@@ -48,6 +48,7 @@
           <item-content>
             <novo-checkbox [label]="item[activeSchema.labelField]"
                            [name]="'selected'"
+                           [indeterminate]="item.indeterminate"
                            [(ngModel)]="item.selected"
                            (ngModelChange)="onItemToggled(activeSchema)"></novo-checkbox>
           </item-content>

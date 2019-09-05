@@ -1,14 +1,14 @@
 // NG2
 import { async, TestBed } from '@angular/core/testing';
 // App
-import { NovoTabbedGroupPickerElement, TabbedGroupPickerSchema } from './TabbedGroupPicker';
+import { NovoTabbedGroupPickerElement, TabbedGroupPickerSchema, SelectableItem } from './TabbedGroupPicker';
 import { NovoTabbedGroupPickerModule } from './TabbedGroupPicker.module';
 import { ComponentUtils } from '../../utils/component-utils/ComponentUtils';
 import { NovoLabelService } from '../../services/novo-label-service';
 
 describe('Elements: NovoTabbedGroupPickerElement', () => {
   let fixture;
-  let component: NovoTabbedGroupPickerElement;
+  let component: NovoTabbedGroupPickerElement<any>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -34,15 +34,16 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
           typeLabel: 'firstTypeLabel',
           valueField: 'firstValueField',
           labelField: 'firstLabelField',
+          data: [],
         },
         {
           typeName: 'secondTypeName',
           typeLabel: 'secondTypeLabel',
           valueField: 'secondValueField',
           labelField: 'secondLabelField',
+          data: [],
         },
       ];
-      component.data = {};
     });
     it('should validate the input data', () => {
       component.ngOnInit();
@@ -54,11 +55,12 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
       expect(component.validateQuickSelectConfig).toHaveBeenCalled();
     });
     it('should activate the first item in the input schemata array', () => {
-      const expected: TabbedGroupPickerSchema = {
+      const expected = {
         typeName: 'firstTypeName',
         typeLabel: 'firstTypeLabel',
         valueField: 'firstValueField',
         labelField: 'firstLabelField',
+        data: [],
       };
       component.ngOnInit();
       expect(component.setActiveSchema).toHaveBeenCalledWith(expected);
@@ -107,7 +109,6 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
     xit('should filter large datasets in a reasonable amount of time', () => {
       const amountOfTimeInMillisecondsThatIndicatesAGrosslyInefficientAlgorithm = 4000;
       const { data, schemata } = buildBigDataset();
-      component.data = data;
       component.schemata = schemata;
 
       const start = performance.now();
@@ -119,6 +120,8 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
   });
   describe('onDataListItemClicked', () => {
     it('should update the selected status of a group if the only item in the group is selected', () => {
+      const chicken = { chickenId: '3', bwaack: 'bwock?' };
+      const dinosaur = { id: '1', name: 'Tyrannosaurus', children: [chicken] };
       component.schemata = [
         {
           typeName: 'dinosaurs',
@@ -126,22 +129,21 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
           valueField: 'id',
           labelField: 'name',
           childTypeName: 'chickens',
+          data: [dinosaur],
         },
         {
           typeName: 'chickens',
           typeLabel: 'Chickens',
           valueField: 'chickenId',
           labelField: 'bwaack',
+          data: [chicken],
         },
       ];
-      const chicken = { chickenId: '3', bwaack: 'bwock?' };
-      component.data = {
-        dinosaurs: [{ id: '1', name: 'Tyrannosaurus' }],
-        chickens: [chicken],
-      };
       component.onDataListItemClicked(component.schemata[1], chicken);
-      expect(component.data.chickens[0].selected).toEqual('selected');
-      expect(component.data.dinosaurs[0].selected).toEqual('selected');
+      const tRex = component.schemata[0].data[0];
+      const heyhey = component.schemata[1].data[0];
+      expect(heyhey.selected).toEqual('selected');
+      expect(tRex.selected).toEqual('selected');
     });
   });
 });

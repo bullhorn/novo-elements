@@ -9,118 +9,48 @@ import { Component } from '@angular/core';
   styleUrls: ['../tabbed-group-picker-example.scss'],
 })
 export class TabbedGroupPickerBasicExample {
-  public example_schema = [
+  getAnimals = (): { animalId: number; name: string }[] =>
+    ['Dog', 'Cat', 'Mouse', 'Horse', 'Cow', 'Chicken', 'Pig', 'Sheep', 'Goat', 'Goose'].map((name, index) => ({
+      name,
+      animalId: index + 1,
+    }));
+
+  getPlaces = (): { localName: string; englishName: string }[] =>
+    [
+      ['Roma', 'Rome'],
+      ['Firenze', 'Florence'],
+      ['Munchen', 'Munich'],
+      ['Paris', 'Paris'],
+      ['Sevilla', 'Seville'],
+      ['Athinai', 'Athens'],
+    ].map(([localName, englishName]) => ({ localName, englishName }));
+  getColors = (): { rgb: string; colorName: string }[] =>
+    [['255,0,0', 'Red'], ['0,255,0', 'Green'], ['0,0,255', 'Blue'], ['0,0,0', 'Black'], ['255,255,255', 'White']].map(
+      ([rgb, colorName]) => ({ rgb, colorName }),
+    );
+  example_schema = [
     {
       typeName: 'animals',
       typeLabel: 'Animals',
       valueField: 'animalId',
       labelField: 'name',
+      data: this.getAnimals(),
     },
     {
       typeName: 'places',
       typeLabel: 'Places',
       valueField: 'localName',
       labelField: 'englishName',
+      data: this.getPlaces(),
     },
     {
       typeName: 'colors',
       typeLabel: 'Colors',
       valueField: 'rgb',
       labelField: 'colorName',
+      data: this.getColors(),
     },
   ];
-  public example_data: any = {
-    animals: [
-      {
-        animalId: 1,
-        name: 'Dog',
-      },
-      {
-        animalId: 2,
-        name: 'Cat',
-      },
-      {
-        animalId: 3,
-        name: 'Mouse',
-      },
-      {
-        animalId: 4,
-        name: 'Horse',
-      },
-      {
-        animalId: 5,
-        name: 'Cow',
-      },
-      {
-        animalId: 6,
-        name: 'Pig',
-      },
-      {
-        animalId: 7,
-        name: 'Chicken',
-      },
-      {
-        animalId: 8,
-        name: 'Sheep',
-      },
-      {
-        animalId: 9,
-        name: 'Goat',
-      },
-      {
-        animalId: 10,
-        name: 'Goose',
-      },
-    ],
-    places: [
-      {
-        localName: 'Roma',
-        englishName: 'Rome',
-      },
-      {
-        localName: 'Firenze',
-        englishName: 'Florence',
-      },
-      {
-        localName: 'Munchen',
-        englishName: 'Munich',
-      },
-      {
-        localName: 'Paris',
-        englishName: 'Paris',
-      },
-      {
-        localName: 'Sevilla',
-        englishName: 'Seville',
-      },
-      {
-        localName: 'Athinai',
-        englishName: 'Athens',
-      },
-    ],
-    colors: [
-      {
-        rgb: '255,0,0',
-        colorName: 'Red',
-      },
-      {
-        rgb: '0,255,0',
-        colorName: 'Green',
-      },
-      {
-        rgb: '0,0,255',
-        colorName: 'Blue',
-      },
-      {
-        rgb: '0,0,0',
-        colorName: 'Black',
-      },
-      {
-        rgb: '255,255,255',
-        colorName: 'White',
-      },
-    ],
-  };
 
   public buttonLabel: string = 'Nothing Selected';
   public example_buttonConfig = {

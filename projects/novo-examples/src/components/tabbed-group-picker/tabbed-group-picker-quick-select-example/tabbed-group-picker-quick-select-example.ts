@@ -9,12 +9,19 @@ import { Component } from '@angular/core';
   styleUrls: ['../tabbed-group-picker-example.scss'],
 })
 export class TabbedGroupPickerQuickSelectExample {
+
+  getAnimals = (): { animalId: number; name: string }[] =>
+    ['Dog', 'Cat', 'Mouse', 'Horse', 'Cow', 'Chicken', 'Pig', 'Sheep', 'Goat', 'Goose'].map((name, index) => ({
+      name,
+      animalId: index + 1,
+    }));
   public example_schema = [
     {
       typeName: 'animals',
       typeLabel: 'Animals',
       valueField: 'animalId',
       labelField: 'name',
+      data: this.getAnimals(),
     },
   ];
   public example_quickSelectConfig = {
@@ -34,50 +41,6 @@ export class TabbedGroupPickerQuickSelectExample {
         typeName: 'animals',
         all: true,
         label: 'All Animals',
-      },
-    ],
-  };
-  public example_data: any = {
-    animals: [
-      {
-        animalId: 1,
-        name: 'Dog',
-      },
-      {
-        animalId: 2,
-        name: 'Cat',
-      },
-      {
-        animalId: 3,
-        name: 'Mouse',
-      },
-      {
-        animalId: 4,
-        name: 'Horse',
-      },
-      {
-        animalId: 5,
-        name: 'Cow',
-      },
-      {
-        animalId: 6,
-        name: 'Pig',
-      },
-      {
-        animalId: 7,
-        name: 'Chicken',
-      },
-      {
-        animalId: 8,
-        name: 'Sheep',
-      },
-      {
-        animalId: 9,
-        name: 'Goat',
-      },
-      {
-        animalId: 10,
-        name: 'Goose',
       },
     ],
   };
