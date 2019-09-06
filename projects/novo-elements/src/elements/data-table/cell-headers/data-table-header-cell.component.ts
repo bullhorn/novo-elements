@@ -51,7 +51,7 @@ import { KeyCodes } from '../../../utils/key-codes/KeyCodes';
         (click)="sort()"
         [class.active]="sortActive"
         data-automation-id="novo-data-table-sort"
-        [attr.data-feature-id]="'novo-data-table-sort-' + dataFeatureId"
+        [attr.data-feature-id]="'novo-data-table-sort-' + this.id"
       ></button>
       <novo-dropdown
         *ngIf="config.filterable"
@@ -68,7 +68,7 @@ import { KeyCodes } from '../../../utils/key-codes/KeyCodes';
           (click)="focusInput()"
           tooltipPosition="right"
           [tooltip]="labels.filters"
-          [attr.data-feature-id]="'novo-data-table-filter-' + dataFeatureId"
+          [attr.data-feature-id]="'novo-data-table-filter-' + this.id"
         ></button>
         <div class="header">
           <span>{{ labels.filters }}</span>
@@ -196,9 +196,6 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
   allowMultipleFilters: boolean = false;
 
   @Input()
-  dataFeatureId: string;
-
-  @Input()
   resized: EventEmitter<IDataTableColumn<T>>;
   @Input()
   filterTemplate: TemplateRef<any>;
@@ -288,6 +285,7 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
   public ngOnInit(): void {
     if (this._cdkColumnDef) {
       this.id = this._cdkColumnDef.name;
+      console.log(this.id);
     }
 
     this.checkSortFilterState({ filter: this.state.filter, sort: this.state.sort }, true);

@@ -107,7 +107,6 @@ import { StaticDataTableService } from './services/static-data-table.service';
               *cdkHeaderCellDef
               [column]="column"
               [filterTemplate]="templates['column-filter-' + column.id]"
-              [dataFeatureId]="column.id"
               [novo-data-table-cell-config]="column"
               [resized]="resized"
               [defaultSort]="defaultSort"
