@@ -44,13 +44,13 @@
                  direction="vertical">
         <novo-list-item *ngFor="let item of displayData[activeSchema.typeName]"
                         [attr.data-automation-id]="item[activeSchema.labelField]"
-                        (click)="onDataListItemClicked(activeSchema, item);">
+                        (click)="(item.selected = !item.selected) && onDataListItemClicked(activeSchema, item)">
           <item-content>
             <novo-checkbox [label]="item[activeSchema.labelField]"
                            [name]="'selected'"
                            [indeterminate]="item.indeterminate"
                            [(ngModel)]="item.selected"
-                           (ngModelChange)="onItemToggled(activeSchema)"></novo-checkbox>
+                           (ngModelChange)="onDataListItemClicked(activeSchema, item)"></novo-checkbox>
           </item-content>
         </novo-list-item>
       </novo-list>

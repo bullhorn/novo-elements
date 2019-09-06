@@ -9,15 +9,22 @@ export type TabbedGroupPickerSchema<N extends string, V extends string, L extend
   typeLabel: string;
   valueField: V;
   labelField: L;
-  childTypeName?: R extends TabbedGroupPickerSchema<infer NN, infer VV, infer LL, infer RR> ? NN : never;
   data: SelectableItem<V, L, R>[];
+  childTypeName?: R extends TabbedGroupPickerSchema<infer NN, infer VV, infer LL, infer RR> ? NN : never;
 };
+//  & (
+//   | {
+//     }
+//   | {
+//       data: SelectableItem<V, L>[];
+//     });
 
-export type SelectableItem<V extends string, L extends string, R = never> = { [key in V | L]: string } & {
-  selected?: boolean;
-  indeterminate?: boolean;
-  children?: R extends TabbedGroupPickerSchema<infer N, infer VV, infer LL, infer RR> ? SelectableItem<VV, LL, RR>[] : never;
-};
+export type SelectableItem<V extends string, L extends string, R = never> = ({ [key in V]: string } | { [key in V]: number }) &
+  { [key in L]: string } & {
+    selected?: boolean;
+    indeterminate?: boolean;
+    children?: R extends TabbedGroupPickerSchema<infer N, infer VV, infer LL, infer RR> ? SelectableItem<VV, LL, R>[] : never;
+  };
 
 type Dinosaurs = TabbedGroupPickerSchema<'dinosaurs', 'id', 'name', Chickens>;
 
@@ -27,7 +34,7 @@ const dinos: Dinosaurs = {
   childTypeName: 'chickens',
   valueField: 'id',
   labelField: 'name',
-  data: [{ name: 'Tyrannosaurus', id: '5', children: [{ chickenId: '11', bwaack: 'bwock?' }] }, { name: 'Velociraptor', id: '6' }],
+  data: [{ name: 'Tyrannosaurus', id: '5', children: [{ chickenId: '11', bwaack: 'bwooock?' }] }, { name: 'Velociraptor', id: '6' }],
 };
 type Chickens = TabbedGroupPickerSchema<'chickens', 'chickenId', 'bwaack', {}>;
 
@@ -37,7 +44,7 @@ type Keyify<U> = U extends PropertyKey ? U : never;
 type DistributeTypeName<U> = Keyify<U extends { typeName: infer K } ? K : never>;
 type DistributeData<U> = U extends { data: SelectableItem<infer V, infer L, infer R>[] } ? SelectableItem<V, L, R>[] : never;
 
-type InferredSchema<S> = S extends TabbedGroupPickerSchema<infer N, infer V, infer L, infer R>
+export type InferredSchema<S> = S extends TabbedGroupPickerSchema<infer N, infer V, infer L, infer R>
   ? TabbedGroupPickerSchema<N, V, L, R>
   : never;
 type InferredSelectableItem<S> = S extends TabbedGroupPickerSchema<infer N, infer V, infer L, infer R> ? SelectableItem<V, L, R> : never;
@@ -76,6 +83,7 @@ export class NovoTabbedGroupPickerElement<S> implements OnInit {
 
   ngOnInit(): void {
     this.validateData();
+    this.createChildrenReferences();
     this.filter('');
     if (this.quickSelectConfig) {
       this.validateQuickSelectConfig();
@@ -163,12 +171,35 @@ export class NovoTabbedGroupPickerElement<S> implements OnInit {
     }
   }
 
-  onDataListItemClicked(activeSchema: { typeName: string; valueField: string }, item: { selected?: boolean } & object) {
-    item.selected ? delete item.selected : (item.selected = true);
-    this.onItemToggled(activeSchema);
+  createChildrenReferences(): void {
+    this.schemata
+      .filter(({ childTypeName }) => !!childTypeName)
+      .forEach(({ data, childTypeName }) => {
+        const childSchema = this.schemata.find(({ typeName }) => typeName === childTypeName);
+
+        data
+          .filter(({ children }: { children?: [] }) => children && children.length)
+          .forEach(
+            (parent: { children?: any[] }) =>
+              (parent.children = parent.children.map((child) =>
+                childSchema.data.find((item) => item[childSchema.valueField] === child[childSchema.valueField]),
+              )),
+          );
+      });
   }
 
-  onItemToggled(schema: { typeName: string; valueField: string }) {
+  onDataListItemClicked(
+    activeSchema: { typeName: string; valueField: string; childTypeName?: string; data: { selected?: boolean }[] },
+    item: { selected?: boolean; children?: { selected?: boolean }[] },
+  ) {
+    this.onItemToggled(activeSchema, item);
+  }
+
+  onItemToggled(
+    schema: { typeName: string; valueField: string; data: { selected?: boolean }[] },
+    item: { selected?: boolean; children?: { selected?: boolean }[] },
+  ) {
+    item.children && this.updateChildren(item.selected, item.children);
     if (this.quickSelectConfig) {
       this.updateQuickSelectCheckboxes(schema);
     }
@@ -176,31 +207,27 @@ export class NovoTabbedGroupPickerElement<S> implements OnInit {
     this.emitSelectedValues();
   }
 
-  updateParents(): void {
-    this.schemata = this.schemata.map(
-      (schema): InferredSchema<S> => {
-        const { childTypeName, data } = schema;
-        if (!childTypeName) {
-          return schema as InferredSchema<S>;
-        }
-        return {
-          ...schema,
-          data: data.map(({ selected: previousValue, ...item }) => {
-            const [key, value] = this.getSelectedValue(
-              this.schemata.find(({ typeName: childName }) => childName === childTypeName).data,
-            );
-            return {
-              ...item,
-              ...(key ? { [key]: value } : {}),
-            };
-          }),
-        } as InferredSchema<S>;
-      },
-    );
+  updateChildren(parentIsSelected: boolean, children: { selected?: boolean }[]): void {
+    children.forEach((item) => (parentIsSelected ? (item.selected = true) : delete item.selected));
   }
 
-  getSelectedValue = (childArray: { selected?: boolean, indeterminate?: boolean }[]): ['selected' | 'indeterminate', boolean] | [] => {
-    const numberOfSelectedItems = childArray.filter(({selected}) => selected).length;
+  updateParents(): void {
+    this.schemata
+      .filter(({ childTypeName }) => !!childTypeName)
+      .forEach(({ data }) => {
+        data
+          .filter(({ children }: { children?: any[] }) => children && children.length)
+          .forEach((parent: { children?: { selected?: boolean }[] }) => {
+            ['indeterminate', 'selected'].forEach((v) => delete parent[v]);
+
+            const [key, value] = this.getSelectedValue(parent.children);
+            key && (parent[key] = value);
+          });
+      });
+  }
+
+  getSelectedValue = (childArray: { selected?: boolean; indeterminate?: boolean }[]): ['selected' | 'indeterminate', boolean] | [] => {
+    const numberOfSelectedItems = childArray.filter(({ selected }) => selected).length;
     if (!numberOfSelectedItems) {
       return [];
     }
@@ -214,37 +241,21 @@ export class NovoTabbedGroupPickerElement<S> implements OnInit {
 
   onQuickSelectToggled(quickSelect: TabbedGroupPickerQuickSelect) {
     const schema = this.schemata.find((schemaItem) => quickSelect.typeName === schemaItem.typeName);
+    const { data, valueField } = schema;
 
-    schema.data = schema.data.map(
-      (item: InferredSelectableItem<S>): InferredSelectableItem<S> => {
-        if (quickSelect.all || quickSelect.values.includes(item[schema.valueField])) {
-          const { selected, indeterminate, ...unselectedItem } = item;
-          return {
-            ...unselectedItem,
-            ...(quickSelect.active ? { selected: true } : {}),
-          } as InferredSelectableItem<S>;
-        } else {
-          return item;
-        }
-      },
-    );
-    // reconstruct displayData from new version of schema.data
-    this.filterText.subscribe({
-      next: this.filter
-    });
+    const children = data.filter((item) => quickSelect.all || quickSelect.values.includes(item[valueField]));
 
-    this.onItemToggled(schema);
+    this.onItemToggled(schema, { selected: quickSelect.active, children });
   }
 
-  updateQuickSelectCheckboxes(activeSchema: { typeName: string; valueField: string }) {
-    const relevantQuickSelects = this.quickSelectConfig.items.filter(({typeName}) => activeSchema.typeName === typeName);
-    relevantQuickSelects.forEach((quickSelect) => {
-      let itemsToCheck = this.schemata.find(({ typeName }) => typeName === activeSchema.typeName).data;
-      if (!quickSelect.all) {
-        quickSelect.active = itemsToCheck.filter((item) => quickSelect.values.includes(item[activeSchema.valueField])).every(({selected}) => selected);
-      }
-      quickSelect.active = itemsToCheck.every(({selected}) => selected);
-    });
+  updateQuickSelectCheckboxes({ data, typeName, valueField }: { typeName: string; valueField: string; data: { selected?: boolean }[] }) {
+    this.quickSelectConfig.items
+      .filter(({ typeName: quickSelectTypeName }) => quickSelectTypeName === typeName)
+      .forEach((quickSelect) => {
+        quickSelect.active = data
+          .filter((item) => quickSelect.all || quickSelect.values.includes(item[valueField]))
+          .every(({ selected }) => selected);
+      });
   }
 
   emitSelectedValues() {
@@ -274,7 +285,8 @@ export class NovoTabbedGroupPickerElement<S> implements OnInit {
       (accumulator: SchemaDictionary<S>, { labelField, typeName, data }: InferredSchema<S>): SchemaDictionary<S> =>
         ({
           ...accumulator,
-          [typeName]: data && data.filter((item: InferredSelectableItem<S>) => item[labelField].toLowerCase().includes(searchTerm.toLowerCase())),
+          [typeName]:
+            data && data.filter((item: InferredSelectableItem<S>) => item[labelField].toLowerCase().includes(searchTerm.toLowerCase())),
         } as SchemaDictionary<S>),
       {} as SchemaDictionary<S>,
     ));

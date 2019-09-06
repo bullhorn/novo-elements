@@ -28,14 +28,17 @@ export class TabbedGroupPickerBasicExample {
     [['255,0,0', 'Red'], ['0,255,0', 'Green'], ['0,0,255', 'Blue'], ['0,0,0', 'Black'], ['255,255,255', 'White']].map(
       ([rgb, colorName]) => ({ rgb, colorName }),
     );
+
+  animalSchema = {
+    typeName: 'animals',
+    typeLabel: 'Animals',
+    valueField: 'animalId',
+    labelField: 'name',
+    data: this.getAnimals(),
+  };
+
   example_schema = [
-    {
-      typeName: 'animals',
-      typeLabel: 'Animals',
-      valueField: 'animalId',
-      labelField: 'name',
-      data: this.getAnimals(),
-    },
+    this.animalSchema,
     {
       typeName: 'places',
       typeLabel: 'Places',
