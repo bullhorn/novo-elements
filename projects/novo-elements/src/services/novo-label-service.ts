@@ -102,6 +102,17 @@ export class NovoLabelService {
   maxRecordsReached = 'Sorry, you have reached the maximum number of records allowed for this field';
   selectFilterOptions = 'Please select one or more filter options below.';
 
+  dateFormats: { [locale: string]: string} = {
+    'en-US': 'MM/dd/yyyy',
+    'en-GB': 'dd/MM/yyyy',
+    'de-DE': 'dd.MM.yyyy',
+    'fr-fr': 'dd/MM/yyyy',
+    'nl-NL': 'dd-MM-yyyy',
+    'es-ES': 'dd/MM/yyyy',
+    'zh-CN': 'yyyy/MM/dd',
+
+  };
+
   constructor(
     @Optional()
     @Inject(LOCALE_ID)
@@ -140,6 +151,10 @@ export class NovoLabelService {
     return select ? `Select all ${total} records.` : `De-select remaining ${total} records.`;
   }
 
+  dateFormatString(): string {
+    return this.dateFormats[this.userLocale] || this.dateFormats['en-US'];
+  }
+
   formatDateWithFormat(value: any, format: Intl.DateTimeFormatOptions) {
     let date = value instanceof Date ? value : new Date(value);
     if (date.getTime() !== date.getTime()) {
@@ -153,6 +168,7 @@ export class NovoLabelService {
     if (date.getTime() !== date.getTime()) {
       return value;
     }
+
     let timeParts: { [type: string]: string } =  Intl.DateTimeFormat(this.userLocale, format).formatToParts(date).reduce((obj, part) => {
       obj[part.type] = part.value;
       return obj;

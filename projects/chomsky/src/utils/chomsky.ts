@@ -114,6 +114,10 @@ export class Chomsky {
     this.formats.use24HourTime = use24HourTime;
   }
 
+  public overrideDateFormat(dateFormatString: string): void {
+    this.formats.overrideDateFormat = dateFormatString;
+  }
+
   public use(locale: string): Observable<{ [key: string]: any }> {
     // Capture the pending task
     let pending;
