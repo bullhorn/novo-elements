@@ -4,29 +4,14 @@ import { debounceTime } from 'rxjs/operators';
 import { Helpers } from '../../utils/Helpers';
 import { NovoLabelService } from '../../services/novo-label-service';
 
-export type TabbedGroupPickerSchema<N extends string, V extends string, L extends string, R = never> = {
+export type TabbedGroupPickerSchema<N extends string, V extends string = 'value', L extends string = 'label', R = never> = {
   typeName: N;
   typeLabel: string;
   valueField: V;
   labelField: L;
   data: SelectableItem<V, L, R>[];
-  childTypeName?: R extends TabbedGroupPickerSchema<infer NN, infer VV, infer LL, infer RR> ? NN : never;
+  childTypeName?: R extends TabbedGroupPickerSchema<infer NN, infer VV, infer LL> ? NN : never;
 };
-//  & (
-//   | {
-//     }
-//   | {
-//       data: SelectableItem<V, L>[];
-//     });
-
-export type SelectableItem<V extends string, L extends string, R = never> = ({ [key in V]: string } | { [key in V]: number }) &
-  { [key in L]: string } & {
-    selected?: boolean;
-    indeterminate?: boolean;
-    children?: R extends TabbedGroupPickerSchema<infer N, infer VV, infer LL, infer RR> ? SelectableItem<VV, LL, R>[] : never;
-  };
-
-type Dinosaurs = TabbedGroupPickerSchema<'dinosaurs', 'id', 'name', Chickens>;
 
 const dinos: Dinosaurs = {
   typeName: 'dinosaurs',
@@ -36,6 +21,14 @@ const dinos: Dinosaurs = {
   labelField: 'name',
   data: [{ name: 'Tyrannosaurus', id: '5', children: [{ chickenId: '11', bwaack: 'bwooock?' }] }, { name: 'Velociraptor', id: '6' }],
 };
+export type SelectableItem<V extends string, L extends string, R = never> = { [key in V]: string | number } &
+  { [key in L]: string } & {
+    selected?: boolean;
+    indeterminate?: boolean;
+    children?: R extends TabbedGroupPickerSchema<infer N, infer VV, infer LL, R> ? SelectableItem<VV, LL>[] : never;
+  };
+
+type Dinosaurs = TabbedGroupPickerSchema<'dinosaurs', 'id', 'name', Chickens>;
 type Chickens = TabbedGroupPickerSchema<'chickens', 'chickenId', 'bwaack', {}>;
 
 type SchemaDictionary<S> = { [key in DistributeTypeName<S>]: DistributeData<S> };
@@ -49,18 +42,23 @@ export type InferredSchema<S> = S extends TabbedGroupPickerSchema<infer N, infer
   : never;
 type InferredSelectableItem<S> = S extends TabbedGroupPickerSchema<infer N, infer V, infer L, infer R> ? SelectableItem<V, L, R> : never;
 export type TabbedGroupPickerQuickSelect = {
-  typeName: string;
   label: string;
-  active?: boolean;
-  all?: boolean;
-  values?: any[];
-};
+  selected?: boolean;
+  childTypeName: string;
+} & (
+  | {
+      all: boolean;
+      children?: { selected?: boolean; [key: string]: any }[];
+    }
+  | {
+      children: { selected?: boolean; [key: string]: any }[];
+    });
 
 @Component({
   selector: 'novo-tabbed-group-picker',
   templateUrl: './TabbedGroupPicker.html',
 })
-export class NovoTabbedGroupPickerElement<S> implements OnInit {
+export class NovoTabbedGroupPickerElement<S = TabbedGroupPickerSchema<'items'>> implements OnInit {
   @Input() buttonConfig: {
     theme: string;
     side: string;
@@ -83,12 +81,12 @@ export class NovoTabbedGroupPickerElement<S> implements OnInit {
 
   ngOnInit(): void {
     this.validateData();
+    this.setActiveSchema(this.schemata[0]);
     this.createChildrenReferences();
     this.filter('');
     if (this.quickSelectConfig) {
       this.validateQuickSelectConfig();
     }
-    this.setActiveSchema(this.schemata[0]);
     this.loading = false;
     this.filterText.pipe(debounceTime(300)).subscribe({
       next: this.filter,
@@ -129,42 +127,46 @@ export class NovoTabbedGroupPickerElement<S> implements OnInit {
     } else if (!this.quickSelectConfig.items.length) {
       warning += `Invalid quick select: 'items' is empty.\n`;
     } else {
-      this.quickSelectConfig.items.forEach((quickSelect) => {
-        let quickSelectIdentifier = '(Invalid quickSelect)';
-        if (!quickSelect.typeName) {
-          warning += `Invalid typeName: required field 'typeName' is not defined.\n`;
-        } else if (!quickSelect.label) {
-          warning += `Invalid label: required field 'label' is not defined.\n`;
-        } else {
-          quickSelectIdentifier = `${quickSelect.label} (${quickSelect.typeName})`;
-        }
-        const schema = this.schemata.find((schemaItem) => quickSelect.typeName === schemaItem.typeName);
-        if (!schema) {
-          warning += `Invalid typeName for ${quickSelectIdentifier} config: ${
-            quickSelect.typeName
-          } is not present in any configured typeSchema.\n`;
-        }
-        if ('values' in quickSelect && 'all' in quickSelect) {
-          warning += `Invalid properties for ${quickSelectIdentifier} config: only one of 'values' and 'all' is allowed.\n`;
-        } else if (!('values' in quickSelect) && !('all' in quickSelect)) {
-          warning += `Invalid properties for ${quickSelectIdentifier} config: either 'values' or 'all' is required.\n`;
-        }
-        if ('values' in quickSelect) {
-          // if (!Array.isArray(quickSelect.values)) {
-          //   warning += `Invalid values for ${quickSelectIdentifier} config:  'values' property is not an array.\n`;
-          // } else if (!Array.isArray(quickSelect.values)) {
-          //   warning += `Invalid values for ${quickSelectIdentifier} config:  'values' property contains no values.\n`;
-          // } else if (
-          //   !quickSelect.values.every((quickSelectValue) =>
-          //     this.data[schema.typeName].some((dataItem) => dataItem[schema.valueField] === quickSelectValue),
-          //   )
-          // ) {
-          //   warning += `Invalid value for ${quickSelectIdentifier} config: at least one value in values is not present in any item in data.${
-          //     schema.typeName
-          //   }\n`;
-          // }
-        }
-      });
+      // this.quickSelectConfig.items.forEach((quickSelect: TabbedGroupPickerQuickSelect) => {
+      //   let quickSelectIdentifier = '(Invalid quickSelect)';
+      //   if ('childTypeName' in quickSelect) {
+      //     if (!quickSelect.childTypeName) {
+      //       warning += `Invalid typeName: required field 'typeName' is not defined.\n`;
+      //     } else if (!quickSelect.label) {
+      //       warning += `Invalid label: required field 'label' is not defined.\n`;
+      //     } else {
+      //       quickSelectIdentifier = `${quickSelect.label} (${quickSelect.childTypeName})`;
+      //     }
+      //     const schema = this.schemata.find((schemaItem) => quickSelect.childTypeName === schemaItem.typeName);
+      //     if (!schema) {
+      //       warning += `Invalid typeName for ${quickSelectIdentifier} config: ${
+      //         quickSelect.childTypeName
+      //       } is not present in any configured typeSchema.\n`;
+      //     }
+      //     if ('children' in quickSelect) {
+      //       if (!Array.isArray(quickSelect.children)) {
+      //         warning += `Invalid values for ${quickSelectIdentifier} config:  'values' property is not an array.\n`;
+      //       } else if (quickSelect.children.length === 0) {
+      //         warning += `Invalid values for ${quickSelectIdentifier} config:  'values' property contains no values.\n`;
+      //       } else if (
+      //         !quickSelect.children.every((quickSelectValue) =>
+      //           schema.data.some((dataItem) => dataItem[schema.valueField] === quickSelectValue[schema.valueField]),
+      //         )
+      //       ) {
+      //         warning += `Invalid value for ${quickSelectIdentifier} config: at least one value in values is not present in any item in data.${
+      //           schema.typeName
+      //         }\n`;
+      //       }
+      //     }
+      //   } else if (!('all' in quickSelect)) {
+      //     warning += `Invalid quick select item: neither 'all', 'children', or 'childTypeName' are defined`;
+      //   }
+      //   if ('values' in quickSelect && 'all' in quickSelect) {
+      //     warning += `Invalid properties for ${quickSelectIdentifier} config: only one of 'values' and 'all' is allowed.\n`;
+      //   } else if (!('values' in quickSelect) && !('all' in quickSelect)) {
+      //     warning += `Invalid properties for ${quickSelectIdentifier} config: either 'values' or 'all' is required.\n`;
+      //   }
+      // });
     }
     if (warning) {
       console.warn(`TabbedGroupPicker quickSelect validation warning:\n${warning}`);
@@ -178,7 +180,7 @@ export class NovoTabbedGroupPickerElement<S> implements OnInit {
         const childSchema = this.schemata.find(({ typeName }) => typeName === childTypeName);
 
         data
-          .filter(({ children }: { children?: [] }) => children && children.length)
+          .filter(({ children }: { children?: { selected?: boolean }[] }) => children && children.length)
           .forEach(
             (parent: { children?: any[] }) =>
               (parent.children = parent.children.map((child) =>
@@ -186,23 +188,36 @@ export class NovoTabbedGroupPickerElement<S> implements OnInit {
               )),
           );
       });
-  }
-
-  onDataListItemClicked(
-    activeSchema: { typeName: string; valueField: string; childTypeName?: string; data: { selected?: boolean }[] },
-    item: { selected?: boolean; children?: { selected?: boolean }[] },
-  ) {
-    this.onItemToggled(activeSchema, item);
-  }
-
-  onItemToggled(
-    schema: { typeName: string; valueField: string; data: { selected?: boolean }[] },
-    item: { selected?: boolean; children?: { selected?: boolean }[] },
-  ) {
-    item.children && this.updateChildren(item.selected, item.children);
     if (this.quickSelectConfig) {
-      this.updateQuickSelectCheckboxes(schema);
+      this.quickSelectConfig.items
+        .filter((parent) => 'all' in parent)
+        .forEach((parent) => {
+          parent.children = this.schemata.find(({ typeName }) => parent.childTypeName === typeName).data;
+        });
+
+      this.quickSelectConfig.items
+        .filter((parent) => !('all' in parent))
+        .forEach((parent) => {
+          if (!('all' in parent)) {
+            const childSchema = this.schemata.find(({ typeName }) => typeName === parent.childTypeName);
+            parent.children = parent.children.map((child) =>
+              childSchema.data.find((item) =>
+                child[childSchema.valueField]
+                  ? child[childSchema.valueField] === item[childSchema.valueField]
+                  : (child as any) === item[childSchema.valueField],
+              ),
+            );
+          }
+        });
     }
+  }
+
+  onDataListItemClicked(item: { selected?: boolean; children?: { selected?: boolean }[] }) {
+    this.onItemToggled(item);
+  }
+
+  onItemToggled(item: { selected?: boolean; children?: { selected?: boolean }[] }) {
+    item.children && this.updateChildren(item.selected, item.children);
     this.updateParents();
     this.emitSelectedValues();
   }
@@ -224,6 +239,14 @@ export class NovoTabbedGroupPickerElement<S> implements OnInit {
             key && (parent[key] = value);
           });
       });
+
+    if (this.quickSelectConfig) {
+      this.quickSelectConfig.items.forEach((quickSelect) => {
+        delete quickSelect.selected;
+        const [key, value] = this.getSelectedValue(quickSelect.children);
+        key && (quickSelect[key] = value);
+      });
+    }
   }
 
   getSelectedValue = (childArray: { selected?: boolean; indeterminate?: boolean }[]): ['selected' | 'indeterminate', boolean] | [] => {
@@ -234,42 +257,16 @@ export class NovoTabbedGroupPickerElement<S> implements OnInit {
     return numberOfSelectedItems === childArray.length ? ['selected', true] : ['indeterminate', true];
   };
 
-  onQuickSelectListItemClicked(quickSelect: TabbedGroupPickerQuickSelect) {
-    quickSelect.active = !quickSelect.active;
-    this.onQuickSelectToggled(quickSelect);
-  }
-
-  onQuickSelectToggled(quickSelect: TabbedGroupPickerQuickSelect) {
-    const schema = this.schemata.find((schemaItem) => quickSelect.typeName === schemaItem.typeName);
-    const { data, valueField } = schema;
-
-    const children = data.filter((item) => quickSelect.all || quickSelect.values.includes(item[valueField]));
-
-    this.onItemToggled(schema, { selected: quickSelect.active, children });
-  }
-
-  updateQuickSelectCheckboxes({ data, typeName, valueField }: { typeName: string; valueField: string; data: { selected?: boolean }[] }) {
-    this.quickSelectConfig.items
-      .filter(({ typeName: quickSelectTypeName }) => quickSelectTypeName === typeName)
-      .forEach((quickSelect) => {
-        quickSelect.active = data
-          .filter((item) => quickSelect.all || quickSelect.values.includes(item[valueField]))
-          .every(({ selected }) => selected);
-      });
-  }
-
   emitSelectedValues() {
-    this.selectionChange.emit(this.getSelectedValues());
-  }
-
-  getSelectedValues = () =>
-    this.schemata.reduce(
+    const selectedValues = this.schemata.reduce(
       (prev, { typeName, valueField, data }) => ({
         ...prev,
         [typeName]: data.filter(({ selected }) => selected).map((item) => item[valueField]),
       }),
       {},
     );
+    this.selectionChange.emit(selectedValues);
+  }
 
   onClearFilter(event) {
     Helpers.swallowEvent(event); // dunno if this is necessary

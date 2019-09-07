@@ -9,7 +9,6 @@ import { Component } from '@angular/core';
   styleUrls: ['../tabbed-group-picker-example.scss'],
 })
 export class TabbedGroupPickerQuickSelectExample {
-
   getAnimals = (): { animalId: number; name: string }[] =>
     ['Dog', 'Cat', 'Mouse', 'Horse', 'Cow', 'Chicken', 'Pig', 'Sheep', 'Goat', 'Goose'].map((name, index) => ({
       name,
@@ -28,17 +27,17 @@ export class TabbedGroupPickerQuickSelectExample {
     label: 'Quick Select',
     items: [
       {
-        typeName: 'animals',
-        values: [2],
+        childTypeName: 'animals',
+        children: [2],
         label: 'Pure Evil',
       },
       {
-        typeName: 'animals',
-        values: [1, 6, 9],
+        childTypeName: 'animals',
+        children: [1, 6, 9],
         label: 'My Pets',
       },
       {
-        typeName: 'animals',
+        childTypeName: 'animals',
         all: true,
         label: 'All Animals',
       },

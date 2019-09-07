@@ -54,17 +54,17 @@ export class TabbedGroupPickerGroupsExample {
     label: 'Quick Select',
     items: [
       {
-        typeName: 'animals',
-        values: [2],
+        childTypeName: 'animals',
+        children: [2],
         label: 'Pure Evil',
       },
       {
-        typeName: 'animals',
-        values: [1, 6, 9],
+        childTypeName: 'animals',
+        children: [1, 6, 9],
         label: 'My Pets',
       },
       {
-        typeName: 'animals',
+        childTypeName: 'animals',
         all: true,
         label: 'All Animals',
       },

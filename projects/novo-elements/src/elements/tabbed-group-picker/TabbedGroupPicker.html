@@ -29,12 +29,12 @@
         <novo-list direction="vertical">
           <novo-list-item *ngFor="let quickSelect of quickSelectConfig.items"
                           [attr.data-automation-id]="quickSelect.label"
-                          (click)="onQuickSelectListItemClicked(quickSelect)">
+                          (click)="(quickSelect.selected = !quickSelect.selected) && onDataListItemClicked(quickSelect)">
             <item-content>
               <novo-checkbox [label]="quickSelect.label"
-                             [name]="'active'"
-                             [(ngModel)]="quickSelect.active"
-                             (ngModelChange)="onQuickSelectToggled(quickSelect)"></novo-checkbox>
+                             [name]="'selected'"
+                             [(ngModel)]="quickSelect.selected"
+                             (ngModelChange)="onDataListItemClicked(quickSelect)"></novo-checkbox>
             </item-content>
           </novo-list-item>
         </novo-list>
@@ -44,13 +44,13 @@
                  direction="vertical">
         <novo-list-item *ngFor="let item of displayData[activeSchema.typeName]"
                         [attr.data-automation-id]="item[activeSchema.labelField]"
-                        (click)="(item.selected = !item.selected) && onDataListItemClicked(activeSchema, item)">
+                        (click)="(item.selected = !item.selected) && onDataListItemClicked(item)">
           <item-content>
             <novo-checkbox [label]="item[activeSchema.labelField]"
                            [name]="'selected'"
                            [indeterminate]="item.indeterminate"
                            [(ngModel)]="item.selected"
-                           (ngModelChange)="onDataListItemClicked(activeSchema, item)"></novo-checkbox>
+                           (ngModelChange)="onDataListItemClicked(item)"></novo-checkbox>
           </item-content>
         </novo-list-item>
       </novo-list>
