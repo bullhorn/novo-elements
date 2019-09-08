@@ -9,6 +9,8 @@ import * as equality from 'retext-equality';
 import * as stringify from 'retext-stringify';
 import { VFile } from 'vfile';
 import { Processor } from 'unified';
+import { debounceTime, throttleTime } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 export function init(editor: Editor): void {
   const processor = retext()
@@ -16,9 +18,21 @@ export function init(editor: Editor): void {
     .use(equality)
     .use(stringify);
 
-  editor.on('change', () => {
-    const body = editor.document.$.body;
-    walk(body, editor, processor);
+  const changeSubject = new Subject();
+  changeSubject
+    .pipe(
+      throttleTime(1000),
+      debounceTime(200),
+    )
+    .subscribe((event) => {
+      console.log('change event', event);
+      const body = editor.document.$.body;
+      walk(body, editor, processor);
+    });
+
+  editor.on('change', (event) => {
+    // fromEvent on editor or document doesn't work /shrug emoji
+    changeSubject.next(event);
   });
 }
 
@@ -98,7 +112,6 @@ function makeExplanation(suggestedReplacements: string[], problematicTerm: strin
       .join(', ')}, or ${suggestedReplacements.slice(-1).map((t) => `"${t}"`)}`;
   }
   return `"${problematicTerm}" is potentially a less inclusive term than ${replacements}`;
-
 }
 
 async function parseAndAddSuggestions(element: HTMLElement | Node, editor: Editor, processor: Processor): Promise<void> {
@@ -107,47 +120,44 @@ async function parseAndAddSuggestions(element: HTMLElement | Node, editor: Edito
   const parent = element.parentNode;
 
   const vfile: VFile = await processor.process(text);
-  console.log(vfile);
-  const suggestions: Suggestion[] = getSuggestions(vfile);
+  // console.log(vfile);
+  const suggestions: Suggestion[] = getSuggestions(vfile).filter((suggestion) => {
+    if (!Array.isArray(editor.dismissedTerms) || editor.dismissedTerms.length === 0) {
+      return true;
+    }
+    return !editor.dismissedTerms.find((term) => {
+      return term === suggestion.problematicTerm;
+    });
+  });
 
   if (suggestions.length && !(parent as HTMLElement).className.includes('inclusion-helper-warning')) {
     // for reach suggestion, splice it into the thing
-    const offset = getSelection(doc, element);
+    const offset: number | undefined = getSelection(doc, element);
 
     splitIntoNodes(suggestions, text, doc, editor).forEach((node) => parent.insertBefore(node, element as ChildNode));
-
+    if (Number.isInteger(offset)) {
+      setSelection(doc, offset, parent);
+    }
     parent.removeChild(element);
-
-    setSelection(doc, offset, parent);
-    // reset selection
   }
 }
 
-function getSelection(doc: Document, element) {
+function getSelection(doc: Document, element): number | undefined {
   const selection: Selection = doc.getSelection();
-  return selection.focusNode === element ? selection.focusOffset : -1;
+  if (selection.focusNode === element || selection.anchorNode === element) {
+    return selection.focusOffset;
+  }
 }
 
 function setSelection(doc: Document, location: number, parent: Node & ParentNode) {
-  if (location === -1) {
-    return;
-  }
-  let offset = 0;
-  flattenChildNodes(parent)
-    .filter((node: Node) => node.nodeType === Node.TEXT_NODE)
-    .forEach((node) => {
-      const width = node.textContent.length;
-      if (location > offset && location < offset + width) {
-        // set that mothafuckin range
-        const range = document.createRange();
-        range.setStart(node, location - offset);
-        range.collapse(true);
-        const selection = doc.getSelection();
-        selection.removeAllRanges();
-        selection.addRange(range);
-      }
-      offset += width;
-    });
+  const selection = doc.getSelection();
+  selection.removeAllRanges();
+
+  const range = document.createRange();
+  range.selectNode(parent);
+
+  selection.addRange(range);
+  selection.collapseToEnd();
 }
 
 function splitIntoNodes(suggestions: Suggestion[], text: string, doc, editor): (Node | HTMLElement)[] {

@@ -15,8 +15,10 @@ import {
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { init } from './plugins/inclusion-helper/inclusion-helper-plugin';
-import { InclusionSuggestionArgs, CKEventInfo, Editor } from './editor-types';
+import { InclusionSuggestionArgs, CKEventInfo, Editor, Suggestion } from './editor-types';
 import { PopOverContent } from '../popover/PopOverContent';
+import { fromEvent, BehaviorSubject, Subject } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 // import 'CKEDITOR';
 
 // Value accessor for the component (supports ngModel)
@@ -150,6 +152,7 @@ export class NovoCKEditorElement implements OnDestroy, AfterViewInit, ControlVal
   learnMore() {}
 
   changeTerm(term: string) {
+    // this is a placeholdler to be replaced when the highlighted text is clicked
     this.hidePopover();
   }
 
@@ -161,7 +164,10 @@ export class NovoCKEditorElement implements OnDestroy, AfterViewInit, ControlVal
   onInclusionEvent = (info: CKEventInfo) => {
     const data: InclusionSuggestionArgs = info.data;
     const editor: Editor = info.editor;
+
     this.createChangeTerm(info.data.suggestion.id, editor.document.$);
+    this.createDismiss(editor, data);
+
     this.shouldShowPopover = true;
     this.suggestedReplacements = data.suggestion.suggestedReplacements;
     this.popoverTitle = `"${data.suggestion.problematicTerm}"`;
@@ -174,6 +180,16 @@ export class NovoCKEditorElement implements OnDestroy, AfterViewInit, ControlVal
       const element = document.getElementById(id);
       const parent = element.parentNode;
       parent.replaceChild(document.createTextNode(term), element);
+      this.hidePopover();
+    };
+  }
+
+  createDismiss(editor: Editor, data: InclusionSuggestionArgs) {
+    this.dismiss = () => {
+      editor.dismissedTerms = [...(editor.dismissedTerms ? editor.dismissedTerms : []), data.suggestion.problematicTerm];
+      const element = editor.document.$.getElementById(data.suggestion.id);
+      const parent = element.parentNode;
+      parent.replaceChild(document.createTextNode(data.suggestion.problematicTerm), element);
       this.hidePopover();
     };
   }
