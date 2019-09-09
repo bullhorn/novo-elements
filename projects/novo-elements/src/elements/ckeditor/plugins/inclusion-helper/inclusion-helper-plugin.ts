@@ -81,22 +81,24 @@ function flatten<T>(a: T[][]): T[] {
   return a.reduce((prev, next) => [...(Array.isArray(prev) ? prev : [prev]), ...(Array.isArray(next) ? next : [next])]);
 }
 
-function getSuggestions(vfile: VFile): Suggestion[] {
+function getSuggestions(vfile: VFile, text): Suggestion[] {
   if (!vfile.messages && vfile.messages.length) {
     return [];
   }
-  return vfile.messages.map((vmessage) => {
-    const suggestedReplacements = vmessage.message.match(/`([^`]*)`/g).map((s) => s.replace(/`/g, ''));
-    const problematicTerm = suggestedReplacements.shift();
-    return {
-      start: vmessage.location.start.offset,
-      stop: vmessage.location.end.offset,
-      id: vmessage.name + problematicTerm,
-      problematicTerm,
-      suggestedReplacements,
-      explanation: makeExplanation(suggestedReplacements, problematicTerm),
-    };
-  });
+  return vfile.messages
+    .map((vmessage) => {
+      const suggestedReplacements = vmessage.message.match(/`([^`]*)`/g).map((s) => s.replace(/`/g, ''));
+      const problematicTerm = suggestedReplacements.shift();
+      return {
+        start: vmessage.location.start.offset,
+        stop: vmessage.location.end.offset,
+        id: vmessage.name + problematicTerm,
+        problematicTerm,
+        suggestedReplacements,
+        explanation: makeExplanation(suggestedReplacements, problematicTerm),
+      };
+    })
+    .concat(getCustomSuggestions(text));
 }
 
 function makeExplanation(suggestedReplacements: string[], problematicTerm: string): string {
@@ -114,6 +116,27 @@ function makeExplanation(suggestedReplacements: string[], problematicTerm: strin
   return `"${problematicTerm}" is potentially a less inclusive term than ${replacements}`;
 }
 
+function getCustomSuggestions(text: string): Suggestion[] {
+  const customList = [
+    { term: 'self-sufficient', replacement: 'responsible' },
+    { term: 'superior', replacement: 'excellent' },
+    { term: 'boasts', replacement: 'has' },
+    { term: ' courageously', replacement: ', with pluck and grit,' },
+  ];
+  return customList
+    .filter(({ term }) => text.includes(term))
+    .map(({ term, replacement }) => {
+      return {
+        start: text.indexOf(term),
+        stop: text.indexOf(term) + term.length,
+        id: term,
+        problematicTerm: term,
+        suggestedReplacements: [replacement],
+        explanation: makeExplanation([replacement], term),
+      };
+    });
+}
+
 async function parseAndAddSuggestions(element: HTMLElement | Node, editor: Editor, processor: Processor): Promise<void> {
   const doc = element.ownerDocument;
   const text = element.textContent;
@@ -121,7 +144,7 @@ async function parseAndAddSuggestions(element: HTMLElement | Node, editor: Edito
 
   const vfile: VFile = await processor.process(text);
   // console.log(vfile);
-  const suggestions: Suggestion[] = getSuggestions(vfile).filter((suggestion) => {
+  const suggestions: Suggestion[] = getSuggestions(vfile, text).filter((suggestion) => {
     if (!Array.isArray(editor.dismissedTerms) || editor.dismissedTerms.length === 0) {
       return true;
     }
