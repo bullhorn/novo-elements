@@ -21,8 +21,8 @@ export function init(editor: Editor): void {
   const changeSubject = new Subject();
   changeSubject
     .pipe(
-      throttleTime(1000),
-      debounceTime(200),
+      throttleTime(700),
+      debounceTime(300),
     )
     .subscribe((event) => {
       console.log('change event', event);
@@ -118,10 +118,11 @@ function makeExplanation(suggestedReplacements: string[], problematicTerm: strin
 
 function getCustomSuggestions(text: string): Suggestion[] {
   const customList = [
-    { term: 'self-sufficient', replacement: 'responsible' },
     { term: 'superior', replacement: 'excellent' },
     { term: 'boasts', replacement: 'has' },
     { term: ' courageously', replacement: ', with pluck and grit,' },
+    { term: 'dominate', replacement: 'thrive'},
+    { term: 'hostile', replacement: 'difficult'},
   ];
   return customList
     .filter(({ term }) => text.includes(term))

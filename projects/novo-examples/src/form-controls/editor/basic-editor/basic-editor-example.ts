@@ -9,7 +9,7 @@ import { Component } from '@angular/core';
   styleUrls: ['basic-editor-example.css'],
 })
 export class BasicEditorExample {
-  public editorValue: string = '<p>I AM A PRE-RENDERED VALUE</p><h1>TEST</h1>';
+  public editorValue: string = ''; // The engineer we are looking for boasts superior technical skills and is ready to take the keys to our codebase and dominate. They have the touch of a craftsman and can courageously handle hostile issues in production.
 
   insertText(editor) {
     editor.insertText('Hello World');

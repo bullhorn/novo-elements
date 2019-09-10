@@ -148,7 +148,7 @@ export class DatePickerPage {}
 
 @Component({
   selector: 'editor-page',
-  template: `<h1>CK Editor <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/ckeditor">(source)</a></h1><p>Basic HTML editor using CK Editor.</p><h5>Basic Example</h5><p><code-example example="basic-editor"></code-example></p><h5>Minimal Example</h5><p><code-example example="minimal-editor"></code-example></p>`
+  template: `<h5>Inclusion Helper</h5><p><code-example example="basic-editor"></code-example></p>`
 })
 export class EditorPage {}
 

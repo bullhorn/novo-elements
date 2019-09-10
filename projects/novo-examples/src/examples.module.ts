@@ -592,9 +592,9 @@ export const EXAMPLE_COMPONENTS: {[key: string]: LiveExample} = {
   'basic-editor': {
     title: 'Basic Editor Example',
     component: BasicEditorExample,
-    tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0A%0A%2F**%0A%20*%20%40title%20Basic%20Editor%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'basic-editor-example'%2C%0A%20%20templateUrl%3A%20'basic-editor-example.html'%2C%0A%20%20styleUrls%3A%20%5B'basic-editor-example.css'%5D%2C%0A%7D)%0Aexport%20class%20BasicEditorExample%20%7B%0A%20%20public%20editorValue%3A%20string%20%3D%20'%3Cp%3EI%20AM%20A%20PRE-RENDERED%20VALUE%3C%2Fp%3E%3Ch1%3ETEST%3C%2Fh1%3E'%3B%0A%0A%20%20insertText(editor)%20%7B%0A%20%20%20%20editor.insertText('Hello%20World')%3B%0A%20%20%7D%0A%7D%0A`,
+    tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0A%0A%2F**%0A%20*%20%40title%20Basic%20Editor%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'basic-editor-example'%2C%0A%20%20templateUrl%3A%20'basic-editor-example.html'%2C%0A%20%20styleUrls%3A%20%5B'basic-editor-example.css'%5D%2C%0A%7D)%0Aexport%20class%20BasicEditorExample%20%7B%0A%20%20public%20editorValue%3A%20string%20%3D%20'The%20engineer%20we%20are%20looking%20for%20boasts%C2%A0superior%20technical%20skills%20and%20is%20ready%20to%20take%20the%20keys%20to%20our%20codebase%20and%20dominate.%20They%20have%20the%20touch%20of%20a%C2%A0craftsman%C2%A0and%20can%20courageously%C2%A0handle%C2%A0hostile%C2%A0issues%20in%20production.'%3B%0A%0A%20%20insertText(editor)%20%7B%0A%20%20%20%20editor.insertText('Hello%20World')%3B%0A%20%20%7D%0A%7D%0A`,
     cssSource: `%2F**%20No%20CSS%20for%20this%20example%20*%2F%0A`,
-    htmlSource: `%3Cnovo-editor%20%5Bname%5D%3D%22'demoEditor'%22%20%5B(ngModel)%5D%3D%22editorValue%22%20%23editor%3E%3C%2Fnovo-editor%3E%0A%0A%3Cbutton%20theme%3D%22primary%22%20(click)%3D%22insertText(editor)%22%3EInsert%20%22Hello%20World%22%20at%20Cursor%3C%2Fbutton%3E%0A%0A%3Cp%3EValue%3A%3C%2Fp%3E%0A%3Cp%20%5BinnerHtml%5D%3D%22editorValue%22%3E%3C%2Fp%3E%0A%0A%3Cp%3EHTML%3A%3C%2Fp%3E%0A%3Cpre%3E%3Ccode%3E%7B%7BeditorValue%7D%7D%3C%2Fcode%3E%3C%2Fpre%3E%0A`
+    htmlSource: `%3Cnovo-editor%20%5Bname%5D%3D%22'demoEditor'%22%20%5B(ngModel)%5D%3D%22editorValue%22%20%23editor%3E%3C%2Fnovo-editor%3E%0A%0A`
   },
   'minimal-editor': {
     title: 'Minimal Editor Example',
