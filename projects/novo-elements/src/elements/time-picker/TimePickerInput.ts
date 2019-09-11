@@ -212,9 +212,6 @@ export class NovoTimePickerInputElement implements OnInit, ControlValueAccessor 
       minute: '2-digit',
       hour12: !this.military,
     });
-    if (format.split(':')[0].length === 1) {
-      return `0${format}`;
-    }
     return format;
   }
 
