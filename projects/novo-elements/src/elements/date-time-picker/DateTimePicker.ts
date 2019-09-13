@@ -180,7 +180,7 @@ export class NovoDateTimePickerElement implements ControlValueAccessor {
       }
     }
 
-    this.hours = hours.toString().length === 1 ? `0${hours.toString()}` : hours.toString();
+    this.hours = hours.toString();
     this.minutes = minutes.toString().length === 1 ? `0${minutes.toString()}` : minutes.toString();
   }
 
