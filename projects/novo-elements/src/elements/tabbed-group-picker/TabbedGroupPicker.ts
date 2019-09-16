@@ -22,7 +22,7 @@ export type TabbedGroupPickerQuickSelect = {
 };
 
 type SchemaDictionary = {
-  [key: string]: object;
+  [key: string]: ({ selected?: boolean } & object)[];
 };
 
 @Component({
