@@ -4,74 +4,45 @@ import { debounceTime } from 'rxjs/operators';
 import { Helpers } from '../../utils/Helpers';
 import { NovoLabelService } from '../../services/novo-label-service';
 
-export type TabbedGroupPickerSchema<N extends string, V extends string = 'value', L extends string = 'label', R = never> = {
-  typeName: N;
+export type TabbedGroupPickerSchema = {
+  typeName: string;
   typeLabel: string;
-  valueField: V;
-  labelField: L;
-  data: SelectableItem<V, L, R>[];
-  childTypeName?: R extends TabbedGroupPickerSchema<infer NN, infer VV, infer LL> ? NN : never;
+  valueField: string;
+  labelField: string;
+  childTypeName?: string;
+  data: ({ selected?: boolean } & object)[];
 };
 
-const dinos: Dinosaurs = {
-  typeName: 'dinosaurs',
-  typeLabel: 'Dinosaurs',
-  childTypeName: 'chickens',
-  valueField: 'id',
-  labelField: 'name',
-  data: [{ name: 'Tyrannosaurus', id: '5', children: [{ chickenId: '11', bwaack: 'bwooock?' }] }, { name: 'Velociraptor', id: '6' }],
-};
-export type SelectableItem<V extends string, L extends string, R = never> = { [key in V]: string | number } &
-  { [key in L]: string } & {
-    selected?: boolean;
-    indeterminate?: boolean;
-    children?: R extends TabbedGroupPickerSchema<infer N, infer VV, infer LL, R> ? SelectableItem<VV, LL>[] : never;
-  };
-
-type Dinosaurs = TabbedGroupPickerSchema<'dinosaurs', 'id', 'name', Chickens>;
-type Chickens = TabbedGroupPickerSchema<'chickens', 'chickenId', 'bwaack', {}>;
-
-type SchemaDictionary<S> = { [key in DistributeTypeName<S>]: DistributeData<S> };
-
-type Keyify<U> = U extends PropertyKey ? U : never;
-type DistributeTypeName<U> = Keyify<U extends { typeName: infer K } ? K : never>;
-type DistributeData<U> = U extends { data: SelectableItem<infer V, infer L, infer R>[] } ? SelectableItem<V, L, R>[] : never;
-
-export type InferredSchema<S> = S extends TabbedGroupPickerSchema<infer N, infer V, infer L, infer R>
-  ? TabbedGroupPickerSchema<N, V, L, R>
-  : never;
-type InferredSelectableItem<S> = S extends TabbedGroupPickerSchema<infer N, infer V, infer L, infer R> ? SelectableItem<V, L, R> : never;
 export type TabbedGroupPickerQuickSelect = {
   label: string;
   selected?: boolean;
-  childTypeName: string;
-} & (
-  | {
-      all: boolean;
-      children?: { selected?: boolean; [key: string]: any }[];
-    }
-  | {
-      children: { selected?: boolean; [key: string]: any }[];
-    });
+  childTypeName?: string;
+  children?: ({ selected?: boolean } & object)[];
+  all?: boolean;
+};
+
+type SchemaDictionary = {
+  [key: string]: object;
+};
 
 @Component({
   selector: 'novo-tabbed-group-picker',
   templateUrl: './TabbedGroupPicker.html',
 })
-export class NovoTabbedGroupPickerElement<S = TabbedGroupPickerSchema<'items'>> implements OnInit {
+export class NovoTabbedGroupPickerElement implements OnInit {
   @Input() buttonConfig: {
     theme: string;
     side: string;
     icon: string;
     label: string;
   };
-  @Input() schemata: InferredSchema<S>[];
+  @Input() schemata: TabbedGroupPickerSchema[];
   @Input() quickSelectConfig: { label: string; items: TabbedGroupPickerQuickSelect[] };
-  displayData: SchemaDictionary<S>;
+  displayData: SchemaDictionary;
 
   @Output() selectionChange: EventEmitter<any> = new EventEmitter<any>();
 
-  activeSchema: S extends TabbedGroupPickerSchema<infer N, infer V, infer L, infer R> ? TabbedGroupPickerSchema<N, V, L, R> : never;
+  activeSchema: TabbedGroupPickerSchema;
   filterText: BehaviorSubject<string> = new BehaviorSubject('');
   searchLabel: string = 'Search';
 
@@ -263,7 +234,7 @@ export class NovoTabbedGroupPickerElement<S = TabbedGroupPickerSchema<'items'>> 
         ...prev,
         [typeName]: data.filter(({ selected }) => selected).map((item) => item[valueField]),
       }),
-      {},
+      {} as any,
     );
     this.selectionChange.emit(selectedValues);
   }
@@ -279,12 +250,10 @@ export class NovoTabbedGroupPickerElement<S = TabbedGroupPickerSchema<'items'>> 
 
   filter = (searchTerm: string) =>
     (this.displayData = this.schemata.reduce(
-      (accumulator: SchemaDictionary<S>, { labelField, typeName, data }: InferredSchema<S>): SchemaDictionary<S> =>
-        ({
-          ...accumulator,
-          [typeName]:
-            data && data.filter((item: InferredSelectableItem<S>) => item[labelField].toLowerCase().includes(searchTerm.toLowerCase())),
-        } as SchemaDictionary<S>),
-      {} as SchemaDictionary<S>,
+      (accumulator, { labelField, typeName, data }) => ({
+        ...accumulator,
+        [typeName]: data && data.filter((item) => item[labelField].toLowerCase().includes(searchTerm.toLowerCase())),
+      }),
+      {},
     ));
 }
