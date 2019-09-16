@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TabbedGroupPickerSchema } from 'dist/novo-elements/elements/tabbed-group-picker/TabbedGroupPicker';
 
 /**
  * @title Tabbed Group Picker - Basic Example
@@ -64,14 +65,18 @@ export class TabbedGroupPickerBasicExample {
     selector: 'buttonConfig',
   };
 
-  public selectedAnimals: number[] = [];
+  public selectedAnimals: string[] = [];
   public selectedPlaces: string[] = [];
   public selectedColors: string[] = [];
 
-  onSelectionChange(selectedData) {
-    this.selectedAnimals = selectedData['animals'];
-    this.selectedPlaces = selectedData['places'];
-    this.selectedColors = selectedData['colors'];
+  onSelectionChange(selectedData: TabbedGroupPickerSchema[]) {
+    this.selectedAnimals = selectedData
+      .find(({ typeName }) => typeName === 'animals')
+      .data.map(({ animalId }: { animalId: string }) => animalId);
+    this.selectedPlaces = selectedData
+      .find(({ typeName }) => typeName === 'places')
+      .data.map(({ localName }: { localName: string }) => localName);
+    this.selectedColors = selectedData.find(({ typeName }) => typeName === 'colors').data.map(({ rgb }: { rgb: string }) => rgb);
     this.example_buttonConfig.label = this.buildButtonLabel();
   }
 

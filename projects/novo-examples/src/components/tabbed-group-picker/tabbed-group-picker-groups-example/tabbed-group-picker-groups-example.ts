@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TabbedGroupPickerSchema } from 'dist/novo-elements/elements/tabbed-group-picker/TabbedGroupPicker';
 
 /**
  * @title Tabbed Group Picker - Quick Select Example
@@ -9,14 +10,13 @@ import { Component } from '@angular/core';
   styleUrls: ['../tabbed-group-picker-example.scss'],
 })
 export class TabbedGroupPickerGroupsExample {
-
   getAnimals = (): { animalId: number; name: string }[] =>
     ['Dog', 'Cat', 'Mouse', 'Horse', 'Cow', 'Chicken', 'Pig', 'Sheep', 'Goat', 'Goose'].map((name, index) => ({
       name,
       animalId: index + 1,
     }));
 
-  getAnimalCategories = (): {groupId: number, name: string, children?: {animalId: number, name: string}[]}[] => {
+  getAnimalCategories = (): { groupId: number; name: string; children?: { animalId: number; name: string }[] }[] => {
     const animals = this.getAnimals();
     const birds = ['Chicken', 'Goose'].map((name) => animals.find((animal) => animal.name === name));
     const livestock = ['Cow', 'Pig', 'Sheep', 'Goat'].map((name) => animals.find((animal) => animal.name === name));
@@ -24,15 +24,15 @@ export class TabbedGroupPickerGroupsExample {
       {
         name: 'Birds',
         groupId: 1,
-        children: birds
+        children: birds,
       },
       {
         name: 'Livestock',
         groupId: 2,
-        children: livestock
-      }
+        children: livestock,
+      },
     ];
-  }
+  };
   example_schema = [
     {
       typeName: 'animals',
@@ -48,7 +48,7 @@ export class TabbedGroupPickerGroupsExample {
       labelField: 'name',
       childTypeName: 'animals',
       data: this.getAnimalCategories(),
-    }
+    },
   ];
   public example_quickSelectConfig = {
     label: 'Quick Select',
@@ -80,12 +80,16 @@ export class TabbedGroupPickerGroupsExample {
     selector: 'buttonConfig',
   };
 
-  public selectedAnimals: any[] = [];
-  selectedAnimalCategories = [];
+  selectedAnimals: string[] = [];
+  selectedAnimalCategories: string[] = [];
 
-  onSelectionChange(selectedData) {
-    this.selectedAnimals = selectedData['animals'];
-    this.selectedAnimalCategories = selectedData['animalCategories'];
+  onSelectionChange(selectedData: TabbedGroupPickerSchema[]) {
+    this.selectedAnimals = selectedData
+      .find(({ typeName }) => typeName === 'animals')
+      .data.map(({ animalId }: { animalId: string }) => animalId);
+    this.selectedAnimalCategories = selectedData
+      .find(({ typeName }) => typeName === 'animalCategories')
+      .data.map(({ groupId }: { groupId: string }) => groupId);
     this.example_buttonConfig.label = this.buildButtonLabel();
   }
 

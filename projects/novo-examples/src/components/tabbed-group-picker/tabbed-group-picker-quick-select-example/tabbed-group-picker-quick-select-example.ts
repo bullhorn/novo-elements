@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TabbedGroupPickerSchema } from 'dist/novo-elements/elements/tabbed-group-picker/TabbedGroupPicker';
 
 /**
  * @title Tabbed Group Picker - Quick Select Example
@@ -53,10 +54,12 @@ export class TabbedGroupPickerQuickSelectExample {
     selector: 'buttonConfig',
   };
 
-  public selectedAnimals: any[] = [];
+  public selectedAnimals: string[] = [];
 
-  onSelectionChange(selectedData) {
-    this.selectedAnimals = selectedData['animals'];
+  onSelectionChange(selectedData: TabbedGroupPickerSchema[]) {
+    this.selectedAnimals = selectedData
+      .find(({ typeName }) => typeName === 'animals')
+      .data.map(({ animalId }: { animalId: string }) => animalId);
     this.example_buttonConfig.label = this.buildButtonLabel();
   }
 

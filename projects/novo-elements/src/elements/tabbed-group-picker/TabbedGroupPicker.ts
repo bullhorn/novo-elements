@@ -229,13 +229,10 @@ export class NovoTabbedGroupPickerElement implements OnInit {
   };
 
   emitSelectedValues() {
-    const selectedValues = this.schemata.reduce(
-      (prev, { typeName, valueField, data }) => ({
-        ...prev,
-        [typeName]: data.filter(({ selected }) => selected).map((item) => item[valueField]),
-      }),
-      {} as any,
-    );
+    const selectedValues: TabbedGroupPickerSchema[] = this.schemata.map((schema) => ({
+      ...schema,
+      data: schema.data.filter(({ selected }) => selected),
+    }));
     this.selectionChange.emit(selectedValues);
   }
 
