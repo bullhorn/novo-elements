@@ -160,9 +160,7 @@ export class BasePickerResults {
             ) {
               this.isStatic = false;
               // Promises (ES6 or Deferred) are resolved whenever they resolve
-              options
-                .then(this.structureArray.bind(this))
-                .then(resolve, reject);
+              options.then(this.structureArray.bind(this)).then(resolve, reject);
             } else if (typeof options === 'function') {
               this.isStatic = false;
               // Promises (ES6 or Deferred) are resolved whenever they resolve
@@ -180,9 +178,7 @@ export class BasePickerResults {
               if (typeof this.config.defaultOptions === 'function') {
                 let defaultOptions = this.config.defaultOptions(term, ++this.page);
                 if (Object.getPrototypeOf(defaultOptions).hasOwnProperty('then')) {
-                  defaultOptions
-                    .then(this.structureArray.bind(this))
-                    .then(resolve, reject);
+                  defaultOptions.then(this.structureArray.bind(this)).then(resolve, reject);
                 } else {
                   resolve(this.structureArray(defaultOptions));
                 }
@@ -386,8 +382,8 @@ export class BasePickerResults {
       let preselectedFunc: Function = this.config.preselected;
       return (
         this.selected.findIndex((item) => {
-        return preselectedFunc(match, item);
-      }) !== -1
+          return preselectedFunc(match, item);
+        }) !== -1
       );
     }
     return (

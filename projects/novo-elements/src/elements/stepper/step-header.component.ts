@@ -2,6 +2,7 @@ import { FocusMonitor } from '@angular/cdk/a11y';
 import { coerceBooleanProperty, coerceNumberProperty } from '@angular/cdk/coercion';
 import { ChangeDetectionStrategy, Component, ElementRef, Input, OnDestroy, TemplateRef } from '@angular/core';
 import { NovoStepLabel } from './step-label.component';
+import { CdkStepHeader } from '@angular/cdk/stepper';
 
 @Component({
   selector: 'novo-step-header',
@@ -14,7 +15,7 @@ import { NovoStepLabel } from './step-label.component';
   preserveWhitespaces: false,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NovoStepHeader implements OnDestroy {
+export class NovoStepHeader extends CdkStepHeader implements OnDestroy {
   @Input()
   theme: string;
   @Input()
@@ -79,6 +80,7 @@ export class NovoStepHeader implements OnDestroy {
   private _optional: boolean;
 
   constructor(private _focusMonitor: FocusMonitor, private _element: ElementRef) {
+    super(_element);
     _focusMonitor.monitor(_element.nativeElement, true);
   }
 
