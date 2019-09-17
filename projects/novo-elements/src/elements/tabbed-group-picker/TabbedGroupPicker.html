@@ -15,10 +15,10 @@
     <div class="tabbed-group-picker-column left">
       <novo-nav theme="white"
                 direction="vertical">
-        <novo-tab *ngFor="let schema of schemata"
+        <novo-tab *ngFor="let schema of displaySchemata"
                   [attr.data-automation-id]="schema.typeName"
-                  (activeChange)="setActiveSchema(schema)">
-          <span>{{schema.typeLabel}} ({{displayData[schema.typeName].length}})</span><i class="bhi-next"></i>
+                  (activeChange)="setDisplaySchema(schema)">
+          <span>{{schema.typeLabel}} ({{schema.data.length}})</span><i class="bhi-next"></i>
         </novo-tab>
       </novo-nav>
       <!-- todo: clear all button goes here-->
@@ -40,13 +40,13 @@
         </novo-list>
       </div>
       <!-- todo: add virtual scroll-->
-      <novo-list *ngIf="displayData[activeSchema.typeName].length"
+      <novo-list *ngIf="displaySchema.data.length"
                  direction="vertical">
-        <novo-list-item *ngFor="let item of displayData[activeSchema.typeName]"
-                        [attr.data-automation-id]="item[activeSchema.labelField]"
+        <novo-list-item *ngFor="let item of displaySchema.data"
+                        [attr.data-automation-id]="item[displaySchema.labelField]"
                         (click)="item.selected = !item.selected; onDataListItemClicked(item)">
                         <item-content>
-                          <novo-checkbox [label]="item[activeSchema.labelField]"
+                          <novo-checkbox [label]="item[displaySchema.labelField]"
                           [name]="'selected'"
                           [indeterminate]="item.indeterminate"
                           [(ngModel)]="item.selected"
@@ -56,11 +56,11 @@
         </novo-list-item>
       </novo-list>
       <!-- TODO: add empty result message for no data in the case of no search -->
-      <div class="novo-category-dropdown-empty-item" *ngIf="!displayData[activeSchema.typeName].length && (filterText | async)">
+      <div class="novo-category-dropdown-empty-item" *ngIf="!displaySchema.data.length && (filterText | async)">
         <!-- TODO: add bhi-users icon if parent-child relationship-->
         <i class="bhi-user"></i>
         <div class="empty-item-main-message">{{ labelService.tabbedGroupPickerEmpty }}</div>
-        <div class="empty-item-sub-message">{{ labelService.tabbedGroupClearSuggestion(this.activeSchema.typeLabel) }}</div>
+        <div class="empty-item-sub-message">{{ labelService.tabbedGroupClearSuggestion(this.displaySchema.typeLabel) }}</div>
       </div>
     </div>
   </div>
