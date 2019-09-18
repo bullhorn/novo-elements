@@ -254,6 +254,50 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
     });
   });
   describe('function: onDataListItemClicked', () => {
+    it('should work for large datasets', () => {
+      const amountOfTimeInMillisecondsThatIndicatesAGrosslyInefficientAlgorithm = 4000;
+      const children: TabbedGroupPickerSchema['data'] = Array(10000)
+        .fill(0)
+        .map((n, i) => ({
+          value: i,
+          label: `child #${i}`,
+          selected: Boolean(i % 2),
+        }));
+      const childSchema: TabbedGroupPickerSchema = {
+        typeLabel: 'child',
+        typeName: 'child',
+        valueField: 'value',
+        labelField: 'label',
+        data: children,
+      };
+      const parentSchemata: TabbedGroupPickerSchema[] = Array(100)
+        .fill(0)
+        .map(
+          (n, i): TabbedGroupPickerSchema => ({
+            typeLabel: 'parent',
+            typeName: `parent${i}`,
+            labelField: `label${i}`,
+            valueField: `value${i}`,
+            childTypeName: 'child',
+            data: Array(100)
+              .fill(0)
+              .map((nn, ii) => ({
+                [`value${i}`]: i,
+                [`label${i}`]: i,
+                children,
+              })),
+          }),
+        );
+      component.schemata = [...parentSchemata, childSchema];
+      const firstParent = parentSchemata[0].data[0];
+      firstParent.selected = true;
+      const start = performance.now();
+      component.onDataListItemClicked(firstParent);
+      const end = performance.now();
+      expect(end - start).toBeLessThan(amountOfTimeInMillisecondsThatIndicatesAGrosslyInefficientAlgorithm);
+      const allAreSelected = component.schemata.every((schema) => schema.data.every((datum) => datum.selected));
+      expect(allAreSelected).toBe(true);
+    });
     it('should select each item in the quick select group', () => {
       const data = [{ id: 1, name: 'chicken', selected: false }, { id: 2, name: 'goldfish', selected: false }];
       const quickSelectItem: TabbedGroupPickerQuickSelect = {
