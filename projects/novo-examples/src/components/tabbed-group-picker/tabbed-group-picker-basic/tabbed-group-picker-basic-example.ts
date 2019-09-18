@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { TabbedGroupPickerSchema } from 'dist/novo-elements/elements/tabbed-group-picker/TabbedGroupPicker';
+import { TabbedGroupPickerSchema, ChildSchema } from 'dist/novo-elements/elements/tabbed-group-picker/TabbedGroupPicker';
 
 /**
  * @title Tabbed Group Picker - Basic Example
@@ -70,13 +70,13 @@ export class TabbedGroupPickerBasicExample {
   public selectedColors: string[] = [];
 
   onSelectionChange(selectedData: TabbedGroupPickerSchema[]) {
-    this.selectedAnimals = selectedData
-      .find(({ typeName }) => typeName === 'animals')
-      .data.map(({ animalId }: { animalId: string }) => animalId);
-    this.selectedPlaces = selectedData
-      .find(({ typeName }) => typeName === 'places')
-      .data.map(({ localName }: { localName: string }) => localName);
-    this.selectedColors = selectedData.find(({ typeName }) => typeName === 'colors').data.map(({ rgb }: { rgb: string }) => rgb);
+    this.selectedAnimals = (selectedData.find(({ typeName }) => typeName === 'animals') as ChildSchema).data.map(
+      ({ animalId }) => animalId,
+    );
+    this.selectedPlaces = (selectedData.find(({ typeName }) => typeName === 'places') as ChildSchema).data.map(
+      ({ localName }) => localName,
+    );
+    this.selectedColors = (selectedData.find(({ typeName }) => typeName === 'colors') as ChildSchema).data.map(({ rgb }) => rgb);
     this.example_buttonConfig.label = this.buildButtonLabel();
   }
 

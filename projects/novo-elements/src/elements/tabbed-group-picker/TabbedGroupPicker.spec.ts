@@ -36,7 +36,7 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
 
   describe('Function: ngOnInit', () => {
     beforeEach(() => {
-      spyOn(component, 'setDisplaySchema').and.callFake(() => {});
+      spyOn(component, 'setDisplaySchemaIndex').and.callFake(() => {});
       component.schemata = [
         {
           typeName: 'firstTypeName',
@@ -55,15 +55,8 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
       ];
     });
     it('should activate the first item in the input schemata array', () => {
-      const expected = {
-        typeName: 'firstTypeName',
-        typeLabel: 'firstTypeLabel',
-        valueField: 'firstValueField',
-        labelField: 'firstLabelField',
-        data: [],
-      };
       component.ngOnInit();
-      expect(component.setDisplaySchema).toHaveBeenCalledWith(expected);
+      expect(component.setDisplaySchemaIndex).toHaveBeenCalledWith(0);
     });
     it('should stop loading', () => {
       component.ngOnInit();
@@ -72,7 +65,7 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
   });
   describe('function: filter', () => {
     beforeEach(() => {
-      spyOn(component, 'setDisplaySchema').and.callFake(() => {});
+      spyOn(component, 'setDisplaySchemaIndex').and.callFake(() => {});
     });
 
     const getLetter = (n: number) => String.fromCharCode((n % 26) + 65);

@@ -9,19 +9,19 @@ export type TabbedGroupPickerSchema = {
   typeLabel: string;
   valueField: string;
   labelField: string;
-} & (
-  | {
-      childTypeName: string;
-      data: Array<
-        {
-          selected?: boolean;
-          indeterminate?: boolean;
-          children: Array<{ selected?: boolean } & object>;
-        } & object
-      >;
-    }
-  | { data: Array<{ selected?: boolean } & object> });
+} & (ParentSchema | ChildSchema);
+export type ParentSchema = {
+  childTypeName: string;
+  data: Array<
+    {
+      selected?: boolean;
+      indeterminate?: boolean;
+      children: Array<{ selected?: boolean }>;
+    } & { [key: string]: any }
+  >;
+};
 
+export type ChildSchema = { data: Array<{ selected?: boolean } & { [key: string]: any }> };
 export type TabbedGroupPickerQuickSelect = {
   label: string;
   selected?: boolean;
@@ -47,7 +47,11 @@ export class NovoTabbedGroupPickerElement implements OnInit {
 
   @Output() selectionChange: EventEmitter<any> = new EventEmitter<any>();
 
-  displaySchema: TabbedGroupPickerSchema;
+  displaySchemaIndex: number;
+
+  get displaySchema(): TabbedGroupPickerSchema {
+    return this.displaySchemata[this.displaySchemaIndex];
+  }
   filterText: BehaviorSubject<string> = new BehaviorSubject('');
   searchLabel: string = 'Search';
 
@@ -67,11 +71,11 @@ export class NovoTabbedGroupPickerElement implements OnInit {
 
   setupDisplayData(): void {
     this.displaySchemata = this.schemata;
-    this.setDisplaySchema(this.schemata[0]);
+    this.setDisplaySchemaIndex(0);
   }
 
-  setDisplaySchema(newActiveSchema: TabbedGroupPickerSchema) {
-    this.displaySchema = newActiveSchema;
+  setDisplaySchemaIndex(index: number) {
+    this.displaySchemaIndex = index;
   }
 
   // Replace each parent's child object with a reference to the child in order to avoid duplicating data, since children
@@ -134,14 +138,16 @@ export class NovoTabbedGroupPickerElement implements OnInit {
     this.schemata
       .filter((schema) => 'childTypeName' in schema && !!schema.childTypeName)
       .forEach(({ data }) => {
-        data
-          .filter(({ children }: { children?: any[] }) => children && children.length)
-          .forEach((parent: { children?: { selected?: boolean }[] }) => {
-            ['indeterminate', 'selected'].forEach((v) => delete parent[v]);
+        const parents: ParentSchema['data'] = data.filter(
+          ({ children }: { children?: any[] }) => children && children.length,
+        ) as ParentSchema['data'] extends Array<infer T> ? T[] : never;
 
-            const [key, value] = this.getSelectedValue(parent.children);
-            key && (parent[key] = value);
-          });
+        parents.forEach((parent: { children?: { selected?: boolean }[] }) => {
+          ['indeterminate', 'selected'].forEach((v) => delete parent[v]);
+
+          const [key, value] = this.getSelectedValue(parent.children);
+          key && (parent[key] = value);
+        });
       });
 
     if (this.quickSelectConfig) {

@@ -15,9 +15,9 @@
     <div class="tabbed-group-picker-column left">
       <novo-nav theme="white"
                 direction="vertical">
-        <novo-tab *ngFor="let schema of displaySchemata"
+        <novo-tab *ngFor="let schema of displaySchemata; index as i"
                   [attr.data-automation-id]="schema.typeName"
-                  (activeChange)="setDisplaySchema(schema)">
+                  (activeChange)="setDisplaySchemaIndex(i)">
           <span>{{schema.typeLabel}} ({{schema.data.length}})</span><i class="bhi-next"></i>
         </novo-tab>
       </novo-nav>
@@ -40,7 +40,7 @@
         </novo-list>
       </div>
       <!-- todo: add virtual scroll-->
-      <novo-list *ngIf="displaySchema.data.length"
+      <novo-list *ngIf="schemata[displaySchemaIndex].data.length"
                  direction="vertical">
         <novo-list-item *ngFor="let item of displaySchema.data"
                         [attr.data-automation-id]="item[displaySchema.labelField]"
