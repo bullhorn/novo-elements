@@ -9,20 +9,25 @@ export type TabbedGroupPickerSchema = {
   typeLabel: string;
   valueField: string;
   labelField: string;
-  childTypeName?: string;
-  data: ({ selected?: boolean } & object)[];
-};
+} & (
+  | {
+      childTypeName: string;
+      data: Array<
+        {
+          selected?: boolean;
+          indeterminate?: boolean;
+          children: Array<{ selected?: boolean } & object>;
+        } & object
+      >;
+    }
+  | { data: Array<{ selected?: boolean } & object> });
 
 export type TabbedGroupPickerQuickSelect = {
   label: string;
   selected?: boolean;
   childTypeName?: string;
-  children?: ({ selected?: boolean } & object)[];
+  children?: (({ selected?: boolean } & object) | (number))[];
   all?: boolean;
-};
-
-type SchemaDictionary = {
-  [key: string]: ({ selected?: boolean } & object)[];
 };
 
 @Component({
@@ -72,9 +77,10 @@ export class NovoTabbedGroupPickerElement implements OnInit {
   // Replace each parent's child object with a reference to the child in order to avoid duplicating data, since children
   // have a to-many relationship with parents
   createChildrenReferences(): void {
-    this.schemata
-      .filter(({ childTypeName }) => !!childTypeName)
-      .forEach(({ data, childTypeName }) => {
+    this.schemata.forEach((schema) => {
+      // would rather filter but TypeScript stills wants a type narrowing here
+      if ('childTypeName' in schema) {
+        const { childTypeName, data } = schema;
         const childSchema = this.schemata.find(({ typeName }) => typeName === childTypeName);
 
         data
@@ -85,7 +91,8 @@ export class NovoTabbedGroupPickerElement implements OnInit {
                 childSchema.data.find((item) => item[childSchema.valueField] === child[childSchema.valueField]),
               )),
           );
-      });
+      }
+    });
     if (this.quickSelectConfig) {
       this.quickSelectConfig.items
         .filter((parent) => 'all' in parent)
@@ -108,11 +115,11 @@ export class NovoTabbedGroupPickerElement implements OnInit {
     }
   }
 
-  onDataListItemClicked(item: { selected?: boolean; children?: { selected?: boolean }[] }) {
+  onDataListItemClicked(item: { selected?: boolean; children?: Array<{ selected?: boolean }> }) {
     this.onItemToggled(item);
   }
 
-  onItemToggled(item: { selected?: boolean; children?: { selected?: boolean }[] }) {
+  onItemToggled(item: { selected?: boolean; children?: Array<{ selected?: boolean }> }) {
     item.children && this.updateChildren(item.selected, item.children);
     this.updateParents();
     this.emitSelectedValues();
@@ -125,7 +132,7 @@ export class NovoTabbedGroupPickerElement implements OnInit {
   updateParents(): void {
     // mutate here to avoid dereferencing the objects in displaySchemata
     this.schemata
-      .filter(({ childTypeName }) => !!childTypeName)
+      .filter((schema) => 'childTypeName' in schema && !!schema.childTypeName)
       .forEach(({ data }) => {
         data
           .filter(({ children }: { children?: any[] }) => children && children.length)
@@ -140,7 +147,7 @@ export class NovoTabbedGroupPickerElement implements OnInit {
     if (this.quickSelectConfig) {
       this.quickSelectConfig.items.forEach((quickSelect) => {
         delete quickSelect.selected;
-        const [key, value] = this.getSelectedValue(quickSelect.children);
+        const [key, value] = this.getSelectedValue(quickSelect.children as ({ selected?: boolean } & object)[]);
         key && (quickSelect[key] = value);
       });
     }

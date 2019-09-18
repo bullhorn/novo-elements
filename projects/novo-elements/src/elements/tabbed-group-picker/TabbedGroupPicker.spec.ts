@@ -1,14 +1,25 @@
 // NG2
 import { async, TestBed } from '@angular/core/testing';
 // App
-import { NovoTabbedGroupPickerElement, TabbedGroupPickerSchema, SelectableItem, TabbedGroupPickerQuickSelect } from './TabbedGroupPicker';
+import { NovoTabbedGroupPickerElement, TabbedGroupPickerSchema, TabbedGroupPickerQuickSelect } from './TabbedGroupPicker';
 import { NovoTabbedGroupPickerModule } from './TabbedGroupPicker.module';
 import { ComponentUtils } from '../../utils/component-utils/ComponentUtils';
 import { NovoLabelService } from '../../services/novo-label-service';
 
 describe('Elements: NovoTabbedGroupPickerElement', () => {
   let fixture;
-  let component: NovoTabbedGroupPickerElement<any>;
+  let component: NovoTabbedGroupPickerElement;
+
+  const getChickenSchema = (): TabbedGroupPickerSchema => ({
+    typeName: 'chickens',
+    typeLabel: 'Chickens',
+    valueField: 'chickenId',
+    labelField: 'bwaack',
+    data: [
+      ({ chickenId: 3, bwaack: 'bwock?' } as unknown) as { selected?: boolean },
+      ({ chickenId: 4, bwaack: 'baa bock' } as unknown) as { selected?: boolean },
+    ],
+  });
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -25,9 +36,7 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
 
   describe('Function: ngOnInit', () => {
     beforeEach(() => {
-      spyOn(component, 'validateData').and.callFake(() => {});
-      spyOn(component, 'validateQuickSelectConfig').and.callFake(() => {});
-      spyOn(component, 'setActiveSchema').and.callFake(() => {});
+      spyOn(component, 'setDisplaySchema').and.callFake(() => {});
       component.schemata = [
         {
           typeName: 'firstTypeName',
@@ -45,15 +54,6 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
         },
       ];
     });
-    it('should validate the input data', () => {
-      component.ngOnInit();
-      expect(component.validateData).toHaveBeenCalled();
-    });
-    it('when quick select configuration exists, should validate the quick select configuration', () => {
-      component.quickSelectConfig = { label: 'blah', items: [] };
-      component.ngOnInit();
-      expect(component.validateQuickSelectConfig).toHaveBeenCalled();
-    });
     it('should activate the first item in the input schemata array', () => {
       const expected = {
         typeName: 'firstTypeName',
@@ -63,7 +63,7 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
         data: [],
       };
       component.ngOnInit();
-      expect(component.setActiveSchema).toHaveBeenCalledWith(expected);
+      expect(component.setDisplaySchema).toHaveBeenCalledWith(expected);
     });
     it('should stop loading', () => {
       component.ngOnInit();
@@ -72,9 +72,7 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
   });
   describe('function: filter', () => {
     beforeEach(() => {
-      spyOn(component, 'validateData').and.callFake(() => {});
-      spyOn(component, 'validateQuickSelectConfig').and.callFake(() => {});
-      spyOn(component, 'setActiveSchema').and.callFake(() => {});
+      spyOn(component, 'setDisplaySchema').and.callFake(() => {});
     });
 
     const getLetter = (n: number) => String.fromCharCode((n % 26) + 65);
@@ -120,8 +118,6 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
   });
   describe('createChildrenReferences', () => {
     it('should make it so that children of data list items are references to other data list items', () => {
-      const chicken = { chickenId: 3, bwaack: 'bwock?' };
-      const mockingbird = { chickenId: 4, bwaack: 'tweeet' };
       const dinosaurs = [
         {
           id: 5,
@@ -130,13 +126,7 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
         },
       ];
       component.schemata = [
-        {
-          typeName: 'chickens',
-          typeLabel: 'Chickens',
-          valueField: 'chickenId',
-          labelField: 'bwaack',
-          data: [chicken, mockingbird],
-        },
+        getChickenSchema(),
         {
           typeName: 'dinosaurs',
           typeLabel: 'Dinosaurs',
@@ -146,25 +136,20 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
           data: dinosaurs,
         },
       ];
-      let childOfAllosaurus = component.schemata[1].data[0].children[0];
+      const chicken = component.schemata[0].data[0];
+      let childOfAllosaurus = component.schemata[1].data[0]['children'][0];
       expect(childOfAllosaurus).not.toBe(chicken);
 
       component.createChildrenReferences();
 
-      childOfAllosaurus = component.schemata[1].data[0].children[0];
+      childOfAllosaurus = component.schemata[1].data[0]['children'][0];
       expect(childOfAllosaurus).toBe(chicken);
     });
   });
   describe('updateParents', () => {
     it('should set parents to selected if their only child is selected', () => {
       component.schemata = [
-        {
-          typeName: 'chickens',
-          typeLabel: 'Chickens',
-          valueField: 'chickenId',
-          labelField: 'bwaack',
-          data: [{ chickenId: 3, bwaack: 'bwock?' }],
-        },
+        getChickenSchema(),
         {
           typeName: 'dinosaurs',
           typeLabel: 'Dinosaurs',
@@ -172,11 +157,11 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
           labelField: 'name',
           childTypeName: 'chickens',
           data: [
-            {
+            ({
               id: 5,
               name: 'Allosaurus',
-              children: [{ chickenId: 3, bwaack: 'bwock?' }],
-            },
+              children: [({ chickenId: 3, bwaack: 'bwock?' } as unknown) as { selected?: boolean }],
+            } as unknown) as { selected?: boolean },
           ],
         },
       ];
@@ -192,13 +177,7 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
     });
     it('should set parents to unselected if none of their children are selected', () => {
       component.schemata = [
-        {
-          typeName: 'chickens',
-          typeLabel: 'Chickens',
-          valueField: 'chickenId',
-          labelField: 'bwaack',
-          data: [{ chickenId: 3, bwaack: 'bwock?' }],
-        },
+        getChickenSchema(),
         {
           typeName: 'dinosaurs',
           typeLabel: 'Dinosaurs',
@@ -206,12 +185,12 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
           labelField: 'name',
           childTypeName: 'chickens',
           data: [
-            {
+            ({
               selected: true,
               id: 5,
               name: 'Allosaurus',
-              children: [{ chickenId: 3, bwaack: 'bwock?' }],
-            },
+              children: [...getChickenSchema().data],
+            } as unknown) as { selected?: boolean },
           ],
         },
       ];
@@ -224,32 +203,31 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
       expect(parent.selected).toEqual(undefined);
     });
     it('should set parents to indeterminate if one of their many children is selected', () => {
+      const dinosaurSchema = {
+        typeName: 'dinosaurs',
+        typeLabel: 'Dinosaurs',
+        valueField: 'id',
+        labelField: 'name',
+        childTypeName: 'chickens',
+        data: [
+          ({
+            selected: true,
+            id: 5,
+            name: 'Allosaurus',
+            children: [...getChickenSchema().data],
+          } as unknown) as { selected?: boolean; indeterminate?: boolean },
+        ],
+      };
       component.schemata = [
         {
-          typeName: 'chickens',
-          typeLabel: 'Chickens',
-          valueField: 'chickenId',
-          labelField: 'bwaack',
-          data: [{ chickenId: 3, bwaack: 'bwock?', selected: true }, { chickenId: 4, bwaack: 'baa bock' }],
+          ...getChickenSchema(),
+          data: [...getChickenSchema().data],
         },
-        {
-          typeName: 'dinosaurs',
-          typeLabel: 'Dinosaurs',
-          valueField: 'id',
-          labelField: 'name',
-          childTypeName: 'chickens',
-          data: [
-            {
-              selected: true,
-              id: 5,
-              name: 'Allosaurus',
-              children: [{ chickenId: 3, bwaack: 'bwock?' }, { chickenId: 4, bwaack: 'baa bock' }],
-            },
-          ],
-        },
+        dinosaurSchema,
       ];
+      component.schemata[0].data[0].selected = true;
       component.createChildrenReferences();
-      const parent = component.schemata[1].data[0];
+      const parent = dinosaurSchema.data[0];
       expect(parent.selected).toEqual(true);
 
       component.updateParents();
@@ -275,23 +253,36 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
       expect(result).toEqual([]);
     });
   });
-  describe('onQuickSelectListItemClicked', () => {
+  describe('function: onDataListItemClicked', () => {
     it('should select each item in the quick select group', () => {
-      const quickSelectItem = { typeName: 'animals', values: [1], label: 'chicken' };
+      const data = [{ id: 1, name: 'chicken', selected: false }, { id: 2, name: 'goldfish', selected: false }];
+      const quickSelectItem: TabbedGroupPickerQuickSelect = {
+        childTypeName: 'animals',
+        children: [data[0]],
+        label: 'chicken',
+        selected: true,
+      };
       component.quickSelectConfig = {
         label: 'Quick Select',
         items: [quickSelectItem],
       };
-      component.schemata = [
-        { typeName: 'animals', valueField: 'id', labelField: 'name', data: [{ id: 1, name: 'chicken' }, { id: 2, name: 'goldfish' }] },
-      ];
+      component.schemata = [{ typeName: 'animals', typeLabel: 'Animalz', valueField: 'id', labelField: 'name', data }];
       const chicken = component.schemata[0].data[0];
-      expect(chicken.selected).toEqual(undefined);
-      component.onQuickSelectListItemClicked(quickSelectItem);
+      const goldfish = component.schemata[0].data[1];
+
+      expect(chicken.selected).toBeFalsy();
+      component.onDataListItemClicked(quickSelectItem as any);
       expect(chicken.selected).toEqual(true);
+      expect(goldfish.selected).toEqual(false);
     });
     it('should unselect each item in the quick select group', () => {
-      const quickSelectItem: TabbedGroupPickerQuickSelect = { typeName: 'animals', values: [1], label: 'chicken', active: true };
+      const data = [{ id: 1, name: 'chicken', selected: true }, { id: 2, name: 'goldfish' }];
+      const quickSelectItem: TabbedGroupPickerQuickSelect = {
+        childTypeName: 'animals',
+        children: [data[0]],
+        label: 'chicken',
+        selected: false,
+      };
       component.quickSelectConfig = {
         label: 'Quick Select',
         items: [quickSelectItem],
@@ -299,22 +290,24 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
       component.schemata = [
         {
           typeName: 'animals',
+          typeLabel: 'Animalz',
           valueField: 'id',
           labelField: 'name',
-          data: [{ id: 1, name: 'chicken', selected: true }, { id: 2, name: 'goldfish' }],
+          data,
         },
       ];
       const chicken = component.schemata[0].data[0];
       expect(chicken.selected).toEqual(true);
-      expect(component.quickSelectConfig.items[0].active).toEqual(true);
-      component.onQuickSelectListItemClicked(quickSelectItem);
-      expect(component.quickSelectConfig.items[0].active).toEqual(false);
+
+      component.onDataListItemClicked(quickSelectItem as any);
+
       expect(chicken.selected).toEqual(undefined);
     });
   });
-  describe('updateQuickSelectCheckboxes', () => {
+  describe('function: updateParents', () => {
     it('should select each item in the quick select group', () => {
-      const quickSelectItem: TabbedGroupPickerQuickSelect = { typeName: 'animals', values: [1], label: 'chicken' };
+      const data = [{ id: 1, name: 'chicken', selected: true }, { id: 2, name: 'goldfish' }];
+      const quickSelectItem: TabbedGroupPickerQuickSelect = { childTypeName: 'animals', children: [1], label: 'chicken' };
       component.quickSelectConfig = {
         label: 'Quick Select',
         items: [quickSelectItem],
@@ -322,39 +315,32 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
       component.schemata = [
         {
           typeName: 'animals',
+          typeLabel: 'Animalz',
           valueField: 'id',
           labelField: 'name',
-          data: [{ id: 1, name: 'chicken', selected: true }, { id: 2, name: 'goldfish' }],
+          data,
         },
       ];
-      expect(quickSelectItem.active).toEqual(undefined);
-      component.updateQuickSelectCheckboxes(component.schemata[0]);
-      expect(quickSelectItem.active).toEqual(true);
+      component.createChildrenReferences();
+      expect(quickSelectItem.selected).toEqual(undefined);
+      component.updateParents();
+      expect(quickSelectItem.selected).toEqual(true);
     });
   });
   describe('onDataListItemClicked', () => {
     it('should update the selected status on the schema as well as the display data', () => {
-      const chicken = { chickenId: '3', bwaack: 'bwock?' };
-      component.schemata = [
-        {
-          typeName: 'chickens',
-          typeLabel: 'Chickens',
-          valueField: 'chickenId',
-          labelField: 'bwaack',
-          data: [chicken],
-        },
-      ];
+      component.schemata = [getChickenSchema()];
+      const chicken = component.schemata[0].data[0];
+      chicken.selected = true;
       component.filter('');
-      component.onDataListItemClicked(component.schemata[0], chicken);
+      component.onDataListItemClicked(chicken);
       const selectedItem = component.schemata[0].data[0];
-      const displayReference = component.displayData['chickens'][0];
+      const displayReference = component.displaySchemata.find(({ typeName }) => typeName === 'chickens').data[0];
       expect(selectedItem.selected).toEqual(true);
       expect(displayReference.selected).toEqual(true);
       expect(selectedItem).toEqual(displayReference);
     });
     it('should update the selected status of a group to indeterminate if an item in the group is selected but others are not', () => {
-      const chicken = { chickenId: 3, bwaack: 'bwock?' };
-      const mockingbird = { chickenId: 4, bwaack: 'tweeet' };
       const dinosaurs = [
         {
           id: 5,
@@ -363,13 +349,7 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
         },
       ];
       component.schemata = [
-        {
-          typeName: 'chickens',
-          typeLabel: 'Chickens',
-          valueField: 'chickenId',
-          labelField: 'bwaack',
-          data: [chicken, mockingbird],
-        },
+        getChickenSchema(),
         {
           typeName: 'dinosaurs',
           typeLabel: 'Dinosaurs',
@@ -379,20 +359,23 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
           data: dinosaurs,
         },
       ];
+      const chicken = component.schemata[0].data[0];
+      chicken.selected = true;
       component.createChildrenReferences();
-      component.onDataListItemClicked(component.schemata[0], chicken);
+      component.onDataListItemClicked(chicken);
 
       const selectedItem = component.schemata[0].data[0];
       expect(selectedItem.selected).toEqual(true);
 
       const indeterminateGroup = component.schemata[1].data[0];
       expect(indeterminateGroup.selected).toBeFalsy();
-      expect(indeterminateGroup.indeterminate).toEqual(true);
+      expect(indeterminateGroup['indeterminate']).toEqual(true);
     });
     it('should update the selected status of a group if the only item in the group is selected', () => {
-      const chicken = { chickenId: '3', bwaack: 'bwock?' };
-      const dinosaur = { id: '1', name: 'Tyrannosaurus', children: [chicken] };
+      const chickenSchema = getChickenSchema();
+      const dinosaur = { id: '1', name: 'Tyrannosaurus', children: [chickenSchema.data[0]] };
       component.schemata = [
+        chickenSchema,
         {
           typeName: 'dinosaurs',
           typeLabel: 'Dinosaurs',
@@ -401,18 +384,12 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
           childTypeName: 'chickens',
           data: [dinosaur],
         },
-        {
-          typeName: 'chickens',
-          typeLabel: 'Chickens',
-          valueField: 'chickenId',
-          labelField: 'bwaack',
-          data: [chicken],
-        },
       ];
-      component.onDataListItemClicked(component.schemata[1], chicken);
-      const tRex = component.schemata[0].data[0];
-      const heyhey = component.schemata[1].data[0];
-      expect(heyhey.selected).toEqual(true);
+      const chicken = component.schemata[0].data[0];
+      chicken.selected = true;
+      const tRex = component.schemata[1].data[0];
+
+      component.onDataListItemClicked(chicken);
       expect(tRex.selected).toEqual(true);
     });
   });
