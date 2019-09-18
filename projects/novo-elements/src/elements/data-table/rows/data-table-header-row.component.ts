@@ -9,6 +9,9 @@ import { CdkHeaderRow, CDK_ROW_TEMPLATE } from '@angular/cdk/table';
 export class NovoDataTableHeaderRow extends CdkHeaderRow {
   @HostBinding('class')
   public rowClass = 'novo-data-table-header-row';
+  @HostBinding('class.fixed-header')
+  @Input()
+  public fixedHeader: boolean = false;
   @HostBinding('attr.role')
   public role = 'row';
 }
