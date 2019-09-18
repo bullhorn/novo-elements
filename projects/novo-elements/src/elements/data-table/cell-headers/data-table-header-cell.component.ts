@@ -285,7 +285,6 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
   public ngOnInit(): void {
     if (this._cdkColumnDef) {
       this.id = this._cdkColumnDef.name;
-      console.log(this.id);
     }
 
     this.checkSortFilterState({ filter: this.state.filter, sort: this.state.sort }, true);
