@@ -32,10 +32,21 @@ const DATE_VALUE_ACCESSOR = {
   selector: 'novo-time-picker-input',
   providers: [DATE_VALUE_ACCESSOR],
   template: `
-    <input type="text" [name]="name" [(ngModel)]="formattedValue" [textMask]="maskOptions" [placeholder]="placeholder" (focus)="_handleFocus($event)"
-           (keydown)="_handleKeydown($event)" (input)="_handleInput($event)" (blur)="_handleBlur($event)" #input data-automation-id="time-input" [disabled]="disabled"/>
-    <i *ngIf="!hasValue" (click)="openPanel()" class="bhi-clock"></i>
-    <i *ngIf="hasValue" (click)="clearValue()" class="bhi-times"></i>
+    <input
+      type="text"
+      [name]="name"
+      [(ngModel)]="formattedValue"
+      [textMask]="maskOptions"
+      [placeholder]="placeholder"
+      (focus)="_handleFocus($event)"
+      (keydown)="_handleKeydown($event)"
+      (input)="_handleInput($event)"
+      (blur)="_handleBlur($event)"
+      #input
+      data-automation-id="time-input"
+      [disabled]="disabled"
+    />
+    <i *ngIf="!hasValue" (click)="openPanel()" class="bhi-clock"></i> <i *ngIf="hasValue" (click)="clearValue()" class="bhi-times"></i>
 
     <novo-overlay-template [parent]="element" position="above-below">
       <novo-time-picker inline="true" (onSelect)="setValue($event)" [ngModel]="value" [military]="military"></novo-time-picker>
@@ -197,7 +208,7 @@ export class NovoTimePickerInputElement implements OnInit, ControlValueAccessor 
       return '';
     }
     let format = this.labels.formatTimeWithFormat(value, {
-      hour: '2-digit',
+      hour: 'numeric',
       minute: '2-digit',
       hour12: !this.military,
     });
