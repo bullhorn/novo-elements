@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NovoHorizontalStepper, NovoStep } from 'novo-elements';
 
 /**
  * @title Basic Stepper Component
@@ -16,7 +17,7 @@ export class StepperHorizontalExample implements OnInit {
 
   constructor(private _formBuilder: FormBuilder) {}
 
-  public ngOnInit() {
+  ngOnInit() {
     this.firstFormGroup = this._formBuilder.group({
       firstCtrl: ['', Validators.required],
     });
@@ -25,8 +26,8 @@ export class StepperHorizontalExample implements OnInit {
     });
   }
 
-  public next(stepper, step) {
-    // step.editable = false;
+  next(stepper: NovoHorizontalStepper, step: NovoStep) {
+    step.editable = false;
     stepper.next();
   }
 }

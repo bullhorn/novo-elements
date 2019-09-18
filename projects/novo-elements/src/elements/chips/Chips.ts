@@ -352,7 +352,7 @@ export class NovoChipsElement implements OnInit, ControlValueAccessor {
   showPreview() {
     if (this.source.previewTemplate) {
       if (!this.popup) {
-        this.popup = this.componentUtils.appendNextToLocation(this.source.previewTemplate, this.preview);
+        this.popup = this.componentUtils.append(this.source.previewTemplate, this.preview);
       }
       this.popup.instance.match = this.selected;
     }

@@ -44,6 +44,7 @@ const LAYOUT_DEFAULTS = { order: 'default', download: true, removable: true, lab
           (change)="check($event)"
           [attr.multiple]="multiple"
           tabindex="-1"
+          [attr.data-feature-id]="dataFeatureId"
         />
         <input
           *ngIf="layoutOptions.customActions"
@@ -53,6 +54,7 @@ const LAYOUT_DEFAULTS = { order: 'default', download: true, removable: true, lab
           (change)="customCheck($event)"
           [attr.multiple]="multiple"
           tabindex="-1"
+          [attr.data-feature-id]="dataFeatureId"
         />
         <section [ngSwitch]="layoutOptions.labelStyle">
           <label *ngSwitchCase="'no-box'" [attr.for]="name" class="no-box">
@@ -167,6 +169,8 @@ export class NovoFileInputElement implements ControlValueAccessor, OnInit, OnDes
   };
   @Input()
   value: Array<any> = [];
+  @Input()
+  dataFeatureId: string;
 
   @Output()
   edit: EventEmitter<any> = new EventEmitter();
@@ -205,6 +209,7 @@ export class NovoFileInputElement implements ControlValueAccessor, OnInit, OnDes
     this.updateLayout();
     this.initializeDragula();
     this.setInitialFileList();
+    this.dataFeatureId = this.dataFeatureId ? this.dataFeatureId : this.name;
   }
 
   ngOnDestroy() {

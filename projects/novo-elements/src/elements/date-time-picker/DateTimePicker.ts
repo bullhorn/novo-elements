@@ -81,26 +81,45 @@ const DATE_TIME_PICKER_VALUE_ACCESSOR = {
     ]),
   ],
   template: `
-        <div class="date-time-container">
-            <div class="date-time-tabs">
-                <span class="date-tab" (click)="toggleView('date')" [@dateTextState]="componentTabState" data-automation-id="novo-date-time-date-tab">{{selectedLabel}}</span>
-                <span class="time-tab" (click)="toggleView('time')" [@timeTextState]="componentTabState" data-automation-id="novo-date-time-time-tab">
-                    <span class="hours" data-automation-id="novo-time-picker-hours">{{hours}}</span>:<span
-                    class="minutes" data-automation-id="novo-time-picker-minutes">{{minutes}}</span>
-                    <span *ngIf="!military" class="meridian">{{meridian}}</span>
-                </span>
-                <i class="date-time-indicator" [@indicatorState]="componentTabState"></i>
-            </div>
-            <div class="view-container" [@containerState]="componentTabState">
-                <div class="calendar">
-                    <novo-date-picker (onSelect)="onDateSelected($event)" [(ngModel)]="model" inline="true" [minYear]="minYear" [maxYear]="maxYear" [start]="start" [end]="end"></novo-date-picker>
-                </div>
-                <div class="time-picker">
-                    <novo-time-picker (onSelect)="onTimeSelected($event)" [(ngModel)]="model" [military]="military" inline="true"></novo-time-picker>
-                </div>
-            </div>
+    <div class="date-time-container">
+      <div class="date-time-tabs">
+        <span
+          class="date-tab"
+          (click)="toggleView('date')"
+          [@dateTextState]="componentTabState"
+          data-automation-id="novo-date-time-date-tab"
+          >{{ selectedLabel }}</span
+        >
+        <span
+          class="time-tab"
+          (click)="toggleView('time')"
+          [@timeTextState]="componentTabState"
+          data-automation-id="novo-date-time-time-tab"
+        >
+          <span class="hours" data-automation-id="novo-time-picker-hours">{{ hours }}</span
+          >:<span class="minutes" data-automation-id="novo-time-picker-minutes">{{ minutes }}</span>
+          <span *ngIf="!military" class="meridian"> {{ meridian }}</span>
+        </span>
+        <i class="date-time-indicator" [@indicatorState]="componentTabState"></i>
+      </div>
+      <div class="view-container" [@containerState]="componentTabState">
+        <div class="calendar">
+          <novo-date-picker
+            (onSelect)="onDateSelected($event)"
+            [(ngModel)]="model"
+            inline="true"
+            [minYear]="minYear"
+            [maxYear]="maxYear"
+            [start]="start"
+            [end]="end"
+          ></novo-date-picker>
         </div>
-    `,
+        <div class="time-picker">
+          <novo-time-picker (onSelect)="onTimeSelected($event)" [(ngModel)]="model" [military]="military" inline="true"></novo-time-picker>
+        </div>
+      </div>
+    </div>
+  `,
 })
 export class NovoDateTimePickerElement implements ControlValueAccessor {
   @Input()
@@ -161,7 +180,7 @@ export class NovoDateTimePickerElement implements ControlValueAccessor {
       }
     }
 
-    this.hours = hours.toString().length === 1 ? `0${hours.toString()}` : hours.toString();
+    this.hours = hours.toString();
     this.minutes = minutes.toString().length === 1 ? `0${minutes.toString()}` : minutes.toString();
   }
 

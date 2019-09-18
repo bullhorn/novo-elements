@@ -15,7 +15,6 @@ import { IDataTablePaginationEvent } from '../interfaces';
 import { NovoLabelService } from '../../../services/novo-label-service';
 import { DataTableState } from '../state/data-table-state.service';
 
-const DEFAULT_PAGE_SIZE = 50;
 const MAX_PAGES_DISPLAYED = 5;
 
 @Component({
@@ -60,7 +59,14 @@ const MAX_PAGES_DISPLAYED = 5;
       </ng-container>
       <ng-container *ngIf="theme === 'standard'">
         <h5 class="rows">{{ labels.itemsPerPage }}</h5>
-        <novo-select [options]="displayedPageSizeOptions" [placeholder]="labels.select" [(ngModel)]="pageSize" (onSelect)="changePageSize($event.selected)" data-automation-id="pager-select"></novo-select>
+        <novo-select
+          [options]="displayedPageSizeOptions"
+          [placeholder]="labels.select"
+          [(ngModel)]="pageSize"
+          (onSelect)="changePageSize($event.selected)"
+          data-automation-id="pager-select"
+          [attr.data-feature-id]="dataFeatureId">
+        </novo-select>
         <span class="spacer"></span>
         <ul class="pager" data-automation-id="pager">
             <li class="page" (click)="selectPage(page - 1)" [ngClass]="{ 'disabled': page === 0 }"><i class="bhi-previous" data-automation-id="pager-previous"></i></li>
@@ -99,6 +105,7 @@ export class NovoDataTablePagination<T> implements OnInit, OnDestroy {
     this.state.pageSize = this._pageSize;
   }
   private _pageSize: number;
+  @Input() dataFeatureId: string;
 
   @Input()
   get pageSizeOptions(): any[] {
@@ -124,8 +131,7 @@ export class NovoDataTablePagination<T> implements OnInit, OnDestroy {
   }
   _length: number = 0;
 
-  @Output()
-  pageChange = new EventEmitter<IDataTablePaginationEvent>();
+  @Output() pageChange = new EventEmitter<IDataTablePaginationEvent>();
 
   public displayedPageSizeOptions: { value: string; label: string }[];
   public longRangeLabel: string;
