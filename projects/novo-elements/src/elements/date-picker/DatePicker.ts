@@ -7,8 +7,6 @@ import {
   Input,
   Output,
   OnInit,
-  ViewChild,
-  TemplateRef,
   OnChanges,
   SimpleChanges,
   SimpleChange,
@@ -173,8 +171,6 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit, OnCh
   // Select callback for output
   @Output()
   onSelect: EventEmitter<any> = new EventEmitter(false);
-  @ViewChild(TemplateRef)
-  template: TemplateRef<any>;
 
   // List of all the weekdays
   weekdays: string[] = [];
