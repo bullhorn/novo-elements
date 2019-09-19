@@ -15,9 +15,9 @@
     <div class="tabbed-group-picker-column left">
       <novo-nav theme="white"
                 direction="vertical">
-        <novo-tab *ngFor="let schema of displaySchemata; index as i"
+        <novo-tab *ngFor="let schema of displaySchemata"
                   [attr.data-automation-id]="schema.typeName"
-                  (activeChange)="setDisplaySchemaIndex(i)">
+                  (activeChange)="displaySchema = schema">
           <span>{{schema.typeLabel}} ({{schema.data.length}})</span><i class="bhi-next"></i>
         </novo-tab>
       </novo-nav>
@@ -29,12 +29,12 @@
         <novo-list direction="vertical">
           <novo-list-item *ngFor="let quickSelect of quickSelectConfig.items"
                           [attr.data-automation-id]="quickSelect.label"
-                          (click)="quickSelect.selected = !quickSelect.selected; onDataListItemClicked(quickSelect)">
+                          (click)="quickSelect.selected = !quickSelect.selected; onItemToggled(quickSelect)">
                           <item-content>
                             <novo-checkbox [label]="quickSelect.label"
                             [name]="'selected'"
                             [(ngModel)]="quickSelect.selected"
-                            (ngModelChange)="onDataListItemClicked(quickSelect)"></novo-checkbox>
+                            (ngModelChange)="onItemToggled(quickSelect)"></novo-checkbox>
                           </item-content>
           </novo-list-item>
         </novo-list>
@@ -44,13 +44,13 @@
                  direction="vertical">
         <novo-list-item *ngFor="let item of displaySchema.data"
                         [attr.data-automation-id]="item[displaySchema.labelField]"
-                        (click)="item.selected = !item.selected; onDataListItemClicked(item)">
+                        (click)="item.selected = !item.selected; onItemToggled(item)">
                         <item-content>
                           <novo-checkbox [label]="item[displaySchema.labelField]"
                           [name]="'selected'"
                           [indeterminate]="item.indeterminate"
                           [(ngModel)]="item.selected"
-                          (ngModelChange)="onDataListItemClicked(item)">
+                          (ngModelChange)="onItemToggled(item)">
                         </novo-checkbox>
                       </item-content>
         </novo-list-item>

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { TabbedGroupPickerSchema, ChildSchema, ParentSchema } from 'dist/novo-elements/elements/tabbed-group-picker/TabbedGroupPicker';
 
 /**
- * @title Tabbed Group Picker - Quick Select Example
+ * @title Tabbed Group Picker - Groups Example
  */
 @Component({
   selector: 'tabbed-group-picker-groups-example',

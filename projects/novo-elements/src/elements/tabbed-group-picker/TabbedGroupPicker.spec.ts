@@ -35,16 +35,16 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
   });
 
   describe('Function: ngOnInit', () => {
+    const firstSchema = {
+      typeName: 'firstTypeName',
+      typeLabel: 'firstTypeLabel',
+      valueField: 'firstValueField',
+      labelField: 'firstLabelField',
+      data: [],
+    };
     beforeEach(() => {
-      spyOn(component, 'setDisplaySchemaIndex').and.callFake(() => {});
       component.schemata = [
-        {
-          typeName: 'firstTypeName',
-          typeLabel: 'firstTypeLabel',
-          valueField: 'firstValueField',
-          labelField: 'firstLabelField',
-          data: [],
-        },
+        firstSchema,
         {
           typeName: 'secondTypeName',
           typeLabel: 'secondTypeLabel',
@@ -56,7 +56,7 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
     });
     it('should activate the first item in the input schemata array', () => {
       component.ngOnInit();
-      expect(component.setDisplaySchemaIndex).toHaveBeenCalledWith(0);
+      expect(component.displaySchema).toBe(firstSchema);
     });
     it('should stop loading', () => {
       component.ngOnInit();
@@ -64,10 +64,6 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
     });
   });
   describe('function: filter', () => {
-    beforeEach(() => {
-      spyOn(component, 'setDisplaySchemaIndex').and.callFake(() => {});
-    });
-
     const getLetter = (n: number) => String.fromCharCode((n % 26) + 65);
 
     const turnNumbersIntoLetters = (val: string): string =>
@@ -97,10 +93,11 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
       return { data, schemata };
     };
 
-    xit('should filter large datasets in a reasonable amount of time', () => {
+    it('should filter large datasets in a reasonable amount of time', () => {
       const amountOfTimeInMillisecondsThatIndicatesAGrosslyInefficientAlgorithm = 4000;
       const { data, schemata } = buildBigDataset();
       component.schemata = schemata;
+      component.ngOnInit();
 
       const start = performance.now();
       component.filter('asdfasdf');
@@ -232,21 +229,47 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
   describe('getSelectedValue', () => {
     it('should return indeterminate if one value is selected', () => {
       const childArray = [{ id: 1, name: 'Scout', selected: true }, { id: 2, name: 'Atticus' }];
-      const result = component.getSelectedValue(childArray);
-      expect(result).toEqual(['indeterminate', true]);
+      const result = component.getSelectedState(childArray);
+      expect(result).toEqual('indeterminate');
     });
     it('should return selected if every element of the child array is selected', () => {
       const childArray = [{ id: 1, name: 'Scout', selected: true }, { id: 2, name: 'Atticus', selected: true }];
-      const result = component.getSelectedValue(childArray);
-      expect(result).toEqual(['selected', true]);
+      const result = component.getSelectedState(childArray);
+      expect(result).toEqual('selected');
     });
     it('should return undefined if none of the items in the child array are selected', () => {
       const childArray = [{ id: 1, name: 'Scout' }, { id: 2, name: 'Atticus' }];
-      const result = component.getSelectedValue(childArray as any);
-      expect(result).toEqual([]);
+      const result = component.getSelectedState(childArray as any);
+      expect(result).toEqual(undefined);
     });
   });
-  describe('function: onDataListItemClicked', () => {
+  describe('function: updateParents', () => {
+    it('should select each item in the quick select group', () => {
+      const data = [{ id: 1, name: 'chicken', selected: true }, { id: 2, name: 'goldfish' }];
+      const quickSelectItem: TabbedGroupPickerQuickSelect = { childTypeName: 'animals', children: [1], label: 'chicken' };
+      component.quickSelectConfig = {
+        label: 'Quick Select',
+        items: [quickSelectItem],
+      };
+      component.schemata = [
+        {
+          typeName: 'animals',
+          typeLabel: 'Animalz',
+          valueField: 'id',
+          labelField: 'name',
+          data,
+        },
+      ];
+
+      component.createChildrenReferences();
+      expect(quickSelectItem.selected).toEqual(undefined);
+
+      component.updateParents();
+
+      expect(quickSelectItem.selected).toEqual(true);
+    });
+  });
+  describe('onItemToggled', () => {
     it('should work for large datasets', () => {
       const amountOfTimeInMillisecondsThatIndicatesAGrosslyInefficientAlgorithm = 4000;
       const children: TabbedGroupPickerSchema['data'] = Array(10000)
@@ -284,9 +307,11 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
       component.schemata = [...parentSchemata, childSchema];
       const firstParent = parentSchemata[0].data[0];
       firstParent.selected = true;
+
       const start = performance.now();
-      component.onDataListItemClicked(firstParent);
+      component.onItemToggled(firstParent);
       const end = performance.now();
+
       expect(end - start).toBeLessThan(amountOfTimeInMillisecondsThatIndicatesAGrosslyInefficientAlgorithm);
       const allAreSelected = component.schemata.every((schema) => schema.data.every((datum) => datum.selected));
       expect(allAreSelected).toBe(true);
@@ -308,7 +333,9 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
       const goldfish = component.schemata[0].data[1];
 
       expect(chicken.selected).toBeFalsy();
-      component.onDataListItemClicked(quickSelectItem as any);
+
+      component.onItemToggled(quickSelectItem as any);
+
       expect(chicken.selected).toEqual(true);
       expect(goldfish.selected).toEqual(false);
     });
@@ -336,43 +363,21 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
       const chicken = component.schemata[0].data[0];
       expect(chicken.selected).toEqual(true);
 
-      component.onDataListItemClicked(quickSelectItem as any);
+      component.onItemToggled(quickSelectItem as any);
 
       expect(chicken.selected).toEqual(undefined);
     });
-  });
-  describe('function: updateParents', () => {
-    it('should select each item in the quick select group', () => {
-      const data = [{ id: 1, name: 'chicken', selected: true }, { id: 2, name: 'goldfish' }];
-      const quickSelectItem: TabbedGroupPickerQuickSelect = { childTypeName: 'animals', children: [1], label: 'chicken' };
-      component.quickSelectConfig = {
-        label: 'Quick Select',
-        items: [quickSelectItem],
-      };
-      component.schemata = [
-        {
-          typeName: 'animals',
-          typeLabel: 'Animalz',
-          valueField: 'id',
-          labelField: 'name',
-          data,
-        },
-      ];
-      component.createChildrenReferences();
-      expect(quickSelectItem.selected).toEqual(undefined);
-      component.updateParents();
-      expect(quickSelectItem.selected).toEqual(true);
-    });
-  });
-  describe('onDataListItemClicked', () => {
     it('should update the selected status on the schema as well as the display data', () => {
       component.schemata = [getChickenSchema()];
+      component.ngOnInit();
       const chicken = component.schemata[0].data[0];
       chicken.selected = true;
-      component.filter('');
-      component.onDataListItemClicked(chicken);
+
+      component.onItemToggled(chicken);
+
       const selectedItem = component.schemata[0].data[0];
       const displayReference = component.displaySchemata.find(({ typeName }) => typeName === 'chickens').data[0];
+
       expect(selectedItem.selected).toEqual(true);
       expect(displayReference.selected).toEqual(true);
       expect(selectedItem).toEqual(displayReference);
@@ -398,8 +403,9 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
       ];
       const chicken = component.schemata[0].data[0];
       chicken.selected = true;
+
       component.createChildrenReferences();
-      component.onDataListItemClicked(chicken);
+      component.onItemToggled(chicken);
 
       const selectedItem = component.schemata[0].data[0];
       expect(selectedItem.selected).toEqual(true);
@@ -426,7 +432,7 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
       chicken.selected = true;
       const tRex = component.schemata[1].data[0];
 
-      component.onDataListItemClicked(chicken);
+      component.onItemToggled(chicken);
       expect(tRex.selected).toEqual(true);
     });
   });

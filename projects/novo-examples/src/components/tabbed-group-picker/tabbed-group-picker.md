@@ -17,3 +17,7 @@ Tabbed Group Picker provides a configurable quick select interface. For each qui
 ## Groups
 
 <code-example example="tabbed-group-picker-groups"></code-example>
+
+## Big Groups
+
+<code-example example="tabbed-group-picker-big-groups"></code-example>

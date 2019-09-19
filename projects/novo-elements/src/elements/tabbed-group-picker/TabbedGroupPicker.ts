@@ -12,15 +12,14 @@ export type TabbedGroupPickerSchema = {
 } & (ParentSchema | ChildSchema);
 export type ParentSchema = {
   childTypeName: string;
-  data: Array<
-    {
-      selected?: boolean;
-      indeterminate?: boolean;
-      children: Array<{ selected?: boolean }>;
-    } & { [key: string]: any }
-  >;
+  data: Array<ParentOption>;
 };
 
+type ParentOption = {
+  selected?: boolean;
+  indeterminate?: boolean;
+  children: Array<{ selected?: boolean }>;
+} & { [key: string]: any };
 export type ChildSchema = { data: Array<{ selected?: boolean } & { [key: string]: any }> };
 export type TabbedGroupPickerQuickSelect = {
   label: string;
@@ -52,6 +51,10 @@ export class NovoTabbedGroupPickerElement implements OnInit {
   get displaySchema(): TabbedGroupPickerSchema {
     return this.displaySchemata[this.displaySchemaIndex];
   }
+  set displaySchema(schema: TabbedGroupPickerSchema) {
+    this.displaySchemaIndex = this.schemata.map(({ typeName }) => typeName).indexOf(schema.typeName);
+  }
+
   filterText: BehaviorSubject<string> = new BehaviorSubject('');
   searchLabel: string = 'Search';
 
@@ -71,30 +74,23 @@ export class NovoTabbedGroupPickerElement implements OnInit {
 
   setupDisplayData(): void {
     this.displaySchemata = this.schemata;
-    this.setDisplaySchemaIndex(0);
+    this.displaySchema = this.schemata[0];
   }
 
-  setDisplaySchemaIndex(index: number) {
-    this.displaySchemaIndex = index;
-  }
-
-  // Replace each parent's child object with a reference to the child in order to avoid duplicating data, since children
-  // have a to-many relationship with parents
+  // Replace each parent's child object with a reference to the child to avoid
+  // a child lookup for selected status; linking references gets M x N
+  // time complexity instead of M x N^2, which in practice is 2 orders of magnitude
+  // difference in time.
   createChildrenReferences(): void {
     this.schemata.forEach((schema) => {
-      // would rather filter but TypeScript stills wants a type narrowing here
+      // would rather filter but TypeScript still wants a type narrowing here
       if ('childTypeName' in schema) {
         const { childTypeName, data } = schema;
         const childSchema = this.schemata.find(({ typeName }) => typeName === childTypeName);
 
         data
-          .filter(({ children }: { children?: { selected?: boolean }[] }) => children && children.length)
-          .forEach(
-            (parent: { children?: any[] }) =>
-              (parent.children = parent.children.map((child) =>
-                childSchema.data.find((item) => item[childSchema.valueField] === child[childSchema.valueField]),
-              )),
-          );
+          .filter(({ children }) => children && children.length)
+          .forEach((parent: { children?: any[] }) => this.replaceChildrenWithReferences(parent as ParentOption, childSchema));
       }
     });
     if (this.quickSelectConfig) {
@@ -108,23 +104,25 @@ export class NovoTabbedGroupPickerElement implements OnInit {
         .filter((parent) => !('all' in parent))
         .forEach((parent) => {
           const childSchema = this.schemata.find(({ typeName }) => typeName === parent.childTypeName);
-          parent.children = parent.children.map((child) =>
-            childSchema.data.find((item) =>
-              child[childSchema.valueField]
-                ? child[childSchema.valueField] === item[childSchema.valueField]
-                : (child as any) === item[childSchema.valueField],
-            ),
-          );
+          this.replaceChildrenWithReferences(parent as ParentOption, childSchema);
         });
     }
   }
 
-  onDataListItemClicked(item: { selected?: boolean; children?: Array<{ selected?: boolean }> }) {
-    this.onItemToggled(item);
+  replaceChildrenWithReferences(parent: { children: any[] }, childSchema: TabbedGroupPickerSchema): void {
+    parent.children = parent.children.map((child) =>
+      childSchema.data.find((item) =>
+        child[childSchema.valueField]
+          ? child[childSchema.valueField] === item[childSchema.valueField]
+          : child === item[childSchema.valueField],
+      ),
+    );
   }
 
   onItemToggled(item: { selected?: boolean; children?: Array<{ selected?: boolean }> }) {
-    item.children && this.updateChildren(item.selected, item.children);
+    if (Array.isArray(item.children)) {
+      this.updateChildren(item.selected, item.children);
+    }
     this.updateParents();
     this.emitSelectedValues();
   }
@@ -137,34 +135,36 @@ export class NovoTabbedGroupPickerElement implements OnInit {
     // mutate here to avoid dereferencing the objects in displaySchemata
     this.schemata
       .filter((schema) => 'childTypeName' in schema && !!schema.childTypeName)
-      .forEach(({ data }) => {
-        const parents: ParentSchema['data'] = data.filter(
-          ({ children }: { children?: any[] }) => children && children.length,
-        ) as ParentSchema['data'] extends Array<infer T> ? T[] : never;
+      .forEach((schema) => {
+        const parents = schema.data.filter(({ children }: { children?: any[] }) => children && children.length);
 
         parents.forEach((parent: { children?: { selected?: boolean }[] }) => {
           ['indeterminate', 'selected'].forEach((v) => delete parent[v]);
 
-          const [key, value] = this.getSelectedValue(parent.children);
-          key && (parent[key] = value);
+          const selectedState = this.getSelectedState(parent.children);
+          if (selectedState) {
+            parent[selectedState] = true;
+          }
         });
       });
 
     if (this.quickSelectConfig) {
       this.quickSelectConfig.items.forEach((quickSelect) => {
         delete quickSelect.selected;
-        const [key, value] = this.getSelectedValue(quickSelect.children as ({ selected?: boolean } & object)[]);
-        key && (quickSelect[key] = value);
+        const selectedState = this.getSelectedState(quickSelect.children as ({ selected?: boolean } & object)[]);
+        if (selectedState) {
+          quickSelect[selectedState] = true;
+        }
       });
     }
   }
 
-  getSelectedValue = (childArray: { selected?: boolean; indeterminate?: boolean }[]): ['selected' | 'indeterminate', boolean] | [] => {
+  getSelectedState = (childArray: { selected?: boolean; indeterminate?: boolean }[]): 'selected' | 'indeterminate' | undefined => {
     const numberOfSelectedItems = childArray.filter(({ selected }) => selected).length;
     if (!numberOfSelectedItems) {
-      return [];
+      return undefined;
     }
-    return numberOfSelectedItems === childArray.length ? ['selected', true] : ['indeterminate', true];
+    return numberOfSelectedItems === childArray.length ? 'selected' : 'indeterminate';
   };
 
   emitSelectedValues() {
@@ -187,6 +187,6 @@ export class NovoTabbedGroupPickerElement implements OnInit {
   filter = (searchTerm: string) =>
     (this.displaySchemata = this.schemata.map(({ data, ...schema }: TabbedGroupPickerSchema) => ({
       ...schema,
-      data: data.filter((item) => item[schema.labelField].toLowerCase().includes(searchTerm.toLowerCase())),
+      data: data && data.filter((item) => item[schema.labelField].toLowerCase().includes(searchTerm.toLowerCase())),
     })));
 }
