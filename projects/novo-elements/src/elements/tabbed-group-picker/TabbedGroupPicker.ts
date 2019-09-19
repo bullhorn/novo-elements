@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
-import { Helpers } from '../../utils/Helpers';
+import { Helpers, binarySearch } from '../../utils/Helpers';
 import { NovoLabelService } from '../../services/novo-label-service';
 
 export type TabbedGroupPickerSchema = {
@@ -87,10 +87,14 @@ export class NovoTabbedGroupPickerElement implements OnInit {
       if ('childTypeName' in schema) {
         const { childTypeName, data } = schema;
         const childSchema = this.schemata.find(({ typeName }) => typeName === childTypeName);
+        const compareFunction = this.makeCompareFunction(childSchema.valueField);
+        const sortedChildren = childSchema.data.slice().sort(compareFunction);
 
         data
           .filter(({ children }) => children && children.length)
-          .forEach((parent: { children?: any[] }) => this.replaceChildrenWithReferences(parent as ParentOption, childSchema));
+          .forEach((parent: { children?: any[] }) =>
+            this.replaceChildrenWithReferences(parent as ParentOption, sortedChildren, compareFunction),
+          );
       }
     });
     if (this.quickSelectConfig) {
@@ -104,19 +108,29 @@ export class NovoTabbedGroupPickerElement implements OnInit {
         .filter((parent) => !('all' in parent))
         .forEach((parent) => {
           const childSchema = this.schemata.find(({ typeName }) => typeName === parent.childTypeName);
-          this.replaceChildrenWithReferences(parent as ParentOption, childSchema);
+          const compareFunction = this.makeCompareFunction(childSchema.valueField);
+          const sortedChildren = childSchema.data.slice().sort(compareFunction);
+          this.replaceChildrenWithReferences(parent as ParentOption, sortedChildren, compareFunction);
         });
     }
   }
 
-  replaceChildrenWithReferences(parent: { children: any[] }, childSchema: TabbedGroupPickerSchema): void {
-    parent.children = parent.children.map((child) =>
-      childSchema.data.find((item) =>
-        child[childSchema.valueField]
-          ? child[childSchema.valueField] === item[childSchema.valueField]
-          : child === item[childSchema.valueField],
-      ),
-    );
+  makeCompareFunction<T>(key: string): (a: T | { [key: string]: T }, b: { [key: string]: T }) => 1 | -1 | 0 {
+    return (a: T | { [key: string]: T }, b: { [key: string]: T }) => {
+      const value: T = a[key] || a;
+
+      if (value < b[key]) {
+        return -1;
+      } else if (value > b[key]) {
+        return 1;
+      } else {
+        return 0;
+      }
+    };
+  }
+
+  replaceChildrenWithReferences(parent: { children: any[] }, sortedData: ChildSchema['data'], compareFunction: (a, b) => 1 | -1 | 0): void {
+    parent.children = parent.children.map((child) => binarySearch(child, sortedData, compareFunction));
   }
 
   onItemToggled(item: { selected?: boolean; children?: Array<{ selected?: boolean }> }) {

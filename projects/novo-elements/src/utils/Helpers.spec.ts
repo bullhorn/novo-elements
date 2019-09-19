@@ -1,5 +1,5 @@
 // APP
-import { Helpers } from './Helpers';
+import { Helpers, binarySearch } from './Helpers';
 
 describe('Utils: Helpers', () => {
   xdescribe('Method: swallowEvent(event)', () => {
@@ -73,6 +73,58 @@ describe('Utils: Helpers', () => {
       let origin = document.createElement('h1');
       parent.appendChild(origin);
       expect(Helpers.getNextElementSibling(origin)).toEqual(null);
+    });
+  });
+  describe('Method: binarySearch', () => {
+    const compareFunction = (a, b) => {
+      if (a.id < b.id) {
+        return -1;
+      } else if (a.id > b.id) {
+        return 1;
+      } else {
+        return 0;
+      }
+    };
+    it('should return the matching element for an array of size 1', () => {
+      const element = { id: 5 };
+      const item = binarySearch({ id: 5 }, [element], compareFunction);
+      expect(item).toBe(element);
+    });
+    it('should return the matching element for an array of size 2', () => {
+      const element = { id: 5 };
+
+      let item = binarySearch({ id: 5 }, [element, { id: 6 }], compareFunction);
+      expect(item).toBe(element);
+
+      item = binarySearch({ id: 5 }, [{ id: 4 }, element], compareFunction);
+      expect(item).toBe(element);
+    });
+    it('should return the matching element for an array of size 3', () => {
+      const element = { id: 5 };
+
+      let item = binarySearch({ id: 5 }, [element, { id: 6 }, { id: 7 }], compareFunction);
+      expect(item).toBe(element);
+
+      item = binarySearch({ id: 5 }, [{ id: 4 }, element, { id: 6 }], compareFunction);
+      expect(item).toBe(element);
+
+      item = binarySearch({ id: 5 }, [{ id: 3 }, { id: 4 }, element], compareFunction);
+      expect(item).toBe(element);
+    });
+    it('should return the matching element for an array of size 4', () => {
+      const element = { id: 5 };
+
+      let item = binarySearch({ id: 5 }, [element, { id: 6 }, { id: 7 }, { id: 8 }], compareFunction);
+      expect(item).toBe(element);
+
+      item = binarySearch({ id: 5 }, [{ id: 4 }, element, { id: 6 }, { id: 7 }], compareFunction);
+      expect(item).toBe(element);
+
+      item = binarySearch({ id: 5 }, [{ id: 3 }, { id: 4 }, element, { id: 6 }], compareFunction);
+      expect(item).toBe(element);
+
+      item = binarySearch({ id: 5 }, [{ id: 2 }, { id: 3 }, { id: 4 }, element], compareFunction);
+      expect(item).toBe(element);
     });
   });
 

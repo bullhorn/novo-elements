@@ -34,7 +34,7 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
     expect(component).toBeTruthy();
   });
 
-  describe('Function: ngOnInit', () => {
+  describe('function: ngOnInit', () => {
     const firstSchema = {
       typeName: 'firstTypeName',
       typeLabel: 'firstTypeLabel',
@@ -72,7 +72,7 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
         .map(getLetter)
         .join('');
 
-    const buildBigDataset = (): { data; schemata } => {
+    const buildBigDataset = (): { schemata } => {
       const names: string[] = Array(2000)
         .fill(0)
         .map((e, i) => String(Math.pow(1000 + i, 5))); // make a bunch of ~16 character strings
@@ -82,20 +82,20 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
         typeName,
         labelField: labelFieldNames[i], // search/filter only looks at labelField
       }));
-      const data = {};
-      schemata.forEach(({ labelField, typeName }) => {
-        data[typeName] = Array(1000)
+      schemata.forEach((schema) => {
+        const { labelField } = schema;
+        schema['data'] = Array(1000)
           .fill(0)
           .map((n, i) => ({
             [labelField]: turnNumbersIntoLetters(`${labelField}${i}`),
           }));
       });
-      return { data, schemata };
+      return { schemata };
     };
 
     it('should filter large datasets in a reasonable amount of time', () => {
-      const amountOfTimeInMillisecondsThatIndicatesAGrosslyInefficientAlgorithm = 4000;
-      const { data, schemata } = buildBigDataset();
+      const amountOfTimeInMillisecondsThatIndicatesAGrosslyInefficientAlgorithm = 8000;
+      const { schemata } = buildBigDataset();
       component.schemata = schemata;
       component.ngOnInit();
 
@@ -106,7 +106,7 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
       expect(timeItTakesToSearchAMillionItems).toBeLessThan(amountOfTimeInMillisecondsThatIndicatesAGrosslyInefficientAlgorithm);
     });
   });
-  describe('createChildrenReferences', () => {
+  describe('function: createChildrenReferences', () => {
     it('should make it so that children of data list items are references to other data list items', () => {
       const dinosaurs = [
         {
@@ -136,7 +136,7 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
       expect(childOfAllosaurus).toBe(chicken);
     });
   });
-  describe('updateParents', () => {
+  describe('function: updateParents', () => {
     it('should set parents to selected if their only child is selected', () => {
       component.schemata = [
         getChickenSchema(),
@@ -226,7 +226,7 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
       expect(parent.indeterminate).toEqual(true);
     });
   });
-  describe('getSelectedValue', () => {
+  describe('function: getSelectedValue', () => {
     it('should return indeterminate if one value is selected', () => {
       const childArray = [{ id: 1, name: 'Scout', selected: true }, { id: 2, name: 'Atticus' }];
       const result = component.getSelectedState(childArray);
@@ -269,9 +269,9 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
       expect(quickSelectItem.selected).toEqual(true);
     });
   });
-  describe('onItemToggled', () => {
-    it('should work for large datasets', () => {
-      const amountOfTimeInMillisecondsThatIndicatesAGrosslyInefficientAlgorithm = 4000;
+  describe('function: onItemToggled', () => {
+    it('should work for large datasets i.e. 1,000 parents each with 10,000 children', () => {
+      const amountOfTimeInMillisecondsThatIndicatesAGrosslyInefficientAlgorithm = 8000;
       const children: TabbedGroupPickerSchema['data'] = Array(10000)
         .fill(0)
         .map((n, i) => ({
@@ -286,7 +286,7 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
         labelField: 'label',
         data: children,
       };
-      const parentSchemata: TabbedGroupPickerSchema[] = Array(100)
+      const parentSchemata: TabbedGroupPickerSchema[] = Array(10)
         .fill(0)
         .map(
           (n, i): TabbedGroupPickerSchema => ({

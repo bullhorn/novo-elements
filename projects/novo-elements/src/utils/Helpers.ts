@@ -348,3 +348,17 @@ export class Can {
 export function can(obj: any) {
   return new Can(obj);
 }
+
+// Assumes data is already sorted
+export function binarySearch<T>(item: T, array: T[], compare: (a: T, b: T) => 1 | -1 | 0): T {
+  const index = Math.floor(array.length / 2);
+
+  const comparison = compare(item, array[index]);
+  if (comparison === 0) {
+    return array[index];
+  } else if (comparison === 1) {
+    return binarySearch(item, array.slice(index + 1), compare);
+  } else if (comparison === -1) {
+    return binarySearch(item, array.slice(0, index), compare);
+  }
+}
