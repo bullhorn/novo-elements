@@ -351,19 +351,23 @@ export function can(obj: any) {
 
 // Assumes data is already sorted
 export function binarySearch<T>(item: T, array: T[], compare: (a: T, b: T) => 1 | -1 | 0 | undefined): T | undefined {
-  const index = Math.floor(array.length / 2);
-  if (array.length === 0) {
-    return;
-  }
+  return search(0, array.length - 1);
 
-  const comparison = compare(item, array[index]);
-  if (comparison === 0) {
-    return array[index];
-  } else if (comparison === 1) {
-    return binarySearch(item, array.slice(index + 1), compare);
-  } else if (comparison === -1) {
-    return binarySearch(item, array.slice(0, index), compare);
-  } else {
-    throw new Error(`Input mismatch: ${JSON.stringify(item)} not comparable to ${JSON.stringify(array[index])}`);
+  function search(min: number, max: number): T | undefined {
+    if (min > max) {
+      return undefined;
+    }
+    const guess = min + Math.floor((max - min) / 2);
+    const comparison = compare(item, array[guess]);
+
+    if (comparison === 0) {
+      return array[guess];
+    } else if (comparison === -1) {
+      return search(min, guess - 1);
+    } else if (comparison === 1) {
+      return search(guess + 1, max);
+    } else {
+      throw new Error(`Input mismatch: ${JSON.stringify(item)} not comparable to ${JSON.stringify(array[guess])}`);
+    }
   }
 }

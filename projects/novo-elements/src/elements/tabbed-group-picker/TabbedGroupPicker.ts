@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { Helpers, binarySearch } from '../../utils/Helpers';
@@ -32,6 +32,7 @@ export type TabbedGroupPickerQuickSelect = {
 @Component({
   selector: 'novo-tabbed-group-picker',
   templateUrl: './TabbedGroupPicker.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NovoTabbedGroupPickerElement implements OnInit {
   @Input() buttonConfig: {
@@ -60,7 +61,7 @@ export class NovoTabbedGroupPickerElement implements OnInit {
 
   loading = true;
 
-  constructor(public labelService: NovoLabelService) {}
+  constructor(public labelService: NovoLabelService, private ref: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     this.setupDisplayData();
@@ -84,13 +85,12 @@ export class NovoTabbedGroupPickerElement implements OnInit {
     this.schemata.forEach((schema) => {
       // would rather filter but TypeScript still wants a type narrowing here
       if ('childTypeName' in schema) {
-        const { childTypeName, data } = schema;
-        const childSchema = this.schemata.find(({ typeName }) => typeName === childTypeName);
+        const childSchema = this.schemata.find(({ typeName }) => typeName === schema.childTypeName);
         const compareFunction = this.makeCompareFunction(childSchema.valueField);
         const warnFunction = this.makeWarningFunction(schema.typeName, childSchema.typeName, childSchema.valueField);
         const sortedChildren = childSchema.data.slice().sort(compareFunction);
 
-        data
+        schema.data
           .filter(({ children }) => children && children.length)
           .forEach((parent: { children?: any[] }) =>
             this.replaceChildrenWithReferences(parent as ParentOption, sortedChildren, compareFunction, warnFunction),
@@ -119,7 +119,7 @@ export class NovoTabbedGroupPickerElement implements OnInit {
 
   makeCompareFunction<T>(key: string): (a: T | { [key: string]: T }, b: { [key: string]: T }) => 1 | -1 | 0 | undefined {
     return (a: T | { [key: string]: T }, b: { [key: string]: T }) => {
-      const value: T = a[key] || a;
+      const value: T = (a && a[key]) || a;
 
       if (value < b[key]) {
         return -1;
@@ -157,6 +157,7 @@ export class NovoTabbedGroupPickerElement implements OnInit {
     }
     this.updateParents();
     this.emitSelectedValues();
+    this.ref.markForCheck();
   }
 
   updateChildren(parentIsSelected: boolean, children: { selected?: boolean }[]): void {
@@ -216,9 +217,11 @@ export class NovoTabbedGroupPickerElement implements OnInit {
     this.filterText.next(event.target.value);
   }
 
-  filter = (searchTerm: string) =>
-    (this.displaySchemata = this.schemata.map(({ data, ...schema }: TabbedGroupPickerSchema) => ({
+  filter = (searchTerm: string) => {
+    this.displaySchemata = this.schemata.map(({ data, ...schema }: TabbedGroupPickerSchema) => ({
       ...schema,
       data: data && data.filter((item) => item[schema.labelField].toLowerCase().includes(searchTerm.toLowerCase())),
-    })));
+    }));
+    this.ref.markForCheck();
+  };
 }

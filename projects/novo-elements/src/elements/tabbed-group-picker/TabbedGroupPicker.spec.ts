@@ -269,7 +269,7 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
   });
   describe('function: onItemToggled', () => {
     it('should use an algorithm more efficient than O(MxN^2)', () => {
-      // this dataset takes about 20000ms for MxN^2 and 15ms for MxN
+      // this dataset takes about 3 orders of magnitude longer for MxN^2 vs MxN
       const amountOfTimeInMillisecondsThatIndicatesAGrosslyInefficientAlgorithm = 500;
       const children: TabbedGroupPickerSchema['data'] = Array(10000)
         .fill(0)
