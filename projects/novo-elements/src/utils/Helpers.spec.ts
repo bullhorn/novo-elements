@@ -81,7 +81,7 @@ describe('Utils: Helpers', () => {
         return -1;
       } else if (a.id > b.id) {
         return 1;
-      } else {
+      } else if (a.id === b.id) {
         return 0;
       }
     };
@@ -125,6 +125,16 @@ describe('Utils: Helpers', () => {
 
       item = binarySearch({ id: 5 }, [{ id: 2 }, { id: 3 }, { id: 4 }, element], compareFunction);
       expect(item).toBe(element);
+    });
+    it('should return undefined if item not found', () => {
+      let item = binarySearch({ id: 5 }, [{ id: 6 }], compareFunction);
+      expect(item).toBe(undefined);
+
+      item = binarySearch({ id: 5 }, [{ id: 4 }, { id: 6 }], compareFunction);
+      expect(item).toBe(undefined);
+    });
+    it('should throw an error if items are not comparable', () => {
+      expect(() => binarySearch({ id: 5 }, [5], compareFunction)).toThrow();
     });
   });
 

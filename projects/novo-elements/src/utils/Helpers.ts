@@ -350,8 +350,11 @@ export function can(obj: any) {
 }
 
 // Assumes data is already sorted
-export function binarySearch<T>(item: T, array: T[], compare: (a: T, b: T) => 1 | -1 | 0): T {
+export function binarySearch<T>(item: T, array: T[], compare: (a: T, b: T) => 1 | -1 | 0 | undefined): T | undefined {
   const index = Math.floor(array.length / 2);
+  if (array.length === 0) {
+    return;
+  }
 
   const comparison = compare(item, array[index]);
   if (comparison === 0) {
@@ -360,5 +363,7 @@ export function binarySearch<T>(item: T, array: T[], compare: (a: T, b: T) => 1 
     return binarySearch(item, array.slice(index + 1), compare);
   } else if (comparison === -1) {
     return binarySearch(item, array.slice(0, index), compare);
+  } else {
+    throw new Error(`Input mismatch: ${JSON.stringify(item)} not comparable to ${JSON.stringify(array[index])}`);
   }
 }

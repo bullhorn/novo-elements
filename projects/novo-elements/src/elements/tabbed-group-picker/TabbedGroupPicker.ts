@@ -78,9 +78,8 @@ export class NovoTabbedGroupPickerElement implements OnInit {
   }
 
   // Replace each parent's child object with a reference to the child to avoid
-  // a child lookup for selected status; linking references gets M x N
-  // time complexity instead of M x N^2, which in practice is 2 orders of magnitude
-  // difference in time.
+  // a child lookup for selected status; linking references allows M x N
+  // time complexity instead of M x N^2
   createChildrenReferences(): void {
     this.schemata.forEach((schema) => {
       // would rather filter but TypeScript still wants a type narrowing here
@@ -88,12 +87,13 @@ export class NovoTabbedGroupPickerElement implements OnInit {
         const { childTypeName, data } = schema;
         const childSchema = this.schemata.find(({ typeName }) => typeName === childTypeName);
         const compareFunction = this.makeCompareFunction(childSchema.valueField);
+        const warnFunction = this.makeWarningFunction(schema.typeName, childSchema.typeName, childSchema.valueField);
         const sortedChildren = childSchema.data.slice().sort(compareFunction);
 
         data
           .filter(({ children }) => children && children.length)
           .forEach((parent: { children?: any[] }) =>
-            this.replaceChildrenWithReferences(parent as ParentOption, sortedChildren, compareFunction),
+            this.replaceChildrenWithReferences(parent as ParentOption, sortedChildren, compareFunction, warnFunction),
           );
       }
     });
@@ -109,13 +109,15 @@ export class NovoTabbedGroupPickerElement implements OnInit {
         .forEach((parent) => {
           const childSchema = this.schemata.find(({ typeName }) => typeName === parent.childTypeName);
           const compareFunction = this.makeCompareFunction(childSchema.valueField);
+          const warnFunction = this.makeWarningFunction(parent.label, childSchema.typeName, childSchema.valueField);
           const sortedChildren = childSchema.data.slice().sort(compareFunction);
-          this.replaceChildrenWithReferences(parent as ParentOption, sortedChildren, compareFunction);
+
+          this.replaceChildrenWithReferences(parent as ParentOption, sortedChildren, compareFunction, warnFunction);
         });
     }
   }
 
-  makeCompareFunction<T>(key: string): (a: T | { [key: string]: T }, b: { [key: string]: T }) => 1 | -1 | 0 {
+  makeCompareFunction<T>(key: string): (a: T | { [key: string]: T }, b: { [key: string]: T }) => 1 | -1 | 0 | undefined {
     return (a: T | { [key: string]: T }, b: { [key: string]: T }) => {
       const value: T = a[key] || a;
 
@@ -123,14 +125,30 @@ export class NovoTabbedGroupPickerElement implements OnInit {
         return -1;
       } else if (value > b[key]) {
         return 1;
-      } else {
+      } else if (value === b[key]) {
         return 0;
+      } else {
+        return undefined;
       }
     };
   }
 
-  replaceChildrenWithReferences(parent: { children: any[] }, sortedData: ChildSchema['data'], compareFunction: (a, b) => 1 | -1 | 0): void {
-    parent.children = parent.children.map((child) => binarySearch(child, sortedData, compareFunction));
+  replaceChildrenWithReferences(
+    parent: { children: any[] },
+    sortedData: ChildSchema['data'],
+    compareFunction: (a, b) => 1 | -1 | 0,
+    warnFunction: (child) => void,
+  ): void {
+    parent.children = parent.children
+      .map((child) => binarySearch(child, sortedData, compareFunction) || warnFunction(child))
+      .filter(Boolean); // since map can return undefined, remove undefined elements
+  }
+
+  makeWarningFunction(parentLabel: string, childLabel: string, childValueField): (child) => void {
+    return (child) => {
+      const childValue = child[childValueField] || child;
+      console.warn(`No ${childLabel} found with value ${childValue} for parent ${parentLabel}`);
+    };
   }
 
   onItemToggled(item: { selected?: boolean; children?: Array<{ selected?: boolean }> }) {
