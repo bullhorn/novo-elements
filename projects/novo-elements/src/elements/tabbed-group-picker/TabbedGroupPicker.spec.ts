@@ -72,12 +72,12 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
         .map(getLetter)
         .join('');
 
-    const buildBigDataset = (): { schemata } => {
-      const names: string[] = Array(2000)
+    const buildBigDataset = (): Partial<TabbedGroupPickerSchema>[] => {
+      const names: string[] = Array(200)
         .fill(0)
         .map((e, i) => String(Math.pow(1000 + i, 5))); // make a bunch of ~16 character strings
-      const schemaNames = names.slice(0, 1000);
-      const labelFieldNames = names.splice(0, 1000);
+      const schemaNames = names.slice(0, 100);
+      const labelFieldNames = names.splice(0, 100);
       const schemata = schemaNames.map((typeName, i) => ({
         typeName,
         labelField: labelFieldNames[i], // search/filter only looks at labelField
@@ -90,14 +90,12 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
             [labelField]: turnNumbersIntoLetters(`${labelField}${i}`),
           }));
       });
-      return { schemata };
+      return schemata;
     };
 
     it('should filter large datasets in a reasonable amount of time', () => {
-      const amountOfTimeInMillisecondsThatIndicatesAGrosslyInefficientAlgorithm = 8000;
-      const { schemata } = buildBigDataset();
-      component.schemata = schemata;
-      component.ngOnInit();
+      const amountOfTimeInMillisecondsThatIndicatesAGrosslyInefficientAlgorithm = 1000;
+      component.schemata = buildBigDataset() as TabbedGroupPickerSchema[];
 
       const start = performance.now();
       component.filter('asdfasdf');
@@ -270,14 +268,15 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
     });
   });
   describe('function: onItemToggled', () => {
-    it('should work for large datasets i.e. 1,000 parents each with 10,000 children', () => {
-      const amountOfTimeInMillisecondsThatIndicatesAGrosslyInefficientAlgorithm = 8000;
+    it('should use an algorithm more efficient than O(MxN^2)', () => {
+      // this dataset takes about 20000ms for MxN^2 and 15ms for MxN
+      const amountOfTimeInMillisecondsThatIndicatesAGrosslyInefficientAlgorithm = 500;
       const children: TabbedGroupPickerSchema['data'] = Array(10000)
         .fill(0)
         .map((n, i) => ({
           value: i,
           label: `child #${i}`,
-          selected: Boolean(i % 2),
+          selected: true,
         }));
       const childSchema: TabbedGroupPickerSchema = {
         typeLabel: 'child',
@@ -295,7 +294,7 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
             labelField: `label${i}`,
             valueField: `value${i}`,
             childTypeName: 'child',
-            data: Array(100)
+            data: Array(10)
               .fill(0)
               .map((nn, ii) => ({
                 [`value${i}`]: i,
