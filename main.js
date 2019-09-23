@@ -2727,29 +2727,43 @@ NovoButtonElement.decorators = [
                     '[attr.side]': 'side',
                 },
                 template: `
-        <div class="flex-wrapper">
-            <!--Left Icon-->
-            <i *ngIf="icon && side === 'left' && !loading" [ngClass]="icon"></i>
-            <!--Transcluded Content-->
-            <ng-content></ng-content>
-            <!--Right Icon-->
-            <i *ngIf="icon && side === 'right' && !loading" [ngClass]="icon"></i>
-            <!--Loading-->
-            <i *ngIf="loading" class="loading">
-                <svg version="1.1"
-                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
-                    x="0px" y="0px" width="18.2px" height="18.5px" viewBox="0 0 18.2 18.5" style="enable-background:new 0 0 18.2 18.5;"
-                    xml:space="preserve">
-                <style type="text/css">
-                    .spinner { fill:#FFFFFF; }
-                </style>
-                    <path class="spinner" d="M9.2,18.5C4.1,18.5,0,14.4,0,9.2S4.1,0,9.2,0c0.9,0,1.9,0.1,2.7,0.4c0.8,0.2,1.2,1.1,1,1.9
+    <div class="flex-wrapper">
+      <!--Left Icon-->
+      <i *ngIf="icon && side === 'left' && !loading" [ngClass]="icon"></i>
+      <!--Transcluded Content-->
+      <ng-content></ng-content>
+      <!--Right Icon-->
+      <i *ngIf="icon && side === 'right' && !loading" [ngClass]="icon"></i>
+      <!--Loading-->
+      <i *ngIf="loading" class="loading">
+        <svg
+          version="1.1"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
+          x="0px"
+          y="0px"
+          width="18.2px"
+          height="18.5px"
+          viewBox="0 0 18.2 18.5"
+          style="enable-background:new 0 0 18.2 18.5;"
+          xml:space="preserve"
+        >
+          <style type="text/css">
+            .spinner {
+              fill: #ffffff;
+            }
+          </style>
+          <path
+            class="spinner"
+            d="M9.2,18.5C4.1,18.5,0,14.4,0,9.2S4.1,0,9.2,0c0.9,0,1.9,0.1,2.7,0.4c0.8,0.2,1.2,1.1,1,1.9
                         c-0.2,0.8-1.1,1.2-1.9,1C10.5,3.1,9.9,3,9.2,3C5.8,3,3,5.8,3,9.2s2.8,6.2,6.2,6.2c2.8,0,5.3-1.9,6-4.7c0.2-0.8,1-1.3,1.8-1.1
-                        c0.8,0.2,1.3,1,1.1,1.8C17.1,15.7,13.4,18.5,9.2,18.5z"/>
-                </svg>
-            </i>
-        </div>
-    `,
+                        c0.8,0.2,1.3,1,1.1,1.8C17.1,15.7,13.4,18.5,9.2,18.5z"
+          />
+        </svg>
+      </i>
+    </div>
+  `,
                 changeDetection: _angular_core__WEBPACK_IMPORTED_MODULE_25__["ChangeDetectionStrategy"].OnPush
             }] }
 ];
@@ -38018,6 +38032,7 @@ class NovoFileInputElement {
         this.updateLayout();
         this.initializeDragula();
         this.setInitialFileList();
+        this.dataFeatureId = this.dataFeatureId ? this.dataFeatureId : this.name;
     }
     /**
      * @return {?}
@@ -38270,6 +38285,7 @@ NovoFileInputElement.decorators = [
           (change)="check($event)"
           [attr.multiple]="multiple"
           tabindex="-1"
+          [attr.data-feature-id]="dataFeatureId"
         />
         <input
           *ngIf="layoutOptions.customActions"
@@ -38279,6 +38295,7 @@ NovoFileInputElement.decorators = [
           (change)="customCheck($event)"
           [attr.multiple]="multiple"
           tabindex="-1"
+          [attr.data-feature-id]="dataFeatureId"
         />
         <section [ngSwitch]="layoutOptions.labelStyle">
           <label *ngSwitchCase="'no-box'" [attr.for]="name" class="no-box">
@@ -38380,6 +38397,7 @@ NovoFileInputElement.propDecorators = {
     placeholder: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_25__["Input"] }],
     layoutOptions: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_25__["Input"] }],
     value: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_25__["Input"] }],
+    dataFeatureId: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_25__["Input"] }],
     edit: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_25__["Output"] }],
     save: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_25__["Output"] }],
     delete: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_25__["Output"] }],
@@ -45500,6 +45518,7 @@ NovoDataTable.decorators = [
         [page]="paginationOptions.page"
         [pageSize]="paginationOptions.pageSize"
         [pageSizeOptions]="paginationOptions.pageSizeOptions"
+        [dataFeatureId]="paginatorDataFeatureId"
       >
       </novo-data-table-pagination>
       <div class="novo-data-table-actions" *ngIf="templates['customActions']">
@@ -45627,6 +45646,7 @@ NovoDataTable.decorators = [
     </ng-template>
     <ng-template novoTemplate="linkCellTemplate" let-row let-col="col">
       <a
+        [attr.data-feature-id]="col?.attributes?.dataFeatureId"
         (click)="col.handlers?.click({ originalEvent: $event, row: row })"
         [style.width.px]="col?.width"
         [style.min-width.px]="col?.width"
@@ -45645,7 +45665,7 @@ NovoDataTable.decorators = [
       }}</a>
     </ng-template>
     <ng-template novoTemplate="buttonCellTemplate" let-row let-col="col">
-      <p [tooltip]="col?.action?.tooltip" tooltipPosition="right">
+      <p [tooltip]="col?.action?.tooltip" tooltipPosition="right" [attr.data-feature-id]="col?.attributes?.dataFeatureId">
         <i
           class="bhi-{{ col?.action?.icon }} data-table-icon"
           (click)="col.handlers?.click({ originalEvent: $event, row: row })"
@@ -45709,6 +45729,7 @@ NovoDataTable.propDecorators = {
     trackByFn: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_25__["Input"] }],
     templates: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_25__["Input"] }],
     fixedHeader: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_25__["Input"] }],
+    paginatorDataFeatureId: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_25__["Input"] }],
     dataTableService: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_25__["Input"] }],
     rows: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_25__["Input"] }],
     outsideFilter: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_25__["Input"] }],
@@ -46566,6 +46587,7 @@ NovoDataTableCellHeader.decorators = [
         (click)="sort()"
         [class.active]="sortActive"
         data-automation-id="novo-data-table-sort"
+        [attr.data-feature-id]="'novo-data-table-sort-' + this.id"
       ></button>
       <novo-dropdown
         *ngIf="config.filterable"
@@ -46582,6 +46604,7 @@ NovoDataTableCellHeader.decorators = [
           (click)="focusInput()"
           tooltipPosition="right"
           [tooltip]="labels.filters"
+          [attr.data-feature-id]="'novo-data-table-filter-' + this.id"
         ></button>
         <div class="header">
           <span>{{ labels.filters }}</span>
@@ -47236,7 +47259,14 @@ NovoDataTablePagination.decorators = [
       </ng-container>
       <ng-container *ngIf="theme === 'standard'">
         <h5 class="rows">{{ labels.itemsPerPage }}</h5>
-        <novo-select [options]="displayedPageSizeOptions" [placeholder]="labels.select" [(ngModel)]="pageSize" (onSelect)="changePageSize($event.selected)" data-automation-id="pager-select"></novo-select>
+        <novo-select
+          [options]="displayedPageSizeOptions"
+          [placeholder]="labels.select"
+          [(ngModel)]="pageSize"
+          (onSelect)="changePageSize($event.selected)"
+          data-automation-id="pager-select"
+          [attr.data-feature-id]="dataFeatureId">
+        </novo-select>
         <span class="spacer"></span>
         <ul class="pager" data-automation-id="pager">
             <li class="page" (click)="selectPage(page - 1)" [ngClass]="{ 'disabled': page === 0 }"><i class="bhi-previous" data-automation-id="pager-previous"></i></li>
@@ -47258,6 +47288,7 @@ NovoDataTablePagination.propDecorators = {
     theme: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_25__["HostBinding"], args: ['class',] }, { type: _angular_core__WEBPACK_IMPORTED_MODULE_25__["Input"] }],
     page: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_25__["Input"] }],
     pageSize: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_25__["Input"] }],
+    dataFeatureId: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_25__["Input"] }],
     pageSizeOptions: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_25__["Input"] }],
     length: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_25__["Input"] }],
     pageChange: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_25__["Output"] }]
@@ -50347,7 +50378,7 @@ NovoSimpleCellHeader.propDecorators = {
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
-const DEFAULT_PAGE_SIZE$1 = 50;
+const DEFAULT_PAGE_SIZE = 50;
 class NovoSimpleTablePagination {
     /**
      * @param {?} changeDetectorRef
@@ -50498,7 +50529,7 @@ class NovoSimpleTablePagination {
             return;
         }
         if (!this.pageSize) {
-            this._pageSize = this.pageSizeOptions.length !== 0 ? this.pageSizeOptions[0] : DEFAULT_PAGE_SIZE$1;
+            this._pageSize = this.pageSizeOptions.length !== 0 ? this.pageSizeOptions[0] : DEFAULT_PAGE_SIZE;
         }
         this.displayedPageSizeOptions = this.pageSizeOptions.slice();
         if (this.displayedPageSizeOptions.indexOf(this.pageSize) === -1) {
