@@ -23,17 +23,12 @@ import { Subscription } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NovoDataTableCell<T> extends CdkCell implements OnInit, OnDestroy {
-  @HostBinding('attr.role')
-  public role = 'gridcell';
+  @HostBinding('attr.role') role = 'gridcell';
 
-  @Input()
-  public row: T;
-  @Input()
-  public template: TemplateRef<any>;
-  @Input()
-  public column: IDataTableColumn<T>;
-  @Input()
-  public resized: EventEmitter<IDataTableColumn<T>>;
+  @Input() row: T;
+  @Input() template: TemplateRef<any>;
+  @Input() column: IDataTableColumn<T>;
+  @Input() resized: EventEmitter<IDataTableColumn<T>>;
   private subscriptions: Subscription[] = [];
 
   constructor(columnDef: CdkColumnDef, private elementRef: ElementRef, private renderer: Renderer2) {

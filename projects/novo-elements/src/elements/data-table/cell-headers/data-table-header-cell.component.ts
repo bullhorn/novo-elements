@@ -51,6 +51,7 @@ import { KeyCodes } from '../../../utils/key-codes/KeyCodes';
         (click)="sort()"
         [class.active]="sortActive"
         data-automation-id="novo-data-table-sort"
+        [attr.data-feature-id]="'novo-data-table-sort-' + this.id"
       ></button>
       <novo-dropdown
         *ngIf="config.filterable"
@@ -67,6 +68,7 @@ import { KeyCodes } from '../../../utils/key-codes/KeyCodes';
           (click)="focusInput()"
           tooltipPosition="right"
           [tooltip]="labels.filters"
+          [attr.data-feature-id]="'novo-data-table-filter-' + this.id"
         ></button>
         <div class="header">
           <span>{{ labels.filters }}</span>
