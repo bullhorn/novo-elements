@@ -1,27 +1,53 @@
 import { Component } from '@angular/core';
-import { TabbedGroupPickerSchema, ChildSchema } from 'dist/novo-elements/elements/tabbed-group-picker/TabbedGroupPicker';
+import { TabbedGroupPickerSchema, ChildSchema, ParentSchema } from 'dist/novo-elements/elements/tabbed-group-picker/TabbedGroupPicker';
 
 /**
- * @title Tabbed Group Picker - Quick Select Example
+ * @title Tabbed Group Picker - Groups Example
  */
 @Component({
-  selector: 'tabbed-group-picker-quick-select-example',
-  templateUrl: 'tabbed-group-picker-quick-select-example.html',
+  selector: 'tabbed-group-picker-groups-example',
+  templateUrl: 'tabbed-group-picker-groups-example.html',
   styleUrls: ['../tabbed-group-picker-example.scss'],
 })
-export class TabbedGroupPickerQuickSelectExample {
+export class TabbedGroupPickerGroupsExample {
   getAnimals = (): { animalId: number; name: string }[] =>
     ['Dog', 'Cat', 'Mouse', 'Horse', 'Cow', 'Chicken', 'Pig', 'Sheep', 'Goat', 'Goose'].map((name, index) => ({
       name,
       animalId: index + 1,
     }));
-  public example_schema = [
+
+  getAnimalCategories = (): { groupId: number; name: string; children?: { animalId: number; name: string }[] }[] => {
+    const animals = this.getAnimals();
+    const birds = ['Chicken', 'Goose'].map((name) => animals.find((animal) => animal.name === name));
+    const livestock = ['Cow', 'Pig', 'Sheep', 'Goat'].map((name) => animals.find((animal) => animal.name === name));
+    return [
+      {
+        name: 'Birds',
+        groupId: 1,
+        children: birds,
+      },
+      {
+        name: 'Livestock',
+        groupId: 2,
+        children: livestock,
+      },
+    ];
+  };
+  example_schema = [
     {
       typeName: 'animals',
       typeLabel: 'Animals',
       valueField: 'animalId',
       labelField: 'name',
       data: this.getAnimals(),
+    },
+    {
+      typeName: 'animalCategories',
+      typeLabel: 'Animal Categories',
+      valueField: 'groupId',
+      labelField: 'name',
+      childTypeName: 'animals',
+      data: this.getAnimalCategories(),
     },
   ];
   public example_quickSelectConfig = {
@@ -54,11 +80,15 @@ export class TabbedGroupPickerQuickSelectExample {
     selector: 'buttonConfig',
   };
 
-  public selectedAnimals: string[] = [];
+  selectedAnimals: string[] = [];
+  selectedAnimalCategories: string[] = [];
 
   onSelectionChange(selectedData: TabbedGroupPickerSchema[]) {
     this.selectedAnimals = (selectedData.find(({ typeName }) => typeName === 'animals') as ChildSchema).data.map(
-      ({ animalId }: { animalId: string }) => animalId,
+      ({ animalId }) => animalId,
+    );
+    this.selectedAnimalCategories = (selectedData.find(({ typeName }) => typeName === 'animalCategories') as ParentSchema).data.map(
+      ({ groupId }) => groupId,
     );
     this.example_buttonConfig.label = this.buildButtonLabel();
   }

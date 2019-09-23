@@ -348,3 +348,26 @@ export class Can {
 export function can(obj: any) {
   return new Can(obj);
 }
+
+// Assumes data is already sorted
+export function binarySearch<T>(item: T, array: T[], compare: (a: T, b: T) => 1 | -1 | 0 | undefined): T | undefined {
+  return search(0, array.length - 1);
+
+  function search(min: number, max: number): T | undefined {
+    if (min > max) {
+      return undefined;
+    }
+    const guess = min + Math.floor((max - min) / 2);
+    const comparison = compare(item, array[guess]);
+
+    if (comparison === 0) {
+      return array[guess];
+    } else if (comparison === -1) {
+      return search(min, guess - 1);
+    } else if (comparison === 1) {
+      return search(guess + 1, max);
+    } else {
+      throw new Error(`Input mismatch: ${JSON.stringify(item)} not comparable to ${JSON.stringify(array[guess])}`);
+    }
+  }
+}

@@ -47,9 +47,7 @@ export class AceEditorPage {}
       contain a &quot;check&quot; icon. Negative color primary buttons <code>color=&quot;negative&quot;</code> are used to delete, clear, or
       otherwise remove an extant element. Primary buttons should never have a <code>side</code> attribute.
     </p>
-     attribute.
-    </p>
-    <!-- Example
+    <!-- Example: ButtonOverviewExample -->
     <p><code-example example="button-primary"></code-example></p>
     <h2>Secondary</h2>
     <p>
@@ -341,6 +339,10 @@ export class SwitchPage {}
       with the data checkboxes (in both directions).
     </p>
     <p><code-example example="tabbed-group-picker-quick-select"></code-example></p>
+    <h2>Groups</h2>
+    <p><code-example example="tabbed-group-picker-groups"></code-example></p>
+    <h2>Big Groups</h2>
+    <p><code-example example="tabbed-group-picker-big-groups"></code-example></p>
   `,
 })
 export class TabbedGroupPickerPage {}
@@ -554,10 +556,7 @@ export class DesignPage {}
     <p>Opportunity</p>
     <p>Job</p>
     <p>Placement</p>
-    <pre>
-    <p>Job</p>
-    <p>Placement</p>
-    <pre><code>            &lt;i theme=&quot;entity&quot; class=&quot;bhi-lead lead&quot;&gt;&lt;/i&gt;            &lt;h6&gt;Lead&lt;/h6&gt;            &lt;i theme=&quot;entity&quot; class=&quot;bhi-person contact&quot;&gt;&lt;/i&gt;            &lt;h6&gt;Contact&lt;/h6&gt;            &lt;i theme=&quot;entity&quot; class=&quot;bhi-company company&quot;&gt;&lt;/i&gt;            &lt;h6&gt;Company&lt;/h6&gt;            &lt;i theme=&quot;entity&quot; class=&quot;bhi-candidate candidate&quot;&gt;&lt;/i&gt;            &lt;h6&gt;Candidate&lt;/h6&gt;            &lt;i theme=&quot;entity&quot; class=&quot;bhi-opportunity opportunity&quot;&gt;&lt;/i&gt;            &lt;h6&gt;Opportunity&lt;/h6&gt;            &lt;i theme=&quot;entity&quot; class=&quot;bhi-job job&quot;&gt;&lt;/i&gt;            &lt;h6&gt;Job&lt;/h6&gt;            &lt;i theme=&quot;entity&quot; class=&quot;bhi-star placement&quot;&gt;&lt;/i&gt;     >
+    <pre><code>            &lt;i theme=&quot;entity&quot; class=&quot;bhi-lead lead&quot;&gt;&lt;/i&gt;            &lt;h6&gt;Lead&lt;/h6&gt;            &lt;i theme=&quot;entity&quot; class=&quot;bhi-person contact&quot;&gt;&lt;/i&gt;            &lt;h6&gt;Contact&lt;/h6&gt;            &lt;i theme=&quot;entity&quot; class=&quot;bhi-company company&quot;&gt;&lt;/i&gt;            &lt;h6&gt;Company&lt;/h6&gt;            &lt;i theme=&quot;entity&quot; class=&quot;bhi-candidate candidate&quot;&gt;&lt;/i&gt;            &lt;h6&gt;Candidate&lt;/h6&gt;            &lt;i theme=&quot;entity&quot; class=&quot;bhi-opportunity opportunity&quot;&gt;&lt;/i&gt;            &lt;h6&gt;Opportunity&lt;/h6&gt;            &lt;i theme=&quot;entity&quot; class=&quot;bhi-job job&quot;&gt;&lt;/i&gt;            &lt;h6&gt;Job&lt;/h6&gt;            &lt;i theme=&quot;entity&quot; class=&quot;bhi-star placement&quot;&gt;&lt;/i&gt;            &lt;h6&gt;Placement&lt;/h6&gt;</code></pre>
     <h2>Contained Icons</h2>
     <h5>Scaling</h5>
     <p>Make sure to scale the corner radius appropriately when enlarging or decreasing the size of the icon.</p>
@@ -581,10 +580,7 @@ export class DesignPage {}
     <h4>Heading Four</h4>
     <h5>Heading Five</h5>
     <h6>Heading Six</h6>
-    <pre>Four</h4>
-    <h5>Heading Five</h5>
-    <h6>Heading Six</h6>
-    <pre><code>            &lt;h1&gt;&lt;i theme=&quot;contained&quot; class=&quot;bhi-lead lead&quot;&gt;&lt;/i&gt;Heading One&lt;/h1&gt;            &lt;h2&gt;&lt;i theme=&quot;contained&quot; class=&quot;bhi-person contact&quot;&gt;&lt;/i&gt;Heading Two&lt;/h2&gt;            &lt;h3&gt;&lt;i theme=&quot;contained&quot; class=&quot;bhi-company company&quot;&gt;&lt;/i&gt;Heading Three&lt;/h3&gt;            &lt;h4&gt;&lt;i theme=&quot;contained&quot; class=&quot;bhi-candidate candidate&quot;&gt;&lt;/i&gt;Heading Four&lt;/h4&gt;            &lt;h5&gt;&lt;i theme=&quot;contained&quot; class=&quot;bhi-opportunity opportunity&quot;&gt;&lt;/i&gt;Heading Five&lt;/h5&gt;            &lt;h6&gt;&lt;i theme=&quot;contained&quot; clas>
+    <pre><code>            &lt;h1&gt;&lt;i theme=&quot;contained&quot; class=&quot;bhi-lead lead&quot;&gt;&lt;/i&gt;Heading One&lt;/h1&gt;            &lt;h2&gt;&lt;i theme=&quot;contained&quot; class=&quot;bhi-person contact&quot;&gt;&lt;/i&gt;Heading Two&lt;/h2&gt;            &lt;h3&gt;&lt;i theme=&quot;contained&quot; class=&quot;bhi-company company&quot;&gt;&lt;/i&gt;Heading Three&lt;/h3&gt;            &lt;h4&gt;&lt;i theme=&quot;contained&quot; class=&quot;bhi-candidate candidate&quot;&gt;&lt;/i&gt;Heading Four&lt;/h4&gt;            &lt;h5&gt;&lt;i theme=&quot;contained&quot; class=&quot;bhi-opportunity opportunity&quot;&gt;&lt;/i&gt;Heading Five&lt;/h5&gt;            &lt;h6&gt;&lt;i theme=&quot;contained&quot; class=&quot;bhi-job job&quot;&gt;&lt;/i&gt;Heading Six&lt;/h6&gt;</code></pre>
   `,
 })
 export class IconographyPage {}
@@ -698,10 +694,7 @@ export class IconographyPage {}
     <h4>Section Header</h4>
     <h2>Large Section Header with Icon</h2>
     <h6>Small Section Header with Icon</h6>
-    <pre>r</h4>
-    <h2>Large Section Header with Icon</h2>
-    <h6>Small Section Header with Icon</h6>
-    <pre><code>        &lt;h1&gt;Heading 1&lt;/h1&gt;        &lt;h2&gt;Heading 2&lt;/h2&gt;        &lt;h3&gt;Heading 3&lt;/h3&gt;        &lt;h4&gt;Heading 4&lt;/h4&gt;        &lt;h5&gt;Heading 5&lt;/h5&gt;        &lt;h6&gt;Heading 6&lt;/h6&gt;        &lt;p&gt;        Body        &lt;/p&gt;        &lt;hr&gt;        &lt;span class=&quot;caption&quot;&gt;Caption&lt;/span&gt;        &lt;h4 class=&quot;novo-section-header&quot;&gt;Section Header&lt;/h4&gt;        &lt;h2 class=&quot;novo-section-header&quot;&gt;          &lt;i class=&quot;bhi-section&quot;&gt;          Large Section Header with Icon        &lt;/h2&gt;        &lt;h6 class=&quot;novo-section-header&quot;&gt;          >
+    <pre><code>        &lt;h1&gt;Heading 1&lt;/h1&gt;        &lt;h2&gt;Heading 2&lt;/h2&gt;        &lt;h3&gt;Heading 3&lt;/h3&gt;        &lt;h4&gt;Heading 4&lt;/h4&gt;        &lt;h5&gt;Heading 5&lt;/h5&gt;        &lt;h6&gt;Heading 6&lt;/h6&gt;        &lt;p&gt;        Body        &lt;/p&gt;        &lt;hr&gt;        &lt;span class=&quot;caption&quot;&gt;Caption&lt;/span&gt;        &lt;h4 class=&quot;novo-section-header&quot;&gt;Section Header&lt;/h4&gt;        &lt;h2 class=&quot;novo-section-header&quot;&gt;          &lt;i class=&quot;bhi-section&quot;&gt;          Large Section Header with Icon        &lt;/h2&gt;        &lt;h6 class=&quot;novo-section-header&quot;&gt;          &lt;i class=&quot;bhi-idea&quot;&gt;          Small Section Header with Icon        &lt;/h6&gt;</code></pre>
   `,
 })
 export class TypographyPage {}
@@ -1246,8 +1239,7 @@ export class StepperPage {}
     <p><code-example example="tabs-vertical"></code-example></p>
     <h5>Button Tab Bars</h5>
     <p>Tabbed Button Bars get a similar style treatment to the <code>&quot;header&quot;</code> theme button.</p>
-    theme button.</p>
-    <!-- <code-example example="tabs-condens
+    <!-- <code-example example="tabs-condensed"></code-example> -->
     <h2>As Application Routing Mechanism</h2>
     <p>
       Follows the same color/white theme as above, but doesn't use the &quot;novo-tabs&quot; tag and you have to add the classes and html
@@ -1339,8 +1331,7 @@ export class ChomskyPage {}
     <p>You can inspec the DOM at the input and see the property to know what 'key' to use in the API</p>
     <p>By default, if you are writing a Field Interaction for the active field you can use <code>API.getActiveKey()</code></p>
     <h5>Configuration on Field</h5>
-    <pre>>
-    <pre><code>event: 'change|focus|blur|init', script: Function, invokeOnInit?: boolean>
+    <pre><code>event: 'change|focus|blur|init', script: Function, invokeOnInit?: boolean</code></pre>
     <p>
       The Field Interactions are configured on a per control basis. There are three scenarios in which they will be fired: 'change', 'focus'
       and 'blur'.
