@@ -20,7 +20,7 @@ export const FORMAT_DEFAULTS: IFormatDefaults = {
       month: '2-digit',
       day: '2-digit',
       year: 'numeric',
-      hour: '2-digit',
+      hour: 'numeric',
       minute: '2-digit',
       hour12: true,
     },
@@ -29,7 +29,7 @@ export const FORMAT_DEFAULTS: IFormatDefaults = {
       month: 'short',
       day: '2-digit',
       year: 'numeric',
-      hour: '2-digit',
+      hour: 'numeric',
       minute: '2-digit',
       hour12: true,
     },
@@ -38,7 +38,7 @@ export const FORMAT_DEFAULTS: IFormatDefaults = {
       month: 'long',
       day: '2-digit',
       year: 'numeric',
-      hour: '2-digit',
+      hour: 'numeric',
       minute: '2-digit',
       hour12: true,
     },
@@ -62,13 +62,13 @@ export const FORMAT_DEFAULTS: IFormatDefaults = {
     },
     timeShort: {
       // HH:MM A - 1:17 PM
-      hour: '2-digit',
+      hour: 'numeric',
       minute: '2-digit',
       hour12: true,
     },
     timeLong: {
       // HH:MM A Z - 1:17 PM CST
-      hour: '2-digit',
+      hour: 'numeric',
       minute: '2-digit',
       timeZoneName: 'short',
       hour12: true,

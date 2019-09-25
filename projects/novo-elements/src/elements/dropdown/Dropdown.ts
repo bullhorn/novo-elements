@@ -64,8 +64,6 @@ export class NovoDropdownElement implements OnInit, OnDestroy {
 
   @ViewChild(NovoOverlayTemplateComponent)
   overlay: NovoOverlayTemplateComponent;
-  @ViewChild('trigger')
-  public button;
 
   clickHandler: any;
   closeHandler: any;

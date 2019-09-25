@@ -1,7 +1,6 @@
-import { Formats} from './formats';
+import { Formats } from './formats';
 
 describe('Formats', () => {
-
   let formats;
 
   beforeEach(() => {
@@ -12,7 +11,7 @@ describe('Formats', () => {
     it('should return time in a string format', () => {
       const date = new Date();
       const options = {
-        hour: '2-digit',
+        hour: 'numeric',
         minute: '2-digit',
         hour12: true,
       };
@@ -24,7 +23,7 @@ describe('Formats', () => {
     it('should return time formatted to the locale', () => {
       const date = new Date();
       const options = {
-        hour: '2-digit',
+        hour: 'numeric',
         minute: '2-digit',
         hour12: true,
       };
