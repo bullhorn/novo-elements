@@ -479,7 +479,9 @@ class Formats {
         const _value = value === null || value === undefined || value === '' ? new Date() : new Date(value);
         /** @type {?} */
         let options = this.getDateOptions(format);
-        return new Intl.DateTimeFormat([this.locale, 'en-US'], options).format(_value);
+        /** @type {?} */
+        const locales = [...(this.overrideDateFormat ? [this.overrideDateFormat] : []), this.locale, 'en-US'];
+        return new Intl.DateTimeFormat(locales, options).format(_value);
     }
     /**
      * @param {?} value
@@ -492,7 +494,9 @@ class Formats {
         /** @type {?} */
         let options = this.getDateOptions(format);
         /** @type {?} */
-        let timeParts = Intl.DateTimeFormat([this.locale, 'en-US'], options).formatToParts(_value).reduce((obj, part) => {
+        const locales = [...(this.overrideDateFormat ? [this.overrideDateFormat] : []), this.locale, 'en-US'];
+        /** @type {?} */
+        let timeParts = Intl.DateTimeFormat(locales, options).formatToParts(_value).reduce((obj, part) => {
             obj[part.type] = part.value;
             return obj;
         }, {});
@@ -688,6 +692,13 @@ class Chomsky {
      */
     forceDisplayTo24HourTime(use24HourTime) {
         this.formats.use24HourTime = use24HourTime;
+    }
+    /**
+     * @param {?} dateFormatString
+     * @return {?}
+     */
+    overrideDateFormat(dateFormatString) {
+        this.formats.overrideDateFormat = dateFormatString;
     }
     /**
      * @param {?} locale
@@ -3447,6 +3458,12 @@ class NovoLabelService {
      */
     totalRecords(total, select = false) {
         return select ? `Select all ${total} records.` : `De-select remaining ${total} records.`;
+    }
+    /**
+     * @return {?}
+     */
+    dateFormatString() {
+        return this.dateFormat;
     }
     /**
      * @param {?} value
@@ -13407,7 +13424,7 @@ class DateFormatService {
      */
     parseDateString(dateString) {
         /** @type {?} */
-        let dateFormat = this.labels.dateFormat;
+        let dateFormat = this.labels.dateFormatString();
         /** @type {?} */
         let dateFormatRegex = /(\w+)[\/|\.|\-](\w+)[\/|\.|\-](\w+)/gi;
         /** @type {?} */
@@ -13625,7 +13642,7 @@ class NovoDatePickerInputElement {
         this.disabled = false;
         this.blurEvent = new _angular_core__WEBPACK_IMPORTED_MODULE_25__["EventEmitter"]();
         this.focusEvent = new _angular_core__WEBPACK_IMPORTED_MODULE_25__["EventEmitter"]();
-        this.placeholder = this.labels.dateFormatPlaceholder;
+        this.placeholder = this.labels.dateFormatString().toUpperCase() || this.labels.dateFormatPlaceholder;
     }
     /**
      * @return {?}
@@ -13634,8 +13651,8 @@ class NovoDatePickerInputElement {
         this.userDefinedFormat = this.format ? !this.format.match(/^(DD\/MM\/YYYY|MM\/DD\/YYYY)$/g) : false;
         if (!this.userDefinedFormat && this.textMaskEnabled && !this.allowInvalidDate) {
             this.maskOptions = this.maskOptions || {
-                mask: [/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/],
-                pipe: text_mask_addons_dist_createAutoCorrectedDatePipe__WEBPACK_IMPORTED_MODULE_6___default()(this.format || this.labels.dateFormat.toLowerCase()),
+                mask: this.dateFormatService.getDateMask(),
+                pipe: text_mask_addons_dist_createAutoCorrectedDatePipe__WEBPACK_IMPORTED_MODULE_6___default()(this.format || this.labels.dateFormatString().toLowerCase()),
                 keepCharPositions: false,
                 guide: true,
             };
