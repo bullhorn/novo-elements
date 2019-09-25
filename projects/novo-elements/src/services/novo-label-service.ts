@@ -140,6 +140,10 @@ export class NovoLabelService {
     return select ? `Select all ${total} records.` : `De-select remaining ${total} records.`;
   }
 
+  dateFormatString(): string {
+    return this.dateFormat;
+  }
+
   formatDateWithFormat(value: any, format: Intl.DateTimeFormatOptions) {
     let date = value instanceof Date ? value : new Date(value);
     if (date.getTime() !== date.getTime()) {

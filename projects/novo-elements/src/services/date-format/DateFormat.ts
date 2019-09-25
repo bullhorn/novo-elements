@@ -49,7 +49,7 @@ export class DateFormatService {
   }
 
   parseDateString(dateString: string): [Date, string] {
-    let dateFormat: string = this.labels.dateFormat,
+    let dateFormat: string = this.labels.dateFormatString(),
       dateFormatRegex = /(\w+)[\/|\.|\-](\w+)[\/|\.|\-](\w+)/gi,
       dateValueRegex = /(\d+)[\/|\.|\-](\d+)[\/|\.|\-](\d+)/gi,
       dateFormatTokens: Array<string>,

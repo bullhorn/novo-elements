@@ -17,6 +17,8 @@ export class Formats {
   };
   // Current locale
   private locale: string;
+  // Override date format from user preferences
+  public overrideDateFormat: string;
   // Override currency to blanket change the currency behavior
   public overrideCurrency: string;
   // Override to force times to display in 24 hour
@@ -78,13 +80,15 @@ export class Formats {
   public formatDate(value: any, format?: string | Intl.DateTimeFormatOptions): string {
     const _value = value === null || value === undefined || value === '' ? new Date() : new Date(value);
     let options: Intl.DateTimeFormatOptions = this.getDateOptions(format);
-    return new Intl.DateTimeFormat([this.locale, 'en-US'], options).format(_value);
+    const locales = [ ...(this.overrideDateFormat ? [this.overrideDateFormat] : []), this.locale, 'en-US'];
+    return new Intl.DateTimeFormat(locales, options).format(_value);
   }
 
   public formatTime(value: any, format?: string | Intl.DateTimeFormatOptions): string {
     const _value = (value === null || value === undefined || value === '') ? new Date() : new Date(value);
     let options: Intl.DateTimeFormatOptions = this.getDateOptions(format);
-    let timeParts: { [p: string]: string } = Intl.DateTimeFormat([this.locale, 'en-US'], options).formatToParts(_value).reduce((obj, part) => {
+    const locales = [ ...(this.overrideDateFormat ? [this.overrideDateFormat] : []), this.locale, 'en-US'];
+    let timeParts: { [p: string]: string } = Intl.DateTimeFormat(locales, options).formatToParts(_value).reduce((obj, part) => {
       obj[part.type] = part.value;
       return obj;
     }, {});
