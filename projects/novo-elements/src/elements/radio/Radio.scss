@@ -1,28 +1,43 @@
 novo-radio-group {
   display: flex;
+
   > novo-radio {
     margin: 0;
+
     button {
       border-radius: 0 !important;
-      &.unchecked {
-        opacity: 0.5;
+
+      // &.unchecked {
+      //     opacity: 0.5;
+      // }
+
+      &.checked:not([theme='icon']) {
+        box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5) !important;
+        color: #fff !important;
+        background: #4a89dc !important;
       }
+
       &[theme='icon'] i {
         margin-right: 0;
       }
     }
+
     &:first-child {
       button {
-        border-top-left-radius: 3px;
-        border-bottom-left-radius: 3px;
+        border-radius: 0;
+        border-top-left-radius: 4px !important;
+        border-bottom-left-radius: 4px !important;
       }
     }
+
     &:last-child {
       button {
-        border-top-right-radius: 3px;
-        border-bottom-right-radius: 3px;
+        border-radius: 0;
+        border-top-right-radius: 4px !important;
+        border-bottom-right-radius: 4px !important;
         border-right-width: 1px !important;
         border-right-style: solid !important;
+
         &[theme='icon'] {
           border-right-width: 0px !important;
         }
@@ -34,18 +49,22 @@ novo-radio-group {
 novo-radio {
   margin-right: 10px;
   position: relative;
+
   &.vertical {
     display: block;
   }
+
   > input {
     position: absolute;
     z-index: -1;
     opacity: 0;
+
     &:focus + label {
       i {
         &:before {
           text-shadow: 0px 0px 20px rgba(74, 137, 220, 0.5);
         }
+
         &.bhi-radio-empty,
         &.bhi-radio-filled {
           color: $positive;
@@ -53,38 +72,48 @@ novo-radio {
       }
     }
   }
+
   > label {
     cursor: pointer;
+
     > div {
       display: inline;
     }
+
     i {
       margin-right: 5px;
       transition: all 200ms ease-in-out;
+
       &.bhi-checkbox-empty,
       &.bhi-radio-empty {
         color: #d2d2d2;
       }
+
       &.bhi-checkbox-filled,
       &.bhi-radio-filled {
         color: $positive;
       }
     }
+
     &.disabled {
       i {
         opacity: 0.7;
       }
+
       button[theme].has-icon {
         opacity: 0.7;
       }
     }
   }
+
   button[theme].has-icon {
     opacity: 0.7;
     transition: all 100ms ease-in-out;
+
     &:hover {
       opacity: 1;
     }
+
     &.checked {
       color: $white;
       background: $positive;
