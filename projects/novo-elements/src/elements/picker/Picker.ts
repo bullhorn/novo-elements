@@ -78,7 +78,7 @@ const PICKER_VALUE_ACCESSOR = {
 })
 export class NovoPickerElement implements OnInit {
   // Container for the results
-  @ViewChild('results', { read: ViewContainerRef })
+  @ViewChild('results', { read: ViewContainerRef, static: true })
   results: ViewContainerRef;
 
   @Input()
@@ -136,19 +136,19 @@ export class NovoPickerElement implements OnInit {
   @Output()
   typing: EventEmitter<any> = new EventEmitter();
 
-  @ViewChild(NovoOverlayTemplateComponent)
+  @ViewChild(NovoOverlayTemplateComponent, { static: true })
   public container: NovoOverlayTemplateComponent;
-  @ViewChild('input')
+  @ViewChild('input', { static: true })
   private input: ElementRef;
 
   term: string = '';
   resultsComponent: any;
   popup: ComponentRef<any>;
   _value: any;
-  onModelChange: Function = () => { };
-  onModelTouched: Function = () => { };
+  onModelChange: Function = () => {};
+  onModelTouched: Function = () => {};
 
-  constructor(public element: ElementRef, private componentUtils: ComponentUtils, private ref: ChangeDetectorRef) { }
+  constructor(public element: ElementRef, private componentUtils: ComponentUtils, private ref: ChangeDetectorRef) {}
 
   ngOnInit() {
     if (this.overrideElement) {

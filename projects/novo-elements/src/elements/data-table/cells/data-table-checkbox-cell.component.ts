@@ -13,27 +13,21 @@ import { CdkCell, CdkColumnDef } from '@angular/cdk/table';
 import { Subscription } from 'rxjs';
 
 import { NovoDataTable } from '../data-table.component';
-import { DataTableState } from '../state/data-table-state.service';
 
 @Component({
   selector: 'novo-data-table-checkbox-cell',
   template: `
     <div class="data-table-checkbox" (click)="onClick()">
-      <input type="checkbox" [checked]="checked">
-      <label>
-        <i [class.bhi-checkbox-empty]="!checked"
-          [class.bhi-checkbox-filled]="checked"></i>
-      </label>
+      <input type="checkbox" [checked]="checked" />
+      <label> <i [class.bhi-checkbox-empty]="!checked" [class.bhi-checkbox-filled]="checked"></i> </label>
     </div>
-    `,
+  `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NovoDataTableCheckboxCell<T> extends CdkCell implements OnInit, OnDestroy {
-  @HostBinding('attr.role')
-  public role = 'gridcell';
+  @HostBinding('attr.role') public role = 'gridcell';
 
-  @Input()
-  public row: T;
+  @Input() public row: T;
 
   public checked: boolean = false;
 

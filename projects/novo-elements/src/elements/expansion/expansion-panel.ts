@@ -55,10 +55,8 @@ let uniqueId = 0;
   },
 })
 export class NovoExpansionPanel extends CdkAccordionItem implements AfterContentInit, OnChanges, OnDestroy {
-  @Input()
-  disabled: boolean;
-  @Input()
-  expanded: boolean;
+  @Input() disabled: boolean;
+  @Input() expanded: boolean;
   /** Whether the toggle indicator should be hidden. */
   @Input()
   get hideToggle(): boolean {
@@ -78,12 +76,9 @@ export class NovoExpansionPanel extends CdkAccordionItem implements AfterContent
   }
   private _padding = true;
 
-  @Output()
-  opened: EventEmitter<void> = new EventEmitter();
-  @Output()
-  closed: EventEmitter<void> = new EventEmitter();
-  @Output()
-  expandedChange: EventEmitter<boolean> = new EventEmitter();
+  @Output() opened: EventEmitter<void> = new EventEmitter();
+  @Output() closed: EventEmitter<void> = new EventEmitter();
+  @Output() expandedChange: EventEmitter<boolean> = new EventEmitter();
 
   /** Stream that emits for changes in `@Input` properties. */
   readonly _inputChanges = new Subject<SimpleChanges>();
@@ -92,7 +87,7 @@ export class NovoExpansionPanel extends CdkAccordionItem implements AfterContent
   accordion: NovoAccordion;
 
   /** Content that will be rendered lazily. */
-  @ContentChild(NovoExpansionPanelContent)
+  @ContentChild(NovoExpansionPanelContent, { static: false })
   _lazyContent: NovoExpansionPanelContent;
 
   /** Portal holding the user's content. */

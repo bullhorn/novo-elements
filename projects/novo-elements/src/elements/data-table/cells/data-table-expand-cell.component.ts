@@ -13,7 +13,6 @@ import { CdkCell, CdkColumnDef } from '@angular/cdk/table';
 import { Subscription } from 'rxjs';
 
 import { NovoDataTable } from '../data-table.component';
-import { DataTableState } from '../state/data-table-state.service';
 
 @Component({
   selector: 'novo-data-table-expand-cell',
@@ -23,11 +22,9 @@ import { DataTableState } from '../state/data-table-state.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NovoDataTableExpandCell<T> extends CdkCell implements OnInit, OnDestroy {
-  @HostBinding('attr.role')
-  public role = 'gridcell';
+  @HostBinding('attr.role') public role = 'gridcell';
 
-  @Input()
-  public row: T;
+  @Input() public row: T;
 
   public expanded: boolean = false;
 
