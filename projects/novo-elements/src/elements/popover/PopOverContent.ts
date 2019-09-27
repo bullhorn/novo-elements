@@ -4,21 +4,23 @@ import { PopOverDirective } from './PopOver';
 @Component({
   selector: 'popover-content',
   template: `
-        <div #popoverDiv
-            class="popover {{ effectivePlacement }}"
-            [style.top]="top + 'px'"
-            [style.left]="left + 'px'"
-            [class.fade]="animation"
-            style="display: block"
-            role="popover">
-            <div class="arrow {{effectiveAlignment}}"></div>
-            <h4 class="popover-title" [hidden]="!title">{{ title }}</h4>
-            <div class="popover-content">
-                <ng-content></ng-content>
-                <div class="popover-content-text">{{ content }}</div>
-            </div>
-        </div>
-    `,
+    <div
+      #popoverDiv
+      class="popover {{ effectivePlacement }}"
+      [style.top]="top + 'px'"
+      [style.left]="left + 'px'"
+      [class.fade]="animation"
+      style="display: block"
+      role="popover"
+    >
+      <div class="arrow {{ effectiveAlignment }}"></div>
+      <h4 class="popover-title" [hidden]="!title">{{ title }}</h4>
+      <div class="popover-content">
+        <ng-content></ng-content>
+        <div class="popover-content-text">{{ content }}</div>
+      </div>
+    </div>
+  `,
 })
 export class PopOverContent implements AfterViewInit {
   @Input()
@@ -30,7 +32,7 @@ export class PopOverContent implements AfterViewInit {
   @Input()
   animation: boolean = true;
 
-  @ViewChild('popoverDiv')
+  @ViewChild('popoverDiv', { static: true })
   popoverDiv: ElementRef;
   popover: PopOverDirective;
   onCloseFromOutside = new EventEmitter();

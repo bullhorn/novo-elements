@@ -73,7 +73,6 @@ describe('Elements: NovoSelectElement', () => {
       comp.createdItem = false;
       comp.placeholder = mockPlaceholder;
       comp.ngOnChanges();
-      expect();
       expect(comp.selected).toEqual({
         label: mockPlaceholder,
         value: null,

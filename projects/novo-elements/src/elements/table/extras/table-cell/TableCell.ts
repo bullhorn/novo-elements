@@ -10,16 +10,15 @@ import { ComponentUtils } from './../../../../utils/component-utils/ComponentUti
 @Component({
   selector: 'novo-table-cell',
   template: `
-        <div [ngSwitch]="column._type">
-            <span #container></span>
-            <date-cell *ngSwitchCase="'date'" [value]="value"></date-cell>
-            <a *ngSwitchCase="'link'" (click)="onClick($event);">{{ value }}</a>
-            <span *ngSwitchDefault>{{ value }}</span>
-        </div>
-    `,
+    <div [ngSwitch]="column._type">
+      <span #container></span>
+      <date-cell *ngSwitchCase="'date'" [value]="value"></date-cell>
+      <a *ngSwitchCase="'link'" (click)="onClick($event)">{{ value }}</a> <span *ngSwitchDefault>{{ value }}</span>
+    </div>
+  `,
 })
 export class TableCell implements OnInit, OnDestroy {
-  @ViewChild('container', { read: ViewContainerRef })
+  @ViewChild('container', { read: ViewContainerRef, static: true })
   container: ViewContainerRef;
 
   @Input()

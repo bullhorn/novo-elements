@@ -91,7 +91,9 @@ export class NovoSimpleEmptyHeaderCell extends _NovoHeaderCell {
 
 @Component({
   selector: 'novo-simple-checkbox-header-cell',
-  template: `<novo-checkbox [(ngModel)]="selectAll" (ngModelChange)="toggle($event)"></novo-checkbox>`,
+  template: `
+    <novo-checkbox [(ngModel)]="selectAll" (ngModelChange)="toggle($event)"></novo-checkbox>
+  `,
 })
 export class NovoSimpleCheckboxHeaderCell extends _NovoHeaderCell implements OnDestroy {
   @HostBinding('attr.role')
@@ -143,7 +145,7 @@ export class NovoSimpleCell<T> extends _NovoCell implements OnInit {
   @Input()
   public column: SimpleTableColumn<T>;
 
-  @ViewChild('span')
+  @ViewChild('span', { static: true })
   private spanElement: ElementRef;
 
   constructor(columnDef: CdkColumnDef, private elementRef: ElementRef, private renderer: Renderer2) {
