@@ -65,6 +65,7 @@ import { StaticDataTableService } from './services/static-data-table.service';
         [page]="paginationOptions.page"
         [pageSize]="paginationOptions.pageSize"
         [pageSizeOptions]="paginationOptions.pageSizeOptions"
+        [dataFeatureId]="paginatorDataFeatureId"
       >
       </novo-data-table-pagination>
       <div class="novo-data-table-actions" *ngIf="templates['customActions']">
@@ -114,6 +115,7 @@ import { StaticDataTableService } from './services/static-data-table.service';
               [class.empty]="column?.type === 'action' && !column?.label"
               [class.button-header-cell]="column?.type === 'expand' || (column?.type === 'action' && !column?.action?.options)"
               [class.dropdown-header-cell]="column?.type === 'action' && column?.action?.options"
+              [class.fixed-header]="fixedHeader"
             ></novo-data-table-header-cell>
             <novo-data-table-cell
               *cdkCellDef="let row"
@@ -128,6 +130,7 @@ import { StaticDataTableService } from './services/static-data-table.service';
           </ng-container>
           <novo-data-table-header-row
             *cdkHeaderRowDef="displayedColumns"
+            [fixedHeader]="fixedHeader"
             data-automation-id="novo-data-table-header-row"
           ></novo-data-table-header-row>
           <novo-data-table-row
@@ -190,6 +193,7 @@ import { StaticDataTableService } from './services/static-data-table.service';
     </ng-template>
     <ng-template novoTemplate="linkCellTemplate" let-row let-col="col">
       <a
+        [attr.data-feature-id]="col?.attributes?.dataFeatureId"
         (click)="col.handlers?.click({ originalEvent: $event, row: row })"
         [style.width.px]="col?.width"
         [style.min-width.px]="col?.width"
@@ -208,7 +212,7 @@ import { StaticDataTableService } from './services/static-data-table.service';
       }}</a>
     </ng-template>
     <ng-template novoTemplate="buttonCellTemplate" let-row let-col="col">
-      <p [tooltip]="col?.action?.tooltip" tooltipPosition="right">
+      <p [tooltip]="col?.action?.tooltip" tooltipPosition="right" [attr.data-feature-id]="col?.attributes?.dataFeatureId">
         <i
           class="bhi-{{ col?.action?.icon }} data-table-icon"
           (click)="col.handlers?.click({ originalEvent: $event, row: row })"
@@ -249,17 +253,12 @@ import { StaticDataTableService } from './services/static-data-table.service';
   providers: [DataTableState],
 })
 export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
-  @HostBinding('class.global-search-hidden')
-  globalSearchHiddenClassToggle: boolean = false;
+  @HostBinding('class.global-search-hidden') globalSearchHiddenClassToggle: boolean = false;
 
-  @ContentChildren(NovoTemplate)
-  customTemplates: QueryList<NovoTemplate>;
-  @ViewChildren(NovoTemplate)
-  defaultTemplates: QueryList<NovoTemplate>;
-  @ViewChild('novoDataTableContainer')
-  novoDataTableContainer: ElementRef;
-  @Output()
-  resized: EventEmitter<IDataTableColumn<T>> = new EventEmitter();
+  @ContentChildren(NovoTemplate) customTemplates: QueryList<NovoTemplate>;
+  @ViewChildren(NovoTemplate) defaultTemplates: QueryList<NovoTemplate>;
+  @ViewChild('novoDataTableContainer') novoDataTableContainer: ElementRef;
+  @Output() resized: EventEmitter<IDataTableColumn<T>> = new EventEmitter();
 
   @Input()
   set displayedColumns(displayedColumns: string[]) {
@@ -287,27 +286,18 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   }
   private _disabledColumns: string[];
 
-  @Input()
-  paginationOptions: IDataTablePaginationOptions;
-  @Input()
-  searchOptions: IDataTableSearchOptions;
-  @Input()
-  defaultSort: { id: string; value: string };
-  @Input()
-  name: string = 'novo-data-table';
-  @Input()
-  allowMultipleFilters: boolean = false;
-  @Input()
-  rowIdentifier: string = 'id';
-  @Input()
-  activeRowIdentifier: string = '';
+  @Input() paginationOptions: IDataTablePaginationOptions;
+  @Input() searchOptions: IDataTableSearchOptions;
+  @Input() defaultSort: { id: string; value: string };
+  @Input() name = 'novo-data-table';
+  @Input() allowMultipleFilters = false;
+  @Input() rowIdentifier = 'id';
+  @Input() activeRowIdentifier = '';
   // prettier-ignore
-  @Input()
-  trackByFn: Function = (index, item) => item.id
-  @Input()
-  templates: { [key: string]: TemplateRef<any> } = {};
-  @Input()
-  fixedHeader: boolean = false;
+  @Input() trackByFn = (index, item) => item.id;
+  @Input() templates: { [key: string]: TemplateRef<any> } = {};
+  @Input() fixedHeader = false;
+  @Input() paginatorDataFeatureId: string;
 
   @Input()
   set dataTableService(service: IDataTableService<T>) {
@@ -405,8 +395,7 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   }
   private _hideGlobalSearch: boolean = true;
 
-  @Output()
-  preferencesChanged: EventEmitter<IDataTablePreferences> = new EventEmitter<IDataTablePreferences>();
+  @Output() preferencesChanged: EventEmitter<IDataTablePreferences> = new EventEmitter<IDataTablePreferences>();
 
   public dataSource: DataTableSource<T>;
   public loading: boolean = true;
@@ -697,13 +686,6 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
     let left: number = target.scrollLeft;
     if (left !== this.scrollLeft) {
       this.scrollLeft = target.scrollLeft;
-    }
-    if (this.fixedHeader) {
-      const top: number = target.scrollTop;
-      const header: any = target.querySelector('cdk-table > novo-data-table-header-row');
-      if (header) {
-        header.style.transform = `translateY(${top}px)`;
-      }
     }
     this.ref.markForCheck();
   }
