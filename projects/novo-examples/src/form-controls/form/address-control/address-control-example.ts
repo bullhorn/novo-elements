@@ -82,9 +82,10 @@ export class AddressControlExample {
       value: {
         address1: '321 Summer Street',
         address2: '11 Washington Street',
+        city: 'Chicago',
+        state: 'California',
+        zip: 95133,
         countryID: 1,
-        countryName: 'United States',
-        countryCode: 'US',
       },
     });
     this.secondaryAddressControl = new AddressControl({

@@ -2,7 +2,7 @@
 import { Component, forwardRef, Input, OnInit, ChangeDetectionStrategy, EventEmitter, Output } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 // APP
-import { getCountries, getStates, findByCountryId, COUNTRIES } from '../../../../utils/countries/Countries';
+import { getStates, findByCountryId, COUNTRIES } from '../../../../utils/countries/Countries';
 import { NovoLabelService } from '../../../../services/novo-label-service';
 import { Helpers } from '../../../../utils/Helpers';
 
@@ -176,7 +176,7 @@ export interface NovoAddressConfig {
         [placeholder]="config.countryID.label"
         (changed)="onCountryChange($event)"
         autocomplete="shipping country"
-        [(ngModel)]="model.countryID"
+        [(ngModel)]="model.countryName"
         [disablePickerInput]="disabled.countryID"
       ></novo-picker>
     </span>
@@ -200,7 +200,6 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
     return this._readOnly;
   }
   states: Array<any> = [];
-  countries: Array<any> = getCountries();
   fieldList: Array<string> = ['address1', 'address2', 'city', 'state', 'zip', 'countryID'];
   model: any;
   onModelChange: Function = () => {};
@@ -475,7 +474,11 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
             if (promise.then) {
               promise.then((result: any) => {
                 loadingCountries = false;
-                countryName = Helpers.interpolateWithFallback(this.config.countryID.pickerConfig.format, result);
+                if (typeof result === 'string') {
+                  countryName = result;
+                } else {
+                  countryName = Helpers.interpolateWithFallback(this.config.countryID.pickerConfig.format, result);
+                }
                 this.model = Object.assign(model, { countryName });
                 this.updateStates();
               });
