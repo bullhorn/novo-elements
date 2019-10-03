@@ -176,7 +176,7 @@ export interface NovoAddressConfig {
         [placeholder]="config.countryID.label"
         (changed)="onCountryChange($event)"
         autocomplete="shipping country"
-        [(ngModel)]="model.countryName"
+        [(ngModel)]="model.countryID"
         [disablePickerInput]="disabled.countryID"
       ></novo-picker>
     </span>
