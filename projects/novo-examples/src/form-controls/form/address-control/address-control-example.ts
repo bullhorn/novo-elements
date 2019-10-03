@@ -124,7 +124,14 @@ export class AddressControlExample {
               return Promise.resolve(this.getCountryOptions(query));
             },
             getLabels: (value: number) => {
-              return Promise.resolve(findByCountryId(value));
+              return new Promise((resolve: any) => {
+                let country: any = findByCountryId(value);
+                if (country) {
+                  resolve({ value: country.id, label: country.name });
+                } else {
+                  resolve('');
+                }
+              });
             },
           },
         },
@@ -138,7 +145,7 @@ export class AddressControlExample {
       value: {
         address1: '123 Summer Street',
         address2: '10 Washington Street and stuff',
-        countryID: 1,
+        countryID: 2359,
       },
     });
     this.addressFormControls = [this.addressControl, this.secondaryAddressControl];

@@ -474,11 +474,7 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
             if (promise.then) {
               promise.then((result: any) => {
                 loadingCountries = false;
-                if (typeof result === 'string') {
-                  countryName = result;
-                } else {
-                  countryName = Helpers.interpolateWithFallback(this.config.countryID.pickerConfig.format, result);
-                }
+                countryName = Helpers.interpolateWithFallback(this.config.countryID.pickerConfig.format, result);
                 this.model = Object.assign(model, { countryName });
                 this.updateStates();
               });
@@ -540,7 +536,7 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
         return new Promise((resolve: any) => {
           let country: any = findByCountryId(countryID);
           if (country) {
-            resolve(country.name);
+            resolve({ value: country.id, label: country.name });
           } else {
             resolve('');
           }
