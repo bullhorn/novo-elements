@@ -13,7 +13,7 @@
 .novo-category-dropdown-search {
   width: 100%;
   padding: 0.5em;
-  border-bottom: .1em solid #ccc;
+  border-bottom: 0.1em solid #ccc;
   position: relative;
   input {
     font-size: 1em;
@@ -38,7 +38,7 @@
   i.bhi-times {
     position: absolute;
     bottom: 1em;
-    right: .5em;
+    right: 0.5em;
     color: #aaaaaa;
     font-size: 1em;
     margin-right: 1em;
@@ -80,10 +80,16 @@
     }
 
     &.right {
+      novo-list {
+        height: 100%;
+      }
       display: block;
       width: 23em;
-      height: 27em;
       overflow: auto;
+
+      .virtual-scroll-viewport {
+        height: 27em;
+      }
 
       .quick-select {
         font-weight: 500;

@@ -1,24 +1,23 @@
 <novo-dropdown>
-  <button class="tabbed-group-picker-button"
-          [theme]="buttonConfig.theme"
-          [side]="buttonConfig.side"
-          [icon]="buttonConfig.icon"
-          [loading]="loading">
+  <button
+    class="tabbed-group-picker-button"
+    [theme]="buttonConfig.theme"
+    [side]="buttonConfig.side"
+    [icon]="buttonConfig.icon"
+    [loading]="loading"
+  >
     <div class="tabbed-group-picker-button-label">{{ buttonConfig.label }}</div>
   </button>
   <div class="novo-category-dropdown-search" data-automation-id="novo-category-dropdown-search">
     <input type="text" [placeholder]="searchLabel" [value]="filterText | async" (input)="onFilter($event)" />
     <i class="bhi-search" *ngIf="!(filterText | async)"></i>
-    <i class="bhi-times" *ngIf="filterText | async" (click)="onClearFilter($event)"></i>
+    <i class="bhi-times" *ngIf="(filterText | async)" (click)="onClearFilter($event)"></i>
   </div>
   <div class="tabbed-group-picker-column-container">
     <div class="tabbed-group-picker-column left">
-      <novo-nav theme="white"
-                direction="vertical">
-        <novo-tab *ngFor="let schema of displaySchemata"
-                  [attr.data-automation-id]="schema.typeName"
-                  (activeChange)="displaySchema = schema">
-          <span>{{schema.typeLabel}} ({{schema.data.length}})</span><i class="bhi-next"></i>
+      <novo-nav theme="white" direction="vertical">
+        <novo-tab *ngFor="let schema of displaySchemata" [attr.data-automation-id]="schema.typeName" (activeChange)="changeTab(schema)">
+          <span>{{ schema.typeLabel }} ({{ schema.data.length }})</span><i class="bhi-next"></i>
         </novo-tab>
       </novo-nav>
       <!-- todo: clear all button goes here-->
@@ -27,33 +26,46 @@
       <div class="quick-select" *ngIf="quickSelectConfig && !(filterText | async)">
         <div class="quick-select-label">{{ quickSelectConfig.label }}</div>
         <novo-list direction="vertical">
-          <novo-list-item *ngFor="let quickSelect of quickSelectConfig.items"
-                          [attr.data-automation-id]="quickSelect.label"
-                          (click)="quickSelect.selected = !quickSelect.selected; onItemToggled(quickSelect)">
-                          <item-content>
-                            <novo-checkbox [label]="quickSelect.label"
-                            [name]="'selected'"
-                            [(ngModel)]="quickSelect.selected"
-                            (ngModelChange)="onItemToggled(quickSelect)"></novo-checkbox>
-                          </item-content>
+          <novo-list-item
+            *ngFor="let quickSelect of quickSelectConfig.items"
+            [attr.data-automation-id]="quickSelect.label"
+            (click)="quickSelect.selected = !quickSelect.selected; onItemToggled(quickSelect)"
+          >
+            <item-content>
+              <novo-checkbox
+                [label]="quickSelect.label"
+                [name]="'selected'"
+                [(ngModel)]="quickSelect.selected"
+                (ngModelChange)="onItemToggled(quickSelect)"
+              ></novo-checkbox>
+            </item-content>
           </novo-list-item>
         </novo-list>
       </div>
-      <!-- todo: add virtual scroll-->
-      <novo-list *ngIf="schemata[displaySchemaIndex].data.length"
-                 direction="vertical">
-        <novo-list-item *ngFor="let item of displaySchema.data"
-                        [attr.data-automation-id]="item[displaySchema.labelField]"
-                        (click)="item.selected = !item.selected; onItemToggled(item)">
-                        <item-content>
-                          <novo-checkbox [label]="item[displaySchema.labelField]"
-                          [name]="'selected'"
-                          [indeterminate]="item.indeterminate"
-                          [(ngModel)]="item.selected"
-                          (ngModelChange)="onItemToggled(item)">
-                        </novo-checkbox>
-                      </item-content>
-        </novo-list-item>
+      <novo-list *ngIf="schemata[displaySchemaIndex].data.length" direction="vertical">
+        <cdk-virtual-scroll-viewport
+          [itemSize]="virtualScrollItemSize"
+          [maxBufferPx]="maxBufferPx"
+          [minBufferPx]="minBufferPx"
+          [class]="viewportClass"
+        >
+          <novo-list-item
+            *cdkVirtualFor="let item of displaySchema.data"
+            [attr.data-automation-id]="item[displaySchema.labelField]"
+            (click)="item.selected = !item.selected; onItemToggled(item)"
+          >
+            <item-content>
+              <novo-checkbox
+                [label]="item[displaySchema.labelField]"
+                [name]="'selected'"
+                [indeterminate]="item.indeterminate"
+                [(ngModel)]="item.selected"
+                (ngModelChange)="onItemToggled(item)"
+              >
+              </novo-checkbox>
+            </item-content>
+          </novo-list-item>
+        </cdk-virtual-scroll-viewport>
       </novo-list>
       <!-- TODO: add empty result message for no data in the case of no search -->
       <div class="novo-category-dropdown-empty-item" *ngIf="!displaySchema.data.length && (filterText | async)">

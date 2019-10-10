@@ -1,14 +1,16 @@
-import { Component, EventEmitter, Input, OnInit, Output, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ChangeDetectionStrategy, ChangeDetectorRef, AfterViewInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { Helpers, binarySearch } from '../../utils/Helpers';
 import { NovoLabelService } from '../../services/novo-label-service';
+import { ScrollDispatcher, CdkScrollable, ExtendedScrollToOptions } from '@angular/cdk/scrolling';
 
 export type TabbedGroupPickerSchema = {
   typeName: string;
   typeLabel: string;
   valueField: string;
   labelField: string;
+  scrollOffset?: number;
 } & (ParentSchema | ChildSchema);
 export type ParentSchema = {
   childTypeName: string;
@@ -34,7 +36,7 @@ export type TabbedGroupPickerQuickSelect = {
   templateUrl: './TabbedGroupPicker.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NovoTabbedGroupPickerElement implements OnInit {
+export class NovoTabbedGroupPickerElement implements OnInit, AfterViewInit {
   @Input() buttonConfig: {
     theme: string;
     side: string;
@@ -43,11 +45,14 @@ export class NovoTabbedGroupPickerElement implements OnInit {
   };
   @Input() schemata: TabbedGroupPickerSchema[];
   @Input() quickSelectConfig: { label: string; items: TabbedGroupPickerQuickSelect[] };
+
+  @Input() title: string = 'tabbed-group-picker'; // need unique information in order to find scroll container from scroll dispatcher
   displaySchemata: TabbedGroupPickerSchema[];
 
   @Output() selectionChange: EventEmitter<any> = new EventEmitter<any>();
 
   displaySchemaIndex: number;
+  scrollableInstance: CdkScrollable;
 
   get displaySchema(): TabbedGroupPickerSchema {
     return this.displaySchemata[this.displaySchemaIndex];
@@ -56,12 +61,16 @@ export class NovoTabbedGroupPickerElement implements OnInit {
     this.displaySchemaIndex = this.schemata.map(({ typeName }) => typeName).indexOf(schema.typeName);
   }
 
+  get viewportClass(): string {
+    return `virtual-scroll-viewport ${this.title}`;
+  }
+
   filterText: BehaviorSubject<string> = new BehaviorSubject('');
   searchLabel: string = 'Search';
 
   loading = true;
 
-  constructor(public labelService: NovoLabelService, private ref: ChangeDetectorRef) {}
+  constructor(public labelService: NovoLabelService, public scrollDispatch: ScrollDispatcher, private ref: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     this.setupDisplayData();
@@ -71,6 +80,47 @@ export class NovoTabbedGroupPickerElement implements OnInit {
     this.filterText.pipe(debounceTime(300)).subscribe({
       next: this.filter,
     });
+  }
+
+  ngAfterViewInit(): void {
+    this.scrollableInstance = [...this.scrollDispatch.scrollContainers.keys()].find((scrollable) =>
+      scrollable.getElementRef().nativeElement.classList.contains(this.title),
+    );
+
+    for (let [scrollable, subscription] of this.scrollDispatch.scrollContainers.entries()) {
+      console.log(scrollable);
+    }
+  }
+
+  changeTab(schema: TabbedGroupPickerSchema) {
+    this.schemata[this.displaySchemaIndex].scrollOffset = this.scrollableInstance.measureScrollOffset('top');
+    this.displaySchema = schema;
+    const offset = this.schemata[this.displaySchemaIndex].scrollOffset || 0;
+    const options: ExtendedScrollToOptions = { behavior: 'auto', top: offset };
+    this.scrollableInstance.scrollTo(options);
+  }
+
+  get virtualScrollItemSize() {
+    const em = 3.1; // this corresponds to TabbedGroupPicker.scss .tabbed-group-picker-column-container.tabbed-group-picker-column &.right novo-list-item.height
+    const defaultFontSize = 16; // fingers crossed
+    const element = document.getElementById('tabbed-group-picker-viewport');
+    const emSizeInPixels = element ? this.getEmSize(element) : defaultFontSize;
+    return em * emSizeInPixels;
+  }
+
+  get minBufferPx() {
+    const em = 27; // this corresponds to the height of the list;
+    const defaultFontSize = 16;
+    const element = document.getElementById('tabbed-group-picker-viewport');
+    const emSizeInPixels = element ? this.getEmSize(element) : defaultFontSize;
+    return 3 * em * emSizeInPixels;
+  }
+
+  get maxBufferPx() {
+    return 2 * this.minBufferPx;
+  }
+  getEmSize(el: HTMLElement) {
+    return Number(getComputedStyle(el, '').fontSize.match(/(\d+(\.\d+)?)px$/)[1]);
   }
 
   setupDisplayData(): void {
