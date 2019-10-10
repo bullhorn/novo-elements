@@ -37222,7 +37222,6 @@ class NovoAddressElement {
         this.labels = labels;
         this._readOnly = false;
         this.states = [];
-        this.countries = getCountries();
         this.fieldList = ['address1', 'address2', 'city', 'state', 'zip', 'countryID'];
         this.onModelChange = () => { };
         this.onModelTouched = () => { };
@@ -37627,11 +37626,11 @@ class NovoAddressElement {
             options: (query$$1 = '') => {
                 return new Promise((resolve) => {
                     /** @type {?} */
-                    let countries = getCountries();
+                    let countries = COUNTRIES;
                     if (query$$1) {
                         countries = countries.filter((country) => new RegExp(`${query$$1}`, 'gi').test(country.name));
                     }
-                    return resolve(countries);
+                    return resolve(countries.map((country) => ({ value: country.id, label: country.name })));
                 });
             },
             getLabels: (countryID) => {
@@ -37639,7 +37638,7 @@ class NovoAddressElement {
                     /** @type {?} */
                     let country = findByCountryId(countryID);
                     if (country) {
-                        resolve(country.name);
+                        resolve({ value: country.id, label: country.name });
                     }
                     else {
                         resolve('');
@@ -37654,49 +37653,149 @@ NovoAddressElement.decorators = [
                 selector: 'novo-address',
                 providers: [ADDRESS_VALUE_ACCESSOR],
                 template: `
-        <span *ngIf="!config?.address1?.hidden" class="street-address" [class.invalid]="invalid.address1" [class.focus]="focused.address1" [class.disabled]="disabled.address1">
-            <i *ngIf="config.address1.required"
-                class="required-indicator address1"
-                [ngClass]="{'bhi-circle': !valid.address1, 'bhi-check': valid.address1}">
-            </i>
-            <input [class.maxlength-error]="invalidMaxlength.address1" type="text" id="address1" name="address1" [placeholder]="config.address1.label" [maxlength]="config?.address1?.maxlength" autocomplete="shipping street-address address-line-1" [(ngModel)]="model.address1" (ngModelChange)="updateControl()" (focus)="isFocused($event, 'address1')" (blur)="isBlurred($event, 'address1')" (input)="onInput($event, 'address1')"/>
-        </span>
-        <span *ngIf="!config?.address2?.hidden" class="apt suite" [class.invalid]="invalid.address2" [class.focus]="focused.address2" [class.disabled]="disabled.address2">
-            <i *ngIf="config.address2.required"
-                class="required-indicator address2"
-                [ngClass]="{'bhi-circle': !valid.address2, 'bhi-check': valid.address2}">
-            </i>
-            <input [class.maxlength-error]="invalidMaxlength.address2" type="text" id="address2" name="address2" [placeholder]="config.address2.label" [maxlength]="config?.address2?.maxlength" autocomplete="shipping address-line-2" [(ngModel)]="model.address2" (ngModelChange)="updateControl()" (focus)="isFocused($event, 'address2')" (blur)="isBlurred($event, 'address2')" (input)="onInput($event, 'address2')"/>
-        </span>
-        <span *ngIf="!config?.city?.hidden" class="city locality" [class.invalid]="invalid.city" [class.focus]="focused.city" [class.disabled]="disabled.city">
-            <i *ngIf="config.city.required"
-                class="required-indicator"
-                [ngClass]="{'bhi-circle': !valid.city, 'bhi-check': valid.city}">
-            </i>
-            <input [class.maxlength-error]="invalidMaxlength.city" type="text" id="city" name="city" [placeholder]="config.city.label" autocomplete="shipping city locality" [maxlength]="config?.city?.maxlength" [(ngModel)]="model.city" (ngModelChange)="updateControl()" (focus)="isFocused($event, 'city')" (blur)="isBlurred($event, 'city')" (input)="onInput($event, 'city')"/>
-        </span>
-        <span *ngIf="!config?.state?.hidden" class="state region" [class.invalid]="invalid.state" [class.focus]="focused.state" [class.disabled]="disabled.state"  [tooltip]="tooltip.state">
-            <i *ngIf="config.state.required"
-                class="required-indicator"
-                [ngClass]="{'bhi-circle': !valid.state, 'bhi-check': valid.state}">
-            </i>
-            <novo-picker [config]="config?.state?.pickerConfig" [placeholder]="config?.state?.label" (changed)="onStateChange($event)" autocomplete="shipping region" [(ngModel)]="model.state" [disablePickerInput]="disabled.state"></novo-picker>
-        </span>
-        <span *ngIf="!config?.zip?.hidden" class="zip postal-code" [class.invalid]="invalid.zip" [class.focus]="focused.zip" [class.disabled]="disabled.zip">
-            <i *ngIf="config.zip.required"
-                class="required-indicator"
-                [ngClass]="{'bhi-circle': !valid.zip, 'bhi-check': valid.zip}">
-            </i>
-            <input [class.maxlength-error]="invalidMaxlength.zip" type="text" id="zip" name="zip" [placeholder]="config.zip.label" autocomplete="shipping postal-code" [maxlength]="config?.zip?.maxlength" [(ngModel)]="model.zip" (ngModelChange)="updateControl()" (focus)="isFocused($event, 'zip')" (blur)="isBlurred($event, 'zip')" (input)="onInput($event, 'zip')" />
-        </span>
-        <span *ngIf="!config?.countryID?.hidden" class="country-name" [class.invalid]="invalid.countryID" [class.focus]="focused.countryID" [class.disabled]="disabled.countryID">
-            <i *ngIf="config.countryID.required"
-                class="required-indicator"
-                [ngClass]="{'bhi-circle': !valid.countryID, 'bhi-check': valid.countryID}">
-            </i>
-            <novo-picker [config]="config?.countryID?.pickerConfig" [placeholder]="config.countryID.label" (changed)="onCountryChange($event)" autocomplete="shipping country" [(ngModel)]="model.countryName" [disablePickerInput]="disabled.countryID"></novo-picker>
-        </span>
-    `
+    <span
+      *ngIf="!config?.address1?.hidden"
+      class="street-address"
+      [class.invalid]="invalid.address1"
+      [class.focus]="focused.address1"
+      [class.disabled]="disabled.address1"
+    >
+      <i
+        *ngIf="config.address1.required"
+        class="required-indicator address1"
+        [ngClass]="{ 'bhi-circle': !valid.address1, 'bhi-check': valid.address1 }"
+      >
+      </i>
+      <input
+        [class.maxlength-error]="invalidMaxlength.address1"
+        type="text"
+        id="address1"
+        name="address1"
+        [placeholder]="config.address1.label"
+        [maxlength]="config?.address1?.maxlength"
+        autocomplete="shipping street-address address-line-1"
+        [(ngModel)]="model.address1"
+        (ngModelChange)="updateControl()"
+        (focus)="isFocused($event, 'address1')"
+        (blur)="isBlurred($event, 'address1')"
+        (input)="onInput($event, 'address1')"
+      />
+    </span>
+    <span
+      *ngIf="!config?.address2?.hidden"
+      class="apt suite"
+      [class.invalid]="invalid.address2"
+      [class.focus]="focused.address2"
+      [class.disabled]="disabled.address2"
+    >
+      <i
+        *ngIf="config.address2.required"
+        class="required-indicator address2"
+        [ngClass]="{ 'bhi-circle': !valid.address2, 'bhi-check': valid.address2 }"
+      >
+      </i>
+      <input
+        [class.maxlength-error]="invalidMaxlength.address2"
+        type="text"
+        id="address2"
+        name="address2"
+        [placeholder]="config.address2.label"
+        [maxlength]="config?.address2?.maxlength"
+        autocomplete="shipping address-line-2"
+        [(ngModel)]="model.address2"
+        (ngModelChange)="updateControl()"
+        (focus)="isFocused($event, 'address2')"
+        (blur)="isBlurred($event, 'address2')"
+        (input)="onInput($event, 'address2')"
+      />
+    </span>
+    <span
+      *ngIf="!config?.city?.hidden"
+      class="city locality"
+      [class.invalid]="invalid.city"
+      [class.focus]="focused.city"
+      [class.disabled]="disabled.city"
+    >
+      <i *ngIf="config.city.required" class="required-indicator" [ngClass]="{ 'bhi-circle': !valid.city, 'bhi-check': valid.city }"> </i>
+      <input
+        [class.maxlength-error]="invalidMaxlength.city"
+        type="text"
+        id="city"
+        name="city"
+        [placeholder]="config.city.label"
+        autocomplete="shipping city locality"
+        [maxlength]="config?.city?.maxlength"
+        [(ngModel)]="model.city"
+        (ngModelChange)="updateControl()"
+        (focus)="isFocused($event, 'city')"
+        (blur)="isBlurred($event, 'city')"
+        (input)="onInput($event, 'city')"
+      />
+    </span>
+    <span
+      *ngIf="!config?.state?.hidden"
+      class="state region"
+      [class.invalid]="invalid.state"
+      [class.focus]="focused.state"
+      [class.disabled]="disabled.state"
+      [tooltip]="tooltip.state"
+    >
+      <i *ngIf="config.state.required" class="required-indicator" [ngClass]="{ 'bhi-circle': !valid.state, 'bhi-check': valid.state }"> </i>
+      <novo-picker
+        [config]="config?.state?.pickerConfig"
+        [placeholder]="config?.state?.label"
+        (changed)="onStateChange($event)"
+        autocomplete="shipping region"
+        [(ngModel)]="model.state"
+        [disablePickerInput]="disabled.state"
+      ></novo-picker>
+    </span>
+    <span
+      *ngIf="!config?.zip?.hidden"
+      class="zip postal-code"
+      [class.invalid]="invalid.zip"
+      [class.focus]="focused.zip"
+      [class.disabled]="disabled.zip"
+    >
+      <i *ngIf="config.zip.required" class="required-indicator" [ngClass]="{ 'bhi-circle': !valid.zip, 'bhi-check': valid.zip }"> </i>
+      <input
+        [class.maxlength-error]="invalidMaxlength.zip"
+        type="text"
+        id="zip"
+        name="zip"
+        [placeholder]="config.zip.label"
+        autocomplete="shipping postal-code"
+        [maxlength]="config?.zip?.maxlength"
+        [(ngModel)]="model.zip"
+        (ngModelChange)="updateControl()"
+        (focus)="isFocused($event, 'zip')"
+        (blur)="isBlurred($event, 'zip')"
+        (input)="onInput($event, 'zip')"
+      />
+    </span>
+    <span
+      *ngIf="!config?.countryID?.hidden"
+      class="country-name"
+      [class.invalid]="invalid.countryID"
+      [class.focus]="focused.countryID"
+      [class.disabled]="disabled.countryID"
+    >
+      <i
+        *ngIf="config.countryID.required"
+        class="required-indicator"
+        [ngClass]="{ 'bhi-circle': !valid.countryID, 'bhi-check': valid.countryID }"
+      >
+      </i>
+      <novo-picker
+        [config]="config?.countryID?.pickerConfig"
+        [placeholder]="config.countryID.label"
+        (changed)="onCountryChange($event)"
+        autocomplete="shipping country"
+        [(ngModel)]="model.countryID"
+        [disablePickerInput]="disabled.countryID"
+      ></novo-picker>
+    </span>
+  `
             }] }
 ];
 /** @nocollapse */
@@ -58218,9 +58317,10 @@ class AddressControlExample {
             value: {
                 address1: '321 Summer Street',
                 address2: '11 Washington Street',
+                city: 'Chicago',
+                state: 'California',
+                zip: 95133,
                 countryID: 1,
-                countryName: 'United States',
-                countryCode: 'US',
             },
         });
         this.secondaryAddressControl = new novo_elements__WEBPACK_IMPORTED_MODULE_11__["AddressControl"]({
@@ -58259,7 +58359,16 @@ class AddressControlExample {
                             return Promise.resolve(this.getCountryOptions(query));
                         },
                         getLabels: (value) => {
-                            return Promise.resolve(Object(novo_elements__WEBPACK_IMPORTED_MODULE_11__["findByCountryId"])(value));
+                            return new Promise((resolve) => {
+                                /** @type {?} */
+                                let country = Object(novo_elements__WEBPACK_IMPORTED_MODULE_11__["findByCountryId"])(value);
+                                if (country) {
+                                    resolve({ value: country.id, label: country.name });
+                                }
+                                else {
+                                    resolve('');
+                                }
+                            });
                         },
                     },
                 },
@@ -58273,7 +58382,7 @@ class AddressControlExample {
             value: {
                 address1: '123 Summer Street',
                 address2: '10 Washington Street and stuff',
-                countryID: 1,
+                countryID: 2359,
             },
         });
         this.addressFormControls = [this.addressControl, this.secondaryAddressControl];
@@ -65860,7 +65969,7 @@ const EXAMPLE_COMPONENTS = {
     'address-control': {
         title: 'Address Control Example',
         component: AddressControlExample,
-        tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0A%0A%2F%2F%20Vendor%0Aimport%20%7B%20FormUtils%2C%20AddressControl%2C%20findByCountryId%20%7D%20from%20'novo-elements'%3B%0A%0A%2F**%0A%20*%20%40title%20Address%20Control%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'address-control-example'%2C%0A%20%20templateUrl%3A%20'address-control-example.html'%2C%0A%20%20styleUrls%3A%20%5B'address-control-example.css'%5D%2C%0A%7D)%0Aexport%20class%20AddressControlExample%20%7B%0A%20%20public%20addressControl%3A%20any%3B%0A%20%20public%20secondaryAddressControl%3A%20any%3B%0A%20%20public%20addressForm%3A%20any%3B%0A%20%20public%20addressFormControls%3A%20any%3B%0A%20%20public%20states%3A%20any%5B%5D%20%3D%20%5B%0A%20%20%20%20%7B%0A%20%20%20%20%20%20value%3A%20'MA'%2C%0A%20%20%20%20%20%20label%3A%20'Massachusetts'%2C%0A%20%20%20%20%20%20countryId%3A%201%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20value%3A%20'NY'%2C%0A%20%20%20%20%20%20label%3A%20'New%20York'%2C%0A%20%20%20%20%20%20countryId%3A%201%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20value%3A%20'AB'%2C%0A%20%20%20%20%20%20label%3A%20'Alberta'%2C%0A%20%20%20%20%20%20countryId%3A%202216%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20value%3A%20'BC'%2C%0A%20%20%20%20%20%20label%3A%20'British%20Columbia'%2C%0A%20%20%20%20%20%20countryId%3A%202216%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20value%3A%20'MB'%2C%0A%20%20%20%20%20%20label%3A%20'Manitoba'%2C%0A%20%20%20%20%20%20countryId%3A%202216%2C%0A%20%20%20%20%7D%2C%0A%20%20%5D%3B%0A%0A%20%20constructor(private%20formUtils%3A%20FormUtils)%20%7B%0A%20%20%20%20%2F%2F%20Address%20control%0A%20%20%20%20this.addressControl%20%3D%20new%20AddressControl(%7B%0A%20%20%20%20%20%20key%3A%20'address'%2C%0A%20%20%20%20%20%20name%3A%20'address'%2C%0A%20%20%20%20%20%20label%3A%20'Address'%2C%0A%20%20%20%20%20%20tooltip%3A%20'Address'%2C%0A%20%20%20%20%20%20config%3A%20%7B%0A%20%20%20%20%20%20%20%20address1%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20label%3A%20'Address%20Line%201'%2C%0A%20%20%20%20%20%20%20%20%20%20required%3A%20true%2C%0A%20%20%20%20%20%20%20%20%20%20maxlength%3A%2020%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20address2%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20label%3A%20'Address%20Line%202'%2C%0A%20%20%20%20%20%20%20%20%20%20required%3A%20true%2C%0A%20%20%20%20%20%20%20%20%20%20maxlength%3A%2015%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20state%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20label%3A%20'State'%2C%0A%20%20%20%20%20%20%20%20%20%20required%3A%20true%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20countryID%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20label%3A%20'Country'%2C%0A%20%20%20%20%20%20%20%20%20%20required%3A%20true%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20city%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20label%3A%20'City'%2C%0A%20%20%20%20%20%20%20%20%20%20required%3A%20true%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20zip%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20label%3A%20'Zipcode'%2C%0A%20%20%20%20%20%20%20%20%20%20required%3A%20true%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20value%3A%20%7B%0A%20%20%20%20%20%20%20%20address1%3A%20'321%20Summer%20Street'%2C%0A%20%20%20%20%20%20%20%20address2%3A%20'11%20Washington%20Street'%2C%0A%20%20%20%20%20%20%20%20countryID%3A%201%2C%0A%20%20%20%20%20%20%20%20countryName%3A%20'United%20States'%2C%0A%20%20%20%20%20%20%20%20countryCode%3A%20'US'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.secondaryAddressControl%20%3D%20new%20AddressControl(%7B%0A%20%20%20%20%20%20key%3A%20'secondaryAddress'%2C%0A%20%20%20%20%20%20name%3A%20'secondaryAddress'%2C%0A%20%20%20%20%20%20label%3A%20'Secondary%20Address'%2C%0A%20%20%20%20%20%20tooltip%3A%20'Secondary%20Address'%2C%0A%20%20%20%20%20%20config%3A%20%7B%0A%20%20%20%20%20%20%20%20address1%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20label%3A%20'Address%20Line%201'%2C%0A%20%20%20%20%20%20%20%20%20%20maxlength%3A%2020%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20address2%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20label%3A%20'Address%20Line%202'%2C%0A%20%20%20%20%20%20%20%20%20%20maxlength%3A%2015%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20state%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20label%3A%20'State'%2C%0A%20%20%20%20%20%20%20%20%20%20pickerConfig%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20field%3A%20'value'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20format%3A%20'%24label'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20options%3A%20(query%2C%20countryID)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20return%20Promise.resolve(this.getStateOptions(query%2C%20countryID))%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20getLabels%3A%20(value%3A%20number)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20return%20Promise.resolve(this.getStateLabel(value))%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20countryID%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20label%3A%20'Country'%2C%0A%20%20%20%20%20%20%20%20%20%20pickerConfig%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20field%3A%20'value'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20format%3A%20'%24label'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20options%3A%20(query)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20return%20Promise.resolve(this.getCountryOptions(query))%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20getLabels%3A%20(value%3A%20number)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20return%20Promise.resolve(findByCountryId(value))%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20city%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20label%3A%20'City'%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20zip%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20label%3A%20'Zipcode'%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20value%3A%20%7B%0A%20%20%20%20%20%20%20%20address1%3A%20'123%20Summer%20Street'%2C%0A%20%20%20%20%20%20%20%20address2%3A%20'10%20Washington%20Street%20and%20stuff'%2C%0A%20%20%20%20%20%20%20%20countryID%3A%201%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.addressFormControls%20%3D%20%5Bthis.addressControl%2C%20this.secondaryAddressControl%5D%3B%0A%20%20%20%20this.addressForm%20%3D%20formUtils.toFormGroup(this.addressFormControls)%3B%0A%20%20%7D%0A%0A%20%20getStateOptions(filter%3A%20string%20%3D%20''%2C%20countryID%3A%20number)%3A%20any%5B%5D%20%7B%0A%20%20%20%20let%20states%3A%20any%5B%5D%20%3D%20this.states%3B%0A%20%20%20%20if%20(countryID)%20%7B%0A%20%20%20%20%20%20states%20%3D%20states.filter((state%3A%20any)%20%3D%3E%20state.countryId%20%3D%3D%3D%20countryID)%3B%0A%20%20%20%20%7D%0A%20%20%20%20if%20(filter%20%26%26%20filter.length)%20%7B%0A%20%20%20%20%20%20states%20%3D%20states.filter((state)%20%3D%3E%20new%20RegExp(%60%24%7Bfilter%7D%60%2C%20'gi').test(state.label))%3B%0A%20%20%20%20%7D%0A%20%20%20%20return%20states%3B%0A%20%20%7D%0A%0A%20%20getStateLabel(value%3A%20number)%3A%20string%20%7B%0A%20%20%20%20let%20state%3A%20any%20%3D%20this.states.find((s%3A%20any)%20%3D%3E%20%7B%0A%20%20%20%20%20%20return%20s.value%20%3D%3D%3D%20value%3B%0A%20%20%20%20%7D)%3B%0A%20%20%20%20if%20(state%20%26%26%20state.label)%20%7B%0A%20%20%20%20%20%20return%20state.label%3B%0A%20%20%20%20%7D%0A%20%20%20%20return%20''%3B%0A%20%20%7D%0A%0A%20%20getCountryOptions(filter%3F%3A%20string)%3A%20any%5B%5D%20%7B%0A%20%20%20%20let%20countries%3A%20any%20%3D%20%5B%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20value%3A%202356%2C%0A%20%20%20%20%20%20%20%20label%3A%20'Uganda'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20value%3A%202357%2C%0A%20%20%20%20%20%20%20%20label%3A%20'Ukraine'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20value%3A%202358%2C%0A%20%20%20%20%20%20%20%20label%3A%20'United%20Arab%20Emirates'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20value%3A%202359%2C%0A%20%20%20%20%20%20%20%20label%3A%20'United%20Kingdom'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20value%3A%201%2C%0A%20%20%20%20%20%20%20%20label%3A%20'United%20States'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20value%3A%202443%2C%0A%20%20%20%20%20%20%20%20label%3A%20'United%20States%20Minor%20Outlying%20Islands'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20value%3A%202360%2C%0A%20%20%20%20%20%20%20%20label%3A%20'Uruguay'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20value%3A%202361%2C%0A%20%20%20%20%20%20%20%20label%3A%20'Uzbekistan'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%5D%3B%0A%20%20%20%20if%20(filter%20%26%26%20filter.length)%20%7B%0A%20%20%20%20%20%20countries%20%3D%20countries.filter((country)%20%3D%3E%20new%20RegExp(%60%24%7Bfilter%7D%60%2C%20'gi').test(country.label))%3B%0A%20%20%20%20%7D%0A%20%20%20%20return%20countries%3B%0A%20%20%7D%0A%7D%0A`,
+        tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0A%0A%2F%2F%20Vendor%0Aimport%20%7B%20FormUtils%2C%20AddressControl%2C%20findByCountryId%20%7D%20from%20'novo-elements'%3B%0A%0A%2F**%0A%20*%20%40title%20Address%20Control%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'address-control-example'%2C%0A%20%20templateUrl%3A%20'address-control-example.html'%2C%0A%20%20styleUrls%3A%20%5B'address-control-example.css'%5D%2C%0A%7D)%0Aexport%20class%20AddressControlExample%20%7B%0A%20%20public%20addressControl%3A%20any%3B%0A%20%20public%20secondaryAddressControl%3A%20any%3B%0A%20%20public%20addressForm%3A%20any%3B%0A%20%20public%20addressFormControls%3A%20any%3B%0A%20%20public%20states%3A%20any%5B%5D%20%3D%20%5B%0A%20%20%20%20%7B%0A%20%20%20%20%20%20value%3A%20'MA'%2C%0A%20%20%20%20%20%20label%3A%20'Massachusetts'%2C%0A%20%20%20%20%20%20countryId%3A%201%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20value%3A%20'NY'%2C%0A%20%20%20%20%20%20label%3A%20'New%20York'%2C%0A%20%20%20%20%20%20countryId%3A%201%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20value%3A%20'AB'%2C%0A%20%20%20%20%20%20label%3A%20'Alberta'%2C%0A%20%20%20%20%20%20countryId%3A%202216%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20value%3A%20'BC'%2C%0A%20%20%20%20%20%20label%3A%20'British%20Columbia'%2C%0A%20%20%20%20%20%20countryId%3A%202216%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20value%3A%20'MB'%2C%0A%20%20%20%20%20%20label%3A%20'Manitoba'%2C%0A%20%20%20%20%20%20countryId%3A%202216%2C%0A%20%20%20%20%7D%2C%0A%20%20%5D%3B%0A%0A%20%20constructor(private%20formUtils%3A%20FormUtils)%20%7B%0A%20%20%20%20%2F%2F%20Address%20control%0A%20%20%20%20this.addressControl%20%3D%20new%20AddressControl(%7B%0A%20%20%20%20%20%20key%3A%20'address'%2C%0A%20%20%20%20%20%20name%3A%20'address'%2C%0A%20%20%20%20%20%20label%3A%20'Address'%2C%0A%20%20%20%20%20%20tooltip%3A%20'Address'%2C%0A%20%20%20%20%20%20config%3A%20%7B%0A%20%20%20%20%20%20%20%20address1%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20label%3A%20'Address%20Line%201'%2C%0A%20%20%20%20%20%20%20%20%20%20required%3A%20true%2C%0A%20%20%20%20%20%20%20%20%20%20maxlength%3A%2020%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20address2%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20label%3A%20'Address%20Line%202'%2C%0A%20%20%20%20%20%20%20%20%20%20required%3A%20true%2C%0A%20%20%20%20%20%20%20%20%20%20maxlength%3A%2015%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20state%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20label%3A%20'State'%2C%0A%20%20%20%20%20%20%20%20%20%20required%3A%20true%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20countryID%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20label%3A%20'Country'%2C%0A%20%20%20%20%20%20%20%20%20%20required%3A%20true%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20city%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20label%3A%20'City'%2C%0A%20%20%20%20%20%20%20%20%20%20required%3A%20true%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20zip%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20label%3A%20'Zipcode'%2C%0A%20%20%20%20%20%20%20%20%20%20required%3A%20true%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20value%3A%20%7B%0A%20%20%20%20%20%20%20%20address1%3A%20'321%20Summer%20Street'%2C%0A%20%20%20%20%20%20%20%20address2%3A%20'11%20Washington%20Street'%2C%0A%20%20%20%20%20%20%20%20city%3A%20'Chicago'%2C%0A%20%20%20%20%20%20%20%20state%3A%20'California'%2C%0A%20%20%20%20%20%20%20%20zip%3A%2095133%2C%0A%20%20%20%20%20%20%20%20countryID%3A%201%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.secondaryAddressControl%20%3D%20new%20AddressControl(%7B%0A%20%20%20%20%20%20key%3A%20'secondaryAddress'%2C%0A%20%20%20%20%20%20name%3A%20'secondaryAddress'%2C%0A%20%20%20%20%20%20label%3A%20'Secondary%20Address'%2C%0A%20%20%20%20%20%20tooltip%3A%20'Secondary%20Address'%2C%0A%20%20%20%20%20%20config%3A%20%7B%0A%20%20%20%20%20%20%20%20address1%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20label%3A%20'Address%20Line%201'%2C%0A%20%20%20%20%20%20%20%20%20%20maxlength%3A%2020%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20address2%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20label%3A%20'Address%20Line%202'%2C%0A%20%20%20%20%20%20%20%20%20%20maxlength%3A%2015%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20state%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20label%3A%20'State'%2C%0A%20%20%20%20%20%20%20%20%20%20pickerConfig%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20field%3A%20'value'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20format%3A%20'%24label'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20options%3A%20(query%2C%20countryID)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20return%20Promise.resolve(this.getStateOptions(query%2C%20countryID))%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20getLabels%3A%20(value%3A%20number)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20return%20Promise.resolve(this.getStateLabel(value))%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20countryID%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20label%3A%20'Country'%2C%0A%20%20%20%20%20%20%20%20%20%20pickerConfig%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20field%3A%20'value'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20format%3A%20'%24label'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20options%3A%20(query)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20return%20Promise.resolve(this.getCountryOptions(query))%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20getLabels%3A%20(value%3A%20number)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20return%20new%20Promise((resolve%3A%20any)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20let%20country%3A%20any%20%3D%20findByCountryId(value)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20if%20(country)%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20resolve(%7B%20value%3A%20country.id%2C%20label%3A%20country.name%20%7D)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20resolve('')%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20city%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20label%3A%20'City'%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20zip%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20label%3A%20'Zipcode'%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20value%3A%20%7B%0A%20%20%20%20%20%20%20%20address1%3A%20'123%20Summer%20Street'%2C%0A%20%20%20%20%20%20%20%20address2%3A%20'10%20Washington%20Street%20and%20stuff'%2C%0A%20%20%20%20%20%20%20%20countryID%3A%202359%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.addressFormControls%20%3D%20%5Bthis.addressControl%2C%20this.secondaryAddressControl%5D%3B%0A%20%20%20%20this.addressForm%20%3D%20formUtils.toFormGroup(this.addressFormControls)%3B%0A%20%20%7D%0A%0A%20%20getStateOptions(filter%3A%20string%20%3D%20''%2C%20countryID%3A%20number)%3A%20any%5B%5D%20%7B%0A%20%20%20%20let%20states%3A%20any%5B%5D%20%3D%20this.states%3B%0A%20%20%20%20if%20(countryID)%20%7B%0A%20%20%20%20%20%20states%20%3D%20states.filter((state%3A%20any)%20%3D%3E%20state.countryId%20%3D%3D%3D%20countryID)%3B%0A%20%20%20%20%7D%0A%20%20%20%20if%20(filter%20%26%26%20filter.length)%20%7B%0A%20%20%20%20%20%20states%20%3D%20states.filter((state)%20%3D%3E%20new%20RegExp(%60%24%7Bfilter%7D%60%2C%20'gi').test(state.label))%3B%0A%20%20%20%20%7D%0A%20%20%20%20return%20states%3B%0A%20%20%7D%0A%0A%20%20getStateLabel(value%3A%20number)%3A%20string%20%7B%0A%20%20%20%20let%20state%3A%20any%20%3D%20this.states.find((s%3A%20any)%20%3D%3E%20%7B%0A%20%20%20%20%20%20return%20s.value%20%3D%3D%3D%20value%3B%0A%20%20%20%20%7D)%3B%0A%20%20%20%20if%20(state%20%26%26%20state.label)%20%7B%0A%20%20%20%20%20%20return%20state.label%3B%0A%20%20%20%20%7D%0A%20%20%20%20return%20''%3B%0A%20%20%7D%0A%0A%20%20getCountryOptions(filter%3F%3A%20string)%3A%20any%5B%5D%20%7B%0A%20%20%20%20let%20countries%3A%20any%20%3D%20%5B%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20value%3A%202356%2C%0A%20%20%20%20%20%20%20%20label%3A%20'Uganda'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20value%3A%202357%2C%0A%20%20%20%20%20%20%20%20label%3A%20'Ukraine'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20value%3A%202358%2C%0A%20%20%20%20%20%20%20%20label%3A%20'United%20Arab%20Emirates'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20value%3A%202359%2C%0A%20%20%20%20%20%20%20%20label%3A%20'United%20Kingdom'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20value%3A%201%2C%0A%20%20%20%20%20%20%20%20label%3A%20'United%20States'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20value%3A%202443%2C%0A%20%20%20%20%20%20%20%20label%3A%20'United%20States%20Minor%20Outlying%20Islands'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20value%3A%202360%2C%0A%20%20%20%20%20%20%20%20label%3A%20'Uruguay'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20value%3A%202361%2C%0A%20%20%20%20%20%20%20%20label%3A%20'Uzbekistan'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%5D%3B%0A%20%20%20%20if%20(filter%20%26%26%20filter.length)%20%7B%0A%20%20%20%20%20%20countries%20%3D%20countries.filter((country)%20%3D%3E%20new%20RegExp(%60%24%7Bfilter%7D%60%2C%20'gi').test(country.label))%3B%0A%20%20%20%20%7D%0A%20%20%20%20return%20countries%3B%0A%20%20%7D%0A%7D%0A`,
         cssSource: `%2F**%20No%20CSS%20for%20this%20example%20*%2F%0A`,
         htmlSource: `%3Cnovo-form%20%5Bform%5D%3D%22addressForm%22%3E%0A%20%20%3Cdiv%20class%3D%22novo-form-row%22%3E%0A%20%20%20%20%3Cnovo-control%20%5Bform%5D%3D%22addressForm%22%20%5Bcontrol%5D%3D%22addressControl%22%3E%3C%2Fnovo-control%3E%0A%20%20%3C%2Fdiv%3E%0A%20%20%3Cdiv%20class%3D%22novo-form-row%22%3E%0A%20%20%20%20%3Cnovo-control%20%5Bform%5D%3D%22addressForm%22%20%5Bcontrol%5D%3D%22secondaryAddressControl%22%3E%3C%2Fnovo-control%3E%0A%20%20%3C%2Fdiv%3E%0A%3C%2Fnovo-form%3E%0A%0A%3Cdiv%20class%3D%22final-value%22%3EValue%3A%20%7B%7BaddressForm.value%20%7C%20json%7D%7D%3C%2Fdiv%3E%0A`
     },
