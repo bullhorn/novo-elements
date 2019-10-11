@@ -66,9 +66,10 @@ export class NovoTabbedGroupPickerElement implements OnInit, AfterViewInit {
   }
 
   filterText: BehaviorSubject<string> = new BehaviorSubject('');
-  searchLabel: string = 'Search';
 
   loading = true;
+
+  showClearAll: boolean = false;
 
   constructor(public labelService: NovoLabelService, public scrollDispatch: ScrollDispatcher, private ref: ChangeDetectorRef) {}
 
@@ -206,8 +207,23 @@ export class NovoTabbedGroupPickerElement implements OnInit, AfterViewInit {
       this.updateChildren(item.selected, item.children);
     }
     this.updateParents();
+    this.updateClearAll(item.selected);
     this.emitSelectedValues();
     this.ref.markForCheck();
+  }
+
+  updateClearAll(itemWasJustSelected?: boolean) {
+    if (itemWasJustSelected) {
+      this.showClearAll = true;
+    } else {
+      return this.schemata.some((schema) => {
+        if ((schema as ParentSchema).childTypeName) {
+          return schema.data.some(({selected, indeterminate}) => selected || indeterminate);
+        } else {
+          return schema.data.some(({selected}) => selected);
+        }
+      });
+    }
   }
 
   updateChildren(parentIsSelected: boolean, children: { selected?: boolean }[]): void {
@@ -256,6 +272,27 @@ export class NovoTabbedGroupPickerElement implements OnInit, AfterViewInit {
       data: schema.data.filter(({ selected }) => selected),
     }));
     this.selectionChange.emit(selectedValues);
+  }
+
+  deselectEverything(event) {
+    Helpers.swallowEvent(event);
+    this.showClearAll = false;
+    if (this.quickSelectConfig) {
+      this.quickSelectConfig.items.forEach((quickSelect) => {
+        delete quickSelect.selected;
+      });
+    }
+    this.schemata.forEach((schema) => {
+      if ((schema as ParentSchema).childTypeName) {
+        schema.data.forEach((item) => {
+          delete item.selected;
+          delete item.indeterminate;
+          item.children.forEach((child) => delete child.selected);
+        });
+      } else {
+        (schema as ChildSchema).data.forEach((item) => delete item.selected);
+      }
+    });
   }
 
   onClearFilter(event) {

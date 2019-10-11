@@ -9,7 +9,7 @@
     <div class="tabbed-group-picker-button-label">{{ buttonConfig.label }}</div>
   </button>
   <div class="novo-category-dropdown-search" data-automation-id="novo-category-dropdown-search">
-    <input type="text" [placeholder]="searchLabel" [value]="filterText | async" (input)="onFilter($event)" />
+    <input type="text" [placeholder]="labelService.search" [value]="filterText | async" (input)="onFilter($event)" />
     <i class="bhi-search" *ngIf="!(filterText | async)"></i>
     <i class="bhi-times" *ngIf="(filterText | async)" (click)="onClearFilter($event)"></i>
   </div>
@@ -20,7 +20,7 @@
           <span>{{ schema.typeLabel }} ({{ schema.data.length }})</span><i class="bhi-next"></i>
         </novo-tab>
       </novo-nav>
-      <!-- todo: clear all button goes here-->
+      <button *ngIf="showClearAll" class="clear-all-button" theme="dialogue" icon="times" side="right" color="grapefruit" (click)="deselectEverything($event)">{{ labelService.clear }}</button>
     </div>
     <div class="tabbed-group-picker-column right">
       <div class="quick-select" *ngIf="quickSelectConfig && !(filterText | async)">

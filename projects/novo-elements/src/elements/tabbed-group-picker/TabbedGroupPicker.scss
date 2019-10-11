@@ -62,6 +62,10 @@
       border-right: 1px solid $light;
       justify-content: space-between;
 
+      .clear-all-button {
+        margin-bottom: .5em;
+      }
+
       novo-nav {
         overflow: auto;
 
