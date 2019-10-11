@@ -31,6 +31,8 @@ export type TabbedGroupPickerQuickSelect = {
   all?: boolean;
 };
 
+export type QuickSelectConfig = { label: string; items: TabbedGroupPickerQuickSelect[] };
+
 @Component({
   selector: 'novo-tabbed-group-picker',
   templateUrl: './TabbedGroupPicker.html',
@@ -44,7 +46,7 @@ export class NovoTabbedGroupPickerElement implements OnInit, AfterViewInit {
     label: string;
   };
   @Input() schemata: TabbedGroupPickerSchema[];
-  @Input() quickSelectConfig: { label: string; items: TabbedGroupPickerQuickSelect[] };
+  @Input() quickSelectConfig: QuickSelectConfig;
 
   @Input() title: string = 'tabbed-group-picker'; // need unique information in order to find scroll container from scroll dispatcher
   displaySchemata: TabbedGroupPickerSchema[];
