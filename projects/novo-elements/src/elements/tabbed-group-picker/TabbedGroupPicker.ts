@@ -125,7 +125,9 @@ export class NovoTabbedGroupPickerElement implements OnInit, AfterViewInit {
   }
 
   setupDisplayData(): void {
-    this.displaySchemata = this.schemata;
+    // shallow copy here so that reassigning displaySchemata[i].data doesn't mutate schemata[i].data
+    // but both data values point to the same items
+    this.displaySchemata = this.schemata.map((schema) => ({...schema}));
     this.displaySchema = this.schemata[0];
   }
 
@@ -218,9 +220,9 @@ export class NovoTabbedGroupPickerElement implements OnInit, AfterViewInit {
     } else {
       return this.schemata.some((schema) => {
         if ((schema as ParentSchema).childTypeName) {
-          return schema.data.some(({selected, indeterminate}) => selected || indeterminate);
+          return schema.data.some(({ selected, indeterminate }) => selected || indeterminate);
         } else {
-          return schema.data.some(({selected}) => selected);
+          return schema.data.some(({ selected }) => selected);
         }
       });
     }
@@ -305,10 +307,12 @@ export class NovoTabbedGroupPickerElement implements OnInit, AfterViewInit {
   }
 
   filter = (searchTerm: string) => {
-    this.displaySchemata = this.schemata.map(({ data, ...schema }: TabbedGroupPickerSchema) => ({
-      ...schema,
-      data: data && data.filter((item) => item[schema.labelField].toLowerCase().includes(searchTerm.toLowerCase())),
-    }));
+    this.displaySchemata.forEach(
+      (displaySchema, i) =>
+        (displaySchema.data = this.schemata[i].data.filter((item) =>
+          item[displaySchema.labelField].toLowerCase().includes(searchTerm.toLowerCase()),
+        )),
+    );
     this.ref.markForCheck();
   };
 }

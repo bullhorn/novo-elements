@@ -56,7 +56,7 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
     });
     it('should activate the first item in the input schemata array', () => {
       component.ngOnInit();
-      expect(component.displaySchema).toBe(firstSchema);
+      expect(component.displaySchema).toEqual(firstSchema);
     });
     it('should stop loading', () => {
       component.ngOnInit();
@@ -96,6 +96,7 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
     it('should filter large datasets in a reasonable amount of time', () => {
       const amountOfTimeInMillisecondsThatIndicatesAGrosslyInefficientAlgorithm = 1000;
       component.schemata = buildBigDataset() as TabbedGroupPickerSchema[];
+      component.ngOnInit();
 
       const start = performance.now();
       component.filter('asdfasdf');
