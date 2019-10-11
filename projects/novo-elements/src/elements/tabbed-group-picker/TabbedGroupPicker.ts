@@ -53,7 +53,7 @@ export class NovoTabbedGroupPickerElement implements OnInit, AfterViewInit {
 
   @Output() selectionChange: EventEmitter<any> = new EventEmitter<any>();
 
-  displaySchemaIndex: number;
+  displaySchemaIndex: number = 0;
   scrollableInstance: CdkScrollable;
 
   get displaySchema(): TabbedGroupPickerSchema {
@@ -89,10 +89,6 @@ export class NovoTabbedGroupPickerElement implements OnInit, AfterViewInit {
     this.scrollableInstance = [...this.scrollDispatch.scrollContainers.keys()].find((scrollable) =>
       scrollable.getElementRef().nativeElement.classList.contains(this.title),
     );
-
-    for (let [scrollable, subscription] of this.scrollDispatch.scrollContainers.entries()) {
-      console.log(scrollable);
-    }
   }
 
   changeTab(schema: TabbedGroupPickerSchema) {
