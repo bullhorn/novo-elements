@@ -57,6 +57,9 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
     it('should activate the first item in the input schemata array', () => {
       component.ngOnInit();
       expect(component.displaySchema).toEqual(firstSchema);
+      // these should be identical but should NOT be the same object or else the filter function
+      // will permanently remove data from the component (for the life of the component at least).
+      expect(component.displaySchema).not.toBe(firstSchema);
     });
     it('should stop loading', () => {
       component.ngOnInit();
