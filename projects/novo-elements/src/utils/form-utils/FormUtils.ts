@@ -35,6 +35,7 @@ export class FormUtils {
     'Candidate',
     'ClientContact',
     'ClientCorporation',
+    'CorporationDepartment',
     'Lead',
     'Opportunity',
     'JobOrder',
