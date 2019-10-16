@@ -83,6 +83,8 @@ export class NovoTabbedGroupPickerElement implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.setupDisplayData();
     this.createChildrenReferences();
+    this.checkQuickSelectState();
+    this.updateClearAll();
 
     this.loading = false;
     this.filterText.pipe(debounceTime(300)).subscribe({
@@ -173,6 +175,16 @@ export class NovoTabbedGroupPickerElement implements OnInit, AfterViewInit {
     }
   }
 
+  checkQuickSelectState() {
+    if (this.quickSelectConfig && this.quickSelectConfig.items && this.quickSelectConfig.items.length) {
+      this.quickSelectConfig.items.forEach(quickSelect => {
+        if (quickSelect.children && quickSelect.children.length) {
+          quickSelect.selected = quickSelect.children.every((child) => typeof child === 'number' ? false : child.selected);
+        }
+      });
+    }
+  }
+
   makeCompareFunction<T>(key: string): (a: T | { [key: string]: T }, b: { [key: string]: T }) => 1 | -1 | 0 | undefined {
     return (a: T | { [key: string]: T }, b: { [key: string]: T }) => {
       const value: T = (a && a[key]) || a;
@@ -211,31 +223,28 @@ export class NovoTabbedGroupPickerElement implements OnInit, AfterViewInit {
     if (Array.isArray(item.children)) {
       this.updateChildren(item.selected, item.children);
     }
-    this.updateParents();
+    this.updateParentsAndQuickSelect();
     this.updateClearAll(item.selected);
     this.emitSelectedValues();
     this.ref.markForCheck();
   }
 
   updateClearAll(itemWasJustSelected?: boolean) {
-    if (itemWasJustSelected) {
-      this.showClearAll = true;
-    } else {
-      return this.schemata.some((schema) => {
+    this.showClearAll = itemWasJustSelected ? true :
+      this.schemata.some((schema) => {
         if ((schema as ParentSchema).childTypeName) {
           return schema.data.some(({ selected, indeterminate }) => selected || indeterminate);
         } else {
           return schema.data.some(({ selected }) => selected);
         }
       });
-    }
   }
 
   updateChildren(parentIsSelected: boolean, children: { selected?: boolean }[]): void {
     children.forEach((item) => (parentIsSelected ? (item.selected = true) : delete item.selected));
   }
 
-  updateParents(): void {
+  updateParentsAndQuickSelect(): void {
     // mutate here to avoid dereferencing the objects in displaySchemata
     this.schemata
       .filter((schema) => 'childTypeName' in schema && !!schema.childTypeName)
@@ -298,6 +307,8 @@ export class NovoTabbedGroupPickerElement implements OnInit, AfterViewInit {
         (schema as ChildSchema).data.forEach((item) => delete item.selected);
       }
     });
+    this.emitSelectedValues();
+    this.ref.markForCheck();
   }
 
   onClearFilter(event) {

@@ -138,7 +138,7 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
       expect(childOfAllosaurus).toBe(chicken);
     });
   });
-  describe('function: updateParents', () => {
+  describe('function: updateParentsAndQuickSelect', () => {
     it('should set parents to selected if their only child is selected', () => {
       component.schemata = [
         getChickenSchema(),
@@ -163,7 +163,7 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
       const parent = component.schemata[1].data[0];
       expect(parent.selected).toEqual(undefined);
 
-      component.updateParents();
+      component.updateParentsAndQuickSelect();
 
       expect(parent.selected).toEqual(true);
     });
@@ -190,7 +190,7 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
       const parent = component.schemata[1].data[0];
       expect(parent.selected).toEqual(true);
 
-      component.updateParents();
+      component.updateParentsAndQuickSelect();
 
       expect(parent.selected).toEqual(undefined);
     });
@@ -222,7 +222,7 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
       const parent = dinosaurSchema.data[0];
       expect(parent.selected).toEqual(true);
 
-      component.updateParents();
+      component.updateParentsAndQuickSelect();
 
       expect(parent.selected).toEqual(undefined);
       expect(parent.indeterminate).toEqual(true);
@@ -245,7 +245,7 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
       expect(result).toEqual(undefined);
     });
   });
-  describe('function: updateParents', () => {
+  describe('function: updateParentsAndQuickSelect', () => {
     it('should select each item in the quick select group', () => {
       const data = [{ id: 1, name: 'chicken', selected: true }, { id: 2, name: 'goldfish' }];
       const quickSelectItem: TabbedGroupPickerQuickSelect = { childTypeName: 'animals', children: [1], label: 'chicken' };
@@ -266,7 +266,7 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
       component.createChildrenReferences();
       expect(quickSelectItem.selected).toEqual(undefined);
 
-      component.updateParents();
+      component.updateParentsAndQuickSelect();
 
       expect(quickSelectItem.selected).toEqual(true);
     });
