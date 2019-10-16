@@ -26,7 +26,7 @@ export class DataTableState<T> {
   updates: EventEmitter<IDataTableChangeEvent> = new EventEmitter<IDataTableChangeEvent>();
 
   get userFiltered(): boolean {
-    return !!(this.filter || this.sort || this.globalSearch || this.outsideFilter);
+    return !!(this.filter || this.sort || this.globalSearch);
   }
 
   get selected(): T[] {

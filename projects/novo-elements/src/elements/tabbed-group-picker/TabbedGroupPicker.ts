@@ -12,6 +12,7 @@ export type TabbedGroupPickerSchema = {
   labelField: string;
   scrollOffset?: number;
 } & (ParentSchema | ChildSchema);
+
 export type ParentSchema = {
   childTypeName: string;
   data: Array<ParentOption>;
@@ -22,12 +23,16 @@ type ParentOption = {
   indeterminate?: boolean;
   children: Array<{ selected?: boolean }>;
 } & { [key: string]: any };
-export type ChildSchema = { data: Array<{ selected?: boolean } & { [key: string]: any }> };
+
+export type ChildSchema = {
+  data: Array<{ selected?: boolean
+} & { [key: string]: any }> };
+
 export type TabbedGroupPickerQuickSelect = {
   label: string;
   selected?: boolean;
   childTypeName?: string;
-  children?: (({ selected?: boolean } & object) | (number))[];
+  children?: (({ selected?: boolean } & { [key: string]: any }) | (number))[];
   all?: boolean;
 };
 
