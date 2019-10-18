@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.14.0"></a>
+# [3.14.0](https://github.com/bullhorn/novo-elements/compare/v3.13.0...v3.14.0) (2019-10-11)
+
+
+### Features
+
+* **dateCellLabels:** Use novo label service instead of built in angular date pipe ([#1046](https://github.com/bullhorn/novo-elements/issues/1046)) ([bf9db91](https://github.com/bullhorn/novo-elements/commit/bf9db91))
+
+
+
 <a name="3.13.0"></a>
 # [3.13.0](https://github.com/bullhorn/novo-elements/compare/v2.13.0...v3.13.0) (2019-09-13)
 
