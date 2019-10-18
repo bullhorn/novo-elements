@@ -17315,85 +17315,35 @@ class FormUtils {
         /** @type {?} */
         let fieldsets = [];
         /** @type {?} */
-        let ranges = [];
+        let formFields = [];
         if (meta && meta.fields) {
-            /** @type {?} */
-            let fields = meta.fields
-                .map((field) => {
-                if (!field.hasOwnProperty('sortOrder')) {
-                    field.sortOrder = Number.MAX_SAFE_INTEGER - 1;
-                }
-                return field;
-            })
-                .sort(Helpers.sortByField(['sortOrder', 'name']));
-            if (meta.sectionHeaders && meta.sectionHeaders.length) {
-                meta.sectionHeaders.sort(Helpers.sortByField(['sortOrder', 'name']));
-                meta.sectionHeaders.forEach((item, i) => {
-                    if (item.enabled) {
-                        if (item.sortOrder > 0 && fieldsets.length === 0) {
-                            fieldsets.push({
-                                controls: [],
-                            });
-                            ranges.push({
-                                min: 0,
-                                max: item.sortOrder - 1,
-                                fieldsetIdx: 0,
-                            });
-                        }
-                        fieldsets.push({
-                            title: item.label,
-                            icon: item.icon || 'bhi-section',
-                            controls: [],
-                        });
-                        ranges.push({
-                            min: item.sortOrder,
-                            max: Number.MAX_SAFE_INTEGER,
-                            fieldsetIdx: fieldsets.length - 1,
-                        });
-                        if (i > 0 && fieldsets.length > 1) {
-                            ranges[fieldsets.length - 2].max = item.sortOrder - 1;
-                        }
+            formFields = this.getFormFields(meta);
+            formFields.forEach((field) => {
+                if (this.isHeader(field)) {
+                    if (field.enabled) {
+                        this.insertHeaderToFieldsets(fieldsets, field);
                     }
-                });
-                if (!ranges.length) {
-                    fieldsets.push({
-                        controls: [],
-                    });
-                    ranges.push({
-                        min: 0,
-                        max: Number.MAX_SAFE_INTEGER,
-                        fieldsetIdx: 0,
+                }
+                else if (this.isEmbeddedField(field)) {
+                    this.insertHeaderToFieldsets(fieldsets, field);
+                    /** @type {?} */
+                    let embeddedFields = this.getEmbeddedFields(field);
+                    embeddedFields.forEach((embeddedField) => {
+                        if (this.shouldCreateControl(embeddedField)) {
+                            /** @type {?} */
+                            let control = this.createControl(embeddedField, data, http, config, overrides, currencyFormat);
+                            control = this.markControlAsEmbedded(control);
+                            fieldsets[fieldsets.length - 1].controls.push(control);
+                        }
                     });
                 }
-            }
-            else {
-                fieldsets.push({
-                    controls: [],
-                });
-                ranges.push({
-                    min: 0,
-                    max: Number.MAX_SAFE_INTEGER,
-                    fieldsetIdx: 0,
-                });
-            }
-            fields.forEach((field) => {
-                if (this.shouldCreateControl(field)) {
+                else if (this.shouldCreateControl(field)) {
                     /** @type {?} */
-                    const fieldData = data && data[field.name] ? data[field.name] : null;
-                    /** @type {?} */
-                    let control = this.getControlForField(field, http, config, overrides, undefined, fieldData);
-                    // Set currency format
-                    if (control.subType === 'currency') {
-                        control.currencyFormat = currencyFormat;
+                    let control = this.createControl(field, data, http, config, overrides, currencyFormat);
+                    if (fieldsets.length === 0) {
+                        fieldsets.push({ controls: [] });
                     }
-                    /** @type {?} */
-                    let location = ranges.find((item) => {
-                        return (item.min <= field.sortOrder && field.sortOrder <= item.max) || (item.min <= field.sortOrder && item.min === item.max);
-                    });
-                    if (location) {
-                        // Add to controls
-                        fieldsets[location.fieldsetIdx].controls.push(control);
-                    }
+                    fieldsets[fieldsets.length - 1].controls.push(control);
                 }
             });
         }
@@ -17407,6 +17357,132 @@ class FormUtils {
                 },
             ];
         }
+    }
+    /**
+     * @private
+     * @param {?} field
+     * @return {?}
+     */
+    isEmbeddedField(field) {
+        return field.dataSpecialization && field.dataSpecialization.toLowerCase() === 'embedded' && !field.readOnly;
+    }
+    /**
+     * @private
+     * @param {?} field
+     * @param {?} data
+     * @param {?} http
+     * @param {?} config
+     * @param {?} overrides
+     * @param {?} currencyFormat
+     * @return {?}
+     */
+    createControl(field, data, http, config, overrides, currencyFormat) {
+        /** @type {?} */
+        const fieldData = this.isEmbeddedFieldData(field, data) ? this.getEmbeddedFieldData(field, data) : this.getFieldData(field, data);
+        /** @type {?} */
+        let control = this.getControlForField(field, http, config, overrides, undefined, fieldData);
+        // Set currency format
+        if (control.subType === 'currency') {
+            control.currencyFormat = currencyFormat;
+        }
+        return control;
+    }
+    /**
+     * @private
+     * @param {?} field
+     * @param {?} data
+     * @return {?}
+     */
+    isEmbeddedFieldData(field, data) {
+        return data && field.name.includes('.');
+    }
+    /**
+     * @private
+     * @param {?} field
+     * @param {?} data
+     * @return {?}
+     */
+    getFieldData(field, data) {
+        return (data && data[field.name]) || null;
+    }
+    /**
+     * @private
+     * @param {?} field
+     * @param {?} data
+     * @return {?}
+     */
+    getEmbeddedFieldData(field, data) {
+        let [parentFieldName, fieldName] = field.name.split('.');
+        return (data && data[parentFieldName] && data[parentFieldName][fieldName]) || null;
+    }
+    /**
+     * @private
+     * @param {?} meta
+     * @return {?}
+     */
+    getFormFields(meta) {
+        /** @type {?} */
+        let sectionHeaders = meta.sectionHeaders
+            ? meta.sectionHeaders.map((element) => {
+                element.isSectionHeader = true;
+                return element;
+            })
+            : [];
+        /** @type {?} */
+        let fields = meta.fields.map((field) => {
+            if (!field.hasOwnProperty('sortOrder')) {
+                field.sortOrder = Number.MAX_SAFE_INTEGER - 1;
+            }
+            return field;
+        });
+        return [...sectionHeaders, ...fields].sort(Helpers.sortByField(['sortOrder', 'name']));
+    }
+    /**
+     * @private
+     * @param {?} subHeader
+     * @return {?}
+     */
+    getEmbeddedFields(subHeader) {
+        return subHeader.associatedEntity.fields
+            .filter((field) => field.name !== 'id')
+            .map((field) => {
+            field.name = `${subHeader.name}.${field.name}`;
+            return field;
+        })
+            .sort(Helpers.sortByField(['sortOrder', 'name']));
+    }
+    /**
+     * @private
+     * @param {?} field
+     * @return {?}
+     */
+    isHeader(field) {
+        return !Helpers.isBlank(field) && field.hasOwnProperty('isSectionHeader') && field.isSectionHeader;
+    }
+    /**
+     * @private
+     * @param {?} fieldsets
+     * @param {?} field
+     * @return {?}
+     */
+    insertHeaderToFieldsets(fieldsets, field) {
+        fieldsets.push({
+            title: field.label,
+            icon: field.icon || 'bhi-section',
+            controls: [],
+        });
+    }
+    /**
+     * @private
+     * @param {?} control
+     * @return {?}
+     */
+    markControlAsEmbedded(control) {
+        if (Helpers.isBlank(control['config'])) {
+            control['config'] = {};
+        }
+        control['config']['embedded'] = true;
+        return control;
     }
     /**
      * @param {?} field
