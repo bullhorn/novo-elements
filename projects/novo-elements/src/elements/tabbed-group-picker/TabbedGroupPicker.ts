@@ -219,14 +219,23 @@ export class NovoTabbedGroupPickerElement implements OnInit, AfterViewInit {
     };
   }
 
-  onItemToggled(item: { selected?: boolean; children?: Array<{ selected?: boolean }> }) {
+  onItemToggled(item: { selected?: boolean; children?: Array<{ selected?: boolean, children?: Array<{ selected?: boolean }> }> }) {
     if (Array.isArray(item.children)) {
-      this.updateChildren(item.selected, item.children);
+      this.updateDescendants(item.selected, item.children);
     }
     this.updateParentsAndQuickSelect();
     this.updateClearAll(item.selected);
     this.emitSelectedValues();
     this.ref.markForCheck();
+  }
+
+  updateDescendants(parentIsSelected: boolean, children: Array<{ selected?: boolean, children?: Array<{ selected?: boolean }> }>): void {
+    children.forEach((item) => {
+      parentIsSelected ? (item.selected = true) : delete item.selected;
+      if (Array.isArray(item.children)) {
+        this.updateDescendants(item.selected, item.children);
+      }
+    });
   }
 
   updateClearAll(itemWasJustSelected?: boolean) {
@@ -240,10 +249,6 @@ export class NovoTabbedGroupPickerElement implements OnInit, AfterViewInit {
       });
   }
 
-  updateChildren(parentIsSelected: boolean, children: { selected?: boolean }[]): void {
-    children.forEach((item) => (parentIsSelected ? (item.selected = true) : delete item.selected));
-  }
-
   updateParentsAndQuickSelect(): void {
     // mutate here to avoid dereferencing the objects in displaySchemata
     this.schemata
@@ -252,7 +257,7 @@ export class NovoTabbedGroupPickerElement implements OnInit, AfterViewInit {
         const parents = schema.data.filter(({ children }: { children?: any[] }) => children && children.length);
 
         parents.forEach((parent: { children?: { selected?: boolean }[] }) => {
-          ['indeterminate', 'selected'].forEach((v) => delete parent[v]);
+          ['indeterminate', 'selected'].forEach((selectedStateOption) => delete parent[selectedStateOption]);
 
           const selectedState = this.getSelectedState(parent.children);
           if (selectedState) {
