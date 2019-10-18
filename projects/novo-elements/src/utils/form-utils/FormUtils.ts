@@ -505,80 +505,36 @@ export class FormUtils {
     data?: { [key: string]: any },
   ) {
     let fieldsets: Array<NovoFieldset> = [];
-    let ranges = [];
+    let formFields = [];
+
     if (meta && meta.fields) {
-      let fields = meta.fields
-        .map((field) => {
-          if (!field.hasOwnProperty('sortOrder')) {
-            field.sortOrder = Number.MAX_SAFE_INTEGER - 1;
+      formFields = this.getFormFields(meta);
+
+      formFields.forEach((field) => {
+        if (this.isHeader(field)) {
+          if (field.enabled) {
+            this.insertHeaderToFieldsets(fieldsets, field);
           }
-          return field;
-        })
-        .sort(Helpers.sortByField(['sortOrder', 'name']));
-      if (meta.sectionHeaders && meta.sectionHeaders.length) {
-        meta.sectionHeaders.sort(Helpers.sortByField(['sortOrder', 'name']));
-        meta.sectionHeaders.forEach((item, i) => {
-          if (item.enabled) {
-            if (item.sortOrder > 0 && fieldsets.length === 0) {
-              fieldsets.push({
-                controls: [],
-              });
-              ranges.push({
-                min: 0,
-                max: item.sortOrder - 1,
-                fieldsetIdx: 0,
-              });
+        } else if (this.isEmbeddedField(field)) {
+          this.insertHeaderToFieldsets(fieldsets, field);
+
+          let embeddedFields = this.getEmbeddedFields(field);
+
+          embeddedFields.forEach((embeddedField) => {
+            if (this.shouldCreateControl(embeddedField)) {
+              let control = this.createControl(embeddedField, data, http, config, overrides, currencyFormat);
+              control = this.markControlAsEmbedded(control);
+              fieldsets[fieldsets.length - 1].controls.push(control);
             }
-            fieldsets.push({
-              title: item.label,
-              icon: item.icon || 'bhi-section',
-              controls: [],
-            });
-            ranges.push({
-              min: item.sortOrder,
-              max: Number.MAX_SAFE_INTEGER,
-              fieldsetIdx: fieldsets.length - 1,
-            });
-            if (i > 0 && fieldsets.length > 1) {
-              ranges[fieldsets.length - 2].max = item.sortOrder - 1;
-            }
-          }
-        });
-        if (!ranges.length) {
-          fieldsets.push({
-            controls: [],
           });
-          ranges.push({
-            min: 0,
-            max: Number.MAX_SAFE_INTEGER,
-            fieldsetIdx: 0,
-          });
-        }
-      } else {
-        fieldsets.push({
-          controls: [],
-        });
-        ranges.push({
-          min: 0,
-          max: Number.MAX_SAFE_INTEGER,
-          fieldsetIdx: 0,
-        });
-      }
-      fields.forEach((field) => {
-        if (this.shouldCreateControl(field)) {
-          const fieldData: any = data && data[field.name] ? data[field.name] : null;
-          let control = this.getControlForField(field, http, config, overrides, undefined, fieldData);
-          // Set currency format
-          if (control.subType === 'currency') {
-            control.currencyFormat = currencyFormat;
+        } else if (this.shouldCreateControl(field)) {
+          let control = this.createControl(field, data, http, config, overrides, currencyFormat);
+
+          if (fieldsets.length === 0) {
+            fieldsets.push({ controls: [] });
           }
-          let location = ranges.find((item) => {
-            return (item.min <= field.sortOrder && field.sortOrder <= item.max) || (item.min <= field.sortOrder && item.min === item.max);
-          });
-          if (location) {
-            // Add to controls
-            fieldsets[location.fieldsetIdx].controls.push(control);
-          }
+
+          fieldsets[fieldsets.length - 1].controls.push(control);
         }
       });
     }
@@ -591,6 +547,81 @@ export class FormUtils {
         },
       ];
     }
+  }
+
+  private isEmbeddedField(field) {
+    return field.dataSpecialization && field.dataSpecialization.toLowerCase() === 'embedded' && !field.readOnly;
+  }
+
+  private createControl(field, data, http, config, overrides, currencyFormat) {
+    const fieldData = this.isEmbeddedFieldData(field, data) ? this.getEmbeddedFieldData(field, data) : this.getFieldData(field, data);
+    let control = this.getControlForField(field, http, config, overrides, undefined, fieldData);
+    // Set currency format
+    if (control.subType === 'currency') {
+      control.currencyFormat = currencyFormat;
+    }
+    return control;
+  }
+
+  private isEmbeddedFieldData(field, data) {
+    return data && field.name.includes('.');
+  }
+
+  private getFieldData(field, data) {
+    return (data && data[field.name]) || null;
+  }
+
+  private getEmbeddedFieldData(field, data) {
+    let [parentFieldName, fieldName] = field.name.split('.');
+    return (data && data[parentFieldName] && data[parentFieldName][fieldName]) || null;
+  }
+
+  private getFormFields(meta) {
+    let sectionHeaders = meta.sectionHeaders
+      ? meta.sectionHeaders.map((element) => {
+          element.isSectionHeader = true;
+          return element;
+        })
+      : [];
+
+    let fields = meta.fields.map((field) => {
+      if (!field.hasOwnProperty('sortOrder')) {
+        field.sortOrder = Number.MAX_SAFE_INTEGER - 1;
+      }
+      return field;
+    });
+
+    return [...sectionHeaders, ...fields].sort(Helpers.sortByField(['sortOrder', 'name']));
+  }
+
+  private getEmbeddedFields(subHeader) {
+    return subHeader.associatedEntity.fields
+      .filter((field) => field.name !== 'id')
+      .map((field) => {
+        field.name = `${subHeader.name}.${field.name}`;
+        return field;
+      })
+      .sort(Helpers.sortByField(['sortOrder', 'name']));
+  }
+
+  private isHeader(field): boolean {
+    return !Helpers.isBlank(field) && field.hasOwnProperty('isSectionHeader') && field.isSectionHeader;
+  }
+
+  private insertHeaderToFieldsets(fieldsets, field) {
+    fieldsets.push({
+      title: field.label,
+      icon: field.icon || 'bhi-section',
+      controls: [],
+    });
+  }
+
+  private markControlAsEmbedded(control) {
+    if (Helpers.isBlank(control['config'])) {
+      control['config'] = {};
+    }
+    control['config']['embedded'] = true;
+    return control;
   }
 
   getControlOptions(field: any, http: any, config: { token?: string; restUrl?: string; military?: boolean }, fieldData?: any): any {
