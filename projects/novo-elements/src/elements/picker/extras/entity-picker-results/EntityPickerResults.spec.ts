@@ -61,6 +61,9 @@ describe('Elements: EntityPickerResult', () => {
     it('should return the right icon name for Placement', () => {
       expect(component.getIconForResult({ searchEntity: 'Placement' })).toBe('star placement');
     });
+    it('should return the right icon name for CorporationDepartment', () => {
+      expect(component.getIconForResult({ searchEntity: 'CorporationDepartment' })).toBe('department');
+    });
     it('should return empty string for unrecognized entity names', () => {
       expect(component.getIconForResult({ searchEntity: 'Unknown' })).toBe('');
     });
