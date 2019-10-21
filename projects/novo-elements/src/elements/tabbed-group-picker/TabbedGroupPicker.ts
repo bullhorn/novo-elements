@@ -61,6 +61,12 @@ export class NovoTabbedGroupPickerElement implements OnInit, AfterViewInit {
   displaySchemaIndex: number = 0;
   scrollableInstance: CdkScrollable;
 
+  filterText: BehaviorSubject<string> = new BehaviorSubject('');
+
+  loading = true;
+
+  showClearAll: boolean = false;
+
   get displaySchema(): TabbedGroupPickerSchema {
     return this.displaySchemata[this.displaySchemaIndex];
   }
@@ -72,18 +78,33 @@ export class NovoTabbedGroupPickerElement implements OnInit, AfterViewInit {
     return `virtual-scroll-viewport ${this.title}`;
   }
 
-  filterText: BehaviorSubject<string> = new BehaviorSubject('');
+  get virtualScrollItemSize() {
+    const em = 3.1; // this corresponds to TabbedGroupPicker.scss .tabbed-group-picker-column-container.tabbed-group-picker-column &.right novo-list-item.height
+    const defaultFontSize = 16; // fingers crossed
+    const element = document.getElementById('tabbed-group-picker-viewport');
+    const emSizeInPixels = element ? this.getEmSize(element) : defaultFontSize;
+    return em * emSizeInPixels;
+  }
 
-  loading = true;
+  get minBufferPx() {
+    const em = 27; // this corresponds to the height of the list;
+    const defaultFontSize = 16;
+    const element = document.getElementById('tabbed-group-picker-viewport');
+    const emSizeInPixels = element ? this.getEmSize(element) : defaultFontSize;
+    return 3 * em * emSizeInPixels;
+  }
 
-  showClearAll: boolean = false;
+  get maxBufferPx() {
+    return 2 * this.minBufferPx;
+  }
 
   constructor(public labelService: NovoLabelService, public scrollDispatch: ScrollDispatcher, private ref: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     this.setupDisplayData();
     this.createChildrenReferences();
-    this.checkQuickSelectState();
+    this.updateAllDescendants();
+    this.updateParentsAndQuickSelect();
     this.updateClearAll();
 
     this.loading = false;
@@ -106,25 +127,6 @@ export class NovoTabbedGroupPickerElement implements OnInit, AfterViewInit {
     this.scrollableInstance.scrollTo(options);
   }
 
-  get virtualScrollItemSize() {
-    const em = 3.1; // this corresponds to TabbedGroupPicker.scss .tabbed-group-picker-column-container.tabbed-group-picker-column &.right novo-list-item.height
-    const defaultFontSize = 16; // fingers crossed
-    const element = document.getElementById('tabbed-group-picker-viewport');
-    const emSizeInPixels = element ? this.getEmSize(element) : defaultFontSize;
-    return em * emSizeInPixels;
-  }
-
-  get minBufferPx() {
-    const em = 27; // this corresponds to the height of the list;
-    const defaultFontSize = 16;
-    const element = document.getElementById('tabbed-group-picker-viewport');
-    const emSizeInPixels = element ? this.getEmSize(element) : defaultFontSize;
-    return 3 * em * emSizeInPixels;
-  }
-
-  get maxBufferPx() {
-    return 2 * this.minBufferPx;
-  }
   getEmSize(el: HTMLElement) {
     return Number(getComputedStyle(el, '').fontSize.match(/(\d+(\.\d+)?)px$/)[1]);
   }
@@ -175,25 +177,16 @@ export class NovoTabbedGroupPickerElement implements OnInit, AfterViewInit {
     }
   }
 
-  checkQuickSelectState() {
-    if (this.quickSelectConfig && this.quickSelectConfig.items && this.quickSelectConfig.items.length) {
-      this.quickSelectConfig.items.forEach(quickSelect => {
-        if (quickSelect.children && quickSelect.children.length) {
-          quickSelect.selected = quickSelect.children.every((child) => typeof child === 'number' ? false : child.selected);
-        }
-      });
-    }
-  }
+  makeCompareFunction<T>(key: string): (a: T | { [key: string]: T }, b: T | { [key: string]: T }) => 1 | -1 | 0 | undefined {
+    return (a: T | { [key: string]: T }, b: T | { [key: string]: T }) => {
+      const aValue: T = (a && a[key]) || a;
+      const bValue: T = (b && b[key]) || b;
 
-  makeCompareFunction<T>(key: string): (a: T | { [key: string]: T }, b: { [key: string]: T }) => 1 | -1 | 0 | undefined {
-    return (a: T | { [key: string]: T }, b: { [key: string]: T }) => {
-      const value: T = (a && a[key]) || a;
-
-      if (value < b[key]) {
+      if (aValue < bValue) {
         return -1;
-      } else if (value > b[key]) {
+      } else if (aValue > bValue) {
         return 1;
-      } else if (value === b[key]) {
+      } else if (aValue === bValue) {
         return 0;
       } else {
         return undefined;
@@ -227,6 +220,16 @@ export class NovoTabbedGroupPickerElement implements OnInit, AfterViewInit {
     this.updateClearAll(item.selected);
     this.emitSelectedValues();
     this.ref.markForCheck();
+  }
+
+  updateAllDescendants() {
+    this.schemata.forEach((schema) => {
+      if ('childTypeName' in schema && schema.data && schema.data.length) {
+        schema.data.forEach(parent => {
+          this.updateDescendants(parent.selected, parent.children);
+        });
+      }
+    });
   }
 
   updateDescendants(parentIsSelected: boolean, children: Array<{ selected?: boolean, children?: Array<{ selected?: boolean }> }>): void {
