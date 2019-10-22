@@ -25,8 +25,8 @@ type ParentOption = {
 } & { [key: string]: any };
 
 export type ChildSchema = {
-  data: Array<{ selected?: boolean
-} & { [key: string]: any }> };
+  data: Array<{ selected?: boolean } & { [key: string]: any }>;
+};
 
 export type TabbedGroupPickerQuickSelect = {
   label: string;
@@ -103,7 +103,7 @@ export class NovoTabbedGroupPickerElement implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.setupDisplayData();
     this.createChildrenReferences();
-    this.updateAllDescendants();
+    this.initializeDescendantSelection();
     this.updateParentsAndQuickSelect();
     this.updateClearAll();
 
@@ -134,7 +134,7 @@ export class NovoTabbedGroupPickerElement implements OnInit, AfterViewInit {
   setupDisplayData(): void {
     // shallow copy here so that reassigning displaySchemata[i].data doesn't mutate schemata[i].data
     // but both data values point to the same items
-    this.displaySchemata = this.schemata.map((schema) => ({...schema}));
+    this.displaySchemata = this.schemata.map((schema) => ({ ...schema }));
     this.displaySchema = this.schemata[0];
   }
 
@@ -212,7 +212,7 @@ export class NovoTabbedGroupPickerElement implements OnInit, AfterViewInit {
     };
   }
 
-  onItemToggled(item: { selected?: boolean; children?: Array<{ selected?: boolean, children?: Array<{ selected?: boolean }> }> }) {
+  onItemToggled(item: { selected?: boolean; children?: Array<{ selected?: boolean; children?: Array<{ selected?: boolean }> }> }) {
     if (Array.isArray(item.children)) {
       this.updateDescendants(item.selected, item.children);
     }
@@ -222,17 +222,21 @@ export class NovoTabbedGroupPickerElement implements OnInit, AfterViewInit {
     this.ref.markForCheck();
   }
 
-  updateAllDescendants() {
+  initializeDescendantSelection() {
     this.schemata.forEach((schema) => {
       if ('childTypeName' in schema && schema.data && schema.data.length) {
-        schema.data.forEach(parent => {
-          this.updateDescendants(parent.selected, parent.children);
+        schema.data.forEach((parent) => {
+          if (parent.selected && parent.children && parent.children.length) {
+            parent.children.forEach((child) => {
+              child.selected = true;
+            });
+          }
         });
       }
     });
   }
 
-  updateDescendants(parentIsSelected: boolean, children: Array<{ selected?: boolean, children?: Array<{ selected?: boolean }> }>): void {
+  updateDescendants(parentIsSelected: boolean, children: Array<{ selected?: boolean; children?: Array<{ selected?: boolean }> }>): void {
     children.forEach((item) => {
       parentIsSelected ? (item.selected = true) : delete item.selected;
       if (Array.isArray(item.children)) {
@@ -242,14 +246,15 @@ export class NovoTabbedGroupPickerElement implements OnInit, AfterViewInit {
   }
 
   updateClearAll(itemWasJustSelected?: boolean) {
-    this.showClearAll = itemWasJustSelected ? true :
-      this.schemata.some((schema) => {
-        if ((schema as ParentSchema).childTypeName) {
-          return schema.data.some(({ selected, indeterminate }) => selected || indeterminate);
-        } else {
-          return schema.data.some(({ selected }) => selected);
-        }
-      });
+    this.showClearAll = itemWasJustSelected
+      ? true
+      : this.schemata.some((schema) => {
+          if ((schema as ParentSchema).childTypeName) {
+            return schema.data.some(({ selected, indeterminate }) => selected || indeterminate);
+          } else {
+            return schema.data.some(({ selected }) => selected);
+          }
+        });
   }
 
   updateParentsAndQuickSelect(): void {
