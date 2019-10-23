@@ -13,6 +13,9 @@ export class NovoFormGroup extends FormGroup {
   public currentEntityId: string;
   public associations: object;
   public _value: any;
+  public controls: {
+    [key: string]: NovoFormControl;
+  };
 
   get value() {
     return this.getRawValue();
@@ -24,8 +27,8 @@ export class NovoFormGroup extends FormGroup {
 
   public enableAllControls(): void {
     for (let key in this.controls) {
-      if ((this.controls[key] as NovoFormControl).readOnly) {
-        (this.controls[key] as NovoFormControl).readOnly = false;
+      if (this.controls[key].readOnly) {
+        this.controls[key].readOnly = false;
         this.controls[key].enable();
       }
     }
@@ -33,8 +36,8 @@ export class NovoFormGroup extends FormGroup {
 
   public disableAllControls(): void {
     for (let key in this.controls) {
-      if (!(this.controls[key] as NovoFormControl).readOnly) {
-        (this.controls[key] as NovoFormControl).readOnly = true;
+      if (!this.controls[key].readOnly) {
+        this.controls[key].readOnly = true;
         this.controls[key].disable();
       }
     }
