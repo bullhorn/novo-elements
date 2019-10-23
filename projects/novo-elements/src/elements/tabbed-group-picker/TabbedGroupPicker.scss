@@ -79,6 +79,16 @@
             justify-content: space-between;
             align-items: center;
           }
+          &.active {
+            .novo-tab-link {
+              font-weight: 400;
+            }
+          }
+          &:hover {
+            .novo-tab-link {
+              font-weight: 400;
+            }
+          }
         }
       }
     }
