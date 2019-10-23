@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { TabbedGroupPickerSchema, ChildSchema, ParentSchema } from 'dist/novo-elements/elements/tabbed-group-picker/TabbedGroupPicker';
+import { TabbedGroupPickerTab, ChildTab, ParentTab } from 'dist/novo-elements/elements/tabbed-group-picker/TabbedGroupPicker';
 
 /**
  * @title Tabbed Group Picker - Groups Example
@@ -33,7 +33,7 @@ export class TabbedGroupPickerGroupsExample {
       },
     ];
   };
-  example_schema = [
+  example_tab = [
     {
       typeName: 'animals',
       typeLabel: 'Animals',
@@ -83,11 +83,11 @@ export class TabbedGroupPickerGroupsExample {
   selectedAnimals: string[] = [];
   selectedAnimalCategories: string[] = [];
 
-  onSelectionChange(selectedData: TabbedGroupPickerSchema[]) {
-    this.selectedAnimals = (selectedData.find(({ typeName }) => typeName === 'animals') as ChildSchema).data.map(
+  onSelectionChange(selectedData: TabbedGroupPickerTab[]) {
+    this.selectedAnimals = (selectedData.find(({ typeName }) => typeName === 'animals') as ChildTab).data.map(
       ({ animalId }) => animalId,
     );
-    this.selectedAnimalCategories = (selectedData.find(({ typeName }) => typeName === 'animalCategories') as ParentSchema).data.map(
+    this.selectedAnimalCategories = (selectedData.find(({ typeName }) => typeName === 'animalCategories') as ParentTab).data.map(
       ({ groupId }) => groupId,
     );
     this.example_buttonConfig.label = this.buildButtonLabel();

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { TabbedGroupPickerSchema, ChildSchema } from 'dist/novo-elements/elements/tabbed-group-picker/TabbedGroupPicker';
+import { TabbedGroupPickerTab, ChildTab } from 'dist/novo-elements/elements/tabbed-group-picker/TabbedGroupPicker';
 
 /**
  * @title Tabbed Group Picker - Quick Select Example
@@ -15,7 +15,7 @@ export class TabbedGroupPickerQuickSelectExample {
       name,
       animalId: index + 1,
     }));
-  public example_schema = [
+  public example_tab = [
     {
       typeName: 'animals',
       typeLabel: 'Animals',
@@ -56,8 +56,8 @@ export class TabbedGroupPickerQuickSelectExample {
 
   public selectedAnimals: string[] = [];
 
-  onSelectionChange(selectedData: TabbedGroupPickerSchema[]) {
-    this.selectedAnimals = (selectedData.find(({ typeName }) => typeName === 'animals') as ChildSchema).data.map(
+  onSelectionChange(selectedData: TabbedGroupPickerTab[]) {
+    this.selectedAnimals = (selectedData.find(({ typeName }) => typeName === 'animals') as ChildTab).data.map(
       ({ animalId }: { animalId: string }) => animalId,
     );
     this.example_buttonConfig.label = this.buildButtonLabel();

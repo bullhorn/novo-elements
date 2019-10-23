@@ -16,8 +16,8 @@
   <div class="tabbed-group-picker-column-container">
     <div class="tabbed-group-picker-column left">
       <novo-nav theme="white" direction="vertical">
-        <novo-tab *ngFor="let schema of displaySchemata" [attr.data-automation-id]="schema.typeName" (activeChange)="changeTab(schema)">
-          <span>{{ schema.typeLabel }} ({{ schema.data.length }})</span><i class="bhi-next"></i>
+        <novo-tab *ngFor="let tab of displayTabs" [attr.data-automation-id]="tab.typeName" (activeChange)="changeTab(tab)">
+          <span>{{ tab.typeLabel }} ({{ tab.data.length }})</span><i class="bhi-next"></i>
         </novo-tab>
       </novo-nav>
       <button *ngIf="showClearAll" class="clear-all-button" theme="dialogue" icon="times" side="right" color="grapefruit" (click)="deselectEverything($event)">{{ labelService.clear }}</button>
@@ -42,7 +42,7 @@
           </novo-list-item>
         </novo-list>
       </div>
-      <novo-list *ngIf="schemata[displaySchemaIndex].data.length" direction="vertical">
+      <novo-list *ngIf="tabs[displayTabIndex].data.length" direction="vertical">
         <cdk-virtual-scroll-viewport
           [itemSize]="virtualScrollItemSize"
           [maxBufferPx]="maxBufferPx"
@@ -50,13 +50,13 @@
           [class]="viewportClass"
         >
           <novo-list-item
-            *cdkVirtualFor="let item of displaySchema.data"
-            [attr.data-automation-id]="item[displaySchema.labelField]"
+            *cdkVirtualFor="let item of displayTab.data"
+            [attr.data-automation-id]="item[displayTab.labelField]"
             (click)="item.selected = !item.selected; onItemToggled(item)"
           >
             <item-content>
               <novo-checkbox
-                [label]="item[displaySchema.labelField]"
+                [label]="item[displayTab.labelField]"
                 [name]="'selected'"
                 [indeterminate]="item.indeterminate"
                 [(ngModel)]="item.selected"
@@ -67,12 +67,10 @@
           </novo-list-item>
         </cdk-virtual-scroll-viewport>
       </novo-list>
-      <!-- TODO: add empty result message for no data in the case of no search -->
-      <div class="novo-category-dropdown-empty-item" *ngIf="!displaySchema.data.length && (filterText | async)">
-        <!-- TODO: add bhi-users icon if parent-child relationship-->
-        <i class="bhi-user"></i>
+      <div class="novo-category-dropdown-empty-item" *ngIf="!displayTab.data.length && (filterText | async)">
+        <i class="{{ emptyStateIcon }}"></i>
         <div class="empty-item-main-message">{{ labelService.tabbedGroupPickerEmpty }}</div>
-        <div class="empty-item-sub-message">{{ labelService.tabbedGroupClearSuggestion(this.displaySchema.typeLabel) }}</div>
+        <div class="empty-item-sub-message">{{ labelService.tabbedGroupClearSuggestion(displayTab.typeLabel) }}</div>
       </div>
     </div>
   </div>

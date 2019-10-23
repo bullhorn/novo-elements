@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { TabbedGroupPickerSchema, ChildSchema, ParentSchema } from 'dist/novo-elements/elements/tabbed-group-picker/TabbedGroupPicker';
+import { TabbedGroupPickerTab, ChildTab, ParentTab } from 'dist/novo-elements/elements/tabbed-group-picker/TabbedGroupPicker';
 
 /**
  * @title Tabbed Group Picker - Big Groups Example
@@ -18,7 +18,7 @@ export class TabbedGroupPickerBigGroupsExample {
       .map((value, index) => index + 2)
       .some((divisor) => number % divisor === 0);
   }
-  example_schema = [
+  example_tab = [
     {
       typeName: 'integers',
       typeLabel: 'Integers',
@@ -83,10 +83,10 @@ export class TabbedGroupPickerBigGroupsExample {
 
   selectedIntegers: string[] = [];
 
-  onSelectionChange(selectedData: TabbedGroupPickerSchema[]) {
-    this.selectedIntegers = (selectedData.find(({ typeName }) => typeName === 'integers') as ChildSchema).data.map(({ value }) => value);
-    this.selectedDivisibles = (selectedData.find(({ typeName }) => typeName === 'divisibles') as ParentSchema).data.map(({ v }) => v);
-    this.selectedPrimeFactorizations = (selectedData.find(({ typeName }) => typeName === 'prime factorization') as ParentSchema).data.map(
+  onSelectionChange(selectedData: TabbedGroupPickerTab[]) {
+    this.selectedIntegers = (selectedData.find(({ typeName }) => typeName === 'integers') as ChildTab).data.map(({ value }) => value);
+    this.selectedDivisibles = (selectedData.find(({ typeName }) => typeName === 'divisibles') as ParentTab).data.map(({ v }) => v);
+    this.selectedPrimeFactorizations = (selectedData.find(({ typeName }) => typeName === 'prime factorization') as ParentTab).data.map(
       ({ v }) => v,
     );
     this.example_buttonConfig.label = this.buildButtonLabel();

@@ -5,15 +5,15 @@ import { Helpers, binarySearch } from '../../utils/Helpers';
 import { NovoLabelService } from '../../services/novo-label-service';
 import { ScrollDispatcher, CdkScrollable, ExtendedScrollToOptions } from '@angular/cdk/scrolling';
 
-export type TabbedGroupPickerSchema = {
+export type TabbedGroupPickerTab = {
   typeName: string;
   typeLabel: string;
   valueField: string;
   labelField: string;
   scrollOffset?: number;
-} & (ParentSchema | ChildSchema);
+} & (ParentTab | ChildTab);
 
-export type ParentSchema = {
+export type ParentTab = {
   childTypeName: string;
   data: Array<ParentOption>;
 };
@@ -24,7 +24,7 @@ type ParentOption = {
   children: Array<{ selected?: boolean }>;
 } & { [key: string]: any };
 
-export type ChildSchema = {
+export type ChildTab = {
   data: Array<{ selected?: boolean } & { [key: string]: any }>;
 };
 
@@ -50,28 +50,27 @@ export class NovoTabbedGroupPickerElement implements OnInit, AfterViewInit {
     icon: string;
     label: string;
   };
-  @Input() schemata: TabbedGroupPickerSchema[];
+  @Input() emptyStateIcon: string = 'bhi-user';
+  @Input() tabs: TabbedGroupPickerTab[];
   @Input() quickSelectConfig: QuickSelectConfig;
-
   @Input() title: string = 'tabbed-group-picker'; // need unique information in order to find scroll container from scroll dispatcher
-  displaySchemata: TabbedGroupPickerSchema[];
 
   @Output() selectionChange: EventEmitter<any> = new EventEmitter<any>();
 
-  displaySchemaIndex: number = 0;
+  displayTabs: TabbedGroupPickerTab[];
+  displayTabIndex: number = 0;
   scrollableInstance: CdkScrollable;
-
   filterText: BehaviorSubject<string> = new BehaviorSubject('');
-
   loading = true;
-
   showClearAll: boolean = false;
 
-  get displaySchema(): TabbedGroupPickerSchema {
-    return this.displaySchemata[this.displaySchemaIndex];
+  constructor(public labelService: NovoLabelService, public scrollDispatch: ScrollDispatcher, private ref: ChangeDetectorRef) {}
+
+  get displayTab(): TabbedGroupPickerTab {
+    return this.displayTabs[this.displayTabIndex];
   }
-  set displaySchema(schema: TabbedGroupPickerSchema) {
-    this.displaySchemaIndex = this.schemata.map(({ typeName }) => typeName).indexOf(schema.typeName);
+  set displayTab(tab: TabbedGroupPickerTab) {
+    this.displayTabIndex = this.tabs.map(({ typeName }) => typeName).indexOf(tab.typeName);
   }
 
   get viewportClass(): string {
@@ -80,7 +79,7 @@ export class NovoTabbedGroupPickerElement implements OnInit, AfterViewInit {
 
   get virtualScrollItemSize() {
     const em = 3.1; // this corresponds to TabbedGroupPicker.scss .tabbed-group-picker-column-container.tabbed-group-picker-column &.right novo-list-item.height
-    const defaultFontSize = 16; // fingers crossed
+    const defaultFontSize = 16;
     const element = document.getElementById('tabbed-group-picker-viewport');
     const emSizeInPixels = element ? this.getEmSize(element) : defaultFontSize;
     return em * emSizeInPixels;
@@ -97,8 +96,6 @@ export class NovoTabbedGroupPickerElement implements OnInit, AfterViewInit {
   get maxBufferPx() {
     return 2 * this.minBufferPx;
   }
-
-  constructor(public labelService: NovoLabelService, public scrollDispatch: ScrollDispatcher, private ref: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     this.setupDisplayData();
@@ -119,10 +116,10 @@ export class NovoTabbedGroupPickerElement implements OnInit, AfterViewInit {
     );
   }
 
-  changeTab(schema: TabbedGroupPickerSchema) {
-    this.schemata[this.displaySchemaIndex].scrollOffset = this.scrollableInstance.measureScrollOffset('top');
-    this.displaySchema = schema;
-    const offset = this.schemata[this.displaySchemaIndex].scrollOffset || 0;
+  changeTab(tab: TabbedGroupPickerTab) {
+    this.tabs[this.displayTabIndex].scrollOffset = this.scrollableInstance.measureScrollOffset('top');
+    this.displayTab = tab;
+    const offset = this.tabs[this.displayTabIndex].scrollOffset || 0;
     const options: ExtendedScrollToOptions = { behavior: 'auto', top: offset };
     this.scrollableInstance.scrollTo(options);
   }
@@ -132,25 +129,25 @@ export class NovoTabbedGroupPickerElement implements OnInit, AfterViewInit {
   }
 
   setupDisplayData(): void {
-    // shallow copy here so that reassigning displaySchemata[i].data doesn't mutate schemata[i].data
+    // shallow copy here so that reassigning displayTabs[i].data doesn't mutate tabs[i].data
     // but both data values point to the same items
-    this.displaySchemata = this.schemata.map((schema) => ({ ...schema }));
-    this.displaySchema = this.schemata[0];
+    this.displayTabs = this.tabs.map((tab) => ({ ...tab }));
+    this.displayTab = this.tabs[0];
   }
 
   // Replace each parent's child object with a reference to the child to avoid
   // a child lookup for selected status; linking references allows M x N
   // time complexity instead of M x N^2
   createChildrenReferences(): void {
-    this.schemata.forEach((schema) => {
+    this.tabs.forEach((tab) => {
       // would rather filter but TypeScript still wants a type narrowing here
-      if ('childTypeName' in schema) {
-        const childSchema = this.schemata.find(({ typeName }) => typeName === schema.childTypeName);
-        const compareFunction = this.makeCompareFunction(childSchema.valueField);
-        const warnFunction = this.makeWarningFunction(schema.typeName, childSchema.typeName, childSchema.valueField);
-        const sortedChildren = childSchema.data.slice().sort(compareFunction);
+      if ('childTypeName' in tab) {
+        const childTab = this.tabs.find(({ typeName }) => typeName === tab.childTypeName);
+        const compareFunction = this.makeCompareFunction(childTab.valueField);
+        const warnFunction = this.makeWarningFunction(tab.typeName, childTab.typeName, childTab.valueField);
+        const sortedChildren = childTab.data.slice().sort(compareFunction);
 
-        schema.data
+        tab.data
           .filter(({ children }) => children && children.length)
           .forEach((parent: { children?: any[] }) =>
             this.replaceChildrenWithReferences(parent as ParentOption, sortedChildren, compareFunction, warnFunction),
@@ -161,16 +158,16 @@ export class NovoTabbedGroupPickerElement implements OnInit, AfterViewInit {
       this.quickSelectConfig.items
         .filter((parent) => 'all' in parent)
         .forEach((parent) => {
-          parent.children = this.schemata.find(({ typeName }) => parent.childTypeName === typeName).data;
+          parent.children = this.tabs.find(({ typeName }) => parent.childTypeName === typeName).data;
         });
 
       this.quickSelectConfig.items
         .filter((parent) => !('all' in parent))
         .forEach((parent) => {
-          const childSchema = this.schemata.find(({ typeName }) => typeName === parent.childTypeName);
-          const compareFunction = this.makeCompareFunction(childSchema.valueField);
-          const warnFunction = this.makeWarningFunction(parent.label, childSchema.typeName, childSchema.valueField);
-          const sortedChildren = childSchema.data.slice().sort(compareFunction);
+          const childTab = this.tabs.find(({ typeName }) => typeName === parent.childTypeName);
+          const compareFunction = this.makeCompareFunction(childTab.valueField);
+          const warnFunction = this.makeWarningFunction(parent.label, childTab.typeName, childTab.valueField);
+          const sortedChildren = childTab.data.slice().sort(compareFunction);
 
           this.replaceChildrenWithReferences(parent as ParentOption, sortedChildren, compareFunction, warnFunction);
         });
@@ -196,7 +193,7 @@ export class NovoTabbedGroupPickerElement implements OnInit, AfterViewInit {
 
   replaceChildrenWithReferences(
     parent: { children: any[] },
-    sortedData: ChildSchema['data'],
+    sortedData: ChildTab['data'],
     compareFunction: (a, b) => 1 | -1 | 0,
     warnFunction: (child) => void,
   ): void {
@@ -223,9 +220,9 @@ export class NovoTabbedGroupPickerElement implements OnInit, AfterViewInit {
   }
 
   initializeDescendantSelection() {
-    this.schemata.forEach((schema) => {
-      if ('childTypeName' in schema && schema.data && schema.data.length) {
-        schema.data.forEach((parent) => {
+    this.tabs.forEach((tab) => {
+      if ('childTypeName' in tab && tab.data && tab.data.length) {
+        tab.data.forEach((parent) => {
           if (parent.selected && parent.children && parent.children.length) {
             parent.children.forEach((child) => {
               child.selected = true;
@@ -248,21 +245,21 @@ export class NovoTabbedGroupPickerElement implements OnInit, AfterViewInit {
   updateClearAll(itemWasJustSelected?: boolean) {
     this.showClearAll = itemWasJustSelected
       ? true
-      : this.schemata.some((schema) => {
-          if ((schema as ParentSchema).childTypeName) {
-            return schema.data.some(({ selected, indeterminate }) => selected || indeterminate);
+      : this.tabs.some((tab) => {
+          if ((tab as ParentTab).childTypeName) {
+            return tab.data.some(({ selected, indeterminate }) => selected || indeterminate);
           } else {
-            return schema.data.some(({ selected }) => selected);
+            return tab.data.some(({ selected }) => selected);
           }
         });
   }
 
   updateParentsAndQuickSelect(): void {
-    // mutate here to avoid dereferencing the objects in displaySchemata
-    this.schemata
-      .filter((schema) => 'childTypeName' in schema && !!schema.childTypeName)
-      .forEach((schema) => {
-        const parents = schema.data.filter(({ children }: { children?: any[] }) => children && children.length);
+    // mutate here to avoid dereferencing the objects in displayTabs
+    this.tabs
+      .filter((tab) => 'childTypeName' in tab && !!tab.childTypeName)
+      .forEach((tab) => {
+        const parents = tab.data.filter(({ children }: { children?: any[] }) => children && children.length);
 
         parents.forEach((parent: { children?: { selected?: boolean }[] }) => {
           ['indeterminate', 'selected'].forEach((selectedStateOption) => delete parent[selectedStateOption]);
@@ -277,7 +274,7 @@ export class NovoTabbedGroupPickerElement implements OnInit, AfterViewInit {
     if (this.quickSelectConfig) {
       this.quickSelectConfig.items.forEach((quickSelect) => {
         delete quickSelect.selected;
-        const selectedState = this.getSelectedState(quickSelect.children as ({ selected?: boolean } & object)[]);
+        const selectedState = this.getSelectedState(quickSelect.children as ({ selected?: boolean } & { [key: string]: any })[]);
         if (selectedState) {
           quickSelect[selectedState] = true;
         }
@@ -294,9 +291,9 @@ export class NovoTabbedGroupPickerElement implements OnInit, AfterViewInit {
   };
 
   emitSelectedValues() {
-    const selectedValues: TabbedGroupPickerSchema[] = this.schemata.map((schema) => ({
-      ...schema,
-      data: schema.data.filter(({ selected }) => selected),
+    const selectedValues: TabbedGroupPickerTab[] = this.tabs.map((tab) => ({
+      ...tab,
+      data: tab.data.filter(({ selected }) => selected),
     }));
     this.selectionChange.emit(selectedValues);
   }
@@ -309,15 +306,15 @@ export class NovoTabbedGroupPickerElement implements OnInit, AfterViewInit {
         delete quickSelect.selected;
       });
     }
-    this.schemata.forEach((schema) => {
-      if ((schema as ParentSchema).childTypeName) {
-        schema.data.forEach((item) => {
+    this.tabs.forEach((tab) => {
+      if ((tab as ParentTab).childTypeName) {
+        tab.data.forEach((item) => {
           delete item.selected;
           delete item.indeterminate;
           item.children.forEach((child) => delete child.selected);
         });
       } else {
-        (schema as ChildSchema).data.forEach((item) => delete item.selected);
+        (tab as ChildTab).data.forEach((item) => delete item.selected);
       }
     });
     this.emitSelectedValues();
@@ -334,10 +331,10 @@ export class NovoTabbedGroupPickerElement implements OnInit, AfterViewInit {
   }
 
   filter = (searchTerm: string) => {
-    this.displaySchemata.forEach(
-      (displaySchema, i) =>
-        (displaySchema.data = this.schemata[i].data.filter((item) =>
-          item[displaySchema.labelField].toLowerCase().includes(searchTerm.toLowerCase()),
+    this.displayTabs.forEach(
+      (displayTab, i) =>
+        (displayTab.data = this.tabs[i].data.filter((item) =>
+          item[displayTab.labelField].toLowerCase().includes(searchTerm.toLowerCase()),
         )),
     );
     this.ref.markForCheck();
