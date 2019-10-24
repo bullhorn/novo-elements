@@ -83,10 +83,18 @@
             .novo-tab-link {
               font-weight: 400;
             }
+            &:hover {
+              .novo-tab-link {
+                font-weight: 400;
+                color: $positive;
+              }
+            }
           }
           &:hover {
             .novo-tab-link {
               font-weight: 400;
+              color: $black;
+              opacity: 1;
             }
           }
         }
