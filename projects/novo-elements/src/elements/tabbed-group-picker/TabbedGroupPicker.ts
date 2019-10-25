@@ -38,18 +38,20 @@ export type TabbedGroupPickerQuickSelect = {
 
 export type QuickSelectConfig = { label: string; items: TabbedGroupPickerQuickSelect[] };
 
+export type TabbedGroupPickerButtonConfig = {
+  theme: string;
+  side: string;
+  icon: string;
+  label: string;
+};
+
 @Component({
   selector: 'novo-tabbed-group-picker',
   templateUrl: './TabbedGroupPicker.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NovoTabbedGroupPickerElement implements OnInit, AfterViewInit {
-  @Input() buttonConfig: {
-    theme: string;
-    side: string;
-    icon: string;
-    label: string;
-  };
+  @Input() buttonConfig: TabbedGroupPickerButtonConfig;
   @Input() emptyStateIcon: string = 'bhi-user';
   @Input() tabs: TabbedGroupPickerTab[];
   @Input() quickSelectConfig: QuickSelectConfig;
