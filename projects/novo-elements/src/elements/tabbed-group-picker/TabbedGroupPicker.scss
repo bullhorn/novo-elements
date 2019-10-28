@@ -10,7 +10,7 @@
   }
 }
 
-.novo-category-dropdown-search {
+.tabbed-group-picker-search {
   width: 100%;
   padding: 0.5em;
   border-bottom: 0.1em solid #ccc;
@@ -23,15 +23,14 @@
     outline: none;
     height: 2rem;
     width: 95%;
-    margin: 0;
+    margin: 0 0 0 1em;
     padding: 0;
     box-shadow: none;
     box-sizing: content-box;
     transition: all 300ms;
-    color: #26282b;
-    margin-left: 1em;
+    color: $dark;
     &::-webkit-input-placeholder {
-      color: #aaaaaa;
+      color: $grey;
     }
   }
   i.bhi-search,
@@ -39,7 +38,7 @@
     position: absolute;
     bottom: 1em;
     right: 0.5em;
-    color: #aaaaaa;
+    color: $grey;
     font-size: 1em;
     margin-right: 1em;
   }
@@ -102,62 +101,72 @@
     }
 
     &.right {
-      novo-list {
-        height: 100%;
-      }
       display: block;
       width: 23em;
-      overflow: auto;
-
-      .virtual-scroll-viewport {
-        height: 27em;
-      }
+      overflow: hidden;
 
       .quick-select {
         font-weight: 500;
 
         .quick-select-label {
           padding: 0.7em 1.9em 0 1.9em;
-          background: rgba(0, 0, 0, 0.05);
+          background: lighten($light, 10%);
           text-transform: uppercase;
           font-size: 0.8em;
         }
 
-        novo-list {
-          novo-list-item {
-            background: rgba(0, 0, 0, 0.05);
-            padding-bottom: 0.5em;
-            height: 2.3em;
-            min-height: 2.3em;
+        .quick-select-list {
+          .quick-select-item {
+            background: lighten($light, 10%);
+            padding: 0.5em 1.75em;
+            border-bottom: none;
+          }
+          novo-list-item:last-of-type {
+            padding-bottom: 1em;
+          }
+        }
+      }
+      novo-list {
+        height: 100%;
 
-            &:last-of-type {
-              padding-bottom: 1em;
-              height: 3.1em;
-              min-height: 3.1em;
+        cdk-virtual-scroll-viewport {
+          height: 27em;
+          overflow-x: hidden;
+
+          novo-list-item {
+            padding: 0.75em 1.75em;
+            cursor: pointer;
+            border-bottom: none;
+            align-items: center;
+
+            &:focus,
+            &:hover {
+              background: lighten($light, 10%);
+              color: darken($light, 55%);
+            }
+
+            novo-checkbox .check-box-group label span {
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              width: 17em;
             }
           }
         }
       }
 
-      .novo-category-dropdown-empty-item {
+      .tabbed-group-picker-empty-item {
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
         color: $grey;
         width: 100%;
-        height: 100%;
+        height: 27em;
 
         i {
           padding-bottom: 0.2em;
-
-          &.bhi-users {
-            font-size: 3em;
-          }
-          &.bhi-user {
-            font-size: 2em;
-            margin-bottom: 0.5em;
-          }
+          font-size: 3em;
         }
         .empty-item-main-message {
           font-weight: 500;
@@ -165,32 +174,6 @@
         }
         .empty-item-sub-message {
           font-size: 0.9em;
-        }
-      }
-
-      novo-list-item {
-        padding: 0.75em 1.75em;
-        height: 3.1em;
-        min-height: 3.1em;
-        cursor: pointer;
-        font-size: 0.9em;
-        border-bottom: none;
-        align-items: center;
-
-        &:focus,
-        &:hover {
-          background: lighten($light, 10%);
-          color: darken($light, 55%);
-
-          .novo-category-dropdown-hover {
-            display: block;
-          }
-        }
-
-        novo-checkbox .check-box-group label span {
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
         }
       }
     }

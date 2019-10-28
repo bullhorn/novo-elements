@@ -3,7 +3,7 @@ import { BehaviorSubject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { Helpers, binarySearch } from '../../utils/Helpers';
 import { NovoLabelService } from '../../services/novo-label-service';
-import { ScrollDispatcher, CdkScrollable, ExtendedScrollToOptions } from '@angular/cdk/scrolling';
+import { ScrollDispatcher, CdkScrollable } from '@angular/cdk/scrolling';
 
 export type TabbedGroupPickerTab = {
   typeName: string;
@@ -11,6 +11,7 @@ export type TabbedGroupPickerTab = {
   valueField: string;
   labelField: string;
   scrollOffset?: number;
+  icon?: string;
 } & (ParentTab | ChildTab);
 
 export type ParentTab = {
@@ -52,7 +53,6 @@ export type TabbedGroupPickerButtonConfig = {
 })
 export class NovoTabbedGroupPickerElement implements OnInit, AfterViewInit {
   @Input() buttonConfig: TabbedGroupPickerButtonConfig;
-  @Input() emptyStateIcon: string = 'bhi-user';
   @Input() tabs: TabbedGroupPickerTab[];
   @Input() quickSelectConfig: QuickSelectConfig;
   @Input() title: string = 'tabbed-group-picker'; // need unique information in order to find scroll container from scroll dispatcher
@@ -80,7 +80,7 @@ export class NovoTabbedGroupPickerElement implements OnInit, AfterViewInit {
   }
 
   get virtualScrollItemSize() {
-    const em = 3.1; // this corresponds to TabbedGroupPicker.scss .tabbed-group-picker-column-container.tabbed-group-picker-column &.right novo-list-item.height
+    const em = 2.3; // this corresponds to TabbedGroupPicker.scss .tabbed-group-picker-column-container.tabbed-group-picker-column &.right novo-list-item.height
     const defaultFontSize = 16;
     const element = document.getElementById('tabbed-group-picker-viewport');
     const emSizeInPixels = element ? this.getEmSize(element) : defaultFontSize;
@@ -119,11 +119,8 @@ export class NovoTabbedGroupPickerElement implements OnInit, AfterViewInit {
   }
 
   changeTab(tab: TabbedGroupPickerTab) {
-    this.tabs[this.displayTabIndex].scrollOffset = this.scrollableInstance.measureScrollOffset('top');
     this.displayTab = tab;
-    const offset = this.tabs[this.displayTabIndex].scrollOffset || 0;
-    const options: ExtendedScrollToOptions = { behavior: 'auto', top: offset };
-    this.scrollableInstance.scrollTo(options);
+    this.scrollableInstance.scrollTo({ behavior: 'auto', top: 0 });
   }
 
   getEmSize(el: HTMLElement) {

@@ -8,7 +8,7 @@
   >
     <div class="tabbed-group-picker-button-label">{{ buttonConfig.label }}</div>
   </button>
-  <div class="novo-category-dropdown-search" data-automation-id="novo-category-dropdown-search">
+  <div class="tabbed-group-picker-search" data-automation-id="tabbed-group-picker-search">
     <input type="text" [placeholder]="labelService.search" [value]="filterText | async" (input)="onFilter($event)" />
     <i class="bhi-search" *ngIf="!(filterText | async)"></i>
     <i class="bhi-times" *ngIf="(filterText | async)" (click)="onClearFilter($event)"></i>
@@ -25,8 +25,9 @@
     <div class="tabbed-group-picker-column right">
       <div class="quick-select" *ngIf="quickSelectConfig && !(filterText | async)">
         <div class="quick-select-label">{{ quickSelectConfig.label }}</div>
-        <novo-list direction="vertical">
+        <novo-list class="quick-select-list" direction="vertical">
           <novo-list-item
+            class="quick-select-item"
             *ngFor="let quickSelect of quickSelectConfig.items"
             [attr.data-automation-id]="quickSelect.label"
             (click)="quickSelect.selected = !quickSelect.selected; onItemToggled(quickSelect)"
@@ -42,7 +43,7 @@
           </novo-list-item>
         </novo-list>
       </div>
-      <novo-list *ngIf="tabs[displayTabIndex].data.length" direction="vertical">
+      <novo-list *ngIf="displayTab.data.length" direction="vertical">
         <cdk-virtual-scroll-viewport
           [itemSize]="virtualScrollItemSize"
           [maxBufferPx]="maxBufferPx"
@@ -67,8 +68,8 @@
           </novo-list-item>
         </cdk-virtual-scroll-viewport>
       </novo-list>
-      <div class="novo-category-dropdown-empty-item" *ngIf="!displayTab.data.length && (filterText | async)">
-        <i class="{{ emptyStateIcon }}"></i>
+      <div class="tabbed-group-picker-empty-item" *ngIf="!displayTab.data.length && (filterText | async)">
+        <i class="{{ displayTab.icon || 'bhi-search' }}"></i>
         <div class="empty-item-main-message">{{ labelService.tabbedGroupPickerEmpty }}</div>
         <div class="empty-item-sub-message">{{ labelService.tabbedGroupClearSuggestion(displayTab.typeLabel) }}</div>
       </div>
