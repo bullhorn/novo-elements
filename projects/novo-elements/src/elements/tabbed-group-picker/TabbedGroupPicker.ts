@@ -1,9 +1,19 @@
-import { Component, EventEmitter, Input, OnInit, Output, ChangeDetectionStrategy, ChangeDetectorRef, AfterViewInit } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  AfterViewInit,
+  ViewChild
+} from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { Helpers, binarySearch } from '../../utils/Helpers';
 import { NovoLabelService } from '../../services/novo-label-service';
-import { ScrollDispatcher, CdkScrollable } from '@angular/cdk/scrolling';
+import { CdkScrollable } from '@angular/cdk/scrolling';
 
 export type TabbedGroupPickerTab = {
   typeName: string;
@@ -52,10 +62,12 @@ export type TabbedGroupPickerButtonConfig = {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NovoTabbedGroupPickerElement implements OnInit, AfterViewInit {
+  @ViewChild('tabbedGroupPickerVirtualScrollViewport')
+  private scrollViewport: CdkScrollable;
+
   @Input() buttonConfig: TabbedGroupPickerButtonConfig;
   @Input() tabs: TabbedGroupPickerTab[];
   @Input() quickSelectConfig: QuickSelectConfig;
-  @Input() title: string = 'tabbed-group-picker'; // need unique information in order to find scroll container from scroll dispatcher
 
   @Output() selectionChange: EventEmitter<any> = new EventEmitter<any>();
 
@@ -66,7 +78,12 @@ export class NovoTabbedGroupPickerElement implements OnInit, AfterViewInit {
   loading = true;
   showClearAll: boolean = false;
 
-  constructor(public labelService: NovoLabelService, public scrollDispatch: ScrollDispatcher, private ref: ChangeDetectorRef) {}
+  // Initial height based on 13 px font rendered in chrome. Actual height retrieved onDropdownToggled.
+  scrollViewportHeight: number = 351;
+  virtualScrollItemSize: number = 39;
+
+  constructor(public labelService: NovoLabelService,
+              private ref: ChangeDetectorRef) {}
 
   get displayTab(): TabbedGroupPickerTab {
     return this.displayTabs[this.displayTabIndex];
@@ -75,28 +92,12 @@ export class NovoTabbedGroupPickerElement implements OnInit, AfterViewInit {
     this.displayTabIndex = this.tabs.map(({ typeName }) => typeName).indexOf(tab.typeName);
   }
 
-  get viewportClass(): string {
-    return `virtual-scroll-viewport ${this.title}`;
-  }
-
-  get virtualScrollItemSize() {
-    const em = 2.3; // this corresponds to TabbedGroupPicker.scss .tabbed-group-picker-column-container.tabbed-group-picker-column &.right novo-list-item.height
-    const defaultFontSize = 16;
-    const element = document.getElementById('tabbed-group-picker-viewport');
-    const emSizeInPixels = element ? this.getEmSize(element) : defaultFontSize;
-    return em * emSizeInPixels;
-  }
-
   get minBufferPx() {
-    const em = 27; // this corresponds to the height of the list;
-    const defaultFontSize = 16;
-    const element = document.getElementById('tabbed-group-picker-viewport');
-    const emSizeInPixels = element ? this.getEmSize(element) : defaultFontSize;
-    return 3 * em * emSizeInPixels;
+    return this.scrollViewportHeight; // render at least 2x the number of items visible (viewport + min buffer)
   }
 
   get maxBufferPx() {
-    return 2 * this.minBufferPx;
+    return 2 * this.scrollViewportHeight; // render at most 3x the number of items visible (viewport + max buffer)
   }
 
   ngOnInit(): void {
@@ -113,9 +114,7 @@ export class NovoTabbedGroupPickerElement implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.scrollableInstance = [...this.scrollDispatch.scrollContainers.keys()].find((scrollable) =>
-      scrollable.getElementRef().nativeElement.classList.contains(this.title),
-    );
+    this.scrollableInstance = this.scrollViewport;
   }
 
   changeTab(tab: TabbedGroupPickerTab) {
@@ -123,8 +122,8 @@ export class NovoTabbedGroupPickerElement implements OnInit, AfterViewInit {
     this.scrollableInstance.scrollTo({ behavior: 'auto', top: 0 });
   }
 
-  getEmSize(el: HTMLElement) {
-    return Number(getComputedStyle(el, '').fontSize.match(/(\d+(\.\d+)?)px$/)[1]);
+  getPixelHeight(element: HTMLElement) {
+    return Number(getComputedStyle(element, '').height.match(/(\d+(\.\d+)?)px$/)[1]);
   }
 
   setupDisplayData(): void {
@@ -206,6 +205,13 @@ export class NovoTabbedGroupPickerElement implements OnInit, AfterViewInit {
       const childValue = child[childValueField] || child;
       console.warn(`No ${childLabel} found with value ${childValue} for parent ${parentLabel}`);
     };
+  }
+
+  onDropdownToggle(event) {
+    if (event) {
+      this.scrollViewportHeight = this.getPixelHeight(this.scrollableInstance.getElementRef().nativeElement);
+      this.virtualScrollItemSize = this.getPixelHeight(this.scrollableInstance.getElementRef().nativeElement.querySelector('novo-list-item'));
+    }
   }
 
   onItemToggled(item: { selected?: boolean; children?: Array<{ selected?: boolean; children?: Array<{ selected?: boolean }> }> }) {

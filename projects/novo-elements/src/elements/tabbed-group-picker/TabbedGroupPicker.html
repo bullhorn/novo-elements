@@ -1,4 +1,4 @@
-<novo-dropdown>
+<novo-dropdown (toggled)="onDropdownToggle($event)">
   <button
     class="tabbed-group-picker-button"
     [theme]="buttonConfig.theme"
@@ -48,7 +48,7 @@
           [itemSize]="virtualScrollItemSize"
           [maxBufferPx]="maxBufferPx"
           [minBufferPx]="minBufferPx"
-          [class]="viewportClass"
+          #tabbedGroupPickerVirtualScrollViewport
         >
           <novo-list-item
             *cdkVirtualFor="let item of displayTab.data"
