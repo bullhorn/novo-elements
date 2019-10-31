@@ -6,10 +6,10 @@ import {
   Output,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
-  AfterViewInit,
-  ViewChild
+  ViewChild,
+  OnDestroy,
 } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { Helpers, binarySearch } from '../../utils/Helpers';
 import { NovoLabelService } from '../../services/novo-label-service';
@@ -61,9 +61,9 @@ export type TabbedGroupPickerButtonConfig = {
   templateUrl: './TabbedGroupPicker.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NovoTabbedGroupPickerElement implements OnInit, AfterViewInit {
+export class NovoTabbedGroupPickerElement implements OnDestroy, OnInit {
   @ViewChild('tabbedGroupPickerVirtualScrollViewport')
-  private scrollViewport: CdkScrollable;
+  private scrollableInstance: CdkScrollable;
 
   @Input() buttonConfig: TabbedGroupPickerButtonConfig;
   @Input() tabs: TabbedGroupPickerTab[];
@@ -73,8 +73,10 @@ export class NovoTabbedGroupPickerElement implements OnInit, AfterViewInit {
 
   displayTabs: TabbedGroupPickerTab[];
   displayTabIndex: number = 0;
-  scrollableInstance: CdkScrollable;
+
   filterText: BehaviorSubject<string> = new BehaviorSubject('');
+  filterTextSubscription: Subscription;
+
   loading = true;
   showClearAll: boolean = false;
 
@@ -108,13 +110,15 @@ export class NovoTabbedGroupPickerElement implements OnInit, AfterViewInit {
     this.updateClearAll();
 
     this.loading = false;
-    this.filterText.pipe(debounceTime(300)).subscribe({
+    this.filterTextSubscription = this.filterText.pipe(debounceTime(300)).subscribe({
       next: this.filter,
     });
   }
 
-  ngAfterViewInit(): void {
-    this.scrollableInstance = this.scrollViewport;
+  ngOnDestroy(): void {
+    if (this.filterTextSubscription) {
+      this.filterTextSubscription.unsubscribe();
+    }
   }
 
   changeTab(tab: TabbedGroupPickerTab) {
