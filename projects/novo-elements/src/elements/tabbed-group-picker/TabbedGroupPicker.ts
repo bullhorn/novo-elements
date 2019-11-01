@@ -123,7 +123,9 @@ export class NovoTabbedGroupPickerElement implements OnDestroy, OnInit {
 
   changeTab(tab: TabbedGroupPickerTab) {
     this.displayTab = tab;
-    this.scrollableInstance.scrollTo({ behavior: 'auto', top: 0 });
+    if (this.scrollableInstance) {
+      this.scrollableInstance.scrollTo({ behavior: 'auto', top: 0 });
+    }
   }
 
   getPixelHeight(element: HTMLElement) {
