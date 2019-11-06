@@ -91,6 +91,13 @@ export class SwitchPage {}
 
 
 @Component({
+  selector: 'tabbed-group-picker-page',
+  template: `<h1>Tabbed Group Picker <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/tabbed-group-picker">(source)</a></h1><p>Tabbed Group Picker allows for nested selection of groups and members via a tabbed interface.</p><h2>Basic</h2><p>In its most basic usage, Tabbed Group Picker allows for selection of arbitrary sets of data that have no group/member relationship. Each data set appears on its own tab. The values returned must be javascript primitives (typically string or number).</p><p><code-example example="tabbed-group-picker-basic"></code-example></p><h2>Quick Select</h2><p>Tabbed Group Picker provides a configurable quick select interface. For each quick select item, the developer provides the data type, values (or the 'all' flag), and a label. Tabbed Group Picker builds the quick select menu and synchronizes the quick select checkboxes with the data checkboxes (in both directions).</p><p><code-example example="tabbed-group-picker-quick-select"></code-example></p><h2>Groups</h2><p><code-example example="tabbed-group-picker-groups"></code-example></p><h2>Big Groups</h2><p><code-example example="tabbed-group-picker-big-groups"></code-example></p>`
+})
+export class TabbedGroupPickerPage {}
+
+
+@Component({
   selector: 'table-page',
   template: `<h1>Table <a href="https://bullhorn.github.io/novo-elements/tree/master/projects/novo-examples/src/elements/table">(source)</a></h1><p>Tables allow users to view date in a tabular format and perform actions such as Sorting and Filtering. Different configuration are possible for pagination or infinite scroll. Feature to be added include: Custom Item Renderers, etc...</p><h2>Types</h2><h5>Basic Table</h5><p>This is the most basic table.</p><p><code-example example="table"></code-example></p><h5>Details Table</h5><p>This has a row renderer to show a new details row that is expanded when you click on the action column.</p><p><code-example example="details-table"></code-example></p><h5>Select All Table w/ Custom Actions</h5><p>This has checkboxes for selection with custom actions.</p><p><code-example example="select-all-table"></code-example></p><h5>Editable Table</h5><p>Can be put into edit mode and use editors that are set on the column to modify the data.</p><p><code-example example="editable-table"></code-example></p><h5>Total/Average Footer</h5><p>Easily configure a footer to sum or average up columns.</p><p><code-example example="total-footer-table"></code-example></p>`
 })
@@ -274,14 +281,14 @@ export class TabsPage {}
 
 @Component({
   selector: 'patterns-page',
-  template: `<h1>Design Patterns</h1><p>The following are examples of know composition patterns to create a common user exeperience.  The component library is design to be used in these patterns.</p><h2>Activity Sections</h2><p>Displaying a series of list data in ... blah, blah, blah</p><p><code-example example="activity-section"></code-example></p><h2>Record Headers</h2><p>Entity Record Headers Patterns.</p><p><code-example example="record-header"></code-example></p>`
+  template: `<h1>Design Patterns</h1><p>The following are examples of know composition patterns to create a common user experience.  The component library is design to be used in these patterns.</p><h2>Activity Sections</h2><p>Displaying a series of lists in expandable sections, like in the activity tab.</p><p><code-example example="activity-section"></code-example></p><h2>Record Headers</h2><p>Entity Record Headers Patterns.</p><p><code-example example="record-header"></code-example></p>`
 })
 export class PatternsPage {}
 
 
 @Component({
   selector: 'templates-page',
-  template: `<h2>Bullhorn Application Templates</h2><h2>Example starter templates for your application</h2><h3>Email</h3><p>List App</p><p>TODO: Add linked image</p><h3>Form App</h3><p>form-based app template</p><p>TODO: Add linked image</p><h3>Custom Card Starter Template</h3><p>empty starter template</p><p>TODO: Add linked image</p><h3>Dashboard</h3><p>dashboard template</p><p>TODO: Add linked image</p>`
+  template: `<h2>Bullhorn Application Templates</h2><p>Bullhorn provides customization of the user experience with custom tabs, custom cards, custom actions and more.</p><p>The <a href="https://github.com/bullhorn/extension-samples">Bullhorn Extension Samples</a> repoprovides several examples for getting started building custom apps using Novo Elements.</p>`
 })
 export class TemplatesPage {}
 
@@ -362,6 +369,7 @@ const routes: Routes = [
   { path: 'components/search', component: SearchPage, data: { title: 'Search', section: 'components' } },
   { path: 'components/slides', component: SlidesPage, data: { title: 'Slides', section: 'components' } },
   { path: 'components/switch', component: SwitchPage, data: { title: 'Switch', section: 'components' } },
+  { path: 'components/tabbed-group-picker', component: TabbedGroupPickerPage, data: { title: 'Tabbed Group Picker', section: 'components' } },
   { path: 'components/table', component: TablePage, data: { title: 'Table', section: 'components' } },
   { path: 'design/colors', component: ColorsPage, data: { title: 'Colors', section: 'design' } },
   { path: 'design/composition', component: CompositionPage, data: { title: 'Composition', section: 'design' } },
@@ -404,7 +412,7 @@ const routes: Routes = [
 ];
 
 export const PAGE_LIST = [
-  AceEditorPage,ButtonsPage,CalendarPage,ComponentsPage,DataTablePage,DropdownPage,IconPage,LoadingPage,QuickNotePage,SearchPage,SlidesPage,SwitchPage,TablePage,ColorsPage,CompositionPage,DesignPage,IconographyPage,TypographyPage,ChipsPage,DatePickerPage,EditorPage,FormControlsPage,FormGroupsPage,FormPage,MultiPickerPage,PickerPage,RadioButtonsPage,SelectPage,TilesPage,ValuePage,HomePage,CardsPage,ExpansionPage,HeaderPage,LayoutsPage,ListPage,StepperPage,TabsPage,PatternsPage,TemplatesPage,ChomskyPage,FieldInteractionsPage,ModalPage,PipesPage,PopOverPage,SecurityPage,TipWellPage,ToasterPage,TooltipPage
+  AceEditorPage,ButtonsPage,CalendarPage,ComponentsPage,DataTablePage,DropdownPage,IconPage,LoadingPage,QuickNotePage,SearchPage,SlidesPage,SwitchPage,TabbedGroupPickerPage,TablePage,ColorsPage,CompositionPage,DesignPage,IconographyPage,TypographyPage,ChipsPage,DatePickerPage,EditorPage,FormControlsPage,FormGroupsPage,FormPage,MultiPickerPage,PickerPage,RadioButtonsPage,SelectPage,TilesPage,ValuePage,HomePage,CardsPage,ExpansionPage,HeaderPage,LayoutsPage,ListPage,StepperPage,TabsPage,PatternsPage,TemplatesPage,ChomskyPage,FieldInteractionsPage,ModalPage,PipesPage,PopOverPage,SecurityPage,TipWellPage,ToasterPage,TooltipPage
 ];
 
 @NgModule({

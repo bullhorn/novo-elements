@@ -29,6 +29,10 @@ export class DataTableState<T> {
     return !!(this.filter || this.sort || this.globalSearch || this.outsideFilter);
   }
 
+  get userFilteredInternal(): boolean {
+    return !!(this.filter || this.sort || this.globalSearch);
+  }
+
   get selected(): T[] {
     return Array.from(this.selectedRows.values());
   }

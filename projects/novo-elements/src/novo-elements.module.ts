@@ -56,6 +56,7 @@ import { LocalStorageService } from './services/storage/storage.service';
 import { ComponentUtils } from './utils/component-utils/ComponentUtils';
 import { FormUtils } from './utils/form-utils/FormUtils';
 import { OptionsService } from './services/options/OptionsService';
+import { NovoTabbedGroupPickerModule } from './elements/tabbed-group-picker/TabbedGroupPicker.module';
 
 import { NovoCommonModule } from './elements/common/common.module';
 
@@ -108,6 +109,7 @@ import { NovoCommonModule } from './elements/common/common.module';
     NovoCommonModule,
     NovoStepperModule,
     ScrollingModule,
+    NovoTabbedGroupPickerModule,
   ],
   providers: [
     { provide: ComponentUtils, useClass: ComponentUtils },

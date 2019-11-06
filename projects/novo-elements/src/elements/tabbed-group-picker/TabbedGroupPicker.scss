@@ -1,0 +1,181 @@
+@import '../../styles/global/variables';
+
+.tabbed-group-picker-button {
+  .tabbed-group-picker-button-label {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    min-width: 100px;
+    width: 100%;
+  }
+}
+
+.tabbed-group-picker-search {
+  width: 100%;
+  padding: 0.5em;
+  border-bottom: 0.1em solid #ccc;
+  position: relative;
+  input {
+    font-size: 1em;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    outline: none;
+    height: 2rem;
+    width: 95%;
+    margin: 0 0 0 1em;
+    padding: 0;
+    box-shadow: none;
+    box-sizing: content-box;
+    transition: all 300ms;
+    color: $dark;
+    &::-webkit-input-placeholder {
+      color: $grey;
+    }
+  }
+  i.bhi-search,
+  i.bhi-times {
+    position: absolute;
+    bottom: 1em;
+    right: 0.5em;
+    color: $grey;
+    font-size: 1em;
+    margin-right: 1em;
+  }
+  i.bhi-times {
+    cursor: pointer;
+    font-size: 1em;
+  }
+}
+
+.tabbed-group-picker-column-container {
+  display: flex;
+  flex-direction: row;
+
+  .tabbed-group-picker-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &.left {
+      border-right: 1px solid $light;
+      justify-content: space-between;
+
+      .clear-all-button {
+        margin-bottom: .5em;
+      }
+
+      novo-nav {
+        overflow: auto;
+
+        > novo-tab {
+          min-height: 3em;
+
+          > .novo-tab-link {
+            max-width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+          }
+          &.active {
+            .novo-tab-link {
+              font-weight: 400;
+            }
+            &:hover {
+              .novo-tab-link {
+                font-weight: 400;
+                color: $positive;
+              }
+            }
+          }
+          &:hover {
+            .novo-tab-link {
+              font-weight: 400;
+              color: $black;
+              opacity: 1;
+            }
+          }
+        }
+      }
+    }
+
+    &.right {
+      display: block;
+      width: 23em;
+      overflow: hidden;
+
+      .quick-select {
+        font-weight: 500;
+
+        .quick-select-label {
+          padding: 0.7em 1.9em 0 1.9em;
+          background: lighten($light, 10%);
+          text-transform: uppercase;
+          font-size: 0.8em;
+        }
+
+        .quick-select-list {
+          .quick-select-item {
+            background: lighten($light, 10%);
+            padding: 0.5em 1.75em;
+            border-bottom: none;
+          }
+          novo-list-item:last-of-type {
+            padding-bottom: 1em;
+          }
+        }
+      }
+      novo-list {
+        height: 100%;
+
+        cdk-virtual-scroll-viewport {
+          height: 27em;
+          overflow-x: hidden;
+
+          novo-list-item {
+            padding: 0.75em 1.75em;
+            cursor: pointer;
+            border-bottom: none;
+            align-items: center;
+
+            &:focus,
+            &:hover {
+              background: lighten($light, 10%);
+              color: darken($light, 55%);
+            }
+
+            novo-checkbox .check-box-group label span {
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              width: 17em;
+            }
+          }
+        }
+      }
+
+      .tabbed-group-picker-empty-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: $grey;
+        width: 100%;
+        height: 27em;
+
+        i {
+          padding-bottom: 0.2em;
+          font-size: 3em;
+        }
+        .empty-item-main-message {
+          font-weight: 500;
+          color: $dark;
+        }
+        .empty-item-sub-message {
+          font-size: 0.9em;
+        }
+      }
+    }
+  }
+}
