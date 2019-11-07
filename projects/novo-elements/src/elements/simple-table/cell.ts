@@ -31,13 +31,13 @@ export const _NovoCell = CdkCell;
   selector: '[novoSimpleCellDef]',
   providers: [{ provide: CdkCellDef, useExisting: NovoSimpleCellDef }],
 })
-export class NovoSimpleCellDef extends _NovoCellDef {}
+export class NovoSimpleCellDef extends _NovoCellDef { }
 
 @Directive({
   selector: '[novoSimpleHeaderCellDef]',
   providers: [{ provide: CdkHeaderCellDef, useExisting: NovoSimpleHeaderCellDef }],
 })
-export class NovoSimpleHeaderCellDef extends _NovoHeaderCellDef {}
+export class NovoSimpleHeaderCellDef extends _NovoHeaderCellDef { }
 
 @Directive({
   selector: '[novoSimpleColumnDef]',
@@ -91,9 +91,7 @@ export class NovoSimpleEmptyHeaderCell extends _NovoHeaderCell {
 
 @Component({
   selector: 'novo-simple-checkbox-header-cell',
-  template: `
-    <novo-checkbox [(ngModel)]="selectAll" (ngModelChange)="toggle($event)"></novo-checkbox>
-  `,
+  template: `<novo-checkbox [(ngModel)]="selectAll" (ngModelChange)="toggle($event)"></novo-checkbox>`,
 })
 export class NovoSimpleCheckboxHeaderCell extends _NovoHeaderCell implements OnDestroy {
   @HostBinding('attr.role')

@@ -37,14 +37,14 @@ export class NovoStep extends CdkStep {
   @ContentChild(NovoStepLabel, { static: false })
   stepLabel: NovoStepLabel;
 
-  @Input() theme: string;
-  @Input() color: string;
-  @Input() icon: string;
+  @Input()
+  theme: string;
+  @Input()
+  color: string;
+  @Input()
+  icon: string;
 
-  constructor(
-    @Inject(forwardRef(() => NovoStepper))
-    stepper: CdkStepper,
-  ) {
+  constructor(@Inject(forwardRef(() => NovoStepper)) stepper: CdkStepper) {
     super(stepper);
   }
 }
@@ -54,13 +54,16 @@ export class NovoStep extends CdkStep {
 })
 export class NovoStepper extends CdkStepper implements AfterContentInit {
   /** The list of step headers of the steps in the stepper. */
-  @ViewChildren(NovoStepHeader) _stepHeader: QueryList<FocusableOption>;
+  @ViewChildren(NovoStepHeader)
+  _stepHeader: QueryList<FocusableOption>;
 
   /** Steps that the stepper holds. */
-  @ContentChildren(NovoStep) _steps: QueryList<NovoStep>;
+  @ContentChildren(NovoStep)
+  _steps: QueryList<NovoStep>;
 
   /** Custom icon overrides passed in by the consumer. */
-  @ContentChildren(NovoIconComponent) _icons: QueryList<NovoIconComponent>;
+  @ContentChildren(NovoIconComponent)
+  _icons: QueryList<NovoIconComponent>;
 
   /** Consumer-specified template-refs to be used to override the header icons. */
   _iconOverrides: { [key: string]: TemplateRef<any> } = {};
@@ -122,7 +125,8 @@ export class NovoStepper extends CdkStepper implements AfterContentInit {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NovoHorizontalStepper extends NovoStepper {
-  @Input() selectedIndex: number;
+  @Input()
+  selectedIndex: number;
 }
 
 @Component({
@@ -140,7 +144,8 @@ export class NovoHorizontalStepper extends NovoStepper {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NovoVerticalStepper extends NovoStepper {
-  @Input() selectedIndex: number;
+  @Input()
+  selectedIndex: number;
 
   constructor(@Optional() dir: Directionality, changeDetectorRef: ChangeDetectorRef) {
     super(dir, changeDetectorRef);

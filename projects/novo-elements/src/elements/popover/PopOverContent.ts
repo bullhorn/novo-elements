@@ -4,23 +4,21 @@ import { PopOverDirective } from './PopOver';
 @Component({
   selector: 'popover-content',
   template: `
-    <div
-      #popoverDiv
-      class="popover {{ effectivePlacement }}"
-      [style.top]="top + 'px'"
-      [style.left]="left + 'px'"
-      [class.fade]="animation"
-      style="display: block"
-      role="popover"
-    >
-      <div class="arrow {{ effectiveAlignment }}"></div>
-      <h4 class="popover-title" [hidden]="!title">{{ title }}</h4>
-      <div class="popover-content">
-        <ng-content></ng-content>
-        <div class="popover-content-text">{{ content }}</div>
-      </div>
-    </div>
-  `,
+        <div #popoverDiv
+            class="popover {{ effectivePlacement }}"
+            [style.top]="top + 'px'"
+            [style.left]="left + 'px'"
+            [class.fade]="animation"
+            style="display: block"
+            role="popover">
+            <div class="arrow {{effectiveAlignment}}"></div>
+            <h4 class="popover-title" [hidden]="!title">{{ title }}</h4>
+            <div class="popover-content">
+                <ng-content></ng-content>
+                <div class="popover-content-text">{{ content }}</div>
+            </div>
+        </div>
+    `,
 })
 export class PopOverContent implements AfterViewInit {
   @Input()
@@ -43,7 +41,7 @@ export class PopOverContent implements AfterViewInit {
   effectiveAlignment: string;
   isHidden: boolean = false;
 
-  constructor(protected element: ElementRef, protected cdr: ChangeDetectorRef) {}
+  constructor(protected element: ElementRef, protected cdr: ChangeDetectorRef) { }
 
   ngAfterViewInit(): void {
     this.show();
@@ -96,25 +94,25 @@ export class PopOverContent implements AfterViewInit {
     let targetElHeight = targetEl.offsetHeight;
 
     let shiftWidth: any = {
-      center: function(): number {
+      center: function (): number {
         return hostElPos.left + (hostElPos.width - targetElWidth) / 2;
       },
-      right: function(): number {
+      right: function (): number {
         return hostElPos.left;
       },
-      left: function(): number {
+      left: function (): number {
         return hostElPos.left + (hostElPos.width - targetElWidth);
       },
     };
 
     let shiftHeight: any = {
-      center: function(): number {
+      center: function (): number {
         return hostElPos.top + (hostElPos.height - targetElHeight) / 2;
       },
-      bottom: function(): number {
+      bottom: function (): number {
         return hostElPos.top;
       },
-      top: function(): number {
+      top: function (): number {
         return hostElPos.top + (hostElPos.height - targetElHeight);
       },
     };

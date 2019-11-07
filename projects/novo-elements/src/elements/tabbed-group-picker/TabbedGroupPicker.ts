@@ -85,7 +85,7 @@ export class NovoTabbedGroupPickerElement implements OnDestroy, OnInit {
   virtualScrollItemSize: number = 39;
 
   constructor(public labelService: NovoLabelService,
-    private ref: ChangeDetectorRef) { }
+              private ref: ChangeDetectorRef) {}
 
   get displayTab(): TabbedGroupPickerTab {
     return this.displayTabs[this.displayTabIndex];
@@ -257,12 +257,12 @@ export class NovoTabbedGroupPickerElement implements OnDestroy, OnInit {
     this.showClearAll = itemWasJustSelected
       ? true
       : this.tabs.some((tab) => {
-        if ((tab as ParentTab).childTypeName) {
-          return tab.data.some(({ selected, indeterminate }) => selected || indeterminate);
-        } else {
-          return tab.data.some(({ selected }) => selected);
-        }
-      });
+          if ((tab as ParentTab).childTypeName) {
+            return tab.data.some(({ selected, indeterminate }) => selected || indeterminate);
+          } else {
+            return tab.data.some(({ selected }) => selected);
+          }
+        });
   }
 
   updateParentsAndQuickSelect(): void {
