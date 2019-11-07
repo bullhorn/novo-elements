@@ -28,28 +28,6 @@
     "postrelease:elements": "git push --follow-tags origin master; npm run build; cd dist/novo-elements && npm publish",
     "snapshot-publish": "bash snapshot-publish"
   },
-  "jest": {
-    "preset": "jest-preset-angular",
-    "setupFilesAfterEnv": [
-      "<rootDir>/setupJest.ts"
-    ],
-    "roots": [
-      "<rootDir>/projects"
-    ],
-    "collectCoverage": true,
-    "coverageReporters": [
-      "json",
-      "lcov",
-      "text",
-      "text-summary",
-      "html"
-    ],
-    "coveragePathIgnorePatterns": [
-      "/node_modules/",
-      "novo-elements/setupJest.ts"
-    ],
-    "testURL": "http://localhost"
-  },
   "lint-staged": {
     "*.{ts,json,scss,css,html}": [
       "prettier --write",
@@ -88,7 +66,7 @@
     "@angular/language-service": "~8.2.8",
     "@types/glob": "^7.1.1",
     "@types/jasminewd2": "~2.0.6",
-    "@types/jest": "^24.0.18",
+    "@types/jest": "^24.0.22",
     "@types/node": "^10.12.18",
     "codelyzer": "^5.0.1",
     "conventional-changelog-cli": "^2.0.11",
@@ -97,7 +75,8 @@
     "jasmine-core": "^3.3.0",
     "jasmine-spec-reporter": "^4.2.1",
     "jest": "^24.9.0",
-    "jest-preset-angular": "^7.1.1",
+    "jest-environment-jsdom-fourteen": "^0.1.0",
+    "jest-preset-angular": "^8.0.0",
     "karma": "^3.1.4",
     "karma-chrome-launcher": "^2.2.0",
     "karma-cli": "^2.0.0",
@@ -106,6 +85,7 @@
     "lint-staged": "^8.1.0",
     "markdown-it": "^8.4.2",
     "ng-packagr": "^5.5.1",
+    "node-sass": "^4.13.0",
     "prettier": "^1.15.3",
     "protractor": "^5.4.2",
     "standard-version": "^7.0.0",

@@ -62,7 +62,7 @@ export type TabbedGroupPickerButtonConfig = {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NovoTabbedGroupPickerElement implements OnDestroy, OnInit {
-  @ViewChild('tabbedGroupPickerVirtualScrollViewport')
+  @ViewChild('tabbedGroupPickerVirtualScrollViewport', { static: false })
   private scrollableInstance: CdkScrollable;
 
   @Input() buttonConfig: TabbedGroupPickerButtonConfig;
@@ -84,8 +84,7 @@ export class NovoTabbedGroupPickerElement implements OnDestroy, OnInit {
   scrollViewportHeight: number = 351;
   virtualScrollItemSize: number = 39;
 
-  constructor(public labelService: NovoLabelService,
-              private ref: ChangeDetectorRef) {}
+  constructor(public labelService: NovoLabelService, private ref: ChangeDetectorRef) {}
 
   get displayTab(): TabbedGroupPickerTab {
     return this.displayTabs[this.displayTabIndex];
@@ -159,22 +158,18 @@ export class NovoTabbedGroupPickerElement implements OnDestroy, OnInit {
       }
     });
     if (this.quickSelectConfig) {
-      this.quickSelectConfig.items
-        .filter((parent) => 'all' in parent)
-        .forEach((parent) => {
-          parent.children = this.tabs.find(({ typeName }) => parent.childTypeName === typeName).data;
-        });
+      this.quickSelectConfig.items.filter((parent) => 'all' in parent).forEach((parent) => {
+        parent.children = this.tabs.find(({ typeName }) => parent.childTypeName === typeName).data;
+      });
 
-      this.quickSelectConfig.items
-        .filter((parent) => !('all' in parent))
-        .forEach((parent) => {
-          const childTab = this.tabs.find(({ typeName }) => typeName === parent.childTypeName);
-          const compareFunction = this.makeCompareFunction(childTab.valueField);
-          const warnFunction = this.makeWarningFunction(parent.label, childTab.typeName, childTab.valueField);
-          const sortedChildren = childTab.data.slice().sort(compareFunction);
+      this.quickSelectConfig.items.filter((parent) => !('all' in parent)).forEach((parent) => {
+        const childTab = this.tabs.find(({ typeName }) => typeName === parent.childTypeName);
+        const compareFunction = this.makeCompareFunction(childTab.valueField);
+        const warnFunction = this.makeWarningFunction(parent.label, childTab.typeName, childTab.valueField);
+        const sortedChildren = childTab.data.slice().sort(compareFunction);
 
-          this.replaceChildrenWithReferences(parent as ParentOption, sortedChildren, compareFunction, warnFunction);
-        });
+        this.replaceChildrenWithReferences(parent as ParentOption, sortedChildren, compareFunction, warnFunction);
+      });
     }
   }
 
@@ -216,7 +211,9 @@ export class NovoTabbedGroupPickerElement implements OnDestroy, OnInit {
   onDropdownToggle(event) {
     if (event) {
       this.scrollViewportHeight = this.getPixelHeight(this.scrollableInstance.getElementRef().nativeElement);
-      this.virtualScrollItemSize = this.getPixelHeight(this.scrollableInstance.getElementRef().nativeElement.querySelector('novo-list-item'));
+      this.virtualScrollItemSize = this.getPixelHeight(
+        this.scrollableInstance.getElementRef().nativeElement.querySelector('novo-list-item'),
+      );
     }
   }
 
@@ -267,20 +264,18 @@ export class NovoTabbedGroupPickerElement implements OnDestroy, OnInit {
 
   updateParentsAndQuickSelect(): void {
     // mutate here to avoid dereferencing the objects in displayTabs
-    this.tabs
-      .filter((tab) => 'childTypeName' in tab && !!tab.childTypeName)
-      .forEach((tab) => {
-        const parents = tab.data.filter(({ children }: { children?: any[] }) => children && children.length);
+    this.tabs.filter((tab) => 'childTypeName' in tab && !!tab.childTypeName).forEach((tab) => {
+      const parents = tab.data.filter(({ children }: { children?: any[] }) => children && children.length);
 
-        parents.forEach((parent: { children?: { selected?: boolean }[] }) => {
-          ['indeterminate', 'selected'].forEach((selectedStateOption) => delete parent[selectedStateOption]);
+      parents.forEach((parent: { children?: { selected?: boolean }[] }) => {
+        ['indeterminate', 'selected'].forEach((selectedStateOption) => delete parent[selectedStateOption]);
 
-          const selectedState = this.getSelectedState(parent.children);
-          if (selectedState) {
-            parent[selectedState] = true;
-          }
-        });
+        const selectedState = this.getSelectedState(parent.children);
+        if (selectedState) {
+          parent[selectedState] = true;
+        }
       });
+    });
 
     if (this.quickSelectConfig) {
       this.quickSelectConfig.items.forEach((quickSelect) => {
