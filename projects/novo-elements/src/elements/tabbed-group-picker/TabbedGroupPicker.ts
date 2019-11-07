@@ -158,18 +158,22 @@ export class NovoTabbedGroupPickerElement implements OnDestroy, OnInit {
       }
     });
     if (this.quickSelectConfig) {
-      this.quickSelectConfig.items.filter((parent) => 'all' in parent).forEach((parent) => {
-        parent.children = this.tabs.find(({ typeName }) => parent.childTypeName === typeName).data;
-      });
+      this.quickSelectConfig.items
+        .filter((parent) => 'all' in parent)
+        .forEach((parent) => {
+          parent.children = this.tabs.find(({ typeName }) => parent.childTypeName === typeName).data;
+        });
 
-      this.quickSelectConfig.items.filter((parent) => !('all' in parent)).forEach((parent) => {
-        const childTab = this.tabs.find(({ typeName }) => typeName === parent.childTypeName);
-        const compareFunction = this.makeCompareFunction(childTab.valueField);
-        const warnFunction = this.makeWarningFunction(parent.label, childTab.typeName, childTab.valueField);
-        const sortedChildren = childTab.data.slice().sort(compareFunction);
+      this.quickSelectConfig.items
+        .filter((parent) => !('all' in parent))
+        .forEach((parent) => {
+          const childTab = this.tabs.find(({ typeName }) => typeName === parent.childTypeName);
+          const compareFunction = this.makeCompareFunction(childTab.valueField);
+          const warnFunction = this.makeWarningFunction(parent.label, childTab.typeName, childTab.valueField);
+          const sortedChildren = childTab.data.slice().sort(compareFunction);
 
-        this.replaceChildrenWithReferences(parent as ParentOption, sortedChildren, compareFunction, warnFunction);
-      });
+          this.replaceChildrenWithReferences(parent as ParentOption, sortedChildren, compareFunction, warnFunction);
+        });
     }
   }
 
@@ -264,18 +268,20 @@ export class NovoTabbedGroupPickerElement implements OnDestroy, OnInit {
 
   updateParentsAndQuickSelect(): void {
     // mutate here to avoid dereferencing the objects in displayTabs
-    this.tabs.filter((tab) => 'childTypeName' in tab && !!tab.childTypeName).forEach((tab) => {
-      const parents = tab.data.filter(({ children }: { children?: any[] }) => children && children.length);
+    this.tabs
+      .filter((tab) => 'childTypeName' in tab && !!tab.childTypeName)
+      .forEach((tab) => {
+        const parents = tab.data.filter(({ children }: { children?: any[] }) => children && children.length);
 
-      parents.forEach((parent: { children?: { selected?: boolean }[] }) => {
-        ['indeterminate', 'selected'].forEach((selectedStateOption) => delete parent[selectedStateOption]);
+        parents.forEach((parent: { children?: { selected?: boolean }[] }) => {
+          ['indeterminate', 'selected'].forEach((selectedStateOption) => delete parent[selectedStateOption]);
 
-        const selectedState = this.getSelectedState(parent.children);
-        if (selectedState) {
-          parent[selectedState] = true;
-        }
+          const selectedState = this.getSelectedState(parent.children);
+          if (selectedState) {
+            parent[selectedState] = true;
+          }
+        });
       });
-    });
 
     if (this.quickSelectConfig) {
       this.quickSelectConfig.items.forEach((quickSelect) => {
