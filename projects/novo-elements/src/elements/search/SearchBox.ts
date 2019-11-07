@@ -66,9 +66,9 @@ export class NovoSearchBoxElement implements ControlValueAccessor {
   public value: any;
 
   /** View -> model callback called when value changes */
-  _onChange: (value: any) => void = () => { };
+  _onChange: (value: any) => void = () => {};
   /** View -> model callback called when autocomplete has been touched */
-  _onTouched = () => { };
+  _onTouched = () => {};
 
   /** Element for the panel containing the autocomplete options. */
   @ViewChild(NovoOverlayTemplateComponent, { static: true })
@@ -83,7 +83,7 @@ export class NovoSearchBoxElement implements ControlValueAccessor {
     public labels: NovoLabelService,
     private _changeDetectorRef: ChangeDetectorRef,
     private _zone: NgZone,
-  ) { }
+  ) {}
 
   /**
    * @name showFasterFind

@@ -5,7 +5,6 @@ import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { ReplaySubject } from 'rxjs';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 // APP
-import { OutsideClick } from '../../utils/outside-click/OutsideClick';
 import { KeyCodes } from '../../utils/key-codes/KeyCodes';
 import { Helpers } from '../../utils/Helpers';
 import { NovoLabelService } from '../../services/novo-label-service';
@@ -161,10 +160,10 @@ export class NovoChipsElement implements OnInit, ControlValueAccessor {
   _value: any = '';
   _items = new ReplaySubject(1);
   // Placeholders for the callbacks
-  onModelChange: Function = () => { };
-  onModelTouched: Function = () => { };
+  onModelChange: Function = () => {};
+  onModelTouched: Function = () => {};
 
-  constructor(public element: ElementRef, private componentUtils: ComponentUtils, public labels: NovoLabelService) { }
+  constructor(public element: ElementRef, private componentUtils: ComponentUtils, public labels: NovoLabelService) {}
 
   ngOnInit() {
     this.setItems();

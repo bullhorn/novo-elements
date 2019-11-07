@@ -41,7 +41,7 @@ export class PopOverContent implements AfterViewInit {
   effectiveAlignment: string;
   isHidden: boolean = false;
 
-  constructor(protected element: ElementRef, protected cdr: ChangeDetectorRef) { }
+  constructor(protected element: ElementRef, protected cdr: ChangeDetectorRef) {}
 
   ngAfterViewInit(): void {
     this.show();
@@ -94,25 +94,25 @@ export class PopOverContent implements AfterViewInit {
     let targetElHeight = targetEl.offsetHeight;
 
     let shiftWidth: any = {
-      center: function (): number {
+      center: function(): number {
         return hostElPos.left + (hostElPos.width - targetElWidth) / 2;
       },
-      right: function (): number {
+      right: function(): number {
         return hostElPos.left;
       },
-      left: function (): number {
+      left: function(): number {
         return hostElPos.left + (hostElPos.width - targetElWidth);
       },
     };
 
     let shiftHeight: any = {
-      center: function (): number {
+      center: function(): number {
         return hostElPos.top + (hostElPos.height - targetElHeight) / 2;
       },
-      bottom: function (): number {
+      bottom: function(): number {
         return hostElPos.top;
       },
-      top: function (): number {
+      top: function(): number {
         return hostElPos.top + (hostElPos.height - targetElHeight);
       },
     };

@@ -260,7 +260,7 @@ export class NovoItemElement {
 
   public active: boolean = false;
 
-  constructor(private dropdown: NovoDropdownElement, public element: ElementRef) { }
+  constructor(private dropdown: NovoDropdownElement, public element: ElementRef) {}
 
   @HostListener('click', ['$event'])
   public onClick(event: Event): void {
@@ -284,7 +284,7 @@ export class NovoListElement implements AfterContentInit {
   @ContentChildren(NovoItemElement)
   public items: QueryList<NovoItemElement>;
 
-  constructor(private dropdown: NovoDropdownElement) { }
+  constructor(private dropdown: NovoDropdownElement) {}
 
   public ngAfterContentInit(): void {
     this.dropdown.items = this.items;
@@ -295,4 +295,4 @@ export class NovoListElement implements AfterContentInit {
   selector: 'dropdown-item-header',
   template: '<ng-content></ng-content>',
 })
-export class NovoItemHeaderElement { }
+export class NovoItemHeaderElement {}

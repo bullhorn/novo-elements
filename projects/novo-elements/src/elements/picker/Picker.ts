@@ -145,10 +145,10 @@ export class NovoPickerElement implements OnInit {
   resultsComponent: any;
   popup: ComponentRef<any>;
   _value: any;
-  onModelChange: Function = () => {};
-  onModelTouched: Function = () => {};
+  onModelChange: Function = () => { };
+  onModelTouched: Function = () => { };
 
-  constructor(public element: ElementRef, private componentUtils: ComponentUtils, private ref: ChangeDetectorRef) {}
+  constructor(public element: ElementRef, private componentUtils: ComponentUtils, private ref: ChangeDetectorRef) { }
 
   ngOnInit() {
     if (this.overrideElement) {
