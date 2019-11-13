@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.15.0"></a>
+# [3.15.0](https://github.com/bullhorn/novo-elements/compare/v3.14.0...v3.15.0) (2019-11-08)
+
+
+### Features
+
+* **corp-dept-picker:** Making corporation department an entity picker ([#1050](https://github.com/bullhorn/novo-elements/issues/1050)) ([81f5b35](https://github.com/bullhorn/novo-elements/commit/81f5b35))
+
+
+
 <a name="3.14.0"></a>
 # [3.14.0](https://github.com/bullhorn/novo-elements/compare/v3.13.0...v3.14.0) (2019-10-11)
 
