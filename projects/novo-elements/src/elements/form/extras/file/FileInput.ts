@@ -140,11 +140,11 @@ const LAYOUT_DEFAULTS = { order: 'default', download: true, removable: true, lab
   `,
 })
 export class NovoFileInputElement implements ControlValueAccessor, OnInit, OnDestroy, OnChanges {
-  @ViewChild('fileInput', { static: true })
+  @ViewChild('fileInput', { static: false })
   fileInput: TemplateRef<any>;
-  @ViewChild('fileOutput', { static: true })
+  @ViewChild('fileOutput', { static: false })
   fileOutput: TemplateRef<any>;
-  @ViewChild('container', { read: ViewContainerRef, static: true })
+  @ViewChild('container', { read: ViewContainerRef, static: false })
   container: ViewContainerRef;
 
   @Input()

@@ -78,7 +78,7 @@ const PICKER_VALUE_ACCESSOR = {
 })
 export class NovoPickerElement implements OnInit {
   // Container for the results
-  @ViewChild('results', { read: ViewContainerRef, static: true })
+  @ViewChild('results', { read: ViewContainerRef, static: false })
   results: ViewContainerRef;
 
   @Input()
@@ -136,9 +136,9 @@ export class NovoPickerElement implements OnInit {
   @Output()
   typing: EventEmitter<any> = new EventEmitter();
 
-  @ViewChild(NovoOverlayTemplateComponent, { static: true })
+  @ViewChild(NovoOverlayTemplateComponent, { static: false })
   public container: NovoOverlayTemplateComponent;
-  @ViewChild('input', { static: true })
+  @ViewChild('input', { static: false })
   private input: ElementRef;
 
   term: string = '';

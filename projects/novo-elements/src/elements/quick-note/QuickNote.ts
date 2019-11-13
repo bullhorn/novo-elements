@@ -37,11 +37,11 @@ declare var CKEDITOR: any;
   `,
 })
 export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy, AfterViewInit {
-  @ViewChild('wrapper', { static: true })
+  @ViewChild('wrapper', { static: false })
   public wrapper: ElementRef;
-  @ViewChild('host', { static: true })
+  @ViewChild('host', { static: false })
   public host: ElementRef;
-  @ViewChild('results', { read: ViewContainerRef, static: true })
+  @ViewChild('results', { read: ViewContainerRef, static: false })
   results: ViewContainerRef;
 
   @Input()

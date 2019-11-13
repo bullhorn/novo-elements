@@ -49,7 +49,7 @@ export class NovoCKEditorElement implements OnDestroy, AfterViewInit, ControlVal
   paste = new EventEmitter();
   @Output()
   loaded = new EventEmitter();
-  @ViewChild('host', { static: true })
+  @ViewChild('host', { static: false })
   host;
 
   _value: string = '';

@@ -147,7 +147,7 @@ export class NovoChipsElement implements OnInit, ControlValueAccessor {
   @Output()
   typing: EventEmitter<any> = new EventEmitter();
 
-  @ViewChild('preview', { read: ViewContainerRef, static: true })
+  @ViewChild('preview', { read: ViewContainerRef, static: false })
   preview: ViewContainerRef;
 
   items: Array<any> = [];

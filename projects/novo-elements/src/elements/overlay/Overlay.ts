@@ -42,7 +42,7 @@ import { filter, first, switchMap } from 'rxjs/operators';
 export class NovoOverlayTemplateComponent implements OnDestroy {
   public id: string = `novo-overlay-${Date.now()}`;
 
-  @ViewChild(TemplateRef, { static: true })
+  @ViewChild(TemplateRef, { static: false })
   public template: TemplateRef<any>;
   @ViewChild('panel', { static: false })
   public panel: ElementRef;
