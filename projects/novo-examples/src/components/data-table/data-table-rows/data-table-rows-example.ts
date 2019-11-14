@@ -134,7 +134,7 @@ export class DataTableRowsExample {
         allowCustomRange: true,
       },
       sortable: true,
-      format: '$year-$month-$date $hour:$minute',
+      format: '$year-$month-$day $hour:$minute',
     },
     {
       id: 'dateTime',
