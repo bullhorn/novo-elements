@@ -12,8 +12,11 @@ export class Helpers {
   }
 
   static interpolate(str: string, props: any): string {
-    return str.replace(/\$([\w\.]+)/g, (original, key) => {
-      let keys = key.split('.');
+    if (this.isDate(props)) {
+      props = this.dateToObject(props);
+    }
+    return str.replace(/\$([\w\.]+)/g, (original: string, key: string) => {
+      let keys: string[] = key.split('.');
       let value = props[keys.shift()];
       while (keys.length && value !== undefined) {
         let k = keys.shift();
@@ -315,6 +318,49 @@ export class Helpers {
       }
       return e;
     }
+  }
+
+  static dateToObject(
+    date: Date,
+  ): {
+    day: string;
+    dayPeriod: string;
+    era: string;
+    hour: string;
+    minute: string;
+    month: string;
+    second: string;
+    weekday: string;
+    year: string;
+  } {
+    let dateObj = {
+      day: '',
+      dayPeriod: '',
+      era: '',
+      hour: '',
+      minute: '',
+      month: '',
+      second: '',
+      weekday: '',
+      year: '',
+    };
+    Intl.DateTimeFormat('en-US', {
+      day: 'numeric',
+      era: 'short',
+      hour: 'numeric',
+      minute: 'numeric',
+      month: 'numeric',
+      second: 'numeric',
+      weekday: 'long',
+      year: 'numeric',
+    })
+      .formatToParts(date)
+      .forEach((dateTimeFormatPart: Intl.DateTimeFormatPart) => {
+        if (dateTimeFormatPart.type !== 'literal') {
+          dateObj[dateTimeFormatPart.type] = dateTimeFormatPart.value;
+        }
+      });
+    return dateObj;
   }
 }
 
