@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 /**
- * @title Tip Well with No Button Example
+ * @title Tip Well with HTML Example
  */
 @Component({
   selector: 'html-tip-well-example',
@@ -11,7 +11,11 @@ import { Component } from '@angular/core';
 export class HtmlTipWellExample {
   public demoHtmlTip: string = `
     <h2>Title</h2>
-    <p>Sed sodales ligula et fermentum bibendum. Aliquam tincidunt sagittis leo eget auctor. Fusce eu sagittis metus, ut viverra magna. Mauris mollis nisl nec libero tincidunt posuere.</p>
+    <p>
+      <div style="color:red">This text is RED</div>
+      <div><b>This text is BOLD</b></div>
+      <div><i>This text is ITALIC</i></div>
+    </p>
     <table>
         <tr>
             <th width="305px">Firstname</th>
@@ -24,7 +28,7 @@ export class HtmlTipWellExample {
             <td>20</td>
         </tr>
         <tr>
-            <td>Seve</td>
+            <td>Steve</td>
             <td>White</td>
             <td>25</td>
         </tr>

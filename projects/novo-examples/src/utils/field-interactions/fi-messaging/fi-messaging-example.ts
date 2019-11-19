@@ -34,8 +34,9 @@ export class FiMessagingExample {
           title: 'New Value',
           message: API.getActiveValue(),
         });
-      } else if (API.getActiveKey() === 'tip') {
-        API.displayTip(API.getActiveKey(), API.getActiveValue(), 'info', true);
+      } else if (API.getActiveKey() === 'tip' || API.getActiveKey() === 'tipHtml') {
+        const sanitize = !API.getValue('tipHtml');
+        API.displayTip('tip', API.getValue('tip'), 'info', true, sanitize);
       } else if (API.getActiveKey() === 'prompt') {
         API.promptUser(API.getActiveKey(), ['Update Fee Arrangement from Selected Company', 'Update DateLastModified to right now!']).then(
           function(result) {
@@ -64,12 +65,24 @@ export class FiMessagingExample {
       description: 'I will trigger a tip well as you change the value!',
       interactions: [{ event: 'change', script: messagingFunction }],
     });
+    this.controls.tipHtmlControl = new CheckboxControl({
+      key: 'tipHtml',
+      label: 'Display Tip as HTML',
+      description: 'Sets the API.displayTip() sanitize parameter to false.',
+      value: false,
+      interactions: [{ event: 'change', script: messagingFunction }],
+    });
     this.controls.promptControl = new TextBoxControl({
       type: 'text',
       key: 'prompt',
       label: 'Prompt User of Downstream Changes',
       interactions: [{ event: 'change', script: messagingFunction }],
     });
-    this.form = formUtils.toFormGroup([this.controls.toastControl, this.controls.tipControl, this.controls.promptControl]);
+    this.form = formUtils.toFormGroup([
+      this.controls.toastControl,
+      this.controls.tipControl,
+      this.controls.tipHtmlControl,
+      this.controls.promptControl,
+    ]);
   }
 }
