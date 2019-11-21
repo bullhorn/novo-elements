@@ -15355,9 +15355,11 @@ NovoNovoCKEditorModule.decorators = [
 class NovoTipWellElement {
     /**
      * @param {?} labels
+     * @param {?} sanitizer
      */
-    constructor(labels) {
+    constructor(labels, sanitizer) {
         this.labels = labels;
+        this.sanitizer = sanitizer;
         this.button = true;
         this.sanitize = true;
         this.confirmed = new _angular_core__WEBPACK_IMPORTED_MODULE_25__["EventEmitter"]();
@@ -15379,6 +15381,17 @@ class NovoTipWellElement {
             }
             return isEnabled;
         })();
+    }
+    // Trusts the HTML in order to show CSS styles
+    /**
+     * @return {?}
+     */
+    get tipWithStyles() {
+        if (!this._tipWithStyles || this._lastTipStyled !== this.tip) {
+            this._tipWithStyles = this.sanitizer.bypassSecurityTrustHtml(this.tip);
+            this._lastTipStyled = this.tip;
+        }
+        return this._tipWithStyles;
     }
     /**
      * @return {?}
@@ -15414,15 +15427,17 @@ NovoTipWellElement.decorators = [
     { type: _angular_core__WEBPACK_IMPORTED_MODULE_25__["Component"], args: [{
                 selector: 'novo-tip-well',
                 template: `
-        <div *ngIf="isActive">
-            <div>
-                <i class="bhi-{{ icon }}" *ngIf="icon" [attr.data-automation-id]="'novo-tip-well-icon-' + name"></i>
-                <p *ngIf="sanitize" [attr.data-automation-id]="'novo-tip-well-tip-' + name">{{ tip }}</p>
-                <p *ngIf="!sanitize" [attr.data-automation-id]="'novo-tip-well-tip-' + name" [innerHTML]="tip"></p>
-            </div>
-            <button theme="dialogue" (click)="hideTip()" *ngIf="button" [attr.data-automation-id]="'novo-tip-well-button-' + name">{{ buttonText }}</button>
-        </div>
-    `,
+    <div *ngIf="isActive">
+      <div>
+        <i class="bhi-{{ icon }}" *ngIf="icon" [attr.data-automation-id]="'novo-tip-well-icon-' + name"></i>
+        <p *ngIf="sanitize" [attr.data-automation-id]="'novo-tip-well-tip-' + name">{{ tip }}</p>
+        <p *ngIf="!sanitize" [attr.data-automation-id]="'novo-tip-well-tip-' + name" [innerHTML]="tipWithStyles"></p>
+      </div>
+      <button theme="dialogue" (click)="hideTip()" *ngIf="button" [attr.data-automation-id]="'novo-tip-well-button-' + name">
+        {{ buttonText }}
+      </button>
+    </div>
+  `,
                 host: {
                     '[class.active]': 'isActive',
                 }
@@ -15430,7 +15445,8 @@ NovoTipWellElement.decorators = [
 ];
 /** @nocollapse */
 NovoTipWellElement.ctorParameters = () => [
-    { type: NovoLabelService }
+    { type: NovoLabelService },
+    { type: _angular_platform_browser__WEBPACK_IMPORTED_MODULE_8__["DomSanitizer"] }
 ];
 NovoTipWellElement.propDecorators = {
     name: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_25__["Input"] }],
@@ -18537,9 +18553,10 @@ class FieldInteractionApi {
      * @param {?} tip
      * @param {?=} icon
      * @param {?=} allowDismiss
+     * @param {?=} sanitize
      * @return {?}
      */
-    displayTip(key, tip, icon, allowDismiss) {
+    displayTip(key, tip, icon, allowDismiss, sanitize) {
         /** @type {?} */
         let control = this.getControl(key);
         if (control && !control.restrictFieldInteractions) {
@@ -18547,6 +18564,7 @@ class FieldInteractionApi {
                 tip: tip,
                 icon: icon,
                 button: allowDismiss,
+                sanitize: sanitize !== false,
             };
             this.triggerEvent({ controlKey: key, prop: 'tipWell', value: tip });
         }
@@ -19765,7 +19783,7 @@ NovoControlElement.decorators = [
                         <span class="record-count" [class.zero-count]="itemCount === 0" [class.row-picker]="form.controls[this.control.key].config.columns" *ngIf="showCount && form.controls[control.key].controlType === 'picker'">{{ itemCount }}/{{ maxLength || form.controls[control.key].maxlength }}</span>
                     </div>
                     <!--Tip Wel-->
-                    <novo-tip-well *ngIf="form.controls[control.key].tipWell" [name]="control.key" [tip]="form.controls[control.key]?.tipWell?.tip" [icon]="form.controls[control.key]?.tipWell?.icon" [button]="form.controls[control.key]?.tipWell?.button"></novo-tip-well>
+                    <novo-tip-well *ngIf="form.controls[control.key].tipWell" [name]="control.key" [tip]="form.controls[control.key]?.tipWell?.tip" [icon]="form.controls[control.key]?.tipWell?.icon" [button]="form.controls[control.key]?.tipWell?.button" [sanitize]="form.controls[control.key]?.tipWell?.sanitize"></novo-tip-well>
                 </div>
                 <i *ngIf="form.controls[control.key].fieldInteractionloading" class="loading">
                     <svg version="1.1"
@@ -65058,8 +65076,10 @@ class FiMessagingExample {
                     message: API.getActiveValue(),
                 });
             }
-            else if (API.getActiveKey() === 'tip') {
-                API.displayTip(API.getActiveKey(), API.getActiveValue(), 'info', true);
+            else if (API.getActiveKey() === 'tip' || API.getActiveKey() === 'tipHtml') {
+                /** @type {?} */
+                const sanitize = !API.getValue('tipHtml');
+                API.displayTip('tip', API.getValue('tip'), 'info', true, sanitize);
             }
             else if (API.getActiveKey() === 'prompt') {
                 API.promptUser(API.getActiveKey(), ['Update Fee Arrangement from Selected Company', 'Update DateLastModified to right now!']).then(function (result) {
@@ -65087,19 +65107,31 @@ class FiMessagingExample {
             description: 'I will trigger a tip well as you change the value!',
             interactions: [{ event: 'change', script: messagingFunction }],
         });
+        this.controls.tipHtmlControl = new novo_elements__WEBPACK_IMPORTED_MODULE_11__["CheckboxControl"]({
+            key: 'tipHtml',
+            label: 'Display Tip as HTML',
+            description: 'Sets the API.displayTip() sanitize parameter to false.',
+            value: false,
+            interactions: [{ event: 'change', script: messagingFunction }],
+        });
         this.controls.promptControl = new novo_elements__WEBPACK_IMPORTED_MODULE_11__["TextBoxControl"]({
             type: 'text',
             key: 'prompt',
             label: 'Prompt User of Downstream Changes',
             interactions: [{ event: 'change', script: messagingFunction }],
         });
-        this.form = formUtils.toFormGroup([this.controls.toastControl, this.controls.tipControl, this.controls.promptControl]);
+        this.form = formUtils.toFormGroup([
+            this.controls.toastControl,
+            this.controls.tipControl,
+            this.controls.tipHtmlControl,
+            this.controls.promptControl,
+        ]);
     }
 }
 FiMessagingExample.decorators = [
     { type: _angular_core__WEBPACK_IMPORTED_MODULE_10__["Component"], args: [{
                 selector: 'fi-messaging-example',
-                template: "<novo-form [form]=\"form\" layout=\"vertical\">\n    <div class=\"novo-form-row\">\n        <novo-control [form]=\"form\" [control]=\"controls.tipControl\"></novo-control>\n    </div>\n    <div class=\"novo-form-row\">\n        <novo-control [form]=\"form\" [control]=\"controls.toastControl\"></novo-control>\n    </div>\n    <div class=\"novo-form-row\">\n        <novo-control [form]=\"form\" [control]=\"controls.promptControl\"></novo-control>\n    </div>\n</novo-form>\n<div class=\"final-value\">Form Value - {{ form.value | json }}</div>\n<div class=\"final-value\">Form Dirty - {{ form.dirty | json }}</div>\n<div class=\"final-value\">Is Form Valid? - {{ form.valid | json }}</div>\n",
+                template: "<novo-form [form]=\"form\" layout=\"vertical\">\n    <div class=\"novo-form-row\">\n        <novo-control [form]=\"form\" [control]=\"controls.tipControl\"></novo-control>\n    </div>\n    <div class=\"novo-form-row\">\n        <novo-control [form]=\"form\" [control]=\"controls.tipHtmlControl\"></novo-control>\n    </div>\n    <div class=\"novo-form-row\">\n        <novo-control [form]=\"form\" [control]=\"controls.toastControl\"></novo-control>\n    </div>\n    <div class=\"novo-form-row\">\n        <novo-control [form]=\"form\" [control]=\"controls.promptControl\"></novo-control>\n    </div>\n</novo-form>\n<div class=\"final-value\">Form Value - {{ form.value | json }}</div>\n<div class=\"final-value\">Form Dirty - {{ form.dirty | json }}</div>\n<div class=\"final-value\">Is Form Valid? - {{ form.valid | json }}</div>\n",
                 styles: [""]
             }] }
 ];
@@ -66132,13 +66164,17 @@ ButtonlessTipWellExample.decorators = [
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /**
- * \@title Tip Well with No Button Example
+ * \@title Tip Well with HTML Example
  */
 class HtmlTipWellExample {
     constructor() {
         this.demoHtmlTip = `
     <h2>Title</h2>
-    <p>Sed sodales ligula et fermentum bibendum. Aliquam tincidunt sagittis leo eget auctor. Fusce eu sagittis metus, ut viverra magna. Mauris mollis nisl nec libero tincidunt posuere.</p>
+    <p>
+      <div style="color:red">This text is RED</div>
+      <div><b>This text is BOLD</b></div>
+      <div><i>This text is ITALIC</i></div>
+    </p>
     <table>
         <tr>
             <th width="305px">Firstname</th>
@@ -66151,7 +66187,7 @@ class HtmlTipWellExample {
             <td>20</td>
         </tr>
         <tr>
-            <td>Seve</td>
+            <td>Steve</td>
             <td>White</td>
             <td>25</td>
         </tr>
@@ -67449,9 +67485,9 @@ const EXAMPLE_COMPONENTS = {
     'fi-messaging': {
         title: 'Fi Messaging Example',
         component: FiMessagingExample,
-        tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0A%2F%2F%20Vendor%0Aimport%20%7B%0A%20%20FormUtils%2C%0A%20%20NovoFormGroup%2C%0A%20%20TextBoxControl%2C%0A%20%20CheckboxControl%2C%0A%20%20FieldInteractionApi%2C%0A%20%20SelectControl%2C%0A%20%20PickerControl%2C%0A%20%20DateTimeControl%2C%0A%20%20TilesControl%2C%0A%7D%20from%20'novo-elements'%3B%0Aimport%20%7B%20map%20%7D%20from%20'rxjs%2Foperators'%3B%0Aimport%20%7B%20MockMetaHeaders%20%7D%20from%20'..%2FMockMeta'%3B%0A%0A%2F**%0A%20*%20%40title%20Fi%20Messaging%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'fi-messaging-example'%2C%0A%20%20templateUrl%3A%20'fi-messaging-example.html'%2C%0A%20%20styleUrls%3A%20%5B'fi-messaging-example.css'%5D%2C%0A%7D)%0Aexport%20class%20FiMessagingExample%20%7B%0A%20%20public%20form%3A%20any%20%3D%20%7B%7D%3B%0A%20%20public%20controls%3A%20any%20%3D%20%7B%7D%3B%0A%0A%20%20constructor(private%20formUtils%3A%20FormUtils)%20%7B%0A%20%20%20%20let%20messagingFunction%20%3D%20(API%3A%20FieldInteractionApi)%20%3D%3E%20%7B%0A%20%20%20%20%20%20console.log('%5BFieldInteractionDemo%5D%20-%20messagingFunction')%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%20%20%20%20if%20(API.getActiveKey()%20%3D%3D%3D%20'toast')%20%7B%0A%20%20%20%20%20%20%20%20API.displayToast(%7B%0A%20%20%20%20%20%20%20%20%20%20title%3A%20'New%20Value'%2C%0A%20%20%20%20%20%20%20%20%20%20message%3A%20API.getActiveValue()%2C%0A%20%20%20%20%20%20%20%20%7D)%3B%0A%20%20%20%20%20%20%7D%20else%20if%20(API.getActiveKey()%20%3D%3D%3D%20'tip')%20%7B%0A%20%20%20%20%20%20%20%20API.displayTip(API.getActiveKey()%2C%20API.getActiveValue()%2C%20'info'%2C%20true)%3B%0A%20%20%20%20%20%20%7D%20else%20if%20(API.getActiveKey()%20%3D%3D%3D%20'prompt')%20%7B%0A%20%20%20%20%20%20%20%20API.promptUser(API.getActiveKey()%2C%20%5B'Update%20Fee%20Arrangement%20from%20Selected%20Company'%2C%20'Update%20DateLastModified%20to%20right%20now!'%5D).then(%0A%20%20%20%20%20%20%20%20%20%20function(result)%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20if%20(result)%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20console.log('PERFORM')%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20console.log(%22DON'T%20PERFORM%22)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20)%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20%2F%2F%20Messaging%20Field%20Interactions%0A%20%20%20%20this.controls.toastControl%20%3D%20new%20TextBoxControl(%7B%0A%20%20%20%20%20%20type%3A%20'text'%2C%0A%20%20%20%20%20%20key%3A%20'toast'%2C%0A%20%20%20%20%20%20label%3A%20'Toast'%2C%0A%20%20%20%20%20%20description%3A%20'I%20will%20trigger%20a%20toast%20as%20you%20change%20the%20value!'%2C%0A%20%20%20%20%20%20interactions%3A%20%5B%7B%20event%3A%20'change'%2C%20script%3A%20messagingFunction%20%7D%5D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.controls.tipControl%20%3D%20new%20TextBoxControl(%7B%0A%20%20%20%20%20%20type%3A%20'text'%2C%0A%20%20%20%20%20%20key%3A%20'tip'%2C%0A%20%20%20%20%20%20label%3A%20'Tip'%2C%0A%20%20%20%20%20%20description%3A%20'I%20will%20trigger%20a%20tip%20well%20as%20you%20change%20the%20value!'%2C%0A%20%20%20%20%20%20interactions%3A%20%5B%7B%20event%3A%20'change'%2C%20script%3A%20messagingFunction%20%7D%5D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.controls.promptControl%20%3D%20new%20TextBoxControl(%7B%0A%20%20%20%20%20%20type%3A%20'text'%2C%0A%20%20%20%20%20%20key%3A%20'prompt'%2C%0A%20%20%20%20%20%20label%3A%20'Prompt%20User%20of%20Downstream%20Changes'%2C%0A%20%20%20%20%20%20interactions%3A%20%5B%7B%20event%3A%20'change'%2C%20script%3A%20messagingFunction%20%7D%5D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.form%20%3D%20formUtils.toFormGroup(%5Bthis.controls.toastControl%2C%20this.controls.tipControl%2C%20this.controls.promptControl%5D)%3B%0A%20%20%7D%0A%7D%0A`,
+        tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0A%2F%2F%20Vendor%0Aimport%20%7B%0A%20%20FormUtils%2C%0A%20%20NovoFormGroup%2C%0A%20%20TextBoxControl%2C%0A%20%20CheckboxControl%2C%0A%20%20FieldInteractionApi%2C%0A%20%20SelectControl%2C%0A%20%20PickerControl%2C%0A%20%20DateTimeControl%2C%0A%20%20TilesControl%2C%0A%7D%20from%20'novo-elements'%3B%0Aimport%20%7B%20map%20%7D%20from%20'rxjs%2Foperators'%3B%0Aimport%20%7B%20MockMetaHeaders%20%7D%20from%20'..%2FMockMeta'%3B%0A%0A%2F**%0A%20*%20%40title%20Fi%20Messaging%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'fi-messaging-example'%2C%0A%20%20templateUrl%3A%20'fi-messaging-example.html'%2C%0A%20%20styleUrls%3A%20%5B'fi-messaging-example.css'%5D%2C%0A%7D)%0Aexport%20class%20FiMessagingExample%20%7B%0A%20%20public%20form%3A%20any%20%3D%20%7B%7D%3B%0A%20%20public%20controls%3A%20any%20%3D%20%7B%7D%3B%0A%0A%20%20constructor(private%20formUtils%3A%20FormUtils)%20%7B%0A%20%20%20%20let%20messagingFunction%20%3D%20(API%3A%20FieldInteractionApi)%20%3D%3E%20%7B%0A%20%20%20%20%20%20console.log('%5BFieldInteractionDemo%5D%20-%20messagingFunction')%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%20%20%20%20if%20(API.getActiveKey()%20%3D%3D%3D%20'toast')%20%7B%0A%20%20%20%20%20%20%20%20API.displayToast(%7B%0A%20%20%20%20%20%20%20%20%20%20title%3A%20'New%20Value'%2C%0A%20%20%20%20%20%20%20%20%20%20message%3A%20API.getActiveValue()%2C%0A%20%20%20%20%20%20%20%20%7D)%3B%0A%20%20%20%20%20%20%7D%20else%20if%20(API.getActiveKey()%20%3D%3D%3D%20'tip'%20%7C%7C%20API.getActiveKey()%20%3D%3D%3D%20'tipHtml')%20%7B%0A%20%20%20%20%20%20%20%20const%20sanitize%20%3D%20!API.getValue('tipHtml')%3B%0A%20%20%20%20%20%20%20%20API.displayTip('tip'%2C%20API.getValue('tip')%2C%20'info'%2C%20true%2C%20sanitize)%3B%0A%20%20%20%20%20%20%7D%20else%20if%20(API.getActiveKey()%20%3D%3D%3D%20'prompt')%20%7B%0A%20%20%20%20%20%20%20%20API.promptUser(API.getActiveKey()%2C%20%5B'Update%20Fee%20Arrangement%20from%20Selected%20Company'%2C%20'Update%20DateLastModified%20to%20right%20now!'%5D).then(%0A%20%20%20%20%20%20%20%20%20%20function(result)%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20if%20(result)%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20console.log('PERFORM')%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20console.log(%22DON'T%20PERFORM%22)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20)%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20%2F%2F%20Messaging%20Field%20Interactions%0A%20%20%20%20this.controls.toastControl%20%3D%20new%20TextBoxControl(%7B%0A%20%20%20%20%20%20type%3A%20'text'%2C%0A%20%20%20%20%20%20key%3A%20'toast'%2C%0A%20%20%20%20%20%20label%3A%20'Toast'%2C%0A%20%20%20%20%20%20description%3A%20'I%20will%20trigger%20a%20toast%20as%20you%20change%20the%20value!'%2C%0A%20%20%20%20%20%20interactions%3A%20%5B%7B%20event%3A%20'change'%2C%20script%3A%20messagingFunction%20%7D%5D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.controls.tipControl%20%3D%20new%20TextBoxControl(%7B%0A%20%20%20%20%20%20type%3A%20'text'%2C%0A%20%20%20%20%20%20key%3A%20'tip'%2C%0A%20%20%20%20%20%20label%3A%20'Tip'%2C%0A%20%20%20%20%20%20description%3A%20'I%20will%20trigger%20a%20tip%20well%20as%20you%20change%20the%20value!'%2C%0A%20%20%20%20%20%20interactions%3A%20%5B%7B%20event%3A%20'change'%2C%20script%3A%20messagingFunction%20%7D%5D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.controls.tipHtmlControl%20%3D%20new%20CheckboxControl(%7B%0A%20%20%20%20%20%20key%3A%20'tipHtml'%2C%0A%20%20%20%20%20%20label%3A%20'Display%20Tip%20as%20HTML'%2C%0A%20%20%20%20%20%20description%3A%20'Sets%20the%20API.displayTip()%20sanitize%20parameter%20to%20false.'%2C%0A%20%20%20%20%20%20value%3A%20false%2C%0A%20%20%20%20%20%20interactions%3A%20%5B%7B%20event%3A%20'change'%2C%20script%3A%20messagingFunction%20%7D%5D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.controls.promptControl%20%3D%20new%20TextBoxControl(%7B%0A%20%20%20%20%20%20type%3A%20'text'%2C%0A%20%20%20%20%20%20key%3A%20'prompt'%2C%0A%20%20%20%20%20%20label%3A%20'Prompt%20User%20of%20Downstream%20Changes'%2C%0A%20%20%20%20%20%20interactions%3A%20%5B%7B%20event%3A%20'change'%2C%20script%3A%20messagingFunction%20%7D%5D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.form%20%3D%20formUtils.toFormGroup(%5B%0A%20%20%20%20%20%20this.controls.toastControl%2C%0A%20%20%20%20%20%20this.controls.tipControl%2C%0A%20%20%20%20%20%20this.controls.tipHtmlControl%2C%0A%20%20%20%20%20%20this.controls.promptControl%2C%0A%20%20%20%20%5D)%3B%0A%20%20%7D%0A%7D%0A`,
         cssSource: `%2F**%20No%20CSS%20for%20this%20example%20*%2F%0A`,
-        htmlSource: `%3Cnovo-form%20%5Bform%5D%3D%22form%22%20layout%3D%22vertical%22%3E%0A%20%20%20%20%3Cdiv%20class%3D%22novo-form-row%22%3E%0A%20%20%20%20%20%20%20%20%3Cnovo-control%20%5Bform%5D%3D%22form%22%20%5Bcontrol%5D%3D%22controls.tipControl%22%3E%3C%2Fnovo-control%3E%0A%20%20%20%20%3C%2Fdiv%3E%0A%20%20%20%20%3Cdiv%20class%3D%22novo-form-row%22%3E%0A%20%20%20%20%20%20%20%20%3Cnovo-control%20%5Bform%5D%3D%22form%22%20%5Bcontrol%5D%3D%22controls.toastControl%22%3E%3C%2Fnovo-control%3E%0A%20%20%20%20%3C%2Fdiv%3E%0A%20%20%20%20%3Cdiv%20class%3D%22novo-form-row%22%3E%0A%20%20%20%20%20%20%20%20%3Cnovo-control%20%5Bform%5D%3D%22form%22%20%5Bcontrol%5D%3D%22controls.promptControl%22%3E%3C%2Fnovo-control%3E%0A%20%20%20%20%3C%2Fdiv%3E%0A%3C%2Fnovo-form%3E%0A%3Cdiv%20class%3D%22final-value%22%3EForm%20Value%20-%20%7B%7B%20form.value%20%7C%20json%20%7D%7D%3C%2Fdiv%3E%0A%3Cdiv%20class%3D%22final-value%22%3EForm%20Dirty%20-%20%7B%7B%20form.dirty%20%7C%20json%20%7D%7D%3C%2Fdiv%3E%0A%3Cdiv%20class%3D%22final-value%22%3EIs%20Form%20Valid%3F%20-%20%7B%7B%20form.valid%20%7C%20json%20%7D%7D%3C%2Fdiv%3E%0A`
+        htmlSource: `%3Cnovo-form%20%5Bform%5D%3D%22form%22%20layout%3D%22vertical%22%3E%0A%20%20%20%20%3Cdiv%20class%3D%22novo-form-row%22%3E%0A%20%20%20%20%20%20%20%20%3Cnovo-control%20%5Bform%5D%3D%22form%22%20%5Bcontrol%5D%3D%22controls.tipControl%22%3E%3C%2Fnovo-control%3E%0A%20%20%20%20%3C%2Fdiv%3E%0A%20%20%20%20%3Cdiv%20class%3D%22novo-form-row%22%3E%0A%20%20%20%20%20%20%20%20%3Cnovo-control%20%5Bform%5D%3D%22form%22%20%5Bcontrol%5D%3D%22controls.tipHtmlControl%22%3E%3C%2Fnovo-control%3E%0A%20%20%20%20%3C%2Fdiv%3E%0A%20%20%20%20%3Cdiv%20class%3D%22novo-form-row%22%3E%0A%20%20%20%20%20%20%20%20%3Cnovo-control%20%5Bform%5D%3D%22form%22%20%5Bcontrol%5D%3D%22controls.toastControl%22%3E%3C%2Fnovo-control%3E%0A%20%20%20%20%3C%2Fdiv%3E%0A%20%20%20%20%3Cdiv%20class%3D%22novo-form-row%22%3E%0A%20%20%20%20%20%20%20%20%3Cnovo-control%20%5Bform%5D%3D%22form%22%20%5Bcontrol%5D%3D%22controls.promptControl%22%3E%3C%2Fnovo-control%3E%0A%20%20%20%20%3C%2Fdiv%3E%0A%3C%2Fnovo-form%3E%0A%3Cdiv%20class%3D%22final-value%22%3EForm%20Value%20-%20%7B%7B%20form.value%20%7C%20json%20%7D%7D%3C%2Fdiv%3E%0A%3Cdiv%20class%3D%22final-value%22%3EForm%20Dirty%20-%20%7B%7B%20form.dirty%20%7C%20json%20%7D%7D%3C%2Fdiv%3E%0A%3Cdiv%20class%3D%22final-value%22%3EIs%20Form%20Valid%3F%20-%20%7B%7B%20form.valid%20%7C%20json%20%7D%7D%3C%2Fdiv%3E%0A`
     },
     'fi-modify-options': {
         title: 'Fi Modify Options Example',
@@ -67600,9 +67636,9 @@ const EXAMPLE_COMPONENTS = {
         htmlSource: `%3Cnovo-tip-well%20name%3D%22Demo%22%20%5Btip%5D%3D%22demoTip%22%20%5Bbutton%5D%3D%22false%22%3E%3C%2Fnovo-tip-well%3E%0A%0A%3Cp%3EDid%20you%20hide%20the%20TipWell%3F%3C%2Fp%3E%0A%0A%3Cbutton%20theme%3D%22secondary%22%20(click)%3D%22clearLocalStorage()%22%3EReset%3C%2Fbutton%3E%20localStorage%20and%20Reload%0A`
     },
     'html-tip-well': {
-        title: 'Tip Well with No Button Example',
+        title: 'Tip Well with HTML Example',
         component: HtmlTipWellExample,
-        tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0A%0A%2F**%0A%20*%20%40title%20Tip%20Well%20with%20No%20Button%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'html-tip-well-example'%2C%0A%20%20templateUrl%3A%20'html-tip-well-example.html'%2C%0A%20%20styleUrls%3A%20%5B'html-tip-well-example.css'%5D%2C%0A%7D)%0Aexport%20class%20HtmlTipWellExample%20%7B%0A%20%20public%20demoHtmlTip%3A%20string%20%3D%20%60%0A%20%20%20%20%3Ch2%3ETitle%3C%2Fh2%3E%0A%20%20%20%20%3Cp%3ESed%20sodales%20ligula%20et%20fermentum%20bibendum.%20Aliquam%20tincidunt%20sagittis%20leo%20eget%20auctor.%20Fusce%20eu%20sagittis%20metus%2C%20ut%20viverra%20magna.%20Mauris%20mollis%20nisl%20nec%20libero%20tincidunt%20posuere.%3C%2Fp%3E%0A%20%20%20%20%3Ctable%3E%0A%20%20%20%20%20%20%20%20%3Ctr%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Cth%20width%3D%22305px%22%3EFirstname%3C%2Fth%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Cth%20width%3D%22305px%22%3ELastname%3C%2Fth%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Cth%3EAge%3C%2Fth%3E%0A%20%20%20%20%20%20%20%20%3C%2Ftr%3E%0A%20%20%20%20%20%20%20%20%3Ctr%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Ctd%3EJeff%3C%2Ftd%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Ctd%3ESmith%3C%2Ftd%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Ctd%3E20%3C%2Ftd%3E%0A%20%20%20%20%20%20%20%20%3C%2Ftr%3E%0A%20%20%20%20%20%20%20%20%3Ctr%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Ctd%3ESeve%3C%2Ftd%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Ctd%3EWhite%3C%2Ftd%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Ctd%3E25%3C%2Ftd%3E%0A%20%20%20%20%20%20%20%20%3C%2Ftr%3E%0A%20%20%20%20%3C%2Ftable%3E%60%3B%0A%0A%20%20clearLocalStorage()%20%7B%0A%20%20%20%20localStorage.removeItem('novo-tw_Demo')%3B%0A%20%20%20%20location.reload()%3B%0A%20%20%7D%0A%7D%0A`,
+        tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0A%0A%2F**%0A%20*%20%40title%20Tip%20Well%20with%20HTML%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'html-tip-well-example'%2C%0A%20%20templateUrl%3A%20'html-tip-well-example.html'%2C%0A%20%20styleUrls%3A%20%5B'html-tip-well-example.css'%5D%2C%0A%7D)%0Aexport%20class%20HtmlTipWellExample%20%7B%0A%20%20public%20demoHtmlTip%3A%20string%20%3D%20%60%0A%20%20%20%20%3Ch2%3ETitle%3C%2Fh2%3E%0A%20%20%20%20%3Cp%3E%0A%20%20%20%20%20%20%3Cdiv%20style%3D%22color%3Ared%22%3EThis%20text%20is%20RED%3C%2Fdiv%3E%0A%20%20%20%20%20%20%3Cdiv%3E%3Cb%3EThis%20text%20is%20BOLD%3C%2Fb%3E%3C%2Fdiv%3E%0A%20%20%20%20%20%20%3Cdiv%3E%3Ci%3EThis%20text%20is%20ITALIC%3C%2Fi%3E%3C%2Fdiv%3E%0A%20%20%20%20%3C%2Fp%3E%0A%20%20%20%20%3Ctable%3E%0A%20%20%20%20%20%20%20%20%3Ctr%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Cth%20width%3D%22305px%22%3EFirstname%3C%2Fth%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Cth%20width%3D%22305px%22%3ELastname%3C%2Fth%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Cth%3EAge%3C%2Fth%3E%0A%20%20%20%20%20%20%20%20%3C%2Ftr%3E%0A%20%20%20%20%20%20%20%20%3Ctr%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Ctd%3EJeff%3C%2Ftd%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Ctd%3ESmith%3C%2Ftd%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Ctd%3E20%3C%2Ftd%3E%0A%20%20%20%20%20%20%20%20%3C%2Ftr%3E%0A%20%20%20%20%20%20%20%20%3Ctr%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Ctd%3ESteve%3C%2Ftd%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Ctd%3EWhite%3C%2Ftd%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Ctd%3E25%3C%2Ftd%3E%0A%20%20%20%20%20%20%20%20%3C%2Ftr%3E%0A%20%20%20%20%3C%2Ftable%3E%60%3B%0A%0A%20%20clearLocalStorage()%20%7B%0A%20%20%20%20localStorage.removeItem('novo-tw_Demo')%3B%0A%20%20%20%20location.reload()%3B%0A%20%20%7D%0A%7D%0A`,
         cssSource: `%2F**%20No%20CSS%20for%20this%20example%20*%2F%0A`,
         htmlSource: `%3Cnovo-tip-well%20name%3D%22Demo%22%20%5Bsanitize%5D%3D%22false%22%20%5Btip%5D%3D%22demoHtmlTip%22%3E%3C%2Fnovo-tip-well%3E%0A%0A%3Cp%3EDid%20you%20hide%20the%20TipWell%3F%3C%2Fp%3E%0A%0A%3Cbutton%20theme%3D%22secondary%22%20(click)%3D%22clearLocalStorage()%22%3EReset%3C%2Fbutton%3E%20localStorage%20and%20Reload%0A`
     },
