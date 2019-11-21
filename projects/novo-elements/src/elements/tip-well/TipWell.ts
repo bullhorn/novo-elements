@@ -2,19 +2,22 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 // APP
 import { NovoLabelService } from '../../services/novo-label-service';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Component({
   selector: 'novo-tip-well',
   template: `
-        <div *ngIf="isActive">
-            <div>
-                <i class="bhi-{{ icon }}" *ngIf="icon" [attr.data-automation-id]="'novo-tip-well-icon-' + name"></i>
-                <p *ngIf="sanitize" [attr.data-automation-id]="'novo-tip-well-tip-' + name">{{ tip }}</p>
-                <p *ngIf="!sanitize" [attr.data-automation-id]="'novo-tip-well-tip-' + name" [innerHTML]="tip"></p>
-            </div>
-            <button theme="dialogue" (click)="hideTip()" *ngIf="button" [attr.data-automation-id]="'novo-tip-well-button-' + name">{{ buttonText }}</button>
-        </div>
-    `,
+    <div *ngIf="isActive">
+      <div>
+        <i class="bhi-{{ icon }}" *ngIf="icon" [attr.data-automation-id]="'novo-tip-well-icon-' + name"></i>
+        <p *ngIf="sanitize" [attr.data-automation-id]="'novo-tip-well-tip-' + name">{{ tip }}</p>
+        <p *ngIf="!sanitize" [attr.data-automation-id]="'novo-tip-well-tip-' + name" [innerHTML]="tipWithStyles"></p>
+      </div>
+      <button theme="dialogue" (click)="hideTip()" *ngIf="button" [attr.data-automation-id]="'novo-tip-well-button-' + name">
+        {{ buttonText }}
+      </button>
+    </div>
+  `,
   host: {
     '[class.active]': 'isActive',
   },
@@ -39,7 +42,10 @@ export class NovoTipWellElement implements OnInit {
   isLocalStorageEnabled: any;
   localStorageKey: string;
 
-  constructor(private labels: NovoLabelService) {
+  private _tipWithStyles: SafeHtml;
+  private _lastTipStyled: string;
+
+  constructor(private labels: NovoLabelService, private sanitizer: DomSanitizer) {
     this.isActive = true;
     // Check if localStorage is enabled
     this.isLocalStorageEnabled = (() => {
@@ -57,6 +63,15 @@ export class NovoTipWellElement implements OnInit {
       }
       return isEnabled;
     })();
+  }
+
+  // Trusts the HTML in order to show CSS styles
+  get tipWithStyles(): SafeHtml {
+    if (!this._tipWithStyles || this._lastTipStyled !== this.tip) {
+      this._tipWithStyles = this.sanitizer.bypassSecurityTrustHtml(this.tip);
+      this._lastTipStyled = this.tip;
+    }
+    return this._tipWithStyles;
   }
 
   ngOnInit() {
