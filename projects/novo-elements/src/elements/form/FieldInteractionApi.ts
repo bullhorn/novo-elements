@@ -361,13 +361,14 @@ export class FieldInteractionApi {
     }
   }
 
-  public displayTip(key: string, tip: string, icon?: string, allowDismiss?: boolean): void {
+  public displayTip(key: string, tip: string, icon?: string, allowDismiss?: boolean, sanitize?: boolean): void {
     let control = this.getControl(key);
     if (control && !control.restrictFieldInteractions) {
       control.tipWell = {
         tip: tip,
         icon: icon,
         button: allowDismiss,
+        sanitize: sanitize !== false, // defaults to true when undefined
       };
       this.triggerEvent({ controlKey: key, prop: 'tipWell', value: tip });
     }

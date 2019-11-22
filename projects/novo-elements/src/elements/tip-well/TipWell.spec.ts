@@ -6,7 +6,7 @@ import { NovoLabelService } from '../../services/novo-label-service';
 
 describe('Elements: NovoTipWellElement', () => {
   let fixture;
-  let component;
+  let component: NovoTipWellElement | any;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -15,21 +15,13 @@ describe('Elements: NovoTipWellElement', () => {
     }).compileComponents();
     fixture = TestBed.createComponent(NovoTipWellElement);
     component = fixture.debugElement.componentInstance;
+    spyOn(component.sanitizer, 'bypassSecurityTrustHtml').and.returnValue('TRUSTED_HTML');
   }));
 
   it('should initialize with defaults', () => {
     expect(component).toBeDefined();
     expect(component.isActive).toBeTruthy();
     expect(component.isLocalStorageEnabled).toBeTruthy();
-  });
-
-  xdescribe('Method: hideTip()', () => {
-    it('should hide the tip and add a value to localStorage', () => {
-      expect(component.hideTip).toBeDefined();
-      expect(localStorage.getItem(component.localStorageKey)).toBe(null);
-      component.hideTip();
-      expect(JSON.parse(localStorage.getItem(component.localStorageKey))).toBeFalsy();
-    });
   });
 
   describe('Method: ngOnInit()', () => {
@@ -39,6 +31,43 @@ describe('Elements: NovoTipWellElement', () => {
       expect(component.buttonText).toEqual('Ok, Got it');
       expect(component.button).toBeTruthy();
       expect(component.icon).toBeNull();
+    });
+  });
+
+  describe('Method: tipWithStyles()', () => {
+    it('should return sanitized tip', () => {
+      component.tip = `<div style="color: red">This text is RED</div>`;
+      const actual = component.tipWithStyles;
+      expect(actual).toEqual('TRUSTED_HTML');
+      expect(component.sanitizer.bypassSecurityTrustHtml).toBeCalledTimes(1);
+    });
+    it('should cache previous sanitized tip when re-requested', () => {
+      component.tip = `<div style="color: red">This text is RED</div>`;
+      component.tipWithStyles;
+      component.tipWithStyles;
+      component.tipWithStyles;
+      const actual = component.tipWithStyles;
+      expect(actual).toEqual('TRUSTED_HTML');
+      expect(component.sanitizer.bypassSecurityTrustHtml).toBeCalledTimes(1);
+    });
+    it('should bust the cache when the tip is modified', () => {
+      component.tip = `<div style="color: red">This text is RED</div>`;
+      component.tipWithStyles;
+      component.tipWithStyles;
+      component.tip = `<div style="color: blue">This text is BLUE</div>`;
+      component.tipWithStyles;
+      const actual = component.tipWithStyles;
+      expect(actual).toEqual('TRUSTED_HTML');
+      expect(component.sanitizer.bypassSecurityTrustHtml).toBeCalledTimes(2);
+    });
+  });
+
+  describe('Method: hideTip()', () => {
+    it('should hide the tip', () => {
+      component.isLocalStorageEnabled = false;
+      expect(component.isActive).toBe(true);
+      component.hideTip();
+      expect(component.isActive).toBe(false);
     });
   });
 });
