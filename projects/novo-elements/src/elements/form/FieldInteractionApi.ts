@@ -16,13 +16,14 @@ import { NovoLabelService } from '../../services/novo-label-service';
 import { IFieldInteractionEvent } from './FormInterfaces';
 import { ModifyPickerConfigArgs, OptionsFunction, CustomHttp } from './FieldInteractionApiTypes';
 import { Observable, Subscription } from 'rxjs';
+import { ModalConfig } from 'dist/novo-elements/elements/modal/Modal';
 
 class CustomHttpImpl implements CustomHttp {
   url: string;
   options: any;
   mapFn = (x) => x;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   get(url: string, options?: any): CustomHttp {
     this.url = url;
@@ -64,7 +65,7 @@ export class FieldInteractionApi {
     private formUtils: FormUtils,
     private http: HttpClient,
     private labels: NovoLabelService,
-  ) { }
+  ) {}
 
   set form(form: any) {
     this._form = form;
@@ -407,14 +408,7 @@ export class FieldInteractionApi {
     return this.modalService.open(ControlPromptModal, { changes: changes, key: key }).onClosed;
   }
 
-  public promptCustomModal(key: string,
-    modalConfig: {
-      notificationType?: string,
-      header?: string,
-      message?: string,
-      buttonCancel?: { label: string; theme?: string, icon?: string },
-      buttonOK?: { label: string; theme?: string, icon?: string }
-    }): Promise<boolean> {
+  public promptCustomModal(key: string, modalConfig: ModalConfig): Promise<boolean> {
     (document.activeElement as any).blur();
     return this.modalService.open(ControlCustomPromptModal, { key, modalConfig }).onClosed;
   }
