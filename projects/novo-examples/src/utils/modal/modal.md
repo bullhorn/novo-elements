@@ -30,6 +30,10 @@ In the case where "Success", "Warning", and "Error" notfications aren't enough, 
 
 <code-example example="custom-modal"></code-example>
 
+NEW!!!!
+
+<code-example example="all-custom-modal"></code-example>
+
 Workflow Modals
 ---------------
 

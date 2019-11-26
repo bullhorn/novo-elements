@@ -34,7 +34,7 @@ export { NovoTableMode } from './elements/table/Table';
 export { NovoIconModule } from './elements/icon/Icon.module';
 export { NovoExpansionModule } from './elements/expansion/expansion.module';
 export { NovoStepperModule } from './elements/stepper/stepper.module';
-export { NovoVerticalStepper, NovoHorizontalStepper, NovoStep, NovoStepper} from './elements/stepper/stepper.component';
+export { NovoVerticalStepper, NovoHorizontalStepper, NovoStep, NovoStepper } from './elements/stepper/stepper.component';
 export { NovoTableExtrasModule } from './elements/table/extras/TableExtras.module';
 export { NovoFormModule } from './elements/form/Form.module';
 export { NovoDynamicFormElement } from './elements/form/DynamicForm';
@@ -71,7 +71,7 @@ export {
   TabbedGroupPickerTab,
   QuickSelectConfig,
   TabbedGroupPickerQuickSelect,
-  TabbedGroupPickerButtonConfig
+  TabbedGroupPickerButtonConfig,
 } from './elements/tabbed-group-picker/TabbedGroupPicker';
 export { NovoTabbedGroupPickerModule } from './elements/tabbed-group-picker/TabbedGroupPicker.module';
 // Export specific elements that are used in local references and/or view children
@@ -90,7 +90,7 @@ export { CollectionEvent } from './services/data-provider/CollectionEvent';
 export { ArrayCollection } from './services/data-provider/ArrayCollection';
 export { PagedArrayCollection } from './services/data-provider/PagedArrayCollection';
 // Export classes that will need to be imported
-export { NovoModalParams, NovoModalRef } from './elements/modal/Modal';
+export { NovoModalParams, NovoModalRef, NovoCustomModalParams } from './elements/modal/Modal';
 export { QuickNoteResults } from './elements/quick-note/extras/quick-note-results/QuickNoteResults';
 export { PickerResults } from './elements/picker/extras/picker-results/PickerResults';
 export { BasePickerResults } from './elements/picker/extras/base-picker-results/BasePickerResults';

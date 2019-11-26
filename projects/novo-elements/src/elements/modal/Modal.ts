@@ -13,6 +13,16 @@ export interface ModalParams {
 }
 export class NovoModalParams implements ModalParams {}
 
+export interface ModalConfig {
+  notificationType?: string;
+  header?: string;
+  message?: string;
+  buttonCancel?: { label: string; theme?: string; icon?: string };
+  buttonOK?: { label: string; theme?: string; icon?: string };
+}
+
+export class NovoCustomModalParams implements ModalConfig {}
+
 /**
  * Reference to an opened dialog.
  */
