@@ -26,7 +26,7 @@ import { NovoDragulaModule } from './../dragula/Dragula.module';
 import { NovoTipWellModule } from './../tip-well/TipWell.module';
 import { NovoAceEditorModule } from './../ace-editor/AceEditor.module';
 import { NovoModalModule } from './../modal/Modal.module';
-import { ControlConfirmModal, ControlPromptModal } from './FieldInteractionModals';
+import { ControlConfirmModal, ControlPromptModal, ControlCustomPromptModal } from './FieldInteractionModals';
 import { NovoControlGroup } from './ControlGroup';
 import { NovoControlTemplates } from './ControlTemplates';
 import { NovoTemplateService } from './../../services/template/NovoTemplateService';
@@ -66,6 +66,7 @@ import { NovoCommonModule } from '../common/common.module';
     NovoFieldsetHeaderElement,
     ControlConfirmModal,
     ControlPromptModal,
+    ControlCustomPromptModal,
     NovoControlGroup,
     NovoControlTemplates,
   ],
@@ -78,7 +79,7 @@ import { NovoCommonModule } from '../common/common.module';
     NovoControlGroup,
     NovoControlTemplates,
   ],
-  entryComponents: [ControlConfirmModal, ControlPromptModal],
+  entryComponents: [ControlConfirmModal, ControlPromptModal, ControlCustomPromptModal],
   providers: [NovoTemplateService],
 })
 export class NovoFormModule {}
