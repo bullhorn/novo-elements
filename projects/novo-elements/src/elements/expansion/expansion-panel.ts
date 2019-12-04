@@ -181,4 +181,4 @@ export class NovoExpansionPanel extends CdkAccordionItem implements AfterContent
     class: 'novo-action-row',
   },
 })
-export class NovoExpansionPanelActionRow { }
+export class NovoExpansionPanelActionRow {}
