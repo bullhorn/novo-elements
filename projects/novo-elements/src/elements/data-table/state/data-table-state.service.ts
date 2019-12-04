@@ -2,7 +2,7 @@ import { EventEmitter } from '@angular/core';
 import { Subject } from 'rxjs';
 
 import { IDataTableChangeEvent, IDataTableFilter } from '../interfaces';
-import { Helpers } from '../../..';
+import { Helpers } from '../../../utils/Helpers';
 import { NovoDataTableFilterUtils } from '../services/data-table-filter-utils';
 
 export class DataTableState<T> {
