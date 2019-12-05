@@ -378,7 +378,7 @@ export class BasePickerResults {
   }
 
   preselected(match) {
-    if (this.config.preselected) {
+    if (this.config && this.config.preselected) {
       let preselectedFunc: Function = this.config.preselected;
       return (
         this.selected.findIndex((item) => {

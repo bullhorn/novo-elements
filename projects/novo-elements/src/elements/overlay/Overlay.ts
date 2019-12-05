@@ -16,19 +16,32 @@ import {
   ViewContainerRef,
 } from '@angular/core';
 import {
-  ConnectedPositionStrategy,
   HorizontalConnectionPos,
   Overlay,
   OverlayConfig,
   OverlayRef,
   ScrollStrategy,
   VerticalConnectionPos,
+  FlexibleConnectedPositionStrategy,
+  ConnectionPositionPair,
 } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
 import { DOCUMENT } from '@angular/common';
 // Vendor
 import { Observable, Subscription, of as observableOf, merge, fromEvent } from 'rxjs';
 import { filter, first, switchMap } from 'rxjs/operators';
+
+export type OverlayPosition =
+  | 'default'
+  | 'right'
+  | 'above-below'
+  | 'right-above-below'
+  | 'center'
+  | 'bottom'
+  | 'bottom-left'
+  | 'bottom-right'
+  | 'top-left'
+  | 'top-right';
 
 @Component({
   selector: 'novo-overlay-template',
@@ -48,17 +61,7 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
   public panel: ElementRef;
 
   @Input()
-  public position:
-    | 'default'
-    | 'right'
-    | 'above-below'
-    | 'right-above-below'
-    | 'center'
-    | 'bottom'
-    | 'bottom-left'
-    | 'bottom-right'
-    | 'top-left'
-    | 'top-right' = 'default';
+  public position: OverlayPosition;
   @Input()
   public scrollStrategy: 'reposition' | 'block' | 'close' = 'reposition';
   @Input()
@@ -227,7 +230,7 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
       config.height = this.height;
     }
 
-    config.positionStrategy = this.getPosition();
+    config.positionStrategy = this.getPosition(this.position);
     config.hasBackdrop = false;
     config.direction = 'ltr';
     config.scrollStrategy = this.getScrollStrategy();
@@ -235,41 +238,42 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
     return config;
   }
 
-  /**
-   * Supports the following position strategies:
-   * 'default', 'right', 'bottom', 'center', 'bottom-left', 'bottom-right', 'top-left', 'top-right'
-   */
-  protected getPosition(): ConnectedPositionStrategy {
-    if (this.position === 'center') {
-      return this.overlay
-        .position()
-        .connectedTo(this.getConnectedElement(), { originX: 'start', originY: 'center' }, { overlayX: 'start', overlayY: 'center' })
-        .withFallbackPosition({ originX: 'start', originY: 'top' }, { overlayX: 'start', overlayY: 'top' })
-        .withFallbackPosition({ originX: 'start', originY: 'bottom' }, { overlayX: 'start', overlayY: 'bottom' });
+  protected getPosition(position: OverlayPosition): FlexibleConnectedPositionStrategy {
+    return this.overlay
+      .position()
+      .flexibleConnectedTo(this.getConnectedElement())
+      .withPositions(this._getPositions(position));
+  }
+
+  private _getPositions(position: OverlayPosition): ConnectionPositionPair[] {
+    if (position === 'center') {
+      return [
+        { originX: 'start', originY: 'center', overlayX: 'start', overlayY: 'center' },
+        { originX: 'start', originY: 'top', overlayX: 'start', overlayY: 'top' },
+        { originX: 'start', originY: 'bottom', overlayX: 'start', overlayY: 'bottom' },
+      ];
     }
 
-    let [originX, fallbackX]: HorizontalConnectionPos[] = this.position.includes('right') ? ['end', 'start'] : ['start', 'end'];
-    let [originY, overlayY]: VerticalConnectionPos[] = this.position.includes('top') ? ['top', 'bottom'] : ['bottom', 'top'];
+    const positions: ConnectionPositionPair[] = [];
 
-    let strategy: ConnectedPositionStrategy = this.overlay
-      .position()
-      .connectedTo(this.getConnectedElement(), { originX, originY }, { overlayX: originX, overlayY })
-      .withDirection('ltr');
+    const [originX, fallbackX]: HorizontalConnectionPos[] = position.includes('right') ? ['end', 'start'] : ['start', 'end'];
+    const [originY, overlayY]: VerticalConnectionPos[] = position.includes('top') ? ['top', 'bottom'] : ['bottom', 'top'];
 
-    if (this.position === 'bottom') {
-      strategy = strategy.withFallbackPosition({ originX: fallbackX, originY: 'bottom' }, { overlayX: fallbackX, overlayY: 'top' });
-    } else if (this.position === 'right' || this.position === 'default' || this.position.includes('above-below')) {
-      strategy = strategy
-        .withFallbackPosition({ originX, originY: 'top' }, { overlayX: originX, overlayY: 'bottom' })
-        .withFallbackPosition({ originX: fallbackX, originY: 'bottom' }, { overlayX: fallbackX, overlayY: 'top' })
-        .withFallbackPosition({ originX: fallbackX, originY: 'top' }, { overlayX: fallbackX, overlayY: 'bottom' });
-      if (!this.position.includes('above-below')) {
-        strategy = strategy
-          .withFallbackPosition({ originX: originX, originY: 'center' }, { overlayX: originX, overlayY: 'center' })
-          .withFallbackPosition({ originX: fallbackX, originY: 'center' }, { overlayX: fallbackX, overlayY: 'center' });
+    positions.push({ originX, originY, overlayX: originX, overlayY });
+
+    if (position === 'bottom') {
+      positions.push({ originX: fallbackX, originY: 'bottom', overlayX: fallbackX, overlayY: 'top' });
+    } else if (position === 'right' || position === 'default' || position.includes('above-below')) {
+      positions.push({ originX, originY: 'top', overlayX: originX, overlayY: 'bottom' });
+      positions.push({ originX: fallbackX, originY: 'bottom', overlayX: fallbackX, overlayY: 'top' });
+      positions.push({ originX: fallbackX, originY: 'top', overlayX: fallbackX, overlayY: 'bottom' });
+      if (!position.includes('above-below')) {
+        positions.push({ originX: originX, originY: 'center', overlayX: originX, overlayY: 'center' });
+        positions.push({ originX: fallbackX, originY: 'center', overlayX: fallbackX, overlayY: 'center' });
       }
     }
-    return strategy;
+
+    return positions;
   }
 
   protected getScrollStrategy(): ScrollStrategy {
