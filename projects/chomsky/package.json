@@ -2,8 +2,8 @@
   "name": "chomsky",
   "version": "3.5.0",
   "peerDependencies": {
-    "@angular/common": ">=7",
-    "@angular/core": ">=7",
+    "@angular/common": ">=8",
+    "@angular/core": ">=8",
     "rxjs": ">=6"
   }
 }
