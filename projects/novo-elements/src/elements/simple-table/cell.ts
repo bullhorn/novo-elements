@@ -143,9 +143,6 @@ export class NovoSimpleCell<T> extends _NovoCell implements OnInit {
   @Input()
   public column: SimpleTableColumn<T>;
 
-  // @ViewChild('span', { static: true })
-  // private spanElement: ElementRef;
-
   constructor(columnDef: CdkColumnDef, private elementRef: ElementRef, private renderer: Renderer2) {
     super(columnDef, elementRef);
     renderer.setAttribute(elementRef.nativeElement, 'data-automation-id', `novo-column-${columnDef.cssClassFriendlyName}`);
