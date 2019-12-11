@@ -3,7 +3,7 @@ type OptionsFunctionConfig = {
   format?: string;
 } & (
   | { where: string; emptyPickerMessage?: string }
-  | { optionsPromise: (query: string, http: CustomHttp) => Promise<unknown[]> }
+  | { optionsPromise: (query: string, http: CustomHttp, page: number) => Promise<unknown[]> }
   | { optionsUrl: string }
   | { optionsUrlBuilder: (query: string) => string });
 
