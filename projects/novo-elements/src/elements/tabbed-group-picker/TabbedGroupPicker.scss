@@ -51,6 +51,9 @@
 .tabbed-group-picker-column-container {
   display: flex;
   flex-direction: row;
+  @media (max-height: 720px) {
+    max-height: 56vh;
+  }
 
   .tabbed-group-picker-column {
     display: flex;
@@ -127,11 +130,17 @@
         }
       }
       novo-list {
-        height: 100%;
+        @media (min-height: 720px) {
+          height: 100%;
+        }
 
         cdk-virtual-scroll-viewport {
           height: 27em;
           overflow-x: hidden;
+          @media (max-height: 720px) {
+            height: 19em;
+            overflow: auto;
+          }
 
           novo-list-item {
             padding: 0.75em 1.75em;
@@ -145,11 +154,14 @@
               color: darken($light, 55%);
             }
 
-            novo-checkbox .check-box-group label span {
-              white-space: nowrap;
-              overflow: hidden;
-              text-overflow: ellipsis;
-              width: 17em;
+            novo-checkbox .check-box-group {
+              margin-right: 0;
+              label span {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                width: 16.23em;
+              }
             }
           }
         }
