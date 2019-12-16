@@ -30,12 +30,4 @@ describe('Elements: NovoFormElement', () => {
     expect(component.layout).toBe('vertical');
     expect(component.form.layout).toBe('vertical');
   });
-
-  it('should return the value', () => {
-    expect(component.value).toEqual('TEST');
-  });
-
-  it('should return the valid', () => {
-    expect(component.isValid).toBe(false);
-  });
 });

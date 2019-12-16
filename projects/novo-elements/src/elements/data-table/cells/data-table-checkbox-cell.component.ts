@@ -13,7 +13,6 @@ import { CdkCell, CdkColumnDef } from '@angular/cdk/table';
 import { Subscription } from 'rxjs';
 
 import { NovoDataTable } from '../data-table.component';
-import { DataTableState } from '../state/data-table-state.service';
 
 @Component({
   selector: 'novo-data-table-checkbox-cell',

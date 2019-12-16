@@ -126,7 +126,7 @@ export class NovoSimpleFilterFocus implements AfterViewInit {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NovoSimpleCellHeader implements NovoSimpleSortFilter, OnInit, OnDestroy {
-  @ViewChild(NovoDropdownElement)
+  @ViewChild(NovoDropdownElement, { static: false })
   dropdown: NovoDropdownElement;
 
   @Input()

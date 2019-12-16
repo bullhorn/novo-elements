@@ -34,9 +34,7 @@ import { filter, first, switchMap } from 'rxjs/operators';
   selector: 'novo-overlay-template',
   template: `
     <ng-template>
-      <div class="novo-overlay-panel" role="listbox" [id]="id" #panel>
-        <ng-content></ng-content>
-      </div>
+      <div class="novo-overlay-panel" role="listbox" [id]="id" #panel><ng-content></ng-content></div>
     </ng-template>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -44,9 +42,9 @@ import { filter, first, switchMap } from 'rxjs/operators';
 export class NovoOverlayTemplateComponent implements OnDestroy {
   public id: string = `novo-overlay-${Date.now()}`;
 
-  @ViewChild(TemplateRef)
+  @ViewChild(TemplateRef, { static: false })
   public template: TemplateRef<any>;
-  @ViewChild('panel')
+  @ViewChild('panel', { static: false })
   public panel: ElementRef;
 
   @Input()

@@ -34,7 +34,7 @@ export { NovoTableMode } from './elements/table/Table';
 export { NovoIconModule } from './elements/icon/Icon.module';
 export { NovoExpansionModule } from './elements/expansion/expansion.module';
 export { NovoStepperModule } from './elements/stepper/stepper.module';
-export { NovoVerticalStepper, NovoHorizontalStepper, NovoStep, NovoStepper} from './elements/stepper/stepper.component';
+export { NovoVerticalStepper, NovoHorizontalStepper, NovoStep, NovoStepper } from './elements/stepper/stepper.component';
 export { NovoTableExtrasModule } from './elements/table/extras/TableExtras.module';
 export { NovoFormModule } from './elements/form/Form.module';
 export { NovoDynamicFormElement } from './elements/form/DynamicForm';

@@ -34,7 +34,7 @@ export const _NovoStepper = CdkStepper;
 })
 export class NovoStep extends CdkStep {
   /** Content for step label given by `<ng-template novoStepLabel>`. */
-  @ContentChild(NovoStepLabel)
+  @ContentChild(NovoStepLabel, { static: false })
   stepLabel: NovoStepLabel;
 
   @Input()
