@@ -597,7 +597,7 @@ export class FieldInteractionApi {
     filteredOptionsCreator?: (where?: string) => ((query: string, page?: number) => Promise<unknown[]>),
   ): ((query: string) => Promise<unknown[]>) => (query: string, page?: number) => {
     if ('optionsPromise' in config && config.optionsPromise) {
-      return config.optionsPromise(query, new CustomHttpImpl(this.http));
+      return config.optionsPromise(query, new CustomHttpImpl(this.http), page);
     } else if (('optionsUrlBuilder' in config && config.optionsUrlBuilder) || ('optionsUrl' in config && config.optionsUrl)) {
       return new Promise((resolve, reject) => {
         const url = 'optionsUrlBuilder' in config ? config.optionsUrlBuilder(query) : `${config.optionsUrl}?filter=${query || ''}`;
