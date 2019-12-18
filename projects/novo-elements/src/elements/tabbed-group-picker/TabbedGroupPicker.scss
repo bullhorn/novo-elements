@@ -51,9 +51,6 @@
 .tabbed-group-picker-column-container {
   display: flex;
   flex-direction: row;
-  @media (max-height: 720px) {
-    max-height: 56vh;
-  }
 
   .tabbed-group-picker-column {
     display: flex;
@@ -130,16 +127,12 @@
         }
       }
       novo-list {
-        @media (min-height: 720px) {
-          height: 100%;
-        }
 
         cdk-virtual-scroll-viewport {
           height: 27em;
           overflow-x: hidden;
           @media (max-height: 720px) {
-            height: 19em;
-            overflow: auto;
+            height: 18em;
           }
 
           novo-list-item {
