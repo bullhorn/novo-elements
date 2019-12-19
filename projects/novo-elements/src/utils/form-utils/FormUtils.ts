@@ -528,7 +528,7 @@ export class FormUtils {
           embeddedFields.forEach((embeddedField) => {
             if (this.shouldCreateControl(embeddedField)) {
               let control = this.createControl(embeddedField, data, http, config, overrides, currencyFormat);
-              control = this.markControlAsEmbedded(control, field.dataSpecialization.toLowerCase());
+              control = this.markControlAsEmbedded(control, field.dataSpecialization ? field.dataSpecialization.toLowerCase() : null);
               fieldsets[fieldsets.length - 1].controls.push(control);
             }
           });
@@ -618,8 +618,8 @@ export class FormUtils {
       title: field.label,
       icon: field.icon || 'bhi-section',
       controls: [],
-      isEmbedded: field.dataSpecialization.toLowerCase() === 'embedded',
-      isInlineEmbedded: field.dataSpecialization.toLowerCase() === 'inline_embedded',
+      isEmbedded: field.dataSpecialization && field.dataSpecialization.toLowerCase() === 'embedded',
+      isInlineEmbedded: field.dataSpecialization && field.dataSpecialization.toLowerCase() === 'inline_embedded',
     });
   }
 
