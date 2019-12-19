@@ -528,7 +528,7 @@ export class FormUtils {
           embeddedFields.forEach((embeddedField) => {
             if (this.shouldCreateControl(embeddedField)) {
               let control = this.createControl(embeddedField, data, http, config, overrides, currencyFormat);
-              control = this.markControlAsEmbedded(control);
+              control = this.markControlAsEmbedded(control, field.dataSpecialization.toLowerCase());
               fieldsets[fieldsets.length - 1].controls.push(control);
             }
           });
@@ -623,20 +623,13 @@ export class FormUtils {
     });
   }
 
-  private markControlAsEmbedded(control) {
+  private markControlAsEmbedded(control, dataSpecialization?: 'embedded' | 'inline_embedded') {
     if (Helpers.isBlank(control['config'])) {
       control['config'] = {};
     }
     control['config']['embedded'] = true;
-    control.isEmbedded = true;
-    return control;
-  }
-
-  private markControlAsInlineEmbedded(control) {
-    if (Helpers.isBlank(control['config'])) {
-      control['config'] = {};
-    }
-    control.isInlineEmbedded = true;
+    control.isEmbedded = dataSpecialization === 'embedded';
+    control.isInlineEmbedded = dataSpecialization === 'inline_embedded';
     return control;
   }
 
