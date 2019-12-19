@@ -176,7 +176,11 @@ export class FormUtils {
       if ('SYSTEM' === field.dataSpecialization && ['WorkflowOptionsLookup', 'SpecializedOptionsLookup'].includes(field.dataType)) {
         type = dataSpecializationTypeMap[field.dataType];
       } else if (['WORKFLOW_OPTIONS', 'SPECIALIZED_OPTIONS'].includes(field.dataSpecialization)) {
-        type = dataSpecializationTypeMap[field.dataSpecialization];
+        if (['TILES'].includes(field.inputType) && !field.multiValue) {
+          type = 'tiles';
+        } else {
+          type = dataSpecializationTypeMap[field.dataSpecialization];
+        }
       } else if (this.hasAssociatedEntity(field)) {
         type = 'entitypicker'; // TODO!
       } else {
@@ -551,7 +555,7 @@ export class FormUtils {
   }
 
   private isEmbeddedField(field) {
-    return field.dataSpecialization && field.dataSpecialization.toLowerCase() === 'embedded' && !field.readOnly;
+    return field.dataSpecialization && ['embedded', 'inline_embedded'].includes(field.dataSpecialization.toLowerCase()) && !field.readOnly;
   }
 
   private createControl(field, data, http, config, overrides, currencyFormat) {
@@ -614,6 +618,8 @@ export class FormUtils {
       title: field.label,
       icon: field.icon || 'bhi-section',
       controls: [],
+      isEmbedded: field.dataSpecialization.toLowerCase() === 'embedded',
+      isInlineEmbedded: field.dataSpecialization.toLowerCase() === 'inline_embedded',
     });
   }
 
@@ -622,6 +628,15 @@ export class FormUtils {
       control['config'] = {};
     }
     control['config']['embedded'] = true;
+    control.isEmbedded = true;
+    return control;
+  }
+
+  private markControlAsInlineEmbedded(control) {
+    if (Helpers.isBlank(control['config'])) {
+      control['config'] = {};
+    }
+    control.isInlineEmbedded = true;
     return control;
   }
 
