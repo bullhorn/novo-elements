@@ -3,6 +3,8 @@
   "compilerOptions": {
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
+    "downlevelIteration": true,
+    // "incremental": true,
     "sourceMap": true,
     "declaration": false,
     "module": "esnext",
@@ -17,7 +19,6 @@
       "novo-elements": ["dist/novo-elements"],
       "novo-examples": ["dist/novo-examples"],
       "chomsky": ["dist/chomsky"]
-      // comment the above paths and uncomment the following paths to compile with sources
       // "novo-elements": ["projects/novo-elements/src/index"],
       // "novo-examples": ["projects/novo-examples/src/index"],
       // "chomsky": ["projects/chomsky/src/index"],

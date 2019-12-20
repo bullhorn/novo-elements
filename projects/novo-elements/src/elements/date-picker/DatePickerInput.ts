@@ -5,10 +5,8 @@ import {
   ElementRef,
   OnInit,
   forwardRef,
-  Host,
   Input,
   Output,
-  Inject,
   ViewChild,
   EventEmitter,
   HostBinding,
@@ -16,11 +14,9 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { TAB, ENTER, ESCAPE } from '@angular/cdk/keycodes';
 // Vendor
-import { TextMaskModule } from 'angular2-text-mask';
 import * as dateFns from 'date-fns';
 import createAutoCorrectedDatePipe from 'text-mask-addons/dist/createAutoCorrectedDatePipe';
 // App
-import { NovoDatePickerElement } from './DatePicker';
 import { NovoOverlayTemplateComponent } from '../overlay/Overlay';
 import { NovoLabelService } from '../../services/novo-label-service';
 import { Helpers } from '../../utils/Helpers';
@@ -80,7 +76,7 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
   @Output()
   focusEvent: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
   /** Element for the panel containing the autocomplete options. */
-  @ViewChild(NovoOverlayTemplateComponent)
+  @ViewChild(NovoOverlayTemplateComponent, { static: false })
   overlay: NovoOverlayTemplateComponent;
 
   constructor(

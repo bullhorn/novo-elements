@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.16.0"></a>
+# [3.16.0](https://github.com/bullhorn/novo-elements/compare/v3.15.0...v3.16.0) (2019-12-03)
+
+
+### Features
+
+* **TipWell:** https://github.com/bullhorn/novo-elements/issues/1041 ([#1056](https://github.com/bullhorn/novo-elements/issues/1056)) ([3044bd9](https://github.com/bullhorn/novo-elements/commit/3044bd9))
+
+
+
 <a name="3.15.0"></a>
 # [3.15.0](https://github.com/bullhorn/novo-elements/compare/v3.14.0...v3.15.0) (2019-11-08)
 

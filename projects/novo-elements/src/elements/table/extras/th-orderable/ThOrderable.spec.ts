@@ -7,12 +7,12 @@ import { ThOrderable } from './ThOrderable';
 @Component({
   selector: 'test-component',
   template: `
-        <table>
-            <tr>
-                <th novoThOrderable="right"></th>
-            </tr>
-        </table>
-    `,
+    <table>
+      <tr>
+        <th novoThOrderable="right"></th>
+      </tr>
+    </table>
+  `,
 })
 class TestComponent {}
 
@@ -34,7 +34,7 @@ describe('Elements: ThOrderable', () => {
     });
   });
   describe('Class: ', () => {
-    let mockElement = new ElementRef(document.createElement('div'));
+    let mockElement = new ElementRef(document.createElement('div')) as any;
     let subject = new ThOrderable(mockElement);
     mockElement.nativeElement = {
       parentNode: {

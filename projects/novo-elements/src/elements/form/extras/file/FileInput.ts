@@ -140,11 +140,11 @@ const LAYOUT_DEFAULTS = { order: 'default', download: true, removable: true, lab
   `,
 })
 export class NovoFileInputElement implements ControlValueAccessor, OnInit, OnDestroy, OnChanges {
-  @ViewChild('fileInput')
+  @ViewChild('fileInput', { static: true })
   fileInput: TemplateRef<any>;
-  @ViewChild('fileOutput')
+  @ViewChild('fileOutput', { static: true })
   fileOutput: TemplateRef<any>;
-  @ViewChild('container', { read: ViewContainerRef })
+  @ViewChild('container', { read: ViewContainerRef, static: true })
   container: ViewContainerRef;
 
   @Input()
@@ -190,8 +190,8 @@ export class NovoFileInputElement implements ControlValueAccessor, OnInit, OnDes
   target: any;
   fileOutputBag: string;
 
-  onModelChange: Function = () => {};
-  onModelTouched: Function = () => {};
+  onModelChange: Function = () => { };
+  onModelTouched: Function = () => { };
 
   constructor(private element: ElementRef, public labels: NovoLabelService, private dragula: NovoDragulaService) {
     this.commands = {

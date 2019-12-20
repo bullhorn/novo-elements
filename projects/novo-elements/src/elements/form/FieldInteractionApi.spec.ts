@@ -50,18 +50,18 @@ describe('FieldInteractionApi', () => {
     it('adds properties to a picker config without deleting any', () => {
       service.form.controls.doughnuts.config = { oldProperty: 'old!' };
 
-      service.addPropertiesToPickerConfig('doughnuts', {newProperty: 'new!'});
+      service.addPropertiesToPickerConfig('doughnuts', { newProperty: 'new!' });
 
       expect(setProperty).toBeCalledWith('doughnuts', 'config', { newProperty: 'new!', oldProperty: 'old!' });
-      expect(triggerEvent).toBeCalledWith({controlKey: 'doughnuts', prop: 'pickerConfig', value: {newProperty: 'new!'} });
+      expect(triggerEvent).toBeCalledWith({ controlKey: 'doughnuts', prop: 'pickerConfig', value: { newProperty: 'new!' } });
     });
     it('overrides pre-existing properties', () => {
-      service.form.controls.doughnuts.config = { oldProperty: 'old!'};
+      service.form.controls.doughnuts.config = { oldProperty: 'old!' };
 
-      service.addPropertiesToPickerConfig('doughnuts', {oldProperty: 'new!'});
+      service.addPropertiesToPickerConfig('doughnuts', { oldProperty: 'new!' });
 
-      expect(setProperty).toBeCalledWith('doughnuts', 'config', {oldProperty: 'new!'});
-      expect(triggerEvent).toBeCalledWith({controlKey: 'doughnuts', prop: 'pickerConfig', value: {oldProperty: 'new!'} });
+      expect(setProperty).toBeCalledWith('doughnuts', 'config', { oldProperty: 'new!' });
+      expect(triggerEvent).toBeCalledWith({ controlKey: 'doughnuts', prop: 'pickerConfig', value: { oldProperty: 'new!' } });
     });
     it('does not allow picker modifications if restrictFieldInteractions is true for that control', () => {
       service.form = { controls: { doughnuts: { restrictFieldInteractions: true } } };
@@ -96,11 +96,13 @@ describe('FieldInteractionApi', () => {
         optionsUrl: 'fake/url',
       };
       const spy = spyOn(args, 'optionsPromise').and.returnValue(Promise.resolve([]));
+      const query = 'Novo Elem';
+      const page = 9;
 
       const result = service.getOptionsConfig(args) as { options: OptionsFunction };
-      await result.options('asdf');
+      await result.options(query, page);
 
-      expect(spy).toHaveBeenCalled();
+      expect(spy).toHaveBeenCalledWith(query, jasmine.any(Object), page);
       done();
     });
     it('uses the optionsURLBuilder if included and not optionsUrl', async (done) => {

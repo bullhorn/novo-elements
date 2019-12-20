@@ -33,18 +33,15 @@ declare var CKEDITOR: any;
   selector: 'novo-quick-note',
   providers: [QUICK_NOTE_VALUE_ACCESSOR],
   template: `
-        <div class="quick-note-wrapper" #wrapper>
-            <textarea #host></textarea>
-            <span #results></span>
-        </div>
-    `,
+    <div class="quick-note-wrapper" #wrapper><textarea #host></textarea> <span #results></span></div>
+  `,
 })
 export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy, AfterViewInit {
-  @ViewChild('wrapper')
+  @ViewChild('wrapper', { static: true })
   public wrapper: ElementRef;
-  @ViewChild('host')
+  @ViewChild('host', { static: true })
   public host: ElementRef;
-  @ViewChild('results', { read: ViewContainerRef })
+  @ViewChild('results', { read: ViewContainerRef, static: true })
   results: ViewContainerRef;
 
   @Input()

@@ -67,8 +67,7 @@ const SELECT_VALUE_ACCESSOR = {
           (click)="setValueAndClose({ value: option, index: i })"
           [attr.data-automation-value]="option.label"
         >
-          <span [innerHtml]="highlight(option.label, filterTerm)"></span>
-          <i *ngIf="option.active" class="bhi-check"></i>
+          <span [innerHtml]="highlight(option.label, filterTerm)"></span> <i *ngIf="option.active" class="bhi-check"></i>
         </li>
       </ul>
     </novo-overlay-template>
@@ -109,9 +108,9 @@ export class NovoSelectElement implements OnInit, OnChanges, OnDestroy, ControlV
   disabled: boolean = false;
 
   /** Element for the panel containing the autocomplete options. */
-  @ViewChild(NovoOverlayTemplateComponent)
+  @ViewChild(NovoOverlayTemplateComponent, { static: true })
   overlay: NovoOverlayTemplateComponent;
-  @ViewChild('dropdownElement')
+  @ViewChild('dropdownElement', { static: true })
   dropdown: ElementRef;
 
   constructor(

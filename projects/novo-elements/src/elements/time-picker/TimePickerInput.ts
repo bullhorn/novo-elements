@@ -78,7 +78,7 @@ export class NovoTimePickerInputElement implements OnInit, ControlValueAccessor 
   @Output()
   focusEvent: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
   /** Element for the panel containing the autocomplete options. */
-  @ViewChild(NovoOverlayTemplateComponent)
+  @ViewChild(NovoOverlayTemplateComponent, { static: false })
   overlay: NovoOverlayTemplateComponent;
 
   constructor(

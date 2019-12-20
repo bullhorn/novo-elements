@@ -62,7 +62,7 @@ export type TabbedGroupPickerButtonConfig = {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NovoTabbedGroupPickerElement implements OnDestroy, OnInit {
-  @ViewChild('tabbedGroupPickerVirtualScrollViewport')
+  @ViewChild('tabbedGroupPickerVirtualScrollViewport', { static: false })
   private scrollableInstance: CdkScrollable;
 
   @Input() buttonConfig: TabbedGroupPickerButtonConfig;
