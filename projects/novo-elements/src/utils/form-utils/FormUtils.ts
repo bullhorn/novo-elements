@@ -232,6 +232,7 @@ export class FormUtils {
       placeholder: field.hint || '',
       required: field.required || field.systemRequired,
       hidden: !field.required,
+      forceHide: !!field.forceHide,
       encrypted: this.isFieldEncrypted(field.name ? field.name.toString() : ''),
       value: field.value || field.defaultValue,
       sortOrder: field.sortOrder,
