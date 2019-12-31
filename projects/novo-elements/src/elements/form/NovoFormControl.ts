@@ -9,6 +9,7 @@ import { IMaskOptions } from './Control';
 export class NovoFormControl extends FormControl {
   displayValueChanges: EventEmitter<any> = new EventEmitter<any>();
   hidden: boolean;
+  forceHide: boolean = false;
   encrypted: boolean;
   key: string;
   required: boolean;
@@ -73,6 +74,7 @@ export class NovoFormControl extends FormControl {
     this.label = control.label;
     this.readOnly = control.readOnly;
     this.hidden = control.hidden;
+    this.forceHide = control.forceHide;
     this.encrypted = control.encrypted;
     this.config = control.config;
     this.type = control.type;

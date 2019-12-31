@@ -716,14 +716,18 @@ export class FormUtils {
 
   forceShowAllControls(controls: Array<NovoControlConfig>) {
     controls.forEach((control) => {
-      control.hidden = false;
+      if (!control.forceHide) {
+        control.hidden = false;
+      }
     });
   }
 
   forceShowAllControlsInFieldsets(fieldsets: Array<NovoFieldset>) {
     fieldsets.forEach((fieldset) => {
       fieldset.controls.forEach((control) => {
-        control.hidden = false;
+        if (!control.forceHide) {
+          control.hidden = false;
+        }
       });
     });
   }
