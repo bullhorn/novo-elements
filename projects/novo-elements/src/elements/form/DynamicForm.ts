@@ -137,7 +137,9 @@ export class NovoDynamicFormElement implements OnChanges, OnInit, AfterContentIn
     if (this.allFieldsNotRequired && this.hideNonRequiredFields) {
       this.fieldsets.forEach((fieldset) => {
         fieldset.controls.forEach((control) => {
-          this.form.controls[control.key].hidden = false;
+          if (!control.forceHide) {
+            this.form.controls[control.key].hidden = false;
+          }
         });
       });
     }
@@ -156,7 +158,7 @@ export class NovoDynamicFormElement implements OnChanges, OnInit, AfterContentIn
     this.form.fieldsets.forEach((fieldset) => {
       fieldset.controls.forEach((control) => {
         const ctl = this.form.controls[control.key];
-        if (!this.fieldsAlreadyHidden.includes(control.key)) {
+        if (!this.fieldsAlreadyHidden.includes(control.key) && !ctl.forceHide) {
           ctl.hidden = false;
         }
       });
@@ -190,7 +192,7 @@ export class NovoDynamicFormElement implements OnChanges, OnInit, AfterContentIn
         }
 
         // Don't hide fields with errors
-        if (ctl.errors) {
+        if (ctl.errors && !ctl.forceHide) {
           ctl.hidden = false;
         }
       });
