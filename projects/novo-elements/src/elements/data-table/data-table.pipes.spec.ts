@@ -1,7 +1,5 @@
 // APP
-import {DateTableDateTimeRendererPipe} from "./data-table.pipes";
-import {async, inject, TestBed} from "@angular/core/testing";
-import {IDataTableColumn, NovoLabelService} from "../..";
+import {DateTableDateTimeRendererPipe} from './data-table.pipes';
 
 class MockNovoLabelService {
   formatDateShort(val) {}
