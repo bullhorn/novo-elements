@@ -50308,7 +50308,9 @@ class DateTableDateTimeRendererPipe {
      */
     transform(value, column) {
         if (!Helpers.isEmpty(value)) {
-            return column.format ? value : this.labels.formatDate(interpolateCell(value, column));
+            /** @type {?} */
+            let val = interpolateCell(value, column);
+            return this.labels.formatDateShort(val);
         }
         return '';
     }
