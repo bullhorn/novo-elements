@@ -17,7 +17,7 @@ describe('Pipe: DateTableDateTimeRendererPipe', () => {
   describe('When rendering strings', () => {
     it('should make a call to the novo-label service if the value is not null', () => {
       // Arrange
-      spyOn(pipe.labels, 'formatDateShort')
+      spyOn(pipe.labels, 'formatDateShort');
       const testVal = 1234567890;
       const testColumn = {
         label: 'Test',
@@ -31,7 +31,7 @@ describe('Pipe: DateTableDateTimeRendererPipe', () => {
     });
     it('should return an empty string if the value is null', () => {
       // Arrange
-      spyOn(pipe.labels, 'formatDateShort')
+      spyOn(pipe.labels, 'formatDateShort');
       const testVal = null;
       const testColumn = {
         label: 'Test',
