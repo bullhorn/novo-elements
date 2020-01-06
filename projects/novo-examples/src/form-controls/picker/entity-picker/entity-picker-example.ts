@@ -9,12 +9,12 @@ import { Component } from '@angular/core';
   styleUrls: ['entity-picker-example.css'],
 })
 export class EntityPickerExample {
-  public placeholder: string = 'Select...';
-  public entityDemo: any;
-  public entity: any;
+  placeholder: string = 'Select...';
+  entityDemo: any;
+  entity: any;
 
   constructor() {
-    let collaborators = [
+    const collaborators = [
       {
         id: 1,
         firstName: 'Brian',

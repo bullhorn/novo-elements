@@ -5,8 +5,6 @@ import { TestBed, async, inject } from '@angular/core/testing';
 import { OptionsService } from './OptionsService';
 
 describe('Element: OptionsService', () => {
-  let fixture: any;
-  let component: any;
   let service: any;
 
   beforeEach(async(() => {
@@ -29,12 +27,12 @@ describe('Element: OptionsService', () => {
   });
   describe('Function: getOptionsConfig()', () => {
     it('should return default config', () => {
-      let http = {
+      const http = {
         get: (test) => {
           return { subscribe: (x, y) => {} };
         },
       };
-      let field = {
+      const field = {
         optionsUrl: 'test',
       };
       expect(service.getOptionsConfig(http, field, {}, {}).format).toEqual('$label');

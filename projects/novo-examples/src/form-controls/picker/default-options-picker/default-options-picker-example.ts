@@ -9,15 +9,15 @@ import { Component } from '@angular/core';
   styleUrls: ['default-options-picker-example.css'],
 })
 export class DefaultOptionsPickerExample {
-  public placeholder: string = 'Select...';
-  public defaultArrayConfig: any;
-  public defaultFunctionConfig: any;
-  public defaultArrayValue: string;
-  public defaultFunctionValue: string;
-  public value: string;
+  placeholder: string = 'Select...';
+  defaultArrayConfig: any;
+  defaultFunctionConfig: any;
+  defaultArrayValue: string;
+  defaultFunctionValue: string;
+  value: string;
 
   constructor() {
-    let states = [
+    const states = [
       'Alabama',
       'Alaska',
       'Arizona',

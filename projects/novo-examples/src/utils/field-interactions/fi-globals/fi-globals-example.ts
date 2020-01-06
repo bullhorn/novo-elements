@@ -11,11 +11,11 @@ import { FormUtils, TextBoxControl, FieldInteractionApi } from 'novo-elements';
   styleUrls: ['fi-globals-example.css'],
 })
 export class FiGlobalsExample {
-  public form: any = {};
-  public controls: any = {};
+  form: any = {};
+  controls: any = {};
 
   constructor(private formUtils: FormUtils) {
-    let globalsFunction = (API: FieldInteractionApi) => {
+    const globalsFunction = (API: FieldInteractionApi) => {
       console.log('[FieldInteractionDemo] - globalsFunction'); // tslint:disable-line
       API.setProperty(API.getActiveKey(), 'label', `${API.getProperty(API.getActiveKey(), 'label')} -- ${API.globals.TEST}`);
     };

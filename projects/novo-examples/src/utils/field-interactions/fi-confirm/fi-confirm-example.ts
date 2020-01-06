@@ -11,11 +11,11 @@ import { FormUtils, TextBoxControl, FieldInteractionApi } from 'novo-elements';
   styleUrls: ['fi-confirm-example.css'],
 })
 export class FiConfirmExample {
-  public form: any;
-  public controls: any = {};
+  form: any;
+  controls: any = {};
 
   constructor(private formUtils: FormUtils) {
-    let confirmFunction = (API: FieldInteractionApi) => {
+    const confirmFunction = (API: FieldInteractionApi) => {
       console.log('[FieldInteractionDemo] - confirmFunction'); // tslint:disable-line
       if (API.getActiveKey() === 'confirm1') {
         API.confirmChanges(API.getActiveKey());

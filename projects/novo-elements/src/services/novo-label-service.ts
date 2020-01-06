@@ -1,6 +1,5 @@
 // NG2
 import { Injectable, Inject, Optional, LOCALE_ID } from '@angular/core';
-import DateTimeFormatPart = Intl.DateTimeFormatPart;
 
 interface TimeFormatParts {
   hour: string;
@@ -150,7 +149,7 @@ export class NovoLabelService {
   }
 
   formatDateWithFormat(value: any, format: Intl.DateTimeFormatOptions) {
-    let date = value instanceof Date ? value : new Date(value);
+    const date = value instanceof Date ? value : new Date(value);
     if (date.getTime() !== date.getTime()) {
       return value;
     }
@@ -158,11 +157,11 @@ export class NovoLabelService {
   }
 
   formatTimeWithFormat(value: any, format: Intl.DateTimeFormatOptions): string {
-    let date = value instanceof Date ? value : new Date(value);
+    const date = value instanceof Date ? value : new Date(value);
     if (date.getTime() !== date.getTime()) {
       return value;
     }
-    let timeParts: { [type: string]: string } = Intl.DateTimeFormat(this.userLocale, format)
+    const timeParts: { [type: string]: string } = Intl.DateTimeFormat(this.userLocale, format)
       .formatToParts(date)
       .reduce((obj, part) => {
         obj[part.type] = part.value;
@@ -174,7 +173,7 @@ export class NovoLabelService {
 
   getWeekdays(): string[] {
     function getDay(dayOfWeek) {
-      let dt = new Date();
+      const dt = new Date();
       return dt.setDate(dt.getDate() - dt.getDay() + dayOfWeek);
     }
 
@@ -186,7 +185,7 @@ export class NovoLabelService {
 
   getMonths(): string[] {
     function getMonth(month) {
-      let dt = new Date();
+      const dt = new Date();
       return dt.setMonth(month, 1);
     }
 
@@ -229,7 +228,7 @@ export class NovoLabelService {
   }
 
   formatCurrency(value: number): string {
-    let options = { style: 'currency', currency: 'USD' };
+    const options = { style: 'currency', currency: 'USD' };
     return new Intl.NumberFormat(this.userLocale, options).format(value);
   }
 
@@ -255,7 +254,7 @@ export class NovoLabelService {
   }
 
   formatDateShort(value: any): string {
-    let options: Intl.DateTimeFormatOptions = {
+    const options: Intl.DateTimeFormatOptions = {
       // DD/MM/YYYY, HH:MM A - 02/14/2017, 1:17 PM
       month: '2-digit',
       day: '2-digit',
@@ -263,28 +262,28 @@ export class NovoLabelService {
       hour: 'numeric',
       minute: '2-digit',
     };
-    let _value = value === null || value === undefined || value === '' ? new Date() : new Date(value);
+    const _value = value === null || value === undefined || value === '' ? new Date() : new Date(value);
     return new Intl.DateTimeFormat(this.userLocale, options).format(_value);
   }
 
   formatTime(value: any): string {
-    let options: Intl.DateTimeFormatOptions = {
+    const options: Intl.DateTimeFormatOptions = {
       // HH:MM A - 1:17 PM
       hour: 'numeric',
       minute: '2-digit',
     };
-    let _value = value === null || value === undefined || value === '' ? new Date() : new Date(value);
+    const _value = value === null || value === undefined || value === '' ? new Date() : new Date(value);
     return new Intl.DateTimeFormat(this.userLocale, options).format(_value);
   }
 
   formatDate(value: any): string {
-    let options: Intl.DateTimeFormatOptions = {
+    const options: Intl.DateTimeFormatOptions = {
       // DD/MM/YYYY - 02/14/2017
       month: '2-digit',
       day: '2-digit',
       year: 'numeric',
     };
-    let _value = value === null || value === undefined || value === '' ? new Date() : new Date(value);
+    const _value = value === null || value === undefined || value === '' ? new Date() : new Date(value);
     return new Intl.DateTimeFormat(this.userLocale, options).format(_value);
   }
 }

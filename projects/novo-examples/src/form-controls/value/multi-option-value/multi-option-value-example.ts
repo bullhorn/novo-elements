@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NOVO_VALUE_TYPE, NOVO_VALUE_THEME } from 'novo-elements';
+import { NOVO_VALUE_THEME } from 'novo-elements';
 
 /**
  * @title Multi Option Value Example
@@ -10,9 +10,9 @@ import { NOVO_VALUE_TYPE, NOVO_VALUE_THEME } from 'novo-elements';
   styleUrls: ['multi-option-value-example.css'],
 })
 export class MultiOptionValueExample {
-  public theme = NOVO_VALUE_THEME.DEFAULT;
-  public data: any = ['1', '3'];
-  public meta: any = {
+  theme = NOVO_VALUE_THEME.DEFAULT;
+  data: any = ['1', '3'];
+  meta: any = {
     name: 'status',
     label: 'Status',
     inputType: 'SELECT',

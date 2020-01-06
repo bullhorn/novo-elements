@@ -18,14 +18,14 @@ describe('Elements: QuickNoteElement', () => {
    * A fake QuickNoteResults dropdown that provides behavior that mimics enough of the real dropdown for testing.
    */
   class FakeQuickNoteResults {
-    public instance: any = this;
-    public element: any = null;
-    public parentComponent: any = null;
-    public visible: boolean = false;
-    public taggingMode: string = 'person';
-    public selectedIndex: number = 0; // 0 = nothing is selected
-    public selectedValue: any = { value: 'j.bullhorn', label: 'John Bullhorn' };
-    public nativeElementProperties: any = {};
+    instance: any = this;
+    element: any = null;
+    parentComponent: any = null;
+    visible: boolean = false;
+    taggingMode: string = 'person';
+    selectedIndex: number = 0; // 0 = nothing is selected
+    selectedValue: any = { value: 'j.bullhorn', label: 'John Bullhorn' };
+    nativeElementProperties: any = {};
 
     constructor(parentComponent: any) {
       this.parentComponent = parentComponent;
@@ -133,8 +133,8 @@ describe('Elements: QuickNoteElement', () => {
             domEvent: {
               $: {
                 // The native element
-                key: key,
-                keyCode: keyCode,
+                key,
+                keyCode,
               },
             },
           },

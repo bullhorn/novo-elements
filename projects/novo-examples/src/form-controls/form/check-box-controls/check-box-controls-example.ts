@@ -3,25 +3,9 @@ import { Component, Input } from '@angular/core';
 // Vendor
 import {
   FormUtils,
-  TextBoxControl,
   CheckboxControl,
   CheckListControl,
-  FileControl,
-  QuickNoteControl,
   TilesControl,
-  DateControl,
-  TimeControl,
-  DateTimeControl,
-  PickerControl,
-  EntityPickerResult,
-  EntityPickerResults,
-  TextAreaControl,
-  NovoFormGroup,
-  BaseControl,
-  AceEditorControl,
-  AddressControl,
-  FieldInteractionApi,
-  findByCountryId,
 } from 'novo-elements';
 
 // import { MockMeta, MockMetaHeaders } from './MockMeta';
@@ -35,11 +19,11 @@ import {
   styleUrls: ['check-box-controls-example.css'],
 })
 export class CheckBoxControlsExample {
-  public checkControl: any;
-  public checkListControl: any;
-  public tilesControl: any;
-  public disabledTilesControl: any;
-  public checkForm: any;
+  checkControl: any;
+  checkListControl: any;
+  tilesControl: any;
+  disabledTilesControl: any;
+  checkForm: any;
 
   constructor(private formUtils: FormUtils) {
     // Check box controls

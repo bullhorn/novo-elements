@@ -265,7 +265,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
 
   get showCount() {
     const MAX_LENGTH_CONTROL_TYPES: string[] = ['textbox', 'picker', 'text-area'];
-    let charCount: boolean =
+    const charCount: boolean =
       this.focused &&
       !!this.form.controls[this.control.key].maxlength &&
       MAX_LENGTH_CONTROL_TYPES.includes(this.form.controls[this.control.key].controlType);
@@ -292,7 +292,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     const DO_NOT_FOCUS_ME: string[] = ['picker', 'time', 'date', 'date-time'];
     if (this.autoFocus && !DO_NOT_FOCUS_ME.includes(this.control.controlType)) {
       setTimeout(() => {
-        let input: HTMLElement = this.element.nativeElement.querySelector('input');
+        const input: HTMLElement = this.element.nativeElement.querySelector('input');
         if (input) {
           input.focus();
         }
@@ -303,7 +303,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
   ngAfterContentInit() {
     // Subscribe to control interactions
     if (this.control.interactions && !this.form.controls[this.control.key].restrictFieldInteractions) {
-      for (let interaction of this.control.interactions) {
+      for (const interaction of this.control.interactions) {
         switch (interaction.event) {
           case 'blur':
             this.valueChangeSubscription = this.onBlur.pipe(debounceTime(300)).subscribe(() => {
@@ -636,7 +636,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     const NUMBERS_WITH_DECIMAL_DOT = /[0-9\.\-]/;
     const NUMBERS_WITH_DECIMAL_DOT_AND_COMMA = /[0-9\.\,\-]/;
     const UTILITY_KEYS = ['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Tab'];
-    let key = event.key;
+    const key = event.key;
 
     // Numbers or numbers and decimal characters only
     if (this.form.controls[this.control.key].subType === 'number' && !(NUMBERS_ONLY.test(key) || UTILITY_KEYS.includes(key))) {
@@ -658,8 +658,8 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
   }
 
   handlePercentChange(event: KeyboardEvent) {
-    let value = event.target['value'];
-    let percent = Helpers.isEmpty(value) ? null : Number((value / 100).toFixed(6).replace(/\.?0*$/, ''));
+    const value = event.target['value'];
+    const percent = Helpers.isEmpty(value) ? null : Number((value / 100).toFixed(6).replace(/\.?0*$/, ''));
     if (!Helpers.isEmpty(percent)) {
       this.change.emit(percent);
       this.form.controls[this.control.key].setValue(percent);
@@ -719,7 +719,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
   }
 
   updateValidity(shouldEventBeEmitted): void {
-    let emitEvent: boolean = shouldEventBeEmitted ? true : false;
+    const emitEvent: boolean = shouldEventBeEmitted ? true : false;
     this.form.controls[this.control.key].updateValueAndValidity({ emitEvent });
   }
 }

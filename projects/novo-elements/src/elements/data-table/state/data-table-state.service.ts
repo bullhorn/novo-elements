@@ -114,7 +114,7 @@ export class DataTableState<T> {
       }
 
       if (preferences.filter) {
-        let filters = Helpers.convertToArray(preferences.filter);
+        const filters = Helpers.convertToArray(preferences.filter);
         filters.forEach((filter) => {
           filter.value =
             filter.selectedOption && filter.type

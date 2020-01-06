@@ -30,10 +30,8 @@ export class OutsideClick implements OnDestroy {
 
   /**
    * Toggles the element as active and adds/removes the outside click handler
-   * @param event
-   * @param forceValue
    */
-  public toggleActive(event?: MouseEvent, forceValue?: boolean): void {
+  toggleActive(event?: MouseEvent, forceValue?: boolean): void {
     // Reverse the active property (if forceValue, use that)
     this.active = !Helpers.isBlank(forceValue) ? forceValue : !this.active;
     // Bind window click events to hide on outside click
@@ -48,9 +46,8 @@ export class OutsideClick implements OnDestroy {
 
   /**
    * When clicking outside, checks the element and closes if outside
-   * @param event
    */
-  public handleOutsideClick(event: MouseEvent): void {
+  handleOutsideClick(event: MouseEvent): void {
     // If the elements doesn't contain the target element, it is an outside click
     let outsideClick = !this.element.nativeElement.contains(event.target);
     if (this.otherElement && outsideClick) {

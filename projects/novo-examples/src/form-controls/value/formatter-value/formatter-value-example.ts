@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NOVO_VALUE_TYPE, NOVO_VALUE_THEME } from 'novo-elements';
+import { NOVO_VALUE_THEME } from 'novo-elements';
 
 /**
  * @title Formatter Value Example
@@ -10,11 +10,11 @@ import { NOVO_VALUE_TYPE, NOVO_VALUE_THEME } from 'novo-elements';
   styleUrls: ['formatter-value-example.css'],
 })
 export class FormatterValueExample {
-  public theme = NOVO_VALUE_THEME.DEFAULT;
-  public data: any = {
+  theme = NOVO_VALUE_THEME.DEFAULT;
+  data: any = {
     id: 123,
   };
-  public meta: any = {
+  meta: any = {
     type: 'SCALAR',
     name: 'Placement',
     label: 'Placement',

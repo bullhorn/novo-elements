@@ -20,21 +20,21 @@ import {
   styleUrls: ['horizontal-options-example.css'],
 })
 export class HorizontalOptionsExample {
-  public formGroup: NovoFormGroup;
-  public controls: BaseControl[] = [];
-  public initialValue: {}[] = [];
-  public initValue: {}[] = [{ text: 'TEXT', percentage: 12, checkbox: true, test4: 'TEST' }];
+  formGroup: NovoFormGroup;
+  controls: BaseControl[] = [];
+  initialValue: {}[] = [];
+  initValue: {}[] = [{ text: 'TEXT', percentage: 12, checkbox: true, test4: 'TEST' }];
 
-  public simpleAddConfig: NovoControlGroupAddConfig = {
+  simpleAddConfig: NovoControlGroupAddConfig = {
     label: 'Add',
   };
-  public anotherAddConfig: NovoControlGroupAddConfig = {
+  anotherAddConfig: NovoControlGroupAddConfig = {
     label: 'Add a new fancy thing!',
   };
 
-  public emptyMessage: string = 'There are no items...';
-  public canEditFunction: Function;
-  public canRemoveFunction: Function;
+  emptyMessage: string = 'There are no items...';
+  canEditFunction: Function;
+  canRemoveFunction: Function;
 
   constructor(private formUtils: FormUtils) {
     // Grouped form demo
@@ -44,24 +44,24 @@ export class HorizontalOptionsExample {
     this.canRemoveFunction = this.canRemove.bind(this);
   }
 
-  public onRemove(value: any) {
+  onRemove(value: any) {
     console.log('REMOVING', value); // tslint:disable-line
   }
 
-  public onEdit(value: any) {
+  onEdit(value: any) {
     console.log('EDITING', value); // tslint:disable-line
   }
 
-  public canEdit(value: any, index: number) {
+  canEdit(value: any, index: number) {
     console.log('canEdit', value, index); // tslint:disable-line
     return index > 0;
   }
-  public canRemove(value: any, index: number) {
+  canRemove(value: any, index: number) {
     console.log('canRemove', value, index); // tslint:disable-line
     return index === 0;
   }
 
-  public updateInitialValue() {
+  updateInitialValue() {
     this.initValue = [
       { text: 'TEXT 111', percentage: 100, checkbox: false, test4: 'TEST 111' },
       { text: 'TEXT 222', percentage: 5, checkbox: false, test4: 'TEST 222' },
@@ -69,23 +69,23 @@ export class HorizontalOptionsExample {
     ];
   }
 
-  public customDelete(form: NovoFormGroup, key: string, index: number) {
+  customDelete(form: NovoFormGroup, key: string, index: number) {
     console.log('DELETE', form, key, index); // tslint:disable-line
     const control: FormArray = <FormArray>form.controls[key];
     control.removeAt(index);
   }
 
-  public customEdit(form: NovoFormGroup, key: string, index: number) {
+  customEdit(form: NovoFormGroup, key: string, index: number) {
     console.log('EDIT', form, key, index); // tslint:disable-line
   }
 
   private setupGroupedFormDemo() {
     this.formGroup = this.formUtils.emptyFormGroup();
-    let label = new ReadOnlyControl({ key: 'label', value: 'Label :)' });
-    let c1 = new SelectControl({ key: 'text', label: 'Text Box', options: [{ value: 'hello', label: 'Hello' }] });
-    let c2 = new TextBoxControl({ type: 'percentage', key: 'percentage', label: 'Percent', required: true });
-    let c3 = new CheckboxControl({ key: 'checkbox', label: 'Check Me!', width: 100 });
-    let c4 = new TextBoxControl({ key: 'test4', label: 'TEST4' });
+    const label = new ReadOnlyControl({ key: 'label', value: 'Label :)' });
+    const c1 = new SelectControl({ key: 'text', label: 'Text Box', options: [{ value: 'hello', label: 'Hello' }] });
+    const c2 = new TextBoxControl({ type: 'percentage', key: 'percentage', label: 'Percent', required: true });
+    const c3 = new CheckboxControl({ key: 'checkbox', label: 'Check Me!', width: 100 });
+    const c4 = new TextBoxControl({ key: 'test4', label: 'TEST4' });
     this.controls.push(label);
     this.controls.push(c1);
     this.controls.push(c2);

@@ -86,7 +86,7 @@ export class NovoCKEditorElement implements OnDestroy, AfterViewInit, ControlVal
   }
 
   ngAfterViewInit() {
-    let config = this.config || this.getBaseConfig();
+    const config = this.config || this.getBaseConfig();
     if (this.startupFocus) {
       config.startupFocus = true;
     }
@@ -126,7 +126,7 @@ export class NovoCKEditorElement implements OnDestroy, AfterViewInit, ControlVal
     // CKEditor change event
     this.instance.on('change', () => {
       this.onTouched();
-      let value = this.instance.getData();
+      const value = this.instance.getData();
 
       // Debounce update
       if (this.debounce) {
@@ -257,7 +257,7 @@ export class NovoCKEditorElement implements OnDestroy, AfterViewInit, ControlVal
   }
 
   insertText(text) {
-    let trimmedText = text.trim();
+    const trimmedText = text.trim();
     this.instance.insertText(trimmedText);
   }
 }

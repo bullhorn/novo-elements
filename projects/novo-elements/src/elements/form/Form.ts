@@ -90,7 +90,7 @@ export class NovoFormElement implements AfterContentInit, OnInit {
 
   public forceValidation(): void {
     Object.keys(this.form.controls).forEach((key: string) => {
-      let control: any = this.form.controls[key];
+      const control = this.form.controls[key];
       if (control.required && Helpers.isBlank(this.form.value[control.key])) {
         control.markAsDirty();
         control.markAsTouched();

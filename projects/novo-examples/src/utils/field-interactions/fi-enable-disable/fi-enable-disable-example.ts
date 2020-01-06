@@ -11,13 +11,13 @@ import { FormUtils, TextBoxControl, CheckboxControl, FieldInteractionApi } from 
   styleUrls: ['fi-enable-disable-example.css'],
 })
 export class FiEnableDisableExample {
-  public form: any;
-  public controls: any = {};
+  form: any;
+  controls: any = {};
 
   constructor(private formUtils: FormUtils) {
-    let enableDisableFunction = (API: FieldInteractionApi) => {
+    const enableDisableFunction = (API: FieldInteractionApi) => {
       console.log('[FieldInteractionDemo] - enableDisableFunction'); // tslint:disable-line
-      let currentValue = API.getActiveValue();
+      const currentValue = API.getActiveValue();
       if (!currentValue) {
         API.enable('text');
       } else {

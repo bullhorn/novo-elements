@@ -1,6 +1,5 @@
 // APP
 import { DateFormatService } from './DateFormat';
-import { Helpers } from '../../utils/Helpers';
 import { NovoLabelService } from '../../services/novo-label-service';
 
 describe('Service: DateFormatService', () => {
@@ -16,37 +15,37 @@ describe('Service: DateFormatService', () => {
     });
     it('should return a default mask', () => {
       service.labels.dateFormat = '';
-      let actual = service.getDateMask();
+      const actual = service.getDateMask();
       expect(actual.length).toBeGreaterThan(0);
     });
     it('should return a mask that supports a date with format dd-MM-yyyy', () => {
-      let value = '11-02-2017';
-      let dateMask = service.getDateMask();
-      for (let i in dateMask) {
+      const value = '11-02-2017';
+      const dateMask = service.getDateMask();
+      for (const i in dateMask) {
         if (dateMask[i]) {
           expect(value[i].match(dateMask[i])).toBeTruthy();
         }
       }
     });
     it('should return a mask that supports dd.MM.yyyy', () => {
-      let value = '11.02.2017';
-      let dateMask = service.getDateMask();
-      for (let i in dateMask) {
+      const value = '11.02.2017';
+      const dateMask = service.getDateMask();
+      for (const i in dateMask) {
         if (dateMask[i]) {
           expect(value[i].match(dateMask[i])).toBeTruthy();
         }
       }
     });
     it('should return a mask that supports d/M/yyyy', () => {
-      let value: Array<string> = '1/2/2017'.split('');
-      let dateMask = service.getDateMask();
+      const value: Array<string> = '1/2/2017'.split('');
+      const dateMask = service.getDateMask();
       value.forEach((v, i) => {
         expect(v.match(dateMask[i])).toBeTruthy();
       });
     });
     it('should return a mask that supports M/d/yyyy', () => {
-      let value: Array<string> = '11/2/2017'.split('');
-      let dateMask = service.getDateMask();
+      const value: Array<string> = '11/2/2017'.split('');
+      const dateMask = service.getDateMask();
       value.forEach((v, i) => {
         expect(v.match(dateMask[i])).toBeTruthy();
       });
@@ -63,25 +62,25 @@ describe('Service: DateFormatService', () => {
         militaryTimeMask = service.getTimeMask(true);
       });
       it('should work for 1:23', () => {
-        let timeString = '01:23'.split('');
+        const timeString = '01:23'.split('');
         timeString.forEach((v, i) => {
           expect(v.match(militaryTimeMask[i])).toBeTruthy();
         });
       });
       it('should work for 12:23', () => {
-        let timeString = '12:23'.split('');
+        const timeString = '12:23'.split('');
         timeString.forEach((v, i) => {
           expect(v.match(militaryTimeMask[i])).toBeTruthy();
         });
       });
       it('should work for 00:23', () => {
-        let timeString = '00:23'.split('');
+        const timeString = '00:23'.split('');
         timeString.forEach((v, i) => {
           expect(v.match(militaryTimeMask[i])).toBeTruthy();
         });
       });
       it('should work for 23:23', () => {
-        let timeString = '23:23'.split('');
+        const timeString = '23:23'.split('');
         timeString.forEach((v, i) => {
           expect(v.match(militaryTimeMask[i])).toBeTruthy();
         });
@@ -89,45 +88,45 @@ describe('Service: DateFormatService', () => {
     });
     describe('For 12hour time', () => {
       it('should work for 12:23am', () => {
-        let timeMask = service.getTimeMask(false);
-        let timeString = '12:23am'.split('');
+        const timeMask = service.getTimeMask(false);
+        const timeString = '12:23am'.split('');
         timeString.forEach((v, i) => {
           expect(v.match(timeMask[i])).toBeTruthy();
         });
       });
       it('should work for 12:23pm', () => {
-        let timeMask = service.getTimeMask(false);
-        let timeString = '12:23pm'.split('');
+        const timeMask = service.getTimeMask(false);
+        const timeString = '12:23pm'.split('');
         timeString.forEach((v, i) => {
           expect(v.match(timeMask[i])).toBeTruthy();
         });
       });
       it('should work for 1:23pm', () => {
-        let timeMask = service.getTimeMask(false);
-        let timeString = '1:23pm'.split('');
+        const timeMask = service.getTimeMask(false);
+        const timeString = '1:23pm'.split('');
         timeString.forEach((v, i) => {
           expect(v.match(timeMask[i])).toBeTruthy();
         });
       });
       it('should work for 1:23am', () => {
-        let timeMask = service.getTimeMask(false);
-        let timeString = '1:23am'.split('');
+        const timeMask = service.getTimeMask(false);
+        const timeString = '1:23am'.split('');
         timeString.forEach((v, i) => {
           expect(v.match(timeMask[i])).toBeTruthy();
         });
       });
       it('should work for 1:23 A.M.', () => {
         service.labels.timeFormatPlaceholderAM = 'hh:mm A.M.';
-        let timeMask = service.getTimeMask(false);
-        let timeString = '1:23 A.M.'.split('');
+        const timeMask = service.getTimeMask(false);
+        const timeString = '1:23 A.M.'.split('');
         timeString.forEach((v, i) => {
           expect(v.match(timeMask[i])).toBeTruthy();
         });
       });
       it('should work for 1:23 P.M.', () => {
         service.labels.timeFormatPlaceholderAM = 'hh:mm A.M.';
-        let timeMask = service.getTimeMask(false);
-        let timeString = '1:23 P.M.'.split('');
+        const timeMask = service.getTimeMask(false);
+        const timeString = '1:23 P.M.'.split('');
         timeString.forEach((v, i) => {
           expect(v.match(timeMask[i])).toBeTruthy();
         });
@@ -167,8 +166,8 @@ describe('Service: DateFormatService', () => {
       });
       it('should default to current date when dateString in an unsupported format ', () => {
         let dateString = '22-22-2017',
-          dateValue,
-          expectedDateValue = new Date();
+          dateValue;
+        const expectedDateValue = new Date();
         [dateValue, dateString] = service.parseDateString(dateString);
         expect(dateValue.getMonth()).toEqual(expectedDateValue.getMonth());
         expect(dateValue.getDate()).toEqual(expectedDateValue.getDate());
@@ -282,22 +281,22 @@ describe('Service: DateFormatService', () => {
       expect(service.parseTimeString).toBeDefined();
     });
     it('should not parse if the string doesn\'t contain :', () => {
-      let [value, timeString] = service.parseTimeString('', false);
+      const [value, timeString] = service.parseTimeString('', false);
       expect(timeString).toEqual('');
     });
     describe('for 24hour time', () => {
       it('should parse 1:45', () => {
-        let [value, timeString] = service.parseTimeString('1:45', true);
+        const [value, timeString] = service.parseTimeString('1:45', true);
         expect(value.getHours()).toEqual(1);
         expect(value.getMinutes()).toEqual(45);
       });
       it('should parse 07:45', () => {
-        let [value, timeString] = service.parseTimeString('07:45', true);
+        const [value, timeString] = service.parseTimeString('07:45', true);
         expect(value.getHours()).toEqual(7);
         expect(value.getMinutes()).toEqual(45);
       });
       it('should parse 12:45', () => {
-        let [value, timeString] = service.parseTimeString('12:45', true);
+        const [value, timeString] = service.parseTimeString('12:45', true);
         expect(value.getHours()).toEqual(12);
         expect(value.getMinutes()).toEqual(45);
       });
@@ -310,12 +309,12 @@ describe('Service: DateFormatService', () => {
           service.labels.timeFormatPM = 'PM';
         });
         it('should convert 12:45 AM to 00:45', () => {
-          let [value, timeString] = service.parseTimeString('12:45AM', false);
+          const [value, timeString] = service.parseTimeString('12:45AM', false);
           expect(value.getHours()).toEqual(0);
           expect(value.getMinutes()).toEqual(45);
         });
         it('should convert 1:45 AM to 1:45', () => {
-          let [value, timeString] = service.parseTimeString('12:45AM', false);
+          const [value, timeString] = service.parseTimeString('12:45AM', false);
           expect(value.getHours()).toEqual(0);
           expect(value.getMinutes()).toEqual(45);
         });
@@ -327,12 +326,12 @@ describe('Service: DateFormatService', () => {
           service.labels.timeFormatPM = 'P.M.';
         });
         it('should convert 1:45 P.M. to 13:45', () => {
-          let [value, timeString] = service.parseTimeString('1:45 P.M.', false);
+          const [value, timeString] = service.parseTimeString('1:45 P.M.', false);
           expect(value.getHours()).toEqual(13);
           expect(value.getMinutes()).toEqual(45);
         });
         it('should convert 12:45 P.M. to 12:45', () => {
-          let [value, timeString] = service.parseTimeString('12:45 P.M.', false);
+          const [value, timeString] = service.parseTimeString('12:45 P.M.', false);
           expect(value.getHours()).toEqual(12);
           expect(value.getMinutes()).toEqual(45);
         });

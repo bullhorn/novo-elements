@@ -11,13 +11,13 @@ import { FormUtils, TextBoxControl, CheckboxControl, FieldInteractionApi } from 
   styleUrls: ['fi-required-example.css'],
 })
 export class FiRequiredExample {
-  public form: any = {};
-  public controls: any = {};
+  form: any = {};
+  controls: any = {};
 
   constructor(formUtils: FormUtils) {
-    let requiredFunction = (API: FieldInteractionApi) => {
+    const requiredFunction = (API: FieldInteractionApi) => {
       console.log('[FieldInteractionDemo] - requiredFunction'); // tslint:disable-line
-      let activeValue = API.getActiveValue();
+      const activeValue = API.getActiveValue();
       if (activeValue) {
         API.setRequired('required', true);
       } else {

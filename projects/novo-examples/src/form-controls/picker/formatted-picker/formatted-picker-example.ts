@@ -9,12 +9,12 @@ import { Component } from '@angular/core';
   styleUrls: ['formatted-picker-example.css'],
 })
 export class FormattedPickerExample {
-  public placeholder: string = 'Select...';
-  public formatted: any;
-  public value: string;
+  placeholder: string = 'Select...';
+  formatted: any;
+  value: string;
 
   constructor() {
-    let collaborators = [
+    const collaborators = [
       {
         id: 1,
         firstName: 'Brian',

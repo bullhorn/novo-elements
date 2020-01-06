@@ -59,7 +59,7 @@ export class QuickNoteResults extends PickerResults {
   }
 
   search(term: string, taggingMode): Observable<any> {
-    let searchCall = this.config.options[taggingMode];
+    const searchCall = this.config.options[taggingMode];
     return from(
       new Promise((resolve, reject) => {
         // Check if there is match data
@@ -96,7 +96,6 @@ export class QuickNoteResults extends PickerResults {
   }
 
   /**
-   * @name structureArray
    * @param collection - the data once getData resolves it
    *
    * @description This function structures an array of nodes into an array of objects with a
@@ -112,25 +111,19 @@ export class QuickNoteResults extends PickerResults {
       });
     }
     return collection.map((data) => {
-      let value = this.config.field ? data[this.config.field[this.taggingMode]] : data.value || data;
-      let label = this.config.format ? Helpers.interpolate(this.config.format[this.taggingMode], data) : data.label || String(value);
+      const value = this.config.field ? data[this.config.field[this.taggingMode]] : data.value || data;
+      const label = this.config.format ? Helpers.interpolate(this.config.format[this.taggingMode], data) : data.label || String(value);
       return { value, label, data };
     });
   }
 
-  /**
-   * @name selectMatch
-   * @param event
-   *
-   * @description
-   */
   selectMatch(event: KeyboardEvent) {
     if (event) {
       event.stopPropagation();
       event.preventDefault();
     }
 
-    let selected = this.activeMatch;
+    const selected = this.activeMatch;
     if (selected) {
       this.parent.onSelected(this.taggingMode, selected);
       this.parent.hideResults();

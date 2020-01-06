@@ -9,12 +9,12 @@ import { Component } from '@angular/core';
   styleUrls: ['async-chips-example.css'],
 })
 export class AsyncChipsExample {
-  public async: any;
-  public value: any;
-  public placeholder: string = 'Select...';
+  async: any;
+  value: any;
+  placeholder: string = 'Select...';
 
   constructor() {
-    let states = [
+    const states = [
       'Alabama',
       'Alaska',
       'Arizona',
@@ -66,7 +66,7 @@ export class AsyncChipsExample {
       'Wisconsin',
       'Wyoming',
     ];
-    let abbrieviated = [
+    const abbrieviated = [
       {
         value: 'USA',
         label: 'United States',
@@ -95,8 +95,8 @@ export class AsyncChipsExample {
       getLabels: (data) => {
         return new Promise((resolve) => {
           setTimeout(() => {
-            let values = data.map((item) => item.value);
-            let results = abbrieviated.filter((item) => values.includes(item.value));
+            const values = data.map((item) => item.value);
+            const results = abbrieviated.filter((item) => values.includes(item.value));
             resolve(results);
           }, 300);
         });

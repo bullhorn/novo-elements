@@ -34,12 +34,12 @@ export class CustomPickerResults extends PickerResults {}
   styleUrls: ['custom-picker-results-example.css'],
 })
 export class CustomPickerResultsExample {
-  public placeholder: string = 'Select...';
-  public custom: any;
-  public value: string;
+  placeholder: string = 'Select...';
+  custom: any;
+  value: string;
 
   constructor() {
-    let collaborators = [
+    const collaborators = [
       {
         id: 1,
         firstName: 'Brian',

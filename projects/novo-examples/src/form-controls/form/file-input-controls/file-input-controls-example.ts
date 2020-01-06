@@ -12,15 +12,15 @@ import { FormUtils, FileControl, NovoFormGroup } from 'novo-elements';
   styleUrls: ['file-input-controls-example.css'],
 })
 export class FileInputControlsExample {
-  public fileControl: any;
-  public multiFileControl: any;
-  public multiFileControlMixRemove: FileControl;
-  public fileForm: any;
+  fileControl: any;
+  multiFileControl: any;
+  multiFileControlMixRemove: FileControl;
+  fileForm: any;
 
   // custom upload validation
-  public message: string = '';
-  public customValidationFileControl: FileControl;
-  public customValidationFileForm: NovoFormGroup;
+  message: string = '';
+  customValidationFileControl: FileControl;
+  customValidationFileForm: NovoFormGroup;
 
   constructor(private formUtils: FormUtils) {
     // File input controls
@@ -88,7 +88,7 @@ export class FileInputControlsExample {
 
   public checkFileSize(fileList): boolean {
     const maxSizeKb: number = 5120; // (5 MB in KB)
-    for (let file of fileList) {
+    for (const file of fileList) {
       if (file.size > maxSizeKb * 1024) {
         this.message = 'File is bigger than the allowed 5MB';
         return false;

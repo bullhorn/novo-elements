@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DateCell, PercentageCell, NovoTableConfig, NovoDropdownCell } from 'novo-elements';
+import { DateCell, PercentageCell } from 'novo-elements';
 
 /**
  * @title Activity Section
@@ -14,7 +14,7 @@ export class ActivitySectionExample {
   public details: any;
 
   constructor() {
-    let columns = [
+    const columns = [
       { title: 'Name', name: 'name', ordering: true, type: 'link', filtering: true },
       { title: 'Position', name: 'position', ordering: true, filtering: true },
       {
@@ -25,7 +25,7 @@ export class ActivitySectionExample {
           return object.ext.obj;
         },
         compare: (sort, previous, current) => {
-          let first = previous.obj,
+          const first = previous.obj,
             second = current.obj;
 
           if (first > second) {

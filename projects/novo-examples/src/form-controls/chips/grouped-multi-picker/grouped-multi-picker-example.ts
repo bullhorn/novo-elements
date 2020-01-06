@@ -10,34 +10,34 @@ import { GroupedMultiPickerResults } from 'novo-elements';
   styleUrls: ['grouped-multi-picker-example.css'],
 })
 export class GroupedMultiPickerExample {
-  public placeholder: string = 'Select...';
-  public groupedMultiPicker1: any;
-  public groupedMultiPicker2: any;
-  public groupedMultiPicker3: any;
-  public groupedMultiPicker1Value: any;
-  public groupedMultiPicker2Value: any;
-  public groupedMultiPicker3Value: any;
+  placeholder: string = 'Select...';
+  groupedMultiPicker1: any;
+  groupedMultiPicker2: any;
+  groupedMultiPicker3: any;
+  groupedMultiPicker1Value: any;
+  groupedMultiPicker2Value: any;
+  groupedMultiPicker3Value: any;
 
   constructor() {
     this.setupGroupedMultiPickerDemo();
   }
 
   setupGroupedMultiPickerDemo() {
-    let categoryMap = new Map<string, { value: string; label: string; items: { value: string; label: string }[] }>();
+    const categoryMap = new Map<string, { value: string; label: string; items: { value: string; label: string }[] }>();
     for (let i = 0; i < 10; i++) {
-      let items = [];
+      const items = [];
       for (let j = 0; j < 10; j++) {
         items.push({ value: `${i}-${j}`, label: `Category ${i} - Item ${j}` });
       }
-      categoryMap.set(`${i}`, { value: `${i}`, label: `Category ${i}`, items: items });
+      categoryMap.set(`${i}`, { value: `${i}`, label: `Category ${i}`, items });
     }
     this.groupedMultiPicker1 = {
-      categoryMap: categoryMap,
+      categoryMap,
       resultsTemplate: GroupedMultiPickerResults,
       displayAll: true,
     };
     this.groupedMultiPicker2 = {
-      categoryMap: categoryMap,
+      categoryMap,
       resultsTemplate: GroupedMultiPickerResults,
     };
     this.groupedMultiPicker3 = {

@@ -12,11 +12,11 @@ import { MockMetaHeaders } from '../MockMeta';
   styleUrls: ['fi-adding-removing-example.css'],
 })
 export class FiAddingRemovingExample {
-  public form: any;
-  public controls: any = [];
+  form: any;
+  controls: any = [];
 
   constructor(private formUtils: FormUtils) {
-    let addingRemovingFunction = (API: FieldInteractionApi) => {
+    const addingRemovingFunction = (API: FieldInteractionApi) => {
       console.log('[FieldInteractionDemo] - addingRemovingFunction'); // tslint:disable-line
       // Control above field
       API.addControl(
@@ -66,10 +66,10 @@ export class FiAddingRemovingExample {
       API.removeControl('jersey-color');
     };
 
-    let removeAddOnChangeFunction = (API: FieldInteractionApi) => {
+    const removeAddOnChangeFunction = (API: FieldInteractionApi) => {
       console.log('[FieldInteractionDemo] - removeAddOnChangeFunction'); // tslint:disable-line
       // Select control with a field interaction on change event
-      let currentValue = API.getActiveValue();
+      const currentValue = API.getActiveValue();
       if (currentValue === 'Yes') {
         API.removeControl('to-be-removed');
       } else {

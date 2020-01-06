@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NOVO_VALUE_TYPE, NOVO_VALUE_THEME } from 'novo-elements';
+import { NOVO_VALUE_THEME } from 'novo-elements';
 
 /**
  * @title Entity List Value Example
@@ -10,8 +10,8 @@ import { NOVO_VALUE_TYPE, NOVO_VALUE_THEME } from 'novo-elements';
   styleUrls: ['entity-list-value-example.css'],
 })
 export class EntityListValueExample {
-  public theme = NOVO_VALUE_THEME.DEFAULT;
-  public data: any = {
+  theme = NOVO_VALUE_THEME.DEFAULT;
+  data: any = {
     data: [
       {
         id: 1,
@@ -36,7 +36,7 @@ export class EntityListValueExample {
       },
     ],
   };
-  public meta: any = {
+  meta: any = {
     type: 'TO_MANY',
     name: 'guests',
     label: 'Attendees',

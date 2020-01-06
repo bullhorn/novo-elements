@@ -111,7 +111,6 @@ export class NovoSearchBoxElement implements ControlValueAccessor {
   ) {}
 
   /**
-   * @name showFasterFind
    * @description This function shows the picker and adds the active class (for animation)
    */
   showSearch(event?: any, forceClose: boolean = false) {
@@ -119,7 +118,7 @@ export class NovoSearchBoxElement implements ControlValueAccessor {
       // Reset search
       // Set focus on search
       setTimeout(() => {
-        let element = this.input.nativeElement;
+        const element = this.input.nativeElement;
         if (element) {
           element.focus();
         }

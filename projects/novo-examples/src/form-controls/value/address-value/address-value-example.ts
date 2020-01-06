@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NOVO_VALUE_TYPE, NOVO_VALUE_THEME } from 'novo-elements';
+import { NOVO_VALUE_THEME } from 'novo-elements';
 
 /**
  * @title Address Value Example
@@ -10,8 +10,8 @@ import { NOVO_VALUE_TYPE, NOVO_VALUE_THEME } from 'novo-elements';
   styleUrls: ['address-value-example.css'],
 })
 export class AddressValueExample {
-  public theme = NOVO_VALUE_THEME.DEFAULT;
-  public data: any = {
+  theme = NOVO_VALUE_THEME.DEFAULT;
+  data: any = {
     address1: '100 Summer Street',
     city: 'Boston',
     state: 'MA',
@@ -20,7 +20,7 @@ export class AddressValueExample {
       name: 'United States',
     },
   };
-  public meta: any = {
+  meta: any = {
     dataType: 'Address',
     type: 'Address',
     label: 'Address',

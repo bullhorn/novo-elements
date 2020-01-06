@@ -14,19 +14,19 @@ import { FormUtils, PickerControl, EntityPickerResult, EntityPickerResults } fro
   styleUrls: ['picker-controls-example.css'],
 })
 export class PickerControlsExample {
-  public singlePickerControl: any;
-  public multiPickerControl: any;
-  public multiPickerControlWithMaxlength: any;
-  public multiPickerControlWithMaxlengthAndPreselects: any;
-  public entityMultiPickerControl: any;
-  public rowMultiPickerControl: any;
-  public rowMultiPickerControlWithMaxlength: any;
-  public textPickerWithGetLabels: any;
-  public pickerForm: any;
+  singlePickerControl: any;
+  multiPickerControl: any;
+  multiPickerControlWithMaxlength: any;
+  multiPickerControlWithMaxlengthAndPreselects: any;
+  entityMultiPickerControl: any;
+  rowMultiPickerControl: any;
+  rowMultiPickerControlWithMaxlength: any;
+  textPickerWithGetLabels: any;
+  pickerForm: any;
 
   constructor(private formUtils: FormUtils) {
-    let fruits = ['Apples', 'Oranges', 'Bananas', 'Grapes'];
-    let cities = [
+    const fruits = ['Apples', 'Oranges', 'Bananas', 'Grapes'];
+    const cities = [
       {
         id: 1,
         name: 'Boston',
@@ -52,7 +52,7 @@ export class PickerControlsExample {
         name: 'Chicago',
       },
     ];
-    let states = [
+    const states = [
       {
         value: 'ME',
         label: 'Maine',
@@ -272,7 +272,7 @@ export class PickerControlsExample {
         },
       },
     });
-    let controls = [
+    const controls = [
       this.singlePickerControl,
       this.multiPickerControl,
       this.entityMultiPickerControl,

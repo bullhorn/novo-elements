@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, OnDestroy, Input, ViewChild, ElementRef, EventEmitter, ChangeDetectorRef } from '@angular/core';
+import { Component, AfterViewInit, Input, ViewChild, ElementRef, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { PopOverDirective } from './PopOver';
 
 @Component({
@@ -86,33 +86,33 @@ export class PopOverContent implements AfterViewInit {
     positionStr: string,
     appendToBody = false,
   ): { top: number; left: number } {
-    let positionStrParts = positionStr.split('-');
-    let mainSide = (this.effectivePlacement = this.getEffectivePlacement(positionStrParts[0] || 'right', hostEl, targetEl));
-    let orientation = (this.effectiveAlignment = positionStrParts[1] || 'center');
-    let hostElPos = appendToBody ? this.offset(hostEl) : this.position(hostEl);
-    let targetElWidth = targetEl.offsetWidth;
-    let targetElHeight = targetEl.offsetHeight;
+    const positionStrParts = positionStr.split('-');
+    const mainSide = (this.effectivePlacement = this.getEffectivePlacement(positionStrParts[0] || 'right', hostEl, targetEl));
+    const orientation = (this.effectiveAlignment = positionStrParts[1] || 'center');
+    const hostElPos = appendToBody ? this.offset(hostEl) : this.position(hostEl);
+    const targetElWidth = targetEl.offsetWidth;
+    const targetElHeight = targetEl.offsetHeight;
 
-    let shiftWidth: any = {
-      center: function(): number {
+    const shiftWidth: any = {
+      center(): number {
         return hostElPos.left + (hostElPos.width - targetElWidth) / 2;
       },
-      right: function(): number {
+      right(): number {
         return hostElPos.left;
       },
-      left: function(): number {
+      left(): number {
         return hostElPos.left + (hostElPos.width - targetElWidth);
       },
     };
 
-    let shiftHeight: any = {
-      center: function(): number {
+    const shiftHeight: any = {
+      center(): number {
         return hostElPos.top + (hostElPos.height - targetElHeight) / 2;
       },
-      bottom: function(): number {
+      bottom(): number {
         return hostElPos.top;
       },
-      top: function(): number {
+      top(): number {
         return hostElPos.top + (hostElPos.height - targetElHeight);
       },
     };

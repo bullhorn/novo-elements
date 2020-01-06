@@ -13,18 +13,18 @@ import { MockMetaForDisabledForm } from '../MockMeta';
   styleUrls: ['disabled-form-example.css'],
 })
 export class DisabledFormExample {
-  public disabledControls: any;
-  public disabledQuickNote: any;
-  public disabledForm: any;
-  public disabledNote: any;
-  public required: boolean = false;
-  public disabled: boolean = true;
-  public placeholder: string = 'Placeholder';
-  public note: string = '';
+  disabledControls: any;
+  disabledQuickNote: any;
+  disabledForm: any;
+  disabledNote: any;
+  required: boolean = false;
+  disabled: boolean = true;
+  placeholder: string = 'Placeholder';
+  note: string = '';
 
   constructor(private formUtils: FormUtils) {
     // Disabled Form
-    let disabledOverrides: any = {
+    const disabledOverrides: any = {
       address: {
         readOnly: true,
       },

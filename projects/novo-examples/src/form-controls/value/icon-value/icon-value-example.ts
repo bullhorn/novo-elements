@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NOVO_VALUE_TYPE, NOVO_VALUE_THEME } from 'novo-elements';
+import { NOVO_VALUE_THEME } from 'novo-elements';
 
 /**
  * @title Icon Value Example
@@ -10,9 +10,9 @@ import { NOVO_VALUE_TYPE, NOVO_VALUE_THEME } from 'novo-elements';
   styleUrls: ['icon-value-example.css'],
 })
 export class IconValueExample {
-  public theme = NOVO_VALUE_THEME.DEFAULT;
-  public data: any = 'Approved';
-  public meta: any = {
+  theme = NOVO_VALUE_THEME.DEFAULT;
+  data: any = 'Approved';
+  meta: any = {
     type: 'SCALAR',
     options: [
       {

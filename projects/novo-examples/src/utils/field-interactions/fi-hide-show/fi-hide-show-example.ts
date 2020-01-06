@@ -11,13 +11,13 @@ import { FormUtils, TextBoxControl, CheckboxControl, FieldInteractionApi } from 
   styleUrls: ['fi-hide-show-example.css'],
 })
 export class FiHideShowExample {
-  public form: any = {};
-  public controls: any = {};
+  form: any = {};
+  controls: any = {};
 
   constructor(private formUtils: FormUtils) {
-    let hideShowFunction = (API: FieldInteractionApi) => {
+    const hideShowFunction = (API: FieldInteractionApi) => {
       console.log('[FieldInteractionDemo] - hideShowFunction'); // tslint:disable-line
-      let activeValue = API.getActiveValue();
+      const activeValue = API.getActiveValue();
       if (!activeValue) {
         API.show('text');
       } else {

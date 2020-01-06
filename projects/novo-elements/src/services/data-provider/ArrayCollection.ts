@@ -90,8 +90,6 @@ export class ArrayCollection<T> implements Collection<T> {
   /**
    * Appends an item to the end of the data provider.
    *
-   * @param item
-   *
    * @memberOf ArrayCollection
    */
   addItem(item: T): void {
@@ -102,9 +100,6 @@ export class ArrayCollection<T> implements Collection<T> {
 
   /**
    * Adds a new item to the data provider at the specified index.
-   *
-   * @param item
-   * @param index
    *
    * @memberOf ArrayCollection
    */
@@ -117,8 +112,6 @@ export class ArrayCollection<T> implements Collection<T> {
   /**
    *  Appends multiple items to the end of the DataProvider and dispatches a CollectionEvent.ADD event.
    *
-   * @param items
-   *
    * @memberOf ArrayCollection
    */
   addItems(items: Array<T>): void {
@@ -129,9 +122,6 @@ export class ArrayCollection<T> implements Collection<T> {
 
   /**
    * Adds several items to the data provider at the specified index and dispatches a CollectionEvent.ADD event.
-   *
-   * @param items
-   * @param index
    *
    * @memberOf ArrayCollection
    */
@@ -160,8 +150,6 @@ export class ArrayCollection<T> implements Collection<T> {
   /**
    * Concatenates the specified items to the end of the current data provider.
    *
-   * @param items
-   *
    * @memberOf ArrayCollection
    */
   concat(items: Array<T>): void {
@@ -170,8 +158,6 @@ export class ArrayCollection<T> implements Collection<T> {
 
   /**
    * Returns the item at the specified index.
-   *
-   * @param index
    *
    * @memberOf ArrayCollection
    */
@@ -182,8 +168,6 @@ export class ArrayCollection<T> implements Collection<T> {
   /**
    *  Returns the index of the specified item.
    *
-   * @param item
-   *
    * @memberOf ArrayCollection
    */
   getItemIndex(item: T): number {
@@ -192,8 +176,6 @@ export class ArrayCollection<T> implements Collection<T> {
 
   /**
    * Invalidates all the data items that the DataProvider contains and dispatches a CollectionEvent.INVALIDATE_ALL event.
-   *
-   * @memberOf ArrayCollection
    */
   invalidate(): void {
     this.onDataChange(new CollectionEvent(CollectionEvent.INVALIDATE_ALL));
@@ -201,32 +183,20 @@ export class ArrayCollection<T> implements Collection<T> {
 
   /**
    * Invalidates the specified item.
-   *
-   * @param item
-   *
-   * @memberOf ArrayCollection
    */
   // invalidateItem(item:any):void {}
 
   /**
    * Invalidates the item at the specified index.
-   *
-   * @param index
-   *
-   * @memberOf ArrayCollection
    */
   // invalidateItemAt(index:number):void {}
 
   /**
    * Appends the specified data into the data that the data provider contains and removes any duplicate items.
-   *
-   * @param newData
-   *
-   * @memberOf ArrayCollection
    */
   merge(newData: Array<T>): void {
-    for (let obj of newData) {
-      let existing = ~this.getItemIndex(obj);
+    for (const obj of newData) {
+      const existing = ~this.getItemIndex(obj);
       if (existing) {
         this.replaceItem(obj, existing);
       } else {
@@ -237,8 +207,6 @@ export class ArrayCollection<T> implements Collection<T> {
 
   /**
    * Removes all items from the data provider and dispatches a CollectionEvent.REMOVE_ALL event.
-   *
-   * @memberOf ArrayCollection
    */
   removeAll(): void {
     this.source = [];
@@ -250,39 +218,26 @@ export class ArrayCollection<T> implements Collection<T> {
 
   /**
    * Removes the specified item from the data provider and dispatches a CollectionEvent.REMOVE event.
-   *
-   * @param item
-   *
-   * @memberOf ArrayCollection
    */
   removeItem(item: T): boolean {
-    let index = this.getItemIndex(item);
+    const index = this.getItemIndex(item);
     return this.removeItemAt(index);
   }
 
   /**
    * Removes the item at the specified index and dispatches a CollectionEvent.REMOVE event.
-   *
-   * @param index
-   *
-   * @memberOf ArrayCollection
    */
   removeItemAt(index: number): boolean {
-    let success = !!this.source.splice(index, 1);
+    const success = !!this.source.splice(index, 1);
     this.refresh();
     return success;
   }
 
   /**
    * Replaces an existing item with a new item and dispatches a CollectionEvent.REPLACE event.
-   *
-   * @param newItem
-   * @param oldItem
-   *
-   * @memberOf ArrayCollection
    */
   replaceItem(newItem: any, oldItem: any): any {
-    let index = this.getItemIndex(oldItem);
+    const index = this.getItemIndex(oldItem);
     if (index >= 0) {
       this.replaceItemAt(newItem, index);
     }
@@ -290,11 +245,6 @@ export class ArrayCollection<T> implements Collection<T> {
 
   /**
    * Replaces the item at the specified index and dispatches a CollectionEvent.REPLACE event.
-   *
-   * @param newItem
-   * @param index
-   *
-   * @memberOf ArrayCollection
    */
   replaceItemAt(newItem: any, index: number): any {
     this.filterData.splice(index, 1, newItem);
@@ -302,11 +252,6 @@ export class ArrayCollection<T> implements Collection<T> {
 
   /**
    * Sorts the items that the data provider contains and dispatches a CollectionEvent.SORT event.
-   *
-   * @param sortArgs
-   * @returns null
-   *
-   * @memberOf ArrayCollection
    */
   get sort(): Array<any> {
     return this._sort;
@@ -319,12 +264,6 @@ export class ArrayCollection<T> implements Collection<T> {
 
   /**
    * Sorts the items that the data provider contains by the specified field and dispatches a CollectionEvent.SORT event.
-   *
-   * @param fieldName
-   * @param [options=null]
-   * @returns null
-   *
-   * @memberOf ArrayCollection
    */
   sortOn(fieldName: any, reverse = false): Array<T> {
     this.filterData = this.filterData.sort(Helpers.sortByField(fieldName, reverse));
@@ -352,10 +291,10 @@ export class ArrayCollection<T> implements Collection<T> {
 
   refresh(): void {
     this.filterData = this.isEditing ? this.editData.slice() : this.source.slice();
-    for (let item of this._sort.reverse()) {
+    for (const item of this._sort.reverse()) {
       this.sortOn(item.field, item.reverse);
     }
-    for (let key in this._filter) {
+    for (const key in this._filter) {
       if (key) {
         this.filterOn(key, this._filter[key]);
       }

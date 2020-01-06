@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NOVO_VALUE_TYPE, NOVO_VALUE_THEME } from 'novo-elements';
+import { NOVO_VALUE_THEME } from 'novo-elements';
 
 /**
  * @title Basic Value Example
@@ -10,9 +10,9 @@ import { NOVO_VALUE_TYPE, NOVO_VALUE_THEME } from 'novo-elements';
   styleUrls: ['basic-value-example.css'],
 })
 export class BasicValueExample {
-  public theme = NOVO_VALUE_THEME.MOBILE;
-  public data: any = 1234567890;
-  public meta: any = {
+  theme = NOVO_VALUE_THEME.MOBILE;
+  data: any = 1234567890;
+  meta: any = {
     type: 'SCALAR',
     name: 'phone1',
     label: 'PH #',

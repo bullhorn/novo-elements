@@ -16,7 +16,6 @@ import {
   NgZone,
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
-import { TAB, ENTER, ESCAPE } from '@angular/cdk/keycodes';
 import { FocusMonitor } from '@angular/cdk/a11y';
 // App
 import { NovoOverlayTemplateComponent } from '../overlay/Overlay';
@@ -153,8 +152,8 @@ export class NovoSelectElement implements OnInit, OnChanges, OnDestroy, ControlV
     if (!this.model && !this.createdItem) {
       this.clear();
     } else if (this.createdItem) {
-      let item = this.options.find((i) => i.label === this.createdItem);
-      let index = this.options.indexOf(item);
+      const item = this.options.find((i) => i.label === this.createdItem);
+      const index = this.options.indexOf(item);
       this.select(item, index);
     } else {
       this.writeValue(this.model);
@@ -289,9 +288,9 @@ export class NovoSelectElement implements OnInit, OnChanges, OnDestroy, ControlV
       this.filterTermTimeout = setTimeout(() => {
         this.filterTerm = '';
       }, 2000);
-      let char = String.fromCharCode(event.keyCode);
+      const char = String.fromCharCode(event.keyCode);
       this.filterTerm = this.filterTerm.concat(char);
-      let item = this.filteredOptions.find((i) => i.label.toUpperCase().indexOf(this.filterTerm) === 0);
+      const item = this.filteredOptions.find((i) => i.label.toUpperCase().indexOf(this.filterTerm) === 0);
       if (item) {
         this.select(item, this.filteredOptions.indexOf(item));
         this.scrollToSelected();
@@ -310,10 +309,10 @@ export class NovoSelectElement implements OnInit, OnChanges, OnDestroy, ControlV
   }
 
   scrollToIndex(index: number) {
-    let element = this.overlay.overlayRef.overlayElement;
-    let list = element.querySelector('.novo-select-list');
-    let items = list.querySelectorAll('li');
-    let item = items[this.headerConfig ? index + 1 : index];
+    const element = this.overlay.overlayRef.overlayElement;
+    const list = element.querySelector('.novo-select-list');
+    const items = list.querySelectorAll('li');
+    const item = items[this.headerConfig ? index + 1 : index];
     if (item) {
       list.scrollTop = item.offsetTop;
     }

@@ -9,13 +9,13 @@ import { Component } from '@angular/core';
   styleUrls: ['row-chips-example.css'],
 })
 export class RowChipsExample {
-  public placeholder: string = 'Select...';
-  public value: any;
-  public rowDemo: any;
-  public rowValue: any;
+  placeholder: string = 'Select...';
+  value: any;
+  rowDemo: any;
+  rowValue: any;
 
   constructor() {
-    let collaborators = [
+    const collaborators = [
       {
         id: 1,
         firstName: 'Brian',

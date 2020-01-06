@@ -9,9 +9,9 @@ import { Component } from '@angular/core';
   styleUrls: ['async-picker-example.css'],
 })
 export class AsyncPickerExample {
-  public placeholder: string = 'Select...';
-  public value: string;
-  public async: any;
+  placeholder: string = 'Select...';
+  value: string;
+  async: any;
 
   constructor() {
     this.value = null;
@@ -20,7 +20,7 @@ export class AsyncPickerExample {
       options: (term, page) => {
         return new Promise((resolve) => {
           setTimeout(() => {
-            let arr = [];
+            const arr = [];
             for (let i = 0; i < 20; i++) {
               arr.push({ value: `Page: ${page} - Item: ${i + 1}`, label: `Page: ${page} - Item: ${i + 1}` });
             }

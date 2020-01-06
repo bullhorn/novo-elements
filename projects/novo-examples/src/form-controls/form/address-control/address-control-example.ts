@@ -12,11 +12,11 @@ import { FormUtils, AddressControl, findByCountryId } from 'novo-elements';
   styleUrls: ['address-control-example.css'],
 })
 export class AddressControlExample {
-  public addressControl: any;
-  public secondaryAddressControl: any;
-  public addressForm: any;
-  public addressFormControls: any;
-  public states: any[] = [
+  addressControl: any;
+  secondaryAddressControl: any;
+  addressForm: any;
+  addressFormControls: any;
+  states = [
     {
       value: 'MA',
       label: 'Massachusetts',
@@ -125,7 +125,7 @@ export class AddressControlExample {
             },
             getLabels: (value: number) => {
               return new Promise((resolve: any) => {
-                let country: any = findByCountryId(value);
+                const country: any = findByCountryId(value);
                 if (country) {
                   resolve({ value: country.id, label: country.name });
                 } else {
@@ -164,7 +164,7 @@ export class AddressControlExample {
   }
 
   getStateLabel(value: number): string {
-    let state: any = this.states.find((s: any) => {
+    const state: any = this.states.find((s: any) => {
       return s.value === value;
     });
     if (state && state.label) {

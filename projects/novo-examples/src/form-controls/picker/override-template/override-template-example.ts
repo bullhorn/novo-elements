@@ -9,12 +9,12 @@ import { Component } from '@angular/core';
   styleUrls: ['override-template-example.css'],
 })
 export class OverrideTemplateExample {
-  public placeholder: string = 'Select...';
-  public overrideValue: any;
-  public overrideDemo: any;
+  placeholder: string = 'Select...';
+  overrideValue: any;
+  overrideDemo: any;
 
   constructor() {
-    let states = [
+    const states = [
       'Alabama',
       'Alaska',
       'Arizona',

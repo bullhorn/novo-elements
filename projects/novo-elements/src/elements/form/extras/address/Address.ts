@@ -340,7 +340,7 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
     this.isInvalid(field);
     this.isValid(field);
     if (event) {
-      this.change.emit({ value: this.model[field], field: field });
+      this.change.emit({ value: this.model[field], field });
     }
   }
 
@@ -355,7 +355,7 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
   }
 
   onCountryChange(evt) {
-    let country: any = evt && evt.rawValue ? evt.rawValue : null;
+    const country: any = evt && evt.rawValue ? evt.rawValue : null;
     let field: any;
     let statesUpdatable: boolean = false;
     this.config.countryID.updated = true;
@@ -388,7 +388,7 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
   }
 
   onStateChange(evt) {
-    let state: any = evt && evt.value ? evt.value : null;
+    const state: any = evt && evt.value ? evt.value : null;
     this.config.state.updated = true;
     this.model.state = state;
     this.updateControl();
@@ -396,7 +396,7 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
   }
 
   setStateLabel(model: any) {
-    let state: string = model.state;
+    const state: string = model.state;
     if (!Helpers.isBlank(state)) {
       if (this.config.state.required) {
         this.valid.state = true;
@@ -469,7 +469,7 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
       } else if (model.countryID) {
         if (this.config.countryID.pickerConfig && this.config.countryID.pickerConfig.getLabels) {
           if (Helpers.isFunction(this.config.countryID.pickerConfig.getLabels)) {
-            let promise: any = this.config.countryID.pickerConfig.getLabels(model.countryID);
+            const promise: any = this.config.countryID.pickerConfig.getLabels(model.countryID);
             loadingCountries = true;
             if (promise.then) {
               promise.then((result: any) => {
@@ -485,7 +485,7 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
       if (countryName) {
         countryName = countryName.trim();
         model.state = model.state || '';
-        this.model = Object.assign(model, { countryName: countryName });
+        this.model = Object.assign(model, { countryName });
       } else {
         this.model = model;
       }
@@ -534,7 +534,7 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
       },
       getLabels: (countryID) => {
         return new Promise((resolve: any) => {
-          let country: any = findByCountryId(countryID);
+          const country: any = findByCountryId(countryID);
           if (country) {
             resolve({ value: country.id, label: country.name });
           } else {

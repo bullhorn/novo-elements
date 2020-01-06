@@ -31,7 +31,7 @@ export class ThOrderable implements OnInit {
   get index() {
     let index: number = null;
     if (this.element.nativeElement && this.element.nativeElement.parentNode) {
-      let children: Array<any> = Array.prototype.slice.call(this.element.nativeElement.parentNode.children);
+      const children: Array<any> = Array.prototype.slice.call(this.element.nativeElement.parentNode.children);
       index = children.indexOf(this.element.nativeElement);
     }
     return index;
@@ -44,10 +44,6 @@ export class ThOrderable implements OnInit {
     }
   }
 
-  /**
-   * @name onDragStart
-   * @param event
-   */
   onDragStart(event?: any) {
     if (this.column.ordering) {
       this.element.nativeElement.classList.add('dragging');
@@ -64,10 +60,6 @@ export class ThOrderable implements OnInit {
     }
   }
 
-  /**
-   * @name deleteColumns
-   * @param table
-   */
   deleteColumns(table: { rows: Array<any>; deleteRow: Function }) {
     // TODO: `table` should be immutable and this method should return the modified data to its caller
     if (table.rows.length > 0) {
@@ -126,10 +118,6 @@ export class ThOrderable implements OnInit {
     return false;
   }
 
-  /**
-   * @name onDragOver
-   * @param event
-   */
   onDragOver(event: { preventDefault: Function; dataTransfer: { dropEffect: string }; stopPropagation: Function }): boolean {
     Helpers.swallowEvent(event);
     event.dataTransfer.dropEffect = 'move';

@@ -136,12 +136,12 @@ export class NovoSimpleCheckboxHeaderCell extends _NovoHeaderCell implements OnD
 })
 export class NovoSimpleCell<T> extends _NovoCell implements OnInit {
   @HostBinding('attr.role')
-  public role = 'gridcell';
+  role = 'gridcell';
 
   @Input()
-  public row: any;
+  row: any;
   @Input()
-  public column: SimpleTableColumn<T>;
+  column: SimpleTableColumn<T>;
 
   constructor(columnDef: CdkColumnDef, private elementRef: ElementRef, private renderer: Renderer2) {
     super(columnDef, elementRef);
@@ -150,7 +150,7 @@ export class NovoSimpleCell<T> extends _NovoCell implements OnInit {
     renderer.addClass(elementRef.nativeElement, 'novo-simple-cell');
   }
 
-  public ngOnInit(): void {
+  ngOnInit(): void {
     if (this.column.customClass) {
       this.renderer.addClass(this.elementRef.nativeElement, this.column.customClass(this.row));
     }
@@ -171,7 +171,7 @@ export class NovoSimpleCell<T> extends _NovoCell implements OnInit {
     // }
   }
 
-  public onClick(event: MouseEvent): void {
+  onClick(event: MouseEvent): void {
     Helpers.swallowEvent(event);
     if (this.column.onClick) {
       this.column.onClick(this.row);
@@ -188,14 +188,14 @@ export class NovoSimpleCell<T> extends _NovoCell implements OnInit {
 })
 export class NovoSimpleCheckboxCell extends _NovoCell implements OnDestroy, OnInit {
   @HostBinding('attr.role')
-  public role = 'gridcell';
+  role = 'gridcell';
 
   @Input()
-  public row: any;
+  row: any;
   @Input()
-  public index: any;
+  index: any;
 
-  public selected: boolean = false;
+  selected: boolean = false;
   private selectAllSubscription: Subscription;
 
   constructor(public columnDef: CdkColumnDef, elementRef: ElementRef, renderer: Renderer2, @Optional() public _selection: NovoSelection) {

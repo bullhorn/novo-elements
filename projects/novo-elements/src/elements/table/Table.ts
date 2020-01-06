@@ -314,7 +314,7 @@ export class NovoTableElement implements DoCheck {
           }
           // Find that columns we might need to sum up via the footer
           let columnsToSum = [];
-          let columnSums = {};
+          const columnSums = {};
           if (this.config.footers) {
             this.config.footers.forEach((config) => {
               columnsToSum.push(...config.columns);
@@ -323,16 +323,16 @@ export class NovoTableElement implements DoCheck {
             columnsToSum = columnsToSum.filter((item, index, array) => array.indexOf(item) === index);
           }
           // Make a form for each row
-          let tableFormRows = <FormArray>this.tableForm.controls['rows'];
+          const tableFormRows = <FormArray>this.tableForm.controls['rows'];
           this._rows.forEach((row, index) => {
-            let rowControls = [];
+            const rowControls = [];
             row.controls = {};
             row._editing = {};
             row._expanded = this.config.expandAll;
             row.rowId = this._rows.length;
             this.columns.forEach((column) => {
               // Use the control passed or use a ReadOnlyControl so that the form has the values
-              let control = column.editorConfig
+              const control = column.editorConfig
                 ? ControlFactory.create(column.editorType, column.editorConfig)
                 : new ReadOnlyControl({ key: column.name });
               row.controls[column.name] = control;
@@ -358,7 +358,7 @@ export class NovoTableElement implements DoCheck {
           if (this.config.footers) {
             this.footers = [];
             this.config.footers.forEach((footerConfig, footerConfigIndex) => {
-              let footer = {};
+              const footer = {};
               footer[footerConfig.labelColumn] = footerConfig.label;
               footerConfig.columns.forEach((column) => {
                 if (footerConfig.method === 'AVG' && this._rows.length !== 0) {
@@ -430,9 +430,6 @@ export class NovoTableElement implements DoCheck {
     return option;
   }
 
-  /**
-   * @name setupColumnDefaults
-   */
   setupColumnDefaults() {
     // Check columns for cell option types
     this.columns.forEach((column) => {
@@ -449,9 +446,6 @@ export class NovoTableElement implements DoCheck {
     });
   }
 
-  /**
-   * @name ngDoCheck
-   */
   ngDoCheck() {
     if (this.config.paging && this.config.paging.current !== this.lastPage) {
       this.rowSelectHandler();
@@ -460,30 +454,19 @@ export class NovoTableElement implements DoCheck {
     this.lastPage = this.config.paging ? this.config.paging.current : 1;
   }
 
-  /**
-   * @name getPageStart
-   */
   getPageStart(): number {
     return this.config.paging ? (this.dataProvider.page - 1) * this.dataProvider.pageSize : 0;
   }
 
-  /**
-   * @name getPageEnd
-   */
   getPageEnd(): number {
     return this.config.paging && this.dataProvider.pageSize > -1 ? this.getPageStart() + this.dataProvider.pageSize : this.rows.length;
   }
 
   getRowControlForm(i): AbstractControl {
-    let tableFormRows = <FormArray>this.tableForm.controls['rows'];
+    const tableFormRows = <FormArray>this.tableForm.controls['rows'];
     return tableFormRows.controls[i];
   }
 
-  /**
-   * @name onFilterClick
-   * @param column
-   * @param filter
-   */
   onFilterClick(column, filter) {
     if (filter.range && !column.calendarShow) {
       column.calenderShow = true;
@@ -513,10 +496,6 @@ export class NovoTableElement implements DoCheck {
     this.onFilterChange();
   }
 
-  /**
-   * @name onFilterClear
-   * @param column
-   */
   onFilterClear(column: any): void {
     setTimeout(() => {
       column.filter = null;
@@ -538,8 +517,6 @@ export class NovoTableElement implements DoCheck {
   }
 
   /**
-   * @name onFilterChange
-   *
    * @description This method updates the row data to reflect the active filters.
    */
   onFilterChange(event?: Event) {
@@ -632,16 +609,12 @@ export class NovoTableElement implements DoCheck {
     return isActive;
   }
 
-  /**
-   * @name onSortChange
-   * @param newSortColumn
-   */
   onSortChange(column) {
     this.currentSortColumn = column;
-    let sortedColumns: any = this.columns.filter((thisColumn) => {
+    const sortedColumns: any = this.columns.filter((thisColumn) => {
       return thisColumn.sort && thisColumn !== this.currentSortColumn;
     });
-    for (let sortedColumn of sortedColumns) {
+    for (const sortedColumn of sortedColumns) {
       sortedColumn.sort = null;
     }
 
@@ -669,9 +642,6 @@ export class NovoTableElement implements DoCheck {
     }
   }
 
-  /**
-   * @name fireTableChangeEvent
-   */
   fireTableChangeEvent() {
     // Construct a table change object
     const onTableChange: any = {};
@@ -693,10 +663,6 @@ export class NovoTableElement implements DoCheck {
     return null;
   }
 
-  /**
-   * @name onOrderChange
-   * @param event
-   */
   onOrderChange(event) {
     const oldIndex = this.findColumnIndex(event.first.name);
     const newIndex = this.findColumnIndex(event.second.name);
@@ -704,19 +670,13 @@ export class NovoTableElement implements DoCheck {
     this.onSortChange(this.currentSortColumn);
   }
 
-  /**
-   * @name selectPage
-   */
   expandAllOnPage(expanded) {
     this.config.expandAll = !expanded;
-    for (let row of this.dataProvider.list) {
+    for (const row of this.dataProvider.list) {
       row._expanded = this.config.expandAll;
     }
   }
 
-  /**
-   * @name selectPage
-   */
   selectPage(data?: any) {
     if (!this.master) {
       this.selectAll(false);
@@ -726,7 +686,7 @@ export class NovoTableElement implements DoCheck {
     } else {
       this.indeterminate = false;
       // this.pagedData = this.rows.slice(this.getPageStart(), this.getPageEnd());
-      for (let row of this.pagedData) {
+      for (const row of this.pagedData) {
         row._selected = this.master;
       }
       this.selected = this.dataProvider.list.filter((r) => r._selected);
@@ -738,13 +698,10 @@ export class NovoTableElement implements DoCheck {
     }
   }
 
-  /**
-   * @name selectAll
-   */
   selectAll(value) {
     this.master = value;
     this.indeterminate = false;
-    for (let row of this.dataProvider.list) {
+    for (const row of this.dataProvider.list) {
       row._selected = value;
     }
     this.selected = value ? this.dataProvider.list : [];
@@ -753,9 +710,6 @@ export class NovoTableElement implements DoCheck {
     this.rowSelectHandler();
   }
 
-  /**
-   * @name rowSelectHandler
-   */
   rowSelectHandler(data?: any) {
     // this.pagedData = this.rows.slice(this.getPageStart(), this.getPageEnd());
     this.pageSelected = this.pagedData.filter((r) => r._selected);
@@ -777,18 +731,10 @@ export class NovoTableElement implements DoCheck {
     this.emitSelected(this.selected);
   }
 
-  /**
-   * @name emitSelected
-   * @param selected
-   */
   emitSelected(selected) {
-    this.onRowSelect.emit({ length: selected.length, selected: selected });
+    this.onRowSelect.emit({ length: selected.length, selected });
   }
 
-  /**
-   * @name rowClickHandler
-   * @param row
-   */
   rowClickHandler(row) {
     if (this.config.rowSelect) {
       this.activeId = row.id || 0;
@@ -798,7 +744,7 @@ export class NovoTableElement implements DoCheck {
 
   getDefaultOptions(column) {
     // TODO - needs to come from label service - https://github.com/bullhorn/novo-elements/issues/116
-    let opts: any[] = [
+    const opts: any[] = [
       { label: this.labels.past1Day, min: -1, max: 0 },
       { label: this.labels.past7Days, min: -7, max: 0 },
       { label: this.labels.past30Days, min: -30, max: 0 },
@@ -830,11 +776,11 @@ export class NovoTableElement implements DoCheck {
 
   onFilterKeywords(config) {
     if (config && config.filtering && config.filtering.freetextFilter) {
-      let filterKeywords = config.filtering.freetextFilter.toLowerCase();
+      const filterKeywords = config.filtering.freetextFilter.toLowerCase();
       if (!config.filtering.originalOptions) {
         config.filtering.originalOptions = config.filtering.options;
       }
-      let newOptions = config.filtering.originalOptions.filter((option) => {
+      const newOptions = config.filtering.originalOptions.filter((option) => {
         let value = option && option.label ? option.label : option;
         value = value.toLowerCase() ? value.toLowerCase() : value;
         if (value === filterKeywords) {
@@ -853,14 +799,10 @@ export class NovoTableElement implements DoCheck {
   }
 
   /**
-   * @name setTableEdit
    * @description Sets the Table into EDIT mode, based on the row/column passed you can enter in a few states
    * (1) setTableEdit() - don't pass any to put the FULL table into edit mode
    * (2) setTableEdit(1) - pass only row to put that FULL row of the table into edit mode
    * (3) setTableEdit(1, 1) - pass row and column to put that column of the row of the table into edit mode
-   * @param [rowNumber]
-   * @param [columnNumber]
-   * @memberOf NovoTableElement
    */
   setTableEdit(rowNumber?: number, columnNumber?: number): void {
     this.mode = NovoTableMode.EDIT;
@@ -889,7 +831,6 @@ export class NovoTableElement implements DoCheck {
   }
 
   /**
-   * @name leaveEditMode
    * @description Leaves edit mode for the Table and puts everything back to VIEW only
    * @memberOf NovoTableElement
    * @param cancel - whether or not to save data or undo
@@ -911,21 +852,19 @@ export class NovoTableElement implements DoCheck {
   }
 
   /**
-   * @name addEditableRow
    * @description Adds a new row into the table to be edited, can be called from a local reference of the table in your template
-   * @param defaultValue
    * @memberOf NovoTableElement
    */
   addEditableRow(defaultValue: any = {}): void {
-    let tableFormRows = <FormArray>this.tableForm.controls['rows'];
-    let row: any = {};
-    let rowControls = [];
+    const tableFormRows = <FormArray>this.tableForm.controls['rows'];
+    const row: any = {};
+    const rowControls = [];
     row.controls = {};
     row._editing = {};
     row.rowId = this._rows.length + 1;
     this.columns.forEach((column) => {
       // Use the control passed or use a ReadOnlyControl so that the form has the values
-      let control = column.editorConfig
+      const control = column.editorConfig
         ? ControlFactory.create(column.editorType, column.editorConfig)
         : new ReadOnlyControl({ key: column.name });
       control.value = null; // remove copied column value
@@ -939,7 +878,6 @@ export class NovoTableElement implements DoCheck {
   }
 
   /**
-   * @name validateAndGetUpdatedData
    * @description Validates the Form inside of the Table, if there are errors it will display/return the errors for each row.
    * If there are no errors, then it will return ONLY the changed data for each row, the data returned will be in the form:
    * { id: ID_OF_RECORD, key: value } -- data that was updated
@@ -948,15 +886,15 @@ export class NovoTableElement implements DoCheck {
    */
   validateAndGetUpdatedData(): { changed?: any[]; errors?: { errors: any; row: any; index: number }[] } {
     if (this.tableForm && this.tableForm.controls && this.tableForm.controls['rows']) {
-      let changedRows = [];
-      let errors = [];
+      const changedRows = [];
+      const errors = [];
       // Go over the FormArray's controls
       (this.tableForm.controls['rows'] as FormArray).controls.forEach((formGroup: FormGroup, index: number) => {
         let changedRow = null;
         let error = null;
         // Go over the form group controls
         Object.keys(formGroup.controls).forEach((key: string) => {
-          let control = formGroup.controls[key];
+          const control = formGroup.controls[key];
           // Handle value changing
           if (control && control.dirty && !control.errors) {
             if (!changedRow) {
@@ -984,20 +922,19 @@ export class NovoTableElement implements DoCheck {
           changedRows.push(changedRow);
         }
         if (error) {
-          errors.push({ errors: error, row: this._rows[index], index: index });
+          errors.push({ errors: error, row: this._rows[index], index });
         }
       });
-      let ret = {};
+      const ret = {};
       // Return errors if any, otherwise return the changed rows
       if (errors.length === 0) {
         return { changed: changedRows };
       }
-      return { errors: errors };
+      return { errors };
     }
   }
 
   /**
-   * @name cancelEditing
    * @description Refresh the data provider and leave edit mode
    * @memberOf NovoTableElement
    */
@@ -1006,7 +943,6 @@ export class NovoTableElement implements DoCheck {
   }
 
   /**
-   * @name saveChanges
    * @description Refresh the data provider and leave edit mode
    * @memberOf NovoTableElement
    */
@@ -1015,10 +951,7 @@ export class NovoTableElement implements DoCheck {
   }
 
   /**
-   * @name displayToastMessage
    * @description Displays a toast message inside of the table
-   * @param toast
-   * @param hideDelay
    * @memberOf NovoTableElement
    */
   displayToastMessage(toast: { icon: string; theme: string; message: string }, hideDelay?: number): void {
@@ -1030,7 +963,6 @@ export class NovoTableElement implements DoCheck {
   }
 
   /**
-   * @name hideToastMessage
    * @description Force hide the toast message
    * @memberOf NovoTableElement
    */
@@ -1044,9 +976,7 @@ export class NovoTableElement implements DoCheck {
   }
 
   /**
-   * @name toggleLoading
    * @description display the loading overlay on the table
-   * @param show
    * @memberOf NovoTableElement
    */
   toggleLoading(show: boolean): void {
@@ -1054,9 +984,7 @@ export class NovoTableElement implements DoCheck {
   }
 
   /**
-   * @name isColumnHidden
    * @description hide a column in edit or view mode
-   * @param  column
    * @memberOf NovoTableElement
    */
   isColumnHidden(column: any): boolean {

@@ -248,8 +248,8 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
         .withFallbackPosition({ originX: 'start', originY: 'bottom' }, { overlayX: 'start', overlayY: 'bottom' });
     }
 
-    let [originX, fallbackX]: HorizontalConnectionPos[] = this.position.includes('right') ? ['end', 'start'] : ['start', 'end'];
-    let [originY, overlayY]: VerticalConnectionPos[] = this.position.includes('top') ? ['top', 'bottom'] : ['bottom', 'top'];
+    const [originX, fallbackX]: HorizontalConnectionPos[] = this.position.includes('right') ? ['end', 'start'] : ['start', 'end'];
+    const [originY, overlayY]: VerticalConnectionPos[] = this.position.includes('top') ? ['top', 'bottom'] : ['bottom', 'top'];
 
     let strategy: ConnectedPositionStrategy = this.overlay
       .position()
@@ -265,7 +265,7 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
         .withFallbackPosition({ originX: fallbackX, originY: 'top' }, { overlayX: fallbackX, overlayY: 'bottom' });
       if (!this.position.includes('above-below')) {
         strategy = strategy
-          .withFallbackPosition({ originX: originX, originY: 'center' }, { overlayX: originX, overlayY: 'center' })
+          .withFallbackPosition({ originX, originY: 'center' }, { overlayX: originX, overlayY: 'center' })
           .withFallbackPosition({ originX: fallbackX, originY: 'center' }, { overlayX: fallbackX, overlayY: 'center' });
       }
     }

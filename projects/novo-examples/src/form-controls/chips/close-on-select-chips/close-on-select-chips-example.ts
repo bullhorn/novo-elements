@@ -9,12 +9,12 @@ import { Component } from '@angular/core';
   styleUrls: ['close-on-select-chips-example.css'],
 })
 export class CloseOnSelectChipsExample {
-  public formatted: any;
-  public placeholder: string = 'Select...';
-  public value: any;
+  formatted: any;
+  placeholder: string = 'Select...';
+  value: any;
 
   constructor() {
-    let collaborators = [
+    const collaborators = [
       {
         id: 1,
         firstName: 'Brian',

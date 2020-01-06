@@ -36,15 +36,15 @@ export class NovoDropdownCell extends BaseRenderer implements OnInit {
   @Input()
   value: any;
 
-  public ngOnInit(): void {
+  ngOnInit(): void {
     // Check for and fix bad config
     if (!this.meta.dropdownCellConfig) {
       throw new Error('Missing "dropdownCellConfig" on the column setup');
     }
   }
 
-  public onClick(config, option, value): void {
-    let callback = option.callback || config.callback;
+  onClick(config, option, value): void {
+    const callback = option.callback || config.callback;
     callback(this.data, value || option);
   }
 }

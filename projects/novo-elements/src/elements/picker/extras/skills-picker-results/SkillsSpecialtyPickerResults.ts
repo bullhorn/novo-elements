@@ -49,7 +49,6 @@ export class SkillsSpecialtyPickerResults extends BasePickerResults {
   }
 
   /**
-   * @name structureArray
    * @param collection - the data once getData resolves it
    *
    * @description This function structures an array of nodes into an array of objects with a

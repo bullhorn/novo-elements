@@ -71,7 +71,7 @@ describe('Elements: EntityPickerResult', () => {
 
   describe('Method: getNameForResult(result)', () => {
     it('should return a correctly formatted name for ClientContact', () => {
-      let input = {
+      const input = {
         searchEntity: 'ClientContact',
         firstName: 'James',
         lastName: 'Bond',
@@ -79,14 +79,14 @@ describe('Elements: EntityPickerResult', () => {
       expect(component.getNameForResult(input)).toBe('James Bond');
     });
     it('should return a correctly formatted name for ClientCorporation', () => {
-      let input = {
+      const input = {
         searchEntity: 'ClientCorporation',
         name: 'Bottles, Inc.',
       };
       expect(component.getNameForResult(input)).toBe('Bottles, Inc.');
     });
     it('should return a correctly formatted name for Opportunity', () => {
-      let input = {
+      const input = {
         searchEntity: 'Opportunity',
         id: 789,
         title: 'Bottlemaking Opportunity',
@@ -94,7 +94,7 @@ describe('Elements: EntityPickerResult', () => {
       expect(component.getNameForResult(input)).toBe('789 | Bottlemaking Opportunity');
     });
     it('should return a correctly formatted name for Lead', () => {
-      let input = {
+      const input = {
         searchEntity: 'Lead',
         firstName: 'James',
         lastName: 'Bond',
@@ -102,7 +102,7 @@ describe('Elements: EntityPickerResult', () => {
       expect(component.getNameForResult(input)).toBe('James Bond');
     });
     it('should return a correctly formatted name for Candidate', () => {
-      let input = {
+      const input = {
         searchEntity: 'Candidate',
         firstName: 'James',
         lastName: 'Bond',
@@ -110,7 +110,7 @@ describe('Elements: EntityPickerResult', () => {
       expect(component.getNameForResult(input)).toBe('James Bond');
     });
     it('should return a correctly formatted name for Job Order', () => {
-      let input = {
+      const input = {
         searchEntity: 'JobOrder',
         id: 567,
         title: 'Mock Job Title',
@@ -118,7 +118,7 @@ describe('Elements: EntityPickerResult', () => {
       expect(component.getNameForResult(input)).toBe('567 | Mock Job Title');
     });
     it('when candidate and job are defined, should concatenate id, candidate name, and job title', () => {
-      let input = {
+      const input = {
         searchEntity: 'Placement',
         id: 1234,
         candidate: {
@@ -132,7 +132,7 @@ describe('Elements: EntityPickerResult', () => {
       expect(component.getNameForResult(input)).toBe('1234 | James Bond - Gud Picker');
     });
     it('when candidate is undefined and job is defined, should concatenate id and job title', () => {
-      let input = {
+      const input = {
         searchEntity: 'Placement',
         id: 1234,
         jobOrder: {
@@ -142,14 +142,14 @@ describe('Elements: EntityPickerResult', () => {
       expect(component.getNameForResult(input)).toBe('1234 | Gud Picker');
     });
     it('when candidate and job are undefined, should only return id', () => {
-      let input = {
+      const input = {
         searchEntity: 'Placement',
         id: 1234,
       };
       expect(component.getNameForResult(input)).toBe('1234');
     });
     it('when candidate is defined and job is undefined, should concatenate id and candidate name', () => {
-      let input = {
+      const input = {
         searchEntity: 'Placement',
         id: 1234,
         candidate: {
@@ -160,14 +160,14 @@ describe('Elements: EntityPickerResult', () => {
       expect(component.getNameForResult(input)).toBe('1234 | James Bond');
     });
     it('should return the name when present for an unknown entity', () => {
-      let input = {
+      const input = {
         searchEntity: 'Unknown',
         name: 'James Bond',
       };
       expect(component.getNameForResult(input)).toBe('James Bond');
     });
     it('should return an empty string when name is not present for an unknown entity', () => {
-      let input = {
+      const input = {
         searchEntity: 'Unknown',
         title: 'Mock Job Title',
       };

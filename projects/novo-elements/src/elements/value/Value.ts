@@ -120,7 +120,7 @@ export class NovoValueElement implements OnInit, OnChanges {
     if (this.meta && this.isLinkField(this.meta, this.data)) {
       this._type = NOVO_VALUE_TYPE.LINK;
       // Make sure the value has a protocol, otherwise the URL will be relative
-      let hasProtocol: any = new RegExp('^(http|https)://', 'i');
+      const hasProtocol = new RegExp('^(http|https)://', 'i');
       if (!hasProtocol.test(this.data)) {
         this.url = `http://${this.data}`;
       } else {
@@ -151,9 +151,9 @@ export class NovoValueElement implements OnInit, OnChanges {
   }
 
   isLinkField(field: { name?: string; type?: NOVO_VALUE_TYPE }, data: any): boolean {
-    let linkFields: any = ['companyURL', 'clientCorporationCompanyURL'];
-    let regex: any = new RegExp('^(https?://(?:www.|(?!www))[^s.]+.[^s]{2,}|www.[^s]+.[^s]{2,})$', 'gi');
-    let isURL: any = Helpers.isString(data) && regex.exec(data.trim());
+    const linkFields: any = ['companyURL', 'clientCorporationCompanyURL'];
+    const regex: any = new RegExp('^(https?://(?:www.|(?!www))[^s.]+.[^s]{2,}|www.[^s]+.[^s]{2,})$', 'gi');
+    const isURL: any = Helpers.isString(data) && regex.exec(data.trim());
     return linkFields.indexOf(field.name) > -1 || !!isURL || field.type === NOVO_VALUE_TYPE.LINK;
   }
 

@@ -11,16 +11,16 @@ import { FormUtils, TextBoxControl, FieldInteractionApi, TilesControl } from 'no
   styleUrls: ['fi-tooltip-example.css'],
 })
 export class FiTooltipExample {
-  public form: any = {};
-  public controls: any = {};
+  form: any = {};
+  controls: any = {};
 
   constructor(private formUtils: FormUtils) {
-    let tooltipFunction = (API: FieldInteractionApi) => {
+    const tooltipFunction = (API: FieldInteractionApi) => {
       console.log('[FieldInteractionDemo] - tooltipFunction'); // tslint:disable-line
       API.setTooltip(API.getActiveKey(), API.getActiveValue());
     };
 
-    let tooltipUpdateFunction = (API: FieldInteractionApi) => {
+    const tooltipUpdateFunction = (API: FieldInteractionApi) => {
       console.log('[FieldInteractionDemo] - tooltipUpdateFunction'); // tslint:disable-line
       API.getControl(this.controls.tooltipControl.key).tooltipSize = API.getValue(this.controls.tooltipSizeControl.key);
       API.getControl(this.controls.tooltipControl.key).tooltipPreline = API.getValue(this.controls.tooltipPrelineControl.key);

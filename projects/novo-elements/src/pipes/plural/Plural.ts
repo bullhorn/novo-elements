@@ -3,15 +3,14 @@ import { Injectable, Pipe, PipeTransform } from '@angular/core';
 
 // Rule storage - pluralize and singularize need to be run sequentially,
 // while other rules can be optimized using an object for instant lookups.
-let pluralRules = [];
-let singularRules = [];
-let uncountables = {};
-let irregularPlurals = {};
-let irregularSingles = {};
+const pluralRules = [];
+const singularRules = [];
+const uncountables = {};
+const irregularPlurals = {};
+const irregularSingles = {};
 
 /**
  * Title case a string.
- * @param str
  */
 function toTitleCase(str: string): string {
   return str.charAt(0).toUpperCase() + str.substr(1).toLowerCase();
@@ -67,11 +66,11 @@ function sanitizeWord(token: string, word: string, collection: RegExp[]): string
   let len = collection.length;
   // Iterate over the sanitization rules and use the first one to match.
   while (len--) {
-    let rule = collection[len];
+    const rule = collection[len];
     // If the rule passes, return the replacement.
     if (rule[0].test(word)) {
       return word.replace(rule[0], (match, index, words) => {
-        let result = interpolate(rule[1], [match, index, words]);
+        const result = interpolate(rule[1], [match, index, words]);
         if (match === '') {
           return restoreCase(words[index - 1], result);
         }
@@ -88,7 +87,7 @@ function sanitizeWord(token: string, word: string, collection: RegExp[]): string
 function replaceWord(replaceMap: any, keepMap: any, rules: any[]): Function {
   return (word) => {
     // Get the correct token and case restoration functions.
-    let token = word.toLowerCase();
+    const token = word.toLowerCase();
 
     // Check against the keep object map.
     if (keepMap.hasOwnProperty(token)) {
@@ -107,7 +106,7 @@ function replaceWord(replaceMap: any, keepMap: any, rules: any[]): Function {
 
 class Pluralize {
   static pluralize(word, count = 1, inclusive?) {
-    let pluralized = count === 1 ? Pluralize.singular(word) : Pluralize.plural(word);
+    const pluralized = count === 1 ? Pluralize.singular(word) : Pluralize.plural(word);
     return (inclusive ? `${count} ` : '') + pluralized;
   }
 
@@ -139,8 +138,8 @@ class Pluralize {
   }
 
   static addIrregularRule(single, plural) {
-    let one = plural.toLowerCase();
-    let many = single.toLowerCase();
+    const one = plural.toLowerCase();
+    const many = single.toLowerCase();
 
     irregularSingles[one] = many;
     irregularPlurals[many] = one;

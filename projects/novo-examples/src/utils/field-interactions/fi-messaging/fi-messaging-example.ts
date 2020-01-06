@@ -2,17 +2,10 @@ import { Component } from '@angular/core';
 // Vendor
 import {
   FormUtils,
-  NovoFormGroup,
   TextBoxControl,
   CheckboxControl,
   FieldInteractionApi,
-  SelectControl,
-  PickerControl,
-  DateTimeControl,
-  TilesControl,
 } from 'novo-elements';
-import { map } from 'rxjs/operators';
-import { MockMetaHeaders } from '../MockMeta';
 
 /**
  * @title Fi Messaging Example
@@ -23,11 +16,11 @@ import { MockMetaHeaders } from '../MockMeta';
   styleUrls: ['fi-messaging-example.css'],
 })
 export class FiMessagingExample {
-  public form: any = {};
-  public controls: any = {};
+  form: any = {};
+  controls: any = {};
 
   constructor(private formUtils: FormUtils) {
-    let messagingFunction = (API: FieldInteractionApi) => {
+    const messagingFunction = (API: FieldInteractionApi) => {
       console.log('[FieldInteractionDemo] - messagingFunction'); // tslint:disable-line
       if (API.getActiveKey() === 'toast') {
         API.displayToast({

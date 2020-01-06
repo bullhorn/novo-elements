@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NOVO_VALUE_TYPE, NOVO_VALUE_THEME } from 'novo-elements';
+import { NOVO_VALUE_THEME } from 'novo-elements';
 
 /**
  * @title Associated Value Example
@@ -10,13 +10,13 @@ import { NOVO_VALUE_TYPE, NOVO_VALUE_THEME } from 'novo-elements';
   styleUrls: ['associated-value-example.css'],
 })
 export class AssociatedValueExample {
-  public theme = NOVO_VALUE_THEME.DEFAULT;
-  public data: any = {
+  theme = NOVO_VALUE_THEME.DEFAULT;
+  data: any = {
     id: 1,
     firstName: 'Alice',
     lastName: 'Wonderland',
   };
-  public meta: any = {
+  meta: any = {
     type: 'TO_ONE',
     name: 'owner',
     label: 'Owner',

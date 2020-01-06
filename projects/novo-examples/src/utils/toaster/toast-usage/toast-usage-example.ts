@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { NovoToastService } from 'novo-elements';
 
 /**
  * @title Static Toast Usage
@@ -10,9 +9,9 @@ import { NovoToastService } from 'novo-elements';
   styleUrls: ['toast-usage-example.css'],
 })
 export class ToastUsageExample {
-  public themes: Array<string> = ['default', 'success', 'info', 'warning', 'danger'];
-  public icons: Array<string> = ['add', 'check', 'clock', 'lock', 'caution'];
-  public toast: any = {
+  themes: Array<string> = ['default', 'success', 'info', 'warning', 'danger'];
+  icons: Array<string> = ['add', 'check', 'clock', 'lock', 'caution'];
+  toast = {
     theme: 'danger',
     icon: 'caution',
   };

@@ -10,16 +10,15 @@ export class DateFormatService {
 
   getTimeMask(militaryTime: boolean): Array<RegExp> {
     let mask: Array<RegExp> = [/\d/, /\d/, /:/, /\d/, /\d/],
-      timeFormatArray: Array<string> = [],
-      timeFormatPartsArray: Array<string> = [];
-    let timeFormat: string = this.labels.timeFormatPlaceholderAM.toLowerCase();
+      timeFormatArray: Array<string> = [];
+    const timeFormat: string = this.labels.timeFormatPlaceholderAM.toLowerCase();
     if (militaryTime) {
       return mask;
     } else {
       timeFormatArray = timeFormat.split('hh:mm');
       if (timeFormatArray && timeFormatArray.length) {
         mask = [];
-        for (let timeFormatPart of timeFormatArray) {
+        for (const timeFormatPart of timeFormatArray) {
           if (timeFormatPart === '') {
             mask = mask.concat([/\d/, /\d|:/, /:|\d/, /\d|\w|\s/, /\d|\s|\w/]);
           } else if (timeFormatPart.length) {
@@ -49,9 +48,9 @@ export class DateFormatService {
   }
 
   parseDateString(dateString: string): [Date, string] {
+    const dateFormatRegex = /(\w+)[\/|\.|\-](\w+)[\/|\.|\-](\w+)/gi,
+      dateValueRegex = /(\d+)[\/|\.|\-](\d+)[\/|\.|\-](\d+)/gi;
     let dateFormat: string = this.labels.dateFormatString(),
-      dateFormatRegex = /(\w+)[\/|\.|\-](\w+)[\/|\.|\-](\w+)/gi,
-      dateValueRegex = /(\d+)[\/|\.|\-](\d+)[\/|\.|\-](\d+)/gi,
       dateFormatTokens: Array<string>,
       dateValueTokens: Array<string>,
       year: number,
@@ -80,10 +79,10 @@ export class DateFormatService {
         date = new Date(year, month, day);
       }
     } else if (dateFormatTokens && dateFormatTokens.length === 4 && dateString.length >= 1) {
-      let twoTokens = /\d{1,4}(\/|\.|\-)(\d{1,2})/.exec(dateString);
-      let oneToken = /^(\d{1,4})$/.exec(dateString);
-      let delimiter = /\w+(\/|\.|\-)\w+[\/|\.|\-]\w+/gi.exec(dateFormat);
-      let dateStringWithDelimiter = dateString[dateString.length - 1].match(/\/|\.|\-/);
+      const twoTokens = /\d{1,4}(\/|\.|\-)(\d{1,2})/.exec(dateString);
+      const oneToken = /^(\d{1,4})$/.exec(dateString);
+      const delimiter = /\w+(\/|\.|\-)\w+[\/|\.|\-]\w+/gi.exec(dateFormat);
+      const dateStringWithDelimiter = dateString[dateString.length - 1].match(/\/|\.|\-/);
       if (twoTokens && twoTokens.length === 3 && this.isValidDatePart(twoTokens[2], dateFormatTokens[2]) && !dateStringWithDelimiter) {
         dateString = `${dateString}${delimiter[1]}`;
       } else if (oneToken && oneToken.length === 2 && this.isValidDatePart(oneToken[1], dateFormatTokens[1]) && !dateStringWithDelimiter) {
@@ -94,9 +93,8 @@ export class DateFormatService {
   }
 
   parseTimeString(timeString: string, militaryTime: boolean): [Date, string] {
-    let value: Date = new Date(),
-      timeStringParts: Array<string>,
-      timeFormat: string;
+    const value: Date = new Date();
+    let timeStringParts: Array<string>;
     let amFormat = this.labels.timeFormatAM;
     let pmFormat = this.labels.timeFormatPM;
     if (!(timeString && timeString.includes(':'))) {
@@ -115,7 +113,7 @@ export class DateFormatService {
         pm = true;
       }
       if (splits && splits.length) {
-        for (let item of splits) {
+        for (const item of splits) {
           if (item && item.trim().includes(':')) {
             timeStringParts = item.trim().split(':');
           }
@@ -148,11 +146,11 @@ export class DateFormatService {
   parseString(dateTimeString: string, militaryTime: boolean, type: string): [Date, string] {
     switch (type) {
       case 'datetime':
-        let str = dateTimeString.replace(/-/g, '/');
-        let parts = str.split(' ');
-        let [dt, dts] = this.parseDateString(parts[0]);
+        const str = dateTimeString.replace(/-/g, '/');
+        const parts = str.split(' ');
+        const [dt, dts] = this.parseDateString(parts[0]);
         if (parts.length > 1) {
-          let [tm, tms] = this.parseTimeString(parts[1], militaryTime);
+          const [tm, tms] = this.parseTimeString(parts[1], militaryTime);
           return [new Date(dt.setHours(tm.getHours(), tm.getMinutes())), `${dts} ${tms}`];
         }
         return [dt, dts];
@@ -166,7 +164,7 @@ export class DateFormatService {
   }
 
   isValidDatePart(value: string, format: string): boolean {
-    let datePart = parseInt(value);
+    const datePart = parseInt(value);
     if (format.includes('m') && (datePart >= 2 || value.length === 2)) {
       return true;
     } else if (format.includes('d') && (datePart >= 4 || value.length === 2)) {
