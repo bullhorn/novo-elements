@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.0.0](https://github.com/bullhorn/novo-elements/compare/v3.16.0...v4.0.0) (2020-01-07)
+
+
+### Features
+
+* **angular:** update to angular 8 ([#1052](https://github.com/bullhorn/novo-elements/issues/1052)) ([582e49b](https://github.com/bullhorn/novo-elements/commit/582e49b953e46f2b0277588ec6075376ad1ea3c6))
+* **Picker:** Enabling custom optionsPromise to use infinite scroll ([#1059](https://github.com/bullhorn/novo-elements/issues/1059)) ([03e7883](https://github.com/bullhorn/novo-elements/commit/03e788338e13207613d7290d626a1adf2a2e7036))
+
 <a name="3.16.0"></a>
 # [3.16.0](https://github.com/bullhorn/novo-elements/compare/v3.15.0...v3.16.0) (2019-12-03)
 
