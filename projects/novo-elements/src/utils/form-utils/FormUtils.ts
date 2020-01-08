@@ -132,6 +132,7 @@ export class FormUtils {
       SPECIALIZED_OPTIONS: 'select',
       WorkflowOptionsLookup: 'select',
       SpecializedOptionsLookup: 'select',
+      SimplifiedOptionsLookup: 'select',
     };
     let dataTypeToTypeMap = {
       Timestamp: 'date',
@@ -176,10 +177,14 @@ export class FormUtils {
       if ('SYSTEM' === field.dataSpecialization && ['WorkflowOptionsLookup', 'SpecializedOptionsLookup'].includes(field.dataType)) {
         type = dataSpecializationTypeMap[field.dataType];
       } else if (['WORKFLOW_OPTIONS', 'SPECIALIZED_OPTIONS'].includes(field.dataSpecialization)) {
-        if (['TILES'].includes(field.inputType) && !field.multiValue) {
-          type = 'tiles';
+        type = dataSpecializationTypeMap[field.dataSpecialization];
+      } else if (['SimplifiedOptionsLookup', 'SpecializedOptionsLookup'].includes(field.dataType)) {
+        if (field.options && Object.keys(inputTypeToTypeMap).indexOf(field.inputType) > -1 && !field.multiValue) {
+          type = inputTypeToTypeMap[field.inputType];
+        } else if (field.options && Object.keys(inputTypeMultiToTypeMap).indexOf(field.inputType) > -1 && field.multiValue) {
+          type = inputTypeMultiToTypeMap[field.inputType];
         } else {
-          type = dataSpecializationTypeMap[field.dataSpecialization];
+          type = dataSpecializationTypeMap[field.dataType];
         }
       } else if (this.hasAssociatedEntity(field)) {
         type = 'entitypicker'; // TODO!
@@ -641,7 +646,9 @@ export class FormUtils {
       return [{ value: false, label: this.labels.no }, { value: true, label: this.labels.yes }];
     } else if (field.workflowOptions && fieldData) {
       return this.getWorkflowOptions(field.workflowOptions, fieldData);
-    } else if (field.dataSpecialization === 'SPECIALIZED_OPTIONS') {
+    } else if (field.dataSpecialization === 'SPECIALIZED_OPTIONS' ||
+      (field.options && ['SpecializedOptionsLookup', 'SimplifiedOptionsLookup'].includes(field.dataType))
+    ) {
       return field.options.filter((o) => !o.readOnly);
     } else if (field.optionsUrl) {
       return this.optionsService.getOptionsConfig(http, field, config);
