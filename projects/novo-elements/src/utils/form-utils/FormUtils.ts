@@ -810,4 +810,21 @@ export class FormUtils {
       return startDate;
     }
   }
+
+  inflateEmbeddedProperties(data: object): object {
+    if (data) {
+      Object.keys(data)
+      .filter((fieldName) => fieldName.includes('.'))
+      .forEach((field) => {
+          let [parentFieldName, fieldName] = field.split('.');
+          if (!data[parentFieldName]) {
+              data[parentFieldName] = {};
+          }
+          data[parentFieldName][fieldName] = data[field];
+          delete data[field];
+      });
+    }
+
+    return data;
+  }
 }
