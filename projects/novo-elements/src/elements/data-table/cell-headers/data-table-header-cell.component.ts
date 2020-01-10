@@ -10,14 +10,12 @@ import {
   ElementRef,
   Renderer2,
   EventEmitter,
-  Output,
   HostBinding,
   TemplateRef,
   HostListener,
 } from '@angular/core';
 import { CdkColumnDef } from '@angular/cdk/table';
 import { fromEvent, Subscription } from 'rxjs';
-import * as dateFns from 'date-fns';
 
 import {
   IDataTableSortFilter,

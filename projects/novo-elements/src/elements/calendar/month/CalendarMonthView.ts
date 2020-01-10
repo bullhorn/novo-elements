@@ -109,7 +109,7 @@ export class NovoCalendarMonthViewElement implements OnChanges, OnInit, OnDestro
    * The start number of the week
    */
   @Input()
-  weekStartsOn: number;
+  weekStartsOn: 0 | 1 | 2 | 6 | 5 | 4 | 3;
 
   /**
    * A custom template to use to replace the header

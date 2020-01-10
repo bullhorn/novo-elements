@@ -254,7 +254,7 @@ export function getWeekViewHeader({
   excluded = [],
 }: {
   viewDate: Date;
-  weekStartsOn: number;
+  weekStartsOn: 0 | 1 | 2 | 6 | 5 | 4 | 3;
   excluded?: number[];
 }): WeekDay[] {
   const start: Date = dateFns.startOfWeek(viewDate, { weekStartsOn });
@@ -281,7 +281,7 @@ export function getWeekView({
 }: {
   events?: CalendarEvent[];
   viewDate: Date;
-  weekStartsOn: number;
+  weekStartsOn: 0 | 1 | 2 | 6 | 5 | 4 | 3;
   excluded?: number[];
   hourSegments: number;
   segmentHeight: number;
@@ -406,7 +406,7 @@ export function getMonthView({
 }: {
   events?: CalendarEvent[];
   viewDate: Date;
-  weekStartsOn: number;
+  weekStartsOn: 0 | 1 | 2 | 6 | 5 | 4 | 3;
   excluded?: number[];
 }): MonthView {
   if (!events) {

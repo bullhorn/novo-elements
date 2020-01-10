@@ -65,7 +65,7 @@ export class FormUtils {
     'Placement',
   ];
 
-  constructor(public labels: NovoLabelService, public optionsService: OptionsService) {}
+  constructor(public labels: NovoLabelService, public optionsService: OptionsService) { }
 
   toFormGroup(controls: Array<any>): NovoFormGroup {
     let group: any = {};
@@ -580,9 +580,9 @@ export class FormUtils {
   private getFormFields(meta) {
     let sectionHeaders = meta.sectionHeaders
       ? meta.sectionHeaders.map((element) => {
-          element.isSectionHeader = true;
-          return element;
-        })
+        element.isSectionHeader = true;
+        return element;
+      })
       : [];
 
     let fields = meta.fields.map((field) => {
@@ -699,13 +699,17 @@ export class FormUtils {
       }
 
       if (control.dataType === 'Date' && typeof value === 'string' && control.optionsType !== 'skipConversion') {
-        value = dateFns.startOfDay(value);
+        value = dateFns.startOfDay(this.parseDate(value));
       }
 
       control.value = value;
       // TODO: keepClean is not required, but is always used. It should default (to true?)
       control.dirty = !keepClean;
     }
+  }
+
+  private parseDate(value) {
+    return dateFns.parse(value, 'yyyy-MM-dd', new Date());
   }
 
   setInitialValuesFieldsets(fieldsets: Array<NovoFieldset>, values, keepClean?: boolean) {
@@ -769,7 +773,7 @@ export class FormUtils {
 
   private getStartDateFromRange(dateRange: { minDate: string; minOffset: number }): Date {
     if (dateRange.minDate) {
-      return dateFns.parse(dateRange.minDate);
+      return this.parseDate(dateRange.minDate);
     } else if (dateRange.minOffset) {
       return dateFns.addDays(dateFns.startOfToday(), dateRange.minOffset);
     }

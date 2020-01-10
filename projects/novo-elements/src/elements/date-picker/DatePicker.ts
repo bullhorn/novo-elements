@@ -167,7 +167,7 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit, OnCh
   @Input()
   weekRangeSelect: boolean;
   @Input()
-  weekStart: number = 0;
+  weekStart: 0 | 1 | 2 | 6 | 5 | 4 | 3 = 0;
   // Select callback for output
   @Output()
   onSelect: EventEmitter<any> = new EventEmitter(false);

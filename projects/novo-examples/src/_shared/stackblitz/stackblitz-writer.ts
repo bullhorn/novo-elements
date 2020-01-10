@@ -12,7 +12,7 @@ const TEMPLATE_PATH = './assets/stackblitz/';
 const TEMPLATE_FILES = ['index.html', 'styles.scss', 'polyfills.ts', 'main.ts'];
 
 const TAGS: string[] = ['angular', 'bullhon', 'novo-elements', 'example'];
-const angularVersion = '^7.2.0';
+const angularVersion = '^8.2.14';
 
 const dependencies = {
   '@angular/cdk': angularVersion,
@@ -25,7 +25,7 @@ const dependencies = {
   '@angular/platform-browser': angularVersion,
   '@angular/platform-browser-dynamic': angularVersion,
   '@angular/router': angularVersion,
-  'novo-elements': '3.6.0',
+  'novo-elements': '4.0.1',
   'angular-in-memory-web-api': '~0.5.0',
   'core-js': '^2.6.2',
   rxjs: '^6.3.3',
@@ -35,7 +35,7 @@ const dependencies = {
   'angular2-text-mask': '9.0.0',
   brace: '0.11.1',
   'classlist.js': '^1.1.20150312',
-  'date-fns': '1.30.1',
+  'date-fns': '2.9.0',
   'post-robot': '9.0.30',
   'web-animations-js': '^2.3.1',
   'text-mask-addons': '^3.8.0',
