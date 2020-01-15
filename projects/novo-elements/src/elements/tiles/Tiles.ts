@@ -30,7 +30,7 @@ const TILES_VALUE_ACCESSOR = {
   template: `
         <div class="tile-container" [class.active]="focused" [class.disabled]="disabled">
             <div class="tile" *ngFor="let option of _options; let i = index" [ngClass]="{active: option.checked, disabled: option.disabled}" (click)="select($event, option)" [attr.data-automation-id]="option.label || option">
-                <input class="tiles-input" [name]="name" type="radio" [value]="option.checked || option" [attr.id]="name + i" (change)="select($event, option)" (focus)="setFocus(true)" (blur)="setFocus(false)" [disabled]="disabled">
+            <input class="tiles-input" [name]="name" type="radio" [value]="option.checked || option.value || option" [attr.id]="name + i" (change)="select($event, option)" (focus)="setFocus(true)" (blur)="setFocus(false)" [disabled]="disabled">
                 <label [attr.for]="name + i" [attr.data-automation-id]="option.label || option">
                     {{ option.label || option }}
                 </label>
@@ -113,7 +113,7 @@ export class NovoTilesElement implements ControlValueAccessor, AfterContentInit,
       });
     } else {
       this._options = this.options.map((x) => {
-        x.checked = this.model === x.value;
+        x.checked = this.model === x.value || this.model.id === x.value;
         if (x.checked) {
           this.setTile(x);
         }
