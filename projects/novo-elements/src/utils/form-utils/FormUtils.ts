@@ -454,7 +454,7 @@ export class FormUtils {
 
     return (
       field.name !== 'id' &&
-      (field.dataSpecialization !== 'SYSTEM' || ['address', 'billingAddress', 'secondaryAddress'].indexOf(field.name) !== -1) &&
+      (field.dataSpecialization !== 'SYSTEM' || ['address', 'billingAddress', 'secondaryAddress', 'distributionLists'].indexOf(field.name) !== -1) &&
       !field.readOnly
     );
   }
