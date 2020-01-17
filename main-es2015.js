@@ -47352,6 +47352,9 @@ class DataTableSource extends _angular_cdk_table__WEBPACK_IMPORTED_MODULE_26__["
                 this.totalSet = true;
                 this.state.isForceRefresh = false;
             }
+            else if (data.total > this.total) {
+                this.total = data.total;
+            }
             this.currentTotal = data.total;
             this.current = data.results.length;
             this.data = data.results;
