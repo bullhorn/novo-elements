@@ -49,6 +49,8 @@ export class DataTableSource<T> extends DataSource<T> {
           this.total = data.total;
           this.totalSet = true;
           this.state.isForceRefresh = false;
+        } else if (data.total > this.total) {
+          this.total = data.total;
         }
         this.currentTotal = data.total;
         this.current = data.results.length;
