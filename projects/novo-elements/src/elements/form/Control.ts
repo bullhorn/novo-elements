@@ -158,6 +158,8 @@ export class NovoAutoSize implements AfterContentInit {
     '[class.disabled]': 'form.controls[control.key].readOnly',
     '[class.hidden]': 'form.controls[control.key].hidden',
     '[attr.data-control-key]': 'control.key',
+    '[class.inline-embedded]': 'control.isInlineEmbedded',
+    '[class.embedded]': 'control.isEmbedded',
   },
 })
 export class NovoControlElement extends OutsideClick implements OnInit, OnDestroy, AfterViewInit, AfterContentInit {
