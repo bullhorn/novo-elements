@@ -651,6 +651,15 @@ export class FormUtils {
   }
 
   private insertHeaderToFieldsets(fieldsets, field) {
+    if (field.name && field.name.startsWith('customObject') && field.associatedEntity) {
+      fieldsets.push({
+        title: field.associatedEntity.label || field.label,
+        icon: field.icon || 'bhi-section',
+        controls: [],
+        isEmbedded: field.dataSpecialization && field.dataSpecialization.toLowerCase() === 'embedded',
+        isInlineEmbedded: field.dataSpecialization && field.dataSpecialization.toLowerCase() === 'inline_embedded',
+      });
+    }
     fieldsets.push({
       title: field.label,
       icon: field.icon || 'bhi-section',
