@@ -652,18 +652,25 @@ export class FormUtils {
   }
 
   private insertHeaderToFieldsets(fieldsets, field) {
-    const title =
-      field.name && field.name.startsWith('customObject') && field.associatedEntity && field.associatedEntity.label
-        ? field.associatedEntity.label
-        : field.label;
-    fieldsets.push({
-      title: title,
-      icon: field.icon || 'bhi-section',
-      controls: [],
-      isEmbedded: field.dataSpecialization && field.dataSpecialization.toLowerCase() === 'embedded',
-      isInlineEmbedded: field.dataSpecialization && field.dataSpecialization.toLowerCase() === 'inline_embedded',
-      key: field.name,
-    });
+    if (field.name && field.name.startsWith('customObject') && field.associatedEntity && field.associatedEntity.label) {
+      fieldsets.push({
+        title: field.associatedEntity.label || field.label,
+        icon: field.icon || 'bh-card-expand',
+        controls: [],
+        isEmbedded: field.dataSpecialization && field.dataSpecialization.toLowerCase() === 'embedded',
+        isInlineEmbedded: field.dataSpecialization && field.dataSpecialization.toLowerCase() === 'inline_embedded',
+        key: field.name,
+      });
+    } else {
+      fieldsets.push({
+        title: field.label,
+        icon: field.icon || 'bhi-section',
+        controls: [],
+        isEmbedded: field.dataSpecialization && field.dataSpecialization.toLowerCase() === 'embedded',
+        isInlineEmbedded: field.dataSpecialization && field.dataSpecialization.toLowerCase() === 'inline_embedded',
+        key: field.name,
+      });
+    }
   }
 
   private markControlAsEmbedded(control, dataSpecialization?: 'embedded' | 'inline_embedded') {
