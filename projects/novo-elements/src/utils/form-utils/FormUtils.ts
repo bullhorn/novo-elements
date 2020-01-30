@@ -132,6 +132,7 @@ export class FormUtils {
       SPECIALIZED_OPTIONS: 'select',
       WorkflowOptionsLookup: 'select',
       SpecializedOptionsLookup: 'select',
+      SimplifiedOptionsLookup: 'select',
     };
     let dataTypeToTypeMap = {
       Timestamp: 'date',
@@ -177,6 +178,14 @@ export class FormUtils {
         type = dataSpecializationTypeMap[field.dataType];
       } else if (['WORKFLOW_OPTIONS', 'SPECIALIZED_OPTIONS'].includes(field.dataSpecialization)) {
         type = dataSpecializationTypeMap[field.dataSpecialization];
+      } else if (['SimplifiedOptionsLookup', 'SpecializedOptionsLookup'].includes(field.dataType)) {
+        if (field.options && Object.keys(inputTypeToTypeMap).indexOf(field.inputType) > -1 && !field.multiValue) {
+          type = inputTypeToTypeMap[field.inputType];
+        } else if (field.options && Object.keys(inputTypeMultiToTypeMap).indexOf(field.inputType) > -1 && field.multiValue) {
+          type = inputTypeMultiToTypeMap[field.inputType];
+        } else {
+          type = dataSpecializationTypeMap[field.dataType];
+        }
       } else if (this.hasAssociatedEntity(field)) {
         type = 'entitypicker'; // TODO!
       } else {
@@ -524,7 +533,7 @@ export class FormUtils {
           embeddedFields.forEach((embeddedField) => {
             if (this.shouldCreateControl(embeddedField)) {
               let control = this.createControl(embeddedField, data, http, config, overrides, currencyFormat);
-              control = this.markControlAsEmbedded(control);
+              control = this.markControlAsEmbedded(control, field.dataSpecialization ? field.dataSpecialization.toLowerCase() : null);
               fieldsets[fieldsets.length - 1].controls.push(control);
             }
           });
@@ -551,7 +560,7 @@ export class FormUtils {
   }
 
   private isEmbeddedField(field) {
-    return field.dataSpecialization && field.dataSpecialization.toLowerCase() === 'embedded' && !field.readOnly;
+    return field.dataSpecialization && ['embedded', 'inline_embedded'].includes(field.dataSpecialization.toLowerCase()) && !field.readOnly;
   }
 
   private createControl(field, data, http, config, overrides, currencyFormat) {
@@ -614,14 +623,18 @@ export class FormUtils {
       title: field.label,
       icon: field.icon || 'bhi-section',
       controls: [],
+      isEmbedded: field.dataSpecialization && field.dataSpecialization.toLowerCase() === 'embedded',
+      isInlineEmbedded: field.dataSpecialization && field.dataSpecialization.toLowerCase() === 'inline_embedded',
     });
   }
 
-  private markControlAsEmbedded(control) {
+  private markControlAsEmbedded(control, dataSpecialization?: 'embedded' | 'inline_embedded') {
     if (Helpers.isBlank(control['config'])) {
       control['config'] = {};
     }
     control['config']['embedded'] = true;
+    control.isEmbedded = dataSpecialization === 'embedded';
+    control.isInlineEmbedded = dataSpecialization === 'inline_embedded';
     return control;
   }
 
@@ -633,7 +646,9 @@ export class FormUtils {
       return [{ value: false, label: this.labels.no }, { value: true, label: this.labels.yes }];
     } else if (field.workflowOptions && fieldData) {
       return this.getWorkflowOptions(field.workflowOptions, fieldData);
-    } else if (field.dataSpecialization === 'SPECIALIZED_OPTIONS') {
+    } else if (field.dataSpecialization === 'SPECIALIZED_OPTIONS' ||
+      (field.options && ['SpecializedOptionsLookup', 'SimplifiedOptionsLookup'].includes(field.dataType))
+    ) {
       return field.options.filter((o) => !o.readOnly);
     } else if (field.optionsUrl) {
       return this.optionsService.getOptionsConfig(http, field, config);
@@ -794,5 +809,22 @@ export class FormUtils {
       }
       return startDate;
     }
+  }
+
+  inflateEmbeddedProperties(data: object): object {
+    if (data) {
+      Object.keys(data)
+      .filter((fieldName) => fieldName.includes('.'))
+      .forEach((field) => {
+          let [parentFieldName, fieldName] = field.split('.');
+          if (!data[parentFieldName]) {
+              data[parentFieldName] = {};
+          }
+          data[parentFieldName][fieldName] = data[field];
+          delete data[field];
+      });
+    }
+
+    return data;
   }
 }
