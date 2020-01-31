@@ -43,11 +43,11 @@ describe('Elements: NovoCKEditorElement', () => {
       expect(component.ckeditorInit).toHaveBeenCalledWith({ test: true });
     });
 
-    it('should set with passed config', () => {
-      jest.spyOn(component, 'getBaseConfig').mockReturnValue({ test: false });
-      component.config = { test: true };
+    it('should use the passed in config to overwrite and add to base config', () => {
+      jest.spyOn(component, 'getBaseConfig').mockReturnValue({ base: true, default: false });
+      component.config = { default: true, another: true };
       component.ngAfterViewInit();
-      expect(component.ckeditorInit).toHaveBeenCalledWith({ test: true });
+      expect(component.ckeditorInit).toHaveBeenCalledWith({ base: true, default: true, another: true });
     });
   });
 
