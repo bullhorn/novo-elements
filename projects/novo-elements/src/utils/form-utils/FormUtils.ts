@@ -661,7 +661,7 @@ export class FormUtils {
     if (field.name && field.name.startsWith('customObject') && field.associatedEntity && field.associatedEntity.label) {
       fieldsets.push({
         title: field.associatedEntity.label || field.label,
-        icon: field.icon || 'bh-card-expand',
+        icon: field.icon || 'bhi-card-expand',
         controls: [],
         isEmbedded: field.dataSpecialization && field.dataSpecialization.toLowerCase() === 'embedded',
         isInlineEmbedded: field.dataSpecialization && field.dataSpecialization.toLowerCase() === 'inline_embedded',
