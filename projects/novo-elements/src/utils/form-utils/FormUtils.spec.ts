@@ -655,4 +655,29 @@ describe('Utils: FormUtils', () => {
       expect(startDate).toBeInstanceOf(Date);
     });
   });
+  describe('Method: inflateEmbeddedProperties()', () => {
+    it('should inflate embedded properties', () => {
+      const data = { property1: 'value1', 'property2.property1': 'value2' };
+      const returnData = formUtils.inflateEmbeddedProperties(data);
+      expect(JSON.stringify(returnData)).not.toContain('property2.property1');
+      expect(returnData.property2.property1).toBeDefined();
+    });
+    it('should not do anything if there are not embedded values', () => {
+      const data = { property1: 'value1', property2: 'value2' };
+      const returnData = formUtils.inflateEmbeddedProperties(data);
+      expect(returnData).toBe(data);
+    });
+    it('should handle null', () => {
+      const returnData = formUtils.inflateEmbeddedProperties(null);
+      expect(returnData).toBeNull();
+    });
+    it('should handle undefined', () => {
+      const returnData = formUtils.inflateEmbeddedProperties();
+      expect(returnData).toBeUndefined();
+    });
+    it('should handle empty object', () => {
+      const returnData = formUtils.inflateEmbeddedProperties({});
+      expect(returnData).toStrictEqual({});
+    });
+  });
 });

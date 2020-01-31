@@ -92,6 +92,8 @@ class ControlConfig {
     icon?: string;
     tip: string;
   };
+  isEmbedded = false;
+  isInlineEmbedded = false;
 }
 
 export type NovoControlConfig = Partial<ControlConfig>;

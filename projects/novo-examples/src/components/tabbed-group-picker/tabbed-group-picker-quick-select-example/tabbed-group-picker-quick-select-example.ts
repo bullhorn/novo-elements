@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { TabbedGroupPickerTab, ChildTab } from 'dist/novo-elements/elements/tabbed-group-picker/TabbedGroupPicker';
+import { TabbedGroupPickerTab, ChildTab } from 'novo-elements';
 
 /**
  * @title Tabbed Group Picker - Quick Select Example
