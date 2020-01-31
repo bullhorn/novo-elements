@@ -16272,7 +16272,7 @@ class NovoCKEditorElement {
      */
     ngAfterViewInit() {
         /** @type {?} */
-        let config = this.config || this.getBaseConfig();
+        let config = Object.assign(this.getBaseConfig(), this.config);
         if (this.startupFocus) {
             config.startupFocus = true;
         }
@@ -17264,6 +17264,7 @@ class NovoFormControl extends _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormC
         this.sortOrder = control.sortOrder;
         this.controlType = control.controlType;
         this.placeholder = control.placeholder;
+        this.minimal = control.minimal;
         this.multiple = control.multiple;
         this.headerConfig = control.headerConfig;
         this.optionsType = control.optionsType;
