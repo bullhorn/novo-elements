@@ -536,6 +536,8 @@ export class FormUtils {
               let control = this.createControl(embeddedField, data, http, config, overrides, currencyFormat);
               control = this.markControlAsEmbedded(control, field.dataSpecialization ? field.dataSpecialization.toLowerCase() : null);
               fieldsets[fieldsets.length - 1].controls.push(control);
+            } else if (this.isHeader(embeddedField)) {
+              this.insertHeaderToFieldsets(fieldsets, embeddedField);
             }
           });
         } else if (this.shouldCreateControl(field)) {
@@ -648,7 +650,11 @@ export class FormUtils {
   }
 
   private isHeader(field): boolean {
-    return !Helpers.isBlank(field) && field.hasOwnProperty('isSectionHeader') && field.isSectionHeader;
+    return (
+      !Helpers.isBlank(field) &&
+      ((field.hasOwnProperty('isSectionHeader') && field.isSectionHeader) ||
+        (field.dataSpecialization && field.dataSpecialization.toLowerCase() === 'section_header'))
+    );
   }
 
   private insertHeaderToFieldsets(fieldsets, field) {
