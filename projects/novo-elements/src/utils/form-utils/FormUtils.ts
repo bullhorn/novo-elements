@@ -463,7 +463,7 @@ export class FormUtils {
 
     return (
       field.name !== 'id' &&
-      (['SYSTEM', 'SECTION_HEADER'].includes(field.dataSpecialization) ||
+      (!['SYSTEM', 'SECTION_HEADER'].includes(field.dataSpecialization) ||
         ['address', 'billingAddress', 'secondaryAddress'].includes(field.name)) &&
       !field.readOnly
     );
