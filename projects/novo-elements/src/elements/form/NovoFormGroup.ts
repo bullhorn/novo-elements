@@ -22,9 +22,9 @@ export class NovoFormGroup extends FormGroup {
     this._value = v;
   }
 
-  public enableAllControls(): void {
+  public enableAllControls(overrides?: string[]): void {
     for (let key in this.controls) {
-      if ((this.controls[key] as NovoFormControl).readOnly) {
+      if ((this.controls[key] as NovoFormControl).readOnly && (!overrides || (overrides && !overrides.includes(key)))) {
         (this.controls[key] as NovoFormControl).readOnly = false;
         this.controls[key].enable();
       }

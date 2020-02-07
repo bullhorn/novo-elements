@@ -21,6 +21,19 @@ describe('Elements: NovoFormGroup', () => {
         expect((component.controls[key] as NovoFormControl).enable).toHaveBeenCalled();
       }
     });
+    it('should enable all controls unless included in overrides', () => {
+      component.controls = {
+        firstName: new NovoFormControl('John', {}),
+        lastName: new NovoFormControl('Doe', { readOnly: true }),
+      };
+      spyOn(component.controls.lastName, 'enable');
+      (component.controls.lastName as NovoFormControl).readOnly = true;
+      const overrides: string[] = ['lastName'];
+
+      component.enableAllControls(overrides);
+      expect((component.controls.lastName as NovoFormControl).readOnly).toEqual(true);
+      expect(component.controls.lastName.enable).not.toHaveBeenCalled();
+    });
   });
 
   describe('Method: disableAllControls()', () => {
