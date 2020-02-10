@@ -21,6 +21,7 @@ script:
   - npm run lint
   - npm test
   - npm run build
+  - npm run postbuild
   - npm run build:demo
 
 after_success:
