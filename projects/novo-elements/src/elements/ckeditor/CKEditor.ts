@@ -86,7 +86,7 @@ export class NovoCKEditorElement implements OnDestroy, AfterViewInit, ControlVal
   }
 
   ngAfterViewInit() {
-    let config = this.config || this.getBaseConfig();
+    let config = Object.assign(this.getBaseConfig(), this.config);
     if (this.startupFocus) {
       config.startupFocus = true;
     }
@@ -155,7 +155,7 @@ export class NovoCKEditorElement implements OnDestroy, AfterViewInit, ControlVal
     });
   }
 
-  getBaseConfig() {
+  getBaseConfig(): { [key: string]: any } {
     const baseConfig = {
       enterMode: CKEDITOR.ENTER_BR,
       shiftEnterMode: CKEDITOR.ENTER_P,
