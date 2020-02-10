@@ -4,7 +4,6 @@
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "downlevelIteration": true,
-    // "incremental": true,
     "sourceMap": true,
     "declaration": false,
     "module": "esnext",
@@ -12,16 +11,26 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "target": "es2015",
-    "typeRoots": ["node_modules/@types"],
-    "types": ["jest"],
-    "lib": ["es2017", "dom"],
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "types": [
+      "jest"
+    ],
+    "lib": [
+      "es2017",
+      "dom"
+    ],
     "paths": {
-      "novo-elements": ["dist/novo-elements"],
-      "novo-examples": ["dist/novo-examples"],
-      "chomsky": ["dist/chomsky"]
-      // "novo-elements": ["projects/novo-elements/src/index"],
-      // "novo-examples": ["projects/novo-examples/src/index"],
-      // "chomsky": ["projects/chomsky/src/index"],
+      "novo-elements": [
+        "projects/novo-elements/src/index"
+      ],
+      "novo-examples": [
+        "projects/novo-examples/src/index"
+      ],
+      "chomsky": [
+        "projects/chomsky/src/index"
+      ],
       // "@angular/cdk/*": ["../components/src/cdk/*"],
     }
   }
