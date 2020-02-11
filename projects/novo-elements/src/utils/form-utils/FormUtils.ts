@@ -608,7 +608,9 @@ export class FormUtils {
     return subHeader.associatedEntity.fields
       .filter((field) => field.name !== 'id')
       .map((field) => {
-        field.name = `${subHeader.name}.${field.name}`;
+        if (!field.name.startsWith(`${subHeader.name}.`)) {
+          field.name = `${subHeader.name}.${field.name}`;
+        }
         return field;
       })
       .sort(Helpers.sortByField(['sortOrder', 'name']));
