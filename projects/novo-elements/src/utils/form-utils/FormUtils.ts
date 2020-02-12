@@ -539,6 +539,9 @@ export class FormUtils {
           });
         } else if (this.shouldCreateControl(field)) {
           let control = this.createControl(field, data, http, config, overrides, currencyFormat);
+          if (field.inlineEmbeddedAssociatedEntityField) {
+            control = this.markControlAsEmbedded(control, 'inline_embedded');
+          }
 
           if (fieldsets.length === 0) {
             fieldsets.push({ controls: [] });
@@ -560,7 +563,7 @@ export class FormUtils {
   }
 
   private isEmbeddedField(field) {
-    return field.dataSpecialization && ['embedded', 'inline_embedded'].includes(field.dataSpecialization.toLowerCase()) && !field.readOnly;
+    return field.dataSpecialization && ['embedded'].includes(field.dataSpecialization.toLowerCase()) && !field.readOnly;
   }
 
   private createControl(field, data, http, config, overrides, currencyFormat) {
@@ -601,7 +604,34 @@ export class FormUtils {
       return field;
     });
 
-    return [...sectionHeaders, ...fields].sort(Helpers.sortByField(['sortOrder', 'name']));
+    // build list of fields that should be displayed inline but belong to associated entities
+    const inlineEmbeddedAssociatedEntityFields = this.getInlineEmbeddedFields(fields);
+
+    // remove the inline embedded fields because the associated entity fields were extracted above
+    // and will be added to the regular list of fields. This prevents the fields from being added multiple times.
+    fields = fields.filter((f) => !f.dataSpecialization || f.dataSpecialization.toLowerCase() !== 'inline_embedded');
+
+    // sort fields
+    return [...sectionHeaders, ...fields, ...inlineEmbeddedAssociatedEntityFields].sort(Helpers.sortByField(['sortOrder', 'name']));
+  }
+
+  private getInlineEmbeddedFields(fields) {
+    let inlineEmbeddedAssociatedEntityFields = [];
+    fields
+      .filter((f) => f.dataSpecialization && f.dataSpecialization.toLowerCase() === 'inline_embedded')
+      .forEach((f) => {
+        inlineEmbeddedAssociatedEntityFields = [...inlineEmbeddedAssociatedEntityFields, ...this.getAssociatedFieldsForInlineEmbedded(f)];
+      });
+    return inlineEmbeddedAssociatedEntityFields;
+  }
+
+  private getAssociatedFieldsForInlineEmbedded(field) {
+    let associatedEntityFields = [];
+    associatedEntityFields = this.getEmbeddedFields(field).map((aef) => {
+      aef.inlineEmbeddedAssociatedEntityField = true;
+      return aef;
+    });
+    return associatedEntityFields;
   }
 
   private getEmbeddedFields(subHeader) {
@@ -648,7 +678,8 @@ export class FormUtils {
       return [{ value: false, label: this.labels.no }, { value: true, label: this.labels.yes }];
     } else if (field.workflowOptions && fieldData) {
       return this.getWorkflowOptions(field.workflowOptions, fieldData);
-    } else if (field.dataSpecialization === 'SPECIALIZED_OPTIONS' ||
+    } else if (
+      field.dataSpecialization === 'SPECIALIZED_OPTIONS' ||
       (field.options && ['SpecializedOptionsLookup', 'SimplifiedOptionsLookup'].includes(field.dataType))
     ) {
       return field.options.filter((o) => !o.readOnly);
@@ -816,15 +847,15 @@ export class FormUtils {
   inflateEmbeddedProperties(data: object): object {
     if (data) {
       Object.keys(data)
-      .filter((fieldName) => fieldName.includes('.'))
-      .forEach((field) => {
+        .filter((fieldName) => fieldName.includes('.'))
+        .forEach((field) => {
           let [parentFieldName, fieldName] = field.split('.');
           if (!data[parentFieldName]) {
-              data[parentFieldName] = {};
+            data[parentFieldName] = {};
           }
           data[parentFieldName][fieldName] = data[field];
           delete data[field];
-      });
+        });
     }
 
     return data;
