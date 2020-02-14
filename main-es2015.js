@@ -19007,7 +19007,9 @@ class FormUtils {
          * @return {?}
          */
         (field) => {
-            field.name = `${subHeader.name}.${field.name}`;
+            if (!field.name.startsWith(`${subHeader.name}.`)) {
+                field.name = `${subHeader.name}.${field.name}`;
+            }
             return field;
         }))
             .sort(Helpers.sortByField(['sortOrder', 'name']));
