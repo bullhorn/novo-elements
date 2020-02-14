@@ -680,4 +680,50 @@ describe('Utils: FormUtils', () => {
       expect(returnData).toStrictEqual({});
     });
   });
+  describe('Method: getEmbeddedFields(subheader)', () => {
+    it('should be defined', () => {
+      expect(formUtils.getEmbeddedFields).toBeDefined();
+      const field = {
+        name: 'embeddedField',
+        associatedEntity: {
+          fields: []
+        }
+      };
+      formUtils.getEmbeddedFields(field);
+    });
+    it('should add field name to associated entity fields name', () => {
+      const field = {
+        name: 'embeddedField',
+        associatedEntity: {
+          fields: [{
+            name: 'field1'
+          },
+          {
+            name: 'field2'
+          }]
+        }
+      };
+      const embeddedfields = formUtils.getEmbeddedFields(field);
+      expect(embeddedfields.every((f) => f.name.startsWith(`embeddedField.`))).toBeTruthy();
+      expect(embeddedfields[0].name).toBe(`embeddedField.field1`);
+      expect(embeddedfields[1].name).toBe(`embeddedField.field2`);
+    });
+    it('should not add field name to associated entity fields name if already there', () => {
+      const field = {
+        name: 'embeddedField',
+        associatedEntity: {
+          fields: [{
+            name: 'embeddedField.field1'
+          },
+          {
+            name: 'embeddedField.field2'
+          }]
+        }
+      };
+      const embeddedfields = formUtils.getEmbeddedFields(field);
+      expect(embeddedfields.every((f) => f.name.startsWith(`embeddedField.`))).toBeTruthy();
+      expect(embeddedfields[0].name).toBe(`embeddedField.field1`);
+      expect(embeddedfields[1].name).toBe(`embeddedField.field2`);
+    });
+  });
 });
