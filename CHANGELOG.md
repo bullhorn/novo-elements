@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.1.1](https://github.com/bullhorn/novo-elements/compare/v4.0.1...v4.1.1) (2020-02-21)
+
+
+### Features
+
+* **FormUtils:** Allow distributionLists field to have controls ([#1068](https://github.com/bullhorn/novo-elements/issues/1068)) ([f350cd3](https://github.com/bullhorn/novo-elements/commit/f350cd3ebc7beae455b5ba36f3e96c3e70ab5161))
+* **tiles:** enhanced to handle passed options ([#1061](https://github.com/bullhorn/novo-elements/issues/1061)) ([acbeed9](https://github.com/bullhorn/novo-elements/commit/acbeed9d527e0e67a1e21ad1872462c8dd6010f4))
+
+
+### Bug Fixes
+
+* **DataTableSource:** Stop showing empty state when user clears sticky filter with no results ([#1066](https://github.com/bullhorn/novo-elements/issues/1066)) ([1f9fc0e](https://github.com/bullhorn/novo-elements/commit/1f9fc0ecc6ded9326fbc83bfc8c134bcc715b6fd))
+* **Editor:** Fix the creation logic of CKEditor element within dynamic forms ([#1073](https://github.com/bullhorn/novo-elements/issues/1073)) ([0b9e88f](https://github.com/bullhorn/novo-elements/commit/0b9e88faaef83196fc2c546dfa715249a16a51c7))
+* **FormUtils:** Don't allow distributionLists field to have controls ([#1074](https://github.com/bullhorn/novo-elements/issues/1074)) ([fea0d38](https://github.com/bullhorn/novo-elements/commit/fea0d384e477d9a682c3b46bb15de407ba40a613))
+
 ## [4.1.0](https://github.com/bullhorn/novo-elements/compare/v4.0.1...v4.1.0) (2020-02-04)
 
 
