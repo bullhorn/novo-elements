@@ -11,9 +11,11 @@ export interface NovoFormGroup {
 export interface NovoFieldset {
   title?: string;
   icon?: string;
+  key?: string;
   controls: any[];
   isEmbedded?: boolean;
   isInlineEmbedded?: boolean;
+  hidden?: boolean;
 }
 
 export interface IFieldInteractionEvent {
