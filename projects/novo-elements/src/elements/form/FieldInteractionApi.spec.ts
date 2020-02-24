@@ -146,4 +146,66 @@ describe('FieldInteractionApi', () => {
       done();
     });
   });
+
+  describe('Function: hideFieldSetHeader', () => {
+    beforeEach(() => {
+      service.form = { fieldsets: [{ key: 'test' }, { key: 'test1' }] };
+    });
+    it('is defined', () => {
+      expect(service.hideFieldSetHeader).toBeDefined();
+    });
+    it('should set hidden to true for fieldset matching key', () => {
+      service.hideFieldSetHeader('test');
+      expect(service.form.fieldsets[0].hidden).toBeDefined();
+      expect(service.form.fieldsets[0].hidden).toBeTruthy();
+    });
+    it('should not set hidden to true for unmatched key', () => {
+      service.hideFieldSetHeader('test');
+      expect(service.form.fieldsets[1].hidden).toBeUndefined();
+    });
+  });
+
+  describe('Function: showFieldSetHeader', () => {
+    beforeEach(() => {
+      service.form = { fieldsets: [{ key: 'test' }, { key: 'test1' }] };
+    });
+    it('is defined', () => {
+      expect(service.showFieldSetHeader).toBeDefined();
+    });
+    it('should set hidden to true', () => {
+      service.showFieldSetHeader('test');
+      expect(service.form.fieldsets[0].hidden).toBeDefined();
+      expect(service.form.fieldsets[0].hidden).toBeFalsy();
+    });
+    it('should not set hidden to true for unmatched key', () => {
+      service.showFieldSetHeader('test');
+      expect(service.form.fieldsets[1].hidden).toBeUndefined();
+    });
+  });
+
+  describe('Function: getFieldSet', () => {
+    beforeEach(() => {
+      service.form = { fieldsets: [{ key: 'test' }] };
+    });
+    it('is defined', () => {
+      expect(service.getFieldSet).toBeDefined();
+    });
+    it('should return null and log to console if no key', () => {
+      spyOn(console, 'error');
+      const returnValue = service.getFieldSet(null);
+      expect(returnValue).toBeNull();
+      expect(console.error).toBeCalled();
+    });
+    it('should return null and log to console if no match for key', () => {
+      spyOn(console, 'error');
+      const returnValue = service.getFieldSet('test1');
+      expect(returnValue).toBeNull();
+      expect(console.error).toBeCalled();
+    });
+    it('should return fieldset object when key exists', () => {
+      const returnValue = service.getFieldSet('test');
+      expect(returnValue).not.toBeNull();
+      expect(returnValue).toStrictEqual({ key: 'test'});
+    });
+  });
 });

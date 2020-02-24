@@ -627,6 +627,7 @@ export class FormUtils {
       controls: [],
       isEmbedded: field.dataSpecialization && field.dataSpecialization.toLowerCase() === 'embedded',
       isInlineEmbedded: field.dataSpecialization && field.dataSpecialization.toLowerCase() === 'inline_embedded',
+      key: field.name,
     });
   }
 

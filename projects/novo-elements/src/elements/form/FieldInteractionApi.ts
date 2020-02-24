@@ -13,7 +13,7 @@ import { ControlConfirmModal, ControlPromptModal } from './FieldInteractionModal
 import { Helpers } from '../../utils/Helpers';
 import { AppBridge } from '../../utils/app-bridge/AppBridge';
 import { NovoLabelService } from '../../services/novo-label-service';
-import { IFieldInteractionEvent } from './FormInterfaces';
+import { IFieldInteractionEvent, NovoFieldset } from './FormInterfaces';
 import { ModifyPickerConfigArgs, OptionsFunction, CustomHttp } from './FieldInteractionApiTypes';
 import { Observable, Subscription } from 'rxjs';
 
@@ -138,6 +138,21 @@ export class FieldInteractionApi {
     return this.getInitialValue(this.currentKey);
   }
 
+  public getFieldSet(key: string): NovoFieldset {
+    if (!key) {
+      console.error('[FieldInteractionAPI] - invalid or missing "key"'); // tslint:disable-line
+      return null;
+    }
+
+    const fieldSet = this.form.fieldsets.find((fs: NovoFieldset) => fs.key && fs.key.toLowerCase() === key.toLowerCase());
+    if (!fieldSet) {
+      console.error('[FieldInteractionAPI] - could not find a fieldset in the form by the key --', key); // tslint:disable-line
+      return null;
+    }
+
+    return fieldSet as NovoFieldset;
+  }
+
   public getControl(key: string): NovoFormControl {
     if (!key) {
       console.error('[FieldInteractionAPI] - invalid or missing "key"'); // tslint:disable-line
@@ -242,6 +257,20 @@ export class FieldInteractionApi {
       control.show();
       this.enable(key, { emitEvent: false });
       this.triggerEvent({ controlKey: key, prop: 'hidden', value: false });
+    }
+  }
+
+  public hideFieldSetHeader(key: string): void {
+    const fieldSet = this.getFieldSet(key);
+    if (fieldSet) {
+      fieldSet.hidden = true;
+    }
+  }
+
+  public showFieldSetHeader(key: string): void {
+    const fieldSet = this.getFieldSet(key);
+    if (fieldSet) {
+      fieldSet.hidden = false;
     }
   }
 
