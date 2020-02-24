@@ -419,10 +419,29 @@ describe('Utils: FormUtils', () => {
             type: 'text',
             label: 'First Name',
             required: true,
-            sortOrder: 10,
+            sortOrder: 20,
             maxLength: 10,
             description: 'First Name, Yo!',
           },
+          {
+            name: 'inlineEmbeddedField',
+            dataSpecialization: 'INLINE_EMBEDDED',
+            sortOrder: 10,
+            associatedEntity: {
+              fields: [{
+                name: 'field1',
+                type: 'text',
+                label: 'Field 1',
+                sortOrder: 10,
+              },
+              {
+                name: 'field2',
+                type: 'text',
+                label: 'Field 2',
+                sortOrder: 30,
+              }]
+            }
+          }
         ],
         sectionHeaders: [
           {
@@ -437,7 +456,8 @@ describe('Utils: FormUtils', () => {
       let fieldset = formUtils.toFieldSets(meta, 'USD', {}, {}, {});
       expect(fieldset[0].title).toBe('Header');
       expect(fieldset[0].icon).toBe('bhi-certification');
-      expect(fieldset[0].controls.length).toBe(1);
+      expect(fieldset[0].controls.length).toBe(3);
+      expect(fieldset[0].controls[0].key).toEqual('inlineEmbeddedField.field1');
     });
     it('should call getControlForField with data', () => {
       let meta = {
