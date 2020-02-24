@@ -18887,6 +18887,9 @@ class FormUtils {
                 else if (this.shouldCreateControl(field)) {
                     /** @type {?} */
                     let control = this.createControl(field, data, http, config, overrides, currencyFormat);
+                    if (field.inlineEmbeddedAssociatedEntityField) {
+                        control = this.markControlAsEmbedded(control, 'inline_embedded');
+                    }
                     if (fieldsets.length === 0) {
                         fieldsets.push({ controls: [] });
                     }
@@ -18911,7 +18914,7 @@ class FormUtils {
      * @return {?}
      */
     isEmbeddedField(field) {
-        return field.dataSpecialization && ['embedded', 'inline_embedded'].includes(field.dataSpecialization.toLowerCase()) && !field.readOnly;
+        return field.dataSpecialization && ['embedded'].includes(field.dataSpecialization.toLowerCase()) && !field.readOnly;
     }
     /**
      * @private
@@ -18990,7 +18993,59 @@ class FormUtils {
             }
             return field;
         }));
-        return [...sectionHeaders, ...fields].sort(Helpers.sortByField(['sortOrder', 'name']));
+        // build list of fields that should be displayed inline but belong to associated entities
+        /** @type {?} */
+        const inlineEmbeddedAssociatedEntityFields = this.getInlineEmbeddedFields(fields);
+        // remove the inline embedded fields because the associated entity fields were extracted above
+        // and will be added to the regular list of fields. This prevents the fields from being added multiple times.
+        fields = fields.filter((/**
+         * @param {?} f
+         * @return {?}
+         */
+        (f) => !f.dataSpecialization || f.dataSpecialization.toLowerCase() !== 'inline_embedded'));
+        // sort fields
+        return [...sectionHeaders, ...fields, ...inlineEmbeddedAssociatedEntityFields].sort(Helpers.sortByField(['sortOrder', 'name']));
+    }
+    /**
+     * @private
+     * @param {?} fields
+     * @return {?}
+     */
+    getInlineEmbeddedFields(fields) {
+        /** @type {?} */
+        let inlineEmbeddedAssociatedEntityFields = [];
+        fields
+            .filter((/**
+         * @param {?} f
+         * @return {?}
+         */
+        (f) => f.dataSpecialization && f.dataSpecialization.toLowerCase() === 'inline_embedded'))
+            .forEach((/**
+         * @param {?} f
+         * @return {?}
+         */
+        (f) => {
+            inlineEmbeddedAssociatedEntityFields = [...inlineEmbeddedAssociatedEntityFields, ...this.getAssociatedFieldsForInlineEmbedded(f)];
+        }));
+        return inlineEmbeddedAssociatedEntityFields;
+    }
+    /**
+     * @private
+     * @param {?} field
+     * @return {?}
+     */
+    getAssociatedFieldsForInlineEmbedded(field) {
+        /** @type {?} */
+        let associatedEntityFields = [];
+        associatedEntityFields = this.getEmbeddedFields(field).map((/**
+         * @param {?} aef
+         * @return {?}
+         */
+        (aef) => {
+            aef.inlineEmbeddedAssociatedEntityField = true;
+            return aef;
+        }));
+        return associatedEntityFields;
     }
     /**
      * @private
