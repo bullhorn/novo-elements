@@ -175,7 +175,7 @@ export class NovoSimpleTablePagination implements OnInit, OnDestroy {
   }
 
   private emitPageEvent(): void {
-    let event = {
+    const event = {
       page: this.page,
       pageSize: this.pageSize,
       length: this.length,

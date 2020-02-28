@@ -110,7 +110,7 @@ describe('Elements: NovoChipsElement', () => {
 
   describe('Method: remove(event, item)', () => {
     it('should remove an item', () => {
-      let item = { value: 'test' };
+      const item = { value: 'test' };
       component.items = [item];
       component.remove(null, item);
       expect(component.items.length).toBe(0);

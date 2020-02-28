@@ -161,7 +161,7 @@ export class NovoIsLoadingDirective {
   }
   destroyViews(views: EmbeddedViewRef<any>[]) {
     if (views) {
-      for (let view of views) {
+      for (const view of views) {
         view.destroy();
       }
     }

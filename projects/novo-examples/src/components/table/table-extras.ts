@@ -16,7 +16,7 @@ export const TableColumns = [
       return object.ext.obj;
     },
     compare: (sort, previous, current) => {
-      let first = previous.obj,
+      const first = previous.obj,
         second = current.obj;
 
       if (first > second) {

@@ -54,7 +54,7 @@ export class ChecklistPickerResults extends BasePickerResults {
   }
 
   search(): Observable<any> {
-    let options = this.config.options;
+    const options = this.config.options;
     // only set this the first time
     return from(
       new Promise((resolve, reject) => {
@@ -88,7 +88,7 @@ export class ChecklistPickerResults extends BasePickerResults {
   filterData(matches): any {
     if (this.term && matches) {
       this.filteredMatches = matches.map((section) => {
-        let items = section.originalData.filter((match) => {
+        const items = section.originalData.filter((match) => {
           return ~String(match.label)
             .toLowerCase()
             .indexOf(this.term.toLowerCase());
@@ -123,7 +123,7 @@ export class ChecklistPickerResults extends BasePickerResults {
       item.checked = !item.checked;
     }
 
-    let selected = this.activeMatch;
+    const selected = this.activeMatch;
     if (selected) {
       this.parent.value = selected;
     }

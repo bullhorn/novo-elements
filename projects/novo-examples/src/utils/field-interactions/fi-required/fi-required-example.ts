@@ -15,9 +15,9 @@ export class FiRequiredExample {
   public controls: any = {};
 
   constructor(formUtils: FormUtils) {
-    let requiredFunction = (API: FieldInteractionApi) => {
+    const requiredFunction = (API: FieldInteractionApi) => {
       console.log('[FieldInteractionDemo] - requiredFunction'); // tslint:disable-line
-      let activeValue = API.getActiveValue();
+      const activeValue = API.getActiveValue();
       if (activeValue) {
         API.setRequired('required', true);
       } else {

@@ -126,7 +126,7 @@ export class NovoControlGroup implements AfterContentInit, OnChanges {
   }
 
   public ngOnChanges(changes: SimpleChanges) {
-    let initialValueChange: SimpleChange = changes['initialValue'];
+    const initialValueChange: SimpleChange = changes['initialValue'];
 
     // If initial value changes, clear the controls
     if (initialValueChange && initialValueChange.currentValue !== initialValueChange.previousValue && !initialValueChange.firstChange) {
@@ -200,7 +200,7 @@ export class NovoControlGroup implements AfterContentInit, OnChanges {
   public removeControl(index: number, emitEvent: boolean = true): void {
     const control: FormArray = <FormArray>this.form.controls[this.key];
     if (emitEvent) {
-      this.onRemove.emit({ value: control.at(index).value, index: index });
+      this.onRemove.emit({ value: control.at(index).value, index });
     }
     control.removeAt(index);
     this.disabledArray = this.disabledArray.filter((value: NovoControlGroupRowConfig, idx: number) => idx !== index);
@@ -211,7 +211,7 @@ export class NovoControlGroup implements AfterContentInit, OnChanges {
 
   public editControl(index: number): void {
     const control: FormArray = <FormArray>this.form.controls[this.key];
-    this.onEdit.emit({ value: control.at(index).value, index: index });
+    this.onEdit.emit({ value: control.at(index).value, index });
   }
 
   public toggle(event: MouseEvent) {
@@ -249,7 +249,7 @@ export class NovoControlGroup implements AfterContentInit, OnChanges {
   }
 
   private getNewControls(controls: BaseControl[]) {
-    let ret: BaseControl[] = [];
+    const ret: BaseControl[] = [];
     (this.controls || []).forEach((control: BaseControl) => {
       ret.push(new BaseControl(control.__type, control));
     });

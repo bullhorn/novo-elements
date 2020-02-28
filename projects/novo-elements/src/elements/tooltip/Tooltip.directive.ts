@@ -104,7 +104,7 @@ export class TooltipDirective implements OnDestroy, OnInit {
     this.overlayRef.detach();
     this.portal = this.portal || new ComponentPortal(NovoTooltip, this.viewContainerRef);
 
-    let tooltipInstance = this.overlayRef.attach(this.portal).instance;
+    const tooltipInstance = this.overlayRef.attach(this.portal).instance;
     tooltipInstance.message = this.tooltip;
     tooltipInstance.tooltipType = this.type;
     tooltipInstance.rounded = this.rounded;

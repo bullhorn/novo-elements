@@ -12,8 +12,8 @@ class MockCDR {
 }
 
 describe('Elements: BasePickerResults', () => {
-  let elementRef = new ElementRef(document.createElement('div'));
-  let component = new BasePickerResults(elementRef, new MockCDR());
+  const elementRef = new ElementRef(document.createElement('div'));
+  const component = new BasePickerResults(elementRef, new MockCDR());
 
   it('should be defined', () => {
     expect(component).toBeDefined();

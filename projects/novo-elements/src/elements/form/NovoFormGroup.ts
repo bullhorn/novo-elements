@@ -23,7 +23,7 @@ export class NovoFormGroup extends FormGroup {
   }
 
   public enableAllControls(): void {
-    for (let key in this.controls) {
+    for (const key in this.controls) {
       if ((this.controls[key] as NovoFormControl).readOnly) {
         (this.controls[key] as NovoFormControl).readOnly = false;
         this.controls[key].enable();
@@ -32,7 +32,7 @@ export class NovoFormGroup extends FormGroup {
   }
 
   public disableAllControls(): void {
-    for (let key in this.controls) {
+    for (const key in this.controls) {
       if (!(this.controls[key] as NovoFormControl).readOnly) {
         (this.controls[key] as NovoFormControl).readOnly = true;
         this.controls[key].disable();

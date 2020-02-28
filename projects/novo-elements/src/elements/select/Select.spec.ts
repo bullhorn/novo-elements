@@ -8,7 +8,7 @@ import { KeyCodes } from '../../utils/key-codes/KeyCodes';
 import { NovoLabelService } from '../../services/novo-label-service';
 
 const KeyEvent = (code) => {
-  let event: any = document.createEvent('Event');
+  const event: any = document.createEvent('Event');
   event.keyCode = code;
   return event;
 };

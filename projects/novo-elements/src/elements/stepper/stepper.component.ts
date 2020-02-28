@@ -70,8 +70,8 @@ export class NovoStepper extends CdkStepper implements AfterContentInit {
 
   get completed(): boolean {
     try {
-      let steps = this._steps.toArray();
-      let length = steps.length - 1;
+      const steps = this._steps.toArray();
+      const length = steps.length - 1;
       return steps[length].completed && length === this.selectedIndex;
     } catch (err) {
       return false;
@@ -85,7 +85,7 @@ export class NovoStepper extends CdkStepper implements AfterContentInit {
 
   complete() {
     try {
-      let steps = this._steps.toArray();
+      const steps = this._steps.toArray();
       steps[this.selectedIndex].completed = true;
       this.next();
       this._stateChanged();
@@ -95,7 +95,7 @@ export class NovoStepper extends CdkStepper implements AfterContentInit {
   }
 
   getIndicatorType(index: number): 'none' | '' | 'edit' | 'done' {
-    let steps = this._steps.toArray();
+    const steps = this._steps.toArray();
     if (index === this.selectedIndex) {
       if (steps[index] && index === steps.length - 1 && steps[index].completed) {
         return 'done';

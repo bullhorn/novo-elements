@@ -133,8 +133,8 @@ describe('Elements: QuickNoteElement', () => {
             domEvent: {
               $: {
                 // The native element
-                key: key,
-                keyCode: keyCode,
+                key,
+                keyCode,
               },
             },
           },

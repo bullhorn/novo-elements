@@ -39,7 +39,7 @@ export class CustomPickerResultsExample {
   public value: string;
 
   constructor() {
-    let collaborators = [
+    const collaborators = [
       {
         id: 1,
         firstName: 'Brian',

@@ -23,21 +23,21 @@ export class GroupedMultiPickerExample {
   }
 
   setupGroupedMultiPickerDemo() {
-    let categoryMap = new Map<string, { value: string; label: string; items: { value: string; label: string }[] }>();
+    const categoryMap = new Map<string, { value: string; label: string; items: { value: string; label: string }[] }>();
     for (let i = 0; i < 10; i++) {
-      let items = [];
+      const items = [];
       for (let j = 0; j < 10; j++) {
         items.push({ value: `${i}-${j}`, label: `Category ${i} - Item ${j}` });
       }
-      categoryMap.set(`${i}`, { value: `${i}`, label: `Category ${i}`, items: items });
+      categoryMap.set(`${i}`, { value: `${i}`, label: `Category ${i}`, items });
     }
     this.groupedMultiPicker1 = {
-      categoryMap: categoryMap,
+      categoryMap,
       resultsTemplate: GroupedMultiPickerResults,
       displayAll: true,
     };
     this.groupedMultiPicker2 = {
-      categoryMap: categoryMap,
+      categoryMap,
       resultsTemplate: GroupedMultiPickerResults,
     };
     this.groupedMultiPicker3 = {

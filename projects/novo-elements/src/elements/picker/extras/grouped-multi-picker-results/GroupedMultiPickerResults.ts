@@ -169,7 +169,7 @@ export class GroupedMultiPickerResults extends BasePickerResults implements OnIn
     // If we have display all, set the all categories up
     if (this.config.displayAll) {
       this.selectedCategory = { value: 'all', label: 'all' };
-      let allItems = [];
+      const allItems = [];
       Array.from(this.config.categoryMap.values())
         .filter((category: { value: string }) => {
           return category.value !== 'all';
@@ -187,7 +187,7 @@ export class GroupedMultiPickerResults extends BasePickerResults implements OnIn
     // Set focus
     this.inputElement.nativeElement.focus();
     // Find new items
-    let key: string = category.value;
+    const key: string = category.value;
     this.selectedCategory = category;
     // Clear
     this.matches = [];
@@ -216,7 +216,7 @@ export class GroupedMultiPickerResults extends BasePickerResults implements OnIn
     // Only fire if we have a selected category
     if (this.selectCategory) {
       // Find new items
-      let key: string = this.selectedCategory.value;
+      const key: string = this.selectedCategory.value;
       // Get new matches
       this.getNewMatches(this.selectedCategory, key);
       this.ref.markForCheck();
@@ -252,7 +252,7 @@ export class GroupedMultiPickerResults extends BasePickerResults implements OnIn
       if (!this.internalMap.get(key)) {
         this.isLoading = true;
         this.config.getItemsForCategoryAsync(key, this.customFilterValue).then((items: { value: string; label: string }[]) => {
-          this.internalMap.set(key, { value: category.value, label: category.label, items: items });
+          this.internalMap.set(key, { value: category.value, label: category.label, items });
           this.matches = this.filter(items, true);
           this.isLoading = false;
           this.ref.markForCheck();

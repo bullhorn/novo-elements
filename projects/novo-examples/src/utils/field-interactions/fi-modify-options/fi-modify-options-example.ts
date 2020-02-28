@@ -16,9 +16,9 @@ export class FiModifyOptionsExample {
   public controls: any = {};
 
   constructor(private formUtils: FormUtils) {
-    let modifyOptionsAddFunction = (API: FieldInteractionApi) => {
+    const modifyOptionsAddFunction = (API: FieldInteractionApi) => {
       console.log('[FieldInteractionDemo] - modifyOptionsAddFunction'); // tslint:disable-line
-      let currentValue = API.getActiveValue();
+      const currentValue = API.getActiveValue();
       if (!currentValue) {
         API.removeStaticOption('select', 'NEW');
         API.removeStaticOption('picker', 'NEW');
@@ -28,9 +28,9 @@ export class FiModifyOptionsExample {
         API.addStaticOption('picker', 'NEW');
       }
     };
-    let modifyOptionsAsyncFunction = (API: FieldInteractionApi) => {
+    const modifyOptionsAsyncFunction = (API: FieldInteractionApi) => {
       console.log('[FieldInteractionDemo] - modifyOptionsAsyncFunction'); // tslint:disable-line
-      let currentValue = API.getActiveValue();
+      const currentValue = API.getActiveValue();
       switch (currentValue) {
         case 1:
           // Static
@@ -76,7 +76,7 @@ export class FiModifyOptionsExample {
           API.setProperty('picker', 'label', 'Async Picker (with options promise)');
           API.modifyPickerConfig('picker', {
             format: '$name $test',
-            optionsPromise: function(query, http) {
+            optionsPromise(query, http) {
               return new Promise(function(resolve, reject) {
                 if (query && query.length) {
                   http

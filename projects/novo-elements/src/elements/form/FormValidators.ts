@@ -38,14 +38,14 @@ export class FormValidators {
 
   // Make sure the control value is an email
   static isEmail(control) {
-    let EMAIL_REGEXP = /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i;
+    const EMAIL_REGEXP = /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i;
     return !control.value || EMAIL_REGEXP.test(control.value) ? null : { invalidEmail: true };
   }
   // Makes sure the control value is a valid address
   static isValidAddress(control) {
-    let fieldList: string[] = ['address1', 'address2', 'city', 'state', 'zip', 'countryID'];
-    let invalidAddressFields: string[] = [];
-    let maxlengthFields: string[] = [];
+    const fieldList: string[] = ['address1', 'address2', 'city', 'state', 'zip', 'countryID'];
+    const invalidAddressFields: string[] = [];
+    const maxlengthFields: string[] = [];
     let returnVal: {
       invalidAddress?: boolean;
       invalidAddressFields?: string[];
@@ -54,7 +54,7 @@ export class FormValidators {
       maxlengthFields?: string[];
     } = null;
     let maxlengthError: boolean = false;
-    let showCountryRequiredFlag = (subfield, ctrl) => {
+    const showCountryRequiredFlag = (subfield, ctrl) => {
       return (
         subfield === 'countryID' &&
         !Helpers.isEmpty(ctrl.config.countryID) &&
@@ -64,7 +64,7 @@ export class FormValidators {
       );
     };
 
-    let showStateRequiredFlag = (subfield, ctrl): boolean => {
+    const showStateRequiredFlag = (subfield, ctrl): boolean => {
       return (
         subfield === 'state' &&
         !Helpers.isEmpty(ctrl.config.state) &&

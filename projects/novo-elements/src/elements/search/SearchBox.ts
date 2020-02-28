@@ -119,7 +119,7 @@ export class NovoSearchBoxElement implements ControlValueAccessor {
       // Reset search
       // Set focus on search
       setTimeout(() => {
-        let element = this.input.nativeElement;
+        const element = this.input.nativeElement;
         if (element) {
           element.focus();
         }

@@ -102,14 +102,14 @@ export class Pagination implements OnInit, OnChanges {
   // Create page object used in template
   makePage(number, text, isActive) {
     return {
-      number: number,
-      text: text,
+      number,
+      text,
       active: isActive,
     };
   }
 
   getPages(currentPage, totalPages) {
-    let pages = [];
+    const pages = [];
     // Default page limits
     let startPage = 1;
     let endPage = totalPages;

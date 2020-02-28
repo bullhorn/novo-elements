@@ -15,9 +15,9 @@ export class FiValidationExample {
   public controls: any = {};
 
   constructor(private formUtils: FormUtils) {
-    let validationFunction = (API: FieldInteractionApi) => {
+    const validationFunction = (API: FieldInteractionApi) => {
       console.log('[FieldInteractionDemo] - validationFunction'); // tslint:disable-line
-      let activeValue = API.getActiveValue();
+      const activeValue = API.getActiveValue();
       if (activeValue > 10) {
         API.markAsInvalid(API.getActiveKey(), 'Too high! Make it a lot lower!!');
       }

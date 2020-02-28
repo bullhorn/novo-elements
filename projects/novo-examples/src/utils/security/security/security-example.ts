@@ -15,7 +15,7 @@ export class SecurityExample {
   constructor(private security: Security) {}
 
   shufflePermissions(): void {
-    let numOfPerms: number = Math.floor(Math.random() * 2) + 1;
+    const numOfPerms: number = Math.floor(Math.random() * 2) + 1;
     this.perms = this.shuffle(['A', 'B', 'C']).slice(0, numOfPerms);
     this.security.clear();
     this.security.grant(this.perms);

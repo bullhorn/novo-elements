@@ -93,7 +93,7 @@ export class NovoTimePickerElement implements ControlValueAccessor, OnInit, OnCh
       this.HOURS = ['0', ...this.HOURS, '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23'];
       this.increments = this.flatten([...this.HOURS.map((hour) => [`${hour}:00`, `${hour}:15`, `${hour}:30`, `${hour}:45`])]);
     } else {
-      let hours: Array<string> = ['12', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11'];
+      const hours: Array<string> = ['12', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11'];
       this.increments = this.flatten([
         ...hours.map((hour) => [`${hour}:00 AM`, `${hour}:15 AM`, `${hour}:30 AM`, `${hour}:45 AM`]),
         ...hours.map((hour) => [`${hour}:00 PM`, `${hour}:15 PM`, `${hour}:30 PM`, `${hour}:45 PM`]),
@@ -112,7 +112,7 @@ export class NovoTimePickerElement implements ControlValueAccessor, OnInit, OnCh
   }
 
   init(value, dispatch) {
-    let _value = new Date(value);
+    const _value = new Date(value);
     let hours: string | number = _value.getHours();
     let minutes: string | number = _value.getMinutes();
 
@@ -135,8 +135,8 @@ export class NovoTimePickerElement implements ControlValueAccessor, OnInit, OnCh
   setValue(event, value) {
     Helpers.swallowEvent(event);
     this.selected = value;
-    let [time, meridian] = value.split(' ');
-    let [hours, minutes] = time.split(':');
+    const [time, meridian] = value.split(' ');
+    const [hours, minutes] = time.split(':');
     this.hours = hours;
     this.minutes = minutes;
     this.meridian = meridian;
@@ -190,13 +190,13 @@ export class NovoTimePickerElement implements ControlValueAccessor, OnInit, OnCh
       }
     }
 
-    let value = new Date();
+    const value = new Date();
     value.setHours(hours);
     value.setMinutes(this.minutes);
     value.setSeconds(0);
     this.value = `${this.hours}:${this.minutes} ${this.meridian}`;
     this.onSelect.next({
-      hours: hours,
+      hours,
       minutes: this.minutes,
       meridian: this.meridian,
       date: value,

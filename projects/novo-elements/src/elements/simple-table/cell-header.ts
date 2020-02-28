@@ -291,7 +291,7 @@ export class NovoSimpleCellHeader implements NovoSimpleSortFilter, OnInit, OnDes
   }
 
   private getDefaultDateFilterOptions(): SimpleTableColumnFilterOption[] {
-    let opts: SimpleTableColumnFilterOption[] = [
+    const opts: SimpleTableColumnFilterOption[] = [
       { label: this.labels.past1Day, min: -1, max: 0 },
       { label: this.labels.past7Days, min: -7, max: 0 },
       { label: this.labels.past30Days, min: -30, max: 0 },

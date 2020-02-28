@@ -121,7 +121,7 @@ export class NovoTilesElement implements ControlValueAccessor, AfterContentInit,
   setupOptions() {
     if (this.options && this.options.length && (this.options[0].value === undefined || this.options[0].value === null)) {
       this._options = this.options.map((x) => {
-        let item = { value: x, label: x, checked: this.model === x };
+        const item = { value: x, label: x, checked: this.model === x };
         if (item.checked) {
           this.setTile(item);
         }
@@ -151,7 +151,7 @@ export class NovoTilesElement implements ControlValueAccessor, AfterContentInit,
         return;
       }
 
-      for (let option of this._options) {
+      for (const option of this._options) {
         option.checked = false;
       }
 
@@ -175,11 +175,11 @@ export class NovoTilesElement implements ControlValueAccessor, AfterContentInit,
 
   moveTile() {
     setTimeout(() => {
-      let ind = this.element.nativeElement.querySelector('.active-indicator');
-      let el = this.element.nativeElement.querySelector('.tile.active');
+      const ind = this.element.nativeElement.querySelector('.active-indicator');
+      const el = this.element.nativeElement.querySelector('.tile.active');
       if (ind && el) {
-        let w: number = el.clientWidth;
-        let left: number = el.offsetLeft - el.offsetTop; // Removes the border width that Firefox adds without affecting other browsers
+        const w: number = el.clientWidth;
+        const left: number = el.offsetLeft - el.offsetTop; // Removes the border width that Firefox adds without affecting other browsers
         ind.style.width = `calc(${w}px + 0.32em)`;
         ind.style.left = `${left}px`;
         this.state = 'active';
