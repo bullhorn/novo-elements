@@ -266,7 +266,7 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
       if (this.name !== 'novo-data-table') {
         this.preferencesChanged.emit({
           name: this.name,
-          displayedColumns: displayedColumns,
+          displayedColumns,
         });
       } else {
         notify('Must have [name] set on data-table to use preferences!');
@@ -312,7 +312,7 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   @Input()
   set rows(rows: T[]) {
     this.loading = false;
-    let service = new StaticDataTableService(rows);
+    const service = new StaticDataTableService(rows);
     this.dataSource = new DataTableSource<T>(service, this.state, this.ref);
     this.ref.detectChanges();
   }
@@ -541,7 +541,7 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   }
 
   public expandRow(row: T): void {
-    let expanded = this.isExpanded(row);
+    const expanded = this.isExpanded(row);
 
     if (expanded) {
       this.state.expandedRows.delete(`${row[this.rowIdentifier]}`);
@@ -579,7 +579,7 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   }
 
   public selectRow(row: T): void {
-    let selected = this.isSelected(row);
+    const selected = this.isSelected(row);
 
     if (selected) {
       this.state.selectedRows.delete(`${row[this.rowIdentifier]}`);
@@ -683,7 +683,7 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
 
   private scrollListener(): void {
     const target: Element = this.novoDataTableContainer.nativeElement as Element;
-    let left: number = target.scrollLeft;
+    const left: number = target.scrollLeft;
     if (left !== this.scrollLeft) {
       this.scrollLeft = target.scrollLeft;
     }

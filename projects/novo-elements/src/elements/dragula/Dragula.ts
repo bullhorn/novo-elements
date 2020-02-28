@@ -22,7 +22,7 @@ export class NovoDragulaElement implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    let bag = this.dragulaService.find(this.bag);
+    const bag = this.dragulaService.find(this.bag);
 
     if (bag) {
       this.drake = bag.drake;
@@ -51,7 +51,7 @@ export class NovoDragulaElement implements OnInit, OnChanges {
     if (changes && changes.dragulaModel) {
       if (this.drake) {
         if (this.drake.models) {
-          let modelIndex = this.drake.models.indexOf(changes.dragulaModel.previousValue);
+          const modelIndex = this.drake.models.indexOf(changes.dragulaModel.previousValue);
           this.drake.models.splice(modelIndex, 1, changes.dragulaModel.currentValue);
         } else {
           this.drake.models = [changes.dragulaModel.currentValue];

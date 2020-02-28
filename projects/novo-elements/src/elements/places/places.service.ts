@@ -52,10 +52,10 @@ export class GooglePlacesService {
   getGeoCurrentLocation(): Promise<any> {
     return new Promise((resolve) => {
       if (isPlatformBrowser(this.platformId)) {
-        let _window: any = this._global.nativeGlobal;
+        const _window: any = this._global.nativeGlobal;
         if (_window.navigator.geolocation) {
           _window.navigator.geolocation.getCurrentPosition((pos) => {
-            let latlng: any = { lat: parseFloat(pos.coords.latitude + ''), lng: parseFloat(pos.coords.longitude + '') };
+            const latlng: any = { lat: parseFloat(pos.coords.latitude + ''), lng: parseFloat(pos.coords.longitude + '') };
             resolve(latlng);
           });
         } else {
@@ -70,8 +70,8 @@ export class GooglePlacesService {
   getGeoLatLngDetail(latlng: any): Promise<any> {
     return new Promise((resolve) => {
       if (isPlatformBrowser(this.platformId)) {
-        let _window: any = this._global.nativeGlobal;
-        let geocoder: any = new _window.google.maps.Geocoder();
+        const _window: any = this._global.nativeGlobal;
+        const geocoder: any = new _window.google.maps.Geocoder();
         geocoder.geocode({ location: latlng }, (results, status) => {
           if (status === 'OK') {
             this.getGeoPlaceDetail(results[0].place_id).then((result) => {
@@ -94,10 +94,10 @@ export class GooglePlacesService {
   getGeoPrediction(params: any): Promise<any> {
     return new Promise((resolve) => {
       if (isPlatformBrowser(this.platformId)) {
-        let _window: any = this._global.nativeGlobal;
-        let placesService: any = new _window.google.maps.places.AutocompleteService();
+        const _window: any = this._global.nativeGlobal;
+        const placesService: any = new _window.google.maps.places.AutocompleteService();
         let queryInput: any = {};
-        let promiseArr: any = [];
+        const promiseArr: any = [];
         if (params.countryRestriction.length) {
           queryInput = {
             input: params.query,
@@ -114,7 +114,7 @@ export class GooglePlacesService {
         }
         if (params.geoTypes.length) {
           for (let i: number = 0; i < params.geoTypes.length; i++) {
-            let _tempQuery: any = queryInput;
+            const _tempQuery: any = queryInput;
             _tempQuery['types'] = new Array(params.geoTypes[i]);
             promiseArr.push(this.geoPredictionCall(placesService, _tempQuery));
           }
@@ -123,7 +123,7 @@ export class GooglePlacesService {
         }
 
         Promise.all(promiseArr).then((values) => {
-          let val: any = values;
+          const val: any = values;
           if (val.length > 1) {
             let _tempArr: any = [];
             for (let j: number = 0; j < val.length; j++) {
@@ -146,9 +146,9 @@ export class GooglePlacesService {
   getGeoPlaceDetail(placeId: string): Promise<any> {
     return new Promise((resolve) => {
       if (isPlatformBrowser(this.platformId)) {
-        let _window: any = this._global.nativeGlobal;
-        let placesService: any = new _window.google.maps.places.PlacesService(document.createElement('div'));
-        placesService.getDetails({ placeId: placeId }, (result: any, status: any) => {
+        const _window: any = this._global.nativeGlobal;
+        const placesService: any = new _window.google.maps.places.PlacesService(document.createElement('div'));
+        placesService.getDetails({ placeId }, (result: any, status: any) => {
           if (result === null || result.length === 0) {
             this.getGeoPaceDetailByReferance(result.referance).then((referanceData: any) => {
               if (!referanceData) {
@@ -170,8 +170,8 @@ export class GooglePlacesService {
   getGeoPaceDetailByReferance(referance: string): Promise<any> {
     return new Promise((resolve) => {
       if (isPlatformBrowser(this.platformId)) {
-        let _window: any = this._global.nativeGlobal;
-        let placesService: any = new _window.google.maps.places.PlacesService();
+        const _window: any = this._global.nativeGlobal;
+        const placesService: any = new _window.google.maps.places.PlacesService();
         placesService.getDetails({ reference: referance }, (result: any, status: any) => {
           if (status === _window.google.maps.places.PlacesServiceStatus.OK) {
             resolve(result);
@@ -220,7 +220,7 @@ export class GooglePlacesService {
   }
 
   private geoPredictionCall(placesService: any, queryInput: any): Promise<any> {
-    let _window: any = this._global.nativeGlobal;
+    const _window: any = this._global.nativeGlobal;
     return new Promise((resolve) => {
       placesService.getPlacePredictions(queryInput, (result: any, status: any) => {
         if (status === _window.google.maps.places.PlacesServiceStatus.OK) {

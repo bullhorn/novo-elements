@@ -44,7 +44,7 @@ export class NovoDropdownCell extends BaseRenderer implements OnInit {
   }
 
   public onClick(config, option, value): void {
-    let callback = option.callback || config.callback;
+    const callback = option.callback || config.callback;
     callback(this.data, value || option);
   }
 }

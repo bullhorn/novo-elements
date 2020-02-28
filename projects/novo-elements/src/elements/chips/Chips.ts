@@ -194,8 +194,8 @@ export class NovoChipsElement implements OnInit, ControlValueAccessor {
   setItems() {
     this.items = [];
     if (this.model && Array.isArray(this.model)) {
-      let noLabels = [];
-      for (let value of this.model) {
+      const noLabels = [];
+      for (const value of this.model) {
         let label;
         if (this.source && this.source.format && Helpers.validateInterpolationProps(this.source.format, value)) {
           label = Helpers.interpolate(this.source.format, value);
@@ -220,7 +220,7 @@ export class NovoChipsElement implements OnInit, ControlValueAccessor {
       }
       if (noLabels.length > 0 && this.source && this.source.getLabels && typeof this.source.getLabels === 'function') {
         this.source.getLabels(noLabels).then((result) => {
-          for (let value of result) {
+          for (const value of result) {
             if (value.hasOwnProperty('label')) {
               this.items.push({
                 value,
@@ -241,7 +241,7 @@ export class NovoChipsElement implements OnInit, ControlValueAccessor {
   }
 
   getLabelFromOptions(value) {
-    let optLabel = this.source.options.find((val) => val.value === value);
+    const optLabel = this.source.options.find((val) => val.value === value);
     return {
       value,
       label: optLabel ? optLabel.label : value,
@@ -280,7 +280,7 @@ export class NovoChipsElement implements OnInit, ControlValueAccessor {
       this.items.push(event);
       this.value = this.source && this.source.valueFormatter ? this.source.valueFormatter(this.items) : this.items.map((i) => i.value);
       // Set focus on the picker
-      let input = this.element.nativeElement.querySelector('novo-picker > input');
+      const input = this.element.nativeElement.querySelector('novo-picker > input');
       if (input) {
         input.focus();
       }

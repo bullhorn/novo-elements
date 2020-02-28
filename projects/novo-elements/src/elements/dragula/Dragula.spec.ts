@@ -31,8 +31,8 @@ describe('Elements: NovoDragulaElement', () => {
     });
   });
   describe('Class: ', () => {
-    let mockElement = document.createElement('div');
-    let component = new NovoDragulaElement({ nativeElement: mockElement }, new NovoDragulaService());
+    const mockElement = document.createElement('div');
+    const component = new NovoDragulaElement({ nativeElement: mockElement }, new NovoDragulaService());
 
     describe('Method: ngOnInit()', () => {
       it('should initialize the dragula with the element reference passed into the constructor if the service doesn\'t return any containers.', () => {

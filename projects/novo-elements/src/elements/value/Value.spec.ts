@@ -31,26 +31,26 @@ xdescribe('Elements: NovoValueElement', () => {
   describe('iconClass ', () => {
     it('should set iconClass to icon iconCls', () => {
       component.launched = false;
-      let icon: object = {
+      const icon: object = {
         iconCls: 'test',
         onIconClick: '',
       };
-      let result = component.iconClass(icon);
+      const result = component.iconClass(icon);
       expect(result).toBe('bhi-test actions');
     });
 
     it('should set iconClass to iconCls and clickable', () => {
       component.launched = false;
-      let icon: object = {
+      const icon: object = {
         iconCls: 'test',
-        onIconClick: function() {},
+        onIconClick() {},
       };
-      let result = component.iconClass(icon);
+      const result = component.iconClass(icon);
       expect(result).toBe('bhi-test actions clickable');
     });
 
     it('should set iconClass to empty if no icon defined', () => {
-      let result = component.iconClass({});
+      const result = component.iconClass({});
       expect(result).toBe('');
     });
   });
@@ -129,9 +129,9 @@ xdescribe('Elements: NovoValueElement', () => {
 
   describe('onValueClick ', () => {
     it('should return true if icon is defined and not empty', () => {
-      let icon: any = {
+      const icon: any = {
         iconCls: 'test',
-        onIconClick: function() {},
+        onIconClick() {},
       };
       component.data = 'test';
       spyOn(icon, 'onIconClick');
@@ -140,7 +140,7 @@ xdescribe('Elements: NovoValueElement', () => {
     });
 
     it('should return flase if icon is defined and not empty', () => {
-      let icon: any = {
+      const icon: any = {
         iconCls: 'test',
         onIconClick: '',
       };
@@ -154,7 +154,7 @@ xdescribe('Elements: NovoValueElement', () => {
   describe('openLink ', () => {
     it('should return true if icon is defined and not empty', () => {
       component.meta = {
-        openLink: function() {},
+        openLink() {},
       };
       component.data = 'test';
       spyOn(component.meta, 'openLink');

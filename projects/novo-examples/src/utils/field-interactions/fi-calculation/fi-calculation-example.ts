@@ -16,10 +16,10 @@ export class FiCalculationExample {
   public snippet: any = {};
 
   constructor(private formUtils: FormUtils) {
-    let calculationFunction = (API: FieldInteractionApi) => {
+    const calculationFunction = (API: FieldInteractionApi) => {
       console.log('[FieldInteractionDemo] - calculationFunction'); // tslint:disable-line
-      let a = Number(API.getValue('a'));
-      let b = Number(API.getValue('b'));
+      const a = Number(API.getValue('a'));
+      const b = Number(API.getValue('b'));
       API.setValue('sum', a + b);
       API.setValue('date', new Date());
     };

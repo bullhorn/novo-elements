@@ -136,7 +136,7 @@ export class NovoMultiPickerElement implements OnInit {
     this._options = [];
     if (this.options) {
       this.options.forEach((option) => {
-        let formattedOption = this.setupOptionsByType(option);
+        const formattedOption = this.setupOptionsByType(option);
         this._options.push(formattedOption);
       });
     }
@@ -144,7 +144,7 @@ export class NovoMultiPickerElement implements OnInit {
   }
 
   setupOptionsByType(section) {
-    let formattedSection: any = {
+    const formattedSection: any = {
       type: section.type,
       label: section.label || section.type,
     };
@@ -152,7 +152,7 @@ export class NovoMultiPickerElement implements OnInit {
       return this.formatOption(section, item);
     });
     if (this.selectAllOption) {
-      let selectAll = this.createSelectAllOption(section);
+      const selectAll = this.createSelectAllOption(section);
       formattedSection.data.splice(0, 0, selectAll);
     }
     formattedSection.originalData = formattedSection.data.slice();
@@ -160,7 +160,7 @@ export class NovoMultiPickerElement implements OnInit {
   }
 
   formatOption(section, item) {
-    let obj = {
+    const obj = {
       value: section.field ? item[section.field] : item.value || item,
       label: section.format ? Helpers.interpolate(section.format, item) : item.label || String(item.value || item),
       type: section.type,
@@ -175,7 +175,7 @@ export class NovoMultiPickerElement implements OnInit {
   }
 
   createSelectAllOption(section) {
-    let selectAll = {
+    const selectAll = {
       value: 'ALL',
       label: `All ${section.type}`,
       type: section.type,
@@ -184,7 +184,7 @@ export class NovoMultiPickerElement implements OnInit {
       isChildOf: section.isChildOf,
     };
     if (section.isChildOf) {
-      let allParents = section.data.reduce((accum, next) => {
+      const allParents = section.data.reduce((accum, next) => {
         return accum.concat(next[section.isChildOf]);
       }, []);
       selectAll[section.isChildOf] = allParents;
@@ -216,7 +216,7 @@ export class NovoMultiPickerElement implements OnInit {
       }
       this.modifyAffectedParentsOrChildren(event.checked, event);
       // Set focus on the picker
-      let input = this.element.nativeElement.querySelector('novo-picker > input');
+      const input = this.element.nativeElement.querySelector('novo-picker > input');
       if (input) {
         input.focus();
       }
@@ -237,8 +237,8 @@ export class NovoMultiPickerElement implements OnInit {
   }
 
   updateAllItemState(type) {
-    let allOfType = this.getAllOfType(type);
-    let allOfTypeSelected = this.allItemsSelected(allOfType, type);
+    const allOfType = this.getAllOfType(type);
+    const allOfTypeSelected = this.allItemsSelected(allOfType, type);
     if (allOfTypeSelected) {
       this.selectAll(allOfType, type);
     }
@@ -249,12 +249,12 @@ export class NovoMultiPickerElement implements OnInit {
     if (!this.selectAllOption) {
       return;
     }
-    let allItem = allOfType[0];
+    const allItem = allOfType[0];
     allItem.indeterminate = status;
   }
 
   updateDisplayItems(item, action) {
-    let adding = action === 'add';
+    const adding = action === 'add';
     if (adding) {
       this.items.push(item);
     } else {
@@ -268,19 +268,19 @@ export class NovoMultiPickerElement implements OnInit {
 
   updateDisplayText(items) {
     this.notShown = [];
-    let notShown = items.slice(this.chipsCount);
+    const notShown = items.slice(this.chipsCount);
     if (notShown.length > 0) {
       this.types.forEach((type) => {
         let count;
-        let selectedOfType = notShown.filter((x) => x.type === type.value);
+        const selectedOfType = notShown.filter((x) => x.type === type.value);
         if (selectedOfType.length === 1 && selectedOfType[0].value === 'ALL') {
           count = this.getAllOfType(type.value).length - 1;
         } else {
           count = selectedOfType.length;
         }
-        let displayType = count === 1 ? type.singular : type.plural || type.value;
+        const displayType = count === 1 ? type.singular : type.plural || type.value;
         if (count > 0) {
-          this.notShown.push({ type: displayType, count: count });
+          this.notShown.push({ type: displayType, count });
         }
       });
     }
@@ -291,7 +291,7 @@ export class NovoMultiPickerElement implements OnInit {
     if (event) {
       triggeredByEvent = true;
     }
-    let itemToRemove = item;
+    const itemToRemove = item;
     if (itemToRemove.value === 'ALL') {
       triggeredByEvent = false;
       this.modifyAllOfType(itemToRemove.type, 'unselect');
@@ -314,7 +314,7 @@ export class NovoMultiPickerElement implements OnInit {
   }
 
   removeValue(item) {
-    let updatedValues = this.value[item.type].filter((x) => x !== item.value);
+    const updatedValues = this.value[item.type].filter((x) => x !== item.value);
     this.value[item.type] = updatedValues;
     this.triggerValueUpdate();
     this.updateDisplayItems(item, 'remove');
@@ -341,8 +341,8 @@ export class NovoMultiPickerElement implements OnInit {
   }
 
   modifyAllOfType(type, action) {
-    let selecting = action === 'select';
-    let allOfType = this.getAllOfType(type);
+    const selecting = action === 'select';
+    const allOfType = this.getAllOfType(type);
     allOfType.forEach((item) => {
       item.checked = selecting;
       item.indeterminate = false;
@@ -361,7 +361,7 @@ export class NovoMultiPickerElement implements OnInit {
   }
 
   triggerValueUpdate() {
-    let updatedObject = {};
+    const updatedObject = {};
     this.types.forEach((x) => (updatedObject[x.value] = this.value[x.value]));
     this.value = updatedObject;
   }
@@ -371,13 +371,13 @@ export class NovoMultiPickerElement implements OnInit {
       return;
     }
     allOfType[0].checked = true;
-    let values = allOfType.map((i) => {
+    const values = allOfType.map((i) => {
       return i.value;
     });
     // remove 'ALL' value
     values.splice(0, 1);
     this.value[type] = values;
-    let updatedItems = this.items.filter((x) => x.type !== type);
+    const updatedItems = this.items.filter((x) => x.type !== type);
     this.items = updatedItems;
     this.updateDisplayItems(allOfType[0], 'add');
   }
@@ -386,14 +386,14 @@ export class NovoMultiPickerElement implements OnInit {
     if (!this.selectAllOption) {
       return;
     }
-    let type = item.type;
-    let allOfType = this.getAllOfType(type);
-    let allItem = allOfType[0];
+    const type = item.type;
+    const allOfType = this.getAllOfType(type);
+    const allItem = allOfType[0];
     this.removeItem(allItem);
     allItem.indeterminate = true;
-    let selectedItems = allOfType.filter((i) => i.checked === true);
+    const selectedItems = allOfType.filter((i) => i.checked === true);
     this.items = [...this.items, ...selectedItems];
-    let values = selectedItems.map((i) => {
+    const values = selectedItems.map((i) => {
       return i.value;
     });
     this.value[type] = [...values];
@@ -423,18 +423,18 @@ export class NovoMultiPickerElement implements OnInit {
     if (!itemChanged.isChildOf && !itemChanged.isParentOf) {
       return;
     }
-    let parent = this.types.filter((x) => !!x.isParentOf)[0];
-    let parentType = parent.value;
-    let allParentType = this.getAllOfType(parentType);
-    let childType = allParentType[0].isParentOf;
-    let allChildren = this.getAllOfType(childType);
-    let allCheckedChildren = allChildren.filter((x) => !!x.checked);
+    const parent = this.types.filter((x) => !!x.isParentOf)[0];
+    const parentType = parent.value;
+    const allParentType = this.getAllOfType(parentType);
+    const childType = allParentType[0].isParentOf;
+    const allChildren = this.getAllOfType(childType);
+    const allCheckedChildren = allChildren.filter((x) => !!x.checked);
 
     allParentType.forEach((obj) => {
       if (obj.value === 'ALL') {
         return;
       }
-      let selectedChildrenOfParent = allCheckedChildren.filter((x) => {
+      const selectedChildrenOfParent = allCheckedChildren.filter((x) => {
         return x[parentType].filter((y) => y === obj.value).length > 0;
       });
 
@@ -444,7 +444,7 @@ export class NovoMultiPickerElement implements OnInit {
         }
         obj.indeterminate = selectedChildrenOfParent.length > 0;
       } else {
-        let allChildrenOfParent = allChildren.filter((x) => {
+        const allChildrenOfParent = allChildren.filter((x) => {
           return x.value !== 'ALL' && x[parentType].filter((y) => y === obj.value).length > 0;
         });
         if (selectedChildrenOfParent.length > 0) {
@@ -490,9 +490,9 @@ export class NovoMultiPickerElement implements OnInit {
   }
 
   updateAllChildrenValue(item, action) {
-    let selecting = action === 'select';
-    let childType = item.isParentOf;
-    let potentialChildren = this.getAllOfType(childType);
+    const selecting = action === 'select';
+    const childType = item.isParentOf;
+    const potentialChildren = this.getAllOfType(childType);
     if (this.selectAllOption && this.allOfTypeSelected(childType) && !selecting) {
       this.remove(null, potentialChildren[0]);
       return;
@@ -513,9 +513,9 @@ export class NovoMultiPickerElement implements OnInit {
   }
 
   updateAllParentValue(item, action) {
-    let selecting = action === 'select';
-    let parentType = item.isChildOf;
-    let potentialParents = this.getAllOfType(parentType);
+    const selecting = action === 'select';
+    const parentType = item.isChildOf;
+    const potentialParents = this.getAllOfType(parentType);
     potentialParents.forEach((x) => {
       if (!x.checked) {
         x.indeterminate = selecting;
@@ -524,17 +524,17 @@ export class NovoMultiPickerElement implements OnInit {
   }
 
   updateIndeterminateStates(allParentType, allChildren, allCheckedChildren) {
-    let allCheckedOrIndeterminateParents = allParentType.filter((x) => (!!x.checked || !!x.indeterminate) && x.value !== 'ALL');
-    let isParentIndeterminate = !!allParentType[0].checked ? false : allCheckedOrIndeterminateParents.length > 0;
-    let isChildIndeterminate = !!allChildren[0].checked ? false : allCheckedChildren.length > 0;
+    const allCheckedOrIndeterminateParents = allParentType.filter((x) => (!!x.checked || !!x.indeterminate) && x.value !== 'ALL');
+    const isParentIndeterminate = !!allParentType[0].checked ? false : allCheckedOrIndeterminateParents.length > 0;
+    const isChildIndeterminate = !!allChildren[0].checked ? false : allCheckedChildren.length > 0;
     this.setIndeterminateState(allParentType, isParentIndeterminate);
     this.setIndeterminateState(allChildren, isChildIndeterminate);
   }
 
   updateChildrenValue(parent, action) {
-    let selecting = action === 'select';
-    let childType = parent.isParentOf;
-    let potentialChildren = this.getAllOfType(childType);
+    const selecting = action === 'select';
+    const childType = parent.isParentOf;
+    const potentialChildren = this.getAllOfType(childType);
     potentialChildren.forEach((x) => {
       if (x.value === 'ALL') {
         return;
@@ -554,7 +554,7 @@ export class NovoMultiPickerElement implements OnInit {
   }
 
   updateParentValue(child, action) {
-    let allParentType = this.getAllOfType(child.isChildOf);
+    const allParentType = this.getAllOfType(child.isChildOf);
     if (allParentType[0].checked && action !== 'select') {
       this.handleRemoveItemIfAllSelected(allParentType[0]);
     }
@@ -584,18 +584,18 @@ export class NovoMultiPickerElement implements OnInit {
       return;
     }
     this.types.forEach((typeObj) => {
-      let type = typeObj.value;
+      const type = typeObj.value;
       if (this.value[type]) {
         let indeterminateIsSet = false;
-        let options = this.updateAllItemState(type);
-        let optionsByType = options.allOfType;
-        let allSelected = options.allOfTypeSelected;
+        const options = this.updateAllItemState(type);
+        const optionsByType = options.allOfType;
+        const allSelected = options.allOfTypeSelected;
         this.value[type].forEach((item) => {
           if (!allSelected && !indeterminateIsSet) {
             indeterminateIsSet = true;
             this.setIndeterminateState(optionsByType, true);
           }
-          let value = optionsByType.filter((x) => x.value === item)[0];
+          const value = optionsByType.filter((x) => x.value === item)[0];
           value.checked = true;
           if (!allSelected) {
             this.updateDisplayItems(value, 'add');

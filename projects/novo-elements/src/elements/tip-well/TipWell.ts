@@ -84,7 +84,7 @@ export class NovoTipWellElement implements OnInit {
     this.localStorageKey = `novo-tw_${this.name}`;
     // Check localStorage for state
     if (this.isLocalStorageEnabled) {
-      let storedValue = JSON.parse(localStorage.getItem(this.localStorageKey));
+      const storedValue = JSON.parse(localStorage.getItem(this.localStorageKey));
       this.isActive = storedValue !== false;
     }
   }

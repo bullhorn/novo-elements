@@ -36,7 +36,7 @@ describe('Services: ArrayCollection', () => {
 
   describe('Objects', () => {
     let collection: Collection<any>;
-    let source: Array<any> = [{ id: 1 }, { id: 2 }, { id: 3 }];
+    const source: Array<any> = [{ id: 1 }, { id: 2 }, { id: 3 }];
     beforeEach(() => {
       collection = new ArrayCollection<any>(source);
     });

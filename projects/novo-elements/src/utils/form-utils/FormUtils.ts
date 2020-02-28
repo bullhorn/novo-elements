@@ -68,9 +68,9 @@ export class FormUtils {
   constructor(public labels: NovoLabelService, public optionsService: OptionsService) {}
 
   toFormGroup(controls: Array<any>): NovoFormGroup {
-    let group: any = {};
+    const group: any = {};
     controls.forEach((control) => {
-      let value = Helpers.isBlank(control.value) ? '' : control.value;
+      const value = Helpers.isBlank(control.value) ? '' : control.value;
       group[control.key] = new NovoFormControl(value, control);
     });
     return new NovoFormGroup(group);
@@ -82,8 +82,8 @@ export class FormUtils {
 
   addControls(formGroup: NovoFormGroup, controls: Array<NovoControlConfig>): void {
     controls.forEach((control) => {
-      let value = Helpers.isBlank(control.value) ? '' : control.value;
-      let formControl = new NovoFormControl(value, control);
+      const value = Helpers.isBlank(control.value) ? '' : control.value;
+      const formControl = new NovoFormControl(value, control);
       formGroup.addControl(control.key, formControl);
     });
   }
@@ -99,7 +99,7 @@ export class FormUtils {
    * @param fieldsets
    */
   toFormGroupFromFieldset(fieldsets: Array<NovoFieldset>): NovoFormGroup {
-    let controls: Array<NovoFormControl> = [];
+    const controls: Array<NovoFormControl> = [];
     fieldsets.forEach((fieldset) => {
       controls.push(...fieldset.controls);
     });
@@ -120,7 +120,7 @@ export class FormUtils {
    */
   determineInputType(field: FormField): string {
     let type: string;
-    let dataSpecializationTypeMap = {
+    const dataSpecializationTypeMap = {
       DATETIME: 'datetime',
       TIME: 'time',
       MONEY: 'currency',
@@ -134,27 +134,27 @@ export class FormUtils {
       SpecializedOptionsLookup: 'select',
       SimplifiedOptionsLookup: 'select',
     };
-    let dataTypeToTypeMap = {
+    const dataTypeToTypeMap = {
       Timestamp: 'date',
       Date: 'date',
       Boolean: 'tiles',
     };
-    let inputTypeToTypeMap = {
+    const inputTypeToTypeMap = {
       CHECKBOX: 'radio',
       RADIO: 'radio',
       SELECT: 'select',
       TILES: 'tiles',
     };
-    let inputTypeMultiToTypeMap = {
+    const inputTypeMultiToTypeMap = {
       CHECKBOX: 'checklist',
       RADIO: 'checklist',
       SELECT: 'chips',
     };
-    let typeToTypeMap = {
+    const typeToTypeMap = {
       file: 'file',
       COMPOSITE: 'address',
     };
-    let numberDataTypeToTypeMap = {
+    const numberDataTypeToTypeMap = {
       Double: 'float',
       BigDecimal: 'float',
       Integer: 'number',
@@ -233,9 +233,9 @@ export class FormUtils {
     // TODO: (cont.) as the setter of the field argument
     let type: string = this.determineInputType(field) || field.type;
     let control: any;
-    let controlConfig: NovoControlConfig = {
+    const controlConfig: NovoControlConfig = {
       metaType: field.type,
-      type: type,
+      type,
       key: field.name,
       label: field.label,
       placeholder: field.hint || '',
@@ -406,7 +406,7 @@ export class FormUtils {
         controlConfig.config.required = field.required;
         controlConfig.config.readOnly = controlConfig.readOnly;
         if (field.fields && field.fields.length) {
-          for (let subfield of field.fields) {
+          for (const subfield of field.fields) {
             controlConfig.config[subfield.name] = {
               required: !!subfield.required,
               hidden: !!subfield.readOnly,
@@ -476,12 +476,12 @@ export class FormUtils {
     overrides?: any,
     forTable: boolean = false,
   ) {
-    let controls = [];
+    const controls = [];
     if (meta && meta.fields) {
-      let fields = meta.fields;
+      const fields = meta.fields;
       fields.forEach((field) => {
         if (this.shouldCreateControl(field)) {
-          let control = this.getControlForField(field, http, config, overrides, forTable);
+          const control = this.getControlForField(field, http, config, overrides, forTable);
           // Set currency format
           if (control.subType === 'currency') {
             control.currencyFormat = currencyFormat;
@@ -495,8 +495,8 @@ export class FormUtils {
   }
 
   toTableControls(meta, currencyFormat, http, config: { token?: string; restUrl?: string; military?: boolean }, overrides?: any) {
-    let controls = this.toControls(meta, currencyFormat, http, config, overrides, true);
-    let ret = {};
+    const controls = this.toControls(meta, currencyFormat, http, config, overrides, true);
+    const ret = {};
     controls.forEach((control: BaseControl) => {
       ret[control.key] = {
         editorType: control.__type,
@@ -514,7 +514,7 @@ export class FormUtils {
     overrides?,
     data?: { [key: string]: any },
   ) {
-    let fieldsets: Array<NovoFieldset> = [];
+    const fieldsets: Array<NovoFieldset> = [];
     let formFields = [];
 
     if (meta && meta.fields) {
@@ -528,7 +528,7 @@ export class FormUtils {
         } else if (this.isEmbeddedField(field)) {
           this.insertHeaderToFieldsets(fieldsets, field);
 
-          let embeddedFields = this.getEmbeddedFields(field);
+          const embeddedFields = this.getEmbeddedFields(field);
 
           embeddedFields.forEach((embeddedField) => {
             if (this.shouldCreateControl(embeddedField)) {
@@ -568,7 +568,7 @@ export class FormUtils {
 
   private createControl(field, data, http, config, overrides, currencyFormat) {
     const fieldData = this.isEmbeddedFieldData(field, data) ? this.getEmbeddedFieldData(field, data) : this.getFieldData(field, data);
-    let control = this.getControlForField(field, http, config, overrides, undefined, fieldData);
+    const control = this.getControlForField(field, http, config, overrides, undefined, fieldData);
     // Set currency format
     if (control.subType === 'currency') {
       control.currencyFormat = currencyFormat;
@@ -585,12 +585,12 @@ export class FormUtils {
   }
 
   private getEmbeddedFieldData(field, data) {
-    let [parentFieldName, fieldName] = field.name.split('.');
+    const [parentFieldName, fieldName] = field.name.split('.');
     return (data && data[parentFieldName] && data[parentFieldName][fieldName]) || null;
   }
 
   private getFormFields(meta) {
-    let sectionHeaders = meta.sectionHeaders
+    const sectionHeaders = meta.sectionHeaders
       ? meta.sectionHeaders.map((element) => {
           element.isSectionHeader = true;
           return element;
@@ -687,7 +687,7 @@ export class FormUtils {
     } else if (field.optionsUrl) {
       return this.optionsService.getOptionsConfig(http, field, config);
     } else if (Array.isArray(field.options) && field.type === 'chips') {
-      let options = field.options;
+      const options = field.options;
       return {
         field: 'value',
         format: '$label',
@@ -709,7 +709,7 @@ export class FormUtils {
     }
 
     const currentWorkflowOption: number | string = fieldData.id ? fieldData.id : 'initial';
-    let updateWorkflowOptions: Array<{ value: string | number; label: string | number }> = workflowOptions[currentWorkflowOption] || [];
+    const updateWorkflowOptions: Array<{ value: string | number; label: string | number }> = workflowOptions[currentWorkflowOption] || [];
 
     if (currentValue && !updateWorkflowOptions.find((option) => option.value === currentValue.value)) {
       updateWorkflowOptions.unshift(currentValue);
@@ -779,7 +779,7 @@ export class FormUtils {
 
   forceValidation(form: NovoFormGroup): void {
     Object.keys(form.controls).forEach((key: string) => {
-      let control: any = form.controls[key];
+      const control: any = form.controls[key];
       if (control.required && Helpers.isBlank(form.value[control.key])) {
         control.markAsDirty();
         control.markAsTouched();
@@ -788,7 +788,7 @@ export class FormUtils {
   }
 
   isAddressEmpty(control: any): boolean {
-    let fieldList: string[] = ['address1', 'address2', 'city', 'state', 'zip', 'countryID'];
+    const fieldList: string[] = ['address1', 'address2', 'city', 'state', 'zip', 'countryID'];
     let valid: boolean = true;
     if (control.value && control.config) {
       fieldList.forEach((subfield: string) => {
@@ -850,7 +850,7 @@ export class FormUtils {
       Object.keys(data)
         .filter((fieldName) => fieldName.includes('.'))
         .forEach((field) => {
-          let [parentFieldName, fieldName] = field.split('.');
+          const [parentFieldName, fieldName] = field.split('.');
           if (!data[parentFieldName]) {
             data[parentFieldName] = {};
           }

@@ -8,8 +8,8 @@ const examplesPath = path.join('./projects/', 'examples');
  * Builds the template for the examples module
  */
 function generateTSTemplate(selector: string): string {
-  let description = convertToSentence(selector);
-  let name = convertToCamelCase(selector);
+  const description = convertToSentence(selector);
+  const name = convertToCamelCase(selector);
   return `
 import {Component} from '@angular/core';
 
@@ -81,22 +81,22 @@ function convertToSentence(name: string): string {
  * Creates the examples files
  */
 const task = () => {
-  let section = process.argv[2];
-  let example = process.argv[3];
-  let selector = `${example}-example`;
-  let dir = path.join(examplesPath, section, example);
+  const section = process.argv[2];
+  const example = process.argv[3];
+  const selector = `${example}-example`;
+  const dir = path.join(examplesPath, section, example);
   fs.mkdirSync(dir);
 
   const tsTmp = generateTSTemplate(selector);
-  let tsOutputFile = path.join(dir, `${selector}.ts`);
+  const tsOutputFile = path.join(dir, `${selector}.ts`);
   fs.writeFileSync(tsOutputFile, tsTmp);
 
   const cssTmp = generateCSSTemplate(selector);
-  let cssOutputFile = path.join(dir, `${selector}.css`);
+  const cssOutputFile = path.join(dir, `${selector}.css`);
   fs.writeFileSync(cssOutputFile, cssTmp);
 
   const htmlTmp = generateHTMLTemplate(selector);
-  let htmlOutputFile = path.join(dir, `${selector}.html`);
+  const htmlOutputFile = path.join(dir, `${selector}.html`);
   fs.writeFileSync(htmlOutputFile, htmlTmp);
 };
 

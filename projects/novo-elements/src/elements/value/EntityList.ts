@@ -66,7 +66,7 @@ export class EntityList implements OnInit {
     this.metaDisplay = Helpers.deepClone(this.meta);
     this.metaDisplay.type = 'TO_ONE';
     this.baseEntity = this.meta.associatedEntity.entity;
-    for (let entity of this.data.data) {
+    for (const entity of this.data.data) {
       entity.isLinkable = this.isLinkable(entity);
       entity.class = this.getClass(entity);
     }

@@ -15,7 +15,7 @@ export class RowChipsExample {
   public rowValue: any;
 
   constructor() {
-    let collaborators = [
+    const collaborators = [
       {
         id: 1,
         firstName: 'Brian',

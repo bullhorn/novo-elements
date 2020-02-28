@@ -225,8 +225,8 @@ export class ArrayCollection<T> implements Collection<T> {
    * @memberOf ArrayCollection
    */
   merge(newData: Array<T>): void {
-    for (let obj of newData) {
-      let existing = ~this.getItemIndex(obj);
+    for (const obj of newData) {
+      const existing = ~this.getItemIndex(obj);
       if (existing) {
         this.replaceItem(obj, existing);
       } else {
@@ -256,7 +256,7 @@ export class ArrayCollection<T> implements Collection<T> {
    * @memberOf ArrayCollection
    */
   removeItem(item: T): boolean {
-    let index = this.getItemIndex(item);
+    const index = this.getItemIndex(item);
     return this.removeItemAt(index);
   }
 
@@ -268,7 +268,7 @@ export class ArrayCollection<T> implements Collection<T> {
    * @memberOf ArrayCollection
    */
   removeItemAt(index: number): boolean {
-    let success = !!this.source.splice(index, 1);
+    const success = !!this.source.splice(index, 1);
     this.refresh();
     return success;
   }
@@ -282,7 +282,7 @@ export class ArrayCollection<T> implements Collection<T> {
    * @memberOf ArrayCollection
    */
   replaceItem(newItem: any, oldItem: any): any {
-    let index = this.getItemIndex(oldItem);
+    const index = this.getItemIndex(oldItem);
     if (index >= 0) {
       this.replaceItemAt(newItem, index);
     }
@@ -352,10 +352,10 @@ export class ArrayCollection<T> implements Collection<T> {
 
   refresh(): void {
     this.filterData = this.isEditing ? this.editData.slice() : this.source.slice();
-    for (let item of this._sort.reverse()) {
+    for (const item of this._sort.reverse()) {
       this.sortOn(item.field, item.reverse);
     }
-    for (let key in this._filter) {
+    for (const key in this._filter) {
       if (key) {
         this.filterOn(key, this._filter[key]);
       }

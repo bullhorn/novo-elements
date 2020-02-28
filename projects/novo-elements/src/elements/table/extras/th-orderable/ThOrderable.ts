@@ -31,7 +31,7 @@ export class ThOrderable implements OnInit {
   get index() {
     let index: number = null;
     if (this.element.nativeElement && this.element.nativeElement.parentNode) {
-      let children: Array<any> = Array.prototype.slice.call(this.element.nativeElement.parentNode.children);
+      const children: Array<any> = Array.prototype.slice.call(this.element.nativeElement.parentNode.children);
       index = children.indexOf(this.element.nativeElement);
     }
     return index;

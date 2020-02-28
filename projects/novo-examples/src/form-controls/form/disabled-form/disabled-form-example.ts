@@ -24,7 +24,7 @@ export class DisabledFormExample {
 
   constructor(private formUtils: FormUtils) {
     // Disabled Form
-    let disabledOverrides: any = {
+    const disabledOverrides: any = {
       address: {
         readOnly: true,
       },

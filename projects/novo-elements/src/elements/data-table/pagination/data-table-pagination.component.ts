@@ -221,7 +221,7 @@ export class NovoDataTablePagination<T> implements OnInit, OnDestroy {
   }
 
   private emitPageEvent(isPageSizeChange: boolean = false): void {
-    let event = {
+    const event = {
       page: this.page,
       pageSize: this.pageSize,
       length: this.length,
@@ -246,14 +246,14 @@ export class NovoDataTablePagination<T> implements OnInit, OnDestroy {
 
   private makePage(number: number, text: string, isActive: boolean): { number: number; text: string; active: boolean } {
     return {
-      number: number,
-      text: text,
+      number,
+      text,
       active: isActive,
     };
   }
 
   private getPages(currentPage: number, totalPages: number): { number: number; text: string; active: boolean }[] {
-    let pages = [];
+    const pages = [];
 
     // Default page limits
     let startPage = 1;

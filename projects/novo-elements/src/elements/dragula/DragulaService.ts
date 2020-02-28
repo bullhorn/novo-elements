@@ -31,8 +31,8 @@ export class NovoDragulaService {
       throw new Error(`Bag named: ${name} already exists.`);
     }
     bag = {
-      name: name,
-      drake: drake,
+      name,
+      drake,
     };
     this.bags.push(bag);
     if (drake.models) {
@@ -63,8 +63,8 @@ export class NovoDragulaService {
    * @param name
    */
   destroy(name) {
-    let bag = this.find(name);
-    let i = this.bags.indexOf(bag);
+    const bag = this.find(name);
+    const i = this.bags.indexOf(bag);
     this.bags.splice(i, 1);
     bag.drake.destroy();
   }
@@ -75,7 +75,7 @@ export class NovoDragulaService {
    * @param options
    */
   setOptions(name, options) {
-    let bag = this.add(name, dragula(options));
+    const bag = this.add(name, dragula(options));
     this.handleModels(name, bag.drake);
   }
 
@@ -110,9 +110,9 @@ export class NovoDragulaService {
       if (target === source) {
         sourceModel.splice(dropIndex, 0, sourceModel.splice(dragIndex, 1)[0]);
       } else {
-        let notCopy = dragElm === dropElm;
-        let targetModel = drake.models[drake.containers.indexOf(target)];
-        let dropElmModel = notCopy ? sourceModel[dragIndex] : JSON.parse(JSON.stringify(sourceModel[dragIndex]));
+        const notCopy = dragElm === dropElm;
+        const targetModel = drake.models[drake.containers.indexOf(target)];
+        const dropElmModel = notCopy ? sourceModel[dragIndex] : JSON.parse(JSON.stringify(sourceModel[dragIndex]));
 
         if (notCopy) {
           sourceModel.splice(dragIndex, 1);
@@ -130,10 +130,10 @@ export class NovoDragulaService {
    */
   setupEvents(bag) {
     bag.initEvents = true;
-    let that = this;
-    let emitter = (type) => {
+    const that = this;
+    const emitter = (type) => {
       function replicate() {
-        let args = Array.prototype.slice.call(arguments);
+        const args = Array.prototype.slice.call(arguments);
         that[type].emit([bag.name].concat(args));
       }
 

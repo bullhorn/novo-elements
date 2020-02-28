@@ -16,7 +16,7 @@ export class BasicMultiPickerExample {
   staticDemo: any;
 
   constructor() {
-    let states = [
+    const states = [
       'Alabama',
       'Alaska',
       'Arizona',
@@ -68,7 +68,7 @@ export class BasicMultiPickerExample {
       'Wisconsin',
       'Wyoming',
     ];
-    let collaborators = [
+    const collaborators = [
       {
         id: 1,
         firstName: 'Brian',
