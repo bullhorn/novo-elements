@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.2.0](https://github.com/bullhorn/novo-elements/compare/v4.0.1...v4.2.0) (2020-03-03)
+
+
+### Features
+
+* **control:** added check that prevents embedded field name being ad… ([#1078](https://github.com/bullhorn/novo-elements/issues/1078)) ([7884699](https://github.com/bullhorn/novo-elements/commit/7884699fc02604d6eeb6881b1e4737d8de41e880))
+* **fieldset:** added key property to fieldset and added FI for fieldset header ([#1081](https://github.com/bullhorn/novo-elements/issues/1081)) ([0f8b3d1](https://github.com/bullhorn/novo-elements/commit/0f8b3d1ca1de525b9a2f7372ae74c023442c0f95))
+* **FormUtils:** Allow distributionLists field to have controls ([#1068](https://github.com/bullhorn/novo-elements/issues/1068)) ([f350cd3](https://github.com/bullhorn/novo-elements/commit/f350cd3ebc7beae455b5ba36f3e96c3e70ab5161))
+* **inlineEmbeddedFields:** Allow inline embedded associated entity f… ([#1080](https://github.com/bullhorn/novo-elements/issues/1080)) ([76d35ce](https://github.com/bullhorn/novo-elements/commit/76d35ce1b1e29cc7625feb3d30e5c6b6917dc06b))
+* **tiles:** enhanced to handle passed options ([#1061](https://github.com/bullhorn/novo-elements/issues/1061)) ([acbeed9](https://github.com/bullhorn/novo-elements/commit/acbeed9d527e0e67a1e21ad1872462c8dd6010f4))
+
+
+### Bug Fixes
+
+* **DataTableSource:** Stop showing empty state when user clears sticky filter with no results ([#1066](https://github.com/bullhorn/novo-elements/issues/1066)) ([1f9fc0e](https://github.com/bullhorn/novo-elements/commit/1f9fc0ecc6ded9326fbc83bfc8c134bcc715b6fd))
+* **Editor:** Fix the creation logic of CKEditor element within dynamic forms ([#1073](https://github.com/bullhorn/novo-elements/issues/1073)) ([0b9e88f](https://github.com/bullhorn/novo-elements/commit/0b9e88faaef83196fc2c546dfa715249a16a51c7))
+* **FormUtils:** Don't allow distributionLists field to have controls ([#1074](https://github.com/bullhorn/novo-elements/issues/1074)) ([fea0d38](https://github.com/bullhorn/novo-elements/commit/fea0d384e477d9a682c3b46bb15de407ba40a613))
+
 ## [4.1.0](https://github.com/bullhorn/novo-elements/compare/v4.0.1...v4.1.0) (2020-02-04)
 
 
