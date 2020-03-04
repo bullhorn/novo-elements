@@ -13,9 +13,10 @@ import { ControlConfirmModal, ControlPromptModal } from './FieldInteractionModal
 import { Helpers } from '../../utils/Helpers';
 import { AppBridge } from '../../utils/app-bridge/AppBridge';
 import { NovoLabelService } from '../../services/novo-label-service';
-import { IFieldInteractionEvent, NovoFieldset } from './FormInterfaces';
+import { IFieldInteractionEvent, NovoFieldset, ResultsTemplateType } from './FormInterfaces';
 import { ModifyPickerConfigArgs, OptionsFunction, CustomHttp } from './FieldInteractionApiTypes';
 import { Observable, Subscription } from 'rxjs';
+import { EntityPickerResults } from '../picker/extras/entity-picker-results/EntityPickerResults';
 
 class CustomHttpImpl implements CustomHttp {
   url: string;
@@ -556,7 +557,14 @@ export class FieldInteractionApi {
 
   public modifyPickerConfig(
     key: string,
-    config: { format?: string; optionsUrl?: string; optionsUrlBuilder?: Function; optionsPromise?: any; options?: any[] },
+    config: {
+      format?: string;
+      optionsUrl?: string;
+      optionsUrlBuilder?: Function;
+      optionsPromise?: any;
+      options?: any[];
+      resultsTemplateType?: ResultsTemplateType;
+    },
     mapper?: any,
   ): void {
     // call another public method to avoid a breaking change but still enable stricter types
@@ -604,21 +612,34 @@ export class FieldInteractionApi {
     filteredOptionsCreator?: (where: string) => (query: string) => Promise<unknown[]>,
     pickerConfigFormat?: string,
   ): undefined | { options: unknown[] } | { options: OptionsFunction; format?: string } => {
+    let optionsConfig = undefined;
     if (filteredOptionsCreator || 'optionsUrl' in args || 'optionsUrlBuilder' in args || 'optionsPromise' in args) {
       const format = ('format' in args && args.format) || pickerConfigFormat;
-      return {
+      optionsConfig = {
         options: this.createOptionsFunction(args, mapper, filteredOptionsCreator),
         ...('emptyPickerMessage' in args && { emptyPickerMessage: args.emptyPickerMessage }),
         ...(format && { format }),
       };
     } else if ('options' in args && Array.isArray(args.options)) {
-      return {
+      optionsConfig = {
         options: [...args.options],
       };
-    } else {
-      return undefined;
     }
+
+    if ('resultsTemplateType' in args) {
+      this.assignAppropriateResultsTemplate(args.resultsTemplateType, optionsConfig);
+    }
+
+    return optionsConfig;
   };
+
+  private assignAppropriateResultsTemplate(resultsTemplateType: ResultsTemplateType, config: { resultsTemplate: any }): void {
+    switch (resultsTemplateType) {
+      case 'entity-picker':
+        config.resultsTemplate = EntityPickerResults;
+        break;
+    }
+  }
 
   createOptionsFunction = (
     config: ModifyPickerConfigArgs,
