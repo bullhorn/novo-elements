@@ -505,7 +505,7 @@ class Formats {
         /** @type {?} */
         const _value = value === null || value === undefined || value === '' ? new Date() : new Date(value);
         /** @type {?} */
-        let options = this.getDateOptions(format);
+        const options = this.getDateOptions(format);
         /** @type {?} */
         const locales = [...(this.overrideDateFormat ? [this.overrideDateFormat] : []), this.locale, 'en-US'];
         return new Intl.DateTimeFormat(locales, options).format(_value);
@@ -519,11 +519,11 @@ class Formats {
         /** @type {?} */
         const _value = (value === null || value === undefined || value === '') ? new Date() : new Date(value);
         /** @type {?} */
-        let options = this.getDateOptions(format);
+        const options = this.getDateOptions(format);
         /** @type {?} */
         const locales = [...(this.overrideDateFormat ? [this.overrideDateFormat] : []), this.locale, 'en-US'];
         /** @type {?} */
-        let timeParts = Intl.DateTimeFormat(locales, options).formatToParts(_value).reduce((/**
+        const timeParts = Intl.DateTimeFormat(locales, options).formatToParts(_value).reduce((/**
          * @param {?} obj
          * @param {?} part
          * @return {?}
@@ -1688,12 +1688,12 @@ class Helpers {
          */
         (original, key) => {
             /** @type {?} */
-            let keys = key.split('.');
+            const keys = key.split('.');
             /** @type {?} */
             let value = props[keys.shift()];
             while (keys.length && value !== undefined) {
                 /** @type {?} */
-                let k = keys.shift();
+                const k = keys.shift();
                 value = k ? value[k] : `${value}.`;
             }
             return value !== undefined ? value : '';
@@ -1711,9 +1711,9 @@ class Helpers {
         // or an empty string
         if (Array.isArray(formatString)) {
             /** @type {?} */
-            let successes = [];
+            const successes = [];
             /** @type {?} */
-            let failures = [];
+            const failures = [];
             formatString.forEach((/**
              * @param {?} format
              * @return {?}
@@ -1722,19 +1722,19 @@ class Helpers {
                 /** @type {?} */
                 let isSuccess = true;
                 /** @type {?} */
-                let attempt = format.replace(/\$([\w\.]+)/g, (/**
+                const attempt = format.replace(/\$([\w\.]+)/g, (/**
                  * @param {?} original
                  * @param {?} key
                  * @return {?}
                  */
                 (original, key) => {
                     /** @type {?} */
-                    let keys = key.split('.');
+                    const keys = key.split('.');
                     /** @type {?} */
                     let value = data[keys.shift()];
                     while (keys.length && value !== undefined) {
                         /** @type {?} */
-                        let k = keys.shift();
+                        const k = keys.shift();
                         value = k ? value[k] : `${value}.`;
                     }
                     if (isSuccess && Helpers.isEmpty(value)) {
@@ -1766,7 +1766,7 @@ class Helpers {
      */
     static validateInterpolationProps(str, props) {
         /** @type {?} */
-        let keys = str.match(/\$([\w\.]+)/g);
+        const keys = str.match(/\$([\w\.]+)/g);
         return keys.every((/**
          * @param {?} key
          * @return {?}
@@ -1880,7 +1880,7 @@ class Helpers {
             }
             for (let i = 0; i < fields.length; i++) {
                 /** @type {?} */
-                let field = fields[i];
+                const field = fields[i];
                 /** @type {?} */
                 let first = previous[field] || '';
                 /** @type {?} */
@@ -1922,7 +1922,7 @@ class Helpers {
          */
         (item) => {
             /** @type {?} */
-            let results = [];
+            const results = [];
             /** @type {?} */
             let field = can(item).have(key);
             if (value instanceof Function) {
@@ -1963,10 +1963,10 @@ class Helpers {
                 if (value.not) {
                     results.push(!Helpers.filterByField(key, value.not)(item));
                 }
-                for (let subkey in value) {
+                for (const subkey in value) {
                     if (['min', 'max', 'any', 'all', 'not'].indexOf(subkey) < 0) {
                         /** @type {?} */
-                        let subvalue = value[subkey];
+                        const subvalue = value[subkey];
                         results.push(Helpers.filterByField(`${key}.${subkey}`, subvalue)(item));
                     }
                 }
@@ -1998,7 +1998,7 @@ class Helpers {
     static deepClone(item) {
         if (Array.isArray(item)) {
             /** @type {?} */
-            let newArr = [];
+            const newArr = [];
             for (let i = item.length; i-- > 0;) {
                 // tslint:disable-line
                 newArr[i] = Helpers.deepClone(item[i]);
@@ -2009,7 +2009,7 @@ class Helpers {
             /** @type {?} */
             let obj;
             eval('obj = ' + item.toString()); // tslint:disable-line
-            for (let k in item) {
+            for (const k in item) {
                 if (k in item) {
                     obj[k] = Helpers.deepClone(item[k]);
                 }
@@ -2018,8 +2018,8 @@ class Helpers {
         }
         if (item && typeof item === 'object') {
             /** @type {?} */
-            let obj = {};
-            for (let k in item) {
+            const obj = {};
+            for (const k in item) {
                 if (k in item) {
                     obj[k] = Helpers.deepClone(item[k]);
                 }
@@ -2122,7 +2122,7 @@ class Helpers {
      */
     static dateToObject(date) {
         /** @type {?} */
-        let dateObj = {
+        const dateObj = {
             day: '',
             dayPeriod: '',
             era: '',
@@ -2169,7 +2169,7 @@ class Can {
      */
     have(key) {
         /** @type {?} */
-        let props = key.split('.');
+        const props = key.split('.');
         /** @type {?} */
         let item = this.obj;
         for (let i = 0; i < props.length; i++) {
@@ -2316,7 +2316,7 @@ class NovoAceEditor {
      */
     initializeEditor() {
         /** @type {?} */
-        let el = this.elementRef.nativeElement;
+        const el = this.elementRef.nativeElement;
         this.editor = ace.edit(el);
         this.editor.$blockScrolling = Infinity;
     }
@@ -2359,9 +2359,9 @@ class NovoAceEditor {
      */
     updateText() {
         /** @type {?} */
-        let newVal = this.editor.getValue();
+        const newVal = this.editor.getValue();
         /** @type {?} */
-        let that = this;
+        const that = this;
         if (newVal === this.oldText) {
             return;
         }
@@ -2478,15 +2478,15 @@ NovoAceEditorModule.decorators = [
 // Rule storage - pluralize and singularize need to be run sequentially,
 // while other rules can be optimized using an object for instant lookups.
 /** @type {?} */
-let pluralRules = [];
+const pluralRules = [];
 /** @type {?} */
-let singularRules = [];
+const singularRules = [];
 /** @type {?} */
-let uncountables = {};
+const uncountables = {};
 /** @type {?} */
-let irregularPlurals = {};
+const irregularPlurals = {};
 /** @type {?} */
-let irregularSingles = {};
+const irregularSingles = {};
 /**
  * Title case a string.
  * @param {?} str
@@ -2558,7 +2558,7 @@ function sanitizeWord(token, word, collection) {
     // Iterate over the sanitization rules and use the first one to match.
     while (len--) {
         /** @type {?} */
-        let rule = collection[len];
+        const rule = collection[len];
         // If the rule passes, return the replacement.
         if (rule[0].test(word)) {
             return word.replace(rule[0], (/**
@@ -2569,7 +2569,7 @@ function sanitizeWord(token, word, collection) {
              */
             (match, index, words) => {
                 /** @type {?} */
-                let result = interpolate(rule[1], [match, index, words]);
+                const result = interpolate(rule[1], [match, index, words]);
                 if (match === '') {
                     return restoreCase(words[index - 1], result);
                 }
@@ -2594,7 +2594,7 @@ function replaceWord(replaceMap, keepMap, rules) {
     (word) => {
         // Get the correct token and case restoration functions.
         /** @type {?} */
-        let token = word.toLowerCase();
+        const token = word.toLowerCase();
         // Check against the keep object map.
         if (keepMap.hasOwnProperty(token)) {
             return restoreCase(word, token);
@@ -2616,7 +2616,7 @@ class Pluralize {
      */
     static pluralize(word, count = 1, inclusive) {
         /** @type {?} */
-        let pluralized = count === 1 ? Pluralize.singular(word) : Pluralize.plural(word);
+        const pluralized = count === 1 ? Pluralize.singular(word) : Pluralize.plural(word);
         return (inclusive ? `${count} ` : '') + pluralized;
     }
     /**
@@ -2669,9 +2669,9 @@ class Pluralize {
      */
     static addIrregularRule(single, plural) {
         /** @type {?} */
-        let one = plural.toLowerCase();
+        const one = plural.toLowerCase();
         /** @type {?} */
-        let many = single.toLowerCase();
+        const many = single.toLowerCase();
         irregularSingles[one] = many;
         irregularPlurals[many] = one;
     }
@@ -3271,7 +3271,7 @@ class NovoIsLoadingDirective {
      */
     destroyViews(views) {
         if (views) {
-            for (let view of views) {
+            for (const view of views) {
                 view.destroy();
             }
         }
@@ -3440,7 +3440,7 @@ class TooltipDirective {
         this.overlayRef.detach();
         this.portal = this.portal || new _angular_cdk_portal__WEBPACK_IMPORTED_MODULE_8__["ComponentPortal"](NovoTooltip, this.viewContainerRef);
         /** @type {?} */
-        let tooltipInstance = this.overlayRef.attach(this.portal).instance;
+        const tooltipInstance = this.overlayRef.attach(this.portal).instance;
         tooltipInstance.message = this.tooltip;
         tooltipInstance.tooltipType = this.type;
         tooltipInstance.rounded = this.rounded;
@@ -3793,7 +3793,7 @@ class NovoLabelService {
      */
     formatDateWithFormat(value, format) {
         /** @type {?} */
-        let date = value instanceof Date ? value : new Date(value);
+        const date = value instanceof Date ? value : new Date(value);
         if (date.getTime() !== date.getTime()) {
             return value;
         }
@@ -3806,12 +3806,12 @@ class NovoLabelService {
      */
     formatTimeWithFormat(value, format) {
         /** @type {?} */
-        let date = value instanceof Date ? value : new Date(value);
+        const date = value instanceof Date ? value : new Date(value);
         if (date.getTime() !== date.getTime()) {
             return value;
         }
         /** @type {?} */
-        let timeParts = Intl.DateTimeFormat(this.userLocale, format)
+        const timeParts = Intl.DateTimeFormat(this.userLocale, format)
             .formatToParts(date)
             .reduce((/**
          * @param {?} obj
@@ -3836,7 +3836,7 @@ class NovoLabelService {
          */
         function getDay(dayOfWeek) {
             /** @type {?} */
-            let dt = new Date();
+            const dt = new Date();
             return dt.setDate(dt.getDate() - dt.getDay() + dayOfWeek);
         }
         return [getDay(0), getDay(1), getDay(2), getDay(3), getDay(4), getDay(5), getDay(6)].reduce((/**
@@ -3859,7 +3859,7 @@ class NovoLabelService {
          */
         function getMonth(month) {
             /** @type {?} */
-            let dt = new Date();
+            const dt = new Date();
             return dt.setMonth(month, 1);
         }
         return [
@@ -3917,7 +3917,7 @@ class NovoLabelService {
      */
     formatCurrency(value) {
         /** @type {?} */
-        let options = { style: 'currency', currency: 'USD' };
+        const options = { style: 'currency', currency: 'USD' };
         return new Intl.NumberFormat(this.userLocale, options).format(value);
     }
     /**
@@ -3959,7 +3959,7 @@ class NovoLabelService {
      */
     formatDateShort(value) {
         /** @type {?} */
-        let options = {
+        const options = {
             // DD/MM/YYYY, HH:MM A - 02/14/2017, 1:17 PM
             month: '2-digit',
             day: '2-digit',
@@ -3968,7 +3968,7 @@ class NovoLabelService {
             minute: '2-digit',
         };
         /** @type {?} */
-        let _value = value === null || value === undefined || value === '' ? new Date() : new Date(value);
+        const _value = value === null || value === undefined || value === '' ? new Date() : new Date(value);
         return new Intl.DateTimeFormat(this.userLocale, options).format(_value);
     }
     /**
@@ -3977,13 +3977,13 @@ class NovoLabelService {
      */
     formatTime(value) {
         /** @type {?} */
-        let options = {
+        const options = {
             // HH:MM A - 1:17 PM
             hour: 'numeric',
             minute: '2-digit',
         };
         /** @type {?} */
-        let _value = value === null || value === undefined || value === '' ? new Date() : new Date(value);
+        const _value = value === null || value === undefined || value === '' ? new Date() : new Date(value);
         return new Intl.DateTimeFormat(this.userLocale, options).format(_value);
     }
     /**
@@ -3992,14 +3992,14 @@ class NovoLabelService {
      */
     formatDate(value) {
         /** @type {?} */
-        let options = {
+        const options = {
             // DD/MM/YYYY - 02/14/2017
             month: '2-digit',
             day: '2-digit',
             year: 'numeric',
         };
         /** @type {?} */
-        let _value = value === null || value === undefined || value === '' ? new Date() : new Date(value);
+        const _value = value === null || value === undefined || value === '' ? new Date() : new Date(value);
         return new Intl.DateTimeFormat(this.userLocale, options).format(_value);
     }
 }
@@ -4052,9 +4052,9 @@ class CardElement {
         this.config = this.config || {};
         this.cardAutomationId = `${(this.title || this.config.title || 'no-title').toLowerCase().replace(/\s/g, '-')}-card`;
         /** @type {?} */
-        let newIcon = this.icon || this.config.icon;
+        const newIcon = this.icon || this.config.icon;
         /** @type {?} */
-        let newMessageIcon = this.messageIcon || this.config.messageIcon;
+        const newMessageIcon = this.messageIcon || this.config.messageIcon;
         this.iconClass = newIcon ? `bhi-${newIcon}` : null;
         this.messageIconClass = newMessageIcon ? `bhi-${newMessageIcon}` : null;
     }
@@ -4653,7 +4653,7 @@ function getWeekView({ events = [], viewDate, weekStartsOn, excluded = [], hourS
             }));
             if (otherRowEvents.length > 0) {
                 /** @type {?} */
-                let totalEventsForRow = otherRowEvents.length + 1;
+                const totalEventsForRow = otherRowEvents.length + 1;
                 event.span = 1 / totalEventsForRow;
                 /** @type {?} */
                 let nextOffset = event.span + event.offset;
@@ -6797,7 +6797,7 @@ class NovoNavElement {
         }
         // TODO - remove hack to make DOM rerender - jgodi
         /** @type {?} */
-        let element = (/** @type {?} */ (document.querySelector('novo-tab-link.active span.indicator')));
+        const element = (/** @type {?} */ (document.querySelector('novo-tab-link.active span.indicator')));
         if (element) {
             element.style.opacity = 0.99;
             setTimeout((/**
@@ -6974,7 +6974,7 @@ class NovoNavOutletElement {
      */
     show(index) {
         /** @type {?} */
-        let item = this.items[index];
+        const item = this.items[index];
         /**
          * Deactivates other tab items
          * @param {?} items - deactivated items
@@ -7193,7 +7193,7 @@ class NovoTilesElement {
              */
             (x) => {
                 /** @type {?} */
-                let item = { value: x, label: x, checked: this.model === x };
+                const item = { value: x, label: x, checked: this.model === x };
                 if (item.checked) {
                     this.setTile(item);
                 }
@@ -7230,7 +7230,7 @@ class NovoTilesElement {
                 this.onSelectedOptionClick.emit(item);
                 return;
             }
-            for (let option of this._options) {
+            for (const option of this._options) {
                 option.checked = false;
             }
             item.checked = !item.checked;
@@ -7263,14 +7263,14 @@ class NovoTilesElement {
          */
         () => {
             /** @type {?} */
-            let ind = this.element.nativeElement.querySelector('.active-indicator');
+            const ind = this.element.nativeElement.querySelector('.active-indicator');
             /** @type {?} */
-            let el = this.element.nativeElement.querySelector('.tile.active');
+            const el = this.element.nativeElement.querySelector('.tile.active');
             if (ind && el) {
                 /** @type {?} */
-                let w = el.clientWidth;
+                const w = el.clientWidth;
                 /** @type {?} */
-                let left = el.offsetLeft - el.offsetTop;
+                const left = el.offsetLeft - el.offsetTop;
                 ind.style.width = `calc(${w}px + 0.32em)`;
                 ind.style.left = `${left}px`;
                 this.state = 'active';
@@ -8048,7 +8048,7 @@ class BasePickerResults {
      */
     cleanUp() {
         /** @type {?} */
-        let element = this.getListElement();
+        const element = this.getListElement();
         if (element && element.hasAttribute('scrollListener')) {
             element.removeAttribute('scrollListener');
             element.removeEventListener('scroll', this.scrollHandler);
@@ -8060,12 +8060,12 @@ class BasePickerResults {
      */
     onScrollDown(event) {
         /** @type {?} */
-        let element = event.target;
+        const element = event.target;
         if (element) {
             /** @type {?} */
-            let offset = element.offsetHeight + element.scrollTop;
+            const offset = element.offsetHeight + element.scrollTop;
             /** @type {?} */
-            let bottom = element.scrollHeight - 300;
+            const bottom = element.scrollHeight - 300;
             if (offset >= bottom) {
                 event.stopPropagation();
                 if (!this.lastPage && !this.isLoading) {
@@ -8129,7 +8129,7 @@ class BasePickerResults {
     addScrollListener() {
         if (this.config.enableInfiniteScroll) {
             /** @type {?} */
-            let element = this.getListElement();
+            const element = this.getListElement();
             if (element && !element.hasAttribute('scrollListener')) {
                 element.setAttribute('scrollListener', 'true');
                 element.addEventListener('scroll', this.scrollHandler);
@@ -8192,7 +8192,7 @@ class BasePickerResults {
      */
     search(term, mode) {
         /** @type {?} */
-        let options = this.config.options;
+        const options = this.config.options;
         return Object(rxjs__WEBPACK_IMPORTED_MODULE_11__["from"])(new Promise((/**
          * @param {?} resolve
          * @param {?} reject
@@ -8232,7 +8232,7 @@ class BasePickerResults {
                         this.isStatic = false;
                         if (typeof this.config.defaultOptions === 'function') {
                             /** @type {?} */
-                            let defaultOptions = this.config.defaultOptions(term, ++this.page);
+                            const defaultOptions = this.config.defaultOptions(term, ++this.page);
                             if (Object.getPrototypeOf(defaultOptions).hasOwnProperty('then')) {
                                 defaultOptions.then(this.structureArray.bind(this)).then(resolve, reject);
                             }
@@ -8278,7 +8278,7 @@ class BasePickerResults {
      */
     structureArray(collection) {
         /** @type {?} */
-        let dataArray = collection.data ? collection.data : collection;
+        const dataArray = collection.data ? collection.data : collection;
         if (dataArray && (typeof dataArray[0] === 'string' || typeof dataArray[0] === 'number')) {
             return collection.map((/**
              * @param {?} item
@@ -8302,7 +8302,7 @@ class BasePickerResults {
                 value = Helpers.interpolate(this.config.valueFormat, data);
             }
             /** @type {?} */
-            let label = this.config.format ? Helpers.interpolate(this.config.format, data) : data.label || String(value);
+            const label = this.config.format ? Helpers.interpolate(this.config.format, data) : data.label || String(value);
             return { value, label, data };
         }));
     }
@@ -8346,7 +8346,7 @@ class BasePickerResults {
      */
     prevActiveMatch() {
         /** @type {?} */
-        let index = this.matches.indexOf(this.activeMatch);
+        const index = this.matches.indexOf(this.activeMatch);
         this.activeMatch = this.matches[index - 1 < 0 ? this.matches.length - 1 : index - 1];
         this.scrollToActive();
         this.ref.markForCheck();
@@ -8359,7 +8359,7 @@ class BasePickerResults {
      */
     nextActiveMatch() {
         /** @type {?} */
-        let index = this.matches.indexOf(this.activeMatch);
+        const index = this.matches.indexOf(this.activeMatch);
         this.activeMatch = this.matches[index + 1 > this.matches.length - 1 ? 0 : index + 1];
         this.scrollToActive();
         this.ref.markForCheck();
@@ -8386,13 +8386,13 @@ class BasePickerResults {
      */
     scrollToActive() {
         /** @type {?} */
-        let list = this.getListElement();
+        const list = this.getListElement();
         /** @type {?} */
-        let items = this.getChildrenOfListElement();
+        const items = this.getChildrenOfListElement();
         /** @type {?} */
-        let index = this.matches.indexOf(this.activeMatch);
+        const index = this.matches.indexOf(this.activeMatch);
         /** @type {?} */
-        let item = items[index];
+        const item = items[index];
         if (item) {
             list.scrollTop = item.offsetTop;
         }
@@ -8474,7 +8474,7 @@ class BasePickerResults {
     preselected(match) {
         if (this.config.preselected) {
             /** @type {?} */
-            let preselectedFunc = this.config.preselected;
+            const preselectedFunc = this.config.preselected;
             return (this.selected.findIndex((/**
              * @param {?} item
              * @return {?}
@@ -8643,7 +8643,7 @@ class QuickNoteResults extends PickerResults {
      */
     search(term, taggingMode) {
         /** @type {?} */
-        let searchCall = this.config.options[taggingMode];
+        const searchCall = this.config.options[taggingMode];
         return Object(rxjs__WEBPACK_IMPORTED_MODULE_11__["from"])(new Promise((/**
          * @param {?} resolve
          * @param {?} reject
@@ -8710,9 +8710,9 @@ class QuickNoteResults extends PickerResults {
          */
         (data) => {
             /** @type {?} */
-            let value = this.config.field ? data[this.config.field[this.taggingMode]] : data.value || data;
+            const value = this.config.field ? data[this.config.field[this.taggingMode]] : data.value || data;
             /** @type {?} */
-            let label = this.config.format ? Helpers.interpolate(this.config.format[this.taggingMode], data) : data.label || String(value);
+            const label = this.config.format ? Helpers.interpolate(this.config.format[this.taggingMode], data) : data.label || String(value);
             return { value, label, data };
         }));
     }
@@ -8729,7 +8729,7 @@ class QuickNoteResults extends PickerResults {
             event.preventDefault();
         }
         /** @type {?} */
-        let selected = this.activeMatch;
+        const selected = this.activeMatch;
         if (selected) {
             this.parent.onSelected(this.taggingMode, selected);
             this.parent.hideResults();
@@ -9062,14 +9062,14 @@ class QuickNoteElement extends OutsideClick {
             else {
                 // Loop through all triggers and turn on tagging mode if the user just pressed a trigger character
                 /** @type {?} */
-                let triggers = this.config.triggers || {};
+                const triggers = this.config.triggers || {};
                 Object.keys(triggers).forEach((/**
                  * @param {?} key
                  * @return {?}
                  */
                 (key) => {
                     /** @type {?} */
-                    let trigger = triggers[key] || {};
+                    const trigger = triggers[key] || {};
                     if (event.key === trigger) {
                         this.isTagging = true;
                         this.taggingMode = key;
@@ -9091,7 +9091,7 @@ class QuickNoteElement extends OutsideClick {
         let value = this.ckeInstance.getData();
         // Remove empty 'ZERO WIDTH SPACE' characters that can get added erroneously by the editor
         /** @type {?} */
-        let regex = new RegExp(String.fromCharCode(8203), 'g');
+        const regex = new RegExp(String.fromCharCode(8203), 'g');
         value = value.replace(regex, '');
         // Make sure that any references in the model are still valid
         this.validateReferences();
@@ -9121,13 +9121,13 @@ class QuickNoteElement extends OutsideClick {
     showResults() {
         if (this.isTagging) {
             /** @type {?} */
-            let searchTerm = this.getSearchTerm();
+            const searchTerm = this.getSearchTerm();
             if (searchTerm.length) {
                 // Update Matches
                 if (this.quickNoteResults) {
                     // Update existing list
                     this.quickNoteResults.instance.term = {
-                        searchTerm: searchTerm,
+                        searchTerm,
                         taggingMode: this.taggingMode,
                     };
                 }
@@ -9137,7 +9137,7 @@ class QuickNoteElement extends OutsideClick {
                     this.quickNoteResults.instance.parent = this;
                     this.quickNoteResults.instance.config = this.config;
                     this.quickNoteResults.instance.term = {
-                        searchTerm: searchTerm,
+                        searchTerm,
                         taggingMode: this.taggingMode,
                     };
                     this.positionResultsDropdown();
@@ -9177,17 +9177,17 @@ class QuickNoteElement extends OutsideClick {
         this.isTagging = false;
         // Replace searchTerm with link
         /** @type {?} */
-        let symbol = this.config.triggers[taggingMode];
+        const symbol = this.config.triggers[taggingMode];
         /** @type {?} */
-        let renderer = this.getRenderer(taggingMode);
+        const renderer = this.getRenderer(taggingMode);
         /** @type {?} */
-        let renderedText = renderer(symbol, selected);
+        const renderedText = renderer(symbol, selected);
         this.replaceWordAtCursor(renderedText);
         // Add the new reference, if it doesn't already exist
         this.model.references = this.model.references || {};
         this.model.references[taggingMode] = this.model.references[taggingMode] || [];
         /** @type {?} */
-        let matchingItems = this.model.references[taggingMode].filter((/**
+        const matchingItems = this.model.references[taggingMode].filter((/**
          * @param {?} item
          * @return {?}
          */
@@ -9209,7 +9209,7 @@ class QuickNoteElement extends OutsideClick {
         let word = this.getWordAtCursor().trim();
         if (this.isTagging) {
             /** @type {?} */
-            let symbol = this.config.triggers[this.taggingMode];
+            const symbol = this.config.triggers[this.taggingMode];
             if (!word.includes(symbol)) {
                 this.hideResults();
                 return '';
@@ -9227,19 +9227,19 @@ class QuickNoteElement extends OutsideClick {
      */
     getWordAtCursor() {
         /** @type {?} */
-        let range = this.ckeInstance.getSelection().getRanges()[0];
+        const range = this.ckeInstance.getSelection().getRanges()[0];
         /** @type {?} */
-        let start = range.startContainer;
+        const start = range.startContainer;
         if (start.type === CKEDITOR.NODE_TEXT && range.startOffset) {
             /** @type {?} */
-            let text = start.getText();
+            const text = start.getText();
             /** @type {?} */
-            let symbol = this.config.triggers[this.taggingMode];
+            const symbol = this.config.triggers[this.taggingMode];
             /** @type {?} */
             let wordStart = text.lastIndexOf(symbol, range.startOffset - 1);
             if (wordStart > 0) {
                 /** @type {?} */
-                let beforeSymbol = text.charAt(wordStart - 1);
+                const beforeSymbol = text.charAt(wordStart - 1);
                 // We don't want to trigger the lookup call unless the symbol was preceded by whitespace
                 if (beforeSymbol !== '\u200B' && /\S/.test(beforeSymbol)) {
                     return '';
@@ -9273,22 +9273,22 @@ class QuickNoteElement extends OutsideClick {
      */
     replaceWordAtCursor(newWord) {
         /** @type {?} */
-        let originalWord = this.getWordAtCursor().trim();
+        const originalWord = this.getWordAtCursor().trim();
         /** @type {?} */
-        let range = this.ckeInstance.getSelection().getRanges()[0];
+        const range = this.ckeInstance.getSelection().getRanges()[0];
         /** @type {?} */
-        let start = range.startContainer;
+        const start = range.startContainer;
         /** @type {?} */
-        let parentNode = start.getParent();
+        const parentNode = start.getParent();
         if (start.type === CKEDITOR.NODE_TEXT && parentNode) {
             /** @type {?} */
-            let line = parentNode.getHtml();
+            const line = parentNode.getHtml();
             /** @type {?} */
-            let index = line.lastIndexOf(originalWord);
+            const index = line.lastIndexOf(originalWord);
             if (index >= 0) {
                 // Add a space after the replaced word so that multiple references can be added back to back
                 /** @type {?} */
-                let newLine = line.substring(0, index) + newWord + ' ' + line.substring(index + originalWord.length);
+                const newLine = line.substring(0, index) + newWord + ' ' + line.substring(index + originalWord.length);
                 parentNode.setHtml(newLine);
                 // Place selection at the end of the line
                 range.moveToPosition(parentNode, CKEDITOR.POSITION_BEFORE_END);
@@ -9307,7 +9307,7 @@ class QuickNoteElement extends OutsideClick {
         // CKEditor stopped supporting the config.forceSimpleAmpersand setting, so we have to convert '&amp;' to '&'
         // when we pull html from the editor - see: https://dev.ckeditor.com/ticket/13723
         /** @type {?} */
-        let ampRegex = new RegExp('&amp;', 'g');
+        const ampRegex = new RegExp('&amp;', 'g');
         html = html.replace(ampRegex, '&');
         Object.keys(this.model.references).forEach((/**
          * @param {?} taggingMode
@@ -9315,18 +9315,18 @@ class QuickNoteElement extends OutsideClick {
          */
         (taggingMode) => {
             /** @type {?} */
-            let array = this.model.references[taggingMode] || [];
+            const array = this.model.references[taggingMode] || [];
             /** @type {?} */
-            let symbol = this.config.triggers[taggingMode];
+            const symbol = this.config.triggers[taggingMode];
             /** @type {?} */
-            let renderer = this.getRenderer(taggingMode);
+            const renderer = this.getRenderer(taggingMode);
             this.model.references[taggingMode] = array.filter((/**
              * @param {?} item
              * @return {?}
              */
             (item) => {
                 /** @type {?} */
-                let renderedText = renderer(symbol, item);
+                const renderedText = renderer(symbol, item);
                 return html.includes(renderedText);
             }));
             // If no references, then delete the key
@@ -9348,7 +9348,7 @@ class QuickNoteElement extends OutsideClick {
         // Use the height of the wrapper element to set the initial height of the editor, then
         // set it to 100% to allow the editor to resize using the grippy.
         /** @type {?} */
-        let editorHeight = this.wrapper.nativeElement.clientHeight - QuickNoteElement.TOOLBAR_HEIGHT;
+        const editorHeight = this.wrapper.nativeElement.clientHeight - QuickNoteElement.TOOLBAR_HEIGHT;
         this.wrapper.nativeElement.style.setProperty('height', '100%');
         return {
             enterMode: CKEDITOR.ENTER_BR,
@@ -9386,21 +9386,21 @@ class QuickNoteElement extends OutsideClick {
      */
     getCursorPosition() {
         /** @type {?} */
-        let range = this.ckeInstance.getSelection().getRanges()[0];
+        const range = this.ckeInstance.getSelection().getRanges()[0];
         /** @type {?} */
-        let parentElement = range.startContainer.$.parentElement;
+        const parentElement = range.startContainer.$.parentElement;
         /** @type {?} */
-        let editorElement = this.ckeInstance.editable().$;
+        const editorElement = this.ckeInstance.editable().$;
         // Since the editor is a text node in the DOM that does not know about it's position, a temporary element has to
         // be inserted in order to locate the cursor position.
         /** @type {?} */
-        let cursorElement = document.createElement('img');
+        const cursorElement = document.createElement('img');
         cursorElement.setAttribute('src', 'null');
         cursorElement.setAttribute('width', '0');
         cursorElement.setAttribute('height', '0');
         parentElement.appendChild(cursorElement);
         /** @type {?} */
-        let cursorPosition = {
+        const cursorPosition = {
             top: cursorElement.offsetTop - editorElement.scrollTop,
             left: cursorElement.offsetLeft - editorElement.scrollLeft,
         };
@@ -9418,7 +9418,7 @@ class QuickNoteElement extends OutsideClick {
         /** @type {?} */
         const MAX_MARGIN_TOP = this.getContentHeight() + QuickNoteElement.TOOLBAR_HEIGHT;
         /** @type {?} */
-        let cursorPosition = this.getCursorPosition();
+        const cursorPosition = this.getCursorPosition();
         /** @type {?} */
         let marginTop = cursorPosition.top + QuickNoteElement.TOOLBAR_HEIGHT;
         // Check that the margin is within the visible bounds
@@ -9440,7 +9440,7 @@ class QuickNoteElement extends OutsideClick {
             this.ckeInstance.ui.contentsElement.$ &&
             this.ckeInstance.ui.contentsElement.$.style) {
             /** @type {?} */
-            let cssText = this.ckeInstance.ui.contentsElement.$.style.cssText;
+            const cssText = this.ckeInstance.ui.contentsElement.$.style.cssText;
             if (cssText.indexOf('height: ') !== -1) {
                 /** @type {?} */
                 let height = cssText.split('height: ')[1];
@@ -9906,8 +9906,8 @@ class NovoOverlayTemplateComponent {
                 .withFallbackPosition({ originX: 'start', originY: 'top' }, { overlayX: 'start', overlayY: 'top' })
                 .withFallbackPosition({ originX: 'start', originY: 'bottom' }, { overlayX: 'start', overlayY: 'bottom' });
         }
-        let [originX, fallbackX] = this.position.includes('right') ? ['end', 'start'] : ['start', 'end'];
-        let [originY, overlayY] = this.position.includes('top') ? ['top', 'bottom'] : ['bottom', 'top'];
+        const [originX, fallbackX] = this.position.includes('right') ? ['end', 'start'] : ['start', 'end'];
+        const [originY, overlayY] = this.position.includes('top') ? ['top', 'bottom'] : ['bottom', 'top'];
         /** @type {?} */
         let strategy = this.overlay
             .position()
@@ -9923,7 +9923,7 @@ class NovoOverlayTemplateComponent {
                 .withFallbackPosition({ originX: fallbackX, originY: 'top' }, { overlayX: fallbackX, overlayY: 'bottom' });
             if (!this.position.includes('above-below')) {
                 strategy = strategy
-                    .withFallbackPosition({ originX: originX, originY: 'center' }, { overlayX: originX, overlayY: 'center' })
+                    .withFallbackPosition({ originX, originY: 'center' }, { overlayX: originX, overlayY: 'center' })
                     .withFallbackPosition({ originX: fallbackX, originY: 'center' }, { overlayX: fallbackX, overlayY: 'center' });
             }
         }
@@ -10062,7 +10062,7 @@ class NovoDropdownElement {
         }
         // Add a click handler to the button to toggle the menu
         /** @type {?} */
-        let button = this.element.nativeElement.querySelector('button');
+        const button = this.element.nativeElement.querySelector('button');
         button.addEventListener('click', this.clickHandler);
         if (this.parentScrollSelector) {
             this.parentScrollElement = Helpers.findAncestor(this.element.nativeElement, this.parentScrollSelector);
@@ -10074,7 +10074,7 @@ class NovoDropdownElement {
     ngOnDestroy() {
         // Remove listener
         /** @type {?} */
-        let button = this.element.nativeElement.querySelector('button');
+        const button = this.element.nativeElement.querySelector('button');
         if (button) {
             button.removeEventListener('click', this.clickHandler);
         }
@@ -10205,10 +10205,10 @@ class NovoDropdownElement {
                 this.filterTerm = '';
             }), 2000);
             /** @type {?} */
-            let char = String.fromCharCode(event.keyCode);
+            const char = String.fromCharCode(event.keyCode);
             this.filterTerm = this.filterTerm.concat(char);
             /** @type {?} */
-            let index = this._textItems.findIndex((/**
+            const index = this._textItems.findIndex((/**
              * @param {?} value
              * @return {?}
              */
@@ -10253,9 +10253,9 @@ class NovoDropdownElement {
      */
     scrollToActive() {
         /** @type {?} */
-        let container = this.overlay.overlayRef.overlayElement.querySelector('.dropdown-container');
+        const container = this.overlay.overlayRef.overlayElement.querySelector('.dropdown-container');
         /** @type {?} */
-        let item = this._items.toArray()[this.activeIndex];
+        const item = this._items.toArray()[this.activeIndex];
         if (container && item) {
             container.scrollTop = item.element.nativeElement.offsetTop;
         }
@@ -10514,13 +10514,13 @@ class NovoSelectElement {
         }
         else if (this.createdItem) {
             /** @type {?} */
-            let item = this.options.find((/**
+            const item = this.options.find((/**
              * @param {?} i
              * @return {?}
              */
             (i) => i.label === this.createdItem));
             /** @type {?} */
-            let index = this.options.indexOf(item);
+            const index = this.options.indexOf(item);
             this.select(item, index);
         }
         else {
@@ -10690,10 +10690,10 @@ class NovoSelectElement {
                 this.filterTerm = '';
             }), 2000);
             /** @type {?} */
-            let char = String.fromCharCode(event.keyCode);
+            const char = String.fromCharCode(event.keyCode);
             this.filterTerm = this.filterTerm.concat(char);
             /** @type {?} */
-            let item = this.filteredOptions.find((/**
+            const item = this.filteredOptions.find((/**
              * @param {?} i
              * @return {?}
              */
@@ -10726,13 +10726,13 @@ class NovoSelectElement {
      */
     scrollToIndex(index) {
         /** @type {?} */
-        let element = this.overlay.overlayRef.overlayElement;
+        const element = this.overlay.overlayRef.overlayElement;
         /** @type {?} */
-        let list = element.querySelector('.novo-select-list');
+        const list = element.querySelector('.novo-select-list');
         /** @type {?} */
-        let items = list.querySelectorAll('li');
+        const items = list.querySelectorAll('li');
         /** @type {?} */
-        let item = items[this.headerConfig ? index + 1 : index];
+        const item = items[this.headerConfig ? index + 1 : index];
         if (item) {
             list.scrollTop = item.offsetTop;
         }
@@ -11819,7 +11819,7 @@ class ChecklistPickerResults extends BasePickerResults {
      */
     search() {
         /** @type {?} */
-        let options = this.config.options;
+        const options = this.config.options;
         // only set this the first time
         return Object(rxjs__WEBPACK_IMPORTED_MODULE_11__["from"])(new Promise((/**
          * @param {?} resolve
@@ -11863,7 +11863,7 @@ class ChecklistPickerResults extends BasePickerResults {
              */
             (section) => {
                 /** @type {?} */
-                let items = section.originalData.filter((/**
+                const items = section.originalData.filter((/**
                  * @param {?} match
                  * @return {?}
                  */
@@ -11908,7 +11908,7 @@ class ChecklistPickerResults extends BasePickerResults {
             item.checked = !item.checked;
         }
         /** @type {?} */
-        let selected = this.activeMatch;
+        const selected = this.activeMatch;
         if (selected) {
             this.parent.value = selected;
         }
@@ -12066,7 +12066,7 @@ class GroupedMultiPickerResults extends BasePickerResults {
         if (this.config.displayAll) {
             this.selectedCategory = { value: 'all', label: 'all' };
             /** @type {?} */
-            let allItems = [];
+            const allItems = [];
             Array.from(this.config.categoryMap.values())
                 .filter((/**
              * @param {?} category
@@ -12096,7 +12096,7 @@ class GroupedMultiPickerResults extends BasePickerResults {
         this.inputElement.nativeElement.focus();
         // Find new items
         /** @type {?} */
-        let key = category.value;
+        const key = category.value;
         this.selectedCategory = category;
         // Clear
         this.matches = [];
@@ -12136,7 +12136,7 @@ class GroupedMultiPickerResults extends BasePickerResults {
         if (this.selectCategory) {
             // Find new items
             /** @type {?} */
-            let key = this.selectedCategory.value;
+            const key = this.selectedCategory.value;
             // Get new matches
             this.getNewMatches(this.selectedCategory, key);
             this.ref.markForCheck();
@@ -12186,7 +12186,7 @@ class GroupedMultiPickerResults extends BasePickerResults {
                  * @return {?}
                  */
                 (items) => {
-                    this.internalMap.set(key, { value: category.value, label: category.label, items: items });
+                    this.internalMap.set(key, { value: category.value, label: category.label, items });
                     this.matches = this.filter(items, true);
                     this.isLoading = false;
                     this.ref.markForCheck();
@@ -12598,7 +12598,7 @@ class NovoSearchBoxElement {
              */
             () => {
                 /** @type {?} */
-                let element = this.input.nativeElement;
+                const element = this.input.nativeElement;
                 if (element) {
                     element.focus();
                 }
@@ -12858,8 +12858,8 @@ class NovoDragulaService {
             throw new Error(`Bag named: ${name} already exists.`);
         }
         bag = {
-            name: name,
-            drake: drake,
+            name,
+            drake,
         };
         this.bags.push(bag);
         if (drake.models) {
@@ -12891,9 +12891,9 @@ class NovoDragulaService {
      */
     destroy(name) {
         /** @type {?} */
-        let bag = this.find(name);
+        const bag = this.find(name);
         /** @type {?} */
-        let i = this.bags.indexOf(bag);
+        const i = this.bags.indexOf(bag);
         this.bags.splice(i, 1);
         bag.drake.destroy();
     }
@@ -12905,7 +12905,7 @@ class NovoDragulaService {
      */
     setOptions(name, options) {
         /** @type {?} */
-        let bag = this.add(name, dragula(options));
+        const bag = this.add(name, dragula(options));
         this.handleModels(name, bag.drake);
     }
     /**
@@ -12962,11 +12962,11 @@ class NovoDragulaService {
             }
             else {
                 /** @type {?} */
-                let notCopy = dragElm === dropElm;
+                const notCopy = dragElm === dropElm;
                 /** @type {?} */
-                let targetModel = drake.models[drake.containers.indexOf(target)];
+                const targetModel = drake.models[drake.containers.indexOf(target)];
                 /** @type {?} */
-                let dropElmModel = notCopy ? sourceModel[dragIndex] : JSON.parse(JSON.stringify(sourceModel[dragIndex]));
+                const dropElmModel = notCopy ? sourceModel[dragIndex] : JSON.parse(JSON.stringify(sourceModel[dragIndex]));
                 if (notCopy) {
                     sourceModel.splice(dragIndex, 1);
                 }
@@ -12984,9 +12984,9 @@ class NovoDragulaService {
     setupEvents(bag) {
         bag.initEvents = true;
         /** @type {?} */
-        let that = this;
+        const that = this;
         /** @type {?} */
-        let emitter = (/**
+        const emitter = (/**
          * @param {?} type
          * @return {?}
          */
@@ -12996,7 +12996,7 @@ class NovoDragulaService {
              */
             function replicate() {
                 /** @type {?} */
-                let args = Array.prototype.slice.call(arguments);
+                const args = Array.prototype.slice.call(arguments);
                 that[type].emit([bag.name].concat(args));
             }
             bag.drake.on(type, replicate);
@@ -13040,7 +13040,7 @@ class NovoDragulaElement {
      */
     ngOnInit() {
         /** @type {?} */
-        let bag = this.dragulaService.find(this.bag);
+        const bag = this.dragulaService.find(this.bag);
         if (bag) {
             this.drake = bag.drake;
             this.checkModel();
@@ -13076,7 +13076,7 @@ class NovoDragulaElement {
             if (this.drake) {
                 if (this.drake.models) {
                     /** @type {?} */
-                    let modelIndex = this.drake.models.indexOf(changes.dragulaModel.previousValue);
+                    const modelIndex = this.drake.models.indexOf(changes.dragulaModel.previousValue);
                     this.drake.models.splice(modelIndex, 1, changes.dragulaModel.currentValue);
                 }
                 else {
@@ -13406,8 +13406,8 @@ class NovoChipsElement {
         this.items = [];
         if (this.model && Array.isArray(this.model)) {
             /** @type {?} */
-            let noLabels = [];
-            for (let value of this.model) {
+            const noLabels = [];
+            for (const value of this.model) {
                 /** @type {?} */
                 let label;
                 if (this.source && this.source.format && Helpers.validateInterpolationProps(this.source.format, value)) {
@@ -13441,7 +13441,7 @@ class NovoChipsElement {
                  * @return {?}
                  */
                 (result) => {
-                    for (let value of result) {
+                    for (const value of result) {
                         if (value.hasOwnProperty('label')) {
                             this.items.push({
                                 value,
@@ -13468,7 +13468,7 @@ class NovoChipsElement {
      */
     getLabelFromOptions(value) {
         /** @type {?} */
-        let optLabel = this.source.options.find((/**
+        const optLabel = this.source.options.find((/**
          * @param {?} val
          * @return {?}
          */
@@ -13536,7 +13536,7 @@ class NovoChipsElement {
             (i) => i.value));
             // Set focus on the picker
             /** @type {?} */
-            let input = this.element.nativeElement.querySelector('novo-picker > input');
+            const input = this.element.nativeElement.querySelector('novo-picker > input');
             if (input) {
                 input.focus();
             }
@@ -13898,11 +13898,11 @@ class NovoDatePickerElement {
     ngOnInit() {
         // Determine the year array
         /** @type {?} */
-        let now = new Date();
+        const now = new Date();
         /** @type {?} */
-        let start = this.minYear ? Number(this.minYear) : now.getFullYear() - 100;
+        const start = this.minYear ? Number(this.minYear) : now.getFullYear() - 100;
         /** @type {?} */
-        let end = this.maxYear ? Number(this.maxYear) : now.getFullYear() + 10;
+        const end = this.maxYear ? Number(this.maxYear) : now.getFullYear() + 10;
         for (let i = start; i <= end; i++) {
             this.years.push(i);
         }
@@ -13920,14 +13920,14 @@ class NovoDatePickerElement {
      */
     ngOnChanges(changes) {
         /** @type {?} */
-        let weekRangeSelectChange = changes['weekRangeSelect'];
+        const weekRangeSelectChange = changes['weekRangeSelect'];
         if (weekRangeSelectChange &&
             weekRangeSelectChange.currentValue !== weekRangeSelectChange.previousValue &&
             !weekRangeSelectChange.firstChange) {
             this.clearRange();
         }
         /** @type {?} */
-        let weekStartChanges = changes['weekStart'];
+        const weekStartChanges = changes['weekStart'];
         if (weekStartChanges && weekStartChanges.currentValue !== weekStartChanges.previousValue && !weekStartChanges.firstChange) {
             this.weekdays = this.setupWeekdays();
             this.updateView(this.model, false, false);
@@ -13942,7 +13942,7 @@ class NovoDatePickerElement {
         // Weekstart must be 0-6 (Sunday - Saturday)
         if (!Helpers.isBlank(this.weekStart) && this.weekStart > 0 && this.weekStart <= 6) {
             /** @type {?} */
-            let newStart = weekdays.splice(this.weekStart);
+            const newStart = weekdays.splice(this.weekStart);
             weekdays = [...newStart, ...weekdays];
         }
         return weekdays;
@@ -13960,13 +13960,13 @@ class NovoDatePickerElement {
     isSelectingRange(range, day, selected, selected2, hoverDay, rangeSelectMode, weekRangeSelect) {
         if (range && !weekRangeSelect) {
             /** @type {?} */
-            let isRangeModeEndDate = rangeSelectMode === 'endDate' && (selected && selected2 && Object(date_fns__WEBPACK_IMPORTED_MODULE_10__["isAfter"])(day, selected2) && Object(date_fns__WEBPACK_IMPORTED_MODULE_10__["isBefore"])(day, hoverDay));
+            const isRangeModeEndDate = rangeSelectMode === 'endDate' && (selected && selected2 && Object(date_fns__WEBPACK_IMPORTED_MODULE_10__["isAfter"])(day, selected2) && Object(date_fns__WEBPACK_IMPORTED_MODULE_10__["isBefore"])(day, hoverDay));
             /** @type {?} */
-            let isRangeModeStartDate = rangeSelectMode === 'startDate' && (selected && selected2 && Object(date_fns__WEBPACK_IMPORTED_MODULE_10__["isBefore"])(day, selected) && Object(date_fns__WEBPACK_IMPORTED_MODULE_10__["isAfter"])(day, hoverDay));
+            const isRangeModeStartDate = rangeSelectMode === 'startDate' && (selected && selected2 && Object(date_fns__WEBPACK_IMPORTED_MODULE_10__["isBefore"])(day, selected) && Object(date_fns__WEBPACK_IMPORTED_MODULE_10__["isAfter"])(day, hoverDay));
             /** @type {?} */
-            let isNotSelected = !selected && selected2 && Object(date_fns__WEBPACK_IMPORTED_MODULE_10__["isBefore"])(day, selected2) && Object(date_fns__WEBPACK_IMPORTED_MODULE_10__["isAfter"])(day, hoverDay);
+            const isNotSelected = !selected && selected2 && Object(date_fns__WEBPACK_IMPORTED_MODULE_10__["isBefore"])(day, selected2) && Object(date_fns__WEBPACK_IMPORTED_MODULE_10__["isAfter"])(day, hoverDay);
             /** @type {?} */
-            let isNotSelected2 = selected && !selected2 && Object(date_fns__WEBPACK_IMPORTED_MODULE_10__["isAfter"])(day, selected) && Object(date_fns__WEBPACK_IMPORTED_MODULE_10__["isBefore"])(day, hoverDay);
+            const isNotSelected2 = selected && !selected2 && Object(date_fns__WEBPACK_IMPORTED_MODULE_10__["isAfter"])(day, selected) && Object(date_fns__WEBPACK_IMPORTED_MODULE_10__["isBefore"])(day, hoverDay);
             return isNotSelected2 || isNotSelected || isRangeModeStartDate || isRangeModeEndDate;
         }
         return false;
@@ -14062,7 +14062,7 @@ class NovoDatePickerElement {
             this.month = new Date(value);
             this.monthLabel = this.labels.formatDateWithFormat(this.month, { month: 'short' });
             /** @type {?} */
-            let start = new Date(value.getTime());
+            const start = new Date(value.getTime());
             start.setDate(1);
             this.removeTime(start.setDate(1));
             this.buildMonth(start, this.month);
@@ -14076,7 +14076,7 @@ class NovoDatePickerElement {
      */
     setToday() {
         /** @type {?} */
-        let tmp = new Date();
+        const tmp = new Date();
         this.updateView(tmp, true, true);
         // Go back to days
         this.open(null, 'days');
@@ -14096,9 +14096,9 @@ class NovoDatePickerElement {
      */
     setMonth(month) {
         /** @type {?} */
-        let date = this.month ? this.month : new Date();
+        const date = this.month ? this.month : new Date();
         /** @type {?} */
-        let tmp = Object(date_fns__WEBPACK_IMPORTED_MODULE_10__["setMonth"])(date, month);
+        const tmp = Object(date_fns__WEBPACK_IMPORTED_MODULE_10__["setMonth"])(date, month);
         this.updateView(tmp, true, false);
         // Go back to days
         this.open(null, 'days');
@@ -14109,9 +14109,9 @@ class NovoDatePickerElement {
      */
     setYear(year) {
         /** @type {?} */
-        let date = this.month ? this.month : new Date();
+        const date = this.month ? this.month : new Date();
         /** @type {?} */
-        let tmp = Object(date_fns__WEBPACK_IMPORTED_MODULE_10__["setYear"])(date, year);
+        const tmp = Object(date_fns__WEBPACK_IMPORTED_MODULE_10__["setYear"])(date, year);
         this.updateView(tmp, true, false);
         // Go back to days
         this.open(null, 'days');
@@ -14257,9 +14257,9 @@ class NovoDatePickerElement {
              */
             () => {
                 /** @type {?} */
-                let container = this.element.nativeElement.querySelector(`.calendar-content.${this.view}`);
+                const container = this.element.nativeElement.querySelector(`.calendar-content.${this.view}`);
                 /** @type {?} */
-                let selectedItem = this.element.nativeElement.querySelector(`.calendar-content.${this.view} .${this.view === 'years' ? 'year' : 'month'}.selected`);
+                const selectedItem = this.element.nativeElement.querySelector(`.calendar-content.${this.view} .${this.view === 'years' ? 'year' : 'month'}.selected`);
                 if (container && selectedItem) {
                     container.scrollTop = selectedItem.offsetTop - 100;
                 }
@@ -14274,7 +14274,7 @@ class NovoDatePickerElement {
     prevMonth(event) {
         Helpers.swallowEvent(event);
         /** @type {?} */
-        let tmp = Object(date_fns__WEBPACK_IMPORTED_MODULE_10__["subMonths"])(this.month, 1);
+        const tmp = Object(date_fns__WEBPACK_IMPORTED_MODULE_10__["subMonths"])(this.month, 1);
         this.updateView(tmp, false, false);
     }
     /**
@@ -14284,7 +14284,7 @@ class NovoDatePickerElement {
     nextMonth(event) {
         Helpers.swallowEvent(event);
         /** @type {?} */
-        let tmp = Object(date_fns__WEBPACK_IMPORTED_MODULE_10__["addMonths"])(this.month, 1);
+        const tmp = Object(date_fns__WEBPACK_IMPORTED_MODULE_10__["addMonths"])(this.month, 1);
         this.updateView(tmp, false, false);
     }
     /**
@@ -14308,7 +14308,7 @@ class NovoDatePickerElement {
      */
     removeTime(date) {
         /** @type {?} */
-        let ret = new Date(date);
+        const ret = new Date(date);
         ret.setHours(12);
         ret.setSeconds(0);
         ret.setMilliseconds(0);
@@ -14348,7 +14348,7 @@ class NovoDatePickerElement {
     buildWeek(date, month) {
         // Build out of the days of the week
         /** @type {?} */
-        let days = [];
+        const days = [];
         // Iterate over the days of the week
         for (let i = 0; i < 7; i++) {
             // Push a variable on the day array with lots of helpers to make the template easier
@@ -14356,7 +14356,7 @@ class NovoDatePickerElement {
                 name: this.weekdays[i],
                 number: date.getDate(),
                 isToday: Object(date_fns__WEBPACK_IMPORTED_MODULE_10__["isToday"])(date),
-                date: date,
+                date,
             });
             // Increment for the next iteration
             date = Object(date_fns__WEBPACK_IMPORTED_MODULE_10__["addDays"])(date, 1);
@@ -14539,7 +14539,7 @@ class DateFormatService {
         /** @type {?} */
         let timeFormatPartsArray = [];
         /** @type {?} */
-        let timeFormat = this.labels.timeFormatPlaceholderAM.toLowerCase();
+        const timeFormat = this.labels.timeFormatPlaceholderAM.toLowerCase();
         if (militaryTime) {
             return mask;
         }
@@ -14547,7 +14547,7 @@ class DateFormatService {
             timeFormatArray = timeFormat.split('hh:mm');
             if (timeFormatArray && timeFormatArray.length) {
                 mask = [];
-                for (let timeFormatPart of timeFormatArray) {
+                for (const timeFormatPart of timeFormatArray) {
                     if (timeFormatPart === '') {
                         mask = mask.concat([/\d/, /\d|:/, /:|\d/, /\d|\w|\s/, /\d|\s|\w/]);
                     }
@@ -14634,13 +14634,13 @@ class DateFormatService {
         }
         else if (dateFormatTokens && dateFormatTokens.length === 4 && dateString.length >= 1) {
             /** @type {?} */
-            let twoTokens = /\d{1,4}(\/|\.|\-)(\d{1,2})/.exec(dateString);
+            const twoTokens = /\d{1,4}(\/|\.|\-)(\d{1,2})/.exec(dateString);
             /** @type {?} */
-            let oneToken = /^(\d{1,4})$/.exec(dateString);
+            const oneToken = /^(\d{1,4})$/.exec(dateString);
             /** @type {?} */
-            let delimiter = /\w+(\/|\.|\-)\w+[\/|\.|\-]\w+/gi.exec(dateFormat);
+            const delimiter = /\w+(\/|\.|\-)\w+[\/|\.|\-]\w+/gi.exec(dateFormat);
             /** @type {?} */
-            let dateStringWithDelimiter = dateString[dateString.length - 1].match(/\/|\.|\-/);
+            const dateStringWithDelimiter = dateString[dateString.length - 1].match(/\/|\.|\-/);
             if (twoTokens && twoTokens.length === 3 && this.isValidDatePart(twoTokens[2], dateFormatTokens[2]) && !dateStringWithDelimiter) {
                 dateString = `${dateString}${delimiter[1]}`;
             }
@@ -14685,7 +14685,7 @@ class DateFormatService {
                 pm = true;
             }
             if (splits && splits.length) {
-                for (let item of splits) {
+                for (const item of splits) {
                     if (item && item.trim().includes(':')) {
                         timeStringParts = item.trim().split(':');
                     }
@@ -14728,12 +14728,12 @@ class DateFormatService {
         switch (type) {
             case 'datetime':
                 /** @type {?} */
-                let str = dateTimeString.replace(/-/g, '/');
+                const str = dateTimeString.replace(/-/g, '/');
                 /** @type {?} */
-                let parts = str.split(' ');
-                let [dt, dts] = this.parseDateString(parts[0]);
+                const parts = str.split(' ');
+                const [dt, dts] = this.parseDateString(parts[0]);
                 if (parts.length > 1) {
-                    let [tm, tms] = this.parseTimeString(parts[1], militaryTime);
+                    const [tm, tms] = this.parseTimeString(parts[1], militaryTime);
                     return [new Date(dt.setHours(tm.getHours(), tm.getMinutes())), `${dts} ${tms}`];
                 }
                 return [dt, dts];
@@ -14752,7 +14752,7 @@ class DateFormatService {
      */
     isValidDatePart(value, format) {
         /** @type {?} */
-        let datePart = parseInt(value);
+        const datePart = parseInt(value);
         if (format.includes('m') && (datePart >= 2 || value.length === 2)) {
             return true;
         }
@@ -14904,7 +14904,7 @@ class NovoDatePickerInputElement {
      */
     _handleEvent(event, blur) {
         /** @type {?} */
-        let value = ((/** @type {?} */ (event.target))).value;
+        const value = ((/** @type {?} */ (event.target))).value;
         this.formatDate(value, blur);
         this.openPanel();
     }
@@ -14916,10 +14916,10 @@ class NovoDatePickerInputElement {
      */
     formatDate(value, blur) {
         try {
-            let [dateTimeValue, formatted] = this.dateFormatService.parseString(value, false, 'date');
+            const [dateTimeValue, formatted] = this.dateFormatService.parseString(value, false, 'date');
             if (!isNaN(dateTimeValue.getUTCDate())) {
                 /** @type {?} */
-                let dt = new Date(dateTimeValue);
+                const dt = new Date(dateTimeValue);
                 this.dispatchOnChange(dt, blur);
             }
             else {
@@ -15005,7 +15005,7 @@ class NovoDatePickerInputElement {
     _setFormValue(value) {
         if (this.value) {
             /** @type {?} */
-            let test = this.formatDateValue(this.value);
+            const test = this.formatDateValue(this.value);
             this.formattedValue = test;
         }
     }
@@ -15036,7 +15036,7 @@ class NovoDatePickerInputElement {
      */
     formatDateValue(value) {
         /** @type {?} */
-        let originalValue = value;
+        const originalValue = value;
         try {
             if (!value) {
                 return '';
@@ -15179,7 +15179,7 @@ class NovoTimePickerElement {
         }
         else {
             /** @type {?} */
-            let hours = ['12', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11'];
+            const hours = ['12', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11'];
             this.increments = this.flatten([
                 ...hours.map((/**
                  * @param {?} hour
@@ -15215,7 +15215,7 @@ class NovoTimePickerElement {
      */
     init(value, dispatch) {
         /** @type {?} */
-        let _value = new Date(value);
+        const _value = new Date(value);
         /** @type {?} */
         let hours = _value.getHours();
         /** @type {?} */
@@ -15245,8 +15245,8 @@ class NovoTimePickerElement {
     setValue(event, value) {
         Helpers.swallowEvent(event);
         this.selected = value;
-        let [time, meridian] = value.split(' ');
-        let [hours, minutes] = time.split(':');
+        const [time, meridian] = value.split(' ');
+        const [hours, minutes] = time.split(':');
         this.hours = hours;
         this.minutes = minutes;
         this.meridian = meridian;
@@ -15313,13 +15313,13 @@ class NovoTimePickerElement {
             }
         }
         /** @type {?} */
-        let value = new Date();
+        const value = new Date();
         value.setHours(hours);
         value.setMinutes(this.minutes);
         value.setSeconds(0);
         this.value = `${this.hours}:${this.minutes} ${this.meridian}`;
         this.onSelect.next({
-            hours: hours,
+            hours,
             minutes: this.minutes,
             meridian: this.meridian,
             date: value,
@@ -15476,7 +15476,7 @@ class NovoTimePickerInputElement {
         if (!this.overlay.panelOpen) {
             this.overlay.openPanel();
             /** @type {?} */
-            let hour = new Date().getHours();
+            const hour = new Date().getHours();
             Promise.resolve(null).then((/**
              * @return {?}
              */
@@ -15515,9 +15515,9 @@ class NovoTimePickerInputElement {
         if (document.activeElement === event.target) {
             // this._onChange((event.target as HTMLInputElement).value);
             /** @type {?} */
-            let text = ((/** @type {?} */ (event.target))).value;
+            const text = ((/** @type {?} */ (event.target))).value;
             if (this.military ? text.replace(/_/g, '').length === 5 : text.replace(/_/g, '').length === 8) {
-                let [dateTimeValue, formatted] = this.dateFormatService.parseString(text, this.military, 'time');
+                const [dateTimeValue, formatted] = this.dateFormatService.parseString(text, this.military, 'time');
                 this.dispatchOnChange(dateTimeValue);
             }
             else {
@@ -15525,7 +15525,7 @@ class NovoTimePickerInputElement {
             }
             this.openPanel();
             /** @type {?} */
-            let num = Number(text.split(':')[0]);
+            const num = Number(text.split(':')[0]);
             this.scrollToIndex(num * 4);
         }
     }
@@ -15635,7 +15635,7 @@ class NovoTimePickerInputElement {
             return '';
         }
         /** @type {?} */
-        let format = this.labels.formatTimeWithFormat(value, {
+        const format = this.labels.formatTimeWithFormat(value, {
             hour: 'numeric',
             minute: '2-digit',
             hour12: !this.military,
@@ -15657,13 +15657,13 @@ class NovoTimePickerInputElement {
      */
     scrollToIndex(index) {
         /** @type {?} */
-        let element = this.overlay.overlayRef.overlayElement;
+        const element = this.overlay.overlayRef.overlayElement;
         /** @type {?} */
-        let list = element.querySelector('.increments');
+        const list = element.querySelector('.increments');
         /** @type {?} */
-        let items = list.querySelectorAll('novo-list-item');
+        const items = list.querySelectorAll('novo-list-item');
         /** @type {?} */
-        let item = items[index];
+        const item = items[index];
         if (item) {
             list.scrollTop = ((/** @type {?} */ (item))).offsetTop;
         }
@@ -15793,7 +15793,7 @@ class NovoDateTimePickerElement {
         /** @type {?} */
         let hours = value.getHours();
         /** @type {?} */
-        let minutes = value.getMinutes();
+        const minutes = value.getMinutes();
         this.meridian = value.toLocaleTimeString().slice(-2);
         if (!this.military) {
             hours = this.meridian === 'PM' && hours > 12 ? hours - 12 : hours;
@@ -16066,7 +16066,7 @@ class NovoDateTimePickerInputElement {
         try {
             if (this.datePart instanceof Date && this.timePart instanceof Date) {
                 /** @type {?} */
-                let newDt = new Date(this.datePart.getFullYear(), this.datePart.getMonth(), this.datePart.getDate(), this.timePart.getHours(), this.timePart.getMinutes());
+                const newDt = new Date(this.datePart.getFullYear(), this.datePart.getMonth(), this.datePart.getDate(), this.timePart.getHours(), this.timePart.getMinutes());
                 this.dispatchOnChange(newDt);
             }
             else {
@@ -16272,7 +16272,7 @@ class NovoCKEditorElement {
      */
     ngAfterViewInit() {
         /** @type {?} */
-        let config = Object.assign(this.getBaseConfig(), this.config);
+        const config = Object.assign(this.getBaseConfig(), this.config);
         if (this.startupFocus) {
             config.startupFocus = true;
         }
@@ -16326,7 +16326,7 @@ class NovoCKEditorElement {
         () => {
             this.onTouched();
             /** @type {?} */
-            let value = this.instance.getData();
+            const value = this.instance.getData();
             // Debounce update
             if (this.debounce) {
                 if (this.debounceTimeout) {
@@ -16501,7 +16501,7 @@ class NovoCKEditorElement {
      */
     insertText(text) {
         /** @type {?} */
-        let trimmedText = text.trim();
+        const trimmedText = text.trim();
         this.instance.insertText(trimmedText);
     }
 }
@@ -16613,7 +16613,7 @@ class NovoTipWellElement {
         // Check localStorage for state
         if (this.isLocalStorageEnabled) {
             /** @type {?} */
-            let storedValue = JSON.parse(localStorage.getItem(this.localStorageKey));
+            const storedValue = JSON.parse(localStorage.getItem(this.localStorageKey));
             this.isActive = storedValue !== false;
         }
     }
@@ -16697,7 +16697,7 @@ class NovoTemplateService {
      */
     getAll() {
         /** @type {?} */
-        let templates = {};
+        const templates = {};
         /** @type {?} */
         const customTemplateTypes = Object.keys(this.templates.custom);
         /** @type {?} */
@@ -16880,9 +16880,9 @@ class NovoDynamicFormElement {
             }));
         }
         /** @type {?} */
-        let requiredFields = [];
+        const requiredFields = [];
         /** @type {?} */
-        let nonRequiredFields = [];
+        const nonRequiredFields = [];
         this.fieldsets.forEach((/**
          * @param {?} fieldset
          * @return {?}
@@ -17047,7 +17047,7 @@ class NovoDynamicFormElement {
          */
         (key) => {
             /** @type {?} */
-            let control = this.form.controls[key];
+            const control = this.form.controls[key];
             if (control.required && Helpers.isBlank(this.form.value[control.key])) {
                 control.markAsDirty();
                 control.markAsTouched();
@@ -17189,7 +17189,7 @@ class NovoFormElement {
          */
         (key) => {
             /** @type {?} */
-            let control = this.form.controls[key];
+            const control = this.form.controls[key];
             if (control.required && Helpers.isBlank(this.form.value[control.key])) {
                 control.markAsDirty();
                 control.markAsTouched();
@@ -17333,7 +17333,7 @@ class NovoFormControl extends _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormC
         // Update validators to have the required
         if (this.required && !this.hasRequiredValidator) {
             /** @type {?} */
-            let validators = [...this.validators];
+            const validators = [...this.validators];
             validators.push(_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required);
             // TODO: duplicated below
             this.setValidators(validators);
@@ -17597,7 +17597,7 @@ class FormValidators {
      */
     static isEmail(control) {
         /** @type {?} */
-        let EMAIL_REGEXP = /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i;
+        const EMAIL_REGEXP = /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i;
         return !control.value || EMAIL_REGEXP.test(control.value) ? null : { invalidEmail: true };
     }
     // Makes sure the control value is a valid address
@@ -17607,17 +17607,17 @@ class FormValidators {
      */
     static isValidAddress(control) {
         /** @type {?} */
-        let fieldList = ['address1', 'address2', 'city', 'state', 'zip', 'countryID'];
+        const fieldList = ['address1', 'address2', 'city', 'state', 'zip', 'countryID'];
         /** @type {?} */
-        let invalidAddressFields = [];
+        const invalidAddressFields = [];
         /** @type {?} */
-        let maxlengthFields = [];
+        const maxlengthFields = [];
         /** @type {?} */
         let returnVal = null;
         /** @type {?} */
         let maxlengthError = false;
         /** @type {?} */
-        let showCountryRequiredFlag = (/**
+        const showCountryRequiredFlag = (/**
          * @param {?} subfield
          * @param {?} ctrl
          * @return {?}
@@ -17630,7 +17630,7 @@ class FormValidators {
                 ctrl.config.countryID.updated);
         });
         /** @type {?} */
-        let showStateRequiredFlag = (/**
+        const showStateRequiredFlag = (/**
          * @param {?} subfield
          * @param {?} ctrl
          * @return {?}
@@ -18198,7 +18198,7 @@ class NovoFormGroup extends _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormGro
      * @return {?}
      */
     enableAllControls() {
-        for (let key in this.controls) {
+        for (const key in this.controls) {
             if (((/** @type {?} */ (this.controls[key]))).readOnly) {
                 ((/** @type {?} */ (this.controls[key]))).readOnly = false;
                 this.controls[key].enable();
@@ -18209,7 +18209,7 @@ class NovoFormGroup extends _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormGro
      * @return {?}
      */
     disableAllControls() {
-        for (let key in this.controls) {
+        for (const key in this.controls) {
             if (!((/** @type {?} */ (this.controls[key]))).readOnly) {
                 ((/** @type {?} */ (this.controls[key]))).readOnly = true;
                 this.controls[key].disable();
@@ -18318,14 +18318,14 @@ class FormUtils {
      */
     toFormGroup(controls) {
         /** @type {?} */
-        let group = {};
+        const group = {};
         controls.forEach((/**
          * @param {?} control
          * @return {?}
          */
         (control) => {
             /** @type {?} */
-            let value = Helpers.isBlank(control.value) ? '' : control.value;
+            const value = Helpers.isBlank(control.value) ? '' : control.value;
             group[control.key] = new NovoFormControl(value, control);
         }));
         return new NovoFormGroup(group);
@@ -18348,9 +18348,9 @@ class FormUtils {
          */
         (control) => {
             /** @type {?} */
-            let value = Helpers.isBlank(control.value) ? '' : control.value;
+            const value = Helpers.isBlank(control.value) ? '' : control.value;
             /** @type {?} */
-            let formControl = new NovoFormControl(value, control);
+            const formControl = new NovoFormControl(value, control);
             formGroup.addControl(control.key, formControl);
         }));
     }
@@ -18375,7 +18375,7 @@ class FormUtils {
      */
     toFormGroupFromFieldset(fieldsets) {
         /** @type {?} */
-        let controls = [];
+        const controls = [];
         fieldsets.forEach((/**
          * @param {?} fieldset
          * @return {?}
@@ -18402,7 +18402,7 @@ class FormUtils {
         /** @type {?} */
         let type;
         /** @type {?} */
-        let dataSpecializationTypeMap = {
+        const dataSpecializationTypeMap = {
             DATETIME: 'datetime',
             TIME: 'time',
             MONEY: 'currency',
@@ -18417,31 +18417,31 @@ class FormUtils {
             SimplifiedOptionsLookup: 'select',
         };
         /** @type {?} */
-        let dataTypeToTypeMap = {
+        const dataTypeToTypeMap = {
             Timestamp: 'date',
             Date: 'date',
             Boolean: 'tiles',
         };
         /** @type {?} */
-        let inputTypeToTypeMap = {
+        const inputTypeToTypeMap = {
             CHECKBOX: 'radio',
             RADIO: 'radio',
             SELECT: 'select',
             TILES: 'tiles',
         };
         /** @type {?} */
-        let inputTypeMultiToTypeMap = {
+        const inputTypeMultiToTypeMap = {
             CHECKBOX: 'checklist',
             RADIO: 'checklist',
             SELECT: 'chips',
         };
         /** @type {?} */
-        let typeToTypeMap = {
+        const typeToTypeMap = {
             file: 'file',
             COMPOSITE: 'address',
         };
         /** @type {?} */
-        let numberDataTypeToTypeMap = {
+        const numberDataTypeToTypeMap = {
             Double: 'float',
             BigDecimal: 'float',
             Integer: 'number',
@@ -18546,9 +18546,9 @@ class FormUtils {
         /** @type {?} */
         let control;
         /** @type {?} */
-        let controlConfig = {
+        const controlConfig = {
             metaType: field.type,
-            type: type,
+            type,
             key: field.name,
             label: field.label,
             placeholder: field.hint || '',
@@ -18719,7 +18719,7 @@ class FormUtils {
                 controlConfig.config.required = field.required;
                 controlConfig.config.readOnly = controlConfig.readOnly;
                 if (field.fields && field.fields.length) {
-                    for (let subfield of field.fields) {
+                    for (const subfield of field.fields) {
                         controlConfig.config[subfield.name] = {
                             required: !!subfield.required,
                             hidden: !!subfield.readOnly,
@@ -18793,10 +18793,10 @@ class FormUtils {
      */
     toControls(meta, currencyFormat, http, config, overrides, forTable = false) {
         /** @type {?} */
-        let controls = [];
+        const controls = [];
         if (meta && meta.fields) {
             /** @type {?} */
-            let fields = meta.fields;
+            const fields = meta.fields;
             fields.forEach((/**
              * @param {?} field
              * @return {?}
@@ -18804,7 +18804,7 @@ class FormUtils {
             (field) => {
                 if (this.shouldCreateControl(field)) {
                     /** @type {?} */
-                    let control = this.getControlForField(field, http, config, overrides, forTable);
+                    const control = this.getControlForField(field, http, config, overrides, forTable);
                     // Set currency format
                     if (control.subType === 'currency') {
                         control.currencyFormat = currencyFormat;
@@ -18826,9 +18826,9 @@ class FormUtils {
      */
     toTableControls(meta, currencyFormat, http, config, overrides) {
         /** @type {?} */
-        let controls = this.toControls(meta, currencyFormat, http, config, overrides, true);
+        const controls = this.toControls(meta, currencyFormat, http, config, overrides, true);
         /** @type {?} */
-        let ret = {};
+        const ret = {};
         controls.forEach((/**
          * @param {?} control
          * @return {?}
@@ -18852,7 +18852,7 @@ class FormUtils {
      */
     toFieldSets(meta, currencyFormat, http, config, overrides, data) {
         /** @type {?} */
-        let fieldsets = [];
+        const fieldsets = [];
         /** @type {?} */
         let formFields = [];
         if (meta && meta.fields) {
@@ -18870,7 +18870,7 @@ class FormUtils {
                 else if (this.isEmbeddedField(field)) {
                     this.insertHeaderToFieldsets(fieldsets, field);
                     /** @type {?} */
-                    let embeddedFields = this.getEmbeddedFields(field);
+                    const embeddedFields = this.getEmbeddedFields(field);
                     embeddedFields.forEach((/**
                      * @param {?} embeddedField
                      * @return {?}
@@ -18930,7 +18930,7 @@ class FormUtils {
         /** @type {?} */
         const fieldData = this.isEmbeddedFieldData(field, data) ? this.getEmbeddedFieldData(field, data) : this.getFieldData(field, data);
         /** @type {?} */
-        let control = this.getControlForField(field, http, config, overrides, undefined, fieldData);
+        const control = this.getControlForField(field, http, config, overrides, undefined, fieldData);
         // Set currency format
         if (control.subType === 'currency') {
             control.currencyFormat = currencyFormat;
@@ -18962,7 +18962,7 @@ class FormUtils {
      * @return {?}
      */
     getEmbeddedFieldData(field, data) {
-        let [parentFieldName, fieldName] = field.name.split('.');
+        const [parentFieldName, fieldName] = field.name.split('.');
         return (data && data[parentFieldName] && data[parentFieldName][fieldName]) || null;
     }
     /**
@@ -18972,7 +18972,7 @@ class FormUtils {
      */
     getFormFields(meta) {
         /** @type {?} */
-        let sectionHeaders = meta.sectionHeaders
+        const sectionHeaders = meta.sectionHeaders
             ? meta.sectionHeaders.map((/**
              * @param {?} element
              * @return {?}
@@ -19140,7 +19140,7 @@ class FormUtils {
         }
         else if (Array.isArray(field.options) && field.type === 'chips') {
             /** @type {?} */
-            let options = field.options;
+            const options = field.options;
             return {
                 field: 'value',
                 format: '$label',
@@ -19167,7 +19167,7 @@ class FormUtils {
         /** @type {?} */
         const currentWorkflowOption = fieldData.id ? fieldData.id : 'initial';
         /** @type {?} */
-        let updateWorkflowOptions = workflowOptions[currentWorkflowOption] || [];
+        const updateWorkflowOptions = workflowOptions[currentWorkflowOption] || [];
         if (currentValue && !updateWorkflowOptions.find((/**
          * @param {?} option
          * @return {?}
@@ -19280,7 +19280,7 @@ class FormUtils {
          */
         (key) => {
             /** @type {?} */
-            let control = form.controls[key];
+            const control = form.controls[key];
             if (control.required && Helpers.isBlank(form.value[control.key])) {
                 control.markAsDirty();
                 control.markAsTouched();
@@ -19293,7 +19293,7 @@ class FormUtils {
      */
     isAddressEmpty(control) {
         /** @type {?} */
-        let fieldList = ['address1', 'address2', 'city', 'state', 'zip', 'countryID'];
+        const fieldList = ['address1', 'address2', 'city', 'state', 'zip', 'countryID'];
         /** @type {?} */
         let valid = true;
         if (control.value && control.config) {
@@ -19380,7 +19380,7 @@ class FormUtils {
              * @return {?}
              */
             (field) => {
-                let [parentFieldName, fieldName] = field.split('.');
+                const [parentFieldName, fieldName] = field.split('.');
                 if (!data[parentFieldName]) {
                     data[parentFieldName] = {};
                 }
@@ -19973,7 +19973,7 @@ class FieldInteractionApi {
             return null;
         }
         /** @type {?} */
-        let control = this.form.controls[key];
+        const control = this.form.controls[key];
         if (!control) {
             console.error('[FieldInteractionAPI] - could not find a control in the form by the key --', key); // tslint:disable-line
             return null;
@@ -19986,7 +19986,7 @@ class FieldInteractionApi {
      */
     getValue(key) {
         /** @type {?} */
-        let control = this.getControl(key);
+        const control = this.getControl(key);
         if (control) {
             return control.value;
         }
@@ -19998,7 +19998,7 @@ class FieldInteractionApi {
      */
     getRawValue(key) {
         /** @type {?} */
-        let control = this.getControl(key);
+        const control = this.getControl(key);
         if (control) {
             return control.rawValue;
         }
@@ -20010,7 +20010,7 @@ class FieldInteractionApi {
      */
     getInitialValue(key) {
         /** @type {?} */
-        let control = this.getControl(key);
+        const control = this.getControl(key);
         if (control) {
             return control.initialValue;
         }
@@ -20024,10 +20024,10 @@ class FieldInteractionApi {
      */
     setValue(key, value, options) {
         /** @type {?} */
-        let control = this.getControl(key);
+        const control = this.getControl(key);
         if (control && !control.restrictFieldInteractions) {
             control.setValue(value, options);
-            this.triggerEvent({ controlKey: key, prop: 'value', value: value });
+            this.triggerEvent({ controlKey: key, prop: 'value', value });
         }
     }
     /**
@@ -20038,10 +20038,10 @@ class FieldInteractionApi {
      */
     patchValue(key, value, options) {
         /** @type {?} */
-        let control = this.getControl(key);
+        const control = this.getControl(key);
         if (control && !control.restrictFieldInteractions) {
             control.setValue(value, options);
-            this.triggerEvent({ controlKey: key, prop: 'value', value: value });
+            this.triggerEvent({ controlKey: key, prop: 'value', value });
         }
     }
     /**
@@ -20051,7 +20051,7 @@ class FieldInteractionApi {
      */
     setReadOnly(key, isReadOnly) {
         /** @type {?} */
-        let control = this.getControl(key);
+        const control = this.getControl(key);
         if (control && !control.restrictFieldInteractions) {
             control.setReadOnly(isReadOnly);
             this.triggerEvent({ controlKey: key, prop: 'readOnly', value: isReadOnly });
@@ -20064,7 +20064,7 @@ class FieldInteractionApi {
      */
     setRequired(key, required) {
         /** @type {?} */
-        let control = this.getControl(key);
+        const control = this.getControl(key);
         if (control && !control.restrictFieldInteractions) {
             control.setRequired(required);
             this.triggerEvent({ controlKey: key, prop: 'required', value: required });
@@ -20077,7 +20077,7 @@ class FieldInteractionApi {
      */
     hide(key, clearValue = true) {
         /** @type {?} */
-        let control = this.getControl(key);
+        const control = this.getControl(key);
         if (control && !control.restrictFieldInteractions) {
             control.hide(clearValue);
             this.disable(key, { emitEvent: false });
@@ -20090,7 +20090,7 @@ class FieldInteractionApi {
      */
     show(key) {
         /** @type {?} */
-        let control = this.getControl(key);
+        const control = this.getControl(key);
         if (control && !control.restrictFieldInteractions) {
             control.show();
             this.enable(key, { emitEvent: false });
@@ -20126,7 +20126,7 @@ class FieldInteractionApi {
      */
     disable(key, options) {
         /** @type {?} */
-        let control = this.getControl(key);
+        const control = this.getControl(key);
         if (control && !control.restrictFieldInteractions) {
             control.disable(options);
             this.triggerEvent({ controlKey: key, prop: 'readOnly', value: true });
@@ -20139,7 +20139,7 @@ class FieldInteractionApi {
      */
     enable(key, options) {
         /** @type {?} */
-        let control = this.getControl(key);
+        const control = this.getControl(key);
         if (control && !control.restrictFieldInteractions) {
             control.enable(options);
             this.triggerEvent({ controlKey: key, prop: 'readOnly', value: false });
@@ -20152,7 +20152,7 @@ class FieldInteractionApi {
      */
     markAsInvalid(key, validationMessage) {
         /** @type {?} */
-        let control = this.getControl(key);
+        const control = this.getControl(key);
         if (control) {
             if (control && !control.restrictFieldInteractions) {
                 control.markAsInvalid(validationMessage);
@@ -20166,7 +20166,7 @@ class FieldInteractionApi {
      */
     markAsDirty(key, options) {
         /** @type {?} */
-        let control = this.getControl(key);
+        const control = this.getControl(key);
         if (control && !control.restrictFieldInteractions) {
             control.markAsDirty(options);
         }
@@ -20178,7 +20178,7 @@ class FieldInteractionApi {
      */
     markAsPending(key, options) {
         /** @type {?} */
-        let control = this.getControl(key);
+        const control = this.getControl(key);
         if (control && !control.restrictFieldInteractions) {
             control.markAsPending(options);
         }
@@ -20190,7 +20190,7 @@ class FieldInteractionApi {
      */
     markAsPristine(key, options) {
         /** @type {?} */
-        let control = this.getControl(key);
+        const control = this.getControl(key);
         if (control && !control.restrictFieldInteractions) {
             control.markAsPristine(options);
         }
@@ -20202,7 +20202,7 @@ class FieldInteractionApi {
      */
     markAsTouched(key, options) {
         /** @type {?} */
-        let control = this.getControl(key);
+        const control = this.getControl(key);
         if (control && !control.restrictFieldInteractions) {
             control.markAsTouched(options);
         }
@@ -20214,7 +20214,7 @@ class FieldInteractionApi {
      */
     markAsUntouched(key, options) {
         /** @type {?} */
-        let control = this.getControl(key);
+        const control = this.getControl(key);
         if (control && !control.restrictFieldInteractions) {
             control.markAsUntouched(options);
         }
@@ -20226,7 +20226,7 @@ class FieldInteractionApi {
      */
     updateValueAndValidity(key, options) {
         /** @type {?} */
-        let control = this.getControl(key);
+        const control = this.getControl(key);
         if (control && !control.restrictFieldInteractions) {
             control.updateValueAndValidity(options);
         }
@@ -20250,11 +20250,11 @@ class FieldInteractionApi {
      */
     displayTip(key, tip, icon, allowDismiss, sanitize) {
         /** @type {?} */
-        let control = this.getControl(key);
+        const control = this.getControl(key);
         if (control && !control.restrictFieldInteractions) {
             control.tipWell = {
-                tip: tip,
-                icon: icon,
+                tip,
+                icon,
                 button: allowDismiss,
                 sanitize: sanitize !== false,
             };
@@ -20268,7 +20268,7 @@ class FieldInteractionApi {
      */
     setTooltip(key, tooltip) {
         /** @type {?} */
-        let control = this.getControl(key);
+        const control = this.getControl(key);
         if (control && !control.restrictFieldInteractions) {
             control.tooltip = tooltip;
             if (tooltip.length >= 40 && tooltip.length <= 400) {
@@ -20288,13 +20288,13 @@ class FieldInteractionApi {
      */
     confirmChanges(key, message) {
         /** @type {?} */
-        let history = this.getProperty(key, 'valueHistory');
+        const history = this.getProperty(key, 'valueHistory');
         /** @type {?} */
-        let oldValue = history[history.length - 2];
+        const oldValue = history[history.length - 2];
         /** @type {?} */
-        let newValue = this.getValue(key);
+        const newValue = this.getValue(key);
         /** @type {?} */
-        let label = this.getProperty(key, 'label');
+        const label = this.getProperty(key, 'label');
         ((/** @type {?} */ (document.activeElement))).blur();
         return this.modalService.open(ControlConfirmModal, { oldValue, newValue, label, message, key }).onClosed.then((/**
          * @param {?} result
@@ -20313,9 +20313,9 @@ class FieldInteractionApi {
      */
     promptUser(key, changes) {
         /** @type {?} */
-        let showYes = true;
+        const showYes = true;
         ((/** @type {?} */ (document.activeElement))).blur();
-        return this.modalService.open(ControlPromptModal, { changes: changes, key: key }).onClosed;
+        return this.modalService.open(ControlPromptModal, { changes, key }).onClosed;
     }
     /**
      * @param {?} key
@@ -20325,10 +20325,10 @@ class FieldInteractionApi {
      */
     setProperty(key, prop, value) {
         /** @type {?} */
-        let control = this.getControl(key);
+        const control = this.getControl(key);
         if (control && !control.restrictFieldInteractions) {
             control[prop] = value;
-            this.triggerEvent({ controlKey: key, prop: prop, value: value });
+            this.triggerEvent({ controlKey: key, prop, value });
         }
     }
     /**
@@ -20338,7 +20338,7 @@ class FieldInteractionApi {
      */
     getProperty(key, prop) {
         /** @type {?} */
-        let control = this.getControl(key);
+        const control = this.getControl(key);
         if (control && !control.restrictFieldInteractions) {
             return control[prop];
         }
@@ -20350,7 +20350,7 @@ class FieldInteractionApi {
      */
     isValueEmpty(key) {
         /** @type {?} */
-        let value = this.getValue(key);
+        const value = this.getValue(key);
         return Helpers.isEmpty(value);
     }
     /**
@@ -20359,7 +20359,7 @@ class FieldInteractionApi {
      */
     isValueBlank(key) {
         /** @type {?} */
-        let value = this.getValue(key);
+        const value = this.getValue(key);
         return Helpers.isBlank(value);
     }
     /**
@@ -20376,7 +20376,7 @@ class FieldInteractionApi {
      */
     addStaticOption(key, newOption) {
         /** @type {?} */
-        let control = this.getControl(key);
+        const control = this.getControl(key);
         /** @type {?} */
         let optionToAdd = newOption;
         /** @type {?} */
@@ -20386,7 +20386,7 @@ class FieldInteractionApi {
             let currentOptions = this.getProperty(key, 'options');
             if (!currentOptions || !currentOptions.length) {
                 /** @type {?} */
-                let config = this.getProperty(key, 'config');
+                const config = this.getProperty(key, 'config');
                 if (config) {
                     currentOptions = config.options;
                     if (currentOptions && Array.isArray(currentOptions)) {
@@ -20428,13 +20428,13 @@ class FieldInteractionApi {
      */
     removeStaticOption(key, optionToRemove) {
         /** @type {?} */
-        let control = this.getControl(key);
+        const control = this.getControl(key);
         if (control && !control.restrictFieldInteractions) {
             /** @type {?} */
             let currentOptions = this.getProperty(key, 'options');
             if (!currentOptions || !currentOptions.length) {
                 /** @type {?} */
-                let config = this.getProperty(key, 'config');
+                const config = this.getProperty(key, 'config');
                 if (config) {
                     currentOptions = config.options;
                     if (currentOptions && Array.isArray(currentOptions)) {
@@ -20511,7 +20511,7 @@ class FieldInteractionApi {
      */
     mutatePickerConfig(key, args, mapper) {
         /** @type {?} */
-        let control = this.getControl(key);
+        const control = this.getControl(key);
         if (control && !control.restrictFieldInteractions) {
             const { minSearchLength, enableInfiniteScroll, filteredOptionsCreator, format, getLabels, emptyPickerMessage } = control.config;
             /** @type {?} */
@@ -20529,7 +20529,7 @@ class FieldInteractionApi {
      */
     addPropertiesToPickerConfig(key, properties) {
         /** @type {?} */
-        let control = this.getControl(key);
+        const control = this.getControl(key);
         if (!control || control.restrictFieldInteractions) {
             return;
         }
@@ -20545,7 +20545,7 @@ class FieldInteractionApi {
      */
     setLoading(key, loading) {
         /** @type {?} */
-        let control = this.getControl(key);
+        const control = this.getControl(key);
         if (control && !control.restrictFieldInteractions) {
             if (loading) {
                 this.form.controls[key].fieldInteractionloading = true;
@@ -20594,7 +20594,7 @@ class FieldInteractionApi {
             return null;
         }
         /** @type {?} */
-        let control = this.form.controls[key];
+        const control = this.form.controls[key];
         /** @type {?} */
         let fieldsetIndex;
         /** @type {?} */
@@ -20645,10 +20645,10 @@ class FieldInteractionApi {
             }
             if (fieldsetIndex !== -1 && controlIndex !== -1) {
                 /** @type {?} */
-                let novoControl = this.formUtils.getControlForField(metaForNewField, this.http, {});
+                const novoControl = this.formUtils.getControlForField(metaForNewField, this.http, {});
                 novoControl.hidden = false;
                 /** @type {?} */
-                let formControl = new NovoFormControl(initialValue, novoControl);
+                const formControl = new NovoFormControl(initialValue, novoControl);
                 this.form.addControl(novoControl.key, formControl);
                 this.form.fieldsets[fieldsetIndex].controls.splice(controlIndex, 0, novoControl);
                 this.triggerEvent({ controlKey: key, prop: 'addControl', value: formControl });
@@ -20665,7 +20665,7 @@ class FieldInteractionApi {
             return null;
         }
         /** @type {?} */
-        let control = this.getControl(key);
+        const control = this.getControl(key);
         if (control && !control.restrictFieldInteractions) {
             /** @type {?} */
             let fieldsetIndex = -1;
@@ -20909,7 +20909,7 @@ class NovoControlElement extends OutsideClick {
         /** @type {?} */
         const MAX_LENGTH_CONTROL_TYPES = ['textbox', 'picker', 'text-area'];
         /** @type {?} */
-        let charCount = this.focused &&
+        const charCount = this.focused &&
             !!this.form.controls[this.control.key].maxlength &&
             MAX_LENGTH_CONTROL_TYPES.includes(this.form.controls[this.control.key].controlType);
         return this._showCount || charCount;
@@ -20947,7 +20947,7 @@ class NovoControlElement extends OutsideClick {
              */
             () => {
                 /** @type {?} */
-                let input = this.element.nativeElement.querySelector('input');
+                const input = this.element.nativeElement.querySelector('input');
                 if (input) {
                     input.focus();
                 }
@@ -20960,7 +20960,7 @@ class NovoControlElement extends OutsideClick {
     ngAfterContentInit() {
         // Subscribe to control interactions
         if (this.control.interactions && !this.form.controls[this.control.key].restrictFieldInteractions) {
-            for (let interaction of this.control.interactions) {
+            for (const interaction of this.control.interactions) {
                 switch (interaction.event) {
                     case 'blur':
                         this.valueChangeSubscription = this.onBlur.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_13__["debounceTime"])(300)).subscribe((/**
@@ -21378,7 +21378,7 @@ class NovoControlElement extends OutsideClick {
         /** @type {?} */
         const UTILITY_KEYS = ['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Tab'];
         /** @type {?} */
-        let key = event.key;
+        const key = event.key;
         // Numbers or numbers and decimal characters only
         if (this.form.controls[this.control.key].subType === 'number' && !(NUMBERS_ONLY.test(key) || UTILITY_KEYS.includes(key))) {
             event.preventDefault();
@@ -21400,9 +21400,9 @@ class NovoControlElement extends OutsideClick {
      */
     handlePercentChange(event) {
         /** @type {?} */
-        let value = event.target['value'];
+        const value = event.target['value'];
         /** @type {?} */
-        let percent = Helpers.isEmpty(value) ? null : Number((value / 100).toFixed(6).replace(/\.?0*$/, ''));
+        const percent = Helpers.isEmpty(value) ? null : Number((value / 100).toFixed(6).replace(/\.?0*$/, ''));
         if (!Helpers.isEmpty(percent)) {
             this.change.emit(percent);
             this.form.controls[this.control.key].setValue(percent);
@@ -21491,7 +21491,7 @@ class NovoControlElement extends OutsideClick {
      */
     updateValidity(shouldEventBeEmitted) {
         /** @type {?} */
-        let emitEvent = shouldEventBeEmitted ? true : false;
+        const emitEvent = shouldEventBeEmitted ? true : false;
         this.form.controls[this.control.key].updateValueAndValidity({ emitEvent });
     }
 }
@@ -39416,7 +39416,7 @@ class NovoAddressElement {
         this.isInvalid(field);
         this.isValid(field);
         if (event) {
-            this.change.emit({ value: this.model[field], field: field });
+            this.change.emit({ value: this.model[field], field });
         }
     }
     /**
@@ -39443,7 +39443,7 @@ class NovoAddressElement {
      */
     onCountryChange(evt) {
         /** @type {?} */
-        let country = evt && evt.rawValue ? evt.rawValue : null;
+        const country = evt && evt.rawValue ? evt.rawValue : null;
         /** @type {?} */
         let field;
         /** @type {?} */
@@ -39482,7 +39482,7 @@ class NovoAddressElement {
      */
     onStateChange(evt) {
         /** @type {?} */
-        let state = evt && evt.value ? evt.value : null;
+        const state = evt && evt.value ? evt.value : null;
         this.config.state.updated = true;
         this.model.state = state;
         this.updateControl();
@@ -39494,7 +39494,7 @@ class NovoAddressElement {
      */
     setStateLabel(model) {
         /** @type {?} */
-        let state = model.state;
+        const state = model.state;
         if (!Helpers.isBlank(state)) {
             if (this.config.state.required) {
                 this.valid.state = true;
@@ -39600,7 +39600,7 @@ class NovoAddressElement {
                 if (this.config.countryID.pickerConfig && this.config.countryID.pickerConfig.getLabels) {
                     if (Helpers.isFunction(this.config.countryID.pickerConfig.getLabels)) {
                         /** @type {?} */
-                        let promise = this.config.countryID.pickerConfig.getLabels(model.countryID);
+                        const promise = this.config.countryID.pickerConfig.getLabels(model.countryID);
                         loadingCountries = true;
                         if (promise.then) {
                             promise.then((/**
@@ -39620,7 +39620,7 @@ class NovoAddressElement {
             if (countryName) {
                 countryName = countryName.trim();
                 model.state = model.state || '';
-                this.model = Object.assign(model, { countryName: countryName });
+                this.model = Object.assign(model, { countryName });
             }
             else {
                 this.model = model;
@@ -39721,7 +39721,7 @@ class NovoAddressElement {
                  */
                 (resolve) => {
                     /** @type {?} */
-                    let country = findByCountryId(countryID);
+                    const country = findByCountryId(countryID);
                     if (country) {
                         resolve({ value: country.id, label: country.name });
                     }
@@ -40086,7 +40086,7 @@ class NovoCheckListElement {
              */
             (option) => {
                 /** @type {?} */
-                let formattedOption = {
+                const formattedOption = {
                     value: option,
                     label: option,
                     checked: this.model && this.model.length && this.model.indexOf(option.value) !== -1,
@@ -40101,7 +40101,7 @@ class NovoCheckListElement {
              */
             (option) => {
                 /** @type {?} */
-                let formattedOption = option;
+                const formattedOption = option;
                 formattedOption.checked = this.model && this.model.length && this.model.indexOf(option.value) !== -1;
                 this._options.push(formattedOption);
             }));
@@ -40112,7 +40112,7 @@ class NovoCheckListElement {
      */
     setModel() {
         /** @type {?} */
-        let checkedOptions = this.options.filter((/**
+        const checkedOptions = this.options.filter((/**
          * @param {?} checkBox
          * @return {?}
          */
@@ -40318,7 +40318,7 @@ class NovoFileInputElement {
             this.element.nativeElement.removeEventListener(type, this.commands[type]);
         }));
         /** @type {?} */
-        let dragulaHasFileOutputBag = this.dragula.bags.length > 0 && this.dragula.bags.filter((/**
+        const dragulaHasFileOutputBag = this.dragula.bags.length > 0 && this.dragula.bags.filter((/**
          * @param {?} x
          * @return {?}
          */
@@ -40427,9 +40427,9 @@ class NovoFileInputElement {
             return;
         }
         /** @type {?} */
-        let options = this.layoutOptions;
+        const options = this.layoutOptions;
         /** @type {?} */
-        let filelist = Array.from(event.dataTransfer.files);
+        const filelist = Array.from(event.dataTransfer.files);
         if (options.customActions) {
             this.upload.emit(this.multiple ? filelist : [filelist[0]]);
         }
@@ -40864,7 +40864,7 @@ class NovoControlGroup {
      */
     ngOnChanges(changes) {
         /** @type {?} */
-        let initialValueChange = changes['initialValue'];
+        const initialValueChange = changes['initialValue'];
         // If initial value changes, clear the controls
         if (initialValueChange && initialValueChange.currentValue !== initialValueChange.previousValue && !initialValueChange.firstChange) {
             this.clearControls();
@@ -40971,7 +40971,7 @@ class NovoControlGroup {
         /** @type {?} */
         const control = (/** @type {?} */ (this.form.controls[this.key]));
         if (emitEvent) {
-            this.onRemove.emit({ value: control.at(index).value, index: index });
+            this.onRemove.emit({ value: control.at(index).value, index });
         }
         control.removeAt(index);
         this.disabledArray = this.disabledArray.filter((/**
@@ -40991,7 +40991,7 @@ class NovoControlGroup {
     editControl(index) {
         /** @type {?} */
         const control = (/** @type {?} */ (this.form.controls[this.key]));
-        this.onEdit.emit({ value: control.at(index).value, index: index });
+        this.onEdit.emit({ value: control.at(index).value, index });
     }
     /**
      * @param {?} event
@@ -41051,7 +41051,7 @@ class NovoControlGroup {
      */
     getNewControls(controls) {
         /** @type {?} */
-        let ret = [];
+        const ret = [];
         (this.controls || []).forEach((/**
          * @param {?} control
          * @return {?}
@@ -41456,8 +41456,8 @@ class Pagination {
      */
     makePage(number, text, isActive) {
         return {
-            number: number,
-            text: text,
+            number,
+            text,
             active: isActive,
         };
     }
@@ -41468,7 +41468,7 @@ class Pagination {
      */
     getPages(currentPage, totalPages) {
         /** @type {?} */
-        let pages = [];
+        const pages = [];
         // Default page limits
         /** @type {?} */
         let startPage = 1;
@@ -41810,7 +41810,7 @@ class ThOrderable {
         let index = null;
         if (this.element.nativeElement && this.element.nativeElement.parentNode) {
             /** @type {?} */
-            let children = Array.prototype.slice.call(this.element.nativeElement.parentNode.children);
+            const children = Array.prototype.slice.call(this.element.nativeElement.parentNode.children);
             index = children.indexOf(this.element.nativeElement);
         }
         return index;
@@ -42098,7 +42098,7 @@ class NovoDropdownCell extends BaseRenderer {
      */
     onClick(config, option, value) {
         /** @type {?} */
-        let callback = option.callback || config.callback;
+        const callback = option.callback || config.callback;
         callback(this.data, value || option);
     }
 }
@@ -42518,9 +42518,9 @@ class ArrayCollection {
      * @return {?}
      */
     merge(newData) {
-        for (let obj of newData) {
+        for (const obj of newData) {
             /** @type {?} */
-            let existing = ~this.getItemIndex(obj);
+            const existing = ~this.getItemIndex(obj);
             if (existing) {
                 this.replaceItem(obj, existing);
             }
@@ -42552,7 +42552,7 @@ class ArrayCollection {
      */
     removeItem(item) {
         /** @type {?} */
-        let index = this.getItemIndex(item);
+        const index = this.getItemIndex(item);
         return this.removeItemAt(index);
     }
     /**
@@ -42565,7 +42565,7 @@ class ArrayCollection {
      */
     removeItemAt(index) {
         /** @type {?} */
-        let success = !!this.source.splice(index, 1);
+        const success = !!this.source.splice(index, 1);
         this.refresh();
         return success;
     }
@@ -42580,7 +42580,7 @@ class ArrayCollection {
      */
     replaceItem(newItem, oldItem) {
         /** @type {?} */
-        let index = this.getItemIndex(oldItem);
+        const index = this.getItemIndex(oldItem);
         if (index >= 0) {
             this.replaceItemAt(newItem, index);
         }
@@ -42664,10 +42664,10 @@ class ArrayCollection {
      */
     refresh() {
         this.filterData = this.isEditing ? this.editData.slice() : this.source.slice();
-        for (let item of this._sort.reverse()) {
+        for (const item of this._sort.reverse()) {
             this.sortOn(item.field, item.reverse);
         }
-        for (let key in this._filter) {
+        for (const key in this._filter) {
             if (key) {
                 this.filterOn(key, this._filter[key]);
             }
@@ -42792,21 +42792,21 @@ class PagedArrayCollection extends ArrayCollection {
      */
     refresh() {
         this.filterData = this.isEditing ? this.editData.slice() : this.source.slice();
-        for (let item of this._sort.reverse()) {
+        for (const item of this._sort.reverse()) {
             this.sortOn(item.field, item.reverse);
         }
-        for (let key in this._filter) {
+        for (const key in this._filter) {
             if (key) {
                 this.filterOn(key, this._filter[key]);
             }
         }
         if (this.page >= 0) {
             /** @type {?} */
-            let start = (this.page - 1) * this.pageSize;
+            const start = (this.page - 1) * this.pageSize;
             /** @type {?} */
-            let end = start + this.pageSize;
+            const end = start + this.pageSize;
             /** @type {?} */
-            let result = this.filterData.slice(start, end);
+            const result = this.filterData.slice(start, end);
             this.onDataChange(new CollectionEvent(CollectionEvent.CHANGE, result));
         }
         else {
@@ -42925,7 +42925,7 @@ class NovoTableElement {
                     /** @type {?} */
                     let columnsToSum = [];
                     /** @type {?} */
-                    let columnSums = {};
+                    const columnSums = {};
                     if (this.config.footers) {
                         this.config.footers.forEach((/**
                          * @param {?} config
@@ -42945,7 +42945,7 @@ class NovoTableElement {
                     }
                     // Make a form for each row
                     /** @type {?} */
-                    let tableFormRows = (/** @type {?} */ (this.tableForm.controls['rows']));
+                    const tableFormRows = (/** @type {?} */ (this.tableForm.controls['rows']));
                     this._rows.forEach((/**
                      * @param {?} row
                      * @param {?} index
@@ -42953,7 +42953,7 @@ class NovoTableElement {
                      */
                     (row, index) => {
                         /** @type {?} */
-                        let rowControls = [];
+                        const rowControls = [];
                         row.controls = {};
                         row._editing = {};
                         row._expanded = this.config.expandAll;
@@ -42965,7 +42965,7 @@ class NovoTableElement {
                         (column) => {
                             // Use the control passed or use a ReadOnlyControl so that the form has the values
                             /** @type {?} */
-                            let control = column.editorConfig
+                            const control = column.editorConfig
                                 ? ControlFactory.create(column.editorType, column.editorConfig)
                                 : new ReadOnlyControl({ key: column.name });
                             row.controls[column.name] = control;
@@ -43001,7 +43001,7 @@ class NovoTableElement {
                          */
                         (footerConfig, footerConfigIndex) => {
                             /** @type {?} */
-                            let footer = {};
+                            const footer = {};
                             footer[footerConfig.labelColumn] = footerConfig.label;
                             footerConfig.columns.forEach((/**
                              * @param {?} column
@@ -43154,7 +43154,7 @@ class NovoTableElement {
      */
     getRowControlForm(i) {
         /** @type {?} */
-        let tableFormRows = (/** @type {?} */ (this.tableForm.controls['rows']));
+        const tableFormRows = (/** @type {?} */ (this.tableForm.controls['rows']));
         return tableFormRows.controls[i];
     }
     /**
@@ -43367,14 +43367,14 @@ class NovoTableElement {
     onSortChange(column) {
         this.currentSortColumn = column;
         /** @type {?} */
-        let sortedColumns = this.columns.filter((/**
+        const sortedColumns = this.columns.filter((/**
          * @param {?} thisColumn
          * @return {?}
          */
         (thisColumn) => {
             return thisColumn.sort && thisColumn !== this.currentSortColumn;
         }));
-        for (let sortedColumn of sortedColumns) {
+        for (const sortedColumn of sortedColumns) {
             sortedColumn.sort = null;
         }
         if (column) {
@@ -43451,7 +43451,7 @@ class NovoTableElement {
      */
     expandAllOnPage(expanded) {
         this.config.expandAll = !expanded;
-        for (let row of this.dataProvider.list) {
+        for (const row of this.dataProvider.list) {
             row._expanded = this.config.expandAll;
         }
     }
@@ -43470,7 +43470,7 @@ class NovoTableElement {
         else {
             this.indeterminate = false;
             // this.pagedData = this.rows.slice(this.getPageStart(), this.getPageEnd());
-            for (let row of this.pagedData) {
+            for (const row of this.pagedData) {
                 row._selected = this.master;
             }
             this.selected = this.dataProvider.list.filter((/**
@@ -43497,7 +43497,7 @@ class NovoTableElement {
     selectAll(value) {
         this.master = value;
         this.indeterminate = false;
-        for (let row of this.dataProvider.list) {
+        for (const row of this.dataProvider.list) {
             row._selected = value;
         }
         this.selected = value ? this.dataProvider.list : [];
@@ -43545,7 +43545,7 @@ class NovoTableElement {
      * @return {?}
      */
     emitSelected(selected) {
-        this.onRowSelect.emit({ length: selected.length, selected: selected });
+        this.onRowSelect.emit({ length: selected.length, selected });
     }
     /**
      * \@name rowClickHandler
@@ -43565,7 +43565,7 @@ class NovoTableElement {
     getDefaultOptions(column) {
         // TODO - needs to come from label service - https://github.com/bullhorn/novo-elements/issues/116
         /** @type {?} */
-        let opts = [
+        const opts = [
             { label: this.labels.past1Day, min: -1, max: 0 },
             { label: this.labels.past7Days, min: -7, max: 0 },
             { label: this.labels.past30Days, min: -30, max: 0 },
@@ -43607,12 +43607,12 @@ class NovoTableElement {
     onFilterKeywords(config) {
         if (config && config.filtering && config.filtering.freetextFilter) {
             /** @type {?} */
-            let filterKeywords = config.filtering.freetextFilter.toLowerCase();
+            const filterKeywords = config.filtering.freetextFilter.toLowerCase();
             if (!config.filtering.originalOptions) {
                 config.filtering.originalOptions = config.filtering.options;
             }
             /** @type {?} */
-            let newOptions = config.filtering.originalOptions.filter((/**
+            const newOptions = config.filtering.originalOptions.filter((/**
              * @param {?} option
              * @return {?}
              */
@@ -43725,11 +43725,11 @@ class NovoTableElement {
      */
     addEditableRow(defaultValue = {}) {
         /** @type {?} */
-        let tableFormRows = (/** @type {?} */ (this.tableForm.controls['rows']));
+        const tableFormRows = (/** @type {?} */ (this.tableForm.controls['rows']));
         /** @type {?} */
-        let row = {};
+        const row = {};
         /** @type {?} */
-        let rowControls = [];
+        const rowControls = [];
         row.controls = {};
         row._editing = {};
         row.rowId = this._rows.length + 1;
@@ -43740,7 +43740,7 @@ class NovoTableElement {
         (column) => {
             // Use the control passed or use a ReadOnlyControl so that the form has the values
             /** @type {?} */
-            let control = column.editorConfig
+            const control = column.editorConfig
                 ? ControlFactory.create(column.editorType, column.editorConfig)
                 : new ReadOnlyControl({ key: column.name });
             control.value = null; // remove copied column value
@@ -43764,9 +43764,9 @@ class NovoTableElement {
     validateAndGetUpdatedData() {
         if (this.tableForm && this.tableForm.controls && this.tableForm.controls['rows']) {
             /** @type {?} */
-            let changedRows = [];
+            const changedRows = [];
             /** @type {?} */
-            let errors = [];
+            const errors = [];
             // Go over the FormArray's controls
             ((/** @type {?} */ (this.tableForm.controls['rows']))).controls.forEach((/**
              * @param {?} formGroup
@@ -43785,7 +43785,7 @@ class NovoTableElement {
                  */
                 (key) => {
                     /** @type {?} */
-                    let control = formGroup.controls[key];
+                    const control = formGroup.controls[key];
                     // Handle value changing
                     if (control && control.dirty && !control.errors) {
                         if (!changedRow) {
@@ -43814,16 +43814,16 @@ class NovoTableElement {
                     changedRows.push(changedRow);
                 }
                 if (error) {
-                    errors.push({ errors: error, row: this._rows[index], index: index });
+                    errors.push({ errors: error, row: this._rows[index], index });
                 }
             }));
             /** @type {?} */
-            let ret = {};
+            const ret = {};
             // Return errors if any, otherwise return the changed rows
             if (errors.length === 0) {
                 return { changed: changedRows };
             }
-            return { errors: errors };
+            return { errors };
         }
     }
     /**
@@ -44268,7 +44268,7 @@ class NovoValueElement {
             this._type = NOVO_VALUE_TYPE.LINK;
             // Make sure the value has a protocol, otherwise the URL will be relative
             /** @type {?} */
-            let hasProtocol = new RegExp('^(http|https)://', 'i');
+            const hasProtocol = new RegExp('^(http|https)://', 'i');
             if (!hasProtocol.test(this.data)) {
                 this.url = `http://${this.data}`;
             }
@@ -44308,11 +44308,11 @@ class NovoValueElement {
      */
     isLinkField(field, data) {
         /** @type {?} */
-        let linkFields = ['companyURL', 'clientCorporationCompanyURL'];
+        const linkFields = ['companyURL', 'clientCorporationCompanyURL'];
         /** @type {?} */
-        let regex = new RegExp('^(https?://(?:www.|(?!www))[^s.]+.[^s]{2,}|www.[^s]+.[^s]{2,})$', 'gi');
+        const regex = new RegExp('^(https?://(?:www.|(?!www))[^s.]+.[^s]{2,}|www.[^s]+.[^s]{2,})$', 'gi');
         /** @type {?} */
-        let isURL = Helpers.isString(data) && regex.exec(data.trim());
+        const isURL = Helpers.isString(data) && regex.exec(data.trim());
         return linkFields.indexOf(field.name) > -1 || !!isURL || field.type === NOVO_VALUE_TYPE.LINK;
     }
     /**
@@ -44423,9 +44423,9 @@ class RenderPipe {
             return true;
         }
         /** @type {?} */
-        let t1 = typeof objectOne;
+        const t1 = typeof objectOne;
         /** @type {?} */
-        let t2 = typeof objectTwo;
+        const t2 = typeof objectTwo;
         /** @type {?} */
         let length;
         /** @type {?} */
@@ -44594,7 +44594,7 @@ class RenderPipe {
                 case 'SecondaryAddress':
                 case 'BillingAddress':
                     /** @type {?} */
-                    let country = findByCountryId(Number(value.countryName));
+                    const country = findByCountryId(Number(value.countryName));
                     text = '';
                     if (value.address1 || value.address2) {
                         text += `${value.address1 || ''} ${value.address2 || ''}<br />\n`;
@@ -44696,7 +44696,7 @@ class RenderPipe {
                     break;
                 case 'Country':
                     /** @type {?} */
-                    let countryObj = findByCountryId(Number(value));
+                    const countryObj = findByCountryId(Number(value));
                     text = countryObj ? countryObj.name : value;
                     break;
                 case 'Html':
@@ -44757,11 +44757,11 @@ class RenderPipe {
      */
     concat(list, ...fields) {
         /** @type {?} */
-        let data = [];
-        for (let item of list) {
+        const data = [];
+        for (const item of list) {
             /** @type {?} */
-            let label = [];
-            for (let field of fields) {
+            const label = [];
+            for (const field of fields) {
                 label.push(`${item[field]}`);
             }
             data.push(label.join(' '));
@@ -44810,9 +44810,9 @@ class RenderPipe {
         let decimalPlaces;
         if (value) {
             /** @type {?} */
-            let numberString = parseFloat(value).toString();
+            const numberString = parseFloat(value).toString();
             /** @type {?} */
-            let decimalPlace = (numberString || '').split('.')[1] || '';
+            const decimalPlace = (numberString || '').split('.')[1] || '';
             decimalPlaces = decimalPlace.length;
         }
         return decimalPlaces || 1;
@@ -44890,7 +44890,7 @@ class EntityList {
         this.metaDisplay = Helpers.deepClone(this.meta);
         this.metaDisplay.type = 'TO_ONE';
         this.baseEntity = this.meta.associatedEntity.entity;
-        for (let entity of this.data.data) {
+        for (const entity of this.data.data) {
             entity.isLinkable = this.isLinkable(entity);
             entity.class = this.getClass(entity);
         }
@@ -45821,9 +45821,9 @@ class NovoStepper extends _angular_cdk_stepper__WEBPACK_IMPORTED_MODULE_24__["Cd
     get completed() {
         try {
             /** @type {?} */
-            let steps = this._steps.toArray();
+            const steps = this._steps.toArray();
             /** @type {?} */
-            let length = steps.length - 1;
+            const length = steps.length - 1;
             return steps[length].completed && length === this.selectedIndex;
         }
         catch (err) {
@@ -45846,7 +45846,7 @@ class NovoStepper extends _angular_cdk_stepper__WEBPACK_IMPORTED_MODULE_24__["Cd
     complete() {
         try {
             /** @type {?} */
-            let steps = this._steps.toArray();
+            const steps = this._steps.toArray();
             steps[this.selectedIndex].completed = true;
             this.next();
             this._stateChanged();
@@ -45861,7 +45861,7 @@ class NovoStepper extends _angular_cdk_stepper__WEBPACK_IMPORTED_MODULE_24__["Cd
      */
     getIndicatorType(index) {
         /** @type {?} */
-        let steps = this._steps.toArray();
+        const steps = this._steps.toArray();
         if (index === this.selectedIndex) {
             if (steps[index] && index === steps.length - 1 && steps[index].completed) {
                 return 'done';
@@ -46039,7 +46039,7 @@ class NovoCategoryDropdownElement extends OutsideClick {
      */
     ngOnInit() {
         /** @type {?} */
-        let button = this.element.nativeElement.querySelector('button');
+        const button = this.element.nativeElement.querySelector('button');
         button.addEventListener('click', this.clickHandler);
     }
     /**
@@ -46047,7 +46047,7 @@ class NovoCategoryDropdownElement extends OutsideClick {
      */
     ngOnDestroy() {
         /** @type {?} */
-        let button = this.element.nativeElement.querySelector('button');
+        const button = this.element.nativeElement.querySelector('button');
         if (button) {
             button.removeEventListener('click', this.clickHandler);
         }
@@ -46368,7 +46368,7 @@ class NovoMultiPickerElement {
              */
             (option) => {
                 /** @type {?} */
-                let formattedOption = this.setupOptionsByType(option);
+                const formattedOption = this.setupOptionsByType(option);
                 this._options.push(formattedOption);
             }));
         }
@@ -46380,7 +46380,7 @@ class NovoMultiPickerElement {
      */
     setupOptionsByType(section) {
         /** @type {?} */
-        let formattedSection = {
+        const formattedSection = {
             type: section.type,
             label: section.label || section.type,
         };
@@ -46393,7 +46393,7 @@ class NovoMultiPickerElement {
         }));
         if (this.selectAllOption) {
             /** @type {?} */
-            let selectAll = this.createSelectAllOption(section);
+            const selectAll = this.createSelectAllOption(section);
             formattedSection.data.splice(0, 0, selectAll);
         }
         formattedSection.originalData = formattedSection.data.slice();
@@ -46406,7 +46406,7 @@ class NovoMultiPickerElement {
      */
     formatOption(section, item) {
         /** @type {?} */
-        let obj = {
+        const obj = {
             value: section.field ? item[section.field] : item.value || item,
             label: section.format ? Helpers.interpolate(section.format, item) : item.label || String(item.value || item),
             type: section.type,
@@ -46425,7 +46425,7 @@ class NovoMultiPickerElement {
      */
     createSelectAllOption(section) {
         /** @type {?} */
-        let selectAll = {
+        const selectAll = {
             value: 'ALL',
             label: `All ${section.type}`,
             type: section.type,
@@ -46435,7 +46435,7 @@ class NovoMultiPickerElement {
         };
         if (section.isChildOf) {
             /** @type {?} */
-            let allParents = section.data.reduce((/**
+            const allParents = section.data.reduce((/**
              * @param {?} accum
              * @param {?} next
              * @return {?}
@@ -46486,7 +46486,7 @@ class NovoMultiPickerElement {
             this.modifyAffectedParentsOrChildren(event.checked, event);
             // Set focus on the picker
             /** @type {?} */
-            let input = this.element.nativeElement.querySelector('novo-picker > input');
+            const input = this.element.nativeElement.querySelector('novo-picker > input');
             if (input) {
                 input.focus();
             }
@@ -46515,9 +46515,9 @@ class NovoMultiPickerElement {
      */
     updateAllItemState(type) {
         /** @type {?} */
-        let allOfType = this.getAllOfType(type);
+        const allOfType = this.getAllOfType(type);
         /** @type {?} */
-        let allOfTypeSelected = this.allItemsSelected(allOfType, type);
+        const allOfTypeSelected = this.allItemsSelected(allOfType, type);
         if (allOfTypeSelected) {
             this.selectAll(allOfType, type);
         }
@@ -46533,7 +46533,7 @@ class NovoMultiPickerElement {
             return;
         }
         /** @type {?} */
-        let allItem = allOfType[0];
+        const allItem = allOfType[0];
         allItem.indeterminate = status;
     }
     /**
@@ -46543,7 +46543,7 @@ class NovoMultiPickerElement {
      */
     updateDisplayItems(item, action) {
         /** @type {?} */
-        let adding = action === 'add';
+        const adding = action === 'add';
         if (adding) {
             this.items.push(item);
         }
@@ -46562,7 +46562,7 @@ class NovoMultiPickerElement {
     updateDisplayText(items) {
         this.notShown = [];
         /** @type {?} */
-        let notShown = items.slice(this.chipsCount);
+        const notShown = items.slice(this.chipsCount);
         if (notShown.length > 0) {
             this.types.forEach((/**
              * @param {?} type
@@ -46572,7 +46572,7 @@ class NovoMultiPickerElement {
                 /** @type {?} */
                 let count;
                 /** @type {?} */
-                let selectedOfType = notShown.filter((/**
+                const selectedOfType = notShown.filter((/**
                  * @param {?} x
                  * @return {?}
                  */
@@ -46584,9 +46584,9 @@ class NovoMultiPickerElement {
                     count = selectedOfType.length;
                 }
                 /** @type {?} */
-                let displayType = count === 1 ? type.singular : type.plural || type.value;
+                const displayType = count === 1 ? type.singular : type.plural || type.value;
                 if (count > 0) {
-                    this.notShown.push({ type: displayType, count: count });
+                    this.notShown.push({ type: displayType, count });
                 }
             }));
         }
@@ -46603,7 +46603,7 @@ class NovoMultiPickerElement {
             triggeredByEvent = true;
         }
         /** @type {?} */
-        let itemToRemove = item;
+        const itemToRemove = item;
         if (itemToRemove.value === 'ALL') {
             triggeredByEvent = false;
             this.modifyAllOfType(itemToRemove.type, 'unselect');
@@ -46635,7 +46635,7 @@ class NovoMultiPickerElement {
      */
     removeValue(item) {
         /** @type {?} */
-        let updatedValues = this.value[item.type].filter((/**
+        const updatedValues = this.value[item.type].filter((/**
          * @param {?} x
          * @return {?}
          */
@@ -46682,9 +46682,9 @@ class NovoMultiPickerElement {
      */
     modifyAllOfType(type, action) {
         /** @type {?} */
-        let selecting = action === 'select';
+        const selecting = action === 'select';
         /** @type {?} */
-        let allOfType = this.getAllOfType(type);
+        const allOfType = this.getAllOfType(type);
         allOfType.forEach((/**
          * @param {?} item
          * @return {?}
@@ -46715,7 +46715,7 @@ class NovoMultiPickerElement {
      */
     triggerValueUpdate() {
         /** @type {?} */
-        let updatedObject = {};
+        const updatedObject = {};
         this.types.forEach((/**
          * @param {?} x
          * @return {?}
@@ -46734,7 +46734,7 @@ class NovoMultiPickerElement {
         }
         allOfType[0].checked = true;
         /** @type {?} */
-        let values = allOfType.map((/**
+        const values = allOfType.map((/**
          * @param {?} i
          * @return {?}
          */
@@ -46745,7 +46745,7 @@ class NovoMultiPickerElement {
         values.splice(0, 1);
         this.value[type] = values;
         /** @type {?} */
-        let updatedItems = this.items.filter((/**
+        const updatedItems = this.items.filter((/**
          * @param {?} x
          * @return {?}
          */
@@ -46762,22 +46762,22 @@ class NovoMultiPickerElement {
             return;
         }
         /** @type {?} */
-        let type = item.type;
+        const type = item.type;
         /** @type {?} */
-        let allOfType = this.getAllOfType(type);
+        const allOfType = this.getAllOfType(type);
         /** @type {?} */
-        let allItem = allOfType[0];
+        const allItem = allOfType[0];
         this.removeItem(allItem);
         allItem.indeterminate = true;
         /** @type {?} */
-        let selectedItems = allOfType.filter((/**
+        const selectedItems = allOfType.filter((/**
          * @param {?} i
          * @return {?}
          */
         (i) => i.checked === true));
         this.items = [...this.items, ...selectedItems];
         /** @type {?} */
-        let values = selectedItems.map((/**
+        const values = selectedItems.map((/**
          * @param {?} i
          * @return {?}
          */
@@ -46831,21 +46831,21 @@ class NovoMultiPickerElement {
             return;
         }
         /** @type {?} */
-        let parent = this.types.filter((/**
+        const parent = this.types.filter((/**
          * @param {?} x
          * @return {?}
          */
         (x) => !!x.isParentOf))[0];
         /** @type {?} */
-        let parentType = parent.value;
+        const parentType = parent.value;
         /** @type {?} */
-        let allParentType = this.getAllOfType(parentType);
+        const allParentType = this.getAllOfType(parentType);
         /** @type {?} */
-        let childType = allParentType[0].isParentOf;
+        const childType = allParentType[0].isParentOf;
         /** @type {?} */
-        let allChildren = this.getAllOfType(childType);
+        const allChildren = this.getAllOfType(childType);
         /** @type {?} */
-        let allCheckedChildren = allChildren.filter((/**
+        const allCheckedChildren = allChildren.filter((/**
          * @param {?} x
          * @return {?}
          */
@@ -46859,7 +46859,7 @@ class NovoMultiPickerElement {
                 return;
             }
             /** @type {?} */
-            let selectedChildrenOfParent = allCheckedChildren.filter((/**
+            const selectedChildrenOfParent = allCheckedChildren.filter((/**
              * @param {?} x
              * @return {?}
              */
@@ -46878,7 +46878,7 @@ class NovoMultiPickerElement {
             }
             else {
                 /** @type {?} */
-                let allChildrenOfParent = allChildren.filter((/**
+                const allChildrenOfParent = allChildren.filter((/**
                  * @param {?} x
                  * @return {?}
                  */
@@ -46945,11 +46945,11 @@ class NovoMultiPickerElement {
      */
     updateAllChildrenValue(item, action) {
         /** @type {?} */
-        let selecting = action === 'select';
+        const selecting = action === 'select';
         /** @type {?} */
-        let childType = item.isParentOf;
+        const childType = item.isParentOf;
         /** @type {?} */
-        let potentialChildren = this.getAllOfType(childType);
+        const potentialChildren = this.getAllOfType(childType);
         if (this.selectAllOption && this.allOfTypeSelected(childType) && !selecting) {
             this.remove(null, potentialChildren[0]);
             return;
@@ -46980,11 +46980,11 @@ class NovoMultiPickerElement {
      */
     updateAllParentValue(item, action) {
         /** @type {?} */
-        let selecting = action === 'select';
+        const selecting = action === 'select';
         /** @type {?} */
-        let parentType = item.isChildOf;
+        const parentType = item.isChildOf;
         /** @type {?} */
-        let potentialParents = this.getAllOfType(parentType);
+        const potentialParents = this.getAllOfType(parentType);
         potentialParents.forEach((/**
          * @param {?} x
          * @return {?}
@@ -47003,15 +47003,15 @@ class NovoMultiPickerElement {
      */
     updateIndeterminateStates(allParentType, allChildren, allCheckedChildren) {
         /** @type {?} */
-        let allCheckedOrIndeterminateParents = allParentType.filter((/**
+        const allCheckedOrIndeterminateParents = allParentType.filter((/**
          * @param {?} x
          * @return {?}
          */
         (x) => (!!x.checked || !!x.indeterminate) && x.value !== 'ALL'));
         /** @type {?} */
-        let isParentIndeterminate = !!allParentType[0].checked ? false : allCheckedOrIndeterminateParents.length > 0;
+        const isParentIndeterminate = !!allParentType[0].checked ? false : allCheckedOrIndeterminateParents.length > 0;
         /** @type {?} */
-        let isChildIndeterminate = !!allChildren[0].checked ? false : allCheckedChildren.length > 0;
+        const isChildIndeterminate = !!allChildren[0].checked ? false : allCheckedChildren.length > 0;
         this.setIndeterminateState(allParentType, isParentIndeterminate);
         this.setIndeterminateState(allChildren, isChildIndeterminate);
     }
@@ -47022,11 +47022,11 @@ class NovoMultiPickerElement {
      */
     updateChildrenValue(parent, action) {
         /** @type {?} */
-        let selecting = action === 'select';
+        const selecting = action === 'select';
         /** @type {?} */
-        let childType = parent.isParentOf;
+        const childType = parent.isParentOf;
         /** @type {?} */
-        let potentialChildren = this.getAllOfType(childType);
+        const potentialChildren = this.getAllOfType(childType);
         potentialChildren.forEach((/**
          * @param {?} x
          * @return {?}
@@ -47060,7 +47060,7 @@ class NovoMultiPickerElement {
      */
     updateParentValue(child, action) {
         /** @type {?} */
-        let allParentType = this.getAllOfType(child.isChildOf);
+        const allParentType = this.getAllOfType(child.isChildOf);
         if (allParentType[0].checked && action !== 'select') {
             this.handleRemoveItemIfAllSelected(allParentType[0]);
         }
@@ -47118,16 +47118,16 @@ class NovoMultiPickerElement {
          */
         (typeObj) => {
             /** @type {?} */
-            let type = typeObj.value;
+            const type = typeObj.value;
             if (this.value[type]) {
                 /** @type {?} */
                 let indeterminateIsSet = false;
                 /** @type {?} */
-                let options = this.updateAllItemState(type);
+                const options = this.updateAllItemState(type);
                 /** @type {?} */
-                let optionsByType = options.allOfType;
+                const optionsByType = options.allOfType;
                 /** @type {?} */
-                let allSelected = options.allOfTypeSelected;
+                const allSelected = options.allOfTypeSelected;
                 this.value[type].forEach((/**
                  * @param {?} item
                  * @return {?}
@@ -47138,7 +47138,7 @@ class NovoMultiPickerElement {
                         this.setIndeterminateState(optionsByType, true);
                     }
                     /** @type {?} */
-                    let value = optionsByType.filter((/**
+                    const value = optionsByType.filter((/**
                      * @param {?} x
                      * @return {?}
                      */
@@ -47288,16 +47288,16 @@ class Security {
      */
     grant(data) {
         /** @type {?} */
-        let parsed = [];
+        const parsed = [];
         if (data instanceof Array) {
-            for (let permission of data) {
+            for (const permission of data) {
                 parsed.push(permission.replace(/\s/gi, ''));
             }
         }
         else if (typeof data === 'object') {
-            for (let key in data) {
+            for (const key in data) {
                 if (data[key] instanceof Array) {
-                    for (let permission of data[key]) {
+                    for (const permission of data[key]) {
                         parsed.push(`${key}.${permission}`);
                     }
                 }
@@ -47319,7 +47319,7 @@ class Security {
      */
     revoke(value) {
         /** @type {?} */
-        let i = this.credentials.indexOf(value);
+        const i = this.credentials.indexOf(value);
         this.credentials.splice(i, 1);
         this.change.emit(this.credentials);
     }
@@ -47344,8 +47344,8 @@ class Security {
      */
     checkRoutes(routes, options) {
         /** @type {?} */
-        let filtered = [];
-        for (let route of routes) {
+        const filtered = [];
+        for (const route of routes) {
             if (route.entities && ~route.entities.indexOf(options.entityType)) {
                 if (route.permissions instanceof Function) {
                     if (route.permissions(options, this)) {
@@ -47409,8 +47409,8 @@ class Unless {
         let display = false;
         if (~this.permissions.indexOf('||')) {
             /** @type {?} */
-            let ps = this.permissions.split('||');
-            for (let p of ps) {
+            const ps = this.permissions.split('||');
+            for (const p of ps) {
                 if (this.security.has(p.trim())) {
                     display = true;
                 }
@@ -47766,7 +47766,7 @@ class DataTableState {
             }
             if (preferences.filter) {
                 /** @type {?} */
-                let filters = Helpers.convertToArray(preferences.filter);
+                const filters = Helpers.convertToArray(preferences.filter);
                 filters.forEach((/**
                  * @param {?} filter
                  * @return {?}
@@ -47841,7 +47841,7 @@ class StaticDataTableService {
                 this.currentData = this.currentData.slice(page * pageSize, (page + 1) * pageSize);
             }
         }
-        return Object(rxjs__WEBPACK_IMPORTED_MODULE_11__["of"])({ results: this.currentData, total: total });
+        return Object(rxjs__WEBPACK_IMPORTED_MODULE_11__["of"])({ results: this.currentData, total });
     }
     /**
      * @param {?} currentData
@@ -47850,7 +47850,7 @@ class StaticDataTableService {
      */
     filterData(currentData, filter) {
         /** @type {?} */
-        let filters = Helpers.convertToArray(filter);
+        const filters = Helpers.convertToArray(filter);
         filters.forEach((/**
          * @param {?} aFilter
          * @return {?}
@@ -47858,12 +47858,12 @@ class StaticDataTableService {
         (aFilter) => {
             if (Array.isArray(aFilter.value)) {
                 /** @type {?} */
-                let values = Helpers.convertToArray(aFilter.value).map(Helpers.escapeString);
+                const values = Helpers.convertToArray(aFilter.value).map(Helpers.escapeString);
                 currentData = currentData.filter(Helpers.filterByField(aFilter.id, values));
             }
             else {
                 /** @type {?} */
-                let value = Helpers.escapeString(aFilter.value);
+                const value = Helpers.escapeString(aFilter.value);
                 currentData = currentData.filter(Helpers.filterByField(aFilter.id, value));
             }
         }));
@@ -47962,7 +47962,7 @@ class NovoDataTable {
             if (this.name !== 'novo-data-table') {
                 this.preferencesChanged.emit({
                     name: this.name,
-                    displayedColumns: displayedColumns,
+                    displayedColumns,
                 });
             }
             else {
@@ -48005,7 +48005,7 @@ class NovoDataTable {
     set rows(rows) {
         this.loading = false;
         /** @type {?} */
-        let service = new StaticDataTableService(rows);
+        const service = new StaticDataTableService(rows);
         this.dataSource = new DataTableSource(service, this.state, this.ref);
         this.ref.detectChanges();
     }
@@ -48245,7 +48245,7 @@ class NovoDataTable {
      */
     expandRow(row) {
         /** @type {?} */
-        let expanded = this.isExpanded(row);
+        const expanded = this.isExpanded(row);
         if (expanded) {
             this.state.expandedRows.delete(`${row[this.rowIdentifier]}`);
         }
@@ -48300,7 +48300,7 @@ class NovoDataTable {
      */
     selectRow(row) {
         /** @type {?} */
-        let selected = this.isSelected(row);
+        const selected = this.isSelected(row);
         if (selected) {
             this.state.selectedRows.delete(`${row[this.rowIdentifier]}`);
         }
@@ -48447,7 +48447,7 @@ class NovoDataTable {
         /** @type {?} */
         const target = (/** @type {?} */ (this.novoDataTableContainer.nativeElement));
         /** @type {?} */
-        let left = target.scrollLeft;
+        const left = target.scrollLeft;
         if (left !== this.scrollLeft) {
             this.scrollLeft = target.scrollLeft;
         }
@@ -49072,7 +49072,7 @@ class NovoDataTableSortFilter {
         }
         this.state.filter = filter;
         this.state.reset(false, true);
-        this.state.updates.next({ filter: filter, sort: this.state.sort });
+        this.state.updates.next({ filter, sort: this.state.sort });
         this.state.onSortFilterChange();
     }
     /**
@@ -49083,10 +49083,10 @@ class NovoDataTableSortFilter {
      */
     sort(id, value, transform) {
         /** @type {?} */
-        let sort = { id, value, transform };
+        const sort = { id, value, transform };
         this.state.sort = sort;
         this.state.reset(false, true);
-        this.state.updates.next({ sort: sort, filter: this.state.filter });
+        this.state.updates.next({ sort, filter: this.state.filter });
         this.state.onSortFilterChange();
     }
     /**
@@ -49102,7 +49102,7 @@ class NovoDataTableSortFilter {
         let filter;
         filter = Helpers.convertToArray(this.state.filter);
         /** @type {?} */
-        let filterIndex = filter.findIndex((/**
+        const filterIndex = filter.findIndex((/**
          * @param {?} aFilter
          * @return {?}
          */
@@ -49188,7 +49188,7 @@ class NovoDataTableCellHeader {
         };
         this.resizable = this.config.resizable;
         /** @type {?} */
-        let transforms = {};
+        const transforms = {};
         if (column.filterable && Helpers.isObject(column.filterable)) {
             this.config.filterConfig = (/** @type {?} */ (column.filterable));
             if (!this.config.filterConfig.type) {
@@ -49286,7 +49286,7 @@ class NovoDataTableCellHeader {
                      * @param {?} option
                      * @return {?}
                      */
-                    (option) => ({ option: option, hidden: false })));
+                    (option) => ({ option, hidden: false })));
                 }
                 else {
                     this.multiSelectedOptionIsHidden = ((/** @type {?} */ (this.config.filterConfig.options))).map((/**
@@ -49294,7 +49294,7 @@ class NovoDataTableCellHeader {
                      * @return {?}
                      */
                     (option) => ({
-                        option: option,
+                        option,
                         hidden: false,
                     })));
                 }
@@ -49312,7 +49312,7 @@ class NovoDataTableCellHeader {
             /** @type {?} */
             const optionValue = option.hasOwnProperty('value') ? option.value : option;
             /** @type {?} */
-            let found = optionsList.find((/**
+            const found = optionsList.find((/**
              * @param {?} item
              * @return {?}
              */
@@ -49329,7 +49329,7 @@ class NovoDataTableCellHeader {
         /** @type {?} */
         const optionValue = option.hasOwnProperty('value') ? option.value : option;
         /** @type {?} */
-        let optionIndex = this.multiSelectedOptions.findIndex((/**
+        const optionIndex = this.multiSelectedOptions.findIndex((/**
          * @param {?} item
          * @return {?}
          */
@@ -49383,7 +49383,7 @@ class NovoDataTableCellHeader {
         else {
             this.clearOptionFilter();
             /** @type {?} */
-            let actualFilter = this.multiSelectedOptions.length > 0 ? [...this.multiSelectedOptions] : undefined;
+            const actualFilter = this.multiSelectedOptions.length > 0 ? [...this.multiSelectedOptions] : undefined;
             this.filterData(actualFilter);
             this.dropdown.closePanel();
         }
@@ -49491,7 +49491,7 @@ class NovoDataTableCellHeader {
         /** @type {?} */
         const minimumWidth = 60 + (this.config.filterable ? 30 : 0) + (this.config.sortable ? 30 : 0);
         /** @type {?} */
-        let startingWidth = this.elementRef.nativeElement.getBoundingClientRect().width;
+        const startingWidth = this.elementRef.nativeElement.getBoundingClientRect().width;
         /** @type {?} */
         const mouseMoveSubscription = Object(rxjs__WEBPACK_IMPORTED_MODULE_11__["fromEvent"])(window.document, 'mousemove').subscribe((/**
          * @param {?} middleMouseEvent
@@ -49499,7 +49499,7 @@ class NovoDataTableCellHeader {
          */
         (middleMouseEvent) => {
             /** @type {?} */
-            let differenceWidth = middleMouseEvent.clientX - mouseDownEvent.clientX;
+            const differenceWidth = middleMouseEvent.clientX - mouseDownEvent.clientX;
             /** @type {?} */
             let width = startingWidth + differenceWidth;
             if (width < minimumWidth) {
@@ -49513,7 +49513,7 @@ class NovoDataTableCellHeader {
             this.resized.next(this._column);
         }));
         /** @type {?} */
-        let mouseUpSubscription = Object(rxjs__WEBPACK_IMPORTED_MODULE_11__["fromEvent"])(window.document, 'mouseup').subscribe((/**
+        const mouseUpSubscription = Object(rxjs__WEBPACK_IMPORTED_MODULE_11__["fromEvent"])(window.document, 'mouseup').subscribe((/**
          * @return {?}
          */
         () => {
@@ -49630,7 +49630,7 @@ class NovoDataTableCellHeader {
      */
     getDefaultDateFilterOptions() {
         /** @type {?} */
-        let opts = [
+        const opts = [
             { label: this.labels.past1Day, min: -1, max: 0 },
             { label: this.labels.past7Days, min: -7, max: 0 },
             { label: this.labels.past30Days, min: -30, max: 0 },
@@ -50242,7 +50242,7 @@ class NovoDataTablePagination {
      */
     emitPageEvent(isPageSizeChange = false) {
         /** @type {?} */
-        let event = {
+        const event = {
             page: this.page,
             pageSize: this.pageSize,
             length: this.length,
@@ -50277,8 +50277,8 @@ class NovoDataTablePagination {
      */
     makePage(number, text, isActive) {
         return {
-            number: number,
-            text: text,
+            number,
+            text,
             active: isActive,
         };
     }
@@ -50290,7 +50290,7 @@ class NovoDataTablePagination {
      */
     getPages(currentPage, totalPages) {
         /** @type {?} */
-        let pages = [];
+        const pages = [];
         // Default page limits
         /** @type {?} */
         let startPage = 1;
@@ -50592,7 +50592,7 @@ class DataTableBigDecimalRendererPipe {
     transform(value, column) {
         if (!Helpers.isEmpty(value)) {
             /** @type {?} */
-            let val = interpolateCell(value, column);
+            const val = interpolateCell(value, column);
             return this.labels.formatBigDecimal(Number(val));
         }
         return '';
@@ -50627,7 +50627,7 @@ class DateTableCurrencyRendererPipe {
     transform(value, column) {
         if (!Helpers.isEmpty(value)) {
             /** @type {?} */
-            let val = interpolateCell(value, column);
+            const val = interpolateCell(value, column);
             return this.labels.formatCurrency(Number(val));
         }
         return '';
@@ -51619,7 +51619,7 @@ class GooglePlacesService {
         (resolve) => {
             if (Object(_angular_common__WEBPACK_IMPORTED_MODULE_1__["isPlatformBrowser"])(this.platformId)) {
                 /** @type {?} */
-                let _window = this._global.nativeGlobal;
+                const _window = this._global.nativeGlobal;
                 if (_window.navigator.geolocation) {
                     _window.navigator.geolocation.getCurrentPosition((/**
                      * @param {?} pos
@@ -51627,7 +51627,7 @@ class GooglePlacesService {
                      */
                     (pos) => {
                         /** @type {?} */
-                        let latlng = { lat: parseFloat(pos.coords.latitude + ''), lng: parseFloat(pos.coords.longitude + '') };
+                        const latlng = { lat: parseFloat(pos.coords.latitude + ''), lng: parseFloat(pos.coords.longitude + '') };
                         resolve(latlng);
                     }));
                 }
@@ -51652,9 +51652,9 @@ class GooglePlacesService {
         (resolve) => {
             if (Object(_angular_common__WEBPACK_IMPORTED_MODULE_1__["isPlatformBrowser"])(this.platformId)) {
                 /** @type {?} */
-                let _window = this._global.nativeGlobal;
+                const _window = this._global.nativeGlobal;
                 /** @type {?} */
-                let geocoder = new _window.google.maps.Geocoder();
+                const geocoder = new _window.google.maps.Geocoder();
                 geocoder.geocode({ location: latlng }, (/**
                  * @param {?} results
                  * @param {?} status
@@ -51697,13 +51697,13 @@ class GooglePlacesService {
         (resolve) => {
             if (Object(_angular_common__WEBPACK_IMPORTED_MODULE_1__["isPlatformBrowser"])(this.platformId)) {
                 /** @type {?} */
-                let _window = this._global.nativeGlobal;
+                const _window = this._global.nativeGlobal;
                 /** @type {?} */
-                let placesService = new _window.google.maps.places.AutocompleteService();
+                const placesService = new _window.google.maps.places.AutocompleteService();
                 /** @type {?} */
                 let queryInput = {};
                 /** @type {?} */
-                let promiseArr = [];
+                const promiseArr = [];
                 if (params.countryRestriction.length) {
                     queryInput = {
                         input: params.query,
@@ -51722,7 +51722,7 @@ class GooglePlacesService {
                 if (params.geoTypes.length) {
                     for (let i = 0; i < params.geoTypes.length; i++) {
                         /** @type {?} */
-                        let _tempQuery = queryInput;
+                        const _tempQuery = queryInput;
                         _tempQuery['types'] = new Array(params.geoTypes[i]);
                         promiseArr.push(this.geoPredictionCall(placesService, _tempQuery));
                     }
@@ -51736,7 +51736,7 @@ class GooglePlacesService {
                  */
                 (values) => {
                     /** @type {?} */
-                    let val = values;
+                    const val = values;
                     if (val.length > 1) {
                         /** @type {?} */
                         let _tempArr = [];
@@ -51770,10 +51770,10 @@ class GooglePlacesService {
         (resolve) => {
             if (Object(_angular_common__WEBPACK_IMPORTED_MODULE_1__["isPlatformBrowser"])(this.platformId)) {
                 /** @type {?} */
-                let _window = this._global.nativeGlobal;
+                const _window = this._global.nativeGlobal;
                 /** @type {?} */
-                let placesService = new _window.google.maps.places.PlacesService(document.createElement('div'));
-                placesService.getDetails({ placeId: placeId }, (/**
+                const placesService = new _window.google.maps.places.PlacesService(document.createElement('div'));
+                placesService.getDetails({ placeId }, (/**
                  * @param {?} result
                  * @param {?} status
                  * @return {?}
@@ -51815,9 +51815,9 @@ class GooglePlacesService {
         (resolve) => {
             if (Object(_angular_common__WEBPACK_IMPORTED_MODULE_1__["isPlatformBrowser"])(this.platformId)) {
                 /** @type {?} */
-                let _window = this._global.nativeGlobal;
+                const _window = this._global.nativeGlobal;
                 /** @type {?} */
-                let placesService = new _window.google.maps.places.PlacesService();
+                const placesService = new _window.google.maps.places.PlacesService();
                 placesService.getDetails({ reference: referance }, (/**
                  * @param {?} result
                  * @param {?} status
@@ -51906,7 +51906,7 @@ class GooglePlacesService {
      */
     geoPredictionCall(placesService, queryInput) {
         /** @type {?} */
-        let _window = this._global.nativeGlobal;
+        const _window = this._global.nativeGlobal;
         return new Promise((/**
          * @param {?} resolve
          * @return {?}
@@ -52397,7 +52397,7 @@ class AppBridge {
             }
             else {
                 /** @type {?} */
-                let openListPacket = {};
+                const openListPacket = {};
                 Object.assign(openListPacket, { type: 'List', entityType: packet.type, keywords: packet.keywords, criteria: packet.criteria });
                 postRobot
                     .sendToParent(MESSAGE_TYPES.OPEN_LIST, packet)
@@ -52508,7 +52508,7 @@ class AppBridge {
                     console.info('[AppBridge] - close(packet) is deprecated! Please just use close()!'); // tslint:disable-line
                 }
                 /** @type {?} */
-                let realPacket = { id: this.id, windowName: this.windowName };
+                const realPacket = { id: this.id, windowName: this.windowName };
                 postRobot
                     .sendToParent(MESSAGE_TYPES.CLOSE, realPacket)
                     .then((/**
@@ -52565,7 +52565,7 @@ class AppBridge {
                     console.info('[AppBridge] - refresh(packet) is deprecated! Please just use refresh()!'); // tslint:disable-line
                 }
                 /** @type {?} */
-                let realPacket = { id: this.id, windowName: this.windowName };
+                const realPacket = { id: this.id, windowName: this.windowName };
                 postRobot
                     .sendToParent(MESSAGE_TYPES.REFRESH, realPacket)
                     .then((/**
@@ -52622,7 +52622,7 @@ class AppBridge {
                     console.info('[AppBridge] - pin(packet) is deprecated! Please just use pin()!'); // tslint:disable-line
                 }
                 /** @type {?} */
-                let realPacket = { id: this.id, windowName: this.windowName };
+                const realPacket = { id: this.id, windowName: this.windowName };
                 postRobot
                     .sendToParent(MESSAGE_TYPES.PIN, realPacket)
                     .then((/**
@@ -52822,7 +52822,7 @@ class AppBridge {
          */
         (resolve, reject) => {
             if (this._handlers[AppBridgeHandler.HTTP]) {
-                this._handlers[AppBridgeHandler.HTTP]({ verb: HTTP_VERBS.GET, relativeURL: relativeURL }, (/**
+                this._handlers[AppBridgeHandler.HTTP]({ verb: HTTP_VERBS.GET, relativeURL }, (/**
                  * @param {?} data
                  * @param {?} error
                  * @return {?}
@@ -52865,7 +52865,7 @@ class AppBridge {
          */
         (resolve, reject) => {
             if (this._handlers[AppBridgeHandler.HTTP]) {
-                this._handlers[AppBridgeHandler.HTTP]({ verb: HTTP_VERBS.POST, relativeURL: relativeURL, data: postData }, (/**
+                this._handlers[AppBridgeHandler.HTTP]({ verb: HTTP_VERBS.POST, relativeURL, data: postData }, (/**
                  * @param {?} data
                  * @param {?} error
                  * @return {?}
@@ -52876,7 +52876,7 @@ class AppBridge {
             }
             else {
                 postRobot
-                    .sendToParent(MESSAGE_TYPES.HTTP_POST, { relativeURL: relativeURL, data: postData })
+                    .sendToParent(MESSAGE_TYPES.HTTP_POST, { relativeURL, data: postData })
                     .then((/**
                  * @param {?} event
                  * @return {?}
@@ -52908,7 +52908,7 @@ class AppBridge {
          */
         (resolve, reject) => {
             if (this._handlers[AppBridgeHandler.HTTP]) {
-                this._handlers[AppBridgeHandler.HTTP]({ verb: HTTP_VERBS.PUT, relativeURL: relativeURL, data: putData }, (/**
+                this._handlers[AppBridgeHandler.HTTP]({ verb: HTTP_VERBS.PUT, relativeURL, data: putData }, (/**
                  * @param {?} data
                  * @param {?} error
                  * @return {?}
@@ -52919,7 +52919,7 @@ class AppBridge {
             }
             else {
                 postRobot
-                    .sendToParent(MESSAGE_TYPES.HTTP_PUT, { relativeURL: relativeURL, data: putData })
+                    .sendToParent(MESSAGE_TYPES.HTTP_PUT, { relativeURL, data: putData })
                     .then((/**
                  * @param {?} event
                  * @return {?}
@@ -52950,7 +52950,7 @@ class AppBridge {
          */
         (resolve, reject) => {
             if (this._handlers[AppBridgeHandler.HTTP]) {
-                this._handlers[AppBridgeHandler.HTTP]({ verb: HTTP_VERBS.DELETE, relativeURL: relativeURL }, (/**
+                this._handlers[AppBridgeHandler.HTTP]({ verb: HTTP_VERBS.DELETE, relativeURL }, (/**
                  * @param {?} data
                  * @param {?} error
                  * @return {?}
@@ -53025,7 +53025,7 @@ class AppBridge {
             (frame) => {
                 postRobot.send(frame.source, MESSAGE_TYPES.CUSTOM_EVENT, {
                     eventType: event,
-                    data: data,
+                    data,
                 });
             }));
         }
@@ -53053,12 +53053,12 @@ class DevAppBridge extends AppBridge {
         super(traceName);
         this.http = http;
         /** @type {?} */
-        let cookie = this.getCookie('UlEncodedIdentity');
+        const cookie = this.getCookie('UlEncodedIdentity');
         if (cookie && cookie.length) {
             /** @type {?} */
-            let identity = JSON.parse(decodeURIComponent(cookie));
+            const identity = JSON.parse(decodeURIComponent(cookie));
             /** @type {?} */
-            let endpoints = identity.sessions.reduce((/**
+            const endpoints = identity.sessions.reduce((/**
              * @param {?} obj
              * @param {?} session
              * @return {?}
@@ -53117,9 +53117,9 @@ class DevAppBridge extends AppBridge {
     getCookie(cname) {
         if (document) {
             /** @type {?} */
-            let name = `${cname}=`;
+            const name = `${cname}=`;
             /** @type {?} */
-            let ca = document.cookie.split(';');
+            const ca = document.cookie.split(';');
             for (let i = 0; i < ca.length; i++) {
                 /** @type {?} */
                 let c = ca[i];
@@ -53236,7 +53236,7 @@ class StaticActivityTableService {
             }
             if (filter) {
                 /** @type {?} */
-                let value = Helpers.isString(filter.value) ? filter.value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') : filter.value;
+                const value = Helpers.isString(filter.value) ? filter.value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') : filter.value;
                 ret = ret.filter(Helpers.filterByField(filter.id, value));
             }
             if (sort) {
@@ -53707,7 +53707,7 @@ class NovoSortFilter {
         }
         this.state.filter = filter;
         this.state.reset(false, true);
-        this.state.updates.next({ filter: filter, sort: this.state.sort });
+        this.state.updates.next({ filter, sort: this.state.sort });
     }
     /**
      * @param {?} id
@@ -53717,10 +53717,10 @@ class NovoSortFilter {
      */
     sort(id, value, transform) {
         /** @type {?} */
-        let sort = { id, value, transform };
+        const sort = { id, value, transform };
         this.state.sort = sort;
         this.state.reset(false, true);
-        this.state.updates.next({ sort: sort, filter: this.state.filter });
+        this.state.updates.next({ sort, filter: this.state.filter });
     }
 }
 NovoSortFilter.decorators = [
@@ -54513,7 +54513,7 @@ class NovoSimpleCellHeader {
      */
     getDefaultDateFilterOptions() {
         /** @type {?} */
-        let opts = [
+        const opts = [
             { label: this.labels.past1Day, min: -1, max: 0 },
             { label: this.labels.past7Days, min: -7, max: 0 },
             { label: this.labels.past30Days, min: -30, max: 0 },
@@ -54818,7 +54818,7 @@ class NovoSimpleTablePagination {
      */
     emitPageEvent() {
         /** @type {?} */
-        let event = {
+        const event = {
             page: this.page,
             pageSize: this.pageSize,
             length: this.length,
@@ -55047,58 +55047,58 @@ class PopOverContent {
      */
     positionElements(hostEl, targetEl, positionStr, appendToBody = false) {
         /** @type {?} */
-        let positionStrParts = positionStr.split('-');
+        const positionStrParts = positionStr.split('-');
         /** @type {?} */
-        let mainSide = (this.effectivePlacement = this.getEffectivePlacement(positionStrParts[0] || 'right', hostEl, targetEl));
+        const mainSide = (this.effectivePlacement = this.getEffectivePlacement(positionStrParts[0] || 'right', hostEl, targetEl));
         /** @type {?} */
-        let orientation = (this.effectiveAlignment = positionStrParts[1] || 'center');
+        const orientation = (this.effectiveAlignment = positionStrParts[1] || 'center');
         /** @type {?} */
-        let hostElPos = appendToBody ? this.offset(hostEl) : this.position(hostEl);
+        const hostElPos = appendToBody ? this.offset(hostEl) : this.position(hostEl);
         /** @type {?} */
-        let targetElWidth = targetEl.offsetWidth;
+        const targetElWidth = targetEl.offsetWidth;
         /** @type {?} */
-        let targetElHeight = targetEl.offsetHeight;
+        const targetElHeight = targetEl.offsetHeight;
         /** @type {?} */
-        let shiftWidth = {
-            center: (/**
+        const shiftWidth = {
+            /**
              * @return {?}
              */
-            function () {
+            center() {
                 return hostElPos.left + (hostElPos.width - targetElWidth) / 2;
-            }),
-            right: (/**
+            },
+            /**
              * @return {?}
              */
-            function () {
+            right() {
                 return hostElPos.left;
-            }),
-            left: (/**
+            },
+            /**
              * @return {?}
              */
-            function () {
+            left() {
                 return hostElPos.left + (hostElPos.width - targetElWidth);
-            }),
+            },
         };
         /** @type {?} */
-        let shiftHeight = {
-            center: (/**
+        const shiftHeight = {
+            /**
              * @return {?}
              */
-            function () {
+            center() {
                 return hostElPos.top + (hostElPos.height - targetElHeight) / 2;
-            }),
-            bottom: (/**
+            },
+            /**
              * @return {?}
              */
-            function () {
+            bottom() {
                 return hostElPos.top;
-            }),
-            top: (/**
+            },
+            /**
              * @return {?}
              */
-            function () {
+            top() {
                 return hostElPos.top + (hostElPos.height - targetElHeight);
-            }),
+            },
         };
         /** @type {?} */
         let targetElPos;
@@ -55568,7 +55568,7 @@ class PlacesListComponent {
      */
     searchinputCallback(event) {
         /** @type {?} */
-        let inputVal = this.locationInput;
+        const inputVal = this.locationInput;
         if (inputVal) {
             this.getListQuery(inputVal);
         }
@@ -55635,7 +55635,7 @@ class PlacesListComponent {
      */
     userQuerySubmit(selectedOption) {
         /** @type {?} */
-        let _userOption = selectedOption === 'false' ? '' : this.userSelectedOption;
+        const _userOption = selectedOption === 'false' ? '' : this.userSelectedOption;
         if (_userOption) {
             this.select.emit(this.userSelectedOption);
         }
@@ -55728,11 +55728,11 @@ class PlacesListComponent {
      */
     setUserSettings() {
         /** @type {?} */
-        let _tempObj = {};
+        const _tempObj = {};
         if (this.userSettings && typeof this.userSettings === 'object') {
             /** @type {?} */
-            let keys = Object.keys(this.defaultSettings);
-            for (let value of keys) {
+            const keys = Object.keys(this.defaultSettings);
+            for (const value of keys) {
                 _tempObj[value] = this.userSettings[value] !== undefined ? this.userSettings[value] : this.defaultSettings[value];
             }
             return _tempObj;
@@ -55751,7 +55751,7 @@ class PlacesListComponent {
         this.recentDropdownOpen = false;
         if (this.settings.useGoogleGeoApi) {
             /** @type {?} */
-            let _tempParams = {
+            const _tempParams = {
                 query: value,
                 countryRestriction: this.settings.geoCountryRestriction,
                 geoTypes: this.settings.geoTypes,
@@ -55790,7 +55790,7 @@ class PlacesListComponent {
         if (arrayList.length) {
             /** @type {?} */
             let _tempData = data;
-            for (let key of arrayList) {
+            for (const key of arrayList) {
                 _tempData = _tempData[key];
             }
             return _tempData;
@@ -56085,7 +56085,7 @@ class ActivityTableRenderers {
      */
     static propertyRenderer(prop) {
         /** @type {?} */
-        let ret = (/**
+        const ret = (/**
          * @param {?} data
          * @return {?}
          */
@@ -56102,7 +56102,7 @@ class ActivityTableRenderers {
      */
     static dateRenderer(prop) {
         /** @type {?} */
-        let ret = (/**
+        const ret = (/**
          * @param {?} data
          * @return {?}
          */
@@ -56464,7 +56464,7 @@ class ButtonDynamicExample {
      */
     changeTheme() {
         /** @type {?} */
-        let i = Math.floor(Math.random() * 4);
+        const i = Math.floor(Math.random() * 4);
         this.theme = ['primary', 'secondary', 'dialogue', 'standard', 'icon'][i];
     }
 }
@@ -56850,10 +56850,10 @@ class BigCalendarExample {
      */
     getNewEvent(date, color, type) {
         /** @type {?} */
-        let evt = {
+        const evt = {
             title: 'Meeting',
             description: 'with @jgodi',
-            color: color,
+            color,
             start: date,
             response: type,
             type: 'Meeting',
@@ -56866,7 +56866,7 @@ class BigCalendarExample {
      */
     dayClicked(date) {
         /** @type {?} */
-        let evt = this.getNewEvent(date, colors.blue, novo_elements__WEBPACK_IMPORTED_MODULE_3__["CalendarEventResponse"].Maybe);
+        const evt = this.getNewEvent(date, colors.blue, novo_elements__WEBPACK_IMPORTED_MODULE_3__["CalendarEventResponse"].Maybe);
         this.events.push(evt);
         this.events = [...this.events];
     }
@@ -56876,7 +56876,7 @@ class BigCalendarExample {
      */
     addShift(event) {
         /** @type {?} */
-        let evt = this.getNewEvent(event.day.date, colors.blue, novo_elements__WEBPACK_IMPORTED_MODULE_3__["CalendarEventResponse"].Maybe);
+        const evt = this.getNewEvent(event.day.date, colors.blue, novo_elements__WEBPACK_IMPORTED_MODULE_3__["CalendarEventResponse"].Maybe);
         this.events.push(evt);
         this.events = [...this.events];
     }
@@ -57303,7 +57303,7 @@ class DataTableRemoteExample {
         this.staticDataSet1 = [];
         for (let i = 0; i < 1000; i++) {
             /** @type {?} */
-            let day = i < 500 ? Object(date_fns__WEBPACK_IMPORTED_MODULE_6__["subDays"])(new Date(), i) : Object(date_fns__WEBPACK_IMPORTED_MODULE_6__["addDays"])(new Date(), i - 500);
+            const day = i < 500 ? Object(date_fns__WEBPACK_IMPORTED_MODULE_6__["subDays"])(new Date(), i) : Object(date_fns__WEBPACK_IMPORTED_MODULE_6__["addDays"])(new Date(), i - 500);
             this.staticDataSet1.push({
                 id: i,
                 embeddedObj: { id: i, test: `HMM ${i}`, another: { id: 777 } },
@@ -57337,7 +57337,7 @@ class DataTableRemoteExample {
      */
     getPriorityOptions() {
         /** @type {?} */
-        let options = new Array();
+        const options = new Array();
         /** @type {?} */
         let i;
         for (i = 0; i < 49; i++) {
@@ -57388,7 +57388,7 @@ class DataTableRemoteExample {
         (columns) => {
             if (columns) {
                 /** @type {?} */
-                let enabledColumns = columns.filter((/**
+                const enabledColumns = columns.filter((/**
                  * @param {?} column
                  * @return {?}
                  */
@@ -57448,11 +57448,11 @@ class RemoteMockDataService extends novo_elements__WEBPACK_IMPORTED_MODULE_3__["
      */
     getTableResults(sort, filter, page, pageSize, globalSearch) {
         /** @type {?} */
-        let whereQuery = this.buildWhereClause(filter);
+        const whereQuery = this.buildWhereClause(filter);
         /** @type {?} */
-        let sortQuery = this.buildSortColumn(sort);
+        const sortQuery = this.buildSortColumn(sort);
         /** @type {?} */
-        let pageQuery = this.buildStart(page, pageSize);
+        const pageQuery = this.buildStart(page, pageSize);
         this.url = `http://mock-api.com?where=${whereQuery}&sort=${sortQuery}&pageSize=${pageSize}&page=${pageQuery}`;
         return Object(rxjs__WEBPACK_IMPORTED_MODULE_7__["of"])({ results: this.data, total: this.data.length }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["delay"])(5000));
     }
@@ -57463,10 +57463,10 @@ class RemoteMockDataService extends novo_elements__WEBPACK_IMPORTED_MODULE_3__["
      */
     buildWhereClause(filter) {
         /** @type {?} */
-        let query = {};
+        const query = {};
         if (filter) {
             /** @type {?} */
-            let filters = novo_elements__WEBPACK_IMPORTED_MODULE_3__["Helpers"].convertToArray(filter);
+            const filters = novo_elements__WEBPACK_IMPORTED_MODULE_3__["Helpers"].convertToArray(filter);
             filters.forEach((/**
              * @param {?} aFilter
              * @return {?}
@@ -57509,10 +57509,10 @@ class RemoteMockDataService extends novo_elements__WEBPACK_IMPORTED_MODULE_3__["
      */
     toQuerySyntax(data) {
         /** @type {?} */
-        let queries = [];
-        for (let key in data) {
+        const queries = [];
+        for (const key in data) {
             /** @type {?} */
-            let value = data[key];
+            const value = data[key];
             if (key === 'or') {
                 queries.push(`(${this.toQuerySyntax(value).replace(/ AND /g, ' OR ')})`);
             }
@@ -57531,22 +57531,22 @@ class RemoteMockDataService extends novo_elements__WEBPACK_IMPORTED_MODULE_3__["
      */
     parseQueryValue(key, value, isNot = false) {
         /** @type {?} */
-        let clauses = [];
+        const clauses = [];
         /** @type {?} */
-        let IN = isNot ? ' NOT IN ' : ' IN ';
+        const IN = isNot ? ' NOT IN ' : ' IN ';
         /** @type {?} */
-        let EQ = isNot ? '<>' : '=';
+        const EQ = isNot ? '<>' : '=';
         /** @type {?} */
-        let GT = isNot ? '<' : '>=';
+        const GT = isNot ? '<' : '>=';
         /** @type {?} */
-        let LT = isNot ? '>=' : '<';
+        const LT = isNot ? '>=' : '<';
         if (Array.isArray(value)) {
             clauses.push(`${key}${IN}(${this.writeQueryValues(value)})`);
         }
         else if (value instanceof Object) {
             if (typeof value.isNull === 'boolean') {
                 /** @type {?} */
-                let query = value.isNull ? 'IS NULL' : 'IS NOT NULL';
+                const query = value.isNull ? 'IS NULL' : 'IS NOT NULL';
                 clauses.push(`${key} ${query}`);
             }
             if (value.min !== null && value.min !== undefined) {
@@ -57569,7 +57569,7 @@ class RemoteMockDataService extends novo_elements__WEBPACK_IMPORTED_MODULE_3__["
             }
             if (value.lookup !== null && value.lookup !== undefined) {
                 /** @type {?} */
-                let obj = {};
+                const obj = {};
                 obj[key] = value.lookup;
                 clauses.push(this.toQuerySyntax(obj));
             }
@@ -57581,14 +57581,14 @@ class RemoteMockDataService extends novo_elements__WEBPACK_IMPORTED_MODULE_3__["
             }
             if (value.or !== null && value.or !== undefined) {
                 /** @type {?} */
-                let obj = {};
+                const obj = {};
                 obj[key] = value.or;
                 clauses.push(this.toQuerySyntax(obj).replace('AND', 'OR'));
             }
-            for (let subkey in value) {
+            for (const subkey in value) {
                 if (['min', 'max', 'any', 'all', 'not', 'or', 'like', 'lookup', 'with', 'without', 'isNull'].indexOf(subkey) < 0) {
                     /** @type {?} */
-                    let subvalue = value[subkey];
+                    const subvalue = value[subkey];
                     clauses.push(this.parseQueryValue(`${key}.${subkey}`, subvalue));
                 }
             }
@@ -57886,7 +57886,7 @@ class DataTableRowsExample {
         this.selectedRecordId = '';
         for (let i = 0; i < 1000; i++) {
             /** @type {?} */
-            let day = i < 500 ? Object(date_fns__WEBPACK_IMPORTED_MODULE_6__["subDays"])(new Date(), i) : Object(date_fns__WEBPACK_IMPORTED_MODULE_6__["addDays"])(new Date(), i - 500);
+            const day = i < 500 ? Object(date_fns__WEBPACK_IMPORTED_MODULE_6__["subDays"])(new Date(), i) : Object(date_fns__WEBPACK_IMPORTED_MODULE_6__["addDays"])(new Date(), i - 500);
             this.staticDataSet1.push({
                 id: i,
                 embeddedObj: { id: i, test: `HMM ${i}`, another: { id: 777 } },
@@ -57939,7 +57939,7 @@ class DataTableRowsExample {
      */
     getPriorityOptions() {
         /** @type {?} */
-        let options = new Array();
+        const options = new Array();
         /** @type {?} */
         let i;
         for (i = 0; i < 49; i++) {
@@ -58016,7 +58016,7 @@ class DataTableRowsExample {
         (columns) => {
             if (columns) {
                 /** @type {?} */
-                let enabledColumns = columns.filter((/**
+                const enabledColumns = columns.filter((/**
                  * @param {?} column
                  * @return {?}
                  */
@@ -58062,7 +58062,7 @@ class DataTableRowsExample {
      * @return {?}
      */
     filterList(value) {
-        this.table.state.filter = { id: 'status', type: 'text', value: value };
+        this.table.state.filter = { id: 'status', type: 'text', value };
         this.table.state.updates.next({
             globalSearch: this.table.state.globalSearch,
             filter: this.table.state.filter,
@@ -58322,7 +58322,7 @@ class DataTableServiceExample {
         this.staticDataSet3 = [];
         for (let i = 0; i < 1000; i++) {
             /** @type {?} */
-            let day = i < 500 ? Object(date_fns__WEBPACK_IMPORTED_MODULE_6__["subDays"])(new Date(), i) : Object(date_fns__WEBPACK_IMPORTED_MODULE_6__["addDays"])(new Date(), i - 500);
+            const day = i < 500 ? Object(date_fns__WEBPACK_IMPORTED_MODULE_6__["subDays"])(new Date(), i) : Object(date_fns__WEBPACK_IMPORTED_MODULE_6__["addDays"])(new Date(), i - 500);
             this.staticDataSet1.push({
                 id: i,
                 embeddedObj: { id: i, test: `HMM ${i}`, another: { id: 777 } },
@@ -58373,7 +58373,7 @@ class DataTableServiceExample {
      */
     getPriorityOptions() {
         /** @type {?} */
-        let options = new Array();
+        const options = new Array();
         /** @type {?} */
         let i;
         for (i = 0; i < 49; i++) {
@@ -58442,7 +58442,7 @@ class DataTableServiceExample {
         (columns) => {
             if (columns) {
                 /** @type {?} */
-                let enabledColumns = columns.filter((/**
+                const enabledColumns = columns.filter((/**
                  * @param {?} column
                  * @return {?}
                  */
@@ -60024,9 +60024,9 @@ const ɵ0 = /**
  */
 (sort, previous, current) => {
     /** @type {?} */
-    let first = previous.obj;
+    const first = previous.obj;
     /** @type {?} */
-    let second = current.obj;
+    const second = current.obj;
     if (first > second) {
         return sort === 'desc' ? -1 : 1;
     }
@@ -61765,10 +61765,10 @@ class AnalyticsColorsExample {
     copyLink(color) {
         // Create dom element to copy from
         /** @type {?} */
-        let copyFrom = document.createElement('textarea');
+        const copyFrom = document.createElement('textarea');
         copyFrom.textContent = `#${color.hex}`;
         /** @type {?} */
-        let body = document.getElementsByTagName('body')[0];
+        const body = document.getElementsByTagName('body')[0];
         body.appendChild(copyFrom);
         copyFrom.select();
         // Copy text
@@ -61907,10 +61907,10 @@ class EntityColorsExample {
     copyLink(color) {
         // Create dom element to copy from
         /** @type {?} */
-        let copyFrom = document.createElement('textarea');
+        const copyFrom = document.createElement('textarea');
         copyFrom.textContent = `#${color.hex}`;
         /** @type {?} */
-        let body = document.getElementsByTagName('body')[0];
+        const body = document.getElementsByTagName('body')[0];
         body.appendChild(copyFrom);
         copyFrom.select();
         // Copy text
@@ -62019,10 +62019,10 @@ class PrimaryColorsExample {
     copyLink(color) {
         // Create dom element to copy from
         /** @type {?} */
-        let copyFrom = document.createElement('textarea');
+        const copyFrom = document.createElement('textarea');
         copyFrom.textContent = `#${color.hex}`;
         /** @type {?} */
-        let body = document.getElementsByTagName('body')[0];
+        const body = document.getElementsByTagName('body')[0];
         body.appendChild(copyFrom);
         copyFrom.select();
         // Copy text
@@ -62069,7 +62069,7 @@ class AsyncChipsExample {
     constructor() {
         this.placeholder = 'Select...';
         /** @type {?} */
-        let states = [
+        const states = [
             'Alabama',
             'Alaska',
             'Arizona',
@@ -62122,7 +62122,7 @@ class AsyncChipsExample {
             'Wyoming',
         ];
         /** @type {?} */
-        let abbrieviated = [
+        const abbrieviated = [
             {
                 value: 'USA',
                 label: 'United States',
@@ -62173,13 +62173,13 @@ class AsyncChipsExample {
                      */
                     () => {
                         /** @type {?} */
-                        let values = data.map((/**
+                        const values = data.map((/**
                          * @param {?} item
                          * @return {?}
                          */
                         (item) => item.value));
                         /** @type {?} */
-                        let results = abbrieviated.filter((/**
+                        const results = abbrieviated.filter((/**
                          * @param {?} item
                          * @return {?}
                          */
@@ -62313,7 +62313,7 @@ class CloseOnSelectChipsExample {
     constructor() {
         this.placeholder = 'Select...';
         /** @type {?} */
-        let collaborators = [
+        const collaborators = [
             {
                 id: 1,
                 firstName: 'Brian',
@@ -62371,7 +62371,7 @@ class FormattedChipsExample {
     constructor() {
         this.placeholder = 'Select...';
         /** @type {?} */
-        let collaborators = [
+        const collaborators = [
             {
                 id: 1,
                 firstName: 'Brian',
@@ -62435,22 +62435,22 @@ class GroupedMultiPickerExample {
      */
     setupGroupedMultiPickerDemo() {
         /** @type {?} */
-        let categoryMap = new Map();
+        const categoryMap = new Map();
         for (let i = 0; i < 10; i++) {
             /** @type {?} */
-            let items = [];
+            const items = [];
             for (let j = 0; j < 10; j++) {
                 items.push({ value: `${i}-${j}`, label: `Category ${i} - Item ${j}` });
             }
-            categoryMap.set(`${i}`, { value: `${i}`, label: `Category ${i}`, items: items });
+            categoryMap.set(`${i}`, { value: `${i}`, label: `Category ${i}`, items });
         }
         this.groupedMultiPicker1 = {
-            categoryMap: categoryMap,
+            categoryMap,
             resultsTemplate: novo_elements__WEBPACK_IMPORTED_MODULE_3__["GroupedMultiPickerResults"],
             displayAll: true,
         };
         this.groupedMultiPicker2 = {
-            categoryMap: categoryMap,
+            categoryMap,
             resultsTemplate: novo_elements__WEBPACK_IMPORTED_MODULE_3__["GroupedMultiPickerResults"],
         };
         this.groupedMultiPicker3 = {
@@ -62519,7 +62519,7 @@ class RowChipsExample {
     constructor() {
         this.placeholder = 'Select...';
         /** @type {?} */
-        let collaborators = [
+        const collaborators = [
             {
                 id: 1,
                 firstName: 'Brian',
@@ -62911,15 +62911,15 @@ class CustomTemplateExample {
     setupGroupedFormDemo() {
         this.formGroup = this.formUtils.emptyFormGroup();
         /** @type {?} */
-        let label = new novo_elements__WEBPACK_IMPORTED_MODULE_3__["ReadOnlyControl"]({ key: 'label', value: 'Label :)' });
+        const label = new novo_elements__WEBPACK_IMPORTED_MODULE_3__["ReadOnlyControl"]({ key: 'label', value: 'Label :)' });
         /** @type {?} */
-        let c1 = new novo_elements__WEBPACK_IMPORTED_MODULE_3__["SelectControl"]({ key: 'text', label: 'Text Box', options: [{ value: 'hello', label: 'Hello' }] });
+        const c1 = new novo_elements__WEBPACK_IMPORTED_MODULE_3__["SelectControl"]({ key: 'text', label: 'Text Box', options: [{ value: 'hello', label: 'Hello' }] });
         /** @type {?} */
-        let c2 = new novo_elements__WEBPACK_IMPORTED_MODULE_3__["TextBoxControl"]({ type: 'percentage', key: 'percentage', label: 'Percent', required: true });
+        const c2 = new novo_elements__WEBPACK_IMPORTED_MODULE_3__["TextBoxControl"]({ type: 'percentage', key: 'percentage', label: 'Percent', required: true });
         /** @type {?} */
-        let c3 = new novo_elements__WEBPACK_IMPORTED_MODULE_3__["CheckboxControl"]({ key: 'checkbox', label: 'Check Me!', width: 100 });
+        const c3 = new novo_elements__WEBPACK_IMPORTED_MODULE_3__["CheckboxControl"]({ key: 'checkbox', label: 'Check Me!', width: 100 });
         /** @type {?} */
-        let c4 = new novo_elements__WEBPACK_IMPORTED_MODULE_3__["TextBoxControl"]({ key: 'test4', label: 'TEST4' });
+        const c4 = new novo_elements__WEBPACK_IMPORTED_MODULE_3__["TextBoxControl"]({ key: 'test4', label: 'TEST4' });
         this.controls.push(label);
         this.controls.push(c1);
         this.controls.push(c2);
@@ -63041,15 +63041,15 @@ class HorizontalOptionsExample {
     setupGroupedFormDemo() {
         this.formGroup = this.formUtils.emptyFormGroup();
         /** @type {?} */
-        let label = new novo_elements__WEBPACK_IMPORTED_MODULE_3__["ReadOnlyControl"]({ key: 'label', value: 'Label :)' });
+        const label = new novo_elements__WEBPACK_IMPORTED_MODULE_3__["ReadOnlyControl"]({ key: 'label', value: 'Label :)' });
         /** @type {?} */
-        let c1 = new novo_elements__WEBPACK_IMPORTED_MODULE_3__["SelectControl"]({ key: 'text', label: 'Text Box', options: [{ value: 'hello', label: 'Hello' }] });
+        const c1 = new novo_elements__WEBPACK_IMPORTED_MODULE_3__["SelectControl"]({ key: 'text', label: 'Text Box', options: [{ value: 'hello', label: 'Hello' }] });
         /** @type {?} */
-        let c2 = new novo_elements__WEBPACK_IMPORTED_MODULE_3__["TextBoxControl"]({ type: 'percentage', key: 'percentage', label: 'Percent', required: true });
+        const c2 = new novo_elements__WEBPACK_IMPORTED_MODULE_3__["TextBoxControl"]({ type: 'percentage', key: 'percentage', label: 'Percent', required: true });
         /** @type {?} */
-        let c3 = new novo_elements__WEBPACK_IMPORTED_MODULE_3__["CheckboxControl"]({ key: 'checkbox', label: 'Check Me!', width: 100 });
+        const c3 = new novo_elements__WEBPACK_IMPORTED_MODULE_3__["CheckboxControl"]({ key: 'checkbox', label: 'Check Me!', width: 100 });
         /** @type {?} */
-        let c4 = new novo_elements__WEBPACK_IMPORTED_MODULE_3__["TextBoxControl"]({ key: 'test4', label: 'TEST4' });
+        const c4 = new novo_elements__WEBPACK_IMPORTED_MODULE_3__["TextBoxControl"]({ key: 'test4', label: 'TEST4' });
         this.controls.push(label);
         this.controls.push(c1);
         this.controls.push(c2);
@@ -63171,15 +63171,15 @@ class HorizontalExample {
     setupGroupedFormDemo() {
         this.formGroup = this.formUtils.emptyFormGroup();
         /** @type {?} */
-        let label = new novo_elements__WEBPACK_IMPORTED_MODULE_3__["ReadOnlyControl"]({ key: 'label', value: 'Label :)' });
+        const label = new novo_elements__WEBPACK_IMPORTED_MODULE_3__["ReadOnlyControl"]({ key: 'label', value: 'Label :)' });
         /** @type {?} */
-        let c1 = new novo_elements__WEBPACK_IMPORTED_MODULE_3__["SelectControl"]({ key: 'text', label: 'Text Box', options: [{ value: 'hello', label: 'Hello' }] });
+        const c1 = new novo_elements__WEBPACK_IMPORTED_MODULE_3__["SelectControl"]({ key: 'text', label: 'Text Box', options: [{ value: 'hello', label: 'Hello' }] });
         /** @type {?} */
-        let c2 = new novo_elements__WEBPACK_IMPORTED_MODULE_3__["TextBoxControl"]({ type: 'percentage', key: 'percentage', label: 'Percent', required: true });
+        const c2 = new novo_elements__WEBPACK_IMPORTED_MODULE_3__["TextBoxControl"]({ type: 'percentage', key: 'percentage', label: 'Percent', required: true });
         /** @type {?} */
-        let c3 = new novo_elements__WEBPACK_IMPORTED_MODULE_3__["CheckboxControl"]({ key: 'checkbox', label: 'Check Me!', width: 100 });
+        const c3 = new novo_elements__WEBPACK_IMPORTED_MODULE_3__["CheckboxControl"]({ key: 'checkbox', label: 'Check Me!', width: 100 });
         /** @type {?} */
-        let c4 = new novo_elements__WEBPACK_IMPORTED_MODULE_3__["TextBoxControl"]({ key: 'test4', label: 'TEST4' });
+        const c4 = new novo_elements__WEBPACK_IMPORTED_MODULE_3__["TextBoxControl"]({ key: 'test4', label: 'TEST4' });
         this.controls.push(label);
         this.controls.push(c1);
         this.controls.push(c2);
@@ -63301,15 +63301,15 @@ class VerticalOptionsExample {
     setupGroupedFormDemo() {
         this.formGroup = this.formUtils.emptyFormGroup();
         /** @type {?} */
-        let label = new novo_elements__WEBPACK_IMPORTED_MODULE_3__["ReadOnlyControl"]({ key: 'label', value: 'Label :)' });
+        const label = new novo_elements__WEBPACK_IMPORTED_MODULE_3__["ReadOnlyControl"]({ key: 'label', value: 'Label :)' });
         /** @type {?} */
-        let c1 = new novo_elements__WEBPACK_IMPORTED_MODULE_3__["SelectControl"]({ key: 'text', label: 'Text Box', options: [{ value: 'hello', label: 'Hello' }] });
+        const c1 = new novo_elements__WEBPACK_IMPORTED_MODULE_3__["SelectControl"]({ key: 'text', label: 'Text Box', options: [{ value: 'hello', label: 'Hello' }] });
         /** @type {?} */
-        let c2 = new novo_elements__WEBPACK_IMPORTED_MODULE_3__["TextBoxControl"]({ type: 'percentage', key: 'percentage', label: 'Percent', required: true });
+        const c2 = new novo_elements__WEBPACK_IMPORTED_MODULE_3__["TextBoxControl"]({ type: 'percentage', key: 'percentage', label: 'Percent', required: true });
         /** @type {?} */
-        let c3 = new novo_elements__WEBPACK_IMPORTED_MODULE_3__["CheckboxControl"]({ key: 'checkbox', label: 'Check Me!', width: 100 });
+        const c3 = new novo_elements__WEBPACK_IMPORTED_MODULE_3__["CheckboxControl"]({ key: 'checkbox', label: 'Check Me!', width: 100 });
         /** @type {?} */
-        let c4 = new novo_elements__WEBPACK_IMPORTED_MODULE_3__["TextBoxControl"]({ key: 'test4', label: 'TEST4' });
+        const c4 = new novo_elements__WEBPACK_IMPORTED_MODULE_3__["TextBoxControl"]({ key: 'test4', label: 'TEST4' });
         this.controls.push(label);
         this.controls.push(c1);
         this.controls.push(c2);
@@ -63431,15 +63431,15 @@ class VerticalExample {
     setupGroupedFormDemo() {
         this.formGroup = this.formUtils.emptyFormGroup();
         /** @type {?} */
-        let label = new novo_elements__WEBPACK_IMPORTED_MODULE_3__["ReadOnlyControl"]({ key: 'label', value: 'Label :)' });
+        const label = new novo_elements__WEBPACK_IMPORTED_MODULE_3__["ReadOnlyControl"]({ key: 'label', value: 'Label :)' });
         /** @type {?} */
-        let c1 = new novo_elements__WEBPACK_IMPORTED_MODULE_3__["SelectControl"]({ key: 'text', label: 'Text Box', options: [{ value: 'hello', label: 'Hello' }] });
+        const c1 = new novo_elements__WEBPACK_IMPORTED_MODULE_3__["SelectControl"]({ key: 'text', label: 'Text Box', options: [{ value: 'hello', label: 'Hello' }] });
         /** @type {?} */
-        let c2 = new novo_elements__WEBPACK_IMPORTED_MODULE_3__["TextBoxControl"]({ type: 'percentage', key: 'percentage', label: 'Percent', required: true });
+        const c2 = new novo_elements__WEBPACK_IMPORTED_MODULE_3__["TextBoxControl"]({ type: 'percentage', key: 'percentage', label: 'Percent', required: true });
         /** @type {?} */
-        let c3 = new novo_elements__WEBPACK_IMPORTED_MODULE_3__["CheckboxControl"]({ key: 'checkbox', label: 'Check Me!', width: 100 });
+        const c3 = new novo_elements__WEBPACK_IMPORTED_MODULE_3__["CheckboxControl"]({ key: 'checkbox', label: 'Check Me!', width: 100 });
         /** @type {?} */
-        let c4 = new novo_elements__WEBPACK_IMPORTED_MODULE_3__["TextBoxControl"]({ key: 'test4', label: 'TEST4' });
+        const c4 = new novo_elements__WEBPACK_IMPORTED_MODULE_3__["TextBoxControl"]({ key: 'test4', label: 'TEST4' });
         this.controls.push(label);
         this.controls.push(c1);
         this.controls.push(c2);
@@ -63603,7 +63603,7 @@ class AddressControlExample {
                              */
                             (resolve) => {
                                 /** @type {?} */
-                                let country = Object(novo_elements__WEBPACK_IMPORTED_MODULE_3__["findByCountryId"])(value);
+                                const country = Object(novo_elements__WEBPACK_IMPORTED_MODULE_3__["findByCountryId"])(value);
                                 if (country) {
                                     resolve({ value: country.id, label: country.name });
                                 }
@@ -63660,7 +63660,7 @@ class AddressControlExample {
      */
     getStateLabel(value) {
         /** @type {?} */
-        let state = this.states.find((/**
+        const state = this.states.find((/**
          * @param {?} s
          * @return {?}
          */
@@ -64836,7 +64836,7 @@ class DisabledFormExample {
         this.note = '';
         // Disabled Form
         /** @type {?} */
-        let disabledOverrides = {
+        const disabledOverrides = {
             address: {
                 readOnly: true,
             },
@@ -65281,7 +65281,7 @@ class FileInputControlsExample {
     checkFileSize(fileList) {
         /** @type {?} */
         const maxSizeKb = 5120;
-        for (let file of fileList) {
+        for (const file of fileList) {
             if (file.size > maxSizeKb * 1024) {
                 this.message = 'File is bigger than the allowed 5MB';
                 return false;
@@ -65319,9 +65319,9 @@ class PickerControlsExample {
     constructor(formUtils) {
         this.formUtils = formUtils;
         /** @type {?} */
-        let fruits = ['Apples', 'Oranges', 'Bananas', 'Grapes'];
+        const fruits = ['Apples', 'Oranges', 'Bananas', 'Grapes'];
         /** @type {?} */
-        let cities = [
+        const cities = [
             {
                 id: 1,
                 name: 'Boston',
@@ -65348,7 +65348,7 @@ class PickerControlsExample {
             },
         ];
         /** @type {?} */
-        let states = [
+        const states = [
             {
                 value: 'ME',
                 label: 'Maine',
@@ -65596,7 +65596,7 @@ class PickerControlsExample {
             },
         });
         /** @type {?} */
-        let controls = [
+        const controls = [
             this.singlePickerControl,
             this.multiPickerControl,
             this.entityMultiPickerControl,
@@ -65933,7 +65933,7 @@ class BasicMultiPickerExample {
         this.value = { states: ['Alabama'], collaborators: [1, 2, 3, 4] };
         this.types = [{ value: 'states', singular: 'state' }, { value: 'collaborators', singular: 'collaborator' }];
         /** @type {?} */
-        let states = [
+        const states = [
             'Alabama',
             'Alaska',
             'Arizona',
@@ -65986,7 +65986,7 @@ class BasicMultiPickerExample {
             'Wyoming',
         ];
         /** @type {?} */
-        let collaborators = [
+        const collaborators = [
             {
                 id: 1,
                 firstName: 'Brian',
@@ -66046,7 +66046,7 @@ class NestedMultiPickerExample {
     constructor() {
         this.placeholder = 'Select...';
         /** @type {?} */
-        let departments = [
+        const departments = [
             {
                 id: 1,
                 name: 'Sales',
@@ -66069,7 +66069,7 @@ class NestedMultiPickerExample {
             },
         ];
         /** @type {?} */
-        let users = [
+        const users = [
             {
                 id: 1,
                 departments: [1, 2, 4],
@@ -66164,7 +66164,7 @@ class AsyncPickerExample {
                      */
                     () => {
                         /** @type {?} */
-                        let arr = [];
+                        const arr = [];
                         for (let i = 0; i < 20; i++) {
                             arr.push({ value: `Page: ${page} - Item: ${i + 1}`, label: `Page: ${page} - Item: ${i + 1}` });
                         }
@@ -66314,7 +66314,7 @@ class CustomPickerResultsExample {
     constructor() {
         this.placeholder = 'Select...';
         /** @type {?} */
-        let collaborators = [
+        const collaborators = [
             {
                 id: 1,
                 firstName: 'Brian',
@@ -66374,7 +66374,7 @@ class DefaultOptionsPickerExample {
     constructor() {
         this.placeholder = 'Select...';
         /** @type {?} */
-        let states = [
+        const states = [
             'Alabama',
             'Alaska',
             'Arizona',
@@ -66505,7 +66505,7 @@ class EntityPickerExample {
     constructor() {
         this.placeholder = 'Select...';
         /** @type {?} */
-        let collaborators = [
+        const collaborators = [
             {
                 id: 1,
                 firstName: 'Brian',
@@ -66564,7 +66564,7 @@ class FormattedPickerExample {
     constructor() {
         this.placeholder = 'Select...';
         /** @type {?} */
-        let collaborators = [
+        const collaborators = [
             {
                 id: 1,
                 firstName: 'Brian',
@@ -66629,34 +66629,34 @@ class GroupedPickerExample {
      */
     setupGroupedPickerDemo() {
         /** @type {?} */
-        let categoryMap = new Map();
+        const categoryMap = new Map();
         for (let i = 0; i < 10; i++) {
             /** @type {?} */
-            let items = [];
+            const items = [];
             for (let j = 0; j < 10; j++) {
                 items.push({ value: `${i}-${j}`, label: `Category ${i} - Item ${j}` });
             }
-            categoryMap.set(`${i}`, { value: `${i}`, label: `Category ${i}`, items: items });
+            categoryMap.set(`${i}`, { value: `${i}`, label: `Category ${i}`, items });
         }
         /** @type {?} */
-        let filterCategoryMap = new Map();
+        const filterCategoryMap = new Map();
         for (let i = 0; i < 10; i++) {
             /** @type {?} */
-            let items = [];
+            const items = [];
             for (let j = 0; j < 10; j++) {
                 /** @type {?} */
-                let filter = Math.random() >= 0.5;
-                items.push({ value: `${i}-${j}`, label: `Category ${i} - Item ${j} - Data - ${filter}`, data: { filter: filter } });
+                const filter = Math.random() >= 0.5;
+                items.push({ value: `${i}-${j}`, label: `Category ${i} - Item ${j} - Data - ${filter}`, data: { filter } });
             }
-            filterCategoryMap.set(`${i}`, { value: `${i}`, label: `Category ${i}`, items: items });
+            filterCategoryMap.set(`${i}`, { value: `${i}`, label: `Category ${i}`, items });
         }
         this.groupedPicker1 = {
-            categoryMap: categoryMap,
+            categoryMap,
             resultsTemplate: novo_elements__WEBPACK_IMPORTED_MODULE_3__["GroupedMultiPickerResults"],
             displayAll: true,
         };
         this.groupedPicker2 = {
-            categoryMap: categoryMap,
+            categoryMap,
             resultsTemplate: novo_elements__WEBPACK_IMPORTED_MODULE_3__["GroupedMultiPickerResults"],
         };
         this.groupedPicker3 = {
@@ -66748,7 +66748,7 @@ class OverrideTemplateExample {
     constructor() {
         this.placeholder = 'Select...';
         /** @type {?} */
-        let states = [
+        const states = [
             'Alabama',
             'Alaska',
             'Arizona',
@@ -68090,20 +68090,20 @@ if (false) {}
 class BasicListExample {
     constructor() {
         /** @type {?} */
-        let ONE_HOUR = 60 * 60 * 1000;
+        const ONE_HOUR = 60 * 60 * 1000;
         /* ms */
         /** @type {?} */
-        let TWO_HOURS = ONE_HOUR * 2;
+        const TWO_HOURS = ONE_HOUR * 2;
         /** @type {?} */
-        let THREE_HOURS = ONE_HOUR * 3;
+        const THREE_HOURS = ONE_HOUR * 3;
         /** @type {?} */
-        let currentDate = new Date();
+        const currentDate = new Date();
         /** @type {?} */
-        let oneHourAgo = currentDate.getTime() - ONE_HOUR;
+        const oneHourAgo = currentDate.getTime() - ONE_HOUR;
         /** @type {?} */
-        let twoHoursAgo = currentDate.getTime() - TWO_HOURS;
+        const twoHoursAgo = currentDate.getTime() - TWO_HOURS;
         /** @type {?} */
-        let threeHoursAgo = currentDate.getTime() - THREE_HOURS;
+        const threeHoursAgo = currentDate.getTime() - THREE_HOURS;
         /* "mockResponse[]" should represent a REST response with improperly formatted data.
             /  The "buildItems()" function is taking this data object and massaging it
             /  to build the list items appropriately via a new data object "pulseItems[]".
@@ -68111,7 +68111,7 @@ class BasicListExample {
             /  - @asibilia
             */
         /** @type {?} */
-        let mockResponse = [
+        const mockResponse = [
             {
                 type: 'opportunity',
                 dateCreated: oneHourAgo,
@@ -68166,9 +68166,9 @@ class BasicListExample {
      * @return {?}
      */
     buildItems(resp) {
-        for (let obj of resp) {
+        for (const obj of resp) {
             /** @type {?} */
-            let item = {};
+            const item = {};
             /*
             ||| This is the item structure to be pushed to pulseItems[] and used
             ||| to build the list & items.
@@ -68223,20 +68223,20 @@ if (false) {}
 class ThemedListExample {
     constructor() {
         /** @type {?} */
-        let ONE_HOUR = 60 * 60 * 1000;
+        const ONE_HOUR = 60 * 60 * 1000;
         /* ms */
         /** @type {?} */
-        let TWO_HOURS = ONE_HOUR * 2;
+        const TWO_HOURS = ONE_HOUR * 2;
         /** @type {?} */
-        let THREE_HOURS = ONE_HOUR * 3;
+        const THREE_HOURS = ONE_HOUR * 3;
         /** @type {?} */
-        let currentDate = new Date();
+        const currentDate = new Date();
         /** @type {?} */
-        let oneHourAgo = currentDate.getTime() - ONE_HOUR;
+        const oneHourAgo = currentDate.getTime() - ONE_HOUR;
         /** @type {?} */
-        let twoHoursAgo = currentDate.getTime() - TWO_HOURS;
+        const twoHoursAgo = currentDate.getTime() - TWO_HOURS;
         /** @type {?} */
-        let threeHoursAgo = currentDate.getTime() - THREE_HOURS;
+        const threeHoursAgo = currentDate.getTime() - THREE_HOURS;
         /* "mockResponse[]" should represent a REST response with improperly formatted data.
             /  The "buildItems()" function is taking this data object and massaging it
             /  to build the list items appropriately via a new data object "pulseItems[]".
@@ -68244,7 +68244,7 @@ class ThemedListExample {
             /  - @asibilia
             */
         /** @type {?} */
-        let mockResponse = [
+        const mockResponse = [
             {
                 type: 'opportunity',
                 dateCreated: oneHourAgo,
@@ -68299,9 +68299,9 @@ class ThemedListExample {
      * @return {?}
      */
     buildItems(resp) {
-        for (let obj of resp) {
+        for (const obj of resp) {
             /** @type {?} */
-            let item = {};
+            const item = {};
             /*
             ||| This is the item structure to be pushed to pulseItems[] and used
             ||| to build the list & items.
@@ -68607,7 +68607,7 @@ class ActivitySectionExample {
     constructor() {
         this.isDisabled = true;
         /** @type {?} */
-        let columns = [
+        const columns = [
             { title: 'Name', name: 'name', ordering: true, type: 'link', filtering: true },
             { title: 'Position', name: 'position', ordering: true, filtering: true },
             {
@@ -68629,9 +68629,9 @@ class ActivitySectionExample {
                  */
                 (sort, previous, current) => {
                     /** @type {?} */
-                    let first = previous.obj;
+                    const first = previous.obj;
                     /** @type {?} */
-                    let second = current.obj;
+                    const second = current.obj;
                     if (first > second) {
                         return sort === 'desc' ? -1 : 1;
                     }
@@ -69260,7 +69260,7 @@ class FiAddingRemovingExample {
         this.formUtils = formUtils;
         this.controls = [];
         /** @type {?} */
-        let addingRemovingFunction = (/**
+        const addingRemovingFunction = (/**
          * @param {?} API
          * @return {?}
          */
@@ -69294,7 +69294,7 @@ class FiAddingRemovingExample {
             API.removeControl('jersey-color');
         });
         /** @type {?} */
-        let removeAddOnChangeFunction = (/**
+        const removeAddOnChangeFunction = (/**
          * @param {?} API
          * @return {?}
          */
@@ -69303,7 +69303,7 @@ class FiAddingRemovingExample {
             // tslint:disable-line
             // Select control with a field interaction on change event
             /** @type {?} */
-            let currentValue = API.getActiveValue();
+            const currentValue = API.getActiveValue();
             if (currentValue === 'Yes') {
                 API.removeControl('to-be-removed');
             }
@@ -69352,7 +69352,7 @@ class FiAsyncExample {
         this.formUtils = formUtils;
         this.controls = {};
         /** @type {?} */
-        let asyncFunction = (/**
+        const asyncFunction = (/**
          * @param {?} API
          * @return {?}
          */
@@ -69427,7 +69427,7 @@ class FiCalculationExample {
         this.controls = {};
         this.snippet = {};
         /** @type {?} */
-        let calculationFunction = (/**
+        const calculationFunction = (/**
          * @param {?} API
          * @return {?}
          */
@@ -69435,9 +69435,9 @@ class FiCalculationExample {
             console.log('[FieldInteractionDemo] - calculationFunction'); // tslint:disable-line
             // tslint:disable-line
             /** @type {?} */
-            let a = Number(API.getValue('a'));
+            const a = Number(API.getValue('a'));
             /** @type {?} */
-            let b = Number(API.getValue('b'));
+            const b = Number(API.getValue('b'));
             API.setValue('sum', a + b);
             API.setValue('date', new Date());
         });
@@ -69505,7 +69505,7 @@ class FiConfirmExample {
         this.formUtils = formUtils;
         this.controls = {};
         /** @type {?} */
-        let confirmFunction = (/**
+        const confirmFunction = (/**
          * @param {?} API
          * @return {?}
          */
@@ -69567,7 +69567,7 @@ class FiEnableDisableExample {
         this.formUtils = formUtils;
         this.controls = {};
         /** @type {?} */
-        let enableDisableFunction = (/**
+        const enableDisableFunction = (/**
          * @param {?} API
          * @return {?}
          */
@@ -69575,7 +69575,7 @@ class FiEnableDisableExample {
             console.log('[FieldInteractionDemo] - enableDisableFunction'); // tslint:disable-line
             // tslint:disable-line
             /** @type {?} */
-            let currentValue = API.getActiveValue();
+            const currentValue = API.getActiveValue();
             if (!currentValue) {
                 API.enable('text');
             }
@@ -69628,7 +69628,7 @@ class FiGlobalsExample {
         this.form = {};
         this.controls = {};
         /** @type {?} */
-        let globalsFunction = (/**
+        const globalsFunction = (/**
          * @param {?} API
          * @return {?}
          */
@@ -69678,7 +69678,7 @@ class FiHideShowExample {
         this.form = {};
         this.controls = {};
         /** @type {?} */
-        let hideShowFunction = (/**
+        const hideShowFunction = (/**
          * @param {?} API
          * @return {?}
          */
@@ -69686,7 +69686,7 @@ class FiHideShowExample {
             console.log('[FieldInteractionDemo] - hideShowFunction'); // tslint:disable-line
             // tslint:disable-line
             /** @type {?} */
-            let activeValue = API.getActiveValue();
+            const activeValue = API.getActiveValue();
             if (!activeValue) {
                 API.show('text');
             }
@@ -69745,7 +69745,7 @@ class FiMessagingExample {
         this.form = {};
         this.controls = {};
         /** @type {?} */
-        let messagingFunction = (/**
+        const messagingFunction = (/**
          * @param {?} API
          * @return {?}
          */
@@ -69843,7 +69843,7 @@ class FiModifyOptionsExample {
         this.form = {};
         this.controls = {};
         /** @type {?} */
-        let modifyOptionsAddFunction = (/**
+        const modifyOptionsAddFunction = (/**
          * @param {?} API
          * @return {?}
          */
@@ -69851,7 +69851,7 @@ class FiModifyOptionsExample {
             console.log('[FieldInteractionDemo] - modifyOptionsAddFunction'); // tslint:disable-line
             // tslint:disable-line
             /** @type {?} */
-            let currentValue = API.getActiveValue();
+            const currentValue = API.getActiveValue();
             if (!currentValue) {
                 API.removeStaticOption('select', 'NEW');
                 API.removeStaticOption('picker', 'NEW');
@@ -69863,7 +69863,7 @@ class FiModifyOptionsExample {
             }
         });
         /** @type {?} */
-        let modifyOptionsAsyncFunction = (/**
+        const modifyOptionsAsyncFunction = (/**
          * @param {?} API
          * @return {?}
          */
@@ -69871,7 +69871,7 @@ class FiModifyOptionsExample {
             console.log('[FieldInteractionDemo] - modifyOptionsAsyncFunction'); // tslint:disable-line
             // tslint:disable-line
             /** @type {?} */
-            let currentValue = API.getActiveValue();
+            const currentValue = API.getActiveValue();
             switch (currentValue) {
                 case 1:
                     // Static
@@ -69921,12 +69921,12 @@ class FiModifyOptionsExample {
                     API.setProperty('picker', 'label', 'Async Picker (with options promise)');
                     API.modifyPickerConfig('picker', {
                         format: '$name $test',
-                        optionsPromise: (/**
+                        /**
                          * @param {?} query
                          * @param {?} http
                          * @return {?}
                          */
-                        function (query, http) {
+                        optionsPromise(query, http) {
                             return new Promise((/**
                              * @param {?} resolve
                              * @param {?} reject
@@ -69956,7 +69956,7 @@ class FiModifyOptionsExample {
                                     resolve(['DEFAULT']);
                                 }
                             }));
-                        }),
+                        },
                     });
                     break;
                 default:
@@ -70032,7 +70032,7 @@ class FiRequiredExample {
         this.form = {};
         this.controls = {};
         /** @type {?} */
-        let requiredFunction = (/**
+        const requiredFunction = (/**
          * @param {?} API
          * @return {?}
          */
@@ -70040,7 +70040,7 @@ class FiRequiredExample {
             console.log('[FieldInteractionDemo] - requiredFunction'); // tslint:disable-line
             // tslint:disable-line
             /** @type {?} */
-            let activeValue = API.getActiveValue();
+            const activeValue = API.getActiveValue();
             if (activeValue) {
                 API.setRequired('required', true);
             }
@@ -70093,7 +70093,7 @@ class FiTooltipExample {
         this.form = {};
         this.controls = {};
         /** @type {?} */
-        let tooltipFunction = (/**
+        const tooltipFunction = (/**
          * @param {?} API
          * @return {?}
          */
@@ -70102,7 +70102,7 @@ class FiTooltipExample {
             API.setTooltip(API.getActiveKey(), API.getActiveValue());
         });
         /** @type {?} */
-        let tooltipUpdateFunction = (/**
+        const tooltipUpdateFunction = (/**
          * @param {?} API
          * @return {?}
          */
@@ -70170,7 +70170,7 @@ class FiValidationExample {
         this.form = {};
         this.controls = {};
         /** @type {?} */
-        let validationFunction = (/**
+        const validationFunction = (/**
          * @param {?} API
          * @return {?}
          */
@@ -70178,7 +70178,7 @@ class FiValidationExample {
             console.log('[FieldInteractionDemo] - validationFunction'); // tslint:disable-line
             // tslint:disable-line
             /** @type {?} */
-            let activeValue = API.getActiveValue();
+            const activeValue = API.getActiveValue();
             if (activeValue > 10) {
                 API.markAsInvalid(API.getActiveKey(), 'Too high! Make it a lot lower!!');
             }
@@ -70838,7 +70838,7 @@ class SecurityExample {
      */
     shufflePermissions() {
         /** @type {?} */
-        let numOfPerms = Math.floor(Math.random() * 2) + 1;
+        const numOfPerms = Math.floor(Math.random() * 2) + 1;
         this.perms = this.shuffle(['A', 'B', 'C']).slice(0, numOfPerms);
         this.security.clear();
         this.security.grant(this.perms);
@@ -71310,7 +71310,7 @@ const EXAMPLE_COMPONENTS = {
     'button-dynamic': {
         title: 'Dynamic buttons',
         component: ButtonDynamicExample,
-        tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0A%0A%2F**%0A%20*%20%40title%20Dynamic%20buttons%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'button-dynamic-example'%2C%0A%20%20templateUrl%3A%20'button-dynamic-example.html'%2C%0A%20%20styleUrls%3A%20%5B'button-dynamic-example.css'%5D%2C%0A%7D)%0Aexport%20class%20ButtonDynamicExample%20%7B%0A%20%20theme%3A%20string%20%3D%20'primary'%3B%0A%20%20isChecked%3A%20boolean%20%3D%20false%3B%0A%20%20negativeColor%3A%20string%20%3D%20'negative'%3B%0A%20%20color%3A%20string%20%3D%20'blue'%3B%0A%0A%20%20changeTheme()%20%7B%0A%20%20%20%20let%20i%20%3D%20Math.floor(Math.random()%20*%204)%3B%0A%20%20%20%20this.theme%20%3D%20%5B'primary'%2C%20'secondary'%2C%20'dialogue'%2C%20'standard'%2C%20'icon'%5D%5Bi%5D%3B%0A%20%20%7D%0A%7D%0A`,
+        tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0A%0A%2F**%0A%20*%20%40title%20Dynamic%20buttons%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'button-dynamic-example'%2C%0A%20%20templateUrl%3A%20'button-dynamic-example.html'%2C%0A%20%20styleUrls%3A%20%5B'button-dynamic-example.css'%5D%2C%0A%7D)%0Aexport%20class%20ButtonDynamicExample%20%7B%0A%20%20theme%3A%20string%20%3D%20'primary'%3B%0A%20%20isChecked%3A%20boolean%20%3D%20false%3B%0A%20%20negativeColor%3A%20string%20%3D%20'negative'%3B%0A%20%20color%3A%20string%20%3D%20'blue'%3B%0A%0A%20%20changeTheme()%20%7B%0A%20%20%20%20const%20i%20%3D%20Math.floor(Math.random()%20*%204)%3B%0A%20%20%20%20this.theme%20%3D%20%5B'primary'%2C%20'secondary'%2C%20'dialogue'%2C%20'standard'%2C%20'icon'%5D%5Bi%5D%3B%0A%20%20%7D%0A%7D%0A`,
         cssSource: `%2F**%20No%20CSS%20for%20this%20example%20*%2F%0A`,
         htmlSource: `%3Cbutton%20%5Btheme%5D%3D%22theme%22%20%5Bicon%5D%3D%22isChecked%20%3F%20'check'%20%3A%20'times'%22%20(click)%3D%22changeTheme()%22%3EChange%20Theme%3C%2Fbutton%3E%0A%3Cnovo-checkbox%20label%3D%22Checked%3F%22%20%5B(ngModel)%5D%3D%22isChecked%22%3E%3C%2Fnovo-checkbox%3E%0A%3Cbutton%20%5Btheme%5D%3D%22theme%22%20%5Bicon%5D%3D%22isChecked%20%3F%20'check'%20%3A%20'times'%22%20(click)%3D%22changeTheme()%22%20%5Bdisabled%5D%3D%22isChecked%22%3EChange%20Theme%3C%2Fbutton%3E%0A`
     },
@@ -71373,7 +71373,7 @@ const EXAMPLE_COMPONENTS = {
     'big-calendar': {
         title: 'Big Calendar Example',
         component: BigCalendarExample,
-        tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0Aimport%20%7B%20CalendarEvent%2C%20CalendarEventResponse%20%7D%20from%20'novo-elements'%3B%0A%0Aconst%20colors%3A%20any%20%3D%20%7B%0A%20%20red%3A%20%7B%0A%20%20%20%20primary%3A%20'%23ad2121'%2C%0A%20%20%20%20secondary%3A%20'%23FAE3E3'%2C%0A%20%20%7D%2C%0A%20%20blue%3A%20%7B%0A%20%20%20%20primary%3A%20'%231e90ff'%2C%0A%20%20%20%20secondary%3A%20'%23D1E8FF'%2C%0A%20%20%7D%2C%0A%20%20yellow%3A%20%7B%0A%20%20%20%20primary%3A%20'%23e3bc08'%2C%0A%20%20%20%20secondary%3A%20'%23FDF1BA'%2C%0A%20%20%7D%2C%0A%20%20green%3A%20%7B%0A%20%20%20%20primary%3A%20'%238CC152'%2C%0A%20%20%20%20secondary%3A%20'%2337BC9B'%2C%0A%20%20%7D%2C%0A%7D%3B%0A%0A%2F**%0A%20*%20%40title%20Big%20Calendar%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'big-calendar-example'%2C%0A%20%20templateUrl%3A%20'big-calendar-example.html'%2C%0A%20%20styleUrls%3A%20%5B'big-calendar-example.css'%5D%2C%0A%7D)%0Aexport%20class%20BigCalendarExample%20%7B%0A%20%20public%20views%3A%20Array%3Cany%3E%20%3D%20%5B%0A%20%20%20%20%7B%0A%20%20%20%20%20%20label%3A%20'Month'%2C%0A%20%20%20%20%20%20value%3A%20'month'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20label%3A%20'Week'%2C%0A%20%20%20%20%20%20value%3A%20'week'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20label%3A%20'Day'%2C%0A%20%20%20%20%20%20value%3A%20'day'%2C%0A%20%20%20%20%7D%2C%0A%20%20%5D%3B%0A%20%20view%3A%20string%20%3D%20'month'%3B%0A%0A%20%20viewDate%3A%20Date%20%3D%20new%20Date()%3B%0A%20%20events%3A%20CalendarEvent%5B%5D%20%3D%20%5B%0A%20%20%20%20%7B%0A%20%20%20%20%20%20title%3A%20'Interview'%2C%0A%20%20%20%20%20%20description%3A%20'with%20%40bvkimball'%2C%0A%20%20%20%20%20%20color%3A%20colors.green%2C%0A%20%20%20%20%20%20start%3A%20new%20Date()%2C%0A%20%20%20%20%20%20response%3A%20CalendarEventResponse.Rejected%2C%0A%20%20%20%20%20%20type%3A%20'Interview'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20title%3A%20'Client%20Visit'%2C%0A%20%20%20%20%20%20description%3A%20'with%20%40asibilia'%2C%0A%20%20%20%20%20%20color%3A%20colors.red%2C%0A%20%20%20%20%20%20start%3A%20new%20Date(Date.now()%20%2B%2060000%20*%2030)%2C%0A%20%20%20%20%20%20response%3A%20CalendarEventResponse.Accepted%2C%0A%20%20%20%20%20%20type%3A%20'Visit'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20title%3A%20'Interview'%2C%0A%20%20%20%20%20%20description%3A%20'with%20%40johndoe'%2C%0A%20%20%20%20%20%20color%3A%20colors.green%2C%0A%20%20%20%20%20%20start%3A%20new%20Date(Date.now()%20%2B%2060000%20*%2090)%2C%0A%20%20%20%20%20%20response%3A%20CalendarEventResponse.Accepted%2C%0A%20%20%20%20%20%20type%3A%20'Interview'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20title%3A%20'Phone%20Interview'%2C%0A%20%20%20%20%20%20description%3A%20'with%20%40johnsully83'%2C%0A%20%20%20%20%20%20color%3A%20colors.green%2C%0A%20%20%20%20%20%20start%3A%20new%20Date(Date.now()%20%2B%2060000%20*%2090)%2C%0A%20%20%20%20%20%20end%3A%20new%20Date(Date.now()%20%2B%2060000%20*%20180)%2C%0A%20%20%20%20%20%20response%3A%20CalendarEventResponse.Accepted%2C%0A%20%20%20%20%20%20type%3A%20'Interview'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20title%3A%20'Interview'%2C%0A%20%20%20%20%20%20description%3A%20'with%20%40johnsully83'%2C%0A%20%20%20%20%20%20color%3A%20colors.green%2C%0A%20%20%20%20%20%20start%3A%20new%20Date(Date.now()%20%2B%2060000%20*%2090)%2C%0A%20%20%20%20%20%20end%3A%20new%20Date(Date.now()%20%2B%2060000%20*%20150)%2C%0A%20%20%20%20%20%20response%3A%20CalendarEventResponse.Accepted%2C%0A%20%20%20%20%20%20type%3A%20'Interview'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20title%3A%20'Final%20Interview'%2C%0A%20%20%20%20%20%20description%3A%20'with%20%40johnsully83'%2C%0A%20%20%20%20%20%20color%3A%20colors.green%2C%0A%20%20%20%20%20%20start%3A%20new%20Date(Date.now()%20%2B%2060000%20*%2090)%2C%0A%20%20%20%20%20%20end%3A%20new%20Date(Date.now()%20%2B%2060000%20*%20120)%2C%0A%20%20%20%20%20%20response%3A%20CalendarEventResponse.Accepted%2C%0A%20%20%20%20%20%20type%3A%20'Interview'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20title%3A%20'Phone%20Interview'%2C%0A%20%20%20%20%20%20description%3A%20'with%20%40johnsully83'%2C%0A%20%20%20%20%20%20color%3A%20colors.green%2C%0A%20%20%20%20%20%20start%3A%20new%20Date(Date.now()%20%2B%2060000%20*%2090)%2C%0A%20%20%20%20%20%20end%3A%20new%20Date(Date.now()%20%2B%2060000%20*%20180)%2C%0A%20%20%20%20%20%20response%3A%20CalendarEventResponse.Accepted%2C%0A%20%20%20%20%20%20type%3A%20'Interview'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20title%3A%20'Interview'%2C%0A%20%20%20%20%20%20description%3A%20'with%20%40johnsully83'%2C%0A%20%20%20%20%20%20color%3A%20colors.green%2C%0A%20%20%20%20%20%20start%3A%20new%20Date(Date.now()%20%2B%2060000%20*%2090)%2C%0A%20%20%20%20%20%20end%3A%20new%20Date(Date.now()%20%2B%2060000%20*%20150)%2C%0A%20%20%20%20%20%20response%3A%20CalendarEventResponse.Accepted%2C%0A%20%20%20%20%20%20type%3A%20'Interview'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20title%3A%20'Final%20Interview'%2C%0A%20%20%20%20%20%20description%3A%20'with%20%40johnsully83'%2C%0A%20%20%20%20%20%20color%3A%20colors.green%2C%0A%20%20%20%20%20%20start%3A%20new%20Date(Date.now()%20%2B%2060000%20*%2090)%2C%0A%20%20%20%20%20%20end%3A%20new%20Date(Date.now()%20%2B%2060000%20*%20120)%2C%0A%20%20%20%20%20%20response%3A%20CalendarEventResponse.Accepted%2C%0A%20%20%20%20%20%20type%3A%20'Interview'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20title%3A%20'Phone%20Interview'%2C%0A%20%20%20%20%20%20description%3A%20'with%20%40johnsully83'%2C%0A%20%20%20%20%20%20color%3A%20colors.green%2C%0A%20%20%20%20%20%20start%3A%20new%20Date(Date.now()%20%2B%2060000%20*%2090)%2C%0A%20%20%20%20%20%20end%3A%20new%20Date(Date.now()%20%2B%2060000%20*%20180)%2C%0A%20%20%20%20%20%20response%3A%20CalendarEventResponse.Accepted%2C%0A%20%20%20%20%20%20type%3A%20'Interview'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20title%3A%20'Interview'%2C%0A%20%20%20%20%20%20description%3A%20'with%20%40johnsully83'%2C%0A%20%20%20%20%20%20color%3A%20colors.green%2C%0A%20%20%20%20%20%20start%3A%20new%20Date(Date.now()%20%2B%2060000%20*%2090)%2C%0A%20%20%20%20%20%20end%3A%20new%20Date(Date.now()%20%2B%2060000%20*%20150)%2C%0A%20%20%20%20%20%20response%3A%20CalendarEventResponse.Accepted%2C%0A%20%20%20%20%20%20type%3A%20'Interview'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20title%3A%20'Final%20Interview'%2C%0A%20%20%20%20%20%20description%3A%20'with%20%40johnsully83'%2C%0A%20%20%20%20%20%20color%3A%20colors.green%2C%0A%20%20%20%20%20%20start%3A%20new%20Date(Date.now()%20%2B%2060000%20*%2090)%2C%0A%20%20%20%20%20%20end%3A%20new%20Date(Date.now()%20%2B%2060000%20*%20120)%2C%0A%20%20%20%20%20%20response%3A%20CalendarEventResponse.Accepted%2C%0A%20%20%20%20%20%20type%3A%20'Interview'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20title%3A%20'Phone%20Interview'%2C%0A%20%20%20%20%20%20description%3A%20'with%20%40johnsully83'%2C%0A%20%20%20%20%20%20color%3A%20colors.green%2C%0A%20%20%20%20%20%20start%3A%20new%20Date(Date.now()%20%2B%2060000%20*%2075)%2C%0A%20%20%20%20%20%20end%3A%20new%20Date(Date.now()%20%2B%2060000%20*%20120)%2C%0A%20%20%20%20%20%20response%3A%20CalendarEventResponse.Accepted%2C%0A%20%20%20%20%20%20type%3A%20'Interview'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20title%3A%20'Phone%20Interview'%2C%0A%20%20%20%20%20%20description%3A%20'with%20%40johnsully83'%2C%0A%20%20%20%20%20%20color%3A%20colors.green%2C%0A%20%20%20%20%20%20start%3A%20new%20Date(Date.now()%20%2B%2060000%20*%2075)%2C%0A%20%20%20%20%20%20end%3A%20new%20Date(Date.now()%20%2B%2060000%20*%20150)%2C%0A%20%20%20%20%20%20response%3A%20CalendarEventResponse.Accepted%2C%0A%20%20%20%20%20%20type%3A%20'Interview'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20title%3A%20'Interview'%2C%0A%20%20%20%20%20%20description%3A%20'with%20%40johnsully83'%2C%0A%20%20%20%20%20%20color%3A%20colors.green%2C%0A%20%20%20%20%20%20start%3A%20new%20Date(Date.now()%20%2B%2060000%20*%20270)%2C%0A%20%20%20%20%20%20end%3A%20new%20Date(Date.now()%20%2B%2060000%20*%20300)%2C%0A%20%20%20%20%20%20response%3A%20CalendarEventResponse.Accepted%2C%0A%20%20%20%20%20%20type%3A%20'Interview'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20title%3A%20'Final%20Interview'%2C%0A%20%20%20%20%20%20description%3A%20'with%20%40johnsully83'%2C%0A%20%20%20%20%20%20color%3A%20colors.green%2C%0A%20%20%20%20%20%20start%3A%20new%20Date(Date.now()%20%2B%2060000%20*%20270)%2C%0A%20%20%20%20%20%20end%3A%20new%20Date(Date.now()%20%2B%2060000%20*%20360)%2C%0A%20%20%20%20%20%20response%3A%20CalendarEventResponse.Accepted%2C%0A%20%20%20%20%20%20type%3A%20'Interview'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20title%3A%20'Final%20Interview'%2C%0A%20%20%20%20%20%20description%3A%20'with%20%40johnsully83'%2C%0A%20%20%20%20%20%20color%3A%20colors.green%2C%0A%20%20%20%20%20%20start%3A%20new%20Date(Date.now()%20%2B%2060000%20*%20270)%2C%0A%20%20%20%20%20%20end%3A%20new%20Date(Date.now()%20%2B%2060000%20*%202880000)%2C%0A%20%20%20%20%20%20response%3A%20CalendarEventResponse.Accepted%2C%0A%20%20%20%20%20%20type%3A%20'Interview'%2C%0A%20%20%20%20%7D%2C%0A%20%20%5D%3B%0A%0A%20%20getNewEvent(date%2C%20color%2C%20type)%3A%20CalendarEvent%20%7B%0A%20%20%20%20let%20evt%3A%20CalendarEvent%20%3D%20%7B%0A%20%20%20%20%20%20title%3A%20'Meeting'%2C%0A%20%20%20%20%20%20description%3A%20'with%20%40jgodi'%2C%0A%20%20%20%20%20%20color%3A%20color%2C%0A%20%20%20%20%20%20start%3A%20date%2C%0A%20%20%20%20%20%20response%3A%20type%2C%0A%20%20%20%20%20%20type%3A%20'Meeting'%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20return%20evt%3B%0A%20%20%7D%0A%0A%20%20dayClicked(date)%20%7B%0A%20%20%20%20let%20evt%3A%20CalendarEvent%20%3D%20this.getNewEvent(date%2C%20colors.blue%2C%20CalendarEventResponse.Maybe)%3B%0A%20%20%20%20this.events.push(evt)%3B%0A%20%20%20%20this.events%20%3D%20%5B...this.events%5D%3B%0A%20%20%7D%0A%0A%20%20addShift(event)%20%7B%0A%20%20%20%20let%20evt%3A%20CalendarEvent%20%3D%20this.getNewEvent(event.day.date%2C%20colors.blue%2C%20CalendarEventResponse.Maybe)%3B%0A%20%20%20%20this.events.push(evt)%3B%0A%20%20%20%20this.events%20%3D%20%5B...this.events%5D%3B%0A%20%20%7D%0A%0A%20%20removeShift(event)%20%7B%0A%20%20%20%20this.events.splice(event.day.events.indexOf(event.event)%2C%201)%3B%0A%20%20%7D%0A%0A%20%20toggleAvailable(event)%20%7B%0A%20%20%20%20let%20evt%3A%20CalendarEvent%3B%0A%20%20%20%20if%20(!event.day.events.length)%20%7B%0A%20%20%20%20%20%20evt%20%3D%20this.getNewEvent(event.day.date%2C%20colors.green%2C%20CalendarEventResponse.Accepted)%3B%0A%20%20%20%20%20%20this.events.push(evt)%3B%0A%20%20%20%20%20%20this.events%20%3D%20%5B...this.events%5D%3B%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20evt%20%3D%20event.day.events%5B0%5D%3B%0A%20%20%20%20%20%20switch%20(evt.response)%20%7B%0A%20%20%20%20%20%20%20%20case%20CalendarEventResponse.Accepted%3A%0A%20%20%20%20%20%20%20%20%20%20evt.response%20%3D%20CalendarEventResponse.Rejected%3B%0A%20%20%20%20%20%20%20%20%20%20break%3B%0A%20%20%20%20%20%20%20%20case%20CalendarEventResponse.Rejected%3A%0A%20%20%20%20%20%20%20%20%20%20event.day.events%20%3D%20%5B%5D%3B%0A%20%20%20%20%20%20%20%20%20%20break%3B%0A%20%20%20%20%20%20%20%20default%3A%0A%20%20%20%20%20%20%20%20%20%20break%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20%7D%0A%7D%0A`,
+        tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0Aimport%20%7B%20CalendarEvent%2C%20CalendarEventResponse%20%7D%20from%20'novo-elements'%3B%0A%0Aconst%20colors%3A%20any%20%3D%20%7B%0A%20%20red%3A%20%7B%0A%20%20%20%20primary%3A%20'%23ad2121'%2C%0A%20%20%20%20secondary%3A%20'%23FAE3E3'%2C%0A%20%20%7D%2C%0A%20%20blue%3A%20%7B%0A%20%20%20%20primary%3A%20'%231e90ff'%2C%0A%20%20%20%20secondary%3A%20'%23D1E8FF'%2C%0A%20%20%7D%2C%0A%20%20yellow%3A%20%7B%0A%20%20%20%20primary%3A%20'%23e3bc08'%2C%0A%20%20%20%20secondary%3A%20'%23FDF1BA'%2C%0A%20%20%7D%2C%0A%20%20green%3A%20%7B%0A%20%20%20%20primary%3A%20'%238CC152'%2C%0A%20%20%20%20secondary%3A%20'%2337BC9B'%2C%0A%20%20%7D%2C%0A%7D%3B%0A%0A%2F**%0A%20*%20%40title%20Big%20Calendar%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'big-calendar-example'%2C%0A%20%20templateUrl%3A%20'big-calendar-example.html'%2C%0A%20%20styleUrls%3A%20%5B'big-calendar-example.css'%5D%2C%0A%7D)%0Aexport%20class%20BigCalendarExample%20%7B%0A%20%20public%20views%3A%20Array%3Cany%3E%20%3D%20%5B%0A%20%20%20%20%7B%0A%20%20%20%20%20%20label%3A%20'Month'%2C%0A%20%20%20%20%20%20value%3A%20'month'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20label%3A%20'Week'%2C%0A%20%20%20%20%20%20value%3A%20'week'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20label%3A%20'Day'%2C%0A%20%20%20%20%20%20value%3A%20'day'%2C%0A%20%20%20%20%7D%2C%0A%20%20%5D%3B%0A%20%20view%3A%20string%20%3D%20'month'%3B%0A%0A%20%20viewDate%3A%20Date%20%3D%20new%20Date()%3B%0A%20%20events%3A%20CalendarEvent%5B%5D%20%3D%20%5B%0A%20%20%20%20%7B%0A%20%20%20%20%20%20title%3A%20'Interview'%2C%0A%20%20%20%20%20%20description%3A%20'with%20%40bvkimball'%2C%0A%20%20%20%20%20%20color%3A%20colors.green%2C%0A%20%20%20%20%20%20start%3A%20new%20Date()%2C%0A%20%20%20%20%20%20response%3A%20CalendarEventResponse.Rejected%2C%0A%20%20%20%20%20%20type%3A%20'Interview'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20title%3A%20'Client%20Visit'%2C%0A%20%20%20%20%20%20description%3A%20'with%20%40asibilia'%2C%0A%20%20%20%20%20%20color%3A%20colors.red%2C%0A%20%20%20%20%20%20start%3A%20new%20Date(Date.now()%20%2B%2060000%20*%2030)%2C%0A%20%20%20%20%20%20response%3A%20CalendarEventResponse.Accepted%2C%0A%20%20%20%20%20%20type%3A%20'Visit'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20title%3A%20'Interview'%2C%0A%20%20%20%20%20%20description%3A%20'with%20%40johndoe'%2C%0A%20%20%20%20%20%20color%3A%20colors.green%2C%0A%20%20%20%20%20%20start%3A%20new%20Date(Date.now()%20%2B%2060000%20*%2090)%2C%0A%20%20%20%20%20%20response%3A%20CalendarEventResponse.Accepted%2C%0A%20%20%20%20%20%20type%3A%20'Interview'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20title%3A%20'Phone%20Interview'%2C%0A%20%20%20%20%20%20description%3A%20'with%20%40johnsully83'%2C%0A%20%20%20%20%20%20color%3A%20colors.green%2C%0A%20%20%20%20%20%20start%3A%20new%20Date(Date.now()%20%2B%2060000%20*%2090)%2C%0A%20%20%20%20%20%20end%3A%20new%20Date(Date.now()%20%2B%2060000%20*%20180)%2C%0A%20%20%20%20%20%20response%3A%20CalendarEventResponse.Accepted%2C%0A%20%20%20%20%20%20type%3A%20'Interview'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20title%3A%20'Interview'%2C%0A%20%20%20%20%20%20description%3A%20'with%20%40johnsully83'%2C%0A%20%20%20%20%20%20color%3A%20colors.green%2C%0A%20%20%20%20%20%20start%3A%20new%20Date(Date.now()%20%2B%2060000%20*%2090)%2C%0A%20%20%20%20%20%20end%3A%20new%20Date(Date.now()%20%2B%2060000%20*%20150)%2C%0A%20%20%20%20%20%20response%3A%20CalendarEventResponse.Accepted%2C%0A%20%20%20%20%20%20type%3A%20'Interview'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20title%3A%20'Final%20Interview'%2C%0A%20%20%20%20%20%20description%3A%20'with%20%40johnsully83'%2C%0A%20%20%20%20%20%20color%3A%20colors.green%2C%0A%20%20%20%20%20%20start%3A%20new%20Date(Date.now()%20%2B%2060000%20*%2090)%2C%0A%20%20%20%20%20%20end%3A%20new%20Date(Date.now()%20%2B%2060000%20*%20120)%2C%0A%20%20%20%20%20%20response%3A%20CalendarEventResponse.Accepted%2C%0A%20%20%20%20%20%20type%3A%20'Interview'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20title%3A%20'Phone%20Interview'%2C%0A%20%20%20%20%20%20description%3A%20'with%20%40johnsully83'%2C%0A%20%20%20%20%20%20color%3A%20colors.green%2C%0A%20%20%20%20%20%20start%3A%20new%20Date(Date.now()%20%2B%2060000%20*%2090)%2C%0A%20%20%20%20%20%20end%3A%20new%20Date(Date.now()%20%2B%2060000%20*%20180)%2C%0A%20%20%20%20%20%20response%3A%20CalendarEventResponse.Accepted%2C%0A%20%20%20%20%20%20type%3A%20'Interview'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20title%3A%20'Interview'%2C%0A%20%20%20%20%20%20description%3A%20'with%20%40johnsully83'%2C%0A%20%20%20%20%20%20color%3A%20colors.green%2C%0A%20%20%20%20%20%20start%3A%20new%20Date(Date.now()%20%2B%2060000%20*%2090)%2C%0A%20%20%20%20%20%20end%3A%20new%20Date(Date.now()%20%2B%2060000%20*%20150)%2C%0A%20%20%20%20%20%20response%3A%20CalendarEventResponse.Accepted%2C%0A%20%20%20%20%20%20type%3A%20'Interview'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20title%3A%20'Final%20Interview'%2C%0A%20%20%20%20%20%20description%3A%20'with%20%40johnsully83'%2C%0A%20%20%20%20%20%20color%3A%20colors.green%2C%0A%20%20%20%20%20%20start%3A%20new%20Date(Date.now()%20%2B%2060000%20*%2090)%2C%0A%20%20%20%20%20%20end%3A%20new%20Date(Date.now()%20%2B%2060000%20*%20120)%2C%0A%20%20%20%20%20%20response%3A%20CalendarEventResponse.Accepted%2C%0A%20%20%20%20%20%20type%3A%20'Interview'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20title%3A%20'Phone%20Interview'%2C%0A%20%20%20%20%20%20description%3A%20'with%20%40johnsully83'%2C%0A%20%20%20%20%20%20color%3A%20colors.green%2C%0A%20%20%20%20%20%20start%3A%20new%20Date(Date.now()%20%2B%2060000%20*%2090)%2C%0A%20%20%20%20%20%20end%3A%20new%20Date(Date.now()%20%2B%2060000%20*%20180)%2C%0A%20%20%20%20%20%20response%3A%20CalendarEventResponse.Accepted%2C%0A%20%20%20%20%20%20type%3A%20'Interview'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20title%3A%20'Interview'%2C%0A%20%20%20%20%20%20description%3A%20'with%20%40johnsully83'%2C%0A%20%20%20%20%20%20color%3A%20colors.green%2C%0A%20%20%20%20%20%20start%3A%20new%20Date(Date.now()%20%2B%2060000%20*%2090)%2C%0A%20%20%20%20%20%20end%3A%20new%20Date(Date.now()%20%2B%2060000%20*%20150)%2C%0A%20%20%20%20%20%20response%3A%20CalendarEventResponse.Accepted%2C%0A%20%20%20%20%20%20type%3A%20'Interview'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20title%3A%20'Final%20Interview'%2C%0A%20%20%20%20%20%20description%3A%20'with%20%40johnsully83'%2C%0A%20%20%20%20%20%20color%3A%20colors.green%2C%0A%20%20%20%20%20%20start%3A%20new%20Date(Date.now()%20%2B%2060000%20*%2090)%2C%0A%20%20%20%20%20%20end%3A%20new%20Date(Date.now()%20%2B%2060000%20*%20120)%2C%0A%20%20%20%20%20%20response%3A%20CalendarEventResponse.Accepted%2C%0A%20%20%20%20%20%20type%3A%20'Interview'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20title%3A%20'Phone%20Interview'%2C%0A%20%20%20%20%20%20description%3A%20'with%20%40johnsully83'%2C%0A%20%20%20%20%20%20color%3A%20colors.green%2C%0A%20%20%20%20%20%20start%3A%20new%20Date(Date.now()%20%2B%2060000%20*%2075)%2C%0A%20%20%20%20%20%20end%3A%20new%20Date(Date.now()%20%2B%2060000%20*%20120)%2C%0A%20%20%20%20%20%20response%3A%20CalendarEventResponse.Accepted%2C%0A%20%20%20%20%20%20type%3A%20'Interview'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20title%3A%20'Phone%20Interview'%2C%0A%20%20%20%20%20%20description%3A%20'with%20%40johnsully83'%2C%0A%20%20%20%20%20%20color%3A%20colors.green%2C%0A%20%20%20%20%20%20start%3A%20new%20Date(Date.now()%20%2B%2060000%20*%2075)%2C%0A%20%20%20%20%20%20end%3A%20new%20Date(Date.now()%20%2B%2060000%20*%20150)%2C%0A%20%20%20%20%20%20response%3A%20CalendarEventResponse.Accepted%2C%0A%20%20%20%20%20%20type%3A%20'Interview'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20title%3A%20'Interview'%2C%0A%20%20%20%20%20%20description%3A%20'with%20%40johnsully83'%2C%0A%20%20%20%20%20%20color%3A%20colors.green%2C%0A%20%20%20%20%20%20start%3A%20new%20Date(Date.now()%20%2B%2060000%20*%20270)%2C%0A%20%20%20%20%20%20end%3A%20new%20Date(Date.now()%20%2B%2060000%20*%20300)%2C%0A%20%20%20%20%20%20response%3A%20CalendarEventResponse.Accepted%2C%0A%20%20%20%20%20%20type%3A%20'Interview'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20title%3A%20'Final%20Interview'%2C%0A%20%20%20%20%20%20description%3A%20'with%20%40johnsully83'%2C%0A%20%20%20%20%20%20color%3A%20colors.green%2C%0A%20%20%20%20%20%20start%3A%20new%20Date(Date.now()%20%2B%2060000%20*%20270)%2C%0A%20%20%20%20%20%20end%3A%20new%20Date(Date.now()%20%2B%2060000%20*%20360)%2C%0A%20%20%20%20%20%20response%3A%20CalendarEventResponse.Accepted%2C%0A%20%20%20%20%20%20type%3A%20'Interview'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20title%3A%20'Final%20Interview'%2C%0A%20%20%20%20%20%20description%3A%20'with%20%40johnsully83'%2C%0A%20%20%20%20%20%20color%3A%20colors.green%2C%0A%20%20%20%20%20%20start%3A%20new%20Date(Date.now()%20%2B%2060000%20*%20270)%2C%0A%20%20%20%20%20%20end%3A%20new%20Date(Date.now()%20%2B%2060000%20*%202880000)%2C%0A%20%20%20%20%20%20response%3A%20CalendarEventResponse.Accepted%2C%0A%20%20%20%20%20%20type%3A%20'Interview'%2C%0A%20%20%20%20%7D%2C%0A%20%20%5D%3B%0A%0A%20%20getNewEvent(date%2C%20color%2C%20type)%3A%20CalendarEvent%20%7B%0A%20%20%20%20const%20evt%3A%20CalendarEvent%20%3D%20%7B%0A%20%20%20%20%20%20title%3A%20'Meeting'%2C%0A%20%20%20%20%20%20description%3A%20'with%20%40jgodi'%2C%0A%20%20%20%20%20%20color%2C%0A%20%20%20%20%20%20start%3A%20date%2C%0A%20%20%20%20%20%20response%3A%20type%2C%0A%20%20%20%20%20%20type%3A%20'Meeting'%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20return%20evt%3B%0A%20%20%7D%0A%0A%20%20dayClicked(date)%20%7B%0A%20%20%20%20const%20evt%3A%20CalendarEvent%20%3D%20this.getNewEvent(date%2C%20colors.blue%2C%20CalendarEventResponse.Maybe)%3B%0A%20%20%20%20this.events.push(evt)%3B%0A%20%20%20%20this.events%20%3D%20%5B...this.events%5D%3B%0A%20%20%7D%0A%0A%20%20addShift(event)%20%7B%0A%20%20%20%20const%20evt%3A%20CalendarEvent%20%3D%20this.getNewEvent(event.day.date%2C%20colors.blue%2C%20CalendarEventResponse.Maybe)%3B%0A%20%20%20%20this.events.push(evt)%3B%0A%20%20%20%20this.events%20%3D%20%5B...this.events%5D%3B%0A%20%20%7D%0A%0A%20%20removeShift(event)%20%7B%0A%20%20%20%20this.events.splice(event.day.events.indexOf(event.event)%2C%201)%3B%0A%20%20%7D%0A%0A%20%20toggleAvailable(event)%20%7B%0A%20%20%20%20let%20evt%3A%20CalendarEvent%3B%0A%20%20%20%20if%20(!event.day.events.length)%20%7B%0A%20%20%20%20%20%20evt%20%3D%20this.getNewEvent(event.day.date%2C%20colors.green%2C%20CalendarEventResponse.Accepted)%3B%0A%20%20%20%20%20%20this.events.push(evt)%3B%0A%20%20%20%20%20%20this.events%20%3D%20%5B...this.events%5D%3B%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20evt%20%3D%20event.day.events%5B0%5D%3B%0A%20%20%20%20%20%20switch%20(evt.response)%20%7B%0A%20%20%20%20%20%20%20%20case%20CalendarEventResponse.Accepted%3A%0A%20%20%20%20%20%20%20%20%20%20evt.response%20%3D%20CalendarEventResponse.Rejected%3B%0A%20%20%20%20%20%20%20%20%20%20break%3B%0A%20%20%20%20%20%20%20%20case%20CalendarEventResponse.Rejected%3A%0A%20%20%20%20%20%20%20%20%20%20event.day.events%20%3D%20%5B%5D%3B%0A%20%20%20%20%20%20%20%20%20%20break%3B%0A%20%20%20%20%20%20%20%20default%3A%0A%20%20%20%20%20%20%20%20%20%20break%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20%7D%0A%7D%0A`,
         cssSource: `%2F**%20No%20CSS%20for%20this%20example%20*%2F%0A`,
         htmlSource: `%3Cdiv%3E%0A%20%20%20%20%3Cnovo-calendar-date-change%20%5Bview%5D%3D%22view%22%20%5B(viewDate)%5D%3D%22viewDate%22%3E%0A%20%20%20%20%3C%2Fnovo-calendar-date-change%3E%0A%0A%20%20%20%20%3Cnovo-tiles%20%5Boptions%5D%3D%22views%22%20%5B(ngModel)%5D%3D%22view%22%3E%3C%2Fnovo-tiles%3E%0A%3C%2Fdiv%3E%0A%3Cdiv%20%5BngSwitch%5D%3D%22view%22%20class%3D%22cal-demo-content%22%3E%0A%20%20%20%20%3Cnovo-calendar-month%20*ngSwitchCase%3D%22'month'%22%20%5B(viewDate)%5D%3D%22viewDate%22%20%5Bevents%5D%3D%22events%22%20(dayClicked)%3D%22dayClicked(%24event.day.date)%22%3E%0A%20%20%20%20%3C%2Fnovo-calendar-month%3E%0A%0A%20%20%20%20%3Cnovo-calendar-week%20*ngSwitchCase%3D%22'week'%22%20%5B(viewDate)%5D%3D%22viewDate%22%20%5Bevents%5D%3D%22events%22%20(dayClicked)%3D%22dayClicked(%24event.date)%22%20%5BdayStartHour%5D%3D%220%22%20%5BdayEndHour%5D%3D%2223%22%3E%0A%20%20%20%20%3C%2Fnovo-calendar-week%3E%0A%0A%20%20%20%20%3Cnovo-calendar-day%20*ngSwitchCase%3D%22'day'%22%20%5B(viewDate)%5D%3D%22viewDate%22%20%5Bevents%5D%3D%22events%22%20%5BdayStartHour%5D%3D%220%22%20%5BdayEndHour%5D%3D%2223%22%3E%0A%20%20%20%20%3C%2Fnovo-calendar-day%3E%0A%3C%2Fdiv%3E%0A`
     },
@@ -71401,21 +71401,21 @@ const EXAMPLE_COMPONENTS = {
     'data-table-remote': {
         title: 'Remote Data Table Example',
         component: DataTableRemoteExample,
-        tsSource: `import%20%7B%20Component%2C%20ChangeDetectionStrategy%2C%20ChangeDetectorRef%2C%20ViewChild%20%7D%20from%20'%40angular%2Fcore'%3B%0Aimport%20%7B%20delay%20%7D%20from%20'rxjs%2Foperators'%3B%0Aimport%20*%20as%20dateFns%20from%20'date-fns'%3B%0Aimport%20%7B%20Subject%2C%20Observable%2C%20of%20%7D%20from%20'rxjs'%3B%0A%0Aimport%20%7B%0A%20%20IDataTableColumn%2C%0A%20%20RemoteDataTableService%2C%0A%20%20IDataTablePaginationOptions%2C%0A%20%20IDataTableSearchOptions%2C%0A%20%20NovoModalService%2C%0A%20%20IDataTablePreferences%2C%0A%20%20IDataTableFilter%2C%0A%20%20Helpers%2C%0A%7D%20from%20'novo-elements'%3B%0A%0Aimport%20%7B%20ConfigureColumnsModal%2C%20MockData%20%7D%20from%20'..%2Fextras'%3B%0A%0A%2F**%0A%20*%20%40title%20Remote%20Data%20Table%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'data-table-remote-example'%2C%0A%20%20templateUrl%3A%20'data-table-remote-example.html'%2C%0A%20%20styleUrls%3A%20%5B'data-table-remote-example.css'%5D%2C%0A%20%20changeDetection%3A%20ChangeDetectionStrategy.OnPush%2C%0A%7D)%0Aexport%20class%20DataTableRemoteExample%20%7B%0A%20%20%2F%2F%20Table%20configuration%0A%20%20public%20dataSetOptions%3A%20any%5B%5D%20%3D%20%5B%7B%20label%3A%20'Dataset%20%231'%2C%20value%3A%201%20%7D%2C%20%7B%20label%3A%20'Dataset%20%232'%2C%20value%3A%202%20%7D%2C%20%7B%20label%3A%20'Dataset%20%233'%2C%20value%3A%203%20%7D%5D%3B%0A%20%20public%20loadedDataSet%3A%20number%20%3D%201%3B%0A%20%20public%20paginationTypeOptions%3A%20any%5B%5D%20%3D%20%5B%7B%20label%3A%20'Standard'%2C%20value%3A%20'standard'%20%7D%2C%20%7B%20label%3A%20'Basic'%2C%20value%3A%20'basic'%20%7D%5D%3B%0A%20%20public%20loadedPaginationType%3A%20string%20%3D%20'standard'%3B%0A%20%20public%20globalSearchOptions%3A%20any%5B%5D%20%3D%20%5B%7B%20label%3A%20'Show'%2C%20value%3A%20true%20%7D%2C%20%7B%20label%3A%20'Hide'%2C%20value%3A%20false%20%7D%5D%3B%0A%20%20public%20loadedGlobalSearch%3A%20boolean%20%3D%20false%3B%0A%0A%20%20%2F%2F%20Shared%20configuration%0A%20%20public%20sharedColumns%3A%20IDataTableColumn%3CMockData%3E%5B%5D%20%3D%20%5B%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'preview'%2C%0A%20%20%20%20%20%20type%3A%20'action'%2C%0A%20%20%20%20%20%20enabled%3A%20true%2C%0A%20%20%20%20%20%20handlers%3A%20%7B%0A%20%20%20%20%20%20%20%20click%3A%20this.log.bind(this)%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20action%3A%20%7B%0A%20%20%20%20%20%20%20%20icon%3A%20'preview'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'actions'%2C%0A%20%20%20%20%20%20type%3A%20'action'%2C%0A%20%20%20%20%20%20label%3A%20'Actions'%2C%0A%20%20%20%20%20%20enabled%3A%20true%2C%0A%20%20%20%20%20%20action%3A%20%7B%0A%20%20%20%20%20%20%20%20options%3A%20%5B%0A%20%20%20%20%20%20%20%20%20%20%7B%20label%3A%20'Action%201'%2C%20handlers%3A%20%7B%20click%3A%20this.log.bind(this)%20%7D%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7B%20label%3A%20'Action%202'%2C%20handlers%3A%20%7B%20click%3A%20this.log.bind(this)%20%7D%2C%20disabled%3A%20true%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7B%20label%3A%20'Action%203'%2C%20handlers%3A%20%7B%20click%3A%20this.log.bind(this)%20%7D%2C%20disabledFunc%3A%20this.checkDisabled.bind(this)%20%7D%2C%0A%20%20%20%20%20%20%20%20%5D%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'id'%2C%0A%20%20%20%20%20%20label%3A%20'ID'%2C%0A%20%20%20%20%20%20enabled%3A%20true%2C%0A%20%20%20%20%20%20type%3A%20'text'%2C%0A%20%20%20%20%20%20filterable%3A%20%7B%0A%20%20%20%20%20%20%20%20type%3A%20'number'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20sortable%3A%20true%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'telephone'%2C%0A%20%20%20%20%20%20label%3A%20'Phone'%2C%0A%20%20%20%20%20%20type%3A%20'link%3Atel'%2C%0A%20%20%20%20%20%20attributes%3A%20%7B%0A%20%20%20%20%20%20%20%20target%3A%20'_blank'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'email'%2C%0A%20%20%20%20%20%20label%3A%20'Email'%2C%0A%20%20%20%20%20%20type%3A%20'link%3Amailto'%2C%0A%20%20%20%20%20%20attributes%3A%20%7B%0A%20%20%20%20%20%20%20%20target%3A%20'_blank'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'address'%2C%0A%20%20%20%20%20%20label%3A%20'Address'%2C%0A%20%20%20%20%20%20type%3A%20'text'%2C%0A%20%20%20%20%20%20format%3A%20%5B'%24city%2C%20%24state'%2C%20'%24city'%2C%20'%24state'%5D%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'embeddedObj'%2C%0A%20%20%20%20%20%20label%3A%20'Embedded%20(hard)'%2C%0A%20%20%20%20%20%20enabled%3A%20true%2C%0A%20%20%20%20%20%20format%3A%20%5B'%24another.id'%2C%20'%24firstName%20%24lastName'%5D%2C%0A%20%20%20%20%20%20type%3A%20'link'%2C%0A%20%20%20%20%20%20handlers%3A%20%7B%0A%20%20%20%20%20%20%20%20click%3A%20this.log.bind(this)%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20filterable%3A%20true%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'simpleEmbeddedObj'%2C%0A%20%20%20%20%20%20label%3A%20'Embedded%20(simple)'%2C%0A%20%20%20%20%20%20enabled%3A%20true%2C%0A%20%20%20%20%20%20format%3A%20'%24id'%2C%0A%20%20%20%20%20%20type%3A%20'text'%2C%0A%20%20%20%20%20%20filterable%3A%20true%2C%0A%20%20%20%20%20%20sortable%3A%20true%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'date'%2C%0A%20%20%20%20%20%20label%3A%20'Date'%2C%0A%20%20%20%20%20%20enabled%3A%20true%2C%0A%20%20%20%20%20%20type%3A%20'date'%2C%0A%20%20%20%20%20%20filterable%3A%20%7B%0A%20%20%20%20%20%20%20%20type%3A%20'date'%2C%0A%20%20%20%20%20%20%20%20allowCustomRange%3A%20true%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20sortable%3A%20true%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'dateTime'%2C%0A%20%20%20%20%20%20label%3A%20'DateTime'%2C%0A%20%20%20%20%20%20enabled%3A%20false%2C%0A%20%20%20%20%20%20type%3A%20'datetime'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'time'%2C%0A%20%20%20%20%20%20label%3A%20'Time'%2C%0A%20%20%20%20%20%20enabled%3A%20false%2C%0A%20%20%20%20%20%20type%3A%20'time'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'money'%2C%0A%20%20%20%20%20%20label%3A%20'Money'%2C%0A%20%20%20%20%20%20enabled%3A%20false%2C%0A%20%20%20%20%20%20type%3A%20'currency'%2C%0A%20%20%20%20%20%20filterable%3A%20true%2C%0A%20%20%20%20%20%20sortable%3A%20true%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'percent'%2C%0A%20%20%20%20%20%20label%3A%20'Percent'%2C%0A%20%20%20%20%20%20enabled%3A%20true%2C%0A%20%20%20%20%20%20type%3A%20'percent'%2C%0A%20%20%20%20%20%20filterable%3A%20true%2C%0A%20%20%20%20%20%20sortable%3A%20true%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'name'%2C%0A%20%20%20%20%20%20label%3A%20'Name'%2C%0A%20%20%20%20%20%20labelIcon%3A%20'bull'%2C%0A%20%20%20%20%20%20enabled%3A%20true%2C%0A%20%20%20%20%20%20type%3A%20'text'%2C%0A%20%20%20%20%20%20template%3A%20'custom'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'status'%2C%0A%20%20%20%20%20%20label%3A%20'Status'%2C%0A%20%20%20%20%20%20enabled%3A%20true%2C%0A%20%20%20%20%20%20type%3A%20'text'%2C%0A%20%20%20%20%20%20filterable%3A%20true%2C%0A%20%20%20%20%20%20sortable%3A%20true%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'priority'%2C%0A%20%20%20%20%20%20label%3A%20'Priority'%2C%0A%20%20%20%20%20%20enabled%3A%20true%2C%0A%20%20%20%20%20%20type%3A%20'text'%2C%0A%20%20%20%20%20%20filterable%3A%20%7B%0A%20%20%20%20%20%20%20%20type%3A%20'multi-select'%2C%0A%20%20%20%20%20%20%20%20options%3A%20this.getPriorityOptions()%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20sortable%3A%20true%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'enabled'%2C%0A%20%20%20%20%20%20label%3A%20'Enabled'%2C%0A%20%20%20%20%20%20enabled%3A%20true%2C%0A%20%20%20%20%20%20type%3A%20'text'%2C%0A%20%20%20%20%20%20sortable%3A%20true%2C%0A%20%20%20%20%20%20filterable%3A%20%7B%0A%20%20%20%20%20%20%20%20type%3A%20'select'%2C%0A%20%20%20%20%20%20%20%20options%3A%20%5B%7B%20value%3A%20true%2C%20label%3A%20'True'%20%7D%2C%20%7B%20value%3A%20false%2C%20label%3A%20'False'%20%7D%5D%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'edit'%2C%0A%20%20%20%20%20%20type%3A%20'action'%2C%0A%20%20%20%20%20%20enabled%3A%20true%2C%0A%20%20%20%20%20%20disabled%3A%20true%2C%0A%20%20%20%20%20%20handlers%3A%20%7B%0A%20%20%20%20%20%20%20%20click%3A%20this.log.bind(this)%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20action%3A%20%7B%0A%20%20%20%20%20%20%20%20icon%3A%20'edit'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%7D%2C%0A%20%20%5D%3B%0A%20%20public%20sharedDisplayColumns%20%3D%20%5B%0A%20%20%20%20'selection'%2C%0A%20%20%20%20'expand'%2C%0A%20%20%20%20'preview'%2C%0A%20%20%20%20'actions'%2C%0A%20%20%20%20'id'%2C%0A%20%20%20%20'date'%2C%0A%20%20%20%20'name'%2C%0A%20%20%20%20'telephone'%2C%0A%20%20%20%20'email'%2C%0A%20%20%20%20'simpleEmbeddedObj'%2C%0A%20%20%20%20'status'%2C%0A%20%20%20%20'priority'%2C%0A%20%20%20%20'percent'%2C%0A%20%20%20%20'embeddedObj'%2C%0A%20%20%20%20'edit'%2C%0A%20%20%5D%3B%0A%20%20public%20sharedPaginationOptions%3A%20IDataTablePaginationOptions%20%3D%20%7B%0A%20%20%20%20theme%3A%20'standard'%2C%0A%20%20%20%20pageSize%3A%2010%2C%0A%20%20%20%20pageSizeOptions%3A%20%5B10%2C%2050%2C%20100%2C%20250%2C%20500%5D%2C%0A%20%20%7D%3B%0A%20%20public%20widePaginationOptions%3A%20IDataTablePaginationOptions%20%3D%20%7B%0A%20%20%20%20theme%3A%20'basic-wide'%2C%0A%20%20%20%20pageSize%3A%2010%2C%0A%20%20%20%20pageSizeOptions%3A%20%5B10%2C%2050%2C%20100%2C%20250%2C%20500%5D%2C%0A%20%20%7D%3B%0A%20%20public%20sharedSearchOptions%3A%20IDataTableSearchOptions%20%3D%20%7B%0A%20%20%20%20placeholder%3A%20'Search%20for%20things...'%2C%0A%20%20%20%20tooltip%3A%20'HELLO'%2C%0A%20%20%7D%3B%0A%20%20public%20sharedDefaultSort%3A%20%7B%20id%3A%20string%3B%20value%3A%20string%20%7D%20%3D%20%7B%0A%20%20%20%20id%3A%20'id'%2C%0A%20%20%20%20value%3A%20'asc'%2C%0A%20%20%7D%3B%0A%20%20public%20globalSearchEnabled%3A%20boolean%20%3D%20false%3B%0A%20%20public%20refreshSubject%3A%20Subject%3Cboolean%3E%20%3D%20new%20Subject()%3B%0A%0A%20%20%2F%2F%20Remote%20configuration%0A%20%20public%20remoteService%3A%20RemoteDataTableService%3CMockData%3E%3B%0A%0A%20%20private%20staticDataSet1%3A%20MockData%5B%5D%20%3D%20%5B%5D%3B%0A%0A%20%20constructor(private%20ref%3A%20ChangeDetectorRef%2C%20private%20modalService%3A%20NovoModalService)%20%7B%0A%20%20%20%20for%20(let%20i%20%3D%200%3B%20i%20%3C%201000%3B%20i%2B%2B)%20%7B%0A%20%20%20%20%20%20let%20day%20%3D%20i%20%3C%20500%20%3F%20dateFns.subDays(new%20Date()%2C%20i)%20%3A%20dateFns.addDays(new%20Date()%2C%20i%20-%20500)%3B%0A%20%20%20%20%20%20this.staticDataSet1.push(%7B%0A%20%20%20%20%20%20%20%20id%3A%20i%2C%0A%20%20%20%20%20%20%20%20embeddedObj%3A%20%7B%20id%3A%20i%2C%20test%3A%20%60HMM%20%24%7Bi%7D%60%2C%20another%3A%20%7B%20id%3A%20777%20%7D%20%7D%2C%0A%20%20%20%20%20%20%20%20simpleEmbeddedObj%3A%20%7B%20id%3A%20i%20%7D%2C%0A%20%20%20%20%20%20%20%20name%3A%20%60(1)%20Name%20%24%7Bi%7D%60%2C%0A%20%20%20%20%20%20%20%20status%3A%20%60(1)%20Status%20%24%7Bi%7D%60%2C%0A%20%20%20%20%20%20%20%20priority%3A%20this.getPriority()%2C%0A%20%20%20%20%20%20%20%20enabled%3A%20i%20%25%202%20%3D%3D%3D%200%2C%0A%20%20%20%20%20%20%20%20date%3A%20day%2C%0A%20%20%20%20%20%20%20%20dateTime%3A%20day%2C%0A%20%20%20%20%20%20%20%20time%3A%20day%2C%0A%20%20%20%20%20%20%20%20money%3A%20i%20%2B%2010%2C%0A%20%20%20%20%20%20%20%20percent%3A%20i%20%2F%20100%2C%0A%20%20%20%20%20%20%20%20telephone%3A%20'555-555-5555'%2C%0A%20%20%20%20%20%20%20%20email%3A%20'test%40google.com'%2C%0A%20%20%20%20%20%20%20%20address%3A%20%7B%20city%3A%20'City'%2C%20state%3A%20null%20%7D%2C%0A%20%20%20%20%20%20%7D)%3B%0A%20%20%20%20%7D%0A%20%20%20%20this.remoteService%20%3D%20new%20RemoteMockDataService(%5B...this.staticDataSet1.slice(0%2C%2010)%5D)%3B%0A%20%20%7D%0A%0A%20%20public%20getPriority()%3A%20string%20%7B%0A%20%20%20%20const%20x%20%3D%20Math.round(Math.random()%20*%2050)%3B%0A%20%20%20%20return%20'test%20'%20%2B%20x.toString()%3B%0A%20%20%7D%0A%0A%20%20public%20getPriorityOptions()%20%7B%0A%20%20%20%20let%20options%20%3D%20new%20Array()%3B%0A%20%20%20%20let%20i%3B%0A%20%20%20%20for%20(i%20%3D%200%3B%20i%20%3C%2049%3B%20i%2B%2B)%20%7B%0A%20%20%20%20%20%20options.push('test%20'%20%2B%20i.toString())%3B%0A%20%20%20%20%7D%0A%20%20%20%20return%20options%3B%0A%20%20%7D%0A%0A%20%20public%20switchPaginationType(type%3A%20'basic'%20%7C%20'standard')%20%7B%0A%20%20%20%20this.sharedPaginationOptions%20%3D%20Object.assign(%7B%7D%2C%20this.sharedPaginationOptions%2C%20%7B%20theme%3A%20type%20%7D)%3B%0A%20%20%20%20this.ref.detectChanges()%3B%0A%20%20%7D%0A%0A%20%20public%20toggleGlobalSearch(toggle%3A%20boolean)%3A%20void%20%7B%0A%20%20%20%20this.globalSearchEnabled%20%3D%20toggle%3B%0A%20%20%20%20this.ref.detectChanges()%3B%0A%20%20%7D%0A%0A%20%20public%20log(event%3A%20%7B%20originalEvent%3A%20MouseEvent%3B%20row%3A%20MockData%20%7D)%3A%20void%20%7B%0A%20%20%20%20console.log('%5BDataTable%5D%20Event%20Triggered!'%2C%20event)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%0A%20%20public%20checkDisabled(row%3A%20MockData)%3A%20boolean%20%7B%0A%20%20%20%20return%20true%3B%0A%20%20%7D%0A%0A%20%20public%20configureColumns()%3A%20void%20%7B%0A%20%20%20%20this.modalService%0A%20%20%20%20%20%20.open(ConfigureColumnsModal%2C%20%7B%20columns%3A%20this.sharedColumns%20%7D)%0A%20%20%20%20%20%20.onClosed.then((columns%3A%20IDataTableColumn%3CMockData%3E%5B%5D)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20if%20(columns)%20%7B%0A%20%20%20%20%20%20%20%20%20%20let%20enabledColumns%20%3D%20columns.filter((column%3A%20IDataTableColumn%3CMockData%3E)%20%3D%3E%20column.enabled)%3B%0A%20%20%20%20%20%20%20%20%20%20this.sharedDisplayColumns%20%3D%20%5B'selection'%2C%20'expand'%2C%20...enabledColumns.map((column%3A%20IDataTableColumn%3CMockData%3E)%20%3D%3E%20column.id)%5D%3B%0A%20%20%20%20%20%20%20%20%20%20this.ref.markForCheck()%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%7D)%3B%0A%20%20%7D%0A%0A%20%20public%20onPreferencesChanged(event%3A%20IDataTablePreferences)%3A%20void%20%7B%0A%20%20%20%20console.log('Preferences%20changed%20(persist%20manually)%3A'%2C%20event)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%0A%20%20public%20refresh()%3A%20void%20%7B%0A%20%20%20%20this.refreshSubject.next()%3B%0A%20%20%7D%0A%7D%0A%0Aclass%20RemoteMockDataService%20extends%20RemoteDataTableService%3CMockData%3E%20%7B%0A%20%20public%20url%3A%20string%3B%0A%0A%20%20constructor(private%20data%3A%20MockData%5B%5D)%20%7B%0A%20%20%20%20super()%3B%0A%20%20%7D%0A%0A%20%20public%20getTableResults(%0A%20%20%20%20sort%3A%20%7B%20id%3A%20string%3B%20value%3A%20string%3B%20transform%3F%3A%20Function%20%7D%2C%0A%20%20%20%20filter%3A%20IDataTableFilter%20%7C%20IDataTableFilter%5B%5D%2C%0A%20%20%20%20page%3A%20number%2C%0A%20%20%20%20pageSize%3A%20number%2C%0A%20%20%20%20globalSearch%3F%3A%20string%2C%0A%20%20)%3A%20Observable%3C%7B%20results%3A%20MockData%5B%5D%3B%20total%3A%20number%20%7D%3E%20%7B%0A%20%20%20%20let%20whereQuery%3A%20string%20%3D%20this.buildWhereClause(filter)%3B%0A%20%20%20%20let%20sortQuery%3A%20string%20%3D%20this.buildSortColumn(sort)%3B%0A%20%20%20%20let%20pageQuery%3A%20number%20%3D%20this.buildStart(page%2C%20pageSize)%3B%0A%20%20%20%20this.url%20%3D%20%60http%3A%2F%2Fmock-api.com%3Fwhere%3D%24%7BwhereQuery%7D%26sort%3D%24%7BsortQuery%7D%26pageSize%3D%24%7BpageSize%7D%26page%3D%24%7BpageQuery%7D%60%3B%0A%20%20%20%20return%20of(%7B%20results%3A%20this.data%2C%20total%3A%20this.data.length%20%7D).pipe(delay(5000))%3B%0A%20%20%7D%0A%0A%20%20private%20buildWhereClause(filter%3A%20IDataTableFilter%20%7C%20IDataTableFilter%5B%5D)%3A%20string%20%7B%0A%20%20%20%20let%20query%3A%20any%20%3D%20%7B%7D%3B%0A%20%20%20%20if%20(filter)%20%7B%0A%20%20%20%20%20%20let%20filters%20%3D%20Helpers.convertToArray(filter)%3B%0A%20%20%20%20%20%20filters.forEach((aFilter)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20query%5BaFilter.id%5D%20%3D%20aFilter.transform%20%3F%20aFilter.transform(aFilter.value)%20%3A%20aFilter.value%3B%0A%20%20%20%20%20%20%7D)%3B%0A%20%20%20%20%7D%0A%20%20%20%20return%20this.toQuerySyntax(query)%3B%0A%20%20%7D%0A%0A%20%20private%20buildSortColumn(sort%3A%20%7B%20id%3A%20string%3B%20value%3A%20string%3B%20transform%3F%3A%20Function%20%7D)%3A%20string%20%7B%0A%20%20%20%20if%20(sort)%20%7B%0A%20%20%20%20%20%20let%20value%20%3D%20sort.id%3B%0A%20%20%20%20%20%20if%20(sort.transform)%20%7B%0A%20%20%20%20%20%20%20%20value%20%3D%20sort.transform(value)%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20return%20sort.value%20%3D%3D%3D%20'asc'%20%3F%20value%20%3A%20%60-%24%7Bvalue%7D%60%3B%0A%20%20%20%20%7D%0A%20%20%20%20return%20''%3B%0A%20%20%7D%0A%0A%20%20private%20buildStart(page%3A%20number%2C%20pageSize%3A%20number)%3A%20number%20%7B%0A%20%20%20%20return%20(page%20%7C%7C%200)%20*%20pageSize%3B%0A%20%20%7D%0A%0A%20%20private%20toQuerySyntax(data%3A%20any)%20%7B%0A%20%20%20%20let%20queries%3A%20Array%3Cstring%3E%20%3D%20%5B%5D%3B%0A%20%20%20%20for%20(let%20key%20in%20data)%20%7B%0A%20%20%20%20%20%20let%20value%20%3D%20data%5Bkey%5D%3B%0A%20%20%20%20%20%20if%20(key%20%3D%3D%3D%20'or')%20%7B%0A%20%20%20%20%20%20%20%20queries.push(%60(%24%7Bthis.toQuerySyntax(value).replace(%2F%20AND%20%2Fg%2C%20'%20OR%20')%7D)%60)%3B%0A%20%20%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20queries.push(this.parseQueryValue(key%2C%20value))%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%0A%20%20%20%20return%20queries.join('%20AND%20')%3B%0A%20%20%7D%0A%0A%20%20private%20parseQueryValue(key%3A%20string%2C%20value%3A%20any%2C%20isNot%3A%20boolean%20%3D%20false)%20%7B%0A%20%20%20%20let%20clauses%3A%20Array%3Cstring%3E%20%3D%20%5B%5D%2C%0A%20%20%20%20%20%20IN%20%3D%20isNot%20%3F%20'%20NOT%20IN%20'%20%3A%20'%20IN%20'%2C%0A%20%20%20%20%20%20EQ%20%3D%20isNot%20%3F%20'%3C%3E'%20%3A%20'%3D'%2C%0A%20%20%20%20%20%20GT%20%3D%20isNot%20%3F%20'%3C'%20%3A%20'%3E%3D'%2C%0A%20%20%20%20%20%20LT%20%3D%20isNot%20%3F%20'%3E%3D'%20%3A%20'%3C'%3B%0A%20%20%20%20if%20(Array.isArray(value))%20%7B%0A%20%20%20%20%20%20clauses.push(%60%24%7Bkey%7D%24%7BIN%7D(%24%7Bthis.writeQueryValues(value)%7D)%60)%3B%0A%20%20%20%20%7D%20else%20if%20(value%20instanceof%20Object)%20%7B%0A%20%20%20%20%20%20if%20(typeof%20value.isNull%20%3D%3D%3D%20'boolean')%20%7B%0A%20%20%20%20%20%20%20%20let%20query%3A%20string%20%3D%20value.isNull%20%3F%20'IS%20NULL'%20%3A%20'IS%20NOT%20NULL'%3B%0A%20%20%20%20%20%20%20%20clauses.push(%60%24%7Bkey%7D%20%24%7Bquery%7D%60)%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20if%20(value.min%20!%3D%3D%20null%20%26%26%20value.min%20!%3D%3D%20undefined)%20%7B%0A%20%20%20%20%20%20%20%20clauses.push(%60%24%7Bkey%7D%24%7BGT%7D%24%7Bthis.writeQueryValue(value.min)%7D%60)%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20if%20(value.max%20!%3D%3D%20null%20%26%26%20value.max%20!%3D%3D%20undefined)%20%7B%0A%20%20%20%20%20%20%20%20clauses.push(%60%24%7Bkey%7D%24%7BLT%7D%24%7Bthis.writeQueryValue(value.max)%7D%60)%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20if%20(value.any%20%26%26%20Array.isArray(value.any))%20%7B%0A%20%20%20%20%20%20%20%20clauses.push(%60%24%7Bkey%7D%24%7BIN%7D(%24%7Bthis.writeQueryValues(value.any)%7D)%60)%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20if%20(value.all%20%26%26%20Array.isArray(value.all))%20%7B%0A%20%20%20%20%20%20%20%20clauses.push(%60%24%7Bkey%7D%24%7BIN%7D(%24%7Bthis.writeQueryValues(value.all)%7D)%60)%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20if%20(value.not%20!%3D%3D%20null%20%26%26%20value.not%20!%3D%3D%20undefined)%20%7B%0A%20%20%20%20%20%20%20%20clauses.push(this.parseQueryValue(key%2C%20value.not%2C%20true))%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20if%20(value.like%20!%3D%3D%20null%20%26%26%20value.like%20!%3D%3D%20undefined)%20%7B%0A%20%20%20%20%20%20%20%20clauses.push(%60%24%7Bkey%7D%20like%20'%25%24%7Bvalue.like%7D%25'%60)%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20if%20(value.lookup%20!%3D%3D%20null%20%26%26%20value.lookup%20!%3D%3D%20undefined)%20%7B%0A%20%20%20%20%20%20%20%20let%20obj%20%3D%20%7B%7D%3B%0A%20%20%20%20%20%20%20%20obj%5Bkey%5D%20%3D%20value.lookup%3B%0A%20%20%20%20%20%20%20%20clauses.push(this.toQuerySyntax(obj))%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20if%20(value.with%20!%3D%3D%20null%20%26%26%20value.with%20!%3D%3D%20undefined)%20%7B%0A%20%20%20%20%20%20%20%20clauses.push(%60%24%7Bkey%7D%20IS%20NOT%20EMPTY%60)%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20if%20(value.without%20!%3D%3D%20null%20%26%26%20value.without%20!%3D%3D%20undefined)%20%7B%0A%20%20%20%20%20%20%20%20clauses.push(%60%24%7Bkey%7D%20IS%20EMPTY%60)%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20if%20(value.or%20!%3D%3D%20null%20%26%26%20value.or%20!%3D%3D%20undefined)%20%7B%0A%20%20%20%20%20%20%20%20let%20obj%20%3D%20%7B%7D%3B%0A%20%20%20%20%20%20%20%20obj%5Bkey%5D%20%3D%20value.or%3B%0A%20%20%20%20%20%20%20%20clauses.push(this.toQuerySyntax(obj).replace('AND'%2C%20'OR'))%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20for%20(let%20subkey%20in%20value)%20%7B%0A%20%20%20%20%20%20%20%20if%20(%5B'min'%2C%20'max'%2C%20'any'%2C%20'all'%2C%20'not'%2C%20'or'%2C%20'like'%2C%20'lookup'%2C%20'with'%2C%20'without'%2C%20'isNull'%5D.indexOf(subkey)%20%3C%200)%20%7B%0A%20%20%20%20%20%20%20%20%20%20let%20subvalue%20%3D%20value%5Bsubkey%5D%3B%0A%20%20%20%20%20%20%20%20%20%20clauses.push(this.parseQueryValue(%60%24%7Bkey%7D.%24%7Bsubkey%7D%60%2C%20subvalue))%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20clauses.push(%60%24%7Bkey%7D%24%7BEQ%7D%24%7Bthis.writeQueryValue(value)%7D%60)%3B%0A%20%20%20%20%7D%0A%0A%20%20%20%20return%20clauses.join('%20AND%20')%3B%0A%20%20%7D%0A%0A%20%20private%20writeQueryValues(values)%20%7B%0A%20%20%20%20if%20(typeof%20values%5B0%5D%20%3D%3D%3D%20'number'%20%7C%7C%20typeof%20values%5B0%5D%20%3D%3D%3D%20'boolean')%20%7B%0A%20%20%20%20%20%20return%20%60%24%7Bvalues.join('%2C')%7D%60%3B%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20return%20%60'%24%7Bvalues.join(%60'%2C'%60)%7D'%60%3B%0A%20%20%20%20%7D%0A%20%20%7D%0A%0A%20%20private%20writeQueryValue(value)%20%7B%0A%20%20%20%20if%20(value%20instanceof%20Date)%20%7B%0A%20%20%20%20%20%20return%20value.getTime()%3B%0A%20%20%20%20%7D%20else%20if%20(typeof%20value%20%3D%3D%3D%20'number'%20%7C%7C%20typeof%20value%20%3D%3D%3D%20'boolean')%20%7B%0A%20%20%20%20%20%20return%20%60%24%7Bvalue%7D%60%3B%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20return%20%60'%24%7Bvalue.replace(%2F%5C*%2Fg%2C%20'')%7D'%60%3B%0A%20%20%20%20%7D%0A%20%20%7D%0A%7D%0A`,
+        tsSource: `import%20%7B%20Component%2C%20ChangeDetectionStrategy%2C%20ChangeDetectorRef%2C%20ViewChild%20%7D%20from%20'%40angular%2Fcore'%3B%0Aimport%20%7B%20delay%20%7D%20from%20'rxjs%2Foperators'%3B%0Aimport%20*%20as%20dateFns%20from%20'date-fns'%3B%0Aimport%20%7B%20Subject%2C%20Observable%2C%20of%20%7D%20from%20'rxjs'%3B%0A%0Aimport%20%7B%0A%20%20IDataTableColumn%2C%0A%20%20RemoteDataTableService%2C%0A%20%20IDataTablePaginationOptions%2C%0A%20%20IDataTableSearchOptions%2C%0A%20%20NovoModalService%2C%0A%20%20IDataTablePreferences%2C%0A%20%20IDataTableFilter%2C%0A%20%20Helpers%2C%0A%7D%20from%20'novo-elements'%3B%0A%0Aimport%20%7B%20ConfigureColumnsModal%2C%20MockData%20%7D%20from%20'..%2Fextras'%3B%0A%0A%2F**%0A%20*%20%40title%20Remote%20Data%20Table%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'data-table-remote-example'%2C%0A%20%20templateUrl%3A%20'data-table-remote-example.html'%2C%0A%20%20styleUrls%3A%20%5B'data-table-remote-example.css'%5D%2C%0A%20%20changeDetection%3A%20ChangeDetectionStrategy.OnPush%2C%0A%7D)%0Aexport%20class%20DataTableRemoteExample%20%7B%0A%20%20%2F%2F%20Table%20configuration%0A%20%20public%20dataSetOptions%3A%20any%5B%5D%20%3D%20%5B%7B%20label%3A%20'Dataset%20%231'%2C%20value%3A%201%20%7D%2C%20%7B%20label%3A%20'Dataset%20%232'%2C%20value%3A%202%20%7D%2C%20%7B%20label%3A%20'Dataset%20%233'%2C%20value%3A%203%20%7D%5D%3B%0A%20%20public%20loadedDataSet%3A%20number%20%3D%201%3B%0A%20%20public%20paginationTypeOptions%3A%20any%5B%5D%20%3D%20%5B%7B%20label%3A%20'Standard'%2C%20value%3A%20'standard'%20%7D%2C%20%7B%20label%3A%20'Basic'%2C%20value%3A%20'basic'%20%7D%5D%3B%0A%20%20public%20loadedPaginationType%3A%20string%20%3D%20'standard'%3B%0A%20%20public%20globalSearchOptions%3A%20any%5B%5D%20%3D%20%5B%7B%20label%3A%20'Show'%2C%20value%3A%20true%20%7D%2C%20%7B%20label%3A%20'Hide'%2C%20value%3A%20false%20%7D%5D%3B%0A%20%20public%20loadedGlobalSearch%3A%20boolean%20%3D%20false%3B%0A%0A%20%20%2F%2F%20Shared%20configuration%0A%20%20public%20sharedColumns%3A%20IDataTableColumn%3CMockData%3E%5B%5D%20%3D%20%5B%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'preview'%2C%0A%20%20%20%20%20%20type%3A%20'action'%2C%0A%20%20%20%20%20%20enabled%3A%20true%2C%0A%20%20%20%20%20%20handlers%3A%20%7B%0A%20%20%20%20%20%20%20%20click%3A%20this.log.bind(this)%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20action%3A%20%7B%0A%20%20%20%20%20%20%20%20icon%3A%20'preview'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'actions'%2C%0A%20%20%20%20%20%20type%3A%20'action'%2C%0A%20%20%20%20%20%20label%3A%20'Actions'%2C%0A%20%20%20%20%20%20enabled%3A%20true%2C%0A%20%20%20%20%20%20action%3A%20%7B%0A%20%20%20%20%20%20%20%20options%3A%20%5B%0A%20%20%20%20%20%20%20%20%20%20%7B%20label%3A%20'Action%201'%2C%20handlers%3A%20%7B%20click%3A%20this.log.bind(this)%20%7D%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7B%20label%3A%20'Action%202'%2C%20handlers%3A%20%7B%20click%3A%20this.log.bind(this)%20%7D%2C%20disabled%3A%20true%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7B%20label%3A%20'Action%203'%2C%20handlers%3A%20%7B%20click%3A%20this.log.bind(this)%20%7D%2C%20disabledFunc%3A%20this.checkDisabled.bind(this)%20%7D%2C%0A%20%20%20%20%20%20%20%20%5D%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'id'%2C%0A%20%20%20%20%20%20label%3A%20'ID'%2C%0A%20%20%20%20%20%20enabled%3A%20true%2C%0A%20%20%20%20%20%20type%3A%20'text'%2C%0A%20%20%20%20%20%20filterable%3A%20%7B%0A%20%20%20%20%20%20%20%20type%3A%20'number'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20sortable%3A%20true%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'telephone'%2C%0A%20%20%20%20%20%20label%3A%20'Phone'%2C%0A%20%20%20%20%20%20type%3A%20'link%3Atel'%2C%0A%20%20%20%20%20%20attributes%3A%20%7B%0A%20%20%20%20%20%20%20%20target%3A%20'_blank'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'email'%2C%0A%20%20%20%20%20%20label%3A%20'Email'%2C%0A%20%20%20%20%20%20type%3A%20'link%3Amailto'%2C%0A%20%20%20%20%20%20attributes%3A%20%7B%0A%20%20%20%20%20%20%20%20target%3A%20'_blank'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'address'%2C%0A%20%20%20%20%20%20label%3A%20'Address'%2C%0A%20%20%20%20%20%20type%3A%20'text'%2C%0A%20%20%20%20%20%20format%3A%20%5B'%24city%2C%20%24state'%2C%20'%24city'%2C%20'%24state'%5D%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'embeddedObj'%2C%0A%20%20%20%20%20%20label%3A%20'Embedded%20(hard)'%2C%0A%20%20%20%20%20%20enabled%3A%20true%2C%0A%20%20%20%20%20%20format%3A%20%5B'%24another.id'%2C%20'%24firstName%20%24lastName'%5D%2C%0A%20%20%20%20%20%20type%3A%20'link'%2C%0A%20%20%20%20%20%20handlers%3A%20%7B%0A%20%20%20%20%20%20%20%20click%3A%20this.log.bind(this)%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20filterable%3A%20true%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'simpleEmbeddedObj'%2C%0A%20%20%20%20%20%20label%3A%20'Embedded%20(simple)'%2C%0A%20%20%20%20%20%20enabled%3A%20true%2C%0A%20%20%20%20%20%20format%3A%20'%24id'%2C%0A%20%20%20%20%20%20type%3A%20'text'%2C%0A%20%20%20%20%20%20filterable%3A%20true%2C%0A%20%20%20%20%20%20sortable%3A%20true%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'date'%2C%0A%20%20%20%20%20%20label%3A%20'Date'%2C%0A%20%20%20%20%20%20enabled%3A%20true%2C%0A%20%20%20%20%20%20type%3A%20'date'%2C%0A%20%20%20%20%20%20filterable%3A%20%7B%0A%20%20%20%20%20%20%20%20type%3A%20'date'%2C%0A%20%20%20%20%20%20%20%20allowCustomRange%3A%20true%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20sortable%3A%20true%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'dateTime'%2C%0A%20%20%20%20%20%20label%3A%20'DateTime'%2C%0A%20%20%20%20%20%20enabled%3A%20false%2C%0A%20%20%20%20%20%20type%3A%20'datetime'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'time'%2C%0A%20%20%20%20%20%20label%3A%20'Time'%2C%0A%20%20%20%20%20%20enabled%3A%20false%2C%0A%20%20%20%20%20%20type%3A%20'time'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'money'%2C%0A%20%20%20%20%20%20label%3A%20'Money'%2C%0A%20%20%20%20%20%20enabled%3A%20false%2C%0A%20%20%20%20%20%20type%3A%20'currency'%2C%0A%20%20%20%20%20%20filterable%3A%20true%2C%0A%20%20%20%20%20%20sortable%3A%20true%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'percent'%2C%0A%20%20%20%20%20%20label%3A%20'Percent'%2C%0A%20%20%20%20%20%20enabled%3A%20true%2C%0A%20%20%20%20%20%20type%3A%20'percent'%2C%0A%20%20%20%20%20%20filterable%3A%20true%2C%0A%20%20%20%20%20%20sortable%3A%20true%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'name'%2C%0A%20%20%20%20%20%20label%3A%20'Name'%2C%0A%20%20%20%20%20%20labelIcon%3A%20'bull'%2C%0A%20%20%20%20%20%20enabled%3A%20true%2C%0A%20%20%20%20%20%20type%3A%20'text'%2C%0A%20%20%20%20%20%20template%3A%20'custom'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'status'%2C%0A%20%20%20%20%20%20label%3A%20'Status'%2C%0A%20%20%20%20%20%20enabled%3A%20true%2C%0A%20%20%20%20%20%20type%3A%20'text'%2C%0A%20%20%20%20%20%20filterable%3A%20true%2C%0A%20%20%20%20%20%20sortable%3A%20true%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'priority'%2C%0A%20%20%20%20%20%20label%3A%20'Priority'%2C%0A%20%20%20%20%20%20enabled%3A%20true%2C%0A%20%20%20%20%20%20type%3A%20'text'%2C%0A%20%20%20%20%20%20filterable%3A%20%7B%0A%20%20%20%20%20%20%20%20type%3A%20'multi-select'%2C%0A%20%20%20%20%20%20%20%20options%3A%20this.getPriorityOptions()%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20sortable%3A%20true%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'enabled'%2C%0A%20%20%20%20%20%20label%3A%20'Enabled'%2C%0A%20%20%20%20%20%20enabled%3A%20true%2C%0A%20%20%20%20%20%20type%3A%20'text'%2C%0A%20%20%20%20%20%20sortable%3A%20true%2C%0A%20%20%20%20%20%20filterable%3A%20%7B%0A%20%20%20%20%20%20%20%20type%3A%20'select'%2C%0A%20%20%20%20%20%20%20%20options%3A%20%5B%7B%20value%3A%20true%2C%20label%3A%20'True'%20%7D%2C%20%7B%20value%3A%20false%2C%20label%3A%20'False'%20%7D%5D%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'edit'%2C%0A%20%20%20%20%20%20type%3A%20'action'%2C%0A%20%20%20%20%20%20enabled%3A%20true%2C%0A%20%20%20%20%20%20disabled%3A%20true%2C%0A%20%20%20%20%20%20handlers%3A%20%7B%0A%20%20%20%20%20%20%20%20click%3A%20this.log.bind(this)%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20action%3A%20%7B%0A%20%20%20%20%20%20%20%20icon%3A%20'edit'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%7D%2C%0A%20%20%5D%3B%0A%20%20public%20sharedDisplayColumns%20%3D%20%5B%0A%20%20%20%20'selection'%2C%0A%20%20%20%20'expand'%2C%0A%20%20%20%20'preview'%2C%0A%20%20%20%20'actions'%2C%0A%20%20%20%20'id'%2C%0A%20%20%20%20'date'%2C%0A%20%20%20%20'name'%2C%0A%20%20%20%20'telephone'%2C%0A%20%20%20%20'email'%2C%0A%20%20%20%20'simpleEmbeddedObj'%2C%0A%20%20%20%20'status'%2C%0A%20%20%20%20'priority'%2C%0A%20%20%20%20'percent'%2C%0A%20%20%20%20'embeddedObj'%2C%0A%20%20%20%20'edit'%2C%0A%20%20%5D%3B%0A%20%20public%20sharedPaginationOptions%3A%20IDataTablePaginationOptions%20%3D%20%7B%0A%20%20%20%20theme%3A%20'standard'%2C%0A%20%20%20%20pageSize%3A%2010%2C%0A%20%20%20%20pageSizeOptions%3A%20%5B10%2C%2050%2C%20100%2C%20250%2C%20500%5D%2C%0A%20%20%7D%3B%0A%20%20public%20widePaginationOptions%3A%20IDataTablePaginationOptions%20%3D%20%7B%0A%20%20%20%20theme%3A%20'basic-wide'%2C%0A%20%20%20%20pageSize%3A%2010%2C%0A%20%20%20%20pageSizeOptions%3A%20%5B10%2C%2050%2C%20100%2C%20250%2C%20500%5D%2C%0A%20%20%7D%3B%0A%20%20public%20sharedSearchOptions%3A%20IDataTableSearchOptions%20%3D%20%7B%0A%20%20%20%20placeholder%3A%20'Search%20for%20things...'%2C%0A%20%20%20%20tooltip%3A%20'HELLO'%2C%0A%20%20%7D%3B%0A%20%20public%20sharedDefaultSort%3A%20%7B%20id%3A%20string%3B%20value%3A%20string%20%7D%20%3D%20%7B%0A%20%20%20%20id%3A%20'id'%2C%0A%20%20%20%20value%3A%20'asc'%2C%0A%20%20%7D%3B%0A%20%20public%20globalSearchEnabled%3A%20boolean%20%3D%20false%3B%0A%20%20public%20refreshSubject%3A%20Subject%3Cboolean%3E%20%3D%20new%20Subject()%3B%0A%0A%20%20%2F%2F%20Remote%20configuration%0A%20%20public%20remoteService%3A%20RemoteDataTableService%3CMockData%3E%3B%0A%0A%20%20private%20staticDataSet1%3A%20MockData%5B%5D%20%3D%20%5B%5D%3B%0A%0A%20%20constructor(private%20ref%3A%20ChangeDetectorRef%2C%20private%20modalService%3A%20NovoModalService)%20%7B%0A%20%20%20%20for%20(let%20i%20%3D%200%3B%20i%20%3C%201000%3B%20i%2B%2B)%20%7B%0A%20%20%20%20%20%20const%20day%20%3D%20i%20%3C%20500%20%3F%20dateFns.subDays(new%20Date()%2C%20i)%20%3A%20dateFns.addDays(new%20Date()%2C%20i%20-%20500)%3B%0A%20%20%20%20%20%20this.staticDataSet1.push(%7B%0A%20%20%20%20%20%20%20%20id%3A%20i%2C%0A%20%20%20%20%20%20%20%20embeddedObj%3A%20%7B%20id%3A%20i%2C%20test%3A%20%60HMM%20%24%7Bi%7D%60%2C%20another%3A%20%7B%20id%3A%20777%20%7D%20%7D%2C%0A%20%20%20%20%20%20%20%20simpleEmbeddedObj%3A%20%7B%20id%3A%20i%20%7D%2C%0A%20%20%20%20%20%20%20%20name%3A%20%60(1)%20Name%20%24%7Bi%7D%60%2C%0A%20%20%20%20%20%20%20%20status%3A%20%60(1)%20Status%20%24%7Bi%7D%60%2C%0A%20%20%20%20%20%20%20%20priority%3A%20this.getPriority()%2C%0A%20%20%20%20%20%20%20%20enabled%3A%20i%20%25%202%20%3D%3D%3D%200%2C%0A%20%20%20%20%20%20%20%20date%3A%20day%2C%0A%20%20%20%20%20%20%20%20dateTime%3A%20day%2C%0A%20%20%20%20%20%20%20%20time%3A%20day%2C%0A%20%20%20%20%20%20%20%20money%3A%20i%20%2B%2010%2C%0A%20%20%20%20%20%20%20%20percent%3A%20i%20%2F%20100%2C%0A%20%20%20%20%20%20%20%20telephone%3A%20'555-555-5555'%2C%0A%20%20%20%20%20%20%20%20email%3A%20'test%40google.com'%2C%0A%20%20%20%20%20%20%20%20address%3A%20%7B%20city%3A%20'City'%2C%20state%3A%20null%20%7D%2C%0A%20%20%20%20%20%20%7D)%3B%0A%20%20%20%20%7D%0A%20%20%20%20this.remoteService%20%3D%20new%20RemoteMockDataService(%5B...this.staticDataSet1.slice(0%2C%2010)%5D)%3B%0A%20%20%7D%0A%0A%20%20public%20getPriority()%3A%20string%20%7B%0A%20%20%20%20const%20x%20%3D%20Math.round(Math.random()%20*%2050)%3B%0A%20%20%20%20return%20'test%20'%20%2B%20x.toString()%3B%0A%20%20%7D%0A%0A%20%20public%20getPriorityOptions()%20%7B%0A%20%20%20%20const%20options%20%3D%20new%20Array()%3B%0A%20%20%20%20let%20i%3B%0A%20%20%20%20for%20(i%20%3D%200%3B%20i%20%3C%2049%3B%20i%2B%2B)%20%7B%0A%20%20%20%20%20%20options.push('test%20'%20%2B%20i.toString())%3B%0A%20%20%20%20%7D%0A%20%20%20%20return%20options%3B%0A%20%20%7D%0A%0A%20%20public%20switchPaginationType(type%3A%20'basic'%20%7C%20'standard')%20%7B%0A%20%20%20%20this.sharedPaginationOptions%20%3D%20Object.assign(%7B%7D%2C%20this.sharedPaginationOptions%2C%20%7B%20theme%3A%20type%20%7D)%3B%0A%20%20%20%20this.ref.detectChanges()%3B%0A%20%20%7D%0A%0A%20%20public%20toggleGlobalSearch(toggle%3A%20boolean)%3A%20void%20%7B%0A%20%20%20%20this.globalSearchEnabled%20%3D%20toggle%3B%0A%20%20%20%20this.ref.detectChanges()%3B%0A%20%20%7D%0A%0A%20%20public%20log(event%3A%20%7B%20originalEvent%3A%20MouseEvent%3B%20row%3A%20MockData%20%7D)%3A%20void%20%7B%0A%20%20%20%20console.log('%5BDataTable%5D%20Event%20Triggered!'%2C%20event)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%0A%20%20public%20checkDisabled(row%3A%20MockData)%3A%20boolean%20%7B%0A%20%20%20%20return%20true%3B%0A%20%20%7D%0A%0A%20%20public%20configureColumns()%3A%20void%20%7B%0A%20%20%20%20this.modalService%0A%20%20%20%20%20%20.open(ConfigureColumnsModal%2C%20%7B%20columns%3A%20this.sharedColumns%20%7D)%0A%20%20%20%20%20%20.onClosed.then((columns%3A%20IDataTableColumn%3CMockData%3E%5B%5D)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20if%20(columns)%20%7B%0A%20%20%20%20%20%20%20%20%20%20const%20enabledColumns%20%3D%20columns.filter((column%3A%20IDataTableColumn%3CMockData%3E)%20%3D%3E%20column.enabled)%3B%0A%20%20%20%20%20%20%20%20%20%20this.sharedDisplayColumns%20%3D%20%5B'selection'%2C%20'expand'%2C%20...enabledColumns.map((column%3A%20IDataTableColumn%3CMockData%3E)%20%3D%3E%20column.id)%5D%3B%0A%20%20%20%20%20%20%20%20%20%20this.ref.markForCheck()%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%7D)%3B%0A%20%20%7D%0A%0A%20%20public%20onPreferencesChanged(event%3A%20IDataTablePreferences)%3A%20void%20%7B%0A%20%20%20%20console.log('Preferences%20changed%20(persist%20manually)%3A'%2C%20event)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%0A%20%20public%20refresh()%3A%20void%20%7B%0A%20%20%20%20this.refreshSubject.next()%3B%0A%20%20%7D%0A%7D%0A%0Aclass%20RemoteMockDataService%20extends%20RemoteDataTableService%3CMockData%3E%20%7B%0A%20%20public%20url%3A%20string%3B%0A%0A%20%20constructor(private%20data%3A%20MockData%5B%5D)%20%7B%0A%20%20%20%20super()%3B%0A%20%20%7D%0A%0A%20%20public%20getTableResults(%0A%20%20%20%20sort%3A%20%7B%20id%3A%20string%3B%20value%3A%20string%3B%20transform%3F%3A%20Function%20%7D%2C%0A%20%20%20%20filter%3A%20IDataTableFilter%20%7C%20IDataTableFilter%5B%5D%2C%0A%20%20%20%20page%3A%20number%2C%0A%20%20%20%20pageSize%3A%20number%2C%0A%20%20%20%20globalSearch%3F%3A%20string%2C%0A%20%20)%3A%20Observable%3C%7B%20results%3A%20MockData%5B%5D%3B%20total%3A%20number%20%7D%3E%20%7B%0A%20%20%20%20const%20whereQuery%3A%20string%20%3D%20this.buildWhereClause(filter)%3B%0A%20%20%20%20const%20sortQuery%3A%20string%20%3D%20this.buildSortColumn(sort)%3B%0A%20%20%20%20const%20pageQuery%3A%20number%20%3D%20this.buildStart(page%2C%20pageSize)%3B%0A%20%20%20%20this.url%20%3D%20%60http%3A%2F%2Fmock-api.com%3Fwhere%3D%24%7BwhereQuery%7D%26sort%3D%24%7BsortQuery%7D%26pageSize%3D%24%7BpageSize%7D%26page%3D%24%7BpageQuery%7D%60%3B%0A%20%20%20%20return%20of(%7B%20results%3A%20this.data%2C%20total%3A%20this.data.length%20%7D).pipe(delay(5000))%3B%0A%20%20%7D%0A%0A%20%20private%20buildWhereClause(filter%3A%20IDataTableFilter%20%7C%20IDataTableFilter%5B%5D)%3A%20string%20%7B%0A%20%20%20%20const%20query%3A%20any%20%3D%20%7B%7D%3B%0A%20%20%20%20if%20(filter)%20%7B%0A%20%20%20%20%20%20const%20filters%20%3D%20Helpers.convertToArray(filter)%3B%0A%20%20%20%20%20%20filters.forEach((aFilter)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20query%5BaFilter.id%5D%20%3D%20aFilter.transform%20%3F%20aFilter.transform(aFilter.value)%20%3A%20aFilter.value%3B%0A%20%20%20%20%20%20%7D)%3B%0A%20%20%20%20%7D%0A%20%20%20%20return%20this.toQuerySyntax(query)%3B%0A%20%20%7D%0A%0A%20%20private%20buildSortColumn(sort%3A%20%7B%20id%3A%20string%3B%20value%3A%20string%3B%20transform%3F%3A%20Function%20%7D)%3A%20string%20%7B%0A%20%20%20%20if%20(sort)%20%7B%0A%20%20%20%20%20%20let%20value%20%3D%20sort.id%3B%0A%20%20%20%20%20%20if%20(sort.transform)%20%7B%0A%20%20%20%20%20%20%20%20value%20%3D%20sort.transform(value)%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20return%20sort.value%20%3D%3D%3D%20'asc'%20%3F%20value%20%3A%20%60-%24%7Bvalue%7D%60%3B%0A%20%20%20%20%7D%0A%20%20%20%20return%20''%3B%0A%20%20%7D%0A%0A%20%20private%20buildStart(page%3A%20number%2C%20pageSize%3A%20number)%3A%20number%20%7B%0A%20%20%20%20return%20(page%20%7C%7C%200)%20*%20pageSize%3B%0A%20%20%7D%0A%0A%20%20private%20toQuerySyntax(data%3A%20any)%20%7B%0A%20%20%20%20const%20queries%3A%20Array%3Cstring%3E%20%3D%20%5B%5D%3B%0A%20%20%20%20for%20(const%20key%20in%20data)%20%7B%0A%20%20%20%20%20%20const%20value%20%3D%20data%5Bkey%5D%3B%0A%20%20%20%20%20%20if%20(key%20%3D%3D%3D%20'or')%20%7B%0A%20%20%20%20%20%20%20%20queries.push(%60(%24%7Bthis.toQuerySyntax(value).replace(%2F%20AND%20%2Fg%2C%20'%20OR%20')%7D)%60)%3B%0A%20%20%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20queries.push(this.parseQueryValue(key%2C%20value))%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%0A%20%20%20%20return%20queries.join('%20AND%20')%3B%0A%20%20%7D%0A%0A%20%20private%20parseQueryValue(key%3A%20string%2C%20value%3A%20any%2C%20isNot%3A%20boolean%20%3D%20false)%20%7B%0A%20%20%20%20const%20clauses%3A%20Array%3Cstring%3E%20%3D%20%5B%5D%2C%0A%20%20%20%20%20%20IN%20%3D%20isNot%20%3F%20'%20NOT%20IN%20'%20%3A%20'%20IN%20'%2C%0A%20%20%20%20%20%20EQ%20%3D%20isNot%20%3F%20'%3C%3E'%20%3A%20'%3D'%2C%0A%20%20%20%20%20%20GT%20%3D%20isNot%20%3F%20'%3C'%20%3A%20'%3E%3D'%2C%0A%20%20%20%20%20%20LT%20%3D%20isNot%20%3F%20'%3E%3D'%20%3A%20'%3C'%3B%0A%20%20%20%20if%20(Array.isArray(value))%20%7B%0A%20%20%20%20%20%20clauses.push(%60%24%7Bkey%7D%24%7BIN%7D(%24%7Bthis.writeQueryValues(value)%7D)%60)%3B%0A%20%20%20%20%7D%20else%20if%20(value%20instanceof%20Object)%20%7B%0A%20%20%20%20%20%20if%20(typeof%20value.isNull%20%3D%3D%3D%20'boolean')%20%7B%0A%20%20%20%20%20%20%20%20const%20query%3A%20string%20%3D%20value.isNull%20%3F%20'IS%20NULL'%20%3A%20'IS%20NOT%20NULL'%3B%0A%20%20%20%20%20%20%20%20clauses.push(%60%24%7Bkey%7D%20%24%7Bquery%7D%60)%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20if%20(value.min%20!%3D%3D%20null%20%26%26%20value.min%20!%3D%3D%20undefined)%20%7B%0A%20%20%20%20%20%20%20%20clauses.push(%60%24%7Bkey%7D%24%7BGT%7D%24%7Bthis.writeQueryValue(value.min)%7D%60)%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20if%20(value.max%20!%3D%3D%20null%20%26%26%20value.max%20!%3D%3D%20undefined)%20%7B%0A%20%20%20%20%20%20%20%20clauses.push(%60%24%7Bkey%7D%24%7BLT%7D%24%7Bthis.writeQueryValue(value.max)%7D%60)%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20if%20(value.any%20%26%26%20Array.isArray(value.any))%20%7B%0A%20%20%20%20%20%20%20%20clauses.push(%60%24%7Bkey%7D%24%7BIN%7D(%24%7Bthis.writeQueryValues(value.any)%7D)%60)%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20if%20(value.all%20%26%26%20Array.isArray(value.all))%20%7B%0A%20%20%20%20%20%20%20%20clauses.push(%60%24%7Bkey%7D%24%7BIN%7D(%24%7Bthis.writeQueryValues(value.all)%7D)%60)%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20if%20(value.not%20!%3D%3D%20null%20%26%26%20value.not%20!%3D%3D%20undefined)%20%7B%0A%20%20%20%20%20%20%20%20clauses.push(this.parseQueryValue(key%2C%20value.not%2C%20true))%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20if%20(value.like%20!%3D%3D%20null%20%26%26%20value.like%20!%3D%3D%20undefined)%20%7B%0A%20%20%20%20%20%20%20%20clauses.push(%60%24%7Bkey%7D%20like%20'%25%24%7Bvalue.like%7D%25'%60)%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20if%20(value.lookup%20!%3D%3D%20null%20%26%26%20value.lookup%20!%3D%3D%20undefined)%20%7B%0A%20%20%20%20%20%20%20%20const%20obj%20%3D%20%7B%7D%3B%0A%20%20%20%20%20%20%20%20obj%5Bkey%5D%20%3D%20value.lookup%3B%0A%20%20%20%20%20%20%20%20clauses.push(this.toQuerySyntax(obj))%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20if%20(value.with%20!%3D%3D%20null%20%26%26%20value.with%20!%3D%3D%20undefined)%20%7B%0A%20%20%20%20%20%20%20%20clauses.push(%60%24%7Bkey%7D%20IS%20NOT%20EMPTY%60)%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20if%20(value.without%20!%3D%3D%20null%20%26%26%20value.without%20!%3D%3D%20undefined)%20%7B%0A%20%20%20%20%20%20%20%20clauses.push(%60%24%7Bkey%7D%20IS%20EMPTY%60)%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20if%20(value.or%20!%3D%3D%20null%20%26%26%20value.or%20!%3D%3D%20undefined)%20%7B%0A%20%20%20%20%20%20%20%20const%20obj%20%3D%20%7B%7D%3B%0A%20%20%20%20%20%20%20%20obj%5Bkey%5D%20%3D%20value.or%3B%0A%20%20%20%20%20%20%20%20clauses.push(this.toQuerySyntax(obj).replace('AND'%2C%20'OR'))%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20for%20(const%20subkey%20in%20value)%20%7B%0A%20%20%20%20%20%20%20%20if%20(%5B'min'%2C%20'max'%2C%20'any'%2C%20'all'%2C%20'not'%2C%20'or'%2C%20'like'%2C%20'lookup'%2C%20'with'%2C%20'without'%2C%20'isNull'%5D.indexOf(subkey)%20%3C%200)%20%7B%0A%20%20%20%20%20%20%20%20%20%20const%20subvalue%20%3D%20value%5Bsubkey%5D%3B%0A%20%20%20%20%20%20%20%20%20%20clauses.push(this.parseQueryValue(%60%24%7Bkey%7D.%24%7Bsubkey%7D%60%2C%20subvalue))%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20clauses.push(%60%24%7Bkey%7D%24%7BEQ%7D%24%7Bthis.writeQueryValue(value)%7D%60)%3B%0A%20%20%20%20%7D%0A%0A%20%20%20%20return%20clauses.join('%20AND%20')%3B%0A%20%20%7D%0A%0A%20%20private%20writeQueryValues(values)%20%7B%0A%20%20%20%20if%20(typeof%20values%5B0%5D%20%3D%3D%3D%20'number'%20%7C%7C%20typeof%20values%5B0%5D%20%3D%3D%3D%20'boolean')%20%7B%0A%20%20%20%20%20%20return%20%60%24%7Bvalues.join('%2C')%7D%60%3B%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20return%20%60'%24%7Bvalues.join(%60'%2C'%60)%7D'%60%3B%0A%20%20%20%20%7D%0A%20%20%7D%0A%0A%20%20private%20writeQueryValue(value)%20%7B%0A%20%20%20%20if%20(value%20instanceof%20Date)%20%7B%0A%20%20%20%20%20%20return%20value.getTime()%3B%0A%20%20%20%20%7D%20else%20if%20(typeof%20value%20%3D%3D%3D%20'number'%20%7C%7C%20typeof%20value%20%3D%3D%3D%20'boolean')%20%7B%0A%20%20%20%20%20%20return%20%60%24%7Bvalue%7D%60%3B%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20return%20%60'%24%7Bvalue.replace(%2F%5C*%2Fg%2C%20'')%7D'%60%3B%0A%20%20%20%20%7D%0A%20%20%7D%0A%7D%0A`,
         cssSource: `%2F**%20No%20CSS%20for%20this%20example%20*%2F%0A`,
         htmlSource: `%3Cnovo-data-table%20%5BdataTableService%5D%3D%22remoteService%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%5Bcolumns%5D%3D%22sharedColumns%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%5BallowMultipleFilters%5D%3D%22true%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%5BhideGlobalSearch%5D%3D%22!globalSearchEnabled%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%5BdisplayedColumns%5D%3D%22sharedDisplayColumns%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%5BpaginationOptions%5D%3D%22widePaginationOptions%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%5BfixedHeader%5D%3D%22true%22%3E%0A%20%20%3C!--%20Custom%20Cell%20--%20passed%20with%20template%20property%20on%20Column%20--%3E%0A%20%20%3Cng-template%20novoTemplate%3D%22custom%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20let-row%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20let-col%3D%22col%22%3E%0A%20%20%20%20%3Cb%3ECUSTOM%3C%2Fb%3E%20%7B%7B%20row.name%20%7D%7D%0A%20%20%20%20%3Cb%3ECUSTOM%3C%2Fb%3E%0A%20%20%3C%2Fng-template%3E%0A%3C%2Fnovo-data-table%3E%0A`
     },
     'data-table-rows': {
         title: 'Rows Data Table Example',
         component: DataTableRowsExample,
-        tsSource: `import%20%7B%20Component%2C%20ChangeDetectionStrategy%2C%20ChangeDetectorRef%2C%20ViewChild%20%7D%20from%20'%40angular%2Fcore'%3B%0Aimport%20*%20as%20dateFns%20from%20'date-fns'%3B%0Aimport%20%7B%20Subject%20%7D%20from%20'rxjs'%3B%0A%0Aimport%20%7B%0A%20%20IDataTableColumn%2C%0A%20%20IDataTablePaginationOptions%2C%0A%20%20IDataTableSearchOptions%2C%0A%20%20NovoModalService%2C%0A%20%20NovoDataTable%2C%0A%20%20IDataTablePreferences%2C%0A%7D%20from%20'novo-elements'%3B%0A%0Aimport%20%7B%20ConfigureColumnsModal%2C%20MockData%20%7D%20from%20'..%2Fextras'%3B%0A%0A%2F**%0A%20*%20%40title%20Rows%20Data%20Table%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'data-table-rows-example'%2C%0A%20%20templateUrl%3A%20'data-table-rows-example.html'%2C%0A%20%20styleUrls%3A%20%5B'data-table-rows-example.css'%5D%2C%0A%20%20changeDetection%3A%20ChangeDetectionStrategy.OnPush%2C%0A%7D)%0Aexport%20class%20DataTableRowsExample%20%7B%0A%20%20%40ViewChild('basic'%2C%20%7B%20static%3A%20false%20%7D)%0A%20%20table%3A%20NovoDataTable%3CMockData%3E%3B%0A%0A%20%20%2F%2F%20Table%20configuration%0A%20%20public%20dataSetOptions%3A%20any%5B%5D%20%3D%20%5B%7B%20label%3A%20'Dataset%20%231'%2C%20value%3A%201%20%7D%2C%20%7B%20label%3A%20'Dataset%20%232'%2C%20value%3A%202%20%7D%2C%20%7B%20label%3A%20'Dataset%20%233'%2C%20value%3A%203%20%7D%5D%3B%0A%20%20public%20loadedDataSet%3A%20number%20%3D%201%3B%0A%20%20public%20paginationTypeOptions%3A%20any%5B%5D%20%3D%20%5B%7B%20label%3A%20'Standard'%2C%20value%3A%20'standard'%20%7D%2C%20%7B%20label%3A%20'Basic'%2C%20value%3A%20'basic'%20%7D%5D%3B%0A%20%20public%20loadedPaginationType%3A%20string%20%3D%20'standard'%3B%0A%20%20public%20globalSearchOptions%3A%20any%5B%5D%20%3D%20%5B%7B%20label%3A%20'Show'%2C%20value%3A%20true%20%7D%2C%20%7B%20label%3A%20'Hide'%2C%20value%3A%20false%20%7D%5D%3B%0A%20%20public%20loadedGlobalSearch%3A%20boolean%20%3D%20false%3B%0A%20%20public%20customStatusColumnValue%3A%20string%20%3D%20''%3B%0A%20%20public%20customStatusColumnOptions%3A%20object%5B%5D%20%3D%20%5B%0A%20%20%20%20%7B%0A%20%20%20%20%20%20label%3A%20'Has%20A%205%20in%20status'%2C%0A%20%20%20%20%20%20value%3A%20'5'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20label%3A%20'All'%2C%0A%20%20%20%20%20%20value%3A%20''%2C%0A%20%20%20%20%7D%2C%0A%20%20%5D%3B%0A%0A%20%20%2F%2F%20Shared%20configuration%0A%20%20public%20sharedColumns%3A%20IDataTableColumn%3CMockData%3E%5B%5D%20%3D%20%5B%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'preview'%2C%0A%20%20%20%20%20%20type%3A%20'action'%2C%0A%20%20%20%20%20%20enabled%3A%20true%2C%0A%20%20%20%20%20%20handlers%3A%20%7B%0A%20%20%20%20%20%20%20%20click%3A%20this.preview.bind(this)%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20action%3A%20%7B%0A%20%20%20%20%20%20%20%20icon%3A%20'preview'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'actions'%2C%0A%20%20%20%20%20%20type%3A%20'action'%2C%0A%20%20%20%20%20%20label%3A%20'Actions'%2C%0A%20%20%20%20%20%20enabled%3A%20true%2C%0A%20%20%20%20%20%20action%3A%20%7B%0A%20%20%20%20%20%20%20%20options%3A%20%5B%0A%20%20%20%20%20%20%20%20%20%20%7B%20label%3A%20'Action%201'%2C%20handlers%3A%20%7B%20click%3A%20this.log.bind(this)%20%7D%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7B%20label%3A%20'Action%202'%2C%20handlers%3A%20%7B%20click%3A%20this.log.bind(this)%20%7D%2C%20disabled%3A%20true%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7B%20label%3A%20'Action%203'%2C%20handlers%3A%20%7B%20click%3A%20this.log.bind(this)%20%7D%2C%20disabledFunc%3A%20this.checkDisabled.bind(this)%20%7D%2C%0A%20%20%20%20%20%20%20%20%5D%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'id'%2C%0A%20%20%20%20%20%20label%3A%20'ID'%2C%0A%20%20%20%20%20%20enabled%3A%20true%2C%0A%20%20%20%20%20%20type%3A%20'text'%2C%0A%20%20%20%20%20%20filterable%3A%20%7B%0A%20%20%20%20%20%20%20%20type%3A%20'number'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20sortable%3A%20true%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'telephone'%2C%0A%20%20%20%20%20%20label%3A%20'Phone'%2C%0A%20%20%20%20%20%20type%3A%20'link%3Atel'%2C%0A%20%20%20%20%20%20resizable%3A%20true%2C%0A%20%20%20%20%20%20attributes%3A%20%7B%0A%20%20%20%20%20%20%20%20target%3A%20'_blank'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'email'%2C%0A%20%20%20%20%20%20label%3A%20'Email'%2C%0A%20%20%20%20%20%20type%3A%20'link%3Amailto'%2C%0A%20%20%20%20%20%20attributes%3A%20%7B%0A%20%20%20%20%20%20%20%20target%3A%20'_blank'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'address'%2C%0A%20%20%20%20%20%20label%3A%20'Address'%2C%0A%20%20%20%20%20%20type%3A%20'text'%2C%0A%20%20%20%20%20%20format%3A%20%5B'%24city%2C%20%24state'%2C%20'%24city'%2C%20'%24state'%5D%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'embeddedObj'%2C%0A%20%20%20%20%20%20label%3A%20'Embedded%20(hard)'%2C%0A%20%20%20%20%20%20enabled%3A%20true%2C%0A%20%20%20%20%20%20format%3A%20%5B'%24another.id'%2C%20'%24firstName%20%24lastName'%5D%2C%0A%20%20%20%20%20%20type%3A%20'link'%2C%0A%20%20%20%20%20%20handlers%3A%20%7B%0A%20%20%20%20%20%20%20%20click%3A%20this.log.bind(this)%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20filterable%3A%20true%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'simpleEmbeddedObj'%2C%0A%20%20%20%20%20%20label%3A%20'Embedded%20(simple)'%2C%0A%20%20%20%20%20%20enabled%3A%20true%2C%0A%20%20%20%20%20%20format%3A%20'%24id'%2C%0A%20%20%20%20%20%20type%3A%20'text'%2C%0A%20%20%20%20%20%20filterable%3A%20true%2C%0A%20%20%20%20%20%20sortable%3A%20true%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'date'%2C%0A%20%20%20%20%20%20label%3A%20'Date'%2C%0A%20%20%20%20%20%20enabled%3A%20true%2C%0A%20%20%20%20%20%20type%3A%20'date'%2C%0A%20%20%20%20%20%20filterable%3A%20%7B%0A%20%20%20%20%20%20%20%20type%3A%20'date'%2C%0A%20%20%20%20%20%20%20%20allowCustomRange%3A%20true%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20sortable%3A%20true%2C%0A%20%20%20%20%20%20format%3A%20'%24year-%24month-%24day%20%24hour%3A%24minute'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'dateTime'%2C%0A%20%20%20%20%20%20label%3A%20'DateTime'%2C%0A%20%20%20%20%20%20enabled%3A%20false%2C%0A%20%20%20%20%20%20type%3A%20'datetime'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'time'%2C%0A%20%20%20%20%20%20label%3A%20'Time'%2C%0A%20%20%20%20%20%20enabled%3A%20false%2C%0A%20%20%20%20%20%20type%3A%20'time'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'money'%2C%0A%20%20%20%20%20%20label%3A%20'Money'%2C%0A%20%20%20%20%20%20enabled%3A%20false%2C%0A%20%20%20%20%20%20type%3A%20'currency'%2C%0A%20%20%20%20%20%20filterable%3A%20true%2C%0A%20%20%20%20%20%20sortable%3A%20true%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'percent'%2C%0A%20%20%20%20%20%20label%3A%20'Percent'%2C%0A%20%20%20%20%20%20enabled%3A%20true%2C%0A%20%20%20%20%20%20type%3A%20'percent'%2C%0A%20%20%20%20%20%20filterable%3A%20true%2C%0A%20%20%20%20%20%20sortable%3A%20true%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'bigdecimal'%2C%0A%20%20%20%20%20%20label%3A%20'BigDecimal'%2C%0A%20%20%20%20%20%20enabled%3A%20true%2C%0A%20%20%20%20%20%20type%3A%20'bigdecimal'%2C%0A%20%20%20%20%20%20filterable%3A%20true%2C%0A%20%20%20%20%20%20sortable%3A%20true%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'name'%2C%0A%20%20%20%20%20%20label%3A%20'Name'%2C%0A%20%20%20%20%20%20labelIcon%3A%20'bull'%2C%0A%20%20%20%20%20%20enabled%3A%20true%2C%0A%20%20%20%20%20%20type%3A%20'text'%2C%0A%20%20%20%20%20%20template%3A%20'custom'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'status'%2C%0A%20%20%20%20%20%20label%3A%20'Status'%2C%0A%20%20%20%20%20%20enabled%3A%20true%2C%0A%20%20%20%20%20%20type%3A%20'text'%2C%0A%20%20%20%20%20%20filterable%3A%20%7B%20type%3A%20'custom'%20%7D%2C%0A%20%20%20%20%20%20sortable%3A%20true%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'priority'%2C%0A%20%20%20%20%20%20label%3A%20'Priority'%2C%0A%20%20%20%20%20%20enabled%3A%20true%2C%0A%20%20%20%20%20%20type%3A%20'text'%2C%0A%20%20%20%20%20%20filterable%3A%20%7B%0A%20%20%20%20%20%20%20%20type%3A%20'multi-select'%2C%0A%20%20%20%20%20%20%20%20options%3A%20this.getPriorityOptions()%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20sortable%3A%20true%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'enabled'%2C%0A%20%20%20%20%20%20label%3A%20'Enabled'%2C%0A%20%20%20%20%20%20enabled%3A%20true%2C%0A%20%20%20%20%20%20type%3A%20'text'%2C%0A%20%20%20%20%20%20sortable%3A%20true%2C%0A%20%20%20%20%20%20filterable%3A%20%7B%0A%20%20%20%20%20%20%20%20type%3A%20'select'%2C%0A%20%20%20%20%20%20%20%20options%3A%20%5B%7B%20value%3A%20true%2C%20label%3A%20'True'%20%7D%2C%20%7B%20value%3A%20false%2C%20label%3A%20'False'%20%7D%5D%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'edit'%2C%0A%20%20%20%20%20%20type%3A%20'action'%2C%0A%20%20%20%20%20%20enabled%3A%20true%2C%0A%20%20%20%20%20%20disabled%3A%20true%2C%0A%20%20%20%20%20%20handlers%3A%20%7B%0A%20%20%20%20%20%20%20%20click%3A%20this.log.bind(this)%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20action%3A%20%7B%0A%20%20%20%20%20%20%20%20icon%3A%20'edit'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%7D%2C%0A%20%20%5D%3B%0A%20%20public%20sharedDisplayColumns%20%3D%20%5B%0A%20%20%20%20'selection'%2C%0A%20%20%20%20'expand'%2C%0A%20%20%20%20'preview'%2C%0A%20%20%20%20'actions'%2C%0A%20%20%20%20'id'%2C%0A%20%20%20%20'date'%2C%0A%20%20%20%20'name'%2C%0A%20%20%20%20'telephone'%2C%0A%20%20%20%20'email'%2C%0A%20%20%20%20'simpleEmbeddedObj'%2C%0A%20%20%20%20'status'%2C%0A%20%20%20%20'priority'%2C%0A%20%20%20%20'percent'%2C%0A%20%20%20%20'bigdecimal'%2C%0A%20%20%20%20'embeddedObj'%2C%0A%20%20%20%20'edit'%2C%0A%20%20%5D%3B%0A%20%20public%20sharedPaginationOptions%3A%20IDataTablePaginationOptions%20%3D%20%7B%0A%20%20%20%20theme%3A%20'standard'%2C%0A%20%20%20%20pageSize%3A%2010%2C%0A%20%20%20%20pageSizeOptions%3A%20%5B10%2C%2050%2C%20100%2C%20250%2C%20500%5D%2C%0A%20%20%7D%3B%0A%20%20public%20widePaginationOptions%3A%20IDataTablePaginationOptions%20%3D%20%7B%0A%20%20%20%20theme%3A%20'basic-wide'%2C%0A%20%20%20%20pageSize%3A%2010%2C%0A%20%20%20%20pageSizeOptions%3A%20%5B10%2C%2050%2C%20100%2C%20250%2C%20500%5D%2C%0A%20%20%7D%3B%0A%20%20public%20sharedSearchOptions%3A%20IDataTableSearchOptions%20%3D%20%7B%0A%20%20%20%20placeholder%3A%20'Search%20for%20things...'%2C%0A%20%20%20%20tooltip%3A%20'HELLO'%2C%0A%20%20%7D%3B%0A%20%20public%20sharedDefaultSort%3A%20%7B%20id%3A%20string%3B%20value%3A%20string%20%7D%20%3D%20%7B%0A%20%20%20%20id%3A%20'id'%2C%0A%20%20%20%20value%3A%20'asc'%2C%0A%20%20%7D%3B%0A%20%20public%20globalSearchEnabled%3A%20boolean%20%3D%20false%3B%0A%20%20public%20refreshSubject%3A%20Subject%3Cboolean%3E%20%3D%20new%20Subject()%3B%0A%0A%20%20%2F%2F%20Basic%20configuration%0A%20%20public%20basicRows%3A%20MockData%5B%5D%3B%0A%0A%20%20private%20staticDataSet1%3A%20MockData%5B%5D%20%3D%20%5B%5D%3B%0A%20%20private%20staticDataSet2%3A%20MockData%5B%5D%20%3D%20%5B%5D%3B%0A%20%20private%20staticDataSet3%3A%20MockData%5B%5D%20%3D%20%5B%5D%3B%0A%0A%20%20public%20selectedRecordId%3A%20string%20%3D%20''%3B%0A%0A%20%20constructor(private%20ref%3A%20ChangeDetectorRef%2C%20private%20modalService%3A%20NovoModalService)%20%7B%0A%20%20%20%20for%20(let%20i%20%3D%200%3B%20i%20%3C%201000%3B%20i%2B%2B)%20%7B%0A%20%20%20%20%20%20let%20day%20%3D%20i%20%3C%20500%20%3F%20dateFns.subDays(new%20Date()%2C%20i)%20%3A%20dateFns.addDays(new%20Date()%2C%20i%20-%20500)%3B%0A%20%20%20%20%20%20this.staticDataSet1.push(%7B%0A%20%20%20%20%20%20%20%20id%3A%20i%2C%0A%20%20%20%20%20%20%20%20embeddedObj%3A%20%7B%20id%3A%20i%2C%20test%3A%20%60HMM%20%24%7Bi%7D%60%2C%20another%3A%20%7B%20id%3A%20777%20%7D%20%7D%2C%0A%20%20%20%20%20%20%20%20simpleEmbeddedObj%3A%20%7B%20id%3A%20i%20%7D%2C%0A%20%20%20%20%20%20%20%20name%3A%20%60(1)%20Name%20%24%7Bi%7D%60%2C%0A%20%20%20%20%20%20%20%20status%3A%20%60(1)%20Status%20%24%7Bi%7D%60%2C%0A%20%20%20%20%20%20%20%20priority%3A%20this.getPriority()%2C%0A%20%20%20%20%20%20%20%20enabled%3A%20i%20%25%202%20%3D%3D%3D%200%2C%0A%20%20%20%20%20%20%20%20date%3A%20day%2C%0A%20%20%20%20%20%20%20%20dateTime%3A%20day%2C%0A%20%20%20%20%20%20%20%20time%3A%20day%2C%0A%20%20%20%20%20%20%20%20money%3A%20i%20%2B%2010%2C%0A%20%20%20%20%20%20%20%20percent%3A%20i%20%2F%20100%2C%0A%20%20%20%20%20%20%20%20telephone%3A%20'555-555-5555'%2C%0A%20%20%20%20%20%20%20%20email%3A%20'test%40google.com'%2C%0A%20%20%20%20%20%20%20%20address%3A%20%7B%20city%3A%20'City'%2C%20state%3A%20null%20%7D%2C%0A%20%20%20%20%20%20%20%20bigdecimal%3A%203.25%20*%20(i%20%2B%201)%20*%20(i%20%25%205%20%3D%3D%3D%201%20%3F%20-1%20%3A%201)%2C%0A%20%20%20%20%20%20%7D)%3B%0A%20%20%20%20%20%20this.staticDataSet2.push(%7B%0A%20%20%20%20%20%20%20%20id%3A%20i%20%2B%201001%2C%0A%20%20%20%20%20%20%20%20embeddedObj%3A%20%7B%20id%3A%20i%2C%20test%3A%20%60HMM%20%24%7Bi%7D%60%2C%20another%3A%20%7B%20id%3A%20777%20%7D%20%7D%2C%0A%20%20%20%20%20%20%20%20simpleEmbeddedObj%3A%20%7B%20id%3A%20i%20%7D%2C%0A%20%20%20%20%20%20%20%20name%3A%20%60(2)%20Name%20%24%7Bi%7D%60%2C%0A%20%20%20%20%20%20%20%20status%3A%20%60(2)%20Status%20%24%7Bi%7D%60%2C%0A%20%20%20%20%20%20%20%20priority%3A%20this.getPriority()%2C%0A%20%20%20%20%20%20%20%20enabled%3A%20i%20%25%202%20%3D%3D%3D%200%2C%0A%20%20%20%20%20%20%20%20date%3A%20day%2C%0A%20%20%20%20%20%20%20%20dateTime%3A%20day%2C%0A%20%20%20%20%20%20%20%20time%3A%20day%2C%0A%20%20%20%20%20%20%20%20money%3A%20i%20%2B%2010%2C%0A%20%20%20%20%20%20%20%20percent%3A%20i%20%2F%20100%2C%0A%20%20%20%20%20%20%20%20telephone%3A%20'555-555-5555'%2C%0A%20%20%20%20%20%20%20%20email%3A%20'test%40google.com'%2C%0A%20%20%20%20%20%20%20%20address%3A%20%7B%20city%3A%20'City'%2C%20state%3A%20'State'%20%7D%2C%0A%20%20%20%20%20%20%20%20bigdecimal%3A%20-75%2C%0A%20%20%20%20%20%20%7D)%3B%0A%20%20%20%20%7D%0A%20%20%20%20this.basicRows%20%3D%20%5B...this.staticDataSet1%5D%3B%0A%20%20%7D%0A%0A%20%20public%20getPriority()%3A%20string%20%7B%0A%20%20%20%20const%20x%20%3D%20Math.round(Math.random()%20*%2050)%3B%0A%20%20%20%20return%20'test%20'%20%2B%20x.toString()%3B%0A%20%20%7D%0A%0A%20%20public%20getPriorityOptions()%20%7B%0A%20%20%20%20let%20options%20%3D%20new%20Array()%3B%0A%20%20%20%20let%20i%3B%0A%20%20%20%20for%20(i%20%3D%200%3B%20i%20%3C%2049%3B%20i%2B%2B)%20%7B%0A%20%20%20%20%20%20options.push('test%20'%20%2B%20i.toString())%3B%0A%20%20%20%20%7D%0A%20%20%20%20return%20options%3B%0A%20%20%7D%0A%0A%20%20public%20switchPaginationType(type%3A%20'basic'%20%7C%20'standard')%20%7B%0A%20%20%20%20this.sharedPaginationOptions%20%3D%20Object.assign(%7B%7D%2C%20this.sharedPaginationOptions%2C%20%7B%20theme%3A%20type%20%7D)%3B%0A%20%20%20%20this.ref.detectChanges()%3B%0A%20%20%7D%0A%0A%20%20public%20loadDataset(setIndex%3A%20number)%20%7B%0A%20%20%20%20switch%20(setIndex)%20%7B%0A%20%20%20%20%20%20case%201%3A%0A%20%20%20%20%20%20%20%20this.basicRows%20%3D%20%5B...this.staticDataSet1%5D%3B%0A%20%20%20%20%20%20%20%20break%3B%0A%20%20%20%20%20%20case%202%3A%0A%20%20%20%20%20%20%20%20this.basicRows%20%3D%20%5B...this.staticDataSet2%5D%3B%0A%20%20%20%20%20%20%20%20break%3B%0A%20%20%20%20%20%20case%203%3A%0A%20%20%20%20%20%20%20%20this.basicRows%20%3D%20%5B...this.staticDataSet3%5D%3B%0A%20%20%20%20%20%20%20%20break%3B%0A%20%20%20%20%20%20default%3A%0A%20%20%20%20%20%20%20%20break%3B%0A%20%20%20%20%7D%0A%20%20%7D%0A%0A%20%20public%20toggleGlobalSearch(toggle%3A%20boolean)%3A%20void%20%7B%0A%20%20%20%20this.globalSearchEnabled%20%3D%20toggle%3B%0A%20%20%20%20this.ref.detectChanges()%3B%0A%20%20%7D%0A%0A%20%20public%20log(event%3A%20%7B%20originalEvent%3A%20MouseEvent%3B%20row%3A%20MockData%20%7D)%3A%20void%20%7B%0A%20%20%20%20console.log('%5BDataTable%5D%20Event%20Triggered!'%2C%20event)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%0A%20%20public%20preview(event%3A%20%7B%20originalEvent%3A%20MouseEvent%3B%20row%3A%20MockData%20%7D)%3A%20void%20%7B%0A%20%20%20%20this.selectedRecordId%20%3D%20event.row.id.toString()%3B%0A%20%20%20%20this.log(event)%3B%0A%20%20%7D%0A%0A%20%20public%20checkDisabled()%3A%20boolean%20%7B%0A%20%20%20%20return%20true%3B%0A%20%20%7D%0A%0A%20%20public%20configureColumns()%3A%20void%20%7B%0A%20%20%20%20this.modalService%0A%20%20%20%20%20%20.open(ConfigureColumnsModal%2C%20%7B%20columns%3A%20this.sharedColumns%20%7D)%0A%20%20%20%20%20%20.onClosed.then((columns%3A%20IDataTableColumn%3CMockData%3E%5B%5D)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20if%20(columns)%20%7B%0A%20%20%20%20%20%20%20%20%20%20let%20enabledColumns%20%3D%20columns.filter((column%3A%20IDataTableColumn%3CMockData%3E)%20%3D%3E%20column.enabled)%3B%0A%20%20%20%20%20%20%20%20%20%20this.sharedDisplayColumns%20%3D%20%5B'selection'%2C%20'expand'%2C%20...enabledColumns.map((column%3A%20IDataTableColumn%3CMockData%3E)%20%3D%3E%20column.id)%5D%3B%0A%20%20%20%20%20%20%20%20%20%20this.ref.markForCheck()%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%7D)%3B%0A%20%20%7D%0A%0A%20%20public%20onPreferencesChanged(event%3A%20IDataTablePreferences)%3A%20void%20%7B%0A%20%20%20%20console.log('Preferences%20changed%20(persist%20manually)%3A'%2C%20event)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%0A%20%20public%20resized(event)%3A%20void%20%7B%0A%20%20%20%20console.log('Column%20Width%20changed%20(persist%20manually)%3A%20'%2C%20event)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%0A%20%20public%20refresh()%3A%20void%20%7B%0A%20%20%20%20this.refreshSubject.next()%3B%0A%20%20%7D%0A%0A%20%20public%20toggleRowDetails(expand%3A%20boolean)%3A%20void%20%7B%0A%20%20%20%20this.table.expandRows(expand)%3B%0A%20%20%7D%0A%0A%20%20public%20filterList(value%3A%20any)%3A%20void%20%7B%0A%20%20%20%20this.table.state.filter%20%3D%20%7B%20id%3A%20'status'%2C%20type%3A%20'text'%2C%20value%3A%20value%20%7D%3B%0A%20%20%20%20this.table.state.updates.next(%7B%0A%20%20%20%20%20%20globalSearch%3A%20this.table.state.globalSearch%2C%0A%20%20%20%20%20%20filter%3A%20this.table.state.filter%2C%0A%20%20%20%20%20%20sort%3A%20this.table.state.sort%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.ref.markForCheck()%3B%0A%20%20%7D%0A%7D%0A`,
+        tsSource: `import%20%7B%20Component%2C%20ChangeDetectionStrategy%2C%20ChangeDetectorRef%2C%20ViewChild%20%7D%20from%20'%40angular%2Fcore'%3B%0Aimport%20*%20as%20dateFns%20from%20'date-fns'%3B%0Aimport%20%7B%20Subject%20%7D%20from%20'rxjs'%3B%0A%0Aimport%20%7B%0A%20%20IDataTableColumn%2C%0A%20%20IDataTablePaginationOptions%2C%0A%20%20IDataTableSearchOptions%2C%0A%20%20NovoModalService%2C%0A%20%20NovoDataTable%2C%0A%20%20IDataTablePreferences%2C%0A%7D%20from%20'novo-elements'%3B%0A%0Aimport%20%7B%20ConfigureColumnsModal%2C%20MockData%20%7D%20from%20'..%2Fextras'%3B%0A%0A%2F**%0A%20*%20%40title%20Rows%20Data%20Table%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'data-table-rows-example'%2C%0A%20%20templateUrl%3A%20'data-table-rows-example.html'%2C%0A%20%20styleUrls%3A%20%5B'data-table-rows-example.css'%5D%2C%0A%20%20changeDetection%3A%20ChangeDetectionStrategy.OnPush%2C%0A%7D)%0Aexport%20class%20DataTableRowsExample%20%7B%0A%20%20%40ViewChild('basic'%2C%20%7B%20static%3A%20false%20%7D)%0A%20%20table%3A%20NovoDataTable%3CMockData%3E%3B%0A%0A%20%20%2F%2F%20Table%20configuration%0A%20%20public%20dataSetOptions%3A%20any%5B%5D%20%3D%20%5B%7B%20label%3A%20'Dataset%20%231'%2C%20value%3A%201%20%7D%2C%20%7B%20label%3A%20'Dataset%20%232'%2C%20value%3A%202%20%7D%2C%20%7B%20label%3A%20'Dataset%20%233'%2C%20value%3A%203%20%7D%5D%3B%0A%20%20public%20loadedDataSet%3A%20number%20%3D%201%3B%0A%20%20public%20paginationTypeOptions%3A%20any%5B%5D%20%3D%20%5B%7B%20label%3A%20'Standard'%2C%20value%3A%20'standard'%20%7D%2C%20%7B%20label%3A%20'Basic'%2C%20value%3A%20'basic'%20%7D%5D%3B%0A%20%20public%20loadedPaginationType%3A%20string%20%3D%20'standard'%3B%0A%20%20public%20globalSearchOptions%3A%20any%5B%5D%20%3D%20%5B%7B%20label%3A%20'Show'%2C%20value%3A%20true%20%7D%2C%20%7B%20label%3A%20'Hide'%2C%20value%3A%20false%20%7D%5D%3B%0A%20%20public%20loadedGlobalSearch%3A%20boolean%20%3D%20false%3B%0A%20%20public%20customStatusColumnValue%3A%20string%20%3D%20''%3B%0A%20%20public%20customStatusColumnOptions%3A%20object%5B%5D%20%3D%20%5B%0A%20%20%20%20%7B%0A%20%20%20%20%20%20label%3A%20'Has%20A%205%20in%20status'%2C%0A%20%20%20%20%20%20value%3A%20'5'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20label%3A%20'All'%2C%0A%20%20%20%20%20%20value%3A%20''%2C%0A%20%20%20%20%7D%2C%0A%20%20%5D%3B%0A%0A%20%20%2F%2F%20Shared%20configuration%0A%20%20public%20sharedColumns%3A%20IDataTableColumn%3CMockData%3E%5B%5D%20%3D%20%5B%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'preview'%2C%0A%20%20%20%20%20%20type%3A%20'action'%2C%0A%20%20%20%20%20%20enabled%3A%20true%2C%0A%20%20%20%20%20%20handlers%3A%20%7B%0A%20%20%20%20%20%20%20%20click%3A%20this.preview.bind(this)%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20action%3A%20%7B%0A%20%20%20%20%20%20%20%20icon%3A%20'preview'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'actions'%2C%0A%20%20%20%20%20%20type%3A%20'action'%2C%0A%20%20%20%20%20%20label%3A%20'Actions'%2C%0A%20%20%20%20%20%20enabled%3A%20true%2C%0A%20%20%20%20%20%20action%3A%20%7B%0A%20%20%20%20%20%20%20%20options%3A%20%5B%0A%20%20%20%20%20%20%20%20%20%20%7B%20label%3A%20'Action%201'%2C%20handlers%3A%20%7B%20click%3A%20this.log.bind(this)%20%7D%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7B%20label%3A%20'Action%202'%2C%20handlers%3A%20%7B%20click%3A%20this.log.bind(this)%20%7D%2C%20disabled%3A%20true%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7B%20label%3A%20'Action%203'%2C%20handlers%3A%20%7B%20click%3A%20this.log.bind(this)%20%7D%2C%20disabledFunc%3A%20this.checkDisabled.bind(this)%20%7D%2C%0A%20%20%20%20%20%20%20%20%5D%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'id'%2C%0A%20%20%20%20%20%20label%3A%20'ID'%2C%0A%20%20%20%20%20%20enabled%3A%20true%2C%0A%20%20%20%20%20%20type%3A%20'text'%2C%0A%20%20%20%20%20%20filterable%3A%20%7B%0A%20%20%20%20%20%20%20%20type%3A%20'number'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20sortable%3A%20true%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'telephone'%2C%0A%20%20%20%20%20%20label%3A%20'Phone'%2C%0A%20%20%20%20%20%20type%3A%20'link%3Atel'%2C%0A%20%20%20%20%20%20resizable%3A%20true%2C%0A%20%20%20%20%20%20attributes%3A%20%7B%0A%20%20%20%20%20%20%20%20target%3A%20'_blank'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'email'%2C%0A%20%20%20%20%20%20label%3A%20'Email'%2C%0A%20%20%20%20%20%20type%3A%20'link%3Amailto'%2C%0A%20%20%20%20%20%20attributes%3A%20%7B%0A%20%20%20%20%20%20%20%20target%3A%20'_blank'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'address'%2C%0A%20%20%20%20%20%20label%3A%20'Address'%2C%0A%20%20%20%20%20%20type%3A%20'text'%2C%0A%20%20%20%20%20%20format%3A%20%5B'%24city%2C%20%24state'%2C%20'%24city'%2C%20'%24state'%5D%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'embeddedObj'%2C%0A%20%20%20%20%20%20label%3A%20'Embedded%20(hard)'%2C%0A%20%20%20%20%20%20enabled%3A%20true%2C%0A%20%20%20%20%20%20format%3A%20%5B'%24another.id'%2C%20'%24firstName%20%24lastName'%5D%2C%0A%20%20%20%20%20%20type%3A%20'link'%2C%0A%20%20%20%20%20%20handlers%3A%20%7B%0A%20%20%20%20%20%20%20%20click%3A%20this.log.bind(this)%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20filterable%3A%20true%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'simpleEmbeddedObj'%2C%0A%20%20%20%20%20%20label%3A%20'Embedded%20(simple)'%2C%0A%20%20%20%20%20%20enabled%3A%20true%2C%0A%20%20%20%20%20%20format%3A%20'%24id'%2C%0A%20%20%20%20%20%20type%3A%20'text'%2C%0A%20%20%20%20%20%20filterable%3A%20true%2C%0A%20%20%20%20%20%20sortable%3A%20true%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'date'%2C%0A%20%20%20%20%20%20label%3A%20'Date'%2C%0A%20%20%20%20%20%20enabled%3A%20true%2C%0A%20%20%20%20%20%20type%3A%20'date'%2C%0A%20%20%20%20%20%20filterable%3A%20%7B%0A%20%20%20%20%20%20%20%20type%3A%20'date'%2C%0A%20%20%20%20%20%20%20%20allowCustomRange%3A%20true%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20sortable%3A%20true%2C%0A%20%20%20%20%20%20format%3A%20'%24year-%24month-%24day%20%24hour%3A%24minute'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'dateTime'%2C%0A%20%20%20%20%20%20label%3A%20'DateTime'%2C%0A%20%20%20%20%20%20enabled%3A%20false%2C%0A%20%20%20%20%20%20type%3A%20'datetime'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'time'%2C%0A%20%20%20%20%20%20label%3A%20'Time'%2C%0A%20%20%20%20%20%20enabled%3A%20false%2C%0A%20%20%20%20%20%20type%3A%20'time'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'money'%2C%0A%20%20%20%20%20%20label%3A%20'Money'%2C%0A%20%20%20%20%20%20enabled%3A%20false%2C%0A%20%20%20%20%20%20type%3A%20'currency'%2C%0A%20%20%20%20%20%20filterable%3A%20true%2C%0A%20%20%20%20%20%20sortable%3A%20true%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'percent'%2C%0A%20%20%20%20%20%20label%3A%20'Percent'%2C%0A%20%20%20%20%20%20enabled%3A%20true%2C%0A%20%20%20%20%20%20type%3A%20'percent'%2C%0A%20%20%20%20%20%20filterable%3A%20true%2C%0A%20%20%20%20%20%20sortable%3A%20true%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'bigdecimal'%2C%0A%20%20%20%20%20%20label%3A%20'BigDecimal'%2C%0A%20%20%20%20%20%20enabled%3A%20true%2C%0A%20%20%20%20%20%20type%3A%20'bigdecimal'%2C%0A%20%20%20%20%20%20filterable%3A%20true%2C%0A%20%20%20%20%20%20sortable%3A%20true%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'name'%2C%0A%20%20%20%20%20%20label%3A%20'Name'%2C%0A%20%20%20%20%20%20labelIcon%3A%20'bull'%2C%0A%20%20%20%20%20%20enabled%3A%20true%2C%0A%20%20%20%20%20%20type%3A%20'text'%2C%0A%20%20%20%20%20%20template%3A%20'custom'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'status'%2C%0A%20%20%20%20%20%20label%3A%20'Status'%2C%0A%20%20%20%20%20%20enabled%3A%20true%2C%0A%20%20%20%20%20%20type%3A%20'text'%2C%0A%20%20%20%20%20%20filterable%3A%20%7B%20type%3A%20'custom'%20%7D%2C%0A%20%20%20%20%20%20sortable%3A%20true%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'priority'%2C%0A%20%20%20%20%20%20label%3A%20'Priority'%2C%0A%20%20%20%20%20%20enabled%3A%20true%2C%0A%20%20%20%20%20%20type%3A%20'text'%2C%0A%20%20%20%20%20%20filterable%3A%20%7B%0A%20%20%20%20%20%20%20%20type%3A%20'multi-select'%2C%0A%20%20%20%20%20%20%20%20options%3A%20this.getPriorityOptions()%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20sortable%3A%20true%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'enabled'%2C%0A%20%20%20%20%20%20label%3A%20'Enabled'%2C%0A%20%20%20%20%20%20enabled%3A%20true%2C%0A%20%20%20%20%20%20type%3A%20'text'%2C%0A%20%20%20%20%20%20sortable%3A%20true%2C%0A%20%20%20%20%20%20filterable%3A%20%7B%0A%20%20%20%20%20%20%20%20type%3A%20'select'%2C%0A%20%20%20%20%20%20%20%20options%3A%20%5B%7B%20value%3A%20true%2C%20label%3A%20'True'%20%7D%2C%20%7B%20value%3A%20false%2C%20label%3A%20'False'%20%7D%5D%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'edit'%2C%0A%20%20%20%20%20%20type%3A%20'action'%2C%0A%20%20%20%20%20%20enabled%3A%20true%2C%0A%20%20%20%20%20%20disabled%3A%20true%2C%0A%20%20%20%20%20%20handlers%3A%20%7B%0A%20%20%20%20%20%20%20%20click%3A%20this.log.bind(this)%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20action%3A%20%7B%0A%20%20%20%20%20%20%20%20icon%3A%20'edit'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%7D%2C%0A%20%20%5D%3B%0A%20%20public%20sharedDisplayColumns%20%3D%20%5B%0A%20%20%20%20'selection'%2C%0A%20%20%20%20'expand'%2C%0A%20%20%20%20'preview'%2C%0A%20%20%20%20'actions'%2C%0A%20%20%20%20'id'%2C%0A%20%20%20%20'date'%2C%0A%20%20%20%20'name'%2C%0A%20%20%20%20'telephone'%2C%0A%20%20%20%20'email'%2C%0A%20%20%20%20'simpleEmbeddedObj'%2C%0A%20%20%20%20'status'%2C%0A%20%20%20%20'priority'%2C%0A%20%20%20%20'percent'%2C%0A%20%20%20%20'bigdecimal'%2C%0A%20%20%20%20'embeddedObj'%2C%0A%20%20%20%20'edit'%2C%0A%20%20%5D%3B%0A%20%20public%20sharedPaginationOptions%3A%20IDataTablePaginationOptions%20%3D%20%7B%0A%20%20%20%20theme%3A%20'standard'%2C%0A%20%20%20%20pageSize%3A%2010%2C%0A%20%20%20%20pageSizeOptions%3A%20%5B10%2C%2050%2C%20100%2C%20250%2C%20500%5D%2C%0A%20%20%7D%3B%0A%20%20public%20widePaginationOptions%3A%20IDataTablePaginationOptions%20%3D%20%7B%0A%20%20%20%20theme%3A%20'basic-wide'%2C%0A%20%20%20%20pageSize%3A%2010%2C%0A%20%20%20%20pageSizeOptions%3A%20%5B10%2C%2050%2C%20100%2C%20250%2C%20500%5D%2C%0A%20%20%7D%3B%0A%20%20public%20sharedSearchOptions%3A%20IDataTableSearchOptions%20%3D%20%7B%0A%20%20%20%20placeholder%3A%20'Search%20for%20things...'%2C%0A%20%20%20%20tooltip%3A%20'HELLO'%2C%0A%20%20%7D%3B%0A%20%20public%20sharedDefaultSort%3A%20%7B%20id%3A%20string%3B%20value%3A%20string%20%7D%20%3D%20%7B%0A%20%20%20%20id%3A%20'id'%2C%0A%20%20%20%20value%3A%20'asc'%2C%0A%20%20%7D%3B%0A%20%20public%20globalSearchEnabled%3A%20boolean%20%3D%20false%3B%0A%20%20public%20refreshSubject%3A%20Subject%3Cboolean%3E%20%3D%20new%20Subject()%3B%0A%0A%20%20%2F%2F%20Basic%20configuration%0A%20%20public%20basicRows%3A%20MockData%5B%5D%3B%0A%0A%20%20private%20staticDataSet1%3A%20MockData%5B%5D%20%3D%20%5B%5D%3B%0A%20%20private%20staticDataSet2%3A%20MockData%5B%5D%20%3D%20%5B%5D%3B%0A%20%20private%20staticDataSet3%3A%20MockData%5B%5D%20%3D%20%5B%5D%3B%0A%0A%20%20public%20selectedRecordId%3A%20string%20%3D%20''%3B%0A%0A%20%20constructor(private%20ref%3A%20ChangeDetectorRef%2C%20private%20modalService%3A%20NovoModalService)%20%7B%0A%20%20%20%20for%20(let%20i%20%3D%200%3B%20i%20%3C%201000%3B%20i%2B%2B)%20%7B%0A%20%20%20%20%20%20const%20day%20%3D%20i%20%3C%20500%20%3F%20dateFns.subDays(new%20Date()%2C%20i)%20%3A%20dateFns.addDays(new%20Date()%2C%20i%20-%20500)%3B%0A%20%20%20%20%20%20this.staticDataSet1.push(%7B%0A%20%20%20%20%20%20%20%20id%3A%20i%2C%0A%20%20%20%20%20%20%20%20embeddedObj%3A%20%7B%20id%3A%20i%2C%20test%3A%20%60HMM%20%24%7Bi%7D%60%2C%20another%3A%20%7B%20id%3A%20777%20%7D%20%7D%2C%0A%20%20%20%20%20%20%20%20simpleEmbeddedObj%3A%20%7B%20id%3A%20i%20%7D%2C%0A%20%20%20%20%20%20%20%20name%3A%20%60(1)%20Name%20%24%7Bi%7D%60%2C%0A%20%20%20%20%20%20%20%20status%3A%20%60(1)%20Status%20%24%7Bi%7D%60%2C%0A%20%20%20%20%20%20%20%20priority%3A%20this.getPriority()%2C%0A%20%20%20%20%20%20%20%20enabled%3A%20i%20%25%202%20%3D%3D%3D%200%2C%0A%20%20%20%20%20%20%20%20date%3A%20day%2C%0A%20%20%20%20%20%20%20%20dateTime%3A%20day%2C%0A%20%20%20%20%20%20%20%20time%3A%20day%2C%0A%20%20%20%20%20%20%20%20money%3A%20i%20%2B%2010%2C%0A%20%20%20%20%20%20%20%20percent%3A%20i%20%2F%20100%2C%0A%20%20%20%20%20%20%20%20telephone%3A%20'555-555-5555'%2C%0A%20%20%20%20%20%20%20%20email%3A%20'test%40google.com'%2C%0A%20%20%20%20%20%20%20%20address%3A%20%7B%20city%3A%20'City'%2C%20state%3A%20null%20%7D%2C%0A%20%20%20%20%20%20%20%20bigdecimal%3A%203.25%20*%20(i%20%2B%201)%20*%20(i%20%25%205%20%3D%3D%3D%201%20%3F%20-1%20%3A%201)%2C%0A%20%20%20%20%20%20%7D)%3B%0A%20%20%20%20%20%20this.staticDataSet2.push(%7B%0A%20%20%20%20%20%20%20%20id%3A%20i%20%2B%201001%2C%0A%20%20%20%20%20%20%20%20embeddedObj%3A%20%7B%20id%3A%20i%2C%20test%3A%20%60HMM%20%24%7Bi%7D%60%2C%20another%3A%20%7B%20id%3A%20777%20%7D%20%7D%2C%0A%20%20%20%20%20%20%20%20simpleEmbeddedObj%3A%20%7B%20id%3A%20i%20%7D%2C%0A%20%20%20%20%20%20%20%20name%3A%20%60(2)%20Name%20%24%7Bi%7D%60%2C%0A%20%20%20%20%20%20%20%20status%3A%20%60(2)%20Status%20%24%7Bi%7D%60%2C%0A%20%20%20%20%20%20%20%20priority%3A%20this.getPriority()%2C%0A%20%20%20%20%20%20%20%20enabled%3A%20i%20%25%202%20%3D%3D%3D%200%2C%0A%20%20%20%20%20%20%20%20date%3A%20day%2C%0A%20%20%20%20%20%20%20%20dateTime%3A%20day%2C%0A%20%20%20%20%20%20%20%20time%3A%20day%2C%0A%20%20%20%20%20%20%20%20money%3A%20i%20%2B%2010%2C%0A%20%20%20%20%20%20%20%20percent%3A%20i%20%2F%20100%2C%0A%20%20%20%20%20%20%20%20telephone%3A%20'555-555-5555'%2C%0A%20%20%20%20%20%20%20%20email%3A%20'test%40google.com'%2C%0A%20%20%20%20%20%20%20%20address%3A%20%7B%20city%3A%20'City'%2C%20state%3A%20'State'%20%7D%2C%0A%20%20%20%20%20%20%20%20bigdecimal%3A%20-75%2C%0A%20%20%20%20%20%20%7D)%3B%0A%20%20%20%20%7D%0A%20%20%20%20this.basicRows%20%3D%20%5B...this.staticDataSet1%5D%3B%0A%20%20%7D%0A%0A%20%20public%20getPriority()%3A%20string%20%7B%0A%20%20%20%20const%20x%20%3D%20Math.round(Math.random()%20*%2050)%3B%0A%20%20%20%20return%20'test%20'%20%2B%20x.toString()%3B%0A%20%20%7D%0A%0A%20%20public%20getPriorityOptions()%20%7B%0A%20%20%20%20const%20options%20%3D%20new%20Array()%3B%0A%20%20%20%20let%20i%3B%0A%20%20%20%20for%20(i%20%3D%200%3B%20i%20%3C%2049%3B%20i%2B%2B)%20%7B%0A%20%20%20%20%20%20options.push('test%20'%20%2B%20i.toString())%3B%0A%20%20%20%20%7D%0A%20%20%20%20return%20options%3B%0A%20%20%7D%0A%0A%20%20public%20switchPaginationType(type%3A%20'basic'%20%7C%20'standard')%20%7B%0A%20%20%20%20this.sharedPaginationOptions%20%3D%20Object.assign(%7B%7D%2C%20this.sharedPaginationOptions%2C%20%7B%20theme%3A%20type%20%7D)%3B%0A%20%20%20%20this.ref.detectChanges()%3B%0A%20%20%7D%0A%0A%20%20public%20loadDataset(setIndex%3A%20number)%20%7B%0A%20%20%20%20switch%20(setIndex)%20%7B%0A%20%20%20%20%20%20case%201%3A%0A%20%20%20%20%20%20%20%20this.basicRows%20%3D%20%5B...this.staticDataSet1%5D%3B%0A%20%20%20%20%20%20%20%20break%3B%0A%20%20%20%20%20%20case%202%3A%0A%20%20%20%20%20%20%20%20this.basicRows%20%3D%20%5B...this.staticDataSet2%5D%3B%0A%20%20%20%20%20%20%20%20break%3B%0A%20%20%20%20%20%20case%203%3A%0A%20%20%20%20%20%20%20%20this.basicRows%20%3D%20%5B...this.staticDataSet3%5D%3B%0A%20%20%20%20%20%20%20%20break%3B%0A%20%20%20%20%20%20default%3A%0A%20%20%20%20%20%20%20%20break%3B%0A%20%20%20%20%7D%0A%20%20%7D%0A%0A%20%20public%20toggleGlobalSearch(toggle%3A%20boolean)%3A%20void%20%7B%0A%20%20%20%20this.globalSearchEnabled%20%3D%20toggle%3B%0A%20%20%20%20this.ref.detectChanges()%3B%0A%20%20%7D%0A%0A%20%20public%20log(event%3A%20%7B%20originalEvent%3A%20MouseEvent%3B%20row%3A%20MockData%20%7D)%3A%20void%20%7B%0A%20%20%20%20console.log('%5BDataTable%5D%20Event%20Triggered!'%2C%20event)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%0A%20%20public%20preview(event%3A%20%7B%20originalEvent%3A%20MouseEvent%3B%20row%3A%20MockData%20%7D)%3A%20void%20%7B%0A%20%20%20%20this.selectedRecordId%20%3D%20event.row.id.toString()%3B%0A%20%20%20%20this.log(event)%3B%0A%20%20%7D%0A%0A%20%20public%20checkDisabled()%3A%20boolean%20%7B%0A%20%20%20%20return%20true%3B%0A%20%20%7D%0A%0A%20%20public%20configureColumns()%3A%20void%20%7B%0A%20%20%20%20this.modalService%0A%20%20%20%20%20%20.open(ConfigureColumnsModal%2C%20%7B%20columns%3A%20this.sharedColumns%20%7D)%0A%20%20%20%20%20%20.onClosed.then((columns%3A%20IDataTableColumn%3CMockData%3E%5B%5D)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20if%20(columns)%20%7B%0A%20%20%20%20%20%20%20%20%20%20const%20enabledColumns%20%3D%20columns.filter((column%3A%20IDataTableColumn%3CMockData%3E)%20%3D%3E%20column.enabled)%3B%0A%20%20%20%20%20%20%20%20%20%20this.sharedDisplayColumns%20%3D%20%5B'selection'%2C%20'expand'%2C%20...enabledColumns.map((column%3A%20IDataTableColumn%3CMockData%3E)%20%3D%3E%20column.id)%5D%3B%0A%20%20%20%20%20%20%20%20%20%20this.ref.markForCheck()%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%7D)%3B%0A%20%20%7D%0A%0A%20%20public%20onPreferencesChanged(event%3A%20IDataTablePreferences)%3A%20void%20%7B%0A%20%20%20%20console.log('Preferences%20changed%20(persist%20manually)%3A'%2C%20event)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%0A%20%20public%20resized(event)%3A%20void%20%7B%0A%20%20%20%20console.log('Column%20Width%20changed%20(persist%20manually)%3A%20'%2C%20event)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%0A%20%20public%20refresh()%3A%20void%20%7B%0A%20%20%20%20this.refreshSubject.next()%3B%0A%20%20%7D%0A%0A%20%20public%20toggleRowDetails(expand%3A%20boolean)%3A%20void%20%7B%0A%20%20%20%20this.table.expandRows(expand)%3B%0A%20%20%7D%0A%0A%20%20public%20filterList(value%3A%20any)%3A%20void%20%7B%0A%20%20%20%20this.table.state.filter%20%3D%20%7B%20id%3A%20'status'%2C%20type%3A%20'text'%2C%20value%20%7D%3B%0A%20%20%20%20this.table.state.updates.next(%7B%0A%20%20%20%20%20%20globalSearch%3A%20this.table.state.globalSearch%2C%0A%20%20%20%20%20%20filter%3A%20this.table.state.filter%2C%0A%20%20%20%20%20%20sort%3A%20this.table.state.sort%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.ref.markForCheck()%3B%0A%20%20%7D%0A%7D%0A`,
         cssSource: `%2F**%20No%20CSS%20for%20this%20example%20*%2F%0A.fixedWindowSize%20%7B%0A%20%20height%3A%20600px%3B%0A%7D%0A%0Anovo-data-table%20%7B%0A%20%20height%3A%20100%25%3B%0A%7D%0A`,
         htmlSource: `%3Ch6%3EChange%20Dataset%3C%2Fh6%3E%0A%20%20%20%20%3Cnovo-tiles%20%5Boptions%5D%3D%22dataSetOptions%22%20(onChange)%3D%22loadDataset(%24event)%22%20%5B(ngModel)%5D%3D%22loadedDataSet%22%3E%3C%2Fnovo-tiles%3E%0A%20%20%20%20%3Ch6%3EChange%20Pagination%20Style%3C%2Fh6%3E%0A%20%20%20%20%3Cnovo-tiles%20%5Boptions%5D%3D%22paginationTypeOptions%22%20(onChange)%3D%22switchPaginationType(%24event)%22%20%5B(ngModel)%5D%3D%22loadedPaginationType%22%3E%3C%2Fnovo-tiles%3E%0A%20%20%20%20%3Ch6%3EToggle%20Global%20Search%3C%2Fh6%3E%0A%20%20%20%20%3Cnovo-tiles%20%5Boptions%5D%3D%22globalSearchOptions%22%20(onChange)%3D%22toggleGlobalSearch(%24event)%22%20%5B(ngModel)%5D%3D%22loadedGlobalSearch%22%3E%3C%2Fnovo-tiles%3E%0A%20%20%20%20%3Ch6%3EConfigure%20Columns%3C%2Fh6%3E%0A%20%20%20%20%3Cbutton%20theme%3D%22primary%22%20(click)%3D%22configureColumns()%22%3EConfigure%20Columns%3C%2Fbutton%3E%0A%20%20%20%20%3Ch6%3EConfigure%20Columns%3C%2Fh6%3E%0A%20%20%20%20%3Cbutton%20theme%3D%22primary%22%20(click)%3D%22toggleRowDetails(true)%22%3EShow%20Row%20Details%20(first%20table)%3C%2Fbutton%3E%0A%20%20%20%20%3Cbutton%20theme%3D%22primary%22%20(click)%3D%22toggleRowDetails(false)%22%3EHide%20Row%20Details%20(first%20table)%3C%2Fbutton%3E%0A%0A%3Cdiv%20class%3D%22fixedWindowSize%22%3E%0A%3Cnovo-data-table%20%5Brows%5D%3D%22basicRows%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%5Bcolumns%5D%3D%22sharedColumns%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%5BallowMultipleFilters%5D%3D%22true%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%5BhideGlobalSearch%5D%3D%22!globalSearchEnabled%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%5BdisplayedColumns%5D%3D%22sharedDisplayColumns%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%5BpaginationOptions%5D%3D%22sharedPaginationOptions%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20name%3D%22demo-basic-rows%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%5BrefreshSubject%5D%3D%22refreshSubject%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20(preferencesChanged)%3D%22onPreferencesChanged(%24event)%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20(resized)%3D%22resized(%24event)%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%5BactiveRowIdentifier%5D%3D%22selectedRecordId%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%5BfixedHeader%5D%3D%22true%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%23basic%3E%0A%20%20%3C!--%20Custom%20Actions%20--%3E%0A%20%20%3Cng-template%20novoTemplate%3D%22customActions%22%3E%0A%20%20%20%20%3Cspan%3ETotal%3A%20%7B%7B%20basic.dataSource.currentTotal%20%7D%7D%3C%2Fspan%3E%0A%20%20%20%20%3Cnovo-data-table-clear-button%20*ngIf%3D%22basic.state.userFiltered%22%3E%3C%2Fnovo-data-table-clear-button%3E%0A%20%20%20%20%3Cbutton%20theme%3D%22secondary%22%0A%20%20%20%20%20%20%20%20%20%20%20%20(click)%3D%22refresh()%22%3ERefresh%3C%2Fbutton%3E%0A%20%20%20%20%3Cnovo-dropdown%20side%3D%22right%22%3E%0A%20%20%20%20%20%20%3Cbutton%20theme%3D%22primary%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20icon%3D%22collapse%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20inverse%3E%0A%20%20%20%20%20%20%20%20%3Cspan%20*ngIf%3D%22basic.state.selected.length%20%3D%3D%3D%200%22%3EActions%3C%2Fspan%3E%0A%20%20%20%20%20%20%20%20%3Cspan%20*ngIf%3D%22basic.state.selected.length%20!%3D%3D%200%22%3E%7B%7B%20basic.state.selected.length%20%7D%7D!%3C%2Fspan%3E%0A%20%20%20%20%20%20%3C%2Fbutton%3E%0A%20%20%20%20%20%20%3Clist%3E%0A%20%20%20%20%20%20%20%20%3Citem%3EAction%201%3C%2Fitem%3E%0A%20%20%20%20%20%20%20%20%3Citem%3EAction%202%3C%2Fitem%3E%0A%20%20%20%20%20%20%20%20%3Citem%20%5Bdisabled%5D%3D%22basic.state.selected.length%20%3D%3D%3D%200%22%3EAction%203%3C%2Fitem%3E%0A%20%20%20%20%20%20%3C%2Flist%3E%0A%20%20%20%20%3C%2Fnovo-dropdown%3E%0A%20%20%3C%2Fng-template%3E%0A%20%20%3C!--%20Custom%20Empty%20Message%20--%3E%0A%20%20%3Cng-template%20novoTemplate%3D%22emptyMessage%22%3EYo!%20No%20Records!%3C%2Fng-template%3E%0A%20%20%3C!--%20Custom%20No%20Results%20Message%20--%3E%0A%20%20%3Cng-template%20novoTemplate%3D%22noResultsMessage%22%3EYo!%20That%20search%20is%20really%20complex%2C%20no%20data%20matches%20that!%3C%2Fng-template%3E%0A%20%20%3C!--%20Custom%20Cell%20for%20ID%20Column%20--%3E%0A%20%20%3Cng-template%20novoTemplate%3D%22id%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20let-row%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20let-col%3D%22col%22%3E%0A%20%20%20%20%3Ci%20class%3D%22bhi-bull%22%3E%3C%2Fi%3E%20%7B%7B%20row.id%20%7D%7D%0A%20%20%3C%2Fng-template%3E%0A%20%20%3C!--%20Custom%20Cell%20--%20passed%20with%20template%20property%20on%20Column%20--%3E%0A%20%20%3Cng-template%20novoTemplate%3D%22custom%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20let-row%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20let-col%3D%22col%22%3E%0A%20%20%20%20%3Cb%3ECUSTOM%3C%2Fb%3E%20%7B%7B%20row.name%20%7D%7D%0A%20%20%20%20%3Cb%3ECUSTOM%3C%2Fb%3E%0A%20%20%3C%2Fng-template%3E%0A%20%20%3C!--%20Row%20Details%20Template%20--%3E%0A%20%20%3Cng-template%20novoTemplate%3D%22expandedRow%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20let-row%3E%0A%20%20%20%20Why%20look%20at%20that%2C%20you%20clicked%20the%20details!%0A%20%20%3C%2Fng-template%3E%0A%20%20%3C!--%20Custom%20Status%20Filter%20--%3E%0A%20%20%3Cng-template%20novoTemplate%3D%22column-filter-status%22%3E%0A%20%20%20%20%3Cnovo-tiles%20%5Boptions%5D%3D%22customStatusColumnOptions%22%20(onChange)%3D%22filterList(%24event)%22%20%5B(ngModel)%5D%3D%22customStatusColumnValue%22%3E%3C%2Fnovo-tiles%3E%0A%20%20%3C%2Fng-template%3E%0A%3C%2Fnovo-data-table%3E%0A%3C%2Fdiv%3E%0A`
     },
     'data-table-service': {
         title: 'Data Table Service Example',
         component: DataTableServiceExample,
-        tsSource: `import%20%7B%20Component%2C%20ChangeDetectionStrategy%2C%20ChangeDetectorRef%20%7D%20from%20'%40angular%2Fcore'%3B%0Aimport%20*%20as%20dateFns%20from%20'date-fns'%3B%0Aimport%20%7B%20Subject%20%7D%20from%20'rxjs'%3B%0A%0Aimport%20%7B%0A%20%20IDataTableColumn%2C%0A%20%20StaticDataTableService%2C%0A%20%20IDataTablePaginationOptions%2C%0A%20%20IDataTableSearchOptions%2C%0A%20%20IDataTableService%2C%0A%20%20NovoModalService%2C%0A%20%20IDataTablePreferences%2C%0A%7D%20from%20'novo-elements'%3B%0A%0Aimport%20%7B%20ConfigureColumnsModal%2C%20MockData%20%7D%20from%20'..%2Fextras'%3B%0A%0A%2F**%0A%20*%20%40title%20Data%20Table%20Service%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'data-table-service-example'%2C%0A%20%20templateUrl%3A%20'data-table-service-example.html'%2C%0A%20%20styleUrls%3A%20%5B'data-table-service-example.css'%5D%2C%0A%20%20changeDetection%3A%20ChangeDetectionStrategy.OnPush%2C%0A%7D)%0Aexport%20class%20DataTableServiceExample%20%7B%0A%20%20%2F%2F%20Table%20configuration%0A%20%20public%20dataSetOptions%3A%20any%5B%5D%20%3D%20%5B%7B%20label%3A%20'Dataset%20%231'%2C%20value%3A%201%20%7D%2C%20%7B%20label%3A%20'Dataset%20%232'%2C%20value%3A%202%20%7D%2C%20%7B%20label%3A%20'Dataset%20%233'%2C%20value%3A%203%20%7D%5D%3B%0A%20%20public%20loadedDataSet%3A%20number%20%3D%201%3B%0A%20%20public%20paginationTypeOptions%3A%20any%5B%5D%20%3D%20%5B%7B%20label%3A%20'Standard'%2C%20value%3A%20'standard'%20%7D%2C%20%7B%20label%3A%20'Basic'%2C%20value%3A%20'basic'%20%7D%5D%3B%0A%20%20public%20loadedPaginationType%3A%20string%20%3D%20'standard'%3B%0A%20%20public%20globalSearchOptions%3A%20any%5B%5D%20%3D%20%5B%7B%20label%3A%20'Show'%2C%20value%3A%20true%20%7D%2C%20%7B%20label%3A%20'Hide'%2C%20value%3A%20false%20%7D%5D%3B%0A%20%20public%20loadedGlobalSearch%3A%20boolean%20%3D%20false%3B%0A%0A%20%20%2F%2F%20Shared%20configuration%0A%20%20public%20sharedColumns%3A%20IDataTableColumn%3CMockData%3E%5B%5D%20%3D%20%5B%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'preview'%2C%0A%20%20%20%20%20%20type%3A%20'action'%2C%0A%20%20%20%20%20%20enabled%3A%20true%2C%0A%20%20%20%20%20%20handlers%3A%20%7B%0A%20%20%20%20%20%20%20%20click%3A%20this.log.bind(this)%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20action%3A%20%7B%0A%20%20%20%20%20%20%20%20icon%3A%20'preview'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'actions'%2C%0A%20%20%20%20%20%20type%3A%20'action'%2C%0A%20%20%20%20%20%20label%3A%20'Actions'%2C%0A%20%20%20%20%20%20enabled%3A%20true%2C%0A%20%20%20%20%20%20action%3A%20%7B%0A%20%20%20%20%20%20%20%20options%3A%20%5B%0A%20%20%20%20%20%20%20%20%20%20%7B%20label%3A%20'Action%201'%2C%20handlers%3A%20%7B%20click%3A%20this.log.bind(this)%20%7D%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7B%20label%3A%20'Action%202'%2C%20handlers%3A%20%7B%20click%3A%20this.log.bind(this)%20%7D%2C%20disabled%3A%20true%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7B%20label%3A%20'Action%203'%2C%20handlers%3A%20%7B%20click%3A%20this.log.bind(this)%20%7D%2C%20disabledFunc%3A%20this.checkDisabled.bind(this)%20%7D%2C%0A%20%20%20%20%20%20%20%20%5D%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'id'%2C%0A%20%20%20%20%20%20label%3A%20'ID'%2C%0A%20%20%20%20%20%20enabled%3A%20true%2C%0A%20%20%20%20%20%20type%3A%20'text'%2C%0A%20%20%20%20%20%20filterable%3A%20%7B%0A%20%20%20%20%20%20%20%20type%3A%20'number'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20sortable%3A%20true%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'telephone'%2C%0A%20%20%20%20%20%20label%3A%20'Phone'%2C%0A%20%20%20%20%20%20type%3A%20'link%3Atel'%2C%0A%20%20%20%20%20%20attributes%3A%20%7B%0A%20%20%20%20%20%20%20%20target%3A%20'_blank'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'email'%2C%0A%20%20%20%20%20%20label%3A%20'Email'%2C%0A%20%20%20%20%20%20type%3A%20'link%3Amailto'%2C%0A%20%20%20%20%20%20attributes%3A%20%7B%0A%20%20%20%20%20%20%20%20target%3A%20'_blank'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'address'%2C%0A%20%20%20%20%20%20label%3A%20'Address'%2C%0A%20%20%20%20%20%20type%3A%20'text'%2C%0A%20%20%20%20%20%20format%3A%20%5B'%24city%2C%20%24state'%2C%20'%24city'%2C%20'%24state'%5D%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'embeddedObj'%2C%0A%20%20%20%20%20%20label%3A%20'Embedded%20(hard)'%2C%0A%20%20%20%20%20%20enabled%3A%20true%2C%0A%20%20%20%20%20%20format%3A%20%5B'%24another.id'%2C%20'%24firstName%20%24lastName'%5D%2C%0A%20%20%20%20%20%20type%3A%20'link'%2C%0A%20%20%20%20%20%20handlers%3A%20%7B%0A%20%20%20%20%20%20%20%20click%3A%20this.log.bind(this)%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20filterable%3A%20true%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'simpleEmbeddedObj'%2C%0A%20%20%20%20%20%20label%3A%20'Embedded%20(simple)'%2C%0A%20%20%20%20%20%20enabled%3A%20true%2C%0A%20%20%20%20%20%20format%3A%20'%24id'%2C%0A%20%20%20%20%20%20type%3A%20'text'%2C%0A%20%20%20%20%20%20filterable%3A%20true%2C%0A%20%20%20%20%20%20sortable%3A%20true%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'date'%2C%0A%20%20%20%20%20%20label%3A%20'Date'%2C%0A%20%20%20%20%20%20enabled%3A%20true%2C%0A%20%20%20%20%20%20type%3A%20'date'%2C%0A%20%20%20%20%20%20filterable%3A%20%7B%0A%20%20%20%20%20%20%20%20type%3A%20'date'%2C%0A%20%20%20%20%20%20%20%20allowCustomRange%3A%20true%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20sortable%3A%20true%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'dateTime'%2C%0A%20%20%20%20%20%20label%3A%20'DateTime'%2C%0A%20%20%20%20%20%20enabled%3A%20false%2C%0A%20%20%20%20%20%20type%3A%20'datetime'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'time'%2C%0A%20%20%20%20%20%20label%3A%20'Time'%2C%0A%20%20%20%20%20%20enabled%3A%20false%2C%0A%20%20%20%20%20%20type%3A%20'time'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'money'%2C%0A%20%20%20%20%20%20label%3A%20'Money'%2C%0A%20%20%20%20%20%20enabled%3A%20false%2C%0A%20%20%20%20%20%20type%3A%20'currency'%2C%0A%20%20%20%20%20%20filterable%3A%20true%2C%0A%20%20%20%20%20%20sortable%3A%20true%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'percent'%2C%0A%20%20%20%20%20%20label%3A%20'Percent'%2C%0A%20%20%20%20%20%20enabled%3A%20true%2C%0A%20%20%20%20%20%20type%3A%20'percent'%2C%0A%20%20%20%20%20%20filterable%3A%20true%2C%0A%20%20%20%20%20%20sortable%3A%20true%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'name'%2C%0A%20%20%20%20%20%20label%3A%20'Name'%2C%0A%20%20%20%20%20%20labelIcon%3A%20'bull'%2C%0A%20%20%20%20%20%20enabled%3A%20true%2C%0A%20%20%20%20%20%20type%3A%20'text'%2C%0A%20%20%20%20%20%20template%3A%20'custom'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'status'%2C%0A%20%20%20%20%20%20label%3A%20'Status'%2C%0A%20%20%20%20%20%20enabled%3A%20true%2C%0A%20%20%20%20%20%20type%3A%20'text'%2C%0A%20%20%20%20%20%20filterable%3A%20true%2C%0A%20%20%20%20%20%20sortable%3A%20true%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'priority'%2C%0A%20%20%20%20%20%20label%3A%20'Priority'%2C%0A%20%20%20%20%20%20enabled%3A%20true%2C%0A%20%20%20%20%20%20type%3A%20'text'%2C%0A%20%20%20%20%20%20filterable%3A%20%7B%0A%20%20%20%20%20%20%20%20type%3A%20'multi-select'%2C%0A%20%20%20%20%20%20%20%20options%3A%20this.getPriorityOptions()%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20sortable%3A%20true%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'enabled'%2C%0A%20%20%20%20%20%20label%3A%20'Enabled'%2C%0A%20%20%20%20%20%20enabled%3A%20true%2C%0A%20%20%20%20%20%20type%3A%20'text'%2C%0A%20%20%20%20%20%20sortable%3A%20true%2C%0A%20%20%20%20%20%20filterable%3A%20%7B%0A%20%20%20%20%20%20%20%20type%3A%20'select'%2C%0A%20%20%20%20%20%20%20%20options%3A%20%5B%7B%20value%3A%20true%2C%20label%3A%20'True'%20%7D%2C%20%7B%20value%3A%20false%2C%20label%3A%20'False'%20%7D%5D%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'edit'%2C%0A%20%20%20%20%20%20type%3A%20'action'%2C%0A%20%20%20%20%20%20enabled%3A%20true%2C%0A%20%20%20%20%20%20disabled%3A%20true%2C%0A%20%20%20%20%20%20handlers%3A%20%7B%0A%20%20%20%20%20%20%20%20click%3A%20this.log.bind(this)%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20action%3A%20%7B%0A%20%20%20%20%20%20%20%20icon%3A%20'edit'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%7D%2C%0A%20%20%5D%3B%0A%20%20public%20sharedDisplayColumns%20%3D%20%5B%0A%20%20%20%20'selection'%2C%0A%20%20%20%20'expand'%2C%0A%20%20%20%20'preview'%2C%0A%20%20%20%20'actions'%2C%0A%20%20%20%20'id'%2C%0A%20%20%20%20'date'%2C%0A%20%20%20%20'name'%2C%0A%20%20%20%20'telephone'%2C%0A%20%20%20%20'email'%2C%0A%20%20%20%20'simpleEmbeddedObj'%2C%0A%20%20%20%20'status'%2C%0A%20%20%20%20'priority'%2C%0A%20%20%20%20'percent'%2C%0A%20%20%20%20'embeddedObj'%2C%0A%20%20%20%20'edit'%2C%0A%20%20%5D%3B%0A%20%20public%20sharedPaginationOptions%3A%20IDataTablePaginationOptions%20%3D%20%7B%0A%20%20%20%20theme%3A%20'standard'%2C%0A%20%20%20%20pageSize%3A%2010%2C%0A%20%20%20%20pageSizeOptions%3A%20%5B10%2C%2050%2C%20100%2C%20250%2C%20500%5D%2C%0A%20%20%7D%3B%0A%20%20public%20widePaginationOptions%3A%20IDataTablePaginationOptions%20%3D%20%7B%0A%20%20%20%20theme%3A%20'basic-wide'%2C%0A%20%20%20%20pageSize%3A%2010%2C%0A%20%20%20%20pageSizeOptions%3A%20%5B10%2C%2050%2C%20100%2C%20250%2C%20500%5D%2C%0A%20%20%7D%3B%0A%20%20public%20sharedSearchOptions%3A%20IDataTableSearchOptions%20%3D%20%7B%0A%20%20%20%20placeholder%3A%20'Search%20for%20things...'%2C%0A%20%20%20%20tooltip%3A%20'HELLO'%2C%0A%20%20%7D%3B%0A%20%20public%20sharedDefaultSort%3A%20%7B%20id%3A%20string%3B%20value%3A%20string%20%7D%20%3D%20%7B%0A%20%20%20%20id%3A%20'id'%2C%0A%20%20%20%20value%3A%20'asc'%2C%0A%20%20%7D%3B%0A%20%20public%20globalSearchEnabled%3A%20boolean%20%3D%20false%3B%0A%20%20public%20refreshSubject%3A%20Subject%3Cboolean%3E%20%3D%20new%20Subject()%3B%0A%0A%20%20%2F%2F%20Basic%20configuration%0A%20%20public%20basicService%3A%20IDataTableService%3CMockData%3E%3B%0A%0A%20%20private%20staticDataSet1%3A%20MockData%5B%5D%20%3D%20%5B%5D%3B%0A%20%20private%20staticDataSet2%3A%20MockData%5B%5D%20%3D%20%5B%5D%3B%0A%20%20private%20staticDataSet3%3A%20MockData%5B%5D%20%3D%20%5B%5D%3B%0A%0A%20%20constructor(private%20ref%3A%20ChangeDetectorRef%2C%20private%20modalService%3A%20NovoModalService)%20%7B%0A%20%20%20%20for%20(let%20i%20%3D%200%3B%20i%20%3C%201000%3B%20i%2B%2B)%20%7B%0A%20%20%20%20%20%20let%20day%20%3D%20i%20%3C%20500%20%3F%20dateFns.subDays(new%20Date()%2C%20i)%20%3A%20dateFns.addDays(new%20Date()%2C%20i%20-%20500)%3B%0A%20%20%20%20%20%20this.staticDataSet1.push(%7B%0A%20%20%20%20%20%20%20%20id%3A%20i%2C%0A%20%20%20%20%20%20%20%20embeddedObj%3A%20%7B%20id%3A%20i%2C%20test%3A%20%60HMM%20%24%7Bi%7D%60%2C%20another%3A%20%7B%20id%3A%20777%20%7D%20%7D%2C%0A%20%20%20%20%20%20%20%20simpleEmbeddedObj%3A%20%7B%20id%3A%20i%20%7D%2C%0A%20%20%20%20%20%20%20%20name%3A%20%60(1)%20Name%20%24%7Bi%7D%60%2C%0A%20%20%20%20%20%20%20%20status%3A%20%60(1)%20Status%20%24%7Bi%7D%60%2C%0A%20%20%20%20%20%20%20%20priority%3A%20this.getPriority()%2C%0A%20%20%20%20%20%20%20%20enabled%3A%20i%20%25%202%20%3D%3D%3D%200%2C%0A%20%20%20%20%20%20%20%20date%3A%20day%2C%0A%20%20%20%20%20%20%20%20dateTime%3A%20day%2C%0A%20%20%20%20%20%20%20%20time%3A%20day%2C%0A%20%20%20%20%20%20%20%20money%3A%20i%20%2B%2010%2C%0A%20%20%20%20%20%20%20%20percent%3A%20i%20%2F%20100%2C%0A%20%20%20%20%20%20%20%20telephone%3A%20'555-555-5555'%2C%0A%20%20%20%20%20%20%20%20email%3A%20'test%40google.com'%2C%0A%20%20%20%20%20%20%20%20address%3A%20%7B%20city%3A%20'City'%2C%20state%3A%20null%20%7D%2C%0A%20%20%20%20%20%20%7D)%3B%0A%20%20%20%20%20%20this.staticDataSet2.push(%7B%0A%20%20%20%20%20%20%20%20id%3A%20i%20%2B%201001%2C%0A%20%20%20%20%20%20%20%20embeddedObj%3A%20%7B%20id%3A%20i%2C%20test%3A%20%60HMM%20%24%7Bi%7D%60%2C%20another%3A%20%7B%20id%3A%20777%20%7D%20%7D%2C%0A%20%20%20%20%20%20%20%20simpleEmbeddedObj%3A%20%7B%20id%3A%20i%20%7D%2C%0A%20%20%20%20%20%20%20%20name%3A%20%60(2)%20Name%20%24%7Bi%7D%60%2C%0A%20%20%20%20%20%20%20%20status%3A%20%60(2)%20Status%20%24%7Bi%7D%60%2C%0A%20%20%20%20%20%20%20%20priority%3A%20this.getPriority()%2C%0A%20%20%20%20%20%20%20%20enabled%3A%20i%20%25%202%20%3D%3D%3D%200%2C%0A%20%20%20%20%20%20%20%20date%3A%20day%2C%0A%20%20%20%20%20%20%20%20dateTime%3A%20day%2C%0A%20%20%20%20%20%20%20%20time%3A%20day%2C%0A%20%20%20%20%20%20%20%20money%3A%20i%20%2B%2010%2C%0A%20%20%20%20%20%20%20%20percent%3A%20i%20%2F%20100%2C%0A%20%20%20%20%20%20%20%20telephone%3A%20'555-555-5555'%2C%0A%20%20%20%20%20%20%20%20email%3A%20'test%40google.com'%2C%0A%20%20%20%20%20%20%20%20address%3A%20%7B%20city%3A%20'City'%2C%20state%3A%20'State'%20%7D%2C%0A%20%20%20%20%20%20%7D)%3B%0A%20%20%20%20%7D%0A%20%20%20%20this.basicService%20%3D%20new%20StaticDataTableService(%5B...this.staticDataSet1%5D)%3B%0A%20%20%7D%0A%0A%20%20public%20getPriority()%3A%20string%20%7B%0A%20%20%20%20const%20x%20%3D%20Math.round(Math.random()%20*%2050)%3B%0A%20%20%20%20return%20'test%20'%20%2B%20x.toString()%3B%0A%20%20%7D%0A%0A%20%20public%20getPriorityOptions()%20%7B%0A%20%20%20%20let%20options%20%3D%20new%20Array()%3B%0A%20%20%20%20let%20i%3B%0A%20%20%20%20for%20(i%20%3D%200%3B%20i%20%3C%2049%3B%20i%2B%2B)%20%7B%0A%20%20%20%20%20%20options.push('test%20'%20%2B%20i.toString())%3B%0A%20%20%20%20%7D%0A%20%20%20%20return%20options%3B%0A%20%20%7D%0A%20%20public%20switchPaginationType(type%3A%20'basic'%20%7C%20'standard')%20%7B%0A%20%20%20%20this.sharedPaginationOptions%20%3D%20Object.assign(%7B%7D%2C%20this.sharedPaginationOptions%2C%20%7B%20theme%3A%20type%20%7D)%3B%0A%20%20%20%20this.ref.detectChanges()%3B%0A%20%20%7D%0A%0A%20%20public%20loadDataset(setIndex%3A%20number)%20%7B%0A%20%20%20%20switch%20(setIndex)%20%7B%0A%20%20%20%20%20%20case%201%3A%0A%20%20%20%20%20%20%20%20this.basicService%20%3D%20new%20StaticDataTableService(%5B...this.staticDataSet1%5D)%3B%0A%20%20%20%20%20%20%20%20break%3B%0A%20%20%20%20%20%20case%202%3A%0A%20%20%20%20%20%20%20%20this.basicService%20%3D%20new%20StaticDataTableService(%5B...this.staticDataSet2%5D)%3B%0A%20%20%20%20%20%20%20%20break%3B%0A%20%20%20%20%20%20case%203%3A%0A%20%20%20%20%20%20%20%20this.basicService%20%3D%20new%20StaticDataTableService(%5B...this.staticDataSet3%5D)%3B%0A%20%20%20%20%20%20%20%20break%3B%0A%20%20%20%20%20%20default%3A%0A%20%20%20%20%20%20%20%20break%3B%0A%20%20%20%20%7D%0A%20%20%7D%0A%0A%20%20public%20toggleGlobalSearch(toggle%3A%20boolean)%3A%20void%20%7B%0A%20%20%20%20this.globalSearchEnabled%20%3D%20toggle%3B%0A%20%20%20%20this.ref.detectChanges()%3B%0A%20%20%7D%0A%0A%20%20public%20log(event%3A%20%7B%20originalEvent%3A%20MouseEvent%3B%20row%3A%20MockData%20%7D)%3A%20void%20%7B%0A%20%20%20%20console.log('%5BDataTable%5D%20Event%20Triggered!'%2C%20event)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%0A%20%20public%20checkDisabled()%3A%20boolean%20%7B%0A%20%20%20%20return%20true%3B%0A%20%20%7D%0A%0A%20%20public%20configureColumns()%3A%20void%20%7B%0A%20%20%20%20this.modalService%0A%20%20%20%20%20%20.open(ConfigureColumnsModal%2C%20%7B%20columns%3A%20this.sharedColumns%20%7D)%0A%20%20%20%20%20%20.onClosed.then((columns%3A%20IDataTableColumn%3CMockData%3E%5B%5D)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20if%20(columns)%20%7B%0A%20%20%20%20%20%20%20%20%20%20let%20enabledColumns%20%3D%20columns.filter((column%3A%20IDataTableColumn%3CMockData%3E)%20%3D%3E%20column.enabled)%3B%0A%20%20%20%20%20%20%20%20%20%20this.sharedDisplayColumns%20%3D%20%5B'selection'%2C%20'expand'%2C%20...enabledColumns.map((column%3A%20IDataTableColumn%3CMockData%3E)%20%3D%3E%20column.id)%5D%3B%0A%20%20%20%20%20%20%20%20%20%20this.ref.markForCheck()%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%7D)%3B%0A%20%20%7D%0A%0A%20%20public%20onPreferencesChanged(event%3A%20IDataTablePreferences)%3A%20void%20%7B%0A%20%20%20%20console.log('Preferences%20changed%20(persist%20manually)%3A'%2C%20event)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%0A%20%20public%20refresh()%3A%20void%20%7B%0A%20%20%20%20this.refreshSubject.next()%3B%0A%20%20%7D%0A%7D%0A`,
+        tsSource: `import%20%7B%20Component%2C%20ChangeDetectionStrategy%2C%20ChangeDetectorRef%20%7D%20from%20'%40angular%2Fcore'%3B%0Aimport%20*%20as%20dateFns%20from%20'date-fns'%3B%0Aimport%20%7B%20Subject%20%7D%20from%20'rxjs'%3B%0A%0Aimport%20%7B%0A%20%20IDataTableColumn%2C%0A%20%20StaticDataTableService%2C%0A%20%20IDataTablePaginationOptions%2C%0A%20%20IDataTableSearchOptions%2C%0A%20%20IDataTableService%2C%0A%20%20NovoModalService%2C%0A%20%20IDataTablePreferences%2C%0A%7D%20from%20'novo-elements'%3B%0A%0Aimport%20%7B%20ConfigureColumnsModal%2C%20MockData%20%7D%20from%20'..%2Fextras'%3B%0A%0A%2F**%0A%20*%20%40title%20Data%20Table%20Service%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'data-table-service-example'%2C%0A%20%20templateUrl%3A%20'data-table-service-example.html'%2C%0A%20%20styleUrls%3A%20%5B'data-table-service-example.css'%5D%2C%0A%20%20changeDetection%3A%20ChangeDetectionStrategy.OnPush%2C%0A%7D)%0Aexport%20class%20DataTableServiceExample%20%7B%0A%20%20%2F%2F%20Table%20configuration%0A%20%20public%20dataSetOptions%3A%20any%5B%5D%20%3D%20%5B%7B%20label%3A%20'Dataset%20%231'%2C%20value%3A%201%20%7D%2C%20%7B%20label%3A%20'Dataset%20%232'%2C%20value%3A%202%20%7D%2C%20%7B%20label%3A%20'Dataset%20%233'%2C%20value%3A%203%20%7D%5D%3B%0A%20%20public%20loadedDataSet%3A%20number%20%3D%201%3B%0A%20%20public%20paginationTypeOptions%3A%20any%5B%5D%20%3D%20%5B%7B%20label%3A%20'Standard'%2C%20value%3A%20'standard'%20%7D%2C%20%7B%20label%3A%20'Basic'%2C%20value%3A%20'basic'%20%7D%5D%3B%0A%20%20public%20loadedPaginationType%3A%20string%20%3D%20'standard'%3B%0A%20%20public%20globalSearchOptions%3A%20any%5B%5D%20%3D%20%5B%7B%20label%3A%20'Show'%2C%20value%3A%20true%20%7D%2C%20%7B%20label%3A%20'Hide'%2C%20value%3A%20false%20%7D%5D%3B%0A%20%20public%20loadedGlobalSearch%3A%20boolean%20%3D%20false%3B%0A%0A%20%20%2F%2F%20Shared%20configuration%0A%20%20public%20sharedColumns%3A%20IDataTableColumn%3CMockData%3E%5B%5D%20%3D%20%5B%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'preview'%2C%0A%20%20%20%20%20%20type%3A%20'action'%2C%0A%20%20%20%20%20%20enabled%3A%20true%2C%0A%20%20%20%20%20%20handlers%3A%20%7B%0A%20%20%20%20%20%20%20%20click%3A%20this.log.bind(this)%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20action%3A%20%7B%0A%20%20%20%20%20%20%20%20icon%3A%20'preview'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'actions'%2C%0A%20%20%20%20%20%20type%3A%20'action'%2C%0A%20%20%20%20%20%20label%3A%20'Actions'%2C%0A%20%20%20%20%20%20enabled%3A%20true%2C%0A%20%20%20%20%20%20action%3A%20%7B%0A%20%20%20%20%20%20%20%20options%3A%20%5B%0A%20%20%20%20%20%20%20%20%20%20%7B%20label%3A%20'Action%201'%2C%20handlers%3A%20%7B%20click%3A%20this.log.bind(this)%20%7D%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7B%20label%3A%20'Action%202'%2C%20handlers%3A%20%7B%20click%3A%20this.log.bind(this)%20%7D%2C%20disabled%3A%20true%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7B%20label%3A%20'Action%203'%2C%20handlers%3A%20%7B%20click%3A%20this.log.bind(this)%20%7D%2C%20disabledFunc%3A%20this.checkDisabled.bind(this)%20%7D%2C%0A%20%20%20%20%20%20%20%20%5D%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'id'%2C%0A%20%20%20%20%20%20label%3A%20'ID'%2C%0A%20%20%20%20%20%20enabled%3A%20true%2C%0A%20%20%20%20%20%20type%3A%20'text'%2C%0A%20%20%20%20%20%20filterable%3A%20%7B%0A%20%20%20%20%20%20%20%20type%3A%20'number'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20sortable%3A%20true%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'telephone'%2C%0A%20%20%20%20%20%20label%3A%20'Phone'%2C%0A%20%20%20%20%20%20type%3A%20'link%3Atel'%2C%0A%20%20%20%20%20%20attributes%3A%20%7B%0A%20%20%20%20%20%20%20%20target%3A%20'_blank'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'email'%2C%0A%20%20%20%20%20%20label%3A%20'Email'%2C%0A%20%20%20%20%20%20type%3A%20'link%3Amailto'%2C%0A%20%20%20%20%20%20attributes%3A%20%7B%0A%20%20%20%20%20%20%20%20target%3A%20'_blank'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'address'%2C%0A%20%20%20%20%20%20label%3A%20'Address'%2C%0A%20%20%20%20%20%20type%3A%20'text'%2C%0A%20%20%20%20%20%20format%3A%20%5B'%24city%2C%20%24state'%2C%20'%24city'%2C%20'%24state'%5D%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'embeddedObj'%2C%0A%20%20%20%20%20%20label%3A%20'Embedded%20(hard)'%2C%0A%20%20%20%20%20%20enabled%3A%20true%2C%0A%20%20%20%20%20%20format%3A%20%5B'%24another.id'%2C%20'%24firstName%20%24lastName'%5D%2C%0A%20%20%20%20%20%20type%3A%20'link'%2C%0A%20%20%20%20%20%20handlers%3A%20%7B%0A%20%20%20%20%20%20%20%20click%3A%20this.log.bind(this)%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20filterable%3A%20true%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'simpleEmbeddedObj'%2C%0A%20%20%20%20%20%20label%3A%20'Embedded%20(simple)'%2C%0A%20%20%20%20%20%20enabled%3A%20true%2C%0A%20%20%20%20%20%20format%3A%20'%24id'%2C%0A%20%20%20%20%20%20type%3A%20'text'%2C%0A%20%20%20%20%20%20filterable%3A%20true%2C%0A%20%20%20%20%20%20sortable%3A%20true%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'date'%2C%0A%20%20%20%20%20%20label%3A%20'Date'%2C%0A%20%20%20%20%20%20enabled%3A%20true%2C%0A%20%20%20%20%20%20type%3A%20'date'%2C%0A%20%20%20%20%20%20filterable%3A%20%7B%0A%20%20%20%20%20%20%20%20type%3A%20'date'%2C%0A%20%20%20%20%20%20%20%20allowCustomRange%3A%20true%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20sortable%3A%20true%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'dateTime'%2C%0A%20%20%20%20%20%20label%3A%20'DateTime'%2C%0A%20%20%20%20%20%20enabled%3A%20false%2C%0A%20%20%20%20%20%20type%3A%20'datetime'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'time'%2C%0A%20%20%20%20%20%20label%3A%20'Time'%2C%0A%20%20%20%20%20%20enabled%3A%20false%2C%0A%20%20%20%20%20%20type%3A%20'time'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'money'%2C%0A%20%20%20%20%20%20label%3A%20'Money'%2C%0A%20%20%20%20%20%20enabled%3A%20false%2C%0A%20%20%20%20%20%20type%3A%20'currency'%2C%0A%20%20%20%20%20%20filterable%3A%20true%2C%0A%20%20%20%20%20%20sortable%3A%20true%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'percent'%2C%0A%20%20%20%20%20%20label%3A%20'Percent'%2C%0A%20%20%20%20%20%20enabled%3A%20true%2C%0A%20%20%20%20%20%20type%3A%20'percent'%2C%0A%20%20%20%20%20%20filterable%3A%20true%2C%0A%20%20%20%20%20%20sortable%3A%20true%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'name'%2C%0A%20%20%20%20%20%20label%3A%20'Name'%2C%0A%20%20%20%20%20%20labelIcon%3A%20'bull'%2C%0A%20%20%20%20%20%20enabled%3A%20true%2C%0A%20%20%20%20%20%20type%3A%20'text'%2C%0A%20%20%20%20%20%20template%3A%20'custom'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'status'%2C%0A%20%20%20%20%20%20label%3A%20'Status'%2C%0A%20%20%20%20%20%20enabled%3A%20true%2C%0A%20%20%20%20%20%20type%3A%20'text'%2C%0A%20%20%20%20%20%20filterable%3A%20true%2C%0A%20%20%20%20%20%20sortable%3A%20true%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'priority'%2C%0A%20%20%20%20%20%20label%3A%20'Priority'%2C%0A%20%20%20%20%20%20enabled%3A%20true%2C%0A%20%20%20%20%20%20type%3A%20'text'%2C%0A%20%20%20%20%20%20filterable%3A%20%7B%0A%20%20%20%20%20%20%20%20type%3A%20'multi-select'%2C%0A%20%20%20%20%20%20%20%20options%3A%20this.getPriorityOptions()%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20sortable%3A%20true%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'enabled'%2C%0A%20%20%20%20%20%20label%3A%20'Enabled'%2C%0A%20%20%20%20%20%20enabled%3A%20true%2C%0A%20%20%20%20%20%20type%3A%20'text'%2C%0A%20%20%20%20%20%20sortable%3A%20true%2C%0A%20%20%20%20%20%20filterable%3A%20%7B%0A%20%20%20%20%20%20%20%20type%3A%20'select'%2C%0A%20%20%20%20%20%20%20%20options%3A%20%5B%7B%20value%3A%20true%2C%20label%3A%20'True'%20%7D%2C%20%7B%20value%3A%20false%2C%20label%3A%20'False'%20%7D%5D%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20id%3A%20'edit'%2C%0A%20%20%20%20%20%20type%3A%20'action'%2C%0A%20%20%20%20%20%20enabled%3A%20true%2C%0A%20%20%20%20%20%20disabled%3A%20true%2C%0A%20%20%20%20%20%20handlers%3A%20%7B%0A%20%20%20%20%20%20%20%20click%3A%20this.log.bind(this)%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20action%3A%20%7B%0A%20%20%20%20%20%20%20%20icon%3A%20'edit'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%7D%2C%0A%20%20%5D%3B%0A%20%20public%20sharedDisplayColumns%20%3D%20%5B%0A%20%20%20%20'selection'%2C%0A%20%20%20%20'expand'%2C%0A%20%20%20%20'preview'%2C%0A%20%20%20%20'actions'%2C%0A%20%20%20%20'id'%2C%0A%20%20%20%20'date'%2C%0A%20%20%20%20'name'%2C%0A%20%20%20%20'telephone'%2C%0A%20%20%20%20'email'%2C%0A%20%20%20%20'simpleEmbeddedObj'%2C%0A%20%20%20%20'status'%2C%0A%20%20%20%20'priority'%2C%0A%20%20%20%20'percent'%2C%0A%20%20%20%20'embeddedObj'%2C%0A%20%20%20%20'edit'%2C%0A%20%20%5D%3B%0A%20%20public%20sharedPaginationOptions%3A%20IDataTablePaginationOptions%20%3D%20%7B%0A%20%20%20%20theme%3A%20'standard'%2C%0A%20%20%20%20pageSize%3A%2010%2C%0A%20%20%20%20pageSizeOptions%3A%20%5B10%2C%2050%2C%20100%2C%20250%2C%20500%5D%2C%0A%20%20%7D%3B%0A%20%20public%20widePaginationOptions%3A%20IDataTablePaginationOptions%20%3D%20%7B%0A%20%20%20%20theme%3A%20'basic-wide'%2C%0A%20%20%20%20pageSize%3A%2010%2C%0A%20%20%20%20pageSizeOptions%3A%20%5B10%2C%2050%2C%20100%2C%20250%2C%20500%5D%2C%0A%20%20%7D%3B%0A%20%20public%20sharedSearchOptions%3A%20IDataTableSearchOptions%20%3D%20%7B%0A%20%20%20%20placeholder%3A%20'Search%20for%20things...'%2C%0A%20%20%20%20tooltip%3A%20'HELLO'%2C%0A%20%20%7D%3B%0A%20%20public%20sharedDefaultSort%3A%20%7B%20id%3A%20string%3B%20value%3A%20string%20%7D%20%3D%20%7B%0A%20%20%20%20id%3A%20'id'%2C%0A%20%20%20%20value%3A%20'asc'%2C%0A%20%20%7D%3B%0A%20%20public%20globalSearchEnabled%3A%20boolean%20%3D%20false%3B%0A%20%20public%20refreshSubject%3A%20Subject%3Cboolean%3E%20%3D%20new%20Subject()%3B%0A%0A%20%20%2F%2F%20Basic%20configuration%0A%20%20public%20basicService%3A%20IDataTableService%3CMockData%3E%3B%0A%0A%20%20private%20staticDataSet1%3A%20MockData%5B%5D%20%3D%20%5B%5D%3B%0A%20%20private%20staticDataSet2%3A%20MockData%5B%5D%20%3D%20%5B%5D%3B%0A%20%20private%20staticDataSet3%3A%20MockData%5B%5D%20%3D%20%5B%5D%3B%0A%0A%20%20constructor(private%20ref%3A%20ChangeDetectorRef%2C%20private%20modalService%3A%20NovoModalService)%20%7B%0A%20%20%20%20for%20(let%20i%20%3D%200%3B%20i%20%3C%201000%3B%20i%2B%2B)%20%7B%0A%20%20%20%20%20%20const%20day%20%3D%20i%20%3C%20500%20%3F%20dateFns.subDays(new%20Date()%2C%20i)%20%3A%20dateFns.addDays(new%20Date()%2C%20i%20-%20500)%3B%0A%20%20%20%20%20%20this.staticDataSet1.push(%7B%0A%20%20%20%20%20%20%20%20id%3A%20i%2C%0A%20%20%20%20%20%20%20%20embeddedObj%3A%20%7B%20id%3A%20i%2C%20test%3A%20%60HMM%20%24%7Bi%7D%60%2C%20another%3A%20%7B%20id%3A%20777%20%7D%20%7D%2C%0A%20%20%20%20%20%20%20%20simpleEmbeddedObj%3A%20%7B%20id%3A%20i%20%7D%2C%0A%20%20%20%20%20%20%20%20name%3A%20%60(1)%20Name%20%24%7Bi%7D%60%2C%0A%20%20%20%20%20%20%20%20status%3A%20%60(1)%20Status%20%24%7Bi%7D%60%2C%0A%20%20%20%20%20%20%20%20priority%3A%20this.getPriority()%2C%0A%20%20%20%20%20%20%20%20enabled%3A%20i%20%25%202%20%3D%3D%3D%200%2C%0A%20%20%20%20%20%20%20%20date%3A%20day%2C%0A%20%20%20%20%20%20%20%20dateTime%3A%20day%2C%0A%20%20%20%20%20%20%20%20time%3A%20day%2C%0A%20%20%20%20%20%20%20%20money%3A%20i%20%2B%2010%2C%0A%20%20%20%20%20%20%20%20percent%3A%20i%20%2F%20100%2C%0A%20%20%20%20%20%20%20%20telephone%3A%20'555-555-5555'%2C%0A%20%20%20%20%20%20%20%20email%3A%20'test%40google.com'%2C%0A%20%20%20%20%20%20%20%20address%3A%20%7B%20city%3A%20'City'%2C%20state%3A%20null%20%7D%2C%0A%20%20%20%20%20%20%7D)%3B%0A%20%20%20%20%20%20this.staticDataSet2.push(%7B%0A%20%20%20%20%20%20%20%20id%3A%20i%20%2B%201001%2C%0A%20%20%20%20%20%20%20%20embeddedObj%3A%20%7B%20id%3A%20i%2C%20test%3A%20%60HMM%20%24%7Bi%7D%60%2C%20another%3A%20%7B%20id%3A%20777%20%7D%20%7D%2C%0A%20%20%20%20%20%20%20%20simpleEmbeddedObj%3A%20%7B%20id%3A%20i%20%7D%2C%0A%20%20%20%20%20%20%20%20name%3A%20%60(2)%20Name%20%24%7Bi%7D%60%2C%0A%20%20%20%20%20%20%20%20status%3A%20%60(2)%20Status%20%24%7Bi%7D%60%2C%0A%20%20%20%20%20%20%20%20priority%3A%20this.getPriority()%2C%0A%20%20%20%20%20%20%20%20enabled%3A%20i%20%25%202%20%3D%3D%3D%200%2C%0A%20%20%20%20%20%20%20%20date%3A%20day%2C%0A%20%20%20%20%20%20%20%20dateTime%3A%20day%2C%0A%20%20%20%20%20%20%20%20time%3A%20day%2C%0A%20%20%20%20%20%20%20%20money%3A%20i%20%2B%2010%2C%0A%20%20%20%20%20%20%20%20percent%3A%20i%20%2F%20100%2C%0A%20%20%20%20%20%20%20%20telephone%3A%20'555-555-5555'%2C%0A%20%20%20%20%20%20%20%20email%3A%20'test%40google.com'%2C%0A%20%20%20%20%20%20%20%20address%3A%20%7B%20city%3A%20'City'%2C%20state%3A%20'State'%20%7D%2C%0A%20%20%20%20%20%20%7D)%3B%0A%20%20%20%20%7D%0A%20%20%20%20this.basicService%20%3D%20new%20StaticDataTableService(%5B...this.staticDataSet1%5D)%3B%0A%20%20%7D%0A%0A%20%20public%20getPriority()%3A%20string%20%7B%0A%20%20%20%20const%20x%20%3D%20Math.round(Math.random()%20*%2050)%3B%0A%20%20%20%20return%20'test%20'%20%2B%20x.toString()%3B%0A%20%20%7D%0A%0A%20%20public%20getPriorityOptions()%20%7B%0A%20%20%20%20const%20options%20%3D%20new%20Array()%3B%0A%20%20%20%20let%20i%3B%0A%20%20%20%20for%20(i%20%3D%200%3B%20i%20%3C%2049%3B%20i%2B%2B)%20%7B%0A%20%20%20%20%20%20options.push('test%20'%20%2B%20i.toString())%3B%0A%20%20%20%20%7D%0A%20%20%20%20return%20options%3B%0A%20%20%7D%0A%20%20public%20switchPaginationType(type%3A%20'basic'%20%7C%20'standard')%20%7B%0A%20%20%20%20this.sharedPaginationOptions%20%3D%20Object.assign(%7B%7D%2C%20this.sharedPaginationOptions%2C%20%7B%20theme%3A%20type%20%7D)%3B%0A%20%20%20%20this.ref.detectChanges()%3B%0A%20%20%7D%0A%0A%20%20public%20loadDataset(setIndex%3A%20number)%20%7B%0A%20%20%20%20switch%20(setIndex)%20%7B%0A%20%20%20%20%20%20case%201%3A%0A%20%20%20%20%20%20%20%20this.basicService%20%3D%20new%20StaticDataTableService(%5B...this.staticDataSet1%5D)%3B%0A%20%20%20%20%20%20%20%20break%3B%0A%20%20%20%20%20%20case%202%3A%0A%20%20%20%20%20%20%20%20this.basicService%20%3D%20new%20StaticDataTableService(%5B...this.staticDataSet2%5D)%3B%0A%20%20%20%20%20%20%20%20break%3B%0A%20%20%20%20%20%20case%203%3A%0A%20%20%20%20%20%20%20%20this.basicService%20%3D%20new%20StaticDataTableService(%5B...this.staticDataSet3%5D)%3B%0A%20%20%20%20%20%20%20%20break%3B%0A%20%20%20%20%20%20default%3A%0A%20%20%20%20%20%20%20%20break%3B%0A%20%20%20%20%7D%0A%20%20%7D%0A%0A%20%20public%20toggleGlobalSearch(toggle%3A%20boolean)%3A%20void%20%7B%0A%20%20%20%20this.globalSearchEnabled%20%3D%20toggle%3B%0A%20%20%20%20this.ref.detectChanges()%3B%0A%20%20%7D%0A%0A%20%20public%20log(event%3A%20%7B%20originalEvent%3A%20MouseEvent%3B%20row%3A%20MockData%20%7D)%3A%20void%20%7B%0A%20%20%20%20console.log('%5BDataTable%5D%20Event%20Triggered!'%2C%20event)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%0A%20%20public%20checkDisabled()%3A%20boolean%20%7B%0A%20%20%20%20return%20true%3B%0A%20%20%7D%0A%0A%20%20public%20configureColumns()%3A%20void%20%7B%0A%20%20%20%20this.modalService%0A%20%20%20%20%20%20.open(ConfigureColumnsModal%2C%20%7B%20columns%3A%20this.sharedColumns%20%7D)%0A%20%20%20%20%20%20.onClosed.then((columns%3A%20IDataTableColumn%3CMockData%3E%5B%5D)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20if%20(columns)%20%7B%0A%20%20%20%20%20%20%20%20%20%20const%20enabledColumns%20%3D%20columns.filter((column%3A%20IDataTableColumn%3CMockData%3E)%20%3D%3E%20column.enabled)%3B%0A%20%20%20%20%20%20%20%20%20%20this.sharedDisplayColumns%20%3D%20%5B'selection'%2C%20'expand'%2C%20...enabledColumns.map((column%3A%20IDataTableColumn%3CMockData%3E)%20%3D%3E%20column.id)%5D%3B%0A%20%20%20%20%20%20%20%20%20%20this.ref.markForCheck()%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%7D)%3B%0A%20%20%7D%0A%0A%20%20public%20onPreferencesChanged(event%3A%20IDataTablePreferences)%3A%20void%20%7B%0A%20%20%20%20console.log('Preferences%20changed%20(persist%20manually)%3A'%2C%20event)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%0A%20%20public%20refresh()%3A%20void%20%7B%0A%20%20%20%20this.refreshSubject.next()%3B%0A%20%20%7D%0A%7D%0A`,
         cssSource: `%2F**%20No%20CSS%20for%20this%20example%20*%2F%0A`,
         htmlSource: `%3Cnovo-data-table%20%5BdataTableService%5D%3D%22basicService%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%5Bcolumns%5D%3D%22sharedColumns%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%5BallowMultipleFilters%5D%3D%22true%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%5BhideGlobalSearch%5D%3D%22!globalSearchEnabled%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%5BdisplayedColumns%5D%3D%22sharedDisplayColumns%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%5BpaginationOptions%5D%3D%22sharedPaginationOptions%22%3E%0A%20%20%3C!--%20Custom%20Cell%20--%20passed%20with%20template%20property%20on%20Column%20--%3E%0A%20%20%3Cng-template%20novoTemplate%3D%22custom%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20let-row%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20let-col%3D%22col%22%3E%0A%20%20%20%20%3Cb%3ECUSTOM%3C%2Fb%3E%20%7B%7B%20row.name%20%7D%7D%0A%20%20%20%20%3Cb%3ECUSTOM%3C%2Fb%3E%0A%20%20%3C%2Fng-template%3E%0A%3C%2Fnovo-data-table%3E%0A`
     },
@@ -71620,28 +71620,28 @@ const EXAMPLE_COMPONENTS = {
     'analytics-colors': {
         title: 'Analytics Colors',
         component: AnalyticsColorsExample,
-        tsSource: `%2F%2F%20NG2%0Aimport%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0A%2F%2F%20Vendor%0Aimport%20%7B%20NovoToastService%20%7D%20from%20'novo-elements'%3B%0A%0A%2F**%0A%20*%20%40title%20Analytics%20Colors%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'analytics-colors-example'%2C%0A%20%20templateUrl%3A%20'.%2Fanalytics-colors-example.html'%2C%0A%20%20styleUrls%3A%20%5B'.%2Fanalytics-colors-example.scss'%5D%2C%0A%7D)%0Aexport%20class%20AnalyticsColorsExample%20%7B%0A%20%20public%20analyticsColors%3A%20Array%3Cany%3E%20%3D%20%5B%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'grapefruit'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'grapefruit'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'DA4453'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'bittersweet'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'bittersweet'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'EB6845'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'sunflower'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'sunflower'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'F6B042'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'grass'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'grass'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'8CC152'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'mint'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'mint'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'37BC9B'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'aqua'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'aqua'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'3BAFDA'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'ocean'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'ocean'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'4A89DC'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'carnation'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'carnation'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'D770AD'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'lavender'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'lavender'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'967ADC'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'mountain'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'mountain'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'9678B6'%2C%0A%20%20%20%20%7D%2C%0A%20%20%5D%3B%0A%0A%20%20options%3A%20any%3B%0A%0A%20%20constructor(private%20toaster%3A%20NovoToastService)%20%7B%7D%0A%0A%20%20copyLink(color)%20%7B%0A%20%20%20%20%2F%2F%20Create%20dom%20element%20to%20copy%20from%0A%20%20%20%20let%20copyFrom%20%3D%20document.createElement('textarea')%3B%0A%20%20%20%20copyFrom.textContent%20%3D%20%60%23%24%7Bcolor.hex%7D%60%3B%0A%20%20%20%20let%20body%20%3D%20document.getElementsByTagName('body')%5B0%5D%3B%0A%20%20%20%20body.appendChild(copyFrom)%3B%0A%20%20%20%20copyFrom.select()%3B%0A%20%20%20%20%2F%2F%20Copy%20text%0A%20%20%20%20document.execCommand('copy')%3B%0A%20%20%20%20%2F%2F%20Delete%20element%0A%20%20%20%20body.removeChild(copyFrom)%3B%0A%0A%20%20%20%20%2F%2F%20Set%20toast%20options%0A%20%20%20%20this.options%20%3D%20%7B%0A%20%20%20%20%20%20title%3A%20%60%23%24%7Bcolor.hex%7D%60%2C%0A%20%20%20%20%20%20message%3A%20'Copied%20to%20your%20clipboard'%2C%0A%20%20%20%20%20%20theme%3A%20color.variables%5B0%5D%2C%0A%20%20%20%20%20%20icon%3A%20'clipboard'%2C%0A%20%20%20%20%20%20position%3A%20'growlTopRight'%2C%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20if%20(color.name%20%3D%3D%3D%20'action')%20%7B%0A%20%20%20%20%20%20this.options.theme%20%3D%20'ocean'%3B%0A%20%20%20%20%7D%0A%0A%20%20%20%20%2F%2F%20Fire%20toast%0A%20%20%20%20this.toaster.alert(this.options)%3B%0A%20%20%7D%0A%7D%0A`,
+        tsSource: `%2F%2F%20NG2%0Aimport%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0A%2F%2F%20Vendor%0Aimport%20%7B%20NovoToastService%20%7D%20from%20'novo-elements'%3B%0A%0A%2F**%0A%20*%20%40title%20Analytics%20Colors%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'analytics-colors-example'%2C%0A%20%20templateUrl%3A%20'.%2Fanalytics-colors-example.html'%2C%0A%20%20styleUrls%3A%20%5B'.%2Fanalytics-colors-example.scss'%5D%2C%0A%7D)%0Aexport%20class%20AnalyticsColorsExample%20%7B%0A%20%20public%20analyticsColors%3A%20Array%3Cany%3E%20%3D%20%5B%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'grapefruit'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'grapefruit'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'DA4453'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'bittersweet'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'bittersweet'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'EB6845'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'sunflower'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'sunflower'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'F6B042'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'grass'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'grass'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'8CC152'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'mint'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'mint'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'37BC9B'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'aqua'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'aqua'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'3BAFDA'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'ocean'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'ocean'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'4A89DC'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'carnation'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'carnation'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'D770AD'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'lavender'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'lavender'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'967ADC'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'mountain'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'mountain'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'9678B6'%2C%0A%20%20%20%20%7D%2C%0A%20%20%5D%3B%0A%0A%20%20options%3A%20any%3B%0A%0A%20%20constructor(private%20toaster%3A%20NovoToastService)%20%7B%7D%0A%0A%20%20copyLink(color)%20%7B%0A%20%20%20%20%2F%2F%20Create%20dom%20element%20to%20copy%20from%0A%20%20%20%20const%20copyFrom%20%3D%20document.createElement('textarea')%3B%0A%20%20%20%20copyFrom.textContent%20%3D%20%60%23%24%7Bcolor.hex%7D%60%3B%0A%20%20%20%20const%20body%20%3D%20document.getElementsByTagName('body')%5B0%5D%3B%0A%20%20%20%20body.appendChild(copyFrom)%3B%0A%20%20%20%20copyFrom.select()%3B%0A%20%20%20%20%2F%2F%20Copy%20text%0A%20%20%20%20document.execCommand('copy')%3B%0A%20%20%20%20%2F%2F%20Delete%20element%0A%20%20%20%20body.removeChild(copyFrom)%3B%0A%0A%20%20%20%20%2F%2F%20Set%20toast%20options%0A%20%20%20%20this.options%20%3D%20%7B%0A%20%20%20%20%20%20title%3A%20%60%23%24%7Bcolor.hex%7D%60%2C%0A%20%20%20%20%20%20message%3A%20'Copied%20to%20your%20clipboard'%2C%0A%20%20%20%20%20%20theme%3A%20color.variables%5B0%5D%2C%0A%20%20%20%20%20%20icon%3A%20'clipboard'%2C%0A%20%20%20%20%20%20position%3A%20'growlTopRight'%2C%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20if%20(color.name%20%3D%3D%3D%20'action')%20%7B%0A%20%20%20%20%20%20this.options.theme%20%3D%20'ocean'%3B%0A%20%20%20%20%7D%0A%0A%20%20%20%20%2F%2F%20Fire%20toast%0A%20%20%20%20this.toaster.alert(this.options)%3B%0A%20%20%7D%0A%7D%0A`,
         cssSource: ``,
         htmlSource: `%3Carticle%20class%3D%22color-blocks%20analytics-colors%22%3E%0A%20%20%3Cdiv%20*ngFor%3D%22let%20color%20of%20analyticsColors%22%20class%3D%22block%22%3E%0A%20%20%20%20%20%20%3Cdiv%20class%3D%22color-square%20bgc-%7B%7Bcolor.variables%5B0%5D%7D%7D%22%20(click)%3D%22copyLink(color)%22%3E%0A%20%20%20%20%20%20%20%20%3Ch3%20class%3D%22color-text%22%3E%3Cspan%3E%23%3C%2Fspan%3E%7B%7Bcolor.hex%7D%7D%3C%2Fh3%3E%0A%20%20%20%20%20%20%3C%2Fdiv%3E%0A%20%20%20%20%20%20%3Ch6%3E%7B%7Bcolor.name%7D%7D%3C%2Fh6%3E%0A%20%20%20%20%20%20%3Cspan%20class%3D%22vars%22%20*ngFor%3D%22let%20variable%20of%20color.variables%22%3E%24%7B%7Bvariable%7D%7D%3C%2Fspan%3E%0A%20%20%3C%2Fdiv%3E%0A%3C%2Farticle%3E%0A`
     },
     'entity-colors': {
         title: 'Entity Colors',
         component: EntityColorsExample,
-        tsSource: `%2F%2F%20NG2%0Aimport%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0A%2F%2F%20Vendor%0Aimport%20%7B%20NovoToastService%20%7D%20from%20'novo-elements'%3B%0A%0A%2F**%0A%20*%20%40title%20Entity%20Colors%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'entity-colors-example'%2C%0A%20%20templateUrl%3A%20'.%2Fentity-colors-example.html'%2C%0A%20%20styleUrls%3A%20%5B'.%2Fentity-colors-example.scss'%5D%2C%0A%7D)%0Aexport%20class%20EntityColorsExample%20%7B%0A%20%20entityColors%3A%20Array%3Cany%3E%20%3D%20%5B%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'lead'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'lead'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'AA6699'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'contact'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'contact'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'FFAA44'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'company'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'company'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'3399DD'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'candidate'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'candidate'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'44BB77'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'opportunity'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'opportunity'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'662255'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'job'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'job'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'BB5566'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'job%20code'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'jobCode'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'696D79'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'earn%20code'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'earnCode'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'696D79'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'submission'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'submission'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'A9ADBB'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'placement'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'placement'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'0B344F'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'sendout'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'sendout'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'747884'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'note'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'note'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'747884'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'contract'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'contract'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'454EA0'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'invoice%20statement'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'invoiceStatement'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'696D79'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'billable%20charge'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'billableCharge'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'696D79'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'payable%20charge'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'payableCharge'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'696D79'%2C%0A%20%20%20%20%7D%2C%0A%20%20%5D%3B%0A%0A%20%20options%3A%20any%3B%0A%0A%20%20constructor(private%20toaster%3A%20NovoToastService)%20%7B%7D%0A%0A%20%20copyLink(color)%20%7B%0A%20%20%20%20%2F%2F%20Create%20dom%20element%20to%20copy%20from%0A%20%20%20%20let%20copyFrom%20%3D%20document.createElement('textarea')%3B%0A%20%20%20%20copyFrom.textContent%20%3D%20%60%23%24%7Bcolor.hex%7D%60%3B%0A%20%20%20%20let%20body%20%3D%20document.getElementsByTagName('body')%5B0%5D%3B%0A%20%20%20%20body.appendChild(copyFrom)%3B%0A%20%20%20%20copyFrom.select()%3B%0A%20%20%20%20%2F%2F%20Copy%20text%0A%20%20%20%20document.execCommand('copy')%3B%0A%20%20%20%20%2F%2F%20Delete%20element%0A%20%20%20%20body.removeChild(copyFrom)%3B%0A%0A%20%20%20%20%2F%2F%20Set%20toast%20options%0A%20%20%20%20this.options%20%3D%20%7B%0A%20%20%20%20%20%20title%3A%20%60%23%24%7Bcolor.hex%7D%60%2C%0A%20%20%20%20%20%20message%3A%20'Copied%20to%20your%20clipboard'%2C%0A%20%20%20%20%20%20theme%3A%20color.variables%5B0%5D%2C%0A%20%20%20%20%20%20icon%3A%20'clipboard'%2C%0A%20%20%20%20%20%20position%3A%20'growlTopRight'%2C%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20if%20(color.name%20%3D%3D%3D%20'action')%20%7B%0A%20%20%20%20%20%20this.options.theme%20%3D%20'ocean'%3B%0A%20%20%20%20%7D%0A%0A%20%20%20%20%2F%2F%20Fire%20toast%0A%20%20%20%20this.toaster.alert(this.options)%3B%0A%20%20%7D%0A%7D%0A`,
+        tsSource: `%2F%2F%20NG2%0Aimport%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0A%2F%2F%20Vendor%0Aimport%20%7B%20NovoToastService%20%7D%20from%20'novo-elements'%3B%0A%0A%2F**%0A%20*%20%40title%20Entity%20Colors%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'entity-colors-example'%2C%0A%20%20templateUrl%3A%20'.%2Fentity-colors-example.html'%2C%0A%20%20styleUrls%3A%20%5B'.%2Fentity-colors-example.scss'%5D%2C%0A%7D)%0Aexport%20class%20EntityColorsExample%20%7B%0A%20%20entityColors%3A%20Array%3Cany%3E%20%3D%20%5B%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'lead'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'lead'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'AA6699'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'contact'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'contact'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'FFAA44'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'company'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'company'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'3399DD'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'candidate'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'candidate'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'44BB77'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'opportunity'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'opportunity'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'662255'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'job'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'job'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'BB5566'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'job%20code'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'jobCode'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'696D79'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'earn%20code'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'earnCode'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'696D79'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'submission'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'submission'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'A9ADBB'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'placement'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'placement'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'0B344F'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'sendout'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'sendout'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'747884'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'note'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'note'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'747884'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'contract'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'contract'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'454EA0'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'invoice%20statement'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'invoiceStatement'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'696D79'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'billable%20charge'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'billableCharge'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'696D79'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'payable%20charge'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'payableCharge'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'696D79'%2C%0A%20%20%20%20%7D%2C%0A%20%20%5D%3B%0A%0A%20%20options%3A%20any%3B%0A%0A%20%20constructor(private%20toaster%3A%20NovoToastService)%20%7B%7D%0A%0A%20%20copyLink(color)%20%7B%0A%20%20%20%20%2F%2F%20Create%20dom%20element%20to%20copy%20from%0A%20%20%20%20const%20copyFrom%20%3D%20document.createElement('textarea')%3B%0A%20%20%20%20copyFrom.textContent%20%3D%20%60%23%24%7Bcolor.hex%7D%60%3B%0A%20%20%20%20const%20body%20%3D%20document.getElementsByTagName('body')%5B0%5D%3B%0A%20%20%20%20body.appendChild(copyFrom)%3B%0A%20%20%20%20copyFrom.select()%3B%0A%20%20%20%20%2F%2F%20Copy%20text%0A%20%20%20%20document.execCommand('copy')%3B%0A%20%20%20%20%2F%2F%20Delete%20element%0A%20%20%20%20body.removeChild(copyFrom)%3B%0A%0A%20%20%20%20%2F%2F%20Set%20toast%20options%0A%20%20%20%20this.options%20%3D%20%7B%0A%20%20%20%20%20%20title%3A%20%60%23%24%7Bcolor.hex%7D%60%2C%0A%20%20%20%20%20%20message%3A%20'Copied%20to%20your%20clipboard'%2C%0A%20%20%20%20%20%20theme%3A%20color.variables%5B0%5D%2C%0A%20%20%20%20%20%20icon%3A%20'clipboard'%2C%0A%20%20%20%20%20%20position%3A%20'growlTopRight'%2C%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20if%20(color.name%20%3D%3D%3D%20'action')%20%7B%0A%20%20%20%20%20%20this.options.theme%20%3D%20'ocean'%3B%0A%20%20%20%20%7D%0A%0A%20%20%20%20%2F%2F%20Fire%20toast%0A%20%20%20%20this.toaster.alert(this.options)%3B%0A%20%20%7D%0A%7D%0A`,
         cssSource: ``,
         htmlSource: `%3Carticle%20class%3D%22color-blocks%20entity-colors%22%3E%0A%20%20%3Cdiv%20*ngFor%3D%22let%20color%20of%20entityColors%22%20class%3D%22block%22%3E%0A%20%20%20%20%20%20%3Cdiv%20class%3D%22color-square%20bgc-%7B%7Bcolor.variables%5B0%5D%7D%7D%22%20(click)%3D%22copyLink(color)%22%3E%0A%20%20%20%20%20%20%20%20%3Ch3%20class%3D%22color-text%22%3E%3Cspan%3E%23%3C%2Fspan%3E%7B%7Bcolor.hex%7D%7D%3C%2Fh3%3E%0A%20%20%20%20%20%20%3C%2Fdiv%3E%0A%20%20%20%20%20%20%3Ch6%3E%7B%7Bcolor.name%7D%7D%3C%2Fh6%3E%0A%20%20%20%20%20%20%3Cspan%20class%3D%22vars%22%20*ngFor%3D%22let%20variable%20of%20color.variables%22%3E%24%7B%7Bvariable%7D%7D%3C%2Fspan%3E%0A%20%20%3C%2Fdiv%3E%0A%3C%2Farticle%3E%0A`
     },
     'primary-colors': {
         title: 'Primary Colors',
         component: PrimaryColorsExample,
-        tsSource: `%2F%2F%20NG2%0Aimport%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0A%2F%2F%20Vendor%0Aimport%20%7B%20NovoToastService%20%7D%20from%20'novo-elements'%3B%0A%0A%2F**%0A%20*%20%40title%20Primary%20Colors%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'primary-colors-example'%2C%0A%20%20templateUrl%3A%20'.%2Fprimary-colors-example.html'%2C%0A%20%20styleUrls%3A%20%5B'.%2Fprimary-colors-example.scss'%5D%2C%0A%7D)%0Aexport%20class%20PrimaryColorsExample%20%7B%0A%20%20primaryColors%3A%20Array%3Cany%3E%20%3D%20%5B%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'navigation'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'navigation'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'2F384F'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'positive'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'positive'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'4A89DC'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'dark'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'dark'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'3D464D'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'background'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'background'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'F4F4F4'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'background%20dark'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'background-dark'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'E2E2E2'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'neutral'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'neutral'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'4F5361'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'success'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'success'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'8CC152'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'negative'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'negative'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'DA4453'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'warning'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'warning'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'F6B042'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'empty'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'empty'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'CCCDCC'%2C%0A%20%20%20%20%7D%2C%0A%20%20%5D%3B%0A%20%20options%3A%20any%3B%0A%0A%20%20constructor(private%20toaster%3A%20NovoToastService)%20%7B%7D%0A%0A%20%20copyLink(color)%20%7B%0A%20%20%20%20%2F%2F%20Create%20dom%20element%20to%20copy%20from%0A%20%20%20%20let%20copyFrom%20%3D%20document.createElement('textarea')%3B%0A%20%20%20%20copyFrom.textContent%20%3D%20%60%23%24%7Bcolor.hex%7D%60%3B%0A%20%20%20%20let%20body%20%3D%20document.getElementsByTagName('body')%5B0%5D%3B%0A%20%20%20%20body.appendChild(copyFrom)%3B%0A%20%20%20%20copyFrom.select()%3B%0A%20%20%20%20%2F%2F%20Copy%20text%0A%20%20%20%20document.execCommand('copy')%3B%0A%20%20%20%20%2F%2F%20Delete%20element%0A%20%20%20%20body.removeChild(copyFrom)%3B%0A%0A%20%20%20%20%2F%2F%20Set%20toast%20options%0A%20%20%20%20this.options%20%3D%20%7B%0A%20%20%20%20%20%20title%3A%20%60%23%24%7Bcolor.hex%7D%60%2C%0A%20%20%20%20%20%20message%3A%20'Copied%20to%20your%20clipboard'%2C%0A%20%20%20%20%20%20theme%3A%20color.variables%5B0%5D%2C%0A%20%20%20%20%20%20icon%3A%20'clipboard'%2C%0A%20%20%20%20%20%20position%3A%20'growlTopRight'%2C%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20if%20(color.name%20%3D%3D%3D%20'action')%20%7B%0A%20%20%20%20%20%20this.options.theme%20%3D%20'ocean'%3B%0A%20%20%20%20%7D%0A%0A%20%20%20%20%2F%2F%20Fire%20toast%0A%20%20%20%20this.toaster.alert(this.options)%3B%0A%20%20%7D%0A%7D%0A`,
+        tsSource: `%2F%2F%20NG2%0Aimport%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0A%2F%2F%20Vendor%0Aimport%20%7B%20NovoToastService%20%7D%20from%20'novo-elements'%3B%0A%0A%2F**%0A%20*%20%40title%20Primary%20Colors%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'primary-colors-example'%2C%0A%20%20templateUrl%3A%20'.%2Fprimary-colors-example.html'%2C%0A%20%20styleUrls%3A%20%5B'.%2Fprimary-colors-example.scss'%5D%2C%0A%7D)%0Aexport%20class%20PrimaryColorsExample%20%7B%0A%20%20primaryColors%3A%20Array%3Cany%3E%20%3D%20%5B%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'navigation'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'navigation'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'2F384F'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'positive'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'positive'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'4A89DC'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'dark'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'dark'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'3D464D'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'background'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'background'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'F4F4F4'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'background%20dark'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'background-dark'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'E2E2E2'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'neutral'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'neutral'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'4F5361'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'success'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'success'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'8CC152'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'negative'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'negative'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'DA4453'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'warning'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'warning'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'F6B042'%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20name%3A%20'empty'%2C%0A%20%20%20%20%20%20variables%3A%20%5B'empty'%5D%2C%0A%20%20%20%20%20%20hex%3A%20'CCCDCC'%2C%0A%20%20%20%20%7D%2C%0A%20%20%5D%3B%0A%20%20options%3A%20any%3B%0A%0A%20%20constructor(private%20toaster%3A%20NovoToastService)%20%7B%7D%0A%0A%20%20copyLink(color)%20%7B%0A%20%20%20%20%2F%2F%20Create%20dom%20element%20to%20copy%20from%0A%20%20%20%20const%20copyFrom%20%3D%20document.createElement('textarea')%3B%0A%20%20%20%20copyFrom.textContent%20%3D%20%60%23%24%7Bcolor.hex%7D%60%3B%0A%20%20%20%20const%20body%20%3D%20document.getElementsByTagName('body')%5B0%5D%3B%0A%20%20%20%20body.appendChild(copyFrom)%3B%0A%20%20%20%20copyFrom.select()%3B%0A%20%20%20%20%2F%2F%20Copy%20text%0A%20%20%20%20document.execCommand('copy')%3B%0A%20%20%20%20%2F%2F%20Delete%20element%0A%20%20%20%20body.removeChild(copyFrom)%3B%0A%0A%20%20%20%20%2F%2F%20Set%20toast%20options%0A%20%20%20%20this.options%20%3D%20%7B%0A%20%20%20%20%20%20title%3A%20%60%23%24%7Bcolor.hex%7D%60%2C%0A%20%20%20%20%20%20message%3A%20'Copied%20to%20your%20clipboard'%2C%0A%20%20%20%20%20%20theme%3A%20color.variables%5B0%5D%2C%0A%20%20%20%20%20%20icon%3A%20'clipboard'%2C%0A%20%20%20%20%20%20position%3A%20'growlTopRight'%2C%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20if%20(color.name%20%3D%3D%3D%20'action')%20%7B%0A%20%20%20%20%20%20this.options.theme%20%3D%20'ocean'%3B%0A%20%20%20%20%7D%0A%0A%20%20%20%20%2F%2F%20Fire%20toast%0A%20%20%20%20this.toaster.alert(this.options)%3B%0A%20%20%7D%0A%7D%0A`,
         cssSource: ``,
         htmlSource: `%3Carticle%20class%3D%22color-blocks%20primary-colors%22%3E%0A%20%20%3Cdiv%20*ngFor%3D%22let%20color%20of%20primaryColors%22%20class%3D%22block%22%3E%0A%20%20%20%20%20%20%3Cdiv%20class%3D%22color-square%20bgc-%7B%7Bcolor.variables%5B0%5D%7D%7D%22%20(click)%3D%22copyLink(color)%22%3E%0A%20%20%20%20%20%20%20%20%3Ch3%20class%3D%22color-text%22%3E%3Cspan%3E%23%3C%2Fspan%3E%7B%7Bcolor.hex%7D%7D%3C%2Fh3%3E%0A%20%20%20%20%20%20%3C%2Fdiv%3E%0A%20%20%20%20%20%20%3Ch6%3E%7B%7Bcolor.name%7D%7D%3C%2Fh6%3E%0A%20%20%20%20%20%20%3Cspan%20class%3D%22vars%22%20*ngFor%3D%22let%20variable%20of%20color.variables%22%3E%24%7B%7Bvariable%7D%7D%3C%2Fspan%3E%0A%20%20%3C%2Fdiv%3E%0A%3C%2Farticle%3E%0A`
     },
     'async-chips': {
         title: 'Async Chips Example',
         component: AsyncChipsExample,
-        tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0A%0A%2F**%0A%20*%20%40title%20Async%20Chips%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'async-chips-example'%2C%0A%20%20templateUrl%3A%20'async-chips-example.html'%2C%0A%20%20styleUrls%3A%20%5B'async-chips-example.css'%5D%2C%0A%7D)%0Aexport%20class%20AsyncChipsExample%20%7B%0A%20%20public%20async%3A%20any%3B%0A%20%20public%20value%3A%20any%3B%0A%20%20public%20placeholder%3A%20string%20%3D%20'Select...'%3B%0A%0A%20%20constructor()%20%7B%0A%20%20%20%20let%20states%20%3D%20%5B%0A%20%20%20%20%20%20'Alabama'%2C%0A%20%20%20%20%20%20'Alaska'%2C%0A%20%20%20%20%20%20'Arizona'%2C%0A%20%20%20%20%20%20'Arkansas'%2C%0A%20%20%20%20%20%20'California'%2C%0A%20%20%20%20%20%20'Colorado'%2C%0A%20%20%20%20%20%20'Connecticut'%2C%0A%20%20%20%20%20%20'Delaware'%2C%0A%20%20%20%20%20%20'Florida'%2C%0A%20%20%20%20%20%20'Georgia'%2C%0A%20%20%20%20%20%20'Hawaii'%2C%0A%20%20%20%20%20%20'Idaho'%2C%0A%20%20%20%20%20%20'Illinois'%2C%0A%20%20%20%20%20%20'Indiana'%2C%0A%20%20%20%20%20%20'Iowa'%2C%0A%20%20%20%20%20%20'Kansas'%2C%0A%20%20%20%20%20%20'Kentucky'%2C%0A%20%20%20%20%20%20'Louisiana'%2C%0A%20%20%20%20%20%20'Maine'%2C%0A%20%20%20%20%20%20'Maryland'%2C%0A%20%20%20%20%20%20'Massachusetts'%2C%0A%20%20%20%20%20%20'Michigan'%2C%0A%20%20%20%20%20%20'Minnesota'%2C%0A%20%20%20%20%20%20'Mississippi'%2C%0A%20%20%20%20%20%20'Missouri'%2C%0A%20%20%20%20%20%20'Montana'%2C%0A%20%20%20%20%20%20'Nebraska'%2C%0A%20%20%20%20%20%20'Nevada'%2C%0A%20%20%20%20%20%20'New%20Hampshire'%2C%0A%20%20%20%20%20%20'New%20Jersey'%2C%0A%20%20%20%20%20%20'New%20Mexico'%2C%0A%20%20%20%20%20%20'New%20York'%2C%0A%20%20%20%20%20%20'North%20Dakota'%2C%0A%20%20%20%20%20%20'North%20Carolina'%2C%0A%20%20%20%20%20%20'Ohio'%2C%0A%20%20%20%20%20%20'Oklahoma'%2C%0A%20%20%20%20%20%20'Oregon'%2C%0A%20%20%20%20%20%20'Pennsylvania'%2C%0A%20%20%20%20%20%20'Rhode%20Island'%2C%0A%20%20%20%20%20%20'South%20Carolina'%2C%0A%20%20%20%20%20%20'South%20Dakota'%2C%0A%20%20%20%20%20%20'Tennessee'%2C%0A%20%20%20%20%20%20'Texas'%2C%0A%20%20%20%20%20%20'Utah'%2C%0A%20%20%20%20%20%20'Vermont'%2C%0A%20%20%20%20%20%20'Virginia'%2C%0A%20%20%20%20%20%20'Washington'%2C%0A%20%20%20%20%20%20'West%20Virginia'%2C%0A%20%20%20%20%20%20'Wisconsin'%2C%0A%20%20%20%20%20%20'Wyoming'%2C%0A%20%20%20%20%5D%3B%0A%20%20%20%20let%20abbrieviated%20%3D%20%5B%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20value%3A%20'USA'%2C%0A%20%20%20%20%20%20%20%20label%3A%20'United%20States'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20value%3A%20'GB'%2C%0A%20%20%20%20%20%20%20%20label%3A%20'Great%20Britain'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20value%3A%20'CA'%2C%0A%20%20%20%20%20%20%20%20label%3A%20'Canada'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20value%3A%20'AU'%2C%0A%20%20%20%20%20%20%20%20label%3A%20'Austrailia'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%5D%3B%0A%20%20%20%20this.async%20%3D%20%7B%0A%20%20%20%20%20%20options%3A%20()%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20return%20new%20Promise((resolve)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20setTimeout(()%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20resolve(abbrieviated)%3B%0A%20%20%20%20%20%20%20%20%20%20%7D%2C%20300)%3B%0A%20%20%20%20%20%20%20%20%7D)%3B%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20getLabels%3A%20(data)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20return%20new%20Promise((resolve)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20setTimeout(()%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20let%20values%20%3D%20data.map((item)%20%3D%3E%20item.value)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20let%20results%20%3D%20abbrieviated.filter((item)%20%3D%3E%20values.includes(item.value))%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20resolve(results)%3B%0A%20%20%20%20%20%20%20%20%20%20%7D%2C%20300)%3B%0A%20%20%20%20%20%20%20%20%7D)%3B%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20this.value%20%3D%20%5B%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20value%3A%20'USA'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20value%3A%20'GB'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%5D%3B%0A%20%20%7D%0A%0A%20%20onChanged(event)%20%7B%0A%20%20%20%20console.log('EVENT'%2C%20event)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%7D%0A`,
+        tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0A%0A%2F**%0A%20*%20%40title%20Async%20Chips%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'async-chips-example'%2C%0A%20%20templateUrl%3A%20'async-chips-example.html'%2C%0A%20%20styleUrls%3A%20%5B'async-chips-example.css'%5D%2C%0A%7D)%0Aexport%20class%20AsyncChipsExample%20%7B%0A%20%20public%20async%3A%20any%3B%0A%20%20public%20value%3A%20any%3B%0A%20%20public%20placeholder%3A%20string%20%3D%20'Select...'%3B%0A%0A%20%20constructor()%20%7B%0A%20%20%20%20const%20states%20%3D%20%5B%0A%20%20%20%20%20%20'Alabama'%2C%0A%20%20%20%20%20%20'Alaska'%2C%0A%20%20%20%20%20%20'Arizona'%2C%0A%20%20%20%20%20%20'Arkansas'%2C%0A%20%20%20%20%20%20'California'%2C%0A%20%20%20%20%20%20'Colorado'%2C%0A%20%20%20%20%20%20'Connecticut'%2C%0A%20%20%20%20%20%20'Delaware'%2C%0A%20%20%20%20%20%20'Florida'%2C%0A%20%20%20%20%20%20'Georgia'%2C%0A%20%20%20%20%20%20'Hawaii'%2C%0A%20%20%20%20%20%20'Idaho'%2C%0A%20%20%20%20%20%20'Illinois'%2C%0A%20%20%20%20%20%20'Indiana'%2C%0A%20%20%20%20%20%20'Iowa'%2C%0A%20%20%20%20%20%20'Kansas'%2C%0A%20%20%20%20%20%20'Kentucky'%2C%0A%20%20%20%20%20%20'Louisiana'%2C%0A%20%20%20%20%20%20'Maine'%2C%0A%20%20%20%20%20%20'Maryland'%2C%0A%20%20%20%20%20%20'Massachusetts'%2C%0A%20%20%20%20%20%20'Michigan'%2C%0A%20%20%20%20%20%20'Minnesota'%2C%0A%20%20%20%20%20%20'Mississippi'%2C%0A%20%20%20%20%20%20'Missouri'%2C%0A%20%20%20%20%20%20'Montana'%2C%0A%20%20%20%20%20%20'Nebraska'%2C%0A%20%20%20%20%20%20'Nevada'%2C%0A%20%20%20%20%20%20'New%20Hampshire'%2C%0A%20%20%20%20%20%20'New%20Jersey'%2C%0A%20%20%20%20%20%20'New%20Mexico'%2C%0A%20%20%20%20%20%20'New%20York'%2C%0A%20%20%20%20%20%20'North%20Dakota'%2C%0A%20%20%20%20%20%20'North%20Carolina'%2C%0A%20%20%20%20%20%20'Ohio'%2C%0A%20%20%20%20%20%20'Oklahoma'%2C%0A%20%20%20%20%20%20'Oregon'%2C%0A%20%20%20%20%20%20'Pennsylvania'%2C%0A%20%20%20%20%20%20'Rhode%20Island'%2C%0A%20%20%20%20%20%20'South%20Carolina'%2C%0A%20%20%20%20%20%20'South%20Dakota'%2C%0A%20%20%20%20%20%20'Tennessee'%2C%0A%20%20%20%20%20%20'Texas'%2C%0A%20%20%20%20%20%20'Utah'%2C%0A%20%20%20%20%20%20'Vermont'%2C%0A%20%20%20%20%20%20'Virginia'%2C%0A%20%20%20%20%20%20'Washington'%2C%0A%20%20%20%20%20%20'West%20Virginia'%2C%0A%20%20%20%20%20%20'Wisconsin'%2C%0A%20%20%20%20%20%20'Wyoming'%2C%0A%20%20%20%20%5D%3B%0A%20%20%20%20const%20abbrieviated%20%3D%20%5B%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20value%3A%20'USA'%2C%0A%20%20%20%20%20%20%20%20label%3A%20'United%20States'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20value%3A%20'GB'%2C%0A%20%20%20%20%20%20%20%20label%3A%20'Great%20Britain'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20value%3A%20'CA'%2C%0A%20%20%20%20%20%20%20%20label%3A%20'Canada'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20value%3A%20'AU'%2C%0A%20%20%20%20%20%20%20%20label%3A%20'Austrailia'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%5D%3B%0A%20%20%20%20this.async%20%3D%20%7B%0A%20%20%20%20%20%20options%3A%20()%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20return%20new%20Promise((resolve)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20setTimeout(()%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20resolve(abbrieviated)%3B%0A%20%20%20%20%20%20%20%20%20%20%7D%2C%20300)%3B%0A%20%20%20%20%20%20%20%20%7D)%3B%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20getLabels%3A%20(data)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20return%20new%20Promise((resolve)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20setTimeout(()%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20const%20values%20%3D%20data.map((item)%20%3D%3E%20item.value)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20const%20results%20%3D%20abbrieviated.filter((item)%20%3D%3E%20values.includes(item.value))%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20resolve(results)%3B%0A%20%20%20%20%20%20%20%20%20%20%7D%2C%20300)%3B%0A%20%20%20%20%20%20%20%20%7D)%3B%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20this.value%20%3D%20%5B%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20value%3A%20'USA'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20value%3A%20'GB'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%5D%3B%0A%20%20%7D%0A%0A%20%20onChanged(event)%20%7B%0A%20%20%20%20console.log('EVENT'%2C%20event)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%7D%0A`,
         cssSource: `%2F**%20No%20CSS%20for%20this%20example%20*%2F%0A`,
         htmlSource: `%3Cdiv%20class%3D%22selected-value%22%3ESelected%20Value%3A%20%7B%7Bvalue%7D%7D%3C%2Fdiv%3E%0A%3Cnovo-chips%20%5Bsource%5D%3D%22async%22%20%5Bplaceholder%5D%3D%22placeholder%22%20%5B(ngModel)%5D%3D%22value%22%20(changed)%3D%22onChanged(%24event)%22%3E%3C%2Fnovo-chips%3E%0A`
     },
@@ -71655,28 +71655,28 @@ const EXAMPLE_COMPONENTS = {
     'close-on-select-chips': {
         title: 'Close On Select Chips Example',
         component: CloseOnSelectChipsExample,
-        tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0A%0A%2F**%0A%20*%20%40title%20Close%20On%20Select%20Chips%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'close-on-select-chips-example'%2C%0A%20%20templateUrl%3A%20'close-on-select-chips-example.html'%2C%0A%20%20styleUrls%3A%20%5B'close-on-select-chips-example.css'%5D%2C%0A%7D)%0Aexport%20class%20CloseOnSelectChipsExample%20%7B%0A%20%20public%20formatted%3A%20any%3B%0A%20%20public%20placeholder%3A%20string%20%3D%20'Select...'%3B%0A%20%20public%20value%3A%20any%3B%0A%0A%20%20constructor()%20%7B%0A%20%20%20%20let%20collaborators%20%3D%20%5B%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%201%2C%0A%20%20%20%20%20%20%20%20firstName%3A%20'Brian'%2C%0A%20%20%20%20%20%20%20%20lastName%3A%20'Kimball'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%202%2C%0A%20%20%20%20%20%20%20%20firstName%3A%20'Josh'%2C%0A%20%20%20%20%20%20%20%20lastName%3A%20'Godi'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%203%2C%0A%20%20%20%20%20%20%20%20firstName%3A%20'Alec'%2C%0A%20%20%20%20%20%20%20%20lastName%3A%20'Sibilia'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%204%2C%0A%20%20%20%20%20%20%20%20firstName%3A%20'Kameron'%2C%0A%20%20%20%20%20%20%20%20lastName%3A%20'Sween'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%5D%3B%0A%20%20%20%20this.formatted%20%3D%20%7B%0A%20%20%20%20%20%20format%3A%20'%24firstName%20%24lastName'%2C%0A%20%20%20%20%20%20options%3A%20collaborators%2C%0A%20%20%20%20%7D%3B%0A%20%20%7D%0A%0A%20%20onChanged(event)%20%7B%0A%20%20%20%20console.log('EVENT'%2C%20event)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%7D%0A`,
+        tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0A%0A%2F**%0A%20*%20%40title%20Close%20On%20Select%20Chips%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'close-on-select-chips-example'%2C%0A%20%20templateUrl%3A%20'close-on-select-chips-example.html'%2C%0A%20%20styleUrls%3A%20%5B'close-on-select-chips-example.css'%5D%2C%0A%7D)%0Aexport%20class%20CloseOnSelectChipsExample%20%7B%0A%20%20public%20formatted%3A%20any%3B%0A%20%20public%20placeholder%3A%20string%20%3D%20'Select...'%3B%0A%20%20public%20value%3A%20any%3B%0A%0A%20%20constructor()%20%7B%0A%20%20%20%20const%20collaborators%20%3D%20%5B%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%201%2C%0A%20%20%20%20%20%20%20%20firstName%3A%20'Brian'%2C%0A%20%20%20%20%20%20%20%20lastName%3A%20'Kimball'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%202%2C%0A%20%20%20%20%20%20%20%20firstName%3A%20'Josh'%2C%0A%20%20%20%20%20%20%20%20lastName%3A%20'Godi'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%203%2C%0A%20%20%20%20%20%20%20%20firstName%3A%20'Alec'%2C%0A%20%20%20%20%20%20%20%20lastName%3A%20'Sibilia'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%204%2C%0A%20%20%20%20%20%20%20%20firstName%3A%20'Kameron'%2C%0A%20%20%20%20%20%20%20%20lastName%3A%20'Sween'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%5D%3B%0A%20%20%20%20this.formatted%20%3D%20%7B%0A%20%20%20%20%20%20format%3A%20'%24firstName%20%24lastName'%2C%0A%20%20%20%20%20%20options%3A%20collaborators%2C%0A%20%20%20%20%7D%3B%0A%20%20%7D%0A%0A%20%20onChanged(event)%20%7B%0A%20%20%20%20console.log('EVENT'%2C%20event)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%7D%0A`,
         cssSource: `%2F**%20No%20CSS%20for%20this%20example%20*%2F%0A`,
         htmlSource: `%3Cdiv%20class%3D%22selected-value%22%3ESelected%20Value%3A%20%7B%7Bvalue%7D%7D%3C%2Fdiv%3E%0A%3Cnovo-chips%20%5BcloseOnSelect%5D%3D%22true%22%20%5Bsource%5D%3D%22formatted%22%20%5Bplaceholder%5D%3D%22placeholder%22%20%5B(ngModel)%5D%3D%22value%22%20(changed)%3D%22onChanged(%24event)%22%3E%3C%2Fnovo-chips%3E%0A`
     },
     'formatted-chips': {
         title: 'Formatted Chips Example',
         component: FormattedChipsExample,
-        tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0A%0A%2F**%0A%20*%20%40title%20Formatted%20Chips%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'formatted-chips-example'%2C%0A%20%20templateUrl%3A%20'formatted-chips-example.html'%2C%0A%20%20styleUrls%3A%20%5B'formatted-chips-example.css'%5D%2C%0A%7D)%0Aexport%20class%20FormattedChipsExample%20%7B%0A%20%20public%20formatted%3A%20any%3B%0A%20%20public%20placeholder%3A%20string%20%3D%20'Select...'%3B%0A%20%20public%20value%3A%20any%3B%0A%0A%20%20constructor()%20%7B%0A%20%20%20%20let%20collaborators%20%3D%20%5B%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%201%2C%0A%20%20%20%20%20%20%20%20firstName%3A%20'Brian'%2C%0A%20%20%20%20%20%20%20%20lastName%3A%20'Kimball'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%202%2C%0A%20%20%20%20%20%20%20%20firstName%3A%20'Josh'%2C%0A%20%20%20%20%20%20%20%20lastName%3A%20'Godi'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%203%2C%0A%20%20%20%20%20%20%20%20firstName%3A%20'Alec'%2C%0A%20%20%20%20%20%20%20%20lastName%3A%20'Sibilia'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%204%2C%0A%20%20%20%20%20%20%20%20firstName%3A%20'Kameron'%2C%0A%20%20%20%20%20%20%20%20lastName%3A%20'Sween'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%5D%3B%0A%20%20%20%20this.formatted%20%3D%20%7B%0A%20%20%20%20%20%20format%3A%20'%24firstName%20%24lastName'%2C%0A%20%20%20%20%20%20options%3A%20collaborators%2C%0A%20%20%20%20%7D%3B%0A%20%20%7D%0A%0A%20%20onChanged(event)%20%7B%0A%20%20%20%20console.log('EVENT'%2C%20event)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%7D%0A`,
+        tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0A%0A%2F**%0A%20*%20%40title%20Formatted%20Chips%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'formatted-chips-example'%2C%0A%20%20templateUrl%3A%20'formatted-chips-example.html'%2C%0A%20%20styleUrls%3A%20%5B'formatted-chips-example.css'%5D%2C%0A%7D)%0Aexport%20class%20FormattedChipsExample%20%7B%0A%20%20public%20formatted%3A%20any%3B%0A%20%20public%20placeholder%3A%20string%20%3D%20'Select...'%3B%0A%20%20public%20value%3A%20any%3B%0A%0A%20%20constructor()%20%7B%0A%20%20%20%20const%20collaborators%20%3D%20%5B%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%201%2C%0A%20%20%20%20%20%20%20%20firstName%3A%20'Brian'%2C%0A%20%20%20%20%20%20%20%20lastName%3A%20'Kimball'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%202%2C%0A%20%20%20%20%20%20%20%20firstName%3A%20'Josh'%2C%0A%20%20%20%20%20%20%20%20lastName%3A%20'Godi'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%203%2C%0A%20%20%20%20%20%20%20%20firstName%3A%20'Alec'%2C%0A%20%20%20%20%20%20%20%20lastName%3A%20'Sibilia'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%204%2C%0A%20%20%20%20%20%20%20%20firstName%3A%20'Kameron'%2C%0A%20%20%20%20%20%20%20%20lastName%3A%20'Sween'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%5D%3B%0A%20%20%20%20this.formatted%20%3D%20%7B%0A%20%20%20%20%20%20format%3A%20'%24firstName%20%24lastName'%2C%0A%20%20%20%20%20%20options%3A%20collaborators%2C%0A%20%20%20%20%7D%3B%0A%20%20%7D%0A%0A%20%20onChanged(event)%20%7B%0A%20%20%20%20console.log('EVENT'%2C%20event)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%7D%0A`,
         cssSource: `%2F**%20No%20CSS%20for%20this%20example%20*%2F%0A`,
         htmlSource: `%3Cdiv%20class%3D%22selected-value%22%3ESelected%20Value%3A%20%7B%7Bvalue%7D%7D%3C%2Fdiv%3E%0A%3Cnovo-chips%20%5Bsource%5D%3D%22formatted%22%20%5Bplaceholder%5D%3D%22placeholder%22%20%5B(ngModel)%5D%3D%22value%22%20(changed)%3D%22onChanged(%24event)%22%3E%3C%2Fnovo-chips%3E%0A`
     },
     'grouped-multi-picker': {
         title: 'Grouped Multi Picker Example',
         component: GroupedMultiPickerExample,
-        tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0Aimport%20%7B%20GroupedMultiPickerResults%20%7D%20from%20'novo-elements'%3B%0A%0A%2F**%0A%20*%20%40title%20Grouped%20Multi%20Picker%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'grouped-multi-picker-example'%2C%0A%20%20templateUrl%3A%20'grouped-multi-picker-example.html'%2C%0A%20%20styleUrls%3A%20%5B'grouped-multi-picker-example.css'%5D%2C%0A%7D)%0Aexport%20class%20GroupedMultiPickerExample%20%7B%0A%20%20public%20placeholder%3A%20string%20%3D%20'Select...'%3B%0A%20%20public%20groupedMultiPicker1%3A%20any%3B%0A%20%20public%20groupedMultiPicker2%3A%20any%3B%0A%20%20public%20groupedMultiPicker3%3A%20any%3B%0A%20%20public%20groupedMultiPicker1Value%3A%20any%3B%0A%20%20public%20groupedMultiPicker2Value%3A%20any%3B%0A%20%20public%20groupedMultiPicker3Value%3A%20any%3B%0A%0A%20%20constructor()%20%7B%0A%20%20%20%20this.setupGroupedMultiPickerDemo()%3B%0A%20%20%7D%0A%0A%20%20setupGroupedMultiPickerDemo()%20%7B%0A%20%20%20%20let%20categoryMap%20%3D%20new%20Map%3Cstring%2C%20%7B%20value%3A%20string%3B%20label%3A%20string%3B%20items%3A%20%7B%20value%3A%20string%3B%20label%3A%20string%20%7D%5B%5D%20%7D%3E()%3B%0A%20%20%20%20for%20(let%20i%20%3D%200%3B%20i%20%3C%2010%3B%20i%2B%2B)%20%7B%0A%20%20%20%20%20%20let%20items%20%3D%20%5B%5D%3B%0A%20%20%20%20%20%20for%20(let%20j%20%3D%200%3B%20j%20%3C%2010%3B%20j%2B%2B)%20%7B%0A%20%20%20%20%20%20%20%20items.push(%7B%20value%3A%20%60%24%7Bi%7D-%24%7Bj%7D%60%2C%20label%3A%20%60Category%20%24%7Bi%7D%20-%20Item%20%24%7Bj%7D%60%20%7D)%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20categoryMap.set(%60%24%7Bi%7D%60%2C%20%7B%20value%3A%20%60%24%7Bi%7D%60%2C%20label%3A%20%60Category%20%24%7Bi%7D%60%2C%20items%3A%20items%20%7D)%3B%0A%20%20%20%20%7D%0A%20%20%20%20this.groupedMultiPicker1%20%3D%20%7B%0A%20%20%20%20%20%20categoryMap%3A%20categoryMap%2C%0A%20%20%20%20%20%20resultsTemplate%3A%20GroupedMultiPickerResults%2C%0A%20%20%20%20%20%20displayAll%3A%20true%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20this.groupedMultiPicker2%20%3D%20%7B%0A%20%20%20%20%20%20categoryMap%3A%20categoryMap%2C%0A%20%20%20%20%20%20resultsTemplate%3A%20GroupedMultiPickerResults%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20this.groupedMultiPicker3%20%3D%20%7B%0A%20%20%20%20%20%20categories%3A%20%5B%0A%20%20%20%20%20%20%20%20%7B%20value%3A%20'C1'%2C%20label%3A%20'Category%201'%20%7D%2C%0A%20%20%20%20%20%20%20%20%7B%20value%3A%20'C2'%2C%20label%3A%20'Category%202'%20%7D%2C%0A%20%20%20%20%20%20%20%20%7B%20value%3A%20'C3'%2C%20label%3A%20'Category%203'%20%7D%2C%0A%20%20%20%20%20%20%20%20%7B%20value%3A%20'C4'%2C%20label%3A%20'Category%204'%20%7D%2C%0A%20%20%20%20%20%20%20%20%7B%20value%3A%20'C5'%2C%20label%3A%20'Category%205'%20%7D%2C%0A%20%20%20%20%20%20%5D%2C%0A%20%20%20%20%20%20getItemsForCategoryAsync%3A%20(category)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20return%20new%20Promise((resolve)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20setTimeout(()%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20resolve(%5B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7B%20value%3A%20'A1'%2C%20label%3A%20'Async%201'%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7B%20value%3A%20'A2'%2C%20label%3A%20'Async%202'%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7B%20value%3A%20'A3'%2C%20label%3A%20'Async%203'%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7B%20value%3A%20'A4'%2C%20label%3A%20'Async%204'%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7B%20value%3A%20'A5'%2C%20label%3A%20'Async%205'%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%5D)%3B%0A%20%20%20%20%20%20%20%20%20%20%7D%2C%201000)%3B%0A%20%20%20%20%20%20%20%20%7D)%3B%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20resultsTemplate%3A%20GroupedMultiPickerResults%2C%0A%20%20%20%20%7D%3B%0A%20%20%7D%0A%0A%20%20onChanged(event)%20%7B%0A%20%20%20%20console.log('EVENT'%2C%20event)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%7D%0A`,
+        tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0Aimport%20%7B%20GroupedMultiPickerResults%20%7D%20from%20'novo-elements'%3B%0A%0A%2F**%0A%20*%20%40title%20Grouped%20Multi%20Picker%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'grouped-multi-picker-example'%2C%0A%20%20templateUrl%3A%20'grouped-multi-picker-example.html'%2C%0A%20%20styleUrls%3A%20%5B'grouped-multi-picker-example.css'%5D%2C%0A%7D)%0Aexport%20class%20GroupedMultiPickerExample%20%7B%0A%20%20public%20placeholder%3A%20string%20%3D%20'Select...'%3B%0A%20%20public%20groupedMultiPicker1%3A%20any%3B%0A%20%20public%20groupedMultiPicker2%3A%20any%3B%0A%20%20public%20groupedMultiPicker3%3A%20any%3B%0A%20%20public%20groupedMultiPicker1Value%3A%20any%3B%0A%20%20public%20groupedMultiPicker2Value%3A%20any%3B%0A%20%20public%20groupedMultiPicker3Value%3A%20any%3B%0A%0A%20%20constructor()%20%7B%0A%20%20%20%20this.setupGroupedMultiPickerDemo()%3B%0A%20%20%7D%0A%0A%20%20setupGroupedMultiPickerDemo()%20%7B%0A%20%20%20%20const%20categoryMap%20%3D%20new%20Map%3Cstring%2C%20%7B%20value%3A%20string%3B%20label%3A%20string%3B%20items%3A%20%7B%20value%3A%20string%3B%20label%3A%20string%20%7D%5B%5D%20%7D%3E()%3B%0A%20%20%20%20for%20(let%20i%20%3D%200%3B%20i%20%3C%2010%3B%20i%2B%2B)%20%7B%0A%20%20%20%20%20%20const%20items%20%3D%20%5B%5D%3B%0A%20%20%20%20%20%20for%20(let%20j%20%3D%200%3B%20j%20%3C%2010%3B%20j%2B%2B)%20%7B%0A%20%20%20%20%20%20%20%20items.push(%7B%20value%3A%20%60%24%7Bi%7D-%24%7Bj%7D%60%2C%20label%3A%20%60Category%20%24%7Bi%7D%20-%20Item%20%24%7Bj%7D%60%20%7D)%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20categoryMap.set(%60%24%7Bi%7D%60%2C%20%7B%20value%3A%20%60%24%7Bi%7D%60%2C%20label%3A%20%60Category%20%24%7Bi%7D%60%2C%20items%20%7D)%3B%0A%20%20%20%20%7D%0A%20%20%20%20this.groupedMultiPicker1%20%3D%20%7B%0A%20%20%20%20%20%20categoryMap%2C%0A%20%20%20%20%20%20resultsTemplate%3A%20GroupedMultiPickerResults%2C%0A%20%20%20%20%20%20displayAll%3A%20true%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20this.groupedMultiPicker2%20%3D%20%7B%0A%20%20%20%20%20%20categoryMap%2C%0A%20%20%20%20%20%20resultsTemplate%3A%20GroupedMultiPickerResults%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20this.groupedMultiPicker3%20%3D%20%7B%0A%20%20%20%20%20%20categories%3A%20%5B%0A%20%20%20%20%20%20%20%20%7B%20value%3A%20'C1'%2C%20label%3A%20'Category%201'%20%7D%2C%0A%20%20%20%20%20%20%20%20%7B%20value%3A%20'C2'%2C%20label%3A%20'Category%202'%20%7D%2C%0A%20%20%20%20%20%20%20%20%7B%20value%3A%20'C3'%2C%20label%3A%20'Category%203'%20%7D%2C%0A%20%20%20%20%20%20%20%20%7B%20value%3A%20'C4'%2C%20label%3A%20'Category%204'%20%7D%2C%0A%20%20%20%20%20%20%20%20%7B%20value%3A%20'C5'%2C%20label%3A%20'Category%205'%20%7D%2C%0A%20%20%20%20%20%20%5D%2C%0A%20%20%20%20%20%20getItemsForCategoryAsync%3A%20(category)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20return%20new%20Promise((resolve)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20setTimeout(()%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20resolve(%5B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7B%20value%3A%20'A1'%2C%20label%3A%20'Async%201'%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7B%20value%3A%20'A2'%2C%20label%3A%20'Async%202'%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7B%20value%3A%20'A3'%2C%20label%3A%20'Async%203'%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7B%20value%3A%20'A4'%2C%20label%3A%20'Async%204'%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7B%20value%3A%20'A5'%2C%20label%3A%20'Async%205'%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%5D)%3B%0A%20%20%20%20%20%20%20%20%20%20%7D%2C%201000)%3B%0A%20%20%20%20%20%20%20%20%7D)%3B%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20resultsTemplate%3A%20GroupedMultiPickerResults%2C%0A%20%20%20%20%7D%3B%0A%20%20%7D%0A%0A%20%20onChanged(event)%20%7B%0A%20%20%20%20console.log('EVENT'%2C%20event)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%7D%0A`,
         cssSource: `%2F**%20No%20CSS%20for%20this%20example%20*%2F%0A`,
         htmlSource: `%3Ch6%3EBasic%20Static%20Example%3C%2Fh6%3E%0A%3Cp%3EFully%20static%20data%2C%20optional%20%22all%22%20category%3C%2Fp%3E%0A%3Cdiv%20class%3D%22selected-value%22%3ESelected%20Value%3A%20%7B%7B%20groupedMultiPicker1Value%20%7D%7D%3C%2Fdiv%3E%0A%3Cnovo-chips%20%5Bsource%5D%3D%22groupedMultiPicker1%22%20%5Bplaceholder%5D%3D%22placeholder%22%20%5B(ngModel)%5D%3D%22groupedMultiPicker1Value%22%20(changed)%3D%22onChanged(%24event)%22%3E%3C%2Fnovo-chips%3E%0A%0A%3Cbr%2F%3E%0A%3Cbr%2F%3E%0A%0A%3Ch6%3ECustom%20Static%20Example%3C%2Fh6%3E%0A%3Cp%3EFully%20static%20data%2C%20all%20category%20turned%20off%3C%2Fp%3E%0A%3Cdiv%20class%3D%22selected-value%22%3ESelected%20Value%3A%20%7B%7B%20groupedMultiPicker2Value%20%7D%7D%3C%2Fdiv%3E%0A%3Cnovo-chips%20%5Bsource%5D%3D%22groupedMultiPicker2%22%20%5Bplaceholder%5D%3D%22placeholder%22%20%5B(ngModel)%5D%3D%22groupedMultiPicker2Value%22%20(changed)%3D%22onChanged(%24event)%22%3E%3C%2Fnovo-chips%3E%0A%0A%3Cbr%2F%3E%0A%3Cbr%2F%3E%0A%0A%3Ch6%3EBasic%20Async%20Example%3C%2Fh6%3E%0A%3Cp%3ECategory%20list%20is%20static%20(always%20has%20to%20be)%20with%20the%20items%20fetched%20via%20async%20call%3C%2Fp%3E%0A%3Cdiv%20class%3D%22selected-value%22%3ESelected%20Value%3A%20%7B%7B%20groupedMultiPicker3Value%20%7D%7D%3C%2Fdiv%3E%0A%3Cnovo-chips%20%5Bsource%5D%3D%22groupedMultiPicker3%22%20%5Bplaceholder%5D%3D%22placeholder%22%20%5B(ngModel)%5D%3D%22groupedMultiPicker3Value%22%20(changed)%3D%22onChanged(%24event)%22%3E%3C%2Fnovo-chips%3E%0A`
     },
     'row-chips': {
         title: 'Row Chips Example',
         component: RowChipsExample,
-        tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0A%0A%2F**%0A%20*%20%40title%20Row%20Chips%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'row-chips-example'%2C%0A%20%20templateUrl%3A%20'row-chips-example.html'%2C%0A%20%20styleUrls%3A%20%5B'row-chips-example.css'%5D%2C%0A%7D)%0Aexport%20class%20RowChipsExample%20%7B%0A%20%20public%20placeholder%3A%20string%20%3D%20'Select...'%3B%0A%20%20public%20value%3A%20any%3B%0A%20%20public%20rowDemo%3A%20any%3B%0A%20%20public%20rowValue%3A%20any%3B%0A%0A%20%20constructor()%20%7B%0A%20%20%20%20let%20collaborators%20%3D%20%5B%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%201%2C%0A%20%20%20%20%20%20%20%20firstName%3A%20'Brian'%2C%0A%20%20%20%20%20%20%20%20lastName%3A%20'Kimball'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%202%2C%0A%20%20%20%20%20%20%20%20firstName%3A%20'Josh'%2C%0A%20%20%20%20%20%20%20%20lastName%3A%20'Godi'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%203%2C%0A%20%20%20%20%20%20%20%20firstName%3A%20'Alec'%2C%0A%20%20%20%20%20%20%20%20lastName%3A%20'Sibilia'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%204%2C%0A%20%20%20%20%20%20%20%20firstName%3A%20'Kameron'%2C%0A%20%20%20%20%20%20%20%20lastName%3A%20'Sween'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%5D%3B%0A%20%20%20%20this.rowValue%20%3D%20%5B%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%201%2C%0A%20%20%20%20%20%20%20%20firstName%3A%20'Brian'%2C%0A%20%20%20%20%20%20%20%20lastName%3A%20'Kimball'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%5D%3B%0A%20%20%20%20this.rowDemo%20%3D%20%7B%0A%20%20%20%20%20%20format%3A%20'%24firstName%20%24lastName'%2C%0A%20%20%20%20%20%20options%3A%20collaborators%2C%0A%20%20%20%20%20%20columns%3A%20%5B%0A%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20label%3A%20'Name'%2C%0A%20%20%20%20%20%20%20%20%20%20data%3A%20(item%3A%20any)%3A%20string%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20return%20item%5B'label'%5D%3B%0A%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20label%3A%20'Id'%2C%0A%20%20%20%20%20%20%20%20%20%20data%3A%20(item%3A%20any)%3A%20string%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20return%20item.value%5B'id'%5D%3B%0A%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%5D%2C%0A%20%20%20%20%7D%3B%0A%20%20%7D%0A%0A%20%20onChanged(event)%20%7B%0A%20%20%20%20console.log('EVENT'%2C%20event)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%7D%0A`,
+        tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0A%0A%2F**%0A%20*%20%40title%20Row%20Chips%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'row-chips-example'%2C%0A%20%20templateUrl%3A%20'row-chips-example.html'%2C%0A%20%20styleUrls%3A%20%5B'row-chips-example.css'%5D%2C%0A%7D)%0Aexport%20class%20RowChipsExample%20%7B%0A%20%20public%20placeholder%3A%20string%20%3D%20'Select...'%3B%0A%20%20public%20value%3A%20any%3B%0A%20%20public%20rowDemo%3A%20any%3B%0A%20%20public%20rowValue%3A%20any%3B%0A%0A%20%20constructor()%20%7B%0A%20%20%20%20const%20collaborators%20%3D%20%5B%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%201%2C%0A%20%20%20%20%20%20%20%20firstName%3A%20'Brian'%2C%0A%20%20%20%20%20%20%20%20lastName%3A%20'Kimball'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%202%2C%0A%20%20%20%20%20%20%20%20firstName%3A%20'Josh'%2C%0A%20%20%20%20%20%20%20%20lastName%3A%20'Godi'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%203%2C%0A%20%20%20%20%20%20%20%20firstName%3A%20'Alec'%2C%0A%20%20%20%20%20%20%20%20lastName%3A%20'Sibilia'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%204%2C%0A%20%20%20%20%20%20%20%20firstName%3A%20'Kameron'%2C%0A%20%20%20%20%20%20%20%20lastName%3A%20'Sween'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%5D%3B%0A%20%20%20%20this.rowValue%20%3D%20%5B%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%201%2C%0A%20%20%20%20%20%20%20%20firstName%3A%20'Brian'%2C%0A%20%20%20%20%20%20%20%20lastName%3A%20'Kimball'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%5D%3B%0A%20%20%20%20this.rowDemo%20%3D%20%7B%0A%20%20%20%20%20%20format%3A%20'%24firstName%20%24lastName'%2C%0A%20%20%20%20%20%20options%3A%20collaborators%2C%0A%20%20%20%20%20%20columns%3A%20%5B%0A%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20label%3A%20'Name'%2C%0A%20%20%20%20%20%20%20%20%20%20data%3A%20(item%3A%20any)%3A%20string%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20return%20item%5B'label'%5D%3B%0A%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20label%3A%20'Id'%2C%0A%20%20%20%20%20%20%20%20%20%20data%3A%20(item%3A%20any)%3A%20string%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20return%20item.value%5B'id'%5D%3B%0A%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%5D%2C%0A%20%20%20%20%7D%3B%0A%20%20%7D%0A%0A%20%20onChanged(event)%20%7B%0A%20%20%20%20console.log('EVENT'%2C%20event)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%7D%0A`,
         cssSource: `%2F**%20No%20CSS%20for%20this%20example%20*%2F%0A`,
         htmlSource: `%3Cdiv%20class%3D%22selected-value%22%3ESelected%20Value%3A%20%7B%7BrowValue%20%7C%20json%7D%7D%3C%2Fdiv%3E%0A%3Cnovo-row-chips%20%5Bsource%5D%3D%22rowDemo%22%20%5Bplaceholder%5D%3D%22placeholder%22%20%5B(ngModel)%5D%3D%22rowValue%22%20(changed)%3D%22onChanged(%24event)%22%3E%3C%2Fnovo-row-chips%3E%0A`
     },
@@ -71739,42 +71739,42 @@ const EXAMPLE_COMPONENTS = {
     'custom-template': {
         title: 'Custom Template Example',
         component: CustomTemplateExample,
-        tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0Aimport%20%7B%20FormArray%20%7D%20from%20'%40angular%2Fforms'%3B%0Aimport%20%7B%0A%20%20FormUtils%2C%0A%20%20TextBoxControl%2C%0A%20%20CheckboxControl%2C%0A%20%20NovoFormGroup%2C%0A%20%20BaseControl%2C%0A%20%20NovoControlGroupAddConfig%2C%0A%20%20ReadOnlyControl%2C%0A%20%20SelectControl%2C%0A%7D%20from%20'novo-elements'%3B%0A%0A%2F**%0A%20*%20%40title%20Custom%20Template%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'custom-template-example'%2C%0A%20%20templateUrl%3A%20'custom-template-example.html'%2C%0A%20%20styleUrls%3A%20%5B'custom-template-example.css'%5D%2C%0A%7D)%0Aexport%20class%20CustomTemplateExample%20%7B%0A%20%20public%20formGroup%3A%20NovoFormGroup%3B%0A%20%20public%20controls%3A%20BaseControl%5B%5D%20%3D%20%5B%5D%3B%0A%20%20public%20initialValue%3A%20%7B%7D%5B%5D%20%3D%20%5B%5D%3B%0A%20%20public%20initValue%3A%20%7B%7D%5B%5D%20%3D%20%5B%7B%20text%3A%20'TEXT'%2C%20percentage%3A%2012%2C%20checkbox%3A%20true%2C%20test4%3A%20'TEST'%20%7D%5D%3B%0A%0A%20%20public%20simpleAddConfig%3A%20NovoControlGroupAddConfig%20%3D%20%7B%0A%20%20%20%20label%3A%20'Add'%2C%0A%20%20%7D%3B%0A%20%20public%20anotherAddConfig%3A%20NovoControlGroupAddConfig%20%3D%20%7B%0A%20%20%20%20label%3A%20'Add%20a%20new%20fancy%20thing!'%2C%0A%20%20%7D%3B%0A%0A%20%20public%20emptyMessage%3A%20string%20%3D%20'There%20are%20no%20items...'%3B%0A%20%20public%20canEditFunction%3A%20Function%3B%0A%20%20public%20canRemoveFunction%3A%20Function%3B%0A%0A%20%20constructor(private%20formUtils%3A%20FormUtils)%20%7B%0A%20%20%20%20%2F%2F%20Grouped%20form%20demo%0A%20%20%20%20this.setupGroupedFormDemo()%3B%0A%20%20%20%20%2F%2F%20Setup%20function%0A%20%20%20%20this.canEditFunction%20%3D%20this.canEdit.bind(this)%3B%0A%20%20%20%20this.canRemoveFunction%20%3D%20this.canRemove.bind(this)%3B%0A%20%20%7D%0A%0A%20%20public%20onRemove(value%3A%20any)%20%7B%0A%20%20%20%20console.log('REMOVING'%2C%20value)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%0A%20%20public%20onEdit(value%3A%20any)%20%7B%0A%20%20%20%20console.log('EDITING'%2C%20value)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%0A%20%20public%20canEdit(value%3A%20any%2C%20index%3A%20number)%20%7B%0A%20%20%20%20console.log('canEdit'%2C%20value%2C%20index)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%20%20return%20index%20%3E%200%3B%0A%20%20%7D%0A%20%20public%20canRemove(value%3A%20any%2C%20index%3A%20number)%20%7B%0A%20%20%20%20console.log('canRemove'%2C%20value%2C%20index)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%20%20return%20index%20%3D%3D%3D%200%3B%0A%20%20%7D%0A%0A%20%20public%20updateInitialValue()%20%7B%0A%20%20%20%20this.initValue%20%3D%20%5B%0A%20%20%20%20%20%20%7B%20text%3A%20'TEXT%20111'%2C%20percentage%3A%20100%2C%20checkbox%3A%20false%2C%20test4%3A%20'TEST%20111'%20%7D%2C%0A%20%20%20%20%20%20%7B%20text%3A%20'TEXT%20222'%2C%20percentage%3A%205%2C%20checkbox%3A%20false%2C%20test4%3A%20'TEST%20222'%20%7D%2C%0A%20%20%20%20%20%20%7B%20text%3A%20'TEXT%20333'%2C%20percentage%3A%2060%2C%20checkbox%3A%20true%2C%20test4%3A%20'TEST%20333'%20%7D%2C%0A%20%20%20%20%5D%3B%0A%20%20%7D%0A%0A%20%20public%20customDelete(form%3A%20NovoFormGroup%2C%20key%3A%20string%2C%20index%3A%20number)%20%7B%0A%20%20%20%20console.log('DELETE'%2C%20form%2C%20key%2C%20index)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%20%20const%20control%3A%20FormArray%20%3D%20%3CFormArray%3Eform.controls%5Bkey%5D%3B%0A%20%20%20%20control.removeAt(index)%3B%0A%20%20%7D%0A%0A%20%20public%20customEdit(form%3A%20NovoFormGroup%2C%20key%3A%20string%2C%20index%3A%20number)%20%7B%0A%20%20%20%20console.log('EDIT'%2C%20form%2C%20key%2C%20index)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%0A%20%20private%20setupGroupedFormDemo()%20%7B%0A%20%20%20%20this.formGroup%20%3D%20this.formUtils.emptyFormGroup()%3B%0A%20%20%20%20let%20label%20%3D%20new%20ReadOnlyControl(%7B%20key%3A%20'label'%2C%20value%3A%20'Label%20%3A)'%20%7D)%3B%0A%20%20%20%20let%20c1%20%3D%20new%20SelectControl(%7B%20key%3A%20'text'%2C%20label%3A%20'Text%20Box'%2C%20options%3A%20%5B%7B%20value%3A%20'hello'%2C%20label%3A%20'Hello'%20%7D%5D%20%7D)%3B%0A%20%20%20%20let%20c2%20%3D%20new%20TextBoxControl(%7B%20type%3A%20'percentage'%2C%20key%3A%20'percentage'%2C%20label%3A%20'Percent'%2C%20required%3A%20true%20%7D)%3B%0A%20%20%20%20let%20c3%20%3D%20new%20CheckboxControl(%7B%20key%3A%20'checkbox'%2C%20label%3A%20'Check%20Me!'%2C%20width%3A%20100%20%7D)%3B%0A%20%20%20%20let%20c4%20%3D%20new%20TextBoxControl(%7B%20key%3A%20'test4'%2C%20label%3A%20'TEST4'%20%7D)%3B%0A%20%20%20%20this.controls.push(label)%3B%0A%20%20%20%20this.controls.push(c1)%3B%0A%20%20%20%20this.controls.push(c2)%3B%0A%20%20%20%20this.controls.push(c3)%3B%0A%20%20%20%20this.controls.push(c4)%3B%0A%20%20%7D%0A%7D%0A`,
+        tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0Aimport%20%7B%20FormArray%20%7D%20from%20'%40angular%2Fforms'%3B%0Aimport%20%7B%0A%20%20FormUtils%2C%0A%20%20TextBoxControl%2C%0A%20%20CheckboxControl%2C%0A%20%20NovoFormGroup%2C%0A%20%20BaseControl%2C%0A%20%20NovoControlGroupAddConfig%2C%0A%20%20ReadOnlyControl%2C%0A%20%20SelectControl%2C%0A%7D%20from%20'novo-elements'%3B%0A%0A%2F**%0A%20*%20%40title%20Custom%20Template%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'custom-template-example'%2C%0A%20%20templateUrl%3A%20'custom-template-example.html'%2C%0A%20%20styleUrls%3A%20%5B'custom-template-example.css'%5D%2C%0A%7D)%0Aexport%20class%20CustomTemplateExample%20%7B%0A%20%20public%20formGroup%3A%20NovoFormGroup%3B%0A%20%20public%20controls%3A%20BaseControl%5B%5D%20%3D%20%5B%5D%3B%0A%20%20public%20initialValue%3A%20%7B%7D%5B%5D%20%3D%20%5B%5D%3B%0A%20%20public%20initValue%3A%20%7B%7D%5B%5D%20%3D%20%5B%7B%20text%3A%20'TEXT'%2C%20percentage%3A%2012%2C%20checkbox%3A%20true%2C%20test4%3A%20'TEST'%20%7D%5D%3B%0A%0A%20%20public%20simpleAddConfig%3A%20NovoControlGroupAddConfig%20%3D%20%7B%0A%20%20%20%20label%3A%20'Add'%2C%0A%20%20%7D%3B%0A%20%20public%20anotherAddConfig%3A%20NovoControlGroupAddConfig%20%3D%20%7B%0A%20%20%20%20label%3A%20'Add%20a%20new%20fancy%20thing!'%2C%0A%20%20%7D%3B%0A%0A%20%20public%20emptyMessage%3A%20string%20%3D%20'There%20are%20no%20items...'%3B%0A%20%20public%20canEditFunction%3A%20Function%3B%0A%20%20public%20canRemoveFunction%3A%20Function%3B%0A%0A%20%20constructor(private%20formUtils%3A%20FormUtils)%20%7B%0A%20%20%20%20%2F%2F%20Grouped%20form%20demo%0A%20%20%20%20this.setupGroupedFormDemo()%3B%0A%20%20%20%20%2F%2F%20Setup%20function%0A%20%20%20%20this.canEditFunction%20%3D%20this.canEdit.bind(this)%3B%0A%20%20%20%20this.canRemoveFunction%20%3D%20this.canRemove.bind(this)%3B%0A%20%20%7D%0A%0A%20%20public%20onRemove(value%3A%20any)%20%7B%0A%20%20%20%20console.log('REMOVING'%2C%20value)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%0A%20%20public%20onEdit(value%3A%20any)%20%7B%0A%20%20%20%20console.log('EDITING'%2C%20value)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%0A%20%20public%20canEdit(value%3A%20any%2C%20index%3A%20number)%20%7B%0A%20%20%20%20console.log('canEdit'%2C%20value%2C%20index)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%20%20return%20index%20%3E%200%3B%0A%20%20%7D%0A%20%20public%20canRemove(value%3A%20any%2C%20index%3A%20number)%20%7B%0A%20%20%20%20console.log('canRemove'%2C%20value%2C%20index)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%20%20return%20index%20%3D%3D%3D%200%3B%0A%20%20%7D%0A%0A%20%20public%20updateInitialValue()%20%7B%0A%20%20%20%20this.initValue%20%3D%20%5B%0A%20%20%20%20%20%20%7B%20text%3A%20'TEXT%20111'%2C%20percentage%3A%20100%2C%20checkbox%3A%20false%2C%20test4%3A%20'TEST%20111'%20%7D%2C%0A%20%20%20%20%20%20%7B%20text%3A%20'TEXT%20222'%2C%20percentage%3A%205%2C%20checkbox%3A%20false%2C%20test4%3A%20'TEST%20222'%20%7D%2C%0A%20%20%20%20%20%20%7B%20text%3A%20'TEXT%20333'%2C%20percentage%3A%2060%2C%20checkbox%3A%20true%2C%20test4%3A%20'TEST%20333'%20%7D%2C%0A%20%20%20%20%5D%3B%0A%20%20%7D%0A%0A%20%20public%20customDelete(form%3A%20NovoFormGroup%2C%20key%3A%20string%2C%20index%3A%20number)%20%7B%0A%20%20%20%20console.log('DELETE'%2C%20form%2C%20key%2C%20index)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%20%20const%20control%3A%20FormArray%20%3D%20%3CFormArray%3Eform.controls%5Bkey%5D%3B%0A%20%20%20%20control.removeAt(index)%3B%0A%20%20%7D%0A%0A%20%20public%20customEdit(form%3A%20NovoFormGroup%2C%20key%3A%20string%2C%20index%3A%20number)%20%7B%0A%20%20%20%20console.log('EDIT'%2C%20form%2C%20key%2C%20index)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%0A%20%20private%20setupGroupedFormDemo()%20%7B%0A%20%20%20%20this.formGroup%20%3D%20this.formUtils.emptyFormGroup()%3B%0A%20%20%20%20const%20label%20%3D%20new%20ReadOnlyControl(%7B%20key%3A%20'label'%2C%20value%3A%20'Label%20%3A)'%20%7D)%3B%0A%20%20%20%20const%20c1%20%3D%20new%20SelectControl(%7B%20key%3A%20'text'%2C%20label%3A%20'Text%20Box'%2C%20options%3A%20%5B%7B%20value%3A%20'hello'%2C%20label%3A%20'Hello'%20%7D%5D%20%7D)%3B%0A%20%20%20%20const%20c2%20%3D%20new%20TextBoxControl(%7B%20type%3A%20'percentage'%2C%20key%3A%20'percentage'%2C%20label%3A%20'Percent'%2C%20required%3A%20true%20%7D)%3B%0A%20%20%20%20const%20c3%20%3D%20new%20CheckboxControl(%7B%20key%3A%20'checkbox'%2C%20label%3A%20'Check%20Me!'%2C%20width%3A%20100%20%7D)%3B%0A%20%20%20%20const%20c4%20%3D%20new%20TextBoxControl(%7B%20key%3A%20'test4'%2C%20label%3A%20'TEST4'%20%7D)%3B%0A%20%20%20%20this.controls.push(label)%3B%0A%20%20%20%20this.controls.push(c1)%3B%0A%20%20%20%20this.controls.push(c2)%3B%0A%20%20%20%20this.controls.push(c3)%3B%0A%20%20%20%20this.controls.push(c4)%3B%0A%20%20%7D%0A%7D%0A`,
         cssSource: `%2F**%20No%20CSS%20for%20this%20example%20*%2F%0A`,
         htmlSource: `%3Cng-template%20%23customRowTemplate%20let-form%3D%22form%22%20let-index%3D%22index%22%20let-key%3D%22key%22%20let-controls%3D%22controls%22%20let-key%3D%22key%22%3E%0A%20%20%20%20%3Cdiv%20class%3D%22novo-control-group-control%22%3E%0A%20%20%20%20%20%20%20%20%3Cdiv%20*ngFor%3D%22let%20c%20of%20controls%22%20class%3D%22novo-control-container%22%20%5Bclass.is-label%5D%3D%22c.controlType%20%3D%3D%3D%20'read-only'%22%20%5Bstyle.max-width.px%5D%3D%22c.width%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Cnovo-control%20%5Bform%5D%3D%22form%3F.controls%5Bkey%5D%5B'controls'%5D%5Bindex%5D%22%20%5Bcontrol%5D%3D%22c%22%20%5Bcondensed%5D%3D%22true%22%3E%3C%2Fnovo-control%3E%0A%20%20%20%20%20%20%20%20%3C%2Fdiv%3E%0A%20%20%20%20%20%20%20%20%3Cdiv%20class%3D%22novo-control-container%20last%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Cbutton%20tooltip%3D%22HI%22%20type%3D%22button%22%20(click)%3D%22customEdit(form%2C%20key%2C%20index)%22%20theme%3D%22icon%22%20icon%3D%22edit%22%20%5Battr.data-automation-id%5D%3D%22'novo-control-group-edit-'%20%2B%20key%22%20index%3D%22-1%22%3E%3C%2Fbutton%3E%0A%20%20%20%20%20%20%20%20%3C%2Fdiv%3E%0A%20%20%20%20%20%20%20%20%3Cdiv%20class%3D%22novo-control-container%20last%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Cbutton%20type%3D%22button%22%20(click)%3D%22customDelete(form%2C%20key%2C%20index)%22%20theme%3D%22icon%22%20icon%3D%22delete-o%22%20%5Battr.data-automation-id%5D%3D%22'novo-control-group-delete-'%20%2B%20key%22%20index%3D%22-1%22%3E%3C%2Fbutton%3E%0A%20%20%20%20%20%20%20%20%3C%2Fdiv%3E%0A%20%20%20%20%3C%2Fdiv%3E%0A%3C%2Fng-template%3E%0A%0A%3Cnovo-form%20%5Bform%5D%3D%22formGroup%22%3E%0A%20%20%20%20%3Cnovo-control-group%20remove%3D%22true%22%20edit%3D%22true%22%20%5BinitialValue%5D%3D%22initValue%22%20%5Bcontrols%5D%3D%22controls%22%20%5BrowTemplate%5D%3D%22customRowTemplate%22%20%5Badd%5D%3D%22simpleAddConfig%22%20label%3D%22Custom%20Template%22%20key%3D%22custom%22%20%5Bform%5D%3D%22formGroup%22%20%5BemptyMessage%5D%3D%22emptyMessage%22%3E%3C%2Fnovo-control-group%3E%0A%3C%2Fnovo-form%3E%0A%0A%3Cdiv%20class%3D%22final-value%22%3EInitial%20Value%3A%20%7B%7B%20initValue%20%7C%20json%20%7D%7D%3C%2Fdiv%3E%0A%3Cdiv%20class%3D%22final-value%22%3EValue%3A%20%7B%7B%20formGroup.value%20%7C%20json%20%7D%7D%3C%2Fdiv%3E%0A`
     },
     'horizontal-options': {
         title: 'Horizontal Options Example',
         component: HorizontalOptionsExample,
-        tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0Aimport%20%7B%20FormArray%20%7D%20from%20'%40angular%2Fforms'%3B%0Aimport%20%7B%0A%20%20FormUtils%2C%0A%20%20TextBoxControl%2C%0A%20%20CheckboxControl%2C%0A%20%20NovoFormGroup%2C%0A%20%20BaseControl%2C%0A%20%20NovoControlGroupAddConfig%2C%0A%20%20ReadOnlyControl%2C%0A%20%20SelectControl%2C%0A%7D%20from%20'novo-elements'%3B%0A%0A%2F**%0A%20*%20%40title%20Horizontal%20Options%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'horizontal-options-example'%2C%0A%20%20templateUrl%3A%20'horizontal-options-example.html'%2C%0A%20%20styleUrls%3A%20%5B'horizontal-options-example.css'%5D%2C%0A%7D)%0Aexport%20class%20HorizontalOptionsExample%20%7B%0A%20%20public%20formGroup%3A%20NovoFormGroup%3B%0A%20%20public%20controls%3A%20BaseControl%5B%5D%20%3D%20%5B%5D%3B%0A%20%20public%20initialValue%3A%20%7B%7D%5B%5D%20%3D%20%5B%5D%3B%0A%20%20public%20initValue%3A%20%7B%7D%5B%5D%20%3D%20%5B%7B%20text%3A%20'TEXT'%2C%20percentage%3A%2012%2C%20checkbox%3A%20true%2C%20test4%3A%20'TEST'%20%7D%5D%3B%0A%0A%20%20public%20simpleAddConfig%3A%20NovoControlGroupAddConfig%20%3D%20%7B%0A%20%20%20%20label%3A%20'Add'%2C%0A%20%20%7D%3B%0A%20%20public%20anotherAddConfig%3A%20NovoControlGroupAddConfig%20%3D%20%7B%0A%20%20%20%20label%3A%20'Add%20a%20new%20fancy%20thing!'%2C%0A%20%20%7D%3B%0A%0A%20%20public%20emptyMessage%3A%20string%20%3D%20'There%20are%20no%20items...'%3B%0A%20%20public%20canEditFunction%3A%20Function%3B%0A%20%20public%20canRemoveFunction%3A%20Function%3B%0A%0A%20%20constructor(private%20formUtils%3A%20FormUtils)%20%7B%0A%20%20%20%20%2F%2F%20Grouped%20form%20demo%0A%20%20%20%20this.setupGroupedFormDemo()%3B%0A%20%20%20%20%2F%2F%20Setup%20function%0A%20%20%20%20this.canEditFunction%20%3D%20this.canEdit.bind(this)%3B%0A%20%20%20%20this.canRemoveFunction%20%3D%20this.canRemove.bind(this)%3B%0A%20%20%7D%0A%0A%20%20public%20onRemove(value%3A%20any)%20%7B%0A%20%20%20%20console.log('REMOVING'%2C%20value)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%0A%20%20public%20onEdit(value%3A%20any)%20%7B%0A%20%20%20%20console.log('EDITING'%2C%20value)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%0A%20%20public%20canEdit(value%3A%20any%2C%20index%3A%20number)%20%7B%0A%20%20%20%20console.log('canEdit'%2C%20value%2C%20index)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%20%20return%20index%20%3E%200%3B%0A%20%20%7D%0A%20%20public%20canRemove(value%3A%20any%2C%20index%3A%20number)%20%7B%0A%20%20%20%20console.log('canRemove'%2C%20value%2C%20index)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%20%20return%20index%20%3D%3D%3D%200%3B%0A%20%20%7D%0A%0A%20%20public%20updateInitialValue()%20%7B%0A%20%20%20%20this.initValue%20%3D%20%5B%0A%20%20%20%20%20%20%7B%20text%3A%20'TEXT%20111'%2C%20percentage%3A%20100%2C%20checkbox%3A%20false%2C%20test4%3A%20'TEST%20111'%20%7D%2C%0A%20%20%20%20%20%20%7B%20text%3A%20'TEXT%20222'%2C%20percentage%3A%205%2C%20checkbox%3A%20false%2C%20test4%3A%20'TEST%20222'%20%7D%2C%0A%20%20%20%20%20%20%7B%20text%3A%20'TEXT%20333'%2C%20percentage%3A%2060%2C%20checkbox%3A%20true%2C%20test4%3A%20'TEST%20333'%20%7D%2C%0A%20%20%20%20%5D%3B%0A%20%20%7D%0A%0A%20%20public%20customDelete(form%3A%20NovoFormGroup%2C%20key%3A%20string%2C%20index%3A%20number)%20%7B%0A%20%20%20%20console.log('DELETE'%2C%20form%2C%20key%2C%20index)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%20%20const%20control%3A%20FormArray%20%3D%20%3CFormArray%3Eform.controls%5Bkey%5D%3B%0A%20%20%20%20control.removeAt(index)%3B%0A%20%20%7D%0A%0A%20%20public%20customEdit(form%3A%20NovoFormGroup%2C%20key%3A%20string%2C%20index%3A%20number)%20%7B%0A%20%20%20%20console.log('EDIT'%2C%20form%2C%20key%2C%20index)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%0A%20%20private%20setupGroupedFormDemo()%20%7B%0A%20%20%20%20this.formGroup%20%3D%20this.formUtils.emptyFormGroup()%3B%0A%20%20%20%20let%20label%20%3D%20new%20ReadOnlyControl(%7B%20key%3A%20'label'%2C%20value%3A%20'Label%20%3A)'%20%7D)%3B%0A%20%20%20%20let%20c1%20%3D%20new%20SelectControl(%7B%20key%3A%20'text'%2C%20label%3A%20'Text%20Box'%2C%20options%3A%20%5B%7B%20value%3A%20'hello'%2C%20label%3A%20'Hello'%20%7D%5D%20%7D)%3B%0A%20%20%20%20let%20c2%20%3D%20new%20TextBoxControl(%7B%20type%3A%20'percentage'%2C%20key%3A%20'percentage'%2C%20label%3A%20'Percent'%2C%20required%3A%20true%20%7D)%3B%0A%20%20%20%20let%20c3%20%3D%20new%20CheckboxControl(%7B%20key%3A%20'checkbox'%2C%20label%3A%20'Check%20Me!'%2C%20width%3A%20100%20%7D)%3B%0A%20%20%20%20let%20c4%20%3D%20new%20TextBoxControl(%7B%20key%3A%20'test4'%2C%20label%3A%20'TEST4'%20%7D)%3B%0A%20%20%20%20this.controls.push(label)%3B%0A%20%20%20%20this.controls.push(c1)%3B%0A%20%20%20%20this.controls.push(c2)%3B%0A%20%20%20%20this.controls.push(c3)%3B%0A%20%20%20%20this.controls.push(c4)%3B%0A%20%20%7D%0A%7D%0A`,
+        tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0Aimport%20%7B%20FormArray%20%7D%20from%20'%40angular%2Fforms'%3B%0Aimport%20%7B%0A%20%20FormUtils%2C%0A%20%20TextBoxControl%2C%0A%20%20CheckboxControl%2C%0A%20%20NovoFormGroup%2C%0A%20%20BaseControl%2C%0A%20%20NovoControlGroupAddConfig%2C%0A%20%20ReadOnlyControl%2C%0A%20%20SelectControl%2C%0A%7D%20from%20'novo-elements'%3B%0A%0A%2F**%0A%20*%20%40title%20Horizontal%20Options%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'horizontal-options-example'%2C%0A%20%20templateUrl%3A%20'horizontal-options-example.html'%2C%0A%20%20styleUrls%3A%20%5B'horizontal-options-example.css'%5D%2C%0A%7D)%0Aexport%20class%20HorizontalOptionsExample%20%7B%0A%20%20public%20formGroup%3A%20NovoFormGroup%3B%0A%20%20public%20controls%3A%20BaseControl%5B%5D%20%3D%20%5B%5D%3B%0A%20%20public%20initialValue%3A%20%7B%7D%5B%5D%20%3D%20%5B%5D%3B%0A%20%20public%20initValue%3A%20%7B%7D%5B%5D%20%3D%20%5B%7B%20text%3A%20'TEXT'%2C%20percentage%3A%2012%2C%20checkbox%3A%20true%2C%20test4%3A%20'TEST'%20%7D%5D%3B%0A%0A%20%20public%20simpleAddConfig%3A%20NovoControlGroupAddConfig%20%3D%20%7B%0A%20%20%20%20label%3A%20'Add'%2C%0A%20%20%7D%3B%0A%20%20public%20anotherAddConfig%3A%20NovoControlGroupAddConfig%20%3D%20%7B%0A%20%20%20%20label%3A%20'Add%20a%20new%20fancy%20thing!'%2C%0A%20%20%7D%3B%0A%0A%20%20public%20emptyMessage%3A%20string%20%3D%20'There%20are%20no%20items...'%3B%0A%20%20public%20canEditFunction%3A%20Function%3B%0A%20%20public%20canRemoveFunction%3A%20Function%3B%0A%0A%20%20constructor(private%20formUtils%3A%20FormUtils)%20%7B%0A%20%20%20%20%2F%2F%20Grouped%20form%20demo%0A%20%20%20%20this.setupGroupedFormDemo()%3B%0A%20%20%20%20%2F%2F%20Setup%20function%0A%20%20%20%20this.canEditFunction%20%3D%20this.canEdit.bind(this)%3B%0A%20%20%20%20this.canRemoveFunction%20%3D%20this.canRemove.bind(this)%3B%0A%20%20%7D%0A%0A%20%20public%20onRemove(value%3A%20any)%20%7B%0A%20%20%20%20console.log('REMOVING'%2C%20value)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%0A%20%20public%20onEdit(value%3A%20any)%20%7B%0A%20%20%20%20console.log('EDITING'%2C%20value)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%0A%20%20public%20canEdit(value%3A%20any%2C%20index%3A%20number)%20%7B%0A%20%20%20%20console.log('canEdit'%2C%20value%2C%20index)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%20%20return%20index%20%3E%200%3B%0A%20%20%7D%0A%20%20public%20canRemove(value%3A%20any%2C%20index%3A%20number)%20%7B%0A%20%20%20%20console.log('canRemove'%2C%20value%2C%20index)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%20%20return%20index%20%3D%3D%3D%200%3B%0A%20%20%7D%0A%0A%20%20public%20updateInitialValue()%20%7B%0A%20%20%20%20this.initValue%20%3D%20%5B%0A%20%20%20%20%20%20%7B%20text%3A%20'TEXT%20111'%2C%20percentage%3A%20100%2C%20checkbox%3A%20false%2C%20test4%3A%20'TEST%20111'%20%7D%2C%0A%20%20%20%20%20%20%7B%20text%3A%20'TEXT%20222'%2C%20percentage%3A%205%2C%20checkbox%3A%20false%2C%20test4%3A%20'TEST%20222'%20%7D%2C%0A%20%20%20%20%20%20%7B%20text%3A%20'TEXT%20333'%2C%20percentage%3A%2060%2C%20checkbox%3A%20true%2C%20test4%3A%20'TEST%20333'%20%7D%2C%0A%20%20%20%20%5D%3B%0A%20%20%7D%0A%0A%20%20public%20customDelete(form%3A%20NovoFormGroup%2C%20key%3A%20string%2C%20index%3A%20number)%20%7B%0A%20%20%20%20console.log('DELETE'%2C%20form%2C%20key%2C%20index)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%20%20const%20control%3A%20FormArray%20%3D%20%3CFormArray%3Eform.controls%5Bkey%5D%3B%0A%20%20%20%20control.removeAt(index)%3B%0A%20%20%7D%0A%0A%20%20public%20customEdit(form%3A%20NovoFormGroup%2C%20key%3A%20string%2C%20index%3A%20number)%20%7B%0A%20%20%20%20console.log('EDIT'%2C%20form%2C%20key%2C%20index)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%0A%20%20private%20setupGroupedFormDemo()%20%7B%0A%20%20%20%20this.formGroup%20%3D%20this.formUtils.emptyFormGroup()%3B%0A%20%20%20%20const%20label%20%3D%20new%20ReadOnlyControl(%7B%20key%3A%20'label'%2C%20value%3A%20'Label%20%3A)'%20%7D)%3B%0A%20%20%20%20const%20c1%20%3D%20new%20SelectControl(%7B%20key%3A%20'text'%2C%20label%3A%20'Text%20Box'%2C%20options%3A%20%5B%7B%20value%3A%20'hello'%2C%20label%3A%20'Hello'%20%7D%5D%20%7D)%3B%0A%20%20%20%20const%20c2%20%3D%20new%20TextBoxControl(%7B%20type%3A%20'percentage'%2C%20key%3A%20'percentage'%2C%20label%3A%20'Percent'%2C%20required%3A%20true%20%7D)%3B%0A%20%20%20%20const%20c3%20%3D%20new%20CheckboxControl(%7B%20key%3A%20'checkbox'%2C%20label%3A%20'Check%20Me!'%2C%20width%3A%20100%20%7D)%3B%0A%20%20%20%20const%20c4%20%3D%20new%20TextBoxControl(%7B%20key%3A%20'test4'%2C%20label%3A%20'TEST4'%20%7D)%3B%0A%20%20%20%20this.controls.push(label)%3B%0A%20%20%20%20this.controls.push(c1)%3B%0A%20%20%20%20this.controls.push(c2)%3B%0A%20%20%20%20this.controls.push(c3)%3B%0A%20%20%20%20this.controls.push(c4)%3B%0A%20%20%7D%0A%7D%0A`,
         cssSource: `%2F**%20No%20CSS%20for%20this%20example%20*%2F%0A`,
         htmlSource: `%3Cnovo-form%20%5Bform%5D%3D%22formGroup%22%3E%0A%20%20%20%20%3Cnovo-control-group%20%5BinitialValue%5D%3D%22initialValue%22%20collapsible%3D%22true%22%20%5Badd%5D%3D%22anotherAddConfig%22%20remove%3D%22true%22%20label%3D%22Horizontal%22%20key%3D%22horizontal%22%20description%3D%22Test%20Description%22%20%5Bform%5D%3D%22formGroup%22%20%5Bcontrols%5D%3D%22controls%22%20%5BemptyMessage%5D%3D%22emptyMessage%22%3E%3C%2Fnovo-control-group%3E%0A%3C%2Fnovo-form%3E%0A%3Cdiv%20class%3D%22final-value%22%3EInitial%20Value%3A%20%7B%7B%20initialValue%20%7C%20json%20%7D%7D%3C%2Fdiv%3E%0A%3Cdiv%20class%3D%22final-value%22%3EValue%3A%20%7B%7B%20formGroup.value%20%7C%20json%20%7D%7D%3C%2Fdiv%3E%0A`
     },
     'horizontal': {
         title: 'Horizontal Example',
         component: HorizontalExample,
-        tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0Aimport%20%7B%20FormArray%20%7D%20from%20'%40angular%2Fforms'%3B%0Aimport%20%7B%0A%20%20FormUtils%2C%0A%20%20TextBoxControl%2C%0A%20%20CheckboxControl%2C%0A%20%20NovoFormGroup%2C%0A%20%20BaseControl%2C%0A%20%20NovoControlGroupAddConfig%2C%0A%20%20ReadOnlyControl%2C%0A%20%20SelectControl%2C%0A%7D%20from%20'novo-elements'%3B%0A%0A%2F**%0A%20*%20%40title%20Horizontal%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'horizontal-example'%2C%0A%20%20templateUrl%3A%20'horizontal-example.html'%2C%0A%20%20styleUrls%3A%20%5B'horizontal-example.css'%5D%2C%0A%7D)%0Aexport%20class%20HorizontalExample%20%7B%0A%20%20public%20formGroup%3A%20NovoFormGroup%3B%0A%20%20public%20controls%3A%20BaseControl%5B%5D%20%3D%20%5B%5D%3B%0A%20%20public%20initialValue%3A%20%7B%7D%5B%5D%20%3D%20%5B%5D%3B%0A%20%20public%20initValue%3A%20%7B%7D%5B%5D%20%3D%20%5B%7B%20text%3A%20'TEXT'%2C%20percentage%3A%2012%2C%20checkbox%3A%20true%2C%20test4%3A%20'TEST'%20%7D%5D%3B%0A%0A%20%20public%20simpleAddConfig%3A%20NovoControlGroupAddConfig%20%3D%20%7B%0A%20%20%20%20label%3A%20'Add'%2C%0A%20%20%7D%3B%0A%20%20public%20anotherAddConfig%3A%20NovoControlGroupAddConfig%20%3D%20%7B%0A%20%20%20%20label%3A%20'Add%20a%20new%20fancy%20thing!'%2C%0A%20%20%7D%3B%0A%0A%20%20public%20emptyMessage%3A%20string%20%3D%20'There%20are%20no%20items...'%3B%0A%20%20public%20canEditFunction%3A%20Function%3B%0A%20%20public%20canRemoveFunction%3A%20Function%3B%0A%0A%20%20constructor(private%20formUtils%3A%20FormUtils)%20%7B%0A%20%20%20%20%2F%2F%20Grouped%20form%20demo%0A%20%20%20%20this.setupGroupedFormDemo()%3B%0A%20%20%20%20%2F%2F%20Setup%20function%0A%20%20%20%20this.canEditFunction%20%3D%20this.canEdit.bind(this)%3B%0A%20%20%20%20this.canRemoveFunction%20%3D%20this.canRemove.bind(this)%3B%0A%20%20%7D%0A%0A%20%20public%20onRemove(value%3A%20any)%20%7B%0A%20%20%20%20console.log('REMOVING'%2C%20value)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%0A%20%20public%20onEdit(value%3A%20any)%20%7B%0A%20%20%20%20console.log('EDITING'%2C%20value)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%0A%20%20public%20canEdit(value%3A%20any%2C%20index%3A%20number)%20%7B%0A%20%20%20%20console.log('canEdit'%2C%20value%2C%20index)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%20%20return%20index%20%3E%200%3B%0A%20%20%7D%0A%20%20public%20canRemove(value%3A%20any%2C%20index%3A%20number)%20%7B%0A%20%20%20%20console.log('canRemove'%2C%20value%2C%20index)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%20%20return%20index%20%3D%3D%3D%200%3B%0A%20%20%7D%0A%0A%20%20public%20updateInitialValue()%20%7B%0A%20%20%20%20this.initValue%20%3D%20%5B%0A%20%20%20%20%20%20%7B%20text%3A%20'TEXT%20111'%2C%20percentage%3A%20100%2C%20checkbox%3A%20false%2C%20test4%3A%20'TEST%20111'%20%7D%2C%0A%20%20%20%20%20%20%7B%20text%3A%20'TEXT%20222'%2C%20percentage%3A%205%2C%20checkbox%3A%20false%2C%20test4%3A%20'TEST%20222'%20%7D%2C%0A%20%20%20%20%20%20%7B%20text%3A%20'TEXT%20333'%2C%20percentage%3A%2060%2C%20checkbox%3A%20true%2C%20test4%3A%20'TEST%20333'%20%7D%2C%0A%20%20%20%20%5D%3B%0A%20%20%7D%0A%0A%20%20public%20customDelete(form%3A%20NovoFormGroup%2C%20key%3A%20string%2C%20index%3A%20number)%20%7B%0A%20%20%20%20console.log('DELETE'%2C%20form%2C%20key%2C%20index)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%20%20const%20control%3A%20FormArray%20%3D%20%3CFormArray%3Eform.controls%5Bkey%5D%3B%0A%20%20%20%20control.removeAt(index)%3B%0A%20%20%7D%0A%0A%20%20public%20customEdit(form%3A%20NovoFormGroup%2C%20key%3A%20string%2C%20index%3A%20number)%20%7B%0A%20%20%20%20console.log('EDIT'%2C%20form%2C%20key%2C%20index)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%0A%20%20private%20setupGroupedFormDemo()%20%7B%0A%20%20%20%20this.formGroup%20%3D%20this.formUtils.emptyFormGroup()%3B%0A%20%20%20%20let%20label%20%3D%20new%20ReadOnlyControl(%7B%20key%3A%20'label'%2C%20value%3A%20'Label%20%3A)'%20%7D)%3B%0A%20%20%20%20let%20c1%20%3D%20new%20SelectControl(%7B%20key%3A%20'text'%2C%20label%3A%20'Text%20Box'%2C%20options%3A%20%5B%7B%20value%3A%20'hello'%2C%20label%3A%20'Hello'%20%7D%5D%20%7D)%3B%0A%20%20%20%20let%20c2%20%3D%20new%20TextBoxControl(%7B%20type%3A%20'percentage'%2C%20key%3A%20'percentage'%2C%20label%3A%20'Percent'%2C%20required%3A%20true%20%7D)%3B%0A%20%20%20%20let%20c3%20%3D%20new%20CheckboxControl(%7B%20key%3A%20'checkbox'%2C%20label%3A%20'Check%20Me!'%2C%20width%3A%20100%20%7D)%3B%0A%20%20%20%20let%20c4%20%3D%20new%20TextBoxControl(%7B%20key%3A%20'test4'%2C%20label%3A%20'TEST4'%20%7D)%3B%0A%20%20%20%20this.controls.push(label)%3B%0A%20%20%20%20this.controls.push(c1)%3B%0A%20%20%20%20this.controls.push(c2)%3B%0A%20%20%20%20this.controls.push(c3)%3B%0A%20%20%20%20this.controls.push(c4)%3B%0A%20%20%7D%0A%7D%0A`,
+        tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0Aimport%20%7B%20FormArray%20%7D%20from%20'%40angular%2Fforms'%3B%0Aimport%20%7B%0A%20%20FormUtils%2C%0A%20%20TextBoxControl%2C%0A%20%20CheckboxControl%2C%0A%20%20NovoFormGroup%2C%0A%20%20BaseControl%2C%0A%20%20NovoControlGroupAddConfig%2C%0A%20%20ReadOnlyControl%2C%0A%20%20SelectControl%2C%0A%7D%20from%20'novo-elements'%3B%0A%0A%2F**%0A%20*%20%40title%20Horizontal%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'horizontal-example'%2C%0A%20%20templateUrl%3A%20'horizontal-example.html'%2C%0A%20%20styleUrls%3A%20%5B'horizontal-example.css'%5D%2C%0A%7D)%0Aexport%20class%20HorizontalExample%20%7B%0A%20%20public%20formGroup%3A%20NovoFormGroup%3B%0A%20%20public%20controls%3A%20BaseControl%5B%5D%20%3D%20%5B%5D%3B%0A%20%20public%20initialValue%3A%20%7B%7D%5B%5D%20%3D%20%5B%5D%3B%0A%20%20public%20initValue%3A%20%7B%7D%5B%5D%20%3D%20%5B%7B%20text%3A%20'TEXT'%2C%20percentage%3A%2012%2C%20checkbox%3A%20true%2C%20test4%3A%20'TEST'%20%7D%5D%3B%0A%0A%20%20public%20simpleAddConfig%3A%20NovoControlGroupAddConfig%20%3D%20%7B%0A%20%20%20%20label%3A%20'Add'%2C%0A%20%20%7D%3B%0A%20%20public%20anotherAddConfig%3A%20NovoControlGroupAddConfig%20%3D%20%7B%0A%20%20%20%20label%3A%20'Add%20a%20new%20fancy%20thing!'%2C%0A%20%20%7D%3B%0A%0A%20%20public%20emptyMessage%3A%20string%20%3D%20'There%20are%20no%20items...'%3B%0A%20%20public%20canEditFunction%3A%20Function%3B%0A%20%20public%20canRemoveFunction%3A%20Function%3B%0A%0A%20%20constructor(private%20formUtils%3A%20FormUtils)%20%7B%0A%20%20%20%20%2F%2F%20Grouped%20form%20demo%0A%20%20%20%20this.setupGroupedFormDemo()%3B%0A%20%20%20%20%2F%2F%20Setup%20function%0A%20%20%20%20this.canEditFunction%20%3D%20this.canEdit.bind(this)%3B%0A%20%20%20%20this.canRemoveFunction%20%3D%20this.canRemove.bind(this)%3B%0A%20%20%7D%0A%0A%20%20public%20onRemove(value%3A%20any)%20%7B%0A%20%20%20%20console.log('REMOVING'%2C%20value)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%0A%20%20public%20onEdit(value%3A%20any)%20%7B%0A%20%20%20%20console.log('EDITING'%2C%20value)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%0A%20%20public%20canEdit(value%3A%20any%2C%20index%3A%20number)%20%7B%0A%20%20%20%20console.log('canEdit'%2C%20value%2C%20index)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%20%20return%20index%20%3E%200%3B%0A%20%20%7D%0A%20%20public%20canRemove(value%3A%20any%2C%20index%3A%20number)%20%7B%0A%20%20%20%20console.log('canRemove'%2C%20value%2C%20index)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%20%20return%20index%20%3D%3D%3D%200%3B%0A%20%20%7D%0A%0A%20%20public%20updateInitialValue()%20%7B%0A%20%20%20%20this.initValue%20%3D%20%5B%0A%20%20%20%20%20%20%7B%20text%3A%20'TEXT%20111'%2C%20percentage%3A%20100%2C%20checkbox%3A%20false%2C%20test4%3A%20'TEST%20111'%20%7D%2C%0A%20%20%20%20%20%20%7B%20text%3A%20'TEXT%20222'%2C%20percentage%3A%205%2C%20checkbox%3A%20false%2C%20test4%3A%20'TEST%20222'%20%7D%2C%0A%20%20%20%20%20%20%7B%20text%3A%20'TEXT%20333'%2C%20percentage%3A%2060%2C%20checkbox%3A%20true%2C%20test4%3A%20'TEST%20333'%20%7D%2C%0A%20%20%20%20%5D%3B%0A%20%20%7D%0A%0A%20%20public%20customDelete(form%3A%20NovoFormGroup%2C%20key%3A%20string%2C%20index%3A%20number)%20%7B%0A%20%20%20%20console.log('DELETE'%2C%20form%2C%20key%2C%20index)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%20%20const%20control%3A%20FormArray%20%3D%20%3CFormArray%3Eform.controls%5Bkey%5D%3B%0A%20%20%20%20control.removeAt(index)%3B%0A%20%20%7D%0A%0A%20%20public%20customEdit(form%3A%20NovoFormGroup%2C%20key%3A%20string%2C%20index%3A%20number)%20%7B%0A%20%20%20%20console.log('EDIT'%2C%20form%2C%20key%2C%20index)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%0A%20%20private%20setupGroupedFormDemo()%20%7B%0A%20%20%20%20this.formGroup%20%3D%20this.formUtils.emptyFormGroup()%3B%0A%20%20%20%20const%20label%20%3D%20new%20ReadOnlyControl(%7B%20key%3A%20'label'%2C%20value%3A%20'Label%20%3A)'%20%7D)%3B%0A%20%20%20%20const%20c1%20%3D%20new%20SelectControl(%7B%20key%3A%20'text'%2C%20label%3A%20'Text%20Box'%2C%20options%3A%20%5B%7B%20value%3A%20'hello'%2C%20label%3A%20'Hello'%20%7D%5D%20%7D)%3B%0A%20%20%20%20const%20c2%20%3D%20new%20TextBoxControl(%7B%20type%3A%20'percentage'%2C%20key%3A%20'percentage'%2C%20label%3A%20'Percent'%2C%20required%3A%20true%20%7D)%3B%0A%20%20%20%20const%20c3%20%3D%20new%20CheckboxControl(%7B%20key%3A%20'checkbox'%2C%20label%3A%20'Check%20Me!'%2C%20width%3A%20100%20%7D)%3B%0A%20%20%20%20const%20c4%20%3D%20new%20TextBoxControl(%7B%20key%3A%20'test4'%2C%20label%3A%20'TEST4'%20%7D)%3B%0A%20%20%20%20this.controls.push(label)%3B%0A%20%20%20%20this.controls.push(c1)%3B%0A%20%20%20%20this.controls.push(c2)%3B%0A%20%20%20%20this.controls.push(c3)%3B%0A%20%20%20%20this.controls.push(c4)%3B%0A%20%20%7D%0A%7D%0A`,
         cssSource: `%2F**%20No%20CSS%20for%20this%20example%20*%2F%0A`,
         htmlSource: `%3Cbutton%20theme%3D%22primary%22%20(click)%3D%22updateInitialValue()%22%3EUpdate%20Initial%20Value%3C%2Fbutton%3E%0A%3Cbr%2F%3E%0A%3Cbr%2F%3E%0A%3Cnovo-form%20%5Bform%5D%3D%22formGroup%22%3E%0A%20%20%20%20%3Cnovo-control-group%20%5BcanEdit%5D%3D%22canEditFunction%22%20%5BcanRemove%5D%3D%22canRemoveFunction%22%20(onRemove)%3D%22onRemove(%24event)%22%20(onEdit)%3D%22onEdit(%24event)%22%20%5BinitialValue%5D%3D%22initValue%22%20%5Badd%5D%3D%22simpleAddConfig%22%20remove%3D%22true%22%20edit%3D%22true%22%20label%3D%22Horizontal%22%20key%3D%22horizontal%22%20%5Bform%5D%3D%22formGroup%22%20%5Bcontrols%5D%3D%22controls%22%20%5BemptyMessage%5D%3D%22emptyMessage%22%3E%3C%2Fnovo-control-group%3E%0A%3C%2Fnovo-form%3E%0A%3Cdiv%20class%3D%22final-value%22%3EInitial%20Value%3A%20%7B%7B%20initValue%20%7C%20json%20%7D%7D%3C%2Fdiv%3E%0A%3Cdiv%20class%3D%22final-value%22%3EValue%3A%20%7B%7B%20formGroup.value%20%7C%20json%20%7D%7D%3C%2Fdiv%3E%0A`
     },
     'vertical-options': {
         title: 'Vertical Options Example',
         component: VerticalOptionsExample,
-        tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0Aimport%20%7B%20FormArray%20%7D%20from%20'%40angular%2Fforms'%3B%0Aimport%20%7B%0A%20%20FormUtils%2C%0A%20%20TextBoxControl%2C%0A%20%20CheckboxControl%2C%0A%20%20NovoFormGroup%2C%0A%20%20BaseControl%2C%0A%20%20NovoControlGroupAddConfig%2C%0A%20%20ReadOnlyControl%2C%0A%20%20SelectControl%2C%0A%7D%20from%20'novo-elements'%3B%0A%0A%2F**%0A%20*%20%40title%20Vertical%20Options%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'vertical-options-example'%2C%0A%20%20templateUrl%3A%20'vertical-options-example.html'%2C%0A%20%20styleUrls%3A%20%5B'vertical-options-example.css'%5D%2C%0A%7D)%0Aexport%20class%20VerticalOptionsExample%20%7B%0A%20%20public%20formGroup%3A%20NovoFormGroup%3B%0A%20%20public%20controls%3A%20BaseControl%5B%5D%20%3D%20%5B%5D%3B%0A%20%20public%20initialValue%3A%20%7B%7D%5B%5D%20%3D%20%5B%5D%3B%0A%20%20public%20initValue%3A%20%7B%7D%5B%5D%20%3D%20%5B%7B%20text%3A%20'TEXT'%2C%20percentage%3A%2012%2C%20checkbox%3A%20true%2C%20test4%3A%20'TEST'%20%7D%5D%3B%0A%0A%20%20public%20simpleAddConfig%3A%20NovoControlGroupAddConfig%20%3D%20%7B%0A%20%20%20%20label%3A%20'Add'%2C%0A%20%20%7D%3B%0A%20%20public%20anotherAddConfig%3A%20NovoControlGroupAddConfig%20%3D%20%7B%0A%20%20%20%20label%3A%20'Add%20a%20new%20fancy%20thing!'%2C%0A%20%20%7D%3B%0A%0A%20%20public%20emptyMessage%3A%20string%20%3D%20'There%20are%20no%20items...'%3B%0A%20%20public%20canEditFunction%3A%20Function%3B%0A%20%20public%20canRemoveFunction%3A%20Function%3B%0A%0A%20%20constructor(private%20formUtils%3A%20FormUtils)%20%7B%0A%20%20%20%20%2F%2F%20Grouped%20form%20demo%0A%20%20%20%20this.setupGroupedFormDemo()%3B%0A%20%20%20%20%2F%2F%20Setup%20function%0A%20%20%20%20this.canEditFunction%20%3D%20this.canEdit.bind(this)%3B%0A%20%20%20%20this.canRemoveFunction%20%3D%20this.canRemove.bind(this)%3B%0A%20%20%7D%0A%0A%20%20public%20onRemove(value%3A%20any)%20%7B%0A%20%20%20%20console.log('REMOVING'%2C%20value)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%0A%20%20public%20onEdit(value%3A%20any)%20%7B%0A%20%20%20%20console.log('EDITING'%2C%20value)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%0A%20%20public%20canEdit(value%3A%20any%2C%20index%3A%20number)%20%7B%0A%20%20%20%20console.log('canEdit'%2C%20value%2C%20index)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%20%20return%20index%20%3E%200%3B%0A%20%20%7D%0A%20%20public%20canRemove(value%3A%20any%2C%20index%3A%20number)%20%7B%0A%20%20%20%20console.log('canRemove'%2C%20value%2C%20index)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%20%20return%20index%20%3D%3D%3D%200%3B%0A%20%20%7D%0A%0A%20%20public%20updateInitialValue()%20%7B%0A%20%20%20%20this.initValue%20%3D%20%5B%0A%20%20%20%20%20%20%7B%20text%3A%20'TEXT%20111'%2C%20percentage%3A%20100%2C%20checkbox%3A%20false%2C%20test4%3A%20'TEST%20111'%20%7D%2C%0A%20%20%20%20%20%20%7B%20text%3A%20'TEXT%20222'%2C%20percentage%3A%205%2C%20checkbox%3A%20false%2C%20test4%3A%20'TEST%20222'%20%7D%2C%0A%20%20%20%20%20%20%7B%20text%3A%20'TEXT%20333'%2C%20percentage%3A%2060%2C%20checkbox%3A%20true%2C%20test4%3A%20'TEST%20333'%20%7D%2C%0A%20%20%20%20%5D%3B%0A%20%20%7D%0A%0A%20%20public%20customDelete(form%3A%20NovoFormGroup%2C%20key%3A%20string%2C%20index%3A%20number)%20%7B%0A%20%20%20%20console.log('DELETE'%2C%20form%2C%20key%2C%20index)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%20%20const%20control%3A%20FormArray%20%3D%20%3CFormArray%3Eform.controls%5Bkey%5D%3B%0A%20%20%20%20control.removeAt(index)%3B%0A%20%20%7D%0A%0A%20%20public%20customEdit(form%3A%20NovoFormGroup%2C%20key%3A%20string%2C%20index%3A%20number)%20%7B%0A%20%20%20%20console.log('EDIT'%2C%20form%2C%20key%2C%20index)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%0A%20%20private%20setupGroupedFormDemo()%20%7B%0A%20%20%20%20this.formGroup%20%3D%20this.formUtils.emptyFormGroup()%3B%0A%20%20%20%20let%20label%20%3D%20new%20ReadOnlyControl(%7B%20key%3A%20'label'%2C%20value%3A%20'Label%20%3A)'%20%7D)%3B%0A%20%20%20%20let%20c1%20%3D%20new%20SelectControl(%7B%20key%3A%20'text'%2C%20label%3A%20'Text%20Box'%2C%20options%3A%20%5B%7B%20value%3A%20'hello'%2C%20label%3A%20'Hello'%20%7D%5D%20%7D)%3B%0A%20%20%20%20let%20c2%20%3D%20new%20TextBoxControl(%7B%20type%3A%20'percentage'%2C%20key%3A%20'percentage'%2C%20label%3A%20'Percent'%2C%20required%3A%20true%20%7D)%3B%0A%20%20%20%20let%20c3%20%3D%20new%20CheckboxControl(%7B%20key%3A%20'checkbox'%2C%20label%3A%20'Check%20Me!'%2C%20width%3A%20100%20%7D)%3B%0A%20%20%20%20let%20c4%20%3D%20new%20TextBoxControl(%7B%20key%3A%20'test4'%2C%20label%3A%20'TEST4'%20%7D)%3B%0A%20%20%20%20this.controls.push(label)%3B%0A%20%20%20%20this.controls.push(c1)%3B%0A%20%20%20%20this.controls.push(c2)%3B%0A%20%20%20%20this.controls.push(c3)%3B%0A%20%20%20%20this.controls.push(c4)%3B%0A%20%20%7D%0A%7D%0A`,
+        tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0Aimport%20%7B%20FormArray%20%7D%20from%20'%40angular%2Fforms'%3B%0Aimport%20%7B%0A%20%20FormUtils%2C%0A%20%20TextBoxControl%2C%0A%20%20CheckboxControl%2C%0A%20%20NovoFormGroup%2C%0A%20%20BaseControl%2C%0A%20%20NovoControlGroupAddConfig%2C%0A%20%20ReadOnlyControl%2C%0A%20%20SelectControl%2C%0A%7D%20from%20'novo-elements'%3B%0A%0A%2F**%0A%20*%20%40title%20Vertical%20Options%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'vertical-options-example'%2C%0A%20%20templateUrl%3A%20'vertical-options-example.html'%2C%0A%20%20styleUrls%3A%20%5B'vertical-options-example.css'%5D%2C%0A%7D)%0Aexport%20class%20VerticalOptionsExample%20%7B%0A%20%20public%20formGroup%3A%20NovoFormGroup%3B%0A%20%20public%20controls%3A%20BaseControl%5B%5D%20%3D%20%5B%5D%3B%0A%20%20public%20initialValue%3A%20%7B%7D%5B%5D%20%3D%20%5B%5D%3B%0A%20%20public%20initValue%3A%20%7B%7D%5B%5D%20%3D%20%5B%7B%20text%3A%20'TEXT'%2C%20percentage%3A%2012%2C%20checkbox%3A%20true%2C%20test4%3A%20'TEST'%20%7D%5D%3B%0A%0A%20%20public%20simpleAddConfig%3A%20NovoControlGroupAddConfig%20%3D%20%7B%0A%20%20%20%20label%3A%20'Add'%2C%0A%20%20%7D%3B%0A%20%20public%20anotherAddConfig%3A%20NovoControlGroupAddConfig%20%3D%20%7B%0A%20%20%20%20label%3A%20'Add%20a%20new%20fancy%20thing!'%2C%0A%20%20%7D%3B%0A%0A%20%20public%20emptyMessage%3A%20string%20%3D%20'There%20are%20no%20items...'%3B%0A%20%20public%20canEditFunction%3A%20Function%3B%0A%20%20public%20canRemoveFunction%3A%20Function%3B%0A%0A%20%20constructor(private%20formUtils%3A%20FormUtils)%20%7B%0A%20%20%20%20%2F%2F%20Grouped%20form%20demo%0A%20%20%20%20this.setupGroupedFormDemo()%3B%0A%20%20%20%20%2F%2F%20Setup%20function%0A%20%20%20%20this.canEditFunction%20%3D%20this.canEdit.bind(this)%3B%0A%20%20%20%20this.canRemoveFunction%20%3D%20this.canRemove.bind(this)%3B%0A%20%20%7D%0A%0A%20%20public%20onRemove(value%3A%20any)%20%7B%0A%20%20%20%20console.log('REMOVING'%2C%20value)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%0A%20%20public%20onEdit(value%3A%20any)%20%7B%0A%20%20%20%20console.log('EDITING'%2C%20value)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%0A%20%20public%20canEdit(value%3A%20any%2C%20index%3A%20number)%20%7B%0A%20%20%20%20console.log('canEdit'%2C%20value%2C%20index)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%20%20return%20index%20%3E%200%3B%0A%20%20%7D%0A%20%20public%20canRemove(value%3A%20any%2C%20index%3A%20number)%20%7B%0A%20%20%20%20console.log('canRemove'%2C%20value%2C%20index)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%20%20return%20index%20%3D%3D%3D%200%3B%0A%20%20%7D%0A%0A%20%20public%20updateInitialValue()%20%7B%0A%20%20%20%20this.initValue%20%3D%20%5B%0A%20%20%20%20%20%20%7B%20text%3A%20'TEXT%20111'%2C%20percentage%3A%20100%2C%20checkbox%3A%20false%2C%20test4%3A%20'TEST%20111'%20%7D%2C%0A%20%20%20%20%20%20%7B%20text%3A%20'TEXT%20222'%2C%20percentage%3A%205%2C%20checkbox%3A%20false%2C%20test4%3A%20'TEST%20222'%20%7D%2C%0A%20%20%20%20%20%20%7B%20text%3A%20'TEXT%20333'%2C%20percentage%3A%2060%2C%20checkbox%3A%20true%2C%20test4%3A%20'TEST%20333'%20%7D%2C%0A%20%20%20%20%5D%3B%0A%20%20%7D%0A%0A%20%20public%20customDelete(form%3A%20NovoFormGroup%2C%20key%3A%20string%2C%20index%3A%20number)%20%7B%0A%20%20%20%20console.log('DELETE'%2C%20form%2C%20key%2C%20index)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%20%20const%20control%3A%20FormArray%20%3D%20%3CFormArray%3Eform.controls%5Bkey%5D%3B%0A%20%20%20%20control.removeAt(index)%3B%0A%20%20%7D%0A%0A%20%20public%20customEdit(form%3A%20NovoFormGroup%2C%20key%3A%20string%2C%20index%3A%20number)%20%7B%0A%20%20%20%20console.log('EDIT'%2C%20form%2C%20key%2C%20index)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%0A%20%20private%20setupGroupedFormDemo()%20%7B%0A%20%20%20%20this.formGroup%20%3D%20this.formUtils.emptyFormGroup()%3B%0A%20%20%20%20const%20label%20%3D%20new%20ReadOnlyControl(%7B%20key%3A%20'label'%2C%20value%3A%20'Label%20%3A)'%20%7D)%3B%0A%20%20%20%20const%20c1%20%3D%20new%20SelectControl(%7B%20key%3A%20'text'%2C%20label%3A%20'Text%20Box'%2C%20options%3A%20%5B%7B%20value%3A%20'hello'%2C%20label%3A%20'Hello'%20%7D%5D%20%7D)%3B%0A%20%20%20%20const%20c2%20%3D%20new%20TextBoxControl(%7B%20type%3A%20'percentage'%2C%20key%3A%20'percentage'%2C%20label%3A%20'Percent'%2C%20required%3A%20true%20%7D)%3B%0A%20%20%20%20const%20c3%20%3D%20new%20CheckboxControl(%7B%20key%3A%20'checkbox'%2C%20label%3A%20'Check%20Me!'%2C%20width%3A%20100%20%7D)%3B%0A%20%20%20%20const%20c4%20%3D%20new%20TextBoxControl(%7B%20key%3A%20'test4'%2C%20label%3A%20'TEST4'%20%7D)%3B%0A%20%20%20%20this.controls.push(label)%3B%0A%20%20%20%20this.controls.push(c1)%3B%0A%20%20%20%20this.controls.push(c2)%3B%0A%20%20%20%20this.controls.push(c3)%3B%0A%20%20%20%20this.controls.push(c4)%3B%0A%20%20%7D%0A%7D%0A`,
         cssSource: `%2F**%20No%20CSS%20for%20this%20example%20*%2F%0A`,
         htmlSource: `%3Cnovo-form%20%5Bform%5D%3D%22formGroup%22%3E%0A%20%20%20%20%3Cnovo-control-group%20%5BinitialValue%5D%3D%22initialValue%22%20collapsible%3D%22true%22%20%5Badd%5D%3D%22anotherAddConfig%22%20remove%3D%22true%22%20icon%3D%22idea%22%20label%3D%22Vertical%22%20key%3D%22vertical%22%20vertical%3D%22true%22%20description%3D%22Test%20Description%22%20%5Bform%5D%3D%22formGroup%22%20%5Bcontrols%5D%3D%22controls%22%20%5BemptyMessage%5D%3D%22emptyMessage%22%3E%3C%2Fnovo-control-group%3E%0A%3C%2Fnovo-form%3E%0A%3Cdiv%20class%3D%22final-value%22%3EInitial%20Value%3A%20%7B%7B%20initialValue%20%7C%20json%20%7D%7D%3C%2Fdiv%3E%0A%3Cdiv%20class%3D%22final-value%22%3EValue%3A%20%7B%7B%20formGroup.value%20%7C%20json%20%7D%7D%3C%2Fdiv%3E%0A`
     },
     'vertical': {
         title: 'Vertical Example',
         component: VerticalExample,
-        tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0Aimport%20%7B%20FormArray%20%7D%20from%20'%40angular%2Fforms'%3B%0Aimport%20%7B%0A%20%20FormUtils%2C%0A%20%20TextBoxControl%2C%0A%20%20CheckboxControl%2C%0A%20%20NovoFormGroup%2C%0A%20%20BaseControl%2C%0A%20%20NovoControlGroupAddConfig%2C%0A%20%20ReadOnlyControl%2C%0A%20%20SelectControl%2C%0A%7D%20from%20'novo-elements'%3B%0A%0A%2F**%0A%20*%20%40title%20Vertical%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'vertical-example'%2C%0A%20%20templateUrl%3A%20'vertical-example.html'%2C%0A%20%20styleUrls%3A%20%5B'vertical-example.css'%5D%2C%0A%7D)%0Aexport%20class%20VerticalExample%20%7B%0A%20%20public%20formGroup%3A%20NovoFormGroup%3B%0A%20%20public%20controls%3A%20BaseControl%5B%5D%20%3D%20%5B%5D%3B%0A%20%20public%20initialValue%3A%20%7B%7D%5B%5D%20%3D%20%5B%5D%3B%0A%20%20public%20initValue%3A%20%7B%7D%5B%5D%20%3D%20%5B%7B%20text%3A%20'TEXT'%2C%20percentage%3A%2012%2C%20checkbox%3A%20true%2C%20test4%3A%20'TEST'%20%7D%5D%3B%0A%0A%20%20public%20simpleAddConfig%3A%20NovoControlGroupAddConfig%20%3D%20%7B%0A%20%20%20%20label%3A%20'Add'%2C%0A%20%20%7D%3B%0A%20%20public%20anotherAddConfig%3A%20NovoControlGroupAddConfig%20%3D%20%7B%0A%20%20%20%20label%3A%20'Add%20a%20new%20fancy%20thing!'%2C%0A%20%20%7D%3B%0A%0A%20%20public%20emptyMessage%3A%20string%20%3D%20'There%20are%20no%20items...'%3B%0A%20%20public%20canEditFunction%3A%20Function%3B%0A%20%20public%20canRemoveFunction%3A%20Function%3B%0A%0A%20%20constructor(private%20formUtils%3A%20FormUtils)%20%7B%0A%20%20%20%20%2F%2F%20Grouped%20form%20demo%0A%20%20%20%20this.setupGroupedFormDemo()%3B%0A%20%20%20%20%2F%2F%20Setup%20function%0A%20%20%20%20this.canEditFunction%20%3D%20this.canEdit.bind(this)%3B%0A%20%20%20%20this.canRemoveFunction%20%3D%20this.canRemove.bind(this)%3B%0A%20%20%7D%0A%0A%20%20public%20onRemove(value%3A%20any)%20%7B%0A%20%20%20%20console.log('REMOVING'%2C%20value)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%0A%20%20public%20onEdit(value%3A%20any)%20%7B%0A%20%20%20%20console.log('EDITING'%2C%20value)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%0A%20%20public%20canEdit(value%3A%20any%2C%20index%3A%20number)%20%7B%0A%20%20%20%20console.log('canEdit'%2C%20value%2C%20index)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%20%20return%20index%20%3E%200%3B%0A%20%20%7D%0A%20%20public%20canRemove(value%3A%20any%2C%20index%3A%20number)%20%7B%0A%20%20%20%20console.log('canRemove'%2C%20value%2C%20index)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%20%20return%20index%20%3D%3D%3D%200%3B%0A%20%20%7D%0A%0A%20%20public%20updateInitialValue()%20%7B%0A%20%20%20%20this.initValue%20%3D%20%5B%0A%20%20%20%20%20%20%7B%20text%3A%20'TEXT%20111'%2C%20percentage%3A%20100%2C%20checkbox%3A%20false%2C%20test4%3A%20'TEST%20111'%20%7D%2C%0A%20%20%20%20%20%20%7B%20text%3A%20'TEXT%20222'%2C%20percentage%3A%205%2C%20checkbox%3A%20false%2C%20test4%3A%20'TEST%20222'%20%7D%2C%0A%20%20%20%20%20%20%7B%20text%3A%20'TEXT%20333'%2C%20percentage%3A%2060%2C%20checkbox%3A%20true%2C%20test4%3A%20'TEST%20333'%20%7D%2C%0A%20%20%20%20%5D%3B%0A%20%20%7D%0A%0A%20%20public%20customDelete(form%3A%20NovoFormGroup%2C%20key%3A%20string%2C%20index%3A%20number)%20%7B%0A%20%20%20%20console.log('DELETE'%2C%20form%2C%20key%2C%20index)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%20%20const%20control%3A%20FormArray%20%3D%20%3CFormArray%3Eform.controls%5Bkey%5D%3B%0A%20%20%20%20control.removeAt(index)%3B%0A%20%20%7D%0A%0A%20%20public%20customEdit(form%3A%20NovoFormGroup%2C%20key%3A%20string%2C%20index%3A%20number)%20%7B%0A%20%20%20%20console.log('EDIT'%2C%20form%2C%20key%2C%20index)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%0A%20%20private%20setupGroupedFormDemo()%20%7B%0A%20%20%20%20this.formGroup%20%3D%20this.formUtils.emptyFormGroup()%3B%0A%20%20%20%20let%20label%20%3D%20new%20ReadOnlyControl(%7B%20key%3A%20'label'%2C%20value%3A%20'Label%20%3A)'%20%7D)%3B%0A%20%20%20%20let%20c1%20%3D%20new%20SelectControl(%7B%20key%3A%20'text'%2C%20label%3A%20'Text%20Box'%2C%20options%3A%20%5B%7B%20value%3A%20'hello'%2C%20label%3A%20'Hello'%20%7D%5D%20%7D)%3B%0A%20%20%20%20let%20c2%20%3D%20new%20TextBoxControl(%7B%20type%3A%20'percentage'%2C%20key%3A%20'percentage'%2C%20label%3A%20'Percent'%2C%20required%3A%20true%20%7D)%3B%0A%20%20%20%20let%20c3%20%3D%20new%20CheckboxControl(%7B%20key%3A%20'checkbox'%2C%20label%3A%20'Check%20Me!'%2C%20width%3A%20100%20%7D)%3B%0A%20%20%20%20let%20c4%20%3D%20new%20TextBoxControl(%7B%20key%3A%20'test4'%2C%20label%3A%20'TEST4'%20%7D)%3B%0A%20%20%20%20this.controls.push(label)%3B%0A%20%20%20%20this.controls.push(c1)%3B%0A%20%20%20%20this.controls.push(c2)%3B%0A%20%20%20%20this.controls.push(c3)%3B%0A%20%20%20%20this.controls.push(c4)%3B%0A%20%20%7D%0A%7D%0A`,
+        tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0Aimport%20%7B%20FormArray%20%7D%20from%20'%40angular%2Fforms'%3B%0Aimport%20%7B%0A%20%20FormUtils%2C%0A%20%20TextBoxControl%2C%0A%20%20CheckboxControl%2C%0A%20%20NovoFormGroup%2C%0A%20%20BaseControl%2C%0A%20%20NovoControlGroupAddConfig%2C%0A%20%20ReadOnlyControl%2C%0A%20%20SelectControl%2C%0A%7D%20from%20'novo-elements'%3B%0A%0A%2F**%0A%20*%20%40title%20Vertical%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'vertical-example'%2C%0A%20%20templateUrl%3A%20'vertical-example.html'%2C%0A%20%20styleUrls%3A%20%5B'vertical-example.css'%5D%2C%0A%7D)%0Aexport%20class%20VerticalExample%20%7B%0A%20%20public%20formGroup%3A%20NovoFormGroup%3B%0A%20%20public%20controls%3A%20BaseControl%5B%5D%20%3D%20%5B%5D%3B%0A%20%20public%20initialValue%3A%20%7B%7D%5B%5D%20%3D%20%5B%5D%3B%0A%20%20public%20initValue%3A%20%7B%7D%5B%5D%20%3D%20%5B%7B%20text%3A%20'TEXT'%2C%20percentage%3A%2012%2C%20checkbox%3A%20true%2C%20test4%3A%20'TEST'%20%7D%5D%3B%0A%0A%20%20public%20simpleAddConfig%3A%20NovoControlGroupAddConfig%20%3D%20%7B%0A%20%20%20%20label%3A%20'Add'%2C%0A%20%20%7D%3B%0A%20%20public%20anotherAddConfig%3A%20NovoControlGroupAddConfig%20%3D%20%7B%0A%20%20%20%20label%3A%20'Add%20a%20new%20fancy%20thing!'%2C%0A%20%20%7D%3B%0A%0A%20%20public%20emptyMessage%3A%20string%20%3D%20'There%20are%20no%20items...'%3B%0A%20%20public%20canEditFunction%3A%20Function%3B%0A%20%20public%20canRemoveFunction%3A%20Function%3B%0A%0A%20%20constructor(private%20formUtils%3A%20FormUtils)%20%7B%0A%20%20%20%20%2F%2F%20Grouped%20form%20demo%0A%20%20%20%20this.setupGroupedFormDemo()%3B%0A%20%20%20%20%2F%2F%20Setup%20function%0A%20%20%20%20this.canEditFunction%20%3D%20this.canEdit.bind(this)%3B%0A%20%20%20%20this.canRemoveFunction%20%3D%20this.canRemove.bind(this)%3B%0A%20%20%7D%0A%0A%20%20public%20onRemove(value%3A%20any)%20%7B%0A%20%20%20%20console.log('REMOVING'%2C%20value)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%0A%20%20public%20onEdit(value%3A%20any)%20%7B%0A%20%20%20%20console.log('EDITING'%2C%20value)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%0A%20%20public%20canEdit(value%3A%20any%2C%20index%3A%20number)%20%7B%0A%20%20%20%20console.log('canEdit'%2C%20value%2C%20index)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%20%20return%20index%20%3E%200%3B%0A%20%20%7D%0A%20%20public%20canRemove(value%3A%20any%2C%20index%3A%20number)%20%7B%0A%20%20%20%20console.log('canRemove'%2C%20value%2C%20index)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%20%20return%20index%20%3D%3D%3D%200%3B%0A%20%20%7D%0A%0A%20%20public%20updateInitialValue()%20%7B%0A%20%20%20%20this.initValue%20%3D%20%5B%0A%20%20%20%20%20%20%7B%20text%3A%20'TEXT%20111'%2C%20percentage%3A%20100%2C%20checkbox%3A%20false%2C%20test4%3A%20'TEST%20111'%20%7D%2C%0A%20%20%20%20%20%20%7B%20text%3A%20'TEXT%20222'%2C%20percentage%3A%205%2C%20checkbox%3A%20false%2C%20test4%3A%20'TEST%20222'%20%7D%2C%0A%20%20%20%20%20%20%7B%20text%3A%20'TEXT%20333'%2C%20percentage%3A%2060%2C%20checkbox%3A%20true%2C%20test4%3A%20'TEST%20333'%20%7D%2C%0A%20%20%20%20%5D%3B%0A%20%20%7D%0A%0A%20%20public%20customDelete(form%3A%20NovoFormGroup%2C%20key%3A%20string%2C%20index%3A%20number)%20%7B%0A%20%20%20%20console.log('DELETE'%2C%20form%2C%20key%2C%20index)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%20%20const%20control%3A%20FormArray%20%3D%20%3CFormArray%3Eform.controls%5Bkey%5D%3B%0A%20%20%20%20control.removeAt(index)%3B%0A%20%20%7D%0A%0A%20%20public%20customEdit(form%3A%20NovoFormGroup%2C%20key%3A%20string%2C%20index%3A%20number)%20%7B%0A%20%20%20%20console.log('EDIT'%2C%20form%2C%20key%2C%20index)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%0A%20%20private%20setupGroupedFormDemo()%20%7B%0A%20%20%20%20this.formGroup%20%3D%20this.formUtils.emptyFormGroup()%3B%0A%20%20%20%20const%20label%20%3D%20new%20ReadOnlyControl(%7B%20key%3A%20'label'%2C%20value%3A%20'Label%20%3A)'%20%7D)%3B%0A%20%20%20%20const%20c1%20%3D%20new%20SelectControl(%7B%20key%3A%20'text'%2C%20label%3A%20'Text%20Box'%2C%20options%3A%20%5B%7B%20value%3A%20'hello'%2C%20label%3A%20'Hello'%20%7D%5D%20%7D)%3B%0A%20%20%20%20const%20c2%20%3D%20new%20TextBoxControl(%7B%20type%3A%20'percentage'%2C%20key%3A%20'percentage'%2C%20label%3A%20'Percent'%2C%20required%3A%20true%20%7D)%3B%0A%20%20%20%20const%20c3%20%3D%20new%20CheckboxControl(%7B%20key%3A%20'checkbox'%2C%20label%3A%20'Check%20Me!'%2C%20width%3A%20100%20%7D)%3B%0A%20%20%20%20const%20c4%20%3D%20new%20TextBoxControl(%7B%20key%3A%20'test4'%2C%20label%3A%20'TEST4'%20%7D)%3B%0A%20%20%20%20this.controls.push(label)%3B%0A%20%20%20%20this.controls.push(c1)%3B%0A%20%20%20%20this.controls.push(c2)%3B%0A%20%20%20%20this.controls.push(c3)%3B%0A%20%20%20%20this.controls.push(c4)%3B%0A%20%20%7D%0A%7D%0A`,
         cssSource: `%2F**%20No%20CSS%20for%20this%20example%20*%2F%0A`,
         htmlSource: `%3Cnovo-form%20%5Bform%5D%3D%22formGroup%22%3E%0A%20%20%20%20%3Cnovo-control-group%20%5BinitialValue%5D%3D%22initialValue%22%20%5Badd%5D%3D%22simpleAddConfig%22%20remove%3D%22true%22%20icon%3D%22idea%22%20label%3D%22Vertical%22%20key%3D%22vertical%22%20vertical%3D%22true%22%20%5Bform%5D%3D%22formGroup%22%20%5Bcontrols%5D%3D%22controls%22%20%5BemptyMessage%5D%3D%22emptyMessage%22%3E%3C%2Fnovo-control-group%3E%0A%3C%2Fnovo-form%3E%0A%3Cdiv%20class%3D%22final-value%22%3EInitial%20Value%3A%20%7B%7B%20initialValue%20%7C%20json%20%7D%7D%3C%2Fdiv%3E%0A%3Cdiv%20class%3D%22final-value%22%3EValue%3A%20%7B%7B%20formGroup.value%20%7C%20json%20%7D%7D%3C%2Fdiv%3E%0A`
     },
     'address-control': {
         title: 'Address Control Example',
         component: AddressControlExample,
-        tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0A%0A%2F%2F%20Vendor%0Aimport%20%7B%20FormUtils%2C%20AddressControl%2C%20findByCountryId%20%7D%20from%20'novo-elements'%3B%0A%0A%2F**%0A%20*%20%40title%20Address%20Control%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'address-control-example'%2C%0A%20%20templateUrl%3A%20'address-control-example.html'%2C%0A%20%20styleUrls%3A%20%5B'address-control-example.css'%5D%2C%0A%7D)%0Aexport%20class%20AddressControlExample%20%7B%0A%20%20public%20addressControl%3A%20any%3B%0A%20%20public%20secondaryAddressControl%3A%20any%3B%0A%20%20public%20addressForm%3A%20any%3B%0A%20%20public%20addressFormControls%3A%20any%3B%0A%20%20public%20states%3A%20any%5B%5D%20%3D%20%5B%0A%20%20%20%20%7B%0A%20%20%20%20%20%20value%3A%20'MA'%2C%0A%20%20%20%20%20%20label%3A%20'Massachusetts'%2C%0A%20%20%20%20%20%20countryId%3A%201%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20value%3A%20'NY'%2C%0A%20%20%20%20%20%20label%3A%20'New%20York'%2C%0A%20%20%20%20%20%20countryId%3A%201%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20value%3A%20'AB'%2C%0A%20%20%20%20%20%20label%3A%20'Alberta'%2C%0A%20%20%20%20%20%20countryId%3A%202216%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20value%3A%20'BC'%2C%0A%20%20%20%20%20%20label%3A%20'British%20Columbia'%2C%0A%20%20%20%20%20%20countryId%3A%202216%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20value%3A%20'MB'%2C%0A%20%20%20%20%20%20label%3A%20'Manitoba'%2C%0A%20%20%20%20%20%20countryId%3A%202216%2C%0A%20%20%20%20%7D%2C%0A%20%20%5D%3B%0A%0A%20%20constructor(private%20formUtils%3A%20FormUtils)%20%7B%0A%20%20%20%20%2F%2F%20Address%20control%0A%20%20%20%20this.addressControl%20%3D%20new%20AddressControl(%7B%0A%20%20%20%20%20%20key%3A%20'address'%2C%0A%20%20%20%20%20%20name%3A%20'address'%2C%0A%20%20%20%20%20%20label%3A%20'Address'%2C%0A%20%20%20%20%20%20tooltip%3A%20'Address'%2C%0A%20%20%20%20%20%20config%3A%20%7B%0A%20%20%20%20%20%20%20%20address1%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20label%3A%20'Address%20Line%201'%2C%0A%20%20%20%20%20%20%20%20%20%20required%3A%20true%2C%0A%20%20%20%20%20%20%20%20%20%20maxlength%3A%2020%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20address2%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20label%3A%20'Address%20Line%202'%2C%0A%20%20%20%20%20%20%20%20%20%20required%3A%20true%2C%0A%20%20%20%20%20%20%20%20%20%20maxlength%3A%2015%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20state%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20label%3A%20'State'%2C%0A%20%20%20%20%20%20%20%20%20%20required%3A%20true%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20countryID%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20label%3A%20'Country'%2C%0A%20%20%20%20%20%20%20%20%20%20required%3A%20true%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20city%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20label%3A%20'City'%2C%0A%20%20%20%20%20%20%20%20%20%20required%3A%20true%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20zip%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20label%3A%20'Zipcode'%2C%0A%20%20%20%20%20%20%20%20%20%20required%3A%20true%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20value%3A%20%7B%0A%20%20%20%20%20%20%20%20address1%3A%20'321%20Summer%20Street'%2C%0A%20%20%20%20%20%20%20%20address2%3A%20'11%20Washington%20Street'%2C%0A%20%20%20%20%20%20%20%20city%3A%20'Chicago'%2C%0A%20%20%20%20%20%20%20%20state%3A%20'California'%2C%0A%20%20%20%20%20%20%20%20zip%3A%2095133%2C%0A%20%20%20%20%20%20%20%20countryID%3A%201%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.secondaryAddressControl%20%3D%20new%20AddressControl(%7B%0A%20%20%20%20%20%20key%3A%20'secondaryAddress'%2C%0A%20%20%20%20%20%20name%3A%20'secondaryAddress'%2C%0A%20%20%20%20%20%20label%3A%20'Secondary%20Address'%2C%0A%20%20%20%20%20%20tooltip%3A%20'Secondary%20Address'%2C%0A%20%20%20%20%20%20config%3A%20%7B%0A%20%20%20%20%20%20%20%20address1%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20label%3A%20'Address%20Line%201'%2C%0A%20%20%20%20%20%20%20%20%20%20maxlength%3A%2020%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20address2%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20label%3A%20'Address%20Line%202'%2C%0A%20%20%20%20%20%20%20%20%20%20maxlength%3A%2015%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20state%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20label%3A%20'State'%2C%0A%20%20%20%20%20%20%20%20%20%20pickerConfig%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20field%3A%20'value'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20format%3A%20'%24label'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20options%3A%20(query%2C%20countryID)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20return%20Promise.resolve(this.getStateOptions(query%2C%20countryID))%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20getLabels%3A%20(value%3A%20number)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20return%20Promise.resolve(this.getStateLabel(value))%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20countryID%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20label%3A%20'Country'%2C%0A%20%20%20%20%20%20%20%20%20%20pickerConfig%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20field%3A%20'value'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20format%3A%20'%24label'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20options%3A%20(query)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20return%20Promise.resolve(this.getCountryOptions(query))%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20getLabels%3A%20(value%3A%20number)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20return%20new%20Promise((resolve%3A%20any)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20let%20country%3A%20any%20%3D%20findByCountryId(value)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20if%20(country)%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20resolve(%7B%20value%3A%20country.id%2C%20label%3A%20country.name%20%7D)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20resolve('')%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20city%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20label%3A%20'City'%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20zip%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20label%3A%20'Zipcode'%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20value%3A%20%7B%0A%20%20%20%20%20%20%20%20address1%3A%20'123%20Summer%20Street'%2C%0A%20%20%20%20%20%20%20%20address2%3A%20'10%20Washington%20Street%20and%20stuff'%2C%0A%20%20%20%20%20%20%20%20countryID%3A%202359%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.addressFormControls%20%3D%20%5Bthis.addressControl%2C%20this.secondaryAddressControl%5D%3B%0A%20%20%20%20this.addressForm%20%3D%20formUtils.toFormGroup(this.addressFormControls)%3B%0A%20%20%7D%0A%0A%20%20getStateOptions(filter%3A%20string%20%3D%20''%2C%20countryID%3A%20number)%3A%20any%5B%5D%20%7B%0A%20%20%20%20let%20states%3A%20any%5B%5D%20%3D%20this.states%3B%0A%20%20%20%20if%20(countryID)%20%7B%0A%20%20%20%20%20%20states%20%3D%20states.filter((state%3A%20any)%20%3D%3E%20state.countryId%20%3D%3D%3D%20countryID)%3B%0A%20%20%20%20%7D%0A%20%20%20%20if%20(filter%20%26%26%20filter.length)%20%7B%0A%20%20%20%20%20%20states%20%3D%20states.filter((state)%20%3D%3E%20new%20RegExp(%60%24%7Bfilter%7D%60%2C%20'gi').test(state.label))%3B%0A%20%20%20%20%7D%0A%20%20%20%20return%20states%3B%0A%20%20%7D%0A%0A%20%20getStateLabel(value%3A%20number)%3A%20string%20%7B%0A%20%20%20%20let%20state%3A%20any%20%3D%20this.states.find((s%3A%20any)%20%3D%3E%20%7B%0A%20%20%20%20%20%20return%20s.value%20%3D%3D%3D%20value%3B%0A%20%20%20%20%7D)%3B%0A%20%20%20%20if%20(state%20%26%26%20state.label)%20%7B%0A%20%20%20%20%20%20return%20state.label%3B%0A%20%20%20%20%7D%0A%20%20%20%20return%20''%3B%0A%20%20%7D%0A%0A%20%20getCountryOptions(filter%3F%3A%20string)%3A%20any%5B%5D%20%7B%0A%20%20%20%20let%20countries%3A%20any%20%3D%20%5B%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20value%3A%202356%2C%0A%20%20%20%20%20%20%20%20label%3A%20'Uganda'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20value%3A%202357%2C%0A%20%20%20%20%20%20%20%20label%3A%20'Ukraine'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20value%3A%202358%2C%0A%20%20%20%20%20%20%20%20label%3A%20'United%20Arab%20Emirates'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20value%3A%202359%2C%0A%20%20%20%20%20%20%20%20label%3A%20'United%20Kingdom'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20value%3A%201%2C%0A%20%20%20%20%20%20%20%20label%3A%20'United%20States'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20value%3A%202443%2C%0A%20%20%20%20%20%20%20%20label%3A%20'United%20States%20Minor%20Outlying%20Islands'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20value%3A%202360%2C%0A%20%20%20%20%20%20%20%20label%3A%20'Uruguay'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20value%3A%202361%2C%0A%20%20%20%20%20%20%20%20label%3A%20'Uzbekistan'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%5D%3B%0A%20%20%20%20if%20(filter%20%26%26%20filter.length)%20%7B%0A%20%20%20%20%20%20countries%20%3D%20countries.filter((country)%20%3D%3E%20new%20RegExp(%60%24%7Bfilter%7D%60%2C%20'gi').test(country.label))%3B%0A%20%20%20%20%7D%0A%20%20%20%20return%20countries%3B%0A%20%20%7D%0A%7D%0A`,
+        tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0A%0A%2F%2F%20Vendor%0Aimport%20%7B%20FormUtils%2C%20AddressControl%2C%20findByCountryId%20%7D%20from%20'novo-elements'%3B%0A%0A%2F**%0A%20*%20%40title%20Address%20Control%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'address-control-example'%2C%0A%20%20templateUrl%3A%20'address-control-example.html'%2C%0A%20%20styleUrls%3A%20%5B'address-control-example.css'%5D%2C%0A%7D)%0Aexport%20class%20AddressControlExample%20%7B%0A%20%20public%20addressControl%3A%20any%3B%0A%20%20public%20secondaryAddressControl%3A%20any%3B%0A%20%20public%20addressForm%3A%20any%3B%0A%20%20public%20addressFormControls%3A%20any%3B%0A%20%20public%20states%3A%20any%5B%5D%20%3D%20%5B%0A%20%20%20%20%7B%0A%20%20%20%20%20%20value%3A%20'MA'%2C%0A%20%20%20%20%20%20label%3A%20'Massachusetts'%2C%0A%20%20%20%20%20%20countryId%3A%201%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20value%3A%20'NY'%2C%0A%20%20%20%20%20%20label%3A%20'New%20York'%2C%0A%20%20%20%20%20%20countryId%3A%201%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20value%3A%20'AB'%2C%0A%20%20%20%20%20%20label%3A%20'Alberta'%2C%0A%20%20%20%20%20%20countryId%3A%202216%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20value%3A%20'BC'%2C%0A%20%20%20%20%20%20label%3A%20'British%20Columbia'%2C%0A%20%20%20%20%20%20countryId%3A%202216%2C%0A%20%20%20%20%7D%2C%0A%20%20%20%20%7B%0A%20%20%20%20%20%20value%3A%20'MB'%2C%0A%20%20%20%20%20%20label%3A%20'Manitoba'%2C%0A%20%20%20%20%20%20countryId%3A%202216%2C%0A%20%20%20%20%7D%2C%0A%20%20%5D%3B%0A%0A%20%20constructor(private%20formUtils%3A%20FormUtils)%20%7B%0A%20%20%20%20%2F%2F%20Address%20control%0A%20%20%20%20this.addressControl%20%3D%20new%20AddressControl(%7B%0A%20%20%20%20%20%20key%3A%20'address'%2C%0A%20%20%20%20%20%20name%3A%20'address'%2C%0A%20%20%20%20%20%20label%3A%20'Address'%2C%0A%20%20%20%20%20%20tooltip%3A%20'Address'%2C%0A%20%20%20%20%20%20config%3A%20%7B%0A%20%20%20%20%20%20%20%20address1%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20label%3A%20'Address%20Line%201'%2C%0A%20%20%20%20%20%20%20%20%20%20required%3A%20true%2C%0A%20%20%20%20%20%20%20%20%20%20maxlength%3A%2020%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20address2%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20label%3A%20'Address%20Line%202'%2C%0A%20%20%20%20%20%20%20%20%20%20required%3A%20true%2C%0A%20%20%20%20%20%20%20%20%20%20maxlength%3A%2015%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20state%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20label%3A%20'State'%2C%0A%20%20%20%20%20%20%20%20%20%20required%3A%20true%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20countryID%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20label%3A%20'Country'%2C%0A%20%20%20%20%20%20%20%20%20%20required%3A%20true%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20city%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20label%3A%20'City'%2C%0A%20%20%20%20%20%20%20%20%20%20required%3A%20true%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20zip%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20label%3A%20'Zipcode'%2C%0A%20%20%20%20%20%20%20%20%20%20required%3A%20true%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20value%3A%20%7B%0A%20%20%20%20%20%20%20%20address1%3A%20'321%20Summer%20Street'%2C%0A%20%20%20%20%20%20%20%20address2%3A%20'11%20Washington%20Street'%2C%0A%20%20%20%20%20%20%20%20city%3A%20'Chicago'%2C%0A%20%20%20%20%20%20%20%20state%3A%20'California'%2C%0A%20%20%20%20%20%20%20%20zip%3A%2095133%2C%0A%20%20%20%20%20%20%20%20countryID%3A%201%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.secondaryAddressControl%20%3D%20new%20AddressControl(%7B%0A%20%20%20%20%20%20key%3A%20'secondaryAddress'%2C%0A%20%20%20%20%20%20name%3A%20'secondaryAddress'%2C%0A%20%20%20%20%20%20label%3A%20'Secondary%20Address'%2C%0A%20%20%20%20%20%20tooltip%3A%20'Secondary%20Address'%2C%0A%20%20%20%20%20%20config%3A%20%7B%0A%20%20%20%20%20%20%20%20address1%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20label%3A%20'Address%20Line%201'%2C%0A%20%20%20%20%20%20%20%20%20%20maxlength%3A%2020%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20address2%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20label%3A%20'Address%20Line%202'%2C%0A%20%20%20%20%20%20%20%20%20%20maxlength%3A%2015%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20state%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20label%3A%20'State'%2C%0A%20%20%20%20%20%20%20%20%20%20pickerConfig%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20field%3A%20'value'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20format%3A%20'%24label'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20options%3A%20(query%2C%20countryID)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20return%20Promise.resolve(this.getStateOptions(query%2C%20countryID))%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20getLabels%3A%20(value%3A%20number)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20return%20Promise.resolve(this.getStateLabel(value))%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20countryID%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20label%3A%20'Country'%2C%0A%20%20%20%20%20%20%20%20%20%20pickerConfig%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20field%3A%20'value'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20format%3A%20'%24label'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20options%3A%20(query)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20return%20Promise.resolve(this.getCountryOptions(query))%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20getLabels%3A%20(value%3A%20number)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20return%20new%20Promise((resolve%3A%20any)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20const%20country%3A%20any%20%3D%20findByCountryId(value)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20if%20(country)%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20resolve(%7B%20value%3A%20country.id%2C%20label%3A%20country.name%20%7D)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20resolve('')%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20city%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20label%3A%20'City'%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20zip%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20label%3A%20'Zipcode'%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20value%3A%20%7B%0A%20%20%20%20%20%20%20%20address1%3A%20'123%20Summer%20Street'%2C%0A%20%20%20%20%20%20%20%20address2%3A%20'10%20Washington%20Street%20and%20stuff'%2C%0A%20%20%20%20%20%20%20%20countryID%3A%202359%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.addressFormControls%20%3D%20%5Bthis.addressControl%2C%20this.secondaryAddressControl%5D%3B%0A%20%20%20%20this.addressForm%20%3D%20formUtils.toFormGroup(this.addressFormControls)%3B%0A%20%20%7D%0A%0A%20%20getStateOptions(filter%3A%20string%20%3D%20''%2C%20countryID%3A%20number)%3A%20any%5B%5D%20%7B%0A%20%20%20%20let%20states%3A%20any%5B%5D%20%3D%20this.states%3B%0A%20%20%20%20if%20(countryID)%20%7B%0A%20%20%20%20%20%20states%20%3D%20states.filter((state%3A%20any)%20%3D%3E%20state.countryId%20%3D%3D%3D%20countryID)%3B%0A%20%20%20%20%7D%0A%20%20%20%20if%20(filter%20%26%26%20filter.length)%20%7B%0A%20%20%20%20%20%20states%20%3D%20states.filter((state)%20%3D%3E%20new%20RegExp(%60%24%7Bfilter%7D%60%2C%20'gi').test(state.label))%3B%0A%20%20%20%20%7D%0A%20%20%20%20return%20states%3B%0A%20%20%7D%0A%0A%20%20getStateLabel(value%3A%20number)%3A%20string%20%7B%0A%20%20%20%20const%20state%3A%20any%20%3D%20this.states.find((s%3A%20any)%20%3D%3E%20%7B%0A%20%20%20%20%20%20return%20s.value%20%3D%3D%3D%20value%3B%0A%20%20%20%20%7D)%3B%0A%20%20%20%20if%20(state%20%26%26%20state.label)%20%7B%0A%20%20%20%20%20%20return%20state.label%3B%0A%20%20%20%20%7D%0A%20%20%20%20return%20''%3B%0A%20%20%7D%0A%0A%20%20getCountryOptions(filter%3F%3A%20string)%3A%20any%5B%5D%20%7B%0A%20%20%20%20let%20countries%3A%20any%20%3D%20%5B%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20value%3A%202356%2C%0A%20%20%20%20%20%20%20%20label%3A%20'Uganda'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20value%3A%202357%2C%0A%20%20%20%20%20%20%20%20label%3A%20'Ukraine'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20value%3A%202358%2C%0A%20%20%20%20%20%20%20%20label%3A%20'United%20Arab%20Emirates'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20value%3A%202359%2C%0A%20%20%20%20%20%20%20%20label%3A%20'United%20Kingdom'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20value%3A%201%2C%0A%20%20%20%20%20%20%20%20label%3A%20'United%20States'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20value%3A%202443%2C%0A%20%20%20%20%20%20%20%20label%3A%20'United%20States%20Minor%20Outlying%20Islands'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20value%3A%202360%2C%0A%20%20%20%20%20%20%20%20label%3A%20'Uruguay'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20value%3A%202361%2C%0A%20%20%20%20%20%20%20%20label%3A%20'Uzbekistan'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%5D%3B%0A%20%20%20%20if%20(filter%20%26%26%20filter.length)%20%7B%0A%20%20%20%20%20%20countries%20%3D%20countries.filter((country)%20%3D%3E%20new%20RegExp(%60%24%7Bfilter%7D%60%2C%20'gi').test(country.label))%3B%0A%20%20%20%20%7D%0A%20%20%20%20return%20countries%3B%0A%20%20%7D%0A%7D%0A`,
         cssSource: `%2F**%20No%20CSS%20for%20this%20example%20*%2F%0A`,
         htmlSource: `%3Cnovo-form%20%5Bform%5D%3D%22addressForm%22%3E%0A%20%20%3Cdiv%20class%3D%22novo-form-row%22%3E%0A%20%20%20%20%3Cnovo-control%20%5Bform%5D%3D%22addressForm%22%20%5Bcontrol%5D%3D%22addressControl%22%3E%3C%2Fnovo-control%3E%0A%20%20%3C%2Fdiv%3E%0A%20%20%3Cdiv%20class%3D%22novo-form-row%22%3E%0A%20%20%20%20%3Cnovo-control%20%5Bform%5D%3D%22addressForm%22%20%5Bcontrol%5D%3D%22secondaryAddressControl%22%3E%3C%2Fnovo-control%3E%0A%20%20%3C%2Fdiv%3E%0A%3C%2Fnovo-form%3E%0A%0A%3Cdiv%20class%3D%22final-value%22%3EValue%3A%20%7B%7BaddressForm.value%20%7C%20json%7D%7D%3C%2Fdiv%3E%0A`
     },
@@ -71802,7 +71802,7 @@ const EXAMPLE_COMPONENTS = {
     'disabled-form': {
         title: 'Disabled Form Example',
         component: DisabledFormExample,
-        tsSource: `import%20%7B%20Component%2C%20Input%20%7D%20from%20'%40angular%2Fcore'%3B%0A%0A%2F%2F%20Vendor%0Aimport%20%7B%20FormUtils%2C%20TextBoxControl%2C%20CheckboxControl%2C%20FileControl%2C%20PickerControl%20%7D%20from%20'novo-elements'%3B%0Aimport%20%7B%20MockMetaForDisabledForm%20%7D%20from%20'..%2FMockMeta'%3B%0A%0A%2F**%0A%20*%20%40title%20Disabled%20Form%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'disabled-form-example'%2C%0A%20%20templateUrl%3A%20'disabled-form-example.html'%2C%0A%20%20styleUrls%3A%20%5B'disabled-form-example.css'%5D%2C%0A%7D)%0Aexport%20class%20DisabledFormExample%20%7B%0A%20%20public%20disabledControls%3A%20any%3B%0A%20%20public%20disabledQuickNote%3A%20any%3B%0A%20%20public%20disabledForm%3A%20any%3B%0A%20%20public%20disabledNote%3A%20any%3B%0A%20%20public%20required%3A%20boolean%20%3D%20false%3B%0A%20%20public%20disabled%3A%20boolean%20%3D%20true%3B%0A%20%20public%20placeholder%3A%20string%20%3D%20'Placeholder'%3B%0A%20%20public%20note%3A%20string%20%3D%20''%3B%0A%0A%20%20constructor(private%20formUtils%3A%20FormUtils)%20%7B%0A%20%20%20%20%2F%2F%20Disabled%20Form%0A%20%20%20%20let%20disabledOverrides%3A%20any%20%3D%20%7B%0A%20%20%20%20%20%20address%3A%20%7B%0A%20%20%20%20%20%20%20%20readOnly%3A%20true%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20textbox%3A%20%7B%0A%20%20%20%20%20%20%20%20readOnly%3A%20true%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20textarea%3A%20%7B%0A%20%20%20%20%20%20%20%20readOnly%3A%20true%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20date%3A%20%7B%0A%20%20%20%20%20%20%20%20readOnly%3A%20true%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20time%3A%20%7B%0A%20%20%20%20%20%20%20%20readOnly%3A%20true%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20datetime%3A%20%7B%0A%20%20%20%20%20%20%20%20readOnly%3A%20true%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20select%3A%20%7B%0A%20%20%20%20%20%20%20%20readOnly%3A%20true%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20tiles%3A%20%7B%0A%20%20%20%20%20%20%20%20readOnly%3A%20true%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20picker%3A%20%7B%0A%20%20%20%20%20%20%20%20readOnly%3A%20true%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20chips%3A%20%7B%0A%20%20%20%20%20%20%20%20readOnly%3A%20true%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20checkbox%3A%20%7B%0A%20%20%20%20%20%20%20%20readOnly%3A%20true%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20checklist%3A%20%7B%0A%20%20%20%20%20%20%20%20readOnly%3A%20true%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20file%3A%20%7B%0A%20%20%20%20%20%20%20%20readOnly%3A%20true%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20type%3A%20%7B%0A%20%20%20%20%20%20%20%20readOnly%3A%20true%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20radio%3A%20%7B%0A%20%20%20%20%20%20%20%20readOnly%3A%20true%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20htmlFieldFullEditor%3A%20%7B%0A%20%20%20%20%20%20%20%20readOnly%3A%20true%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20rowChips%3A%20%7B%0A%20%20%20%20%20%20%20%20readOnly%3A%20true%2C%0A%20%20%20%20%20%20%20%20label%3A%20'Row%20Chips'%2C%0A%20%20%20%20%20%20%20%20columns%3A%20%5B%0A%20%20%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20label%3A%20'Value'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20data%3A%20(item%3A%20any)%3A%20string%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20return%20item.value%5B'value'%5D%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20label%3A%20'Description'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20data%3A%20(item%3A%20any)%3A%20string%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20return%20item.value%5B'description'%5D%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%5D%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20%2F%2F%20Updating%20form%0A%20%20%20%20this.disabledControls%20%3D%20formUtils.toFieldSets(%0A%20%20%20%20%20%20MockMetaForDisabledForm%2C%0A%20%20%20%20%20%20'%24%20USD'%2C%0A%20%20%20%20%20%20%7B%7D%2C%0A%20%20%20%20%20%20%7B%20token%3A%20'TOKEN'%2C%20military%3A%20true%20%7D%2C%0A%20%20%20%20%20%20disabledOverrides%2C%0A%20%20%20%20)%3B%0A%20%20%20%20formUtils.setInitialValuesFieldsets(this.disabledControls%2C%20%7B%0A%20%20%20%20%20%20textbox%3A%20'Disabled%20TextBox'%2C%0A%20%20%20%20%20%20textarea%3A%0A%20%20%20%20%20%20%20%20'Disabled%20TextArea%20Disabled%20TextArea%20Disabled%20TextArea%20Disabled%20TextArea%20Disabled%20TextArea%20Disabled%20TextArea%20Disabled%20TextArea%20'%2C%0A%20%20%20%20%20%20select%3A%20'disabledValue'%2C%0A%20%20%20%20%20%20checklist%3A%20'Disabled'%2C%0A%20%20%20%20%20%20tiles%3A%20'Disabled'%2C%0A%20%20%20%20%20%20radio%3A%20'Yes'%2C%0A%20%20%20%20%20%20chips%3A%20%5B'Disabled'%2C%20'Chip'%5D%2C%0A%20%20%20%20%20%20address%3A%20%7B%0A%20%20%20%20%20%20%20%20address1%3A%20'100%20Summer%20St'%2C%0A%20%20%20%20%20%20%20%20address2%3A%20'apt%2025'%2C%0A%20%20%20%20%20%20%20%20countryID%3A%201%2C%0A%20%20%20%20%20%20%20%20state%3A%20'Georgia'%2C%0A%20%20%20%20%20%20%20%20city%3A%20'Atlanta'%2C%0A%20%20%20%20%20%20%20%20zip%3A%20'30312'%2C%0A%20%20%20%20%20%20%20%20countryName%3A%20'United%20States'%2C%0A%20%20%20%20%20%20%20%20countryCode%3A%20'US'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20file%3A%20%5B%7B%20name%3A%20'yourFile.pdf'%2C%20loaded%3A%20true%2C%20link%3A%20'www.google.com'%2C%20description%3A%20'file%20description'%20%7D%5D%2C%0A%20%20%20%20%20%20htmlFieldFullEditor%3A%20%60%3Ch1%3EDisabled%20Editor%3C%2Fh1%3E%3Cbr%3E%3Cui%3E%3Cli%3EDisabled%3C%2Fli%3E%3Cli%3EEditor%3C%2Fli%3E%3C%2Fui%3E%60%2C%0A%20%20%20%20%20%20picker%3A%20'Disabled%20Picker'%2C%0A%20%20%20%20%20%20rowChips%3A%20%5B%7B%20id%3A%201%2C%20value%3A%20'Disabled%20Row%20Chip'%2C%20description%3A%20'This%20is%20a%20disabled%20Row%20Chip'%20%7D%5D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.disabledForm%20%3D%20formUtils.toFormGroupFromFieldset(this.disabledControls)%3B%0A%20%20%20%20this.disabledNote%20%3D%20'Disabled%20QuickNote'%3B%0A%20%20%20%20this.disabledQuickNote%20%3D%20%7B%0A%20%20%20%20%20%20triggers%3A%20%7B%0A%20%20%20%20%20%20%20%20tags%3A%20'%40'%2C%0A%20%20%20%20%20%20%20%20references%3A%20'%23'%2C%0A%20%20%20%20%20%20%20%20boos%3A%20'%5E'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20options%3A%20%7B%0A%20%20%20%20%20%20%20%20tags%3A%20%5B'First'%2C%20'Second'%2C%20'Space%20Between'%5D%2C%0A%20%20%20%20%20%20%20%20references%3A%20%5B'Third'%2C%20'Fourth'%5D%2C%0A%20%20%20%20%20%20%20%20boos%3A%20%5B'Test'%5D%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20readOnly%3A%20true%2C%0A%20%20%20%20%20%20renderer%3A%20%7B%0A%20%20%20%20%20%20%20%20tags%3A%20(symbol%2C%20item)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20return%20%60%3Ca%20href%3D%22https%3A%2F%2Fwww.google.com%2Fsearch%3Fq%3Dbullhorn%26oq%3Dbullhorn%22%3E%24%7Bsymbol%7D%24%7Bitem.label%7D%3C%2Fa%3E%60%3B%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20references%3A%20(symbol%2C%20item)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20return%20%60%3Ca%20href%3D%22https%3A%2F%2Fwww.google.com%2Fsearch%3Fq%3Dbullhorn%26oq%3Dbullhorn%22%3E%24%7Bsymbol%7D%24%7Bitem.label%7D%3C%2Fa%3E%60%3B%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20boos%3A%20(symbol%2C%20item)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20return%20%60%3Cstrong%3E%24%7Bsymbol%7D%24%7Bitem.label%7D%3C%2Fstrong%3E%60%3B%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%7D%3B%0A%20%20%7D%0A%7D%0A`,
+        tsSource: `import%20%7B%20Component%2C%20Input%20%7D%20from%20'%40angular%2Fcore'%3B%0A%0A%2F%2F%20Vendor%0Aimport%20%7B%20FormUtils%2C%20TextBoxControl%2C%20CheckboxControl%2C%20FileControl%2C%20PickerControl%20%7D%20from%20'novo-elements'%3B%0Aimport%20%7B%20MockMetaForDisabledForm%20%7D%20from%20'..%2FMockMeta'%3B%0A%0A%2F**%0A%20*%20%40title%20Disabled%20Form%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'disabled-form-example'%2C%0A%20%20templateUrl%3A%20'disabled-form-example.html'%2C%0A%20%20styleUrls%3A%20%5B'disabled-form-example.css'%5D%2C%0A%7D)%0Aexport%20class%20DisabledFormExample%20%7B%0A%20%20public%20disabledControls%3A%20any%3B%0A%20%20public%20disabledQuickNote%3A%20any%3B%0A%20%20public%20disabledForm%3A%20any%3B%0A%20%20public%20disabledNote%3A%20any%3B%0A%20%20public%20required%3A%20boolean%20%3D%20false%3B%0A%20%20public%20disabled%3A%20boolean%20%3D%20true%3B%0A%20%20public%20placeholder%3A%20string%20%3D%20'Placeholder'%3B%0A%20%20public%20note%3A%20string%20%3D%20''%3B%0A%0A%20%20constructor(private%20formUtils%3A%20FormUtils)%20%7B%0A%20%20%20%20%2F%2F%20Disabled%20Form%0A%20%20%20%20const%20disabledOverrides%3A%20any%20%3D%20%7B%0A%20%20%20%20%20%20address%3A%20%7B%0A%20%20%20%20%20%20%20%20readOnly%3A%20true%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20textbox%3A%20%7B%0A%20%20%20%20%20%20%20%20readOnly%3A%20true%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20textarea%3A%20%7B%0A%20%20%20%20%20%20%20%20readOnly%3A%20true%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20date%3A%20%7B%0A%20%20%20%20%20%20%20%20readOnly%3A%20true%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20time%3A%20%7B%0A%20%20%20%20%20%20%20%20readOnly%3A%20true%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20datetime%3A%20%7B%0A%20%20%20%20%20%20%20%20readOnly%3A%20true%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20select%3A%20%7B%0A%20%20%20%20%20%20%20%20readOnly%3A%20true%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20tiles%3A%20%7B%0A%20%20%20%20%20%20%20%20readOnly%3A%20true%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20picker%3A%20%7B%0A%20%20%20%20%20%20%20%20readOnly%3A%20true%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20chips%3A%20%7B%0A%20%20%20%20%20%20%20%20readOnly%3A%20true%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20checkbox%3A%20%7B%0A%20%20%20%20%20%20%20%20readOnly%3A%20true%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20checklist%3A%20%7B%0A%20%20%20%20%20%20%20%20readOnly%3A%20true%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20file%3A%20%7B%0A%20%20%20%20%20%20%20%20readOnly%3A%20true%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20type%3A%20%7B%0A%20%20%20%20%20%20%20%20readOnly%3A%20true%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20radio%3A%20%7B%0A%20%20%20%20%20%20%20%20readOnly%3A%20true%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20htmlFieldFullEditor%3A%20%7B%0A%20%20%20%20%20%20%20%20readOnly%3A%20true%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20rowChips%3A%20%7B%0A%20%20%20%20%20%20%20%20readOnly%3A%20true%2C%0A%20%20%20%20%20%20%20%20label%3A%20'Row%20Chips'%2C%0A%20%20%20%20%20%20%20%20columns%3A%20%5B%0A%20%20%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20label%3A%20'Value'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20data%3A%20(item%3A%20any)%3A%20string%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20return%20item.value%5B'value'%5D%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20label%3A%20'Description'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20data%3A%20(item%3A%20any)%3A%20string%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20return%20item.value%5B'description'%5D%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%5D%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20%2F%2F%20Updating%20form%0A%20%20%20%20this.disabledControls%20%3D%20formUtils.toFieldSets(%0A%20%20%20%20%20%20MockMetaForDisabledForm%2C%0A%20%20%20%20%20%20'%24%20USD'%2C%0A%20%20%20%20%20%20%7B%7D%2C%0A%20%20%20%20%20%20%7B%20token%3A%20'TOKEN'%2C%20military%3A%20true%20%7D%2C%0A%20%20%20%20%20%20disabledOverrides%2C%0A%20%20%20%20)%3B%0A%20%20%20%20formUtils.setInitialValuesFieldsets(this.disabledControls%2C%20%7B%0A%20%20%20%20%20%20textbox%3A%20'Disabled%20TextBox'%2C%0A%20%20%20%20%20%20textarea%3A%0A%20%20%20%20%20%20%20%20'Disabled%20TextArea%20Disabled%20TextArea%20Disabled%20TextArea%20Disabled%20TextArea%20Disabled%20TextArea%20Disabled%20TextArea%20Disabled%20TextArea%20'%2C%0A%20%20%20%20%20%20select%3A%20'disabledValue'%2C%0A%20%20%20%20%20%20checklist%3A%20'Disabled'%2C%0A%20%20%20%20%20%20tiles%3A%20'Disabled'%2C%0A%20%20%20%20%20%20radio%3A%20'Yes'%2C%0A%20%20%20%20%20%20chips%3A%20%5B'Disabled'%2C%20'Chip'%5D%2C%0A%20%20%20%20%20%20address%3A%20%7B%0A%20%20%20%20%20%20%20%20address1%3A%20'100%20Summer%20St'%2C%0A%20%20%20%20%20%20%20%20address2%3A%20'apt%2025'%2C%0A%20%20%20%20%20%20%20%20countryID%3A%201%2C%0A%20%20%20%20%20%20%20%20state%3A%20'Georgia'%2C%0A%20%20%20%20%20%20%20%20city%3A%20'Atlanta'%2C%0A%20%20%20%20%20%20%20%20zip%3A%20'30312'%2C%0A%20%20%20%20%20%20%20%20countryName%3A%20'United%20States'%2C%0A%20%20%20%20%20%20%20%20countryCode%3A%20'US'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20file%3A%20%5B%7B%20name%3A%20'yourFile.pdf'%2C%20loaded%3A%20true%2C%20link%3A%20'www.google.com'%2C%20description%3A%20'file%20description'%20%7D%5D%2C%0A%20%20%20%20%20%20htmlFieldFullEditor%3A%20%60%3Ch1%3EDisabled%20Editor%3C%2Fh1%3E%3Cbr%3E%3Cui%3E%3Cli%3EDisabled%3C%2Fli%3E%3Cli%3EEditor%3C%2Fli%3E%3C%2Fui%3E%60%2C%0A%20%20%20%20%20%20picker%3A%20'Disabled%20Picker'%2C%0A%20%20%20%20%20%20rowChips%3A%20%5B%7B%20id%3A%201%2C%20value%3A%20'Disabled%20Row%20Chip'%2C%20description%3A%20'This%20is%20a%20disabled%20Row%20Chip'%20%7D%5D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.disabledForm%20%3D%20formUtils.toFormGroupFromFieldset(this.disabledControls)%3B%0A%20%20%20%20this.disabledNote%20%3D%20'Disabled%20QuickNote'%3B%0A%20%20%20%20this.disabledQuickNote%20%3D%20%7B%0A%20%20%20%20%20%20triggers%3A%20%7B%0A%20%20%20%20%20%20%20%20tags%3A%20'%40'%2C%0A%20%20%20%20%20%20%20%20references%3A%20'%23'%2C%0A%20%20%20%20%20%20%20%20boos%3A%20'%5E'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20options%3A%20%7B%0A%20%20%20%20%20%20%20%20tags%3A%20%5B'First'%2C%20'Second'%2C%20'Space%20Between'%5D%2C%0A%20%20%20%20%20%20%20%20references%3A%20%5B'Third'%2C%20'Fourth'%5D%2C%0A%20%20%20%20%20%20%20%20boos%3A%20%5B'Test'%5D%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20readOnly%3A%20true%2C%0A%20%20%20%20%20%20renderer%3A%20%7B%0A%20%20%20%20%20%20%20%20tags%3A%20(symbol%2C%20item)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20return%20%60%3Ca%20href%3D%22https%3A%2F%2Fwww.google.com%2Fsearch%3Fq%3Dbullhorn%26oq%3Dbullhorn%22%3E%24%7Bsymbol%7D%24%7Bitem.label%7D%3C%2Fa%3E%60%3B%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20references%3A%20(symbol%2C%20item)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20return%20%60%3Ca%20href%3D%22https%3A%2F%2Fwww.google.com%2Fsearch%3Fq%3Dbullhorn%26oq%3Dbullhorn%22%3E%24%7Bsymbol%7D%24%7Bitem.label%7D%3C%2Fa%3E%60%3B%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20boos%3A%20(symbol%2C%20item)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20return%20%60%3Cstrong%3E%24%7Bsymbol%7D%24%7Bitem.label%7D%3C%2Fstrong%3E%60%3B%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%7D%3B%0A%20%20%7D%0A%7D%0A`,
         cssSource: `%2F**%20No%20CSS%20for%20this%20example%20*%2F%0A`,
         htmlSource: `%3Cnovo-dynamic-form%20%5BautoFocusFirstField%5D%3D%22true%22%20class%3D%22dynamic%22%20%5Bfieldsets%5D%3D%22disabledControls%22%20%5B(form)%5D%3D%22disabledForm%22%20%23myform%3E%3C%2Fnovo-dynamic-form%3E%0A%3Cdiv%20class%3D%22final-value%22%3EValues%3A%20%7B%7Bmyform.values%20%7C%20json%7D%7D%3C%2Fdiv%3E%0A%3Cbr%3E%0A%3Ch5%3EQUICK%20NOTE%3C%2Fh5%3E%0A%3Cbr%3E%0A%3Cnovo-quick-note%20%5B(ngModel)%5D%3D%22disabledNote%22%20%5Bplaceholder%5D%3D%22placeholder%22%20%5Bconfig%5D%3D%22disabledQuickNote%22%3E%3C%2Fnovo-quick-note%3E%0A%3Cdiv%20class%3D%22data%22%3E%0A%20%20%3Cp%3ENote%3A%20%7B%7Bnote%20%7C%20json%7D%7D%3C%2Fp%3E%0A%3C%2Fdiv%3E%0A%0A`
     },
@@ -71830,14 +71830,14 @@ const EXAMPLE_COMPONENTS = {
     'file-input-controls': {
         title: 'File Input Controls Example',
         component: FileInputControlsExample,
-        tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0A%0A%2F%2F%20Vendor%0Aimport%20%7B%20FormUtils%2C%20FileControl%2C%20NovoFormGroup%20%7D%20from%20'novo-elements'%3B%0A%0A%2F**%0A%20*%20%40title%20File%20Input%20Controls%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'file-input-controls-example'%2C%0A%20%20templateUrl%3A%20'file-input-controls-example.html'%2C%0A%20%20styleUrls%3A%20%5B'file-input-controls-example.css'%5D%2C%0A%7D)%0Aexport%20class%20FileInputControlsExample%20%7B%0A%20%20public%20fileControl%3A%20any%3B%0A%20%20public%20multiFileControl%3A%20any%3B%0A%20%20public%20multiFileControlMixRemove%3A%20FileControl%3B%0A%20%20public%20fileForm%3A%20any%3B%0A%0A%20%20%2F%2F%20custom%20upload%20validation%0A%20%20public%20message%3A%20string%20%3D%20''%3B%0A%20%20public%20customValidationFileControl%3A%20FileControl%3B%0A%20%20public%20customValidationFileForm%3A%20NovoFormGroup%3B%0A%0A%20%20constructor(private%20formUtils%3A%20FormUtils)%20%7B%0A%20%20%20%20%2F%2F%20File%20input%20controls%0A%20%20%20%20this.fileControl%20%3D%20new%20FileControl(%7B%20key%3A%20'file'%2C%20name%3A%20'myfile'%2C%20label%3A%20'File'%2C%20tooltip%3A%20'Files%20Control'%20%7D)%3B%0A%20%20%20%20this.multiFileControl%20%3D%20new%20FileControl(%7B%0A%20%20%20%20%20%20key%3A%20'files'%2C%0A%20%20%20%20%20%20name%3A%20'myfiles'%2C%0A%20%20%20%20%20%20label%3A%20'Multiple%20Files'%2C%0A%20%20%20%20%20%20tooltip%3A%20'Multiple%20Files'%2C%0A%20%20%20%20%20%20multiple%3A%20true%2C%0A%20%20%20%20%20%20layoutOptions%3A%20%7B%20order%3A%20'displayFilesBelow'%2C%20download%3A%20true%2C%20edit%3A%20true%2C%20customActions%3A%20true%2C%20labelStyle%3A%20'no-box'%20%7D%2C%0A%20%20%20%20%20%20value%3A%20%5B%7B%20name%3A%20'yourFile.pdf'%2C%20loaded%3A%20true%2C%20link%3A%20'www.google.com'%2C%20description%3A%20'file%20description'%20%7D%5D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.fileForm%20%3D%20formUtils.toFormGroup(%5Bthis.fileControl%2C%20this.multiFileControl%5D)%3B%0A%0A%20%20%20%20this.customValidationFileControl%20%3D%20new%20FileControl(%7B%0A%20%20%20%20%20%20key%3A%20'customValidationFiles'%2C%0A%20%20%20%20%20%20name%3A%20'customValidationFiles'%2C%0A%20%20%20%20%20%20label%3A%20'Custom%20Validation'%2C%0A%20%20%20%20%20%20tooltip%3A%20'Custom%20Validation%20Multiple%20Files'%2C%0A%20%20%20%20%20%20multiple%3A%20true%2C%0A%20%20%20%20%20%20layoutOptions%3A%20%7B%0A%20%20%20%20%20%20%20%20order%3A%20'displayFilesBelow'%2C%0A%20%20%20%20%20%20%20%20download%3A%20true%2C%0A%20%20%20%20%20%20%20%20edit%3A%20true%2C%0A%20%20%20%20%20%20%20%20customActions%3A%20false%2C%0A%20%20%20%20%20%20%20%20customValidation%3A%20%5B%7B%20action%3A%20'upload'%2C%20fn%3A%20this.checkFileSize.bind(this)%20%7D%5D%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.customValidationFileForm%20%3D%20formUtils.toFormGroup(%5Bthis.customValidationFileControl%5D)%3B%0A%20%20%20%20this.multiFileControlMixRemove%20%3D%20new%20FileControl(%7B%0A%20%20%20%20%20%20key%3A%20'mixDeleteFiles'%2C%0A%20%20%20%20%20%20name%3A%20'mymixDeleteFiles'%2C%0A%20%20%20%20%20%20label%3A%20'Multiple%20Files%20-%20Delete%20New%20Only'%2C%0A%20%20%20%20%20%20tooltip%3A%20'Multiple%20Files%20-%20Delete%20New%20Only'%2C%0A%20%20%20%20%20%20multiple%3A%20true%2C%0A%20%20%20%20%20%20layoutOptions%3A%20%7B%0A%20%20%20%20%20%20%20%20order%3A%20'displayFilesBelow'%2C%0A%20%20%20%20%20%20%20%20labelStyle%3A%20'no-box'%2C%0A%20%20%20%20%20%20%20%20download%3A%20true%2C%0A%20%20%20%20%20%20%20%20edit%3A%20false%2C%0A%20%20%20%20%20%20%20%20removable%3A%20false%2C%0A%20%20%20%20%20%20%20%20removableWhenNew%3A%20true%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20value%3A%20%5B%7B%20name%3A%20'yourFile.pdf'%2C%20loaded%3A%20true%2C%20link%3A%20'www.google.com'%2C%20description%3A%20'file%20description'%20%7D%5D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.fileForm%20%3D%20formUtils.toFormGroup(%5Bthis.fileControl%2C%20this.multiFileControl%2C%20this.multiFileControlMixRemove%5D)%3B%0A%20%20%7D%0A%0A%20%20public%20handleEdit(file)%20%7B%0A%20%20%20%20console.log('This%20is%20an%20Edit%20Action!'%2C%20file)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%0A%20%20public%20handleSave(file)%20%7B%0A%20%20%20%20console.log('This%20is%20a%20Save%20Action!'%2C%20file)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%0A%20%20public%20handleDelete(file)%20%7B%0A%20%20%20%20console.log('This%20is%20a%20Delete%20Action!'%2C%20file)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%0A%20%20public%20handleUpload(files)%20%7B%0A%20%20%20%20console.log('This%20is%20an%20upload%20Action!'%2C%20files)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%0A%20%20public%20checkFileSize(fileList)%3A%20boolean%20%7B%0A%20%20%20%20const%20maxSizeKb%3A%20number%20%3D%205120%3B%20%2F%2F%20(5%20MB%20in%20KB)%0A%20%20%20%20for%20(let%20file%20of%20fileList)%20%7B%0A%20%20%20%20%20%20if%20(file.size%20%3E%20maxSizeKb%20*%201024)%20%7B%0A%20%20%20%20%20%20%20%20this.message%20%3D%20'File%20is%20bigger%20than%20the%20allowed%205MB'%3B%0A%20%20%20%20%20%20%20%20return%20false%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20%20%20return%20true%3B%0A%20%20%7D%0A%7D%0A`,
+        tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0A%0A%2F%2F%20Vendor%0Aimport%20%7B%20FormUtils%2C%20FileControl%2C%20NovoFormGroup%20%7D%20from%20'novo-elements'%3B%0A%0A%2F**%0A%20*%20%40title%20File%20Input%20Controls%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'file-input-controls-example'%2C%0A%20%20templateUrl%3A%20'file-input-controls-example.html'%2C%0A%20%20styleUrls%3A%20%5B'file-input-controls-example.css'%5D%2C%0A%7D)%0Aexport%20class%20FileInputControlsExample%20%7B%0A%20%20public%20fileControl%3A%20any%3B%0A%20%20public%20multiFileControl%3A%20any%3B%0A%20%20public%20multiFileControlMixRemove%3A%20FileControl%3B%0A%20%20public%20fileForm%3A%20any%3B%0A%0A%20%20%2F%2F%20custom%20upload%20validation%0A%20%20public%20message%3A%20string%20%3D%20''%3B%0A%20%20public%20customValidationFileControl%3A%20FileControl%3B%0A%20%20public%20customValidationFileForm%3A%20NovoFormGroup%3B%0A%0A%20%20constructor(private%20formUtils%3A%20FormUtils)%20%7B%0A%20%20%20%20%2F%2F%20File%20input%20controls%0A%20%20%20%20this.fileControl%20%3D%20new%20FileControl(%7B%20key%3A%20'file'%2C%20name%3A%20'myfile'%2C%20label%3A%20'File'%2C%20tooltip%3A%20'Files%20Control'%20%7D)%3B%0A%20%20%20%20this.multiFileControl%20%3D%20new%20FileControl(%7B%0A%20%20%20%20%20%20key%3A%20'files'%2C%0A%20%20%20%20%20%20name%3A%20'myfiles'%2C%0A%20%20%20%20%20%20label%3A%20'Multiple%20Files'%2C%0A%20%20%20%20%20%20tooltip%3A%20'Multiple%20Files'%2C%0A%20%20%20%20%20%20multiple%3A%20true%2C%0A%20%20%20%20%20%20layoutOptions%3A%20%7B%20order%3A%20'displayFilesBelow'%2C%20download%3A%20true%2C%20edit%3A%20true%2C%20customActions%3A%20true%2C%20labelStyle%3A%20'no-box'%20%7D%2C%0A%20%20%20%20%20%20value%3A%20%5B%7B%20name%3A%20'yourFile.pdf'%2C%20loaded%3A%20true%2C%20link%3A%20'www.google.com'%2C%20description%3A%20'file%20description'%20%7D%5D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.fileForm%20%3D%20formUtils.toFormGroup(%5Bthis.fileControl%2C%20this.multiFileControl%5D)%3B%0A%0A%20%20%20%20this.customValidationFileControl%20%3D%20new%20FileControl(%7B%0A%20%20%20%20%20%20key%3A%20'customValidationFiles'%2C%0A%20%20%20%20%20%20name%3A%20'customValidationFiles'%2C%0A%20%20%20%20%20%20label%3A%20'Custom%20Validation'%2C%0A%20%20%20%20%20%20tooltip%3A%20'Custom%20Validation%20Multiple%20Files'%2C%0A%20%20%20%20%20%20multiple%3A%20true%2C%0A%20%20%20%20%20%20layoutOptions%3A%20%7B%0A%20%20%20%20%20%20%20%20order%3A%20'displayFilesBelow'%2C%0A%20%20%20%20%20%20%20%20download%3A%20true%2C%0A%20%20%20%20%20%20%20%20edit%3A%20true%2C%0A%20%20%20%20%20%20%20%20customActions%3A%20false%2C%0A%20%20%20%20%20%20%20%20customValidation%3A%20%5B%7B%20action%3A%20'upload'%2C%20fn%3A%20this.checkFileSize.bind(this)%20%7D%5D%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.customValidationFileForm%20%3D%20formUtils.toFormGroup(%5Bthis.customValidationFileControl%5D)%3B%0A%20%20%20%20this.multiFileControlMixRemove%20%3D%20new%20FileControl(%7B%0A%20%20%20%20%20%20key%3A%20'mixDeleteFiles'%2C%0A%20%20%20%20%20%20name%3A%20'mymixDeleteFiles'%2C%0A%20%20%20%20%20%20label%3A%20'Multiple%20Files%20-%20Delete%20New%20Only'%2C%0A%20%20%20%20%20%20tooltip%3A%20'Multiple%20Files%20-%20Delete%20New%20Only'%2C%0A%20%20%20%20%20%20multiple%3A%20true%2C%0A%20%20%20%20%20%20layoutOptions%3A%20%7B%0A%20%20%20%20%20%20%20%20order%3A%20'displayFilesBelow'%2C%0A%20%20%20%20%20%20%20%20labelStyle%3A%20'no-box'%2C%0A%20%20%20%20%20%20%20%20download%3A%20true%2C%0A%20%20%20%20%20%20%20%20edit%3A%20false%2C%0A%20%20%20%20%20%20%20%20removable%3A%20false%2C%0A%20%20%20%20%20%20%20%20removableWhenNew%3A%20true%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20value%3A%20%5B%7B%20name%3A%20'yourFile.pdf'%2C%20loaded%3A%20true%2C%20link%3A%20'www.google.com'%2C%20description%3A%20'file%20description'%20%7D%5D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.fileForm%20%3D%20formUtils.toFormGroup(%5Bthis.fileControl%2C%20this.multiFileControl%2C%20this.multiFileControlMixRemove%5D)%3B%0A%20%20%7D%0A%0A%20%20public%20handleEdit(file)%20%7B%0A%20%20%20%20console.log('This%20is%20an%20Edit%20Action!'%2C%20file)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%0A%20%20public%20handleSave(file)%20%7B%0A%20%20%20%20console.log('This%20is%20a%20Save%20Action!'%2C%20file)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%0A%20%20public%20handleDelete(file)%20%7B%0A%20%20%20%20console.log('This%20is%20a%20Delete%20Action!'%2C%20file)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%0A%20%20public%20handleUpload(files)%20%7B%0A%20%20%20%20console.log('This%20is%20an%20upload%20Action!'%2C%20files)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%0A%20%20public%20checkFileSize(fileList)%3A%20boolean%20%7B%0A%20%20%20%20const%20maxSizeKb%3A%20number%20%3D%205120%3B%20%2F%2F%20(5%20MB%20in%20KB)%0A%20%20%20%20for%20(const%20file%20of%20fileList)%20%7B%0A%20%20%20%20%20%20if%20(file.size%20%3E%20maxSizeKb%20*%201024)%20%7B%0A%20%20%20%20%20%20%20%20this.message%20%3D%20'File%20is%20bigger%20than%20the%20allowed%205MB'%3B%0A%20%20%20%20%20%20%20%20return%20false%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20%20%20return%20true%3B%0A%20%20%7D%0A%7D%0A`,
         cssSource: `%2F**%20No%20CSS%20for%20this%20example%20*%2F%0A`,
         htmlSource: `%3C!--Check%20out%20the%20FormDemo.js%20for%20more%20information!--%3E%0A%3Cnovo-form%20%5Bform%5D%3D%22fileForm%22%20layout%3D%22vertical%22%3E%0A%20%20%20%20%3Cdiv%20class%3D%22novo-form-row%22%3E%0A%20%20%20%20%20%20%20%20%3Cnovo-control%20%5Bform%5D%3D%22fileForm%22%20%5Bcontrol%5D%3D%22fileControl%22%3E%3C%2Fnovo-control%3E%0A%20%20%20%20%3C%2Fdiv%3E%0A%20%20%20%20%3Cdiv%20class%3D%22novo-form-row%22%3E%0A%20%20%20%20%20%20%20%20%3Cnovo-control%20%5Bform%5D%3D%22fileForm%22%20%5Bcontrol%5D%3D%22multiFileControl%22%20(edit)%3D%22handleEdit(%24event)%22%20(save)%3D%22handleSave(%24event)%22%20(delete)%3D%22handleDelete(%24event)%22%20(upload)%3D%22handleUpload(%24event)%22%3E%3C%2Fnovo-control%3E%0A%20%20%20%20%3C%2Fdiv%3E%0A%20%20%20%20%3Cdiv%20class%3D%22novo-form-row%22%3E%0A%20%20%20%20%20%20%20%20%3Cnovo-control%20%5Bform%5D%3D%22fileForm%22%20%5Bcontrol%5D%3D%22multiFileControlMixRemove%22%3E%3C%2Fnovo-control%3E%0A%20%20%20%20%3C%2Fdiv%3E%0A%3C%2Fnovo-form%3E%0A%3Cdiv%20class%3D%22final-value%22%3EValue%3A%20%7B%7BfileForm.value%20%7C%20json%7D%7D%3C%2Fdiv%3E%0A%3Cbr%20%2F%3E%0A%3Cbr%20%2F%3E%0A%3Cnovo-form%20layout%3D%22vertical%22%20%5Bform%5D%3D%22customValidationFileForm%22%3E%0A%20%20%20%20%3Cdiv%20class%3D%22novo-form-row%22%3E%0A%20%20%20%20%20%20%20%20%3Cnovo-control%20%5Bform%5D%3D%22customValidationFileForm%22%20%5Bcontrol%5D%3D%22customValidationFileControl%22%3E%3C%2Fnovo-control%3E%0A%20%20%20%20%3C%2Fdiv%3E%0A%3C%2Fnovo-form%3E%0A%3Cdiv%3E%7B%7B%20message%20%7D%7D%3C%2Fdiv%3E%0A`
     },
     'picker-controls': {
         title: 'Picker Controls Example',
         component: PickerControlsExample,
-        tsSource: `import%20%7B%20Component%2C%20Input%20%7D%20from%20'%40angular%2Fcore'%3B%0A%0A%2F%2F%20Vendor%0Aimport%20%7B%20FormUtils%2C%20PickerControl%2C%20EntityPickerResult%2C%20EntityPickerResults%20%7D%20from%20'novo-elements'%3B%0A%0A%2F%2F%20import%20%7B%20MockMeta%2C%20MockMetaHeaders%20%7D%20from%20'.%2FMockMeta'%3B%0A%0A%2F**%0A%20*%20%40title%20Picker%20Controls%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'picker-controls-example'%2C%0A%20%20templateUrl%3A%20'picker-controls-example.html'%2C%0A%20%20styleUrls%3A%20%5B'picker-controls-example.css'%5D%2C%0A%7D)%0Aexport%20class%20PickerControlsExample%20%7B%0A%20%20public%20singlePickerControl%3A%20any%3B%0A%20%20public%20multiPickerControl%3A%20any%3B%0A%20%20public%20multiPickerControlWithMaxlength%3A%20any%3B%0A%20%20public%20multiPickerControlWithMaxlengthAndPreselects%3A%20any%3B%0A%20%20public%20entityMultiPickerControl%3A%20any%3B%0A%20%20public%20rowMultiPickerControl%3A%20any%3B%0A%20%20public%20rowMultiPickerControlWithMaxlength%3A%20any%3B%0A%20%20public%20textPickerWithGetLabels%3A%20any%3B%0A%20%20public%20pickerForm%3A%20any%3B%0A%0A%20%20constructor(private%20formUtils%3A%20FormUtils)%20%7B%0A%20%20%20%20let%20fruits%20%3D%20%5B'Apples'%2C%20'Oranges'%2C%20'Bananas'%2C%20'Grapes'%5D%3B%0A%20%20%20%20let%20cities%20%3D%20%5B%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%201%2C%0A%20%20%20%20%20%20%20%20name%3A%20'Boston'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%202%2C%0A%20%20%20%20%20%20%20%20name%3A%20'New%20York'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%203%2C%0A%20%20%20%20%20%20%20%20name%3A%20'Washington%20D.C.'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%204%2C%0A%20%20%20%20%20%20%20%20name%3A%20'Orlando'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%205%2C%0A%20%20%20%20%20%20%20%20name%3A%20'Houston'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%206%2C%0A%20%20%20%20%20%20%20%20name%3A%20'Chicago'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%5D%3B%0A%20%20%20%20let%20states%20%3D%20%5B%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20value%3A%20'ME'%2C%0A%20%20%20%20%20%20%20%20label%3A%20'Maine'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20value%3A%20'MD'%2C%0A%20%20%20%20%20%20%20%20label%3A%20'Maryland'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20value%3A%20'MA'%2C%0A%20%20%20%20%20%20%20%20label%3A%20'Massachusetts'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20value%3A%20'MI'%2C%0A%20%20%20%20%20%20%20%20label%3A%20'Michigan'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20value%3A%20'MN'%2C%0A%20%20%20%20%20%20%20%20label%3A%20'Minnesota'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20value%3A%20'MS'%2C%0A%20%20%20%20%20%20%20%20label%3A%20'Mississippi'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20value%3A%20'MO'%2C%0A%20%20%20%20%20%20%20%20label%3A%20'Missouri'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20value%3A%20'MT'%2C%0A%20%20%20%20%20%20%20%20label%3A%20'Montana'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%5D%3B%0A%0A%20%20%20%20%2F%2F%20Picker%20controls%0A%20%20%20%20this.singlePickerControl%20%3D%20new%20PickerControl(%7B%0A%20%20%20%20%20%20key%3A%20'singlePicker'%2C%0A%20%20%20%20%20%20tooltip%3A%20'Single'%2C%0A%20%20%20%20%20%20label%3A%20'Single'%2C%0A%20%20%20%20%20%20config%3A%20%7B%20options%3A%20%5B'One'%2C%20'Two'%2C%20'Three'%5D%20%7D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.multiPickerControl%20%3D%20new%20PickerControl(%7B%0A%20%20%20%20%20%20key%3A%20'multiPicker'%2C%0A%20%20%20%20%20%20tooltip%3A%20'Multiple'%2C%0A%20%20%20%20%20%20label%3A%20'Multiple'%2C%0A%20%20%20%20%20%20multiple%3A%20true%2C%0A%20%20%20%20%20%20config%3A%20%7B%20options%3A%20%5B'One'%2C%20'Two'%2C%20'Three'%5D%2C%20type%3A%20'candidate'%20%7D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.multiPickerControlWithMaxlength%20%3D%20new%20PickerControl(%7B%0A%20%20%20%20%20%20key%3A%20'multiPickerWithMaxlength'%2C%0A%20%20%20%20%20%20tooltip%3A%20'Multiple%20With%20Maxlength'%2C%0A%20%20%20%20%20%20label%3A%20'Multiple%20With%20Maxlength'%2C%0A%20%20%20%20%20%20multiple%3A%20true%2C%0A%20%20%20%20%20%20maxlength%3A%202%2C%0A%20%20%20%20%20%20config%3A%20%7B%0A%20%20%20%20%20%20%20%20options%3A%20fruits%2C%0A%20%20%20%20%20%20%20%20type%3A%20'candidate'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.multiPickerControlWithMaxlengthAndPreselects%20%3D%20new%20PickerControl(%7B%0A%20%20%20%20%20%20key%3A%20'multiPickerControlWithMaxlengthAndPreselects'%2C%0A%20%20%20%20%20%20tooltip%3A%20'Multiple%20With%20Maxlength%20and%20Preselects'%2C%0A%20%20%20%20%20%20label%3A%20'Multiple%20With%20Maxlength%20%26%20Preselects'%2C%0A%20%20%20%20%20%20multiple%3A%20true%2C%0A%20%20%20%20%20%20maxlength%3A%202%2C%0A%20%20%20%20%20%20config%3A%20%7B%0A%20%20%20%20%20%20%20%20options%3A%20fruits%2C%0A%20%20%20%20%20%20%20%20type%3A%20'candidate'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.entityMultiPickerControl%20%3D%20new%20PickerControl(%7B%0A%20%20%20%20%20%20key%3A%20'entityMultiPicker'%2C%0A%20%20%20%20%20%20label%3A%20'Entities'%2C%0A%20%20%20%20%20%20required%3A%20true%2C%0A%20%20%20%20%20%20readOnly%3A%20false%2C%0A%20%20%20%20%20%20multiple%3A%20true%2C%0A%20%20%20%20%20%20tooltip%3A%20'Entities'%2C%0A%20%20%20%20%20%20config%3A%20%7B%0A%20%20%20%20%20%20%20%20resultsTemplate%3A%20EntityPickerResults%2C%0A%20%20%20%20%20%20%20%20previewTemplate%3A%20EntityPickerResult%2C%0A%20%20%20%20%20%20%20%20format%3A%20'%24title'%2C%0A%20%20%20%20%20%20%20%20options%3A%20%5B%0A%20%20%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20title%3A%20'Central%20Bank'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20name%3A%20'Central%20Bank'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20email%3A%20'new-bank-inquiries%40centralbank.com'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20phone%3A%20'(651)%20555-1234'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20address%3A%20%7B%20city%3A%20'Washington'%2C%20state%3A%20'DC'%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20searchEntity%3A%20'ClientCorporation'%2C%0A%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20title%3A%20'Federal%20Bank'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20name%3A%20'Federal%20Bank'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20email%3A%20'info%40federalbank.com'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20phone%3A%20'(545)%20555-1212'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20address%3A%20%7B%20city%3A%20'Arlington'%2C%20state%3A%20'VA'%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20searchEntity%3A%20'ClientCorporation'%2C%0A%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20title%3A%20'Aaron%20Burr'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20firstName%3A%20'Aaron'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20lastName%3A%20'Burr'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20name%3A%20'Aaron%20Burr'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20companyName%3A%20'Central%20Bank'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20email%3A%20'aburr%40centralbank.com'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20phone%3A%20'(333)%20555-3434'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20address%3A%20%7B%20city%3A%20'Washington'%2C%20state%3A%20'DC'%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20status%3A%20'Hold'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20searchEntity%3A%20'ClientContact'%2C%0A%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20title%3A%20'Alexander%20Hamilton'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20firstName%3A%20'Alexander'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20lastName%3A%20'Hamilton'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20name%3A%20'Alexander%20Hamilton'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20companyName%3A%20'Federal%20Bank'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20email%3A%20'ahamilton%40federalbank.com'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20phone%3A%20'(333)%20555-2222'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20address%3A%20%7B%20city%3A%20'Arlington'%2C%20state%3A%20'VA'%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20status%3A%20'Active'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20searchEntity%3A%20'ClientContact'%2C%0A%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20title%3A%20'Ben%20Franklin'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20firstName%3A%20'Ben'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20lastName%3A%20'Franklin'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20name%3A%20'Ben%20Franklin'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20email%3A%20'bfranklin%40gmail.com'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20phone%3A%20'(654)%20525-2222'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20address%3A%20%7B%20city%3A%20'Boston'%2C%20state%3A%20'MA'%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20status%3A%20'Interviewing'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20searchEntity%3A%20'Candidate'%2C%0A%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20title%3A%20'Thomas%20Jefferson'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20firstName%3A%20'Thomas'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20lastName%3A%20'Jefferson'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20name%3A%20'Thomas%20Jefferson'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20email%3A%20'tjefferson%40usa.com'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20phone%3A%20'(123)%20542-1234'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20address%3A%20%7B%20city%3A%20'Arlington'%2C%20state%3A%20'VA'%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20status%3A%20'New%20Lead'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20searchEntity%3A%20'Candidate'%2C%0A%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%5D%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.rowMultiPickerControl%20%3D%20new%20PickerControl(%7B%0A%20%20%20%20%20%20key%3A%20'rowMultiPickerControl'%2C%0A%20%20%20%20%20%20tooltip%3A%20'Multiple%20Rows'%2C%0A%20%20%20%20%20%20label%3A%20'Multiple%20Rows'%2C%0A%20%20%20%20%20%20multiple%3A%20true%2C%0A%20%20%20%20%20%20config%3A%20%7B%0A%20%20%20%20%20%20%20%20format%3A%20'%24name'%2C%0A%20%20%20%20%20%20%20%20options%3A%20cities%2C%0A%20%20%20%20%20%20%20%20type%3A%20'candidate'%2C%0A%20%20%20%20%20%20%20%20columns%3A%20%5B%0A%20%20%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20label%3A%20'Name'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20data%3A%20(item%3A%20any)%3A%20string%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20return%20item%5B'label'%5D%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20label%3A%20'Id'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20data%3A%20(item%3A%20any)%3A%20string%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20return%20item.value%5B'id'%5D%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%5D%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.rowMultiPickerControlWithMaxlength%20%3D%20new%20PickerControl(%7B%0A%20%20%20%20%20%20key%3A%20'rowMultiPickerControlWithMaxlength'%2C%0A%20%20%20%20%20%20tooltip%3A%20'Multiple%20Rows%20With%20Maxlength'%2C%0A%20%20%20%20%20%20label%3A%20'Multiple%20Rows%20With%20Maxlength'%2C%0A%20%20%20%20%20%20multiple%3A%20true%2C%0A%20%20%20%20%20%20maxlength%3A%204%2C%0A%20%20%20%20%20%20config%3A%20%7B%0A%20%20%20%20%20%20%20%20format%3A%20'%24name'%2C%0A%20%20%20%20%20%20%20%20options%3A%20cities%2C%0A%20%20%20%20%20%20%20%20type%3A%20'candidate'%2C%0A%20%20%20%20%20%20%20%20columns%3A%20%5B%0A%20%20%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20label%3A%20'Name'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20data%3A%20(item%3A%20any)%3A%20string%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20return%20item%5B'label'%5D%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20label%3A%20'Id'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20data%3A%20(item%3A%20any)%3A%20string%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20return%20item.value%5B'id'%5D%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%5D%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.textPickerWithGetLabels%20%3D%20new%20PickerControl(%7B%0A%20%20%20%20%20%20key%3A%20'textPickerWithGetLabels'%2C%0A%20%20%20%20%20%20tooltip%3A%20'Text%20Value%20Picker%20with%20getLabels()'%2C%0A%20%20%20%20%20%20label%3A%20'Text%20Value%20Picker%20with%20getLabels()'%2C%0A%20%20%20%20%20%20multiple%3A%20false%2C%0A%20%20%20%20%20%20config%3A%20%7B%0A%20%20%20%20%20%20%20%20field%3A%20'value'%2C%0A%20%20%20%20%20%20%20%20format%3A%20'%24label'%2C%0A%20%20%20%20%20%20%20%20options%3A%20states%2C%0A%20%20%20%20%20%20%20%20useGetLabels%3A%20true%2C%0A%20%20%20%20%20%20%20%20getLabels%3A%20(value)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20return%20new%20Promise((resolve)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20states.forEach((state)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20if%20(state.value%20%3D%3D%3D%20value)%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20resolve(state)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D)%3B%0A%20%20%20%20%20%20%20%20%20%20%7D)%3B%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20let%20controls%20%3D%20%5B%0A%20%20%20%20%20%20this.singlePickerControl%2C%0A%20%20%20%20%20%20this.multiPickerControl%2C%0A%20%20%20%20%20%20this.entityMultiPickerControl%2C%0A%20%20%20%20%20%20this.multiPickerControlWithMaxlength%2C%0A%20%20%20%20%20%20this.multiPickerControlWithMaxlengthAndPreselects%2C%0A%20%20%20%20%20%20this.rowMultiPickerControl%2C%0A%20%20%20%20%20%20%2F%2F%20this.rowMultiPickerControlWithMaxlength%2C%0A%20%20%20%20%20%20this.textPickerWithGetLabels%2C%0A%20%20%20%20%5D%3B%0A%20%20%20%20formUtils.setInitialValues(controls%2C%20%7B%0A%20%20%20%20%20%20entityMultiPicker%3A%20%5B%0A%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20title%3A%20'Federal%20Bank'%2C%0A%20%20%20%20%20%20%20%20%20%20name%3A%20'Federal%20Bank'%2C%0A%20%20%20%20%20%20%20%20%20%20email%3A%20'info%40federalbank.com'%2C%0A%20%20%20%20%20%20%20%20%20%20phone%3A%20'(545)%20555-1212'%2C%0A%20%20%20%20%20%20%20%20%20%20address%3A%20%7B%20city%3A%20'Arlington'%2C%20state%3A%20'VA'%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20searchEntity%3A%20'ClientCorporation'%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%5D%2C%0A%20%20%20%20%20%20multiPickerControlWithMaxlengthAndPreselects%3A%20%5B'Oranges'%2C%20'Bananas'%5D%2C%0A%20%20%20%20%20%20rowMultiPickerControlWithMaxlength%3A%20%5B%0A%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20id%3A%201%2C%0A%20%20%20%20%20%20%20%20%20%20name%3A%20'Boston'%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20id%3A%205%2C%0A%20%20%20%20%20%20%20%20%20%20name%3A%20'Houston'%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20id%3A%206%2C%0A%20%20%20%20%20%20%20%20%20%20name%3A%20'Chicago'%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%5D%2C%0A%20%20%20%20%20%20textPickerWithGetLabels%3A%20'MD'%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.pickerForm%20%3D%20formUtils.toFormGroup(controls)%3B%0A%20%20%7D%0A%7D%0A`,
+        tsSource: `import%20%7B%20Component%2C%20Input%20%7D%20from%20'%40angular%2Fcore'%3B%0A%0A%2F%2F%20Vendor%0Aimport%20%7B%20FormUtils%2C%20PickerControl%2C%20EntityPickerResult%2C%20EntityPickerResults%20%7D%20from%20'novo-elements'%3B%0A%0A%2F%2F%20import%20%7B%20MockMeta%2C%20MockMetaHeaders%20%7D%20from%20'.%2FMockMeta'%3B%0A%0A%2F**%0A%20*%20%40title%20Picker%20Controls%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'picker-controls-example'%2C%0A%20%20templateUrl%3A%20'picker-controls-example.html'%2C%0A%20%20styleUrls%3A%20%5B'picker-controls-example.css'%5D%2C%0A%7D)%0Aexport%20class%20PickerControlsExample%20%7B%0A%20%20public%20singlePickerControl%3A%20any%3B%0A%20%20public%20multiPickerControl%3A%20any%3B%0A%20%20public%20multiPickerControlWithMaxlength%3A%20any%3B%0A%20%20public%20multiPickerControlWithMaxlengthAndPreselects%3A%20any%3B%0A%20%20public%20entityMultiPickerControl%3A%20any%3B%0A%20%20public%20rowMultiPickerControl%3A%20any%3B%0A%20%20public%20rowMultiPickerControlWithMaxlength%3A%20any%3B%0A%20%20public%20textPickerWithGetLabels%3A%20any%3B%0A%20%20public%20pickerForm%3A%20any%3B%0A%0A%20%20constructor(private%20formUtils%3A%20FormUtils)%20%7B%0A%20%20%20%20const%20fruits%20%3D%20%5B'Apples'%2C%20'Oranges'%2C%20'Bananas'%2C%20'Grapes'%5D%3B%0A%20%20%20%20const%20cities%20%3D%20%5B%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%201%2C%0A%20%20%20%20%20%20%20%20name%3A%20'Boston'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%202%2C%0A%20%20%20%20%20%20%20%20name%3A%20'New%20York'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%203%2C%0A%20%20%20%20%20%20%20%20name%3A%20'Washington%20D.C.'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%204%2C%0A%20%20%20%20%20%20%20%20name%3A%20'Orlando'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%205%2C%0A%20%20%20%20%20%20%20%20name%3A%20'Houston'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%206%2C%0A%20%20%20%20%20%20%20%20name%3A%20'Chicago'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%5D%3B%0A%20%20%20%20const%20states%20%3D%20%5B%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20value%3A%20'ME'%2C%0A%20%20%20%20%20%20%20%20label%3A%20'Maine'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20value%3A%20'MD'%2C%0A%20%20%20%20%20%20%20%20label%3A%20'Maryland'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20value%3A%20'MA'%2C%0A%20%20%20%20%20%20%20%20label%3A%20'Massachusetts'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20value%3A%20'MI'%2C%0A%20%20%20%20%20%20%20%20label%3A%20'Michigan'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20value%3A%20'MN'%2C%0A%20%20%20%20%20%20%20%20label%3A%20'Minnesota'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20value%3A%20'MS'%2C%0A%20%20%20%20%20%20%20%20label%3A%20'Mississippi'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20value%3A%20'MO'%2C%0A%20%20%20%20%20%20%20%20label%3A%20'Missouri'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20value%3A%20'MT'%2C%0A%20%20%20%20%20%20%20%20label%3A%20'Montana'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%5D%3B%0A%0A%20%20%20%20%2F%2F%20Picker%20controls%0A%20%20%20%20this.singlePickerControl%20%3D%20new%20PickerControl(%7B%0A%20%20%20%20%20%20key%3A%20'singlePicker'%2C%0A%20%20%20%20%20%20tooltip%3A%20'Single'%2C%0A%20%20%20%20%20%20label%3A%20'Single'%2C%0A%20%20%20%20%20%20config%3A%20%7B%20options%3A%20%5B'One'%2C%20'Two'%2C%20'Three'%5D%20%7D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.multiPickerControl%20%3D%20new%20PickerControl(%7B%0A%20%20%20%20%20%20key%3A%20'multiPicker'%2C%0A%20%20%20%20%20%20tooltip%3A%20'Multiple'%2C%0A%20%20%20%20%20%20label%3A%20'Multiple'%2C%0A%20%20%20%20%20%20multiple%3A%20true%2C%0A%20%20%20%20%20%20config%3A%20%7B%20options%3A%20%5B'One'%2C%20'Two'%2C%20'Three'%5D%2C%20type%3A%20'candidate'%20%7D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.multiPickerControlWithMaxlength%20%3D%20new%20PickerControl(%7B%0A%20%20%20%20%20%20key%3A%20'multiPickerWithMaxlength'%2C%0A%20%20%20%20%20%20tooltip%3A%20'Multiple%20With%20Maxlength'%2C%0A%20%20%20%20%20%20label%3A%20'Multiple%20With%20Maxlength'%2C%0A%20%20%20%20%20%20multiple%3A%20true%2C%0A%20%20%20%20%20%20maxlength%3A%202%2C%0A%20%20%20%20%20%20config%3A%20%7B%0A%20%20%20%20%20%20%20%20options%3A%20fruits%2C%0A%20%20%20%20%20%20%20%20type%3A%20'candidate'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.multiPickerControlWithMaxlengthAndPreselects%20%3D%20new%20PickerControl(%7B%0A%20%20%20%20%20%20key%3A%20'multiPickerControlWithMaxlengthAndPreselects'%2C%0A%20%20%20%20%20%20tooltip%3A%20'Multiple%20With%20Maxlength%20and%20Preselects'%2C%0A%20%20%20%20%20%20label%3A%20'Multiple%20With%20Maxlength%20%26%20Preselects'%2C%0A%20%20%20%20%20%20multiple%3A%20true%2C%0A%20%20%20%20%20%20maxlength%3A%202%2C%0A%20%20%20%20%20%20config%3A%20%7B%0A%20%20%20%20%20%20%20%20options%3A%20fruits%2C%0A%20%20%20%20%20%20%20%20type%3A%20'candidate'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.entityMultiPickerControl%20%3D%20new%20PickerControl(%7B%0A%20%20%20%20%20%20key%3A%20'entityMultiPicker'%2C%0A%20%20%20%20%20%20label%3A%20'Entities'%2C%0A%20%20%20%20%20%20required%3A%20true%2C%0A%20%20%20%20%20%20readOnly%3A%20false%2C%0A%20%20%20%20%20%20multiple%3A%20true%2C%0A%20%20%20%20%20%20tooltip%3A%20'Entities'%2C%0A%20%20%20%20%20%20config%3A%20%7B%0A%20%20%20%20%20%20%20%20resultsTemplate%3A%20EntityPickerResults%2C%0A%20%20%20%20%20%20%20%20previewTemplate%3A%20EntityPickerResult%2C%0A%20%20%20%20%20%20%20%20format%3A%20'%24title'%2C%0A%20%20%20%20%20%20%20%20options%3A%20%5B%0A%20%20%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20title%3A%20'Central%20Bank'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20name%3A%20'Central%20Bank'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20email%3A%20'new-bank-inquiries%40centralbank.com'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20phone%3A%20'(651)%20555-1234'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20address%3A%20%7B%20city%3A%20'Washington'%2C%20state%3A%20'DC'%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20searchEntity%3A%20'ClientCorporation'%2C%0A%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20title%3A%20'Federal%20Bank'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20name%3A%20'Federal%20Bank'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20email%3A%20'info%40federalbank.com'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20phone%3A%20'(545)%20555-1212'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20address%3A%20%7B%20city%3A%20'Arlington'%2C%20state%3A%20'VA'%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20searchEntity%3A%20'ClientCorporation'%2C%0A%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20title%3A%20'Aaron%20Burr'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20firstName%3A%20'Aaron'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20lastName%3A%20'Burr'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20name%3A%20'Aaron%20Burr'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20companyName%3A%20'Central%20Bank'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20email%3A%20'aburr%40centralbank.com'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20phone%3A%20'(333)%20555-3434'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20address%3A%20%7B%20city%3A%20'Washington'%2C%20state%3A%20'DC'%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20status%3A%20'Hold'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20searchEntity%3A%20'ClientContact'%2C%0A%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20title%3A%20'Alexander%20Hamilton'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20firstName%3A%20'Alexander'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20lastName%3A%20'Hamilton'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20name%3A%20'Alexander%20Hamilton'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20companyName%3A%20'Federal%20Bank'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20email%3A%20'ahamilton%40federalbank.com'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20phone%3A%20'(333)%20555-2222'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20address%3A%20%7B%20city%3A%20'Arlington'%2C%20state%3A%20'VA'%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20status%3A%20'Active'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20searchEntity%3A%20'ClientContact'%2C%0A%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20title%3A%20'Ben%20Franklin'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20firstName%3A%20'Ben'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20lastName%3A%20'Franklin'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20name%3A%20'Ben%20Franklin'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20email%3A%20'bfranklin%40gmail.com'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20phone%3A%20'(654)%20525-2222'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20address%3A%20%7B%20city%3A%20'Boston'%2C%20state%3A%20'MA'%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20status%3A%20'Interviewing'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20searchEntity%3A%20'Candidate'%2C%0A%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20title%3A%20'Thomas%20Jefferson'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20firstName%3A%20'Thomas'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20lastName%3A%20'Jefferson'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20name%3A%20'Thomas%20Jefferson'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20email%3A%20'tjefferson%40usa.com'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20phone%3A%20'(123)%20542-1234'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20address%3A%20%7B%20city%3A%20'Arlington'%2C%20state%3A%20'VA'%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20status%3A%20'New%20Lead'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20searchEntity%3A%20'Candidate'%2C%0A%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%5D%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.rowMultiPickerControl%20%3D%20new%20PickerControl(%7B%0A%20%20%20%20%20%20key%3A%20'rowMultiPickerControl'%2C%0A%20%20%20%20%20%20tooltip%3A%20'Multiple%20Rows'%2C%0A%20%20%20%20%20%20label%3A%20'Multiple%20Rows'%2C%0A%20%20%20%20%20%20multiple%3A%20true%2C%0A%20%20%20%20%20%20config%3A%20%7B%0A%20%20%20%20%20%20%20%20format%3A%20'%24name'%2C%0A%20%20%20%20%20%20%20%20options%3A%20cities%2C%0A%20%20%20%20%20%20%20%20type%3A%20'candidate'%2C%0A%20%20%20%20%20%20%20%20columns%3A%20%5B%0A%20%20%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20label%3A%20'Name'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20data%3A%20(item%3A%20any)%3A%20string%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20return%20item%5B'label'%5D%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20label%3A%20'Id'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20data%3A%20(item%3A%20any)%3A%20string%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20return%20item.value%5B'id'%5D%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%5D%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.rowMultiPickerControlWithMaxlength%20%3D%20new%20PickerControl(%7B%0A%20%20%20%20%20%20key%3A%20'rowMultiPickerControlWithMaxlength'%2C%0A%20%20%20%20%20%20tooltip%3A%20'Multiple%20Rows%20With%20Maxlength'%2C%0A%20%20%20%20%20%20label%3A%20'Multiple%20Rows%20With%20Maxlength'%2C%0A%20%20%20%20%20%20multiple%3A%20true%2C%0A%20%20%20%20%20%20maxlength%3A%204%2C%0A%20%20%20%20%20%20config%3A%20%7B%0A%20%20%20%20%20%20%20%20format%3A%20'%24name'%2C%0A%20%20%20%20%20%20%20%20options%3A%20cities%2C%0A%20%20%20%20%20%20%20%20type%3A%20'candidate'%2C%0A%20%20%20%20%20%20%20%20columns%3A%20%5B%0A%20%20%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20label%3A%20'Name'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20data%3A%20(item%3A%20any)%3A%20string%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20return%20item%5B'label'%5D%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20label%3A%20'Id'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20data%3A%20(item%3A%20any)%3A%20string%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20return%20item.value%5B'id'%5D%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%5D%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.textPickerWithGetLabels%20%3D%20new%20PickerControl(%7B%0A%20%20%20%20%20%20key%3A%20'textPickerWithGetLabels'%2C%0A%20%20%20%20%20%20tooltip%3A%20'Text%20Value%20Picker%20with%20getLabels()'%2C%0A%20%20%20%20%20%20label%3A%20'Text%20Value%20Picker%20with%20getLabels()'%2C%0A%20%20%20%20%20%20multiple%3A%20false%2C%0A%20%20%20%20%20%20config%3A%20%7B%0A%20%20%20%20%20%20%20%20field%3A%20'value'%2C%0A%20%20%20%20%20%20%20%20format%3A%20'%24label'%2C%0A%20%20%20%20%20%20%20%20options%3A%20states%2C%0A%20%20%20%20%20%20%20%20useGetLabels%3A%20true%2C%0A%20%20%20%20%20%20%20%20getLabels%3A%20(value)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20return%20new%20Promise((resolve)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20states.forEach((state)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20if%20(state.value%20%3D%3D%3D%20value)%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20resolve(state)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D)%3B%0A%20%20%20%20%20%20%20%20%20%20%7D)%3B%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20const%20controls%20%3D%20%5B%0A%20%20%20%20%20%20this.singlePickerControl%2C%0A%20%20%20%20%20%20this.multiPickerControl%2C%0A%20%20%20%20%20%20this.entityMultiPickerControl%2C%0A%20%20%20%20%20%20this.multiPickerControlWithMaxlength%2C%0A%20%20%20%20%20%20this.multiPickerControlWithMaxlengthAndPreselects%2C%0A%20%20%20%20%20%20this.rowMultiPickerControl%2C%0A%20%20%20%20%20%20%2F%2F%20this.rowMultiPickerControlWithMaxlength%2C%0A%20%20%20%20%20%20this.textPickerWithGetLabels%2C%0A%20%20%20%20%5D%3B%0A%20%20%20%20formUtils.setInitialValues(controls%2C%20%7B%0A%20%20%20%20%20%20entityMultiPicker%3A%20%5B%0A%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20title%3A%20'Federal%20Bank'%2C%0A%20%20%20%20%20%20%20%20%20%20name%3A%20'Federal%20Bank'%2C%0A%20%20%20%20%20%20%20%20%20%20email%3A%20'info%40federalbank.com'%2C%0A%20%20%20%20%20%20%20%20%20%20phone%3A%20'(545)%20555-1212'%2C%0A%20%20%20%20%20%20%20%20%20%20address%3A%20%7B%20city%3A%20'Arlington'%2C%20state%3A%20'VA'%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20searchEntity%3A%20'ClientCorporation'%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%5D%2C%0A%20%20%20%20%20%20multiPickerControlWithMaxlengthAndPreselects%3A%20%5B'Oranges'%2C%20'Bananas'%5D%2C%0A%20%20%20%20%20%20rowMultiPickerControlWithMaxlength%3A%20%5B%0A%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20id%3A%201%2C%0A%20%20%20%20%20%20%20%20%20%20name%3A%20'Boston'%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20id%3A%205%2C%0A%20%20%20%20%20%20%20%20%20%20name%3A%20'Houston'%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20id%3A%206%2C%0A%20%20%20%20%20%20%20%20%20%20name%3A%20'Chicago'%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%5D%2C%0A%20%20%20%20%20%20textPickerWithGetLabels%3A%20'MD'%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.pickerForm%20%3D%20formUtils.toFormGroup(controls)%3B%0A%20%20%7D%0A%7D%0A`,
         cssSource: `%2F**%20No%20CSS%20for%20this%20example%20*%2F%0A`,
         htmlSource: `%3C!--Check%20out%20the%20FormDemo.js%20for%20more%20information!--%3E%0A%3Cnovo-form%20%5Bform%5D%3D%22pickerForm%22%3E%0A%20%20%20%20%3Cdiv%20class%3D%22novo-form-row%22%3E%0A%20%20%20%20%20%20%20%20%3Cnovo-control%20%5Bform%5D%3D%22pickerForm%22%20%5Bcontrol%5D%3D%22singlePickerControl%22%3E%3C%2Fnovo-control%3E%0A%20%20%20%20%3C%2Fdiv%3E%0A%20%20%20%20%3Cdiv%20class%3D%22novo-form-row%22%3E%0A%20%20%20%20%20%20%20%20%3Cnovo-control%20%5Bform%5D%3D%22pickerForm%22%20%5Bcontrol%5D%3D%22multiPickerControl%22%3E%3C%2Fnovo-control%3E%0A%20%20%20%20%3C%2Fdiv%3E%0A%20%20%20%20%3Cdiv%20class%3D%22novo-form-row%22%3E%0A%20%20%20%20%20%20%20%20%3Cnovo-control%20%5Bform%5D%3D%22pickerForm%22%20%5Bcontrol%5D%3D%22entityMultiPickerControl%22%3E%3C%2Fnovo-control%3E%0A%20%20%20%20%3C%2Fdiv%3E%0A%20%20%20%20%3Cdiv%20class%3D%22novo-form-row%22%3E%0A%20%20%20%20%20%20%3Cnovo-control%20%5Bform%5D%3D%22pickerForm%22%20%5Bcontrol%5D%3D%22rowMultiPickerControl%22%3E%3C%2Fnovo-control%3E%0A%20%20%20%20%3C%2Fdiv%3E%0A%20%20%20%20%3Cdiv%20class%3D%22novo-form-row%22%3E%0A%20%20%20%20%20%20%3Cnovo-control%20%5Bform%5D%3D%22pickerForm%22%20%5Bcontrol%5D%3D%22multiPickerControlWithMaxlength%22%3E%3C%2Fnovo-control%3E%0A%20%20%20%20%3C%2Fdiv%3E%0A%20%20%20%20%3Cdiv%20class%3D%22novo-form-row%22%3E%0A%20%20%20%20%20%20%3Cnovo-control%20%5Bform%5D%3D%22pickerForm%22%20%5Bcontrol%5D%3D%22multiPickerControlWithMaxlengthAndPreselects%22%3E%3C%2Fnovo-control%3E%0A%20%20%20%20%3C%2Fdiv%3E%0A%20%20%20%20%3C!--%20Row%20picker%20with%20maxlength%20is%20implemented%20but%20currently%20turned%20off%20because%20it%20is%20not%20being%20used%20and%20there%20was%20no%20UI%20created%20for%20it.%0A%20%20%20%20%20%20%20%20%20To%20turn%20it%20back%20on%2C%20add%20'%5Bmaxlength%5D%3D%22control%3F.maxlength%22'%20to%20ControlTemplate.ts%0A%20%20%20%20%3Cdiv%20class%3D%22novo-form-row%22%3E%0A%20%20%20%20%20%20%3Cnovo-control%20%5Bform%5D%3D%22pickerForm%22%20%5Bcontrol%5D%3D%22rowMultiPickerControlWithMaxlength%22%3E%3C%2Fnovo-control%3E%0A%20%20%20%20%3C%2Fdiv--%3E%0A%20%20%20%20%3Cdiv%20class%3D%22novo-form-row%22%3E%0A%20%20%20%20%20%20%3Cnovo-control%20%5Bform%5D%3D%22pickerForm%22%20%5Bcontrol%5D%3D%22textPickerWithGetLabels%22%3E%3C%2Fnovo-control%3E%0A%20%20%20%20%3C%2Fdiv%3E%0A%3C%2Fnovo-form%3E%0A%3Cdiv%20class%3D%22final-value%22%3EValue%3A%20%7B%7BpickerForm.value%20%7C%20json%7D%7D%3C%2Fdiv%3E%0A`
     },
@@ -71865,21 +71865,21 @@ const EXAMPLE_COMPONENTS = {
     'basic-multi-picker': {
         title: 'Basic Multi Picker Example',
         component: BasicMultiPickerExample,
-        tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0Aimport%20%7B%20ChecklistPickerResults%20%7D%20from%20'novo-elements'%3B%0A%0A%2F**%0A%20*%20%40title%20Basic%20Multi%20Picker%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'basic-multi-picker-example'%2C%0A%20%20templateUrl%3A%20'basic-multi-picker-example.html'%2C%0A%20%20styleUrls%3A%20%5B'basic-multi-picker-example.css'%5D%2C%0A%7D)%0Aexport%20class%20BasicMultiPickerExample%20%7B%0A%20%20placeholder%3A%20string%20%3D%20'Select...'%3B%0A%20%20value%3A%20any%20%3D%20%7B%20states%3A%20%5B'Alabama'%5D%2C%20collaborators%3A%20%5B1%2C%202%2C%203%2C%204%5D%20%7D%3B%0A%20%20types%3A%20any%20%3D%20%5B%7B%20value%3A%20'states'%2C%20singular%3A%20'state'%20%7D%2C%20%7B%20value%3A%20'collaborators'%2C%20singular%3A%20'collaborator'%20%7D%5D%3B%0A%20%20staticDemo%3A%20any%3B%0A%0A%20%20constructor()%20%7B%0A%20%20%20%20let%20states%20%3D%20%5B%0A%20%20%20%20%20%20'Alabama'%2C%0A%20%20%20%20%20%20'Alaska'%2C%0A%20%20%20%20%20%20'Arizona'%2C%0A%20%20%20%20%20%20'Arkansas'%2C%0A%20%20%20%20%20%20'California'%2C%0A%20%20%20%20%20%20'Colorado'%2C%0A%20%20%20%20%20%20'Connecticut'%2C%0A%20%20%20%20%20%20'Delaware'%2C%0A%20%20%20%20%20%20'Florida'%2C%0A%20%20%20%20%20%20'Georgia'%2C%0A%20%20%20%20%20%20'Hawaii'%2C%0A%20%20%20%20%20%20'Idaho'%2C%0A%20%20%20%20%20%20'Illinois'%2C%0A%20%20%20%20%20%20'Indiana'%2C%0A%20%20%20%20%20%20'Iowa'%2C%0A%20%20%20%20%20%20'Kansas'%2C%0A%20%20%20%20%20%20'Kentucky'%2C%0A%20%20%20%20%20%20'Louisiana'%2C%0A%20%20%20%20%20%20'Maine'%2C%0A%20%20%20%20%20%20'Maryland'%2C%0A%20%20%20%20%20%20'Massachusetts'%2C%0A%20%20%20%20%20%20'Michigan'%2C%0A%20%20%20%20%20%20'Minnesota'%2C%0A%20%20%20%20%20%20'Mississippi'%2C%0A%20%20%20%20%20%20'Missouri'%2C%0A%20%20%20%20%20%20'Montana'%2C%0A%20%20%20%20%20%20'Nebraska'%2C%0A%20%20%20%20%20%20'Nevada'%2C%0A%20%20%20%20%20%20'New%20Hampshire'%2C%0A%20%20%20%20%20%20'New%20Jersey'%2C%0A%20%20%20%20%20%20'New%20Mexico'%2C%0A%20%20%20%20%20%20'New%20York'%2C%0A%20%20%20%20%20%20'North%20Dakota'%2C%0A%20%20%20%20%20%20'North%20Carolina'%2C%0A%20%20%20%20%20%20'Ohio'%2C%0A%20%20%20%20%20%20'Oklahoma'%2C%0A%20%20%20%20%20%20'Oregon'%2C%0A%20%20%20%20%20%20'Pennsylvania'%2C%0A%20%20%20%20%20%20'Rhode%20Island'%2C%0A%20%20%20%20%20%20'South%20Carolina'%2C%0A%20%20%20%20%20%20'South%20Dakota'%2C%0A%20%20%20%20%20%20'Tennessee'%2C%0A%20%20%20%20%20%20'Texas'%2C%0A%20%20%20%20%20%20'Utah'%2C%0A%20%20%20%20%20%20'Vermont'%2C%0A%20%20%20%20%20%20'Virginia'%2C%0A%20%20%20%20%20%20'Washington'%2C%0A%20%20%20%20%20%20'West%20Virginia'%2C%0A%20%20%20%20%20%20'Wisconsin'%2C%0A%20%20%20%20%20%20'Wyoming'%2C%0A%20%20%20%20%5D%3B%0A%20%20%20%20let%20collaborators%20%3D%20%5B%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%201%2C%0A%20%20%20%20%20%20%20%20firstName%3A%20'Brian'%2C%0A%20%20%20%20%20%20%20%20lastName%3A%20'Kimball'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%202%2C%0A%20%20%20%20%20%20%20%20firstName%3A%20'Josh'%2C%0A%20%20%20%20%20%20%20%20lastName%3A%20'Godi'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%203%2C%0A%20%20%20%20%20%20%20%20firstName%3A%20'Alec'%2C%0A%20%20%20%20%20%20%20%20lastName%3A%20'Sibilia'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%204%2C%0A%20%20%20%20%20%20%20%20firstName%3A%20'Kameron'%2C%0A%20%20%20%20%20%20%20%20lastName%3A%20'Sween'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%5D%3B%0A%20%20%20%20this.staticDemo%20%3D%20%7B%0A%20%20%20%20%20%20options%3A%20%5B%0A%20%20%20%20%20%20%20%20%7B%20type%3A%20'collaborators'%2C%20data%3A%20collaborators%2C%20format%3A%20'%24firstName%20%24lastName'%2C%20field%3A%20'id'%20%7D%2C%0A%20%20%20%20%20%20%20%20%7B%20type%3A%20'states'%2C%20data%3A%20states%20%7D%2C%0A%20%20%20%20%20%20%5D%2C%0A%20%20%20%20%20%20resultsTemplate%3A%20ChecklistPickerResults%2C%0A%20%20%20%20%20%20selectAllOption%3A%20true%2C%0A%20%20%20%20%7D%3B%0A%20%20%7D%0A%0A%20%20onChanged(%24event%3F%3A%20Event)%20%7B%7D%0A%7D%0A`,
+        tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0Aimport%20%7B%20ChecklistPickerResults%20%7D%20from%20'novo-elements'%3B%0A%0A%2F**%0A%20*%20%40title%20Basic%20Multi%20Picker%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'basic-multi-picker-example'%2C%0A%20%20templateUrl%3A%20'basic-multi-picker-example.html'%2C%0A%20%20styleUrls%3A%20%5B'basic-multi-picker-example.css'%5D%2C%0A%7D)%0Aexport%20class%20BasicMultiPickerExample%20%7B%0A%20%20placeholder%3A%20string%20%3D%20'Select...'%3B%0A%20%20value%3A%20any%20%3D%20%7B%20states%3A%20%5B'Alabama'%5D%2C%20collaborators%3A%20%5B1%2C%202%2C%203%2C%204%5D%20%7D%3B%0A%20%20types%3A%20any%20%3D%20%5B%7B%20value%3A%20'states'%2C%20singular%3A%20'state'%20%7D%2C%20%7B%20value%3A%20'collaborators'%2C%20singular%3A%20'collaborator'%20%7D%5D%3B%0A%20%20staticDemo%3A%20any%3B%0A%0A%20%20constructor()%20%7B%0A%20%20%20%20const%20states%20%3D%20%5B%0A%20%20%20%20%20%20'Alabama'%2C%0A%20%20%20%20%20%20'Alaska'%2C%0A%20%20%20%20%20%20'Arizona'%2C%0A%20%20%20%20%20%20'Arkansas'%2C%0A%20%20%20%20%20%20'California'%2C%0A%20%20%20%20%20%20'Colorado'%2C%0A%20%20%20%20%20%20'Connecticut'%2C%0A%20%20%20%20%20%20'Delaware'%2C%0A%20%20%20%20%20%20'Florida'%2C%0A%20%20%20%20%20%20'Georgia'%2C%0A%20%20%20%20%20%20'Hawaii'%2C%0A%20%20%20%20%20%20'Idaho'%2C%0A%20%20%20%20%20%20'Illinois'%2C%0A%20%20%20%20%20%20'Indiana'%2C%0A%20%20%20%20%20%20'Iowa'%2C%0A%20%20%20%20%20%20'Kansas'%2C%0A%20%20%20%20%20%20'Kentucky'%2C%0A%20%20%20%20%20%20'Louisiana'%2C%0A%20%20%20%20%20%20'Maine'%2C%0A%20%20%20%20%20%20'Maryland'%2C%0A%20%20%20%20%20%20'Massachusetts'%2C%0A%20%20%20%20%20%20'Michigan'%2C%0A%20%20%20%20%20%20'Minnesota'%2C%0A%20%20%20%20%20%20'Mississippi'%2C%0A%20%20%20%20%20%20'Missouri'%2C%0A%20%20%20%20%20%20'Montana'%2C%0A%20%20%20%20%20%20'Nebraska'%2C%0A%20%20%20%20%20%20'Nevada'%2C%0A%20%20%20%20%20%20'New%20Hampshire'%2C%0A%20%20%20%20%20%20'New%20Jersey'%2C%0A%20%20%20%20%20%20'New%20Mexico'%2C%0A%20%20%20%20%20%20'New%20York'%2C%0A%20%20%20%20%20%20'North%20Dakota'%2C%0A%20%20%20%20%20%20'North%20Carolina'%2C%0A%20%20%20%20%20%20'Ohio'%2C%0A%20%20%20%20%20%20'Oklahoma'%2C%0A%20%20%20%20%20%20'Oregon'%2C%0A%20%20%20%20%20%20'Pennsylvania'%2C%0A%20%20%20%20%20%20'Rhode%20Island'%2C%0A%20%20%20%20%20%20'South%20Carolina'%2C%0A%20%20%20%20%20%20'South%20Dakota'%2C%0A%20%20%20%20%20%20'Tennessee'%2C%0A%20%20%20%20%20%20'Texas'%2C%0A%20%20%20%20%20%20'Utah'%2C%0A%20%20%20%20%20%20'Vermont'%2C%0A%20%20%20%20%20%20'Virginia'%2C%0A%20%20%20%20%20%20'Washington'%2C%0A%20%20%20%20%20%20'West%20Virginia'%2C%0A%20%20%20%20%20%20'Wisconsin'%2C%0A%20%20%20%20%20%20'Wyoming'%2C%0A%20%20%20%20%5D%3B%0A%20%20%20%20const%20collaborators%20%3D%20%5B%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%201%2C%0A%20%20%20%20%20%20%20%20firstName%3A%20'Brian'%2C%0A%20%20%20%20%20%20%20%20lastName%3A%20'Kimball'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%202%2C%0A%20%20%20%20%20%20%20%20firstName%3A%20'Josh'%2C%0A%20%20%20%20%20%20%20%20lastName%3A%20'Godi'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%203%2C%0A%20%20%20%20%20%20%20%20firstName%3A%20'Alec'%2C%0A%20%20%20%20%20%20%20%20lastName%3A%20'Sibilia'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%204%2C%0A%20%20%20%20%20%20%20%20firstName%3A%20'Kameron'%2C%0A%20%20%20%20%20%20%20%20lastName%3A%20'Sween'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%5D%3B%0A%20%20%20%20this.staticDemo%20%3D%20%7B%0A%20%20%20%20%20%20options%3A%20%5B%0A%20%20%20%20%20%20%20%20%7B%20type%3A%20'collaborators'%2C%20data%3A%20collaborators%2C%20format%3A%20'%24firstName%20%24lastName'%2C%20field%3A%20'id'%20%7D%2C%0A%20%20%20%20%20%20%20%20%7B%20type%3A%20'states'%2C%20data%3A%20states%20%7D%2C%0A%20%20%20%20%20%20%5D%2C%0A%20%20%20%20%20%20resultsTemplate%3A%20ChecklistPickerResults%2C%0A%20%20%20%20%20%20selectAllOption%3A%20true%2C%0A%20%20%20%20%7D%3B%0A%20%20%7D%0A%0A%20%20onChanged(%24event%3F%3A%20Event)%20%7B%7D%0A%7D%0A`,
         cssSource: `%2F**%20No%20CSS%20for%20this%20example%20*%2F%0A`,
         htmlSource: `%3Cdiv%20class%3D%22selected-value%22%3ESelected%20States%3A%20%3Cspan%20*ngFor%3D%22let%20item%20of%20value.states%22%3E%7B%7Bitem%7D%7D%20%3C%2Fspan%3E%0A%20%20%20%20Selected%20Collaborators%3A%20%3Cspan%20*ngFor%3D%22let%20item%20of%20value.collaborators%22%3E%7B%7Bitem%7D%7D%20%3C%2Fspan%3E%3C%2Fdiv%3E%0A%3Cmulti-picker%0A%20%20%20%20%5Bsource%5D%3D%22staticDemo%22%0A%20%20%20%20%5Bplaceholder%5D%3D%22placeholder%22%0A%20%20%20%20%5Btypes%5D%3D%22types%22%0A%20%20%20%20%5B(ngModel)%5D%3D%22value%22%0A%20%20%20%20(changed)%3D%22onChanged(%24event)%22%3E%0A%3C%2Fmulti-picker%3E%0A`
     },
     'nested-multi-picker': {
         title: 'Nested Multi Picker Example',
         component: NestedMultiPickerExample,
-        tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0Aimport%20%7B%20ChecklistPickerResults%20%7D%20from%20'novo-elements'%3B%0A%0A%2F**%0A%20*%20%40title%20Nested%20Multi%20Picker%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'nested-multi-picker-example'%2C%0A%20%20templateUrl%3A%20'nested-multi-picker-example.html'%2C%0A%20%20styleUrls%3A%20%5B'nested-multi-picker-example.css'%5D%2C%0A%7D)%0Aexport%20class%20NestedMultiPickerExample%20%7B%0A%20%20placeholder%3A%20string%20%3D%20'Select...'%3B%0A%20%20parentChild%3A%20any%3B%0A%20%20parentChildTypes%3A%20any%3B%0A%20%20formatted%3A%20any%3B%0A%20%20parentChildValue%3A%20any%3B%0A%0A%20%20constructor()%20%7B%0A%20%20%20%20let%20departments%20%3D%20%5B%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%201%2C%0A%20%20%20%20%20%20%20%20name%3A%20'Sales'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%202%2C%0A%20%20%20%20%20%20%20%20name%3A%20'Engineering'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%203%2C%0A%20%20%20%20%20%20%20%20name%3A%20'Marketing'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%204%2C%0A%20%20%20%20%20%20%20%20name%3A%20'Finance'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%205%2C%0A%20%20%20%20%20%20%20%20name%3A%20'Nobody%20Works%20Here'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%5D%3B%0A%20%20%20%20let%20users%20%3D%20%5B%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%201%2C%0A%20%20%20%20%20%20%20%20departments%3A%20%5B1%2C%202%2C%204%5D%2C%0A%20%20%20%20%20%20%20%20name%3A%20'Bob%20Sales%2FEngineering%2FFin'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%202%2C%0A%20%20%20%20%20%20%20%20departments%3A%20%5B4%5D%2C%0A%20%20%20%20%20%20%20%20name%3A%20'Beth%20Fin'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%203%2C%0A%20%20%20%20%20%20%20%20departments%3A%20%5B2%5D%2C%0A%20%20%20%20%20%20%20%20name%3A%20'Artemis%20Eng'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%204%2C%0A%20%20%20%20%20%20%20%20departments%3A%20%5B1%5D%2C%0A%20%20%20%20%20%20%20%20name%3A%20'Andy%20Sales'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%205%2C%0A%20%20%20%20%20%20%20%20departments%3A%20%5B3%5D%2C%0A%20%20%20%20%20%20%20%20name%3A%20'Zoe%20Marketing'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%206%2C%0A%20%20%20%20%20%20%20%20departments%3A%20%5B4%2C%202%5D%2C%0A%20%20%20%20%20%20%20%20name%3A%20'Ziva%20Eng%20Fin'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%5D%3B%0A%20%20%20%20this.parentChild%20%3D%20%7B%0A%20%20%20%20%20%20options%3A%20%5B%0A%20%20%20%20%20%20%20%20%7B%20type%3A%20'departments'%2C%20data%3A%20departments%2C%20format%3A%20'%24name'%2C%20field%3A%20'id'%2C%20isParentOf%3A%20'users'%20%7D%2C%0A%20%20%20%20%20%20%20%20%7B%20type%3A%20'users'%2C%20data%3A%20users%2C%20format%3A%20'%24name'%2C%20field%3A%20'id'%2C%20isChildOf%3A%20'departments'%20%7D%2C%0A%20%20%20%20%20%20%5D%2C%0A%20%20%20%20%20%20resultsTemplate%3A%20ChecklistPickerResults%2C%0A%20%20%20%20%20%20selectAllOption%3A%20false%2C%0A%20%20%20%20%20%20strictRelationship%3A%20false%2C%0A%20%20%20%20%20%20chipsCount%3A%206%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20this.parentChildTypes%20%3D%20%5B%0A%20%20%20%20%20%20%7B%20value%3A%20'departments'%2C%20isParentOf%3A%20true%2C%20singular%3A%20'department'%20%7D%2C%0A%20%20%20%20%20%20%7B%20value%3A%20'users'%2C%20isChildOf%3A%20true%2C%20singular%3A%20'user'%20%7D%2C%0A%20%20%20%20%5D%3B%0A%20%20%20%20this.parentChildValue%20%3D%20%7B%20departments%3A%20%5B2%2C%203%2C%204%5D%2C%20users%3A%20%5B4%2C%205%5D%20%7D%3B%0A%20%20%7D%0A%0A%20%20onChanged(event%3F%3A%20Event)%20%7B%7D%0A%7D%0A`,
+        tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0Aimport%20%7B%20ChecklistPickerResults%20%7D%20from%20'novo-elements'%3B%0A%0A%2F**%0A%20*%20%40title%20Nested%20Multi%20Picker%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'nested-multi-picker-example'%2C%0A%20%20templateUrl%3A%20'nested-multi-picker-example.html'%2C%0A%20%20styleUrls%3A%20%5B'nested-multi-picker-example.css'%5D%2C%0A%7D)%0Aexport%20class%20NestedMultiPickerExample%20%7B%0A%20%20placeholder%3A%20string%20%3D%20'Select...'%3B%0A%20%20parentChild%3A%20any%3B%0A%20%20parentChildTypes%3A%20any%3B%0A%20%20formatted%3A%20any%3B%0A%20%20parentChildValue%3A%20any%3B%0A%0A%20%20constructor()%20%7B%0A%20%20%20%20const%20departments%20%3D%20%5B%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%201%2C%0A%20%20%20%20%20%20%20%20name%3A%20'Sales'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%202%2C%0A%20%20%20%20%20%20%20%20name%3A%20'Engineering'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%203%2C%0A%20%20%20%20%20%20%20%20name%3A%20'Marketing'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%204%2C%0A%20%20%20%20%20%20%20%20name%3A%20'Finance'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%205%2C%0A%20%20%20%20%20%20%20%20name%3A%20'Nobody%20Works%20Here'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%5D%3B%0A%20%20%20%20const%20users%20%3D%20%5B%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%201%2C%0A%20%20%20%20%20%20%20%20departments%3A%20%5B1%2C%202%2C%204%5D%2C%0A%20%20%20%20%20%20%20%20name%3A%20'Bob%20Sales%2FEngineering%2FFin'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%202%2C%0A%20%20%20%20%20%20%20%20departments%3A%20%5B4%5D%2C%0A%20%20%20%20%20%20%20%20name%3A%20'Beth%20Fin'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%203%2C%0A%20%20%20%20%20%20%20%20departments%3A%20%5B2%5D%2C%0A%20%20%20%20%20%20%20%20name%3A%20'Artemis%20Eng'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%204%2C%0A%20%20%20%20%20%20%20%20departments%3A%20%5B1%5D%2C%0A%20%20%20%20%20%20%20%20name%3A%20'Andy%20Sales'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%205%2C%0A%20%20%20%20%20%20%20%20departments%3A%20%5B3%5D%2C%0A%20%20%20%20%20%20%20%20name%3A%20'Zoe%20Marketing'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%206%2C%0A%20%20%20%20%20%20%20%20departments%3A%20%5B4%2C%202%5D%2C%0A%20%20%20%20%20%20%20%20name%3A%20'Ziva%20Eng%20Fin'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%5D%3B%0A%20%20%20%20this.parentChild%20%3D%20%7B%0A%20%20%20%20%20%20options%3A%20%5B%0A%20%20%20%20%20%20%20%20%7B%20type%3A%20'departments'%2C%20data%3A%20departments%2C%20format%3A%20'%24name'%2C%20field%3A%20'id'%2C%20isParentOf%3A%20'users'%20%7D%2C%0A%20%20%20%20%20%20%20%20%7B%20type%3A%20'users'%2C%20data%3A%20users%2C%20format%3A%20'%24name'%2C%20field%3A%20'id'%2C%20isChildOf%3A%20'departments'%20%7D%2C%0A%20%20%20%20%20%20%5D%2C%0A%20%20%20%20%20%20resultsTemplate%3A%20ChecklistPickerResults%2C%0A%20%20%20%20%20%20selectAllOption%3A%20false%2C%0A%20%20%20%20%20%20strictRelationship%3A%20false%2C%0A%20%20%20%20%20%20chipsCount%3A%206%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20this.parentChildTypes%20%3D%20%5B%0A%20%20%20%20%20%20%7B%20value%3A%20'departments'%2C%20isParentOf%3A%20true%2C%20singular%3A%20'department'%20%7D%2C%0A%20%20%20%20%20%20%7B%20value%3A%20'users'%2C%20isChildOf%3A%20true%2C%20singular%3A%20'user'%20%7D%2C%0A%20%20%20%20%5D%3B%0A%20%20%20%20this.parentChildValue%20%3D%20%7B%20departments%3A%20%5B2%2C%203%2C%204%5D%2C%20users%3A%20%5B4%2C%205%5D%20%7D%3B%0A%20%20%7D%0A%0A%20%20onChanged(event%3F%3A%20Event)%20%7B%7D%0A%7D%0A`,
         cssSource: `%2F**%20No%20CSS%20for%20this%20example%20*%2F%0A`,
         htmlSource: `%3Cdiv%20class%3D%22selected-value%22%3ESelected%20Departments%3A%20%3Cspan%20*ngFor%3D%22let%20item%20of%20parentChildValue.departments%22%3E%7B%7Bitem%7D%7D%20%3C%2Fspan%3E%0A%20%20%20%20Selected%20Users%3A%20%3Cspan%20*ngFor%3D%22let%20item%20of%20parentChildValue.users%22%3E%7B%7Bitem%7D%7D%20%3C%2Fspan%3E%3C%2Fdiv%3E%0A%3Cmulti-picker%0A%20%20%20%20%5Bsource%5D%3D%22parentChild%22%0A%20%20%20%20%5Bplaceholder%5D%3D%22placeholder%22%0A%20%20%20%20%5Btypes%5D%3D%22parentChildTypes%22%0A%20%20%20%20%5B(ngModel)%5D%3D%22parentChildValue%22%0A%20%20%20%20(changed)%3D%22onChanged(%24event)%22%3E%0A%3C%2Fmulti-picker%3E%0A`
     },
     'async-picker': {
         title: 'Async Picker Example',
         component: AsyncPickerExample,
-        tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0A%0A%2F**%0A%20*%20%40title%20Async%20Picker%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'async-picker-example'%2C%0A%20%20templateUrl%3A%20'async-picker-example.html'%2C%0A%20%20styleUrls%3A%20%5B'async-picker-example.css'%5D%2C%0A%7D)%0Aexport%20class%20AsyncPickerExample%20%7B%0A%20%20public%20placeholder%3A%20string%20%3D%20'Select...'%3B%0A%20%20public%20value%3A%20string%3B%0A%20%20public%20async%3A%20any%3B%0A%0A%20%20constructor()%20%7B%0A%20%20%20%20this.value%20%3D%20null%3B%0A%20%20%20%20this.async%20%3D%20%7B%0A%20%20%20%20%20%20enableInfiniteScroll%3A%20true%2C%0A%20%20%20%20%20%20options%3A%20(term%2C%20page)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20return%20new%20Promise((resolve)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20setTimeout(()%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20let%20arr%20%3D%20%5B%5D%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20for%20(let%20i%20%3D%200%3B%20i%20%3C%2020%3B%20i%2B%2B)%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20arr.push(%7B%20value%3A%20%60Page%3A%20%24%7Bpage%7D%20-%20Item%3A%20%24%7Bi%20%2B%201%7D%60%2C%20label%3A%20%60Page%3A%20%24%7Bpage%7D%20-%20Item%3A%20%24%7Bi%20%2B%201%7D%60%20%7D)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20resolve(arr)%3B%0A%20%20%20%20%20%20%20%20%20%20%7D%2C%201000)%3B%0A%20%20%20%20%20%20%20%20%7D)%3B%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%7D%3B%0A%20%20%7D%0A%0A%20%20onChanged(event)%20%7B%0A%20%20%20%20console.log('EVENT'%2C%20event)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%7D%0A`,
+        tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0A%0A%2F**%0A%20*%20%40title%20Async%20Picker%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'async-picker-example'%2C%0A%20%20templateUrl%3A%20'async-picker-example.html'%2C%0A%20%20styleUrls%3A%20%5B'async-picker-example.css'%5D%2C%0A%7D)%0Aexport%20class%20AsyncPickerExample%20%7B%0A%20%20public%20placeholder%3A%20string%20%3D%20'Select...'%3B%0A%20%20public%20value%3A%20string%3B%0A%20%20public%20async%3A%20any%3B%0A%0A%20%20constructor()%20%7B%0A%20%20%20%20this.value%20%3D%20null%3B%0A%20%20%20%20this.async%20%3D%20%7B%0A%20%20%20%20%20%20enableInfiniteScroll%3A%20true%2C%0A%20%20%20%20%20%20options%3A%20(term%2C%20page)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20return%20new%20Promise((resolve)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20setTimeout(()%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20const%20arr%20%3D%20%5B%5D%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20for%20(let%20i%20%3D%200%3B%20i%20%3C%2020%3B%20i%2B%2B)%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20arr.push(%7B%20value%3A%20%60Page%3A%20%24%7Bpage%7D%20-%20Item%3A%20%24%7Bi%20%2B%201%7D%60%2C%20label%3A%20%60Page%3A%20%24%7Bpage%7D%20-%20Item%3A%20%24%7Bi%20%2B%201%7D%60%20%7D)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20resolve(arr)%3B%0A%20%20%20%20%20%20%20%20%20%20%7D%2C%201000)%3B%0A%20%20%20%20%20%20%20%20%7D)%3B%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%7D%3B%0A%20%20%7D%0A%0A%20%20onChanged(event)%20%7B%0A%20%20%20%20console.log('EVENT'%2C%20event)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%7D%0A`,
         cssSource: `%2F**%20No%20CSS%20for%20this%20example%20*%2F%0A`,
         htmlSource: `%3Cdiv%20class%3D%22selected-value%22%3ESelected%20Value%3A%20%7B%7Bvalue%7D%7D%3C%2Fdiv%3E%0A%3Cnovo-picker%20%5Bconfig%5D%3D%22async%22%20%5Bplaceholder%5D%3D%22placeholder%22%20%5B(ngModel)%5D%3D%22value%22%3E%3C%2Fnovo-picker%3E%0A`
     },
@@ -71893,7 +71893,7 @@ const EXAMPLE_COMPONENTS = {
     'custom-picker-results': {
         title: 'Custom Picker Results Example',
         component: CustomPickerResultsExample,
-        tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0Aimport%20%7B%20PickerResults%20%7D%20from%20'novo-elements'%3B%0A%0A%40Component(%7B%0A%20%20selector%3A%20'custom-picker-results'%2C%0A%20%20host%3A%20%7B%0A%20%20%20%20class%3A%20'active%20picker-results'%2C%0A%20%20%7D%2C%0A%20%20template%3A%20%60%0A%20%20%20%20%3Cnovo-loading%20theme%3D%22line%22%20*ngIf%3D%22isLoading%20%26%26%20!matches.length%22%3E%3C%2Fnovo-loading%3E%0A%20%20%20%20%3Cnovo-list%20*ngIf%3D%22matches.length%20%3E%200%22%20direction%3D%22vertical%22%3E%0A%20%20%20%20%20%20%3Cnovo-list-item%0A%20%20%20%20%20%20%20%20*ngFor%3D%22let%20match%20of%20matches%22%0A%20%20%20%20%20%20%20%20(click)%3D%22selectMatch(%24event)%22%0A%20%20%20%20%20%20%20%20%5Bclass.active%5D%3D%22match%20%3D%3D%3D%20activeMatch%22%0A%20%20%20%20%20%20%20%20(mouseenter)%3D%22selectActive(match)%22%3E%0A%20%20%20%20%20%20%20%20%3Citem-content%3E%0A%20%20%20%20%20%20%20%20%20%20**CUSTOM**%20%3Cb%20%5BinnerHtml%5D%3D%22highlight(match.label%2C%20term)%22%3E%3C%2Fb%3E%0A%20%20%20%20%20%20%20%20%3C%2Fitem-content%3E%0A%20%20%20%20%20%20%3C%2Fnovo-list-item%3E%0A%20%20%20%20%3C%2Fnovo-list%3E%0A%20%20%20%20%3Cp%20class%3D%22picker-error%22%20*ngIf%3D%22hasError%22%3EOops!%20An%20error%20occured.%3C%2Fp%3E%0A%20%20%20%20%3Cp%20class%3D%22picker-null%22%20*ngIf%3D%22!isLoading%20%26%26%20!matches.length%20%26%26%20!hasError%22%3ENo%20results%20to%20display...%3C%2Fp%3E%0A%20%20%60%2C%0A%7D)%0Aexport%20class%20CustomPickerResults%20extends%20PickerResults%20%7B%7D%0A%0A%2F**%0A%20*%20%40title%20Custom%20Picker%20Results%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'custom-picker-results-example'%2C%0A%20%20templateUrl%3A%20'custom-picker-results-example.html'%2C%0A%20%20styleUrls%3A%20%5B'custom-picker-results-example.css'%5D%2C%0A%7D)%0Aexport%20class%20CustomPickerResultsExample%20%7B%0A%20%20public%20placeholder%3A%20string%20%3D%20'Select...'%3B%0A%20%20public%20custom%3A%20any%3B%0A%20%20public%20value%3A%20string%3B%0A%0A%20%20constructor()%20%7B%0A%20%20%20%20let%20collaborators%20%3D%20%5B%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%201%2C%0A%20%20%20%20%20%20%20%20firstName%3A%20'Brian'%2C%0A%20%20%20%20%20%20%20%20lastName%3A%20'Kimball'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%202%2C%0A%20%20%20%20%20%20%20%20firstName%3A%20'Josh'%2C%0A%20%20%20%20%20%20%20%20lastName%3A%20'Godi'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%203%2C%0A%20%20%20%20%20%20%20%20firstName%3A%20'Alec'%2C%0A%20%20%20%20%20%20%20%20lastName%3A%20'Sibilia'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%204%2C%0A%20%20%20%20%20%20%20%20firstName%3A%20'Kameron'%2C%0A%20%20%20%20%20%20%20%20lastName%3A%20'Sween'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%5D%3B%0A%0A%20%20%20%20this.custom%20%3D%20%7B%0A%20%20%20%20%20%20resultsTemplate%3A%20CustomPickerResults%2C%0A%20%20%20%20%20%20format%3A%20'%24firstName%20%24lastName'%2C%0A%20%20%20%20%20%20options%3A%20collaborators%2C%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20this.value%20%3D%20null%3B%0A%20%20%7D%0A%0A%20%20onChanged(event)%20%7B%0A%20%20%20%20console.log('EVENT'%2C%20event)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%7D%0A`,
+        tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0Aimport%20%7B%20PickerResults%20%7D%20from%20'novo-elements'%3B%0A%0A%40Component(%7B%0A%20%20selector%3A%20'custom-picker-results'%2C%0A%20%20host%3A%20%7B%0A%20%20%20%20class%3A%20'active%20picker-results'%2C%0A%20%20%7D%2C%0A%20%20template%3A%20%60%0A%20%20%20%20%3Cnovo-loading%20theme%3D%22line%22%20*ngIf%3D%22isLoading%20%26%26%20!matches.length%22%3E%3C%2Fnovo-loading%3E%0A%20%20%20%20%3Cnovo-list%20*ngIf%3D%22matches.length%20%3E%200%22%20direction%3D%22vertical%22%3E%0A%20%20%20%20%20%20%3Cnovo-list-item%0A%20%20%20%20%20%20%20%20*ngFor%3D%22let%20match%20of%20matches%22%0A%20%20%20%20%20%20%20%20(click)%3D%22selectMatch(%24event)%22%0A%20%20%20%20%20%20%20%20%5Bclass.active%5D%3D%22match%20%3D%3D%3D%20activeMatch%22%0A%20%20%20%20%20%20%20%20(mouseenter)%3D%22selectActive(match)%22%3E%0A%20%20%20%20%20%20%20%20%3Citem-content%3E%0A%20%20%20%20%20%20%20%20%20%20**CUSTOM**%20%3Cb%20%5BinnerHtml%5D%3D%22highlight(match.label%2C%20term)%22%3E%3C%2Fb%3E%0A%20%20%20%20%20%20%20%20%3C%2Fitem-content%3E%0A%20%20%20%20%20%20%3C%2Fnovo-list-item%3E%0A%20%20%20%20%3C%2Fnovo-list%3E%0A%20%20%20%20%3Cp%20class%3D%22picker-error%22%20*ngIf%3D%22hasError%22%3EOops!%20An%20error%20occured.%3C%2Fp%3E%0A%20%20%20%20%3Cp%20class%3D%22picker-null%22%20*ngIf%3D%22!isLoading%20%26%26%20!matches.length%20%26%26%20!hasError%22%3ENo%20results%20to%20display...%3C%2Fp%3E%0A%20%20%60%2C%0A%7D)%0Aexport%20class%20CustomPickerResults%20extends%20PickerResults%20%7B%7D%0A%0A%2F**%0A%20*%20%40title%20Custom%20Picker%20Results%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'custom-picker-results-example'%2C%0A%20%20templateUrl%3A%20'custom-picker-results-example.html'%2C%0A%20%20styleUrls%3A%20%5B'custom-picker-results-example.css'%5D%2C%0A%7D)%0Aexport%20class%20CustomPickerResultsExample%20%7B%0A%20%20public%20placeholder%3A%20string%20%3D%20'Select...'%3B%0A%20%20public%20custom%3A%20any%3B%0A%20%20public%20value%3A%20string%3B%0A%0A%20%20constructor()%20%7B%0A%20%20%20%20const%20collaborators%20%3D%20%5B%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%201%2C%0A%20%20%20%20%20%20%20%20firstName%3A%20'Brian'%2C%0A%20%20%20%20%20%20%20%20lastName%3A%20'Kimball'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%202%2C%0A%20%20%20%20%20%20%20%20firstName%3A%20'Josh'%2C%0A%20%20%20%20%20%20%20%20lastName%3A%20'Godi'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%203%2C%0A%20%20%20%20%20%20%20%20firstName%3A%20'Alec'%2C%0A%20%20%20%20%20%20%20%20lastName%3A%20'Sibilia'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%204%2C%0A%20%20%20%20%20%20%20%20firstName%3A%20'Kameron'%2C%0A%20%20%20%20%20%20%20%20lastName%3A%20'Sween'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%5D%3B%0A%0A%20%20%20%20this.custom%20%3D%20%7B%0A%20%20%20%20%20%20resultsTemplate%3A%20CustomPickerResults%2C%0A%20%20%20%20%20%20format%3A%20'%24firstName%20%24lastName'%2C%0A%20%20%20%20%20%20options%3A%20collaborators%2C%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20this.value%20%3D%20null%3B%0A%20%20%7D%0A%0A%20%20onChanged(event)%20%7B%0A%20%20%20%20console.log('EVENT'%2C%20event)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%7D%0A`,
         cssSource: `%2F**%20No%20CSS%20for%20this%20example%20*%2F%0A`,
         htmlSource: `%3Cdiv%20class%3D%22selected-value%22%3ESelected%20Value%3A%20%7B%7Bvalue%7D%7D%3C%2Fdiv%3E%0A%3Cnovo-picker%20%5Bconfig%5D%3D%22custom%22%20%5Bplaceholder%5D%3D%22placeholder%22%20%5B(ngModel)%5D%3D%22value%22%3E%3C%2Fnovo-picker%3E%0A`,
         selectorName: 'CustomPickerResultsExample, CustomPickerResults'
@@ -71901,35 +71901,35 @@ const EXAMPLE_COMPONENTS = {
     'default-options-picker': {
         title: 'Default Options Picker Example',
         component: DefaultOptionsPickerExample,
-        tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0A%0A%2F**%0A%20*%20%40title%20Default%20Options%20Picker%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'default-options-picker-example'%2C%0A%20%20templateUrl%3A%20'default-options-picker-example.html'%2C%0A%20%20styleUrls%3A%20%5B'default-options-picker-example.css'%5D%2C%0A%7D)%0Aexport%20class%20DefaultOptionsPickerExample%20%7B%0A%20%20public%20placeholder%3A%20string%20%3D%20'Select...'%3B%0A%20%20public%20defaultArrayConfig%3A%20any%3B%0A%20%20public%20defaultFunctionConfig%3A%20any%3B%0A%20%20public%20defaultArrayValue%3A%20string%3B%0A%20%20public%20defaultFunctionValue%3A%20string%3B%0A%20%20public%20value%3A%20string%3B%0A%0A%20%20constructor()%20%7B%0A%20%20%20%20let%20states%20%3D%20%5B%0A%20%20%20%20%20%20'Alabama'%2C%0A%20%20%20%20%20%20'Alaska'%2C%0A%20%20%20%20%20%20'Arizona'%2C%0A%20%20%20%20%20%20'Arkansas'%2C%0A%20%20%20%20%20%20'California'%2C%0A%20%20%20%20%20%20'Colorado'%2C%0A%20%20%20%20%20%20'Connecticut'%2C%0A%20%20%20%20%20%20'Delaware'%2C%0A%20%20%20%20%20%20'Florida'%2C%0A%20%20%20%20%20%20'Georgia'%2C%0A%20%20%20%20%20%20'Hawaii'%2C%0A%20%20%20%20%20%20'Idaho'%2C%0A%20%20%20%20%20%20'Illinois'%2C%0A%20%20%20%20%20%20'Indiana'%2C%0A%20%20%20%20%20%20'Iowa'%2C%0A%20%20%20%20%20%20'Kansas'%2C%0A%20%20%20%20%20%20'Kentucky'%2C%0A%20%20%20%20%20%20'Louisiana'%2C%0A%20%20%20%20%20%20'Maine'%2C%0A%20%20%20%20%20%20'Maryland'%2C%0A%20%20%20%20%20%20'Massachusetts'%2C%0A%20%20%20%20%20%20'Michigan'%2C%0A%20%20%20%20%20%20'Minnesota'%2C%0A%20%20%20%20%20%20'Mississippi'%2C%0A%20%20%20%20%20%20'Missouri'%2C%0A%20%20%20%20%20%20'Montana'%2C%0A%20%20%20%20%20%20'Nebraska'%2C%0A%20%20%20%20%20%20'Nevada'%2C%0A%20%20%20%20%20%20'New%20Hampshire'%2C%0A%20%20%20%20%20%20'New%20Jersey'%2C%0A%20%20%20%20%20%20'New%20Mexico'%2C%0A%20%20%20%20%20%20'New%20York'%2C%0A%20%20%20%20%20%20'North%20Dakota'%2C%0A%20%20%20%20%20%20'North%20Carolina'%2C%0A%20%20%20%20%20%20'Ohio'%2C%0A%20%20%20%20%20%20'Oklahoma'%2C%0A%20%20%20%20%20%20'Oregon'%2C%0A%20%20%20%20%20%20'Pennsylvania'%2C%0A%20%20%20%20%20%20'Rhode%20Island'%2C%0A%20%20%20%20%20%20'South%20Carolina'%2C%0A%20%20%20%20%20%20'South%20Dakota'%2C%0A%20%20%20%20%20%20'Tennessee'%2C%0A%20%20%20%20%20%20'Texas'%2C%0A%20%20%20%20%20%20'Utah'%2C%0A%20%20%20%20%20%20'Vermont'%2C%0A%20%20%20%20%20%20'Virginia'%2C%0A%20%20%20%20%20%20'Washington'%2C%0A%20%20%20%20%20%20'West%20Virginia'%2C%0A%20%20%20%20%20%20'Wisconsin'%2C%0A%20%20%20%20%20%20'Wyoming'%2C%0A%20%20%20%20%5D%3B%0A%0A%20%20%20%20this.defaultArrayConfig%20%3D%20%7B%0A%20%20%20%20%20%20defaultOptions%3A%20%5Bstates%5B0%5D%2C%20states%5B1%5D%5D%2C%0A%20%20%20%20%20%20minSearchLength%3A%202%2C%0A%20%20%20%20%20%20options%3A%20()%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20return%20new%20Promise((resolve)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20setTimeout(()%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20resolve(states)%3B%0A%20%20%20%20%20%20%20%20%20%20%7D%2C%20300)%3B%0A%20%20%20%20%20%20%20%20%7D)%3B%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20this.defaultFunctionConfig%20%3D%20%7B%0A%20%20%20%20%20%20minSearchLength%3A%202%2C%0A%20%20%20%20%20%20defaultOptions%3A%20()%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20return%20%5Bstates%5B2%5D%2C%20states%5B3%5D%5D%3B%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20options%3A%20()%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20return%20new%20Promise((resolve)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20setTimeout(()%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20resolve(states)%3B%0A%20%20%20%20%20%20%20%20%20%20%7D%2C%20300)%3B%0A%20%20%20%20%20%20%20%20%7D)%3B%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%7D%3B%0A%20%20%7D%0A%0A%20%20onChanged(event)%20%7B%0A%20%20%20%20console.log('EVENT'%2C%20event)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%7D%0A`,
+        tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0A%0A%2F**%0A%20*%20%40title%20Default%20Options%20Picker%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'default-options-picker-example'%2C%0A%20%20templateUrl%3A%20'default-options-picker-example.html'%2C%0A%20%20styleUrls%3A%20%5B'default-options-picker-example.css'%5D%2C%0A%7D)%0Aexport%20class%20DefaultOptionsPickerExample%20%7B%0A%20%20public%20placeholder%3A%20string%20%3D%20'Select...'%3B%0A%20%20public%20defaultArrayConfig%3A%20any%3B%0A%20%20public%20defaultFunctionConfig%3A%20any%3B%0A%20%20public%20defaultArrayValue%3A%20string%3B%0A%20%20public%20defaultFunctionValue%3A%20string%3B%0A%20%20public%20value%3A%20string%3B%0A%0A%20%20constructor()%20%7B%0A%20%20%20%20const%20states%20%3D%20%5B%0A%20%20%20%20%20%20'Alabama'%2C%0A%20%20%20%20%20%20'Alaska'%2C%0A%20%20%20%20%20%20'Arizona'%2C%0A%20%20%20%20%20%20'Arkansas'%2C%0A%20%20%20%20%20%20'California'%2C%0A%20%20%20%20%20%20'Colorado'%2C%0A%20%20%20%20%20%20'Connecticut'%2C%0A%20%20%20%20%20%20'Delaware'%2C%0A%20%20%20%20%20%20'Florida'%2C%0A%20%20%20%20%20%20'Georgia'%2C%0A%20%20%20%20%20%20'Hawaii'%2C%0A%20%20%20%20%20%20'Idaho'%2C%0A%20%20%20%20%20%20'Illinois'%2C%0A%20%20%20%20%20%20'Indiana'%2C%0A%20%20%20%20%20%20'Iowa'%2C%0A%20%20%20%20%20%20'Kansas'%2C%0A%20%20%20%20%20%20'Kentucky'%2C%0A%20%20%20%20%20%20'Louisiana'%2C%0A%20%20%20%20%20%20'Maine'%2C%0A%20%20%20%20%20%20'Maryland'%2C%0A%20%20%20%20%20%20'Massachusetts'%2C%0A%20%20%20%20%20%20'Michigan'%2C%0A%20%20%20%20%20%20'Minnesota'%2C%0A%20%20%20%20%20%20'Mississippi'%2C%0A%20%20%20%20%20%20'Missouri'%2C%0A%20%20%20%20%20%20'Montana'%2C%0A%20%20%20%20%20%20'Nebraska'%2C%0A%20%20%20%20%20%20'Nevada'%2C%0A%20%20%20%20%20%20'New%20Hampshire'%2C%0A%20%20%20%20%20%20'New%20Jersey'%2C%0A%20%20%20%20%20%20'New%20Mexico'%2C%0A%20%20%20%20%20%20'New%20York'%2C%0A%20%20%20%20%20%20'North%20Dakota'%2C%0A%20%20%20%20%20%20'North%20Carolina'%2C%0A%20%20%20%20%20%20'Ohio'%2C%0A%20%20%20%20%20%20'Oklahoma'%2C%0A%20%20%20%20%20%20'Oregon'%2C%0A%20%20%20%20%20%20'Pennsylvania'%2C%0A%20%20%20%20%20%20'Rhode%20Island'%2C%0A%20%20%20%20%20%20'South%20Carolina'%2C%0A%20%20%20%20%20%20'South%20Dakota'%2C%0A%20%20%20%20%20%20'Tennessee'%2C%0A%20%20%20%20%20%20'Texas'%2C%0A%20%20%20%20%20%20'Utah'%2C%0A%20%20%20%20%20%20'Vermont'%2C%0A%20%20%20%20%20%20'Virginia'%2C%0A%20%20%20%20%20%20'Washington'%2C%0A%20%20%20%20%20%20'West%20Virginia'%2C%0A%20%20%20%20%20%20'Wisconsin'%2C%0A%20%20%20%20%20%20'Wyoming'%2C%0A%20%20%20%20%5D%3B%0A%0A%20%20%20%20this.defaultArrayConfig%20%3D%20%7B%0A%20%20%20%20%20%20defaultOptions%3A%20%5Bstates%5B0%5D%2C%20states%5B1%5D%5D%2C%0A%20%20%20%20%20%20minSearchLength%3A%202%2C%0A%20%20%20%20%20%20options%3A%20()%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20return%20new%20Promise((resolve)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20setTimeout(()%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20resolve(states)%3B%0A%20%20%20%20%20%20%20%20%20%20%7D%2C%20300)%3B%0A%20%20%20%20%20%20%20%20%7D)%3B%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20this.defaultFunctionConfig%20%3D%20%7B%0A%20%20%20%20%20%20minSearchLength%3A%202%2C%0A%20%20%20%20%20%20defaultOptions%3A%20()%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20return%20%5Bstates%5B2%5D%2C%20states%5B3%5D%5D%3B%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20options%3A%20()%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20return%20new%20Promise((resolve)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20setTimeout(()%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20resolve(states)%3B%0A%20%20%20%20%20%20%20%20%20%20%7D%2C%20300)%3B%0A%20%20%20%20%20%20%20%20%7D)%3B%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%7D%3B%0A%20%20%7D%0A%0A%20%20onChanged(event)%20%7B%0A%20%20%20%20console.log('EVENT'%2C%20event)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%7D%0A`,
         cssSource: `%2F**%20No%20CSS%20for%20this%20example%20*%2F%0A`,
         htmlSource: `%3Cdiv%20class%3D%22selected-value%22%3ESelected%20Value%3A%20%7B%7BdefaultArrayValue%7D%7D%3C%2Fdiv%3E%0A%3Cnovo-picker%20%5Bconfig%5D%3D%22defaultArrayConfig%22%20%5Bplaceholder%5D%3D%22placeholder%22%20%5B(ngModel)%5D%3D%22defaultArrayValue%22%3E%3C%2Fnovo-picker%3E%0A%3Cbr%2F%3E%3Cbr%2F%3E%0A%3Cdiv%20class%3D%22selected-value%22%3ESelected%20Value%3A%20%7B%7BdefaultFunctionValue%7D%7D%3C%2Fdiv%3E%0A%3Cnovo-picker%20%5Bconfig%5D%3D%22defaultFunctionConfig%22%20%5Bplaceholder%5D%3D%22placeholder%22%20%5B(ngModel)%5D%3D%22defaultFunctionValue%22%3E%3C%2Fnovo-picker%3E%0A`
     },
     'entity-picker': {
         title: 'Entity Picker Example',
         component: EntityPickerExample,
-        tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0A%0A%2F**%0A%20*%20%40title%20Entity%20Picker%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'entity-picker-example'%2C%0A%20%20templateUrl%3A%20'entity-picker-example.html'%2C%0A%20%20styleUrls%3A%20%5B'entity-picker-example.css'%5D%2C%0A%7D)%0Aexport%20class%20EntityPickerExample%20%7B%0A%20%20public%20placeholder%3A%20string%20%3D%20'Select...'%3B%0A%20%20public%20entityDemo%3A%20any%3B%0A%20%20public%20entity%3A%20any%3B%0A%0A%20%20constructor()%20%7B%0A%20%20%20%20let%20collaborators%20%3D%20%5B%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%201%2C%0A%20%20%20%20%20%20%20%20firstName%3A%20'Brian'%2C%0A%20%20%20%20%20%20%20%20lastName%3A%20'Kimball'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%202%2C%0A%20%20%20%20%20%20%20%20firstName%3A%20'Josh'%2C%0A%20%20%20%20%20%20%20%20lastName%3A%20'Godi'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%203%2C%0A%20%20%20%20%20%20%20%20firstName%3A%20'Alec'%2C%0A%20%20%20%20%20%20%20%20lastName%3A%20'Sibilia'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%204%2C%0A%20%20%20%20%20%20%20%20firstName%3A%20'Kameron'%2C%0A%20%20%20%20%20%20%20%20lastName%3A%20'Sween'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%5D%3B%0A%0A%20%20%20%20this.entityDemo%20%3D%20%7B%0A%20%20%20%20%20%20options%3A%20collaborators%2C%0A%20%20%20%20%20%20format%3A%20'%24firstName%20%24lastName'%2C%0A%20%20%20%20%20%20entityIcon%3A%20'person'%2C%0A%20%20%20%20%7D%3B%0A%20%20%7D%0A%0A%20%20onChanged(event)%20%7B%0A%20%20%20%20console.log('EVENT'%2C%20event)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%7D%0A`,
+        tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0A%0A%2F**%0A%20*%20%40title%20Entity%20Picker%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'entity-picker-example'%2C%0A%20%20templateUrl%3A%20'entity-picker-example.html'%2C%0A%20%20styleUrls%3A%20%5B'entity-picker-example.css'%5D%2C%0A%7D)%0Aexport%20class%20EntityPickerExample%20%7B%0A%20%20public%20placeholder%3A%20string%20%3D%20'Select...'%3B%0A%20%20public%20entityDemo%3A%20any%3B%0A%20%20public%20entity%3A%20any%3B%0A%0A%20%20constructor()%20%7B%0A%20%20%20%20const%20collaborators%20%3D%20%5B%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%201%2C%0A%20%20%20%20%20%20%20%20firstName%3A%20'Brian'%2C%0A%20%20%20%20%20%20%20%20lastName%3A%20'Kimball'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%202%2C%0A%20%20%20%20%20%20%20%20firstName%3A%20'Josh'%2C%0A%20%20%20%20%20%20%20%20lastName%3A%20'Godi'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%203%2C%0A%20%20%20%20%20%20%20%20firstName%3A%20'Alec'%2C%0A%20%20%20%20%20%20%20%20lastName%3A%20'Sibilia'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%204%2C%0A%20%20%20%20%20%20%20%20firstName%3A%20'Kameron'%2C%0A%20%20%20%20%20%20%20%20lastName%3A%20'Sween'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%5D%3B%0A%0A%20%20%20%20this.entityDemo%20%3D%20%7B%0A%20%20%20%20%20%20options%3A%20collaborators%2C%0A%20%20%20%20%20%20format%3A%20'%24firstName%20%24lastName'%2C%0A%20%20%20%20%20%20entityIcon%3A%20'person'%2C%0A%20%20%20%20%7D%3B%0A%20%20%7D%0A%0A%20%20onChanged(event)%20%7B%0A%20%20%20%20console.log('EVENT'%2C%20event)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%7D%0A`,
         cssSource: `%2F**%20No%20CSS%20for%20this%20example%20*%2F%0A`,
         htmlSource: `%3Cdiv%20class%3D%22selected-value%22%3ESelected%20Value%3A%20%7B%7Bentity%7D%7D%3C%2Fdiv%3E%0A%3Cnovo-picker%20%5Bconfig%5D%3D%22entityDemo%22%20%5Bplaceholder%5D%3D%22placeholder%22%20%5B(ngModel)%5D%3D%22entity%22%3E%3C%2Fnovo-picker%3E%0A`
     },
     'formatted-picker': {
         title: 'Formatted Picker Example',
         component: FormattedPickerExample,
-        tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0A%0A%2F**%0A%20*%20%40title%20Formatted%20Picker%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'formatted-picker-example'%2C%0A%20%20templateUrl%3A%20'formatted-picker-example.html'%2C%0A%20%20styleUrls%3A%20%5B'formatted-picker-example.css'%5D%2C%0A%7D)%0Aexport%20class%20FormattedPickerExample%20%7B%0A%20%20public%20placeholder%3A%20string%20%3D%20'Select...'%3B%0A%20%20public%20formatted%3A%20any%3B%0A%20%20public%20value%3A%20string%3B%0A%0A%20%20constructor()%20%7B%0A%20%20%20%20let%20collaborators%20%3D%20%5B%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%201%2C%0A%20%20%20%20%20%20%20%20firstName%3A%20'Brian'%2C%0A%20%20%20%20%20%20%20%20lastName%3A%20'Kimball'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%202%2C%0A%20%20%20%20%20%20%20%20firstName%3A%20'Josh'%2C%0A%20%20%20%20%20%20%20%20lastName%3A%20'Godi'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%203%2C%0A%20%20%20%20%20%20%20%20firstName%3A%20'Alec'%2C%0A%20%20%20%20%20%20%20%20lastName%3A%20'Sibilia'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%204%2C%0A%20%20%20%20%20%20%20%20firstName%3A%20'Kameron'%2C%0A%20%20%20%20%20%20%20%20lastName%3A%20'Sween'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%5D%3B%0A%0A%20%20%20%20this.formatted%20%3D%20%7B%0A%20%20%20%20%20%20field%3A%20'id'%2C%0A%20%20%20%20%20%20format%3A%20%60%24firstName%20%24lastName%60%2C%0A%20%20%20%20%20%20options%3A%20collaborators%2C%0A%20%20%20%20%7D%3B%0A%20%20%7D%0A%0A%20%20onChanged(event)%20%7B%0A%20%20%20%20console.log('EVENT'%2C%20event)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%7D%0A`,
+        tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0A%0A%2F**%0A%20*%20%40title%20Formatted%20Picker%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'formatted-picker-example'%2C%0A%20%20templateUrl%3A%20'formatted-picker-example.html'%2C%0A%20%20styleUrls%3A%20%5B'formatted-picker-example.css'%5D%2C%0A%7D)%0Aexport%20class%20FormattedPickerExample%20%7B%0A%20%20public%20placeholder%3A%20string%20%3D%20'Select...'%3B%0A%20%20public%20formatted%3A%20any%3B%0A%20%20public%20value%3A%20string%3B%0A%0A%20%20constructor()%20%7B%0A%20%20%20%20const%20collaborators%20%3D%20%5B%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%201%2C%0A%20%20%20%20%20%20%20%20firstName%3A%20'Brian'%2C%0A%20%20%20%20%20%20%20%20lastName%3A%20'Kimball'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%202%2C%0A%20%20%20%20%20%20%20%20firstName%3A%20'Josh'%2C%0A%20%20%20%20%20%20%20%20lastName%3A%20'Godi'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%203%2C%0A%20%20%20%20%20%20%20%20firstName%3A%20'Alec'%2C%0A%20%20%20%20%20%20%20%20lastName%3A%20'Sibilia'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20id%3A%204%2C%0A%20%20%20%20%20%20%20%20firstName%3A%20'Kameron'%2C%0A%20%20%20%20%20%20%20%20lastName%3A%20'Sween'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%5D%3B%0A%0A%20%20%20%20this.formatted%20%3D%20%7B%0A%20%20%20%20%20%20field%3A%20'id'%2C%0A%20%20%20%20%20%20format%3A%20%60%24firstName%20%24lastName%60%2C%0A%20%20%20%20%20%20options%3A%20collaborators%2C%0A%20%20%20%20%7D%3B%0A%20%20%7D%0A%0A%20%20onChanged(event)%20%7B%0A%20%20%20%20console.log('EVENT'%2C%20event)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%7D%0A`,
         cssSource: `%2F**%20No%20CSS%20for%20this%20example%20*%2F%0A`,
         htmlSource: `%3Cdiv%20class%3D%22selected-value%22%3ESelected%20Value%3A%20%7B%7Bvalue%7D%7D%3C%2Fdiv%3E%0A%3Cnovo-picker%20%5Bconfig%5D%3D%22formatted%22%20%5Bplaceholder%5D%3D%22placeholder%22%20%5B(ngModel)%5D%3D%22value%22%3E%3C%2Fnovo-picker%3E%0A`
     },
     'grouped-picker': {
         title: 'Grouped Picker Example',
         component: GroupedPickerExample,
-        tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0Aimport%20%7B%20GroupedMultiPickerResults%20%7D%20from%20'novo-elements'%3B%0A%0A%2F**%0A%20*%20%40title%20Grouped%20Picker%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'grouped-picker-example'%2C%0A%20%20templateUrl%3A%20'grouped-picker-example.html'%2C%0A%20%20styleUrls%3A%20%5B'grouped-picker-example.css'%5D%2C%0A%7D)%0Aexport%20class%20GroupedPickerExample%20%7B%0A%20%20public%20placeholder%3A%20string%20%3D%20'Select...'%3B%0A%20%20public%20groupedPicker1%3A%20any%3B%0A%20%20public%20groupedPicker2%3A%20any%3B%0A%20%20public%20groupedPicker3%3A%20any%3B%0A%20%20public%20groupedPicker4%3A%20any%3B%0A%20%20public%20groupedPicker1Value%3A%20any%3B%0A%20%20public%20groupedPicker2Value%3A%20any%3B%0A%20%20public%20groupedPicker3Value%3A%20any%3B%0A%20%20public%20groupedPicker4Value%3A%20any%3B%0A%0A%20%20constructor()%20%7B%0A%20%20%20%20this.setupGroupedPickerDemo()%3B%0A%20%20%7D%0A%0A%20%20setupGroupedPickerDemo()%20%7B%0A%20%20%20%20let%20categoryMap%20%3D%20new%20Map%3Cstring%2C%20%7B%20value%3A%20string%3B%20label%3A%20string%3B%20items%3A%20%7B%20value%3A%20string%3B%20label%3A%20string%20%7D%5B%5D%20%7D%3E()%3B%0A%20%20%20%20for%20(let%20i%20%3D%200%3B%20i%20%3C%2010%3B%20i%2B%2B)%20%7B%0A%20%20%20%20%20%20let%20items%20%3D%20%5B%5D%3B%0A%20%20%20%20%20%20for%20(let%20j%20%3D%200%3B%20j%20%3C%2010%3B%20j%2B%2B)%20%7B%0A%20%20%20%20%20%20%20%20items.push(%7B%20value%3A%20%60%24%7Bi%7D-%24%7Bj%7D%60%2C%20label%3A%20%60Category%20%24%7Bi%7D%20-%20Item%20%24%7Bj%7D%60%20%7D)%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20categoryMap.set(%60%24%7Bi%7D%60%2C%20%7B%20value%3A%20%60%24%7Bi%7D%60%2C%20label%3A%20%60Category%20%24%7Bi%7D%60%2C%20items%3A%20items%20%7D)%3B%0A%20%20%20%20%7D%0A%20%20%20%20let%20filterCategoryMap%20%3D%20new%20Map%3Cstring%2C%20%7B%20value%3A%20string%3B%20label%3A%20string%3B%20items%3A%20%7B%20value%3A%20string%3B%20label%3A%20string%3B%20data%3A%20any%20%7D%5B%5D%20%7D%3E()%3B%0A%20%20%20%20for%20(let%20i%20%3D%200%3B%20i%20%3C%2010%3B%20i%2B%2B)%20%7B%0A%20%20%20%20%20%20let%20items%20%3D%20%5B%5D%3B%0A%20%20%20%20%20%20for%20(let%20j%20%3D%200%3B%20j%20%3C%2010%3B%20j%2B%2B)%20%7B%0A%20%20%20%20%20%20%20%20let%20filter%20%3D%20Math.random()%20%3E%3D%200.5%3B%0A%20%20%20%20%20%20%20%20items.push(%7B%20value%3A%20%60%24%7Bi%7D-%24%7Bj%7D%60%2C%20label%3A%20%60Category%20%24%7Bi%7D%20-%20Item%20%24%7Bj%7D%20-%20Data%20-%20%24%7Bfilter%7D%60%2C%20data%3A%20%7B%20filter%3A%20filter%20%7D%20%7D)%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20filterCategoryMap.set(%60%24%7Bi%7D%60%2C%20%7B%20value%3A%20%60%24%7Bi%7D%60%2C%20label%3A%20%60Category%20%24%7Bi%7D%60%2C%20items%3A%20items%20%7D)%3B%0A%20%20%20%20%7D%0A%20%20%20%20this.groupedPicker1%20%3D%20%7B%0A%20%20%20%20%20%20categoryMap%3A%20categoryMap%2C%0A%20%20%20%20%20%20resultsTemplate%3A%20GroupedMultiPickerResults%2C%0A%20%20%20%20%20%20displayAll%3A%20true%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20this.groupedPicker2%20%3D%20%7B%0A%20%20%20%20%20%20categoryMap%3A%20categoryMap%2C%0A%20%20%20%20%20%20resultsTemplate%3A%20GroupedMultiPickerResults%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20this.groupedPicker3%20%3D%20%7B%0A%20%20%20%20%20%20categories%3A%20%5B%0A%20%20%20%20%20%20%20%20%7B%20value%3A%20'C1'%2C%20label%3A%20'Category%201'%20%7D%2C%0A%20%20%20%20%20%20%20%20%7B%20value%3A%20'C2'%2C%20label%3A%20'Category%202'%20%7D%2C%0A%20%20%20%20%20%20%20%20%7B%20value%3A%20'C3'%2C%20label%3A%20'Category%203'%20%7D%2C%0A%20%20%20%20%20%20%20%20%7B%20value%3A%20'C4'%2C%20label%3A%20'Category%204'%20%7D%2C%0A%20%20%20%20%20%20%20%20%7B%20value%3A%20'C5'%2C%20label%3A%20'Category%205'%20%7D%2C%0A%20%20%20%20%20%20%5D%2C%0A%20%20%20%20%20%20getItemsForCategoryAsync%3A%20(category%2C%20customFilter)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20return%20new%20Promise((resolve)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20setTimeout(()%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20resolve(%5B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7B%20value%3A%20'A1'%2C%20label%3A%20'Async%201'%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7B%20value%3A%20'A2'%2C%20label%3A%20'Async%202'%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7B%20value%3A%20'A3'%2C%20label%3A%20'Async%203'%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7B%20value%3A%20'A4'%2C%20label%3A%20'Async%204'%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7B%20value%3A%20'A5'%2C%20label%3A%20'Async%205'%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%5D)%3B%0A%20%20%20%20%20%20%20%20%20%20%7D%2C%201000)%3B%0A%20%20%20%20%20%20%20%20%7D)%3B%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20resultsTemplate%3A%20GroupedMultiPickerResults%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20this.groupedPicker4%20%3D%20%7B%0A%20%20%20%20%20%20entityIcon%3A%20'company'%2C%0A%20%20%20%20%20%20categoryMap%3A%20filterCategoryMap%2C%0A%20%20%20%20%20%20displayAll%3A%20true%2C%0A%20%20%20%20%20%20placeholder%3A%20'Filter%20things...'%2C%0A%20%20%20%20%20%20customFilter%3A%20%7B%0A%20%20%20%20%20%20%20%20matchFunction%3A%20(item%2C%20value)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20if%20(value)%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20return%20item.data.filter%20%3D%3D%3D%20value%3B%0A%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20return%20true%3B%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20defaultFilterValue%3A%20false%2C%0A%20%20%20%20%20%20%20%20label%3A%20'Custom%20Filter!'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20resultsTemplate%3A%20GroupedMultiPickerResults%2C%0A%20%20%20%20%7D%3B%0A%20%20%7D%0A%0A%20%20onChanged(event)%20%7B%0A%20%20%20%20console.log('EVENT'%2C%20event)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%7D%0A`,
+        tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0Aimport%20%7B%20GroupedMultiPickerResults%20%7D%20from%20'novo-elements'%3B%0A%0A%2F**%0A%20*%20%40title%20Grouped%20Picker%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'grouped-picker-example'%2C%0A%20%20templateUrl%3A%20'grouped-picker-example.html'%2C%0A%20%20styleUrls%3A%20%5B'grouped-picker-example.css'%5D%2C%0A%7D)%0Aexport%20class%20GroupedPickerExample%20%7B%0A%20%20public%20placeholder%3A%20string%20%3D%20'Select...'%3B%0A%20%20public%20groupedPicker1%3A%20any%3B%0A%20%20public%20groupedPicker2%3A%20any%3B%0A%20%20public%20groupedPicker3%3A%20any%3B%0A%20%20public%20groupedPicker4%3A%20any%3B%0A%20%20public%20groupedPicker1Value%3A%20any%3B%0A%20%20public%20groupedPicker2Value%3A%20any%3B%0A%20%20public%20groupedPicker3Value%3A%20any%3B%0A%20%20public%20groupedPicker4Value%3A%20any%3B%0A%0A%20%20constructor()%20%7B%0A%20%20%20%20this.setupGroupedPickerDemo()%3B%0A%20%20%7D%0A%0A%20%20setupGroupedPickerDemo()%20%7B%0A%20%20%20%20const%20categoryMap%20%3D%20new%20Map%3Cstring%2C%20%7B%20value%3A%20string%3B%20label%3A%20string%3B%20items%3A%20%7B%20value%3A%20string%3B%20label%3A%20string%20%7D%5B%5D%20%7D%3E()%3B%0A%20%20%20%20for%20(let%20i%20%3D%200%3B%20i%20%3C%2010%3B%20i%2B%2B)%20%7B%0A%20%20%20%20%20%20const%20items%20%3D%20%5B%5D%3B%0A%20%20%20%20%20%20for%20(let%20j%20%3D%200%3B%20j%20%3C%2010%3B%20j%2B%2B)%20%7B%0A%20%20%20%20%20%20%20%20items.push(%7B%20value%3A%20%60%24%7Bi%7D-%24%7Bj%7D%60%2C%20label%3A%20%60Category%20%24%7Bi%7D%20-%20Item%20%24%7Bj%7D%60%20%7D)%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20categoryMap.set(%60%24%7Bi%7D%60%2C%20%7B%20value%3A%20%60%24%7Bi%7D%60%2C%20label%3A%20%60Category%20%24%7Bi%7D%60%2C%20items%20%7D)%3B%0A%20%20%20%20%7D%0A%20%20%20%20const%20filterCategoryMap%20%3D%20new%20Map%3Cstring%2C%20%7B%20value%3A%20string%3B%20label%3A%20string%3B%20items%3A%20%7B%20value%3A%20string%3B%20label%3A%20string%3B%20data%3A%20any%20%7D%5B%5D%20%7D%3E()%3B%0A%20%20%20%20for%20(let%20i%20%3D%200%3B%20i%20%3C%2010%3B%20i%2B%2B)%20%7B%0A%20%20%20%20%20%20const%20items%20%3D%20%5B%5D%3B%0A%20%20%20%20%20%20for%20(let%20j%20%3D%200%3B%20j%20%3C%2010%3B%20j%2B%2B)%20%7B%0A%20%20%20%20%20%20%20%20const%20filter%20%3D%20Math.random()%20%3E%3D%200.5%3B%0A%20%20%20%20%20%20%20%20items.push(%7B%20value%3A%20%60%24%7Bi%7D-%24%7Bj%7D%60%2C%20label%3A%20%60Category%20%24%7Bi%7D%20-%20Item%20%24%7Bj%7D%20-%20Data%20-%20%24%7Bfilter%7D%60%2C%20data%3A%20%7B%20filter%20%7D%20%7D)%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20filterCategoryMap.set(%60%24%7Bi%7D%60%2C%20%7B%20value%3A%20%60%24%7Bi%7D%60%2C%20label%3A%20%60Category%20%24%7Bi%7D%60%2C%20items%20%7D)%3B%0A%20%20%20%20%7D%0A%20%20%20%20this.groupedPicker1%20%3D%20%7B%0A%20%20%20%20%20%20categoryMap%2C%0A%20%20%20%20%20%20resultsTemplate%3A%20GroupedMultiPickerResults%2C%0A%20%20%20%20%20%20displayAll%3A%20true%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20this.groupedPicker2%20%3D%20%7B%0A%20%20%20%20%20%20categoryMap%2C%0A%20%20%20%20%20%20resultsTemplate%3A%20GroupedMultiPickerResults%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20this.groupedPicker3%20%3D%20%7B%0A%20%20%20%20%20%20categories%3A%20%5B%0A%20%20%20%20%20%20%20%20%7B%20value%3A%20'C1'%2C%20label%3A%20'Category%201'%20%7D%2C%0A%20%20%20%20%20%20%20%20%7B%20value%3A%20'C2'%2C%20label%3A%20'Category%202'%20%7D%2C%0A%20%20%20%20%20%20%20%20%7B%20value%3A%20'C3'%2C%20label%3A%20'Category%203'%20%7D%2C%0A%20%20%20%20%20%20%20%20%7B%20value%3A%20'C4'%2C%20label%3A%20'Category%204'%20%7D%2C%0A%20%20%20%20%20%20%20%20%7B%20value%3A%20'C5'%2C%20label%3A%20'Category%205'%20%7D%2C%0A%20%20%20%20%20%20%5D%2C%0A%20%20%20%20%20%20getItemsForCategoryAsync%3A%20(category%2C%20customFilter)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20return%20new%20Promise((resolve)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20setTimeout(()%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20resolve(%5B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7B%20value%3A%20'A1'%2C%20label%3A%20'Async%201'%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7B%20value%3A%20'A2'%2C%20label%3A%20'Async%202'%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7B%20value%3A%20'A3'%2C%20label%3A%20'Async%203'%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7B%20value%3A%20'A4'%2C%20label%3A%20'Async%204'%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7B%20value%3A%20'A5'%2C%20label%3A%20'Async%205'%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%5D)%3B%0A%20%20%20%20%20%20%20%20%20%20%7D%2C%201000)%3B%0A%20%20%20%20%20%20%20%20%7D)%3B%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20resultsTemplate%3A%20GroupedMultiPickerResults%2C%0A%20%20%20%20%7D%3B%0A%20%20%20%20this.groupedPicker4%20%3D%20%7B%0A%20%20%20%20%20%20entityIcon%3A%20'company'%2C%0A%20%20%20%20%20%20categoryMap%3A%20filterCategoryMap%2C%0A%20%20%20%20%20%20displayAll%3A%20true%2C%0A%20%20%20%20%20%20placeholder%3A%20'Filter%20things...'%2C%0A%20%20%20%20%20%20customFilter%3A%20%7B%0A%20%20%20%20%20%20%20%20matchFunction%3A%20(item%2C%20value)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20if%20(value)%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20return%20item.data.filter%20%3D%3D%3D%20value%3B%0A%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20return%20true%3B%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20defaultFilterValue%3A%20false%2C%0A%20%20%20%20%20%20%20%20label%3A%20'Custom%20Filter!'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20resultsTemplate%3A%20GroupedMultiPickerResults%2C%0A%20%20%20%20%7D%3B%0A%20%20%7D%0A%0A%20%20onChanged(event)%20%7B%0A%20%20%20%20console.log('EVENT'%2C%20event)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%7D%0A`,
         cssSource: `%2F**%20No%20CSS%20for%20this%20example%20*%2F%0A`,
         htmlSource: `%3Ch6%3EBasic%20Static%20Example%3C%2Fh6%3E%0A%3Cp%3EFully%20static%20data%2C%20optional%20%22all%22%20category%3C%2Fp%3E%0A%3Cdiv%20class%3D%22selected-value%22%3ESelected%20Value%3A%20%7B%7B%20groupedPicker1Value%20%7C%20json%20%7D%7D%3C%2Fdiv%3E%0A%3Cnovo-picker%20%5Bconfig%5D%3D%22groupedPicker1%22%20%5Bplaceholder%5D%3D%22placeholder%22%20%5B(ngModel)%5D%3D%22groupedPicker1Value%22%20(changed)%3D%22onChanged(%24event)%22%3E%3C%2Fnovo-picker%3E%0A%0A%3Cbr%2F%3E%0A%3Cbr%2F%3E%0A%0A%3Ch6%3ECustom%20Static%20Example%3C%2Fh6%3E%0A%3Cp%3EFully%20static%20data%2C%20all%20category%20turned%20off%3C%2Fp%3E%0A%3Cdiv%20class%3D%22selected-value%22%3ESelected%20Value%3A%20%7B%7B%20groupedPicker2Value%20%7C%20json%20%7D%7D%3C%2Fdiv%3E%0A%3Cnovo-picker%20%5Bconfig%5D%3D%22groupedPicker2%22%20%5Bplaceholder%5D%3D%22placeholder%22%20%5B(ngModel)%5D%3D%22groupedPicker2Value%22%20(changed)%3D%22onChanged(%24event)%22%3E%3C%2Fnovo-picker%3E%0A%0A%3Cbr%2F%3E%0A%3Cbr%2F%3E%0A%0A%3Ch6%3EBasic%20Async%20Example%3C%2Fh6%3E%0A%3Cp%3ECategory%20list%20is%20static%20(always%20has%20to%20be)%20with%20the%20items%20fetched%20via%20async%20call%3C%2Fp%3E%0A%3Cdiv%20class%3D%22selected-value%22%3ESelected%20Value%3A%20%7B%7B%20groupedPicker3Value%20%7C%20json%20%7D%7D%3C%2Fdiv%3E%0A%3Cnovo-picker%20%5Bconfig%5D%3D%22groupedPicker3%22%20%5Bplaceholder%5D%3D%22placeholder%22%20%5B(ngModel)%5D%3D%22groupedPicker3Value%22%20(changed)%3D%22onChanged(%24event)%22%3E%3C%2Fnovo-picker%3E%0A%3Cbr%2F%3E%0A%3Cbr%2F%3E%0A%0A%3Ch6%3EAsync%20Example%20w%2F%20Custom%20Filter%3C%2Fh6%3E%0A%3Cp%3EYou%20can%20also%20have%20a%20custom%20filter%2C%20limited%20to%20just%20a%20switch%3C%2Fp%3E%0A%3Cdiv%20class%3D%22selected-value%22%3ESelected%20Value%3A%20%7B%7B%20groupedPicker4Value%20%7C%20json%20%7D%7D%3C%2Fdiv%3E%0A%3Cnovo-picker%20%5Bconfig%5D%3D%22groupedPicker4%22%20%5Bplaceholder%5D%3D%22placeholder%22%20%5B(ngModel)%5D%3D%22groupedPicker4Value%22%20(changed)%3D%22onChanged(%24event)%22%3E%3C%2Fnovo-picker%3E%0A`
     },
     'override-template': {
         title: 'Override Template Example',
         component: OverrideTemplateExample,
-        tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0A%0A%2F**%0A%20*%20%40title%20Override%20Template%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'override-template-example'%2C%0A%20%20templateUrl%3A%20'override-template-example.html'%2C%0A%20%20styleUrls%3A%20%5B'override-template-example.css'%5D%2C%0A%7D)%0Aexport%20class%20OverrideTemplateExample%20%7B%0A%20%20public%20placeholder%3A%20string%20%3D%20'Select...'%3B%0A%20%20public%20overrideValue%3A%20any%3B%0A%20%20public%20overrideDemo%3A%20any%3B%0A%0A%20%20constructor()%20%7B%0A%20%20%20%20let%20states%20%3D%20%5B%0A%20%20%20%20%20%20'Alabama'%2C%0A%20%20%20%20%20%20'Alaska'%2C%0A%20%20%20%20%20%20'Arizona'%2C%0A%20%20%20%20%20%20'Arkansas'%2C%0A%20%20%20%20%20%20'California'%2C%0A%20%20%20%20%20%20'Colorado'%2C%0A%20%20%20%20%20%20'Connecticut'%2C%0A%20%20%20%20%20%20'Delaware'%2C%0A%20%20%20%20%20%20'Florida'%2C%0A%20%20%20%20%20%20'Georgia'%2C%0A%20%20%20%20%20%20'Hawaii'%2C%0A%20%20%20%20%20%20'Idaho'%2C%0A%20%20%20%20%20%20'Illinois'%2C%0A%20%20%20%20%20%20'Indiana'%2C%0A%20%20%20%20%20%20'Iowa'%2C%0A%20%20%20%20%20%20'Kansas'%2C%0A%20%20%20%20%20%20'Kentucky'%2C%0A%20%20%20%20%20%20'Louisiana'%2C%0A%20%20%20%20%20%20'Maine'%2C%0A%20%20%20%20%20%20'Maryland'%2C%0A%20%20%20%20%20%20'Massachusetts'%2C%0A%20%20%20%20%20%20'Michigan'%2C%0A%20%20%20%20%20%20'Minnesota'%2C%0A%20%20%20%20%20%20'Mississippi'%2C%0A%20%20%20%20%20%20'Missouri'%2C%0A%20%20%20%20%20%20'Montana'%2C%0A%20%20%20%20%20%20'Nebraska'%2C%0A%20%20%20%20%20%20'Nevada'%2C%0A%20%20%20%20%20%20'New%20Hampshire'%2C%0A%20%20%20%20%20%20'New%20Jersey'%2C%0A%20%20%20%20%20%20'New%20Mexico'%2C%0A%20%20%20%20%20%20'New%20York'%2C%0A%20%20%20%20%20%20'North%20Dakota'%2C%0A%20%20%20%20%20%20'North%20Carolina'%2C%0A%20%20%20%20%20%20'Ohio'%2C%0A%20%20%20%20%20%20'Oklahoma'%2C%0A%20%20%20%20%20%20'Oregon'%2C%0A%20%20%20%20%20%20'Pennsylvania'%2C%0A%20%20%20%20%20%20'Rhode%20Island'%2C%0A%20%20%20%20%20%20'South%20Carolina'%2C%0A%20%20%20%20%20%20'South%20Dakota'%2C%0A%20%20%20%20%20%20'Tennessee'%2C%0A%20%20%20%20%20%20'Texas'%2C%0A%20%20%20%20%20%20'Utah'%2C%0A%20%20%20%20%20%20'Vermont'%2C%0A%20%20%20%20%20%20'Virginia'%2C%0A%20%20%20%20%20%20'Washington'%2C%0A%20%20%20%20%20%20'West%20Virginia'%2C%0A%20%20%20%20%20%20'Wisconsin'%2C%0A%20%20%20%20%20%20'Wyoming'%2C%0A%20%20%20%20%5D%3B%0A%0A%20%20%20%20this.overrideDemo%20%3D%20%7B%0A%20%20%20%20%20%20options%3A%20states%2C%0A%20%20%20%20%20%20overrideTemplate%3A%20'%3Ch1%3E%7B%7B%20match%20%7C%20json%20%7D%7D%3C%2Fh1%3E'%2C%0A%20%20%20%20%7D%3B%0A%20%20%7D%0A%0A%20%20onChanged(event)%20%7B%0A%20%20%20%20console.log('EVENT'%2C%20event)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%7D%0A`,
+        tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0A%0A%2F**%0A%20*%20%40title%20Override%20Template%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'override-template-example'%2C%0A%20%20templateUrl%3A%20'override-template-example.html'%2C%0A%20%20styleUrls%3A%20%5B'override-template-example.css'%5D%2C%0A%7D)%0Aexport%20class%20OverrideTemplateExample%20%7B%0A%20%20public%20placeholder%3A%20string%20%3D%20'Select...'%3B%0A%20%20public%20overrideValue%3A%20any%3B%0A%20%20public%20overrideDemo%3A%20any%3B%0A%0A%20%20constructor()%20%7B%0A%20%20%20%20const%20states%20%3D%20%5B%0A%20%20%20%20%20%20'Alabama'%2C%0A%20%20%20%20%20%20'Alaska'%2C%0A%20%20%20%20%20%20'Arizona'%2C%0A%20%20%20%20%20%20'Arkansas'%2C%0A%20%20%20%20%20%20'California'%2C%0A%20%20%20%20%20%20'Colorado'%2C%0A%20%20%20%20%20%20'Connecticut'%2C%0A%20%20%20%20%20%20'Delaware'%2C%0A%20%20%20%20%20%20'Florida'%2C%0A%20%20%20%20%20%20'Georgia'%2C%0A%20%20%20%20%20%20'Hawaii'%2C%0A%20%20%20%20%20%20'Idaho'%2C%0A%20%20%20%20%20%20'Illinois'%2C%0A%20%20%20%20%20%20'Indiana'%2C%0A%20%20%20%20%20%20'Iowa'%2C%0A%20%20%20%20%20%20'Kansas'%2C%0A%20%20%20%20%20%20'Kentucky'%2C%0A%20%20%20%20%20%20'Louisiana'%2C%0A%20%20%20%20%20%20'Maine'%2C%0A%20%20%20%20%20%20'Maryland'%2C%0A%20%20%20%20%20%20'Massachusetts'%2C%0A%20%20%20%20%20%20'Michigan'%2C%0A%20%20%20%20%20%20'Minnesota'%2C%0A%20%20%20%20%20%20'Mississippi'%2C%0A%20%20%20%20%20%20'Missouri'%2C%0A%20%20%20%20%20%20'Montana'%2C%0A%20%20%20%20%20%20'Nebraska'%2C%0A%20%20%20%20%20%20'Nevada'%2C%0A%20%20%20%20%20%20'New%20Hampshire'%2C%0A%20%20%20%20%20%20'New%20Jersey'%2C%0A%20%20%20%20%20%20'New%20Mexico'%2C%0A%20%20%20%20%20%20'New%20York'%2C%0A%20%20%20%20%20%20'North%20Dakota'%2C%0A%20%20%20%20%20%20'North%20Carolina'%2C%0A%20%20%20%20%20%20'Ohio'%2C%0A%20%20%20%20%20%20'Oklahoma'%2C%0A%20%20%20%20%20%20'Oregon'%2C%0A%20%20%20%20%20%20'Pennsylvania'%2C%0A%20%20%20%20%20%20'Rhode%20Island'%2C%0A%20%20%20%20%20%20'South%20Carolina'%2C%0A%20%20%20%20%20%20'South%20Dakota'%2C%0A%20%20%20%20%20%20'Tennessee'%2C%0A%20%20%20%20%20%20'Texas'%2C%0A%20%20%20%20%20%20'Utah'%2C%0A%20%20%20%20%20%20'Vermont'%2C%0A%20%20%20%20%20%20'Virginia'%2C%0A%20%20%20%20%20%20'Washington'%2C%0A%20%20%20%20%20%20'West%20Virginia'%2C%0A%20%20%20%20%20%20'Wisconsin'%2C%0A%20%20%20%20%20%20'Wyoming'%2C%0A%20%20%20%20%5D%3B%0A%0A%20%20%20%20this.overrideDemo%20%3D%20%7B%0A%20%20%20%20%20%20options%3A%20states%2C%0A%20%20%20%20%20%20overrideTemplate%3A%20'%3Ch1%3E%7B%7B%20match%20%7C%20json%20%7D%7D%3C%2Fh1%3E'%2C%0A%20%20%20%20%7D%3B%0A%20%20%7D%0A%0A%20%20onChanged(event)%20%7B%0A%20%20%20%20console.log('EVENT'%2C%20event)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%7D%0A%7D%0A`,
         cssSource: `%2F**%20No%20CSS%20for%20this%20example%20*%2F%0A`,
         htmlSource: `%3Cdiv%20class%3D%22selected-value%22%3ESelected%20Value%3A%20%7B%7B%20overrideValue%20%7D%7D%3C%2Fdiv%3E%0A%3Cnovo-picker%20%5Bconfig%5D%3D%22overrideDemo%22%20%5Bplaceholder%5D%3D%22placeholder%22%20%5B(ngModel)%5D%3D%22overrideValue%22%3E%3C%2Fnovo-picker%3E%0A`
     },
@@ -72125,14 +72125,14 @@ const EXAMPLE_COMPONENTS = {
     'basic-list': {
         title: 'Basic List Layout',
         component: BasicListExample,
-        tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0A%0A%2F**%0A%20*%20%40title%20Basic%20List%20Layout%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'basic-list-example'%2C%0A%20%20templateUrl%3A%20'basic-list-example.html'%2C%0A%20%20styleUrls%3A%20%5B'basic-list-example.css'%5D%2C%0A%7D)%0Aexport%20class%20BasicListExample%20%7B%0A%20%20public%20pulseItems%3A%20any%3B%0A%0A%20%20constructor()%20%7B%0A%20%20%20%20let%20ONE_HOUR%20%3D%2060%20*%2060%20*%201000%3B%0A%20%20%20%20%2F*%20ms%20*%2F%0A%20%20%20%20let%20TWO_HOURS%20%3D%20ONE_HOUR%20*%202%3B%0A%20%20%20%20let%20THREE_HOURS%20%3D%20ONE_HOUR%20*%203%3B%0A%20%20%20%20let%20currentDate%20%3D%20new%20Date()%3B%0A%0A%20%20%20%20let%20oneHourAgo%20%3D%20currentDate.getTime()%20-%20ONE_HOUR%3B%0A%20%20%20%20let%20twoHoursAgo%20%3D%20currentDate.getTime()%20-%20TWO_HOURS%3B%0A%20%20%20%20let%20threeHoursAgo%20%3D%20currentDate.getTime()%20-%20THREE_HOURS%3B%0A%0A%20%20%20%20%2F*%20%22mockResponse%5B%5D%22%20should%20represent%20a%20REST%20response%20with%20improperly%20formatted%20data.%0A%20%20%20%20%2F%20%20The%20%22buildItems()%22%20function%20is%20taking%20this%20data%20object%20and%20massaging%20it%0A%20%20%20%20%2F%20%20to%20build%20the%20list%20items%20appropriately%20via%20a%20new%20data%20object%20%22pulseItems%5B%5D%22.%0A%20%20%20%20%2F%20%20In%20page1.html%20you%20can%20see%20how%20the%20new%20object%20builds%20a%20list%20of%20items.%0A%20%20%20%20%2F%20%20-%20%40asibilia%0A%20%20%20%20*%2F%0A%0A%20%20%20%20let%20mockResponse%20%3D%20%5B%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20type%3A%20'opportunity'%2C%0A%20%20%20%20%20%20%20%20dateCreated%3A%20oneHourAgo%2C%0A%20%20%20%20%20%20%20%20sentiment%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20rating%3A%20'negative'%2C%0A%20%20%20%20%20%20%20%20%20%20type%3A%20'engagement'%2C%0A%20%20%20%20%20%20%20%20%20%20comment%3A%20'No%20emails%20in%20last%2010%20days'%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20user%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20firstName%3A%20'Steph'%2C%0A%20%20%20%20%20%20%20%20%20%20lastName%3A%20'Curry'%2C%0A%20%20%20%20%20%20%20%20%20%20company%3A%20'Wells%20Fargo'%2C%0A%20%20%20%20%20%20%20%20%20%20location%3A%20'Golden%20State%2C%20CA'%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20type%3A%20'opportunity'%2C%0A%20%20%20%20%20%20%20%20dateCreated%3A%20twoHoursAgo%2C%0A%20%20%20%20%20%20%20%20sentiment%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20rating%3A%20'negative'%2C%0A%20%20%20%20%20%20%20%20%20%20type%3A%20'probability'%2C%0A%20%20%20%20%20%20%20%20%20%20comment%3A%20'Now%20has%20low%20probability%20to%20close'%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20user%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20firstName%3A%20'Lebron'%2C%0A%20%20%20%20%20%20%20%20%20%20lastName%3A%20'James'%2C%0A%20%20%20%20%20%20%20%20%20%20company%3A%20'Amazon'%2C%0A%20%20%20%20%20%20%20%20%20%20location%3A%20'Cleveland%2C%20OH'%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20type%3A%20'company'%2C%0A%20%20%20%20%20%20%20%20dateCreated%3A%20threeHoursAgo%2C%0A%20%20%20%20%20%20%20%20sentiment%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20rating%3A%20'positive'%2C%0A%20%20%20%20%20%20%20%20%20%20type%3A%20'connection'%2C%0A%20%20%20%20%20%20%20%20%20%20comment%3A%20'New%20connection'%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20user%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20firstName%3A%20'Derrick'%2C%0A%20%20%20%20%20%20%20%20%20%20lastName%3A%20'Rose'%2C%0A%20%20%20%20%20%20%20%20%20%20company%3A%20'Walmart'%2C%0A%20%20%20%20%20%20%20%20%20%20location%3A%20'Chicago%2C%20IL'%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%5D%3B%0A%0A%20%20%20%20this.pulseItems%20%3D%20%5B%5D%3B%0A%0A%20%20%20%20this.buildItems(mockResponse)%3B%0A%20%20%7D%0A%0A%20%20buildItems(resp)%20%7B%0A%20%20%20%20for%20(let%20obj%20of%20resp)%20%7B%0A%20%20%20%20%20%20let%20item%3A%20any%20%3D%20%7B%7D%3B%0A%0A%20%20%20%20%20%20%2F*%0A%20%20%20%20%20%20%7C%7C%7C%20This%20is%20the%20item%20structure%20to%20be%20pushed%20to%20pulseItems%5B%5D%20and%20used%0A%20%20%20%20%20%20%7C%7C%7C%20to%20build%20the%20list%20%26%20items.%0A%20%20%20%20%20%20%7C%0A%20%20%20%20%20%20%7C%20%20%20item%20%3D%20%7B%0A%20%20%20%20%20%20%7C%20%20%20%20%20%20%20%22name%22%3A%20''%2C%0A%20%20%20%20%20%20%7C%20%20%20%20%20%20%20%22type%22%3A%20''%2C%0A%20%20%20%20%20%20%7C%20%20%20%20%20%20%20%22icon%22%3A%20%7B%0A%20%20%20%20%20%20%7C%20%20%20%20%20%20%20%20%20%20%20%22name%22%3A%20''%2C%0A%20%20%20%20%20%20%7C%20%20%20%20%20%20%20%20%20%20%20%22sentiment%22%3A%20''%0A%20%20%20%20%20%20%7C%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7C%20%20%20%20%20%20%20%22comment%22%3A%20''%2C%0A%20%20%20%20%20%20%7C%20%20%20%20%20%20%20%22timeAgo%22%3A%20''%0A%20%20%20%20%20%20%7C%20%20%20%20%7D%0A%20%20%20%20%20%20%7C%0A%20%20%20%20%20%20*%2F%0A%0A%20%20%20%20%20%20item.name%20%3D%20obj.user.company%3B%0A%20%20%20%20%20%20item.type%20%3D%20obj.type%3B%0A%20%20%20%20%20%20item.icon%20%3D%20%7B%7D%3B%0A%0A%20%20%20%20%20%20if%20(obj.sentiment.type%20%3D%3D%3D%20'connection')%20%7B%0A%20%20%20%20%20%20%20%20item.icon.name%20%3D%20'bhi-add-o'%3B%0A%20%20%20%20%20%20%7D%0A%0A%20%20%20%20%20%20if%20(obj.sentiment.type%20%3D%3D%3D%20'engagement')%20%7B%0A%20%20%20%20%20%20%20%20item.icon.name%20%3D%20obj.sentiment.rating%20%3D%3D%3D%20'positive'%20%3F%20'bhi-trending-up'%20%3A%20'bhi-trending-down'%3B%0A%20%20%20%20%20%20%7D%0A%0A%20%20%20%20%20%20item.icon.sentiment%20%3D%20obj.sentiment.rating%3B%0A%20%20%20%20%20%20item.comment%20%3D%20obj.sentiment.comment%3B%0A%20%20%20%20%20%20item.timeAgo%20%3D%20obj.dateCreated%3B%0A%0A%20%20%20%20%20%20this.pulseItems.push(item)%3B%0A%20%20%20%20%7D%0A%20%20%7D%0A%7D%0A`,
+        tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0A%0A%2F**%0A%20*%20%40title%20Basic%20List%20Layout%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'basic-list-example'%2C%0A%20%20templateUrl%3A%20'basic-list-example.html'%2C%0A%20%20styleUrls%3A%20%5B'basic-list-example.css'%5D%2C%0A%7D)%0Aexport%20class%20BasicListExample%20%7B%0A%20%20public%20pulseItems%3A%20any%3B%0A%0A%20%20constructor()%20%7B%0A%20%20%20%20const%20ONE_HOUR%20%3D%2060%20*%2060%20*%201000%3B%0A%20%20%20%20%2F*%20ms%20*%2F%0A%20%20%20%20const%20TWO_HOURS%20%3D%20ONE_HOUR%20*%202%3B%0A%20%20%20%20const%20THREE_HOURS%20%3D%20ONE_HOUR%20*%203%3B%0A%20%20%20%20const%20currentDate%20%3D%20new%20Date()%3B%0A%0A%20%20%20%20const%20oneHourAgo%20%3D%20currentDate.getTime()%20-%20ONE_HOUR%3B%0A%20%20%20%20const%20twoHoursAgo%20%3D%20currentDate.getTime()%20-%20TWO_HOURS%3B%0A%20%20%20%20const%20threeHoursAgo%20%3D%20currentDate.getTime()%20-%20THREE_HOURS%3B%0A%0A%20%20%20%20%2F*%20%22mockResponse%5B%5D%22%20should%20represent%20a%20REST%20response%20with%20improperly%20formatted%20data.%0A%20%20%20%20%2F%20%20The%20%22buildItems()%22%20function%20is%20taking%20this%20data%20object%20and%20massaging%20it%0A%20%20%20%20%2F%20%20to%20build%20the%20list%20items%20appropriately%20via%20a%20new%20data%20object%20%22pulseItems%5B%5D%22.%0A%20%20%20%20%2F%20%20In%20page1.html%20you%20can%20see%20how%20the%20new%20object%20builds%20a%20list%20of%20items.%0A%20%20%20%20%2F%20%20-%20%40asibilia%0A%20%20%20%20*%2F%0A%0A%20%20%20%20const%20mockResponse%20%3D%20%5B%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20type%3A%20'opportunity'%2C%0A%20%20%20%20%20%20%20%20dateCreated%3A%20oneHourAgo%2C%0A%20%20%20%20%20%20%20%20sentiment%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20rating%3A%20'negative'%2C%0A%20%20%20%20%20%20%20%20%20%20type%3A%20'engagement'%2C%0A%20%20%20%20%20%20%20%20%20%20comment%3A%20'No%20emails%20in%20last%2010%20days'%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20user%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20firstName%3A%20'Steph'%2C%0A%20%20%20%20%20%20%20%20%20%20lastName%3A%20'Curry'%2C%0A%20%20%20%20%20%20%20%20%20%20company%3A%20'Wells%20Fargo'%2C%0A%20%20%20%20%20%20%20%20%20%20location%3A%20'Golden%20State%2C%20CA'%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20type%3A%20'opportunity'%2C%0A%20%20%20%20%20%20%20%20dateCreated%3A%20twoHoursAgo%2C%0A%20%20%20%20%20%20%20%20sentiment%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20rating%3A%20'negative'%2C%0A%20%20%20%20%20%20%20%20%20%20type%3A%20'probability'%2C%0A%20%20%20%20%20%20%20%20%20%20comment%3A%20'Now%20has%20low%20probability%20to%20close'%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20user%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20firstName%3A%20'Lebron'%2C%0A%20%20%20%20%20%20%20%20%20%20lastName%3A%20'James'%2C%0A%20%20%20%20%20%20%20%20%20%20company%3A%20'Amazon'%2C%0A%20%20%20%20%20%20%20%20%20%20location%3A%20'Cleveland%2C%20OH'%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20type%3A%20'company'%2C%0A%20%20%20%20%20%20%20%20dateCreated%3A%20threeHoursAgo%2C%0A%20%20%20%20%20%20%20%20sentiment%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20rating%3A%20'positive'%2C%0A%20%20%20%20%20%20%20%20%20%20type%3A%20'connection'%2C%0A%20%20%20%20%20%20%20%20%20%20comment%3A%20'New%20connection'%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20user%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20firstName%3A%20'Derrick'%2C%0A%20%20%20%20%20%20%20%20%20%20lastName%3A%20'Rose'%2C%0A%20%20%20%20%20%20%20%20%20%20company%3A%20'Walmart'%2C%0A%20%20%20%20%20%20%20%20%20%20location%3A%20'Chicago%2C%20IL'%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%5D%3B%0A%0A%20%20%20%20this.pulseItems%20%3D%20%5B%5D%3B%0A%0A%20%20%20%20this.buildItems(mockResponse)%3B%0A%20%20%7D%0A%0A%20%20buildItems(resp)%20%7B%0A%20%20%20%20for%20(const%20obj%20of%20resp)%20%7B%0A%20%20%20%20%20%20const%20item%3A%20any%20%3D%20%7B%7D%3B%0A%0A%20%20%20%20%20%20%2F*%0A%20%20%20%20%20%20%7C%7C%7C%20This%20is%20the%20item%20structure%20to%20be%20pushed%20to%20pulseItems%5B%5D%20and%20used%0A%20%20%20%20%20%20%7C%7C%7C%20to%20build%20the%20list%20%26%20items.%0A%20%20%20%20%20%20%7C%0A%20%20%20%20%20%20%7C%20%20%20item%20%3D%20%7B%0A%20%20%20%20%20%20%7C%20%20%20%20%20%20%20%22name%22%3A%20''%2C%0A%20%20%20%20%20%20%7C%20%20%20%20%20%20%20%22type%22%3A%20''%2C%0A%20%20%20%20%20%20%7C%20%20%20%20%20%20%20%22icon%22%3A%20%7B%0A%20%20%20%20%20%20%7C%20%20%20%20%20%20%20%20%20%20%20%22name%22%3A%20''%2C%0A%20%20%20%20%20%20%7C%20%20%20%20%20%20%20%20%20%20%20%22sentiment%22%3A%20''%0A%20%20%20%20%20%20%7C%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7C%20%20%20%20%20%20%20%22comment%22%3A%20''%2C%0A%20%20%20%20%20%20%7C%20%20%20%20%20%20%20%22timeAgo%22%3A%20''%0A%20%20%20%20%20%20%7C%20%20%20%20%7D%0A%20%20%20%20%20%20%7C%0A%20%20%20%20%20%20*%2F%0A%0A%20%20%20%20%20%20item.name%20%3D%20obj.user.company%3B%0A%20%20%20%20%20%20item.type%20%3D%20obj.type%3B%0A%20%20%20%20%20%20item.icon%20%3D%20%7B%7D%3B%0A%0A%20%20%20%20%20%20if%20(obj.sentiment.type%20%3D%3D%3D%20'connection')%20%7B%0A%20%20%20%20%20%20%20%20item.icon.name%20%3D%20'bhi-add-o'%3B%0A%20%20%20%20%20%20%7D%0A%0A%20%20%20%20%20%20if%20(obj.sentiment.type%20%3D%3D%3D%20'engagement')%20%7B%0A%20%20%20%20%20%20%20%20item.icon.name%20%3D%20obj.sentiment.rating%20%3D%3D%3D%20'positive'%20%3F%20'bhi-trending-up'%20%3A%20'bhi-trending-down'%3B%0A%20%20%20%20%20%20%7D%0A%0A%20%20%20%20%20%20item.icon.sentiment%20%3D%20obj.sentiment.rating%3B%0A%20%20%20%20%20%20item.comment%20%3D%20obj.sentiment.comment%3B%0A%20%20%20%20%20%20item.timeAgo%20%3D%20obj.dateCreated%3B%0A%0A%20%20%20%20%20%20this.pulseItems.push(item)%3B%0A%20%20%20%20%7D%0A%20%20%7D%0A%7D%0A`,
         cssSource: `%2F**%20No%20CSS%20for%20this%20example%20*%2F%0A`,
         htmlSource: `%3Cheader%3E%0A%20%20%20%20%3Cnovo-list%20direction%3D%22vertical%22%3E%0A%20%20%20%20%20%20%20%20%3Cnovo-list-item%20*ngFor%3D%22let%20item%20of%20pulseItems%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Citem-header%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Citem-avatar%20%5Bicon%5D%3D%22item.type%22%3E%3C%2Fitem-avatar%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Citem-title%3E%7B%7Bitem.name%7D%7D%3C%2Fitem-title%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Citem-header-end%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cspan%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Ci%20class%3D%22bhi-clock%22%3E%3C%2Fi%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7B%7Bitem.timeAgo%20%7C%20date%3A%20'shortTime'%7D%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fspan%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fitem-header-end%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fitem-header%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Citem-content%20direction%3D%22vertical%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Ci%20*ngIf%3D%22item.icon.name%22%20class%3D%22%7B%7Bitem.icon.name%7D%7D%20%7B%7Bitem.icon.sentiment%7D%7D%22%3E%3C%2Fi%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7B%7Bitem.comment%7D%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fitem-content%3E%0A%20%20%20%20%20%20%20%20%3C%2Fnovo-list-item%3E%0A%20%20%20%20%3C%2Fnovo-list%3E%0A%3C%2Fheader%3E%0A`
     },
     'themed-list': {
         title: 'Themed List Example',
         component: ThemedListExample,
-        tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0A%0A%2F**%0A%20*%20%40title%20Themed%20List%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'themed-list-example'%2C%0A%20%20templateUrl%3A%20'themed-list-example.html'%2C%0A%20%20styleUrls%3A%20%5B'themed-list-example.css'%5D%2C%0A%7D)%0Aexport%20class%20ThemedListExample%20%7B%0A%20%20public%20pulseItems%3A%20any%3B%0A%0A%20%20constructor()%20%7B%0A%20%20%20%20let%20ONE_HOUR%20%3D%2060%20*%2060%20*%201000%3B%0A%20%20%20%20%2F*%20ms%20*%2F%0A%20%20%20%20let%20TWO_HOURS%20%3D%20ONE_HOUR%20*%202%3B%0A%20%20%20%20let%20THREE_HOURS%20%3D%20ONE_HOUR%20*%203%3B%0A%20%20%20%20let%20currentDate%20%3D%20new%20Date()%3B%0A%0A%20%20%20%20let%20oneHourAgo%20%3D%20currentDate.getTime()%20-%20ONE_HOUR%3B%0A%20%20%20%20let%20twoHoursAgo%20%3D%20currentDate.getTime()%20-%20TWO_HOURS%3B%0A%20%20%20%20let%20threeHoursAgo%20%3D%20currentDate.getTime()%20-%20THREE_HOURS%3B%0A%0A%20%20%20%20%2F*%20%22mockResponse%5B%5D%22%20should%20represent%20a%20REST%20response%20with%20improperly%20formatted%20data.%0A%20%20%20%20%2F%20%20The%20%22buildItems()%22%20function%20is%20taking%20this%20data%20object%20and%20massaging%20it%0A%20%20%20%20%2F%20%20to%20build%20the%20list%20items%20appropriately%20via%20a%20new%20data%20object%20%22pulseItems%5B%5D%22.%0A%20%20%20%20%2F%20%20In%20page1.html%20you%20can%20see%20how%20the%20new%20object%20builds%20a%20list%20of%20items.%0A%20%20%20%20%2F%20%20-%20%40asibilia%0A%20%20%20%20*%2F%0A%0A%20%20%20%20let%20mockResponse%20%3D%20%5B%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20type%3A%20'opportunity'%2C%0A%20%20%20%20%20%20%20%20dateCreated%3A%20oneHourAgo%2C%0A%20%20%20%20%20%20%20%20sentiment%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20rating%3A%20'negative'%2C%0A%20%20%20%20%20%20%20%20%20%20type%3A%20'engagement'%2C%0A%20%20%20%20%20%20%20%20%20%20comment%3A%20'No%20emails%20in%20last%2010%20days'%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20user%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20firstName%3A%20'Steph'%2C%0A%20%20%20%20%20%20%20%20%20%20lastName%3A%20'Curry'%2C%0A%20%20%20%20%20%20%20%20%20%20company%3A%20'Wells%20Fargo'%2C%0A%20%20%20%20%20%20%20%20%20%20location%3A%20'Golden%20State%2C%20CA'%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20type%3A%20'opportunity'%2C%0A%20%20%20%20%20%20%20%20dateCreated%3A%20twoHoursAgo%2C%0A%20%20%20%20%20%20%20%20sentiment%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20rating%3A%20'negative'%2C%0A%20%20%20%20%20%20%20%20%20%20type%3A%20'probability'%2C%0A%20%20%20%20%20%20%20%20%20%20comment%3A%20'Now%20has%20low%20probability%20to%20close'%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20user%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20firstName%3A%20'Lebron'%2C%0A%20%20%20%20%20%20%20%20%20%20lastName%3A%20'James'%2C%0A%20%20%20%20%20%20%20%20%20%20company%3A%20'Amazon'%2C%0A%20%20%20%20%20%20%20%20%20%20location%3A%20'Cleveland%2C%20OH'%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20type%3A%20'company'%2C%0A%20%20%20%20%20%20%20%20dateCreated%3A%20threeHoursAgo%2C%0A%20%20%20%20%20%20%20%20sentiment%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20rating%3A%20'positive'%2C%0A%20%20%20%20%20%20%20%20%20%20type%3A%20'connection'%2C%0A%20%20%20%20%20%20%20%20%20%20comment%3A%20'New%20connection'%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20user%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20firstName%3A%20'Derrick'%2C%0A%20%20%20%20%20%20%20%20%20%20lastName%3A%20'Rose'%2C%0A%20%20%20%20%20%20%20%20%20%20company%3A%20'Walmart'%2C%0A%20%20%20%20%20%20%20%20%20%20location%3A%20'Chicago%2C%20IL'%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%5D%3B%0A%0A%20%20%20%20this.pulseItems%20%3D%20%5B%5D%3B%0A%0A%20%20%20%20this.buildItems(mockResponse)%3B%0A%20%20%7D%0A%0A%20%20buildItems(resp)%20%7B%0A%20%20%20%20for%20(let%20obj%20of%20resp)%20%7B%0A%20%20%20%20%20%20let%20item%3A%20any%20%3D%20%7B%7D%3B%0A%0A%20%20%20%20%20%20%2F*%0A%20%20%20%20%20%20%7C%7C%7C%20This%20is%20the%20item%20structure%20to%20be%20pushed%20to%20pulseItems%5B%5D%20and%20used%0A%20%20%20%20%20%20%7C%7C%7C%20to%20build%20the%20list%20%26%20items.%0A%20%20%20%20%20%20%7C%0A%20%20%20%20%20%20%7C%20%20%20item%20%3D%20%7B%0A%20%20%20%20%20%20%7C%20%20%20%20%20%20%20%22name%22%3A%20''%2C%0A%20%20%20%20%20%20%7C%20%20%20%20%20%20%20%22type%22%3A%20''%2C%0A%20%20%20%20%20%20%7C%20%20%20%20%20%20%20%22icon%22%3A%20%7B%0A%20%20%20%20%20%20%7C%20%20%20%20%20%20%20%20%20%20%20%22name%22%3A%20''%2C%0A%20%20%20%20%20%20%7C%20%20%20%20%20%20%20%20%20%20%20%22sentiment%22%3A%20''%0A%20%20%20%20%20%20%7C%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7C%20%20%20%20%20%20%20%22comment%22%3A%20''%2C%0A%20%20%20%20%20%20%7C%20%20%20%20%20%20%20%22timeAgo%22%3A%20''%0A%20%20%20%20%20%20%7C%20%20%20%20%7D%0A%20%20%20%20%20%20%7C%0A%20%20%20%20%20%20*%2F%0A%0A%20%20%20%20%20%20item.name%20%3D%20obj.user.company%3B%0A%20%20%20%20%20%20item.type%20%3D%20obj.type%3B%0A%20%20%20%20%20%20item.icon%20%3D%20%7B%7D%3B%0A%0A%20%20%20%20%20%20if%20(obj.sentiment.type%20%3D%3D%3D%20'connection')%20%7B%0A%20%20%20%20%20%20%20%20item.icon.name%20%3D%20'bhi-add-o'%3B%0A%20%20%20%20%20%20%7D%0A%0A%20%20%20%20%20%20if%20(obj.sentiment.type%20%3D%3D%3D%20'engagement')%20%7B%0A%20%20%20%20%20%20%20%20item.icon.name%20%3D%20obj.sentiment.rating%20%3D%3D%3D%20'positive'%20%3F%20'bhi-trending-up'%20%3A%20'bhi-trending-down'%3B%0A%20%20%20%20%20%20%7D%0A%0A%20%20%20%20%20%20item.icon.sentiment%20%3D%20obj.sentiment.rating%3B%0A%20%20%20%20%20%20item.comment%20%3D%20obj.sentiment.comment%3B%0A%20%20%20%20%20%20item.timeAgo%20%3D%20obj.dateCreated%3B%0A%0A%20%20%20%20%20%20this.pulseItems.push(item)%3B%0A%20%20%20%20%7D%0A%20%20%7D%0A%7D%0A`,
+        tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0A%0A%2F**%0A%20*%20%40title%20Themed%20List%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'themed-list-example'%2C%0A%20%20templateUrl%3A%20'themed-list-example.html'%2C%0A%20%20styleUrls%3A%20%5B'themed-list-example.css'%5D%2C%0A%7D)%0Aexport%20class%20ThemedListExample%20%7B%0A%20%20public%20pulseItems%3A%20any%3B%0A%0A%20%20constructor()%20%7B%0A%20%20%20%20const%20ONE_HOUR%20%3D%2060%20*%2060%20*%201000%3B%0A%20%20%20%20%2F*%20ms%20*%2F%0A%20%20%20%20const%20TWO_HOURS%20%3D%20ONE_HOUR%20*%202%3B%0A%20%20%20%20const%20THREE_HOURS%20%3D%20ONE_HOUR%20*%203%3B%0A%20%20%20%20const%20currentDate%20%3D%20new%20Date()%3B%0A%0A%20%20%20%20const%20oneHourAgo%20%3D%20currentDate.getTime()%20-%20ONE_HOUR%3B%0A%20%20%20%20const%20twoHoursAgo%20%3D%20currentDate.getTime()%20-%20TWO_HOURS%3B%0A%20%20%20%20const%20threeHoursAgo%20%3D%20currentDate.getTime()%20-%20THREE_HOURS%3B%0A%0A%20%20%20%20%2F*%20%22mockResponse%5B%5D%22%20should%20represent%20a%20REST%20response%20with%20improperly%20formatted%20data.%0A%20%20%20%20%2F%20%20The%20%22buildItems()%22%20function%20is%20taking%20this%20data%20object%20and%20massaging%20it%0A%20%20%20%20%2F%20%20to%20build%20the%20list%20items%20appropriately%20via%20a%20new%20data%20object%20%22pulseItems%5B%5D%22.%0A%20%20%20%20%2F%20%20In%20page1.html%20you%20can%20see%20how%20the%20new%20object%20builds%20a%20list%20of%20items.%0A%20%20%20%20%2F%20%20-%20%40asibilia%0A%20%20%20%20*%2F%0A%0A%20%20%20%20const%20mockResponse%20%3D%20%5B%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20type%3A%20'opportunity'%2C%0A%20%20%20%20%20%20%20%20dateCreated%3A%20oneHourAgo%2C%0A%20%20%20%20%20%20%20%20sentiment%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20rating%3A%20'negative'%2C%0A%20%20%20%20%20%20%20%20%20%20type%3A%20'engagement'%2C%0A%20%20%20%20%20%20%20%20%20%20comment%3A%20'No%20emails%20in%20last%2010%20days'%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20user%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20firstName%3A%20'Steph'%2C%0A%20%20%20%20%20%20%20%20%20%20lastName%3A%20'Curry'%2C%0A%20%20%20%20%20%20%20%20%20%20company%3A%20'Wells%20Fargo'%2C%0A%20%20%20%20%20%20%20%20%20%20location%3A%20'Golden%20State%2C%20CA'%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20type%3A%20'opportunity'%2C%0A%20%20%20%20%20%20%20%20dateCreated%3A%20twoHoursAgo%2C%0A%20%20%20%20%20%20%20%20sentiment%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20rating%3A%20'negative'%2C%0A%20%20%20%20%20%20%20%20%20%20type%3A%20'probability'%2C%0A%20%20%20%20%20%20%20%20%20%20comment%3A%20'Now%20has%20low%20probability%20to%20close'%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20user%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20firstName%3A%20'Lebron'%2C%0A%20%20%20%20%20%20%20%20%20%20lastName%3A%20'James'%2C%0A%20%20%20%20%20%20%20%20%20%20company%3A%20'Amazon'%2C%0A%20%20%20%20%20%20%20%20%20%20location%3A%20'Cleveland%2C%20OH'%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20type%3A%20'company'%2C%0A%20%20%20%20%20%20%20%20dateCreated%3A%20threeHoursAgo%2C%0A%20%20%20%20%20%20%20%20sentiment%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20rating%3A%20'positive'%2C%0A%20%20%20%20%20%20%20%20%20%20type%3A%20'connection'%2C%0A%20%20%20%20%20%20%20%20%20%20comment%3A%20'New%20connection'%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20user%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20firstName%3A%20'Derrick'%2C%0A%20%20%20%20%20%20%20%20%20%20lastName%3A%20'Rose'%2C%0A%20%20%20%20%20%20%20%20%20%20company%3A%20'Walmart'%2C%0A%20%20%20%20%20%20%20%20%20%20location%3A%20'Chicago%2C%20IL'%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%5D%3B%0A%0A%20%20%20%20this.pulseItems%20%3D%20%5B%5D%3B%0A%0A%20%20%20%20this.buildItems(mockResponse)%3B%0A%20%20%7D%0A%0A%20%20buildItems(resp)%20%7B%0A%20%20%20%20for%20(const%20obj%20of%20resp)%20%7B%0A%20%20%20%20%20%20const%20item%3A%20any%20%3D%20%7B%7D%3B%0A%0A%20%20%20%20%20%20%2F*%0A%20%20%20%20%20%20%7C%7C%7C%20This%20is%20the%20item%20structure%20to%20be%20pushed%20to%20pulseItems%5B%5D%20and%20used%0A%20%20%20%20%20%20%7C%7C%7C%20to%20build%20the%20list%20%26%20items.%0A%20%20%20%20%20%20%7C%0A%20%20%20%20%20%20%7C%20%20%20item%20%3D%20%7B%0A%20%20%20%20%20%20%7C%20%20%20%20%20%20%20%22name%22%3A%20''%2C%0A%20%20%20%20%20%20%7C%20%20%20%20%20%20%20%22type%22%3A%20''%2C%0A%20%20%20%20%20%20%7C%20%20%20%20%20%20%20%22icon%22%3A%20%7B%0A%20%20%20%20%20%20%7C%20%20%20%20%20%20%20%20%20%20%20%22name%22%3A%20''%2C%0A%20%20%20%20%20%20%7C%20%20%20%20%20%20%20%20%20%20%20%22sentiment%22%3A%20''%0A%20%20%20%20%20%20%7C%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7C%20%20%20%20%20%20%20%22comment%22%3A%20''%2C%0A%20%20%20%20%20%20%7C%20%20%20%20%20%20%20%22timeAgo%22%3A%20''%0A%20%20%20%20%20%20%7C%20%20%20%20%7D%0A%20%20%20%20%20%20%7C%0A%20%20%20%20%20%20*%2F%0A%0A%20%20%20%20%20%20item.name%20%3D%20obj.user.company%3B%0A%20%20%20%20%20%20item.type%20%3D%20obj.type%3B%0A%20%20%20%20%20%20item.icon%20%3D%20%7B%7D%3B%0A%0A%20%20%20%20%20%20if%20(obj.sentiment.type%20%3D%3D%3D%20'connection')%20%7B%0A%20%20%20%20%20%20%20%20item.icon.name%20%3D%20'bhi-add-o'%3B%0A%20%20%20%20%20%20%7D%0A%0A%20%20%20%20%20%20if%20(obj.sentiment.type%20%3D%3D%3D%20'engagement')%20%7B%0A%20%20%20%20%20%20%20%20item.icon.name%20%3D%20obj.sentiment.rating%20%3D%3D%3D%20'positive'%20%3F%20'bhi-trending-up'%20%3A%20'bhi-trending-down'%3B%0A%20%20%20%20%20%20%7D%0A%0A%20%20%20%20%20%20item.icon.sentiment%20%3D%20obj.sentiment.rating%3B%0A%20%20%20%20%20%20item.comment%20%3D%20obj.sentiment.comment%3B%0A%20%20%20%20%20%20item.timeAgo%20%3D%20obj.dateCreated%3B%0A%0A%20%20%20%20%20%20this.pulseItems.push(item)%3B%0A%20%20%20%20%7D%0A%20%20%7D%0A%7D%0A`,
         cssSource: `%2F**%20No%20CSS%20for%20this%20example%20*%2F%0A`,
         htmlSource: `%3Cheader%3E%0A%20%20%20%20%3Cnovo-list%20theme%3D%22navigation%22%20direction%3D%22vertical%22%3E%0A%20%20%20%20%20%20%20%20%3Cnovo-list-item%20*ngFor%3D%22let%20item%20of%20pulseItems%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Citem-header%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Citem-avatar%20%5Bicon%5D%3D%22item.type%22%3E%3C%2Fitem-avatar%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Citem-title%3E%7B%7Bitem.name%7D%7D%3C%2Fitem-title%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fitem-header%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Citem-content%20direction%3D%22vertical%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Ci%20*ngIf%3D%22item.icon.name%22%20class%3D%22%7B%7Bitem.icon.name%7D%7D%20%7B%7Bitem.icon.sentiment%7D%7D%22%3E%3C%2Fi%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7B%7Bitem.comment%7D%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fp%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cspan%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Ci%20class%3D%22bhi-clock%22%3E%3C%2Fi%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7B%7Bitem.timeAgo%20%7C%20date%3A%20'shortTime'%7D%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fspan%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fitem-content%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Citem-end%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Ci%20class%3D%22bhi-next%22%3E%3C%2Fi%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fitem-end%3E%0A%20%20%20%20%20%20%20%20%3C%2Fnovo-list-item%3E%0A%20%20%20%20%3C%2Fnovo-list%3E%0A%3C%2Fheader%3E%0A`
     },
@@ -72188,7 +72188,7 @@ const EXAMPLE_COMPONENTS = {
     'activity-section': {
         title: 'Activity Section',
         component: ActivitySectionExample,
-        tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0Aimport%20%7B%20DateCell%2C%20PercentageCell%2C%20NovoTableConfig%2C%20NovoDropdownCell%20%7D%20from%20'novo-elements'%3B%0A%0A%2F**%0A%20*%20%40title%20Activity%20Section%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'activity-section-example'%2C%0A%20%20templateUrl%3A%20'activity-section-example.html'%2C%0A%20%20styleUrls%3A%20%5B'activity-section-example.css'%5D%2C%0A%7D)%0Aexport%20class%20ActivitySectionExample%20%7B%0A%20%20public%20isDisabled%3A%20boolean%20%3D%20true%3B%0A%20%20public%20details%3A%20any%3B%0A%0A%20%20constructor()%20%7B%0A%20%20%20%20let%20columns%20%3D%20%5B%0A%20%20%20%20%20%20%7B%20title%3A%20'Name'%2C%20name%3A%20'name'%2C%20ordering%3A%20true%2C%20type%3A%20'link'%2C%20filtering%3A%20true%20%7D%2C%0A%20%20%20%20%20%20%7B%20title%3A%20'Position'%2C%20name%3A%20'position'%2C%20ordering%3A%20true%2C%20filtering%3A%20true%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20title%3A%20'Extn.'%2C%0A%20%20%20%20%20%20%20%20name%3A%20'ext'%2C%0A%20%20%20%20%20%20%20%20ordering%3A%20true%2C%0A%20%20%20%20%20%20%20%20renderer%3A%20(object)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20return%20object.ext.obj%3B%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20compare%3A%20(sort%2C%20previous%2C%20current)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20let%20first%20%3D%20previous.obj%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20second%20%3D%20current.obj%3B%0A%0A%20%20%20%20%20%20%20%20%20%20if%20(first%20%3E%20second)%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20return%20sort%20%3D%3D%3D%20'desc'%20%3F%20-1%20%3A%201%3B%0A%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20if%20(first%20%3C%20second)%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20return%20sort%20%3D%3D%3D%20'asc'%20%3F%20-1%20%3A%201%3B%0A%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20return%200%3B%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20title%3A%20'Start%20date'%2C%0A%20%20%20%20%20%20%20%20type%3A%20'date'%2C%0A%20%20%20%20%20%20%20%20name%3A%20'startDate'%2C%0A%20%20%20%20%20%20%20%20renderer%3A%20DateCell%2C%0A%20%20%20%20%20%20%20%20ordering%3A%20true%2C%0A%20%20%20%20%20%20%20%20filtering%3A%20true%2C%0A%20%20%20%20%20%20%20%20range%3A%20true%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20title%3A%20'%25'%2C%0A%20%20%20%20%20%20%20%20name%3A%20'percent'%2C%0A%20%20%20%20%20%20%20%20ordering%3A%20true%2C%0A%20%20%20%20%20%20%20%20renderer%3A%20PercentageCell%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20title%3A%20'Salary'%2C%0A%20%20%20%20%20%20%20%20name%3A%20'salary'%2C%0A%20%20%20%20%20%20%20%20ordering%3A%20true%2C%0A%20%20%20%20%20%20%20%20renderer%3A%20(object)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20return%20%60%24%20%24%7BNumber(object.salary).toFixed(2)%7D%60%3B%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20title%3A%20'Status'%2C%0A%20%20%20%20%20%20%20%20name%3A%20'status'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%5D%3B%0A%20%20%20%20this.details%20%3D%20%7B%0A%20%20%20%20%20%20columns%3A%20columns.slice()%2C%0A%20%20%20%20%20%20rows%3A%20TableData.slice()%2C%0A%20%20%20%20%20%20config%3A%20%7B%0A%20%20%20%20%20%20%20%20paging%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20current%3A%201%2C%0A%20%20%20%20%20%20%20%20%20%20itemsPerPage%3A%2010%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20sorting%3A%20true%2C%0A%20%20%20%20%20%20%20%20filtering%3A%20true%2C%0A%20%20%20%20%20%20%20%20ordering%3A%20true%2C%0A%20%20%20%20%20%20%20%20resizing%3A%20true%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%7D%3B%0A%20%20%7D%0A%7D%0A%0Aexport%20const%20TableData%20%3D%20%5B%0A%20%20%7B%0A%20%20%20%20name%3A%20'Victoria%20Cantrell'%2C%0A%20%20%20%20position%3A%20'Integer%20Corporation'%2C%0A%20%20%20%20office%3A%20'Croatia'%2C%0A%20%20%20%20ext%3A%20%7B%20obj%3A%20'8262'%20%7D%2C%0A%20%20%20%20startDate%3A%20new%20Date('2017%2F08%2F19')%2C%0A%20%20%20%20salary%3A%20208178%2C%0A%20%20%20%20percent%3A%200.5%2C%0A%20%20%20%20status%3A%20'New%20Lead'%2C%0A%20%20%20%20description%3A%0A%20%20%20%20%20%20'When%20there%20was%20despair%20in%20the%20dust%20bowl%20and%20depression%20across%20the%20land%2C%20she%20saw%20a%20nation%20conquer%20fear%20itself%20with%20a%20New%20Deal%2C%20new%20jobs%20and%20a%20new%20sense%20of%20common%20purpose.%20Yes%20we%20can.'%2C%0A%20%20%20%20categories%3A%20%5B'Temporary'%2C%20'Developer'%5D%2C%0A%20%20%7D%2C%0A%20%20%7B%0A%20%20%20%20name%3A%20'Pearl%20Crosby'%2C%0A%20%20%20%20position%3A%20'In%20PC'%2C%0A%20%20%20%20office%3A%20'Cambodia'%2C%0A%20%20%20%20ext%3A%20%7B%20obj%3A%20'8262'%20%7D%2C%0A%20%20%20%20startDate%3A%20new%20Date('2017%2F10%2F08')%2C%0A%20%20%20%20salary%3A%20114367%2C%0A%20%20%20%20percent%3A%200.5%2C%0A%20%20%20%20status%3A%20'New%20Lead'%2C%0A%20%20%20%20description%3A%0A%20%20%20%20%20%20'When%20there%20was%20despair%20in%20the%20dust%20bowl%20and%20depression%20across%20the%20land%2C%20she%20saw%20a%20nation%20conquer%20fear%20itself%20with%20a%20New%20Deal%2C%20new%20jobs%20and%20a%20new%20sense%20of%20common%20purpose.%20Yes%20we%20can.'%2C%0A%20%20%20%20categories%3A%20%5B'Temporary'%2C%20'Developer'%5D%2C%0A%20%20%7D%2C%0A%20%20%7B%0A%20%20%20%20name%3A%20'Colette%20Foley'%2C%0A%20%20%20%20position%3A%20'Lorem%20Inc.'%2C%0A%20%20%20%20office%3A%20'Korea%2C%20North'%2C%0A%20%20%20%20ext%3A%20%7B%20obj%3A%20'8262'%20%7D%2C%0A%20%20%20%20startDate%3A%20new%20Date('2017%2F07%2F19')%2C%0A%20%20%20%20salary%3A%20721473%2C%0A%20%20%20%20status%3A%20'New%20Lead'%2C%0A%20%20%20%20percent%3A%201%2C%0A%20%20%20%20description%3A%0A%20%20%20%20%20%20'To%20my%20campaign%20manager%20David%20Plouffe%2C%20my%20chief%20strategist%20David%20Axelrod%2C%20and%20the%20best%20campaign%20team%20ever%20assembled%20in%20the%20history%20of%20politics%20%E2%80%93%20you%20made%20this%20happen%2C%20and%20I%20am%20forever%20grateful%20for%20what%20you%E2%80%99ve%20sacrificed%20to%20get%20it%20done.'%2C%0A%20%20%20%20categories%3A%20%5B'Temporary'%2C%20'Developer'%5D%2C%0A%20%20%7D%2C%0A%5D%3B%0A`,
+        tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0Aimport%20%7B%20DateCell%2C%20PercentageCell%2C%20NovoTableConfig%2C%20NovoDropdownCell%20%7D%20from%20'novo-elements'%3B%0A%0A%2F**%0A%20*%20%40title%20Activity%20Section%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'activity-section-example'%2C%0A%20%20templateUrl%3A%20'activity-section-example.html'%2C%0A%20%20styleUrls%3A%20%5B'activity-section-example.css'%5D%2C%0A%7D)%0Aexport%20class%20ActivitySectionExample%20%7B%0A%20%20public%20isDisabled%3A%20boolean%20%3D%20true%3B%0A%20%20public%20details%3A%20any%3B%0A%0A%20%20constructor()%20%7B%0A%20%20%20%20const%20columns%20%3D%20%5B%0A%20%20%20%20%20%20%7B%20title%3A%20'Name'%2C%20name%3A%20'name'%2C%20ordering%3A%20true%2C%20type%3A%20'link'%2C%20filtering%3A%20true%20%7D%2C%0A%20%20%20%20%20%20%7B%20title%3A%20'Position'%2C%20name%3A%20'position'%2C%20ordering%3A%20true%2C%20filtering%3A%20true%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20title%3A%20'Extn.'%2C%0A%20%20%20%20%20%20%20%20name%3A%20'ext'%2C%0A%20%20%20%20%20%20%20%20ordering%3A%20true%2C%0A%20%20%20%20%20%20%20%20renderer%3A%20(object)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20return%20object.ext.obj%3B%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20compare%3A%20(sort%2C%20previous%2C%20current)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20const%20first%20%3D%20previous.obj%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20second%20%3D%20current.obj%3B%0A%0A%20%20%20%20%20%20%20%20%20%20if%20(first%20%3E%20second)%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20return%20sort%20%3D%3D%3D%20'desc'%20%3F%20-1%20%3A%201%3B%0A%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20if%20(first%20%3C%20second)%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20return%20sort%20%3D%3D%3D%20'asc'%20%3F%20-1%20%3A%201%3B%0A%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20return%200%3B%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20title%3A%20'Start%20date'%2C%0A%20%20%20%20%20%20%20%20type%3A%20'date'%2C%0A%20%20%20%20%20%20%20%20name%3A%20'startDate'%2C%0A%20%20%20%20%20%20%20%20renderer%3A%20DateCell%2C%0A%20%20%20%20%20%20%20%20ordering%3A%20true%2C%0A%20%20%20%20%20%20%20%20filtering%3A%20true%2C%0A%20%20%20%20%20%20%20%20range%3A%20true%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20title%3A%20'%25'%2C%0A%20%20%20%20%20%20%20%20name%3A%20'percent'%2C%0A%20%20%20%20%20%20%20%20ordering%3A%20true%2C%0A%20%20%20%20%20%20%20%20renderer%3A%20PercentageCell%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20title%3A%20'Salary'%2C%0A%20%20%20%20%20%20%20%20name%3A%20'salary'%2C%0A%20%20%20%20%20%20%20%20ordering%3A%20true%2C%0A%20%20%20%20%20%20%20%20renderer%3A%20(object)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20return%20%60%24%20%24%7BNumber(object.salary).toFixed(2)%7D%60%3B%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20title%3A%20'Status'%2C%0A%20%20%20%20%20%20%20%20name%3A%20'status'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%5D%3B%0A%20%20%20%20this.details%20%3D%20%7B%0A%20%20%20%20%20%20columns%3A%20columns.slice()%2C%0A%20%20%20%20%20%20rows%3A%20TableData.slice()%2C%0A%20%20%20%20%20%20config%3A%20%7B%0A%20%20%20%20%20%20%20%20paging%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20current%3A%201%2C%0A%20%20%20%20%20%20%20%20%20%20itemsPerPage%3A%2010%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20sorting%3A%20true%2C%0A%20%20%20%20%20%20%20%20filtering%3A%20true%2C%0A%20%20%20%20%20%20%20%20ordering%3A%20true%2C%0A%20%20%20%20%20%20%20%20resizing%3A%20true%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%7D%3B%0A%20%20%7D%0A%7D%0A%0Aexport%20const%20TableData%20%3D%20%5B%0A%20%20%7B%0A%20%20%20%20name%3A%20'Victoria%20Cantrell'%2C%0A%20%20%20%20position%3A%20'Integer%20Corporation'%2C%0A%20%20%20%20office%3A%20'Croatia'%2C%0A%20%20%20%20ext%3A%20%7B%20obj%3A%20'8262'%20%7D%2C%0A%20%20%20%20startDate%3A%20new%20Date('2017%2F08%2F19')%2C%0A%20%20%20%20salary%3A%20208178%2C%0A%20%20%20%20percent%3A%200.5%2C%0A%20%20%20%20status%3A%20'New%20Lead'%2C%0A%20%20%20%20description%3A%0A%20%20%20%20%20%20'When%20there%20was%20despair%20in%20the%20dust%20bowl%20and%20depression%20across%20the%20land%2C%20she%20saw%20a%20nation%20conquer%20fear%20itself%20with%20a%20New%20Deal%2C%20new%20jobs%20and%20a%20new%20sense%20of%20common%20purpose.%20Yes%20we%20can.'%2C%0A%20%20%20%20categories%3A%20%5B'Temporary'%2C%20'Developer'%5D%2C%0A%20%20%7D%2C%0A%20%20%7B%0A%20%20%20%20name%3A%20'Pearl%20Crosby'%2C%0A%20%20%20%20position%3A%20'In%20PC'%2C%0A%20%20%20%20office%3A%20'Cambodia'%2C%0A%20%20%20%20ext%3A%20%7B%20obj%3A%20'8262'%20%7D%2C%0A%20%20%20%20startDate%3A%20new%20Date('2017%2F10%2F08')%2C%0A%20%20%20%20salary%3A%20114367%2C%0A%20%20%20%20percent%3A%200.5%2C%0A%20%20%20%20status%3A%20'New%20Lead'%2C%0A%20%20%20%20description%3A%0A%20%20%20%20%20%20'When%20there%20was%20despair%20in%20the%20dust%20bowl%20and%20depression%20across%20the%20land%2C%20she%20saw%20a%20nation%20conquer%20fear%20itself%20with%20a%20New%20Deal%2C%20new%20jobs%20and%20a%20new%20sense%20of%20common%20purpose.%20Yes%20we%20can.'%2C%0A%20%20%20%20categories%3A%20%5B'Temporary'%2C%20'Developer'%5D%2C%0A%20%20%7D%2C%0A%20%20%7B%0A%20%20%20%20name%3A%20'Colette%20Foley'%2C%0A%20%20%20%20position%3A%20'Lorem%20Inc.'%2C%0A%20%20%20%20office%3A%20'Korea%2C%20North'%2C%0A%20%20%20%20ext%3A%20%7B%20obj%3A%20'8262'%20%7D%2C%0A%20%20%20%20startDate%3A%20new%20Date('2017%2F07%2F19')%2C%0A%20%20%20%20salary%3A%20721473%2C%0A%20%20%20%20status%3A%20'New%20Lead'%2C%0A%20%20%20%20percent%3A%201%2C%0A%20%20%20%20description%3A%0A%20%20%20%20%20%20'To%20my%20campaign%20manager%20David%20Plouffe%2C%20my%20chief%20strategist%20David%20Axelrod%2C%20and%20the%20best%20campaign%20team%20ever%20assembled%20in%20the%20history%20of%20politics%20%E2%80%93%20you%20made%20this%20happen%2C%20and%20I%20am%20forever%20grateful%20for%20what%20you%E2%80%99ve%20sacrificed%20to%20get%20it%20done.'%2C%0A%20%20%20%20categories%3A%20%5B'Temporary'%2C%20'Developer'%5D%2C%0A%20%20%7D%2C%0A%5D%3B%0A`,
         cssSource: `%2F**%20No%20CSS%20for%20this%20example%20*%2F%0A`,
         htmlSource: `%3Cnovo-expansion-panel%20theme%3D%22contact%22%20padding%3D%22false%22%3E%0A%20%20%20%20%3Cnovo-expansion-panel-header%3E%0A%20%20%20%20%20%20%20%20%3Cnovo-panel-title%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Cnovo-icon%3Eperson%3C%2Fnovo-icon%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Clabel%3EContacts%3C%2Flabel%3E%0A%20%20%20%20%20%20%20%20%3C%2Fnovo-panel-title%3E%0A%20%20%20%20%3C%2Fnovo-expansion-panel-header%3E%0A%0A%20%20%20%20%3Cnovo-table%20class%3D%22table-condensed%22%0A%20%20%20%20%20%20%20%20%5Brows%5D%3D%22details.rows%22%0A%20%20%20%20%20%20%20%20%5Bcolumns%5D%3D%22details.columns%22%0A%20%20%20%20%20%20%20%20%5Bconfig%5D%3D%22details.config%22%0A%20%20%20%20%20%20%20%20rowIdentifier%3D%22name%22%3E%3C%2Fnovo-table%3E%0A%0A%0A%3C%2Fnovo-expansion-panel%3E%0A%3Cnovo-expansion-panel%20theme%3D%22job%22%20%5BhideToggle%5D%3D%22jp.expanded%22%20%23jp%3E%0A%20%20%20%20%3Cnovo-expansion-panel-header%3E%0A%20%20%20%20%20%20%20%20%3Cnovo-panel-title%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Cnovo-icon%3Ejob%3C%2Fnovo-icon%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Clabel%3EJob%20Orders%3C%2Flabel%3E%0A%20%20%20%20%20%20%20%20%3C%2Fnovo-panel-title%3E%0A%20%20%20%20%20%20%20%20%3Cbutton%20theme%3D%22primary%22%20icon%3D%22add-thin%22%20%5Bhidden%5D%3D%22!jp.expanded%22%3EAdd%20Job%20Order%3C%2Fbutton%3E%0A%20%20%20%20%3C%2Fnovo-expansion-panel-header%3E%0A%0A%20%20%20%20%3Cp%3EThis%20is%20the%20primary%20content%20of%20the%20panel.%3C%2Fp%3E%0A%0A%3C%2Fnovo-expansion-panel%3E%0A`
     },
@@ -72237,84 +72237,84 @@ const EXAMPLE_COMPONENTS = {
     'fi-adding-removing': {
         title: 'Fi Adding Removing Example',
         component: FiAddingRemovingExample,
-        tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0A%2F%2F%20Vendor%0Aimport%20%7B%20FormUtils%2C%20FieldInteractionApi%20%7D%20from%20'novo-elements'%3B%0Aimport%20%7B%20MockMetaHeaders%20%7D%20from%20'..%2FMockMeta'%3B%0A%0A%2F**%0A%20*%20%40title%20Fi%20Adding%20Removing%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'fi-adding-removing-example'%2C%0A%20%20templateUrl%3A%20'fi-adding-removing-example.html'%2C%0A%20%20styleUrls%3A%20%5B'fi-adding-removing-example.css'%5D%2C%0A%7D)%0Aexport%20class%20FiAddingRemovingExample%20%7B%0A%20%20public%20form%3A%20any%3B%0A%20%20public%20controls%3A%20any%20%3D%20%5B%5D%3B%0A%0A%20%20constructor(private%20formUtils%3A%20FormUtils)%20%7B%0A%20%20%20%20let%20addingRemovingFunction%20%3D%20(API%3A%20FieldInteractionApi)%20%3D%3E%20%7B%0A%20%20%20%20%20%20console.log('%5BFieldInteractionDemo%5D%20-%20addingRemovingFunction')%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%20%20%20%20%2F%2F%20Control%20above%20field%0A%20%20%20%20%20%20API.addControl(%0A%20%20%20%20%20%20%20%20'cat'%2C%0A%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20key%3A%20'fieldAbove'%2C%0A%20%20%20%20%20%20%20%20%20%20type%3A%20'text'%2C%0A%20%20%20%20%20%20%20%20%20%20label%3A%20'Added%20Above%20Cat'%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20FieldInteractionApi.FIELD_POSITIONS.ABOVE_FIELD%2C%0A%20%20%20%20%20%20%20%20'DEFAULT'%2C%0A%20%20%20%20%20%20)%3B%0A%20%20%20%20%20%20%2F%2F%20Control%20below%20field%0A%20%20%20%20%20%20API.addControl(%0A%20%20%20%20%20%20%20%20'name'%2C%0A%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20key%3A%20'fieldBelow'%2C%0A%20%20%20%20%20%20%20%20%20%20type%3A%20'text'%2C%0A%20%20%20%20%20%20%20%20%20%20label%3A%20'Added%20Below%20Name'%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20FieldInteractionApi.FIELD_POSITIONS.BELOW_FIELD%2C%0A%20%20%20%20%20%20%20%20'%3A)'%2C%0A%20%20%20%20%20%20)%3B%0A%20%20%20%20%20%20%2F%2F%20Control%20at%20the%20top%20of%20the%20form%0A%20%20%20%20%20%20API.addControl(%0A%20%20%20%20%20%20%20%20'name'%2C%0A%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20key%3A%20'top'%2C%0A%20%20%20%20%20%20%20%20%20%20type%3A%20'text'%2C%0A%20%20%20%20%20%20%20%20%20%20label%3A%20'Added%20To%20The%20Very%20Top'%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20FieldInteractionApi.FIELD_POSITIONS.TOP_OF_FORM%2C%0A%20%20%20%20%20%20%20%20'HIGHEST'%2C%0A%20%20%20%20%20%20)%3B%0A%20%20%20%20%20%20%2F%2F%20Control%20at%20the%20bottom%20of%20the%20form%0A%20%20%20%20%20%20API.addControl(%0A%20%20%20%20%20%20%20%20'name'%2C%0A%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20key%3A%20'bottom'%2C%0A%20%20%20%20%20%20%20%20%20%20type%3A%20'text'%2C%0A%20%20%20%20%20%20%20%20%20%20label%3A%20'Added%20To%20The%20Very%20Bottom'%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20FieldInteractionApi.FIELD_POSITIONS.BOTTOM_OF_FORM%2C%0A%20%20%20%20%20%20%20%20'LOWEST'%2C%0A%20%20%20%20%20%20)%3B%0A%20%20%20%20%20%20%2F%2F%20Remove%20the%20jersey%20color%20field%0A%20%20%20%20%20%20API.removeControl('jersey-color')%3B%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20let%20removeAddOnChangeFunction%20%3D%20(API%3A%20FieldInteractionApi)%20%3D%3E%20%7B%0A%20%20%20%20%20%20console.log('%5BFieldInteractionDemo%5D%20-%20removeAddOnChangeFunction')%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%20%20%20%20%2F%2F%20Select%20control%20with%20a%20field%20interaction%20on%20change%20event%0A%20%20%20%20%20%20let%20currentValue%20%3D%20API.getActiveValue()%3B%0A%20%20%20%20%20%20if%20(currentValue%20%3D%3D%3D%20'Yes')%20%7B%0A%20%20%20%20%20%20%20%20API.removeControl('to-be-removed')%3B%0A%20%20%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20API.addControl(%0A%20%20%20%20%20%20%20%20%20%20'remove-select'%2C%0A%20%20%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20key%3A%20'to-be-removed'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20name%3A%20'to-be-removed'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20type%3A%20'text'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20label%3A%20'This%20field%20will%20be%20removed'%2C%0A%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20FieldInteractionApi.FIELD_POSITIONS.BELOW_FIELD%2C%0A%20%20%20%20%20%20%20%20)%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20%2F%2F%20Adding%20%2F%20Removing%20Interactions%0A%20%20%20%20this.controls%20%3D%20formUtils.toFieldSets(MockMetaHeaders%2C%20'%24%20USD'%2C%20%7B%7D%2C%20%7B%20token%3A%20'TOKEN'%2C%20military%3A%20true%20%7D)%3B%0A%20%20%20%20this.controls%5B2%5D.controls%5B0%5D.interactions%20%3D%20%5B%7B%20event%3A%20'change'%2C%20script%3A%20removeAddOnChangeFunction%20%7D%5D%3B%0A%20%20%20%20this.controls%5B0%5D.controls%5B0%5D.interactions%20%3D%20%5B%7B%20event%3A%20'init'%2C%20script%3A%20addingRemovingFunction%20%7D%5D%3B%0A%20%20%20%20this.form%20%3D%20formUtils.toFormGroupFromFieldset(this.controls)%3B%0A%20%20%7D%0A%7D%0A`,
+        tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0A%2F%2F%20Vendor%0Aimport%20%7B%20FormUtils%2C%20FieldInteractionApi%20%7D%20from%20'novo-elements'%3B%0Aimport%20%7B%20MockMetaHeaders%20%7D%20from%20'..%2FMockMeta'%3B%0A%0A%2F**%0A%20*%20%40title%20Fi%20Adding%20Removing%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'fi-adding-removing-example'%2C%0A%20%20templateUrl%3A%20'fi-adding-removing-example.html'%2C%0A%20%20styleUrls%3A%20%5B'fi-adding-removing-example.css'%5D%2C%0A%7D)%0Aexport%20class%20FiAddingRemovingExample%20%7B%0A%20%20public%20form%3A%20any%3B%0A%20%20public%20controls%3A%20any%20%3D%20%5B%5D%3B%0A%0A%20%20constructor(private%20formUtils%3A%20FormUtils)%20%7B%0A%20%20%20%20const%20addingRemovingFunction%20%3D%20(API%3A%20FieldInteractionApi)%20%3D%3E%20%7B%0A%20%20%20%20%20%20console.log('%5BFieldInteractionDemo%5D%20-%20addingRemovingFunction')%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%20%20%20%20%2F%2F%20Control%20above%20field%0A%20%20%20%20%20%20API.addControl(%0A%20%20%20%20%20%20%20%20'cat'%2C%0A%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20key%3A%20'fieldAbove'%2C%0A%20%20%20%20%20%20%20%20%20%20type%3A%20'text'%2C%0A%20%20%20%20%20%20%20%20%20%20label%3A%20'Added%20Above%20Cat'%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20FieldInteractionApi.FIELD_POSITIONS.ABOVE_FIELD%2C%0A%20%20%20%20%20%20%20%20'DEFAULT'%2C%0A%20%20%20%20%20%20)%3B%0A%20%20%20%20%20%20%2F%2F%20Control%20below%20field%0A%20%20%20%20%20%20API.addControl(%0A%20%20%20%20%20%20%20%20'name'%2C%0A%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20key%3A%20'fieldBelow'%2C%0A%20%20%20%20%20%20%20%20%20%20type%3A%20'text'%2C%0A%20%20%20%20%20%20%20%20%20%20label%3A%20'Added%20Below%20Name'%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20FieldInteractionApi.FIELD_POSITIONS.BELOW_FIELD%2C%0A%20%20%20%20%20%20%20%20'%3A)'%2C%0A%20%20%20%20%20%20)%3B%0A%20%20%20%20%20%20%2F%2F%20Control%20at%20the%20top%20of%20the%20form%0A%20%20%20%20%20%20API.addControl(%0A%20%20%20%20%20%20%20%20'name'%2C%0A%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20key%3A%20'top'%2C%0A%20%20%20%20%20%20%20%20%20%20type%3A%20'text'%2C%0A%20%20%20%20%20%20%20%20%20%20label%3A%20'Added%20To%20The%20Very%20Top'%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20FieldInteractionApi.FIELD_POSITIONS.TOP_OF_FORM%2C%0A%20%20%20%20%20%20%20%20'HIGHEST'%2C%0A%20%20%20%20%20%20)%3B%0A%20%20%20%20%20%20%2F%2F%20Control%20at%20the%20bottom%20of%20the%20form%0A%20%20%20%20%20%20API.addControl(%0A%20%20%20%20%20%20%20%20'name'%2C%0A%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20key%3A%20'bottom'%2C%0A%20%20%20%20%20%20%20%20%20%20type%3A%20'text'%2C%0A%20%20%20%20%20%20%20%20%20%20label%3A%20'Added%20To%20The%20Very%20Bottom'%2C%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20FieldInteractionApi.FIELD_POSITIONS.BOTTOM_OF_FORM%2C%0A%20%20%20%20%20%20%20%20'LOWEST'%2C%0A%20%20%20%20%20%20)%3B%0A%20%20%20%20%20%20%2F%2F%20Remove%20the%20jersey%20color%20field%0A%20%20%20%20%20%20API.removeControl('jersey-color')%3B%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20const%20removeAddOnChangeFunction%20%3D%20(API%3A%20FieldInteractionApi)%20%3D%3E%20%7B%0A%20%20%20%20%20%20console.log('%5BFieldInteractionDemo%5D%20-%20removeAddOnChangeFunction')%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%20%20%20%20%2F%2F%20Select%20control%20with%20a%20field%20interaction%20on%20change%20event%0A%20%20%20%20%20%20const%20currentValue%20%3D%20API.getActiveValue()%3B%0A%20%20%20%20%20%20if%20(currentValue%20%3D%3D%3D%20'Yes')%20%7B%0A%20%20%20%20%20%20%20%20API.removeControl('to-be-removed')%3B%0A%20%20%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20API.addControl(%0A%20%20%20%20%20%20%20%20%20%20'remove-select'%2C%0A%20%20%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20key%3A%20'to-be-removed'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20name%3A%20'to-be-removed'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20type%3A%20'text'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20label%3A%20'This%20field%20will%20be%20removed'%2C%0A%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20FieldInteractionApi.FIELD_POSITIONS.BELOW_FIELD%2C%0A%20%20%20%20%20%20%20%20)%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20%2F%2F%20Adding%20%2F%20Removing%20Interactions%0A%20%20%20%20this.controls%20%3D%20formUtils.toFieldSets(MockMetaHeaders%2C%20'%24%20USD'%2C%20%7B%7D%2C%20%7B%20token%3A%20'TOKEN'%2C%20military%3A%20true%20%7D)%3B%0A%20%20%20%20this.controls%5B2%5D.controls%5B0%5D.interactions%20%3D%20%5B%7B%20event%3A%20'change'%2C%20script%3A%20removeAddOnChangeFunction%20%7D%5D%3B%0A%20%20%20%20this.controls%5B0%5D.controls%5B0%5D.interactions%20%3D%20%5B%7B%20event%3A%20'init'%2C%20script%3A%20addingRemovingFunction%20%7D%5D%3B%0A%20%20%20%20this.form%20%3D%20formUtils.toFormGroupFromFieldset(this.controls)%3B%0A%20%20%7D%0A%7D%0A`,
         cssSource: `%2F**%20No%20CSS%20for%20this%20example%20*%2F%0A`,
         htmlSource: `%3Cnovo-dynamic-form%20%5Bfieldsets%5D%3D%22controls%22%20%5B(form)%5D%3D%22form%22%20layout%3D%22vertical%22%3E%3C%2Fnovo-dynamic-form%3E%0A%3Cdiv%20class%3D%22final-value%22%3EForm%20Value%20-%20%7B%7B%20form.value%20%7C%20json%20%7D%7D%3C%2Fdiv%3E%0A%3Cdiv%20class%3D%22final-value%22%3EForm%20Dirty%20-%20%7B%7B%20form.dirty%20%7C%20json%20%7D%7D%3C%2Fdiv%3E%0A%3Cdiv%20class%3D%22final-value%22%3EIs%20Form%20Valid%3F%20-%20%7B%7B%20form.valid%20%7C%20json%20%7D%7D%3C%2Fdiv%3E%0A`
     },
     'fi-async': {
         title: 'Fi Async Example',
         component: FiAsyncExample,
-        tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0Aimport%20%7B%20FormUtils%2C%20TextBoxControl%2C%20FieldInteractionApi%20%7D%20from%20'novo-elements'%3B%0Aimport%20%7B%20map%20%7D%20from%20'rxjs%2Foperators'%3B%0Aimport%20%7B%20MockMetaHeaders%20%7D%20from%20'..%2FMockMeta'%3B%0A%0A%2F**%0A%20*%20%40title%20Fi%20Async%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'fi-async-example'%2C%0A%20%20templateUrl%3A%20'fi-async-example.html'%2C%0A%20%20styleUrls%3A%20%5B'fi-async-example.css'%5D%2C%0A%7D)%0Aexport%20class%20FiAsyncExample%20%7B%0A%20%20public%20form%3A%20any%3B%0A%20%20public%20controls%3A%20any%20%3D%20%7B%7D%3B%0A%0A%20%20constructor(private%20formUtils%3A%20FormUtils)%20%7B%0A%20%20%20%20let%20asyncFunction%20%3D%20(API%3A%20FieldInteractionApi)%20%3D%3E%20%7B%0A%20%20%20%20%20%20console.log('%5BFieldInteractionDemo%5D%20-%20asyncFunction')%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%20%20%20%20if%20(API.getActiveKey()%20%3D%3D%3D%20'async1')%20%7B%0A%20%20%20%20%20%20%20%20API.setLoading(API.getActiveKey()%2C%20true)%3B%0A%20%20%20%20%20%20%20%20setTimeout(function()%20%7B%0A%20%20%20%20%20%20%20%20%20%20API.setLoading(API.getActiveKey()%2C%20false)%3B%0A%20%20%20%20%20%20%20%20%7D%2C%203000)%3B%0A%20%20%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20API.setLoading(API.getActiveKey()%2C%20true)%3B%0A%20%20%20%20%20%20%20%20setTimeout(function()%20%7B%0A%20%20%20%20%20%20%20%20%20%20API.setLoading(API.getActiveKey()%2C%20false)%3B%0A%20%20%20%20%20%20%20%20%7D%2C%2015000)%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20%2F%2F%20Async%20Interactions%0A%20%20%20%20this.controls.async1Control%20%3D%20new%20TextBoxControl(%7B%0A%20%20%20%20%20%20type%3A%20'text'%2C%0A%20%20%20%20%20%20key%3A%20'async1'%2C%0A%20%20%20%20%20%20value%3A%205%2C%0A%20%20%20%20%20%20label%3A%20'Async%20Validation'%2C%0A%20%20%20%20%20%20description%3A%20'As%20you%20finish%20typing%2C%20the%20async%20check%20will%20mark%20the%20form%20as%20invalid'%2C%0A%20%20%20%20%20%20interactions%3A%20%5B%7B%20event%3A%20'change'%2C%20script%3A%20asyncFunction%20%7D%5D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.controls.async2Control%20%3D%20new%20TextBoxControl(%7B%0A%20%20%20%20%20%20type%3A%20'text'%2C%0A%20%20%20%20%20%20key%3A%20'async2'%2C%0A%20%20%20%20%20%20value%3A%205%2C%0A%20%20%20%20%20%20label%3A%20'Async%20Validation%20(takes%20too%20long)'%2C%0A%20%20%20%20%20%20description%3A%20'This%20one%20will%20take%20too%20long%20and%20trigger%20the%20default%20timeout%20(10s)'%2C%0A%20%20%20%20%20%20interactions%3A%20%5B%7B%20event%3A%20'change'%2C%20script%3A%20asyncFunction%20%7D%5D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.form%20%3D%20formUtils.toFormGroup(%5Bthis.controls.async1Control%2C%20this.controls.async2Control%5D)%3B%0A%20%20%7D%0A%7D%0A`,
+        tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0Aimport%20%7B%20FormUtils%2C%20TextBoxControl%2C%20FieldInteractionApi%20%7D%20from%20'novo-elements'%3B%0Aimport%20%7B%20map%20%7D%20from%20'rxjs%2Foperators'%3B%0Aimport%20%7B%20MockMetaHeaders%20%7D%20from%20'..%2FMockMeta'%3B%0A%0A%2F**%0A%20*%20%40title%20Fi%20Async%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'fi-async-example'%2C%0A%20%20templateUrl%3A%20'fi-async-example.html'%2C%0A%20%20styleUrls%3A%20%5B'fi-async-example.css'%5D%2C%0A%7D)%0Aexport%20class%20FiAsyncExample%20%7B%0A%20%20public%20form%3A%20any%3B%0A%20%20public%20controls%3A%20any%20%3D%20%7B%7D%3B%0A%0A%20%20constructor(private%20formUtils%3A%20FormUtils)%20%7B%0A%20%20%20%20const%20asyncFunction%20%3D%20(API%3A%20FieldInteractionApi)%20%3D%3E%20%7B%0A%20%20%20%20%20%20console.log('%5BFieldInteractionDemo%5D%20-%20asyncFunction')%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%20%20%20%20if%20(API.getActiveKey()%20%3D%3D%3D%20'async1')%20%7B%0A%20%20%20%20%20%20%20%20API.setLoading(API.getActiveKey()%2C%20true)%3B%0A%20%20%20%20%20%20%20%20setTimeout(function()%20%7B%0A%20%20%20%20%20%20%20%20%20%20API.setLoading(API.getActiveKey()%2C%20false)%3B%0A%20%20%20%20%20%20%20%20%7D%2C%203000)%3B%0A%20%20%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20API.setLoading(API.getActiveKey()%2C%20true)%3B%0A%20%20%20%20%20%20%20%20setTimeout(function()%20%7B%0A%20%20%20%20%20%20%20%20%20%20API.setLoading(API.getActiveKey()%2C%20false)%3B%0A%20%20%20%20%20%20%20%20%7D%2C%2015000)%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20%2F%2F%20Async%20Interactions%0A%20%20%20%20this.controls.async1Control%20%3D%20new%20TextBoxControl(%7B%0A%20%20%20%20%20%20type%3A%20'text'%2C%0A%20%20%20%20%20%20key%3A%20'async1'%2C%0A%20%20%20%20%20%20value%3A%205%2C%0A%20%20%20%20%20%20label%3A%20'Async%20Validation'%2C%0A%20%20%20%20%20%20description%3A%20'As%20you%20finish%20typing%2C%20the%20async%20check%20will%20mark%20the%20form%20as%20invalid'%2C%0A%20%20%20%20%20%20interactions%3A%20%5B%7B%20event%3A%20'change'%2C%20script%3A%20asyncFunction%20%7D%5D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.controls.async2Control%20%3D%20new%20TextBoxControl(%7B%0A%20%20%20%20%20%20type%3A%20'text'%2C%0A%20%20%20%20%20%20key%3A%20'async2'%2C%0A%20%20%20%20%20%20value%3A%205%2C%0A%20%20%20%20%20%20label%3A%20'Async%20Validation%20(takes%20too%20long)'%2C%0A%20%20%20%20%20%20description%3A%20'This%20one%20will%20take%20too%20long%20and%20trigger%20the%20default%20timeout%20(10s)'%2C%0A%20%20%20%20%20%20interactions%3A%20%5B%7B%20event%3A%20'change'%2C%20script%3A%20asyncFunction%20%7D%5D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.form%20%3D%20formUtils.toFormGroup(%5Bthis.controls.async1Control%2C%20this.controls.async2Control%5D)%3B%0A%20%20%7D%0A%7D%0A`,
         cssSource: `%2F**%20No%20CSS%20for%20this%20example%20*%2F%0A`,
         htmlSource: `%3Cnovo-form%20%5Bform%5D%3D%22form%22%20layout%3D%22vertical%22%3E%0A%20%20%20%20%3Cdiv%20class%3D%22novo-form-row%22%3E%0A%20%20%20%20%20%20%20%20%3Cnovo-control%20%5Bform%5D%3D%22form%22%20%5Bcontrol%5D%3D%22controls.async1Control%22%3E%3C%2Fnovo-control%3E%0A%20%20%20%20%3C%2Fdiv%3E%0A%20%20%20%20%3Cdiv%20class%3D%22novo-form-row%22%3E%0A%20%20%20%20%20%20%20%20%3Cnovo-control%20%5Bform%5D%3D%22form%22%20%5Bcontrol%5D%3D%22controls.async2Control%22%3E%3C%2Fnovo-control%3E%0A%20%20%20%20%3C%2Fdiv%3E%0A%3C%2Fnovo-form%3E%0A%3Cdiv%20class%3D%22final-value%22%3EForm%20Value%20-%20%7B%7B%20form.value%20%7C%20json%20%7D%7D%3C%2Fdiv%3E%0A%3Cdiv%20class%3D%22final-value%22%3EForm%20Dirty%20-%20%7B%7B%20form.dirty%20%7C%20json%20%7D%7D%3C%2Fdiv%3E%0A%3Cdiv%20class%3D%22final-value%22%3EIs%20Form%20Valid%3F%20-%20%7B%7B%20form.valid%20%7C%20json%20%7D%7D%3C%2Fdiv%3E%0A`
     },
     'fi-calculation': {
         title: 'Fi Calculation Example',
         component: FiCalculationExample,
-        tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0A%2F%2F%20Vendor%0Aimport%20%7B%20FormUtils%2C%20TextBoxControl%2C%20FieldInteractionApi%2C%20DateTimeControl%20%7D%20from%20'novo-elements'%3B%0A%0A%2F**%0A%20*%20%40title%20Fi%20Calculation%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'fi-calculation-example'%2C%0A%20%20templateUrl%3A%20'fi-calculation-example.html'%2C%0A%20%20styleUrls%3A%20%5B'fi-calculation-example.css'%5D%2C%0A%7D)%0Aexport%20class%20FiCalculationExample%20%7B%0A%20%20public%20form%3A%20any%3B%0A%20%20public%20controls%3A%20any%20%3D%20%7B%7D%3B%0A%20%20public%20snippet%3A%20any%20%3D%20%7B%7D%3B%0A%0A%20%20constructor(private%20formUtils%3A%20FormUtils)%20%7B%0A%20%20%20%20let%20calculationFunction%20%3D%20(API%3A%20FieldInteractionApi)%20%3D%3E%20%7B%0A%20%20%20%20%20%20console.log('%5BFieldInteractionDemo%5D%20-%20calculationFunction')%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%20%20%20%20let%20a%20%3D%20Number(API.getValue('a'))%3B%0A%20%20%20%20%20%20let%20b%20%3D%20Number(API.getValue('b'))%3B%0A%20%20%20%20%20%20API.setValue('sum'%2C%20a%20%2B%20b)%3B%0A%20%20%20%20%20%20API.setValue('date'%2C%20new%20Date())%3B%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20%2F%2F%20Calculation%20Field%20Interactions%0A%20%20%20%20this.controls.aControl%20%3D%20new%20TextBoxControl(%7B%0A%20%20%20%20%20%20type%3A%20'number'%2C%0A%20%20%20%20%20%20key%3A%20'a'%2C%0A%20%20%20%20%20%20label%3A%20'A'%2C%0A%20%20%20%20%20%20value%3A%201%2C%0A%20%20%20%20%20%20interactions%3A%20%5B%7B%20event%3A%20'change'%2C%20invokeOnInit%3A%20false%2C%20script%3A%20calculationFunction%20%7D%5D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.controls.bControl%20%3D%20new%20TextBoxControl(%7B%0A%20%20%20%20%20%20type%3A%20'number'%2C%0A%20%20%20%20%20%20key%3A%20'b'%2C%0A%20%20%20%20%20%20label%3A%20'B'%2C%0A%20%20%20%20%20%20value%3A%201%2C%0A%20%20%20%20%20%20interactions%3A%20%5B%7B%20event%3A%20'change'%2C%20invokeOnInit%3A%20false%2C%20script%3A%20calculationFunction%20%7D%5D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.controls.sumControl%20%3D%20new%20TextBoxControl(%7B%0A%20%20%20%20%20%20type%3A%20'number'%2C%0A%20%20%20%20%20%20key%3A%20'sum'%2C%0A%20%20%20%20%20%20label%3A%20'Sum'%2C%0A%20%20%20%20%20%20description%3A%20'I%20am%20automatically%20set%20when%20you%20type%20in%20the%20boxes%20above%20me!'%2C%0A%20%20%20%20%20%20readOnly%3A%20true%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.controls.dateModifiedControl%20%3D%20new%20DateTimeControl(%7B%0A%20%20%20%20%20%20key%3A%20'date'%2C%0A%20%20%20%20%20%20label%3A%20'Date%20Last%20Modified'%2C%0A%20%20%20%20%20%20value%3A%20new%20Date()%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.form%20%3D%20formUtils.toFormGroup(%5B%0A%20%20%20%20%20%20this.controls.aControl%2C%0A%20%20%20%20%20%20this.controls.bControl%2C%0A%20%20%20%20%20%20this.controls.sumControl%2C%0A%20%20%20%20%20%20this.controls.dateModifiedControl%2C%0A%20%20%20%20%5D)%3B%0A%20%20%7D%0A%7D%0A`,
+        tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0A%2F%2F%20Vendor%0Aimport%20%7B%20FormUtils%2C%20TextBoxControl%2C%20FieldInteractionApi%2C%20DateTimeControl%20%7D%20from%20'novo-elements'%3B%0A%0A%2F**%0A%20*%20%40title%20Fi%20Calculation%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'fi-calculation-example'%2C%0A%20%20templateUrl%3A%20'fi-calculation-example.html'%2C%0A%20%20styleUrls%3A%20%5B'fi-calculation-example.css'%5D%2C%0A%7D)%0Aexport%20class%20FiCalculationExample%20%7B%0A%20%20public%20form%3A%20any%3B%0A%20%20public%20controls%3A%20any%20%3D%20%7B%7D%3B%0A%20%20public%20snippet%3A%20any%20%3D%20%7B%7D%3B%0A%0A%20%20constructor(private%20formUtils%3A%20FormUtils)%20%7B%0A%20%20%20%20const%20calculationFunction%20%3D%20(API%3A%20FieldInteractionApi)%20%3D%3E%20%7B%0A%20%20%20%20%20%20console.log('%5BFieldInteractionDemo%5D%20-%20calculationFunction')%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%20%20%20%20const%20a%20%3D%20Number(API.getValue('a'))%3B%0A%20%20%20%20%20%20const%20b%20%3D%20Number(API.getValue('b'))%3B%0A%20%20%20%20%20%20API.setValue('sum'%2C%20a%20%2B%20b)%3B%0A%20%20%20%20%20%20API.setValue('date'%2C%20new%20Date())%3B%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20%2F%2F%20Calculation%20Field%20Interactions%0A%20%20%20%20this.controls.aControl%20%3D%20new%20TextBoxControl(%7B%0A%20%20%20%20%20%20type%3A%20'number'%2C%0A%20%20%20%20%20%20key%3A%20'a'%2C%0A%20%20%20%20%20%20label%3A%20'A'%2C%0A%20%20%20%20%20%20value%3A%201%2C%0A%20%20%20%20%20%20interactions%3A%20%5B%7B%20event%3A%20'change'%2C%20invokeOnInit%3A%20false%2C%20script%3A%20calculationFunction%20%7D%5D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.controls.bControl%20%3D%20new%20TextBoxControl(%7B%0A%20%20%20%20%20%20type%3A%20'number'%2C%0A%20%20%20%20%20%20key%3A%20'b'%2C%0A%20%20%20%20%20%20label%3A%20'B'%2C%0A%20%20%20%20%20%20value%3A%201%2C%0A%20%20%20%20%20%20interactions%3A%20%5B%7B%20event%3A%20'change'%2C%20invokeOnInit%3A%20false%2C%20script%3A%20calculationFunction%20%7D%5D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.controls.sumControl%20%3D%20new%20TextBoxControl(%7B%0A%20%20%20%20%20%20type%3A%20'number'%2C%0A%20%20%20%20%20%20key%3A%20'sum'%2C%0A%20%20%20%20%20%20label%3A%20'Sum'%2C%0A%20%20%20%20%20%20description%3A%20'I%20am%20automatically%20set%20when%20you%20type%20in%20the%20boxes%20above%20me!'%2C%0A%20%20%20%20%20%20readOnly%3A%20true%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.controls.dateModifiedControl%20%3D%20new%20DateTimeControl(%7B%0A%20%20%20%20%20%20key%3A%20'date'%2C%0A%20%20%20%20%20%20label%3A%20'Date%20Last%20Modified'%2C%0A%20%20%20%20%20%20value%3A%20new%20Date()%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.form%20%3D%20formUtils.toFormGroup(%5B%0A%20%20%20%20%20%20this.controls.aControl%2C%0A%20%20%20%20%20%20this.controls.bControl%2C%0A%20%20%20%20%20%20this.controls.sumControl%2C%0A%20%20%20%20%20%20this.controls.dateModifiedControl%2C%0A%20%20%20%20%5D)%3B%0A%20%20%7D%0A%7D%0A`,
         cssSource: `%2F**%20No%20CSS%20for%20this%20example%20*%2F%0A`,
         htmlSource: `%3Cnovo-form%20%5Bform%5D%3D%22form%22%20layout%3D%22vertical%22%3E%0A%20%20%20%20%3Cdiv%20class%3D%22novo-form-row%22%3E%0A%20%20%20%20%20%20%20%20%3Cnovo-control%20%5Bform%5D%3D%22form%22%20%5Bcontrol%5D%3D%22controls.aControl%22%3E%3C%2Fnovo-control%3E%0A%20%20%20%20%3C%2Fdiv%3E%0A%20%20%20%20%3Cdiv%20class%3D%22novo-form-row%22%3E%0A%20%20%20%20%20%20%20%20%3Cnovo-control%20%5Bform%5D%3D%22form%22%20%5Bcontrol%5D%3D%22controls.bControl%22%3E%3C%2Fnovo-control%3E%0A%20%20%20%20%3C%2Fdiv%3E%0A%20%20%20%20%3Cdiv%20class%3D%22novo-form-row%22%3E%0A%20%20%20%20%20%20%20%20%3Cnovo-control%20%5Bform%5D%3D%22form%22%20%5Bcontrol%5D%3D%22controls.sumControl%22%3E%3C%2Fnovo-control%3E%0A%20%20%20%20%3C%2Fdiv%3E%0A%20%20%20%20%3Cdiv%20class%3D%22novo-form-row%22%3E%0A%20%20%20%20%20%20%20%20%3Cnovo-control%20%5Bform%5D%3D%22form%22%20%5Bcontrol%5D%3D%22controls.dateModifiedControl%22%3E%3C%2Fnovo-control%3E%0A%20%20%20%20%3C%2Fdiv%3E%0A%3C%2Fnovo-form%3E%0A%3Cdiv%20class%3D%22final-value%22%3EForm%20Value%20-%20%7B%7B%20form.value%20%7C%20json%20%7D%7D%3C%2Fdiv%3E%0A%3Cdiv%20class%3D%22final-value%22%3E%0A%20%20%20%20Form%20Dirty%20-%20%7B%7B%20form.dirty%20%7C%20json%20%7D%7D%3C%2Fdiv%3E%0A%3Cdiv%20class%3D%22final-value%22%3EIs%20Form%20Valid%3F%20-%20%7B%7B%20form.valid%20%7C%20json%20%7D%7D%3C%2Fdiv%3E%0A`
     },
     'fi-confirm': {
         title: 'Fi Confirm Example',
         component: FiConfirmExample,
-        tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0A%2F%2F%20Vendor%0Aimport%20%7B%20FormUtils%2C%20TextBoxControl%2C%20FieldInteractionApi%20%7D%20from%20'novo-elements'%3B%0A%0A%2F**%0A%20*%20%40title%20Fi%20Confirm%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'fi-confirm-example'%2C%0A%20%20templateUrl%3A%20'fi-confirm-example.html'%2C%0A%20%20styleUrls%3A%20%5B'fi-confirm-example.css'%5D%2C%0A%7D)%0Aexport%20class%20FiConfirmExample%20%7B%0A%20%20public%20form%3A%20any%3B%0A%20%20public%20controls%3A%20any%20%3D%20%7B%7D%3B%0A%0A%20%20constructor(private%20formUtils%3A%20FormUtils)%20%7B%0A%20%20%20%20let%20confirmFunction%20%3D%20(API%3A%20FieldInteractionApi)%20%3D%3E%20%7B%0A%20%20%20%20%20%20console.log('%5BFieldInteractionDemo%5D%20-%20confirmFunction')%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%20%20%20%20if%20(API.getActiveKey()%20%3D%3D%3D%20'confirm1')%20%7B%0A%20%20%20%20%20%20%20%20API.confirmChanges(API.getActiveKey())%3B%0A%20%20%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20API.confirmChanges(API.getActiveKey()%2C%20'This%20is%20VERY%20serious!')%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20%2F%2F%20Confirm%20Interactions%0A%20%20%20%20this.controls.confirm1Control%20%3D%20new%20TextBoxControl(%7B%0A%20%20%20%20%20%20type%3A%20'text'%2C%0A%20%20%20%20%20%20key%3A%20'confirm1'%2C%0A%20%20%20%20%20%20value%3A%20'Hello!'%2C%0A%20%20%20%20%20%20label%3A%20'Prompt!'%2C%0A%20%20%20%20%20%20description%3A%20'As%20you%20take%20focus%20out%20of%20this%20field%20you%20will%20be%20prompted%20for%20changes!'%2C%0A%20%20%20%20%20%20interactions%3A%20%5B%7B%20event%3A%20'change'%2C%20script%3A%20confirmFunction%20%7D%5D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.controls.confirm2Control%20%3D%20new%20TextBoxControl(%7B%0A%20%20%20%20%20%20type%3A%20'text'%2C%0A%20%20%20%20%20%20key%3A%20'confirm2'%2C%0A%20%20%20%20%20%20value%3A%20'Another!'%2C%0A%20%20%20%20%20%20label%3A%20'Custom%20Promp!'%2C%0A%20%20%20%20%20%20description%3A%20'You%20can%20provide%20a%20custom%20message!'%2C%0A%20%20%20%20%20%20interactions%3A%20%5B%7B%20event%3A%20'change'%2C%20script%3A%20confirmFunction%20%7D%5D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.form%20%3D%20formUtils.toFormGroup(%5Bthis.controls.confirm1Control%2C%20this.controls.confirm2Control%5D)%3B%0A%20%20%7D%0A%7D%0A`,
+        tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0A%2F%2F%20Vendor%0Aimport%20%7B%20FormUtils%2C%20TextBoxControl%2C%20FieldInteractionApi%20%7D%20from%20'novo-elements'%3B%0A%0A%2F**%0A%20*%20%40title%20Fi%20Confirm%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'fi-confirm-example'%2C%0A%20%20templateUrl%3A%20'fi-confirm-example.html'%2C%0A%20%20styleUrls%3A%20%5B'fi-confirm-example.css'%5D%2C%0A%7D)%0Aexport%20class%20FiConfirmExample%20%7B%0A%20%20public%20form%3A%20any%3B%0A%20%20public%20controls%3A%20any%20%3D%20%7B%7D%3B%0A%0A%20%20constructor(private%20formUtils%3A%20FormUtils)%20%7B%0A%20%20%20%20const%20confirmFunction%20%3D%20(API%3A%20FieldInteractionApi)%20%3D%3E%20%7B%0A%20%20%20%20%20%20console.log('%5BFieldInteractionDemo%5D%20-%20confirmFunction')%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%20%20%20%20if%20(API.getActiveKey()%20%3D%3D%3D%20'confirm1')%20%7B%0A%20%20%20%20%20%20%20%20API.confirmChanges(API.getActiveKey())%3B%0A%20%20%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20API.confirmChanges(API.getActiveKey()%2C%20'This%20is%20VERY%20serious!')%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20%2F%2F%20Confirm%20Interactions%0A%20%20%20%20this.controls.confirm1Control%20%3D%20new%20TextBoxControl(%7B%0A%20%20%20%20%20%20type%3A%20'text'%2C%0A%20%20%20%20%20%20key%3A%20'confirm1'%2C%0A%20%20%20%20%20%20value%3A%20'Hello!'%2C%0A%20%20%20%20%20%20label%3A%20'Prompt!'%2C%0A%20%20%20%20%20%20description%3A%20'As%20you%20take%20focus%20out%20of%20this%20field%20you%20will%20be%20prompted%20for%20changes!'%2C%0A%20%20%20%20%20%20interactions%3A%20%5B%7B%20event%3A%20'change'%2C%20script%3A%20confirmFunction%20%7D%5D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.controls.confirm2Control%20%3D%20new%20TextBoxControl(%7B%0A%20%20%20%20%20%20type%3A%20'text'%2C%0A%20%20%20%20%20%20key%3A%20'confirm2'%2C%0A%20%20%20%20%20%20value%3A%20'Another!'%2C%0A%20%20%20%20%20%20label%3A%20'Custom%20Promp!'%2C%0A%20%20%20%20%20%20description%3A%20'You%20can%20provide%20a%20custom%20message!'%2C%0A%20%20%20%20%20%20interactions%3A%20%5B%7B%20event%3A%20'change'%2C%20script%3A%20confirmFunction%20%7D%5D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.form%20%3D%20formUtils.toFormGroup(%5Bthis.controls.confirm1Control%2C%20this.controls.confirm2Control%5D)%3B%0A%20%20%7D%0A%7D%0A`,
         cssSource: `%2F**%20No%20CSS%20for%20this%20example%20*%2F%0A`,
         htmlSource: `%3Cnovo-form%20%5Bform%5D%3D%22form%22%20layout%3D%22vertical%22%3E%0A%20%20%20%20%3Cdiv%20class%3D%22novo-form-row%22%3E%0A%20%20%20%20%20%20%20%20%3Cnovo-control%20%5Bform%5D%3D%22form%22%20%5Bcontrol%5D%3D%22controls.confirm1Control%22%3E%3C%2Fnovo-control%3E%0A%20%20%20%20%3C%2Fdiv%3E%0A%20%20%20%20%3Cdiv%20class%3D%22novo-form-row%22%3E%0A%20%20%20%20%20%20%20%20%3Cnovo-control%20%5Bform%5D%3D%22form%22%20%5Bcontrol%5D%3D%22controls.confirm2Control%22%3E%3C%2Fnovo-control%3E%0A%20%20%20%20%3C%2Fdiv%3E%0A%3C%2Fnovo-form%3E%0A%3Cdiv%20class%3D%22final-value%22%3EForm%20Value%20-%20%7B%7B%20form.value%20%7C%20json%20%7D%7D%3C%2Fdiv%3E%0A%3Cdiv%20class%3D%22final-value%22%3EForm%20Dirty%20-%20%7B%7B%20form.dirty%20%7C%20json%20%7D%7D%3C%2Fdiv%3E%0A%3Cdiv%20class%3D%22final-value%22%3EIs%20Form%20Valid%3F%20-%20%7B%7B%20form.valid%20%7C%20json%20%7D%7D%3C%2Fdiv%3E%0A`
     },
     'fi-enable-disable': {
         title: 'Fi Enable Disable Example',
         component: FiEnableDisableExample,
-        tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0A%2F%2F%20Vendor%0Aimport%20%7B%20FormUtils%2C%20TextBoxControl%2C%20CheckboxControl%2C%20FieldInteractionApi%20%7D%20from%20'novo-elements'%3B%0A%0A%2F**%0A%20*%20%40title%20Fi%20Enable%20Disable%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'fi-enable-disable-example'%2C%0A%20%20templateUrl%3A%20'fi-enable-disable-example.html'%2C%0A%20%20styleUrls%3A%20%5B'fi-enable-disable-example.css'%5D%2C%0A%7D)%0Aexport%20class%20FiEnableDisableExample%20%7B%0A%20%20public%20form%3A%20any%3B%0A%20%20public%20controls%3A%20any%20%3D%20%7B%7D%3B%0A%0A%20%20constructor(private%20formUtils%3A%20FormUtils)%20%7B%0A%20%20%20%20let%20enableDisableFunction%20%3D%20(API%3A%20FieldInteractionApi)%20%3D%3E%20%7B%0A%20%20%20%20%20%20console.log('%5BFieldInteractionDemo%5D%20-%20enableDisableFunction')%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%20%20%20%20let%20currentValue%20%3D%20API.getActiveValue()%3B%0A%20%20%20%20%20%20if%20(!currentValue)%20%7B%0A%20%20%20%20%20%20%20%20API.enable('text')%3B%0A%20%20%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20API.disable('text')%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20%2F%2F%20Enable%2FDisable%20Field%20Interactions%0A%20%20%20%20this.controls.textControl%20%3D%20new%20TextBoxControl(%7B%0A%20%20%20%20%20%20type%3A%20'text'%2C%0A%20%20%20%20%20%20key%3A%20'text'%2C%0A%20%20%20%20%20%20label%3A%20'MyField'%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.controls.toggleControl%20%3D%20new%20CheckboxControl(%7B%0A%20%20%20%20%20%20key%3A%20'toggle'%2C%0A%20%20%20%20%20%20label%3A%20'Disable%3F'%2C%0A%20%20%20%20%20%20description%3A%20'I%20will%20disable%20the%20above%20field!'%2C%0A%20%20%20%20%20%20interactions%3A%20%5B%7B%20event%3A%20'change'%2C%20script%3A%20enableDisableFunction%20%7D%5D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.form%20%3D%20formUtils.toFormGroup(%5Bthis.controls.textControl%2C%20this.controls.toggleControl%5D)%3B%0A%20%20%7D%0A%7D%0A`,
+        tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0A%2F%2F%20Vendor%0Aimport%20%7B%20FormUtils%2C%20TextBoxControl%2C%20CheckboxControl%2C%20FieldInteractionApi%20%7D%20from%20'novo-elements'%3B%0A%0A%2F**%0A%20*%20%40title%20Fi%20Enable%20Disable%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'fi-enable-disable-example'%2C%0A%20%20templateUrl%3A%20'fi-enable-disable-example.html'%2C%0A%20%20styleUrls%3A%20%5B'fi-enable-disable-example.css'%5D%2C%0A%7D)%0Aexport%20class%20FiEnableDisableExample%20%7B%0A%20%20public%20form%3A%20any%3B%0A%20%20public%20controls%3A%20any%20%3D%20%7B%7D%3B%0A%0A%20%20constructor(private%20formUtils%3A%20FormUtils)%20%7B%0A%20%20%20%20const%20enableDisableFunction%20%3D%20(API%3A%20FieldInteractionApi)%20%3D%3E%20%7B%0A%20%20%20%20%20%20console.log('%5BFieldInteractionDemo%5D%20-%20enableDisableFunction')%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%20%20%20%20const%20currentValue%20%3D%20API.getActiveValue()%3B%0A%20%20%20%20%20%20if%20(!currentValue)%20%7B%0A%20%20%20%20%20%20%20%20API.enable('text')%3B%0A%20%20%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20API.disable('text')%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20%2F%2F%20Enable%2FDisable%20Field%20Interactions%0A%20%20%20%20this.controls.textControl%20%3D%20new%20TextBoxControl(%7B%0A%20%20%20%20%20%20type%3A%20'text'%2C%0A%20%20%20%20%20%20key%3A%20'text'%2C%0A%20%20%20%20%20%20label%3A%20'MyField'%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.controls.toggleControl%20%3D%20new%20CheckboxControl(%7B%0A%20%20%20%20%20%20key%3A%20'toggle'%2C%0A%20%20%20%20%20%20label%3A%20'Disable%3F'%2C%0A%20%20%20%20%20%20description%3A%20'I%20will%20disable%20the%20above%20field!'%2C%0A%20%20%20%20%20%20interactions%3A%20%5B%7B%20event%3A%20'change'%2C%20script%3A%20enableDisableFunction%20%7D%5D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.form%20%3D%20formUtils.toFormGroup(%5Bthis.controls.textControl%2C%20this.controls.toggleControl%5D)%3B%0A%20%20%7D%0A%7D%0A`,
         cssSource: `%2F**%20No%20CSS%20for%20this%20example%20*%2F%0A`,
         htmlSource: `%3Cnovo-form%20%5Bform%5D%3D%22form%22%20layout%3D%22vertical%22%3E%0A%20%20%20%20%3Cdiv%20class%3D%22novo-form-row%22%3E%0A%20%20%20%20%20%20%20%20%3Cnovo-control%20%5Bform%5D%3D%22form%22%20%5Bcontrol%5D%3D%22controls.textControl%22%3E%3C%2Fnovo-control%3E%0A%20%20%20%20%3C%2Fdiv%3E%0A%20%20%20%20%3Cdiv%20class%3D%22novo-form-row%22%3E%0A%20%20%20%20%20%20%20%20%3Cnovo-control%20%5Bform%5D%3D%22form%22%20%5Bcontrol%5D%3D%22controls.toggleControl%22%3E%3C%2Fnovo-control%3E%0A%20%20%20%20%3C%2Fdiv%3E%0A%3C%2Fnovo-form%3E%0A%3Cdiv%20class%3D%22final-value%22%3EForm%20Value%20-%20%7B%7B%20form.value%20%7C%20json%20%7D%7D%3C%2Fdiv%3E%0A%3Cdiv%20class%3D%22final-value%22%3EForm%20Dirty%20-%20%7B%7B%20form.dirty%20%7C%20json%20%7D%7D%3C%2Fdiv%3E%0A%3Cdiv%20class%3D%22final-value%22%3EIs%20Form%20Valid%3F%20-%20%7B%7B%20form.valid%20%7C%20json%20%7D%7D%3C%2Fdiv%3E%0A`
     },
     'fi-globals': {
         title: 'Fi Globals Example',
         component: FiGlobalsExample,
-        tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0A%2F%2F%20Vendor%0Aimport%20%7B%20FormUtils%2C%20TextBoxControl%2C%20FieldInteractionApi%20%7D%20from%20'novo-elements'%3B%0A%0A%2F**%0A%20*%20%40title%20Fi%20Globals%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'fi-globals-example'%2C%0A%20%20templateUrl%3A%20'fi-globals-example.html'%2C%0A%20%20styleUrls%3A%20%5B'fi-globals-example.css'%5D%2C%0A%7D)%0Aexport%20class%20FiGlobalsExample%20%7B%0A%20%20public%20form%3A%20any%20%3D%20%7B%7D%3B%0A%20%20public%20controls%3A%20any%20%3D%20%7B%7D%3B%0A%0A%20%20constructor(private%20formUtils%3A%20FormUtils)%20%7B%0A%20%20%20%20let%20globalsFunction%20%3D%20(API%3A%20FieldInteractionApi)%20%3D%3E%20%7B%0A%20%20%20%20%20%20console.log('%5BFieldInteractionDemo%5D%20-%20globalsFunction')%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%20%20%20%20API.setProperty(API.getActiveKey()%2C%20'label'%2C%20%60%24%7BAPI.getProperty(API.getActiveKey()%2C%20'label')%7D%20--%20%24%7BAPI.globals.TEST%7D%60)%3B%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20%2F%2F%20Global%20Field%20Interactions%0A%20%20%20%20this.controls.globalControl%20%3D%20new%20TextBoxControl(%7B%0A%20%20%20%20%20%20type%3A%20'number'%2C%0A%20%20%20%20%20%20key%3A%20'global'%2C%0A%20%20%20%20%20%20value%3A%205%2C%0A%20%20%20%20%20%20label%3A%20'Form%20Input'%2C%0A%20%20%20%20%20%20description%3A%20'The%20label%20gets%20updated%20on%20load%20to%20use%20a%20global!'%2C%0A%20%20%20%20%20%20interactions%3A%20%5B%7B%20event%3A%20'init'%2C%20script%3A%20globalsFunction%2C%20invokeOnInit%3A%20true%20%7D%5D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.form%20%3D%20formUtils.toFormGroup(%5Bthis.controls.globalControl%5D)%3B%0A%20%20%7D%0A%7D%0A`,
+        tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0A%2F%2F%20Vendor%0Aimport%20%7B%20FormUtils%2C%20TextBoxControl%2C%20FieldInteractionApi%20%7D%20from%20'novo-elements'%3B%0A%0A%2F**%0A%20*%20%40title%20Fi%20Globals%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'fi-globals-example'%2C%0A%20%20templateUrl%3A%20'fi-globals-example.html'%2C%0A%20%20styleUrls%3A%20%5B'fi-globals-example.css'%5D%2C%0A%7D)%0Aexport%20class%20FiGlobalsExample%20%7B%0A%20%20public%20form%3A%20any%20%3D%20%7B%7D%3B%0A%20%20public%20controls%3A%20any%20%3D%20%7B%7D%3B%0A%0A%20%20constructor(private%20formUtils%3A%20FormUtils)%20%7B%0A%20%20%20%20const%20globalsFunction%20%3D%20(API%3A%20FieldInteractionApi)%20%3D%3E%20%7B%0A%20%20%20%20%20%20console.log('%5BFieldInteractionDemo%5D%20-%20globalsFunction')%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%20%20%20%20API.setProperty(API.getActiveKey()%2C%20'label'%2C%20%60%24%7BAPI.getProperty(API.getActiveKey()%2C%20'label')%7D%20--%20%24%7BAPI.globals.TEST%7D%60)%3B%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20%2F%2F%20Global%20Field%20Interactions%0A%20%20%20%20this.controls.globalControl%20%3D%20new%20TextBoxControl(%7B%0A%20%20%20%20%20%20type%3A%20'number'%2C%0A%20%20%20%20%20%20key%3A%20'global'%2C%0A%20%20%20%20%20%20value%3A%205%2C%0A%20%20%20%20%20%20label%3A%20'Form%20Input'%2C%0A%20%20%20%20%20%20description%3A%20'The%20label%20gets%20updated%20on%20load%20to%20use%20a%20global!'%2C%0A%20%20%20%20%20%20interactions%3A%20%5B%7B%20event%3A%20'init'%2C%20script%3A%20globalsFunction%2C%20invokeOnInit%3A%20true%20%7D%5D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.form%20%3D%20formUtils.toFormGroup(%5Bthis.controls.globalControl%5D)%3B%0A%20%20%7D%0A%7D%0A`,
         cssSource: `%2F**%20No%20CSS%20for%20this%20example%20*%2F%0A`,
         htmlSource: `%3Cnovo-form%20%5Bform%5D%3D%22form%22%20layout%3D%22vertical%22%3E%0A%20%20%20%20%3Cdiv%20class%3D%22novo-form-row%22%3E%0A%20%20%20%20%20%20%20%20%3Cnovo-control%20%5Bform%5D%3D%22form%22%20%5Bcontrol%5D%3D%22controls.globalControl%22%3E%3C%2Fnovo-control%3E%0A%20%20%20%20%3C%2Fdiv%3E%0A%3C%2Fnovo-form%3E%0A%3Cdiv%20class%3D%22final-value%22%3EForm%20Value%20-%20%7B%7B%20form.value%20%7C%20json%20%7D%7D%3C%2Fdiv%3E%0A%3Cdiv%20class%3D%22final-value%22%3EForm%20Dirty%20-%20%7B%7B%20form.dirty%20%7C%20json%20%7D%7D%3C%2Fdiv%3E%0A%3Cdiv%20class%3D%22final-value%22%3EIs%20Form%20Valid%3F%20-%20%7B%7B%20form.valid%20%7C%20json%20%7D%7D%3C%2Fdiv%3E%0A`
     },
     'fi-hide-show': {
         title: 'Fi Hide Show Example',
         component: FiHideShowExample,
-        tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0A%2F%2F%20Vendor%0Aimport%20%7B%20FormUtils%2C%20TextBoxControl%2C%20CheckboxControl%2C%20FieldInteractionApi%20%7D%20from%20'novo-elements'%3B%0A%0A%2F**%0A%20*%20%40title%20Fi%20Hide%20Show%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'fi-hide-show-example'%2C%0A%20%20templateUrl%3A%20'fi-hide-show-example.html'%2C%0A%20%20styleUrls%3A%20%5B'fi-hide-show-example.css'%5D%2C%0A%7D)%0Aexport%20class%20FiHideShowExample%20%7B%0A%20%20public%20form%3A%20any%20%3D%20%7B%7D%3B%0A%20%20public%20controls%3A%20any%20%3D%20%7B%7D%3B%0A%0A%20%20constructor(private%20formUtils%3A%20FormUtils)%20%7B%0A%20%20%20%20let%20hideShowFunction%20%3D%20(API%3A%20FieldInteractionApi)%20%3D%3E%20%7B%0A%20%20%20%20%20%20console.log('%5BFieldInteractionDemo%5D%20-%20hideShowFunction')%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%20%20%20%20let%20activeValue%20%3D%20API.getActiveValue()%3B%0A%20%20%20%20%20%20if%20(!activeValue)%20%7B%0A%20%20%20%20%20%20%20%20API.show('text')%3B%0A%20%20%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20API.hide('text')%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20%2F%2F%20Hide%2FShow%20Field%20Interactions%0A%20%20%20%20this.controls.textControl%20%3D%20new%20TextBoxControl(%7B%0A%20%20%20%20%20%20type%3A%20'text'%2C%0A%20%20%20%20%20%20key%3A%20'text'%2C%0A%20%20%20%20%20%20required%3A%20true%2C%0A%20%20%20%20%20%20label%3A%20'MyField'%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.controls.text2Control%20%3D%20new%20TextBoxControl(%7B%0A%20%20%20%20%20%20type%3A%20'text'%2C%0A%20%20%20%20%20%20key%3A%20'text2'%2C%0A%20%20%20%20%20%20label%3A%20'MyField'%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.controls.toggleControl%20%3D%20new%20CheckboxControl(%7B%0A%20%20%20%20%20%20key%3A%20'toggle'%2C%0A%20%20%20%20%20%20label%3A%20'Hidden%3F'%2C%0A%20%20%20%20%20%20description%3A%20'I%20will%20toggle%20the%20above%20field%20to%20display%20or%20not!'%2C%0A%20%20%20%20%20%20interactions%3A%20%5B%7B%20event%3A%20'change'%2C%20script%3A%20hideShowFunction%20%7D%5D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.form%20%3D%20formUtils.toFormGroup(%5Bthis.controls.textControl%2C%20this.controls.text2Control%2C%20this.controls.toggleControl%5D)%3B%0A%20%20%7D%0A%7D%0A`,
+        tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0A%2F%2F%20Vendor%0Aimport%20%7B%20FormUtils%2C%20TextBoxControl%2C%20CheckboxControl%2C%20FieldInteractionApi%20%7D%20from%20'novo-elements'%3B%0A%0A%2F**%0A%20*%20%40title%20Fi%20Hide%20Show%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'fi-hide-show-example'%2C%0A%20%20templateUrl%3A%20'fi-hide-show-example.html'%2C%0A%20%20styleUrls%3A%20%5B'fi-hide-show-example.css'%5D%2C%0A%7D)%0Aexport%20class%20FiHideShowExample%20%7B%0A%20%20public%20form%3A%20any%20%3D%20%7B%7D%3B%0A%20%20public%20controls%3A%20any%20%3D%20%7B%7D%3B%0A%0A%20%20constructor(private%20formUtils%3A%20FormUtils)%20%7B%0A%20%20%20%20const%20hideShowFunction%20%3D%20(API%3A%20FieldInteractionApi)%20%3D%3E%20%7B%0A%20%20%20%20%20%20console.log('%5BFieldInteractionDemo%5D%20-%20hideShowFunction')%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%20%20%20%20const%20activeValue%20%3D%20API.getActiveValue()%3B%0A%20%20%20%20%20%20if%20(!activeValue)%20%7B%0A%20%20%20%20%20%20%20%20API.show('text')%3B%0A%20%20%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20API.hide('text')%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20%2F%2F%20Hide%2FShow%20Field%20Interactions%0A%20%20%20%20this.controls.textControl%20%3D%20new%20TextBoxControl(%7B%0A%20%20%20%20%20%20type%3A%20'text'%2C%0A%20%20%20%20%20%20key%3A%20'text'%2C%0A%20%20%20%20%20%20required%3A%20true%2C%0A%20%20%20%20%20%20label%3A%20'MyField'%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.controls.text2Control%20%3D%20new%20TextBoxControl(%7B%0A%20%20%20%20%20%20type%3A%20'text'%2C%0A%20%20%20%20%20%20key%3A%20'text2'%2C%0A%20%20%20%20%20%20label%3A%20'MyField'%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.controls.toggleControl%20%3D%20new%20CheckboxControl(%7B%0A%20%20%20%20%20%20key%3A%20'toggle'%2C%0A%20%20%20%20%20%20label%3A%20'Hidden%3F'%2C%0A%20%20%20%20%20%20description%3A%20'I%20will%20toggle%20the%20above%20field%20to%20display%20or%20not!'%2C%0A%20%20%20%20%20%20interactions%3A%20%5B%7B%20event%3A%20'change'%2C%20script%3A%20hideShowFunction%20%7D%5D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.form%20%3D%20formUtils.toFormGroup(%5Bthis.controls.textControl%2C%20this.controls.text2Control%2C%20this.controls.toggleControl%5D)%3B%0A%20%20%7D%0A%7D%0A`,
         cssSource: `%2F**%20No%20CSS%20for%20this%20example%20*%2F%0A`,
         htmlSource: `%3Cnovo-form%20%5Bform%5D%3D%22form%22%20layout%3D%22vertical%22%3E%0A%20%20%20%20%3Cdiv%20class%3D%22novo-form-row%22%3E%0A%20%20%20%20%20%20%20%20%3Cnovo-control%20%5Bform%5D%3D%22form%22%20%5Bcontrol%5D%3D%22controls.textControl%22%3E%3C%2Fnovo-control%3E%0A%20%20%20%20%3C%2Fdiv%3E%0A%20%20%20%20%3Cdiv%20class%3D%22novo-form-row%22%3E%0A%20%20%20%20%20%20%20%20%3Cnovo-control%20%5Bform%5D%3D%22form%22%20%5Bcontrol%5D%3D%22controls.text2Control%22%3E%3C%2Fnovo-control%3E%0A%20%20%20%20%3C%2Fdiv%3E%0A%20%20%20%20%3Cdiv%20class%3D%22novo-form-row%22%3E%0A%20%20%20%20%20%20%20%20%3Cnovo-control%20%5Bform%5D%3D%22form%22%20%5Bcontrol%5D%3D%22controls.toggleControl%22%3E%3C%2Fnovo-control%3E%0A%20%20%20%20%3C%2Fdiv%3E%0A%3C%2Fnovo-form%3E%0A%3Cdiv%20class%3D%22final-value%22%3EForm%20Value%20-%20%7B%7B%20form.value%20%7C%20json%20%7D%7D%3C%2Fdiv%3E%0A%3Cdiv%20class%3D%22final-value%22%3EForm%20Dirty%20-%20%7B%7B%20form.dirty%20%7C%20json%20%7D%7D%3C%2Fdiv%3E%0A%3Cdiv%20class%3D%22final-value%22%3EIs%20Form%20Valid%3F%20-%20%7B%7B%20form.valid%20%7C%20json%20%7D%7D%3C%2Fdiv%3E%0A`
     },
     'fi-messaging': {
         title: 'Fi Messaging Example',
         component: FiMessagingExample,
-        tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0A%2F%2F%20Vendor%0Aimport%20%7B%0A%20%20FormUtils%2C%0A%20%20NovoFormGroup%2C%0A%20%20TextBoxControl%2C%0A%20%20CheckboxControl%2C%0A%20%20FieldInteractionApi%2C%0A%20%20SelectControl%2C%0A%20%20PickerControl%2C%0A%20%20DateTimeControl%2C%0A%20%20TilesControl%2C%0A%7D%20from%20'novo-elements'%3B%0Aimport%20%7B%20map%20%7D%20from%20'rxjs%2Foperators'%3B%0Aimport%20%7B%20MockMetaHeaders%20%7D%20from%20'..%2FMockMeta'%3B%0A%0A%2F**%0A%20*%20%40title%20Fi%20Messaging%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'fi-messaging-example'%2C%0A%20%20templateUrl%3A%20'fi-messaging-example.html'%2C%0A%20%20styleUrls%3A%20%5B'fi-messaging-example.css'%5D%2C%0A%7D)%0Aexport%20class%20FiMessagingExample%20%7B%0A%20%20public%20form%3A%20any%20%3D%20%7B%7D%3B%0A%20%20public%20controls%3A%20any%20%3D%20%7B%7D%3B%0A%0A%20%20constructor(private%20formUtils%3A%20FormUtils)%20%7B%0A%20%20%20%20let%20messagingFunction%20%3D%20(API%3A%20FieldInteractionApi)%20%3D%3E%20%7B%0A%20%20%20%20%20%20console.log('%5BFieldInteractionDemo%5D%20-%20messagingFunction')%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%20%20%20%20if%20(API.getActiveKey()%20%3D%3D%3D%20'toast')%20%7B%0A%20%20%20%20%20%20%20%20API.displayToast(%7B%0A%20%20%20%20%20%20%20%20%20%20title%3A%20'New%20Value'%2C%0A%20%20%20%20%20%20%20%20%20%20message%3A%20API.getActiveValue()%2C%0A%20%20%20%20%20%20%20%20%7D)%3B%0A%20%20%20%20%20%20%7D%20else%20if%20(API.getActiveKey()%20%3D%3D%3D%20'tip'%20%7C%7C%20API.getActiveKey()%20%3D%3D%3D%20'tipHtml')%20%7B%0A%20%20%20%20%20%20%20%20const%20sanitize%20%3D%20!API.getValue('tipHtml')%3B%0A%20%20%20%20%20%20%20%20API.displayTip('tip'%2C%20API.getValue('tip')%2C%20'info'%2C%20true%2C%20sanitize)%3B%0A%20%20%20%20%20%20%7D%20else%20if%20(API.getActiveKey()%20%3D%3D%3D%20'prompt')%20%7B%0A%20%20%20%20%20%20%20%20API.promptUser(API.getActiveKey()%2C%20%5B'Update%20Fee%20Arrangement%20from%20Selected%20Company'%2C%20'Update%20DateLastModified%20to%20right%20now!'%5D).then(%0A%20%20%20%20%20%20%20%20%20%20function(result)%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20if%20(result)%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20console.log('PERFORM')%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20console.log(%22DON'T%20PERFORM%22)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20)%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20%2F%2F%20Messaging%20Field%20Interactions%0A%20%20%20%20this.controls.toastControl%20%3D%20new%20TextBoxControl(%7B%0A%20%20%20%20%20%20type%3A%20'text'%2C%0A%20%20%20%20%20%20key%3A%20'toast'%2C%0A%20%20%20%20%20%20label%3A%20'Toast'%2C%0A%20%20%20%20%20%20description%3A%20'I%20will%20trigger%20a%20toast%20as%20you%20change%20the%20value!'%2C%0A%20%20%20%20%20%20interactions%3A%20%5B%7B%20event%3A%20'change'%2C%20script%3A%20messagingFunction%20%7D%5D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.controls.tipControl%20%3D%20new%20TextBoxControl(%7B%0A%20%20%20%20%20%20type%3A%20'text'%2C%0A%20%20%20%20%20%20key%3A%20'tip'%2C%0A%20%20%20%20%20%20label%3A%20'Tip'%2C%0A%20%20%20%20%20%20description%3A%20'I%20will%20trigger%20a%20tip%20well%20as%20you%20change%20the%20value!'%2C%0A%20%20%20%20%20%20interactions%3A%20%5B%7B%20event%3A%20'change'%2C%20script%3A%20messagingFunction%20%7D%5D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.controls.tipHtmlControl%20%3D%20new%20CheckboxControl(%7B%0A%20%20%20%20%20%20key%3A%20'tipHtml'%2C%0A%20%20%20%20%20%20label%3A%20'Display%20Tip%20as%20HTML'%2C%0A%20%20%20%20%20%20description%3A%20'Sets%20the%20API.displayTip()%20sanitize%20parameter%20to%20false.'%2C%0A%20%20%20%20%20%20value%3A%20false%2C%0A%20%20%20%20%20%20interactions%3A%20%5B%7B%20event%3A%20'change'%2C%20script%3A%20messagingFunction%20%7D%5D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.controls.promptControl%20%3D%20new%20TextBoxControl(%7B%0A%20%20%20%20%20%20type%3A%20'text'%2C%0A%20%20%20%20%20%20key%3A%20'prompt'%2C%0A%20%20%20%20%20%20label%3A%20'Prompt%20User%20of%20Downstream%20Changes'%2C%0A%20%20%20%20%20%20interactions%3A%20%5B%7B%20event%3A%20'change'%2C%20script%3A%20messagingFunction%20%7D%5D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.form%20%3D%20formUtils.toFormGroup(%5B%0A%20%20%20%20%20%20this.controls.toastControl%2C%0A%20%20%20%20%20%20this.controls.tipControl%2C%0A%20%20%20%20%20%20this.controls.tipHtmlControl%2C%0A%20%20%20%20%20%20this.controls.promptControl%2C%0A%20%20%20%20%5D)%3B%0A%20%20%7D%0A%7D%0A`,
+        tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0A%2F%2F%20Vendor%0Aimport%20%7B%0A%20%20FormUtils%2C%0A%20%20NovoFormGroup%2C%0A%20%20TextBoxControl%2C%0A%20%20CheckboxControl%2C%0A%20%20FieldInteractionApi%2C%0A%20%20SelectControl%2C%0A%20%20PickerControl%2C%0A%20%20DateTimeControl%2C%0A%20%20TilesControl%2C%0A%7D%20from%20'novo-elements'%3B%0Aimport%20%7B%20map%20%7D%20from%20'rxjs%2Foperators'%3B%0Aimport%20%7B%20MockMetaHeaders%20%7D%20from%20'..%2FMockMeta'%3B%0A%0A%2F**%0A%20*%20%40title%20Fi%20Messaging%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'fi-messaging-example'%2C%0A%20%20templateUrl%3A%20'fi-messaging-example.html'%2C%0A%20%20styleUrls%3A%20%5B'fi-messaging-example.css'%5D%2C%0A%7D)%0Aexport%20class%20FiMessagingExample%20%7B%0A%20%20public%20form%3A%20any%20%3D%20%7B%7D%3B%0A%20%20public%20controls%3A%20any%20%3D%20%7B%7D%3B%0A%0A%20%20constructor(private%20formUtils%3A%20FormUtils)%20%7B%0A%20%20%20%20const%20messagingFunction%20%3D%20(API%3A%20FieldInteractionApi)%20%3D%3E%20%7B%0A%20%20%20%20%20%20console.log('%5BFieldInteractionDemo%5D%20-%20messagingFunction')%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%20%20%20%20if%20(API.getActiveKey()%20%3D%3D%3D%20'toast')%20%7B%0A%20%20%20%20%20%20%20%20API.displayToast(%7B%0A%20%20%20%20%20%20%20%20%20%20title%3A%20'New%20Value'%2C%0A%20%20%20%20%20%20%20%20%20%20message%3A%20API.getActiveValue()%2C%0A%20%20%20%20%20%20%20%20%7D)%3B%0A%20%20%20%20%20%20%7D%20else%20if%20(API.getActiveKey()%20%3D%3D%3D%20'tip'%20%7C%7C%20API.getActiveKey()%20%3D%3D%3D%20'tipHtml')%20%7B%0A%20%20%20%20%20%20%20%20const%20sanitize%20%3D%20!API.getValue('tipHtml')%3B%0A%20%20%20%20%20%20%20%20API.displayTip('tip'%2C%20API.getValue('tip')%2C%20'info'%2C%20true%2C%20sanitize)%3B%0A%20%20%20%20%20%20%7D%20else%20if%20(API.getActiveKey()%20%3D%3D%3D%20'prompt')%20%7B%0A%20%20%20%20%20%20%20%20API.promptUser(API.getActiveKey()%2C%20%5B'Update%20Fee%20Arrangement%20from%20Selected%20Company'%2C%20'Update%20DateLastModified%20to%20right%20now!'%5D).then(%0A%20%20%20%20%20%20%20%20%20%20function(result)%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20if%20(result)%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20console.log('PERFORM')%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20console.log(%22DON'T%20PERFORM%22)%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20)%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20%2F%2F%20Messaging%20Field%20Interactions%0A%20%20%20%20this.controls.toastControl%20%3D%20new%20TextBoxControl(%7B%0A%20%20%20%20%20%20type%3A%20'text'%2C%0A%20%20%20%20%20%20key%3A%20'toast'%2C%0A%20%20%20%20%20%20label%3A%20'Toast'%2C%0A%20%20%20%20%20%20description%3A%20'I%20will%20trigger%20a%20toast%20as%20you%20change%20the%20value!'%2C%0A%20%20%20%20%20%20interactions%3A%20%5B%7B%20event%3A%20'change'%2C%20script%3A%20messagingFunction%20%7D%5D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.controls.tipControl%20%3D%20new%20TextBoxControl(%7B%0A%20%20%20%20%20%20type%3A%20'text'%2C%0A%20%20%20%20%20%20key%3A%20'tip'%2C%0A%20%20%20%20%20%20label%3A%20'Tip'%2C%0A%20%20%20%20%20%20description%3A%20'I%20will%20trigger%20a%20tip%20well%20as%20you%20change%20the%20value!'%2C%0A%20%20%20%20%20%20interactions%3A%20%5B%7B%20event%3A%20'change'%2C%20script%3A%20messagingFunction%20%7D%5D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.controls.tipHtmlControl%20%3D%20new%20CheckboxControl(%7B%0A%20%20%20%20%20%20key%3A%20'tipHtml'%2C%0A%20%20%20%20%20%20label%3A%20'Display%20Tip%20as%20HTML'%2C%0A%20%20%20%20%20%20description%3A%20'Sets%20the%20API.displayTip()%20sanitize%20parameter%20to%20false.'%2C%0A%20%20%20%20%20%20value%3A%20false%2C%0A%20%20%20%20%20%20interactions%3A%20%5B%7B%20event%3A%20'change'%2C%20script%3A%20messagingFunction%20%7D%5D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.controls.promptControl%20%3D%20new%20TextBoxControl(%7B%0A%20%20%20%20%20%20type%3A%20'text'%2C%0A%20%20%20%20%20%20key%3A%20'prompt'%2C%0A%20%20%20%20%20%20label%3A%20'Prompt%20User%20of%20Downstream%20Changes'%2C%0A%20%20%20%20%20%20interactions%3A%20%5B%7B%20event%3A%20'change'%2C%20script%3A%20messagingFunction%20%7D%5D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.form%20%3D%20formUtils.toFormGroup(%5B%0A%20%20%20%20%20%20this.controls.toastControl%2C%0A%20%20%20%20%20%20this.controls.tipControl%2C%0A%20%20%20%20%20%20this.controls.tipHtmlControl%2C%0A%20%20%20%20%20%20this.controls.promptControl%2C%0A%20%20%20%20%5D)%3B%0A%20%20%7D%0A%7D%0A`,
         cssSource: `%2F**%20No%20CSS%20for%20this%20example%20*%2F%0A`,
         htmlSource: `%3Cnovo-form%20%5Bform%5D%3D%22form%22%20layout%3D%22vertical%22%3E%0A%20%20%20%20%3Cdiv%20class%3D%22novo-form-row%22%3E%0A%20%20%20%20%20%20%20%20%3Cnovo-control%20%5Bform%5D%3D%22form%22%20%5Bcontrol%5D%3D%22controls.tipControl%22%3E%3C%2Fnovo-control%3E%0A%20%20%20%20%3C%2Fdiv%3E%0A%20%20%20%20%3Cdiv%20class%3D%22novo-form-row%22%3E%0A%20%20%20%20%20%20%20%20%3Cnovo-control%20%5Bform%5D%3D%22form%22%20%5Bcontrol%5D%3D%22controls.tipHtmlControl%22%3E%3C%2Fnovo-control%3E%0A%20%20%20%20%3C%2Fdiv%3E%0A%20%20%20%20%3Cdiv%20class%3D%22novo-form-row%22%3E%0A%20%20%20%20%20%20%20%20%3Cnovo-control%20%5Bform%5D%3D%22form%22%20%5Bcontrol%5D%3D%22controls.toastControl%22%3E%3C%2Fnovo-control%3E%0A%20%20%20%20%3C%2Fdiv%3E%0A%20%20%20%20%3Cdiv%20class%3D%22novo-form-row%22%3E%0A%20%20%20%20%20%20%20%20%3Cnovo-control%20%5Bform%5D%3D%22form%22%20%5Bcontrol%5D%3D%22controls.promptControl%22%3E%3C%2Fnovo-control%3E%0A%20%20%20%20%3C%2Fdiv%3E%0A%3C%2Fnovo-form%3E%0A%3Cdiv%20class%3D%22final-value%22%3EForm%20Value%20-%20%7B%7B%20form.value%20%7C%20json%20%7D%7D%3C%2Fdiv%3E%0A%3Cdiv%20class%3D%22final-value%22%3EForm%20Dirty%20-%20%7B%7B%20form.dirty%20%7C%20json%20%7D%7D%3C%2Fdiv%3E%0A%3Cdiv%20class%3D%22final-value%22%3EIs%20Form%20Valid%3F%20-%20%7B%7B%20form.valid%20%7C%20json%20%7D%7D%3C%2Fdiv%3E%0A`
     },
     'fi-modify-options': {
         title: 'Fi Modify Options Example',
         component: FiModifyOptionsExample,
-        tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0A%2F%2F%20Vendor%0Aimport%20%7B%20FormUtils%2C%20CheckboxControl%2C%20FieldInteractionApi%2C%20SelectControl%2C%20PickerControl%20%7D%20from%20'novo-elements'%3B%0Aimport%20%7B%20map%20%7D%20from%20'rxjs%2Foperators'%3B%0A%0A%2F**%0A%20*%20%40title%20Fi%20Modify%20Options%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'fi-modify-options-example'%2C%0A%20%20templateUrl%3A%20'fi-modify-options-example.html'%2C%0A%20%20styleUrls%3A%20%5B'fi-modify-options-example.css'%5D%2C%0A%7D)%0Aexport%20class%20FiModifyOptionsExample%20%7B%0A%20%20public%20form%3A%20any%20%3D%20%7B%7D%3B%0A%20%20public%20controls%3A%20any%20%3D%20%7B%7D%3B%0A%0A%20%20constructor(private%20formUtils%3A%20FormUtils)%20%7B%0A%20%20%20%20let%20modifyOptionsAddFunction%20%3D%20(API%3A%20FieldInteractionApi)%20%3D%3E%20%7B%0A%20%20%20%20%20%20console.log('%5BFieldInteractionDemo%5D%20-%20modifyOptionsAddFunction')%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%20%20%20%20let%20currentValue%20%3D%20API.getActiveValue()%3B%0A%20%20%20%20%20%20if%20(!currentValue)%20%7B%0A%20%20%20%20%20%20%20%20API.removeStaticOption('select'%2C%20'NEW')%3B%0A%20%20%20%20%20%20%20%20API.removeStaticOption('picker'%2C%20'NEW')%3B%0A%20%20%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20API.addStaticOption('select'%2C%20'NEW')%3B%0A%20%20%20%20%20%20%20%20API.addStaticOption('select'%2C%20'NEW')%3B%20%2F%2F%20Duplicate%20options%20will%20be%20ignored%0A%20%20%20%20%20%20%20%20API.addStaticOption('picker'%2C%20'NEW')%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%3B%0A%20%20%20%20let%20modifyOptionsAsyncFunction%20%3D%20(API%3A%20FieldInteractionApi)%20%3D%3E%20%7B%0A%20%20%20%20%20%20console.log('%5BFieldInteractionDemo%5D%20-%20modifyOptionsAsyncFunction')%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%20%20%20%20let%20currentValue%20%3D%20API.getActiveValue()%3B%0A%20%20%20%20%20%20switch%20(currentValue)%20%7B%0A%20%20%20%20%20%20%20%20case%201%3A%0A%20%20%20%20%20%20%20%20%20%20%2F%2F%20Static%0A%20%20%20%20%20%20%20%20%20%20API.setProperty('picker'%2C%20'label'%2C%20'Static%20Picker')%3B%0A%20%20%20%20%20%20%20%20%20%20API.modifyPickerConfig('picker'%2C%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20options%3A%20%5B'A'%2C%20'B'%2C%20'C'%5D%2C%0A%20%20%20%20%20%20%20%20%20%20%7D)%3B%0A%20%20%20%20%20%20%20%20%20%20break%3B%0A%20%20%20%20%20%20%20%20case%202%3A%0A%20%20%20%20%20%20%20%20%20%20%2F%2F%20Async%20with%20Options%20URL%0A%20%20%20%20%20%20%20%20%20%20API.setProperty('picker'%2C%20'label'%2C%20'Async%20Picker%20(with%20options%20url)')%3B%0A%20%20%20%20%20%20%20%20%20%20API.modifyPickerConfig(%0A%20%20%20%20%20%20%20%20%20%20%20%20'picker'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20format%3A%20'%24name%20%24test'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20optionsUrl%3A%20'http%3A%2F%2Fnovo-elements-mock.getsandbox.com%2Fusers'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20function(result)%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20result.test%20%3D%20'Built%20with%20Options%20URL!'%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20return%20result%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20)%3B%0A%20%20%20%20%20%20%20%20%20%20break%3B%0A%20%20%20%20%20%20%20%20case%203%3A%0A%20%20%20%20%20%20%20%20%20%20%2F%2F%20Async%20with%20Options%20URL%20Builder%0A%20%20%20%20%20%20%20%20%20%20API.setProperty('picker'%2C%20'label'%2C%20'Async%20Picker%20(with%20options%20url%20builder)')%3B%0A%20%20%20%20%20%20%20%20%20%20API.modifyPickerConfig(%0A%20%20%20%20%20%20%20%20%20%20%20%20'picker'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20format%3A%20'%24name%20%24test'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20optionsUrlBuilder%3A%20(query)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20return%20'http%3A%2F%2Fnovo-elements-mock.getsandbox.com%2Fusers'%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20function(result)%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20result.test%20%3D%20'Built%20with%20Options%20URL%20Builder!'%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20return%20result%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20)%3B%0A%20%20%20%20%20%20%20%20%20%20break%3B%0A%20%20%20%20%20%20%20%20case%204%3A%0A%20%20%20%20%20%20%20%20%20%20%2F%2F%20Async%20with%20Options%20Promise%0A%20%20%20%20%20%20%20%20%20%20API.setProperty('picker'%2C%20'label'%2C%20'Async%20Picker%20(with%20options%20promise)')%3B%0A%20%20%20%20%20%20%20%20%20%20API.modifyPickerConfig('picker'%2C%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20format%3A%20'%24name%20%24test'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20optionsPromise%3A%20function(query%2C%20http)%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20return%20new%20Promise(function(resolve%2C%20reject)%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20if%20(query%20%26%26%20query.length)%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20http%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20.get('http%3A%2F%2Fnovo-elements-mock.getsandbox.com%2Fusers')%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20.map(function(results%3A%20any%5B%5D)%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20return%20results.map((result)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20result.test%20%3D%20'Built%20with%20Options%20Promise'%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20return%20result%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D)%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20.subscribe(resolve%2C%20reject)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20resolve(%5B'DEFAULT'%5D)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7D)%3B%0A%20%20%20%20%20%20%20%20%20%20break%3B%0A%20%20%20%20%20%20%20%20default%3A%0A%20%20%20%20%20%20%20%20%20%20break%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20%2F%2F%20Modify%20Options%20Field%20Interactions%0A%20%20%20%20this.controls.selectControl%20%3D%20new%20SelectControl(%7B%0A%20%20%20%20%20%20key%3A%20'select'%2C%0A%20%20%20%20%20%20label%3A%20'Select'%2C%0A%20%20%20%20%20%20options%3A%20%5B'A'%2C%20'B'%2C%20'C'%5D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.controls.pickerControl%20%3D%20new%20PickerControl(%7B%0A%20%20%20%20%20%20key%3A%20'picker'%2C%0A%20%20%20%20%20%20label%3A%20'Static%20Picker'%2C%0A%20%20%20%20%20%20config%3A%20%7B%0A%20%20%20%20%20%20%20%20options%3A%20%5B'A'%2C%20'B'%2C%20'C'%5D%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.controls.toggleControl%20%3D%20new%20CheckboxControl(%7B%0A%20%20%20%20%20%20key%3A%20'toggle'%2C%0A%20%20%20%20%20%20label%3A%20'Add%20Option%3F'%2C%0A%20%20%20%20%20%20description%3A%20'I%20will%20add%20options%20to%20the%20above%20field!'%2C%0A%20%20%20%20%20%20interactions%3A%20%5B%7B%20event%3A%20'change'%2C%20script%3A%20modifyOptionsAddFunction%20%7D%5D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.controls.makePickerAsyncControl%20%3D%20new%20SelectControl(%7B%0A%20%20%20%20%20%20key%3A%20'async'%2C%0A%20%20%20%20%20%20label%3A%20'Async%20Picker%3F'%2C%0A%20%20%20%20%20%20description%3A%20'I%20will%20make%20the%20picker%20now%20hit%20a%20service!'%2C%0A%20%20%20%20%20%20value%3A%201%2C%0A%20%20%20%20%20%20options%3A%20%5B%0A%20%20%20%20%20%20%20%20%7B%20label%3A%20'Not%20Async'%2C%20value%3A%201%20%7D%2C%0A%20%20%20%20%20%20%20%20%7B%20label%3A%20'Async%20With%20Options%20URL'%2C%20value%3A%202%20%7D%2C%0A%20%20%20%20%20%20%20%20%7B%20label%3A%20'Async%20With%20Options%20URL%20Builder'%2C%20value%3A%203%20%7D%2C%0A%20%20%20%20%20%20%20%20%7B%20label%3A%20'Async%20With%20Options%20Promise'%2C%20value%3A%204%20%7D%2C%0A%20%20%20%20%20%20%5D%2C%0A%20%20%20%20%20%20interactions%3A%20%5B%7B%20event%3A%20'change'%2C%20script%3A%20modifyOptionsAsyncFunction%20%7D%5D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.form%20%3D%20formUtils.toFormGroup(%5B%0A%20%20%20%20%20%20this.controls.selectControl%2C%0A%20%20%20%20%20%20this.controls.pickerControl%2C%0A%20%20%20%20%20%20this.controls.toggleControl%2C%0A%20%20%20%20%20%20this.controls.makePickerAsyncControl%2C%0A%20%20%20%20%5D)%3B%0A%20%20%7D%0A%7D%0A`,
+        tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0A%2F%2F%20Vendor%0Aimport%20%7B%20FormUtils%2C%20CheckboxControl%2C%20FieldInteractionApi%2C%20SelectControl%2C%20PickerControl%20%7D%20from%20'novo-elements'%3B%0Aimport%20%7B%20map%20%7D%20from%20'rxjs%2Foperators'%3B%0A%0A%2F**%0A%20*%20%40title%20Fi%20Modify%20Options%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'fi-modify-options-example'%2C%0A%20%20templateUrl%3A%20'fi-modify-options-example.html'%2C%0A%20%20styleUrls%3A%20%5B'fi-modify-options-example.css'%5D%2C%0A%7D)%0Aexport%20class%20FiModifyOptionsExample%20%7B%0A%20%20public%20form%3A%20any%20%3D%20%7B%7D%3B%0A%20%20public%20controls%3A%20any%20%3D%20%7B%7D%3B%0A%0A%20%20constructor(private%20formUtils%3A%20FormUtils)%20%7B%0A%20%20%20%20const%20modifyOptionsAddFunction%20%3D%20(API%3A%20FieldInteractionApi)%20%3D%3E%20%7B%0A%20%20%20%20%20%20console.log('%5BFieldInteractionDemo%5D%20-%20modifyOptionsAddFunction')%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%20%20%20%20const%20currentValue%20%3D%20API.getActiveValue()%3B%0A%20%20%20%20%20%20if%20(!currentValue)%20%7B%0A%20%20%20%20%20%20%20%20API.removeStaticOption('select'%2C%20'NEW')%3B%0A%20%20%20%20%20%20%20%20API.removeStaticOption('picker'%2C%20'NEW')%3B%0A%20%20%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20API.addStaticOption('select'%2C%20'NEW')%3B%0A%20%20%20%20%20%20%20%20API.addStaticOption('select'%2C%20'NEW')%3B%20%2F%2F%20Duplicate%20options%20will%20be%20ignored%0A%20%20%20%20%20%20%20%20API.addStaticOption('picker'%2C%20'NEW')%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%3B%0A%20%20%20%20const%20modifyOptionsAsyncFunction%20%3D%20(API%3A%20FieldInteractionApi)%20%3D%3E%20%7B%0A%20%20%20%20%20%20console.log('%5BFieldInteractionDemo%5D%20-%20modifyOptionsAsyncFunction')%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%20%20%20%20const%20currentValue%20%3D%20API.getActiveValue()%3B%0A%20%20%20%20%20%20switch%20(currentValue)%20%7B%0A%20%20%20%20%20%20%20%20case%201%3A%0A%20%20%20%20%20%20%20%20%20%20%2F%2F%20Static%0A%20%20%20%20%20%20%20%20%20%20API.setProperty('picker'%2C%20'label'%2C%20'Static%20Picker')%3B%0A%20%20%20%20%20%20%20%20%20%20API.modifyPickerConfig('picker'%2C%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20options%3A%20%5B'A'%2C%20'B'%2C%20'C'%5D%2C%0A%20%20%20%20%20%20%20%20%20%20%7D)%3B%0A%20%20%20%20%20%20%20%20%20%20break%3B%0A%20%20%20%20%20%20%20%20case%202%3A%0A%20%20%20%20%20%20%20%20%20%20%2F%2F%20Async%20with%20Options%20URL%0A%20%20%20%20%20%20%20%20%20%20API.setProperty('picker'%2C%20'label'%2C%20'Async%20Picker%20(with%20options%20url)')%3B%0A%20%20%20%20%20%20%20%20%20%20API.modifyPickerConfig(%0A%20%20%20%20%20%20%20%20%20%20%20%20'picker'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20format%3A%20'%24name%20%24test'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20optionsUrl%3A%20'http%3A%2F%2Fnovo-elements-mock.getsandbox.com%2Fusers'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20function(result)%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20result.test%20%3D%20'Built%20with%20Options%20URL!'%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20return%20result%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20)%3B%0A%20%20%20%20%20%20%20%20%20%20break%3B%0A%20%20%20%20%20%20%20%20case%203%3A%0A%20%20%20%20%20%20%20%20%20%20%2F%2F%20Async%20with%20Options%20URL%20Builder%0A%20%20%20%20%20%20%20%20%20%20API.setProperty('picker'%2C%20'label'%2C%20'Async%20Picker%20(with%20options%20url%20builder)')%3B%0A%20%20%20%20%20%20%20%20%20%20API.modifyPickerConfig(%0A%20%20%20%20%20%20%20%20%20%20%20%20'picker'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20format%3A%20'%24name%20%24test'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20optionsUrlBuilder%3A%20(query)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20return%20'http%3A%2F%2Fnovo-elements-mock.getsandbox.com%2Fusers'%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20function(result)%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20result.test%20%3D%20'Built%20with%20Options%20URL%20Builder!'%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20return%20result%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20)%3B%0A%20%20%20%20%20%20%20%20%20%20break%3B%0A%20%20%20%20%20%20%20%20case%204%3A%0A%20%20%20%20%20%20%20%20%20%20%2F%2F%20Async%20with%20Options%20Promise%0A%20%20%20%20%20%20%20%20%20%20API.setProperty('picker'%2C%20'label'%2C%20'Async%20Picker%20(with%20options%20promise)')%3B%0A%20%20%20%20%20%20%20%20%20%20API.modifyPickerConfig('picker'%2C%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20format%3A%20'%24name%20%24test'%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20optionsPromise(query%2C%20http)%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20return%20new%20Promise(function(resolve%2C%20reject)%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20if%20(query%20%26%26%20query.length)%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20http%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20.get('http%3A%2F%2Fnovo-elements-mock.getsandbox.com%2Fusers')%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20.map(function(results%3A%20any%5B%5D)%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20return%20results.map((result)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20result.test%20%3D%20'Built%20with%20Options%20Promise'%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20return%20result%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D)%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20.subscribe(resolve%2C%20reject)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20resolve(%5B'DEFAULT'%5D)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%7D)%3B%0A%20%20%20%20%20%20%20%20%20%20break%3B%0A%20%20%20%20%20%20%20%20default%3A%0A%20%20%20%20%20%20%20%20%20%20break%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20%2F%2F%20Modify%20Options%20Field%20Interactions%0A%20%20%20%20this.controls.selectControl%20%3D%20new%20SelectControl(%7B%0A%20%20%20%20%20%20key%3A%20'select'%2C%0A%20%20%20%20%20%20label%3A%20'Select'%2C%0A%20%20%20%20%20%20options%3A%20%5B'A'%2C%20'B'%2C%20'C'%5D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.controls.pickerControl%20%3D%20new%20PickerControl(%7B%0A%20%20%20%20%20%20key%3A%20'picker'%2C%0A%20%20%20%20%20%20label%3A%20'Static%20Picker'%2C%0A%20%20%20%20%20%20config%3A%20%7B%0A%20%20%20%20%20%20%20%20options%3A%20%5B'A'%2C%20'B'%2C%20'C'%5D%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.controls.toggleControl%20%3D%20new%20CheckboxControl(%7B%0A%20%20%20%20%20%20key%3A%20'toggle'%2C%0A%20%20%20%20%20%20label%3A%20'Add%20Option%3F'%2C%0A%20%20%20%20%20%20description%3A%20'I%20will%20add%20options%20to%20the%20above%20field!'%2C%0A%20%20%20%20%20%20interactions%3A%20%5B%7B%20event%3A%20'change'%2C%20script%3A%20modifyOptionsAddFunction%20%7D%5D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.controls.makePickerAsyncControl%20%3D%20new%20SelectControl(%7B%0A%20%20%20%20%20%20key%3A%20'async'%2C%0A%20%20%20%20%20%20label%3A%20'Async%20Picker%3F'%2C%0A%20%20%20%20%20%20description%3A%20'I%20will%20make%20the%20picker%20now%20hit%20a%20service!'%2C%0A%20%20%20%20%20%20value%3A%201%2C%0A%20%20%20%20%20%20options%3A%20%5B%0A%20%20%20%20%20%20%20%20%7B%20label%3A%20'Not%20Async'%2C%20value%3A%201%20%7D%2C%0A%20%20%20%20%20%20%20%20%7B%20label%3A%20'Async%20With%20Options%20URL'%2C%20value%3A%202%20%7D%2C%0A%20%20%20%20%20%20%20%20%7B%20label%3A%20'Async%20With%20Options%20URL%20Builder'%2C%20value%3A%203%20%7D%2C%0A%20%20%20%20%20%20%20%20%7B%20label%3A%20'Async%20With%20Options%20Promise'%2C%20value%3A%204%20%7D%2C%0A%20%20%20%20%20%20%5D%2C%0A%20%20%20%20%20%20interactions%3A%20%5B%7B%20event%3A%20'change'%2C%20script%3A%20modifyOptionsAsyncFunction%20%7D%5D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.form%20%3D%20formUtils.toFormGroup(%5B%0A%20%20%20%20%20%20this.controls.selectControl%2C%0A%20%20%20%20%20%20this.controls.pickerControl%2C%0A%20%20%20%20%20%20this.controls.toggleControl%2C%0A%20%20%20%20%20%20this.controls.makePickerAsyncControl%2C%0A%20%20%20%20%5D)%3B%0A%20%20%7D%0A%7D%0A`,
         cssSource: `%2F**%20No%20CSS%20for%20this%20example%20*%2F%0A`,
         htmlSource: `%3Cnovo-form%20%5Bform%5D%3D%22form%22%20layout%3D%22vertical%22%3E%0A%20%20%20%20%3Cdiv%20class%3D%22novo-form-row%22%3E%0A%20%20%20%20%20%20%20%20%3Cnovo-control%20%5Bform%5D%3D%22form%22%20%5Bcontrol%5D%3D%22controls.selectControl%22%3E%3C%2Fnovo-control%3E%0A%20%20%20%20%3C%2Fdiv%3E%0A%20%20%20%20%3Cdiv%20class%3D%22novo-form-row%22%3E%0A%20%20%20%20%20%20%20%20%3Cnovo-control%20%5Bform%5D%3D%22form%22%20%5Bcontrol%5D%3D%22controls.pickerControl%22%3E%3C%2Fnovo-control%3E%0A%20%20%20%20%3C%2Fdiv%3E%0A%20%20%20%20%3Cdiv%20class%3D%22novo-form-row%22%3E%0A%20%20%20%20%20%20%20%20%3Cnovo-control%20%5Bform%5D%3D%22form%22%20%5Bcontrol%5D%3D%22controls.toggleControl%22%3E%3C%2Fnovo-control%3E%0A%20%20%20%20%3C%2Fdiv%3E%0A%20%20%20%20%3Cdiv%20class%3D%22novo-form-row%22%3E%0A%20%20%20%20%20%20%20%20%3Cnovo-control%20%5Bform%5D%3D%22form%22%20%5Bcontrol%5D%3D%22controls.makePickerAsyncControl%22%3E%3C%2Fnovo-control%3E%0A%20%20%20%20%3C%2Fdiv%3E%0A%3C%2Fnovo-form%3E%0A%3Cdiv%20class%3D%22final-value%22%3EForm%20Value%20-%20%7B%7B%20form.value%20%7C%20json%20%7D%7D%3C%2Fdiv%3E%0A%3Cdiv%20class%3D%22final-value%22%3EForm%20Dirty%20-%20%7B%7B%20form.dirty%20%7C%20json%20%7D%7D%3C%2Fdiv%3E%0A%3Cdiv%20class%3D%22final-value%22%3EIs%20Form%20Valid%3F%20-%20%7B%7B%20form.valid%20%7C%20json%20%7D%7D%3C%2Fdiv%3E%0A`
     },
     'fi-required': {
         title: 'Fi Required Example',
         component: FiRequiredExample,
-        tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0A%2F%2F%20Vendor%0Aimport%20%7B%20FormUtils%2C%20TextBoxControl%2C%20CheckboxControl%2C%20FieldInteractionApi%20%7D%20from%20'novo-elements'%3B%0A%0A%2F**%0A%20*%20%40title%20Fi%20Required%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'fi-required-example'%2C%0A%20%20templateUrl%3A%20'fi-required-example.html'%2C%0A%20%20styleUrls%3A%20%5B'fi-required-example.css'%5D%2C%0A%7D)%0Aexport%20class%20FiRequiredExample%20%7B%0A%20%20public%20form%3A%20any%20%3D%20%7B%7D%3B%0A%20%20public%20controls%3A%20any%20%3D%20%7B%7D%3B%0A%0A%20%20constructor(formUtils%3A%20FormUtils)%20%7B%0A%20%20%20%20let%20requiredFunction%20%3D%20(API%3A%20FieldInteractionApi)%20%3D%3E%20%7B%0A%20%20%20%20%20%20console.log('%5BFieldInteractionDemo%5D%20-%20requiredFunction')%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%20%20%20%20let%20activeValue%20%3D%20API.getActiveValue()%3B%0A%20%20%20%20%20%20if%20(activeValue)%20%7B%0A%20%20%20%20%20%20%20%20API.setRequired('required'%2C%20true)%3B%0A%20%20%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20API.setRequired('required'%2C%20false)%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20%2F%2F%20Required%20Field%20Interactions%0A%20%20%20%20this.controls.requiredControl%20%3D%20new%20TextBoxControl(%7B%0A%20%20%20%20%20%20type%3A%20'text'%2C%0A%20%20%20%20%20%20key%3A%20'required'%2C%0A%20%20%20%20%20%20label%3A%20'Test'%2C%0A%20%20%20%20%20%20description%3A%20'I%20may%20or%20may%20not%20be%20required%2C%20play%20with%20the%20checkbox%20below!'%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.controls.toggleControl%20%3D%20new%20CheckboxControl(%7B%0A%20%20%20%20%20%20key%3A%20'toggle'%2C%0A%20%20%20%20%20%20label%3A%20'Required%3F'%2C%0A%20%20%20%20%20%20interactions%3A%20%5B%7B%20event%3A%20'change'%2C%20script%3A%20requiredFunction%20%7D%5D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.form%20%3D%20formUtils.toFormGroup(%5Bthis.controls.requiredControl%2C%20this.controls.toggleControl%5D)%3B%0A%20%20%7D%0A%7D%0A`,
+        tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0A%2F%2F%20Vendor%0Aimport%20%7B%20FormUtils%2C%20TextBoxControl%2C%20CheckboxControl%2C%20FieldInteractionApi%20%7D%20from%20'novo-elements'%3B%0A%0A%2F**%0A%20*%20%40title%20Fi%20Required%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'fi-required-example'%2C%0A%20%20templateUrl%3A%20'fi-required-example.html'%2C%0A%20%20styleUrls%3A%20%5B'fi-required-example.css'%5D%2C%0A%7D)%0Aexport%20class%20FiRequiredExample%20%7B%0A%20%20public%20form%3A%20any%20%3D%20%7B%7D%3B%0A%20%20public%20controls%3A%20any%20%3D%20%7B%7D%3B%0A%0A%20%20constructor(formUtils%3A%20FormUtils)%20%7B%0A%20%20%20%20const%20requiredFunction%20%3D%20(API%3A%20FieldInteractionApi)%20%3D%3E%20%7B%0A%20%20%20%20%20%20console.log('%5BFieldInteractionDemo%5D%20-%20requiredFunction')%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%20%20%20%20const%20activeValue%20%3D%20API.getActiveValue()%3B%0A%20%20%20%20%20%20if%20(activeValue)%20%7B%0A%20%20%20%20%20%20%20%20API.setRequired('required'%2C%20true)%3B%0A%20%20%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20API.setRequired('required'%2C%20false)%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20%2F%2F%20Required%20Field%20Interactions%0A%20%20%20%20this.controls.requiredControl%20%3D%20new%20TextBoxControl(%7B%0A%20%20%20%20%20%20type%3A%20'text'%2C%0A%20%20%20%20%20%20key%3A%20'required'%2C%0A%20%20%20%20%20%20label%3A%20'Test'%2C%0A%20%20%20%20%20%20description%3A%20'I%20may%20or%20may%20not%20be%20required%2C%20play%20with%20the%20checkbox%20below!'%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.controls.toggleControl%20%3D%20new%20CheckboxControl(%7B%0A%20%20%20%20%20%20key%3A%20'toggle'%2C%0A%20%20%20%20%20%20label%3A%20'Required%3F'%2C%0A%20%20%20%20%20%20interactions%3A%20%5B%7B%20event%3A%20'change'%2C%20script%3A%20requiredFunction%20%7D%5D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.form%20%3D%20formUtils.toFormGroup(%5Bthis.controls.requiredControl%2C%20this.controls.toggleControl%5D)%3B%0A%20%20%7D%0A%7D%0A`,
         cssSource: `%2F**%20No%20CSS%20for%20this%20example%20*%2F%0A`,
         htmlSource: `%3Cnovo-form%20%5Bform%5D%3D%22form%22%20layout%3D%22vertical%22%3E%0A%20%20%20%20%3Cdiv%20class%3D%22novo-form-row%22%3E%0A%20%20%20%20%20%20%20%20%3Cnovo-control%20%5Bform%5D%3D%22form%22%20%5Bcontrol%5D%3D%22controls.requiredControl%22%3E%3C%2Fnovo-control%3E%0A%20%20%20%20%3C%2Fdiv%3E%0A%20%20%20%20%3Cdiv%20class%3D%22novo-form-row%22%3E%0A%20%20%20%20%20%20%20%20%3Cnovo-control%20%5Bform%5D%3D%22form%22%20%5Bcontrol%5D%3D%22controls.toggleControl%22%3E%3C%2Fnovo-control%3E%0A%20%20%20%20%3C%2Fdiv%3E%0A%3C%2Fnovo-form%3E%0A%3Cdiv%20class%3D%22final-value%22%3EForm%20Value%20-%20%7B%7B%20form.value%20%7C%20json%20%7D%7D%3C%2Fdiv%3E%0A%3Cdiv%20class%3D%22final-value%22%3EForm%20Dirty%20-%20%7B%7B%20form.dirty%20%7C%20json%20%7D%7D%3C%2Fdiv%3E%0A%3Cdiv%20class%3D%22final-value%22%3EIs%20Form%20Valid%3F%20-%20%7B%7B%20form.valid%20%7C%20json%20%7D%7D%3C%2Fdiv%3E%0A`
     },
     'fi-tooltip': {
         title: 'Fi Tooltip Example',
         component: FiTooltipExample,
-        tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0A%2F%2F%20Vendor%0Aimport%20%7B%20FormUtils%2C%20TextBoxControl%2C%20FieldInteractionApi%2C%20TilesControl%20%7D%20from%20'novo-elements'%3B%0A%0A%2F**%0A%20*%20%40title%20Fi%20Tooltip%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'fi-tooltip-example'%2C%0A%20%20templateUrl%3A%20'fi-tooltip-example.html'%2C%0A%20%20styleUrls%3A%20%5B'fi-tooltip-example.css'%5D%2C%0A%7D)%0Aexport%20class%20FiTooltipExample%20%7B%0A%20%20public%20form%3A%20any%20%3D%20%7B%7D%3B%0A%20%20public%20controls%3A%20any%20%3D%20%7B%7D%3B%0A%0A%20%20constructor(private%20formUtils%3A%20FormUtils)%20%7B%0A%20%20%20%20let%20tooltipFunction%20%3D%20(API%3A%20FieldInteractionApi)%20%3D%3E%20%7B%0A%20%20%20%20%20%20console.log('%5BFieldInteractionDemo%5D%20-%20tooltipFunction')%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%20%20%20%20API.setTooltip(API.getActiveKey()%2C%20API.getActiveValue())%3B%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20let%20tooltipUpdateFunction%20%3D%20(API%3A%20FieldInteractionApi)%20%3D%3E%20%7B%0A%20%20%20%20%20%20console.log('%5BFieldInteractionDemo%5D%20-%20tooltipUpdateFunction')%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%20%20%20%20API.getControl(this.controls.tooltipControl.key).tooltipSize%20%3D%20API.getValue(this.controls.tooltipSizeControl.key)%3B%0A%20%20%20%20%20%20API.getControl(this.controls.tooltipControl.key).tooltipPreline%20%3D%20API.getValue(this.controls.tooltipPrelineControl.key)%3B%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20%2F%2F%20Tooltip%20Field%20Interactions%0A%20%20%20%20this.controls.tooltipControl%20%3D%20new%20TextBoxControl(%7B%0A%20%20%20%20%20%20type%3A%20'text'%2C%0A%20%20%20%20%20%20key%3A%20'toolTipValue'%2C%0A%20%20%20%20%20%20label%3A%20'Tooltip'%2C%0A%20%20%20%20%20%20description%3A%20'I%20will%20add%20a%20tooltip%20to%20this%20control%20as%20a%20value%20is%20typed'%2C%0A%20%20%20%20%20%20interactions%3A%20%5B%7B%20event%3A%20'change'%2C%20script%3A%20tooltipFunction%20%7D%5D%2C%0A%20%20%20%20%7D)%3B%0A%0A%20%20%20%20this.controls.tooltipSizeControl%20%3D%20new%20TilesControl(%7B%0A%20%20%20%20%20%20key%3A%20'tooltipSize'%2C%0A%20%20%20%20%20%20label%3A%20'Tooltip%20Size'%2C%0A%20%20%20%20%20%20description%3A%20'Changing%20me%20will%20set%20a%20fixed%20width%20on%20the%20tooltip'%2C%0A%20%20%20%20%20%20options%3A%20%5B%7B%20value%3A%20'small'%2C%20label%3A%20'Small'%20%7D%2C%20%7B%20value%3A%20'medium'%2C%20label%3A%20'Medium'%20%7D%2C%20%7B%20value%3A%20'large'%2C%20label%3A%20'Large'%20%7D%5D%2C%0A%20%20%20%20%20%20interactions%3A%20%5B%7B%20event%3A%20'change'%2C%20script%3A%20tooltipUpdateFunction%20%7D%5D%2C%0A%20%20%20%20%7D)%3B%0A%0A%20%20%20%20this.controls.tooltipPrelineControl%20%3D%20new%20TilesControl(%7B%0A%20%20%20%20%20%20key%3A%20'tooltipPreline'%2C%0A%20%20%20%20%20%20label%3A%20'Tooltip%20Multiline'%2C%0A%20%20%20%20%20%20description%3A%20'Should%20the%20tooltip%20be%20multiple%20lines%20tall%20or%20all%20on%20one%20line%3F'%2C%0A%20%20%20%20%20%20options%3A%20%5B%7B%20value%3A%20true%2C%20label%3A%20'Yes'%20%7D%2C%20%7B%20value%3A%20false%2C%20label%3A%20'No'%20%7D%5D%2C%0A%20%20%20%20%20%20interactions%3A%20%5B%7B%20event%3A%20'change'%2C%20script%3A%20tooltipUpdateFunction%20%7D%5D%2C%0A%20%20%20%20%7D)%3B%0A%0A%20%20%20%20this.form%20%3D%20formUtils.toFormGroup(%5B%0A%20%20%20%20%20%20this.controls.tooltipControl%2C%0A%20%20%20%20%20%20this.controls.tooltipSizeControl%2C%0A%20%20%20%20%20%20this.controls.tooltipPrelineControl%2C%0A%20%20%20%20%5D)%3B%0A%20%20%7D%0A%7D%0A`,
+        tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0A%2F%2F%20Vendor%0Aimport%20%7B%20FormUtils%2C%20TextBoxControl%2C%20FieldInteractionApi%2C%20TilesControl%20%7D%20from%20'novo-elements'%3B%0A%0A%2F**%0A%20*%20%40title%20Fi%20Tooltip%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'fi-tooltip-example'%2C%0A%20%20templateUrl%3A%20'fi-tooltip-example.html'%2C%0A%20%20styleUrls%3A%20%5B'fi-tooltip-example.css'%5D%2C%0A%7D)%0Aexport%20class%20FiTooltipExample%20%7B%0A%20%20public%20form%3A%20any%20%3D%20%7B%7D%3B%0A%20%20public%20controls%3A%20any%20%3D%20%7B%7D%3B%0A%0A%20%20constructor(private%20formUtils%3A%20FormUtils)%20%7B%0A%20%20%20%20const%20tooltipFunction%20%3D%20(API%3A%20FieldInteractionApi)%20%3D%3E%20%7B%0A%20%20%20%20%20%20console.log('%5BFieldInteractionDemo%5D%20-%20tooltipFunction')%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%20%20%20%20API.setTooltip(API.getActiveKey()%2C%20API.getActiveValue())%3B%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20const%20tooltipUpdateFunction%20%3D%20(API%3A%20FieldInteractionApi)%20%3D%3E%20%7B%0A%20%20%20%20%20%20console.log('%5BFieldInteractionDemo%5D%20-%20tooltipUpdateFunction')%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%20%20%20%20API.getControl(this.controls.tooltipControl.key).tooltipSize%20%3D%20API.getValue(this.controls.tooltipSizeControl.key)%3B%0A%20%20%20%20%20%20API.getControl(this.controls.tooltipControl.key).tooltipPreline%20%3D%20API.getValue(this.controls.tooltipPrelineControl.key)%3B%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20%2F%2F%20Tooltip%20Field%20Interactions%0A%20%20%20%20this.controls.tooltipControl%20%3D%20new%20TextBoxControl(%7B%0A%20%20%20%20%20%20type%3A%20'text'%2C%0A%20%20%20%20%20%20key%3A%20'toolTipValue'%2C%0A%20%20%20%20%20%20label%3A%20'Tooltip'%2C%0A%20%20%20%20%20%20description%3A%20'I%20will%20add%20a%20tooltip%20to%20this%20control%20as%20a%20value%20is%20typed'%2C%0A%20%20%20%20%20%20interactions%3A%20%5B%7B%20event%3A%20'change'%2C%20script%3A%20tooltipFunction%20%7D%5D%2C%0A%20%20%20%20%7D)%3B%0A%0A%20%20%20%20this.controls.tooltipSizeControl%20%3D%20new%20TilesControl(%7B%0A%20%20%20%20%20%20key%3A%20'tooltipSize'%2C%0A%20%20%20%20%20%20label%3A%20'Tooltip%20Size'%2C%0A%20%20%20%20%20%20description%3A%20'Changing%20me%20will%20set%20a%20fixed%20width%20on%20the%20tooltip'%2C%0A%20%20%20%20%20%20options%3A%20%5B%7B%20value%3A%20'small'%2C%20label%3A%20'Small'%20%7D%2C%20%7B%20value%3A%20'medium'%2C%20label%3A%20'Medium'%20%7D%2C%20%7B%20value%3A%20'large'%2C%20label%3A%20'Large'%20%7D%5D%2C%0A%20%20%20%20%20%20interactions%3A%20%5B%7B%20event%3A%20'change'%2C%20script%3A%20tooltipUpdateFunction%20%7D%5D%2C%0A%20%20%20%20%7D)%3B%0A%0A%20%20%20%20this.controls.tooltipPrelineControl%20%3D%20new%20TilesControl(%7B%0A%20%20%20%20%20%20key%3A%20'tooltipPreline'%2C%0A%20%20%20%20%20%20label%3A%20'Tooltip%20Multiline'%2C%0A%20%20%20%20%20%20description%3A%20'Should%20the%20tooltip%20be%20multiple%20lines%20tall%20or%20all%20on%20one%20line%3F'%2C%0A%20%20%20%20%20%20options%3A%20%5B%7B%20value%3A%20true%2C%20label%3A%20'Yes'%20%7D%2C%20%7B%20value%3A%20false%2C%20label%3A%20'No'%20%7D%5D%2C%0A%20%20%20%20%20%20interactions%3A%20%5B%7B%20event%3A%20'change'%2C%20script%3A%20tooltipUpdateFunction%20%7D%5D%2C%0A%20%20%20%20%7D)%3B%0A%0A%20%20%20%20this.form%20%3D%20formUtils.toFormGroup(%5B%0A%20%20%20%20%20%20this.controls.tooltipControl%2C%0A%20%20%20%20%20%20this.controls.tooltipSizeControl%2C%0A%20%20%20%20%20%20this.controls.tooltipPrelineControl%2C%0A%20%20%20%20%5D)%3B%0A%20%20%7D%0A%7D%0A`,
         cssSource: `%2F**%20No%20CSS%20for%20this%20example%20*%2F%0A`,
         htmlSource: `%3Cnovo-form%20%5Bform%5D%3D%22form%22%20layout%3D%22vertical%22%3E%0A%20%20%3Cdiv%20class%3D%22novo-form-row%22%3E%0A%20%20%20%20%20%20%3Cnovo-control%20%5Bform%5D%3D%22form%22%20%5Bcontrol%5D%3D%22controls.tooltipControl%22%3E%3C%2Fnovo-control%3E%0A%20%20%3C%2Fdiv%3E%0A%20%20%3Cdiv%20class%3D%22novo-form-row%22%3E%0A%20%20%20%20%20%20%3Cnovo-control%20%5Bform%5D%3D%22form%22%20%5Bcontrol%5D%3D%22controls.tooltipSizeControl%22%3E%3C%2Fnovo-control%3E%0A%20%20%3C%2Fdiv%3E%0A%20%20%3Cdiv%20class%3D%22novo-form-row%22%3E%0A%20%20%20%20%20%20%3Cnovo-control%20%5Bform%5D%3D%22form%22%20%5Bcontrol%5D%3D%22controls.tooltipPrelineControl%22%3E%3C%2Fnovo-control%3E%0A%20%20%3C%2Fdiv%3E%0A%3C%2Fnovo-form%3E%0A%3Cdiv%20class%3D%22final-value%22%3EForm%20Value%20-%20%7B%7B%20form.value%20%7C%20json%20%7D%7D%3C%2Fdiv%3E%0A%3Cdiv%20class%3D%22final-value%22%3EForm%20Dirty%20-%20%7B%7B%20form.dirty%20%7C%20json%20%7D%7D%3C%2Fdiv%3E%0A%3Cdiv%20class%3D%22final-value%22%3EIs%20Form%20Valid%3F%20-%20%7B%7B%20form.valid%20%7C%20json%20%7D%7D%3C%2Fdiv%3E%0A`
     },
     'fi-validation': {
         title: 'Fi Validation Example',
         component: FiValidationExample,
-        tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0A%2F%2F%20Vendor%0Aimport%20%7B%20FormUtils%2C%20TextBoxControl%2C%20FieldInteractionApi%20%7D%20from%20'novo-elements'%3B%0A%0A%2F**%0A%20*%20%40title%20Fi%20Validation%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'fi-validation-example'%2C%0A%20%20templateUrl%3A%20'fi-validation-example.html'%2C%0A%20%20styleUrls%3A%20%5B'fi-validation-example.css'%5D%2C%0A%7D)%0Aexport%20class%20FiValidationExample%20%7B%0A%20%20public%20form%3A%20any%20%3D%20%7B%7D%3B%0A%20%20public%20controls%3A%20any%20%3D%20%7B%7D%3B%0A%0A%20%20constructor(private%20formUtils%3A%20FormUtils)%20%7B%0A%20%20%20%20let%20validationFunction%20%3D%20(API%3A%20FieldInteractionApi)%20%3D%3E%20%7B%0A%20%20%20%20%20%20console.log('%5BFieldInteractionDemo%5D%20-%20validationFunction')%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%20%20%20%20let%20activeValue%20%3D%20API.getActiveValue()%3B%0A%20%20%20%20%20%20if%20(activeValue%20%3E%2010)%20%7B%0A%20%20%20%20%20%20%20%20API.markAsInvalid(API.getActiveKey()%2C%20'Too%20high!%20Make%20it%20a%20lot%20lower!!')%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20%2F%2F%20Validation%20Field%20Interactions%0A%20%20%20%20this.controls.validationControl%20%3D%20new%20TextBoxControl(%7B%0A%20%20%20%20%20%20type%3A%20'number'%2C%0A%20%20%20%20%20%20key%3A%20'validation'%2C%0A%20%20%20%20%20%20value%3A%205%2C%0A%20%20%20%20%20%20label%3A%20'Validation%20Test'%2C%0A%20%20%20%20%20%20description%3A%20'Try%20to%20input%20a%20number%20larger%20then%2010!'%2C%0A%20%20%20%20%20%20interactions%3A%20%5B%7B%20event%3A%20'change'%2C%20script%3A%20validationFunction%2C%20invokeOnInit%3A%20true%20%7D%5D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.form%20%3D%20formUtils.toFormGroup(%5Bthis.controls.validationControl%5D)%3B%0A%20%20%7D%0A%7D%0A`,
+        tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0A%2F%2F%20Vendor%0Aimport%20%7B%20FormUtils%2C%20TextBoxControl%2C%20FieldInteractionApi%20%7D%20from%20'novo-elements'%3B%0A%0A%2F**%0A%20*%20%40title%20Fi%20Validation%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'fi-validation-example'%2C%0A%20%20templateUrl%3A%20'fi-validation-example.html'%2C%0A%20%20styleUrls%3A%20%5B'fi-validation-example.css'%5D%2C%0A%7D)%0Aexport%20class%20FiValidationExample%20%7B%0A%20%20public%20form%3A%20any%20%3D%20%7B%7D%3B%0A%20%20public%20controls%3A%20any%20%3D%20%7B%7D%3B%0A%0A%20%20constructor(private%20formUtils%3A%20FormUtils)%20%7B%0A%20%20%20%20const%20validationFunction%20%3D%20(API%3A%20FieldInteractionApi)%20%3D%3E%20%7B%0A%20%20%20%20%20%20console.log('%5BFieldInteractionDemo%5D%20-%20validationFunction')%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%20%20%20%20const%20activeValue%20%3D%20API.getActiveValue()%3B%0A%20%20%20%20%20%20if%20(activeValue%20%3E%2010)%20%7B%0A%20%20%20%20%20%20%20%20API.markAsInvalid(API.getActiveKey()%2C%20'Too%20high!%20Make%20it%20a%20lot%20lower!!')%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20%2F%2F%20Validation%20Field%20Interactions%0A%20%20%20%20this.controls.validationControl%20%3D%20new%20TextBoxControl(%7B%0A%20%20%20%20%20%20type%3A%20'number'%2C%0A%20%20%20%20%20%20key%3A%20'validation'%2C%0A%20%20%20%20%20%20value%3A%205%2C%0A%20%20%20%20%20%20label%3A%20'Validation%20Test'%2C%0A%20%20%20%20%20%20description%3A%20'Try%20to%20input%20a%20number%20larger%20then%2010!'%2C%0A%20%20%20%20%20%20interactions%3A%20%5B%7B%20event%3A%20'change'%2C%20script%3A%20validationFunction%2C%20invokeOnInit%3A%20true%20%7D%5D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.form%20%3D%20formUtils.toFormGroup(%5Bthis.controls.validationControl%5D)%3B%0A%20%20%7D%0A%7D%0A`,
         cssSource: `%2F**%20No%20CSS%20for%20this%20example%20*%2F%0A`,
         htmlSource: `%3Cnovo-form%20%5Bform%5D%3D%22form%22%20layout%3D%22vertical%22%3E%0A%20%20%20%20%3Cdiv%20class%3D%22novo-form-row%22%3E%0A%20%20%20%20%20%20%20%20%3Cnovo-control%20%5Bform%5D%3D%22form%22%20%5Bcontrol%5D%3D%22controls.validationControl%22%3E%3C%2Fnovo-control%3E%0A%20%20%20%20%3C%2Fdiv%3E%0A%3C%2Fnovo-form%3E%0A%3Cdiv%20class%3D%22final-value%22%3EForm%20Value%20-%20%7B%7B%20form.value%20%7C%20json%20%7D%7D%3C%2Fdiv%3E%0A%3Cdiv%20class%3D%22final-value%22%3EForm%20Dirty%20-%20%7B%7B%20form.dirty%20%7C%20json%20%7D%7D%3C%2Fdiv%3E%0A%3Cdiv%20class%3D%22final-value%22%3EIs%20Form%20Valid%3F%20-%20%7B%7B%20form.valid%20%7C%20json%20%7D%7D%3C%2Fdiv%3E%0A`
     },
@@ -72418,7 +72418,7 @@ const EXAMPLE_COMPONENTS = {
     'security': {
         title: 'Security Example',
         component: SecurityExample,
-        tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0Aimport%20%7B%20Security%20%7D%20from%20'novo-elements'%3B%0A%0A%2F**%0A%20*%20%40title%20Security%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'security-example'%2C%0A%20%20templateUrl%3A%20'security-example.html'%2C%0A%20%20styleUrls%3A%20%5B'security-example.css'%5D%2C%0A%7D)%0Aexport%20class%20SecurityExample%20%7B%0A%20%20perms%3A%20any%5B%5D%20%3D%20%5B%5D%3B%0A%0A%20%20constructor(private%20security%3A%20Security)%20%7B%7D%0A%0A%20%20shufflePermissions()%3A%20void%20%7B%0A%20%20%20%20let%20numOfPerms%3A%20number%20%3D%20Math.floor(Math.random()%20*%202)%20%2B%201%3B%0A%20%20%20%20this.perms%20%3D%20this.shuffle(%5B'A'%2C%20'B'%2C%20'C'%5D).slice(0%2C%20numOfPerms)%3B%0A%20%20%20%20this.security.clear()%3B%0A%20%20%20%20this.security.grant(this.perms)%3B%0A%20%20%7D%0A%0A%20%20shuffle(array%3A%20string%5B%5D)%3A%20any%5B%5D%20%7B%0A%20%20%20%20let%20currentIndex%3A%20number%20%3D%20array.length%3B%0A%20%20%20%20let%20temporaryValue%3A%20string%3B%0A%20%20%20%20let%20randomIndex%3A%20number%3B%0A%0A%20%20%20%20%2F%2F%20While%20there%20remain%20elements%20to%20shuffle...%0A%20%20%20%20while%20(currentIndex%20!%3D%3D%200)%20%7B%0A%20%20%20%20%20%20%2F%2F%20Pick%20a%20remaining%20element...%0A%20%20%20%20%20%20randomIndex%20%3D%20Math.floor(Math.random()%20*%20currentIndex)%3B%0A%20%20%20%20%20%20currentIndex%20-%3D%201%3B%0A%20%20%20%20%20%20%2F%2F%20And%20swap%20it%20with%20the%20current%20element.%0A%20%20%20%20%20%20temporaryValue%20%3D%20array%5BcurrentIndex%5D%3B%0A%20%20%20%20%20%20array%5BcurrentIndex%5D%20%3D%20array%5BrandomIndex%5D%3B%0A%20%20%20%20%20%20array%5BrandomIndex%5D%20%3D%20temporaryValue%3B%0A%20%20%20%20%7D%0A%0A%20%20%20%20return%20array%3B%0A%20%20%7D%0A%7D%0A`,
+        tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0Aimport%20%7B%20Security%20%7D%20from%20'novo-elements'%3B%0A%0A%2F**%0A%20*%20%40title%20Security%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'security-example'%2C%0A%20%20templateUrl%3A%20'security-example.html'%2C%0A%20%20styleUrls%3A%20%5B'security-example.css'%5D%2C%0A%7D)%0Aexport%20class%20SecurityExample%20%7B%0A%20%20perms%3A%20any%5B%5D%20%3D%20%5B%5D%3B%0A%0A%20%20constructor(private%20security%3A%20Security)%20%7B%7D%0A%0A%20%20shufflePermissions()%3A%20void%20%7B%0A%20%20%20%20const%20numOfPerms%3A%20number%20%3D%20Math.floor(Math.random()%20*%202)%20%2B%201%3B%0A%20%20%20%20this.perms%20%3D%20this.shuffle(%5B'A'%2C%20'B'%2C%20'C'%5D).slice(0%2C%20numOfPerms)%3B%0A%20%20%20%20this.security.clear()%3B%0A%20%20%20%20this.security.grant(this.perms)%3B%0A%20%20%7D%0A%0A%20%20shuffle(array%3A%20string%5B%5D)%3A%20any%5B%5D%20%7B%0A%20%20%20%20let%20currentIndex%3A%20number%20%3D%20array.length%3B%0A%20%20%20%20let%20temporaryValue%3A%20string%3B%0A%20%20%20%20let%20randomIndex%3A%20number%3B%0A%0A%20%20%20%20%2F%2F%20While%20there%20remain%20elements%20to%20shuffle...%0A%20%20%20%20while%20(currentIndex%20!%3D%3D%200)%20%7B%0A%20%20%20%20%20%20%2F%2F%20Pick%20a%20remaining%20element...%0A%20%20%20%20%20%20randomIndex%20%3D%20Math.floor(Math.random()%20*%20currentIndex)%3B%0A%20%20%20%20%20%20currentIndex%20-%3D%201%3B%0A%20%20%20%20%20%20%2F%2F%20And%20swap%20it%20with%20the%20current%20element.%0A%20%20%20%20%20%20temporaryValue%20%3D%20array%5BcurrentIndex%5D%3B%0A%20%20%20%20%20%20array%5BcurrentIndex%5D%20%3D%20array%5BrandomIndex%5D%3B%0A%20%20%20%20%20%20array%5BrandomIndex%5D%20%3D%20temporaryValue%3B%0A%20%20%20%20%7D%0A%0A%20%20%20%20return%20array%3B%0A%20%20%7D%0A%7D%0A`,
         cssSource: `%2F**%20No%20CSS%20for%20this%20example%20*%2F%0A`,
         htmlSource: `%3Cdiv%3E%0A%20%20%20%20%3Cp%20*bhUnless%3D%22'A'%22%3EShown%20if%20has%20permission%20%3Cstrong%3EA%3C%2Fstrong%3E%3C%2Fp%3E%0A%20%20%20%20%3Cp%20*bhUnless%3D%22'B'%22%3EShown%20if%20has%20permission%20%3Cstrong%3EB%3C%2Fstrong%3E%3C%2Fp%3E%0A%20%20%20%20%3Cp%20*bhUnless%3D%22'C'%22%3EShown%20if%20has%20permission%20%3Cstrong%3EC%3C%2Fstrong%3E%3C%2Fp%3E%0A%20%20%20%20%3Cp%20*bhUnless%3D%22'A%20%26%26%20B'%22%3EShown%20if%20has%20permissions%20%3Cstrong%3EA%20%26%26%20B%3C%2Fstrong%3E%3C%2Fp%3E%0A%20%20%20%20%3Cp%20*bhUnless%3D%22'A%20%26%26%20C'%22%3EShown%20if%20has%20permissions%20%3Cstrong%3EA%20%26%26%20C%3C%2Fstrong%3E%3C%2Fp%3E%0A%20%20%20%20%3Cp%20*bhUnless%3D%22'A%20%26%26%20B%20%26%26%20C'%22%3EShown%20if%20has%20permissions%20%3Cstrong%3EA%20%26%26%20B%20%26%26%20C%3C%2Fstrong%3E%3C%2Fp%3E%0A%20%20%20%20%3Cp%20*bhUnless%3D%22'A%20%7C%7C%20B'%22%3EShown%20if%20has%20permissions%20%3Cstrong%3EA%20%7C%7C%20B%3C%2Fstrong%3E%3C%2Fp%3E%0A%20%20%20%20%3Cp%3E%20Permissions%20are%20%3A%20%3Cstrong%3E%7B%7B%20perms%20%7C%20json%20%7D%7D%3C%2Fstrong%3E%3C%2Fp%3E%0A%20%20%20%20%3Cbutton%20(click)%3D%22shufflePermissions()%22%3EShuffle%3C%2Fbutton%3E%0A%3C%2Fdiv%3E%0A`
     },
@@ -72949,11 +72949,11 @@ class CodeSnippetComponent {
          */
         () => {
             /** @type {?} */
-            let code = decodeURIComponent(EXAMPLE_COMPONENTS[this.example].tsSource);
+            const code = decodeURIComponent(EXAMPLE_COMPONENTS[this.example].tsSource);
             /** @type {?} */
-            let markup = decodeURIComponent(EXAMPLE_COMPONENTS[this.example].htmlSource);
+            const markup = decodeURIComponent(EXAMPLE_COMPONENTS[this.example].htmlSource);
             /** @type {?} */
-            let style = decodeURIComponent(EXAMPLE_COMPONENTS[this.example].cssSource);
+            const style = decodeURIComponent(EXAMPLE_COMPONENTS[this.example].cssSource);
             this.highlightTS = this.sanitizer.bypassSecurityTrustHtml(this.hljs.highlightAuto(code, ['typescript']).value.trim());
             this.highlightHTML = this.sanitizer.bypassSecurityTrustHtml(this.hljs.highlightAuto(markup, ['html']).value.trim());
             this.highlightCSS = this.sanitizer.bypassSecurityTrustHtml(this.hljs.highlightAuto(style, ['css']).value.trim());
@@ -73163,13 +73163,13 @@ class StackblitzWriter {
          */
         (resolve) => {
             /** @type {?} */
-            let templateContents = TEMPLATE_FILES.map((/**
+            const templateContents = TEMPLATE_FILES.map((/**
              * @param {?} file
              * @return {?}
              */
             (file) => this._readFile(form, data, file, TEMPLATE_PATH)));
             /** @type {?} */
-            let exampleContents = [];
+            const exampleContents = [];
             exampleContents.push(Promise.resolve(this._addFileToForm(form, data, decodeURIComponent(data.source.tsSource), `app/${data.selectorName}.ts`, TEMPLATE_PATH)));
             exampleContents.push(Promise.resolve(this._addFileToForm(form, data, decodeURIComponent(data.source.htmlSource), `app/${data.selectorName}.html`, TEMPLATE_PATH)));
             exampleContents.push(Promise.resolve(this._addFileToForm(form, data, decodeURIComponent(data.source.cssSource), `app/${data.selectorName}.css`, TEMPLATE_PATH)));
