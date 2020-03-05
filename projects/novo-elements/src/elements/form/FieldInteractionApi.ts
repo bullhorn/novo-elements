@@ -584,7 +584,8 @@ export class FieldInteractionApi {
         ...(filteredOptionsCreator && { filteredOptionsCreator }),
         ...(getLabels && { getLabels }),
         ...(optionsConfig && optionsConfig),
-        resultsTemplate: control.config.resultsTemplate,
+        resultsTemplate:
+          control.config.resultsTemplate || ('resultsTemplateType' in args && this.getAppropriateResultsTemplate(args.resultsTemplateType)),
       };
 
       this.setProperty(key, 'config', newConfig);
@@ -612,39 +613,35 @@ export class FieldInteractionApi {
     filteredOptionsCreator?: (where: string) => (query: string) => Promise<unknown[]>,
     pickerConfigFormat?: string,
   ): undefined | { options: unknown[] } | { options: OptionsFunction; format?: string } => {
-    let optionsConfig = undefined;
     if (filteredOptionsCreator || 'optionsUrl' in args || 'optionsUrlBuilder' in args || 'optionsPromise' in args) {
       const format = ('format' in args && args.format) || pickerConfigFormat;
-      optionsConfig = {
+      return {
         options: this.createOptionsFunction(args, mapper, filteredOptionsCreator),
         ...('emptyPickerMessage' in args && { emptyPickerMessage: args.emptyPickerMessage }),
         ...(format && { format }),
       };
     } else if ('options' in args && Array.isArray(args.options)) {
-      optionsConfig = {
+      return {
         options: [...args.options],
       };
+    } else {
+      return undefined;
     }
-
-    if ('resultsTemplateType' in args) {
-      this.assignAppropriateResultsTemplate(args.resultsTemplateType, optionsConfig);
-    }
-
-    return optionsConfig;
   };
 
-  private assignAppropriateResultsTemplate(resultsTemplateType: ResultsTemplateType, config: { resultsTemplate: any }): void {
+  private getAppropriateResultsTemplate(resultsTemplateType: ResultsTemplateType) {
     switch (resultsTemplateType) {
       case 'entity-picker':
-        config.resultsTemplate = EntityPickerResults;
-        break;
+        return EntityPickerResults;
+      default:
+        return undefined;
     }
   }
 
   createOptionsFunction = (
     config: ModifyPickerConfigArgs,
     mapper?: (item: unknown) => unknown,
-    filteredOptionsCreator?: (where?: string) => ((query: string, page?: number) => Promise<unknown[]>),
+    filteredOptionsCreator?: (where?: string) => (query: string, page?: number) => Promise<unknown[]>,
   ): ((query: string) => Promise<unknown[]>) => (query: string, page?: number) => {
     if ('optionsPromise' in config && config.optionsPromise) {
       return config.optionsPromise(query, new CustomHttpImpl(this.http), page);
