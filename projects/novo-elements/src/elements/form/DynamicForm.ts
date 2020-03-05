@@ -127,8 +127,8 @@ export class NovoDynamicFormElement implements OnChanges, OnInit, AfterContentIn
       });
     }
 
-    let requiredFields: Array<any> = [];
-    let nonRequiredFields: Array<any> = [];
+    const requiredFields: Array<any> = [];
+    const nonRequiredFields: Array<any> = [];
     this.fieldsets.forEach((fieldset) => {
       fieldset.controls.forEach((control) => {
         if (control.required) {
@@ -231,7 +231,7 @@ export class NovoDynamicFormElement implements OnChanges, OnInit, AfterContentIn
 
   public forceValidation(): void {
     Object.keys(this.form.controls).forEach((key: string) => {
-      let control: any = this.form.controls[key];
+      const control: any = this.form.controls[key];
       if (control.required && Helpers.isBlank(this.form.value[control.key])) {
         control.markAsDirty();
         control.markAsTouched();

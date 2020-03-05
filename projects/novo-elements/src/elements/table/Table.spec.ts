@@ -322,7 +322,7 @@ describe('Elements: NovoTableElement', () => {
     it('should update the row data to reflect the active filters (custom filter).', () => {
       expect(component.onFilterChange).toBeDefined();
       component.config.filtering = (filterValue, data) => {
-        let matches = [];
+        const matches = [];
         data.forEach((row) => {
           if (row.name === 'John') {
             matches.push(row);
@@ -336,7 +336,7 @@ describe('Elements: NovoTableElement', () => {
 
     it('should update the row data to reflect the active filters (custom config filter).', () => {
       expect(component.onFilterChange).toBeDefined();
-      let mockOption = { label: 'Today', min: -2, max: 2 };
+      const mockOption = { label: 'Today', min: -2, max: 2 };
       component.columns = [
         {
           name: 'name',
@@ -366,10 +366,10 @@ describe('Elements: NovoTableElement', () => {
   xdescribe('Method: isFilterActive(columnFilters, filter)', () => {
     it('should return true when the filter is active and false when it is not.', () => {
       expect(component.isFilterActive).toBeDefined();
-      let mockColumnFilters = {
+      const mockColumnFilters = {
         filter: [],
       };
-      let mockFilter = {
+      const mockFilter = {
         label: 'Filter',
       };
       // Using Filter Objects
@@ -439,7 +439,7 @@ describe('Elements: NovoTableElement', () => {
   describe('Method: getDefaultOptions()', () => {
     it('should return a subset of options when the data dates cover a small range.', () => {
       expect(component.getDefaultOptions).toBeDefined();
-      let mockOptions = component.getDefaultOptions();
+      const mockOptions = component.getDefaultOptions();
       expect(mockOptions.length).toBe(10);
     });
   });
@@ -641,49 +641,49 @@ describe('Elements: NovoTableElement', () => {
     });
 
     it('should return true if column has hideColumnOnEdit and in editing mode', () => {
-      let column = { name: 'name', hideColumnOnEdit: true };
+      const column = { name: 'name', hideColumnOnEdit: true };
       component.mode = 2;
       expect(component.isColumnHidden(column)).toBe(true);
     });
 
     it('should return false if column does not have hideColumnOnEdit and in editing mode', () => {
-      let column = { name: 'name' };
+      const column = { name: 'name' };
       component.mode = 2;
       expect(component.isColumnHidden(column)).toBe(false);
     });
 
     it('should return false if column does not have hideColumnOnEdit and not in editing mode', () => {
-      let column = { name: 'name' };
+      const column = { name: 'name' };
       component.mode = 1;
       expect(component.isColumnHidden(column)).toBe(false);
     });
 
     it('should return false if column has hideColumnOnEdit and not in editing mode', () => {
-      let column = { name: 'name', hideColumnOnEdit: true };
+      const column = { name: 'name', hideColumnOnEdit: true };
       component.mode = 1;
       expect(component.isColumnHidden(column)).toBe(false);
     });
 
     it('should return false if column has hideColumnOnView and in editing mode', () => {
-      let column = { name: 'name', hideColumnOnView: true };
+      const column = { name: 'name', hideColumnOnView: true };
       component.mode = 2;
       expect(component.isColumnHidden(column)).toBe(false);
     });
 
     it('should return false if column does not have hideColumnOnView and in editing mode', () => {
-      let column = { name: 'name' };
+      const column = { name: 'name' };
       component.mode = 2;
       expect(component.isColumnHidden(column)).toBe(false);
     });
 
     it('should return false if column does not have hideColumnOnView and not in editing mode', () => {
-      let column = { name: 'name' };
+      const column = { name: 'name' };
       component.mode = 1;
       expect(component.isColumnHidden(column)).toBe(false);
     });
 
     it('should return false if column has hideColumnOnView and not in editing mode', () => {
-      let column = { name: 'name', hideColumnOnView: true };
+      const column = { name: 'name', hideColumnOnView: true };
       component.mode = 1;
       expect(component.isColumnHidden(column)).toBe(true);
     });

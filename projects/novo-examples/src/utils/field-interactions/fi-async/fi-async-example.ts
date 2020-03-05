@@ -16,7 +16,7 @@ export class FiAsyncExample {
   public controls: any = {};
 
   constructor(private formUtils: FormUtils) {
-    let asyncFunction = (API: FieldInteractionApi) => {
+    const asyncFunction = (API: FieldInteractionApi) => {
       console.log('[FieldInteractionDemo] - asyncFunction'); // tslint:disable-line
       if (API.getActiveKey() === 'async1') {
         API.setLoading(API.getActiveKey(), true);

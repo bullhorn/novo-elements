@@ -26,7 +26,7 @@ xdescribe('Elements: NovoDatePickerInputElement', () => {
     it('should call parseString from the dateFormatService and then dispatchOnChange.', () => {
       spyOn(component.dateFormatService, 'parseString').and.callThrough();
       spyOn(component, 'dispatchOnChange');
-      let mockValue: String = '01/01/2020';
+      const mockValue: String = '01/01/2020';
       component.formatDate(mockValue, true);
       expect(component.dateFormatService.parseString).toHaveBeenCalled();
       expect(component.dispatchOnChange).toHaveBeenCalled();

@@ -4,7 +4,7 @@ import { Validators } from '@angular/forms';
 import { NovoFormControl } from './NovoFormControl';
 
 describe('Elements: NovoFormControl', () => {
-  let component = new NovoFormControl('1', { validators: [] });
+  const component = new NovoFormControl('1', { validators: [] });
   it('initialize correctly', () => {
     expect(component).toBeDefined();
   });

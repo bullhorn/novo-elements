@@ -17,7 +17,7 @@ export class NestedMultiPickerExample {
   parentChildValue: any;
 
   constructor() {
-    let departments = [
+    const departments = [
       {
         id: 1,
         name: 'Sales',
@@ -39,7 +39,7 @@ export class NestedMultiPickerExample {
         name: 'Nobody Works Here',
       },
     ];
-    let users = [
+    const users = [
       {
         id: 1,
         departments: [1, 2, 4],

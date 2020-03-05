@@ -165,7 +165,7 @@ export class NovoDateTimePickerElement implements ControlValueAccessor {
 
   setTimeLabels(value: Date) {
     let hours = value.getHours();
-    let minutes = value.getMinutes();
+    const minutes = value.getMinutes();
 
     this.meridian = value.toLocaleTimeString().slice(-2);
 

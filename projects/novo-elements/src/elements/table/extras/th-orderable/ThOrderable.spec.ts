@@ -34,8 +34,8 @@ describe('Elements: ThOrderable', () => {
     });
   });
   describe('Class: ', () => {
-    let mockElement = new ElementRef(document.createElement('div')) as any;
-    let subject = new ThOrderable(mockElement);
+    const mockElement = new ElementRef(document.createElement('div')) as any;
+    const subject = new ThOrderable(mockElement);
     mockElement.nativeElement = {
       parentNode: {
         children: [mockElement],
@@ -63,7 +63,7 @@ describe('Elements: ThOrderable', () => {
     describe('Method: deleteColumns()', () => {
       it('should delete rows from the table', () => {
         expect(subject.deleteColumns).toBeDefined();
-        let mockTable = {
+        const mockTable = {
           rows: [],
           deleteRow: () => {},
         };
@@ -74,7 +74,7 @@ describe('Elements: ThOrderable', () => {
 
     describe('Method: findTable()', () => {
       it('should be defined', () => {
-        let mockHTMLElement = document.createElement('div');
+        const mockHTMLElement = document.createElement('div');
         expect(subject.findTable).toBeDefined();
         subject.findTable(mockHTMLElement);
       });

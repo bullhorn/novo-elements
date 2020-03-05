@@ -67,10 +67,10 @@ describe('Elements: NovoAutoSize', () => {
 });
 
 describe('Test Localization', () => {
-  let mockElement: ElementRef = new ElementRef(document.createElement('div'));
+  const mockElement: ElementRef = new ElementRef(document.createElement('div'));
 
   it('should set decimal separator based on locale correctly', () => {
-    let component = new NovoControlElement(mockElement, null, null, null, null, null, 'fr-FR');
+    const component = new NovoControlElement(mockElement, null, null, null, null, null, 'fr-FR');
     expect(component.decimalSeparator).toBe('.');
   });
 });
@@ -122,7 +122,7 @@ describe('NovoControlElement', () => {
     };
 
     // Act
-    let testBoolean = component.showCount;
+    const testBoolean = component.showCount;
 
     // Assert
     expect(testBoolean).toEqual(false);
@@ -146,7 +146,7 @@ describe('NovoControlElement', () => {
     (component as any).handleFocus(new FocusEvent('input'));
 
     // Act
-    let testBoolean = component.showCount;
+    const testBoolean = component.showCount;
 
     // Assert
     expect(testBoolean).toEqual(true);
@@ -169,7 +169,7 @@ describe('NovoControlElement', () => {
     (component as any).handleFocus(new FocusEvent('input'));
 
     // Act
-    let testBoolean = component.showCount;
+    const testBoolean = component.showCount;
 
     // Assert
     expect(testBoolean).toEqual(false);
@@ -193,7 +193,7 @@ describe('NovoControlElement', () => {
     (component as any).handleFocus(new FocusEvent('input'));
 
     // Act
-    let testBoolean = component.showCount;
+    const testBoolean = component.showCount;
 
     // Assert
     expect(testBoolean).toEqual(false);

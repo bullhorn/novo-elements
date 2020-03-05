@@ -14,7 +14,7 @@ export class EntityPickerExample {
   public entity: any;
 
   constructor() {
-    let collaborators = [
+    const collaborators = [
       {
         id: 1,
         firstName: 'Brian',

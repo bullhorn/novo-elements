@@ -27,7 +27,7 @@ export class FiMessagingExample {
   public controls: any = {};
 
   constructor(private formUtils: FormUtils) {
-    let messagingFunction = (API: FieldInteractionApi) => {
+    const messagingFunction = (API: FieldInteractionApi) => {
       console.log('[FieldInteractionDemo] - messagingFunction'); // tslint:disable-line
       if (API.getActiveKey() === 'toast') {
         API.displayToast({

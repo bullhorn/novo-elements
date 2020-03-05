@@ -79,16 +79,16 @@ export class Formats {
 
   public formatDate(value: any, format?: string | Intl.DateTimeFormatOptions): string {
     const _value = value === null || value === undefined || value === '' ? new Date() : new Date(value);
-    let options: Intl.DateTimeFormatOptions = this.getDateOptions(format);
+    const options: Intl.DateTimeFormatOptions = this.getDateOptions(format);
     const locales = [ ...(this.overrideDateFormat ? [this.overrideDateFormat] : []), this.locale, 'en-US'];
     return new Intl.DateTimeFormat(locales, options).format(_value);
   }
 
   public formatTime(value: any, format?: string | Intl.DateTimeFormatOptions): string {
     const _value = (value === null || value === undefined || value === '') ? new Date() : new Date(value);
-    let options: Intl.DateTimeFormatOptions = this.getDateOptions(format);
+    const options: Intl.DateTimeFormatOptions = this.getDateOptions(format);
     const locales = [ ...(this.overrideDateFormat ? [this.overrideDateFormat] : []), this.locale, 'en-US'];
-    let timeParts: { [p: string]: string } = Intl.DateTimeFormat(locales, options).formatToParts(_value).reduce((obj, part) => {
+    const timeParts: { [p: string]: string } = Intl.DateTimeFormat(locales, options).formatToParts(_value).reduce((obj, part) => {
       obj[part.type] = part.value;
       return obj;
     }, {});

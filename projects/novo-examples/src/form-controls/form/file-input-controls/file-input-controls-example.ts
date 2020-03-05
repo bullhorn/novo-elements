@@ -88,7 +88,7 @@ export class FileInputControlsExample {
 
   public checkFileSize(fileList): boolean {
     const maxSizeKb: number = 5120; // (5 MB in KB)
-    for (let file of fileList) {
+    for (const file of fileList) {
       if (file.size > maxSizeKb * 1024) {
         this.message = 'File is bigger than the allowed 5MB';
         return false;

@@ -374,7 +374,7 @@ export function getWeekView({
       });
 
       if (otherRowEvents.length > 0) {
-        let totalEventsForRow = otherRowEvents.length + 1;
+        const totalEventsForRow = otherRowEvents.length + 1;
 
         event.span = 1 / totalEventsForRow;
 

@@ -200,10 +200,10 @@ export class BigCalendarExample {
   ];
 
   getNewEvent(date, color, type): CalendarEvent {
-    let evt: CalendarEvent = {
+    const evt: CalendarEvent = {
       title: 'Meeting',
       description: 'with @jgodi',
-      color: color,
+      color,
       start: date,
       response: type,
       type: 'Meeting',
@@ -212,13 +212,13 @@ export class BigCalendarExample {
   }
 
   dayClicked(date) {
-    let evt: CalendarEvent = this.getNewEvent(date, colors.blue, CalendarEventResponse.Maybe);
+    const evt: CalendarEvent = this.getNewEvent(date, colors.blue, CalendarEventResponse.Maybe);
     this.events.push(evt);
     this.events = [...this.events];
   }
 
   addShift(event) {
-    let evt: CalendarEvent = this.getNewEvent(event.day.date, colors.blue, CalendarEventResponse.Maybe);
+    const evt: CalendarEvent = this.getNewEvent(event.day.date, colors.blue, CalendarEventResponse.Maybe);
     this.events.push(evt);
     this.events = [...this.events];
   }
