@@ -215,7 +215,7 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
     };
     this.resizable = this.config.resizable;
 
-    let transforms: { filter?: Function; sort?: Function } = {};
+    const transforms: { filter?: Function; sort?: Function } = {};
 
     if (column.filterable && Helpers.isObject(column.filterable)) {
       this.config.filterConfig = column.filterable as IDataTableColumnFilterConfig;
@@ -337,12 +337,12 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
       if (this.config.filterConfig.options) {
         if (typeof this.config.filterConfig.options[0] === 'string') {
           this.multiSelectedOptionIsHidden = (this.config.filterConfig.options as string[]).map(
-            (option: string): { option: string; hidden: boolean } => ({ option: option, hidden: false }),
+            (option: string): { option: string; hidden: boolean } => ({ option, hidden: false }),
           );
         } else {
           this.multiSelectedOptionIsHidden = (this.config.filterConfig.options as IDataTableColumnFilterOption[]).map(
             (option: IDataTableColumnFilterOption): { option: IDataTableColumnFilterOption; hidden: boolean } => ({
-              option: option,
+              option,
               hidden: false,
             }),
           );
@@ -356,7 +356,7 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
     if (optionsList) {
       const optionValue = option.hasOwnProperty('value') ? option.value : option;
 
-      let found = optionsList.find((item) => this.optionPresentCheck(item, optionValue));
+      const found = optionsList.find((item) => this.optionPresentCheck(item, optionValue));
       return found !== undefined;
     }
     return false;
@@ -365,7 +365,7 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
   public toggleSelection(option) {
     const optionValue = option.hasOwnProperty('value') ? option.value : option;
 
-    let optionIndex = this.multiSelectedOptions.findIndex((item) => this.optionPresentCheck(item, optionValue));
+    const optionIndex = this.multiSelectedOptions.findIndex((item) => this.optionPresentCheck(item, optionValue));
     this.error = false;
     if (optionIndex > -1) {
       this.multiSelectedOptions.splice(optionIndex, 1);
@@ -401,7 +401,7 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
       this.multiSelectHasVisibleOptions() && this.dropdown ? (this.error = true) : null;
     } else {
       this.clearOptionFilter();
-      let actualFilter = this.multiSelectedOptions.length > 0 ? [...this.multiSelectedOptions] : undefined;
+      const actualFilter = this.multiSelectedOptions.length > 0 ? [...this.multiSelectedOptions] : undefined;
       this.filterData(actualFilter);
       this.dropdown.closePanel();
     }
@@ -471,9 +471,9 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
   public startResize(mouseDownEvent: MouseEvent): void {
     mouseDownEvent.preventDefault();
     const minimumWidth = 60 + (this.config.filterable ? 30 : 0) + (this.config.sortable ? 30 : 0);
-    let startingWidth: number = this.elementRef.nativeElement.getBoundingClientRect().width;
+    const startingWidth: number = this.elementRef.nativeElement.getBoundingClientRect().width;
     const mouseMoveSubscription: Subscription = fromEvent(window.document, 'mousemove').subscribe((middleMouseEvent: MouseEvent) => {
-      let differenceWidth: number = middleMouseEvent.clientX - mouseDownEvent.clientX;
+      const differenceWidth: number = middleMouseEvent.clientX - mouseDownEvent.clientX;
       let width: number = startingWidth + differenceWidth;
       if (width < minimumWidth) {
         width = minimumWidth;
@@ -486,7 +486,7 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
       this.resized.next(this._column);
     });
 
-    let mouseUpSubscription: Subscription = fromEvent(window.document, 'mouseup').subscribe(() => {
+    const mouseUpSubscription: Subscription = fromEvent(window.document, 'mouseup').subscribe(() => {
       mouseUpSubscription.unsubscribe();
       mouseMoveSubscription.unsubscribe();
       this.changeDetectorRef.markForCheck();
@@ -570,7 +570,7 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
   }
 
   private getDefaultDateFilterOptions(): IDataTableColumnFilterOption[] {
-    let opts: IDataTableColumnFilterOption[] = [
+    const opts: IDataTableColumnFilterOption[] = [
       { label: this.labels.past1Day, min: -1, max: 0 },
       { label: this.labels.past7Days, min: -7, max: 0 },
       { label: this.labels.past30Days, min: -30, max: 0 },

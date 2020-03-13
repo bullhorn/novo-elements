@@ -40,7 +40,7 @@ export class NovoNavElement {
     }
 
     // TODO - remove hack to make DOM rerender - jgodi
-    let element = document.querySelector('novo-tab-link.active span.indicator') as any;
+    const element = document.querySelector('novo-tab-link.active span.indicator') as any;
     if (element) {
       element.style.opacity = 0.99;
       setTimeout(() => {
@@ -166,7 +166,7 @@ export class NovoNavOutletElement {
   items: Array<any> = [];
 
   show(index) {
-    let item = this.items[index];
+    const item = this.items[index];
 
     /**
      * Deactivates other tab items

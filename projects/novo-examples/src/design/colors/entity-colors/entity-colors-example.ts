@@ -101,9 +101,9 @@ export class EntityColorsExample {
 
   copyLink(color) {
     // Create dom element to copy from
-    let copyFrom = document.createElement('textarea');
+    const copyFrom = document.createElement('textarea');
     copyFrom.textContent = `#${color.hex}`;
-    let body = document.getElementsByTagName('body')[0];
+    const body = document.getElementsByTagName('body')[0];
     body.appendChild(copyFrom);
     copyFrom.select();
     // Copy text

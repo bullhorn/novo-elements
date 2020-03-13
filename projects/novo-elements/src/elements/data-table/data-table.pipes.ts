@@ -92,7 +92,7 @@ export class DataTableBigDecimalRendererPipe<T> implements PipeTransform {
   constructor(private labels: NovoLabelService) {}
   transform(value: any, column: IDataTableColumn<T>): string {
     if (!Helpers.isEmpty(value)) {
-      let val = interpolateCell<T>(value, column);
+      const val = interpolateCell<T>(value, column);
       return this.labels.formatBigDecimal(Number(val));
     }
     return '';
@@ -107,7 +107,7 @@ export class DateTableCurrencyRendererPipe<T> implements PipeTransform {
   constructor(private labels: NovoLabelService) {}
   transform(value: any, column: IDataTableColumn<T>): string {
     if (!Helpers.isEmpty(value)) {
-      let val = interpolateCell<T>(value, column);
+      const val = interpolateCell<T>(value, column);
       return this.labels.formatCurrency(Number(val));
     }
     return '';

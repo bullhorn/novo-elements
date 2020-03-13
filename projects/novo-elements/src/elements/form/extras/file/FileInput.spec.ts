@@ -12,7 +12,7 @@ describe('Elements: NovoFileInputElement', () => {
   let fixture;
   let component;
 
-  let FakeEvent = () => {};
+  const FakeEvent = () => {};
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -71,7 +71,7 @@ describe('Elements: NovoFileInputElement', () => {
   });
   describe('Method: initializeDragula()', () => {
     it('should correctly initialize dragula', () => {
-      let expectedBag = 'file-output-1';
+      const expectedBag = 'file-output-1';
       component.dragula = {
         bags: [{ name: 'TEST', drake: {} }],
         setOptions: () => {},
@@ -91,8 +91,8 @@ describe('Elements: NovoFileInputElement', () => {
     it('should correctly insert templates by default', () => {
       expect(component.insertTemplatesBasedOnLayout).toBeDefined();
       spyOn(component.container, 'createEmbeddedView');
-      let expected = ['fileOutput', 'fileInput'];
-      let insertedOrder = component.insertTemplatesBasedOnLayout();
+      const expected = ['fileOutput', 'fileInput'];
+      const insertedOrder = component.insertTemplatesBasedOnLayout();
       expect(component.container.createEmbeddedView).toHaveBeenCalled();
       expect(insertedOrder).toEqual(expected);
     });
@@ -100,8 +100,8 @@ describe('Elements: NovoFileInputElement', () => {
       component.layoutOptions.order = 'displayFilesBelow';
       expect(component.insertTemplatesBasedOnLayout).toBeDefined();
       spyOn(component.container, 'createEmbeddedView');
-      let expected = ['fileInput', 'fileOutput'];
-      let insertedOrder = component.insertTemplatesBasedOnLayout();
+      const expected = ['fileInput', 'fileOutput'];
+      const insertedOrder = component.insertTemplatesBasedOnLayout();
       expect(component.container.createEmbeddedView).toHaveBeenCalled();
       expect(insertedOrder).toEqual(expected);
     });

@@ -45,7 +45,7 @@ export class StaticActivityTableService<T> implements ActivityTableService<T> {
         ret = ret.filter((item) => Object.keys(item).some((key) => `${item[key]}`.toLowerCase().includes(globalSearch.toLowerCase())));
       }
       if (filter) {
-        let value = Helpers.isString(filter.value) ? filter.value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') : filter.value;
+        const value = Helpers.isString(filter.value) ? filter.value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') : filter.value;
         ret = ret.filter(Helpers.filterByField(filter.id, value));
       }
       if (sort) {

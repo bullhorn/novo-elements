@@ -15,7 +15,7 @@ export class ButtonDynamicExample {
   color: string = 'blue';
 
   changeTheme() {
-    let i = Math.floor(Math.random() * 4);
+    const i = Math.floor(Math.random() * 4);
     this.theme = ['primary', 'secondary', 'dialogue', 'standard', 'icon'][i];
   }
 }

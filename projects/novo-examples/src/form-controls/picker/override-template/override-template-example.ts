@@ -14,7 +14,7 @@ export class OverrideTemplateExample {
   public overrideDemo: any;
 
   constructor() {
-    let states = [
+    const states = [
       'Alabama',
       'Alaska',
       'Arizona',

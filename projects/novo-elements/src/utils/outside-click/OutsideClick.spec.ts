@@ -5,7 +5,7 @@ import { OutsideClick } from './OutsideClick';
 
 describe('Util: OutsideClick', () => {
   let outsideClick;
-  let mockElement: ElementRef = new ElementRef(document.createElement('div'));
+  const mockElement: ElementRef = new ElementRef(document.createElement('div'));
   let mockEvent;
 
   beforeEach(() => {

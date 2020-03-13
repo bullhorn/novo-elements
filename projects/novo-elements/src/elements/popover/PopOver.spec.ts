@@ -30,7 +30,7 @@ describe('Elements: PopOverDirective', () => {
     });
 
     describe('Class: ', () => {
-      let mockComponentFactoryResolver: ComponentFactoryResolver = {
+      const mockComponentFactoryResolver: ComponentFactoryResolver = {
         resolveComponentFactory<T>(c: { new (...args: any[]) }): ComponentFactory<T> {
           // This was a monster to mock...
           if (c) {
@@ -40,7 +40,7 @@ describe('Elements: PopOverDirective', () => {
         },
       };
 
-      let component = new PopOverDirective(directive, mockComponentFactoryResolver);
+      const component = new PopOverDirective(directive, mockComponentFactoryResolver);
       describe('Method: ngOnChanges()', () => {
         it('should be defined.', () => {
           expect(component.ngOnChanges).toBeDefined();

@@ -288,7 +288,7 @@ export class AppBridge {
           }
         });
       } else {
-        let openListPacket = {};
+        const openListPacket = {};
         Object.assign(openListPacket, { type: 'List', entityType: packet.type, keywords: packet.keywords, criteria: packet.criteria });
         postRobot
           .sendToParent(MESSAGE_TYPES.OPEN_LIST, packet)
@@ -359,7 +359,7 @@ export class AppBridge {
         if (packet) {
           console.info('[AppBridge] - close(packet) is deprecated! Please just use close()!'); // tslint:disable-line
         }
-        let realPacket = { id: this.id, windowName: this.windowName };
+        const realPacket = { id: this.id, windowName: this.windowName };
         postRobot
           .sendToParent(MESSAGE_TYPES.CLOSE, realPacket)
           .then((event) => {
@@ -394,7 +394,7 @@ export class AppBridge {
         if (packet) {
           console.info('[AppBridge] - refresh(packet) is deprecated! Please just use refresh()!'); // tslint:disable-line
         }
-        let realPacket = { id: this.id, windowName: this.windowName };
+        const realPacket = { id: this.id, windowName: this.windowName };
         postRobot
           .sendToParent(MESSAGE_TYPES.REFRESH, realPacket)
           .then((event) => {
@@ -429,7 +429,7 @@ export class AppBridge {
         if (packet) {
           console.info('[AppBridge] - pin(packet) is deprecated! Please just use pin()!'); // tslint:disable-line
         }
-        let realPacket = { id: this.id, windowName: this.windowName };
+        const realPacket = { id: this.id, windowName: this.windowName };
         postRobot
           .sendToParent(MESSAGE_TYPES.PIN, realPacket)
           .then((event) => {
@@ -555,7 +555,7 @@ export class AppBridge {
   public httpGET(relativeURL: string): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       if (this._handlers[AppBridgeHandler.HTTP]) {
-        this._handlers[AppBridgeHandler.HTTP]({ verb: HTTP_VERBS.GET, relativeURL: relativeURL }, (data: any, error: any) => {
+        this._handlers[AppBridgeHandler.HTTP]({ verb: HTTP_VERBS.GET, relativeURL }, (data: any, error: any) => {
           resolve({ data, error });
         });
       } else {
@@ -579,14 +579,14 @@ export class AppBridge {
     return new Promise<any>((resolve, reject) => {
       if (this._handlers[AppBridgeHandler.HTTP]) {
         this._handlers[AppBridgeHandler.HTTP](
-          { verb: HTTP_VERBS.POST, relativeURL: relativeURL, data: postData },
+          { verb: HTTP_VERBS.POST, relativeURL, data: postData },
           (data: any, error: any) => {
             resolve({ data, error });
           },
         );
       } else {
         postRobot
-          .sendToParent(MESSAGE_TYPES.HTTP_POST, { relativeURL: relativeURL, data: postData })
+          .sendToParent(MESSAGE_TYPES.HTTP_POST, { relativeURL, data: postData })
           .then((event: any) => {
             resolve({ data: event.data.data, error: event.data.error });
           })
@@ -605,14 +605,14 @@ export class AppBridge {
     return new Promise<any>((resolve, reject) => {
       if (this._handlers[AppBridgeHandler.HTTP]) {
         this._handlers[AppBridgeHandler.HTTP](
-          { verb: HTTP_VERBS.PUT, relativeURL: relativeURL, data: putData },
+          { verb: HTTP_VERBS.PUT, relativeURL, data: putData },
           (data: any, error: any) => {
             resolve({ data, error });
           },
         );
       } else {
         postRobot
-          .sendToParent(MESSAGE_TYPES.HTTP_PUT, { relativeURL: relativeURL, data: putData })
+          .sendToParent(MESSAGE_TYPES.HTTP_PUT, { relativeURL, data: putData })
           .then((event: any) => {
             resolve({ data: event.data.data, error: event.data.error });
           })
@@ -630,7 +630,7 @@ export class AppBridge {
   public httpDELETE(relativeURL: string): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       if (this._handlers[AppBridgeHandler.HTTP]) {
-        this._handlers[AppBridgeHandler.HTTP]({ verb: HTTP_VERBS.DELETE, relativeURL: relativeURL }, (data: any, error: any) => {
+        this._handlers[AppBridgeHandler.HTTP]({ verb: HTTP_VERBS.DELETE, relativeURL }, (data: any, error: any) => {
           resolve({ data, error });
         });
       } else {
@@ -674,7 +674,7 @@ export class AppBridge {
       this._registeredFrames.forEach((frame) => {
         postRobot.send(frame.source, MESSAGE_TYPES.CUSTOM_EVENT, {
           eventType: event,
-          data: data,
+          data,
         });
       });
     }
@@ -698,10 +698,10 @@ export class DevAppBridge extends AppBridge {
 
   constructor(traceName: string = 'DevAppBridge', private http: HttpClient) {
     super(traceName);
-    let cookie = this.getCookie('UlEncodedIdentity');
+    const cookie = this.getCookie('UlEncodedIdentity');
     if (cookie && cookie.length) {
-      let identity = JSON.parse(decodeURIComponent(cookie));
-      let endpoints = identity.sessions.reduce((obj, session) => {
+      const identity = JSON.parse(decodeURIComponent(cookie));
+      const endpoints = identity.sessions.reduce((obj, session) => {
         obj[session.name] = session.value.endpoint;
         return obj;
       }, {});
@@ -744,8 +744,8 @@ export class DevAppBridge extends AppBridge {
 
   private getCookie(cname: string): any {
     if (document) {
-      let name = `${cname}=`;
-      let ca = document.cookie.split(';');
+      const name = `${cname}=`;
+      const ca = document.cookie.split(';');
       for (let i = 0; i < ca.length; i++) {
         let c = ca[i];
         while (c.charAt(0) === ' ') {

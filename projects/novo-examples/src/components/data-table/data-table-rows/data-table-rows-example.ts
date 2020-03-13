@@ -273,7 +273,7 @@ export class DataTableRowsExample {
 
   constructor(private ref: ChangeDetectorRef, private modalService: NovoModalService) {
     for (let i = 0; i < 1000; i++) {
-      let day = i < 500 ? dateFns.subDays(new Date(), i) : dateFns.addDays(new Date(), i - 500);
+      const day = i < 500 ? dateFns.subDays(new Date(), i) : dateFns.addDays(new Date(), i - 500);
       this.staticDataSet1.push({
         id: i,
         embeddedObj: { id: i, test: `HMM ${i}`, another: { id: 777 } },
@@ -320,7 +320,7 @@ export class DataTableRowsExample {
   }
 
   public getPriorityOptions() {
-    let options = new Array();
+    const options = new Array();
     let i;
     for (i = 0; i < 49; i++) {
       options.push('test ' + i.toString());
@@ -372,7 +372,7 @@ export class DataTableRowsExample {
       .open(ConfigureColumnsModal, { columns: this.sharedColumns })
       .onClosed.then((columns: IDataTableColumn<MockData>[]) => {
         if (columns) {
-          let enabledColumns = columns.filter((column: IDataTableColumn<MockData>) => column.enabled);
+          const enabledColumns = columns.filter((column: IDataTableColumn<MockData>) => column.enabled);
           this.sharedDisplayColumns = ['selection', 'expand', ...enabledColumns.map((column: IDataTableColumn<MockData>) => column.id)];
           this.ref.markForCheck();
         }
@@ -396,7 +396,7 @@ export class DataTableRowsExample {
   }
 
   public filterList(value: any): void {
-    this.table.state.filter = { id: 'status', type: 'text', value: value };
+    this.table.state.filter = { id: 'status', type: 'text', value };
     this.table.state.updates.next({
       globalSearch: this.table.state.globalSearch,
       filter: this.table.state.filter,

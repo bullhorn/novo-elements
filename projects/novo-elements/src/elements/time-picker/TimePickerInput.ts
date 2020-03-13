@@ -102,7 +102,7 @@ export class NovoTimePickerInputElement implements OnInit, ControlValueAccessor 
   openPanel(): void {
     if (!this.overlay.panelOpen) {
       this.overlay.openPanel();
-      let hour = new Date().getHours();
+      const hour = new Date().getHours();
       Promise.resolve(null).then(() => this.scrollToIndex(hour * 4));
     }
   }
@@ -128,15 +128,15 @@ export class NovoTimePickerInputElement implements OnInit, ControlValueAccessor 
   _handleInput(event: KeyboardEvent): void {
     if (document.activeElement === event.target) {
       // this._onChange((event.target as HTMLInputElement).value);
-      let text = (event.target as HTMLInputElement).value;
+      const text = (event.target as HTMLInputElement).value;
       if (this.military ? text.replace(/_/g, '').length === 5 : text.replace(/_/g, '').length === 8) {
-        let [dateTimeValue, formatted] = this.dateFormatService.parseString(text, this.military, 'time');
+        const [dateTimeValue, formatted] = this.dateFormatService.parseString(text, this.military, 'time');
         this.dispatchOnChange(dateTimeValue);
       } else {
         this.dispatchOnChange(null);
       }
       this.openPanel();
-      let num = Number(text.split(':')[0]);
+      const num = Number(text.split(':')[0]);
       this.scrollToIndex(num * 4);
     }
   }
@@ -207,7 +207,7 @@ export class NovoTimePickerInputElement implements OnInit, ControlValueAccessor 
     if (!value) {
       return '';
     }
-    let format = this.labels.formatTimeWithFormat(value, {
+    const format = this.labels.formatTimeWithFormat(value, {
       hour: 'numeric',
       minute: '2-digit',
       hour12: !this.military,
@@ -223,10 +223,10 @@ export class NovoTimePickerInputElement implements OnInit, ControlValueAccessor 
   }
 
   public scrollToIndex(index: number) {
-    let element = this.overlay.overlayRef.overlayElement;
-    let list = element.querySelector('.increments');
-    let items = list.querySelectorAll('novo-list-item');
-    let item = items[index];
+    const element = this.overlay.overlayRef.overlayElement;
+    const list = element.querySelector('.increments');
+    const items = list.querySelectorAll('novo-list-item');
+    const item = items[index];
     if (item) {
       list.scrollTop = (item as HTMLElement).offsetTop;
     }

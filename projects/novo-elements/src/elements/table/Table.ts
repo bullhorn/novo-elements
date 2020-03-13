@@ -314,7 +314,7 @@ export class NovoTableElement implements DoCheck {
           }
           // Find that columns we might need to sum up via the footer
           let columnsToSum = [];
-          let columnSums = {};
+          const columnSums = {};
           if (this.config.footers) {
             this.config.footers.forEach((config) => {
               columnsToSum.push(...config.columns);
@@ -323,16 +323,16 @@ export class NovoTableElement implements DoCheck {
             columnsToSum = columnsToSum.filter((item, index, array) => array.indexOf(item) === index);
           }
           // Make a form for each row
-          let tableFormRows = <FormArray>this.tableForm.controls['rows'];
+          const tableFormRows = <FormArray>this.tableForm.controls['rows'];
           this._rows.forEach((row, index) => {
-            let rowControls = [];
+            const rowControls = [];
             row.controls = {};
             row._editing = {};
             row._expanded = this.config.expandAll;
             row.rowId = this._rows.length;
             this.columns.forEach((column) => {
               // Use the control passed or use a ReadOnlyControl so that the form has the values
-              let control = column.editorConfig
+              const control = column.editorConfig
                 ? ControlFactory.create(column.editorType, column.editorConfig)
                 : new ReadOnlyControl({ key: column.name });
               row.controls[column.name] = control;
@@ -358,7 +358,7 @@ export class NovoTableElement implements DoCheck {
           if (this.config.footers) {
             this.footers = [];
             this.config.footers.forEach((footerConfig, footerConfigIndex) => {
-              let footer = {};
+              const footer = {};
               footer[footerConfig.labelColumn] = footerConfig.label;
               footerConfig.columns.forEach((column) => {
                 if (footerConfig.method === 'AVG' && this._rows.length !== 0) {
@@ -475,7 +475,7 @@ export class NovoTableElement implements DoCheck {
   }
 
   getRowControlForm(i): AbstractControl {
-    let tableFormRows = <FormArray>this.tableForm.controls['rows'];
+    const tableFormRows = <FormArray>this.tableForm.controls['rows'];
     return tableFormRows.controls[i];
   }
 
@@ -638,10 +638,10 @@ export class NovoTableElement implements DoCheck {
    */
   onSortChange(column) {
     this.currentSortColumn = column;
-    let sortedColumns: any = this.columns.filter((thisColumn) => {
+    const sortedColumns: any = this.columns.filter((thisColumn) => {
       return thisColumn.sort && thisColumn !== this.currentSortColumn;
     });
-    for (let sortedColumn of sortedColumns) {
+    for (const sortedColumn of sortedColumns) {
       sortedColumn.sort = null;
     }
 
@@ -709,7 +709,7 @@ export class NovoTableElement implements DoCheck {
    */
   expandAllOnPage(expanded) {
     this.config.expandAll = !expanded;
-    for (let row of this.dataProvider.list) {
+    for (const row of this.dataProvider.list) {
       row._expanded = this.config.expandAll;
     }
   }
@@ -726,7 +726,7 @@ export class NovoTableElement implements DoCheck {
     } else {
       this.indeterminate = false;
       // this.pagedData = this.rows.slice(this.getPageStart(), this.getPageEnd());
-      for (let row of this.pagedData) {
+      for (const row of this.pagedData) {
         row._selected = this.master;
       }
       this.selected = this.dataProvider.list.filter((r) => r._selected);
@@ -744,7 +744,7 @@ export class NovoTableElement implements DoCheck {
   selectAll(value) {
     this.master = value;
     this.indeterminate = false;
-    for (let row of this.dataProvider.list) {
+    for (const row of this.dataProvider.list) {
       row._selected = value;
     }
     this.selected = value ? this.dataProvider.list : [];
@@ -782,7 +782,7 @@ export class NovoTableElement implements DoCheck {
    * @param selected
    */
   emitSelected(selected) {
-    this.onRowSelect.emit({ length: selected.length, selected: selected });
+    this.onRowSelect.emit({ length: selected.length, selected });
   }
 
   /**
@@ -798,7 +798,7 @@ export class NovoTableElement implements DoCheck {
 
   getDefaultOptions(column) {
     // TODO - needs to come from label service - https://github.com/bullhorn/novo-elements/issues/116
-    let opts: any[] = [
+    const opts: any[] = [
       { label: this.labels.past1Day, min: -1, max: 0 },
       { label: this.labels.past7Days, min: -7, max: 0 },
       { label: this.labels.past30Days, min: -30, max: 0 },
@@ -830,11 +830,11 @@ export class NovoTableElement implements DoCheck {
 
   onFilterKeywords(config) {
     if (config && config.filtering && config.filtering.freetextFilter) {
-      let filterKeywords = config.filtering.freetextFilter.toLowerCase();
+      const filterKeywords = config.filtering.freetextFilter.toLowerCase();
       if (!config.filtering.originalOptions) {
         config.filtering.originalOptions = config.filtering.options;
       }
-      let newOptions = config.filtering.originalOptions.filter((option) => {
+      const newOptions = config.filtering.originalOptions.filter((option) => {
         let value = option && option.label ? option.label : option;
         value = value.toLowerCase() ? value.toLowerCase() : value;
         if (value === filterKeywords) {
@@ -917,15 +917,15 @@ export class NovoTableElement implements DoCheck {
    * @memberOf NovoTableElement
    */
   addEditableRow(defaultValue: any = {}): void {
-    let tableFormRows = <FormArray>this.tableForm.controls['rows'];
-    let row: any = {};
-    let rowControls = [];
+    const tableFormRows = <FormArray>this.tableForm.controls['rows'];
+    const row: any = {};
+    const rowControls = [];
     row.controls = {};
     row._editing = {};
     row.rowId = this._rows.length + 1;
     this.columns.forEach((column) => {
       // Use the control passed or use a ReadOnlyControl so that the form has the values
-      let control = column.editorConfig
+      const control = column.editorConfig
         ? ControlFactory.create(column.editorType, column.editorConfig)
         : new ReadOnlyControl({ key: column.name });
       control.value = null; // remove copied column value
@@ -948,15 +948,15 @@ export class NovoTableElement implements DoCheck {
    */
   validateAndGetUpdatedData(): { changed?: any[]; errors?: { errors: any; row: any; index: number }[] } {
     if (this.tableForm && this.tableForm.controls && this.tableForm.controls['rows']) {
-      let changedRows = [];
-      let errors = [];
+      const changedRows = [];
+      const errors = [];
       // Go over the FormArray's controls
       (this.tableForm.controls['rows'] as FormArray).controls.forEach((formGroup: FormGroup, index: number) => {
         let changedRow = null;
         let error = null;
         // Go over the form group controls
         Object.keys(formGroup.controls).forEach((key: string) => {
-          let control = formGroup.controls[key];
+          const control = formGroup.controls[key];
           // Handle value changing
           if (control && control.dirty && !control.errors) {
             if (!changedRow) {
@@ -984,15 +984,15 @@ export class NovoTableElement implements DoCheck {
           changedRows.push(changedRow);
         }
         if (error) {
-          errors.push({ errors: error, row: this._rows[index], index: index });
+          errors.push({ errors: error, row: this._rows[index], index });
         }
       });
-      let ret = {};
+      const ret = {};
       // Return errors if any, otherwise return the changed rows
       if (errors.length === 0) {
         return { changed: changedRows };
       }
-      return { errors: errors };
+      return { errors };
     }
   }
 

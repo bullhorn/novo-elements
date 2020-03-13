@@ -10,8 +10,8 @@ const examplesPath = path.join('./projects/', 'novo-examples/src');
  * Builds the template for the examples module
  */
 function generateTSTemplate(selector: string): string {
-  let description = convertToSentence(selector);
-  let name = convertToCamelCase(selector);
+  const description = convertToSentence(selector);
+  const name = convertToCamelCase(selector);
   return `
 import {Component} from '@angular/core';
 
@@ -93,36 +93,36 @@ function convertToSentence(name: string): string {
  * Creates the examples files
  */
 const task = () => {
-  let example = process.argv[2];
+  const example = process.argv[2];
   console.log(example);
 
   const matchedFiles = glob(path.join(srcPath, example, 'templates/**/*.html'));
 
-  let dir = path.join(examplesPath, example);
+  const dir = path.join(examplesPath, example);
   fs.mkdirSync(dir);
 
   const mdTmp = generateMDTemplate(example);
-  let mdOutputFile = path.join(dir, `${example}.md`);
+  const mdOutputFile = path.join(dir, `${example}.md`);
   fs.writeFileSync(mdOutputFile, mdTmp);
 
   for (const sourcePath of matchedFiles) {
     console.log('source', sourcePath);
-    let fileName = path.basename(sourcePath, '.html');
-    let name = convertToDashCase(fileName.replace('Demo', ''));
-    let exdir = path.join(dir, `${name}`);
+    const fileName = path.basename(sourcePath, '.html');
+    const name = convertToDashCase(fileName.replace('Demo', ''));
+    const exdir = path.join(dir, `${name}`);
     fs.mkdirSync(exdir);
 
-    let selector = `${name}-example`;
-    let tsTmp = generateTSTemplate(selector);
-    let tsOutputFile = path.join(exdir, `${selector}.ts`);
+    const selector = `${name}-example`;
+    const tsTmp = generateTSTemplate(selector);
+    const tsOutputFile = path.join(exdir, `${selector}.ts`);
     fs.writeFileSync(tsOutputFile, tsTmp);
 
-    let cssTmp = generateCSSTemplate(selector);
-    let cssOutputFile = path.join(exdir, `${selector}.css`);
+    const cssTmp = generateCSSTemplate(selector);
+    const cssOutputFile = path.join(exdir, `${selector}.css`);
     fs.writeFileSync(cssOutputFile, cssTmp);
 
-    let htmlTmp = fs.readFileSync(sourcePath, 'utf-8');
-    let htmlOutputFile = path.join(exdir, `${selector}.html`);
+    const htmlTmp = fs.readFileSync(sourcePath, 'utf-8');
+    const htmlOutputFile = path.join(exdir, `${selector}.html`);
     fs.writeFileSync(htmlOutputFile, htmlTmp);
   }
 };

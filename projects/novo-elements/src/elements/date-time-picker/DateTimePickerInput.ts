@@ -83,7 +83,7 @@ export class NovoDateTimePickerInputElement implements ControlValueAccessor {
   checkParts() {
     try {
       if (this.datePart instanceof Date && this.timePart instanceof Date) {
-        let newDt = new Date(
+        const newDt = new Date(
           this.datePart.getFullYear(),
           this.datePart.getMonth(),
           this.datePart.getDate(),

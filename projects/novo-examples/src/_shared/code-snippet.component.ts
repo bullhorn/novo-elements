@@ -38,9 +38,9 @@ export class CodeSnippetComponent implements OnInit {
 
   ngOnInit() {
     this.hljs.isReady.subscribe(() => {
-      let code = decodeURIComponent(EXAMPLE_COMPONENTS[this.example].tsSource);
-      let markup = decodeURIComponent(EXAMPLE_COMPONENTS[this.example].htmlSource);
-      let style = decodeURIComponent(EXAMPLE_COMPONENTS[this.example].cssSource);
+      const code = decodeURIComponent(EXAMPLE_COMPONENTS[this.example].tsSource);
+      const markup = decodeURIComponent(EXAMPLE_COMPONENTS[this.example].htmlSource);
+      const style = decodeURIComponent(EXAMPLE_COMPONENTS[this.example].cssSource);
       this.highlightTS = this.sanitizer.bypassSecurityTrustHtml(this.hljs.highlightAuto(code, ['typescript']).value.trim());
       this.highlightHTML = this.sanitizer.bypassSecurityTrustHtml(this.hljs.highlightAuto(markup, ['html']).value.trim());
       this.highlightCSS = this.sanitizer.bypassSecurityTrustHtml(this.hljs.highlightAuto(style, ['css']).value.trim());

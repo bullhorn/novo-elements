@@ -40,7 +40,7 @@ export class BasePickerResults {
   }
 
   cleanUp(): void {
-    let element: Element = this.getListElement();
+    const element: Element = this.getListElement();
     if (element && element.hasAttribute('scrollListener')) {
       element.removeAttribute('scrollListener');
       element.removeEventListener('scroll', this.scrollHandler);
@@ -48,9 +48,9 @@ export class BasePickerResults {
   }
 
   onScrollDown(event: WheelEvent) {
-    let element: any = event.target;
+    const element: any = event.target;
     if (element) {
-      let offset = element.offsetHeight + element.scrollTop,
+      const offset = element.offsetHeight + element.scrollTop,
         bottom = element.scrollHeight - 300;
       if (offset >= bottom) {
         event.stopPropagation();
@@ -97,7 +97,7 @@ export class BasePickerResults {
 
   addScrollListener(): void {
     if (this.config.enableInfiniteScroll) {
-      let element: Element = this.getListElement();
+      const element: Element = this.getListElement();
       if (element && !element.hasAttribute('scrollListener')) {
         element.setAttribute('scrollListener', 'true');
         element.addEventListener('scroll', this.scrollHandler);
@@ -143,7 +143,7 @@ export class BasePickerResults {
   }
 
   search(term, mode?): Observable<any> {
-    let options = this.config.options;
+    const options = this.config.options;
     return from(
       new Promise((resolve, reject) => {
         // Check if there is match data
@@ -176,7 +176,7 @@ export class BasePickerResults {
             if (this.config.defaultOptions) {
               this.isStatic = false;
               if (typeof this.config.defaultOptions === 'function') {
-                let defaultOptions = this.config.defaultOptions(term, ++this.page);
+                const defaultOptions = this.config.defaultOptions(term, ++this.page);
                 if (Object.getPrototypeOf(defaultOptions).hasOwnProperty('then')) {
                   defaultOptions.then(this.structureArray.bind(this)).then(resolve, reject);
                 } else {
@@ -214,7 +214,7 @@ export class BasePickerResults {
    * 'name' field by default.
    */
   structureArray(collection: any): any {
-    let dataArray = collection.data ? collection.data : collection;
+    const dataArray = collection.data ? collection.data : collection;
     if (dataArray && (typeof dataArray[0] === 'string' || typeof dataArray[0] === 'number')) {
       return collection.map((item) => {
         return {
@@ -228,7 +228,7 @@ export class BasePickerResults {
       if (this.config.valueFormat) {
         value = Helpers.interpolate(this.config.valueFormat, data);
       }
-      let label = this.config.format ? Helpers.interpolate(this.config.format, data) : data.label || String(value);
+      const label = this.config.format ? Helpers.interpolate(this.config.format, data) : data.label || String(value);
       return { value, label, data };
     });
   }
@@ -267,7 +267,7 @@ export class BasePickerResults {
    * @description This function sets activeMatch to the match before the current node.
    */
   prevActiveMatch() {
-    let index = this.matches.indexOf(this.activeMatch);
+    const index = this.matches.indexOf(this.activeMatch);
     this.activeMatch = this.matches[index - 1 < 0 ? this.matches.length - 1 : index - 1];
     this.scrollToActive();
     this.ref.markForCheck();
@@ -279,7 +279,7 @@ export class BasePickerResults {
    * @description This function sets activeMatch to the match after the current node.
    */
   nextActiveMatch() {
-    let index = this.matches.indexOf(this.activeMatch);
+    const index = this.matches.indexOf(this.activeMatch);
     this.activeMatch = this.matches[index + 1 > this.matches.length - 1 ? 0 : index + 1];
     this.scrollToActive();
     this.ref.markForCheck();
@@ -298,10 +298,10 @@ export class BasePickerResults {
   }
 
   scrollToActive() {
-    let list = this.getListElement();
-    let items = this.getChildrenOfListElement();
-    let index = this.matches.indexOf(this.activeMatch);
-    let item = items[index];
+    const list = this.getListElement();
+    const items = this.getChildrenOfListElement();
+    const index = this.matches.indexOf(this.activeMatch);
+    const item = items[index];
     if (item) {
       list.scrollTop = item.offsetTop;
     }
@@ -379,7 +379,7 @@ export class BasePickerResults {
 
   preselected(match) {
     if (this.config.preselected) {
-      let preselectedFunc: Function = this.config.preselected;
+      const preselectedFunc: Function = this.config.preselected;
       return (
         this.selected.findIndex((item) => {
           return preselectedFunc(match, item);

@@ -38,11 +38,11 @@ xdescribe('Render', () => {
     });
     it('should return true when two objects are identical.', () => {
       expect(pipe.equals).toBeDefined();
-      let b: any = a;
+      const b: any = a;
       expect(pipe.equals(a, b)).toBeTruthy();
     });
     it('should return false when two objects are not identical.', () => {
-      let b: any = {
+      const b: any = {
         id: 1,
         sub: {
           subSub: {
@@ -85,42 +85,42 @@ xdescribe('Render', () => {
     });
     it('should render an address.', () => {
       expect(pipe.render).toBeDefined();
-      let mockValue: any = {
+      const mockValue: any = {
         address1: 'Derp',
         address2: '264 Hess Rd',
         city: 'Leola',
         state: 'PA',
         zip: '17540',
       };
-      let mockArgs: any = {
+      const mockArgs: any = {
         type: 'Address',
       };
       expect(pipe.render(mockValue, mockArgs)).toBe(mockValue);
     });
     it('should render an SecondaryAddress.', () => {
       expect(pipe.render).toBeDefined();
-      let mockValue: any = {
+      const mockValue: any = {
         address1: 'Derp',
         address2: '264 Hess Rd',
         city: 'Leola',
         state: 'PA',
         zip: '17540',
       };
-      let mockArgs: any = {
+      const mockArgs: any = {
         type: 'SecondaryAddress',
       };
       expect(pipe.render(mockValue, mockArgs)).toBe(mockValue);
     });
     it('should render an BillingAddress.', () => {
       expect(pipe.render).toBeDefined();
-      let mockValue: any = {
+      const mockValue: any = {
         address1: 'Derp',
         address2: '264 Hess Rd',
         city: 'Leola',
         state: 'PA',
         zip: '17540',
       };
-      let mockArgs: any = {
+      const mockArgs: any = {
         type: 'BillingAddress',
       };
       expect(pipe.render(mockValue, mockArgs)).toBe(mockValue);
@@ -129,50 +129,50 @@ xdescribe('Render', () => {
     // WILL BREAK THE NEXT DAY
     xit('should render a timestamp.', () => {
       expect(pipe.render).toBeDefined();
-      let mockValue: any = new Date();
-      let mockArgs: any = {
+      const mockValue: any = new Date();
+      const mockArgs: any = {
         dataType: 'Timestamp',
       };
-      let result: any = pipe.render(mockValue, mockArgs);
+      const result: any = pipe.render(mockValue, mockArgs);
       expect(result).toEqual('12/02/2016');
     });
     it('should render a timestamp with conversion skipped.', () => {
       expect(pipe.render).toBeDefined();
-      let mockValue: any = new Date('5/10/2017 23:59:59').getTime();
-      let mockArgs: any = {
+      const mockValue: any = new Date('5/10/2017 23:59:59').getTime();
+      const mockArgs: any = {
         dataType: 'Timestamp',
         optionsType: 'skipConversion',
       };
-      let result: any = pipe.render(mockValue, mockArgs);
+      const result: any = pipe.render(mockValue, mockArgs);
       expect(result).toEqual('5/10/2017');
     });
     // TODO: Phone/Email
     it('should render money.', () => {
       expect(pipe.render).toBeDefined();
-      let mockValue: any = 123.56;
-      let mockArgs: any = {
+      const mockValue: any = 123.56;
+      const mockArgs: any = {
         dataSpecialization: 'MONEY',
       };
-      let result: any = pipe.render(mockValue, mockArgs);
+      const result: any = pipe.render(mockValue, mockArgs);
       expect(result).toEqual('$123.56');
     });
     it('should render a percentage.', () => {
       expect(pipe.render).toBeDefined();
-      let mockValue: any = 0.1556;
-      let mockArgs: any = {
+      const mockValue: any = 0.1556;
+      const mockArgs: any = {
         dataSpecialization: 'PERCENTAGE',
       };
-      let result: any = pipe.render(mockValue, mockArgs);
+      const result: any = pipe.render(mockValue, mockArgs);
       expect(result).toEqual('15.56%');
     });
     // TODO: Double/BigDecimal
     it('should render a Integer.', () => {
       expect(pipe.render).toBeDefined();
-      let mockValue: any = 103;
-      let mockArgs: any = {
+      const mockValue: any = 103;
+      const mockArgs: any = {
         dataType: 'Integer',
       };
-      let result: any = pipe.render(mockValue, mockArgs);
+      const result: any = pipe.render(mockValue, mockArgs);
       expect(result).toBe(103);
     });
     // TODO: Lead/Candidate/ClientContact/CorporateUser/Person
@@ -181,8 +181,8 @@ xdescribe('Render', () => {
     // TODO: WorkersCompensationRate
     it('should render a Options.', () => {
       expect(pipe.render).toBeDefined();
-      let mockValue: any = 'John';
-      let mockArgs: any = {
+      const mockValue: any = 'John';
+      const mockArgs: any = {
         inputType: 'SELECT',
         options: [
           {
@@ -191,12 +191,12 @@ xdescribe('Render', () => {
           },
         ],
       };
-      let result: any = pipe.render(mockValue, mockArgs);
+      const result: any = pipe.render(mockValue, mockArgs);
       expect(result).toBe('John Snow');
     });
     it('should render a ToMany.', () => {
       expect(pipe.render).toBeDefined();
-      let mockValue: any = {
+      const mockValue: any = {
         data: [
           {
             firstName: 'Jane',
@@ -204,234 +204,234 @@ xdescribe('Render', () => {
           },
         ],
       };
-      let mockArgs: any = {
+      const mockArgs: any = {
         type: 'TO_MANY',
         associatedEntity: {
           entity: 'Candidate',
         },
       };
-      let result: any = pipe.render(mockValue, mockArgs);
+      const result: any = pipe.render(mockValue, mockArgs);
       expect(result).toBe('Jane Smith');
     });
     it('should render a Country.', () => {
       expect(pipe.render).toBeDefined();
-      let mockValue: any = 1;
-      let mockArgs: any = {
+      const mockValue: any = 1;
+      const mockArgs: any = {
         optionsType: 'Country',
       };
-      let result: any = pipe.render(mockValue, mockArgs);
+      const result: any = pipe.render(mockValue, mockArgs);
       expect(result).toBe('United States');
     });
     it('should render a DistributionList', () => {
       expect(pipe.render).toBeDefined();
-      let mockArgs: any = {
+      const mockArgs: any = {
         type: 'TO_ONE',
         associatedEntity: {
           entity: 'DistributionList',
         },
       };
-      let mockValue: any = {
+      const mockValue: any = {
         name: 'distributionList',
         label: 'List of Cheese Farmers',
       };
-      let result: any = pipe.render(mockValue, mockArgs);
+      const result: any = pipe.render(mockValue, mockArgs);
       expect(result).toBe('List of Cheese Farmers');
     });
     it('should render a Tearsheet', () => {
       expect(pipe.render).toBeDefined();
-      let mockArgs: any = {
+      const mockArgs: any = {
         type: 'TO_ONE',
         associatedEntity: {
           entity: 'Tearsheet',
         },
       };
-      let mockValue: any = {
+      const mockValue: any = {
         name: 'tearsheet',
         label: 'ShortList of Cheese Farmers',
       };
-      let result: any = pipe.render(mockValue, mockArgs);
+      const result: any = pipe.render(mockValue, mockArgs);
       expect(result).toBe('ShortList of Cheese Farmers');
     });
     it('should render a Skill', () => {
       expect(pipe.render).toBeDefined();
-      let mockArgs: any = {
+      const mockArgs: any = {
         type: 'TO_ONE',
         associatedEntity: {
           entity: 'Skill',
         },
       };
-      let mockValue: any = {
+      const mockValue: any = {
         name: 'skill',
         label: 'Makes awesome cheese',
       };
-      let result: any = pipe.render(mockValue, mockArgs);
+      const result: any = pipe.render(mockValue, mockArgs);
       expect(result).toBe('Makes awesome cheese');
     });
     it('should render a Category', () => {
       expect(pipe.render).toBeDefined();
-      let mockArgs: any = {
+      const mockArgs: any = {
         type: 'TO_ONE',
         associatedEntity: {
           entity: 'Category',
         },
       };
-      let mockValue: any = {
+      const mockValue: any = {
         name: 'category',
         label: 'Cheese Making',
       };
-      let result: any = pipe.render(mockValue, mockArgs);
+      const result: any = pipe.render(mockValue, mockArgs);
       expect(result).toBe('Cheese Making');
     });
     it('should render a Business Sector', () => {
       expect(pipe.render).toBeDefined();
-      let mockArgs: any = {
+      const mockArgs: any = {
         type: 'TO_ONE',
         associatedEntity: {
           entity: 'BusinessSector',
         },
       };
-      let mockValue: any = {
+      const mockValue: any = {
         name: 'businessSector',
         label: 'Dairy',
       };
-      let result: any = pipe.render(mockValue, mockArgs);
+      const result: any = pipe.render(mockValue, mockArgs);
       expect(result).toBe('Dairy');
     });
     it('should render a Certification', () => {
       expect(pipe.render).toBeDefined();
-      let mockArgs: any = {
+      const mockArgs: any = {
         type: 'TO_ONE',
         associatedEntity: {
           entity: 'Certification',
         },
       };
-      let mockValue: any = {
+      const mockValue: any = {
         name: 'certification',
         label: 'CMP - Cheese Making Professional',
       };
-      let result: any = pipe.render(mockValue, mockArgs);
+      const result: any = pipe.render(mockValue, mockArgs);
       expect(result).toBe('CMP - Cheese Making Professional');
     });
     it('should render a ClientCorporation', () => {
       expect(pipe.render).toBeDefined();
-      let mockArgs: any = {
+      const mockArgs: any = {
         type: 'TO_ONE',
         associatedEntity: {
           entity: 'ClientCorporation',
         },
       };
-      let mockValue: any = {
+      const mockValue: any = {
         name: 'clientCorporation',
         label: 'Cheese R Us',
       };
-      let result: any = pipe.render(mockValue, mockArgs);
+      const result: any = pipe.render(mockValue, mockArgs);
       expect(result).toBe('Cheese R Us');
     });
     it('should render a CorporationDepartment', () => {
       expect(pipe.render).toBeDefined();
-      let mockArgs: any = {
+      const mockArgs: any = {
         type: 'TO_ONE',
         associatedEntity: {
           entity: 'CorporationDepartment',
         },
       };
-      let mockValue: any = {
+      const mockValue: any = {
         name: 'corporationDepartment',
         label: 'Bringers of Cheese',
       };
-      let result: any = pipe.render(mockValue, mockArgs);
+      const result: any = pipe.render(mockValue, mockArgs);
       expect(result).toBe('Bringers of Cheese');
     });
     // checking name conditional for TO_ONE
     it('should render a CorporationDepartment', () => {
       expect(pipe.render).toBeDefined();
-      let mockArgs: any = {
+      const mockArgs: any = {
         type: 'TO_ONE',
         associatedEntity: {
           entity: 'CorporationDepartment',
         },
       };
-      let mockValue: any = {
+      const mockValue: any = {
         name: 'corporationDepartment',
         label: '',
       };
-      let result: any = pipe.render(mockValue, mockArgs);
+      const result: any = pipe.render(mockValue, mockArgs);
       expect(result).toBe('corporationDepartment');
     });
     // checking blank conditional for TO_ONE
     it('should render a CorporationDepartment', () => {
       expect(pipe.render).toBeDefined();
-      let mockArgs: any = {
+      const mockArgs: any = {
         type: 'TO_ONE',
         associatedEntity: {
           entity: 'CorporationDepartment',
         },
       };
-      let mockValue: any = {
+      const mockValue: any = {
         name: '',
         label: '',
       };
-      let result: any = pipe.render(mockValue, mockArgs);
+      const result: any = pipe.render(mockValue, mockArgs);
       expect(result).toBe('');
     });
     it('should render a CandidateComment.', () => {
       expect(pipe.render).toBeDefined();
-      let mockArgs: any = {
+      const mockArgs: any = {
         type: 'TO_ONE',
         associatedEntity: {
           entity: 'CandidateComment',
         },
       };
-      let mockValue: any = {
+      const mockValue: any = {
         name: 'David S. Pumpkins',
         comments: 'I am so in the weeds with David Pumpkins!',
         dateLastModified: 1500999002330,
       };
-      let result: any = pipe.render(mockValue, mockArgs);
+      const result: any = pipe.render(mockValue, mockArgs);
       expect(result).toBe('7/25/2017 (David S. Pumpkins) - I am so in the weeds with David Pumpkins!');
     });
     it('should render a CandidateComment.', () => {
       expect(pipe.render).toBeDefined();
-      let mockArgs: any = {
+      const mockArgs: any = {
         type: 'TO_ONE',
         associatedEntity: {
           entity: 'CandidateComment',
         },
       };
-      let mockValue: any = {
+      const mockValue: any = {
         name: 'David S. Pumpkins',
         comments: '',
         dateLastModified: 1500999002330,
       };
-      let result: any = pipe.render(mockValue, mockArgs);
+      const result: any = pipe.render(mockValue, mockArgs);
       expect(result).toBe('');
     });
     it('should render SkillText if array passed in', () => {
       expect(pipe.render).toBeDefined();
-      let mockValue: any = ['Skill1', 'Skill2', 'Skill3'];
-      let mockArgs: any = {
+      const mockValue: any = ['Skill1', 'Skill2', 'Skill3'];
+      const mockArgs: any = {
         optionsType: 'SkillText',
       };
-      let result: any = pipe.render(mockValue, mockArgs);
+      const result: any = pipe.render(mockValue, mockArgs);
       expect(result).toBe('Skill1, Skill2, Skill3');
     });
     it('should render SkillText if array not passed in', () => {
       expect(pipe.render).toBeDefined();
-      let mockValue: any = 'Skill1';
-      let mockArgs: any = {
+      const mockValue: any = 'Skill1';
+      const mockArgs: any = {
         optionsType: 'SkillText',
       };
-      let result: any = pipe.render(mockValue, mockArgs);
+      const result: any = pipe.render(mockValue, mockArgs);
       expect(result).toBe('Skill1');
     });
     it('should render Html strings as sanitized Html content.', () => {
-      let mockArgs: any = {
+      const mockArgs: any = {
         type: 'SCALAR',
         dataType: 'String',
         dataSpecialization: 'HTML',
       };
-      let mockValue: any = '<span style="color:#c0392b">Some Green Text</span>';
-      let result: any = pipe.render(mockValue, mockArgs);
+      const mockValue: any = '<span style="color:#c0392b">Some Green Text</span>';
+      const result: any = pipe.render(mockValue, mockArgs);
       expect(result).toEqual('TrustedHTML');
     });
   });
@@ -451,7 +451,7 @@ xdescribe('Render', () => {
   describe('Function: concat(list, ...fields)', () => {
     it('should concatenate properties of the object being passed in.', () => {
       expect(pipe.concat).toBeDefined();
-      let result: any = pipe.concat([{ firstName: 'Jane', lastName: 'Smith' }], 'firstName', 'lastName');
+      const result: any = pipe.concat([{ firstName: 'Jane', lastName: 'Smith' }], 'firstName', 'lastName');
       expect(result).toBe('Jane Smith');
     });
   });
@@ -461,8 +461,8 @@ xdescribe('Render', () => {
       expect(pipe.options).toBeDefined();
     });
     it('should return an array of corresponding labels for values passed', () => {
-      let values = ['1', '3'];
-      let list = [{ label: 'Archived', value: '1' }, { label: 'New Lead', value: '2' }, { label: 'Old Lead', value: '3' }];
+      const values = ['1', '3'];
+      const list = [{ label: 'Archived', value: '1' }, { label: 'New Lead', value: '2' }, { label: 'Old Lead', value: '3' }];
       expect(pipe.options(values, list)).toEqual(['Archived', 'Old Lead']);
     });
   });

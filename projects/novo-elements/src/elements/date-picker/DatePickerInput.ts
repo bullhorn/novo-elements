@@ -140,16 +140,16 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
   }
 
   _handleEvent(event: Event, blur: boolean): void {
-    let value = (event.target as HTMLInputElement).value;
+    const value = (event.target as HTMLInputElement).value;
     this.formatDate(value, blur);
     this.openPanel();
   }
 
   protected formatDate(value: string, blur: boolean) {
     try {
-      let [dateTimeValue, formatted] = this.dateFormatService.parseString(value, false, 'date');
+      const [dateTimeValue, formatted] = this.dateFormatService.parseString(value, false, 'date');
       if (!isNaN(dateTimeValue.getUTCDate())) {
-        let dt = new Date(dateTimeValue);
+        const dt = new Date(dateTimeValue);
         this.dispatchOnChange(dt, blur);
       } else {
         this.dispatchOnChange(null, blur);
@@ -199,7 +199,7 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
 
   private _setFormValue(value: any): void {
     if (this.value) {
-      let test = this.formatDateValue(this.value);
+      const test = this.formatDateValue(this.value);
       this.formattedValue = test;
     }
   }
@@ -225,7 +225,7 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
   }
 
   public formatDateValue(value) {
-    let originalValue = value;
+    const originalValue = value;
     try {
       if (!value) {
         return '';

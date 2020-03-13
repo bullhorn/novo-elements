@@ -76,7 +76,7 @@ xdescribe('Elements: NovoDateTimePickerElement', () => {
   });
 
   describe('Method: onDateSelected()', () => {
-    let now = new Date();
+    const now = new Date();
     beforeEach(() => {
       spyOn(component, 'setDateLabels');
       spyOn(component, '_onChange');
@@ -93,7 +93,7 @@ xdescribe('Elements: NovoDateTimePickerElement', () => {
   });
 
   describe('Method: onTimeSelected()', () => {
-    let now = new Date();
+    const now = new Date();
     beforeEach(() => {
       spyOn(component, '_onChange');
       spyOn(component, 'setTimeLabels');
@@ -115,7 +115,7 @@ xdescribe('Elements: NovoDateTimePickerElement', () => {
       spyOn(component, 'setTimeLabels');
     });
     it('set the model and labels with correct date', () => {
-      let now = new Date();
+      const now = new Date();
       component.writeValue(now);
       expect(component.model).toEqual(now);
       expect(component.timePickerValue).toEqual(now);
@@ -132,7 +132,7 @@ xdescribe('Elements: NovoDateTimePickerElement', () => {
 
   describe('Method: registerOnChange()', () => {
     it('should set the fn', () => {
-      let test = () => {};
+      const test = () => {};
       component.registerOnChange(test);
       expect(component._onChange).toEqual(test);
     });
@@ -140,7 +140,7 @@ xdescribe('Elements: NovoDateTimePickerElement', () => {
 
   describe('Method: registerOnTouched()', () => {
     it('should set the fn', () => {
-      let test = () => {};
+      const test = () => {};
       component.registerOnTouched(test);
       expect(component._onTouched).toEqual(test);
     });

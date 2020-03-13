@@ -17,7 +17,7 @@ export class DefaultOptionsPickerExample {
   public value: string;
 
   constructor() {
-    let states = [
+    const states = [
       'Alabama',
       'Alaska',
       'Arizona',

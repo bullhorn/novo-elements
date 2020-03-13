@@ -295,7 +295,7 @@ describe('Elements: NovoDataTableCellHeader', () => {
       spyOn(component.renderer, 'setStyle');
       component.startResize(mouseDownEvent);
 
-      let mouseMoveEvent: MouseEvent = window.document.createEvent('MouseEvents');
+      const mouseMoveEvent: MouseEvent = window.document.createEvent('MouseEvents');
       mouseMoveEvent.initMouseEvent('mousemove', true, true, window, 1, 50, 50, 550, 50, false, false, false, false, 0, null);
       window.document.dispatchEvent(mouseMoveEvent);
 
