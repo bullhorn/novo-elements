@@ -1,4 +1,5 @@
 import { Subscription } from 'rxjs';
+import { ResultsTemplateType } from './FormInterfaces';
 type OptionsFunctionConfig = {
   format?: string;
 } & (
@@ -7,11 +8,7 @@ type OptionsFunctionConfig = {
   | { optionsUrl: string }
   | { optionsUrlBuilder: (query: string) => string });
 
-export type ModifyPickerConfigArgs =
-  | {
-      options: unknown[];
-    }
-  | OptionsFunctionConfig;
+export type ModifyPickerConfigArgs = { options: unknown[] } | { resultsTemplateType: ResultsTemplateType } | OptionsFunctionConfig;
 
 export type OptionsFunction = (query: string, page?: number) => Promise<unknown[]>;
 
