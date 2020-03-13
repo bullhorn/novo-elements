@@ -20517,7 +20517,7 @@ class FieldInteractionApi {
             /** @type {?} */
             const optionsConfig = this.getOptionsConfig(args, mapper, filteredOptionsCreator, format);
             /** @type {?} */
-            const newConfig = Object.assign({}, (emptyPickerMessage && { emptyPickerMessage }), (Number.isInteger(minSearchLength) && { minSearchLength }), (enableInfiniteScroll && { enableInfiniteScroll }), (filteredOptionsCreator && { filteredOptionsCreator }), (getLabels && { getLabels }), (optionsConfig && optionsConfig), { resultsTemplate: control.config.resultsTemplate });
+            const newConfig = Object.assign({}, (emptyPickerMessage && { emptyPickerMessage }), (Number.isInteger(minSearchLength) && { minSearchLength }), (enableInfiniteScroll && { enableInfiniteScroll }), (filteredOptionsCreator && { filteredOptionsCreator }), (getLabels && { getLabels }), (optionsConfig && optionsConfig), { resultsTemplate: control.config.resultsTemplate || ('resultsTemplateType' in args && this.getAppropriateResultsTemplate(args.resultsTemplateType)) });
             this.setProperty(key, 'config', newConfig);
             this.triggerEvent({ controlKey: key, prop: 'pickerConfig', value: args });
         }
@@ -20537,6 +20537,19 @@ class FieldInteractionApi {
         const config = Object.assign({}, control.config, properties);
         this.setProperty(key, 'config', config);
         this.triggerEvent({ controlKey: key, prop: 'pickerConfig', value: properties });
+    }
+    /**
+     * @private
+     * @param {?} resultsTemplateType
+     * @return {?}
+     */
+    getAppropriateResultsTemplate(resultsTemplateType) {
+        switch (resultsTemplateType) {
+            case 'entity-picker':
+                return EntityPickerResults;
+            default:
+                return undefined;
+        }
     }
     /**
      * @param {?} key
@@ -56135,7 +56148,7 @@ class ActivityTableRenderers {
 /*!******************************************************!*\
   !*** ./dist/novo-examples/fesm2015/novo-examples.js ***!
   \******************************************************/
-/*! exports provided: AceEditorPage, ButtonsPage, CalendarPage, CardsPage, ChipsPage, ChomskyPage, ColorsPage, ComponentsPage, CompositionPage, DataTablePage, DatePickerPage, DesignPage, DropdownPage, EXAMPLE_COMPONENTS, EXAMPLE_LIST, EditorPage, ExampleData, ExpansionPage, FieldInteractionsPage, FormControlsPage, FormGroupsPage, FormPage, HeaderPage, HomePage, IconPage, IconographyPage, LayoutsPage, ListPage, LoadingPage, ModalPage, MultiPickerPage, NovoExamplesModule, NovoExamplesRoutesModule, PAGE_LIST, PatternsPage, PickerPage, PipesPage, PopOverPage, QuickNotePage, RadioButtonsPage, SearchPage, SecurityPage, SelectPage, SlidesPage, StepperPage, SwitchPage, TabbedGroupPickerPage, TablePage, TabsPage, TemplatesPage, TilesPage, TipWellPage, ToasterPage, TooltipPage, TypographyPage, ValuePage, ɵa, ɵb, ɵba, ɵbb, ɵbc, ɵbd, ɵbe, ɵbf, ɵbg, ɵbh, ɵbi, ɵbj, ɵbk, ɵbl, ɵbm, ɵbn, ɵbo, ɵbp, ɵbq, ɵbr, ɵbs, ɵbt, ɵbu, ɵbv, ɵbw, ɵbx, ɵby, ɵbz, ɵc, ɵca, ɵcb, ɵcc, ɵcd, ɵce, ɵcf, ɵcg, ɵch, ɵci, ɵcj, ɵck, ɵcl, ɵcm, ɵcn, ɵco, ɵcp, ɵcq, ɵcr, ɵcs, ɵct, ɵcu, ɵcv, ɵcw, ɵcx, ɵcy, ɵcz, ɵd, ɵda, ɵdb, ɵdc, ɵdd, ɵde, ɵdf, ɵdg, ɵdh, ɵdi, ɵdj, ɵdk, ɵdl, ɵdm, ɵdn, ɵdo, ɵdp, ɵdq, ɵdr, ɵds, ɵdt, ɵdu, ɵdv, ɵdw, ɵdx, ɵdy, ɵdz, ɵe, ɵea, ɵeb, ɵec, ɵed, ɵee, ɵef, ɵeg, ɵeh, ɵei, ɵej, ɵek, ɵel, ɵem, ɵen, ɵeo, ɵep, ɵeq, ɵer, ɵes, ɵet, ɵeu, ɵev, ɵew, ɵex, ɵey, ɵez, ɵf, ɵfa, ɵfb, ɵfc, ɵfd, ɵfe, ɵff, ɵfg, ɵfh, ɵfi, ɵfj, ɵfk, ɵfl, ɵfm, ɵfn, ɵfo, ɵfp, ɵfq, ɵfr, ɵfs, ɵft, ɵfu, ɵfv, ɵfw, ɵfx, ɵfy, ɵfz, ɵg, ɵga, ɵgb, ɵgc, ɵgd, ɵge, ɵgf, ɵgg, ɵgh, ɵgi, ɵgj, ɵgk, ɵgl, ɵgm, ɵgn, ɵgo, ɵgp, ɵgq, ɵgr, ɵgs, ɵgt, ɵgu, ɵgv, ɵgw, ɵgx, ɵgy, ɵgz, ɵh, ɵha, ɵhb, ɵhc, ɵhd, ɵi, ɵj, ɵk, ɵl, ɵm, ɵn, ɵo, ɵp, ɵq, ɵr, ɵs, ɵt, ɵu, ɵv, ɵw, ɵx, ɵy, ɵz */
+/*! exports provided: AceEditorPage, ButtonsPage, CalendarPage, CardsPage, ChipsPage, ChomskyPage, ColorsPage, ComponentsPage, CompositionPage, DataTablePage, DatePickerPage, DesignPage, DropdownPage, EXAMPLE_COMPONENTS, EXAMPLE_LIST, EditorPage, ExampleData, ExpansionPage, FieldInteractionsPage, FormControlsPage, FormGroupsPage, FormPage, HeaderPage, HomePage, IconPage, IconographyPage, LayoutsPage, ListPage, LoadingPage, ModalPage, MultiPickerPage, NovoExamplesModule, NovoExamplesRoutesModule, PAGE_LIST, PatternsPage, PickerPage, PipesPage, PopOverPage, QuickNotePage, RadioButtonsPage, SearchPage, SecurityPage, SelectPage, SlidesPage, StepperPage, SwitchPage, TabbedGroupPickerPage, TablePage, TabsPage, TemplatesPage, TilesPage, TipWellPage, ToasterPage, TooltipPage, TypographyPage, ValuePage, ɵa, ɵb, ɵba, ɵbb, ɵbc, ɵbd, ɵbe, ɵbf, ɵbg, ɵbh, ɵbi, ɵbj, ɵbk, ɵbl, ɵbm, ɵbn, ɵbo, ɵbp, ɵbq, ɵbr, ɵbs, ɵbt, ɵbu, ɵbv, ɵbw, ɵbx, ɵby, ɵbz, ɵc, ɵca, ɵcb, ɵcc, ɵcd, ɵce, ɵcf, ɵcg, ɵch, ɵci, ɵcj, ɵck, ɵcl, ɵcm, ɵcn, ɵco, ɵcp, ɵcq, ɵcr, ɵcs, ɵct, ɵcu, ɵcv, ɵcw, ɵcx, ɵcy, ɵcz, ɵd, ɵda, ɵdb, ɵdc, ɵdd, ɵde, ɵdf, ɵdg, ɵdh, ɵdi, ɵdj, ɵdk, ɵdl, ɵdm, ɵdn, ɵdo, ɵdp, ɵdq, ɵdr, ɵds, ɵdt, ɵdu, ɵdv, ɵdw, ɵdx, ɵdy, ɵdz, ɵe, ɵea, ɵeb, ɵec, ɵed, ɵee, ɵef, ɵeg, ɵeh, ɵei, ɵej, ɵek, ɵel, ɵem, ɵen, ɵeo, ɵep, ɵeq, ɵer, ɵes, ɵet, ɵeu, ɵev, ɵew, ɵex, ɵey, ɵez, ɵf, ɵfa, ɵfb, ɵfc, ɵfd, ɵfe, ɵff, ɵfg, ɵfh, ɵfi, ɵfj, ɵfk, ɵfl, ɵfm, ɵfn, ɵfo, ɵfp, ɵfq, ɵfr, ɵfs, ɵft, ɵfu, ɵfv, ɵfw, ɵfx, ɵfy, ɵfz, ɵg, ɵga, ɵgb, ɵgc, ɵgd, ɵge, ɵgf, ɵgg, ɵgh, ɵgi, ɵgj, ɵgk, ɵgl, ɵgm, ɵgn, ɵgo, ɵgp, ɵgq, ɵgr, ɵgs, ɵgt, ɵgu, ɵgv, ɵgw, ɵgx, ɵgy, ɵgz, ɵh, ɵha, ɵhb, ɵhc, ɵhd, ɵhe, ɵi, ɵj, ɵk, ɵl, ɵm, ɵn, ɵo, ɵp, ɵq, ɵr, ɵs, ɵt, ɵu, ɵv, ɵw, ɵx, ɵy, ɵz */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -56321,49 +56334,50 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfm", function() { return FiGlobalsExample; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfn", function() { return FiHideShowExample; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfo", function() { return FiMessagingExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfp", function() { return FiModifyOptionsExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfq", function() { return FiRequiredExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfr", function() { return FiTooltipExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfs", function() { return FiValidationExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵft", function() { return ModalCustomDemo; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfu", function() { return CustomModalExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfv", function() { return ModalErrorDemo; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfw", function() { return ErrorModalExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfx", function() { return ModalAddFormDemo; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfy", function() { return ModalAddFormExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfz", function() { return ModalEditFormDemo; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfp", function() { return FiModifyAddedPickerExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfq", function() { return FiModifyOptionsExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfr", function() { return FiRequiredExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfs", function() { return FiTooltipExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵft", function() { return FiValidationExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfu", function() { return ModalCustomDemo; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfv", function() { return CustomModalExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfw", function() { return ModalErrorDemo; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfx", function() { return ErrorModalExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfy", function() { return ModalAddFormDemo; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵfz", function() { return ModalAddFormExample; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵg", function() { return ButtonLoadingExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵga", function() { return ModalEditFormExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgb", function() { return ModalSuccessDemo; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgc", function() { return SuccessModalExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgd", function() { return ModalWarningDemo; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵge", function() { return WarningModalExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgf", function() { return PluralizeExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgg", function() { return PopOverAutoPlacementExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgh", function() { return PopOverBehaviorsExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgi", function() { return PopOverDynamicExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgj", function() { return PopOverHorizontalExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgk", function() { return PopOverPlacementExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgl", function() { return PopOverVerticalExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgm", function() { return SecurityExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgn", function() { return BasicTipWellExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgo", function() { return ButtonlessTipWellExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgp", function() { return HtmlTipWellExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgq", function() { return IconTipWellExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgr", function() { return ToastServiceExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgs", function() { return ToastUsageExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgt", function() { return TooltipAlignExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgu", function() { return TooltipOptionsExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgv", function() { return TooltipPlacementExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgw", function() { return TooltipSizesExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgx", function() { return TooltipToggleExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgy", function() { return TooltipTypesExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgz", function() { return NovoExamplesSharedModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵga", function() { return ModalEditFormDemo; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgb", function() { return ModalEditFormExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgc", function() { return ModalSuccessDemo; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgd", function() { return SuccessModalExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵge", function() { return ModalWarningDemo; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgf", function() { return WarningModalExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgg", function() { return PluralizeExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgh", function() { return PopOverAutoPlacementExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgi", function() { return PopOverBehaviorsExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgj", function() { return PopOverDynamicExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgk", function() { return PopOverHorizontalExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgl", function() { return PopOverPlacementExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgm", function() { return PopOverVerticalExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgn", function() { return SecurityExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgo", function() { return BasicTipWellExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgp", function() { return ButtonlessTipWellExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgq", function() { return HtmlTipWellExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgr", function() { return IconTipWellExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgs", function() { return ToastServiceExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgt", function() { return ToastUsageExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgu", function() { return TooltipAlignExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgv", function() { return TooltipOptionsExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgw", function() { return TooltipPlacementExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgx", function() { return TooltipSizesExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgy", function() { return TooltipToggleExample; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵgz", function() { return TooltipTypesExample; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵh", function() { return ButtonOverviewExample; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵha", function() { return CodeSnippetComponent; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵhb", function() { return HighlightJS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵhc", function() { return CodeExampleComponent; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵhd", function() { return StackblitzButtonModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵha", function() { return NovoExamplesSharedModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵhb", function() { return CodeSnippetComponent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵhc", function() { return HighlightJS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵhd", function() { return CodeExampleComponent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵhe", function() { return StackblitzButtonModule; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵi", function() { return ButtonPrimaryExample; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵj", function() { return ButtonSecondaryExample; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵk", function() { return ButtonStandardExample; });
@@ -69828,6 +69842,98 @@ if (false) {}
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: utils/field-interactions/fi-modify-added-picker/fi-modify-added-picker-example.ts
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * \@title Fi Modify Added Picker Example
+ */
+class FiModifyAddedPickerExample {
+    /**
+     * @param {?} formUtils
+     */
+    constructor(formUtils) {
+        this.formUtils = formUtils;
+        this.controls = {};
+        // Adding / Removing Interactions
+        /** @type {?} */
+        let entityPickerFunction = (/**
+         * @param {?} API
+         * @return {?}
+         */
+        (API) => {
+            console.log('[FieldInteractionDemo] - entityPickerFunction'); // tslint:disable-line
+            API.modifyPickerConfig('custom-entity-picker', {
+                optionsPromise: (/**
+                 * @param {?} query
+                 * @param {?} http
+                 * @return {?}
+                 */
+                (query, http) => {
+                    return new Promise((/**
+                     * @param {?} resolve
+                     * @param {?} reject
+                     * @return {?}
+                     */
+                    function (resolve, reject) {
+                        if (query && query.length) {
+                            http
+                                .get('http://novo-elements-mock.getsandbox.com/users')
+                                .map((/**
+                             * @param {?} results
+                             * @return {?}
+                             */
+                            function (results) {
+                                return results.map((/**
+                                 * @param {?} result
+                                 * @return {?}
+                                 */
+                                (result) => {
+                                    // Setting the searchEntity on the item is important. We use it to format your display properly.
+                                    // Valid options are: Candidate, ClientContact, ClientCorporation, CorporateUser, JobOrder, Lead, Opportunity, and Placement
+                                    result.searchEntity = 'Candidate';
+                                    return result;
+                                }));
+                            }))
+                                .subscribe(resolve, reject);
+                        }
+                        else {
+                            resolve(['DEFAULT']);
+                        }
+                    }));
+                }),
+                format: '$name',
+                // This is how we set the picker to be of an entity type
+                resultsTemplateType: 'entity-picker',
+            });
+        });
+        this.controls.pickerControl = new novo_elements__WEBPACK_IMPORTED_MODULE_3__["PickerControl"]({
+            key: 'custom-entity-picker',
+            name: 'custom-entity-picker',
+            config: {
+                options: [],
+            },
+            label: 'Custom Entity Picker',
+            interactions: [{ event: 'init', script: entityPickerFunction }],
+        });
+        this.form = this.formUtils.toFormGroup([this.controls.pickerControl]);
+    }
+}
+FiModifyAddedPickerExample.decorators = [
+    { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"], args: [{
+                selector: 'fi-modify-added-picker-example',
+                template: "<novo-form [form]=\"form\" layout=\"vertical\">\n  <div class=\"novo-form-row\">\n    <novo-control [form]=\"form\" [control]=\"controls.pickerControl\"></novo-control>\n  </div>\n</novo-form>\n",
+                styles: [""]
+            }] }
+];
+/** @nocollapse */
+FiModifyAddedPickerExample.ctorParameters = () => [
+    { type: novo_elements__WEBPACK_IMPORTED_MODULE_3__["FormUtils"] }
+];
+if (false) {}
+
+/**
+ * @fileoverview added by tsickle
  * Generated from: utils/field-interactions/fi-modify-options/fi-modify-options-example.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
@@ -72290,6 +72396,13 @@ const EXAMPLE_COMPONENTS = {
         cssSource: `%2F**%20No%20CSS%20for%20this%20example%20*%2F%0A`,
         htmlSource: `%3Cnovo-form%20%5Bform%5D%3D%22form%22%20layout%3D%22vertical%22%3E%0A%20%20%20%20%3Cdiv%20class%3D%22novo-form-row%22%3E%0A%20%20%20%20%20%20%20%20%3Cnovo-control%20%5Bform%5D%3D%22form%22%20%5Bcontrol%5D%3D%22controls.tipControl%22%3E%3C%2Fnovo-control%3E%0A%20%20%20%20%3C%2Fdiv%3E%0A%20%20%20%20%3Cdiv%20class%3D%22novo-form-row%22%3E%0A%20%20%20%20%20%20%20%20%3Cnovo-control%20%5Bform%5D%3D%22form%22%20%5Bcontrol%5D%3D%22controls.tipHtmlControl%22%3E%3C%2Fnovo-control%3E%0A%20%20%20%20%3C%2Fdiv%3E%0A%20%20%20%20%3Cdiv%20class%3D%22novo-form-row%22%3E%0A%20%20%20%20%20%20%20%20%3Cnovo-control%20%5Bform%5D%3D%22form%22%20%5Bcontrol%5D%3D%22controls.toastControl%22%3E%3C%2Fnovo-control%3E%0A%20%20%20%20%3C%2Fdiv%3E%0A%20%20%20%20%3Cdiv%20class%3D%22novo-form-row%22%3E%0A%20%20%20%20%20%20%20%20%3Cnovo-control%20%5Bform%5D%3D%22form%22%20%5Bcontrol%5D%3D%22controls.promptControl%22%3E%3C%2Fnovo-control%3E%0A%20%20%20%20%3C%2Fdiv%3E%0A%3C%2Fnovo-form%3E%0A%3Cdiv%20class%3D%22final-value%22%3EForm%20Value%20-%20%7B%7B%20form.value%20%7C%20json%20%7D%7D%3C%2Fdiv%3E%0A%3Cdiv%20class%3D%22final-value%22%3EForm%20Dirty%20-%20%7B%7B%20form.dirty%20%7C%20json%20%7D%7D%3C%2Fdiv%3E%0A%3Cdiv%20class%3D%22final-value%22%3EIs%20Form%20Valid%3F%20-%20%7B%7B%20form.valid%20%7C%20json%20%7D%7D%3C%2Fdiv%3E%0A`
     },
+    'fi-modify-added-picker': {
+        title: 'Fi Modify Added Picker Example',
+        component: FiModifyAddedPickerExample,
+        tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0A%2F%2F%20Vendor%0Aimport%20%7B%20FormUtils%2C%20FieldInteractionApi%2C%20PickerControl%20%7D%20from%20'novo-elements'%3B%0A%0A%2F**%0A%20*%20%40title%20Fi%20Modify%20Added%20Picker%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'fi-modify-added-picker-example'%2C%0A%20%20templateUrl%3A%20'fi-modify-added-picker-example.html'%2C%0A%20%20styleUrls%3A%20%5B'fi-modify-added-picker-example.css'%5D%2C%0A%7D)%0Aexport%20class%20FiModifyAddedPickerExample%20%7B%0A%20%20public%20form%3A%20any%3B%0A%20%20public%20controls%3A%20any%20%3D%20%7B%7D%3B%0A%0A%20%20constructor(private%20formUtils%3A%20FormUtils)%20%7B%0A%20%20%20%20%2F%2F%20Adding%20%2F%20Removing%20Interactions%0A%20%20%20%20let%20entityPickerFunction%20%3D%20(API%3A%20FieldInteractionApi)%20%3D%3E%20%7B%0A%20%20%20%20%20%20console.log('%5BFieldInteractionDemo%5D%20-%20entityPickerFunction')%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%20%20%20%20API.modifyPickerConfig('custom-entity-picker'%2C%20%7B%0A%20%20%20%20%20%20%20%20optionsPromise%3A%20(query%2C%20http)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20return%20new%20Promise(function(resolve%2C%20reject)%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20if%20(query%20%26%26%20query.length)%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20http%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20.get('http%3A%2F%2Fnovo-elements-mock.getsandbox.com%2Fusers')%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20.map(function(results%3A%20any%5B%5D)%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20return%20results.map((result)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20Setting%20the%20searchEntity%20on%20the%20item%20is%20important.%20We%20use%20it%20to%20format%20your%20display%20properly.%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20Valid%20options%20are%3A%20Candidate%2C%20ClientContact%2C%20ClientCorporation%2C%20CorporateUser%2C%20JobOrder%2C%20Lead%2C%20Opportunity%2C%20and%20Placement%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20result.searchEntity%20%3D%20'Candidate'%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20return%20result%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D)%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20.subscribe(resolve%2C%20reject)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20resolve(%5B'DEFAULT'%5D)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20%7D)%3B%0A%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20format%3A%20'%24name'%2C%0A%20%20%20%20%20%20%20%20%2F%2F%20This%20is%20how%20we%20set%20the%20picker%20to%20be%20of%20an%20entity%20type%0A%20%20%20%20%20%20%20%20resultsTemplateType%3A%20'entity-picker'%2C%0A%20%20%20%20%20%20%7D)%3B%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20this.controls.pickerControl%20%3D%20new%20PickerControl(%7B%0A%20%20%20%20%20%20key%3A%20'custom-entity-picker'%2C%0A%20%20%20%20%20%20name%3A%20'custom-entity-picker'%2C%0A%20%20%20%20%20%20config%3A%20%7B%0A%20%20%20%20%20%20%20%20options%3A%20%5B%5D%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20label%3A%20'Custom%20Entity%20Picker'%2C%0A%20%20%20%20%20%20interactions%3A%20%5B%7B%20event%3A%20'init'%2C%20script%3A%20entityPickerFunction%20%7D%5D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.form%20%3D%20this.formUtils.toFormGroup(%5Bthis.controls.pickerControl%5D)%3B%0A%20%20%7D%0A%7D%0A`,
+        cssSource: `%2F**%20No%20CSS%20for%20this%20example%20*%2F%0A`,
+        htmlSource: `%3Cnovo-form%20%5Bform%5D%3D%22form%22%20layout%3D%22vertical%22%3E%0A%20%20%3Cdiv%20class%3D%22novo-form-row%22%3E%0A%20%20%20%20%3Cnovo-control%20%5Bform%5D%3D%22form%22%20%5Bcontrol%5D%3D%22controls.pickerControl%22%3E%3C%2Fnovo-control%3E%0A%20%20%3C%2Fdiv%3E%0A%3C%2Fnovo-form%3E%0A`
+    },
     'fi-modify-options': {
         title: 'Fi Modify Options Example',
         component: FiModifyOptionsExample,
@@ -72651,6 +72764,7 @@ const EXAMPLE_LIST = [
     FiGlobalsExample,
     FiHideShowExample,
     FiMessagingExample,
+    FiModifyAddedPickerExample,
     FiModifyOptionsExample,
     FiRequiredExample,
     FiTooltipExample,
@@ -73768,7 +73882,7 @@ class FieldInteractionsPage {
 FieldInteractionsPage.decorators = [
     { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"], args: [{
                 selector: 'field-interactions-page',
-                template: `<h1>Field Interactions</h1><p>Field Interactions is a simple API that allows you to modify NovoForms based on field changes.</p><p>The Field Interaction API gives you a simple to use API object when writing your field interaction functions.</p><p>Look below for samples of what you can do with this API...</p><h2>Configuration</h2><p>Inspect Form Configuration on Field Getting Current Context Write Field Interaction</p><h5>Inspect Form</h5><p>There is a special <code>data-control-key</code> property added to the <code>novo-control</code> element.</p><p>You can inspec the DOM at the input and see the property to know what 'key' to use in the API</p><p>By default, if you are writing a Field Interaction for the active field you can use <code>API.getActiveKey()</code></p><h5>Configuration on Field</h5><pre><code>event: 'change|focus|blur|init', script: Function, invokeOnInit?: boolean</code></pre><p>The Field Interactions are configured on a per control basis. There are three scenarios in which they will be fired: 'change', 'focus' and 'blur'.</p><p>init -- gets fired only when the form is initialized</p><p>change -- gets fired when the value of the form control changes</p><p>focus -- gets fired when the field gets focused</p><p>blur -- gets fired when the field loses focus</p><p>The script function represents the function that will be fired for the event, you can see examples of these below.</p><p>Lastly, 'invokeOnInit' will also trigger the Field Interaction when the form is created as well.</p><h5>Getting Current Context</h5><p>If you need to write Field Interaction based on if you are on an add or edit page, or you need to know the current entity type and ID then you can get those via:</p><p>edit: 'API.isEdit'</p><p>entity: 'API.currentEntity'</p><p>id: 'API.currentEntityId'</p><h5>Write Field Interaction</h5><p>Writing Field Interactions is very simple. You can refer to all the examples below. If you ever get stuck, you can always open a <a href="https://github.com/bullhorn/novo-elements/issues">Github Issue</a> as well!</p><p><strong>IMPORTANT</strong></p><p>When writing field interactions, you will be writing everything only the contents of the function. <strong>You do not</strong> write the surrounding function.</p><p><strong>All field interactions must be written in vanilla ES5 as well!</strong></p><h2>Basic API</h2><p>Validation Mark Fields as Required Field Calculations &amp; Modification Hide / Show Fields Enable / Disable Fields Messaging / Notifications Modifying Config on Static Pickers / Selects Using Globals Async Interactions Confirm Changes Adding / Removing Fields Add Tooltip</p><h5>Validation</h5><p>If you need to perform some custom validation on a field, you can use the API to quickly mark a field as invalid</p><p><code-example example="fi-validation"></code-example></p><h5>Mark Fields as Required</h5><p>If you need to mark fields as required or not based on some changes in the form, you can use the API to do that!</p><p><code-example example="fi-required"></code-example></p><h5>Field Calculations &amp; Modification</h5><p>If you need to do some custom calculations based off other form data, you can do that easily with the API</p><p><code-example example="fi-calculation"></code-example></p><h5>Hide / Show Fields</h5><p>You can also hide or show certain fields based on interaction with the form. Note that the value is still present in the form's value</p><p><code-example example="fi-hide-show"></code-example></p><h5>Enable / Disable Fields</h5><p>You can also enable or disable certain fields based on interaction with the form. Note that the value is still present in the form's value but does not respond to any interactions</p><p><code-example example="fi-enable-disable"></code-example></p><h5>Messaging / Notifications</h5><p>You can trigger messages to users in a few different ways using the API</p><p><code-example example="fi-messaging"></code-example></p><h5>Modifying Config on Static Pickers / Selects</h5><p>You have full control over the control, you can modify the options array of static pickers and select controls!</p><p><code-example example="fi-modify-options"></code-example></p><h5>Using Globals</h5><p>Using the config from above, you can figure the API to have a set of global variables that you can key off of inside your field interactions</p><p><code-example example="fi-globals"></code-example></p><h5>Async Interactions</h5><p>You can perform async interactions and keep the form from saving by setting a loading state</p><p><code-example example="fi-async"></code-example></p><h5>Confirm Changes</h5><p>You can prompt the user if they want to update the field or not too!</p><p><code-example example="fi-confirm"></code-example></p><h5>Adding / Removing Fields</h5><p>With the API you can quickly add and remove fields on the form.</p><p><strong>ONLY WORKS WITH DYNAMIC FORMS</strong></p><p><code-example example="fi-adding-removing"></code-example></p><h5>Add Tooltip</h5><p>You are able to dynamically change a field's tooltip.</p><p><code-example example="fi-tooltip"></code-example></p>`
+                template: `<h1>Field Interactions</h1><p>Field Interactions is a simple API that allows you to modify NovoForms based on field changes.</p><p>The Field Interaction API gives you a simple to use API object when writing your field interaction functions.</p><p>Look below for samples of what you can do with this API...</p><h2>Configuration</h2><p>Inspect Form Configuration on Field Getting Current Context Write Field Interaction</p><h5>Inspect Form</h5><p>There is a special <code>data-control-key</code> property added to the <code>novo-control</code> element.</p><p>You can inspec the DOM at the input and see the property to know what 'key' to use in the API</p><p>By default, if you are writing a Field Interaction for the active field you can use <code>API.getActiveKey()</code></p><h5>Configuration on Field</h5><pre><code>event: 'change|focus|blur|init', script: Function, invokeOnInit?: boolean</code></pre><p>The Field Interactions are configured on a per control basis. There are three scenarios in which they will be fired: 'change', 'focus' and 'blur'.</p><p>init -- gets fired only when the form is initialized</p><p>change -- gets fired when the value of the form control changes</p><p>focus -- gets fired when the field gets focused</p><p>blur -- gets fired when the field loses focus</p><p>The script function represents the function that will be fired for the event, you can see examples of these below.</p><p>Lastly, 'invokeOnInit' will also trigger the Field Interaction when the form is created as well.</p><h5>Getting Current Context</h5><p>If you need to write Field Interaction based on if you are on an add or edit page, or you need to know the current entity type and ID then you can get those via:</p><p>edit: 'API.isEdit'</p><p>entity: 'API.currentEntity'</p><p>id: 'API.currentEntityId'</p><h5>Write Field Interaction</h5><p>Writing Field Interactions is very simple. You can refer to all the examples below. If you ever get stuck, you can always open a <a href="https://github.com/bullhorn/novo-elements/issues">Github Issue</a> as well!</p><p><strong>IMPORTANT</strong></p><p>When writing field interactions, you will be writing everything only the contents of the function. <strong>You do not</strong> write the surrounding function.</p><p><strong>All field interactions must be written in vanilla ES5 as well!</strong></p><h2>Basic API</h2><p>Validation Mark Fields as Required Field Calculations &amp; Modification Hide / Show Fields Enable / Disable Fields Messaging / Notifications Modifying Config on Static Pickers / Selects Using Globals Async Interactions Confirm Changes Adding / Removing Fields Add Tooltip</p><h5>Validation</h5><p>If you need to perform some custom validation on a field, you can use the API to quickly mark a field as invalid</p><p><code-example example="fi-validation"></code-example></p><h5>Mark Fields as Required</h5><p>If you need to mark fields as required or not based on some changes in the form, you can use the API to do that!</p><p><code-example example="fi-required"></code-example></p><h5>Field Calculations &amp; Modification</h5><p>If you need to do some custom calculations based off other form data, you can do that easily with the API</p><p><code-example example="fi-calculation"></code-example></p><h5>Hide / Show Fields</h5><p>You can also hide or show certain fields based on interaction with the form. Note that the value is still present in the form's value</p><p><code-example example="fi-hide-show"></code-example></p><h5>Enable / Disable Fields</h5><p>You can also enable or disable certain fields based on interaction with the form. Note that the value is still present in the form's value but does not respond to any interactions</p><p><code-example example="fi-enable-disable"></code-example></p><h5>Messaging / Notifications</h5><p>You can trigger messages to users in a few different ways using the API</p><p><code-example example="fi-messaging"></code-example></p><h5>Modifying Config on Static Pickers / Selects</h5><p>You have full control over the control, you can modify the options array of static pickers and select controls!</p><p><code-example example="fi-modify-options"></code-example></p><h5>Modifying Config on Static Pickers / Selects to mimic an Entity Picker</h5><p>You can modify a picker added to a form via field interactions to look like an entity picker!</p><p><code-example example="fi-modify-added-picker"></code-example></p><h5>Using Globals</h5><p>Using the config from above, you can figure the API to have a set of global variables that you can key off of inside your field interactions</p><p><code-example example="fi-globals"></code-example></p><h5>Async Interactions</h5><p>You can perform async interactions and keep the form from saving by setting a loading state</p><p><code-example example="fi-async"></code-example></p><h5>Confirm Changes</h5><p>You can prompt the user if they want to update the field or not too!</p><p><code-example example="fi-confirm"></code-example></p><h5>Adding / Removing Fields</h5><p>With the API you can quickly add and remove fields on the form.</p><p><strong>ONLY WORKS WITH DYNAMIC FORMS</strong></p><p><code-example example="fi-adding-removing"></code-example></p><h5>Add Tooltip</h5><p>You are able to dynamically change a field's tooltip.</p><p><code-example example="fi-tooltip"></code-example></p>`
             }] }
 ];
 class ModalPage {
