@@ -109,7 +109,17 @@ export class NovoDateTimePickerInputElement implements ControlValueAccessor {
           ),
         );
       } else if (this.datePart instanceof Date) {
-        this.dispatchOnChange(new Date(this.datePart.getFullYear(), this.datePart.getMonth(), this.datePart.getDate(), 12, 0));
+        this.timePart.setHours(12);
+        this.timePart.setMinutes(0);
+        this.dispatchOnChange(
+          new Date(
+            this.datePart.getFullYear(),
+            this.datePart.getMonth(),
+            this.datePart.getDate(),
+            this.timePart.getHours(),
+            this.timePart.getMinutes(),
+          ),
+        );
       } else {
         this.dispatchOnChange(null);
       }
