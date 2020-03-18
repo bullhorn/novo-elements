@@ -20,7 +20,7 @@ const DATE_VALUE_ACCESSOR = {
   selector: 'novo-date-time-picker-input',
   providers: [DATE_VALUE_ACCESSOR],
   template: `
-        <novo-date-picker-input [ngModel]="datePart" (ngModelChange)="updateDate($event)" [start]="start" [end]="end" [maskOptions]="maskOptions" (blurEvent)="handleBlur($event)" (focusEvent)="handleFocus($event)" [disabled]="disabled"></novo-date-picker-input>
+        <novo-date-picker-input [ngModel]="datePart" (ngModelChange)="updateDate($event)" [start]="start" [end]="end" [maskOptions]="maskOptions" (blurEvent)="handleBlur($event)" (focusEvent)="handleFocus($event)" [disabled]="disabled" [weekStart]="weekStart"></novo-date-picker-input>
         <novo-time-picker-input [ngModel]="timePart" (ngModelChange)="updateTime($event)" [military]="military" (blurEvent)="handleBlur($event)" (focusEvent)="handleFocus($event)" [disabled]="disabled"></novo-time-picker-input>
   `,
 })
@@ -51,6 +51,8 @@ export class NovoDateTimePickerInputElement implements ControlValueAccessor {
   disabled: boolean = false;
   @Input()
   format: string;
+  @Input()
+  weekStart: number = 0;
   @Output()
   blurEvent: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
   @Output()
