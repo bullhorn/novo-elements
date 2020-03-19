@@ -474,7 +474,7 @@ export class FormUtils {
     meta,
     currencyFormat,
     http,
-    config: { token?: string; restUrl?: string; military?: boolean },
+    config: { token?: string; restUrl?: string; military?: boolean, weekStart?: number },
     overrides?: any,
     forTable: boolean = false,
   ) {
