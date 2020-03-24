@@ -658,23 +658,23 @@ export class FormUtils {
   }
 
   private insertHeaderToFieldsets(fieldsets, field) {
+    const constantProperties = {
+      controls: [],
+      isEmbedded: field.dataSpecialization && field.dataSpecialization.toLowerCase() === 'embedded',
+      isInlineEmbedded: field.dataSpecialization && field.dataSpecialization.toLowerCase() === 'inline_embedded',
+      key: field.name,
+    };
     if (field.name && field.name.startsWith('customObject') && field.associatedEntity && field.associatedEntity.label) {
       fieldsets.push({
         title: field.associatedEntity.label || field.label,
         icon: field.icon || 'bhi-card-expand',
-        controls: [],
-        isEmbedded: field.dataSpecialization && field.dataSpecialization.toLowerCase() === 'embedded',
-        isInlineEmbedded: field.dataSpecialization && field.dataSpecialization.toLowerCase() === 'inline_embedded',
-        key: field.name,
+        ...constantProperties,
       });
     } else {
       fieldsets.push({
         title: field.label,
         icon: field.icon || 'bhi-section',
-        controls: [],
-        isEmbedded: field.dataSpecialization && field.dataSpecialization.toLowerCase() === 'embedded',
-        isInlineEmbedded: field.dataSpecialization && field.dataSpecialization.toLowerCase() === 'inline_embedded',
-        key: field.name,
+        ...constantProperties,
       });
     }
   }
