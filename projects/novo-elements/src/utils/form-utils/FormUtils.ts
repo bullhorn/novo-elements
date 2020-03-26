@@ -224,7 +224,7 @@ export class FormUtils {
   getControlForField(
     field: any,
     http,
-    config: { token?: string; restUrl?: string; military?: boolean },
+    config: { token?: string; restUrl?: string; military?: boolean, weekStart?: number },
     overrides?: any,
     forTable: boolean = false,
     fieldData?: any,
@@ -342,6 +342,7 @@ export class FormUtils {
         break;
       case 'datetime':
         controlConfig.military = config ? !!config.military : false;
+        controlConfig.weekStart = config && config.weekStart ? config.weekStart : 0;
         control = new DateTimeControl(controlConfig);
         break;
       case 'date':
@@ -349,6 +350,7 @@ export class FormUtils {
         controlConfig.textMaskEnabled = field.textMaskEnabled;
         controlConfig.allowInvalidDate = field.allowInvalidDate;
         controlConfig.military = config ? !!config.military : false;
+        controlConfig.weekStart = config && config.weekStart ? config.weekStart : 0;
         control = new DateControl(controlConfig);
         break;
       case 'time':
@@ -463,7 +465,8 @@ export class FormUtils {
 
     return (
       field.name !== 'id' &&
-      (field.dataSpecialization !== 'SYSTEM' || ['address', 'billingAddress', 'secondaryAddress'].indexOf(field.name) !== -1) &&
+      (!['SYSTEM', 'SECTION_HEADER'].includes(field.dataSpecialization) ||
+        ['address', 'billingAddress', 'secondaryAddress'].includes(field.name)) &&
       !field.readOnly
     );
   }
@@ -472,7 +475,7 @@ export class FormUtils {
     meta,
     currencyFormat,
     http,
-    config: { token?: string; restUrl?: string; military?: boolean },
+    config: { token?: string; restUrl?: string; military?: boolean, weekStart?: number },
     overrides?: any,
     forTable: boolean = false,
   ) {
@@ -510,7 +513,7 @@ export class FormUtils {
     meta,
     currencyFormat,
     http,
-    config: { token?: string; restUrl?: string; military?: boolean },
+    config: { token?: string; restUrl?: string; military?: boolean, weekStart?: number },
     overrides?,
     data?: { [key: string]: any },
   ) {
@@ -535,6 +538,8 @@ export class FormUtils {
               let control = this.createControl(embeddedField, data, http, config, overrides, currencyFormat);
               control = this.markControlAsEmbedded(control, field.dataSpecialization ? field.dataSpecialization.toLowerCase() : null);
               fieldsets[fieldsets.length - 1].controls.push(control);
+            } else if (this.isHeader(embeddedField)) {
+              this.insertHeaderToFieldsets(fieldsets, embeddedField);
             }
           });
         } else if (this.shouldCreateControl(field)) {
@@ -647,18 +652,33 @@ export class FormUtils {
   }
 
   private isHeader(field): boolean {
-    return !Helpers.isBlank(field) && field.hasOwnProperty('isSectionHeader') && field.isSectionHeader;
+    return (
+      !Helpers.isBlank(field) &&
+      ((field.hasOwnProperty('isSectionHeader') && field.isSectionHeader) ||
+        (field.dataSpecialization && field.dataSpecialization.toLowerCase() === 'section_header'))
+    );
   }
 
   private insertHeaderToFieldsets(fieldsets, field) {
-    fieldsets.push({
-      title: field.label,
-      icon: field.icon || 'bhi-section',
+    const constantProperties = {
       controls: [],
       isEmbedded: field.dataSpecialization && field.dataSpecialization.toLowerCase() === 'embedded',
       isInlineEmbedded: field.dataSpecialization && field.dataSpecialization.toLowerCase() === 'inline_embedded',
       key: field.name,
-    });
+    };
+    if (field.name && field.name.startsWith('customObject') && field.associatedEntity && field.associatedEntity.label) {
+      fieldsets.push({
+        title: field.associatedEntity.label || field.label,
+        icon: field.icon || 'bhi-card-expand',
+        ...constantProperties,
+      });
+    } else {
+      fieldsets.push({
+        title: field.label,
+        icon: field.icon || 'bhi-section',
+        ...constantProperties,
+      });
+    }
   }
 
   private markControlAsEmbedded(control, dataSpecialization?: 'embedded' | 'inline_embedded') {

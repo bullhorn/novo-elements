@@ -37,7 +37,7 @@ const DATE_VALUE_ACCESSOR = {
         <i *ngIf="!hasValue" (click)="openPanel()" class="bhi-calendar"></i>
         <i *ngIf="hasValue" (click)="clearValue()" class="bhi-times"></i>
         <novo-overlay-template [parent]="element" position="above-below">
-            <novo-date-picker [start]="start" [end]="end" inline="true" (onSelect)="setValueAndClose($event)" [ngModel]="value"></novo-date-picker>
+            <novo-date-picker [start]="start" [end]="end" inline="true" (onSelect)="setValueAndClose($event)" [ngModel]="value" [weekStart]="weekStart"></novo-date-picker>
         </novo-overlay-template>
   `,
 })
@@ -71,6 +71,8 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
   @HostBinding('class.disabled')
   @Input()
   disabled: boolean = false;
+  @Input()
+  weekStart: number = 0;
   @Output()
   blurEvent: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
   @Output()
