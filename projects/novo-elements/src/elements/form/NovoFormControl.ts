@@ -49,6 +49,7 @@ export class NovoFormControl extends FormControl {
   currencyFormat?: string;
   startDate?: Date | Number;
   endDate?: Date | Number;
+  weekStart?: number;
   textMaskEnabled?: boolean;
   maskOptions: IMaskOptions;
   allowInvalidDate?: boolean;
@@ -103,6 +104,7 @@ export class NovoFormControl extends FormControl {
     this.currencyFormat = control.currencyFormat;
     this.startDate = control.startDate;
     this.endDate = control.endDate;
+    this.weekStart = control.weekStart;
     this.textMaskEnabled = control.textMaskEnabled;
     this.textMaskEnabled = control.textMaskEnabled;
     this.maskOptions = control.maskOptions;

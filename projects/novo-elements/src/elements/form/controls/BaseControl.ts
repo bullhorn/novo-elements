@@ -95,6 +95,7 @@ class ControlConfig {
   };
   isEmbedded = false;
   isInlineEmbedded = false;
+  weekStart?: number;
 }
 
 export type NovoControlConfig = Partial<ControlConfig>;
@@ -187,5 +188,6 @@ export class BaseControl extends ControlConfig {
     if (config.isEmpty) {
       this.isEmpty = config.isEmpty;
     }
+    this.weekStart = config.weekStart || 0;
   }
 }
