@@ -18797,7 +18797,8 @@ class FormUtils {
             field.readOnly = false;
         }
         return (field.name !== 'id' &&
-            (field.dataSpecialization !== 'SYSTEM' || ['address', 'billingAddress', 'secondaryAddress'].indexOf(field.name) !== -1) &&
+            (!['SYSTEM', 'SECTION_HEADER'].includes(field.dataSpecialization) ||
+                ['address', 'billingAddress', 'secondaryAddress'].includes(field.name)) &&
             !field.readOnly);
     }
     /**
@@ -18899,6 +18900,9 @@ class FormUtils {
                             let control = this.createControl(embeddedField, data, http, config, overrides, currencyFormat);
                             control = this.markControlAsEmbedded(control, field.dataSpecialization ? field.dataSpecialization.toLowerCase() : null);
                             fieldsets[fieldsets.length - 1].controls.push(control);
+                        }
+                        else if (this.isHeader(embeddedField)) {
+                            this.insertHeaderToFieldsets(fieldsets, embeddedField);
                         }
                     }));
                 }
@@ -19095,7 +19099,9 @@ class FormUtils {
      * @return {?}
      */
     isHeader(field) {
-        return !Helpers.isBlank(field) && field.hasOwnProperty('isSectionHeader') && field.isSectionHeader;
+        return (!Helpers.isBlank(field) &&
+            ((field.hasOwnProperty('isSectionHeader') && field.isSectionHeader) ||
+                (field.dataSpecialization && field.dataSpecialization.toLowerCase() === 'section_header')));
     }
     /**
      * @private
@@ -19104,14 +19110,19 @@ class FormUtils {
      * @return {?}
      */
     insertHeaderToFieldsets(fieldsets, field) {
-        fieldsets.push({
-            title: field.label,
-            icon: field.icon || 'bhi-section',
+        /** @type {?} */
+        const constantProperties = {
             controls: [],
             isEmbedded: field.dataSpecialization && field.dataSpecialization.toLowerCase() === 'embedded',
             isInlineEmbedded: field.dataSpecialization && field.dataSpecialization.toLowerCase() === 'inline_embedded',
             key: field.name,
-        });
+        };
+        if (field.name && field.name.startsWith('customObject') && field.associatedEntity && field.associatedEntity.label) {
+            fieldsets.push(Object.assign({ title: field.associatedEntity.label || field.label, icon: field.icon || 'bhi-card-expand' }, constantProperties));
+        }
+        else {
+            fieldsets.push(Object.assign({ title: field.label, icon: field.icon || 'bhi-section' }, constantProperties));
+        }
     }
     /**
      * @private
