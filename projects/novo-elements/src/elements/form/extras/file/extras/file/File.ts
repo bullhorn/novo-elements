@@ -9,6 +9,7 @@ export class NovoFile {
   fileContents: string;
   dataURL: string;
   reader: FileReader = new FileReader();
+  readPromise: Function;
 
   constructor(file) {
     this.name = `${encodeURIComponent(file.name || '')}`;
@@ -20,12 +21,15 @@ export class NovoFile {
       this.fileContents = event.target.result.split(',')[1];
       this.dataURL = event.target.result;
       this.loaded = true;
+      if (this.readPromise) {
+        this.readPromise(this);
+      }
     };
   }
 
   read() {
     return new Promise((resolve) => {
-      resolve(this);
+      this.readPromise = resolve;
       // when the file is read it triggers the onload event above.
       this.reader.readAsDataURL(this.file);
     });
