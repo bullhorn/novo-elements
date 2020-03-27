@@ -23,10 +23,20 @@ describe('Class: NovoFile', () => {
   });
 
   describe('Method: read()', () => {
-    it('should read files.', () => {
-      jest.spyOn(file.reader, 'readAsDataURL').mockImplementation(() => {});
-      file.read();
-      expect(file.reader.readAsDataURL).toHaveBeenCalled();
+    it('should read files.', async () => {
+      return new Promise((resolve) => {
+        jest.spyOn(file.reader, 'readAsDataURL').mockImplementation(() => {});
+        file.read().then(() => {
+          expect(file.fileContents).toEqual('The contents');
+          resolve(true);
+        });
+        expect(file.reader.readAsDataURL).toHaveBeenCalled();
+        file.reader.onload({
+          target: {
+            result: 'First,The contents',
+          },
+        } as any);
+      });
     });
   });
 
