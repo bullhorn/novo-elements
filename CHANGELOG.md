@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.3.0](https://github.com/bullhorn/novo-elements/compare/v4.2.0...v4.3.0) (2020-03-31)
+
+
+### Features
+
+* **entity-picker-fi:** Set result template inline ([#1085](https://github.com/bullhorn/novo-elements/issues/1085)) ([c661d42](https://github.com/bullhorn/novo-elements/commit/c661d42899bce50f3ed32843395a6e8da3cd5d8c))
+* **novo-file:** Do not resolve promise for read until read is finished ([#1089](https://github.com/bullhorn/novo-elements/issues/1089)) ([433ac92](https://github.com/bullhorn/novo-elements/commit/433ac929f485f0d3fd85d56c5d44ac2a1d169dcb))
+
+
+### Bug Fixes
+
+* **css:** setting css for firefox ([#1088](https://github.com/bullhorn/novo-elements/issues/1088)) ([852e951](https://github.com/bullhorn/novo-elements/commit/852e9518066caddc1f2616bbf410587936275c6c))
+
 ## [4.2.0](https://github.com/bullhorn/novo-elements/compare/v4.0.1...v4.2.0) (2020-03-03)
 
 
