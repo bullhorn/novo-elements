@@ -80,19 +80,25 @@ export class Formats {
   public formatDate(value: any, format?: string | Intl.DateTimeFormatOptions): string {
     const _value = value === null || value === undefined || value === '' ? new Date() : new Date(value);
     const options: Intl.DateTimeFormatOptions = this.getDateOptions(format);
-    const locales = [ ...(this.overrideDateFormat ? [this.overrideDateFormat] : []), this.locale, 'en-US'];
-    return new Intl.DateTimeFormat(locales, options).format(_value);
+    const locales = [...(this.overrideDateFormat ? [this.overrideDateFormat] : []), this.locale, 'en-US'];
+    let formattedDate = new Intl.DateTimeFormat(locales, options).format(_value);
+    if (!this.use24HourTime) {
+      formattedDate = formattedDate.startsWith('0:') ? '12' + formattedDate.substring(1) : formattedDate;
+    }
+    return formattedDate;
   }
 
   public formatTime(value: any, format?: string | Intl.DateTimeFormatOptions): string {
-    const _value = (value === null || value === undefined || value === '') ? new Date() : new Date(value);
+    const _value = value === null || value === undefined || value === '' ? new Date() : new Date(value);
     const options: Intl.DateTimeFormatOptions = this.getDateOptions(format);
-    const locales = [ ...(this.overrideDateFormat ? [this.overrideDateFormat] : []), this.locale, 'en-US'];
-    const timeParts: { [p: string]: string } = Intl.DateTimeFormat(locales, options).formatToParts(_value).reduce((obj, part) => {
-      obj[part.type] = part.value;
-      return obj;
-    }, {});
-    const dayPeriodPropertyName = Object.keys(timeParts).find(n => n.toLowerCase() === 'dayperiod');
+    const locales = [...(this.overrideDateFormat ? [this.overrideDateFormat] : []), this.locale, 'en-US'];
+    const timeParts: { [p: string]: string } = Intl.DateTimeFormat(locales, options)
+      .formatToParts(_value)
+      .reduce((obj, part) => {
+        obj[part.type] = part.value;
+        return obj;
+      }, {});
+    const dayPeriodPropertyName = Object.keys(timeParts).find((n) => n.toLowerCase() === 'dayperiod');
     const dayperiod = timeParts[dayPeriodPropertyName] || '';
     return `${timeParts.hour}:${timeParts.minute}${dayperiod}`;
   }
