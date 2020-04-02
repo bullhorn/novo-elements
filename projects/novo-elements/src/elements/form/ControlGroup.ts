@@ -243,7 +243,10 @@ export class NovoControlGroup implements AfterContentInit, OnChanges {
   private checkCanRemove(index: number): boolean {
     if (this.canRemove) {
       const control: FormArray = <FormArray>this.form.controls[this.key];
-      return this.canRemove(control.at(index).value, index);
+      if (control.at(index)) {
+        return this.canRemove(control.at(index).value, index);
+      }
+      return true;
     }
     return true;
   }

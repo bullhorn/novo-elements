@@ -14,6 +14,7 @@ export { NovoModalModule } from './elements/modal/Modal.module';
 export { NovoQuickNoteModule } from './elements/quick-note/QuickNote.module';
 export { NovoRadioModule } from './elements/radio/Radio.module';
 export { NovoDropdownModule } from './elements/dropdown/Dropdown.module';
+export { NovoDropdownElement } from './elements/dropdown/Dropdown';
 export { NovoSelectModule } from './elements/select/Select.module';
 export { NovoListModule } from './elements/list/List.module';
 export { NovoSwitchModule } from './elements/switch/Switch.module';
@@ -71,7 +72,7 @@ export {
   TabbedGroupPickerTab,
   QuickSelectConfig,
   TabbedGroupPickerQuickSelect,
-  TabbedGroupPickerButtonConfig
+  TabbedGroupPickerButtonConfig,
 } from './elements/tabbed-group-picker/TabbedGroupPicker';
 export { NovoTabbedGroupPickerModule } from './elements/tabbed-group-picker/TabbedGroupPicker.module';
 // Export specific elements that are used in local references and/or view children
