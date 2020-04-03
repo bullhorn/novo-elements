@@ -80,12 +80,8 @@ export class Formats {
   public formatDate(value: any, format?: string | Intl.DateTimeFormatOptions): string {
     const _value = value === null || value === undefined || value === '' ? new Date() : new Date(value);
     const options: Intl.DateTimeFormatOptions = this.getDateOptions(format);
-    const locales = [...(this.overrideDateFormat ? [this.overrideDateFormat] : []), this.locale, 'en-US'];
-    let formattedDate = new Intl.DateTimeFormat(locales, options).format(_value);
-    if (this.use24HourTime) {
-      formattedDate = formattedDate.startsWith('24') ? '0' + formattedDate.substring(2) : formattedDate;
-    }
-    return formattedDate;
+    const locales = [ ...(this.overrideDateFormat ? [this.overrideDateFormat] : []), this.locale, 'en-US'];
+    return new Intl.DateTimeFormat(locales, options).format(_value);
   }
 
   public formatTime(value: any, format?: string | Intl.DateTimeFormatOptions): string {
