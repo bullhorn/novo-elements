@@ -162,12 +162,13 @@ export class NovoLabelService {
     if (date.getTime() !== date.getTime()) {
       return value;
     }
-    const timeParts: { [type: string]: string } = Intl.DateTimeFormat(this.userLocale, format)
+    let timeParts: { [type: string]: string } = Intl.DateTimeFormat(this.userLocale, format)
       .formatToParts(date)
       .reduce((obj, part) => {
         obj[part.type] = part.value;
         return obj;
       }, {});
+    timeParts.hour = timeParts.hour === '24' ? '0' : timeParts.hour;
     const dayperiod = timeParts.dayperiod ? timeParts.dayperiod : '';
     return `${timeParts.hour}:${timeParts.minute}${dayperiod}`;
   }
