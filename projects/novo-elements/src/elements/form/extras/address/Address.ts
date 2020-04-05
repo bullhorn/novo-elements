@@ -185,7 +185,7 @@ export interface NovoAddressConfig {
 export class NovoAddressElement implements ControlValueAccessor, OnInit {
   @Input()
   config: NovoAddressConfig;
-  private _readOnly: boolean = false;
+  private _readOnly = false;
   @Input()
   set readOnly(readOnly: boolean) {
     this._readOnly = readOnly;
@@ -211,7 +211,7 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
   valid: any = {};
   stateOptions: any;
   tooltip: any = {};
-  initComplete: boolean = false;
+  initComplete = false;
   @Output()
   change: EventEmitter<any> = new EventEmitter();
   @Output()
@@ -277,7 +277,7 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
   }
 
   isValid(field: string): void {
-    let valid: boolean = true;
+    let valid = true;
     if (
       ((this.config[field].required && (Helpers.isBlank(this.model[field]) || Helpers.isEmpty(this.model[field]))) ||
         !this.config[field].required) &&
@@ -305,8 +305,8 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
   }
 
   isInvalid(field: string): void {
-    let invalid: boolean = false;
-    let invalidMaxlength: boolean = false;
+    let invalid = false;
+    let invalidMaxlength = false;
     if (
       (field !== 'countryID' &&
         field !== 'state' &&
@@ -357,7 +357,7 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
   onCountryChange(evt) {
     const country: any = evt && evt.rawValue ? evt.rawValue : null;
     let field: any;
-    let statesUpdatable: boolean = false;
+    let statesUpdatable = false;
     this.config.countryID.updated = true;
     if (this.config.countryID.pickerConfig) {
       field = this.config.countryID.pickerConfig.field;
@@ -441,10 +441,10 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
     }
   }
 
-  getStateOptions(filter: string = '', countryID: number): any[] {
+  getStateOptions(filter = '', countryID: number) {
     if (countryID) {
-      const country: any = findByCountryId(countryID);
-      const states: any[] = getStates(country.name);
+      const country = findByCountryId(countryID);
+      const states = getStates(country.name);
       if (filter) {
         return states.filter((name) => new RegExp(`${filter}`, 'gi').test(name));
       }
@@ -460,8 +460,8 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
     this.onInput(null, 'state');
   }
 
-  writeValue(model: any): void {
-    let loadingCountries: boolean = false;
+  writeValue(model) {
+    let loadingCountries = false;
     if (model) {
       let countryName;
       if (model.countryName && model.countryID) {
@@ -469,10 +469,10 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
       } else if (model.countryID) {
         if (this.config.countryID.pickerConfig && this.config.countryID.pickerConfig.getLabels) {
           if (Helpers.isFunction(this.config.countryID.pickerConfig.getLabels)) {
-            const promise: any = this.config.countryID.pickerConfig.getLabels(model.countryID);
+            const promise  = this.config.countryID.pickerConfig.getLabels(model.countryID);
             loadingCountries = true;
             if (promise.then) {
-              promise.then((result: any) => {
+              promise.then((result) => {
                 loadingCountries = false;
                 countryName = Helpers.interpolateWithFallback(this.config.countryID.pickerConfig.format, result);
                 this.model = Object.assign(model, { countryName });
@@ -506,7 +506,7 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
     this.onModelTouched = fn;
   }
 
-  private getDefaultStateConfig(): any {
+  private getDefaultStateConfig() {
     return {
       field: 'value',
       format: '$label',
@@ -519,11 +519,11 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
     };
   }
 
-  private getDefaultCountryConfig(): any {
+  private getDefaultCountryConfig() {
     return {
       field: 'value',
       format: '$label',
-      options: (query: string = '') => {
+      options: (query = '') => {
         return new Promise((resolve) => {
           let countries = COUNTRIES;
           if (query) {

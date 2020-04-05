@@ -153,7 +153,7 @@ export class ArrayCollection<T> implements Collection<T> {
    *
    * @memberOf ArrayCollection
    */
-  copy(array: any[]): any[] {
+  copy(array: any[]) {
     return Helpers.deepClone(array);
   }
 

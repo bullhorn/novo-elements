@@ -22,7 +22,7 @@ export class NovoFormControl extends FormControl {
   removeTooltipArrow?: boolean;
   tooltipAutoPosition?: boolean;
   initialValue: any;
-  valueHistory: any[] = [];
+  valueHistory = [];
   validators: any;
   config: any;
   sortOrder: number;
