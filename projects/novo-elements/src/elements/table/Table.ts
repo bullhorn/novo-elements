@@ -275,7 +275,7 @@ export class NovoTableElement implements DoCheck {
   public NovoTableMode = NovoTableMode;
   public tableForm: FormGroup = new FormGroup({});
   public toast: { theme: string; icon: string; message: string };
-  public footers: any[] = [];
+  public footers = [];
   public grossFlagToAvoidTheTableFromBeingUglyWhenHidingTheToast: boolean = false;
   public loading: boolean = false;
 

@@ -96,7 +96,7 @@ export class AppBridge {
   public traceName: string;
   public windowName: string;
 
-  private _registeredFrames: any[] = [];
+  private _registeredFrames = [];
   private _handlers = {};
   private _tracing: boolean = false;
   private _eventListeners: any = {};

@@ -7,7 +7,7 @@ export class Security {
   change: EventEmitter<any> = new EventEmitter();
 
   grant(data: any[] | Object): void {
-    const parsed: any[] = [];
+    const parsed = [];
     if (data instanceof Array) {
       for (const permission of data) {
         parsed.push(permission.replace(/\s/gi, ''));
@@ -48,7 +48,7 @@ export class Security {
     routes: { entities?: any[]; permissions?: any[] | Function; path?: string; label?: string; canDisable?: Boolean }[],
     options: { entityType?: string },
   ): any {
-    const filtered: any[] = [];
+    const filtered = [];
     for (const route of routes) {
       if (route.entities && ~route.entities.indexOf(options.entityType)) {
         if (route.permissions instanceof Function) {
