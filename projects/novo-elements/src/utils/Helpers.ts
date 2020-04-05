@@ -130,7 +130,7 @@ export class Helpers {
     return obj instanceof Date;
   }
 
-  static convertToArray(obj: unknown): any[] {
+  static convertToArray(obj: unknown) {
     if (obj === undefined) {
       return [];
     } else if (!Array.isArray(obj)) {

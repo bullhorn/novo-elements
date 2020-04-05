@@ -17546,7 +17546,7 @@ export function findByCountryCode(
  * Gets states by country name
  * @param name - Name of the country to search by
  */
-export function getStateObjects(name: string): any[] {
+export function getStateObjects(name: string) {
   if (name) {
     const foundCountry = COUNTRIES.find((country) => country.name === name.trim());
     return (foundCountry && foundCountry.states) || [];

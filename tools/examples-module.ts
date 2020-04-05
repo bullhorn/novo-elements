@@ -167,7 +167,7 @@ function convertToDashCase(name: string): string {
 function parseExampleMetadata(fileName: string, sourceContent: string): ParsedMetadataResults {
   const sourceFile = ts.createSourceFile(fileName, sourceContent, ts.ScriptTarget.Latest, false, ts.ScriptKind.TS);
 
-  const metas: any[] = [];
+  const metas = [];
 
   const visit = (node: any): void => {
     if (node.kind === ts.SyntaxKind.ClassDeclaration) {

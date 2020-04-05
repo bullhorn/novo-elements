@@ -10,7 +10,7 @@ import { Security } from 'novo-elements';
   styleUrls: ['security-example.css'],
 })
 export class SecurityExample {
-  perms: any[] = [];
+  perms = [];
 
   constructor(private security: Security) {}
 
@@ -21,7 +21,7 @@ export class SecurityExample {
     this.security.grant(this.perms);
   }
 
-  shuffle(array: string[]): any[] {
+  shuffle(array: string[]) {
     let currentIndex: number = array.length;
     let temporaryValue: string;
     let randomIndex: number;
