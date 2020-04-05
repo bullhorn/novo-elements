@@ -152,7 +152,7 @@ export class AddressControlExample {
     this.addressForm = formUtils.toFormGroup(this.addressFormControls);
   }
 
-  getStateOptions(filter: string = '', countryID: number): any[] {
+  getStateOptions(filter: string = '', countryID: number) {
     let states: any[] = this.states;
     if (countryID) {
       states = states.filter((state: any) => state.countryId === countryID);
@@ -173,7 +173,7 @@ export class AddressControlExample {
     return '';
   }
 
-  getCountryOptions(filter?: string): any[] {
+  getCountryOptions(filter?: string) {
     let countries: any = [
       {
         value: 2356,
