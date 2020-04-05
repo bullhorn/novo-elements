@@ -108,14 +108,14 @@ export class NovoDataTablePagination<T> implements OnInit, OnDestroy {
   @Input() dataFeatureId: string;
 
   @Input()
-  get pageSizeOptions(): any[] {
+  get pageSizeOptions() {
     return this._pageSizeOptions;
   }
   set pageSizeOptions(pageSizeOptions: any[]) {
     this._pageSizeOptions = pageSizeOptions;
     this.updateDisplayedPageSizeOptions();
   }
-  private _pageSizeOptions: any[] = [];
+  private _pageSizeOptions = [];
 
   @Input()
   get length(): number {

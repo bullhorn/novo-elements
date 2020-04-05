@@ -1,6 +1,6 @@
 // NG2
 import { Injectable, Inject, Optional, LOCALE_ID } from '@angular/core';
-import DateTimeFormatPart = Intl.DateTimeFormatPart;
+//  import DateTimeFormatPart = Intl.DateTimeFormatPart;
 
 interface TimeFormatParts {
   hour: string;
@@ -107,8 +107,8 @@ export class NovoLabelService {
   constructor(
     @Optional()
     @Inject(LOCALE_ID)
-    public userLocale: string = 'en-US',
-  ) {}
+    public userLocale = 'en-US',
+  ) { }
 
   maxlengthMetWithField(field: string, maxlength: number): string {
     return `Sorry, you have reached the maximum character count of ${maxlength} for ${field}.`;
@@ -138,7 +138,7 @@ export class NovoLabelService {
     return `Showing ${shown} of ${total} Results.`;
   }
 
-  totalRecords(total: number, select: boolean = false) {
+  totalRecords(total: number, select = false) {
     return select ? `Select all ${total} records.` : `De-select remaining ${total} records.`;
   }
 
@@ -157,6 +157,10 @@ export class NovoLabelService {
     }
     return new Intl.DateTimeFormat(this.userLocale, format).format(date);
   }
+
+  formatToTimeOnly(param) { }
+
+  formatToDateOnly(param) { }
 
   formatTimeWithFormat(value: any, format: Intl.DateTimeFormatOptions): string {
     const date = value instanceof Date ? value : new Date(value);
@@ -251,11 +255,11 @@ export class NovoLabelService {
     return _value;
   }
 
-  formatNumber(value: any, options?: Intl.NumberFormatOptions): string {
+  formatNumber(value, options?: Intl.NumberFormatOptions) {
     return new Intl.NumberFormat(this.userLocale, options).format(value);
   }
 
-  formatDateShort(value: any): string {
+  formatDateShort(value: string | number | Date) {
     const options: Intl.DateTimeFormatOptions = {
       // DD/MM/YYYY, HH:MM A - 02/14/2017, 1:17 PM
       month: '2-digit',
@@ -268,7 +272,7 @@ export class NovoLabelService {
     return new Intl.DateTimeFormat(this.userLocale, options).format(_value);
   }
 
-  formatTime(value: any): string {
+  formatTime(value: string | number | Date) {
     const options: Intl.DateTimeFormatOptions = {
       // HH:MM A - 1:17 PM
       hour: 'numeric',
@@ -278,7 +282,7 @@ export class NovoLabelService {
     return new Intl.DateTimeFormat(this.userLocale, options).format(_value);
   }
 
-  formatDate(value: any): string {
+  formatDate(value: string | number | Date) {
     const options: Intl.DateTimeFormatOptions = {
       // DD/MM/YYYY - 02/14/2017
       month: '2-digit',
