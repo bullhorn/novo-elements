@@ -28,17 +28,20 @@ novo-tiles {
       z-index: 1;
       position: relative;
       cursor: pointer;
+      font-weight: 500;
+      letter-spacing: 0.02em;
       &:not(:last-child) {
         border-right: solid thin $ocean;
       }
       &:not(.disabled) {
-        font-weight: 900;
         color: $ocean;
       }
       &:not(.disabled).active {
         box-shadow: inset 3px 2px 4px 0px rgba(0, 0, 0, 0.3);
         color: $white;
         background: $ocean;
+      }
+      &.active {
         font-weight: 900;
       }
       &:hover {
@@ -50,7 +53,6 @@ novo-tiles {
       label {
         z-index: 1;
         position: relative;
-        font-weight: 900;
         cursor: inherit;
       }
     }
