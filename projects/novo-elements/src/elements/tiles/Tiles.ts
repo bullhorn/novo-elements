@@ -13,7 +13,6 @@ import {
   ChangeDetectionStrategy,
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
-import { animate, state, style, transition, trigger } from '@angular/animations';
 // APP
 import { Helpers } from '../../utils/Helpers';
 
@@ -53,24 +52,6 @@ const TILES_VALUE_ACCESSOR = {
       </div>
     </div>
   `,
-  animations: [
-    trigger('tileState', [
-      state(
-        'inactive',
-        style({
-          opacity: '0',
-        }),
-      ),
-      state(
-        'active',
-        style({
-          opacity: '1',
-        }),
-      ),
-      transition('inactive => active', animate('200ms ease-in')),
-      transition('active => inactive', animate('200ms ease-out')),
-    ]),
-  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NovoTilesElement implements ControlValueAccessor, AfterContentInit, OnChanges {
@@ -91,7 +72,6 @@ export class NovoTilesElement implements ControlValueAccessor, AfterContentInit,
 
   _options: Array<any> = [];
   public activeTile: any = null;
-  public state: String = 'inactive';
   public focused: boolean = false;
 
   model: any;
@@ -168,23 +148,8 @@ export class NovoTilesElement implements ControlValueAccessor, AfterContentInit,
   setTile(item) {
     if (item) {
       this.activeTile = item.value;
-      this.moveTile();
+      this.ref.markForCheck();
     }
-  }
-
-  moveTile() {
-    setTimeout(() => {
-      const ind = this.element.nativeElement.querySelector('.active-indicator');
-      const el = this.element.nativeElement.querySelector('.tile.active');
-      if (ind && el) {
-        const w: number = el.clientWidth;
-        const left: number = el.offsetLeft - el.offsetTop; // Removes the border width that Firefox adds without affecting other browsers
-        ind.style.width = `calc(${w}px + 0.32em)`;
-        ind.style.left = `${left}px`;
-        this.state = 'active';
-        this.ref.markForCheck();
-      }
-    });
   }
 
   writeValue(model: any): void {
