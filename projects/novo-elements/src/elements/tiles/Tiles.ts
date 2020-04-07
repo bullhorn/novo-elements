@@ -51,7 +51,6 @@ const TILES_VALUE_ACCESSOR = {
           {{ option.label || option }}
         </label>
       </div>
-      <span class="active-indicator" [@tileState]="state" [hidden]="activeTile === undefined || activeTile === null"></span>
     </div>
   `,
   animations: [

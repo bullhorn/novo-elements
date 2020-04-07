@@ -20,29 +20,38 @@ novo-tiles {
     border: solid thin $ocean;
     border-radius: $border-radius;
     position: relative;
-    cursor: pointer;
     align-items: center;
     .tile {
-      padding: 7px 15px;
-      line-height: 1.5em;
+      padding: 8px 12px;
+      line-height: 1em;
       height: 100%;
       z-index: 1;
       position: relative;
       cursor: pointer;
+      &:not(:last-child) {
+        border-right: solid thin $ocean;
+      }
       &:not(.disabled) {
-        font-weight: 500;
+        font-weight: 900;
         color: $ocean;
       }
       &:not(.disabled).active {
-        box-shadow: inset 0 0 9px rgba(0, 0, 0, 0.5);
+        box-shadow: inset 3px 2px 4px 0px rgba(0, 0, 0, 0.3);
         color: $white;
         background: $ocean;
-        font-weight: 700;
+        font-weight: 900;
+      }
+      &:hover {
+        box-shadow: 0 3px 7px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.15);
+      }
+      &.disabled {
+        cursor: not-allowed;
       }
       label {
         z-index: 1;
         position: relative;
-        font-weight: 500;
+        font-weight: 900;
+        cursor: inherit;
       }
     }
     &.active {
@@ -54,12 +63,5 @@ novo-tiles {
       border-color: $disabled-color;
       color: $disabled-color;
     }
-  }
-  span.active-indicator {
-    position: absolute;
-    top: -0.15em;
-    margin-left: -0.15em;
-    height: calc(100% + 0.34em);
-    width: 100%;
   }
 }
