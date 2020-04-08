@@ -44959,6 +44959,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             item.edit = _this139.checkCanEdit(idx);
             item.remove = _this139.checkCanRemove(idx);
           });
+          this.ref.markForCheck();
         }
         /**
          * @param {?=} value
