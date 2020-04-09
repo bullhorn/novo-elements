@@ -7146,7 +7146,6 @@ class NovoTilesElement {
         this.onDisabledOptionClick = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
         this._options = [];
         this.activeTile = null;
-        this.state = 'inactive';
         this.focused = false;
         this.onModelChange = (/**
          * @return {?}
@@ -7251,32 +7250,8 @@ class NovoTilesElement {
     setTile(item) {
         if (item) {
             this.activeTile = item.value;
-            this.moveTile();
+            this.ref.markForCheck();
         }
-    }
-    /**
-     * @return {?}
-     */
-    moveTile() {
-        setTimeout((/**
-         * @return {?}
-         */
-        () => {
-            /** @type {?} */
-            const ind = this.element.nativeElement.querySelector('.active-indicator');
-            /** @type {?} */
-            const el = this.element.nativeElement.querySelector('.tile.active');
-            if (ind && el) {
-                /** @type {?} */
-                const w = el.clientWidth;
-                /** @type {?} */
-                const left = el.offsetLeft - el.offsetTop;
-                ind.style.width = `calc(${w}px + 0.32em)`;
-                ind.style.left = `${left}px`;
-                this.state = 'active';
-                this.ref.markForCheck();
-            }
-        }));
     }
     /**
      * @param {?} model
@@ -7338,21 +7313,8 @@ NovoTilesElement.decorators = [
           {{ option.label || option }}
         </label>
       </div>
-      <span class="active-indicator" [@tileState]="state" [hidden]="activeTile === undefined || activeTile === null"></span>
     </div>
   `,
-                animations: [
-                    Object(_angular_animations__WEBPACK_IMPORTED_MODULE_9__["trigger"])('tileState', [
-                        Object(_angular_animations__WEBPACK_IMPORTED_MODULE_9__["state"])('inactive', Object(_angular_animations__WEBPACK_IMPORTED_MODULE_9__["style"])({
-                            opacity: '0',
-                        })),
-                        Object(_angular_animations__WEBPACK_IMPORTED_MODULE_9__["state"])('active', Object(_angular_animations__WEBPACK_IMPORTED_MODULE_9__["style"])({
-                            opacity: '1',
-                        })),
-                        Object(_angular_animations__WEBPACK_IMPORTED_MODULE_9__["transition"])('inactive => active', Object(_angular_animations__WEBPACK_IMPORTED_MODULE_9__["animate"])('200ms ease-in')),
-                        Object(_angular_animations__WEBPACK_IMPORTED_MODULE_9__["transition"])('active => inactive', Object(_angular_animations__WEBPACK_IMPORTED_MODULE_9__["animate"])('200ms ease-out')),
-                    ]),
-                ],
                 changeDetection: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ChangeDetectionStrategy"].OnPush
             }] }
 ];
