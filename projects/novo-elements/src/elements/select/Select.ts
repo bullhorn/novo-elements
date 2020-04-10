@@ -220,6 +220,9 @@ export class NovoSelectElement implements OnInit, OnChanges, OnDestroy, ControlV
   }
 
   clear() {
+    if (this.selected) {
+      this.selected.active = false;
+    }
     this.selected = {
       label: this.placeholder,
       value: null,
