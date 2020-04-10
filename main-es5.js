@@ -15427,6 +15427,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "clear",
         value: function clear() {
+          if (this.selected) {
+            this.selected.active = false;
+          }
+
           this.selected = {
             label: this.placeholder,
             value: null,
