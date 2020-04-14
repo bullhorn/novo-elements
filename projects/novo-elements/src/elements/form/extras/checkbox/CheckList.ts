@@ -73,7 +73,7 @@ export class NovoCheckListElement implements ControlValueAccessor, OnInit {
     this._options = [];
     if (this.options.length && !this.options[0].value) {
       this.options.forEach((option) => {
-        const formattedOption = {
+        let formattedOption = {
           value: option,
           label: option,
           checked: this.model && this.model.length && this.model.indexOf(option.value) !== -1,
@@ -82,7 +82,7 @@ export class NovoCheckListElement implements ControlValueAccessor, OnInit {
       });
     } else {
       this.options.forEach((option) => {
-        const formattedOption = option;
+        let formattedOption = option;
         formattedOption.checked = this.model && this.model.length && this.model.indexOf(option.value) !== -1;
         this._options.push(formattedOption);
       });
@@ -90,7 +90,7 @@ export class NovoCheckListElement implements ControlValueAccessor, OnInit {
   }
 
   setModel(): void {
-    const checkedOptions = this.options.filter((checkBox) => checkBox.checked).map((x) => x.value);
+    let checkedOptions = this.options.filter((checkBox) => checkBox.checked).map((x) => x.value);
     this.writeValue(checkedOptions);
   }
 
