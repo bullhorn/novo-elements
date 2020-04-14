@@ -11,6 +11,15 @@ $off-white: #f4f4f4;
 $light: #d9dadc;
 $navy: #0d2d42;
 $pulse: #3bafda;
+// New grays below are being added as placeholder.
+// Usages of similar shades will be replaced in App before removing similar legacy variables.
+$sand: #f4f4f4;
+$silver: #e2e2e2;
+$stone: #bebebe;
+$ash: #a0a0a0;
+$slate: #707070;
+$charcoal: #282828;
+
 // Analytics Colors
 $aqua: #3bafda;
 $ocean: #4a89dc;
@@ -109,6 +118,12 @@ $app-colors: (
   pulse: $pulse,
   neutral: $neutral,
   empty: $empty,
+  sand: $sand,
+  silver: $silver,
+  stone: $stone,
+  ash: $ash,
+  slate: $slate,
+  charcoal: $charcoal,
 );
 // Loading Dot Color Map
 $dot-colors: (
@@ -161,15 +176,22 @@ $dark-colors: (
   invoiceStatement: $invoiceStatement,
   submission: $submission,
   note: $note,
-  empty: $empty,
+  ash: $ash,
+  slate: $slate,
+  charcoal: $charcoal,
 );
 // Light map
 $light-colors: (
   background: $off-white,
+  background-dark: $background-dark,
   white: $white,
   grey: $grey,
   off-white: $off-white,
   light: $light,
+  empty: $empty,
+  sand: $sand,
+  silver: $silver,
+  stone: $stone,
 );
 // All colors
 $all-colors: map-merge($dark-colors, $light-colors);

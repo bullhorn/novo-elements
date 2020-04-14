@@ -30,13 +30,33 @@
         align-items: center;
         display: flex;
         position: relative;
+        &.bgc-sand,
+        &.bgc-silver,
+        &.bgc-stone,
+        &.bgc-background,
+        &.bgc-background-dark,
+        &.bgc-empty {
+          .color-text {
+            &:after {
+              content: 'Click to copy';
+              position: absolute;
+              color: rgba(0, 0, 0, 0.6);
+              left: 50%;
+              bottom: 40px;
+              font-size: 10px;
+              text-transform: uppercase;
+              transform: translateX(-50%);
+              width: 100%;
+            }
+          }
+        }
       }
     }
     .color-text {
       &:after {
         content: 'Click to copy';
         position: absolute;
-        color: rgba(255, 255, 255, 0.4);
+        color: rgba(255, 255, 255, 0.6);
         left: 50%;
         bottom: 40px;
         font-size: 10px;
