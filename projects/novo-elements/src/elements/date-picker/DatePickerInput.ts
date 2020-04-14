@@ -37,7 +37,7 @@ const DATE_VALUE_ACCESSOR = {
         <i *ngIf="!hasValue" (click)="openPanel()" class="bhi-calendar"></i>
         <i *ngIf="hasValue" (click)="clearValue()" class="bhi-times"></i>
         <novo-overlay-template [parent]="element" position="above-below">
-            <novo-date-picker [start]="start" [end]="end" inline="true" (onSelect)="setValueAndClose($event)" [ngModel]="value"></novo-date-picker>
+            <novo-date-picker [start]="start" [end]="end" inline="true" (onSelect)="setValueAndClose($event)" [ngModel]="value" [weekStart]="weekStart"></novo-date-picker>
         </novo-overlay-template>
   `,
 })
@@ -71,6 +71,8 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
   @HostBinding('class.disabled')
   @Input()
   disabled: boolean = false;
+  @Input()
+  weekStart: number = 0;
   @Output()
   blurEvent: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
   @Output()
@@ -140,16 +142,16 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
   }
 
   _handleEvent(event: Event, blur: boolean): void {
-    let value = (event.target as HTMLInputElement).value;
+    const value = (event.target as HTMLInputElement).value;
     this.formatDate(value, blur);
     this.openPanel();
   }
 
   protected formatDate(value: string, blur: boolean) {
     try {
-      let [dateTimeValue, formatted] = this.dateFormatService.parseString(value, false, 'date');
+      const [dateTimeValue, formatted] = this.dateFormatService.parseString(value, false, 'date');
       if (!isNaN(dateTimeValue.getUTCDate())) {
-        let dt = new Date(dateTimeValue);
+        const dt = new Date(dateTimeValue);
         this.dispatchOnChange(dt, blur);
       } else {
         this.dispatchOnChange(null, blur);
@@ -199,7 +201,7 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
 
   private _setFormValue(value: any): void {
     if (this.value) {
-      let test = this.formatDateValue(this.value);
+      const test = this.formatDateValue(this.value);
       this.formattedValue = test;
     }
   }
@@ -225,7 +227,7 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
   }
 
   public formatDateValue(value) {
-    let originalValue = value;
+    const originalValue = value;
     try {
       if (!value) {
         return '';

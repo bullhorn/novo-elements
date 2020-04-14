@@ -2,6 +2,57 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.3.4](https://github.com/bullhorn/novo-elements/compare/v4.3.3...v4.3.4) (2020-04-08)
+
+
+### Features
+
+* **visibility:** expose NovoDropdownElement ([#1090](https://github.com/bullhorn/novo-elements/issues/1090)) ([3362a11](https://github.com/bullhorn/novo-elements/commit/3362a113be12272ec8ffb70f176ac2f1bf219de4))
+
+
+### Bug Fixes
+
+* **controlgroup:** added null check to checkCanRemove method ([#1091](https://github.com/bullhorn/novo-elements/issues/1091)) ([574e03c](https://github.com/bullhorn/novo-elements/commit/574e03c10ce29555701aab3b52e06590b6f12745))
+
+### [4.3.3](https://github.com/bullhorn/novo-elements/compare/v4.3.2...v4.3.3) (2020-03-31)
+
+### [4.3.1](https://github.com/bullhorn/novo-elements/compare/v4.3.2...v4.3.1) (2020-03-31)
+
+### [4.3.2](https://github.com/bullhorn/novo-elements/compare/v4.3.1...v4.3.2) (2020-03-31)
+
+### [4.3.1](https://github.com/bullhorn/novo-elements/compare/v4.3.0...v4.3.1) (2020-03-31)
+
+## [4.3.0](https://github.com/bullhorn/novo-elements/compare/v4.2.0...v4.3.0) (2020-03-31)
+
+
+### Features
+
+* **entity-picker-fi:** Set result template inline ([#1085](https://github.com/bullhorn/novo-elements/issues/1085)) ([c661d42](https://github.com/bullhorn/novo-elements/commit/c661d42899bce50f3ed32843395a6e8da3cd5d8c))
+* **novo-file:** Do not resolve promise for read until read is finished ([#1089](https://github.com/bullhorn/novo-elements/issues/1089)) ([433ac92](https://github.com/bullhorn/novo-elements/commit/433ac929f485f0d3fd85d56c5d44ac2a1d169dcb))
+
+
+### Bug Fixes
+
+* **css:** setting css for firefox ([#1088](https://github.com/bullhorn/novo-elements/issues/1088)) ([852e951](https://github.com/bullhorn/novo-elements/commit/852e9518066caddc1f2616bbf410587936275c6c))
+
+## [4.2.0](https://github.com/bullhorn/novo-elements/compare/v4.0.1...v4.2.0) (2020-03-03)
+
+
+### Features
+
+* **control:** added check that prevents embedded field name being ad… ([#1078](https://github.com/bullhorn/novo-elements/issues/1078)) ([7884699](https://github.com/bullhorn/novo-elements/commit/7884699fc02604d6eeb6881b1e4737d8de41e880))
+* **fieldset:** added key property to fieldset and added FI for fieldset header ([#1081](https://github.com/bullhorn/novo-elements/issues/1081)) ([0f8b3d1](https://github.com/bullhorn/novo-elements/commit/0f8b3d1ca1de525b9a2f7372ae74c023442c0f95))
+* **FormUtils:** Allow distributionLists field to have controls ([#1068](https://github.com/bullhorn/novo-elements/issues/1068)) ([f350cd3](https://github.com/bullhorn/novo-elements/commit/f350cd3ebc7beae455b5ba36f3e96c3e70ab5161))
+* **inlineEmbeddedFields:** Allow inline embedded associated entity f… ([#1080](https://github.com/bullhorn/novo-elements/issues/1080)) ([76d35ce](https://github.com/bullhorn/novo-elements/commit/76d35ce1b1e29cc7625feb3d30e5c6b6917dc06b))
+* **tiles:** enhanced to handle passed options ([#1061](https://github.com/bullhorn/novo-elements/issues/1061)) ([acbeed9](https://github.com/bullhorn/novo-elements/commit/acbeed9d527e0e67a1e21ad1872462c8dd6010f4))
+
+
+### Bug Fixes
+
+* **DataTableSource:** Stop showing empty state when user clears sticky filter with no results ([#1066](https://github.com/bullhorn/novo-elements/issues/1066)) ([1f9fc0e](https://github.com/bullhorn/novo-elements/commit/1f9fc0ecc6ded9326fbc83bfc8c134bcc715b6fd))
+* **Editor:** Fix the creation logic of CKEditor element within dynamic forms ([#1073](https://github.com/bullhorn/novo-elements/issues/1073)) ([0b9e88f](https://github.com/bullhorn/novo-elements/commit/0b9e88faaef83196fc2c546dfa715249a16a51c7))
+* **FormUtils:** Don't allow distributionLists field to have controls ([#1074](https://github.com/bullhorn/novo-elements/issues/1074)) ([fea0d38](https://github.com/bullhorn/novo-elements/commit/fea0d384e477d9a682c3b46bb15de407ba40a613))
+
 ## [4.1.0](https://github.com/bullhorn/novo-elements/compare/v4.0.1...v4.1.0) (2020-02-04)
 
 

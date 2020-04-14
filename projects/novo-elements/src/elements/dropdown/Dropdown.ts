@@ -84,7 +84,7 @@ export class NovoDropdownElement implements OnInit, OnDestroy {
       notify(`'appendToBody' has been deprecated. Please remove this attribute.`);
     }
     // Add a click handler to the button to toggle the menu
-    let button = this.element.nativeElement.querySelector('button');
+    const button = this.element.nativeElement.querySelector('button');
     button.addEventListener('click', this.clickHandler);
     if (this.parentScrollSelector) {
       this.parentScrollElement = Helpers.findAncestor(this.element.nativeElement, this.parentScrollSelector);
@@ -93,7 +93,7 @@ export class NovoDropdownElement implements OnInit, OnDestroy {
 
   public ngOnDestroy(): void {
     // Remove listener
-    let button = this.element.nativeElement.querySelector('button');
+    const button = this.element.nativeElement.querySelector('button');
     if (button) {
       button.removeEventListener('click', this.clickHandler);
     }
@@ -202,9 +202,9 @@ export class NovoDropdownElement implements OnInit, OnDestroy {
       this.filterTermTimeout = setTimeout(() => {
         this.filterTerm = '';
       }, 2000);
-      let char = String.fromCharCode(event.keyCode);
+      const char = String.fromCharCode(event.keyCode);
       this.filterTerm = this.filterTerm.concat(char);
-      let index = this._textItems.findIndex((value: string) => {
+      const index = this._textItems.findIndex((value: string) => {
         return new RegExp(`^${this.filterTerm.toLowerCase()}`).test(value.trim().toLowerCase());
       });
       if (index !== -1) {
@@ -234,8 +234,8 @@ export class NovoDropdownElement implements OnInit, OnDestroy {
   }
 
   private scrollToActive(): void {
-    let container = this.overlay.overlayRef.overlayElement.querySelector('.dropdown-container');
-    let item = this._items.toArray()[this.activeIndex];
+    const container = this.overlay.overlayRef.overlayElement.querySelector('.dropdown-container');
+    const item = this._items.toArray()[this.activeIndex];
     if (container && item) {
       container.scrollTop = item.element.nativeElement.offsetTop;
     }

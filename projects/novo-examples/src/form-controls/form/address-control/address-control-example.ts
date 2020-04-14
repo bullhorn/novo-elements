@@ -125,7 +125,7 @@ export class AddressControlExample {
             },
             getLabels: (value: number) => {
               return new Promise((resolve: any) => {
-                let country: any = findByCountryId(value);
+                const country: any = findByCountryId(value);
                 if (country) {
                   resolve({ value: country.id, label: country.name });
                 } else {
@@ -164,7 +164,7 @@ export class AddressControlExample {
   }
 
   getStateLabel(value: number): string {
-    let state: any = this.states.find((s: any) => {
+    const state: any = this.states.find((s: any) => {
       return s.value === value;
     });
     if (state && state.label) {

@@ -90,8 +90,8 @@ export class CardElement implements OnChanges, OnInit {
     this.config = this.config || {};
     this.cardAutomationId = `${(this.title || this.config.title || 'no-title').toLowerCase().replace(/\s/g, '-')}-card`;
 
-    let newIcon: string = this.icon || this.config.icon;
-    let newMessageIcon: string = this.messageIcon || this.config.messageIcon;
+    const newIcon: string = this.icon || this.config.icon;
+    const newMessageIcon: string = this.messageIcon || this.config.messageIcon;
     this.iconClass = newIcon ? `bhi-${newIcon}` : null;
     this.messageIconClass = newMessageIcon ? `bhi-${newMessageIcon}` : null;
   }

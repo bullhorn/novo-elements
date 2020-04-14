@@ -3,8 +3,8 @@ import { DataTableState } from '../state/data-table-state.service';
 
 describe('Directive: sort-filter', () => {
   describe('Function: filter', () => {
-    let testState: DataTableState<{}> = new DataTableState();
-    let directive: NovoDataTableSortFilter<{}> = new NovoDataTableSortFilter(testState);
+    const testState: DataTableState<{}> = new DataTableState();
+    const directive: NovoDataTableSortFilter<{}> = new NovoDataTableSortFilter(testState);
 
     it('should set state filter to results', () => {
       directive.filter('test', 'text', 'test', undefined, false, { label: 'test', value: 1 });
@@ -25,8 +25,8 @@ describe('Directive: sort-filter', () => {
   });
 
   describe('Function: sort', () => {
-    let testState: DataTableState<{}> = new DataTableState();
-    let directive: NovoDataTableSortFilter<{}> = new NovoDataTableSortFilter(testState);
+    const testState: DataTableState<{}> = new DataTableState();
+    const directive: NovoDataTableSortFilter<{}> = new NovoDataTableSortFilter(testState);
 
     it('should set state sort to results', () => {
       directive.sort('test', 'test', undefined);
@@ -35,8 +35,8 @@ describe('Directive: sort-filter', () => {
   });
 
   describe('Function: resolveMultiFilter', () => {
-    let testState: DataTableState<{}> = new DataTableState();
-    let directive: NovoDataTableSortFilter<{}> = new NovoDataTableSortFilter(testState);
+    const testState: DataTableState<{}> = new DataTableState();
+    const directive: NovoDataTableSortFilter<{}> = new NovoDataTableSortFilter(testState);
 
     it('should return an array of results', () => {
       testState.filter = { id: 'test', type: 'text', transform: undefined, value: 'test' };

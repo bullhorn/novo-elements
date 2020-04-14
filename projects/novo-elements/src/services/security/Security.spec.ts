@@ -2,7 +2,7 @@
 import { Security } from './Security';
 
 describe('Services: Security', () => {
-  let service: Security = new Security();
+  const service: Security = new Security();
 
   describe('Method: grant()', () => {
     it('should be defined.', () => {
@@ -11,13 +11,13 @@ describe('Services: Security', () => {
       service.grant([]);
     });
     it('should handle array of values', () => {
-      let permissions = ['A', 'B', 'C'];
+      const permissions = ['A', 'B', 'C'];
       service.clear();
       service.grant(permissions);
       expect(service.credentials).toEqual(permissions);
     });
     it('should handle an object with arrays of values', () => {
-      let permissions = {
+      const permissions = {
         one: ['A', 'B', 'C'],
         two: ['D'],
       };

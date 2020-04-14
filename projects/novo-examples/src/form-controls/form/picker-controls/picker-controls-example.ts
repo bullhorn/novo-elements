@@ -25,8 +25,8 @@ export class PickerControlsExample {
   public pickerForm: any;
 
   constructor(private formUtils: FormUtils) {
-    let fruits = ['Apples', 'Oranges', 'Bananas', 'Grapes'];
-    let cities = [
+    const fruits = ['Apples', 'Oranges', 'Bananas', 'Grapes'];
+    const cities = [
       {
         id: 1,
         name: 'Boston',
@@ -52,7 +52,7 @@ export class PickerControlsExample {
         name: 'Chicago',
       },
     ];
-    let states = [
+    const states = [
       {
         value: 'ME',
         label: 'Maine',
@@ -272,7 +272,7 @@ export class PickerControlsExample {
         },
       },
     });
-    let controls = [
+    const controls = [
       this.singlePickerControl,
       this.multiPickerControl,
       this.entityMultiPickerControl,

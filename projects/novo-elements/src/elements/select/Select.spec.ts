@@ -8,7 +8,7 @@ import { KeyCodes } from '../../utils/key-codes/KeyCodes';
 import { NovoLabelService } from '../../services/novo-label-service';
 
 const KeyEvent = (code) => {
-  let event: any = document.createEvent('Event');
+  const event: any = document.createEvent('Event');
   event.keyCode = code;
   return event;
 };
@@ -89,7 +89,11 @@ describe('Elements: NovoSelectElement', () => {
     it('should invoke select', () => {
       spyOn(comp.onSelect, 'emit');
       comp.createdItem = 'baz';
-      comp.options = [{ label: 'foo', value: 'foo' }, { label: 'bar', value: 'bar' }, { label: 'baz', value: 'baz' }];
+      comp.options = [
+        { label: 'foo', value: 'foo' },
+        { label: 'bar', value: 'bar' },
+        { label: 'baz', value: 'baz' },
+      ];
       comp.ngOnChanges();
       expect(comp.selectedIndex).toEqual(2);
       expect(comp.selected).toEqual({ label: 'baz', value: 'baz', active: true });
@@ -210,6 +214,15 @@ describe('Elements: NovoSelectElement', () => {
         active: false,
       });
     });
+    it('should set active to false on previously selected object', () => {
+      const prevSelected = (comp.selected = {
+        label: 'foo',
+        value: 'bar',
+        active: true,
+      });
+      comp.clear();
+      expect(prevSelected.active).toEqual(false);
+    });
     it('should set header', () => {
       comp.header = {
         open: true,
@@ -264,7 +277,11 @@ describe('Elements: NovoSelectElement', () => {
       };
       comp.selectedIndex = 1;
       comp.header = { open: true };
-      comp.filteredOptions = [{ value: 'foo', label: 'foo' }, { value: 'bar', label: 'bar' }, { value: 'baz', label: 'baz' }];
+      comp.filteredOptions = [
+        { value: 'foo', label: 'foo' },
+        { value: 'bar', label: 'bar' },
+        { value: 'baz', label: 'baz' },
+      ];
       comp.overlay = {
         overlayRef: {
           overlayElement: {
@@ -286,7 +303,11 @@ describe('Elements: NovoSelectElement', () => {
       };
       comp.selectedIndex = 1;
       comp.header = { open: true };
-      comp.filteredOptions = [{ value: 'foo', label: 'foo' }, { value: 'bar', label: 'bar' }, { value: 'baz', label: 'baz' }];
+      comp.filteredOptions = [
+        { value: 'foo', label: 'foo' },
+        { value: 'bar', label: 'bar' },
+        { value: 'baz', label: 'baz' },
+      ];
       comp.overlay = {
         overlayRef: {
           overlayElement: {

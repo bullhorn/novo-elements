@@ -74,7 +74,7 @@ export class NovoAceEditor implements ControlValueAccessor, OnInit, OnDestroy {
   }
 
   private initializeEditor() {
-    let el = this.elementRef.nativeElement;
+    const el = this.elementRef.nativeElement;
     this.editor = ace.edit(el);
     this.editor.$blockScrolling = Infinity;
   }
@@ -93,7 +93,7 @@ export class NovoAceEditor implements ControlValueAccessor, OnInit, OnDestroy {
   }
 
   private updateText() {
-    let newVal = this.editor.getValue(),
+    const newVal = this.editor.getValue(),
       that = this;
 
     if (newVal === this.oldText) {

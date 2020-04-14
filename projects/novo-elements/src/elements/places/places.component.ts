@@ -130,7 +130,7 @@ export class PlacesListComponent implements OnInit, OnChanges {
 
   // function called when there is a change in input. (Binded with view)
   searchinputCallback(event: any): any {
-    let inputVal: any = this.locationInput;
+    const inputVal: any = this.locationInput;
     if (inputVal) {
       this.getListQuery(inputVal);
     } else {
@@ -179,7 +179,7 @@ export class PlacesListComponent implements OnInit, OnChanges {
 
   // function to manually trigger the callback to parent component when clicked search button.
   userQuerySubmit(selectedOption?: any): any {
-    let _userOption: any = selectedOption === 'false' ? '' : this.userSelectedOption;
+    const _userOption: any = selectedOption === 'false' ? '' : this.userSelectedOption;
     if (_userOption) {
       this.select.emit(this.userSelectedOption);
     } else {
@@ -254,10 +254,10 @@ export class PlacesListComponent implements OnInit, OnChanges {
 
   // function to set user settings if it is available.
   private setUserSettings(): Settings {
-    let _tempObj: any = {};
+    const _tempObj: any = {};
     if (this.userSettings && typeof this.userSettings === 'object') {
-      let keys: string[] = Object.keys(this.defaultSettings);
-      for (let value of keys) {
+      const keys: string[] = Object.keys(this.defaultSettings);
+      for (const value of keys) {
         _tempObj[value] = this.userSettings[value] !== undefined ? this.userSettings[value] : this.defaultSettings[value];
       }
       return _tempObj;
@@ -270,7 +270,7 @@ export class PlacesListComponent implements OnInit, OnChanges {
   private getListQuery(value: string): any {
     this.recentDropdownOpen = false;
     if (this.settings.useGoogleGeoApi) {
-      let _tempParams: any = {
+      const _tempParams: any = {
         query: value,
         countryRestriction: this.settings.geoCountryRestriction,
         geoTypes: this.settings.geoTypes,
@@ -294,7 +294,7 @@ export class PlacesListComponent implements OnInit, OnChanges {
   private extractServerList(arrayList: any, data: any): any {
     if (arrayList.length) {
       let _tempData: any = data;
-      for (let key of arrayList) {
+      for (const key of arrayList) {
         _tempData = _tempData[key];
       }
       return _tempData;

@@ -81,9 +81,9 @@ export class StackblitzWriter {
     this._appendFormInput(form, 'dependencies', JSON.stringify(dependencies));
 
     return new Promise((resolve) => {
-      let templateContents = TEMPLATE_FILES.map((file) => this._readFile(form, data, file, TEMPLATE_PATH));
+      const templateContents = TEMPLATE_FILES.map((file) => this._readFile(form, data, file, TEMPLATE_PATH));
 
-      let exampleContents = [];
+      const exampleContents = [];
       exampleContents.push(
         Promise.resolve(
           this._addFileToForm(form, data, decodeURIComponent(data.source.tsSource), `app/${data.selectorName}.ts`, TEMPLATE_PATH),

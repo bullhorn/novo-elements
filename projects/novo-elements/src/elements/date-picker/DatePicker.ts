@@ -200,9 +200,9 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit, OnCh
 
   ngOnInit() {
     // Determine the year array
-    let now = new Date();
-    let start = this.minYear ? Number(this.minYear) : now.getFullYear() - 100;
-    let end = this.maxYear ? Number(this.maxYear) : now.getFullYear() + 10;
+    const now = new Date();
+    const start = this.minYear ? Number(this.minYear) : now.getFullYear() - 100;
+    const end = this.maxYear ? Number(this.maxYear) : now.getFullYear() + 10;
 
     for (let i = start; i <= end; i++) {
       this.years.push(i);
@@ -219,7 +219,7 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit, OnCh
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    let weekRangeSelectChange: SimpleChange = changes['weekRangeSelect'];
+    const weekRangeSelectChange: SimpleChange = changes['weekRangeSelect'];
     if (
       weekRangeSelectChange &&
       weekRangeSelectChange.currentValue !== weekRangeSelectChange.previousValue &&
@@ -227,7 +227,7 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit, OnCh
     ) {
       this.clearRange();
     }
-    let weekStartChanges: SimpleChange = changes['weekStart'];
+    const weekStartChanges: SimpleChange = changes['weekStart'];
     if (weekStartChanges && weekStartChanges.currentValue !== weekStartChanges.previousValue && !weekStartChanges.firstChange) {
       this.weekdays = this.setupWeekdays();
       this.updateView(this.model, false, false);
@@ -238,7 +238,7 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit, OnCh
     let weekdays = this.labels.getWeekdays();
     // Weekstart must be 0-6 (Sunday - Saturday)
     if (!Helpers.isBlank(this.weekStart) && this.weekStart > 0 && this.weekStart <= 6) {
-      let newStart = weekdays.splice(this.weekStart);
+      const newStart = weekdays.splice(this.weekStart);
       weekdays = [...newStart, ...weekdays];
     }
     return weekdays;
@@ -246,12 +246,12 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit, OnCh
 
   isSelectingRange(range, day, selected, selected2, hoverDay, rangeSelectMode, weekRangeSelect) {
     if (range && !weekRangeSelect) {
-      let isRangeModeEndDate =
+      const isRangeModeEndDate =
         rangeSelectMode === 'endDate' && (selected && selected2 && dateFns.isAfter(day, selected2) && dateFns.isBefore(day, hoverDay));
-      let isRangeModeStartDate =
+      const isRangeModeStartDate =
         rangeSelectMode === 'startDate' && (selected && selected2 && dateFns.isBefore(day, selected) && dateFns.isAfter(day, hoverDay));
-      let isNotSelected = !selected && selected2 && dateFns.isBefore(day, selected2) && dateFns.isAfter(day, hoverDay);
-      let isNotSelected2 = selected && !selected2 && dateFns.isAfter(day, selected) && dateFns.isBefore(day, hoverDay);
+      const isNotSelected = !selected && selected2 && dateFns.isBefore(day, selected2) && dateFns.isAfter(day, hoverDay);
+      const isNotSelected2 = selected && !selected2 && dateFns.isAfter(day, selected) && dateFns.isBefore(day, hoverDay);
       return isNotSelected2 || isNotSelected || isRangeModeStartDate || isRangeModeEndDate;
     }
     return false;
@@ -315,7 +315,7 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit, OnCh
       this.month = new Date(value);
       this.monthLabel = this.labels.formatDateWithFormat(this.month, { month: 'short' });
 
-      let start = new Date(value.getTime());
+      const start = new Date(value.getTime());
       start.setDate(1);
       this.removeTime(start.setDate(1));
 
@@ -328,7 +328,7 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit, OnCh
   }
 
   setToday() {
-    let tmp = new Date();
+    const tmp = new Date();
     this.updateView(tmp, true, true);
     // Go back to days
     this.open(null, 'days');
@@ -342,16 +342,16 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit, OnCh
   }
 
   setMonth(month: number): void {
-    let date = this.month ? this.month : new Date();
-    let tmp = dateFns.setMonth(date, month);
+    const date = this.month ? this.month : new Date();
+    const tmp = dateFns.setMonth(date, month);
     this.updateView(tmp, true, false);
     // Go back to days
     this.open(null, 'days');
   }
 
   setYear(year: number): void {
-    let date = this.month ? this.month : new Date();
-    let tmp = dateFns.setYear(date, year);
+    const date = this.month ? this.month : new Date();
+    const tmp = dateFns.setYear(date, year);
     this.updateView(tmp, true, false);
     // Go back to days
     this.open(null, 'days');
@@ -481,8 +481,8 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit, OnCh
     // Make sure to scroll the selected one into view
     if (this.view === 'years' || this.view === 'months') {
       setTimeout(() => {
-        let container = this.element.nativeElement.querySelector(`.calendar-content.${this.view}`);
-        let selectedItem = this.element.nativeElement.querySelector(
+        const container = this.element.nativeElement.querySelector(`.calendar-content.${this.view}`);
+        const selectedItem = this.element.nativeElement.querySelector(
           `.calendar-content.${this.view} .${this.view === 'years' ? 'year' : 'month'}.selected`,
         );
         if (container && selectedItem) {
@@ -496,13 +496,13 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit, OnCh
 
   prevMonth(event: Event): void {
     Helpers.swallowEvent(event);
-    let tmp = dateFns.subMonths(this.month, 1);
+    const tmp = dateFns.subMonths(this.month, 1);
     this.updateView(tmp, false, false);
   }
 
   nextMonth(event: Event): void {
     Helpers.swallowEvent(event);
-    let tmp = dateFns.addMonths(this.month, 1);
+    const tmp = dateFns.addMonths(this.month, 1);
     this.updateView(tmp, false, false);
   }
 
@@ -524,7 +524,7 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit, OnCh
    * @returns with time stripped out
    */
   removeTime(date: any): Date {
-    let ret = new Date(date);
+    const ret = new Date(date);
     ret.setHours(12);
     ret.setSeconds(0);
     ret.setMilliseconds(0);
@@ -554,7 +554,7 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit, OnCh
 
   buildWeek(date: Date, month: Date): Array<Object> {
     // Build out of the days of the week
-    let days = [];
+    const days = [];
 
     // Iterate over the days of the week
     for (let i = 0; i < 7; i++) {
@@ -563,7 +563,7 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit, OnCh
         name: this.weekdays[i],
         number: date.getDate(),
         isToday: dateFns.isToday(date),
-        date: date,
+        date,
       });
 
       // Increment for the next iteration

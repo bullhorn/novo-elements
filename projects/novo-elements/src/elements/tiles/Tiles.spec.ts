@@ -37,7 +37,7 @@ describe('Elements: NovoTilesElement', () => {
 
   describe('Method: select(event, item)', () => {
     it('should set label 2 with checked equal to true', () => {
-      let event: any = {
+      const event: any = {
         stopPropagation: () => {},
         preventDefault: () => {},
       };

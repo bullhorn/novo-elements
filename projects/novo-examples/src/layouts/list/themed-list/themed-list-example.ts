@@ -12,15 +12,15 @@ export class ThemedListExample {
   public pulseItems: any;
 
   constructor() {
-    let ONE_HOUR = 60 * 60 * 1000;
+    const ONE_HOUR = 60 * 60 * 1000;
     /* ms */
-    let TWO_HOURS = ONE_HOUR * 2;
-    let THREE_HOURS = ONE_HOUR * 3;
-    let currentDate = new Date();
+    const TWO_HOURS = ONE_HOUR * 2;
+    const THREE_HOURS = ONE_HOUR * 3;
+    const currentDate = new Date();
 
-    let oneHourAgo = currentDate.getTime() - ONE_HOUR;
-    let twoHoursAgo = currentDate.getTime() - TWO_HOURS;
-    let threeHoursAgo = currentDate.getTime() - THREE_HOURS;
+    const oneHourAgo = currentDate.getTime() - ONE_HOUR;
+    const twoHoursAgo = currentDate.getTime() - TWO_HOURS;
+    const threeHoursAgo = currentDate.getTime() - THREE_HOURS;
 
     /* "mockResponse[]" should represent a REST response with improperly formatted data.
     /  The "buildItems()" function is taking this data object and massaging it
@@ -29,7 +29,7 @@ export class ThemedListExample {
     /  - @asibilia
     */
 
-    let mockResponse = [
+    const mockResponse = [
       {
         type: 'opportunity',
         dateCreated: oneHourAgo,
@@ -83,8 +83,8 @@ export class ThemedListExample {
   }
 
   buildItems(resp) {
-    for (let obj of resp) {
-      let item: any = {};
+    for (const obj of resp) {
+      const item: any = {};
 
       /*
       ||| This is the item structure to be pushed to pulseItems[] and used

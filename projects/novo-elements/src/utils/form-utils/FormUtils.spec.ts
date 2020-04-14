@@ -36,11 +36,11 @@ function createAddress(address1, city, state, zip, countryName) {
     };
   }
   return {
-    address1: address1,
-    city: city,
-    state: state,
-    zip: zip,
-    countryName: countryName,
+    address1,
+    city,
+    state,
+    zip,
+    countryName,
   };
 }
 
@@ -48,7 +48,7 @@ describe('Utils: FormUtils', () => {
   let formUtils;
 
   beforeEach(async(() => {
-    let optionsService = {
+    const optionsService = {
       getOptionEntity: () => {
         return '';
       },
@@ -85,8 +85,8 @@ describe('Utils: FormUtils', () => {
   describe('Method: toFormGroup(controls)', () => {
     it('should create a FormGroup from a collection of controls.', () => {
       expect(formUtils.toFormGroup).toBeDefined();
-      let mockControls: Array<any> = [{ key: 'Test' }];
-      let result = formUtils.toFormGroup(mockControls);
+      const mockControls: Array<any> = [{ key: 'Test' }];
+      const result = formUtils.toFormGroup(mockControls);
       expect(result instanceof FormGroup).toBe(true);
       expect(result.controls.Test).toBeDefined();
       expect(result.controls.Test instanceof NovoFormControl).toBe(true);
@@ -96,7 +96,7 @@ describe('Utils: FormUtils', () => {
   describe('Method: addControls(formGroup, controls)', () => {
     it('should add controls to a form group.', () => {
       expect(formUtils.addControls).toBeDefined();
-      let formGroup: FormGroup = formUtils.toFormGroup([{ key: 'Test' }]);
+      const formGroup: FormGroup = formUtils.toFormGroup([{ key: 'Test' }]);
       formUtils.addControls(formGroup, [{ key: 'Test2' }]);
       // Can't use `.Test2` because the formGroup isn't returned
       expect(formGroup.controls['Test2']).toBeDefined();
@@ -107,7 +107,7 @@ describe('Utils: FormUtils', () => {
   describe('Method: removeControls(formGroup, controls)', () => {
     it('should remove controls from a form group.', () => {
       expect(formUtils.removeControls).toBeDefined();
-      let formGroup: FormGroup = formUtils.toFormGroup([{ key: 'Test' }, { key: 'Test2' }]);
+      const formGroup: FormGroup = formUtils.toFormGroup([{ key: 'Test' }, { key: 'Test2' }]);
       formUtils.removeControls(formGroup, [{ key: 'Test2' }]);
       // Can't use `.Test2` because the formGroup isn't returned
       expect(formGroup.controls['Test2']).not.toBeDefined();
@@ -117,8 +117,8 @@ describe('Utils: FormUtils', () => {
   describe('Method: toFormGroupFromFieldset(fieldsets)', () => {
     it('should create FormGroups from a collection of FieldSets that contain controls.', () => {
       expect(formUtils.toFormGroup).toBeDefined();
-      let mockControls: Array<any> = [{ key: 'Test' }];
-      let fieldSet = formUtils.toFormGroupFromFieldset([{ title: 'Test', controls: mockControls }]);
+      const mockControls: Array<any> = [{ key: 'Test' }];
+      const fieldSet = formUtils.toFormGroupFromFieldset([{ title: 'Test', controls: mockControls }]);
       expect(fieldSet.controls.Test).toBeDefined();
       expect(fieldSet.controls.Test instanceof NovoFormControl).toBe(true);
     });
@@ -258,81 +258,81 @@ describe('Utils: FormUtils', () => {
   describe('Method: getControlForField(field, http, config)', () => {
     xit('should return the right component for entitychips', () => {
       expect(formUtils.getControlForField).toBeDefined();
-      let result = formUtils.getControlForField({ type: 'entitychips' });
+      const result = formUtils.getControlForField({ type: 'entitychips' });
       expect(result instanceof PickerControl).toBe(true);
     });
     xit('should return the right component for entitypicker', () => {
       expect(formUtils.getControlForField).toBeDefined();
-      let result = formUtils.getControlForField({ type: 'entitypicker' });
+      const result = formUtils.getControlForField({ type: 'entitypicker' });
       expect(result instanceof PickerControl).toBe(true);
     });
     it('should return the right component for picker', () => {
       expect(formUtils.getControlForField).toBeDefined();
-      let result = formUtils.getControlForField({ type: 'picker' });
+      const result = formUtils.getControlForField({ type: 'picker' });
       expect(result instanceof PickerControl).toBe(true);
     });
     it('should return the right component for datetime', () => {
       expect(formUtils.getControlForField).toBeDefined();
-      let result = formUtils.getControlForField({ type: 'datetime' });
+      const result = formUtils.getControlForField({ type: 'datetime' });
       expect(result instanceof DateTimeControl).toBe(true);
     });
     it('should return the right component for date', () => {
       expect(formUtils.getControlForField).toBeDefined();
-      let result = formUtils.getControlForField({ type: 'date' });
+      const result = formUtils.getControlForField({ type: 'date' });
       expect(result instanceof DateControl).toBe(true);
     });
     it('should return the right component for time', () => {
       expect(formUtils.getControlForField).toBeDefined();
-      let result = formUtils.getControlForField({ type: 'time' });
+      const result = formUtils.getControlForField({ type: 'time' });
       expect(result instanceof TimeControl).toBe(true);
     });
     it('should return the right component for currency', () => {
       expect(formUtils.getControlForField).toBeDefined();
-      let result = formUtils.getControlForField({ type: 'currency' });
+      const result = formUtils.getControlForField({ type: 'currency' });
       expect(result instanceof TextBoxControl).toBe(true);
     });
     it('should return the right component for text', () => {
       expect(formUtils.getControlForField).toBeDefined();
-      let result = formUtils.getControlForField({ type: 'text' });
+      const result = formUtils.getControlForField({ type: 'text' });
       expect(result instanceof TextBoxControl).toBe(true);
     });
     it('should return the right component for textarea', () => {
       expect(formUtils.getControlForField).toBeDefined();
-      let result = formUtils.getControlForField({ type: 'textarea' });
+      const result = formUtils.getControlForField({ type: 'textarea' });
       expect(result instanceof TextAreaControl).toBe(true);
     });
     it('should return the right component for editor', () => {
       expect(formUtils.getControlForField).toBeDefined();
-      let result = formUtils.getControlForField({ type: 'editor' });
+      const result = formUtils.getControlForField({ type: 'editor' });
       expect(result instanceof EditorControl).toBe(true);
     });
     it('should return the right component for tiles', () => {
       expect(formUtils.getControlForField).toBeDefined();
-      let result = formUtils.getControlForField({ type: 'tiles' });
+      const result = formUtils.getControlForField({ type: 'tiles' });
       expect(result instanceof TilesControl).toBe(true);
     });
     it('should return the right component for checkbox', () => {
       expect(formUtils.getControlForField).toBeDefined();
-      let result = formUtils.getControlForField({ type: 'checkbox' });
+      const result = formUtils.getControlForField({ type: 'checkbox' });
       expect(result instanceof CheckboxControl).toBe(true);
     });
     it('should return the right component for checklist', () => {
       expect(formUtils.getControlForField).toBeDefined();
-      let result = formUtils.getControlForField({ type: 'checklist' });
+      const result = formUtils.getControlForField({ type: 'checklist' });
       expect(result instanceof CheckListControl).toBe(true);
     });
     it('should return the right component for radio', () => {
       expect(formUtils.getControlForField).toBeDefined();
-      let result = formUtils.getControlForField({ type: 'radio' });
+      const result = formUtils.getControlForField({ type: 'radio' });
       expect(result instanceof RadioControl).toBe(true);
     });
     it('should return the right component for select', () => {
       expect(formUtils.getControlForField).toBeDefined();
-      let result = formUtils.getControlForField({ type: 'select' });
+      const result = formUtils.getControlForField({ type: 'select' });
       expect(result instanceof SelectControl).toBe(true);
     });
     it('should return the right component for editor minimal', () => {
-      let result = formUtils.getControlForField({ type: 'editor-minimal' });
+      const result = formUtils.getControlForField({ type: 'editor-minimal' });
       expect(result instanceof EditorControl).toBeTruthy();
     });
     it('should return the right component for WorkflowOptions and call getControlOptions with data', () => {
@@ -345,12 +345,12 @@ describe('Utils: FormUtils', () => {
     describe('with type: address', () => {
       it('should return the right component for address', () => {
         expect(formUtils.getControlForField).toBeDefined();
-        let result = formUtils.getControlForField({ type: 'address' });
+        const result = formUtils.getControlForField({ type: 'address' });
         expect(result instanceof AddressControl).toBe(true);
       });
       it('should set the right defaults for address sub-fields', () => {
         expect(formUtils.getControlForField).toBeDefined();
-        let result = formUtils.getControlForField({
+        const result = formUtils.getControlForField({
           type: 'address',
           fields: [
             {
@@ -391,7 +391,7 @@ describe('Utils: FormUtils', () => {
     });
     it('should return the right component for file', () => {
       expect(formUtils.getControlForField).toBeDefined();
-      let result = formUtils.getControlForField({ type: 'file' });
+      const result = formUtils.getControlForField({ type: 'file' });
       expect(result instanceof FileControl).toBe(true);
     });
   });
@@ -410,7 +410,7 @@ describe('Utils: FormUtils', () => {
     });
 
     it('should return an array of fieldsets with a title, icon and controls', () => {
-      let meta = {
+      const meta = {
         entity: 'ENTITY_NAME',
         label: 'ENTITY_LABEL',
         fields: [
@@ -453,14 +453,14 @@ describe('Utils: FormUtils', () => {
           },
         ],
       };
-      let fieldset = formUtils.toFieldSets(meta, 'USD', {}, {}, {});
+      const fieldset = formUtils.toFieldSets(meta, 'USD', {}, {}, {});
       expect(fieldset[0].title).toBe('Header');
       expect(fieldset[0].icon).toBe('bhi-certification');
       expect(fieldset[0].controls.length).toBe(3);
       expect(fieldset[0].controls[0].key).toEqual('inlineEmbeddedField.field1');
     });
     it('should call getControlForField with data', () => {
-      let meta = {
+      const meta = {
         entity: 'ENTITY_NAME',
         label: 'ENTITY_LABEL',
         fields: [
@@ -497,7 +497,7 @@ describe('Utils: FormUtils', () => {
     });
     it('should return an object with a function that returns a promise when there is an optionsUrl', () => {
       expect(formUtils.getControlOptions).toBeDefined();
-      let result = formUtils.getControlOptions({ optionsUrl: 'TEST' });
+      const result = formUtils.getControlOptions({ optionsUrl: 'TEST' });
       expect(result.field).toBe('value');
       expect(result.format).toBe('$label');
       expect(result.options('') instanceof Promise).toBe(true);
@@ -507,12 +507,12 @@ describe('Utils: FormUtils', () => {
     });
     it('should return an object with a function that returns a promise when there is an optionsUrl that calls an API', () => {
       expect(formUtils.getControlOptions).toBeDefined();
-      let mockHttp = {
+      const mockHttp = {
         get: () => {
           return from([]);
         },
       };
-      let result = formUtils.getControlOptions({ optionsUrl: 'TEST' }, mockHttp, { token: '1' });
+      const result = formUtils.getControlOptions({ optionsUrl: 'TEST' }, mockHttp, { token: '1' });
       expect(result.field).toBe('value');
       expect(result.format).toBe('$label');
       expect(result.options('') instanceof Promise).toBe(true);
@@ -522,14 +522,14 @@ describe('Utils: FormUtils', () => {
     });
     it('should return an object with an array, label, and format for chips', () => {
       expect(formUtils.getControlOptions).toBeDefined();
-      let result = formUtils.getControlOptions({ type: 'chips', options: [1] });
+      const result = formUtils.getControlOptions({ type: 'chips', options: [1] });
       expect(result.options.length).toBe(1);
       expect(result.field).toBe('value');
       expect(result.format).toBe('$label');
     });
     it('should return an array when options is an array', () => {
       expect(formUtils.getControlOptions).toBeDefined();
-      let result = formUtils.getControlOptions({ dataSpecialization: 'DATETIME' });
+      const result = formUtils.getControlOptions({ dataSpecialization: 'DATETIME' });
     });
     it('should return an array when there are WorkflowOptions', () => {
       const field: { workflowOptions: Object } = {

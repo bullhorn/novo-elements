@@ -8,10 +8,10 @@ describe('StaticDataTableService', () => {
   let service;
 
   beforeEach(async(() => {
-    let staticDataSet1 = [];
+    const staticDataSet1 = [];
     for (let i = 0; i < 100; i++) {
-      let day = dateFns.subDays(new Date(), i);
-      let rando = Math.floor(Math.random() * 5);
+      const day = dateFns.subDays(new Date(), i);
+      const rando = Math.floor(Math.random() * 5);
       staticDataSet1.push({
         id: i,
         date: day,
@@ -27,13 +27,13 @@ describe('StaticDataTableService', () => {
 
   describe('method: filterData', () => {
     it('should filter data when passed a value', () => {
-      let results = service.filterData(service.currentData, { id: 'id', value: 5 });
-      let resultsAreFiltered = results.every((x) => x.id.toString().includes('5'));
+      const results = service.filterData(service.currentData, { id: 'id', value: 5 });
+      const resultsAreFiltered = results.every((x) => x.id.toString().includes('5'));
       expect(resultsAreFiltered).toBe(true);
     });
     it('should filter data when passed an array of values', () => {
-      let results = service.filterData(service.currentData, { id: 'status', value: [1, 5] });
-      let resultsAreFiltered = results.every((x) => x.status.includes(['1', '5']));
+      const results = service.filterData(service.currentData, { id: 'status', value: [1, 5] });
+      const resultsAreFiltered = results.every((x) => x.status.includes(['1', '5']));
       expect(resultsAreFiltered).toBe(true);
     });
   });

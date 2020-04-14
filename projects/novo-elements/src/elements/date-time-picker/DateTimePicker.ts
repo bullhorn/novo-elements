@@ -112,6 +112,7 @@ const DATE_TIME_PICKER_VALUE_ACCESSOR = {
             [maxYear]="maxYear"
             [start]="start"
             [end]="end"
+            [weekStart]="weekStart"
           ></novo-date-picker>
         </div>
         <div class="time-picker">
@@ -132,6 +133,8 @@ export class NovoDateTimePickerElement implements ControlValueAccessor {
   end: any;
   @Input()
   military: any;
+  @Input()
+  weekStart: number = 0;
 
   // Select callback for output
   @Output()
@@ -165,7 +168,7 @@ export class NovoDateTimePickerElement implements ControlValueAccessor {
 
   setTimeLabels(value: Date) {
     let hours = value.getHours();
-    let minutes = value.getMinutes();
+    const minutes = value.getMinutes();
 
     this.meridian = value.toLocaleTimeString().slice(-2);
 

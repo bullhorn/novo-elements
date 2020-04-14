@@ -216,7 +216,7 @@ export class NovoFileInputElement implements ControlValueAccessor, OnInit, OnDes
     ['dragenter', 'dragleave', 'dragover', 'drop'].forEach((type) => {
       this.element.nativeElement.removeEventListener(type, this.commands[type]);
     });
-    let dragulaHasFileOutputBag = this.dragula.bags.length > 0 && this.dragula.bags.filter((x) => x.name === this.fileOutputBag).length > 0;
+    const dragulaHasFileOutputBag = this.dragula.bags.length > 0 && this.dragula.bags.filter((x) => x.name === this.fileOutputBag).length > 0;
     if (dragulaHasFileOutputBag) {
       this.dragula.destroy(this.fileOutputBag);
     }
@@ -286,8 +286,8 @@ export class NovoFileInputElement implements ControlValueAccessor, OnInit, OnDes
     if (event.dataTransfer.types[0] !== 'Files') {
       return;
     }
-    let options: any = this.layoutOptions;
-    let filelist = Array.from(event.dataTransfer.files);
+    const options: any = this.layoutOptions;
+    const filelist = Array.from(event.dataTransfer.files);
     if (options.customActions) {
       this.upload.emit(this.multiple ? filelist : [filelist[0]]);
     } else {

@@ -53,8 +53,8 @@ export class RenderPipe implements PipeTransform {
     if (objectOne !== objectOne && objectTwo !== objectTwo) {
       return true;
     }
-    let t1: any = typeof objectOne;
-    let t2: any = typeof objectTwo;
+    const t1: any = typeof objectOne;
+    const t2: any = typeof objectTwo;
     let length: number;
     let key: any;
     let keySet: any;
@@ -203,7 +203,7 @@ export class RenderPipe implements PipeTransform {
         case 'AddressWithoutCountry':
         case 'SecondaryAddress':
         case 'BillingAddress':
-          let country: any = findByCountryId(Number(value.countryName));
+          const country: any = findByCountryId(Number(value.countryName));
           text = '';
           if (value.address1 || value.address2) {
             text += `${value.address1 || ''} ${value.address2 || ''}<br />\n`;
@@ -307,7 +307,7 @@ export class RenderPipe implements PipeTransform {
           }
           break;
         case 'Country':
-          let countryObj: any = findByCountryId(Number(value));
+          const countryObj: any = findByCountryId(Number(value));
           text = countryObj ? countryObj.name : value;
           break;
         case 'Html':
@@ -362,10 +362,10 @@ export class RenderPipe implements PipeTransform {
    * @param fields - list of fields to extract
    */
   concat(list: any, ...fields: any[]): any {
-    let data: any = [];
-    for (let item of list) {
-      let label: any = [];
-      for (let field of fields) {
+    const data: any = [];
+    for (const item of list) {
+      const label: any = [];
+      for (const field of fields) {
         label.push(`${item[field]}`);
       }
       data.push(label.join(' '));
@@ -403,8 +403,8 @@ export class RenderPipe implements PipeTransform {
   getNumberDecimalPlaces(value: any): any {
     let decimalPlaces: any;
     if (value) {
-      let numberString: any = parseFloat(value).toString();
-      let decimalPlace: any = (numberString || '').split('.')[1] || '';
+      const numberString: any = parseFloat(value).toString();
+      const decimalPlace: any = (numberString || '').split('.')[1] || '';
       decimalPlaces = decimalPlace.length;
     }
     return decimalPlaces || 1;

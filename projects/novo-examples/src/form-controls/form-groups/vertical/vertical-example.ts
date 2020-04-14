@@ -81,11 +81,11 @@ export class VerticalExample {
 
   private setupGroupedFormDemo() {
     this.formGroup = this.formUtils.emptyFormGroup();
-    let label = new ReadOnlyControl({ key: 'label', value: 'Label :)' });
-    let c1 = new SelectControl({ key: 'text', label: 'Text Box', options: [{ value: 'hello', label: 'Hello' }] });
-    let c2 = new TextBoxControl({ type: 'percentage', key: 'percentage', label: 'Percent', required: true });
-    let c3 = new CheckboxControl({ key: 'checkbox', label: 'Check Me!', width: 100 });
-    let c4 = new TextBoxControl({ key: 'test4', label: 'TEST4' });
+    const label = new ReadOnlyControl({ key: 'label', value: 'Label :)' });
+    const c1 = new SelectControl({ key: 'text', label: 'Text Box', options: [{ value: 'hello', label: 'Hello' }] });
+    const c2 = new TextBoxControl({ type: 'percentage', key: 'percentage', label: 'Percent', required: true });
+    const c3 = new CheckboxControl({ key: 'checkbox', label: 'Check Me!', width: 100 });
+    const c4 = new TextBoxControl({ key: 'test4', label: 'TEST4' });
     this.controls.push(label);
     this.controls.push(c1);
     this.controls.push(c2);

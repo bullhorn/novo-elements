@@ -6,11 +6,11 @@ import { FormValidators } from './FormValidators';
  */
 function createAddress(address1, city, state, zip, countryName) {
   return {
-    address1: address1,
-    city: city,
-    state: state,
-    zip: zip,
-    countryName: countryName,
+    address1,
+    city,
+    state,
+    zip,
+    countryName,
   };
 }
 

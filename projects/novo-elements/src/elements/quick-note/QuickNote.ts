@@ -272,9 +272,9 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
         }
       } else {
         // Loop through all triggers and turn on tagging mode if the user just pressed a trigger character
-        let triggers = this.config.triggers || {};
+        const triggers = this.config.triggers || {};
         Object.keys(triggers).forEach((key) => {
-          let trigger = triggers[key] || {};
+          const trigger = triggers[key] || {};
           if (event.key === trigger) {
             this.isTagging = true;
             this.taggingMode = key;
@@ -294,7 +294,7 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
     let value = this.ckeInstance.getData();
 
     // Remove empty 'ZERO WIDTH SPACE' characters that can get added erroneously by the editor
-    let regex = new RegExp(String.fromCharCode(8203), 'g');
+    const regex = new RegExp(String.fromCharCode(8203), 'g');
     value = value.replace(regex, '');
 
     // Make sure that any references in the model are still valid
@@ -327,13 +327,13 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
    */
   private showResults(): void {
     if (this.isTagging) {
-      let searchTerm = this.getSearchTerm();
+      const searchTerm = this.getSearchTerm();
       if (searchTerm.length) {
         // Update Matches
         if (this.quickNoteResults) {
           // Update existing list
           this.quickNoteResults.instance.term = {
-            searchTerm: searchTerm,
+            searchTerm,
             taggingMode: this.taggingMode,
           };
         } else {
@@ -342,7 +342,7 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
           this.quickNoteResults.instance.parent = this;
           this.quickNoteResults.instance.config = this.config;
           this.quickNoteResults.instance.term = {
-            searchTerm: searchTerm,
+            searchTerm,
             taggingMode: this.taggingMode,
           };
           this.positionResultsDropdown();
@@ -380,16 +380,16 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
     this.isTagging = false;
 
     // Replace searchTerm with link
-    let symbol = this.config.triggers[taggingMode];
-    let renderer = this.getRenderer(taggingMode);
-    let renderedText = renderer(symbol, selected);
+    const symbol = this.config.triggers[taggingMode];
+    const renderer = this.getRenderer(taggingMode);
+    const renderedText = renderer(symbol, selected);
 
     this.replaceWordAtCursor(renderedText);
 
     // Add the new reference, if it doesn't already exist
     this.model.references = this.model.references || {};
     this.model.references[taggingMode] = this.model.references[taggingMode] || [];
-    let matchingItems = this.model.references[taggingMode].filter((item) => JSON.stringify(item) === JSON.stringify(selected));
+    const matchingItems = this.model.references[taggingMode].filter((item) => JSON.stringify(item) === JSON.stringify(selected));
     if (matchingItems.length === 0) {
       this.model.references[taggingMode].push(selected);
     }
@@ -405,7 +405,7 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
   private getSearchTerm(): string {
     let word = this.getWordAtCursor().trim();
     if (this.isTagging) {
-      let symbol = this.config.triggers[this.taggingMode];
+      const symbol = this.config.triggers[this.taggingMode];
       if (!word.includes(symbol)) {
         this.hideResults();
         return '';
@@ -422,16 +422,16 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
    * @returns plain text string (removes all html formatting)
    */
   private getWordAtCursor(): string {
-    let range = this.ckeInstance.getSelection().getRanges()[0];
-    let start = range.startContainer;
+    const range = this.ckeInstance.getSelection().getRanges()[0];
+    const start = range.startContainer;
 
     if (start.type === CKEDITOR.NODE_TEXT && range.startOffset) {
-      let text = start.getText();
-      let symbol = this.config.triggers[this.taggingMode];
+      const text = start.getText();
+      const symbol = this.config.triggers[this.taggingMode];
       let wordStart = text.lastIndexOf(symbol, range.startOffset - 1);
 
       if (wordStart > 0) {
-        let beforeSymbol: string = text.charAt(wordStart - 1);
+        const beforeSymbol: string = text.charAt(wordStart - 1);
         // We don't want to trigger the lookup call unless the symbol was preceded by whitespace
         if (beforeSymbol !== '\u200B' && /\S/.test(beforeSymbol)) {
           return '';
@@ -463,18 +463,18 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
    * the line, replacing only the current word.
    */
   private replaceWordAtCursor(newWord: string): void {
-    let originalWord = this.getWordAtCursor().trim();
-    let range = this.ckeInstance.getSelection().getRanges()[0];
-    let start = range.startContainer;
-    let parentNode = start.getParent();
+    const originalWord = this.getWordAtCursor().trim();
+    const range = this.ckeInstance.getSelection().getRanges()[0];
+    const start = range.startContainer;
+    const parentNode = start.getParent();
 
     if (start.type === CKEDITOR.NODE_TEXT && parentNode) {
-      let line = parentNode.getHtml();
-      let index = line.lastIndexOf(originalWord);
+      const line = parentNode.getHtml();
+      const index = line.lastIndexOf(originalWord);
 
       if (index >= 0) {
         // Add a space after the replaced word so that multiple references can be added back to back
-        let newLine = line.substring(0, index) + newWord + ' ' + line.substring(index + originalWord.length);
+        const newLine = line.substring(0, index) + newWord + ' ' + line.substring(index + originalWord.length);
         parentNode.setHtml(newLine);
 
         // Place selection at the end of the line
@@ -492,16 +492,16 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
 
     // CKEditor stopped supporting the config.forceSimpleAmpersand setting, so we have to convert '&amp;' to '&'
     // when we pull html from the editor - see: https://dev.ckeditor.com/ticket/13723
-    let ampRegex = new RegExp('&amp;', 'g');
+    const ampRegex = new RegExp('&amp;', 'g');
     html = html.replace(ampRegex, '&');
 
     Object.keys(this.model.references).forEach((taggingMode) => {
-      let array = this.model.references[taggingMode] || [];
-      let symbol = this.config.triggers[taggingMode];
-      let renderer = this.getRenderer(taggingMode);
+      const array = this.model.references[taggingMode] || [];
+      const symbol = this.config.triggers[taggingMode];
+      const renderer = this.getRenderer(taggingMode);
 
       this.model.references[taggingMode] = array.filter((item) => {
-        let renderedText = renderer(symbol, item);
+        const renderedText = renderer(symbol, item);
         return html.includes(renderedText);
       });
 
@@ -522,7 +522,7 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
   private getCKEditorConfig(): any {
     // Use the height of the wrapper element to set the initial height of the editor, then
     // set it to 100% to allow the editor to resize using the grippy.
-    let editorHeight = this.wrapper.nativeElement.clientHeight - QuickNoteElement.TOOLBAR_HEIGHT;
+    const editorHeight = this.wrapper.nativeElement.clientHeight - QuickNoteElement.TOOLBAR_HEIGHT;
     this.wrapper.nativeElement.style.setProperty('height', '100%');
 
     return {
@@ -558,19 +558,19 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
    * Returns the current screen position of the cursor in CKEditor, accounting for any scrolling in the editor.
    */
   private getCursorPosition(): any {
-    let range = this.ckeInstance.getSelection().getRanges()[0];
-    let parentElement = range.startContainer.$.parentElement;
-    let editorElement = this.ckeInstance.editable().$;
+    const range = this.ckeInstance.getSelection().getRanges()[0];
+    const parentElement = range.startContainer.$.parentElement;
+    const editorElement = this.ckeInstance.editable().$;
 
     // Since the editor is a text node in the DOM that does not know about it's position, a temporary element has to
     // be inserted in order to locate the cursor position.
-    let cursorElement = document.createElement('img');
+    const cursorElement = document.createElement('img');
     cursorElement.setAttribute('src', 'null');
     cursorElement.setAttribute('width', '0');
     cursorElement.setAttribute('height', '0');
 
     parentElement.appendChild(cursorElement);
-    let cursorPosition = {
+    const cursorPosition = {
       top: cursorElement.offsetTop - editorElement.scrollTop,
       left: cursorElement.offsetLeft - editorElement.scrollLeft,
     };
@@ -586,7 +586,7 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
     const MIN_MARGIN_TOP: number = QuickNoteElement.TOOLBAR_HEIGHT * 2;
     const MAX_MARGIN_TOP: number = this.getContentHeight() + QuickNoteElement.TOOLBAR_HEIGHT;
 
-    let cursorPosition = this.getCursorPosition();
+    const cursorPosition = this.getCursorPosition();
     let marginTop: number = cursorPosition.top + QuickNoteElement.TOOLBAR_HEIGHT;
 
     // Check that the margin is within the visible bounds
@@ -608,7 +608,7 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
       this.ckeInstance.ui.contentsElement.$ &&
       this.ckeInstance.ui.contentsElement.$.style
     ) {
-      let cssText: string = this.ckeInstance.ui.contentsElement.$.style.cssText;
+      const cssText: string = this.ckeInstance.ui.contentsElement.$.style.cssText;
       if (cssText.indexOf('height: ') !== -1) {
         let height: string = cssText.split('height: ')[1];
         height = height.split('px')[0];

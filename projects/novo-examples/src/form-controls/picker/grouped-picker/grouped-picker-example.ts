@@ -25,30 +25,30 @@ export class GroupedPickerExample {
   }
 
   setupGroupedPickerDemo() {
-    let categoryMap = new Map<string, { value: string; label: string; items: { value: string; label: string }[] }>();
+    const categoryMap = new Map<string, { value: string; label: string; items: { value: string; label: string }[] }>();
     for (let i = 0; i < 10; i++) {
-      let items = [];
+      const items = [];
       for (let j = 0; j < 10; j++) {
         items.push({ value: `${i}-${j}`, label: `Category ${i} - Item ${j}` });
       }
-      categoryMap.set(`${i}`, { value: `${i}`, label: `Category ${i}`, items: items });
+      categoryMap.set(`${i}`, { value: `${i}`, label: `Category ${i}`, items });
     }
-    let filterCategoryMap = new Map<string, { value: string; label: string; items: { value: string; label: string; data: any }[] }>();
+    const filterCategoryMap = new Map<string, { value: string; label: string; items: { value: string; label: string; data: any }[] }>();
     for (let i = 0; i < 10; i++) {
-      let items = [];
+      const items = [];
       for (let j = 0; j < 10; j++) {
-        let filter = Math.random() >= 0.5;
-        items.push({ value: `${i}-${j}`, label: `Category ${i} - Item ${j} - Data - ${filter}`, data: { filter: filter } });
+        const filter = Math.random() >= 0.5;
+        items.push({ value: `${i}-${j}`, label: `Category ${i} - Item ${j} - Data - ${filter}`, data: { filter } });
       }
-      filterCategoryMap.set(`${i}`, { value: `${i}`, label: `Category ${i}`, items: items });
+      filterCategoryMap.set(`${i}`, { value: `${i}`, label: `Category ${i}`, items });
     }
     this.groupedPicker1 = {
-      categoryMap: categoryMap,
+      categoryMap,
       resultsTemplate: GroupedMultiPickerResults,
       displayAll: true,
     };
     this.groupedPicker2 = {
-      categoryMap: categoryMap,
+      categoryMap,
       resultsTemplate: GroupedMultiPickerResults,
     };
     this.groupedPicker3 = {

@@ -10,7 +10,7 @@ export class NovoTemplateService {
   constructor() {}
 
   getAll(): any {
-    let templates: any = {};
+    const templates: any = {};
     const customTemplateTypes: string[] = Object.keys(this.templates.custom);
     const defaultTemplateTypes: string[] = Object.keys(this.templates.default);
     defaultTemplateTypes.forEach((type: string) => {

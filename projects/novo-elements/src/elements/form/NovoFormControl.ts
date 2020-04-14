@@ -49,6 +49,7 @@ export class NovoFormControl extends FormControl {
   currencyFormat?: string;
   startDate?: Date | Number;
   endDate?: Date | Number;
+  weekStart?: number;
   textMaskEnabled?: boolean;
   maskOptions: IMaskOptions;
   allowInvalidDate?: boolean;
@@ -103,6 +104,7 @@ export class NovoFormControl extends FormControl {
     this.currencyFormat = control.currencyFormat;
     this.startDate = control.startDate;
     this.endDate = control.endDate;
+    this.weekStart = control.weekStart;
     this.textMaskEnabled = control.textMaskEnabled;
     this.textMaskEnabled = control.textMaskEnabled;
     this.maskOptions = control.maskOptions;
@@ -158,7 +160,7 @@ export class NovoFormControl extends FormControl {
     this.required = isRequired;
     // Update validators to have the required
     if (this.required && !this.hasRequiredValidator) {
-      let validators: any = [...this.validators];
+      const validators: any = [...this.validators];
       validators.push(Validators.required);
       // TODO: duplicated below
       this.setValidators(validators);
