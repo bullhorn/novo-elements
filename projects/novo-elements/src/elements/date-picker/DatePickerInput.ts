@@ -142,9 +142,14 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
   }
 
   _handleEvent(event: Event, blur: boolean): void {
-    const value = (event.target as HTMLInputElement).value;
-    this.formatDate(value, blur);
-    this.openPanel();
+    let value = (event.target as HTMLInputElement).value;
+    if (value === '') {
+      this.clearValue();
+      this.closePanel();
+    } else {
+      this.formatDate(value, blur);
+      this.openPanel();
+    }
   }
 
   protected formatDate(value: string, blur: boolean) {
