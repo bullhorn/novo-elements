@@ -44097,7 +44097,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       args: [{
         selector: 'novo-check-list',
         providers: [CHECKLIST_VALUE_ACCESSOR],
-        template: "\n        <div class=\"check-box-group\" *ngFor=\"let option of _options; let i = index\" [ngClass]=\"{checked: option.checked}\" [class.disabled]=\"disabled\">\n            <input [name]=\"name\" type=\"checkbox\" [ngModel]=\"option.checked\" [attr.id]=\"name+i\" [value]=\"option.checked\" (change)=\"select($event, option)\" [disabled]=\"disabled\">\n            <label [attr.for]=\"name+i\" (click)=\"select($event, option)\">\n              <i [ngClass]=\"{'bhi-checkbox-empty': !option.checked, 'bhi-checkbox-filled': option.checked }\"></i>\n              <span>{{option.label}}</span>\n            </label>\n        </div>\n    "
+        template: "\n    <div\n      class=\"check-box-group\"\n      *ngFor=\"let option of _options; let i = index\"\n      [ngClass]=\"{ checked: option.checked }\"\n      [class.disabled]=\"disabled\"\n      [attr.data-automation-id]=\"option.label\"\n    >\n      <input\n        [name]=\"name\"\n        type=\"checkbox\"\n        [ngModel]=\"option.checked\"\n        [attr.id]=\"name + i\"\n        [value]=\"option.checked\"\n        (change)=\"select($event, option)\"\n        [disabled]=\"disabled\"\n      />\n      <label [attr.for]=\"name + i\" (click)=\"select($event, option)\">\n        <i [ngClass]=\"{ 'bhi-checkbox-empty': !option.checked, 'bhi-checkbox-filled': option.checked }\"></i>\n        <span>{{ option.label }}</span>\n      </label>\n    </div>\n  "
       }]
     }];
     NovoCheckListElement.propDecorators = {
