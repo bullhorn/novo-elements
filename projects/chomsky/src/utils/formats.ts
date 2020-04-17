@@ -88,12 +88,17 @@ export class Formats {
     const _value = value === null || value === undefined || value === '' ? new Date() : new Date(value);
     const options: Intl.DateTimeFormatOptions = this.getDateOptions(format);
     const locales = [...(this.overrideDateFormat ? [this.overrideDateFormat] : []), this.locale, 'en-US'];
-    const timeParts: { [p: string]: string } = Intl.DateTimeFormat(locales, options)
+    let timeParts: { [p: string]: string } = Intl.DateTimeFormat(locales, options)
       .formatToParts(_value)
       .reduce((obj, part) => {
         obj[part.type] = part.value;
         return obj;
       }, {});
+    if (this.use24HourTime) {
+      timeParts.hour = timeParts.hour === '24' ? '0' : timeParts.hour;
+    } else {
+      timeParts.hour = timeParts.hour === '0' ? '12' : timeParts.hour;
+    }
     const dayPeriodPropertyName = Object.keys(timeParts).find((n) => n.toLowerCase() === 'dayperiod');
     const dayperiod = timeParts[dayPeriodPropertyName] || '';
     return `${timeParts.hour}:${timeParts.minute}${dayperiod}`;
