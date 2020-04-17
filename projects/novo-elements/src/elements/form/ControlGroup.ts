@@ -1,12 +1,10 @@
 // NG
 import {
   Component,
-  Directive,
   TemplateRef,
   Input,
   Output,
   AfterContentInit,
-  ViewContainerRef,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   EventEmitter,
@@ -46,7 +44,7 @@ export class NovoControlGroup implements AfterContentInit, OnChanges {
   get vertical() {
     return this._vertical;
   }
-  private _vertical: boolean = false;
+  private _vertical = false;
   // Hides/shows the add button for adding a new control
   @Input() add: NovoControlGroupAddConfig;
   // Hide/shows the remove button for removing a control
@@ -57,7 +55,7 @@ export class NovoControlGroup implements AfterContentInit, OnChanges {
   get remove() {
     return this._remove;
   }
-  private _remove: boolean = false;
+  private _remove = false;
   // Hide/shows the edit button for editing a control
   @Input()
   set edit(v: boolean) {
@@ -66,7 +64,7 @@ export class NovoControlGroup implements AfterContentInit, OnChanges {
   get edit() {
     return this._edit;
   }
-  private _edit: boolean = false;
+  private _edit = false;
   // Allows the control to collapse or not
   @Input()
   set collapsible(v: boolean) {
@@ -75,7 +73,7 @@ export class NovoControlGroup implements AfterContentInit, OnChanges {
   get collapsible() {
     return this._collapsible;
   }
-  private _collapsible: boolean = false;
+  private _collapsible = false;
   // Main form group
   @Input() form: NovoFormGroup;
   // Controls for each item in the control group
@@ -106,26 +104,26 @@ export class NovoControlGroup implements AfterContentInit, OnChanges {
   // Template for custom row rendering
   @Input() rowTemplate: TemplateRef<any>;
 
-  @Output() onRemove: EventEmitter<any> = new EventEmitter<any>();
-  @Output() onEdit: EventEmitter<any> = new EventEmitter<any>();
-  @Output() onAdd: EventEmitter<any> = new EventEmitter<any>();
-  @Output() change: EventEmitter<any> = new EventEmitter<any>();
+  @Output() onRemove = new EventEmitter<{ value, index }>();
+  @Output() onEdit = new EventEmitter<{ value, index }>();
+  @Output() onAdd = new EventEmitter<any>();
+  @Output() change = new EventEmitter<any>();
 
-  public controlLabels: { value: string; width: number; required: boolean; key: string }[] = [];
-  public toggled: boolean = false;
-  public disabledArray: { edit: boolean; remove: boolean }[] = [];
+  controlLabels: { value: string; width: number; required: boolean; key: string }[] = [];
+  toggled = false;
+  disabledArray: { edit: boolean; remove: boolean }[] = [];
 
   currentIndex = 0;
 
-  constructor(private formUtils: FormUtils, private fb: FormBuilder, private ref: ChangeDetectorRef, private labels: NovoLabelService) {}
+  constructor(private formUtils: FormUtils, private fb: FormBuilder, private ref: ChangeDetectorRef, private labels: NovoLabelService) { }
 
-  public ngAfterContentInit(): void {
+  ngAfterContentInit() {
     if (!this.key) {
       throw new Error('novo-control-group must have the [key] attribute provided!');
     }
   }
 
-  public ngOnChanges(changes: SimpleChanges) {
+  ngOnChanges(changes: SimpleChanges) {
     const initialValueChange: SimpleChange = changes['initialValue'];
 
     // If initial value changes, clear the controls
@@ -157,18 +155,19 @@ export class NovoControlGroup implements AfterContentInit, OnChanges {
     }
   }
 
-  onChange(change: any): void {
+  onChange(change) {
     this.change.emit(this);
   }
 
-  public resetAddRemove(): void {
+  resetAddRemove() {
     this.disabledArray.forEach((item: NovoControlGroupRowConfig, idx: number) => {
       item.edit = this.checkCanEdit(idx);
       item.remove = this.checkCanRemove(idx);
     });
+    this.ref.markForCheck();
   }
 
-  public addNewControl(value?: {}): void {
+  addNewControl(value?: {}) {
     const control: FormArray = <FormArray>this.form.controls[this.key];
     const newCtrl: NovoFormGroup = this.buildControl(value);
     if (control) {
@@ -188,7 +187,7 @@ export class NovoControlGroup implements AfterContentInit, OnChanges {
     this.ref.markForCheck();
   }
 
-  public buildControl(value?: {}): NovoFormGroup {
+  buildControl(value?: {}): NovoFormGroup {
     const newControls = this.getNewControls(this.controls);
     if (value) {
       this.formUtils.setInitialValues(newControls, value);
@@ -197,7 +196,7 @@ export class NovoControlGroup implements AfterContentInit, OnChanges {
     return ctrl;
   }
 
-  public removeControl(index: number, emitEvent: boolean = true): void {
+  removeControl(index: number, emitEvent = true) {
     const control: FormArray = <FormArray>this.form.controls[this.key];
     if (emitEvent) {
       this.onRemove.emit({ value: control.at(index).value, index });
@@ -209,12 +208,12 @@ export class NovoControlGroup implements AfterContentInit, OnChanges {
     this.ref.markForCheck();
   }
 
-  public editControl(index: number): void {
+  editControl(index: number) {
     const control: FormArray = <FormArray>this.form.controls[this.key];
     this.onEdit.emit({ value: control.at(index).value, index });
   }
 
-  public toggle(event: MouseEvent) {
+  toggle(event: MouseEvent) {
     Helpers.swallowEvent(event);
     if (this.collapsible) {
       this.toggled = !this.toggled;

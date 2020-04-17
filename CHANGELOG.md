@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.3.4](https://github.com/bullhorn/novo-elements/compare/v4.3.3...v4.3.4) (2020-04-08)
+
+
+### Features
+
+* **visibility:** expose NovoDropdownElement ([#1090](https://github.com/bullhorn/novo-elements/issues/1090)) ([3362a11](https://github.com/bullhorn/novo-elements/commit/3362a113be12272ec8ffb70f176ac2f1bf219de4))
+
+
+### Bug Fixes
+
+* **controlgroup:** added null check to checkCanRemove method ([#1091](https://github.com/bullhorn/novo-elements/issues/1091)) ([574e03c](https://github.com/bullhorn/novo-elements/commit/574e03c10ce29555701aab3b52e06590b6f12745))
+
 ### [4.3.3](https://github.com/bullhorn/novo-elements/compare/v4.3.2...v4.3.3) (2020-03-31)
 
 ### [4.3.1](https://github.com/bullhorn/novo-elements/compare/v4.3.2...v4.3.1) (2020-03-31)
