@@ -20,13 +20,13 @@ const CHECKLIST_VALUE_ACCESSOR = {
       *ngFor="let option of _options; let i = index"
       [ngClass]="{ checked: option.checked }"
       [class.disabled]="disabled"
+      [attr.data-automation-id]="option.label"
     >
       <input
         [name]="name"
         type="checkbox"
         [ngModel]="option.checked"
         [attr.id]="name + i"
-        [attr.data-automation-id]="option.label"
         [value]="option.checked"
         (change)="select($event, option)"
         [disabled]="disabled"
