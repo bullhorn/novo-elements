@@ -517,13 +517,15 @@ class Formats {
      */
     formatTime(value, format) {
         /** @type {?} */
-        const _value = (value === null || value === undefined || value === '') ? new Date() : new Date(value);
+        const _value = value === null || value === undefined || value === '' ? new Date() : new Date(value);
         /** @type {?} */
         const options = this.getDateOptions(format);
         /** @type {?} */
         const locales = [...(this.overrideDateFormat ? [this.overrideDateFormat] : []), this.locale, 'en-US'];
         /** @type {?} */
-        const timeParts = Intl.DateTimeFormat(locales, options).formatToParts(_value).reduce((/**
+        const timeParts = Intl.DateTimeFormat(locales, options)
+            .formatToParts(_value)
+            .reduce((/**
          * @param {?} obj
          * @param {?} part
          * @return {?}
@@ -537,7 +539,7 @@ class Formats {
          * @param {?} n
          * @return {?}
          */
-        n => n.toLowerCase() === 'dayperiod'));
+        (n) => n.toLowerCase() === 'dayperiod'));
         /** @type {?} */
         const dayperiod = timeParts[dayPeriodPropertyName] || '';
         return `${timeParts.hour}:${timeParts.minute}${dayperiod}`;
@@ -14870,9 +14872,15 @@ class NovoDatePickerInputElement {
      */
     _handleEvent(event, blur) {
         /** @type {?} */
-        const value = ((/** @type {?} */ (event.target))).value;
-        this.formatDate(value, blur);
-        this.openPanel();
+        let value = ((/** @type {?} */ (event.target))).value;
+        if (value === '') {
+            this.clearValue();
+            this.closePanel();
+        }
+        else {
+            this.formatDate(value, blur);
+            this.openPanel();
+        }
     }
     /**
      * @protected

@@ -20750,8 +20750,14 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           var value =
           /** @type {?} */
           event.target.value;
-          this.formatDate(value, blur);
-          this.openPanel();
+
+          if (value === '') {
+            this.clearValue();
+            this.closePanel();
+          } else {
+            this.formatDate(value, blur);
+            this.openPanel();
+          }
         }
         /**
          * @protected
