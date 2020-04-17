@@ -523,7 +523,7 @@ class Formats {
         /** @type {?} */
         const locales = [...(this.overrideDateFormat ? [this.overrideDateFormat] : []), this.locale, 'en-US'];
         /** @type {?} */
-        const timeParts = Intl.DateTimeFormat(locales, options)
+        let timeParts = Intl.DateTimeFormat(locales, options)
             .formatToParts(_value)
             .reduce((/**
          * @param {?} obj
@@ -534,6 +534,12 @@ class Formats {
             obj[part.type] = part.value;
             return obj;
         }), {});
+        if (this.use24HourTime) {
+            timeParts.hour = timeParts.hour === '24' ? '0' : timeParts.hour;
+        }
+        else {
+            timeParts.hour = timeParts.hour === '0' ? '12' : timeParts.hour;
+        }
         /** @type {?} */
         const dayPeriodPropertyName = Object.keys(timeParts).find((/**
          * @param {?} n
@@ -15048,12 +15054,32 @@ NovoDatePickerInputElement.decorators = [
                 selector: 'novo-date-picker-input',
                 providers: [DATE_VALUE_ACCESSOR],
                 template: `
-        <input type="text" [name]="name" [(ngModel)]="formattedValue" [textMask]="maskOptions" [placeholder]="placeholder" (focus)="_handleFocus($event)" (keydown)="_handleKeydown($event)" (input)="_handleInput($event)" (blur)="_handleBlur($event)" #input data-automation-id="date-input" [disabled]="disabled"/>
-        <i *ngIf="!hasValue" (click)="openPanel()" class="bhi-calendar"></i>
-        <i *ngIf="hasValue" (click)="clearValue()" class="bhi-times"></i>
-        <novo-overlay-template [parent]="element" position="above-below">
-            <novo-date-picker [start]="start" [end]="end" inline="true" (onSelect)="setValueAndClose($event)" [ngModel]="value" [weekStart]="weekStart"></novo-date-picker>
-        </novo-overlay-template>
+    <input
+      type="text"
+      [name]="name"
+      [(ngModel)]="formattedValue"
+      [textMask]="maskOptions"
+      [placeholder]="placeholder"
+      (focus)="_handleFocus($event)"
+      (keydown)="_handleKeydown($event)"
+      (input)="_handleInput($event)"
+      (blur)="_handleBlur($event)"
+      #input
+      data-automation-id="date-input"
+      [disabled]="disabled"
+    />
+    <i *ngIf="!hasValue" (click)="openPanel()" class="bhi-calendar"></i>
+    <i *ngIf="hasValue" (click)="clearValue()" class="bhi-times"></i>
+    <novo-overlay-template [parent]="element" position="above-below">
+      <novo-date-picker
+        [start]="start"
+        [end]="end"
+        inline="true"
+        (onSelect)="setValueAndClose($event)"
+        [ngModel]="value"
+        [weekStart]="weekStart"
+      ></novo-date-picker>
+    </novo-overlay-template>
   `
             }] }
 ];

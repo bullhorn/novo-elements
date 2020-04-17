@@ -848,7 +848,14 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             obj[part.type] = part.value;
             return obj;
           }, {});
+
+          if (this.use24HourTime) {
+            timeParts.hour = timeParts.hour === '24' ? '0' : timeParts.hour;
+          } else {
+            timeParts.hour = timeParts.hour === '0' ? '12' : timeParts.hour;
+          }
           /** @type {?} */
+
 
           var dayPeriodPropertyName = Object.keys(timeParts).find(
           /**
@@ -20989,7 +20996,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       args: [{
         selector: 'novo-date-picker-input',
         providers: [DATE_VALUE_ACCESSOR],
-        template: "\n        <input type=\"text\" [name]=\"name\" [(ngModel)]=\"formattedValue\" [textMask]=\"maskOptions\" [placeholder]=\"placeholder\" (focus)=\"_handleFocus($event)\" (keydown)=\"_handleKeydown($event)\" (input)=\"_handleInput($event)\" (blur)=\"_handleBlur($event)\" #input data-automation-id=\"date-input\" [disabled]=\"disabled\"/>\n        <i *ngIf=\"!hasValue\" (click)=\"openPanel()\" class=\"bhi-calendar\"></i>\n        <i *ngIf=\"hasValue\" (click)=\"clearValue()\" class=\"bhi-times\"></i>\n        <novo-overlay-template [parent]=\"element\" position=\"above-below\">\n            <novo-date-picker [start]=\"start\" [end]=\"end\" inline=\"true\" (onSelect)=\"setValueAndClose($event)\" [ngModel]=\"value\" [weekStart]=\"weekStart\"></novo-date-picker>\n        </novo-overlay-template>\n  "
+        template: "\n    <input\n      type=\"text\"\n      [name]=\"name\"\n      [(ngModel)]=\"formattedValue\"\n      [textMask]=\"maskOptions\"\n      [placeholder]=\"placeholder\"\n      (focus)=\"_handleFocus($event)\"\n      (keydown)=\"_handleKeydown($event)\"\n      (input)=\"_handleInput($event)\"\n      (blur)=\"_handleBlur($event)\"\n      #input\n      data-automation-id=\"date-input\"\n      [disabled]=\"disabled\"\n    />\n    <i *ngIf=\"!hasValue\" (click)=\"openPanel()\" class=\"bhi-calendar\"></i>\n    <i *ngIf=\"hasValue\" (click)=\"clearValue()\" class=\"bhi-times\"></i>\n    <novo-overlay-template [parent]=\"element\" position=\"above-below\">\n      <novo-date-picker\n        [start]=\"start\"\n        [end]=\"end\"\n        inline=\"true\"\n        (onSelect)=\"setValueAndClose($event)\"\n        [ngModel]=\"value\"\n        [weekStart]=\"weekStart\"\n      ></novo-date-picker>\n    </novo-overlay-template>\n  "
       }]
     }];
     /** @nocollapse */
