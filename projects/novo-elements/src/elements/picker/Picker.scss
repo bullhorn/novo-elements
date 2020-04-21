@@ -340,11 +340,11 @@ distribution-list-picker-results {
   max-width: none;
   z-index: 99;
   background: $white;
+  padding: 1px;
   &.active {
     border: 1px solid $positive;
   }
   novo-list {
-    max-height: 100%;
     min-height: 100%;
     background: $white;
     max-height: 330px;
@@ -361,7 +361,7 @@ distribution-list-picker-results {
       }
       item-title h6 {
         font-weight: 500;
-        padding: 0.6em 0 0em;
+        padding: 0.6em 0 0.5em;
         span {
           overflow: hidden;
           white-space: nowrap;
@@ -393,7 +393,7 @@ distribution-list-picker-results {
           overflow: hidden;
           white-space: nowrap;
           text-overflow: ellipsis;
-          min-width: 100px;
+          flex: 1;
           .label {
             font-weight: bold;
           }

@@ -21,25 +21,25 @@ import { NovoLabelService } from '../../../../services/novo-label-service';
       >
         <item-header>
           <item-title>
-            <span [innerHtml]="sanitizeHTML(match?.compensation?.workersCompCode, match?.compensation?.name)"></span>
+            <span [innerHtml]="sanitizeHTML(match?.data?.compensation?.code, match?.data?.compensation?.name)"></span>
           </item-title>
         </item-header>
         <item-content direction="horizontal">
           <p>
-            <span class="label">{{ labels.state }}: </span><span>{{ match?.compensation?.state }}</span>
+            <span class="label">{{ labels.state }}: </span><span>{{ match?.data?.compensation?.state }}</span>
           </p>
           <p>
-            <span class="label">{{ labels.rate }}: </span><span>{{ labels.formatCurrency((match?.rate || 0).toNumber()) }}</span>
+            <span class="label">{{ labels.rate }}: </span><span>{{ labels.formatCurrency(match?.data?.rate) }}</span>
           </p>
         </item-content>
         <item-content direction="horizontal">
           <p>
             <span class="label">{{ labels.startDate }}: </span
-            ><span>{{ labels.formatDateWithFormat(match?.startDate, { year: 'numeric', month: 'numeric', day: 'numeric' }) }}</span>
+            ><span>{{ labels.formatDateWithFormat(match?.data?.startDate, { year: 'numeric', month: 'numeric', day: 'numeric' }) }}</span>
           </p>
           <p>
             <span class="label">{{ labels.endDate }}: </span
-            ><span>{{ labels.formatDateWithFormat(match?.endDate, { year: 'numeric', month: 'numeric', day: 'numeric' }) }}</span>
+            ><span>{{ labels.formatDateWithFormat(match?.data?.endDate, { year: 'numeric', month: 'numeric', day: 'numeric' }) }}</span>
           </p>
         </item-content>
       </novo-list-item>
