@@ -60,11 +60,11 @@ export class WorkersCompCodesPickerResults extends BasePickerResults {
     this.sanitizer = sanitizer;
   }
 
-  getListElement(): any {
+  getListElement() {
     return this.element.nativeElement.querySelector('novo-list');
   }
 
-  sanitizeHTML(compCode: string, name: string): any {
+  sanitizeHTML(compCode: string, name: string) {
     return this.sanitizer.bypassSecurityTrustHtml(`${compCode} | ${name}`);
   }
 }
