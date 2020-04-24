@@ -1813,7 +1813,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     !*** ./dist/novo-elements/fesm2015/novo-elements.js ***!
     \******************************************************/
 
-  /*! exports provided: AceEditorControl, ActivityTableDataSource, ActivityTableRenderers, AddressControl, AppBridge, AppBridgeHandler, AppBridgeService, ArrayCollection, BaseControl, BasePickerResults, BaseRenderer, COUNTRIES, CalendarEventResponse, CheckListControl, CheckboxControl, ChecklistPickerResults, CollectionEvent, ComponentUtils, ControlFactory, CustomControl, DateCell, DateControl, DateTimeControl, DecodeURIPipe, Deferred, DevAppBridge, DevAppBridgeService, DistributionListPickerResults, EditorControl, EntityPickerResult, EntityPickerResults, FieldInteractionApi, FileControl, FormUtils, FormValidators, GooglePlacesService, GroupByPipe, GroupedControl, GroupedMultiPickerResults, Helpers, KeyCodes, NOVO_VALUE_THEME, NOVO_VALUE_TYPE, NativeSelectControl, NovoAceEditorModule, NovoActivityTable, NovoActivityTableActions, NovoActivityTableCustomFilter, NovoActivityTableCustomHeader, NovoActivityTableEmptyMessage, NovoActivityTableNoResultsMessage, NovoActivityTableState, NovoButtonModule, NovoCalendarDateChangeElement, NovoCalendarModule, NovoCardModule, NovoCategoryDropdownModule, NovoCheckListElement, NovoChipsModule, NovoCommonModule, NovoControlGroup, NovoDataTable, NovoDataTableFilterUtils, NovoDataTableModule, NovoDatePickerElement, NovoDatePickerModule, NovoDateTimePickerModule, NovoDragulaModule, NovoDragulaService, NovoDropdownCell, NovoDropdownElement, NovoDropdownModule, NovoDynamicFormElement, NovoElementProviders, NovoElementsModule, NovoExpansionModule, NovoFile, NovoFormControl, NovoFormExtrasModule, NovoFormGroup, NovoFormModule, NovoHeaderModule, NovoHorizontalStepper, NovoIconModule, NovoLabelService, NovoListElement, NovoListModule, NovoLoadingModule, NovoModalModule, NovoModalParams, NovoModalRef, NovoModalService, NovoMultiPickerModule, NovoNovoCKEditorModule, NovoPickerModule, NovoPipesModule, NovoQuickNoteModule, NovoRadioModule, NovoSearchBoxModule, NovoSelectModule, NovoSelection, NovoSimpleActionCell, NovoSimpleCell, NovoSimpleCellDef, NovoSimpleCellHeader, NovoSimpleCheckboxCell, NovoSimpleCheckboxHeaderCell, NovoSimpleColumnDef, NovoSimpleEmptyHeaderCell, NovoSimpleFilterFocus, NovoSimpleHeaderCell, NovoSimpleHeaderCellDef, NovoSimpleHeaderRow, NovoSimpleHeaderRowDef, NovoSimpleRow, NovoSimpleRowDef, NovoSimpleTableModule, NovoSimpleTablePagination, NovoSliderModule, NovoSortFilter, NovoStep, NovoStepper, NovoStepperModule, NovoSwitchModule, NovoTabModule, NovoTabbedGroupPickerModule, NovoTable, NovoTableElement, NovoTableExtrasModule, NovoTableMode, NovoTableModule, NovoTemplate, NovoTemplateService, NovoTilesModule, NovoTimePickerModule, NovoTipWellModule, NovoToastModule, NovoToastService, NovoTooltipModule, NovoValueModule, NovoVerticalStepper, OptionsService, OutsideClick, PagedArrayCollection, PercentageCell, PickerControl, PickerResults, PluralPipe, QuickNoteControl, QuickNoteResults, RadioControl, ReadOnlyControl, RemoteActivityTableService, RemoteDataTableService, RenderPipe, Security, SelectControl, SkillsSpecialtyPickerResults, StaticActivityTableService, StaticDataTableService, TablePickerControl, TextAreaControl, TextBoxControl, TilesControl, TimeControl, UnlessModule, findByCountryCode, findByCountryId, findByCountryName, getCountries, getDayView, getDayViewHourGrid, getMonthView, getStateObjects, getStates, getWeekView, getWeekViewEventOffset, getWeekViewHeader, notify, ɵa, ɵb, ɵba, ɵbb, ɵbc, ɵbd, ɵbe, ɵbf, ɵbg, ɵbh, ɵbi, ɵbj, ɵbk, ɵbl, ɵbm, ɵbn, ɵbo, ɵbp, ɵbq, ɵbr, ɵbs, ɵbt, ɵbu, ɵbv, ɵbw, ɵbx, ɵby, ɵbz, ɵc, ɵca, ɵcb, ɵcc, ɵcd, ɵce, ɵcf, ɵcg, ɵch, ɵci, ɵcj, ɵck, ɵcl, ɵcm, ɵcn, ɵco, ɵcp, ɵcq, ɵcr, ɵcs, ɵct, ɵcu, ɵcv, ɵcw, ɵcx, ɵcy, ɵcz, ɵd, ɵda, ɵdb, ɵdc, ɵdd, ɵde, ɵdf, ɵdg, ɵdh, ɵdi, ɵdj, ɵdk, ɵdl, ɵdm, ɵdn, ɵdo, ɵdp, ɵdq, ɵdr, ɵds, ɵdt, ɵdu, ɵdv, ɵdw, ɵdx, ɵdy, ɵdz, ɵe, ɵea, ɵeb, ɵec, ɵed, ɵee, ɵef, ɵeg, ɵeh, ɵei, ɵej, ɵek, ɵel, ɵem, ɵen, ɵeo, ɵep, ɵeq, ɵer, ɵes, ɵet, ɵeu, ɵev, ɵew, ɵex, ɵey, ɵez, ɵf, ɵfa, ɵfb, ɵfc, ɵfd, ɵfe, ɵff, ɵfg, ɵfh, ɵfi, ɵfj, ɵfk, ɵfl, ɵfm, ɵfn, ɵfo, ɵfp, ɵfq, ɵg, ɵh, ɵi, ɵj, ɵk, ɵl, ɵm, ɵn, ɵo, ɵp, ɵq, ɵr, ɵs, ɵt, ɵu, ɵv, ɵw, ɵx, ɵy, ɵz */
+  /*! exports provided: AceEditorControl, ActivityTableDataSource, ActivityTableRenderers, AddressControl, AppBridge, AppBridgeHandler, AppBridgeService, ArrayCollection, BaseControl, BasePickerResults, BaseRenderer, COUNTRIES, CalendarEventResponse, CheckListControl, CheckboxControl, ChecklistPickerResults, CollectionEvent, ComponentUtils, ControlFactory, CustomControl, DateCell, DateControl, DateTimeControl, DecodeURIPipe, Deferred, DevAppBridge, DevAppBridgeService, DistributionListPickerResults, EditorControl, EntityPickerResult, EntityPickerResults, FieldInteractionApi, FileControl, FormUtils, FormValidators, GooglePlacesService, GroupByPipe, GroupedControl, GroupedMultiPickerResults, Helpers, KeyCodes, NOVO_VALUE_THEME, NOVO_VALUE_TYPE, NativeSelectControl, NovoAceEditorModule, NovoActivityTable, NovoActivityTableActions, NovoActivityTableCustomFilter, NovoActivityTableCustomHeader, NovoActivityTableEmptyMessage, NovoActivityTableNoResultsMessage, NovoActivityTableState, NovoButtonModule, NovoCalendarDateChangeElement, NovoCalendarModule, NovoCardModule, NovoCategoryDropdownModule, NovoCheckListElement, NovoChipsModule, NovoCommonModule, NovoControlGroup, NovoDataTable, NovoDataTableFilterUtils, NovoDataTableModule, NovoDatePickerElement, NovoDatePickerModule, NovoDateTimePickerModule, NovoDragulaModule, NovoDragulaService, NovoDropdownCell, NovoDropdownElement, NovoDropdownModule, NovoDynamicFormElement, NovoElementProviders, NovoElementsModule, NovoExpansionModule, NovoFile, NovoFormControl, NovoFormExtrasModule, NovoFormGroup, NovoFormModule, NovoHeaderModule, NovoHorizontalStepper, NovoIconModule, NovoLabelService, NovoListElement, NovoListModule, NovoLoadingModule, NovoModalModule, NovoModalParams, NovoModalRef, NovoModalService, NovoMultiPickerModule, NovoNovoCKEditorModule, NovoPickerModule, NovoPipesModule, NovoQuickNoteModule, NovoRadioModule, NovoSearchBoxModule, NovoSelectModule, NovoSelection, NovoSimpleActionCell, NovoSimpleCell, NovoSimpleCellDef, NovoSimpleCellHeader, NovoSimpleCheckboxCell, NovoSimpleCheckboxHeaderCell, NovoSimpleColumnDef, NovoSimpleEmptyHeaderCell, NovoSimpleFilterFocus, NovoSimpleHeaderCell, NovoSimpleHeaderCellDef, NovoSimpleHeaderRow, NovoSimpleHeaderRowDef, NovoSimpleRow, NovoSimpleRowDef, NovoSimpleTableModule, NovoSimpleTablePagination, NovoSliderModule, NovoSortFilter, NovoStep, NovoStepper, NovoStepperModule, NovoSwitchModule, NovoTabModule, NovoTabbedGroupPickerModule, NovoTable, NovoTableElement, NovoTableExtrasModule, NovoTableMode, NovoTableModule, NovoTemplate, NovoTemplateService, NovoTilesModule, NovoTimePickerModule, NovoTipWellModule, NovoToastModule, NovoToastService, NovoTooltipModule, NovoValueModule, NovoVerticalStepper, OptionsService, OutsideClick, PagedArrayCollection, PercentageCell, PickerControl, PickerResults, PluralPipe, QuickNoteControl, QuickNoteResults, RadioControl, ReadOnlyControl, RemoteActivityTableService, RemoteDataTableService, RenderPipe, Security, SelectControl, SkillsSpecialtyPickerResults, StaticActivityTableService, StaticDataTableService, TablePickerControl, TextAreaControl, TextBoxControl, TilesControl, TimeControl, UnlessModule, WorkersCompCodesPickerResults, findByCountryCode, findByCountryId, findByCountryName, getCountries, getDayView, getDayViewHourGrid, getMonthView, getStateObjects, getStates, getWeekView, getWeekViewEventOffset, getWeekViewHeader, notify, ɵa, ɵb, ɵba, ɵbb, ɵbc, ɵbd, ɵbe, ɵbf, ɵbg, ɵbh, ɵbi, ɵbj, ɵbk, ɵbl, ɵbm, ɵbn, ɵbo, ɵbp, ɵbq, ɵbr, ɵbs, ɵbt, ɵbu, ɵbv, ɵbw, ɵbx, ɵby, ɵbz, ɵc, ɵca, ɵcb, ɵcc, ɵcd, ɵce, ɵcf, ɵcg, ɵch, ɵci, ɵcj, ɵck, ɵcl, ɵcm, ɵcn, ɵco, ɵcp, ɵcq, ɵcr, ɵcs, ɵct, ɵcu, ɵcv, ɵcw, ɵcx, ɵcy, ɵcz, ɵd, ɵda, ɵdb, ɵdc, ɵdd, ɵde, ɵdf, ɵdg, ɵdh, ɵdi, ɵdj, ɵdk, ɵdl, ɵdm, ɵdn, ɵdo, ɵdp, ɵdq, ɵdr, ɵds, ɵdt, ɵdu, ɵdv, ɵdw, ɵdx, ɵdy, ɵdz, ɵe, ɵea, ɵeb, ɵec, ɵed, ɵee, ɵef, ɵeg, ɵeh, ɵei, ɵej, ɵek, ɵel, ɵem, ɵen, ɵeo, ɵep, ɵeq, ɵer, ɵes, ɵet, ɵeu, ɵev, ɵew, ɵex, ɵey, ɵez, ɵf, ɵfa, ɵfb, ɵfc, ɵfd, ɵfe, ɵff, ɵfg, ɵfh, ɵfi, ɵfj, ɵfk, ɵfl, ɵfm, ɵfn, ɵfo, ɵfp, ɵfq, ɵg, ɵh, ɵi, ɵj, ɵk, ɵl, ɵm, ɵn, ɵo, ɵp, ɵq, ɵr, ɵs, ɵt, ɵu, ɵv, ɵw, ɵx, ɵy, ɵz */
 
   /***/
   function distNovoElementsFesm2015NovoElementsJs(module, __webpack_exports__, __webpack_require__) {
@@ -2815,6 +2815,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     __webpack_require__.d(__webpack_exports__, "UnlessModule", function () {
       return UnlessModule;
+    });
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "WorkersCompCodesPickerResults", function () {
+      return WorkersCompCodesPickerResults;
     });
     /* harmony export (binding) */
 
@@ -6394,6 +6400,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         this.move = 'Move';
         this.startDate = 'Start Date';
         this.endDate = 'End Date';
+        this.rate = 'Rate';
         this.more = 'more';
         this.clearAll = 'CLEAR ALL';
         this.clearAllNormalCase = 'Clear All';
@@ -17694,6 +17701,104 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     if (false) {}
     /**
      * @fileoverview added by tsickle
+     * Generated from: elements/picker/extras/workers-comp-codes-picker-results/WorkersCompCodesPickerResults.ts
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+
+
+    var WorkersCompCodesPickerResults = /*#__PURE__*/function (_BasePickerResults7) {
+      _inherits(WorkersCompCodesPickerResults, _BasePickerResults7);
+
+      var _super9 = _createSuper(WorkersCompCodesPickerResults);
+
+      /**
+       * @param {?} element
+       * @param {?} sanitizer
+       * @param {?} labels
+       * @param {?} ref
+       */
+      function WorkersCompCodesPickerResults(element, sanitizer, labels, ref) {
+        var _this55;
+
+        _classCallCheck(this, WorkersCompCodesPickerResults);
+
+        _this55 = _super9.call(this, element, ref);
+        _this55.sanitizer = sanitizer;
+        _this55.labels = labels;
+        _this55.active = true;
+        _this55.sanitizer = sanitizer;
+        return _this55;
+      }
+      /**
+       * @return {?}
+       */
+
+
+      _createClass(WorkersCompCodesPickerResults, [{
+        key: "getListElement",
+
+        /**
+         * @return {?}
+         */
+        value: function getListElement() {
+          return this.element.nativeElement.querySelector('novo-list');
+        }
+        /**
+         * @param {?} compCode
+         * @param {?} name
+         * @return {?}
+         */
+
+      }, {
+        key: "sanitizeHTML",
+        value: function sanitizeHTML(compCode, name) {
+          return this.sanitizer.bypassSecurityTrustHtml("".concat(compCode, " | ").concat(name));
+        }
+      }, {
+        key: "isHidden",
+        get: function get() {
+          return this.matches.length === 0;
+        }
+      }]);
+
+      return WorkersCompCodesPickerResults;
+    }(BasePickerResults);
+
+    WorkersCompCodesPickerResults.decorators = [{
+      type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
+      args: [{
+        selector: 'workers-comp-codes-picker-results',
+        template: "\n    <section class=\"picker-loading\" *ngIf=\"isLoading && !matches?.length\">\n      <novo-loading theme=\"line\"></novo-loading>\n    </section>\n    <novo-list direction=\"vertical\" *ngIf=\"matches?.length > 0 && !hasError\">\n      <novo-list-item\n        *ngFor=\"let match of matches\"\n        (click)=\"selectMatch($event)\"\n        [class.active]=\"match === activeMatch\"\n        (mouseenter)=\"selectActive(match)\"\n        [class.disabled]=\"preselected(match)\"\n      >\n        <item-header>\n          <item-title>\n            <span [innerHtml]=\"sanitizeHTML(match?.data?.compensation?.code, match?.data?.compensation?.name)\"></span>\n          </item-title>\n        </item-header>\n        <item-content direction=\"horizontal\">\n          <p>\n            <span class=\"label\">{{ labels.state }}: </span><span>{{ match?.data?.compensation?.state }}</span>\n          </p>\n          <p>\n            <span class=\"label\">{{ labels.rate }}: </span><span>{{ labels.formatCurrency(match?.data?.rate) }}</span>\n          </p>\n        </item-content>\n        <item-content direction=\"horizontal\">\n          <p>\n            <span class=\"label\">{{ labels.startDate }}: </span\n            ><span>{{ labels.formatDateWithFormat(match?.data?.startDate, { year: 'numeric', month: 'numeric', day: 'numeric' }) }}</span>\n          </p>\n          <p>\n            <span class=\"label\">{{ labels.endDate }}: </span\n            ><span>{{ labels.formatDateWithFormat(match?.data?.endDate, { year: 'numeric', month: 'numeric', day: 'numeric' }) }}</span>\n          </p>\n        </item-content>\n      </novo-list-item>\n      <novo-loading theme=\"line\" *ngIf=\"isLoading && matches?.length > 0\"></novo-loading>\n    </novo-list>\n  "
+      }]
+    }];
+    /** @nocollapse */
+
+    WorkersCompCodesPickerResults.ctorParameters = function () {
+      return [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ElementRef"]
+      }, {
+        type: _angular_platform_browser__WEBPACK_IMPORTED_MODULE_12__["DomSanitizer"]
+      }, {
+        type: NovoLabelService
+      }, {
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ChangeDetectorRef"]
+      }];
+    };
+
+    WorkersCompCodesPickerResults.propDecorators = {
+      active: [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["HostBinding"],
+        args: ['class.active']
+      }],
+      isHidden: [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["HostBinding"],
+        args: ['hidden']
+      }]
+    };
+
+    if (false) {}
+    /**
+     * @fileoverview added by tsickle
      * Generated from: elements/picker/Picker.module.ts
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
@@ -17707,9 +17812,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"],
       args: [{
         imports: [_angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormsModule"], NovoLoadingModule, NovoListModule, NovoOverlayModule, NovoSwitchModule],
-        declarations: [NovoPickerElement, PickerResults, EntityPickerResult, EntityPickerResults, ChecklistPickerResults, GroupedMultiPickerResults, DistributionListPickerResults, SkillsSpecialtyPickerResults],
-        exports: [NovoPickerElement, PickerResults, EntityPickerResult, EntityPickerResults, ChecklistPickerResults, GroupedMultiPickerResults, DistributionListPickerResults, SkillsSpecialtyPickerResults],
-        entryComponents: [PickerResults, EntityPickerResult, EntityPickerResults, ChecklistPickerResults, GroupedMultiPickerResults, DistributionListPickerResults, SkillsSpecialtyPickerResults]
+        declarations: [NovoPickerElement, PickerResults, EntityPickerResult, EntityPickerResults, ChecklistPickerResults, GroupedMultiPickerResults, DistributionListPickerResults, WorkersCompCodesPickerResults, SkillsSpecialtyPickerResults],
+        exports: [NovoPickerElement, PickerResults, EntityPickerResult, EntityPickerResults, ChecklistPickerResults, GroupedMultiPickerResults, DistributionListPickerResults, WorkersCompCodesPickerResults, SkillsSpecialtyPickerResults],
+        entryComponents: [PickerResults, EntityPickerResult, EntityPickerResults, ChecklistPickerResults, GroupedMultiPickerResults, DistributionListPickerResults, WorkersCompCodesPickerResults, SkillsSpecialtyPickerResults]
       }]
     }];
     /**
@@ -17786,7 +17891,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _createClass(NovoSearchBoxElement, [{
         key: "showSearch",
         value: function showSearch(event) {
-          var _this55 = this;
+          var _this56 = this;
 
           var forceClose = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
 
@@ -17799,7 +17904,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             */
             function () {
               /** @type {?} */
-              var element = _this55.input.nativeElement;
+              var element = _this56.input.nativeElement;
 
               if (element) {
                 element.focus();
@@ -17814,16 +17919,16 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "onFocus",
         value: function onFocus() {
-          var _this56 = this;
+          var _this57 = this;
 
           this._zone.run(
           /**
           * @return {?}
           */
           function () {
-            _this56.focused = true;
+            _this57.focused = true;
 
-            _this56.openPanel();
+            _this57.openPanel();
           });
         }
         /**
@@ -17880,7 +17985,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "_handleInput",
         value: function _handleInput(event) {
-          var _this57 = this;
+          var _this58 = this;
 
           if (document.activeElement === event.target) {
             this._onChange(
@@ -17896,7 +18001,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             * @return {?}
             */
             function () {
-              _this57.searchChanged.emit(
+              _this58.searchChanged.emit(
               /** @type {?} */
               event.target.value);
             }, 400);
@@ -18225,7 +18330,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "handleModels",
         value: function handleModels(name, drake) {
-          var _this58 = this;
+          var _this59 = this;
 
           /** @type {?} */
           var dragElm;
@@ -18252,7 +18357,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             sourceModel = drake.models[drake.containers.indexOf(source)];
             sourceModel.splice(dragIndex, 1);
 
-            _this58.removeModel.emit([name, el, source]);
+            _this59.removeModel.emit([name, el, source]);
           });
           drake.on('drag',
           /**
@@ -18262,7 +18367,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           */
           function (el, source) {
             dragElm = el;
-            dragIndex = _this58.domIndexOf(el, source);
+            dragIndex = _this59.domIndexOf(el, source);
           });
           drake.on('drop',
           /**
@@ -18276,7 +18381,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               return;
             }
 
-            dropIndex = _this58.domIndexOf(dropElm, target);
+            dropIndex = _this59.domIndexOf(dropElm, target);
             sourceModel = drake.models[drake.containers.indexOf(source)];
 
             if (target === source) {
@@ -18299,7 +18404,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               target.removeChild(dropElm); // element must be removed for ngFor to apply correctly
             }
 
-            _this58.dropModel.emit([name, dropElm, target, source]);
+            _this59.dropModel.emit([name, dropElm, target, source]);
           });
         }
         /**
@@ -18834,7 +18939,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "setItems",
         value: function setItems() {
-          var _this59 = this;
+          var _this60 = this;
 
           this.items = [];
 
@@ -18895,14 +19000,14 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                     var value = _step6.value;
 
                     if (value.hasOwnProperty('label')) {
-                      _this59.items.push({
+                      _this60.items.push({
                         value: value,
                         label: value.label
                       });
-                    } else if (_this59.source.options && Array.isArray(_this59.source.options)) {
-                      _this59.items.push(_this59.getLabelFromOptions(value));
+                    } else if (_this60.source.options && Array.isArray(_this60.source.options)) {
+                      _this60.items.push(_this60.getLabelFromOptions(value));
                     } else {
-                      _this59.items.push(value);
+                      _this60.items.push(value);
                     }
                   }
                 } catch (err) {
@@ -18911,7 +19016,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                   _iterator6.f();
                 }
 
-                _this59._items.next(_this59.items);
+                _this60._items.next(_this60.items);
               });
             }
           }
@@ -19310,12 +19415,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var NovoRowChipElement = /*#__PURE__*/function (_NovoChipElement) {
       _inherits(NovoRowChipElement, _NovoChipElement);
 
-      var _super9 = _createSuper(NovoRowChipElement);
+      var _super10 = _createSuper(NovoRowChipElement);
 
       function NovoRowChipElement() {
         _classCallCheck(this, NovoRowChipElement);
 
-        return _super9.apply(this, arguments);
+        return _super10.apply(this, arguments);
       }
 
       _createClass(NovoRowChipElement, [{
@@ -19344,7 +19449,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var NovoRowChipsElement = /*#__PURE__*/function (_NovoChipsElement) {
       _inherits(NovoRowChipsElement, _NovoChipsElement);
 
-      var _super10 = _createSuper(NovoRowChipsElement);
+      var _super11 = _createSuper(NovoRowChipsElement);
 
       /**
        * @param {?} element
@@ -19352,13 +19457,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
        * @param {?} labels
        */
       function NovoRowChipsElement(element, componentUtils, labels) {
-        var _this60;
+        var _this61;
 
         _classCallCheck(this, NovoRowChipsElement);
 
-        _this60 = _super10.call(this, element, componentUtils, labels);
-        _this60.closeOnSelect = true;
-        return _this60;
+        _this61 = _super11.call(this, element, componentUtils, labels);
+        _this61.closeOnSelect = true;
+        return _this61;
       }
       /**
        * @param {?} event
@@ -19935,7 +20040,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "open",
         value: function open(event, type) {
-          var _this61 = this;
+          var _this62 = this;
 
           Helpers.swallowEvent(event); // If they click the toggle two time in a row, close it (go back to days)
 
@@ -19953,11 +20058,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             */
             function () {
               /** @type {?} */
-              var container = _this61.element.nativeElement.querySelector(".calendar-content.".concat(_this61.view));
+              var container = _this62.element.nativeElement.querySelector(".calendar-content.".concat(_this62.view));
               /** @type {?} */
 
 
-              var selectedItem = _this61.element.nativeElement.querySelector(".calendar-content.".concat(_this61.view, " .").concat(_this61.view === 'years' ? 'year' : 'month', ".selected"));
+              var selectedItem = _this62.element.nativeElement.querySelector(".calendar-content.".concat(_this62.view, " .").concat(_this62.view === 'years' ? 'year' : 'month', ".selected"));
 
               if (container && selectedItem) {
                 container.scrollTop = selectedItem.offsetTop - 100;
@@ -20799,14 +20904,14 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "writeValue",
         value: function writeValue(value) {
-          var _this62 = this;
+          var _this63 = this;
 
           Promise.resolve(null).then(
           /**
           * @return {?}
           */
           function () {
-            return _this62._setTriggerValue(value);
+            return _this63._setTriggerValue(value);
           });
         }
         /**
@@ -21511,7 +21616,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "openPanel",
         value: function openPanel() {
-          var _this63 = this;
+          var _this64 = this;
 
           if (!this.overlay.panelOpen) {
             this.overlay.openPanel();
@@ -21523,7 +21628,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             * @return {?}
             */
             function () {
-              return _this63.scrollToIndex(hour * 4);
+              return _this64.scrollToIndex(hour * 4);
             });
           }
         }
@@ -21618,14 +21723,14 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "writeValue",
         value: function writeValue(value) {
-          var _this64 = this;
+          var _this65 = this;
 
           Promise.resolve(null).then(
           /**
           * @return {?}
           */
           function () {
-            return _this64._setTriggerValue(value);
+            return _this65._setTriggerValue(value);
           });
         }
         /**
@@ -22205,7 +22310,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _createClass(NovoDateTimePickerInputElement, [{
         key: "writeValue",
         value: function writeValue(value) {
-          var _this65 = this;
+          var _this66 = this;
 
           this.datePart = Object(date_fns__WEBPACK_IMPORTED_MODULE_10__["isDate"])(value) ? Object(date_fns__WEBPACK_IMPORTED_MODULE_10__["parse"])(value) : value;
           this.timePart = Object(date_fns__WEBPACK_IMPORTED_MODULE_10__["isDate"])(value) ? Object(date_fns__WEBPACK_IMPORTED_MODULE_10__["parse"])(value) : value;
@@ -22214,7 +22319,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function () {
-            return _this65._setTriggerValue(value);
+            return _this66._setTriggerValue(value);
           });
         }
         /**
@@ -22516,7 +22621,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
          * @return {?}
          */
         value: function ngOnDestroy() {
-          var _this66 = this;
+          var _this67 = this;
 
           if (this.instance) {
             this.instance.focusManager.blur(true); // Remove focus from editor
@@ -22526,19 +22631,19 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             * @return {?}
             */
             function () {
-              _this66.instance.removeAllListeners();
+              _this67.instance.removeAllListeners();
               /** @type {?} */
 
 
-              var aInstance = CKEDITOR.instances[_this66.instance.name];
+              var aInstance = CKEDITOR.instances[_this67.instance.name];
 
               if (aInstance) {
                 aInstance.destroy();
               }
 
-              _this66.instance.destroy();
+              _this67.instance.destroy();
 
-              _this66.instance = null;
+              _this67.instance = null;
             });
           }
         }
@@ -22570,20 +22675,20 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "updateValue",
         value: function updateValue(value) {
-          var _this67 = this;
+          var _this68 = this;
 
           this.zone.run(
           /**
           * @return {?}
           */
           function () {
-            _this67.value = value;
+            _this68.value = value;
 
-            _this67.onChange(value);
+            _this68.onChange(value);
 
-            _this67.onTouched();
+            _this68.onTouched();
 
-            _this67.change.emit(value);
+            _this68.change.emit(value);
           });
         }
         /**
@@ -22595,7 +22700,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "ckeditorInit",
         value: function ckeditorInit(config) {
-          var _this68 = this;
+          var _this69 = this;
 
           if (!CKEDITOR) {
             console.error('Make sure to include CKEditor sources in your dependencies!');
@@ -22614,7 +22719,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           */
           function (evt) {
             // send the evt to the EventEmitter
-            _this68.ready.emit(evt);
+            _this69.ready.emit(evt);
           }); // CKEditor change event
 
           this.instance.on('change',
@@ -22622,29 +22727,29 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function () {
-            _this68.onTouched();
+            _this69.onTouched();
             /** @type {?} */
 
 
-            var value = _this68.instance.getData(); // Debounce update
+            var value = _this69.instance.getData(); // Debounce update
 
 
-            if (_this68.debounce) {
-              if (_this68.debounceTimeout) {
-                clearTimeout(_this68.debounceTimeout);
+            if (_this69.debounce) {
+              if (_this69.debounceTimeout) {
+                clearTimeout(_this69.debounceTimeout);
               }
 
-              _this68.debounceTimeout = setTimeout(
+              _this69.debounceTimeout = setTimeout(
               /**
               * @return {?}
               */
               function () {
-                _this68.updateValue(value);
+                _this69.updateValue(value);
 
-                _this68.debounceTimeout = null;
-              }, parseInt(_this68.debounce));
+                _this69.debounceTimeout = null;
+              }, parseInt(_this69.debounce));
             } else {
-              _this68.updateValue(value);
+              _this69.updateValue(value);
             }
           });
           this.instance.on('blur',
@@ -22653,7 +22758,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (event) {
-            _this68.blur.emit(event);
+            _this69.blur.emit(event);
           });
           this.instance.on('focus',
           /**
@@ -22661,7 +22766,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (event) {
-            _this68.focus.emit(event);
+            _this69.focus.emit(event);
           });
           this.instance.on('paste',
           /**
@@ -22669,7 +22774,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (event) {
-            _this68.paste.emit(event);
+            _this69.paste.emit(event);
           });
           this.instance.on('loaded',
           /**
@@ -22677,7 +22782,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (event) {
-            _this68.loaded.emit(event);
+            _this69.loaded.emit(event);
           });
         }
         /**
@@ -23109,7 +23214,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _createClass(NovoTemplateService, [{
         key: "getAll",
         value: function getAll() {
-          var _this69 = this;
+          var _this70 = this;
 
           /** @type {?} */
           var templates = {};
@@ -23125,7 +23230,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (type) {
-            templates[type] = _this69.templates["default"][type];
+            templates[type] = _this70.templates["default"][type];
           });
           customTemplateTypes.forEach(
           /**
@@ -23133,7 +23238,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (type) {
-            templates[type] = _this69.templates.custom[type];
+            templates[type] = _this70.templates.custom[type];
           });
           return templates;
         }
@@ -23345,7 +23450,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "ngOnChanges",
         value: function ngOnChanges(changes) {
-          var _this70 = this;
+          var _this71 = this;
 
           this.form.layout = this.layout;
 
@@ -23361,7 +23466,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             * @return {?}
             */
             function (fieldset) {
-              _this70.numControls = _this70.numControls + fieldset.controls.length;
+              _this71.numControls = _this71.numControls + fieldset.controls.length;
             });
           }
           /** @type {?} */
@@ -23406,7 +23511,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               * @return {?}
               */
               function (control) {
-                _this70.form.controls[control.key].hidden = false;
+                _this71.form.controls[control.key].hidden = false;
               });
             });
           }
@@ -23420,7 +23525,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "ngAfterContentInit",
         value: function ngAfterContentInit() {
-          var _this71 = this;
+          var _this72 = this;
 
           if (this.customTemplates && this.customTemplates.length) {
             this.customTemplates.forEach(
@@ -23429,7 +23534,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             * @return {?}
             */
             function (template) {
-              _this71.templates.addCustom(template.name, template.template);
+              _this72.templates.addCustom(template.name, template.template);
             });
           }
         }
@@ -23440,42 +23545,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "showAllFields",
         value: function showAllFields() {
-          var _this72 = this;
-
-          this.form.fieldsets.forEach(
-          /**
-          * @param {?} fieldset
-          * @return {?}
-          */
-          function (fieldset) {
-            fieldset.controls.forEach(
-            /**
-            * @param {?} control
-            * @return {?}
-            */
-            function (control) {
-              /** @type {?} */
-              var ctl = _this72.form.controls[control.key];
-
-              if (!_this72.fieldsAlreadyHidden.includes(control.key)) {
-                ctl.hidden = false;
-              }
-            });
-          });
-          this.showingAllFields = true;
-          this.showingRequiredFields = false;
-        }
-        /**
-         * @param {?} hideRequiredWithValue
-         * @return {?}
-         */
-
-      }, {
-        key: "showOnlyRequired",
-        value: function showOnlyRequired(hideRequiredWithValue) {
           var _this73 = this;
 
-          this.fieldsAlreadyHidden = [];
           this.form.fieldsets.forEach(
           /**
           * @param {?} fieldset
@@ -23491,8 +23562,42 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               /** @type {?} */
               var ctl = _this73.form.controls[control.key];
 
+              if (!_this73.fieldsAlreadyHidden.includes(control.key)) {
+                ctl.hidden = false;
+              }
+            });
+          });
+          this.showingAllFields = true;
+          this.showingRequiredFields = false;
+        }
+        /**
+         * @param {?} hideRequiredWithValue
+         * @return {?}
+         */
+
+      }, {
+        key: "showOnlyRequired",
+        value: function showOnlyRequired(hideRequiredWithValue) {
+          var _this74 = this;
+
+          this.fieldsAlreadyHidden = [];
+          this.form.fieldsets.forEach(
+          /**
+          * @param {?} fieldset
+          * @return {?}
+          */
+          function (fieldset) {
+            fieldset.controls.forEach(
+            /**
+            * @param {?} control
+            * @return {?}
+            */
+            function (control) {
+              /** @type {?} */
+              var ctl = _this74.form.controls[control.key];
+
               if (ctl.hidden) {
-                _this73.fieldsAlreadyHidden.push(control.key);
+                _this74.fieldsAlreadyHidden.push(control.key);
               } // Hide any non-required fields
 
 
@@ -23501,7 +23606,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               } // Hide required fields that have been successfully filled out
 
 
-              if (hideRequiredWithValue && !Helpers.isBlank(_this73.form.value[control.key]) && (!control.isEmpty || control.isEmpty && control.isEmpty(ctl))) {
+              if (hideRequiredWithValue && !Helpers.isBlank(_this74.form.value[control.key]) && (!control.isEmpty || control.isEmpty && control.isEmpty(ctl))) {
                 ctl.hidden = true;
               } // Don't hide fields with errors
 
@@ -23526,7 +23631,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
          * @return {?}
          */
         value: function updatedValues() {
-          var _this74 = this;
+          var _this75 = this;
 
           /** @type {?} */
           var ret = null;
@@ -23542,12 +23647,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             * @return {?}
             */
             function (control) {
-              if (_this74.form.controls[control.key].dirty || control.dirty) {
+              if (_this75.form.controls[control.key].dirty || control.dirty) {
                 if (!ret) {
                   ret = {};
                 }
 
-                ret[control.key] = _this74.form.value[control.key];
+                ret[control.key] = _this75.form.value[control.key];
               }
             });
           });
@@ -23560,7 +23665,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "forceValidation",
         value: function forceValidation() {
-          var _this75 = this;
+          var _this76 = this;
 
           Object.keys(this.form.controls).forEach(
           /**
@@ -23569,9 +23674,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           */
           function (key) {
             /** @type {?} */
-            var control = _this75.form.controls[key];
+            var control = _this76.form.controls[key];
 
-            if (control.required && Helpers.isBlank(_this75.form.value[control.key])) {
+            if (control.required && Helpers.isBlank(_this76.form.value[control.key])) {
               control.markAsDirty();
               control.markAsTouched();
             }
@@ -23680,7 +23785,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "ngAfterContentInit",
         value: function ngAfterContentInit() {
-          var _this76 = this;
+          var _this77 = this;
 
           if (this.customTemplates && this.customTemplates.length) {
             this.customTemplates.forEach(
@@ -23689,7 +23794,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             * @return {?}
             */
             function (template) {
-              _this76.templates.addCustom(template.name, template.template);
+              _this77.templates.addCustom(template.name, template.template);
             });
           }
         }
@@ -23700,7 +23805,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "showAllFields",
         value: function showAllFields() {
-          var _this77 = this;
+          var _this78 = this;
 
           Object.keys(this.form.controls).forEach(
           /**
@@ -23708,7 +23813,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (key) {
-            _this77.form.controls[key].hidden = false;
+            _this78.form.controls[key].hidden = false;
           });
           this.showingAllFields = true;
           this.showingRequiredFields = false;
@@ -23721,7 +23826,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "showOnlyRequired",
         value: function showOnlyRequired(hideRequiredWithValue) {
-          var _this78 = this;
+          var _this79 = this;
 
           Object.keys(this.form.controls).forEach(
           /**
@@ -23730,18 +23835,18 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           */
           function (key) {
             // Hide any non-required fields
-            if (!_this78.form.controls[key].required) {
-              _this78.form.controls[key].hidden = true;
+            if (!_this79.form.controls[key].required) {
+              _this79.form.controls[key].hidden = true;
             } // Hide required fields that have been successfully filled out
 
 
-            if (hideRequiredWithValue && !Helpers.isBlank(_this78.form.value[key])) {
-              _this78.form.controls[key].hidden = true;
+            if (hideRequiredWithValue && !Helpers.isBlank(_this79.form.value[key])) {
+              _this79.form.controls[key].hidden = true;
             } // Don't hide fields with errors
 
 
-            if (_this78.form.controls[key].errors) {
-              _this78.form.controls[key].hidden = false;
+            if (_this79.form.controls[key].errors) {
+              _this79.form.controls[key].hidden = false;
             }
           });
           this.showingAllFields = false;
@@ -23755,7 +23860,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "forceValidation",
         value: function forceValidation() {
-          var _this79 = this;
+          var _this80 = this;
 
           Object.keys(this.form.controls).forEach(
           /**
@@ -23764,9 +23869,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           */
           function (key) {
             /** @type {?} */
-            var control = _this79.form.controls[key];
+            var control = _this80.form.controls[key];
 
-            if (control.required && Helpers.isBlank(_this79.form.value[control.key])) {
+            if (control.required && Helpers.isBlank(_this80.form.value[control.key])) {
               control.markAsDirty();
               control.markAsTouched();
             }
@@ -23834,89 +23939,89 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var NovoFormControl = /*#__PURE__*/function (_angular_forms__WEBPA) {
       _inherits(NovoFormControl, _angular_forms__WEBPA);
 
-      var _super11 = _createSuper(NovoFormControl);
+      var _super12 = _createSuper(NovoFormControl);
 
       /**
        * @param {?} value
        * @param {?} control
        */
       function NovoFormControl(value, control) {
-        var _this80;
+        var _this81;
 
         _classCallCheck(this, NovoFormControl);
 
-        _this80 = _super11.call(this, value, control.validators, control.asyncValidators);
-        _this80.displayValueChanges = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
-        _this80.valueHistory = [];
-        _this80.validators = control.validators;
-        _this80.initialValue = value;
+        _this81 = _super12.call(this, value, control.validators, control.asyncValidators);
+        _this81.displayValueChanges = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
+        _this81.valueHistory = [];
+        _this81.validators = control.validators;
+        _this81.initialValue = value;
 
-        _this80.valueHistory.push(value);
+        _this81.valueHistory.push(value);
 
-        _this80.key = control.key;
-        _this80.label = control.label;
-        _this80.readOnly = control.readOnly;
-        _this80.hidden = control.hidden;
-        _this80.encrypted = control.encrypted;
-        _this80.config = control.config;
-        _this80.type = control.type;
-        _this80.subType = control.subType;
-        _this80.required = control.required;
-        _this80.hasRequiredValidator = _this80.required;
-        _this80.tooltip = control.tooltip;
-        _this80.tooltipPosition = control.tooltipPosition;
-        _this80.tooltipSize = control.tooltipSize;
-        _this80.tooltipPreline = control.tooltipPreline;
-        _this80.removeTooltipArrow = control.removeTooltipArrow;
-        _this80.tooltipAutoPosition = control.tooltipAutoPosition;
-        _this80.label = control.label;
-        _this80.name = control.name;
-        _this80.required = control.required;
-        _this80.sortOrder = control.sortOrder;
-        _this80.controlType = control.controlType;
-        _this80.placeholder = control.placeholder;
-        _this80.minimal = control.minimal;
-        _this80.multiple = control.multiple;
-        _this80.headerConfig = control.headerConfig;
-        _this80.optionsType = control.optionsType;
-        _this80.readOnly = control.readOnly;
-        _this80.layoutOptions = control.layoutOptions;
-        _this80.military = control.military;
-        _this80.dateFormat = control.dateFormat;
-        _this80.currencyFormat = control.currencyFormat;
-        _this80.startDate = control.startDate;
-        _this80.endDate = control.endDate;
-        _this80.weekStart = control.weekStart;
-        _this80.textMaskEnabled = control.textMaskEnabled;
-        _this80.textMaskEnabled = control.textMaskEnabled;
-        _this80.maskOptions = control.maskOptions;
-        _this80.allowInvalidDate = control.allowInvalidDate;
-        _this80.maxlength = control.maxlength;
-        _this80.minlength = control.minlength;
-        _this80.closeOnSelect = control.closeOnSelect;
-        _this80.interactions = control.interactions;
-        _this80.checkboxLabel = control.checkboxLabel;
-        _this80.restrictFieldInteractions = control.restrictFieldInteractions;
-        _this80.appendToBody = control.appendToBody;
+        _this81.key = control.key;
+        _this81.label = control.label;
+        _this81.readOnly = control.readOnly;
+        _this81.hidden = control.hidden;
+        _this81.encrypted = control.encrypted;
+        _this81.config = control.config;
+        _this81.type = control.type;
+        _this81.subType = control.subType;
+        _this81.required = control.required;
+        _this81.hasRequiredValidator = _this81.required;
+        _this81.tooltip = control.tooltip;
+        _this81.tooltipPosition = control.tooltipPosition;
+        _this81.tooltipSize = control.tooltipSize;
+        _this81.tooltipPreline = control.tooltipPreline;
+        _this81.removeTooltipArrow = control.removeTooltipArrow;
+        _this81.tooltipAutoPosition = control.tooltipAutoPosition;
+        _this81.label = control.label;
+        _this81.name = control.name;
+        _this81.required = control.required;
+        _this81.sortOrder = control.sortOrder;
+        _this81.controlType = control.controlType;
+        _this81.placeholder = control.placeholder;
+        _this81.minimal = control.minimal;
+        _this81.multiple = control.multiple;
+        _this81.headerConfig = control.headerConfig;
+        _this81.optionsType = control.optionsType;
+        _this81.readOnly = control.readOnly;
+        _this81.layoutOptions = control.layoutOptions;
+        _this81.military = control.military;
+        _this81.dateFormat = control.dateFormat;
+        _this81.currencyFormat = control.currencyFormat;
+        _this81.startDate = control.startDate;
+        _this81.endDate = control.endDate;
+        _this81.weekStart = control.weekStart;
+        _this81.textMaskEnabled = control.textMaskEnabled;
+        _this81.textMaskEnabled = control.textMaskEnabled;
+        _this81.maskOptions = control.maskOptions;
+        _this81.allowInvalidDate = control.allowInvalidDate;
+        _this81.maxlength = control.maxlength;
+        _this81.minlength = control.minlength;
+        _this81.closeOnSelect = control.closeOnSelect;
+        _this81.interactions = control.interactions;
+        _this81.checkboxLabel = control.checkboxLabel;
+        _this81.restrictFieldInteractions = control.restrictFieldInteractions;
+        _this81.appendToBody = control.appendToBody;
 
-        if (_this80.appendToBody) {
+        if (_this81.appendToBody) {
           notify("'appendToBody' has been deprecated. Please remove this attribute.");
         }
 
-        _this80.parentScrollSelector = control.parentScrollSelector;
-        _this80.description = control.description;
-        _this80.options = control.options;
-        _this80.tipWell = control.tipWell;
-        _this80.customControlConfig = control.customControlConfig;
-        _this80.warning = control.warning; // Reactive Form, need to enable/disable, can't bind to [disabled]
+        _this81.parentScrollSelector = control.parentScrollSelector;
+        _this81.description = control.description;
+        _this81.options = control.options;
+        _this81.tipWell = control.tipWell;
+        _this81.customControlConfig = control.customControlConfig;
+        _this81.warning = control.warning; // Reactive Form, need to enable/disable, can't bind to [disabled]
 
-        if (_this80.readOnly) {
-          _this80.disable();
+        if (_this81.readOnly) {
+          _this81.disable();
         } else {
-          _this80.enable();
+          _this81.enable();
         }
 
-        return _this80;
+        return _this81;
       }
       /**
        * \@name hide
@@ -23998,7 +24103,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "setValue",
         value: function setValue(value) {
-          var _this81 = this;
+          var _this82 = this;
 
           var _ref16 = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
               onlySelf = _ref16.onlySelf,
@@ -24024,7 +24129,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function () {
-            _this81.valueHistory.push(value);
+            _this82.valueHistory.push(value);
           }, 300);
         }
         /**
@@ -24132,119 +24237,119 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var BaseControl = /*#__PURE__*/function (_ControlConfig) {
       _inherits(BaseControl, _ControlConfig);
 
-      var _super12 = _createSuper(BaseControl);
+      var _super13 = _createSuper(BaseControl);
 
       /**
        * @param {?=} type
        * @param {?=} config
        */
       function BaseControl() {
-        var _this82;
+        var _this83;
 
         var type = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'BaseControl';
         var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
         _classCallCheck(this, BaseControl);
 
-        _this82 = _super12.call(this);
-        _this82.__type = 'BaseControl';
-        _this82.__type = type;
-        _this82.__config = config;
-        _this82.validators = config.validators || [];
-        _this82.asyncValidators = config.asyncValidators || [];
-        _this82.value = config.value;
-        _this82.key = config.key || '';
-        _this82.label = config.label || '';
-        _this82.checkboxLabel = config.checkboxLabel;
-        _this82.name = config.name || '';
-        _this82.required = !!config.required;
-        _this82.hidden = !!config.hidden;
-        _this82.encrypted = !!config.encrypted;
-        _this82.sortOrder = config.sortOrder === undefined ? 1 : config.sortOrder;
-        _this82.controlType = config.controlType || '';
-        _this82.type = config.type;
-        _this82.subType = config.subType;
-        _this82.metaType = config.metaType;
-        _this82.placeholder = config.placeholder || '';
-        _this82.config = config.config || null;
-        _this82.dirty = !!(config.value !== undefined && config.value !== null);
-        _this82.multiple = !!config.multiple;
-        _this82.headerConfig = config.headerConfig || null;
-        _this82.currencyFormat = config.currencyFormat || null;
-        _this82.associatedEntity = config.associatedEntity || null;
-        _this82.optionsType = config.optionsType || null;
-        _this82.options = config.options || [];
-        _this82.forceClear = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
-        _this82.readOnly = !!config.readOnly || !!config.disabled;
-        _this82.disabled = !!config.disabled;
-        _this82.layoutOptions = config.layoutOptions || {};
-        _this82.military = !!config.military;
-        _this82.dateFormat = config.dateFormat;
-        _this82.textMaskEnabled = config.textMaskEnabled;
-        _this82.maskOptions = config.maskOptions;
-        _this82.allowInvalidDate = config.allowInvalidDate;
-        _this82.startDate = config.startDate;
-        _this82.endDate = config.endDate;
-        _this82.restrictFieldInteractions = !!config.restrictFieldInteractions;
+        _this83 = _super13.call(this);
+        _this83.__type = 'BaseControl';
+        _this83.__type = type;
+        _this83.__config = config;
+        _this83.validators = config.validators || [];
+        _this83.asyncValidators = config.asyncValidators || [];
+        _this83.value = config.value;
+        _this83.key = config.key || '';
+        _this83.label = config.label || '';
+        _this83.checkboxLabel = config.checkboxLabel;
+        _this83.name = config.name || '';
+        _this83.required = !!config.required;
+        _this83.hidden = !!config.hidden;
+        _this83.encrypted = !!config.encrypted;
+        _this83.sortOrder = config.sortOrder === undefined ? 1 : config.sortOrder;
+        _this83.controlType = config.controlType || '';
+        _this83.type = config.type;
+        _this83.subType = config.subType;
+        _this83.metaType = config.metaType;
+        _this83.placeholder = config.placeholder || '';
+        _this83.config = config.config || null;
+        _this83.dirty = !!(config.value !== undefined && config.value !== null);
+        _this83.multiple = !!config.multiple;
+        _this83.headerConfig = config.headerConfig || null;
+        _this83.currencyFormat = config.currencyFormat || null;
+        _this83.associatedEntity = config.associatedEntity || null;
+        _this83.optionsType = config.optionsType || null;
+        _this83.options = config.options || [];
+        _this83.forceClear = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
+        _this83.readOnly = !!config.readOnly || !!config.disabled;
+        _this83.disabled = !!config.disabled;
+        _this83.layoutOptions = config.layoutOptions || {};
+        _this83.military = !!config.military;
+        _this83.dateFormat = config.dateFormat;
+        _this83.textMaskEnabled = config.textMaskEnabled;
+        _this83.maskOptions = config.maskOptions;
+        _this83.allowInvalidDate = config.allowInvalidDate;
+        _this83.startDate = config.startDate;
+        _this83.endDate = config.endDate;
+        _this83.restrictFieldInteractions = !!config.restrictFieldInteractions;
 
         if (!Helpers.isEmpty(config.warning)) {
-          _this82.warning = config.warning;
+          _this83.warning = config.warning;
         }
 
-        if (_this82.required) {
-          _this82.validators.push(_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required);
+        if (_this83.required) {
+          _this83.validators.push(_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required);
         }
 
         if (!Helpers.isBlank(config.maxlength)) {
-          _this82.maxlength = config.maxlength;
+          _this83.maxlength = config.maxlength;
 
-          _this82.validators.push(_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].maxLength(_this82.maxlength));
+          _this83.validators.push(_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].maxLength(_this83.maxlength));
         }
 
         if (!Helpers.isBlank(config.minlength)) {
-          _this82.minlength = config.minlength;
+          _this83.minlength = config.minlength;
 
-          _this82.validators.push(_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].minLength(_this82.minlength));
+          _this83.validators.push(_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].minLength(_this83.minlength));
         }
 
-        _this82.closeOnSelect = !!config.closeOnSelect;
-        _this82.interactions = config.interactions;
-        _this82.dataSpecialization = config.dataSpecialization;
-        _this82.dataType = config.dataType;
-        _this82.appendToBody = !!config.appendToBody;
+        _this83.closeOnSelect = !!config.closeOnSelect;
+        _this83.interactions = config.interactions;
+        _this83.dataSpecialization = config.dataSpecialization;
+        _this83.dataType = config.dataType;
+        _this83.appendToBody = !!config.appendToBody;
 
-        if (_this82.appendToBody) {
+        if (_this83.appendToBody) {
           notify("'appendToBody' has been deprecated. Please remove this attribute.");
         }
 
-        _this82.parentScrollSelector = config.parentScrollSelector;
-        _this82.description = config.description;
+        _this83.parentScrollSelector = config.parentScrollSelector;
+        _this83.description = config.description;
 
         if (config.tooltip) {
-          _this82.tooltip = config.tooltip;
-          _this82.tooltipPosition = config.tooltipPosition;
-          _this82.tooltipSize = config.tooltipSize;
-          _this82.tooltipPreline = config.tooltipPreline;
-          _this82.removeTooltipArrow = config.removeTooltipArrow;
-          _this82.tooltipAutoPosition = config.tooltipAutoPosition;
+          _this83.tooltip = config.tooltip;
+          _this83.tooltipPosition = config.tooltipPosition;
+          _this83.tooltipSize = config.tooltipSize;
+          _this83.tooltipPreline = config.tooltipPreline;
+          _this83.removeTooltipArrow = config.removeTooltipArrow;
+          _this83.tooltipAutoPosition = config.tooltipAutoPosition;
         }
 
-        _this82.template = config.template;
-        _this82.customControlConfig = config.customControlConfig;
-        _this82.tipWell = config.tipWell;
-        _this82.width = config.width;
-        _this82.startupFocus = !!config.startupFocus;
+        _this83.template = config.template;
+        _this83.customControlConfig = config.customControlConfig;
+        _this83.tipWell = config.tipWell;
+        _this83.width = config.width;
+        _this83.startupFocus = !!config.startupFocus;
 
         if (config.fileBrowserImageUploadUrl) {
-          _this82.fileBrowserImageUploadUrl = config.fileBrowserImageUploadUrl;
+          _this83.fileBrowserImageUploadUrl = config.fileBrowserImageUploadUrl;
         }
 
         if (config.isEmpty) {
-          _this82.isEmpty = config.isEmpty;
+          _this83.isEmpty = config.isEmpty;
         }
 
-        _this82.weekStart = config.weekStart || 0;
-        return _this82;
+        _this83.weekStart = config.weekStart || 0;
+        return _this83;
       }
 
       return BaseControl;
@@ -24454,22 +24559,22 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var AddressControl = /*#__PURE__*/function (_BaseControl) {
       _inherits(AddressControl, _BaseControl);
 
-      var _super13 = _createSuper(AddressControl);
+      var _super14 = _createSuper(AddressControl);
 
       /**
        * @param {?} config
        */
       function AddressControl(config) {
-        var _this83;
+        var _this84;
 
         _classCallCheck(this, AddressControl);
 
-        _this83 = _super13.call(this, 'AddressControl', config);
-        _this83.controlType = 'address';
+        _this84 = _super14.call(this, 'AddressControl', config);
+        _this84.controlType = 'address';
 
-        _this83.validators.push(FormValidators.isValidAddress);
+        _this84.validators.push(FormValidators.isValidAddress);
 
-        return _this83;
+        return _this84;
       }
 
       return AddressControl;
@@ -24486,20 +24591,20 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var CheckListControl = /*#__PURE__*/function (_BaseControl2) {
       _inherits(CheckListControl, _BaseControl2);
 
-      var _super14 = _createSuper(CheckListControl);
+      var _super15 = _createSuper(CheckListControl);
 
       /**
        * @param {?} config
        */
       function CheckListControl(config) {
-        var _this84;
+        var _this85;
 
         _classCallCheck(this, CheckListControl);
 
-        _this84 = _super14.call(this, 'CheckListControl', config);
-        _this84.controlType = 'checklist';
-        _this84.options = config.options || [];
-        return _this84;
+        _this85 = _super15.call(this, 'CheckListControl', config);
+        _this85.controlType = 'checklist';
+        _this85.options = config.options || [];
+        return _this85;
       }
 
       return CheckListControl;
@@ -24516,19 +24621,19 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var CheckboxControl = /*#__PURE__*/function (_BaseControl3) {
       _inherits(CheckboxControl, _BaseControl3);
 
-      var _super15 = _createSuper(CheckboxControl);
+      var _super16 = _createSuper(CheckboxControl);
 
       /**
        * @param {?} config
        */
       function CheckboxControl(config) {
-        var _this85;
+        var _this86;
 
         _classCallCheck(this, CheckboxControl);
 
-        _this85 = _super15.call(this, 'CheckboxControl', config);
-        _this85.controlType = 'checkbox';
-        return _this85;
+        _this86 = _super16.call(this, 'CheckboxControl', config);
+        _this86.controlType = 'checkbox';
+        return _this86;
       }
 
       return CheckboxControl;
@@ -24545,19 +24650,19 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var DateControl = /*#__PURE__*/function (_BaseControl4) {
       _inherits(DateControl, _BaseControl4);
 
-      var _super16 = _createSuper(DateControl);
+      var _super17 = _createSuper(DateControl);
 
       /**
        * @param {?} config
        */
       function DateControl(config) {
-        var _this86;
+        var _this87;
 
         _classCallCheck(this, DateControl);
 
-        _this86 = _super16.call(this, 'DateControl', config);
-        _this86.controlType = 'date';
-        return _this86;
+        _this87 = _super17.call(this, 'DateControl', config);
+        _this87.controlType = 'date';
+        return _this87;
       }
 
       return DateControl;
@@ -24574,19 +24679,19 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var DateTimeControl = /*#__PURE__*/function (_BaseControl5) {
       _inherits(DateTimeControl, _BaseControl5);
 
-      var _super17 = _createSuper(DateTimeControl);
+      var _super18 = _createSuper(DateTimeControl);
 
       /**
        * @param {?} config
        */
       function DateTimeControl(config) {
-        var _this87;
+        var _this88;
 
         _classCallCheck(this, DateTimeControl);
 
-        _this87 = _super17.call(this, 'DateTimeControl', config);
-        _this87.controlType = 'date-time';
-        return _this87;
+        _this88 = _super18.call(this, 'DateTimeControl', config);
+        _this88.controlType = 'date-time';
+        return _this88;
       }
 
       return DateTimeControl;
@@ -24603,20 +24708,20 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var EditorControl = /*#__PURE__*/function (_BaseControl6) {
       _inherits(EditorControl, _BaseControl6);
 
-      var _super18 = _createSuper(EditorControl);
+      var _super19 = _createSuper(EditorControl);
 
       /**
        * @param {?} config
        */
       function EditorControl(config) {
-        var _this88;
+        var _this89;
 
         _classCallCheck(this, EditorControl);
 
-        _this88 = _super18.call(this, 'EditorControl', config);
-        _this88.controlType = 'editor';
-        _this88.minimal = false;
-        return _this88;
+        _this89 = _super19.call(this, 'EditorControl', config);
+        _this89.controlType = 'editor';
+        _this89.minimal = false;
+        return _this89;
       }
 
       return EditorControl;
@@ -24633,19 +24738,19 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var AceEditorControl = /*#__PURE__*/function (_BaseControl7) {
       _inherits(AceEditorControl, _BaseControl7);
 
-      var _super19 = _createSuper(AceEditorControl);
+      var _super20 = _createSuper(AceEditorControl);
 
       /**
        * @param {?} config
        */
       function AceEditorControl(config) {
-        var _this89;
+        var _this90;
 
         _classCallCheck(this, AceEditorControl);
 
-        _this89 = _super19.call(this, 'AceEditorControl', config);
-        _this89.controlType = 'ace-editor';
-        return _this89;
+        _this90 = _super20.call(this, 'AceEditorControl', config);
+        _this90.controlType = 'ace-editor';
+        return _this90;
       }
 
       return AceEditorControl;
@@ -24662,22 +24767,22 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var FileControl = /*#__PURE__*/function (_BaseControl8) {
       _inherits(FileControl, _BaseControl8);
 
-      var _super20 = _createSuper(FileControl);
+      var _super21 = _createSuper(FileControl);
 
       /**
        * @param {?} config
        */
       function FileControl(config) {
-        var _this90;
+        var _this91;
 
         _classCallCheck(this, FileControl);
 
-        _this90 = _super20.call(this, 'FileControl', config);
-        _this90.controlType = 'file'; // TODO - translate
+        _this91 = _super21.call(this, 'FileControl', config);
+        _this91.controlType = 'file'; // TODO - translate
 
-        _this90.placeholder = config.placeholder;
-        _this90.multiple = config.multiple;
-        return _this90;
+        _this91.placeholder = config.placeholder;
+        _this91.multiple = config.multiple;
+        return _this91;
       }
 
       return FileControl;
@@ -24694,21 +24799,21 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var NativeSelectControl = /*#__PURE__*/function (_BaseControl9) {
       _inherits(NativeSelectControl, _BaseControl9);
 
-      var _super21 = _createSuper(NativeSelectControl);
+      var _super22 = _createSuper(NativeSelectControl);
 
       /**
        * @param {?} config
        */
       function NativeSelectControl(config) {
-        var _this91;
+        var _this92;
 
         _classCallCheck(this, NativeSelectControl);
 
-        _this91 = _super21.call(this, 'NativeSelectControl', config);
-        _this91.controlType = 'native-select';
-        _this91.options = [];
-        _this91.options = config.options || [];
-        return _this91;
+        _this92 = _super22.call(this, 'NativeSelectControl', config);
+        _this92.controlType = 'native-select';
+        _this92.options = [];
+        _this92.options = config.options || [];
+        return _this92;
       }
 
       return NativeSelectControl;
@@ -24725,21 +24830,21 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var PickerControl = /*#__PURE__*/function (_BaseControl10) {
       _inherits(PickerControl, _BaseControl10);
 
-      var _super22 = _createSuper(PickerControl);
+      var _super23 = _createSuper(PickerControl);
 
       /**
        * @param {?} config
        */
       function PickerControl(config) {
-        var _this92;
+        var _this93;
 
         _classCallCheck(this, PickerControl);
 
-        _this92 = _super22.call(this, 'PickerControl', config);
-        _this92.controlType = 'picker';
-        _this92.options = [];
-        _this92.options = config.options || [];
-        return _this92;
+        _this93 = _super23.call(this, 'PickerControl', config);
+        _this93.controlType = 'picker';
+        _this93.options = [];
+        _this93.options = config.options || [];
+        return _this93;
       }
 
       return PickerControl;
@@ -24750,21 +24855,21 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var TablePickerControl = /*#__PURE__*/function (_PickerControl) {
       _inherits(TablePickerControl, _PickerControl);
 
-      var _super23 = _createSuper(TablePickerControl);
+      var _super24 = _createSuper(TablePickerControl);
 
       /**
        * @param {?} config
        */
       function TablePickerControl(config) {
-        var _this93;
+        var _this94;
 
         _classCallCheck(this, TablePickerControl);
 
-        _this93 = _super23.call(this, Object.assign(config, {
+        _this94 = _super24.call(this, Object.assign(config, {
           parentScrollSelector: '.table-container'
         }));
-        _this93.__type = 'TablePickerControl';
-        return _this93;
+        _this94.__type = 'TablePickerControl';
+        return _this94;
       }
 
       return TablePickerControl;
@@ -24779,21 +24884,21 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var QuickNoteControl = /*#__PURE__*/function (_BaseControl11) {
       _inherits(QuickNoteControl, _BaseControl11);
 
-      var _super24 = _createSuper(QuickNoteControl);
+      var _super25 = _createSuper(QuickNoteControl);
 
       /**
        * @param {?} config
        */
       function QuickNoteControl(config) {
-        var _this94;
+        var _this95;
 
         _classCallCheck(this, QuickNoteControl);
 
-        _this94 = _super24.call(this, 'QuickNoteControl', config);
-        _this94.controlType = 'quick-note';
-        _this94.options = [];
-        _this94.options = config.options || [];
-        return _this94;
+        _this95 = _super25.call(this, 'QuickNoteControl', config);
+        _this95.controlType = 'quick-note';
+        _this95.options = [];
+        _this95.options = config.options || [];
+        return _this95;
       }
 
       return QuickNoteControl;
@@ -24810,21 +24915,21 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var RadioControl = /*#__PURE__*/function (_BaseControl12) {
       _inherits(RadioControl, _BaseControl12);
 
-      var _super25 = _createSuper(RadioControl);
+      var _super26 = _createSuper(RadioControl);
 
       /**
        * @param {?} config
        */
       function RadioControl(config) {
-        var _this95;
+        var _this96;
 
         _classCallCheck(this, RadioControl);
 
-        _this95 = _super25.call(this, 'RadioControl', config);
-        _this95.controlType = 'radio';
-        _this95.options = [];
-        _this95.options = config.options || [];
-        return _this95;
+        _this96 = _super26.call(this, 'RadioControl', config);
+        _this96.controlType = 'radio';
+        _this96.options = [];
+        _this96.options = config.options || [];
+        return _this96;
       }
 
       return RadioControl;
@@ -24841,20 +24946,20 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var ReadOnlyControl = /*#__PURE__*/function (_BaseControl13) {
       _inherits(ReadOnlyControl, _BaseControl13);
 
-      var _super26 = _createSuper(ReadOnlyControl);
+      var _super27 = _createSuper(ReadOnlyControl);
 
       /**
        * @param {?} config
        */
       function ReadOnlyControl(config) {
-        var _this96;
+        var _this97;
 
         _classCallCheck(this, ReadOnlyControl);
 
-        _this96 = _super26.call(this, 'ReadOnlyControl', config);
-        _this96.controlType = 'read-only';
+        _this97 = _super27.call(this, 'ReadOnlyControl', config);
+        _this97.controlType = 'read-only';
         config.readOnly = true;
-        return _this96;
+        return _this97;
       }
 
       return ReadOnlyControl;
@@ -24871,22 +24976,22 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var SelectControl = /*#__PURE__*/function (_BaseControl14) {
       _inherits(SelectControl, _BaseControl14);
 
-      var _super27 = _createSuper(SelectControl);
+      var _super28 = _createSuper(SelectControl);
 
       /**
        * @param {?} config
        */
       function SelectControl(config) {
-        var _this97;
+        var _this98;
 
         _classCallCheck(this, SelectControl);
 
-        _this97 = _super27.call(this, 'SelectControl', config);
-        _this97.controlType = 'select';
-        _this97.options = [];
-        _this97.options = config.options || [];
-        _this97.placeholder = config.placeholder || '';
-        return _this97;
+        _this98 = _super28.call(this, 'SelectControl', config);
+        _this98.controlType = 'select';
+        _this98.options = [];
+        _this98.options = config.options || [];
+        _this98.placeholder = config.placeholder || '';
+        return _this98;
       }
 
       return SelectControl;
@@ -24903,19 +25008,19 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var TextAreaControl = /*#__PURE__*/function (_BaseControl15) {
       _inherits(TextAreaControl, _BaseControl15);
 
-      var _super28 = _createSuper(TextAreaControl);
+      var _super29 = _createSuper(TextAreaControl);
 
       /**
        * @param {?} config
        */
       function TextAreaControl(config) {
-        var _this98;
+        var _this99;
 
         _classCallCheck(this, TextAreaControl);
 
-        _this98 = _super28.call(this, 'TextAreaControl', config);
-        _this98.controlType = 'text-area';
-        return _this98;
+        _this99 = _super29.call(this, 'TextAreaControl', config);
+        _this99.controlType = 'text-area';
+        return _this99;
       }
 
       return TextAreaControl;
@@ -24932,24 +25037,24 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var TextBoxControl = /*#__PURE__*/function (_BaseControl16) {
       _inherits(TextBoxControl, _BaseControl16);
 
-      var _super29 = _createSuper(TextBoxControl);
+      var _super30 = _createSuper(TextBoxControl);
 
       /**
        * @param {?} config
        */
       function TextBoxControl(config) {
-        var _this99;
+        var _this100;
 
         _classCallCheck(this, TextBoxControl);
 
-        _this99 = _super29.call(this, 'TextBoxControl', config);
-        _this99.controlType = 'textbox';
-        _this99.type = _this99.getTextboxType(config.type) || '';
-        _this99.subType = config.type || '';
+        _this100 = _super30.call(this, 'TextBoxControl', config);
+        _this100.controlType = 'textbox';
+        _this100.type = _this100.getTextboxType(config.type) || '';
+        _this100.subType = config.type || '';
 
-        _this99.setValidators(_this99.subType);
+        _this100.setValidators(_this100.subType);
 
-        return _this99;
+        return _this100;
       }
       /**
        * @param {?} type
@@ -25018,21 +25123,21 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var TilesControl = /*#__PURE__*/function (_BaseControl17) {
       _inherits(TilesControl, _BaseControl17);
 
-      var _super30 = _createSuper(TilesControl);
+      var _super31 = _createSuper(TilesControl);
 
       /**
        * @param {?} config
        */
       function TilesControl(config) {
-        var _this100;
+        var _this101;
 
         _classCallCheck(this, TilesControl);
 
-        _this100 = _super30.call(this, 'TilesControl', config);
-        _this100.controlType = 'tiles';
-        _this100.options = [];
-        _this100.options = config.options || [];
-        return _this100;
+        _this101 = _super31.call(this, 'TilesControl', config);
+        _this101.controlType = 'tiles';
+        _this101.options = [];
+        _this101.options = config.options || [];
+        return _this101;
       }
 
       return TilesControl;
@@ -25049,19 +25154,19 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var TimeControl = /*#__PURE__*/function (_BaseControl18) {
       _inherits(TimeControl, _BaseControl18);
 
-      var _super31 = _createSuper(TimeControl);
+      var _super32 = _createSuper(TimeControl);
 
       /**
        * @param {?} config
        */
       function TimeControl(config) {
-        var _this101;
+        var _this102;
 
         _classCallCheck(this, TimeControl);
 
-        _this101 = _super31.call(this, 'TimeControl', config);
-        _this101.controlType = 'time';
-        return _this101;
+        _this102 = _super32.call(this, 'TimeControl', config);
+        _this102.controlType = 'time';
+        return _this102;
       }
 
       return TimeControl;
@@ -25080,7 +25185,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @param {?} config
      */
     function GroupedControl(config) {
-      var _this102 = this;
+      var _this103 = this;
 
       _classCallCheck(this, GroupedControl);
 
@@ -25091,7 +25196,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       * @return {?}
       */
       function (key) {
-        return _this102[key] = config[key];
+        return _this103[key] = config[key];
       });
     };
 
@@ -25197,20 +25302,20 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var CustomControl = /*#__PURE__*/function (_BaseControl19) {
       _inherits(CustomControl, _BaseControl19);
 
-      var _super32 = _createSuper(CustomControl);
+      var _super33 = _createSuper(CustomControl);
 
       /**
        * @param {?} config
        */
       function CustomControl(config) {
-        var _this103;
+        var _this104;
 
         _classCallCheck(this, CustomControl);
 
-        _this103 = _super32.call(this, config.template, config);
-        _this103.controlType = 'custom';
-        _this103.controlType = config.template;
-        return _this103;
+        _this104 = _super33.call(this, config.template, config);
+        _this104.controlType = 'custom';
+        _this104.controlType = config.template;
+        return _this104;
       }
 
       return CustomControl;
@@ -25233,16 +25338,16 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var NovoFormGroup = /*#__PURE__*/function (_angular_forms__WEBPA2) {
       _inherits(NovoFormGroup, _angular_forms__WEBPA2);
 
-      var _super33 = _createSuper(NovoFormGroup);
+      var _super34 = _createSuper(NovoFormGroup);
 
       function NovoFormGroup() {
-        var _this104;
+        var _this105;
 
         _classCallCheck(this, NovoFormGroup);
 
-        _this104 = _super33.apply(this, arguments);
-        _this104.fieldInteractionEvents = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
-        return _this104;
+        _this105 = _super34.apply(this, arguments);
+        _this105.fieldInteractionEvents = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
+        return _this105;
       }
       /**
        * @return {?}
@@ -25955,7 +26060,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "toControls",
         value: function toControls(meta, currencyFormat, http, config, overrides) {
-          var _this105 = this;
+          var _this106 = this;
 
           var forTable = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : false;
 
@@ -25971,9 +26076,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             * @return {?}
             */
             function (field) {
-              if (_this105.shouldCreateControl(field)) {
+              if (_this106.shouldCreateControl(field)) {
                 /** @type {?} */
-                var control = _this105.getControlForField(field, http, config, overrides, forTable); // Set currency format
+                var control = _this106.getControlForField(field, http, config, overrides, forTable); // Set currency format
 
 
                 if (control.subType === 'currency') {
@@ -26031,7 +26136,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "toFieldSets",
         value: function toFieldSets(meta, currencyFormat, http, config, overrides, data) {
-          var _this106 = this;
+          var _this107 = this;
 
           /** @type {?} */
           var fieldsets = [];
@@ -26047,16 +26152,16 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             * @return {?}
             */
             function (field) {
-              if (_this106.isHeader(field)) {
+              if (_this107.isHeader(field)) {
                 if (field.enabled) {
-                  _this106.insertHeaderToFieldsets(fieldsets, field);
+                  _this107.insertHeaderToFieldsets(fieldsets, field);
                 }
-              } else if (_this106.isEmbeddedField(field)) {
-                _this106.insertHeaderToFieldsets(fieldsets, field);
+              } else if (_this107.isEmbeddedField(field)) {
+                _this107.insertHeaderToFieldsets(fieldsets, field);
                 /** @type {?} */
 
 
-                var embeddedFields = _this106.getEmbeddedFields(field);
+                var embeddedFields = _this107.getEmbeddedFields(field);
 
                 embeddedFields.forEach(
                 /**
@@ -26064,22 +26169,22 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                 * @return {?}
                 */
                 function (embeddedField) {
-                  if (_this106.shouldCreateControl(embeddedField)) {
+                  if (_this107.shouldCreateControl(embeddedField)) {
                     /** @type {?} */
-                    var control = _this106.createControl(embeddedField, data, http, config, overrides, currencyFormat);
+                    var control = _this107.createControl(embeddedField, data, http, config, overrides, currencyFormat);
 
-                    control = _this106.markControlAsEmbedded(control, field.dataSpecialization ? field.dataSpecialization.toLowerCase() : null);
+                    control = _this107.markControlAsEmbedded(control, field.dataSpecialization ? field.dataSpecialization.toLowerCase() : null);
                     fieldsets[fieldsets.length - 1].controls.push(control);
-                  } else if (_this106.isHeader(embeddedField)) {
-                    _this106.insertHeaderToFieldsets(fieldsets, embeddedField);
+                  } else if (_this107.isHeader(embeddedField)) {
+                    _this107.insertHeaderToFieldsets(fieldsets, embeddedField);
                   }
                 });
-              } else if (_this106.shouldCreateControl(field)) {
+              } else if (_this107.shouldCreateControl(field)) {
                 /** @type {?} */
-                var control = _this106.createControl(field, data, http, config, overrides, currencyFormat);
+                var control = _this107.createControl(field, data, http, config, overrides, currencyFormat);
 
                 if (field.inlineEmbeddedAssociatedEntityField) {
-                  control = _this106.markControlAsEmbedded(control, 'inline_embedded');
+                  control = _this107.markControlAsEmbedded(control, 'inline_embedded');
                 }
 
                 if (fieldsets.length === 0) {
@@ -26238,7 +26343,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "getInlineEmbeddedFields",
         value: function getInlineEmbeddedFields(fields) {
-          var _this107 = this;
+          var _this108 = this;
 
           /** @type {?} */
           var inlineEmbeddedAssociatedEntityFields = [];
@@ -26255,7 +26360,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (f) {
-            inlineEmbeddedAssociatedEntityFields = [].concat(_toConsumableArray(inlineEmbeddedAssociatedEntityFields), _toConsumableArray(_this107.getAssociatedFieldsForInlineEmbedded(f)));
+            inlineEmbeddedAssociatedEntityFields = [].concat(_toConsumableArray(inlineEmbeddedAssociatedEntityFields), _toConsumableArray(_this108.getAssociatedFieldsForInlineEmbedded(f)));
           });
           return inlineEmbeddedAssociatedEntityFields;
         }
@@ -26530,7 +26635,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "setInitialValuesFieldsets",
         value: function setInitialValuesFieldsets(fieldsets, values, keepClean) {
-          var _this108 = this;
+          var _this109 = this;
 
           fieldsets.forEach(
           /**
@@ -26538,7 +26643,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (fieldset) {
-            _this108.setInitialValues(fieldset.controls, values, keepClean);
+            _this109.setInitialValues(fieldset.controls, values, keepClean);
           });
         }
         /**
@@ -26796,7 +26901,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
          * @return {?}
          */
         value: function alert(options) {
-          var _this109 = this;
+          var _this110 = this;
 
           var toastElement = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : NovoToastElement;
           return new Promise(
@@ -26805,18 +26910,18 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (resolve) {
-            if (!_this109._parentViewContainer) {
+            if (!_this110._parentViewContainer) {
               console.error('No parent view container specified for the ToastService. Set it inside your main application. \nthis.toastService.parentViewContainer = view (ViewContainerRef)');
               return;
             }
             /** @type {?} */
 
 
-            var toast = _this109.componentUtils.append(toastElement, _this109._parentViewContainer);
+            var toast = _this110.componentUtils.append(toastElement, _this110._parentViewContainer);
 
-            _this109.references.push(toast);
+            _this110.references.push(toast);
 
-            _this109.handleAlert(toast.instance, options);
+            _this110.handleAlert(toast.instance, options);
 
             resolve(toast);
           });
@@ -26839,7 +26944,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "hide",
         value: function hide(toast) {
-          var _this110 = this;
+          var _this111 = this;
 
           toast.animate = false;
           setTimeout(
@@ -26850,7 +26955,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             toast.show = false;
             /** @type {?} */
 
-            var REF = _this110.references.filter(
+            var REF = _this111.references.filter(
             /**
             * @param {?} x
             * @return {?}
@@ -26860,7 +26965,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             })[0];
 
             if (REF) {
-              _this110.references.splice(_this110.references.indexOf(REF), 1);
+              _this111.references.splice(_this111.references.indexOf(REF), 1);
 
               REF.destroy();
             }
@@ -26875,7 +26980,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "handleAlert",
         value: function handleAlert(toast, options) {
-          var _this111 = this;
+          var _this112 = this;
 
           this.setToastOnSession(toast, options);
           setTimeout(
@@ -26883,7 +26988,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function () {
-            _this111.show(toast);
+            _this112.show(toast);
           }, 20);
 
           if (!toast.isCloseable) {
@@ -26951,7 +27056,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "toastTimer",
         value: function toastTimer(toast) {
-          var _this112 = this;
+          var _this113 = this;
 
           if (toast.hideDelay < 0) {
             return;
@@ -26962,7 +27067,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function () {
-            _this112.hide(toast);
+            _this113.hide(toast);
           }, toast.hideDelay);
         }
       }, {
@@ -27247,7 +27352,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
        * @param {?} labels
        */
       function FieldInteractionApi(toaster, modalService, formUtils, http, labels) {
-        var _this113 = this;
+        var _this114 = this;
 
         _classCallCheck(this, FieldInteractionApi);
 
@@ -27270,7 +27375,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             /** @type {?} */
             var format = 'format' in args && args.format || pickerConfigFormat;
             return Object.assign({
-              options: _this113.createOptionsFunction(args, mapper, filteredOptionsCreator)
+              options: _this114.createOptionsFunction(args, mapper, filteredOptionsCreator)
             }, 'emptyPickerMessage' in args && {
               emptyPickerMessage: args.emptyPickerMessage
             }, format && {
@@ -27301,7 +27406,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             */
             function (query, page) {
               if ('optionsPromise' in config && config.optionsPromise) {
-                return config.optionsPromise(query, new CustomHttpImpl(_this113.http), page);
+                return config.optionsPromise(query, new CustomHttpImpl(_this114.http), page);
               } else if ('optionsUrlBuilder' in config && config.optionsUrlBuilder || 'optionsUrl' in config && config.optionsUrl) {
                 return new Promise(
                 /**
@@ -27313,7 +27418,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                   /** @type {?} */
                   var url = 'optionsUrlBuilder' in config ? config.optionsUrlBuilder(query) : "".concat(config.optionsUrl, "?filter=").concat(query || '');
 
-                  _this113.http.get(url).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_13__["map"])(
+                  _this114.http.get(url).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_13__["map"])(
                   /**
                   * @param {?} results
                   * @return {?}
@@ -27904,7 +28009,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "confirmChanges",
         value: function confirmChanges(key, message) {
-          var _this114 = this;
+          var _this115 = this;
 
           /** @type {?} */
           var history = this.getProperty(key, 'valueHistory');
@@ -27933,7 +28038,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           */
           function (result) {
             if (!result) {
-              _this114.setValue(key, oldValue, {
+              _this115.setValue(key, oldValue, {
                 emitEvent: false
               });
             }
@@ -28309,7 +28414,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "setLoading",
         value: function setLoading(key, loading) {
-          var _this115 = this;
+          var _this116 = this;
 
           /** @type {?} */
           var control = this.getControl(key);
@@ -28327,11 +28432,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               * @return {?}
               */
               function () {
-                _this115.setLoading(key, false);
+                _this116.setLoading(key, false);
 
-                _this115.displayTip(key, _this115.labels.asyncFailure, 'info', false);
+                _this116.displayTip(key, _this116.labels.asyncFailure, 'info', false);
 
-                _this115.setProperty(key, '_displayedAsyncFailure', true);
+                _this116.setProperty(key, '_displayedAsyncFailure', true);
               }, 10000);
             } else {
               this.form.controls[key].fieldInteractionloading = false;
@@ -28734,14 +28839,14 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "ngAfterContentInit",
         value: function ngAfterContentInit() {
-          var _this116 = this;
+          var _this117 = this;
 
           setTimeout(
           /**
           * @return {?}
           */
           function () {
-            _this116.adjust();
+            _this117.adjust();
           });
         }
         /**
@@ -28788,7 +28893,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var NovoControlElement = /*#__PURE__*/function (_OutsideClick2) {
       _inherits(NovoControlElement, _OutsideClick2);
 
-      var _super34 = _createSuper(NovoControlElement);
+      var _super35 = _createSuper(NovoControlElement);
 
       /**
        * @param {?} element
@@ -28800,38 +28905,38 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
        * @param {?=} locale
        */
       function NovoControlElement(element, labels, dateFormatService, fieldInteractionApi, templateService, changeDetectorRef) {
-        var _this117;
+        var _this118;
 
         var locale = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 'en-US';
 
         _classCallCheck(this, NovoControlElement);
 
-        _this117 = _super34.call(this, element);
-        _this117.labels = labels;
-        _this117.dateFormatService = dateFormatService;
-        _this117.fieldInteractionApi = fieldInteractionApi;
-        _this117.templateService = templateService;
-        _this117.changeDetectorRef = changeDetectorRef;
-        _this117.locale = locale;
-        _this117.condensed = false;
-        _this117.autoFocus = false;
-        _this117.change = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
-        _this117.edit = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
-        _this117.save = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
-        _this117["delete"] = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
-        _this117.upload = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
-        _this117.formattedValue = '';
-        _this117.maxLengthMet = false;
-        _this117.itemCount = 0;
-        _this117._blurEmitter = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
-        _this117._focusEmitter = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
-        _this117._focused = false;
-        _this117._enteredText = '';
-        _this117._showCount = false;
-        _this117.maxLengthMetErrorfields = [];
-        _this117.templates = {};
-        _this117.loading = false;
-        return _this117;
+        _this118 = _super35.call(this, element);
+        _this118.labels = labels;
+        _this118.dateFormatService = dateFormatService;
+        _this118.fieldInteractionApi = fieldInteractionApi;
+        _this118.templateService = templateService;
+        _this118.changeDetectorRef = changeDetectorRef;
+        _this118.locale = locale;
+        _this118.condensed = false;
+        _this118.autoFocus = false;
+        _this118.change = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
+        _this118.edit = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
+        _this118.save = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
+        _this118["delete"] = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
+        _this118.upload = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
+        _this118.formattedValue = '';
+        _this118.maxLengthMet = false;
+        _this118.itemCount = 0;
+        _this118._blurEmitter = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
+        _this118._focusEmitter = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
+        _this118._focused = false;
+        _this118._enteredText = '';
+        _this118._showCount = false;
+        _this118.maxLengthMetErrorfields = [];
+        _this118.templates = {};
+        _this118.loading = false;
+        return _this118;
       }
       /**
        * @return {?}
@@ -28845,7 +28950,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
          * @return {?}
          */
         value: function ngAfterViewInit() {
-          var _this118 = this;
+          var _this119 = this;
 
           /** @type {?} */
           var DO_NOT_FOCUS_ME = ['picker', 'time', 'date', 'date-time'];
@@ -28857,7 +28962,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             */
             function () {
               /** @type {?} */
-              var input = _this118.element.nativeElement.querySelector('input');
+              var input = _this119.element.nativeElement.querySelector('input');
 
               if (input) {
                 input.focus();
@@ -28872,7 +28977,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "ngAfterContentInit",
         value: function ngAfterContentInit() {
-          var _this119 = this;
+          var _this120 = this;
 
           // Subscribe to control interactions
           if (this.control.interactions && !this.form.controls[this.control.key].restrictFieldInteractions) {
@@ -28885,37 +28990,37 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
                 switch (interaction.event) {
                   case 'blur':
-                    _this119.valueChangeSubscription = _this119.onBlur.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_13__["debounceTime"])(300)).subscribe(
+                    _this120.valueChangeSubscription = _this120.onBlur.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_13__["debounceTime"])(300)).subscribe(
                     /**
                     * @return {?}
                     */
                     function () {
-                      if (!_this119.form.controls[_this119.control.key].restrictFieldInteractions) {
-                        _this119.executeInteraction(interaction);
+                      if (!_this120.form.controls[_this120.control.key].restrictFieldInteractions) {
+                        _this120.executeInteraction(interaction);
                       }
                     });
                     break;
 
                   case 'focus':
-                    _this119.valueChangeSubscription = _this119.onFocus.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_13__["debounceTime"])(300)).subscribe(
+                    _this120.valueChangeSubscription = _this120.onFocus.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_13__["debounceTime"])(300)).subscribe(
                     /**
                     * @return {?}
                     */
                     function () {
-                      if (!_this119.form.controls[_this119.control.key].restrictFieldInteractions) {
-                        _this119.executeInteraction(interaction);
+                      if (!_this120.form.controls[_this120.control.key].restrictFieldInteractions) {
+                        _this120.executeInteraction(interaction);
                       }
                     });
                     break;
 
                   case 'change':
-                    _this119.valueChangeSubscription = _this119.form.controls[_this119.control.key].valueChanges.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_13__["debounceTime"])(300)).subscribe(
+                    _this120.valueChangeSubscription = _this120.form.controls[_this120.control.key].valueChanges.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_13__["debounceTime"])(300)).subscribe(
                     /**
                     * @return {?}
                     */
                     function () {
-                      if (!_this119.form.controls[_this119.control.key].restrictFieldInteractions) {
-                        _this119.executeInteraction(interaction);
+                      if (!_this120.form.controls[_this120.control.key].restrictFieldInteractions) {
+                        _this120.executeInteraction(interaction);
                       }
                     });
                     break;
@@ -28929,8 +29034,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                 }
 
                 if (interaction.invokeOnInit) {
-                  if (!_this119.form.controls[_this119.control.key].restrictFieldInteractions) {
-                    _this119.executeInteraction(interaction);
+                  if (!_this120.form.controls[_this120.control.key].restrictFieldInteractions) {
+                    _this120.executeInteraction(interaction);
                   }
                 }
               };
@@ -28950,10 +29055,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function () {
-            _this119.templates = _this119.templateService.getAll();
-            _this119.loading = false;
+            _this120.templates = _this120.templateService.getAll();
+            _this120.loading = false;
 
-            _this119.changeDetectorRef.markForCheck();
+            _this120.changeDetectorRef.markForCheck();
           });
         }
         /**
@@ -28963,7 +29068,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "ngOnInit",
         value: function ngOnInit() {
-          var _this120 = this;
+          var _this121 = this;
 
           this.loading = true; // Make sure to initially format the time controls
 
@@ -28980,7 +29085,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             * @return {?}
             */
             function () {
-              _this120.clearValue();
+              _this121.clearValue();
             }); // For Asynchronous validations
 
             this.statusChangeSubscription = this.form.controls[this.control.key].statusChanges.subscribe(
@@ -28989,10 +29094,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             * @return {?}
             */
             function (validity) {
-              _this120.form.controls[_this120.control.key] = _this120.templateContext.$implicit;
+              _this121.form.controls[_this121.control.key] = _this121.templateContext.$implicit;
 
-              if (validity !== 'PENDING' && _this120.form.updateValueAndValidity) {
-                _this120.form.updateValueAndValidity();
+              if (validity !== 'PENDING' && _this121.form.updateValueAndValidity) {
+                _this121.form.updateValueAndValidity();
               }
             });
           }
@@ -29045,7 +29150,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             */
             function (value) {
               if (!Helpers.isEmpty(value)) {
-                _this120.templateContext.$implicit.percentValue = Number((value * 100).toFixed(6).replace(/\.?0*$/, ''));
+                _this121.templateContext.$implicit.percentValue = Number((value * 100).toFixed(6).replace(/\.?0*$/, ''));
               }
             });
           }
@@ -29097,7 +29202,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
          * @return {?}
          */
         value: function executeInteraction(interaction) {
-          var _this121 = this;
+          var _this122 = this;
 
           if (interaction.script && Helpers.isFunction(interaction.script)) {
             setTimeout(
@@ -29105,13 +29210,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             * @return {?}
             */
             function () {
-              _this121.fieldInteractionApi.form = _this121.form;
-              _this121.fieldInteractionApi.currentKey = _this121.control.key;
+              _this122.fieldInteractionApi.form = _this122.form;
+              _this122.fieldInteractionApi.currentKey = _this122.control.key;
 
               try {
-                interaction.script(_this121.fieldInteractionApi, _this121.control.key);
+                interaction.script(_this122.fieldInteractionApi, _this122.control.key);
               } catch (err) {
-                console.info('Field Interaction Error!', _this121.control.key); // tslint:disable-line
+                console.info('Field Interaction Error!', _this122.control.key); // tslint:disable-line
 
                 console.error(err); // tslint:disable-line
               }
@@ -29452,7 +29557,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "maxlengthMetField",
         get: function get() {
-          var _this122 = this;
+          var _this123 = this;
 
           if (this.maxLengthMetErrorfields && this.maxLengthMetErrorfields.length) {
             return this.maxLengthMetErrorfields.find(
@@ -29461,7 +29566,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             * @return {?}
             */
             function (field) {
-              return field === _this122.focusedField;
+              return field === _this123.focusedField;
             }) || '';
           } else {
             return '';
@@ -29474,7 +29579,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "maxlengthErrorField",
         get: function get() {
-          var _this123 = this;
+          var _this124 = this;
 
           if (this.errors && this.errors.maxlengthFields && this.errors.maxlengthFields.length) {
             return this.errors.maxlengthFields.find(
@@ -29483,7 +29588,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             * @return {?}
             */
             function (field) {
-              return field === _this123.focusedField;
+              return field === _this124.focusedField;
             }) || '';
           } else {
             return '';
@@ -43121,7 +43226,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "initConfig",
         value: function initConfig() {
-          var _this124 = this;
+          var _this125 = this;
 
           this.fieldList.forEach(
           /**
@@ -43129,52 +43234,52 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (field) {
-            if (!_this124.config.hasOwnProperty(field)) {
-              _this124.config[field] = {
+            if (!_this125.config.hasOwnProperty(field)) {
+              _this125.config[field] = {
                 hidden: true
               };
             }
 
-            if (!_this124.config[field].hasOwnProperty('label')) {
-              _this124.config[field].label = _this124.labels[field];
+            if (!_this125.config[field].hasOwnProperty('label')) {
+              _this125.config[field].label = _this125.labels[field];
             }
 
-            if (_this124.config.required) {
-              _this124.config[field].required = true;
+            if (_this125.config.required) {
+              _this125.config[field].required = true;
             }
 
-            if (_this124.config[field].readOnly || _this124.config.readOnly) {
-              _this124.config[field].readOnly = true;
-              _this124.disabled[field] = true;
+            if (_this125.config[field].readOnly || _this125.config.readOnly) {
+              _this125.config[field].readOnly = true;
+              _this125.disabled[field] = true;
             }
 
             if (field === 'countryID') {
-              if (!_this124.config[field].pickerConfig) {
-                _this124.config.countryID.pickerConfig = _this124.getDefaultCountryConfig();
+              if (!_this125.config[field].pickerConfig) {
+                _this125.config.countryID.pickerConfig = _this125.getDefaultCountryConfig();
               }
 
-              _this124.config[field].pickerConfig.defaultOptions = _this124.config.countryID.pickerConfig.options;
+              _this125.config[field].pickerConfig.defaultOptions = _this125.config.countryID.pickerConfig.options;
             }
 
             if (field === 'state') {
-              if (!_this124.config[field].pickerConfig) {
-                _this124.config.state.pickerConfig = _this124.getDefaultStateConfig();
-                _this124.config[field].pickerConfig.defaultOptions = _this124.config[field].pickerConfig.options;
+              if (!_this125.config[field].pickerConfig) {
+                _this125.config.state.pickerConfig = _this125.getDefaultStateConfig();
+                _this125.config[field].pickerConfig.defaultOptions = _this125.config[field].pickerConfig.options;
               }
 
-              _this124.stateOptions = _this124.config[field].pickerConfig.options;
+              _this125.stateOptions = _this125.config[field].pickerConfig.options;
 
-              _this124.config[field].pickerConfig.options =
+              _this125.config[field].pickerConfig.options =
               /**
               * @param {?=} query
               * @return {?}
               */
               function () {
                 var query = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
-                return _this124.stateOptions(query, _this124.model.countryID);
+                return _this125.stateOptions(query, _this125.model.countryID);
               };
 
-              _this124.config[field].pickerConfig.defaultOptions = _this124.stateOptions;
+              _this125.config[field].pickerConfig.defaultOptions = _this125.stateOptions;
             }
           });
         }
@@ -43364,7 +43469,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "updateStates",
         value: function updateStates() {
-          var _this125 = this;
+          var _this126 = this;
 
           if (this.config.state.pickerConfig.options && !Helpers.isBlank(this.model.countryID)) {
             this.config.state.pickerConfig.options =
@@ -43374,7 +43479,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             */
             function () {
               var query = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
-              return _this125.stateOptions(query, _this125.model.countryID);
+              return _this126.stateOptions(query, _this126.model.countryID);
             };
 
             this.stateOptions('', this.model.countryID).then(
@@ -43383,25 +43488,25 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             * @return {?}
             */
             function (results) {
-              _this125.config.state.pickerConfig.defaultOptions = results;
+              _this126.config.state.pickerConfig.defaultOptions = results;
 
               if (results.length) {
-                _this125.tooltip.state = undefined;
-                _this125.disabled.state = _this125._readOnly;
+                _this126.tooltip.state = undefined;
+                _this126.disabled.state = _this126._readOnly;
 
-                _this125.setStateLabel(_this125.model);
+                _this126.setStateLabel(_this126.model);
               } else {
-                _this125.disabled.state = true;
-                _this125.tooltip.state = _this125.labels.noStatesForCountry;
+                _this126.disabled.state = true;
+                _this126.tooltip.state = _this126.labels.noStatesForCountry;
 
-                if (_this125.config.state.required) {
-                  _this125.valid.state = true;
+                if (_this126.config.state.required) {
+                  _this126.valid.state = true;
                 }
               }
 
-              _this125.validityChange.emit();
+              _this126.validityChange.emit();
 
-              _this125.onInput(null, 'state');
+              _this126.onInput(null, 'state');
             });
           } else {
             this.config.state.pickerConfig.defaultOptions = [];
@@ -43467,7 +43572,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "writeValue",
         value: function writeValue(model) {
-          var _this126 = this;
+          var _this127 = this;
 
           /** @type {?} */
           var loadingCountries = false;
@@ -43493,12 +43598,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                     */
                     function (result) {
                       loadingCountries = false;
-                      countryName = Helpers.interpolateWithFallback(_this126.config.countryID.pickerConfig.format, result);
-                      _this126.model = Object.assign(model, {
+                      countryName = Helpers.interpolateWithFallback(_this127.config.countryID.pickerConfig.format, result);
+                      _this127.model = Object.assign(model, {
                         countryName: countryName
                       });
 
-                      _this126.updateStates();
+                      _this127.updateStates();
                     });
                   }
                 }
@@ -43526,7 +43631,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (field) {
-            _this126.onInput(null, field);
+            _this127.onInput(null, field);
           });
         }
         /**
@@ -43557,7 +43662,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "getDefaultStateConfig",
         value: function getDefaultStateConfig() {
-          var _this127 = this;
+          var _this128 = this;
 
           return {
             field: 'value',
@@ -43571,7 +43676,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             function options() {
               var query = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
               var countryID = arguments.length > 1 ? arguments[1] : undefined;
-              return Promise.resolve(_this127.getStateOptions(query, countryID));
+              return Promise.resolve(_this128.getStateOptions(query, countryID));
             },
             getLabels:
             /**
@@ -43664,7 +43769,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "readOnly",
         set: function set(readOnly) {
-          var _this128 = this;
+          var _this129 = this;
 
           this._readOnly = readOnly;
           this.fieldList.forEach(
@@ -43673,7 +43778,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (field) {
-            _this128.disabled[field] = _this128._readOnly;
+            _this129.disabled[field] = _this129._readOnly;
           });
 
           if (this.model) {
@@ -43989,7 +44094,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "setupOptions",
         value: function setupOptions() {
-          var _this129 = this;
+          var _this130 = this;
 
           this.options = this.options || [];
           this._options = [];
@@ -44005,10 +44110,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               var formattedOption = {
                 value: option,
                 label: option,
-                checked: _this129.model && _this129.model.length && _this129.model.indexOf(option.value) !== -1
+                checked: _this130.model && _this130.model.length && _this130.model.indexOf(option.value) !== -1
               };
 
-              _this129._options.push(formattedOption);
+              _this130._options.push(formattedOption);
             });
           } else {
             this.options.forEach(
@@ -44019,9 +44124,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             function (option) {
               /** @type {?} */
               var formattedOption = option;
-              formattedOption.checked = _this129.model && _this129.model.length && _this129.model.indexOf(option.value) !== -1;
+              formattedOption.checked = _this130.model && _this130.model.length && _this130.model.indexOf(option.value) !== -1;
 
-              _this129._options.push(formattedOption);
+              _this130._options.push(formattedOption);
             });
           }
         }
@@ -44135,7 +44240,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
        * @param {?} file
        */
       function NovoFile(file) {
-        var _this130 = this;
+        var _this131 = this;
 
         _classCallCheck(this, NovoFile);
 
@@ -44157,12 +44262,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         * @return {?}
         */
         function (event) {
-          _this130.fileContents = event.target.result.split(',')[1];
-          _this130.dataURL = event.target.result;
-          _this130.loaded = true;
+          _this131.fileContents = event.target.result.split(',')[1];
+          _this131.dataURL = event.target.result;
+          _this131.loaded = true;
 
-          if (_this130.readPromise) {
-            _this130.readPromise(_this130);
+          if (_this131.readPromise) {
+            _this131.readPromise(_this131);
           }
         };
       }
@@ -44174,7 +44279,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _createClass(NovoFile, [{
         key: "read",
         value: function read() {
-          var _this131 = this;
+          var _this132 = this;
 
           return new Promise(
           /**
@@ -44182,9 +44287,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (resolve) {
-            _this131.readPromise = resolve; // when the file is read it triggers the onload event above.
+            _this132.readPromise = resolve; // when the file is read it triggers the onload event above.
 
-            _this131.reader.readAsDataURL(_this131.file);
+            _this132.reader.readAsDataURL(_this132.file);
           });
         }
         /**
@@ -44289,7 +44394,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _createClass(NovoFileInputElement, [{
         key: "ngOnInit",
         value: function ngOnInit() {
-          var _this132 = this;
+          var _this133 = this;
 
           ['dragenter', 'dragleave', 'dragover', 'drop'].forEach(
           /**
@@ -44297,7 +44402,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (type) {
-            _this132.element.nativeElement.addEventListener(type, _this132.commands[type]);
+            _this133.element.nativeElement.addEventListener(type, _this133.commands[type]);
           });
           this.updateLayout();
           this.initializeDragula();
@@ -44311,7 +44416,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "ngOnDestroy",
         value: function ngOnDestroy() {
-          var _this133 = this;
+          var _this134 = this;
 
           ['dragenter', 'dragleave', 'dragover', 'drop'].forEach(
           /**
@@ -44319,7 +44424,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (type) {
-            _this133.element.nativeElement.removeEventListener(type, _this133.commands[type]);
+            _this134.element.nativeElement.removeEventListener(type, _this134.commands[type]);
           });
           /** @type {?} */
 
@@ -44329,7 +44434,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (x) {
-            return x.name === _this133.fileOutputBag;
+            return x.name === _this134.fileOutputBag;
           }).length > 0;
 
           if (dragulaHasFileOutputBag) {
@@ -44363,7 +44468,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "insertTemplatesBasedOnLayout",
         value: function insertTemplatesBasedOnLayout() {
-          var _this134 = this;
+          var _this135 = this;
 
           /** @type {?} */
           var order;
@@ -44383,7 +44488,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (template) {
-            _this134.container.createEmbeddedView(_this134[template], 0);
+            _this135.container.createEmbeddedView(_this135[template], 0);
           });
           return order;
         }
@@ -44394,7 +44499,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "initializeDragula",
         value: function initializeDragula() {
-          var _this135 = this;
+          var _this136 = this;
 
           this.fileOutputBag = "file-output-".concat(this.dragula.bags.length);
           this.dragula.setOptions(this.fileOutputBag, {
@@ -44406,7 +44511,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             * @return {?}
             */
             function moves(el, container, handle) {
-              return _this135.layoutOptions.draggable;
+              return _this136.layoutOptions.draggable;
             }
           });
         }
@@ -44567,7 +44672,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "process",
         value: function process(filelist) {
-          var _this136 = this;
+          var _this137 = this;
 
           if (this.validate(filelist)) {
             Promise.all(filelist.map(
@@ -44576,24 +44681,24 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             * @return {?}
             */
             function (file) {
-              return _this136.readFile(file);
+              return _this137.readFile(file);
             })).then(
             /**
             * @param {?} files
             * @return {?}
             */
             function (files) {
-              if (_this136.multiple) {
-                var _this136$files;
+              if (_this137.multiple) {
+                var _this137$files;
 
-                (_this136$files = _this136.files).push.apply(_this136$files, _toConsumableArray(files));
+                (_this137$files = _this137.files).push.apply(_this137$files, _toConsumableArray(files));
               } else {
-                _this136.files = files;
+                _this137.files = files;
               }
 
-              _this136.model = _this136.files;
+              _this137.model = _this137.files;
 
-              _this136.onModelChange(_this136.model);
+              _this137.onModelChange(_this137.model);
             });
           }
         }
@@ -44861,7 +44966,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "ngOnChanges",
         value: function ngOnChanges(changes) {
-          var _this137 = this;
+          var _this138 = this;
 
           /** @type {?} */
           var initialValueChange = changes['initialValue']; // If initial value changes, clear the controls
@@ -44880,7 +44985,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               * @return {?}
               */
               function (value) {
-                return _this137.addNewControl(value);
+                return _this138.addNewControl(value);
               });
             }
           } else if (this.initialValue) {
@@ -44923,7 +45028,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "resetAddRemove",
         value: function resetAddRemove() {
-          var _this138 = this;
+          var _this139 = this;
 
           this.disabledArray.forEach(
           /**
@@ -44932,8 +45037,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (item, idx) {
-            item.edit = _this138.checkCanEdit(idx);
-            item.remove = _this138.checkCanRemove(idx);
+            item.edit = _this139.checkCanEdit(idx);
+            item.remove = _this139.checkCanRemove(idx);
           });
           this.ref.markForCheck();
         }
@@ -45345,7 +45450,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _createClass(NovoControlTemplates, [{
         key: "ngAfterViewInit",
         value: function ngAfterViewInit() {
-          var _this139 = this;
+          var _this140 = this;
 
           if (this.defaultTemplates && this.defaultTemplates.length) {
             this.defaultTemplates.forEach(
@@ -45354,7 +45459,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             * @return {?}
             */
             function (template) {
-              _this139.templates.addDefault(template.name, template.template);
+              _this140.templates.addDefault(template.name, template.template);
             });
           }
         }
@@ -45807,7 +45912,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _createClass(TableCell, [{
         key: "ngOnInit",
         value: function ngOnInit() {
-          var _this140 = this;
+          var _this141 = this;
 
           this.column._type = this.column.type || 'text';
 
@@ -45837,7 +45942,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             * @return {?}
             */
             function (value) {
-              _this140.value = value[_this140.column.name];
+              _this141.value = value[_this141.column.name];
             });
           }
         }
@@ -45972,7 +46077,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "onChangeFilter",
         value: function onChangeFilter(event) {
-          var _this141 = this;
+          var _this142 = this;
 
           clearTimeout(this.filterThrottle);
 
@@ -45989,12 +46094,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             * @return {?}
             */
             function () {
-              _this141.config.filter =
+              _this142.config.filter =
               /** @type {?} */
               event.target.value;
 
-              _this141.onFilterChange.emit({
-                filtering: _this141.config
+              _this142.onFilterChange.emit({
+                filtering: _this142.config
               });
             }, 300);
           }
@@ -46367,19 +46472,19 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var DateCell = /*#__PURE__*/function (_BaseRenderer) {
       _inherits(DateCell, _BaseRenderer);
 
-      var _super35 = _createSuper(DateCell);
+      var _super36 = _createSuper(DateCell);
 
       /**
        * @param {?} labels
        */
       function DateCell(labels) {
-        var _this142;
+        var _this143;
 
         _classCallCheck(this, DateCell);
 
-        _this142 = _super35.call(this);
-        _this142.labels = labels;
-        return _this142;
+        _this143 = _super36.call(this);
+        _this143.labels = labels;
+        return _this143;
       }
       /**
        * @return {?}
@@ -46428,12 +46533,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var PercentageCell = /*#__PURE__*/function (_BaseRenderer2) {
       _inherits(PercentageCell, _BaseRenderer2);
 
-      var _super36 = _createSuper(PercentageCell);
+      var _super37 = _createSuper(PercentageCell);
 
       function PercentageCell() {
         _classCallCheck(this, PercentageCell);
 
-        return _super36.apply(this, arguments);
+        return _super37.apply(this, arguments);
       }
 
       return PercentageCell;
@@ -46463,12 +46568,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var NovoDropdownCell = /*#__PURE__*/function (_BaseRenderer3) {
       _inherits(NovoDropdownCell, _BaseRenderer3);
 
-      var _super37 = _createSuper(NovoDropdownCell);
+      var _super38 = _createSuper(NovoDropdownCell);
 
       function NovoDropdownCell() {
         _classCallCheck(this, NovoDropdownCell);
 
-        return _super37.apply(this, arguments);
+        return _super38.apply(this, arguments);
       }
 
       _createClass(NovoDropdownCell, [{
@@ -47249,23 +47354,23 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var PagedArrayCollection = /*#__PURE__*/function (_ArrayCollection) {
       _inherits(PagedArrayCollection, _ArrayCollection);
 
-      var _super38 = _createSuper(PagedArrayCollection);
+      var _super39 = _createSuper(PagedArrayCollection);
 
       /**
        * @param {?=} source
        */
       function PagedArrayCollection() {
-        var _this143;
+        var _this144;
 
         var source = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
 
         _classCallCheck(this, PagedArrayCollection);
 
-        _this143 = _super38.call(this, source);
-        _this143._page = 1;
-        _this143._numberOfPages = 1;
-        _this143._pageSize = 10;
-        return _this143;
+        _this144 = _super39.call(this, source);
+        _this144._page = 1;
+        _this144._numberOfPages = 1;
+        _this144._pageSize = 10;
+        return _this144;
       }
       /**
        * @return {?}
@@ -47562,7 +47667,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "setupColumnDefaults",
         value: function setupColumnDefaults() {
-          var _this144 = this;
+          var _this145 = this;
 
           // Check columns for cell option types
           this.columns.forEach(
@@ -47575,7 +47680,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               switch (column.type) {
                 case 'date':
                   // Set options based on dates if there are none
-                  column.options = column.options || _this144.getDefaultOptions(column);
+                  column.options = column.options || _this145.getDefaultOptions(column);
                   break;
 
                 default:
@@ -47682,7 +47787,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "onFilterClear",
         value: function onFilterClear(column) {
-          var _this145 = this;
+          var _this146 = this;
 
           setTimeout(
           /**
@@ -47692,7 +47797,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             column.filter = null;
             column.freetextFilter = null;
 
-            _this145.onFilterChange();
+            _this146.onFilterChange();
 
             if (column.originalOptions) {
               column.options = column.originalOptions;
@@ -47729,7 +47834,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "onFilterChange",
         value: function onFilterChange(event) {
-          var _this146 = this;
+          var _this147 = this;
 
           if (this.config.filtering) {
             // Array of filters
@@ -47766,7 +47871,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                       return column.match(record, column.filter);
                     };
                   } else if (column.preFilter && Helpers.isFunction(column.preFilter)) {
-                    query = Object.assign({}, query, column.preFilter(_this146.escapeCharacters(column.filter)));
+                    query = Object.assign({}, query, column.preFilter(_this147.escapeCharacters(column.filter)));
                   } else if (Array.isArray(column.filter)) {
                     // The filters are an array (multi-select), check value
 
@@ -47898,7 +48003,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "onSortChange",
         value: function onSortChange(column) {
-          var _this147 = this;
+          var _this148 = this;
 
           this.currentSortColumn = column;
           /** @type {?} */
@@ -47909,7 +48014,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (thisColumn) {
-            return thisColumn.sort && thisColumn !== _this147.currentSortColumn;
+            return thisColumn.sort && thisColumn !== _this148.currentSortColumn;
           });
 
           var _iterator15 = _createForOfIteratorHelper(sortedColumns),
@@ -48263,7 +48368,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "onCalenderSelect",
         value: function onCalenderSelect(column, event) {
-          var _this148 = this;
+          var _this149 = this;
 
           setTimeout(
           /**
@@ -48271,7 +48376,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           */
           function () {
             if (event.startDate && event.endDate) {
-              _this148.onFilterChange();
+              _this149.onFilterChange();
             }
           }, 10);
         }
@@ -48334,7 +48439,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "setTableEdit",
         value: function setTableEdit(rowNumber, columnNumber) {
-          var _this149 = this;
+          var _this150 = this;
 
           this.mode = NovoTableMode.EDIT;
 
@@ -48349,7 +48454,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           function (row, rowIndex) {
             row._editing = row._editing || {};
 
-            _this149.columns.forEach(
+            _this150.columns.forEach(
             /**
             * @param {?} column
             * @param {?} columnIndex
@@ -48382,7 +48487,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "leaveEditMode",
         value: function leaveEditMode(cancel) {
-          var _this150 = this;
+          var _this151 = this;
 
           this.mode = NovoTableMode.VIEW;
 
@@ -48394,7 +48499,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           function (row) {
             row._editing = row._editing || {};
 
-            _this150.columns.forEach(
+            _this151.columns.forEach(
             /**
             * @param {?} column
             * @return {?}
@@ -48474,7 +48579,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "validateAndGetUpdatedData",
         value: function validateAndGetUpdatedData() {
-          var _this151 = this;
+          var _this152 = this;
 
           if (this.tableForm && this.tableForm.controls && this.tableForm.controls['rows']) {
             /** @type {?} */
@@ -48511,15 +48616,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                     // Append the ID, so we have some key to save against
                     changedRow = {};
 
-                    if (_this151._rows[index].id) {
-                      changedRow.id = _this151._rows[index].id;
+                    if (_this152._rows[index].id) {
+                      changedRow.id = _this152._rows[index].id;
                     }
                   } // If dirty, grab value off the form
 
 
-                  changedRow[key] = _this151.tableForm.value['rows'][index][key]; // Set value back to row (should be already done via the server call, but do it anyway)
+                  changedRow[key] = _this152.tableForm.value['rows'][index][key]; // Set value back to row (should be already done via the server call, but do it anyway)
 
-                  _this151._rows[index][key] = changedRow[key];
+                  _this152._rows[index][key] = changedRow[key];
                 } else if (control && control.errors) {
                   // Handle errors
                   if (!error) {
@@ -48539,7 +48644,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               if (error) {
                 errors.push({
                   errors: error,
-                  row: _this151._rows[index],
+                  row: _this152._rows[index],
                   index: index
                 });
               }
@@ -48595,7 +48700,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "displayToastMessage",
         value: function displayToastMessage(toast, hideDelay) {
-          var _this152 = this;
+          var _this153 = this;
 
           this.loading = false;
           this.toast = toast;
@@ -48606,7 +48711,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             * @return {?}
             */
             function () {
-              return _this152.hideToastMessage();
+              return _this153.hideToastMessage();
             }, hideDelay);
           }
         }
@@ -48620,7 +48725,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "hideToastMessage",
         value: function hideToastMessage() {
-          var _this153 = this;
+          var _this154 = this;
 
           this.toast = null; // Hack to make the table display properly after hiding the toast
 
@@ -48630,7 +48735,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function () {
-            _this153.grossFlagToAvoidTheTableFromBeingUglyWhenHidingTheToast = false;
+            _this154.grossFlagToAvoidTheTableFromBeingUglyWhenHidingTheToast = false;
           });
         }
         /**
@@ -48688,7 +48793,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "dataProvider",
         set: function set(dp) {
-          var _this154 = this;
+          var _this155 = this;
 
           this._dataProvider = Array.isArray(dp) ? new PagedArrayCollection(dp) : dp;
 
@@ -48700,15 +48805,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           function (event) {
             switch (event.type) {
               case CollectionEvent.CHANGE:
-                _this154._rows = event.data; // Setup form
+                _this155._rows = event.data; // Setup form
 
-                _this154.tableForm = _this154.builder.group({
-                  rows: _this154.builder.array([])
+                _this155.tableForm = _this155.builder.group({
+                  rows: _this155.builder.array([])
                 }); // Remove all selection on sort change if selection is on
 
-                if (_this154.config.rowSelectionStyle === 'checkbox') {
-                  _this154.pagedData = event.data;
-                  _this154.pageSelected = _this154.pagedData.filter(
+                if (_this155.config.rowSelectionStyle === 'checkbox') {
+                  _this155.pagedData = event.data;
+                  _this155.pageSelected = _this155.pagedData.filter(
                   /**
                   * @param {?} r
                   * @return {?}
@@ -48717,7 +48822,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                     return r._selected;
                   });
 
-                  _this154.rowSelectHandler();
+                  _this155.rowSelectHandler();
                 } // Find that columns we might need to sum up via the footer
 
                 /** @type {?} */
@@ -48728,8 +48833,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
                 var columnSums = {};
 
-                if (_this154.config.footers) {
-                  _this154.config.footers.forEach(
+                if (_this155.config.footers) {
+                  _this155.config.footers.forEach(
                   /**
                   * @param {?} config
                   * @return {?}
@@ -48758,9 +48863,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
                 var tableFormRows =
                 /** @type {?} */
-                _this154.tableForm.controls['rows'];
+                _this155.tableForm.controls['rows'];
 
-                _this154._rows.forEach(
+                _this155._rows.forEach(
                 /**
                 * @param {?} row
                 * @param {?} index
@@ -48771,10 +48876,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                   var rowControls = [];
                   row.controls = {};
                   row._editing = {};
-                  row._expanded = _this154.config.expandAll;
-                  row.rowId = _this154._rows.length;
+                  row._expanded = _this155.config.expandAll;
+                  row.rowId = _this155._rows.length;
 
-                  _this154.columns.forEach(
+                  _this155.columns.forEach(
                   /**
                   * @param {?} column
                   * @return {?}
@@ -48790,9 +48895,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                     rowControls.push(control);
                   });
 
-                  _this154.formUtils.setInitialValues(rowControls, row, false);
+                  _this155.formUtils.setInitialValues(rowControls, row, false);
 
-                  tableFormRows.push(_this154.formUtils.toFormGroup(rowControls)); // Setup the total footer if configured
+                  tableFormRows.push(_this155.formUtils.toFormGroup(rowControls)); // Setup the total footer if configured
                   // Array of keys to total
 
                   if (columnsToSum.length !== 0) {
@@ -48811,15 +48916,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                   }
                 });
 
-                if (_this154.mode === NovoTableMode.EDIT) {
-                  _this154.setTableEdit();
+                if (_this155.mode === NovoTableMode.EDIT) {
+                  _this155.setTableEdit();
                 } // Setup the footers (if any)
 
 
-                if (_this154.config.footers) {
-                  _this154.footers = [];
+                if (_this155.config.footers) {
+                  _this155.footers = [];
 
-                  _this154.config.footers.forEach(
+                  _this155.config.footers.forEach(
                   /**
                   * @param {?} footerConfig
                   * @param {?} footerConfigIndex
@@ -48835,14 +48940,14 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                     * @return {?}
                     */
                     function (column) {
-                      if (footerConfig.method === 'AVG' && _this154._rows.length !== 0) {
-                        footer[column] = columnSums[column] / _this154._rows.length;
+                      if (footerConfig.method === 'AVG' && _this155._rows.length !== 0) {
+                        footer[column] = columnSums[column] / _this155._rows.length;
                       } else {
                         footer[column] = columnSums[column];
                       }
                     });
 
-                    _this154.footers.push(footer);
+                    _this155.footers.push(footer);
                   });
                 }
 
@@ -50086,7 +50191,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
          * @return {?}
          */
         value: function ngAfterViewInit() {
-          var _this155 = this;
+          var _this156 = this;
 
           if (this.element.nativeElement.textContent.trim()) {
             Promise.resolve().then(
@@ -50094,9 +50199,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             * @return {?}
             */
             function () {
-              _this155.name = _this155.element.nativeElement.textContent.trim();
+              _this156.name = _this156.element.nativeElement.textContent.trim();
 
-              _this155.cdr.markForCheck();
+              _this156.cdr.markForCheck();
             });
           }
         }
@@ -50225,15 +50330,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var NovoAccordion = /*#__PURE__*/function (_angular_cdk_accordio) {
       _inherits(NovoAccordion, _angular_cdk_accordio);
 
-      var _super39 = _createSuper(NovoAccordion);
+      var _super40 = _createSuper(NovoAccordion);
 
       function NovoAccordion() {
-        var _this156;
+        var _this157;
 
         _classCallCheck(this, NovoAccordion);
 
-        _this156 = _super39.apply(this, arguments);
-        _this156._hideToggle = false;
+        _this157 = _super40.apply(this, arguments);
+        _this157._hideToggle = false;
         /**
          * The display mode used for all expansion panels in the accordion. Currently two display
          * modes exist:
@@ -50243,8 +50348,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
          *     elevation.
          */
 
-        _this156.displayMode = 'default';
-        return _this156;
+        _this157.displayMode = 'default';
+        return _this157;
       }
       /**
        * Whether the expansion indicator should be hidden.
@@ -50407,7 +50512,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var NovoExpansionPanel = /*#__PURE__*/function (_angular_cdk_accordio2) {
       _inherits(NovoExpansionPanel, _angular_cdk_accordio2);
 
-      var _super40 = _createSuper(NovoExpansionPanel);
+      var _super41 = _createSuper(NovoExpansionPanel);
 
       /**
        * @param {?} accordion
@@ -50416,29 +50521,29 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
        * @param {?} _viewContainerRef
        */
       function NovoExpansionPanel(accordion, _changeDetectorRef, _uniqueSelectionDispatcher, _viewContainerRef) {
-        var _this157;
+        var _this158;
 
         _classCallCheck(this, NovoExpansionPanel);
 
-        _this157 = _super40.call(this, accordion, _changeDetectorRef, _uniqueSelectionDispatcher);
-        _this157._viewContainerRef = _viewContainerRef;
-        _this157._hideToggle = false;
-        _this157._padding = true;
-        _this157.opened = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
-        _this157.closed = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
-        _this157.expandedChange = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
+        _this158 = _super41.call(this, accordion, _changeDetectorRef, _uniqueSelectionDispatcher);
+        _this158._viewContainerRef = _viewContainerRef;
+        _this158._hideToggle = false;
+        _this158._padding = true;
+        _this158.opened = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
+        _this158.closed = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
+        _this158.expandedChange = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
         /**
          * Stream that emits for changes in `\@Input` properties.
          */
 
-        _this157._inputChanges = new rxjs__WEBPACK_IMPORTED_MODULE_11__["Subject"]();
+        _this158._inputChanges = new rxjs__WEBPACK_IMPORTED_MODULE_11__["Subject"]();
         /**
          * ID for the associated header element. Used for a11y labelling.
          */
 
-        _this157._headerId = "novo-expansion-panel-header-".concat(uniqueId++);
-        _this157.accordion = accordion;
-        return _this157;
+        _this158._headerId = "novo-expansion-panel-header-".concat(uniqueId++);
+        _this158.accordion = accordion;
+        return _this158;
       }
       /**
        * Whether the toggle indicator should be hidden.
@@ -50491,7 +50596,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "ngAfterContentInit",
         value: function ngAfterContentInit() {
-          var _this158 = this;
+          var _this159 = this;
 
           if (this._lazyContent) {
             // Render the content as soon as the panel becomes open.
@@ -50500,13 +50605,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             * @return {?}
             */
             function () {
-              return _this158.expanded && !_this158._portal;
+              return _this159.expanded && !_this159._portal;
             }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_13__["take"])(1)).subscribe(
             /**
             * @return {?}
             */
             function () {
-              _this158._portal = new _angular_cdk_portal__WEBPACK_IMPORTED_MODULE_8__["TemplatePortal"](_this158._lazyContent._template, _this158._viewContainerRef);
+              _this159._portal = new _angular_cdk_portal__WEBPACK_IMPORTED_MODULE_8__["TemplatePortal"](_this159._lazyContent._template, _this159._viewContainerRef);
             });
           }
         }
@@ -50692,7 +50797,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
        * @param {?} _changeDetectorRef
        */
       function NovoExpansionPanelHeader(panel, _element, _changeDetectorRef) {
-        var _this159 = this;
+        var _this160 = this;
 
         _classCallCheck(this, NovoExpansionPanelHeader);
 
@@ -50714,7 +50819,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         * @return {?}
         */
         function () {
-          return _this159._changeDetectorRef.markForCheck();
+          return _this160._changeDetectorRef.markForCheck();
         }); // _focusMonitor.monitor(_element.nativeElement);
       }
       /**
@@ -50921,7 +51026,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var NovoStepLabel = /*#__PURE__*/function (_angular_cdk_stepper_) {
       _inherits(NovoStepLabel, _angular_cdk_stepper_);
 
-      var _super41 = _createSuper(NovoStepLabel);
+      var _super42 = _createSuper(NovoStepLabel);
 
       /**
        * @param {?} template
@@ -50929,7 +51034,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       function NovoStepLabel(template) {
         _classCallCheck(this, NovoStepLabel);
 
-        return _super41.call(this, template);
+        return _super42.call(this, template);
       }
 
       return NovoStepLabel;
@@ -50958,24 +51063,24 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var NovoStepHeader = /*#__PURE__*/function (_angular_cdk_stepper_2) {
       _inherits(NovoStepHeader, _angular_cdk_stepper_2);
 
-      var _super42 = _createSuper(NovoStepHeader);
+      var _super43 = _createSuper(NovoStepHeader);
 
       /**
        * @param {?} _focusMonitor
        * @param {?} _element
        */
       function NovoStepHeader(_focusMonitor, _element) {
-        var _this160;
+        var _this161;
 
         _classCallCheck(this, NovoStepHeader);
 
-        _this160 = _super42.call(this, _element);
-        _this160._focusMonitor = _focusMonitor;
-        _this160._element = _element;
+        _this161 = _super43.call(this, _element);
+        _this161._focusMonitor = _focusMonitor;
+        _this161._element = _element;
 
         _focusMonitor.monitor(_element.nativeElement, true);
 
-        return _this160;
+        return _this161;
       }
       /**
        * Index of the given step.
@@ -51219,7 +51324,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var NovoStep = /*#__PURE__*/function (_angular_cdk_stepper_3) {
       _inherits(NovoStep, _angular_cdk_stepper_3);
 
-      var _super43 = _createSuper(NovoStep);
+      var _super44 = _createSuper(NovoStep);
 
       /**
        * @param {?} stepper
@@ -51227,7 +51332,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       function NovoStep(stepper) {
         _classCallCheck(this, NovoStep);
 
-        return _super43.call(this, stepper);
+        return _super44.call(this, stepper);
       }
 
       return NovoStep;
@@ -51283,20 +51388,20 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var NovoStepper = /*#__PURE__*/function (_angular_cdk_stepper_4) {
       _inherits(NovoStepper, _angular_cdk_stepper_4);
 
-      var _super44 = _createSuper(NovoStepper);
+      var _super45 = _createSuper(NovoStepper);
 
       function NovoStepper() {
-        var _this161;
+        var _this162;
 
         _classCallCheck(this, NovoStepper);
 
-        _this161 = _super44.apply(this, arguments);
+        _this162 = _super45.apply(this, arguments);
         /**
          * Consumer-specified template-refs to be used to override the header icons.
          */
 
-        _this161._iconOverrides = {};
-        return _this161;
+        _this162._iconOverrides = {};
+        return _this162;
       }
       /**
        * @return {?}
@@ -51310,7 +51415,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
          * @return {?}
          */
         value: function ngAfterContentInit() {
-          var _this162 = this;
+          var _this163 = this;
 
           // Mark the component for change detection whenever the content children query changes
           this._steps.changes.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_13__["takeUntil"])(this._destroyed)).subscribe(
@@ -51318,7 +51423,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function () {
-            return _this162._stateChanged();
+            return _this163._stateChanged();
           });
         }
         /**
@@ -51410,12 +51515,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var NovoHorizontalStepper = /*#__PURE__*/function (_NovoStepper2) {
       _inherits(NovoHorizontalStepper, _NovoStepper2);
 
-      var _super45 = _createSuper(NovoHorizontalStepper);
+      var _super46 = _createSuper(NovoHorizontalStepper);
 
       function NovoHorizontalStepper() {
         _classCallCheck(this, NovoHorizontalStepper);
 
-        return _super45.apply(this, arguments);
+        return _super46.apply(this, arguments);
       }
 
       return NovoHorizontalStepper;
@@ -51453,20 +51558,20 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var NovoVerticalStepper = /*#__PURE__*/function (_NovoStepper3) {
       _inherits(NovoVerticalStepper, _NovoStepper3);
 
-      var _super46 = _createSuper(NovoVerticalStepper);
+      var _super47 = _createSuper(NovoVerticalStepper);
 
       /**
        * @param {?} dir
        * @param {?} changeDetectorRef
        */
       function NovoVerticalStepper(dir, changeDetectorRef) {
-        var _this163;
+        var _this164;
 
         _classCallCheck(this, NovoVerticalStepper);
 
-        _this163 = _super46.call(this, dir, changeDetectorRef);
-        _this163._orientation = 'vertical';
-        return _this163;
+        _this164 = _super47.call(this, dir, changeDetectorRef);
+        _this164._orientation = 'vertical';
+        return _this164;
       }
 
       return NovoVerticalStepper;
@@ -51606,32 +51711,32 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var NovoCategoryDropdownElement = /*#__PURE__*/function (_OutsideClick3) {
       _inherits(NovoCategoryDropdownElement, _OutsideClick3);
 
-      var _super47 = _createSuper(NovoCategoryDropdownElement);
+      var _super48 = _createSuper(NovoCategoryDropdownElement);
 
       /**
        * @param {?} element
        * @param {?} labels
        */
       function NovoCategoryDropdownElement(element, labels) {
-        var _this164;
+        var _this165;
 
         _classCallCheck(this, NovoCategoryDropdownElement);
 
-        _this164 = _super47.call(this, element);
-        _this164.labels = labels;
-        _this164._query = '';
-        _this164._categoryMap = {};
-        _this164._categories = []; // Boolean to keep the selection persist when closing the dropdown
+        _this165 = _super48.call(this, element);
+        _this165.labels = labels;
+        _this165._query = '';
+        _this165._categoryMap = {};
+        _this165._categories = []; // Boolean to keep the selection persist when closing the dropdown
 
-        _this164.persistSelection = false; // Boolean to close the dropdown on selection
+        _this165.persistSelection = false; // Boolean to close the dropdown on selection
 
-        _this164.closeOnSelect = false; // Event that is emitted whenever an item is selected
+        _this165.closeOnSelect = false; // Event that is emitted whenever an item is selected
 
-        _this164._select = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"](); // Event that is emitted whenever a category is selected
+        _this165._select = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"](); // Event that is emitted whenever a category is selected
 
-        _this164.categorySelected = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
-        _this164.clickHandler = _this164.toggleActive.bind(_assertThisInitialized(_this164));
-        return _this164;
+        _this165.categorySelected = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
+        _this165.clickHandler = _this165.toggleActive.bind(_assertThisInitialized(_this165));
+        return _this165;
       }
       /**
        * @param {?} categories
@@ -51683,7 +51788,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "clearSelection",
         value: function clearSelection() {
-          var _this165 = this;
+          var _this166 = this;
 
           this._categories.forEach(
           /**
@@ -51691,7 +51796,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (category) {
-            _this165._categoryMap[category].forEach(
+            _this166._categoryMap[category].forEach(
             /**
             * @param {?} item
             * @return {?}
@@ -51743,7 +51848,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "clearQuery",
         value: function clearQuery(event) {
-          var _this166 = this;
+          var _this167 = this;
 
           Helpers.swallowEvent(event);
           this._query = ''; // Reset the categories
@@ -51754,7 +51859,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (category) {
-            _this166._categoryMap[category] = _this166._masterCategoryMap[category];
+            _this167._categoryMap[category] = _this167._masterCategoryMap[category];
           });
         }
         /**
@@ -51765,7 +51870,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "queryCategories",
         value: function queryCategories(query) {
-          var _this167 = this;
+          var _this168 = this;
 
           // Save the query
           this._query = query; // Check timeout
@@ -51780,23 +51885,23 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function () {
-            _this167._categories.forEach(
+            _this168._categories.forEach(
             /**
             * @param {?} category
             * @return {?}
             */
             function (category) {
-              if (_this167.search.compare) {
-                _this167._categoryMap[category] = _this167._masterCategoryMap[category].filter(
+              if (_this168.search.compare) {
+                _this168._categoryMap[category] = _this168._masterCategoryMap[category].filter(
                 /**
                 * @param {?} item
                 * @return {?}
                 */
                 function (item) {
-                  return _this167.search.compare(query, item);
+                  return _this168.search.compare(query, item);
                 });
               } else {
-                _this167._categoryMap[category] = _this167._masterCategoryMap[category].filter(
+                _this168._categoryMap[category] = _this168._masterCategoryMap[category].filter(
                 /**
                 * @param {?} item
                 * @return {?}
@@ -51989,7 +52094,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "clearValue",
         value: function clearValue() {
-          var _this168 = this;
+          var _this169 = this;
 
           this.types.forEach(
           /**
@@ -51997,7 +52102,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (type) {
-            return _this168.modifyAllOfType(type.value, 'unselect');
+            return _this169.modifyAllOfType(type.value, 'unselect');
           });
           this.items = [];
 
@@ -52025,7 +52130,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "setupOptions",
         value: function setupOptions() {
-          var _this169 = this;
+          var _this170 = this;
 
           this.options = this.source.options || [];
           this._options = [];
@@ -52038,9 +52143,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             */
             function (option) {
               /** @type {?} */
-              var formattedOption = _this169.setupOptionsByType(option);
+              var formattedOption = _this170.setupOptionsByType(option);
 
-              _this169._options.push(formattedOption);
+              _this170._options.push(formattedOption);
             });
           }
 
@@ -52054,7 +52159,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "setupOptionsByType",
         value: function setupOptionsByType(section) {
-          var _this170 = this;
+          var _this171 = this;
 
           /** @type {?} */
           var formattedSection = {
@@ -52067,7 +52172,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (item) {
-            return _this170.formatOption(section, item);
+            return _this171.formatOption(section, item);
           });
 
           if (this.selectAllOption) {
@@ -52290,7 +52395,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "updateDisplayText",
         value: function updateDisplayText(items) {
-          var _this171 = this;
+          var _this172 = this;
 
           this.notShown = [];
           /** @type {?} */
@@ -52318,7 +52423,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               });
 
               if (selectedOfType.length === 1 && selectedOfType[0].value === 'ALL') {
-                count = _this171.getAllOfType(type.value).length - 1;
+                count = _this172.getAllOfType(type.value).length - 1;
               } else {
                 count = selectedOfType.length;
               }
@@ -52328,7 +52433,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               var displayType = count === 1 ? type.singular : type.plural || type.value;
 
               if (count > 0) {
-                _this171.notShown.push({
+                _this172.notShown.push({
                   type: displayType,
                   count: count
                 });
@@ -52501,7 +52606,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "triggerValueUpdate",
         value: function triggerValueUpdate() {
-          var _this172 = this;
+          var _this173 = this;
 
           /** @type {?} */
           var updatedObject = {};
@@ -52511,7 +52616,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (x) {
-            return updatedObject[x.value] = _this172.value[x.value];
+            return updatedObject[x.value] = _this173.value[x.value];
           });
           this.value = updatedObject;
         }
@@ -52656,7 +52761,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "modifyAffectedParentsOrChildren",
         value: function modifyAffectedParentsOrChildren(selecting, itemChanged) {
-          var _this173 = this;
+          var _this174 = this;
 
           if (!itemChanged.isChildOf && !itemChanged.isParentOf) {
             return;
@@ -52748,25 +52853,25 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
               if (selectedChildrenOfParent.length > 0) {
                 if (obj.checked) {
-                  if (_this173.strictRelationship && allChildrenOfParent.length !== selectedChildrenOfParent.length) {
+                  if (_this174.strictRelationship && allChildrenOfParent.length !== selectedChildrenOfParent.length) {
                     obj.indeterminate = true;
                     obj.checked = false;
 
-                    _this173.removeValue(obj);
+                    _this174.removeValue(obj);
 
-                    _this173.addIndividualChildren(selectedChildrenOfParent);
+                    _this174.addIndividualChildren(selectedChildrenOfParent);
                   }
                 } else {
                   obj.indeterminate = true;
                 }
 
-                if (_this173.strictRelationship && itemChanged.type !== parentType) {
+                if (_this174.strictRelationship && itemChanged.type !== parentType) {
                   if (obj.checked) {
                     obj.checked = false;
 
-                    _this173.removeValue(obj);
+                    _this174.removeValue(obj);
 
-                    _this173.addIndividualChildren(selectedChildrenOfParent);
+                    _this174.addIndividualChildren(selectedChildrenOfParent);
                   }
                 }
               } else {
@@ -52775,8 +52880,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                 if (allChildrenOfParent.length === 0) {
                   // if it has no children and is checked, it should stay checked
                   return;
-                } else if (_this173.strictRelationship && itemChanged.type !== parentType) {
-                  _this173.remove(null, obj);
+                } else if (_this174.strictRelationship && itemChanged.type !== parentType) {
+                  _this174.remove(null, obj);
                 }
               }
             }
@@ -52810,7 +52915,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "updateAllChildrenValue",
         value: function updateAllChildrenValue(item, action) {
-          var _this174 = this;
+          var _this175 = this;
 
           /** @type {?} */
           var selecting = action === 'select';
@@ -52840,7 +52945,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               x.indeterminate = selecting;
             } else {
               if (x.checked && !selecting) {
-                _this174.remove(null, x);
+                _this175.remove(null, x);
               }
 
               x.checked = selecting;
@@ -52912,7 +53017,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "updateChildrenValue",
         value: function updateChildrenValue(parent, action) {
-          var _this175 = this;
+          var _this176 = this;
 
           /** @type {?} */
           var selecting = action === 'select';
@@ -52943,10 +53048,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               if (x.checked && !selecting) {
                 x.checked = false;
 
-                if (_this175.allOfTypeSelected(childType)) {
-                  _this175.handleRemoveItemIfAllSelected(x);
+                if (_this176.allOfTypeSelected(childType)) {
+                  _this176.handleRemoveItemIfAllSelected(x);
                 } else {
-                  _this175.removeValue(x);
+                  _this176.removeValue(x);
                 }
               }
 
@@ -52978,7 +53083,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "addIndividualChildren",
         value: function addIndividualChildren(children) {
-          var _this176 = this;
+          var _this177 = this;
 
           /** @type {?} */
           var parentAlreadySelected = false;
@@ -52996,7 +53101,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               * @return {?}
               */
               function (parent) {
-                if (_this176.value[x.isChildOf].filter(
+                if (_this177.value[x.isChildOf].filter(
                 /**
                 * @param {?} p
                 * @return {?}
@@ -53009,7 +53114,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               });
             }
 
-            if (_this176.value[x.type].filter(
+            if (_this177.value[x.type].filter(
             /**
             * @param {?} item
             * @return {?}
@@ -53017,7 +53122,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             function (item) {
               return item === x.value;
             }).length === 0 && !parentAlreadySelected) {
-              _this176.add(x);
+              _this177.add(x);
             }
           });
         }
@@ -53029,7 +53134,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "setInitialValue",
         value: function setInitialValue(model) {
-          var _this177 = this;
+          var _this178 = this;
 
           this.items = [];
           this.value = model || {};
@@ -53047,12 +53152,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             /** @type {?} */
             var type = typeObj.value;
 
-            if (_this177.value[type]) {
+            if (_this178.value[type]) {
               /** @type {?} */
               var indeterminateIsSet = false;
               /** @type {?} */
 
-              var options = _this177.updateAllItemState(type);
+              var options = _this178.updateAllItemState(type);
               /** @type {?} */
 
 
@@ -53061,7 +53166,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
               var allSelected = options.allOfTypeSelected;
 
-              _this177.value[type].forEach(
+              _this178.value[type].forEach(
               /**
               * @param {?} item
               * @return {?}
@@ -53070,7 +53175,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                 if (!allSelected && !indeterminateIsSet) {
                   indeterminateIsSet = true;
 
-                  _this177.setIndeterminateState(optionsByType, true);
+                  _this178.setIndeterminateState(optionsByType, true);
                 }
                 /** @type {?} */
 
@@ -53086,22 +53191,22 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                 value.checked = true;
 
                 if (!allSelected) {
-                  _this177.updateDisplayItems(value, 'add');
+                  _this178.updateDisplayItems(value, 'add');
                 }
 
-                if (_this177.strictRelationship && value.isParentOf) {
-                  _this177.updateChildrenValue(value, 'select');
+                if (_this178.strictRelationship && value.isParentOf) {
+                  _this178.updateChildrenValue(value, 'select');
                 }
               });
 
               if (typeObj.isChildOf) {
-                _this177.modifyAffectedParentsOrChildren(true, {
+                _this178.modifyAffectedParentsOrChildren(true, {
                   value: type,
                   isChildOf: true
                 });
               }
             } else {
-              _this177.value[type] = [];
+              _this178.value[type] = [];
             }
           });
         }
@@ -53171,7 +53276,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
          */
         ,
         set: function set(selectedItems) {
-          var _this178 = this;
+          var _this179 = this;
 
           if (selectedItems) {
             this.types.forEach(
@@ -53180,7 +53285,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             * @return {?}
             */
             function (x) {
-              return _this178._value[x.value] = selectedItems[x.value];
+              return _this179._value[x.value] = selectedItems[x.value];
             });
           } else {
             this._value = {};
@@ -53190,7 +53295,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             * @return {?}
             */
             function (x) {
-              return _this178._value[x.value] = [];
+              return _this179._value[x.value] = [];
             });
           }
 
@@ -53381,7 +53486,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "checkRoutes",
         value: function checkRoutes(routes, options) {
-          var _this179 = this;
+          var _this180 = this;
 
           /** @type {?} */
           var filtered = [];
@@ -53405,7 +53510,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                   * @return {?}
                   */
                   function (perm) {
-                    return _this179.has(perm);
+                    return _this180.has(perm);
                   })) {
                     filtered.push(route);
                   }
@@ -53468,7 +53573,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
          * @return {?}
          */
         value: function check() {
-          var _this180 = this;
+          var _this181 = this;
 
           /** @type {?} */
           var display = false;
@@ -53500,7 +53605,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             * @return {?}
             */
             function (p) {
-              return _this180.security.has(p.trim());
+              return _this181.security.has(p.trim());
             });
           }
 
@@ -53582,7 +53687,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var DataTableSource = /*#__PURE__*/function (_angular_cdk_table__W) {
       _inherits(DataTableSource, _angular_cdk_table__W);
 
-      var _super48 = _createSuper(DataTableSource);
+      var _super49 = _createSuper(DataTableSource);
 
       /**
        * @param {?} tableService
@@ -53590,21 +53695,21 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
        * @param {?} ref
        */
       function DataTableSource(tableService, state, ref) {
-        var _this181;
+        var _this182;
 
         _classCallCheck(this, DataTableSource);
 
-        _this181 = _super48.call(this);
-        _this181.tableService = tableService;
-        _this181.state = state;
-        _this181.ref = ref;
-        _this181.total = 0;
-        _this181.currentTotal = 0;
-        _this181.current = 0;
-        _this181.loading = false;
-        _this181.pristine = true;
-        _this181.totalSet = false;
-        return _this181;
+        _this182 = _super49.call(this);
+        _this182.tableService = tableService;
+        _this182.state = state;
+        _this182.ref = ref;
+        _this182.total = 0;
+        _this182.currentTotal = 0;
+        _this182.current = 0;
+        _this182.loading = false;
+        _this182.pristine = true;
+        _this182.totalSet = false;
+        return _this182;
       }
       /**
        * @return {?}
@@ -53618,7 +53723,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
          * @return {?}
          */
         value: function connect() {
-          var _this182 = this;
+          var _this183 = this;
 
           /** @type {?} */
           var displayDataChanges = [this.state.updates];
@@ -53627,30 +53732,30 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function () {
-            _this182.pristine = false;
-            _this182.loading = true;
-            return _this182.tableService.getTableResults(_this182.state.sort, _this182.state.filter, _this182.state.page, _this182.state.pageSize, _this182.state.globalSearch, _this182.state.outsideFilter);
+            _this183.pristine = false;
+            _this183.loading = true;
+            return _this183.tableService.getTableResults(_this183.state.sort, _this183.state.filter, _this183.state.page, _this183.state.pageSize, _this183.state.globalSearch, _this183.state.outsideFilter);
           }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_13__["map"])(
           /**
           * @param {?} data
           * @return {?}
           */
           function (data) {
-            if (!_this182.totalSet || _this182.state.isForceRefresh) {
-              _this182.total = data.total;
-              _this182.totalSet = true;
-              _this182.state.isForceRefresh = false;
-            } else if (data.total > _this182.total) {
-              _this182.total = data.total;
+            if (!_this183.totalSet || _this183.state.isForceRefresh) {
+              _this183.total = data.total;
+              _this183.totalSet = true;
+              _this183.state.isForceRefresh = false;
+            } else if (data.total > _this183.total) {
+              _this183.total = data.total;
             }
 
-            _this182.currentTotal = data.total;
-            _this182.current = data.results.length;
-            _this182.data = data.results; // Clear selection
+            _this183.currentTotal = data.total;
+            _this183.current = data.results.length;
+            _this183.data = data.results; // Clear selection
 
-            _this182.state.selectedRows.clear();
+            _this183.state.selectedRows.clear();
 
-            _this182.state.onSelectionChange(); // Mark changes
+            _this183.state.onSelectionChange(); // Mark changes
 
 
             setTimeout(
@@ -53658,18 +53763,18 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             * @return {?}
             */
             function () {
-              _this182.ref.markForCheck();
+              _this183.ref.markForCheck();
 
               setTimeout(
               /**
               * @return {?}
               */
               function () {
-                _this182.loading = false;
+                _this183.loading = false;
 
-                _this182.state.dataLoaded.next();
+                _this183.state.dataLoaded.next();
 
-                _this182.ref.markForCheck();
+                _this183.ref.markForCheck();
               });
             });
             return data.results;
@@ -53682,7 +53787,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           function (err, caught) {
             console.error(err, caught); // tslint: disable-line
 
-            _this182.loading = false;
+            _this183.loading = false;
             return Object(rxjs__WEBPACK_IMPORTED_MODULE_11__["of"])(null);
           }));
         }
@@ -54137,7 +54242,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
        * @param {?} state
        */
       function NovoDataTable(labels, ref, state) {
-        var _this183 = this;
+        var _this184 = this;
 
         _classCallCheck(this, NovoDataTable);
 
@@ -54179,9 +54284,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         * @return {?}
         */
         function (event) {
-          if (_this183.name !== 'novo-data-table') {
-            _this183.preferencesChanged.emit({
-              name: _this183.name,
+          if (_this184.name !== 'novo-data-table') {
+            _this184.preferencesChanged.emit({
+              name: _this184.name,
               sort: event.sort,
               filter: event.filter,
               globalSearch: event.globalSearch
@@ -54196,10 +54301,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         * @return {?}
         */
         function (event) {
-          if (_this183.name !== 'novo-data-table') {
+          if (_this184.name !== 'novo-data-table') {
             if (event.isPageSizeChange) {
-              _this183.preferencesChanged.emit({
-                name: _this183.name,
+              _this184.preferencesChanged.emit({
+                name: _this184.name,
                 pageSize: event.pageSize
               });
             }
@@ -54217,7 +54322,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function () {
-            _this183.ref.detectChanges();
+            _this184.ref.detectChanges();
           }, 300);
         });
       }
@@ -54262,7 +54367,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "ngAfterContentInit",
         value: function ngAfterContentInit() {
-          var _this184 = this;
+          var _this185 = this;
 
           if (this.displayedColumns && this.displayedColumns.length) {
             this.expandable = this.displayedColumns.includes('expand');
@@ -54276,8 +54381,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           */
           function (item) {
             // Only override if it doesn't already exist
-            if (!_this184.templates[item.getType()]) {
-              _this184.templates[item.getType()] = item.template;
+            if (!_this185.templates[item.getType()]) {
+              _this185.templates[item.getType()] = item.template;
             }
           }); // Custom templates passed in
 
@@ -54288,7 +54393,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           */
           function (item) {
             // Override anything that is custom and in HTML
-            _this184.templates[item.getType()] = item.template;
+            _this185.templates[item.getType()] = item.template;
           }); // Load columns
 
           this.configureColumns(); // State
@@ -54404,7 +54509,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "expandRows",
         value: function expandRows(expand) {
-          var _this185 = this;
+          var _this186 = this;
 
           (this.dataSource.data || []).forEach(
           /**
@@ -54413,9 +54518,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           */
           function (row) {
             if (!expand) {
-              _this185.state.expandedRows["delete"]("".concat(row[_this185.rowIdentifier]));
+              _this186.state.expandedRows["delete"]("".concat(row[_this186.rowIdentifier]));
             } else {
-              _this185.state.expandedRows.add("".concat(row[_this185.rowIdentifier]));
+              _this186.state.expandedRows.add("".concat(row[_this186.rowIdentifier]));
             }
           });
           this.state.onExpandChange();
@@ -54476,7 +54581,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "selectRows",
         value: function selectRows(selected) {
-          var _this186 = this;
+          var _this187 = this;
 
           (this.dataSource.data || []).forEach(
           /**
@@ -54485,9 +54590,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           */
           function (row) {
             if (!selected) {
-              _this186.state.selectedRows["delete"]("".concat(row[_this186.rowIdentifier]));
+              _this187.state.selectedRows["delete"]("".concat(row[_this187.rowIdentifier]));
             } else {
-              _this186.state.selectedRows.set("".concat(row[_this186.rowIdentifier]), row);
+              _this187.state.selectedRows.set("".concat(row[_this187.rowIdentifier]), row);
             }
           });
           this.state.onSelectionChange();
@@ -54515,7 +54620,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "configureLastDisplayedColumn",
         value: function configureLastDisplayedColumn() {
-          var _this187 = this;
+          var _this188 = this;
 
           if (this.columns && this.displayedColumns && 0 !== this.columns.length && 0 !== this.displayedColumns.length) {
             this.columns.forEach(
@@ -54538,7 +54643,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             * @return {?}
             */
             function (name) {
-              return _this187.columns.findIndex(
+              return _this188.columns.findIndex(
               /**
               * @param {?} column
               * @return {?}
@@ -54575,7 +54680,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "configureColumns",
         value: function configureColumns() {
-          var _this188 = this;
+          var _this189 = this;
 
           if (this.columns && this.columns.length !== 0 && Object.keys(this.templates).length !== 0) {
             // Figure the column templates
@@ -54593,7 +54698,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               if (column.template) {
                 // Pass it in as template
                 templateName = column.template;
-              } else if (!!_this188.templates[column.id]) {
+              } else if (!!_this189.templates[column.id]) {
                 // Custom template for the column id
                 templateName = column.id;
               } else {
@@ -54617,7 +54722,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                 }
               }
 
-              _this188.columnToTemplate[column.id] = _this188.templates[templateName];
+              _this189.columnToTemplate[column.id] = _this189.templates[templateName];
             });
             this.configureLastDisplayedColumn();
             this.columnsLoaded = true;
@@ -54648,7 +54753,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "displayedColumns",
         set: function set(displayedColumns) {
-          var _this189 = this;
+          var _this190 = this;
 
           if (this.displayedColumns && this.displayedColumns.length !== 0) {
             if (this.name !== 'novo-data-table') {
@@ -54670,7 +54775,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             * @return {?}
             */
             function () {
-              _this189.scrollListener();
+              _this190.scrollListener();
             });
           }
         }
@@ -54721,7 +54826,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "outsideFilter",
         set: function set(outsideFilter) {
-          var _this190 = this;
+          var _this191 = this;
 
           // Unsubscribe
           if (this.outsideFilterSubscription) {
@@ -54736,15 +54841,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             * @return {?}
             */
             function (filter) {
-              _this190.state.outsideFilter = filter;
+              _this191.state.outsideFilter = filter;
 
-              _this190.state.updates.next({
-                globalSearch: _this190.state.globalSearch,
-                filter: _this190.state.filter,
-                sort: _this190.state.sort
+              _this191.state.updates.next({
+                globalSearch: _this191.state.globalSearch,
+                filter: _this191.state.filter,
+                sort: _this191.state.sort
               });
 
-              _this190.ref.markForCheck();
+              _this191.ref.markForCheck();
             });
           }
         }
@@ -54756,7 +54861,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "refreshSubject",
         set: function set(refreshSubject) {
-          var _this191 = this;
+          var _this192 = this;
 
           // Unsubscribe
           if (this.refreshSubscription) {
@@ -54771,15 +54876,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             * @return {?}
             */
             function (filter) {
-              _this191.state.isForceRefresh = true;
+              _this192.state.isForceRefresh = true;
 
-              _this191.state.updates.next({
-                globalSearch: _this191.state.globalSearch,
-                filter: _this191.state.filter,
-                sort: _this191.state.sort
+              _this192.state.updates.next({
+                globalSearch: _this192.state.globalSearch,
+                filter: _this192.state.filter,
+                sort: _this192.state.sort
               });
 
-              _this191.ref.markForCheck();
+              _this192.ref.markForCheck();
             });
           }
         }
@@ -55035,7 +55140,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var NovoDataTableCell = /*#__PURE__*/function (_angular_cdk_table__W2) {
       _inherits(NovoDataTableCell, _angular_cdk_table__W2);
 
-      var _super49 = _createSuper(NovoDataTableCell);
+      var _super50 = _createSuper(NovoDataTableCell);
 
       /**
        * @param {?} columnDef
@@ -55043,19 +55148,19 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
        * @param {?} renderer
        */
       function NovoDataTableCell(columnDef, elementRef, renderer) {
-        var _this192;
+        var _this193;
 
         _classCallCheck(this, NovoDataTableCell);
 
-        _this192 = _super49.call(this, columnDef, elementRef);
-        _this192.elementRef = elementRef;
-        _this192.renderer = renderer;
-        _this192.role = 'gridcell';
-        _this192.subscriptions = [];
+        _this193 = _super50.call(this, columnDef, elementRef);
+        _this193.elementRef = elementRef;
+        _this193.renderer = renderer;
+        _this193.role = 'gridcell';
+        _this193.subscriptions = [];
         renderer.setAttribute(elementRef.nativeElement, 'data-automation-id', "novo-column-".concat(columnDef.cssClassFriendlyName));
         renderer.addClass(elementRef.nativeElement, "novo-column-".concat(columnDef.cssClassFriendlyName));
         renderer.addClass(elementRef.nativeElement, 'novo-data-table-cell');
-        return _this192;
+        return _this193;
       }
       /**
        * @return {?}
@@ -55065,7 +55170,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _createClass(NovoDataTableCell, [{
         key: "ngOnInit",
         value: function ngOnInit() {
-          var _this193 = this;
+          var _this194 = this;
 
           if (this.column.cellClass) {
             this.renderer.addClass(this.elementRef.nativeElement, this.column.cellClass(this.row));
@@ -55082,8 +55187,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (column) {
-            if (column === _this193.column) {
-              _this193.calculateWidths();
+            if (column === _this194.column) {
+              _this194.calculateWidths();
             }
           }));
         }
@@ -55176,7 +55281,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var NovoDataTableCheckboxCell = /*#__PURE__*/function (_angular_cdk_table__W3) {
       _inherits(NovoDataTableCheckboxCell, _angular_cdk_table__W3);
 
-      var _super50 = _createSuper(NovoDataTableCheckboxCell);
+      var _super51 = _createSuper(NovoDataTableCheckboxCell);
 
       /**
        * @param {?} columnDef
@@ -55186,38 +55291,38 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
        * @param {?} ref
        */
       function NovoDataTableCheckboxCell(columnDef, elementRef, renderer, dataTable, ref) {
-        var _this194;
+        var _this195;
 
         _classCallCheck(this, NovoDataTableCheckboxCell);
 
-        _this194 = _super50.call(this, columnDef, elementRef);
-        _this194.columnDef = columnDef;
-        _this194.dataTable = dataTable;
-        _this194.ref = ref;
-        _this194.role = 'gridcell';
-        _this194.checked = false;
+        _this195 = _super51.call(this, columnDef, elementRef);
+        _this195.columnDef = columnDef;
+        _this195.dataTable = dataTable;
+        _this195.ref = ref;
+        _this195.role = 'gridcell';
+        _this195.checked = false;
         renderer.setAttribute(elementRef.nativeElement, 'data-automation-id', "novo-checkbox-column-".concat(columnDef.cssClassFriendlyName));
         renderer.addClass(elementRef.nativeElement, "novo-checkbox-column-".concat(columnDef.cssClassFriendlyName));
         renderer.addClass(elementRef.nativeElement, 'novo-data-table-checkbox-cell');
-        _this194.selectionSubscription = _this194.dataTable.state.selectionSource.subscribe(
+        _this195.selectionSubscription = _this195.dataTable.state.selectionSource.subscribe(
         /**
         * @return {?}
         */
         function () {
-          _this194.checked = _this194.dataTable.isSelected(_this194.row);
+          _this195.checked = _this195.dataTable.isSelected(_this195.row);
 
-          _this194.ref.markForCheck();
+          _this195.ref.markForCheck();
         });
-        _this194.resetSubscription = _this194.dataTable.state.resetSource.subscribe(
+        _this195.resetSubscription = _this195.dataTable.state.resetSource.subscribe(
         /**
         * @return {?}
         */
         function () {
-          _this194.checked = false;
+          _this195.checked = false;
 
-          _this194.ref.markForCheck();
+          _this195.ref.markForCheck();
         });
-        return _this194;
+        return _this195;
       }
       /**
        * @return {?}
@@ -55307,7 +55412,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var NovoDataTableExpandCell = /*#__PURE__*/function (_angular_cdk_table__W4) {
       _inherits(NovoDataTableExpandCell, _angular_cdk_table__W4);
 
-      var _super51 = _createSuper(NovoDataTableExpandCell);
+      var _super52 = _createSuper(NovoDataTableExpandCell);
 
       /**
        * @param {?} columnDef
@@ -55317,29 +55422,29 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
        * @param {?} ref
        */
       function NovoDataTableExpandCell(columnDef, elementRef, renderer, dataTable, ref) {
-        var _this195;
+        var _this196;
 
         _classCallCheck(this, NovoDataTableExpandCell);
 
-        _this195 = _super51.call(this, columnDef, elementRef);
-        _this195.columnDef = columnDef;
-        _this195.dataTable = dataTable;
-        _this195.ref = ref;
-        _this195.role = 'gridcell';
-        _this195.expanded = false;
+        _this196 = _super52.call(this, columnDef, elementRef);
+        _this196.columnDef = columnDef;
+        _this196.dataTable = dataTable;
+        _this196.ref = ref;
+        _this196.role = 'gridcell';
+        _this196.expanded = false;
         renderer.setAttribute(elementRef.nativeElement, 'data-automation-id', "novo-expand-column-".concat(columnDef.cssClassFriendlyName));
         renderer.addClass(elementRef.nativeElement, "novo-expand-column-".concat(columnDef.cssClassFriendlyName));
         renderer.addClass(elementRef.nativeElement, 'novo-data-table-expand-cell');
-        _this195.expandSubscription = _this195.dataTable.state.expandSource.subscribe(
+        _this196.expandSubscription = _this196.dataTable.state.expandSource.subscribe(
         /**
         * @return {?}
         */
         function () {
-          _this195.expanded = _this195.dataTable.isExpanded(_this195.row);
+          _this196.expanded = _this196.dataTable.isExpanded(_this196.row);
 
-          _this195.ref.markForCheck();
+          _this196.ref.markForCheck();
         });
-        return _this195;
+        return _this196;
       }
       /**
        * @return {?}
@@ -55421,18 +55526,18 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var NovoDataTableHeaderRow = /*#__PURE__*/function (_angular_cdk_table__W5) {
       _inherits(NovoDataTableHeaderRow, _angular_cdk_table__W5);
 
-      var _super52 = _createSuper(NovoDataTableHeaderRow);
+      var _super53 = _createSuper(NovoDataTableHeaderRow);
 
       function NovoDataTableHeaderRow() {
-        var _this196;
+        var _this197;
 
         _classCallCheck(this, NovoDataTableHeaderRow);
 
-        _this196 = _super52.apply(this, arguments);
-        _this196.rowClass = 'novo-data-table-header-row';
-        _this196.fixedHeader = false;
-        _this196.role = 'row';
-        return _this196;
+        _this197 = _super53.apply(this, arguments);
+        _this197.rowClass = 'novo-data-table-header-row';
+        _this197.fixedHeader = false;
+        _this197.role = 'row';
+        return _this197;
       }
 
       return NovoDataTableHeaderRow;
@@ -55474,17 +55579,17 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var NovoDataTableRow = /*#__PURE__*/function (_angular_cdk_table__W6) {
       _inherits(NovoDataTableRow, _angular_cdk_table__W6);
 
-      var _super53 = _createSuper(NovoDataTableRow);
+      var _super54 = _createSuper(NovoDataTableRow);
 
       function NovoDataTableRow() {
-        var _this197;
+        var _this198;
 
         _classCallCheck(this, NovoDataTableRow);
 
-        _this197 = _super53.apply(this, arguments);
-        _this197.rowClass = 'novo-data-table-row';
-        _this197.role = 'row';
-        return _this197;
+        _this198 = _super54.apply(this, arguments);
+        _this198.rowClass = 'novo-data-table-row';
+        _this198.role = 'row';
+        return _this198;
       }
 
       return NovoDataTableRow;
@@ -55700,7 +55805,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
        * @param {?} _cdkColumnDef
        */
       function NovoDataTableCellHeader(changeDetectorRef, labels, state, renderer, elementRef, _sort, _cdkColumnDef) {
-        var _this198 = this;
+        var _this199 = this;
 
         _classCallCheck(this, NovoDataTableCellHeader);
 
@@ -55728,7 +55833,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         * @return {?}
         */
         function (change) {
-          return _this198.checkSortFilterState(change);
+          return _this199.checkSortFilterState(change);
         });
       }
       /**
@@ -55787,7 +55892,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "checkSortFilterState",
         value: function checkSortFilterState(sortFilterState) {
-          var _this199 = this;
+          var _this200 = this;
 
           var initialConfig = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
 
@@ -55810,7 +55915,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (filter) {
-            return filter && filter.id === _this199.id;
+            return filter && filter.id === _this200.id;
           });
 
           if (thisFilter) {
@@ -55882,7 +55987,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "isSelected",
         value: function isSelected(option, optionsList) {
-          var _this200 = this;
+          var _this201 = this;
 
           if (optionsList) {
             /** @type {?} */
@@ -55895,7 +56000,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             * @return {?}
             */
             function (item) {
-              return _this200.optionPresentCheck(item, optionValue);
+              return _this201.optionPresentCheck(item, optionValue);
             });
             return found !== undefined;
           }
@@ -55910,7 +56015,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "toggleSelection",
         value: function toggleSelection(option) {
-          var _this201 = this;
+          var _this202 = this;
 
           /** @type {?} */
           var optionValue = option.hasOwnProperty('value') ? option.value : option;
@@ -55922,7 +56027,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (item) {
-            return _this201.optionPresentCheck(item, optionValue);
+            return _this202.optionPresentCheck(item, optionValue);
           });
           this.error = false;
 
@@ -55995,7 +56100,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "multiSelectOptionFilter",
         value: function multiSelectOptionFilter(optionFilter) {
-          var _this202 = this;
+          var _this203 = this;
 
           this.multiSelectedOptionIsHidden.forEach(
           /**
@@ -56004,7 +56109,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           */
           function (record) {
             if (record.option) {
-              record.hidden = !(_this202.getOptionText(record.option).toLowerCase().startsWith(optionFilter.toLowerCase()) || _this202.isSelected(record.option, _this202.multiSelectedOptions));
+              record.hidden = !(_this203.getOptionText(record.option).toLowerCase().startsWith(optionFilter.toLowerCase()) || _this203.isSelected(record.option, _this203.multiSelectedOptions));
             }
           });
         }
@@ -56114,7 +56219,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "startResize",
         value: function startResize(mouseDownEvent) {
-          var _this203 = this;
+          var _this204 = this;
 
           mouseDownEvent.preventDefault();
           /** @type {?} */
@@ -56141,17 +56246,17 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               width = minimumWidth;
             }
 
-            _this203._column.width = width;
+            _this204._column.width = width;
 
-            _this203.renderer.setStyle(_this203.elementRef.nativeElement, 'min-width', "".concat(_this203._column.width, "px"));
+            _this204.renderer.setStyle(_this204.elementRef.nativeElement, 'min-width', "".concat(_this204._column.width, "px"));
 
-            _this203.renderer.setStyle(_this203.elementRef.nativeElement, 'max-width', "".concat(_this203._column.width, "px"));
+            _this204.renderer.setStyle(_this204.elementRef.nativeElement, 'max-width', "".concat(_this204._column.width, "px"));
 
-            _this203.renderer.setStyle(_this203.elementRef.nativeElement, 'width', "".concat(_this203._column.width, "px"));
+            _this204.renderer.setStyle(_this204.elementRef.nativeElement, 'width', "".concat(_this204._column.width, "px"));
 
-            _this203.changeDetectorRef.markForCheck();
+            _this204.changeDetectorRef.markForCheck();
 
-            _this203.resized.next(_this203._column);
+            _this204.resized.next(_this204._column);
           });
           /** @type {?} */
 
@@ -56163,7 +56268,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             mouseUpSubscription.unsubscribe();
             mouseMoveSubscription.unsubscribe();
 
-            _this203.changeDetectorRef.markForCheck();
+            _this204.changeDetectorRef.markForCheck();
           });
           this.subscriptions.push(mouseMoveSubscription);
           this.subscriptions.push(mouseUpSubscription);
@@ -56189,7 +56294,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "focusInput",
         value: function focusInput() {
-          var _this204 = this;
+          var _this205 = this;
 
           if (this.filterInput && this.filterInput.nativeElement) {
             setTimeout(
@@ -56197,7 +56302,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             * @return {?}
             */
             function () {
-              return _this204.filterInput.nativeElement.focus();
+              return _this205.filterInput.nativeElement.focus();
             }, 0);
           }
 
@@ -56208,7 +56313,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             * @return {?}
             */
             function (event) {
-              _this204.multiSelectOptionFilterHandleKeydown(event);
+              _this205.multiSelectOptionFilterHandleKeydown(event);
             };
 
             setTimeout(
@@ -56216,7 +56321,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             * @return {?}
             */
             function () {
-              return _this204.optionFilterInput.nativeElement.focus();
+              return _this205.optionFilterInput.nativeElement.focus();
             }, 0);
             this.changeDetectorRef.markForCheck();
           }
@@ -56228,7 +56333,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "sort",
         value: function sort() {
-          var _this205 = this;
+          var _this206 = this;
 
           if (this.changeTimeout) {
             clearTimeout(this.changeTimeout);
@@ -56239,11 +56344,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function () {
-            _this205.direction = _this205.getNextSortDirection(_this205.direction);
+            _this206.direction = _this206.getNextSortDirection(_this206.direction);
 
-            _this205._sort.sort(_this205.id, _this205.direction, _this205.config.transforms.sort);
+            _this206._sort.sort(_this206.id, _this206.direction, _this206.config.transforms.sort);
 
-            _this205.changeDetectorRef.markForCheck();
+            _this206.changeDetectorRef.markForCheck();
           }, 300);
         }
         /**
@@ -56254,7 +56359,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "filterData",
         value: function filterData(filter) {
-          var _this206 = this;
+          var _this207 = this;
 
           /** @type {?} */
           var actualFilter = NovoDataTableFilterUtils.constructFilter(filter, this.config.filterConfig.type, this.multiSelect);
@@ -56275,9 +56380,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               actualFilter = undefined;
             }
 
-            _this206._sort.filter(_this206.id, _this206.config.filterConfig.type, actualFilter, _this206.config.transforms.filter, _this206.allowMultipleFilters, selectedOption);
+            _this207._sort.filter(_this207.id, _this207.config.filterConfig.type, actualFilter, _this207.config.transforms.filter, _this207.allowMultipleFilters, selectedOption);
 
-            _this206.changeDetectorRef.markForCheck();
+            _this207.changeDetectorRef.markForCheck();
           }, 300);
         }
         /**
@@ -56520,7 +56625,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var NovoDataTableExpandHeaderCell = /*#__PURE__*/function (_angular_cdk_table__W7) {
       _inherits(NovoDataTableExpandHeaderCell, _angular_cdk_table__W7);
 
-      var _super54 = _createSuper(NovoDataTableExpandHeaderCell);
+      var _super55 = _createSuper(NovoDataTableExpandHeaderCell);
 
       /**
        * @param {?} columnDef
@@ -56530,28 +56635,28 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
        * @param {?} ref
        */
       function NovoDataTableExpandHeaderCell(columnDef, elementRef, renderer, dataTable, ref) {
-        var _this207;
+        var _this208;
 
         _classCallCheck(this, NovoDataTableExpandHeaderCell);
 
-        _this207 = _super54.call(this, columnDef, elementRef);
-        _this207.dataTable = dataTable;
-        _this207.ref = ref;
-        _this207.role = 'columnheader';
-        _this207.expanded = false;
+        _this208 = _super55.call(this, columnDef, elementRef);
+        _this208.dataTable = dataTable;
+        _this208.ref = ref;
+        _this208.role = 'columnheader';
+        _this208.expanded = false;
         renderer.setAttribute(elementRef.nativeElement, 'data-automation-id', "novo-expand-column-header-".concat(columnDef.cssClassFriendlyName));
         renderer.addClass(elementRef.nativeElement, "novo-expand-column-".concat(columnDef.cssClassFriendlyName));
         renderer.addClass(elementRef.nativeElement, 'novo-data-table-expand-header-cell');
-        _this207.expandSubscription = _this207.dataTable.state.expandSource.subscribe(
+        _this208.expandSubscription = _this208.dataTable.state.expandSource.subscribe(
         /**
         * @return {?}
         */
         function () {
-          _this207.expanded = _this207.dataTable.allCurrentRowsExpanded();
+          _this208.expanded = _this208.dataTable.allCurrentRowsExpanded();
 
-          _this207.ref.markForCheck();
+          _this208.ref.markForCheck();
         });
-        return _this207;
+        return _this208;
       }
       /**
        * @return {?}
@@ -56625,7 +56730,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var NovoDataTableCheckboxHeaderCell = /*#__PURE__*/function (_angular_cdk_table__W8) {
       _inherits(NovoDataTableCheckboxHeaderCell, _angular_cdk_table__W8);
 
-      var _super55 = _createSuper(NovoDataTableCheckboxHeaderCell);
+      var _super56 = _createSuper(NovoDataTableCheckboxHeaderCell);
 
       /**
        * @param {?} columnDef
@@ -56635,53 +56740,53 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
        * @param {?} ref
        */
       function NovoDataTableCheckboxHeaderCell(columnDef, elementRef, renderer, dataTable, ref) {
-        var _this208;
+        var _this209;
 
         _classCallCheck(this, NovoDataTableCheckboxHeaderCell);
 
-        _this208 = _super55.call(this, columnDef, elementRef);
-        _this208.dataTable = dataTable;
-        _this208.ref = ref;
-        _this208.role = 'columnheader';
-        _this208.checked = false;
+        _this209 = _super56.call(this, columnDef, elementRef);
+        _this209.dataTable = dataTable;
+        _this209.ref = ref;
+        _this209.role = 'columnheader';
+        _this209.checked = false;
         renderer.setAttribute(elementRef.nativeElement, 'data-automation-id', "novo-checkbox-column-header-".concat(columnDef.cssClassFriendlyName));
         renderer.addClass(elementRef.nativeElement, "novo-checkbox-column-".concat(columnDef.cssClassFriendlyName));
         renderer.addClass(elementRef.nativeElement, 'novo-data-table-checkbox-header-cell');
-        _this208.selectionSubscription = _this208.dataTable.state.selectionSource.subscribe(
+        _this209.selectionSubscription = _this209.dataTable.state.selectionSource.subscribe(
         /**
         * @return {?}
         */
         function () {
-          _this208.checked = _this208.dataTable.allCurrentRowsSelected();
+          _this209.checked = _this209.dataTable.allCurrentRowsSelected();
 
-          _this208.ref.markForCheck();
+          _this209.ref.markForCheck();
         });
-        _this208.paginationSubscription = _this208.dataTable.state.paginationSource.subscribe(
+        _this209.paginationSubscription = _this209.dataTable.state.paginationSource.subscribe(
         /**
         * @param {?} event
         * @return {?}
         */
         function (event) {
           if (event.isPageSizeChange) {
-            _this208.checked = false;
+            _this209.checked = false;
 
-            _this208.dataTable.selectRows(false);
+            _this209.dataTable.selectRows(false);
           } else {
-            _this208.checked = _this208.dataTable.allCurrentRowsSelected();
+            _this209.checked = _this209.dataTable.allCurrentRowsSelected();
           }
 
-          _this208.ref.markForCheck();
+          _this209.ref.markForCheck();
         });
-        _this208.resetSubscription = _this208.dataTable.state.resetSource.subscribe(
+        _this209.resetSubscription = _this209.dataTable.state.resetSource.subscribe(
         /**
         * @return {?}
         */
         function () {
-          _this208.checked = false;
+          _this209.checked = false;
 
-          _this208.ref.markForCheck();
+          _this209.ref.markForCheck();
         });
-        return _this208;
+        return _this209;
       }
       /**
        * @return {?}
@@ -56763,7 +56868,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var NovoDataTableHeaderCell = /*#__PURE__*/function (_angular_cdk_table__W9) {
       _inherits(NovoDataTableHeaderCell, _angular_cdk_table__W9);
 
-      var _super56 = _createSuper(NovoDataTableHeaderCell);
+      var _super57 = _createSuper(NovoDataTableHeaderCell);
 
       /**
        * @param {?} columnDef
@@ -56771,18 +56876,18 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
        * @param {?} renderer
        */
       function NovoDataTableHeaderCell(columnDef, elementRef, renderer) {
-        var _this209;
+        var _this210;
 
         _classCallCheck(this, NovoDataTableHeaderCell);
 
-        _this209 = _super56.call(this, columnDef, elementRef);
-        _this209.elementRef = elementRef;
-        _this209.renderer = renderer;
-        _this209.role = 'columnheader';
+        _this210 = _super57.call(this, columnDef, elementRef);
+        _this210.elementRef = elementRef;
+        _this210.renderer = renderer;
+        _this210.role = 'columnheader';
         renderer.setAttribute(elementRef.nativeElement, 'data-automation-id', "novo-column-header-".concat(columnDef.cssClassFriendlyName));
         renderer.addClass(elementRef.nativeElement, "novo-column-".concat(columnDef.cssClassFriendlyName));
         renderer.addClass(elementRef.nativeElement, 'novo-data-table-header-cell');
-        return _this209;
+        return _this210;
       }
       /**
        * @return {?}
@@ -56853,7 +56958,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
        * @param {?} state
        */
       function NovoDataTablePagination(changeDetectorRef, labels, state) {
-        var _this210 = this;
+        var _this211 = this;
 
         _classCallCheck(this, NovoDataTablePagination);
 
@@ -56870,9 +56975,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         * @return {?}
         */
         function () {
-          _this210.page = 0;
+          _this211.page = 0;
 
-          _this210.changeDetectorRef.markForCheck();
+          _this211.changeDetectorRef.markForCheck();
         });
       }
       /**
@@ -56980,7 +57085,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "updateDisplayedPageSizeOptions",
         value: function updateDisplayedPageSizeOptions() {
-          var _this211 = this;
+          var _this212 = this;
 
           if (!this._initialized) {
             return;
@@ -56995,9 +57100,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             */
             function (option) {
               if (option.hasOwnProperty('value')) {
-                _this211.displayedPageSizeOptions.push(option);
+                _this212.displayedPageSizeOptions.push(option);
               } else {
-                _this211.displayedPageSizeOptions.push({
+                _this212.displayedPageSizeOptions.push({
                   value: option,
                   label: option
                 });
@@ -57636,7 +57741,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
        * @param {?} dataTable
        */
       function NovoDataTableExpandDirective(vcRef, state, dataTable) {
-        var _this212 = this;
+        var _this213 = this;
 
         _classCallCheck(this, NovoDataTableExpandDirective);
 
@@ -57663,7 +57768,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           /** @type {?} */
 
           /** @type {?} */
-          _this212.row.id;
+          _this213.row.id;
         };
 
         this.subscription = this.state.expandSource.subscribe(
@@ -57672,11 +57777,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         * @return {?}
         */
         function (targetId) {
-          if (_this212.shouldExpandAllRows(targetId) || _this212.shouldExpandOneRow(targetId)) {
-            if (dataTable.isExpanded(_this212.row)) {
-              _this212.render();
+          if (_this213.shouldExpandAllRows(targetId) || _this213.shouldExpandOneRow(targetId)) {
+            if (dataTable.isExpanded(_this213.row)) {
+              _this213.render();
             } else {
-              _this212.clear();
+              _this213.clear();
             }
           }
         });
@@ -57917,7 +58022,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
        * @param {?} ref
        */
       function NovoTabbedGroupPickerElement(labelService, ref) {
-        var _this213 = this;
+        var _this214 = this;
 
         _classCallCheck(this, NovoTabbedGroupPickerElement);
 
@@ -57962,14 +58067,14 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         * @return {?}
         */
         function (searchTerm) {
-          _this213.displayTabs.forEach(
+          _this214.displayTabs.forEach(
           /**
           * @param {?} displayTab
           * @param {?} i
           * @return {?}
           */
           function (displayTab, i) {
-            return displayTab.data = _this213.tabs[i].data.filter(
+            return displayTab.data = _this214.tabs[i].data.filter(
             /**
             * @param {?} item
             * @return {?}
@@ -57979,7 +58084,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             });
           });
 
-          _this213.ref.markForCheck();
+          _this214.ref.markForCheck();
         };
       }
       /**
@@ -58071,7 +58176,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "createChildrenReferences",
         value: function createChildrenReferences() {
-          var _this214 = this;
+          var _this215 = this;
 
           this.tabs.forEach(
           /**
@@ -58082,7 +58187,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             // would rather filter but TypeScript still wants a type narrowing here
             if ('childTypeName' in tab) {
               /** @type {?} */
-              var childTab = _this214.tabs.find(
+              var childTab = _this215.tabs.find(
               /**
               * @param {?} __0
               * @return {?}
@@ -58094,11 +58199,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               /** @type {?} */
 
 
-              var compareFunction = _this214.makeCompareFunction(childTab.valueField);
+              var compareFunction = _this215.makeCompareFunction(childTab.valueField);
               /** @type {?} */
 
 
-              var warnFunction = _this214.makeWarningFunction(tab.typeName, childTab.typeName, childTab.valueField);
+              var warnFunction = _this215.makeWarningFunction(tab.typeName, childTab.typeName, childTab.valueField);
               /** @type {?} */
 
 
@@ -58117,7 +58222,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               * @return {?}
               */
               function (parent) {
-                return _this214.replaceChildrenWithReferences(
+                return _this215.replaceChildrenWithReferences(
                 /** @type {?} */
                 parent, sortedChildren, compareFunction, warnFunction);
               });
@@ -58138,7 +58243,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             * @return {?}
             */
             function (parent) {
-              parent.children = _this214.tabs.find(
+              parent.children = _this215.tabs.find(
               /**
               * @param {?} __0
               * @return {?}
@@ -58162,7 +58267,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             */
             function (parent) {
               /** @type {?} */
-              var childTab = _this214.tabs.find(
+              var childTab = _this215.tabs.find(
               /**
               * @param {?} __0
               * @return {?}
@@ -58174,17 +58279,17 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               /** @type {?} */
 
 
-              var compareFunction = _this214.makeCompareFunction(childTab.valueField);
+              var compareFunction = _this215.makeCompareFunction(childTab.valueField);
               /** @type {?} */
 
 
-              var warnFunction = _this214.makeWarningFunction(parent.label, childTab.typeName, childTab.valueField);
+              var warnFunction = _this215.makeWarningFunction(parent.label, childTab.typeName, childTab.valueField);
               /** @type {?} */
 
 
               var sortedChildren = childTab.data.slice().sort(compareFunction);
 
-              _this214.replaceChildrenWithReferences(
+              _this215.replaceChildrenWithReferences(
               /** @type {?} */
               parent, sortedChildren, compareFunction, warnFunction);
             });
@@ -58339,7 +58444,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "updateDescendants",
         value: function updateDescendants(parentIsSelected, children) {
-          var _this215 = this;
+          var _this216 = this;
 
           children.forEach(
           /**
@@ -58350,7 +58455,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             parentIsSelected ? item.selected = true : delete item.selected;
 
             if (Array.isArray(item.children)) {
-              _this215.updateDescendants(item.selected, item.children);
+              _this216.updateDescendants(item.selected, item.children);
             }
           });
         }
@@ -58401,7 +58506,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "updateParentsAndQuickSelect",
         value: function updateParentsAndQuickSelect() {
-          var _this216 = this;
+          var _this217 = this;
 
           // mutate here to avoid dereferencing the objects in displayTabs
           this.tabs.filter(
@@ -58443,7 +58548,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               });
               /** @type {?} */
 
-              var selectedState = _this216.getSelectedState(parent.children);
+              var selectedState = _this217.getSelectedState(parent.children);
 
               if (selectedState) {
                 parent[selectedState] = true;
@@ -58461,7 +58566,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               delete quickSelect.selected;
               /** @type {?} */
 
-              var selectedState = _this216.getSelectedState(
+              var selectedState = _this217.getSelectedState(
               /** @type {?} */
               quickSelect.children);
 
@@ -58712,12 +58817,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var BrowserGlobalRef = /*#__PURE__*/function (_GlobalRef) {
       _inherits(BrowserGlobalRef, _GlobalRef);
 
-      var _super57 = _createSuper(BrowserGlobalRef);
+      var _super58 = _createSuper(BrowserGlobalRef);
 
       function BrowserGlobalRef() {
         _classCallCheck(this, BrowserGlobalRef);
 
-        return _super57.apply(this, arguments);
+        return _super58.apply(this, arguments);
       }
 
       _createClass(BrowserGlobalRef, [{
@@ -58740,12 +58845,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var NodeGlobalRef = /*#__PURE__*/function (_GlobalRef2) {
       _inherits(NodeGlobalRef, _GlobalRef2);
 
-      var _super58 = _createSuper(NodeGlobalRef);
+      var _super59 = _createSuper(NodeGlobalRef);
 
       function NodeGlobalRef() {
         _classCallCheck(this, NodeGlobalRef);
 
-        return _super58.apply(this, arguments);
+        return _super59.apply(this, arguments);
       }
 
       _createClass(NodeGlobalRef, [{
@@ -58843,7 +58948,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _createClass(GooglePlacesService, [{
         key: "getPredictions",
         value: function getPredictions(url, query) {
-          var _this217 = this;
+          var _this218 = this;
 
           return new Promise(
           /**
@@ -58851,7 +58956,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (resolve) {
-            _this217._http.get(url + '?query=' + query).subscribe(
+            _this218._http.get(url + '?query=' + query).subscribe(
             /**
             * @param {?} data
             * @return {?}
@@ -58875,7 +58980,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "getLatLngDetail",
         value: function getLatLngDetail(url, lat, lng) {
-          var _this218 = this;
+          var _this219 = this;
 
           return new Promise(
           /**
@@ -58883,7 +58988,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (resolve) {
-            _this218._http.get(url + '?lat=' + lat + '&lng=' + lng).subscribe(
+            _this219._http.get(url + '?lat=' + lat + '&lng=' + lng).subscribe(
             /**
             * @param {?} data
             * @return {?}
@@ -58906,7 +59011,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "getPlaceDetails",
         value: function getPlaceDetails(url, placeId) {
-          var _this219 = this;
+          var _this220 = this;
 
           return new Promise(
           /**
@@ -58914,7 +59019,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (resolve) {
-            _this219._http.get(url + '?query=' + placeId).subscribe(
+            _this220._http.get(url + '?query=' + placeId).subscribe(
             /**
             * @param {?} data
             * @return {?}
@@ -58935,7 +59040,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "getGeoCurrentLocation",
         value: function getGeoCurrentLocation() {
-          var _this220 = this;
+          var _this221 = this;
 
           return new Promise(
           /**
@@ -58943,9 +59048,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (resolve) {
-            if (Object(_angular_common__WEBPACK_IMPORTED_MODULE_1__["isPlatformBrowser"])(_this220.platformId)) {
+            if (Object(_angular_common__WEBPACK_IMPORTED_MODULE_1__["isPlatformBrowser"])(_this221.platformId)) {
               /** @type {?} */
-              var _window = _this220._global.nativeGlobal;
+              var _window = _this221._global.nativeGlobal;
 
               if (_window.navigator.geolocation) {
                 _window.navigator.geolocation.getCurrentPosition(
@@ -58977,7 +59082,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "getGeoLatLngDetail",
         value: function getGeoLatLngDetail(latlng) {
-          var _this221 = this;
+          var _this222 = this;
 
           return new Promise(
           /**
@@ -58985,9 +59090,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (resolve) {
-            if (Object(_angular_common__WEBPACK_IMPORTED_MODULE_1__["isPlatformBrowser"])(_this221.platformId)) {
+            if (Object(_angular_common__WEBPACK_IMPORTED_MODULE_1__["isPlatformBrowser"])(_this222.platformId)) {
               /** @type {?} */
-              var _window = _this221._global.nativeGlobal;
+              var _window = _this222._global.nativeGlobal;
               /** @type {?} */
 
               var geocoder = new _window.google.maps.Geocoder();
@@ -59001,7 +59106,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               */
               function (results, status) {
                 if (status === 'OK') {
-                  _this221.getGeoPlaceDetail(results[0].place_id).then(
+                  _this222.getGeoPlaceDetail(results[0].place_id).then(
                   /**
                   * @param {?} result
                   * @return {?}
@@ -59030,7 +59135,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "getGeoPrediction",
         value: function getGeoPrediction(params) {
-          var _this222 = this;
+          var _this223 = this;
 
           return new Promise(
           /**
@@ -59038,9 +59143,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (resolve) {
-            if (Object(_angular_common__WEBPACK_IMPORTED_MODULE_1__["isPlatformBrowser"])(_this222.platformId)) {
+            if (Object(_angular_common__WEBPACK_IMPORTED_MODULE_1__["isPlatformBrowser"])(_this223.platformId)) {
               /** @type {?} */
-              var _window = _this222._global.nativeGlobal;
+              var _window = _this223._global.nativeGlobal;
               /** @type {?} */
 
               var placesService = new _window.google.maps.places.AutocompleteService();
@@ -59074,10 +59179,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                   /** @type {?} */
                   var _tempQuery = queryInput;
                   _tempQuery['types'] = new Array(params.geoTypes[i]);
-                  promiseArr.push(_this222.geoPredictionCall(placesService, _tempQuery));
+                  promiseArr.push(_this223.geoPredictionCall(placesService, _tempQuery));
                 }
               } else {
-                promiseArr.push(_this222.geoPredictionCall(placesService, queryInput));
+                promiseArr.push(_this223.geoPredictionCall(placesService, queryInput));
               }
 
               Promise.all(promiseArr).then(
@@ -59099,7 +59204,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                     }
                   }
 
-                  _tempArr = _this222.getUniqueResults(_tempArr);
+                  _tempArr = _this223.getUniqueResults(_tempArr);
                   resolve(_tempArr);
                 } else {
                   resolve(values[0]);
@@ -59118,7 +59223,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "getGeoPlaceDetail",
         value: function getGeoPlaceDetail(placeId) {
-          var _this223 = this;
+          var _this224 = this;
 
           return new Promise(
           /**
@@ -59126,9 +59231,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (resolve) {
-            if (Object(_angular_common__WEBPACK_IMPORTED_MODULE_1__["isPlatformBrowser"])(_this223.platformId)) {
+            if (Object(_angular_common__WEBPACK_IMPORTED_MODULE_1__["isPlatformBrowser"])(_this224.platformId)) {
               /** @type {?} */
-              var _window = _this223._global.nativeGlobal;
+              var _window = _this224._global.nativeGlobal;
               /** @type {?} */
 
               var placesService = new _window.google.maps.places.PlacesService(document.createElement('div'));
@@ -59142,7 +59247,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               */
               function (result, status) {
                 if (result === null || result.length === 0) {
-                  _this223.getGeoPaceDetailByReferance(result.referance).then(
+                  _this224.getGeoPaceDetailByReferance(result.referance).then(
                   /**
                   * @param {?} referanceData
                   * @return {?}
@@ -59171,7 +59276,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "getGeoPaceDetailByReferance",
         value: function getGeoPaceDetailByReferance(referance) {
-          var _this224 = this;
+          var _this225 = this;
 
           return new Promise(
           /**
@@ -59179,9 +59284,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (resolve) {
-            if (Object(_angular_common__WEBPACK_IMPORTED_MODULE_1__["isPlatformBrowser"])(_this224.platformId)) {
+            if (Object(_angular_common__WEBPACK_IMPORTED_MODULE_1__["isPlatformBrowser"])(_this225.platformId)) {
               /** @type {?} */
-              var _window = _this224._global.nativeGlobal;
+              var _window = _this225._global.nativeGlobal;
               /** @type {?} */
 
               var placesService = new _window.google.maps.places.PlacesService();
@@ -59215,7 +59320,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "addRecentList",
         value: function addRecentList(localStorageName, result, itemSavedLength) {
-          var _this225 = this;
+          var _this226 = this;
 
           this.getRecentList(localStorageName).then(
           /**
@@ -59237,7 +59342,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                 data.pop();
               }
 
-              _this225._localStorageService.setItem(localStorageName, JSON.stringify(data));
+              _this226._localStorageService.setItem(localStorageName, JSON.stringify(data));
             }
           });
         }
@@ -59249,7 +59354,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "getRecentList",
         value: function getRecentList(localStorageName) {
-          var _this226 = this;
+          var _this227 = this;
 
           return new Promise(
           /**
@@ -59258,7 +59363,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           */
           function (resolve) {
             /** @type {?} */
-            var value = _this226._localStorageService.getItem(localStorageName);
+            var value = _this227._localStorageService.getItem(localStorageName);
 
             if (value) {
               value = JSON.parse(value);
@@ -59543,7 +59648,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "_setupHandlers",
         value: function _setupHandlers() {
-          var _this227 = this;
+          var _this228 = this;
 
           // Register
           postRobot.on(MESSAGE_TYPES.REGISTER,
@@ -59552,11 +59657,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (event) {
-            _this227._trace(MESSAGE_TYPES.REGISTER, event);
+            _this228._trace(MESSAGE_TYPES.REGISTER, event);
 
-            _this227._registeredFrames.push(event);
+            _this228._registeredFrames.push(event);
 
-            return _this227.register(event.data).then(
+            return _this228.register(event.data).then(
             /**
             * @param {?} windowName
             * @return {?}
@@ -59574,9 +59679,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (event) {
-            _this227._trace(MESSAGE_TYPES.UPDATE, event);
+            _this228._trace(MESSAGE_TYPES.UPDATE, event);
 
-            return _this227.update(event.data).then(
+            return _this228.update(event.data).then(
             /**
             * @param {?} success
             * @return {?}
@@ -59594,9 +59699,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (event) {
-            _this227._trace(MESSAGE_TYPES.OPEN, event);
+            _this228._trace(MESSAGE_TYPES.OPEN, event);
 
-            return _this227.open(event.data).then(
+            return _this228.open(event.data).then(
             /**
             * @param {?} success
             * @return {?}
@@ -59613,9 +59718,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (event) {
-            _this227._trace(MESSAGE_TYPES.OPEN_LIST, event);
+            _this228._trace(MESSAGE_TYPES.OPEN_LIST, event);
 
-            return _this227.openList(event.data).then(
+            return _this228.openList(event.data).then(
             /**
             * @param {?} success
             * @return {?}
@@ -59633,11 +59738,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (event) {
-            _this227._trace(MESSAGE_TYPES.CLOSE, event);
+            _this228._trace(MESSAGE_TYPES.CLOSE, event);
             /** @type {?} */
 
 
-            var index = _this227._registeredFrames.findIndex(
+            var index = _this228._registeredFrames.findIndex(
             /**
             * @param {?} frame
             * @return {?}
@@ -59647,10 +59752,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             });
 
             if (index !== -1) {
-              _this227._registeredFrames.splice(index, 1);
+              _this228._registeredFrames.splice(index, 1);
             }
 
-            return _this227.close(event.data).then(
+            return _this228.close(event.data).then(
             /**
             * @param {?} success
             * @return {?}
@@ -59668,9 +59773,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (event) {
-            _this227._trace(MESSAGE_TYPES.REFRESH, event);
+            _this228._trace(MESSAGE_TYPES.REFRESH, event);
 
-            return _this227.refresh(event.data).then(
+            return _this228.refresh(event.data).then(
             /**
             * @param {?} success
             * @return {?}
@@ -59688,9 +59793,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (event) {
-            _this227._trace(MESSAGE_TYPES.PIN, event);
+            _this228._trace(MESSAGE_TYPES.PIN, event);
 
-            return _this227.pin(event.data).then(
+            return _this228.pin(event.data).then(
             /**
             * @param {?} success
             * @return {?}
@@ -59708,9 +59813,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (event) {
-            _this227._trace(MESSAGE_TYPES.REQUEST_DATA, event);
+            _this228._trace(MESSAGE_TYPES.REQUEST_DATA, event);
 
-            return _this227.requestData(event.data).then(
+            return _this228.requestData(event.data).then(
             /**
             * @param {?} result
             * @return {?}
@@ -59729,9 +59834,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (event) {
-            _this227._trace(MESSAGE_TYPES.CALLBACK, event);
+            _this228._trace(MESSAGE_TYPES.CALLBACK, event);
 
-            return _this227.callback(event.data).then(
+            return _this228.callback(event.data).then(
             /**
             * @param {?} success
             * @return {?}
@@ -59749,9 +59854,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (event) {
-            _this227._trace(MESSAGE_TYPES.HTTP_GET, event);
+            _this228._trace(MESSAGE_TYPES.HTTP_GET, event);
 
-            return _this227.httpGET(event.data.relativeURL).then(
+            return _this228.httpGET(event.data.relativeURL).then(
             /**
             * @param {?} result
             * @return {?}
@@ -59770,9 +59875,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (event) {
-            _this227._trace(MESSAGE_TYPES.HTTP_POST, event);
+            _this228._trace(MESSAGE_TYPES.HTTP_POST, event);
 
-            return _this227.httpPOST(event.data.relativeURL, event.data.data).then(
+            return _this228.httpPOST(event.data.relativeURL, event.data.data).then(
             /**
             * @param {?} result
             * @return {?}
@@ -59791,9 +59896,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (event) {
-            _this227._trace(MESSAGE_TYPES.HTTP_PUT, event);
+            _this228._trace(MESSAGE_TYPES.HTTP_PUT, event);
 
-            return _this227.httpPUT(event.data.relativeURL, event.data.data).then(
+            return _this228.httpPUT(event.data.relativeURL, event.data.data).then(
             /**
             * @param {?} result
             * @return {?}
@@ -59812,9 +59917,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (event) {
-            _this227._trace(MESSAGE_TYPES.HTTP_DELETE, event);
+            _this228._trace(MESSAGE_TYPES.HTTP_DELETE, event);
 
-            return _this227.httpDELETE(event.data.relativeURL).then(
+            return _this228.httpDELETE(event.data.relativeURL).then(
             /**
             * @param {?} result
             * @return {?}
@@ -59833,10 +59938,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (event) {
-            _this227._trace(MESSAGE_TYPES.CUSTOM_EVENT, event);
+            _this228._trace(MESSAGE_TYPES.CUSTOM_EVENT, event);
 
-            if (_this227._eventListeners[event.data.event]) {
-              _this227._eventListeners[event.data.event].forEach(
+            if (_this228._eventListeners[event.data.event]) {
+              _this228._eventListeners[event.data.event].forEach(
               /**
               * @param {?} listener
               * @return {?}
@@ -59846,8 +59951,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               });
             }
 
-            if (_this227._registeredFrames.length > 0) {
-              _this227._registeredFrames.forEach(
+            if (_this228._registeredFrames.length > 0) {
+              _this228._registeredFrames.forEach(
               /**
               * @param {?} frame
               * @return {?}
@@ -59867,7 +59972,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "open",
         value: function open(packet) {
-          var _this228 = this;
+          var _this229 = this;
 
           return new Promise(
           /**
@@ -59876,8 +59981,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (resolve, reject) {
-            if (_this228._handlers[AppBridgeHandler.OPEN]) {
-              _this228._handlers[AppBridgeHandler.OPEN](packet,
+            if (_this229._handlers[AppBridgeHandler.OPEN]) {
+              _this229._handlers[AppBridgeHandler.OPEN](packet,
               /**
               * @param {?} success
               * @return {?}
@@ -59891,8 +59996,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               });
             } else {
               Object.assign(packet, {
-                id: _this228.id,
-                windowName: _this228.windowName
+                id: _this229.id,
+                windowName: _this229.windowName
               });
               postRobot.sendToParent(MESSAGE_TYPES.OPEN, packet).then(
               /**
@@ -59900,7 +60005,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               * @return {?}
               */
               function (event) {
-                _this228._trace("".concat(MESSAGE_TYPES.OPEN, " (callback)"), event);
+                _this229._trace("".concat(MESSAGE_TYPES.OPEN, " (callback)"), event);
 
                 if (event.data) {
                   resolve(true);
@@ -59927,7 +60032,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "openList",
         value: function openList(packet) {
-          var _this229 = this;
+          var _this230 = this;
 
           return new Promise(
           /**
@@ -59936,8 +60041,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (resolve, reject) {
-            if (_this229._handlers[AppBridgeHandler.OPEN_LIST]) {
-              _this229._handlers[AppBridgeHandler.OPEN_LIST](packet,
+            if (_this230._handlers[AppBridgeHandler.OPEN_LIST]) {
+              _this230._handlers[AppBridgeHandler.OPEN_LIST](packet,
               /**
               * @param {?} success
               * @return {?}
@@ -59964,7 +60069,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               * @return {?}
               */
               function (event) {
-                _this229._trace("".concat(MESSAGE_TYPES.OPEN_LIST, " (callback)"), event);
+                _this230._trace("".concat(MESSAGE_TYPES.OPEN_LIST, " (callback)"), event);
 
                 if (event.data) {
                   resolve(true);
@@ -59991,7 +60096,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "update",
         value: function update(packet) {
-          var _this230 = this;
+          var _this231 = this;
 
           return new Promise(
           /**
@@ -60000,8 +60105,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (resolve, reject) {
-            if (_this230._handlers[AppBridgeHandler.UPDATE]) {
-              _this230._handlers[AppBridgeHandler.UPDATE](packet,
+            if (_this231._handlers[AppBridgeHandler.UPDATE]) {
+              _this231._handlers[AppBridgeHandler.UPDATE](packet,
               /**
               * @param {?} success
               * @return {?}
@@ -60015,8 +60120,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               });
             } else {
               Object.assign(packet, {
-                id: _this230.id,
-                windowName: _this230.windowName
+                id: _this231.id,
+                windowName: _this231.windowName
               });
               postRobot.sendToParent(MESSAGE_TYPES.UPDATE, packet).then(
               /**
@@ -60024,7 +60129,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               * @return {?}
               */
               function (event) {
-                _this230._trace("".concat(MESSAGE_TYPES.UPDATE, " (callback)"), event);
+                _this231._trace("".concat(MESSAGE_TYPES.UPDATE, " (callback)"), event);
 
                 if (event.data) {
                   resolve(true);
@@ -60051,7 +60156,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "close",
         value: function close(packet) {
-          var _this231 = this;
+          var _this232 = this;
 
           return new Promise(
           /**
@@ -60060,8 +60165,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (resolve, reject) {
-            if (_this231._handlers[AppBridgeHandler.CLOSE]) {
-              _this231._handlers[AppBridgeHandler.CLOSE](packet,
+            if (_this232._handlers[AppBridgeHandler.CLOSE]) {
+              _this232._handlers[AppBridgeHandler.CLOSE](packet,
               /**
               * @param {?} success
               * @return {?}
@@ -60081,8 +60186,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
               var realPacket = {
-                id: _this231.id,
-                windowName: _this231.windowName
+                id: _this232.id,
+                windowName: _this232.windowName
               };
               postRobot.sendToParent(MESSAGE_TYPES.CLOSE, realPacket).then(
               /**
@@ -60090,7 +60195,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               * @return {?}
               */
               function (event) {
-                _this231._trace("".concat(MESSAGE_TYPES.CLOSE, " (callback)"), event);
+                _this232._trace("".concat(MESSAGE_TYPES.CLOSE, " (callback)"), event);
 
                 if (event.data) {
                   resolve(true);
@@ -60117,7 +60222,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "refresh",
         value: function refresh(packet) {
-          var _this232 = this;
+          var _this233 = this;
 
           return new Promise(
           /**
@@ -60126,8 +60231,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (resolve, reject) {
-            if (_this232._handlers[AppBridgeHandler.REFRESH]) {
-              _this232._handlers[AppBridgeHandler.REFRESH](packet,
+            if (_this233._handlers[AppBridgeHandler.REFRESH]) {
+              _this233._handlers[AppBridgeHandler.REFRESH](packet,
               /**
               * @param {?} success
               * @return {?}
@@ -60147,8 +60252,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
               var realPacket = {
-                id: _this232.id,
-                windowName: _this232.windowName
+                id: _this233.id,
+                windowName: _this233.windowName
               };
               postRobot.sendToParent(MESSAGE_TYPES.REFRESH, realPacket).then(
               /**
@@ -60156,7 +60261,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               * @return {?}
               */
               function (event) {
-                _this232._trace("".concat(MESSAGE_TYPES.REFRESH, " (callback)"), event);
+                _this233._trace("".concat(MESSAGE_TYPES.REFRESH, " (callback)"), event);
 
                 if (event.data) {
                   resolve(true);
@@ -60183,7 +60288,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "pin",
         value: function pin(packet) {
-          var _this233 = this;
+          var _this234 = this;
 
           return new Promise(
           /**
@@ -60192,8 +60297,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (resolve, reject) {
-            if (_this233._handlers[AppBridgeHandler.PIN]) {
-              _this233._handlers[AppBridgeHandler.PIN](packet,
+            if (_this234._handlers[AppBridgeHandler.PIN]) {
+              _this234._handlers[AppBridgeHandler.PIN](packet,
               /**
               * @param {?} success
               * @return {?}
@@ -60213,8 +60318,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
               var realPacket = {
-                id: _this233.id,
-                windowName: _this233.windowName
+                id: _this234.id,
+                windowName: _this234.windowName
               };
               postRobot.sendToParent(MESSAGE_TYPES.PIN, realPacket).then(
               /**
@@ -60222,7 +60327,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               * @return {?}
               */
               function (event) {
-                _this233._trace("".concat(MESSAGE_TYPES.PIN, " (callback)"), event);
+                _this234._trace("".concat(MESSAGE_TYPES.PIN, " (callback)"), event);
 
                 if (event.data) {
                   resolve(true);
@@ -60249,7 +60354,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "requestData",
         value: function requestData(packet) {
-          var _this234 = this;
+          var _this235 = this;
 
           return new Promise(
           /**
@@ -60258,8 +60363,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (resolve, reject) {
-            if (_this234._handlers[AppBridgeHandler.REQUEST_DATA]) {
-              _this234._handlers[AppBridgeHandler.REQUEST_DATA](packet,
+            if (_this235._handlers[AppBridgeHandler.REQUEST_DATA]) {
+              _this235._handlers[AppBridgeHandler.REQUEST_DATA](packet,
               /**
               * @param {?} data
               * @return {?}
@@ -60275,8 +60380,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               });
             } else {
               Object.assign(packet, {
-                id: _this234.id,
-                windowName: _this234.windowName
+                id: _this235.id,
+                windowName: _this235.windowName
               });
               postRobot.sendToParent(MESSAGE_TYPES.REQUEST_DATA, packet).then(
               /**
@@ -60284,7 +60389,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               * @return {?}
               */
               function (event) {
-                _this234._trace("".concat(MESSAGE_TYPES.REQUEST_DATA, " (callback)"), event);
+                _this235._trace("".concat(MESSAGE_TYPES.REQUEST_DATA, " (callback)"), event);
 
                 if (event.data) {
                   resolve({
@@ -60313,7 +60418,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "callback",
         value: function callback(packet) {
-          var _this235 = this;
+          var _this236 = this;
 
           return new Promise(
           /**
@@ -60322,8 +60427,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (resolve, reject) {
-            if (_this235._handlers[AppBridgeHandler.CALLBACK]) {
-              _this235._handlers[AppBridgeHandler.CALLBACK](packet,
+            if (_this236._handlers[AppBridgeHandler.CALLBACK]) {
+              _this236._handlers[AppBridgeHandler.CALLBACK](packet,
               /**
               * @param {?} success
               * @return {?}
@@ -60337,8 +60442,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               });
             } else {
               Object.assign(packet, {
-                id: _this235.id,
-                windowName: _this235.windowName
+                id: _this236.id,
+                windowName: _this236.windowName
               });
               postRobot.sendToParent(MESSAGE_TYPES.CALLBACK, packet).then(
               /**
@@ -60346,7 +60451,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               * @return {?}
               */
               function (event) {
-                _this235._trace("".concat(MESSAGE_TYPES.CALLBACK, " (callback)"), event);
+                _this236._trace("".concat(MESSAGE_TYPES.CALLBACK, " (callback)"), event);
 
                 if (event.data) {
                   resolve(true);
@@ -60373,7 +60478,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "register",
         value: function register() {
-          var _this236 = this;
+          var _this237 = this;
 
           var packet = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
           return new Promise(
@@ -60383,8 +60488,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (resolve, reject) {
-            if (_this236._handlers[AppBridgeHandler.REGISTER]) {
-              _this236._handlers[AppBridgeHandler.REGISTER](packet,
+            if (_this237._handlers[AppBridgeHandler.REGISTER]) {
+              _this237._handlers[AppBridgeHandler.REGISTER](packet,
               /**
               * @param {?} windowName
               * @return {?}
@@ -60398,7 +60503,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               });
             } else {
               Object.assign(packet, {
-                id: _this236.id
+                id: _this237.id
               });
               postRobot.sendToParent(MESSAGE_TYPES.REGISTER, packet).then(
               /**
@@ -60406,10 +60511,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               * @return {?}
               */
               function (event) {
-                _this236._trace("".concat(MESSAGE_TYPES.REGISTER, " (callback)"), event);
+                _this237._trace("".concat(MESSAGE_TYPES.REGISTER, " (callback)"), event);
 
                 if (event.data) {
-                  _this236.windowName = event.data.windowName;
+                  _this237.windowName = event.data.windowName;
                   resolve(event.data.windowName);
                 } else {
                   resolve(null);
@@ -60420,7 +60525,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               * @return {?}
               */
               function (err) {
-                _this236._trace("".concat(MESSAGE_TYPES.REGISTER, " - FAILED - (no parent)"), err);
+                _this237._trace("".concat(MESSAGE_TYPES.REGISTER, " - FAILED - (no parent)"), err);
 
                 reject(err);
               });
@@ -60436,7 +60541,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "httpGET",
         value: function httpGET(relativeURL) {
-          var _this237 = this;
+          var _this238 = this;
 
           return new Promise(
           /**
@@ -60445,8 +60550,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (resolve, reject) {
-            if (_this237._handlers[AppBridgeHandler.HTTP]) {
-              _this237._handlers[AppBridgeHandler.HTTP]({
+            if (_this238._handlers[AppBridgeHandler.HTTP]) {
+              _this238._handlers[AppBridgeHandler.HTTP]({
                 verb: HTTP_VERBS.GET,
                 relativeURL: relativeURL
               },
@@ -60495,7 +60600,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "httpPOST",
         value: function httpPOST(relativeURL, postData) {
-          var _this238 = this;
+          var _this239 = this;
 
           return new Promise(
           /**
@@ -60504,8 +60609,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (resolve, reject) {
-            if (_this238._handlers[AppBridgeHandler.HTTP]) {
-              _this238._handlers[AppBridgeHandler.HTTP]({
+            if (_this239._handlers[AppBridgeHandler.HTTP]) {
+              _this239._handlers[AppBridgeHandler.HTTP]({
                 verb: HTTP_VERBS.POST,
                 relativeURL: relativeURL,
                 data: postData
@@ -60556,7 +60661,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "httpPUT",
         value: function httpPUT(relativeURL, putData) {
-          var _this239 = this;
+          var _this240 = this;
 
           return new Promise(
           /**
@@ -60565,8 +60670,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (resolve, reject) {
-            if (_this239._handlers[AppBridgeHandler.HTTP]) {
-              _this239._handlers[AppBridgeHandler.HTTP]({
+            if (_this240._handlers[AppBridgeHandler.HTTP]) {
+              _this240._handlers[AppBridgeHandler.HTTP]({
                 verb: HTTP_VERBS.PUT,
                 relativeURL: relativeURL,
                 data: putData
@@ -60616,7 +60721,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "httpDELETE",
         value: function httpDELETE(relativeURL) {
-          var _this240 = this;
+          var _this241 = this;
 
           return new Promise(
           /**
@@ -60625,8 +60730,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (resolve, reject) {
-            if (_this240._handlers[AppBridgeHandler.HTTP]) {
-              _this240._handlers[AppBridgeHandler.HTTP]({
+            if (_this241._handlers[AppBridgeHandler.HTTP]) {
+              _this241._handlers[AppBridgeHandler.HTTP]({
                 verb: HTTP_VERBS.DELETE,
                 relativeURL: relativeURL
               },
@@ -60757,25 +60862,25 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var DevAppBridge = /*#__PURE__*/function (_AppBridge) {
       _inherits(DevAppBridge, _AppBridge);
 
-      var _super59 = _createSuper(DevAppBridge);
+      var _super60 = _createSuper(DevAppBridge);
 
       /**
        * @param {?=} traceName
        * @param {?=} http
        */
       function DevAppBridge() {
-        var _this241;
+        var _this242;
 
         var traceName = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'DevAppBridge';
         var http = arguments.length > 1 ? arguments[1] : undefined;
 
         _classCallCheck(this, DevAppBridge);
 
-        _this241 = _super59.call(this, traceName);
-        _this241.http = http;
+        _this242 = _super60.call(this, traceName);
+        _this242.http = http;
         /** @type {?} */
 
-        var cookie = _this241.getCookie('UlEncodedIdentity');
+        var cookie = _this242.getCookie('UlEncodedIdentity');
 
         if (cookie && cookie.length) {
           /** @type {?} */
@@ -60792,10 +60897,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             obj[session.name] = session.value.endpoint;
             return obj;
           }, {});
-          _this241.baseURL = endpoints.rest;
+          _this242.baseURL = endpoints.rest;
         }
 
-        return _this241;
+        return _this242;
       }
       /**
        * @protected
@@ -61091,7 +61196,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var ActivityTableDataSource = /*#__PURE__*/function (_angular_cdk_table__W10) {
       _inherits(ActivityTableDataSource, _angular_cdk_table__W10);
 
-      var _super60 = _createSuper(ActivityTableDataSource);
+      var _super61 = _createSuper(ActivityTableDataSource);
 
       /**
        * @param {?} tableService
@@ -61099,19 +61204,19 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
        * @param {?} ref
        */
       function ActivityTableDataSource(tableService, state, ref) {
-        var _this242;
+        var _this243;
 
         _classCallCheck(this, ActivityTableDataSource);
 
-        _this242 = _super60.call(this);
-        _this242.tableService = tableService;
-        _this242.state = state;
-        _this242.ref = ref;
-        _this242.total = 0;
-        _this242.current = 0;
-        _this242.loading = false;
-        _this242.pristine = true;
-        return _this242;
+        _this243 = _super61.call(this);
+        _this243.tableService = tableService;
+        _this243.state = state;
+        _this243.ref = ref;
+        _this243.total = 0;
+        _this243.current = 0;
+        _this243.loading = false;
+        _this243.pristine = true;
+        return _this243;
       }
       /**
        * @return {?}
@@ -61125,7 +61230,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
          * @return {?}
          */
         value: function connect() {
-          var _this243 = this;
+          var _this244 = this;
 
           /** @type {?} */
           var displayDataChanges = [this.state.updates];
@@ -61134,24 +61239,24 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function () {
-            _this243.pristine = false;
-            _this243.loading = true;
-            return _this243.tableService.getTableResults(_this243.state.sort, _this243.state.filter, _this243.state.page, _this243.state.pageSize, _this243.state.globalSearch, _this243.state.outsideFilter);
+            _this244.pristine = false;
+            _this244.loading = true;
+            return _this244.tableService.getTableResults(_this244.state.sort, _this244.state.filter, _this244.state.page, _this244.state.pageSize, _this244.state.globalSearch, _this244.state.outsideFilter);
           }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_13__["map"])(
           /**
           * @param {?} data
           * @return {?}
           */
           function (data) {
-            _this243.loading = false;
-            _this243.total = data.total;
-            _this243.current = data.results.length;
+            _this244.loading = false;
+            _this244.total = data.total;
+            _this244.current = data.results.length;
             setTimeout(
             /**
             * @return {?}
             */
             function () {
-              _this243.ref.markForCheck();
+              _this244.ref.markForCheck();
             });
             return data.results;
           }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_13__["catchError"])(
@@ -61162,7 +61267,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           function (error) {
             console.error(error); // tslint: disable-line
 
-            _this243.loading = false;
+            _this244.loading = false;
             return Object(rxjs__WEBPACK_IMPORTED_MODULE_11__["of"])(null);
           }));
         }
@@ -61280,12 +61385,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var NovoTable = /*#__PURE__*/function (_NovoTable2) {
       _inherits(NovoTable, _NovoTable2);
 
-      var _super61 = _createSuper(NovoTable);
+      var _super62 = _createSuper(NovoTable);
 
       function NovoTable() {
         _classCallCheck(this, NovoTable);
 
-        return _super61.apply(this, arguments);
+        return _super62.apply(this, arguments);
       }
 
       return NovoTable;
@@ -61389,7 +61494,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
          * @return {?}
          */
         value: function ngOnChanges(changes) {
-          var _this244 = this;
+          var _this245 = this;
 
           this.loading = changes['activityService'] && !changes['activityService'].currentValue;
           this.ref.detectChanges();
@@ -61408,15 +61513,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               * @return {?}
               */
               function (filter) {
-                _this244.state.outsideFilter = filter;
+                _this245.state.outsideFilter = filter;
 
-                _this244.state.updates.next({
-                  globalSearch: _this244.state.globalSearch,
-                  filter: _this244.state.filter,
-                  sort: _this244.state.sort
+                _this245.state.updates.next({
+                  globalSearch: _this245.state.globalSearch,
+                  filter: _this245.state.filter,
+                  sort: _this245.state.sort
                 });
 
-                _this244.ref.markForCheck();
+                _this245.ref.markForCheck();
               });
             }
           }
@@ -61753,7 +61858,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "deregister",
         value: function deregister(id) {
-          var _this245 = this;
+          var _this246 = this;
 
           this.allRows["delete"](id);
           this.state.selectedRows["delete"](id);
@@ -61763,8 +61868,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function () {
-            if (_this245.state.selectedRows.size === 0) {
-              _this245.novoSelectAllToggle.emit(false);
+            if (_this246.state.selectedRows.size === 0) {
+              _this246.novoSelectAllToggle.emit(false);
             }
           });
         }
@@ -61865,12 +61970,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var NovoSimpleCellDef = /*#__PURE__*/function (_NovoCellDef2) {
       _inherits(NovoSimpleCellDef, _NovoCellDef2);
 
-      var _super62 = _createSuper(NovoSimpleCellDef);
+      var _super63 = _createSuper(NovoSimpleCellDef);
 
       function NovoSimpleCellDef() {
         _classCallCheck(this, NovoSimpleCellDef);
 
-        return _super62.apply(this, arguments);
+        return _super63.apply(this, arguments);
       }
 
       return NovoSimpleCellDef;
@@ -61890,12 +61995,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var NovoSimpleHeaderCellDef = /*#__PURE__*/function (_NovoHeaderCellDef2) {
       _inherits(NovoSimpleHeaderCellDef, _NovoHeaderCellDef2);
 
-      var _super63 = _createSuper(NovoSimpleHeaderCellDef);
+      var _super64 = _createSuper(NovoSimpleHeaderCellDef);
 
       function NovoSimpleHeaderCellDef() {
         _classCallCheck(this, NovoSimpleHeaderCellDef);
 
-        return _super63.apply(this, arguments);
+        return _super64.apply(this, arguments);
       }
 
       return NovoSimpleHeaderCellDef;
@@ -61915,12 +62020,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var NovoSimpleColumnDef = /*#__PURE__*/function (_NovoColumnDef2) {
       _inherits(NovoSimpleColumnDef, _NovoColumnDef2);
 
-      var _super64 = _createSuper(NovoSimpleColumnDef);
+      var _super65 = _createSuper(NovoSimpleColumnDef);
 
       function NovoSimpleColumnDef() {
         _classCallCheck(this, NovoSimpleColumnDef);
 
-        return _super64.apply(this, arguments);
+        return _super65.apply(this, arguments);
       }
 
       return NovoSimpleColumnDef;
@@ -61952,7 +62057,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var NovoSimpleHeaderCell = /*#__PURE__*/function (_NovoHeaderCell2) {
       _inherits(NovoSimpleHeaderCell, _NovoHeaderCell2);
 
-      var _super65 = _createSuper(NovoSimpleHeaderCell);
+      var _super66 = _createSuper(NovoSimpleHeaderCell);
 
       /**
        * @param {?} columnDef
@@ -61960,18 +62065,18 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
        * @param {?} renderer
        */
       function NovoSimpleHeaderCell(columnDef, elementRef, renderer) {
-        var _this246;
+        var _this247;
 
         _classCallCheck(this, NovoSimpleHeaderCell);
 
-        _this246 = _super65.call(this, columnDef, elementRef);
-        _this246.elementRef = elementRef;
-        _this246.renderer = renderer;
-        _this246.role = 'columnheader';
+        _this247 = _super66.call(this, columnDef, elementRef);
+        _this247.elementRef = elementRef;
+        _this247.renderer = renderer;
+        _this247.role = 'columnheader';
         renderer.setAttribute(elementRef.nativeElement, 'data-automation-id', "novo-column-header-".concat(columnDef.cssClassFriendlyName));
         renderer.addClass(elementRef.nativeElement, "novo-column-".concat(columnDef.cssClassFriendlyName));
         renderer.addClass(elementRef.nativeElement, 'novo-simple-header-cell');
-        return _this246;
+        return _this247;
       }
       /**
        * @return {?}
@@ -62025,7 +62130,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var NovoSimpleEmptyHeaderCell = /*#__PURE__*/function (_NovoHeaderCell3) {
       _inherits(NovoSimpleEmptyHeaderCell, _NovoHeaderCell3);
 
-      var _super66 = _createSuper(NovoSimpleEmptyHeaderCell);
+      var _super67 = _createSuper(NovoSimpleEmptyHeaderCell);
 
       /**
        * @param {?} columnDef
@@ -62033,16 +62138,16 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
        * @param {?} renderer
        */
       function NovoSimpleEmptyHeaderCell(columnDef, elementRef, renderer) {
-        var _this247;
+        var _this248;
 
         _classCallCheck(this, NovoSimpleEmptyHeaderCell);
 
-        _this247 = _super66.call(this, columnDef, elementRef);
-        _this247.role = 'columnheader';
+        _this248 = _super67.call(this, columnDef, elementRef);
+        _this248.role = 'columnheader';
         renderer.setAttribute(elementRef.nativeElement, 'data-automation-id', "novo-column-header-".concat(columnDef.cssClassFriendlyName));
         renderer.addClass(elementRef.nativeElement, "novo-column-".concat(columnDef.cssClassFriendlyName));
         renderer.addClass(elementRef.nativeElement, 'novo-simple-empty-header-cell');
-        return _this247;
+        return _this248;
       }
 
       return NovoSimpleEmptyHeaderCell;
@@ -62078,7 +62183,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var NovoSimpleCheckboxHeaderCell = /*#__PURE__*/function (_NovoHeaderCell4) {
       _inherits(NovoSimpleCheckboxHeaderCell, _NovoHeaderCell4);
 
-      var _super67 = _createSuper(NovoSimpleCheckboxHeaderCell);
+      var _super68 = _createSuper(NovoSimpleCheckboxHeaderCell);
 
       /**
        * @param {?} columnDef
@@ -62088,27 +62193,27 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
        * @param {?} _selection
        */
       function NovoSimpleCheckboxHeaderCell(columnDef, elementRef, renderer, ref, _selection) {
-        var _this248;
+        var _this249;
 
         _classCallCheck(this, NovoSimpleCheckboxHeaderCell);
 
-        _this248 = _super67.call(this, columnDef, elementRef);
-        _this248._selection = _selection;
-        _this248.role = 'columnheader';
-        _this248.selectAll = false;
+        _this249 = _super68.call(this, columnDef, elementRef);
+        _this249._selection = _selection;
+        _this249.role = 'columnheader';
+        _this249.selectAll = false;
         renderer.setAttribute(elementRef.nativeElement, 'data-automation-id', "novo-checkbox-column-header-".concat(columnDef.cssClassFriendlyName));
         renderer.addClass(elementRef.nativeElement, "novo-checkbox-column-".concat(columnDef.cssClassFriendlyName));
         renderer.addClass(elementRef.nativeElement, 'novo-simple-checkbox-header-cell');
-        _this248.selectAllSubscription = _selection.novoSelectAllToggle.subscribe(
+        _this249.selectAllSubscription = _selection.novoSelectAllToggle.subscribe(
         /**
         * @param {?} value
         * @return {?}
         */
         function (value) {
-          _this248.selectAll = value;
+          _this249.selectAll = value;
           ref.markForCheck();
         });
-        return _this248;
+        return _this249;
       }
       /**
        * @return {?}
@@ -62177,7 +62282,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var NovoSimpleCell = /*#__PURE__*/function (_NovoCell2) {
       _inherits(NovoSimpleCell, _NovoCell2);
 
-      var _super68 = _createSuper(NovoSimpleCell);
+      var _super69 = _createSuper(NovoSimpleCell);
 
       /**
        * @param {?} columnDef
@@ -62185,18 +62290,18 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
        * @param {?} renderer
        */
       function NovoSimpleCell(columnDef, elementRef, renderer) {
-        var _this249;
+        var _this250;
 
         _classCallCheck(this, NovoSimpleCell);
 
-        _this249 = _super68.call(this, columnDef, elementRef);
-        _this249.elementRef = elementRef;
-        _this249.renderer = renderer;
-        _this249.role = 'gridcell';
+        _this250 = _super69.call(this, columnDef, elementRef);
+        _this250.elementRef = elementRef;
+        _this250.renderer = renderer;
+        _this250.role = 'gridcell';
         renderer.setAttribute(elementRef.nativeElement, 'data-automation-id', "novo-column-".concat(columnDef.cssClassFriendlyName));
         renderer.addClass(elementRef.nativeElement, "novo-column-".concat(columnDef.cssClassFriendlyName));
         renderer.addClass(elementRef.nativeElement, 'novo-simple-cell');
-        return _this249;
+        return _this250;
       }
       /**
        * @return {?}
@@ -62284,7 +62389,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var NovoSimpleCheckboxCell = /*#__PURE__*/function (_NovoCell3) {
       _inherits(NovoSimpleCheckboxCell, _NovoCell3);
 
-      var _super69 = _createSuper(NovoSimpleCheckboxCell);
+      var _super70 = _createSuper(NovoSimpleCheckboxCell);
 
       /**
        * @param {?} columnDef
@@ -62293,27 +62398,27 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
        * @param {?} _selection
        */
       function NovoSimpleCheckboxCell(columnDef, elementRef, renderer, _selection) {
-        var _this250;
+        var _this251;
 
         _classCallCheck(this, NovoSimpleCheckboxCell);
 
-        _this250 = _super69.call(this, columnDef, elementRef);
-        _this250.columnDef = columnDef;
-        _this250._selection = _selection;
-        _this250.role = 'gridcell';
-        _this250.selected = false;
+        _this251 = _super70.call(this, columnDef, elementRef);
+        _this251.columnDef = columnDef;
+        _this251._selection = _selection;
+        _this251.role = 'gridcell';
+        _this251.selected = false;
         renderer.setAttribute(elementRef.nativeElement, 'data-automation-id', "novo-checkbox-column-".concat(columnDef.cssClassFriendlyName));
         renderer.addClass(elementRef.nativeElement, "novo-checkbox-column-".concat(columnDef.cssClassFriendlyName));
         renderer.addClass(elementRef.nativeElement, 'novo-simple-checkbox-cell');
-        _this250.selectAllSubscription = _selection.novoSelectAllToggle.subscribe(
+        _this251.selectAllSubscription = _selection.novoSelectAllToggle.subscribe(
         /**
         * @param {?} value
         * @return {?}
         */
         function (value) {
-          _this250.selected = value;
+          _this251.selected = value;
         });
-        return _this250;
+        return _this251;
       }
       /**
        * @return {?}
@@ -62399,7 +62504,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var NovoSimpleActionCell = /*#__PURE__*/function (_NovoCell4) {
       _inherits(NovoSimpleActionCell, _NovoCell4);
 
-      var _super70 = _createSuper(NovoSimpleActionCell);
+      var _super71 = _createSuper(NovoSimpleActionCell);
 
       /**
        * @param {?} columnDef
@@ -62408,17 +62513,17 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
        * @param {?} labels
        */
       function NovoSimpleActionCell(columnDef, elementRef, renderer, labels) {
-        var _this251;
+        var _this252;
 
         _classCallCheck(this, NovoSimpleActionCell);
 
-        _this251 = _super70.call(this, columnDef, elementRef);
-        _this251.elementRef = elementRef;
-        _this251.renderer = renderer;
-        _this251.labels = labels;
-        _this251.role = 'gridcell';
+        _this252 = _super71.call(this, columnDef, elementRef);
+        _this252.elementRef = elementRef;
+        _this252.renderer = renderer;
+        _this252.labels = labels;
+        _this252.role = 'gridcell';
         renderer.setAttribute(elementRef.nativeElement, 'data-automation-id', "novo-action-column-".concat(columnDef.cssClassFriendlyName));
-        return _this251;
+        return _this252;
       }
       /**
        * @return {?}
@@ -62520,12 +62625,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var NovoSimpleHeaderRowDef = /*#__PURE__*/function (_NovoHeaderRowDef2) {
       _inherits(NovoSimpleHeaderRowDef, _NovoHeaderRowDef2);
 
-      var _super71 = _createSuper(NovoSimpleHeaderRowDef);
+      var _super72 = _createSuper(NovoSimpleHeaderRowDef);
 
       function NovoSimpleHeaderRowDef() {
         _classCallCheck(this, NovoSimpleHeaderRowDef);
 
-        return _super71.apply(this, arguments);
+        return _super72.apply(this, arguments);
       }
 
       return NovoSimpleHeaderRowDef;
@@ -62557,12 +62662,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var NovoSimpleRowDef = /*#__PURE__*/function (_NovoCdkRowDef2) {
       _inherits(NovoSimpleRowDef, _NovoCdkRowDef2);
 
-      var _super72 = _createSuper(NovoSimpleRowDef);
+      var _super73 = _createSuper(NovoSimpleRowDef);
 
       function NovoSimpleRowDef() {
         _classCallCheck(this, NovoSimpleRowDef);
 
-        return _super72.apply(this, arguments);
+        return _super73.apply(this, arguments);
       }
 
       return NovoSimpleRowDef;
@@ -62590,17 +62695,17 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var NovoSimpleHeaderRow = /*#__PURE__*/function (_NovoHeaderRow2) {
       _inherits(NovoSimpleHeaderRow, _NovoHeaderRow2);
 
-      var _super73 = _createSuper(NovoSimpleHeaderRow);
+      var _super74 = _createSuper(NovoSimpleHeaderRow);
 
       function NovoSimpleHeaderRow() {
-        var _this252;
+        var _this253;
 
         _classCallCheck(this, NovoSimpleHeaderRow);
 
-        _this252 = _super73.apply(this, arguments);
-        _this252.rowClass = 'novo-simple-header-row';
-        _this252.role = 'row';
-        return _this252;
+        _this253 = _super74.apply(this, arguments);
+        _this253.rowClass = 'novo-simple-header-row';
+        _this253.role = 'row';
+        return _this253;
       }
 
       return NovoSimpleHeaderRow;
@@ -62630,17 +62735,17 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var NovoSimpleRow = /*#__PURE__*/function (_NovoRow2) {
       _inherits(NovoSimpleRow, _NovoRow2);
 
-      var _super74 = _createSuper(NovoSimpleRow);
+      var _super75 = _createSuper(NovoSimpleRow);
 
       function NovoSimpleRow() {
-        var _this253;
+        var _this254;
 
         _classCallCheck(this, NovoSimpleRow);
 
-        _this253 = _super74.apply(this, arguments);
-        _this253.rowClass = 'novo-simple-row';
-        _this253.role = 'row';
-        return _this253;
+        _this254 = _super75.apply(this, arguments);
+        _this254.rowClass = 'novo-simple-row';
+        _this254.role = 'row';
+        return _this254;
       }
 
       return NovoSimpleRow;
@@ -62722,7 +62827,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
        * @param {?} _cdkColumnDef
        */
       function NovoSimpleCellHeader(changeDetectorRef, labels, state, _sort, _cdkColumnDef) {
-        var _this254 = this;
+        var _this255 = this;
 
         _classCallCheck(this, NovoSimpleCellHeader);
 
@@ -62741,20 +62846,20 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         * @return {?}
         */
         function (change) {
-          if (change.sort && change.sort.id === _this254.id) {
-            _this254.icon = "sort-".concat(change.sort.value);
-            _this254.sortActive = true;
+          if (change.sort && change.sort.id === _this255.id) {
+            _this255.icon = "sort-".concat(change.sort.value);
+            _this255.sortActive = true;
           } else {
-            _this254.icon = 'sortable';
-            _this254.sortActive = false;
+            _this255.icon = 'sortable';
+            _this255.sortActive = false;
           }
 
-          if (change.filter && change.filter.id === _this254.id) {
-            _this254.filterActive = true;
-            _this254.filter = change.filter.value;
+          if (change.filter && change.filter.id === _this255.id) {
+            _this255.filterActive = true;
+            _this255.filter = change.filter.value;
           } else {
-            _this254.filterActive = false;
-            _this254.filter = undefined;
+            _this255.filterActive = false;
+            _this255.filter = undefined;
           }
 
           changeDetectorRef.markForCheck();
@@ -62798,7 +62903,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "sort",
         value: function sort() {
-          var _this255 = this;
+          var _this256 = this;
 
           if (this.changeTimeout) {
             clearTimeout(this.changeTimeout);
@@ -62809,11 +62914,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function () {
-            _this255.direction = _this255.getNextSortDirection(_this255.direction);
+            _this256.direction = _this256.getNextSortDirection(_this256.direction);
 
-            _this255._sort.sort(_this255.id, _this255.direction, _this255._config.transforms.sort);
+            _this256._sort.sort(_this256.id, _this256.direction, _this256._config.transforms.sort);
 
-            _this255.changeDetectorRef.markForCheck();
+            _this256.changeDetectorRef.markForCheck();
           }, 300);
         }
         /**
@@ -62838,7 +62943,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "filterData",
         value: function filterData(filter) {
-          var _this256 = this;
+          var _this257 = this;
 
           /** @type {?} */
           var actualFilter = filter;
@@ -62876,9 +62981,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               actualFilter = undefined;
             }
 
-            _this256._sort.filter(_this256.id, actualFilter, _this256.config.transforms.filter);
+            _this257._sort.filter(_this257.id, actualFilter, _this257.config.transforms.filter);
 
-            _this256.changeDetectorRef.markForCheck();
+            _this257.changeDetectorRef.markForCheck();
           }, 300);
         }
         /**
@@ -63068,7 +63173,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
        * @param {?} state
        */
       function NovoSimpleTablePagination(changeDetectorRef, labels, state) {
-        var _this257 = this;
+        var _this258 = this;
 
         _classCallCheck(this, NovoSimpleTablePagination);
 
@@ -63088,9 +63193,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           */
           function (clear) {
             if (clear) {
-              _this257.page = 0;
+              _this258.page = 0;
 
-              _this257.changeDetectorRef.markForCheck();
+              _this258.changeDetectorRef.markForCheck();
             }
           });
         }
@@ -63874,7 +63979,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "show",
         value: function show() {
-          var _this258 = this;
+          var _this259 = this;
 
           if (this.visible) {
             return;
@@ -63918,7 +64023,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             * @return {?}
             */
             function () {
-              return _this258.hide();
+              return _this259.hide();
             });
 
             if (this.popoverDismissTimeout > 0) {
@@ -63927,7 +64032,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               * @return {?}
               */
               function () {
-                return _this258.hide();
+                return _this259.hide();
               }, this.popoverDismissTimeout);
             }
           } else {
@@ -63954,7 +64059,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             * @return {?}
             */
             function () {
-              return _this258.hide();
+              return _this259.hide();
             });
 
             if (this.popoverDismissTimeout > 0) {
@@ -63963,7 +64068,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               * @return {?}
               */
               function () {
-                return _this258.hide();
+                return _this259.hide();
               }, this.popoverDismissTimeout);
             }
 
@@ -64306,7 +64411,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "currentLocationSelected",
         value: function currentLocationSelected() {
-          var _this259 = this;
+          var _this260 = this;
 
           if (Object(_angular_common__WEBPACK_IMPORTED_MODULE_1__["isPlatformBrowser"])(this.platformId)) {
             this.gettingCurrentLocationFlag = true;
@@ -64319,9 +64424,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             */
             function (result) {
               if (!result) {
-                _this259.gettingCurrentLocationFlag = false;
+                _this260.gettingCurrentLocationFlag = false;
               } else {
-                _this259.getCurrentLocationInfo(result);
+                _this260.getCurrentLocationInfo(result);
               }
             });
           }
@@ -64425,7 +64530,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "getListQuery",
         value: function getListQuery(value) {
-          var _this260 = this;
+          var _this261 = this;
 
           this.recentDropdownOpen = false;
 
@@ -64448,7 +64553,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             * @return {?}
             */
             function (result) {
-              _this260.updateListItem(result);
+              _this261.updateListItem(result);
             });
           } else {
             this._googlePlacesService.getPredictions(this.settings.geoPredictionServerUrl, value).then(
@@ -64457,9 +64562,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             * @return {?}
             */
             function (result) {
-              result = _this260.extractServerList(_this260.settings.serverResponseListHierarchy, result);
+              result = _this261.extractServerList(_this261.settings.serverResponseListHierarchy, result);
 
-              _this260.updateListItem(result);
+              _this261.updateListItem(result);
             });
           }
         } // function to extratc custom data which is send by the server.
@@ -64519,7 +64624,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "showRecentSearch",
         value: function showRecentSearch() {
-          var _this261 = this;
+          var _this262 = this;
 
           this.recentDropdownOpen = true;
           this.dropdownOpen = true;
@@ -64531,9 +64636,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           */
           function (result) {
             if (result) {
-              _this261.queryItems = result;
+              _this262.queryItems = result;
             } else {
-              _this261.queryItems = [];
+              _this262.queryItems = [];
             }
           });
         } // //function to navigate through list when up and down keyboard key is pressed;
@@ -64567,7 +64672,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "getCurrentLocationInfo",
         value: function getCurrentLocationInfo(latlng) {
-          var _this262 = this;
+          var _this263 = this;
 
           if (this.settings.useGoogleGeoApi) {
             this._googlePlacesService.getGeoLatLngDetail(latlng).then(
@@ -64577,10 +64682,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             */
             function (result) {
               if (result) {
-                _this262.setRecentLocation(result);
+                _this263.setRecentLocation(result);
               }
 
-              _this262.gettingCurrentLocationFlag = false;
+              _this263.gettingCurrentLocationFlag = false;
             });
           } else {
             this._googlePlacesService.getLatLngDetail(this.settings.geoLatLangServiceUrl, latlng.lat, latlng.lng).then(
@@ -64590,12 +64695,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             */
             function (result) {
               if (result) {
-                result = _this262.extractServerList(_this262.settings.serverResponseatLangHierarchy, result);
+                result = _this263.extractServerList(_this263.settings.serverResponseatLangHierarchy, result);
 
-                _this262.setRecentLocation(result);
+                _this263.setRecentLocation(result);
               }
 
-              _this262.gettingCurrentLocationFlag = false;
+              _this263.gettingCurrentLocationFlag = false;
             });
           }
         } // function to retrive the location info based on goovle place id.
@@ -64609,7 +64714,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "getPlaceLocationInfo",
         value: function getPlaceLocationInfo(selectedData) {
-          var _this263 = this;
+          var _this264 = this;
 
           if (this.settings.useGoogleGeoApi) {
             this._googlePlacesService.getGeoPlaceDetail(selectedData.place_id).then(
@@ -64619,7 +64724,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             */
             function (data) {
               if (data) {
-                _this263.setRecentLocation(data);
+                _this264.setRecentLocation(data);
               }
             });
           } else {
@@ -64630,9 +64735,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             */
             function (result) {
               if (result) {
-                result = _this263.extractServerList(_this263.settings.serverResponseDetailHierarchy, result);
+                result = _this264.extractServerList(_this264.settings.serverResponseDetailHierarchy, result);
 
-                _this263.setRecentLocation(result);
+                _this264.setRecentLocation(result);
               }
             });
           }
@@ -64675,7 +64780,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "getRecentLocations",
         value: function getRecentLocations() {
-          var _this264 = this;
+          var _this265 = this;
 
           this._googlePlacesService.getRecentList(this.settings.recentStorageName).then(
           /**
@@ -64683,7 +64788,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (data) {
-            _this264.recentSearchData = data && data.length ? data : [];
+            _this265.recentSearchData = data && data.length ? data : [];
           });
         }
       }]);
@@ -66602,7 +66707,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _createClass(ButtonLoadingExample, [{
         key: "fakeRequest",
         value: function fakeRequest() {
-          var _this265 = this;
+          var _this266 = this;
 
           this.loading = true;
           this.loadingButtonText = this.loading ? 'Removing... ' : 'Delete';
@@ -66611,8 +66716,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function () {
-            _this265.loading = false;
-            _this265.loadingButtonText = _this265.loading ? 'Removing... ' : 'Delete';
+            _this266.loading = false;
+            _this266.loadingButtonText = _this266.loading ? 'Removing... ' : 'Delete';
           }, 5000);
         }
       }]);
@@ -67532,7 +67637,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "configureColumns",
         value: function configureColumns() {
-          var _this266 = this;
+          var _this267 = this;
 
           this.modalService.open(ConfigureColumnsModal, {
             columns: this.sharedColumns
@@ -67552,7 +67657,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               function (column) {
                 return column.enabled;
               });
-              _this266.sharedDisplayColumns = ['selection', 'expand'].concat(_toConsumableArray(enabledColumns.map(
+              _this267.sharedDisplayColumns = ['selection', 'expand'].concat(_toConsumableArray(enabledColumns.map(
               /**
               * @param {?} column
               * @return {?}
@@ -67561,7 +67666,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                 return column.id;
               })));
 
-              _this266.ref.markForCheck();
+              _this267.ref.markForCheck();
             }
           });
         }
@@ -67613,19 +67718,19 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var RemoteMockDataService = /*#__PURE__*/function (_novo_elements__WEBPA) {
       _inherits(RemoteMockDataService, _novo_elements__WEBPA);
 
-      var _super75 = _createSuper(RemoteMockDataService);
+      var _super76 = _createSuper(RemoteMockDataService);
 
       /**
        * @param {?} data
        */
       function RemoteMockDataService(data) {
-        var _this267;
+        var _this268;
 
         _classCallCheck(this, RemoteMockDataService);
 
-        _this267 = _super75.call(this);
-        _this267.data = data;
-        return _this267;
+        _this268 = _super76.call(this);
+        _this268.data = data;
+        return _this268;
       }
       /**
        * @param {?} sort
@@ -68318,7 +68423,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "configureColumns",
         value: function configureColumns() {
-          var _this268 = this;
+          var _this269 = this;
 
           this.modalService.open(ConfigureColumnsModal, {
             columns: this.sharedColumns
@@ -68338,7 +68443,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               function (column) {
                 return column.enabled;
               });
-              _this268.sharedDisplayColumns = ['selection', 'expand'].concat(_toConsumableArray(enabledColumns.map(
+              _this269.sharedDisplayColumns = ['selection', 'expand'].concat(_toConsumableArray(enabledColumns.map(
               /**
               * @param {?} column
               * @return {?}
@@ -68347,7 +68452,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                 return column.id;
               })));
 
-              _this268.ref.markForCheck();
+              _this269.ref.markForCheck();
             }
           });
         }
@@ -68855,7 +68960,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "configureColumns",
         value: function configureColumns() {
-          var _this269 = this;
+          var _this270 = this;
 
           this.modalService.open(ConfigureColumnsModal, {
             columns: this.sharedColumns
@@ -68875,7 +68980,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               function (column) {
                 return column.enabled;
               });
-              _this269.sharedDisplayColumns = ['selection', 'expand'].concat(_toConsumableArray(enabledColumns.map(
+              _this270.sharedDisplayColumns = ['selection', 'expand'].concat(_toConsumableArray(enabledColumns.map(
               /**
               * @param {?} column
               * @return {?}
@@ -68884,7 +68989,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                 return column.id;
               })));
 
-              _this269.ref.markForCheck();
+              _this270.ref.markForCheck();
             }
           });
         }
@@ -69409,12 +69514,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var CustomQuickNoteResults = /*#__PURE__*/function (_novo_elements__WEBPA2) {
       _inherits(CustomQuickNoteResults, _novo_elements__WEBPA2);
 
-      var _super76 = _createSuper(CustomQuickNoteResults);
+      var _super77 = _createSuper(CustomQuickNoteResults);
 
       function CustomQuickNoteResults() {
         _classCallCheck(this, CustomQuickNoteResults);
 
-        return _super76.apply(this, arguments);
+        return _super77.apply(this, arguments);
       }
 
       return CustomQuickNoteResults;
@@ -70093,7 +70198,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var TabbedGroupPickerBigGroupsExample = /*#__PURE__*/function () {
       function TabbedGroupPickerBigGroupsExample() {
-        var _this270 = this;
+        var _this271 = this;
 
         _classCallCheck(this, TabbedGroupPickerBigGroupsExample);
 
@@ -70209,7 +70314,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               * @return {?}
               */
               function (child) {
-                return parent % child === 0 && _this270.isPrime(child);
+                return parent % child === 0 && _this271.isPrime(child);
               }).map(
               /**
               * @param {?} child
@@ -70368,7 +70473,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var TabbedGroupPickerGroupsExample = /*#__PURE__*/function () {
       function TabbedGroupPickerGroupsExample() {
-        var _this271 = this;
+        var _this272 = this;
 
         _classCallCheck(this, TabbedGroupPickerGroupsExample);
 
@@ -70397,7 +70502,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         */
         function () {
           /** @type {?} */
-          var animals = _this271.getAnimals();
+          var animals = _this272.getAnimals();
           /** @type {?} */
 
 
@@ -70693,12 +70798,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var ActionsCellExample = /*#__PURE__*/function (_novo_elements__WEBPA3) {
       _inherits(ActionsCellExample, _novo_elements__WEBPA3);
 
-      var _super77 = _createSuper(ActionsCellExample);
+      var _super78 = _createSuper(ActionsCellExample);
 
       function ActionsCellExample() {
         _classCallCheck(this, ActionsCellExample);
 
-        return _super77.call(this);
+        return _super78.call(this);
       }
       /**
        * @param {?} data
@@ -72192,12 +72297,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var ExtraDetails = /*#__PURE__*/function (_novo_elements__WEBPA4) {
       _inherits(ExtraDetails, _novo_elements__WEBPA4);
 
-      var _super78 = _createSuper(ExtraDetails);
+      var _super79 = _createSuper(ExtraDetails);
 
       function ExtraDetails() {
         _classCallCheck(this, ExtraDetails);
 
-        return _super78.apply(this, arguments);
+        return _super79.apply(this, arguments);
       }
 
       return ExtraDetails;
@@ -72215,7 +72320,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      */
 
     var DetailsTableExample = function DetailsTableExample() {
-      var _this272 = this;
+      var _this273 = this;
 
       _classCallCheck(this, DetailsTableExample);
 
@@ -72233,8 +72338,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             * @return {?}
             */
             function onPageChange(event) {
-              _this272.configuration.config.paging.current = event.page;
-              _this272.configuration.config.paging.itemsPerPage = event.itemsPerPage;
+              _this273.configuration.config.paging.current = event.page;
+              _this273.configuration.config.paging.itemsPerPage = event.itemsPerPage;
             }
           },
           sorting: true,
@@ -72269,7 +72374,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
     var EditableTableExample = function EditableTableExample() {
-      var _this273 = this;
+      var _this274 = this;
 
       _classCallCheck(this, EditableTableExample);
 
@@ -72373,8 +72478,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             * @return {?}
             */
             function onPageChange(event) {
-              _this273.configuration.config.paging.current = event.page;
-              _this273.configuration.config.paging.itemsPerPage = event.itemsPerPage;
+              _this274.configuration.config.paging.current = event.page;
+              _this274.configuration.config.paging.itemsPerPage = event.itemsPerPage;
             }
           },
           filtering: true,
@@ -72412,7 +72517,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var SelectAllTableExample = /*#__PURE__*/function () {
       function SelectAllTableExample() {
-        var _this274 = this;
+        var _this275 = this;
 
         _classCallCheck(this, SelectAllTableExample);
 
@@ -72430,8 +72535,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               * @return {?}
               */
               function onPageChange(event) {
-                _this274.configuration.config.paging.current = event.page;
-                _this274.configuration.config.paging.itemsPerPage = event.itemsPerPage;
+                _this275.configuration.config.paging.current = event.page;
+                _this275.configuration.config.paging.itemsPerPage = event.itemsPerPage;
               }
             },
             sorting: true,
@@ -72491,7 +72596,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var TableExample = /*#__PURE__*/function () {
       function TableExample() {
-        var _this275 = this;
+        var _this276 = this;
 
         _classCallCheck(this, TableExample);
 
@@ -72509,8 +72614,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               * @return {?}
               */
               function onPageChange(event) {
-                _this275.configuration.config.paging.current = event.page;
-                _this275.configuration.config.paging.itemsPerPage = event.itemsPerPage;
+                _this276.configuration.config.paging.current = event.page;
+                _this276.configuration.config.paging.itemsPerPage = event.itemsPerPage;
               }
             },
             filtering: true,
@@ -72573,7 +72678,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
     var TotalFooterTableExample = function TotalFooterTableExample() {
-      var _this276 = this;
+      var _this277 = this;
 
       _classCallCheck(this, TotalFooterTableExample);
 
@@ -72641,8 +72746,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             * @return {?}
             */
             function onPageChange(event) {
-              _this276.configuration.config.paging.current = event.page;
-              _this276.configuration.config.paging.itemsPerPage = event.itemsPerPage;
+              _this277.configuration.config.paging.current = event.page;
+              _this277.configuration.config.paging.itemsPerPage = event.itemsPerPage;
             }
           },
           footers: [{
@@ -73635,17 +73740,17 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var ExtendedLabelService = /*#__PURE__*/function (_novo_elements__WEBPA5) {
       _inherits(ExtendedLabelService, _novo_elements__WEBPA5);
 
-      var _super79 = _createSuper(ExtendedLabelService);
+      var _super80 = _createSuper(ExtendedLabelService);
 
       function ExtendedLabelService() {
-        var _this277;
+        var _this278;
 
         _classCallCheck(this, ExtendedLabelService);
 
-        _this277 = _super79.apply(this, arguments);
-        _this277.dateFormat = 'dd/mm/yyyy';
-        _this277.dateFormatPlaceholder = 'DD/MM/YYYY';
-        return _this277;
+        _this278 = _super80.apply(this, arguments);
+        _this278.dateFormat = 'dd/mm/yyyy';
+        _this278.dateFormatPlaceholder = 'DD/MM/YYYY';
+        return _this278;
       }
 
       return ExtendedLabelService;
@@ -75022,7 +75127,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
        * @param {?} formUtils
        */
       function AddressControlExample(formUtils) {
-        var _this278 = this;
+        var _this279 = this;
 
         _classCallCheck(this, AddressControlExample);
 
@@ -75117,7 +75222,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                 * @return {?}
                 */
                 function options(query, countryID) {
-                  return Promise.resolve(_this278.getStateOptions(query, countryID));
+                  return Promise.resolve(_this279.getStateOptions(query, countryID));
                 },
                 getLabels:
                 /**
@@ -75125,7 +75230,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                 * @return {?}
                 */
                 function getLabels(value) {
-                  return Promise.resolve(_this278.getStateLabel(value));
+                  return Promise.resolve(_this279.getStateLabel(value));
                 }
               }
             },
@@ -75140,7 +75245,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                 * @return {?}
                 */
                 function options(query) {
-                  return Promise.resolve(_this278.getCountryOptions(query));
+                  return Promise.resolve(_this279.getCountryOptions(query));
                 },
                 getLabels:
                 /**
@@ -77524,7 +77629,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _createClass(UpdatingFormExample, [{
         key: "toggleEnabled",
         value: function toggleEnabled() {
-          var _this279 = this;
+          var _this280 = this;
 
           this.disabled = !this.disabled;
           Object.keys(this.updatingForm.controls).forEach(
@@ -77533,10 +77638,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (key) {
-            if (_this279.disabled) {
-              _this279.updatingForm.controls[key].enable();
+            if (_this280.disabled) {
+              _this280.updatingForm.controls[key].enable();
             } else {
-              _this279.updatingForm.controls[key].disable();
+              _this280.updatingForm.controls[key].disable();
             }
           });
         }
@@ -77547,7 +77652,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "toggleRequired",
         value: function toggleRequired() {
-          var _this280 = this;
+          var _this281 = this;
 
           this.required = !this.required;
           Object.keys(this.updatingForm.controls).forEach(
@@ -77556,7 +77661,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (key) {
-            _this280.updatingForm.controls[key].setRequired(_this280.required);
+            _this281.updatingForm.controls[key].setRequired(_this281.required);
           });
         }
         /**
@@ -77566,7 +77671,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "markAsInvalid",
         value: function markAsInvalid() {
-          var _this281 = this;
+          var _this282 = this;
 
           Object.keys(this.updatingForm.controls).forEach(
           /**
@@ -77574,7 +77679,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (key) {
-            _this281.updatingForm.controls[key].markAsInvalid('Custom Error!');
+            _this282.updatingForm.controls[key].markAsInvalid('Custom Error!');
           });
         }
       }]);
@@ -78021,12 +78126,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var CustomPickerResults = /*#__PURE__*/function (_novo_elements__WEBPA6) {
       _inherits(CustomPickerResults, _novo_elements__WEBPA6);
 
-      var _super80 = _createSuper(CustomPickerResults);
+      var _super81 = _createSuper(CustomPickerResults);
 
       function CustomPickerResults() {
         _classCallCheck(this, CustomPickerResults);
 
-        return _super80.apply(this, arguments);
+        return _super81.apply(this, arguments);
       }
 
       return CustomPickerResults;
@@ -81058,7 +81163,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _createClass(RecordHeaderExample, [{
         key: "refresh",
         value: function refresh() {
-          var _this282 = this;
+          var _this283 = this;
 
           this.values = undefined;
           this.tabs = undefined;
@@ -81068,7 +81173,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function () {
-            _this282.values = [{
+            _this283.values = [{
               label: 'Status',
               data: 'Open'
             }, {
@@ -81078,8 +81183,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               label: 'Address',
               data: 'Boston, MA'
             }];
-            _this282.tabs = ['Overview', 'Edit', 'Activity'];
-            _this282.record = {
+            _this283.tabs = ['Overview', 'Edit', 'Activity'];
+            _this283.record = {
               id: 101,
               name: 'Acme Corporation, LLC'
             };
@@ -81151,7 +81256,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var DateTranslationsExample = /*#__PURE__*/function () {
       function DateTranslationsExample() {
-        var _this283 = this;
+        var _this284 = this;
 
         _classCallCheck(this, DateTranslationsExample);
 
@@ -81190,7 +81295,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         * @return {?}
         */
         function (locale) {
-          _this283.currentLocale = locale;
+          _this284.currentLocale = locale;
         }); // Use en-US
 
         this.changeLanguage('en-US');
@@ -81252,7 +81357,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var NumberTranslationsExample = /*#__PURE__*/function () {
       function NumberTranslationsExample() {
-        var _this284 = this;
+        var _this285 = this;
 
         _classCallCheck(this, NumberTranslationsExample);
 
@@ -81282,7 +81387,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         * @return {?}
         */
         function (locale) {
-          _this284.currentLocale = locale;
+          _this285.currentLocale = locale;
         }); // Use en-US
 
         this.changeLanguage('en-US');
@@ -81332,7 +81437,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var PluralTranslationsExample = /*#__PURE__*/function () {
       function PluralTranslationsExample() {
-        var _this285 = this;
+        var _this286 = this;
 
         _classCallCheck(this, PluralTranslationsExample);
 
@@ -81362,7 +81467,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         * @return {?}
         */
         function (locale) {
-          _this285.currentLocale = locale;
+          _this286.currentLocale = locale;
         }); // Use en-US
 
         this.changeLanguage('en-US');
@@ -81412,7 +81517,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var SimpleTranslationsExample = /*#__PURE__*/function () {
       function SimpleTranslationsExample() {
-        var _this286 = this;
+        var _this287 = this;
 
         _classCallCheck(this, SimpleTranslationsExample);
 
@@ -81441,7 +81546,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         * @return {?}
         */
         function (locale) {
-          _this286.currentLocale = locale;
+          _this287.currentLocale = locale;
         }); // Use en-US
 
         this.changeLanguage('en-US');
@@ -81491,7 +81596,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var TranslationsVariablesExample = /*#__PURE__*/function () {
       function TranslationsVariablesExample() {
-        var _this287 = this;
+        var _this288 = this;
 
         _classCallCheck(this, TranslationsVariablesExample);
 
@@ -81521,7 +81626,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         * @return {?}
         */
         function (locale) {
-          _this287.currentLocale = locale;
+          _this288.currentLocale = locale;
         }); // Use en-US
 
         this.changeLanguage('en-US');
@@ -82787,7 +82892,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @param {?} formUtils
      */
     function FiTooltipExample(formUtils) {
-      var _this288 = this;
+      var _this289 = this;
 
       _classCallCheck(this, FiTooltipExample);
 
@@ -82817,8 +82922,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       function tooltipUpdateFunction(API) {
         console.log('[FieldInteractionDemo] - tooltipUpdateFunction'); // tslint:disable-line
 
-        API.getControl(_this288.controls.tooltipControl.key).tooltipSize = API.getValue(_this288.controls.tooltipSizeControl.key);
-        API.getControl(_this288.controls.tooltipControl.key).tooltipPreline = API.getValue(_this288.controls.tooltipPrelineControl.key);
+        API.getControl(_this289.controls.tooltipControl.key).tooltipSize = API.getValue(_this289.controls.tooltipSizeControl.key);
+        API.getControl(_this289.controls.tooltipControl.key).tooltipPreline = API.getValue(_this289.controls.tooltipPrelineControl.key);
       }; // Tooltip Field Interactions
 
 
@@ -85830,7 +85935,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "_loadScript",
         value: function _loadScript() {
-          var _this289 = this;
+          var _this290 = this;
 
           /** @type {?} */
           var script = document.createElement('script');
@@ -85842,9 +85947,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function () {
-            hljs.configure(_this289.options.config);
+            hljs.configure(_this290.options.config);
 
-            _this289._isReady$.next(true);
+            _this290._isReady$.next(true);
           };
 
           script.src = "".concat(this.options.path, "/highlight.pack.js");
@@ -85920,7 +86025,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _createClass(CodeSnippetComponent, [{
         key: "ngOnInit",
         value: function ngOnInit() {
-          var _this290 = this;
+          var _this291 = this;
 
           this.hljs.isReady.subscribe(
           /**
@@ -85928,18 +86033,18 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           */
           function () {
             /** @type {?} */
-            var code = decodeURIComponent(EXAMPLE_COMPONENTS[_this290.example].tsSource);
+            var code = decodeURIComponent(EXAMPLE_COMPONENTS[_this291.example].tsSource);
             /** @type {?} */
 
-            var markup = decodeURIComponent(EXAMPLE_COMPONENTS[_this290.example].htmlSource);
+            var markup = decodeURIComponent(EXAMPLE_COMPONENTS[_this291.example].htmlSource);
             /** @type {?} */
 
-            var style = decodeURIComponent(EXAMPLE_COMPONENTS[_this290.example].cssSource);
-            _this290.highlightTS = _this290.sanitizer.bypassSecurityTrustHtml(_this290.hljs.highlightAuto(code, ['typescript']).value.trim());
-            _this290.highlightHTML = _this290.sanitizer.bypassSecurityTrustHtml(_this290.hljs.highlightAuto(markup, ['html']).value.trim());
-            _this290.highlightCSS = _this290.sanitizer.bypassSecurityTrustHtml(_this290.hljs.highlightAuto(style, ['css']).value.trim());
+            var style = decodeURIComponent(EXAMPLE_COMPONENTS[_this291.example].cssSource);
+            _this291.highlightTS = _this291.sanitizer.bypassSecurityTrustHtml(_this291.hljs.highlightAuto(code, ['typescript']).value.trim());
+            _this291.highlightHTML = _this291.sanitizer.bypassSecurityTrustHtml(_this291.hljs.highlightAuto(markup, ['html']).value.trim());
+            _this291.highlightCSS = _this291.sanitizer.bypassSecurityTrustHtml(_this291.hljs.highlightAuto(style, ['css']).value.trim());
 
-            _this290.cdr.markForCheck();
+            _this291.cdr.markForCheck();
           });
         }
       }]);
@@ -86143,7 +86248,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _createClass(StackblitzWriter, [{
         key: "constructStackblitzForm",
         value: function constructStackblitzForm(data) {
-          var _this291 = this;
+          var _this292 = this;
 
           /** @type {?} */
           var indexFile = "app%2F".concat(data.indexFilename, ".ts");
@@ -86158,7 +86263,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (tag, i) {
-            return _this291._appendFormInput(form, "tags[".concat(i, "]"), tag);
+            return _this292._appendFormInput(form, "tags[".concat(i, "]"), tag);
           });
 
           this._appendFormInput(form, 'private', 'true');
@@ -86180,15 +86285,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             * @return {?}
             */
             function (file) {
-              return _this291._readFile(form, data, file, TEMPLATE_PATH);
+              return _this292._readFile(form, data, file, TEMPLATE_PATH);
             });
             /** @type {?} */
 
             var exampleContents = [];
-            exampleContents.push(Promise.resolve(_this291._addFileToForm(form, data, decodeURIComponent(data.source.tsSource), "app/".concat(data.selectorName, ".ts"), TEMPLATE_PATH)));
-            exampleContents.push(Promise.resolve(_this291._addFileToForm(form, data, decodeURIComponent(data.source.htmlSource), "app/".concat(data.selectorName, ".html"), TEMPLATE_PATH)));
-            exampleContents.push(Promise.resolve(_this291._addFileToForm(form, data, decodeURIComponent(data.source.cssSource), "app/".concat(data.selectorName, ".css"), TEMPLATE_PATH)));
-            exampleContents.push(Promise.resolve(_this291._addFileToForm(form, data, JSON.stringify({
+            exampleContents.push(Promise.resolve(_this292._addFileToForm(form, data, decodeURIComponent(data.source.tsSource), "app/".concat(data.selectorName, ".ts"), TEMPLATE_PATH)));
+            exampleContents.push(Promise.resolve(_this292._addFileToForm(form, data, decodeURIComponent(data.source.htmlSource), "app/".concat(data.selectorName, ".html"), TEMPLATE_PATH)));
+            exampleContents.push(Promise.resolve(_this292._addFileToForm(form, data, decodeURIComponent(data.source.cssSource), "app/".concat(data.selectorName, ".css"), TEMPLATE_PATH)));
+            exampleContents.push(Promise.resolve(_this292._addFileToForm(form, data, JSON.stringify({
               apps: [{
                 styles: ['styles.scss']
               }]
@@ -86253,7 +86358,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "_readFile",
         value: function _readFile(form, data, filename, path) {
-          var _this292 = this;
+          var _this293 = this;
 
           var prependApp = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : true;
 
@@ -86265,7 +86370,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (response) {
-            return _this292._addFileToForm(form, data, response, filename, path, prependApp);
+            return _this293._addFileToForm(form, data, response, filename, path, prependApp);
           },
           /**
           * @param {?} error
@@ -86424,7 +86529,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "example",
         set: function set(example) {
-          var _this293 = this;
+          var _this294 = this;
 
           /** @type {?} */
           var exampleData = new ExampleData(example);
@@ -86436,8 +86541,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             * @return {?}
             */
             function (stackblitzForm) {
-              _this293.stackblitzForm = stackblitzForm;
-              _this293.isDisabled = false;
+              _this294.stackblitzForm = stackblitzForm;
+              _this294.isDisabled = false;
             });
           } else {
             this.isDisabled = true;

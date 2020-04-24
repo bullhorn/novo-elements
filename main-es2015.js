@@ -1268,7 +1268,7 @@ ChomskyModule.decorators = [
 /*!******************************************************!*\
   !*** ./dist/novo-elements/fesm2015/novo-elements.js ***!
   \******************************************************/
-/*! exports provided: AceEditorControl, ActivityTableDataSource, ActivityTableRenderers, AddressControl, AppBridge, AppBridgeHandler, AppBridgeService, ArrayCollection, BaseControl, BasePickerResults, BaseRenderer, COUNTRIES, CalendarEventResponse, CheckListControl, CheckboxControl, ChecklistPickerResults, CollectionEvent, ComponentUtils, ControlFactory, CustomControl, DateCell, DateControl, DateTimeControl, DecodeURIPipe, Deferred, DevAppBridge, DevAppBridgeService, DistributionListPickerResults, EditorControl, EntityPickerResult, EntityPickerResults, FieldInteractionApi, FileControl, FormUtils, FormValidators, GooglePlacesService, GroupByPipe, GroupedControl, GroupedMultiPickerResults, Helpers, KeyCodes, NOVO_VALUE_THEME, NOVO_VALUE_TYPE, NativeSelectControl, NovoAceEditorModule, NovoActivityTable, NovoActivityTableActions, NovoActivityTableCustomFilter, NovoActivityTableCustomHeader, NovoActivityTableEmptyMessage, NovoActivityTableNoResultsMessage, NovoActivityTableState, NovoButtonModule, NovoCalendarDateChangeElement, NovoCalendarModule, NovoCardModule, NovoCategoryDropdownModule, NovoCheckListElement, NovoChipsModule, NovoCommonModule, NovoControlGroup, NovoDataTable, NovoDataTableFilterUtils, NovoDataTableModule, NovoDatePickerElement, NovoDatePickerModule, NovoDateTimePickerModule, NovoDragulaModule, NovoDragulaService, NovoDropdownCell, NovoDropdownElement, NovoDropdownModule, NovoDynamicFormElement, NovoElementProviders, NovoElementsModule, NovoExpansionModule, NovoFile, NovoFormControl, NovoFormExtrasModule, NovoFormGroup, NovoFormModule, NovoHeaderModule, NovoHorizontalStepper, NovoIconModule, NovoLabelService, NovoListElement, NovoListModule, NovoLoadingModule, NovoModalModule, NovoModalParams, NovoModalRef, NovoModalService, NovoMultiPickerModule, NovoNovoCKEditorModule, NovoPickerModule, NovoPipesModule, NovoQuickNoteModule, NovoRadioModule, NovoSearchBoxModule, NovoSelectModule, NovoSelection, NovoSimpleActionCell, NovoSimpleCell, NovoSimpleCellDef, NovoSimpleCellHeader, NovoSimpleCheckboxCell, NovoSimpleCheckboxHeaderCell, NovoSimpleColumnDef, NovoSimpleEmptyHeaderCell, NovoSimpleFilterFocus, NovoSimpleHeaderCell, NovoSimpleHeaderCellDef, NovoSimpleHeaderRow, NovoSimpleHeaderRowDef, NovoSimpleRow, NovoSimpleRowDef, NovoSimpleTableModule, NovoSimpleTablePagination, NovoSliderModule, NovoSortFilter, NovoStep, NovoStepper, NovoStepperModule, NovoSwitchModule, NovoTabModule, NovoTabbedGroupPickerModule, NovoTable, NovoTableElement, NovoTableExtrasModule, NovoTableMode, NovoTableModule, NovoTemplate, NovoTemplateService, NovoTilesModule, NovoTimePickerModule, NovoTipWellModule, NovoToastModule, NovoToastService, NovoTooltipModule, NovoValueModule, NovoVerticalStepper, OptionsService, OutsideClick, PagedArrayCollection, PercentageCell, PickerControl, PickerResults, PluralPipe, QuickNoteControl, QuickNoteResults, RadioControl, ReadOnlyControl, RemoteActivityTableService, RemoteDataTableService, RenderPipe, Security, SelectControl, SkillsSpecialtyPickerResults, StaticActivityTableService, StaticDataTableService, TablePickerControl, TextAreaControl, TextBoxControl, TilesControl, TimeControl, UnlessModule, findByCountryCode, findByCountryId, findByCountryName, getCountries, getDayView, getDayViewHourGrid, getMonthView, getStateObjects, getStates, getWeekView, getWeekViewEventOffset, getWeekViewHeader, notify, ɵa, ɵb, ɵba, ɵbb, ɵbc, ɵbd, ɵbe, ɵbf, ɵbg, ɵbh, ɵbi, ɵbj, ɵbk, ɵbl, ɵbm, ɵbn, ɵbo, ɵbp, ɵbq, ɵbr, ɵbs, ɵbt, ɵbu, ɵbv, ɵbw, ɵbx, ɵby, ɵbz, ɵc, ɵca, ɵcb, ɵcc, ɵcd, ɵce, ɵcf, ɵcg, ɵch, ɵci, ɵcj, ɵck, ɵcl, ɵcm, ɵcn, ɵco, ɵcp, ɵcq, ɵcr, ɵcs, ɵct, ɵcu, ɵcv, ɵcw, ɵcx, ɵcy, ɵcz, ɵd, ɵda, ɵdb, ɵdc, ɵdd, ɵde, ɵdf, ɵdg, ɵdh, ɵdi, ɵdj, ɵdk, ɵdl, ɵdm, ɵdn, ɵdo, ɵdp, ɵdq, ɵdr, ɵds, ɵdt, ɵdu, ɵdv, ɵdw, ɵdx, ɵdy, ɵdz, ɵe, ɵea, ɵeb, ɵec, ɵed, ɵee, ɵef, ɵeg, ɵeh, ɵei, ɵej, ɵek, ɵel, ɵem, ɵen, ɵeo, ɵep, ɵeq, ɵer, ɵes, ɵet, ɵeu, ɵev, ɵew, ɵex, ɵey, ɵez, ɵf, ɵfa, ɵfb, ɵfc, ɵfd, ɵfe, ɵff, ɵfg, ɵfh, ɵfi, ɵfj, ɵfk, ɵfl, ɵfm, ɵfn, ɵfo, ɵfp, ɵfq, ɵg, ɵh, ɵi, ɵj, ɵk, ɵl, ɵm, ɵn, ɵo, ɵp, ɵq, ɵr, ɵs, ɵt, ɵu, ɵv, ɵw, ɵx, ɵy, ɵz */
+/*! exports provided: AceEditorControl, ActivityTableDataSource, ActivityTableRenderers, AddressControl, AppBridge, AppBridgeHandler, AppBridgeService, ArrayCollection, BaseControl, BasePickerResults, BaseRenderer, COUNTRIES, CalendarEventResponse, CheckListControl, CheckboxControl, ChecklistPickerResults, CollectionEvent, ComponentUtils, ControlFactory, CustomControl, DateCell, DateControl, DateTimeControl, DecodeURIPipe, Deferred, DevAppBridge, DevAppBridgeService, DistributionListPickerResults, EditorControl, EntityPickerResult, EntityPickerResults, FieldInteractionApi, FileControl, FormUtils, FormValidators, GooglePlacesService, GroupByPipe, GroupedControl, GroupedMultiPickerResults, Helpers, KeyCodes, NOVO_VALUE_THEME, NOVO_VALUE_TYPE, NativeSelectControl, NovoAceEditorModule, NovoActivityTable, NovoActivityTableActions, NovoActivityTableCustomFilter, NovoActivityTableCustomHeader, NovoActivityTableEmptyMessage, NovoActivityTableNoResultsMessage, NovoActivityTableState, NovoButtonModule, NovoCalendarDateChangeElement, NovoCalendarModule, NovoCardModule, NovoCategoryDropdownModule, NovoCheckListElement, NovoChipsModule, NovoCommonModule, NovoControlGroup, NovoDataTable, NovoDataTableFilterUtils, NovoDataTableModule, NovoDatePickerElement, NovoDatePickerModule, NovoDateTimePickerModule, NovoDragulaModule, NovoDragulaService, NovoDropdownCell, NovoDropdownElement, NovoDropdownModule, NovoDynamicFormElement, NovoElementProviders, NovoElementsModule, NovoExpansionModule, NovoFile, NovoFormControl, NovoFormExtrasModule, NovoFormGroup, NovoFormModule, NovoHeaderModule, NovoHorizontalStepper, NovoIconModule, NovoLabelService, NovoListElement, NovoListModule, NovoLoadingModule, NovoModalModule, NovoModalParams, NovoModalRef, NovoModalService, NovoMultiPickerModule, NovoNovoCKEditorModule, NovoPickerModule, NovoPipesModule, NovoQuickNoteModule, NovoRadioModule, NovoSearchBoxModule, NovoSelectModule, NovoSelection, NovoSimpleActionCell, NovoSimpleCell, NovoSimpleCellDef, NovoSimpleCellHeader, NovoSimpleCheckboxCell, NovoSimpleCheckboxHeaderCell, NovoSimpleColumnDef, NovoSimpleEmptyHeaderCell, NovoSimpleFilterFocus, NovoSimpleHeaderCell, NovoSimpleHeaderCellDef, NovoSimpleHeaderRow, NovoSimpleHeaderRowDef, NovoSimpleRow, NovoSimpleRowDef, NovoSimpleTableModule, NovoSimpleTablePagination, NovoSliderModule, NovoSortFilter, NovoStep, NovoStepper, NovoStepperModule, NovoSwitchModule, NovoTabModule, NovoTabbedGroupPickerModule, NovoTable, NovoTableElement, NovoTableExtrasModule, NovoTableMode, NovoTableModule, NovoTemplate, NovoTemplateService, NovoTilesModule, NovoTimePickerModule, NovoTipWellModule, NovoToastModule, NovoToastService, NovoTooltipModule, NovoValueModule, NovoVerticalStepper, OptionsService, OutsideClick, PagedArrayCollection, PercentageCell, PickerControl, PickerResults, PluralPipe, QuickNoteControl, QuickNoteResults, RadioControl, ReadOnlyControl, RemoteActivityTableService, RemoteDataTableService, RenderPipe, Security, SelectControl, SkillsSpecialtyPickerResults, StaticActivityTableService, StaticDataTableService, TablePickerControl, TextAreaControl, TextBoxControl, TilesControl, TimeControl, UnlessModule, WorkersCompCodesPickerResults, findByCountryCode, findByCountryId, findByCountryName, getCountries, getDayView, getDayViewHourGrid, getMonthView, getStateObjects, getStates, getWeekView, getWeekViewEventOffset, getWeekViewHeader, notify, ɵa, ɵb, ɵba, ɵbb, ɵbc, ɵbd, ɵbe, ɵbf, ɵbg, ɵbh, ɵbi, ɵbj, ɵbk, ɵbl, ɵbm, ɵbn, ɵbo, ɵbp, ɵbq, ɵbr, ɵbs, ɵbt, ɵbu, ɵbv, ɵbw, ɵbx, ɵby, ɵbz, ɵc, ɵca, ɵcb, ɵcc, ɵcd, ɵce, ɵcf, ɵcg, ɵch, ɵci, ɵcj, ɵck, ɵcl, ɵcm, ɵcn, ɵco, ɵcp, ɵcq, ɵcr, ɵcs, ɵct, ɵcu, ɵcv, ɵcw, ɵcx, ɵcy, ɵcz, ɵd, ɵda, ɵdb, ɵdc, ɵdd, ɵde, ɵdf, ɵdg, ɵdh, ɵdi, ɵdj, ɵdk, ɵdl, ɵdm, ɵdn, ɵdo, ɵdp, ɵdq, ɵdr, ɵds, ɵdt, ɵdu, ɵdv, ɵdw, ɵdx, ɵdy, ɵdz, ɵe, ɵea, ɵeb, ɵec, ɵed, ɵee, ɵef, ɵeg, ɵeh, ɵei, ɵej, ɵek, ɵel, ɵem, ɵen, ɵeo, ɵep, ɵeq, ɵer, ɵes, ɵet, ɵeu, ɵev, ɵew, ɵex, ɵey, ɵez, ɵf, ɵfa, ɵfb, ɵfc, ɵfd, ɵfe, ɵff, ɵfg, ɵfh, ɵfi, ɵfj, ɵfk, ɵfl, ɵfm, ɵfn, ɵfo, ɵfp, ɵfq, ɵg, ɵh, ɵi, ɵj, ɵk, ɵl, ɵm, ɵn, ɵo, ɵp, ɵq, ɵr, ɵs, ɵt, ɵu, ɵv, ɵw, ɵx, ɵy, ɵz */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1439,6 +1439,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TilesControl", function() { return TilesControl; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TimeControl", function() { return TimeControl; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UnlessModule", function() { return UnlessModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "WorkersCompCodesPickerResults", function() { return WorkersCompCodesPickerResults; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "findByCountryCode", function() { return findByCountryCode; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "findByCountryId", function() { return findByCountryId; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "findByCountryName", function() { return findByCountryName; });
@@ -3655,6 +3656,7 @@ class NovoLabelService {
         this.move = 'Move';
         this.startDate = 'Start Date';
         this.endDate = 'End Date';
+        this.rate = 'Rate';
         this.more = 'more';
         this.clearAll = 'CLEAR ALL';
         this.clearAllNormalCase = 'Clear All';
@@ -12466,6 +12468,103 @@ if (false) {}
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: elements/picker/extras/workers-comp-codes-picker-results/WorkersCompCodesPickerResults.ts
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class WorkersCompCodesPickerResults extends BasePickerResults {
+    /**
+     * @param {?} element
+     * @param {?} sanitizer
+     * @param {?} labels
+     * @param {?} ref
+     */
+    constructor(element, sanitizer, labels, ref) {
+        super(element, ref);
+        this.sanitizer = sanitizer;
+        this.labels = labels;
+        this.active = true;
+        this.sanitizer = sanitizer;
+    }
+    /**
+     * @return {?}
+     */
+    get isHidden() {
+        return this.matches.length === 0;
+    }
+    /**
+     * @return {?}
+     */
+    getListElement() {
+        return this.element.nativeElement.querySelector('novo-list');
+    }
+    /**
+     * @param {?} compCode
+     * @param {?} name
+     * @return {?}
+     */
+    sanitizeHTML(compCode, name) {
+        return this.sanitizer.bypassSecurityTrustHtml(`${compCode} | ${name}`);
+    }
+}
+WorkersCompCodesPickerResults.decorators = [
+    { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"], args: [{
+                selector: 'workers-comp-codes-picker-results',
+                template: `
+    <section class="picker-loading" *ngIf="isLoading && !matches?.length">
+      <novo-loading theme="line"></novo-loading>
+    </section>
+    <novo-list direction="vertical" *ngIf="matches?.length > 0 && !hasError">
+      <novo-list-item
+        *ngFor="let match of matches"
+        (click)="selectMatch($event)"
+        [class.active]="match === activeMatch"
+        (mouseenter)="selectActive(match)"
+        [class.disabled]="preselected(match)"
+      >
+        <item-header>
+          <item-title>
+            <span [innerHtml]="sanitizeHTML(match?.data?.compensation?.code, match?.data?.compensation?.name)"></span>
+          </item-title>
+        </item-header>
+        <item-content direction="horizontal">
+          <p>
+            <span class="label">{{ labels.state }}: </span><span>{{ match?.data?.compensation?.state }}</span>
+          </p>
+          <p>
+            <span class="label">{{ labels.rate }}: </span><span>{{ labels.formatCurrency(match?.data?.rate) }}</span>
+          </p>
+        </item-content>
+        <item-content direction="horizontal">
+          <p>
+            <span class="label">{{ labels.startDate }}: </span
+            ><span>{{ labels.formatDateWithFormat(match?.data?.startDate, { year: 'numeric', month: 'numeric', day: 'numeric' }) }}</span>
+          </p>
+          <p>
+            <span class="label">{{ labels.endDate }}: </span
+            ><span>{{ labels.formatDateWithFormat(match?.data?.endDate, { year: 'numeric', month: 'numeric', day: 'numeric' }) }}</span>
+          </p>
+        </item-content>
+      </novo-list-item>
+      <novo-loading theme="line" *ngIf="isLoading && matches?.length > 0"></novo-loading>
+    </novo-list>
+  `
+            }] }
+];
+/** @nocollapse */
+WorkersCompCodesPickerResults.ctorParameters = () => [
+    { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ElementRef"] },
+    { type: _angular_platform_browser__WEBPACK_IMPORTED_MODULE_12__["DomSanitizer"] },
+    { type: NovoLabelService },
+    { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ChangeDetectorRef"] }
+];
+WorkersCompCodesPickerResults.propDecorators = {
+    active: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["HostBinding"], args: ['class.active',] }],
+    isHidden: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["HostBinding"], args: ['hidden',] }]
+};
+if (false) {}
+
+/**
+ * @fileoverview added by tsickle
  * Generated from: elements/picker/Picker.module.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
@@ -12482,6 +12581,7 @@ NovoPickerModule.decorators = [
                     ChecklistPickerResults,
                     GroupedMultiPickerResults,
                     DistributionListPickerResults,
+                    WorkersCompCodesPickerResults,
                     SkillsSpecialtyPickerResults,
                 ],
                 exports: [
@@ -12492,6 +12592,7 @@ NovoPickerModule.decorators = [
                     ChecklistPickerResults,
                     GroupedMultiPickerResults,
                     DistributionListPickerResults,
+                    WorkersCompCodesPickerResults,
                     SkillsSpecialtyPickerResults,
                 ],
                 entryComponents: [
@@ -12501,6 +12602,7 @@ NovoPickerModule.decorators = [
                     ChecklistPickerResults,
                     GroupedMultiPickerResults,
                     DistributionListPickerResults,
+                    WorkersCompCodesPickerResults,
                     SkillsSpecialtyPickerResults,
                 ],
             },] }
