@@ -39,6 +39,7 @@ export class NovoLabelService {
   move = 'Move';
   startDate = 'Start Date';
   endDate = 'End Date';
+  rate = 'Rate';
   more = 'more';
   clearAll = 'CLEAR ALL';
   clearAllNormalCase = 'Clear All';

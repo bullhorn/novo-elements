@@ -14,6 +14,7 @@ import { ChecklistPickerResults } from './extras/checklist-picker-results/Checkl
 import { GroupedMultiPickerResults } from './extras/grouped-multi-picker-results/GroupedMultiPickerResults';
 import { SkillsSpecialtyPickerResults } from './extras/skills-picker-results/SkillsSpecialtyPickerResults';
 import { DistributionListPickerResults } from './extras/distributionlist-picker-results/DistributionListPickerResults';
+import { WorkersCompCodesPickerResults } from './extras/workers-comp-codes-picker-results/WorkersCompCodesPickerResults';
 
 @NgModule({
   imports: [CommonModule, FormsModule, NovoLoadingModule, NovoListModule, NovoOverlayModule, NovoSwitchModule],
@@ -25,6 +26,7 @@ import { DistributionListPickerResults } from './extras/distributionlist-picker-
     ChecklistPickerResults,
     GroupedMultiPickerResults,
     DistributionListPickerResults,
+    WorkersCompCodesPickerResults,
     SkillsSpecialtyPickerResults,
   ],
   exports: [
@@ -35,6 +37,7 @@ import { DistributionListPickerResults } from './extras/distributionlist-picker-
     ChecklistPickerResults,
     GroupedMultiPickerResults,
     DistributionListPickerResults,
+    WorkersCompCodesPickerResults,
     SkillsSpecialtyPickerResults,
   ],
   entryComponents: [
@@ -44,6 +47,7 @@ import { DistributionListPickerResults } from './extras/distributionlist-picker-
     ChecklistPickerResults,
     GroupedMultiPickerResults,
     DistributionListPickerResults,
+    WorkersCompCodesPickerResults,
     SkillsSpecialtyPickerResults,
   ],
 })
