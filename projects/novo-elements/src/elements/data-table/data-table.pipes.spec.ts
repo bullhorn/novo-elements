@@ -1,5 +1,5 @@
 // APP
-import {DateTableDateRendererPipe, DateTableDateTimeRendererPipe, DateTableTimeRendererPipe} from './data-table.pipes';
+import { DateTableDateRendererPipe, DateTableDateTimeRendererPipe, DateTableTimeRendererPipe } from './data-table.pipes';
 
 class MockNovoLabelService {
   formatDateShort(val) {}
@@ -44,7 +44,7 @@ describe('Pipe: DateTableDateTimeRendererPipe', () => {
         label: 'Test',
         id: 'test',
         type: 'datetime',
-        format: 'anything'
+        format: 'anything',
       };
       // Act
       dateTimePipe.transform(testVal, testColumn);
@@ -90,7 +90,7 @@ describe('Pipe: DateTableDateTimeRendererPipe', () => {
         label: 'Test',
         id: 'test',
         type: 'datetime',
-        format: 'anything'
+        format: 'anything',
       };
       // Act
       datePipe.transform(testVal, testColumn);
@@ -136,7 +136,7 @@ describe('Pipe: DateTableDateTimeRendererPipe', () => {
         label: 'Test',
         id: 'test',
         type: 'datetime',
-        format: 'anything'
+        format: 'anything',
       };
       // Act
       timePipe.transform(testVal, testColumn);

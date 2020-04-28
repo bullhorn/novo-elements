@@ -136,7 +136,7 @@ export class NovoCKEditorElement implements OnDestroy, AfterViewInit, ControlVal
         this.debounceTimeout = setTimeout(() => {
           this.updateValue(value);
           this.debounceTimeout = null;
-        }, parseInt(this.debounce));
+        }, parseInt(this.debounce, 10));
       } else {
         this.updateValue(value);
       }

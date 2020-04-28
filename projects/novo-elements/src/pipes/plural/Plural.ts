@@ -11,7 +11,6 @@ const irregularSingles = {};
 
 /**
  * Title case a string.
- * @param str
  */
 function toTitleCase(str: string): string {
   return str.charAt(0).toUpperCase() + str.substr(1).toLowerCase();
