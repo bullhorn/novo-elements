@@ -14,10 +14,9 @@ import { NovoToastService, ToastOptions } from '../toast/ToastService';
 import { CustomHttp, ModifyPickerConfigArgs, OptionsFunction } from './FieldInteractionApiTypes';
 import { ControlConfirmModal, ControlPromptModal } from './FieldInteractionModals';
 import { NovoControlConfig } from './FormControls';
-import { IFieldInteractionEvent, NovoFieldset, ResultsTemplateType } from './FormInterfaces';
+import { IFieldInteractionEvent, NovoFieldset, ResultsTemplateType, NovoFormGroup } from './FormInterfaces';
 // APP
 import { NovoFormControl } from './NovoFormControl';
-import { NovoFormGroup } from 'novo-elements';
 
 class CustomHttpImpl implements CustomHttp {
   url: string;
