@@ -64,7 +64,7 @@ export class NovoRadioElement implements ControlValueAccessor {
 
   constructor(private ref: ChangeDetectorRef) { }
 
-  select(event) {
+  select(event: MouseEvent) {
     Helpers.swallowEvent(event);
     // Only change the checked state if this is a new radio, they are not toggle buttons
     if (!this.checked) {
