@@ -1,12 +1,12 @@
 // NG2
-import {ChangeDetectorRef, Component, ElementRef, NO_ERRORS_SCHEMA} from '@angular/core';
-import {TestBed, async, ComponentFixture} from '@angular/core/testing';
+import { ChangeDetectorRef, Component, ElementRef, NO_ERRORS_SCHEMA } from '@angular/core';
+import { TestBed, async, ComponentFixture } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 // App
 import { NovoAutoSize } from './Control';
 import { NovoControlElement } from './Control';
-import {FieldInteractionApi, NovoLabelService, NovoTemplateService} from '../..';
-import {DateFormatService} from '../../services/date-format/DateFormat';
+import { FieldInteractionApi, NovoLabelService, NovoTemplateService } from '../..';
+import { DateFormatService } from '../../services/date-format/DateFormat';
 
 @Component({
   selector: 'novo-auto-size-test-component',
@@ -78,7 +78,7 @@ describe('Test Localization', () => {
 @Component({
   template: `
     <div></div>
-  `
+  `,
 })
 class TestComponent {}
 describe('NovoControlElement', () => {
@@ -86,7 +86,7 @@ describe('NovoControlElement', () => {
   let fixture: ComponentFixture<NovoControlElement>;
   beforeEach(() => {
     const elementRefStub = {
-      nativeElement: { style: { height: {}, minHeight: {} }, scrollHeight: {} }
+      nativeElement: { style: { height: {}, minHeight: {} }, scrollHeight: {} },
     };
     const changeDetectorRefStub = { markForCheck: () => ({}) };
     const novoLabelServiceStub = { invalidIntegerInput: {} };
@@ -103,8 +103,8 @@ describe('NovoControlElement', () => {
         { provide: NovoLabelService, useValue: novoLabelServiceStub },
         { provide: DateFormatService, useValue: dateFormatServiceStub },
         { provide: FieldInteractionApi, useValue: fieldInteractionApiStub },
-        { provide: NovoTemplateService, useValue: novoTemplateServiceStub }
-      ]
+        { provide: NovoTemplateService, useValue: novoTemplateServiceStub },
+      ],
     });
     fixture = TestBed.createComponent(NovoControlElement);
     component = fixture.componentInstance;

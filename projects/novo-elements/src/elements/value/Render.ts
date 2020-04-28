@@ -141,16 +141,12 @@ export class RenderPipe implements PipeTransform {
   /**
    * Define the fields to set or retrieve for the given entity. Getter and Setter methods will automagically
    * be set up on the entity once the fields are defined.
-   * @name fields
-   * @memberOf Entity#
-   * @param value
    * @param args - fields can either be sent as a list of arguments or as an Array
    * @return text
    */
   render(value: any, args: any): any {
     let type: any = null;
     let text: any = value;
-    let rezonedTime: any;
 
     // Handle when we don't have meta, but passing an entity
     if (value && value._subtype && !args) {
@@ -357,7 +353,6 @@ export class RenderPipe implements PipeTransform {
 
   /**
    * Simple function concat a list of fields from a list of objects
-   * @name options
    * @param list - the list of values to use
    * @param fields - list of fields to extract
    */
@@ -375,7 +370,6 @@ export class RenderPipe implements PipeTransform {
 
   /**
    * Simple function to look up the **label** to display from options
-   * @name options
    * @param value - the value to find
    * @param list - list of options (label/value pairs)
    */
@@ -412,7 +406,6 @@ export class RenderPipe implements PipeTransform {
 
   /**
    * Capitalizes the first letter
-   * @param value
    */
   capitalize(value: any): string {
     return value.charAt(0).toUpperCase() + value.slice(1);

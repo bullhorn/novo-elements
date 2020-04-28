@@ -6,12 +6,11 @@ import { NovoLabelService } from '../../services/novo-label-service';
 
 @Injectable()
 export class DateFormatService {
-  constructor(private labels: NovoLabelService) {}
+  constructor(private labels: NovoLabelService) { }
 
   getTimeMask(militaryTime: boolean): Array<RegExp> {
-    let mask: Array<RegExp> = [/\d/, /\d/, /:/, /\d/, /\d/],
-      timeFormatArray: Array<string> = [],
-      timeFormatPartsArray: Array<string> = [];
+    let mask: Array<RegExp> = [/\d/, /\d/, /:/, /\d/, /\d/];
+    let timeFormatArray: Array<string> = [];
     const timeFormat: string = this.labels.timeFormatPlaceholderAM.toLowerCase();
     if (militaryTime) {
       return mask;
@@ -49,15 +48,15 @@ export class DateFormatService {
   }
 
   parseDateString(dateString: string): [Date, string] {
-    let dateFormat: string = this.labels.dateFormatString(),
-      dateFormatRegex = /(\w+)[\/|\.|\-](\w+)[\/|\.|\-](\w+)/gi,
-      dateValueRegex = /(\d+)[\/|\.|\-](\d+)[\/|\.|\-](\d+)/gi,
-      dateFormatTokens: Array<string>,
-      dateValueTokens: Array<string>,
-      year: number,
-      month: number,
-      day: number,
-      date: Date = new Date();
+    let dateFormat: string = this.labels.dateFormatString();
+    const dateFormatRegex = /(\w+)[\/|\.|\-](\w+)[\/|\.|\-](\w+)/gi;
+    const dateValueRegex = /(\d+)[\/|\.|\-](\d+)[\/|\.|\-](\d+)/gi;
+    let dateFormatTokens: Array<string>;
+    let dateValueTokens: Array<string>;
+    let year: number;
+    let month: number;
+    let day: number;
+    let date: Date = new Date();
     if (Helpers.isEmpty(dateFormat)) {
       // Default to MM/dd/yyyy
       dateFormat = 'mm/dd/yyyy';
@@ -69,11 +68,11 @@ export class DateFormatService {
     if (dateFormatTokens && dateFormatTokens.length === 4 && dateValueTokens && dateValueTokens.length === 4) {
       for (let i = 1; i < 4; i++) {
         if (dateFormatTokens[i].includes('m')) {
-          month = parseInt(dateValueTokens[i]) - 1;
+          month = parseInt(dateValueTokens[i], 10) - 1;
         } else if (dateFormatTokens[i].includes('d')) {
-          day = parseInt(dateValueTokens[i]);
+          day = parseInt(dateValueTokens[i], 10);
         } else {
-          year = parseInt(dateValueTokens[i]);
+          year = parseInt(dateValueTokens[i], 10);
         }
       }
       if (month >= 0 && month <= 11 && year > 1900 && day > 0 && day <= 31) {
@@ -94,17 +93,16 @@ export class DateFormatService {
   }
 
   parseTimeString(timeString: string, militaryTime: boolean): [Date, string] {
-    let value: Date = new Date(),
-      timeStringParts: Array<string>,
-      timeFormat: string;
+    const value: Date = new Date();
+    let timeStringParts: Array<string>;
     let amFormat = this.labels.timeFormatAM;
     let pmFormat = this.labels.timeFormatPM;
     if (!(timeString && timeString.includes(':'))) {
       return [value, timeString];
     }
     if (!militaryTime && amFormat && pmFormat) {
-      let splits: Array<string> = [],
-        pm: boolean = false;
+      let splits: Array<string> = [];
+      let pm: boolean = false;
       amFormat = this.labels.timeFormatAM.toLowerCase();
       pmFormat = this.labels.timeFormatPM.toLowerCase();
       timeString = timeString.toLowerCase();
@@ -122,7 +120,7 @@ export class DateFormatService {
         }
       }
       if (timeStringParts && timeStringParts.length && timeStringParts.length === 2) {
-        let hours: number = parseInt(timeStringParts[0]);
+        let hours: number = parseInt(timeStringParts[0], 10);
         if (hours === 12 && pm) {
           hours = 12;
         } else if (pm) {
@@ -131,14 +129,14 @@ export class DateFormatService {
           hours = 0;
         }
         value.setHours(hours);
-        value.setMinutes(parseInt(timeStringParts[1]));
+        value.setMinutes(parseInt(timeStringParts[1], 10));
         value.setSeconds(0);
       }
     } else {
       timeStringParts = /(\d{1,2}):(\d{2})/.exec(timeString);
       if (timeStringParts && timeStringParts.length && timeStringParts.length === 3) {
-        value.setHours(parseInt(timeStringParts[1]));
-        value.setMinutes(parseInt(timeStringParts[2]));
+        value.setHours(parseInt(timeStringParts[1], 10));
+        value.setMinutes(parseInt(timeStringParts[2], 10));
         value.setSeconds(0);
       }
     }
@@ -166,7 +164,7 @@ export class DateFormatService {
   }
 
   isValidDatePart(value: string, format: string): boolean {
-    const datePart = parseInt(value);
+    const datePart = parseInt(value, 10);
     if (format.includes('m') && (datePart >= 2 || value.length === 2)) {
       return true;
     } else if (format.includes('d') && (datePart >= 4 || value.length === 2)) {

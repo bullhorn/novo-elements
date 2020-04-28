@@ -439,9 +439,9 @@ describe('Utils: FormUtils', () => {
                 type: 'text',
                 label: 'Field 2',
                 sortOrder: 30,
-              }]
-            }
-          }
+              }],
+            },
+          },
         ],
         sectionHeaders: [
           {
@@ -534,8 +534,8 @@ describe('Utils: FormUtils', () => {
     it('should return an array when there are WorkflowOptions', () => {
       const field: { workflowOptions: Object } = {
         workflowOptions: {
-          '1': [{ value: '1', label: '1' }],
-          '2': [{ value: '2', label: '2' }],
+          1: [{ value: '1', label: '1' }],
+          2: [{ value: '2', label: '2' }],
         },
       };
       const expected: Array<{ value: string; label: string }> = [{ value: '2', label: '2' }];
@@ -545,8 +545,8 @@ describe('Utils: FormUtils', () => {
     it('should add current option to array if current value is not there for WorkflowOptions', () => {
       const field: { workflowOptions: Object } = {
         workflowOptions: {
-          '1': [{ value: '1', label: 'one' }, { value: '3', label: 'three' }],
-          '2': [{ value: '2', label: 'two' }],
+          1: [{ value: '1', label: 'one' }, { value: '3', label: 'three' }],
+          2: [{ value: '2', label: 'two' }],
         },
       };
       const expected: Array<{ value: string; label: string }> = [{ value: '1', label: 'one' }, { value: '3', label: 'three' }];
@@ -557,7 +557,7 @@ describe('Utils: FormUtils', () => {
       const field: { workflowOptions: Object } = {
         workflowOptions: {
           initial: [{ value: '1', label: '1' }],
-          '2': [{ value: '2', label: '2' }],
+          2: [{ value: '2', label: '2' }],
         },
       };
       const expected: Array<{ value: string; label: string }> = [{ value: '1', label: '1' }];
@@ -706,8 +706,8 @@ describe('Utils: FormUtils', () => {
       const field = {
         name: 'embeddedField',
         associatedEntity: {
-          fields: []
-        }
+          fields: [],
+        },
       };
       formUtils.getEmbeddedFields(field);
     });
@@ -716,12 +716,12 @@ describe('Utils: FormUtils', () => {
         name: 'embeddedField',
         associatedEntity: {
           fields: [{
-            name: 'field1'
+            name: 'field1',
           },
           {
-            name: 'field2'
-          }]
-        }
+            name: 'field2',
+          }],
+        },
       };
       const embeddedfields = formUtils.getEmbeddedFields(field);
       expect(embeddedfields.every((f) => f.name.startsWith(`embeddedField.`))).toBeTruthy();
@@ -733,12 +733,12 @@ describe('Utils: FormUtils', () => {
         name: 'embeddedField',
         associatedEntity: {
           fields: [{
-            name: 'embeddedField.field1'
+            name: 'embeddedField.field1',
           },
           {
-            name: 'embeddedField.field2'
-          }]
-        }
+            name: 'embeddedField.field2',
+          }],
+        },
       };
       const embeddedfields = formUtils.getEmbeddedFields(field);
       expect(embeddedfields.every((f) => f.name.startsWith(`embeddedField.`))).toBeTruthy();

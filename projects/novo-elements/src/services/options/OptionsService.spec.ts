@@ -5,8 +5,6 @@ import { TestBed, async, inject } from '@angular/core/testing';
 import { OptionsService } from './OptionsService';
 
 describe('Element: OptionsService', () => {
-  let fixture: any;
-  let component: any;
   let service: any;
 
   beforeEach(async(() => {

@@ -2,7 +2,6 @@
 export class Helpers {
   /**
    * Swallows an event to stop further execution
-   * @param event
    */
   static swallowEvent(event) {
     if (event) {
@@ -236,7 +235,6 @@ export class Helpers {
     }
     if (typeof item === 'function' && !/\(\) \{ \[native/.test(item.toString())) {
       let obj;
-      eval('obj = ' + item.toString()); // tslint:disable-line
       for (const k in item) {
         if (k in item) {
           obj[k] = Helpers.deepClone(item[k]);
@@ -388,9 +386,6 @@ export class Can {
   }
 }
 
-/**
- * @param obj
- */
 export function can(obj: any) {
   return new Can(obj);
 }
