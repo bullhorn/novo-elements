@@ -193,10 +193,10 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit, OnCh
   hoverDay: any;
 
   rangeSelectMode: rangeSelectModes = 'startDate';
-  _onChange: Function = () => {};
-  _onTouched: Function = () => {};
+  _onChange: Function = () => { };
+  _onTouched: Function = () => { };
 
-  constructor(public labels: NovoLabelService, private element: ElementRef) {}
+  constructor(public labels: NovoLabelService, private element: ElementRef) { }
 
   ngOnInit() {
     // Determine the year array
@@ -520,7 +520,6 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit, OnCh
 
   /**
    * Remove the time aspect of the date
-   * @param date
    * @returns with time stripped out
    */
   removeTime(date: any): Date {
@@ -536,10 +535,10 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit, OnCh
     this.weeks = [];
 
     // House keeping variables to know when we are done building the month
-    let done = false,
-      date = dateFns.startOfWeek(start, { weekStartsOn: this.weekStart }),
-      monthIndex = date.getMonth(),
-      count = 0;
+    let done = false;
+    let date = dateFns.startOfWeek(start, { weekStartsOn: this.weekStart });
+    let monthIndex = date.getMonth();
+    let count = 0;
 
     while (!done) {
       // Build the days for the weeks

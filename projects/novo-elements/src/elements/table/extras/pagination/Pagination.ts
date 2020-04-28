@@ -47,7 +47,7 @@ export class Pagination implements OnInit, OnChanges {
   totalPages: number;
   pages: Array<any>;
 
-  constructor(public labels: NovoLabelService) {}
+  constructor(public labels: NovoLabelService) { }
 
   ngOnInit() {
     this.label = this.label || this.labels.itemsPerPage;
@@ -100,12 +100,8 @@ export class Pagination implements OnInit, OnChanges {
   }
 
   // Create page object used in template
-  makePage(number, text, isActive) {
-    return {
-      number,
-      text,
-      active: isActive,
-    };
+  makePage(num, text, isActive) {
+    return { num, text, active: isActive, };
   }
 
   getPages(currentPage, totalPages) {
@@ -129,8 +125,8 @@ export class Pagination implements OnInit, OnChanges {
     }
 
     // Add page number links
-    for (let number = startPage; number <= endPage; number++) {
-      const page = this.makePage(number, number.toString(), number === currentPage);
+    for (let num = startPage; num <= endPage; num++) {
+      const page = this.makePage(num, num.toString(), num === currentPage);
       pages.push(page);
     }
     return pages;

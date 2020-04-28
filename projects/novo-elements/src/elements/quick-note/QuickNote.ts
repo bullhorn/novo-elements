@@ -72,8 +72,8 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
 
   private static TOOLBAR_HEIGHT = 40; // in pixels - configured by stylesheet
 
-  private onModelChange: Function = () => {};
-  private onModelTouched: Function = () => {};
+  private onModelChange: Function = () => { };
+  private onModelTouched: Function = () => { };
 
   constructor(private zone: NgZone, element: ElementRef, private componentUtils: ComponentUtils) {
     super(element);
@@ -612,7 +612,7 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
       if (cssText.indexOf('height: ') !== -1) {
         let height: string = cssText.split('height: ')[1];
         height = height.split('px')[0];
-        contentHeight = parseInt(height);
+        contentHeight = parseInt(height, 10);
       }
     }
     return contentHeight;
