@@ -135,28 +135,20 @@ export class NovoFormControl extends FormControl {
   }
 
   /**
-   * @name hide
    * @param clearValue - flag to reset the control's value
    */
-  public hide(clearValue: boolean = true): void {
+  hide(clearValue: boolean = true): void {
     this.hidden = true;
     if (clearValue) {
       this.setValue(null);
     }
   }
 
-  /**
-   * @name show
-   */
-  public show(): void {
+  show(): void {
     this.hidden = false;
   }
 
-  /**
-   * @name setRequired
-   * @param isRequired
-   */
-  public setRequired(isRequired: boolean): void {
+  setRequired(isRequired: boolean): void {
     this.required = isRequired;
     // Update validators to have the required
     if (this.required && !this.hasRequiredValidator) {
@@ -176,17 +168,7 @@ export class NovoFormControl extends FormControl {
     }
   }
 
-  /**
-   * @name setValue
-   *
-   * @param value
-   * @param onlySelf
-   * @param emitEvent
-   * @param emitModelToViewChange
-   * @param emitViewToModelChange
-   *
-   */
-  public setValue(
+  setValue(
     value: any,
     {
       onlySelf,
@@ -212,11 +194,7 @@ export class NovoFormControl extends FormControl {
     }, 300);
   }
 
-  /**
-   * @name setReadOnly
-   * @param isReadOnly
-   */
-  public setReadOnly(isReadOnly: boolean): void {
+  setReadOnly(isReadOnly: boolean): void {
     this.readOnly = isReadOnly;
     if (this.readOnly) {
       this.disable();
@@ -231,24 +209,20 @@ export class NovoFormControl extends FormControl {
    *
    * If the control has children, all children will be disabled to maintain the model.
    */
-  public disable(opts: { onlySelf?: boolean; emitEvent?: boolean } = { emitEvent: false }): void {
+  disable(opts: { onlySelf?: boolean; emitEvent?: boolean } = { emitEvent: false }): void {
     if (typeof opts.emitEvent === 'undefined') {
       opts.emitEvent = false;
     }
     super.disable(opts);
   }
 
-  public enable(opts: { onlySelf?: boolean; emitEvent?: boolean } = { emitEvent: false }): void {
+  enable(opts: { onlySelf?: boolean; emitEvent?: boolean } = { emitEvent: false }): void {
     if (typeof opts.emitEvent === 'undefined') {
       opts.emitEvent = false;
     }
     super.enable(opts);
   }
 
-  /**
-   * @name markAsInvalid
-   * @param message
-   */
   markAsInvalid(message: string): void {
     this.markAsDirty();
     this.markAsTouched();

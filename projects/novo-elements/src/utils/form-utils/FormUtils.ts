@@ -94,10 +94,6 @@ export class FormUtils {
     });
   }
 
-  /**
-   * @name toFormGroupFromFieldset
-   * @param fieldsets
-   */
   toFormGroupFromFieldset(fieldsets: Array<NovoFieldset>): NovoFormGroup {
     const controls: Array<NovoFormControl> = [];
     fieldsets.forEach((fieldset) => {
@@ -106,18 +102,10 @@ export class FormUtils {
     return this.toFormGroup(controls);
   }
 
-  /**
-   * @name hasAssociatedEntity
-   * @param field
-   */
   hasAssociatedEntity(field: FormField): boolean {
     return !!(field.associatedEntity && ~this.ASSOCIATED_ENTITY_LIST.indexOf(field.associatedEntity.entity));
   }
 
-  /**
-   * @name determineInputType
-   * @param field
-   */
   determineInputType(field: FormField): string {
     let type: string;
     const dataSpecializationTypeMap = {

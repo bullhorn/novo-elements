@@ -8,8 +8,6 @@ import { NovoLabelService } from '../../../../services/novo-label-service';
 import { from, Observable } from 'rxjs';
 
 /**
- * @name: ChecklistPickerResults
- *
  * @description This is the actual list of matches that gets injected into the DOM.
  */
 @Component({
@@ -79,7 +77,6 @@ export class ChecklistPickerResults extends BasePickerResults {
   }
 
   /**
-   * @name filterData=
    * @param matches - Collection of objects=
    *
    * @description This function loops through the picker options and creates a filtered list of objects that contain
@@ -107,13 +104,6 @@ export class ChecklistPickerResults extends BasePickerResults {
     return matches;
   }
 
-  /**
-   * @name selectMatch
-   * @param event
-   * @param item
-   *
-   * @description
-   */
   selectMatch(event, item) {
     Helpers.swallowEvent(event);
     if (item.indeterminate) {

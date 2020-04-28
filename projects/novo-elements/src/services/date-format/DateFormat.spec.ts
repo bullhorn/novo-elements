@@ -158,17 +158,17 @@ describe('Service: DateFormatService', () => {
         service.labels.dateFormat = '';
       });
       it('should parse the date string using mm/dd/yyyy', () => {
-        let dateString = '1/22/2017',
-          dateValue;
+        let dateString = '1/22/2017';
+        let dateValue;
         [dateValue, dateString] = service.parseDateString(dateString);
         expect(dateValue.getMonth()).toEqual(0);
         expect(dateValue.getDate()).toEqual(22);
         expect(dateValue.getFullYear()).toEqual(2017);
       });
       it('should default to current date when dateString in an unsupported format ', () => {
-        let dateString = '22-22-2017',
-          dateValue,
-          expectedDateValue = new Date();
+        let dateString = '22-22-2017';
+        let dateValue;
+        const expectedDateValue = new Date();
         [dateValue, dateString] = service.parseDateString(dateString);
         expect(dateValue.getMonth()).toEqual(expectedDateValue.getMonth());
         expect(dateValue.getDate()).toEqual(expectedDateValue.getDate());
@@ -177,8 +177,8 @@ describe('Service: DateFormatService', () => {
     });
     describe('when dateFormat is defined', () => {
       it('should parse the date string using dd/mm/yyyy', () => {
-        let dateString = '11/2/2017',
-          dateValue;
+        let dateString = '11/2/2017';
+        let dateValue;
         service.labels.dateFormat = 'dd/mm/yyyy';
         [dateValue, dateString] = service.parseDateString(dateString);
         expect(dateValue.getMonth()).toEqual(1);
@@ -186,8 +186,8 @@ describe('Service: DateFormatService', () => {
         expect(dateValue.getFullYear()).toEqual(2017);
       });
       it('should parse the date string using M-d-yyyy', () => {
-        let dateString = '2-11-2017',
-          dateValue;
+        let dateString = '2-11-2017';
+        let dateValue;
         service.labels.dateFormat = 'M-d-yyyy';
         [dateValue, dateString] = service.parseDateString(dateString);
         expect(dateValue.getMonth()).toEqual(1);
@@ -195,8 +195,8 @@ describe('Service: DateFormatService', () => {
         expect(dateValue.getFullYear()).toEqual(2017);
       });
       it('should parse the date string using dd.MM.yyyy', () => {
-        let dateString = '22.01.2017',
-          dateValue;
+        let dateString = '22.01.2017';
+        let dateValue;
         service.labels.dateFormat = 'dd.MM.yyyy';
         [dateValue, dateString] = service.parseDateString(dateString);
         expect(dateValue.getMonth()).toEqual(0);
@@ -204,8 +204,8 @@ describe('Service: DateFormatService', () => {
         expect(dateValue.getFullYear()).toEqual(2017);
       });
       it('should parse the date string using yyyy-MM-dd', () => {
-        let dateString = '2017-01-22',
-          dateValue;
+        let dateString = '2017-01-22';
+        let dateValue;
         service.labels.dateFormat = 'yyyy-MM-dd';
         [dateValue, dateString] = service.parseDateString(dateString);
         expect(dateValue.getMonth()).toEqual(0);
@@ -216,29 +216,29 @@ describe('Service: DateFormatService', () => {
     describe('when dateString is an incomplete date value ', () => {
       describe('and only 1 digit is filled in', () => {
         it('should not append delimiter for dd-MM-yyyy when value = 1', () => {
-          let dateString = '1',
-            dateValue;
+          let dateString = '1';
+          let dateValue;
           service.labels.dateFormat = 'dd-MM-yyyy';
           [dateValue, dateString] = service.parseDateString(dateString);
           expect(dateString).toEqual('1');
         });
         it('should append delimiter for dd-MM-yyyy when value = 4', () => {
-          let dateString = '4',
-            dateValue;
+          let dateString = '4';
+          let dateValue;
           service.labels.dateFormat = 'dd-MM-yyyy';
           [dateValue, dateString] = service.parseDateString(dateString);
           expect(dateString).toEqual('4-');
         });
         it('should append delimiter for dd-MM-yyyy when value = 21', () => {
-          let dateString = '21',
-            dateValue;
+          let dateString = '21';
+          let dateValue;
           service.labels.dateFormat = 'dd-MM-yyyy';
           [dateValue, dateString] = service.parseDateString(dateString);
           expect(dateString).toEqual('21-');
         });
         it('should fill in the right delimiter for dd.MM.yyyy when value = 5', () => {
-          let dateString = '5',
-            dateValue;
+          let dateString = '5';
+          let dateValue;
           service.labels.dateFormat = 'dd.MM.yyyy';
           [dateValue, dateString] = service.parseDateString(dateString);
           expect(dateString).toEqual('5.');
@@ -246,29 +246,29 @@ describe('Service: DateFormatService', () => {
       });
       describe('when 2 date-part digits are filled in', () => {
         it('should append the right delimiter for d/M/yyyy', () => {
-          let dateString = '4/11',
-            dateValue;
+          let dateString = '4/11';
+          let dateValue;
           service.labels.dateFormat = 'd/M/yyyy';
           [dateValue, dateString] = service.parseDateString(dateString);
           expect(dateString).toEqual('4/11/');
         });
         it('should not append the right delimiter for d/M/yyyy when value = 2/1', () => {
-          let dateString = '2/1',
-            dateValue;
+          let dateString = '2/1';
+          let dateValue;
           service.labels.dateFormat = 'd/M/yyyy';
           [dateValue, dateString] = service.parseDateString(dateString);
           expect(dateString).toEqual('2/1');
         });
         it('should not append the right delimiter for M/d/yyyy when value = 4/3', () => {
-          let dateString = '4/3',
-            dateValue;
+          let dateString = '4/3';
+          let dateValue;
           service.labels.dateFormat = 'M/d/yyyy';
           [dateValue, dateString] = service.parseDateString(dateString);
           expect(dateString).toEqual('4/3');
         });
         it('should append the right delimiter for M/d/yyyy when value = 4/30', () => {
-          let dateString = '4/30',
-            dateValue;
+          let dateString = '4/30';
+          let dateValue;
           service.labels.dateFormat = 'M/d/yyyy';
           [dateValue, dateString] = service.parseDateString(dateString);
           expect(dateString).toEqual('4/30/');

@@ -547,7 +547,7 @@ export class FieldInteractionApi {
       optionsUrl?: string;
       optionsUrlBuilder?: Function;
       optionsPromise?;
-      options?: [];
+      options?: any[];
       resultsTemplateType?: ResultsTemplateType;
     },
     mapper?,
