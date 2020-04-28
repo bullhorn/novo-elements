@@ -682,7 +682,7 @@ export class FieldInteractionApi {
 
   addControl(
     key: string,
-    metaForNewField: { key: string, name: string },
+    metaForNewField: { key?: string, type?: string, name?: string, label?: string },
     position: string = FieldInteractionApi.FIELD_POSITIONS.ABOVE_FIELD,
     initialValue?,
   ): void {
