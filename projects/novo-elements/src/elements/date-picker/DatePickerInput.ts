@@ -33,12 +33,32 @@ const DATE_VALUE_ACCESSOR = {
   selector: 'novo-date-picker-input',
   providers: [DATE_VALUE_ACCESSOR],
   template: `
-        <input type="text" [name]="name" [(ngModel)]="formattedValue" [textMask]="maskOptions" [placeholder]="placeholder" (focus)="_handleFocus($event)" (keydown)="_handleKeydown($event)" (input)="_handleInput($event)" (blur)="_handleBlur($event)" #input data-automation-id="date-input" [disabled]="disabled"/>
-        <i *ngIf="!hasValue" (click)="openPanel()" class="bhi-calendar"></i>
-        <i *ngIf="hasValue" (click)="clearValue()" class="bhi-times"></i>
-        <novo-overlay-template [parent]="element" position="above-below">
-            <novo-date-picker [start]="start" [end]="end" inline="true" (onSelect)="setValueAndClose($event)" [ngModel]="value" [weekStart]="weekStart"></novo-date-picker>
-        </novo-overlay-template>
+    <input
+      type="text"
+      [name]="name"
+      [(ngModel)]="formattedValue"
+      [textMask]="maskOptions"
+      [placeholder]="placeholder"
+      (focus)="_handleFocus($event)"
+      (keydown)="_handleKeydown($event)"
+      (input)="_handleInput($event)"
+      (blur)="_handleBlur($event)"
+      #input
+      data-automation-id="date-input"
+      [disabled]="disabled"
+    />
+    <i *ngIf="!hasValue" (click)="openPanel()" class="bhi-calendar"></i>
+    <i *ngIf="hasValue" (click)="clearValue()" class="bhi-times"></i>
+    <novo-overlay-template [parent]="element" position="above-below">
+      <novo-date-picker
+        [start]="start"
+        [end]="end"
+        inline="true"
+        (onSelect)="setValueAndClose($event)"
+        [ngModel]="value"
+        [weekStart]="weekStart"
+      ></novo-date-picker>
+    </novo-overlay-template>
   `,
 })
 export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor {
@@ -142,9 +162,14 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
   }
 
   _handleEvent(event: Event, blur: boolean): void {
-    const value = (event.target as HTMLInputElement).value;
-    this.formatDate(value, blur);
-    this.openPanel();
+    let value = (event.target as HTMLInputElement).value;
+    if (value === '') {
+      this.clearValue();
+      this.closePanel();
+    } else {
+      this.formatDate(value, blur);
+      this.openPanel();
+    }
   }
 
   protected formatDate(value: string, blur: boolean) {
