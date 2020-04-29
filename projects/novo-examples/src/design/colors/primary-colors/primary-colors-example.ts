@@ -63,6 +63,36 @@ export class PrimaryColorsExample {
       variables: ['empty'],
       hex: 'CCCDCC',
     },
+    {
+      name: 'sand',
+      variables: ['sand'],
+      hex: 'F4F4F4',
+    },
+    {
+      name: 'silver',
+      variables: ['silver'],
+      hex: 'E2E2E2',
+    },
+    {
+      name: 'stone',
+      variables: ['stone'],
+      hex: 'BEBEBE',
+    },
+    {
+      name: 'ash',
+      variables: ['ash'],
+      hex: 'A0A0A0',
+    },
+    {
+      name: 'slate',
+      variables: ['slate'],
+      hex: '707070',
+    },
+    {
+      name: 'charcoal',
+      variables: ['charcoal'],
+      hex: '282828',
+    },
   ];
   options: any;
 
