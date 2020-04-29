@@ -6,7 +6,6 @@ import { Helpers } from '../../utils/Helpers';
 import { SimpleTableActionColumn, SimpleTableActionColumnOption, SimpleTableColumn } from './interfaces';
 import { NovoSelection } from './sort';
 
-
 /** Workaround for https://github.com/angular/angular/issues/17849 */
 export const _NovoCellDef = CdkCellDef;
 export const _NovoHeaderCellDef = CdkHeaderCellDef;
@@ -18,13 +17,17 @@ export const _NovoCell = CdkCell;
   selector: '[novoSimpleCellDef]',
   providers: [{ provide: CdkCellDef, useExisting: NovoSimpleCellDef }],
 })
-export class NovoSimpleCellDef extends _NovoCellDef { }
+export class NovoSimpleCellDef extends _NovoCellDef {
+  // TODO: add explicit constructor
+}
 
 @Directive({
   selector: '[novoSimpleHeaderCellDef]',
   providers: [{ provide: CdkHeaderCellDef, useExisting: NovoSimpleHeaderCellDef }],
 })
-export class NovoSimpleHeaderCellDef extends _NovoHeaderCellDef { }
+export class NovoSimpleHeaderCellDef extends _NovoHeaderCellDef {
+  // TODO: add explicit constructor
+}
 
 @Directive({
   selector: '[novoSimpleColumnDef]',
