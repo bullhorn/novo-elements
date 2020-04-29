@@ -182,11 +182,11 @@ import { KeyCodes } from '../../../utils/key-codes/KeyCodes';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit, OnDestroy {
-  @ViewChild('filterInput', { static: false })
+  @ViewChild('filterInput')
   filterInput: ElementRef;
-  @ViewChild(NovoDropdownElement, { static: false })
+  @ViewChild(NovoDropdownElement)
   dropdown: NovoDropdownElement;
-  @ViewChild('optionFilterInput', { static: false })
+  @ViewChild('optionFilterInput')
   optionFilterInput: ElementRef;
 
   @Input()

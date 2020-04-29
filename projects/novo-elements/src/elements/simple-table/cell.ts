@@ -31,13 +31,17 @@ export const _NovoCell = CdkCell;
   selector: '[novoSimpleCellDef]',
   providers: [{ provide: CdkCellDef, useExisting: NovoSimpleCellDef }],
 })
-export class NovoSimpleCellDef extends _NovoCellDef {}
+export class NovoSimpleCellDef extends _NovoCellDef {
+  // TODO: add explicit constructor
+}
 
 @Directive({
   selector: '[novoSimpleHeaderCellDef]',
   providers: [{ provide: CdkHeaderCellDef, useExisting: NovoSimpleHeaderCellDef }],
 })
-export class NovoSimpleHeaderCellDef extends _NovoHeaderCellDef {}
+export class NovoSimpleHeaderCellDef extends _NovoHeaderCellDef {
+  // TODO: add explicit constructor
+}
 
 @Directive({
   selector: '[novoSimpleColumnDef]',
