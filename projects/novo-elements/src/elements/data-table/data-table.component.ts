@@ -10,7 +10,6 @@ import { IDataTableColumn, IDataTableFilter, IDataTablePaginationOptions, IDataT
 import { StaticDataTableService } from './services/static-data-table.service';
 import { DataTableState } from './state/data-table-state.service';
 
-
 @Component({
   selector: 'novo-data-table',
   animations: [
