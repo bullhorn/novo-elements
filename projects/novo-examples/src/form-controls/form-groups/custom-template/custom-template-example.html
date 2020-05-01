@@ -1,4 +1,4 @@
-<ng-template #customRowTemplate let-form="form" let-index="index" let-key="key" let-controls="controls" let-key="key">
+<ng-template #customRowTemplate let-form="form" let-index="index" let-key="key" let-controls="controls">
     <div class="novo-control-group-control">
         <div *ngFor="let c of controls" class="novo-control-container" [class.is-label]="c.controlType === 'read-only'" [style.max-width.px]="c.width">
             <novo-control [form]="form?.controls[key]['controls'][index]" [control]="c" [condensed]="true"></novo-control>

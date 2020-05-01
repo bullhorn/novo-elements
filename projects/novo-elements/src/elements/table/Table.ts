@@ -1,17 +1,17 @@
 // NG2
-import { Component, EventEmitter, Input, Output, DoCheck, ElementRef, QueryList, ViewChildren } from '@angular/core';
-import { FormGroup, FormBuilder, FormArray, AbstractControl } from '@angular/forms';
+import { Component, DoCheck, ElementRef, EventEmitter, Input, Output, QueryList, ViewChildren } from '@angular/core';
+import { AbstractControl, FormArray, FormBuilder, FormGroup } from '@angular/forms';
 // Vendor
 import * as dateFns from 'date-fns';
 import { debounceTime } from 'rxjs/operators';
 // APP
-import { NovoLabelService } from '../../services/novo-label-service';
-import { Helpers } from '../../utils/Helpers';
-import { FormUtils } from '../../utils/form-utils/FormUtils';
-import { ReadOnlyControl, ControlFactory } from './../form/FormControls';
 import { CollectionEvent } from '../../services/data-provider/CollectionEvent';
 import { PagedArrayCollection } from '../../services/data-provider/PagedArrayCollection';
+import { NovoLabelService } from '../../services/novo-label-service';
+import { FormUtils } from '../../utils/form-utils/FormUtils';
+import { Helpers } from '../../utils/Helpers';
 import { notify } from '../../utils/notifier/notifier.util';
+import { ControlFactory, ReadOnlyControl } from './../form/FormControls';
 
 export interface NovoTableConfig {
   // Paging config
