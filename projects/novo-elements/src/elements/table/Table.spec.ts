@@ -28,7 +28,7 @@ import { NovoAddressElement } from '../form/extras/address/Address';
 import { NovoDatePickerElement } from '../date-picker/DatePicker';
 import { NovoToastElement } from '../toast/Toast';
 import { NovoLoadingElement } from '../loading/Loading';
-import { NovoItemElement, NovoListElement } from '../dropdown/Dropdown';
+import { NovoItemElement, NovoDropdownListElement } from '../dropdown/Dropdown';
 import { NovoChipsElement, NovoChipElement } from '../chips/Chips';
 import { NovoDropdownElement } from '../dropdown/Dropdown';
 import { TooltipDirective } from '../tooltip/Tooltip.directive';
@@ -67,7 +67,7 @@ describe('Elements: NovoTableElement', () => {
         // Novo Elements
         NovoDatePickerElement,
         NovoToastElement,
-        NovoListElement,
+        NovoDropdownListElement,
         NovoChipElement,
         NovoLoadingElement,
         NovoItemElement,
@@ -175,7 +175,7 @@ describe('Elements: NovoTableElement', () => {
   describe('Method: onFilterClick(column, filter)', () => {
     beforeEach(() => {
       component._dataProvider = {
-        edit: () => {},
+        edit: () => { },
       };
       component.columns = [
         {
@@ -461,7 +461,7 @@ describe('Elements: NovoTableElement', () => {
   describe('Method: setTableEdit()', () => {
     beforeEach(() => {
       component._dataProvider = {
-        edit: () => {},
+        edit: () => { },
       };
       component.columns = [
         {
@@ -519,8 +519,8 @@ describe('Elements: NovoTableElement', () => {
   describe('Method: leaveEditMode()', () => {
     beforeEach(() => {
       component._dataProvider = {
-        undo: () => {},
-        commit: () => {},
+        undo: () => { },
+        commit: () => { },
       };
       component.columns = [
         {
@@ -591,8 +591,8 @@ describe('Elements: NovoTableElement', () => {
   describe('Method: cancelEditing()', () => {
     beforeEach(() => {
       component._dataProvider = {
-        undo: () => {},
-        commit: () => {},
+        undo: () => { },
+        commit: () => { },
       };
     });
     it('should be defined.', () => {

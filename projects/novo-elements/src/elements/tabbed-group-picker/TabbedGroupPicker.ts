@@ -1,19 +1,9 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  OnInit,
-  Output,
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  ViewChild,
-  OnDestroy,
-} from '@angular/core';
+import { CdkScrollable } from '@angular/cdk/scrolling';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
-import { Helpers, binarySearch } from '../../utils/Helpers';
 import { NovoLabelService } from '../../services/novo-label-service';
-import { CdkScrollable } from '@angular/cdk/scrolling';
+import { binarySearch, Helpers } from '../../utils/Helpers';
 
 export type TabbedGroupPickerTab = {
   typeName: string;
@@ -85,7 +75,7 @@ export class NovoTabbedGroupPickerElement implements OnDestroy, OnInit {
   virtualScrollItemSize: number = 39;
 
   constructor(public labelService: NovoLabelService,
-              private ref: ChangeDetectorRef) {}
+    private ref: ChangeDetectorRef) { }
 
   get displayTab(): TabbedGroupPickerTab {
     return this.displayTabs[this.displayTabIndex];
@@ -257,12 +247,12 @@ export class NovoTabbedGroupPickerElement implements OnDestroy, OnInit {
     this.showClearAll = itemWasJustSelected
       ? true
       : this.tabs.some((tab) => {
-          if ((tab as ParentTab).childTypeName) {
-            return tab.data.some(({ selected, indeterminate }) => selected || indeterminate);
-          } else {
-            return tab.data.some(({ selected }) => selected);
-          }
-        });
+        if ((tab as ParentTab).childTypeName) {
+          return tab.data.some(({ selected, indeterminate }) => selected || indeterminate);
+        } else {
+          return tab.data.some(({ selected }) => selected);
+        }
+      });
   }
 
   updateParentsAndQuickSelect(): void {
