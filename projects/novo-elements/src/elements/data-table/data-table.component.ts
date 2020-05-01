@@ -1,39 +1,15 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  HostBinding,
-  Input,
-  ViewChild,
-  EventEmitter,
-  AfterContentInit,
-  ChangeDetectorRef,
-  OnDestroy,
-  ContentChildren,
-  QueryList,
-  ViewChildren,
-  TemplateRef,
-  ElementRef,
-  Output,
-} from '@angular/core';
-import { coerceBooleanProperty } from '@angular/cdk/coercion';
-import { Subscription } from 'rxjs';
 import { animate, state as animState, style, transition, trigger } from '@angular/animations';
-
-import {
-  IDataTableColumn,
-  IDataTablePaginationOptions,
-  IDataTableSearchOptions,
-  IDataTableService,
-  IDataTablePreferences,
-  IDataTableFilter,
-  IDataTableSort,
-} from './interfaces';
-import { DataTableSource } from './data-table.source';
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import { AfterContentInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChildren, ElementRef, EventEmitter, HostBinding, Input, OnDestroy, Output, QueryList, TemplateRef, ViewChild, ViewChildren } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { NovoLabelService } from '../../services/novo-label-service';
-import { DataTableState } from './state/data-table-state.service';
-import { NovoTemplate } from '../common/novo-template/novo-template.directive';
 import { notify } from '../../utils/notifier/notifier.util';
+import { NovoTemplate } from '../common/novo-template/novo-template.directive';
+import { DataTableSource } from './data-table.source';
+import { IDataTableColumn, IDataTableFilter, IDataTablePaginationOptions, IDataTablePreferences, IDataTableSearchOptions, IDataTableService, IDataTableSort } from './interfaces';
 import { StaticDataTableService } from './services/static-data-table.service';
+import { DataTableState } from './state/data-table-state.service';
+
 
 @Component({
   selector: 'novo-data-table',

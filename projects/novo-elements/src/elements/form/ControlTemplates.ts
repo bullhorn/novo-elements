@@ -1,7 +1,6 @@
-import { Component, AfterViewInit, ViewChildren, QueryList } from '@angular/core';
-// App
-import { NovoTemplate } from '../common/novo-template/novo-template.directive';
+import { AfterViewInit, Component, QueryList, ViewChildren } from '@angular/core';
 import { NovoTemplateService } from '../../services/template/NovoTemplateService';
+import { NovoTemplate } from '../common/novo-template/novo-template.directive';
 
 @Component({
   selector: 'novo-control-templates',
@@ -144,7 +143,7 @@ import { NovoTemplateService } from '../../services/template/NovoTemplateService
 export class NovoControlTemplates implements AfterViewInit {
   @ViewChildren(NovoTemplate)
   defaultTemplates: QueryList<NovoTemplate>;
-  constructor(private templates: NovoTemplateService) {}
+  constructor(private templates: NovoTemplateService) { }
 
   ngAfterViewInit(): void {
     if (this.defaultTemplates && this.defaultTemplates.length) {

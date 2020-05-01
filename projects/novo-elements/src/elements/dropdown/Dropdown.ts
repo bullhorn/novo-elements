@@ -1,24 +1,10 @@
 // NG2
-import {
-  AfterContentInit,
-  ChangeDetectorRef,
-  Component,
-  ContentChildren,
-  ElementRef,
-  EventEmitter,
-  HostListener,
-  Input,
-  OnDestroy,
-  OnInit,
-  Output,
-  QueryList,
-  ViewChild,
-} from '@angular/core';
+import { AfterContentInit, ChangeDetectorRef, Component, ContentChildren, ElementRef, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output, QueryList, ViewChild } from '@angular/core';
+import { Helpers } from '../../utils/Helpers';
+import { KeyCodes } from '../../utils/key-codes/KeyCodes';
+import { notify } from '../../utils/notifier/notifier.util';
 // APP
 import { NovoOverlayTemplateComponent } from '../overlay/Overlay';
-import { KeyCodes } from '../../utils/key-codes/KeyCodes';
-import { Helpers } from '../../utils/Helpers';
-import { notify } from '../../utils/notifier/notifier.util';
 
 @Component({
   selector: 'novo-dropdown',
@@ -266,7 +252,7 @@ export class NovoItemElement {
 
   public active: boolean = false;
 
-  constructor(private dropdown: NovoDropdownElement, public element: ElementRef) {}
+  constructor(private dropdown: NovoDropdownElement, public element: ElementRef) { }
 
   @HostListener('click', ['$event'])
   public onClick(event: Event): void {
@@ -286,11 +272,11 @@ export class NovoItemElement {
   selector: 'list',
   template: '<ng-content></ng-content>',
 })
-export class NovoListElement implements AfterContentInit {
+export class NovoDropdownListElement implements AfterContentInit {
   @ContentChildren(NovoItemElement)
   public items: QueryList<NovoItemElement>;
 
-  constructor(private dropdown: NovoDropdownElement) {}
+  constructor(private dropdown: NovoDropdownElement) { }
 
   public ngAfterContentInit(): void {
     this.dropdown.items = this.items;
@@ -304,4 +290,4 @@ export class NovoListElement implements AfterContentInit {
   selector: 'dropdown-item-header',
   template: '<ng-content></ng-content>',
 })
-export class NovoItemHeaderElement {}
+export class NovoDropDownItemHeaderElement { }

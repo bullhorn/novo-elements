@@ -1,27 +1,12 @@
-import { CdkStep, CdkStepper } from '@angular/cdk/stepper';
-import { Directionality } from '@angular/cdk/bidi';
 import { FocusableOption } from '@angular/cdk/a11y';
-import {
-  AfterContentInit,
-  Component,
-  ContentChild,
-  ContentChildren,
-  Directive,
-  forwardRef,
-  Inject,
-  QueryList,
-  ViewChildren,
-  ChangeDetectorRef,
-  ChangeDetectionStrategy,
-  Optional,
-  TemplateRef,
-  Input,
-} from '@angular/core';
+import { Directionality } from '@angular/cdk/bidi';
+import { CdkStep, CdkStepper } from '@angular/cdk/stepper';
+import { AfterContentInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChild, ContentChildren, Directive, forwardRef, Inject, Input, Optional, QueryList, TemplateRef, ViewChildren } from '@angular/core';
 import { takeUntil } from 'rxjs/operators';
+import { NovoIconComponent } from '../icon/Icon';
 import { NovoStepHeader } from './step-header.component';
 import { NovoStepLabel } from './step-label.component';
 import { novoStepperAnimations } from './stepper.animations';
-import { NovoIconComponent } from '../icon/Icon';
 
 export const _NovoStep = CdkStep;
 export const _NovoStepper = CdkStepper;
