@@ -1,10 +1,10 @@
 // NG
-import { AfterContentInit, Component, Input, OnInit, ContentChildren, QueryList } from '@angular/core';
+import { AfterContentInit, Component, ContentChildren, Input, OnInit, QueryList } from '@angular/core';
 // App
-import { NovoFormGroup } from './FormInterfaces';
+import { NovoTemplateService } from '../../services/template/NovoTemplateService';
 import { Helpers } from '../../utils/Helpers';
 import { NovoTemplate } from '../common/novo-template/novo-template.directive';
-import { NovoTemplateService } from '../../services/template/NovoTemplateService';
+import { NovoFormGroup } from './FormInterfaces';
 
 @Component({
   selector: 'novo-form',
@@ -36,7 +36,7 @@ export class NovoFormElement implements AfterContentInit, OnInit {
   public showingAllFields: boolean = false;
   public showingRequiredFields: boolean = true;
 
-  constructor(private templates: NovoTemplateService) {}
+  constructor(private templates: NovoTemplateService) { }
 
   get value() {
     return this.form.getRawValue();

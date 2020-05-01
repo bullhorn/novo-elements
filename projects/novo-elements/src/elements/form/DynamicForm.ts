@@ -1,20 +1,10 @@
 // NG
-import {
-  Component,
-  Input,
-  OnInit,
-  OnChanges,
-  SimpleChanges,
-  ElementRef,
-  ContentChildren,
-  QueryList,
-  AfterContentInit,
-} from '@angular/core';
+import { AfterContentInit, Component, ContentChildren, ElementRef, Input, OnChanges, OnInit, QueryList, SimpleChanges } from '@angular/core';
+import { NovoTemplateService } from '../../services/template/NovoTemplateService';
+import { NovoTemplate } from '../common/novo-template/novo-template.directive';
 // App
 import { Helpers } from './../../utils/Helpers';
 import { NovoFieldset, NovoFormGroup } from './FormInterfaces';
-import { NovoTemplateService } from '../../services/template/NovoTemplateService';
-import { NovoTemplate } from '../common/novo-template/novo-template.directive';
 
 @Component({
   selector: 'novo-fieldset-header',
@@ -105,7 +95,7 @@ export class NovoDynamicFormElement implements OnChanges, OnInit, AfterContentIn
   showingRequiredFields = true;
   numControls = 0;
 
-  constructor(private element: ElementRef, private templates: NovoTemplateService) {}
+  constructor(private element: ElementRef, private templates: NovoTemplateService) { }
 
   public ngOnInit(): void {
     this.ngOnChanges();
