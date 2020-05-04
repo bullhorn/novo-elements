@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.3.5](https://github.com/bullhorn/novo-elements/compare/v4.3.4...v4.3.5) (2020-05-04)
+
+
+### Features
+
+* **novo-check-list:** added data-automation-id to NovoCheckList inputs ([#1099](https://github.com/bullhorn/novo-elements/issues/1099)) ([2b3a231](https://github.com/bullhorn/novo-elements/commit/2b3a231251ed7be0229d2bc17474cb36f1de1a62))
+* **picker:** New workers comp codes picker results component ([#1102](https://github.com/bullhorn/novo-elements/issues/1102)) ([1ce9078](https://github.com/bullhorn/novo-elements/commit/1ce9078b503e6acb6896092a585fb9e980b954c1))
+
+
+### Bug Fixes
+
+* **css:** updating tile css again ([#1101](https://github.com/bullhorn/novo-elements/issues/1101)) ([33309ee](https://github.com/bullhorn/novo-elements/commit/33309ee9ce19056dcab6921c7e0f3740365d70de))
+* **select:** Fix select clear function to properly clear the previous selected value ([#1096](https://github.com/bullhorn/novo-elements/issues/1096)) ([9ae636d](https://github.com/bullhorn/novo-elements/commit/9ae636d826a140b58888d30ecaefbc51b2a4c145))
+
 ### [4.3.4](https://github.com/bullhorn/novo-elements/compare/v4.3.3...v4.3.4) (2020-04-08)
 
 
