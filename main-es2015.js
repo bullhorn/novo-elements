@@ -91,7 +91,7 @@ AppComponent.ctorParameters = () => [
 AppComponent = __decorate([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
         selector: 'novo-demo-app',
-        template: __importDefault(__webpack_require__(/*! raw-loader!./app.component.html */ "./node_modules/@angular-devkit/build-angular/node_modules/raw-loader/dist/cjs.js!./demo/app/app.component.html")).default,
+        template: __importDefault(__webpack_require__(/*! raw-loader!./app.component.html */ "./node_modules/raw-loader/dist/cjs.js!./demo/app/app.component.html")).default,
     }),
     __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"], _angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewContainerRef"], novo_elements__WEBPACK_IMPORTED_MODULE_2__["NovoToastService"], novo_elements__WEBPACK_IMPORTED_MODULE_2__["NovoModalService"]])
 ], AppComponent);
@@ -74224,10 +74224,10 @@ NovoExamplesRoutesModule.decorators = [
 
 /***/ }),
 
-/***/ "./node_modules/@angular-devkit/build-angular/node_modules/raw-loader/dist/cjs.js!./demo/app/app.component.html":
-/*!**********************************************************************************************************************!*\
-  !*** ./node_modules/@angular-devkit/build-angular/node_modules/raw-loader/dist/cjs.js!./demo/app/app.component.html ***!
-  \**********************************************************************************************************************/
+/***/ "./node_modules/raw-loader/dist/cjs.js!./demo/app/app.component.html":
+/*!***************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./demo/app/app.component.html ***!
+  \***************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
