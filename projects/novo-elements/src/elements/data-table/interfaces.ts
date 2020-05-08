@@ -2,7 +2,7 @@ import { Observable } from 'rxjs';
 
 export interface IDataTablePreferences {
   name: string;
-  sort?: { id: string; value: string };
+  sort?: IDataTableSort;
   filter?: IDataTableFilter | IDataTableFilter[];
   globalSearch?: any;
   pageSize?: number;
@@ -113,6 +113,12 @@ export interface IDataTablePaginationEvent {
   page: number;
   pageSize: number;
   length: number;
+}
+
+export interface IDataTableSort {
+  id: string;
+  value: string;
+  transform?: Function;
 }
 
 export interface IDataTableFilter {
