@@ -63,6 +63,7 @@ export {
   IDataTableSortFilter,
   IDataTablePreferences,
   IDataTableFilter,
+  IDataTableSort,
 } from './elements/data-table/interfaces';
 export { NovoDataTable } from './elements/data-table/data-table.component';
 export { NovoCommonModule } from './elements/common/common.module';

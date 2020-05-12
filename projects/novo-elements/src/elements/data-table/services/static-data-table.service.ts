@@ -1,6 +1,6 @@
 import { Observable, of } from 'rxjs';
 
-import { IDataTableFilter, IDataTableService } from '../interfaces';
+import { IDataTableSort, IDataTableFilter, IDataTableService } from '../interfaces';
 import { Helpers } from '../../../utils/Helpers';
 
 export class StaticDataTableService<T> implements IDataTableService<T> {
@@ -11,7 +11,7 @@ export class StaticDataTableService<T> implements IDataTableService<T> {
   }
 
   public getTableResults(
-    sort: { id: string; value: string; transform?: Function },
+    sort: IDataTableSort,
     filter: IDataTableFilter | IDataTableFilter[],
     page: number = 0,
     pageSize: number,
