@@ -80,7 +80,7 @@ There are many ways to **[contribute](https://github.com/bullhorn/novo-elements/
 - Review **[source code changes](https://github.com/bullhorn/novo-elements/pulls)**.
 - **[Contribute bug fixes](https://github.com/bullhorn/novo-elements/blob/master/CONTRIBUTING.md)**.
 
-> TL;DR; Fork this repository, make any required change and then submit a PR :)
+> TL;DR: Fork this repository, make any required change and then submit a PR :)
 
 # License
 
