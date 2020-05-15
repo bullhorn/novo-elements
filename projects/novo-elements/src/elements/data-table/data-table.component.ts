@@ -26,6 +26,7 @@ import {
   IDataTableService,
   IDataTablePreferences,
   IDataTableFilter,
+  IDataTableSort,
 } from './interfaces';
 import { DataTableSource } from './data-table.source';
 import { NovoLabelService } from '../../services/novo-label-service';
@@ -428,7 +429,7 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
     this.scrollListenerHandler = this.scrollListener.bind(this);
     this.sortFilterSubscription = this.state.sortFilterSource.subscribe(
       (event: {
-        sort: { id: string; value: string; transform?: Function };
+        sort: IDataTableSort;
         filter: IDataTableFilter | IDataTableFilter[];
         globalSearch: string;
       }) => {

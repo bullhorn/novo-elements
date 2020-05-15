@@ -1,7 +1,7 @@
 import { EventEmitter } from '@angular/core';
 import { Subject } from 'rxjs';
 
-import { IDataTableChangeEvent, IDataTableFilter } from '../interfaces';
+import { IDataTableChangeEvent, IDataTableFilter, IDataTableSort } from '../interfaces';
 import { Helpers } from '../../../utils/Helpers';
 import { NovoDataTableFilterUtils } from '../services/data-table-filter-utils';
 
@@ -13,7 +13,7 @@ export class DataTableState<T> {
   public expandSource = new Subject();
   public dataLoaded = new Subject();
 
-  sort: { id: string; value: string } = undefined;
+  sort: IDataTableSort = undefined;
   filter: IDataTableFilter | IDataTableFilter[] = undefined;
   page: number = 0;
   pageSize: number = undefined;
