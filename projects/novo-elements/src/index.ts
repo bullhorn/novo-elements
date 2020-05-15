@@ -37,7 +37,7 @@ export { NovoDataTableClearButton } from './elements/data-table/data-table-clear
 export { NovoDataTable } from './elements/data-table/data-table.component';
 export { NovoDataTableModule } from './elements/data-table/data-table.module';
 export { DataTableBigDecimalRendererPipe, DataTableInterpolatePipe, DateTableCurrencyRendererPipe, DateTableDateRendererPipe, DateTableDateTimeRendererPipe, DateTableNumberRendererPipe, DateTableTimeRendererPipe } from './elements/data-table/data-table.pipes';
-export { IDataTableCell, IDataTableChangeEvent, IDataTableColumn, IDataTableColumnFilterConfig, IDataTableColumnFilterOption, IDataTableColumnSortConfig, IDataTableFilter, IDataTablePaginationEvent, IDataTablePaginationOptions, IDataTablePreferences, IDataTableSearchOptions, IDataTableSelectionChangeEvent, IDataTableService, IDataTableSortFilter } from './elements/data-table/interfaces';
+export { IDataTableCell, IDataTableChangeEvent, IDataTableColumn, IDataTableColumnFilterConfig, IDataTableColumnFilterOption, IDataTableColumnSortConfig, IDataTableFilter, IDataTableSort, IDataTablePaginationEvent, IDataTablePaginationOptions, IDataTablePreferences, IDataTableSearchOptions, IDataTableSelectionChangeEvent, IDataTableService, IDataTableSortFilter } from './elements/data-table/interfaces';
 export { NovoDataTableFilterUtils } from './elements/data-table/services/data-table-filter-utils';
 export { RemoteDataTableService } from './elements/data-table/services/remote-data-table.service';
 export { StaticDataTableService } from './elements/data-table/services/static-data-table.service';
