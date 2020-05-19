@@ -1,5 +1,5 @@
 // NG2
-import { Component, Input, OnInit, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Helpers } from '../../utils/Helpers';
 
 @Component({

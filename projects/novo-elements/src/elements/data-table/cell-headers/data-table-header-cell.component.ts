@@ -1,40 +1,14 @@
-import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  Input,
-  Optional,
-  OnDestroy,
-  OnInit,
-  ViewChild,
-  ElementRef,
-  Renderer2,
-  EventEmitter,
-  Output,
-  HostBinding,
-  TemplateRef,
-  HostListener,
-} from '@angular/core';
 import { CdkColumnDef } from '@angular/cdk/table';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, EventEmitter, HostBinding, HostListener, Input, OnDestroy, OnInit, Optional, Renderer2, TemplateRef, ViewChild } from '@angular/core';
 import { fromEvent, Subscription } from 'rxjs';
-import * as dateFns from 'date-fns';
-
-import {
-  IDataTableSortFilter,
-  IDataTableChangeEvent,
-  IDataTableColumn,
-  IDataTableColumnFilterOption,
-  IDataTableColumnFilterConfig,
-  IDataTableColumnSortConfig,
-} from '../interfaces';
-
-import { NovoDataTableSortFilter } from '../sort-filter/sort-filter.directive';
-import { NovoDropdownElement } from '../../dropdown/Dropdown';
 import { NovoLabelService } from '../../../services/novo-label-service';
-import { DataTableState } from '../state/data-table-state.service';
 import { Helpers } from '../../../utils/Helpers';
-import { NovoDataTableFilterUtils } from '../services/data-table-filter-utils';
 import { KeyCodes } from '../../../utils/key-codes/KeyCodes';
+import { NovoDropdownElement } from '../../dropdown/Dropdown';
+import { IDataTableChangeEvent, IDataTableColumn, IDataTableColumnFilterConfig, IDataTableColumnFilterOption, IDataTableColumnSortConfig, IDataTableSortFilter } from '../interfaces';
+import { NovoDataTableFilterUtils } from '../services/data-table-filter-utils';
+import { NovoDataTableSortFilter } from '../sort-filter/sort-filter.directive';
+import { DataTableState } from '../state/data-table-state.service';
 
 @Component({
   selector: '[novo-data-table-cell-config]',

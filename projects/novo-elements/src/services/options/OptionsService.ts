@@ -1,11 +1,11 @@
 // NG2
-import { Injectable, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 // App
 
 @Injectable()
 export class OptionsService {
-  constructor() {}
+  constructor() { }
 
   getOptionsConfig(http: HttpClient, field: any, config: { token?: string; restUrl?: string; military?: boolean }): any {
     return {

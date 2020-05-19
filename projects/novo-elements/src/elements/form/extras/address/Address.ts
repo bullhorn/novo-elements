@@ -1,9 +1,9 @@
 // NG2
-import { Component, forwardRef, Input, OnInit, ChangeDetectionStrategy, EventEmitter, Output } from '@angular/core';
-import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
+import { Component, EventEmitter, forwardRef, Input, OnInit, Output } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 // APP
-import { getStates, findByCountryId, COUNTRIES } from '../../../../utils/countries/Countries';
 import { NovoLabelService } from '../../../../services/novo-label-service';
+import { COUNTRIES, findByCountryId, getStates } from '../../../../utils/countries/Countries';
 import { Helpers } from '../../../../utils/Helpers';
 
 // Value accessor for the component (supports ngModel)
@@ -202,8 +202,8 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
   states: Array<any> = [];
   fieldList: Array<string> = ['address1', 'address2', 'city', 'state', 'zip', 'countryID'];
   model: any;
-  onModelChange: Function = () => {};
-  onModelTouched: Function = () => {};
+  onModelChange: Function = () => { };
+  onModelTouched: Function = () => { };
   focused: any = {};
   invalid: any = {};
   disabled: any = {};
@@ -221,7 +221,7 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
   @Output()
   validityChange: EventEmitter<any> = new EventEmitter();
 
-  constructor(public labels: NovoLabelService) {}
+  constructor(public labels: NovoLabelService) { }
 
   ngOnInit() {
     if (!this.config) {

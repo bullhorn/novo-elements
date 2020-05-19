@@ -1,4 +1,4 @@
-import { EventEmitter } from '@angular/core';
+
 
 import { ArrayCollection } from './ArrayCollection';
 import { PagedCollection } from './PagedCollection';

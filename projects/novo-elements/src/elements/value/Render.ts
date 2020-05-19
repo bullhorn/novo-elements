@@ -1,5 +1,5 @@
 // NG2
-import { Injectable, Pipe, ChangeDetectorRef, OnDestroy, PipeTransform } from '@angular/core';
+import { Injectable, Pipe, ChangeDetectorRef, PipeTransform } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 // APP
 import { NovoLabelService } from '../../services/novo-label-service';
