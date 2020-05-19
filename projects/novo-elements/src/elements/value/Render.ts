@@ -1,5 +1,5 @@
 // NG2
-import { Injectable, Pipe, ChangeDetectorRef, PipeTransform } from '@angular/core';
+import { ChangeDetectorRef, Injectable, Pipe, PipeTransform } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 // APP
 import { NovoLabelService } from '../../services/novo-label-service';
@@ -41,7 +41,7 @@ export class RenderPipe implements PipeTransform {
   lastValue: any;
   lastArgs: any;
 
-  constructor(private changeDetector: ChangeDetectorRef, private sanitizationService: DomSanitizer, private labels: NovoLabelService) {}
+  constructor(private changeDetector: ChangeDetectorRef, private sanitizationService: DomSanitizer, private labels: NovoLabelService) { }
 
   equals(objectOne: any, objectTwo: any): any {
     if (objectOne === objectTwo) {
@@ -276,7 +276,7 @@ export class RenderPipe implements PipeTransform {
           text =
             value.label ||
             `${value.jobOrder ? `${value.jobOrder.title} - ` : ''} ${value.candidate ? value.candidate.firstName : ''} ${
-              value.candidate ? value.candidate.lastName : ''
+            value.candidate ? value.candidate.lastName : ''
             }`;
           break;
         case 'WorkersCompensationRate':

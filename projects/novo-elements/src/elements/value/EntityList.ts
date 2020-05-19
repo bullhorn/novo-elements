@@ -1,5 +1,5 @@
 // NG2
-import { Component, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { Helpers } from '../../utils/Helpers';
 
 @Component({
@@ -58,7 +58,7 @@ export class EntityList implements OnInit {
     Appointment: 'appointment',
   };
 
-  constructor() {}
+  constructor() { }
 
   ngOnInit(): any {
     // use a local copy of the meta to set the type to TO_ONE for proper display

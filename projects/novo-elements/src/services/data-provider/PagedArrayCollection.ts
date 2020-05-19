@@ -1,8 +1,6 @@
-
-
 import { ArrayCollection } from './ArrayCollection';
-import { PagedCollection } from './PagedCollection';
 import { CollectionEvent } from './CollectionEvent';
+import { PagedCollection } from './PagedCollection';
 
 export class PagedArrayCollection<T> extends ArrayCollection<T> implements PagedCollection<T> {
   _page: number = 1;
