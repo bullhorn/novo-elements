@@ -1,0 +1,27 @@
+<novo-dropdown side="left">
+    <button theme="secondary"
+            icon="collapse"><i class="bhi-columns"></i>Columns</button>
+        <div class="dropdown">
+            <novo-list class="results-list" direction="vertical">
+                <novo-list-item *ngFor="let column of columns">
+                    <item keepOpen="true">
+                        <item-header>
+                            <item-title>
+                                <span>
+                                    <novo-checkbox [(ngModel)]="column.enabled"></novo-checkbox>
+                                    <span>{{ column.label }}</span>
+                                </span>
+                            </item-title>
+                        </item-header>
+                        <item-content direction="horizontal"></item-content>
+                    </item>
+                </novo-list-item>
+            </novo-list>
+            <item>    
+                <button theme="standard">Cancel</button>
+                <button theme="primary"
+                    color="success"
+                    icon="check">Save</button>
+            </item>
+        </div>
+</novo-dropdown>

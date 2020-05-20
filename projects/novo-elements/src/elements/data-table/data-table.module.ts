@@ -13,6 +13,7 @@ import { NovoDatePickerModule } from '../date-picker/DatePicker.module';
 import { NovoCommonModule } from '../common/common.module';
 import { NovoSelectModule } from '../select/Select.module';
 import { NovoTooltipModule } from '../tooltip/Tooltip.module';
+import { NovoListModule } from '../list/List.module';
 
 import { NovoDataTable } from './data-table.component';
 import { NovoDataTableCell } from './cells/data-table-cell.component';
@@ -26,6 +27,7 @@ import { NovoDataTableCheckboxHeaderCell } from './cell-headers/data-table-check
 import { NovoDataTableHeaderCell } from './cell-headers/data-table-header-cell.directive';
 import { NovoDataTableSortFilter } from './sort-filter/sort-filter.directive';
 import { NovoDataTablePagination } from './pagination/data-table-pagination.component';
+import { ConfigureColumnsDropdown } from './configure-columns/configure-columns-dropdown.component';
 import { DataTableState } from './state/data-table-state.service';
 import {
   DataTableInterpolatePipe,
@@ -54,6 +56,7 @@ import { NovoDataTableClearButton } from './data-table-clear-button.component';
     NovoCommonModule,
     NovoSelectModule,
     NovoTooltipModule,
+    NovoListModule,
   ],
   declarations: [
     DataTableInterpolatePipe,
@@ -70,6 +73,7 @@ import { NovoDataTableClearButton } from './data-table-clear-button.component';
     NovoDataTableHeaderRow,
     NovoDataTableRow,
     NovoDataTablePagination,
+    ConfigureColumnsDropdown,
     NovoDataTableCheckboxCell,
     NovoDataTableCheckboxHeaderCell,
     NovoDataTableExpandCell,
@@ -89,6 +93,7 @@ import { NovoDataTableClearButton } from './data-table-clear-button.component';
     DateTableTimeRendererPipe,
     DataTableBigDecimalRendererPipe,
     NovoDataTableClearButton,
+    ConfigureColumnsDropdown,
   ],
 })
 export class NovoDataTableModule {}
