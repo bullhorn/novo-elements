@@ -14,7 +14,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-function _createSuper(Derived) { return function () { var Super = _getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function () { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
 
 function _possibleConstructorReturn(self, call) { if (call && (typeof call === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
@@ -30,7 +30,7 @@ function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableTo
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 
 function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
 
@@ -23931,287 +23931,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     if (false) {}
     /**
      * @fileoverview added by tsickle
-     * Generated from: elements/form/NovoFormControl.ts
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-
-
-    var NovoFormControl = /*#__PURE__*/function (_angular_forms__WEBPA) {
-      _inherits(NovoFormControl, _angular_forms__WEBPA);
-
-      var _super12 = _createSuper(NovoFormControl);
-
-      /**
-       * @param {?} value
-       * @param {?} control
-       */
-      function NovoFormControl(value, control) {
-        var _this81;
-
-        _classCallCheck(this, NovoFormControl);
-
-        _this81 = _super12.call(this, value, control.validators, control.asyncValidators);
-        _this81.displayValueChanges = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
-        _this81.valueHistory = [];
-        _this81.validators = control.validators;
-        _this81.initialValue = value;
-
-        _this81.valueHistory.push(value);
-
-        _this81.key = control.key;
-        _this81.label = control.label;
-        _this81.readOnly = control.readOnly;
-        _this81.hidden = control.hidden;
-        _this81.encrypted = control.encrypted;
-        _this81.config = control.config;
-        _this81.type = control.type;
-        _this81.subType = control.subType;
-        _this81.required = control.required;
-        _this81.hasRequiredValidator = _this81.required;
-        _this81.tooltip = control.tooltip;
-        _this81.tooltipPosition = control.tooltipPosition;
-        _this81.tooltipSize = control.tooltipSize;
-        _this81.tooltipPreline = control.tooltipPreline;
-        _this81.removeTooltipArrow = control.removeTooltipArrow;
-        _this81.tooltipAutoPosition = control.tooltipAutoPosition;
-        _this81.label = control.label;
-        _this81.name = control.name;
-        _this81.required = control.required;
-        _this81.sortOrder = control.sortOrder;
-        _this81.controlType = control.controlType;
-        _this81.placeholder = control.placeholder;
-        _this81.minimal = control.minimal;
-        _this81.multiple = control.multiple;
-        _this81.headerConfig = control.headerConfig;
-        _this81.optionsType = control.optionsType;
-        _this81.readOnly = control.readOnly;
-        _this81.layoutOptions = control.layoutOptions;
-        _this81.military = control.military;
-        _this81.dateFormat = control.dateFormat;
-        _this81.currencyFormat = control.currencyFormat;
-        _this81.startDate = control.startDate;
-        _this81.endDate = control.endDate;
-        _this81.weekStart = control.weekStart;
-        _this81.textMaskEnabled = control.textMaskEnabled;
-        _this81.textMaskEnabled = control.textMaskEnabled;
-        _this81.maskOptions = control.maskOptions;
-        _this81.allowInvalidDate = control.allowInvalidDate;
-        _this81.maxlength = control.maxlength;
-        _this81.minlength = control.minlength;
-        _this81.closeOnSelect = control.closeOnSelect;
-        _this81.interactions = control.interactions;
-        _this81.checkboxLabel = control.checkboxLabel;
-        _this81.restrictFieldInteractions = control.restrictFieldInteractions;
-        _this81.appendToBody = control.appendToBody;
-
-        if (_this81.appendToBody) {
-          notify("'appendToBody' has been deprecated. Please remove this attribute.");
-        }
-
-        _this81.parentScrollSelector = control.parentScrollSelector;
-        _this81.description = control.description;
-        _this81.options = control.options;
-        _this81.tipWell = control.tipWell;
-        _this81.customControlConfig = control.customControlConfig;
-        _this81.warning = control.warning; // Reactive Form, need to enable/disable, can't bind to [disabled]
-
-        if (_this81.readOnly) {
-          _this81.disable();
-        } else {
-          _this81.enable();
-        }
-
-        return _this81;
-      }
-      /**
-       * \@name hide
-       * @param {?=} clearValue - flag to reset the control's value
-       * @return {?}
-       */
-
-
-      _createClass(NovoFormControl, [{
-        key: "hide",
-        value: function hide() {
-          var clearValue = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
-          this.hidden = true;
-
-          if (clearValue) {
-            this.setValue(null);
-          }
-        }
-        /**
-         * \@name show
-         * @return {?}
-         */
-
-      }, {
-        key: "show",
-        value: function show() {
-          this.hidden = false;
-        }
-        /**
-         * \@name setRequired
-         * @param {?} isRequired
-         * @return {?}
-         */
-
-      }, {
-        key: "setRequired",
-        value: function setRequired(isRequired) {
-          this.required = isRequired; // Update validators to have the required
-
-          if (this.required && !this.hasRequiredValidator) {
-            /** @type {?} */
-            var validators = _toConsumableArray(this.validators);
-
-            validators.push(_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required); // TODO: duplicated below
-
-            this.setValidators(validators);
-            this.updateValueAndValidity({
-              emitEvent: false
-            });
-            this.hasRequiredValidator = this.required;
-          } else if (!this.required && this.hasRequiredValidator) {
-            /** @type {?} */
-            var _validators = _toConsumableArray(this.validators);
-
-            _validators = _validators.filter(
-            /**
-            * @param {?} val
-            * @return {?}
-            */
-            function (val) {
-              return val !== _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required;
-            }); // TODO: duplicated above
-
-            this.setValidators(_validators);
-            this.updateValueAndValidity({
-              emitEvent: false
-            });
-            this.hasRequiredValidator = this.required;
-          }
-        }
-        /**
-         * \@name setValue
-         *
-         * @param {?} value
-         * @param {?=} __1
-         * @return {?}
-         */
-
-      }, {
-        key: "setValue",
-        value: function setValue(value) {
-          var _this82 = this;
-
-          var _ref16 = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
-              onlySelf = _ref16.onlySelf,
-              emitEvent = _ref16.emitEvent,
-              emitModelToViewChange = _ref16.emitModelToViewChange,
-              emitViewToModelChange = _ref16.emitViewToModelChange;
-
-          this.markAsDirty();
-          this.markAsTouched();
-          this.displayValueChanges.emit(value);
-
-          _get(_getPrototypeOf(NovoFormControl.prototype), "setValue", this).call(this, value, {
-            onlySelf: onlySelf,
-            emitEvent: emitEvent,
-            emitModelToViewChange: emitModelToViewChange,
-            emitViewToModelChange: emitViewToModelChange
-          }); // History
-
-
-          clearTimeout(this.historyTimeout);
-          this.historyTimeout = setTimeout(
-          /**
-          * @return {?}
-          */
-          function () {
-            _this82.valueHistory.push(value);
-          }, 300);
-        }
-        /**
-         * \@name setReadOnly
-         * @param {?} isReadOnly
-         * @return {?}
-         */
-
-      }, {
-        key: "setReadOnly",
-        value: function setReadOnly(isReadOnly) {
-          this.readOnly = isReadOnly;
-
-          if (this.readOnly) {
-            this.disable();
-          } else {
-            this.enable();
-          }
-        }
-        /**
-         * Disables the control. This means the control will be exempt from validation checks and
-         * excluded from the aggregate value of any parent. Its status is `DISABLED`.
-         *
-         * If the control has children, all children will be disabled to maintain the model.
-         * @param {?=} opts
-         * @return {?}
-         */
-
-      }, {
-        key: "disable",
-        value: function disable() {
-          var opts = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {
-            emitEvent: false
-          };
-
-          if (typeof opts.emitEvent === 'undefined') {
-            opts.emitEvent = false;
-          }
-
-          _get(_getPrototypeOf(NovoFormControl.prototype), "disable", this).call(this, opts);
-        }
-        /**
-         * @param {?=} opts
-         * @return {?}
-         */
-
-      }, {
-        key: "enable",
-        value: function enable() {
-          var opts = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {
-            emitEvent: false
-          };
-
-          if (typeof opts.emitEvent === 'undefined') {
-            opts.emitEvent = false;
-          }
-
-          _get(_getPrototypeOf(NovoFormControl.prototype), "enable", this).call(this, opts);
-        }
-        /**
-         * \@name markAsInvalid
-         * @param {?} message
-         * @return {?}
-         */
-
-      }, {
-        key: "markAsInvalid",
-        value: function markAsInvalid(message) {
-          this.markAsDirty();
-          this.markAsTouched();
-          this.setErrors(Object.assign({}, this.errors, {
-            custom: message
-          }));
-        }
-      }]);
-
-      return NovoFormControl;
-    }(_angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]);
-
-    if (false) {}
-    /**
-     * @fileoverview added by tsickle
      * Generated from: elements/form/controls/BaseControl.ts
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
@@ -24237,119 +23956,119 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var BaseControl = /*#__PURE__*/function (_ControlConfig) {
       _inherits(BaseControl, _ControlConfig);
 
-      var _super13 = _createSuper(BaseControl);
+      var _super12 = _createSuper(BaseControl);
 
       /**
        * @param {?=} type
        * @param {?=} config
        */
       function BaseControl() {
-        var _this83;
+        var _this81;
 
         var type = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'BaseControl';
         var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
         _classCallCheck(this, BaseControl);
 
-        _this83 = _super13.call(this);
-        _this83.__type = 'BaseControl';
-        _this83.__type = type;
-        _this83.__config = config;
-        _this83.validators = config.validators || [];
-        _this83.asyncValidators = config.asyncValidators || [];
-        _this83.value = config.value;
-        _this83.key = config.key || '';
-        _this83.label = config.label || '';
-        _this83.checkboxLabel = config.checkboxLabel;
-        _this83.name = config.name || '';
-        _this83.required = !!config.required;
-        _this83.hidden = !!config.hidden;
-        _this83.encrypted = !!config.encrypted;
-        _this83.sortOrder = config.sortOrder === undefined ? 1 : config.sortOrder;
-        _this83.controlType = config.controlType || '';
-        _this83.type = config.type;
-        _this83.subType = config.subType;
-        _this83.metaType = config.metaType;
-        _this83.placeholder = config.placeholder || '';
-        _this83.config = config.config || null;
-        _this83.dirty = !!(config.value !== undefined && config.value !== null);
-        _this83.multiple = !!config.multiple;
-        _this83.headerConfig = config.headerConfig || null;
-        _this83.currencyFormat = config.currencyFormat || null;
-        _this83.associatedEntity = config.associatedEntity || null;
-        _this83.optionsType = config.optionsType || null;
-        _this83.options = config.options || [];
-        _this83.forceClear = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
-        _this83.readOnly = !!config.readOnly || !!config.disabled;
-        _this83.disabled = !!config.disabled;
-        _this83.layoutOptions = config.layoutOptions || {};
-        _this83.military = !!config.military;
-        _this83.dateFormat = config.dateFormat;
-        _this83.textMaskEnabled = config.textMaskEnabled;
-        _this83.maskOptions = config.maskOptions;
-        _this83.allowInvalidDate = config.allowInvalidDate;
-        _this83.startDate = config.startDate;
-        _this83.endDate = config.endDate;
-        _this83.restrictFieldInteractions = !!config.restrictFieldInteractions;
+        _this81 = _super12.call(this);
+        _this81.__type = 'BaseControl';
+        _this81.__type = type;
+        _this81.__config = config;
+        _this81.validators = config.validators || [];
+        _this81.asyncValidators = config.asyncValidators || [];
+        _this81.value = config.value;
+        _this81.key = config.key || '';
+        _this81.label = config.label || '';
+        _this81.checkboxLabel = config.checkboxLabel;
+        _this81.name = config.name || '';
+        _this81.required = !!config.required;
+        _this81.hidden = !!config.hidden;
+        _this81.encrypted = !!config.encrypted;
+        _this81.sortOrder = config.sortOrder === undefined ? 1 : config.sortOrder;
+        _this81.controlType = config.controlType || '';
+        _this81.type = config.type;
+        _this81.subType = config.subType;
+        _this81.metaType = config.metaType;
+        _this81.placeholder = config.placeholder || '';
+        _this81.config = config.config || null;
+        _this81.dirty = !!(config.value !== undefined && config.value !== null);
+        _this81.multiple = !!config.multiple;
+        _this81.headerConfig = config.headerConfig || null;
+        _this81.currencyFormat = config.currencyFormat || null;
+        _this81.associatedEntity = config.associatedEntity || null;
+        _this81.optionsType = config.optionsType || null;
+        _this81.options = config.options || [];
+        _this81.forceClear = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
+        _this81.readOnly = !!config.readOnly || !!config.disabled;
+        _this81.disabled = !!config.disabled;
+        _this81.layoutOptions = config.layoutOptions || {};
+        _this81.military = !!config.military;
+        _this81.dateFormat = config.dateFormat;
+        _this81.textMaskEnabled = config.textMaskEnabled;
+        _this81.maskOptions = config.maskOptions;
+        _this81.allowInvalidDate = config.allowInvalidDate;
+        _this81.startDate = config.startDate;
+        _this81.endDate = config.endDate;
+        _this81.restrictFieldInteractions = !!config.restrictFieldInteractions;
 
         if (!Helpers.isEmpty(config.warning)) {
-          _this83.warning = config.warning;
+          _this81.warning = config.warning;
         }
 
-        if (_this83.required) {
-          _this83.validators.push(_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required);
+        if (_this81.required) {
+          _this81.validators.push(_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required);
         }
 
         if (!Helpers.isBlank(config.maxlength)) {
-          _this83.maxlength = config.maxlength;
+          _this81.maxlength = config.maxlength;
 
-          _this83.validators.push(_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].maxLength(_this83.maxlength));
+          _this81.validators.push(_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].maxLength(_this81.maxlength));
         }
 
         if (!Helpers.isBlank(config.minlength)) {
-          _this83.minlength = config.minlength;
+          _this81.minlength = config.minlength;
 
-          _this83.validators.push(_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].minLength(_this83.minlength));
+          _this81.validators.push(_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].minLength(_this81.minlength));
         }
 
-        _this83.closeOnSelect = !!config.closeOnSelect;
-        _this83.interactions = config.interactions;
-        _this83.dataSpecialization = config.dataSpecialization;
-        _this83.dataType = config.dataType;
-        _this83.appendToBody = !!config.appendToBody;
+        _this81.closeOnSelect = !!config.closeOnSelect;
+        _this81.interactions = config.interactions;
+        _this81.dataSpecialization = config.dataSpecialization;
+        _this81.dataType = config.dataType;
+        _this81.appendToBody = !!config.appendToBody;
 
-        if (_this83.appendToBody) {
+        if (_this81.appendToBody) {
           notify("'appendToBody' has been deprecated. Please remove this attribute.");
         }
 
-        _this83.parentScrollSelector = config.parentScrollSelector;
-        _this83.description = config.description;
+        _this81.parentScrollSelector = config.parentScrollSelector;
+        _this81.description = config.description;
 
         if (config.tooltip) {
-          _this83.tooltip = config.tooltip;
-          _this83.tooltipPosition = config.tooltipPosition;
-          _this83.tooltipSize = config.tooltipSize;
-          _this83.tooltipPreline = config.tooltipPreline;
-          _this83.removeTooltipArrow = config.removeTooltipArrow;
-          _this83.tooltipAutoPosition = config.tooltipAutoPosition;
+          _this81.tooltip = config.tooltip;
+          _this81.tooltipPosition = config.tooltipPosition;
+          _this81.tooltipSize = config.tooltipSize;
+          _this81.tooltipPreline = config.tooltipPreline;
+          _this81.removeTooltipArrow = config.removeTooltipArrow;
+          _this81.tooltipAutoPosition = config.tooltipAutoPosition;
         }
 
-        _this83.template = config.template;
-        _this83.customControlConfig = config.customControlConfig;
-        _this83.tipWell = config.tipWell;
-        _this83.width = config.width;
-        _this83.startupFocus = !!config.startupFocus;
+        _this81.template = config.template;
+        _this81.customControlConfig = config.customControlConfig;
+        _this81.tipWell = config.tipWell;
+        _this81.width = config.width;
+        _this81.startupFocus = !!config.startupFocus;
 
         if (config.fileBrowserImageUploadUrl) {
-          _this83.fileBrowserImageUploadUrl = config.fileBrowserImageUploadUrl;
+          _this81.fileBrowserImageUploadUrl = config.fileBrowserImageUploadUrl;
         }
 
         if (config.isEmpty) {
-          _this83.isEmpty = config.isEmpty;
+          _this81.isEmpty = config.isEmpty;
         }
 
-        _this83.weekStart = config.weekStart || 0;
-        return _this83;
+        _this81.weekStart = config.weekStart || 0;
+        return _this81;
       }
 
       return BaseControl;
@@ -24559,22 +24278,22 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var AddressControl = /*#__PURE__*/function (_BaseControl) {
       _inherits(AddressControl, _BaseControl);
 
-      var _super14 = _createSuper(AddressControl);
+      var _super13 = _createSuper(AddressControl);
 
       /**
        * @param {?} config
        */
       function AddressControl(config) {
-        var _this84;
+        var _this82;
 
         _classCallCheck(this, AddressControl);
 
-        _this84 = _super14.call(this, 'AddressControl', config);
-        _this84.controlType = 'address';
+        _this82 = _super13.call(this, 'AddressControl', config);
+        _this82.controlType = 'address';
 
-        _this84.validators.push(FormValidators.isValidAddress);
+        _this82.validators.push(FormValidators.isValidAddress);
 
-        return _this84;
+        return _this82;
       }
 
       return AddressControl;
@@ -24591,20 +24310,20 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var CheckListControl = /*#__PURE__*/function (_BaseControl2) {
       _inherits(CheckListControl, _BaseControl2);
 
-      var _super15 = _createSuper(CheckListControl);
+      var _super14 = _createSuper(CheckListControl);
 
       /**
        * @param {?} config
        */
       function CheckListControl(config) {
-        var _this85;
+        var _this83;
 
         _classCallCheck(this, CheckListControl);
 
-        _this85 = _super15.call(this, 'CheckListControl', config);
-        _this85.controlType = 'checklist';
-        _this85.options = config.options || [];
-        return _this85;
+        _this83 = _super14.call(this, 'CheckListControl', config);
+        _this83.controlType = 'checklist';
+        _this83.options = config.options || [];
+        return _this83;
       }
 
       return CheckListControl;
@@ -24621,19 +24340,19 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var CheckboxControl = /*#__PURE__*/function (_BaseControl3) {
       _inherits(CheckboxControl, _BaseControl3);
 
-      var _super16 = _createSuper(CheckboxControl);
+      var _super15 = _createSuper(CheckboxControl);
 
       /**
        * @param {?} config
        */
       function CheckboxControl(config) {
-        var _this86;
+        var _this84;
 
         _classCallCheck(this, CheckboxControl);
 
-        _this86 = _super16.call(this, 'CheckboxControl', config);
-        _this86.controlType = 'checkbox';
-        return _this86;
+        _this84 = _super15.call(this, 'CheckboxControl', config);
+        _this84.controlType = 'checkbox';
+        return _this84;
       }
 
       return CheckboxControl;
@@ -24650,19 +24369,19 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var DateControl = /*#__PURE__*/function (_BaseControl4) {
       _inherits(DateControl, _BaseControl4);
 
-      var _super17 = _createSuper(DateControl);
+      var _super16 = _createSuper(DateControl);
 
       /**
        * @param {?} config
        */
       function DateControl(config) {
-        var _this87;
+        var _this85;
 
         _classCallCheck(this, DateControl);
 
-        _this87 = _super17.call(this, 'DateControl', config);
-        _this87.controlType = 'date';
-        return _this87;
+        _this85 = _super16.call(this, 'DateControl', config);
+        _this85.controlType = 'date';
+        return _this85;
       }
 
       return DateControl;
@@ -24679,19 +24398,19 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var DateTimeControl = /*#__PURE__*/function (_BaseControl5) {
       _inherits(DateTimeControl, _BaseControl5);
 
-      var _super18 = _createSuper(DateTimeControl);
+      var _super17 = _createSuper(DateTimeControl);
 
       /**
        * @param {?} config
        */
       function DateTimeControl(config) {
-        var _this88;
+        var _this86;
 
         _classCallCheck(this, DateTimeControl);
 
-        _this88 = _super18.call(this, 'DateTimeControl', config);
-        _this88.controlType = 'date-time';
-        return _this88;
+        _this86 = _super17.call(this, 'DateTimeControl', config);
+        _this86.controlType = 'date-time';
+        return _this86;
       }
 
       return DateTimeControl;
@@ -24708,20 +24427,20 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var EditorControl = /*#__PURE__*/function (_BaseControl6) {
       _inherits(EditorControl, _BaseControl6);
 
-      var _super19 = _createSuper(EditorControl);
+      var _super18 = _createSuper(EditorControl);
 
       /**
        * @param {?} config
        */
       function EditorControl(config) {
-        var _this89;
+        var _this87;
 
         _classCallCheck(this, EditorControl);
 
-        _this89 = _super19.call(this, 'EditorControl', config);
-        _this89.controlType = 'editor';
-        _this89.minimal = false;
-        return _this89;
+        _this87 = _super18.call(this, 'EditorControl', config);
+        _this87.controlType = 'editor';
+        _this87.minimal = false;
+        return _this87;
       }
 
       return EditorControl;
@@ -24738,19 +24457,19 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var AceEditorControl = /*#__PURE__*/function (_BaseControl7) {
       _inherits(AceEditorControl, _BaseControl7);
 
-      var _super20 = _createSuper(AceEditorControl);
+      var _super19 = _createSuper(AceEditorControl);
 
       /**
        * @param {?} config
        */
       function AceEditorControl(config) {
-        var _this90;
+        var _this88;
 
         _classCallCheck(this, AceEditorControl);
 
-        _this90 = _super20.call(this, 'AceEditorControl', config);
-        _this90.controlType = 'ace-editor';
-        return _this90;
+        _this88 = _super19.call(this, 'AceEditorControl', config);
+        _this88.controlType = 'ace-editor';
+        return _this88;
       }
 
       return AceEditorControl;
@@ -24767,22 +24486,22 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var FileControl = /*#__PURE__*/function (_BaseControl8) {
       _inherits(FileControl, _BaseControl8);
 
-      var _super21 = _createSuper(FileControl);
+      var _super20 = _createSuper(FileControl);
 
       /**
        * @param {?} config
        */
       function FileControl(config) {
-        var _this91;
+        var _this89;
 
         _classCallCheck(this, FileControl);
 
-        _this91 = _super21.call(this, 'FileControl', config);
-        _this91.controlType = 'file'; // TODO - translate
+        _this89 = _super20.call(this, 'FileControl', config);
+        _this89.controlType = 'file'; // TODO - translate
 
-        _this91.placeholder = config.placeholder;
-        _this91.multiple = config.multiple;
-        return _this91;
+        _this89.placeholder = config.placeholder;
+        _this89.multiple = config.multiple;
+        return _this89;
       }
 
       return FileControl;
@@ -24799,21 +24518,21 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var NativeSelectControl = /*#__PURE__*/function (_BaseControl9) {
       _inherits(NativeSelectControl, _BaseControl9);
 
-      var _super22 = _createSuper(NativeSelectControl);
+      var _super21 = _createSuper(NativeSelectControl);
 
       /**
        * @param {?} config
        */
       function NativeSelectControl(config) {
-        var _this92;
+        var _this90;
 
         _classCallCheck(this, NativeSelectControl);
 
-        _this92 = _super22.call(this, 'NativeSelectControl', config);
-        _this92.controlType = 'native-select';
-        _this92.options = [];
-        _this92.options = config.options || [];
-        return _this92;
+        _this90 = _super21.call(this, 'NativeSelectControl', config);
+        _this90.controlType = 'native-select';
+        _this90.options = [];
+        _this90.options = config.options || [];
+        return _this90;
       }
 
       return NativeSelectControl;
@@ -24830,21 +24549,21 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var PickerControl = /*#__PURE__*/function (_BaseControl10) {
       _inherits(PickerControl, _BaseControl10);
 
-      var _super23 = _createSuper(PickerControl);
+      var _super22 = _createSuper(PickerControl);
 
       /**
        * @param {?} config
        */
       function PickerControl(config) {
-        var _this93;
+        var _this91;
 
         _classCallCheck(this, PickerControl);
 
-        _this93 = _super23.call(this, 'PickerControl', config);
-        _this93.controlType = 'picker';
-        _this93.options = [];
-        _this93.options = config.options || [];
-        return _this93;
+        _this91 = _super22.call(this, 'PickerControl', config);
+        _this91.controlType = 'picker';
+        _this91.options = [];
+        _this91.options = config.options || [];
+        return _this91;
       }
 
       return PickerControl;
@@ -24855,21 +24574,21 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var TablePickerControl = /*#__PURE__*/function (_PickerControl) {
       _inherits(TablePickerControl, _PickerControl);
 
-      var _super24 = _createSuper(TablePickerControl);
+      var _super23 = _createSuper(TablePickerControl);
 
       /**
        * @param {?} config
        */
       function TablePickerControl(config) {
-        var _this94;
+        var _this92;
 
         _classCallCheck(this, TablePickerControl);
 
-        _this94 = _super24.call(this, Object.assign(config, {
+        _this92 = _super23.call(this, Object.assign(config, {
           parentScrollSelector: '.table-container'
         }));
-        _this94.__type = 'TablePickerControl';
-        return _this94;
+        _this92.__type = 'TablePickerControl';
+        return _this92;
       }
 
       return TablePickerControl;
@@ -24884,21 +24603,21 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var QuickNoteControl = /*#__PURE__*/function (_BaseControl11) {
       _inherits(QuickNoteControl, _BaseControl11);
 
-      var _super25 = _createSuper(QuickNoteControl);
+      var _super24 = _createSuper(QuickNoteControl);
 
       /**
        * @param {?} config
        */
       function QuickNoteControl(config) {
-        var _this95;
+        var _this93;
 
         _classCallCheck(this, QuickNoteControl);
 
-        _this95 = _super25.call(this, 'QuickNoteControl', config);
-        _this95.controlType = 'quick-note';
-        _this95.options = [];
-        _this95.options = config.options || [];
-        return _this95;
+        _this93 = _super24.call(this, 'QuickNoteControl', config);
+        _this93.controlType = 'quick-note';
+        _this93.options = [];
+        _this93.options = config.options || [];
+        return _this93;
       }
 
       return QuickNoteControl;
@@ -24915,21 +24634,21 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var RadioControl = /*#__PURE__*/function (_BaseControl12) {
       _inherits(RadioControl, _BaseControl12);
 
-      var _super26 = _createSuper(RadioControl);
+      var _super25 = _createSuper(RadioControl);
 
       /**
        * @param {?} config
        */
       function RadioControl(config) {
-        var _this96;
+        var _this94;
 
         _classCallCheck(this, RadioControl);
 
-        _this96 = _super26.call(this, 'RadioControl', config);
-        _this96.controlType = 'radio';
-        _this96.options = [];
-        _this96.options = config.options || [];
-        return _this96;
+        _this94 = _super25.call(this, 'RadioControl', config);
+        _this94.controlType = 'radio';
+        _this94.options = [];
+        _this94.options = config.options || [];
+        return _this94;
       }
 
       return RadioControl;
@@ -24946,20 +24665,20 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var ReadOnlyControl = /*#__PURE__*/function (_BaseControl13) {
       _inherits(ReadOnlyControl, _BaseControl13);
 
-      var _super27 = _createSuper(ReadOnlyControl);
+      var _super26 = _createSuper(ReadOnlyControl);
 
       /**
        * @param {?} config
        */
       function ReadOnlyControl(config) {
-        var _this97;
+        var _this95;
 
         _classCallCheck(this, ReadOnlyControl);
 
-        _this97 = _super27.call(this, 'ReadOnlyControl', config);
-        _this97.controlType = 'read-only';
+        _this95 = _super26.call(this, 'ReadOnlyControl', config);
+        _this95.controlType = 'read-only';
         config.readOnly = true;
-        return _this97;
+        return _this95;
       }
 
       return ReadOnlyControl;
@@ -24976,22 +24695,22 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var SelectControl = /*#__PURE__*/function (_BaseControl14) {
       _inherits(SelectControl, _BaseControl14);
 
-      var _super28 = _createSuper(SelectControl);
+      var _super27 = _createSuper(SelectControl);
 
       /**
        * @param {?} config
        */
       function SelectControl(config) {
-        var _this98;
+        var _this96;
 
         _classCallCheck(this, SelectControl);
 
-        _this98 = _super28.call(this, 'SelectControl', config);
-        _this98.controlType = 'select';
-        _this98.options = [];
-        _this98.options = config.options || [];
-        _this98.placeholder = config.placeholder || '';
-        return _this98;
+        _this96 = _super27.call(this, 'SelectControl', config);
+        _this96.controlType = 'select';
+        _this96.options = [];
+        _this96.options = config.options || [];
+        _this96.placeholder = config.placeholder || '';
+        return _this96;
       }
 
       return SelectControl;
@@ -25008,19 +24727,19 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var TextAreaControl = /*#__PURE__*/function (_BaseControl15) {
       _inherits(TextAreaControl, _BaseControl15);
 
-      var _super29 = _createSuper(TextAreaControl);
+      var _super28 = _createSuper(TextAreaControl);
 
       /**
        * @param {?} config
        */
       function TextAreaControl(config) {
-        var _this99;
+        var _this97;
 
         _classCallCheck(this, TextAreaControl);
 
-        _this99 = _super29.call(this, 'TextAreaControl', config);
-        _this99.controlType = 'text-area';
-        return _this99;
+        _this97 = _super28.call(this, 'TextAreaControl', config);
+        _this97.controlType = 'text-area';
+        return _this97;
       }
 
       return TextAreaControl;
@@ -25037,24 +24756,24 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var TextBoxControl = /*#__PURE__*/function (_BaseControl16) {
       _inherits(TextBoxControl, _BaseControl16);
 
-      var _super30 = _createSuper(TextBoxControl);
+      var _super29 = _createSuper(TextBoxControl);
 
       /**
        * @param {?} config
        */
       function TextBoxControl(config) {
-        var _this100;
+        var _this98;
 
         _classCallCheck(this, TextBoxControl);
 
-        _this100 = _super30.call(this, 'TextBoxControl', config);
-        _this100.controlType = 'textbox';
-        _this100.type = _this100.getTextboxType(config.type) || '';
-        _this100.subType = config.type || '';
+        _this98 = _super29.call(this, 'TextBoxControl', config);
+        _this98.controlType = 'textbox';
+        _this98.type = _this98.getTextboxType(config.type) || '';
+        _this98.subType = config.type || '';
 
-        _this100.setValidators(_this100.subType);
+        _this98.setValidators(_this98.subType);
 
-        return _this100;
+        return _this98;
       }
       /**
        * @param {?} type
@@ -25123,21 +24842,21 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var TilesControl = /*#__PURE__*/function (_BaseControl17) {
       _inherits(TilesControl, _BaseControl17);
 
-      var _super31 = _createSuper(TilesControl);
+      var _super30 = _createSuper(TilesControl);
 
       /**
        * @param {?} config
        */
       function TilesControl(config) {
-        var _this101;
+        var _this99;
 
         _classCallCheck(this, TilesControl);
 
-        _this101 = _super31.call(this, 'TilesControl', config);
-        _this101.controlType = 'tiles';
-        _this101.options = [];
-        _this101.options = config.options || [];
-        return _this101;
+        _this99 = _super30.call(this, 'TilesControl', config);
+        _this99.controlType = 'tiles';
+        _this99.options = [];
+        _this99.options = config.options || [];
+        return _this99;
       }
 
       return TilesControl;
@@ -25154,19 +24873,19 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var TimeControl = /*#__PURE__*/function (_BaseControl18) {
       _inherits(TimeControl, _BaseControl18);
 
-      var _super32 = _createSuper(TimeControl);
+      var _super31 = _createSuper(TimeControl);
 
       /**
        * @param {?} config
        */
       function TimeControl(config) {
-        var _this102;
+        var _this100;
 
         _classCallCheck(this, TimeControl);
 
-        _this102 = _super32.call(this, 'TimeControl', config);
-        _this102.controlType = 'time';
-        return _this102;
+        _this100 = _super31.call(this, 'TimeControl', config);
+        _this100.controlType = 'time';
+        return _this100;
       }
 
       return TimeControl;
@@ -25185,7 +24904,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @param {?} config
      */
     function GroupedControl(config) {
-      var _this103 = this;
+      var _this101 = this;
 
       _classCallCheck(this, GroupedControl);
 
@@ -25196,7 +24915,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       * @return {?}
       */
       function (key) {
-        return _this103[key] = config[key];
+        return _this101[key] = config[key];
       });
     };
 
@@ -25302,20 +25021,20 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var CustomControl = /*#__PURE__*/function (_BaseControl19) {
       _inherits(CustomControl, _BaseControl19);
 
-      var _super33 = _createSuper(CustomControl);
+      var _super32 = _createSuper(CustomControl);
 
       /**
        * @param {?} config
        */
       function CustomControl(config) {
-        var _this104;
+        var _this102;
 
         _classCallCheck(this, CustomControl);
 
-        _this104 = _super33.call(this, config.template, config);
-        _this104.controlType = 'custom';
-        _this104.controlType = config.template;
-        return _this104;
+        _this102 = _super32.call(this, config.template, config);
+        _this102.controlType = 'custom';
+        _this102.controlType = config.template;
+        return _this102;
       }
 
       return CustomControl;
@@ -25328,6 +25047,287 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
 
+    /**
+     * @fileoverview added by tsickle
+     * Generated from: elements/form/NovoFormControl.ts
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+
+
+    var NovoFormControl = /*#__PURE__*/function (_angular_forms__WEBPA) {
+      _inherits(NovoFormControl, _angular_forms__WEBPA);
+
+      var _super33 = _createSuper(NovoFormControl);
+
+      /**
+       * @param {?} value
+       * @param {?} control
+       */
+      function NovoFormControl(value, control) {
+        var _this103;
+
+        _classCallCheck(this, NovoFormControl);
+
+        _this103 = _super33.call(this, value, control.validators, control.asyncValidators);
+        _this103.displayValueChanges = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
+        _this103.valueHistory = [];
+        _this103.validators = control.validators;
+        _this103.initialValue = value;
+
+        _this103.valueHistory.push(value);
+
+        _this103.key = control.key;
+        _this103.label = control.label;
+        _this103.readOnly = control.readOnly;
+        _this103.hidden = control.hidden;
+        _this103.encrypted = control.encrypted;
+        _this103.config = control.config;
+        _this103.type = control.type;
+        _this103.subType = control.subType;
+        _this103.required = control.required;
+        _this103.hasRequiredValidator = _this103.required;
+        _this103.tooltip = control.tooltip;
+        _this103.tooltipPosition = control.tooltipPosition;
+        _this103.tooltipSize = control.tooltipSize;
+        _this103.tooltipPreline = control.tooltipPreline;
+        _this103.removeTooltipArrow = control.removeTooltipArrow;
+        _this103.tooltipAutoPosition = control.tooltipAutoPosition;
+        _this103.label = control.label;
+        _this103.name = control.name;
+        _this103.required = control.required;
+        _this103.sortOrder = control.sortOrder;
+        _this103.controlType = control.controlType;
+        _this103.placeholder = control.placeholder;
+        _this103.minimal = control.minimal;
+        _this103.multiple = control.multiple;
+        _this103.headerConfig = control.headerConfig;
+        _this103.optionsType = control.optionsType;
+        _this103.readOnly = control.readOnly;
+        _this103.layoutOptions = control.layoutOptions;
+        _this103.military = control.military;
+        _this103.dateFormat = control.dateFormat;
+        _this103.currencyFormat = control.currencyFormat;
+        _this103.startDate = control.startDate;
+        _this103.endDate = control.endDate;
+        _this103.weekStart = control.weekStart;
+        _this103.textMaskEnabled = control.textMaskEnabled;
+        _this103.textMaskEnabled = control.textMaskEnabled;
+        _this103.maskOptions = control.maskOptions;
+        _this103.allowInvalidDate = control.allowInvalidDate;
+        _this103.maxlength = control.maxlength;
+        _this103.minlength = control.minlength;
+        _this103.closeOnSelect = control.closeOnSelect;
+        _this103.interactions = control.interactions;
+        _this103.checkboxLabel = control.checkboxLabel;
+        _this103.restrictFieldInteractions = control.restrictFieldInteractions;
+        _this103.appendToBody = control.appendToBody;
+
+        if (_this103.appendToBody) {
+          notify("'appendToBody' has been deprecated. Please remove this attribute.");
+        }
+
+        _this103.parentScrollSelector = control.parentScrollSelector;
+        _this103.description = control.description;
+        _this103.options = control.options;
+        _this103.tipWell = control.tipWell;
+        _this103.customControlConfig = control.customControlConfig;
+        _this103.warning = control.warning; // Reactive Form, need to enable/disable, can't bind to [disabled]
+
+        if (_this103.readOnly) {
+          _this103.disable();
+        } else {
+          _this103.enable();
+        }
+
+        return _this103;
+      }
+      /**
+       * \@name hide
+       * @param {?=} clearValue - flag to reset the control's value
+       * @return {?}
+       */
+
+
+      _createClass(NovoFormControl, [{
+        key: "hide",
+        value: function hide() {
+          var clearValue = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+          this.hidden = true;
+
+          if (clearValue) {
+            this.setValue(null);
+          }
+        }
+        /**
+         * \@name show
+         * @return {?}
+         */
+
+      }, {
+        key: "show",
+        value: function show() {
+          this.hidden = false;
+        }
+        /**
+         * \@name setRequired
+         * @param {?} isRequired
+         * @return {?}
+         */
+
+      }, {
+        key: "setRequired",
+        value: function setRequired(isRequired) {
+          this.required = isRequired; // Update validators to have the required
+
+          if (this.required && !this.hasRequiredValidator) {
+            /** @type {?} */
+            var validators = _toConsumableArray(this.validators);
+
+            validators.push(_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required); // TODO: duplicated below
+
+            this.setValidators(validators);
+            this.updateValueAndValidity({
+              emitEvent: false
+            });
+            this.hasRequiredValidator = this.required;
+          } else if (!this.required && this.hasRequiredValidator) {
+            /** @type {?} */
+            var _validators = _toConsumableArray(this.validators);
+
+            _validators = _validators.filter(
+            /**
+            * @param {?} val
+            * @return {?}
+            */
+            function (val) {
+              return val !== _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required;
+            }); // TODO: duplicated above
+
+            this.setValidators(_validators);
+            this.updateValueAndValidity({
+              emitEvent: false
+            });
+            this.hasRequiredValidator = this.required;
+          }
+        }
+        /**
+         * \@name setValue
+         *
+         * @param {?} value
+         * @param {?=} __1
+         * @return {?}
+         */
+
+      }, {
+        key: "setValue",
+        value: function setValue(value) {
+          var _this104 = this;
+
+          var _ref16 = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
+              onlySelf = _ref16.onlySelf,
+              emitEvent = _ref16.emitEvent,
+              emitModelToViewChange = _ref16.emitModelToViewChange,
+              emitViewToModelChange = _ref16.emitViewToModelChange;
+
+          this.markAsDirty();
+          this.markAsTouched();
+          this.displayValueChanges.emit(value);
+
+          _get(_getPrototypeOf(NovoFormControl.prototype), "setValue", this).call(this, value, {
+            onlySelf: onlySelf,
+            emitEvent: emitEvent,
+            emitModelToViewChange: emitModelToViewChange,
+            emitViewToModelChange: emitViewToModelChange
+          }); // History
+
+
+          clearTimeout(this.historyTimeout);
+          this.historyTimeout = setTimeout(
+          /**
+          * @return {?}
+          */
+          function () {
+            _this104.valueHistory.push(value);
+          }, 300);
+        }
+        /**
+         * \@name setReadOnly
+         * @param {?} isReadOnly
+         * @return {?}
+         */
+
+      }, {
+        key: "setReadOnly",
+        value: function setReadOnly(isReadOnly) {
+          this.readOnly = isReadOnly;
+
+          if (this.readOnly) {
+            this.disable();
+          } else {
+            this.enable();
+          }
+        }
+        /**
+         * Disables the control. This means the control will be exempt from validation checks and
+         * excluded from the aggregate value of any parent. Its status is `DISABLED`.
+         *
+         * If the control has children, all children will be disabled to maintain the model.
+         * @param {?=} opts
+         * @return {?}
+         */
+
+      }, {
+        key: "disable",
+        value: function disable() {
+          var opts = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {
+            emitEvent: false
+          };
+
+          if (typeof opts.emitEvent === 'undefined') {
+            opts.emitEvent = false;
+          }
+
+          _get(_getPrototypeOf(NovoFormControl.prototype), "disable", this).call(this, opts);
+        }
+        /**
+         * @param {?=} opts
+         * @return {?}
+         */
+
+      }, {
+        key: "enable",
+        value: function enable() {
+          var opts = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {
+            emitEvent: false
+          };
+
+          if (typeof opts.emitEvent === 'undefined') {
+            opts.emitEvent = false;
+          }
+
+          _get(_getPrototypeOf(NovoFormControl.prototype), "enable", this).call(this, opts);
+        }
+        /**
+         * \@name markAsInvalid
+         * @param {?} message
+         * @return {?}
+         */
+
+      }, {
+        key: "markAsInvalid",
+        value: function markAsInvalid(message) {
+          this.markAsDirty();
+          this.markAsTouched();
+          this.setErrors(Object.assign({}, this.errors, {
+            custom: message
+          }));
+        }
+      }]);
+
+      return NovoFormControl;
+    }(_angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]);
+
+    if (false) {}
     /**
      * @fileoverview added by tsickle
      * Generated from: elements/form/NovoFormGroup.ts
@@ -26851,6 +26851,83 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     if (false) {}
     /**
      * @fileoverview added by tsickle
+     * Generated from: elements/modal/ModalService.ts
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+
+
+    var NovoModalService = /*#__PURE__*/function () {
+      /**
+       * @param {?} componentUtils
+       */
+      function NovoModalService(componentUtils) {
+        _classCallCheck(this, NovoModalService);
+
+        this.componentUtils = componentUtils;
+      }
+      /**
+       * @param {?} view
+       * @return {?}
+       */
+
+
+      _createClass(NovoModalService, [{
+        key: "open",
+
+        /**
+         * @template T
+         * @param {?} component
+         * @param {?=} scope
+         * @return {?}
+         */
+        value: function open(component) {
+          var scope = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+          if (!this._parentViewContainer) {
+            throw new Error('No parent view container specified for the ModalService. Set it inside your main application. \nthis.modalService.parentViewContainer = view (ViewContainerRef)');
+          }
+          /** @type {?} */
+
+
+          var modal = new NovoModalRef();
+          modal.component = component;
+          modal.open();
+          /** @type {?} */
+
+          var providers = [{
+            provide: NovoModalRef,
+            useValue: modal
+          }, {
+            provide: NovoModalParams,
+            useValue: scope
+          }];
+          modal.containerRef = this.componentUtils.append(NovoModalContainerElement, this._parentViewContainer, providers);
+          return modal;
+        }
+      }, {
+        key: "parentViewContainer",
+        set: function set(view) {
+          this._parentViewContainer = view;
+        }
+      }]);
+
+      return NovoModalService;
+    }();
+
+    NovoModalService.decorators = [{
+      type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"]
+    }];
+    /** @nocollapse */
+
+    NovoModalService.ctorParameters = function () {
+      return [{
+        type: ComponentUtils
+      }];
+    };
+
+    if (false) {}
+    /**
+     * @fileoverview added by tsickle
      * Generated from: elements/toast/ToastService.ts
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
@@ -27086,83 +27163,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /** @nocollapse */
 
     NovoToastService.ctorParameters = function () {
-      return [{
-        type: ComponentUtils
-      }];
-    };
-
-    if (false) {}
-    /**
-     * @fileoverview added by tsickle
-     * Generated from: elements/modal/ModalService.ts
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-
-
-    var NovoModalService = /*#__PURE__*/function () {
-      /**
-       * @param {?} componentUtils
-       */
-      function NovoModalService(componentUtils) {
-        _classCallCheck(this, NovoModalService);
-
-        this.componentUtils = componentUtils;
-      }
-      /**
-       * @param {?} view
-       * @return {?}
-       */
-
-
-      _createClass(NovoModalService, [{
-        key: "open",
-
-        /**
-         * @template T
-         * @param {?} component
-         * @param {?=} scope
-         * @return {?}
-         */
-        value: function open(component) {
-          var scope = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-
-          if (!this._parentViewContainer) {
-            throw new Error('No parent view container specified for the ModalService. Set it inside your main application. \nthis.modalService.parentViewContainer = view (ViewContainerRef)');
-          }
-          /** @type {?} */
-
-
-          var modal = new NovoModalRef();
-          modal.component = component;
-          modal.open();
-          /** @type {?} */
-
-          var providers = [{
-            provide: NovoModalRef,
-            useValue: modal
-          }, {
-            provide: NovoModalParams,
-            useValue: scope
-          }];
-          modal.containerRef = this.componentUtils.append(NovoModalContainerElement, this._parentViewContainer, providers);
-          return modal;
-        }
-      }, {
-        key: "parentViewContainer",
-        set: function set(view) {
-          this._parentViewContainer = view;
-        }
-      }]);
-
-      return NovoModalService;
-    }();
-
-    NovoModalService.decorators = [{
-      type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"]
-    }];
-    /** @nocollapse */
-
-    NovoModalService.ctorParameters = function () {
       return [{
         type: ComponentUtils
       }];
@@ -49098,292 +49098,131 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     }];
     /**
      * @fileoverview added by tsickle
-     * Generated from: elements/value/Value.ts
+     * Generated from: elements/value/EntityList.ts
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
 
-    /** @enum {number} */
+    var EntityList = /*#__PURE__*/function () {
+      function EntityList() {
+        _classCallCheck(this, EntityList);
 
-    var NOVO_VALUE_TYPE = {
-      DEFAULT: 0,
-      ENTITY_LIST: 1,
-      LINK: 2,
-      INTERNAL_LINK: 3
-    };
-    NOVO_VALUE_TYPE[NOVO_VALUE_TYPE.DEFAULT] = 'DEFAULT';
-    NOVO_VALUE_TYPE[NOVO_VALUE_TYPE.ENTITY_LIST] = 'ENTITY_LIST';
-    NOVO_VALUE_TYPE[NOVO_VALUE_TYPE.LINK] = 'LINK';
-    NOVO_VALUE_TYPE[NOVO_VALUE_TYPE.INTERNAL_LINK] = 'INTERNAL_LINK';
-    /** @enum {number} */
-
-    var NOVO_VALUE_THEME = {
-      DEFAULT: 0,
-      MOBILE: 1
-    };
-    NOVO_VALUE_THEME[NOVO_VALUE_THEME.DEFAULT] = 'DEFAULT';
-    NOVO_VALUE_THEME[NOVO_VALUE_THEME.MOBILE] = 'MOBILE';
-
-    var NovoValueElement = /*#__PURE__*/function () {
-      function NovoValueElement() {
-        _classCallCheck(this, NovoValueElement);
-
-        // TODO use interface
-        this.meta = {
-          type: 'SCALAR',
-          label: ''
-        }; // TODO use interface
-        // TODO use interface
-
-        this.theme = NOVO_VALUE_THEME.DEFAULT;
-        this.NOVO_VALUE_TYPE = NOVO_VALUE_TYPE;
-        this.NOVO_VALUE_THEME = NOVO_VALUE_THEME;
-        this.customClass = '';
+        this.baseEntity = '';
+        this.ENTITY_SHORT_NAMES = {
+          Lead: 'lead',
+          ClientContact: 'contact',
+          ClientContact1: 'contact',
+          ClientContact2: 'contact',
+          ClientContact3: 'contact',
+          ClientContact4: 'contact',
+          ClientContact5: 'contact',
+          ClientCorporation: 'company',
+          ClientCorporation1: 'company',
+          ClientCorporation2: 'company',
+          ClientCorporation3: 'company',
+          ClientCorporation4: 'company',
+          ClientCorporation5: 'company',
+          Opportunity: 'opportunity',
+          Task: 'task',
+          Note: 'note',
+          CorporateUser: 'user',
+          Candidate: 'candidate',
+          JobOrder: 'job',
+          JobOrder1: 'job',
+          JobOrder2: 'job',
+          JobOrder3: 'job',
+          JobOrder4: 'job',
+          JobOrder5: 'job',
+          Placement: 'placement',
+          JobSubmission: 'submission',
+          CandidateReference: 'references',
+          DistributionList: 'distributionList',
+          Appointment: 'appointment'
+        };
       }
       /**
-       * @param {?} lbl
        * @return {?}
        */
 
 
-      _createClass(NovoValueElement, [{
+      _createClass(EntityList, [{
         key: "ngOnInit",
-
-        /**
-         * @return {?}
-         */
         value: function ngOnInit() {
-          if (Helpers.isEmpty(this.meta)) {
-            this.meta = {
-              label: ''
-            };
-          }
-        }
-        /**
-         * @return {?}
-         */
+          // use a local copy of the meta to set the type to TO_ONE for proper display
+          // without changing the input object
+          this.metaDisplay = Helpers.deepClone(this.meta);
+          this.metaDisplay.type = 'TO_ONE';
+          this.baseEntity = this.meta.associatedEntity.entity;
 
-      }, {
-        key: "iconClass",
+          var _iterator19 = _createForOfIteratorHelper(this.data.data),
+              _step19;
 
-        /**
-         * @param {?} icon
-         * @return {?}
-         */
-        value: function iconClass(icon) {
-          /** @type {?} */
-          var iconClass = '';
-
-          if (icon && icon.iconCls) {
-            iconClass = "bhi-".concat(icon.iconCls, " actions");
-
-            if (icon.onIconClick) {
-              iconClass = "".concat(iconClass, " clickable");
+          try {
+            for (_iterator19.s(); !(_step19 = _iterator19.n()).done;) {
+              var entity = _step19.value;
+              entity.isLinkable = this.isLinkable(entity);
+              entity["class"] = this.getClass(entity);
             }
-
-            return iconClass;
+          } catch (err) {
+            _iterator19.e(err);
+          } finally {
+            _iterator19.f();
           }
-
-          return iconClass;
         }
         /**
+         * @param {?} entity
          * @return {?}
          */
 
       }, {
-        key: "onValueClick",
-
-        /**
-         * @param {?} icon
-         * @return {?}
-         */
-        value: function onValueClick(icon) {
-          if (icon.onIconClick && typeof icon.onIconClick === 'function') {
-            icon.onIconClick(this.data, this.meta);
-          }
+        key: "getClass",
+        value: function getClass(entity) {
+          return this.ENTITY_SHORT_NAMES[entity.personSubtype];
         }
         /**
+         * @param {?} entity
          * @return {?}
          */
 
       }, {
         key: "openLink",
-        value: function openLink() {
-          if (this.meta && this.meta.openLink && typeof this.meta.openLink === 'function') {
-            this.meta.openLink(this.data, this.meta);
-          }
+        value: function openLink(entity) {
+          entity.openLink(entity);
         }
         /**
-         * @param {?=} changes
+         * @param {?} entity
          * @return {?}
          */
 
       }, {
-        key: "ngOnChanges",
-        value: function ngOnChanges(changes) {
-          if (this.meta && this.isLinkField(this.meta, this.data)) {
-            this._type = NOVO_VALUE_TYPE.LINK; // Make sure the value has a protocol, otherwise the URL will be relative
-
-            /** @type {?} */
-
-            var hasProtocol = new RegExp('^(http|https)://', 'i');
-
-            if (!hasProtocol.test(this.data)) {
-              this.url = "http://".concat(this.data);
-            } else {
-              this.url = this.data;
-            }
-          } else if (this.isEntityList(this.meta.type)) {
-            this._type = NOVO_VALUE_TYPE.ENTITY_LIST;
-          } else if (this.isHTMLField(this.meta)) {
-            this.customClass = this.meta.customClass ? this.meta.customClass : '';
-
-            if (this.meta.stripHTML && this.data && this.data.replace) {
-              this.data = this.data.replace(/<(?!style|\/style).+?>/gi, '').trim();
-            }
-          } else if (this.meta && this.meta.associatedEntity) {
-            switch (this.meta.associatedEntity.entity) {
-              case 'ClientCorporation':
-              case 'ClientContact':
-              case 'Candidate':
-              case 'Opportunity':
-              case 'JobOrder':
-              case 'Placement':
-              case 'Lead':
-                this._type = NOVO_VALUE_TYPE.INTERNAL_LINK;
-                break;
-
-              default:
-                break;
-            }
-          }
-        }
-        /**
-         * @param {?} field
-         * @param {?} data
-         * @return {?}
-         */
-
-      }, {
-        key: "isLinkField",
-        value: function isLinkField(field, data) {
-          /** @type {?} */
-          var linkFields = ['companyURL', 'clientCorporationCompanyURL'];
-          /** @type {?} */
-
-          var regex = new RegExp('^(https?://(?:www.|(?!www))[^s.]+.[^s]{2,}|www.[^s]+.[^s]{2,})$', 'gi');
-          /** @type {?} */
-
-          var isURL = Helpers.isString(data) && regex.exec(data.trim());
-          return linkFields.indexOf(field.name) > -1 || !!isURL || field.type === NOVO_VALUE_TYPE.LINK;
-        }
-        /**
-         * @param {?} type
-         * @return {?}
-         */
-
-      }, {
-        key: "isEntityList",
-        value: function isEntityList(type) {
-          return type === 'TO_MANY';
-        }
-        /**
-         * @param {?} meta
-         * @return {?}
-         */
-
-      }, {
-        key: "isHTMLField",
-        value: function isHTMLField(meta) {
-          return meta.dataSpecialization === 'HTML' || meta.inputType === 'TEXTAREA';
-        }
-      }, {
-        key: "label",
-        set: function set(lbl) {
-          this.meta.label = lbl;
-        }
-        /**
-         * @return {?}
-         */
-        ,
-        get: function get() {
-          return this.meta.label;
-        }
-        /**
-         * @param {?} typ
-         * @return {?}
-         */
-
-      }, {
-        key: "type",
-        set: function set(typ) {
-          this.meta.type = typ;
-        }
-        /**
-         * @return {?}
-         */
-        ,
-        get: function get() {
-          return this.meta.type;
-        }
-      }, {
-        key: "isMobile",
-        get: function get() {
-          return this.theme === NOVO_VALUE_THEME.MOBILE;
-        }
-      }, {
-        key: "isDefault",
-        get: function get() {
-          return true;
-        }
-        /**
-         * @return {?}
-         */
-
-      }, {
-        key: "showLabel",
-        get: function get() {
-          return this._type === NOVO_VALUE_TYPE.INTERNAL_LINK || this._type === NOVO_VALUE_TYPE.LINK || this._type === NOVO_VALUE_TYPE.ENTITY_LIST;
-        }
-        /**
-         * @return {?}
-         */
-
-      }, {
-        key: "showIcon",
-        get: function get() {
-          return this.meta && this.meta.icons && this.meta.icons.length && !Helpers.isEmpty(this.data);
+        key: "isLinkable",
+        value: function isLinkable(entity) {
+          return entity.openLink;
         }
       }]);
 
-      return NovoValueElement;
+      return EntityList;
     }();
 
-    NovoValueElement.decorators = [{
+    EntityList.decorators = [{
       type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
       args: [{
-        selector: 'novo-value',
-        template: "\n      <ng-container [ngSwitch]=\"_type\">\n          <div class=\"value-outer\" *ngIf=\"showLabel\">\n              <label>{{ meta.label }}</label>\n              <span class=\"value\">\n                <i *ngIf=\"meta.showEntityIcon\" class=\"bhi-circle {{meta.entityIconClass}}\"></i>\n                <a *ngSwitchCase=\"NOVO_VALUE_TYPE.INTERNAL_LINK\" (click)=\"openLink()\" [innerHTML]=\"data | render : meta\"></a>\n                <a *ngSwitchCase=\"NOVO_VALUE_TYPE.LINK\" class=\"value\" [href]=\"url\" target=\"_blank\" [innerHTML]=\"data | render : meta\"></a>\n              </span>\n              <novo-entity-list *ngSwitchCase=\"NOVO_VALUE_TYPE.ENTITY_LIST\" [data]='data' [meta]=\"meta\"></novo-entity-list>\n          </div>\n          <div *ngSwitchDefault class=\"value-outer\" [ngClass]=\"customClass\">\n              <label>{{ meta.label }}</label>\n              <div *ngIf=\"isDefault\" class=\"value\" [innerHTML]=\"data | render : meta\"></div>\n          </div>\n          <div class=\"actions\" *ngIf=\"showIcon\">\n              <i *ngFor=\"let icon of meta.icons\" [class]=\"iconClass(icon)\" (click)=\"onValueClick(icon)\"></i>\n          </div>\n      </ng-container>\n    "
+        selector: 'novo-entity-list',
+        changeDetection: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ChangeDetectionStrategy"].OnPush,
+        template: "\n        <div *ngFor=\"let entity of data.data\" class=\"entity\">\n            <a *ngIf=\"entity.isLinkable\" (click)=\"openLink(entity)\">\n                <i class=\"bhi-circle {{ entity.class }}\"></i>{{ entity | render : metaDisplay }}\n            </a>\n            <span *ngIf=\"!entity.isLinkable && entity.personSubtype\">\n                <i class=\"bhi-circle {{ entity.class }}\"></i>{{ entity | render : metaDisplay }}\n            </span>\n            <span *ngIf=\"!entity.isLinkable && !entity.personSubtype\">\n                {{ entity | render : metaDisplay }}\n            </span>\n        </div>\n    "
       }]
     }];
-    NovoValueElement.propDecorators = {
+    /** @nocollapse */
+
+    EntityList.ctorParameters = function () {
+      return [];
+    };
+
+    EntityList.propDecorators = {
       data: [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
       }],
       meta: [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
-      }],
-      theme: [{
-        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
-      }],
-      label: [{
-        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
-      }],
-      type: [{
-        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
-      }],
-      isMobile: [{
-        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["HostBinding"],
-        args: ['class.mobile']
       }]
     };
 
@@ -49864,36 +49703,36 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             fields[_key - 1] = arguments[_key];
           }
 
-          var _iterator19 = _createForOfIteratorHelper(list),
-              _step19;
+          var _iterator20 = _createForOfIteratorHelper(list),
+              _step20;
 
           try {
-            for (_iterator19.s(); !(_step19 = _iterator19.n()).done;) {
-              var item = _step19.value;
+            for (_iterator20.s(); !(_step20 = _iterator20.n()).done;) {
+              var item = _step20.value;
 
               /** @type {?} */
               var label = [];
 
-              var _iterator20 = _createForOfIteratorHelper(fields),
-                  _step20;
+              var _iterator21 = _createForOfIteratorHelper(fields),
+                  _step21;
 
               try {
-                for (_iterator20.s(); !(_step20 = _iterator20.n()).done;) {
-                  var field = _step20.value;
+                for (_iterator21.s(); !(_step21 = _iterator21.n()).done;) {
+                  var field = _step21.value;
                   label.push("".concat(item[field]));
                 }
               } catch (err) {
-                _iterator20.e(err);
+                _iterator21.e(err);
               } finally {
-                _iterator20.f();
+                _iterator21.f();
               }
 
               data.push(label.join(' '));
             }
           } catch (err) {
-            _iterator19.e(err);
+            _iterator20.e(err);
           } finally {
-            _iterator19.f();
+            _iterator20.f();
           }
 
           return data.join(', ');
@@ -49921,21 +49760,21 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             * @return {?}
             */
             function (item) {
-              var _iterator21 = _createForOfIteratorHelper(list),
-                  _step21;
+              var _iterator22 = _createForOfIteratorHelper(list),
+                  _step22;
 
               try {
-                for (_iterator21.s(); !(_step21 = _iterator21.n()).done;) {
-                  var option = _step21.value;
+                for (_iterator22.s(); !(_step22 = _iterator22.n()).done;) {
+                  var option = _step22.value;
 
                   if (option.value === item) {
                     return option.label;
                   }
                 }
               } catch (err) {
-                _iterator21.e(err);
+                _iterator22.e(err);
               } finally {
-                _iterator21.f();
+                _iterator22.f();
               }
 
               return item;
@@ -50010,132 +49849,293 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     if (false) {}
     /**
      * @fileoverview added by tsickle
-     * Generated from: elements/value/EntityList.ts
+     * Generated from: elements/value/Value.ts
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
 
+    /** @enum {number} */
 
-    var EntityList = /*#__PURE__*/function () {
-      function EntityList() {
-        _classCallCheck(this, EntityList);
 
-        this.baseEntity = '';
-        this.ENTITY_SHORT_NAMES = {
-          Lead: 'lead',
-          ClientContact: 'contact',
-          ClientContact1: 'contact',
-          ClientContact2: 'contact',
-          ClientContact3: 'contact',
-          ClientContact4: 'contact',
-          ClientContact5: 'contact',
-          ClientCorporation: 'company',
-          ClientCorporation1: 'company',
-          ClientCorporation2: 'company',
-          ClientCorporation3: 'company',
-          ClientCorporation4: 'company',
-          ClientCorporation5: 'company',
-          Opportunity: 'opportunity',
-          Task: 'task',
-          Note: 'note',
-          CorporateUser: 'user',
-          Candidate: 'candidate',
-          JobOrder: 'job',
-          JobOrder1: 'job',
-          JobOrder2: 'job',
-          JobOrder3: 'job',
-          JobOrder4: 'job',
-          JobOrder5: 'job',
-          Placement: 'placement',
-          JobSubmission: 'submission',
-          CandidateReference: 'references',
-          DistributionList: 'distributionList',
-          Appointment: 'appointment'
-        };
+    var NOVO_VALUE_TYPE = {
+      DEFAULT: 0,
+      ENTITY_LIST: 1,
+      LINK: 2,
+      INTERNAL_LINK: 3
+    };
+    NOVO_VALUE_TYPE[NOVO_VALUE_TYPE.DEFAULT] = 'DEFAULT';
+    NOVO_VALUE_TYPE[NOVO_VALUE_TYPE.ENTITY_LIST] = 'ENTITY_LIST';
+    NOVO_VALUE_TYPE[NOVO_VALUE_TYPE.LINK] = 'LINK';
+    NOVO_VALUE_TYPE[NOVO_VALUE_TYPE.INTERNAL_LINK] = 'INTERNAL_LINK';
+    /** @enum {number} */
+
+    var NOVO_VALUE_THEME = {
+      DEFAULT: 0,
+      MOBILE: 1
+    };
+    NOVO_VALUE_THEME[NOVO_VALUE_THEME.DEFAULT] = 'DEFAULT';
+    NOVO_VALUE_THEME[NOVO_VALUE_THEME.MOBILE] = 'MOBILE';
+
+    var NovoValueElement = /*#__PURE__*/function () {
+      function NovoValueElement() {
+        _classCallCheck(this, NovoValueElement);
+
+        // TODO use interface
+        this.meta = {
+          type: 'SCALAR',
+          label: ''
+        }; // TODO use interface
+        // TODO use interface
+
+        this.theme = NOVO_VALUE_THEME.DEFAULT;
+        this.NOVO_VALUE_TYPE = NOVO_VALUE_TYPE;
+        this.NOVO_VALUE_THEME = NOVO_VALUE_THEME;
+        this.customClass = '';
       }
       /**
+       * @param {?} lbl
        * @return {?}
        */
 
 
-      _createClass(EntityList, [{
+      _createClass(NovoValueElement, [{
         key: "ngOnInit",
+
+        /**
+         * @return {?}
+         */
         value: function ngOnInit() {
-          // use a local copy of the meta to set the type to TO_ONE for proper display
-          // without changing the input object
-          this.metaDisplay = Helpers.deepClone(this.meta);
-          this.metaDisplay.type = 'TO_ONE';
-          this.baseEntity = this.meta.associatedEntity.entity;
-
-          var _iterator22 = _createForOfIteratorHelper(this.data.data),
-              _step22;
-
-          try {
-            for (_iterator22.s(); !(_step22 = _iterator22.n()).done;) {
-              var entity = _step22.value;
-              entity.isLinkable = this.isLinkable(entity);
-              entity["class"] = this.getClass(entity);
-            }
-          } catch (err) {
-            _iterator22.e(err);
-          } finally {
-            _iterator22.f();
+          if (Helpers.isEmpty(this.meta)) {
+            this.meta = {
+              label: ''
+            };
           }
         }
         /**
-         * @param {?} entity
          * @return {?}
          */
 
       }, {
-        key: "getClass",
-        value: function getClass(entity) {
-          return this.ENTITY_SHORT_NAMES[entity.personSubtype];
+        key: "iconClass",
+
+        /**
+         * @param {?} icon
+         * @return {?}
+         */
+        value: function iconClass(icon) {
+          /** @type {?} */
+          var iconClass = '';
+
+          if (icon && icon.iconCls) {
+            iconClass = "bhi-".concat(icon.iconCls, " actions");
+
+            if (icon.onIconClick) {
+              iconClass = "".concat(iconClass, " clickable");
+            }
+
+            return iconClass;
+          }
+
+          return iconClass;
         }
         /**
-         * @param {?} entity
+         * @return {?}
+         */
+
+      }, {
+        key: "onValueClick",
+
+        /**
+         * @param {?} icon
+         * @return {?}
+         */
+        value: function onValueClick(icon) {
+          if (icon.onIconClick && typeof icon.onIconClick === 'function') {
+            icon.onIconClick(this.data, this.meta);
+          }
+        }
+        /**
          * @return {?}
          */
 
       }, {
         key: "openLink",
-        value: function openLink(entity) {
-          entity.openLink(entity);
+        value: function openLink() {
+          if (this.meta && this.meta.openLink && typeof this.meta.openLink === 'function') {
+            this.meta.openLink(this.data, this.meta);
+          }
         }
         /**
-         * @param {?} entity
+         * @param {?=} changes
          * @return {?}
          */
 
       }, {
-        key: "isLinkable",
-        value: function isLinkable(entity) {
-          return entity.openLink;
+        key: "ngOnChanges",
+        value: function ngOnChanges(changes) {
+          if (this.meta && this.isLinkField(this.meta, this.data)) {
+            this._type = NOVO_VALUE_TYPE.LINK; // Make sure the value has a protocol, otherwise the URL will be relative
+
+            /** @type {?} */
+
+            var hasProtocol = new RegExp('^(http|https)://', 'i');
+
+            if (!hasProtocol.test(this.data)) {
+              this.url = "http://".concat(this.data);
+            } else {
+              this.url = this.data;
+            }
+          } else if (this.isEntityList(this.meta.type)) {
+            this._type = NOVO_VALUE_TYPE.ENTITY_LIST;
+          } else if (this.isHTMLField(this.meta)) {
+            this.customClass = this.meta.customClass ? this.meta.customClass : '';
+
+            if (this.meta.stripHTML && this.data && this.data.replace) {
+              this.data = this.data.replace(/<(?!style|\/style).+?>/gi, '').trim();
+            }
+          } else if (this.meta && this.meta.associatedEntity) {
+            switch (this.meta.associatedEntity.entity) {
+              case 'ClientCorporation':
+              case 'ClientContact':
+              case 'Candidate':
+              case 'Opportunity':
+              case 'JobOrder':
+              case 'Placement':
+              case 'Lead':
+                this._type = NOVO_VALUE_TYPE.INTERNAL_LINK;
+                break;
+
+              default:
+                break;
+            }
+          }
+        }
+        /**
+         * @param {?} field
+         * @param {?} data
+         * @return {?}
+         */
+
+      }, {
+        key: "isLinkField",
+        value: function isLinkField(field, data) {
+          /** @type {?} */
+          var linkFields = ['companyURL', 'clientCorporationCompanyURL'];
+          /** @type {?} */
+
+          var regex = new RegExp('^(https?://(?:www.|(?!www))[^s.]+.[^s]{2,}|www.[^s]+.[^s]{2,})$', 'gi');
+          /** @type {?} */
+
+          var isURL = Helpers.isString(data) && regex.exec(data.trim());
+          return linkFields.indexOf(field.name) > -1 || !!isURL || field.type === NOVO_VALUE_TYPE.LINK;
+        }
+        /**
+         * @param {?} type
+         * @return {?}
+         */
+
+      }, {
+        key: "isEntityList",
+        value: function isEntityList(type) {
+          return type === 'TO_MANY';
+        }
+        /**
+         * @param {?} meta
+         * @return {?}
+         */
+
+      }, {
+        key: "isHTMLField",
+        value: function isHTMLField(meta) {
+          return meta.dataSpecialization === 'HTML' || meta.inputType === 'TEXTAREA';
+        }
+      }, {
+        key: "label",
+        set: function set(lbl) {
+          this.meta.label = lbl;
+        }
+        /**
+         * @return {?}
+         */
+        ,
+        get: function get() {
+          return this.meta.label;
+        }
+        /**
+         * @param {?} typ
+         * @return {?}
+         */
+
+      }, {
+        key: "type",
+        set: function set(typ) {
+          this.meta.type = typ;
+        }
+        /**
+         * @return {?}
+         */
+        ,
+        get: function get() {
+          return this.meta.type;
+        }
+      }, {
+        key: "isMobile",
+        get: function get() {
+          return this.theme === NOVO_VALUE_THEME.MOBILE;
+        }
+      }, {
+        key: "isDefault",
+        get: function get() {
+          return true;
+        }
+        /**
+         * @return {?}
+         */
+
+      }, {
+        key: "showLabel",
+        get: function get() {
+          return this._type === NOVO_VALUE_TYPE.INTERNAL_LINK || this._type === NOVO_VALUE_TYPE.LINK || this._type === NOVO_VALUE_TYPE.ENTITY_LIST;
+        }
+        /**
+         * @return {?}
+         */
+
+      }, {
+        key: "showIcon",
+        get: function get() {
+          return this.meta && this.meta.icons && this.meta.icons.length && !Helpers.isEmpty(this.data);
         }
       }]);
 
-      return EntityList;
+      return NovoValueElement;
     }();
 
-    EntityList.decorators = [{
+    NovoValueElement.decorators = [{
       type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
       args: [{
-        selector: 'novo-entity-list',
-        changeDetection: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ChangeDetectionStrategy"].OnPush,
-        template: "\n        <div *ngFor=\"let entity of data.data\" class=\"entity\">\n            <a *ngIf=\"entity.isLinkable\" (click)=\"openLink(entity)\">\n                <i class=\"bhi-circle {{ entity.class }}\"></i>{{ entity | render : metaDisplay }}\n            </a>\n            <span *ngIf=\"!entity.isLinkable && entity.personSubtype\">\n                <i class=\"bhi-circle {{ entity.class }}\"></i>{{ entity | render : metaDisplay }}\n            </span>\n            <span *ngIf=\"!entity.isLinkable && !entity.personSubtype\">\n                {{ entity | render : metaDisplay }}\n            </span>\n        </div>\n    "
+        selector: 'novo-value',
+        template: "\n      <ng-container [ngSwitch]=\"_type\">\n          <div class=\"value-outer\" *ngIf=\"showLabel\">\n              <label>{{ meta.label }}</label>\n              <span class=\"value\">\n                <i *ngIf=\"meta.showEntityIcon\" class=\"bhi-circle {{meta.entityIconClass}}\"></i>\n                <a *ngSwitchCase=\"NOVO_VALUE_TYPE.INTERNAL_LINK\" (click)=\"openLink()\" [innerHTML]=\"data | render : meta\"></a>\n                <a *ngSwitchCase=\"NOVO_VALUE_TYPE.LINK\" class=\"value\" [href]=\"url\" target=\"_blank\" [innerHTML]=\"data | render : meta\"></a>\n              </span>\n              <novo-entity-list *ngSwitchCase=\"NOVO_VALUE_TYPE.ENTITY_LIST\" [data]='data' [meta]=\"meta\"></novo-entity-list>\n          </div>\n          <div *ngSwitchDefault class=\"value-outer\" [ngClass]=\"customClass\">\n              <label>{{ meta.label }}</label>\n              <div *ngIf=\"isDefault\" class=\"value\" [innerHTML]=\"data | render : meta\"></div>\n          </div>\n          <div class=\"actions\" *ngIf=\"showIcon\">\n              <i *ngFor=\"let icon of meta.icons\" [class]=\"iconClass(icon)\" (click)=\"onValueClick(icon)\"></i>\n          </div>\n      </ng-container>\n    "
       }]
     }];
-    /** @nocollapse */
-
-    EntityList.ctorParameters = function () {
-      return [];
-    };
-
-    EntityList.propDecorators = {
+    NovoValueElement.propDecorators = {
       data: [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
       }],
       meta: [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
+      }],
+      theme: [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
+      }],
+      label: [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
+      }],
+      type: [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
+      }],
+      isMobile: [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["HostBinding"],
+        args: ['class.mobile']
       }]
     };
 

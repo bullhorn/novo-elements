@@ -17356,206 +17356,6 @@ if (false) {}
 
 /**
  * @fileoverview added by tsickle
- * Generated from: elements/form/NovoFormControl.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class NovoFormControl extends _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"] {
-    /**
-     * @param {?} value
-     * @param {?} control
-     */
-    constructor(value, control) {
-        super(value, control.validators, control.asyncValidators);
-        this.displayValueChanges = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
-        this.valueHistory = [];
-        this.validators = control.validators;
-        this.initialValue = value;
-        this.valueHistory.push(value);
-        this.key = control.key;
-        this.label = control.label;
-        this.readOnly = control.readOnly;
-        this.hidden = control.hidden;
-        this.encrypted = control.encrypted;
-        this.config = control.config;
-        this.type = control.type;
-        this.subType = control.subType;
-        this.required = control.required;
-        this.hasRequiredValidator = this.required;
-        this.tooltip = control.tooltip;
-        this.tooltipPosition = control.tooltipPosition;
-        this.tooltipSize = control.tooltipSize;
-        this.tooltipPreline = control.tooltipPreline;
-        this.removeTooltipArrow = control.removeTooltipArrow;
-        this.tooltipAutoPosition = control.tooltipAutoPosition;
-        this.label = control.label;
-        this.name = control.name;
-        this.required = control.required;
-        this.sortOrder = control.sortOrder;
-        this.controlType = control.controlType;
-        this.placeholder = control.placeholder;
-        this.minimal = control.minimal;
-        this.multiple = control.multiple;
-        this.headerConfig = control.headerConfig;
-        this.optionsType = control.optionsType;
-        this.readOnly = control.readOnly;
-        this.layoutOptions = control.layoutOptions;
-        this.military = control.military;
-        this.dateFormat = control.dateFormat;
-        this.currencyFormat = control.currencyFormat;
-        this.startDate = control.startDate;
-        this.endDate = control.endDate;
-        this.weekStart = control.weekStart;
-        this.textMaskEnabled = control.textMaskEnabled;
-        this.textMaskEnabled = control.textMaskEnabled;
-        this.maskOptions = control.maskOptions;
-        this.allowInvalidDate = control.allowInvalidDate;
-        this.maxlength = control.maxlength;
-        this.minlength = control.minlength;
-        this.closeOnSelect = control.closeOnSelect;
-        this.interactions = control.interactions;
-        this.checkboxLabel = control.checkboxLabel;
-        this.restrictFieldInteractions = control.restrictFieldInteractions;
-        this.appendToBody = control.appendToBody;
-        if (this.appendToBody) {
-            notify(`'appendToBody' has been deprecated. Please remove this attribute.`);
-        }
-        this.parentScrollSelector = control.parentScrollSelector;
-        this.description = control.description;
-        this.options = control.options;
-        this.tipWell = control.tipWell;
-        this.customControlConfig = control.customControlConfig;
-        this.warning = control.warning;
-        // Reactive Form, need to enable/disable, can't bind to [disabled]
-        if (this.readOnly) {
-            this.disable();
-        }
-        else {
-            this.enable();
-        }
-    }
-    /**
-     * \@name hide
-     * @param {?=} clearValue - flag to reset the control's value
-     * @return {?}
-     */
-    hide(clearValue = true) {
-        this.hidden = true;
-        if (clearValue) {
-            this.setValue(null);
-        }
-    }
-    /**
-     * \@name show
-     * @return {?}
-     */
-    show() {
-        this.hidden = false;
-    }
-    /**
-     * \@name setRequired
-     * @param {?} isRequired
-     * @return {?}
-     */
-    setRequired(isRequired) {
-        this.required = isRequired;
-        // Update validators to have the required
-        if (this.required && !this.hasRequiredValidator) {
-            /** @type {?} */
-            const validators = [...this.validators];
-            validators.push(_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required);
-            // TODO: duplicated below
-            this.setValidators(validators);
-            this.updateValueAndValidity({ emitEvent: false });
-            this.hasRequiredValidator = this.required;
-        }
-        else if (!this.required && this.hasRequiredValidator) {
-            /** @type {?} */
-            let validators = [...this.validators];
-            validators = validators.filter((/**
-             * @param {?} val
-             * @return {?}
-             */
-            (val) => val !== _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required));
-            // TODO: duplicated above
-            this.setValidators(validators);
-            this.updateValueAndValidity({ emitEvent: false });
-            this.hasRequiredValidator = this.required;
-        }
-    }
-    /**
-     * \@name setValue
-     *
-     * @param {?} value
-     * @param {?=} __1
-     * @return {?}
-     */
-    setValue(value, { onlySelf, emitEvent, emitModelToViewChange, emitViewToModelChange, } = {}) {
-        this.markAsDirty();
-        this.markAsTouched();
-        this.displayValueChanges.emit(value);
-        super.setValue(value, { onlySelf, emitEvent, emitModelToViewChange, emitViewToModelChange });
-        // History
-        clearTimeout(this.historyTimeout);
-        this.historyTimeout = setTimeout((/**
-         * @return {?}
-         */
-        () => {
-            this.valueHistory.push(value);
-        }), 300);
-    }
-    /**
-     * \@name setReadOnly
-     * @param {?} isReadOnly
-     * @return {?}
-     */
-    setReadOnly(isReadOnly) {
-        this.readOnly = isReadOnly;
-        if (this.readOnly) {
-            this.disable();
-        }
-        else {
-            this.enable();
-        }
-    }
-    /**
-     * Disables the control. This means the control will be exempt from validation checks and
-     * excluded from the aggregate value of any parent. Its status is `DISABLED`.
-     *
-     * If the control has children, all children will be disabled to maintain the model.
-     * @param {?=} opts
-     * @return {?}
-     */
-    disable(opts = { emitEvent: false }) {
-        if (typeof opts.emitEvent === 'undefined') {
-            opts.emitEvent = false;
-        }
-        super.disable(opts);
-    }
-    /**
-     * @param {?=} opts
-     * @return {?}
-     */
-    enable(opts = { emitEvent: false }) {
-        if (typeof opts.emitEvent === 'undefined') {
-            opts.emitEvent = false;
-        }
-        super.enable(opts);
-    }
-    /**
-     * \@name markAsInvalid
-     * @param {?} message
-     * @return {?}
-     */
-    markAsInvalid(message) {
-        this.markAsDirty();
-        this.markAsTouched();
-        this.setErrors(Object.assign({}, this.errors, { custom: message }));
-    }
-}
-if (false) {}
-
-/**
- * @fileoverview added by tsickle
  * Generated from: elements/form/controls/BaseControl.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
@@ -18299,6 +18099,206 @@ if (false) {}
  * Generated from: elements/form/FormControls.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+
+/**
+ * @fileoverview added by tsickle
+ * Generated from: elements/form/NovoFormControl.ts
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class NovoFormControl extends _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"] {
+    /**
+     * @param {?} value
+     * @param {?} control
+     */
+    constructor(value, control) {
+        super(value, control.validators, control.asyncValidators);
+        this.displayValueChanges = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
+        this.valueHistory = [];
+        this.validators = control.validators;
+        this.initialValue = value;
+        this.valueHistory.push(value);
+        this.key = control.key;
+        this.label = control.label;
+        this.readOnly = control.readOnly;
+        this.hidden = control.hidden;
+        this.encrypted = control.encrypted;
+        this.config = control.config;
+        this.type = control.type;
+        this.subType = control.subType;
+        this.required = control.required;
+        this.hasRequiredValidator = this.required;
+        this.tooltip = control.tooltip;
+        this.tooltipPosition = control.tooltipPosition;
+        this.tooltipSize = control.tooltipSize;
+        this.tooltipPreline = control.tooltipPreline;
+        this.removeTooltipArrow = control.removeTooltipArrow;
+        this.tooltipAutoPosition = control.tooltipAutoPosition;
+        this.label = control.label;
+        this.name = control.name;
+        this.required = control.required;
+        this.sortOrder = control.sortOrder;
+        this.controlType = control.controlType;
+        this.placeholder = control.placeholder;
+        this.minimal = control.minimal;
+        this.multiple = control.multiple;
+        this.headerConfig = control.headerConfig;
+        this.optionsType = control.optionsType;
+        this.readOnly = control.readOnly;
+        this.layoutOptions = control.layoutOptions;
+        this.military = control.military;
+        this.dateFormat = control.dateFormat;
+        this.currencyFormat = control.currencyFormat;
+        this.startDate = control.startDate;
+        this.endDate = control.endDate;
+        this.weekStart = control.weekStart;
+        this.textMaskEnabled = control.textMaskEnabled;
+        this.textMaskEnabled = control.textMaskEnabled;
+        this.maskOptions = control.maskOptions;
+        this.allowInvalidDate = control.allowInvalidDate;
+        this.maxlength = control.maxlength;
+        this.minlength = control.minlength;
+        this.closeOnSelect = control.closeOnSelect;
+        this.interactions = control.interactions;
+        this.checkboxLabel = control.checkboxLabel;
+        this.restrictFieldInteractions = control.restrictFieldInteractions;
+        this.appendToBody = control.appendToBody;
+        if (this.appendToBody) {
+            notify(`'appendToBody' has been deprecated. Please remove this attribute.`);
+        }
+        this.parentScrollSelector = control.parentScrollSelector;
+        this.description = control.description;
+        this.options = control.options;
+        this.tipWell = control.tipWell;
+        this.customControlConfig = control.customControlConfig;
+        this.warning = control.warning;
+        // Reactive Form, need to enable/disable, can't bind to [disabled]
+        if (this.readOnly) {
+            this.disable();
+        }
+        else {
+            this.enable();
+        }
+    }
+    /**
+     * \@name hide
+     * @param {?=} clearValue - flag to reset the control's value
+     * @return {?}
+     */
+    hide(clearValue = true) {
+        this.hidden = true;
+        if (clearValue) {
+            this.setValue(null);
+        }
+    }
+    /**
+     * \@name show
+     * @return {?}
+     */
+    show() {
+        this.hidden = false;
+    }
+    /**
+     * \@name setRequired
+     * @param {?} isRequired
+     * @return {?}
+     */
+    setRequired(isRequired) {
+        this.required = isRequired;
+        // Update validators to have the required
+        if (this.required && !this.hasRequiredValidator) {
+            /** @type {?} */
+            const validators = [...this.validators];
+            validators.push(_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required);
+            // TODO: duplicated below
+            this.setValidators(validators);
+            this.updateValueAndValidity({ emitEvent: false });
+            this.hasRequiredValidator = this.required;
+        }
+        else if (!this.required && this.hasRequiredValidator) {
+            /** @type {?} */
+            let validators = [...this.validators];
+            validators = validators.filter((/**
+             * @param {?} val
+             * @return {?}
+             */
+            (val) => val !== _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required));
+            // TODO: duplicated above
+            this.setValidators(validators);
+            this.updateValueAndValidity({ emitEvent: false });
+            this.hasRequiredValidator = this.required;
+        }
+    }
+    /**
+     * \@name setValue
+     *
+     * @param {?} value
+     * @param {?=} __1
+     * @return {?}
+     */
+    setValue(value, { onlySelf, emitEvent, emitModelToViewChange, emitViewToModelChange, } = {}) {
+        this.markAsDirty();
+        this.markAsTouched();
+        this.displayValueChanges.emit(value);
+        super.setValue(value, { onlySelf, emitEvent, emitModelToViewChange, emitViewToModelChange });
+        // History
+        clearTimeout(this.historyTimeout);
+        this.historyTimeout = setTimeout((/**
+         * @return {?}
+         */
+        () => {
+            this.valueHistory.push(value);
+        }), 300);
+    }
+    /**
+     * \@name setReadOnly
+     * @param {?} isReadOnly
+     * @return {?}
+     */
+    setReadOnly(isReadOnly) {
+        this.readOnly = isReadOnly;
+        if (this.readOnly) {
+            this.disable();
+        }
+        else {
+            this.enable();
+        }
+    }
+    /**
+     * Disables the control. This means the control will be exempt from validation checks and
+     * excluded from the aggregate value of any parent. Its status is `DISABLED`.
+     *
+     * If the control has children, all children will be disabled to maintain the model.
+     * @param {?=} opts
+     * @return {?}
+     */
+    disable(opts = { emitEvent: false }) {
+        if (typeof opts.emitEvent === 'undefined') {
+            opts.emitEvent = false;
+        }
+        super.disable(opts);
+    }
+    /**
+     * @param {?=} opts
+     * @return {?}
+     */
+    enable(opts = { emitEvent: false }) {
+        if (typeof opts.emitEvent === 'undefined') {
+            opts.emitEvent = false;
+        }
+        super.enable(opts);
+    }
+    /**
+     * \@name markAsInvalid
+     * @param {?} message
+     * @return {?}
+     */
+    markAsInvalid(message) {
+        this.markAsDirty();
+        this.markAsTouched();
+        this.setErrors(Object.assign({}, this.errors, { custom: message }));
+    }
+}
+if (false) {}
 
 /**
  * @fileoverview added by tsickle
@@ -19545,6 +19545,54 @@ if (false) {}
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: elements/modal/ModalService.ts
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class NovoModalService {
+    /**
+     * @param {?} componentUtils
+     */
+    constructor(componentUtils) {
+        this.componentUtils = componentUtils;
+    }
+    /**
+     * @param {?} view
+     * @return {?}
+     */
+    set parentViewContainer(view) {
+        this._parentViewContainer = view;
+    }
+    /**
+     * @template T
+     * @param {?} component
+     * @param {?=} scope
+     * @return {?}
+     */
+    open(component, scope = {}) {
+        if (!this._parentViewContainer) {
+            throw new Error('No parent view container specified for the ModalService. Set it inside your main application. \nthis.modalService.parentViewContainer = view (ViewContainerRef)');
+        }
+        /** @type {?} */
+        const modal = new NovoModalRef();
+        modal.component = component;
+        modal.open();
+        /** @type {?} */
+        const providers = [{ provide: NovoModalRef, useValue: modal }, { provide: NovoModalParams, useValue: scope }];
+        modal.containerRef = this.componentUtils.append(NovoModalContainerElement, this._parentViewContainer, providers);
+        return modal;
+    }
+}
+NovoModalService.decorators = [
+    { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"] }
+];
+/** @nocollapse */
+NovoModalService.ctorParameters = () => [
+    { type: ComponentUtils }
+];
+if (false) {}
+
+/**
+ * @fileoverview added by tsickle
  * Generated from: elements/toast/ToastService.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
@@ -19702,54 +19750,6 @@ NovoToastService.decorators = [
 ];
 /** @nocollapse */
 NovoToastService.ctorParameters = () => [
-    { type: ComponentUtils }
-];
-if (false) {}
-
-/**
- * @fileoverview added by tsickle
- * Generated from: elements/modal/ModalService.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class NovoModalService {
-    /**
-     * @param {?} componentUtils
-     */
-    constructor(componentUtils) {
-        this.componentUtils = componentUtils;
-    }
-    /**
-     * @param {?} view
-     * @return {?}
-     */
-    set parentViewContainer(view) {
-        this._parentViewContainer = view;
-    }
-    /**
-     * @template T
-     * @param {?} component
-     * @param {?=} scope
-     * @return {?}
-     */
-    open(component, scope = {}) {
-        if (!this._parentViewContainer) {
-            throw new Error('No parent view container specified for the ModalService. Set it inside your main application. \nthis.modalService.parentViewContainer = view (ViewContainerRef)');
-        }
-        /** @type {?} */
-        const modal = new NovoModalRef();
-        modal.component = component;
-        modal.open();
-        /** @type {?} */
-        const providers = [{ provide: NovoModalRef, useValue: modal }, { provide: NovoModalParams, useValue: scope }];
-        modal.containerRef = this.componentUtils.append(NovoModalContainerElement, this._parentViewContainer, providers);
-        return modal;
-    }
-}
-NovoModalService.decorators = [
-    { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"] }
-];
-/** @nocollapse */
-NovoModalService.ctorParameters = () => [
     { type: ComponentUtils }
 ];
 if (false) {}
@@ -44311,233 +44311,104 @@ NovoTableModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * Generated from: elements/value/Value.ts
+ * Generated from: elements/value/EntityList.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-/** @enum {number} */
-const NOVO_VALUE_TYPE = {
-    DEFAULT: 0,
-    ENTITY_LIST: 1,
-    LINK: 2,
-    INTERNAL_LINK: 3,
-};
-NOVO_VALUE_TYPE[NOVO_VALUE_TYPE.DEFAULT] = 'DEFAULT';
-NOVO_VALUE_TYPE[NOVO_VALUE_TYPE.ENTITY_LIST] = 'ENTITY_LIST';
-NOVO_VALUE_TYPE[NOVO_VALUE_TYPE.LINK] = 'LINK';
-NOVO_VALUE_TYPE[NOVO_VALUE_TYPE.INTERNAL_LINK] = 'INTERNAL_LINK';
-/** @enum {number} */
-const NOVO_VALUE_THEME = {
-    DEFAULT: 0,
-    MOBILE: 1,
-};
-NOVO_VALUE_THEME[NOVO_VALUE_THEME.DEFAULT] = 'DEFAULT';
-NOVO_VALUE_THEME[NOVO_VALUE_THEME.MOBILE] = 'MOBILE';
-class NovoValueElement {
+class EntityList {
     constructor() {
-        // TODO use interface
-        this.meta = { type: 'SCALAR', label: '' }; // TODO use interface
-        // TODO use interface
-        this.theme = NOVO_VALUE_THEME.DEFAULT;
-        this.NOVO_VALUE_TYPE = NOVO_VALUE_TYPE;
-        this.NOVO_VALUE_THEME = NOVO_VALUE_THEME;
-        this.customClass = '';
-    }
-    /**
-     * @param {?} lbl
-     * @return {?}
-     */
-    set label(lbl) {
-        this.meta.label = lbl;
-    }
-    /**
-     * @return {?}
-     */
-    get label() {
-        return this.meta.label;
-    }
-    /**
-     * @param {?} typ
-     * @return {?}
-     */
-    set type(typ) {
-        this.meta.type = typ;
-    }
-    /**
-     * @return {?}
-     */
-    get type() {
-        return this.meta.type;
+        this.baseEntity = '';
+        this.ENTITY_SHORT_NAMES = {
+            Lead: 'lead',
+            ClientContact: 'contact',
+            ClientContact1: 'contact',
+            ClientContact2: 'contact',
+            ClientContact3: 'contact',
+            ClientContact4: 'contact',
+            ClientContact5: 'contact',
+            ClientCorporation: 'company',
+            ClientCorporation1: 'company',
+            ClientCorporation2: 'company',
+            ClientCorporation3: 'company',
+            ClientCorporation4: 'company',
+            ClientCorporation5: 'company',
+            Opportunity: 'opportunity',
+            Task: 'task',
+            Note: 'note',
+            CorporateUser: 'user',
+            Candidate: 'candidate',
+            JobOrder: 'job',
+            JobOrder1: 'job',
+            JobOrder2: 'job',
+            JobOrder3: 'job',
+            JobOrder4: 'job',
+            JobOrder5: 'job',
+            Placement: 'placement',
+            JobSubmission: 'submission',
+            CandidateReference: 'references',
+            DistributionList: 'distributionList',
+            Appointment: 'appointment',
+        };
     }
     /**
      * @return {?}
      */
     ngOnInit() {
-        if (Helpers.isEmpty(this.meta)) {
-            this.meta = {
-                label: '',
-            };
+        // use a local copy of the meta to set the type to TO_ONE for proper display
+        // without changing the input object
+        this.metaDisplay = Helpers.deepClone(this.meta);
+        this.metaDisplay.type = 'TO_ONE';
+        this.baseEntity = this.meta.associatedEntity.entity;
+        for (const entity of this.data.data) {
+            entity.isLinkable = this.isLinkable(entity);
+            entity.class = this.getClass(entity);
         }
     }
     /**
+     * @param {?} entity
      * @return {?}
      */
-    get isMobile() {
-        return this.theme === NOVO_VALUE_THEME.MOBILE;
+    getClass(entity) {
+        return this.ENTITY_SHORT_NAMES[entity.personSubtype];
     }
     /**
-     * @param {?} icon
+     * @param {?} entity
      * @return {?}
      */
-    iconClass(icon) {
-        /** @type {?} */
-        let iconClass = '';
-        if (icon && icon.iconCls) {
-            iconClass = `bhi-${icon.iconCls} actions`;
-            if (icon.onIconClick) {
-                iconClass = `${iconClass} clickable`;
-            }
-            return iconClass;
-        }
-        return iconClass;
+    openLink(entity) {
+        entity.openLink(entity);
     }
     /**
+     * @param {?} entity
      * @return {?}
      */
-    get isDefault() {
-        return true;
-    }
-    /**
-     * @return {?}
-     */
-    get showLabel() {
-        return (this._type === NOVO_VALUE_TYPE.INTERNAL_LINK || this._type === NOVO_VALUE_TYPE.LINK || this._type === NOVO_VALUE_TYPE.ENTITY_LIST);
-    }
-    /**
-     * @return {?}
-     */
-    get showIcon() {
-        return this.meta && this.meta.icons && this.meta.icons.length && !Helpers.isEmpty(this.data);
-    }
-    /**
-     * @param {?} icon
-     * @return {?}
-     */
-    onValueClick(icon) {
-        if (icon.onIconClick && typeof icon.onIconClick === 'function') {
-            icon.onIconClick(this.data, this.meta);
-        }
-    }
-    /**
-     * @return {?}
-     */
-    openLink() {
-        if (this.meta && this.meta.openLink && typeof this.meta.openLink === 'function') {
-            this.meta.openLink(this.data, this.meta);
-        }
-    }
-    /**
-     * @param {?=} changes
-     * @return {?}
-     */
-    ngOnChanges(changes) {
-        if (this.meta && this.isLinkField(this.meta, this.data)) {
-            this._type = NOVO_VALUE_TYPE.LINK;
-            // Make sure the value has a protocol, otherwise the URL will be relative
-            /** @type {?} */
-            const hasProtocol = new RegExp('^(http|https)://', 'i');
-            if (!hasProtocol.test(this.data)) {
-                this.url = `http://${this.data}`;
-            }
-            else {
-                this.url = this.data;
-            }
-        }
-        else if (this.isEntityList(this.meta.type)) {
-            this._type = NOVO_VALUE_TYPE.ENTITY_LIST;
-        }
-        else if (this.isHTMLField(this.meta)) {
-            this.customClass = this.meta.customClass ? this.meta.customClass : '';
-            if (this.meta.stripHTML && this.data && this.data.replace) {
-                this.data = this.data.replace(/<(?!style|\/style).+?>/gi, '').trim();
-            }
-        }
-        else if (this.meta && this.meta.associatedEntity) {
-            switch (this.meta.associatedEntity.entity) {
-                case 'ClientCorporation':
-                case 'ClientContact':
-                case 'Candidate':
-                case 'Opportunity':
-                case 'JobOrder':
-                case 'Placement':
-                case 'Lead':
-                    this._type = NOVO_VALUE_TYPE.INTERNAL_LINK;
-                    break;
-                default:
-                    break;
-            }
-        }
-    }
-    /**
-     * @param {?} field
-     * @param {?} data
-     * @return {?}
-     */
-    isLinkField(field, data) {
-        /** @type {?} */
-        const linkFields = ['companyURL', 'clientCorporationCompanyURL'];
-        /** @type {?} */
-        const regex = new RegExp('^(https?://(?:www.|(?!www))[^s.]+.[^s]{2,}|www.[^s]+.[^s]{2,})$', 'gi');
-        /** @type {?} */
-        const isURL = Helpers.isString(data) && regex.exec(data.trim());
-        return linkFields.indexOf(field.name) > -1 || !!isURL || field.type === NOVO_VALUE_TYPE.LINK;
-    }
-    /**
-     * @param {?} type
-     * @return {?}
-     */
-    isEntityList(type) {
-        return type === 'TO_MANY';
-    }
-    /**
-     * @param {?} meta
-     * @return {?}
-     */
-    isHTMLField(meta) {
-        return meta.dataSpecialization === 'HTML' || meta.inputType === 'TEXTAREA';
+    isLinkable(entity) {
+        return entity.openLink;
     }
 }
-NovoValueElement.decorators = [
+EntityList.decorators = [
     { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"], args: [{
-                selector: 'novo-value',
+                selector: 'novo-entity-list',
+                changeDetection: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ChangeDetectionStrategy"].OnPush,
                 template: `
-      <ng-container [ngSwitch]="_type">
-          <div class="value-outer" *ngIf="showLabel">
-              <label>{{ meta.label }}</label>
-              <span class="value">
-                <i *ngIf="meta.showEntityIcon" class="bhi-circle {{meta.entityIconClass}}"></i>
-                <a *ngSwitchCase="NOVO_VALUE_TYPE.INTERNAL_LINK" (click)="openLink()" [innerHTML]="data | render : meta"></a>
-                <a *ngSwitchCase="NOVO_VALUE_TYPE.LINK" class="value" [href]="url" target="_blank" [innerHTML]="data | render : meta"></a>
-              </span>
-              <novo-entity-list *ngSwitchCase="NOVO_VALUE_TYPE.ENTITY_LIST" [data]='data' [meta]="meta"></novo-entity-list>
-          </div>
-          <div *ngSwitchDefault class="value-outer" [ngClass]="customClass">
-              <label>{{ meta.label }}</label>
-              <div *ngIf="isDefault" class="value" [innerHTML]="data | render : meta"></div>
-          </div>
-          <div class="actions" *ngIf="showIcon">
-              <i *ngFor="let icon of meta.icons" [class]="iconClass(icon)" (click)="onValueClick(icon)"></i>
-          </div>
-      </ng-container>
+        <div *ngFor="let entity of data.data" class="entity">
+            <a *ngIf="entity.isLinkable" (click)="openLink(entity)">
+                <i class="bhi-circle {{ entity.class }}"></i>{{ entity | render : metaDisplay }}
+            </a>
+            <span *ngIf="!entity.isLinkable && entity.personSubtype">
+                <i class="bhi-circle {{ entity.class }}"></i>{{ entity | render : metaDisplay }}
+            </span>
+            <span *ngIf="!entity.isLinkable && !entity.personSubtype">
+                {{ entity | render : metaDisplay }}
+            </span>
+        </div>
     `
             }] }
 ];
-NovoValueElement.propDecorators = {
+/** @nocollapse */
+EntityList.ctorParameters = () => [];
+EntityList.propDecorators = {
     data: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"] }],
-    meta: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"] }],
-    theme: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"] }],
-    label: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"] }],
-    type: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"] }],
-    isMobile: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["HostBinding"], args: ['class.mobile',] }]
+    meta: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"] }]
 };
 if (false) {}
 
@@ -45019,104 +44890,233 @@ if (false) {}
 
 /**
  * @fileoverview added by tsickle
- * Generated from: elements/value/EntityList.ts
+ * Generated from: elements/value/Value.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-class EntityList {
+/** @enum {number} */
+const NOVO_VALUE_TYPE = {
+    DEFAULT: 0,
+    ENTITY_LIST: 1,
+    LINK: 2,
+    INTERNAL_LINK: 3,
+};
+NOVO_VALUE_TYPE[NOVO_VALUE_TYPE.DEFAULT] = 'DEFAULT';
+NOVO_VALUE_TYPE[NOVO_VALUE_TYPE.ENTITY_LIST] = 'ENTITY_LIST';
+NOVO_VALUE_TYPE[NOVO_VALUE_TYPE.LINK] = 'LINK';
+NOVO_VALUE_TYPE[NOVO_VALUE_TYPE.INTERNAL_LINK] = 'INTERNAL_LINK';
+/** @enum {number} */
+const NOVO_VALUE_THEME = {
+    DEFAULT: 0,
+    MOBILE: 1,
+};
+NOVO_VALUE_THEME[NOVO_VALUE_THEME.DEFAULT] = 'DEFAULT';
+NOVO_VALUE_THEME[NOVO_VALUE_THEME.MOBILE] = 'MOBILE';
+class NovoValueElement {
     constructor() {
-        this.baseEntity = '';
-        this.ENTITY_SHORT_NAMES = {
-            Lead: 'lead',
-            ClientContact: 'contact',
-            ClientContact1: 'contact',
-            ClientContact2: 'contact',
-            ClientContact3: 'contact',
-            ClientContact4: 'contact',
-            ClientContact5: 'contact',
-            ClientCorporation: 'company',
-            ClientCorporation1: 'company',
-            ClientCorporation2: 'company',
-            ClientCorporation3: 'company',
-            ClientCorporation4: 'company',
-            ClientCorporation5: 'company',
-            Opportunity: 'opportunity',
-            Task: 'task',
-            Note: 'note',
-            CorporateUser: 'user',
-            Candidate: 'candidate',
-            JobOrder: 'job',
-            JobOrder1: 'job',
-            JobOrder2: 'job',
-            JobOrder3: 'job',
-            JobOrder4: 'job',
-            JobOrder5: 'job',
-            Placement: 'placement',
-            JobSubmission: 'submission',
-            CandidateReference: 'references',
-            DistributionList: 'distributionList',
-            Appointment: 'appointment',
-        };
+        // TODO use interface
+        this.meta = { type: 'SCALAR', label: '' }; // TODO use interface
+        // TODO use interface
+        this.theme = NOVO_VALUE_THEME.DEFAULT;
+        this.NOVO_VALUE_TYPE = NOVO_VALUE_TYPE;
+        this.NOVO_VALUE_THEME = NOVO_VALUE_THEME;
+        this.customClass = '';
+    }
+    /**
+     * @param {?} lbl
+     * @return {?}
+     */
+    set label(lbl) {
+        this.meta.label = lbl;
+    }
+    /**
+     * @return {?}
+     */
+    get label() {
+        return this.meta.label;
+    }
+    /**
+     * @param {?} typ
+     * @return {?}
+     */
+    set type(typ) {
+        this.meta.type = typ;
+    }
+    /**
+     * @return {?}
+     */
+    get type() {
+        return this.meta.type;
     }
     /**
      * @return {?}
      */
     ngOnInit() {
-        // use a local copy of the meta to set the type to TO_ONE for proper display
-        // without changing the input object
-        this.metaDisplay = Helpers.deepClone(this.meta);
-        this.metaDisplay.type = 'TO_ONE';
-        this.baseEntity = this.meta.associatedEntity.entity;
-        for (const entity of this.data.data) {
-            entity.isLinkable = this.isLinkable(entity);
-            entity.class = this.getClass(entity);
+        if (Helpers.isEmpty(this.meta)) {
+            this.meta = {
+                label: '',
+            };
         }
     }
     /**
-     * @param {?} entity
      * @return {?}
      */
-    getClass(entity) {
-        return this.ENTITY_SHORT_NAMES[entity.personSubtype];
+    get isMobile() {
+        return this.theme === NOVO_VALUE_THEME.MOBILE;
     }
     /**
-     * @param {?} entity
+     * @param {?} icon
      * @return {?}
      */
-    openLink(entity) {
-        entity.openLink(entity);
+    iconClass(icon) {
+        /** @type {?} */
+        let iconClass = '';
+        if (icon && icon.iconCls) {
+            iconClass = `bhi-${icon.iconCls} actions`;
+            if (icon.onIconClick) {
+                iconClass = `${iconClass} clickable`;
+            }
+            return iconClass;
+        }
+        return iconClass;
     }
     /**
-     * @param {?} entity
      * @return {?}
      */
-    isLinkable(entity) {
-        return entity.openLink;
+    get isDefault() {
+        return true;
+    }
+    /**
+     * @return {?}
+     */
+    get showLabel() {
+        return (this._type === NOVO_VALUE_TYPE.INTERNAL_LINK || this._type === NOVO_VALUE_TYPE.LINK || this._type === NOVO_VALUE_TYPE.ENTITY_LIST);
+    }
+    /**
+     * @return {?}
+     */
+    get showIcon() {
+        return this.meta && this.meta.icons && this.meta.icons.length && !Helpers.isEmpty(this.data);
+    }
+    /**
+     * @param {?} icon
+     * @return {?}
+     */
+    onValueClick(icon) {
+        if (icon.onIconClick && typeof icon.onIconClick === 'function') {
+            icon.onIconClick(this.data, this.meta);
+        }
+    }
+    /**
+     * @return {?}
+     */
+    openLink() {
+        if (this.meta && this.meta.openLink && typeof this.meta.openLink === 'function') {
+            this.meta.openLink(this.data, this.meta);
+        }
+    }
+    /**
+     * @param {?=} changes
+     * @return {?}
+     */
+    ngOnChanges(changes) {
+        if (this.meta && this.isLinkField(this.meta, this.data)) {
+            this._type = NOVO_VALUE_TYPE.LINK;
+            // Make sure the value has a protocol, otherwise the URL will be relative
+            /** @type {?} */
+            const hasProtocol = new RegExp('^(http|https)://', 'i');
+            if (!hasProtocol.test(this.data)) {
+                this.url = `http://${this.data}`;
+            }
+            else {
+                this.url = this.data;
+            }
+        }
+        else if (this.isEntityList(this.meta.type)) {
+            this._type = NOVO_VALUE_TYPE.ENTITY_LIST;
+        }
+        else if (this.isHTMLField(this.meta)) {
+            this.customClass = this.meta.customClass ? this.meta.customClass : '';
+            if (this.meta.stripHTML && this.data && this.data.replace) {
+                this.data = this.data.replace(/<(?!style|\/style).+?>/gi, '').trim();
+            }
+        }
+        else if (this.meta && this.meta.associatedEntity) {
+            switch (this.meta.associatedEntity.entity) {
+                case 'ClientCorporation':
+                case 'ClientContact':
+                case 'Candidate':
+                case 'Opportunity':
+                case 'JobOrder':
+                case 'Placement':
+                case 'Lead':
+                    this._type = NOVO_VALUE_TYPE.INTERNAL_LINK;
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+    /**
+     * @param {?} field
+     * @param {?} data
+     * @return {?}
+     */
+    isLinkField(field, data) {
+        /** @type {?} */
+        const linkFields = ['companyURL', 'clientCorporationCompanyURL'];
+        /** @type {?} */
+        const regex = new RegExp('^(https?://(?:www.|(?!www))[^s.]+.[^s]{2,}|www.[^s]+.[^s]{2,})$', 'gi');
+        /** @type {?} */
+        const isURL = Helpers.isString(data) && regex.exec(data.trim());
+        return linkFields.indexOf(field.name) > -1 || !!isURL || field.type === NOVO_VALUE_TYPE.LINK;
+    }
+    /**
+     * @param {?} type
+     * @return {?}
+     */
+    isEntityList(type) {
+        return type === 'TO_MANY';
+    }
+    /**
+     * @param {?} meta
+     * @return {?}
+     */
+    isHTMLField(meta) {
+        return meta.dataSpecialization === 'HTML' || meta.inputType === 'TEXTAREA';
     }
 }
-EntityList.decorators = [
+NovoValueElement.decorators = [
     { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"], args: [{
-                selector: 'novo-entity-list',
-                changeDetection: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ChangeDetectionStrategy"].OnPush,
+                selector: 'novo-value',
                 template: `
-        <div *ngFor="let entity of data.data" class="entity">
-            <a *ngIf="entity.isLinkable" (click)="openLink(entity)">
-                <i class="bhi-circle {{ entity.class }}"></i>{{ entity | render : metaDisplay }}
-            </a>
-            <span *ngIf="!entity.isLinkable && entity.personSubtype">
-                <i class="bhi-circle {{ entity.class }}"></i>{{ entity | render : metaDisplay }}
-            </span>
-            <span *ngIf="!entity.isLinkable && !entity.personSubtype">
-                {{ entity | render : metaDisplay }}
-            </span>
-        </div>
+      <ng-container [ngSwitch]="_type">
+          <div class="value-outer" *ngIf="showLabel">
+              <label>{{ meta.label }}</label>
+              <span class="value">
+                <i *ngIf="meta.showEntityIcon" class="bhi-circle {{meta.entityIconClass}}"></i>
+                <a *ngSwitchCase="NOVO_VALUE_TYPE.INTERNAL_LINK" (click)="openLink()" [innerHTML]="data | render : meta"></a>
+                <a *ngSwitchCase="NOVO_VALUE_TYPE.LINK" class="value" [href]="url" target="_blank" [innerHTML]="data | render : meta"></a>
+              </span>
+              <novo-entity-list *ngSwitchCase="NOVO_VALUE_TYPE.ENTITY_LIST" [data]='data' [meta]="meta"></novo-entity-list>
+          </div>
+          <div *ngSwitchDefault class="value-outer" [ngClass]="customClass">
+              <label>{{ meta.label }}</label>
+              <div *ngIf="isDefault" class="value" [innerHTML]="data | render : meta"></div>
+          </div>
+          <div class="actions" *ngIf="showIcon">
+              <i *ngFor="let icon of meta.icons" [class]="iconClass(icon)" (click)="onValueClick(icon)"></i>
+          </div>
+      </ng-container>
     `
             }] }
 ];
-/** @nocollapse */
-EntityList.ctorParameters = () => [];
-EntityList.propDecorators = {
+NovoValueElement.propDecorators = {
     data: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"] }],
-    meta: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"] }]
+    meta: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"] }],
+    theme: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"] }],
+    label: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"] }],
+    type: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"] }],
+    isMobile: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["HostBinding"], args: ['class.mobile',] }]
 };
 if (false) {}
 
