@@ -1,28 +1,12 @@
 // NG
-import {
-  Component,
-  Input,
-  Output,
-  EventEmitter,
-  ViewChild,
-  forwardRef,
-  ElementRef,
-  OnInit,
-  OnChanges,
-  SimpleChanges,
-  HostListener,
-  ChangeDetectorRef,
-  OnDestroy,
-  NgZone,
-} from '@angular/core';
-import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
-import { TAB, ENTER, ESCAPE } from '@angular/cdk/keycodes';
 import { FocusMonitor } from '@angular/cdk/a11y';
-// App
-import { NovoOverlayTemplateComponent } from '../overlay/Overlay';
-import { KeyCodes } from '../../utils/key-codes/KeyCodes';
+import { ChangeDetectorRef, Component, ElementRef, EventEmitter, forwardRef, HostListener, Input, NgZone, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { NovoLabelService } from '../../services/novo-label-service';
 import { Helpers } from '../../utils/Helpers';
+import { KeyCodes } from '../../utils/key-codes/KeyCodes';
+// App
+import { NovoOverlayTemplateComponent } from '../overlay/Overlay';
 
 // Value accessor for the component (supports ngModel)
 const SELECT_VALUE_ACCESSOR = {
@@ -100,8 +84,8 @@ export class NovoSelectElement implements OnInit, OnChanges, OnDestroy, ControlV
   createdItem: any;
   selected: any;
   model: any;
-  onModelChange: Function = () => {};
-  onModelTouched: Function = () => {};
+  onModelChange: Function = () => { };
+  onModelTouched: Function = () => { };
   filterTerm: string = '';
   filterTermTimeout;
   filteredOptions: any;
@@ -119,7 +103,7 @@ export class NovoSelectElement implements OnInit, OnChanges, OnDestroy, ControlV
     public ref: ChangeDetectorRef,
     private focusMonitor: FocusMonitor,
     private ngZone: NgZone,
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.focusMonitor.monitor(this.dropdown.nativeElement).subscribe((origin) =>

@@ -1,19 +1,9 @@
 // NG2
-import {
-  ComponentFactoryResolver,
-  ComponentRef,
-  Injectable,
-  Injector,
-  ReflectiveInjector,
-  ViewContainerRef,
-  ResolvedReflectiveProvider,
-  StaticProvider,
-  Type,
-} from '@angular/core';
+import { ComponentFactoryResolver, ComponentRef, Injectable, Injector, StaticProvider, Type, ViewContainerRef } from '@angular/core';
 
 @Injectable()
 export class ComponentUtils {
-  constructor(public componentFactoryResolver: ComponentFactoryResolver) {}
+  constructor(public componentFactoryResolver: ComponentFactoryResolver) { }
 
   append<T>(ComponentClass: Type<T>, location: ViewContainerRef, providers?: StaticProvider[], onTop?: boolean): ComponentRef<T> {
     const componentFactory = this.componentFactoryResolver.resolveComponentFactory(ComponentClass);

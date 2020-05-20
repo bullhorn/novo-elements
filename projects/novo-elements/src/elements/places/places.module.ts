@@ -1,10 +1,10 @@
-import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { NovoListModule } from '../list/List.module';
 import { PlacesListComponent } from './places.component';
 import { GooglePlacesService } from './places.service';
-import { NovoListModule } from '../list/List.module';
 
 @NgModule({
   declarations: [PlacesListComponent],
@@ -12,4 +12,4 @@ import { NovoListModule } from '../list/List.module';
   exports: [PlacesListComponent],
   providers: [GooglePlacesService],
 })
-export class GooglePlacesModule {}
+export class GooglePlacesModule { }

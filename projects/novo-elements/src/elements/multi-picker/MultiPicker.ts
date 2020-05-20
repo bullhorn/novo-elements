@@ -1,13 +1,11 @@
 // NG2
-import { Component, OnInit, EventEmitter, forwardRef, ElementRef, Input, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, forwardRef, Input, OnInit, Output } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
-// APP
-import { OutsideClick } from '../../utils/outside-click/OutsideClick';
-import { KeyCodes } from '../../utils/key-codes/KeyCodes';
-import { Helpers } from '../../utils/Helpers';
-import { NovoLabelService } from '../../services/novo-label-service';
 // Vendor
 import { ReplaySubject } from 'rxjs';
+import { NovoLabelService } from '../../services/novo-label-service';
+import { Helpers } from '../../utils/Helpers';
+import { KeyCodes } from '../../utils/key-codes/KeyCodes';
 
 // Value accessor for the component (supports ngModel)
 const CHIPS_VALUE_ACCESSOR = {
@@ -104,8 +102,8 @@ export class NovoMultiPickerElement implements OnInit {
   notShown: any = {};
   // Placeholders for the callbacks
   model: any;
-  onModelChange: Function = () => {};
-  onModelTouched: Function = () => {};
+  onModelChange: Function = () => { };
+  onModelTouched: Function = () => { };
 
   constructor(public element: ElementRef, public labels: NovoLabelService) {
     this.chipsCount = 4;

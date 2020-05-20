@@ -1,17 +1,8 @@
-import {
-  Component,
-  HostBinding,
-  OnDestroy,
-  ElementRef,
-  Renderer2,
-  Optional,
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-} from '@angular/core';
-import { CdkHeaderCell, CdkColumnDef } from '@angular/cdk/table';
+import { CdkColumnDef, CdkHeaderCell } from '@angular/cdk/table';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, HostBinding, OnDestroy, Renderer2 } from '@angular/core';
 import { Subscription } from 'rxjs';
-
 import { NovoDataTable } from '../data-table.component';
+
 
 @Component({
   selector: 'novo-data-table-expand-header-cell',

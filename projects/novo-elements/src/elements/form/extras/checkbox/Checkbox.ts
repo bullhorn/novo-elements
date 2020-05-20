@@ -1,6 +1,6 @@
 // NG2
-import { Component, forwardRef, Input, Output, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, EventEmitter } from '@angular/core';
-import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
+import { ChangeDetectorRef, Component, EventEmitter, forwardRef, Input, OnInit, Output } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 // APP
 import { Helpers } from '../../../../utils/Helpers';
 
@@ -49,10 +49,10 @@ export class NovoCheckboxElement implements ControlValueAccessor, OnInit {
   boxIcon: boolean = true;
   model;
 
-  onModelChange: Function = () => {};
-  onModelTouched: Function = () => {};
+  onModelChange: Function = () => { };
+  onModelTouched: Function = () => { };
 
-  constructor(private ref: ChangeDetectorRef) {}
+  constructor(private ref: ChangeDetectorRef) { }
 
   ngOnInit() {
     this.layoutOptions = Object.assign({}, LAYOUT_DEFAULTS, this.layoutOptions);

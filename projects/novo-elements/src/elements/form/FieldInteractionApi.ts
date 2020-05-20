@@ -1,29 +1,29 @@
 // NG2
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Subscription } from 'rxjs';
 // Vendor
 import { map } from 'rxjs/operators';
+import { NovoLabelService } from '../../services/novo-label-service';
+import { AppBridge } from '../../utils/app-bridge/AppBridge';
+import { FormUtils } from '../../utils/form-utils/FormUtils';
+import { Helpers } from '../../utils/Helpers';
+import { NovoModalService } from '../modal/ModalService';
+import { EntityPickerResults } from '../picker/extras/entity-picker-results/EntityPickerResults';
+import { NovoToastService, ToastOptions } from '../toast/ToastService';
+import { CustomHttp, ModifyPickerConfigArgs, OptionsFunction } from './FieldInteractionApiTypes';
+import { ControlConfirmModal, ControlPromptModal } from './FieldInteractionModals';
+import { NovoControlConfig } from './FormControls';
+import { IFieldInteractionEvent, NovoFieldset, ResultsTemplateType } from './FormInterfaces';
 // APP
 import { NovoFormControl } from './NovoFormControl';
-import { NovoControlConfig } from './FormControls';
-import { FormUtils } from '../../utils/form-utils/FormUtils';
-import { NovoToastService, ToastOptions } from '../toast/ToastService';
-import { NovoModalService } from '../modal/ModalService';
-import { ControlConfirmModal, ControlPromptModal } from './FieldInteractionModals';
-import { Helpers } from '../../utils/Helpers';
-import { AppBridge } from '../../utils/app-bridge/AppBridge';
-import { NovoLabelService } from '../../services/novo-label-service';
-import { IFieldInteractionEvent, NovoFieldset, ResultsTemplateType } from './FormInterfaces';
-import { ModifyPickerConfigArgs, OptionsFunction, CustomHttp } from './FieldInteractionApiTypes';
-import { Observable, Subscription } from 'rxjs';
-import { EntityPickerResults } from '../picker/extras/entity-picker-results/EntityPickerResults';
 
 class CustomHttpImpl implements CustomHttp {
   url: string;
   options: any;
   mapFn = (x) => x;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   get(url: string, options?: any): CustomHttp {
     this.url = url;
@@ -65,7 +65,7 @@ export class FieldInteractionApi {
     private formUtils: FormUtils,
     private http: HttpClient,
     private labels: NovoLabelService,
-  ) {}
+  ) { }
 
   set form(form: any) {
     this._form = form;

@@ -1,6 +1,6 @@
 // NG2
-import { Component, EventEmitter, forwardRef, Input, Output, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
-import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
+import { ChangeDetectorRef, Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 // APP
 import { Helpers } from '../../utils/Helpers';
 
@@ -15,7 +15,7 @@ const RADIO_VALUE_ACCESSOR = {
   selector: 'novo-radio-group',
   template: '<ng-content></ng-content>',
 })
-export class NovoRadioGroup {}
+export class NovoRadioGroup { }
 
 @Component({
   selector: 'novo-radio',
@@ -59,10 +59,10 @@ export class NovoRadioElement implements ControlValueAccessor {
   change: EventEmitter<any> = new EventEmitter();
 
   model: any;
-  onModelChange: Function = () => {};
-  onModelTouched: Function = () => {};
+  onModelChange: Function = () => { };
+  onModelTouched: Function = () => { };
 
-  constructor(private ref: ChangeDetectorRef) {}
+  constructor(private ref: ChangeDetectorRef) { }
 
   select(event) {
     Helpers.swallowEvent(event);

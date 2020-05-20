@@ -1,19 +1,6 @@
 // NG2
-import {
-  Component,
-  PLATFORM_ID,
-  Inject,
-  Input,
-  Output,
-  Optional,
-  EventEmitter,
-  OnInit,
-  OnChanges,
-  SimpleChanges,
-  ElementRef,
-} from '@angular/core';
-import { NovoSearchBoxElement } from '../search/SearchBox';
-import { isPlatformBrowser, isPlatformServer } from '@angular/common';
+import { isPlatformBrowser } from '@angular/common';
+import { Component, ElementRef, EventEmitter, Inject, Input, OnChanges, OnInit, Output, PLATFORM_ID } from '@angular/core';
 import { GlobalRef } from '../../services/global/global.service';
 import { GooglePlacesService } from './places.service';
 
@@ -108,7 +95,7 @@ export class PlacesListComponent implements OnInit, OnChanges {
     private _elmRef: ElementRef,
     private _global: GlobalRef,
     private _googlePlacesService: GooglePlacesService,
-  ) {}
+  ) { }
 
   ngOnInit(): any {
     if (!this.moduleinit) {

@@ -1,11 +1,8 @@
 // NG
-import { ChangeDetectorRef, Component, ElementRef, forwardRef, Host, Input, Output, Inject, ViewChild, EventEmitter } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, EventEmitter, forwardRef, Input, Output } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { TAB, ENTER, ESCAPE } from '@angular/cdk/keycodes';
 // Vendor
-import { parse, isDate } from 'date-fns';
-// App
-import { NovoDateTimePickerElement } from './DateTimePicker';
+import { isDate, parse } from 'date-fns';
 import { NovoLabelService } from '../../services/novo-label-service';
 import { Helpers } from '../../utils/Helpers';
 
@@ -47,10 +44,10 @@ export class NovoDateTimePickerInputElement implements ControlValueAccessor {
   public timePart: any;
 
   /** View -> model callback called when value changes */
-  _onChange: (value: any) => void = () => {};
+  _onChange: (value: any) => void = () => { };
 
   /** View -> model callback called when autocomplete has been touched */
-  _onTouched = () => {};
+  _onTouched = () => { };
 
   @Input()
   name: string;
@@ -75,7 +72,7 @@ export class NovoDateTimePickerInputElement implements ControlValueAccessor {
   @Output()
   focusEvent: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
 
-  constructor(public element: ElementRef, public labels: NovoLabelService, private _changeDetectorRef: ChangeDetectorRef) {}
+  constructor(public element: ElementRef, public labels: NovoLabelService, private _changeDetectorRef: ChangeDetectorRef) { }
 
   writeValue(value: any): void {
     this.datePart = isDate(value) ? parse(value) : value;

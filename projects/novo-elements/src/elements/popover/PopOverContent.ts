@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, OnDestroy, Input, ViewChild, ElementRef, EventEmitter, ChangeDetectorRef } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, ViewChild } from '@angular/core';
 import { PopOverDirective } from './PopOver';
 
 @Component({
@@ -41,7 +41,7 @@ export class PopOverContent implements AfterViewInit {
   effectiveAlignment: string;
   isHidden: boolean = false;
 
-  constructor(protected element: ElementRef, protected cdr: ChangeDetectorRef) {}
+  constructor(protected element: ElementRef, protected cdr: ChangeDetectorRef) { }
 
   ngAfterViewInit(): void {
     this.show();

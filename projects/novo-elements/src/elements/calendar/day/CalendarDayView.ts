@@ -1,27 +1,6 @@
-import {
-  Component,
-  Input,
-  OnChanges,
-  Output,
-  EventEmitter,
-  ChangeDetectorRef,
-  LOCALE_ID,
-  Inject,
-  OnInit,
-  OnDestroy,
-  TemplateRef,
-} from '@angular/core';
-import {
-  CalendarEvent,
-  DayView,
-  DayViewHour,
-  DayViewHourSegment,
-  DayViewEvent,
-  CalendarEventTimesChangedEvent,
-  getDayView,
-  getDayViewHourGrid,
-} from '../../../utils/calendar-utils/CalendarUtils';
+import { ChangeDetectorRef, Component, EventEmitter, Inject, Input, LOCALE_ID, OnChanges, OnDestroy, OnInit, Output, TemplateRef } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
+import { CalendarEvent, CalendarEventTimesChangedEvent, DayView, DayViewHour, getDayView, getDayViewHourGrid } from '../../../utils/calendar-utils/CalendarUtils';
 
 /**
  * @hidden
