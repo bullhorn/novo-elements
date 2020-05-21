@@ -1,0 +1,106 @@
+.configure-columns-dropdown {
+  min-width: 330px;
+  max-width: 330px;
+  max-height: 500px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  &.right {
+    margin-left: -150px !important;
+  }
+  .header {
+    padding: 5px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    button {
+      padding: 3px;
+      icon {
+        font-size: 0.8em;
+      }
+    }
+  }
+  .configure-columns-dropdown-list-options {
+    max-height: 346px;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+  list {
+    item.filter-search {
+      padding: 10px 0;
+      width: 100%;
+      height: auto;
+      flex-direction: column;
+      align-items: flex-start;
+      cursor: initial;
+      &:hover {
+        background: transparent;
+      }
+      .header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 90%;
+        font-size: 0.9em;
+        margin: 0 auto;
+        span {
+          text-transform: uppercase;
+          font-weight: $table-header-font-weight;
+        }
+        button {
+          padding: 0 5px;
+          i {
+            height: auto !important;
+            width: auto !important;
+            font-size: 0.9em;
+          }
+        }
+      }
+      input {
+        border: none;
+        border-bottom: 2px solid #bebebe;
+        width: 90%;
+        margin: 0 auto;
+        background: transparent;
+        &:focus {
+          outline: none;
+          border-bottom: 2px solid $ocean;
+          ~ i.bhi-search {
+            color: $ocean;
+          }
+        }
+      }
+    }
+    item > span {
+      display: flex;
+      max-width: calc(100% - 20px);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+  i.bhi-search {
+    color: inherit;
+    position: relative;
+    left: 196px;
+    top: -25px;
+  }
+  .filter-null-results {
+    background-color: $white;
+    text-align: center;
+    color: darken($light, 15%);
+    background: transparent;
+    font-weight: 500;
+  }
+}
+.configure-columns-footer {
+  border-top: 1px solid $light;
+  padding: 5px 10px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  button {
+    icon {
+      font-size: 0.8em;
+    }
+  }
+}
