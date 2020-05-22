@@ -36,6 +36,7 @@ yarn-error.log
 testem.log
 /typings
 /projects/novo-examples/src/examples.module.ts
+/projects/novo-examples/src/examples.routes.ts
 
 # System Files
 .DS_Store
