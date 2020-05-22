@@ -25,7 +25,12 @@ import { notify } from '../../utils/notifier/notifier.util';
   template: `
     <ng-content select="button" #trigger></ng-content>
     <novo-overlay-template [parent]="element" [width]="width" [position]="side" [scrollStrategy]="scrollStrategy">
-      <div class="dropdown-container {{ containerClass }}" [style.height.px]="height" [class.has-height]="!!height" (keydown)="onOverlayKeyDown($event)">
+      <div
+        class="dropdown-container {{ containerClass }}"
+        [style.height.px]="height"
+        [class.has-height]="!!height"
+        (keydown)="onOverlayKeyDown($event)"
+      >
         <ng-content></ng-content>
       </div>
     </novo-overlay-template>
@@ -104,6 +109,7 @@ export class NovoDropdownElement implements OnInit, OnDestroy {
 
   public set items(items: QueryList<NovoItemElement>) {
     this._items = items;
+    this.activeIndex = -1;
     // Get the innerText of all the items to allow for searching
     this._textItems = items.map((item: NovoItemElement) => {
       return item.element.nativeElement.innerText;
@@ -288,6 +294,9 @@ export class NovoListElement implements AfterContentInit {
 
   public ngAfterContentInit(): void {
     this.dropdown.items = this.items;
+    this.items.changes.subscribe(() => {
+      this.dropdown.items = this.items;
+    });
   }
 }
 
