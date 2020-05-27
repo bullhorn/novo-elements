@@ -5,12 +5,11 @@
         <list class="results-list" direction="vertical">
             <item keepOpen="true" *ngFor="let column of columns">
                 <item-title>
-                    <span>
+                    <span class="column-name">
                         <novo-checkbox [(ngModel)]="column.enabled"></novo-checkbox>
                         <span>{{ column.label }}</span>
                     </span>
                 </item-title>
-                <item-content direction="horizontal"></item-content>
             </item>
         </list>
     </div>
@@ -19,4 +18,5 @@
       <button theme="primary"
               icon="check">Save</button>
     </div>
+
 </novo-dropdown>

@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, Input } from '@angular/core';
-import { IDataTableColumn } from 'novo-elements';
+//import { IDataTableColumn } from 'novo-elements';
 
 @Component({
     selector: 'configure-columns-dropdown',
@@ -16,8 +16,8 @@ export class ConfigureColumnsDropdown {
 
     ngOnInit() {
         if (this.columns) {
-            const enabledColumns = this.columns.filter((column: IDataTableColumn<any>) => column.enabled);
-            this.displayedColumns = ['selection', 'expand', ...enabledColumns.map((column: IDataTableColumn<any>) => column.id)];
+            const enabledColumns = this.columns.filter((column: any) => column.enabled);
+            this.displayedColumns = ['selection', 'expand', ...enabledColumns.map((column: any) => column.id)];
             this.ref.markForCheck();
         }
     }
