@@ -241,12 +241,14 @@ export class NovoChipsElement implements OnInit, ControlValueAccessor {
   }
 
   getLabelFromOptions(value) {
+    let id = value;
     let optLabel = this.source.options.find((val) => val.value === value);
     if (!optLabel && value.hasOwnProperty('id')) {
       optLabel = this.source.options.find((val) => val.value === value.id);
+      id = value.id;
     }
     return {
-      value,
+      value: id,
       label: optLabel ? optLabel.label : value,
     };
   }

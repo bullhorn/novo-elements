@@ -229,7 +229,7 @@ describe('Elements: NovoChipsElement', () => {
         }]
       };
       const result = component.getLabelFromOptions({ id: 2 });
-      expect(result).toStrictEqual({ value: { id: 2 }, label: 'option 2'});
+      expect(result).toStrictEqual({ value: 2, label: 'option 2'});
     });
     it('should return a proper response if passed an number as value', () => {
       component.source = {
