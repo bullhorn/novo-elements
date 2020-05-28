@@ -103,9 +103,11 @@ export class NovoControlGroup implements AfterContentInit, OnChanges {
   @Input() canRemove: Function;
   // Template for custom row rendering
   @Input() rowTemplate: TemplateRef<any>;
+  // Template for custom column label rendering
+  @Input() columnLabelTemplate: TemplateRef<any>;
 
-  @Output() onRemove = new EventEmitter<{ value, index }>();
-  @Output() onEdit = new EventEmitter<{ value, index }>();
+  @Output() onRemove = new EventEmitter<{ value; index }>();
+  @Output() onEdit = new EventEmitter<{ value; index }>();
   @Output() onAdd = new EventEmitter<any>();
   @Output() change = new EventEmitter<any>();
 
@@ -115,7 +117,7 @@ export class NovoControlGroup implements AfterContentInit, OnChanges {
 
   currentIndex = 0;
 
-  constructor(private formUtils: FormUtils, private fb: FormBuilder, private ref: ChangeDetectorRef, private labels: NovoLabelService) { }
+  constructor(private formUtils: FormUtils, private fb: FormBuilder, private ref: ChangeDetectorRef, private labels: NovoLabelService) {}
 
   ngAfterContentInit() {
     if (!this.key) {
