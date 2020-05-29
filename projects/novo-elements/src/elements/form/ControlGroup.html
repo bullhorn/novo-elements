@@ -22,13 +22,19 @@
     <button [disabled]="!disabledArray[index].edit" type="button" *ngIf="edit && vertical" theme="icon" icon="edit" (click)="editControl(index)" [attr.data-automation-id]="'novo-control-group-edit-' + key" index="-1"></button>
     <button [disabled]="!disabledArray[index].remove" type="button" *ngIf="remove && vertical" theme="icon" icon="delete-o" (click)="removeControl(index)" [attr.data-automation-id]="'novo-control-group-delete-' + key" index="-1"></button>
   </ng-template>
-  <div class="novo-control-group-labels" *ngIf="!vertical && (form?.controls)[key] && (form?.controls)[key]['controls'].length !== 0">
-    <div class="novo-control-group-control-label {{ label.key }}" *ngFor="let label of controlLabels" [style.max-width.px]="label.width" [class.column-required]="label.required">
-      <span [attr.data-automation-id]="'novo-control-group-label-' + label.value">{{ label.value }}</span>
+  <ng-template #defaultColumnLabelTemplate let-form="form" let-key="key">
+      <div class="novo-control-group-control-label {{ label.key }}" *ngFor="let label of controlLabels" [style.max-width.px]="label.width" [class.column-required]="label.required">
+        <span [attr.data-automation-id]="'novo-control-group-label-' + label.value">{{ label.value }}</span>
+      </div>
+      <div class="novo-control-group-control-label last" *ngIf="edit" [attr.data-automation-id]="'novo-control-group-edit-' + key"></div>
+      <div class="novo-control-group-control-label last" *ngIf="remove" [attr.data-automation-id]="'novo-control-group-delete-' + key"></div>
+  </ng-template>
+  <ng-container *ngIf="!vertical && (form?.controls)[key] && (form?.controls)[key]['controls'].length !== 0">
+    <div class="novo-control-group-labels" *ngIf="!vertical && (form?.controls)[key] && (form?.controls)[key]['controls'].length !== 0">
+      <ng-template [ngTemplateOutlet]="columnLabelTemplate || defaultColumnLabelTemplate" [ngTemplateOutletContext]="{ form: form, key: key, controlLabels: controlLabels }">
+      </ng-template>
     </div>
-    <div class="novo-control-group-control-label last" *ngIf="edit" [attr.data-automation-id]="'novo-control-group-edit-' + key"></div>
-    <div class="novo-control-group-control-label last" *ngIf="remove" [attr.data-automation-id]="'novo-control-group-delete-' + key"></div>
-  </div>
+  </ng-container>
   <ng-container *ngIf="(form?.controls)[key]">
     <div class="novo-control-group-row" *ngFor="let control of (form?.controls)[key]['controls']; let index = index">
       <ng-template [ngTemplateOutlet]="rowTemplate || defaultTemplate" [ngTemplateOutletContext]="{ form: form, index: index, key: key, controls: controls }">
