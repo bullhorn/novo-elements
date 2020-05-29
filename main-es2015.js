@@ -13555,13 +13555,23 @@ class NovoChipsElement {
      */
     getLabelFromOptions(value) {
         /** @type {?} */
-        const optLabel = this.source.options.find((/**
+        let id = value;
+        /** @type {?} */
+        let optLabel = this.source.options.find((/**
          * @param {?} val
          * @return {?}
          */
         (val) => val.value === value));
+        if (!optLabel && value.hasOwnProperty('id')) {
+            optLabel = this.source.options.find((/**
+             * @param {?} val
+             * @return {?}
+             */
+            (val) => val.value === value.id));
+            id = value.id;
+        }
         return {
-            value,
+            value: id,
             label: optLabel ? optLabel.label : value,
         };
     }
