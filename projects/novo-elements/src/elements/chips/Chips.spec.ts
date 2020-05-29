@@ -214,6 +214,41 @@ describe('Elements: NovoChipsElement', () => {
     });
   });
 
+  describe('Method: getLabelFromOptions', () => {
+    it('should return a proper response if passed an object as value', () => {
+      component.source = {
+        options: [{
+          value: 1,
+          label: 'option 1',
+        }, {
+          value: 2,
+          label: 'option 2',
+        }, {
+          value: 3,
+          label: 'option 3',
+        }]
+      };
+      const result = component.getLabelFromOptions({ id: 2 });
+      expect(result).toStrictEqual({ value: 2, label: 'option 2'});
+    });
+    it('should return a proper response if passed an number as value', () => {
+      component.source = {
+        options: [{
+          value: 1,
+          label: 'option 1',
+        }, {
+          value: 2,
+          label: 'option 2',
+        }, {
+          value: 3,
+          label: 'option 3',
+        }]
+      };
+      const result = component.getLabelFromOptions(2);
+      expect(result).toStrictEqual({ value: 2, label: 'option 2'});
+    });
+  });
+
   describe('Method: registerOnTouched()', () => {
     it('should be defined.', () => {
       expect(component.registerOnTouched).toBeDefined();
