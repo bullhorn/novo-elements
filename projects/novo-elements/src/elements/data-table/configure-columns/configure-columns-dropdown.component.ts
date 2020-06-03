@@ -1,24 +1,36 @@
-import { ChangeDetectorRef, Component, Input } from '@angular/core';
-//import { IDataTableColumn } from 'novo-elements';
+import { 
+    ChangeDetectorRef,
+    Component,
+    EventEmitter,
+    Input,
+    OnInit,
+    Output,
+} from '@angular/core';
 
 @Component({
     selector: 'configure-columns-dropdown',
     templateUrl: './configure-columns-dropdown.html',
 })
-export class ConfigureColumnsDropdown {
-    @Input()
-    public columns;
+export class ConfigureColumnsDropdown implements OnInit {
+    @Input() columns: any;
 
-    @Input()
     public displayedColumns;
+
+    @Output() applyColumnConfig: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     constructor(private ref: ChangeDetectorRef) {}
 
     ngOnInit() {
+    }
+
+    saveColumns(emit = true): void {
         if (this.columns) {
             const enabledColumns = this.columns.filter((column: any) => column.enabled);
-            this.displayedColumns = ['selection', 'expand', ...enabledColumns.map((column: any) => column.id)];
+            this.displayedColumns = [...enabledColumns.map((column: any) => column.id)];
             this.ref.markForCheck();
+            if (emit) {
+                this.applyColumnConfig.emit(this.displayedColumns);
+            }
         }
     }
 }
