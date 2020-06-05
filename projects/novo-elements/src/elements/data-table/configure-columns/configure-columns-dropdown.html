@@ -2,8 +2,18 @@
     <button theme="secondary"
             icon="collapse"><i class="bhi-columns"></i>Columns</button>
     <div class="configure-columns-dropdown-list-options">
-        <list class="results-list" direction="vertical">
-            <item keepOpen="true" *ngFor="let column of columns">
+        <div class="picker-input-filter">
+            <div class="input-container">
+                <input [(ngModel)]="term" type="text">
+                <i class="bhi-search" *ngIf="term === ''"></i>
+                <i class="bhi-times" *ngIf="term !== ''" (click)="clearQuickSearch()"></i>
+            </div>
+        </div>
+        <!--section class="picker-loading" *ngIf="isLoading && !matches?.length">
+            <novo-loading theme="line"></novo-loading>
+        </section-->
+        <list class="results-list" direction="vertical" *ngIf="matches?.length > 0 && !hasError">
+            <item keepOpen="true" *ngFor="let column of matches">
                 <item-title>
                     <span class="column-name">
                         <novo-checkbox [(ngModel)]="column.enabled"></novo-checkbox>
@@ -13,11 +23,14 @@
             </item>
         </list>
     </div>
-    <div class="configure-columns-footer">
-      <button theme="standard">Cancel</button>
-      <button theme="primary"
-              icon="check"
-              (click)="saveColumns()">Save</button>
-    </div>
+    <item>
+        <div class="configure-columns-footer">
+        <button theme="standard"
+                (click)="clearQuickSearch()">Cancel</button>
+        <button theme="primary"
+                icon="check"
+                (click)="saveColumns()">Save</button>
+        </div>
+    </item>
 
 </novo-dropdown>

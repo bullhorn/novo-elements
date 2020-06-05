@@ -8,6 +8,33 @@
     max-height: 346px;
     overflow-y: auto;
     overflow-x: hidden;
+    .picker-input-filter {
+      width: 100%;
+      height: 50px;
+      padding: 10px 10px 0;
+      .input-container {
+        height: 100%
+        border-bottom: solid 1px $neutral;
+        &:focus-within {
+          .bh-search {
+            display:none;
+          }
+        }
+      }
+      input {
+        width: 90%;
+        height: 100%;
+        border: none;
+        font-size: 1.4em;
+        &:focus {
+          outline: none;
+        }
+      }
+      .bhi-times {
+        font-size: 1em;
+        cursor: pointer;
+      }
+    }
     .results-list item {
       padding: 0px 10px;
       .column-name {
