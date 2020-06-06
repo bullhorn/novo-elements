@@ -48,7 +48,7 @@ export class ConfigureColumnsDropdown extends BasePickerResults implements OnCha
     clearQuickSearch(): void {
         this.term = '';
     }
-    
+
     processSearch(): void {
         this.matches = this.columns.filter((column) => column.label.toLowerCase().includes(this.term.toLowerCase()));
         this.ref.markForCheck();
