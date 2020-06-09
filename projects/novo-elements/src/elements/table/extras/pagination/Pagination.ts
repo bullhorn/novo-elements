@@ -1,9 +1,14 @@
 // NG2
-import { Component, EventEmitter, Input, Output, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 // APP
 import { NovoLabelService } from '../../../../services/novo-label-service';
 
+interface Page {
+  num: number;
+  text: string;
+  active: boolean;
+}
 @Component({
   selector: 'novo-pagination',
   template: `
@@ -12,7 +17,7 @@ import { NovoLabelService } from '../../../../services/novo-label-service';
         <span class="spacer"></span>
         <ul class="pager" data-automation-id="pager">
             <li class="page" (click)="selectPage(page-1)" [ngClass]="{'disabled': noPrevious()}"><i class="bhi-previous" data-automation-id="pager-previous"></i></li>
-            <li class="page" [ngClass]="{active: p.number==page}" [class.disabled]="disablePageSelection" *ngFor="let p of pages" (click)="selectPage(p.number)">{{p.text}}</li>
+            <li class="page" [ngClass]="{active: p.active}" [class.disabled]="disablePageSelection" *ngFor="let p of pages" (click)="selectPage(p.num, $event)">{{p.text}}</li>
             <li class="page" (click)="selectPage(page+1)" [ngClass]="{'disabled': noNext()}"><i class="bhi-next" data-automation-id="pager-next"></i></li>
         </ul>
   `,
@@ -23,9 +28,9 @@ export class Pagination implements OnInit, OnChanges {
   @Input()
   totalItems: number;
   @Input()
-  itemsPerPage: number = 10;
+  itemsPerPage = 10;
   @Input()
-  rowOptions: any;
+  rowOptions;
   @Input()
   label: string;
   @Input()
@@ -36,16 +41,16 @@ export class Pagination implements OnInit, OnChanges {
     this.pageSelectDisabled = coerceBooleanProperty(val);
   }
   @Output()
-  pageChange: EventEmitter<any> = new EventEmitter();
+  pageChange = new EventEmitter();
   @Output()
-  itemsPerPageChange: EventEmitter<any> = new EventEmitter();
+  itemsPerPageChange = new EventEmitter();
   @Output()
-  onPageChange: EventEmitter<any> = new EventEmitter();
+  onPageChange = new EventEmitter();
 
   public pageSelectDisabled: boolean;
-  maxPagesDisplayed: number = 5;
+  maxPagesDisplayed = 5;
   totalPages: number;
-  pages: Array<any>;
+  pages: Array<Page>;
 
   constructor(public labels: NovoLabelService) { }
 
@@ -77,7 +82,7 @@ export class Pagination implements OnInit, OnChanges {
     });
   }
 
-  selectPage(page, event?: any) {
+  selectPage(page: number, event?: MouseEvent) {
     if (event) {
       event.preventDefault();
     }
@@ -100,12 +105,12 @@ export class Pagination implements OnInit, OnChanges {
   }
 
   // Create page object used in template
-  makePage(num, text, isActive) {
-    return { num, text, active: isActive, };
+  makePage(num: number, text: string, isActive: boolean) {
+    return { num, text, active: isActive, } as Page;
   }
 
-  getPages(currentPage, totalPages) {
-    const pages = [];
+  getPages(currentPage: number, totalPages: number) {
+    const pages: Array<Page> = [];
     // Default page limits
     let startPage = 1;
     let endPage = totalPages;
