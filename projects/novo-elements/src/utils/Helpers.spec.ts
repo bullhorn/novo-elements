@@ -141,8 +141,8 @@ describe('Utils: Helpers', () => {
   describe('Method: isNumber(val)', () => {
     it('should return true', () => {
       const numbers: any[] = [0, 1, 10.75, '25', '8.75', '5.', '.5', '0.10', '0'];
-      numbers.forEach((number) => {
-        expect(Helpers.isNumber(number)).toEqual(true);
+      numbers.forEach((num) => {
+        expect(Helpers.isNumber(num)).toEqual(true);
       });
     });
     it('should return false', () => {
@@ -153,8 +153,8 @@ describe('Utils: Helpers', () => {
     });
     it('should return true for negative numbers', () => {
       const numbers: any[] = ['-10', '-2145'];
-      numbers.forEach((number) => {
-        expect(Helpers.isNumber(number, true)).toBeTruthy();
+      numbers.forEach((num) => {
+        expect(Helpers.isNumber(num, true)).toBeTruthy();
       });
     });
   });

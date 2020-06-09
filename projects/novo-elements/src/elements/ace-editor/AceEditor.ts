@@ -56,10 +56,10 @@ export class NovoAceEditor implements ControlValueAccessor, OnInit, OnDestroy {
   private oldText: string;
   private editor: any;
 
-  private onChange = (_: any) => {};
-  private onTouched = () => {};
+  private onChange = (_: any) => { };
+  private onTouched = () => { };
 
-  constructor(private elementRef: ElementRef) {}
+  constructor(private elementRef: ElementRef) { }
 
   ngOnDestroy() {
     if (this.editor) {
@@ -93,8 +93,7 @@ export class NovoAceEditor implements ControlValueAccessor, OnInit, OnDestroy {
   }
 
   private updateText() {
-    const newVal = this.editor.getValue(),
-      that = this;
+    const newVal = this.editor.getValue();
 
     if (newVal === this.oldText) {
       return;

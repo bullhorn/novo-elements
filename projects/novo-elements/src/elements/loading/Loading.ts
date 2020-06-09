@@ -1,15 +1,5 @@
 // NG2
-import {
-  Component,
-  Input,
-  Directive,
-  TemplateRef,
-  ViewContainerRef,
-  ContentChildren,
-  EmbeddedViewRef,
-  HostBinding,
-  QueryList,
-} from '@angular/core';
+import { Component, ContentChildren, Directive, EmbeddedViewRef, HostBinding, Input, QueryList, TemplateRef, ViewContainerRef } from '@angular/core';
 
 @Component({
   selector: 'novo-loading',
@@ -127,7 +117,7 @@ export class NovoSkeletonDirective {
 @Directive({
   selector: '[loaded]',
 })
-export class NovoLoadedDirective {}
+export class NovoLoadedDirective { }
 
 @Directive({
   selector: '[isLoading]',
@@ -142,7 +132,7 @@ export class NovoIsLoadingDirective {
   private skeletonViews: EmbeddedViewRef<NovoSkeletonDirective>[] = [];
   private loadedViews: EmbeddedViewRef<NovoLoadedDirective>[] = [];
 
-  constructor(private viewContainer: ViewContainerRef) {}
+  constructor(private viewContainer: ViewContainerRef) { }
 
   @Input()
   set isLoading(condition: boolean) {

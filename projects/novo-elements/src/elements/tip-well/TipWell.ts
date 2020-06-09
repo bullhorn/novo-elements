@@ -89,9 +89,6 @@ export class NovoTipWellElement implements OnInit {
     }
   }
 
-  /**
-   * @name hideTip
-   */
   hideTip() {
     if (this.isLocalStorageEnabled) {
       localStorage.setItem(this.localStorageKey, JSON.stringify(false));

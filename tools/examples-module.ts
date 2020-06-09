@@ -32,7 +32,7 @@ const examplesPath = path.join('./projects/', 'novo-examples', 'src');
 const outputModuleFilename = path.join(examplesPath, 'examples.module.ts');
 
 /** Build ES module import statements for the examples. */
-function buildImportsTemplate(metadata: ExampleMetadata): string {
+function buildImportsTemplate(metadata: ExampleMetadata, prefix = 'import'): string {
   const components = metadata.additionalComponents.concat(metadata.component);
 
   // Create a relative path to the source file of the current example.
@@ -42,7 +42,7 @@ function buildImportsTemplate(metadata: ExampleMetadata): string {
     .replace(/\\/g, '/')
     .replace('.ts', '');
 
-  return `import {${components.join(',')}} from './${relativeSrcPath}';
+  return `${prefix} { ${components.join(',')} } from './${relativeSrcPath}';
 `;
 }
 
@@ -99,17 +99,16 @@ function generateExampleNgModule(extractedMetadata: ExampleMetadata[]): string {
   return `
 /* tslint:disable */
 /** DO NOT MANUALLY EDIT THIS FILE, IT IS GENERATED VIA GULP 'build-examples-module' */
-import {NgModule} from '@angular/core';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {CommonModule} from '@angular/common';
-import {NovoElementsModule} from 'novo-elements';
+import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { NovoElementsModule } from 'novo-elements';
 import { ChomskyModule } from 'chomsky';
 
 // Examples
-${extractedMetadata
-    .map((r) => buildImportsTemplate(r))
-    .join('')
-    .trim()}
+${extractedMetadata.map((r) => buildImportsTemplate(r)).join('').trim()}
+
+${extractedMetadata.map((r) => buildImportsTemplate(r, 'export')).join('').trim()}
 
 export interface LiveExample {
   title: string;
@@ -122,17 +121,11 @@ export interface LiveExample {
 }
 
 export const EXAMPLE_COMPONENTS: {[key: string]: LiveExample} = {
-  ${extractedMetadata
-    .map((r) => buildExamplesTemplate(r))
-    .join('')
-    .trim()}
+  ${extractedMetadata.map((r) => buildExamplesTemplate(r)).join('').trim()}
 };
 
 export const EXAMPLE_LIST = [
-  ${extractedMetadata
-    .map((r) => buildListTemplate(r))
-    .join('')
-    .trim()}
+  ${extractedMetadata.map((r) => buildListTemplate(r)).join('').trim()}
 ];
 
 @NgModule({
@@ -167,7 +160,7 @@ function convertToDashCase(name: string): string {
 function parseExampleMetadata(fileName: string, sourceContent: string): ParsedMetadataResults {
   const sourceFile = ts.createSourceFile(fileName, sourceContent, ts.ScriptTarget.Latest, false, ts.ScriptKind.TS);
 
-  const metas: any[] = [];
+  const metas = [];
 
   const visit = (node: any): void => {
     if (node.kind === ts.SyntaxKind.ClassDeclaration) {

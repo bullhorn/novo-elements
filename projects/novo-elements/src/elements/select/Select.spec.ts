@@ -7,14 +7,9 @@ import { NovoSelectModule } from './Select.module';
 import { KeyCodes } from '../../utils/key-codes/KeyCodes';
 import { NovoLabelService } from '../../services/novo-label-service';
 
-const KeyEvent = (code) => {
-  const event: any = document.createEvent('Event');
-  event.keyCode = code;
-  return event;
-};
-
 describe('Elements: NovoSelectElement', () => {
-  let fixture, comp;
+  let fixture;
+  let comp;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -249,7 +244,7 @@ describe('Elements: NovoSelectElement', () => {
   });
 
   describe('Function: onKeyDown(event)', () => {
-    xit('should not scroll', () => {});
+    xit('should not scroll', () => { });
     it('should close panel', () => {
       spyOn(comp.overlay, 'closePanel');
       const mockEvent: any = { keyCode: KeyCodes.ESC };
@@ -321,27 +316,27 @@ describe('Elements: NovoSelectElement', () => {
       comp.onKeyDown(mockEvent);
       expect(comp.selectedIndex).toEqual(2);
     });
-    xit('should toggle header open', () => {});
-    xit('should toggle header closed', () => {});
-    xit('should enter filter term', () => {});
-    xit('should remove part of the filter term', () => {});
+    xit('should toggle header open', () => { });
+    xit('should toggle header closed', () => { });
+    xit('should enter filter term', () => { });
+    xit('should remove part of the filter term', () => { });
   });
 
-  xdescribe('Function: scrollToSelected', () => {});
+  xdescribe('Function: scrollToSelected', () => { });
 
-  xdescribe('Function: scrollToIndex(index)', () => {});
+  xdescribe('Function: scrollToIndex(index)', () => { });
 
-  xdescribe('Function: toggleHeader(event, forceValue)', () => {});
+  xdescribe('Function: toggleHeader(event, forceValue)', () => { });
 
-  xdescribe('Function: highlight(match, query)', () => {});
+  xdescribe('Function: highlight(match, query)', () => { });
 
-  xdescribe('Function: escapeRegexp(queryToEscape)', () => {});
+  xdescribe('Function: escapeRegexp(queryToEscape)', () => { });
 
-  xdescribe('Function: saveHeader', () => {});
+  xdescribe('Function: saveHeader', () => { });
 
-  xdescribe('Function: writeValue(model)', () => {});
+  xdescribe('Function: writeValue(model)', () => { });
 
-  xdescribe('Function: registerOnChange(fn)', () => {});
+  xdescribe('Function: registerOnChange(fn)', () => { });
 
-  xdescribe('Function: registerOnTouched(fn)', () => {});
+  xdescribe('Function: registerOnTouched(fn)', () => { });
 });

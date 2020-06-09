@@ -8,8 +8,6 @@ import { OverlayRef } from '@angular/cdk/overlay';
 import { NovoControlConfig } from '../../../form/controls/BaseControl';
 
 /**
- * @name: PickerResults
- *
  * @description This is the actual list of matches that gets injected into the DOM. It's also the piece that can be
  * overwritten if custom list options are needed.
  */
@@ -50,8 +48,8 @@ export class BasePickerResults {
   onScrollDown(event: WheelEvent) {
     const element: any = event.target;
     if (element) {
-      const offset = element.offsetHeight + element.scrollTop,
-        bottom = element.scrollHeight - 300;
+      const offset = element.offsetHeight + element.scrollTop;
+      const bottom = element.scrollHeight - 300;
       if (offset >= bottom) {
         event.stopPropagation();
         if (!this.lastPage && !this.isLoading) {
@@ -207,7 +205,6 @@ export class BasePickerResults {
   }
 
   /**
-   * @name structureArray
    * @param collection - the data once getData resolves it
    *
    * @description This function structures an array of nodes into an array of objects with a
@@ -234,7 +231,6 @@ export class BasePickerResults {
   }
 
   /**
-   * @name filterData=
    * @param matches - Collection of objects=
    *
    * @description This function loops through the picker options and creates a filtered list of objects that contain
@@ -253,8 +249,6 @@ export class BasePickerResults {
   }
 
   /**
-   * @name selectActiveMatch
-   *
    * @description This function is called when the user presses the enter key to call the selectMatch method.
    */
   selectActiveMatch() {
@@ -262,8 +256,6 @@ export class BasePickerResults {
   }
 
   /**
-   * @name prevActiveMatch
-   *
    * @description This function sets activeMatch to the match before the current node.
    */
   prevActiveMatch() {
@@ -274,8 +266,6 @@ export class BasePickerResults {
   }
 
   /**
-   * @name nextActiveMatch
-   *
    * @description This function sets activeMatch to the match after the current node.
    */
   nextActiveMatch() {
@@ -308,9 +298,6 @@ export class BasePickerResults {
   }
 
   /**
-   * @name selectActive
-   * @param match
-   *
    * @description
    */
   selectActive(match) {
@@ -318,9 +305,6 @@ export class BasePickerResults {
   }
 
   /**
-   * @name isActive
-   * @param match
-   *
    * @description
    */
   isActive(match) {
@@ -328,10 +312,6 @@ export class BasePickerResults {
   }
 
   /**
-   * @name selectMatch
-   * @param event
-   * @param item
-   *
    * @description
    */
   selectMatch(event?: any, item?: any) {
@@ -354,9 +334,6 @@ export class BasePickerResults {
   }
 
   /**
-   * @name escapeRegexp
-   * @param queryToEscape
-   *
    * @description This function captures the whole query string and replace it with the string that will be used to
    * match.
    */
@@ -366,10 +343,6 @@ export class BasePickerResults {
   }
 
   /**
-   * @name highlight
-   * @param match
-   * @param query
-   *
    * @description This function should return a <strong>-tag wrapped HTML string.
    */
   highlight(match, query) {

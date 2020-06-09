@@ -14,18 +14,18 @@ import { NovoToastService, ToastOptions } from '../toast/ToastService';
 import { CustomHttp, ModifyPickerConfigArgs, OptionsFunction } from './FieldInteractionApiTypes';
 import { ControlConfirmModal, ControlPromptModal } from './FieldInteractionModals';
 import { NovoControlConfig } from './FormControls';
-import { IFieldInteractionEvent, NovoFieldset, ResultsTemplateType } from './FormInterfaces';
+import { IFieldInteractionEvent, NovoFieldset, ResultsTemplateType, NovoFormGroup } from './FormInterfaces';
 // APP
 import { NovoFormControl } from './NovoFormControl';
 
 class CustomHttpImpl implements CustomHttp {
   url: string;
-  options: any;
+  options;
   mapFn = (x) => x;
 
   constructor(private http: HttpClient) { }
 
-  get(url: string, options?: any): CustomHttp {
+  get(url: string, options?): CustomHttp {
     this.url = url;
     this.options = options;
     return this;
@@ -36,7 +36,7 @@ class CustomHttpImpl implements CustomHttp {
     return this;
   }
 
-  subscribe(resolve: any, reject?: any): Subscription {
+  subscribe(resolve, reject?): Subscription {
     return this.http
       .get(this.url, this.options)
       .pipe(map(this.mapFn))
@@ -46,13 +46,13 @@ class CustomHttpImpl implements CustomHttp {
 
 @Injectable()
 export class FieldInteractionApi {
-  private _globals: any;
-  private _form: any;
+  private _globals;
+  form: NovoFormGroup | any;
   private _currentKey: string;
-  private _appBridge: AppBridge;
-  private asyncBlockTimeout: any;
+  appBridge: AppBridge;
+  private asyncBlockTimeout;
 
-  public static FIELD_POSITIONS = {
+  static FIELD_POSITIONS = {
     ABOVE_FIELD: 'ABOVE_FIELD',
     BELOW_FIELD: 'BELOW_FIELD',
     TOP_OF_FORM: 'TOP_OF_FORM',
@@ -67,15 +67,7 @@ export class FieldInteractionApi {
     private labels: NovoLabelService,
   ) { }
 
-  set form(form: any) {
-    this._form = form;
-  }
-
-  get form(): any {
-    return this._form;
-  }
-
-  get associations(): object {
+  get associations() {
     return this.form.hasOwnProperty('associations') ? this.form.associations : {};
   }
 
@@ -95,11 +87,11 @@ export class FieldInteractionApi {
     return this.form.hasOwnProperty('edit') ? !this.form.edit : false;
   }
 
-  set globals(globals: any) {
+  set globals(globals) {
     this._globals = globals;
   }
 
-  get globals(): any {
+  get globals() {
     return this._globals;
   }
 
@@ -111,35 +103,27 @@ export class FieldInteractionApi {
     return this._currentKey;
   }
 
-  set appBridge(appBridge: AppBridge) {
-    this._appBridge = appBridge;
-  }
-
-  get appBridge(): AppBridge {
-    return this._appBridge;
-  }
-
-  public isActiveControlValid(): boolean {
+  isActiveControlValid(): boolean {
     return !!this.getValue(this.currentKey);
   }
 
-  public getActiveControl(): NovoFormControl {
+  getActiveControl(): NovoFormControl {
     return this.getControl(this.currentKey);
   }
 
-  public getActiveKey(): string {
+  getActiveKey(): string {
     return this.currentKey;
   }
 
-  public getActiveValue(): any {
+  getActiveValue() {
     return this.getValue(this.currentKey);
   }
 
-  public getActiveInitialValue(): any {
+  getActiveInitialValue() {
     return this.getInitialValue(this.currentKey);
   }
 
-  public getFieldSet(key: string): NovoFieldset {
+  getFieldSet(key: string): NovoFieldset {
     if (!key) {
       console.error('[FieldInteractionAPI] - invalid or missing "key"'); // tslint:disable-line
       return null;
@@ -154,22 +138,22 @@ export class FieldInteractionApi {
     return fieldSet as NovoFieldset;
   }
 
-  public getControl(key: string): NovoFormControl {
+  getControl(key: string) {
     if (!key) {
       console.error('[FieldInteractionAPI] - invalid or missing "key"'); // tslint:disable-line
       return null;
     }
 
-    const control = this.form.controls[key];
+    const control = this.form.controls[key] as NovoFormControl;
     if (!control) {
       console.error('[FieldInteractionAPI] - could not find a control in the form by the key --', key); // tslint:disable-line
       return null;
     }
 
-    return control as NovoFormControl;
+    return control;
   }
 
-  public getValue(key: string): any {
+  getValue(key: string) {
     const control = this.getControl(key);
     if (control) {
       return control.value;
@@ -177,7 +161,7 @@ export class FieldInteractionApi {
     return null;
   }
 
-  public getRawValue(key: string): any {
+  getRawValue(key: string) {
     const control = this.getControl(key);
     if (control) {
       return control.rawValue;
@@ -185,7 +169,7 @@ export class FieldInteractionApi {
     return null;
   }
 
-  public getInitialValue(key: string): any {
+  getInitialValue(key: string) {
     const control = this.getControl(key);
     if (control) {
       return control.initialValue;
@@ -193,9 +177,9 @@ export class FieldInteractionApi {
     return null;
   }
 
-  public setValue(
+  setValue(
     key: string,
-    value: any,
+    value,
     options?: {
       onlySelf?: boolean;
       emitEvent?: boolean;
@@ -210,9 +194,9 @@ export class FieldInteractionApi {
     }
   }
 
-  public patchValue(
+  patchValue(
     key: string,
-    value: any,
+    value,
     options?: {
       onlySelf?: boolean;
       emitEvent?: boolean;
@@ -227,7 +211,7 @@ export class FieldInteractionApi {
     }
   }
 
-  public setReadOnly(key: string, isReadOnly: boolean): void {
+  setReadOnly(key: string, isReadOnly: boolean): void {
     const control = this.getControl(key);
     if (control && !control.restrictFieldInteractions) {
       control.setReadOnly(isReadOnly);
@@ -235,7 +219,7 @@ export class FieldInteractionApi {
     }
   }
 
-  public setRequired(key: string, required: boolean): void {
+  setRequired(key: string, required: boolean): void {
     const control = this.getControl(key);
     if (control && !control.restrictFieldInteractions) {
       control.setRequired(required);
@@ -243,16 +227,17 @@ export class FieldInteractionApi {
     }
   }
 
-  public hide(key: string, clearValue: boolean = true): void {
+  hide(key: string, clearValue = true) {
     const control = this.getControl(key);
     if (control && !control.restrictFieldInteractions) {
       control.hide(clearValue);
       this.disable(key, { emitEvent: false });
       this.triggerEvent({ controlKey: key, prop: 'hidden', value: true });
     }
+    return control;
   }
 
-  public show(key: string): void {
+  show(key: string): void {
     const control = this.getControl(key);
     if (control && !control.restrictFieldInteractions) {
       control.show();
@@ -261,21 +246,21 @@ export class FieldInteractionApi {
     }
   }
 
-  public hideFieldSetHeader(key: string): void {
+  hideFieldSetHeader(key: string): void {
     const fieldSet = this.getFieldSet(key);
     if (fieldSet) {
       fieldSet.hidden = true;
     }
   }
 
-  public showFieldSetHeader(key: string): void {
+  showFieldSetHeader(key: string): void {
     const fieldSet = this.getFieldSet(key);
     if (fieldSet) {
       fieldSet.hidden = false;
     }
   }
 
-  public disable(
+  disable(
     key: string,
     options?: {
       onlySelf?: boolean;
@@ -289,7 +274,7 @@ export class FieldInteractionApi {
     }
   }
 
-  public enable(
+  enable(
     key: string,
     options?: {
       onlySelf?: boolean;
@@ -303,7 +288,7 @@ export class FieldInteractionApi {
     }
   }
 
-  public markAsInvalid(key: string, validationMessage?: string): void {
+  markAsInvalid(key: string, validationMessage?: string): void {
     const control = this.getControl(key);
     if (control) {
       if (control && !control.restrictFieldInteractions) {
@@ -312,7 +297,7 @@ export class FieldInteractionApi {
     }
   }
 
-  public markAsDirty(
+  markAsDirty(
     key: string,
     options?: {
       onlySelf?: boolean;
@@ -324,7 +309,7 @@ export class FieldInteractionApi {
     }
   }
 
-  public markAsPending(
+  markAsPending(
     key: string,
     options?: {
       onlySelf?: boolean;
@@ -336,7 +321,7 @@ export class FieldInteractionApi {
     }
   }
 
-  public markAsPristine(
+  markAsPristine(
     key: string,
     options?: {
       onlySelf?: boolean;
@@ -348,7 +333,7 @@ export class FieldInteractionApi {
     }
   }
 
-  public markAsTouched(
+  markAsTouched(
     key: string,
     options?: {
       onlySelf?: boolean;
@@ -360,7 +345,7 @@ export class FieldInteractionApi {
     }
   }
 
-  public markAsUntouched(
+  markAsUntouched(
     key: string,
     options?: {
       onlySelf?: boolean;
@@ -372,7 +357,7 @@ export class FieldInteractionApi {
     }
   }
 
-  public updateValueAndValidity(
+  updateValueAndValidity(
     key: string,
     options?: {
       onlySelf?: boolean;
@@ -391,7 +376,7 @@ export class FieldInteractionApi {
     }
   }
 
-  public displayTip(key: string, tip: string, icon?: string, allowDismiss?: boolean, sanitize?: boolean): void {
+  displayTip(key: string, tip: string, icon?: string, allowDismiss?: boolean, sanitize?: boolean): void {
     const control = this.getControl(key);
     if (control && !control.restrictFieldInteractions) {
       control.tipWell = {
@@ -404,7 +389,7 @@ export class FieldInteractionApi {
     }
   }
 
-  public setTooltip(key: string, tooltip: string): void {
+  setTooltip(key: string, tooltip: string): void {
     const control = this.getControl(key);
     if (control && !control.restrictFieldInteractions) {
       control.tooltip = tooltip;
@@ -418,7 +403,7 @@ export class FieldInteractionApi {
     }
   }
 
-  public confirmChanges(key: string, message?: string): Promise<boolean> {
+  confirmChanges(key: string, message?: string): Promise<boolean> {
     const history = this.getProperty(key, 'valueHistory');
     const oldValue = history[history.length - 2];
     const newValue = this.getValue(key);
@@ -431,13 +416,13 @@ export class FieldInteractionApi {
     });
   }
 
-  public promptUser(key: string, changes: string[]): Promise<boolean> {
-    const showYes: boolean = true;
+  promptUser(key: string, changes: string[]): Promise<boolean> {
+    const showYes = true;
     (document.activeElement as any).blur();
     return this.modalService.open(ControlPromptModal, { changes, key }).onClosed;
   }
 
-  public setProperty(key: string, prop: string, value: any): void {
+  setProperty(key: string, prop: string, value): void {
     const control = this.getControl(key);
     if (control && !control.restrictFieldInteractions) {
       control[prop] = value;
@@ -445,7 +430,7 @@ export class FieldInteractionApi {
     }
   }
 
-  public getProperty(key: string, prop: string): any {
+  getProperty(key: string, prop: string) {
     const control = this.getControl(key);
     if (control && !control.restrictFieldInteractions) {
       return control[prop];
@@ -453,24 +438,24 @@ export class FieldInteractionApi {
     return null;
   }
 
-  public isValueEmpty(key: string): boolean {
+  isValueEmpty(key: string): boolean {
     const value = this.getValue(key);
     return Helpers.isEmpty(value);
   }
 
-  public isValueBlank(key: string): boolean {
+  isValueBlank(key: string): boolean {
     const value = this.getValue(key);
     return Helpers.isBlank(value);
   }
 
-  public hasField(key: string): boolean {
+  hasField(key: string): boolean {
     return !!this.form.controls[key];
   }
 
-  public addStaticOption(key: string, newOption: any): void {
+  addStaticOption(key: string, newOption): void {
     const control = this.getControl(key);
     let optionToAdd = newOption;
-    let isUnique: boolean = true;
+    let isUnique = true;
     if (control && !control.restrictFieldInteractions) {
       let currentOptions = this.getProperty(key, 'options');
       if (!currentOptions || !currentOptions.length) {
@@ -505,7 +490,7 @@ export class FieldInteractionApi {
     }
   }
 
-  public removeStaticOption(key: string, optionToRemove: string): void {
+  removeStaticOption(key: string, optionToRemove: string): void {
     const control = this.getControl(key);
     if (control && !control.restrictFieldInteractions) {
       let currentOptions = this.getProperty(key, 'options');
@@ -555,23 +540,23 @@ export class FieldInteractionApi {
     }
   }
 
-  public modifyPickerConfig(
+  modifyPickerConfig(
     key: string,
     config: {
       format?: string;
       optionsUrl?: string;
       optionsUrlBuilder?: Function;
-      optionsPromise?: any;
+      optionsPromise?;
       options?: any[];
       resultsTemplateType?: ResultsTemplateType;
     },
-    mapper?: any,
+    mapper?,
   ): void {
-    // call another public method to avoid a breaking change but still enable stricter types
+    // call another method to avoid a breaking change but still enable stricter types
     this.mutatePickerConfig(key, config as ModifyPickerConfigArgs, mapper);
   }
 
-  public mutatePickerConfig(key: string, args: ModifyPickerConfigArgs, mapper?: (item: unknown) => unknown): void {
+  mutatePickerConfig(key: string, args: ModifyPickerConfigArgs, mapper?: (item: unknown) => unknown): void {
     const control = this.getControl(key);
     if (control && !control.restrictFieldInteractions) {
       const { minSearchLength, enableInfiniteScroll, filteredOptionsCreator, format, getLabels, emptyPickerMessage } = control.config;
@@ -669,7 +654,7 @@ export class FieldInteractionApi {
     }
   };
 
-  public setLoading(key: string, loading: boolean) {
+  setLoading(key: string, loading: boolean) {
     const control = this.getControl(key);
     if (control && !control.restrictFieldInteractions) {
       if (loading) {
@@ -695,11 +680,11 @@ export class FieldInteractionApi {
     }
   }
 
-  public addControl(
+  addControl(
     key: string,
-    metaForNewField: any,
+    metaForNewField: { key?: string, type?: string, name?: string, label?: string },
     position: string = FieldInteractionApi.FIELD_POSITIONS.ABOVE_FIELD,
-    initialValue?: any,
+    initialValue?,
   ): void {
     if (!metaForNewField.key && !metaForNewField.name) {
       console.error('[FieldInteractionAPI] - missing "key" in meta for new field'); // tslint:disable-line
@@ -717,7 +702,8 @@ export class FieldInteractionApi {
     }
 
     const control = this.form.controls[key];
-    let fieldsetIndex, controlIndex;
+    let fieldsetIndex: number;
+    let controlIndex: number;
     if (control) {
       fieldsetIndex = -1;
       controlIndex = -1;
@@ -766,7 +752,7 @@ export class FieldInteractionApi {
     }
   }
 
-  public removeControl(key: string): void {
+  removeControl(key: string): void {
     if (!this.form.controls[key]) {
       // Field is not on the form
       return null;
@@ -793,8 +779,8 @@ export class FieldInteractionApi {
     }
   }
 
-  public debounce(func: () => void, wait = 50) {
-    let h: any;
+  debounce(func: () => void, wait = 50) {
+    let h;
     clearTimeout(h);
     h = setTimeout(() => func(), wait);
   }
