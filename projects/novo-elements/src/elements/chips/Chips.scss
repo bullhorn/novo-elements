@@ -72,6 +72,10 @@ novo-entity-chips {
       border: 1px solid $positive;
     }
   }
+  .novo-chip-container {
+    display: flex;
+    flex-wrap: wrap;
+  }
   .chip-input-container {
     flex-grow: 4;
     input {
