@@ -60355,9 +60355,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
       }, {
         key: "onPageChange",
-        value: function onPageChange(event) {} // this.dataProvider.page = event.page;
-        // this.dataProvider.pageSize = event.itemsPerPage;
-
+        value: function onPageChange(event) {// this.dataProvider.page = event.page;
+          // this.dataProvider.pageSize = event.itemsPerPage;
+        }
         /**
          * @param {?} option
          * @return {?}
