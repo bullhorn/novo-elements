@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.3.7](https://github.com/bullhorn/novo-elements/compare/v4.3.6...v4.3.7) (2020-06-29)
+
+
+### Bug Fixes
+
+* **chips:** Fix for [#1121](https://github.com/bullhorn/novo-elements/issues/1121) - flex the chips horizontally ([#1122](https://github.com/bullhorn/novo-elements/issues/1122)) ([99a7e78](https://github.com/bullhorn/novo-elements/commit/99a7e785dbd73317242e54a7867cbd9bc06c2c8d))
+
 ### [4.3.6](https://github.com/bullhorn/novo-elements/compare/v4.3.4...v4.3.6) (2020-06-02)
 
 
