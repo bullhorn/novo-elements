@@ -173,15 +173,19 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
   }
 
   protected formatDate(value: string, blur: boolean) {
-    try {
-      const [dateTimeValue, formatted] = this.dateFormatService.parseString(value, false, 'date', this.format);
-      if (!isNaN(dateTimeValue.getUTCDate())) {
-        const dt = new Date(dateTimeValue);
-        this.dispatchOnChange(dt, blur);
-      } else {
-        this.dispatchOnChange(null, blur);
-      }
-    } catch (err) {}
+    if (this.userDefinedFormat) {
+      this.dispatchOnChange(dateFns.format(value, this.format), blur);
+    } else {
+      try {
+        const [dateTimeValue, formatted] = this.dateFormatService.parseString(value, false, 'date');
+        if (!isNaN(dateTimeValue.getUTCDate())) {
+          const dt = new Date(dateTimeValue);
+          this.dispatchOnChange(dt, blur);
+        } else {
+          this.dispatchOnChange(null, blur);
+        }
+      } catch (err) {}
+    }
   }
 
   writeValue(value: any): void {
