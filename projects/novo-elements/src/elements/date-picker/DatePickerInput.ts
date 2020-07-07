@@ -174,7 +174,7 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
 
   protected formatDate(value: string, blur: boolean) {
     try {
-      const [dateTimeValue, formatted] = this.dateFormatService.parseString(value, false, 'date');
+      const [dateTimeValue, formatted] = this.dateFormatService.parseString(value, false, 'date', this.format);
       if (!isNaN(dateTimeValue.getUTCDate())) {
         const dt = new Date(dateTimeValue);
         this.dispatchOnChange(dt, blur);

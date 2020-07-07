@@ -48,8 +48,8 @@ export class DateFormatService {
     return this.labels.timeFormatPlaceholderAM;
   }
 
-  parseDateString(dateString: string): [Date, string] {
-    let dateFormat: string = this.labels.dateFormatString(),
+  parseDateString(dateString: string, format?: string): [Date, string] {
+    let dateFormat: string = format || this.labels.dateFormatString(),
       dateFormatRegex = /(\w+)[\/|\.|\-](\w+)[\/|\.|\-](\w+)/gi,
       dateValueRegex = /(\d+)[\/|\.|\-](\d+)[\/|\.|\-](\d+)/gi,
       dateFormatTokens: Array<string>,
@@ -145,7 +145,7 @@ export class DateFormatService {
     return [value, timeString];
   }
 
-  parseString(dateTimeString: string, militaryTime: boolean, type: string): [Date, string] {
+  parseString(dateTimeString: string, militaryTime: boolean, type: string, format?: string): [Date, string] {
     switch (type) {
       case 'datetime':
         const str = dateTimeString.replace(/-/g, '/');
@@ -157,7 +157,7 @@ export class DateFormatService {
         }
         return [dt, dts];
       case 'date':
-        return this.parseDateString(dateTimeString);
+        return this.parseDateString(dateTimeString, format);
       case 'time':
         return this.parseTimeString(dateTimeString, militaryTime);
       default:
