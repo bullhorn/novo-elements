@@ -108,7 +108,7 @@
     "markdown-it": "^8.4.2",
     "ng-packagr": "^5.5.1",
     "prettier": "^1.18.2",
-    "standard-version": "^7.0.0",
+    "standard-version": "^8.0.1",
     "ts-jest": "~26.0.0",
     "ts-node": "~8.10.1",
     "tsickle": "^0.37.1",
