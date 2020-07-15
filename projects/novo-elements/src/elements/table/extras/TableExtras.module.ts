@@ -52,6 +52,5 @@ import { NovoTableHeaderElement } from './table-header/TableHeader';
     PercentageCell,
     NovoDropdownCell,
   ],
-  entryComponents: [DateCell, PercentageCell, NovoDropdownCell],
 })
-export class NovoTableExtrasModule {}
+export class NovoTableExtrasModule { }

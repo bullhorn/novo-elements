@@ -8,6 +8,5 @@ import { NovoToastElement } from './Toast';
   imports: [CommonModule],
   declarations: [NovoToastElement],
   exports: [NovoToastElement],
-  entryComponents: [NovoToastElement],
 })
-export class NovoToastModule {}
+export class NovoToastModule { }

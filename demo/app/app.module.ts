@@ -70,7 +70,6 @@ export function provideAppBridgeService(http) {
       deps: [HttpClient],
     },
   ],
-  entryComponents: [AppComponent],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
