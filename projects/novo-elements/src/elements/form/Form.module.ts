@@ -78,7 +78,6 @@ import { NovoCommonModule } from '../common/common.module';
     NovoControlGroup,
     NovoControlTemplates,
   ],
-  entryComponents: [ControlConfirmModal, ControlPromptModal],
   providers: [NovoTemplateService],
 })
-export class NovoFormModule {}
+export class NovoFormModule { }
