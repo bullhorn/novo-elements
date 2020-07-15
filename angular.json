@@ -15,7 +15,12 @@
             "tsConfig": "projects/novo-elements/tsconfig.lib.json",
             "project": "projects/novo-elements/ng-package.json"
           }
-        },
+        ,          "configurations": {
+            "production": {
+              "tsConfig": "projects/novo-elements/tsconfig.lib.prod.json"
+            }
+          }
+},
         "test": {
           "builder": "@angular-builders/jest:run",
           "options": {
@@ -43,7 +48,12 @@
             "tsConfig": "projects/novo-examples/tsconfig.lib.json",
             "project": "projects/novo-examples/ng-package.json"
           }
-        },
+        ,          "configurations": {
+            "production": {
+              "tsConfig": "projects/novo-examples/tsconfig.lib.prod.json"
+            }
+          }
+},
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
@@ -71,6 +81,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "aot": true,
             "outputPath": "dist/demo",
             "index": "demo/index.html",
             "main": "demo/main.ts",
@@ -85,6 +96,12 @@
           },
           "configurations": {
             "production": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "fileReplacements": [
                 {
                   "replace": "demo/environments/environment.ts",
@@ -141,7 +158,12 @@
             "tsConfig": "projects/chomsky/tsconfig.lib.json",
             "project": "projects/chomsky/ng-package.json"
           }
-        },
+        ,          "configurations": {
+            "production": {
+              "tsConfig": "projects/chomsky/tsconfig.lib.prod.json"
+            }
+          }
+},
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
