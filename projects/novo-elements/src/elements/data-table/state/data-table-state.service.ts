@@ -1,10 +1,11 @@
-import { EventEmitter } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 
 import { IDataTableChangeEvent, IDataTableFilter, IDataTableSort } from '../interfaces';
 import { Helpers } from '../../../utils/Helpers';
 import { NovoDataTableFilterUtils } from '../services/data-table-filter-utils';
 
+@Injectable()
 export class DataTableState<T> {
   public selectionSource = new Subject();
   public paginationSource = new Subject();
