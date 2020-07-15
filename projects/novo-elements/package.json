@@ -15,5 +15,8 @@
     "post-robot": "^8.0.0",
     "rxjs": ">=6",
     "text-mask-addons": "^3.7.0"
+  },
+  "dependencies": {
+    "tslib": "^2.0.0"
   }
 }
