@@ -1,5 +1,5 @@
 // NG2
-import { ElementRef, Input, ChangeDetectorRef } from '@angular/core';
+import { ElementRef, Input, ChangeDetectorRef, Directive } from '@angular/core';
 // APP
 import { Helpers } from '../../../../utils/Helpers';
 // Vendor
@@ -11,6 +11,7 @@ import { NovoControlConfig } from '../../../form/controls/BaseControl';
  * @description This is the actual list of matches that gets injected into the DOM. It's also the piece that can be
  * overwritten if custom list options are needed.
  */
+@Directive()
 export class BasePickerResults {
   _term: string = '';
   selected: Array<any> = [];
