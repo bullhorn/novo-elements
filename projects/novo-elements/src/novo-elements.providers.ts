@@ -35,16 +35,16 @@ const NOVO_ELEMENTS_PROVIDERS = [
   imports: [],
 })
 export class NovoElementProviders {
-  static forRoot() {
+  static forRoot(): ModuleWithProviders<NovoElementProviders> {
     return {
-      ngModule: NovoElementProviders,
-      providers: [...NOVO_ELEMENTS_PROVIDERS],
+        ngModule: NovoElementProviders,
+        providers: [...NOVO_ELEMENTS_PROVIDERS],
     };
-  }
+}
 
-  static forChild() {
+  static forChild(): ModuleWithProviders<NovoElementProviders> {
     return {
-      ngModule: NovoElementProviders,
+        ngModule: NovoElementProviders,
     };
-  }
+}
 }
