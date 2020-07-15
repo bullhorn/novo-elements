@@ -53,7 +53,7 @@ export class NovoModalRef {
   template: '<span #container></span>',
 })
 export class NovoModalContainerElement implements AfterViewInit {
-  @ViewChild('container', { read: ViewContainerRef, static: false })
+  @ViewChild('container', { read: ViewContainerRef })
   container: ViewContainerRef;
 
   constructor(private modalRef: NovoModalRef, private componentUtils: ComponentUtils) {}
