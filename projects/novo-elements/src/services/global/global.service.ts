@@ -1,5 +1,5 @@
-import { Injectable } from "@angular/core";
-export interface Global {}
+import { Injectable } from '@angular/core';
+export interface Global { }
 
 export abstract class GlobalRef {
   abstract get nativeGlobal(): Global;
