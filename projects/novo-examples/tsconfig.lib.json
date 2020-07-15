@@ -3,7 +3,7 @@
   "compilerOptions": {
     "outDir": "../../out-tsc/lib",
     "target": "es2018",
-    "module": "esnext",
+    "module": "es2020",
     "moduleResolution": "node",
     "declaration": true,
     "sourceMap": true,
