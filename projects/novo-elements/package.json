@@ -1,6 +1,6 @@
 {
   "name": "novo-elements",
-  "version": "4.3.9",
+  "version": "4.3.8",
   "peerDependencies": {
     "@angular/animations": ">=8",
     "@angular/cdk": ">=8",
@@ -15,5 +15,9 @@
     "post-robot": "^8.0.0",
     "rxjs": ">=6",
     "text-mask-addons": "^3.7.0"
+  }
+,
+  "dependencies": {
+    "tslib": "^2.0.0"
   }
 }
