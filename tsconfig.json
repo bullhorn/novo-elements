@@ -1,41 +1,29 @@
+/*
+  This is a "Solution Style" tsconfig.json file, and is used by editors and TypeScript’s language server to improve development experience.
+  It is not intended to be used to perform a compilation.
+
+  To learn more about this file see: https://angular.io/config/solution-tsconfig.
+*/
 {
-  "compileOnSave": false,
-  "compilerOptions": {
-    "baseUrl": "./",
-    "outDir": "./dist/out-tsc",
-    "downlevelIteration": true,
-    // "incremental": true,
-    "sourceMap": true,
-    "declaration": false,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "target": "es2018",
-    "typeRoots": [
-      "node_modules/@types"
-    ],
-    "types": [
-      "jest"
-    ],
-    "lib": [
-      "es2018",
-      "dom"
-    ],
-    "paths": {
-      "novo-elements": [
-        "dist/novo-elements"
-      ],
-      "novo-examples": [
-        "dist/novo-examples"
-      ],
-      "chomsky": [
-        "dist/chomsky"
-      ]
-      // "novo-elements": ["projects/novo-elements/src/index"],
-      // "novo-examples": ["projects/novo-examples/src/index"],
-      // "chomsky": ["projects/chomsky/src/index"],
-      // "@angular/cdk/*": ["../components/src/cdk/*"],
+  "files": [],
+  "references": [
+    {
+      "path": "./projects/novo-elements/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/novo-examples/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/novo-examples/tsconfig.spec.json"
+    },
+    {
+      "path": "./demo/tsconfig.app.json"
+    },
+    {
+      "path": "./projects/chomsky/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/chomsky/tsconfig.spec.json"
     }
-  }
+  ]
 }
