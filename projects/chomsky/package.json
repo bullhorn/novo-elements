@@ -5,5 +5,8 @@
     "@angular/common": ">=8",
     "@angular/core": ">=8",
     "rxjs": ">=6"
+  },
+  "dependencies": {
+    "tslib": "^2.0.0"
   }
 }
