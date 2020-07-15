@@ -10,11 +10,10 @@ import { NovoDocsExample } from './app/novo-docs-example';
 
 @NgModule({
   imports: [BrowserModule, BrowserAnimationsModule, FormsModule, HttpClientModule, NovoElementsModule, ReactiveFormsModule],
-  entryComponents: [NovoDocsExample],
   declarations: [NovoDocsExample],
   bootstrap: [NovoDocsExample],
   providers: [FieldInteractionApi, NovoToastService, NovoModalService],
 })
-export class AppModule {}
+export class AppModule { }
 
 platformBrowserDynamic().bootstrapModule(AppModule);
