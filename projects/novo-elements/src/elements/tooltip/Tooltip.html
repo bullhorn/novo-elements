@@ -1,0 +1,2 @@
+<div [@state]="noAnimate ? 'no-animation' : 'visible'"
+  [ngClass]="[tooltipType, this.rounded ? 'rounded' : '', size ? size : '', this.preline? 'preline' : '', position]">{{message}}</div>
