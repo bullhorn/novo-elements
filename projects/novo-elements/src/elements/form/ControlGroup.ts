@@ -21,13 +21,21 @@ import { FormUtils } from './../../utils/form-utils/FormUtils';
 import { Helpers } from '../../utils/Helpers';
 import { NovoLabelService } from '../../services/novo-label-service';
 
+export type BooleanInput = string | boolean | null | undefined;
+
 export interface NovoControlGroupAddConfig {
   label: string;
+}
+
+export enum EditState {
+  EDITING = 'editing',
+  NOT_EDITING = 'notediting',
 }
 
 export interface NovoControlGroupRowConfig {
   edit: boolean;
   remove: boolean;
+  state: EditState;
 }
 
 @Component({
@@ -45,6 +53,15 @@ export class NovoControlGroup implements AfterContentInit, OnChanges {
     return this._vertical;
   }
   private _vertical = false;
+  @Input()
+  set stacked(v: boolean) {
+    this._stacked = coerceBooleanProperty(v);
+  }
+  get stacked() {
+    return this._stacked;
+  }
+  private _stacked = false;
+
   // Hides/shows the add button for adding a new control
   @Input() add: NovoControlGroupAddConfig;
   // Hide/shows the remove button for removing a control
@@ -113,8 +130,8 @@ export class NovoControlGroup implements AfterContentInit, OnChanges {
 
   controlLabels: { value: string; width: number; required: boolean; key: string }[] = [];
   toggled = false;
-  disabledArray: { edit: boolean; remove: boolean }[] = [];
-
+  disabledArray: NovoControlGroupRowConfig[] = [];
+  editState: EditState = EditState.NOT_EDITING;
   currentIndex = 0;
 
   constructor(private formUtils: FormUtils, private fb: FormBuilder, private ref: ChangeDetectorRef, private labels: NovoLabelService) {}
@@ -161,10 +178,30 @@ export class NovoControlGroup implements AfterContentInit, OnChanges {
     this.change.emit(this);
   }
 
+  onClickAdd() {
+    this.addNewControl();
+    // this.editState = EditState.EDITING;
+  }
+  onClickCancel() {
+    this.editState = EditState.NOT_EDITING;
+  }
+  onClickSave() {
+    this.disabledArray[this.currentIndex - 1].state = EditState.NOT_EDITING;
+    this.editState = EditState.NOT_EDITING;
+    const control: FormArray = <FormArray>this.form.controls[this.key];
+    if (control) {
+      const fg: NovoFormGroup = control.at(this.currentIndex - 1) as NovoFormGroup;
+      fg.disableAllControls();
+    }
+  }
+
   resetAddRemove() {
     this.disabledArray.forEach((item: NovoControlGroupRowConfig, idx: number) => {
       item.edit = this.checkCanEdit(idx);
       item.remove = this.checkCanRemove(idx);
+      if (!item.edit) {
+        item.state = EditState.NOT_EDITING;
+      }
     });
     this.ref.markForCheck();
   }
@@ -178,12 +215,13 @@ export class NovoControlGroup implements AfterContentInit, OnChanges {
       this.form.addControl(this.key, this.fb.array([newCtrl]));
     }
     this.disabledArray.push({
+      state: EditState.EDITING,
       edit: true,
       remove: true,
     });
     this.resetAddRemove();
     if (!value) {
-      this.onAdd.emit();
+      this.onAdd.emit(newCtrl);
     }
     this.currentIndex++;
     this.ref.markForCheck();
@@ -212,6 +250,8 @@ export class NovoControlGroup implements AfterContentInit, OnChanges {
 
   editControl(index: number) {
     const control: FormArray = <FormArray>this.form.controls[this.key];
+    const fg = control.at(index) as NovoFormGroup;
+    fg.enableAllControls();
     this.onEdit.emit({ value: control.at(index).value, index });
   }
 
@@ -259,4 +299,8 @@ export class NovoControlGroup implements AfterContentInit, OnChanges {
     });
     return ret;
   }
+
+  static ngAcceptInputType_disabled: BooleanInput;
+  static ngAcceptInputType_stacked: BooleanInput;
+  static ngAcceptInputType_vertical: BooleanInput;
 }

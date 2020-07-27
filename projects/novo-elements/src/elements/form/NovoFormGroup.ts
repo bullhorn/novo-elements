@@ -1,5 +1,5 @@
 // NG
-import { FormGroup, AbstractControl } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { EventEmitter } from '@angular/core';
 // App
 import { IFieldInteractionEvent } from './FormInterfaces';
