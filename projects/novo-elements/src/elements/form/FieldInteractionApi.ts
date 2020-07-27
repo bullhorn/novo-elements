@@ -14,16 +14,17 @@ import { NovoToastService, ToastOptions } from '../toast/ToastService';
 import { CustomHttp, ModifyPickerConfigArgs, OptionsFunction } from './FieldInteractionApiTypes';
 import { ControlConfirmModal, ControlPromptModal } from './FieldInteractionModals';
 import { NovoControlConfig } from './FormControls';
-import { IFieldInteractionEvent, NovoFieldset, ResultsTemplateType, NovoFormGroup } from './FormInterfaces';
+import { IFieldInteractionEvent, NovoFieldset, ResultsTemplateType } from './FormInterfaces';
 // APP
 import { NovoFormControl } from './NovoFormControl';
+import { NovoFormGroup } from './NovoFormGroup';
 
 class CustomHttpImpl implements CustomHttp {
   url: string;
   options;
   mapFn = (x) => x;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   get(url: string, options?): CustomHttp {
     this.url = url;
@@ -37,10 +38,7 @@ class CustomHttpImpl implements CustomHttp {
   }
 
   subscribe(resolve, reject?): Subscription {
-    return this.http
-      .get(this.url, this.options)
-      .pipe(map(this.mapFn))
-      .subscribe(resolve, reject);
+    return this.http.get(this.url, this.options).pipe(map(this.mapFn)).subscribe(resolve, reject);
   }
 }
 
@@ -65,7 +63,7 @@ export class FieldInteractionApi {
     private formUtils: FormUtils,
     private http: HttpClient,
     private labels: NovoLabelService,
-  ) { }
+  ) {}
 
   get associations() {
     return this.form.hasOwnProperty('associations') ? this.form.associations : {};
@@ -682,7 +680,7 @@ export class FieldInteractionApi {
 
   addControl(
     key: string,
-    metaForNewField: { key?: string, type?: string, name?: string, label?: string },
+    metaForNewField: { key?: string; type?: string; name?: string; label?: string },
     position: string = FieldInteractionApi.FIELD_POSITIONS.ABOVE_FIELD,
     initialValue?,
   ): void {

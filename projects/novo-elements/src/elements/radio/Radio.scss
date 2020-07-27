@@ -3,6 +3,7 @@ novo-radio-group {
   > novo-radio {
     margin: 0;
     button {
+      pointer-events: none;
       border-radius: 0 !important;
       &.unchecked {
         opacity: 0.5;
@@ -13,14 +14,14 @@ novo-radio-group {
     }
     &:first-child {
       button {
-        border-top-left-radius: 3px;
-        border-bottom-left-radius: 3px;
+        border-top-left-radius: 3px !important;
+        border-bottom-left-radius: 3px !important;
       }
     }
     &:last-child {
       button {
-        border-top-right-radius: 3px;
-        border-bottom-right-radius: 3px;
+        border-top-right-radius: 3px !important;
+        border-bottom-right-radius: 3px !important;
         border-right-width: 1px !important;
         border-right-style: solid !important;
         &[theme='icon'] {

@@ -1,14 +1,20 @@
 novo-search {
-  display: flex;
-  flex-flow: row nowrap;
+  display: grid;
+  grid-template-areas: 'icon input';
+  grid-template-columns: 3.2em 1fr;
   align-items: center;
+
+  > button[theme][theme='fab'] {
+    width: 2.8em;
+    height: 2.8em;
+    min-height: 2.8em;
+  }
 
   > input {
     height: 100%;
     width: 0;
     display: block;
     background: $white;
-    padding: 12px 8px;
     position: relative;
     border: 1px solid $light;
     border-left: none;
@@ -17,26 +23,26 @@ novo-search {
     color: $dark;
     z-index: 12;
     opacity: 0;
-    transition: background-color 250ms ease-in-out, opacity 150ms ease-in-out, 250ms width ease-in-out;
+    transition: border-color 250ms ease-in-out, 250ms ease-in-out, opacity 150ms ease-in-out, 250ms width ease-in-out;
     &:focus,
     &:active {
       outline: none;
       border: 1px solid $positive;
       border-left: none;
     }
-    &::-webkit-input-placeholder {
-      color: $empty !important;
+    &::placeholder {
+      color: $empty;
     }
   }
   &.active {
     max-width: 400px;
-    min-width: 250px;
+    min-width: 100px;
     z-index: 1000;
 
     > button[theme='fab'] {
       border-radius: 2px 0 0 2px !important;
-      width: 47px;
-      height: 47px;
+      width: 3.2em;
+      height: 2.8em;
       box-shadow: none;
     }
 
@@ -47,9 +53,22 @@ novo-search {
   }
   &.focused {
     > button {
-      color: $positive !important;
-      border: 1px solid $positive;
+      border: 1px solid $positive !important;
+      border-right: none !important;
+    }
+  }
+
+  &.always-open {
+    > button {
+      border: 1px solid $light;
       border-right: none;
+    }
+  }
+
+  &.focused,
+  &.always-open {
+    > button {
+      color: $positive !important;
       background: $white !important;
       box-shadow: none !important;
       &:hover {
@@ -61,6 +80,20 @@ novo-search {
         > button {
           color: $color !important;
         }
+      }
+    }
+  }
+}
+
+header {
+  novo-search.always-open:not(.focused) {
+    button,
+    input {
+      background-color: rgba($white, 0.25) !important;
+      border-color: rgba($white, 0.25) !important;
+      color: $white !important;
+      &::placeholder {
+        color: $white !important;
       }
     }
   }

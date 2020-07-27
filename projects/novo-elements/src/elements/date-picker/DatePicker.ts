@@ -10,11 +10,25 @@ import {
   OnChanges,
   SimpleChanges,
   SimpleChange,
+  ChangeDetectorRef,
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 // Vendor
-import * as dateFns from 'date-fns';
+import {
+  isAfter,
+  isBefore,
+  isWithinRange,
+  isSameDay,
+  setMonth,
+  setYear,
+  endOfWeek,
+  subMonths,
+  addMonths,
+  startOfWeek,
+  addDays,
+  isToday,
+} from 'date-fns';
 // APP
 import { Helpers } from '../../utils/Helpers';
 import { NovoLabelService } from '../../services/novo-label-service';
@@ -26,11 +40,11 @@ const DATE_PICKER_VALUE_ACCESSOR = {
   multi: true,
 };
 
-export interface RangeModal {
+export interface RangeModel {
   startDate: Date;
   endDate: Date;
 }
-export type modelTypes = Date | RangeModal;
+export type modelTypes = Date | Date[] | RangeModel;
 
 export interface Day {
   date: Date;
@@ -39,6 +53,8 @@ export interface Day {
   name?: string;
   number?: string | number;
 }
+
+export type DatePickerSelectModes = 'single' | 'multiple' | 'range' | 'week';
 
 export type rangeSelectModes = 'startDate' | 'endDate';
 
@@ -93,63 +109,89 @@ export type rangeSelectModes = 'startDate' | 'endDate';
     ]),
   ],
   template: `
-        <div class="calendar">
-            <div class="calendar-top" *ngIf="!inline && !range">
-                <h4 class="day" [attr.data-automation-id]="heading?.day">{{heading?.day}}</h4>
-                <h2 class="month" [attr.data-automation-id]="heading?.month">{{heading?.month}}</h2>
-                <h1 class="date" [attr.data-automation-id]="heading?.date">{{heading?.date}}</h1>
-                <h3 class="year" [attr.data-automation-id]="heading?.year">{{heading?.year}}</h3>
-            </div>
-            <div class="date-range-tabs" *ngIf="range" [class.week-select-mode]="weekRangeSelect">
-                <span class="range-tab" (click)="toggleRangeSelect('startDate')" [@startDateTextState]="rangeSelectMode" data-automation-id="calendar-start-date">{{selectedLabel}}</span>
-                <span class="range-tab" (click)="toggleRangeSelect('endDate')" [@endDateTextState]="rangeSelectMode" data-automation-id="calendar-end-date">{{selected2Label}}</span>
-                <i class="indicator" [@indicatorState]="rangeSelectMode"></i>
-            </div>
-            <div class="calendar-header">
-                <span class="previous" (click)="prevMonth($event)" data-automation-id="calendar-previous"></span>
-                <span class="heading">
-                    <span class="month" (click)="open($event, 'months')" data-automation-id="header-month">{{monthLabel}}</span>
-                    <span class="year" (click)="open($event, 'years')" data-automation-id="header-year">{{month?.getFullYear()}}</span>
-                </span>
-                <span class="next" (click)="nextMonth($event)" data-automation-id="calendar-next"></span>
-            </div>
-            <table class="calendar-content days" cellspacing="0" cellpadding="0" [hidden]="!(view=='days')">
-                <thead>
-                    <tr>
-                        <th *ngFor="let day of weekdays" title="{{day}}" class="weekday" [attr.data-automation-id]="day.substr(0, 2)">{{day.substr(0, 2)}}</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let week of weeks">
-                        <td *ngFor="let day of week.days" [ngClass]="{
-                            today: day.isToday,
-                            'notinmonth': day.date.getMonth() !== this.month.getMonth(),
-                            selected: isSelected(range, day.date, selected, selected2),
-                            filler: isFiller(range, day.date, selected, selected2),
-                            startfill: isStartFill(range, day.date, selected, selected2),
-                            endfill: isEndFill(range, day.date, selected, selected2),
-                            'selecting-range': isSelectingRange(range, day.date, selected, selected2, hoverDay, rangeSelectMode, weekRangeSelect)
-                           }" (mouseover)="rangeHover($event, day)" [attr.data-automation-id]="day.number">
-                            <button class="day" [attr.data-automation-id]="day.number" [disabled]="isDisabled(day.date, start, end)" (click)="select($event, day, true)">{{day.number}}</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <section class="calendar-content months" [hidden]="view !== 'months'">
-                <div *ngFor="let month of months;let i = index" (click)="setMonth(i)">
-                    <div class="month" [ngClass]="{selected: i === selected?.getMonth()}" [attr.data-automation-id]="month">{{month}}</div>
-                </div>
-            </section>
-            <section class="calendar-content years" [hidden]="view !== 'years'">
-                <div *ngFor="let year of years" (click)="setYear(year)">
-                    <div class="year" [ngClass]="{selected: year == selected?.getFullYear()}" [attr.data-automation-id]="year">{{year}}</div>
-                </div>
-            </section>
-            <div class="calendar-footer">
-                <span (click)="setToday()" class="today" data-automation-id="calendar-today">{{ labels.today }}</span>
-            </div>
+    <div class="calendar">
+      <div class="calendar-top" *ngIf="!inline && mode === 'single'">
+        <h4 class="day" [attr.data-automation-id]="heading?.day">{{ heading?.day }}</h4>
+        <h2 class="month" [attr.data-automation-id]="heading?.month">{{ heading?.month }}</h2>
+        <h1 class="date" [attr.data-automation-id]="heading?.date">{{ heading?.date }}</h1>
+        <h3 class="year" [attr.data-automation-id]="heading?.year">{{ heading?.year }}</h3>
+      </div>
+      <div class="date-range-tabs" *ngIf="range" [class.week-select-mode]="weekRangeSelect">
+        <span
+          class="range-tab"
+          (click)="toggleRangeSelect('startDate')"
+          [@startDateTextState]="rangeSelectMode"
+          data-automation-id="calendar-start-date"
+          >{{ startDateLabel }}</span
+        >
+        <span
+          class="range-tab"
+          (click)="toggleRangeSelect('endDate')"
+          [@endDateTextState]="rangeSelectMode"
+          data-automation-id="calendar-end-date"
+          >{{ endDateLabel }}</span
+        >
+        <i class="indicator" [@indicatorState]="rangeSelectMode"></i>
+      </div>
+      <div class="calendar-header">
+        <span class="previous" (click)="prevMonth($event)" data-automation-id="calendar-previous"></span>
+        <span class="heading">
+          <span class="month" (click)="open($event, 'months')" data-automation-id="header-month">{{ monthLabel }}</span>
+          <span class="year" (click)="open($event, 'years')" data-automation-id="header-year">{{ month?.getFullYear() }}</span>
+        </span>
+        <span class="next" (click)="nextMonth($event)" data-automation-id="calendar-next"></span>
+      </div>
+      <table class="calendar-content days" cellspacing="0" cellpadding="0" [hidden]="!(view == 'days')">
+        <thead>
+          <tr>
+            <th *ngFor="let day of weekdays" title="{{ day }}" class="weekday" [attr.data-automation-id]="day.substr(0, 2)">
+              {{ day.substr(0, 2) }}
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let week of weeks">
+            <td
+              *ngFor="let day of week.days"
+              [ngClass]="{
+                today: day.isToday,
+                notinmonth: day.date.getMonth() !== this.month.getMonth(),
+                selected: isSelected(range, day.date),
+                filler: isFiller(range, day.date),
+                startfill: isStartFill(range, day.date),
+                endfill: isEndFill(range, day.date),
+                'selecting-range': isSelectingRange(range, day.date, hoverDay, rangeSelectMode, weekRangeSelect)
+              }"
+              (mouseover)="rangeHover($event, day)"
+              [attr.data-automation-id]="day.number"
+            >
+              <button
+                class="day"
+                [attr.data-automation-id]="day.number"
+                [disabled]="isDisabled(day.date, start, end)"
+                (click)="select($event, day, true)"
+              >
+                {{ day.number }}
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <section class="calendar-content months" [hidden]="view !== 'months'">
+        <div *ngFor="let month of months; let i = index" (click)="setMonth(i)">
+          <div class="month" [ngClass]="{ selected: i === selected?.getMonth() }" [attr.data-automation-id]="month">{{ month }}</div>
         </div>
-    `,
+      </section>
+      <section class="calendar-content years" [hidden]="view !== 'years'">
+        <div *ngFor="let year of years" (click)="setYear(year)">
+          <div class="year" [ngClass]="{ selected: year == selected?.getFullYear() }" [attr.data-automation-id]="year">{{ year }}</div>
+        </div>
+      </section>
+      <div class="calendar-footer">
+        <span (click)="setToday()" class="today" data-automation-id="calendar-today">{{ labels.today }}</span>
+      </div>
+    </div>
+  `,
 })
 export class NovoDatePickerElement implements ControlValueAccessor, OnInit, OnChanges {
   @Input()
@@ -163,14 +205,46 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit, OnCh
   @Input()
   inline: boolean;
   @Input()
-  range: boolean;
-  @Input()
-  weekRangeSelect: boolean;
-  @Input()
   weekStart: number = 0;
   // Select callback for output
   @Output()
   onSelect: EventEmitter<any> = new EventEmitter(false);
+
+  _mode: DatePickerSelectModes = 'single';
+  _range: boolean;
+  _weekRangeSelect: boolean;
+
+  @Input()
+  get mode(): DatePickerSelectModes {
+    return this._mode;
+  }
+  set mode(value) {
+    if (this._mode !== value) {
+      this._mode = value;
+    }
+  }
+  @Input()
+  get range(): boolean {
+    return ['range', 'week'].includes(this.mode) || this._range;
+  }
+  set range(value) {
+    console.warn(`'range' property is deprecated, please use 'mode="range"'.`);
+    if (this._range !== value) {
+      this._range = value;
+      this.mode = 'range';
+    }
+  }
+  @Input()
+  get weekRangeSelect(): boolean {
+    return this._mode === 'week' || this._weekRangeSelect;
+  }
+  set weekRangeSelect(value) {
+    console.warn(`'weekRangeSelect' property is deprecated, please use 'mode="week"'.`);
+    if (this._weekRangeSelect !== value) {
+      this._weekRangeSelect = value;
+      this.mode = 'week';
+    }
+  }
 
   // List of all the weekdays
   weekdays: string[] = [];
@@ -186,17 +260,26 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit, OnCh
   month: Date;
   monthLabel: string;
   weeks: any;
-  selected: Date;
-  selectedLabel: string;
-  selected2: Date;
-  selected2Label: string;
+
+  selection: Date[] = [];
+  prevSelected: Date;
+  get selected() {
+    return this.selection[0] || new Date();
+  }
+  startDateLabel: string;
+  endDateLabel: string;
+  // deprecate in favor of selection
+  // selected: Date;
+  // selectedLabel: string;
+  // selected2: Date;
+  // selected2Label: string;
   hoverDay: any;
 
   rangeSelectMode: rangeSelectModes = 'startDate';
-  _onChange: Function = () => { };
-  _onTouched: Function = () => { };
+  _onChange: Function = () => {};
+  _onTouched: Function = () => {};
 
-  constructor(public labels: NovoLabelService, private element: ElementRef) { }
+  constructor(public labels: NovoLabelService, private element: ElementRef, private cdr: ChangeDetectorRef) {}
 
   ngOnInit() {
     // Determine the year array
@@ -213,9 +296,9 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit, OnCh
     this.months = this.labels.getMonths();
 
     // Set labels
-    this.selectedLabel = this.labels.startDate;
-    this.selected2Label = this.labels.endDate;
     this.updateView(this.model, false, true);
+    this.updateSelection(this.model);
+    this.updateHeading();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -244,63 +327,44 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit, OnCh
     return weekdays;
   }
 
-  isSelectingRange(range, day, selected, selected2, hoverDay, rangeSelectMode, weekRangeSelect) {
-    if (range && !weekRangeSelect) {
-      const isRangeModeEndDate =
-        rangeSelectMode === 'endDate' && (selected && selected2 && dateFns.isAfter(day, selected2) && dateFns.isBefore(day, hoverDay));
-      const isRangeModeStartDate =
-        rangeSelectMode === 'startDate' && (selected && selected2 && dateFns.isBefore(day, selected) && dateFns.isAfter(day, hoverDay));
-      const isNotSelected = !selected && selected2 && dateFns.isBefore(day, selected2) && dateFns.isAfter(day, hoverDay);
-      const isNotSelected2 = selected && !selected2 && dateFns.isAfter(day, selected) && dateFns.isBefore(day, hoverDay);
-      return isNotSelected2 || isNotSelected || isRangeModeStartDate || isRangeModeEndDate;
+  isSelectingRange(range, day, hoverDay, rangeSelectMode, weekRangeSelect) {
+    if (range && !weekRangeSelect && hoverDay && this.prevSelected) {
+      let dates = [hoverDay, this.prevSelected].sort((a, b) => a.getTime() - b.getTime());
+      return isWithinRange(day, dates[0], dates[1]);
     }
     return false;
   }
 
-  isEndFill(range, day, selected, selected2) {
-    if (range && selected2 && selected) {
-      return !dateFns.isSameDay(selected, selected2) && dateFns.isSameDay(day, selected2) && dateFns.isAfter(day, selected);
+  isEndFill(range, day) {
+    const [start, end] = this.selection;
+    if (range && start && end) {
+      return !isSameDay(start, end) && isSameDay(day, end) && isAfter(day, start);
     }
     return false;
   }
 
-  isStartFill(range, day, selected, selected2) {
-    if (range && selected2 && selected) {
-      return !dateFns.isSameDay(selected, selected2) && dateFns.isSameDay(day, selected) && dateFns.isBefore(day, selected2);
+  isStartFill(range, day) {
+    const [start, end] = this.selection;
+    if (range && end && start) {
+      return !isSameDay(start, end) && isSameDay(day, start) && isBefore(day, end);
     }
     return false;
   }
 
-  isFiller(range, day, selected, selected2) {
-    if (range && selected2 && selected) {
-      return (
-        (dateFns.isAfter(day, selected) && dateFns.isBefore(day, selected2)) ||
-        dateFns.isSameDay(day, selected) ||
-        dateFns.isSameDay(day, selected2)
-      );
+  isFiller(range, day) {
+    const [start, end] = this.selection;
+    if (range && end && start) {
+      return (isAfter(day, start) && isBefore(day, end)) || isSameDay(day, start) || isSameDay(day, end);
     }
     return false;
   }
 
-  isSelected(range, day, selected, selected2) {
-    if (range) {
-      return (
-        day &&
-        ((selected &&
-          (day.getDate() === selected.getDate() &&
-            day.getMonth() === selected.getMonth() &&
-            day.getFullYear() === selected.getFullYear())) ||
-          (selected2 &&
-            (day.getDate() === selected2.getDate() &&
-              day.getMonth() === selected2.getMonth() &&
-              day.getFullYear() === selected2.getFullYear())))
-      );
-    }
-    return day.getDate() === selected.getDate() && day.getMonth() === selected.getMonth() && day.getFullYear() === selected.getFullYear();
+  isSelected(range, day) {
+    return this.selection.includes(day);
   }
 
   isDisabled(day, start, end) {
-    return dateFns.isBefore(day, start) || dateFns.isAfter(day, end);
+    return isBefore(day, start) || isAfter(day, end);
   }
 
   updateView(date, fireEvents: boolean, markedSelected: boolean) {
@@ -318,12 +382,32 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit, OnCh
       const start = new Date(value.getTime());
       start.setDate(1);
       this.removeTime(start.setDate(1));
-
       this.buildMonth(start, this.month);
 
-      if (markedSelected) {
+      if (date && markedSelected) {
         this.select(null, { date: value }, fireEvents);
       }
+    }
+  }
+
+  updateSelection(date) {
+    if (!date || (date && date.startDate === null)) {
+      return this.clearRange();
+    }
+    switch (this.mode) {
+      case 'multiple':
+        this.selection = date;
+        break;
+      case 'range':
+        this.selection = [date.startDate, date.endDate].filter(Boolean);
+        break;
+      case 'week':
+        this.selection = [date.startDate, date.endDate].filter(Boolean);
+        break;
+      case 'single':
+      default:
+        this.selection = [date];
+        break;
     }
   }
 
@@ -335,15 +419,12 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit, OnCh
   }
 
   clearRange() {
-    this.selected = null;
-    this.selectedLabel = this.labels.startDate;
-    this.selected2 = null;
-    this.selected2Label = this.labels.endDate;
+    this.selection = [];
   }
 
   setMonth(month: number): void {
     const date = this.month ? this.month : new Date();
-    const tmp = dateFns.setMonth(date, month);
+    const tmp = setMonth(date, month);
     this.updateView(tmp, true, false);
     // Go back to days
     this.open(null, 'days');
@@ -351,7 +432,7 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit, OnCh
 
   setYear(year: number): void {
     const date = this.month ? this.month : new Date();
-    const tmp = dateFns.setYear(date, year);
+    const tmp = setYear(date, year);
     this.updateView(tmp, true, false);
     // Go back to days
     this.open(null, 'days');
@@ -359,111 +440,76 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit, OnCh
 
   select(event: Event, day: Day, fireEvents: boolean) {
     Helpers.swallowEvent(event);
-    if (this.range) {
-      if (this.weekRangeSelect) {
-        this.selected = dateFns.startOfWeek(day.date, { weekStartsOn: this.weekStart });
-        this.selected2 = dateFns.endOfWeek(day.date, { weekStartsOn: this.weekStart });
-        this.selectedLabel = this.labels.formatDateWithFormat(this.selected, {
-          month: 'short',
-          day: '2-digit',
-          year: 'numeric',
-        });
-        this.selected2Label = this.labels.formatDateWithFormat(this.selected2, {
-          month: 'short',
-          day: '2-digit',
-          year: 'numeric',
-        });
-        // Make sure to fire this, since we default to the current week selected!
-        if (!fireEvents && this.weekRangeSelect) {
-          this.fireRangeSelect();
-        }
-      } else if (this.rangeSelectMode === 'startDate') {
-        // SET START DATE
-        this.selected = dateFns.startOfDay(day.date);
-        this.selectedLabel = this.labels.formatDateWithFormat(this.selected, {
-          month: 'short',
-          day: '2-digit',
-          year: 'numeric',
-        });
-        if (this.selected2 && dateFns.isAfter(day.date, this.selected2)) {
-          // CLEAR END DATE
-          this.selected2 = null;
-          this.selected2Label = this.labels.endDate;
-        }
-        if (event) {
-          this.rangeSelectMode = 'endDate';
-        }
-      } else if (this.rangeSelectMode === 'endDate') {
-        // SET END DATE
-        this.selected2 = dateFns.endOfDay(day.date);
-        this.selected2Label = this.labels.formatDateWithFormat(this.selected2, {
-          month: 'short',
-          day: '2-digit',
-          year: 'numeric',
-        });
-        if (this.selected && dateFns.isBefore(day.date, this.selected)) {
-          // CLEAR START DATE
-          this.selected = null;
-          this.selectedLabel = this.labels.startDate;
-        }
-        if (event) {
-          this.rangeSelectMode = 'startDate';
-        }
+    if (this.mode === 'multiple') {
+      let current = new Set(this.selection);
+      if (current.has(day.date)) {
+        current.delete(day.date);
+      } else {
+        current.add(day.date);
       }
+      this.selection = [...current];
+    } else if (this.mode === 'week') {
+      let start = startOfWeek(day.date, { weekStartsOn: this.weekStart });
+      let end = endOfWeek(day.date, { weekStartsOn: this.weekStart });
+      this.selection = [start, end];
+    } else if (this.range) {
+      let current = [day.date, this.prevSelected].filter(Boolean);
+      this.prevSelected = day.date;
+      this.selection = current.sort((a, b) => a.getTime() - b.getTime());
     } else {
-      this.selected = day.date;
-      this.selectedLabel = this.labels.formatDateWithFormat(this.selected, {
-        month: 'short',
-        day: '2-digit',
-        year: 'numeric',
-      });
-      this.updateHeading();
+      this.selection = [day.date];
     }
-    if (fireEvents && this.selected) {
+    if (fireEvents) {
       // Emit our output
-      if (this.range && this.selected && this.selected2) {
+      if (this.range && this.selection.length === 2) {
         this.fireRangeSelect();
         // Also, update the ngModel
-        this._onChange({
-          startDate: this.selected,
-          endDate: this.selected2 ? this.selected2 : null,
-        });
-        this.model = {
-          startDate: this.selected,
-          endDate: this.selected2 ? this.selected2 : null,
+        let model = {
+          startDate: this.selection[0],
+          endDate: this.selection[1],
         };
-      }
-
-      if (!this.range) {
-        this.onSelect.next({
-          month: this.labels.formatDateWithFormat(this.selected, { month: 'long' }),
-          year: this.selected.getFullYear(),
-          day: this.labels.formatDateWithFormat(this.selected, { weekday: 'long' }),
-          date: this.selected,
-        });
+        this._onChange(model);
+        this.model = model;
+      } else if (this.mode === 'multiple') {
+        this.fireSelect();
         // Also, update the ngModel
-        this._onChange(this.selected);
-        this.model = this.selected;
+        this._onChange(this.selection);
+        this.model = this.selection;
+      } else {
+        this.fireSelect();
+        // Also, update the ngModel
+        this._onChange(this.selection[0]);
+        this.model = this.selection[0];
       }
+    }
+    this.updateHeading();
+    this.cdr.markForCheck();
+  }
+
+  eventData(date: Date) {
+    return {
+      year: date.getFullYear(),
+      month: this.labels.formatDateWithFormat(date, { month: 'long' }),
+      day: this.labels.formatDateWithFormat(date, { weekday: 'long' }),
+      date,
+    };
+  }
+
+  fireSelect() {
+    if (this.mode === 'multiple') {
+      this.onSelect.next(this.selection);
+    } else {
+      this.onSelect.next(this.eventData(this.selection[0]));
     }
   }
 
   fireRangeSelect() {
     // Make sure the start date is before the end date
-    if (dateFns.isBefore(this.selected, this.selected2)) {
+    if (this.selection.length === 2) {
+      const [start, end] = this.selection;
       this.onSelect.next({
-        startDate: {
-          month: this.labels.formatDateWithFormat(this.selected, { month: 'long' }),
-          year: this.selected.getFullYear(),
-          day: this.labels.formatDateWithFormat(this.selected, { weekday: 'long' }),
-          date: this.selected,
-        },
-        endDate: {
-          month: this.labels.formatDateWithFormat(this.selected2, { month: 'long' }),
-          year: this.selected2.getFullYear(),
-          day: this.labels.formatDateWithFormat(this.selected2, { weekday: 'long' }),
-          date: this.selected2,
-        },
+        startDate: this.eventData(start),
+        endDate: this.eventData(end),
       });
     }
   }
@@ -496,30 +542,48 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit, OnCh
 
   prevMonth(event: Event): void {
     Helpers.swallowEvent(event);
-    const tmp = dateFns.subMonths(this.month, 1);
+    const tmp = subMonths(this.month, 1);
     this.updateView(tmp, false, false);
   }
 
   nextMonth(event: Event): void {
     Helpers.swallowEvent(event);
-    const tmp = dateFns.addMonths(this.month, 1);
+    const tmp = addMonths(this.month, 1);
     this.updateView(tmp, false, false);
   }
 
   updateHeading() {
-    if (!this.selected) {
-      return;
+    if (this.selection.length) {
+      this.heading = {
+        month: this.labels.formatDateWithFormat(this.selection[0], { month: 'long' }),
+        year: this.selection[0].getFullYear(),
+        day: this.labels.formatDateWithFormat(this.selection[0], { weekday: 'long' }),
+        date: this.selection[0].getDate(),
+      };
     }
-    this.heading = {
-      month: this.labels.formatDateWithFormat(this.selected, { month: 'long' }),
-      year: this.selected.getFullYear(),
-      day: this.labels.formatDateWithFormat(this.selected, { weekday: 'long' }),
-      date: this.selected.getDate(),
-    };
+    if (this.selection.length) {
+      this.startDateLabel = this.labels.formatDateWithFormat(this.selection[0], {
+        month: 'short',
+        day: '2-digit',
+        year: 'numeric',
+      });
+    } else {
+      this.startDateLabel = this.labels.startDate;
+    }
+    if (this.selection.length === 2) {
+      this.endDateLabel = this.labels.formatDateWithFormat(this.selection[1], {
+        month: 'short',
+        day: '2-digit',
+        year: 'numeric',
+      });
+    } else {
+      this.endDateLabel = this.labels.endDate;
+    }
   }
 
   /**
    * Remove the time aspect of the date
+   * @param date
    * @returns with time stripped out
    */
   removeTime(date: any): Date {
@@ -535,17 +599,17 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit, OnCh
     this.weeks = [];
 
     // House keeping variables to know when we are done building the month
-    let done = false;
-    let date = dateFns.startOfWeek(start, { weekStartsOn: this.weekStart });
-    let monthIndex = date.getMonth();
-    let count = 0;
+    let done = false,
+      date = startOfWeek(start, { weekStartsOn: this.weekStart }),
+      monthIndex = date.getMonth(),
+      count = 0;
 
     while (!done) {
       // Build the days for the weeks
       this.weeks.push({ days: this.buildWeek(new Date(date.getTime()), month) });
 
       // Increment variables for the next iteration
-      date = dateFns.addDays(date, 7);
+      date = addDays(date, 7);
       done = count++ > 2 && monthIndex !== date.getMonth();
       monthIndex = date.getMonth();
     }
@@ -561,12 +625,12 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit, OnCh
       days.push({
         name: this.weekdays[i],
         number: date.getDate(),
-        isToday: dateFns.isToday(date),
+        isToday: isToday(date),
         date,
       });
 
       // Increment for the next iteration
-      date = dateFns.addDays(date, 1);
+      date = addDays(date, 1);
     }
 
     return days;
@@ -574,6 +638,12 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit, OnCh
 
   toggleRangeSelect(range: rangeSelectModes): void {
     this.rangeSelectMode = range;
+    if (range === 'startDate' && this.selection.length) {
+      this.updateView(this.selection[0], false, false);
+    }
+    if (range === 'endDate' && this.selection.length === 2) {
+      this.updateView(this.selection[1], false, false);
+    }
   }
 
   rangeHover(event: Event, day: Day): void {
@@ -583,6 +653,9 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit, OnCh
   // ValueAccessor Functions
   writeValue(model: modelTypes): void {
     this.model = model;
+    if (this.mode === 'multiple') {
+      this.selection = this.model as Date[];
+    }
     if (Helpers.isDate(model)) {
       this.updateView(model, false, true);
     }

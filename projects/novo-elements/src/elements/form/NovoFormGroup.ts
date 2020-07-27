@@ -1,5 +1,5 @@
 // NG
-import { FormGroup } from '@angular/forms';
+import { FormGroup, AbstractControl } from '@angular/forms';
 import { EventEmitter } from '@angular/core';
 // App
 import { IFieldInteractionEvent } from './FormInterfaces';
@@ -13,6 +13,9 @@ export class NovoFormGroup extends FormGroup {
   public currentEntityId: string;
   public associations: object;
   public _value: any;
+  public controls: { [key: string]: any };
+  public novoControls: any[];
+  public fieldsets: any[];
 
   get value() {
     return this.getRawValue();

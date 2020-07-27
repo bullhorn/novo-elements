@@ -1,8 +1,25 @@
 // NG2
-import { ChangeDetectorRef, Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import {
+  Component,
+  EventEmitter,
+  forwardRef,
+  Input,
+  Output,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  QueryList,
+  ContentChildren,
+  HostBinding,
+  Optional,
+  OnInit,
+} from '@angular/core';
+import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 // APP
 import { Helpers } from '../../utils/Helpers';
+import { NovoRadioGroup } from './RadioGroup';
+
+// make radio-buttons ids unique
+let nextId = 0;
 
 // Value accessor for the component (supports ngModel)
 const RADIO_VALUE_ACCESSOR = {
@@ -12,36 +29,47 @@ const RADIO_VALUE_ACCESSOR = {
 };
 
 @Component({
-  selector: 'novo-radio-group',
-  template: '<ng-content></ng-content>',
-})
-export class NovoRadioGroup { }
-
-@Component({
   selector: 'novo-radio',
   providers: [RADIO_VALUE_ACCESSOR],
   template: `
-        <input [name]="name" type="radio" [checked]="checked" [attr.id]="name" (change)="select($event)" [disabled]="disabled">
-        <label [attr.for]="name" (click)="select($event)" [class.disabled]="disabled">
-            <button *ngIf="button" [ngClass]="{'unchecked': !checked, 'checked': checked, 'has-icon': !!icon}" [theme]="theme" [icon]="icon">{{ label }}</button>
-            <div *ngIf="!button">
-                <i [ngClass]="{'bhi-radio-empty': !checked, 'bhi-radio-filled': checked}"></i>
-                {{ label }}
-                <ng-content></ng-content>
-            </div>
-        </label>
-    `,
+    <input
+      type="radio"
+      [id]="id"
+      [name]="name"
+      [checked]="checked"
+      [tabIndex]="tabindex"
+      [disabled]="disabled"
+      (focus)="focus.emit($event)"
+      (blur)="blur.emit($event)"
+      (change)="_onInputChange($event)"
+    />
+    <label [attr.for]="id" [class.disabled]="disabled">
+      <button
+        *ngIf="button"
+        [ngClass]="{ unchecked: !checked, checked: checked, 'has-icon': !!icon }"
+        [theme]="theme"
+        [icon]="icon"
+        [size]="size"
+      >
+        {{ label }}
+      </button>
+      <div *ngIf="!button">
+        <i [ngClass]="{ 'bhi-radio-empty': !checked, 'bhi-radio-filled': checked }"></i>
+        {{ label }}
+        <ng-content></ng-content>
+      </div>
+    </label>
+  `,
   host: {
     '[class.vertical]': 'vertical',
   },
 })
-export class NovoRadioElement implements ControlValueAccessor {
-  @Input()
-  name: string;
-  @Input()
-  value: any;
-  @Input()
-  checked: boolean;
+export class NovoRadioElement implements ControlValueAccessor, OnInit {
+  private _uniqueId: string = `novo-radio-${++nextId}`;
+  @Input() id: string = this._uniqueId;
+  @Input() name: string = this._uniqueId;
+  @Input() tabindex: number = 0;
+
   @Input()
   vertical: boolean;
   @Input()
@@ -51,42 +79,97 @@ export class NovoRadioElement implements ControlValueAccessor {
   @Input()
   theme: string = 'secondary';
   @Input()
-  icon: string;
+  size: string;
   @Input()
-  disabled: boolean = false;
+  icon: string;
 
-  @Output()
-  change: EventEmitter<any> = new EventEmitter();
+  @Output() change = new EventEmitter();
+  @Output() blur = new EventEmitter();
+  @Output() focus = new EventEmitter();
 
-  model: any;
-  onModelChange: Function = () => { };
-  onModelTouched: Function = () => { };
+  private _checked: boolean = false;
+  private _value: boolean = false;
+  private _disabled: boolean = false;
 
-  constructor(private ref: ChangeDetectorRef) { }
+  @Input() get checked(): boolean {
+    return this._checked;
+  }
 
-  select(event: MouseEvent) {
-    Helpers.swallowEvent(event);
-    // Only change the checked state if this is a new radio, they are not toggle buttons
-    if (!this.checked) {
-      this.checked = !this.checked;
-      this.change.emit(this.value);
-      this.onModelChange(this.value);
-      this.ref.markForCheck();
+  set checked(value: boolean) {
+    value = !!value;
+    if (this._checked !== value) {
+      this._checked = value;
+      if (this._checked && this.radioGroup && this.radioGroup.value !== this.value) {
+        this.radioGroup.value = this.value;
+      }
+      this.onChangeCallback(this._value);
     }
   }
 
-  writeValue(model: any): void {
-    this.model = model;
+  @Input() get value(): boolean {
+    return this._value;
+  }
+  set value(value) {
+    if (this.value !== value) {
+      this._value = value;
+      if (this.radioGroup) {
+        this._checked = this.radioGroup.value === this.value;
+      }
+      this.onChangeCallback(this._value);
+    }
+  }
+  // Disabled State
+  @Input()
+  @HostBinding('class.disabled')
+  get disabled(): boolean {
+    return this._disabled || (this.radioGroup != null && this.radioGroup.disabled);
+  }
+  set disabled(value: boolean) {
+    this._disabled = !!value;
+  }
+
+  constructor(@Optional() public radioGroup: NovoRadioGroup, private ref: ChangeDetectorRef) {
+    this.radioGroup = radioGroup;
+  }
+
+  ngOnInit() {
+    if (this.radioGroup) {
+      this.checked = this.radioGroup.value === this._value;
+      this.name = this.radioGroup.name;
+    }
+  }
+
+  _onInputChange(event: Event) {
+    event.stopPropagation();
+    this.change.emit(event);
+
+    this.checked = true;
+
+    if (this.radioGroup) {
+      this.radioGroup.value = this.value;
+    }
+  }
+
+  writeValue(value: any): void {
+    this.value = value;
     this.ref.markForCheck();
   }
 
-  registerOnChange(fn: Function): void {
-    this.onModelChange = fn;
+  registerOnChange(fn: any): void {
+    this.onChangeCallback = fn;
   }
 
-  registerOnTouched(fn: Function): void {
-    this.onModelTouched = fn;
+  registerOnTouched(fn: any): void {
+    this.onTouchedCallback = fn;
   }
+
+  private onChangeCallback = (_: any) => {
+    // placeholder
+  };
+
+  private onTouchedCallback = () => {
+    // placeholder
+  };
 
   setDisabledState(disabled: boolean): void {
     this.disabled = disabled;

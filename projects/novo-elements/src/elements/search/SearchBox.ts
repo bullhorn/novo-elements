@@ -57,7 +57,7 @@ const SEARCH_VALUE_ACCESSOR = {
     <novo-overlay-template
       [parent]="element"
       [closeOnSelect]="closeOnSelect"
-      position="above-below"
+      [position]="position"
       (select)="closePanel()"
       (closing)="onBlur()"
     >
@@ -71,8 +71,11 @@ export class NovoSearchBoxElement implements ControlValueAccessor {
   @Input()
   public icon: string = 'search';
   @Input()
+  public position: string = 'bottom-left';
+  @Input()
   public placeholder: string = 'Search...';
   @Input()
+  @HostBinding('class.always-open')
   public alwaysOpen: boolean = false;
   @Input()
   public theme: string = 'positive';

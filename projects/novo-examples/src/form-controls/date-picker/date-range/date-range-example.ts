@@ -17,4 +17,8 @@ export class DateRangeExample {
     startDate: null,
     endDate: null,
   };
+  rangeIn: any = {
+    startDate: null,
+    endDate: null,
+  };
 }

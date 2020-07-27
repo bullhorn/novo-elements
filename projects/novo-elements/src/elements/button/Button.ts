@@ -9,6 +9,7 @@ import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
     '[attr.icon]': 'icon',
     '[attr.loading]': 'loading',
     '[attr.side]': 'side',
+    '[attr.size]': 'size',
   },
   template: `
     <div class="flex-wrapper">
@@ -53,6 +54,7 @@ import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 export class NovoButtonElement {
   @Input() color: string;
   @Input() side: string = 'right';
+  @Input() size: string;
   @Input() theme: string;
   @Input() loading: boolean;
   @Input()

@@ -1,0 +1,20 @@
+:host {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  &::ng-deep {
+    novo-icon {
+      font-size: xx-large;
+      i {
+        margin: 0;
+      }
+    }
+  }
+  button {
+    display: inline-block;
+  }
+}

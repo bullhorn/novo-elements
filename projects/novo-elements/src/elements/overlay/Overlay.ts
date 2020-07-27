@@ -160,14 +160,16 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
       return observableOf();
     }
 
-    return merge(fromEvent(this.document, 'mousedown'), fromEvent(this.document, 'touchend')).pipe(
+    return merge(fromEvent(this.document, 'mouseup'), fromEvent(this.document, 'touchend')).pipe(
       filter((event: MouseEvent | TouchEvent) => {
         const clickTarget: HTMLElement = event.target as HTMLElement;
         const clicked: boolean =
           this.panelOpen &&
           clickTarget !== this.getConnectedElement().nativeElement &&
           !this.getConnectedElement().nativeElement.contains(clickTarget) &&
-          (!!this.overlayRef && !this.overlayRef.overlayElement.contains(clickTarget));
+          !!this.overlayRef &&
+          !this.overlayRef.overlayElement.contains(clickTarget) &&
+          !Array.from(document.querySelectorAll('.cdk-overlay-container')).some((el) => el.contains(clickTarget));
         if (this.panelOpen && !!this.overlayRef && this.overlayRef.overlayElement.contains(clickTarget) && this.closeOnSelect) {
           this.select.emit(event);
         }

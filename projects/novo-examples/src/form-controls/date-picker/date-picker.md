@@ -1,10 +1,8 @@
-Date and Time Pickers
-=====================
+# Date and Time Pickers
 
 These allow users to easily select a time and date. It comes in a handful of varieties based on the content of the field.
 
-Date Picker [(source)](https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/date-picker)
-------------------------------------------------------------------------------------------------------
+## Date Picker [(source)](https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/date-picker)
 
 The calendar picker is used to select a date. It appears in all date picker fields.
 
@@ -12,8 +10,7 @@ The calendar picker is used to select a date. It appears in all date picker fiel
 
 <code-example example="date-picker"></code-example>
 
-Time Picker [(source)](https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/time-picker)
-------------------------------------------------------------------------------------------------------
+## Time Picker [(source)](https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/time-picker)
 
 Time pickers come in 12 hour or 24 hour style.
 
@@ -24,6 +21,10 @@ Time pickers come in 12 hour or 24 hour style.
 ##### Range Picker
 
 <code-example example="date-range"></code-example>
+
+##### Multi Date Selection Picker
+
+<code-example example="multi-date"></code-example>
 
 ##### Date Time Picker
 

@@ -4,11 +4,15 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 // APP
 import { NovoPipesModule } from './pipes/Pipes.module';
+import { NovoAsideModule } from './elements/aside/aside.module';
+import { NovoAvatarModule } from './elements/avatar/Avatar.module';
 import { NovoButtonModule } from './elements/button/Button.module';
 import { NovoAceEditorModule } from './elements/ace-editor/AceEditor.module';
 import { NovoLoadingModule } from './elements/loading/Loading.module';
+import { NovoBreadcrumbModule } from './elements/breadcrumbs/Breadcrumb.module';
 import { NovoCardModule } from './elements/card/Card.module';
 import { NovoCalendarModule } from './elements/calendar/Calendar.module';
+import { NovoFlexModule } from './elements/flex/Flex.module';
 import { NovoToastModule } from './elements/toast/Toast.module';
 import { NovoTooltipModule } from './elements/tooltip/Tooltip.module';
 import { NovoHeaderModule } from './elements/header/Header.module';
@@ -39,6 +43,7 @@ import { NovoCategoryDropdownModule } from './elements/category-dropdown/Categor
 import { NovoMultiPickerModule } from './elements/multi-picker/MultiPicker.module';
 import { NovoPopOverModule } from './elements/popover/PopOver.module';
 import { NovoSearchBoxModule } from './elements/search/SearchBox.module';
+import { NovoProgressModule } from './elements/progress/Progress.module';
 import { GooglePlacesModule } from './elements/places/places.module';
 import { NovoValueModule } from './elements/value/Value.module';
 import { NovoDataTableModule } from './elements/data-table/data-table.module';
@@ -57,17 +62,23 @@ import { ComponentUtils } from './utils/component-utils/ComponentUtils';
 import { FormUtils } from './utils/form-utils/FormUtils';
 import { OptionsService } from './services/options/OptionsService';
 import { NovoTabbedGroupPickerModule } from './elements/tabbed-group-picker/TabbedGroupPicker.module';
+import { NovoNonIdealStateModule } from './elements/non-ideal-state/NonIdealState.module';
+import { NovoFieldModule } from './elements/field/field.module';
+import { NovoColorPickerModule } from './elements/color-picker/color-picker.module';
 
 import { NovoCommonModule } from './elements/common/common.module';
 
 @NgModule({
   imports: [ReactiveFormsModule],
   exports: [
+    NovoAsideModule,
+    NovoAvatarModule,
     NovoPipesModule,
     NovoButtonModule,
     NovoLoadingModule,
     NovoCardModule,
     NovoCalendarModule,
+    NovoFlexModule,
     NovoToastModule,
     NovoTooltipModule,
     NovoHeaderModule,
@@ -99,6 +110,7 @@ import { NovoCommonModule } from './elements/common/common.module';
     NovoPopOverModule,
     NovoDataTableModule,
     NovoSearchBoxModule,
+    NovoProgressModule,
     NovoOverlayModule,
     GooglePlacesModule,
     NovoValueModule,
@@ -110,6 +122,10 @@ import { NovoCommonModule } from './elements/common/common.module';
     NovoStepperModule,
     ScrollingModule,
     NovoTabbedGroupPickerModule,
+    NovoNonIdealStateModule,
+    NovoBreadcrumbModule,
+    NovoFieldModule,
+    NovoColorPickerModule,
   ],
   providers: [
     { provide: ComponentUtils, useClass: ComponentUtils },

@@ -1,4 +1,13 @@
 button {
+  &[theme][size='small'] {
+    font-size: 0.8em;
+    min-width: 2em;
+  }
+
+  &[theme][size='large'] {
+    font-size: 1.2em;
+  }
+
   > div.flex-wrapper {
     display: flex;
     flex-direction: row;
@@ -10,12 +19,12 @@ button {
   }
   &[side='left']:not([theme='fab']) {
     i {
-      margin-right: 5px;
+      margin-right: 0.4em;
     }
   }
   &[side='right']:not([theme='fab']) {
     i {
-      margin-left: 5px;
+      margin-left: 0.4em;
     }
   }
   &[icon='times'] {
@@ -24,8 +33,8 @@ button {
     }
   }
   &[theme] {
-    padding: 6px 10px;
-    min-height: 37px;
+    padding: 0.4em 0.8em;
+    // min-height: 37px;
     font-size: 1rem;
     border: none;
     background: transparent;
@@ -75,12 +84,12 @@ button {
           background: rgba(0, 0, 0, 0.15);
           padding: 5px;
           border-radius: 50%;
-          height: 25px;
-          width: 25px;
+          // height: 25px;
+          // width: 25px;
           display: flex;
           align-items: center;
           justify-content: center;
-          margin-left: 10px;
+          margin-left: 0.8em;
           &:before {
             vertical-align: baseline;
           }
@@ -147,7 +156,7 @@ button {
       color: $positive;
       border: 1px solid $positive;
       i.loading {
-        margin-left: 10px;
+        margin-left: 0.8em;
         svg {
           .spinner {
             fill: $positive;
@@ -182,14 +191,14 @@ button {
       }
       &[icon] {
         i {
-          padding: 5px;
+          padding: 0.4em;
           border-radius: 50%;
-          height: 25px;
-          width: 25px;
+          // height: 25px;
+          // width: 25px;
           display: flex;
           align-items: center;
           justify-content: center;
-          margin-left: 10px;
+          margin-left: 0.8em;
           &:before {
             vertical-align: baseline;
           }
@@ -204,10 +213,10 @@ button {
         align-items: center;
         justify-content: space-between;
         i {
-          padding: 5px;
+          padding: 0.4em;
           border-radius: 50%;
-          height: 25px;
-          width: 25px;
+          // height: 25px;
+          // width: 25px;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -238,7 +247,7 @@ button {
           i {
             color: $color;
             &.loading {
-              margin-left: 10px;
+              margin-left: 0.8em;
               svg {
                 .spinner {
                   fill: $color;
@@ -254,7 +263,7 @@ button {
           i {
             color: $color;
             &.loading {
-              margin-left: 10px;
+              margin-left: 0.8em;
               svg {
                 .spinner {
                   fill: $color;
@@ -264,7 +273,24 @@ button {
           }
         }
       }
-    } // Standard Themed Icon
+    }
+    &[theme='field'] {
+      background: transparent;
+      color: $dark;
+      border: none;
+      border-radius: 0;
+      border-bottom: 1px solid $dark;
+      margin-bottom: 4px;
+      padding: 0.2rem 0.4rem;
+      font-size: 0.8rem;
+      text-align: left;
+      &:hover,
+      &:focus,
+      &:active {
+        border-bottom: 1px solid $positive;
+      }
+    }
+    // Standard Themed Icon
     &[theme='standard'] {
       color: $dark;
       background: $light;
@@ -299,9 +325,9 @@ button {
       &[inverse] {
         color: #fff;
       }
-      width: 40px;
-      height: 40px;
-      padding: 10px;
+      // width: 40px;
+      // height: 40px;
+      padding: 0.8em;
       i {
         margin: 0 !important;
       }
@@ -316,9 +342,9 @@ button {
       &[inverse] {
         color: #fff;
       }
-      width: 40px;
-      height: 40px;
-      padding: 10px;
+      // width: 40px;
+      // height: 40px;
+      padding: 0.8em;
       border-radius: 50% !important;
       @each $button, $color in $all-colors {
         &[color='#{$button}'] {
@@ -331,6 +357,13 @@ button {
       }
       &:active {
         box-shadow: 0px 1px 2px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+      }
+      i {
+        margin: 0;
+        padding: 0;
+        &:before {
+          display: block;
+        }
       }
     } // Select Themed Button
     &[theme='select'] {
@@ -367,7 +400,7 @@ button {
       &:hover {
         border-bottom: 1px solid lighten($dark, 15%);
         i {
-          opacity: .75;
+          opacity: 0.75;
         }
       }
       &:focus {
@@ -379,7 +412,7 @@ button {
       i {
         font-size: 0.8em;
         color: $dark;
-        opacity: .45;
+        opacity: 0.45;
       }
     }
   }

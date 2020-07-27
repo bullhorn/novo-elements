@@ -1,0 +1,16 @@
+<novo-progress>
+  <novo-progress-bar indeterminate="true"></novo-progress-bar>
+</novo-progress>
+
+<br />
+
+<novo-progress striped="true">
+  <novo-progress-bar value="40"></novo-progress-bar>
+</novo-progress>
+
+<br />
+
+<novo-progress total="300">
+  <novo-progress-bar value="120" color="success" [tooltip]="largeTooltip" tooltipSize="large"></novo-progress-bar>
+  <novo-progress-bar value="40" color="negative"></novo-progress-bar>
+</novo-progress>

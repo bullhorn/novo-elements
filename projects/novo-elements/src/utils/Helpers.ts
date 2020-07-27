@@ -1,5 +1,11 @@
+import { TemplateRef } from '@angular/core';
+
 // @dynamic
 export class Helpers {
+  static isTemplateRef(value: any): boolean {
+    return value instanceof TemplateRef;
+  }
+
   /**
    * Swallows an event to stop further execution
    */

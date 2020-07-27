@@ -1,0 +1,20 @@
+:host {
+  img {
+    width: 30px;
+    height: 30px;
+    border-radius: 2em;
+  }
+  // @each $basic, $color in $all-colors {
+  //   &[theme='#{$basic}'] {
+  //     color: $white;
+  //     background: $color;
+  //   }
+  // }
+  // @each $basic, $color in $all-colors {
+  //   &[color='#{$basic}'] {
+  //     color: $color;
+  //     border: $color;
+  //     background: $white;
+  //   }
+  // }
+}

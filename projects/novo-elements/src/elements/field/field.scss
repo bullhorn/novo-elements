@@ -1,0 +1,79 @@
+@import '../../styles/global/variables.scss';
+
+:host {
+  display: grid;
+
+  &.novo-field-appearance-horizontal {
+    grid-template-columns: 150px minmax(min-content, max-content);
+    grid-template-areas:
+      'label input'
+      '. messages';
+  }
+
+  &.novo-field-appearance-vertical {
+    grid-template-columns: minmax(min-content, max-content);
+    grid-template-rows: repeat(3, minmax(min-content, max-content));
+    grid-template-areas:
+      'label'
+      'input'
+      'messages';
+  }
+
+  .novo-field-label {
+    grid-area: label;
+    display: grid;
+  }
+
+  &.novo-focused {
+    .novo-field-input {
+      border-bottom: 1px solid $positive;
+    }
+  }
+
+  &.novo-field-invalid {
+    .novo-field-input {
+      border-bottom: 1px solid $negative;
+    }
+  }
+
+  .novo-field-input {
+    grid-area: input;
+    display: grid;
+    grid-template-columns: minmax(auto, max-content) 1fr minmax(auto, max-content);
+    border-bottom: 1px solid $dark;
+
+    &::ng-deep .novo-input-element {
+      border: none;
+      background-image: none;
+      background-color: transparent;
+      -webkit-box-shadow: none;
+      -moz-box-shadow: none;
+      box-shadow: none;
+      padding: 4px 2px;
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    .novo-field-prefix {
+      display: flex;
+      align-items: flex-end;
+    }
+
+    .novo-field-infix {
+      display: flex;
+      align-items: flex-end;
+    }
+
+    .novo-field-suffix {
+      display: flex;
+      align-items: flex-end;
+    }
+  }
+
+  .novo-field-messages {
+    grid-area: messages;
+    display: grid;
+  }
+}
