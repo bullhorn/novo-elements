@@ -144,8 +144,6 @@ export class NovoAvatarElement implements OnInit {
 
   setPrefixedValue(elm: any, prop: any, value: any): any {
     const prefixes: any = ['-moz-', '-webkit-', '-o-', '-ms-', '-khtml-'];
-    let i: any;
-    let v: any;
 
     // Clear
     elm.style[prop] = '';
@@ -162,8 +160,8 @@ export class NovoAvatarElement implements OnInit {
     }
 
     // Try prefixes
-    for (i = 0; i < prefixes.length; ++i) {
-      v = prefixes[i] + value;
+    for (let i = 0; i < prefixes.length; ++i) {
+      const v = prefixes[i] + value;
       try {
         elm.style[prop] = v;
         if (elm.style[prop] !== starting) {
