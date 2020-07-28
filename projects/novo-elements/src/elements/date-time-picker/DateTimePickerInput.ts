@@ -44,10 +44,10 @@ export class NovoDateTimePickerInputElement implements ControlValueAccessor {
   public timePart: any;
 
   /** View -> model callback called when value changes */
-  _onChange: (value: any) => void = () => { };
+  _onChange: (value: any) => void = () => {};
 
   /** View -> model callback called when autocomplete has been touched */
-  _onTouched = () => { };
+  _onTouched = () => {};
 
   @Input()
   name: string;
@@ -72,7 +72,7 @@ export class NovoDateTimePickerInputElement implements ControlValueAccessor {
   @Output()
   focusEvent: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
 
-  constructor(public element: ElementRef, public labels: NovoLabelService, private _changeDetectorRef: ChangeDetectorRef) { }
+  constructor(public element: ElementRef, public labels: NovoLabelService, private _changeDetectorRef: ChangeDetectorRef) {}
 
   writeValue(value: any): void {
     this.datePart = isDate(value) ? parse(value) : value;

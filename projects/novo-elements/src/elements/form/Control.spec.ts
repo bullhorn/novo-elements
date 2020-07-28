@@ -10,9 +10,7 @@ import { DateFormatService } from '../../services/date-format/DateFormat';
 
 @Component({
   selector: 'novo-auto-size-test-component',
-  template: `
-        <textarea autosize></textarea>
-    `,
+  template: ` <textarea autosize></textarea> `,
   styles: [
     `
       textarea {
@@ -71,14 +69,13 @@ describe('Test Localization', () => {
 
   it('should set decimal separator based on locale correctly', () => {
     const component = new NovoControlElement(mockElement, null, null, null, null, null, 'fr-FR');
+    expect(component.locale).toBe('fr-FR');
     expect(component.decimalSeparator).toBe(',');
   });
 });
 
 @Component({
-  template: `
-    <div></div>
-  `,
+  template: ` <div></div> `,
 })
 class TestComponent {}
 describe('NovoControlElement', () => {
@@ -113,12 +110,14 @@ describe('NovoControlElement', () => {
   it('should return false if the field has a MAX_LENGTH property but is not focused', () => {
     // Arrange
     component.control = {
-       key: 0,
-     };
+      key: 0,
+    };
     component.form = {
-      controls: [{
-        maxLength: 1,
-      }],
+      controls: [
+        {
+          maxLength: 1,
+        },
+      ],
     };
 
     // Act

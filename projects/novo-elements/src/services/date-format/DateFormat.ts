@@ -6,7 +6,7 @@ import { NovoLabelService } from '../../services/novo-label-service';
 
 @Injectable()
 export class DateFormatService {
-  constructor(private labels: NovoLabelService) { }
+  constructor(private labels: NovoLabelService) {}
 
   getTimeMask(militaryTime: boolean): Array<RegExp> {
     let mask: Array<RegExp> = [/\d/, /\d/, /:/, /\d/, /\d/];

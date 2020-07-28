@@ -20,6 +20,8 @@ import { NovoOverlayTemplateComponent } from '../overlay/Overlay';
 import { NovoLabelService } from '../../services/novo-label-service';
 import { Helpers } from '../../utils/Helpers';
 import { DateFormatService } from '../../services/date-format/DateFormat';
+import { format, parse } from 'date-fns';
+import * as IMask from 'imask';
 
 // Value accessor for the component (supports ngModel)
 const DATE_VALUE_ACCESSOR = {
@@ -35,8 +37,10 @@ const DATE_VALUE_ACCESSOR = {
     <input
       type="text"
       [name]="name"
-      [(ngModel)]="formattedValue"
-      [textMask]="maskOptions"
+      [(ngModel)]="value"
+      [imask]="maskOptions"
+      [unmask]="'typed'"
+      (complete)="onComplete($event)"
       [placeholder]="placeholder"
       (focus)="_handleFocus($event)"
       (keydown)="_handleKeydown($event)"
@@ -55,7 +59,6 @@ const DATE_VALUE_ACCESSOR = {
 })
 export class NovoTimePickerInputElement implements OnInit, ControlValueAccessor {
   public value: any;
-  public formattedValue: string = '';
 
   /** View -> model callback called when value changes */
   _onChange: (value: any) => void = () => {};
@@ -90,12 +93,62 @@ export class NovoTimePickerInputElement implements OnInit, ControlValueAccessor 
 
   ngOnInit(): void {
     this.placeholder = this.military ? this.labels.timeFormatPlaceholder24Hour : this.labels.timeFormatPlaceholderAM;
+    let timeFormat = this.military ? 'HH:mm' : 'hh:mm A';
+    let amFormat = this.labels.timeFormatAM.toUpperCase();
+    let pmFormat = this.labels.timeFormatPM.toUpperCase();
     this.maskOptions = {
-      mask: this.military ? [/\d/, /\d/, ':', /\d/, /\d/] : [/\d/, /\d/, ':', /\d/, /\d/, ' ', /[aApP上下]/, /[mM午]/],
-      pipe: this.military ? createAutoCorrectedDatePipe('HH:MM') : createAutoCorrectedDatePipe('mm:MM'),
-      keepCharPositions: false,
-      guide: true,
+      mask: Date,
+      pattern: this.military ? 'HH:mm' : 'hh:mm aa',
+      overwrite: true,
+      autofix: true,
+      lazy: false,
+      min: new Date(1970, 0, 1),
+      max: new Date(2030, 0, 1),
+      prepare: function (str) {
+        return str.toUpperCase();
+      },
+      format: function (date) {
+        return format(date, timeFormat);
+      },
+      parse: (str) => {
+        let time = this.military ? str : this.convertTime12to24(str);
+        return parse(`${format(Date.now(), 'YYYY-MM-DD')}T${time}`);
+      },
+      blocks: {
+        HH: {
+          mask: IMask.MaskedRange,
+          placeholderChar: 'H',
+          maxLength: 2,
+          from: 0,
+          to: 23,
+        },
+        hh: {
+          mask: IMask.MaskedRange,
+          placeholderChar: 'h',
+          maxLength: 2,
+          from: 1,
+          to: 12,
+        },
+        mm: {
+          mask: IMask.MaskedRange,
+          placeholderChar: 'm',
+          maxLength: 2,
+          from: 0,
+          to: 59,
+        },
+        aa: {
+          mask: IMask.MaskedEnum,
+          placeholderChar: 'x',
+          enum: ['AM', 'PM', 'am', 'pm', amFormat, pmFormat],
+        },
+      },
     };
+  }
+
+  onComplete(dt) {
+    if (this.value !== dt) {
+      this.dispatchOnChange(dt);
+    }
   }
 
   /** BEGIN: Convenient Panel Methods. */
@@ -127,14 +180,7 @@ export class NovoTimePickerInputElement implements OnInit, ControlValueAccessor 
 
   _handleInput(event: KeyboardEvent): void {
     if (document.activeElement === event.target) {
-      // this._onChange((event.target as HTMLInputElement).value);
       const text = (event.target as HTMLInputElement).value;
-      if (this.military ? text.replace(/_/g, '').length === 5 : text.replace(/_/g, '').length === 8) {
-        const [dateTimeValue, formatted] = this.dateFormatService.parseString(text, this.military, 'time');
-        this.dispatchOnChange(dateTimeValue);
-      } else {
-        this.dispatchOnChange(null);
-      }
       this.openPanel();
       const num = Number(text.split(':')[0]);
       this.scrollToIndex(num * 4);
@@ -178,9 +224,6 @@ export class NovoTimePickerInputElement implements OnInit, ControlValueAccessor 
       value = new Date(value.setFullYear(this.value.getFullYear(), this.value.getMonth(), this.value.getDate()));
     }
     this.value = value;
-    if (this.value) {
-      this.formattedValue = this.formatDateValue(this.value);
-    }
     this._changeDetectorRef.markForCheck();
   }
 
@@ -199,23 +242,7 @@ export class NovoTimePickerInputElement implements OnInit, ControlValueAccessor 
    * Clear any previous selected option and emit a selection change event for this option
    */
   public clearValue() {
-    this.formattedValue = '';
     this.dispatchOnChange(null);
-  }
-
-  public formatDateValue(value) {
-    if (!value) {
-      return '';
-    }
-    const format = this.labels.formatTimeWithFormat(value, {
-      hour: 'numeric',
-      minute: '2-digit',
-      hour12: !this.military,
-    });
-    if (format.split(':')[0].length === 1) {
-      return `0${format}`;
-    }
-    return format;
   }
 
   public get hasValue() {
@@ -230,5 +257,19 @@ export class NovoTimePickerInputElement implements OnInit, ControlValueAccessor 
     if (item) {
       list.scrollTop = (item as HTMLElement).offsetTop;
     }
+  }
+
+  convertTime12to24(time12h: string) {
+    let pmFormat = this.labels.timeFormatPM.toUpperCase();
+
+    const [time, modifier] = time12h.split(' ');
+    let [hours, minutes] = time.split(':');
+    if (hours === '12') {
+      hours = '00';
+    }
+    if (['PM', pmFormat].includes(modifier)) {
+      hours = `${parseInt(hours, 10) + 12}`.padStart(2, '0');
+    }
+    return `${hours}:${minutes}`;
   }
 }

@@ -60,7 +60,7 @@ novo-list-item {
   .list-item {
     display: flex;
     flex-direction: column;
-    flex: 1 0 0;
+    flex: 1 0 auto;
   }
   item-header {
     display: flex;

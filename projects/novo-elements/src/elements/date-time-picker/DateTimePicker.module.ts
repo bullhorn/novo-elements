@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 // Vendor
 import { TextMaskModule } from 'angular2-text-mask';
+import { IMaskDirectiveModule } from 'angular-imask';
 // APP
 import { NovoOverlayModule } from '../overlay/Overlay.module';
 import { NovoDateTimePickerElement } from './DateTimePicker';
@@ -12,7 +13,7 @@ import { NovoDatePickerModule } from '../date-picker/DatePicker.module';
 import { NovoTimePickerModule } from '../time-picker/TimePicker.module';
 
 @NgModule({
-  imports: [CommonModule, FormsModule, NovoDatePickerModule, NovoTimePickerModule, TextMaskModule, NovoOverlayModule],
+  imports: [CommonModule, FormsModule, NovoDatePickerModule, NovoTimePickerModule, IMaskDirectiveModule, TextMaskModule, NovoOverlayModule],
   declarations: [NovoDateTimePickerElement, NovoDateTimePickerInputElement],
   exports: [NovoDateTimePickerElement, NovoDateTimePickerInputElement],
 })

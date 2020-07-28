@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 // Vendor
 import { TextMaskModule } from 'angular2-text-mask';
+import { IMaskDirectiveModule } from 'angular-imask';
 // APP
 import { NovoButtonModule } from '../button/Button.module';
 import { NovoToastModule } from '../toast/Toast.module';
@@ -30,6 +31,7 @@ import { NovoFormExtrasModule } from '../form/extras/FormExtras.module';
     NovoDatePickerModule,
     NovoFormExtrasModule,
     TextMaskModule,
+    IMaskDirectiveModule,
   ],
   declarations: [NovoTableElement],
   exports: [NovoTableElement],

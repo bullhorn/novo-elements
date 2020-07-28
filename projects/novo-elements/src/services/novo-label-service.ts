@@ -108,7 +108,7 @@ export class NovoLabelService {
     @Optional()
     @Inject(LOCALE_ID)
     public userLocale = 'en-US',
-  ) { }
+  ) {}
 
   maxlengthMetWithField(field: string, maxlength: number): string {
     return `Sorry, you have reached the maximum character count of ${maxlength} for ${field}.`;
@@ -158,9 +158,9 @@ export class NovoLabelService {
     return new Intl.DateTimeFormat(this.userLocale, format).format(date);
   }
 
-  formatToTimeOnly(param) { }
+  formatToTimeOnly(param) {}
 
-  formatToDateOnly(param) { }
+  formatToDateOnly(param) {}
 
   formatTimeWithFormat(value: any, format: Intl.DateTimeFormatOptions): string {
     const date = value instanceof Date ? value : new Date(value);
@@ -173,8 +173,10 @@ export class NovoLabelService {
         obj[part.type] = part.value;
         return obj;
       }, {});
-    const dayperiod = timeParts.dayperiod ? timeParts.dayperiod : '';
-    return `${timeParts.hour}:${timeParts.minute}${dayperiod}`;
+    const dayPeriod = timeParts.dayPeriod ? timeParts.dayPeriod : '';
+    let res = `${timeParts.hour}:${timeParts.minute} ${dayPeriod}`;
+    console.log('formatting', res);
+    return res;
   }
 
   getWeekdays(): string[] {

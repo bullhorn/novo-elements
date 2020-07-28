@@ -126,11 +126,11 @@ function hexToRgb(hex: string): RGB | null {
  */
 function rgbToHsl({ r, g, b }: RGB): HSL {
   (r /= 255), (g /= 255), (b /= 255);
-  let max = Math.max(r, g, b),
-    min = Math.min(r, g, b);
-  let h,
-    s,
-    l = (max + min) / 2;
+  let max = Math.max(r, g, b);
+  let min = Math.min(r, g, b);
+  let h;
+  let s;
+  let l = (max + min) / 2;
 
   if (max === min) {
     h = s = 0; // achromatic
@@ -171,23 +171,23 @@ function hslToRgb({ h, s, l }: HSL): RGB {
   if (s === 0) {
     r = g = b = l; // achromatic
   } else {
-    function hue2rgb(p, q, t) {
-      if (t < 0) {
-        t += 1;
+    function hue2rgb(p1, q1, t1) {
+      if (t1 < 0) {
+        t1 += 1;
       }
-      if (t > 1) {
-        t -= 1;
+      if (t1 > 1) {
+        t1 -= 1;
       }
-      if (t < 1 / 6) {
-        return p + (q - p) * 6 * t;
+      if (t1 < 1 / 6) {
+        return p1 + (q1 - p1) * 6 * t1;
       }
-      if (t < 1 / 2) {
-        return q;
+      if (t1 < 1 / 2) {
+        return q1;
       }
-      if (t < 2 / 3) {
-        return p + (q - p) * (2 / 3 - t) * 6;
+      if (t1 < 2 / 3) {
+        return p1 + (q1 - p1) * (2 / 3 - t1) * 6;
       }
-      return p;
+      return p1;
     }
 
     let q = l < 0.5 ? l * (1 + s) : l + s - l * s;
@@ -217,11 +217,11 @@ function hslToRgb({ h, s, l }: HSL): RGB {
  */
 function rgbToHsv({ r, g, b }: RGB): HSV {
   (r = r / 255), (g = g / 255), (b = b / 255);
-  let max = Math.max(r, g, b),
-    min = Math.min(r, g, b);
-  let h,
-    s,
-    v = max;
+  let max = Math.max(r, g, b);
+  let min = Math.min(r, g, b);
+  let h;
+  let s;
+  let v = max;
 
   let d = max - min;
   s = max === 0 ? 0 : d / max;

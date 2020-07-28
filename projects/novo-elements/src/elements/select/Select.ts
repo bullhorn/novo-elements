@@ -37,7 +37,7 @@ const SELECT_VALUE_ACCESSOR = {
     <div #dropdownElement (click)="togglePanel(); (false)" tabIndex="{{ disabled ? -1 : 0 }}" type="button" [class.empty]="empty">
       {{ selected.label }}<i class="bhi-collapse"></i>
     </div>
-    <novo-overlay-template [parent]="element" position="center" (closing)="dropdown.nativeElement.focus()">
+    <novo-overlay-template [parent]="element" [position]="position" (closing)="dropdown.nativeElement.focus()">
       <ul class="novo-select-list" tabIndex="-1" [class.header]="headerConfig" [class.active]="panelOpen">
         <ng-content></ng-content>
         <li *ngIf="headerConfig" class="select-header" [class.open]="header.open">

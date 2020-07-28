@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 // Vendor
 import { TextMaskModule } from 'angular2-text-mask';
+import { IMaskDirectiveModule } from 'angular-imask';
 // APP
 import { NovoRadioModule } from './../radio/Radio.module';
 import { NovoButtonModule } from './../button/Button.module';
@@ -50,6 +51,7 @@ import { NovoCommonModule } from '../common/common.module';
     NovoHeaderModule,
     NovoTooltipModule,
     NovoDragulaModule,
+    IMaskDirectiveModule,
     TextMaskModule,
     NovoTipWellModule,
     NovoModalModule,
@@ -80,4 +82,4 @@ import { NovoCommonModule } from '../common/common.module';
   ],
   providers: [NovoTemplateService],
 })
-export class NovoFormModule { }
+export class NovoFormModule {}

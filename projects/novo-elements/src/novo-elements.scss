@@ -107,3 +107,12 @@
     }
   }
 }
+
+.aside-overlay-backdrop {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.aside-overlay-panel {
+  position: relative;
+  // z-index: 1001;
+}
