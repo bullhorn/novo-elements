@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.3.9](https://github.com/bullhorn/novo-elements/compare/v4.3.8...v4.3.9) (2020-07-28)
+
+
+### Bug Fixes
+
+* **Clear Button:** Prevent data table clear dropdown from popping up instead of down ([#1128](https://github.com/bullhorn/novo-elements/issues/1128)) ([7803747](https://github.com/bullhorn/novo-elements/commit/7803747106555d70a22effa09b761417d0b44122))
+
 ### [4.3.8](https://github.com/bullhorn/novo-elements/compare/v4.3.6...v4.3.8) (2020-06-29)
 
 
