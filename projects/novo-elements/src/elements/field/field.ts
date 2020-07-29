@@ -13,6 +13,7 @@ import {
   ChangeDetectorRef,
   ViewChild,
   HostBinding,
+  OnDestroy,
 } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { NovoLabelElement } from './label/label';
@@ -58,7 +59,7 @@ export class NovoFieldSuffixDirective {}
     '[class.ng-pending]': '_shouldForward("pending")',
   },
 })
-export class NovoFieldElement implements AfterContentInit {
+export class NovoFieldElement implements AfterContentInit, OnDestroy {
   @ViewChild('connectionContainer') _connectionContainerRef: ElementRef;
   // @ViewChild('inputContainer') _inputContainerRef: ElementRef;
   // @ViewChild('label') private _label: ElementRef<HTMLElement>;
@@ -93,7 +94,8 @@ export class NovoFieldElement implements AfterContentInit {
     }
 
     // Subscribe to changes in the child control state in order to update the form field UI.
-    control.stateChanges.pipe(startWith(null!)).subscribe(() => {
+    // tslint:disable-next-line:deprecation
+    control.stateChanges.pipe(startWith(null)).subscribe(() => {
       this._changeDetectorRef.markForCheck();
     });
 
@@ -111,7 +113,7 @@ export class NovoFieldElement implements AfterContentInit {
   /** Throws an error if the form field's control is missing. */
   protected _validateControlChild() {
     if (!this._control) {
-      throw 'Missing Novo Control';
+      throw new Error('Missing Novo Control');
     }
   }
 

@@ -29,7 +29,9 @@ import { NovoAsideService, NovoAsideRef, FormUtils, TextBoxControl, PickerContro
     <button theme="primary" color="success" icon="check" (click)="close()">Save</button>
   `,
   host: {
+    // tslint:disable-next-line: quotemark
     '[style.display]': "'block'",
+    // tslint:disable-next-line: quotemark
     '[style.width.%]': "'100'",
   },
 })

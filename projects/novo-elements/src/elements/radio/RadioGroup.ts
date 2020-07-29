@@ -96,7 +96,7 @@ export class NovoRadioGroup implements ControlValueAccessor {
   private _updateSelectedRadioFromValue(): void {
     if (this._radios) {
       this._radios.forEach((radio) => {
-        radio.checked = this.value == radio.value;
+        radio.checked = this.value === radio.value;
         if (radio.checked) {
           this._selected = radio;
         }

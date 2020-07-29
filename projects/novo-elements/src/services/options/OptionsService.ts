@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class OptionsService {
-  constructor() { }
+  constructor() {}
 
   getOptionsConfig(http: HttpClient, field: any, config: { token?: string; restUrl?: string; military?: boolean }): any {
     return {
@@ -14,7 +14,19 @@ export class OptionsService {
       options: (query) => {
         return new Promise((resolve, reject) => {
           if (query && query.length) {
-            http.get(`${field.optionsUrl}?filter=${query || ''}`).subscribe(resolve, reject);
+            const exp = new RegExp('^(?:[a-z]+:)?//', 'i');
+            let endpoint;
+            if (exp.test(field.optionsUrl)) {
+              let url = new URL(field.optionsUrl);
+              url.searchParams.set('filter', query || '');
+              endpoint = url.toString();
+            } else {
+              // Construct relative url (host will not be used but is required for construction)
+              let url = new URL(`http://placeholder.com/${field.optionsUrl}`);
+              url.searchParams.set('filter', query || '');
+              endpoint = `${url.pathname}${url.search}`;
+            }
+            http.get(endpoint).subscribe(resolve, reject);
           } else {
             resolve([]);
           }
