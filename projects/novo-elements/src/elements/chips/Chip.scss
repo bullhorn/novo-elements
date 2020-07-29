@@ -1,0 +1,101 @@
+@import '../../styles/global/variables.scss';
+
+:host {
+  display: flex;
+  flex-grow: inherit;
+  align-items: center;
+  justify-content: space-between;
+  background: #eeeeee;
+  border-radius: 4px;
+  padding: 0.3em 0.5em;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  width: auto;
+  max-width: 180px;
+  border: 1px solid transparent;
+  transition: all 200ms ease-in-out;
+  span {
+    vertical-align: middle;
+    display: flex;
+    align-items: center;
+    span {
+      color: $ocean;
+      cursor: pointer;
+      max-width: 115px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      display: block;
+    }
+    i {
+      font-size: 0.8em;
+    }
+  }
+  i.bhi-close {
+    margin-left: 10px;
+    font-size: 1.1em;
+    cursor: pointer;
+    color: darken(#eee, 15%);
+    &:hover {
+      color: darken(#eee, 35%);
+    }
+  }
+  &.selected {
+    border: 1px solid $positive;
+  }
+
+  span {
+    &.contact,
+    &.clientcontact {
+      color: $positive;
+      i {
+        color: $contact;
+      }
+    }
+    &.company,
+    &.clientcorporation {
+      color: $positive;
+      i {
+        color: $company;
+      }
+    }
+    &.candidate {
+      color: $positive;
+      i {
+        color: $candidate;
+      }
+    }
+    &.job,
+    &.joborder {
+      color: $positive;
+      i {
+        color: $job;
+      }
+    }
+    &.placement {
+      color: $positive;
+      i {
+        color: $placement;
+      }
+    }
+    &.opportunity {
+      color: $positive;
+      i {
+        color: $opportunity;
+      }
+    }
+    &.lead {
+      color: $positive;
+      i {
+        color: $lead;
+      }
+    }
+    &.user,
+    &.corporateuser {
+      color: $positive;
+      i {
+        color: $neutral;
+      }
+    }
+  }
+}
