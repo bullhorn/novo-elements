@@ -360,7 +360,7 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit, OnCh
   }
 
   isSelected(range, day) {
-    return this.selection.includes(day);
+    return this.selection && this.selection.includes(day);
   }
 
   isDisabled(day, start, end) {
