@@ -16,6 +16,8 @@ import { LocalStorageService } from './services/storage/storage.service';
 import { Security } from './services/security/Security';
 import { OptionsService } from './services/options/OptionsService';
 import { NovoTemplateService } from './services/template/NovoTemplateService';
+import { MENU_OPTIONS } from './elements/menu/menu.tokens';
+import { IMenuOptions } from './elements/menu/menu.types';
 
 const NOVO_ELEMENTS_PROVIDERS = [
   { provide: NovoDragulaService, useClass: NovoDragulaService },
@@ -39,10 +41,16 @@ const NOVO_ELEMENTS_PROVIDERS = [
   imports: [],
 })
 export class NovoElementProviders {
-  static forRoot(): ModuleWithProviders<NovoElementProviders> {
+  static forRoot(options?: { menu: IMenuOptions }): ModuleWithProviders<NovoElementProviders> {
     return {
       ngModule: NovoElementProviders,
-      providers: [...NOVO_ELEMENTS_PROVIDERS],
+      providers: [
+        ...NOVO_ELEMENTS_PROVIDERS,
+        {
+          provide: MENU_OPTIONS,
+          useValue: options && options.menu,
+        },
+      ],
     };
   }
 

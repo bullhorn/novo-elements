@@ -1,0 +1,8 @@
+<button type="button" theme="secondary" icon="collapse" [menu]="menu" [menuContext]="reference">Actions</button>
+
+<!-- Menu Template -->
+<novo-menu #menu>
+  <ng-template menuItem (execute)="clickMe($event.item)">Preview</ng-template>
+  <ng-template menuItem (execute)="clickMe($event.item)">Edit</ng-template>
+  <ng-template menuItem (execute)="clickMe($event.item)">Delete</ng-template>
+</novo-menu>

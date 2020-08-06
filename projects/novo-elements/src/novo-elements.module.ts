@@ -67,6 +67,7 @@ import { NovoFieldModule } from './elements/field/field.module';
 import { NovoColorPickerModule } from './elements/color-picker/color-picker.module';
 
 import { NovoCommonModule } from './elements/common/common.module';
+import { NovoMenuModule } from './elements/menu/menu.module';
 
 @NgModule({
   imports: [ReactiveFormsModule],
@@ -126,6 +127,7 @@ import { NovoCommonModule } from './elements/common/common.module';
     NovoBreadcrumbModule,
     NovoFieldModule,
     NovoColorPickerModule,
+    NovoMenuModule,
   ],
   providers: [
     { provide: ComponentUtils, useClass: ComponentUtils },

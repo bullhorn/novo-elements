@@ -23,6 +23,7 @@ export * from './header';
 export * from './icon';
 export * from './list';
 export * from './loading';
+export * from './menu';
 export * from './modal';
 export * from './multi-picker';
 export * from './non-ideal-state';

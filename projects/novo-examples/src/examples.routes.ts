@@ -320,6 +320,27 @@ export class IconPage {}
 export class LoadingPage {}
 
 @Component({
+  selector: 'menu-page',
+  template: `<h1>
+      Menu <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/dropdown">(source)</a>
+    </h1>
+    <p>Menu allow users to take an action by selecting from a list of choices revealed upon opening a temporary menu.</p>
+    <h2>Types</h2>
+    <h5>Basic Menu</h5>
+    <p>This is a simple menu.</p>
+    <p><code-example example="basic-menu"></code-example></p>
+    <h5>Nested Menu</h5>
+    <p>This is an example of how you can have sub-menus for each menu item.</p>
+    <p><code-example example="nested-menu"></code-example></p>
+    <h5>Menu Context</h5>
+    <p>
+      TBW of an example when you can define a context to pass to the context menu to control visibility or to use on the callback action.
+    </p>
+    <p><code-example example="menu-context"></code-example></p>`,
+})
+export class MenuPage {}
+
+@Component({
   selector: 'non-ideal-state-page',
   template: `<h1>
       Non Ideal State
@@ -1695,6 +1716,7 @@ const routes: Routes = [
   { path: 'components/field', component: FieldPage, data: { title: 'Field', section: 'components' } },
   { path: 'components/icon', component: IconPage, data: { title: 'Icon', section: 'components' } },
   { path: 'components/loading', component: LoadingPage, data: { title: 'Loading', section: 'components' } },
+  { path: 'components/menu', component: MenuPage, data: { title: 'Menu', section: 'components' } },
   { path: 'components/non-ideal-state', component: NonIdealStatePage, data: { title: 'Non Ideal State', section: 'components' } },
   { path: 'components/progress', component: ProgressPage, data: { title: 'Progress', section: 'components' } },
   { path: 'components/quick-note', component: QuickNotePage, data: { title: 'Quick Note', section: 'components' } },
@@ -1761,6 +1783,7 @@ export const PAGE_LIST = [
   FieldPage,
   IconPage,
   LoadingPage,
+  MenuPage,
   NonIdealStatePage,
   ProgressPage,
   QuickNotePage,
