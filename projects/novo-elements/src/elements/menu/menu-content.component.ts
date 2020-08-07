@@ -14,21 +14,21 @@ const ARROW_LEFT_KEYCODE = 37;
 @Component({
   selector: 'menu-content',
   styleUrls: ['./menu-content.component.scss'],
-  template: `<div class="dropdown open show novo-menu" [ngClass]="menuClass" tabindex="0">
-    <ul #menu class="dropdown-menu show" style="position: static; float: none;" tabindex="0">
+  template: `<div class="menu-container novo-menu" [ngClass]="menuClass" tabindex="0">
+    <ul #menu class="menu" style="position: static; float: none;" tabindex="0">
       <li
         #li
         *ngFor="let menuItem of menuItems; let i = index"
         [class.disabled]="!isMenuItemEnabled(menuItem)"
         [class.divider]="menuItem.divider"
-        [class.dropdown-divider]="menuItem.divider"
+        [class.menu-divider]="menuItem.divider"
         [class.active]="menuItem.isActive && isMenuItemEnabled(menuItem)"
         [attr.role]="menuItem.divider ? 'separator' : undefined"
       >
         <a
           *ngIf="!menuItem.divider && !menuItem.passive"
           href
-          [class.dropdown-item]="true"
+          [class.menu-item]="true"
           [class.active]="menuItem.isActive && isMenuItemEnabled(menuItem)"
           [class.disabled]="!isMenuItemEnabled(menuItem)"
           [class.hasSubMenu]="!!menuItem.subMenu"
@@ -36,12 +36,13 @@ const ARROW_LEFT_KEYCODE = 37;
           (mouseenter)="onOpenSubMenu(menuItem, $event)"
         >
           <ng-template [ngTemplateOutlet]="menuItem.template" [ngTemplateOutletContext]="{ $implicit: item }"></ng-template>
+          <novo-icon *ngIf="!!menuItem.subMenu" size="small" color="ash">expand</novo-icon>
         </a>
         <span
           (click)="stopEvent($event)"
           class="passive"
           *ngIf="!menuItem.divider && menuItem.passive"
-          [class.dropdown-item]="true"
+          [class.menu-item]="true"
           [class.disabled]="!isMenuItemEnabled(menuItem)"
         >
           <ng-template [ngTemplateOutlet]="menuItem.template" [ngTemplateOutletContext]="{ $implicit: item }"></ng-template>

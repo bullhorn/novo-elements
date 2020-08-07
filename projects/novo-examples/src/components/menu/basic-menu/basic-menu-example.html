@@ -7,3 +7,29 @@
   <ng-template menuItem [divider]="true"></ng-template>
   <ng-template menuItem (execute)="clickMe($event)">Delete</ng-template>
 </novo-menu>
+
+<button type="button"
+        theme="secondary"
+        icon="collapse"
+        [menu]="icons">Actions</button>
+
+<!-- Menu Template -->
+<novo-menu #icons>
+    <ng-template menuItem
+                 (execute)="clickMe($event)">
+                 <novo-icon>preview</novo-icon>
+                 <span>Preview</span>
+                </ng-template>
+    <ng-template menuItem
+                 (execute)="clickMe($event)">
+                 <novo-icon>edit</novo-icon>
+                 <span>Edit</span>
+                </ng-template>
+    <ng-template menuItem
+                 [divider]="true"></ng-template>
+    <ng-template menuItem class="red"
+                 (execute)="clickMe($event)">
+                 <novo-icon>delete-o</novo-icon>
+                 <span>Delete</span>
+                </ng-template>
+</novo-menu>

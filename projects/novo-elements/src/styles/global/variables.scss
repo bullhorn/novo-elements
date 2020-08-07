@@ -59,11 +59,13 @@ $background: $off-white;
 $background-dark: #e2e2e2;
 $neutral: #4f5361;
 $empty: #cccdcc;
+$disabled: $stone;
 
 // Color Maps
 // --------------------------------------------------
 // Analytics Color Map
-$analytics-colors: ('aqua': $aqua,
+$analytics-colors: (
+  'aqua': $aqua,
   'ocean': $ocean,
   'mint': $mint,
   'grass': $grass,
@@ -75,7 +77,8 @@ $analytics-colors: ('aqua': $aqua,
   'mountain': $mountain,
 );
 // Entity Color Map
-$entity-colors: ('star': $placement,
+$entity-colors: (
+  'star': $placement,
   'person': $contact,
   'company': $company,
   'candidate': $candidate,
@@ -101,7 +104,8 @@ $entity-colors: ('star': $placement,
   'invoiceStatement': $invoiceStatement,
 );
 // Generic Color Map
-$app-colors: ('positive': $ocean,
+$app-colors: (
+  'positive': $ocean,
   'success': $grass,
   'negative': $grapefruit,
   'warning': $sunflower,
@@ -123,14 +127,16 @@ $app-colors: ('positive': $ocean,
   'charcoal': $charcoal,
 );
 // Loading Dot Color Map
-$dot-colors: ('ocean': $ocean,
+$dot-colors: (
+  'ocean': $ocean,
   'lavender': $lavender,
   'grapefruit': $grapefruit,
   'sunflower': $sunflower,
   'mint': $mint,
 );
 // Dark map
-$dark-colors: ('company': $company,
+$dark-colors: (
+  'company': $company,
   'candidate': $candidate,
   'navigation': $navigation,
   'lead': $lead,
@@ -176,7 +182,8 @@ $dark-colors: ('company': $company,
   'charcoal': $charcoal,
 );
 // Light map
-$light-colors: ('background': $off-white,
+$light-colors: (
+  'background': $off-white,
   'background-dark': $background-dark,
   'white': $white,
   'grey': $grey,
@@ -192,14 +199,10 @@ $all-colors: map-merge($dark-colors, $light-colors);
 // Typography
 // --------------------------------------------------
 $base-font-size: 13px;
-$base-font-family: 'Roboto',
-sans-serif;
+$base-font-family: 'Roboto', sans-serif;
 $base-font-color: $dark;
 $base-line-height: 1rem;
-$alt-font-family: Georgia,
-'Times New Roman',
-Times,
-serif;
+$alt-font-family: Georgia, 'Times New Roman', Times, serif;
 // Whiteframes
 // -------------------------
 $whiteframe-shadow-z1: 0px 2px 5px 0 rgba(0, 0, 0, 0.26) !default;
@@ -218,19 +221,20 @@ $whiteframe-zindex-z5: 5 !default;
 // Function to call z-indexes.
 // Usage: z-index: z('modal');
 @function z($layer) {
-  $z-layers: ('goku': 9001,
-      'modal': 500,
-      'tooltip': 100,
-      'toast': 90,
-      'dialogue': 80,
-      'bottom-sheet': 70,
-      'sidenav': 60,
-      'backdrop': 50,
-      'fab': 20,
-      'default': 1,
-      'below': -1,
-      'bottomless-pit': -9000,
-    );
+  $z-layers: (
+    'goku': 9001,
+    'modal': 500,
+    'tooltip': 100,
+    'toast': 90,
+    'dialogue': 80,
+    'bottom-sheet': 70,
+    'sidenav': 60,
+    'backdrop': 50,
+    'fab': 20,
+    'default': 1,
+    'below': -1,
+    'bottomless-pit': -9000,
+  );
 
   @if not map-has-key($z-layers, $layer) {
     @warn 'No layer found for `#{$layer}` in $z-layers map. Property omitted.';
@@ -242,13 +246,17 @@ $whiteframe-zindex-z5: 5 !default;
 // Easing Curves
 // -------------------------
 // Usage: html-tag { @include ease('all', 'swift-ease-in-out'); }
-$easing-curves: ('swift-ease-out': ('duration': 400ms,
+$easing-curves: (
+  'swift-ease-out': (
+    'duration': 400ms,
     'curve': 'cubic-bezier(0.25, 0.8, 0.25, 1)',
   ),
-  'swift-ease-in': ('duration': 300ms,
+  'swift-ease-in': (
+    'duration': 300ms,
     'curve': 'cubic-bezier(0.55, 0, 0.55, 0.2)',
   ),
-  'swift-ease-in-out': ('duration': 500ms,
+  'swift-ease-in-out': (
+    'duration': 500ms,
     'curve': 'cubic-bezier(0.35, 0, 0.25, 1)',
   ),
 );

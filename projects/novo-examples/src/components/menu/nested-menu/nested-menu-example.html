@@ -7,6 +7,6 @@
   <ng-template menuItem [subMenu]="subMenu">Choose...</ng-template>
   <novo-menu #subMenu>
     <ng-template menuItem (execute)="clickMe($event)">Available</ng-template>
-    <ng-template menuItem (execute)="clickMe($event)">Not Available</ng-template>
+    <ng-template menuItem [enabled]="false" (execute)="clickMe($event)">Not Available</ng-template>
   </novo-menu>
 </novo-menu>

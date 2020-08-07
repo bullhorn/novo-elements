@@ -24,21 +24,18 @@ novo-icon {
       }
       &[size='small'] {
         i {
-          font-size: 1em;
           width: $small-themed-icon-size;
           height: $small-themed-icon-size;
         }
       }
       &[size='medium'] {
         i {
-          font-size: 1.2em;
           width: $medium-themed-icon-size;
           height: $medium-themed-icon-size;
         }
       }
       &[size='large'] {
         i {
-          font-size: 1.4em;
           width: $large-themed-icon-size;
           height: $large-themed-icon-size;
         }
@@ -59,18 +56,21 @@ novo-icon {
     i {
       width: $small-icon-size;
       height: $small-icon-size;
+      font-size: 1rem;
     }
   }
   &[size='medium'] {
     i {
       width: $medium-icon-size;
       height: $medium-icon-size;
+      font-size: 1.2rem;
     }
   }
   &[size='large'] {
     i {
       width: $large-icon-size;
       height: $large-icon-size;
+      font-size: 1.4rem;
     }
   }
   &[raised='true'] {
