@@ -80,7 +80,6 @@ novo-notification {
   }
 
   & > header {
-    padding: 1em;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -129,18 +128,17 @@ novo-notification {
     flex-flow: row nowrap;
 
     button {
-      height: 45px;
       flex: 1;
 
-      .flex-wrapper {
-        justify-content: center !important;
-      }
+      //   .flex-wrapper {
+      //     justify-content: center !important;
+      //   }
 
-      &[theme='primary'] {
-        .flex-wrapper {
-          justify-content: center !important;
-        }
-      }
+      //   &[theme='primary'] {
+      //     .flex-wrapper {
+      //       justify-content: center !important;
+      //     }
+      //   }
     }
   }
 
@@ -171,7 +169,6 @@ novo-notification {
     }
 
     button {
-      width: 50%;
       justify-content: center;
 
       &:first-of-type {

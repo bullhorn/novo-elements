@@ -9,12 +9,13 @@ import { NovoMenuService } from './menu.service';
 import { MenuContentComponent } from './menu-content.component';
 import { MENU_OPTIONS } from './menu.tokens';
 import { NovoIconModule } from '../icon/Icon.module';
+import { NovoCommonModule } from '../common/common.module';
 
 @NgModule({
   declarations: [MenuDirective, MenuComponent, MenuContentComponent, MenuItemDirective],
   entryComponents: [MenuContentComponent],
   exports: [MenuDirective, MenuComponent, MenuItemDirective],
-  imports: [CommonModule, OverlayModule, NovoIconModule],
+  imports: [CommonModule, OverlayModule, NovoCommonModule, NovoIconModule],
 })
 export class NovoMenuModule {
   public static forRoot(options?: IMenuOptions): ModuleWithProviders<NovoMenuModule> {

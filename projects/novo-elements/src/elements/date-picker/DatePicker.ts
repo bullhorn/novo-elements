@@ -336,7 +336,7 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit, OnCh
   }
 
   isEndFill(range, day) {
-    const [start, end] = this.selection;
+    const [start, end] = this.selection ?? [];
     if (range && start && end) {
       return !isSameDay(start, end) && isSameDay(day, end) && isAfter(day, start);
     }
@@ -344,7 +344,7 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit, OnCh
   }
 
   isStartFill(range, day) {
-    const [start, end] = this.selection;
+    const [start, end] = this.selection ?? [];
     if (range && end && start) {
       return !isSameDay(start, end) && isSameDay(day, start) && isBefore(day, end);
     }
@@ -352,7 +352,7 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit, OnCh
   }
 
   isFiller(range, day) {
-    const [start, end] = this.selection;
+    const [start, end] = this.selection ?? [];
     if (range && end && start) {
       return (isAfter(day, start) && isBefore(day, end)) || isSameDay(day, start) || isSameDay(day, end);
     }

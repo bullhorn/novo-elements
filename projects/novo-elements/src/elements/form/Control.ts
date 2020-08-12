@@ -612,6 +612,8 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
         'radio',
         'text-area',
         'quick-note',
+        'date',
+        'custom',
       ].indexOf(this.form.controls[this.control.key].controlType) !== -1
     );
   }

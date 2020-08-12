@@ -8,14 +8,18 @@ novo-radio-group {
       &.unchecked {
         opacity: 0.5;
       }
-      &[theme='icon'] i {
+      &[theme='icon'] {
         margin-right: 0;
+        border: 1px solid $positive;
       }
     }
     &:first-child {
       button {
         border-top-left-radius: 3px !important;
         border-bottom-left-radius: 3px !important;
+        &[theme='icon'] {
+          border-right-width: 0px !important;
+        }
       }
     }
     &:last-child {
@@ -25,7 +29,7 @@ novo-radio-group {
         border-right-width: 1px !important;
         border-right-style: solid !important;
         &[theme='icon'] {
-          border-right-width: 0px !important;
+          border-left-width: 0px !important;
         }
       }
     }

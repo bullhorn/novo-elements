@@ -1,5 +1,16 @@
 import { OverlayRef } from '@angular/cdk/overlay';
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, Inject, Input, Optional, ViewChild, ViewChildren } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  Inject,
+  Input,
+  Optional,
+  ViewChild,
+  ViewChildren,
+  Directive,
+} from '@angular/core';
 import { EventEmitter, OnDestroy, OnInit, Output, QueryList, HostListener } from '@angular/core';
 import { Subscription } from 'rxjs';
 
@@ -36,7 +47,7 @@ const ARROW_LEFT_KEYCODE = 37;
           (mouseenter)="onOpenSubMenu(menuItem, $event)"
         >
           <ng-template [ngTemplateOutlet]="menuItem.template" [ngTemplateOutletContext]="{ $implicit: item }"></ng-template>
-          <novo-icon *ngIf="!!menuItem.subMenu" size="small" color="ash">expand</novo-icon>
+          <novo-icon suffix *ngIf="!!menuItem.subMenu" size="small" color="ash">expand</novo-icon>
         </a>
         <span
           (click)="stopEvent($event)"

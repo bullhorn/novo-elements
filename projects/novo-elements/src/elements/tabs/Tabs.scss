@@ -9,21 +9,20 @@ novo-nav {
   &.condensed {
     novo-tab,
     novo-tab-link {
-      font-size: 12px;
+      font-size: 1rem;
       .novo-tab-link {
-        padding: 8px 12px;
+        padding: 0.8rem 1.2rem;
       }
     }
   }
   novo-tab,
   novo-tab-link {
-    font-size: 14px;
+    font-size: 1.2rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100%;
-    min-height: 45px;
     position: relative;
     &.disabled {
       .novo-tab-link {
@@ -37,7 +36,7 @@ novo-nav {
       }
     }
     .novo-tab-link {
-      padding: 10px 20px;
+      padding: 1rem 2rem;
       color: #fff;
       opacity: 0.7;
       font-weight: 400;
@@ -81,7 +80,7 @@ novo-nav {
     border-radius: 3px;
     border: 2px solid #fff;
     novo-tab-button {
-      padding: 15px 20px;
+      padding: 1rem 2rem;
       cursor: pointer;
       transition: all 120ms ease-in-out;
       &.disabled {
@@ -146,6 +145,8 @@ novo-nav {
     }
     novo-tab,
     novo-tab-link {
+      height: auto;
+
       &.disabled {
         .novo-tab-link {
           opacity: 0.5;
@@ -211,8 +212,7 @@ novo-nav {
       width: 100%;
       flex-direction: row;
       align-items: center;
-      height: 50px;
-      min-width: 150px;
+      min-width: 12rem;
       justify-content: space-between;
       transition: all 120ms ease-in-out;
       &:first-of-type {
@@ -232,7 +232,6 @@ novo-nav {
       }
       .indicator {
         order: 1;
-        position: relative;
         width: 4px;
         height: 0;
         display: block;
@@ -247,6 +246,8 @@ novo-nav {
         }
         .indicator {
           height: 100%;
+          top: 0;
+          bottom: 0;
         }
       }
       &:hover {
@@ -274,9 +275,9 @@ novo-nav-outlet {
   display: block;
   novo-nav-header {
     display: block;
-    padding: 8px;
+    padding: 0.8rem;
+    margin: 0.8rem;
     border: 1px solid #333;
-    margin: 8px;
   }
   novo-nav-content {
     display: none;

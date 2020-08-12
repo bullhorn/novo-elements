@@ -9,63 +9,63 @@ html {
 // Headers
 // --------------------------------------------------
 h1 {
-  font-size: 2.5em;
+  font-size: 2.5rem;
   font-weight: 400;
   margin: 0;
-  padding: 0.45em 0 0.35em;
+  padding: 0.45rem 0 0.35rem;
 }
 
 h2 {
-  font-size: 2em;
+  font-size: 2rem;
   font-weight: 500;
   margin: 0;
-  padding: 0.75em 0 0.3em;
+  padding: 0.75rem 0 0.3rem;
 }
 
 h3 {
-  font-size: 1.75em;
+  font-size: 1.75rem;
   font-weight: 300;
   margin: 0;
-  padding: 0.6em 0 0.4em;
+  padding: 0.6rem 0 0.4rem;
 }
 
 h4 {
-  font-size: 1.375em;
+  font-size: 1.375rem;
   font-weight: 400;
   margin: 0;
-  padding: 0.75em 0 0.5em;
+  padding: 0.75rem 0 0.5rem;
 }
 
 h5 {
-  font-size: 1.125em;
+  font-size: 1.125rem;
   font-weight: 700;
   margin: 0;
-  padding: 0.75em 0 0.25em;
+  padding: 0.75rem 0 0.25rem;
   text-transform: uppercase;
   color: rgba(0, 0, 0, 0.45);
 }
 
 h6 {
-  font-size: 1.125em;
+  font-size: 1.125rem;
   font-weight: 500;
   margin: 0;
-  padding: 0.75em 0 0.25em;
+  padding: 0.75rem 0 0.25rem;
 }
 
 // Body And Paragraph
 // --------------------------------------------------
 p {
-  font-size: 1em;
-  line-height: 1.7em;
+  font-size: 1rem;
+  line-height: 1.5;
   margin: 0;
-  padding: 0.25em 0 0.55em;
-  // max-width: 33em;  // @bkimball removed this on 9/7/2018
+  padding: 0.25rem 0 0.55rem;
+  // max-width: 33rem;  // @bkimball removed this on 9/7/2018
 }
 
 // Special Classes
 // --------------------------------------------------
 .caption {
-  font-size: 1.125em;
+  font-size: 1.125rem;
   font-weight: 700;
   text-transform: uppercase;
   opacity: 0.55;
@@ -83,31 +83,31 @@ h6.novo-section-header {
   font-weight: 400;
   display: flex;
   width: 100%;
-  padding: 1em 0.5em 1em 1.5em;
-  margin-left: -1.5em;
-  margin-right: -1.5em;
+  padding: 1rem 0.5rem 1rem 1.5rem;
+  margin-left: -1.5rem;
+  margin-right: -1.5rem;
   > i {
     display: flex;
     margin-right: 10px;
     &.bhi-section {
       // Special case for icons that are not vertically centered
-      margin-top: -0.2em;
+      margin-top: -0.2rem;
     }
   }
 }
 
 // Iconography
 // --------------------------------------------------
-$icon-height: 1.7em; // 24px Base background size
-$icon-width: 1.7em; // 24px Base background size
-$base-icon-size: 1.4em; //18px Base font-size
+$icon-height: 1.7rem; // 24px Base background size
+$icon-width: 1.7rem; // 24px Base background size
+$base-icon-size: 1.4rem; //18px Base font-size
 i {
   font-size: $base-icon-size;
   display: inline-block;
   &[theme] {
     &[theme='contained'] {
-      font-size: 0.8em;
-      border-radius: 0.55em;
+      font-size: 0.8rem;
+      border-radius: 0.55rem;
       height: $icon-height;
       width: $icon-width;
       text-align: center;
@@ -128,7 +128,7 @@ i {
         }
       }
       &.large {
-        font-size: 1.2em;
+        font-size: 1.2rem;
       }
     }
     &[theme='entity'] {
@@ -152,16 +152,16 @@ h5,
 h6,
 p,
 span {
-  i {
-    margin: 0 0.45em 0 0;
+  > i {
+    margin: 0 0.4rem 0 0;
     padding: 0;
     &:before {
       vertical-align: middle !important;
     }
     &[theme] {
       &[theme='contained'] {
-        font-size: 0.8em;
-        vertical-align: 0.1em;
+        font-size: 0.8rem;
+        vertical-align: 0.1rem;
         &:before {
           vertical-align: baseline;
           line-height: $icon-width;
@@ -192,7 +192,7 @@ a {
 // Code
 // --------------------------------------------------
 code {
-  font-size: 0.8em;
+  font-size: 0.8rem;
   background: #f8f8f8;
   border: 1px solid #e9eaea;
   color: #4c545a;

@@ -11,13 +11,12 @@
   }
 
   .menu-container {
-    width: 220px;
+    width: 180px;
     .menu {
       list-style: none;
       background-color: $white;
       cursor: default;
       list-style: none;
-      line-height: 26px;
       padding-inline-start: 0px !important;
       box-shadow: 0 -1px 3px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
       font-size: 1rem;
@@ -28,21 +27,14 @@
       .menu-item {
         font-weight: normal;
         cursor: pointer;
-        height: 30px;
         margin: 0;
-        padding: 4px 8px 4px 16px;
+        padding: 1rem 1rem 1rem 1.6rem;
         box-sizing: border-box;
         display: flex;
         align-items: center;
         justify-content: space-between;
         color: $dark;
         font-size: 1rem;
-        // &.hasSubMenu {
-        //     novo-icon {
-        //       font-size: .7em;
-        //       line-height: 1.4em;
-        //     }
-        // }
       }
       .divider {
         order: none;

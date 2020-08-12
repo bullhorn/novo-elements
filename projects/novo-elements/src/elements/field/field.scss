@@ -22,6 +22,7 @@
   .novo-field-label {
     grid-area: label;
     display: grid;
+    align-items: flex-end;
   }
 
   &.novo-focused {
@@ -41,6 +42,7 @@
     display: grid;
     grid-template-columns: minmax(auto, max-content) 1fr minmax(auto, max-content);
     border-bottom: 1px solid $dark;
+    font-size: 1.2rem;
 
     &::ng-deep .novo-input-element {
       border: none;
@@ -49,7 +51,7 @@
       -webkit-box-shadow: none;
       -moz-box-shadow: none;
       box-shadow: none;
-      padding: 4px 2px;
+      padding: 0.4rem 0.2rem;
 
       &:focus {
         outline: none;

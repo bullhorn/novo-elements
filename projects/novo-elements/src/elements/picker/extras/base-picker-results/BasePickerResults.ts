@@ -240,9 +240,7 @@ export class BasePickerResults {
   filterData(matches): Array<any> {
     if (this.term && matches) {
       return matches.filter((match) => {
-        return ~String(match.label)
-          .toLowerCase()
-          .indexOf(this.term.toLowerCase());
+        return ~String(match.label).toLowerCase().indexOf(this.term.toLowerCase());
       });
     }
     // Show no recent results template
@@ -352,7 +350,7 @@ export class BasePickerResults {
   }
 
   preselected(match) {
-    if (this.config.preselected) {
+    if (this.config && this.config.preselected) {
       const preselectedFunc: Function = this.config.preselected;
       return (
         this.selected.findIndex((item) => {

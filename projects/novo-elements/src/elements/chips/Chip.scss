@@ -29,11 +29,12 @@
     }
     i {
       font-size: 0.8em;
+      margin-right: 0.4rem;
     }
   }
   i.bhi-close {
-    margin-left: 10px;
-    font-size: 1.1em;
+    margin-left: 1rem;
+    font-size: 1.1rem;
     cursor: pointer;
     color: darken(#eee, 15%);
     &:hover {

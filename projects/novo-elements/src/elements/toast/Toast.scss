@@ -4,7 +4,7 @@ novo-toast {
   position: relative;
   background: $navy;
   color: $white;
-  padding: 15px 15px 15px 25px;
+  padding: 1rem 1rem 1rem 2rem;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
   &.show {
     display: block;
@@ -42,8 +42,8 @@ novo-toast.toast-container > .toast-icon {
     display: flex;
     position: relative;
     top: 0;
-    font-size: 16px;
-    line-height: 16px;
+    font-size: 1.2rem;
+    line-height: 1.2;
   }
 }
 
@@ -58,8 +58,8 @@ novo-toast.toast-container > .close-icon {
     display: flex;
     position: relative;
     top: 0;
-    font-size: 16px;
-    line-height: 16px;
+    font-size: 1.2rem;
+    line-height: 1.2;
   }
 }
 
@@ -79,7 +79,6 @@ novo-toast.toast-container .toast-content {
     width: 100%;
     position: relative;
     input {
-      font-size: 1em;
       background: transparent !important;
       border: none;
       border-bottom: 1px solid lighten($dark, 45%);
@@ -107,8 +106,7 @@ novo-toast.toast-container .toast-content {
 novo-toast .toast-content > h5 {
   display: block;
   color: $white;
-  margin: 0 0 5px;
-  font-size: 14px;
+  font-size: 1.4rem;
 }
 
 novo-toast:not(.default) .toast-content > h5 {
@@ -116,14 +114,11 @@ novo-toast:not(.default) .toast-content > h5 {
 }
 
 novo-toast .toast-content > p {
-  font-size: 14px;
-  line-height: 20px;
   margin: 0;
   max-width: inherit;
   &.message-only {
     top: 0;
-    font-size: 16px;
-    line-height: 22px;
+    font-size: 1.2rem;
     padding: 0;
   }
 }
@@ -253,11 +248,10 @@ novo-toast[class*='growl'] {
   .toast-content h5 {
     display: block;
     color: #fff;
-    margin: 0 0 5px;
-    font-size: 14px;
+    font-size: 1.4rem;
   }
   .toast-content p {
-    font-size: 14px;
+    font-size: 1rem;
     width: 100%;
   }
 }
@@ -275,12 +269,12 @@ novo-toast.growlTopLeft {
 
 novo-toast.growlTopLeft,
 novo-toast.growlTopRight {
-  top: 15px;
+  top: 1rem;
 }
 
 novo-toast.growlBottomLeft,
 novo-toast.growlBottomRight {
-  bottom: 15px;
+  bottom: 1rem;
 }
 
 novo-toast.growlBottomRight,
@@ -290,7 +284,7 @@ novo-toast.growlTopRight {
   width: calc(100% - 30px);
   @include ease('all', 'swift-ease-in-out');
   &.animate {
-    right: 15px;
+    right: 1rem;
   }
 }
 
@@ -353,7 +347,7 @@ novo-toast.embedded.fixedTop {
   left: auto;
   right: auto;
   width: inherit;
-  margin: -1em -3em;
+  margin: -1rem -3rem;
   &.animate {
     top: auto;
   }
@@ -398,7 +392,7 @@ novo-toast.dialogue {
     right: auto;
     @include ease('all', 'swift-ease-in-out');
     &.animate {
-      left: 15px;
+      left: 1rem;
     }
   }
   novo-toast.growlBottomRight,
@@ -407,7 +401,7 @@ novo-toast.dialogue {
     left: auto;
     @include ease('all', 'swift-ease-in-out');
     &.animate {
-      right: 15px;
+      right: 1rem;
     }
   }
 }

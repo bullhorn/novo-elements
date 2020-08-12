@@ -8,7 +8,7 @@ import { NovoLabelService } from '../../../../services/novo-label-service';
 @Component({
   selector: 'entity-picker-result',
   template: `
-    <novo-list-item *ngIf="match.data">
+    <novo-list-item *ngIf="match.data" (click)="select.next(match.data)">
       <item-header>
         <item-avatar [icon]="getIconForResult(match.data)"></item-avatar>
         <item-title> <span [innerHtml]="highlight(getNameForResult(match.data), term)"></span> </item-title>
@@ -72,10 +72,9 @@ import { NovoLabelService } from '../../../../services/novo-label-service';
   `,
 })
 export class EntityPickerResult {
-  @Input()
-  match: any;
-  @Input()
-  term: any;
+  @Input() match: any;
+  @Input() term: any;
+  @Output() select: EventEmitter<any> = new EventEmitter();
 
   constructor(public labels: NovoLabelService) {}
 
@@ -177,8 +176,8 @@ export class EntityPickerResult {
         *ngFor="let match of matches"
         [match]="match"
         [term]="term"
-        (click)="selectMatch($event, match)"
         [ngClass]="{ active: isActive(match) }"
+        (mousedown)="selectMatch($event, match)"
         (mouseenter)="selectActive(match)"
         [class.disabled]="preselected(match)"
       >
@@ -191,8 +190,8 @@ export class EntityPickerResult {
   `,
 })
 export class EntityPickerResults extends BasePickerResults {
-  @Output()
-  select: EventEmitter<any> = new EventEmitter();
+  @Output() select: EventEmitter<any> = new EventEmitter();
+
   constructor(element: ElementRef, public labels: NovoLabelService, ref: ChangeDetectorRef) {
     super(element, ref);
   }

@@ -4,8 +4,10 @@ import { Component, ElementRef, Input, HostBinding, AfterViewInit, ChangeDetecti
   selector: 'novo-icon',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-        <i [class]="iconName"><span><ng-content></ng-content></span></i>
-    `,
+    <i [class]="iconName"
+      ><span (cdkObserveContent)="projectContentChanged($event)"><ng-content></ng-content></span
+    ></i>
+  `,
 })
 export class NovoIconComponent implements AfterViewInit {
   @HostBinding('attr.raised')
@@ -54,5 +56,10 @@ export class NovoIconComponent implements AfterViewInit {
         this.cdr.markForCheck();
       });
     }
+  }
+
+  public projectContentChanged(record: MutationRecord) {
+    this.name = this.element.nativeElement.textContent.trim();
+    this.cdr.detectChanges();
   }
 }

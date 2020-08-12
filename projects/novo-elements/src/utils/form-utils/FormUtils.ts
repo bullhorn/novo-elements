@@ -212,7 +212,7 @@ export class FormUtils {
   getControlForField(
     field: any,
     http,
-    config: { token?: string; restUrl?: string; military?: boolean, weekStart?: number },
+    config: { token?: string; restUrl?: string; military?: boolean; weekStart?: number },
     overrides?: any,
     forTable: boolean = false,
     fieldData?: any,
@@ -463,7 +463,7 @@ export class FormUtils {
     meta,
     currencyFormat,
     http,
-    config: { token?: string; restUrl?: string; military?: boolean, weekStart?: number },
+    config: { token?: string; restUrl?: string; military?: boolean; weekStart?: number },
     overrides?: any,
     forTable: boolean = false,
   ) {
@@ -501,7 +501,7 @@ export class FormUtils {
     meta,
     currencyFormat,
     http,
-    config: { token?: string; restUrl?: string; military?: boolean, weekStart?: number },
+    config: { token?: string; restUrl?: string; military?: boolean; weekStart?: number },
     overrides?,
     data?: { [key: string]: any },
   ) {
@@ -684,7 +684,10 @@ export class FormUtils {
     if (field.dataType === 'Boolean' && !field.options) {
       // TODO: dataType should only be determined by `determineInputType` which doesn't ever return 'Boolean' it
       // TODO: (cont.) returns `tiles`
-      return [{ value: false, label: this.labels.no }, { value: true, label: this.labels.yes }];
+      return [
+        { value: false, label: this.labels.no },
+        { value: true, label: this.labels.yes },
+      ];
     } else if (field.workflowOptions && fieldData) {
       return this.getWorkflowOptions(field.workflowOptions, fieldData);
     } else if (
