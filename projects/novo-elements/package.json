@@ -1,6 +1,7 @@
 {
   "name": "novo-elements",
   "version": "4.3.8",
+  "sideEffects": true,
   "peerDependencies": {
     "@angular/animations": ">=10",
     "@angular/cdk": ">=10",
