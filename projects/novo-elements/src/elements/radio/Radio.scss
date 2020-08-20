@@ -85,15 +85,13 @@ novo-radio {
     }
   }
   button[theme].has-icon {
-    opacity: 0.7;
     transition: all 100ms ease-in-out;
-    &:hover {
-      opacity: 1;
-    }
+    color: $positive;
+    background: $white;
+    opacity: 1;
     &.checked {
       color: $white;
       background: $positive;
-      opacity: 1;
     }
   }
 }

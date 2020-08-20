@@ -32,3 +32,13 @@ Form fields consists of the following parts:
 See how they are used below...
 
 <code-example example="field-anatomy"></code-example>
+
+##### Native Controls
+
+The following input types can be used with novoInput:
+
+- Text: text, password, email, search, tel, url, number
+- Date: date, datetime-local, month, week, time
+- Other: color, range
+
+<code-example example="field-native"></code-example>

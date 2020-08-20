@@ -4,7 +4,7 @@ import { of } from 'rxjs';
 
 import { FieldInteractionApi } from './FieldInteractionApi';
 import { NovoToastService } from '../toast/ToastService';
-import { NovoModalService } from '../modal/ModalService';
+import { NovoModalService } from '../modal/modal.service';
 import { FormUtils } from '../../utils/form-utils/FormUtils';
 import { NovoLabelService } from '../../services/novo-label-service';
 import { ComponentUtils } from '../../utils/component-utils/ComponentUtils';
@@ -205,7 +205,7 @@ describe('FieldInteractionApi', () => {
     it('should return fieldset object when key exists', () => {
       const returnValue = service.getFieldSet('test');
       expect(returnValue).not.toBeNull();
-      expect(returnValue).toStrictEqual({ key: 'test'});
+      expect(returnValue).toStrictEqual({ key: 'test' });
     });
   });
 });

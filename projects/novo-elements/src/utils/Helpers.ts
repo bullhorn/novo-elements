@@ -16,10 +16,23 @@ export class Helpers {
     }
   }
 
-  static interpolate(str: string, props: any): string {
+  static interpolate(str: string | Function, props: any): string {
+    if (typeof str === 'function') {
+      return str(props);
+    }
     if (this.isDate(props)) {
       props = this.dateToObject(props);
     }
+    // else {
+    //   props = Object.entries(props).reduce((obj, [key, value]) => {
+    //     const res = { ...obj, [key]: value };
+    //     if (this.isIsoDate(value as string)) {
+    //       res[`${key}Parts`] = this.dateToObject(new Date(value as string));
+    //     }
+    //     return res;
+    //   }, {});
+    // }
+
     return str.replace(/\$([\w\.]+)/g, (original: string, key: string) => {
       const keys: string[] = key.split('.');
       let value = props[keys.shift()];
@@ -73,7 +86,10 @@ export class Helpers {
    * @param str   The string to interpolate
    * @param props The params to replace in string.
    */
-  static validateInterpolationProps(str: string, props: any): boolean {
+  static validateInterpolationProps(str: string | Function, props: any): boolean {
+    if (typeof str === 'function') {
+      return true;
+    }
     const keys = str.match(/\$([\w\.]+)/g);
     return keys.every((key) => {
       return props.hasOwnProperty(key.substr(1));
@@ -133,6 +149,14 @@ export class Helpers {
    */
   static isDate(obj: any) {
     return obj instanceof Date;
+  }
+
+  static isIsoDate(str: string) {
+    if (!/\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z/.test(str)) {
+      return false;
+    }
+    const d = new Date(str);
+    return d.toISOString() === str;
   }
 
   static convertToArray(obj: unknown) {

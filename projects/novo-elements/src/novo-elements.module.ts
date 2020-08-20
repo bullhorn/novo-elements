@@ -18,7 +18,7 @@ import { NovoTooltipModule } from './elements/tooltip/Tooltip.module';
 import { NovoHeaderModule } from './elements/header/Header.module';
 import { NovoTabModule } from './elements/tabs/Tabs.module';
 import { NovoTilesModule } from './elements/tiles/Tiles.module';
-import { NovoModalModule } from './elements/modal/Modal.module';
+import { NovoModalModule } from './elements/modal/modal.module';
 import { NovoQuickNoteModule } from './elements/quick-note/QuickNote.module';
 import { NovoRadioModule } from './elements/radio/Radio.module';
 import { NovoDropdownModule } from './elements/dropdown/Dropdown.module';

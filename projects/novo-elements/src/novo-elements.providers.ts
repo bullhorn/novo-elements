@@ -5,8 +5,7 @@ import { GooglePlacesService } from './elements/places/places.service';
 import { NovoDragulaService } from './elements/dragula/DragulaService';
 import { NovoAsideService } from './elements/aside/aside.service';
 // import { NovoAsideRef } from './elements/aside/aside-ref';
-import { NovoModalService } from './elements/modal/ModalService';
-import { NovoModalRef } from './elements/modal/Modal';
+import { NovoModalService } from './elements/modal/modal.service';
 import { NovoToastService } from './elements/toast/ToastService';
 import { ComponentUtils } from './utils/component-utils/ComponentUtils';
 import { FieldInteractionApi } from './elements/form/FieldInteractionApi';
@@ -23,7 +22,7 @@ const NOVO_ELEMENTS_PROVIDERS = [
   { provide: NovoDragulaService, useClass: NovoDragulaService },
   // { provide: NovoAsideRef, useClass: NovoAsideRef },
   { provide: NovoAsideService, useClass: NovoAsideService },
-  { provide: NovoModalRef, useClass: NovoModalRef },
+  // { provide: NovoModalRef, useClass: NovoModalRef },
   { provide: NovoModalService, useClass: NovoModalService },
   { provide: GooglePlacesService, useClass: GooglePlacesService },
   { provide: NovoToastService, useClass: NovoToastService },

@@ -4,7 +4,7 @@
 @import './ControlGroup';
 .novo-form-control-label {
   color: $dark;
-  font-size: 0.9em;
+  font-size: 1.1rem;
   flex: 1;
   max-width: 130px;
   min-width: 130px;
@@ -369,7 +369,7 @@ novo-form {
                       }
                     }
                     input {
-                      font-size: 1em;
+                      font-size: 1.1rem;
                       background: transparent !important;
                       border: none;
                       border-bottom: 1px solid lighten($dark, 45%);
@@ -397,7 +397,7 @@ novo-form {
                       }
                     }
                     textarea {
-                      font-size: 1em;
+                      font-size: 1.1rem;
                       height: 2rem;
                       background: transparent !important;
                       border: none;
@@ -441,12 +441,12 @@ novo-form {
                     > div.novo-control-input-with-label {
                       display: flex;
                       align-items: center;
-                      @supports (not (-moz-appearance:none)) {
+                      @supports (not (-moz-appearance: none)) {
                         input {
                           flex: 1;
                         }
                       }
-                      @supports (-moz-appearance:none) {
+                      @supports (-moz-appearance: none) {
                         input {
                           flex: auto;
                         }

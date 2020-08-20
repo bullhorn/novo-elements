@@ -26,7 +26,7 @@ import { NovoTooltipModule } from './../tooltip/Tooltip.module';
 import { NovoDragulaModule } from './../dragula/Dragula.module';
 import { NovoTipWellModule } from './../tip-well/TipWell.module';
 import { NovoAceEditorModule } from './../ace-editor/AceEditor.module';
-import { NovoModalModule } from './../modal/Modal.module';
+import { NovoModalModule } from './../modal/modal.module';
 import { ControlConfirmModal, ControlPromptModal } from './FieldInteractionModals';
 import { NovoControlGroup } from './ControlGroup';
 import { NovoControlTemplates } from './ControlTemplates';

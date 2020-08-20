@@ -24,7 +24,7 @@
 @import './elements/ace-editor/AceEditor';
 @import './elements/radio/Radio';
 @import './elements/toast/Toast';
-@import './elements/modal/Modal';
+@import './elements/modal/modal.component';
 @import './elements/card/Card';
 @import './elements/calendar/month/CalendarMonthView';
 @import './elements/calendar/week/CalendarWeekView';
@@ -107,6 +107,7 @@
   }
 }
 
+.modal-overlay-backdrop,
 .aside-overlay-backdrop {
   background-color: rgba(0, 0, 0, 0.8);
 }

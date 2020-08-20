@@ -8,7 +8,7 @@ import { NovoLabelService } from '../../services/novo-label-service';
 import { AppBridge } from '../../utils/app-bridge/AppBridge';
 import { FormUtils } from '../../utils/form-utils/FormUtils';
 import { Helpers } from '../../utils/Helpers';
-import { NovoModalService } from '../modal/ModalService';
+import { NovoModalService } from '../modal/modal.service';
 import { EntityPickerResults } from '../picker/extras/entity-picker-results/EntityPickerResults';
 import { NovoToastService, ToastOptions } from '../toast/ToastService';
 import { CustomHttp, ModifyPickerConfigArgs, OptionsFunction } from './FieldInteractionApiTypes';
@@ -411,6 +411,7 @@ export class FieldInteractionApi {
       if (!result) {
         this.setValue(key, oldValue, { emitEvent: false });
       }
+      return true;
     });
   }
 

@@ -42,6 +42,7 @@ export class FormUtils {
     'CorporateUser',
     'Person',
     'Placement',
+    'JobShift',
   ];
   ENTITY_PICKER_LIST: string[] = [
     'Candidate',
@@ -63,6 +64,7 @@ export class FormUtils {
     'Person',
     'PersonText',
     'Placement',
+    'JobShift',
   ];
 
   constructor(public labels: NovoLabelService, public optionsService: OptionsService) {}

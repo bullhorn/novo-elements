@@ -168,8 +168,8 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
           clickTarget !== this.getConnectedElement().nativeElement &&
           !this.getConnectedElement().nativeElement.contains(clickTarget) &&
           !!this.overlayRef &&
-          !this.overlayRef.overlayElement.contains(clickTarget) &&
-          !Array.from(document.querySelectorAll('.cdk-overlay-container')).some((el) => el.contains(clickTarget));
+          !this.overlayRef.overlayElement.contains(clickTarget);
+        // &&!Array.from(document.querySelectorAll('.cdk-overlay-container')).some((el) => el.contains(clickTarget));
         if (this.panelOpen && !!this.overlayRef && this.overlayRef.overlayElement.contains(clickTarget) && this.closeOnSelect) {
           this.select.emit(event);
         }

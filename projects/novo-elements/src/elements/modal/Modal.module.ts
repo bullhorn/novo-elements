@@ -1,13 +1,20 @@
 // NG2
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { OverlayModule } from '@angular/cdk/overlay';
+import { PortalModule } from '@angular/cdk/portal';
+
 // APP
 import { NovoButtonModule } from './../button/Button.module';
-import { NovoModalContainerElement, NovoModalElement, NovoModalNotificationElement } from './Modal';
+import { NovoModalContainerComponent } from './modal-container.component';
+import { NovoModalElement, NovoModalNotificationElement } from './modal.component';
+import { NovoModalService } from './modal.service';
 
 @NgModule({
-  imports: [CommonModule, NovoButtonModule],
-  declarations: [NovoModalContainerElement, NovoModalElement, NovoModalNotificationElement],
+  imports: [OverlayModule, PortalModule, CommonModule, NovoButtonModule],
+  declarations: [NovoModalContainerComponent, NovoModalElement, NovoModalNotificationElement],
   exports: [NovoModalElement, NovoModalNotificationElement],
+  providers: [NovoModalService],
+  entryComponents: [NovoModalContainerComponent],
 })
-export class NovoModalModule { }
+export class NovoModalModule {}
