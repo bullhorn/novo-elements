@@ -5,3 +5,4 @@ export * from './field-control';
 export * from './field.module';
 export * from './field';
 export * from './input';
+export * from './fieldset';

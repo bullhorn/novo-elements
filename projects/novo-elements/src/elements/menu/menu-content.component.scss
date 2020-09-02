@@ -24,6 +24,16 @@
         background: rgba($ocean, 0.1);
         color: $dark;
       }
+      .menu-item-container {
+        display: flex;
+        align-items: center;
+        position: relative;
+        .sub-menu-caret {
+          position: absolute;
+          right: 0.4rem;
+        }
+      }
+
       .menu-item {
         font-weight: normal;
         cursor: pointer;
@@ -32,9 +42,10 @@
         box-sizing: border-box;
         display: flex;
         align-items: center;
-        justify-content: space-between;
         color: $dark;
         font-size: 1rem;
+        gap: 1rem;
+        flex: 1;
       }
       .divider {
         order: none;

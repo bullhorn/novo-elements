@@ -29,6 +29,8 @@ export class NovoFieldPrefixDirective {}
 @Directive({ selector: '[novoSuffix]' })
 export class NovoFieldSuffixDirective {}
 
+const NOVO_INPUT_UNDERLINED_TYPES = ['text', 'date', 'time', 'datetime-local', 'password', 'email', 'tel', 'select', 'textarea'];
+
 @Component({
   selector: 'novo-field',
   templateUrl: './field.html',
@@ -42,6 +44,7 @@ export class NovoFieldSuffixDirective {}
     // '[class.novo-field-appearance-fill]': 'appearance == "fill"',
     // '[class.novo-field-appearance-outline]': 'appearance == "outline"',
     // '[class.novo-field-appearance-legacy]': 'appearance == "legacy"',
+    '[class.novo-field-appearance-underlined]': '_isUnderlinedInput()',
     '[class.novo-field-invalid]': '_control.errorState',
     '[class.novo-field-has-label]': '_hasLabel()',
     // '[class.novo-field-hide-placeholder]': '_hideControlPlaceholder()',
@@ -115,6 +118,10 @@ export class NovoFieldElement implements AfterContentInit, OnDestroy {
     if (!this._control) {
       throw new Error('Missing Novo Control');
     }
+  }
+
+  _isUnderlinedInput(): boolean {
+    return NOVO_INPUT_UNDERLINED_TYPES.includes(this._control.controlType);
   }
 
   /** Determines whether to display hints or errors. */

@@ -20,6 +20,7 @@ import {
   TextBoxControl,
   TilesControl,
   TimeControl,
+  TimezoneControl,
 } from '../../elements/form/FormControls';
 import { EntityPickerResult, EntityPickerResults } from '../../elements/picker/extras/entity-picker-results/EntityPickerResults';
 import { Helpers } from '../Helpers';
@@ -346,6 +347,9 @@ export class FormUtils {
       case 'time':
         controlConfig.military = config ? !!config.military : false;
         control = new TimeControl(controlConfig);
+        break;
+      case 'timezone':
+        control = new TimezoneControl(controlConfig);
         break;
       case 'currency':
       case 'money':

@@ -2,8 +2,10 @@
 
 :host {
   display: grid;
+  font-size: 1.1rem;
 
   &.novo-field-appearance-horizontal {
+    grid-gap: 1rem;
     grid-template-columns: 150px minmax(min-content, max-content);
     grid-template-areas:
       'label input'
@@ -25,15 +27,27 @@
     align-items: flex-end;
   }
 
-  &.novo-focused {
+  &.novo-field-appearance-underlined {
     .novo-field-input {
-      border-bottom: 1px solid $positive;
+      border-bottom: 1px solid $dark;
+    }
+    &.novo-focused {
+      .novo-field-input {
+        border-bottom: 1px solid $positive;
+      }
+    }
+    &.novo-field-invalid {
+      .novo-field-input {
+        border-bottom: 1px solid $negative;
+      }
     }
   }
 
-  &.novo-field-invalid {
+  &.novo-field-type-color {
     .novo-field-input {
-      border-bottom: 1px solid $negative;
+      &::ng-deep .novo-input-element {
+        padding: 0;
+      }
     }
   }
 
@@ -41,7 +55,6 @@
     grid-area: input;
     display: grid;
     grid-template-columns: minmax(auto, max-content) 1fr minmax(auto, max-content);
-    border-bottom: 1px solid $dark;
     font-size: 1.2rem;
 
     &::ng-deep .novo-input-element {
@@ -66,6 +79,9 @@
     .novo-field-infix {
       display: flex;
       align-items: flex-end;
+      select {
+        width: 100%;
+      }
     }
 
     .novo-field-suffix {

@@ -264,7 +264,7 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit, OnCh
   selection: Date[] = [];
   prevSelected: Date;
   get selected() {
-    return this.selection[0] || new Date();
+    return (this.selection && this.selection[0]) || new Date();
   }
   startDateLabel: string;
   endDateLabel: string;

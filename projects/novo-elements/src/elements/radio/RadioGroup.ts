@@ -18,6 +18,11 @@ const RADIOGROUP_VALUE_ACCESSOR = {
   selector: 'novo-radio-group',
   providers: [RADIOGROUP_VALUE_ACCESSOR],
   template: '<ng-content></ng-content>',
+  host: {
+    class: 'novo-radio-group',
+    '[class.novo-radio-group-appearance-horizontal]': 'appearance=="horizontal"',
+    '[class.novo-radio-group-appearance-vertical]': 'appearance=="vertical"',
+  },
 })
 export class NovoRadioGroup implements ControlValueAccessor {
   private _uniqueId: string = `ngx-radio-group-${++nextId}`;
@@ -35,6 +40,19 @@ export class NovoRadioGroup implements ControlValueAccessor {
 
   @ContentChildren(forwardRef(() => NovoRadioElement), { descendants: true })
   _radios: QueryList<NovoRadioElement>;
+
+  _appearance: 'horizontal' | 'vertical' = 'horizontal';
+
+  @Input() get appearance(): any {
+    return this._appearance;
+  }
+
+  set appearance(value) {
+    if (this._appearance !== value) {
+      this._appearance = value;
+      this._updateRadioButtonAppearance();
+    }
+  }
 
   @Input() get value(): any {
     return this._value;
@@ -84,6 +102,12 @@ export class NovoRadioGroup implements ControlValueAccessor {
   private onTouchedCallback = () => {
     // placeholder
   };
+
+  private _updateRadioButtonAppearance(): void {
+    this._radios.forEach((radio) => {
+      radio.vertical = this.appearance === 'vertical';
+    });
+  }
 
   private _updateRadioButtonNames(): void {
     if (this._radios) {

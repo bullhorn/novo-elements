@@ -1,5 +1,17 @@
 novo-radio-group {
   display: flex;
+
+  &.novo-radio-group-appearance-horizontal {
+    novo-radio:not(:last-child) {
+      .novo-radio-button-label {
+        margin-right: 1rem;
+      }
+    }
+  }
+
+  // &.novo-radio-group-appearance-vertical {
+  // }
+
   > novo-radio {
     margin: 0;
     button {

@@ -1,0 +1,6 @@
+@import '../../styles/global/variables.scss';
+
+:host {
+  display: grid;
+  grid-gap: 1.2rem;
+}

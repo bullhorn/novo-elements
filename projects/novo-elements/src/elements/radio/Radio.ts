@@ -53,7 +53,7 @@ const RADIO_VALUE_ACCESSOR = {
       >
         {{ label }}
       </button>
-      <div *ngIf="!button">
+      <div *ngIf="!button" class="novo-radio-button-label">
         <i [ngClass]="{ 'bhi-radio-empty': !checked, 'bhi-radio-filled': checked }"></i>
         {{ label }}
         <ng-content></ng-content>

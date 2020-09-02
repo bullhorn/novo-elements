@@ -18,5 +18,6 @@ export * from './text-area';
 export * from './textbox';
 export * from './tiles';
 export * from './time';
+export * from './timezone';
 export * from './BaseControl';
 export * from './ControlFactory';

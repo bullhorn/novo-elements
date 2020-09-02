@@ -42,9 +42,9 @@ export abstract class NovoFieldControl<T> {
   readonly errorState: boolean;
 
   /**
-   * An optional name for the control type that can be used to distinguish `mat-form-field` elements
+   * An optional name for the control type that can be used to distinguish `novo-form-field` elements
    * based on their control type. The form field will add a class,
-   * `mat-form-field-type-{{controlType}}` to its root element.
+   * `novo-form-field-type-{{controlType}}` to its root element.
    */
   readonly controlType?: string;
 

@@ -33,6 +33,7 @@ const ARROW_LEFT_KEYCODE = 37;
         [class.disabled]="!isMenuItemEnabled(menuItem)"
         [class.divider]="menuItem.divider"
         [class.menu-divider]="menuItem.divider"
+        [class.menu-item-container]="!menuItem.divider"
         [class.active]="menuItem.isActive && isMenuItemEnabled(menuItem)"
         [attr.role]="menuItem.divider ? 'separator' : undefined"
       >
@@ -47,8 +48,8 @@ const ARROW_LEFT_KEYCODE = 37;
           (mouseenter)="onOpenSubMenu(menuItem, $event)"
         >
           <ng-template [ngTemplateOutlet]="menuItem.template" [ngTemplateOutletContext]="{ $implicit: item }"></ng-template>
-          <novo-icon suffix *ngIf="!!menuItem.subMenu" size="small" color="ash">expand</novo-icon>
         </a>
+        <novo-icon class="sub-menu-caret" suffix *ngIf="!!menuItem.subMenu" size="small" color="ash">expand</novo-icon>
         <span
           (click)="stopEvent($event)"
           class="passive"

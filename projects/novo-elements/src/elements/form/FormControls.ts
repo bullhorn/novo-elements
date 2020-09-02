@@ -18,5 +18,6 @@ export { TextAreaControl } from './controls/text-area/TextAreaControl';
 export { TextBoxControl } from './controls/textbox/TextBoxControl';
 export { TilesControl } from './controls/tiles/TilesControl';
 export { TimeControl } from './controls/time/TimeControl';
+export { TimezoneControl } from './controls/timezone/TimezoneControl';
 export { GroupedControl } from './controls/grouped/GroupedControl';
 export { CustomControl } from './controls/custom/CustomControl';

@@ -106,7 +106,7 @@
         background: rgba(0, 0, 0, 0.15);
         padding: 0.5rem;
         border-radius: 50%;
-        margin: -0.25rem 0rem -0.25rem 0.8rem;
+        margin: -0.5rem;
         &:before {
           vertical-align: baseline;
         }
@@ -314,10 +314,11 @@
   }
   // Icon Themed Button
   &[theme='icon'] {
+    padding: 0.6rem;
+    font-size: 1.2rem;
     &[inverse] {
       color: #fff;
     }
-    padding: 0.8rem;
     i {
       margin: 0 !important;
     }
@@ -334,6 +335,7 @@
       color: #fff;
     }
     padding: 0.8rem;
+    font-size: 1.2rem;
     border-radius: 50% !important;
     @each $button, $color in $all-colors {
       &[color='#{$button}'] {

@@ -11,7 +11,7 @@ novo-nav {
     novo-tab-link {
       font-size: 1rem;
       .novo-tab-link {
-        padding: 0.8rem 1.2rem;
+        padding: 0.8rem;
       }
     }
   }
@@ -35,7 +35,7 @@ novo-nav {
       }
     }
     .novo-tab-link {
-      padding: 1rem 2rem;
+      padding: 1rem;
       color: #fff;
       opacity: 0.7;
       font-weight: 400;
@@ -79,7 +79,7 @@ novo-nav {
     border-radius: 3px;
     border: 2px solid #fff;
     novo-tab-button {
-      padding: 1rem 2rem;
+      padding: 1rem;
       cursor: pointer;
       transition: all 120ms ease-in-out;
       &.disabled {
