@@ -5,7 +5,7 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { PortalModule } from '@angular/cdk/portal';
 
 // APP
-import { NovoButtonModule } from './../button/Button.module';
+import { NovoButtonModule } from '../button/Button.module
 import { NovoModalContainerComponent } from './modal-container.component';
 import { NovoModalElement, NovoModalNotificationElement } from './modal.component';
 import { NovoModalService } from './modal.service';
