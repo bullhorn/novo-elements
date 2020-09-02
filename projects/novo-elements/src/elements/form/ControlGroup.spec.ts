@@ -8,6 +8,7 @@ import { NovoFormModule } from './Form.module';
 import { FormUtils } from './../../utils/form-utils/FormUtils';
 import { NovoLabelService } from '../../services/novo-label-service';
 import { OptionsService } from '../../services/options/OptionsService';
+import { OverlayModule } from '@angular/cdk/overlay';
 
 describe('Elements: NovoControlGroup', () => {
   let fixture;
