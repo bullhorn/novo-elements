@@ -1,32 +1,27 @@
 // APP
-import { SelectControl } from './SelectControl';
+import { TimezoneControl } from './TimezoneControl';
 
-describe('Control: SelectControl', () => {
+describe('Control: TimezoneControl', () => {
   let control;
 
   beforeEach(() => {
-    control = new SelectControl({});
+    control = new TimezoneControl({});
   });
 
   it('should have the right control type', () => {
-    expect(control.controlType).toEqual('select');
+    expect(control.controlType).toEqual('timezone');
   });
 
   it('should set the options', () => {
-    expect(control.options.length).toBe(0);
+    expect(control.options.length).toBe(387);
   });
 
   it('should set the placeholder', () => {
     expect(control.placeholder).toEqual('');
   });
 
-  it('should set the options if passed', () => {
-    control = new SelectControl({ options: ['ONE'] });
-    expect(control.options.length).toBe(1);
-  });
-
   it('should set the placeholder if passed', () => {
-    control = new SelectControl({ placeholder: 'TEST' });
+    control = new TimezoneControl({ placeholder: 'TEST' });
     expect(control.placeholder).toEqual('TEST');
   });
 });

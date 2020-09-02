@@ -32,10 +32,12 @@ import { NovoControlGroup } from './ControlGroup';
 import { NovoControlTemplates } from './ControlTemplates';
 import { NovoTemplateService } from './../../services/template/NovoTemplateService';
 import { NovoCommonModule } from '../common/common.module';
+import { OverlayModule } from '@angular/cdk/overlay';
 
 @NgModule({
   imports: [
     CommonModule,
+    OverlayModule,
     ReactiveFormsModule,
     NovoRadioModule,
     NovoTilesModule,

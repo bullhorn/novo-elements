@@ -10,11 +10,13 @@ import { NovoLabelService } from '../../services/novo-label-service';
 import { ComponentUtils } from '../../utils/component-utils/ComponentUtils';
 import { OptionsService } from '../../services/options/OptionsService';
 import { ModifyPickerConfigArgs, OptionsFunction } from './FieldInteractionApiTypes';
+import { OverlayModule } from '@angular/cdk/overlay';
 
 describe('FieldInteractionApi', () => {
   let service: FieldInteractionApi;
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [OverlayModule],
       providers: [
         {
           provide: FieldInteractionApi,
