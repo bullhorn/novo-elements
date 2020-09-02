@@ -60,14 +60,22 @@ const SELECT_VALUE_ACCESSOR = {
             </footer>
           </div>
         </li>
-        <li
-          *ngFor="let option of filteredOptions; let i = index"
-          [ngClass]="{ active: option.active }"
-          (click)="setValueAndClose({ value: option, index: i })"
-          [attr.data-automation-value]="option.label"
-        >
-          <span [innerHtml]="highlight(option.label, filterTerm)"></span> <i *ngIf="option.active" class="bhi-check"></i>
-        </li>
+        <ng-container *ngFor="let option of filteredOptions; let i = index">
+          <li
+            *ngIf="!option.divider; else divider"
+            class="select-item"
+            [ngClass]="{ active: option.active }"
+            (click)="setValueAndClose({ value: option, index: i })"
+            [attr.data-automation-value]="option.label"
+          >
+            <span [innerHtml]="highlight(option.label, filterTerm)"></span> <i *ngIf="option.active" class="bhi-check"></i>
+          </li>
+          <ng-template #divider>
+            <li class="select-item-divider" [class.with-label]="option.label" [class.without-label]="!option.label">
+              {{ option?.label }}
+            </li>
+          </ng-template>
+        </ng-container>
       </ul>
     </novo-overlay-template>
   `,
@@ -154,7 +162,7 @@ export class NovoSelectElement implements OnInit, OnChanges, OnDestroy, ControlV
     if (!this.model && !this.createdItem) {
       this.clear();
     } else if (this.createdItem) {
-      const item = this.options.find((i) => i.label === this.createdItem);
+      const item = this.options.find((i) => i.label === this.createdItem && !i.divider);
       const index = this.options.indexOf(item);
       this.select(item, index);
     } else {
@@ -359,7 +367,7 @@ export class NovoSelectElement implements OnInit, OnChanges, OnDestroy, ControlV
   writeValue(model: any): void {
     this.model = model;
     if (this.options) {
-      let item = this.filteredOptions.find((i) => i.value === model || (model && i.value === model.id));
+      let item = this.filteredOptions.find((i) => (i.value === model || (model && i.value === model.id)) && !i.divider);
       if (!item && !Helpers.isEmpty(model)) {
         item = {
           label: model,
