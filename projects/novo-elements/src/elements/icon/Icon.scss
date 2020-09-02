@@ -1,12 +1,14 @@
 $small-themed-icon-size: 1.6em;
 $medium-themed-icon-size: 2em;
 $large-themed-icon-size: 2.4em;
-$small-icon-size: 1em;
-$medium-icon-size: 1.4em;
-$large-icon-size: 1.8em;
+$small-icon-size: 0.8em;
+$medium-icon-size: 1em;
+$large-icon-size: 1.4em;
 $icon-border-radius: 0.3em;
 novo-icon {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   i {
     display: flex;
     justify-content: center;
