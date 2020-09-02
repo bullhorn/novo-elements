@@ -5,12 +5,13 @@ import { FormGroupDirective } from '@angular/forms';
 import { NovoFormElement } from './Form';
 import { NovoTemplateService } from '../../services/template/NovoTemplateService';
 import { NovoFormModule } from './Form.module';
+import { OverlayModule } from '@angular/cdk/overlay';
 describe('Elements: NovoFormElement', () => {
   let fixture;
   let component;
 
   beforeEach(async(() => {
-    TestBed.configureTestingModule({ imports: [NovoFormModule], providers: [NovoTemplateService] }).compileComponents();
+    TestBed.configureTestingModule({ imports: [NovoFormModule, OverlayModule], providers: [NovoTemplateService] }).compileComponents();
     fixture = TestBed.createComponent(NovoFormElement);
     component = fixture.debugElement.componentInstance;
     // Mock @Input

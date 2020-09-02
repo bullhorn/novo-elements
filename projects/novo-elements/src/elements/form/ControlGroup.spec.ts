@@ -15,7 +15,7 @@ describe('Elements: NovoControlGroup', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [NovoFormModule],
+      imports: [NovoFormModule, OverlayModule],
       providers: [FormUtils, FormBuilder, ChangeDetectorRef, NovoLabelService, OptionsService],
     }).compileComponents();
     fixture = TestBed.createComponent(NovoControlGroup);
@@ -83,7 +83,11 @@ describe('Elements: NovoControlGroup', () => {
       spyOn(component.ref, 'markForCheck');
       spyOn(component.onRemove, 'emit');
       component.currentIndex = 3;
-      component.disabledArray = [{ edit: true, remove: false }, { edit: false, remove: false }, { edit: true, remove: true }];
+      component.disabledArray = [
+        { edit: true, remove: false },
+        { edit: false, remove: false },
+        { edit: true, remove: true },
+      ];
       component.form = {
         controls: {
           one: {
@@ -106,7 +110,10 @@ describe('Elements: NovoControlGroup', () => {
     });
     it('should update disabledArray', () => {
       component.removeControl(1);
-      expect(component.disabledArray).toEqual([{ edit: true, remove: false }, { edit: true, remove: true }]);
+      expect(component.disabledArray).toEqual([
+        { edit: true, remove: false },
+        { edit: true, remove: true },
+      ]);
     });
     it('should update currentIndex', () => {
       component.removeControl(1);

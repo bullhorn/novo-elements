@@ -7,6 +7,7 @@ import { NovoAutoSize } from './Control';
 import { NovoControlElement } from './Control';
 import { FieldInteractionApi, NovoLabelService, NovoTemplateService } from '../..';
 import { DateFormatService } from '../../services/date-format/DateFormat';
+import { OverlayModule } from '@angular/cdk/overlay';
 
 @Component({
   selector: 'novo-auto-size-test-component',
@@ -35,6 +36,7 @@ describe('Elements: NovoAutoSize', () => {
 
     beforeEach(async(() => {
       TestBed.configureTestingModule({
+        imports: [OverlayModule],
         declarations: [NovoAutoSize, NovoAutoSizeTestComponent],
       }).compileComponents();
       fixture = TestBed.createComponent(NovoAutoSizeTestComponent);
