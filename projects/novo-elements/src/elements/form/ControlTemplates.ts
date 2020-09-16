@@ -342,6 +342,30 @@ import { NovoTemplate } from '../common/novo-template/novo-template.directive';
       </div>
     </ng-template>
 
+    <!--Native Input--->
+    <ng-template novoTemplate="native-input" let-control let-form="form" let-errors="errors" let-methods="methods">
+      <div
+        [formGroup]="form"
+        class="novo-control-input-container novo-control-input-with-label"
+        [tooltip]="control?.tooltip"
+        [tooltipPosition]="control?.tooltipPosition"
+        [tooltipSize]="control?.tooltipSize"
+        [tooltipPreline]="control?.tooltipPreline"
+        [removeTooltipArrow]="control?.removeTooltipArrow"
+        [tooltipAutoPosition]="control?.tooltipAutoPosition"
+      >
+        <input
+          [formControlName]="control.key"
+          [id]="control.key"
+          [type]="control.type"
+          [placeholder]="control?.placeholder"
+          (input)="methods.emitChange($event)"
+          (focus)="methods.handleFocus($event)"
+          (blur)="methods.handleBlur($event)"
+        />
+      </div>
+    </ng-template>
+
     <!--Date-->
     <ng-template novoTemplate="date" let-control let-form="form" let-errors="errors" let-methods="methods">
       <div

@@ -348,6 +348,17 @@ export class FormUtils {
         controlConfig.military = config ? !!config.military : false;
         control = new TimeControl(controlConfig);
         break;
+      case 'native-time':
+      case 'native-date':
+      case 'native-week':
+      case 'native-year':
+      case 'native-datetime-local':
+      case 'native-tel':
+      case 'native-email':
+      case 'native-url':
+      case 'native-number':
+        control = new CustomControl({ ...controlConfig, template: 'native-input', type: type.replace('native-', ''), alwaysActive: true });
+        break;
       case 'timezone':
         control = new TimezoneControl(controlConfig);
         break;

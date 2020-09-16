@@ -1,6 +1,7 @@
 // NG2
 import { Component, Input, OnInit, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { Deferred, DeferredPromise } from '../../utils';
 
 @Component({
   selector: 'novo-toast',
@@ -12,23 +13,26 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
     '(click)': '!isCloseable && clickHandler($event)',
   },
   template: `
-        <div class="toast-icon">
-            <i [ngClass]="iconClass"></i>
-        </div>
-        <div class="toast-content">
-            <h5 *ngIf="title">{{title}}</h5>
-            <p *ngIf="_message" [class.message-only]="!title" [innerHtml]="_message"></p>
-            <div *ngIf="link" class="link-generated">
-                <input type="text" [value]="link" onfocus="this.select();"/>
-            </div>
-            <div class="dialogue">
-                <ng-content></ng-content>
-            </div>
-        </div>
-        <div class="close-icon" *ngIf="isCloseable" (click)="close($event)">
-            <i class="bhi-times"></i>
-        </div>
-    `,
+    <div class="toast-icon">
+      <i [ngClass]="iconClass"></i>
+    </div>
+    <div class="toast-content">
+      <h5 *ngIf="title">{{ title }}</h5>
+      <p *ngIf="_message" [class.message-only]="!title" [innerHtml]="_message"></p>
+      <div *ngIf="link" class="link-generated">
+        <input type="text" [value]="link" onfocus="this.select();" />
+      </div>
+      <div class="dialogue">
+        <ng-content></ng-content>
+      </div>
+      <div *ngIf="action" class="action">
+        <button theme="dialogue" color="white" (click)="actionHandler($event)">{{ action }}</button>
+      </div>
+    </div>
+    <div class="close-icon" *ngIf="isCloseable" (click)="close($event)">
+      <i class="bhi-times"></i>
+    </div>
+  `,
 })
 export class NovoToastElement implements OnInit, OnChanges {
   @Input()
@@ -37,6 +41,8 @@ export class NovoToastElement implements OnInit, OnChanges {
   icon: string = 'caution';
   @Input()
   title: string;
+  @Input()
+  action: string;
   @Input()
   hasDialogue: boolean = false;
   @Input()
@@ -60,6 +66,7 @@ export class NovoToastElement implements OnInit, OnChanges {
   iconClass: string;
   alertTheme: string;
   embedded: any;
+  onActionPromise: DeferredPromise = Deferred();
 
   constructor(private sanitizer: DomSanitizer) {}
 
@@ -111,5 +118,13 @@ export class NovoToastElement implements OnInit, OnChanges {
     } else {
       this.closed.emit({ closed: true });
     }
+  }
+
+  actionHandler(event) {
+    this.onActionPromise.resolve(event);
+  }
+
+  onAction(fn: () => void) {
+    return this.onActionPromise.then(fn);
   }
 }

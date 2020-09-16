@@ -595,7 +595,9 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     if (this.form.controls[this.control.key].controlType === 'picker' && this._enteredText.length) {
       return true;
     }
-
+    if (this.form.controls[this.control.key].alwaysActive) {
+      return true;
+    }
     // Controls that always have the label active
     return (
       [

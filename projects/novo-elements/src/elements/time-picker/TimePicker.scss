@@ -183,12 +183,12 @@ novo-time-picker {
       transform: rotate(90deg);
     }
     .analog--ball {
-      height: 37px;
-      width: 37px;
+      height: 3rem;
+      width: 3rem;
       display: block;
-      right: 8px;
+      right: 3.2rem;
       top: 50%;
-      margin-top: -18px;
+      margin-top: -1.5rem;
       border-radius: 50%;
       position: absolute;
       border: 3px solid $positive;
@@ -259,10 +259,10 @@ novo-time-picker {
       top: 50%;
       border-radius: 50%;
       position: absolute;
-      height: 32px;
-      width: 32px;
-      right: 25px;
-      margin-top: -16px;
+      height: 2.4rem;
+      width: 2.4rem;
+      right: 4.2rem;
+      margin-top: -1.2rem;
       border: 2px solid lighten($positive, 10%);
       background: lighten($positive, 10%);
       transition: all 160ms ease-in-out;
@@ -289,8 +289,8 @@ novo-time-picker {
     }
   }
   .analog--center {
-    height: 155px;
-    width: 155px;
+    height: 12rem;
+    width: 12rem;
     border-radius: 50%;
     top: 50%;
     left: 50%;
@@ -304,7 +304,7 @@ novo-time-picker {
   }
   .analog--hour,
   .analog--minute {
-    font-size: 1.6em;
+    font-size: 1.6rem;
     color: #666666;
     left: 50%;
     top: 50%;
@@ -322,7 +322,7 @@ novo-time-picker {
     }
   }
   .analog--minute {
-    font-size: 1em;
+    font-size: 1rem;
     margin-left: -20px;
     margin-top: -16px;
   }
@@ -347,7 +347,7 @@ novo-time-picker {
     }
   }
   &.military {
-    $md: 8em;
+    $md: 8rem;
     @for $i from 1 through 24 {
       $hour: $i - 1;
       $deg: ($i * 15 - 105);
@@ -369,19 +369,19 @@ novo-time-picker {
       bottom: 15px;
     }
     .analog--hour {
-      font-size: 0.9em;
-      margin-left: -20px;
-      margin-top: -16px;
+      font-size: 0.9rem;
+      margin-left: -2rem;
+      margin-top: -1.2rem;
     }
     .analog--hand--minutes {
       margin: 10px;
     }
     .analog--hand--hours {
       .analog--ball {
-        height: 28px;
-        width: 28px;
-        right: 13px;
-        margin-top: -14px;
+        height: 2.8rem;
+        width: 2.8rem;
+        right: 2.7rem;
+        margin-top: -1.4rem;
       }
     }
   }

@@ -95,6 +95,20 @@ export const MockMeta = {
       sortOrder: 100,
     },
     {
+      name: 'native-time',
+      type: 'native-time',
+      label: 'Native Time',
+      required: true,
+      sortOrder: 101,
+    },
+    {
+      name: 'native-datetime-local',
+      type: 'native-datetime-local',
+      label: 'Native Date Time Local',
+      required: true,
+      sortOrder: 102,
+    },
+    {
       name: 'datetime',
       type: 'date-time',
       label: 'DateTime',

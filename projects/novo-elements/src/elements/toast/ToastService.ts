@@ -11,6 +11,7 @@ export type ToastPositions = 'fixedTop' | 'fixedBottom' | 'growlTopRight' | 'gro
 export interface ToastOptions {
   title?: string;
   message?: string;
+  action?: string;
   icon?: ToastIcons;
   theme?: ToastThemes;
   hideDelay?: number;
@@ -43,7 +44,7 @@ export class NovoToastService {
       const toast = this.componentUtils.append(toastElement, this._parentViewContainer);
       this.references.push(toast);
       this.handleAlert(toast.instance, options);
-      resolve(toast);
+      resolve(toast.instance);
     });
   }
 
@@ -79,6 +80,7 @@ export class NovoToastService {
     toast.parent = this;
     toast.title = OPTIONS.title || '';
     toast.message = OPTIONS.message || '';
+    toast.action = OPTIONS.action || null;
     toast.hideDelay = OPTIONS.hideDelay || this.defaults.hideDelay;
     toast.link = OPTIONS.link || '';
     toast.isCloseable = OPTIONS.isCloseable || false;

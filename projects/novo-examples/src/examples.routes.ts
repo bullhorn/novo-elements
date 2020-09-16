@@ -400,7 +400,7 @@ export class TipWellPage {}
 
 @Component({
   selector: 'toaster-page',
-  template: `<h1>Toast Notifications <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/toast">(source)</a></h1><p>Toasts are used as system notifications. They can contain custom text titles and messages, as well as any icons from bh-icons and any color from our color palletes.</p><h2>Types</h2><h5>Alert</h5><p>This type of toast notification takes a template, a style, and a location.</p><h2>Embedded Toast</h2><p><code-example example="toast-usage"></code-example></p><h2>Toaster Service</h2><p><code-example example="toast-service"></code-example></p>`
+  template: `<h1>Toast Notifications <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/toast">(source)</a></h1><p>Toasts are used as system notifications. They can contain custom text titles and messages, as well as any icons from bh-icons and any color from our color palletes.</p><h2>Types</h2><h5>Alert</h5><p>This type of toast notification takes a template, a style, and a location.</p><h2>Embedded Toast</h2><p><code-example example="toast-usage"></code-example></p><h2>Toaster Service</h2><p><code-example example="toast-service"></code-example></p><h2>Toaster Actions</h2><p><code-example example="toast-actions"></code-example></p>`
 })
 export class ToasterPage {}
 

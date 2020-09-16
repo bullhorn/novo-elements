@@ -17,6 +17,7 @@ export interface NovoGroupedControlConfig {
 }
 
 class ControlConfig {
+  alwaysActive?: Boolean;
   allowInvalidDate?: boolean;
   appendToBody: boolean; // Deprecated;
   associatedEntity: string;
@@ -40,7 +41,7 @@ class ControlConfig {
   forceClear: EventEmitter<any>;
   headerConfig: any;
   hidden: boolean;
-  interactions: Array<{ event?: 'change' | 'focus' | string, invokeOnInit?: boolean, script? }>;
+  interactions: Array<{ event?: 'change' | 'focus' | string; invokeOnInit?: boolean; script? }>;
   isEmpty?: Function;
   key: string;
   label: string;
@@ -108,6 +109,7 @@ export class BaseControl extends ControlConfig {
     super();
     this.__type = type;
     this.__config = config;
+    this.alwaysActive = config.alwaysActive;
     this.validators = config.validators || [];
     this.asyncValidators = config.asyncValidators || [];
     this.value = config.value;
