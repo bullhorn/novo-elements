@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.13.1"></a>
+## [3.13.1](https://github.com/bullhorn/novo-elements/compare/v3.13.0...v3.13.1) (2020-09-30)
+
+
+
 <a name="3.13.0"></a>
 # [3.13.0](https://github.com/bullhorn/novo-elements/compare/v2.13.0...v3.13.0) (2019-09-13)
 
