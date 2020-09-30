@@ -9,7 +9,9 @@
 <br/>
 <div class="date-picker-demo-side-by-side">
     <p>
-        <label>Value</label> {{(weekStartDate | date) || 'N/A'}}
+        <label>Value</label> {{(weekStartDateOne | date) || 'N/A'}}
+        <label>Value</label> {{(weekStartDateTwo | date) || 'N/A'}}
     </p>
-    <novo-date-picker [(ngModel)]="weekStartDate" [weekStart]="weekStart"></novo-date-picker>
+    <novo-date-picker [(ngModel)]="weekStartDateOne" [weekStart]="weekStart"></novo-date-picker>
+    <novo-date-picker [(ngModel)]="weekStartDateTwo" [weekStart]="weekStart" [range]="true" [weekRangeSelect]="true"></novo-date-picker>
 </div>

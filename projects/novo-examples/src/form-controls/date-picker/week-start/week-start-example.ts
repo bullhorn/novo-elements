@@ -9,7 +9,8 @@ import { Component } from '@angular/core';
   styleUrls: ['week-start-example.css'],
 })
 export class WeekStartExample {
-  weekStartDate: Date = new Date();
+  weekStartDateOne: Date = new Date();
+  weekStartDateTwo: Date = new Date();
   weekStart: number = 0;
 
   setWeekStart(num: number): void {

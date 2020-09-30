@@ -31,6 +31,7 @@ const DATE_PICKER_VALUE_ACCESSOR = {
 export interface RangeModal {
   startDate: Date;
   endDate: Date;
+  selectedDate?: Date;
 }
 export type modelTypes = Date | RangeModal;
 
@@ -314,7 +315,12 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit, OnCh
       if (!date) {
         this.clearRange();
       }
-      let value: any = date ? new Date(date) : new Date();
+      let value: any;
+      if (date && date.selectedDate) {
+        value = new Date(date.selectedDate);
+      } else {
+        value = date ? new Date(date) : new Date();
+      }
       value = this.removeTime(value);
       this.month = new Date(value);
       this.monthLabel = this.labels.formatDateWithFormat(this.month, { month: 'short' });
@@ -431,10 +437,12 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit, OnCh
         this._onChange({
           startDate: this.selected,
           endDate: this.selected2 ? this.selected2 : null,
+          selectedDate: day.date,
         });
         this.model = {
           startDate: this.selected,
           endDate: this.selected2 ? this.selected2 : null,
+          selectedDate: day.date,
         };
       }
 
