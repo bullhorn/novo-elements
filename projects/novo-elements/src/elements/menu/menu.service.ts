@@ -173,6 +173,10 @@ export class NovoMenuService {
     this.overlays = [];
   }
 
+  public hasOpenMenus() {
+    return this.overlays?.length > 0;
+  }
+
   public getLastAttachedOverlay(): OverlayRefWithMenu {
     let overlay: OverlayRef = this.overlays[this.overlays.length - 1];
     while (this.overlays.length > 1 && overlay && !overlay.hasAttached()) {
