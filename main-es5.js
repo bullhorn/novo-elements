@@ -36154,7 +36154,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         key: "_setCalendarValue",
         value: function _setCalendarValue(value) {
           if (value instanceof Date && this.value instanceof Date) {
-            value = new Date(value.setHours(this.value.getHours(), this.value.getMinutes()));
+            value = new Date(value).setHours(0, 0, 0, 0);
           }
 
           this.value = value;
