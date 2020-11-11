@@ -240,7 +240,9 @@ export class BasePickerResults {
   filterData(matches): Array<any> {
     if (this.term && matches) {
       return matches.filter((match) => {
-        return ~String(match.label).toLowerCase().indexOf(this.term.toLowerCase());
+        return ~String(match.label)
+          .toLowerCase()
+          .indexOf(this.term.toLowerCase());
       });
     }
     // Show no recent results template
@@ -350,16 +352,20 @@ export class BasePickerResults {
   }
 
   preselected(match) {
+    let selected = this.selected;
+    if (this.config.selected) {
+      selected = [...this.selected, ...this.config.selected];
+    }
     if (this.config && this.config.preselected) {
       const preselectedFunc: Function = this.config.preselected;
       return (
-        this.selected.findIndex((item) => {
+        selected.findIndex((item) => {
           return preselectedFunc(match, item);
         }) !== -1
       );
     }
     return (
-      this.selected.findIndex((item) => {
+      selected.findIndex((item) => {
         let isPreselected = false;
         if (item && item.value && match && match.value) {
           if (item.value.id && match.value.id) {
