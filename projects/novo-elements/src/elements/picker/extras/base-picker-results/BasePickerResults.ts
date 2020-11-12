@@ -353,7 +353,7 @@ export class BasePickerResults {
 
   preselected(match) {
     let selected = this.selected;
-    if (this.config.selected) {
+    if (this.config && this.config.selected) {
       selected = [...this.selected, ...this.config.selected];
     }
     if (this.config && this.config.preselected) {
