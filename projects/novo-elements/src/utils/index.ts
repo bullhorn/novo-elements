@@ -8,3 +8,4 @@ export * from './key-codes';
 export * from './notifier';
 export * from './outside-click';
 export * from './Helpers';
+export * from './decorators';

@@ -13,15 +13,13 @@ import {
   SimpleChange,
 } from '@angular/core';
 import { FormBuilder, FormArray } from '@angular/forms';
-import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 // App
 import { NovoFormGroup } from './NovoFormGroup';
 import { BaseControl } from './controls/BaseControl';
 import { FormUtils } from './../../utils/form-utils/FormUtils';
 import { Helpers } from '../../utils/Helpers';
 import { NovoLabelService } from '../../services/novo-label-service';
-
-export type BooleanInput = string | boolean | null | undefined;
 
 export interface NovoControlGroupAddConfig {
   label: string;

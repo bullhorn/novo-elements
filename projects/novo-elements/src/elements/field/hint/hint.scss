@@ -2,8 +2,9 @@
 
 :host {
   display: flex;
-  padding-bottom: 5px;
   flex: 1;
   font-size: 0.8em;
-  color: $dark;
+  color: $grey;
+  padding-bottom: .4rem;
+  padding-top: .4rem;
 }

@@ -2,6 +2,7 @@ import { MenuComponent } from './menu.component';
 import { NovoMenuService } from './menu.service';
 import { ChangeDetectorRef, Directive, HostBinding, HostListener, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { BooleanInput } from '../../utils';
 
 @Directive({
   selector: '[menu]',
@@ -9,7 +10,8 @@ import { Subscription } from 'rxjs';
 export class MenuDirective implements OnInit, OnDestroy {
   @Input() public menuContext: any;
   @Input() public menu: MenuComponent;
-  @Input() public waitWhenOpen: Boolean = false;
+  @Input() @BooleanInput() public waitWhenOpen: boolean = false;
+  @Input() @BooleanInput() public capture: boolean = false;
 
   isActive: boolean = false;
   @HostBinding('class.menu-active')

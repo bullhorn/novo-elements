@@ -138,6 +138,11 @@ export class NovoMultiDateInputElement implements OnInit, ControlValueAccessor {
     // }
   }
 
+  formatter(value) {
+    const [dateTimeValue, formatted] = this.dateFormatService.parseString(value, false, 'date');
+    return formatted;
+  }
+
   /** BEGIN: Convenient Panel Methods. */
   openPanel(): void {
     if (!this.disabled) {

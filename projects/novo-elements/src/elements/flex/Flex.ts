@@ -27,6 +27,10 @@ export class NovoFlexElement {
   @Input()
   wrap: string = 'nowrap';
 
+  @HostBinding('style.gap')
+  @Input()
+  gap: string = 'nowrap';
+
   // get hb_gridCols() {
   //   return this._sanitizer.bypassSecurityTrustStyle(`repeat(${this.columns}, ${ResourceSettings.eventWidth})`);
   // }

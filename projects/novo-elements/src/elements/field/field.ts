@@ -29,7 +29,7 @@ export class NovoFieldPrefixDirective {}
 @Directive({ selector: '[novoSuffix]' })
 export class NovoFieldSuffixDirective {}
 
-const NOVO_INPUT_UNDERLINED_TYPES = ['text', 'date', 'time', 'datetime-local', 'password', 'email', 'tel', 'select', 'textarea'];
+const NOVO_INPUT_UNDERLINED_TYPES = ['text', 'date', 'time', 'datetime-local', 'password', 'email', 'tel', 'select', 'textarea', 'number'];
 
 @Component({
   selector: 'novo-field',
@@ -76,6 +76,9 @@ export class NovoFieldElement implements AfterContentInit, OnDestroy {
   @ContentChild(NovoFieldControl) _control: NovoFieldControl<any>;
 
   @Input() appearance: 'horizontal' | 'vertical' = 'vertical';
+
+  @Input()
+  width: string;
 
   private _destroyed = new Subject<void>();
 
