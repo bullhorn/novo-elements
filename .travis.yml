@@ -3,7 +3,7 @@ sudo: required
 dist: trusty
 
 node_js:
-  - 14
+  - 10
 
 cache:
   directories:
