@@ -687,13 +687,14 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   }
 
   performInteractions(event: string): void {
-    for (const column of this.columns) {
-      const allListColumnInteractions = this.listInteractions[column.id];
-      const listColumnInteraction = allListColumnInteractions && allListColumnInteractions.find(int => int.event.includes(event));
-      if (listColumnInteraction) {
-        listColumnInteraction.script(this, column.id);
+    if (this.listInteractions) {
+      for (const column of this.columns) {
+        const allListColumnInteractions = this.listInteractions[column.id];
+        const listColumnInteraction = allListColumnInteractions && allListColumnInteractions.find(int => int.event.includes(event));
+        if (listColumnInteraction) {
+          listColumnInteraction.script(this, column.id);
+        }
       }
     }
-
   }
 }
