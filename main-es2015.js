@@ -404,6 +404,7 @@ const currencyOverridesMap = {
     SEK: 'kr',
     NOK: 'kr',
     ZAR: 'R',
+    RUB: '₽',
 };
 
 /**

@@ -668,7 +668,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       DKK: 'kr.',
       SEK: 'kr',
       NOK: 'kr',
-      ZAR: 'R'
+      ZAR: 'R',
+      RUB: '₽'
     };
     /**
      * @fileoverview added by tsickle
