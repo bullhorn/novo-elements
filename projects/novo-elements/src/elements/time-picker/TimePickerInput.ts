@@ -53,7 +53,7 @@ const DATE_VALUE_ACCESSOR = {
     <i *ngIf="!hasValue" (click)="openPanel()" class="bhi-clock"></i> <i *ngIf="hasValue" (click)="clearValue()" class="bhi-times"></i>
 
     <novo-overlay-template [parent]="element" position="above-below">
-      <novo-time-picker inline="true" (onSelect)="setValueAndClose($event)" [ngModel]="value" [military]="military"></novo-time-picker>
+      <novo-time-picker inline="true" (onSelect)="setValue($event)" [ngModel]="value" [military]="military"></novo-time-picker>
     </novo-overlay-template>
   `,
 })
@@ -182,8 +182,10 @@ export class NovoTimePickerInputElement implements OnInit, ControlValueAccessor 
     if (document.activeElement === event.target) {
       const text = (event.target as HTMLInputElement).value;
       this.openPanel();
-      const num = Number(text.split(':')[0]);
-      this.scrollToIndex(num * 4);
+      if ((this.military && Number(text[0]) > 2) || (!this.military && Number(text[0]) > 1)) {
+        event.preventDefault();
+        (event.target as HTMLInputElement).value = `0${text}`;
+      }
     }
   }
 

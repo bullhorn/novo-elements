@@ -6,11 +6,19 @@ export const MockMeta = {
     {
       name: 'firstName',
       type: 'text',
-      label: 'First Name',
+      label: 'Name',
       required: true,
       sortOrder: 10,
       maxLength: 10,
       description: 'First Name, Yo!',
+    },
+    {
+      name: 'lastName',
+      type: 'text',
+      label: 'Name',
+      hint: 'Last Name, Yo!',
+      description: 'Last Name, Yo!',
+      sortOrder: 10,
     },
     {
       name: 'groupedItems',
@@ -33,14 +41,6 @@ export const MockMeta = {
           sortOrder: 20,
         },
       ],
-    },
-    {
-      name: 'lastName',
-      type: 'text',
-      label: 'Last Name',
-      hint: 'Last Name, Yo!',
-      description: 'Last Name, Yo!',
-      sortOrder: 20,
     },
     {
       name: 'number',

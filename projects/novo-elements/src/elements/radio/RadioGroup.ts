@@ -3,7 +3,7 @@ import { Component, EventEmitter, forwardRef, Input, Output, QueryList, ContentC
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 // APP
 import { NovoRadioElement } from './Radio';
-export * from './Radio';
+import { NOVO_RADIO_GROUP } from './tokens';
 
 // make radio-button-group ids unique
 let nextId = 0;
@@ -16,7 +16,7 @@ const RADIOGROUP_VALUE_ACCESSOR = {
 
 @Component({
   selector: 'novo-radio-group',
-  providers: [RADIOGROUP_VALUE_ACCESSOR],
+  providers: [RADIOGROUP_VALUE_ACCESSOR, { provide: NOVO_RADIO_GROUP, useExisting: NovoRadioGroup }],
   template: '<ng-content></ng-content>',
   host: {
     class: 'novo-radio-group',

@@ -12,11 +12,12 @@ import {
   HostBinding,
   Optional,
   OnInit,
+  Inject,
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 // APP
 import { Helpers } from '../../utils/Helpers';
-import { NovoRadioGroup } from './RadioGroup';
+import { NOVO_RADIO_GROUP, RadioGroup } from './tokens';
 
 // make radio-buttons ids unique
 let nextId = 0;
@@ -128,7 +129,7 @@ export class NovoRadioElement implements ControlValueAccessor, OnInit {
     this._disabled = !!value;
   }
 
-  constructor(@Optional() public radioGroup: NovoRadioGroup, private ref: ChangeDetectorRef) {
+  constructor(@Inject(NOVO_RADIO_GROUP) @Optional() public radioGroup: RadioGroup, private ref: ChangeDetectorRef) {
     this.radioGroup = radioGroup;
   }
 

@@ -15,44 +15,82 @@ const TIME_PICKER_VALUE_ACCESSOR = {
   selector: 'novo-time-picker',
   providers: [TIME_PICKER_VALUE_ACCESSOR],
   template: `
-        <div class="digital" [class.inline]="inline" [class.military]="military">
-            <div class="digital--inner">
-                <span class="digital--clock" *ngIf="!inline">
-                    <span class="hours" data-automation-id="novo-time-picker-hours">{{hours}}</span>:<span class="minutes" data-automation-id="novo-time-picker-minutes">{{minutes}}</span>
-                </span>
-                <div class="control-block" *ngIf="!military">
-                    <span *ngFor="let period of MERIDIANS" class="digital--period" [class.active]="meridian==period" (click)="setPeriod($event, period, true)" [attr.data-automation-id]="period">{{period}}</span>
-                </div>
-            </div>
+    <div class="digital" [class.inline]="inline" [class.military]="military">
+      <div class="digital--inner">
+        <span class="digital--clock" *ngIf="!inline">
+          <span class="hours" data-automation-id="novo-time-picker-hours">{{ hours }}</span
+          >:<span class="minutes" data-automation-id="novo-time-picker-minutes">{{ minutes }}</span>
+        </span>
+        <div class="control-block" *ngIf="!military">
+          <span
+            *ngFor="let period of MERIDIANS"
+            class="digital--period"
+            [class.active]="meridian == period"
+            (click)="setPeriod($event, period, true)"
+            [attr.data-automation-id]="period"
+            >{{ period }}</span
+          >
         </div>
-        <div class="increments" *ngIf="!analog">
-            <novo-list direction="vertical" data-automation-id="novo-time-picker-increments">
-                <novo-list-item *ngFor="let increment of increments" (click)="setValue($event, increment)" [class.active]="increment==selected" [attr.data-automation-id]="increment">
-                    <item-content>{{increment}}</item-content>
-                    <i *ngIf="increment==selected" class="bhi-check"></i>
-                </novo-list-item>
-            </novo-list>
+      </div>
+    </div>
+    <div class="increments" *ngIf="!analog">
+      <novo-list direction="vertical" data-automation-id="novo-time-picker-increments">
+        <novo-list-item
+          *ngFor="let increment of HOURS"
+          (click)="setHours($event, increment, true)"
+          [class.active]="increment == activeHour"
+          [attr.data-automation-id]="increment"
+        >
+          <item-content>{{ increment }}</item-content>
+          <i *ngIf="increment == selected" class="bhi-check"></i>
+        </novo-list-item>
+      </novo-list>
+      <novo-list direction="vertical" data-automation-id="novo-time-picker-increments">
+        <novo-list-item
+          *ngFor="let increment of MINUTES"
+          (click)="setMinutes($event, increment, true)"
+          [class.active]="increment == activeMinute"
+          [attr.data-automation-id]="increment"
+        >
+          <item-content>{{ increment }}</item-content>
+          <i *ngIf="increment == selected" class="bhi-check"></i>
+        </novo-list-item>
+      </novo-list>
+    </div>
+    <div class="analog" *ngIf="analog">
+      <div class="analog--inner">
+        <div class="analog--face">
+          <span class="analog--center"></span>
+          <span class="analog--hand--hours" [ngClass]="hoursClass">
+            <span class="analog--ball"></span>
+          </span>
+          <span class="analog--hand--minutes" [ngClass]="minutesClass">
+            <span class="analog--ball" [ngClass]="{ between: inBetween }"></span>
+          </span>
         </div>
-        <div class="analog" *ngIf="analog">
-            <div class="analog--inner">
-                <div class="analog--face">
-                    <span class="analog--center"></span>
-                    <span class="analog--hand--hours" [ngClass]="hoursClass">
-                        <span class="analog--ball"></span>
-                    </span>
-                    <span class="analog--hand--minutes" [ngClass]="minutesClass">
-                        <span class="analog--ball" [ngClass]="{between: inBetween}"></span>
-                    </span>
-                </div>
-                <div class="analog--hours">
-                    <span *ngFor="let hour of HOURS" class="analog--hour" [ngClass]="{active: activeHour == hour}" (click)="setHours($event, hour, true)" [attr.data-automation-id]="hour">{{hour}}</span>
-                </div>
-                <div class="analog--minutes">
-                    <span *ngFor="let minute of MINUTES" class="analog--minute" [ngClass]="{active: activeMinute == minute}" (click)="setMinutes($event, minute, true)" [attr.data-automation-id]="minute">{{minute}}</span>
-                </div>
-            </div>
+        <div class="analog--hours">
+          <span
+            *ngFor="let hour of HOURS"
+            class="analog--hour"
+            [ngClass]="{ active: activeHour == hour }"
+            (click)="setHours($event, hour, true)"
+            [attr.data-automation-id]="hour"
+            >{{ hour }}</span
+          >
         </div>
-    `,
+        <div class="analog--minutes">
+          <span
+            *ngFor="let minute of MINUTES"
+            class="analog--minute"
+            [ngClass]="{ active: activeMinute == minute }"
+            (click)="setMinutes($event, minute, true)"
+            [attr.data-automation-id]="minute"
+            >{{ minute }}</span
+          >
+        </div>
+      </div>
+    </div>
+  `,
   host: {
     '[class.military]': 'military',
   },

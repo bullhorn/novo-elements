@@ -54,7 +54,6 @@ novo-time-picker {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15), 0 2px 7px rgba(0, 0, 0, 0.1);
   z-index: 999;
   .digital {
-    padding: 6.5px 0;
     background-color: $positive;
     display: flex;
     justify-content: center;
@@ -65,16 +64,21 @@ novo-time-picker {
         border-bottom: none;
       }
       .digital--inner {
+        flex: 1;
         .control-block {
           display: flex;
+          flex: 1;
           .digital--period {
             color: $positive;
             cursor: pointer;
             font-size: 1em;
             opacity: 0.6;
-            margin: 0 20px;
+            padding: 1rem;
+            flex: 1;
             &.active {
               opacity: 1;
+              background-color: $positive;
+              color: $white;
             }
           }
         }
@@ -102,7 +106,6 @@ novo-time-picker {
     font-size: 1em;
     opacity: 0.6;
     text-transform: uppercase;
-    margin-left: 5px;
     font-weight: 400;
     &.active {
       opacity: 1;
@@ -113,8 +116,15 @@ novo-time-picker {
     position: relative;
     height: 250px;
     width: 130px;
-    overflow-y: auto;
-    overflow-x: hidden;
+    display: flex;
+    flex-flow: row nowrap;
+
+    novo-list {
+      overflow-y: auto;
+      overflow-x: hidden;
+      height: 100%;
+      flex: 1;
+    }
 
     novo-list-item {
       padding: 5px 16px;
@@ -128,8 +138,8 @@ novo-time-picker {
         color: darken($light, 55%);
       }
       &.active {
-        // border: 1px solid $positive;
-        color: $positive;
+        background-color: $positive;
+        color: $white;
         font-weight: 500;
       }
     }

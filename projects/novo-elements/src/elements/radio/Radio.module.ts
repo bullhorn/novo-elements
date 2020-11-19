@@ -3,7 +3,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 // APP
 import { NovoButtonModule } from '../button/Button.module';
-import { NovoRadioGroup, NovoRadioElement } from './RadioGroup';
+import { NovoRadioGroup } from './RadioGroup';
+import { NovoRadioElement } from './Radio';
 
 @NgModule({
   imports: [CommonModule, NovoButtonModule],
