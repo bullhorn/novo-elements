@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.3.10](https://github.com/bullhorn/novo-elements/compare/v4.3.9...v4.3.10) (2020-11-18)
+
+
+### Bug Fixes
+
+* **novo-date-picker-input:** date picker fix ([dacbc5c](https://github.com/bullhorn/novo-elements/commit/dacbc5c4311c3239d2c506a3a5b4713078f65bc9))
+
 ### [4.3.9](https://github.com/bullhorn/novo-elements/compare/v4.3.8...v4.3.9) (2020-07-28)
 
 
