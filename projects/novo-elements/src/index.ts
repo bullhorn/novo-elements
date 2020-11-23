@@ -36,8 +36,32 @@ export { NovoTemplate } from './elements/common/novo-template/novo-template.dire
 export { NovoDataTableClearButton } from './elements/data-table/data-table-clear-button.component';
 export { NovoDataTable } from './elements/data-table/data-table.component';
 export { NovoDataTableModule } from './elements/data-table/data-table.module';
-export { DataTableBigDecimalRendererPipe, DataTableInterpolatePipe, DateTableCurrencyRendererPipe, DateTableDateRendererPipe, DateTableDateTimeRendererPipe, DateTableNumberRendererPipe, DateTableTimeRendererPipe } from './elements/data-table/data-table.pipes';
-export { IDataTableCell, IDataTableChangeEvent, IDataTableColumn, IDataTableColumnFilterConfig, IDataTableColumnFilterOption, IDataTableColumnSortConfig, IDataTableFilter, IDataTablePaginationEvent, IDataTablePaginationOptions, IDataTablePreferences, IDataTableSearchOptions, IDataTableSelectionChangeEvent, IDataTableService, IDataTableSort, IDataTableSortFilter } from './elements/data-table/interfaces';
+export {
+  DataTableBigDecimalRendererPipe,
+  DataTableInterpolatePipe,
+  DateTableCurrencyRendererPipe,
+  DateTableDateRendererPipe,
+  DateTableDateTimeRendererPipe,
+  DateTableNumberRendererPipe,
+  DateTableTimeRendererPipe,
+} from './elements/data-table/data-table.pipes';
+export {
+  IDataTableCell,
+  IDataTableChangeEvent,
+  IDataTableColumn,
+  IDataTableColumnFilterConfig,
+  IDataTableColumnFilterOption,
+  IDataTableColumnSortConfig,
+  IDataTableFilter,
+  IDataTablePaginationEvent,
+  IDataTablePaginationOptions,
+  IDataTablePreferences,
+  IDataTableSearchOptions,
+  IDataTableSelectionChangeEvent,
+  IDataTableService,
+  IDataTableSort,
+  IDataTableSortFilter,
+} from './elements/data-table/interfaces';
 export { NovoDataTableFilterUtils } from './elements/data-table/services/data-table-filter-utils';
 export { RemoteDataTableService } from './elements/data-table/services/remote-data-table.service';
 export { StaticDataTableService } from './elements/data-table/services/static-data-table.service';
@@ -55,7 +79,11 @@ export { NovoDropdownModule } from './elements/dropdown/Dropdown.module';
 export { NovoAccordion } from './elements/expansion/accordion';
 export { NovoExpansionPanel, NovoExpansionPanelActionRow } from './elements/expansion/expansion-panel';
 export { NovoExpansionPanelContent } from './elements/expansion/expansion-panel-content';
-export { NovoExpansionPanelDescription, NovoExpansionPanelHeader, NovoExpansionPanelTitle } from './elements/expansion/expansion-panel-header';
+export {
+  NovoExpansionPanelDescription,
+  NovoExpansionPanelHeader,
+  NovoExpansionPanelTitle,
+} from './elements/expansion/expansion-panel-header';
 export { NovoExpansionModule } from './elements/expansion/expansion.module';
 export { NovoAutoSize, NovoControlElement } from './elements/form/Control';
 export { NovoControlGroup, NovoControlGroupAddConfig } from './elements/form/ControlGroup';
@@ -101,9 +129,24 @@ export { NovoHeaderComponent, NovoHeaderSpacer, NovoUtilActionComponent, NovoUti
 export { NovoHeaderModule } from './elements/header/Header.module';
 export { NovoIconComponent } from './elements/icon/Icon';
 export { NovoIconModule } from './elements/icon/Icon.module';
-export { NovoItemAvatarElement, NovoItemContentElement, NovoItemDateElement, NovoItemEndElement, NovoItemHeaderElement, NovoItemTitleElement, NovoListElement, NovoListItemElement } from './elements/list/List';
+export {
+  NovoItemAvatarElement,
+  NovoItemContentElement,
+  NovoItemDateElement,
+  NovoItemEndElement,
+  NovoItemHeaderElement,
+  NovoItemTitleElement,
+  NovoListElement,
+  NovoListItemElement,
+} from './elements/list/List';
 export { NovoListModule } from './elements/list/List.module';
-export { NovoIsLoadingDirective, NovoLoadedDirective, NovoLoadingElement, NovoSkeletonDirective, NovoSpinnerElement } from './elements/loading/Loading';
+export {
+  NovoIsLoadingDirective,
+  NovoLoadedDirective,
+  NovoLoadingElement,
+  NovoSkeletonDirective,
+  NovoSpinnerElement,
+} from './elements/loading/Loading';
 export { NovoLoadingModule } from './elements/loading/Loading.module';
 export { NovoModalElement, NovoModalNotificationElement, NovoModalParams, NovoModalRef } from './elements/modal/Modal';
 export { NovoModalModule } from './elements/modal/Modal.module';
@@ -138,16 +181,51 @@ export { NovoSearchBoxModule } from './elements/search/SearchBox.module';
 export { NovoSelectElement } from './elements/select/Select';
 export { NovoSelectModule } from './elements/select/Select.module';
 export { ActivityTableRenderers } from './elements/simple-table/activity-table-renderers';
-export { NovoSimpleActionCell, NovoSimpleCell, NovoSimpleCellDef, NovoSimpleCheckboxCell, NovoSimpleCheckboxHeaderCell, NovoSimpleColumnDef, NovoSimpleEmptyHeaderCell, NovoSimpleHeaderCell, NovoSimpleHeaderCellDef } from './elements/simple-table/cell';
+export {
+  NovoSimpleActionCell,
+  NovoSimpleCell,
+  NovoSimpleCellDef,
+  NovoSimpleCheckboxCell,
+  NovoSimpleCheckboxHeaderCell,
+  NovoSimpleColumnDef,
+  NovoSimpleEmptyHeaderCell,
+  NovoSimpleHeaderCell,
+  NovoSimpleHeaderCellDef,
+} from './elements/simple-table/cell';
 export { NovoSimpleCellHeader, NovoSimpleFilterFocus } from './elements/simple-table/cell-header';
-export { NovoSimplePaginationEvent, NovoSimpleSelectionChange, NovoSimpleSortFilter, NovoSimpleTableChange, SimpleTableActionColumn, SimpleTableActionColumnOption, SimpleTableColumn, SimpleTableColumnFilterConfig, SimpleTableColumnFilterOption, SimpleTablePaginationOptions, SimpleTableSearchOptions } from './elements/simple-table/interfaces';
+export {
+  NovoSimplePaginationEvent,
+  NovoSimpleSelectionChange,
+  NovoSimpleSortFilter,
+  NovoSimpleTableChange,
+  SimpleTableActionColumn,
+  SimpleTableActionColumnOption,
+  SimpleTableColumn,
+  SimpleTableColumnFilterConfig,
+  SimpleTableColumnFilterOption,
+  SimpleTablePaginationOptions,
+  SimpleTableSearchOptions,
+} from './elements/simple-table/interfaces';
 export { NovoSimpleTablePagination } from './elements/simple-table/pagination';
 export { NovoSimpleHeaderRow, NovoSimpleHeaderRowDef, NovoSimpleRow, NovoSimpleRowDef } from './elements/simple-table/row';
 export { NovoSimpleTableModule } from './elements/simple-table/simple-table.module';
 export { NovoSelection, NovoSortFilter } from './elements/simple-table/sort';
 export { NovoActivityTableState } from './elements/simple-table/state';
-export { NovoActivityTable, NovoActivityTableActions, NovoActivityTableCustomFilter, NovoActivityTableCustomHeader, NovoActivityTableEmptyMessage, NovoActivityTableNoResultsMessage, NovoTable } from './elements/simple-table/table';
-export { ActivityTableDataSource, ActivityTableService, RemoteActivityTableService, StaticActivityTableService } from './elements/simple-table/table-source';
+export {
+  NovoActivityTable,
+  NovoActivityTableActions,
+  NovoActivityTableCustomFilter,
+  NovoActivityTableCustomHeader,
+  NovoActivityTableEmptyMessage,
+  NovoActivityTableNoResultsMessage,
+  NovoTable,
+} from './elements/simple-table/table';
+export {
+  ActivityTableDataSource,
+  ActivityTableService,
+  RemoteActivityTableService,
+  StaticActivityTableService,
+} from './elements/simple-table/table-source';
 export { NovoSliderElement } from './elements/slider/Slider';
 export { NovoSliderModule } from './elements/slider/Slider.module';
 export { NovoStepHeader } from './elements/stepper/step-header.component';
@@ -157,7 +235,15 @@ export { NovoHorizontalStepper, NovoStep, NovoStepper, NovoVerticalStepper } fro
 export { NovoStepperModule } from './elements/stepper/stepper.module';
 export { NovoSwitchElement } from './elements/switch/Switch';
 export { NovoSwitchModule } from './elements/switch/Switch.module';
-export { ChildTab, NovoTabbedGroupPickerElement, ParentTab, QuickSelectConfig, TabbedGroupPickerButtonConfig, TabbedGroupPickerQuickSelect, TabbedGroupPickerTab } from './elements/tabbed-group-picker/TabbedGroupPicker';
+export {
+  ChildTab,
+  NovoTabbedGroupPickerElement,
+  ParentTab,
+  QuickSelectConfig,
+  TabbedGroupPickerButtonConfig,
+  TabbedGroupPickerQuickSelect,
+  TabbedGroupPickerTab,
+} from './elements/tabbed-group-picker/TabbedGroupPicker';
 export { NovoTabbedGroupPickerModule } from './elements/tabbed-group-picker/TabbedGroupPicker.module';
 export { BaseRenderer } from './elements/table/extras/base-renderer/BaseRenderer';
 export { DateCell } from './elements/table/extras/date-cell/DateCell';
@@ -176,7 +262,15 @@ export { ThOrderable } from './elements/table/extras/th-orderable/ThOrderable';
 export { ThSortable } from './elements/table/extras/th-sortable/ThSortable';
 export { NovoTableConfig, NovoTableElement, NovoTableMode } from './elements/table/Table';
 export { NovoTableModule } from './elements/table/Table.module';
-export { NovoNavContentElement, NovoNavElement, NovoNavHeaderElement, NovoNavOutletElement, NovoTabButtonElement, NovoTabElement, NovoTabLinkElement } from './elements/tabs/Tabs';
+export {
+  NovoNavContentElement,
+  NovoNavElement,
+  NovoNavHeaderElement,
+  NovoNavOutletElement,
+  NovoTabButtonElement,
+  NovoTabElement,
+  NovoTabLinkElement,
+} from './elements/tabs/Tabs';
 export { NovoTabModule } from './elements/tabs/Tabs.module';
 export { NovoTilesElement } from './elements/tiles/Tiles';
 export { NovoTilesModule } from './elements/tiles/Tiles.module';
@@ -207,19 +301,51 @@ export { Collection } from './services/data-provider/Collection';
 export { CollectionEvent } from './services/data-provider/CollectionEvent';
 export { PagedArrayCollection } from './services/data-provider/PagedArrayCollection';
 export { BrowserGlobalRef, GlobalRef } from './services/global/global.service';
-export { NovoLabelService } from './services/novo-label-service';
+export { NovoLabelService, BigDecimalFormatOptions } from './services/novo-label-service';
 export { OptionsService } from './services/options/OptionsService';
 export { Security } from './services/security/Security';
 export { LocalStorageService } from './services/storage/storage.service';
 export { NovoTemplateService } from './services/template/NovoTemplateService';
-export { AppBridge, AppBridgeHandler, AppBridgeService, DevAppBridge, DevAppBridgeService, IAppBridgeOpenEvent } from './utils/app-bridge/AppBridge';
-export { CalendarEvent, CalendarEventResponse, CalendarEventTimesChangedEvent, DayView, DayViewEvent, DayViewHour, DayViewHourSegment, EventAction, EventColor, GetDayViewArgs, GetEventsInPeriodArgs, IsEventInPeriodArgs, MonthView, MonthViewDay, WeekDay, WeekViewEvent, WeekViewEventRow } from './utils/calendar-utils/CalendarUtils';
+export {
+  AppBridge,
+  AppBridgeHandler,
+  AppBridgeService,
+  DevAppBridge,
+  DevAppBridgeService,
+  IAppBridgeOpenEvent,
+} from './utils/app-bridge/AppBridge';
+export {
+  CalendarEvent,
+  CalendarEventResponse,
+  CalendarEventTimesChangedEvent,
+  DayView,
+  DayViewEvent,
+  DayViewHour,
+  DayViewHourSegment,
+  EventAction,
+  EventColor,
+  GetDayViewArgs,
+  GetEventsInPeriodArgs,
+  IsEventInPeriodArgs,
+  MonthView,
+  MonthViewDay,
+  WeekDay,
+  WeekViewEvent,
+  WeekViewEventRow,
+} from './utils/calendar-utils/CalendarUtils';
 export { ComponentUtils } from './utils/component-utils/ComponentUtils';
-export { COUNTRIES, findByCountryCode, findByCountryId, findByCountryName, getCountries, getStateObjects, getStates } from './utils/countries/Countries';
+export {
+  COUNTRIES,
+  findByCountryCode,
+  findByCountryId,
+  findByCountryName,
+  getCountries,
+  getStateObjects,
+  getStates,
+} from './utils/countries/Countries';
 export { Deferred } from './utils/deferred/Deferred';
 export { FormUtils } from './utils/form-utils/FormUtils';
 export { Helpers } from './utils/Helpers';
 export { KeyCodes } from './utils/key-codes/KeyCodes';
 export { notify } from './utils/notifier/notifier.util';
 export { OutsideClick } from './utils/outside-click/OutsideClick';
-

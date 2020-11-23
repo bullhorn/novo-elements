@@ -1,11 +1,16 @@
 // NG2
-import { Injectable, Inject, Optional, LOCALE_ID } from '@angular/core';
+import { Inject, Injectable, LOCALE_ID, Optional } from '@angular/core';
+
 //  import DateTimeFormatPart = Intl.DateTimeFormatPart;
 
 interface TimeFormatParts {
   hour: string;
   minute: string;
   dayPeriod?: string;
+}
+
+export interface BigDecimalFormatOptions extends Intl.NumberFormatOptions {
+  useAccountingFormat?: boolean; // Render negative numbers using parens. True: "(3.14)", False: "-3.14"
 }
 
 @Injectable()
@@ -108,7 +113,7 @@ export class NovoLabelService {
     @Optional()
     @Inject(LOCALE_ID)
     public userLocale = 'en-US',
-  ) { }
+  ) {}
 
   maxlengthMetWithField(field: string, maxlength: number): string {
     return `Sorry, you have reached the maximum character count of ${maxlength} for ${field}.`;
@@ -158,9 +163,9 @@ export class NovoLabelService {
     return new Intl.DateTimeFormat(this.userLocale, format).format(date);
   }
 
-  formatToTimeOnly(param) { }
+  formatToTimeOnly(param) {}
 
-  formatToDateOnly(param) { }
+  formatToDateOnly(param) {}
 
   formatTimeWithFormat(value: any, format: Intl.DateTimeFormatOptions): string {
     const date = value instanceof Date ? value : new Date(value);
@@ -238,21 +243,40 @@ export class NovoLabelService {
     return new Intl.NumberFormat(this.userLocale, options).format(value);
   }
 
-  formatBigDecimal(value: number): string {
-    let valueAsString = value ? value.toString() : '0';
-    // truncate at two decimals (do not round)
-    const decimalIndex = valueAsString.indexOf('.');
-    if (decimalIndex > -1 && decimalIndex + 3 < valueAsString.length) {
-      valueAsString = valueAsString.substring(0, valueAsString.indexOf('.') + 3);
-    }
-    // convert back to number
-    const truncatedValue = Number(valueAsString);
-    const options = { style: 'decimal', minimumFractionDigits: 2, maximumFractionDigits: 2 };
+  /**
+   * Extends the Intl.numberFormat capability with two extra features:
+   *  - Does NOT round values, but instead truncates to maximumFractionDigits
+   *  - By default uses accounting format for negative numbers: (3.14) instead of -3.14.
+   *
+   * @param value           The number value to convert to string
+   * @param overrideOptions Allows for overriding options used and passed to Intl.NumberFormat()
+   */
+  formatBigDecimal(value: number, overrideOptions?: BigDecimalFormatOptions): string {
+    const defaultOptions: BigDecimalFormatOptions = {
+      style: 'decimal',
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+      useAccountingFormat: true,
+    };
+    const options: BigDecimalFormatOptions = Object.assign(defaultOptions, overrideOptions);
+    const truncatedValue = this.truncateToPrecision(value, options.maximumFractionDigits);
     let _value = new Intl.NumberFormat(this.userLocale, options).format(truncatedValue);
     if (value < 0) {
-      _value = `(${_value.slice(1)})`;
+      _value = options.useAccountingFormat ? `(${_value.slice(1)})` : `-${_value.slice(1)}`;
     }
     return _value;
+  }
+
+  /**
+   * Performs a string-based truncating of a number with no rounding
+   */
+  truncateToPrecision(value: number, precision: number) {
+    let valueAsString = value ? value.toString() : '0';
+    const decimalIndex = valueAsString.indexOf('.');
+    if (decimalIndex > -1 && decimalIndex + precision + 1 < valueAsString.length) {
+      valueAsString = valueAsString.substring(0, valueAsString.indexOf('.') + precision + 1);
+    }
+    return Number(valueAsString);
   }
 
   formatNumber(value, options?: Intl.NumberFormatOptions) {
