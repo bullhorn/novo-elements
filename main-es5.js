@@ -3649,19 +3649,19 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
     __webpack_require__.d(__webpack_exports__, "ɵe", function () {
-      return DateFormatService;
-    });
-    /* harmony export (binding) */
-
-
-    __webpack_require__.d(__webpack_exports__, "ɵf", function () {
       return NovoDataTableCellHeader;
     });
     /* harmony export (binding) */
 
 
-    __webpack_require__.d(__webpack_exports__, "ɵg", function () {
+    __webpack_require__.d(__webpack_exports__, "ɵf", function () {
       return NovoDataTableSortFilter;
+    });
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "ɵg", function () {
+      return DateFormatService;
     });
     /* harmony export (binding) */
 
@@ -16532,908 +16532,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     if (false) {}
     /**
      * @fileoverview added by tsickle
-     * Generated from: elements/data-table/data-table.component.ts
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-
-    /**
-     * @template T
-     */
-
-
-    var NovoDataTable = /*#__PURE__*/function () {
-      /**
-       * @param {?} labels
-       * @param {?} ref
-       * @param {?} state
-       */
-      function NovoDataTable(labels, ref, state) {
-        var _this51 = this;
-
-        _classCallCheck(this, NovoDataTable);
-
-        this.labels = labels;
-        this.ref = ref;
-        this.state = state;
-        this.globalSearchHiddenClassToggle = false;
-        this.resized = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
-        this.name = 'novo-data-table';
-        this.allowMultipleFilters = false;
-        this.rowIdentifier = 'id';
-        this.activeRowIdentifier = ''; // prettier-ignore
-
-        this.trackByFn =
-        /**
-        * @param {?} index
-        * @param {?} item
-        * @return {?}
-        */
-        function (index, item) {
-          return item.id;
-        };
-
-        this.templates = {};
-        this.fixedHeader = false;
-        this._hideGlobalSearch = true;
-        this.preferencesChanged = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
-        this.loading = true;
-        this.columnToTemplate = {};
-        this.columnsLoaded = false;
-        this.selection = new Set();
-        this.scrollLeft = 0;
-        this.expandable = false;
-        this.initialized = false;
-        this.scrollListenerHandler = this.scrollListener.bind(this);
-        this.sortFilterSubscription = this.state.sortFilterSource.subscribe(
-        /**
-        * @param {?} event
-        * @return {?}
-        */
-        function (event) {
-          if (_this51.name !== 'novo-data-table') {
-            _this51.preferencesChanged.emit({
-              name: _this51.name,
-              sort: event.sort,
-              filter: event.filter,
-              globalSearch: event.globalSearch
-            });
-          } else {
-            notify('Must have [name] set on data-table to use preferences!');
-          }
-        });
-        this.paginationSubscription = this.state.paginationSource.subscribe(
-        /**
-        * @param {?} event
-        * @return {?}
-        */
-        function (event) {
-          if (_this51.name !== 'novo-data-table') {
-            if (event.isPageSizeChange) {
-              _this51.preferencesChanged.emit({
-                name: _this51.name,
-                pageSize: event.pageSize
-              });
-            }
-          } else {
-            notify('Must have [name] set on data-table to use preferences!');
-          }
-        });
-        this.resetSubscription = this.state.resetSource.subscribe(
-        /**
-        * @return {?}
-        */
-        function () {
-          setTimeout(
-          /**
-          * @return {?}
-          */
-          function () {
-            _this51.ref.detectChanges();
-          }, 300);
-        });
-      }
-      /**
-       * @param {?} displayedColumns
-       * @return {?}
-       */
-
-
-      _createClass(NovoDataTable, [{
-        key: "ngOnDestroy",
-
-        /**
-         * @return {?}
-         */
-        value: function ngOnDestroy() {
-          if (this.outsideFilterSubscription) {
-            this.outsideFilterSubscription.unsubscribe();
-          }
-
-          if (this.novoDataTableContainer) {
-            /** @type {?} */
-            this.novoDataTableContainer.nativeElement.removeEventListener('scroll', this.scrollListenerHandler);
-          }
-
-          if (this.refreshSubscription) {
-            this.refreshSubscription.unsubscribe();
-          }
-
-          if (this.resetSubscription) {
-            this.resetSubscription.unsubscribe();
-          }
-
-          if (this.sortFilterSubscription) {
-            this.sortFilterSubscription.unsubscribe();
-          }
-        }
-        /**
-         * @return {?}
-         */
-
-      }, {
-        key: "ngAfterContentInit",
-        value: function ngAfterContentInit() {
-          var _this52 = this;
-
-          if (this.displayedColumns && this.displayedColumns.length) {
-            this.expandable = this.displayedColumns.includes('expand');
-          } // Default templates defined here
-
-
-          this.defaultTemplates.forEach(
-          /**
-          * @param {?} item
-          * @return {?}
-          */
-          function (item) {
-            // Only override if it doesn't already exist
-            if (!_this52.templates[item.getType()]) {
-              _this52.templates[item.getType()] = item.template;
-            }
-          }); // Custom templates passed in
-
-          this.customTemplates.forEach(
-          /**
-          * @param {?} item
-          * @return {?}
-          */
-          function (item) {
-            // Override anything that is custom and in HTML
-            _this52.templates[item.getType()] = item.template;
-          }); // Load columns
-
-          this.configureColumns(); // State
-
-          if (this.paginationOptions && !this.paginationOptions.page) {
-            this.paginationOptions.page = 0;
-          }
-
-          if (this.paginationOptions && !this.paginationOptions.pageSize) {
-            this.paginationOptions.pageSize = 50;
-          }
-
-          if (this.paginationOptions && !this.paginationOptions.pageSizeOptions) {
-            this.paginationOptions.pageSizeOptions = [10, 25, 50, 100];
-          }
-
-          this.state.page = this.paginationOptions ? this.paginationOptions.page : undefined;
-          this.state.pageSize = this.paginationOptions ? this.paginationOptions.pageSize : undefined; // Scrolling inside table
-
-          /** @type {?} */
-          this.novoDataTableContainer.nativeElement.addEventListener('scroll', this.scrollListenerHandler);
-          this.initialized = true;
-          this.ref.markForCheck();
-        }
-        /**
-         * @param {?} term
-         * @return {?}
-         */
-
-      }, {
-        key: "onSearchChange",
-        value: function onSearchChange(term) {
-          this.state.globalSearch = term;
-          this.state.reset(false, true);
-          this.state.updates.next({
-            globalSearch: term,
-            filter: this.state.filter,
-            sort: this.state.sort
-          });
-        }
-        /**
-         * @param {?} index
-         * @param {?} item
-         * @return {?}
-         */
-
-      }, {
-        key: "trackColumnsBy",
-        value: function trackColumnsBy(index, item) {
-          return item.id;
-        }
-        /**
-         * @param {?} check
-         * @param {?} row
-         * @return {?}
-         */
-
-      }, {
-        key: "isDisabled",
-        value: function isDisabled(check, row) {
-          if (check.disabled === true) {
-            return true;
-          }
-
-          if (check.disabledFunc) {
-            return check.disabledFunc(row);
-          }
-
-          return false;
-        }
-        /**
-         * @param {?} row
-         * @return {?}
-         */
-
-      }, {
-        key: "isExpanded",
-        value: function isExpanded(row) {
-          if (!row) {
-            return false;
-          }
-
-          return this.state.expandedRows.has("".concat(row[this.rowIdentifier]));
-        }
-        /**
-         * @param {?} row
-         * @return {?}
-         */
-
-      }, {
-        key: "expandRow",
-        value: function expandRow(row) {
-          /** @type {?} */
-          var expanded = this.isExpanded(row);
-
-          if (expanded) {
-            this.state.expandedRows["delete"]("".concat(row[this.rowIdentifier]));
-          } else {
-            this.state.expandedRows.add("".concat(row[this.rowIdentifier]));
-          }
-
-          this.state.onExpandChange(
-          /** @type {?} */
-
-          /** @type {?} */
-          row.id);
-        }
-        /**
-         * @param {?} expand
-         * @return {?}
-         */
-
-      }, {
-        key: "expandRows",
-        value: function expandRows(expand) {
-          var _this53 = this;
-
-          (this.dataSource.data || []).forEach(
-          /**
-          * @param {?} row
-          * @return {?}
-          */
-          function (row) {
-            if (!expand) {
-              _this53.state.expandedRows["delete"]("".concat(row[_this53.rowIdentifier]));
-            } else {
-              _this53.state.expandedRows.add("".concat(row[_this53.rowIdentifier]));
-            }
-          });
-          this.state.onExpandChange();
-        }
-        /**
-         * @return {?}
-         */
-
-      }, {
-        key: "allCurrentRowsExpanded",
-        value: function allCurrentRowsExpanded() {
-          for (var i = 0; i < (this.dataSource.data || []).length; i++) {
-            if (!this.isExpanded((this.dataSource.data || [])[i])) {
-              return false;
-            }
-          }
-
-          return true;
-        }
-        /**
-         * @param {?} row
-         * @return {?}
-         */
-
-      }, {
-        key: "isSelected",
-        value: function isSelected(row) {
-          if (!row) {
-            return false;
-          }
-
-          return this.state.selectedRows.has("".concat(row[this.rowIdentifier]));
-        }
-        /**
-         * @param {?} row
-         * @return {?}
-         */
-
-      }, {
-        key: "selectRow",
-        value: function selectRow(row) {
-          /** @type {?} */
-          var selected = this.isSelected(row);
-
-          if (selected) {
-            this.state.selectedRows["delete"]("".concat(row[this.rowIdentifier]));
-          } else {
-            this.state.selectedRows.set("".concat(row[this.rowIdentifier]), row);
-          }
-
-          this.state.onSelectionChange();
-        }
-        /**
-         * @param {?} selected
-         * @return {?}
-         */
-
-      }, {
-        key: "selectRows",
-        value: function selectRows(selected) {
-          var _this54 = this;
-
-          (this.dataSource.data || []).forEach(
-          /**
-          * @param {?} row
-          * @return {?}
-          */
-          function (row) {
-            if (!selected) {
-              _this54.state.selectedRows["delete"]("".concat(row[_this54.rowIdentifier]));
-            } else {
-              _this54.state.selectedRows.set("".concat(row[_this54.rowIdentifier]), row);
-            }
-          });
-          this.state.onSelectionChange();
-        }
-        /**
-         * @return {?}
-         */
-
-      }, {
-        key: "allCurrentRowsSelected",
-        value: function allCurrentRowsSelected() {
-          for (var i = 0; i < (this.dataSource.data || []).length; i++) {
-            if (!this.isSelected((this.dataSource.data || [])[i])) {
-              return false;
-            }
-          }
-
-          return true;
-        }
-        /**
-         * @private
-         * @return {?}
-         */
-
-      }, {
-        key: "configureLastDisplayedColumn",
-        value: function configureLastDisplayedColumn() {
-          var _this55 = this;
-
-          if (this.columns && this.displayedColumns && 0 !== this.columns.length && 0 !== this.displayedColumns.length) {
-            this.columns.forEach(
-            /**
-            * @param {?} column
-            * @return {?}
-            */
-            function (column) {
-              if (column.initialResizable) {
-                column.resizable = column.initialResizable.resizable;
-                column.width = column.initialResizable.width;
-                column.initialResizable = undefined;
-              }
-            });
-            /** @type {?} */
-
-            var resizableColumns = this.displayedColumns.filter(
-            /**
-            * @param {?} name
-            * @return {?}
-            */
-            function (name) {
-              return _this55.columns.findIndex(
-              /**
-              * @param {?} column
-              * @return {?}
-              */
-              function (column) {
-                return column.resizable && column.id === name;
-              }) !== -1;
-            });
-
-            if (resizableColumns && resizableColumns.length > 0) {
-              /** @type {?} */
-              var lastResizableColumn = this.columns.find(
-              /**
-              * @param {?} column
-              * @return {?}
-              */
-              function (column) {
-                return column.id === resizableColumns[resizableColumns.length - 1];
-              });
-              lastResizableColumn.initialResizable = {
-                resizable: lastResizableColumn.resizable,
-                width: lastResizableColumn.width
-              };
-              lastResizableColumn.width = undefined;
-              lastResizableColumn.resizable = false;
-            }
-          }
-        }
-        /**
-         * @private
-         * @return {?}
-         */
-
-      }, {
-        key: "configureColumns",
-        value: function configureColumns() {
-          var _this56 = this;
-
-          if (this.columns && this.columns.length !== 0 && Object.keys(this.templates).length !== 0) {
-            // Figure the column templates
-            this.columns.forEach(
-            /**
-            * @param {?} column
-            * @return {?}
-            */
-            function (column) {
-              // Figure the template
-
-              /** @type {?} */
-              var templateName;
-
-              if (column.template) {
-                // Pass it in as template
-                templateName = column.template;
-              } else if (!!_this56.templates[column.id]) {
-                // Custom template for the column id
-                templateName = column.id;
-              } else {
-                // Default to the defaulCellTemplate
-                if (column.type === 'action') {
-                  if (column.action && column.action.options) {
-                    if (!column.action.icon) {
-                      column.action.icon = 'collapse';
-                    }
-
-                    templateName = 'dropdownCellTemplate';
-                  } else {
-                    templateName = 'buttonCellTemplate';
-                  }
-                } else {
-                  if (column.type === 'link:tel' || column.type === 'link:mailto') {
-                    templateName = "".concat(column.type.split(':')[1], "CellTemplate");
-                  } else {
-                    templateName = "".concat(column.type, "CellTemplate");
-                  }
-                }
-              }
-
-              _this56.columnToTemplate[column.id] = _this56.templates[templateName];
-            });
-            this.configureLastDisplayedColumn();
-            this.columnsLoaded = true;
-          }
-        }
-        /**
-         * @private
-         * @return {?}
-         */
-
-      }, {
-        key: "scrollListener",
-        value: function scrollListener() {
-          /** @type {?} */
-          var target =
-          /** @type {?} */
-          this.novoDataTableContainer.nativeElement;
-          /** @type {?} */
-
-          var left = target.scrollLeft;
-
-          if (left !== this.scrollLeft) {
-            this.scrollLeft = target.scrollLeft;
-          }
-
-          this.ref.markForCheck();
-        }
-      }, {
-        key: "displayedColumns",
-        set: function set(displayedColumns) {
-          var _this57 = this;
-
-          if (this.displayedColumns && this.displayedColumns.length !== 0) {
-            if (this.name !== 'novo-data-table') {
-              this.preferencesChanged.emit({
-                name: this.name,
-                displayedColumns: displayedColumns
-              });
-            } else {
-              notify('Must have [name] set on data-table to use preferences!');
-            }
-          }
-
-          this._disabledColumns = displayedColumns;
-          this.configureLastDisplayedColumn();
-
-          if (this.initialized) {
-            setTimeout(
-            /**
-            * @return {?}
-            */
-            function () {
-              _this57.scrollListener();
-            });
-          }
-        }
-        /**
-         * @return {?}
-         */
-        ,
-        get: function get() {
-          return this._disabledColumns;
-        }
-        /**
-         * @param {?} service
-         * @return {?}
-         */
-
-      }, {
-        key: "dataTableService",
-        set: function set(service) {
-          this.loading = false;
-
-          if (!service) {
-            service = new StaticDataTableService([]);
-          }
-
-          this.dataSource = new DataTableSource(service, this.state, this.ref);
-          this.ref.detectChanges();
-        }
-        /**
-         * @param {?} rows
-         * @return {?}
-         */
-
-      }, {
-        key: "rows",
-        set: function set(rows) {
-          this.loading = false;
-          /** @type {?} */
-
-          var service = new StaticDataTableService(rows);
-          this.dataSource = new DataTableSource(service, this.state, this.ref);
-          this.ref.detectChanges();
-        }
-        /**
-         * @param {?} outsideFilter
-         * @return {?}
-         */
-
-      }, {
-        key: "outsideFilter",
-        set: function set(outsideFilter) {
-          var _this58 = this;
-
-          // Unsubscribe
-          if (this.outsideFilterSubscription) {
-            this.outsideFilterSubscription.unsubscribe();
-          }
-
-          if (outsideFilter) {
-            // Re-subscribe
-            this.outsideFilterSubscription = outsideFilter.subscribe(
-            /**
-            * @param {?} filter
-            * @return {?}
-            */
-            function (filter) {
-              _this58.state.outsideFilter = filter;
-
-              _this58.state.updates.next({
-                globalSearch: _this58.state.globalSearch,
-                filter: _this58.state.filter,
-                sort: _this58.state.sort
-              });
-
-              _this58.ref.markForCheck();
-            });
-          }
-        }
-        /**
-         * @param {?} refreshSubject
-         * @return {?}
-         */
-
-      }, {
-        key: "refreshSubject",
-        set: function set(refreshSubject) {
-          var _this59 = this;
-
-          // Unsubscribe
-          if (this.refreshSubscription) {
-            this.refreshSubscription.unsubscribe();
-          }
-
-          if (refreshSubject) {
-            // Re-subscribe
-            this.refreshSubscription = refreshSubject.subscribe(
-            /**
-            * @param {?} filter
-            * @return {?}
-            */
-            function (filter) {
-              _this59.state.isForceRefresh = true;
-
-              _this59.state.updates.next({
-                globalSearch: _this59.state.globalSearch,
-                filter: _this59.state.filter,
-                sort: _this59.state.sort
-              });
-
-              _this59.ref.markForCheck();
-            });
-          }
-        }
-        /**
-         * @param {?} columns
-         * @return {?}
-         */
-
-      }, {
-        key: "columns",
-        set: function set(columns) {
-          this._columns = columns;
-          this.configureColumns();
-        }
-        /**
-         * @return {?}
-         */
-        ,
-        get: function get() {
-          return this._columns;
-        }
-        /**
-         * @param {?} v
-         * @return {?}
-         */
-
-      }, {
-        key: "customFilter",
-        set: function set(v) {
-          this._customFilter = Object(_angular_cdk_coercion__WEBPACK_IMPORTED_MODULE_12__["coerceBooleanProperty"])(v);
-        }
-        /**
-         * @return {?}
-         */
-        ,
-        get: function get() {
-          return this._customFilter;
-        }
-        /**
-         * @param {?} v
-         * @return {?}
-         */
-
-      }, {
-        key: "hasExandedRows",
-        set: function set(v) {
-          this._hasExandedRows = Object(_angular_cdk_coercion__WEBPACK_IMPORTED_MODULE_12__["coerceBooleanProperty"])(v);
-        }
-        /**
-         * @return {?}
-         */
-        ,
-        get: function get() {
-          return this._hasExandedRows;
-        }
-        /**
-         * @param {?} v
-         * @return {?}
-         */
-
-      }, {
-        key: "forceShowHeader",
-        set: function set(v) {
-          this._forceShowHeader = Object(_angular_cdk_coercion__WEBPACK_IMPORTED_MODULE_12__["coerceBooleanProperty"])(v);
-        }
-        /**
-         * @return {?}
-         */
-        ,
-        get: function get() {
-          return this._forceShowHeader;
-        }
-        /**
-         * @param {?} v
-         * @return {?}
-         */
-
-      }, {
-        key: "hideGlobalSearch",
-        set: function set(v) {
-          this._hideGlobalSearch = Object(_angular_cdk_coercion__WEBPACK_IMPORTED_MODULE_12__["coerceBooleanProperty"])(v);
-          this.globalSearchHiddenClassToggle = this._hideGlobalSearch;
-        }
-        /**
-         * @return {?}
-         */
-        ,
-        get: function get() {
-          return this._hideGlobalSearch;
-        }
-        /**
-         * @return {?}
-         */
-
-      }, {
-        key: "empty",
-        get: function get() {
-          return this.dataSource && this.dataSource.totallyEmpty;
-        }
-        /**
-         * @return {?}
-         */
-
-      }, {
-        key: "loadingClass",
-        get: function get() {
-          return this.loading || this.dataSource && this.dataSource.loading;
-        }
-      }]);
-
-      return NovoDataTable;
-    }();
-
-    NovoDataTable.decorators = [{
-      type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
-      args: [{
-        selector: 'novo-data-table',
-        animations: [Object(_angular_animations__WEBPACK_IMPORTED_MODULE_9__["trigger"])('expand', [Object(_angular_animations__WEBPACK_IMPORTED_MODULE_9__["state"])('void', Object(_angular_animations__WEBPACK_IMPORTED_MODULE_9__["style"])({
-          height: '0px',
-          minHeight: '0',
-          visibility: 'hidden'
-        })), Object(_angular_animations__WEBPACK_IMPORTED_MODULE_9__["state"])('*', Object(_angular_animations__WEBPACK_IMPORTED_MODULE_9__["style"])({
-          height: '*',
-          visibility: 'visible'
-        })), Object(_angular_animations__WEBPACK_IMPORTED_MODULE_9__["transition"])('void <=> *', Object(_angular_animations__WEBPACK_IMPORTED_MODULE_9__["animate"])('70ms cubic-bezier(0.4, 0.0, 0.2, 1)'))])],
-        template: "\n    <header\n      *ngIf=\"(!(dataSource?.totallyEmpty && !state.userFiltered) && !loading) || forceShowHeader\"\n      [class.empty]=\"hideGlobalSearch && !paginationOptions && !templates['customActions']\"\n    >\n      <ng-container *ngTemplateOutlet=\"templates['customHeader']\"></ng-container>\n      <novo-search\n        alwaysOpen=\"true\"\n        (searchChanged)=\"onSearchChange($event)\"\n        [(ngModel)]=\"state.globalSearch\"\n        *ngIf=\"!hideGlobalSearch\"\n        [placeholder]=\"searchOptions?.placeholder\"\n        [hint]=\"searchOptions?.tooltip\"\n      >\n      </novo-search>\n      <novo-data-table-pagination\n        *ngIf=\"paginationOptions\"\n        [theme]=\"paginationOptions.theme\"\n        [length]=\"dataSource?.currentTotal\"\n        [page]=\"paginationOptions.page\"\n        [pageSize]=\"paginationOptions.pageSize\"\n        [pageSizeOptions]=\"paginationOptions.pageSizeOptions\"\n        [dataFeatureId]=\"paginatorDataFeatureId\"\n      >\n      </novo-data-table-pagination>\n      <div class=\"novo-data-table-actions\" *ngIf=\"templates['customActions']\">\n        <ng-container *ngTemplateOutlet=\"templates['customActions']\"></ng-container>\n      </div>\n    </header>\n    <div class=\"novo-data-table-loading-mask\" *ngIf=\"dataSource?.loading || loading\" data-automation-id=\"novo-data-table-loading\">\n      <novo-loading></novo-loading>\n    </div>\n    <div class=\"novo-data-table-outside-container\" [ngClass]=\"{ 'novo-data-table-outside-container-fixed': fixedHeader }\">\n      <div class=\"novo-data-table-custom-filter\" *ngIf=\"customFilter\">\n        <ng-container *ngTemplateOutlet=\"templates['customFilter']\"></ng-container>\n      </div>\n      <div\n        #novoDataTableContainer\n        class=\"novo-data-table-container\"\n        [ngClass]=\"{ 'novo-data-table-container-fixed': fixedHeader }\"\n        [class.empty-user-filtered]=\"dataSource?.currentlyEmpty && state.userFiltered\"\n        [class.empty]=\"dataSource?.totallyEmpty && !dataSource?.loading && !loading && !state.userFiltered && !dataSource.pristine\"\n      >\n        <cdk-table\n          *ngIf=\"columns?.length > 0 && columnsLoaded && dataSource\"\n          [dataSource]=\"dataSource\"\n          [trackBy]=\"trackByFn\"\n          novoDataTableSortFilter\n          [class.expandable]=\"expandable\"\n          [class.empty]=\"dataSource?.currentlyEmpty && state.userFiltered\"\n          [hidden]=\"dataSource?.totallyEmpty && !state.userFiltered\"\n        >\n          <ng-container cdkColumnDef=\"selection\">\n            <novo-data-table-checkbox-header-cell *cdkHeaderCellDef></novo-data-table-checkbox-header-cell>\n            <novo-data-table-checkbox-cell *cdkCellDef=\"let row; let i = index\" [row]=\"row\"></novo-data-table-checkbox-cell>\n          </ng-container>\n          <ng-container cdkColumnDef=\"expand\">\n            <novo-data-table-expand-header-cell *cdkHeaderCellDef></novo-data-table-expand-header-cell>\n            <novo-data-table-expand-cell *cdkCellDef=\"let row; let i = index\" [row]=\"row\"></novo-data-table-expand-cell>\n          </ng-container>\n          <ng-container *ngFor=\"let column of columns; trackBy: trackColumnsBy\" [cdkColumnDef]=\"column.id\">\n            <novo-data-table-header-cell\n              *cdkHeaderCellDef\n              [column]=\"column\"\n              [filterTemplate]=\"templates['column-filter-' + column.id]\"\n              [novo-data-table-cell-config]=\"column\"\n              [resized]=\"resized\"\n              [defaultSort]=\"defaultSort\"\n              [allowMultipleFilters]=\"allowMultipleFilters\"\n              [class.empty]=\"column?.type === 'action' && !column?.label\"\n              [class.button-header-cell]=\"column?.type === 'expand' || (column?.type === 'action' && !column?.action?.options)\"\n              [class.dropdown-header-cell]=\"column?.type === 'action' && column?.action?.options\"\n              [class.fixed-header]=\"fixedHeader\"\n            ></novo-data-table-header-cell>\n            <novo-data-table-cell\n              *cdkCellDef=\"let row\"\n              [resized]=\"resized\"\n              [column]=\"column\"\n              [row]=\"row\"\n              [template]=\"columnToTemplate[column.id]\"\n              [class.empty]=\"column?.type === 'action' && !column?.label\"\n              [class.button-cell]=\"column?.type === 'expand' || (column?.type === 'action' && !column?.action?.options)\"\n              [class.dropdown-cell]=\"column?.type === 'action' && column?.action?.options\"\n            ></novo-data-table-cell>\n          </ng-container>\n          <novo-data-table-header-row\n            *cdkHeaderRowDef=\"displayedColumns\"\n            [fixedHeader]=\"fixedHeader\"\n            data-automation-id=\"novo-data-table-header-row\"\n          ></novo-data-table-header-row>\n          <novo-data-table-row\n            *cdkRowDef=\"let row; columns: displayedColumns\"\n            [ngClass]=\"{ active: row[rowIdentifier] == activeRowIdentifier }\"\n            [novoDataTableExpand]=\"detailRowTemplate\"\n            [row]=\"row\"\n            [id]=\"name + '-' + row[rowIdentifier]\"\n            [dataAutomationId]=\"row[rowIdentifier]\"\n          ></novo-data-table-row>\n        </cdk-table>\n        <div class=\"novo-data-table-footer\" *ngIf=\"templates['footer']\">\n          <ng-container *ngTemplateOutlet=\"templates['footer']; context: { $implicit: columns, data: dataSource.data }\"></ng-container>\n        </div>\n        <div\n          class=\"novo-data-table-no-results-container\"\n          [style.left.px]=\"scrollLeft\"\n          *ngIf=\"dataSource?.currentlyEmpty && state.userFiltered && !dataSource?.loading && !loading && !dataSource.pristine\"\n        >\n          <div class=\"novo-data-table-empty-message\">\n            <ng-container *ngTemplateOutlet=\"templates['noResultsMessage'] || templates['defaultNoResultsMessage']\"></ng-container>\n          </div>\n        </div>\n      </div>\n      <div\n        class=\"novo-data-table-empty-container\"\n        *ngIf=\"dataSource?.totallyEmpty && !dataSource?.loading && !loading && !state.userFiltered && !dataSource.pristine\"\n      >\n        <div class=\"novo-data-table-empty-message\">\n          <ng-container *ngTemplateOutlet=\"templates['emptyMessage'] || templates['defaultNoResultsMessage']\"></ng-container>\n        </div>\n      </div>\n    </div>\n    <!-- DEFAULT CELL TEMPLATE -->\n    <ng-template novoTemplate=\"textCellTemplate\" let-row let-col=\"col\">\n      <span [style.width.px]=\"col?.width\" [style.min-width.px]=\"col?.width\" [style.max-width.px]=\"col?.width\">{{\n        row[col.id] | dataTableInterpolate: col\n      }}</span>\n    </ng-template>\n    <ng-template novoTemplate=\"dateCellTemplate\" let-row let-col=\"col\">\n      <span>{{ row[col.id] | dataTableInterpolate: col | dataTableDateRenderer: col }}</span>\n    </ng-template>\n    <ng-template novoTemplate=\"datetimeCellTemplate\" let-row let-col=\"col\">\n      <span>{{ row[col.id] | dataTableInterpolate: col | dataTableDateTimeRenderer: col }}</span>\n    </ng-template>\n    <ng-template novoTemplate=\"timeCellTemplate\" let-row let-col=\"col\">\n      <span>{{ row[col.id] | dataTableInterpolate: col | dataTableTimeRenderer: col }}</span>\n    </ng-template>\n    <ng-template novoTemplate=\"currencyCellTemplate\" let-row let-col=\"col\">\n      <span>{{ row[col.id] | dataTableInterpolate: col | dataTableCurrencyRenderer: col }}</span>\n    </ng-template>\n    <ng-template novoTemplate=\"bigdecimalCellTemplate\" let-row let-col=\"col\">\n      <span>{{ row[col.id] | dataTableInterpolate: col | dataTableBigDecimalRenderer: col }}</span>\n    </ng-template>\n    <ng-template novoTemplate=\"numberCellTemplate\" let-row let-col=\"col\">\n      <span>{{ row[col.id] | dataTableInterpolate: col | dataTableNumberRenderer: col }}</span>\n    </ng-template>\n    <ng-template novoTemplate=\"percentCellTemplate\" let-row let-col=\"col\">\n      <span>{{ row[col.id] | dataTableInterpolate: col | dataTableNumberRenderer: col:true }}</span>\n    </ng-template>\n    <ng-template novoTemplate=\"linkCellTemplate\" let-row let-col=\"col\">\n      <a\n        [attr.data-feature-id]=\"col?.attributes?.dataFeatureId\"\n        (click)=\"col.handlers?.click({ originalEvent: $event, row: row })\"\n        [style.width.px]=\"col?.width\"\n        [style.min-width.px]=\"col?.width\"\n        [style.max-width.px]=\"col?.width\"\n        >{{ row[col.id] | dataTableInterpolate: col }}</a\n      >\n    </ng-template>\n    <ng-template novoTemplate=\"telCellTemplate\" let-row let-col=\"col\">\n      <a href=\"tel:{{ row[col.id] | dataTableInterpolate: col }}\" [target]=\"col?.attributes?.target\">{{\n        row[col.id] | dataTableInterpolate: col\n      }}</a>\n    </ng-template>\n    <ng-template novoTemplate=\"mailtoCellTemplate\" let-row let-col=\"col\">\n      <a href=\"mailto:{{ row[col.id] | dataTableInterpolate: col }}\" [target]=\"col?.attributes?.target\">{{\n        row[col.id] | dataTableInterpolate: col\n      }}</a>\n    </ng-template>\n    <ng-template novoTemplate=\"buttonCellTemplate\" let-row let-col=\"col\">\n      <p [tooltip]=\"col?.action?.tooltip\" tooltipPosition=\"right\" [attr.data-feature-id]=\"col?.attributes?.dataFeatureId\">\n        <i\n          class=\"bhi-{{ col?.action?.icon }} data-table-icon\"\n          (click)=\"col.handlers?.click({ originalEvent: $event, row: row })\"\n          [class.disabled]=\"isDisabled(col, row)\"\n        ></i>\n      </p>\n    </ng-template>\n    <ng-template novoTemplate=\"dropdownCellTemplate\" let-row let-col=\"col\">\n      <novo-dropdown parentScrollSelector=\".novo-data-table-container\" containerClass=\"novo-data-table-dropdown\">\n        <button type=\"button\" theme=\"dialogue\" [icon]=\"col.action.icon\" inverse>{{ col.label }}</button>\n        <list>\n          <item\n            *ngFor=\"let option of col?.action?.options\"\n            (action)=\"option.handlers.click({ originalEvent: $event?.originalEvent, row: row })\"\n            [disabled]=\"isDisabled(option, row)\"\n          >\n            <span [attr.data-automation-id]=\"option.label\">{{ option.label }}</span>\n          </item>\n        </list>\n      </novo-dropdown>\n    </ng-template>\n    <ng-template novoTemplate=\"defaultNoResultsMessage\">\n      <h4><i class=\"bhi-search-question\"></i> {{ labels.noMatchingRecordsMessage }}</h4>\n    </ng-template>\n    <ng-template novoTemplate=\"defaultEmptyMessage\">\n      <h4><i class=\"bhi-search-question\"></i> {{ labels.emptyTableMessage }}</h4>\n    </ng-template>\n    <ng-template novoTemplate=\"expandedRow\"> You did not provide an \"expandedRow\" template! </ng-template>\n    <ng-template #detailRowTemplate let-row>\n      <div class=\"novo-data-table-detail-row\" [@expand] style=\"overflow: hidden\">\n        <ng-container *ngTemplateOutlet=\"templates['expandedRow']; context: { $implicit: row }\"></ng-container>\n      </div>\n    </ng-template>\n    <!-- CUSTOM CELLS PASSED IN -->\n    <ng-content></ng-content>\n  ",
-        changeDetection: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ChangeDetectionStrategy"].OnPush,
-        providers: [DataTableState]
-      }]
-    }];
-    /** @nocollapse */
-
-    NovoDataTable.ctorParameters = function () {
-      return [{
-        type: NovoLabelService
-      }, {
-        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ChangeDetectorRef"]
-      }, {
-        type: DataTableState
-      }];
-    };
-
-    NovoDataTable.propDecorators = {
-      globalSearchHiddenClassToggle: [{
-        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["HostBinding"],
-        args: ['class.global-search-hidden']
-      }],
-      customTemplates: [{
-        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ContentChildren"],
-        args: [NovoTemplate]
-      }],
-      defaultTemplates: [{
-        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChildren"],
-        args: [NovoTemplate]
-      }],
-      novoDataTableContainer: [{
-        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"],
-        args: ['novoDataTableContainer', {
-          "static": false
-        }]
-      }],
-      resized: [{
-        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"]
-      }],
-      displayedColumns: [{
-        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
-      }],
-      paginationOptions: [{
-        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
-      }],
-      searchOptions: [{
-        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
-      }],
-      defaultSort: [{
-        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
-      }],
-      name: [{
-        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
-      }],
-      allowMultipleFilters: [{
-        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
-      }],
-      rowIdentifier: [{
-        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
-      }],
-      activeRowIdentifier: [{
-        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
-      }],
-      trackByFn: [{
-        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
-      }],
-      templates: [{
-        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
-      }],
-      fixedHeader: [{
-        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
-      }],
-      paginatorDataFeatureId: [{
-        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
-      }],
-      dataTableService: [{
-        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
-      }],
-      rows: [{
-        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
-      }],
-      outsideFilter: [{
-        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
-      }],
-      refreshSubject: [{
-        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
-      }],
-      columns: [{
-        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
-      }],
-      customFilter: [{
-        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
-      }],
-      hasExandedRows: [{
-        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
-      }],
-      forceShowHeader: [{
-        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
-      }],
-      hideGlobalSearch: [{
-        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
-      }],
-      preferencesChanged: [{
-        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"]
-      }],
-      empty: [{
-        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["HostBinding"],
-        args: ['class.empty']
-      }],
-      loadingClass: [{
-        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["HostBinding"],
-        args: ['class.loading']
-      }]
-    };
-
-    if (false) {}
-    /**
-     * @fileoverview added by tsickle
      * Generated from: elements/dropdown/Dropdown.ts
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
@@ -17566,7 +16664,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "onKeyDown",
         value: function onKeyDown(event) {
-          var _this60 = this;
+          var _this51 = this;
 
           if (this.panelOpen && event.keyCode === KeyCodes.ESC) {
             Helpers.swallowEvent(event); // active & esc hit -- close
@@ -17632,7 +16730,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             * @return {?}
             */
             function () {
-              _this60.filterTerm = '';
+              _this51.filterTerm = '';
             }, 2000);
             /** @type {?} */
 
@@ -17647,7 +16745,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             * @return {?}
             */
             function (value) {
-              return new RegExp("^".concat(_this60.filterTerm.toLowerCase())).test(value.trim().toLowerCase());
+              return new RegExp("^".concat(_this51.filterTerm.toLowerCase())).test(value.trim().toLowerCase());
             });
 
             if (index !== -1) {
@@ -17668,7 +16766,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             * @return {?}
             */
             function () {
-              _this60.filterTerm = '';
+              _this51.filterTerm = '';
             }, 2000);
             this.filterTerm = this.filterTerm.slice(0, -1);
           }
@@ -17890,7 +16988,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _createClass(NovoDropdownListElement, [{
         key: "ngAfterContentInit",
         value: function ngAfterContentInit() {
-          var _this61 = this;
+          var _this52 = this;
 
           this.dropdown.items = this.items;
           this.items.changes.subscribe(
@@ -17898,7 +16996,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function () {
-            _this61.dropdown.items = _this61.items;
+            _this52.dropdown.items = _this52.items;
           });
         }
       }]);
@@ -17943,9 +17041,2000 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     }];
     /**
      * @fileoverview added by tsickle
+     * Generated from: elements/data-table/sort-filter/sort-filter.directive.ts
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+
+    /**
+     * @template T
+     */
+
+    var NovoDataTableSortFilter = /*#__PURE__*/function () {
+      /**
+       * @param {?} state
+       */
+      function NovoDataTableSortFilter(state) {
+        _classCallCheck(this, NovoDataTableSortFilter);
+
+        this.state = state;
+      }
+      /**
+       * @param {?} id
+       * @param {?} type
+       * @param {?} value
+       * @param {?} transform
+       * @param {?=} allowMultipleFilters
+       * @param {?=} selectedOption
+       * @return {?}
+       */
+
+
+      _createClass(NovoDataTableSortFilter, [{
+        key: "filter",
+        value: function filter(id, type, value, transform) {
+          var allowMultipleFilters = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : false;
+          var selectedOption = arguments.length > 5 ? arguments[5] : undefined;
+
+          /** @type {?} */
+          var filter;
+
+          if (allowMultipleFilters) {
+            filter = this.resolveMultiFilter(id, type, value, transform, selectedOption);
+          } else {
+            if (!Helpers.isBlank(value)) {
+              filter = Object.assign({
+                id: id,
+                type: type,
+                value: value,
+                transform: transform
+              }, selectedOption && {
+                selectedOption: selectedOption
+              });
+            } else {
+              filter = undefined;
+            }
+          }
+
+          this.state.filter = filter;
+          this.state.reset(false, true);
+          this.state.updates.next({
+            filter: filter,
+            sort: this.state.sort
+          });
+          this.state.onSortFilterChange();
+        }
+        /**
+         * @param {?} id
+         * @param {?} value
+         * @param {?} transform
+         * @return {?}
+         */
+
+      }, {
+        key: "sort",
+        value: function sort(id, value, transform) {
+          /** @type {?} */
+          var sort = {
+            id: id,
+            value: value,
+            transform: transform
+          };
+          this.state.sort = sort;
+          this.state.reset(false, true);
+          this.state.updates.next({
+            sort: sort,
+            filter: this.state.filter
+          });
+          this.state.onSortFilterChange();
+        }
+        /**
+         * @param {?} id
+         * @param {?} type
+         * @param {?} value
+         * @param {?} transform
+         * @param {?} selectedOption
+         * @return {?}
+         */
+
+      }, {
+        key: "resolveMultiFilter",
+        value: function resolveMultiFilter(id, type, value, transform, selectedOption) {
+          /** @type {?} */
+          var filter;
+          filter = Helpers.convertToArray(this.state.filter);
+          /** @type {?} */
+
+          var filterIndex = filter.findIndex(
+          /**
+          * @param {?} aFilter
+          * @return {?}
+          */
+          function (aFilter) {
+            return aFilter && aFilter.id === id;
+          });
+
+          if (filterIndex > -1) {
+            filter.splice(filterIndex, 1);
+          }
+
+          if (!Helpers.isBlank(value)) {
+            filter = [].concat(_toConsumableArray(filter), [Object.assign({
+              id: id,
+              type: type,
+              value: value,
+              transform: transform
+            }, selectedOption && {
+              selectedOption: selectedOption
+            })]);
+          }
+
+          if (filter.length < 1) {
+            filter = undefined;
+          }
+
+          return filter;
+        }
+      }]);
+
+      return NovoDataTableSortFilter;
+    }();
+
+    NovoDataTableSortFilter.decorators = [{
+      type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Directive"],
+      args: [{
+        selector: '[novoDataTableSortFilter]'
+      }]
+    }];
+    /** @nocollapse */
+
+    NovoDataTableSortFilter.ctorParameters = function () {
+      return [{
+        type: DataTableState
+      }];
+    };
+
+    if (false) {}
+    /**
+     * @fileoverview added by tsickle
+     * Generated from: elements/data-table/cell-headers/data-table-header-cell.component.ts
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+
+    /**
+     * @template T
+     */
+
+
+    var NovoDataTableCellHeader = /*#__PURE__*/function () {
+      /**
+       * @param {?} changeDetectorRef
+       * @param {?} labels
+       * @param {?} state
+       * @param {?} renderer
+       * @param {?} elementRef
+       * @param {?} _sort
+       * @param {?} _cdkColumnDef
+       */
+      function NovoDataTableCellHeader(changeDetectorRef, labels, state, renderer, elementRef, _sort, _cdkColumnDef) {
+        var _this53 = this;
+
+        _classCallCheck(this, NovoDataTableCellHeader);
+
+        this.changeDetectorRef = changeDetectorRef;
+        this.labels = labels;
+        this.state = state;
+        this.renderer = renderer;
+        this.elementRef = elementRef;
+        this._sort = _sort;
+        this._cdkColumnDef = _cdkColumnDef;
+        this.allowMultipleFilters = false;
+        this.icon = 'sortable';
+        this.filterActive = false;
+        this.sortActive = false;
+        this.showCustomRange = false;
+        this.multiSelect = false;
+        this.multiSelectedOptions = [];
+        this.multiSelectedOptionIsHidden = [];
+        this.optionFilter = '';
+        this.error = false;
+        this.subscriptions = [];
+        this._rerenderSubscription = state.updates.subscribe(
+        /**
+        * @param {?} change
+        * @return {?}
+        */
+        function (change) {
+          return _this53.checkSortFilterState(change);
+        });
+      }
+      /**
+       * @param {?} column
+       * @return {?}
+       */
+
+
+      _createClass(NovoDataTableCellHeader, [{
+        key: "ngOnInit",
+
+        /**
+         * @return {?}
+         */
+        value: function ngOnInit() {
+          if (this._cdkColumnDef) {
+            this.id = this._cdkColumnDef.name;
+          }
+
+          this.setupFilterOptions();
+          this.changeDetectorRef.markForCheck();
+        }
+        /**
+         * @return {?}
+         */
+
+      }, {
+        key: "setupFilterOptions",
+        value: function setupFilterOptions() {
+          this.checkSortFilterState({
+            filter: this.state.filter,
+            sort: this.state.sort
+          }, true);
+          this.multiSelect = this.config.filterConfig && this.config.filterConfig.type ? this.config.filterConfig.type === 'multi-select' : false;
+
+          if (this.multiSelect) {
+            this.multiSelectedOptions = this.filter ? _toConsumableArray(this.filter) : [];
+          }
+        }
+        /**
+         * @return {?}
+         */
+
+      }, {
+        key: "ngOnDestroy",
+        value: function ngOnDestroy() {
+          this._rerenderSubscription.unsubscribe();
+
+          this.subscriptions.forEach(
+          /**
+          * @param {?} subscription
+          * @return {?}
+          */
+          function (subscription) {
+            subscription.unsubscribe();
+          });
+        }
+        /**
+         * @param {?} sortFilterState
+         * @param {?=} initialConfig
+         * @return {?}
+         */
+
+      }, {
+        key: "checkSortFilterState",
+        value: function checkSortFilterState(sortFilterState) {
+          var _this54 = this;
+
+          var initialConfig = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+
+          if (sortFilterState.sort && sortFilterState.sort.id === this.id) {
+            this.icon = "sort-".concat(sortFilterState.sort.value);
+            this.sortActive = true;
+          } else {
+            this.icon = 'sortable';
+            this.sortActive = false;
+          }
+          /** @type {?} */
+
+
+          var tableFilter = Helpers.convertToArray(sortFilterState.filter);
+          /** @type {?} */
+
+          var thisFilter = tableFilter.find(
+          /**
+          * @param {?} filter
+          * @return {?}
+          */
+          function (filter) {
+            return filter && filter.id === _this54.id;
+          });
+
+          if (thisFilter) {
+            this.filterActive = true;
+
+            if (initialConfig && thisFilter.type === 'date' && thisFilter.selectedOption) {
+              this.activeDateFilter = thisFilter.selectedOption.label || this.labels.customDateRange;
+            }
+
+            this.filter = thisFilter.value;
+          } else {
+            this.filterActive = false;
+            this.filter = undefined;
+            this.activeDateFilter = undefined;
+            this.multiSelectedOptions = [];
+          }
+
+          if (this.defaultSort && this.id === this.defaultSort.id) {
+            this.icon = "sort-".concat(this.defaultSort.value);
+            this.sortActive = true;
+          }
+
+          this.multiSelect = this.config.filterConfig && this.config.filterConfig.type ? this.config.filterConfig.type === 'multi-select' : false;
+
+          if (this.multiSelect) {
+            this.multiSelectedOptions = this.filter ? _toConsumableArray(this.filter) : [];
+
+            if (this.config.filterConfig.options) {
+              if (typeof this.config.filterConfig.options[0] === 'string') {
+                this.multiSelectedOptionIsHidden =
+                /** @type {?} */
+                this.config.filterConfig.options.map(
+                /**
+                * @param {?} option
+                * @return {?}
+                */
+                function (option) {
+                  return {
+                    option: option,
+                    hidden: false
+                  };
+                });
+              } else {
+                this.multiSelectedOptionIsHidden =
+                /** @type {?} */
+                this.config.filterConfig.options.map(
+                /**
+                * @param {?} option
+                * @return {?}
+                */
+                function (option) {
+                  return {
+                    option: option,
+                    hidden: false
+                  };
+                });
+              }
+            }
+          }
+
+          this.changeDetectorRef.markForCheck();
+        }
+        /**
+         * @param {?} option
+         * @param {?} optionsList
+         * @return {?}
+         */
+
+      }, {
+        key: "isSelected",
+        value: function isSelected(option, optionsList) {
+          var _this55 = this;
+
+          if (optionsList) {
+            /** @type {?} */
+            var optionValue = option.hasOwnProperty('value') ? option.value : option;
+            /** @type {?} */
+
+            var found = optionsList.find(
+            /**
+            * @param {?} item
+            * @return {?}
+            */
+            function (item) {
+              return _this55.optionPresentCheck(item, optionValue);
+            });
+            return found !== undefined;
+          }
+
+          return false;
+        }
+        /**
+         * @param {?} option
+         * @return {?}
+         */
+
+      }, {
+        key: "toggleSelection",
+        value: function toggleSelection(option) {
+          var _this56 = this;
+
+          /** @type {?} */
+          var optionValue = option.hasOwnProperty('value') ? option.value : option;
+          /** @type {?} */
+
+          var optionIndex = this.multiSelectedOptions.findIndex(
+          /**
+          * @param {?} item
+          * @return {?}
+          */
+          function (item) {
+            return _this56.optionPresentCheck(item, optionValue);
+          });
+          this.error = false;
+
+          if (optionIndex > -1) {
+            this.multiSelectedOptions.splice(optionIndex, 1);
+
+            if (this.optionFilter && !this.getOptionText(option).toLowerCase().startsWith(this.optionFilter.toLowerCase())) {
+              this.multiSelectedOptionIsHidden[this.multiSelectedOptionIsHidden.findIndex(
+              /**
+              * @param {?} record
+              * @return {?}
+              */
+              function (record) {
+                return record.option === option;
+              })].hidden = true;
+            }
+          } else {
+            this.multiSelectedOptions.push(optionValue);
+          }
+        }
+        /**
+         * @param {?} item
+         * @param {?} optionValue
+         * @return {?}
+         */
+
+      }, {
+        key: "optionPresentCheck",
+        value: function optionPresentCheck(item, optionValue) {
+          if (item.hasOwnProperty('value')) {
+            return item.value === optionValue;
+          } else {
+            return item === optionValue;
+          }
+        }
+        /**
+         * @return {?}
+         */
+
+      }, {
+        key: "cancel",
+        value: function cancel() {
+          this.multiSelectedOptions = this.filter ? _toConsumableArray(this.filter) : [];
+          this.dropdown.closePanel();
+          this.clearOptionFilter();
+        }
+        /**
+         * @return {?}
+         */
+
+      }, {
+        key: "filterMultiSelect",
+        value: function filterMultiSelect() {
+          if (this.multiSelectedOptions.length === 0 && !this.filter) {
+            this.multiSelectHasVisibleOptions() && this.dropdown ? this.error = true : null;
+          } else {
+            this.clearOptionFilter();
+            /** @type {?} */
+
+            var actualFilter = this.multiSelectedOptions.length > 0 ? _toConsumableArray(this.multiSelectedOptions) : undefined;
+            this.filterData(actualFilter);
+            this.dropdown.closePanel();
+          }
+        }
+        /**
+         * @param {?} optionFilter
+         * @return {?}
+         */
+
+      }, {
+        key: "multiSelectOptionFilter",
+        value: function multiSelectOptionFilter(optionFilter) {
+          var _this57 = this;
+
+          this.multiSelectedOptionIsHidden.forEach(
+          /**
+          * @param {?} record
+          * @return {?}
+          */
+          function (record) {
+            if (record.option) {
+              record.hidden = !(_this57.getOptionText(record.option).toLowerCase().startsWith(optionFilter.toLowerCase()) || _this57.isSelected(record.option, _this57.multiSelectedOptions));
+            }
+          });
+        }
+        /**
+         * @param {?} option
+         * @return {?}
+         */
+
+      }, {
+        key: "multiSelectOptionIsHidden",
+        value: function multiSelectOptionIsHidden(option) {
+          return this.multiSelectedOptionIsHidden.find(
+          /**
+          * @param {?} record
+          * @return {?}
+          */
+          function (record) {
+            return record.option === option;
+          }).hidden;
+        }
+        /**
+         * @return {?}
+         */
+
+      }, {
+        key: "multiSelectHasVisibleOptions",
+        value: function multiSelectHasVisibleOptions() {
+          return this.multiSelectedOptionIsHidden.some(
+          /**
+          * @param {?} record
+          * @return {?}
+          */
+          function (record) {
+            return !record.hidden;
+          });
+        }
+        /**
+         * @private
+         * @param {?} option
+         * @return {?}
+         */
+
+      }, {
+        key: "getOptionText",
+        value: function getOptionText(option) {
+          if (typeof option !== 'object') {
+            return option.toString();
+          } else {
+            /** @type {?} */
+            var opt =
+            /** @type {?} */
+            option;
+            return (opt.label.length > 0 ? opt.label : opt.value).toString();
+          }
+        }
+        /**
+         * @param {?} event
+         * @return {?}
+         */
+
+      }, {
+        key: "multiSelectOptionFilterHandleKeydown",
+        value: function multiSelectOptionFilterHandleKeydown(event) {
+          if (this.multiSelect) {
+            this.error = false;
+
+            if (this.dropdown.panelOpen && event.keyCode === KeyCodes.ESC) {
+              // escape = clear text box and close
+              Helpers.swallowEvent(event);
+              this.clearOptionFilter();
+              this.dropdown.closePanel();
+            } else if (event.keyCode === KeyCodes.ENTER) {
+              Helpers.swallowEvent(event);
+              this.filterMultiSelect();
+            } else if (event.keyCode >= 65 && event.keyCode <= 90 || event.keyCode >= 96 && event.keyCode <= 105 || event.keyCode >= 48 && event.keyCode <= 57) {
+              this.optionFilterInput.nativeElement.focus();
+            }
+          }
+        }
+        /**
+         * @private
+         * @return {?}
+         */
+
+      }, {
+        key: "clearOptionFilter",
+        value: function clearOptionFilter() {
+          this.error = false;
+
+          if (this.optionFilter.length > 0) {
+            this.optionFilter = '';
+            this.multiSelectedOptionIsHidden.forEach(
+            /**
+            * @param {?} record
+            * @return {?}
+            */
+            function (record) {
+              record.hidden = false;
+            });
+          }
+        }
+        /**
+         * @param {?} mouseDownEvent
+         * @return {?}
+         */
+
+      }, {
+        key: "startResize",
+        value: function startResize(mouseDownEvent) {
+          var _this58 = this;
+
+          mouseDownEvent.preventDefault();
+          /** @type {?} */
+
+          var minimumWidth = 60 + (this.config.filterable ? 30 : 0) + (this.config.sortable ? 30 : 0);
+          /** @type {?} */
+
+          var startingWidth = this.elementRef.nativeElement.getBoundingClientRect().width;
+          /** @type {?} */
+
+          var mouseMoveSubscription = Object(rxjs__WEBPACK_IMPORTED_MODULE_11__["fromEvent"])(window.document, 'mousemove').subscribe(
+          /**
+          * @param {?} middleMouseEvent
+          * @return {?}
+          */
+          function (middleMouseEvent) {
+            /** @type {?} */
+            var differenceWidth = middleMouseEvent.clientX - mouseDownEvent.clientX;
+            /** @type {?} */
+
+            var width = startingWidth + differenceWidth;
+
+            if (width < minimumWidth) {
+              width = minimumWidth;
+            }
+
+            _this58._column.width = width;
+
+            _this58.renderer.setStyle(_this58.elementRef.nativeElement, 'min-width', "".concat(_this58._column.width, "px"));
+
+            _this58.renderer.setStyle(_this58.elementRef.nativeElement, 'max-width', "".concat(_this58._column.width, "px"));
+
+            _this58.renderer.setStyle(_this58.elementRef.nativeElement, 'width', "".concat(_this58._column.width, "px"));
+
+            _this58.changeDetectorRef.markForCheck();
+
+            _this58.resized.next(_this58._column);
+          });
+          /** @type {?} */
+
+          var mouseUpSubscription = Object(rxjs__WEBPACK_IMPORTED_MODULE_11__["fromEvent"])(window.document, 'mouseup').subscribe(
+          /**
+          * @return {?}
+          */
+          function () {
+            mouseUpSubscription.unsubscribe();
+            mouseMoveSubscription.unsubscribe();
+
+            _this58.changeDetectorRef.markForCheck();
+          });
+          this.subscriptions.push(mouseMoveSubscription);
+          this.subscriptions.push(mouseUpSubscription);
+        }
+        /**
+         * @param {?} event
+         * @param {?} value
+         * @return {?}
+         */
+
+      }, {
+        key: "toggleCustomRange",
+        value: function toggleCustomRange(event, value) {
+          Helpers.swallowEvent(event);
+          this.showCustomRange = value;
+          this.changeDetectorRef.markForCheck();
+          this.dropdown.openPanel(); // Ensures that the panel correctly updates to the dynamic size of the dropdown
+        }
+        /**
+         * @return {?}
+         */
+
+      }, {
+        key: "focusInput",
+        value: function focusInput() {
+          var _this59 = this;
+
+          if (this.filterInput && this.filterInput.nativeElement) {
+            setTimeout(
+            /**
+            * @return {?}
+            */
+            function () {
+              return _this59.filterInput.nativeElement.focus();
+            }, 0);
+          }
+
+          if (this.multiSelect && this.dropdown) {
+            this.dropdown.onKeyDown =
+            /**
+            * @param {?} event
+            * @return {?}
+            */
+            function (event) {
+              _this59.multiSelectOptionFilterHandleKeydown(event);
+            };
+
+            setTimeout(
+            /**
+            * @return {?}
+            */
+            function () {
+              return _this59.optionFilterInput.nativeElement.focus();
+            }, 0);
+            this.changeDetectorRef.markForCheck();
+          }
+        }
+        /**
+         * @return {?}
+         */
+
+      }, {
+        key: "sort",
+        value: function sort() {
+          var _this60 = this;
+
+          if (this.changeTimeout) {
+            clearTimeout(this.changeTimeout);
+          }
+
+          this.changeTimeout = setTimeout(
+          /**
+          * @return {?}
+          */
+          function () {
+            _this60.direction = _this60.getNextSortDirection(_this60.direction);
+
+            _this60._sort.sort(_this60.id, _this60.direction, _this60.config.transforms.sort);
+
+            _this60.changeDetectorRef.markForCheck();
+          }, 300);
+        }
+        /**
+         * @param {?=} filter
+         * @return {?}
+         */
+
+      }, {
+        key: "filterData",
+        value: function filterData(filter) {
+          var _this61 = this;
+
+          /** @type {?} */
+          var actualFilter = NovoDataTableFilterUtils.constructFilter(filter, this.config.filterConfig.type, this.multiSelect);
+          /** @type {?} */
+
+          var selectedOption = this.config.filterConfig.type === 'date' && filter ? filter : undefined;
+
+          if (this.changeTimeout) {
+            clearTimeout(this.changeTimeout);
+          }
+
+          this.changeTimeout = setTimeout(
+          /**
+          * @return {?}
+          */
+          function () {
+            if (actualFilter === '') {
+              actualFilter = undefined;
+            }
+
+            _this61._sort.filter(_this61.id, _this61.config.filterConfig.type, actualFilter, _this61.config.transforms.filter, _this61.allowMultipleFilters, selectedOption);
+
+            _this61.changeDetectorRef.markForCheck();
+          }, 300);
+        }
+        /**
+         * @return {?}
+         */
+
+      }, {
+        key: "clearFilter",
+        value: function clearFilter() {
+          this.filter = undefined;
+          this.multiSelectedOptions = [];
+          this.activeDateFilter = undefined;
+          this.filterData(undefined);
+          this.clearOptionFilter();
+          this.dropdown.closePanel();
+        }
+        /**
+         * @private
+         * @param {?} direction
+         * @return {?}
+         */
+
+      }, {
+        key: "getNextSortDirection",
+        value: function getNextSortDirection(direction) {
+          if (!direction) {
+            return 'asc';
+          }
+
+          if (direction === 'asc') {
+            return 'desc';
+          }
+
+          return 'asc';
+        }
+        /**
+         * @private
+         * @return {?}
+         */
+
+      }, {
+        key: "getDefaultDateFilterOptions",
+        value: function getDefaultDateFilterOptions() {
+          /** @type {?} */
+          var opts = [{
+            label: this.labels.past1Day,
+            min: -1,
+            max: 0
+          }, {
+            label: this.labels.past7Days,
+            min: -7,
+            max: 0
+          }, {
+            label: this.labels.past30Days,
+            min: -30,
+            max: 0
+          }, {
+            label: this.labels.past90Days,
+            min: -90,
+            max: 0
+          }, {
+            label: this.labels.past1Year,
+            min: -366,
+            max: 0
+          }, {
+            label: this.labels.next1Day,
+            min: 0,
+            max: 1
+          }, {
+            label: this.labels.next7Days,
+            min: 0,
+            max: 7
+          }, {
+            label: this.labels.next30Days,
+            min: 0,
+            max: 30
+          }, {
+            label: this.labels.next90Days,
+            min: 0,
+            max: 90
+          }, {
+            label: this.labels.next1Year,
+            min: 0,
+            max: 366
+          }];
+          return opts;
+        }
+      }, {
+        key: "column",
+        set: function set(column) {
+          this._column = column;
+          this.label = column.type === 'action' ? '' : column.label;
+          this.labelIcon = column.labelIcon;
+          this.config = {
+            sortable: !!column.sortable,
+            filterable: !!column.filterable,
+            resizable: !!column.resizable
+          };
+          this.resizable = this.config.resizable;
+          /** @type {?} */
+
+          var transforms = {};
+
+          if (column.filterable && Helpers.isObject(column.filterable)) {
+            this.config.filterConfig =
+            /** @type {?} */
+            column.filterable;
+
+            if (!this.config.filterConfig.type) {
+              this.config.filterConfig = {
+                type: 'text'
+              };
+            }
+
+            if (
+            /** @type {?} */
+            column.filterable.transform) {
+              transforms.filter =
+              /** @type {?} */
+              column.filterable.transform;
+            }
+          } else {
+            this.config.filterConfig = {
+              type: 'text'
+            };
+          }
+
+          if (column.sortable && Helpers.isObject(column.sortable)) {
+            if (
+            /** @type {?} */
+            column.sortable.transform) {
+              transforms.sort =
+              /** @type {?} */
+              column.sortable.transform;
+            }
+          }
+
+          if (this.config.filterConfig.type === 'date' && !this.config.filterConfig.options) {
+            this.config.filterConfig.options = this.getDefaultDateFilterOptions();
+          }
+
+          this.config.transforms = transforms;
+        }
+      }]);
+
+      return NovoDataTableCellHeader;
+    }();
+
+    NovoDataTableCellHeader.decorators = [{
+      type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
+      args: [{
+        selector: '[novo-data-table-cell-config]',
+        template: "\n    <i class=\"bhi-{{ labelIcon }} label-icon\" *ngIf=\"labelIcon\" data-automation-id=\"novo-data-table-header-icon\"></i>\n    <label data-automation-id=\"novo-data-table-label\">{{ label }}</label>\n    <div>\n      <button\n        *ngIf=\"config.sortable\"\n        tooltipPosition=\"right\"\n        [tooltip]=\"labels.sort\"\n        theme=\"icon\"\n        [icon]=\"icon\"\n        (click)=\"sort()\"\n        [class.active]=\"sortActive\"\n        data-automation-id=\"novo-data-table-sort\"\n        [attr.data-feature-id]=\"'novo-data-table-sort-' + this.id\"\n      ></button>\n      <novo-dropdown\n        *ngIf=\"config.filterable\"\n        side=\"right\"\n        parentScrollSelector=\".novo-data-table-container\"\n        containerClass=\"data-table-dropdown\"\n        data-automation-id=\"novo-data-table-filter\"\n      >\n        <button\n          type=\"button\"\n          theme=\"icon\"\n          icon=\"filter\"\n          [class.active]=\"filterActive\"\n          (click)=\"focusInput()\"\n          tooltipPosition=\"right\"\n          [tooltip]=\"labels.filters\"\n          [attr.data-feature-id]=\"'novo-data-table-filter-' + this.id\"\n        ></button>\n        <div class=\"header\">\n          <span>{{ labels.filters }}</span>\n          <button\n            theme=\"dialogue\"\n            color=\"negative\"\n            icon=\"times\"\n            (click)=\"clearFilter()\"\n            *ngIf=\"filter !== null && filter !== undefined && filter !== ''\"\n            data-automation-id=\"novo-data-table-filter-clear\"\n          >\n            {{ labels.clear }}\n          </button>\n        </div>\n        <ng-container [ngSwitch]=\"config.filterConfig.type\">\n          <list *ngSwitchCase=\"'date'\">\n            <ng-container *ngIf=\"!showCustomRange\">\n              <item\n                [class.active]=\"activeDateFilter === option.label\"\n                *ngFor=\"let option of config.filterConfig.options\"\n                (click)=\"filterData(option)\"\n                [attr.data-automation-id]=\"'novo-data-table-filter-' + option.label\"\n              >\n                {{ option.label }} <i class=\"bhi-check\" *ngIf=\"activeDateFilter === option.label\"></i>\n              </item>\n            </ng-container>\n            <item\n              [class.active]=\"labels.customDateRange === activeDateFilter\"\n              (click)=\"toggleCustomRange($event, true)\"\n              *ngIf=\"config.filterConfig.allowCustomRange && !showCustomRange\"\n              [keepOpen]=\"true\"\n            >\n              {{ labels.customDateRange }} <i class=\"bhi-check\" *ngIf=\"labels.customDateRange === activeDateFilter\"></i>\n            </item>\n            <div class=\"calendar-container\" *ngIf=\"showCustomRange\">\n              <div (click)=\"toggleCustomRange($event, false)\"><i class=\"bhi-previous\"></i>{{ labels.backToPresetFilters }}</div>\n              <novo-date-picker (onSelect)=\"filterData($event)\" [(ngModel)]=\"filter\" range=\"true\"></novo-date-picker>\n            </div>\n          </list>\n          <list *ngSwitchCase=\"'select'\">\n            <item\n              [class.active]=\"filter === option\"\n              *ngFor=\"let option of config.filterConfig.options\"\n              (click)=\"filterData(option)\"\n              [attr.data-automation-id]=\"'novo-data-table-filter-' + (option?.label || option)\"\n            >\n              <span>{{ option?.label || option }}</span>\n              <i class=\"bhi-check\" *ngIf=\"option.hasOwnProperty('value') ? filter === option.value : filter === option\"></i>\n            </item>\n          </list>\n          <list *ngSwitchCase=\"'multi-select'\">\n            <div class=\"dropdown-list-filter\" (keydown)=\"multiSelectOptionFilterHandleKeydown($event)\">\n              <item class=\"filter-search\" keepOpen=\"true\">\n                <input\n                  [(ngModel)]=\"optionFilter\"\n                  (ngModelChange)=\"multiSelectOptionFilter($event)\"\n                  #optionFilterInput\n                  data-automation-id=\"novo-data-table-multi-select-option-filter-input\"\n                />\n                <i class=\"bhi-search\"></i>\n                <span class=\"error-text\" [hidden]=\"!error || !multiSelectHasVisibleOptions()\">{{ labels.selectFilterOptions }}</span>\n              </item>\n            </div>\n            <div class=\"dropdown-list-options\">\n              <item\n                *ngFor=\"let option of config.filterConfig.options\"\n                [hidden]=\"multiSelectOptionIsHidden(option)\"\n                (click)=\"toggleSelection(option)\"\n                [attr.data-automation-id]=\"'novo-data-table-filter-' + (option?.label || option)\"\n                [keepOpen]=\"true\"\n              >\n                <span>{{ option?.label || option }}</span>\n                <i\n                  [class.bhi-checkbox-empty]=\"!isSelected(option, multiSelectedOptions)\"\n                  [class.bhi-checkbox-filled]=\"isSelected(option, multiSelectedOptions)\"\n                ></i>\n              </item>\n            </div>\n            <p class=\"filter-null-results\" [hidden]=\"multiSelectHasVisibleOptions()\">{{ labels.pickerEmpty }}</p>\n          </list>\n          <list *ngSwitchCase=\"'custom'\">\n            <item class=\"filter-search\" keepOpen=\"true\">\n              <ng-container *ngTemplateOutlet=\"filterTemplate; context: { $implicit: config }\"></ng-container>\n            </item>\n          </list>\n          <list *ngSwitchDefault>\n            <item class=\"filter-search\" keepOpen=\"true\">\n              <input\n                [type]=\"config.filterConfig.type\"\n                [(ngModel)]=\"filter\"\n                (ngModelChange)=\"filterData($event)\"\n                #filterInput\n                data-automation-id=\"novo-data-table-filter-input\"\n              />\n            </item>\n          </list>\n        </ng-container>\n        <div class=\"footer\" *ngIf=\"multiSelect\">\n          <button theme=\"dialogue\" color=\"dark\" (click)=\"cancel()\" data-automation-id=\"novo-data-table-multi-select-cancel\">\n            {{ labels.cancel }}\n          </button>\n          <button theme=\"dialogue\" color=\"positive\" (click)=\"filterMultiSelect()\" data-automation-id=\"novo-data-table-multi-select-filter\">\n            {{ labels.filters }}\n          </button>\n        </div>\n      </novo-dropdown>\n    </div>\n    <div class=\"spacer\"></div>\n    <div class=\"data-table-header-resizable\" *ngIf=\"config.resizable\"><span (mousedown)=\"startResize($event)\">&nbsp;</span></div>\n  ",
+        changeDetection: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ChangeDetectionStrategy"].OnPush
+      }]
+    }];
+    /** @nocollapse */
+
+    NovoDataTableCellHeader.ctorParameters = function () {
+      return [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ChangeDetectorRef"]
+      }, {
+        type: NovoLabelService
+      }, {
+        type: DataTableState
+      }, {
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Renderer2"]
+      }, {
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ElementRef"]
+      }, {
+        type: NovoDataTableSortFilter,
+        decorators: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Optional"]
+        }]
+      }, {
+        type: _angular_cdk_table__WEBPACK_IMPORTED_MODULE_16__["CdkColumnDef"],
+        decorators: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Optional"]
+        }]
+      }];
+    };
+
+    NovoDataTableCellHeader.propDecorators = {
+      filterInput: [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"],
+        args: ['filterInput', {
+          "static": false
+        }]
+      }],
+      dropdown: [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"],
+        args: [NovoDropdownElement, {
+          "static": false
+        }]
+      }],
+      optionFilterInput: [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"],
+        args: ['optionFilterInput', {
+          "static": false
+        }]
+      }],
+      defaultSort: [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
+      }],
+      allowMultipleFilters: [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
+      }],
+      resized: [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
+      }],
+      filterTemplate: [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
+      }],
+      resizable: [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["HostBinding"],
+        args: ['class.resizable']
+      }],
+      column: [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"],
+        args: ['novo-data-table-cell-config']
+      }],
+      multiSelectOptionFilterHandleKeydown: [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["HostListener"],
+        args: ['keydown', ['$event']]
+      }]
+    };
+
+    if (false) {}
+    /**
+     * @fileoverview added by tsickle
+     * Generated from: elements/data-table/data-table.component.ts
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+
+    /**
+     * @template T
+     */
+
+
+    var NovoDataTable = /*#__PURE__*/function () {
+      /**
+       * @param {?} labels
+       * @param {?} ref
+       * @param {?} state
+       */
+      function NovoDataTable(labels, ref, state) {
+        var _this62 = this;
+
+        _classCallCheck(this, NovoDataTable);
+
+        this.labels = labels;
+        this.ref = ref;
+        this.state = state;
+        this.globalSearchHiddenClassToggle = false;
+        this.resized = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
+        this.name = 'novo-data-table';
+        this.allowMultipleFilters = false;
+        this.rowIdentifier = 'id';
+        this.activeRowIdentifier = ''; // prettier-ignore
+
+        this.trackByFn =
+        /**
+        * @param {?} index
+        * @param {?} item
+        * @return {?}
+        */
+        function (index, item) {
+          return item.id;
+        };
+
+        this.templates = {};
+        this.fixedHeader = false;
+        this._hideGlobalSearch = true;
+        this.preferencesChanged = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
+        this.loading = true;
+        this.columnToTemplate = {};
+        this.columnsLoaded = false;
+        this.selection = new Set();
+        this.scrollLeft = 0;
+        this.expandable = false;
+        this.initialized = false;
+        this.scrollListenerHandler = this.scrollListener.bind(this);
+        this.sortFilterSubscription = this.state.sortFilterSource.subscribe(
+        /**
+        * @param {?} event
+        * @return {?}
+        */
+        function (event) {
+          if (_this62.name !== 'novo-data-table') {
+            _this62.preferencesChanged.emit({
+              name: _this62.name,
+              sort: event.sort,
+              filter: event.filter,
+              globalSearch: event.globalSearch
+            });
+
+            _this62.performInteractions('change');
+          } else {
+            notify('Must have [name] set on data-table to use preferences!');
+          }
+        });
+        this.paginationSubscription = this.state.paginationSource.subscribe(
+        /**
+        * @param {?} event
+        * @return {?}
+        */
+        function (event) {
+          if (_this62.name !== 'novo-data-table') {
+            if (event.isPageSizeChange) {
+              _this62.preferencesChanged.emit({
+                name: _this62.name,
+                pageSize: event.pageSize
+              });
+            }
+          } else {
+            notify('Must have [name] set on data-table to use preferences!');
+          }
+        });
+        this.resetSubscription = this.state.resetSource.subscribe(
+        /**
+        * @return {?}
+        */
+        function () {
+          setTimeout(
+          /**
+          * @return {?}
+          */
+          function () {
+            _this62.ref.detectChanges();
+          }, 300);
+        });
+      }
+      /**
+       * @param {?} displayedColumns
+       * @return {?}
+       */
+
+
+      _createClass(NovoDataTable, [{
+        key: "modifyCellHeaderMultiSelectFilterOptions",
+
+        /**
+         * @param {?} column
+         * @param {?} newOptions
+         * @return {?}
+         */
+        value: function modifyCellHeaderMultiSelectFilterOptions(column, newOptions) {
+          /** @type {?} */
+          var header = this.cellHeaders.find(
+          /**
+          * @param {?} cellHeader
+          * @return {?}
+          */
+          function (cellHeader) {
+            return cellHeader.id === column;
+          });
+
+          if (header && header.config && header.config.filterConfig && header.config.filterConfig.options) {
+            /** @type {?} */
+            var filterOptions = header.config.filterConfig.options;
+            /** @type {?} */
+
+            var optionsToKeep = filterOptions.filter(
+            /**
+            * @param {?} opt
+            * @return {?}
+            */
+            function (opt) {
+              return header.isSelected(opt, header.multiSelectedOptions) && !newOptions.find(
+              /**
+              * @param {?} newOpt
+              * @return {?}
+              */
+              function (newOpt) {
+                return opt.value && newOpt.value && newOpt.value === opt.value;
+              });
+            });
+            header.config.filterConfig.options = [].concat(_toConsumableArray(optionsToKeep), _toConsumableArray(newOptions));
+          } else {
+            header.config.filterConfig['options'] = newOptions;
+          }
+
+          header.setupFilterOptions();
+          header.changeDetectorRef.markForCheck();
+        }
+        /**
+         * @return {?}
+         */
+
+      }, {
+        key: "ngOnDestroy",
+        value: function ngOnDestroy() {
+          if (this.outsideFilterSubscription) {
+            this.outsideFilterSubscription.unsubscribe();
+          }
+
+          if (this.novoDataTableContainer) {
+            /** @type {?} */
+            this.novoDataTableContainer.nativeElement.removeEventListener('scroll', this.scrollListenerHandler);
+          }
+
+          if (this.refreshSubscription) {
+            this.refreshSubscription.unsubscribe();
+          }
+
+          if (this.resetSubscription) {
+            this.resetSubscription.unsubscribe();
+          }
+
+          if (this.sortFilterSubscription) {
+            this.sortFilterSubscription.unsubscribe();
+          }
+        }
+        /**
+         * @return {?}
+         */
+
+      }, {
+        key: "ngAfterContentInit",
+        value: function ngAfterContentInit() {
+          var _this63 = this;
+
+          if (this.displayedColumns && this.displayedColumns.length) {
+            this.expandable = this.displayedColumns.includes('expand');
+          } // Default templates defined here
+
+
+          this.defaultTemplates.forEach(
+          /**
+          * @param {?} item
+          * @return {?}
+          */
+          function (item) {
+            // Only override if it doesn't already exist
+            if (!_this63.templates[item.getType()]) {
+              _this63.templates[item.getType()] = item.template;
+            }
+          }); // Custom templates passed in
+
+          this.customTemplates.forEach(
+          /**
+          * @param {?} item
+          * @return {?}
+          */
+          function (item) {
+            // Override anything that is custom and in HTML
+            _this63.templates[item.getType()] = item.template;
+          }); // Load columns
+
+          this.configureColumns(); // State
+
+          if (this.paginationOptions && !this.paginationOptions.page) {
+            this.paginationOptions.page = 0;
+          }
+
+          if (this.paginationOptions && !this.paginationOptions.pageSize) {
+            this.paginationOptions.pageSize = 50;
+          }
+
+          if (this.paginationOptions && !this.paginationOptions.pageSizeOptions) {
+            this.paginationOptions.pageSizeOptions = [10, 25, 50, 100];
+          }
+
+          this.state.page = this.paginationOptions ? this.paginationOptions.page : undefined;
+          this.state.pageSize = this.paginationOptions ? this.paginationOptions.pageSize : undefined; // Scrolling inside table
+
+          /** @type {?} */
+          this.novoDataTableContainer.nativeElement.addEventListener('scroll', this.scrollListenerHandler);
+          this.initialized = true;
+          this.ref.markForCheck();
+        }
+        /**
+         * @param {?} term
+         * @return {?}
+         */
+
+      }, {
+        key: "onSearchChange",
+        value: function onSearchChange(term) {
+          this.state.globalSearch = term;
+          this.state.reset(false, true);
+          this.state.updates.next({
+            globalSearch: term,
+            filter: this.state.filter,
+            sort: this.state.sort
+          });
+        }
+        /**
+         * @param {?} index
+         * @param {?} item
+         * @return {?}
+         */
+
+      }, {
+        key: "trackColumnsBy",
+        value: function trackColumnsBy(index, item) {
+          return item.id;
+        }
+        /**
+         * @param {?} check
+         * @param {?} row
+         * @return {?}
+         */
+
+      }, {
+        key: "isDisabled",
+        value: function isDisabled(check, row) {
+          if (check.disabled === true) {
+            return true;
+          }
+
+          if (check.disabledFunc) {
+            return check.disabledFunc(row);
+          }
+
+          return false;
+        }
+        /**
+         * @param {?} row
+         * @return {?}
+         */
+
+      }, {
+        key: "isExpanded",
+        value: function isExpanded(row) {
+          if (!row) {
+            return false;
+          }
+
+          return this.state.expandedRows.has("".concat(row[this.rowIdentifier]));
+        }
+        /**
+         * @param {?} row
+         * @return {?}
+         */
+
+      }, {
+        key: "expandRow",
+        value: function expandRow(row) {
+          /** @type {?} */
+          var expanded = this.isExpanded(row);
+
+          if (expanded) {
+            this.state.expandedRows["delete"]("".concat(row[this.rowIdentifier]));
+          } else {
+            this.state.expandedRows.add("".concat(row[this.rowIdentifier]));
+          }
+
+          this.state.onExpandChange(
+          /** @type {?} */
+
+          /** @type {?} */
+          row.id);
+        }
+        /**
+         * @param {?} expand
+         * @return {?}
+         */
+
+      }, {
+        key: "expandRows",
+        value: function expandRows(expand) {
+          var _this64 = this;
+
+          (this.dataSource.data || []).forEach(
+          /**
+          * @param {?} row
+          * @return {?}
+          */
+          function (row) {
+            if (!expand) {
+              _this64.state.expandedRows["delete"]("".concat(row[_this64.rowIdentifier]));
+            } else {
+              _this64.state.expandedRows.add("".concat(row[_this64.rowIdentifier]));
+            }
+          });
+          this.state.onExpandChange();
+        }
+        /**
+         * @return {?}
+         */
+
+      }, {
+        key: "allCurrentRowsExpanded",
+        value: function allCurrentRowsExpanded() {
+          for (var i = 0; i < (this.dataSource.data || []).length; i++) {
+            if (!this.isExpanded((this.dataSource.data || [])[i])) {
+              return false;
+            }
+          }
+
+          return true;
+        }
+        /**
+         * @param {?} row
+         * @return {?}
+         */
+
+      }, {
+        key: "isSelected",
+        value: function isSelected(row) {
+          if (!row) {
+            return false;
+          }
+
+          return this.state.selectedRows.has("".concat(row[this.rowIdentifier]));
+        }
+        /**
+         * @param {?} row
+         * @return {?}
+         */
+
+      }, {
+        key: "selectRow",
+        value: function selectRow(row) {
+          /** @type {?} */
+          var selected = this.isSelected(row);
+
+          if (selected) {
+            this.state.selectedRows["delete"]("".concat(row[this.rowIdentifier]));
+          } else {
+            this.state.selectedRows.set("".concat(row[this.rowIdentifier]), row);
+          }
+
+          this.state.onSelectionChange();
+        }
+        /**
+         * @param {?} selected
+         * @return {?}
+         */
+
+      }, {
+        key: "selectRows",
+        value: function selectRows(selected) {
+          var _this65 = this;
+
+          (this.dataSource.data || []).forEach(
+          /**
+          * @param {?} row
+          * @return {?}
+          */
+          function (row) {
+            if (!selected) {
+              _this65.state.selectedRows["delete"]("".concat(row[_this65.rowIdentifier]));
+            } else {
+              _this65.state.selectedRows.set("".concat(row[_this65.rowIdentifier]), row);
+            }
+          });
+          this.state.onSelectionChange();
+        }
+        /**
+         * @return {?}
+         */
+
+      }, {
+        key: "allCurrentRowsSelected",
+        value: function allCurrentRowsSelected() {
+          for (var i = 0; i < (this.dataSource.data || []).length; i++) {
+            if (!this.isSelected((this.dataSource.data || [])[i])) {
+              return false;
+            }
+          }
+
+          return true;
+        }
+        /**
+         * @private
+         * @return {?}
+         */
+
+      }, {
+        key: "configureLastDisplayedColumn",
+        value: function configureLastDisplayedColumn() {
+          var _this66 = this;
+
+          if (this.columns && this.displayedColumns && 0 !== this.columns.length && 0 !== this.displayedColumns.length) {
+            this.columns.forEach(
+            /**
+            * @param {?} column
+            * @return {?}
+            */
+            function (column) {
+              if (column.initialResizable) {
+                column.resizable = column.initialResizable.resizable;
+                column.width = column.initialResizable.width;
+                column.initialResizable = undefined;
+              }
+            });
+            /** @type {?} */
+
+            var resizableColumns = this.displayedColumns.filter(
+            /**
+            * @param {?} name
+            * @return {?}
+            */
+            function (name) {
+              return _this66.columns.findIndex(
+              /**
+              * @param {?} column
+              * @return {?}
+              */
+              function (column) {
+                return column.resizable && column.id === name;
+              }) !== -1;
+            });
+
+            if (resizableColumns && resizableColumns.length > 0) {
+              /** @type {?} */
+              var lastResizableColumn = this.columns.find(
+              /**
+              * @param {?} column
+              * @return {?}
+              */
+              function (column) {
+                return column.id === resizableColumns[resizableColumns.length - 1];
+              });
+              lastResizableColumn.initialResizable = {
+                resizable: lastResizableColumn.resizable,
+                width: lastResizableColumn.width
+              };
+              lastResizableColumn.width = undefined;
+              lastResizableColumn.resizable = false;
+            }
+          }
+        }
+        /**
+         * @private
+         * @return {?}
+         */
+
+      }, {
+        key: "configureColumns",
+        value: function configureColumns() {
+          var _this67 = this;
+
+          if (this.columns && this.columns.length !== 0 && Object.keys(this.templates).length !== 0) {
+            // Figure the column templates
+            this.columns.forEach(
+            /**
+            * @param {?} column
+            * @return {?}
+            */
+            function (column) {
+              // Figure the template
+
+              /** @type {?} */
+              var templateName;
+
+              if (column.template) {
+                // Pass it in as template
+                templateName = column.template;
+              } else if (!!_this67.templates[column.id]) {
+                // Custom template for the column id
+                templateName = column.id;
+              } else {
+                // Default to the defaulCellTemplate
+                if (column.type === 'action') {
+                  if (column.action && column.action.options) {
+                    if (!column.action.icon) {
+                      column.action.icon = 'collapse';
+                    }
+
+                    templateName = 'dropdownCellTemplate';
+                  } else {
+                    templateName = 'buttonCellTemplate';
+                  }
+                } else {
+                  if (column.type === 'link:tel' || column.type === 'link:mailto') {
+                    templateName = "".concat(column.type.split(':')[1], "CellTemplate");
+                  } else {
+                    templateName = "".concat(column.type, "CellTemplate");
+                  }
+                }
+              }
+
+              _this67.columnToTemplate[column.id] = _this67.templates[templateName];
+            });
+            this.configureLastDisplayedColumn();
+            this.columnsLoaded = true;
+          }
+        }
+        /**
+         * @private
+         * @return {?}
+         */
+
+      }, {
+        key: "scrollListener",
+        value: function scrollListener() {
+          /** @type {?} */
+          var target =
+          /** @type {?} */
+          this.novoDataTableContainer.nativeElement;
+          /** @type {?} */
+
+          var left = target.scrollLeft;
+
+          if (left !== this.scrollLeft) {
+            this.scrollLeft = target.scrollLeft;
+          }
+
+          this.ref.markForCheck();
+        }
+        /**
+         * @param {?} event
+         * @return {?}
+         */
+
+      }, {
+        key: "performInteractions",
+        value: function performInteractions(event) {
+          if (this.listInteractions) {
+            var _iterator6 = _createForOfIteratorHelper(this.columns),
+                _step6;
+
+            try {
+              for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
+                var column = _step6.value;
+
+                /** @type {?} */
+                var allListColumnInteractions = this.listInteractions[column.id];
+                /** @type {?} */
+
+                var listColumnInteraction = allListColumnInteractions && allListColumnInteractions.find(
+                /**
+                * @param {?} int
+                * @return {?}
+                */
+                function (_int) {
+                  return _int.event.includes(event);
+                });
+
+                if (listColumnInteraction) {
+                  listColumnInteraction.script(this, column.id);
+                }
+              }
+            } catch (err) {
+              _iterator6.e(err);
+            } finally {
+              _iterator6.f();
+            }
+          }
+        }
+      }, {
+        key: "displayedColumns",
+        set: function set(displayedColumns) {
+          var _this68 = this;
+
+          if (this.displayedColumns && this.displayedColumns.length !== 0) {
+            if (this.name !== 'novo-data-table') {
+              this.preferencesChanged.emit({
+                name: this.name,
+                displayedColumns: displayedColumns
+              });
+            } else {
+              notify('Must have [name] set on data-table to use preferences!');
+            }
+          }
+
+          this._disabledColumns = displayedColumns;
+          this.configureLastDisplayedColumn();
+
+          if (this.initialized) {
+            setTimeout(
+            /**
+            * @return {?}
+            */
+            function () {
+              _this68.scrollListener();
+            });
+          }
+        }
+        /**
+         * @return {?}
+         */
+        ,
+        get: function get() {
+          return this._disabledColumns;
+        }
+        /**
+         * @param {?} service
+         * @return {?}
+         */
+
+      }, {
+        key: "dataTableService",
+        set: function set(service) {
+          this.loading = false;
+
+          if (!service) {
+            service = new StaticDataTableService([]);
+          }
+
+          this.dataSource = new DataTableSource(service, this.state, this.ref);
+          this.ref.detectChanges();
+        }
+        /**
+         * @param {?} rows
+         * @return {?}
+         */
+
+      }, {
+        key: "rows",
+        set: function set(rows) {
+          this.loading = false;
+          /** @type {?} */
+
+          var service = new StaticDataTableService(rows);
+          this.dataSource = new DataTableSource(service, this.state, this.ref);
+          this.ref.detectChanges();
+        }
+        /**
+         * @param {?} outsideFilter
+         * @return {?}
+         */
+
+      }, {
+        key: "outsideFilter",
+        set: function set(outsideFilter) {
+          var _this69 = this;
+
+          // Unsubscribe
+          if (this.outsideFilterSubscription) {
+            this.outsideFilterSubscription.unsubscribe();
+          }
+
+          if (outsideFilter) {
+            // Re-subscribe
+            this.outsideFilterSubscription = outsideFilter.subscribe(
+            /**
+            * @param {?} filter
+            * @return {?}
+            */
+            function (filter) {
+              _this69.state.outsideFilter = filter;
+
+              _this69.state.updates.next({
+                globalSearch: _this69.state.globalSearch,
+                filter: _this69.state.filter,
+                sort: _this69.state.sort
+              });
+
+              _this69.ref.markForCheck();
+            });
+          }
+        }
+        /**
+         * @param {?} refreshSubject
+         * @return {?}
+         */
+
+      }, {
+        key: "refreshSubject",
+        set: function set(refreshSubject) {
+          var _this70 = this;
+
+          // Unsubscribe
+          if (this.refreshSubscription) {
+            this.refreshSubscription.unsubscribe();
+          }
+
+          if (refreshSubject) {
+            // Re-subscribe
+            this.refreshSubscription = refreshSubject.subscribe(
+            /**
+            * @param {?} filter
+            * @return {?}
+            */
+            function (filter) {
+              _this70.state.isForceRefresh = true;
+
+              _this70.state.updates.next({
+                globalSearch: _this70.state.globalSearch,
+                filter: _this70.state.filter,
+                sort: _this70.state.sort
+              });
+
+              _this70.ref.markForCheck();
+            });
+          }
+        }
+        /**
+         * @param {?} columns
+         * @return {?}
+         */
+
+      }, {
+        key: "columns",
+        set: function set(columns) {
+          this._columns = columns;
+          this.configureColumns();
+          this.performInteractions('init');
+        }
+        /**
+         * @return {?}
+         */
+        ,
+        get: function get() {
+          return this._columns;
+        }
+        /**
+         * @param {?} v
+         * @return {?}
+         */
+
+      }, {
+        key: "customFilter",
+        set: function set(v) {
+          this._customFilter = Object(_angular_cdk_coercion__WEBPACK_IMPORTED_MODULE_12__["coerceBooleanProperty"])(v);
+        }
+        /**
+         * @return {?}
+         */
+        ,
+        get: function get() {
+          return this._customFilter;
+        }
+        /**
+         * @param {?} v
+         * @return {?}
+         */
+
+      }, {
+        key: "hasExandedRows",
+        set: function set(v) {
+          this._hasExandedRows = Object(_angular_cdk_coercion__WEBPACK_IMPORTED_MODULE_12__["coerceBooleanProperty"])(v);
+        }
+        /**
+         * @return {?}
+         */
+        ,
+        get: function get() {
+          return this._hasExandedRows;
+        }
+        /**
+         * @param {?} v
+         * @return {?}
+         */
+
+      }, {
+        key: "forceShowHeader",
+        set: function set(v) {
+          this._forceShowHeader = Object(_angular_cdk_coercion__WEBPACK_IMPORTED_MODULE_12__["coerceBooleanProperty"])(v);
+        }
+        /**
+         * @return {?}
+         */
+        ,
+        get: function get() {
+          return this._forceShowHeader;
+        }
+        /**
+         * @param {?} v
+         * @return {?}
+         */
+
+      }, {
+        key: "hideGlobalSearch",
+        set: function set(v) {
+          this._hideGlobalSearch = Object(_angular_cdk_coercion__WEBPACK_IMPORTED_MODULE_12__["coerceBooleanProperty"])(v);
+          this.globalSearchHiddenClassToggle = this._hideGlobalSearch;
+        }
+        /**
+         * @return {?}
+         */
+        ,
+        get: function get() {
+          return this._hideGlobalSearch;
+        }
+        /**
+         * @return {?}
+         */
+
+      }, {
+        key: "empty",
+        get: function get() {
+          return this.dataSource && this.dataSource.totallyEmpty;
+        }
+        /**
+         * @return {?}
+         */
+
+      }, {
+        key: "loadingClass",
+        get: function get() {
+          return this.loading || this.dataSource && this.dataSource.loading;
+        }
+      }]);
+
+      return NovoDataTable;
+    }();
+
+    NovoDataTable.decorators = [{
+      type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
+      args: [{
+        selector: 'novo-data-table',
+        animations: [Object(_angular_animations__WEBPACK_IMPORTED_MODULE_9__["trigger"])('expand', [Object(_angular_animations__WEBPACK_IMPORTED_MODULE_9__["state"])('void', Object(_angular_animations__WEBPACK_IMPORTED_MODULE_9__["style"])({
+          height: '0px',
+          minHeight: '0',
+          visibility: 'hidden'
+        })), Object(_angular_animations__WEBPACK_IMPORTED_MODULE_9__["state"])('*', Object(_angular_animations__WEBPACK_IMPORTED_MODULE_9__["style"])({
+          height: '*',
+          visibility: 'visible'
+        })), Object(_angular_animations__WEBPACK_IMPORTED_MODULE_9__["transition"])('void <=> *', Object(_angular_animations__WEBPACK_IMPORTED_MODULE_9__["animate"])('70ms cubic-bezier(0.4, 0.0, 0.2, 1)'))])],
+        template: "\n    <header\n      *ngIf=\"(!(dataSource?.totallyEmpty && !state.userFiltered) && !loading) || forceShowHeader\"\n      [class.empty]=\"hideGlobalSearch && !paginationOptions && !templates['customActions']\"\n    >\n      <ng-container *ngTemplateOutlet=\"templates['customHeader']\"></ng-container>\n      <novo-search\n        alwaysOpen=\"true\"\n        (searchChanged)=\"onSearchChange($event)\"\n        [(ngModel)]=\"state.globalSearch\"\n        *ngIf=\"!hideGlobalSearch\"\n        [placeholder]=\"searchOptions?.placeholder\"\n        [hint]=\"searchOptions?.tooltip\"\n      >\n      </novo-search>\n      <novo-data-table-pagination\n        *ngIf=\"paginationOptions\"\n        [theme]=\"paginationOptions.theme\"\n        [length]=\"dataSource?.currentTotal\"\n        [page]=\"paginationOptions.page\"\n        [pageSize]=\"paginationOptions.pageSize\"\n        [pageSizeOptions]=\"paginationOptions.pageSizeOptions\"\n        [dataFeatureId]=\"paginatorDataFeatureId\"\n      >\n      </novo-data-table-pagination>\n      <div class=\"novo-data-table-actions\" *ngIf=\"templates['customActions']\">\n        <ng-container *ngTemplateOutlet=\"templates['customActions']\"></ng-container>\n      </div>\n    </header>\n    <div class=\"novo-data-table-loading-mask\" *ngIf=\"dataSource?.loading || loading\" data-automation-id=\"novo-data-table-loading\">\n      <novo-loading></novo-loading>\n    </div>\n    <div class=\"novo-data-table-outside-container\" [ngClass]=\"{ 'novo-data-table-outside-container-fixed': fixedHeader }\">\n      <div class=\"novo-data-table-custom-filter\" *ngIf=\"customFilter\">\n        <ng-container *ngTemplateOutlet=\"templates['customFilter']\"></ng-container>\n      </div>\n      <div\n        #novoDataTableContainer\n        class=\"novo-data-table-container\"\n        [ngClass]=\"{ 'novo-data-table-container-fixed': fixedHeader }\"\n        [class.empty-user-filtered]=\"dataSource?.currentlyEmpty && state.userFiltered\"\n        [class.empty]=\"dataSource?.totallyEmpty && !dataSource?.loading && !loading && !state.userFiltered && !dataSource.pristine\"\n      >\n        <cdk-table\n          *ngIf=\"columns?.length > 0 && columnsLoaded && dataSource\"\n          [dataSource]=\"dataSource\"\n          [trackBy]=\"trackByFn\"\n          novoDataTableSortFilter\n          [class.expandable]=\"expandable\"\n          [class.empty]=\"dataSource?.currentlyEmpty && state.userFiltered\"\n          [hidden]=\"dataSource?.totallyEmpty && !state.userFiltered\"\n        >\n          <ng-container cdkColumnDef=\"selection\">\n            <novo-data-table-checkbox-header-cell *cdkHeaderCellDef></novo-data-table-checkbox-header-cell>\n            <novo-data-table-checkbox-cell *cdkCellDef=\"let row; let i = index\" [row]=\"row\"></novo-data-table-checkbox-cell>\n          </ng-container>\n          <ng-container cdkColumnDef=\"expand\">\n            <novo-data-table-expand-header-cell *cdkHeaderCellDef></novo-data-table-expand-header-cell>\n            <novo-data-table-expand-cell *cdkCellDef=\"let row; let i = index\" [row]=\"row\"></novo-data-table-expand-cell>\n          </ng-container>\n          <ng-container *ngFor=\"let column of columns; trackBy: trackColumnsBy\" [cdkColumnDef]=\"column.id\">\n            <novo-data-table-header-cell\n              *cdkHeaderCellDef\n              [column]=\"column\"\n              [filterTemplate]=\"templates['column-filter-' + column.id]\"\n              [novo-data-table-cell-config]=\"column\"\n              [resized]=\"resized\"\n              [defaultSort]=\"defaultSort\"\n              [allowMultipleFilters]=\"allowMultipleFilters\"\n              [class.empty]=\"column?.type === 'action' && !column?.label\"\n              [class.button-header-cell]=\"column?.type === 'expand' || (column?.type === 'action' && !column?.action?.options)\"\n              [class.dropdown-header-cell]=\"column?.type === 'action' && column?.action?.options\"\n              [class.fixed-header]=\"fixedHeader\"\n            ></novo-data-table-header-cell>\n            <novo-data-table-cell\n              *cdkCellDef=\"let row\"\n              [resized]=\"resized\"\n              [column]=\"column\"\n              [row]=\"row\"\n              [template]=\"columnToTemplate[column.id]\"\n              [class.empty]=\"column?.type === 'action' && !column?.label\"\n              [class.button-cell]=\"column?.type === 'expand' || (column?.type === 'action' && !column?.action?.options)\"\n              [class.dropdown-cell]=\"column?.type === 'action' && column?.action?.options\"\n            ></novo-data-table-cell>\n          </ng-container>\n          <novo-data-table-header-row\n            *cdkHeaderRowDef=\"displayedColumns\"\n            [fixedHeader]=\"fixedHeader\"\n            data-automation-id=\"novo-data-table-header-row\"\n          ></novo-data-table-header-row>\n          <novo-data-table-row\n            *cdkRowDef=\"let row; columns: displayedColumns\"\n            [ngClass]=\"{ active: row[rowIdentifier] == activeRowIdentifier }\"\n            [novoDataTableExpand]=\"detailRowTemplate\"\n            [row]=\"row\"\n            [id]=\"name + '-' + row[rowIdentifier]\"\n            [dataAutomationId]=\"row[rowIdentifier]\"\n          ></novo-data-table-row>\n        </cdk-table>\n        <div class=\"novo-data-table-footer\" *ngIf=\"templates['footer']\">\n          <ng-container *ngTemplateOutlet=\"templates['footer']; context: { $implicit: columns, data: dataSource.data }\"></ng-container>\n        </div>\n        <div\n          class=\"novo-data-table-no-results-container\"\n          [style.left.px]=\"scrollLeft\"\n          *ngIf=\"dataSource?.currentlyEmpty && state.userFiltered && !dataSource?.loading && !loading && !dataSource.pristine\"\n        >\n          <div class=\"novo-data-table-empty-message\">\n            <ng-container *ngTemplateOutlet=\"templates['noResultsMessage'] || templates['defaultNoResultsMessage']\"></ng-container>\n          </div>\n        </div>\n      </div>\n      <div\n        class=\"novo-data-table-empty-container\"\n        *ngIf=\"dataSource?.totallyEmpty && !dataSource?.loading && !loading && !state.userFiltered && !dataSource.pristine\"\n      >\n        <div class=\"novo-data-table-empty-message\">\n          <ng-container *ngTemplateOutlet=\"templates['emptyMessage'] || templates['defaultNoResultsMessage']\"></ng-container>\n        </div>\n      </div>\n    </div>\n    <!-- DEFAULT CELL TEMPLATE -->\n    <ng-template novoTemplate=\"textCellTemplate\" let-row let-col=\"col\">\n      <span [style.width.px]=\"col?.width\" [style.min-width.px]=\"col?.width\" [style.max-width.px]=\"col?.width\">{{\n        row[col.id] | dataTableInterpolate: col\n      }}</span>\n    </ng-template>\n    <ng-template novoTemplate=\"dateCellTemplate\" let-row let-col=\"col\">\n      <span>{{ row[col.id] | dataTableInterpolate: col | dataTableDateRenderer: col }}</span>\n    </ng-template>\n    <ng-template novoTemplate=\"datetimeCellTemplate\" let-row let-col=\"col\">\n      <span>{{ row[col.id] | dataTableInterpolate: col | dataTableDateTimeRenderer: col }}</span>\n    </ng-template>\n    <ng-template novoTemplate=\"timeCellTemplate\" let-row let-col=\"col\">\n      <span>{{ row[col.id] | dataTableInterpolate: col | dataTableTimeRenderer: col }}</span>\n    </ng-template>\n    <ng-template novoTemplate=\"currencyCellTemplate\" let-row let-col=\"col\">\n      <span>{{ row[col.id] | dataTableInterpolate: col | dataTableCurrencyRenderer: col }}</span>\n    </ng-template>\n    <ng-template novoTemplate=\"bigdecimalCellTemplate\" let-row let-col=\"col\">\n      <span>{{ row[col.id] | dataTableInterpolate: col | dataTableBigDecimalRenderer: col }}</span>\n    </ng-template>\n    <ng-template novoTemplate=\"numberCellTemplate\" let-row let-col=\"col\">\n      <span>{{ row[col.id] | dataTableInterpolate: col | dataTableNumberRenderer: col }}</span>\n    </ng-template>\n    <ng-template novoTemplate=\"percentCellTemplate\" let-row let-col=\"col\">\n      <span>{{ row[col.id] | dataTableInterpolate: col | dataTableNumberRenderer: col:true }}</span>\n    </ng-template>\n    <ng-template novoTemplate=\"linkCellTemplate\" let-row let-col=\"col\">\n      <a\n        [attr.data-feature-id]=\"col?.attributes?.dataFeatureId\"\n        (click)=\"col.handlers?.click({ originalEvent: $event, row: row })\"\n        [style.width.px]=\"col?.width\"\n        [style.min-width.px]=\"col?.width\"\n        [style.max-width.px]=\"col?.width\"\n        >{{ row[col.id] | dataTableInterpolate: col }}</a\n      >\n    </ng-template>\n    <ng-template novoTemplate=\"telCellTemplate\" let-row let-col=\"col\">\n      <a href=\"tel:{{ row[col.id] | dataTableInterpolate: col }}\" [target]=\"col?.attributes?.target\">{{\n        row[col.id] | dataTableInterpolate: col\n      }}</a>\n    </ng-template>\n    <ng-template novoTemplate=\"mailtoCellTemplate\" let-row let-col=\"col\">\n      <a href=\"mailto:{{ row[col.id] | dataTableInterpolate: col }}\" [target]=\"col?.attributes?.target\">{{\n        row[col.id] | dataTableInterpolate: col\n      }}</a>\n    </ng-template>\n    <ng-template novoTemplate=\"buttonCellTemplate\" let-row let-col=\"col\">\n      <p [tooltip]=\"col?.action?.tooltip\" tooltipPosition=\"right\" [attr.data-feature-id]=\"col?.attributes?.dataFeatureId\">\n        <i\n          class=\"bhi-{{ col?.action?.icon }} data-table-icon\"\n          (click)=\"col.handlers?.click({ originalEvent: $event, row: row })\"\n          [class.disabled]=\"isDisabled(col, row)\"\n        ></i>\n      </p>\n    </ng-template>\n    <ng-template novoTemplate=\"dropdownCellTemplate\" let-row let-col=\"col\">\n      <novo-dropdown parentScrollSelector=\".novo-data-table-container\" containerClass=\"novo-data-table-dropdown\">\n        <button type=\"button\" theme=\"dialogue\" [icon]=\"col.action.icon\" inverse>{{ col.label }}</button>\n        <list>\n          <item\n            *ngFor=\"let option of col?.action?.options\"\n            (action)=\"option.handlers.click({ originalEvent: $event?.originalEvent, row: row })\"\n            [disabled]=\"isDisabled(option, row)\"\n          >\n            <span [attr.data-automation-id]=\"option.label\">{{ option.label }}</span>\n          </item>\n        </list>\n      </novo-dropdown>\n    </ng-template>\n    <ng-template novoTemplate=\"defaultNoResultsMessage\">\n      <h4><i class=\"bhi-search-question\"></i> {{ labels.noMatchingRecordsMessage }}</h4>\n    </ng-template>\n    <ng-template novoTemplate=\"defaultEmptyMessage\">\n      <h4><i class=\"bhi-search-question\"></i> {{ labels.emptyTableMessage }}</h4>\n    </ng-template>\n    <ng-template novoTemplate=\"expandedRow\"> You did not provide an \"expandedRow\" template! </ng-template>\n    <ng-template #detailRowTemplate let-row>\n      <div class=\"novo-data-table-detail-row\" [@expand] style=\"overflow: hidden\">\n        <ng-container *ngTemplateOutlet=\"templates['expandedRow']; context: { $implicit: row }\"></ng-container>\n      </div>\n    </ng-template>\n    <!-- CUSTOM CELLS PASSED IN -->\n    <ng-content></ng-content>\n  ",
+        changeDetection: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ChangeDetectionStrategy"].OnPush,
+        providers: [DataTableState]
+      }]
+    }];
+    /** @nocollapse */
+
+    NovoDataTable.ctorParameters = function () {
+      return [{
+        type: NovoLabelService
+      }, {
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ChangeDetectorRef"]
+      }, {
+        type: DataTableState
+      }];
+    };
+
+    NovoDataTable.propDecorators = {
+      globalSearchHiddenClassToggle: [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["HostBinding"],
+        args: ['class.global-search-hidden']
+      }],
+      customTemplates: [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ContentChildren"],
+        args: [NovoTemplate]
+      }],
+      defaultTemplates: [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChildren"],
+        args: [NovoTemplate]
+      }],
+      cellHeaders: [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChildren"],
+        args: [NovoDataTableCellHeader]
+      }],
+      novoDataTableContainer: [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"],
+        args: ['novoDataTableContainer', {
+          "static": false
+        }]
+      }],
+      resized: [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"]
+      }],
+      displayedColumns: [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
+      }],
+      paginationOptions: [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
+      }],
+      searchOptions: [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
+      }],
+      defaultSort: [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
+      }],
+      name: [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
+      }],
+      allowMultipleFilters: [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
+      }],
+      rowIdentifier: [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
+      }],
+      activeRowIdentifier: [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
+      }],
+      trackByFn: [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
+      }],
+      templates: [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
+      }],
+      fixedHeader: [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
+      }],
+      paginatorDataFeatureId: [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
+      }],
+      dataTableService: [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
+      }],
+      rows: [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
+      }],
+      outsideFilter: [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
+      }],
+      refreshSubject: [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
+      }],
+      columns: [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
+      }],
+      customFilter: [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
+      }],
+      hasExandedRows: [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
+      }],
+      forceShowHeader: [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
+      }],
+      hideGlobalSearch: [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
+      }],
+      preferencesChanged: [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"]
+      }],
+      empty: [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["HostBinding"],
+        args: ['class.empty']
+      }],
+      loadingClass: [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["HostBinding"],
+        args: ['class.loading']
+      }],
+      listInteractions: [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
+      }]
+    };
+
+    if (false) {}
+    /**
+     * @fileoverview added by tsickle
      * Generated from: elements/dropdown/Dropdown.module.ts
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
+
 
     var NovoDropdownModule = function NovoDropdownModule() {
       _classCallCheck(this, NovoDropdownModule);
@@ -18029,7 +19118,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _createClass(NovoSelectElement, [{
         key: "ngOnInit",
         value: function ngOnInit() {
-          var _this62 = this;
+          var _this71 = this;
 
           this.focusMonitor.monitor(this.dropdown.nativeElement).subscribe(
           /**
@@ -18037,13 +19126,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (origin) {
-            return _this62.ngZone.run(
+            return _this71.ngZone.run(
             /**
             * @return {?}
             */
             function () {
-              if (origin === 'keyboard' && !_this62.disabled) {
-                _this62.openPanel();
+              if (origin === 'keyboard' && !_this71.disabled) {
+                _this71.openPanel();
               }
             });
           });
@@ -18057,7 +19146,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "ngOnChanges",
         value: function ngOnChanges(changes) {
-          var _this63 = this;
+          var _this72 = this;
 
           this.readonly = this.readonly === true;
 
@@ -18103,7 +19192,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             * @return {?}
             */
             function (i) {
-              return i.label === _this63.createdItem;
+              return i.label === _this72.createdItem;
             });
             /** @type {?} */
 
@@ -18152,7 +19241,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "togglePanel",
         value: function togglePanel() {
-          var _this64 = this;
+          var _this73 = this;
 
           if (this.panelOpen) {
             this.closePanel();
@@ -18162,7 +19251,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             * @return {?}
             */
             function () {
-              _this64.dropdown.nativeElement.focus();
+              _this73.dropdown.nativeElement.focus();
             });
             this.openPanel();
           }
@@ -18250,7 +19339,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "onKeyDown",
         value: function onKeyDown(event) {
-          var _this65 = this;
+          var _this74 = this;
 
           // To prevent default window scrolling
           if ([KeyCodes.UP, KeyCodes.DOWN].includes(event.keyCode)) {
@@ -18314,7 +19403,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             * @return {?}
             */
             function () {
-              _this65.filterTerm = '';
+              _this74.filterTerm = '';
             }, 2000);
             /** @type {?} */
 
@@ -18329,7 +19418,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             * @return {?}
             */
             function (i) {
-              return i.label.toUpperCase().indexOf(_this65.filterTerm) === 0;
+              return i.label.toUpperCase().indexOf(_this74.filterTerm) === 0;
             });
 
             if (item) {
@@ -18343,7 +19432,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             * @return {?}
             */
             function () {
-              _this65.filterTerm = '';
+              _this74.filterTerm = '';
             }, 2000);
             this.filterTerm = this.filterTerm.slice(0, -1);
           }
@@ -18724,7 +19813,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "handleModels",
         value: function handleModels(name, drake) {
-          var _this66 = this;
+          var _this75 = this;
 
           /** @type {?} */
           var dragElm;
@@ -18751,7 +19840,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             sourceModel = drake.models[drake.containers.indexOf(source)];
             sourceModel.splice(dragIndex, 1);
 
-            _this66.removeModel.emit([name, el, source]);
+            _this75.removeModel.emit([name, el, source]);
           });
           drake.on('drag',
           /**
@@ -18761,7 +19850,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           */
           function (el, source) {
             dragElm = el;
-            dragIndex = _this66.domIndexOf(el, source);
+            dragIndex = _this75.domIndexOf(el, source);
           });
           drake.on('drop',
           /**
@@ -18775,7 +19864,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               return;
             }
 
-            dropIndex = _this66.domIndexOf(dropElm, target);
+            dropIndex = _this75.domIndexOf(dropElm, target);
             sourceModel = drake.models[drake.containers.indexOf(source)];
 
             if (target === source) {
@@ -18798,7 +19887,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               target.removeChild(dropElm); // element must be removed for ngFor to apply correctly
             }
 
-            _this66.dropModel.emit([name, dropElm, target, source]);
+            _this75.dropModel.emit([name, dropElm, target, source]);
           });
         }
         /**
@@ -32336,7 +33425,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "initConfig",
         value: function initConfig() {
-          var _this67 = this;
+          var _this76 = this;
 
           this.fieldList.forEach(
           /**
@@ -32344,52 +33433,52 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (field) {
-            if (!_this67.config.hasOwnProperty(field)) {
-              _this67.config[field] = {
+            if (!_this76.config.hasOwnProperty(field)) {
+              _this76.config[field] = {
                 hidden: true
               };
             }
 
-            if (!_this67.config[field].hasOwnProperty('label')) {
-              _this67.config[field].label = _this67.labels[field];
+            if (!_this76.config[field].hasOwnProperty('label')) {
+              _this76.config[field].label = _this76.labels[field];
             }
 
-            if (_this67.config.required) {
-              _this67.config[field].required = true;
+            if (_this76.config.required) {
+              _this76.config[field].required = true;
             }
 
-            if (_this67.config[field].readOnly || _this67.config.readOnly) {
-              _this67.config[field].readOnly = true;
-              _this67.disabled[field] = true;
+            if (_this76.config[field].readOnly || _this76.config.readOnly) {
+              _this76.config[field].readOnly = true;
+              _this76.disabled[field] = true;
             }
 
             if (field === 'countryID') {
-              if (!_this67.config[field].pickerConfig) {
-                _this67.config.countryID.pickerConfig = _this67.getDefaultCountryConfig();
+              if (!_this76.config[field].pickerConfig) {
+                _this76.config.countryID.pickerConfig = _this76.getDefaultCountryConfig();
               }
 
-              _this67.config[field].pickerConfig.defaultOptions = _this67.config.countryID.pickerConfig.options;
+              _this76.config[field].pickerConfig.defaultOptions = _this76.config.countryID.pickerConfig.options;
             }
 
             if (field === 'state') {
-              if (!_this67.config[field].pickerConfig) {
-                _this67.config.state.pickerConfig = _this67.getDefaultStateConfig();
-                _this67.config[field].pickerConfig.defaultOptions = _this67.config[field].pickerConfig.options;
+              if (!_this76.config[field].pickerConfig) {
+                _this76.config.state.pickerConfig = _this76.getDefaultStateConfig();
+                _this76.config[field].pickerConfig.defaultOptions = _this76.config[field].pickerConfig.options;
               }
 
-              _this67.stateOptions = _this67.config[field].pickerConfig.options;
+              _this76.stateOptions = _this76.config[field].pickerConfig.options;
 
-              _this67.config[field].pickerConfig.options =
+              _this76.config[field].pickerConfig.options =
               /**
               * @param {?=} query
               * @return {?}
               */
               function () {
                 var query = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
-                return _this67.stateOptions(query, _this67.model.countryID);
+                return _this76.stateOptions(query, _this76.model.countryID);
               };
 
-              _this67.config[field].pickerConfig.defaultOptions = _this67.stateOptions;
+              _this76.config[field].pickerConfig.defaultOptions = _this76.stateOptions;
             }
           });
         }
@@ -32579,7 +33668,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "updateStates",
         value: function updateStates() {
-          var _this68 = this;
+          var _this77 = this;
 
           if (this.config.state.pickerConfig.options && !Helpers.isBlank(this.model.countryID)) {
             this.config.state.pickerConfig.options =
@@ -32589,7 +33678,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             */
             function () {
               var query = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
-              return _this68.stateOptions(query, _this68.model.countryID);
+              return _this77.stateOptions(query, _this77.model.countryID);
             };
 
             this.stateOptions('', this.model.countryID).then(
@@ -32598,25 +33687,25 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             * @return {?}
             */
             function (results) {
-              _this68.config.state.pickerConfig.defaultOptions = results;
+              _this77.config.state.pickerConfig.defaultOptions = results;
 
               if (results.length) {
-                _this68.tooltip.state = undefined;
-                _this68.disabled.state = _this68._readOnly;
+                _this77.tooltip.state = undefined;
+                _this77.disabled.state = _this77._readOnly;
 
-                _this68.setStateLabel(_this68.model);
+                _this77.setStateLabel(_this77.model);
               } else {
-                _this68.disabled.state = true;
-                _this68.tooltip.state = _this68.labels.noStatesForCountry;
+                _this77.disabled.state = true;
+                _this77.tooltip.state = _this77.labels.noStatesForCountry;
 
-                if (_this68.config.state.required) {
-                  _this68.valid.state = true;
+                if (_this77.config.state.required) {
+                  _this77.valid.state = true;
                 }
               }
 
-              _this68.validityChange.emit();
+              _this77.validityChange.emit();
 
-              _this68.onInput(null, 'state');
+              _this77.onInput(null, 'state');
             });
           } else {
             this.config.state.pickerConfig.defaultOptions = [];
@@ -32682,7 +33771,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "writeValue",
         value: function writeValue(model) {
-          var _this69 = this;
+          var _this78 = this;
 
           /** @type {?} */
           var loadingCountries = false;
@@ -32708,12 +33797,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                     */
                     function (result) {
                       loadingCountries = false;
-                      countryName = Helpers.interpolateWithFallback(_this69.config.countryID.pickerConfig.format, result);
-                      _this69.model = Object.assign(model, {
+                      countryName = Helpers.interpolateWithFallback(_this78.config.countryID.pickerConfig.format, result);
+                      _this78.model = Object.assign(model, {
                         countryName: countryName
                       });
 
-                      _this69.updateStates();
+                      _this78.updateStates();
                     });
                   }
                 }
@@ -32741,7 +33830,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (field) {
-            _this69.onInput(null, field);
+            _this78.onInput(null, field);
           });
         }
         /**
@@ -32772,7 +33861,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "getDefaultStateConfig",
         value: function getDefaultStateConfig() {
-          var _this70 = this;
+          var _this79 = this;
 
           return {
             field: 'value',
@@ -32786,7 +33875,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             function options() {
               var query = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
               var countryID = arguments.length > 1 ? arguments[1] : undefined;
-              return Promise.resolve(_this70.getStateOptions(query, countryID));
+              return Promise.resolve(_this79.getStateOptions(query, countryID));
             },
             getLabels:
             /**
@@ -32879,7 +33968,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "readOnly",
         set: function set(readOnly) {
-          var _this71 = this;
+          var _this80 = this;
 
           this._readOnly = readOnly;
           this.fieldList.forEach(
@@ -32888,7 +33977,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (field) {
-            _this71.disabled[field] = _this71._readOnly;
+            _this80.disabled[field] = _this80._readOnly;
           });
 
           if (this.model) {
@@ -33204,7 +34293,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "setupOptions",
         value: function setupOptions() {
-          var _this72 = this;
+          var _this81 = this;
 
           this.options = this.options || [];
           this._options = [];
@@ -33220,10 +34309,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               var formattedOption = {
                 value: option,
                 label: option,
-                checked: _this72.model && _this72.model.length && _this72.model.indexOf(option.value) !== -1
+                checked: _this81.model && _this81.model.length && _this81.model.indexOf(option.value) !== -1
               };
 
-              _this72._options.push(formattedOption);
+              _this81._options.push(formattedOption);
             });
           } else {
             this.options.forEach(
@@ -33234,9 +34323,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             function (option) {
               /** @type {?} */
               var formattedOption = option;
-              formattedOption.checked = _this72.model && _this72.model.length && _this72.model.indexOf(option.value) !== -1;
+              formattedOption.checked = _this81.model && _this81.model.length && _this81.model.indexOf(option.value) !== -1;
 
-              _this72._options.push(formattedOption);
+              _this81._options.push(formattedOption);
             });
           }
         }
@@ -33350,7 +34439,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
        * @param {?} file
        */
       function NovoFile(file) {
-        var _this73 = this;
+        var _this82 = this;
 
         _classCallCheck(this, NovoFile);
 
@@ -33372,12 +34461,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         * @return {?}
         */
         function (event) {
-          _this73.fileContents = event.target.result.split(',')[1];
-          _this73.dataURL = event.target.result;
-          _this73.loaded = true;
+          _this82.fileContents = event.target.result.split(',')[1];
+          _this82.dataURL = event.target.result;
+          _this82.loaded = true;
 
-          if (_this73.readPromise) {
-            _this73.readPromise(_this73);
+          if (_this82.readPromise) {
+            _this82.readPromise(_this82);
           }
         };
       }
@@ -33389,7 +34478,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _createClass(NovoFile, [{
         key: "read",
         value: function read() {
-          var _this74 = this;
+          var _this83 = this;
 
           return new Promise(
           /**
@@ -33397,9 +34486,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (resolve) {
-            _this74.readPromise = resolve; // when the file is read it triggers the onload event above.
+            _this83.readPromise = resolve; // when the file is read it triggers the onload event above.
 
-            _this74.reader.readAsDataURL(_this74.file);
+            _this83.reader.readAsDataURL(_this83.file);
           });
         }
         /**
@@ -33504,7 +34593,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _createClass(NovoFileInputElement, [{
         key: "ngOnInit",
         value: function ngOnInit() {
-          var _this75 = this;
+          var _this84 = this;
 
           ['dragenter', 'dragleave', 'dragover', 'drop'].forEach(
           /**
@@ -33512,7 +34601,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (type) {
-            _this75.element.nativeElement.addEventListener(type, _this75.commands[type]);
+            _this84.element.nativeElement.addEventListener(type, _this84.commands[type]);
           });
           this.updateLayout();
           this.initializeDragula();
@@ -33526,7 +34615,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "ngOnDestroy",
         value: function ngOnDestroy() {
-          var _this76 = this;
+          var _this85 = this;
 
           ['dragenter', 'dragleave', 'dragover', 'drop'].forEach(
           /**
@@ -33534,7 +34623,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (type) {
-            _this76.element.nativeElement.removeEventListener(type, _this76.commands[type]);
+            _this85.element.nativeElement.removeEventListener(type, _this85.commands[type]);
           });
           /** @type {?} */
 
@@ -33544,7 +34633,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (x) {
-            return x.name === _this76.fileOutputBag;
+            return x.name === _this85.fileOutputBag;
           }).length > 0;
 
           if (dragulaHasFileOutputBag) {
@@ -33578,7 +34667,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "insertTemplatesBasedOnLayout",
         value: function insertTemplatesBasedOnLayout() {
-          var _this77 = this;
+          var _this86 = this;
 
           /** @type {?} */
           var order;
@@ -33598,7 +34687,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (template) {
-            _this77.container.createEmbeddedView(_this77[template], 0);
+            _this86.container.createEmbeddedView(_this86[template], 0);
           });
           return order;
         }
@@ -33609,7 +34698,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "initializeDragula",
         value: function initializeDragula() {
-          var _this78 = this;
+          var _this87 = this;
 
           this.fileOutputBag = "file-output-".concat(this.dragula.bags.length);
           this.dragula.setOptions(this.fileOutputBag, {
@@ -33621,7 +34710,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             * @return {?}
             */
             function moves(el, container, handle) {
-              return _this78.layoutOptions.draggable;
+              return _this87.layoutOptions.draggable;
             }
           });
         }
@@ -33782,7 +34871,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "process",
         value: function process(filelist) {
-          var _this79 = this;
+          var _this88 = this;
 
           if (this.validate(filelist)) {
             Promise.all(filelist.map(
@@ -33791,24 +34880,24 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             * @return {?}
             */
             function (file) {
-              return _this79.readFile(file);
+              return _this88.readFile(file);
             })).then(
             /**
             * @param {?} files
             * @return {?}
             */
             function (files) {
-              if (_this79.multiple) {
-                var _this79$files;
+              if (_this88.multiple) {
+                var _this88$files;
 
-                (_this79$files = _this79.files).push.apply(_this79$files, _toConsumableArray(files));
+                (_this88$files = _this88.files).push.apply(_this88$files, _toConsumableArray(files));
               } else {
-                _this79.files = files;
+                _this88.files = files;
               }
 
-              _this79.model = _this79.files;
+              _this88.model = _this88.files;
 
-              _this79.onModelChange(_this79.model);
+              _this88.onModelChange(_this88.model);
             });
           }
         }
@@ -34095,7 +35184,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "setupOptions",
         value: function setupOptions() {
-          var _this80 = this;
+          var _this89 = this;
 
           if (this.options && this.options.length && (this.options[0].value === undefined || this.options[0].value === null)) {
             this._options = this.options.map(
@@ -34108,11 +35197,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               var item = {
                 value: x,
                 label: x,
-                checked: _this80.model === x
+                checked: _this89.model === x
               };
 
               if (item.checked) {
-                _this80.setTile(item);
+                _this89.setTile(item);
               }
 
               return item;
@@ -34124,10 +35213,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             * @return {?}
             */
             function (x) {
-              x.checked = _this80.model === x.value || _this80.model && _this80.model.id === x.value;
+              x.checked = _this89.model === x.value || _this89.model && _this89.model.id === x.value;
 
               if (x.checked) {
-                _this80.setTile(x);
+                _this89.setTile(x);
               }
 
               return x;
@@ -34156,18 +35245,18 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               return;
             }
 
-            var _iterator6 = _createForOfIteratorHelper(this._options),
-                _step6;
+            var _iterator7 = _createForOfIteratorHelper(this._options),
+                _step7;
 
             try {
-              for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
-                var option = _step6.value;
+              for (_iterator7.s(); !(_step7 = _iterator7.n()).done;) {
+                var option = _step7.value;
                 option.checked = false;
               }
             } catch (err) {
-              _iterator6.e(err);
+              _iterator7.e(err);
             } finally {
-              _iterator6.f();
+              _iterator7.f();
             }
 
             item.checked = !item.checked;
@@ -34381,7 +35470,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _createClass(NovoSearchBoxElement, [{
         key: "showSearch",
         value: function showSearch(event) {
-          var _this81 = this;
+          var _this90 = this;
 
           var forceClose = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
 
@@ -34394,7 +35483,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             */
             function () {
               /** @type {?} */
-              var element = _this81.input.nativeElement;
+              var element = _this90.input.nativeElement;
 
               if (element) {
                 element.focus();
@@ -34409,16 +35498,16 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "onFocus",
         value: function onFocus() {
-          var _this82 = this;
+          var _this91 = this;
 
           this._zone.run(
           /**
           * @return {?}
           */
           function () {
-            _this82.focused = true;
+            _this91.focused = true;
 
-            _this82.openPanel();
+            _this91.openPanel();
           });
         }
         /**
@@ -34475,7 +35564,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "_handleInput",
         value: function _handleInput(event) {
-          var _this83 = this;
+          var _this92 = this;
 
           if (document.activeElement === event.target) {
             this._onChange(
@@ -34491,7 +35580,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             * @return {?}
             */
             function () {
-              _this83.searchChanged.emit(
+              _this92.searchChanged.emit(
               /** @type {?} */
               event.target.value);
             }, 400);
@@ -35209,7 +36298,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "open",
         value: function open(event, type) {
-          var _this84 = this;
+          var _this93 = this;
 
           Helpers.swallowEvent(event); // If they click the toggle two time in a row, close it (go back to days)
 
@@ -35227,11 +36316,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             */
             function () {
               /** @type {?} */
-              var container = _this84.element.nativeElement.querySelector(".calendar-content.".concat(_this84.view));
+              var container = _this93.element.nativeElement.querySelector(".calendar-content.".concat(_this93.view));
               /** @type {?} */
 
 
-              var selectedItem = _this84.element.nativeElement.querySelector(".calendar-content.".concat(_this84.view, " .").concat(_this84.view === 'years' ? 'year' : 'month', ".selected"));
+              var selectedItem = _this93.element.nativeElement.querySelector(".calendar-content.".concat(_this93.view, " .").concat(_this93.view === 'years' ? 'year' : 'month', ".selected"));
 
               if (container && selectedItem) {
                 container.scrollTop = selectedItem.offsetTop - 100;
@@ -35538,12 +36627,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             if (timeFormatArray && timeFormatArray.length) {
               mask = [];
 
-              var _iterator7 = _createForOfIteratorHelper(timeFormatArray),
-                  _step7;
+              var _iterator8 = _createForOfIteratorHelper(timeFormatArray),
+                  _step8;
 
               try {
-                for (_iterator7.s(); !(_step7 = _iterator7.n()).done;) {
-                  var timeFormatPart = _step7.value;
+                for (_iterator8.s(); !(_step8 = _iterator8.n()).done;) {
+                  var timeFormatPart = _step8.value;
 
                   if (timeFormatPart === '') {
                     mask = mask.concat([/\d/, /\d|:/, /:|\d/, /\d|\w|\s/, /\d|\s|\w/]);
@@ -35554,9 +36643,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                   }
                 }
               } catch (err) {
-                _iterator7.e(err);
+                _iterator8.e(err);
               } finally {
-                _iterator7.f();
+                _iterator8.f();
               }
             }
           }
@@ -35721,21 +36810,21 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             }
 
             if (splits && splits.length) {
-              var _iterator8 = _createForOfIteratorHelper(splits),
-                  _step8;
+              var _iterator9 = _createForOfIteratorHelper(splits),
+                  _step9;
 
               try {
-                for (_iterator8.s(); !(_step8 = _iterator8.n()).done;) {
-                  var item = _step8.value;
+                for (_iterator9.s(); !(_step9 = _iterator9.n()).done;) {
+                  var item = _step9.value;
 
                   if (item && item.trim().includes(':')) {
                     timeStringParts = item.trim().split(':');
                   }
                 }
               } catch (err) {
-                _iterator8.e(err);
+                _iterator9.e(err);
               } finally {
-                _iterator8.f();
+                _iterator9.f();
               }
             }
 
@@ -36067,14 +37156,14 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "writeValue",
         value: function writeValue(value) {
-          var _this85 = this;
+          var _this94 = this;
 
           Promise.resolve(null).then(
           /**
           * @return {?}
           */
           function () {
-            return _this85._setTriggerValue(value);
+            return _this94._setTriggerValue(value);
           });
         }
         /**
@@ -36370,19 +37459,19 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
        * @param {?} renderer
        */
       function NovoDataTableCell(columnDef, elementRef, renderer) {
-        var _this86;
+        var _this95;
 
         _classCallCheck(this, NovoDataTableCell);
 
-        _this86 = _super12.call(this, columnDef, elementRef);
-        _this86.elementRef = elementRef;
-        _this86.renderer = renderer;
-        _this86.role = 'gridcell';
-        _this86.subscriptions = [];
+        _this95 = _super12.call(this, columnDef, elementRef);
+        _this95.elementRef = elementRef;
+        _this95.renderer = renderer;
+        _this95.role = 'gridcell';
+        _this95.subscriptions = [];
         renderer.setAttribute(elementRef.nativeElement, 'data-automation-id', "novo-column-".concat(columnDef.cssClassFriendlyName));
         renderer.addClass(elementRef.nativeElement, "novo-column-".concat(columnDef.cssClassFriendlyName));
         renderer.addClass(elementRef.nativeElement, 'novo-data-table-cell');
-        return _this86;
+        return _this95;
       }
       /**
        * @return {?}
@@ -36392,7 +37481,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _createClass(NovoDataTableCell, [{
         key: "ngOnInit",
         value: function ngOnInit() {
-          var _this87 = this;
+          var _this96 = this;
 
           if (this.column.cellClass) {
             this.renderer.addClass(this.elementRef.nativeElement, this.column.cellClass(this.row));
@@ -36409,8 +37498,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (column) {
-            if (column === _this87.column) {
-              _this87.calculateWidths();
+            if (column === _this96.column) {
+              _this96.calculateWidths();
             }
           }));
         }
@@ -36513,38 +37602,38 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
        * @param {?} ref
        */
       function NovoDataTableCheckboxCell(columnDef, elementRef, renderer, dataTable, ref) {
-        var _this88;
+        var _this97;
 
         _classCallCheck(this, NovoDataTableCheckboxCell);
 
-        _this88 = _super13.call(this, columnDef, elementRef);
-        _this88.columnDef = columnDef;
-        _this88.dataTable = dataTable;
-        _this88.ref = ref;
-        _this88.role = 'gridcell';
-        _this88.checked = false;
+        _this97 = _super13.call(this, columnDef, elementRef);
+        _this97.columnDef = columnDef;
+        _this97.dataTable = dataTable;
+        _this97.ref = ref;
+        _this97.role = 'gridcell';
+        _this97.checked = false;
         renderer.setAttribute(elementRef.nativeElement, 'data-automation-id', "novo-checkbox-column-".concat(columnDef.cssClassFriendlyName));
         renderer.addClass(elementRef.nativeElement, "novo-checkbox-column-".concat(columnDef.cssClassFriendlyName));
         renderer.addClass(elementRef.nativeElement, 'novo-data-table-checkbox-cell');
-        _this88.selectionSubscription = _this88.dataTable.state.selectionSource.subscribe(
+        _this97.selectionSubscription = _this97.dataTable.state.selectionSource.subscribe(
         /**
         * @return {?}
         */
         function () {
-          _this88.checked = _this88.dataTable.isSelected(_this88.row);
+          _this97.checked = _this97.dataTable.isSelected(_this97.row);
 
-          _this88.ref.markForCheck();
+          _this97.ref.markForCheck();
         });
-        _this88.resetSubscription = _this88.dataTable.state.resetSource.subscribe(
+        _this97.resetSubscription = _this97.dataTable.state.resetSource.subscribe(
         /**
         * @return {?}
         */
         function () {
-          _this88.checked = false;
+          _this97.checked = false;
 
-          _this88.ref.markForCheck();
+          _this97.ref.markForCheck();
         });
-        return _this88;
+        return _this97;
       }
       /**
        * @return {?}
@@ -36644,29 +37733,29 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
        * @param {?} ref
        */
       function NovoDataTableExpandCell(columnDef, elementRef, renderer, dataTable, ref) {
-        var _this89;
+        var _this98;
 
         _classCallCheck(this, NovoDataTableExpandCell);
 
-        _this89 = _super14.call(this, columnDef, elementRef);
-        _this89.columnDef = columnDef;
-        _this89.dataTable = dataTable;
-        _this89.ref = ref;
-        _this89.role = 'gridcell';
-        _this89.expanded = false;
+        _this98 = _super14.call(this, columnDef, elementRef);
+        _this98.columnDef = columnDef;
+        _this98.dataTable = dataTable;
+        _this98.ref = ref;
+        _this98.role = 'gridcell';
+        _this98.expanded = false;
         renderer.setAttribute(elementRef.nativeElement, 'data-automation-id', "novo-expand-column-".concat(columnDef.cssClassFriendlyName));
         renderer.addClass(elementRef.nativeElement, "novo-expand-column-".concat(columnDef.cssClassFriendlyName));
         renderer.addClass(elementRef.nativeElement, 'novo-data-table-expand-cell');
-        _this89.expandSubscription = _this89.dataTable.state.expandSource.subscribe(
+        _this98.expandSubscription = _this98.dataTable.state.expandSource.subscribe(
         /**
         * @return {?}
         */
         function () {
-          _this89.expanded = _this89.dataTable.isExpanded(_this89.row);
+          _this98.expanded = _this98.dataTable.isExpanded(_this98.row);
 
-          _this89.ref.markForCheck();
+          _this98.ref.markForCheck();
         });
-        return _this89;
+        return _this98;
       }
       /**
        * @return {?}
@@ -36751,15 +37840,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       var _super15 = _createSuper(NovoDataTableHeaderRow);
 
       function NovoDataTableHeaderRow() {
-        var _this90;
+        var _this99;
 
         _classCallCheck(this, NovoDataTableHeaderRow);
 
-        _this90 = _super15.apply(this, arguments);
-        _this90.rowClass = 'novo-data-table-header-row';
-        _this90.fixedHeader = false;
-        _this90.role = 'row';
-        return _this90;
+        _this99 = _super15.apply(this, arguments);
+        _this99.rowClass = 'novo-data-table-header-row';
+        _this99.fixedHeader = false;
+        _this99.role = 'row';
+        return _this99;
       }
 
       return NovoDataTableHeaderRow;
@@ -36804,14 +37893,14 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       var _super16 = _createSuper(NovoDataTableRow);
 
       function NovoDataTableRow() {
-        var _this91;
+        var _this100;
 
         _classCallCheck(this, NovoDataTableRow);
 
-        _this91 = _super16.apply(this, arguments);
-        _this91.rowClass = 'novo-data-table-row';
-        _this91.role = 'row';
-        return _this91;
+        _this100 = _super16.apply(this, arguments);
+        _this100.rowClass = 'novo-data-table-row';
+        _this100.role = 'row';
+        return _this100;
       }
 
       return NovoDataTableRow;
@@ -36845,990 +37934,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         args: ['attr.data-automation-id']
       }, {
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
-      }]
-    };
-
-    if (false) {}
-    /**
-     * @fileoverview added by tsickle
-     * Generated from: elements/data-table/sort-filter/sort-filter.directive.ts
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-
-    /**
-     * @template T
-     */
-
-
-    var NovoDataTableSortFilter = /*#__PURE__*/function () {
-      /**
-       * @param {?} state
-       */
-      function NovoDataTableSortFilter(state) {
-        _classCallCheck(this, NovoDataTableSortFilter);
-
-        this.state = state;
-      }
-      /**
-       * @param {?} id
-       * @param {?} type
-       * @param {?} value
-       * @param {?} transform
-       * @param {?=} allowMultipleFilters
-       * @param {?=} selectedOption
-       * @return {?}
-       */
-
-
-      _createClass(NovoDataTableSortFilter, [{
-        key: "filter",
-        value: function filter(id, type, value, transform) {
-          var allowMultipleFilters = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : false;
-          var selectedOption = arguments.length > 5 ? arguments[5] : undefined;
-
-          /** @type {?} */
-          var filter;
-
-          if (allowMultipleFilters) {
-            filter = this.resolveMultiFilter(id, type, value, transform, selectedOption);
-          } else {
-            if (!Helpers.isBlank(value)) {
-              filter = Object.assign({
-                id: id,
-                type: type,
-                value: value,
-                transform: transform
-              }, selectedOption && {
-                selectedOption: selectedOption
-              });
-            } else {
-              filter = undefined;
-            }
-          }
-
-          this.state.filter = filter;
-          this.state.reset(false, true);
-          this.state.updates.next({
-            filter: filter,
-            sort: this.state.sort
-          });
-          this.state.onSortFilterChange();
-        }
-        /**
-         * @param {?} id
-         * @param {?} value
-         * @param {?} transform
-         * @return {?}
-         */
-
-      }, {
-        key: "sort",
-        value: function sort(id, value, transform) {
-          /** @type {?} */
-          var sort = {
-            id: id,
-            value: value,
-            transform: transform
-          };
-          this.state.sort = sort;
-          this.state.reset(false, true);
-          this.state.updates.next({
-            sort: sort,
-            filter: this.state.filter
-          });
-          this.state.onSortFilterChange();
-        }
-        /**
-         * @param {?} id
-         * @param {?} type
-         * @param {?} value
-         * @param {?} transform
-         * @param {?} selectedOption
-         * @return {?}
-         */
-
-      }, {
-        key: "resolveMultiFilter",
-        value: function resolveMultiFilter(id, type, value, transform, selectedOption) {
-          /** @type {?} */
-          var filter;
-          filter = Helpers.convertToArray(this.state.filter);
-          /** @type {?} */
-
-          var filterIndex = filter.findIndex(
-          /**
-          * @param {?} aFilter
-          * @return {?}
-          */
-          function (aFilter) {
-            return aFilter && aFilter.id === id;
-          });
-
-          if (filterIndex > -1) {
-            filter.splice(filterIndex, 1);
-          }
-
-          if (!Helpers.isBlank(value)) {
-            filter = [].concat(_toConsumableArray(filter), [Object.assign({
-              id: id,
-              type: type,
-              value: value,
-              transform: transform
-            }, selectedOption && {
-              selectedOption: selectedOption
-            })]);
-          }
-
-          if (filter.length < 1) {
-            filter = undefined;
-          }
-
-          return filter;
-        }
-      }]);
-
-      return NovoDataTableSortFilter;
-    }();
-
-    NovoDataTableSortFilter.decorators = [{
-      type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Directive"],
-      args: [{
-        selector: '[novoDataTableSortFilter]'
-      }]
-    }];
-    /** @nocollapse */
-
-    NovoDataTableSortFilter.ctorParameters = function () {
-      return [{
-        type: DataTableState
-      }];
-    };
-
-    if (false) {}
-    /**
-     * @fileoverview added by tsickle
-     * Generated from: elements/data-table/cell-headers/data-table-header-cell.component.ts
-     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
-
-    /**
-     * @template T
-     */
-
-
-    var NovoDataTableCellHeader = /*#__PURE__*/function () {
-      /**
-       * @param {?} changeDetectorRef
-       * @param {?} labels
-       * @param {?} state
-       * @param {?} renderer
-       * @param {?} elementRef
-       * @param {?} _sort
-       * @param {?} _cdkColumnDef
-       */
-      function NovoDataTableCellHeader(changeDetectorRef, labels, state, renderer, elementRef, _sort, _cdkColumnDef) {
-        var _this92 = this;
-
-        _classCallCheck(this, NovoDataTableCellHeader);
-
-        this.changeDetectorRef = changeDetectorRef;
-        this.labels = labels;
-        this.state = state;
-        this.renderer = renderer;
-        this.elementRef = elementRef;
-        this._sort = _sort;
-        this._cdkColumnDef = _cdkColumnDef;
-        this.allowMultipleFilters = false;
-        this.icon = 'sortable';
-        this.filterActive = false;
-        this.sortActive = false;
-        this.showCustomRange = false;
-        this.multiSelect = false;
-        this.multiSelectedOptions = [];
-        this.multiSelectedOptionIsHidden = [];
-        this.optionFilter = '';
-        this.error = false;
-        this.subscriptions = [];
-        this._rerenderSubscription = state.updates.subscribe(
-        /**
-        * @param {?} change
-        * @return {?}
-        */
-        function (change) {
-          return _this92.checkSortFilterState(change);
-        });
-      }
-      /**
-       * @param {?} column
-       * @return {?}
-       */
-
-
-      _createClass(NovoDataTableCellHeader, [{
-        key: "ngOnInit",
-
-        /**
-         * @return {?}
-         */
-        value: function ngOnInit() {
-          if (this._cdkColumnDef) {
-            this.id = this._cdkColumnDef.name;
-          }
-
-          this.checkSortFilterState({
-            filter: this.state.filter,
-            sort: this.state.sort
-          }, true);
-          this.multiSelect = this.config.filterConfig && this.config.filterConfig.type ? this.config.filterConfig.type === 'multi-select' : false;
-
-          if (this.multiSelect) {
-            this.multiSelectedOptions = this.filter ? _toConsumableArray(this.filter) : [];
-          }
-
-          this.changeDetectorRef.markForCheck();
-        }
-        /**
-         * @return {?}
-         */
-
-      }, {
-        key: "ngOnDestroy",
-        value: function ngOnDestroy() {
-          this._rerenderSubscription.unsubscribe();
-
-          this.subscriptions.forEach(
-          /**
-          * @param {?} subscription
-          * @return {?}
-          */
-          function (subscription) {
-            subscription.unsubscribe();
-          });
-        }
-        /**
-         * @param {?} sortFilterState
-         * @param {?=} initialConfig
-         * @return {?}
-         */
-
-      }, {
-        key: "checkSortFilterState",
-        value: function checkSortFilterState(sortFilterState) {
-          var _this93 = this;
-
-          var initialConfig = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-
-          if (sortFilterState.sort && sortFilterState.sort.id === this.id) {
-            this.icon = "sort-".concat(sortFilterState.sort.value);
-            this.sortActive = true;
-          } else {
-            this.icon = 'sortable';
-            this.sortActive = false;
-          }
-          /** @type {?} */
-
-
-          var tableFilter = Helpers.convertToArray(sortFilterState.filter);
-          /** @type {?} */
-
-          var thisFilter = tableFilter.find(
-          /**
-          * @param {?} filter
-          * @return {?}
-          */
-          function (filter) {
-            return filter && filter.id === _this93.id;
-          });
-
-          if (thisFilter) {
-            this.filterActive = true;
-
-            if (initialConfig && thisFilter.type === 'date' && thisFilter.selectedOption) {
-              this.activeDateFilter = thisFilter.selectedOption.label || this.labels.customDateRange;
-            }
-
-            this.filter = thisFilter.value;
-          } else {
-            this.filterActive = false;
-            this.filter = undefined;
-            this.activeDateFilter = undefined;
-            this.multiSelectedOptions = [];
-          }
-
-          if (this.defaultSort && this.id === this.defaultSort.id) {
-            this.icon = "sort-".concat(this.defaultSort.value);
-            this.sortActive = true;
-          }
-
-          this.multiSelect = this.config.filterConfig && this.config.filterConfig.type ? this.config.filterConfig.type === 'multi-select' : false;
-
-          if (this.multiSelect) {
-            this.multiSelectedOptions = this.filter ? _toConsumableArray(this.filter) : [];
-
-            if (this.config.filterConfig.options) {
-              if (typeof this.config.filterConfig.options[0] === 'string') {
-                this.multiSelectedOptionIsHidden =
-                /** @type {?} */
-                this.config.filterConfig.options.map(
-                /**
-                * @param {?} option
-                * @return {?}
-                */
-                function (option) {
-                  return {
-                    option: option,
-                    hidden: false
-                  };
-                });
-              } else {
-                this.multiSelectedOptionIsHidden =
-                /** @type {?} */
-                this.config.filterConfig.options.map(
-                /**
-                * @param {?} option
-                * @return {?}
-                */
-                function (option) {
-                  return {
-                    option: option,
-                    hidden: false
-                  };
-                });
-              }
-            }
-          }
-
-          this.changeDetectorRef.markForCheck();
-        }
-        /**
-         * @param {?} option
-         * @param {?} optionsList
-         * @return {?}
-         */
-
-      }, {
-        key: "isSelected",
-        value: function isSelected(option, optionsList) {
-          var _this94 = this;
-
-          if (optionsList) {
-            /** @type {?} */
-            var optionValue = option.hasOwnProperty('value') ? option.value : option;
-            /** @type {?} */
-
-            var found = optionsList.find(
-            /**
-            * @param {?} item
-            * @return {?}
-            */
-            function (item) {
-              return _this94.optionPresentCheck(item, optionValue);
-            });
-            return found !== undefined;
-          }
-
-          return false;
-        }
-        /**
-         * @param {?} option
-         * @return {?}
-         */
-
-      }, {
-        key: "toggleSelection",
-        value: function toggleSelection(option) {
-          var _this95 = this;
-
-          /** @type {?} */
-          var optionValue = option.hasOwnProperty('value') ? option.value : option;
-          /** @type {?} */
-
-          var optionIndex = this.multiSelectedOptions.findIndex(
-          /**
-          * @param {?} item
-          * @return {?}
-          */
-          function (item) {
-            return _this95.optionPresentCheck(item, optionValue);
-          });
-          this.error = false;
-
-          if (optionIndex > -1) {
-            this.multiSelectedOptions.splice(optionIndex, 1);
-
-            if (this.optionFilter && !this.getOptionText(option).toLowerCase().startsWith(this.optionFilter.toLowerCase())) {
-              this.multiSelectedOptionIsHidden[this.multiSelectedOptionIsHidden.findIndex(
-              /**
-              * @param {?} record
-              * @return {?}
-              */
-              function (record) {
-                return record.option === option;
-              })].hidden = true;
-            }
-          } else {
-            this.multiSelectedOptions.push(optionValue);
-          }
-        }
-        /**
-         * @param {?} item
-         * @param {?} optionValue
-         * @return {?}
-         */
-
-      }, {
-        key: "optionPresentCheck",
-        value: function optionPresentCheck(item, optionValue) {
-          if (item.hasOwnProperty('value')) {
-            return item.value === optionValue;
-          } else {
-            return item === optionValue;
-          }
-        }
-        /**
-         * @return {?}
-         */
-
-      }, {
-        key: "cancel",
-        value: function cancel() {
-          this.multiSelectedOptions = this.filter ? _toConsumableArray(this.filter) : [];
-          this.dropdown.closePanel();
-          this.clearOptionFilter();
-        }
-        /**
-         * @return {?}
-         */
-
-      }, {
-        key: "filterMultiSelect",
-        value: function filterMultiSelect() {
-          if (this.multiSelectedOptions.length === 0 && !this.filter) {
-            this.multiSelectHasVisibleOptions() && this.dropdown ? this.error = true : null;
-          } else {
-            this.clearOptionFilter();
-            /** @type {?} */
-
-            var actualFilter = this.multiSelectedOptions.length > 0 ? _toConsumableArray(this.multiSelectedOptions) : undefined;
-            this.filterData(actualFilter);
-            this.dropdown.closePanel();
-          }
-        }
-        /**
-         * @param {?} optionFilter
-         * @return {?}
-         */
-
-      }, {
-        key: "multiSelectOptionFilter",
-        value: function multiSelectOptionFilter(optionFilter) {
-          var _this96 = this;
-
-          this.multiSelectedOptionIsHidden.forEach(
-          /**
-          * @param {?} record
-          * @return {?}
-          */
-          function (record) {
-            if (record.option) {
-              record.hidden = !(_this96.getOptionText(record.option).toLowerCase().startsWith(optionFilter.toLowerCase()) || _this96.isSelected(record.option, _this96.multiSelectedOptions));
-            }
-          });
-        }
-        /**
-         * @param {?} option
-         * @return {?}
-         */
-
-      }, {
-        key: "multiSelectOptionIsHidden",
-        value: function multiSelectOptionIsHidden(option) {
-          return this.multiSelectedOptionIsHidden.find(
-          /**
-          * @param {?} record
-          * @return {?}
-          */
-          function (record) {
-            return record.option === option;
-          }).hidden;
-        }
-        /**
-         * @return {?}
-         */
-
-      }, {
-        key: "multiSelectHasVisibleOptions",
-        value: function multiSelectHasVisibleOptions() {
-          return this.multiSelectedOptionIsHidden.some(
-          /**
-          * @param {?} record
-          * @return {?}
-          */
-          function (record) {
-            return !record.hidden;
-          });
-        }
-        /**
-         * @private
-         * @param {?} option
-         * @return {?}
-         */
-
-      }, {
-        key: "getOptionText",
-        value: function getOptionText(option) {
-          if (typeof option !== 'object') {
-            return option.toString();
-          } else {
-            /** @type {?} */
-            var opt =
-            /** @type {?} */
-            option;
-            return (opt.label.length > 0 ? opt.label : opt.value).toString();
-          }
-        }
-        /**
-         * @param {?} event
-         * @return {?}
-         */
-
-      }, {
-        key: "multiSelectOptionFilterHandleKeydown",
-        value: function multiSelectOptionFilterHandleKeydown(event) {
-          if (this.multiSelect) {
-            this.error = false;
-
-            if (this.dropdown.panelOpen && event.keyCode === KeyCodes.ESC) {
-              // escape = clear text box and close
-              Helpers.swallowEvent(event);
-              this.clearOptionFilter();
-              this.dropdown.closePanel();
-            } else if (event.keyCode === KeyCodes.ENTER) {
-              Helpers.swallowEvent(event);
-              this.filterMultiSelect();
-            } else if (event.keyCode >= 65 && event.keyCode <= 90 || event.keyCode >= 96 && event.keyCode <= 105 || event.keyCode >= 48 && event.keyCode <= 57) {
-              this.optionFilterInput.nativeElement.focus();
-            }
-          }
-        }
-        /**
-         * @private
-         * @return {?}
-         */
-
-      }, {
-        key: "clearOptionFilter",
-        value: function clearOptionFilter() {
-          this.error = false;
-
-          if (this.optionFilter.length > 0) {
-            this.optionFilter = '';
-            this.multiSelectedOptionIsHidden.forEach(
-            /**
-            * @param {?} record
-            * @return {?}
-            */
-            function (record) {
-              record.hidden = false;
-            });
-          }
-        }
-        /**
-         * @param {?} mouseDownEvent
-         * @return {?}
-         */
-
-      }, {
-        key: "startResize",
-        value: function startResize(mouseDownEvent) {
-          var _this97 = this;
-
-          mouseDownEvent.preventDefault();
-          /** @type {?} */
-
-          var minimumWidth = 60 + (this.config.filterable ? 30 : 0) + (this.config.sortable ? 30 : 0);
-          /** @type {?} */
-
-          var startingWidth = this.elementRef.nativeElement.getBoundingClientRect().width;
-          /** @type {?} */
-
-          var mouseMoveSubscription = Object(rxjs__WEBPACK_IMPORTED_MODULE_11__["fromEvent"])(window.document, 'mousemove').subscribe(
-          /**
-          * @param {?} middleMouseEvent
-          * @return {?}
-          */
-          function (middleMouseEvent) {
-            /** @type {?} */
-            var differenceWidth = middleMouseEvent.clientX - mouseDownEvent.clientX;
-            /** @type {?} */
-
-            var width = startingWidth + differenceWidth;
-
-            if (width < minimumWidth) {
-              width = minimumWidth;
-            }
-
-            _this97._column.width = width;
-
-            _this97.renderer.setStyle(_this97.elementRef.nativeElement, 'min-width', "".concat(_this97._column.width, "px"));
-
-            _this97.renderer.setStyle(_this97.elementRef.nativeElement, 'max-width', "".concat(_this97._column.width, "px"));
-
-            _this97.renderer.setStyle(_this97.elementRef.nativeElement, 'width', "".concat(_this97._column.width, "px"));
-
-            _this97.changeDetectorRef.markForCheck();
-
-            _this97.resized.next(_this97._column);
-          });
-          /** @type {?} */
-
-          var mouseUpSubscription = Object(rxjs__WEBPACK_IMPORTED_MODULE_11__["fromEvent"])(window.document, 'mouseup').subscribe(
-          /**
-          * @return {?}
-          */
-          function () {
-            mouseUpSubscription.unsubscribe();
-            mouseMoveSubscription.unsubscribe();
-
-            _this97.changeDetectorRef.markForCheck();
-          });
-          this.subscriptions.push(mouseMoveSubscription);
-          this.subscriptions.push(mouseUpSubscription);
-        }
-        /**
-         * @param {?} event
-         * @param {?} value
-         * @return {?}
-         */
-
-      }, {
-        key: "toggleCustomRange",
-        value: function toggleCustomRange(event, value) {
-          Helpers.swallowEvent(event);
-          this.showCustomRange = value;
-          this.changeDetectorRef.markForCheck();
-          this.dropdown.openPanel(); // Ensures that the panel correctly updates to the dynamic size of the dropdown
-        }
-        /**
-         * @return {?}
-         */
-
-      }, {
-        key: "focusInput",
-        value: function focusInput() {
-          var _this98 = this;
-
-          if (this.filterInput && this.filterInput.nativeElement) {
-            setTimeout(
-            /**
-            * @return {?}
-            */
-            function () {
-              return _this98.filterInput.nativeElement.focus();
-            }, 0);
-          }
-
-          if (this.multiSelect && this.dropdown) {
-            this.dropdown.onKeyDown =
-            /**
-            * @param {?} event
-            * @return {?}
-            */
-            function (event) {
-              _this98.multiSelectOptionFilterHandleKeydown(event);
-            };
-
-            setTimeout(
-            /**
-            * @return {?}
-            */
-            function () {
-              return _this98.optionFilterInput.nativeElement.focus();
-            }, 0);
-            this.changeDetectorRef.markForCheck();
-          }
-        }
-        /**
-         * @return {?}
-         */
-
-      }, {
-        key: "sort",
-        value: function sort() {
-          var _this99 = this;
-
-          if (this.changeTimeout) {
-            clearTimeout(this.changeTimeout);
-          }
-
-          this.changeTimeout = setTimeout(
-          /**
-          * @return {?}
-          */
-          function () {
-            _this99.direction = _this99.getNextSortDirection(_this99.direction);
-
-            _this99._sort.sort(_this99.id, _this99.direction, _this99.config.transforms.sort);
-
-            _this99.changeDetectorRef.markForCheck();
-          }, 300);
-        }
-        /**
-         * @param {?=} filter
-         * @return {?}
-         */
-
-      }, {
-        key: "filterData",
-        value: function filterData(filter) {
-          var _this100 = this;
-
-          /** @type {?} */
-          var actualFilter = NovoDataTableFilterUtils.constructFilter(filter, this.config.filterConfig.type, this.multiSelect);
-          /** @type {?} */
-
-          var selectedOption = this.config.filterConfig.type === 'date' && filter ? filter : undefined;
-
-          if (this.changeTimeout) {
-            clearTimeout(this.changeTimeout);
-          }
-
-          this.changeTimeout = setTimeout(
-          /**
-          * @return {?}
-          */
-          function () {
-            if (actualFilter === '') {
-              actualFilter = undefined;
-            }
-
-            _this100._sort.filter(_this100.id, _this100.config.filterConfig.type, actualFilter, _this100.config.transforms.filter, _this100.allowMultipleFilters, selectedOption);
-
-            _this100.changeDetectorRef.markForCheck();
-          }, 300);
-        }
-        /**
-         * @return {?}
-         */
-
-      }, {
-        key: "clearFilter",
-        value: function clearFilter() {
-          this.filter = undefined;
-          this.multiSelectedOptions = [];
-          this.activeDateFilter = undefined;
-          this.filterData(undefined);
-          this.clearOptionFilter();
-          this.dropdown.closePanel();
-        }
-        /**
-         * @private
-         * @param {?} direction
-         * @return {?}
-         */
-
-      }, {
-        key: "getNextSortDirection",
-        value: function getNextSortDirection(direction) {
-          if (!direction) {
-            return 'asc';
-          }
-
-          if (direction === 'asc') {
-            return 'desc';
-          }
-
-          return 'asc';
-        }
-        /**
-         * @private
-         * @return {?}
-         */
-
-      }, {
-        key: "getDefaultDateFilterOptions",
-        value: function getDefaultDateFilterOptions() {
-          /** @type {?} */
-          var opts = [{
-            label: this.labels.past1Day,
-            min: -1,
-            max: 0
-          }, {
-            label: this.labels.past7Days,
-            min: -7,
-            max: 0
-          }, {
-            label: this.labels.past30Days,
-            min: -30,
-            max: 0
-          }, {
-            label: this.labels.past90Days,
-            min: -90,
-            max: 0
-          }, {
-            label: this.labels.past1Year,
-            min: -366,
-            max: 0
-          }, {
-            label: this.labels.next1Day,
-            min: 0,
-            max: 1
-          }, {
-            label: this.labels.next7Days,
-            min: 0,
-            max: 7
-          }, {
-            label: this.labels.next30Days,
-            min: 0,
-            max: 30
-          }, {
-            label: this.labels.next90Days,
-            min: 0,
-            max: 90
-          }, {
-            label: this.labels.next1Year,
-            min: 0,
-            max: 366
-          }];
-          return opts;
-        }
-      }, {
-        key: "column",
-        set: function set(column) {
-          this._column = column;
-          this.label = column.type === 'action' ? '' : column.label;
-          this.labelIcon = column.labelIcon;
-          this.config = {
-            sortable: !!column.sortable,
-            filterable: !!column.filterable,
-            resizable: !!column.resizable
-          };
-          this.resizable = this.config.resizable;
-          /** @type {?} */
-
-          var transforms = {};
-
-          if (column.filterable && Helpers.isObject(column.filterable)) {
-            this.config.filterConfig =
-            /** @type {?} */
-            column.filterable;
-
-            if (!this.config.filterConfig.type) {
-              this.config.filterConfig = {
-                type: 'text'
-              };
-            }
-
-            if (
-            /** @type {?} */
-            column.filterable.transform) {
-              transforms.filter =
-              /** @type {?} */
-              column.filterable.transform;
-            }
-          } else {
-            this.config.filterConfig = {
-              type: 'text'
-            };
-          }
-
-          if (column.sortable && Helpers.isObject(column.sortable)) {
-            if (
-            /** @type {?} */
-            column.sortable.transform) {
-              transforms.sort =
-              /** @type {?} */
-              column.sortable.transform;
-            }
-          }
-
-          if (this.config.filterConfig.type === 'date' && !this.config.filterConfig.options) {
-            this.config.filterConfig.options = this.getDefaultDateFilterOptions();
-          }
-
-          this.config.transforms = transforms;
-        }
-      }]);
-
-      return NovoDataTableCellHeader;
-    }();
-
-    NovoDataTableCellHeader.decorators = [{
-      type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
-      args: [{
-        selector: '[novo-data-table-cell-config]',
-        template: "\n    <i class=\"bhi-{{ labelIcon }} label-icon\" *ngIf=\"labelIcon\" data-automation-id=\"novo-data-table-header-icon\"></i>\n    <label data-automation-id=\"novo-data-table-label\">{{ label }}</label>\n    <div>\n      <button\n        *ngIf=\"config.sortable\"\n        tooltipPosition=\"right\"\n        [tooltip]=\"labels.sort\"\n        theme=\"icon\"\n        [icon]=\"icon\"\n        (click)=\"sort()\"\n        [class.active]=\"sortActive\"\n        data-automation-id=\"novo-data-table-sort\"\n        [attr.data-feature-id]=\"'novo-data-table-sort-' + this.id\"\n      ></button>\n      <novo-dropdown\n        *ngIf=\"config.filterable\"\n        side=\"right\"\n        parentScrollSelector=\".novo-data-table-container\"\n        containerClass=\"data-table-dropdown\"\n        data-automation-id=\"novo-data-table-filter\"\n      >\n        <button\n          type=\"button\"\n          theme=\"icon\"\n          icon=\"filter\"\n          [class.active]=\"filterActive\"\n          (click)=\"focusInput()\"\n          tooltipPosition=\"right\"\n          [tooltip]=\"labels.filters\"\n          [attr.data-feature-id]=\"'novo-data-table-filter-' + this.id\"\n        ></button>\n        <div class=\"header\">\n          <span>{{ labels.filters }}</span>\n          <button\n            theme=\"dialogue\"\n            color=\"negative\"\n            icon=\"times\"\n            (click)=\"clearFilter()\"\n            *ngIf=\"filter !== null && filter !== undefined && filter !== ''\"\n            data-automation-id=\"novo-data-table-filter-clear\"\n          >\n            {{ labels.clear }}\n          </button>\n        </div>\n        <ng-container [ngSwitch]=\"config.filterConfig.type\">\n          <list *ngSwitchCase=\"'date'\">\n            <ng-container *ngIf=\"!showCustomRange\">\n              <item\n                [class.active]=\"activeDateFilter === option.label\"\n                *ngFor=\"let option of config.filterConfig.options\"\n                (click)=\"filterData(option)\"\n                [attr.data-automation-id]=\"'novo-data-table-filter-' + option.label\"\n              >\n                {{ option.label }} <i class=\"bhi-check\" *ngIf=\"activeDateFilter === option.label\"></i>\n              </item>\n            </ng-container>\n            <item\n              [class.active]=\"labels.customDateRange === activeDateFilter\"\n              (click)=\"toggleCustomRange($event, true)\"\n              *ngIf=\"config.filterConfig.allowCustomRange && !showCustomRange\"\n              [keepOpen]=\"true\"\n            >\n              {{ labels.customDateRange }} <i class=\"bhi-check\" *ngIf=\"labels.customDateRange === activeDateFilter\"></i>\n            </item>\n            <div class=\"calendar-container\" *ngIf=\"showCustomRange\">\n              <div (click)=\"toggleCustomRange($event, false)\"><i class=\"bhi-previous\"></i>{{ labels.backToPresetFilters }}</div>\n              <novo-date-picker (onSelect)=\"filterData($event)\" [(ngModel)]=\"filter\" range=\"true\"></novo-date-picker>\n            </div>\n          </list>\n          <list *ngSwitchCase=\"'select'\">\n            <item\n              [class.active]=\"filter === option\"\n              *ngFor=\"let option of config.filterConfig.options\"\n              (click)=\"filterData(option)\"\n              [attr.data-automation-id]=\"'novo-data-table-filter-' + (option?.label || option)\"\n            >\n              <span>{{ option?.label || option }}</span>\n              <i class=\"bhi-check\" *ngIf=\"option.hasOwnProperty('value') ? filter === option.value : filter === option\"></i>\n            </item>\n          </list>\n          <list *ngSwitchCase=\"'multi-select'\">\n            <div class=\"dropdown-list-filter\" (keydown)=\"multiSelectOptionFilterHandleKeydown($event)\">\n              <item class=\"filter-search\" keepOpen=\"true\">\n                <input\n                  [(ngModel)]=\"optionFilter\"\n                  (ngModelChange)=\"multiSelectOptionFilter($event)\"\n                  #optionFilterInput\n                  data-automation-id=\"novo-data-table-multi-select-option-filter-input\"\n                />\n                <i class=\"bhi-search\"></i>\n                <span class=\"error-text\" [hidden]=\"!error || !multiSelectHasVisibleOptions()\">{{ labels.selectFilterOptions }}</span>\n              </item>\n            </div>\n            <div class=\"dropdown-list-options\">\n              <item\n                *ngFor=\"let option of config.filterConfig.options\"\n                [hidden]=\"multiSelectOptionIsHidden(option)\"\n                (click)=\"toggleSelection(option)\"\n                [attr.data-automation-id]=\"'novo-data-table-filter-' + (option?.label || option)\"\n                [keepOpen]=\"true\"\n              >\n                <span>{{ option?.label || option }}</span>\n                <i\n                  [class.bhi-checkbox-empty]=\"!isSelected(option, multiSelectedOptions)\"\n                  [class.bhi-checkbox-filled]=\"isSelected(option, multiSelectedOptions)\"\n                ></i>\n              </item>\n            </div>\n            <p class=\"filter-null-results\" [hidden]=\"multiSelectHasVisibleOptions()\">{{ labels.pickerEmpty }}</p>\n          </list>\n          <list *ngSwitchCase=\"'custom'\">\n            <item class=\"filter-search\" keepOpen=\"true\">\n              <ng-container *ngTemplateOutlet=\"filterTemplate; context: { $implicit: config }\"></ng-container>\n            </item>\n          </list>\n          <list *ngSwitchDefault>\n            <item class=\"filter-search\" keepOpen=\"true\">\n              <input\n                [type]=\"config.filterConfig.type\"\n                [(ngModel)]=\"filter\"\n                (ngModelChange)=\"filterData($event)\"\n                #filterInput\n                data-automation-id=\"novo-data-table-filter-input\"\n              />\n            </item>\n          </list>\n        </ng-container>\n        <div class=\"footer\" *ngIf=\"multiSelect\">\n          <button theme=\"dialogue\" color=\"dark\" (click)=\"cancel()\" data-automation-id=\"novo-data-table-multi-select-cancel\">\n            {{ labels.cancel }}\n          </button>\n          <button theme=\"dialogue\" color=\"positive\" (click)=\"filterMultiSelect()\" data-automation-id=\"novo-data-table-multi-select-filter\">\n            {{ labels.filters }}\n          </button>\n        </div>\n      </novo-dropdown>\n    </div>\n    <div class=\"spacer\"></div>\n    <div class=\"data-table-header-resizable\" *ngIf=\"config.resizable\"><span (mousedown)=\"startResize($event)\">&nbsp;</span></div>\n  ",
-        changeDetection: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ChangeDetectionStrategy"].OnPush
-      }]
-    }];
-    /** @nocollapse */
-
-    NovoDataTableCellHeader.ctorParameters = function () {
-      return [{
-        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ChangeDetectorRef"]
-      }, {
-        type: NovoLabelService
-      }, {
-        type: DataTableState
-      }, {
-        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Renderer2"]
-      }, {
-        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ElementRef"]
-      }, {
-        type: NovoDataTableSortFilter,
-        decorators: [{
-          type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Optional"]
-        }]
-      }, {
-        type: _angular_cdk_table__WEBPACK_IMPORTED_MODULE_16__["CdkColumnDef"],
-        decorators: [{
-          type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Optional"]
-        }]
-      }];
-    };
-
-    NovoDataTableCellHeader.propDecorators = {
-      filterInput: [{
-        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"],
-        args: ['filterInput', {
-          "static": false
-        }]
-      }],
-      dropdown: [{
-        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"],
-        args: [NovoDropdownElement, {
-          "static": false
-        }]
-      }],
-      optionFilterInput: [{
-        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"],
-        args: ['optionFilterInput', {
-          "static": false
-        }]
-      }],
-      defaultSort: [{
-        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
-      }],
-      allowMultipleFilters: [{
-        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
-      }],
-      resized: [{
-        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
-      }],
-      filterTemplate: [{
-        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
-      }],
-      resizable: [{
-        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["HostBinding"],
-        args: ['class.resizable']
-      }],
-      column: [{
-        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"],
-        args: ['novo-data-table-cell-config']
-      }],
-      multiSelectOptionFilterHandleKeydown: [{
-        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["HostListener"],
-        args: ['keydown', ['$event']]
       }]
     };
 
@@ -43231,12 +43336,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               controlConfig.config.readOnly = controlConfig.readOnly;
 
               if (field.fields && field.fields.length) {
-                var _iterator9 = _createForOfIteratorHelper(field.fields),
-                    _step9;
+                var _iterator10 = _createForOfIteratorHelper(field.fields),
+                    _step10;
 
                 try {
-                  for (_iterator9.s(); !(_step9 = _iterator9.n()).done;) {
-                    var subfield = _step9.value;
+                  for (_iterator10.s(); !(_step10 = _iterator10.n()).done;) {
+                    var subfield = _step10.value;
                     controlConfig.config[subfield.name] = {
                       required: !!subfield.required,
                       hidden: !!subfield.readOnly
@@ -43279,9 +43384,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                     }
                   }
                 } catch (err) {
-                  _iterator9.e(err);
+                  _iterator10.e(err);
                 } finally {
-                  _iterator9.f();
+                  _iterator10.f();
                 }
               }
 
@@ -46781,12 +46886,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
           // Subscribe to control interactions
           if (this.control.interactions && !this.form.controls[this.control.key].restrictFieldInteractions) {
-            var _iterator10 = _createForOfIteratorHelper(this.control.interactions),
-                _step10;
+            var _iterator11 = _createForOfIteratorHelper(this.control.interactions),
+                _step11;
 
             try {
               var _loop5 = function _loop5() {
-                var interaction = _step10.value;
+                var interaction = _step11.value;
 
                 switch (interaction.event) {
                   case 'blur':
@@ -46840,13 +46945,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                 }
               };
 
-              for (_iterator10.s(); !(_step10 = _iterator10.n()).done;) {
+              for (_iterator11.s(); !(_step11 = _iterator11.n()).done;) {
                 _loop5();
               }
             } catch (err) {
-              _iterator10.e(err);
+              _iterator11.e(err);
             } finally {
-              _iterator10.f();
+              _iterator11.f();
             }
           }
 
@@ -53188,18 +53293,18 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             /** @type {?} */
             var _tempData = data;
 
-            var _iterator11 = _createForOfIteratorHelper(arrayList),
-                _step11;
+            var _iterator12 = _createForOfIteratorHelper(arrayList),
+                _step12;
 
             try {
-              for (_iterator11.s(); !(_step11 = _iterator11.n()).done;) {
-                var key = _step11.value;
+              for (_iterator12.s(); !(_step12 = _iterator12.n()).done;) {
+                var key = _step12.value;
                 _tempData = _tempData[key];
               }
             } catch (err) {
-              _iterator11.e(err);
+              _iterator12.e(err);
             } finally {
-              _iterator11.f();
+              _iterator12.f();
             }
 
             return _tempData;
@@ -59792,12 +59897,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "merge",
         value: function merge(newData) {
-          var _iterator12 = _createForOfIteratorHelper(newData),
-              _step12;
+          var _iterator13 = _createForOfIteratorHelper(newData),
+              _step13;
 
           try {
-            for (_iterator12.s(); !(_step12 = _iterator12.n()).done;) {
-              var obj = _step12.value;
+            for (_iterator13.s(); !(_step13 = _iterator13.n()).done;) {
+              var obj = _step13.value;
 
               /** @type {?} */
               var existing = ~this.getItemIndex(obj);
@@ -59809,9 +59914,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               }
             }
           } catch (err) {
-            _iterator12.e(err);
+            _iterator13.e(err);
           } finally {
-            _iterator12.f();
+            _iterator13.f();
           }
         }
         /**
@@ -59954,18 +60059,18 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         value: function refresh() {
           this.filterData = this.isEditing ? this.editData.slice() : this.source.slice();
 
-          var _iterator13 = _createForOfIteratorHelper(this._sort.reverse()),
-              _step13;
+          var _iterator14 = _createForOfIteratorHelper(this._sort.reverse()),
+              _step14;
 
           try {
-            for (_iterator13.s(); !(_step13 = _iterator13.n()).done;) {
-              var item = _step13.value;
+            for (_iterator14.s(); !(_step14 = _iterator14.n()).done;) {
+              var item = _step14.value;
               this.sortOn(item.field, item.reverse);
             }
           } catch (err) {
-            _iterator13.e(err);
+            _iterator14.e(err);
           } finally {
-            _iterator13.f();
+            _iterator14.f();
           }
 
           for (var key in this._filter) {
@@ -60156,18 +60261,18 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         value: function refresh() {
           this.filterData = this.isEditing ? this.editData.slice() : this.source.slice();
 
-          var _iterator14 = _createForOfIteratorHelper(this._sort.reverse()),
-              _step14;
+          var _iterator15 = _createForOfIteratorHelper(this._sort.reverse()),
+              _step15;
 
           try {
-            for (_iterator14.s(); !(_step14 = _iterator14.n()).done;) {
-              var item = _step14.value;
+            for (_iterator15.s(); !(_step15 = _iterator15.n()).done;) {
+              var item = _step15.value;
               this.sortOn(item.field, item.reverse);
             }
           } catch (err) {
-            _iterator14.e(err);
+            _iterator15.e(err);
           } finally {
-            _iterator14.f();
+            _iterator15.f();
           }
 
           for (var key in this._filter) {
@@ -60559,12 +60664,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               /** @type {?} */
               var query = {};
 
-              var _iterator15 = _createForOfIteratorHelper(filters),
-                  _step15;
+              var _iterator16 = _createForOfIteratorHelper(filters),
+                  _step16;
 
               try {
                 var _loop6 = function _loop6() {
-                  var column = _step15.value;
+                  var column = _step16.value;
 
                   if (Helpers.isFunction(column.match)) {
                     query[column.name] =
@@ -60615,13 +60720,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                   }
                 };
 
-                for (_iterator15.s(); !(_step15 = _iterator15.n()).done;) {
+                for (_iterator16.s(); !(_step16 = _iterator16.n()).done;) {
                   _loop6();
                 }
               } catch (err) {
-                _iterator15.e(err);
+                _iterator16.e(err);
               } finally {
-                _iterator15.f();
+                _iterator16.f();
               }
 
               if (Helpers.isFunction(this.config.filtering)) {
@@ -60722,18 +60827,18 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             return thisColumn.sort && thisColumn !== _this242.currentSortColumn;
           });
 
-          var _iterator16 = _createForOfIteratorHelper(sortedColumns),
-              _step16;
+          var _iterator17 = _createForOfIteratorHelper(sortedColumns),
+              _step17;
 
           try {
-            for (_iterator16.s(); !(_step16 = _iterator16.n()).done;) {
-              var sortedColumn = _step16.value;
+            for (_iterator17.s(); !(_step17 = _iterator17.n()).done;) {
+              var sortedColumn = _step17.value;
               sortedColumn.sort = null;
             }
           } catch (err) {
-            _iterator16.e(err);
+            _iterator17.e(err);
           } finally {
-            _iterator16.f();
+            _iterator17.f();
           }
 
           if (column) {
@@ -60830,18 +60935,18 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         value: function expandAllOnPage(expanded) {
           this.config.expandAll = !expanded;
 
-          var _iterator17 = _createForOfIteratorHelper(this.dataProvider.list),
-              _step17;
+          var _iterator18 = _createForOfIteratorHelper(this.dataProvider.list),
+              _step18;
 
           try {
-            for (_iterator17.s(); !(_step17 = _iterator17.n()).done;) {
-              var row = _step17.value;
+            for (_iterator18.s(); !(_step18 = _iterator18.n()).done;) {
+              var row = _step18.value;
               row._expanded = this.config.expandAll;
             }
           } catch (err) {
-            _iterator17.e(err);
+            _iterator18.e(err);
           } finally {
-            _iterator17.f();
+            _iterator18.f();
           }
         }
         /**
@@ -60860,18 +60965,18 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           } else {
             this.indeterminate = false; // this.pagedData = this.rows.slice(this.getPageStart(), this.getPageEnd());
 
-            var _iterator18 = _createForOfIteratorHelper(this.pagedData),
-                _step18;
+            var _iterator19 = _createForOfIteratorHelper(this.pagedData),
+                _step19;
 
             try {
-              for (_iterator18.s(); !(_step18 = _iterator18.n()).done;) {
-                var row = _step18.value;
+              for (_iterator19.s(); !(_step19 = _iterator19.n()).done;) {
+                var row = _step19.value;
                 row._selected = this.master;
               }
             } catch (err) {
-              _iterator18.e(err);
+              _iterator19.e(err);
             } finally {
-              _iterator18.f();
+              _iterator19.f();
             }
 
             this.selected = this.dataProvider.list.filter(
@@ -60907,18 +61012,18 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           this.master = value;
           this.indeterminate = false;
 
-          var _iterator19 = _createForOfIteratorHelper(this.dataProvider.list),
-              _step19;
+          var _iterator20 = _createForOfIteratorHelper(this.dataProvider.list),
+              _step20;
 
           try {
-            for (_iterator19.s(); !(_step19 = _iterator19.n()).done;) {
-              var row = _step19.value;
+            for (_iterator20.s(); !(_step20 = _iterator20.n()).done;) {
+              var row = _step20.value;
               row._selected = value;
             }
           } catch (err) {
-            _iterator19.e(err);
+            _iterator20.e(err);
           } finally {
-            _iterator19.f();
+            _iterator20.f();
           }
 
           this.selected = value ? this.dataProvider.list : [];
@@ -61828,34 +61933,34 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           var parsed = [];
 
           if (data instanceof Array) {
-            var _iterator20 = _createForOfIteratorHelper(data),
-                _step20;
+            var _iterator21 = _createForOfIteratorHelper(data),
+                _step21;
 
             try {
-              for (_iterator20.s(); !(_step20 = _iterator20.n()).done;) {
-                var permission = _step20.value;
+              for (_iterator21.s(); !(_step21 = _iterator21.n()).done;) {
+                var permission = _step21.value;
                 parsed.push(permission.replace(/\s/gi, ''));
               }
             } catch (err) {
-              _iterator20.e(err);
+              _iterator21.e(err);
             } finally {
-              _iterator20.f();
+              _iterator21.f();
             }
           } else if (typeof data === 'object') {
             for (var key in data) {
               if (data[key] instanceof Array) {
-                var _iterator21 = _createForOfIteratorHelper(data[key]),
-                    _step21;
+                var _iterator22 = _createForOfIteratorHelper(data[key]),
+                    _step22;
 
                 try {
-                  for (_iterator21.s(); !(_step21 = _iterator21.n()).done;) {
-                    var _permission = _step21.value;
+                  for (_iterator22.s(); !(_step22 = _iterator22.n()).done;) {
+                    var _permission = _step22.value;
                     parsed.push("".concat(key, ".").concat(_permission));
                   }
                 } catch (err) {
-                  _iterator21.e(err);
+                  _iterator22.e(err);
                 } finally {
-                  _iterator21.f();
+                  _iterator22.f();
                 }
               }
             }
@@ -61921,12 +62026,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           /** @type {?} */
           var filtered = [];
 
-          var _iterator22 = _createForOfIteratorHelper(routes),
-              _step22;
+          var _iterator23 = _createForOfIteratorHelper(routes),
+              _step23;
 
           try {
-            for (_iterator22.s(); !(_step22 = _iterator22.n()).done;) {
-              var route = _step22.value;
+            for (_iterator23.s(); !(_step23 = _iterator23.n()).done;) {
+              var route = _step23.value;
 
               if (route.entities && ~route.entities.indexOf(options.entityType)) {
                 if (route.permissions instanceof Function) {
@@ -61950,9 +62055,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               }
             }
           } catch (err) {
-            _iterator22.e(err);
+            _iterator23.e(err);
           } finally {
-            _iterator22.f();
+            _iterator23.f();
           }
 
           return filtered;
@@ -62012,21 +62117,21 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             /** @type {?} */
             var ps = this.permissions.split('||');
 
-            var _iterator23 = _createForOfIteratorHelper(ps),
-                _step23;
+            var _iterator24 = _createForOfIteratorHelper(ps),
+                _step24;
 
             try {
-              for (_iterator23.s(); !(_step23 = _iterator23.n()).done;) {
-                var p = _step23.value;
+              for (_iterator24.s(); !(_step24 = _iterator24.n()).done;) {
+                var p = _step24.value;
 
                 if (this.security.has(p.trim())) {
                   display = true;
                 }
               }
             } catch (err) {
-              _iterator23.e(err);
+              _iterator24.e(err);
             } finally {
-              _iterator23.f();
+              _iterator24.f();
             }
           } else {
             display = this.permissions.split('&&').every(
@@ -62161,19 +62266,19 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           this.metaDisplay.type = 'TO_ONE';
           this.baseEntity = this.meta.associatedEntity.entity;
 
-          var _iterator24 = _createForOfIteratorHelper(this.data.data),
-              _step24;
+          var _iterator25 = _createForOfIteratorHelper(this.data.data),
+              _step25;
 
           try {
-            for (_iterator24.s(); !(_step24 = _iterator24.n()).done;) {
-              var entity = _step24.value;
+            for (_iterator25.s(); !(_step25 = _iterator25.n()).done;) {
+              var entity = _step25.value;
               entity.isLinkable = this.isLinkable(entity);
               entity["class"] = this.getClass(entity);
             }
           } catch (err) {
-            _iterator24.e(err);
+            _iterator25.e(err);
           } finally {
-            _iterator24.f();
+            _iterator25.f();
           }
         }
         /**
@@ -62705,36 +62810,36 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             fields[_key - 1] = arguments[_key];
           }
 
-          var _iterator25 = _createForOfIteratorHelper(list),
-              _step25;
+          var _iterator26 = _createForOfIteratorHelper(list),
+              _step26;
 
           try {
-            for (_iterator25.s(); !(_step25 = _iterator25.n()).done;) {
-              var item = _step25.value;
+            for (_iterator26.s(); !(_step26 = _iterator26.n()).done;) {
+              var item = _step26.value;
 
               /** @type {?} */
               var label = [];
 
-              var _iterator26 = _createForOfIteratorHelper(fields),
-                  _step26;
+              var _iterator27 = _createForOfIteratorHelper(fields),
+                  _step27;
 
               try {
-                for (_iterator26.s(); !(_step26 = _iterator26.n()).done;) {
-                  var field = _step26.value;
+                for (_iterator27.s(); !(_step27 = _iterator27.n()).done;) {
+                  var field = _step27.value;
                   label.push("".concat(item[field]));
                 }
               } catch (err) {
-                _iterator26.e(err);
+                _iterator27.e(err);
               } finally {
-                _iterator26.f();
+                _iterator27.f();
               }
 
               data.push(label.join(' '));
             }
           } catch (err) {
-            _iterator25.e(err);
+            _iterator26.e(err);
           } finally {
-            _iterator25.f();
+            _iterator26.f();
           }
 
           return data.join(', ');
@@ -62761,21 +62866,21 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             * @return {?}
             */
             function (item) {
-              var _iterator27 = _createForOfIteratorHelper(list),
-                  _step27;
+              var _iterator28 = _createForOfIteratorHelper(list),
+                  _step28;
 
               try {
-                for (_iterator27.s(); !(_step27 = _iterator27.n()).done;) {
-                  var option = _step27.value;
+                for (_iterator28.s(); !(_step28 = _iterator28.n()).done;) {
+                  var option = _step28.value;
 
                   if (option.value === item) {
                     return option.label;
                   }
                 }
               } catch (err) {
-                _iterator27.e(err);
+                _iterator28.e(err);
               } finally {
-                _iterator27.f();
+                _iterator28.f();
               }
 
               return item;
@@ -76917,12 +77022,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           /** @type {?} */
           var maxSizeKb = 5120;
 
-          var _iterator28 = _createForOfIteratorHelper(fileList),
-              _step28;
+          var _iterator29 = _createForOfIteratorHelper(fileList),
+              _step29;
 
           try {
-            for (_iterator28.s(); !(_step28 = _iterator28.n()).done;) {
-              var file = _step28.value;
+            for (_iterator29.s(); !(_step29 = _iterator29.n()).done;) {
+              var file = _step29.value;
 
               if (file.size > maxSizeKb * 1024) {
                 this.message = 'File is bigger than the allowed 5MB';
@@ -76930,9 +77035,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               }
             }
           } catch (err) {
-            _iterator28.e(err);
+            _iterator29.e(err);
           } finally {
-            _iterator28.f();
+            _iterator29.f();
           }
 
           return true;
@@ -80237,12 +80342,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _createClass(BasicListExample, [{
         key: "buildItems",
         value: function buildItems(resp) {
-          var _iterator29 = _createForOfIteratorHelper(resp),
-              _step29;
+          var _iterator30 = _createForOfIteratorHelper(resp),
+              _step30;
 
           try {
-            for (_iterator29.s(); !(_step29 = _iterator29.n()).done;) {
-              var obj = _step29.value;
+            for (_iterator30.s(); !(_step30 = _iterator30.n()).done;) {
+              var obj = _step30.value;
 
               /** @type {?} */
               var item = {};
@@ -80281,9 +80386,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               this.pulseItems.push(item);
             }
           } catch (err) {
-            _iterator29.e(err);
+            _iterator30.e(err);
           } finally {
-            _iterator29.f();
+            _iterator30.f();
           }
         }
       }]);
@@ -80407,12 +80512,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _createClass(ThemedListExample, [{
         key: "buildItems",
         value: function buildItems(resp) {
-          var _iterator30 = _createForOfIteratorHelper(resp),
-              _step30;
+          var _iterator31 = _createForOfIteratorHelper(resp),
+              _step31;
 
           try {
-            for (_iterator30.s(); !(_step30 = _iterator30.n()).done;) {
-              var obj = _step30.value;
+            for (_iterator31.s(); !(_step31 = _iterator31.n()).done;) {
+              var obj = _step31.value;
 
               /** @type {?} */
               var item = {};
@@ -80451,9 +80556,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               this.pulseItems.push(item);
             }
           } catch (err) {
-            _iterator30.e(err);
+            _iterator31.e(err);
           } finally {
-            _iterator30.f();
+            _iterator31.f();
           }
         }
       }]);
