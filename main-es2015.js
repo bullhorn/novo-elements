@@ -5715,6 +5715,11 @@ NovoCalendarModule.decorators = [
  */
 function TimeFormatParts() { }
 if (false) {}
+/**
+ * @record
+ */
+function BigDecimalFormatOptions() { }
+if (false) {}
 class NovoLabelService {
     /**
      * @param {?=} userLocale
@@ -6035,29 +6040,48 @@ class NovoLabelService {
         return new Intl.NumberFormat(this.userLocale, options).format(value);
     }
     /**
-     * @param {?} value
+     * Extends the Intl.numberFormat capability with two extra features:
+     *  - Does NOT round values, but instead truncates to maximumFractionDigits
+     *  - By default uses accounting format for negative numbers: (3.14) instead of -3.14.
+     *
+     * @param {?} value           The number value to convert to string
+     * @param {?=} overrideOptions Allows for overriding options used and passed to Intl.NumberFormat()
      * @return {?}
      */
-    formatBigDecimal(value) {
+    formatBigDecimal(value, overrideOptions) {
         /** @type {?} */
-        let valueAsString = value ? value.toString() : '0';
-        // truncate at two decimals (do not round)
+        const defaultOptions = {
+            style: 'decimal',
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+            useAccountingFormat: true,
+        };
         /** @type {?} */
-        const decimalIndex = valueAsString.indexOf('.');
-        if (decimalIndex > -1 && decimalIndex + 3 < valueAsString.length) {
-            valueAsString = valueAsString.substring(0, valueAsString.indexOf('.') + 3);
-        }
-        // convert back to number
+        const options = Object.assign(defaultOptions, overrideOptions);
         /** @type {?} */
-        const truncatedValue = Number(valueAsString);
-        /** @type {?} */
-        const options = { style: 'decimal', minimumFractionDigits: 2, maximumFractionDigits: 2 };
+        const truncatedValue = this.truncateToPrecision(value, options.maximumFractionDigits);
         /** @type {?} */
         let _value = new Intl.NumberFormat(this.userLocale, options).format(truncatedValue);
         if (value < 0) {
-            _value = `(${_value.slice(1)})`;
+            _value = options.useAccountingFormat ? `(${_value.slice(1)})` : `-${_value.slice(1)}`;
         }
         return _value;
+    }
+    /**
+     * Performs a string-based truncating of a number with no rounding
+     * @param {?} value
+     * @param {?} precision
+     * @return {?}
+     */
+    truncateToPrecision(value, precision) {
+        /** @type {?} */
+        let valueAsString = value ? value.toString() : '0';
+        /** @type {?} */
+        const decimalIndex = valueAsString.indexOf('.');
+        if (decimalIndex > -1 && decimalIndex + precision + 1 < valueAsString.length) {
+            valueAsString = valueAsString.substring(0, valueAsString.indexOf('.') + precision + 1);
+        }
+        return Number(valueAsString);
     }
     /**
      * @param {?} value
