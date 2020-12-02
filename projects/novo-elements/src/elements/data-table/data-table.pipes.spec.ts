@@ -1,10 +1,16 @@
 // APP
-import { DateTableDateRendererPipe, DateTableDateTimeRendererPipe, DateTableTimeRendererPipe } from './data-table.pipes';
+import {
+  DateTableDateRendererPipe,
+  DateTableDateTimeRendererPipe,
+  DateTableTimeRendererPipe,
+  DataTableBigDecimalRendererPipe,
+} from './data-table.pipes';
 
 class MockNovoLabelService {
   formatDateShort(val) {}
   formatDate(val) {}
   formatTime(val) {}
+  formatBigDecimal(value, overrideOptions) {}
 }
 
 describe('Pipe: DateTableDateTimeRendererPipe', () => {
@@ -12,12 +18,14 @@ describe('Pipe: DateTableDateTimeRendererPipe', () => {
   let dateTimePipe;
   let datePipe;
   let timePipe;
+  let dataTableBigDecimalRendererPipe;
 
   beforeEach(() => {
     labels = new MockNovoLabelService();
     dateTimePipe = new DateTableDateTimeRendererPipe(labels);
     datePipe = new DateTableDateRendererPipe(labels);
     timePipe = new DateTableTimeRendererPipe(labels);
+    dataTableBigDecimalRendererPipe = new DataTableBigDecimalRendererPipe(labels);
   });
 
   describe('When rendering strings', () => {
@@ -142,6 +150,22 @@ describe('Pipe: DateTableDateTimeRendererPipe', () => {
       timePipe.transform(testVal, testColumn);
       // Assert
       expect(timePipe.labels.formatTime).not.toHaveBeenCalled();
+    });
+
+    it('DataTableBigDecimalRendererPipe should pass on the column configuration to formatBigDecimal', () => {
+      // Arrange
+      spyOn(dataTableBigDecimalRendererPipe.labels, 'formatBigDecimal');
+      const testVal = '12.52';
+      const testColumn = {
+        label: 'Total',
+        id: 'total-id',
+        type: 'bigdecimal',
+        configuration: { useAccountingFormat: false, useGrouping: false, maximumFractionDigits: 6 },
+      };
+      // Act
+      dataTableBigDecimalRendererPipe.transform(testVal, testColumn);
+      // Assert
+      expect(dataTableBigDecimalRendererPipe.labels.formatBigDecimal).toHaveBeenCalledWith(parseFloat(testVal), testColumn.configuration);
     });
 
     it('TimePipe should return an empty string if the value is null', () => {

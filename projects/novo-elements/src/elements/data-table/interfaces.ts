@@ -58,6 +58,7 @@ export interface IDataTableColumn<T> {
     width: number;
   };
   rightAlignCellContent?: boolean;
+  configuration?: object; // intended to be implemented by each column type if and as needed
 }
 
 export interface IDataTablePaginationOptions {
