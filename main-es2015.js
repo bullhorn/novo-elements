@@ -36555,7 +36555,7 @@ class DataTableBigDecimalRendererPipe {
         if (!Helpers.isEmpty(value)) {
             /** @type {?} */
             const val = interpolateCell(value, column);
-            return this.labels.formatBigDecimal(Number(val));
+            return this.labels.formatBigDecimal(Number(val), column.configuration);
         }
         return '';
     }

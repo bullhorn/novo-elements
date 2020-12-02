@@ -38997,7 +38997,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           if (!Helpers.isEmpty(value)) {
             /** @type {?} */
             var val = interpolateCell(value, column);
-            return this.labels.formatBigDecimal(Number(val));
+            return this.labels.formatBigDecimal(Number(val), column.configuration);
           }
 
           return '';
