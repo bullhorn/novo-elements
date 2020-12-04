@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NovoTableConfig, BaseRenderer } from 'novo-elements';
+import { BaseRenderer } from 'novo-elements';
 import { HEADER_COLORS, TableData, TableColumns } from '../table-extras';
 
 @Component({

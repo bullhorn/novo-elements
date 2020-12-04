@@ -926,7 +926,6 @@ export class NovoTableElement implements DoCheck {
           errors.push({ errors: error, row: this._rows[index], index });
         }
       });
-      const ret = {};
       // Return errors if any, otherwise return the changed rows
       if (errors.length === 0) {
         return { changed: changedRows };

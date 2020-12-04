@@ -1,7 +1,7 @@
 // NG2
 import { ChangeDetectorRef } from '@angular/core';
 import { TestBed, async } from '@angular/core/testing';
-import { FormBuilder, FormArray } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 // App
 import { NovoControlGroup } from './ControlGroup';
 import { NovoFormModule } from './Form.module';

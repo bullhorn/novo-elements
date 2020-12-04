@@ -417,7 +417,6 @@ export class FieldInteractionApi {
   }
 
   promptUser(key: string, changes: string[]): Promise<boolean> {
-    const showYes = true;
     (document.activeElement as any).blur();
     return this.modalService.open(ControlPromptModal, { changes, key }).onClosed;
   }

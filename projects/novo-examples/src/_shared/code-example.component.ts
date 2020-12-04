@@ -1,6 +1,5 @@
 // NG2
-import { Component, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { Component, Input } from '@angular/core';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { EXAMPLE_COMPONENTS, LiveExample } from '../examples.module';
 

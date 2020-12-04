@@ -1,4 +1,4 @@
-import { Injectable, Inject, Optional, InjectionToken } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { take, filter } from 'rxjs/operators';
 
