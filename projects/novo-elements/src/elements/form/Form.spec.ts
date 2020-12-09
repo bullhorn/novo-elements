@@ -1,11 +1,10 @@
 // NG2
-import { TestBed, async } from '@angular/core/testing';
-import { FormGroupDirective } from '@angular/forms';
+import { OverlayModule } from '@angular/cdk/overlay';
+import { async, TestBed } from '@angular/core/testing';
+import { NovoTemplateService } from '../../services/template/NovoTemplateService';
 // App
 import { NovoFormElement } from './Form';
-import { NovoTemplateService } from '../../services/template/NovoTemplateService';
 import { NovoFormModule } from './Form.module';
-import { OverlayModule } from '@angular/cdk/overlay';
 describe('Elements: NovoFormElement', () => {
   let fixture;
   let component;

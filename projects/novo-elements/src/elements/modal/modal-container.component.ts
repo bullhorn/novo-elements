@@ -1,8 +1,8 @@
-import { Component, Output, EventEmitter, Injector } from '@angular/core';
 import { AnimationEvent } from '@angular/animations';
-import { Portal, ComponentPortal } from '@angular/cdk/portal';
-import { zoomInOut } from './modal.animation';
+import { ComponentPortal, Portal } from '@angular/cdk/portal';
+import { Component, EventEmitter, Injector, Output } from '@angular/core';
 import { NovoModalRef } from './modal-ref';
+import { zoomInOut } from './modal.animation';
 
 @Component({
   selector: 'novo-modal-container',

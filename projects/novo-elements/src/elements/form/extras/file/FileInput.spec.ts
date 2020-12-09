@@ -1,12 +1,12 @@
 // NG
-import { TestBed, async } from '@angular/core/testing';
-// App
-import { NovoFileInputElement } from './FileInput';
-import { NovoLoadingElement } from '../../../loading/Loading';
-import { NovoLabelService } from '../../../../services/novo-label-service';
+import { async, TestBed } from '@angular/core/testing';
 import { NovoDragulaElement } from '../../../../elements/dragula/Dragula';
 import { NovoDragulaService } from '../../../../elements/dragula/DragulaService';
 import { DecodeURIPipe } from '../../../../pipes/decode-uri/DecodeURI';
+import { NovoLabelService } from '../../../../services/novo-label-service';
+import { NovoLoadingElement } from '../../../loading/Loading';
+// App
+import { NovoFileInputElement } from './FileInput';
 
 describe('Elements: NovoFileInputElement', () => {
   let fixture;
@@ -17,7 +17,10 @@ describe('Elements: NovoFileInputElement', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [NovoFileInputElement, NovoLoadingElement, NovoDragulaElement, DecodeURIPipe],
-      providers: [{ provide: NovoLabelService, useClass: NovoLabelService }, { provide: NovoDragulaService, useClass: NovoDragulaService }],
+      providers: [
+        { provide: NovoLabelService, useClass: NovoLabelService },
+        { provide: NovoDragulaService, useClass: NovoDragulaService },
+      ],
     }).compileComponents();
     fixture = TestBed.createComponent(NovoFileInputElement);
     component = fixture.debugElement.componentInstance;

@@ -1,4 +1,6 @@
 // NG2
+// Vendor
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import {
   ChangeDetectorRef,
   Component,
@@ -13,18 +15,16 @@ import {
   ViewContainerRef,
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
-// Vendor
-import { coerceBooleanProperty } from '@angular/cdk/coercion';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { fromEvent } from 'rxjs';
-// APP
-import { KeyCodes } from '../../utils/key-codes/KeyCodes';
-import { PickerResults } from './extras/picker-results/PickerResults';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { ComponentUtils } from '../../utils/component-utils/ComponentUtils';
 import { Helpers } from '../../utils/Helpers';
-import { NovoOverlayTemplateComponent } from '../overlay/Overlay';
+// APP
+import { KeyCodes } from '../../utils/key-codes/KeyCodes';
 import { notify } from '../../utils/notifier/notifier.util';
 import { NovoControlConfig } from '../form/FormControls';
+import { NovoOverlayTemplateComponent } from '../overlay/Overlay';
+import { PickerResults } from './extras/picker-results/PickerResults';
 
 // Value accessor for the component (supports ngModel)
 const PICKER_VALUE_ACCESSOR = {
@@ -143,10 +143,10 @@ export class NovoPickerElement implements OnInit {
   resultsComponent: any;
   popup: ComponentRef<any>;
   _value: any;
-  onModelChange: Function = () => { };
-  onModelTouched: Function = () => { };
+  onModelChange: Function = () => {};
+  onModelTouched: Function = () => {};
 
-  constructor(public element: ElementRef, private componentUtils: ComponentUtils, private ref: ChangeDetectorRef) { }
+  constructor(public element: ElementRef, private componentUtils: ComponentUtils, private ref: ChangeDetectorRef) {}
 
   ngOnInit() {
     if (this.overrideElement) {
@@ -159,16 +159,16 @@ export class NovoPickerElement implements OnInit {
     this.resultsComponent = this.config.resultsTemplate || PickerResults;
     // Get all distinct key up events from the input and only fire if long enough and distinct
     // let input = this.element.nativeElement.querySelector('input');
-    const pasteObserver = fromEvent(this.input.nativeElement, 'paste').pipe(
-      debounceTime(250),
-      distinctUntilChanged(),
+    const pasteObserver = fromEvent(this.input.nativeElement, 'paste').pipe(debounceTime(250), distinctUntilChanged());
+    pasteObserver.subscribe(
+      (event: ClipboardEvent) => this.onDebouncedKeyup(event),
+      (err) => this.hideResults(err),
     );
-    pasteObserver.subscribe((event: ClipboardEvent) => this.onDebouncedKeyup(event), (err) => this.hideResults(err));
-    const keyboardObserver = fromEvent(this.input.nativeElement, 'keyup').pipe(
-      debounceTime(250),
-      distinctUntilChanged(),
+    const keyboardObserver = fromEvent(this.input.nativeElement, 'keyup').pipe(debounceTime(250), distinctUntilChanged());
+    keyboardObserver.subscribe(
+      (event: KeyboardEvent) => this.onDebouncedKeyup(event),
+      (err) => this.hideResults(err),
     );
-    keyboardObserver.subscribe((event: KeyboardEvent) => this.onDebouncedKeyup(event), (err) => this.hideResults(err));
   }
 
   private onDebouncedKeyup(event: Event) {

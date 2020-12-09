@@ -1,8 +1,7 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-
-import { IDataTableChangeEvent, IDataTableFilter, IDataTableSort } from '../interfaces';
 import { Helpers } from '../../../utils/Helpers';
+import { IDataTableChangeEvent, IDataTableFilter, IDataTableSort } from '../interfaces';
 import { NovoDataTableFilterUtils } from '../services/data-table-filter-utils';
 
 @Injectable()

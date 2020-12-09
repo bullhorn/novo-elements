@@ -1,15 +1,15 @@
-import { OverlayModule, FullscreenOverlayContainer, OverlayContainer } from '@angular/cdk/overlay';
+import { FullscreenOverlayContainer, OverlayContainer, OverlayModule } from '@angular/cdk/overlay';
 import { CommonModule } from '@angular/common';
 import { ModuleWithProviders, NgModule } from '@angular/core';
-import { MenuDirective } from './menu.directive';
+import { NovoCommonModule } from '../common/common.module';
+import { NovoIconModule } from '../icon/Icon.module';
+import { MenuContentComponent } from './menu-content.component';
 import { MenuItemDirective } from './menu-item.directive';
 import { MenuComponent } from './menu.component';
-import { IMenuOptions } from './menu.types';
+import { MenuDirective } from './menu.directive';
 import { NovoMenuService } from './menu.service';
-import { MenuContentComponent } from './menu-content.component';
 import { MENU_OPTIONS } from './menu.tokens';
-import { NovoIconModule } from '../icon/Icon.module';
-import { NovoCommonModule } from '../common/common.module';
+import { IMenuOptions } from './menu.types';
 
 @NgModule({
   declarations: [MenuDirective, MenuComponent, MenuContentComponent, MenuItemDirective],

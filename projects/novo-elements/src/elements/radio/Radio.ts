@@ -1,22 +1,17 @@
 // NG2
 import {
+  ChangeDetectorRef,
   Component,
   EventEmitter,
   forwardRef,
-  Input,
-  Output,
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  QueryList,
-  ContentChildren,
   HostBinding,
-  Optional,
-  OnInit,
   Inject,
+  Input,
+  OnInit,
+  Optional,
+  Output,
 } from '@angular/core';
-import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
-// APP
-import { Helpers } from '../../utils/Helpers';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { NOVO_RADIO_GROUP, RadioGroup } from './tokens';
 
 // make radio-buttons ids unique

@@ -2,17 +2,13 @@ import { Component, HostBinding, Input } from '@angular/core';
 
 @Component({
   selector: 'header-spacer',
-  template: `
-    <ng-content></ng-content>
-  `,
+  template: ` <ng-content></ng-content> `,
 })
 export class NovoHeaderSpacer {}
 
 @Component({
   selector: 'utils',
-  template: `
-    <ng-content></ng-content>
-  `,
+  template: ` <ng-content></ng-content> `,
 })
 export class NovoUtilsComponent {}
 

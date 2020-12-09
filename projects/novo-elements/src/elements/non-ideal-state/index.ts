@@ -1,2 +1,2 @@
-export * from './NonIdealState.module';
 export * from './NonIdealState';
+export * from './NonIdealState.module';

@@ -1,8 +1,8 @@
 // NG2
 import { Component } from '@angular/core';
-// APP
-import { NovoModalRef, NovoModalParams } from '../modal/modal-ref';
 import { NovoLabelService } from '../../services/novo-label-service';
+// APP
+import { NovoModalParams, NovoModalRef } from '../modal/modal-ref';
 
 @Component({
   selector: 'control-confirm-modal',

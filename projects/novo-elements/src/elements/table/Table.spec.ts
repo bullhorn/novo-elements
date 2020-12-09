@@ -1,44 +1,40 @@
 // NG2
+import { OverlayModule } from '@angular/cdk/overlay';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { TestBed, async } from '@angular/core/testing';
-import { FormsModule, FormGroupDirective, NgControl, FormControlName, FormBuilder } from '@angular/forms';
+import { async, TestBed } from '@angular/core/testing';
+import { FormBuilder, FormControlName, FormGroupDirective, FormsModule, NgControl } from '@angular/forms';
 // Vendor
 import { TextMaskModule } from 'angular2-text-mask';
-import { OverlayModule } from '@angular/cdk/overlay';
-// App
-import { NovoOverlayModule } from '../overlay/Overlay.module';
-import { NovoTableElement } from './Table';
-import { Pagination } from './extras/pagination/Pagination';
-import { RowDetails } from './extras/row-details/RowDetails';
-import { TableCell } from './extras/table-cell/TableCell';
-import { TableFilter } from './extras/table-filter/TableFilter';
-import { ThOrderable } from './extras/th-orderable/ThOrderable';
-import { ThSortable } from './extras/th-sortable/ThSortable';
-import { NovoTableKeepFilterFocus } from './extras/keep-filter-focus/KeepFilterFocus';
-import { NovoTableActionsElement } from './extras/table-actions/TableActions';
-import { NovoTableFooterElement } from './extras/table-footer/TableFooter';
-import { NovoTableHeaderElement } from './extras/table-header/TableHeader';
-
-import { NovoFormElement } from '../form/Form';
-import { NovoControlElement } from '../form/Control';
-import { NovoCheckboxElement } from '../form/extras/checkbox/Checkbox';
-import { NovoCheckListElement } from '../form/extras/checkbox/CheckList';
-import { NovoAddressElement } from '../form/extras/address/Address';
-
-import { NovoDatePickerElement } from '../date-picker/DatePicker';
-import { NovoToastElement } from '../toast/Toast';
-import { NovoLoadingElement } from '../loading/Loading';
-import { NovoItemElement, NovoDropdownListElement } from '../dropdown/Dropdown';
+import { DateFormatService } from '../../services/date-format/DateFormat';
+import { NovoLabelService } from '../../services/novo-label-service';
+import { OptionsService } from '../../services/options/OptionsService';
+import { FormUtils } from '../../utils/form-utils/FormUtils';
 import { NovoChipElement } from '../chips/Chip';
 import { NovoChipsElement } from '../chips/Chips';
-import { NovoDropdownElement } from '../dropdown/Dropdown';
-import { TooltipDirective } from '../tooltip/Tooltip.directive';
+import { NovoDatePickerElement } from '../date-picker/DatePicker';
+import { NovoDropdownElement, NovoDropdownListElement, NovoItemElement } from '../dropdown/Dropdown';
+import { NovoControlElement } from '../form/Control';
+import { NovoAddressElement } from '../form/extras/address/Address';
+import { NovoCheckboxElement } from '../form/extras/checkbox/Checkbox';
+import { NovoCheckListElement } from '../form/extras/checkbox/CheckList';
+import { NovoFormElement } from '../form/Form';
+import { NovoLoadingElement } from '../loading/Loading';
+// App
+import { NovoOverlayModule } from '../overlay/Overlay.module';
 import { NovoSelectElement } from '../select/Select';
-
-import { NovoLabelService } from '../../services/novo-label-service';
-import { FormUtils } from '../../utils/form-utils/FormUtils';
-import { DateFormatService } from '../../services/date-format/DateFormat';
-import { OptionsService } from '../../services/options/OptionsService';
+import { NovoToastElement } from '../toast/Toast';
+import { TooltipDirective } from '../tooltip/Tooltip.directive';
+import { NovoTableKeepFilterFocus } from './extras/keep-filter-focus/KeepFilterFocus';
+import { Pagination } from './extras/pagination/Pagination';
+import { RowDetails } from './extras/row-details/RowDetails';
+import { NovoTableActionsElement } from './extras/table-actions/TableActions';
+import { TableCell } from './extras/table-cell/TableCell';
+import { TableFilter } from './extras/table-filter/TableFilter';
+import { NovoTableFooterElement } from './extras/table-footer/TableFooter';
+import { NovoTableHeaderElement } from './extras/table-header/TableHeader';
+import { ThOrderable } from './extras/th-orderable/ThOrderable';
+import { ThSortable } from './extras/th-sortable/ThSortable';
+import { NovoTableElement } from './Table';
 
 describe('Elements: NovoTableElement', () => {
   let fixture;

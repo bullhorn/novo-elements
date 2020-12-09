@@ -1,2 +1,2 @@
-export * from './Header.module';
 export * from './Header';
+export * from './Header.module';

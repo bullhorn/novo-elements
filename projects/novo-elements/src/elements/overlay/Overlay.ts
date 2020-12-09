@@ -1,5 +1,16 @@
 // Angular
 import {
+  ConnectedPositionStrategy,
+  HorizontalConnectionPos,
+  Overlay,
+  OverlayConfig,
+  OverlayRef,
+  ScrollStrategy,
+  VerticalConnectionPos,
+} from '@angular/cdk/overlay';
+import { TemplatePortal } from '@angular/cdk/portal';
+import { DOCUMENT } from '@angular/common';
+import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
@@ -15,19 +26,8 @@ import {
   ViewChild,
   ViewContainerRef,
 } from '@angular/core';
-import {
-  ConnectedPositionStrategy,
-  HorizontalConnectionPos,
-  Overlay,
-  OverlayConfig,
-  OverlayRef,
-  ScrollStrategy,
-  VerticalConnectionPos,
-} from '@angular/cdk/overlay';
-import { TemplatePortal } from '@angular/cdk/portal';
-import { DOCUMENT } from '@angular/common';
 // Vendor
-import { Observable, Subscription, of as observableOf, merge, fromEvent } from 'rxjs';
+import { fromEvent, merge, Observable, of as observableOf, Subscription } from 'rxjs';
 import { filter, first, switchMap } from 'rxjs/operators';
 
 @Component({

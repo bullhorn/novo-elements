@@ -1,15 +1,38 @@
 import { animate, state as animState, style, transition, trigger } from '@angular/animations';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
-import { AfterContentInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChildren, ElementRef, EventEmitter, HostBinding, Input, OnDestroy, Output, QueryList, TemplateRef, ViewChild, ViewChildren } from '@angular/core';
+import {
+  AfterContentInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  ContentChildren,
+  ElementRef,
+  EventEmitter,
+  HostBinding,
+  Input,
+  OnDestroy,
+  Output,
+  QueryList,
+  TemplateRef,
+  ViewChild,
+  ViewChildren,
+} from '@angular/core';
 import { Subscription } from 'rxjs';
 import { NovoLabelService } from '../../services/novo-label-service';
 import { notify } from '../../utils/notifier/notifier.util';
 import { NovoTemplate } from '../common/novo-template/novo-template.directive';
 import { DataTableSource } from './data-table.source';
-import { IDataTableColumn, IDataTableFilter, IDataTablePaginationOptions, IDataTablePreferences, IDataTableSearchOptions, IDataTableService, IDataTableSort } from './interfaces';
+import {
+  IDataTableColumn,
+  IDataTableFilter,
+  IDataTablePaginationOptions,
+  IDataTablePreferences,
+  IDataTableSearchOptions,
+  IDataTableService,
+  IDataTableSort,
+} from './interfaces';
 import { StaticDataTableService } from './services/static-data-table.service';
 import { DataTableState } from './state/data-table-state.service';
-
 
 @Component({
   selector: 'novo-data-table',
@@ -404,11 +427,7 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   constructor(public labels: NovoLabelService, private ref: ChangeDetectorRef, public state: DataTableState<T>) {
     this.scrollListenerHandler = this.scrollListener.bind(this);
     this.sortFilterSubscription = this.state.sortFilterSource.subscribe(
-      (event: {
-        sort: IDataTableSort;
-        filter: IDataTableFilter | IDataTableFilter[];
-        globalSearch: string;
-      }) => {
+      (event: { sort: IDataTableSort; filter: IDataTableFilter | IDataTableFilter[]; globalSearch: string }) => {
         if (this.name !== 'novo-data-table') {
           this.preferencesChanged.emit({ name: this.name, sort: event.sort, filter: event.filter, globalSearch: event.globalSearch });
         } else {
@@ -595,17 +614,13 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
           column.initialResizable = undefined;
         }
       });
-      const resizableColumns: string[] = this.displayedColumns.filter(
-        (name: string): boolean => {
-          return (
-            this.columns.findIndex(
-              (column: IDataTableColumn<T>): boolean => {
-                return column.resizable && column.id === name;
-              },
-            ) !== -1
-          );
-        },
-      );
+      const resizableColumns: string[] = this.displayedColumns.filter((name: string): boolean => {
+        return (
+          this.columns.findIndex((column: IDataTableColumn<T>): boolean => {
+            return column.resizable && column.id === name;
+          }) !== -1
+        );
+      });
       if (resizableColumns && resizableColumns.length > 0) {
         const lastResizableColumn: IDataTableColumn<T> = this.columns.find((column: IDataTableColumn<T>) => {
           return column.id === resizableColumns[resizableColumns.length - 1];

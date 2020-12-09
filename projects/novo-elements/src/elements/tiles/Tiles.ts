@@ -1,18 +1,18 @@
 // NG2
 import {
+  AfterContentInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
-  Input,
-  SimpleChanges,
-  Output,
+  ElementRef,
   EventEmitter,
   forwardRef,
-  ElementRef,
-  AfterContentInit,
+  Input,
   OnChanges,
-  ChangeDetectorRef,
-  ChangeDetectionStrategy,
+  Output,
+  SimpleChanges,
 } from '@angular/core';
-import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 // APP
 import { Helpers } from '../../utils/Helpers';
 

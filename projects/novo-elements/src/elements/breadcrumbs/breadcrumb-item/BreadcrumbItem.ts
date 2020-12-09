@@ -1,7 +1,7 @@
-import { ChangeDetectionStrategy, Component, Input, TemplateRef, OnInit, Output, EventEmitter } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, TemplateRef } from '@angular/core';
 import { BreadcrumbElement } from '../Breadcrumb';
-import { MenuConfig } from '../Breadcrumb.types';
 import { BreadcrumbService } from '../Breadcrumb.service';
+import { MenuConfig } from '../Breadcrumb.types';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,

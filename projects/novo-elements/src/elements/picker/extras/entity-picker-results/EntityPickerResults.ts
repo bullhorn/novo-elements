@@ -1,9 +1,9 @@
 // NG2
-import { Component, ElementRef, Input, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, Output } from '@angular/core';
+import { NovoLabelService } from '../../../../services/novo-label-service';
 // Vendor
 // APP
 import { BasePickerResults } from '../base-picker-results/BasePickerResults';
-import { NovoLabelService } from '../../../../services/novo-label-service';
 
 @Component({
   selector: 'entity-picker-result',

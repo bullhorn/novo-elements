@@ -8,4 +8,7 @@ import { Component } from '@angular/core';
   templateUrl: 'field-usage-example.html',
   styleUrls: ['field-usage-example.css'],
 })
-export class FieldUsageExample {}
+export class FieldUsageExample {
+  time = '14:00';
+  date = new Date();
+}

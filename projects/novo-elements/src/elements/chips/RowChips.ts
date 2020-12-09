@@ -1,11 +1,11 @@
 // NG2
-import { Component, forwardRef, ElementRef, Input } from '@angular/core';
+import { Component, ElementRef, forwardRef, Input } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 // APP
 import { NovoLabelService } from '../../services/novo-label-service';
 import { ComponentUtils } from '../../utils/component-utils/ComponentUtils';
-import { NovoChipsElement } from './Chips';
 import { NovoChipElement } from './Chip';
+import { NovoChipsElement } from './Chips';
 
 // Value accessor for the component (supports ngModel)
 const CHIPS_VALUE_ACCESSOR = {

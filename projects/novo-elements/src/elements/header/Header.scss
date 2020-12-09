@@ -55,7 +55,7 @@ header[theme] {
     }
   }
   @each $basic, $color in $all-colors {
-    &[theme='#{$basic}'] {
+    &[theme="#{$basic}"] {
       background: $color;
       color: #fff;
       & > section.primary {
@@ -63,9 +63,9 @@ header[theme] {
       }
     }
   }
-  &[theme='light'],
-  &[theme='off-white'],
-  &[theme='white'] {
+  &[theme="light"],
+  &[theme="off-white"],
+  &[theme="white"] {
     color: $dark;
   }
   & > main {
@@ -87,7 +87,7 @@ header[theme] {
     novo-icon > i {
       font-size: 1.4rem;
     }
-    button[theme][theme='icon'] {
+    button[theme][theme="icon"] {
       width: 30px !important;
       height: 30px !important;
       padding: 5px;

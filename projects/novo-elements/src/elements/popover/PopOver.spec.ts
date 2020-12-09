@@ -1,14 +1,12 @@
 // NG2
-import { TestBed, async } from '@angular/core/testing';
 import { Component, ComponentFactory, ComponentFactoryResolver } from '@angular/core';
+import { async, TestBed } from '@angular/core/testing';
 // App
 import { PopOverDirective } from './PopOver';
 
 @Component({
   selector: 'test-component',
-  template: `
-    <div popover=""></div>
-  `,
+  template: ` <div popover=""></div> `,
 })
 class TestComponent {}
 

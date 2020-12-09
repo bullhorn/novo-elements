@@ -1,14 +1,14 @@
 // NG2
+import { OverlayModule } from '@angular/cdk/overlay';
 import { ChangeDetectorRef } from '@angular/core';
-import { TestBed, async } from '@angular/core/testing';
-import { FormBuilder, FormArray } from '@angular/forms';
+import { async, TestBed } from '@angular/core/testing';
+import { FormBuilder } from '@angular/forms';
+import { NovoLabelService } from '../../services/novo-label-service';
+import { OptionsService } from '../../services/options/OptionsService';
+import { FormUtils } from './../../utils/form-utils/FormUtils';
 // App
 import { NovoControlGroup } from './ControlGroup';
 import { NovoFormModule } from './Form.module';
-import { FormUtils } from './../../utils/form-utils/FormUtils';
-import { NovoLabelService } from '../../services/novo-label-service';
-import { OptionsService } from '../../services/options/OptionsService';
-import { OverlayModule } from '@angular/cdk/overlay';
 
 describe('Elements: NovoControlGroup', () => {
   let fixture;

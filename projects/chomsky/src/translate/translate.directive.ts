@@ -1,6 +1,5 @@
-import { Directive, Input, OnInit, OnDestroy, HostBinding } from '@angular/core';
+import { Directive, HostBinding, Input, OnDestroy, OnInit } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-
 import { TranslateService } from './translate.service';
 
 @Directive({

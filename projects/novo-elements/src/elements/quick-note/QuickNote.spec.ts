@@ -1,10 +1,10 @@
 // NG2
 import { fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
-// App
-import { QuickNoteElement } from './QuickNote';
 import { ComponentUtils } from '../../utils/component-utils/ComponentUtils';
 import { KeyCodes } from '../../utils/key-codes/KeyCodes';
+// App
+import { QuickNoteElement } from './QuickNote';
 
 describe('Elements: QuickNoteElement', () => {
   // Mocks and fakes used in the tests

@@ -1,23 +1,23 @@
 // NG2
 import {
   Component,
-  Input,
   ElementRef,
+  EventEmitter,
   forwardRef,
-  OnInit,
-  OnDestroy,
+  Input,
   OnChanges,
+  OnDestroy,
+  OnInit,
+  Output,
+  SimpleChanges,
+  TemplateRef,
   ViewChild,
   ViewContainerRef,
-  TemplateRef,
-  SimpleChanges,
-  Output,
-  EventEmitter,
 } from '@angular/core';
-import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { NovoDragulaService } from '../../../../elements/dragula/DragulaService';
 // APP
 import { NovoLabelService } from '../../../../services/novo-label-service';
-import { NovoDragulaService } from '../../../../elements/dragula/DragulaService';
 import { NovoFile } from './extras/file/File';
 
 // Value accessor for the component (supports ngModel)
@@ -190,8 +190,8 @@ export class NovoFileInputElement implements ControlValueAccessor, OnInit, OnDes
   target: any;
   fileOutputBag: string;
 
-  onModelChange: Function = () => { };
-  onModelTouched: Function = () => { };
+  onModelChange: Function = () => {};
+  onModelTouched: Function = () => {};
 
   constructor(private element: ElementRef, public labels: NovoLabelService, private dragula: NovoDragulaService) {
     this.commands = {
@@ -216,7 +216,8 @@ export class NovoFileInputElement implements ControlValueAccessor, OnInit, OnDes
     ['dragenter', 'dragleave', 'dragover', 'drop'].forEach((type) => {
       this.element.nativeElement.removeEventListener(type, this.commands[type]);
     });
-    const dragulaHasFileOutputBag = this.dragula.bags.length > 0 && this.dragula.bags.filter((x) => x.name === this.fileOutputBag).length > 0;
+    const dragulaHasFileOutputBag =
+      this.dragula.bags.length > 0 && this.dragula.bags.filter((x) => x.name === this.fileOutputBag).length > 0;
     if (dragulaHasFileOutputBag) {
       this.dragula.destroy(this.fileOutputBag);
     }
@@ -343,7 +344,10 @@ export class NovoFileInputElement implements ControlValueAccessor, OnInit, OnDes
   }
 
   remove(file) {
-    this.files.splice(this.files.findIndex((f) => f.name === file.name && f.size === file.size), 1);
+    this.files.splice(
+      this.files.findIndex((f) => f.name === file.name && f.size === file.size),
+      1,
+    );
     this.model = this.files;
     this.onModelChange(this.model);
   }

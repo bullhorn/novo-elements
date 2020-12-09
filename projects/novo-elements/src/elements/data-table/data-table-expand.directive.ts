@@ -1,9 +1,8 @@
-import { Directive, HostListener, Input, TemplateRef, ViewContainerRef, OnDestroy } from '@angular/core';
+import { Directive, HostListener, Input, OnDestroy, TemplateRef, ViewContainerRef } from '@angular/core';
 import { Subscription } from 'rxjs';
-
-import { DataTableState } from './state/data-table-state.service';
 import { Helpers } from '../../utils/Helpers';
 import { NovoDataTable } from './data-table.component';
+import { DataTableState } from './state/data-table-state.service';
 
 @Directive({
   selector: '[novoDataTableExpand]',

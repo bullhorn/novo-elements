@@ -1,5 +1,5 @@
 // NG2
-import { Injectable, Inject, Optional, LOCALE_ID } from '@angular/core';
+import { Inject, Injectable, LOCALE_ID, Optional } from '@angular/core';
 //  import DateTimeFormatPart = Intl.DateTimeFormatPart;
 
 interface TimeFormatParts {
@@ -179,16 +179,22 @@ export class NovoLabelService {
     return res;
   }
 
-  getWeekdays(): string[] {
+  getWeekdays(weekStartsOn = 0): string[] {
     function getDay(dayOfWeek) {
       const dt = new Date();
       return dt.setDate(dt.getDate() - dt.getDay() + dayOfWeek);
     }
 
-    return [getDay(0), getDay(1), getDay(2), getDay(3), getDay(4), getDay(5), getDay(6)].reduce((weekdays, dt) => {
+    let weekdays = [getDay(0), getDay(1), getDay(2), getDay(3), getDay(4), getDay(5), getDay(6)].reduce((weekdays, dt) => {
       weekdays.push(new Intl.DateTimeFormat(this.userLocale, { weekday: 'long' }).format(dt));
       return weekdays;
     }, []);
+
+    if (weekStartsOn > 0 && weekStartsOn <= 6) {
+      const newStart = weekdays.splice(weekStartsOn);
+      weekdays = [...newStart, ...weekdays];
+    }
+    return weekdays;
   }
 
   getMonths(): string[] {

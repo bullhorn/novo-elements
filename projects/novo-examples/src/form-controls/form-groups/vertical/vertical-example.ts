@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { FormArray } from '@angular/forms';
 import {
-  FormUtils,
-  TextBoxControl,
-  CheckboxControl,
-  NovoFormGroup,
   BaseControl,
+  CheckboxControl,
+  FormUtils,
   NovoControlGroupAddConfig,
+  NovoFormGroup,
   ReadOnlyControl,
   SelectControl,
+  TextBoxControl,
 } from 'novo-elements';
 
 /**

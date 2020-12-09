@@ -1,8 +1,8 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { A11yModule } from '@angular/cdk/a11y';
 import { PortalModule } from '@angular/cdk/portal';
 import { CdkStepperModule } from '@angular/cdk/stepper';
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { NovoButtonModule } from '../button/Button.module';
 import { NovoIconModule } from '../icon/Icon.module';
 import { NovoStepHeader } from './step-header.component';

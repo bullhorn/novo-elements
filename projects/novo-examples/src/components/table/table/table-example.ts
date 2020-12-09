@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
-// Vendor
-import { NovoTableConfig } from 'novo-elements';
-import { HEADER_COLORS, TableData, TableColumns } from '../table-extras';
+import { HEADER_COLORS, TableColumns, TableData } from '../table-extras';
 
 /**
  * @title Table Example

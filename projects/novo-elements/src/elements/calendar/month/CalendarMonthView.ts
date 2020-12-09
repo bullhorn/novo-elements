@@ -1,27 +1,27 @@
 import {
-  Component,
-  OnChanges,
-  Input,
-  Output,
-  EventEmitter,
   ChangeDetectorRef,
-  OnInit,
-  OnDestroy,
-  LOCALE_ID,
+  Component,
+  EventEmitter,
   Inject,
+  Input,
+  LOCALE_ID,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  Output,
   TemplateRef,
 } from '@angular/core';
+import * as dateFns from 'date-fns';
+import { Subject, Subscription } from 'rxjs';
 import {
   CalendarEvent,
-  WeekDay,
+  CalendarEventTimesChangedEvent,
+  getMonthView,
+  getWeekViewHeader,
   MonthView,
   MonthViewDay,
-  CalendarEventTimesChangedEvent,
-  getWeekViewHeader,
-  getMonthView,
+  WeekDay,
 } from '../../../utils/calendar-utils/CalendarUtils';
-import { Subject, Subscription } from 'rxjs';
-import * as dateFns from 'date-fns';
 
 /**
  * Shows all events on a given month. Example usage:
@@ -37,23 +37,25 @@ import * as dateFns from 'date-fns';
   selector: 'novo-calendar-month',
   template: `
     <div class="calendar-month-view">
-       <novo-calendar-month-header
-         [(viewDate)]="viewDate"
-         [days]="columnHeaders"
-         [locale]="locale"
-         [customTemplate]="headerTemplate"
-         (viewDateChange)="refreshAll()">
-       </novo-calendar-month-header>
+      <novo-calendar-month-header
+        [(viewDate)]="viewDate"
+        [days]="columnHeaders"
+        [locale]="locale"
+        [customTemplate]="headerTemplate"
+        (viewDateChange)="refreshAll()"
+      >
+      </novo-calendar-month-header>
       <div class="calendar-days">
         <div *ngFor="let rowIndex of view.rowOffsets">
           <div class="calendar-cell-row">
             <novo-calendar-month-day
-              *ngFor="let day of view.days | slice : rowIndex : rowIndex + (view.totalDaysVisibleInWeek)"
+              *ngFor="let day of view.days | slice: rowIndex:rowIndex + view.totalDaysVisibleInWeek"
               [day]="day"
               [locale]="locale"
               [customTemplate]="cellTemplate"
-              (click)="dayClicked.emit({day: day})"
-              (eventClicked)="eventClicked.emit({ day: day, event: $event.event})">
+              (click)="dayClicked.emit({ day: day })"
+              (eventClicked)="eventClicked.emit({ day: day, event: $event.event })"
+            >
             </novo-calendar-month-day>
           </div>
         </div>

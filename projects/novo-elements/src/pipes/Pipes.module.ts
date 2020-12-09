@@ -1,10 +1,10 @@
 // NG2
 import { NgModule } from '@angular/core';
+import { DecodeURIPipe } from './decode-uri/DecodeURI';
+import { DefaultPipe } from './default/Default';
+import { GroupByPipe } from './group-by/GroupBy';
 // APP
 import { PluralPipe } from './plural/Plural';
-import { DecodeURIPipe } from './decode-uri/DecodeURI';
-import { GroupByPipe } from './group-by/GroupBy';
-import { DefaultPipe } from './default/Default';
 
 @NgModule({
   declarations: [PluralPipe, DecodeURIPipe, GroupByPipe, DefaultPipe],

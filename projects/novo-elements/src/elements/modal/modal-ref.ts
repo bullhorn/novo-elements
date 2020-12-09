@@ -1,8 +1,6 @@
-import { Injectable } from '@angular/core';
 import { OverlayRef } from '@angular/cdk/overlay';
-import { Subject, Observable } from 'rxjs';
-import { take, filter } from 'rxjs/operators';
-import { Deferred } from '../../utils/deferred/Deferred';
+import { Observable, Subject } from 'rxjs';
+import { filter, take } from 'rxjs/operators';
 import { NovoModalContainerComponent } from './modal-container.component';
 
 /**

@@ -1,5 +1,5 @@
-import { Directive, TemplateRef } from '@angular/core';
 import { CdkStepLabel } from '@angular/cdk/stepper';
+import { Directive, TemplateRef } from '@angular/core';
 
 @Directive({
   selector: '[novoStepLabel]',

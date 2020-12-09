@@ -1,28 +1,26 @@
 // NG2
 import {
+  AfterContentInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
-  Input,
-  OnInit,
   ContentChild,
   ContentChildren,
-  QueryList,
-  AfterContentInit,
   Directive,
-  ChangeDetectionStrategy,
   ElementRef,
-  ChangeDetectorRef,
-  ViewChild,
-  HostBinding,
+  InjectionToken,
+  Input,
   OnDestroy,
+  QueryList,
+  ViewChild,
 } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
-import { NovoLabelElement } from './label/label';
-import { NovoHintElement } from './hint/hint';
+import { NgControl } from '@angular/forms';
+import { Subject } from 'rxjs';
+import { startWith, takeUntil } from 'rxjs/operators';
 import { NovoErrorElement } from './error/error';
 import { NovoFieldControl } from './field-control';
-import { takeUntil, startWith } from 'rxjs/operators';
-import { Subject } from 'rxjs';
-import { NgControl } from '@angular/forms';
+import { NovoHintElement } from './hint/hint';
+import { NovoLabelElement } from './label/label';
 
 @Directive({ selector: '[novoPrefix]' })
 export class NovoFieldPrefixDirective {}
@@ -30,6 +28,7 @@ export class NovoFieldPrefixDirective {}
 export class NovoFieldSuffixDirective {}
 
 const NOVO_INPUT_UNDERLINED_TYPES = ['text', 'date', 'time', 'datetime-local', 'password', 'email', 'tel', 'select', 'textarea', 'number'];
+export const NOVO_FORM_FIELD = new InjectionToken<NovoFieldElement>('NovoFormField');
 
 @Component({
   selector: 'novo-field',
@@ -61,10 +60,11 @@ const NOVO_INPUT_UNDERLINED_TYPES = ['text', 'date', 'time', 'datetime-local', '
     '[class.ng-invalid]': '_shouldForward("invalid")',
     '[class.ng-pending]': '_shouldForward("pending")',
   },
+  providers: [{ provide: NOVO_FORM_FIELD, useExisting: NovoFieldElement }],
 })
 export class NovoFieldElement implements AfterContentInit, OnDestroy {
-  @ViewChild('connectionContainer') _connectionContainerRef: ElementRef;
-  // @ViewChild('inputContainer') _inputContainerRef: ElementRef;
+  // @ViewChild('connectionContainer') _connectionContainerRef: ElementRef;
+  @ViewChild('inputContainer') _inputContainerRef: ElementRef;
   // @ViewChild('label') private _label: ElementRef<HTMLElement>;
 
   @ContentChild(NovoLabelElement) _labelElement: NovoLabelElement;
@@ -88,7 +88,7 @@ export class NovoFieldElement implements AfterContentInit, OnDestroy {
    * positioned relative to.
    */
   getConnectedOverlayOrigin(): ElementRef {
-    return this._connectionContainerRef || this._elementRef;
+    return this._inputContainerRef || this._elementRef;
   }
   ngAfterContentInit(): any {
     this._validateControlChild();

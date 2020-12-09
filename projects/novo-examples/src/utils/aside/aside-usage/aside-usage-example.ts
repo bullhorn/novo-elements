@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NovoAsideService, NovoAsideRef } from 'novo-elements';
+import { NovoAsideRef, NovoAsideService } from 'novo-elements';
 
 @Component({
   selector: 'aside-custom-demo',

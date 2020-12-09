@@ -1,24 +1,25 @@
-@import '../../styles/global/variables.scss';
+@import "../../styles/global/variables.scss";
 
 :host {
   display: grid;
   font-size: 1.1rem;
 
   &.novo-field-appearance-horizontal {
-    grid-gap: 1rem;
+    grid-gap: 0rem 1rem;
     grid-template-columns: 150px minmax(min-content, max-content);
     grid-template-areas:
-      'label input'
-      '. messages';
+      "label input"
+      ". messages";
   }
 
   &.novo-field-appearance-vertical {
     grid-template-columns: minmax(min-content, max-content);
     grid-template-rows: repeat(3, minmax(min-content, max-content));
     grid-template-areas:
-      'label'
-      'input'
-      'messages';
+      "label"
+      "input"
+      "messages";
+    width: min-content;
   }
 
   .novo-field-label {

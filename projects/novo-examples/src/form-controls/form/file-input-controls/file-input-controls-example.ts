@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-
 // Vendor
-import { FormUtils, FileControl, NovoFormGroup } from 'novo-elements';
+import { FileControl, FormUtils, NovoFormGroup } from 'novo-elements';
 
 /**
  * @title File Input Controls Example

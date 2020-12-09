@@ -1,11 +1,10 @@
 // NG2
-import { Injectable, Injector, ComponentRef, ComponentFactoryResolver } from '@angular/core';
 import { Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal, PortalInjector } from '@angular/cdk/portal';
-// APP
-import { NovoModalRef, NovoModalParams } from './modal-ref';
+import { ComponentRef, Injectable, Injector, ViewContainerRef } from '@angular/core';
 import { NovoModalContainerComponent } from './modal-container.component';
-import { ViewContainerRef } from '@angular/core';
+// APP
+import { NovoModalParams, NovoModalRef } from './modal-ref';
 
 interface ModalConfig {
   panelClass?: string;

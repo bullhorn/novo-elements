@@ -1,2 +1,2 @@
-export * from './novo-template';
 export * from './common.module';
+export * from './novo-template';

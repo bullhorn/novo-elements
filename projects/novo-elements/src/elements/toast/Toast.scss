@@ -225,7 +225,7 @@ novo-toast.fixedTop {
 novo-toast.fixedTop {
   top: -100%;
   padding-top: 20px;
-  @include ease('all', 'swift-ease-in-out');
+  @include ease("all", "swift-ease-in-out");
   &.animate {
     padding-top: 20px;
     top: -6px;
@@ -235,14 +235,14 @@ novo-toast.fixedTop {
 novo-toast.fixedBottom {
   bottom: -100%;
   padding-bottom: 20px;
-  @include ease('all', 'swift-ease-in-out');
+  @include ease("all", "swift-ease-in-out");
   &.animate {
     padding-bottom: 20px;
     bottom: -6px;
   }
 }
 
-novo-toast[class*='growl'] {
+novo-toast[class*="growl"] {
   border-radius: 3px;
   max-width: 350px;
   .toast-content h5 {
@@ -261,7 +261,7 @@ novo-toast.growlTopLeft {
   left: -100%;
   right: auto;
   width: calc(100% - 30px);
-  @include ease('all', 'swift-ease-in-out');
+  @include ease("all", "swift-ease-in-out");
   &.animate {
     left: 15px;
   }
@@ -282,7 +282,7 @@ novo-toast.growlTopRight {
   right: -100%;
   left: auto;
   width: calc(100% - 30px);
-  @include ease('all', 'swift-ease-in-out');
+  @include ease("all", "swift-ease-in-out");
   &.animate {
     right: 1rem;
   }
@@ -383,14 +383,14 @@ novo-toast.dialogue {
 }
 
 @media screen and (min-width: 350px) {
-  novo-toast[class*='growl-'] {
+  novo-toast[class*="growl-"] {
     min-width: 350px;
   }
   novo-toast.growlBottomLeft,
   novo-toast.growlTopLeft {
     left: -100%;
     right: auto;
-    @include ease('all', 'swift-ease-in-out');
+    @include ease("all", "swift-ease-in-out");
     &.animate {
       left: 1rem;
     }
@@ -399,7 +399,7 @@ novo-toast.dialogue {
   novo-toast.growlTopRight {
     right: -100%;
     left: auto;
-    @include ease('all', 'swift-ease-in-out');
+    @include ease("all", "swift-ease-in-out");
     &.animate {
       right: 1rem;
     }

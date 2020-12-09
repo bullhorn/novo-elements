@@ -1,10 +1,9 @@
-import { ChangeDetectorRef } from '@angular/core';
 import { DataSource } from '@angular/cdk/table';
-import { Observable, of, merge } from 'rxjs';
-import { startWith, switchMap, map, catchError } from 'rxjs/operators';
-
-import { NovoActivityTableState } from './state';
+import { ChangeDetectorRef } from '@angular/core';
+import { merge, Observable, of } from 'rxjs';
+import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 import { Helpers } from '../../utils/Helpers';
+import { NovoActivityTableState } from './state';
 
 export interface ActivityTableService<T> {
   getTableResults(

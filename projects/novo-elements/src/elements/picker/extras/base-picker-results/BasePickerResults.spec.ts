@@ -1,5 +1,5 @@
 // NG2
-import { ElementRef, ChangeDetectorRef } from '@angular/core';
+import { ElementRef } from '@angular/core';
 // App
 import { BasePickerResults } from './BasePickerResults';
 
@@ -162,17 +162,26 @@ describe('Elements: BasePickerResults', () => {
       // component.preselected();
     });
     it('should match by id when applicable', () => {
-      component.selected = [{ id: 1, value: 'test0' }, { id: 2, value: 'test1' }];
+      component.selected = [
+        { id: 1, value: 'test0' },
+        { id: 2, value: 'test1' },
+      ];
       expect(component.preselected({ id: 1, value: 'test0' })).toEqual(true);
       expect(component.preselected({ id: 5, value: 'not a match' })).toEqual(false);
     });
     it('should match by the nested value property when an object', () => {
-      component.selected = [{ id: 1, value: { value: 'test0' } }, { id: 2, value: { value: 'test1' } }];
+      component.selected = [
+        { id: 1, value: { value: 'test0' } },
+        { id: 2, value: { value: 'test1' } },
+      ];
       expect(component.preselected({ value: 'test0' })).toEqual(true);
       expect(component.preselected({ value: 'not a match' })).toEqual(false);
     });
     it('should match by the value property when applicable', () => {
-      component.selected = [{ id: 1, value: 'test0' }, { id: 2, value: 'test1' }];
+      component.selected = [
+        { id: 1, value: 'test0' },
+        { id: 2, value: 'test1' },
+      ];
       expect(component.preselected({ value: 'test0' })).toEqual(true);
       expect(component.preselected({ value: 'not a match' })).toEqual(false);
     });
@@ -180,7 +189,10 @@ describe('Elements: BasePickerResults', () => {
       component.config.preselected = (match, item) => {
         return match.testVal === item.testVal;
       };
-      component.selected = [{ id: 1, testVal: 'test0' }, { id: 2, testVal: 'test1' }];
+      component.selected = [
+        { id: 1, testVal: 'test0' },
+        { id: 2, testVal: 'test1' },
+      ];
       expect(component.preselected({ testVal: 'test0' })).toEqual(true);
       expect(component.preselected({ testVal: 'not a match' })).toEqual(false);
     });

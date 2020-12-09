@@ -1,19 +1,19 @@
 // NG2
-import { TestBed, async } from '@angular/core/testing';
-import { NovoDataTableCellHeader } from './data-table-header-cell.component';
+import { EventEmitter } from '@angular/core';
+import { async, TestBed } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
+import { IMaskDirectiveModule } from 'angular-imask';
 import {
+  IDataTableColumnFilterOption,
   NovoButtonModule,
+  NovoDatePickerModule,
+  NovoDropdownModule,
   NovoLabelService,
   NovoTooltipModule,
-  NovoDropdownModule,
-  NovoDatePickerModule,
-  IDataTableColumnFilterOption,
 } from '../../..';
-import { FormsModule } from '@angular/forms';
-import { DataTableState } from '../state/data-table-state.service';
-import { EventEmitter } from '@angular/core';
 import { KeyCodes } from '../../../utils/key-codes/KeyCodes';
-import { IMaskDirectiveModule } from 'angular-imask';
+import { DataTableState } from '../state/data-table-state.service';
+import { NovoDataTableCellHeader } from './data-table-header-cell.component';
 
 // App
 

@@ -1,22 +1,22 @@
 // NG
+import { ENTER, ESCAPE, TAB } from '@angular/cdk/keycodes';
 import {
   ChangeDetectorRef,
   Component,
   ElementRef,
-  OnInit,
+  EventEmitter,
   forwardRef,
+  HostBinding,
   Input,
+  OnInit,
   Output,
   ViewChild,
-  EventEmitter,
-  HostBinding,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { TAB, ENTER, ESCAPE } from '@angular/cdk/keycodes';
-// App
-import { NovoOverlayTemplateComponent } from '../overlay/Overlay';
 import { NovoLabelService } from '../../services/novo-label-service';
 import { Helpers } from '../../utils/Helpers';
+// App
+import { NovoOverlayTemplateComponent } from '../overlay/Overlay';
 
 // Value accessor for the component (supports ngModel)
 const COLOR_VALUE_ACCESSOR = {

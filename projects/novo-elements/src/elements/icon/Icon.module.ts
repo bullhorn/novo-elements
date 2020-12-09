@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
 import { ObserversModule } from '@angular/cdk/observers';
+import { NgModule } from '@angular/core';
 import { NovoIconComponent } from './Icon';
 
 @NgModule({

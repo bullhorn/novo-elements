@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, TemplateRef } from '@angular/core';
+import { Component, EventEmitter, Input, Output, TemplateRef } from '@angular/core';
 import { DayViewEvent } from '../../../utils/calendar-utils/CalendarUtils';
 
 @Component({
@@ -13,17 +13,19 @@ import { DayViewEvent } from '../../../utils/calendar-utils/CalendarUtils';
         [ngClass]="dayEvent.event.cssClass"
         [tooltip]="dayEvent.event.description"
         [tooltipPosition]="tooltipPosition"
-        (click)="eventClicked.emit({event: dayEvent.event})">
-          <div class="cal-event-ribbon" [style.backgroundColor]="dayEvent.event.color.primary"></div>
-          <div class="cal-event-group">
-            <div class="cal-event-title">{{dayEvent.event.title}}</div>
-            <div class="cal-event-description">{{dayEvent.event?.description}}</div>
-          </div>
+        (click)="eventClicked.emit({ event: dayEvent.event })"
+      >
+        <div class="cal-event-ribbon" [style.backgroundColor]="dayEvent.event.color.primary"></div>
+        <div class="cal-event-group">
+          <div class="cal-event-title">{{ dayEvent.event.title }}</div>
+          <div class="cal-event-description">{{ dayEvent.event?.description }}</div>
+        </div>
       </div>
     </ng-template>
     <ng-template
       [ngTemplateOutlet]="customTemplate || defaultTemplate"
-      [ngTemplateOutletContext]="{dayEvent: dayEvent, tooltipPosition: tooltipPosition, eventClicked: eventClicked}">
+      [ngTemplateOutletContext]="{ dayEvent: dayEvent, tooltipPosition: tooltipPosition, eventClicked: eventClicked }"
+    >
     </ng-template>
   `,
 })

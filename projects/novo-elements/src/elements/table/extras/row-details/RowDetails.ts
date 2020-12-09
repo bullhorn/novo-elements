@@ -1,14 +1,12 @@
 // NG2
-import { Component, ElementRef, ViewContainerRef, ViewChild, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { ComponentUtils } from './../../../../utils/component-utils/ComponentUtils';
 // APP
 import { BaseRenderer } from './../base-renderer/BaseRenderer';
-import { ComponentUtils } from './../../../../utils/component-utils/ComponentUtils';
 
 @Component({
   selector: 'novo-row-details',
-  template: `
-    <span #container></span> <span>{{ value }}</span>
-  `,
+  template: ` <span #container></span> <span>{{ value }}</span> `,
 })
 export class RowDetails implements OnInit {
   @ViewChild('container', { read: ViewContainerRef, static: true })

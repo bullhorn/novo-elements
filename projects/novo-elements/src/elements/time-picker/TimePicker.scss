@@ -48,6 +48,7 @@ novo-time-picker {
   display: block;
   // width: 250px;
   // min-width: 250px;
+  width: min-content;
   overflow: hidden;
   border-radius: 4px;
   background-color: #fff;
@@ -124,6 +125,11 @@ novo-time-picker {
       overflow-x: hidden;
       height: 100%;
       flex: 1;
+      -ms-overflow-style: none; /* Internet Explorer 10+ */
+      scrollbar-width: none; /* Firefox */
+      &::-webkit-scrollbar {
+        display: none; /* Safari and Chrome */
+      }
     }
 
     novo-list-item {
@@ -181,7 +187,7 @@ novo-time-picker {
     transition: transform 100ms linear;
     z-index: 1;
     &:before {
-      content: ' ';
+      content: " ";
       width: 2px;
       top: 0;
       bottom: 0;
@@ -255,7 +261,7 @@ novo-time-picker {
     &:before {
       left: 23%;
       margin: 33%;
-      content: ' ';
+      content: " ";
       width: 2px;
       top: 0;
       bottom: 0;

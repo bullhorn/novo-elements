@@ -1,9 +1,9 @@
 // NG2
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { NovoButtonModule } from '../button';
 // APP
 import { NovoToastElement } from './Toast';
-import { NovoButtonModule } from '../button';
 
 @NgModule({
   imports: [CommonModule, NovoButtonModule],

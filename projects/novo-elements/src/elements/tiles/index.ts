@@ -1,2 +1,2 @@
-export * from './Tiles.module';
 export * from './Tiles';
+export * from './Tiles.module';

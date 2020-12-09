@@ -1,6 +1,6 @@
-import { Component, Input, Output, EventEmitter, TemplateRef } from '@angular/core';
-import { WeekDay } from '../../../utils/calendar-utils/CalendarUtils';
+import { Component, EventEmitter, Input, Output, TemplateRef } from '@angular/core';
 import * as dateFns from 'date-fns';
+import { WeekDay } from '../../../utils/calendar-utils/CalendarUtils';
 
 @Component({
   selector: 'novo-calendar-month-header',
@@ -9,7 +9,7 @@ import * as dateFns from 'date-fns';
       <div class="calendar-header">
         <div class="calendar-header-top">
           <button theme="icon" icon="previous" (click)="prevMonth($event)"></button>
-          <div class="calendar-month">{{ viewDate | month:locale }}</div>
+          <div class="calendar-month">{{ viewDate | month: locale }}</div>
           <button theme="icon" icon="next" (click)="nextMonth($event)"></button>
         </div>
         <div class="calendar-weekdays">
@@ -19,15 +19,17 @@ import * as dateFns from 'date-fns';
             [class.calendar-past]="day.isPast"
             [class.calendar-today]="day.isToday"
             [class.calendar-future]="day.isFuture"
-            [class.calendar-weekend]="day.isWeekend">
-            {{ day.date | weekday:locale }}
+            [class.calendar-weekend]="day.isWeekend"
+          >
+            {{ day.date | weekday: locale }}
           </div>
         </div>
       </div>
     </ng-template>
     <ng-template
       [ngTemplateOutlet]="customTemplate || defaultTemplate"
-      [ngTemplateOutletContext]="{days: days, locale: locale, viewDate: viewDate}">
+      [ngTemplateOutletContext]="{ days: days, locale: locale, viewDate: viewDate }"
+    >
     </ng-template>
   `,
 })

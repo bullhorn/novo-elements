@@ -202,8 +202,8 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
   states: Array<any> = [];
   fieldList: Array<string> = ['address1', 'address2', 'city', 'state', 'zip', 'countryID'];
   model: any;
-  onModelChange: Function = () => { };
-  onModelTouched: Function = () => { };
+  onModelChange: Function = () => {};
+  onModelTouched: Function = () => {};
   focused: any = {};
   invalid: any = {};
   disabled: any = {};
@@ -221,7 +221,7 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
   @Output()
   validityChange: EventEmitter<any> = new EventEmitter();
 
-  constructor(public labels: NovoLabelService) { }
+  constructor(public labels: NovoLabelService) {}
 
   ngOnInit() {
     if (!this.config) {
@@ -469,7 +469,7 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
       } else if (model.countryID) {
         if (this.config.countryID.pickerConfig && this.config.countryID.pickerConfig.getLabels) {
           if (Helpers.isFunction(this.config.countryID.pickerConfig.getLabels)) {
-            const promise  = this.config.countryID.pickerConfig.getLabels(model.countryID);
+            const promise = this.config.countryID.pickerConfig.getLabels(model.countryID);
             loadingCountries = true;
             if (promise.then) {
               promise.then((result) => {

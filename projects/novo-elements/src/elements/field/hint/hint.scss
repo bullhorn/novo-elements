@@ -1,10 +1,10 @@
-@import '../../../styles/global/variables.scss';
+@import "../../../styles/global/variables.scss";
 
 :host {
   display: flex;
   flex: 1;
   font-size: 0.8em;
   color: $grey;
-  padding-bottom: .4rem;
-  padding-top: .4rem;
+  padding-bottom: 0.4rem;
+  padding-top: 0.4rem;
 }

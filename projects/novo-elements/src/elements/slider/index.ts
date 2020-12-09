@@ -1,2 +1,2 @@
-export * from './Slider.module';
 export * from './Slider';
+export * from './Slider.module';

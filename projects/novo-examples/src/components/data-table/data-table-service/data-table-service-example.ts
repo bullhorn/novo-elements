@@ -1,17 +1,15 @@
-import { Component, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
 import * as dateFns from 'date-fns';
-import { Subject } from 'rxjs';
-
 import {
   IDataTableColumn,
-  StaticDataTableService,
   IDataTablePaginationOptions,
+  IDataTablePreferences,
   IDataTableSearchOptions,
   IDataTableService,
   NovoModalService,
-  IDataTablePreferences,
+  StaticDataTableService,
 } from 'novo-elements';
-
+import { Subject } from 'rxjs';
 import { ConfigureColumnsModal, MockData } from '../extras';
 
 /**
@@ -25,11 +23,21 @@ import { ConfigureColumnsModal, MockData } from '../extras';
 })
 export class DataTableServiceExample {
   // Table configuration
-  public dataSetOptions: any[] = [{ label: 'Dataset #1', value: 1 }, { label: 'Dataset #2', value: 2 }, { label: 'Dataset #3', value: 3 }];
+  public dataSetOptions: any[] = [
+    { label: 'Dataset #1', value: 1 },
+    { label: 'Dataset #2', value: 2 },
+    { label: 'Dataset #3', value: 3 },
+  ];
   public loadedDataSet: number = 1;
-  public paginationTypeOptions: any[] = [{ label: 'Standard', value: 'standard' }, { label: 'Basic', value: 'basic' }];
+  public paginationTypeOptions: any[] = [
+    { label: 'Standard', value: 'standard' },
+    { label: 'Basic', value: 'basic' },
+  ];
   public loadedPaginationType: string = 'standard';
-  public globalSearchOptions: any[] = [{ label: 'Show', value: true }, { label: 'Hide', value: false }];
+  public globalSearchOptions: any[] = [
+    { label: 'Show', value: true },
+    { label: 'Hide', value: false },
+  ];
   public loadedGlobalSearch: boolean = false;
 
   // Shared configuration
@@ -184,7 +192,10 @@ export class DataTableServiceExample {
       sortable: true,
       filterable: {
         type: 'select',
-        options: [{ value: true, label: 'True' }, { value: false, label: 'False' }],
+        options: [
+          { value: true, label: 'True' },
+          { value: false, label: 'False' },
+        ],
       },
     },
     {

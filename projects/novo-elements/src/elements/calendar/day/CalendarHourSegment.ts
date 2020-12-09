@@ -9,9 +9,10 @@ import { DayViewHourSegment } from '../../../utils/calendar-utils/CalendarUtils'
         class="cal-hour-segment"
         [class.cal-hour-start]="segment.isStart"
         [class.cal-after-hour-start]="!segment.isStart"
-        [ngClass]="segment.cssClass">
+        [ngClass]="segment.cssClass"
+      >
         <div class="cal-time">
-          {{ segment.date | hours:locale }}
+          {{ segment.date | hours: locale }}
         </div>
       </div>
     </ng-template>
@@ -20,7 +21,8 @@ import { DayViewHourSegment } from '../../../utils/calendar-utils/CalendarUtils'
       [ngTemplateOutletContext]="{
         segment: segment,
         locale: locale
-      }">
+      }"
+    >
     </ng-template>
   `,
 })

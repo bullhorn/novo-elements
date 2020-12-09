@@ -1,6 +1,6 @@
 // NG
-import { FormGroup } from '@angular/forms';
 import { EventEmitter } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 // App
 import { IFieldInteractionEvent } from './FormInterfaces';
 import { NovoFormControl } from './NovoFormControl';

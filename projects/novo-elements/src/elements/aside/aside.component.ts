@@ -1,8 +1,8 @@
-import { Component, Output, EventEmitter, Injector } from '@angular/core';
-import { slideInOut } from './aside.animation';
 import { AnimationEvent } from '@angular/animations';
-import { Portal, ComponentPortal } from '@angular/cdk/portal';
+import { ComponentPortal, Portal } from '@angular/cdk/portal';
+import { Component, EventEmitter, Injector, Output } from '@angular/core';
 import { NovoAsideRef } from './aside-ref';
+import { slideInOut } from './aside.animation';
 
 @Component({
   selector: 'novo-aside',

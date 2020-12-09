@@ -1,19 +1,19 @@
 // NG2
 import {
   Directive,
-  EventEmitter,
   ElementRef,
-  Renderer2,
+  EventEmitter,
+  HostListener,
+  Input,
   OnChanges,
   OnInit,
-  Input,
   Output,
+  Renderer2,
   SimpleChanges,
-  HostListener,
 } from '@angular/core';
+import { Helpers } from './../../../../utils/Helpers';
 // APP
 import { KeyCodes } from './../../../../utils/key-codes/KeyCodes';
-import { Helpers } from './../../../../utils/Helpers';
 
 @Directive({
   selector: '[novoTableFilter]',

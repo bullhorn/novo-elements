@@ -1,16 +1,16 @@
 import { Component } from '@angular/core';
-import { NovoModalService, NovoModalRef } from 'novo-elements';
+import { NovoModalRef, NovoModalService } from 'novo-elements';
 
 @Component({
   selector: 'modal-warning-demo',
   template: `
-  <novo-notification type="warning">
-    <h1>This action will delete 25 records.</h1>
-    <h2>Are you sure you wish to continue?</h2>
-    <button theme="standard" (click)="close()">Cancel</button>
-    <button theme="primary" color="negative" icon="delete" (click)="close()">Delete</button>
-  </novo-notification>
-`,
+    <novo-notification type="warning">
+      <h1>This action will delete 25 records.</h1>
+      <h2>Are you sure you wish to continue?</h2>
+      <button theme="standard" (click)="close()">Cancel</button>
+      <button theme="primary" color="negative" icon="delete" (click)="close()">Delete</button>
+    </novo-notification>
+  `,
 })
 export class ModalWarningDemo {
   constructor(private modalRef: NovoModalRef) {}

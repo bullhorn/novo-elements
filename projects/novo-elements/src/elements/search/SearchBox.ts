@@ -1,22 +1,22 @@
 // NG2
+import { ENTER, ESCAPE, TAB } from '@angular/cdk/keycodes';
 import {
-  Component,
-  Input,
-  Output,
-  EventEmitter,
-  ViewChild,
-  forwardRef,
-  ElementRef,
-  HostBinding,
-  ChangeDetectorRef,
-  NgZone,
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  EventEmitter,
+  forwardRef,
+  HostBinding,
+  Input,
+  NgZone,
+  Output,
+  ViewChild,
 } from '@angular/core';
-import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
-import { TAB, ENTER, ESCAPE } from '@angular/cdk/keycodes';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { NovoLabelService } from '../../services/novo-label-service';
 // APP
 import { NovoOverlayTemplateComponent } from '../overlay/Overlay';
-import { NovoLabelService } from '../../services/novo-label-service';
 
 // Value accessor for the component (supports ngModel)
 const SEARCH_VALUE_ACCESSOR = {

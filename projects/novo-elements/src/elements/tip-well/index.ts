@@ -1,2 +1,2 @@
-export * from './TipWell.module';
 export * from './TipWell';
+export * from './TipWell.module';

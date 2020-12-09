@@ -1,6 +1,25 @@
-import { ChangeDetectorRef, Component, EventEmitter, Inject, Input, LOCALE_ID, OnChanges, OnDestroy, OnInit, Output, TemplateRef } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  Inject,
+  Input,
+  LOCALE_ID,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  Output,
+  TemplateRef,
+} from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
-import { CalendarEvent, CalendarEventTimesChangedEvent, DayView, DayViewHour, getDayView, getDayViewHourGrid } from '../../../utils/calendar-utils/CalendarUtils';
+import {
+  CalendarEvent,
+  CalendarEventTimesChangedEvent,
+  DayView,
+  DayViewHour,
+  getDayView,
+  getDayViewHourGrid,
+} from '../../../utils/calendar-utils/CalendarUtils';
 
 /**
  * @hidden
@@ -30,7 +49,8 @@ const MINUTES_IN_HOUR: number = 60;
         *ngFor="let event of view.allDayEvents"
         [event]="event"
         [customTemplate]="allDayEventTemplate"
-        (eventClicked)="eventClicked.emit({event: event})">
+        (eventClicked)="eventClicked.emit({ event: event })"
+      >
       </novo-calendar-all-day-event>
       <div class="cal-hour-rows">
         <div class="cal-events">
@@ -41,12 +61,14 @@ const MINUTES_IN_HOUR: number = 60;
             [style.marginTop.px]="dayEvent.top"
             [style.height.px]="dayEvent.height"
             [style.marginLeft.px]="dayEvent.left + 70"
-            [style.width.px]="dayEvent.width - 1">
+            [style.width.px]="dayEvent.width - 1"
+          >
             <novo-calendar-day-event
               [dayEvent]="dayEvent"
               [tooltipPosition]="tooltipPosition"
               [customTemplate]="eventTemplate"
-              (eventClicked)="eventClicked.emit($event)">
+              (eventClicked)="eventClicked.emit($event)"
+            >
             </novo-calendar-day-event>
           </div>
         </div>
@@ -56,7 +78,8 @@ const MINUTES_IN_HOUR: number = 60;
             [segment]="segment"
             [locale]="locale"
             [customTemplate]="hourSegmentTemplate"
-            (click)="hourSegmentClicked.emit({date: segment.date})">
+            (click)="hourSegmentClicked.emit({ date: segment.date })"
+          >
           </novo-calendar-day-hour-segment>
         </div>
       </div>

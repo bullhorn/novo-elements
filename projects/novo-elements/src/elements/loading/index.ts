@@ -1,2 +1,2 @@
-export * from './Loading.module';
 export * from './Loading';
+export * from './Loading.module';

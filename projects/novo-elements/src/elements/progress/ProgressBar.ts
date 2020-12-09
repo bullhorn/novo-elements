@@ -1,17 +1,17 @@
 // NG2
 import {
-  Component,
-  Input,
-  HostBinding,
-  forwardRef,
   ChangeDetectorRef,
+  Component,
   EventEmitter,
-  Output,
+  forwardRef,
+  HostBinding,
+  Inject,
+  Input,
   OnInit,
   Optional,
-  Inject,
+  Output,
 } from '@angular/core';
-import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { NovoProgressElement, ProgressAppearance } from './Progress';
 
 // make radio-button-group ids unique

@@ -1,2 +1,2 @@
-export * from './SearchBox.module';
 export * from './SearchBox';
+export * from './SearchBox.module';

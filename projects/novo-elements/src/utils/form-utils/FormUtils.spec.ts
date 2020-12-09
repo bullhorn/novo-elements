@@ -1,13 +1,13 @@
 // NG2
+import { async, inject, TestBed } from '@angular/core/testing';
 import { FormGroup } from '@angular/forms';
-import { TestBed, async, inject } from '@angular/core/testing';
 // Vendor
 import { from } from 'rxjs';
 // APP
 import {
   AddressControl,
-  CheckListControl,
   CheckboxControl,
+  CheckListControl,
   DateControl,
   DateTimeControl,
   EditorControl,
@@ -20,11 +20,11 @@ import {
   TilesControl,
   TimeControl,
 } from '../../elements/form/FormControls';
-import { FormUtils } from './FormUtils';
+import { FormField } from '../../elements/form/FormInterfaces';
 import { NovoFormControl } from '../../elements/form/NovoFormControl';
 import { NovoLabelService } from '../../services/novo-label-service';
 import { OptionsService } from '../../services/options/OptionsService';
-import { FormField } from '../../elements/form/FormInterfaces';
+import { FormUtils } from './FormUtils';
 
 /**
  * Creates a mock address
@@ -428,18 +428,20 @@ describe('Utils: FormUtils', () => {
             dataSpecialization: 'INLINE_EMBEDDED',
             sortOrder: 10,
             associatedEntity: {
-              fields: [{
-                name: 'field1',
-                type: 'text',
-                label: 'Field 1',
-                sortOrder: 10,
-              },
-              {
-                name: 'field2',
-                type: 'text',
-                label: 'Field 2',
-                sortOrder: 30,
-              }],
+              fields: [
+                {
+                  name: 'field1',
+                  type: 'text',
+                  label: 'Field 1',
+                  sortOrder: 10,
+                },
+                {
+                  name: 'field2',
+                  type: 'text',
+                  label: 'Field 2',
+                  sortOrder: 30,
+                },
+              ],
             },
           },
         ],
@@ -545,11 +547,17 @@ describe('Utils: FormUtils', () => {
     it('should add current option to array if current value is not there for WorkflowOptions', () => {
       const field: { workflowOptions: Object } = {
         workflowOptions: {
-          1: [{ value: '1', label: 'one' }, { value: '3', label: 'three' }],
+          1: [
+            { value: '1', label: 'one' },
+            { value: '3', label: 'three' },
+          ],
           2: [{ value: '2', label: 'two' }],
         },
       };
-      const expected: Array<{ value: string; label: string }> = [{ value: '1', label: 'one' }, { value: '3', label: 'three' }];
+      const expected: Array<{ value: string; label: string }> = [
+        { value: '1', label: 'one' },
+        { value: '3', label: 'three' },
+      ];
       const result = formUtils.getControlOptions(field, undefined, undefined, { id: '1', label: 'one' });
       expect(result).toEqual(expected);
     });
@@ -715,12 +723,14 @@ describe('Utils: FormUtils', () => {
       const field = {
         name: 'embeddedField',
         associatedEntity: {
-          fields: [{
-            name: 'field1',
-          },
-          {
-            name: 'field2',
-          }],
+          fields: [
+            {
+              name: 'field1',
+            },
+            {
+              name: 'field2',
+            },
+          ],
         },
       };
       const embeddedfields = formUtils.getEmbeddedFields(field);
@@ -732,12 +742,14 @@ describe('Utils: FormUtils', () => {
       const field = {
         name: 'embeddedField',
         associatedEntity: {
-          fields: [{
-            name: 'embeddedField.field1',
-          },
-          {
-            name: 'embeddedField.field2',
-          }],
+          fields: [
+            {
+              name: 'embeddedField.field1',
+            },
+            {
+              name: 'embeddedField.field2',
+            },
+          ],
         },
       };
       const embeddedfields = formUtils.getEmbeddedFields(field);

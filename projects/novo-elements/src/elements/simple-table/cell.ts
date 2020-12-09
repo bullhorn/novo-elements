@@ -1,11 +1,22 @@
 import { CdkCell, CdkCellDef, CdkColumnDef, CdkHeaderCell, CdkHeaderCellDef } from '@angular/cdk/table';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Directive, ElementRef, HostBinding, Input, OnDestroy, OnInit, Optional, Renderer2 } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  Directive,
+  ElementRef,
+  HostBinding,
+  Input,
+  OnDestroy,
+  OnInit,
+  Optional,
+  Renderer2,
+} from '@angular/core';
 import { Subscription } from 'rxjs';
 import { NovoLabelService } from '../../services/novo-label-service';
 import { Helpers } from '../../utils/Helpers';
 import { SimpleTableActionColumn, SimpleTableActionColumnOption, SimpleTableColumn } from './interfaces';
 import { NovoSelection } from './sort';
-
 
 /** Workaround for https://github.com/angular/angular/issues/17849 */
 export const _NovoCellDef = CdkCellDef;
@@ -20,7 +31,7 @@ export const _NovoCell = CdkCell;
 })
 export class NovoSimpleCellDef extends _NovoCellDef {
   // TODO: add explicit constructor
- }
+}
 
 @Directive({
   selector: '[novoSimpleHeaderCellDef]',
@@ -28,7 +39,7 @@ export class NovoSimpleCellDef extends _NovoCellDef {
 })
 export class NovoSimpleHeaderCellDef extends _NovoHeaderCellDef {
   // TODO: add explicit constructor
- }
+}
 
 @Directive({
   selector: '[novoSimpleColumnDef]',
@@ -120,9 +131,7 @@ export class NovoSimpleCheckboxHeaderCell extends _NovoHeaderCell implements OnD
 
 @Component({
   selector: 'novo-simple-cell',
-  template: `
-    <span [class.clickable]="!!column.onClick" (click)="onClick($event)" #span>{{ column.renderer(row) }}</span>
-  `,
+  template: ` <span [class.clickable]="!!column.onClick" (click)="onClick($event)" #span>{{ column.renderer(row) }}</span> `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NovoSimpleCell<T> extends _NovoCell implements OnInit {
@@ -173,9 +182,7 @@ export class NovoSimpleCell<T> extends _NovoCell implements OnInit {
 
 @Component({
   selector: 'novo-simple-checkbox-cell',
-  template: `
-    <novo-checkbox [ngModel]="selected" (ngModelChange)="toggle($event)"></novo-checkbox>
-  `,
+  template: ` <novo-checkbox [ngModel]="selected" (ngModelChange)="toggle($event)"></novo-checkbox> `,
 })
 export class NovoSimpleCheckboxCell extends _NovoCell implements OnDestroy, OnInit {
   @HostBinding('attr.role')

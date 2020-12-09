@@ -1,11 +1,10 @@
 import { Overlay, OverlayRef, ScrollStrategyOptions } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
-import { ComponentRef, Injectable, ElementRef } from '@angular/core';
+import { ComponentRef, ElementRef, Injectable } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
-
-import { MenuComponent } from './menu.component';
-import { MenuItemDirective } from './menu-item.directive';
 import { MenuContentComponent } from './menu-content.component';
+import { MenuItemDirective } from './menu-item.directive';
+import { MenuComponent } from './menu.component';
 
 export interface IMenuClickEvent {
   anchorElement?: Element | EventTarget;

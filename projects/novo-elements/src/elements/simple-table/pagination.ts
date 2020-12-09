@@ -1,8 +1,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Subscription } from 'rxjs';
-
-import { NovoSimplePaginationEvent } from './interfaces';
 import { NovoLabelService } from '../../services/novo-label-service';
+import { NovoSimplePaginationEvent } from './interfaces';
 import { NovoActivityTableState } from './state';
 
 const DEFAULT_PAGE_SIZE = 50;
@@ -10,42 +9,50 @@ const DEFAULT_PAGE_SIZE = 50;
 @Component({
   selector: 'novo-simple-table-pagination',
   template: `
-        <div class="novo-simple-table-pagination-size">
-            <novo-tiles *ngIf="displayedPageSizeOptions.length > 1"
-                        [(ngModel)]="pageSize"
-                        [options]="displayedPageSizeOptions"
-                        (onChange)="changePageSize($event)"
-                        data-automation-id="novo-simple-table-pagination-tiles">
-            </novo-tiles>
-            <div *ngIf="displayedPageSizeOptions.length <= 1">{{ pageSize }}</div>
-        </div>
+    <div class="novo-simple-table-pagination-size">
+      <novo-tiles
+        *ngIf="displayedPageSizeOptions.length > 1"
+        [(ngModel)]="pageSize"
+        [options]="displayedPageSizeOptions"
+        (onChange)="changePageSize($event)"
+        data-automation-id="novo-simple-table-pagination-tiles"
+      >
+      </novo-tiles>
+      <div *ngIf="displayedPageSizeOptions.length <= 1">{{ pageSize }}</div>
+    </div>
 
-        <div class="novo-simple-table-range-label-long"data-automation-id="novo-simple-table-pagination-range-label-long">
-            {{ longRangeLabel }}
-        </div>
-        <div class="novo-simple-table-range-label-short"data-automation-id="novo-simple-table-pagination-range-label-short">
-            {{ shortRangeLabel }}
-        </div>
+    <div class="novo-simple-table-range-label-long" data-automation-id="novo-simple-table-pagination-range-label-long">
+      {{ longRangeLabel }}
+    </div>
+    <div class="novo-simple-table-range-label-short" data-automation-id="novo-simple-table-pagination-range-label-short">
+      {{ shortRangeLabel }}
+    </div>
 
-        <button theme="dialogue" type="button"
-                class="novo-simple-table-pagination-navigation-previous"
-                (click)="previousPage()"
-                icon="previous"
-                side="left"
-                [disabled]="!hasPreviousPage()"
-                data-automation-id="novo-simple-table-pagination-previous">
-            <span>{{ labels.previous }}</span>
-        </button>
-        <button theme="dialogue" type="button"
-                class="novo-simple-table-pagination-navigation-next"
-                (click)="nextPage()"
-                icon="next"
-                side="right"
-                [disabled]="!hasNextPage()"
-                data-automation-id="novo-simple-table-pagination-next">
-            <span>{{ labels.next }}</span>
-        </button>
-    `,
+    <button
+      theme="dialogue"
+      type="button"
+      class="novo-simple-table-pagination-navigation-previous"
+      (click)="previousPage()"
+      icon="previous"
+      side="left"
+      [disabled]="!hasPreviousPage()"
+      data-automation-id="novo-simple-table-pagination-previous"
+    >
+      <span>{{ labels.previous }}</span>
+    </button>
+    <button
+      theme="dialogue"
+      type="button"
+      class="novo-simple-table-pagination-navigation-next"
+      (click)="nextPage()"
+      icon="next"
+      side="right"
+      [disabled]="!hasNextPage()"
+      data-automation-id="novo-simple-table-pagination-next"
+    >
+      <span>{{ labels.next }}</span>
+    </button>
+  `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NovoSimpleTablePagination implements OnInit, OnDestroy {

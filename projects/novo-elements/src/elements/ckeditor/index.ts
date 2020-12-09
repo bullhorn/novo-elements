@@ -1,2 +1,2 @@
-export * from './CKEditor.module';
 export * from './CKEditor';
+export * from './CKEditor.module';

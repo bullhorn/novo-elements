@@ -3,7 +3,7 @@ import { ComponentFactoryResolver, ComponentRef, Injectable, Injector, StaticPro
 
 @Injectable()
 export class ComponentUtils {
-  constructor(public componentFactoryResolver: ComponentFactoryResolver) { }
+  constructor(public componentFactoryResolver: ComponentFactoryResolver) {}
 
   append<T>(ComponentClass: Type<T>, location: ViewContainerRef, providers?: StaticProvider[], onTop?: boolean): ComponentRef<T> {
     const componentFactory = this.componentFactoryResolver.resolveComponentFactory(ComponentClass);

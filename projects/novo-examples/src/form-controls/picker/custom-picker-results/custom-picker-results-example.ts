@@ -13,10 +13,9 @@ import { PickerResults } from 'novo-elements';
         *ngFor="let match of matches"
         (click)="selectMatch($event)"
         [class.active]="match === activeMatch"
-        (mouseenter)="selectActive(match)">
-        <item-content>
-          **CUSTOM** <b [innerHtml]="highlight(match.label, term)"></b>
-        </item-content>
+        (mouseenter)="selectActive(match)"
+      >
+        <item-content> **CUSTOM** <b [innerHtml]="highlight(match.label, term)"></b> </item-content>
       </novo-list-item>
     </novo-list>
     <p class="picker-error" *ngIf="hasError">Oops! An error occured.</p>

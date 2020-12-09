@@ -42,3 +42,9 @@ The following input types can be used with novoInput:
 - Other: color, range
 
 <code-example example="field-native"></code-example>
+
+##### Form Controls
+
+How to use form fields tied to a form with FormControls and validation
+
+<code-example example="form-usage"></code-example>

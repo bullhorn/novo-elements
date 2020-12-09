@@ -1,8 +1,10 @@
 <div class="calendar-demo-side-by-side">
-    <p>
-        <label>Start date</label> {{(value?.startDate | date) || 'N/A'}}
+  <p>
+    <label>Start date</label> {{(value?.startDate | date) || 'N/A'}}
 
-        <label>End date</label> {{(value?.endDate | date) || 'N/A'}}
-    </p>
-    <novo-date-picker [(ngModel)]="value" range="true"></novo-date-picker>
+    <label>End date</label> {{(value?.endDate | date) || 'N/A'}}
+  </p>
+  <novo-date-picker [(ngModel)]="value" range="true"></novo-date-picker>
+  <novo-date-picker mode="range" numberOfMonths="2" hideOverflowDays></novo-date-picker>
+
 </div>

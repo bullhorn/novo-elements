@@ -19,8 +19,8 @@ novo-loading {
     border-radius: 50%;
     height: 1em;
     width: 1em;
-    @include enumerate($dot-colors, 'background-color', 'map-val', '');
-    @include animationMapDelay($dot-colors, jump, 1600ms, ease-in-out, 70ms, forward, infinite, '', '');
+    @include enumerate($dot-colors, "background-color", "map-val", "");
+    @include animationMapDelay($dot-colors, jump, 1600ms, ease-in-out, 70ms, forward, infinite, "", "");
   }
   @each $analytics, $color in $analytics-colors {
     &.#{$analytics} {

@@ -2,7 +2,7 @@ novo-checkbox,
 novo-check-list {
   display: flex;
   flex-flow: row wrap;
-  [class*='-group'] {
+  [class*="-group"] {
     margin-right: 15px;
     cursor: pointer;
     position: relative;

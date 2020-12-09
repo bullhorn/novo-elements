@@ -1,14 +1,13 @@
 // NG2
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+import { IMaskDirectiveModule } from 'angular-imask';
 // Vendor
 import { TextMaskModule } from 'angular2-text-mask';
-import { IMaskDirectiveModule } from 'angular-imask';
-
+import { NovoListModule } from '../list/List.module';
 // APP
 import { NovoOverlayModule } from '../overlay/Overlay.module';
-import { NovoListModule } from '../list/List.module';
 import { NovoTimePickerElement } from './TimePicker';
 import { NovoTimePickerInputElement } from './TimePickerInput';
 

@@ -1,10 +1,10 @@
 // NG2
-import { ElementRef, Input, ChangeDetectorRef, Directive } from '@angular/core';
-// APP
-import { Helpers } from '../../../../utils/Helpers';
+import { OverlayRef } from '@angular/cdk/overlay';
+import { ChangeDetectorRef, Directive, ElementRef, Input } from '@angular/core';
 // Vendor
 import { from, Observable } from 'rxjs';
-import { OverlayRef } from '@angular/cdk/overlay';
+// APP
+import { Helpers } from '../../../../utils/Helpers';
 import { NovoControlConfig } from '../../../form/controls/BaseControl';
 
 /**
@@ -240,9 +240,7 @@ export class BasePickerResults {
   filterData(matches): Array<any> {
     if (this.term && matches) {
       return matches.filter((match) => {
-        return ~String(match.label)
-          .toLowerCase()
-          .indexOf(this.term.toLowerCase());
+        return ~String(match.label).toLowerCase().indexOf(this.term.toLowerCase());
       });
     }
     // Show no recent results template

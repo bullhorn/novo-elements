@@ -1,5 +1,5 @@
 // NG2
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NovoModalRef } from './modal-ref';
 
 @Component({

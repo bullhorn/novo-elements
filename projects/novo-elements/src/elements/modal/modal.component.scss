@@ -123,7 +123,7 @@ novo-notification {
     }
   }
 
-  &[type='success'] {
+  &[type="success"] {
     & > section {
       i {
         color: $success;
@@ -131,7 +131,7 @@ novo-notification {
       }
     }
 
-    button[theme='primary'] {
+    button[theme="primary"] {
       width: 100%;
 
       .flex-wrapper {
@@ -140,7 +140,7 @@ novo-notification {
     }
   }
 
-  &[type='warning'] {
+  &[type="warning"] {
     footer {
       display: flex;
 
@@ -162,8 +162,8 @@ novo-notification {
     }
   }
 
-  &[type='error'] {
-    button[theme='primary'].primary {
+  &[type="error"] {
+    button[theme="primary"].primary {
       width: 100%;
 
       .flex-wrapper {

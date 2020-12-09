@@ -1,2 +1,2 @@
-export * from './Overlay.module';
 export * from './Overlay';
+export * from './Overlay.module';

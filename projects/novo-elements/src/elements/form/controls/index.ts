@@ -1,7 +1,9 @@
 export * from './ace-editor';
 export * from './address';
+export * from './BaseControl';
 export * from './check-list';
 export * from './checkbox';
+export * from './ControlFactory';
 export * from './custom';
 export * from './date';
 export * from './date-time';
@@ -19,5 +21,3 @@ export * from './textbox';
 export * from './tiles';
 export * from './time';
 export * from './timezone';
-export * from './BaseControl';
-export * from './ControlFactory';

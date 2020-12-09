@@ -74,7 +74,7 @@ novo-nav {
       outline: none;
     }
   }
-  &[type='button-bar'] {
+  &[type="button-bar"] {
     display: inline-flex;
     border-radius: 3px;
     border: 2px solid #fff;
@@ -91,7 +91,7 @@ novo-nav {
       }
     }
   }
-  &[theme='color'] {
+  &[theme="color"] {
     background: rgba(0, 0, 0, 0.2);
     novo-tab,
     novo-tab-link {
@@ -116,7 +116,7 @@ novo-nav {
         }
       }
     }
-    &[type='button-bar'] {
+    &[type="button-bar"] {
       border: 2px solid #fff;
       novo-tab-button {
         color: rgba(255, 255, 255, 0.75);
@@ -137,9 +137,9 @@ novo-nav {
       }
     }
   }
-  &[theme='white'] {
+  &[theme="white"] {
     background-color: $white;
-    &[direction='vertical'] {
+    &[direction="vertical"] {
       background: transparent;
     }
     novo-tab,
@@ -179,7 +179,7 @@ novo-nav {
         }
       }
     }
-    &[type='button-bar'] {
+    &[type="button-bar"] {
       border: 2px solid $light;
       novo-tab-button {
         color: $dark;
@@ -202,7 +202,7 @@ novo-nav {
       }
     }
   }
-  &[direction='vertical'] {
+  &[direction="vertical"] {
     flex-direction: column;
     width: auto;
     novo-tab,

@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, Input, HostBinding } from '@angular/core';
 import { CdkHeaderRow, CDK_ROW_TEMPLATE } from '@angular/cdk/table';
+import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular/core';
 
 @Component({
   selector: 'novo-data-table-header-row',

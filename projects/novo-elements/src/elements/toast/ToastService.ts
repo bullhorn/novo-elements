@@ -1,8 +1,8 @@
 // NG2
 import { Injectable } from '@angular/core';
+import { ComponentUtils } from '../../utils/component-utils/ComponentUtils';
 // APP
 import { NovoToastElement } from './Toast';
-import { ComponentUtils } from '../../utils/component-utils/ComponentUtils';
 
 export type ToastThemes = 'default' | 'success' | 'info' | 'warning' | 'danger' | 'positive' | string;
 export type ToastIcons = 'bell' | 'check' | 'info' | 'warning' | 'remove' | 'caution' | 'times' | 'coffee' | 'danger' | string;

@@ -1,13 +1,12 @@
 // NG2
-import { TestBed, async } from '@angular/core/testing';
+import { async, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
-// App
-import { NovoAddressElement } from './Address';
-import { NovoSelectModule } from '../../../select/Select.module';
 import { NovoLabelService } from '../../../../services/novo-label-service';
 import { NovoPickerModule } from '../../../picker/Picker.module';
+import { NovoSelectModule } from '../../../select/Select.module';
 import { NovoTooltipModule } from './../../../tooltip/Tooltip.module';
-import { Helpers } from '../../../../utils/Helpers';
+// App
+import { NovoAddressElement } from './Address';
 
 describe('Elements: NovoAddressElement', () => {
   let fixture;

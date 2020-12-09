@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { NovoToastService } from 'novo-elements';
 
 /**
  * @title Static Toast Usage

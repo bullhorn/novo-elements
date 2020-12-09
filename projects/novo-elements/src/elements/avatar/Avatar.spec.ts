@@ -1,8 +1,8 @@
 // NG2
-import { TestBed, async } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
+import { setupTestSuite } from '../../../../../utils/test-setup';
 // APP
 import { NovoAvatarElement } from './Avatar';
-import { setupTestSuite } from '../../../../../utils/test-setup';
 
 describe('Elements: NovoButtonElement', () => {
   let fixture;

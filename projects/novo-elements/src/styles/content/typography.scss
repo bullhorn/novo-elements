@@ -105,7 +105,7 @@ i {
   font-size: $base-icon-size;
   display: inline-block;
   &[theme] {
-    &[theme='contained'] {
+    &[theme="contained"] {
       font-size: 0.8rem;
       border-radius: 0.55rem;
       height: $icon-height;
@@ -131,7 +131,7 @@ i {
         font-size: 1.2rem;
       }
     }
-    &[theme='entity'] {
+    &[theme="entity"] {
       @each $entity, $color in $entity-colors {
         &.#{$entity} {
           color: $color;
@@ -159,7 +159,7 @@ span {
       vertical-align: middle !important;
     }
     &[theme] {
-      &[theme='contained'] {
+      &[theme="contained"] {
         font-size: 0.8rem;
         vertical-align: 0.1rem;
         &:before {

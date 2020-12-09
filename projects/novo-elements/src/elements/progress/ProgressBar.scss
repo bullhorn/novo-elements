@@ -1,5 +1,5 @@
-@import '../../styles/global/variables';
-@import '../../styles/global/functions';
+@import "../../styles/global/variables";
+@import "../../styles/global/functions";
 
 /* default styling for progress bar */
 :host {
@@ -35,7 +35,7 @@
     }
 
     @each $basic, $color in $all-colors {
-      &[color='#{$basic}'] {
+      &[color="#{$basic}"] {
         background-color: $color;
       }
     }
@@ -61,7 +61,7 @@
     }
 
     @each $basic, $color in $all-colors {
-      &[color='#{$basic}'] {
+      &[color="#{$basic}"] {
         svg circle {
           stroke: $color;
         }

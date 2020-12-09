@@ -1,11 +1,11 @@
 // NG2
-import { Validators } from '@angular/forms';
 import { EventEmitter } from '@angular/core';
+import { Validators } from '@angular/forms';
 // APP
 import { Helpers } from '../../../utils/Helpers';
-import { NovoControlGroupAddConfig } from '../ControlGroup';
 import { notify } from '../../../utils/notifier/notifier.util';
 import { IMaskOptions } from '../Control';
+import { NovoControlGroupAddConfig } from '../ControlGroup';
 
 export interface NovoGroupedControlConfig {
   label?: string;

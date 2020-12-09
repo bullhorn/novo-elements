@@ -1,9 +1,8 @@
 // NG2
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { PortalModule } from '@angular/cdk/portal';
-
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 // APP
 import { NovoButtonModule } from '../button/Button.module';
 import { NovoModalContainerComponent } from './modal-container.component';

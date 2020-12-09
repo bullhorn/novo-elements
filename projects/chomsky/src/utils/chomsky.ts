@@ -1,8 +1,7 @@
-import { Observable, Subject, of, from } from 'rxjs';
-
-import { Loader } from './loader';
-import { Formats, IFormatDefaults } from './formats';
+import { from, Observable, of, Subject } from 'rxjs';
 import { DictionaryManager } from './dictionary-manager';
+import { Formats, IFormatDefaults } from './formats';
+import { Loader } from './loader';
 import { mergeDeep } from './object-assign-deep';
 
 // Default formats

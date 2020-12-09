@@ -19,7 +19,7 @@
   }
 
   .cal-hour-segment::after {
-    content: '\00a0';
+    content: "\00a0";
   }
 
   .cal-hour:not(:last-child) .cal-hour-segment,

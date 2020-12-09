@@ -7,7 +7,7 @@ novo-list {
     flex-direction: row;
   }
   @each $entity, $color in $entity-colors {
-    &[theme='#{$entity}'] {
+    &[theme="#{$entity}"] {
       novo-list-item {
         background: $color;
         color: #fff;
@@ -27,7 +27,7 @@ novo-list {
     }
   }
   @each $basic, $color in $app-colors {
-    &[theme='#{$basic}'] {
+    &[theme="#{$basic}"] {
       novo-list-item {
         background: $color;
         color: #fff;
@@ -100,10 +100,10 @@ novo-list-item {
     }
     i {
       &.positive {
-        color: map-get($analytics-colors, 'grass');
+        color: map-get($analytics-colors, "grass");
       }
       &.negative {
-        color: map-get($analytics-colors, 'grapefruit');
+        color: map-get($analytics-colors, "grapefruit");
       }
       @each $analytic, $color in $analytics-colors {
         &.#{$analytic} {

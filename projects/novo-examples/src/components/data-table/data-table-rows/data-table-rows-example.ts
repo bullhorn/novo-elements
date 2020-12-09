@@ -1,16 +1,14 @@
-import { Component, ChangeDetectionStrategy, ChangeDetectorRef, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ViewChild } from '@angular/core';
 import * as dateFns from 'date-fns';
-import { Subject } from 'rxjs';
-
 import {
   IDataTableColumn,
   IDataTablePaginationOptions,
-  IDataTableSearchOptions,
-  NovoModalService,
-  NovoDataTable,
   IDataTablePreferences,
+  IDataTableSearchOptions,
+  NovoDataTable,
+  NovoModalService,
 } from 'novo-elements';
-
+import { Subject } from 'rxjs';
 import { ConfigureColumnsModal, MockData } from '../extras';
 
 /**
@@ -27,11 +25,21 @@ export class DataTableRowsExample {
   table: NovoDataTable<MockData>;
 
   // Table configuration
-  public dataSetOptions: any[] = [{ label: 'Dataset #1', value: 1 }, { label: 'Dataset #2', value: 2 }, { label: 'Dataset #3', value: 3 }];
+  public dataSetOptions: any[] = [
+    { label: 'Dataset #1', value: 1 },
+    { label: 'Dataset #2', value: 2 },
+    { label: 'Dataset #3', value: 3 },
+  ];
   public loadedDataSet: number = 1;
-  public paginationTypeOptions: any[] = [{ label: 'Standard', value: 'standard' }, { label: 'Basic', value: 'basic' }];
+  public paginationTypeOptions: any[] = [
+    { label: 'Standard', value: 'standard' },
+    { label: 'Basic', value: 'basic' },
+  ];
   public loadedPaginationType: string = 'standard';
-  public globalSearchOptions: any[] = [{ label: 'Show', value: true }, { label: 'Hide', value: false }];
+  public globalSearchOptions: any[] = [
+    { label: 'Show', value: true },
+    { label: 'Hide', value: false },
+  ];
   public loadedGlobalSearch: boolean = false;
   public customStatusColumnValue: string = '';
   public customStatusColumnOptions: object[] = [
@@ -207,7 +215,10 @@ export class DataTableRowsExample {
       sortable: true,
       filterable: {
         type: 'select',
-        options: [{ value: true, label: 'True' }, { value: false, label: 'False' }],
+        options: [
+          { value: true, label: 'True' },
+          { value: false, label: 'False' },
+        ],
       },
     },
     {

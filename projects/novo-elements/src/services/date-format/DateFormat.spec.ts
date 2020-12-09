@@ -1,7 +1,6 @@
 // APP
-import { DateFormatService } from './DateFormat';
-import { Helpers } from '../../utils/Helpers';
 import { NovoLabelService } from '../../services/novo-label-service';
+import { DateFormatService } from './DateFormat';
 
 describe('Service: DateFormatService', () => {
   let service;
@@ -281,7 +280,7 @@ describe('Service: DateFormatService', () => {
     it('should be defined', () => {
       expect(service.parseTimeString).toBeDefined();
     });
-    it('should not parse if the string doesn\'t contain :', () => {
+    it("should not parse if the string doesn't contain :", () => {
       const [value, timeString] = service.parseTimeString('', false);
       expect(timeString).toEqual('');
     });

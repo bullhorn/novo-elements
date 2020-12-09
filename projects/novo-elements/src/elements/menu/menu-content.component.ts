@@ -1,24 +1,27 @@
+import { ActiveDescendantKeyManager } from '@angular/cdk/a11y';
 import { OverlayRef } from '@angular/cdk/overlay';
 import {
   AfterViewInit,
   ChangeDetectorRef,
   Component,
   ElementRef,
+  EventEmitter,
+  HostListener,
   Inject,
   Input,
+  OnDestroy,
+  OnInit,
   Optional,
+  Output,
+  QueryList,
   ViewChild,
   ViewChildren,
-  Directive,
 } from '@angular/core';
-import { EventEmitter, OnDestroy, OnInit, Output, QueryList, HostListener } from '@angular/core';
 import { Subscription } from 'rxjs';
-
-import { CloseLeafMenuEvent, IMenuClickEvent } from './menu.service';
 import { MenuItemDirective } from './menu-item.directive';
-import { IMenuOptions, ILinkConfig } from './menu.types';
+import { CloseLeafMenuEvent, IMenuClickEvent } from './menu.service';
 import { MENU_OPTIONS } from './menu.tokens';
-import { ActiveDescendantKeyManager } from '@angular/cdk/a11y';
+import { ILinkConfig, IMenuOptions } from './menu.types';
 
 const ARROW_LEFT_KEYCODE = 37;
 

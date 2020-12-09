@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, HostBinding, AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, HostBinding, Input } from '@angular/core';
 
 @Component({
   selector: 'novo-icon',

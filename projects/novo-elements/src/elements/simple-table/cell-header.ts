@@ -1,3 +1,5 @@
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import { CdkColumnDef } from '@angular/cdk/table';
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
@@ -12,17 +14,14 @@ import {
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import { coerceBooleanProperty } from '@angular/cdk/coercion';
-import { CdkColumnDef } from '@angular/cdk/table';
-import { Subscription } from 'rxjs';
 import * as dateFns from 'date-fns';
-
+import { Subscription } from 'rxjs';
+import { NovoLabelService } from '../../services/novo-label-service';
+import { Helpers } from '../../utils/Helpers';
 import { NovoDropdownElement } from '../dropdown/Dropdown';
 import { NovoSimpleSortFilter, NovoSimpleTableChange, SimpleTableColumnFilterConfig, SimpleTableColumnFilterOption } from './interfaces';
 import { NovoSortFilter } from './sort';
-import { NovoLabelService } from '../../services/novo-label-service';
 import { NovoActivityTableState } from './state';
-import { Helpers } from '../../utils/Helpers';
 
 @Directive({
   selector: '[novoSimpleFilterFocus]',

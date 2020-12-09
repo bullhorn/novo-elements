@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, TemplateRef } from '@angular/core';
+import { Component, EventEmitter, Input, Output, TemplateRef } from '@angular/core';
 import { CalendarEvent } from '../../../utils/calendar-utils/CalendarUtils';
 
 @Component({
@@ -6,16 +6,20 @@ import { CalendarEvent } from '../../../utils/calendar-utils/CalendarUtils';
   template: `
     <ng-template #defaultTemplate>
       <div class="cal-event-legend">
-        <div class="cal-event-type"
-          *ngFor="let type of events | groupBy : 'type'"
-          (click)="$event.stopPropagation(); eventTypeClicked.emit({event:type?.key})">
-          <div class="cal-event-type-swatch"></div><div>{{type?.key}}</div>
+        <div
+          class="cal-event-type"
+          *ngFor="let type of events | groupBy: 'type'"
+          (click)="$event.stopPropagation(); eventTypeClicked.emit({ event: type?.key })"
+        >
+          <div class="cal-event-type-swatch"></div>
+          <div>{{ type?.key }}</div>
         </div>
       </div>
     </ng-template>
     <ng-template
       [ngTemplateOutlet]="customTemplate || defaultTemplate"
-      [ngTemplateOutletContext]="{events: events, eventTypeClicked: eventTypeClicked}">
+      [ngTemplateOutletContext]="{ events: events, eventTypeClicked: eventTypeClicked }"
+    >
     </ng-template>
   `,
 })

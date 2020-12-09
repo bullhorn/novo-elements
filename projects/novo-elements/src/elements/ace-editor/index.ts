@@ -1,2 +1,2 @@
-export * from './AceEditor.module';
 export * from './AceEditor';
+export * from './AceEditor.module';

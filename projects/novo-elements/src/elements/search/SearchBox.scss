@@ -1,10 +1,10 @@
 novo-search {
   display: grid;
-  grid-template-areas: 'icon input';
+  grid-template-areas: "icon input";
   grid-template-columns: 3.2em 1fr;
   align-items: center;
 
-  > button[theme][theme='fab'] {
+  > button[theme][theme="fab"] {
     width: 2.8em;
     height: 2.8em;
     min-height: 2.8em;
@@ -35,7 +35,7 @@ novo-search {
     min-width: 100px;
     z-index: 1000;
 
-    > button[theme='fab'] {
+    > button[theme="fab"] {
       border-radius: 2px 0 0 2px !important;
       width: 3.2em;
       height: 2.8em;
@@ -70,7 +70,7 @@ novo-search {
       }
     }
     @each $key, $color in $all-colors {
-      &[theme='#{$key}'] {
+      &[theme="#{$key}"] {
         > button {
           color: $color !important;
         }

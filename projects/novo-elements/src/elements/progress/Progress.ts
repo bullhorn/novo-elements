@@ -1,5 +1,5 @@
 // NG2
-import { Component, Input, HostBinding, forwardRef, ContentChildren, QueryList, AfterContentInit } from '@angular/core';
+import { AfterContentInit, Component, ContentChildren, forwardRef, HostBinding, Input, QueryList } from '@angular/core';
 import { NovoProgressBarElement } from './ProgressBar';
 
 export enum ProgressAppearance {

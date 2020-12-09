@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-
 // Vendor
-import { FormUtils, DateControl, TimeControl, DateTimeControl, TimezoneControl } from 'novo-elements';
+import { DateControl, DateTimeControl, FormUtils, TimeControl, TimezoneControl } from 'novo-elements';
 
 // import { MockMeta, MockMetaHeaders } from './MockMeta';
 

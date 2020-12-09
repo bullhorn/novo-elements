@@ -20,7 +20,7 @@ novo-radio-group {
       &.unchecked {
         opacity: 0.5;
       }
-      &[theme='icon'] {
+      &[theme="icon"] {
         margin-right: 0;
         border: 1px solid $positive;
       }
@@ -29,7 +29,7 @@ novo-radio-group {
       button {
         border-top-left-radius: 3px !important;
         border-bottom-left-radius: 3px !important;
-        &[theme='icon'] {
+        &[theme="icon"] {
           border-right-width: 0px !important;
         }
       }
@@ -40,7 +40,7 @@ novo-radio-group {
         border-bottom-right-radius: 3px !important;
         border-right-width: 1px !important;
         border-right-style: solid !important;
-        &[theme='icon'] {
+        &[theme="icon"] {
           border-left-width: 0px !important;
         }
       }

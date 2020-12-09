@@ -1,27 +1,27 @@
 // NG
+import { ENTER, ESCAPE, TAB } from '@angular/cdk/keycodes';
 import {
   ChangeDetectorRef,
   Component,
   ElementRef,
-  OnInit,
+  EventEmitter,
   forwardRef,
+  HostBinding,
   Input,
+  OnInit,
   Output,
   ViewChild,
-  EventEmitter,
-  HostBinding,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { TAB, ENTER, ESCAPE } from '@angular/cdk/keycodes';
 // Vendor
 import * as dateFns from 'date-fns';
 import createAutoCorrectedDatePipe from 'text-mask-addons/dist/createAutoCorrectedDatePipe';
-// App
-import { NovoOverlayTemplateComponent } from '../overlay/Overlay';
+import { DateFormatService } from '../../services/date-format/DateFormat';
 import { NovoLabelService } from '../../services/novo-label-service';
 import { Helpers } from '../../utils/Helpers';
-import { DateFormatService } from '../../services/date-format/DateFormat';
-import { RangeModel } from './DatePicker';
+// App
+import { NovoOverlayTemplateComponent } from '../overlay/Overlay';
+import { RangeModel } from './date-picker.types';
 
 // Value accessor for the component (supports ngModel)
 const DATE_VALUE_ACCESSOR = {

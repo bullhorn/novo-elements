@@ -1,11 +1,11 @@
 // NG2
+import { async, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
-import { TestBed, async } from '@angular/core/testing';
+import { NovoLabelService } from '../../services/novo-label-service';
+import { ComponentUtils } from '../../utils/component-utils/ComponentUtils';
+import { NovoChipsModule } from './Chips.module';
 // App
 import { NovoRowChipElement, NovoRowChipsElement } from './RowChips';
-import { NovoChipsModule } from './Chips.module';
-import { ComponentUtils } from '../../utils/component-utils/ComponentUtils';
-import { NovoLabelService } from '../../services/novo-label-service';
 
 describe('Elements: NovoRowChipElement', () => {
   let fixture;
@@ -35,7 +35,10 @@ describe('Elements: NovoRowChipsElement', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [FormsModule, NovoChipsModule],
-      providers: [{ provide: ComponentUtils, useClass: ComponentUtils }, { provide: NovoLabelService, useClass: NovoLabelService }],
+      providers: [
+        { provide: ComponentUtils, useClass: ComponentUtils },
+        { provide: NovoLabelService, useClass: NovoLabelService },
+      ],
     }).compileComponents();
     fixture = TestBed.createComponent(NovoRowChipsElement);
     component = fixture.debugElement.componentInstance;

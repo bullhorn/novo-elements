@@ -1,13 +1,12 @@
 // NG2
+import { OverlayModule } from '@angular/cdk/overlay';
 import { ChangeDetectorRef, Component, ElementRef, NO_ERRORS_SCHEMA } from '@angular/core';
-import { TestBed, async, ComponentFixture } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-// App
-import { NovoAutoSize } from './Control';
-import { NovoControlElement } from './Control';
 import { FieldInteractionApi, NovoLabelService, NovoTemplateService } from '../..';
 import { DateFormatService } from '../../services/date-format/DateFormat';
-import { OverlayModule } from '@angular/cdk/overlay';
+// App
+import { NovoAutoSize, NovoControlElement } from './Control';
 
 @Component({
   selector: 'novo-auto-size-test-component',

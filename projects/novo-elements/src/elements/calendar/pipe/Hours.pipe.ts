@@ -1,4 +1,4 @@
-import { Pipe, PipeTransform, LOCALE_ID, Inject } from '@angular/core';
+import { Inject, LOCALE_ID, Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({ name: 'hours' })
 export class HoursPipe implements PipeTransform {

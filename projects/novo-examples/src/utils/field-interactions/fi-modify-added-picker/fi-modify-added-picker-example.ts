@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 // Vendor
-import { FormUtils, FieldInteractionApi, PickerControl } from 'novo-elements';
+import { FieldInteractionApi, FormUtils, PickerControl } from 'novo-elements';
 
 /**
  * @title Fi Modify Added Picker Example
@@ -20,11 +20,11 @@ export class FiModifyAddedPickerExample {
       console.log('[FieldInteractionDemo] - entityPickerFunction'); // tslint:disable-line
       API.modifyPickerConfig('custom-entity-picker', {
         optionsPromise: (query, http) => {
-          return new Promise(function(resolve, reject) {
+          return new Promise(function (resolve, reject) {
             if (query && query.length) {
               http
                 .get('http://novo-elements-mock.getsandbox.com/users')
-                .map(function(results: any[]) {
+                .map(function (results: any[]) {
                   return results.map((result) => {
                     // Setting the searchEntity on the item is important. We use it to format your display properly.
                     // Valid options are: Candidate, ClientContact, ClientCorporation, CorporateUser, JobOrder, Lead, Opportunity, and Placement

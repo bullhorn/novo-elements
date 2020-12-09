@@ -578,12 +578,9 @@ export class AppBridge {
   public httpPOST(relativeURL: string, postData: any): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       if (this._handlers[AppBridgeHandler.HTTP]) {
-        this._handlers[AppBridgeHandler.HTTP](
-          { verb: HTTP_VERBS.POST, relativeURL, data: postData },
-          (data: any, error: any) => {
-            resolve({ data, error });
-          },
-        );
+        this._handlers[AppBridgeHandler.HTTP]({ verb: HTTP_VERBS.POST, relativeURL, data: postData }, (data: any, error: any) => {
+          resolve({ data, error });
+        });
       } else {
         postRobot
           .sendToParent(MESSAGE_TYPES.HTTP_POST, { relativeURL, data: postData })
@@ -604,12 +601,9 @@ export class AppBridge {
   public httpPUT(relativeURL: string, putData: any): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       if (this._handlers[AppBridgeHandler.HTTP]) {
-        this._handlers[AppBridgeHandler.HTTP](
-          { verb: HTTP_VERBS.PUT, relativeURL, data: putData },
-          (data: any, error: any) => {
-            resolve({ data, error });
-          },
-        );
+        this._handlers[AppBridgeHandler.HTTP]({ verb: HTTP_VERBS.PUT, relativeURL, data: putData }, (data: any, error: any) => {
+          resolve({ data, error });
+        });
       } else {
         postRobot
           .sendToParent(MESSAGE_TYPES.HTTP_PUT, { relativeURL, data: putData })

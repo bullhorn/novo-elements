@@ -1,6 +1,6 @@
 // NG2
-import { Component, EventEmitter, forwardRef, Input, Output, QueryList, ContentChildren, HostBinding } from '@angular/core';
-import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
+import { Component, ContentChildren, EventEmitter, forwardRef, HostBinding, Input, Output, QueryList } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 // APP
 import { NovoRadioElement } from './Radio';
 import { NOVO_RADIO_GROUP } from './tokens';

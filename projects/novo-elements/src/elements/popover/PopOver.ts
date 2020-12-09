@@ -1,15 +1,15 @@
 // NG2
 import {
-  Directive,
-  OnChanges,
-  ComponentRef,
-  ViewContainerRef,
   ComponentFactoryResolver,
-  Input,
-  Output,
+  ComponentRef,
+  Directive,
   EventEmitter,
   HostListener,
+  Input,
+  OnChanges,
+  Output,
   SimpleChange,
+  ViewContainerRef,
 } from '@angular/core';
 import { PopOverContent } from './PopOverContent';
 

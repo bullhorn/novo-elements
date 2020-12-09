@@ -1,2 +1,2 @@
-export * from './CategoryDropdown.module';
 export * from './CategoryDropdown';
+export * from './CategoryDropdown.module';

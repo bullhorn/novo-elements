@@ -1,25 +1,25 @@
 // NG
+import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import {
-  Component,
-  TemplateRef,
-  Input,
-  Output,
   AfterContentInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
+  Component,
   EventEmitter,
+  Input,
   OnChanges,
-  SimpleChanges,
+  Output,
   SimpleChange,
+  SimpleChanges,
+  TemplateRef,
 } from '@angular/core';
-import { FormBuilder, FormArray } from '@angular/forms';
-import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
+import { FormArray, FormBuilder } from '@angular/forms';
+import { NovoLabelService } from '../../services/novo-label-service';
+import { Helpers } from '../../utils/Helpers';
+import { FormUtils } from './../../utils/form-utils/FormUtils';
+import { BaseControl } from './controls/BaseControl';
 // App
 import { NovoFormGroup } from './NovoFormGroup';
-import { BaseControl } from './controls/BaseControl';
-import { FormUtils } from './../../utils/form-utils/FormUtils';
-import { Helpers } from '../../utils/Helpers';
-import { NovoLabelService } from '../../services/novo-label-service';
 
 export interface NovoControlGroupAddConfig {
   label: string;

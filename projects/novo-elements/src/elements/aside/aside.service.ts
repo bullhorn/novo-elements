@@ -1,7 +1,6 @@
-import { Injectable, Injector, ComponentRef, ComponentFactoryResolver } from '@angular/core';
 import { Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal, PortalInjector } from '@angular/cdk/portal';
-
+import { ComponentRef, Injectable, Injector } from '@angular/core';
 import { NovoAsideRef } from './aside-ref';
 import { AsideComponent } from './aside.component';
 

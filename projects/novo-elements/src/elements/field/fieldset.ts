@@ -1,5 +1,5 @@
 // NG2
-import { Component, Input, ContentChildren, QueryList, AfterContentInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
+import { AfterContentInit, ChangeDetectionStrategy, Component, ContentChildren, Input, QueryList } from '@angular/core';
 import { NovoFieldElement } from './field';
 
 @Component({

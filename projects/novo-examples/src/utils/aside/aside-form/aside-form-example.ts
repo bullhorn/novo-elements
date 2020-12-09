@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NovoAsideService, NovoAsideRef, FormUtils, TextBoxControl, PickerControl, PickerResults } from 'novo-elements';
+import { FormUtils, NovoAsideRef, NovoAsideService, PickerControl, PickerResults, TextBoxControl } from 'novo-elements';
 
 @Component({
   selector: 'aside-form-demo',

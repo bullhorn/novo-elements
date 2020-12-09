@@ -1,7 +1,7 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit, Output, EventEmitter, OnDestroy, OnChanges } from '@angular/core';
-import { Color, HSL, HSLA, HSVA, RGBA, HSV, RGB } from '../../utils/color-utils/ColorUtils';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
+import { Color, HSL, HSLA, HSV, HSVA, RGB, RGBA } from '../../utils/color-utils/ColorUtils';
 
 @Component({
   selector: 'novo-color-picker',

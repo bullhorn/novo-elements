@@ -9,3 +9,22 @@
   <novo-label>Leave a comment</novo-label>
   <textarea novoInput placeholder="Ex. It makes me feel..."></textarea>
 </novo-field>
+
+<novo-field>
+  <novo-label>Set an Alarm</novo-label>
+  <input novoInput [(ngModel)]="time" timeFormat="iso8601" [picker]="timepicker">
+  <novo-picker-toggle novoSuffix icon="clock">
+    <novo-time-picker #timepicker></novo-time-picker>
+  </novo-picker-toggle>
+  <novo-hint>value is: {{time}}</novo-hint>
+</novo-field>
+
+<novo-field>
+  <novo-label>Date of Birth</novo-label>
+  <input novoInput dateFormat="iso8601" [picker]="datepicker" [(ngModel)]="date">
+  <novo-picker-toggle novoSuffix icon="calendar">
+    <novo-date-picker #datepicker></novo-date-picker>
+  </novo-picker-toggle>
+  <novo-hint>value is: {{date}}</novo-hint>
+
+</novo-field>

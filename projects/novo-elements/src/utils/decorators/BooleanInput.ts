@@ -9,8 +9,7 @@ export function BooleanInput(): any {
       },
       set(value: boolean | string) {
         this[key] = coerceBooleanProperty(value);
-      }
+      },
     };
   };
 }
-

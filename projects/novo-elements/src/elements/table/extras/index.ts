@@ -10,7 +10,7 @@ export * from './table-cell';
 export * from './table-filter';
 export * from './table-footer';
 export * from './table-header';
+export * from './TableExtras.module';
 // export * from './table-resizing';
 export * from './th-orderable';
 export * from './th-sortable';
-export * from './TableExtras.module';

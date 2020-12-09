@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Subject } from 'rxjs';
 
 /**
  * @title Radial Progress Bars Usage

@@ -1,6 +1,5 @@
 // NG2
-import { Component, Input, ViewChildren, QueryList, AfterViewInit } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
+import { AfterViewInit, Component, Input, QueryList, ViewChildren } from '@angular/core';
 import { NovoAvatarElement } from './Avatar';
 
 @Component({

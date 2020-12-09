@@ -1,4 +1,4 @@
-@import '../../styles/global/variables.scss';
+@import "../../styles/global/variables.scss";
 
 :host {
   display: inline-flex;
@@ -14,13 +14,13 @@
   transition: all 200ms ease-in-out;
   gap: 0.4rem;
 
-  &[size='small'] {
+  &[size="small"] {
     padding: 0.4rem;
     font-size: 0.8rem;
     min-width: 2rem;
   }
 
-  &[size='large'] {
+  &[size="large"] {
     font-size: 1.2rem;
     padding: 1rem;
   }
@@ -29,7 +29,7 @@
     font-size: 1em;
   }
 
-  &[icon='times'] {
+  &[icon="times"] {
     i {
       font-size: 1rem;
     }
@@ -45,13 +45,13 @@
     pointer-events: none;
   }
 
-  &[disabled='false'] {
+  &[disabled="false"] {
     opacity: 1;
     cursor: pointer;
     pointer-events: auto;
   }
 
-  &[loading='true'] {
+  &[loading="true"] {
     opacity: 0.5;
     cursor: not-allowed;
     pointer-events: none;
@@ -84,12 +84,12 @@
         }
       }
     }
-    &[side='left']:not([theme='fab']) {
+    &[side="left"]:not([theme="fab"]) {
       i {
         margin-right: 0.8rem;
       }
     }
-    &[side='right']:not([theme='fab']) {
+    &[side="right"]:not([theme="fab"]) {
       i {
         margin-left: 0.8rem;
       }
@@ -97,7 +97,7 @@
   }
 
   // Primary theme
-  &[theme='primary'] {
+  &[theme="primary"] {
     background: $positive;
     color: #fff;
     min-width: 10rem;
@@ -121,7 +121,7 @@
       background: darken($positive, 5%);
     }
     @each $button, $color in $app-colors {
-      &[color='#{$button}'] {
+      &[color="#{$button}"] {
         background: $color;
         &:hover,
         &:focus {
@@ -132,7 +132,7 @@
         }
       }
     }
-    &[color='white'] {
+    &[color="white"] {
       background: $white;
       color: $ocean;
       &:hover,
@@ -147,7 +147,7 @@
       }
     }
     @each $analytics, $color in $analytics-colors {
-      &[color='#{$analytics}'] {
+      &[color="#{$analytics}"] {
         background: $color;
         &:hover,
         &:focus {
@@ -161,7 +161,7 @@
   }
 
   // Secondary Themed Button
-  &[theme='secondary'] {
+  &[theme="secondary"] {
     text-align: left;
     align-items: center;
     background: #fff;
@@ -217,7 +217,7 @@
   }
 
   // Dialoge Themed Button
-  &[theme='dialogue'] {
+  &[theme="dialogue"] {
     background: transparent;
     color: $positive;
     &[icon] {
@@ -251,7 +251,7 @@
     }
     // Loop Generic Colors (Primary, Success, Negative, Etc.)
     @each $button, $color in $app-colors {
-      &[color='#{$button}'] {
+      &[color="#{$button}"] {
         color: $color;
         i {
           color: $color;
@@ -267,7 +267,7 @@
       }
     } // Loop Analytics Colors
     @each $analytics, $color in $analytics-colors {
-      &[color='#{$analytics}'] {
+      &[color="#{$analytics}"] {
         color: $color;
         i {
           color: $color;
@@ -284,7 +284,7 @@
     }
   }
   // Standard Themed Icon
-  &[theme='standard'] {
+  &[theme="standard"] {
     color: $dark;
     background: $light;
     &:hover,
@@ -295,27 +295,27 @@
       box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
     } // Loop Generic Colors (Primary, Success, Negative, Etc.)
     @each $button, $color in $app-colors {
-      &[color='#{$button}'] {
+      &[color="#{$button}"] {
         color: $white;
         background: $color;
       }
     } // Loop Analytics Colors
     @each $analytics, $color in $analytics-colors {
-      &[color='#{$analytics}'] {
+      &[color="#{$analytics}"] {
         color: $white;
         background: $color;
       }
     }
-    &[color='background'],
-    &[color='gray'],
-    &[color='light'],
-    &[color='off-white'],
-    &[color='white'] {
+    &[color="background"],
+    &[color="gray"],
+    &[color="light"],
+    &[color="off-white"],
+    &[color="white"] {
       color: $dark;
     }
   }
   // Icon Themed Button
-  &[theme='icon'] {
+  &[theme="icon"] {
     padding: 0.6rem;
     font-size: 1.2rem;
     &[inverse] {
@@ -332,7 +332,7 @@
     }
   }
   // Fab Themed Button
-  &[theme='fab'] {
+  &[theme="fab"] {
     &[inverse] {
       color: #fff;
     }
@@ -340,7 +340,7 @@
     font-size: 1.2rem;
     border-radius: 50% !important;
     @each $button, $color in $all-colors {
-      &[color='#{$button}'] {
+      &[color="#{$button}"] {
         color: $white;
         background: $color;
       }
@@ -360,7 +360,7 @@
     }
   }
   // Field Themed Button
-  &[theme='field'] {
+  &[theme="field"] {
     background: transparent;
     color: $dark;
     border: none;
@@ -377,7 +377,7 @@
     }
   }
   // Select Themed Button
-  &[theme='select'] {
+  &[theme="select"] {
     display: flex;
     justify-content: space-between;
     align-items: center;

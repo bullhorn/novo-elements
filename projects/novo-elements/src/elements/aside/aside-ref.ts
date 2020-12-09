@@ -1,7 +1,7 @@
 import { OverlayRef } from '@angular/cdk/overlay';
+import { Observable, Subject } from 'rxjs';
+import { filter, take } from 'rxjs/operators';
 import { AsideComponent } from './aside.component';
-import { Subject, Observable } from 'rxjs';
-import { take, filter } from 'rxjs/operators';
 
 export class NovoAsideRef {
   constructor(public component: any, public params: any, private overlayRef: OverlayRef) {}

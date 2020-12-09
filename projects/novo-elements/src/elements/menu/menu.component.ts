@@ -4,7 +4,6 @@ import {
   ContentChildren,
   ElementRef,
   EventEmitter,
-  HostListener,
   Inject,
   Input,
   OnDestroy,
@@ -16,11 +15,10 @@ import {
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { first } from 'rxjs/operators';
-
 import { MenuItemDirective } from './menu-item.directive';
-import { IMenuOptions, ILinkConfig } from './menu.types';
-import { NovoMenuService, IMenuClickEvent, CloseMenuEvent } from './menu.service';
+import { CloseMenuEvent, IMenuClickEvent, NovoMenuService } from './menu.service';
 import { MENU_OPTIONS } from './menu.tokens';
+import { ILinkConfig, IMenuOptions } from './menu.types';
 
 export interface MouseLocation {
   left?: string;

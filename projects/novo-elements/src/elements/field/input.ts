@@ -10,23 +10,24 @@ import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { getSupportedInputTypes, Platform } from '@angular/cdk/platform';
 import { AutofillMonitor } from '@angular/cdk/text-field';
 import {
+  AfterViewInit,
   Directive,
   DoCheck,
   ElementRef,
+  HostBinding,
+  HostListener,
   Inject,
+  InjectionToken,
   Input,
   NgZone,
   OnChanges,
   OnDestroy,
   Optional,
   Self,
-  HostListener,
-  AfterViewInit,
 } from '@angular/core';
 import { FormGroupDirective, NgControl, NgForm } from '@angular/forms';
-import { NovoFieldControl } from './field-control';
 import { Subject } from 'rxjs';
-import { InjectionToken } from '@angular/core';
+import { NovoFieldControl } from './field-control';
 
 /**
  * This token is used to inject the object whose value should be set into `NovoInput`. If none is
@@ -52,6 +53,7 @@ class NovoInputBase {
 }
 
 /** Directive that allows a native input to work inside a `NovoField`. */
+// tslint:disable: no-conflicting-lifecycle member-ordering
 @Directive({
   selector: `input[novoInput], textarea[novoInput], select[novoInput]`,
   host: {
@@ -61,7 +63,6 @@ class NovoInputBase {
     '[disabled]': 'disabled',
     '[required]': 'required',
     '[attr.readonly]': 'readonly && !_isNativeSelect || null',
-    '[attr.aria-describedby]': '_ariaDescribedby || null',
     '[attr.aria-invalid]': 'errorState',
     '[attr.aria-required]': 'required.toString()',
   },
@@ -72,7 +73,7 @@ export class NovoInput extends NovoInputBase implements NovoFieldControl<any>, O
   protected _previousNativeValue: any;
   private _inputValueAccessor: { value: any };
   /** The aria-describedby attribute on the input for improved a11y. */
-  _ariaDescribedby: string;
+  @HostBinding('attr.aria-describedby') _ariaDescribedby: string;
 
   /** Whether the component is being rendered on the server. */
   readonly _isServer: boolean;
@@ -242,7 +243,7 @@ export class NovoInput extends NovoInputBase implements NovoFieldControl<any>, O
     if (_platform.IOS) {
       ngZone.runOutsideAngular(() => {
         _elementRef.nativeElement.addEventListener('keyup', (event: Event) => {
-          let el = event.target as HTMLInputElement;
+          const el = event.target as HTMLInputElement;
           if (!el.value && !el.selectionStart && !el.selectionEnd) {
             // Note: Just setting `0, 0` doesn't fix the issue. Setting
             // `1, 1` fixes it for the first time that you type text and
@@ -364,7 +365,7 @@ export class NovoInput extends NovoInputBase implements NovoFieldControl<any>, O
   /** Checks whether the input is invalid based on the native validation. */
   protected _isBadInput() {
     // The `validity` property won't be present on platform-server.
-    let validity = (this._elementRef.nativeElement as HTMLInputElement).validity;
+    const validity = (this._elementRef.nativeElement as HTMLInputElement).validity;
     return validity && validity.badInput;
   }
 

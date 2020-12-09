@@ -22,12 +22,12 @@ import {
   TimeControl,
   TimezoneControl,
 } from '../../elements/form/FormControls';
-import { EntityPickerResult, EntityPickerResults } from '../../elements/picker/extras/entity-picker-results/EntityPickerResults';
-import { Helpers } from '../Helpers';
-import { NovoFieldset, FormField } from '../../elements/form/FormInterfaces';
+import { FormField, NovoFieldset } from '../../elements/form/FormInterfaces';
 import { NovoFormControl } from '../../elements/form/NovoFormControl';
 import { NovoFormGroup } from '../../elements/form/NovoFormGroup';
+import { EntityPickerResult, EntityPickerResults } from '../../elements/picker/extras/entity-picker-results/EntityPickerResults';
 import { NovoLabelService } from '../../services/novo-label-service';
+import { Helpers } from '../Helpers';
 import { OptionsService } from './../../services/options/OptionsService';
 
 @Injectable()

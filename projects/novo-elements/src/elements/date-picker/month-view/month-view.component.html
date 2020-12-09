@@ -1,0 +1,38 @@
+<table class="calendar-table" cellspacing="0" cellpadding="0">
+  <thead>
+    <tr>
+      <th *ngFor="let day of weekdays" title="{{ day }}" class="weekday" [attr.data-automation-id]="day.substr(0, 2)">
+        {{ day.substr(0, 2) }}
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let week of weeks">
+      <td
+        *ngFor="let day of week.days"
+        [class.today]="day.isToday"
+        [class.notinmonth]="day.date.getMonth() !== activeDate.getMonth()"
+        [class.selected]="_isSelected(day.date)"
+        [class.preview]="_isPreview(day.date)"
+        [class.inRange]="_isInRange(day.date)"
+        [class.rangeStart]="_isRangeStart(day.date)"
+        [class.rangeEnd]="_isRangeEnd(day.date)"
+        [class.inPreview]="_isInPreview(day.date)"
+        [class.previewStart]="_isPreviewStart(day.date)"
+        [class.previewEnd]="_isPreviewEnd(day.date)"
+        [attr.aria-label]="day.name"
+        [attr.aria-disabled]="isDisabled(day.date)"
+        [attr.aria-selected]="_isSelected(day.date)"
+        [attr.data-automation-id]="day.number"
+        (mouseover)="onHover($event, day)">
+        <button
+          class="day"
+          [attr.data-automation-id]="day.number"
+          [disabled]="isDisabled(day.date)"
+          (click)="onSelect($event, day)">
+          {{ day.number }}
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

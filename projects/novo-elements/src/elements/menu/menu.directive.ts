@@ -1,8 +1,8 @@
-import { MenuComponent } from './menu.component';
-import { NovoMenuService } from './menu.service';
 import { ChangeDetectorRef, Directive, HostBinding, HostListener, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { BooleanInput } from '../../utils';
+import { MenuComponent } from './menu.component';
+import { NovoMenuService } from './menu.service';
 
 @Directive({
   selector: '[menu]',

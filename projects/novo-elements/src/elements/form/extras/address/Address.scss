@@ -11,7 +11,7 @@ novo-address {
     .country-name {
       &.invalid {
         input,
-        novo-select div[type='button'] {
+        novo-select div[type="button"] {
           border-bottom: 1px solid $negative !important;
         }
       }
@@ -87,7 +87,7 @@ novo-address {
 }
 
 novo-form .novo-form-container form,
-novo-dynamic-form[layout='vertical'] .novo-form-container form,
+novo-dynamic-form[layout="vertical"] .novo-form-container form,
 novo-dynamic-form .novo-form-container form {
   div.novo-form-row
     novo-control

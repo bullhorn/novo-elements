@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
-
-import { TranslatePipe } from './translate/translate.pipe';
 import { TranslateDirective } from './translate/translate.directive';
+import { TranslatePipe } from './translate/translate.pipe';
 
 @NgModule({
   declarations: [TranslatePipe, TranslateDirective],

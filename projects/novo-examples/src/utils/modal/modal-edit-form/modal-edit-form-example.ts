@@ -1,35 +1,35 @@
 import { Component, OnInit } from '@angular/core';
-import { NovoModalService, NovoModalRef, FormUtils, TextBoxControl, PickerControl, PickerResults } from 'novo-elements';
+import { FormUtils, NovoModalRef, NovoModalService, PickerControl, PickerResults, TextBoxControl } from 'novo-elements';
 
 @Component({
   selector: 'modal-edit-form-demo',
   template: `
-  <novo-modal>
-    <header title="John Deere" icon="candidate" theme="candidate">
+    <novo-modal>
+      <header title="John Deere" icon="candidate" theme="candidate">
         <utils>
-            <util-action icon="times" (click)="close()"></util-action>
+          <util-action icon="times" (click)="close()"></util-action>
         </utils>
-    </header>
-    <section>
+      </header>
+      <section>
         <novo-form [form]="textForm">
-            <div class="novo-form-row">
-                <novo-control [form]="textForm" [control]="textControl"></novo-control>
-            </div>
-            <div class="novo-form-row">
-                <novo-control [form]="textForm" [control]="emailControl"></novo-control>
-            </div>
-            <div class="novo-form-row">
-                <novo-control [form]="textForm" [control]="numberControl"></novo-control>
-            </div>
-            <div class="novo-form-row">
-                <novo-control [form]="textForm" [control]="pickerControl"></novo-control>
-            </div>
+          <div class="novo-form-row">
+            <novo-control [form]="textForm" [control]="textControl"></novo-control>
+          </div>
+          <div class="novo-form-row">
+            <novo-control [form]="textForm" [control]="emailControl"></novo-control>
+          </div>
+          <div class="novo-form-row">
+            <novo-control [form]="textForm" [control]="numberControl"></novo-control>
+          </div>
+          <div class="novo-form-row">
+            <novo-control [form]="textForm" [control]="pickerControl"></novo-control>
+          </div>
         </novo-form>
-    </section>
-    <button theme="standard" (click)="close()">Cancel</button>
-    <button theme="primary" color="success" icon="check" (click)="close()">Save</button>
-  </novo-modal>
-`,
+      </section>
+      <button theme="standard" (click)="close()">Cancel</button>
+      <button theme="primary" color="success" icon="check" (click)="close()">Save</button>
+    </novo-modal>
+  `,
 })
 export class ModalEditFormDemo implements OnInit {
   public textControl: any;

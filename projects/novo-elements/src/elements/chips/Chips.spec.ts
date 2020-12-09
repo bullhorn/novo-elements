@@ -1,12 +1,12 @@
 // NG2
+import { async, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
-import { TestBed, async } from '@angular/core/testing';
+import { NovoLabelService } from '../../services/novo-label-service';
+import { ComponentUtils } from '../../utils/component-utils/ComponentUtils';
 // App
 import { NovoChipElement } from './Chip';
 import { NovoChipsElement } from './Chips';
 import { NovoChipsModule } from './Chips.module';
-import { ComponentUtils } from '../../utils/component-utils/ComponentUtils';
-import { NovoLabelService } from '../../services/novo-label-service';
 
 describe('Elements: NovoChipElement', () => {
   let fixture;

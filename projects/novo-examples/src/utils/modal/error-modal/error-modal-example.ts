@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
-import { NovoModalService, NovoModalRef } from 'novo-elements';
+import { NovoModalRef, NovoModalService } from 'novo-elements';
 
 @Component({
   selector: 'modal-error-demo',
   template: `
-  <novo-notification type="error">
-    <h1>Sorry, something went wrong.</h1>
-    <h2>You did not have 1.21 gigawatts of power.</h2>
-    <button theme="primary" icon="refresh-o" (click)="close()">Refresh this page</button>
-  </novo-notification>
-`,
+    <novo-notification type="error">
+      <h1>Sorry, something went wrong.</h1>
+      <h2>You did not have 1.21 gigawatts of power.</h2>
+      <button theme="primary" icon="refresh-o" (click)="close()">Refresh this page</button>
+    </novo-notification>
+  `,
 })
 export class ModalErrorDemo {
   constructor(private modalRef: NovoModalRef) {}

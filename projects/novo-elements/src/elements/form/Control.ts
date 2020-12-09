@@ -1,31 +1,31 @@
 // NG2
 import {
-  ChangeDetectorRef,
-  Component,
-  Input,
-  Output,
-  ElementRef,
-  EventEmitter,
-  OnInit,
-  OnDestroy,
-  Directive,
-  HostListener,
   AfterContentInit,
   AfterViewInit,
-  LOCALE_ID,
+  ChangeDetectorRef,
+  Component,
+  Directive,
+  ElementRef,
+  EventEmitter,
+  HostListener,
   Inject,
+  Input,
+  LOCALE_ID,
+  OnDestroy,
+  OnInit,
+  Output,
 } from '@angular/core';
 // Vendor
 import { Observable } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
-// APP
-import { OutsideClick } from '../../utils/outside-click/OutsideClick';
+import { DateFormatService } from '../../services/date-format/DateFormat';
 import { NovoLabelService } from '../../services/novo-label-service';
+import { NovoTemplateService } from '../../services/template/NovoTemplateService';
 import { Helpers } from '../../utils/Helpers';
 import { KeyCodes } from '../../utils/key-codes/KeyCodes';
-import { DateFormatService } from '../../services/date-format/DateFormat';
+// APP
+import { OutsideClick } from '../../utils/outside-click/OutsideClick';
 import { FieldInteractionApi } from './FieldInteractionApi';
-import { NovoTemplateService } from '../../services/template/NovoTemplateService';
 
 export interface IMaskOptions {
   mask: any;

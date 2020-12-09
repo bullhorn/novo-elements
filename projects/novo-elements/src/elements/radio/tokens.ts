@@ -1,6 +1,7 @@
 import { InjectionToken } from '@angular/core';
 
 export interface RadioGroup<T = any> {
+  name: string;
   value: T;
   disabled: boolean;
 }

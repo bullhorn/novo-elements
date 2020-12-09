@@ -1,6 +1,6 @@
 // App
-import { NovoFormGroup } from './NovoFormGroup';
 import { NovoFormControl } from './NovoFormControl';
+import { NovoFormGroup } from './NovoFormGroup';
 
 describe('Elements: NovoFormGroup', () => {
   const component = new NovoFormGroup({});
