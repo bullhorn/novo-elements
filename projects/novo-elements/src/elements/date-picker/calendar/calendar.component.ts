@@ -146,7 +146,7 @@ export class NovoCalendarElement implements OnInit {
     this.activeDate = new Date(activeDate ? new Date(activeDate) : new Date());
     this.months = [];
     const month = startOfMonth(this.activeDate);
-    for (let i of this._numberOfMonths) {
+    for (const i of this._numberOfMonths) {
       const date = addMonths(month, i);
       const label = this.labels.formatDateWithFormat(date, { month: 'short' });
       this.months.push({ date, label });

@@ -91,9 +91,9 @@ export class NovoTimePickerInputElement implements OnInit, ControlValueAccessor 
 
   ngOnInit(): void {
     this.placeholder = this.military ? this.labels.timeFormatPlaceholder24Hour : this.labels.timeFormatPlaceholderAM;
-    let timeFormat = this.military ? 'HH:mm' : 'hh:mm A';
-    let amFormat = this.labels.timeFormatAM.toUpperCase();
-    let pmFormat = this.labels.timeFormatPM.toUpperCase();
+    const timeFormat = this.military ? 'HH:mm' : 'hh:mm A';
+    const amFormat = this.labels.timeFormatAM.toUpperCase();
+    const pmFormat = this.labels.timeFormatPM.toUpperCase();
     this.maskOptions = {
       mask: Date,
       pattern: this.military ? 'HH:mm' : 'hh:mm aa',
@@ -102,14 +102,14 @@ export class NovoTimePickerInputElement implements OnInit, ControlValueAccessor 
       lazy: false,
       min: new Date(1970, 0, 1),
       max: new Date(2030, 0, 1),
-      prepare: function (str) {
+      prepare(str) {
         return str.toUpperCase();
       },
-      format: function (date) {
+      format(date) {
         return format(date, timeFormat);
       },
       parse: (str) => {
-        let time = this.military ? str : this.convertTime12to24(str);
+        const time = this.military ? str : this.convertTime12to24(str);
         return parse(`${format(Date.now(), 'YYYY-MM-DD')}T${time}`);
       },
       blocks: {
@@ -260,7 +260,7 @@ export class NovoTimePickerInputElement implements OnInit, ControlValueAccessor 
   }
 
   convertTime12to24(time12h: string) {
-    let pmFormat = this.labels.timeFormatPM.toUpperCase();
+    const pmFormat = this.labels.timeFormatPM.toUpperCase();
 
     const [time, modifier] = time12h.split(' ');
     let [hours, minutes] = time.split(':');

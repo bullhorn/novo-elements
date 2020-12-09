@@ -277,8 +277,8 @@ export class NovoDateRangeInputElement implements OnInit, ControlValueAccessor {
    */
   public setValueAndClose(event: any | null): void {
     if (event && event.startDate && event.endDate) {
-      let startDate = event.startDate.date;
-      let endDate = event.endDate.date;
+      const startDate = event.startDate.date;
+      const endDate = event.endDate.date;
       this.value = { startDate, endDate };
       this.change.emit(this.value);
     }

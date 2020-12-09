@@ -238,14 +238,14 @@ export class NovoActivityTable<T> implements AfterContentInit, OnChanges, OnDest
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
-    this.loading = changes['activityService'] && !changes['activityService'].currentValue;
+    this.loading = changes.activityService && !changes.activityService.currentValue;
     this.ref.detectChanges();
-    if (changes['activityService'] && changes['activityService'].currentValue) {
+    if (changes.activityService && changes.activityService.currentValue) {
       this.loading = false;
       this.dataSource = new ActivityTableDataSource<T>(this.activityService, this.state, this.ref);
       this.ref.detectChanges();
     }
-    if (changes['outsideFilter'] && changes['outsideFilter'].currentValue) {
+    if (changes.outsideFilter && changes.outsideFilter.currentValue) {
       if (!this.outsideFilterSubscription) {
         this.outsideFilterSubscription = this.outsideFilter.subscribe((filter: any) => {
           this.state.outsideFilter = filter;

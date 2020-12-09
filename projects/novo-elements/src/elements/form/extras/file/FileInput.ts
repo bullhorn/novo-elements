@@ -234,7 +234,7 @@ export class NovoFileInputElement implements ControlValueAccessor, OnInit, OnDes
 
   insertTemplatesBasedOnLayout() {
     let order;
-    switch (this.layoutOptions['order']) {
+    switch (this.layoutOptions.order) {
       case 'displayFilesBelow':
         order = ['fileInput', 'fileOutput'];
         break;

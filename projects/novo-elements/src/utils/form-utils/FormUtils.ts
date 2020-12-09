@@ -687,10 +687,10 @@ export class FormUtils {
   }
 
   private markControlAsEmbedded(control, dataSpecialization?: 'embedded' | 'inline_embedded') {
-    if (Helpers.isBlank(control['config'])) {
-      control['config'] = {};
+    if (Helpers.isBlank(control.config)) {
+      control.config = {};
     }
-    control['config']['embedded'] = true;
+    control.config.embedded = true;
     control.isEmbedded = dataSpecialization === 'embedded';
     control.isInlineEmbedded = dataSpecialization === 'inline_embedded';
     return control;

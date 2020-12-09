@@ -127,7 +127,7 @@ export class NovoMenuService {
     menuContent.instance.overlay = overlay;
     menuContent.instance.isLeaf = true;
     menuContent.instance.menuClass = menuClass;
-    (<OverlayRefWithMenu>overlay).menu = menuContent.instance;
+    (overlay as OverlayRefWithMenu).menu = menuContent.instance;
 
     const subscriptions: Subscription = new Subscription();
     subscriptions.add(

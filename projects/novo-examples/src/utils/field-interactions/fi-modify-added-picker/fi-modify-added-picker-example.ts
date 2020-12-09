@@ -16,7 +16,7 @@ export class FiModifyAddedPickerExample {
 
   constructor(private formUtils: FormUtils) {
     // Adding / Removing Interactions
-    let entityPickerFunction = (API: FieldInteractionApi) => {
+    const entityPickerFunction = (API: FieldInteractionApi) => {
       console.log('[FieldInteractionDemo] - entityPickerFunction'); // tslint:disable-line
       API.modifyPickerConfig('custom-entity-picker', {
         optionsPromise: (query, http) => {

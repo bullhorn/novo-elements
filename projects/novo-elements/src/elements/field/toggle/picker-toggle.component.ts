@@ -90,7 +90,7 @@ export class NovoPickerToggleElement<T = any> implements AfterContentInit, After
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['picker']) {
+    if (changes.picker) {
       this._watchStateChanges();
     }
   }

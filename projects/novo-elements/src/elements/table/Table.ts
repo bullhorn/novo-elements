@@ -476,7 +476,7 @@ export class NovoTableElement implements DoCheck {
             columnsToSum = columnsToSum.filter((item, index, array) => array.indexOf(item) === index);
           }
           // Make a form for each row
-          const tableFormRows = <FormArray>this.tableForm.controls['rows'];
+          const tableFormRows = this.tableForm.controls.rows as FormArray;
           this._rows.forEach((row, index) => {
             const rowControls = [];
             row.controls = {};
@@ -616,7 +616,7 @@ export class NovoTableElement implements DoCheck {
   }
 
   getRowControlForm(i): AbstractControl {
-    const tableFormRows = <FormArray>this.tableForm.controls['rows'];
+    const tableFormRows = this.tableForm.controls.rows as FormArray;
     return tableFormRows.controls[i];
   }
 
@@ -1010,7 +1010,7 @@ export class NovoTableElement implements DoCheck {
    * @memberOf NovoTableElement
    */
   addEditableRow(defaultValue: any = {}): void {
-    const tableFormRows = <FormArray>this.tableForm.controls['rows'];
+    const tableFormRows = this.tableForm.controls.rows as FormArray;
     const row: any = {};
     const rowControls = [];
     row.controls = {};
@@ -1039,11 +1039,11 @@ export class NovoTableElement implements DoCheck {
    * @memberOf NovoTableElement
    */
   validateAndGetUpdatedData(): { changed?: any[]; errors?: { errors: any; row: any; index: number }[] } {
-    if (this.tableForm && this.tableForm.controls && this.tableForm.controls['rows']) {
+    if (this.tableForm && this.tableForm.controls && this.tableForm.controls.rows) {
       const changedRows = [];
       const errors = [];
       // Go over the FormArray's controls
-      (this.tableForm.controls['rows'] as FormArray).controls.forEach((formGroup: FormGroup, index: number) => {
+      (this.tableForm.controls.rows as FormArray).controls.forEach((formGroup: FormGroup, index: number) => {
         let changedRow = null;
         let error = null;
         // Go over the form group controls
@@ -1059,7 +1059,7 @@ export class NovoTableElement implements DoCheck {
               }
             }
             // If dirty, grab value off the form
-            changedRow[key] = this.tableForm.value['rows'][index][key];
+            changedRow[key] = this.tableForm.value.rows[index][key];
             // Set value back to row (should be already done via the server call, but do it anyway)
             this._rows[index][key] = changedRow[key];
           } else if (control && control.errors) {

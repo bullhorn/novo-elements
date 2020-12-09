@@ -32,7 +32,7 @@ export class Formats {
   public override(overrides: any): void {
     if (overrides.locale) {
       this.setLocale(overrides.locale);
-      delete overrides['locale'];
+      delete overrides.locale;
     }
     this.defaults = overrides;
   }
@@ -88,7 +88,7 @@ export class Formats {
     const _value = value === null || value === undefined || value === '' ? new Date() : new Date(value);
     const options: Intl.DateTimeFormatOptions = this.getDateOptions(format);
     const locales = [...(this.overrideDateFormat ? [this.overrideDateFormat] : []), this.locale, 'en-US'];
-    let timeParts: { [p: string]: string } = Intl.DateTimeFormat(locales, options)
+    const timeParts: { [p: string]: string } = Intl.DateTimeFormat(locales, options)
       .formatToParts(_value)
       .reduce((obj, part) => {
         obj[part.type] = part.value;

@@ -87,7 +87,7 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
       }));
       tabs.forEach((tab) => {
         const { labelField } = tab;
-        tab['data'] = Array(1000)
+        tab.data = Array(1000)
           .fill(0)
           .map((n, i) => ({
             [labelField]: turnNumbersIntoLetters(`${labelField}${i}`),
@@ -132,12 +132,12 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
         },
       ];
       const chicken = component.tabs[0].data[0];
-      let childOfAllosaurus = component.tabs[1].data[0]['children'][0];
+      let childOfAllosaurus = component.tabs[1].data[0].children[0];
       expect(childOfAllosaurus).not.toBe(chicken);
 
       component.createChildrenReferences();
 
-      childOfAllosaurus = component.tabs[1].data[0]['children'][0];
+      childOfAllosaurus = component.tabs[1].data[0].children[0];
       expect(childOfAllosaurus).toBe(chicken);
     });
   });
@@ -439,7 +439,7 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
 
       const indeterminateGroup = component.tabs[1].data[0];
       expect(indeterminateGroup.selected).toBeFalsy();
-      expect(indeterminateGroup['indeterminate']).toEqual(true);
+      expect(indeterminateGroup.indeterminate).toEqual(true);
     });
     it('should update the selected status of a group if the only item in the group is selected', () => {
       const chickenTab = getChickenTab();

@@ -99,8 +99,8 @@ describe('Utils: FormUtils', () => {
       const formGroup: FormGroup = formUtils.toFormGroup([{ key: 'Test' }]);
       formUtils.addControls(formGroup, [{ key: 'Test2' }]);
       // Can't use `.Test2` because the formGroup isn't returned
-      expect(formGroup.controls['Test2']).toBeDefined();
-      expect(formGroup.controls['Test2'] instanceof NovoFormControl).toBe(true);
+      expect(formGroup.controls.Test2).toBeDefined();
+      expect(formGroup.controls.Test2 instanceof NovoFormControl).toBe(true);
     });
   });
 
@@ -110,7 +110,7 @@ describe('Utils: FormUtils', () => {
       const formGroup: FormGroup = formUtils.toFormGroup([{ key: 'Test' }, { key: 'Test2' }]);
       formUtils.removeControls(formGroup, [{ key: 'Test2' }]);
       // Can't use `.Test2` because the formGroup isn't returned
-      expect(formGroup.controls['Test2']).not.toBeDefined();
+      expect(formGroup.controls.Test2).not.toBeDefined();
     });
   });
 

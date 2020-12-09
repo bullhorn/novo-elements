@@ -115,7 +115,7 @@ export class GooglePlacesService {
         if (params.geoTypes.length) {
           for (let i: number = 0; i < params.geoTypes.length; i++) {
             const _tempQuery: any = queryInput;
-            _tempQuery['types'] = new Array(params.geoTypes[i]);
+            _tempQuery.types = new Array(params.geoTypes[i]);
             promiseArr.push(this.geoPredictionCall(placesService, _tempQuery));
           }
         } else {

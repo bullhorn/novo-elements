@@ -212,13 +212,13 @@ export class PickerControlsExample {
           {
             label: 'Name',
             data: (item: any): string => {
-              return item['label'];
+              return item.label;
             },
           },
           {
             label: 'Id',
             data: (item: any): string => {
-              return item.value['id'];
+              return item.value.id;
             },
           },
         ],
@@ -238,13 +238,13 @@ export class PickerControlsExample {
           {
             label: 'Name',
             data: (item: any): string => {
-              return item['label'];
+              return item.label;
             },
           },
           {
             label: 'Id',
             data: (item: any): string => {
-              return item.value['id'];
+              return item.value.id;
             },
           },
         ],

@@ -5,7 +5,7 @@ import { DateLike, NovoDateSelectionStrategy } from '../date-picker.types';
 export class MultiDateSelectionStrategy implements NovoDateSelectionStrategy<DateLike[]> {
   selectionFinished(dateLike: DateLike | null, currentValue: DateLike[], event: Event): DateLike[] {
     const date = dateLike as Date;
-    let current = new Set(currentValue.map((c: Date) => c.getTime()));
+    const current = new Set(currentValue.map((c: Date) => c.getTime()));
     if (current.has(date.getTime())) {
       current.delete(date.getTime());
     } else {

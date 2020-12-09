@@ -283,11 +283,11 @@ export class Chomsky {
     const overrides = {};
     if (translations && translations.hasOwnProperty('_defaults_')) {
       mergeDeep(overrides, translations._defaults_);
-      delete translations['_defaults_'];
+      delete translations._defaults_;
     }
     if (fallbackTranslations && fallbackTranslations.hasOwnProperty('_defaults_')) {
       mergeDeep(overrides, fallbackTranslations._defaults_);
-      delete translations['_defaults_'];
+      delete translations._defaults_;
     }
     this.formats.override(mergeDeep({}, FORMAT_DEFAULTS, overrides));
     // Add the translations to the DictionaryManager

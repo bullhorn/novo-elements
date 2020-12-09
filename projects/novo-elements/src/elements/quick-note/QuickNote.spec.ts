@@ -258,7 +258,7 @@ describe('Elements: QuickNoteElement', () => {
     };
 
     // Create a fake CKEDITOR global object that returns the fake CKEditor instance.
-    window['CKEDITOR'] = {
+    window.CKEDITOR = {
       NODE_TEXT: 3,
       replace: () => {
         return fakeCkEditorInstance;

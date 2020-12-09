@@ -174,7 +174,7 @@ export class NovoMultiDateInputElement implements OnInit, ControlValueAccessor {
   }
 
   remove(event: any, date: Date) {
-    let current = new Set(this.value);
+    const current = new Set(this.value);
     if (current.has(date)) {
       current.delete(date);
     }

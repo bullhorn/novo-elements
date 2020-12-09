@@ -63,8 +63,8 @@ export class Color {
   }
 
   static isValidHex(h: string) {
-    let clean = h.replace('#', '').toLowerCase();
-    let a = parseInt(clean, 16);
+    const clean = h.replace('#', '').toLowerCase();
+    const a = parseInt(clean, 16);
     return a.toString(16).padStart(6, '0') === clean;
   }
 
@@ -95,7 +95,7 @@ export class Color {
 }
 
 function componentToHex(c: number) {
-  let hex = c.toString(16);
+  const hex = c.toString(16);
   return hex.length === 1 ? '0' + hex : hex;
 }
 
@@ -104,7 +104,7 @@ function rgbToHex({ r, g, b }: RGB) {
 }
 
 function hexToRgb(hex: string): RGB | null {
-  let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
   return result
     ? {
         r: parseInt(result[1], 16),
@@ -126,16 +126,16 @@ function hexToRgb(hex: string): RGB | null {
  */
 function rgbToHsl({ r, g, b }: RGB): HSL {
   (r /= 255), (g /= 255), (b /= 255);
-  let max = Math.max(r, g, b);
-  let min = Math.min(r, g, b);
+  const max = Math.max(r, g, b);
+  const min = Math.min(r, g, b);
   let h;
   let s;
-  let l = (max + min) / 2;
+  const l = (max + min) / 2;
 
   if (max === min) {
     h = s = 0; // achromatic
   } else {
-    let d = max - min;
+    const d = max - min;
     s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
     switch (max) {
       case r:
@@ -190,8 +190,8 @@ function hslToRgb({ h, s, l }: HSL): RGB {
       return p1;
     }
 
-    let q = l < 0.5 ? l * (1 + s) : l + s - l * s;
-    let p = 2 * l - q;
+    const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+    const p = 2 * l - q;
     r = hue2rgb(p, q, h + 1 / 3);
     g = hue2rgb(p, q, h);
     b = hue2rgb(p, q, h - 1 / 3);
@@ -217,13 +217,13 @@ function hslToRgb({ h, s, l }: HSL): RGB {
  */
 function rgbToHsv({ r, g, b }: RGB): HSV {
   (r = r / 255), (g = g / 255), (b = b / 255);
-  let max = Math.max(r, g, b);
-  let min = Math.min(r, g, b);
+  const max = Math.max(r, g, b);
+  const min = Math.min(r, g, b);
   let h;
   let s;
-  let v = max;
+  const v = max;
 
-  let d = max - min;
+  const d = max - min;
   s = max === 0 ? 0 : d / max;
 
   if (max === min) {
@@ -260,11 +260,11 @@ function rgbToHsv({ r, g, b }: RGB): HSV {
 function hsvToRgb({ h, s, v }: HSV): RGB {
   let r, g, b;
 
-  let i = Math.floor(h * 6);
-  let f = h * 6 - i;
-  let p = v * (1 - s);
-  let q = v * (1 - f * s);
-  let t = v * (1 - (1 - f) * s);
+  const i = Math.floor(h * 6);
+  const f = h * 6 - i;
+  const p = v * (1 - s);
+  const q = v * (1 - f * s);
+  const t = v * (1 - (1 - f) * s);
 
   switch (i % 6) {
     case 0:

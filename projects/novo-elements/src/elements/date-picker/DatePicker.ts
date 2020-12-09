@@ -255,7 +255,7 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
           if (this.selection.filter(Boolean).length === 2) {
             this.fireRangeSelect();
             // Also, update the ngModel
-            let model = {
+            const model = {
               startDate: this.selection[0],
               endDate: this.selection[1],
             };
@@ -327,7 +327,7 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
         break;
       case 'range':
       case 'week':
-        let range = this.model as RangeModel;
+        const range = this.model as RangeModel;
         this.selection = [range.startDate, range.endDate].filter(Boolean);
         break;
       case 'single':

@@ -75,13 +75,13 @@ export class PopOverDirective implements OnChanges {
   }
 
   ngOnChanges(changes: { [propertyName: string]: SimpleChange }) {
-    if (changes['popoverDisabled']) {
-      if (changes['popoverDisabled'].currentValue) {
+    if (changes.popoverDisabled) {
+      if (changes.popoverDisabled.currentValue) {
         this.hide();
       }
     }
-    if (changes['popoverAlways']) {
-      if (changes['popoverAlways'].currentValue) {
+    if (changes.popoverAlways) {
+      if (changes.popoverAlways.currentValue) {
         this.show();
       }
     }

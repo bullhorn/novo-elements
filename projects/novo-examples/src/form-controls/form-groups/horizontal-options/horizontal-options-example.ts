@@ -71,7 +71,7 @@ export class HorizontalOptionsExample {
 
   public customDelete(form: NovoFormGroup, key: string, index: number) {
     console.log('DELETE', form, key, index); // tslint:disable-line
-    const control: FormArray = <FormArray>form.controls[key];
+    const control: FormArray = form.controls[key] as FormArray;
     control.removeAt(index);
   }
 

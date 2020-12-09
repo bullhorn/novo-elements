@@ -303,7 +303,7 @@ export class NovoTimePickerElement implements ControlValueAccessor, OnInit, OnCh
   }
 
   convertTime12to24(time12h: string) {
-    let pmFormat = this.labels.timeFormatPM.toUpperCase();
+    const pmFormat = this.labels.timeFormatPM.toUpperCase();
 
     const [time, modifier] = time12h.split(' ');
     let [hours, minutes] = time.split(':');

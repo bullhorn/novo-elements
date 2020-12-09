@@ -172,7 +172,7 @@ export class NovoPickerElement implements OnInit {
   }
 
   private onDebouncedKeyup(event: Event) {
-    if ([KeyCodes.ESC, KeyCodes.UP, KeyCodes.DOWN, KeyCodes.ENTER, KeyCodes.TAB].includes(event['keyCode'])) {
+    if ([KeyCodes.ESC, KeyCodes.UP, KeyCodes.DOWN, KeyCodes.ENTER, KeyCodes.TAB].includes(event.keyCode)) {
       return;
     }
     this.show((event.target as any).value);

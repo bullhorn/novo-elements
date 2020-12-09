@@ -17,12 +17,12 @@ export class OptionsService {
             const exp = new RegExp('^(?:[a-z]+:)?//', 'i');
             let endpoint;
             if (exp.test(field.optionsUrl)) {
-              let url = new URL(field.optionsUrl);
+              const url = new URL(field.optionsUrl);
               url.searchParams.set('filter', query || '');
               endpoint = url.toString();
             } else {
               // Construct relative url (host will not be used but is required for construction)
-              let url = new URL(`http://placeholder.com/${field.optionsUrl}`);
+              const url = new URL(`http://placeholder.com/${field.optionsUrl}`);
               url.searchParams.set('filter', query || '');
               endpoint = `${url.pathname}${url.search}`;
             }

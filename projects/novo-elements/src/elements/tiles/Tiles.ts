@@ -90,7 +90,7 @@ export class NovoTilesElement implements ControlValueAccessor, AfterContentInit,
   }
 
   ngOnChanges(change: SimpleChanges) {
-    if (change['options'] && change['options'].currentValue && !change['options'].firstChange) {
+    if (change.options && change.options.currentValue && !change.options.firstChange) {
       this.name = this.name || '';
       this._options = [];
       this.setupOptions();
