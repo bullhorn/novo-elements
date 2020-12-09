@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.4.2](https://github.com/bullhorn/novo-elements/compare/v4.4.0...v4.4.2) (2020-12-09)
+
 ## [4.4.0](https://github.com/bullhorn/novo-elements/compare/v4.3.10...v4.4.0) (2020-12-09)
 
 
