@@ -1,4 +1,4 @@
-import { Component, HostBinding, Input, Output } from '@angular/core';
+import { Component, HostBinding, Input } from '@angular/core';
 
 @Component({
   selector: 'header-spacer',
@@ -99,7 +99,7 @@ export class NovoHeaderComponent {
   private _icon: string;
 
   dragModal() {
-    let elmnt = document.getElementsByTagName('novo-modal')[0];
+    let elmnt: HTMLElement = document.getElementsByTagName('novo-modal')[0] as HTMLElement;
     if (elmnt) {
       let pos1 = 0,
         pos2 = 0,
