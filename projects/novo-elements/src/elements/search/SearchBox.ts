@@ -58,7 +58,6 @@ const SEARCH_VALUE_ACCESSOR = {
       [parent]="element"
       [closeOnSelect]="closeOnSelect"
       position="above-below"
-      (select)="closePanel()"
       (closing)="onBlur()"
     >
       <ng-content></ng-content>
