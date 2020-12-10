@@ -1,5 +1,9 @@
 header[theme] {
   & > section {
+    .bhi-move {
+      padding: 0;
+      cursor: move;
+    }
     height: $header-height;
     display: flex;
     flex-direction: row;

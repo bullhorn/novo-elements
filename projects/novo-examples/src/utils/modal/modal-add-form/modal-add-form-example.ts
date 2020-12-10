@@ -4,32 +4,32 @@ import { NovoModalService, NovoModalRef, FormUtils, TextBoxControl, PickerContro
 @Component({
   selector: 'modal-edit-form-demo',
   template: `
-  <novo-modal>
-    <header title="Add Contact" icon="person" theme="contact">
+    <novo-modal>
+      <header title="Add Contact" icon="person" theme="contact" movable="false">
         <utils>
-            <util-action icon="times" (click)="close()"></util-action>
+          <util-action icon="times" (click)="close()"></util-action>
         </utils>
-    </header>
-    <section>
+      </header>
+      <section>
         <novo-form [form]="textForm">
-            <div class="novo-form-row">
-                <novo-control [form]="textForm" [control]="textControl"></novo-control>
-            </div>
-            <div class="novo-form-row">
-                <novo-control [form]="textForm" [control]="emailControl"></novo-control>
-            </div>
-            <div class="novo-form-row">
-                <novo-control [form]="textForm" [control]="numberControl"></novo-control>
-            </div>
-            <div class="novo-form-row">
-                <novo-control [form]="textForm" [control]="pickerControl"></novo-control>
-            </div>
+          <div class="novo-form-row">
+            <novo-control [form]="textForm" [control]="textControl"></novo-control>
+          </div>
+          <div class="novo-form-row">
+            <novo-control [form]="textForm" [control]="emailControl"></novo-control>
+          </div>
+          <div class="novo-form-row">
+            <novo-control [form]="textForm" [control]="numberControl"></novo-control>
+          </div>
+          <div class="novo-form-row">
+            <novo-control [form]="textForm" [control]="pickerControl"></novo-control>
+          </div>
         </novo-form>
-    </section>
-    <button theme="standard" (click)="close()">Cancel</button>
-    <button theme="primary" color="success" icon="check" (click)="close()">Save</button>
-  </novo-modal>
-`,
+      </section>
+      <button theme="standard" (click)="close()">Cancel</button>
+      <button theme="primary" color="success" icon="check" (click)="close()">Save</button>
+    </novo-modal>
+  `,
 })
 export class ModalAddFormDemo implements OnInit {
   public textControl: any;

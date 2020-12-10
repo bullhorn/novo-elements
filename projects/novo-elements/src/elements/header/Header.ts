@@ -1,4 +1,4 @@
-import { Component, HostBinding, Input } from '@angular/core';
+import { Component, HostBinding, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'header-spacer',
@@ -39,6 +39,7 @@ export class NovoUtilActionComponent {
     <section>
       <div class="header-title">
         <ng-container *ngIf="title">
+          <i *ngIf="movable" class="header-icon" class="bhi-move" id="dragger" (mouseenter)="dragModal()"></i>
           <i *ngIf="icon" class="header-icon" [ngClass]="icon"></i>
           <div class="header-titles">
             <h1>{{ title }}</h1>
@@ -70,6 +71,8 @@ export class NovoHeaderComponent {
   public title: string;
   @Input()
   public subTitle: string;
+  @Input()
+  public movable: boolean = true;
   public inverse: string = 'inverse';
 
   @HostBinding('attr.theme')
@@ -94,4 +97,43 @@ export class NovoHeaderComponent {
 
   private _theme: string;
   private _icon: string;
+
+  dragModal() {
+    let elmnt = document.getElementsByTagName('novo-modal')[0];
+    if (elmnt) {
+      let pos1 = 0,
+        pos2 = 0,
+        pos3 = 0,
+        pos4 = 0;
+      document.getElementById('dragger').onmousedown = dragMouseDown;
+      function dragMouseDown(e) {
+        e = e || window.event;
+        e.preventDefault();
+        // get the mouse cursor position at startup:
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        document.onmouseup = closeDragElement;
+        document.onmousemove = elementDrag;
+      }
+
+      function elementDrag(e) {
+        e = e || window.event;
+        e.preventDefault();
+        // calculate the new cursor position:
+        pos1 = pos3 - e.clientX;
+        pos2 = pos4 - e.clientY;
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        // set the element's new position:
+        elmnt.style.top = elmnt.offsetTop - pos2 + 'px';
+        elmnt.style.left = elmnt.offsetLeft - pos1 + 'px';
+      }
+
+      function closeDragElement() {
+        /* stop moving when mouse button is released:*/
+        document.onmouseup = null;
+        document.onmousemove = null;
+      }
+    }
+  }
 }
