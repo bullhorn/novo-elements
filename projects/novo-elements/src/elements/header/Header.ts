@@ -1,4 +1,4 @@
-import { Component, HostBinding, Input } from '@angular/core';
+import { Component, HostBinding, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'header-spacer',
@@ -61,7 +61,7 @@ export class NovoUtilActionComponent {
     <ng-content></ng-content>
   `,
 })
-export class NovoHeaderComponent {
+export class NovoHeaderComponent implements OnInit {
   @HostBinding('class')
   public headerClass: string = 'novo-header';
   @HostBinding('class.condensed')
@@ -73,6 +73,8 @@ export class NovoHeaderComponent {
   public subTitle: string;
   @Input()
   public movable: boolean = true;
+  @Input()
+  public resizable: boolean = true;
   public inverse: string = 'inverse';
 
   @HostBinding('attr.theme')
@@ -98,6 +100,13 @@ export class NovoHeaderComponent {
   private _theme: string;
   private _icon: string;
 
+  ngOnInit() {
+    let elmnt: HTMLElement = document.getElementsByTagName('novo-modal')[0] as HTMLElement;
+    if (elmnt && this.resizable) {
+      elmnt.classList.add('movable');
+    }
+  }
+
   dragModal() {
     let elmnt: HTMLElement = document.getElementsByTagName('novo-modal')[0] as HTMLElement;
     if (elmnt) {
@@ -109,7 +118,7 @@ export class NovoHeaderComponent {
       function dragMouseDown(e) {
         e = e || window.event;
         e.preventDefault();
-        // get the mouse cursor position at startup:
+        // get the mouse cursor position at startup
         pos3 = e.clientX;
         pos4 = e.clientY;
         document.onmouseup = closeDragElement;
@@ -119,18 +128,19 @@ export class NovoHeaderComponent {
       function elementDrag(e) {
         e = e || window.event;
         e.preventDefault();
-        // calculate the new cursor position:
+        // calculate the new cursor position
         pos1 = pos3 - e.clientX;
         pos2 = pos4 - e.clientY;
         pos3 = e.clientX;
         pos4 = e.clientY;
-        // set the element's new position:
+        // set the element's new position
         elmnt.style.top = elmnt.offsetTop - pos2 + 'px';
         elmnt.style.left = elmnt.offsetLeft - pos1 + 'px';
+        elmnt.style.resize = 'both';
       }
 
       function closeDragElement() {
-        /* stop moving when mouse button is released:*/
+        // stop moving when mouse button is released
         document.onmouseup = null;
         document.onmousemove = null;
       }

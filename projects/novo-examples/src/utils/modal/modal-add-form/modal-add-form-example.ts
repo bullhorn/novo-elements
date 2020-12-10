@@ -5,7 +5,7 @@ import { NovoModalService, NovoModalRef, FormUtils, TextBoxControl, PickerContro
   selector: 'modal-edit-form-demo',
   template: `
     <novo-modal>
-      <header title="Add Contact" icon="person" theme="contact" movable="false">
+      <header title="Add Contact" icon="person" theme="contact" [movable]="false" [resizable]="false">
         <utils>
           <util-action icon="times" (click)="close()"></util-action>
         </utils>
