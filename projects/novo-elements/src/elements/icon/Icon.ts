@@ -17,6 +17,9 @@ export class NovoIconComponent implements AfterViewInit {
   @HostBinding('attr.theme')
   @Input()
   public theme: string;
+  @HostBinding('attr.shape')
+  @Input()
+  public shape: string = 'box';
   @HostBinding('attr.color')
   @Input()
   public color: string;

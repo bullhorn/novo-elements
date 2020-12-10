@@ -43,6 +43,11 @@ novo-icon {
           height: $large-themed-icon-size;
         }
       }
+      &[shape='circle'] {
+        i {
+          border-radius: 50%;
+        }
+      }
     }
   }
   @each $basic, $color in $all-colors {
