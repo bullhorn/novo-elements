@@ -79,6 +79,14 @@ novo-notification {
     min-height: 200px;
     max-height: 100%;
     max-width: 60%;
+    & > section {
+      padding: 1em 3em 6em 3em;
+    }
+    & > footer {
+      position: absolute;
+      width: 100%;
+      bottom: 0;
+    }
   }
 
   & > button.modal-close {
