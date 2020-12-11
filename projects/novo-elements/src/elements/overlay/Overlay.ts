@@ -163,15 +163,16 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
     return merge(fromEvent(this.document, 'mousedown'), fromEvent(this.document, 'touchend')).pipe(
       filter((event: MouseEvent | TouchEvent) => {
         const clickTarget: HTMLElement = event.target as HTMLElement;
-        const clicked: boolean =
+        const clickedOutside: boolean =
           this.panelOpen &&
           clickTarget !== this.getConnectedElement().nativeElement &&
           !this.getConnectedElement().nativeElement.contains(clickTarget) &&
-          (!!this.overlayRef && !this.overlayRef.overlayElement.contains(clickTarget));
+          (!!this.overlayRef && !this.overlayRef.overlayElement.contains(clickTarget)) &&
+          !this.elementIsInNestedOverlay(clickTarget);
         if (this.panelOpen && !!this.overlayRef && this.overlayRef.overlayElement.contains(clickTarget) && this.closeOnSelect) {
           this.select.emit(event);
         }
-        return clicked;
+        return clickedOutside;
       }),
     );
   }
@@ -299,6 +300,16 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
 
   protected getConnectedElement(): ElementRef {
     return this.parent;
+  }
+
+  protected elementIsInNestedOverlay(el): boolean {
+    while (el.parentNode) {
+      if (el.id && el.id.includes('novo-overlay')) {
+        return this.id < el.id;
+      }
+      el = el.parentNode;
+    }
+    return false;
   }
 
   protected getHostWidth(): number {
