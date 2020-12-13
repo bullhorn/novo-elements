@@ -123,6 +123,10 @@ export class DataTableState<T> {
         });
         this.filter = filters;
       }
+
+      if (preferences.globalSearch) {
+        this.globalSearch = preferences.globalSearch;
+      }
     }
   }
 }
