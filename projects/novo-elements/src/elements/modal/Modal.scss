@@ -63,13 +63,13 @@ novo-notification {
 
 novo-modal,
 novo-notification {
-  display: block;
   background-color: #fff;
   margin-bottom: 1em;
   border-radius: 4px;
   box-shadow: 0 1px 7px rgba(0, 0, 0, 0.09), 0 1px 3px rgba(0, 0, 0, 0.2);
-  z-index: 1000;
+  z-index: $novo-modal-z-index;
   position: absolute;
+  width: fit-content;
   min-width: 330px;
   max-width: 600px;
   transform: translate(-50%, -50%);
