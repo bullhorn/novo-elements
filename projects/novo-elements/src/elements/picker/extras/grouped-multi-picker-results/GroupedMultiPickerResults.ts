@@ -172,7 +172,7 @@ export class GroupedMultiPickerResults extends BasePickerResults implements OnIn
     this.keyboardSubscription = fromEvent(this.inputElement.nativeElement, 'keyup')
       .pipe(debounceTime(350), distinctUntilChanged())
       .subscribe((event: KeyboardEvent) => {
-        this.searchTerm = event.target.value;
+        this.searchTerm = (event.target as HTMLInputElement).value;
         this.matches = this.filterData();
         this.ref.markForCheck();
       });

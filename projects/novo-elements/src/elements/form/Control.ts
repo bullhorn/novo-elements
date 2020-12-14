@@ -755,8 +755,8 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
   }
 
   handlePercentChange(event: KeyboardEvent) {
-    const value = event.target.value;
-    const percent = Helpers.isEmpty(value) ? null : Number((value / 100).toFixed(6).replace(/\.?0*$/, ''));
+    const value = (event.target as HTMLInputElement).value;
+    const percent = Helpers.isEmpty(value) ? null : Number((Number(value) / 100).toFixed(6).replace(/\.?0*$/, ''));
     if (!Helpers.isEmpty(percent)) {
       this.change.emit(percent);
       this.form.controls[this.control.key].setValue(percent);

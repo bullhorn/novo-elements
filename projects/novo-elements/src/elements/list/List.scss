@@ -6,11 +6,23 @@ novo-list {
   &.horizontal-list {
     flex-direction: row;
   }
+
+  a[list-item],
+  button[list-item] {
+    outline: none;
+    &:hover,
+    &:active {
+      background: rgba($positive, 0.2);
+    }
+  }
   @each $entity, $color in $entity-colors {
     &[theme="#{$entity}"] {
-      novo-list-item {
+      novo-list-item,
+      a[list-item],
+      button[list-item] {
         background: $color;
         color: #fff;
+        border: unset;
         border-bottom: 1px solid rgba(#fff, 0.1);
         i {
           color: #fff;
@@ -22,13 +34,23 @@ novo-list {
           > * {
             color: rgba(#fff, 0.65);
           }
+        }
+      }
+      a[list-item],
+      button[list-item] {
+        outline: none;
+        &:hover,
+        &:active {
+          background: lighten($color, 20%);
         }
       }
     }
   }
   @each $basic, $color in $app-colors {
     &[theme="#{$basic}"] {
-      novo-list-item {
+      novo-list-item,
+      a[list-item],
+      button[list-item] {
         background: $color;
         color: #fff;
         border-bottom: 1px solid rgba(#fff, 0.1);
@@ -44,11 +66,21 @@ novo-list {
           }
         }
       }
+      a[list-item],
+      button[list-item] {
+        outline: none;
+        &:hover,
+        &:active {
+          background: lighten($color, 20%);
+        }
+      }
     }
   }
 }
 
-novo-list-item {
+novo-list-item,
+a[list-item],
+button[list-item] {
   background: #fff;
   border-bottom: 1px solid #f4f4f4;
   padding: 1rem;

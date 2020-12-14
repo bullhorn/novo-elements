@@ -2,7 +2,7 @@
 import { ComponentFactoryResolver, ComponentRef, Injectable, Injector, StaticProvider, Type, ViewContainerRef } from '@angular/core';
 
 @Injectable()
-export class ComponentUtils {
+export class ComponentUtils<T = any> {
   constructor(public componentFactoryResolver: ComponentFactoryResolver) {}
 
   append<T>(ComponentClass: Type<T>, location: ViewContainerRef, providers?: StaticProvider[], onTop?: boolean): ComponentRef<T> {

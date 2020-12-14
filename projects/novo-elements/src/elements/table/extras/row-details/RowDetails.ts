@@ -1,5 +1,5 @@
 // NG2
-import { Component, ElementRef, Input, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, ComponentRef, ElementRef, Input, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { ComponentUtils } from './../../../../utils/component-utils/ComponentUtils';
 // APP
 import { BaseRenderer } from './../base-renderer/BaseRenderer';
@@ -24,7 +24,7 @@ export class RowDetails implements OnInit {
   ngOnInit() {
     if (this.renderer) {
       if (this.renderer.prototype instanceof BaseRenderer) {
-        const componentRef = this.componentUtils.append(this.renderer, this.container);
+        const componentRef: ComponentRef<RowDetails> = this.componentUtils.append(this.renderer, this.container);
         componentRef.instance.data = this.data;
       } else {
         this.value = this.renderer(this.data);

@@ -47,7 +47,27 @@ export class NovoSimpleHeaderCellDef extends _NovoHeaderCellDef {
 })
 export class NovoSimpleColumnDef extends _NovoColumnDef {
   @Input('novoSimpleColumnDef')
-  name: string;
+  get name(): string {
+    return this._name;
+  }
+  set name(name: string) {
+    this._setNameInput(name);
+  }
+  /**
+   * This has been extracted to a util because of TS 4 and VE.
+   * View Engine doesn't support property rename inheritance.
+   * TS 4.0 doesn't allow properties to override accessors or vice-versa.
+   * @docs-private
+   */
+  protected _setNameInput(value: string) {
+    // If the directive is set without a name (updated programatically), then this setter will
+    // trigger with an empty string and should not overwrite the programatically set value.
+    if (value) {
+      this._name = value;
+      this.cssClassFriendlyName = value.replace(/[^a-z0-9_-]/gi, '-');
+      this._updateColumnCssClassName();
+    }
+  }
 }
 
 @Directive({

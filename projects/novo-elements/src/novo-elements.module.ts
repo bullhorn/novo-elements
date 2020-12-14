@@ -17,6 +17,7 @@ import { NovoCommonModule } from './elements/common/common.module';
 import { NovoDataTableModule } from './elements/data-table/data-table.module';
 import { NovoDatePickerModule } from './elements/date-picker/DatePicker.module';
 import { NovoDateTimePickerModule } from './elements/date-time-picker/DateTimePicker.module';
+import { NovoDividerModule } from './elements/divider/divider.module';
 import { NovoDragulaModule } from './elements/dragula/Dragula.module';
 import { NovoDragulaService } from './elements/dragula/DragulaService';
 import { NovoDropdownModule } from './elements/dropdown/Dropdown.module';
@@ -27,6 +28,7 @@ import { NovoFormExtrasModule } from './elements/form/extras/FormExtras.module';
 import { NovoFormModule } from './elements/form/Form.module';
 import { NovoHeaderModule } from './elements/header/Header.module';
 import { NovoIconModule } from './elements/icon/Icon.module';
+import { NovoLayoutModule } from './elements/layout/layout.module';
 import { NovoListModule } from './elements/list/List.module';
 import { NovoLoadingModule } from './elements/loading/Loading.module';
 import { NovoMenuModule } from './elements/menu/menu.module';
@@ -79,6 +81,8 @@ import { FormUtils } from './utils/form-utils/FormUtils';
     NovoCardModule,
     NovoCalendarModule,
     NovoFlexModule,
+    NovoLayoutModule,
+    NovoDividerModule,
     NovoToastModule,
     NovoTooltipModule,
     NovoHeaderModule,

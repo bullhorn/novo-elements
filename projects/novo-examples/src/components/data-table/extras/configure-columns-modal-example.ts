@@ -36,7 +36,7 @@ export class ConfigureColumnsModal {
   public columns: IDataTableColumn<MockData>;
 
   constructor(private modalRef: NovoModalRef, private params: NovoModalParams) {
-    this.columns = params.columns;
+    this.columns = (params as any).columns;
   }
 
   public close(): void {

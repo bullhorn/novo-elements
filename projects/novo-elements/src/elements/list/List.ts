@@ -1,5 +1,5 @@
 // NG2
-import { Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, ContentChild, ElementRef, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'novo-list',
@@ -17,27 +17,6 @@ export class NovoListElement {
   direction: string;
 
   constructor(public element: ElementRef) {}
-}
-
-@Component({
-  selector: 'novo-list-item',
-  template: `
-    <div class="list-item" [ngClass]="{ avatar: avatar }">
-      <ng-content select="item-header"></ng-content>
-      <ng-content select="item-content"></ng-content>
-    </div>
-    <ng-content></ng-content>
-    <ng-content select="item-end"></ng-content>
-  `,
-})
-export class NovoListItemElement implements OnInit {
-  avatar: boolean = false;
-
-  constructor(private element: ElementRef) {}
-
-  ngOnInit() {
-    this.avatar = !!this.element.nativeElement.querySelector('item-avatar');
-  }
 }
 
 @Component({
@@ -101,3 +80,26 @@ export class NovoItemContentElement {
   template: ` <ng-content></ng-content> `,
 })
 export class NovoItemEndElement {}
+
+@Component({
+  selector: 'novo-list-item, a[list-item], button[list-item]',
+  template: `
+    <div class="list-item" [ngClass]="{ avatar: avatar }" *ngIf="_content || _header">
+      <ng-content select="item-header"></ng-content>
+      <ng-content select="item-content"></ng-content>
+    </div>
+    <ng-content></ng-content>
+    <ng-content select="item-end"></ng-content>
+  `,
+})
+export class NovoListItemElement implements OnInit {
+  avatar: boolean = false;
+  @ContentChild(NovoItemContentElement) _content: NovoItemContentElement;
+  @ContentChild(NovoItemHeaderElement) _header: NovoItemHeaderElement;
+
+  constructor(private element: ElementRef) {}
+
+  ngOnInit() {
+    this.avatar = !!this.element.nativeElement.querySelector('item-avatar');
+  }
+}

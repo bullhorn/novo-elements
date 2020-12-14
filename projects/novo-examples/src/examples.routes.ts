@@ -1304,6 +1304,18 @@ export class LayoutsPage {}
 export class ListPage {}
 
 @Component({
+  selector: 'sidenav-page',
+  template: `<h1>
+      SideNav <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/layout">(source)</a>
+    </h1>
+    <p>Components and elements for cards to make sure the loading/empty/layout views are all consistent.</p>
+    <h5>Examples</h5>
+    <h2>Basic SideNav (using attributes)</h2>
+    <p><code-example example="basic-sidenav"></code-example></p>`,
+})
+export class SidenavPage {}
+
+@Component({
   selector: 'stepper-page',
   template: `<h1>
       Steppers <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/stepper">(source)</a>
@@ -1768,6 +1780,7 @@ const routes: Routes = [
   { path: 'layouts/header', component: HeaderPage, data: { title: 'Header', section: 'layouts' } },
   { path: 'layouts', component: LayoutsPage, data: { title: 'Layouts', section: 'src' } },
   { path: 'layouts/list', component: ListPage, data: { title: 'List', section: 'layouts' } },
+  { path: 'layouts/sidenav', component: SidenavPage, data: { title: 'Sidenav', section: 'layouts' } },
   { path: 'layouts/stepper', component: StepperPage, data: { title: 'Stepper', section: 'layouts' } },
   { path: 'layouts/tabs', component: TabsPage, data: { title: 'Tabs', section: 'layouts' } },
   { path: 'patterns', component: PatternsPage, data: { title: 'Patterns', section: 'src' } },
@@ -1831,6 +1844,7 @@ export const PAGE_LIST = [
   HeaderPage,
   LayoutsPage,
   ListPage,
+  SidenavPage,
   StepperPage,
   TabsPage,
   PatternsPage,

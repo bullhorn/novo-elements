@@ -127,10 +127,7 @@ export class NovoStepper extends CdkStepper implements AfterContentInit {
   preserveWhitespaces: false,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NovoHorizontalStepper extends NovoStepper {
-  @Input()
-  selectedIndex: number;
-}
+export class NovoHorizontalStepper extends NovoStepper {}
 
 @Component({
   selector: 'novo-vertical-stepper',
@@ -151,9 +148,6 @@ export class NovoHorizontalStepper extends NovoStepper {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NovoVerticalStepper extends NovoStepper {
-  @Input()
-  selectedIndex: number;
-
   constructor(@Optional() dir: Directionality, changeDetectorRef: ChangeDetectorRef) {
     super(dir, changeDetectorRef);
     this._orientation = 'vertical';

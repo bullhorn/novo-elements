@@ -1,4 +1,7 @@
-header[theme] {
+header[theme],
+novo-header {
+  display: block;
+
   & > section {
     display: flex;
     flex-direction: row;
