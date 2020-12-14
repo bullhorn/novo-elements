@@ -102,8 +102,12 @@ export class NovoHeaderComponent implements OnInit {
 
   ngOnInit() {
     let elmnt: HTMLElement = document.getElementsByTagName('novo-modal')[0] as HTMLElement;
-    if (elmnt && this.resizable) {
-      elmnt.classList.add('movable');
+    if (elmnt) {
+      if (this.resizable) {
+        elmnt.classList.add('resizable');
+      }
+    } else {
+      this.movable = false;
     }
   }
 

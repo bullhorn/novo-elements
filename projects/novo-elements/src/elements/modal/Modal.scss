@@ -73,16 +73,19 @@ novo-notification {
   min-width: 330px;
   max-width: 600px;
   transform: translate(-50%, -50%);
-  &.movable {
+  &.resizable {
+    display: flex;
+    flex-direction: column;
     resize: both;
-    overflow: auto;
+    overflow: hidden;
     min-height: 200px;
     max-height: 100%;
     max-width: 60%;
     & > section {
-      padding: 1em 3em 6em 3em;
+      padding: 1em 3em 5.5em 3em;
     }
     & > footer {
+      background-color: #fff;
       position: absolute;
       width: 100%;
       bottom: 0;
