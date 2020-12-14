@@ -138,7 +138,9 @@ export class NovoSearchBoxElement implements ControlValueAccessor {
     });
   }
   onBlur() {
-    this.focused = false;
+    if (!this.keepOpen || !this.panelOpen) {
+      this.focused = false;
+    }
   }
   onSelect() {
     if (!this.keepOpen) {
@@ -151,6 +153,7 @@ export class NovoSearchBoxElement implements ControlValueAccessor {
   }
   closePanel(): void {
     this.overlay.closePanel();
+    this.focused = false;
   }
   get panelOpen(): boolean {
     return this.overlay && this.overlay.panelOpen;

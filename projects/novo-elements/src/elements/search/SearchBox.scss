@@ -54,7 +54,7 @@ novo-search {
   }
 
   &.always-open {
-    border: 1px solid $light;
+    border: 1px solid $empty;
     transition: border-color 250ms ease-in-out, 250ms ease-in-out, opacity 150ms ease-in-out, 250ms width ease-in-out;
     border-radius: 0.2rem;
   }
@@ -81,13 +81,16 @@ novo-search {
 
 header {
   novo-search.always-open:not(.focused) {
-    button,
+    button {
+      background: rgba($white, 0.25) !important;
+      color: rgba($positive, 0.25) !important;
+    }
     input {
       background-color: rgba($white, 0.25) !important;
       border-color: rgba($white, 0.25) !important;
       color: $white !important;
       &::placeholder {
-        color: $white !important;
+        color: $empty !important;
       }
     }
   }
