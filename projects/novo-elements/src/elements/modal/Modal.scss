@@ -83,12 +83,14 @@ novo-notification {
     max-width: 60%;
     & > section {
       padding: 1em 3em 5.5em 3em;
+      max-height: unset;
     }
     & > footer {
       background-color: #fff;
       position: absolute;
       width: 100%;
       bottom: 0;
+      z-index: 1;
     }
   }
 
