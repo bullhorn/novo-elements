@@ -91,6 +91,8 @@ export class NovoSearchBoxElement implements ControlValueAccessor {
   public keepOpen: boolean = false;
   @Output()
   public searchChanged: EventEmitter<string> = new EventEmitter<string>();
+  @Output()
+  public applySearch: EventEmitter<KeyboardEvent> = new EventEmitter<KeyboardEvent>();
   @HostBinding('class.focused')
   focused: boolean = false;
   public value: any;
@@ -166,6 +168,9 @@ export class NovoSearchBoxElement implements ControlValueAccessor {
 
   _handleKeydown(event: KeyboardEvent): void {
     if ((event.keyCode === ESCAPE || event.keyCode === ENTER || event.keyCode === TAB) && this.panelOpen) {
+      if (event.keyCode === ENTER) {
+        this.applySearch.emit(event);
+      }
       this.closePanel();
       event.stopPropagation();
     }
