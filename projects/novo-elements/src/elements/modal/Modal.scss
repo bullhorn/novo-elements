@@ -68,12 +68,11 @@ novo-notification {
   border-radius: 4px;
   box-shadow: 0 1px 7px rgba(0, 0, 0, 0.09), 0 1px 3px rgba(0, 0, 0, 0.2);
   z-index: $novo-modal-z-index;
-  position: absolute;
-  width: fit-content;
   min-width: 330px;
   max-width: 600px;
-  transform: translate(-50%, -50%);
   &.resizable {
+    position: absolute;
+    transform: translate(-50%, -50%);
     display: flex;
     flex-direction: column;
     resize: both;
@@ -90,7 +89,7 @@ novo-notification {
       position: absolute;
       width: 100%;
       bottom: 0;
-      z-index: 1;
+      z-index: 1001;
     }
   }
 
