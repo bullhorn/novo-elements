@@ -50,11 +50,15 @@ novo-search {
 
   &.focused,
   &.always-open.focused {
-    border: 1px solid $positive;
+    border: none;
+    border-bottom: none;
+    border-color: $white;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
   }
 
   &.always-open {
-    border: 1px solid $empty;
+    border: none;
+    border-bottom: 1px solid $background-dark;
     transition: border-color 250ms ease-in-out, 250ms ease-in-out, opacity 150ms ease-in-out, 250ms width ease-in-out;
     border-radius: 0.2rem;
   }
