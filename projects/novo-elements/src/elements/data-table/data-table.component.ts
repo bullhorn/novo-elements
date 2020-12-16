@@ -330,7 +330,23 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
       // Re-subscribe
       this.outsideFilterSubscription = outsideFilter.subscribe((filter: any) => {
         this.state.outsideFilter = filter;
-        this.state.updates.next({ globalSearch: this.state.globalSearch, filter: this.state.filter, sort: this.state.sort });
+        this.state.updates.next({ globalSearch: this.state.globalSearch, filter: this.state.filter, sort: this.state.sort, advancedFilter: this.state.advancedFilter });
+        this.ref.markForCheck();
+      });
+    }
+  }
+
+  @Input()
+  set advancedFilter(advancedFilter: EventEmitter<any>) {
+    // Unsubscribe
+    if (this.advancedFilterSubscription) {
+      this.advancedFilterSubscription.unsubscribe();
+    }
+    if (advancedFilter) {
+      // Re-subscribe
+      this.advancedFilterSubscription = advancedFilter.subscribe((filter: any) => {
+        this.state.advancedFilter = filter;
+        this.state.updates.next({ globalSearch: this.state.globalSearch, filter: this.state.filter, sort: this.state.sort, outsideFilter: this.state.outsideFilter });
         this.ref.markForCheck();
       });
     }
@@ -410,6 +426,7 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   public expandable: boolean = false;
 
   private outsideFilterSubscription: Subscription;
+  private advancedFilterSubscription: Subscription;
   private refreshSubscription: Subscription;
   private resetSubscription: Subscription;
   private paginationSubscription: Subscription;
@@ -476,6 +493,9 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   }
 
   public ngOnDestroy(): void {
+    if (this.advancedFilterSubscription) {
+      this.advancedFilterSubscription.unsubscribe();
+    }
     if (this.outsideFilterSubscription) {
       this.outsideFilterSubscription.unsubscribe();
     }

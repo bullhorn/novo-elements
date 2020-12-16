@@ -21,12 +21,13 @@ export class DataTableState<T> {
   selectedRows: Map<string, T> = new Map<string, T>();
   expandedRows: Set<string> = new Set<string>();
   outsideFilter: any;
+  advancedFilter: IDataTableFilter[] = undefined;
   isForceRefresh: boolean = false;
 
   updates: EventEmitter<IDataTableChangeEvent> = new EventEmitter<IDataTableChangeEvent>();
 
   get userFiltered(): boolean {
-    return !!(this.filter || this.sort || this.globalSearch || this.outsideFilter);
+    return !!(this.filter || this.sort || this.globalSearch || this.outsideFilter || this.advancedFilter);
   }
 
   get userFilteredInternal(): boolean {

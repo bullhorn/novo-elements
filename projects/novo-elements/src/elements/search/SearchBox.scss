@@ -92,7 +92,7 @@ header {
     input {
       background-color: rgba($white, 0.25) !important;
       border-color: rgba($white, 0.25) !important;
-      color: $white !important;
+      color: rgba($positive, 0.25) !important;
       &::placeholder {
         color: $empty !important;
       }
