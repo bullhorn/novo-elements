@@ -4,6 +4,7 @@ export interface IDataTablePreferences {
   name: string;
   sort?: IDataTableSort;
   filter?: IDataTableFilter | IDataTableFilter[];
+  advancedFilter?: IDataTableFilter[];
   globalSearch?: any;
   pageSize?: number;
   displayedColumns?: string[];

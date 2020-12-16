@@ -125,6 +125,17 @@ export class DataTableState<T> {
         this.filter = filters;
       }
 
+      if (preferences.advancedFilter) {
+        const advancedFilters = Helpers.convertToArray(preferences.advancedFilter);
+        advancedFilters.forEach((filter) => {
+          filter.value =
+            filter.selectedOption && filter.type
+              ? NovoDataTableFilterUtils.constructFilter(filter.selectedOption, filter.type)
+              : filter.value;
+        });
+        this.advancedFilter = advancedFilters;
+      }
+
       if (preferences.globalSearch) {
         this.globalSearch = preferences.globalSearch;
       }
