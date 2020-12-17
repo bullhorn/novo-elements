@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 import { FormUtils, TextBoxControl, FieldInteractionApi } from 'novo-elements';
-import { map } from 'rxjs/operators';
-import { MockMetaHeaders } from '../MockMeta';
 
 /**
  * @title Fi Async Example

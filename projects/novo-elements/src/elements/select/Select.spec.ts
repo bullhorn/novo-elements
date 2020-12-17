@@ -1,6 +1,5 @@
 // NG
 import { TestBed, async } from '@angular/core/testing';
-import { FormsModule } from '@angular/forms';
 // App
 import { NovoSelectElement } from './Select';
 import { NovoSelectModule } from './Select.module';

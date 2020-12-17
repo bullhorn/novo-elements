@@ -1,6 +1,5 @@
 // APP
 import { DateFormatService } from './DateFormat';
-import { Helpers } from '../../utils/Helpers';
 import { NovoLabelService } from '../../services/novo-label-service';
 
 describe('Service: DateFormatService', () => {

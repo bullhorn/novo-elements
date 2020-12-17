@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DateCell, PercentageCell, NovoTableConfig, NovoDropdownCell } from 'novo-elements';
+import { DateCell, PercentageCell } from 'novo-elements';
 
 /**
  * @title Activity Section

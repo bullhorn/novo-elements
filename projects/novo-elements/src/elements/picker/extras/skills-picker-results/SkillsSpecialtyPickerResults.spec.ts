@@ -1,7 +1,6 @@
 // NG2
 import { ElementRef } from '@angular/core';
 import { TestBed, async } from '@angular/core/testing';
-import { DomSanitizer } from '@angular/platform-browser';
 // App
 import { NovoListModule } from './../../../list/List.module';
 import { NovoLoadingModule } from './../../../loading/Loading.module';

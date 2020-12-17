@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 
 // Vendor
 import { FormUtils, PickerControl, EntityPickerResult, EntityPickerResults } from 'novo-elements';
