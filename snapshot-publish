@@ -1,5 +1,5 @@
 #!/bin/bash
-
+#### TODO: FIX THIS
 set -o errexit -o nounset
 
 buildDir="dist/novo-elements"

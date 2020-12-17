@@ -1,5 +1,5 @@
 on: push
-name: Test
+name: Test and Build
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -21,11 +21,22 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - name: npm install and npm run build
+      - name: Install Dependencies
         run: |
           npm i
           npm install -g angular-cli-ghpages
-          npm run lint
-          npm test
+      - name: Lint
+        run: npm run lint
+      - name: Test
+        run: npm test
+      - name: Build
+        run: |
           npm run build
           npm run build:demo
+      - name: Publish
+        env: 
+          GH_TOKEN: ${{ secrets.API_TOKEN_GITHUB }}
+        if: ${{ github.event_name == 'pull_request' && github.ref == 'refs/heads/master' }}
+        run: |
+        angular-cli-ghpages --dir="dist/demo" --repo="https://github.com/bullhorn/novo-elements.git" --name="Sr. Github" --email="hi@github.com"; fi
+        npm run snapshot-publish
