@@ -239,9 +239,9 @@ export class NovoLayoutContainer implements AfterContentInit, DoCheck, OnDestroy
     let right = 0;
 
     if (this._left && this._left.opened) {
-      if (this._left.mode == 'side') {
+      if (this._left.mode === 'side') {
         left += this._left._getWidth();
-      } else if (this._left.mode == 'push') {
+      } else if (this._left.mode === 'push') {
         const width = this._left._getWidth();
         left += width;
         right -= width;
@@ -249,9 +249,9 @@ export class NovoLayoutContainer implements AfterContentInit, DoCheck, OnDestroy
     }
 
     if (this._right && this._right.opened) {
-      if (this._right.mode == 'side') {
+      if (this._right.mode === 'side') {
         right += this._right._getWidth();
-      } else if (this._right.mode == 'push') {
+      } else if (this._right.mode === 'push') {
         const width = this._right._getWidth();
         right += width;
         left -= width;
@@ -262,8 +262,8 @@ export class NovoLayoutContainer implements AfterContentInit, DoCheck, OnDestroy
     // allows users to specify a custom size via CSS class in SSR scenarios where the
     // measured widths will always be zero. Note that we reset to `null` here, rather
     // than below, in order to ensure that the types in the `if` below are consistent.
-    left = left || null!;
-    right = right || null!;
+    left = left || null;
+    right = right || null;
 
     if (left !== this._contentMargins.left || right !== this._contentMargins.right) {
       this._contentMargins = { left, right };
@@ -354,7 +354,7 @@ export class NovoLayoutContainer implements AfterContentInit, DoCheck, OnDestroy
 
     // Ensure that we have at most one start and one end drawer.
     this._drawers.forEach((drawer) => {
-      if (drawer.position == 'end') {
+      if (drawer.position === 'end') {
         if (this._end != null) {
           throw new Error('Duplication drawers at end');
           // throwMatDuplicatedDrawerError('end');
@@ -382,7 +382,7 @@ export class NovoLayoutContainer implements AfterContentInit, DoCheck, OnDestroy
 
   /** Whether the container is being pushed to the side by one of the drawers. */
   private _isPushed() {
-    return (this._isDrawerOpen(this._start) && this._start.mode != 'over') || (this._isDrawerOpen(this._end) && this._end.mode != 'over');
+    return (this._isDrawerOpen(this._start) && this._start.mode !== 'over') || (this._isDrawerOpen(this._end) && this._end.mode !== 'over');
   }
 
   _onBackdropClicked() {
@@ -394,7 +394,7 @@ export class NovoLayoutContainer implements AfterContentInit, DoCheck, OnDestroy
     // Close all open drawers where closing is not disabled and the mode is not `side`.
     [this._start, this._end]
       .filter((drawer) => drawer && !drawer.disableClose && this._canHaveBackdrop(drawer))
-      .forEach((drawer) => drawer!._closeViaBackdropClick());
+      .forEach((drawer) => drawer._closeViaBackdropClick());
   }
 
   _isShowingBackdrop(): boolean {

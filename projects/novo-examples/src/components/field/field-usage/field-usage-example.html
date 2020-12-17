@@ -2,7 +2,7 @@
 
 <novo-field>
   <novo-label>Favorite food</novo-label>
-  <input novoInput placeholder="Ex. Pizza" value="Sushi">
+  <input novoInput placeholder="Ex. Pizza" value="Sushi" />
 </novo-field>
 
 <novo-field>
@@ -12,7 +12,7 @@
 
 <novo-field>
   <novo-label>Set an Alarm</novo-label>
-  <input novoInput [(ngModel)]="time" timeFormat="iso8601" [picker]="timepicker">
+  <input novoInput [(ngModel)]="time" timeFormat="iso8601" [picker]="timepicker" />
   <novo-picker-toggle novoSuffix icon="clock">
     <novo-time-picker #timepicker></novo-time-picker>
   </novo-picker-toggle>
@@ -21,7 +21,7 @@
 
 <novo-field>
   <novo-label>Date of Birth</novo-label>
-  <input novoInput dateFormat="iso8601" [picker]="datepicker" [(ngModel)]="date">
+  <input novoInput dateFormat="iso8601" [picker]="datepicker" [(ngModel)]="date" />
   <novo-picker-toggle novoSuffix icon="calendar">
     <novo-date-picker #datepicker></novo-date-picker>
   </novo-picker-toggle>

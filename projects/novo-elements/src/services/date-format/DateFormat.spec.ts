@@ -280,7 +280,7 @@ describe('Service: DateFormatService', () => {
     it('should be defined', () => {
       expect(service.parseTimeString).toBeDefined();
     });
-    it("should not parse if the string doesn't contain :", () => {
+    it(`should not parse if the string doesn't contain :`, () => {
       const [value, timeString] = service.parseTimeString('', false);
       expect(timeString).toEqual('');
     });

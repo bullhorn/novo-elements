@@ -46,7 +46,7 @@
     "no-bitwise": false,
     "object-literal-sort-keys": false,
     "prefer-const": false,
-    "quotemark": [true, "single"],
+    "quotemark": [true, "single", "avoid-escape"],
     "typedef": [false, "parameter", "property-declaration"], 
     "variable-name": false,
     "no-var-requires": false,

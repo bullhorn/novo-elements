@@ -101,7 +101,7 @@ export class NovoSidenavComponent implements AfterContentInit, AfterContentCheck
   set position(value: 'start' | 'end') {
     // Make sure we have a valid value.
     value = value === 'end' ? 'end' : 'start';
-    if (value != this._position) {
+    if (value !== this._position) {
       this._position = value;
       this.onPositionChanged.emit();
     }

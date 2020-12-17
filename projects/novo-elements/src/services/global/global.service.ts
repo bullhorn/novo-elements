@@ -13,7 +13,7 @@ export class BrowserGlobalRef extends GlobalRef {
 }
 export class NodeGlobalRef extends GlobalRef {
   get nativeGlobal(): Global {
-    throw new Error("global doesn't compile for some reason");
+    throw new Error(`global doesn't compile for some reason`);
     // return global as Global;
   }
 }
