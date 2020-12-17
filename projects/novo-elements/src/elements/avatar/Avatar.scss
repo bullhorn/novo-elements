@@ -18,3 +18,17 @@
   //   }
   // }
 }
+
+:host([size="small"]) {
+  img {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+:host([size="large"]) {
+  img {
+    width: 40px;
+    height: 40px;
+  }
+}

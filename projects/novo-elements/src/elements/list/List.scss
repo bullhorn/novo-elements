@@ -10,9 +10,11 @@ novo-list {
   a[list-item],
   button[list-item] {
     outline: none;
-    &:hover,
-    &:active {
+    &:hover {
       background: rgba($positive, 0.2);
+    }
+    &.active {
+      background: darken($positive, 20%);
     }
   }
   @each $entity, $color in $entity-colors {
@@ -69,9 +71,11 @@ novo-list {
       a[list-item],
       button[list-item] {
         outline: none;
-        &:hover,
-        &:active {
+        &:hover {
           background: lighten($color, 20%);
+        }
+        &.active {
+          background: darken($color, 20%);
         }
       }
     }

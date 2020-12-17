@@ -162,6 +162,7 @@ export class NovoSearchBoxElement implements ControlValueAccessor {
   }
   _handleInput(event: KeyboardEvent): void {
     if (document.activeElement === event.target) {
+      this.value = (event.target as HTMLInputElement).value;
       this._onChange((event.target as HTMLInputElement).value);
 
       if (this.debounceSearchChange) {

@@ -1,5 +1,5 @@
 // NG2
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, HostBinding, Input, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
@@ -13,13 +13,17 @@ export class NovoAvatarElement implements OnInit {
   @Input() color: string;
   @Input() theme: string;
 
+  @HostBinding('attr.size')
+  @Input()
+  size: string;
+
   src: any;
 
   constructor(private sanitizer: DomSanitizer) {}
 
   ngOnInit(): any {
     let src: any;
-    if (this.source && this.source !== '') {
+    if ((this.source && this.source !== '') || this.label) {
       if (this.source.profileImage) {
         src = this.source.profileImage;
       } else if (this.source.logo) {
@@ -116,7 +120,7 @@ export class NovoAvatarElement implements OnInit {
         cobj.style.fontWeight = settings.fontWeight;
         cobj.style.fontSize = `${settings.fontSize}px`;
 
-        const ltrs: any = document.createTextNode(first + last);
+        const ltrs: any = document.createTextNode(this.label || first + last);
         cobj.appendChild(ltrs);
 
         const svg: any = document.createElement('svg');

@@ -107,6 +107,7 @@ novo-switch {
   &[disabled] {
     opacity: 0.5;
     cursor: not-allowed;
+    pointer-events: none;
     .novo-switch-container {
       cursor: not-allowed;
     }
@@ -127,7 +128,7 @@ novo-switch {
   &.light {
     @include novo-switch-style(darken($light, 3%), $light);
   }
-  &[disabled] {
+  &[disabled]:not([aria-checked="true"]) {
     .novo-switch-thumb {
       background-color: darken($light, 20%);
     }
