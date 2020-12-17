@@ -6,6 +6,12 @@ import { KeyCodes } from '../../utils/key-codes/KeyCodes';
 // App
 import { QuickNoteElement } from './QuickNote';
 
+declare global {
+  interface Window {
+    CKEDITOR: any;
+  }
+}
+
 describe('Elements: QuickNoteElement', () => {
   // Mocks and fakes used in the tests
   let fixture;
