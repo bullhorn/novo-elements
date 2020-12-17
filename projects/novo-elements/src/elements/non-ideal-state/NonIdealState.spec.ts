@@ -1,7 +1,8 @@
 // NG2
 import { async, TestBed } from '@angular/core/testing';
-// App
 import { NonIdealStateElement } from './NonIdealState';
+// App
+import { NovoNonIdealStateModule } from './NonIdealState.module';
 
 describe('Elements: NonIdealStateElement', () => {
   let fixture;
@@ -9,7 +10,7 @@ describe('Elements: NonIdealStateElement', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [NonIdealStateElement],
+      imports: [NovoNonIdealStateModule],
     }).compileComponents();
     fixture = TestBed.createComponent(NonIdealStateElement);
     component = fixture.debugElement.componentInstance;

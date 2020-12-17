@@ -84,6 +84,7 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
       const tabs = tabNames.map((typeName, i) => ({
         typeName,
         labelField: labelFieldNames[i], // search/filter only looks at labelField
+        data: null,
       }));
       tabs.forEach((tab) => {
         const { labelField } = tab;

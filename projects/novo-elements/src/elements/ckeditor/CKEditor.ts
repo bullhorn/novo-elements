@@ -10,6 +10,11 @@ const CKEDITOR_CONTROL_VALUE_ACCESSOR = {
 };
 
 declare var CKEDITOR: any;
+declare global {
+  interface Window {
+    CKEDITOR: any;
+  }
+}
 
 /**
  * CKEditor component
