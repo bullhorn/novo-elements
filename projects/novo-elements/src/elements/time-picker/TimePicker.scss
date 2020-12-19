@@ -125,6 +125,7 @@ novo-time-picker {
       overflow-x: hidden;
       height: 100%;
       flex: 1;
+      scroll-snap-type: y mandatory;
       -ms-overflow-style: none; /* Internet Explorer 10+ */
       scrollbar-width: none; /* Firefox */
       &::-webkit-scrollbar {
@@ -135,6 +136,8 @@ novo-time-picker {
     novo-list-item {
       padding: 5px 16px;
       width: 130px;
+      scroll-snap-align: start;
+
       .list-item {
         line-height: 19px;
       }

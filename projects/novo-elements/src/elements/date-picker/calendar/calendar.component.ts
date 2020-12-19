@@ -113,9 +113,9 @@ export class NovoCalendarElement implements OnInit {
   @HostBinding('style.width')
   get hb_width() {
     if (this.layout === 'vertical') {
-      return this._sanitizer.bypassSecurityTrustStyle(`228px`);
+      return this._sanitizer.bypassSecurityTrustStyle(`min-content`);
     }
-    return this._sanitizer.bypassSecurityTrustStyle(`${this.numberOfMonths * 228}px`);
+    return this._sanitizer.bypassSecurityTrustStyle(`min-content`);
   }
 
   @HostBinding('class.layout-horizontal')

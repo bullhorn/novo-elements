@@ -69,7 +69,7 @@ const DATE_PICKER_VALUE_ACCESSOR = {
     ]),
   ],
   template: `
-    <div class="calendar">
+    <div class="date-picker-container">
       <div class="date-range-tabs" *ngIf="range" [class.week-select-mode]="weekRangeSelect">
         <span
           class="range-tab"
@@ -178,10 +178,10 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
     }
   }
 
-  @HostBinding('style.width')
-  get hb_width() {
-    return this._sanitizer.bypassSecurityTrustStyle(`${this.numberOfMonths * 228}px`);
-  }
+  // @HostBinding('style.width')
+  // get hb_width() {
+  //   return this._sanitizer.bypassSecurityTrustStyle(`${this.numberOfMonths * 228}px`);
+  // }
 
   model: modelTypes;
   activeDate: Date;

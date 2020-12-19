@@ -71,9 +71,9 @@ novo-date-picker-input {
   display: block;
 }
 
-.calendar {
+.date-picker-container {
   border-radius: 4px;
-  width: 100%;
+  width: min-content;
   text-align: center;
   background: #fff;
   color: #3a3a3a;

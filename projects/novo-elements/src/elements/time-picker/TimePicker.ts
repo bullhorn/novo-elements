@@ -33,7 +33,7 @@ export enum TIME_VALUE_FORMATS {
   selector: 'novo-time-picker',
   providers: [TIME_PICKER_VALUE_ACCESSOR],
   template: `
-    <div class="digital" [class.inline]="inline" [class.military]="military">
+    <!-- <div class="digital" [class.inline]="inline" [class.military]="military" *ngIf="inline">
       <div class="digital--inner">
         <span class="digital--clock" *ngIf="analog">
           <span class="hours" data-automation-id="novo-time-picker-hours">{{ hours }}</span
@@ -50,7 +50,7 @@ export enum TIME_VALUE_FORMATS {
           >
         </div>
       </div>
-    </div>
+    </div> -->
     <div class="increments" *ngIf="!analog">
       <novo-list direction="vertical" data-automation-id="novo-time-picker-increments">
         <novo-list-item
