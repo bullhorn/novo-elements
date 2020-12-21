@@ -73,3 +73,8 @@ export interface NovoDateSelectionStrategy<D = DateLike> {
 
   isSelected(activeDate: DateLike | null, currentValue: D): boolean;
 }
+
+export interface OverlayDate {
+  date: Date;
+  type: string;
+}

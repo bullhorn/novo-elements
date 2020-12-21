@@ -15,7 +15,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { addDays, isAfter, isBefore, isSameDay, isToday, startOfMonth, startOfWeek } from 'date-fns';
 import { NovoLabelService } from '../../../services/novo-label-service';
 import { BooleanInput } from '../../../utils';
-import { DateLike, Day } from '../date-picker.types';
+import { DateLike, Day, OverlayDate } from '../date-picker.types';
 
 @Component({
   selector: 'novo-month-view',
@@ -35,6 +35,8 @@ export class NovoMonthViewElement implements OnInit {
   selected: DateLike[] = [];
   @Input()
   preview: DateLike[] = [];
+  @Input()
+  overlays: OverlayDate[] = [];
 
   @Input()
   @BooleanInput()
@@ -153,6 +155,17 @@ export class NovoMonthViewElement implements OnInit {
   /** Returns whether a cell should be marked as preview. */
   _isPreview(value: DateLike) {
     return this.preview && this.preview.find((d) => isSameDay(d, value));
+  }
+
+  /** Returns whether a cell should be marked as an overlay. */
+  _isOverlay(value: DateLike) {
+    return this.overlays && this.overlays.find((o) => isSameDay(o.date, value));
+  }
+
+  /** Returns whether a cell should be marked as an overlay. */
+  _hasOverlayType(value: DateLike) {
+    let overlay = this.overlays && this.overlays.find((o) => isSameDay(o.date, value));
+    return overlay ? overlay.type : null;
   }
 
   /** Gets whether a value is the start of the main range. */

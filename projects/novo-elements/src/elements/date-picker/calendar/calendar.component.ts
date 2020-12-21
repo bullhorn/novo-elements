@@ -12,6 +12,7 @@ import {
   NovoDateSelectionStrategy,
   NovoMonthSelectEvent,
   NovoYearSelectEvent,
+  OverlayDate,
 } from '../date-picker.types';
 import { MultiDateSelectionStrategy, RangeSelectionStrategy, WeekSelectionStrategy } from '../strategies';
 import { DefaultDateSelectionStrategy } from '../strategies/default-selection.strategy';
@@ -46,6 +47,11 @@ export class NovoCalendarElement implements OnInit {
   preview: Date[] = [];
   @Output()
   previewChange: EventEmitter<Date[]> = new EventEmitter();
+  @Output()
+  activeDateChange: EventEmitter<Date> = new EventEmitter();
+
+  @Input()
+  overlays: OverlayDate[] = [];
 
   _activeDate: Date;
   _mode: DatePickerSelectModes = 'single';
@@ -62,6 +68,7 @@ export class NovoCalendarElement implements OnInit {
   set activeDate(value) {
     if (!isSameDay(value, this._activeDate)) {
       this._activeDate = value;
+      this.activeDateChange.next(value);
       this.updateView(value);
     }
   }
