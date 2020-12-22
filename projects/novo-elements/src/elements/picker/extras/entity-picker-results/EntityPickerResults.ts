@@ -42,7 +42,7 @@ import { BasePickerResults } from '../base-picker-results/BasePickerResults';
         <!-- START & END TIME -->
         <p class="start-time" *ngIf="match.data.startTime && match.data.searchEntity === 'JobShift'">
           <i class="bhi-clock"></i>
-          <span [innerHtml]="renderTime(match.data.startTime) + ' - ' + renderTime(match.data.endTime)"></span>
+          <span [innerHtml]="renderTimeNoOffset(match.data.startTime) + ' - ' + renderTimeNoOffset(match.data.endTime)"></span>
         </p>
         <!-- JOBORDER -->
         <p class="job" *ngIf="match.data.jobOrder && match.data.searchEntity === 'JobShift'">
@@ -157,6 +157,15 @@ export class EntityPickerResult {
     let timestamp = '';
     if (dateStr) {
       timestamp = this.labels.formatTime(new Date(dateStr));
+    }
+    return timestamp;
+  }
+
+  renderTimeNoOffset(dateStr?: string) {
+    let timestamp = '';
+    if (dateStr) {
+      dateStr = dateStr.slice(0, 19);
+      timestamp = this.labels.formatTime(dateStr);
     }
     return timestamp;
   }
