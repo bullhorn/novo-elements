@@ -52,7 +52,7 @@ import { BasePickerResults } from '../base-picker-results/BasePickerResults';
         <!-- OPENINGS -->
         <p class="openings" *ngIf="match.data.openings && match.data.searchEntity === 'JobShift'">
           <i class="bhi-candidate"></i>
-          <span>{{ (match.data.numAssigned * match.data.fillRatio) | number: '1.0-0' }} / {{ match.data.openings }}</span>
+          <span>{{ match.data.jobShiftAssignments?.total || 0 }} / {{ match.data.openings }}</span>
         </p>
         <!-- EMAIL -->
         <p class="email" *ngIf="match.data.email">
