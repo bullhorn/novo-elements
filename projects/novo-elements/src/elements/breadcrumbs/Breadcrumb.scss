@@ -1,0 +1,10 @@
+:host {
+  display: flex;
+  align-items: center;
+
+  ::ng-deep novo-breadcrumb-item:last-child {
+    .novo-breadcrumb-separator {
+      display: none;
+    }
+  }
+}

@@ -60,7 +60,11 @@ export const TableColumns = [
       {
         category: 'Update Status',
         callback: (data: any, status: string) => window.alert(`Update Status ${status}!`),
-        options: [{ label: 'New Lead', value: 'New Lead' }, { label: 'Active', value: 'Active' }, { label: 'Archived', value: 'Archived' }],
+        options: [
+          { label: 'New Lead', value: 'New Lead' },
+          { label: 'Active', value: 'Active' },
+          { label: 'Archived', value: 'Archived' },
+        ],
       },
       {
         category: 'Move',

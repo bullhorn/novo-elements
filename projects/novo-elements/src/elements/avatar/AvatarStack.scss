@@ -1,0 +1,60 @@
+@import "../../styles/global/variables";
+@import "../../styles/global/functions";
+
+:host {
+  display: inline-flex;
+  flex-flow: row nowrap;
+
+  &::ng-deep {
+    novo-avatar {
+      transition: all 0.1s ease-in-out;
+
+      img {
+        border: 1px solid $white;
+      }
+
+      & + novo-avatar {
+        margin-left: -15px;
+      }
+
+      &:first-child {
+        z-index: 5;
+      }
+
+      &:nth-child(2) {
+        z-index: 4;
+      }
+
+      &:nth-child(3) {
+        z-index: 3;
+      }
+
+      &:nth-child(4) {
+        z-index: 2;
+      }
+
+      &:nth-child(5) {
+        z-index: 1;
+      }
+
+      &:nth-child(n + 6) {
+        z-index: 0;
+        margin-left: -15px;
+        display: none;
+        opacity: 0;
+      }
+    }
+  }
+  &:hover {
+    &::ng-deep {
+      novo-avatar {
+        margin-left: 0px;
+        margin-right: 1px;
+        &:nth-child(n + 6) {
+          display: unset;
+          opacity: 1;
+        }
+      }
+    }
+  }
+}

@@ -12,7 +12,10 @@ import { ChecklistPickerResults } from 'novo-elements';
 export class BasicMultiPickerExample {
   placeholder: string = 'Select...';
   value: any = { states: ['Alabama'], collaborators: [1, 2, 3, 4] };
-  types: any = [{ value: 'states', singular: 'state' }, { value: 'collaborators', singular: 'collaborator' }];
+  types: any = [
+    { value: 'states', singular: 'state' },
+    { value: 'collaborators', singular: 'collaborator' },
+  ];
   staticDemo: any;
 
   constructor() {

@@ -1,0 +1,55 @@
+<div class="sidenav-example">
+  <novo-layout-container>
+    <novo-sidenav
+      #sidenav
+      [mode]="isMobile ? 'over' : 'side'"
+      [opened]="!isMobile"
+      [disableClose]="!isMobile"
+      theme="navigation">
+      <novo-header theme="navigation" [condensed]="true">
+        <utils>
+          <button theme="icon" [menu]="userMenu">
+            <novo-icon>person</novo-icon>
+          </button>
+          <!-- Menu Template -->
+          <novo-menu #userMenu>
+            <ng-template menuItem>
+              <span translate>Logged in as <b>User</b></span>
+            </ng-template>
+            <ng-template menuItem>
+              <novo-icon>edit</novo-icon>
+              <span>Logout</span>
+            </ng-template>
+          </novo-menu>
+        </utils>
+        <novo-icon>bull</novo-icon>
+        <div novo-title>Application Name</div>
+      </novo-header>
+      <nav>
+        <novo-list theme="navigation" direction="vertical">
+          <novo-divider></novo-divider>
+          <novo-list-item><a>Features</a></novo-list-item>
+          <a list-item>Users</a>
+          <button list-item>Corporations</button>
+          <novo-list-item>Home</novo-list-item>
+          <novo-list-item>About</novo-list-item>
+        </novo-list>
+      </nav>
+    </novo-sidenav>
+    <novo-layout-content>
+      <novo-header theme="white">
+        <div novo-title>
+          <button theme="icon" (click)="sidenav.toggle()" fxHide.gt-sm>
+            <novo-icon>menu</novo-icon>
+          </button>
+          <span>Application Content</span>
+        </div>
+      </novo-header>
+      <div>
+        SIDENAV CONTENT
+        <novo-label>Is Mobile?</novo-label>
+        <novo-switch [(ngModel)]="isMobile"></novo-switch>
+      </div>
+    </novo-layout-content>
+  </novo-layout-container>
+</div>

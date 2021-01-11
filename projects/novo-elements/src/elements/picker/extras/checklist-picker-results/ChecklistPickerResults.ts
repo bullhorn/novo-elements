@@ -1,11 +1,11 @@
 // NG2
-import { Component, ElementRef, ChangeDetectorRef } from '@angular/core';
-// APP
-import { BasePickerResults } from '../base-picker-results/BasePickerResults';
-import { Helpers } from '../../../../utils/Helpers';
-import { NovoLabelService } from '../../../../services/novo-label-service';
+import { ChangeDetectorRef, Component, ElementRef } from '@angular/core';
 // Vendor
 import { from, Observable } from 'rxjs';
+import { NovoLabelService } from '../../../../services/novo-label-service';
+import { Helpers } from '../../../../utils/Helpers';
+// APP
+import { BasePickerResults } from '../base-picker-results/BasePickerResults';
 
 /**
  * @description This is the actual list of matches that gets injected into the DOM.
@@ -86,9 +86,7 @@ export class ChecklistPickerResults extends BasePickerResults {
     if (this.term && matches) {
       this.filteredMatches = matches.map((section) => {
         const items = section.originalData.filter((match) => {
-          return ~String(match.label)
-            .toLowerCase()
-            .indexOf(this.term.toLowerCase());
+          return ~String(match.label).toLowerCase().indexOf(this.term.toLowerCase());
         });
         section.data = items;
         return section;

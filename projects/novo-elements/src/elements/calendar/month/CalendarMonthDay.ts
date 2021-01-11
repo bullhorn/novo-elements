@@ -1,5 +1,5 @@
-import { Component, Input, Output, EventEmitter, TemplateRef } from '@angular/core';
-import { MonthViewDay, CalendarEvent, CalendarEventResponse } from '../../../utils/calendar-utils/CalendarUtils';
+import { Component, EventEmitter, Input, Output, TemplateRef } from '@angular/core';
+import { CalendarEvent, CalendarEventResponse, MonthViewDay } from '../../../utils/calendar-utils/CalendarUtils';
 
 @Component({
   selector: 'novo-calendar-month-day',
@@ -7,16 +7,17 @@ import { MonthViewDay, CalendarEvent, CalendarEventResponse } from '../../../uti
     <ng-template #defaultTemplate>
       <div class="calendar-day-top">
         <span class="calendar-day-badge" *ngIf="day.badgeTotal > 0">{{ day.badgeTotal }}</span>
-        <span class="calendar-day-number">{{ day.date | dayofmonth:locale }}</span>
+        <span class="calendar-day-number">{{ day.date | dayofmonth: locale }}</span>
       </div>
       <div class="calendar-events">
         <div
           class="calendar-event"
-          *ngFor="let type of day.events | groupBy : 'type'"
+          *ngFor="let type of day.events | groupBy: 'type'"
           [style.backgroundColor]="type?.value[0]?.color.primary"
           [ngClass]="type?.value[0]?.cssClass"
-          (click)="$event.stopPropagation(); eventClicked.emit({event:type?.value[0]})">
-          {{type?.value.length}}
+          (click)="$event.stopPropagation(); eventClicked.emit({ event: type?.value[0] })"
+        >
+          {{ type?.value.length }}
         </div>
       </div>
     </ng-template>
@@ -30,7 +31,8 @@ import { MonthViewDay, CalendarEvent, CalendarEventResponse } from '../../../uti
         accepted: accepted,
         rejected: rejected,
         maybes: maybes
-      }">
+      }"
+    >
     </ng-template>
   `,
   host: {

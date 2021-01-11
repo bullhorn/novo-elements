@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NovoTableConfig, ArrayCollection, PercentageCell } from 'novo-elements';
+import { ArrayCollection, PercentageCell } from 'novo-elements';
 
 /**
  * @title Editable Table Example

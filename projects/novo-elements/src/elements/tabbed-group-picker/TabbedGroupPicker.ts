@@ -1,5 +1,15 @@
 import { CdkScrollable } from '@angular/cdk/scrolling';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { NovoLabelService } from '../../services/novo-label-service';
@@ -33,7 +43,7 @@ export type TabbedGroupPickerQuickSelect = {
   label: string;
   selected?: boolean;
   childTypeName?: string;
-  children?: (({ selected?: boolean } & { [key: string]: any }) | (number))[];
+  children?: (({ selected?: boolean } & { [key: string]: any }) | number)[];
   all?: boolean;
 };
 
@@ -74,8 +84,7 @@ export class NovoTabbedGroupPickerElement implements OnDestroy, OnInit {
   scrollViewportHeight: number = 351;
   virtualScrollItemSize: number = 39;
 
-  constructor(public labelService: NovoLabelService,
-    private ref: ChangeDetectorRef) { }
+  constructor(public labelService: NovoLabelService, private ref: ChangeDetectorRef) {}
 
   get displayTab(): TabbedGroupPickerTab {
     return this.displayTabs[this.displayTabIndex];
@@ -206,7 +215,9 @@ export class NovoTabbedGroupPickerElement implements OnDestroy, OnInit {
   onDropdownToggle(event) {
     if (event) {
       this.scrollViewportHeight = this.getPixelHeight(this.scrollableInstance.getElementRef().nativeElement);
-      this.virtualScrollItemSize = this.getPixelHeight(this.scrollableInstance.getElementRef().nativeElement.querySelector('novo-list-item'));
+      this.virtualScrollItemSize = this.getPixelHeight(
+        this.scrollableInstance.getElementRef().nativeElement.querySelector('novo-list-item'),
+      );
     }
   }
 
@@ -247,12 +258,12 @@ export class NovoTabbedGroupPickerElement implements OnDestroy, OnInit {
     this.showClearAll = itemWasJustSelected
       ? true
       : this.tabs.some((tab) => {
-        if ((tab as ParentTab).childTypeName) {
-          return tab.data.some(({ selected, indeterminate }) => selected || indeterminate);
-        } else {
-          return tab.data.some(({ selected }) => selected);
-        }
-      });
+          if ((tab as ParentTab).childTypeName) {
+            return tab.data.some(({ selected, indeterminate }) => selected || indeterminate);
+          } else {
+            return tab.data.some(({ selected }) => selected);
+          }
+        });
   }
 
   updateParentsAndQuickSelect(): void {

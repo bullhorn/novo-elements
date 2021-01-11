@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 // Vendor
-import { FormUtils, CheckboxControl, FieldInteractionApi, SelectControl, PickerControl } from 'novo-elements';
-import { map } from 'rxjs/operators';
+import { CheckboxControl, FieldInteractionApi, FormUtils, PickerControl, SelectControl } from 'novo-elements';
 
 /**
  * @title Fi Modify Options Example
@@ -48,7 +47,7 @@ export class FiModifyOptionsExample {
               format: '$name $test',
               optionsUrl: 'http://novo-elements-mock.getsandbox.com/users',
             },
-            function(result) {
+            function (result) {
               result.test = 'Built with Options URL!';
               return result;
             },
@@ -65,7 +64,7 @@ export class FiModifyOptionsExample {
                 return 'http://novo-elements-mock.getsandbox.com/users';
               },
             },
-            function(result) {
+            function (result) {
               result.test = 'Built with Options URL Builder!';
               return result;
             },
@@ -77,11 +76,11 @@ export class FiModifyOptionsExample {
           API.modifyPickerConfig('picker', {
             format: '$name $test',
             optionsPromise(query, http) {
-              return new Promise(function(resolve, reject) {
+              return new Promise(function (resolve, reject) {
                 if (query && query.length) {
                   http
                     .get('http://novo-elements-mock.getsandbox.com/users')
-                    .map(function(results: any[]) {
+                    .map(function (results: any[]) {
                       return results.map((result) => {
                         result.test = 'Built with Options Promise';
                         return result;

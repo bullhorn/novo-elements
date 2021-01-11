@@ -143,9 +143,10 @@ export class StackblitzWriter {
    * @param prependApp whether to prepend the 'app' prefix to the path
    */
   _readFile(form: HTMLFormElement, data: ExampleData, filename: string, path: string, prependApp = true): void {
-    this._http
-      .get(path + filename, { responseType: 'text' })
-      .subscribe((response) => this._addFileToForm(form, data, response, filename, path, prependApp), (error) => console.log(error));
+    this._http.get(path + filename, { responseType: 'text' }).subscribe(
+      (response) => this._addFileToForm(form, data, response, filename, path, prependApp),
+      (error) => console.log(error),
+    );
   }
 
   /**

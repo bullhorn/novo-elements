@@ -1,6 +1,5 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { NgModule } from '@angular/core';
 import { NovoTemplate } from './novo-template/novo-template.directive';
 
 @NgModule({

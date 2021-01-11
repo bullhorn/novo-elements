@@ -1,5 +1,16 @@
 // Angular
 import {
+  ConnectedPositionStrategy,
+  HorizontalConnectionPos,
+  Overlay,
+  OverlayConfig,
+  OverlayRef,
+  ScrollStrategy,
+  VerticalConnectionPos,
+} from '@angular/cdk/overlay';
+import { TemplatePortal } from '@angular/cdk/portal';
+import { DOCUMENT } from '@angular/common';
+import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
@@ -15,19 +26,8 @@ import {
   ViewChild,
   ViewContainerRef,
 } from '@angular/core';
-import {
-  ConnectedPositionStrategy,
-  HorizontalConnectionPos,
-  Overlay,
-  OverlayConfig,
-  OverlayRef,
-  ScrollStrategy,
-  VerticalConnectionPos,
-} from '@angular/cdk/overlay';
-import { TemplatePortal } from '@angular/cdk/portal';
-import { DOCUMENT } from '@angular/common';
 // Vendor
-import { Observable, Subscription, of as observableOf, merge, fromEvent } from 'rxjs';
+import { fromEvent, merge, Observable, of as observableOf, Subscription } from 'rxjs';
 import { filter, first, switchMap } from 'rxjs/operators';
 
 @Component({
@@ -160,14 +160,16 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
       return observableOf();
     }
 
-    return merge(fromEvent(this.document, 'mousedown'), fromEvent(this.document, 'touchend')).pipe(
+    return merge(fromEvent(this.document, 'mouseup'), fromEvent(this.document, 'touchend')).pipe(
       filter((event: MouseEvent | TouchEvent) => {
         const clickTarget: HTMLElement = event.target as HTMLElement;
         const clicked: boolean =
           this.panelOpen &&
           clickTarget !== this.getConnectedElement().nativeElement &&
           !this.getConnectedElement().nativeElement.contains(clickTarget) &&
-          (!!this.overlayRef && !this.overlayRef.overlayElement.contains(clickTarget));
+          !!this.overlayRef &&
+          !this.overlayRef.overlayElement.contains(clickTarget);
+        // &&!Array.from(document.querySelectorAll('.cdk-overlay-container')).some((el) => el.contains(clickTarget));
         if (this.panelOpen && !!this.overlayRef && this.overlayRef.overlayElement.contains(clickTarget) && this.closeOnSelect) {
           this.select.emit(event);
         }

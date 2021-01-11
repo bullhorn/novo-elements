@@ -1,18 +1,6 @@
 import { Component } from '@angular/core';
 // Vendor
-import {
-  FormUtils,
-  NovoFormGroup,
-  TextBoxControl,
-  CheckboxControl,
-  FieldInteractionApi,
-  SelectControl,
-  PickerControl,
-  DateTimeControl,
-  TilesControl,
-} from 'novo-elements';
-import { map } from 'rxjs/operators';
-import { MockMetaHeaders } from '../MockMeta';
+import { CheckboxControl, FieldInteractionApi, FormUtils, TextBoxControl } from 'novo-elements';
 
 /**
  * @title Fi Messaging Example
@@ -39,7 +27,7 @@ export class FiMessagingExample {
         API.displayTip('tip', API.getValue('tip'), 'info', true, sanitize);
       } else if (API.getActiveKey() === 'prompt') {
         API.promptUser(API.getActiveKey(), ['Update Fee Arrangement from Selected Company', 'Update DateLastModified to right now!']).then(
-          function(result) {
+          function (result) {
             if (result) {
               console.log('PERFORM'); // tslint:disable-line
             } else {

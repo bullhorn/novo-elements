@@ -316,15 +316,13 @@ export function getWeekView({
       endsAfterWeek: (entry.event.end || entry.event.start) > endOfViewWeek,
       top: 0,
     }))
-    .sort(
-      (itemA, itemB): number => {
-        const startSecondsDiff: number = dateFns.differenceInSeconds(itemA.event.start, itemB.event.start);
-        if (startSecondsDiff === 0) {
-          return dateFns.differenceInSeconds(itemB.event.end || itemB.event.start, itemA.event.end || itemA.event.start);
-        }
-        return startSecondsDiff;
-      },
-    )
+    .sort((itemA, itemB): number => {
+      const startSecondsDiff: number = dateFns.differenceInSeconds(itemA.event.start, itemB.event.start);
+      if (startSecondsDiff === 0) {
+        return dateFns.differenceInSeconds(itemB.event.end || itemB.event.start, itemA.event.end || itemA.event.start);
+      }
+      return startSecondsDiff;
+    })
     .map((entry: WeekViewEvent) => {
       const startOfView: Date = dateFns.setMinutes(dateFns.setHours(dateFns.startOfDay(entry.event.start), dayStart.hour), dayStart.minute);
       const endOfView: Date = dateFns.setMinutes(

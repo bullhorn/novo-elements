@@ -66,7 +66,7 @@ popover-content {
       border-top-color: rgba(0, 0, 0, 0.1);
       bottom: -9px;
       &:after {
-        content: ' ';
+        content: " ";
         bottom: 1px;
         margin-left: -10px;
         border-bottom-width: 0;
@@ -88,7 +88,7 @@ popover-content {
       border-left-width: 0;
       border-right-color: rgba(0, 0, 0, 0.1);
       &:after {
-        content: ' ';
+        content: " ";
         left: 1px;
         bottom: -10px;
         border-left-width: 0;
@@ -110,7 +110,7 @@ popover-content {
       border-bottom-color: rgba(0, 0, 0, 0.1);
       top: -9px;
       &:after {
-        content: ' ';
+        content: " ";
         top: 1px;
         margin-left: -10px;
         border-top-width: 0;
@@ -132,7 +132,7 @@ popover-content {
       border-right-width: 0;
       border-left-color: rgba(0, 0, 0, 0.1);
       &:after {
-        content: ' ';
+        content: " ";
         right: 1px;
         border-right-width: 0;
         border-left-color: #fff;
@@ -162,7 +162,7 @@ popover-content {
     }
     &:after {
       border-width: 10px;
-      content: '';
+      content: "";
     }
   }
   .popover-title {

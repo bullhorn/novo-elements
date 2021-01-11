@@ -1,6 +1,6 @@
-import { Directive, Input } from '@angular/core';
-import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { CdkAccordion } from '@angular/cdk/accordion';
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import { Directive, Input } from '@angular/core';
 
 /** NovoAccordion's display modes. */
 export type NovoAccordionDisplayMode = 'default' | 'flat';

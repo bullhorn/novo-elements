@@ -1,8 +1,8 @@
 // NG2
-import { TestBed, async } from '@angular/core/testing';
+import { async, TestBed } from '@angular/core/testing';
+import { NovoLabelService } from '../../services/novo-label-service';
 // App
 import { NovoDatePickerElement } from './DatePicker';
-import { NovoLabelService } from '../../services/novo-label-service';
 
 xdescribe('Elements: NovoDatePickerElement', () => {
   let fixture;

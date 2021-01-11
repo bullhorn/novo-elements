@@ -1,5 +1,5 @@
 // APP
-import { Helpers, binarySearch } from './Helpers';
+import { binarySearch, Helpers } from './Helpers';
 
 describe('Utils: Helpers', () => {
   xdescribe('Method: swallowEvent(event)', () => {

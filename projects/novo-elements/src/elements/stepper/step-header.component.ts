@@ -1,8 +1,8 @@
 import { FocusMonitor } from '@angular/cdk/a11y';
 import { coerceBooleanProperty, coerceNumberProperty } from '@angular/cdk/coercion';
+import { CdkStepHeader } from '@angular/cdk/stepper';
 import { ChangeDetectionStrategy, Component, ElementRef, Input, OnDestroy, TemplateRef } from '@angular/core';
 import { NovoStepLabel } from './step-label.component';
-import { CdkStepHeader } from '@angular/cdk/stepper';
 
 @Component({
   selector: 'novo-step-header',

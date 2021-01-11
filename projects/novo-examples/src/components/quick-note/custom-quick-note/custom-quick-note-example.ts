@@ -1,8 +1,14 @@
 import { Component } from '@angular/core';
 
 const DATA = {
-  tags: [{ id: 1, name: 'OH YA!', test: 'TWO' }, { id: 2, name: 'TAGGING!', test: 'ONE' }],
-  references: [{ id: 1, title: 'Awesome Reference' }, { id: 2, title: 'Angular2' }],
+  tags: [
+    { id: 1, name: 'OH YA!', test: 'TWO' },
+    { id: 2, name: 'TAGGING!', test: 'ONE' },
+  ],
+  references: [
+    { id: 1, title: 'Awesome Reference' },
+    { id: 2, title: 'Angular2' },
+  ],
 };
 
 /**

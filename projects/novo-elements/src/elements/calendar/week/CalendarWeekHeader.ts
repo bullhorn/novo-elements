@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, TemplateRef } from '@angular/core';
+import { Component, EventEmitter, Input, Output, TemplateRef } from '@angular/core';
 import { CalendarEvent, WeekDay } from '../../../utils/calendar-utils/CalendarUtils';
 
 @Component({
@@ -14,19 +14,22 @@ import { CalendarEvent, WeekDay } from '../../../utils/calendar-utils/CalendarUt
           [class.cal-future]="day.isFuture"
           [class.cal-weekend]="day.isWeekend"
           [class.cal-drag-over]="day.dragOver"
-          (click)="dayClicked.emit({date: day.date})"
+          (click)="dayClicked.emit({ date: day.date })"
           mwlDroppable
           (dragEnter)="day.dragOver = true"
           (dragLeave)="day.dragOver = false"
-          (drop)="day.dragOver = false; eventDropped.emit({event: $event.dropData.event, newStart: day.date})">
-          <b>{{ day.date | weekday:locale:'long'}}</b><br>
-          <span>{{ day.date | monthday:locale }}</span>
+          (drop)="day.dragOver = false; eventDropped.emit({ event: $event.dropData.event, newStart: day.date })"
+        >
+          <b>{{ day.date | weekday: locale:'long' }}</b
+          ><br />
+          <span>{{ day.date | monthday: locale }}</span>
         </div>
       </div>
     </ng-template>
     <ng-template
       [ngTemplateOutlet]="customTemplate || defaultTemplate"
-      [ngTemplateOutletContext]="{days: days, locale: locale, dayClicked: dayClicked, eventDropped: eventDropped}">
+      [ngTemplateOutletContext]="{ days: days, locale: locale, dayClicked: dayClicked, eventDropped: eventDropped }"
+    >
     </ng-template>
   `,
 })

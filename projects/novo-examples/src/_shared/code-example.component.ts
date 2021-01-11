@@ -1,26 +1,25 @@
 // NG2
-import { Component, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { ComponentPortal } from '@angular/cdk/portal';
+import { Component, Input } from '@angular/core';
 import { EXAMPLE_COMPONENTS, LiveExample } from '../examples.module';
 
 @Component({
   selector: 'code-example',
   template: `
-      <div class="example">
-        <header theme="white" [condensed]="true">
-          <h4 novo-title>{{exampleData.title}}</h4>
-          <utils>
-            <button theme="icon" icon="book" (click)="toggleSourceView()"></button>
-            <stackblitz-button [example]="example"></stackblitz-button>
-          </utils>
-        </header>
-        <div class="example-container">
-          <ng-template [cdkPortalOutlet]="selectedPortal"></ng-template>
-        </div>
-        <code-snippet [example]="example" *ngIf="showSource"></code-snippet>
+    <div class="example">
+      <header theme="white" [condensed]="true">
+        <h4 novo-title>{{ exampleData.title }}</h4>
+        <utils>
+          <button theme="icon" icon="book" (click)="toggleSourceView()"></button>
+          <stackblitz-button [example]="example"></stackblitz-button>
+        </utils>
+      </header>
+      <div class="example-container">
+        <ng-template [cdkPortalOutlet]="selectedPortal"></ng-template>
       </div>
-    `,
+      <code-snippet [example]="example" *ngIf="showSource"></code-snippet>
+    </div>
+  `,
   // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CodeExampleComponent {

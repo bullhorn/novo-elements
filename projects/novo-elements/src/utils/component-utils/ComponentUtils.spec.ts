@@ -1,7 +1,7 @@
 // APP
-import { ComponentUtils } from './ComponentUtils';
 import { ComponentFactoryResolver } from '@angular/core';
 import { async } from '@angular/core/testing';
+import { ComponentUtils } from './ComponentUtils';
 
 describe('Utils: ComponentUtils', () => {
   let service: ComponentUtils;

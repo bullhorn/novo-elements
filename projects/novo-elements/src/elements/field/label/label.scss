@@ -1,0 +1,13 @@
+@import "../../../styles/global/variables.scss";
+
+:host {
+  display: flex;
+  color: $dark;
+  font-size: 0.9em;
+  flex: 1;
+  font-weight: 500;
+  transition: 0.2s ease-out;
+  text-transform: uppercase;
+  word-break: word-break;
+  overflow-wrap: break-word;
+}

@@ -1,14 +1,14 @@
 // NG2
-import { Component, EventEmitter, Input, Output, forwardRef, ElementRef, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
-import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import { Component, ElementRef, EventEmitter, forwardRef, Input, OnInit, Output, ViewChild, ViewContainerRef } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 // Vendor
 import { ReplaySubject } from 'rxjs';
-import { coerceBooleanProperty } from '@angular/cdk/coercion';
-// APP
-import { KeyCodes } from '../../utils/key-codes/KeyCodes';
-import { Helpers } from '../../utils/Helpers';
 import { NovoLabelService } from '../../services/novo-label-service';
 import { ComponentUtils } from '../../utils/component-utils/ComponentUtils';
+import { Helpers } from '../../utils/Helpers';
+// APP
+import { KeyCodes } from '../../utils/key-codes/KeyCodes';
 
 // Value accessor for the component (supports ngModel)
 const CHIPS_VALUE_ACCESSOR = {
@@ -18,101 +18,48 @@ const CHIPS_VALUE_ACCESSOR = {
 };
 
 @Component({
-  selector: 'chip,novo-chip',
-  template: `
-        <span (click)="onSelect($event)" (mouseenter)="onSelect($event)" (mouseleave)="onDeselect($event)" [ngClass]="_type">
-            <i *ngIf="_type" class="bhi-circle"></i>
-            <span><ng-content></ng-content></span>
-        </span>
-        <i class="bhi-close" *ngIf="!disabled" (click)="onRemove($event)"></i>
-    `,
-})
-export class NovoChipElement {
-  @Input()
-  set type(type: string) {
-    this._type = type ? type.toLowerCase() : null;
-  }
-
-  @Input()
-  disabled: boolean = false;
-
-  @Output()
-  select: EventEmitter<any> = new EventEmitter();
-  @Output()
-  remove: EventEmitter<any> = new EventEmitter();
-  @Output()
-  deselect: EventEmitter<any> = new EventEmitter();
-
-  entity: string;
-  _type: string;
-
-  onRemove(e) {
-    if (e) {
-      e.stopPropagation();
-      e.preventDefault();
-    }
-    this.remove.emit(e);
-    return false;
-  }
-
-  onSelect(e) {
-    if (e) {
-      e.stopPropagation();
-      e.preventDefault();
-    }
-    this.select.emit(e);
-    return false;
-  }
-
-  onDeselect(e) {
-    if (e) {
-      e.stopPropagation();
-      e.preventDefault();
-    }
-    this.deselect.emit(e);
-    return false;
-  }
-}
-
-@Component({
   selector: 'chips,novo-chips',
   providers: [CHIPS_VALUE_ACCESSOR],
   template: `
-        <div class="novo-chip-container">
-          <novo-chip
-              *ngFor="let item of _items | async"
-              [type]="type || item?.value?.searchEntity"
-              [class.selected]="item == selected"
-              [disabled]="disablePickerInput"
-              (remove)="remove($event, item)"
-              (select)="select($event, item)"
-              (deselect)="deselect($event, item)">
-              {{ item.label }}
-          </novo-chip>
-        </div>
-        <div class="chip-input-container" *ngIf="!maxlength || (maxlength && items.length < maxlength)">
-            <novo-picker
-                clearValueOnSelect="true"
-                [closeOnSelect]="closeOnSelect"
-                [config]="source"
-                [disablePickerInput]="disablePickerInput"
-                [placeholder]="placeholder"
-                [(ngModel)]="itemToAdd"
-                (select)="add($event)"
-                (keydown)="onKeyDown($event)"
-                (focus)="onFocus($event)"
-                (typing)="onTyping($event)"
-                (blur)="onTouched($event)"
-                [selected]="items"
-                [overrideElement]="element">
-            </novo-picker>
-        </div>
-        <div class="preview-container">
-            <span #preview></span>
-        </div>
-        <i class="bhi-search" [class.has-value]="items.length" *ngIf="!disablePickerInput"></i>
-        <label class="clear-all" *ngIf="items.length && !disablePickerInput" (click)="clearValue()">{{ labels.clearAll }} <i class="bhi-times"></i></label>
-   `,
+    <div class="novo-chip-container">
+      <novo-chip
+        *ngFor="let item of _items | async"
+        [type]="type || item?.value?.searchEntity"
+        [class.selected]="item == selected"
+        [disabled]="disablePickerInput"
+        (remove)="remove($event, item)"
+        (select)="select($event, item)"
+        (deselect)="deselect($event, item)"
+      >
+        {{ item.label }}
+      </novo-chip>
+    </div>
+    <div class="chip-input-container" *ngIf="!maxlength || (maxlength && items.length < maxlength)">
+      <novo-picker
+        clearValueOnSelect="true"
+        [closeOnSelect]="closeOnSelect"
+        [config]="source"
+        [disablePickerInput]="disablePickerInput"
+        [placeholder]="placeholder"
+        [(ngModel)]="itemToAdd"
+        (select)="add($event)"
+        (keydown)="onKeyDown($event)"
+        (focus)="onFocus($event)"
+        (typing)="onTyping($event)"
+        (blur)="onTouched($event)"
+        [selected]="items"
+        [overrideElement]="element"
+      >
+      </novo-picker>
+    </div>
+    <div class="preview-container">
+      <span #preview></span>
+    </div>
+    <i class="bhi-search" [class.has-value]="items.length" *ngIf="!disablePickerInput"></i>
+    <label class="clear-all" *ngIf="items.length && !disablePickerInput" (click)="clearValue()"
+      >{{ labels.clearAll }} <i class="bhi-times"></i
+    ></label>
+  `,
   host: {
     '[class.with-value]': 'items.length > 0',
     '[class.disabled]': 'disablePickerInput',
@@ -347,6 +294,8 @@ export class NovoChipsElement implements OnInit, ControlValueAccessor {
   }
 
   /**
+   * @name showPreview
+   *
    * @description This method creates an instance of the preview (called popup) and adds all the bindings to that
    * instance. Will reuse the popup or create a new one if it does not already exist. Will only work if there is
    * a previewTemplate given in the config.
@@ -361,6 +310,8 @@ export class NovoChipsElement implements OnInit, ControlValueAccessor {
   }
 
   /**
+   * @name hidePreview
+   *
    * @description - This method deletes the preview popup from the DOM.
    */
   hidePreview() {

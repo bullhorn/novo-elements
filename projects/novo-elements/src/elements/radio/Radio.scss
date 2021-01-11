@@ -1,30 +1,47 @@
 novo-radio-group {
   display: flex;
+
+  &.novo-radio-group-appearance-horizontal {
+    novo-radio:not(:last-child) {
+      .novo-radio-button-label {
+        margin-right: 1rem;
+      }
+    }
+  }
+
+  // &.novo-radio-group-appearance-vertical {
+  // }
+
   > novo-radio {
     margin: 0;
     button {
+      pointer-events: none;
       border-radius: 0 !important;
       &.unchecked {
         opacity: 0.5;
       }
-      &[theme='icon'] i {
+      &[theme="icon"] {
         margin-right: 0;
+        border: 1px solid $positive;
       }
     }
     &:first-child {
       button {
-        border-top-left-radius: 3px;
-        border-bottom-left-radius: 3px;
+        border-top-left-radius: 3px !important;
+        border-bottom-left-radius: 3px !important;
+        &[theme="icon"] {
+          border-right-width: 0px !important;
+        }
       }
     }
     &:last-child {
       button {
-        border-top-right-radius: 3px;
-        border-bottom-right-radius: 3px;
+        border-top-right-radius: 3px !important;
+        border-bottom-right-radius: 3px !important;
         border-right-width: 1px !important;
         border-right-style: solid !important;
-        &[theme='icon'] {
-          border-right-width: 0px !important;
+        &[theme="icon"] {
+          border-left-width: 0px !important;
         }
       }
     }
@@ -80,15 +97,13 @@ novo-radio {
     }
   }
   button[theme].has-icon {
-    opacity: 0.7;
     transition: all 100ms ease-in-out;
-    &:hover {
-      opacity: 1;
-    }
+    color: $positive;
+    background: $white;
+    opacity: 1;
     &.checked {
       color: $white;
       background: $positive;
-      opacity: 1;
     }
   }
 }

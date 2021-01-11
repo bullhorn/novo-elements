@@ -1,30 +1,28 @@
-import {
-  ElementRef,
-  Input,
-  Renderer2,
-  HostBinding,
-  Component,
-  OnInit,
-  OnDestroy,
-  ChangeDetectorRef,
-  ChangeDetectionStrategy,
-} from '@angular/core';
 import { CdkCell, CdkColumnDef } from '@angular/cdk/table';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  HostBinding,
+  Input,
+  OnDestroy,
+  OnInit,
+  Renderer2,
+} from '@angular/core';
 import { Subscription } from 'rxjs';
-
 import { NovoDataTable } from '../data-table.component';
 
 @Component({
   selector: 'novo-data-table-checkbox-cell',
   template: `
     <div class="data-table-checkbox" (click)="onClick()">
-      <input type="checkbox" [checked]="checked">
+      <input type="checkbox" [checked]="checked" />
       <label>
-        <i [class.bhi-checkbox-empty]="!checked"
-          [class.bhi-checkbox-filled]="checked"></i>
+        <i [class.bhi-checkbox-empty]="!checked" [class.bhi-checkbox-filled]="checked"></i>
       </label>
     </div>
-    `,
+  `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NovoDataTableCheckboxCell<T> extends CdkCell implements OnInit, OnDestroy {

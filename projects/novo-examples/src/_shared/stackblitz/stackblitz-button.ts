@@ -1,7 +1,7 @@
 import { Component, Input, NgModule } from '@angular/core';
-import { StackblitzWriter } from './stackblitz-writer';
 import { NovoElementsModule } from 'novo-elements';
 import { ExampleData } from '../../examples.data';
+import { StackblitzWriter } from './stackblitz-writer';
 
 @Component({
   selector: 'stackblitz-button',

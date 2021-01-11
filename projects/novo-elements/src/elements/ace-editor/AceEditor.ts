@@ -1,10 +1,11 @@
 // NG2
-import { Component, EventEmitter, Output, ElementRef, Input, forwardRef, OnInit, OnDestroy } from '@angular/core';
-import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
+import { Component, ElementRef, EventEmitter, forwardRef, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 // Vendor
+// organize-imports-ignore
 import 'brace/index';
-import 'brace/theme/chrome';
 import 'brace/mode/javascript';
+import 'brace/theme/chrome';
 import 'brace/ext/language_tools.js';
 // APP
 import { Helpers } from '../../utils/Helpers';
@@ -56,10 +57,10 @@ export class NovoAceEditor implements ControlValueAccessor, OnInit, OnDestroy {
   private oldText: string;
   private editor: any;
 
-  private onChange = (_: any) => { };
-  private onTouched = () => { };
+  private onChange = (_: any) => {};
+  private onTouched = () => {};
 
-  constructor(private elementRef: ElementRef) { }
+  constructor(private elementRef: ElementRef) {}
 
   ngOnDestroy() {
     if (this.editor) {

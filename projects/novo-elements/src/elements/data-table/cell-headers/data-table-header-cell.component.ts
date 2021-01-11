@@ -1,11 +1,33 @@
 import { CdkColumnDef } from '@angular/cdk/table';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, EventEmitter, HostBinding, HostListener, Input, OnDestroy, OnInit, Optional, Renderer2, TemplateRef, ViewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  EventEmitter,
+  HostBinding,
+  HostListener,
+  Input,
+  OnDestroy,
+  OnInit,
+  Optional,
+  Renderer2,
+  TemplateRef,
+  ViewChild,
+} from '@angular/core';
 import { fromEvent, Subscription } from 'rxjs';
 import { NovoLabelService } from '../../../services/novo-label-service';
 import { Helpers } from '../../../utils/Helpers';
 import { KeyCodes } from '../../../utils/key-codes/KeyCodes';
 import { NovoDropdownElement } from '../../dropdown/Dropdown';
-import { IDataTableChangeEvent, IDataTableColumn, IDataTableColumnFilterConfig, IDataTableColumnFilterOption, IDataTableColumnSortConfig, IDataTableSortFilter } from '../interfaces';
+import {
+  IDataTableChangeEvent,
+  IDataTableColumn,
+  IDataTableColumnFilterConfig,
+  IDataTableColumnFilterOption,
+  IDataTableColumnSortConfig,
+  IDataTableSortFilter,
+} from '../interfaces';
 import { NovoDataTableFilterUtils } from '../services/data-table-filter-utils';
 import { NovoDataTableSortFilter } from '../sort-filter/sort-filter.directive';
 import { DataTableState } from '../state/data-table-state.service';
@@ -310,9 +332,10 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
       this.multiSelectedOptions = this.filter ? [...this.filter] : [];
       if (this.config.filterConfig.options) {
         if (typeof this.config.filterConfig.options[0] === 'string') {
-          this.multiSelectedOptionIsHidden = (this.config.filterConfig.options as string[]).map(
-            (option: string): { option: string; hidden: boolean } => ({ option, hidden: false }),
-          );
+          this.multiSelectedOptionIsHidden = (this.config.filterConfig.options as string[]).map((option: string): {
+            option: string;
+            hidden: boolean;
+          } => ({ option, hidden: false }));
         } else {
           this.multiSelectedOptionIsHidden = (this.config.filterConfig.options as IDataTableColumnFilterOption[]).map(
             (option: IDataTableColumnFilterOption): { option: IDataTableColumnFilterOption; hidden: boolean } => ({
@@ -343,12 +366,7 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
     this.error = false;
     if (optionIndex > -1) {
       this.multiSelectedOptions.splice(optionIndex, 1);
-      if (
-        this.optionFilter &&
-        !this.getOptionText(option)
-          .toLowerCase()
-          .startsWith(this.optionFilter.toLowerCase())
-      ) {
+      if (this.optionFilter && !this.getOptionText(option).toLowerCase().startsWith(this.optionFilter.toLowerCase())) {
         this.multiSelectedOptionIsHidden[this.multiSelectedOptionIsHidden.findIndex((record) => record.option === option)].hidden = true;
       }
     } else {
@@ -385,9 +403,8 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
     this.multiSelectedOptionIsHidden.forEach((record) => {
       if (record.option) {
         record.hidden = !(
-          this.getOptionText(record.option)
-            .toLowerCase()
-            .startsWith(optionFilter.toLowerCase()) || this.isSelected(record.option, this.multiSelectedOptions)
+          this.getOptionText(record.option).toLowerCase().startsWith(optionFilter.toLowerCase()) ||
+          this.isSelected(record.option, this.multiSelectedOptions)
         );
       }
     });

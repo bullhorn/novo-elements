@@ -1,15 +1,15 @@
 // NG2
-import { TestBed, async } from '@angular/core/testing';
+import { async, TestBed } from '@angular/core/testing';
 // App
 import {
+  NovoItemAvatarElement,
+  NovoItemContentElement,
+  NovoItemDateElement,
+  NovoItemEndElement,
+  NovoItemHeaderElement,
+  NovoItemTitleElement,
   NovoListElement,
   NovoListItemElement,
-  NovoItemAvatarElement,
-  NovoItemTitleElement,
-  NovoItemHeaderElement,
-  NovoItemDateElement,
-  NovoItemContentElement,
-  NovoItemEndElement,
 } from './List';
 
 describe('Elements: NovoListElement', () => {

@@ -9,7 +9,7 @@ xdescribe('Element: Unless', () => {
   let component: Unless;
   let service: Unless;
 
-  beforeEach((() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [TestCmp, Unless],
       providers: [
@@ -27,7 +27,7 @@ xdescribe('Element: Unless', () => {
     }).compileComponents();
     fixture = TestBed.createComponent(TestCmp);
     component = fixture.debugElement.componentInstance;
-  }));
+  });
 
   beforeEach(inject([Unless], (_service) => {
     service = _service;

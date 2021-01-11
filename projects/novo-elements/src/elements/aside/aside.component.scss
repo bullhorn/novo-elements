@@ -1,0 +1,16 @@
+:host {
+  .aside-panel {
+    background-color: #fff;
+    height: 100vh;
+    width: 50%;
+    min-width: min-content;
+    max-width: 540px;
+    position: absolute;
+    top: 0;
+    right: 0px;
+    padding: 0;
+    display: flex;
+    justify-content: stretch;
+    align-items: stretch;
+  }
+}

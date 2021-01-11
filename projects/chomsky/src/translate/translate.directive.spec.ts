@@ -1,6 +1,5 @@
 import { SecurityContext } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-
 import { TranslateDirective } from './translate.directive';
 
 class MockDomSanitizer extends DomSanitizer {

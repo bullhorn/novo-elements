@@ -1,8 +1,7 @@
-import { Observable, Subject, of, from } from 'rxjs';
-
-import { Loader } from './loader';
-import { Formats, IFormatDefaults } from './formats';
+import { from, Observable, of, Subject } from 'rxjs';
 import { DictionaryManager } from './dictionary-manager';
+import { Formats, IFormatDefaults } from './formats';
+import { Loader } from './loader';
 import { mergeDeep } from './object-assign-deep';
 
 // Default formats
@@ -284,11 +283,11 @@ export class Chomsky {
     const overrides = {};
     if (translations && translations.hasOwnProperty('_defaults_')) {
       mergeDeep(overrides, translations._defaults_);
-      delete translations['_defaults_'];
+      delete translations._defaults_;
     }
     if (fallbackTranslations && fallbackTranslations.hasOwnProperty('_defaults_')) {
       mergeDeep(overrides, fallbackTranslations._defaults_);
-      delete translations['_defaults_'];
+      delete translations._defaults_;
     }
     this.formats.override(mergeDeep({}, FORMAT_DEFAULTS, overrides));
     // Add the translations to the DictionaryManager

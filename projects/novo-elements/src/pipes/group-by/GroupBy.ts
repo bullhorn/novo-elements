@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Helpers, can } from '../../utils/Helpers';
+import { can, Helpers } from '../../utils/Helpers';
 
 @Pipe({
   name: 'groupBy',

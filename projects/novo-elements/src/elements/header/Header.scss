@@ -1,11 +1,14 @@
-header[theme] {
+header[theme],
+novo-header {
+  display: block;
+
   & > section {
-    height: $header-height;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    padding: 8px;
+    padding: 1rem;
+
     i.header-icon {
       padding: 12px;
     }
@@ -20,7 +23,8 @@ header[theme] {
       padding: 0px 8px;
       max-width: 100%;
       h1 {
-        font-size: 1.7em;
+        font-size: 2em;
+        line-height: 1.5;
         margin: 0;
         padding: 0;
         display: inline-block;
@@ -54,7 +58,7 @@ header[theme] {
     }
   }
   @each $basic, $color in $all-colors {
-    &[theme='#{$basic}'] {
+    &[theme="#{$basic}"] {
       background: $color;
       color: #fff;
       & > section.primary {
@@ -62,9 +66,9 @@ header[theme] {
       }
     }
   }
-  &[theme='light'],
-  &[theme='off-white'],
-  &[theme='white'] {
+  &[theme="light"],
+  &[theme="off-white"],
+  &[theme="white"] {
     color: $dark;
   }
   & > main {
@@ -78,16 +82,15 @@ header[theme] {
   }
   &.condensed {
     > section {
-      padding: 0 1em;
-      height: $header-height;
+      padding: 0.2rem 1rem;
       i {
-        font-size: 1.2em;
+        font-size: 1.2rem;
       }
     }
     novo-icon > i {
-      font-size: 1.4em;
+      font-size: 1.4rem;
     }
-    button[theme][theme='icon'] {
+    button[theme][theme="icon"] {
       width: 30px !important;
       height: 30px !important;
       padding: 5px;

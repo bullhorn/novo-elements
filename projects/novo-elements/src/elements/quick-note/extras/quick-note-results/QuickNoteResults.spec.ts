@@ -1,10 +1,10 @@
 // NG2
-import { TestBed, async } from '@angular/core/testing';
+import { async, TestBed } from '@angular/core/testing';
+import { NovoLabelService } from '../../../../services/novo-label-service';
+import { NovoItemContentElement, NovoListElement, NovoListItemElement } from '../../../list/List';
+import { NovoLoadingElement } from '../../../loading/Loading';
 // App
 import { QuickNoteResults } from './QuickNoteResults';
-import { NovoLabelService } from '../../../../services/novo-label-service';
-import { NovoLoadingElement } from '../../../loading/Loading';
-import { NovoListElement, NovoListItemElement, NovoItemContentElement } from '../../../list/List';
 
 describe('Elements: QuickNoteResults', () => {
   describe('Extras: ', () => {

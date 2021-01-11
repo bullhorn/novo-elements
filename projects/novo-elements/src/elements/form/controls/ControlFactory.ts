@@ -1,3 +1,4 @@
+import { BaseControl } from './BaseControl';
 import {
   AddressControl,
   CheckboxControl,
@@ -17,7 +18,6 @@ import {
   TilesControl,
   TimeControl,
 } from './index';
-import { BaseControl } from './BaseControl';
 
 export class ControlFactory {
   static create(type: string, config: BaseControl): BaseControl {

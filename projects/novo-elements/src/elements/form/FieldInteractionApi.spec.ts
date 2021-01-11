@@ -1,20 +1,21 @@
-import { async, TestBed, inject } from '@angular/core/testing';
+import { OverlayModule } from '@angular/cdk/overlay';
 import { HttpClient, HttpHandler } from '@angular/common/http';
+import { async, inject, TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
-
-import { FieldInteractionApi } from './FieldInteractionApi';
-import { NovoToastService } from '../toast/ToastService';
-import { NovoModalService } from '../modal/ModalService';
-import { FormUtils } from '../../utils/form-utils/FormUtils';
 import { NovoLabelService } from '../../services/novo-label-service';
-import { ComponentUtils } from '../../utils/component-utils/ComponentUtils';
 import { OptionsService } from '../../services/options/OptionsService';
+import { ComponentUtils } from '../../utils/component-utils/ComponentUtils';
+import { FormUtils } from '../../utils/form-utils/FormUtils';
+import { NovoModalService } from '../modal/modal.service';
+import { NovoToastService } from '../toast/ToastService';
+import { FieldInteractionApi } from './FieldInteractionApi';
 import { ModifyPickerConfigArgs, OptionsFunction } from './FieldInteractionApiTypes';
 
 describe('FieldInteractionApi', () => {
   let service: FieldInteractionApi;
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [OverlayModule],
       providers: [
         {
           provide: FieldInteractionApi,
@@ -205,7 +206,7 @@ describe('FieldInteractionApi', () => {
     it('should return fieldset object when key exists', () => {
       const returnValue = service.getFieldSet('test');
       expect(returnValue).not.toBeNull();
-      expect(returnValue).toStrictEqual({ key: 'test'});
+      expect(returnValue).toStrictEqual({ key: 'test' });
     });
   });
 });

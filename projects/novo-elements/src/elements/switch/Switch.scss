@@ -9,7 +9,7 @@ $switch-thumb-size: 20px !default;
   .novo-switch-bar {
     background-color: lighten($light, 10%);
   } // Can make the checked version style different (same for now)
-  &[aria-checked='true'] {
+  &[aria-checked="true"] {
     .novo-switch-thumb {
       background-color: $thumb;
     }
@@ -27,7 +27,7 @@ novo-switch {
   cursor: pointer;
   outline: none;
   user-select: none;
-  @include ease('all', 'swift-ease-in-out');
+  @include ease("all", "swift-ease-in-out");
   * {
     box-sizing: border-box;
   }
@@ -68,7 +68,7 @@ novo-switch {
     transform: translate3d(0, 0, 0);
     z-index: 1;
   }
-  &[aria-checked='true'] .novo-switch-thumb-container {
+  &[aria-checked="true"] .novo-switch-thumb-container {
     transform: translate3d(100%, 0, 0);
   }
   .novo-switch-thumb {
@@ -96,7 +96,7 @@ novo-switch {
     .novo-switch-bar,
     .novo-switch-thumb,
     .novo-switch-thumb-container {
-      @include ease('all', 'swift-ease-in-out');
+      @include ease("all", "swift-ease-in-out");
       transition-property: transform, background-color;
     }
     .novo-switch-bar,
@@ -107,6 +107,7 @@ novo-switch {
   &[disabled] {
     opacity: 0.5;
     cursor: not-allowed;
+    pointer-events: none;
     .novo-switch-container {
       cursor: not-allowed;
     }
@@ -127,7 +128,7 @@ novo-switch {
   &.light {
     @include novo-switch-style(darken($light, 3%), $light);
   }
-  &[disabled] {
+  &[disabled]:not([aria-checked="true"]) {
     .novo-switch-thumb {
       background-color: darken($light, 20%);
     }

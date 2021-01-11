@@ -14,8 +14,11 @@ export class BasicSelectExample {
   public withNumbers: Array<any> = [
     { label: 'One', value: 1 },
     { label: 'Two', value: 2 },
+    { divider: true },
     { label: 'Zero', value: 0 },
     { label: 'Four', value: 4, readOnly: true },
+    { label: 'Five', divider: true },
+    { label: 'Six', value: 6 },
   ];
   public withNumbersValue: number = 4;
   public value: string = 'Bravo';

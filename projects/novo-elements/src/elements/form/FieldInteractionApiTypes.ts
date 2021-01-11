@@ -6,7 +6,8 @@ type OptionsFunctionConfig = {
   | { where: string; emptyPickerMessage?: string }
   | { optionsPromise: (query: string, http: CustomHttp, page?: number) => Promise<unknown[]> }
   | { optionsUrl: string }
-  | { optionsUrlBuilder: (query: string) => string });
+  | { optionsUrlBuilder: (query: string) => string }
+);
 
 export type ModifyPickerConfigArgs = { options: unknown[] } | { resultsTemplateType: ResultsTemplateType } | OptionsFunctionConfig;
 

@@ -1,0 +1,102 @@
+@import "../../styles/global/variables.scss";
+
+:host {
+  display: grid;
+  font-size: 1.1rem;
+
+  &.novo-field-appearance-horizontal {
+    grid-gap: 0rem 1rem;
+    grid-template-columns: 150px minmax(min-content, max-content);
+    grid-template-areas:
+      "label input"
+      ". messages";
+  }
+
+  &.novo-field-appearance-vertical {
+    grid-template-columns: minmax(min-content, max-content);
+    grid-template-rows: repeat(3, minmax(min-content, max-content));
+    grid-template-areas:
+      "label"
+      "input"
+      "messages";
+    width: min-content;
+  }
+
+  .novo-field-label {
+    grid-area: label;
+    display: grid;
+    align-items: flex-end;
+  }
+
+  &.novo-field-appearance-underlined {
+    .novo-field-input {
+      border-bottom: 1px solid lighten($dark, 45%) !important;
+    }
+    &:not(.novo-focused):hover {
+      .novo-field-input {
+        border-bottom: 1px solid $dark !important;
+      }
+    }
+    &.novo-focused {
+      .novo-field-input {
+        border-bottom: 1px solid $positive !important;
+      }
+    }
+    &.novo-field-invalid {
+      .novo-field-input {
+        border-bottom: 1px solid $negative !important;
+      }
+    }
+  }
+
+  &.novo-field-type-color {
+    .novo-field-input {
+      &::ng-deep .novo-input-element {
+        padding: 0;
+      }
+    }
+  }
+
+  .novo-field-input {
+    grid-area: input;
+    display: grid;
+    grid-template-columns: minmax(auto, max-content) 1fr minmax(auto, max-content);
+    font-size: 1.2rem;
+
+    &::ng-deep .novo-input-element {
+      border: none;
+      background-image: none;
+      background-color: transparent;
+      box-shadow: none;
+      padding: 0.4rem 0.2rem;
+      border-bottom: none !important;
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    .novo-field-prefix {
+      display: flex;
+      align-items: flex-end;
+    }
+
+    .novo-field-infix {
+      display: flex;
+      align-items: flex-end;
+      select {
+        width: 100%;
+      }
+    }
+
+    .novo-field-suffix {
+      display: flex;
+      align-items: flex-end;
+    }
+  }
+
+  .novo-field-messages {
+    grid-area: messages;
+    display: grid;
+  }
+}

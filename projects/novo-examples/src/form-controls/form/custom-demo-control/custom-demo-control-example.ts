@@ -6,8 +6,8 @@ import { Component, Input } from '@angular/core';
 @Component({
   selector: 'custom-demo-control-example',
   template: `<div [formGroup]="form">
-        My Custom Input <input [formControlName]="control.key" [id]="control.key" [type]="control.type" [placeholder]="control.placeholder">
-    </div>`,
+    My Custom Input <input [formControlName]="control.key" [id]="control.key" [type]="control.type" [placeholder]="control.placeholder" />
+  </div>`,
 })
 export class CustomDemoControlExample {
   @Input()

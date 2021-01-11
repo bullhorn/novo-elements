@@ -1,9 +1,10 @@
 // NG2
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 // APP
 import { NovoButtonModule } from '../button/Button.module';
-import { NovoRadioElement, NovoRadioGroup } from './Radio';
+import { NovoRadioElement } from './Radio';
+import { NovoRadioGroup } from './RadioGroup';
 
 @NgModule({
   imports: [CommonModule, NovoButtonModule],

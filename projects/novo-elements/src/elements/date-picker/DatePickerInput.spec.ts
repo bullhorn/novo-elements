@@ -1,10 +1,10 @@
 // NG2
-import { TestBed, async } from '@angular/core/testing';
-// App
-import { NovoDatePickerInputElement } from './DatePickerInput';
+import { async, TestBed } from '@angular/core/testing';
+import { DateFormatService } from '../../services/date-format/DateFormat';
 import { NovoLabelService } from '../../services/novo-label-service';
 import { NovoDatePickerModule } from './DatePicker.module';
-import { DateFormatService } from '../../services/date-format/DateFormat';
+// App
+import { NovoDatePickerInputElement } from './DatePickerInput';
 
 xdescribe('Elements: NovoDatePickerInputElement', () => {
   let fixture;

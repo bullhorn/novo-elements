@@ -1,11 +1,11 @@
 // NG2
-import { TestBed, async } from '@angular/core/testing';
-// App
-import { CardElement } from './Card';
+import { OverlayModule } from '@angular/cdk/overlay';
+import { async, TestBed } from '@angular/core/testing';
+import { NovoLabelService } from '../../services/novo-label-service';
 import { NovoLoadingElement } from '../loading/Loading';
 import { TooltipDirective } from '../tooltip/Tooltip.directive';
-import { NovoLabelService } from '../../services/novo-label-service';
-import { OverlayModule } from '@angular/cdk/overlay';
+// App
+import { CardElement } from './Card';
 
 describe('Elements: CardElement', () => {
   let fixture;

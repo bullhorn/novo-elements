@@ -12,14 +12,34 @@ interface Page {
 @Component({
   selector: 'novo-pagination',
   template: `
-        <h5 class="rows">{{label}}</h5>
-        <novo-select [options]="rowOptions" [placeholder]="labels.select" [(ngModel)]="itemsPerPage" (onSelect)="onPageSizeChanged($event)" data-automation-id="pager-select"></novo-select>
-        <span class="spacer"></span>
-        <ul class="pager" data-automation-id="pager">
-            <li class="page" (click)="selectPage(page-1)" [ngClass]="{'disabled': noPrevious()}"><i class="bhi-previous" data-automation-id="pager-previous"></i></li>
-            <li class="page" [ngClass]="{active: p.active}" [class.disabled]="disablePageSelection" *ngFor="let p of pages" (click)="selectPage(p.num, $event)">{{p.text}}</li>
-            <li class="page" (click)="selectPage(page+1)" [ngClass]="{'disabled': noNext()}"><i class="bhi-next" data-automation-id="pager-next"></i></li>
-        </ul>
+    <ng-container *ngIf="rowOptions.length > 1">
+      <h5 class="rows">{{ label }}</h5>
+      <novo-select
+        [options]="rowOptions"
+        [placeholder]="labels.select"
+        [(ngModel)]="itemsPerPage"
+        (onSelect)="onPageSizeChanged($event)"
+        data-automation-id="pager-select"
+      ></novo-select>
+      <span class="spacer"></span>
+    </ng-container>
+    <ul class="pager" data-automation-id="pager">
+      <li class="page" (click)="selectPage(page - 1)" [ngClass]="{ disabled: noPrevious() }">
+        <i class="bhi-previous" data-automation-id="pager-previous"></i>
+      </li>
+      <li
+        class="page"
+        [ngClass]="{ active: p.active }"
+        [class.disabled]="disablePageSelection"
+        *ngFor="let p of pages"
+        (click)="selectPage(p.num, $event)"
+      >
+        {{ p.text }}
+      </li>
+      <li class="page" (click)="selectPage(page + 1)" [ngClass]="{ disabled: noNext() }">
+        <i class="bhi-next" data-automation-id="pager-next"></i>
+      </li>
+    </ul>
   `,
 })
 export class Pagination implements OnInit, OnChanges {
@@ -52,7 +72,7 @@ export class Pagination implements OnInit, OnChanges {
   totalPages: number;
   pages: Array<Page>;
 
-  constructor(public labels: NovoLabelService) { }
+  constructor(public labels: NovoLabelService) {}
 
   ngOnInit() {
     this.label = this.label || this.labels.itemsPerPage;
@@ -66,7 +86,12 @@ export class Pagination implements OnInit, OnChanges {
   }
 
   getDefaultRowOptions() {
-    return [{ value: 10, label: '10' }, { value: 25, label: '25' }, { value: 50, label: '50' }, { value: 100, label: '100' }];
+    return [
+      { value: 10, label: '10' },
+      { value: 25, label: '25' },
+      { value: 50, label: '50' },
+      { value: 100, label: '100' },
+    ];
   }
 
   onPageSizeChanged(event) {
@@ -106,7 +131,7 @@ export class Pagination implements OnInit, OnChanges {
 
   // Create page object used in template
   makePage(num: number, text: string, isActive: boolean) {
-    return { num, text, active: isActive, } as Page;
+    return { num, text, active: isActive } as Page;
   }
 
   getPages(currentPage: number, totalPages: number) {

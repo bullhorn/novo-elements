@@ -1,0 +1,3 @@
+<div *ngFor="let year of years" (click)="onSelect($event, year)">
+  <div class="year" [class.selected]="_isSelected(year)" [attr.data-automation-id]="year">{{ year }}</div>
+</div>

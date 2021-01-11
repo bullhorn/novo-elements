@@ -1,5 +1,5 @@
 // NG2
-import { TestBed, async } from '@angular/core/testing';
+import { async, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 // App
 import { NovoCheckboxElement } from './Checkbox';

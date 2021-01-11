@@ -20,13 +20,7 @@ export class EnableDisableAllFieldsInFormExample {
 
   constructor(public formUtils: FormUtils) {
     // Updating form
-    this.controls = formUtils.toFieldSets(
-      MockMetaForForm,
-      '$ USD',
-      {},
-      { token: 'TOKEN', military: true },
-      {},
-    );
+    this.controls = formUtils.toFieldSets(MockMetaForForm, '$ USD', {}, { token: 'TOKEN', military: true }, {});
     formUtils.setInitialValuesFieldsets(this.controls, {
       select: 'disabledValue',
     });

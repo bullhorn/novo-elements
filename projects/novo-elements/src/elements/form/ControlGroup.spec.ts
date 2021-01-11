@@ -1,13 +1,14 @@
 // NG2
+import { OverlayModule } from '@angular/cdk/overlay';
 import { ChangeDetectorRef } from '@angular/core';
-import { TestBed, async } from '@angular/core/testing';
-import { FormBuilder, FormArray } from '@angular/forms';
+import { async, TestBed } from '@angular/core/testing';
+import { FormBuilder } from '@angular/forms';
+import { NovoLabelService } from '../../services/novo-label-service';
+import { OptionsService } from '../../services/options/OptionsService';
+import { FormUtils } from './../../utils/form-utils/FormUtils';
 // App
 import { NovoControlGroup } from './ControlGroup';
 import { NovoFormModule } from './Form.module';
-import { FormUtils } from './../../utils/form-utils/FormUtils';
-import { NovoLabelService } from '../../services/novo-label-service';
-import { OptionsService } from '../../services/options/OptionsService';
 
 describe('Elements: NovoControlGroup', () => {
   let fixture;
@@ -15,7 +16,7 @@ describe('Elements: NovoControlGroup', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [NovoFormModule],
+      imports: [NovoFormModule, OverlayModule],
       providers: [FormUtils, FormBuilder, ChangeDetectorRef, NovoLabelService, OptionsService],
     }).compileComponents();
     fixture = TestBed.createComponent(NovoControlGroup);
@@ -83,7 +84,11 @@ describe('Elements: NovoControlGroup', () => {
       spyOn(component.ref, 'markForCheck');
       spyOn(component.onRemove, 'emit');
       component.currentIndex = 3;
-      component.disabledArray = [{ edit: true, remove: false }, { edit: false, remove: false }, { edit: true, remove: true }];
+      component.disabledArray = [
+        { edit: true, remove: false },
+        { edit: false, remove: false },
+        { edit: true, remove: true },
+      ];
       component.form = {
         controls: {
           one: {
@@ -106,7 +111,10 @@ describe('Elements: NovoControlGroup', () => {
     });
     it('should update disabledArray', () => {
       component.removeControl(1);
-      expect(component.disabledArray).toEqual([{ edit: true, remove: false }, { edit: true, remove: true }]);
+      expect(component.disabledArray).toEqual([
+        { edit: true, remove: false },
+        { edit: true, remove: true },
+      ]);
     });
     it('should update currentIndex', () => {
       component.removeControl(1);

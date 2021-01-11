@@ -1,8 +1,8 @@
 // NG2
-import { TestBed, async } from '@angular/core/testing';
+import { async, TestBed } from '@angular/core/testing';
+import { NovoLabelService } from '../../services/novo-label-service';
 // App
 import { NovoTipWellElement } from './TipWell';
-import { NovoLabelService } from '../../services/novo-label-service';
 
 describe('Elements: NovoTipWellElement', () => {
   let fixture;

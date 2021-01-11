@@ -1,5 +1,5 @@
 // APP
-import { getCountries, getStates, getStateObjects } from './Countries';
+import { getCountries, getStateObjects, getStates } from './Countries';
 
 describe('Utils: Countries', () => {
   describe('Method: getCountries()', () => {

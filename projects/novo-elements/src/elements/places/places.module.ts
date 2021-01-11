@@ -12,4 +12,4 @@ import { GooglePlacesService } from './places.service';
   exports: [PlacesListComponent],
   providers: [GooglePlacesService],
 })
-export class GooglePlacesModule { }
+export class GooglePlacesModule {}

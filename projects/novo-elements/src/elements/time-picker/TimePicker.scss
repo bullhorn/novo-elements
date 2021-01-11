@@ -23,7 +23,7 @@ novo-time-picker-input {
     box-shadow: none;
     box-sizing: content-box;
     transition: all 300ms;
-    color: $light;
+    color: $dark;
 
     &:focus {
       border-bottom: 1px solid $ocean;
@@ -48,13 +48,13 @@ novo-time-picker {
   display: block;
   // width: 250px;
   // min-width: 250px;
+  width: min-content;
   overflow: hidden;
   border-radius: 4px;
   background-color: #fff;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15), 0 2px 7px rgba(0, 0, 0, 0.1);
   z-index: 999;
   .digital {
-    padding: 6.5px 0;
     background-color: $positive;
     display: flex;
     justify-content: center;
@@ -65,16 +65,21 @@ novo-time-picker {
         border-bottom: none;
       }
       .digital--inner {
+        flex: 1;
         .control-block {
           display: flex;
+          flex: 1;
           .digital--period {
             color: $positive;
             cursor: pointer;
             font-size: 1em;
             opacity: 0.6;
-            margin: 0 20px;
+            padding: 1rem;
+            flex: 1;
             &.active {
               opacity: 1;
+              background-color: $positive;
+              color: $white;
             }
           }
         }
@@ -102,7 +107,6 @@ novo-time-picker {
     font-size: 1em;
     opacity: 0.6;
     text-transform: uppercase;
-    margin-left: 5px;
     font-weight: 400;
     &.active {
       opacity: 1;
@@ -113,12 +117,27 @@ novo-time-picker {
     position: relative;
     height: 250px;
     width: 130px;
-    overflow-y: auto;
-    overflow-x: hidden;
+    display: flex;
+    flex-flow: row nowrap;
+
+    novo-list {
+      overflow-y: auto;
+      overflow-x: hidden;
+      height: 100%;
+      flex: 1;
+      scroll-snap-type: y mandatory;
+      -ms-overflow-style: none; /* Internet Explorer 10+ */
+      scrollbar-width: none; /* Firefox */
+      &::-webkit-scrollbar {
+        display: none; /* Safari and Chrome */
+      }
+    }
 
     novo-list-item {
       padding: 5px 16px;
       width: 130px;
+      scroll-snap-align: start;
+
       .list-item {
         line-height: 19px;
       }
@@ -128,8 +147,8 @@ novo-time-picker {
         color: darken($light, 55%);
       }
       &.active {
-        // border: 1px solid $positive;
-        color: $positive;
+        background-color: $positive;
+        color: $white;
         font-weight: 500;
       }
     }
@@ -171,7 +190,7 @@ novo-time-picker {
     transition: transform 100ms linear;
     z-index: 1;
     &:before {
-      content: ' ';
+      content: " ";
       width: 2px;
       top: 0;
       bottom: 0;
@@ -183,12 +202,12 @@ novo-time-picker {
       transform: rotate(90deg);
     }
     .analog--ball {
-      height: 37px;
-      width: 37px;
+      height: 3rem;
+      width: 3rem;
       display: block;
-      right: 8px;
+      right: 3.2rem;
       top: 50%;
-      margin-top: -18px;
+      margin-top: -1.5rem;
       border-radius: 50%;
       position: absolute;
       border: 3px solid $positive;
@@ -245,7 +264,7 @@ novo-time-picker {
     &:before {
       left: 23%;
       margin: 33%;
-      content: ' ';
+      content: " ";
       width: 2px;
       top: 0;
       bottom: 0;
@@ -259,10 +278,10 @@ novo-time-picker {
       top: 50%;
       border-radius: 50%;
       position: absolute;
-      height: 32px;
-      width: 32px;
-      right: 25px;
-      margin-top: -16px;
+      height: 2.4rem;
+      width: 2.4rem;
+      right: 4.2rem;
+      margin-top: -1.2rem;
       border: 2px solid lighten($positive, 10%);
       background: lighten($positive, 10%);
       transition: all 160ms ease-in-out;
@@ -289,8 +308,8 @@ novo-time-picker {
     }
   }
   .analog--center {
-    height: 155px;
-    width: 155px;
+    height: 12rem;
+    width: 12rem;
     border-radius: 50%;
     top: 50%;
     left: 50%;
@@ -304,7 +323,7 @@ novo-time-picker {
   }
   .analog--hour,
   .analog--minute {
-    font-size: 1.6em;
+    font-size: 1.6rem;
     color: #666666;
     left: 50%;
     top: 50%;
@@ -322,7 +341,7 @@ novo-time-picker {
     }
   }
   .analog--minute {
-    font-size: 1em;
+    font-size: 1rem;
     margin-left: -20px;
     margin-top: -16px;
   }
@@ -347,7 +366,7 @@ novo-time-picker {
     }
   }
   &.military {
-    $md: 8em;
+    $md: 8rem;
     @for $i from 1 through 24 {
       $hour: $i - 1;
       $deg: ($i * 15 - 105);
@@ -369,19 +388,19 @@ novo-time-picker {
       bottom: 15px;
     }
     .analog--hour {
-      font-size: 0.9em;
-      margin-left: -20px;
-      margin-top: -16px;
+      font-size: 0.9rem;
+      margin-left: -2rem;
+      margin-top: -1.2rem;
     }
     .analog--hand--minutes {
       margin: 10px;
     }
     .analog--hand--hours {
       .analog--ball {
-        height: 28px;
-        width: 28px;
-        right: 13px;
-        margin-top: -14px;
+        height: 2.8rem;
+        width: 2.8rem;
+        right: 2.7rem;
+        margin-top: -1.4rem;
       }
     }
   }

@@ -1,15 +1,13 @@
 // NG2
 import { Component } from '@angular/core';
-import { TestBed, async } from '@angular/core/testing';
+import { async, TestBed } from '@angular/core/testing';
 // App
 import { NovoDragulaElement } from './Dragula';
 import { NovoDragulaService } from './DragulaService';
 
 @Component({
   selector: 'test',
-  template: `
-        <div dragula=""></div>
-    `,
+  template: ` <div dragula=""></div> `,
 })
 class TestComponent {}
 
@@ -35,7 +33,7 @@ describe('Elements: NovoDragulaElement', () => {
     const component = new NovoDragulaElement({ nativeElement: mockElement }, new NovoDragulaService());
 
     describe('Method: ngOnInit()', () => {
-      it('should initialize the dragula with the element reference passed into the constructor if the service doesn\'t return any containers.', () => {
+      it("should initialize the dragula with the element reference passed into the constructor if the service doesn't return any containers.", () => {
         expect(component.ngOnInit).toBeDefined();
         component.ngOnInit();
         expect(component.drake.dragging).toBe(false);
@@ -45,7 +43,7 @@ describe('Elements: NovoDragulaElement', () => {
     });
 
     describe('Method: checkModel()', () => {
-      it('should insert the dragulaModel into the drake models when they\'re defined.', () => {
+      it("should insert the dragulaModel into the drake models when they're defined.", () => {
         expect(component.checkModel).toBeDefined();
         component.dragulaModel = {};
         component.drake = {
@@ -55,7 +53,7 @@ describe('Elements: NovoDragulaElement', () => {
         component.checkModel();
         expect(component.drake.models.length).toBe(1);
       });
-      it('should create drake models from the dragulaModel when their\'s no models defined.', () => {
+      it("should create drake models from the dragulaModel when their's no models defined.", () => {
         expect(component.checkModel).toBeDefined();
         component.dragulaModel = {};
         component.drake = {};

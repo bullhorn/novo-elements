@@ -1,5 +1,5 @@
-import { NovoDataTableFilterUtils } from './data-table-filter-utils';
 import * as dateFns from 'date-fns';
+import { NovoDataTableFilterUtils } from './data-table-filter-utils';
 
 describe('NovoDataTableFilterUtils', () => {
   describe('Method: constructFilter()', () => {

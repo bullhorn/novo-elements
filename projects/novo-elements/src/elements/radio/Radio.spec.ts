@@ -1,8 +1,8 @@
 // NG2
-import { TestBed, async } from '@angular/core/testing';
+import { async, TestBed } from '@angular/core/testing';
+import { NovoButtonModule } from '../button/Button.module';
 // App
 import { NovoRadioElement } from './Radio';
-import { NovoButtonModule } from '../button/Button.module';
 
 describe('Elements: NovoRadioElement', () => {
   let fixture;

@@ -25,7 +25,7 @@ interface Item {
   providers: [CHIPS_VALUE_ACCESSOR],
   template: `
     <chip
-      *ngFor="let item of (_items | async | slice: 0:chipsCount)"
+      *ngFor="let item of _items | async | slice: 0:chipsCount"
       [type]="item.type"
       [class.selected]="item == selected"
       (remove)="removeFromDisplay($event, item)"
@@ -102,8 +102,8 @@ export class NovoMultiPickerElement implements OnInit {
   notShown: any = {};
   // Placeholders for the callbacks
   model: any;
-  onModelChange: Function = () => { };
-  onModelTouched: Function = () => { };
+  onModelChange: Function = () => {};
+  onModelTouched: Function = () => {};
 
   constructor(public element: ElementRef, public labels: NovoLabelService) {
     this.chipsCount = 4;

@@ -1,6 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormUtils } from 'novo-elements';
-import { MockMeta, MockMetaHeaders } from '../MockMeta';
+import { MockMeta } from '../MockMeta';
 
 /**
  * @title Vertical Dynamic Form Example

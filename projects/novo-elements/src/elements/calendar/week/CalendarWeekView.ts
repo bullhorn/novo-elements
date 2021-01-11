@@ -46,26 +46,24 @@ const MINUTES_IN_HOUR: number = 60;
   selector: 'novo-calendar-week',
   template: `
     <div class="cal-week-view" #weekViewContainer>
-      <novo-calendar-week-header
-        [days]="days"
-        [locale]="locale"
-        [customTemplate]="headerTemplate"
-        (dayClicked)="dayClicked.emit($event)">
+      <novo-calendar-week-header [days]="days" [locale]="locale" [customTemplate]="headerTemplate" (dayClicked)="dayClicked.emit($event)">
       </novo-calendar-week-header>
       <div *ngFor="let eventRow of eventRows" #eventRowContainer>
         <div
           class="cal-event-container"
           #event
           *ngFor="let weekEvent of eventRow.row"
-          [style.width]="((100 / days.length) * weekEvent.span) + '%'"
+          [style.width]="(100 / days.length) * weekEvent.span + '%'"
           [style.marginTop.px]="weekEvent.top"
           [style.height.px]="weekEvent.height"
-          [style.marginLeft]="((100 / days.length) * weekEvent.offset) + '%'">
+          [style.marginLeft]="(100 / days.length) * weekEvent.offset + '%'"
+        >
           <novo-calendar-week-event
             [weekEvent]="weekEvent"
             [tooltipPosition]="tooltipPosition"
             [customTemplate]="eventTemplate"
-            (eventClicked)="eventClicked.emit($event)">
+            (eventClicked)="eventClicked.emit($event)"
+          >
           </novo-calendar-week-event>
         </div>
       </div>
@@ -75,7 +73,8 @@ const MINUTES_IN_HOUR: number = 60;
           [segment]="segment"
           [locale]="locale"
           [customTemplate]="hourSegmentTemplate"
-          (click)="hourSegmentClicked.emit({date: segment.date})">
+          (click)="hourSegmentClicked.emit({ date: segment.date })"
+        >
         </novo-calendar-day-hour-segment>
       </div>
     </div>

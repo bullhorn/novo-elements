@@ -6,18 +6,18 @@ import { NovoLabelService } from '../../services/novo-label-service';
 @Component({
   selector: 'novo-slider',
   template: `
-        <section class="slides">
-            <ng-content select="div[slide]"></ng-content>
-        </section>
-        <div class="controls">
-            <button *ngIf="!start" theme="icon" icon="previous" (click)="changeSlide('back')"></button>
-            <div class="indicators">
-                <div class="indicator-circle" *ngFor="let indicator of currSlides; let i = index" [ngClass]="indicator"></div>
-            </div>
-            <button *ngIf="!end" theme="primary" icon="next" (click)="changeSlide('next')">{{ labels.next }}</button>
-            <ng-content select="button" *ngIf="end"></ng-content>
-        </div>
-    `,
+    <section class="slides">
+      <ng-content select="div[slide]"></ng-content>
+    </section>
+    <div class="controls">
+      <button *ngIf="!start" theme="icon" icon="previous" (click)="changeSlide('back')"></button>
+      <div class="indicators">
+        <div class="indicator-circle" *ngFor="let indicator of currSlides; let i = index" [ngClass]="indicator"></div>
+      </div>
+      <button *ngIf="!end" theme="primary" icon="next" (click)="changeSlide('next')">{{ labels.next }}</button>
+      <ng-content select="button" *ngIf="end"></ng-content>
+    </div>
+  `,
   host: {
     '[class]': 'currentClass',
   },

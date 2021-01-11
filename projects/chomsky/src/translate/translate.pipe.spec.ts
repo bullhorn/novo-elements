@@ -28,11 +28,11 @@ describe('Pipe: TranslatePipe', () => {
       expect(pipe.equals).toBeDefined();
       expect(pipe.equals([], {})).toBeFalsy();
     });
-    it('should return false if both are arrays but they aren\'t the same length.', () => {
+    it("should return false if both are arrays but they aren't the same length.", () => {
       expect(pipe.equals).toBeDefined();
       expect(pipe.equals(['one'], ['one', 'two'])).toBeFalsy();
     });
-    it('should return false if both are arrays and they have the same length but they aren\'t the same.', () => {
+    it("should return false if both are arrays and they have the same length but they aren't the same.", () => {
       expect(pipe.equals).toBeDefined();
       expect(pipe.equals(['one', 2], ['one', 'two'])).toBeFalsy();
     });
@@ -44,11 +44,11 @@ describe('Pipe: TranslatePipe', () => {
       expect(pipe.equals).toBeDefined();
       expect(pipe.equals({}, [])).toBeFalsy();
     });
-    it('should return false if the first object\'s keys don\'t match the second object.', () => {
+    it("should return false if the first object's keys don't match the second object.", () => {
       expect(pipe.equals).toBeDefined();
       expect(pipe.equals({ key: 'val' }, { key: 'val2' })).toBeFalsy();
     });
-    it('should return false if the second object\'s keys don\'t match the first object.', () => {
+    it("should return false if the second object's keys don't match the first object.", () => {
       expect(pipe.equals).toBeDefined();
       expect(pipe.equals({ key: 'val' }, { key: 'val', keyTwo: 'valTwo' })).toBeFalsy();
     });
@@ -68,11 +68,11 @@ describe('Pipe: TranslatePipe', () => {
   });
 
   describe('Function: transform(phraseKey, dynamicVariables)', () => {
-    it('should return if it\'s called without arguments.', () => {
+    it("should return if it's called without arguments.", () => {
       expect(pipe.transform).toBeDefined();
       expect(pipe.transform()).toBeNull();
     });
-    it('should return it\'s current value if the key and dynamic variables haven\'t changed.', () => {
+    it("should return it's current value if the key and dynamic variables haven't changed.", () => {
       expect(pipe.transform).toBeDefined();
       pipe.lastKey = 'key';
       pipe.lastParams = { name: 'Jane' };
@@ -82,7 +82,7 @@ describe('Pipe: TranslatePipe', () => {
   });
 
   describe('Function: unsubscribe()', () => {
-    it('should unsubscribe to onLangChange and undefine it when it\'s defined.', () => {
+    it("should unsubscribe to onLangChange and undefine it when it's defined.", () => {
       expect(pipe.unsubscribe).toBeDefined();
       pipe.onLangChange = {
         unsubscribe: () => {},

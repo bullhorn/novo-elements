@@ -1,18 +1,16 @@
 // NG2
+import { OverlayModule } from '@angular/cdk/overlay';
 import { ChangeDetectorRef, Component, ElementRef, NO_ERRORS_SCHEMA } from '@angular/core';
-import { TestBed, async, ComponentFixture } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-// App
-import { NovoAutoSize } from './Control';
-import { NovoControlElement } from './Control';
 import { FieldInteractionApi, NovoLabelService, NovoTemplateService } from '../..';
 import { DateFormatService } from '../../services/date-format/DateFormat';
+// App
+import { NovoAutoSize, NovoControlElement } from './Control';
 
 @Component({
   selector: 'novo-auto-size-test-component',
-  template: `
-        <textarea autosize></textarea>
-    `,
+  template: ` <textarea autosize></textarea> `,
   styles: [
     `
       textarea {
@@ -37,6 +35,7 @@ describe('Elements: NovoAutoSize', () => {
 
     beforeEach(async(() => {
       TestBed.configureTestingModule({
+        imports: [OverlayModule],
         declarations: [NovoAutoSize, NovoAutoSizeTestComponent],
       }).compileComponents();
       fixture = TestBed.createComponent(NovoAutoSizeTestComponent);
@@ -71,14 +70,13 @@ describe('Test Localization', () => {
 
   it('should set decimal separator based on locale correctly', () => {
     const component = new NovoControlElement(mockElement, null, null, null, null, null, 'fr-FR');
+    expect(component.locale).toBe('fr-FR');
     expect(component.decimalSeparator).toBe(',');
   });
 });
 
 @Component({
-  template: `
-    <div></div>
-  `,
+  template: ` <div></div> `,
 })
 class TestComponent {}
 describe('NovoControlElement', () => {
@@ -113,12 +111,14 @@ describe('NovoControlElement', () => {
   it('should return false if the field has a MAX_LENGTH property but is not focused', () => {
     // Arrange
     component.control = {
-       key: 0,
-     };
+      key: 0,
+    };
     component.form = {
-      controls: [{
-        maxLength: 1,
-      }],
+      controls: [
+        {
+          maxLength: 1,
+        },
+      ],
     };
 
     // Act

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 // Vendor
-import { FormUtils, FieldInteractionApi } from 'novo-elements';
+import { FieldInteractionApi, FormUtils } from 'novo-elements';
 import { MockMetaHeaders } from '../MockMeta';
 
 /**

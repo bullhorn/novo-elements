@@ -1,24 +1,24 @@
 // NG2
 import {
+  AfterViewInit,
   Component,
+  ElementRef,
   EventEmitter,
   forwardRef,
-  ElementRef,
+  Input,
+  NgZone,
+  OnDestroy,
+  OnInit,
+  Output,
   ViewChild,
   ViewContainerRef,
-  Input,
-  Output,
-  OnInit,
-  AfterViewInit,
-  OnDestroy,
-  NgZone,
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ComponentUtils } from './../../utils/component-utils/ComponentUtils';
+import { KeyCodes } from './../../utils/key-codes/KeyCodes';
 // APP
 import { OutsideClick } from './../../utils/outside-click/OutsideClick';
-import { KeyCodes } from './../../utils/key-codes/KeyCodes';
 import { QuickNoteResults } from './extras/quick-note-results/QuickNoteResults';
-import { ComponentUtils } from './../../utils/component-utils/ComponentUtils';
 
 // Value accessor for the component (supports ngModel)
 const QUICK_NOTE_VALUE_ACCESSOR = {
@@ -32,9 +32,7 @@ declare var CKEDITOR: any;
 @Component({
   selector: 'novo-quick-note',
   providers: [QUICK_NOTE_VALUE_ACCESSOR],
-  template: `
-    <div class="quick-note-wrapper" #wrapper><textarea #host></textarea> <span #results></span></div>
-  `,
+  template: ` <div class="quick-note-wrapper" #wrapper><textarea #host></textarea> <span #results></span></div> `,
 })
 export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('wrapper', { static: true })
@@ -72,8 +70,8 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
 
   private static TOOLBAR_HEIGHT = 40; // in pixels - configured by stylesheet
 
-  private onModelChange: Function = () => { };
-  private onModelTouched: Function = () => { };
+  private onModelChange: Function = () => {};
+  private onModelTouched: Function = () => {};
 
   constructor(private zone: NgZone, element: ElementRef, private componentUtils: ComponentUtils) {
     super(element);
@@ -623,10 +621,7 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
    */
   private showPlaceholder(): void {
     if (!this.ckeInstance.getData() && !this.startupFocus) {
-      this.ckeInstance
-        .editable()
-        .getParent()
-        .$.appendChild(this.placeholderElement);
+      this.ckeInstance.editable().getParent().$.appendChild(this.placeholderElement);
       this.placeholderVisible = true;
     }
   }
@@ -636,10 +631,7 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
    */
   private hidePlaceholder(): void {
     if (this.placeholderVisible) {
-      this.ckeInstance
-        .editable()
-        .getParent()
-        .$.removeChild(this.placeholderElement);
+      this.ckeInstance.editable().getParent().$.removeChild(this.placeholderElement);
       this.placeholderVisible = false;
     }
   }

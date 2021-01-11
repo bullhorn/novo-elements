@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { FormArray } from '@angular/forms';
 import {
-  FormUtils,
-  TextBoxControl,
-  CheckboxControl,
-  NovoFormGroup,
   BaseControl,
+  CheckboxControl,
+  FormUtils,
   NovoControlGroupAddConfig,
+  NovoFormGroup,
   ReadOnlyControl,
   SelectControl,
+  TextBoxControl,
 } from 'novo-elements';
 
 /**
@@ -71,7 +71,7 @@ export class CustomTemplateExample {
 
   public customDelete(form: NovoFormGroup, key: string, index: number) {
     console.log('DELETE', form, key, index); // tslint:disable-line
-    const control: FormArray = <FormArray>form.controls[key];
+    const control: FormArray = form.controls[key] as FormArray;
     control.removeAt(index);
   }
 

@@ -1,10 +1,10 @@
 // NG2
-import { TestBed, async } from '@angular/core/testing';
+import { async, TestBed } from '@angular/core/testing';
+import { NovoLabelService } from '../../services/novo-label-service';
+import { NovoItemContentElement, NovoItemEndElement, NovoListElement, NovoListItemElement } from '../list/List';
+import { NovoNavContentElement, NovoNavElement, NovoNavOutletElement, NovoTabElement } from '../tabs/Tabs';
 // App
 import { NovoCategoryDropdownElement } from './CategoryDropdown';
-import { NovoNavElement, NovoTabElement, NovoNavContentElement, NovoNavOutletElement } from '../tabs/Tabs';
-import { NovoListElement, NovoListItemElement, NovoItemEndElement, NovoItemContentElement } from '../list/List';
-import { NovoLabelService } from '../../services/novo-label-service';
 
 describe('Elements: NovoCategoryDropdownElement', () => {
   let fixture;

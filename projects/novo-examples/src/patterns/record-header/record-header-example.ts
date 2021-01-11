@@ -37,7 +37,11 @@ export class RecordHeaderExample {
     this.record = undefined;
 
     setTimeout(() => {
-      this.values = [{ label: 'Status', data: 'Open' }, { label: 'Phone', data: '555-555-5555' }, { label: 'Address', data: 'Boston, MA' }];
+      this.values = [
+        { label: 'Status', data: 'Open' },
+        { label: 'Phone', data: '555-555-5555' },
+        { label: 'Address', data: 'Boston, MA' },
+      ];
       this.tabs = ['Overview', 'Edit', 'Activity'];
       this.record = {
         id: 101,

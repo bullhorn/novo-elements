@@ -141,12 +141,12 @@ novo-category-dropdown {
       }
     }
   }
-  &[side='left'] {
+  &[side="left"] {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
   }
-  &[side='right'] {
+  &[side="right"] {
     display: flex;
     flex-direction: column;
     align-items: flex-end;

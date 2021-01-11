@@ -1,5 +1,5 @@
 // NG2
-import { Component, Input, EventEmitter, Output, HostBinding } from '@angular/core';
+import { Component, EventEmitter, HostBinding, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'novo-nav',
@@ -66,11 +66,11 @@ export class NovoNavElement {
     '[class.disabled]': 'disabled',
   },
   template: `
-        <div class="novo-tab-link">
-            <ng-content></ng-content>
-        </div>
-        <span class="indicator"></span>
-   `,
+    <div class="novo-tab-link">
+      <ng-content></ng-content>
+    </div>
+    <span class="indicator"></span>
+  `,
 })
 export class NovoTabElement {
   @Input()
@@ -132,11 +132,11 @@ export class NovoTabButtonElement {
     '[class.disabled]': 'disabled',
   },
   template: `
-        <div class="novo-tab-link">
-            <ng-content></ng-content>
-        </div>
-        <span class="indicator"></span>
-    `,
+    <div class="novo-tab-link">
+      <ng-content></ng-content>
+    </div>
+    <span class="indicator"></span>
+  `,
 })
 export class NovoTabLinkElement {
   @Input()

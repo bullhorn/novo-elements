@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-
-import { IDataTableColumn, NovoModalRef, NovoModalParams } from 'novo-elements';
+import { IDataTableColumn, NovoModalParams, NovoModalRef } from 'novo-elements';
 import { MockData } from './mock-data';
 
 /**
@@ -11,31 +10,25 @@ import { MockData } from './mock-data';
   selector: 'configure-columns-modal-example',
   template: `
     <novo-modal>
-      <header title="Configure Columns"
-              theme="contact">
+      <header title="Configure Columns" theme="contact">
         <utils>
-          <util-action icon="times"
-                      (click)="close()"></util-action>
+          <util-action icon="times" (click)="close()"></util-action>
         </utils>
       </header>
       <section>
         <novo-list direction="vertical">
           <novo-list-item *ngFor="let column of columns">
             <item-header>
-                  <item-title>{{ column.id }}</item-title>
-                  <item-header-end>
-                    <novo-checkbox [(ngModel)]="column.enabled"></novo-checkbox>
-                  </item-header-end>
-              </item-header>
+              <item-title>{{ column.id }}</item-title>
+              <item-header-end>
+                <novo-checkbox [(ngModel)]="column.enabled"></novo-checkbox>
+              </item-header-end>
+            </item-header>
           </novo-list-item>
         </novo-list>
       </section>
-      <button theme="standard"
-              (click)="close()">Cancel</button>
-      <button theme="primary"
-              color="success"
-              icon="check"
-              (click)="save()">Save</button>
+      <button theme="standard" (click)="close()">Cancel</button>
+      <button theme="primary" color="success" icon="check" (click)="save()">Save</button>
     </novo-modal>
   `,
 })
@@ -43,7 +36,7 @@ export class ConfigureColumnsModal {
   public columns: IDataTableColumn<MockData>;
 
   constructor(private modalRef: NovoModalRef, private params: NovoModalParams) {
-    this.columns = params['columns'];
+    this.columns = (params as any).columns;
   }
 
   public close(): void {

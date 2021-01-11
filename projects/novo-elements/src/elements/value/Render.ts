@@ -41,7 +41,7 @@ export class RenderPipe implements PipeTransform {
   lastValue: any;
   lastArgs: any;
 
-  constructor(private changeDetector: ChangeDetectorRef, private sanitizationService: DomSanitizer, private labels: NovoLabelService) { }
+  constructor(private changeDetector: ChangeDetectorRef, private sanitizationService: DomSanitizer, private labels: NovoLabelService) {}
 
   equals(objectOne: any, objectTwo: any): any {
     if (objectOne === objectTwo) {
@@ -171,6 +171,8 @@ export class RenderPipe implements PipeTransform {
       type = 'DateTime';
     } else if (args.dataSpecialization === 'YEAR') {
       type = 'Year';
+    } else if (args.dataSpecialization === 'TIME') {
+      type = 'Time';
     } else if (args.dataSpecialization === 'DATE' && args.dataType === 'Date') {
       type = 'Date';
     } else if (args.dataType === 'Timestamp') {
@@ -217,6 +219,9 @@ export class RenderPipe implements PipeTransform {
           break;
         case 'Year':
           text = new Date(value).getFullYear();
+          break;
+        case 'Time':
+          text = this.labels.formatTimeWithFormat(value, { hour: 'numeric', minute: 'numeric' });
           break;
         case 'Phone':
         case 'Email':
@@ -272,7 +277,7 @@ export class RenderPipe implements PipeTransform {
           text =
             value.label ||
             `${value.jobOrder ? `${value.jobOrder.title} - ` : ''} ${value.candidate ? value.candidate.firstName : ''} ${
-            value.candidate ? value.candidate.lastName : ''
+              value.candidate ? value.candidate.lastName : ''
             }`;
           break;
         case 'WorkersCompensationRate':

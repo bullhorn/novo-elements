@@ -1,5 +1,15 @@
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Directive, ElementRef, Host, Input, OnDestroy, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  Directive,
+  ElementRef,
+  Host,
+  Input,
+  OnDestroy,
+  ViewEncapsulation,
+} from '@angular/core';
 import { merge, Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { novoExpansionAnimations } from './expansion-animations';
@@ -121,7 +131,7 @@ export class NovoExpansionPanelHeader implements OnDestroy {
     class: 'novo-expansion-panel-header-description',
   },
 })
-export class NovoExpansionPanelDescription { }
+export class NovoExpansionPanelDescription {}
 
 /**
  * `<novo-panel-title>`
@@ -134,4 +144,4 @@ export class NovoExpansionPanelDescription { }
     class: 'novo-expansion-panel-header-title',
   },
 })
-export class NovoExpansionPanelTitle { }
+export class NovoExpansionPanelTitle {}

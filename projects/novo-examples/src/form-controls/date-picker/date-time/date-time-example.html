@@ -1,7 +1,12 @@
 <div class="date-picker-demo-side-by-side">
+  <section>
     <p>
-        <label>Date-Time</label> {{(dateTime | date:'medium') || 'N/A'}}
+      <label>Date-Time</label> {{(dateTime | date:'medium') || 'N/A'}}
     </p>
     <novo-date-time-picker [(ngModel)]="dateTime"></novo-date-time-picker>
+  </section>
+  <section>
+    <label>24hr Time</label>
     <novo-date-time-picker [(ngModel)]="dateTime" military="true"></novo-date-time-picker>
+  </section>
 </div>

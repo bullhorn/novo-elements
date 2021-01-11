@@ -1,5 +1,4 @@
 import { EventEmitter, Injectable } from '@angular/core';
-
 import { NovoSimpleTableChange } from './interfaces';
 
 @Injectable()

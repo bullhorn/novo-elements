@@ -1,0 +1,16 @@
+$novo-modal-z-index: 1001;
+
+:host {
+  .modal-container {
+    z-index: $novo-modal-z-index;
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.25);
+  }
+}

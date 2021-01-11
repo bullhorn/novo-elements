@@ -1,12 +1,12 @@
 // NG2
-import { ElementRef, Component, EventEmitter, Input, Output, forwardRef } from '@angular/core';
-import { trigger, state, style, transition, animate } from '@angular/animations';
-import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
+import { animate, state, style, transition, trigger } from '@angular/animations';
+import { Component, ElementRef, EventEmitter, forwardRef, Input, Output } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 // Vendor
 import * as dateFns from 'date-fns';
+import { NovoLabelService } from '../../services/novo-label-service';
 // APP
 import { Helpers } from '../../utils/Helpers';
-import { NovoLabelService } from '../../services/novo-label-service';
 
 // Value accessor for the component (supports ngModel)
 const DATE_TIME_PICKER_VALUE_ACCESSOR = {

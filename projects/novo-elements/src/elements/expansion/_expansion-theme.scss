@@ -1,5 +1,5 @@
-@import '../../styles/global/variables';
-@import '../../styles/global/functions';
+@import "../../styles/global/variables";
+@import "../../styles/global/functions";
 
 @mixin novo-expansion-panel-theme() {
   .novo-expansion-panel {
@@ -12,7 +12,7 @@
   }
 
   .novo-expansion-panel:not(.novo-expanded) .novo-expansion-panel-header {
-    &:not([aria-disabled='true']) {
+    &:not([aria-disabled="true"]) {
       &.cdk-keyboard-focused,
       &.cdk-program-focused,
       &:hover {
@@ -30,7 +30,7 @@
     color: $grey;
   }
 
-  .novo-expansion-panel-header[aria-disabled='true'] {
+  .novo-expansion-panel-header[aria-disabled="true"] {
     color: $grey;
     pointer-events: none;
 
@@ -42,7 +42,7 @@
 
   .novo-expansion-panel.novo-expanded {
     @each $basic, $color in $all-colors {
-      &[theme='#{$basic}'] {
+      &[theme="#{$basic}"] {
         border-top: 3px solid $color;
       }
     }

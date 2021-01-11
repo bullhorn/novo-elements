@@ -1,7 +1,6 @@
-import { Component, Input } from '@angular/core';
-
+import { Component } from '@angular/core';
 // Vendor
-import { FormUtils, TextBoxControl, CheckboxControl, FileControl, PickerControl } from 'novo-elements';
+import { CheckboxControl, FileControl, FormUtils, PickerControl, TextBoxControl } from 'novo-elements';
 
 /**
  * @title Updating Form Example

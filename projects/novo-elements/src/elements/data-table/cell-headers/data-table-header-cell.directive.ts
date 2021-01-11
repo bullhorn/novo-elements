@@ -1,6 +1,5 @@
-import { Directive, OnInit, ElementRef, Renderer2, Input, HostBinding } from '@angular/core';
-import { CdkHeaderCell, CdkColumnDef } from '@angular/cdk/table';
-
+import { CdkColumnDef, CdkHeaderCell } from '@angular/cdk/table';
+import { Directive, ElementRef, HostBinding, Input, OnInit, Renderer2 } from '@angular/core';
 import { IDataTableColumn } from '../interfaces';
 
 @Directive({

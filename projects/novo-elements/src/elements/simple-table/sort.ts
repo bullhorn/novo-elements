@@ -1,6 +1,6 @@
-import { Directive, EventEmitter, Output, OnDestroy } from '@angular/core';
-import { NovoActivityTableState } from './state';
+import { Directive, EventEmitter, OnDestroy, Output } from '@angular/core';
 import { Helpers } from '../../utils/Helpers';
+import { NovoActivityTableState } from './state';
 
 @Directive({
   selector: '[novoSortFilter]',

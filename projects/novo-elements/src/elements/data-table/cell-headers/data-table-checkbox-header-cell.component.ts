@@ -3,15 +3,13 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Host
 import { Subscription } from 'rxjs';
 import { NovoDataTable } from '../data-table.component';
 
-
 @Component({
   selector: 'novo-data-table-checkbox-header-cell',
   template: `
     <div class="data-table-checkbox" (click)="onClick()">
-      <input type="checkbox" [checked]="checked">
+      <input type="checkbox" [checked]="checked" />
       <label>
-        <i [class.bhi-checkbox-empty]="!checked"
-          [class.bhi-checkbox-filled]="checked"></i>
+        <i [class.bhi-checkbox-empty]="!checked" [class.bhi-checkbox-filled]="checked"></i>
       </label>
     </div>
   `,

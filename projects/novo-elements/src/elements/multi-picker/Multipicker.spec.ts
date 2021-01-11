@@ -1,12 +1,12 @@
 // NG2
-import { FormsModule } from '@angular/forms';
 import { async, TestBed } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
+import { NovoLabelService } from '../../services/novo-label-service';
+import { ComponentUtils } from '../../utils/component-utils/ComponentUtils';
+import { KeyCodes } from '../../utils/key-codes/KeyCodes';
 // App
 import { NovoMultiPickerElement } from './MultiPicker';
 import { NovoMultiPickerModule } from './MultiPicker.module';
-import { KeyCodes } from '../../utils/key-codes/KeyCodes';
-import { NovoLabelService } from '../../services/novo-label-service';
-import { ComponentUtils } from '../../utils/component-utils/ComponentUtils';
 
 describe('Element: NovoMultiPickerElement', () => {
   let fixture;
@@ -14,7 +14,10 @@ describe('Element: NovoMultiPickerElement', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      providers: [{ provide: NovoLabelService, useClass: NovoLabelService }, { provide: ComponentUtils, useClass: ComponentUtils }],
+      providers: [
+        { provide: NovoLabelService, useClass: NovoLabelService },
+        { provide: ComponentUtils, useClass: ComponentUtils },
+      ],
       imports: [FormsModule, NovoMultiPickerModule],
     }).compileComponents();
     fixture = TestBed.createComponent(NovoMultiPickerElement);

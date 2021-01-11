@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 // Vendor
-import { FormUtils, TextBoxControl, CheckboxControl, FieldInteractionApi } from 'novo-elements';
+import { CheckboxControl, FieldInteractionApi, FormUtils, TextBoxControl } from 'novo-elements';
 
 /**
  * @title Fi Enable Disable Example

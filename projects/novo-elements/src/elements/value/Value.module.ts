@@ -11,4 +11,4 @@ import { NovoValueElement } from './Value';
   declarations: [NovoValueElement, RenderPipe, EntityList],
   exports: [NovoValueElement, RenderPipe, EntityList],
 })
-export class NovoValueModule { }
+export class NovoValueModule {}

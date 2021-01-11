@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 // Vendor
-import { FormUtils, TextBoxControl, FieldInteractionApi, DateTimeControl } from 'novo-elements';
+import { DateTimeControl, FieldInteractionApi, FormUtils, TextBoxControl } from 'novo-elements';
 
 /**
  * @title Fi Calculation Example

@@ -18,16 +18,18 @@ const LAYOUT_DEFAULTS = { iconStyle: 'box' };
   providers: [CHECKBOX_VALUE_ACCESSOR],
   template: `
     <div class="check-box-group" [class.checked]="model" [class.disabled]="disabled">
-        <input [name]="name" type="checkbox" [(ngModel)]="model" [attr.id]="name" [disabled]="disabled">
-        <label [attr.for]="name" (click)="select($event)" [class.disabled]="disabled">
-          <i [class.bhi-checkbox-empty]="!model && !indeterminate && boxIcon"
-              [class.bhi-checkbox-filled]="model && !indeterminate && boxIcon"
-              [class.bhi-checkbox-indeterminate]="indeterminate && boxIcon"
-              [class.bhi-circle-o]="!model && !indeterminate && !boxIcon"
-              [class.bhi-check]="model && !indeterminate && !boxIcon"
-              [class.bhi-circle]="indeterminate && !boxIcon"></i>
-          <span *ngIf="label">{{ label }}</span>
-        </label>
+      <input [name]="name" type="checkbox" [(ngModel)]="model" [attr.id]="name" [disabled]="disabled" />
+      <label [attr.for]="name" (click)="select($event)" [class.disabled]="disabled">
+        <i
+          [class.bhi-checkbox-empty]="!model && !indeterminate && boxIcon"
+          [class.bhi-checkbox-filled]="model && !indeterminate && boxIcon"
+          [class.bhi-checkbox-indeterminate]="indeterminate && boxIcon"
+          [class.bhi-circle-o]="!model && !indeterminate && !boxIcon"
+          [class.bhi-check]="model && !indeterminate && !boxIcon"
+          [class.bhi-circle]="indeterminate && !boxIcon"
+        ></i>
+        <span *ngIf="label">{{ label }}</span>
+      </label>
     </div>
   `,
 })
@@ -49,10 +51,10 @@ export class NovoCheckboxElement implements ControlValueAccessor, OnInit {
   boxIcon: boolean = true;
   model;
 
-  onModelChange: Function = () => { };
-  onModelTouched: Function = () => { };
+  onModelChange: Function = () => {};
+  onModelTouched: Function = () => {};
 
-  constructor(private ref: ChangeDetectorRef) { }
+  constructor(private ref: ChangeDetectorRef) {}
 
   ngOnInit() {
     this.layoutOptions = Object.assign({}, LAYOUT_DEFAULTS, this.layoutOptions);

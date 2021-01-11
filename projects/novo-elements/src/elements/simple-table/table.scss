@@ -108,7 +108,7 @@ novo-simple-table {
   > div {
     width: 60px;
   }
-  novo-dropdown[side='right'] {
+  novo-dropdown[side="right"] {
     display: inline-block;
   }
 }
@@ -183,7 +183,7 @@ novo-activity-table {
         font-size: 1.1em;
         height: 35px;
       }
-      &.active > button[theme='fab'] {
+      &.active > button[theme="fab"] {
         height: 35px;
       }
     }
@@ -199,7 +199,7 @@ novo-activity-table {
         button {
           margin-left: 3px;
         }
-        button[theme][theme='icon'] {
+        button[theme][theme="icon"] {
           height: 35px;
           width: 35px;
           font-size: 1.4em;
@@ -213,7 +213,7 @@ novo-activity-table {
       }
     }
   }
-  button[theme][theme='icon'] {
+  button[theme][theme="icon"] {
     height: 30px;
     width: 30px;
     padding: 5px;
@@ -309,13 +309,13 @@ novo-simple-table-pagination {
       }
     }
   }
-  > button[theme][theme='dialogue'][icon][side='left'] {
+  > button[theme][theme="dialogue"][icon][side="left"] {
     padding: 5px;
     @media (min-width: $breakpoint) {
       padding: 5px 15px 5px 5px;
     }
   }
-  > button[theme][theme='dialogue'][icon][side='right'] {
+  > button[theme][theme="dialogue"][icon][side="right"] {
     padding: 5px;
     @media (min-width: $breakpoint) {
       padding: 5px 5px 5px 15px;

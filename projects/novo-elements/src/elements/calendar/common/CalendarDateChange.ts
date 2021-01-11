@@ -1,18 +1,21 @@
 import { Component, EventEmitter, Inject, Input, LOCALE_ID, Output } from '@angular/core';
-
 import * as dateFns from 'date-fns';
 
 @Component({
   selector: 'novo-calendar-date-change',
   template: `
     <div class="cal-date-change">
-        <i class="bhi-arrow-left" (click)="subtractDate()" ></i>
-        <span [ngSwitch]="view">
-            <span *ngSwitchCase="'month'">{{ ( viewDate | month:locale ) + ' ' + ( viewDate | year:locale ) }}</span>
-            <span *ngSwitchCase="'week'">{{ ( startOfWeek | monthday:locale:'long' ) + ' - ' + ( endOfWeek | endofweekdisplay:startOfWeek:locale:'long' ) }}</span>
-            <span *ngSwitchCase="'day'">{{ ( viewDate | weekday:locale:'long' ) + ', ' + ( viewDate | month:locale ) + ' ' + ( viewDate | dayofmonth:locale ) }}</span>
-        </span>
-        <i class="bhi-arrow-right" (click)="addDate()"></i>
+      <i class="bhi-arrow-left" (click)="subtractDate()"></i>
+      <span [ngSwitch]="view">
+        <span *ngSwitchCase="'month'">{{ (viewDate | month: locale) + ' ' + (viewDate | year: locale) }}</span>
+        <span *ngSwitchCase="'week'">{{
+          (startOfWeek | monthday: locale:'long') + ' - ' + (endOfWeek | endofweekdisplay: startOfWeek:locale:'long')
+        }}</span>
+        <span *ngSwitchCase="'day'">{{
+          (viewDate | weekday: locale:'long') + ', ' + (viewDate | month: locale) + ' ' + (viewDate | dayofmonth: locale)
+        }}</span>
+      </span>
+      <i class="bhi-arrow-right" (click)="addDate()"></i>
     </div>
   `,
 })

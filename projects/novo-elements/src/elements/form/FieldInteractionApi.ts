@@ -8,22 +8,23 @@ import { NovoLabelService } from '../../services/novo-label-service';
 import { AppBridge } from '../../utils/app-bridge/AppBridge';
 import { FormUtils } from '../../utils/form-utils/FormUtils';
 import { Helpers } from '../../utils/Helpers';
-import { NovoModalService } from '../modal/ModalService';
+import { NovoModalService } from '../modal/modal.service';
 import { EntityPickerResults } from '../picker/extras/entity-picker-results/EntityPickerResults';
 import { NovoToastService, ToastOptions } from '../toast/ToastService';
 import { CustomHttp, ModifyPickerConfigArgs, OptionsFunction } from './FieldInteractionApiTypes';
 import { ControlConfirmModal, ControlPromptModal } from './FieldInteractionModals';
 import { NovoControlConfig } from './FormControls';
-import { IFieldInteractionEvent, NovoFieldset, ResultsTemplateType, NovoFormGroup } from './FormInterfaces';
+import { IFieldInteractionEvent, NovoFieldset, ResultsTemplateType } from './FormInterfaces';
 // APP
 import { NovoFormControl } from './NovoFormControl';
+import { NovoFormGroup } from './NovoFormGroup';
 
 class CustomHttpImpl implements CustomHttp {
   url: string;
   options;
   mapFn = (x) => x;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   get(url: string, options?): CustomHttp {
     this.url = url;
@@ -37,10 +38,7 @@ class CustomHttpImpl implements CustomHttp {
   }
 
   subscribe(resolve, reject?): Subscription {
-    return this.http
-      .get(this.url, this.options)
-      .pipe(map(this.mapFn))
-      .subscribe(resolve, reject);
+    return this.http.get(this.url, this.options).pipe(map(this.mapFn)).subscribe(resolve, reject);
   }
 }
 
@@ -65,7 +63,7 @@ export class FieldInteractionApi {
     private formUtils: FormUtils,
     private http: HttpClient,
     private labels: NovoLabelService,
-  ) { }
+  ) {}
 
   get associations() {
     return this.form.hasOwnProperty('associations') ? this.form.associations : {};
@@ -413,6 +411,7 @@ export class FieldInteractionApi {
       if (!result) {
         this.setValue(key, oldValue, { emitEvent: false });
       }
+      return true;
     });
   }
 
@@ -682,7 +681,7 @@ export class FieldInteractionApi {
 
   addControl(
     key: string,
-    metaForNewField: { key?: string, type?: string, name?: string, label?: string },
+    metaForNewField: { key?: string; type?: string; name?: string; label?: string },
     position: string = FieldInteractionApi.FIELD_POSITIONS.ABOVE_FIELD,
     initialValue?,
   ): void {

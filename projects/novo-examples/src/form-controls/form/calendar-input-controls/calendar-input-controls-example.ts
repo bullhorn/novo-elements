@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-
 // Vendor
-import { FormUtils, DateControl, TimeControl, DateTimeControl } from 'novo-elements';
+import { DateControl, DateTimeControl, FormUtils, TimeControl, TimezoneControl } from 'novo-elements';
 
 // import { MockMeta, MockMetaHeaders } from './MockMeta';
 
@@ -18,6 +17,7 @@ export class CalendarInputControlsExample {
   public userDefinedDateControl: DateControl;
   public timeControl: any;
   public dateTimeControl: any;
+  public timezoneControl: any;
   public calendarForm: any;
 
   constructor(private formUtils: FormUtils) {
@@ -37,6 +37,13 @@ export class CalendarInputControlsExample {
     });
     this.timeControl = new TimeControl({ key: 'time', label: 'Time', tooltip: 'Time' });
     this.dateTimeControl = new DateTimeControl({ key: 'dateTime', tooltip: 'Date Time', label: 'Date Time', military: true });
-    this.calendarForm = formUtils.toFormGroup([this.dateControl, this.userDefinedDateControl, this.timeControl, this.dateTimeControl]);
+    this.timezoneControl = new TimezoneControl({ key: 'timezone', tooltip: 'Timezone', label: 'Timezone' });
+    this.calendarForm = formUtils.toFormGroup([
+      this.dateControl,
+      this.userDefinedDateControl,
+      this.timeControl,
+      this.dateTimeControl,
+      this.timezoneControl,
+    ]);
   }
 }

@@ -6,18 +6,18 @@ import { Helpers } from '../../utils/Helpers';
   selector: 'novo-entity-list',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-        <div *ngFor="let entity of data.data" class="entity">
-            <a *ngIf="entity.isLinkable" (click)="openLink(entity)">
-                <i class="bhi-circle {{ entity.class }}"></i>{{ entity | render : metaDisplay }}
-            </a>
-            <span *ngIf="!entity.isLinkable && entity.personSubtype">
-                <i class="bhi-circle {{ entity.class }}"></i>{{ entity | render : metaDisplay }}
-            </span>
-            <span *ngIf="!entity.isLinkable && !entity.personSubtype">
-                {{ entity | render : metaDisplay }}
-            </span>
-        </div>
-    `,
+    <div *ngFor="let entity of data.data" class="entity">
+      <a *ngIf="entity.isLinkable" (click)="openLink(entity)">
+        <i class="bhi-circle {{ entity.class }}"></i>{{ entity | render: metaDisplay }}
+      </a>
+      <span *ngIf="!entity.isLinkable && entity.personSubtype">
+        <i class="bhi-circle {{ entity.class }}"></i>{{ entity | render: metaDisplay }}
+      </span>
+      <span *ngIf="!entity.isLinkable && !entity.personSubtype">
+        {{ entity | render: metaDisplay }}
+      </span>
+    </div>
+  `,
 })
 export class EntityList implements OnInit {
   @Input()
@@ -58,7 +58,7 @@ export class EntityList implements OnInit {
     Appointment: 'appointment',
   };
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): any {
     // use a local copy of the meta to set the type to TO_ONE for proper display

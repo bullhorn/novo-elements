@@ -1,0 +1,9 @@
+@import "../../../styles/global/variables.scss";
+
+:host {
+  display: flex;
+  padding-bottom: 5px;
+  flex: 1;
+  font-size: 0.8em;
+  color: $negative;
+}

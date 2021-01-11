@@ -1,0 +1,33 @@
+@import "../../styles/global/variables.scss";
+
+:host {
+  display: grid;
+  grid-template-rows: 6rem 1fr min-content;
+  background-color: $white;
+  cursor: default;
+  overflow: auto;
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  transform: translateY(0%);
+  transition: all 0.15s cubic-bezier(0.35, 0, 0.25, 1);
+  border-radius: 0.4rem;
+  width: 18rem;
+
+  .novo-color-preview {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .novo-color-swatches {
+    display: grid;
+    grid-template-columns: repeat(6, 2.4rem);
+    grid-auto-rows: 2.4rem;
+    grid-gap: 0.4rem;
+    margin: 0.4rem 0;
+    justify-content: center;
+  }
+
+  .novo-color-input {
+    padding: 0.4rem 0.8rem;
+  }
+}

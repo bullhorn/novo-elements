@@ -1,22 +1,22 @@
 // NG2
+import { ENTER, ESCAPE, TAB } from '@angular/cdk/keycodes';
 import {
-  Component,
-  Input,
-  Output,
-  EventEmitter,
-  ViewChild,
-  forwardRef,
-  ElementRef,
-  HostBinding,
-  ChangeDetectorRef,
-  NgZone,
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  EventEmitter,
+  forwardRef,
+  HostBinding,
+  Input,
+  NgZone,
+  Output,
+  ViewChild,
 } from '@angular/core';
-import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
-import { TAB, ENTER, ESCAPE } from '@angular/cdk/keycodes';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { NovoLabelService } from '../../services/novo-label-service';
 // APP
 import { NovoOverlayTemplateComponent } from '../overlay/Overlay';
-import { NovoLabelService } from '../../services/novo-label-service';
 
 // Value accessor for the component (supports ngModel)
 const SEARCH_VALUE_ACCESSOR = {
@@ -57,7 +57,7 @@ const SEARCH_VALUE_ACCESSOR = {
     <novo-overlay-template
       [parent]="element"
       [closeOnSelect]="closeOnSelect"
-      position="above-below"
+      [position]="position"
       (select)="closePanel()"
       (closing)="onBlur()"
     >
@@ -71,8 +71,11 @@ export class NovoSearchBoxElement implements ControlValueAccessor {
   @Input()
   public icon: string = 'search';
   @Input()
+  public position: string = 'bottom-left';
+  @Input()
   public placeholder: string = 'Search...';
   @Input()
+  @HostBinding('class.always-open')
   public alwaysOpen: boolean = false;
   @Input()
   public theme: string = 'positive';
@@ -159,6 +162,7 @@ export class NovoSearchBoxElement implements ControlValueAccessor {
   }
   _handleInput(event: KeyboardEvent): void {
     if (document.activeElement === event.target) {
+      this.value = (event.target as HTMLInputElement).value;
       this._onChange((event.target as HTMLInputElement).value);
 
       if (this.debounceSearchChange) {

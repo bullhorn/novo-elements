@@ -1,5 +1,5 @@
 // NG2
-import { Injectable, Inject, Optional, LOCALE_ID } from '@angular/core';
+import { Inject, Injectable, LOCALE_ID, Optional } from '@angular/core';
 //  import DateTimeFormatPart = Intl.DateTimeFormatPart;
 
 interface TimeFormatParts {
@@ -108,7 +108,7 @@ export class NovoLabelService {
     @Optional()
     @Inject(LOCALE_ID)
     public userLocale = 'en-US',
-  ) { }
+  ) {}
 
   maxlengthMetWithField(field: string, maxlength: number): string {
     return `Sorry, you have reached the maximum character count of ${maxlength} for ${field}.`;
@@ -158,9 +158,9 @@ export class NovoLabelService {
     return new Intl.DateTimeFormat(this.userLocale, format).format(date);
   }
 
-  formatToTimeOnly(param) { }
+  formatToTimeOnly(param) {}
 
-  formatToDateOnly(param) { }
+  formatToDateOnly(param) {}
 
   formatTimeWithFormat(value: any, format: Intl.DateTimeFormatOptions): string {
     const date = value instanceof Date ? value : new Date(value);
@@ -173,20 +173,28 @@ export class NovoLabelService {
         obj[part.type] = part.value;
         return obj;
       }, {});
-    const dayperiod = timeParts.dayperiod ? timeParts.dayperiod : '';
-    return `${timeParts.hour}:${timeParts.minute}${dayperiod}`;
+    const dayPeriod = timeParts.dayPeriod ? timeParts.dayPeriod : '';
+    const res = `${timeParts.hour}:${timeParts.minute} ${dayPeriod}`;
+    console.log('formatting', res);
+    return res;
   }
 
-  getWeekdays(): string[] {
+  getWeekdays(weekStartsOn = 0): string[] {
     function getDay(dayOfWeek) {
       const dt = new Date();
       return dt.setDate(dt.getDate() - dt.getDay() + dayOfWeek);
     }
 
-    return [getDay(0), getDay(1), getDay(2), getDay(3), getDay(4), getDay(5), getDay(6)].reduce((weekdays, dt) => {
+    let weekdays = [getDay(0), getDay(1), getDay(2), getDay(3), getDay(4), getDay(5), getDay(6)].reduce((weekdays, dt) => {
       weekdays.push(new Intl.DateTimeFormat(this.userLocale, { weekday: 'long' }).format(dt));
       return weekdays;
     }, []);
+
+    if (weekStartsOn > 0 && weekStartsOn <= 6) {
+      const newStart = weekdays.splice(weekStartsOn);
+      weekdays = [...newStart, ...weekdays];
+    }
+    return weekdays;
   }
 
   getMonths(): string[] {

@@ -1,5 +1,5 @@
 // NG2
-import { Directive, EventEmitter, ElementRef, OnInit, Input, Output } from '@angular/core';
+import { Directive, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
 // App
 import { Helpers } from '../../../../utils/Helpers';
 

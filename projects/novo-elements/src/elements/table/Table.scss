@@ -296,7 +296,7 @@ novo-table {
   max-height: 500px;
   overflow-x: hidden;
   overflow-y: auto;
-  button[theme][theme='dialogue'][icon] i {
+  button[theme][theme="dialogue"][icon] i {
     padding: inherit;
     padding-left: 5px;
     height: inherit;
@@ -458,7 +458,7 @@ novo-table {
     }
   }
   @each $analytics, $color in $analytics-colors {
-    &[theme='#{$analytics}'] {
+    &[theme="#{$analytics}"] {
       > header {
         background: $color;
         color: #fff;
@@ -475,7 +475,7 @@ novo-table {
             opacity: 0.75;
           }
           novo-select {
-            div[type='button'] {
+            div[type="button"] {
               color: $white;
               border-bottom: 1px solid rgba(255, 255, 255, 0.15);
               i {
@@ -488,7 +488,7 @@ novo-table {
     }
   }
   @each $entity, $color in $entity-colors {
-    &[theme='#{$entity}'] {
+    &[theme="#{$entity}"] {
       > header {
         background: $color;
         color: #fff;
@@ -505,7 +505,7 @@ novo-table {
             opacity: 0.75;
           }
           novo-select {
-            div[type='button'] {
+            div[type="button"] {
               color: $white;
               border-bottom: 1px solid rgba(255, 255, 255, 0.15);
               i {
@@ -518,7 +518,7 @@ novo-table {
     }
   }
   @each $basic, $color in $app-colors {
-    &[theme='#{$basic}'] {
+    &[theme="#{$basic}"] {
       > header {
         background: $color;
         color: #fff;
@@ -535,7 +535,7 @@ novo-table {
             opacity: 0.75;
           }
           novo-select {
-            div[type='button'] {
+            div[type="button"] {
               color: $white;
               border-bottom: 1px solid rgba(255, 255, 255, 0.15);
               i {
@@ -567,7 +567,7 @@ novo-table {
           opacity: 0.75;
         }
         novo-select {
-          div[type='button'] {
+          div[type="button"] {
             color: $white;
             border-bottom: 1px solid rgba(255, 255, 255, 0.15);
             i {

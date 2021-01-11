@@ -2,13 +2,13 @@
   "extends": "../tsconfig.base.json",
   "compilerOptions": {
     "outDir": "../out-tsc/app",
-    "types": ["node"]
+    "types": ["node"],
+    "paths": {
+      "novo-elements": ["projects/novo-elements/src/index"],
+      "novo-examples": ["projects/novo-examples/src/index"],
+      "chomsky": ["projects/chomsky/src/index"]
+    }
   },
-  "files": [
-    "main.ts",
-    "polyfills.ts"
-  ],
-  "include": [
-    "demo/**/*.d.ts"
-  ]
+  "files": ["main.ts", "polyfills.ts"],
+  "include": ["demo/**/*.d.ts"]
 }

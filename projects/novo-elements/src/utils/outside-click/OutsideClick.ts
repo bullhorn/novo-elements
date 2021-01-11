@@ -1,5 +1,5 @@
 // NG2
-import { EventEmitter, ElementRef, OnDestroy, Injectable } from '@angular/core';
+import { ElementRef, EventEmitter, Injectable, OnDestroy } from '@angular/core';
 // APP
 import { Helpers } from '../Helpers';
 

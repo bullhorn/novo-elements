@@ -1,6 +1,21 @@
 // NG
 import { FocusMonitor } from '@angular/cdk/a11y';
-import { ChangeDetectorRef, Component, ElementRef, EventEmitter, forwardRef, HostListener, Input, NgZone, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  EventEmitter,
+  forwardRef,
+  HostListener,
+  Input,
+  NgZone,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  Output,
+  SimpleChanges,
+  ViewChild,
+} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { NovoLabelService } from '../../services/novo-label-service';
 import { Helpers } from '../../utils/Helpers';
@@ -22,7 +37,7 @@ const SELECT_VALUE_ACCESSOR = {
     <div #dropdownElement (click)="togglePanel(); (false)" tabIndex="{{ disabled ? -1 : 0 }}" type="button" [class.empty]="empty">
       {{ selected.label }}<i class="bhi-collapse"></i>
     </div>
-    <novo-overlay-template [parent]="element" position="center" (closing)="dropdown.nativeElement.focus()">
+    <novo-overlay-template [parent]="element" [position]="position" (closing)="dropdown.nativeElement.focus()">
       <ul class="novo-select-list" tabIndex="-1" [class.header]="headerConfig" [class.active]="panelOpen">
         <ng-content></ng-content>
         <li *ngIf="headerConfig" class="select-header" [class.open]="header.open">
@@ -45,14 +60,22 @@ const SELECT_VALUE_ACCESSOR = {
             </footer>
           </div>
         </li>
-        <li
-          *ngFor="let option of filteredOptions; let i = index"
-          [ngClass]="{ active: option.active }"
-          (click)="setValueAndClose({ value: option, index: i })"
-          [attr.data-automation-value]="option.label"
-        >
-          <span [innerHtml]="highlight(option.label, filterTerm)"></span> <i *ngIf="option.active" class="bhi-check"></i>
-        </li>
+        <ng-container *ngFor="let option of filteredOptions; let i = index">
+          <li
+            *ngIf="!option.divider; else divider"
+            class="select-item"
+            [ngClass]="{ active: option.active }"
+            (click)="setValueAndClose({ value: option, index: i })"
+            [attr.data-automation-value]="option.label"
+          >
+            <span [innerHtml]="highlight(option.label, filterTerm)"></span> <i *ngIf="option.active" class="bhi-check"></i>
+          </li>
+          <ng-template #divider>
+            <li class="select-item-divider" [class.with-label]="option.label" [class.without-label]="!option.label">
+              {{ option?.label }}
+            </li>
+          </ng-template>
+        </ng-container>
       </ul>
     </novo-overlay-template>
   `,
@@ -71,6 +94,8 @@ export class NovoSelectElement implements OnInit, OnChanges, OnDestroy, ControlV
   readonly: boolean;
   @Input()
   headerConfig: any;
+  @Input()
+  position: string = 'center';
   @Output()
   onSelect: EventEmitter<any> = new EventEmitter();
 
@@ -84,8 +109,8 @@ export class NovoSelectElement implements OnInit, OnChanges, OnDestroy, ControlV
   createdItem: any;
   selected: any;
   model: any;
-  onModelChange: Function = () => { };
-  onModelTouched: Function = () => { };
+  onModelChange: Function = () => {};
+  onModelTouched: Function = () => {};
   filterTerm: string = '';
   filterTermTimeout;
   filteredOptions: any;
@@ -103,7 +128,7 @@ export class NovoSelectElement implements OnInit, OnChanges, OnDestroy, ControlV
     public ref: ChangeDetectorRef,
     private focusMonitor: FocusMonitor,
     private ngZone: NgZone,
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.focusMonitor.monitor(this.dropdown.nativeElement).subscribe((origin) =>
@@ -137,7 +162,7 @@ export class NovoSelectElement implements OnInit, OnChanges, OnDestroy, ControlV
     if (!this.model && !this.createdItem) {
       this.clear();
     } else if (this.createdItem) {
-      const item = this.options.find((i) => i.label === this.createdItem);
+      const item = this.options.find((i) => i.label === this.createdItem && !i.divider);
       const index = this.options.indexOf(item);
       this.select(item, index);
     } else {
@@ -342,7 +367,7 @@ export class NovoSelectElement implements OnInit, OnChanges, OnDestroy, ControlV
   writeValue(model: any): void {
     this.model = model;
     if (this.options) {
-      let item = this.filteredOptions.find((i) => i.value === model || (model && i.value === model.id));
+      let item = this.filteredOptions.find((i) => (i.value === model || (model && i.value === model.id)) && !i.divider);
       if (!item && !Helpers.isEmpty(model)) {
         item = {
           label: model,

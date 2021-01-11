@@ -1,6 +1,6 @@
 // NG2
-import { Component, Input, Output, EventEmitter, forwardRef, ChangeDetectorRef } from '@angular/core';
-import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
+import { ChangeDetectorRef, Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 // APP
 import { KeyCodes } from '../../utils/key-codes/KeyCodes';
 
@@ -15,16 +15,16 @@ const SWITCH_VALUE_ACCESSOR = {
   selector: 'novo-switch',
   providers: [SWITCH_VALUE_ACCESSOR],
   template: `
-        <div (click)="toggle($event)">
-            <div class="novo-switch-container">
-                <div class="novo-switch-bar"></div>
-                <div class="novo-switch-thumb-container">
-                    <div class="novo-switch-thumb"></div>
-                </div>
-            </div>
-            <div class="novo-switch-label"><ng-content></ng-content></div>
+    <div (click)="toggle($event)">
+      <div class="novo-switch-container">
+        <div class="novo-switch-bar"></div>
+        <div class="novo-switch-thumb-container">
+          <div class="novo-switch-thumb"></div>
         </div>
-    `,
+      </div>
+      <div class="novo-switch-label"><ng-content></ng-content></div>
+    </div>
+  `,
   host: {
     role: 'checkbox',
     '[attr.aria-checked]': 'model',

@@ -1,17 +1,17 @@
 // NG2
-import { TestBed, async } from '@angular/core/testing';
-// APP
-import { EntityPickerResult } from './EntityPickerResults';
+import { async, TestBed } from '@angular/core/testing';
 import { NovoLabelService } from '../../../../services/novo-label-service';
-import { NovoLoadingElement } from '../../../loading/Loading';
 import {
-  NovoListElement,
-  NovoListItemElement,
   NovoItemAvatarElement,
+  NovoItemContentElement,
   NovoItemHeaderElement,
   NovoItemTitleElement,
-  NovoItemContentElement,
+  NovoListElement,
+  NovoListItemElement,
 } from '../../../list/List';
+import { NovoLoadingElement } from '../../../loading/Loading';
+// APP
+import { EntityPickerResult } from './EntityPickerResults';
 
 describe('Elements: EntityPickerResult', () => {
   let fixture;

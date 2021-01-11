@@ -1,6 +1,6 @@
 // APP
-import { BaseControl, NovoControlConfig } from '../BaseControl';
 import { FormValidators } from '../../FormValidators';
+import { BaseControl, NovoControlConfig } from '../BaseControl';
 
 export class AddressControl extends BaseControl {
   controlType = 'address';

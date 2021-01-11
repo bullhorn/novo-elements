@@ -1,14 +1,14 @@
 // NG2
-import { Component, ElementRef, Input, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, Output } from '@angular/core';
+import { NovoLabelService } from '../../../../services/novo-label-service';
 // Vendor
 // APP
 import { BasePickerResults } from '../base-picker-results/BasePickerResults';
-import { NovoLabelService } from '../../../../services/novo-label-service';
 
 @Component({
   selector: 'entity-picker-result',
   template: `
-    <novo-list-item *ngIf="match.data">
+    <novo-list-item *ngIf="match.data" (click)="select.next(match.data)">
       <item-header>
         <item-avatar [icon]="getIconForResult(match.data)"></item-avatar>
         <item-title> <span [innerHtml]="highlight(getNameForResult(match.data), term)"></span> </item-title>
@@ -33,6 +33,26 @@ import { NovoLabelService } from '../../../../services/novo-label-service';
         <p class="start-date" *ngIf="match.data.dateBegin && match.data.searchEntity === 'Placement'">
           <i class="bhi-calendar"></i>
           <span [innerHtml]="renderTimestamp(match.data.dateBegin) + ' - ' + renderTimestamp(match.data.dateEnd)"></span>
+        </p>
+        <!-- START Date -->
+        <p class="start-date" *ngIf="match.data.startTime && match.data.searchEntity === 'JobShift'">
+          <i class="bhi-calendar"></i>
+          <span [innerHtml]="renderTimestamp(match.data.startTime)"></span>
+        </p>
+        <!-- START & END TIME -->
+        <p class="start-time" *ngIf="match.data.startTime && match.data.searchEntity === 'JobShift'">
+          <i class="bhi-clock"></i>
+          <span [innerHtml]="renderTimeNoOffset(match.data.startTime) + ' - ' + renderTimeNoOffset(match.data.endTime)"></span>
+        </p>
+        <!-- JOBORDER -->
+        <p class="job" *ngIf="match.data.jobOrder && match.data.searchEntity === 'JobShift'">
+          <i class="bhi-job"></i>
+          <span [innerHtml]="highlight(match.data.jobOrder.title, term)"></span>
+        </p>
+        <!-- OPENINGS -->
+        <p class="openings" *ngIf="match.data.openings && match.data.searchEntity === 'JobShift'">
+          <i class="bhi-candidate"></i>
+          <span>{{ match.data.numAssigned * match.data.fillRatio | number: '1.0-0' }} / {{ match.data.openings }}</span>
         </p>
         <!-- EMAIL -->
         <p class="email" *ngIf="match.data.email">
@@ -72,10 +92,9 @@ import { NovoLabelService } from '../../../../services/novo-label-service';
   `,
 })
 export class EntityPickerResult {
-  @Input()
-  match: any;
-  @Input()
-  term: any;
+  @Input() match: any;
+  @Input() term: any;
+  @Output() select: EventEmitter<any> = new EventEmitter();
 
   constructor(public labels: NovoLabelService) {}
 
@@ -117,6 +136,8 @@ export class EntityPickerResult {
           return 'user';
         case 'CorporationDepartment':
           return 'department';
+        case 'JobShift':
+          return 'timetable contract';
         default:
           return '';
       }
@@ -128,6 +149,23 @@ export class EntityPickerResult {
     let timestamp = '';
     if (date) {
       timestamp = this.labels.formatDateWithFormat(date, { year: 'numeric', month: 'numeric', day: 'numeric' });
+    }
+    return timestamp;
+  }
+
+  renderTime(dateStr?: string) {
+    let timestamp = '';
+    if (dateStr) {
+      timestamp = this.labels.formatTime(new Date(dateStr));
+    }
+    return timestamp;
+  }
+
+  renderTimeNoOffset(dateStr?: string) {
+    let timestamp = '';
+    if (dateStr) {
+      dateStr = dateStr.slice(0, 19);
+      timestamp = this.labels.formatTime(dateStr);
     }
     return timestamp;
   }
@@ -161,6 +199,8 @@ export class EntityPickerResult {
             }
           }
           return label;
+        case 'JobShift':
+          return `${result.jobOrder?.title} @ ${result.jobOrder?.clientCorporation?.name || ''}`.trim();
         default:
           return `${result.name || ''}`.trim();
       }
@@ -177,8 +217,8 @@ export class EntityPickerResult {
         *ngFor="let match of matches"
         [match]="match"
         [term]="term"
-        (click)="selectMatch($event, match)"
         [ngClass]="{ active: isActive(match) }"
+        (mousedown)="selectMatch($event, match)"
         (mouseenter)="selectActive(match)"
         [class.disabled]="preselected(match)"
       >
@@ -191,8 +231,8 @@ export class EntityPickerResult {
   `,
 })
 export class EntityPickerResults extends BasePickerResults {
-  @Output()
-  select: EventEmitter<any> = new EventEmitter();
+  @Output() select: EventEmitter<any> = new EventEmitter();
+
   constructor(element: ElementRef, public labels: NovoLabelService, ref: ChangeDetectorRef) {
     super(element, ref);
   }
