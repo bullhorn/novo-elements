@@ -14,11 +14,11 @@ export class NovoFormGroup extends FormGroup {
   public associations: object;
   public _value: any;
 
-  get value() {
+  get valueInput() {
     return this.getRawValue();
   }
 
-  set value(v: any) {
+  set valueInput(v: any) {
     this._value = v;
   }
 

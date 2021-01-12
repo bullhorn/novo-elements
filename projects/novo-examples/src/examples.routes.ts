@@ -418,7 +418,7 @@ export const PAGE_LIST = [
 @NgModule({
   declarations: PAGE_LIST,
   entryComponents: PAGE_LIST,
-  imports: [RouterModule.forRoot(routes, { useHash: true, relativeLinkResolution: 'legacy' }), NovoExamplesModule, NovoExamplesSharedModule],
+  imports: [RouterModule.forRoot(routes, { useHash: true }), NovoExamplesModule, NovoExamplesSharedModule],
   exports: [RouterModule],
 })
 export class NovoExamplesRoutesModule {}

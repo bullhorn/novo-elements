@@ -35,8 +35,9 @@ export class NovoSimpleHeaderCellDef extends _NovoHeaderCellDef {
   providers: [{ provide: CdkColumnDef, useExisting: NovoSimpleColumnDef }],
 })
 export class NovoSimpleColumnDef extends _NovoColumnDef {
-  @Input('novoSimpleColumnDef')
-  name: string;
+  @Input('novoSimpleColumnDef') set name(value: string) {
+    this.name = value;
+  }
 }
 
 @Directive({

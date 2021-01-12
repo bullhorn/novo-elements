@@ -110,8 +110,9 @@ export class NovoStepper extends CdkStepper implements AfterContentInit {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NovoHorizontalStepper extends NovoStepper {
-  @Input()
-  selectedIndex: number;
+  @Input('selectedIndex') set selectedIndex(value: number) {
+    this.selectedIndex = value;
+  }
 }
 
 @Component({
@@ -129,8 +130,9 @@ export class NovoHorizontalStepper extends NovoStepper {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NovoVerticalStepper extends NovoStepper {
-  @Input()
-  selectedIndex: number;
+  @Input() set selectedIndex(value: number) {
+    this.selectedIndex = value;
+  };
 
   constructor(@Optional() dir: Directionality, changeDetectorRef: ChangeDetectorRef) {
     super(dir, changeDetectorRef);
