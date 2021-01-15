@@ -15,7 +15,7 @@ export class NovoIconComponent implements AfterViewInit {
   public raised: boolean;
   @HostBinding('attr.size')
   @Input()
-  public size: string = 'medium';
+  public size: string;
   @HostBinding('attr.theme')
   @Input()
   public theme: string;

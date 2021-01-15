@@ -1,18 +1,20 @@
 novo-search {
   display: grid;
   grid-template-areas: "icon input";
-  grid-template-columns: 3.2em 1fr;
+  grid-template-columns: max-content 1fr;
+  grid-template-rows: 1fr;
   align-items: center;
+  height: 3.5em;
 
   > button[theme][theme="fab"] {
-    width: 2.8em;
-    height: 2.8em;
-    min-height: 2.8em;
+    width: 2em;
+    height: 2em;
   }
 
   > input {
     height: 100%;
-    width: 0;
+    max-width: 400px;
+    width: 0%;
     display: block;
     background: $white;
     position: relative;
@@ -21,6 +23,9 @@ novo-search {
     z-index: 12;
     opacity: 0;
     border: none;
+    transition: all 250ms;
+    backface-visibility: hidden;
+
     &:focus,
     &:active {
       outline: none;
@@ -45,6 +50,7 @@ novo-search {
     > input {
       opacity: 1;
       width: 100%;
+      width: -webkit-fill-available;
     }
   }
 
@@ -70,9 +76,35 @@ novo-search {
       }
     }
     @each $key, $color in $all-colors {
-      &[theme="#{$key}"] {
+      &[color="#{$key}"] {
         > button {
           color: $color !important;
+        }
+      }
+    }
+
+    @each $key, $color in $dark-colors {
+      &[theme="#{$key}"] {
+        > button {
+          background: $color !important;
+          color: $white !important;
+        }
+        input {
+          background: $color !important;
+          color: $white !important;
+        }
+      }
+    }
+
+    @each $key, $color in $light-colors {
+      &[theme="#{$key}"] {
+        > button {
+          background: $color !important;
+          color: $dark !important;
+        }
+        input {
+          background: $color !important;
+          color: $dark !important;
         }
       }
     }

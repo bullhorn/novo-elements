@@ -1,5 +1,6 @@
 // NG2
 import { Component, HostBinding, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { BooleanInput } from '../../utils';
 // APP
 import { Helpers } from '../../utils/Helpers';
 export enum NOVO_VALUE_TYPE {
@@ -18,7 +19,7 @@ export enum NOVO_VALUE_THEME {
   template: `
     <ng-container [ngSwitch]="_type">
       <div class="value-outer" *ngIf="showLabel">
-        <label>{{ meta.label }}</label>
+        <novo-label>{{ meta.label }}</novo-label>
         <span class="value">
           <i *ngIf="meta.showEntityIcon" class="bhi-circle {{ meta.entityIconClass }}"></i>
           <a *ngSwitchCase="NOVO_VALUE_TYPE.INTERNAL_LINK" (click)="openLink()" [innerHTML]="data | render: meta"></a>
@@ -27,7 +28,7 @@ export enum NOVO_VALUE_THEME {
         <novo-entity-list *ngSwitchCase="NOVO_VALUE_TYPE.ENTITY_LIST" [data]="data" [meta]="meta"></novo-entity-list>
       </div>
       <div *ngSwitchDefault class="value-outer" [ngClass]="customClass">
-        <label>{{ meta.label }}</label>
+        <novo-label>{{ meta.label }}</novo-label>
         <div *ngIf="isDefault" class="value" [innerHTML]="data | render: meta"></div>
       </div>
       <div class="actions" *ngIf="showIcon">
@@ -43,6 +44,11 @@ export class NovoValueElement implements OnInit, OnChanges {
   meta: any = { type: 'SCALAR', label: '' }; // TODO use interface
   @Input()
   theme: NOVO_VALUE_THEME = NOVO_VALUE_THEME.DEFAULT;
+
+  @HostBinding('class.horizontal')
+  @Input()
+  @BooleanInput()
+  row: Boolean = false;
 
   _type: NOVO_VALUE_TYPE;
   NOVO_VALUE_TYPE = NOVO_VALUE_TYPE;

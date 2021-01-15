@@ -2,8 +2,9 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'button[theme]',
+  selector: 'button[theme],novo-button',
   host: {
+    class: 'novo-button',
     '[attr.theme]': 'theme',
     '[attr.color]': 'color',
     '[attr.icon]': 'icon',
@@ -54,7 +55,7 @@ export class NovoButtonElement {
   @Input() color: string;
   @Input() side: string = 'right';
   @Input() size: string;
-  @Input() theme: string;
+  @Input() theme: string = 'dialogue';
   @Input() loading: boolean;
   @Input()
   set icon(icon: string) {

@@ -1,0 +1,25 @@
+@import "../../../../styles/global/variables.scss";
+@import "../text.mixins.scss";
+
+:host {
+  display: block;
+  font-family: Roboto, sans-serif;
+  font-size: 1.5em;
+  font-weight: 300;
+  line-height: 1em;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  // color: $dark;
+  color: inherit;
+
+  @include text-sizing(1.2em, 1.5em, 2em);
+  @include text-colors();
+  @include text-margins();
+
+  &::ng-deep {
+    novo-icon {
+      vertical-align: top;
+      font-size: 1em;
+    }
+  }
+}

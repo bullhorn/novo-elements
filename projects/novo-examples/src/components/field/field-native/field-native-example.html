@@ -6,7 +6,13 @@
     <novo-radio value="vertical">Vertical</novo-radio>
   </novo-radio-group>
 
-  <novo-fields [appearance]="direction">
+  <novo-label>Full Width?</novo-label>
+  <novo-radio-group [(ngModel)]="fullWidth">
+    <novo-radio [value]="false">Condensed</novo-radio>
+    <novo-radio [value]="true">Full Width</novo-radio>
+  </novo-radio-group>
+
+  <novo-fields [appearance]="direction" [fullWidth]="fullWidth">
 
     <novo-field>
       <novo-label>Username</novo-label>

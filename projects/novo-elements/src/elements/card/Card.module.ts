@@ -5,11 +5,11 @@ import { NovoButtonModule } from '../button/Button.module';
 // APP
 import { NovoLoadingModule } from '../loading/Loading.module';
 import { NovoTooltipModule } from '../tooltip/Tooltip.module';
-import { CardActionsElement, CardElement } from './Card';
+import { CardActionsElement, CardContentElement, CardElement, CardFooterElement, CardHeaderElement } from './Card';
 
 @NgModule({
   imports: [CommonModule, NovoButtonModule, NovoLoadingModule, NovoTooltipModule],
-  declarations: [CardElement, CardActionsElement],
-  exports: [CardElement, CardActionsElement],
+  declarations: [CardElement, CardActionsElement, CardContentElement, CardHeaderElement, CardFooterElement],
+  exports: [CardElement, CardActionsElement, CardContentElement, CardHeaderElement, CardFooterElement],
 })
 export class NovoCardModule {}

@@ -10,5 +10,6 @@ import { Component } from '@angular/core';
 })
 export class FieldNativeExample {
   direction = 'horizontal';
+  fullWidth = false;
   hide = true;
 }

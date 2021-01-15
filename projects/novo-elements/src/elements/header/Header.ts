@@ -1,14 +1,15 @@
 import { Component, HostBinding, Input } from '@angular/core';
+import { BooleanInput } from '../../utils';
 
 @Component({
   selector: 'header-spacer',
-  template: ` <ng-content></ng-content> `,
+  template: `<ng-content></ng-content>`,
 })
 export class NovoHeaderSpacer {}
 
 @Component({
   selector: 'utils',
-  template: ` <ng-content></ng-content> `,
+  template: `<ng-content></ng-content>`,
 })
 export class NovoUtilsComponent {}
 
@@ -35,23 +36,25 @@ export class NovoUtilActionComponent {
     <section>
       <div class="header-title">
         <ng-container *ngIf="title">
-          <i *ngIf="icon" class="header-icon" [ngClass]="icon"></i>
+          <novo-icon class="header-icon" *ngIf="icon">{{ icon }}</novo-icon>
           <div class="header-titles">
-            <h1>{{ title }}</h1>
-            <small *ngIf="subTitle">{{ subTitle }}</small>
+            <novo-title size="large">{{ title }}</novo-title>
+            <novo-title size="small">{{ subTitle }}</novo-title>
           </div>
         </ng-container>
         <ng-container *ngIf="!title">
           <ng-content select="novo-icon, [novo-icon]"></ng-content>
           <div class="header-titles">
-            <ng-content select="h1, h2, h3, h4, h5, h6, small, [novo-title], [novo-subtitle]"></ng-content>
+            <ng-content select="h1, h2, h3, h4, h5, h6, small, novo-title, [novo-title], [novo-subtitle]"></ng-content>
           </div>
         </ng-container>
       </div>
       <ng-content select="section"></ng-content>
-      <span flex></span>
+      <span class="spacer"></span>
       <ng-content select="utils"></ng-content>
-      <ng-content select="novo-action"></ng-content>
+      <div class="header-actions">
+        <ng-content select="novo-action,[novo-action]"></ng-content>
+      </div>
     </section>
     <ng-content></ng-content>
   `,
@@ -61,6 +64,7 @@ export class NovoHeaderComponent {
   public headerClass: string = 'novo-header';
   @HostBinding('class.condensed')
   @Input()
+  @BooleanInput()
   public condensed: boolean = false;
   @Input()
   public title: string;

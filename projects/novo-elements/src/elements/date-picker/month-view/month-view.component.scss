@@ -121,7 +121,7 @@
           color: #fff;
         }
       }
-      &.preview:not(.previewEnd) {
+      &.preview:not(.previewStart):not(.previewEnd) {
         .day {
           border: 1px dashed $positive;
         }

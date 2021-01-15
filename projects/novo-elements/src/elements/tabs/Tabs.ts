@@ -1,5 +1,6 @@
 // NG2
 import { Component, EventEmitter, HostBinding, Input, Output } from '@angular/core';
+import { BooleanInput } from '../../utils';
 
 @Component({
   selector: 'novo-nav',
@@ -16,6 +17,7 @@ export class NovoNavElement {
   router: string;
   @HostBinding('class.condensed')
   @Input()
+  @BooleanInput()
   condensed: boolean = false;
 
   items: Array<any> = [];
@@ -75,8 +77,13 @@ export class NovoNavElement {
 export class NovoTabElement {
   @Input()
   active: boolean = false;
+
+  @Input()
+  color: string;
+
   @Input()
   disabled: boolean = false;
+
   @Output()
   activeChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 

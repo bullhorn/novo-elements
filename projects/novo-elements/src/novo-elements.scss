@@ -84,6 +84,14 @@
 }
 
 @each $basic, $color in $all-colors {
+  .bgc-#{$basic}-striped {
+    & > *:nth-child(odd) {
+      background: $color;
+    }
+  }
+}
+
+@each $basic, $color in $all-colors {
   .tc-#{$basic} {
     color: $color;
   }

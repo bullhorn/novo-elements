@@ -9,10 +9,12 @@ novo-icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  font-size: 1em;
   i {
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: inherit;
     * {
       display: none;
     }
@@ -23,6 +25,8 @@ novo-icon {
         color: $white;
         background: $color;
         border-radius: $icon-border-radius;
+        width: $medium-themed-icon-size;
+        height: $medium-themed-icon-size;
       }
       &[size="small"] {
         i {
@@ -55,24 +59,24 @@ novo-icon {
     }
   }
   &[size="small"] {
+    font-size: 0.8em;
     i {
       width: $small-icon-size;
       height: $small-icon-size;
-      font-size: 1rem;
     }
   }
   &[size="medium"] {
+    font-size: 1em;
     i {
       width: $medium-icon-size;
       height: $medium-icon-size;
-      font-size: 1.2rem;
     }
   }
   &[size="large"] {
+    font-size: 1.4em;
     i {
       width: $large-icon-size;
       height: $large-icon-size;
-      font-size: 1.4rem;
     }
   }
   &[raised="true"] {

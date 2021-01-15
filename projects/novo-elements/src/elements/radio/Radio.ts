@@ -44,6 +44,7 @@ const RADIO_VALUE_ACCESSOR = {
         *ngIf="button"
         [ngClass]="{ unchecked: !checked, checked: checked, 'has-icon': !!icon }"
         [theme]="theme"
+        [color]="checked ? color : null"
         [icon]="icon"
         [size]="size"
       >
@@ -78,6 +79,8 @@ export class NovoRadioElement implements ControlValueAccessor, OnInit {
   size: string;
   @Input()
   icon: string;
+  @Input()
+  color: string;
 
   @Output() change = new EventEmitter();
   @Output() blur = new EventEmitter();

@@ -1,8 +1,6 @@
-Typography
-==========
+# Typography
 
-Roboto, not robotic.
---------------------
+## Roboto, not robotic.
 
 Roboto's refined letterforms combine geometry with open, rounded features to create a structured, yet friendly typeface. It maintains a human\-like quality while expressing a clean and modern aesthetic.
 
@@ -34,7 +32,7 @@ Typographic balance is critical to readability and understanding information hie
 
 ##### Line Length
 
-* * *
+---
 
 30
 
@@ -42,7 +40,7 @@ Short lines interrupt the reader's rhythm
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco labor.
 
-* * *
+---
 
 55\-75
 
@@ -50,7 +48,7 @@ Optimal line length for readability
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco labor.
 
-* * *
+---
 
 100
 
@@ -60,22 +58,19 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 
 ###### How does this work with responsive design?
 
-Line length is always relative to its font\-size. This means that if a font scales up or down in sizing (relative to its device's screen size) the line length will automatically scale with it. Line length is about maintaining a comfortable reading flow and rhythm from line to line.  
-  
+Line length is always relative to its font\-size. This means that if a font scales up or down in sizing (relative to its device's screen size) the line length will automatically scale with it. Line length is about maintaining a comfortable reading flow and rhythm from line to line.
+
 **When implementing**, native line length will always be secondary to the width of the text's container. This means that if a screen's width is smaller than the text's native line length, the text will wrap early.
 
-Styles
-------
+## Styles
 
 There a number of general styles that are present throughout the application. To maintain consistency, these styles should be adhered to as much as possible.
 
-Header 1
-========
+# Header 1
 
 Roboto **Size:** 2.5em (35px) **Weight:** 400 **Margin:** 0 **Padding:** 0.45em 0 0.35em
 
-Header 2
---------
+## Header 2
 
 Roboto **Size:** 2em (28px) **Weight:** 500 **Margin:** 0 **Padding:** 0.75em 0 0.3em
 
@@ -99,12 +94,10 @@ Caption
 
 #### Section Header
 
-Large Section Header with Icon
-------------------------------
+## Large Section Header with Icon
 
 ###### Small Section Header with Icon
 
-    
             <h1>Heading 1</h1>
             <h2>Heading 2</h2>
             <h3>Heading 3</h3>
@@ -125,3 +118,33 @@ Large Section Header with Icon
               <i class="bhi-idea">
               Small Section Header with Icon
             </h6>
+
+## Title Text
+
+These are the base colors of the application.
+
+<code-example example="title"></code-example>
+
+## Body Text
+
+These are the base colors of the application.
+
+<code-example example="text"></code-example>
+
+## Label Text
+
+These are the base colors of the application.
+
+<code-example example="label"></code-example>
+
+## Caption Text
+
+These are the base colors of the application.
+
+<code-example example="caption"></code-example>
+
+## Link Text
+
+These are the base colors of the application.
+
+<code-example example="link"></code-example>

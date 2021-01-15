@@ -1,11 +1,13 @@
 <header [theme]="theme">
-  <utils>
-    <util-action icon="convert" tooltip="Change Theme" (click)="changeTheme()"></util-action>
-    <util-action icon="refresh" tooltip="Show Popup" (click)="catchEv('refresh', $event)"></util-action>
-    <util-action icon="times" tooltip="Show Popup" (click)="catchEv('close', $event)"></util-action>
-  </utils>
-  <novo-icon>{{icon}}</novo-icon>
-  <h1 novo-title>John Deere</h1>
+  <novo-action icon="convert" tooltip="Change Theme" (click)="changeTheme()"></novo-action>
+  <novo-action icon="refresh" tooltip="Show Popup" (click)="catchEv('refresh', $event)"></novo-action>
+  <novo-action icon="times" tooltip="Show Popup" (click)="catchEv('close', $event)"></novo-action>
+
+  <!-- <novo-icon size="large">{{icon}}</novo-icon> -->
+  <novo-title size="large">
+    <novo-icon>{{icon}}</novo-icon>
+    <span>John Deere</span>
+  </novo-title>
   <section>
     Extra Info
   </section>

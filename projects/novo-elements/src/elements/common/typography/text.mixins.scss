@@ -1,0 +1,156 @@
+@import "../../../styles/global/variables.scss";
+
+@mixin text-disabled($property) {
+  pointer-events: none;
+  color: $disabled;
+}
+
+@mixin text-sizing($small, $base, $large) {
+  &.text-size-default {
+    font-size: $base;
+  }
+  &.text-size-small {
+    font-size: $small;
+  }
+  &.text-size-large {
+    font-size: $large;
+  }
+}
+
+@mixin text-weights() {
+  &.text-weight-thin {
+    font-weight: 200;
+  }
+  &.text-weight-default {
+    font-weight: 400;
+  }
+  &.text-weight-medium {
+    font-weight: 500;
+  }
+  &.text-weight-bold {
+    font-weight: 700;
+  }
+}
+
+@mixin text-colors() {
+  @each $basic, $color in $all-colors {
+    &.text-color-#{$basic} {
+      color: $color;
+    }
+  }
+}
+
+@mixin text-margins() {
+  &.margin-before {
+    margin-top: 1em;
+  }
+
+  &.margin-after {
+    margin-bottom: 1em;
+  }
+}
+
+@mixin novo-body-text() {
+  display: inline;
+  font-family: Roboto, san-serif;
+  font-size: 1em;
+  font-weight: normal;
+  line-height: 1em;
+  color: inherit;
+}
+
+@mixin novo-title-text() {
+  display: block;
+  font-family: Roboto, sans-serif;
+  font-size: 1.5em;
+  font-weight: 300;
+  line-height: 1em;
+  color: $dark;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+@mixin novo-label-text() {
+  display: inline;
+  font-family: Roboto, sans-serif;
+  font-size: 0.9em;
+  font-weight: 500;
+  transition: 0.2s ease-out;
+  text-transform: uppercase;
+  word-break: word-break;
+  overflow-wrap: break-word;
+  color: $slate;
+}
+
+@mixin novo-caption-text() {
+  display: inline;
+  font-family: Roboto, san-serif;
+  font-size: 0.8em;
+  font-weight: 400;
+  line-height: 1em;
+  color: $neutral;
+}
+
+// Body Text
+@mixin novo-text-small() {
+  @include novo-body-text();
+  font-size: $base;
+}
+
+@mixin novo-text-medium() {
+  @include novo-body-text();
+  font-size: $base;
+}
+
+@mixin novo-text-large() {
+  @include novo-body-text();
+  font-size: $base;
+}
+
+// TITLE
+@mixin novo-title-small() {
+  @include novo-title-text();
+  font-size: $base;
+}
+
+@mixin novo-title-medium() {
+  @include novo-title-text();
+  font-size: $base;
+}
+
+@mixin novo-title-large() {
+  @include novo-title-text();
+  font-size: $base;
+}
+
+// LABEL
+@mixin novo-label-small() {
+  @include novo-label-text();
+  font-size: $base;
+}
+
+@mixin novo-label-medium() {
+  @include novo-label-text();
+  font-size: $base;
+}
+
+@mixin novo-label-large() {
+  @include novo-label-text();
+  font-size: $base;
+}
+
+// CAPTIONS
+@mixin novo-caption-small() {
+  @include novo-caption-text();
+  font-size: $base;
+}
+
+@mixin novo-caption-medium() {
+  @include novo-caption-text();
+  font-size: $base;
+}
+
+@mixin novo-caption-large() {
+  @include novo-caption-text();
+  font-size: $base;
+}

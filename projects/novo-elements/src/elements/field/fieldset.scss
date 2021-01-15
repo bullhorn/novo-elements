@@ -3,4 +3,21 @@
 :host {
   display: grid;
   grid-gap: 1.2rem;
+
+  &.full-width {
+    &::ng-deep {
+      novo-field.novo-field-appearance-vertical {
+        grid-template-columns: minmax(300px, 450px);
+        .novo-input-element {
+          width: 100%;
+        }
+      }
+      novo-field.novo-field-appearance-horizontal {
+        grid-template-columns: 150px minmax(150px, 450px);
+        .novo-input-element {
+          width: 100%;
+        }
+      }
+    }
+  }
 }

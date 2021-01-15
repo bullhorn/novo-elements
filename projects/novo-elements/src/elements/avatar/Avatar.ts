@@ -5,7 +5,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 @Component({
   selector: 'novo-avatar',
   styleUrls: ['./Avatar.scss'],
-  template: '<img [src]="src"/>',
+  template: '<img *ngIf="src" [src]="src"/>',
 })
 export class NovoAvatarElement implements OnInit {
   @Input() source: any;
@@ -17,6 +17,11 @@ export class NovoAvatarElement implements OnInit {
   @Input()
   size: string;
 
+  @HostBinding('style.backgroundImage')
+  get background(): string {
+    return `url(${this.source.profileImage})`;
+  }
+
   src: any;
 
   constructor(private sanitizer: DomSanitizer) {}
@@ -25,7 +30,8 @@ export class NovoAvatarElement implements OnInit {
     let src: any;
     if ((this.source && this.source !== '') || this.label) {
       if (this.source.profileImage) {
-        src = this.source.profileImage;
+        // this.background = this.source.profileImage;
+        return;
       } else if (this.source.logo) {
         src = this.source.logo;
       } else {

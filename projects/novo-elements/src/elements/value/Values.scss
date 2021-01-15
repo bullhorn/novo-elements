@@ -4,22 +4,33 @@ novo-value {
   max-width: 500px;
   justify-content: space-between;
   align-items: flex-start;
-  width: 100%;
+  width: max-content;
   padding: 8px;
-  font-size: 1.1rem;
+  // font-size: 1.1rem;
+
+  &.horizontal {
+    width: 100%;
+    max-width: 100%;
+    .value-outer {
+      display: grid;
+      width: 100%;
+      grid-template-columns: minmax(120px, 30%) 1fr;
+    }
+  }
 
   .value-outer {
     display: flex;
     flex-direction: column;
-    label {
-      color: $grey;
-      flex: 1;
-      font-weight: 500;
-      transition: 200ms ease-out;
-      text-transform: uppercase;
-      overflow-wrap: break-word;
-      margin-bottom: 0.4rem;
-    }
+    gap: 0.4rem;
+    // label {
+    //   color: $grey;
+    //   flex: 1;
+    //   font-weight: 500;
+    //   transition: 200ms ease-out;
+    //   text-transform: uppercase;
+    //   overflow-wrap: break-word;
+    //   margin-bottom: 0.4rem;
+    // }
   }
   @each $entity, $color in $entity-colors {
     i.#{$entity} {
