@@ -14,14 +14,6 @@ export class NovoFormGroup extends FormGroup {
   public associations: object;
   public _value: any;
 
-  get valueInput() {
-    return this.getRawValue();
-  }
-
-  set valueInput(v: any) {
-    this._value = v;
-  }
-
   public enableAllControls(): void {
     for (const key in this.controls) {
       if ((this.controls[key] as NovoFormControl).readOnly) {

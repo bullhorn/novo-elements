@@ -55,12 +55,6 @@ let uniqueId = 0;
   },
 })
 export class NovoExpansionPanel extends CdkAccordionItem implements AfterContentInit, OnChanges, OnDestroy {
-  @Input('disabled') set disabled(value: boolean) {
-    this.disabled = value;
-  }
-  @Input('expanded') set expanded(value: boolean) {
-    this.expanded = value;
-  }
   /** Whether the toggle indicator should be hidden. */
   @Input()
   get hideToggle(): boolean {
@@ -183,4 +177,4 @@ export class NovoExpansionPanel extends CdkAccordionItem implements AfterContent
     class: 'novo-action-row',
   },
 })
-export class NovoExpansionPanelActionRow { }
+export class NovoExpansionPanelActionRow {}

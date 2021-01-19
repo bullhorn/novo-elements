@@ -20,7 +20,7 @@ export const _NovoCell = CdkCell;
 })
 export class NovoSimpleCellDef extends _NovoCellDef {
   // TODO: add explicit constructor
- }
+}
 
 @Directive({
   selector: '[novoSimpleHeaderCellDef]',
@@ -28,15 +28,19 @@ export class NovoSimpleCellDef extends _NovoCellDef {
 })
 export class NovoSimpleHeaderCellDef extends _NovoHeaderCellDef {
   // TODO: add explicit constructor
- }
+}
 
 @Directive({
   selector: '[novoSimpleColumnDef]',
   providers: [{ provide: CdkColumnDef, useExisting: NovoSimpleColumnDef }],
 })
 export class NovoSimpleColumnDef extends _NovoColumnDef {
-  @Input('novoSimpleColumnDef') set name(value: string) {
-    this.name = value;
+  @Input('novoSimpleColumnDef')
+  get name(): string {
+    return this._name;
+  }
+  set name(name: string) {
+    this._setNameInput(name);
   }
 }
 
