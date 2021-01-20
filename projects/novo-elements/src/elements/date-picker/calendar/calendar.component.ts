@@ -144,7 +144,7 @@ export class NovoCalendarElement implements OnInit {
 
   ngOnInit() {
     if (!this.activeDate) {
-      this.activeDate = this.selected ? this.selected[0] : new Date();
+      this.activeDate = this.selected.length ? this.selected[0] : new Date();
     }
     this.updateView(this.activeDate);
   }

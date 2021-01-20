@@ -12,4 +12,5 @@ import { addDays } from 'date-fns';
 export class StandaloneCalendarExample {
   selected: Date[] = [addDays(new Date(), 0), addDays(new Date(), 1), addDays(new Date(), 3), addDays(new Date(), 5)];
   preview: Date[] = [addDays(new Date(), 2), addDays(new Date(), 4), addDays(new Date(), 6)];
+  activeDate = Date.UTC(2020, 8, 15);
 }

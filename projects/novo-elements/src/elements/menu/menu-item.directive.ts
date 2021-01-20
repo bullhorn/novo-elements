@@ -12,6 +12,7 @@ export class MenuItemDirective implements Highlightable {
   @Input() public enabled: boolean | ((item: any) => boolean) = true;
   @Input() public passive = false;
   @Input() public visible: boolean | ((item: any) => boolean) = true;
+  @Input() public name: string;
   @Output() public execute: EventEmitter<{ event: Event; item: any }> = new EventEmitter();
 
   public currentItem: any;
