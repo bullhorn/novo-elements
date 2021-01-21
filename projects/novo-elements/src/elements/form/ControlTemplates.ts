@@ -138,6 +138,13 @@ import { NovoTemplate } from '../common/novo-template/novo-template.directive';
             <novo-quick-note [formControlName]="control.key" [startupFocus]="control?.startupFocus" [placeholder]="control?.placeholder" [config]="control?.config" (change)="methods.modelChange($event)" [tooltip]="control?.tooltip" [tooltipPosition]="control?.tooltipPosition" [tooltipSize]="control?.tooltipSize" [removeTooltipArrow]="control?.removeTooltipArrow" [tooltipAutoPosition]="control?.tooltipAutoPosition" [tooltipPreline]="control?.tooltipPreline"></novo-quick-note>
           </div>
         </ng-template>
+
+        <!--Embedded-form-group-->
+        <ng-template novoTemplate="embedded-form-group" let-control let-form="form" let-errors="errors" let-methods="methods">
+          <div [formGroup]="form">
+            <novo-Embedded-form-group [key]="control.key" ></novo-Embedded-form-group>
+          </div>
+        </ng-template>
     `,
 })
 export class NovoControlTemplates implements AfterViewInit {

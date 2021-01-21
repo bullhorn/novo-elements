@@ -28,6 +28,7 @@ import { NovoFormControl } from '../../elements/form/NovoFormControl';
 import { NovoFormGroup } from '../../elements/form/NovoFormGroup';
 import { NovoLabelService } from '../../services/novo-label-service';
 import { OptionsService } from './../../services/options/OptionsService';
+import { EmbeddedFormGroupControl } from '../../elements/form/controls';
 
 @Injectable()
 export class FormUtils {
@@ -160,6 +161,9 @@ export class FormUtils {
         } else {
           type = 'chips';
         }
+      }
+      if (field.dataType === 'AbstractEmbeddedToManyEntity') {
+        type = 'embeddedFormGroupControl';
       }
     } else if (field.type === 'TO_ONE') {
       if ('SYSTEM' === field.dataSpecialization && ['WorkflowOptionsLookup', 'SpecializedOptionsLookup'].includes(field.dataType)) {
@@ -438,6 +442,9 @@ export class FormUtils {
         break;
       case 'custom':
         control = new CustomControl(controlConfig);
+        break;
+      case 'embeddedFormGroupControl':
+        control = new EmbeddedFormGroupControl(controlConfig);
         break;
       default:
         control = new TextBoxControl(controlConfig);

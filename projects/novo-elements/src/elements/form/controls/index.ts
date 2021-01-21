@@ -17,3 +17,4 @@ export { TextBoxControl } from './textbox/TextBoxControl';
 export { TilesControl } from './tiles/TilesControl';
 export { TimeControl } from './time/TimeControl';
 export { GroupedControl } from './grouped/GroupedControl';
+export { EmbeddedFormGroupControl } from './embedded-form-group/EmbeddedFormGroupControl';

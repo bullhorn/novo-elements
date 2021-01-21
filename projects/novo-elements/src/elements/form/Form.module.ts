@@ -31,6 +31,7 @@ import { NovoControlGroup } from './ControlGroup';
 import { NovoControlTemplates } from './ControlTemplates';
 import { NovoTemplateService } from './../../services/template/NovoTemplateService';
 import { NovoCommonModule } from '../common/common.module';
+import {NovoEmbeddedFormGroupModule} from '../embedded-Form-Group/EmbeddedFormGroup.module';
 
 @NgModule({
   imports: [
@@ -56,6 +57,7 @@ import { NovoCommonModule } from '../common/common.module';
     NovoButtonModule,
     NovoAceEditorModule,
     NovoCommonModule,
+    NovoEmbeddedFormGroupModule,
   ],
   declarations: [
     NovoAutoSize,
