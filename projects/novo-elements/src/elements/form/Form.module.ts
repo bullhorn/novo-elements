@@ -18,7 +18,7 @@ import { NovoNovoCKEditorModule } from './../ckeditor/CKEditor.module';
 import { NovoQuickNoteModule } from './../quick-note/QuickNote.module';
 import { NovoDynamicFormElement, NovoFieldsetElement, NovoFieldsetHeaderElement } from './DynamicForm';
 import { NovoFormElement } from './Form';
-import { NovoControlElement, NovoAutoSize } from './Control';
+import { NovoAutoSize, NovoControlElement } from './Control';
 import { NovoFormExtrasModule } from './extras/FormExtras.module';
 import { NovoHeaderModule } from './../header/Header.module';
 import { NovoTooltipModule } from './../tooltip/Tooltip.module';
@@ -31,7 +31,7 @@ import { NovoControlGroup } from './ControlGroup';
 import { NovoControlTemplates } from './ControlTemplates';
 import { NovoTemplateService } from './../../services/template/NovoTemplateService';
 import { NovoCommonModule } from '../common/common.module';
-import {NovoEmbeddedFormGroup} from './EmbeddedFormGroup';
+import { NovoEmbeddedFormGroupElement } from './EmbeddedFormGroup';
 
 @NgModule({
   imports: [
@@ -65,11 +65,11 @@ import {NovoEmbeddedFormGroup} from './EmbeddedFormGroup';
     NovoFieldsetElement,
     NovoFieldsetHeaderElement,
     NovoControlElement,
-    NovoEmbeddedFormGroup,
     ControlConfirmModal,
     ControlPromptModal,
     NovoControlGroup,
     NovoControlTemplates,
+    NovoEmbeddedFormGroupElement,
   ],
   exports: [
     NovoAutoSize,
@@ -77,9 +77,9 @@ import {NovoEmbeddedFormGroup} from './EmbeddedFormGroup';
     NovoFormElement,
     NovoFieldsetHeaderElement,
     NovoControlElement,
-    NovoEmbeddedFormGroup,
     NovoControlGroup,
     NovoControlTemplates,
+    NovoEmbeddedFormGroupElement,
   ],
   entryComponents: [ControlConfirmModal, ControlPromptModal],
   providers: [NovoTemplateService],

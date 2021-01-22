@@ -20,3 +20,4 @@ export { TilesControl } from './controls/tiles/TilesControl';
 export { TimeControl } from './controls/time/TimeControl';
 export { GroupedControl } from './controls/grouped/GroupedControl';
 export { CustomControl } from './controls/custom/CustomControl';
+export { EmbeddedFormGroupControl } from './controls/embedded-form-group/EmbeddedFormGroupControl';
