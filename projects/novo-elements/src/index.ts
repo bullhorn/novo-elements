@@ -350,5 +350,4 @@ export { Helpers } from './utils/Helpers';
 export { KeyCodes } from './utils/key-codes/KeyCodes';
 export { notify } from './utils/notifier/notifier.util';
 export { OutsideClick } from './utils/outside-click/OutsideClick';
-export {  NovoEmbeddedFormGroup } from './elements/embedded-Form-Group/EmbeddedFormGroup';
-export {  NovoEmbeddedFormGroupModule } from './elements/embedded-Form-Group/EmbeddedFormGroup.module';
+export {  NovoEmbeddedFormGroup } from './elements/form/EmbeddedFormGroup';

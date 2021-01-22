@@ -96,6 +96,7 @@ class ControlConfig {
   isEmbedded = false;
   isInlineEmbedded = false;
   weekStart?: number;
+  controls?: any[];
 }
 
 export type NovoControlConfig = Partial<ControlConfig>;
@@ -144,6 +145,7 @@ export class BaseControl extends ControlConfig {
     this.startDate = config.startDate;
     this.endDate = config.endDate;
     this.restrictFieldInteractions = !!config.restrictFieldInteractions;
+    this.controls = config.controls;
     if (!Helpers.isEmpty(config.warning)) {
       this.warning = config.warning;
     }

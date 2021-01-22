@@ -28,7 +28,7 @@ import { NovoFormControl } from '../../elements/form/NovoFormControl';
 import { NovoFormGroup } from '../../elements/form/NovoFormGroup';
 import { NovoLabelService } from '../../services/novo-label-service';
 import { OptionsService } from './../../services/options/OptionsService';
-import { EmbeddedFormGroupControl } from '../../elements/form/controls';
+import {EmbeddedFormGroupControl} from '../../elements/form/controls/embedded-form-group/EmbeddedFormGroupControl';
 
 @Injectable()
 export class FormUtils {
@@ -163,7 +163,7 @@ export class FormUtils {
         }
       }
       if (field.dataType === 'AbstractEmbeddedToManyEntity') {
-        type = 'embeddedFormGroupControl';
+        type = 'embedded-form-group';
       }
     } else if (field.type === 'TO_ONE') {
       if ('SYSTEM' === field.dataSpecialization && ['WorkflowOptionsLookup', 'SpecializedOptionsLookup'].includes(field.dataType)) {
@@ -257,6 +257,7 @@ export class FormUtils {
       config: field.config || {},
       closeOnSelect: field.closeOnSelect,
       layoutOptions: field.layoutOptions,
+      controls: field.controls,
     };
     this.inferStartDate(controlConfig, field);
     // TODO: getControlOptions should always return the correct format
@@ -443,7 +444,7 @@ export class FormUtils {
       case 'custom':
         control = new CustomControl(controlConfig);
         break;
-      case 'embeddedFormGroupControl':
+      case 'embedded-form-group':
         control = new EmbeddedFormGroupControl(controlConfig);
         break;
       default:
@@ -460,7 +461,7 @@ export class FormUtils {
 
     return (
       field.name !== 'id' &&
-      (!['SYSTEM', 'SECTION_HEADER'].includes(field.dataSpecialization) ||
+      ((!['SYSTEM', 'SECTION_HEADER'].includes(field.dataSpecialization) || field.dataType === 'AbstractEmbeddedToManyEntity') ||
         ['address', 'billingAddress', 'secondaryAddress'].includes(field.name)) &&
       !field.readOnly
     );

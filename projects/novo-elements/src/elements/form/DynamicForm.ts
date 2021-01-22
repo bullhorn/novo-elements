@@ -25,10 +25,12 @@ export class NovoFieldsetHeaderElement {
         <div class="novo-fieldset-container">
             <novo-fieldset-header [icon]="icon" [title]="title" *ngIf="title" [class.embedded]="isEmbedded" [class.inline-embedded]="isInlineEmbedded" [class.hidden]="hidden"></novo-fieldset-header>
             <ng-container *ngFor="let control of controls;let controlIndex = index;">
-                <div class="novo-form-row" [class.disabled]="control.disabled" *ngIf="control.__type !== 'GroupedControl'">
+                <div class="novo-form-row" [class.disabled]="control.disabled" *ngIf="control.__type !== 'embedded-form-group'">
                     <novo-control [autoFocus]="autoFocus && index === 0 && controlIndex === 0" [control]="control" [form]="form"></novo-control>
                 </div>
-                <div *ngIf="control.__type === 'GroupedControl'">TODO - GroupedControl</div>
+                <div *ngIf="control.__type === 'embedded-form-group'">
+                  <novo-Embedded-form-group [control]="control" [parentForm]="form"></novo-Embedded-form-group>
+                </div>
             </ng-container>
         </div>
     `,

@@ -1,11 +1,11 @@
 import { BaseControl, NovoControlConfig } from './../BaseControl';
 
 export class EmbeddedFormGroupControl extends BaseControl {
-  controlType = 'embeddedFormGroupControl';
+  controlType = 'embedded-form-group';
   options = [];
 
   constructor(config: NovoControlConfig) {
-    super('embeddedFormGroupControl', config);
+    super('embedded-form-group', config);
     this.options = config.options || [];
     this.placeholder = config.placeholder || '';
   }

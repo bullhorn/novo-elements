@@ -31,7 +31,7 @@ import { NovoControlGroup } from './ControlGroup';
 import { NovoControlTemplates } from './ControlTemplates';
 import { NovoTemplateService } from './../../services/template/NovoTemplateService';
 import { NovoCommonModule } from '../common/common.module';
-import {NovoEmbeddedFormGroupModule} from '../embedded-Form-Group/EmbeddedFormGroup.module';
+import {NovoEmbeddedFormGroup} from './EmbeddedFormGroup';
 
 @NgModule({
   imports: [
@@ -57,15 +57,15 @@ import {NovoEmbeddedFormGroupModule} from '../embedded-Form-Group/EmbeddedFormGr
     NovoButtonModule,
     NovoAceEditorModule,
     NovoCommonModule,
-    NovoEmbeddedFormGroupModule,
   ],
   declarations: [
     NovoAutoSize,
-    NovoControlElement,
     NovoDynamicFormElement,
     NovoFormElement,
     NovoFieldsetElement,
     NovoFieldsetHeaderElement,
+    NovoControlElement,
+    NovoEmbeddedFormGroup,
     ControlConfirmModal,
     ControlPromptModal,
     NovoControlGroup,
@@ -74,9 +74,10 @@ import {NovoEmbeddedFormGroupModule} from '../embedded-Form-Group/EmbeddedFormGr
   exports: [
     NovoAutoSize,
     NovoDynamicFormElement,
-    NovoControlElement,
     NovoFormElement,
     NovoFieldsetHeaderElement,
+    NovoControlElement,
+    NovoEmbeddedFormGroup,
     NovoControlGroup,
     NovoControlTemplates,
   ],
