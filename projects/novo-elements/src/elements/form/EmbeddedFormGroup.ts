@@ -58,7 +58,6 @@ import { FormUtils } from '../../utils/form-utils/FormUtils';
           </div>
         </div>
       </div>
-
       <div
         class="novo-control-group-control-label {{ label.key }}"
         *ngFor="let label of controlLabels"
