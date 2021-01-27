@@ -574,7 +574,6 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     this.focusedField = '';
     this.showCount = false;
     this._blurEmitter.emit(event);
-    this.emitChange(event);
   }
 
   clearValue() {
