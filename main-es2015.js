@@ -11808,7 +11808,7 @@ class NovoDropdownElement {
                 this.filterTerm = '';
             }), 2000);
             /** @type {?} */
-            const char = String.fromCharCode(event.keyCode);
+            const char = event.key;
             this.filterTerm = this.filterTerm.concat(char);
             /** @type {?} */
             const index = this._textItems.findIndex((/**
@@ -13982,7 +13982,7 @@ class NovoSelectElement {
                 this.filterTerm = '';
             }), 2000);
             /** @type {?} */
-            const char = String.fromCharCode(event.keyCode);
+            const char = event.key;
             this.filterTerm = this.filterTerm.concat(char);
             /** @type {?} */
             const item = this.filteredOptions.find((/**

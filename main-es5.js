@@ -16760,8 +16760,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             }, 2000);
             /** @type {?} */
 
-            var _char = String.fromCharCode(event.keyCode);
-
+            var _char = event.key;
             this.filterTerm = this.filterTerm.concat(_char);
             /** @type {?} */
 
@@ -19433,8 +19432,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             }, 2000);
             /** @type {?} */
 
-            var _char2 = String.fromCharCode(event.keyCode);
-
+            var _char2 = event.key;
             this.filterTerm = this.filterTerm.concat(_char2);
             /** @type {?} */
 
