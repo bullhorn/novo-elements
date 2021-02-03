@@ -71,6 +71,8 @@ export class NovoDateTimePickerInputElement implements ControlValueAccessor {
   blurEvent: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
   @Output()
   focusEvent: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
+  @Output()
+  changeEvent: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
 
   constructor(public element: ElementRef, public labels: NovoLabelService, private _changeDetectorRef: ChangeDetectorRef) { }
 
@@ -90,6 +92,7 @@ export class NovoDateTimePickerInputElement implements ControlValueAccessor {
 
   handleBlur(event) {
     this.blurEvent.emit(event);
+    this.changeEvent.emit(event);
   }
 
   handleFocus(event) {

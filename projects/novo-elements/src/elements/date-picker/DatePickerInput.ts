@@ -97,6 +97,8 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
   blurEvent: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
   @Output()
   focusEvent: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
+  @Output()
+  changeEvent: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
   /** Element for the panel containing the autocomplete options. */
   @ViewChild(NovoOverlayTemplateComponent, { static: false })
   overlay: NovoOverlayTemplateComponent;
@@ -154,6 +156,7 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
 
   _handleBlur(event: FocusEvent): void {
     this.blurEvent.emit(event);
+    this.changeEvent.emit(event);
   }
 
   _handleFocus(event: FocusEvent): void {
