@@ -1,6 +1,21 @@
 // NG
 import { FocusMonitor } from '@angular/cdk/a11y';
-import { ChangeDetectorRef, Component, ElementRef, EventEmitter, forwardRef, HostListener, Input, NgZone, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  EventEmitter,
+  forwardRef,
+  HostListener,
+  Input,
+  NgZone,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  Output,
+  SimpleChanges,
+  ViewChild,
+} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { NovoLabelService } from '../../services/novo-label-service';
 import { Helpers } from '../../utils/Helpers';
@@ -84,8 +99,8 @@ export class NovoSelectElement implements OnInit, OnChanges, OnDestroy, ControlV
   createdItem: any;
   selected: any;
   model: any;
-  onModelChange: Function = () => { };
-  onModelTouched: Function = () => { };
+  onModelChange: Function = () => {};
+  onModelTouched: Function = () => {};
   filterTerm: string = '';
   filterTermTimeout;
   filteredOptions: any;
@@ -103,7 +118,7 @@ export class NovoSelectElement implements OnInit, OnChanges, OnDestroy, ControlV
     public ref: ChangeDetectorRef,
     private focusMonitor: FocusMonitor,
     private ngZone: NgZone,
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.focusMonitor.monitor(this.dropdown.nativeElement).subscribe((origin) =>
@@ -276,7 +291,7 @@ export class NovoSelectElement implements OnInit, OnChanges, OnDestroy, ControlV
       this.filterTermTimeout = setTimeout(() => {
         this.filterTerm = '';
       }, 2000);
-      const char = String.fromCharCode(event.keyCode);
+      const char = event.key;
       this.filterTerm = this.filterTerm.concat(char);
       const item = this.filteredOptions.find((i) => i.label.toUpperCase().indexOf(this.filterTerm) === 0);
       if (item) {
