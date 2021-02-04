@@ -72,6 +72,24 @@ export class NovoHeaderComponent {
   public subTitle: string;
   public inverse: string = 'inverse';
 
+  @Input()
+  public size: 'small' | 'medium' | 'large';
+
+  @HostBinding('class.header-size-small')
+  get hb_isSizeSmall(): boolean {
+    return this.size === 'small';
+  }
+
+  @HostBinding('class.header-size-large')
+  get hb_isSizeLarge(): boolean {
+    return this.size === 'large';
+  }
+
+  @HostBinding('class.header-size-default')
+  get hb_isSizeDefault(): boolean {
+    return !['small', 'large'].includes(this.size);
+  }
+
   @HostBinding('attr.theme')
   @Input()
   set theme(theme: string) {

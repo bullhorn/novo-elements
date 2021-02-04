@@ -1,8 +1,26 @@
 header[theme],
 novo-header {
   display: block;
+
   .spacer {
     flex: 1 1 0%;
+  }
+
+  &[size="small"] {
+    & > section {
+      height: 3.6rem;
+    }
+  }
+
+  &.header-size-small > section {
+    height: 3.2rem;
+  }
+
+  &.header-size-default > section {
+    height: 5rem;
+  }
+  &.header-size-large > section {
+    height: 6.4rem;
   }
 
   & > section {
