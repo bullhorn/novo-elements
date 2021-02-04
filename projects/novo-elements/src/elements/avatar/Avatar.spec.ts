@@ -4,7 +4,7 @@ import { setupTestSuite } from '../../../../../utils/test-setup';
 // APP
 import { NovoAvatarElement } from './Avatar';
 
-describe('Elements: NovoButtonElement', () => {
+describe('Elements: NovoAvatarElement', () => {
   let fixture;
   let component;
 
@@ -28,15 +28,6 @@ describe('Elements: NovoButtonElement', () => {
   describe('ngOnInit()', () => {
     beforeEach(() => {
       spyOn(component.sanitizer, 'bypassSecurityTrustUrl').and.callFake(() => {});
-    });
-
-    it('should set the source to a profile image if that property is available.', () => {
-      expect(component.ngOnInit).toBeDefined();
-      component.source = {
-        profileImage: 'PROFILE_URL',
-      };
-      component.ngOnInit();
-      expect(component.sanitizer.bypassSecurityTrustUrl).toHaveBeenCalledWith(component.source.profileImage);
     });
 
     it('should set the source to a logo image if that property is available.', () => {
