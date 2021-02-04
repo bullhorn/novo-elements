@@ -2,7 +2,6 @@
 
 :host {
   display: grid;
-  font-size: 1.1rem;
 
   &.novo-field-appearance-horizontal {
     grid-gap: 0rem 1rem;
@@ -25,7 +24,7 @@
   .novo-field-label {
     grid-area: label;
     display: grid;
-    align-items: flex-end;
+    align-items: center;
   }
 
   &.novo-field-appearance-underlined {
@@ -61,7 +60,6 @@
     grid-area: input;
     display: grid;
     grid-template-columns: minmax(auto, max-content) 1fr minmax(auto, max-content);
-    font-size: 1.2rem;
 
     &::ng-deep .novo-input-element {
       border: none;
@@ -78,12 +76,12 @@
 
     .novo-field-prefix {
       display: flex;
-      align-items: flex-end;
+      align-items: center;
     }
 
     .novo-field-infix {
       display: flex;
-      align-items: flex-end;
+      align-items: center;
       select {
         width: 100%;
       }
@@ -91,7 +89,7 @@
 
     .novo-field-suffix {
       display: flex;
-      align-items: flex-end;
+      align-items: center;
     }
   }
 

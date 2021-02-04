@@ -1,8 +1,16 @@
 :host {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  border-radius: 2em;
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+
   img {
-    width: 30px;
-    height: 30px;
-    border-radius: 2em;
+    width: inherit;
+    height: inherit;
+    border-radius: inherit;
   }
   // @each $basic, $color in $all-colors {
   //   &[theme='#{$basic}'] {
@@ -20,15 +28,11 @@
 }
 
 :host([size="small"]) {
-  img {
-    width: 20px;
-    height: 20px;
-  }
+  width: 20px;
+  height: 20px;
 }
 
 :host([size="large"]) {
-  img {
-    width: 40px;
-    height: 40px;
-  }
+  width: 40px;
+  height: 40px;
 }

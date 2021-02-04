@@ -105,5 +105,12 @@ novo-radio {
       color: $white;
       background: $positive;
     }
+
+    @each $name, $color in $all-colors {
+      &.checked[color="#{$name}"] {
+        color: $white;
+        background: $color;
+      }
+    }
   }
 }

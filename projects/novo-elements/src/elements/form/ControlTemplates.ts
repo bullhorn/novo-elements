@@ -1,7 +1,6 @@
 import { AfterViewInit, Component, QueryList, ViewChildren } from '@angular/core';
 import { NovoTemplateService } from '../../services/template/NovoTemplateService';
 import { NovoTemplate } from '../common/novo-template/novo-template.directive';
-
 @Component({
   selector: 'novo-control-templates',
   template: `
@@ -300,23 +299,25 @@ import { NovoTemplate } from '../common/novo-template/novo-template.directive';
     <!--Radio-->
     <ng-template novoTemplate="radio" let-control let-form="form" let-errors="errors" let-methods="methods">
       <div [formGroup]="form" class="novo-control-input-container">
-        <novo-radio
-          [name]="control.key"
-          [formControlName]="control.key"
-          *ngFor="let option of control.options"
-          [value]="option.value"
-          [label]="option.label"
-          [checked]="option.value === form.value[control.key] || (form.value[control.key] && option.value === form.value[control.key].id)"
-          [tooltip]="control.tooltip"
-          [tooltipPosition]="control.tooltipPosition"
-          [tooltipSize]="control?.tooltipSize"
-          [tooltipPreline]="control?.tooltipPreline"
-          [removeTooltipArrow]="control?.removeTooltipArrow"
-          [tooltipAutoPosition]="control?.tooltipAutoPosition"
-          [button]="!!option.icon"
-          [icon]="option.icon"
-          [attr.data-automation-id]="control.key + '-' + (option?.label || option?.value)"
-        ></novo-radio>
+        <novo-radio-group [name]="control.key" [formControlName]="control.key">
+          <novo-radio
+            *ngFor="let option of control.options"
+            [value]="option.value"
+            [label]="option.label"
+            [checked]="option.value === form.value[control.key] || (form.value[control.key] && option.value === form.value[control.key].id)"
+            [tooltip]="control.tooltip"
+            [tooltipPosition]="control.tooltipPosition"
+            [tooltipSize]="control?.tooltipSize"
+            [tooltipPreline]="control?.tooltipPreline"
+            [removeTooltipArrow]="control?.removeTooltipArrow"
+            [tooltipAutoPosition]="control?.tooltipAutoPosition"
+            [button]="!!option.icon"
+            [icon]="option.icon"
+            [color]="option.color"
+            [theme]="!!option.icon && !option.label ? 'icon' : null"
+            [attr.data-automation-id]="control.key + '-' + (option?.label || option?.value)"
+          ></novo-radio>
+        </novo-radio-group>
       </div>
     </ng-template>
 

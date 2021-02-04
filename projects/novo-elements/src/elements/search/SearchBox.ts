@@ -33,7 +33,7 @@ const SEARCH_VALUE_ACCESSOR = {
     <!-- SEARCH ICON -->
     <button
       theme="fab"
-      [color]="theme"
+      [color]="color"
       [icon]="icon"
       (click)="showSearch()"
       [tooltip]="hint"
@@ -78,7 +78,9 @@ export class NovoSearchBoxElement implements ControlValueAccessor {
   @HostBinding('class.always-open')
   public alwaysOpen: boolean = false;
   @Input()
-  public theme: string = 'positive';
+  public theme: string;
+  @Input()
+  public color: string = 'positive';
   @Input()
   public closeOnSelect: boolean = true;
   @Input()
@@ -127,6 +129,8 @@ export class NovoSearchBoxElement implements ControlValueAccessor {
           element.focus();
         }
       }, 10);
+    } else {
+      this.closePanel();
     }
   }
   onFocus() {

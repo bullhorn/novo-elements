@@ -77,6 +77,9 @@ novo-control-group {
         padding: 0.4em 0;
         & > .novo-control-group-control-label {
           padding: 0 0.4em;
+          &.novo-control-group-control-hidden {
+            padding: 0;
+          }
         }
       }
     }
@@ -147,7 +150,7 @@ novo-control-group {
           align-items: center;
         }
       }
-      button[theme="icon"] {
+      button.control-group-action[theme="icon"] {
         padding: 3px;
         height: 30px;
         width: 30px;

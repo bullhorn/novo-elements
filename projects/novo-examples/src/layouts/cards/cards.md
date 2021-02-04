@@ -1,5 +1,4 @@
-Cards [(source)](https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/card)
-=========================================================================================
+# Cards [(source)](https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/card)
 
 Components and elements for cards to make sure the loading/empty/layout views are all consistent.
 
@@ -9,8 +8,10 @@ Components and elements for cards to make sure the loading/empty/layout views ar
 
 <code-example example="basic-card"></code-example>
 
-
 ## Card (using config object and card\-actions)
 
 <code-example example="card-config"></code-example>
 
+## Card with Image
+
+<code-example example="card-with-image"></code-example>

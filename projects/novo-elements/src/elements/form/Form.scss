@@ -4,7 +4,7 @@
 @import "./ControlGroup";
 .novo-form-control-label {
   color: $dark;
-  font-size: 1.1rem;
+  font-size: 0.9rem;
   flex: 1;
   max-width: 130px;
   min-width: 130px;
@@ -369,7 +369,6 @@ novo-form {
                       }
                     }
                     input {
-                      font-size: 1.1rem;
                       background: transparent !important;
                       border: none;
                       border-bottom: 1px solid lighten($dark, 45%);
@@ -397,7 +396,6 @@ novo-form {
                       }
                     }
                     textarea {
-                      font-size: 1.1rem;
                       height: 2rem;
                       background: transparent !important;
                       border: none;

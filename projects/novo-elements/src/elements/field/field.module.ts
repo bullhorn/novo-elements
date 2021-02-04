@@ -11,14 +11,14 @@ import { NovoDateFormatDirective } from './formats/date-format';
 import { NovoTimeFormatDirective } from './formats/time-format';
 import { NovoHintElement } from './hint/hint';
 import { NovoInput } from './input';
-import { NovoLabelElement } from './label/label';
+// import { NovoLabelElement } from './label/label';
 import { NovoPickerDirective } from './picker.directive';
 import { NovoPickerToggleElement } from './toggle/picker-toggle.component';
 @NgModule({
   imports: [CommonModule, NovoButtonModule, NovoOverlayModule],
   declarations: [
     NovoFieldElement,
-    NovoLabelElement,
+    // NovoLabelElement,
     NovoHintElement,
     NovoErrorElement,
     NovoInput,
@@ -32,7 +32,7 @@ import { NovoPickerToggleElement } from './toggle/picker-toggle.component';
   ],
   exports: [
     NovoFieldElement,
-    NovoLabelElement,
+    // NovoLabelElement,
     NovoHintElement,
     NovoErrorElement,
     NovoInput,

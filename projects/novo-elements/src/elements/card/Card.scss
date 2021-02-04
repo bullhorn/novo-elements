@@ -102,3 +102,25 @@ novo-card {
     }
   }
 }
+
+.novo-card-header,
+.novo-card-footer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0.4rem;
+  gap: 0.8rem;
+}
+
+.novo-card-header-text {
+  flex: 1 1 0px;
+}
+
+.novo-card-content {
+  display: block;
+}
+
+[novo-card-image] {
+  width: calc(100%);
+  margin: 0 0 0.8rem 0;
+}

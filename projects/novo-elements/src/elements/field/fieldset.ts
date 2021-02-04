@@ -1,5 +1,6 @@
 // NG2
-import { AfterContentInit, ChangeDetectionStrategy, Component, ContentChildren, Input, QueryList } from '@angular/core';
+import { AfterContentInit, ChangeDetectionStrategy, Component, ContentChildren, HostBinding, Input, QueryList } from '@angular/core';
+import { BooleanInput } from '../../utils';
 import { NovoFieldElement } from './field';
 
 @Component({
@@ -29,6 +30,11 @@ export class NovoFieldsElement implements AfterContentInit {
       this._updateFieldAppearance();
     }
   }
+
+  @HostBinding('class.full-width')
+  @Input()
+  @BooleanInput()
+  fullWidth: boolean = false;
 
   ngAfterContentInit(): any {
     this._updateFieldAppearance();

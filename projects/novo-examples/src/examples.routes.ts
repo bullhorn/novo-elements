@@ -824,7 +824,22 @@ export class IconographyPage {}
     <h4>Section Header</h4>
     <h2>Large Section Header with Icon</h2>
     <h6>Small Section Header with Icon</h6>
-    <pre><code>        &lt;h1&gt;Heading 1&lt;/h1&gt;        &lt;h2&gt;Heading 2&lt;/h2&gt;        &lt;h3&gt;Heading 3&lt;/h3&gt;        &lt;h4&gt;Heading 4&lt;/h4&gt;        &lt;h5&gt;Heading 5&lt;/h5&gt;        &lt;h6&gt;Heading 6&lt;/h6&gt;        &lt;p&gt;        Body        &lt;/p&gt;        &lt;hr&gt;        &lt;span class=&quot;caption&quot;&gt;Caption&lt;/span&gt;        &lt;h4 class=&quot;novo-section-header&quot;&gt;Section Header&lt;/h4&gt;        &lt;h2 class=&quot;novo-section-header&quot;&gt;          &lt;i class=&quot;bhi-section&quot;&gt;          Large Section Header with Icon        &lt;/h2&gt;        &lt;h6 class=&quot;novo-section-header&quot;&gt;          &lt;i class=&quot;bhi-idea&quot;&gt;          Small Section Header with Icon        &lt;/h6&gt;</code></pre>`,
+    <pre><code>        &lt;h1&gt;Heading 1&lt;/h1&gt;        &lt;h2&gt;Heading 2&lt;/h2&gt;        &lt;h3&gt;Heading 3&lt;/h3&gt;        &lt;h4&gt;Heading 4&lt;/h4&gt;        &lt;h5&gt;Heading 5&lt;/h5&gt;        &lt;h6&gt;Heading 6&lt;/h6&gt;        &lt;p&gt;        Body        &lt;/p&gt;        &lt;hr&gt;        &lt;span class=&quot;caption&quot;&gt;Caption&lt;/span&gt;        &lt;h4 class=&quot;novo-section-header&quot;&gt;Section Header&lt;/h4&gt;        &lt;h2 class=&quot;novo-section-header&quot;&gt;          &lt;i class=&quot;bhi-section&quot;&gt;          Large Section Header with Icon        &lt;/h2&gt;        &lt;h6 class=&quot;novo-section-header&quot;&gt;          &lt;i class=&quot;bhi-idea&quot;&gt;          Small Section Header with Icon        &lt;/h6&gt;</code></pre>
+    <h2>Title Text</h2>
+    <p>These are the base colors of the application.</p>
+    <p><code-example example="title"></code-example></p>
+    <h2>Body Text</h2>
+    <p>These are the base colors of the application.</p>
+    <p><code-example example="text"></code-example></p>
+    <h2>Label Text</h2>
+    <p>These are the base colors of the application.</p>
+    <p><code-example example="label"></code-example></p>
+    <h2>Caption Text</h2>
+    <p>These are the base colors of the application.</p>
+    <p><code-example example="caption"></code-example></p>
+    <h2>Link Text</h2>
+    <p>These are the base colors of the application.</p>
+    <p><code-example example="link"></code-example></p>`,
 })
 export class TypographyPage {}
 
@@ -1223,7 +1238,9 @@ export class HomePage {}
     <h2>Basic Card (using attributes)</h2>
     <p><code-example example="basic-card"></code-example></p>
     <h2>Card (using config object and card-actions)</h2>
-    <p><code-example example="card-config"></code-example></p>`,
+    <p><code-example example="card-config"></code-example></p>
+    <h2>Card with Image</h2>
+    <p><code-example example="card-with-image"></code-example></p>`,
 })
 export class CardsPage {}
 
@@ -1400,7 +1417,10 @@ export class TabsPage {}
     <p><code-example example="activity-section"></code-example></p>
     <h2>Record Headers</h2>
     <p>Entity Record Headers Patterns.</p>
-    <p><code-example example="record-header"></code-example></p>`,
+    <p><code-example example="record-header"></code-example></p>
+    <h2>Details Card</h2>
+    <p>When Displaying list of fields &amp; values in a card, follow this pattern.</p>
+    <p><code-example example="details-card"></code-example></p>`,
 })
 export class PatternsPage {}
 

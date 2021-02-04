@@ -1,5 +1,5 @@
 // NG2
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, Directive, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 // APP
 import { NovoLabelService } from '../../services/novo-label-service';
 
@@ -8,6 +8,40 @@ import { NovoLabelService } from '../../services/novo-label-service';
   template: '<ng-content></ng-content>',
 })
 export class CardActionsElement {}
+
+/**
+ * Content of a card, needed as it's used as a selector in the API.
+ */
+@Directive({
+  selector: 'novo-card-content, [novo-card-content], [novoCardContent]',
+  host: { class: 'novo-card-content' },
+})
+export class CardContentElement {}
+
+/**
+ * Content of a card, needed as it's used as a selector in the API.
+ */
+@Component({
+  selector: 'novo-card-header, [novo-card-header], [novoCardHeader]',
+  host: { class: 'novo-card-header' },
+  template: `
+    <ng-content select="novo-avatar, [novo-avatar], novo-icon"></ng-content>
+    <div class="novo-card-header-text">
+      <ng-content select="novo-title, [novo-title], novo-text, novo-label, novo-caption"></ng-content>
+    </div>
+    <ng-content></ng-content>
+    <div class="novo-card-header-actions">
+      <ng-content select="novo-action"></ng-content>
+    </div>
+  `,
+})
+export class CardHeaderElement {}
+
+@Directive({
+  selector: 'novo-card-footer, [novo-card-footer], [novoCardFooter]',
+  host: { class: 'novo-card-footer' },
+})
+export class CardFooterElement {}
 
 @Component({
   selector: 'novo-card',
@@ -23,7 +57,7 @@ export class CardActionsElement {}
         <novo-loading theme="line" [attr.data-automation-id]="cardAutomationId + '-loading'"></novo-loading>
       </div>
       <!--Card Header-->
-      <header>
+      <header *ngIf="title || config.title">
         <div class="title">
           <!--Grabber Icon-->
           <span tooltip="{{ labels.move }}" tooltipPosition="bottom-right"

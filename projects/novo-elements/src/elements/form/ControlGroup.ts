@@ -126,7 +126,7 @@ export class NovoControlGroup implements AfterContentInit, OnChanges {
   @Output() onAdd = new EventEmitter<any>();
   @Output() change = new EventEmitter<any>();
 
-  controlLabels: { value: string; width: number; required: boolean; key: string }[] = [];
+  controlLabels: { value: string; width: number; required: boolean; hidden?: boolean; key: string }[] = [];
   toggled = false;
   disabledArray: NovoControlGroupRowConfig[] = [];
   editState: EditState = EditState.NOT_EDITING;
@@ -166,6 +166,7 @@ export class NovoControlGroup implements AfterContentInit, OnChanges {
           width: control.width,
           required: control.required,
           key: control.key,
+          hidden: control.hidden,
         };
       });
       this.ref.markForCheck();
