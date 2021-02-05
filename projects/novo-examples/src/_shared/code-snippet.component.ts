@@ -1,5 +1,5 @@
 // NG2
-import { Component, Input, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, Input, OnInit, ChangeDetectorRef } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { HighlightJS } from './highlight.service';
 import { EXAMPLE_COMPONENTS } from '../examples.module';

@@ -7,7 +7,6 @@ import { NovoSelectModule } from '../../../select/Select.module';
 import { NovoLabelService } from '../../../../services/novo-label-service';
 import { NovoPickerModule } from '../../../picker/Picker.module';
 import { NovoTooltipModule } from './../../../tooltip/Tooltip.module';
-import { Helpers } from '../../../../utils/Helpers';
 
 describe('Elements: NovoAddressElement', () => {
   let fixture;

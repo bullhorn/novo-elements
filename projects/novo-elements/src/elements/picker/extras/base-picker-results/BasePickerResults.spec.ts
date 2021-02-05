@@ -1,5 +1,5 @@
 // NG2
-import { ElementRef, ChangeDetectorRef } from '@angular/core';
+import { ElementRef } from '@angular/core';
 // App
 import { BasePickerResults } from './BasePickerResults';
 

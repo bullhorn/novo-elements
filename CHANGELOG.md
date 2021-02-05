@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.4.2](https://github.com/bullhorn/novo-elements/compare/v4.4.0...v4.4.2) (2020-12-09)
+
+## [4.4.0](https://github.com/bullhorn/novo-elements/compare/v4.3.10...v4.4.0) (2020-12-09)
+
+
+### Features
+
+* **DataTableBigDecimalRendererPipe:** Add configuration to DataTableBigDecimalRendererPipe to allow overrides without changing existing behavior  ([#1145](https://github.com/bullhorn/novo-elements/issues/1145)) ([34c8fc5](https://github.com/bullhorn/novo-elements/commit/34c8fc5d949ca5e058dfae9f1dc933439bae5e61))
+* **NovoDataTable:** Changes for list interactions to be enabled ([#1139](https://github.com/bullhorn/novo-elements/issues/1139)) ([5e105a8](https://github.com/bullhorn/novo-elements/commit/5e105a8eb6314d3f419d8107fc806d5db4ae79c4))
+* **NovoLabelService:** Add options to formatBigDecimal() to allow overrides without changing existing behavior ([#1142](https://github.com/bullhorn/novo-elements/issues/1142)) ([c26c55a](https://github.com/bullhorn/novo-elements/commit/c26c55a2c0fb1c9b550d6cba5d3af028acbbef57))
+
 ### [4.3.10](https://github.com/bullhorn/novo-elements/compare/v4.3.9...v4.3.10) (2020-11-18)
 
 

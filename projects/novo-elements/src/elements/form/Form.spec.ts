@@ -1,6 +1,5 @@
 // NG2
 import { TestBed, async } from '@angular/core/testing';
-import { FormGroupDirective } from '@angular/forms';
 // App
 import { NovoFormElement } from './Form';
 import { NovoTemplateService } from '../../services/template/NovoTemplateService';

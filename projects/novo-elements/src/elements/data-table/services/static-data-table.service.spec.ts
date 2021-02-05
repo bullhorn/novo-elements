@@ -1,5 +1,5 @@
 // NG2
-import { TestBed, async } from '@angular/core/testing';
+import { async } from '@angular/core/testing';
 // APP
 import { StaticDataTableService } from './static-data-table.service';
 import * as dateFns from 'date-fns';

@@ -2,17 +2,10 @@ import { Component } from '@angular/core';
 // Vendor
 import {
   FormUtils,
-  NovoFormGroup,
   TextBoxControl,
   CheckboxControl,
   FieldInteractionApi,
-  SelectControl,
-  PickerControl,
-  DateTimeControl,
-  TilesControl,
 } from 'novo-elements';
-import { map } from 'rxjs/operators';
-import { MockMetaHeaders } from '../MockMeta';
 
 /**
  * @title Fi Messaging Example

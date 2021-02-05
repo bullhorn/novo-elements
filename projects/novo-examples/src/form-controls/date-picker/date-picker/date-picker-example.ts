@@ -1,4 +1,4 @@
-import { Component, LOCALE_ID } from '@angular/core';
+import { Component } from '@angular/core';
 import { NovoLabelService } from 'novo-elements';
 
 export class ExtendedLabelService extends NovoLabelService {

@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, ChangeDetectorRef, ViewChild } from '@angular/core';
+import { Component, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { delay } from 'rxjs/operators';
 import * as dateFns from 'date-fns';
 import { Subject, Observable, of } from 'rxjs';
