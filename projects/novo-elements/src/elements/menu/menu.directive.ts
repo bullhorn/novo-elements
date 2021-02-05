@@ -39,9 +39,9 @@ export class MenuDirective implements OnInit, OnDestroy {
   @HostListener('click', ['$event'])
   @HostListener('contextmenu', ['$event'])
   public onMenuClick(event: MouseEvent): void {
-    if (this.trigger == 'click' && event.button !== 0) {
+    if (this.trigger === 'click' && event.button !== 0) {
       return;
-    } else if (this.trigger == 'contextmenu' && event.button !== 2) {
+    } else if (this.trigger === 'contextmenu' && event.button !== 2) {
       return;
     }
 
