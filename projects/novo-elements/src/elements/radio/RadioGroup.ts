@@ -1,5 +1,15 @@
 // NG2
-import { Component, ContentChildren, EventEmitter, forwardRef, HostBinding, Input, Output, QueryList } from '@angular/core';
+import {
+  AfterContentInit,
+  Component,
+  ContentChildren,
+  EventEmitter,
+  forwardRef,
+  HostBinding,
+  Input,
+  Output,
+  QueryList,
+} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 // APP
 import { NovoRadioElement } from './Radio';
@@ -24,7 +34,7 @@ const RADIOGROUP_VALUE_ACCESSOR = {
     '[class.novo-radio-group-appearance-vertical]': 'appearance=="vertical"',
   },
 })
-export class NovoRadioGroup implements ControlValueAccessor {
+export class NovoRadioGroup implements ControlValueAccessor, AfterContentInit {
   private _uniqueId: string = `ngx-radio-group-${++nextId}`;
 
   @Input() id: string = this._uniqueId;
@@ -83,6 +93,12 @@ export class NovoRadioGroup implements ControlValueAccessor {
   private _value: boolean = false;
   private _selected: NovoRadioElement;
 
+  ngAfterContentInit() {
+    this._updateRadioButtonAppearance();
+    this._updateRadioButtonNames();
+    this._updateSelectedRadioFromValue();
+  }
+
   writeValue(value: any): void {
     this.value = value;
   }
@@ -104,9 +120,11 @@ export class NovoRadioGroup implements ControlValueAccessor {
   };
 
   private _updateRadioButtonAppearance(): void {
-    this._radios.forEach((radio) => {
-      radio.vertical = this.appearance === 'vertical';
-    });
+    if (this._radios) {
+      this._radios.forEach((radio) => {
+        radio.vertical = this.appearance === 'vertical';
+      });
+    }
   }
 
   private _updateRadioButtonNames(): void {
