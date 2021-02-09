@@ -1,7 +1,10 @@
+@import "../common/typography/text.mixins";
+
 novo-dropdown {
   display: block;
   position: relative;
-  button {
+  button,
+  novo-button {
     position: relative;
     z-index: 0;
     i {
@@ -27,6 +30,7 @@ novo-dropdown {
   }
   list {
     item {
+      @include novo-body-text();
       cursor: pointer;
       width: 100%;
       margin: 0;

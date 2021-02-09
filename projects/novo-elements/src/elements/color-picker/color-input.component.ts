@@ -45,7 +45,7 @@ const COLOR_VALUE_ACCESSOR = {
         #input
       />
       <novo-icon *ngIf="!hasValue" (click)="openPanel()">complex</novo-icon>
-      <novo-icon *ngIf="hasValue" size="small" (click)="clearValue()">times</novo-icon>
+      <novo-icon *ngIf="hasValue" size="small" (click)="clearValue()">x</novo-icon>
     </novo-field>
     <novo-overlay-template [parent]="element" position="above-below">
       <novo-color-picker [(color)]="value" (onChange)="setValueAndClose($event)"></novo-color-picker>

@@ -6,8 +6,8 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./NonIdealState.scss'],
   template: `
     <novo-icon *ngIf="icon" [color]="theme">{{ icon }}</novo-icon>
-    <h4 *ngIf="title">{{ title }}</h4>
-    <p *ngIf="description">{{ description }}</p>
+    <novo-title *ngIf="title" marginBefore>{{ title }}</novo-title>
+    <novo-text *ngIf="description" block marginBefore marginAfter>{{ description }}</novo-text>
     <ng-content></ng-content>
   `,
 })

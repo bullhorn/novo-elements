@@ -4,7 +4,7 @@
 :host {
   display: block;
   font-family: Roboto, sans-serif;
-  font-size: 1.5em;
+  font-size: 1.8em;
   font-weight: 500;
   line-height: 1em;
   white-space: nowrap;
@@ -12,7 +12,7 @@
   // color: $dark;
   color: inherit;
 
-  @include text-sizing(1.2em, 1.5em, 2em);
+  @include text-sizing(1.5em, 1.8em, 2.1em);
   @include text-colors();
   @include text-margins();
 

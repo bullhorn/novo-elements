@@ -98,7 +98,7 @@ const DATE_PICKER_VALUE_ACCESSOR = {
       ></novo-calendar>
 
       <div class="calendar-footer" [hidden]="hideFooter">
-        <span (click)="setToday()" class="today" data-automation-id="calendar-today">{{ labels.today }}</span>
+        <novo-button (click)="setToday()" class="today" size="small" data-automation-id="calendar-today">{{ labels.today }}</novo-button>
       </div>
     </div>
   `,

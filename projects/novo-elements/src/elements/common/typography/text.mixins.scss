@@ -42,18 +42,18 @@
 
 @mixin text-margins() {
   &.margin-before {
-    margin-top: 1em;
+    margin-top: 0.4em;
   }
 
   &.margin-after {
-    margin-bottom: 1em;
+    margin-bottom: 0.8em;
   }
 }
 
 @mixin novo-body-text() {
   display: inline;
   font-family: Roboto, san-serif;
-  font-size: 1em;
+  font-size: 1.2em;
   font-weight: normal;
   line-height: 1em;
   color: inherit;
@@ -62,7 +62,7 @@
 @mixin novo-title-text() {
   display: block;
   font-family: Roboto, sans-serif;
-  font-size: 1.5em;
+  font-size: 1.8em;
   font-weight: 300;
   line-height: 1em;
   color: $dark;
@@ -73,7 +73,7 @@
 @mixin novo-label-text() {
   display: inline;
   font-family: Roboto, sans-serif;
-  font-size: 0.9em;
+  font-size: 1.1em;
   font-weight: 500;
   transition: 0.2s ease-out;
   text-transform: uppercase;
@@ -94,17 +94,17 @@
 // Body Text
 @mixin novo-text-small() {
   @include novo-body-text();
-  font-size: $base;
+  font-size: 1em;
 }
 
 @mixin novo-text-medium() {
   @include novo-body-text();
-  font-size: $base;
+  font-size: 1.2em;
 }
 
 @mixin novo-text-large() {
   @include novo-body-text();
-  font-size: $base;
+  font-size: 1.4em;
 }
 
 // TITLE
@@ -126,17 +126,16 @@
 // LABEL
 @mixin novo-label-small() {
   @include novo-label-text();
-  font-size: $base;
+  font-size: 1em;
 }
 
 @mixin novo-label-medium() {
   @include novo-label-text();
-  font-size: $base;
 }
 
 @mixin novo-label-large() {
   @include novo-label-text();
-  font-size: $base;
+  font-size: 1.2em;
 }
 
 // CAPTIONS

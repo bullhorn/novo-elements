@@ -4,7 +4,7 @@
 :host {
   display: inline;
   font-family: Roboto, san-serif;
-  font-size: 1em;
+  font-size: 1.2em;
   font-weight: normal;
   line-height: 1em;
   color: inherit;
@@ -23,7 +23,7 @@
     }
   }
 
-  @include text-sizing(0.8em, 1em, 1.2em);
+  @include text-sizing(1em, 1.2em, 1.4em);
   @include text-colors();
   @include text-weights();
   @include text-margins();

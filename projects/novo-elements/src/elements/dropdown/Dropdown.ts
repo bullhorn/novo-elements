@@ -23,7 +23,7 @@ import { NovoOverlayTemplateComponent } from '../overlay/Overlay';
 @Component({
   selector: 'novo-dropdown',
   template: `
-    <ng-content select="button" #trigger></ng-content>
+    <ng-content select="button,novo-button" #trigger></ng-content>
     <novo-overlay-template [parent]="element" [width]="width" [position]="side" [scrollStrategy]="scrollStrategy">
       <div
         class="dropdown-container {{ containerClass }}"

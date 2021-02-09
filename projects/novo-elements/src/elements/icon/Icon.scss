@@ -1,15 +1,15 @@
 $small-themed-icon-size: 1.6em;
 $medium-themed-icon-size: 2em;
 $large-themed-icon-size: 2.4em;
-$small-icon-size: 0.8em;
-$medium-icon-size: 1em;
-$large-icon-size: 1.4em;
+$small-icon-size: 1.4em;
+$medium-icon-size: 1.8em;
+$large-icon-size: 2.1em;
 $icon-border-radius: 0.3em;
 novo-icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 1em;
+  font-size: 1.8em;
   i {
     display: flex;
     justify-content: center;
@@ -59,21 +59,21 @@ novo-icon {
     }
   }
   &[size="small"] {
-    font-size: 0.8em;
+    font-size: 1.5em;
     i {
       width: $small-icon-size;
       height: $small-icon-size;
     }
   }
   &[size="medium"] {
-    font-size: 1em;
+    font-size: 1.8em;
     i {
       width: $medium-icon-size;
       height: $medium-icon-size;
     }
   }
   &[size="large"] {
-    font-size: 1.4em;
+    font-size: 2.1em;
     i {
       width: $large-icon-size;
       height: $large-icon-size;

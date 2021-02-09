@@ -4,12 +4,13 @@
 :host {
   display: inline-block;
   font-family: Roboto, sans-serif;
-  font-size: 0.9em;
+  font-size: 1.1em;
   font-weight: 500;
   transition: 0.2s ease-out;
   text-transform: uppercase;
   word-break: word-break;
   overflow-wrap: break-word;
+  color: $dark;
 
   &.text-block {
     display: block;
@@ -23,7 +24,7 @@
     }
   }
 
-  @include text-sizing(0.8em, 0.9em, 1.2em);
+  @include text-sizing(1em, 1.1em, 1.2em);
   @include text-colors();
   @include text-margins();
 }
