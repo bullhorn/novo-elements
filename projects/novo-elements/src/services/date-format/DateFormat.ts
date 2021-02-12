@@ -6,7 +6,7 @@ import { NovoLabelService } from '../../services/novo-label-service';
 
 @Injectable()
 export class DateFormatService {
-  constructor(private labels: NovoLabelService) { }
+  constructor(private labels: NovoLabelService) {}
 
   getTimeMask(militaryTime: boolean): Array<RegExp> {
     let mask: Array<RegExp> = [/\d/, /\d/, /:/, /\d/, /\d/];
@@ -48,6 +48,8 @@ export class DateFormatService {
   }
 
   parseDateString(dateString: string): [Date, string] {
+    console.log(`jbTest - parseDateString() / dateString = ${dateString}`);
+
     let dateFormat: string = this.labels.dateFormatString();
     const dateFormatRegex = /(\w+)[\/|\.|\-](\w+)[\/|\.|\-](\w+)/gi;
     const dateValueRegex = /(\d+)[\/|\.|\-](\d+)[\/|\.|\-](\d+)/gi;
@@ -63,6 +65,9 @@ export class DateFormatService {
     } else {
       dateFormat = dateFormat.toLowerCase();
     }
+
+    console.log(`jbTest - parseDateString() / dateFormat = ${dateFormat}`);
+
     dateFormatTokens = dateFormatRegex.exec(dateFormat);
     dateValueTokens = dateValueRegex.exec(dateString);
     if (dateFormatTokens && dateFormatTokens.length === 4 && dateValueTokens && dateValueTokens.length === 4) {
@@ -75,8 +80,12 @@ export class DateFormatService {
           year = parseInt(dateValueTokens[i], 10);
         }
       }
+
+      console.log(`jbTest - parseDateString() / month = ${month} day = ${day} year = ${year}`);
+
       if (month >= 0 && month <= 11 && year > 1900 && day > 0 && day <= 31) {
         date = new Date(year, month, day);
+        console.log(`jbTest - parseDateString() / date = ${date} dateString = ${dateString}`);
       }
     } else if (dateFormatTokens && dateFormatTokens.length === 4 && dateString.length >= 1) {
       const twoTokens = /\d{1,4}(\/|\.|\-)(\d{1,2})/.exec(dateString);
@@ -85,10 +94,13 @@ export class DateFormatService {
       const dateStringWithDelimiter = dateString[dateString.length - 1].match(/\/|\.|\-/);
       if (twoTokens && twoTokens.length === 3 && this.isValidDatePart(twoTokens[2], dateFormatTokens[2]) && !dateStringWithDelimiter) {
         dateString = `${dateString}${delimiter[1]}`;
+        console.log(`jbTest - parseDateString() dateString twotokens = ${dateString} dateStringWithDelimiter = ${dateStringWithDelimiter}`);
       } else if (oneToken && oneToken.length === 2 && this.isValidDatePart(oneToken[1], dateFormatTokens[1]) && !dateStringWithDelimiter) {
         dateString = `${dateString}${delimiter[1]}`;
+        console.log(`jbTest - parseDateString() dateString onetoken = ${dateString} dateStringWithDelimiter = ${dateStringWithDelimiter}`);
       }
     }
+    console.log(`jbTest - parseDateString() before return/ date = ${date} dateString = ${dateString}`);
     return [date, dateString];
   }
 

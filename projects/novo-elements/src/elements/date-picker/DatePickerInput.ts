@@ -149,6 +149,7 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
   }
 
   _handleInput(event: KeyboardEvent): void {
+    console.log(`jbTest - handleInput = ${event.target}`);
     if (document.activeElement === event.target) {
       this._handleEvent(event, false);
     }
@@ -170,6 +171,7 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
       this.clearValue();
       this.closePanel();
     } else {
+      console.log(`jbTest - handleEvent = ${value}`);
       this.formatDate(value, blur);
       this.openPanel();
     }
@@ -177,11 +179,17 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
 
   protected formatDate(value: string, blur: boolean) {
     try {
+      console.log(`jbTest - formatDate() = ${value}`);
       const [dateTimeValue, formatted] = this.dateFormatService.parseString(value, false, 'date');
+      console.log(`jbTest - formatDate() / dateTimeValue = ${value}`);
+
       if (!isNaN(dateTimeValue.getUTCDate())) {
         const dt = new Date(dateTimeValue);
+        console.log(`jbTest - formatDate() / dt = = ${value}`);
+
         this.dispatchOnChange(dt, blur);
       } else {
+        console.log(`jbTest - formatDate() / utcDate is NaN = ${dateTimeValue.getUTCDate()}`);
         this.dispatchOnChange(null, blur);
       }
     } catch (err) {}
@@ -204,6 +212,8 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
   }
 
   public dispatchOnChange(newValue?: any, blur: boolean = false, skip: boolean = false) {
+    console.log(`jbTest - dispatchOnChange() newValue = ${newValue} blur = ${blur} skip = ${skip}`);
+
     if (newValue !== this.value) {
       this._onChange(newValue);
       if (blur) {
@@ -221,9 +231,15 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
   }
 
   private _setCalendarValue(value: any): void {
+    console.log(`jbTest - _setCalendarValue() value = ${value}`);
+
     if (value instanceof Date && this.value instanceof Date) {
       value = new Date(value).setHours(0, 0, 0, 0);
+      console.log(`jbTest - _setCalendarValue() inside if value = ${value}`);
     }
+
+    console.log(`jbTest - _setCalendarValue() before assignment value = ${value}`);
+
     this.value = value;
   }
 
