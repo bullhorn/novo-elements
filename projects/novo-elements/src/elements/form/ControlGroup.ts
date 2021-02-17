@@ -1,23 +1,14 @@
 // NG
 import {
-  Component,
-  TemplateRef,
-  Input,
-  Output,
-  AfterContentInit,
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  EventEmitter,
-  OnChanges,
-  SimpleChanges,
-  SimpleChange,
+  AfterContentInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, Output, SimpleChange,
+  SimpleChanges, TemplateRef,
 } from '@angular/core';
-import { FormBuilder, FormArray } from '@angular/forms';
+import { FormArray, FormBuilder } from '@angular/forms';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 // App
 import { NovoFormGroup } from './NovoFormGroup';
 import { BaseControl } from './controls/BaseControl';
-import { FormUtils } from './../../utils/form-utils/FormUtils';
+import { FormUtils } from '../../utils/form-utils/FormUtils';
 import { Helpers } from '../../utils/Helpers';
 import { NovoLabelService } from '../../services/novo-label-service';
 
@@ -186,16 +177,16 @@ export class NovoControlGroup implements AfterContentInit, OnChanges {
       this.onAdd.emit();
     }
     this.currentIndex++;
+    this.assignIndexes();
     this.ref.markForCheck();
   }
 
   buildControl(value?: {}): NovoFormGroup {
-    const newControls = this.getNewControls(this.controls);
+    const newControls = this.getNewControls();
     if (value) {
       this.formUtils.setInitialValues(newControls, value);
     }
-    const ctrl: NovoFormGroup = this.formUtils.toFormGroup(newControls);
-    return ctrl;
+    return this.formUtils.toFormGroup(newControls);
   }
 
   removeControl(index: number, emitEvent = true) {
@@ -207,6 +198,7 @@ export class NovoControlGroup implements AfterContentInit, OnChanges {
     this.disabledArray = this.disabledArray.filter((value: NovoControlGroupRowConfig, idx: number) => idx !== index);
     this.resetAddRemove();
     this.currentIndex--;
+    this.assignIndexes();
     this.ref.markForCheck();
   }
 
@@ -226,7 +218,7 @@ export class NovoControlGroup implements AfterContentInit, OnChanges {
   private clearControls() {
     const control: FormArray = <FormArray>this.form.controls[this.key];
     if (control) {
-      for (let i: number = control.controls.length; i >= 0; i--) {
+      for (let i: number = control.length; i >= 0; i--) {
         this.removeControl(i, false);
       }
       this.currentIndex = 0;
@@ -252,11 +244,20 @@ export class NovoControlGroup implements AfterContentInit, OnChanges {
     return true;
   }
 
-  private getNewControls(controls: BaseControl[]) {
+  private getNewControls() {
     const ret: BaseControl[] = [];
     (this.controls || []).forEach((control: BaseControl) => {
       ret.push(new BaseControl(control.__type, control));
     });
     return ret;
+  }
+
+  private assignIndexes() {
+    const control: FormArray = <FormArray>this.form.controls[this.key];
+    if (control) {
+      for (let i: number = 0; i < control.length; i++) {
+        (control.at(i) as NovoFormGroup).associations = { index: i };
+      }
+    }
   }
 }
