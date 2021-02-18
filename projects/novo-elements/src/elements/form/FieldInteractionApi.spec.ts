@@ -1,4 +1,4 @@
-import { async, TestBed, inject } from '@angular/core/testing';
+import { async, inject, TestBed } from '@angular/core/testing';
 import { HttpClient, HttpHandler } from '@angular/common/http';
 import { of } from 'rxjs';
 
@@ -53,7 +53,7 @@ describe('FieldInteractionApi', () => {
       service.addPropertiesToPickerConfig('doughnuts', { newProperty: 'new!' });
 
       expect(setProperty).toBeCalledWith('doughnuts', 'config', { newProperty: 'new!', oldProperty: 'old!' });
-      expect(triggerEvent).toBeCalledWith({ controlKey: 'doughnuts', prop: 'pickerConfig', value: { newProperty: 'new!' } });
+      expect(triggerEvent).toBeCalledWith({ controlKey: 'doughnuts', prop: 'pickerConfig', value: { newProperty: 'new!' } }, undefined);
     });
     it('overrides pre-existing properties', () => {
       service.form.controls.doughnuts.config = { oldProperty: 'old!' };
@@ -61,7 +61,7 @@ describe('FieldInteractionApi', () => {
       service.addPropertiesToPickerConfig('doughnuts', { oldProperty: 'new!' });
 
       expect(setProperty).toBeCalledWith('doughnuts', 'config', { oldProperty: 'new!' });
-      expect(triggerEvent).toBeCalledWith({ controlKey: 'doughnuts', prop: 'pickerConfig', value: { oldProperty: 'new!' } });
+      expect(triggerEvent).toBeCalledWith({ controlKey: 'doughnuts', prop: 'pickerConfig', value: { oldProperty: 'new!' } }, undefined);
     });
     it('does not allow picker modifications if restrictFieldInteractions is true for that control', () => {
       service.form = { controls: { doughnuts: { restrictFieldInteractions: true } } };
@@ -102,7 +102,7 @@ describe('FieldInteractionApi', () => {
       const result = service.getOptionsConfig(args) as { options: OptionsFunction };
       await result.options(query, page);
 
-      expect(spy).toHaveBeenCalledWith(query, jasmine.any(Object), page);
+      expect(spy).toBeCalledWith(query, jasmine.any(Object), page);
       done();
     });
     it('uses the optionsURLBuilder if included and not optionsUrl', async (done) => {
@@ -205,7 +205,116 @@ describe('FieldInteractionApi', () => {
     it('should return fieldset object when key exists', () => {
       const returnValue = service.getFieldSet('test');
       expect(returnValue).not.toBeNull();
-      expect(returnValue).toStrictEqual({ key: 'test'});
+      expect(returnValue).toStrictEqual({ key: 'test' });
+    });
+  });
+
+  describe('Function: getValue', () => {
+    beforeEach(() => {
+      service.form = {
+        controls: { myControl: { value: 1 } },
+        parent: {
+          controls: { parentControl: { value: 2 } },
+        }
+      }
+    });
+    it('is defined', () => {
+      expect(service.getValue).toBeDefined();
+    });
+    it('should log to console if no key', () => {
+      spyOn(console, 'error');
+      const returnValue = service.getValue(null);
+      expect(returnValue).toBeNull();
+      expect(console.error).toBeCalled();
+    });
+    it('should log to console if no match for key', () => {
+      spyOn(console, 'error');
+      const returnValue = service.getValue('myControl1');
+      expect(returnValue).toBeNull();
+      expect(console.error).toBeCalled();
+    });
+    it('should get value when key exists', () => {
+      spyOn(console, 'error');
+      const returnValue = service.getValue('myControl');
+      expect(returnValue).toBe(1);
+      expect(console.error).not.toBeCalled();
+    });
+    it('should get value on current form when provided as argument', () => {
+      spyOn(console, 'error');
+      const returnValue = service.getValue('myControl', service.form);
+      expect(returnValue).toBe(1);
+      expect(console.error).not.toBeCalled();
+    });
+    it('should get value on parent form when provided as argument', () => {
+      spyOn(console, 'error');
+      const returnValue = service.getValue('parentControl', service.getParent());
+      expect(returnValue).toBe(2);
+      expect(console.error).not.toBeCalled();
+    });
+  });
+
+  describe('Function: setValue', () => {
+    beforeEach(() => {
+      service.form = {
+        controls: {
+          myControl: { setValue: () => {} },
+          restrictedControl: { setValue: () => {}, restrictFieldInteractions: true },
+        },
+        parent: {
+          controls: { parentControl: { setValue: () => {} } },
+        }
+      }
+    });
+    it('is defined', () => {
+      expect(service.setValue).toBeDefined();
+    });
+    it('should log to console if no key', () => {
+      spyOn(service.form.controls.myControl, 'setValue');
+      spyOn(console, 'error');
+      service.setValue(null, null);
+      expect(service.form.controls.myControl.setValue).not.toBeCalled();
+      expect(triggerEvent).not.toBeCalled();
+      expect(console.error).toBeCalled();
+    });
+    it('should log to console if no match for key', () => {
+      spyOn(service.form.controls.myControl, 'setValue');
+      spyOn(console, 'error');
+      service.setValue('myControl1', null);
+      expect(service.form.controls.myControl.setValue).not.toBeCalled();
+      expect(triggerEvent).not.toBeCalled();
+      expect(console.error).toBeCalled();
+    });
+    it('should set value when key exists', () => {
+      spyOn(service.form.controls.myControl, 'setValue');
+      spyOn(console, 'error');
+      service.setValue('myControl', 1);
+      expect(service.form.controls.myControl.setValue).toBeCalled();
+      expect(triggerEvent).toBeCalledWith({ controlKey: 'myControl', prop: 'value', value: 1 }, undefined);
+      expect(console.error).not.toBeCalled();
+    });
+    it('should set value on current form when provided as argument', () => {
+      spyOn(service.form.controls.myControl, 'setValue');
+      spyOn(console, 'error');
+      service.setValue('myControl', 1, {}, service.form);
+      expect(service.form.controls.myControl.setValue).toBeCalled();
+      expect(triggerEvent).toBeCalledWith({ controlKey: 'myControl', prop: 'value', value: 1 }, service.form);
+      expect(console.error).not.toBeCalled();
+    });
+    it('should do nothing when field interactions are restricted', () => {
+      spyOn(service.form.controls.restrictedControl, 'setValue');
+      spyOn(console, 'error');
+      service.setValue('restrictedControl', 1);
+      expect(service.form.controls.restrictedControl.setValue).not.toBeCalled();
+      expect(triggerEvent).not.toBeCalled();
+      expect(console.error).not.toBeCalled();
+    });
+    it('should set value on parent form when provided as argument', () => {
+      spyOn(service.form.parent.controls.parentControl, 'setValue');
+      spyOn(console, 'error');
+      service.setValue('parentControl', 1, {}, service.getParent());
+      expect(service.form.parent.controls.parentControl.setValue).toBeCalled();
+      expect(triggerEvent).toBeCalledWith({ controlKey: 'parentControl', prop: 'value', value: 1 }, service.form.parent);
+      expect(console.error).not.toBeCalled();
     });
   });
 });

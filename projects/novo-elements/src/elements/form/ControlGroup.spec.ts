@@ -1,11 +1,11 @@
 // NG2
 import { ChangeDetectorRef } from '@angular/core';
-import { TestBed, async } from '@angular/core/testing';
+import { async, TestBed } from '@angular/core/testing';
 import { FormBuilder } from '@angular/forms';
 // App
 import { NovoControlGroup } from './ControlGroup';
 import { NovoFormModule } from './Form.module';
-import { FormUtils } from './../../utils/form-utils/FormUtils';
+import { FormUtils } from '../../utils/form-utils/FormUtils';
 import { NovoLabelService } from '../../services/novo-label-service';
 import { OptionsService } from '../../services/options/OptionsService';
 
@@ -18,99 +18,104 @@ describe('Elements: NovoControlGroup', () => {
       imports: [NovoFormModule],
       providers: [FormUtils, FormBuilder, ChangeDetectorRef, NovoLabelService, OptionsService],
     }).compileComponents();
+
     fixture = TestBed.createComponent(NovoControlGroup);
     component = fixture.debugElement.componentInstance;
-    // Mock @Input
-    component.form = {
-      value: 'TEST',
-      valid: false,
-      getRawValue: () => {
-        return 'TEST';
-      },
-    };
-    component.add = true;
+
+    component.add = { label: 'Add new group' };
     component.edit = true;
     component.remove = true;
-    component.canRemove = () => true;
+    component.form = component.formUtils.toFormGroup([{ key: 'myPercent' }, { key: 'myString' }]);
+    component.controls = [{
+      key: 'myPercent',
+      controlType: 'textbox',
+      type: 'number',
+      subtype: 'percentage',
+    }, {
+      key: 'myString',
+      controlType: 'textbox',
+      type: 'string',
+    }];
+    component.key = 'myControls';
     component.canEdit = () => true;
-    component.onAdd = () => {};
-    component.controls = [
-      {
-        key: 'test1',
-        controlType: 'textbox',
-        type: 'number',
-        subtype: 'percentage',
-      },
-    ];
-    component.initialValue = [
-      {
-        test1: '34',
-      },
-    ];
-    component.key = 'test';
+    component.canRemove = () => true;
   }));
 
-  it('should initialize correctly', () => {
-    expect(component).toBeTruthy();
-    component.ngAfterContentInit();
-    expect(component.key).toBe('test');
+  describe('Initialization', () => {
+    it('should create empty form without initial values', () => {
+      component.initialValue = null;
+      component.ngOnChanges({ initialValue: { previousValue: '', currentValue: component.initialValue } });
+      expect(component.form.value.myControls).not.toBeDefined();
+      expect(component.currentIndex).toEqual(0);
+    });
+    it('should add single control with initial values object', () => {
+      component.initialValue = { myPercent: .1, myString: '10%' };
+      component.ngOnChanges({ initialValue: { previousValue: '', currentValue: component.initialValue } });
+      expect(component.form.value.myControls).toEqual([component.initialValue]);
+      expect(component.form.controls.myControls.controls.length).toEqual(1);
+      expect(component.currentIndex).toEqual(1);
+      expect(component.form.controls.myControls.controls[0].controls.myString.value).toEqual('10%');
+      expect(component.form.controls.myControls.controls[0].associations.index).toEqual(0);
+    });
+    it('should add multiple controls with initial values array', () => {
+      component.initialValue = [{ myPercent: .1, myString: '10%' }, { myPercent: .2, myString: '20%' }, { myPercent: .3, myString: '30%' }];
+      component.ngOnChanges({ initialValue: { previousValue: '', currentValue: component.initialValue } });
+      expect(component.form.value.myControls).toEqual(component.initialValue);
+      expect(component.form.controls.myControls.controls.length).toEqual(3);
+      expect(component.currentIndex).toEqual(3);
+      expect(component.form.controls.myControls.controls[0].controls.myString.value).toEqual('10%');
+      expect(component.form.controls.myControls.controls[1].controls.myString.value).toEqual('20%');
+      expect(component.form.controls.myControls.controls[2].controls.myString.value).toEqual('30%');
+      expect(component.form.controls.myControls.controls[0].associations.index).toEqual(0);
+      expect(component.form.controls.myControls.controls[1].associations.index).toEqual(1);
+      expect(component.form.controls.myControls.controls[2].associations.index).toEqual(2);
+    });
   });
 
-  describe('Function: public resetAddRemove(): void', () => {
-    beforeEach(() => {
-      spyOn(component, 'checkCanEdit').and.returnValue(true);
-      spyOn(component, 'checkCanRemove').and.returnValue(true);
+  describe('Adding controls', () => {
+    it('should add controls without initial values', () => {
+      component.addNewControl();
+      expect(component.form.controls.myControls.controls.length).toEqual(1);
+      expect(component.currentIndex).toEqual(1);
+      expect(component.form.controls.myControls.controls[0].controls.myPercent.value).toEqual('');
+      expect(component.form.controls.myControls.controls[0].controls.myString.value).toEqual('');
     });
-    it('should not error if disabledArray is empty', () => {
-      component.resetAddRemove();
-      expect(component.disabledArray.length).toEqual(0);
-    });
-    it('should execute when disabledArray is not empty', () => {
-      component.disabledArray = [
-        {
-          edit: false,
-          remove: false,
-        },
-      ];
-      component.resetAddRemove();
-      expect(component.disabledArray[0].edit).toEqual(true);
-      expect(component.disabledArray[0].remove).toEqual(true);
+    it('should add controls with initial values', () => {
+      component.addNewControl({ myPercent: .4, myString: '40%' });
+      expect(component.form.controls.myControls.controls.length).toEqual(1);
+      expect(component.currentIndex).toEqual(1);
+      expect(component.form.controls.myControls.controls[0].controls.myPercent.value).toEqual(0.4);
+      expect(component.form.controls.myControls.controls[0].controls.myString.value).toEqual('40%');
     });
   });
-  describe('Function: public removeControl(index: number, emitEvent: boolean = true): void', () => {
+
+  describe('Removing controls', () => {
     beforeEach(() => {
-      spyOn(component, 'resetAddRemove');
-      spyOn(component.ref, 'markForCheck');
-      spyOn(component.onRemove, 'emit');
-      component.currentIndex = 3;
-      component.disabledArray = [{ edit: true, remove: false }, { edit: false, remove: false }, { edit: true, remove: true }];
-      component.form = {
-        controls: {
-          one: {
-            controls: [{ key: 'name' }, { key: 'name2' }, { key: 'name3' }],
-            at: () => {
-              return { value: 1 };
-            },
-            removeAt: () => {},
-          },
-        },
-      };
-      component.key = 'one';
-      spyOn(component.form.controls.one, 'removeAt').and.callFake(() => {
-        component.form.controls.one.controls = [{ key: 'name' }, { key: 'name2' }];
-      });
-    });
-    it('should remove control row', () => {
-      component.removeControl(1);
-      expect(component.form.controls.one.controls.length).toEqual(2);
-    });
-    it('should update disabledArray', () => {
-      component.removeControl(1);
-      expect(component.disabledArray).toEqual([{ edit: true, remove: false }, { edit: true, remove: true }]);
-    });
-    it('should update currentIndex', () => {
-      component.removeControl(1);
+      component.initialValue = [{ myPercent: .1, myString: '10%' }, { myPercent: .2, myString: '20%' }, { myPercent: .3, myString: '30%' }];
+      component.ngOnChanges({ initialValue: { previousValue: '', currentValue: component.initialValue } });
+      expect(component.form.controls.myControls.controls.length).toEqual(3);
+    })
+    it('should remove control row and update indexes', () => {
+      component.removeControl(0);
+      expect(component.form.controls.myControls.controls.length).toEqual(2);
       expect(component.currentIndex).toEqual(2);
+      expect(component.form.controls.myControls.controls[0].controls.myString.value).toEqual('20%');
+      expect(component.form.controls.myControls.controls[1].controls.myString.value).toEqual('30%');
+      expect(component.form.controls.myControls.controls[0].associations.index).toEqual(0);
+      expect(component.form.controls.myControls.controls[1].associations.index).toEqual(1);
+    });
+    it('should check canRemove() function after removal', () => {
+      spyOn(component, 'canRemove').and.returnValue(true);
+      component.removeControl(0);
+      expect(component.canRemove).toHaveBeenCalledWith({ 'myPercent': 0.2, 'myString': '20%' }, 0);
+      expect(component.canRemove).toHaveBeenCalledWith({ 'myPercent': 0.3, 'myString': '30%' }, 1);
+    });
+    it('should check canRemove() function when reset', () => {
+      spyOn(component, 'canRemove').and.returnValue(false);
+      component.resetAddRemove();
+      expect(component.canRemove).toHaveBeenCalledWith({ 'myPercent': 0.1, 'myString': '10%' }, 0);
+      expect(component.canRemove).toHaveBeenCalledWith({ 'myPercent': 0.2, 'myString': '20%' }, 1);
+      expect(component.canRemove).toHaveBeenCalledWith({ 'myPercent': 0.3, 'myString': '30%' }, 2);
     });
   });
 });
