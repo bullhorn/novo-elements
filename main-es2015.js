@@ -62786,6 +62786,8 @@ if (false) {}
  * Generated from: form-controls/date-picker/date-picker/date-picker-example.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+//  Must add 'ExtendedLabelService' to your module file and
+//  include it in the constructor of your component
 class ExtendedLabelService extends novo_elements__WEBPACK_IMPORTED_MODULE_3__["NovoLabelService"] {
     constructor() {
         super(...arguments);
@@ -71962,7 +71964,7 @@ const EXAMPLE_COMPONENTS = {
     'date-picker': {
         title: 'Date Example',
         component: DatePickerExample,
-        tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0Aimport%20%7B%20NovoLabelService%20%7D%20from%20'novo-elements'%3B%0A%0Aexport%20class%20ExtendedLabelService%20extends%20NovoLabelService%20%7B%0A%20%20dateFormat%20%3D%20'dd%2Fmm%2Fyyyy'%3B%0A%20%20dateFormatPlaceholder%20%3D%20'DD%2FMM%2FYYYY'%3B%0A%7D%0A%0A%2F**%0A%20*%20%40title%20Date%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'date-picker-example'%2C%0A%20%20templateUrl%3A%20'date-picker-example.html'%2C%0A%20%20styleUrls%3A%20%5B'date-picker-example.css'%5D%2C%0A%7D)%0Aexport%20class%20DatePickerExample%20%7B%0A%20%20dateOne%3A%20Date%20%3D%20new%20Date()%3B%0A%20%20dateTwo%3A%20Date%20%3D%20new%20Date()%3B%0A%7D%0A`,
+        tsSource: `import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0Aimport%20%7B%20NovoLabelService%20%7D%20from%20'novo-elements'%3B%0A%0A%0A%2F%2F%20%20Must%20add%20'ExtendedLabelService'%20to%20your%20module%20file%20and%0A%2F%2F%20%20include%20it%20in%20the%20constructor%20of%20your%20component%0Aexport%20class%20ExtendedLabelService%20extends%20NovoLabelService%20%7B%0A%20%20dateFormat%20%3D%20'dd%2Fmm%2Fyyyy'%3B%0A%20%20dateFormatPlaceholder%20%3D%20'DD%2FMM%2FYYYY'%3B%0A%7D%0A%0A%2F**%0A%20*%20%40title%20Date%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'date-picker-example'%2C%0A%20%20templateUrl%3A%20'date-picker-example.html'%2C%0A%20%20styleUrls%3A%20%5B'date-picker-example.css'%5D%2C%0A%7D)%0Aexport%20class%20DatePickerExample%20%7B%0A%20%20dateOne%3A%20Date%20%3D%20new%20Date()%3B%0A%20%20dateTwo%3A%20Date%20%3D%20new%20Date()%3B%0A%7D%0A`,
         cssSource: `%2F**%20No%20CSS%20for%20this%20example%20*%2F%0A`,
         htmlSource: `%3Cdiv%20class%3D%22date-picker-demo-side-by-side%22%3E%0A%20%20%20%20%3Cp%3E%0A%20%20%20%20%20%20%20%20%3Clabel%3EValue%20One%3C%2Flabel%3E%20%7B%7B(dateOne%20%7C%20date)%20%7C%7C%20'N%2FA'%7D%7D%0A%20%20%20%20%20%20%20%20%3Clabel%3EValue%20Two%3C%2Flabel%3E%20%7B%7B(dateTwo%20%7C%20date)%20%7C%7C%20'N%2FA'%7D%7D%0A%20%20%20%20%3C%2Fp%3E%0A%20%20%20%20%3Cnovo-date-picker%20%5B(ngModel)%5D%3D%22dateOne%22%3E%3C%2Fnovo-date-picker%3E%0A%20%20%20%20%3Cdiv%3E%0A%20%20%20%20%20%20%20%20%3Cnovo-date-picker-input%20%5B(ngModel)%5D%3D%22dateTwo%22%20format%3D%22mm%2Fdd%2Fyyyy%22%3E%3C%2Fnovo-date-picker-input%3E%0A%20%20%20%20%20%20%20%20%3Cnovo-date-picker-input%20%5B(ngModel)%5D%3D%22dateTwo%22%20format%3D%22dd%2Fmm%2Fyyyy%22%3E%3C%2Fnovo-date-picker-input%3E%0A%20%20%20%20%3C%2Fdiv%3E%0A%3C%2Fdiv%3E%0A`
     },
