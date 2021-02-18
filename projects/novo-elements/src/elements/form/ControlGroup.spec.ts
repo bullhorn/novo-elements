@@ -94,7 +94,7 @@ describe('Elements: NovoControlGroup', () => {
       component.initialValue = [{ myPercent: .1, myString: '10%' }, { myPercent: .2, myString: '20%' }, { myPercent: .3, myString: '30%' }];
       component.ngOnChanges({ initialValue: { previousValue: '', currentValue: component.initialValue } });
       expect(component.form.controls.myControls.controls.length).toEqual(3);
-    })
+    });
     it('should remove control row and update indexes', () => {
       component.removeControl(0);
       expect(component.form.controls.myControls.controls.length).toEqual(2);

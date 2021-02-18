@@ -216,7 +216,7 @@ describe('FieldInteractionApi', () => {
         parent: {
           controls: { parentControl: { value: 2 } },
         }
-      }
+      };
     });
     it('is defined', () => {
       expect(service.getValue).toBeDefined();
@@ -263,7 +263,7 @@ describe('FieldInteractionApi', () => {
         parent: {
           controls: { parentControl: { setValue: () => {} } },
         }
-      }
+      };
     });
     it('is defined', () => {
       expect(service.setValue).toBeDefined();
