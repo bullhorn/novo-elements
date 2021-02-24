@@ -1,0 +1,14 @@
+<novo-form [form]="formGroup">
+  <novo-control-group [form]="formGroup"
+                      [controls]="controls"
+                      [initialValue]="initialValue"
+                      [add]="simpleAddConfig"
+                      [emptyMessage]="emptyMessage"
+                      remove="true"
+                      edit="false"
+                      key="rows"></novo-control-group>
+</novo-form>
+
+<div class="final-value">Form Value - <pre>{{ formGroup.value | json }}</pre></div>
+<div class="final-value">Form Dirty - {{ formGroup.dirty }}</div>
+<div class="final-value">Is Form Valid? - {{ formGroup.valid }}</div>
