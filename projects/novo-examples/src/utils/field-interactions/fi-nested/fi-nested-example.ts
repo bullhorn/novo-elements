@@ -71,6 +71,6 @@ export class FiNestedExample {
       new CheckboxControl({ key: 'selected', interactions: [{ event: 'change', script: selectedFunction }] }),
       new TextBoxControl({ key: 'value', type: 'percentage', required: true, interactions: [{ event: 'change', script: valueFunction }] }),
       new TextBoxControl({ key: 'label', required: true, interactions: [{ invokeOnInit: true, event: 'change', script: labelFunction }] }),
-    ]
+    ];
   }
 }
