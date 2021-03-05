@@ -292,7 +292,7 @@ export class NovoSelectElement implements OnInit, OnChanges, OnDestroy, ControlV
         this.filterTerm = '';
       }, 2000);
       const char = event.key;
-      this.filterTerm = this.filterTerm.concat(char);
+      this.filterTerm = this.filterTerm.concat(char).toUpperCase();
       const item = this.filteredOptions.find((i) => i.label.toUpperCase().indexOf(this.filterTerm) === 0);
       if (item) {
         this.select(item, this.filteredOptions.indexOf(item));
