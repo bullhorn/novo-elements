@@ -19433,7 +19433,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             /** @type {?} */
 
             var _char2 = event.key;
-            this.filterTerm = this.filterTerm.concat(_char2);
+            this.filterTerm = this.filterTerm.concat(_char2).toUpperCase();
             /** @type {?} */
 
             var item = this.filteredOptions.find(

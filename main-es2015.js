@@ -13983,7 +13983,7 @@ class NovoSelectElement {
             }), 2000);
             /** @type {?} */
             const char = event.key;
-            this.filterTerm = this.filterTerm.concat(char);
+            this.filterTerm = this.filterTerm.concat(char).toUpperCase();
             /** @type {?} */
             const item = this.filteredOptions.find((/**
              * @param {?} i
