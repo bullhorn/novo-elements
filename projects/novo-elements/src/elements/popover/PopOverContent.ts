@@ -14,7 +14,7 @@ import { PopOverDirective } from './PopOver';
       role="popover"
     >
       <div class="arrow {{ effectiveAlignment }}"></div>
-      <h4 class="popover-title" [hidden]="!title">{{ title }}</h4>
+      <div class="popover-title" [hidden]="!title">{{ title }}</div>
       <div class="popover-content">
         <ng-content></ng-content>
         <div class="popover-content-text">{{ content }}</div>

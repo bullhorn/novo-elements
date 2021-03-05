@@ -3,8 +3,10 @@
 
 :host {
   display: grid;
+  position: relative;
+  // margin: 0 0.5em;
 
-  &.novo-field-appearance-horizontal {
+  &.novo-field-layout-horizontal {
     grid-gap: 0rem 1rem;
     grid-template-columns: 150px minmax(min-content, max-content);
     grid-template-areas:
@@ -12,41 +14,20 @@
       ". messages";
   }
 
-  &.novo-field-appearance-vertical {
+  &.novo-field-layout-vertical {
     grid-template-columns: minmax(min-content, max-content);
     grid-template-rows: repeat(3, minmax(min-content, max-content));
     grid-template-areas:
       "label"
       "input"
       "messages";
-    width: min-content;
+    width: max-content;
   }
 
   .novo-field-label {
     grid-area: label;
     display: grid;
     align-items: center;
-  }
-
-  &.novo-field-appearance-underlined {
-    .novo-field-input {
-      border-bottom: 1px solid lighten($dark, 45%) !important;
-    }
-    &:not(.novo-focused):hover {
-      .novo-field-input {
-        border-bottom: 1px solid $dark !important;
-      }
-    }
-    &.novo-focused {
-      .novo-field-input {
-        border-bottom: 1px solid $positive !important;
-      }
-    }
-    &.novo-field-invalid {
-      .novo-field-input {
-        border-bottom: 1px solid $negative !important;
-      }
-    }
   }
 
   &.novo-field-type-color {
@@ -62,17 +43,23 @@
     display: grid;
     grid-template-columns: minmax(auto, max-content) 1fr minmax(auto, max-content);
 
-    &::ng-deep .novo-input-element {
-      @include novo-text-large();
-      border: none;
-      background-image: none;
-      background-color: transparent;
-      box-shadow: none;
-      padding: 0.4rem 0.2rem;
-      border-bottom: none !important;
+    &::ng-deep {
+      .novo-input-element {
+        @include novo-text-medium();
+        border: none;
+        background-image: none;
+        background-color: transparent;
+        box-shadow: none;
+        padding: 0.4rem 0.2rem;
+        border-bottom: none !important;
 
-      &:focus {
-        outline: none;
+        &:focus {
+          outline: none;
+        }
+      }
+
+      .novo-radio-group {
+        padding: 0.5rem 0;
       }
     }
 
@@ -98,5 +85,9 @@
   .novo-field-messages {
     grid-area: messages;
     display: grid;
+  }
+
+  .novo-field-hint-wrapper {
+    display: flex;
   }
 }

@@ -60,9 +60,9 @@ export class CardFooterElement {}
       <header *ngIf="title || config.title">
         <div class="title">
           <!--Grabber Icon-->
-          <span tooltip="{{ labels.move }}" tooltipPosition="bottom-right"
-            ><i *ngIf="move || config.move" class="bhi-move" [attr.data-automation-id]="cardAutomationId + '-move'"></i
-          ></span>
+          <span tooltip="{{ labels.move }}" tooltipPosition="bottom-right">
+            <novo-icon *ngIf="move || config.move" [attr.data-automation-id]="cardAutomationId + '-move'">move</novo-icon>
+          </span>
           <!--Card Title-->
           <h3 [attr.data-automation-id]="cardAutomationId + '-title'">
             <span [tooltip]="iconTooltip" tooltipPosition="right"><i *ngIf="icon" [ngClass]="iconClass"></i></span>

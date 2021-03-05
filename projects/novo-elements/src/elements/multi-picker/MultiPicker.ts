@@ -24,15 +24,15 @@ interface Item {
   selector: 'multi-picker',
   providers: [CHIPS_VALUE_ACCESSOR],
   template: `
-    <chip
+    <novo-chip
       *ngFor="let item of _items | async | slice: 0:chipsCount"
       [type]="item.type"
       [class.selected]="item == selected"
-      (remove)="removeFromDisplay($event, item)"
-      (select)="select($event, item)"
+      (removed)="removeFromDisplay($event, item)"
+      (selectionChange)="select($event, item)"
     >
       {{ item.label }}
-    </chip>
+    </novo-chip>
     <div *ngIf="items.length > chipsCount">
       <ul class="summary">
         <li *ngFor="let type of notShown">+ {{ type.count }} {{ labels.more }} {{ type.type }}</li>

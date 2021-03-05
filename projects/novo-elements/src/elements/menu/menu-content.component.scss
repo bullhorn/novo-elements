@@ -24,6 +24,9 @@
         background: rgba($ocean, 0.1);
         color: $dark;
       }
+      :active {
+        background: rgba($ocean, 0.4);
+      }
       .menu-item-container {
         display: flex;
         align-items: center;

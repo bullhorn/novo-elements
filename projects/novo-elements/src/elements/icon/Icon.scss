@@ -9,12 +9,13 @@ novo-icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.8em;
+  font-size: 1.2em;
   i {
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: inherit;
+    line-height: inherit;
     * {
       display: none;
     }

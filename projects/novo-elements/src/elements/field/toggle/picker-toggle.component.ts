@@ -67,9 +67,6 @@ export class NovoPickerToggleElement<T = any> implements AfterContentInit, After
   }
   private _disabled: boolean;
 
-  /** Whether ripples on the toggle should be disabled. */
-  @Input() disableRipple: boolean;
-
   /** Underlying button element. */
   @ViewChild('button') _button: NovoButtonElement;
 

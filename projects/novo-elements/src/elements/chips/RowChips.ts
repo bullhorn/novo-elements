@@ -17,7 +17,7 @@ const CHIPS_VALUE_ACCESSOR = {
 @Component({
   selector: 'novo-row-chip',
   template: `<div class="novo-row-chips-columns">
-    <ng-content></ng-content><i class="bhi-delete-o" *ngIf="!disabled" (click)="onRemove($event)"></i>
+    <ng-content></ng-content><i class="bhi-delete-o" *ngIf="!disabled" (click)="remove()"></i>
   </div>`,
 })
 export class NovoRowChipElement extends NovoChipElement {
@@ -44,8 +44,8 @@ export class NovoRowChipElement extends NovoChipElement {
       [type]="type || item?.value?.searchEntity"
       [class.selected]="item == selected"
       [disabled]="disablePickerInput"
-      (remove)="remove($event, item)"
-      (select)="select($event, item)"
+      (removed)="remove($event, item)"
+      (selectionChange)="select($event, item)"
     >
       <div class="column-data" *ngFor="let column of source.columns">
         <span>{{ column.data(item) }}</span>

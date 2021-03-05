@@ -1,0 +1,63 @@
+@import "../../../styles/global/variables.scss";
+// @import "../style/menu-common";
+// @import "../style/vendor-prefixes";
+// @import "../style/layout-common";
+// @import "../../../cdk/a11y/a11y";
+
+$novo-menu-side-padding: 0.5rem;
+
+.novo-option {
+  // @include novo-menu-item-base();
+  position: relative;
+  cursor: pointer;
+  outline: none;
+  display: flex;
+  flex-direction: row;
+  max-width: 100%;
+  box-sizing: border-box;
+  align-items: center;
+  margin: 0;
+  padding: 1rem 1rem 1rem 1.6rem;
+  gap: 1rem;
+  flex: 1;
+  -webkit-tap-highlight-color: transparent;
+
+  &:hover {
+    background: rgba($ocean, 0.1);
+    color: $dark;
+  }
+  &:active {
+    background: rgba($ocean, 0.4);
+  }
+
+  &[aria-disabled="true"] {
+    // @include user-select(none);
+    cursor: default;
+  }
+
+  .novo-optgroup &:not(.novo-option-multiple) {
+    padding-left: $novo-menu-side-padding * 2;
+
+    [dir="rtl"] & {
+      padding-left: $novo-menu-side-padding;
+      padding-right: $novo-menu-side-padding * 2;
+    }
+  }
+}
+
+.novo-option-text {
+  display: inline-block;
+  flex-grow: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.novo-option-pseudo-checkbox {
+  $margin: $novo-menu-side-padding / 2;
+  margin-right: $margin;
+
+  [dir="rtl"] & {
+    margin-left: $margin;
+    margin-right: 0;
+  }
+}

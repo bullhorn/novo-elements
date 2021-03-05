@@ -17,6 +17,25 @@ import { NovoExamplesSharedModule } from './_shared/shared.module';
 export class AceEditorPage {}
 
 @Component({
+  selector: 'autocomplete-page',
+  template: `<h1>
+      Autocomplete <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/avatar">(source)</a>
+    </h1>
+    <p>Autocompletes are images used to represent users and organizations on GitHub. They typically are squares with rounded edges.</p>
+    <h2>Types</h2>
+    <h5>Autocomplete</h5>
+    <p>Autocompletes are images used to represent users and organizations on GitHub. They typically are squares with rounded edges.</p>
+    <p><code-example example="autocomplete-usage"></code-example></p>
+    <h5>Autocomplete with Chips</h5>
+    <p>Autocompletes are images used to represent users and organizations on GitHub. They typically are squares with rounded edges.</p>
+    <p><code-example example="autocomplete-with-chips"></code-example></p>
+    <h5>Autocomplete with Stacked Chips</h5>
+    <p>Autocompletes are images used to represent users and organizations on GitHub. They typically are squares with rounded edges.</p>
+    <p><code-example example="autocomplete-stacked-chips"></code-example></p>`,
+})
+export class AutocompletePage {}
+
+@Component({
   selector: 'avatar-page',
   template: `<h1>
       Avatar <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/avatar">(source)</a>
@@ -1384,7 +1403,7 @@ export class StepperPage {}
     <p><code-example example="tabs-color"></code-example></p>
     <h5>White</h5>
     <p>White background tab navigation gets the theme <code>theme=&quot;white&quot;</code></p>
-    <p><code-example example="tabs-color"></code-example></p>
+    <p><code-example example="tabs-basic"></code-example></p>
     <h2>Styles</h2>
     <p>Condensed tabs to help utilize more space with <code>condensed=&quot;true&quot;</code></p>
     <p><code-example example="tabs-condensed"></code-example></p>
@@ -1420,7 +1439,10 @@ export class TabsPage {}
     <p><code-example example="record-header"></code-example></p>
     <h2>Details Card</h2>
     <p>When Displaying list of fields &amp; values in a card, follow this pattern.</p>
-    <p><code-example example="details-card"></code-example></p>`,
+    <p><code-example example="details-card"></code-example></p>
+    <h2>Card Form</h2>
+    <p>Displaying a form inside a cards, used for email &amp; sms messages</p>
+    <p><code-example example="card-form"></code-example></p>`,
 })
 export class PatternsPage {}
 
@@ -1753,6 +1775,7 @@ export class TooltipPage {}
 const routes: Routes = [
   //{ path: '', component: Home, data: {} },
   { path: 'components/ace-editor', component: AceEditorPage, data: { title: 'Ace Editor', section: 'components' } },
+  { path: 'components/autocomplete', component: AutocompletePage, data: { title: 'Autocomplete', section: 'components' } },
   { path: 'components/avatar', component: AvatarPage, data: { title: 'Avatar', section: 'components' } },
   { path: 'components/breadcrumb', component: BreadcrumbPage, data: { title: 'Breadcrumb', section: 'components' } },
   { path: 'components/buttons', component: ButtonsPage, data: { title: 'Buttons', section: 'components' } },
@@ -1821,6 +1844,7 @@ const routes: Routes = [
 
 export const PAGE_LIST = [
   AceEditorPage,
+  AutocompletePage,
   AvatarPage,
   BreadcrumbPage,
   ButtonsPage,

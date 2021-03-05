@@ -4,7 +4,7 @@ $black: #000000;
 $white: #ffffff;
 $grey: #999999;
 $off-white: #f4f4f4;
-$light: #d9dadc;
+$light: #bebebe; // #d9dadc;
 $navy: #0d2d42;
 $pulse: #3bafda;
 // New grays below are being added as placeholder.
@@ -211,7 +211,7 @@ $all-colors: map-merge($dark-colors, $light-colors);
 // -------------------------
 $whiteframe-shadow-z1: 0px 2px 5px 0 rgba(0, 0, 0, 0.26) !default;
 $whiteframe-zindex-z1: 1 !default;
-$whiteframe-shadow-z2: 0px 8px 17px rgba(0, 0, 0, 0.2) !default;
+$whiteframe-shadow-z2: 0px 3px 8px rgba(0, 0, 0, 0.2) !default;
 $whiteframe-zindex-z2: 2 !default;
 $whiteframe-shadow-z3: 0px 4px 10px rgba(0, 0, 0, 0.15) !default;
 $whiteframe-zindex-z3: 3 !default;

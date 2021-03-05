@@ -1,4 +1,6 @@
 // NG2
+import { FocusKeyManager } from '@angular/cdk/a11y';
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import {
   AfterContentInit,
   Component,
@@ -10,8 +12,9 @@ import {
   Output,
   QueryList,
 } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-// APP
+import { ControlValueAccessor, FormGroupDirective, NgControl, NgForm, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { CanUpdateErrorStateCtor, ErrorStateMatcher, mixinErrorState } from '../common';
+import { NovoFieldControl } from '../field';
 import { NovoRadioElement } from './Radio';
 import { NOVO_RADIO_GROUP } from './tokens';
 
@@ -24,9 +27,24 @@ const RADIOGROUP_VALUE_ACCESSOR = {
   multi: true,
 };
 
+// Boilerplate for applying mixins to NovoChipList.
+class NovoRadioGroupBase {
+  constructor(
+    public _defaultErrorStateMatcher: ErrorStateMatcher,
+    public _parentForm: NgForm,
+    public _parentFormGroup: FormGroupDirective,
+    public ngControl: NgControl,
+  ) {}
+}
+const NovoRadioGroupMixins: CanUpdateErrorStateCtor & typeof NovoRadioGroupBase = mixinErrorState(NovoRadioGroupBase);
+
 @Component({
   selector: 'novo-radio-group',
-  providers: [RADIOGROUP_VALUE_ACCESSOR, { provide: NOVO_RADIO_GROUP, useExisting: NovoRadioGroup }],
+  providers: [
+    RADIOGROUP_VALUE_ACCESSOR,
+    { provide: NOVO_RADIO_GROUP, useExisting: NovoRadioGroup },
+    { provide: NovoFieldControl, useExisting: NovoRadioGroup },
+  ],
   template: '<ng-content></ng-content>',
   host: {
     class: 'novo-radio-group',
@@ -34,26 +52,31 @@ const RADIOGROUP_VALUE_ACCESSOR = {
     '[class.novo-radio-group-appearance-vertical]': 'appearance=="vertical"',
   },
 })
-export class NovoRadioGroup implements ControlValueAccessor, AfterContentInit {
+export class NovoRadioGroup extends NovoRadioGroupMixins implements NovoFieldControl<any>, ControlValueAccessor, AfterContentInit {
   private _uniqueId: string = `ngx-radio-group-${++nextId}`;
+  /** The aria-describedby attribute on the chip list for improved a11y. */
+  _ariaDescribedby: string;
+  /** Tab index for the chip list. */
+  _tabIndex = 0;
+  /** User defined tab index. */
+  _userTabIndex: number | null = null;
+  /** The FocusKeyManager which handles focus. */
+  _keyManager: FocusKeyManager<NovoRadioElement>;
 
   @Input() id: string = this._uniqueId;
   @Input() tabindex: number = 0;
-
-  @HostBinding('class.disabled')
-  @Input()
-  disabled: boolean = false;
+  /** An object used to control when error messages are shown. */
+  @Input() errorStateMatcher: ErrorStateMatcher;
 
   @Output() change = new EventEmitter();
   @Output() blur = new EventEmitter();
-  @Output() focus = new EventEmitter();
+  // @Output() focused = new EventEmitter();
 
   @ContentChildren(forwardRef(() => NovoRadioElement), { descendants: true })
   _radios: QueryList<NovoRadioElement>;
 
-  _appearance: 'horizontal' | 'vertical' = 'horizontal';
-
-  @Input() get appearance(): any {
+  @Input()
+  get appearance(): any {
     return this._appearance;
   }
 
@@ -76,22 +99,60 @@ export class NovoRadioGroup implements ControlValueAccessor, AfterContentInit {
     }
   }
 
-  @Input() get name(): string {
+  @Input()
+  get name(): string {
     return this._name;
   }
+
   set name(value: string) {
     if (this._name !== value) {
       this._updateRadioButtonNames();
     }
   }
 
+  @HostBinding('class.disabled')
+  @Input()
+  get disabled(): boolean {
+    return this.ngControl ? !!this.ngControl.disabled : this._disabled;
+  }
+  set disabled(value: boolean) {
+    this._disabled = coerceBooleanProperty(value);
+    this._updateRadioButtonDisabled();
+  }
+
+  /**
+   * Implemented as part of NovoFieldControl.
+   * @docs-private
+   */
+  @Input()
+  get required(): boolean {
+    return this._required;
+  }
+  set required(value: boolean) {
+    this._required = coerceBooleanProperty(value);
+    this.stateChanges.next();
+  }
+
+  /** Implemented as part of NovoFieldControl. */
+  @Input()
+  get placeholder(): string {
+    return this._placeholder;
+  }
+  set placeholder(value: string) {
+    this._placeholder = value;
+  }
+
   get selected(): NovoRadioElement {
     return this._selected;
   }
 
-  private _name: string = this._uniqueId;
-  private _value: boolean = false;
-  private _selected: NovoRadioElement;
+  protected _name: string = this._uniqueId;
+  protected _value: boolean = false;
+  protected _selected: NovoRadioElement;
+  protected _required: boolean = false;
+  protected _disabled: boolean = false;
+  protected _placeholder: string;
+  protected _appearance: 'horizontal' | 'vertical' = 'horizontal';
 
   ngAfterContentInit() {
     this._updateRadioButtonAppearance();
@@ -135,6 +196,14 @@ export class NovoRadioGroup implements ControlValueAccessor, AfterContentInit {
     }
   }
 
+  private _updateRadioButtonDisabled(): void {
+    if (this._radios) {
+      this._radios.forEach((radio) => {
+        radio.disabled = this.disabled;
+      });
+    }
+  }
+
   private _updateSelectedRadioFromValue(): void {
     if (this._radios) {
       this._radios.forEach((radio) => {
@@ -144,5 +213,42 @@ export class NovoRadioGroup implements ControlValueAccessor, AfterContentInit {
         }
       });
     }
+  }
+
+  /** Whether any radio buttons has focus. */
+  get focused(): boolean {
+    //todo: implement this.
+    return false;
+  }
+
+  /** Implemented as part of NovoFieldControl. */
+  get empty(): boolean {
+    return this.value === null;
+  }
+
+  /** Implemented as part of NovoFieldControl. */
+  get shouldLabelFloat(): boolean {
+    return !this.empty || this.focused;
+  }
+
+  /** Implemented as part of NovoFieldControl. */
+  setDescribedByIds(ids: string[]) {
+    this._ariaDescribedby = ids.join(' ');
+  }
+
+  /** Implemented as part of NovoFieldControl. */
+  onContainerClick(event: MouseEvent) {
+    this.focus();
+  }
+
+  /**
+   * Focuses the first non-disabled chip in this chip list, or the associated input when there
+   * are no eligible chips.
+   */
+  focus(options?: FocusOptions): void {
+    if (this.disabled) {
+      return;
+    }
+    //TODO
   }
 }

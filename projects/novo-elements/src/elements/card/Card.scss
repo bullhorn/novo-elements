@@ -1,3 +1,5 @@
+@import "../common/typography/text.mixins";
+
 novo-card {
   .novo-card {
     background-color: $white;
@@ -39,8 +41,7 @@ novo-card {
           cursor: pointer;
         }
         h3 {
-          font-weight: 500;
-          font-size: 1.3em;
+          @include novo-title-medium();
           padding: 0;
           white-space: nowrap;
           overflow: hidden;
@@ -57,21 +58,6 @@ novo-card {
       .actions {
         color: lighten($dark, 15%);
         white-space: nowrap;
-        button {
-          height: 30px;
-          width: 30px;
-          padding: 5px;
-          font-size: 1.2em;
-          text-transform: none;
-        }
-      }
-    }
-    novo-card-actions {
-      button {
-        font-size: 1.05rem;
-        i {
-          font-size: 1.05em;
-        }
       }
     }
     main {
@@ -110,6 +96,19 @@ novo-card {
   align-items: center;
   padding: 0.4rem;
   gap: 0.8rem;
+
+  @each $name, $color in $dark-colors {
+    &[theme="#{$name}"] {
+      background: $color;
+      color: #fff;
+    }
+  }
+  @each $name, $color in $light-colors {
+    &[theme="#{$name}"] {
+      background: $color;
+      color: $dark;
+    }
+  }
 }
 
 .novo-card-header-text {

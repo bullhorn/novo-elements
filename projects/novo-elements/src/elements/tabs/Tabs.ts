@@ -1,5 +1,5 @@
 // NG2
-import { Component, EventEmitter, HostBinding, Input, Output } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, HostBinding, Input, Output, ViewChild } from '@angular/core';
 import { BooleanInput } from '../../utils';
 
 @Component({
@@ -68,13 +68,13 @@ export class NovoNavElement {
     '[class.disabled]': 'disabled',
   },
   template: `
-    <div class="novo-tab-link">
+    <div #tablink class="novo-tab-link">
       <ng-content></ng-content>
     </div>
     <span class="indicator"></span>
   `,
 })
-export class NovoTabElement {
+export class NovoTabElement implements AfterViewInit {
   @Input()
   active: boolean = false;
 
@@ -82,16 +82,34 @@ export class NovoTabElement {
   color: string;
 
   @Input()
+  @BooleanInput()
   disabled: boolean = false;
 
   @Output()
   activeChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+  onlyText = true;
+  @HostBinding('class.text-only')
+  get hb_textOnly() {
+    return this.onlyText;
+  }
+
+  @ViewChild('tablink')
+  tablink;
 
   nav: any;
 
   constructor(nav: NovoNavElement) {
     this.nav = nav;
     this.nav.add(this);
+  }
+
+  ngAfterViewInit() {
+    const nodes = this.tablink.nativeElement.childNodes;
+    console.log('nodes', nodes);
+    for (let i = 0; i < nodes.length; i++) {
+      if (nodes[i].nodeType !== Node.TEXT_NODE) this.onlyText = false;
+    }
   }
 
   select() {

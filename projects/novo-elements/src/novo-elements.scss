@@ -8,6 +8,9 @@
 @import "./styles/global/flex-grid";
 @import "./styles/global/layout";
 @import "./styles/global/cdk";
+// Typography
+@import "./elements/common/typography/text.mixins";
+
 @include cdk-overlay();
 // --------------------------------------------------
 // Plugins (Third-Party-Libraries)

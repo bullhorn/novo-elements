@@ -7,6 +7,7 @@ import { NovoInputFormat, NOVO_INPUT_FORMAT } from './formats/base-format';
   selector: 'input[picker]',
   host: {
     class: 'novo-has-picker',
+    '[attr.autocomplete]': 'autocompleteAttribute',
   },
 })
 export class NovoPickerDirective {
@@ -19,6 +20,11 @@ export class NovoPickerDirective {
     }
   }
   _picker: ControlValueAccessor;
+  /**
+   * `autocomplete` attribute to be set on the input element.
+   * @docs-private
+   */
+  @Input('autocomplete') autocompleteAttribute: string = 'off';
 
   constructor(
     private _elementRef: ElementRef<HTMLInputElement>,

@@ -10,20 +10,33 @@ import { NovoFieldElement } from './field';
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     class: 'novo-field',
-    // '[class.novo-field-appearance-horizontal]': 'appearance=="horizontal"',
-    // '[class.novo-field-appearance-vertical]': 'appearance=="vertical"',
+    '[class.novo-fieldset-appearance-standard]': 'appearance == "standard"',
+    '[class.novo-fieldset-appearance-fill]': 'appearance == "fill"',
+    '[class.novo-fieldset-appearance-outline]': 'appearance == "outline"',
+    '[class.novo-fieldset-appearance-list]': 'appearance == "list"',
+    // '[class.novo-field-layout-horizontal]': 'layout=="horizontal"',
+    // '[class.novo-field-layout-vertical]': 'layout=="vertical"',
   },
 })
 export class NovoFieldsElement implements AfterContentInit {
   @ContentChildren(NovoFieldElement)
   _fields: QueryList<NovoFieldElement>;
 
-  _appearance: 'horizontal' | 'vertical' = 'horizontal';
+  _layout: 'horizontal' | 'vertical' = 'horizontal';
+  @Input() get layout(): any {
+    return this._layout;
+  }
+  set layout(value) {
+    if (this._layout !== value) {
+      this._layout = value;
+      this._updateFieldLayout();
+    }
+  }
 
+  _appearance: 'standard' | 'outline' | 'fill' | 'list' = 'standard';
   @Input() get appearance(): any {
     return this._appearance;
   }
-
   set appearance(value) {
     if (this._appearance !== value) {
       this._appearance = value;
@@ -37,7 +50,16 @@ export class NovoFieldsElement implements AfterContentInit {
   fullWidth: boolean = false;
 
   ngAfterContentInit(): any {
+    this._updateFieldLayout();
     this._updateFieldAppearance();
+  }
+
+  private _updateFieldLayout(): void {
+    if (this._fields) {
+      this._fields.forEach((field) => {
+        field.layout = this.layout;
+      });
+    }
   }
 
   private _updateFieldAppearance(): void {

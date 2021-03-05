@@ -1,0 +1,25 @@
+<novo-field class="example-chip-list">
+  <novo-label>Favorite Fruits</novo-label>
+  <novo-chip-list #chipList aria-label="Fruit selection">
+    <novo-chip
+      *ngFor="let fruit of fruits"
+      (removed)="remove(fruit)">
+      {{fruit}}
+      <novo-icon size="small" novoChipRemove>box-times-o</novo-icon>
+    </novo-chip>
+    <input
+      novoChipInput
+      placeholder="New fruit..."
+      #fruitInput
+      [formControl]="fruitCtrl"
+      autocomplete="off"
+      (novoChipInputTokenEnd)="add($event)">
+  </novo-chip-list>
+  <novo-autocomplete (optionSelected)="selected($event)">
+    <novo-option *ngFor="let fruit of filteredFruits | async" [value]="fruit">
+      {{fruit}}
+    </novo-option>
+  </novo-autocomplete>
+</novo-field>
+
+<div>{{chipList.value}}</div>

@@ -5,7 +5,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  padding: 0 0.8rem;
+  padding: 0 1rem;
   font-size: 1.2rem;
   line-height: 3.2rem;
   border: none;
@@ -16,6 +16,9 @@
   gap: 0.4rem;
   cursor: pointer;
   user-select: none;
+  text-overflow: clip;
+  white-space: nowrap;
+  overflow: hidden;
 
   &[size="small"] {
     font-size: 1rem;
@@ -104,19 +107,8 @@
   &[theme="primary"] {
     background: $positive;
     color: #fff;
-    min-width: 8rem;
     text-align: left;
-    // &[icon] {
-    //   i {
-    //     background: rgba(0, 0, 0, 0.15);
-    //     padding: 0.5rem;
-    //     border-radius: 50%;
-    //     margin: -0.5rem;
-    //     &:before {
-    //       vertical-align: baseline;
-    //     }
-    //   }
-    // }
+
     &:hover,
     &:focus {
       background: lighten($positive, 10%);
@@ -160,6 +152,7 @@
     background: #fff;
     color: $positive;
     border: 1px solid $positive;
+    padding: 0 calc(1rem - 1px);
     line-height: calc(3.2rem - 2px);
 
     @each $name, $color in $all-colors {

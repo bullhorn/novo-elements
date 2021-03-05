@@ -29,6 +29,7 @@ const LAYOUT_DEFAULTS = { iconStyle: 'box' };
           [class.bhi-circle]="indeterminate && !boxIcon"
         ></i>
         <span *ngIf="label">{{ label }}</span>
+        <span *ngIf="!label"><ng-content></ng-content></span>
       </label>
     </div>
   `,

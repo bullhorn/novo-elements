@@ -1,6 +1,7 @@
 @import "../../styles/global/variables.scss";
 
-:host {
+novo-chip,
+[novo-chip] {
   display: flex;
   flex-grow: inherit;
   align-items: center;

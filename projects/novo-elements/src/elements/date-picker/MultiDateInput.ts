@@ -31,9 +31,9 @@ const MULTI_DATE_VALUE_ACCESSOR = {
   selector: 'novo-multi-date-input',
   providers: [MULTI_DATE_VALUE_ACCESSOR],
   template: `
-    <chip *ngFor="let date of value | default: []" (remove)="remove($event, date)">
+    <novo-chip *ngFor="let date of value | default: []" (removed)="remove($event, date)">
       {{ date | date: format }}
-    </chip>
+    </novo-chip>
     <!-- <div *ngIf="value.length > chipsCount">
       <ul class="summary">
         <li *ngFor="let type of notShown">+ {{ type.count }} {{ labels.more }} {{ type.type }}</li>

@@ -4,16 +4,22 @@
   display: grid;
   grid-gap: 1.2rem;
 
+  &.novo-fieldset-appearance-list {
+    grid-gap: 0rem;
+  }
+
   &.full-width {
     &::ng-deep {
-      novo-field.novo-field-appearance-vertical {
-        grid-template-columns: minmax(300px, 450px);
+      novo-field.novo-field-layout-vertical {
+        grid-template-columns: minmax(300px, 1fr);
+        width: -webkit-fill-available;
+
         .novo-input-element {
           width: 100%;
         }
       }
-      novo-field.novo-field-appearance-horizontal {
-        grid-template-columns: 150px minmax(150px, 450px);
+      novo-field.novo-field-layout-horizontal {
+        grid-template-columns: 150px minmax(150px, 1fr);
         .novo-input-element {
           width: 100%;
         }

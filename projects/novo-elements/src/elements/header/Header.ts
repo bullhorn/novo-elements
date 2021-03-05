@@ -35,6 +35,7 @@ export class NovoUtilActionComponent {
   template: `
     <section>
       <div class="header-title">
+        <ng-content select="[prefix]"></ng-content>
         <ng-container *ngIf="title">
           <novo-icon class="header-icon" *ngIf="icon">{{ icon }}</novo-icon>
           <div class="header-titles">
@@ -52,6 +53,7 @@ export class NovoUtilActionComponent {
       <ng-content select="section"></ng-content>
       <span class="spacer"></span>
       <ng-content select="utils"></ng-content>
+      <ng-content select="[suffix]"></ng-content>
       <div class="header-actions">
         <ng-content select="novo-action,[novo-action]"></ng-content>
       </div>

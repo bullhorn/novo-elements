@@ -1,3 +1,5 @@
+@import "../common/typography/text.mixins";
+
 novo-nav {
   background: rgba(0, 0, 0, 0.15);
   padding: 0;
@@ -34,11 +36,17 @@ novo-nav {
         }
       }
     }
+    &.text-only {
+      .novo-tab-link {
+        @include novo-label-medium();
+      }
+    }
     .novo-tab-link {
       padding: 1rem;
       color: #fff;
-      opacity: 0.7;
-      font-weight: 400;
+      display: flex;
+      align-items: center;
+      gap: 0.5em;
       cursor: pointer;
       text-transform: uppercase;
       &:focus {

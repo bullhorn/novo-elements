@@ -1,10 +1,18 @@
 @import "../../../styles/global/variables.scss";
+@import "../../common/typography/text.mixins";
 
 :host {
+  @include novo-caption-medium();
   display: flex;
-  flex: 1;
-  font-size: 0.8em;
+  flex: 1 0 auto;
+  width: max-content;
   color: $grey;
   padding-bottom: 0.4rem;
   padding-top: 0.4rem;
+  &.novo-field-hint-end {
+    order: 1;
+    text-align: right;
+    align-content: end;
+    justify-content: flex-end;
+  }
 }

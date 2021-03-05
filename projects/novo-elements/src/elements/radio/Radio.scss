@@ -1,3 +1,5 @@
+@import "../common/typography/text.mixins";
+
 novo-radio-group {
   display: flex;
 
@@ -9,8 +11,10 @@ novo-radio-group {
     }
   }
 
-  // &.novo-radio-group-appearance-vertical {
-  // }
+  &.novo-radio-group-appearance-vertical {
+    flex-flow: column;
+    gap: 0.2rem;
+  }
 
   > novo-radio {
     margin: 0;
@@ -72,7 +76,8 @@ novo-radio {
   }
   > label {
     cursor: pointer;
-    > div {
+    .novo-radio-button-label {
+      @include novo-text-medium();
       display: inline;
     }
     i {

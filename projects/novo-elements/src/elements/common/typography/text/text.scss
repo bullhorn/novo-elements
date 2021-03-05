@@ -4,14 +4,14 @@
 :host {
   display: inline;
   font-family: Roboto, san-serif;
-  font-size: 1.2em;
+  font-size: 1.2rem;
   font-weight: normal;
-  line-height: 1em;
+  line-height: 1.5rem;
   color: inherit;
 
   &.text-block {
     display: block;
-    line-height: 1.2em;
+    line-height: 1.5rem;
     min-width: 55ch;
     max-width: 75ch;
   }
@@ -19,11 +19,11 @@
   &::ng-deep {
     novo-icon {
       vertical-align: top;
-      font-size: 1em;
+      font-size: 1.2em;
     }
   }
 
-  @include text-sizing(1em, 1.2em, 1.4em);
+  @include text-sizing(1rem, 1.2rem, 1.4rem);
   @include text-colors();
   @include text-weights();
   @include text-margins();

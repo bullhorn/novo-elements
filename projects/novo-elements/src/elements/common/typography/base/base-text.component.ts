@@ -1,4 +1,4 @@
-import { Directive, HostBinding, Input } from '@angular/core';
+import { Directive, ElementRef, HostBinding, Input } from '@angular/core';
 import { BooleanInput } from '../../../../utils';
 import { TypographySize, TypographyWeight } from '../text.types';
 
@@ -75,4 +75,10 @@ export class NovoBaseTextElement {
   @Input()
   @BooleanInput()
   marginAfter: boolean;
+
+  constructor(protected element: ElementRef) {}
+
+  get nativeElement() {
+    return this.element.nativeElement;
+  }
 }

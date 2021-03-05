@@ -13,7 +13,7 @@ import { NovoCategoryDropdownModule } from './elements/category-dropdown/Categor
 import { NovoChipsModule } from './elements/chips/Chips.module';
 import { NovoNovoCKEditorModule } from './elements/ckeditor/CKEditor.module';
 import { NovoColorPickerModule } from './elements/color-picker/color-picker.module';
-import { NovoCommonModule } from './elements/common/common.module';
+import { NovoCommonModule, NovoOptionModule } from './elements/common';
 import { NovoDataTableModule } from './elements/data-table/data-table.module';
 import { NovoDatePickerModule } from './elements/date-picker/DatePicker.module';
 import { NovoDateTimePickerModule } from './elements/date-time-picker/DateTimePicker.module';
@@ -123,6 +123,7 @@ import { FormUtils } from './utils/form-utils/FormUtils';
     NovoExpansionModule,
     UnlessModule,
     NovoCommonModule,
+    NovoOptionModule,
     NovoStepperModule,
     ScrollingModule,
     NovoTabbedGroupPickerModule,

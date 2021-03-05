@@ -1,19 +1,19 @@
-<header>
-  <novo-nav theme="ocean" [outlet]="colornav" direction="horizontal">
+<novo-header theme="ocean">
+  <novo-nav [outlet]="colornav" direction="horizontal">
     <novo-tab>
-      <novo-icon>person</novo-icon>
-      <span>Tab 1</span>
+      <novo-icon size="small">person</novo-icon>
+      <novo-label>Tab 1</novo-label>
     </novo-tab>
     <novo-tab>
-      <span>
-        <i class="bhi-person"></i>Tab 2</span>
+      <novo-icon size="small">person</novo-icon>
+      <novo-label>Tab 2</novo-label>
     </novo-tab>
     <novo-tab [disabled]="true">
-      <span>
-        <i class="bhi-person"></i>Tab 3</span>
+      <novo-icon size="small">person</novo-icon>
+      <novo-label>Tab 3</novo-label>
     </novo-tab>
   </novo-nav>
-</header>
+</novo-header>
 
 <novo-nav-outlet #colornav>
   <novo-nav-content>
