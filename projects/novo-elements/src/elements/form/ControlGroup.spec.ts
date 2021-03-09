@@ -57,6 +57,31 @@ describe('Elements: NovoControlGroup', () => {
       expect(component.form.controls.myControls.controls[0].controls.myString.value).toEqual('10%');
       expect(component.form.controls.myControls.controls[0].associations.index).toEqual(0);
     });
+    it('should not overwrite existing form associations', () => {
+      // Setup the form like the above test
+      component.initialValue = { myPercent: .1, myString: '10%' };
+      component.ngOnChanges({ initialValue: { previousValue: '', currentValue: component.initialValue } });
+
+      // Simulate a form interaction modifying the associations by adding custom properties
+      component.form.controls.myControls.controls[0].associations = { customProperty: 'customValue' };
+
+      // Simulate re-assignment of indexes
+      component.addNewControl();
+
+      // Ensure that the existing custom data is not overwritten by assignment of indexes
+      expect(component.form.controls.myControls.controls[0].associations.index).toEqual(0);
+      expect(component.form.controls.myControls.controls[1].associations.index).toEqual(1);
+      expect(component.form.controls.myControls.controls[0].associations.customProperty).toEqual('customValue');
+      expect(component.form.controls.myControls.controls[1].associations.customProperty).not.toBeDefined();
+    });
+    it('should handle null associations', () => {
+      component.initialValue = { myPercent: .1, myString: '10%' };
+      component.ngOnChanges({ initialValue: { previousValue: '', currentValue: component.initialValue } });
+      component.form.controls.myControls.controls[0].associations = undefined;
+      component.addNewControl();
+      expect(component.form.controls.myControls.controls[0].associations.index).toEqual(0);
+      expect(component.form.controls.myControls.controls[1].associations.index).toEqual(1);
+    });
     it('should add multiple controls with initial values array', () => {
       component.initialValue = [{ myPercent: .1, myString: '10%' }, { myPercent: .2, myString: '20%' }, { myPercent: .3, myString: '30%' }];
       component.ngOnChanges({ initialValue: { previousValue: '', currentValue: component.initialValue } });

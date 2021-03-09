@@ -256,7 +256,8 @@ export class NovoControlGroup implements AfterContentInit, OnChanges {
     const control: FormArray = <FormArray>this.form.controls[this.key];
     if (control) {
       for (let i: number = 0; i < control.length; i++) {
-        (control.at(i) as NovoFormGroup).associations = { index: i };
+        const form = control.at(i) as NovoFormGroup;
+        form.associations = { ...form.associations, index: i };
       }
     }
   }
