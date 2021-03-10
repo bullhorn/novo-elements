@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 // Vendor
-import { CheckboxControl, FieldInteractionApi, FormUtils, NovoControlGroupAddConfig, NovoFormGroup, TextBoxControl } from 'novo-elements';
+import { FieldInteractionApi, FormUtils, NovoFormGroup, RadioControl, TextBoxControl } from 'novo-elements';
 
 /**
  * @title Fi Nested Form Example
@@ -14,63 +14,90 @@ export class FiNestedExample {
   public formGroup: NovoFormGroup;
   public controls: any[];
   public initialValue = [
-    { selected: true, value: .1, label: `Value + 10%` },
-    { selected: false, value: .2, label: `Value + 20%` },
-    { selected: false, value: .3, label: `Value + 30%` },
+    { selected: true, label: `First Shift`, multiplier: 1, payRate: 40 },
+    { selected: false, label: ``, multiplier: 1.5, payRate: 60 },
+    { selected: false, label: ``, multiplier: 2.0, payRate: 80 },
   ];
-  public simpleAddConfig: NovoControlGroupAddConfig = {
-    label: 'Add',
-  };
-  public emptyMessage: string = 'There are no items...';
 
   constructor(private formUtils: FormUtils) {
-    const selectedFunction = (API: FieldInteractionApi) => {
-      console.log('[FieldInteractionDemo] - selectedFunction'); // tslint:disable-line
-
+    const onSelectedChanged = (API: FieldInteractionApi) => {
       // If my row is selected, deselect other rows without causing cascading changes
       if (API.getActiveValue() === true && API.getParent()) {
         API.getParent().controls.forEach(form => {
-          if (API.associations['index'] !== form.associations['index']) {
+          if (API.getIndex() !== API.getIndex(form)) {
             API.setValue(API.getActiveKey(), false, { emitEvent: false }, form);
           }
         });
       }
     };
 
-    const valueFunction = (API: FieldInteractionApi) => {
-      console.log('[FieldInteractionDemo] - valueFunction'); // tslint:disable-line
-
-      // Keep the changes in sync across all fields
-      if (API.getParent()) {
-        const diff = API.getActiveValue() - API.getActiveInitialValue();
-        API.getParent().controls.forEach(form => {
-          if (API.associations['index'] !== form.associations['index']) {
-            const updatedValue = API.getInitialValue(API.getActiveKey(), form) + diff;
-            API.setValue(API.getActiveKey(), updatedValue, { emitEvent: false }, form);
-          }
-        });
+    const onLabelChanged = (API: FieldInteractionApi) => {
+      // Update the labels for the Overtime/Double Time earn codes
+      if (API.getIndex() === 0 && API.getParent()) {
+        const overtimeForm = API.getParent().controls[1];
+        const doubleTimeForm = API.getParent().controls[2];
+        if (overtimeForm) {
+          API.setValue(API.getActiveKey(), API.getActiveValue() + ' - OT', { emitEvent: false }, overtimeForm);
+          API.setReadOnly(API.getActiveKey(), true, overtimeForm);
+        }
+        if (doubleTimeForm) {
+          API.setValue(API.getActiveKey(), API.getActiveValue() + ' - DT', { emitEvent: false }, doubleTimeForm);
+          API.setReadOnly(API.getActiveKey(), true, doubleTimeForm);
+        }
       }
     };
 
-    const labelFunction = (API: FieldInteractionApi) => {
-      console.log('[FieldInteractionDemo] - labelFunction'); // tslint:disable-line
+    const onMultiplierChanged = (API: FieldInteractionApi) => {
+      // Disable the base rate multiplier since it is fixed at one
+      API.setReadOnly(API.getActiveKey(), API.getIndex() === 0);
+      this.calculatePayRates(API);
+    };
 
-      // When editing the label on a row, adjust labels of all rows to include this text plus each row's initial value
-      if (API.getParent()) {
-        const baseLabel = API.getActiveValue().replace(/ \+.*/, '');
-        API.getParent().controls.forEach(form => {
-          const formattedInitialValue = Math.round(Number(API.getInitialValue('value', form)) * 100);
-          const modifiedLabel = `${baseLabel || 'Value'} + ${formattedInitialValue}%`;
-          API.setValue(API.getActiveKey(), modifiedLabel, { emitEvent: false }, form);
-        });
-      }
+    const onPayRateChanged = (API: FieldInteractionApi) => {
+      // Disable the non-base rate payRates since they are auto calculated
+      API.setReadOnly(API.getActiveKey(), API.getIndex() > 0);
+      this.calculatePayRates(API);
     };
 
     this.formGroup = this.formUtils.emptyFormGroup();
     this.controls = [
-      new CheckboxControl({ key: 'selected', interactions: [{ event: 'change', script: selectedFunction }] }),
-      new TextBoxControl({ key: 'value', type: 'percentage', required: true, interactions: [{ event: 'change', script: valueFunction }] }),
-      new TextBoxControl({ key: 'label', required: true, interactions: [{ invokeOnInit: true, event: 'change', script: labelFunction }] }),
+      new RadioControl({
+        key: 'selected',
+        label: 'Selected',
+        options: [{ label: '', value: true }],
+        interactions: [{ event: 'change', script: onSelectedChanged }]
+      }),
+      new TextBoxControl({
+        key: 'label',
+        label: 'Earn Code',
+        required: true,
+        interactions: [{ invokeOnInit: true, event: 'change', script: onLabelChanged }]
+      }),
+      new TextBoxControl({
+        key: 'multiplier',
+        label: 'Multiplier',
+        type: 'bigdecimal',
+        required: true,
+        interactions: [{ invokeOnInit: true, event: 'change', script: onMultiplierChanged }]
+      }),
+      new TextBoxControl({
+        key: 'payRate',
+        label: 'Pay Rate',
+        type: 'currency',
+        required: true,
+        interactions: [{ invokeOnInit: true, event: 'change', script: onPayRateChanged }]
+      }),
     ];
+  }
+
+  private calculatePayRates(API: FieldInteractionApi) {
+    const baseForm = API.getParent().controls[0];
+    const basePayRate = Number(API.getValue('payRate', baseForm));
+    API.getParent().controls.forEach(form => {
+      if (API.getIndex(form) > 0) {
+        const multiplier = Number(API.getValue('multiplier', form));
+        API.setValue('payRate', basePayRate * multiplier, { emitEvent: false }, form);
+      }
+    });
   }
 }

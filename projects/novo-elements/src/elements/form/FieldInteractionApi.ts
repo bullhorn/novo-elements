@@ -801,9 +801,26 @@ export class FieldInteractionApi {
     h = setTimeout(() => func(), wait);
   }
 
+  /**
+   * Allows traversing nested forms by accessing the parent form.
+   *
+   * @param otherForm optional parameter for getting the parent of a different form.
+   * If not provided will default to the parent of the current form.
+   */
   getParent(otherForm?: NovoFormGroup) {
     const form = otherForm || this.form;
     return form.parent;
+  }
+
+  /**
+   * The index is assigned as a property on the form's associations object when the form is part of a NovoControlGroup array.
+   *
+   * @param otherForm optional parameter for getting the index of a different form. If not provided will default to the current form.
+   * @returns the index if it exists for the current or form, or null otherwise.
+   */
+  getIndex(otherForm?: NovoFormGroup) {
+    const form = otherForm || this.form;
+    return (form.associations && form.associations.hasOwnProperty('index')) ? form.associations.index : null;
   }
 
   private triggerEvent(event: IFieldInteractionEvent, otherForm?: NovoFormGroup): void {

@@ -317,4 +317,34 @@ describe('FieldInteractionApi', () => {
       expect(console.error).not.toBeCalled();
     });
   });
+
+  describe('Function: getIndex', () => {
+    beforeEach(() => {
+      service.form = {
+        associations: {},
+        parent: {
+          associations: {}
+        }
+      };
+    });
+    it('is defined', () => {
+      expect(service.getIndex).toBeDefined();
+    });
+    it('should return the index when defined', () => {
+      service.form.associations.index = 0;
+      expect(service.getIndex()).toBe(0);
+    });
+    it('should return the index on another form when otherForm is provided', () => {
+      service.form.associations.index = 0;
+      service.form.parent.associations.index = 3;
+      expect(service.getIndex(service.getParent())).toBe(3);
+    });
+    it('should return null when index is not defined', () => {
+      expect(service.getIndex()).toBe(null);
+    });
+    it('should return null when associations is not defined', () => {
+      service.form.associations = undefined;
+      expect(service.getIndex()).toBe(null);
+    });
+  });
 });
