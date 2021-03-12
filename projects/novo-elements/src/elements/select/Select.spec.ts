@@ -97,11 +97,25 @@ describe('Elements: NovoSelectElement', () => {
     it('should invoke writeValue', () => {
       spyOn(comp, 'select');
       comp.model = 'bar';
-      comp.options = [{ value: 'foo' }, { value: 'bar' }, { value: 'baz' }];
-      comp.filteredOptions = [{ value: 'foo' }, { value: 'bar' }];
+      comp.options = [
+        { label: 'foo', value: 'foo', readOnly: false },
+        { label: 'bar', value: 'bar', readOnly: false },
+        { label: 'baz', value: 'baz', readOnly: true },
+      ];
       comp.ngOnChanges();
-      expect(comp.select).toHaveBeenCalledWith({ value: 'bar', active: false }, 1, false);
+      expect(comp.select).toHaveBeenCalledWith({ label: 'bar', value: 'bar', readOnly: false, active: false }, 1, false);
       expect(comp.empty).toEqual(false);
+    });
+    it('should invoke writeValue with readOnly option', () => {
+      spyOn(comp, 'select');
+      comp.model = 'baz';
+      comp.options = [
+        { label: 'foo', value: 'foo', readOnly: false },
+        { label: 'bar', value: 'bar', readOnly: false },
+        { label: 'baz', value: 'baz', readOnly: true },
+      ];
+      comp.ngOnChanges();
+      expect(comp.select).toHaveBeenCalledTimes(0);
     });
     it('should invoke openPanel', () => {
       comp.overlay = {

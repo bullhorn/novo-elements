@@ -357,7 +357,7 @@ export class NovoSelectElement implements OnInit, OnChanges, OnDestroy, ControlV
   writeValue(model: any): void {
     this.model = model;
     if (this.options) {
-      let item = this.options.find((i) => i.value === model || (model && i.value === model.id));
+      let item = this.filteredOptions.find((i) => i.value === model || (model && i.value === model.id)) || this.options.find((i) => i.value === model || (model && i.value === model.id));
       if (!item && !Helpers.isEmpty(model)) {
         item = {
           label: model,
@@ -367,8 +367,8 @@ export class NovoSelectElement implements OnInit, OnChanges, OnDestroy, ControlV
           this.options.unshift(item);
         }
       }
-      if (item) {
-        this.select(item, this.options.indexOf(item), false);
+      if (item && this.filteredOptions.indexOf(item) > -1) {
+        this.select(item, this.filteredOptions.indexOf(item), false);
         this.empty = false;
       } else {
         this.clear();
