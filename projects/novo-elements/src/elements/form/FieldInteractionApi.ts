@@ -401,6 +401,14 @@ export class FieldInteractionApi {
     }
   }
 
+  clearTip(key: string, otherForm?: NovoFormGroup): void {
+    const control = this.getControl(key, otherForm);
+    if (control && !control.restrictFieldInteractions) {
+      control.tipWell = null;
+      this.triggerEvent({ controlKey: key, prop: 'tipWell', value: null }, otherForm);
+    }
+  }
+
   setTooltip(key: string, tooltip: string, otherForm?: NovoFormGroup): void {
     const control = this.getControl(key, otherForm);
     if (control && !control.restrictFieldInteractions) {

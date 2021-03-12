@@ -347,4 +347,74 @@ describe('FieldInteractionApi', () => {
       expect(service.getIndex()).toBe(null);
     });
   });
+
+  describe('Function: displayTip / clearTip', () => {
+    beforeEach(() => {
+      service.form = {
+        controls: {
+          myControl: { },
+          restrictedControl: { restrictFieldInteractions: true },
+        },
+        parent: {
+          controls: { parentControl: { } },
+        }
+      };
+    });
+    it('is defined', () => {
+      expect(service.displayTip).toBeDefined();
+    });
+    it('should log to console if no match for key', () => {
+      spyOn(console, 'error');
+      service.displayTip('outOfControl', 'this is a tip');
+      expect(service.form.controls.myControl.tipWell).toBeUndefined();
+      expect(triggerEvent).not.toBeCalled();
+      expect(console.error).toBeCalled();
+    });
+    it('should set tipWell and clear on a control in the current form', () => {
+      spyOn(console, 'error');
+      expect(service.form.controls.myControl.tipWell).toBeUndefined();
+
+      service.displayTip('myControl', 'this is a tip', 'caution', true, true);
+
+      expect(service.form.controls.myControl.tipWell).toEqual({ tip: 'this is a tip', icon: 'caution', button: true, sanitize: true });
+      expect(triggerEvent).toBeCalledWith({ controlKey: 'myControl', prop: 'tipWell', value: 'this is a tip' }, undefined);
+      expect(console.error).not.toBeCalled();
+
+      service.clearTip('myControl');
+
+      expect(service.form.controls.myControl.tipWell).toBeNull();
+      expect(triggerEvent).toBeCalledWith({ controlKey: 'myControl', prop: 'tipWell', value: null }, undefined);
+      expect(console.error).not.toBeCalled();
+    });
+    it('should set tipWell on current form when provided as argument', () => {
+      spyOn(console, 'error');
+      service.displayTip('myControl', 'this is a tip', 'caution', true, true, service.form);
+      expect(service.form.controls.myControl.tipWell).toEqual({ tip: 'this is a tip', icon: 'caution', button: true, sanitize: true });
+      expect(triggerEvent).toBeCalledWith({ controlKey: 'myControl', prop: 'tipWell', value: 'this is a tip' }, service.form);
+      expect(console.error).not.toBeCalled();
+    });
+    it('should do nothing when field interactions are restricted', () => {
+      spyOn(console, 'error');
+      service.displayTip('restrictedControl', 'this is a tip that will not be applied');
+      expect(service.form.controls.myControl.tipWell).toBeUndefined();
+      expect(triggerEvent).not.toBeCalled();
+      expect(console.error).not.toBeCalled();
+    });
+    it('should set tipWell and clear on a separate form', () => {
+      spyOn(console, 'error');
+      expect(service.form.parent.controls.parentControl.tipWell).toBeUndefined();
+
+      service.displayTip('parentControl', 'this is a tip', 'caution', true, true, service.form.parent);
+
+      expect(service.form.parent.controls.parentControl.tipWell).toEqual({ tip: 'this is a tip', icon: 'caution', button: true, sanitize: true });
+      expect(triggerEvent).toBeCalledWith({ controlKey: 'parentControl', prop: 'tipWell', value: 'this is a tip' }, service.form.parent);
+      expect(console.error).not.toBeCalled();
+
+      service.clearTip('parentControl', service.form.parent);
+
+      expect(service.form.parent.controls.parentControl.tipWell).toBeNull();
+      expect(triggerEvent).toBeCalledWith({ controlKey: 'parentControl', prop: 'tipWell', value: null }, service.form.parent);
+      expect(console.error).not.toBeCalled();
+    });
+  });
 });
