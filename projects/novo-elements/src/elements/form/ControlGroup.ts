@@ -108,7 +108,7 @@ export class NovoControlGroup implements AfterContentInit, OnChanges {
 
   currentIndex = 0;
 
-  constructor(private formUtils: FormUtils, private fb: FormBuilder, private ref: ChangeDetectorRef, private labels: NovoLabelService) {}
+  constructor(private formUtils: FormUtils, private fb: FormBuilder, private ref: ChangeDetectorRef) {}
 
   ngAfterContentInit() {
     if (!this.key) {
