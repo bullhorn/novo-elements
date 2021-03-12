@@ -1,22 +1,23 @@
 // NG2
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { FormArray } from '@angular/forms';
 // Vendor
+import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { NovoLabelService } from '../../services/novo-label-service';
+// APP
+import { Helpers } from '../../utils/Helpers';
 import { AppBridge } from '../../utils/app-bridge/AppBridge';
 import { FormUtils } from '../../utils/form-utils/FormUtils';
-import { Helpers } from '../../utils/Helpers';
+import { NovoLabelService } from '../../services/novo-label-service';
+import { NovoFormControl } from './NovoFormControl';
 import { NovoModalService } from '../modal/ModalService';
 import { EntityPickerResults } from '../picker/extras/entity-picker-results/EntityPickerResults';
 import { NovoToastService, ToastOptions } from '../toast/ToastService';
 import { CustomHttp, ModifyPickerConfigArgs, OptionsFunction } from './FieldInteractionApiTypes';
 import { ControlConfirmModal, ControlPromptModal } from './FieldInteractionModals';
 import { NovoControlConfig } from './FormControls';
-import { IFieldInteractionEvent, NovoFieldset, ResultsTemplateType, NovoFormGroup } from './FormInterfaces';
-// APP
-import { NovoFormControl } from './NovoFormControl';
+import { IFieldInteractionEvent, NovoFieldset, NovoFormGroup, ResultsTemplateType } from './FormInterfaces';
 
 class CustomHttpImpl implements CustomHttp {
   url: string;
@@ -153,6 +154,22 @@ export class FieldInteractionApi {
     }
 
     return control;
+  }
+
+  getFormGroupArray(key: string, otherForm?: NovoFormGroup): NovoFormGroup[] {
+    if (!key) {
+      console.error('[FieldInteractionAPI] - invalid or missing "key"'); // tslint:disable-line
+      return null;
+    }
+
+    const form = otherForm || this.form;
+    const formArray = form.controls[key] as FormArray;
+    if (!formArray || !formArray.controls) {
+      console.error('[FieldInteractionAPI] - could not find a form array in the form by the key --', key); // tslint:disable-line
+      return null;
+    }
+
+    return formArray.controls as NovoFormGroup[] | any;
   }
 
   getValue(key: string, otherForm?: NovoFormGroup) {
@@ -299,6 +316,17 @@ export class FieldInteractionApi {
     if (control) {
       if (control && !control.restrictFieldInteractions) {
         control.markAsInvalid(validationMessage);
+        this.triggerEvent({ controlKey: key, prop: 'errors', value: validationMessage }, otherForm);
+      }
+    }
+  }
+
+  markAsValid(key: string, otherForm?: NovoFormGroup): void {
+    const control = this.getControl(key, otherForm);
+    if (control) {
+      if (control && !control.restrictFieldInteractions) {
+        control.markAsValid();
+        this.triggerEvent({ controlKey: key, prop: 'errors', value: null }, otherForm);
       }
     }
   }

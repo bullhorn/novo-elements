@@ -97,6 +97,30 @@ describe('Elements: NovoControlGroup', () => {
     });
   });
 
+  describe('destruction', () => {
+    it('should remove all controls when destroying in order to properly unsubscribe to form interaction events', () => {
+      component.initialValue = [{ myPercent: .1, myString: '10%' }, { myPercent: .2, myString: '20%' }, { myPercent: .3, myString: '30%' }];
+      component.ngOnChanges({ initialValue: { previousValue: '', currentValue: component.initialValue } });
+      expect(component.form.value.myControls).toEqual(component.initialValue);
+      expect(component.currentIndex).toEqual(3);
+      component.ngOnDestroy();
+      expect(component.currentIndex).toEqual(0);
+    });
+  });
+
+  describe('field interaction events', () => {
+    it('should call markForCheck when there are field interaction events on a nested form', () => {
+      spyOn(component.ref, 'markForCheck');
+      component.initialValue = [{ myPercent: .1, myString: '10%' }, { myPercent: .2, myString: '20%' }, { myPercent: .3, myString: '30%' }];
+      component.ngOnChanges({ initialValue: { previousValue: '', currentValue: component.initialValue } });
+
+      // Simulate a field interaction event
+      expect(component.ref.markForCheck).toHaveBeenCalledTimes(7); // All previous calls coming internally
+      component.form.controls.myControls.controls[0].fieldInteractionEvents.emit({ prop: 'errors', value: 'my error message' });
+      expect(component.ref.markForCheck).toHaveBeenCalledTimes(8); // One more coming externally from the form interaction
+    });
+  });
+
   describe('Adding controls', () => {
     it('should add controls without initial values', () => {
       component.addNewControl();

@@ -24,19 +24,15 @@ export class FiNestedExample {
   constructor(private formUtils: FormUtils) {
     const onMinMaxPayRateChanged = (API: FieldInteractionApi) => {
       // Validate the min/max range
-      const minPayRateControl = API.getControl('minPayRate');
       const minPayRate = Number(API.getValue('minPayRate'));
       const maxPayRate = Number(API.getValue('maxPayRate'));
       if (minPayRate > maxPayRate) {
         API.markAsInvalid(API.getActiveKey(), 'Range is invalid. Please ensure that the minimum does not exceed the maximum.');
-        minPayRateControl.tipWell = {
-          tip: 'Range is invalid. Please ensure that the minimum does not exceed the maximum.',
-          icon: 'caution'
-        };
+        API.displayTip('minPayRate', 'Range is invalid. Please ensure that the minimum does not exceed the maximum.', 'caution');
       } else {
         // The API.form is equal the top level form since the min/max fields are directly on the form, not part of a nested form
         this.calculatePayRates(API, API.form);
-        minPayRateControl.tipWell = null;
+        API.clearTip('minPayRate');
       }
     };
 
@@ -148,21 +144,17 @@ export class FiNestedExample {
   }
 
   private calculatePayRates(API: FieldInteractionApi, topLevelForm: NovoFormGroup | any) {
-    // TODO:
-    // const rowsArray: NovoFormGroup[] = API.getFormArray('rows', topLevelForm);
-
     // Get values from the top level form controls
     const minPayRate = Number(API.getValue('minPayRate', topLevelForm));
     const maxPayRate = Number(API.getValue('maxPayRate', topLevelForm));
 
     // Walk down to the nested forms: 'rows' is the key input value passed to the NovoControlGroup for constructing the formArray
-    const rowsFormArray = topLevelForm.controls.rows;
-    const baseRowForm = rowsFormArray.controls[0] as NovoFormGroup | any;
-    const basePayRateControl = API.getControl('payRate', baseRowForm);
+    const rowForms: NovoFormGroup[] | any[] = API.getFormGroupArray('rows', topLevelForm);
+    const baseRowForm = rowForms[0];
     const basePayRate = Number(API.getValue('payRate', baseRowForm));
 
     let isPayRateValid = true;
-    rowsFormArray.controls.forEach(form => {
+    rowForms.forEach(form => {
       // Calculate the payRate for read only Overtime / Double time fields
       if (API.getIndex(form) > 0) {
         const multiplier = Number(API.getValue('multiplier', form));
@@ -170,7 +162,6 @@ export class FiNestedExample {
       }
 
       // Determine if each pay rate is valid. Put a tipWell on the invalid rows.
-      const payRateControl = API.getControl('payRate', form);
       const payRate = Number(API.getValue('payRate', form));
       if (payRate < minPayRate) {
         isPayRateValid = false;
@@ -180,14 +171,12 @@ export class FiNestedExample {
         API.displayTip('payRate', 'rate exceeds the maximum', 'caution', false, false, form);
       } else {
         API.clearTip('payRate', form);
-        payRateControl.tipWell = null;
       }
     });
 
-    // Mark the editable row as valid or invalid.
+    // Mark the editable row as invalid if any nested payRate form has a value outside of the min/max bounds
     if (isPayRateValid) {
-      // TODO: API.markAsValid() to remove the errors?
-      basePayRateControl.setErrors(null);
+      API.markAsValid('payRate', baseRowForm);
     } else {
       API.markAsInvalid('payRate', 'pay rate is less than the minimum pay rate', baseRowForm);
     }

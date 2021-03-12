@@ -209,6 +209,49 @@ describe('FieldInteractionApi', () => {
     });
   });
 
+  describe('Function: getFormGroupArray', () => {
+    beforeEach(() => {
+      service.form = {
+        controls: { myControl: { value: 1 } },
+        parent: {
+          controls: {
+            myFormGroupArray: {
+              controls: [
+                { controls: { group1Control: { value: 1 } } },
+                { controls: { group2Control: { value: 2 } } },
+                { controls: { group3Control: { value: 3 } } },
+              ],
+            },
+          },
+        },
+      };
+    });
+    it('is defined', () => {
+      expect(service.getFormGroupArray).toBeDefined();
+    });
+    it('should log to console if no key', () => {
+      spyOn(console, 'error');
+      const returnValue = service.getFormGroupArray(null);
+      expect(returnValue).toBeNull();
+      expect(console.error).toBeCalled();
+    });
+    it('should log to console if no match for key', () => {
+      spyOn(console, 'error');
+      const returnValue = service.getFormGroupArray('bogus');
+      expect(returnValue).toBeNull();
+      expect(console.error).toBeCalled();
+    });
+    it('should get the form group array when key exists', () => {
+      spyOn(console, 'error');
+      const formGroupArray = service.getFormGroupArray('myFormGroupArray', service.getParent());
+      expect(formGroupArray.length).toBe(3);
+      expect(service.getValue('group1Control', formGroupArray[0])).toBe(1);
+      expect(service.getValue('group2Control', formGroupArray[1])).toBe(2);
+      expect(service.getValue('group3Control', formGroupArray[2])).toBe(3);
+      expect(console.error).not.toBeCalled();
+    });
+  });
+
   describe('Function: getValue', () => {
     beforeEach(() => {
       service.form = {
@@ -352,11 +395,11 @@ describe('FieldInteractionApi', () => {
     beforeEach(() => {
       service.form = {
         controls: {
-          myControl: { },
+          myControl: {},
           restrictedControl: { restrictFieldInteractions: true },
         },
         parent: {
-          controls: { parentControl: { } },
+          controls: { parentControl: {} },
         }
       };
     });
@@ -406,7 +449,12 @@ describe('FieldInteractionApi', () => {
 
       service.displayTip('parentControl', 'this is a tip', 'caution', true, true, service.form.parent);
 
-      expect(service.form.parent.controls.parentControl.tipWell).toEqual({ tip: 'this is a tip', icon: 'caution', button: true, sanitize: true });
+      expect(service.form.parent.controls.parentControl.tipWell).toEqual({
+        tip: 'this is a tip',
+        icon: 'caution',
+        button: true,
+        sanitize: true
+      });
       expect(triggerEvent).toBeCalledWith({ controlKey: 'parentControl', prop: 'tipWell', value: 'this is a tip' }, service.form.parent);
       expect(console.error).not.toBeCalled();
 
@@ -414,6 +462,99 @@ describe('FieldInteractionApi', () => {
 
       expect(service.form.parent.controls.parentControl.tipWell).toBeNull();
       expect(triggerEvent).toBeCalledWith({ controlKey: 'parentControl', prop: 'tipWell', value: null }, service.form.parent);
+      expect(console.error).not.toBeCalled();
+    });
+  });
+
+  describe('Function: markAsValid / markAsInvalid', () => {
+    beforeEach(() => {
+      service.form = {
+        controls: {
+          myControl: { markAsInvalid: () => {}, markAsValid: () => {} },
+          restrictedControl: { restrictFieldInteractions: true, markAsInvalid: () => {}, markAsValid: () => {} },
+        },
+        parent: {
+          controls: { parentControl: { markAsInvalid: () => {}, markAsValid: () => {} } },
+        }
+      };
+    });
+    it('is defined', () => {
+      expect(service.markAsInvalid).toBeDefined();
+    });
+    it('should log to console if no key', () => {
+      spyOn(service.form.controls.myControl, 'markAsInvalid');
+      spyOn(console, 'error');
+      service.markAsInvalid(null, null);
+      expect(service.form.controls.myControl.markAsInvalid).not.toBeCalled();
+      expect(triggerEvent).not.toBeCalled();
+      expect(console.error).toBeCalled();
+    });
+    it('should log to console if no match for key', () => {
+      spyOn(service.form.controls.myControl, 'markAsInvalid');
+      spyOn(console, 'error');
+      service.markAsInvalid('myControl1', null);
+      expect(service.form.controls.myControl.markAsInvalid).not.toBeCalled();
+      expect(triggerEvent).not.toBeCalled();
+      expect(console.error).toBeCalled();
+    });
+    it('should set value when key exists', () => {
+      spyOn(service.form.controls.myControl, 'markAsInvalid');
+      spyOn(service.form.controls.myControl, 'markAsValid');
+      spyOn(console, 'error');
+
+      service.markAsInvalid('myControl', 'error message');
+      expect(service.form.controls.myControl.markAsInvalid).toBeCalled();
+      expect(triggerEvent).toBeCalledWith({ controlKey: 'myControl', prop: 'errors', value: 'error message' }, undefined);
+      expect(console.error).not.toBeCalled();
+
+      service.markAsValid('myControl');
+      expect(service.form.controls.myControl.markAsValid).toBeCalled();
+      expect(triggerEvent).toBeCalledWith({ controlKey: 'myControl', prop: 'errors', value: null }, undefined);
+      expect(console.error).not.toBeCalled();
+    });
+    it('should set value on current form when provided as argument', () => {
+      spyOn(service.form.controls.myControl, 'markAsInvalid');
+      spyOn(service.form.controls.myControl, 'markAsValid');
+      spyOn(console, 'error');
+
+      service.markAsInvalid('myControl', 'error message', service.form);
+      expect(service.form.controls.myControl.markAsInvalid).toBeCalled();
+      expect(triggerEvent).toBeCalledWith({ controlKey: 'myControl', prop: 'errors', value: 'error message' }, service.form);
+      expect(console.error).not.toBeCalled();
+
+      service.markAsValid('myControl', service.form);
+      expect(service.form.controls.myControl.markAsValid).toBeCalled();
+      expect(triggerEvent).toBeCalledWith({ controlKey: 'myControl', prop: 'errors', value: null }, service.form);
+      expect(console.error).not.toBeCalled();
+    });
+    it('should do nothing when field interactions are restricted', () => {
+      spyOn(service.form.controls.restrictedControl, 'markAsInvalid');
+      spyOn(service.form.controls.restrictedControl, 'markAsValid');
+      spyOn(console, 'error');
+
+      service.markAsInvalid('restrictedControl', 'error message');
+      expect(service.form.controls.restrictedControl.markAsInvalid).not.toBeCalled();
+      expect(triggerEvent).not.toBeCalled();
+      expect(console.error).not.toBeCalled();
+
+      service.markAsValid('restrictedControl');
+      expect(service.form.controls.restrictedControl.markAsValid).not.toBeCalled();
+      expect(triggerEvent).not.toBeCalled();
+      expect(console.error).not.toBeCalled();
+    });
+    it('should set value on parent form when provided as argument', () => {
+      spyOn(service.form.parent.controls.parentControl, 'markAsInvalid');
+      spyOn(service.form.parent.controls.parentControl, 'markAsValid');
+      spyOn(console, 'error');
+
+      service.markAsInvalid('parentControl', 'error message', service.getParent());
+      expect(service.form.parent.controls.parentControl.markAsInvalid).toBeCalled();
+      expect(triggerEvent).toBeCalledWith({ controlKey: 'parentControl', prop: 'errors', value: 'error message' }, service.form.parent);
+      expect(console.error).not.toBeCalled();
+
+      service.markAsValid('parentControl', service.getParent());
+      expect(service.form.parent.controls.parentControl.markAsValid).toBeCalled();
+      expect(triggerEvent).toBeCalledWith({ controlKey: 'parentControl', prop: 'errors', value: null }, service.form.parent);
       expect(console.error).not.toBeCalled();
     });
   });
