@@ -115,7 +115,8 @@ describe('Elements: NovoSelectElement', () => {
         { label: 'baz', value: 'baz', readOnly: true },
       ];
       comp.ngOnChanges();
-      expect(comp.select).toHaveBeenCalledTimes(0);
+      expect(comp.select).toHaveBeenCalledWith({ label: 'baz', value: 'baz', readOnly: true }, -1, false);
+      expect(comp.empty).toEqual(false);
     });
     it('should invoke openPanel', () => {
       comp.overlay = {

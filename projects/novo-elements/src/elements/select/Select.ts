@@ -367,7 +367,7 @@ export class NovoSelectElement implements OnInit, OnChanges, OnDestroy, ControlV
           this.options.unshift(item);
         }
       }
-      if (item && this.filteredOptions.indexOf(item) > -1) {
+      if (item) {
         this.select(item, this.filteredOptions.indexOf(item), false);
         this.empty = false;
       } else {
