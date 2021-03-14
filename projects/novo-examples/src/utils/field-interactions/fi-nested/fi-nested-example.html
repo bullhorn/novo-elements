@@ -1,0 +1,18 @@
+<novo-form [form]="form">
+  <div class="novo-form-row">
+    <novo-control [form]="form" [control]="minPayRateControl"></novo-control>
+  </div>
+  <div class="novo-form-row">
+    <novo-control [form]="form" [control]="maxPayRateControl"></novo-control>
+  </div>
+  <novo-control-group [form]="form"
+                      [controls]="controls"
+                      [initialValue]="initialValue"
+                      remove="false"
+                      edit="false"
+                      key="rows"></novo-control-group>
+</novo-form>
+
+<div class="final-value">Form Value - <pre>{{ form.value | json }}</pre></div>
+<div class="final-value">Form Dirty - {{ form.dirty }}</div>
+<div class="final-value">Is Form Valid? - {{ form.valid }}</div>
