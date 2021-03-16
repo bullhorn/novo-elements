@@ -574,8 +574,8 @@ describe('Utils: FormUtils', () => {
         ]
       };
       const expected: Array<{ value: string; label: string; readOnly: boolean }> = [
-        { value: '1', label: 'one', readOnly: true }, 
-        { value: '2', label: 'two', readOnly: false }, 
+        { value: '1', label: 'one', readOnly: true },
+        { value: '2', label: 'two', readOnly: false },
         { value: '3', label: 'three', readOnly: false }
       ];
       const result = formUtils.getControlOptions(field, undefined, undefined, { id: '1', label: 'one' });
