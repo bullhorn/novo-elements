@@ -19,7 +19,7 @@ import { DateFormatService } from '../../services/date-format/DateFormat';
 import { NovoLabelService } from '../../services/novo-label-service';
 import { Helpers } from '../../utils/Helpers';
 // App
-import { NovoOverlayTemplateComponent } from '../overlay/Overlay';
+import { NovoOverlayTemplateComponent } from '../common/overlay/Overlay';
 
 // Value accessor for the component (supports ngModel)
 const DATE_VALUE_ACCESSOR = {

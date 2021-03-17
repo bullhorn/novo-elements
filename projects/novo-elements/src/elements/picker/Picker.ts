@@ -22,8 +22,8 @@ import { Helpers } from '../../utils/Helpers';
 // APP
 import { KeyCodes } from '../../utils/key-codes/KeyCodes';
 import { notify } from '../../utils/notifier/notifier.util';
+import { NovoOverlayTemplateComponent } from '../common/overlay/Overlay';
 import { NovoControlConfig } from '../form/FormControls';
-import { NovoOverlayTemplateComponent } from '../overlay/Overlay';
 import { PickerResults } from './extras/picker-results/PickerResults';
 
 // Value accessor for the component (supports ngModel)

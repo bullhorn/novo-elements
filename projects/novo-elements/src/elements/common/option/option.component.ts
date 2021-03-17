@@ -81,7 +81,9 @@ export class _NovoOptionBase implements FocusableOption, AfterViewChecked, OnDes
     private _changeDetectorRef: ChangeDetectorRef,
     private _parent: NovoOptionParentComponent,
     readonly group: NovoOptgroupBase,
-  ) {}
+  ) {
+    this._element.nativeElement.addEventListener('click', this._handleDisabledClick, false);
+  }
 
   /**
    * Whether or not the option is currently active and ready to be selected.
@@ -159,6 +161,14 @@ export class _NovoOptionBase implements FocusableOption, AfterViewChecked, OnDes
     return this.viewValue;
   }
 
+  _handleDisabledClick(event: MouseEvent) {
+    if (this.disabled) {
+      event.preventDefault();
+      event.stopPropagation();
+      event.stopImmediatePropagation();
+    }
+  }
+
   /** Ensures the option is selected when activated from the keyboard. */
   _handleKeydown(event: KeyboardEvent): void {
     if ((event.keyCode === ENTER || event.keyCode === SPACE) && !hasModifierKey(event)) {
@@ -178,6 +188,15 @@ export class _NovoOptionBase implements FocusableOption, AfterViewChecked, OnDes
       this._selected = this.multiple ? !this._selected : true;
       this._changeDetectorRef.markForCheck();
       this._emitSelectionChangeEvent(true);
+    }
+  }
+
+  /**
+   * Force a click event
+   */
+  _clickViaInteraction(): void {
+    if (!this.disabled) {
+      this._element.nativeElement.click();
     }
   }
 
@@ -219,6 +238,7 @@ export class _NovoOptionBase implements FocusableOption, AfterViewChecked, OnDes
 
   ngOnDestroy() {
     this._stateChanges.complete();
+    this._element.nativeElement.removeEventListener('click', this._handleDisabledClick, false);
   }
 
   /** Emits the selection change event. */
@@ -237,13 +257,13 @@ export class _NovoOptionBase implements FocusableOption, AfterViewChecked, OnDes
   exportAs: 'novoOption',
   host: {
     role: 'option',
-    '[attr.tabindex]': '_getTabIndex()',
-    '[class.novo-selected]': 'selected',
-    '[class.novo-option-multiple]': 'multiple',
-    '[class.novo-active]': 'active',
     '[id]': 'id',
+    '[attr.tabindex]': '_getTabIndex()',
     '[attr.aria-selected]': '_getAriaSelected()',
     '[attr.aria-disabled]': 'disabled.toString()',
+    '[class.novo-active]': 'active',
+    '[class.novo-selected]': 'selected',
+    '[class.novo-option-multiple]': 'multiple',
     '[class.novo-option-disabled]': 'disabled',
     '(click)': '_selectViaInteraction()',
     '(keydown)': '_handleKeydown($event)',
@@ -262,7 +282,6 @@ export class NovoOption extends _NovoOptionBase {
     @Optional() @Inject(NOVO_OPTGROUP) group: NovoOptgroup,
   ) {
     super(element, changeDetectorRef, parent, group);
-    console.log('OPTION');
   }
 }
 

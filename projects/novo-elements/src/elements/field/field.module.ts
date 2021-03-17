@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { NovoButtonModule } from '../button/Button.module';
 import { NovoOptionModule } from '../common';
 // APP
-import { NovoOverlayModule } from '../overlay/Overlay.module';
+import { NovoOverlayModule } from '../common/overlay/Overlay.module';
 import { NovoAutocompleteElement } from './autocomplete/autocomplete.component';
 import { NovoErrorElement } from './error/error';
 import { NovoFieldElement, NovoFieldPrefixDirective, NovoFieldSuffixDirective } from './field';

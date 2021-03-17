@@ -1,5 +1,6 @@
 import { ActiveDescendantKeyManager } from '@angular/cdk/a11y';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
+import { DOWN_ARROW, ENTER, ESCAPE, hasModifierKey, TAB, UP_ARROW } from '@angular/cdk/keycodes';
 import {
   AfterContentInit,
   AfterViewInit,
@@ -21,10 +22,20 @@ import {
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import { merge, of, Subscription } from 'rxjs';
+import { fromEvent, merge, of, Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
-import { NovoOptgroup, NovoOption, NovoOptionSelectionChange, NOVO_OPTION_PARENT_COMPONENT } from '../../common';
-import { NovoOverlayTemplateComponent } from '../../overlay';
+import {
+  CanDisable,
+  CanDisableCtor,
+  HasOverlayCtor,
+  mixinDisabled,
+  mixinOverlay,
+  NovoOptgroup,
+  NovoOption,
+  NovoOptionSelectionChange,
+  NOVO_OPTION_PARENT_COMPONENT,
+} from '../../common';
+import { NovoOverlayTemplateComponent } from '../../common/overlay';
 import { NovoFieldElement, NOVO_FORM_FIELD } from '../field';
 
 /** Event object that is emitted when an autocomplete option is selected. */
@@ -36,6 +47,14 @@ export class NovoOptionSelectedEvent {
     public option: NovoOption,
   ) {}
 }
+
+// Boilerplate for applying mixins
+class NovoAutocompleteBase {
+  constructor() {}
+}
+const NovoAutocompleteMixins: HasOverlayCtor & CanDisableCtor & typeof NovoAutocompleteBase = mixinOverlay(
+  mixinDisabled(NovoAutocompleteBase),
+);
 
 @Component({
   selector: 'novo-autocomplete',
@@ -52,10 +71,13 @@ export class NovoOptionSelectedEvent {
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NovoAutocompleteElement<T = any> implements AfterContentInit, AfterViewInit, OnChanges, OnDestroy {
+export class NovoAutocompleteElement
+  extends NovoAutocompleteMixins
+  implements CanDisable, AfterContentInit, AfterViewInit, OnChanges, OnDestroy {
   private _stateChanges = Subscription.EMPTY;
   private _activeOptionChanges = Subscription.EMPTY;
   private _selectedOptionChanges = Subscription.EMPTY;
+  private _keyDownChanges = Subscription.EMPTY;
 
   /** Manages active item in option list based on key events. */
   private _keyManager: ActiveDescendantKeyManager<NovoOption>;
@@ -86,7 +108,6 @@ export class NovoAutocompleteElement<T = any> implements AfterContentInit, After
     if (this._disabled === undefined && this._formField?._control) {
       return this._formField._control.disabled;
     }
-
     return !!this._disabled;
   }
   set disabled(value: boolean) {
@@ -106,6 +127,7 @@ export class NovoAutocompleteElement<T = any> implements AfterContentInit, After
     @Attribute('tabindex') defaultTabIndex: string,
     @Optional() @Inject(NOVO_FORM_FIELD) private _formField: NovoFieldElement,
   ) {
+    super();
     const parsedTabIndex = Number(defaultTabIndex);
     this.tabIndex = parsedTabIndex || parsedTabIndex === 0 ? parsedTabIndex : null;
   }
@@ -119,14 +141,17 @@ export class NovoAutocompleteElement<T = any> implements AfterContentInit, After
     this._stateChanges.unsubscribe();
     this._activeOptionChanges.unsubscribe();
     this._selectedOptionChanges.unsubscribe();
+    this._keyDownChanges.unsubscribe();
   }
 
   ngAfterContentInit() {
     this._keyManager = new ActiveDescendantKeyManager<NovoOption>(this.options).withWrap();
     this._activeOptionChanges = this._keyManager.change.subscribe((index) => {
+      console.log('change active');
       this.optionActivated.emit({ source: this, option: this.options.toArray()[index] || null });
     });
     this.element = this._formField.getConnectedOverlayOrigin() || this._elementRef;
+    this._keyDownChanges = fromEvent(this.element.nativeElement, 'keydown').subscribe((event: KeyboardEvent) => this._handleKeydown(event));
     this.options.changes.subscribe(() => {
       this._watchStateChanges();
       this._watchSelectionEvents();
@@ -137,35 +162,10 @@ export class NovoAutocompleteElement<T = any> implements AfterContentInit, After
     this._watchStateChanges();
     this._watchSelectionEvents();
   }
-
-  togglePanel(event?: Event) {
-    this.cdr.detectChanges();
-    if (!this.overlay.panelOpen) {
-      this.openPanel(event);
-    } else {
-      this.closePanel(event);
-    }
-  }
-
-  /** BEGIN: Convenient Panel Methods. */
-  openPanel(event?: Event): void {
-    if (!this.overlay.panelOpen) {
-      this.overlay.openPanel();
-    }
-  }
-
-  closePanel(event?: Event): void {
-    this.overlay.closePanel();
-  }
-
   checkPanel() {
     if (this._formField._control.focused && this.element) {
       this.openPanel();
     }
-  }
-
-  get panelOpen(): boolean {
-    return this.overlay && this.overlay.panelOpen;
   }
 
   private _setTriggerValue(value: any): void {
@@ -235,6 +235,46 @@ export class NovoAutocompleteElement<T = any> implements AfterContentInit, After
       this.checkPanel();
       this.cdr.markForCheck();
     });
+  }
+
+  /** The currently active option, coerced to MatOption type. */
+  get activeOption(): NovoOption | null {
+    if (this._keyManager) {
+      return this._keyManager.activeItem;
+    }
+
+    return null;
+  }
+
+  _handleKeydown(event: KeyboardEvent): void {
+    const keyCode = event.keyCode;
+
+    // Prevent the default action on all escape key presses. This is here primarily to bring IE
+    // in line with other browsers. By default, pressing escape on IE will cause it to revert
+    // the input value to the one that it had on focus, however it won't dispatch any events
+    // which means that the model value will be out of sync with the view.
+    if (keyCode === ESCAPE && !hasModifierKey(event)) {
+      event.preventDefault();
+    }
+
+    if (this.activeOption && keyCode === ENTER && this.panelOpen) {
+      this.activeOption._selectViaInteraction();
+      // this._resetActiveItem();
+      event.preventDefault();
+    } else {
+      const prevActiveItem = this._keyManager.activeItem;
+      const isArrowKey = keyCode === UP_ARROW || keyCode === DOWN_ARROW;
+
+      if (this.panelOpen || keyCode === TAB) {
+        this._keyManager.onKeydown(event);
+      } else if (isArrowKey && !this.overlay.panelOpen) {
+        this.openPanel();
+      }
+
+      // if (isArrowKey || this.autocomplete._keyManager.activeItem !== prevActiveItem) {
+      //   this._scrollToOption(this.autocomplete._keyManager.activeItemIndex || 0);
+      // }
+    }
   }
 
   static ngAcceptInputType_disabled: BooleanInput;

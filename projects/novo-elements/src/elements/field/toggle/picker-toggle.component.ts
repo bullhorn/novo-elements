@@ -18,7 +18,7 @@ import {
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { NovoButtonElement } from '../../button';
-import { NovoOverlayTemplateComponent } from '../../overlay';
+import { NovoOverlayTemplateComponent } from '../../common/overlay';
 import { NovoFieldElement, NOVO_FORM_FIELD } from '../field';
 
 @Component({

@@ -18,7 +18,7 @@ import { NovoLabelService } from '../../services/novo-label-service';
 import { Helpers } from '../../utils/Helpers';
 // Vendor
 // App
-import { NovoOverlayTemplateComponent } from '../overlay/Overlay';
+import { NovoOverlayTemplateComponent } from '../common/overlay/Overlay';
 
 // Value accessor for the component (supports ngModel)
 const MULTI_DATE_VALUE_ACCESSOR = {

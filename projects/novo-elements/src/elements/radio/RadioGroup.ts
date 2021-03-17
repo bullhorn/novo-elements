@@ -27,7 +27,7 @@ const RADIOGROUP_VALUE_ACCESSOR = {
   multi: true,
 };
 
-// Boilerplate for applying mixins to NovoChipList.
+// Boilerplate for applying mixins
 class NovoRadioGroupBase {
   constructor(
     public _defaultErrorStateMatcher: ErrorStateMatcher,

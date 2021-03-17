@@ -1,4 +1,4 @@
 import { Directive } from '@angular/core';
 
-@Directive({ selector: '[prefix]' })
+@Directive({ selector: '[prefix],[before]' })
 export class NovoPrefixDirective {}

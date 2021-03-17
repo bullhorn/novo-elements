@@ -1,0 +1,35 @@
+@import "../../../styles/global/variables.scss";
+
+:host {
+  // Fab Themed Button
+  &[theme="fab"] {
+    &[inverse] {
+      color: #fff;
+    }
+    padding: 0;
+    font-size: 1.2rem;
+    line-height: 1.4rem;
+    width: 3.2rem;
+    height: 3.2rem;
+    border-radius: 50% !important;
+    @each $button, $color in $all-colors {
+      &[color="#{$button}"] {
+        color: $white;
+        background: $color;
+      }
+    }
+    &:hover {
+      box-shadow: 0px 1px 2px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+    }
+    &:active {
+      box-shadow: 0px 1px 2px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+    }
+    i {
+      margin: 0;
+      padding: 0;
+      &:before {
+        display: block;
+      }
+    }
+  }
+}

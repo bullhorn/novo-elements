@@ -58,6 +58,16 @@ $neutral: #4f5361;
 $empty: #cccdcc;
 $disabled: $stone;
 
+// Spacing
+// --------------------------------------------------
+$spacing-none: 0;
+$spacing-px: 1px;
+$spacing-xs: 0.2rem; // +3
+$spacing-sm: 0.5rem; // +5
+$spacing-md: 1rem; // +6
+$spacing-lg: 1.6rem; // +8
+$spacing-xl: 2.4rem; // +8
+
 // Typography
 // --------------------------------------------------
 $base-font-size: 10px;
@@ -219,6 +229,8 @@ $whiteframe-shadow-z4: 0px 16px 28px 0 rgba(0, 0, 0, 0.22) !default;
 $whiteframe-zindex-z4: 4 !default;
 $whiteframe-shadow-z5: 0px 27px 24px 0 rgba(0, 0, 0, 0.2) !default;
 $whiteframe-zindex-z5: 5 !default;
+
+$multi-shadow: 0 -1px 3px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
 
 // Z-indexes
 // -------------------------

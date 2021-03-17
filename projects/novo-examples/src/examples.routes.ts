@@ -1159,7 +1159,13 @@ export class RadioButtonsPage {}
       The most common need for the <code>select</code> component is when there are too many options that would fit on on the screen. The
       options list will display appropriately and scroll as needed.
     </p>
-    <p><code-example example="long-select"></code-example></p>`,
+    <p><code-example example="long-select"></code-example></p>
+    <h5>Multiple Selections</h5>
+    <p>
+      When many option can be selected, use the <code>multiple</code> attribute which allows for a simple iterface to select multiple
+      options.
+    </p>
+    <p><code-example example="multiple-select"></code-example></p>`,
 })
 export class SelectPage {}
 

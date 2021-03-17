@@ -1,0 +1,42 @@
+@import "../../../styles/global/variables.scss";
+
+:host {
+  // Dialoge Themed Button
+  &[theme="dialogue"] {
+    background: transparent;
+    color: $positive;
+    &:hover,
+    &:focus {
+      background: lighten($light, 7%);
+    }
+    &:active {
+      background: lighten($light, 2%);
+    }
+    &[inverse] {
+      &:hover,
+      &:focus {
+        background: rgba(0, 0, 0, 0.2);
+      }
+      &:active {
+        background: rgba(0, 0, 0, 0.35);
+      }
+    }
+    // Loop Generic Colors (Primary, Success, Negative, Etc.)
+    @each $button, $color in $app-colors {
+      &[color="#{$button}"] {
+        color: $color;
+        i {
+          color: $color;
+        }
+      }
+    } // Loop Analytics Colors
+    @each $analytics, $color in $analytics-colors {
+      &[color="#{$analytics}"] {
+        color: $color;
+        i {
+          color: $color;
+        }
+      }
+    }
+  }
+}

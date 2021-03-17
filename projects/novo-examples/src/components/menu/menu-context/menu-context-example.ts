@@ -9,7 +9,10 @@ import { Component } from '@angular/core';
   styleUrls: ['menu-context-example.css'],
 })
 export class MenuContextExample {
-  public reference = 'The Menu Context';
+  public apple = 'Context is Apples';
+  public orange = 'Context is Orange';
+  public isOrange = (item) => item === this.orange;
+
   public clickMe(event?: string) {
     window.alert(event);
   }

@@ -1,28 +1,30 @@
-<button theme="secondary" icon="collapse" [menu]="menu">Actions</button>
+<novo-button theme="secondary" icon="collapse" [menu]="menu">Actions</novo-button>
 
 <!-- Menu Template -->
 <novo-menu #menu>
-  <ng-template menuItem (execute)="clickMe($event)">Preview</ng-template>
-  <ng-template menuItem (execute)="clickMe($event)">Edit</ng-template>
-  <ng-template menuItem [divider]="true"></ng-template>
-  <ng-template menuItem (execute)="clickMe($event)">Delete</ng-template>
+  <novo-option id="mi-preview" *menuItem (click)="clickMe($event)">Preview</novo-option>
+  <novo-option id="mi-edit" *menuItem (click)="clickMe($event)">Edit</novo-option>
+  <novo-option id="mi-disabled" *menuItem (click)="clickMe($event)" disabled>Disabled</novo-option>
+  <novo-divider *menuItem></novo-divider>
+  <novo-option id="mi-delete" *menuItem (click)="clickMe($event)">Delete</novo-option>
 </novo-menu>
 
-<button theme="icon" icon="more" [menu]="icons"></button>
+
+<novo-button theme="icon" icon="more" [menu]="icons"></novo-button>
 
 <!-- Menu Template -->
 <novo-menu #icons>
-  <ng-template menuItem (execute)="clickMe($event)">
+  <novo-option *menuItem (click)="clickMe($event)">
     <novo-icon>preview</novo-icon>
     <span>Preview</span>
-  </ng-template>
-  <ng-template menuItem (execute)="clickMe($event)">
+  </novo-option>
+  <novo-option *menuItem (click)="clickMe($event)">
     <novo-icon>edit</novo-icon>
     <span>Edit</span>
-  </ng-template>
-  <ng-template menuItem [divider]="true"></ng-template>
-  <ng-template menuItem class="red" (execute)="clickMe($event)">
+  </novo-option>
+  <novo-divider *menuItem></novo-divider>
+  <novo-option *menuItem class="red" (click)="clickMe($event)">
     <novo-icon>delete-o</novo-icon>
     <span>Delete</span>
-  </ng-template>
+  </novo-option>
 </novo-menu>

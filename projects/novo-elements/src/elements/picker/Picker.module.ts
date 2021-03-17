@@ -2,10 +2,10 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+// APP
+import { NovoOverlayModule } from '../common/overlay/Overlay.module';
 import { NovoListModule } from '../list/List.module';
 import { NovoLoadingModule } from '../loading/Loading.module';
-// APP
-import { NovoOverlayModule } from '../overlay/Overlay.module';
 import { NovoSwitchModule } from '../switch/Switch.module';
 import { ChecklistPickerResults } from './extras/checklist-picker-results/ChecklistPickerResults';
 import { DistributionListPickerResults } from './extras/distributionlist-picker-results/DistributionListPickerResults';

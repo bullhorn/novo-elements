@@ -20,7 +20,7 @@ import { DateFormatService } from '../../services/date-format/DateFormat';
 import { NovoLabelService } from '../../services/novo-label-service';
 import { Helpers } from '../../utils/Helpers';
 // App
-import { NovoOverlayTemplateComponent } from '../overlay/Overlay';
+import { NovoOverlayTemplateComponent } from '../common/overlay/Overlay';
 import { RangeModel } from './date-picker.types';
 
 // Value accessor for the component (supports ngModel)

@@ -1,3 +1,6 @@
+// @import "../styles/global/variables.scss";
+@import "../common/typography/text.mixins.scss";
+
 novo-select {
   display: block;
   position: relative;
@@ -5,8 +8,9 @@ novo-select {
   max-width: 800px;
   min-width: 180px;
   cursor: pointer;
-  font-size: 1rem;
+
   div[type="button"] {
+    @include novo-text-medium();
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -23,7 +27,7 @@ novo-select {
     cursor: pointer;
     text-transform: none;
     padding: 0 10px 0 0;
-    font-size: 1rem;
+
     &.empty {
       color: #a9a9a9;
     }

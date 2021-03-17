@@ -1,8 +1,16 @@
+@import "../../../styles/global/variables.scss";
+@import "../typography/text.mixins.scss";
 // @import "../style/menu-common";
 // @import "../style/vendor-prefixes";
 
 .novo-optgroup-label {
-  // @include novo-menu-item-base();
-  // @include user-select(none);
+  @include novo-label-small();
+  color: $grey;
   cursor: default;
+  font-size: 0.8em;
+  flex: 1;
+  font-weight: 500;
+  text-transform: uppercase;
+  padding: 5px 10px;
+  display: block;
 }

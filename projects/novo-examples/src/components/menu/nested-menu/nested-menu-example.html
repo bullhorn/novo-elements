@@ -2,11 +2,11 @@
 
 <!-- Menu Template -->
 <novo-menu #menu>
-  <ng-template menuItem (execute)="clickMe($event)">Preview</ng-template>
-  <ng-template menuItem (execute)="clickMe($event)">Edit</ng-template>
-  <ng-template menuItem [subMenu]="subMenu">Choose...</ng-template>
+  <novo-option *menuItem (click)="clickMe($event)">Preview</novo-option>
+  <novo-option *menuItem (click)="clickMe($event)">Edit</novo-option>
+  <novo-option *menuItem [menu]="subMenu">Choose...</novo-option>
   <novo-menu #subMenu>
-    <ng-template menuItem (execute)="clickMe($event)">Available</ng-template>
-    <ng-template menuItem [enabled]="false" (execute)="clickMe($event)">Not Available</ng-template>
+    <novo-option *menuItem (click)="clickMe($event)">Available</novo-option>
+    <novo-option *menuItem (click)="clickMe($event)">Not Available</novo-option>
   </novo-menu>
 </novo-menu>
