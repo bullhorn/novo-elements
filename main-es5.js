@@ -37114,7 +37114,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         key: "_handleBlur",
         value: function _handleBlur(event) {
           this.blurEvent.emit(event);
-          this.changeEvent.emit(event);
         }
         /**
          * @param {?} event
@@ -37237,6 +37236,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
           if (newValue !== this.value) {
             this._onChange(newValue);
+
+            this.changeEvent.emit(newValue);
 
             if (blur) {
               !skip && this.writeValue(newValue);
