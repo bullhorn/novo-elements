@@ -11,6 +11,7 @@ import {
   ElementRef,
   EventEmitter,
   Inject,
+  InjectionToken,
   Input,
   NgZone,
   OnDestroy,
@@ -21,6 +22,14 @@ import { ANIMATION_MODULE_TYPE } from '@angular/platform-browser/animations';
 import { Subject } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { CanColor, CanColorCtor, HasTabIndex, HasTabIndexCtor, mixinColor, mixinTabIndex } from '../common';
+
+export interface IRemovable {
+  remove: () => void;
+  removable: boolean;
+  disabled: boolean;
+}
+
+export const REMOVABLE_REF: InjectionToken<IRemovable> = new InjectionToken<IRemovable>('REMOVABLE_REF');
 
 /** Represents an event fired on an individual `novo-chip`. */
 export interface NovoChipEvent {
@@ -80,7 +89,7 @@ export class NovoChipAvatar {}
   },
 })
 export class NovoChipRemove {
-  constructor(protected _parentChip: NovoChipElement, elementRef: ElementRef<HTMLElement>) {
+  constructor(@Inject(REMOVABLE_REF) private _parentChip: IRemovable, elementRef: ElementRef<HTMLElement>) {
     if (elementRef.nativeElement.nodeName === 'BUTTON') {
       elementRef.nativeElement.setAttribute('type', 'button');
     }
@@ -110,6 +119,7 @@ export class NovoChipRemove {
   selector: `novo-chip, [novo-chip]`,
   inputs: ['color', 'tabIndex'],
   exportAs: 'novoChip',
+  providers: [{ provide: REMOVABLE_REF, useExisting: NovoChipElement }],
   host: {
     class: 'novo-chip mat-focus-indicator',
     '[attr.tabindex]': 'disabled ? null : tabIndex',
@@ -123,6 +133,8 @@ export class NovoChipRemove {
     '[attr.aria-disabled]': 'disabled.toString()',
     '[attr.aria-selected]': 'ariaSelected',
     '(click)': '_handleClick($event)',
+    '(mouseenter)': '_handleActivate($event)',
+    '(mouseleave)': '_handleDeactivate($event)',
     '(keydown)': '_handleKeydown($event)',
     '(focus)': 'focus()',
     '(blur)': '_blur()',

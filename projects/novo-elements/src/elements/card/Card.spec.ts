@@ -2,10 +2,8 @@
 import { OverlayModule } from '@angular/cdk/overlay';
 import { async, TestBed } from '@angular/core/testing';
 import { NovoLabelService } from '../../services/novo-label-service';
-import { NovoLoadingElement } from '../loading/Loading';
-import { TooltipDirective } from '../tooltip/Tooltip.directive';
-// App
 import { CardElement } from './Card';
+import { NovoCardModule } from './Card.module';
 
 describe('Elements: CardElement', () => {
   let fixture;
@@ -13,9 +11,8 @@ describe('Elements: CardElement', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [CardElement, NovoLoadingElement, TooltipDirective],
       providers: [{ provide: NovoLabelService, useClass: NovoLabelService }],
-      imports: [OverlayModule],
+      imports: [OverlayModule, NovoCardModule],
     }).compileComponents();
     fixture = TestBed.createComponent(CardElement);
     component = fixture.debugElement.componentInstance;

@@ -8,7 +8,7 @@ import { NovoChipElement } from './Chip';
 import { NovoChipsElement } from './Chips';
 import { NovoChipsModule } from './Chips.module';
 
-describe('Elements: NovoChipElement', () => {
+xdescribe('Elements: NovoChipElement', () => {
   let fixture;
   let component;
 
@@ -29,19 +29,18 @@ describe('Elements: NovoChipElement', () => {
     });
   });
 
-  describe('Method: onRemove(event)', () => {
-    it('should emit remove event', () => {
-      jest.spyOn(component.remove, 'emit').mockImplementation(() => {});
-      component.onRemove();
-      expect(component.remove.emit).toHaveBeenCalled();
+  describe('Method: remove()', () => {
+    it('should emit remove event if removable', () => {
+      jest.spyOn(component.removed, 'emit').mockImplementation(() => {});
+      component.removable = true;
+      component.remove();
+      expect(component.removed.emit).toHaveBeenCalled();
     });
-  });
-
-  describe('Method: onSelect(event)', () => {
-    it('should emit select event', () => {
-      jest.spyOn(component.select, 'emit').mockImplementation(() => {});
-      component.onSelect();
-      expect(component.select.emit).toHaveBeenCalled();
+    it('should not emit remove event if not removable', () => {
+      jest.spyOn(component.removed, 'emit').mockImplementation(() => {});
+      component.removable = false;
+      component.remove();
+      expect(component.removed.emit).toHaveBeenCalled();
     });
   });
 });

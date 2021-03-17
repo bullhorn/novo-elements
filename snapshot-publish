@@ -16,9 +16,9 @@ repoDir="snapshot"
 echo "Cloning $repoUrl into $repoDir"
 git clone $repoUrl $repoDir
 
-echo "Changing branch to $TRAVIS_BRANCH"
+echo "Changing branch to $BRANCH_NAME"
 cd $repoDir
-git checkout -B $TRAVIS_BRANCH
+git checkout -B $BRANCH_NAME
 cd ..
 
 echo "Cleaning snapshot repo and moving build files into it"
@@ -31,19 +31,19 @@ git config user.name "$commitAuthorName"
 git config user.email "$commitAuthorEmail"
 git config credential.helper "store --file=.git/credentials"
 
-echo "https://${SNAPSHOT_GIT_TOKEN}:@github.com" > .git/credentials
+echo "https://${GITHUB_TOKEN}:@github.com" > .git/credentials
 
 git status
 git add -A
 git commit -m "$commitMessage"
 
-if [ "$TRAVIS_BRANCH" == "master" ]; then
+if [ "$BRANCH_NAME" == "master" ]; then
     echo "Committing and pushing to master"
     git tag "$commitSha"
     git push origin master --tags
 else
-    echo "Committing and pushing to $TRAVIS_BRANCH"
-    git push -u origin $TRAVIS_BRANCH --force
+    echo "Committing and pushing to $BRANCH_NAME"
+    git push -u origin $BRANCH_NAME --force
 fi
 
-echo "Finished publishing snapshot build to $TRAVIS_BRANCH"
+echo "Finished publishing snapshot build to $BRANCH_NAME"
