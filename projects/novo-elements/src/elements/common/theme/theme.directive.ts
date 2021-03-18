@@ -1,6 +1,6 @@
 import { Directive, ElementRef, Input, OnChanges } from '@angular/core';
 
-//TODO: Define theme interface
+// TODO: Define theme interface
 
 @Directive({
   selector: '[novoTheme]',
