@@ -45,7 +45,7 @@ jobs:
         with:
           name: build-artifact
           path: dist
-      - uses: bvkimball/branch-vars@1.0.0
+      - uses: bvkimball/branch-vars@1.0.1
       - run: sh snapshot-publish.sh
         env:
           CURRENT_BRANCH: ${CURRENT_BRANCH}
