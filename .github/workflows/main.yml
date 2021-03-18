@@ -30,12 +30,21 @@ jobs:
         run: |
           npm run build
           npm run build:demo
+      - uses: actions/upload-artifact@master
+        with:
+          name: build-artifact
+          path: dist
 
   publish:
     runs-on: ubuntu-16.04
     needs: build
     if: github.event_name == 'pull_request'
     steps:
+      - uses: actions/checkout@master
+      - uses: actions/download-artifact@master
+        with:
+          name: build-artifact
+          path: dist
       - uses: bvkimball/branch-vars@1.0.0
       - run: npm run snapshot-publish
 
@@ -44,5 +53,10 @@ jobs:
     needs: build
     if: github.ref == 'refs/heads/master'
     steps:
+      - uses: actions/checkout@master
+      - uses: actions/download-artifact@master
+        with:
+          name: build-artifact
+          path: dist
       - name: Deploy Demo
         run: angular-cli-ghpages --dir="dist/demo" --repo="https://${GITHUB_TOKEN}@github.com/bullhorn/novo-elements.git" --name="Brian Kimball" --email="bkimball@bullhorn.com";
