@@ -6,12 +6,15 @@
     &[inverse] {
       color: #fff;
     }
+    border-radius: 50% !important;
     padding: 0;
     font-size: 1.2rem;
-    line-height: 1.4rem;
+    line-height: 1.6rem;
     width: 3.2rem;
     height: 3.2rem;
-    border-radius: 50% !important;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     @each $button, $color in $all-colors {
       &[color="#{$button}"] {
         color: $white;
