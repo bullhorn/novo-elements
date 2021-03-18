@@ -377,7 +377,6 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
   }
 
   get decimalSeparator(): string {
-    console.log('this.locale', this.locale);
     return new Intl.NumberFormat(this.locale).format(1.2)[1];
   }
 

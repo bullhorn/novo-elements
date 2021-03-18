@@ -42,16 +42,13 @@ export class MenuContentComponent implements OnInit, OnDestroy, AfterViewInit {
   private subscription: Subscription = new Subscription();
   constructor() {}
 
-  ngOnInit(): void {
-    console.log('MenuContent Init');
-  }
+  ngOnInit(): void {}
 
   ngAfterViewInit() {
     if (this.autoFocus) {
       setTimeout(() => this.focus());
     }
     this.overlay.updatePosition();
-    console.log('options', this.menu.menuOptions);
     this._keyManager = new ActiveDescendantKeyManager<NovoOption>(this.menu.menuOptions).withWrap();
   }
 

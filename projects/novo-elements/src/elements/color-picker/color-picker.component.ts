@@ -117,7 +117,6 @@ export class NovoColorPickerComponent implements OnInit, OnChanges, OnDestroy {
 
   handleSwatchHover($event) {
     const color = new Color($event.hex);
-    console.log('hover', $event);
     if (color.isValid) {
       this.setState(color);
       this.onSwatchHover.emit({ color, $event });

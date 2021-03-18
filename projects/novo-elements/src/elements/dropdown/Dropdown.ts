@@ -251,7 +251,6 @@ export class NovoDropdownElement extends NovoDropdowMixins implements OnInit, Af
 
   /** Sets up a key manager to listen to keyboard events on the overlay panel. */
   private _initKeyManager() {
-    console.log('init', this.options);
     this._keyManager = new ActiveDescendantKeyManager<NovoOption>(this.options).withTypeAhead(100).withHomeAndEnd();
     // .withAllowedModifierKeys(['shiftKey']);
 

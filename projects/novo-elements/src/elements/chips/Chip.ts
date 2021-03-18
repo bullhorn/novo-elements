@@ -98,7 +98,6 @@ export class NovoChipRemove {
   /** Calls the parent chip's public `remove()` method if applicable. */
   _handleClick(event: Event): void {
     const parentChip = this._parentChip;
-    console.log('click close');
     if (parentChip.removable && !parentChip.disabled) {
       parentChip.remove();
     }

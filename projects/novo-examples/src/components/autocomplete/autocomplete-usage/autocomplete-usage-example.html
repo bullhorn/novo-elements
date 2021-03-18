@@ -5,7 +5,7 @@
       novoInput
       [formControl]="myControl"
       placeholder="Pick one"
-      autocomplete="off">
+      autocomplete="off" />
     <novo-autocomplete #auto>
       <novo-option *ngFor="let option of filteredOptions | async" [value]="option">
         {{option}}

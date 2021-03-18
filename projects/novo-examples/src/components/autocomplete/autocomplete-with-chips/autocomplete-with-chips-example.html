@@ -13,7 +13,7 @@
       #fruitInput
       [formControl]="fruitCtrl"
       autocomplete="off"
-      (novoChipInputTokenEnd)="add($event)">
+      (novoChipInputTokenEnd)="add($event)" />
   </novo-chip-list>
   <novo-autocomplete (optionSelected)="selected($event)">
     <novo-option *ngFor="let fruit of filteredFruits | async" [value]="fruit">

@@ -51,7 +51,7 @@
             placeholder="Search..."
             autocomplete="off"
             [formControl]="recipientCtrl"
-            (novoChipInputTokenEnd)="add($event)">
+            (novoChipInputTokenEnd)="add($event)" />
           <novo-text *ngIf="recipients.length">+{{recipients.length - 2}}</novo-text>
         </novo-chip-list>
         <novo-autocomplete (optionSelected)="selected($event)">

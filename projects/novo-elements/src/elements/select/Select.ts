@@ -369,7 +369,6 @@ export class NovoSelectElement
     this._selectionModel.selected.forEach((option) => option.setInactiveStyles());
     this._selectionModel.clear();
     if (this.multiple && value) {
-      console.log('multiple', this.multiple, value);
       value.forEach((currentValue: any) => this._selectValue(currentValue));
       this._sortValues();
     } else {

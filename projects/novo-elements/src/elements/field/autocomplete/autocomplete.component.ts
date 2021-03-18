@@ -148,7 +148,6 @@ export class NovoAutocompleteElement
   ngAfterContentInit() {
     this._keyManager = new ActiveDescendantKeyManager<NovoOption>(this.options).withWrap();
     this._activeOptionChanges = this._keyManager.change.subscribe((index) => {
-      console.log('change active');
       this.optionActivated.emit({ source: this, option: this.options.toArray()[index] || null });
     });
     this.element = this._formField.getConnectedOverlayOrigin() || this._elementRef;

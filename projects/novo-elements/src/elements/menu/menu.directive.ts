@@ -44,7 +44,6 @@ export class MenuDirective implements OnInit, OnDestroy {
     private cdr: ChangeDetectorRef,
     @Optional() @Inject(PARENT_MENU) private _parentMenu: MenuComponent,
   ) {
-    console.log('parent', this._parentMenu);
     if (!!this._parentMenu) {
       this.isSubMenu = true;
       this.trigger = 'mouseenter';

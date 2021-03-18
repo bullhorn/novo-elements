@@ -106,7 +106,6 @@ export class NovoTabElement implements AfterViewInit {
 
   ngAfterViewInit() {
     const nodes = this.tablink.nativeElement.childNodes;
-    console.log('nodes', nodes);
     for (let i = 0; i < nodes.length; i++) {
       if (nodes[i].nodeType !== Node.TEXT_NODE) this.onlyText = false;
     }
