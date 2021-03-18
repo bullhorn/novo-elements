@@ -16,9 +16,9 @@ repoDir="snapshot"
 echo "Cloning $repoUrl into $repoDir"
 git clone $repoUrl $repoDir
 
-echo "Changing branch to $BRANCH_NAME"
+echo "Changing branch to $CURRENT_BRANCH"
 cd $repoDir
-git checkout -B $BRANCH_NAME
+git checkout -B $CURRENT_BRANCH
 cd ..
 
 echo "Cleaning snapshot repo and moving build files into it"
@@ -37,13 +37,13 @@ git status
 git add -A
 git commit -m "$commitMessage"
 
-if [ "$BRANCH_NAME" == "master" ]; then
+if [ "$CURRENT_BRANCH" == "master" ]; then
     echo "Committing and pushing to master"
     git tag "$commitSha"
     git push origin master --tags
 else
-    echo "Committing and pushing to $BRANCH_NAME"
-    git push -u origin $BRANCH_NAME --force
+    echo "Committing and pushing to $CURRENT_BRANCH"
+    git push -u origin $CURRENT_BRANCH --force
 fi
 
-echo "Finished publishing snapshot build to $BRANCH_NAME"
+echo "Finished publishing snapshot build to $CURRENT_BRANCH"

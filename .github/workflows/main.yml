@@ -36,7 +36,7 @@ jobs:
     needs: build
     if: github.event_name == 'pull_request'
     steps:
-      - uses: nelonoel/branch-name@v1.0.1
+      - uses: bvkimball/branch-vars@v1.0.0
       - run: npm run snapshot-publish
 
   deploy:
