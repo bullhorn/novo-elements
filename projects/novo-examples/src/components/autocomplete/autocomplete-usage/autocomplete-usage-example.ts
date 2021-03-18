@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
@@ -11,7 +11,7 @@ import { map, startWith } from 'rxjs/operators';
   templateUrl: 'autocomplete-usage-example.html',
   styleUrls: ['autocomplete-usage-example.css'],
 })
-export class AutocompleteUsageExample {
+export class AutocompleteUsageExample implements OnInit {
   myControl = new FormControl();
   options: string[] = ['One', 'Two', 'Three'];
   filteredOptions: Observable<string[]>;
