@@ -1,27 +1,25 @@
 novo-search {
   display: grid;
   grid-template-areas: "icon input";
-  grid-template-columns: max-content 1fr;
+  grid-template-columns: 3.2rem 1fr;
   grid-template-rows: 1fr;
   align-items: center;
-  height: 3.5em;
-
-  > button[theme][theme="fab"] {
-    width: 2em;
-    height: 2em;
-  }
+  height: 3.2em;
+  border: 1px solid $light;
+  border-radius: 0.2rem;
+  max-width: 400px;
+  min-width: 100px;
+  transition: border-color 250ms ease-in-out, 250ms ease-in-out, opacity 150ms ease-in-out, 250ms width ease-in-out;
 
   > input {
     height: 100%;
     max-width: 400px;
-    width: 0%;
     display: block;
     background: $white;
     position: relative;
     font-size: 1.4em;
     color: $dark;
     z-index: 12;
-    opacity: 0;
     border: none;
     transition: all 250ms;
     backface-visibility: hidden;
@@ -30,54 +28,18 @@ novo-search {
     &:active {
       outline: none;
     }
-    &::placeholder {
-      color: $empty;
-    }
   }
 
-  &.active {
-    max-width: 400px;
-    min-width: 100px;
-    z-index: 1000;
-
-    > button[theme="fab"] {
-      border-radius: 2px 0 0 2px !important;
-      width: 3.2em;
-      height: 2.8em;
-      box-shadow: none;
-    }
-
-    > input {
-      opacity: 1;
-      width: 100%;
-      width: -webkit-fill-available;
-    }
-  }
-
-  &.focused,
-  &.always-open.focused {
+  &.focused {
     border: 1px solid $positive;
-  }
 
-  &.always-open {
-    border: 1px solid $light;
-    transition: border-color 250ms ease-in-out, 250ms ease-in-out, opacity 150ms ease-in-out, 250ms width ease-in-out;
-    border-radius: 0.2rem;
-  }
-
-  &.focused,
-  &.always-open {
-    > button {
+    > novo-icon {
       color: $positive !important;
-      background: $white !important;
-      box-shadow: none !important;
-      &:hover {
-        box-shadow: none !important;
-      }
     }
+
     @each $key, $color in $all-colors {
       &[color="#{$key}"] {
-        > button {
+        > novo-icon {
           color: $color !important;
         }
       }
@@ -85,41 +47,25 @@ novo-search {
 
     @each $key, $color in $dark-colors {
       &[theme="#{$key}"] {
-        > button {
-          background: $color !important;
-          color: $white !important;
-        }
+        background: $color !important;
+        novo-icon,
         input {
-          background: $color !important;
           color: $white !important;
+          background: transparent !important;
+          &::placeholder {
+            color: $off-white;
+          }
         }
       }
     }
 
     @each $key, $color in $light-colors {
       &[theme="#{$key}"] {
-        > button {
-          background: $color !important;
-          color: $dark !important;
-        }
+        background: $color !important;
+        novo-icon,
         input {
-          background: $color !important;
           color: $dark !important;
         }
-      }
-    }
-  }
-}
-
-header {
-  novo-search.always-open:not(.focused) {
-    button,
-    input {
-      background-color: rgba($white, 0.25) !important;
-      border-color: rgba($white, 0.25) !important;
-      color: $white !important;
-      &::placeholder {
-        color: $white !important;
       }
     }
   }

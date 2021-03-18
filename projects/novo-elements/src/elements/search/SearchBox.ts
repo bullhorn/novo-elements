@@ -31,15 +31,7 @@ const SEARCH_VALUE_ACCESSOR = {
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <!-- SEARCH ICON -->
-    <button
-      theme="fab"
-      [color]="color"
-      [icon]="icon"
-      (click)="showSearch()"
-      [tooltip]="hint"
-      tooltipPosition="bottom"
-      data-automation-id="novo-search-fab"
-    ></button>
+    <novo-icon (click)="showSearch($event)" [tooltip]="hint" tooltipPosition="bottom">{{ icon }}</novo-icon>
     <!-- SEARCH INPUT -->
     <input
       type="text"

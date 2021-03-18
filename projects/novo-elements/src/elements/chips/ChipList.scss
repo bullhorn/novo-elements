@@ -15,7 +15,7 @@ $novo-chip-avatar-after-margin: 0rem;
 
 $novo-chip-list-margin: 4px;
 
-$novo-chip-input-width: 150px;
+$novo-chip-input-width: 100px;
 $novo-chip-input-margin: 4px;
 
 $novo-chip-avatar-size: 24px;
@@ -199,8 +199,16 @@ $novo-chip-remove-size: 18px;
   object-fit: cover;
 }
 
+novo-field.novo-focused {
+  input.novo-chip-input {
+    width: $novo-chip-input-width;
+    margin: $novo-chip-input-margin;
+    flex: 1 0 $novo-chip-input-width;
+  }
+}
+
 input.novo-chip-input {
-  width: $novo-chip-input-width;
+  width: 80px;
   margin: $novo-chip-input-margin;
-  flex: 1 0 $novo-chip-input-width;
+  flex: 1 0 80px;
 }

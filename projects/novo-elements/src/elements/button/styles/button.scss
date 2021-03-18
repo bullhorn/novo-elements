@@ -20,20 +20,10 @@
   white-space: nowrap;
   overflow: hidden;
 
-  &:not(.has-text) {
-    .button-contents {
-      display: none;
-    }
-  }
-
   .button-contents {
     line-height: inherit;
     font-size: inherit;
     color: inherit;
-    &:empty,
-    &:blank {
-      display: none;
-    }
   }
 
   i {
