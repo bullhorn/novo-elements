@@ -217,7 +217,7 @@ export class NovoRadioGroup extends NovoRadioGroupMixins implements NovoFieldCon
 
   /** Whether any radio buttons has focus. */
   get focused(): boolean {
-    //todo: implement this.
+    // todo: implement this.
     return false;
   }
 
@@ -249,6 +249,6 @@ export class NovoRadioGroup extends NovoRadioGroupMixins implements NovoFieldCon
     if (this.disabled) {
       return;
     }
-    //TODO
+    // TODO
   }
 }

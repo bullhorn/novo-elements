@@ -4,8 +4,8 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
 // Vendor
 import { ReplaySubject } from 'rxjs';
 import { NovoLabelService } from '../../services/novo-label-service';
+import { Key } from '../../utils';
 import { Helpers } from '../../utils/Helpers';
-import { KeyCodes } from '../../utils/key-codes/KeyCodes';
 
 // Value accessor for the component (supports ngModel)
 const CHIPS_VALUE_ACCESSOR = {
@@ -319,7 +319,7 @@ export class NovoMultiPickerElement implements OnInit {
   }
 
   onKeyDown(event) {
-    if (event.keyCode === KeyCodes.BACKSPACE) {
+    if (event.key === Key.Backspace) {
       if (event.target && event.target.value.length === 0 && this.items.length) {
         if (event) {
           event.stopPropagation();

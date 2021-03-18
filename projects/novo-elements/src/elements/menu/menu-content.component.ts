@@ -2,13 +2,12 @@ import { ActiveDescendantKeyManager } from '@angular/cdk/a11y';
 import { OverlayRef } from '@angular/cdk/overlay';
 import { AfterViewInit, Component, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { Key } from '../../utils';
 import { NovoOption } from '../common';
 import { MenuItemDirective } from './menu-item.directive';
 import { MenuComponent } from './menu.component';
 import { CloseLeafMenuEvent, IMenuClickEvent } from './menu.service';
 import { ILinkConfig } from './menu.types';
-
-const ARROW_LEFT_KEYCODE = 37;
 
 @Component({
   selector: 'menu-content',
@@ -132,7 +131,7 @@ export class MenuContentComponent implements OnInit, OnDestroy, AfterViewInit {
       return;
     }
     this.cancelEvent(event);
-    this.closeLeafMenu.emit({ exceptRootMenu: event.keyCode === ARROW_LEFT_KEYCODE, event });
+    this.closeLeafMenu.emit({ exceptRootMenu: event.key === Key.ArrowLeft, event });
   }
 
   // @HostListener('document:contextmenu', ['$event'])

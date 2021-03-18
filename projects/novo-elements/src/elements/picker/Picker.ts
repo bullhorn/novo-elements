@@ -17,10 +17,9 @@ import {
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { fromEvent } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { Key } from '../../utils';
 import { ComponentUtils } from '../../utils/component-utils/ComponentUtils';
 import { Helpers } from '../../utils/Helpers';
-// APP
-import { KeyCodes } from '../../utils/key-codes/KeyCodes';
 import { notify } from '../../utils/notifier/notifier.util';
 import { NovoOverlayTemplateComponent } from '../common/overlay/Overlay';
 import { NovoControlConfig } from '../form/FormControls';
@@ -172,7 +171,7 @@ export class NovoPickerElement implements OnInit {
   }
 
   private onDebouncedKeyup(event: KeyboardEvent | ClipboardEvent) {
-    if ([KeyCodes.ESC, KeyCodes.UP, KeyCodes.DOWN, KeyCodes.ENTER, KeyCodes.TAB].includes((event as KeyboardEvent).keyCode)) {
+    if ([Key.Escape, Key.ArrowDown, Key.ArrowUp, Key.Enter, Key.Tab].some((key) => key === (event as KeyboardEvent).key)) {
       return;
     }
     this.show((event.target as any).value);
@@ -202,24 +201,24 @@ export class NovoPickerElement implements OnInit {
       return;
     }
     if (this.panelOpen && !this.disablePickerInput) {
-      if (event.keyCode === KeyCodes.ESC || event.keyCode === KeyCodes.TAB) {
+      if (event.key === Key.Escape || event.key === Key.Tab) {
         this.hideResults();
         return;
       }
 
-      if (event.keyCode === KeyCodes.UP) {
+      if (event.key === Key.ArrowUp) {
         this.popup.instance.prevActiveMatch();
         this.ref.markForCheck();
         return;
       }
 
-      if (event.keyCode === KeyCodes.DOWN) {
+      if (event.key === Key.ArrowDown) {
         this.popup.instance.nextActiveMatch();
         this.ref.markForCheck();
         return;
       }
 
-      if (event.keyCode === KeyCodes.ENTER) {
+      if (event.key === Key.Enter) {
         const activeMatch = this.popup.instance.activeMatch;
         if (!this.selected.find((selected) => activeMatch && activeMatch.value && selected.value === activeMatch.value)) {
           this.popup.instance.selectActiveMatch();
@@ -228,11 +227,11 @@ export class NovoPickerElement implements OnInit {
         return;
       }
 
-      if ((event.keyCode === KeyCodes.BACKSPACE || event.keyCode === KeyCodes.DELETE) && !Helpers.isBlank(this._value)) {
+      if ((event.key === Key.Backspace || event.key === Key.Delete) && !Helpers.isBlank(this._value)) {
         this.clearValue(false);
         this.closePanel();
       }
-      if (event.keyCode === KeyCodes.DELETE && Helpers.isBlank(this._value)) {
+      if (event.key === Key.Delete && Helpers.isBlank(this._value)) {
         this.clearValue(true);
       }
     }

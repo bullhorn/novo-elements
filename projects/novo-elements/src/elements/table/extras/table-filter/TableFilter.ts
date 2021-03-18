@@ -11,9 +11,8 @@ import {
   Renderer2,
   SimpleChanges,
 } from '@angular/core';
+import { Key } from 'projects/novo-elements/src/utils';
 import { Helpers } from './../../../../utils/Helpers';
-// APP
-import { KeyCodes } from './../../../../utils/key-codes/KeyCodes';
 
 @Directive({
   selector: '[novoTableFilter]',
@@ -48,7 +47,7 @@ export class TableFilter implements OnInit, OnChanges {
   @HostListener('keydown', ['$event'])
   public onChangeFilter(event: KeyboardEvent) {
     clearTimeout(this.filterThrottle);
-    if (KeyCodes.ENTER === event.keyCode) {
+    if (Key.Enter === event.key) {
       this.config.filter = (event.target as any).value;
       this.onFilterChange.emit({ filtering: this.config });
     } else {

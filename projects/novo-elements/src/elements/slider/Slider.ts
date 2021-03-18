@@ -2,6 +2,7 @@
 import { Component, ElementRef, Input, OnDestroy, OnInit } from '@angular/core';
 // APP
 import { NovoLabelService } from '../../services/novo-label-service';
+import { Key } from '../../utils';
 
 @Component({
   selector: 'novo-slider',
@@ -49,8 +50,8 @@ export class NovoSliderElement implements OnInit, OnDestroy {
     this.element.nativeElement.removeEventListener('keydown', this.handleKeyDownFunc);
   }
 
-  handleKeyDown(event) {
-    if (event.keyCode === 9) {
+  handleKeyDown(event: KeyboardEvent) {
+    if (event.key === Key.Tab) {
       event.stopImmediatePropagation();
       event.preventDefault();
     }

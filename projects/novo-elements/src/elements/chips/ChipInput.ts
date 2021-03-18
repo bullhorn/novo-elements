@@ -1,6 +1,7 @@
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
-import { hasModifierKey, TAB } from '@angular/cdk/keycodes';
+import { hasModifierKey } from '@angular/cdk/keycodes';
 import { Directive, ElementRef, EventEmitter, forwardRef, Inject, Input, OnChanges, Output } from '@angular/core';
+import { Key } from '../../utils';
 import { NovoChipsDefaultOptions, NOVO_CHIPS_DEFAULT_OPTIONS } from './ChipDefaults';
 import { NovoChipList } from './ChipList';
 import { NovoChipTextControl } from './ChipTextControl';
@@ -56,10 +57,10 @@ export class NovoChipInput implements NovoChipTextControl, OnChanges {
   /**
    * The list of key codes that will trigger a chipEnd event.
    *
-   * Defaults to `[ENTER]`.
+   * Defaults to `[Key.Enter]`.
    */
   @Input('novoChipInputSeparatorKeyCodes')
-  separatorKeyCodes: readonly number[] | ReadonlySet<number> = this._defaultOptions.separatorKeyCodes;
+  separatorKeyCodes: readonly string[] = this._defaultOptions.separatorKeyCodes;
 
   /** Emitted when a chip is to be added. */
   @Output('novoChipInputTokenEnd')
@@ -106,7 +107,7 @@ export class NovoChipInput implements NovoChipTextControl, OnChanges {
   _keydown(event?: KeyboardEvent) {
     // Allow the user's focus to escape when they're tabbing forward. Note that we don't
     // want to do this when going backwards, because focus should go back to the first chip.
-    if (event && event.keyCode === TAB && !hasModifierKey(event, 'shiftKey')) {
+    if (event && event.key === Key.Tab && !hasModifierKey(event, 'shiftKey')) {
       this._chipList._allowFocusEscape();
     }
 
@@ -157,7 +158,7 @@ export class NovoChipInput implements NovoChipTextControl, OnChanges {
 
   /** Checks whether a keycode is one of the configured separators. */
   private _isSeparatorKey(event: KeyboardEvent) {
-    return !hasModifierKey(event) && new Set(this.separatorKeyCodes).has(event.keyCode);
+    return !hasModifierKey(event) && new Set(this.separatorKeyCodes).has(event.key);
   }
 
   static ngAcceptInputType_addOnBlur: BooleanInput;

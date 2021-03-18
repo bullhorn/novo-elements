@@ -1,8 +1,7 @@
 // NG2
 import { ChangeDetectorRef, Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-// APP
-import { KeyCodes } from '../../utils/key-codes/KeyCodes';
+import { Key } from '../../utils';
 
 // Value accessor for the component (supports ngModel)
 const SWITCH_VALUE_ACCESSOR = {
@@ -55,8 +54,8 @@ export class NovoSwitchElement implements ControlValueAccessor {
 
   constructor(private ref: ChangeDetectorRef) {}
 
-  onKeydown(event) {
-    if (event.keyCode === KeyCodes.SPACE) {
+  onKeydown(event: KeyboardEvent) {
+    if (event.key === Key.Space) {
       event.preventDefault();
       this.toggle(event);
     }

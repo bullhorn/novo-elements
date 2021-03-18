@@ -15,10 +15,10 @@ import {
   TemplateRef,
   ViewChild,
 } from '@angular/core';
+import { Key } from 'projects/novo-elements/src/utils';
 import { fromEvent, Subscription } from 'rxjs';
 import { NovoLabelService } from '../../../services/novo-label-service';
 import { Helpers } from '../../../utils/Helpers';
-import { KeyCodes } from '../../../utils/key-codes/KeyCodes';
 import { NovoDropdownElement } from '../../dropdown/Dropdown';
 import {
   IDataTableChangeEvent,
@@ -431,12 +431,12 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
   public multiSelectOptionFilterHandleKeydown(event: KeyboardEvent) {
     if (this.multiSelect) {
       this.error = false;
-      if (this.dropdown.panelOpen && event.keyCode === KeyCodes.ESC) {
+      if (this.dropdown.panelOpen && event.key === Key.Escape) {
         // escape = clear text box and close
         Helpers.swallowEvent(event);
         this.clearOptionFilter();
         this.dropdown.closePanel();
-      } else if (event.keyCode === KeyCodes.ENTER) {
+      } else if (event.key === Key.Enter) {
         Helpers.swallowEvent(event);
         this.filterMultiSelect();
       } else if (

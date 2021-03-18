@@ -252,7 +252,7 @@ export class NovoSelectElement
 
   /** Whether any radio buttons has focus. */
   get focused(): boolean {
-    //todo: implement this.
+    // todo: implement this.
     return false;
   }
 
@@ -311,7 +311,7 @@ export class NovoSelectElement
   ngOnChanges(changes: SimpleChanges) {
     // Updating the disabled state is handled by `mixinDisabled`, but we need to additionally let
     // the parent form field know to run change detection when the disabled state changes.
-    if (changes['disabled']) {
+    if (changes?.disabled) {
       this.stateChanges.next();
     }
     this._initLegacyOptions();

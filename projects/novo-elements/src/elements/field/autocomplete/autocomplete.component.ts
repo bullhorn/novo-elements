@@ -1,6 +1,6 @@
 import { ActiveDescendantKeyManager } from '@angular/cdk/a11y';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
-import { DOWN_ARROW, ENTER, ESCAPE, hasModifierKey, TAB, UP_ARROW } from '@angular/cdk/keycodes';
+import { hasModifierKey } from '@angular/cdk/keycodes';
 import {
   AfterContentInit,
   AfterViewInit,
@@ -22,6 +22,7 @@ import {
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
+import { Key } from 'projects/novo-elements/src/utils';
 import { fromEvent, merge, of, Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
 import {
@@ -247,25 +248,25 @@ export class NovoAutocompleteElement
   }
 
   _handleKeydown(event: KeyboardEvent): void {
-    const keyCode = event.keyCode;
+    const key = event.key;
 
     // Prevent the default action on all escape key presses. This is here primarily to bring IE
     // in line with other browsers. By default, pressing escape on IE will cause it to revert
     // the input value to the one that it had on focus, however it won't dispatch any events
     // which means that the model value will be out of sync with the view.
-    if (keyCode === ESCAPE && !hasModifierKey(event)) {
+    if (key === Key.Escape && !hasModifierKey(event)) {
       event.preventDefault();
     }
 
-    if (this.activeOption && keyCode === ENTER && this.panelOpen) {
+    if (this.activeOption && key === Key.Enter && this.panelOpen) {
       this.activeOption._selectViaInteraction();
       // this._resetActiveItem();
       event.preventDefault();
     } else {
       const prevActiveItem = this._keyManager.activeItem;
-      const isArrowKey = keyCode === UP_ARROW || keyCode === DOWN_ARROW;
+      const isArrowKey = key === Key.ArrowUp || key === Key.ArrowDown;
 
-      if (this.panelOpen || keyCode === TAB) {
+      if (this.panelOpen || key === Key.Tab) {
         this._keyManager.onKeydown(event);
       } else if (isArrowKey && !this.overlay.panelOpen) {
         this.openPanel();

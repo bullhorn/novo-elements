@@ -1,8 +1,8 @@
 // NG2
-import { ENTER } from '@angular/cdk/keycodes';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Key } from '../../utils';
 import { ErrorStateMatcher } from '../common';
 import { NovoIconModule } from '../icon';
 // APP
@@ -41,7 +41,7 @@ import { NovoRowChipElement, NovoRowChipsElement } from './RowChips';
     {
       provide: NOVO_CHIPS_DEFAULT_OPTIONS,
       useValue: {
-        separatorKeyCodes: [ENTER],
+        separatorKeyCodes: [Key.Enter],
       } as NovoChipsDefaultOptions,
     },
   ],

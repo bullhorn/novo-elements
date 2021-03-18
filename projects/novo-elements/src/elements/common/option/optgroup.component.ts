@@ -1,6 +1,6 @@
 import { BooleanInput } from '@angular/cdk/coercion';
-import { ChangeDetectionStrategy, Component, Directive, Inject, InjectionToken, Input, Optional, ViewEncapsulation } from '@angular/core';
-import { CanDisable, CanDisableCtor, mixinDisabled } from '../mixins/disabled.mixin';
+import { ChangeDetectionStrategy, Component, Inject, InjectionToken, Input, Optional, ViewEncapsulation } from '@angular/core';
+import { CanDisableCtor, mixinDisabled } from '../mixins/disabled.mixin';
 import { NovoOptionParentComponent, NOVO_OPTION_PARENT_COMPONENT } from './option-parent';
 
 // Notes on the accessibility pattern used for `novo-optgroup`.
@@ -25,30 +25,11 @@ import { NovoOptionParentComponent, NOVO_OPTION_PARENT_COMPONENT } from './optio
 
 // Boilerplate for applying mixins to NovoOptgroup.
 /** @docs-private */
-class _NovoOptgroupBase {}
-const _NovoOptgroupMixinBase: CanDisableCtor & typeof _NovoOptgroupBase = mixinDisabled(_NovoOptgroupBase);
+export class NovoOptgroupBase {}
+export const NovoOptgroupMixinBase: CanDisableCtor & typeof NovoOptgroupBase = mixinDisabled(NovoOptgroupBase);
 
 // Counter for unique group ids.
 let _uniqueOptgroupIdCounter = 0;
-
-@Directive()
-export class NovoOptgroupBase extends _NovoOptgroupMixinBase implements CanDisable {
-  /** Label for the option group. */
-  @Input() label: string;
-
-  /** Unique id for the underlying label. */
-  _labelId: string = `novo-optgroup-label-${_uniqueOptgroupIdCounter++}`;
-
-  /** Whether the group is in inert a11y mode. */
-  _inert: boolean;
-
-  constructor(@Inject(NOVO_OPTION_PARENT_COMPONENT) @Optional() parent?: NovoOptionParentComponent) {
-    super();
-    this._inert = parent?.inertGroups ?? false;
-  }
-
-  static ngAcceptInputType_disabled: BooleanInput;
-}
 
 /**
  * Injection token that can be used to reference instances of `NovoOptgroup`. It serves as
@@ -77,4 +58,20 @@ export const NOVO_OPTGROUP = new InjectionToken<NovoOptgroup>('NovoOptgroup');
   },
   providers: [{ provide: NOVO_OPTGROUP, useExisting: NovoOptgroup }],
 })
-export class NovoOptgroup extends NovoOptgroupBase {}
+export class NovoOptgroup extends NovoOptgroupMixinBase {
+  /** Label for the option group. */
+  @Input() label: string;
+
+  /** Unique id for the underlying label. */
+  _labelId: string = `novo-optgroup-label-${_uniqueOptgroupIdCounter++}`;
+
+  /** Whether the group is in inert a11y mode. */
+  _inert: boolean;
+
+  constructor(@Inject(NOVO_OPTION_PARENT_COMPONENT) @Optional() parent?: NovoOptionParentComponent) {
+    super();
+    this._inert = parent?.inertGroups ?? false;
+  }
+
+  static ngAcceptInputType_disabled: BooleanInput;
+}

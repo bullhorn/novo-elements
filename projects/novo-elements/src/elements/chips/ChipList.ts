@@ -2,7 +2,6 @@ import { FocusKeyManager } from '@angular/cdk/a11y';
 import { Directionality } from '@angular/cdk/bidi';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { SelectionModel } from '@angular/cdk/collections';
-import { BACKSPACE } from '@angular/cdk/keycodes';
 import {
   AfterContentInit,
   ChangeDetectionStrategy,
@@ -24,6 +23,7 @@ import {
 import { ControlValueAccessor, FormGroupDirective, NgControl, NgForm } from '@angular/forms';
 import { merge, Observable, Subject, Subscription } from 'rxjs';
 import { startWith, takeUntil } from 'rxjs/operators';
+import { Key } from '../../utils';
 import { CanUpdateErrorState, CanUpdateErrorStateCtor, ErrorStateMatcher, mixinErrorState } from '../common';
 import { NovoFieldControl } from '../field';
 import { NovoChipElement, NovoChipEvent, NovoChipSelectionChange } from './Chip';
@@ -516,7 +516,7 @@ export class NovoChipList
     const target = event.target as HTMLElement;
 
     // If they are on an empty input and hit backspace, focus the last chip
-    if (event.keyCode === BACKSPACE && this._isInputEmpty(target)) {
+    if (event.key === Key.Backspace && this._isInputEmpty(target)) {
       this._keyManager.setLastItemActive();
       event.preventDefault();
     } else if (target && target.classList.contains('novo-chip')) {

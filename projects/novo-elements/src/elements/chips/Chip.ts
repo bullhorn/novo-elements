@@ -1,6 +1,5 @@
 import { FocusableOption } from '@angular/cdk/a11y';
 import { BooleanInput, coerceBooleanProperty, NumberInput } from '@angular/cdk/coercion';
-import { BACKSPACE, DELETE, SPACE } from '@angular/cdk/keycodes';
 import { Platform } from '@angular/cdk/platform';
 import { DOCUMENT } from '@angular/common';
 import {
@@ -21,6 +20,7 @@ import {
 import { ANIMATION_MODULE_TYPE } from '@angular/platform-browser/animations';
 import { Subject } from 'rxjs';
 import { take } from 'rxjs/operators';
+import { Key } from '../../utils';
 import { CanColor, CanColorCtor, HasTabIndex, HasTabIndexCtor, mixinColor, mixinTabIndex } from '../common';
 
 export interface IRemovable {
@@ -259,7 +259,7 @@ export class NovoChipElement extends NovoChipMixinBase implements FocusableOptio
   ) {
     super(_elementRef);
     this._animationsDisabled = animationMode === 'NoopAnimations';
-    this.tabIndex = tabIndex != null ? parseInt(tabIndex) || -1 : -1;
+    this.tabIndex = tabIndex != null ? parseInt(tabIndex, 10) || -1 : -1;
   }
 
   ngOnDestroy() {
@@ -337,15 +337,15 @@ export class NovoChipElement extends NovoChipMixinBase implements FocusableOptio
       return;
     }
 
-    switch (event.keyCode) {
-      case DELETE:
-      case BACKSPACE:
+    switch (event.key) {
+      case Key.Delete:
+      case Key.Backspace:
         // If we are removable, remove the focused chip
         this.remove();
         // Always prevent so page navigation does not occur
         event.preventDefault();
         break;
-      case SPACE:
+      case Key.Space:
         // If we are selectable, toggle the focused chip
         if (this.selectable) {
           this.toggleSelected(true);

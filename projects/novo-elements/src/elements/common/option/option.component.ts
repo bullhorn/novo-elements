@@ -1,6 +1,6 @@
 import { FocusableOption, FocusOptions, FocusOrigin } from '@angular/cdk/a11y';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
-import { ENTER, hasModifierKey, SPACE } from '@angular/cdk/keycodes';
+import { hasModifierKey } from '@angular/cdk/keycodes';
 import {
   AfterViewChecked,
   ChangeDetectionStrategy,
@@ -17,6 +17,7 @@ import {
   QueryList,
   ViewEncapsulation,
 } from '@angular/core';
+import { Key } from 'projects/novo-elements/src/utils';
 import { Subject } from 'rxjs';
 import { NovoOptgroup, NovoOptgroupBase, NOVO_OPTGROUP } from './optgroup.component';
 import { NovoOptionParentComponent, NOVO_OPTION_PARENT_COMPONENT } from './option-parent';
@@ -31,14 +32,14 @@ let _uniqueIdCounter = 0;
 export class NovoOptionSelectionChange {
   constructor(
     /** Reference to the option that emitted the event. */
-    public source: _NovoOptionBase,
+    public source: NovoOptionBase,
     /** Whether the change in the option's value was a result of a user action. */
     public isUserInput = false,
   ) {}
 }
 
 @Directive()
-export class _NovoOptionBase implements FocusableOption, AfterViewChecked, OnDestroy {
+export class NovoOptionBase implements FocusableOption, AfterViewChecked, OnDestroy {
   private _selected = false;
   private _active = false;
   private _disabled = false;
@@ -171,7 +172,7 @@ export class _NovoOptionBase implements FocusableOption, AfterViewChecked, OnDes
 
   /** Ensures the option is selected when activated from the keyboard. */
   _handleKeydown(event: KeyboardEvent): void {
-    if ((event.keyCode === ENTER || event.keyCode === SPACE) && !hasModifierKey(event)) {
+    if ((event.key === Key.Enter || event.key === Key.Space) && !hasModifierKey(event)) {
       this._selectViaInteraction();
 
       // Prevent the page from scrolling down and form submits.
@@ -274,7 +275,7 @@ export class _NovoOptionBase implements FocusableOption, AfterViewChecked, OnDes
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NovoOption extends _NovoOptionBase {
+export class NovoOption extends NovoOptionBase {
   constructor(
     element: ElementRef<HTMLElement>,
     changeDetectorRef: ChangeDetectorRef,

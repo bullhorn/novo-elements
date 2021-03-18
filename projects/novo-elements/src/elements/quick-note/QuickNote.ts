@@ -14,8 +14,8 @@ import {
   ViewContainerRef,
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Key } from '../../utils';
 import { ComponentUtils } from './../../utils/component-utils/ComponentUtils';
-import { KeyCodes } from './../../utils/key-codes/KeyCodes';
 // APP
 import { OutsideClick } from './../../utils/outside-click/OutsideClick';
 import { QuickNoteResults } from './extras/quick-note-results/QuickNoteResults';
@@ -240,7 +240,7 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
     if (event.key) {
       if (this.quickNoteResults) {
         // Hide results on escape key
-        if (event.keyCode === KeyCodes.ESC) {
+        if (event.key === Key.Escape) {
           this.zone.run(() => {
             this.hideResults();
           });
@@ -248,21 +248,21 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
         }
 
         // Navigation inside the results
-        if (event.keyCode === KeyCodes.UP) {
+        if (event.key === Key.ArrowUp) {
           this.zone.run(() => {
             this.quickNoteResults.instance.prevActiveMatch();
           });
           return false;
         }
 
-        if (event.keyCode === KeyCodes.DOWN) {
+        if (event.key === Key.ArrowDown) {
           this.zone.run(() => {
             this.quickNoteResults.instance.nextActiveMatch();
           });
           return false;
         }
 
-        if (event.keyCode === KeyCodes.ENTER) {
+        if (event.key === Key.Enter) {
           this.zone.run(() => {
             this.quickNoteResults.instance.selectActiveMatch();
           });
