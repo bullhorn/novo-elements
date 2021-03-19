@@ -37,7 +37,8 @@ git status
 git add -A
 git commit -m "$commitMessage"
 
-if [ "$CURRENT_BRANCH" == "master" ] then
+if [ "$CURRENT_BRANCH" == "master" ]
+then
     echo "Committing and pushing to master"
     git tag "$commitSha"
     git push origin master --tags
