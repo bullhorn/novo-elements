@@ -156,7 +156,6 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
 
   _handleBlur(event: FocusEvent): void {
     this.blurEvent.emit(event);
-    this.changeEvent.emit(event);
   }
 
   _handleFocus(event: FocusEvent): void {
@@ -206,6 +205,7 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
   public dispatchOnChange(newValue?: any, blur: boolean = false, skip: boolean = false) {
     if (newValue !== this.value) {
       this._onChange(newValue);
+      this.changeEvent.emit(newValue);
       if (blur) {
         !skip && this.writeValue(newValue);
       } else {
