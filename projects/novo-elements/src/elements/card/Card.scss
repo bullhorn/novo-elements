@@ -123,6 +123,10 @@
   padding: $spacing-md $spacing-md;
 }
 
+.novo-card-header + .novo-card-content.condensed {
+  margin-top: $spacing-sm;
+}
+
 [novo-card-image] {
   width: calc(100%);
   margin: $spacing-md 0;

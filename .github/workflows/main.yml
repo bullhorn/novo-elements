@@ -47,7 +47,7 @@ jobs:
           path: dist
       - uses: bvkimball/branch-vars@1.0.1
       - env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
         run: sh snapshot-publish
 
   deploy:
@@ -61,4 +61,4 @@ jobs:
           name: build-artifact
           path: dist
       - name: Deploy Demo
-        run: angular-cli-ghpages --dir="dist/demo" --repo="https://${GITHUB_TOKEN}@github.com/bullhorn/novo-elements.git" --name="Brian Kimball" --email="bkimball@bullhorn.com";
+        run: angular-cli-ghpages --dir="dist/demo" --repo="https://${API_TOKEN_GITHUB}@github.com/bullhorn/novo-elements.git" --name="Brian Kimball" --email="bkimball@bullhorn.com";

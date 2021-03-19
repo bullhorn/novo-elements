@@ -1,4 +1,4 @@
-// @import "../styles/global/variables.scss";
+@import "../../styles/global/variables.scss";
 @import "../common/typography/text.mixins.scss";
 
 novo-select {
@@ -26,7 +26,7 @@ novo-select {
     z-index: 1;
     cursor: pointer;
     text-transform: none;
-    padding: 0 10px 0 0;
+    padding: 0 $spacing-sm;
 
     &.empty {
       color: #a9a9a9;
