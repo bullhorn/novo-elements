@@ -1,5 +1,5 @@
 // NG2
-import { Component, Directive, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, Directive, EventEmitter, HostBinding, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 // APP
 import { NovoLabelService } from '../../services/novo-label-service';
 import { BooleanInput } from '../../utils';
@@ -134,6 +134,21 @@ export class CardElement implements OnChanges, OnInit {
   move: boolean;
   @Input()
   loading: boolean;
+
+  @Input()
+  @BooleanInput()
+  @HostBinding('class.novo-card-inline')
+  inline: boolean;
+
+  @Input()
+  @BooleanInput()
+  @HostBinding('class.novo-card-inset-large')
+  insetLarge: boolean;
+
+  @Input()
+  @BooleanInput()
+  @HostBinding('class.novo-card-inset-small')
+  insetSmall: boolean;
 
   @Output()
   onClose: EventEmitter<any> = new EventEmitter();

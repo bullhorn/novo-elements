@@ -64,16 +64,16 @@ export class MarginDirective {
     return this.margin || this.m;
   }
   @HostBinding('style.margin-left') get hb_margin_left() {
-    return this.marginLeft || this.ml;
+    return this.marginLeft || this.ml || this.mx || this.marginX;
   }
   @HostBinding('style.margin-right') get hb_margin_right() {
-    return this.marginRight || this.mr;
+    return this.marginRight || this.mr || this.mx || this.marginX;
   }
   @HostBinding('style.margin-top') get hb_margin_top() {
-    return this.marginTop || this.mt;
+    return this.marginTop || this.mt || this.my || this.marginY;
   }
   @HostBinding('style.margin-bottom') get hb_margin_bottom() {
-    return this.marginBottom || this.mb;
+    return this.marginBottom || this.mb || this.my || this.marginY;
   }
 }
 
@@ -102,15 +102,15 @@ export class PaddingDirective {
     return this.padding || this.p;
   }
   @HostBinding('style.padding-left') get hb_padding_left() {
-    return this.paddingLeft || this.pl || this.px;
+    return this.paddingLeft || this.pl || this.px || this.paddingX;
   }
   @HostBinding('style.padding-right') get hb_padding_right() {
-    return this.paddingRight || this.pr || this.px;
+    return this.paddingRight || this.pr || this.px || this.paddingX;
   }
   @HostBinding('style.padding-top') get hb_padding_top() {
-    return this.paddingTop || this.pt || this.py;
+    return this.paddingTop || this.pt || this.py || this.paddingY;
   }
   @HostBinding('style.padding-bottom') get hb_padding_bottom() {
-    return this.paddingBottom || this.pb || this.py;
+    return this.paddingBottom || this.pb || this.py || this.paddingY;
   }
 }

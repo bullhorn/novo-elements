@@ -123,8 +123,26 @@
   padding: $spacing-md $spacing-md;
 }
 
-.novo-card-header + .novo-card-content.condensed {
+.novo-card-header + .novo-card-content.condensed,
+.novo-card-header + :not(.novo-card-content) {
   margin-top: $spacing-sm;
+}
+
+.novo-card-inline {
+  display: inline-flex;
+  justify-self: start;
+  align-self: start;
+}
+
+.novo-card-inset-small {
+  .novo-card-content {
+    padding: $spacing-sm;
+  }
+}
+.novo-card-inset-large {
+  .novo-card-content {
+    padding: $spacing-lg;
+  }
 }
 
 [novo-card-image] {
