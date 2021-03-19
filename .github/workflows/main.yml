@@ -21,7 +21,6 @@ jobs:
       - name: Install Dependencies
         run: |
           npm install
-          npm install -g angular-cli-ghpages
       - name: Test
         run: |
           npm run lint
@@ -56,9 +55,13 @@ jobs:
     if: github.ref == 'refs/heads/master'
     steps:
       - uses: actions/checkout@master
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12.16.3
+      - run: npm install -g angular-cli-ghpages
       - uses: actions/download-artifact@master
         with:
           name: build-artifact
           path: dist
       - name: Deploy Demo
-        run: angular-cli-ghpages --dir="dist/demo" --repo="https://${API_TOKEN_GITHUB}@github.com/bullhorn/novo-elements.git" --name="Brian Kimball" --email="bkimball@bullhorn.com";
+        run: angular-cli-ghpages --dir="dist/demo" --repo="https://${{secrets.API_TOKEN_GITHUB}}@github.com/bullhorn/novo-elements.git" --name="Brian Kimball" --email="bkimball@bullhorn.com";
