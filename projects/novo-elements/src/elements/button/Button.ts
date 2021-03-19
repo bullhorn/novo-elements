@@ -1,5 +1,6 @@
 // NG2
-import { ChangeDetectionStrategy, Component, ElementRef, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, HostBinding, Input } from '@angular/core';
+import { BooleanInput } from '../../utils';
 
 @Component({
   selector: 'button[theme],novo-button',
@@ -76,6 +77,11 @@ export class NovoButtonElement {
   get icon(): string {
     return this._icon;
   }
+
+  @Input()
+  @BooleanInput()
+  @HostBinding('class.novo-button-disabled')
+  disabled: boolean = false;
 
   private _icon: string;
 
