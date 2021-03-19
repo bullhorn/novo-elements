@@ -357,7 +357,7 @@ export class NovoSelectElement implements OnInit, OnChanges, OnDestroy, ControlV
   writeValue(model: any): void {
     this.model = model;
     if (this.options) {
-      let item = this.filteredOptions.find((i) => i.value === model || (model && i.value === model.id));
+      let item = this.filteredOptions.find((i) => i.value === model || (model && i.value === model.id)) || this.options.find((i) => i.value === model || (model && i.value === model.id));
       if (!item && !Helpers.isEmpty(model)) {
         item = {
           label: model,
