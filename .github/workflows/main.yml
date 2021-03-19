@@ -46,10 +46,9 @@ jobs:
           name: build-artifact
           path: dist
       - uses: bvkimball/branch-vars@1.0.1
-      - run: sh snapshot-publish.sh
-        env:
-          CURRENT_BRANCH: ${CURRENT_BRANCH}
+      - env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: sh snapshot-publish
 
   deploy:
     runs-on: ubuntu-16.04
