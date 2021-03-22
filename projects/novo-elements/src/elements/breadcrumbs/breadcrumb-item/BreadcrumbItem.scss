@@ -3,7 +3,6 @@
 
 .novo-breadcrumb-font-style {
   @include novo-text-medium();
-  color: $dark;
 }
 
 :host {
@@ -19,15 +18,12 @@
     flex-flow: row nowrap;
 
     ::ng-deep a:hover {
-      color: $dark;
       text-decoration: none;
     }
 
     ::ng-deep a {
       @extend.novo-breadcrumb-font-style;
-
       cursor: pointer;
-
       &:focus {
         text-decoration: none;
       }
