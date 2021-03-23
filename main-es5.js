@@ -19574,6 +19574,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             */
             function (i) {
               return i.value === model || model && i.value === model.id;
+            }) || this.options.find(
+            /**
+            * @param {?} i
+            * @return {?}
+            */
+            function (i) {
+              return i.value === model || model && i.value === model.id;
             });
 
             if (!item && !Helpers.isEmpty(model)) {
@@ -43921,14 +43928,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           } else if (field.workflowOptions && fieldData) {
             return this.getWorkflowOptions(field.workflowOptions, fieldData);
           } else if (field.dataSpecialization === 'SPECIALIZED_OPTIONS' || field.options && ['SpecializedOptionsLookup', 'SimplifiedOptionsLookup'].includes(field.dataType)) {
-            return field.options.filter(
-            /**
-            * @param {?} o
-            * @return {?}
-            */
-            function (o) {
-              return !o.readOnly;
-            });
+            return field.options;
           } else if (field.optionsUrl) {
             return this.optionsService.getOptionsConfig(http, field, config);
           } else if (Array.isArray(field.options) && field.type === 'chips') {
@@ -79156,6 +79156,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           readOnly: true
         }];
         this.withNumbersValue = 4;
+        this.withNumbersObject = {
+          id: 4,
+          label: 'Four'
+        };
         this.value = 'Bravo';
         this.headerConfig = {
           label: 'Add New Item',
@@ -79183,7 +79187,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
       args: [{
         selector: 'basic-select-example',
-        template: "<div>\n    <label>\n        <span class=\"caption\">Selected Value:</span> {{value}}\n    </label>\n    <novo-select [options]=\"options\" [placeholder]=\"placeholder\" [(ngModel)]=\"value\"></novo-select>\n</div>\n<div>\n    <label>\n        <span class=\"caption\">Selected Value:</span> {{withNumbersValue}}\n    </label>\n    <novo-select [options]=\"withNumbers\" [(ngModel)]=\"withNumbersValue\"></novo-select>\n</div>\n<div>\n    <label>\n        <span class=\"caption\">Disabled State</span>\n    </label>\n    <novo-select [options]=\"options\" [placeholder]=\"placeholder\" [(ngModel)]=\"value\" disabled></novo-select>\n</div>\n<div>\n    <label>\n        <span class=\"caption\">No Model With Header</span>\n    </label>\n    <novo-select [options]=\"options\" [placeholder]=\"placeholder\" [headerConfig]=\"headerConfig\"></novo-select>\n</div>\n",
+        template: "<div>\n    <label>\n        <span class=\"caption\">Selected Value:</span> {{value}}\n    </label>\n    <novo-select [options]=\"options\" [placeholder]=\"placeholder\" [(ngModel)]=\"value\"></novo-select>\n</div>\n<div>\n    <label>\n        <span class=\"caption\">Selected Value:</span> {{withNumbersValue}}\n    </label>\n    <novo-select [options]=\"withNumbers\" [(ngModel)]=\"withNumbersValue\"></novo-select>\n</div>\n<div>\n    <label>\n        <span class=\"caption\">Selected Value:</span> {{withNumbersObject.label}}\n    </label>\n    <novo-select [options]=\"withNumbers\" [(ngModel)]=\"withNumbersObject\"></novo-select>\n</div>\n<div>\n    <label>\n        <span class=\"caption\">Disabled State</span>\n    </label>\n    <novo-select [options]=\"options\" [placeholder]=\"placeholder\" [(ngModel)]=\"value\" disabled></novo-select>\n</div>\n<div>\n    <label>\n        <span class=\"caption\">No Model With Header</span>\n    </label>\n    <novo-select [options]=\"options\" [placeholder]=\"placeholder\" [headerConfig]=\"headerConfig\"></novo-select>\n</div>\n",
         styles: [":host{padding:20px 30px;border-top-right-radius:3px;border-top-left-radius:3px;display:flex;flex-direction:row;flex-shrink:0;flex-grow:0;align-items:flex-start;flex-wrap:wrap;transition:background 460ms ease-in-out}:host label{margin-bottom:10px;display:block}:host .caption{font-size:.9em;margin-right:5px}"]
       }]
     }];
@@ -85706,9 +85710,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       'basic-select': {
         title: 'Basic Select Example',
         component: BasicSelectExample,
-        tsSource: "import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0A%0A%2F**%0A%20*%20%40title%20Basic%20Select%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'basic-select-example'%2C%0A%20%20templateUrl%3A%20'basic-select-example.html'%2C%0A%20%20styleUrls%3A%20%5B'basic-select-example.css'%5D%2C%0A%7D)%0Aexport%20class%20BasicSelectExample%20%7B%0A%20%20public%20placeholder%3A%20string%20%3D%20'Select...'%3B%0A%20%20public%20options%3A%20Array%3Cstring%3E%20%3D%20%5B'Alpha'%2C%20'Bravo'%2C%20'Charlie'%5D%3B%0A%20%20public%20withNumbers%3A%20Array%3Cany%3E%20%3D%20%5B%0A%20%20%20%20%7B%20label%3A%20'One'%2C%20value%3A%201%20%7D%2C%0A%20%20%20%20%7B%20label%3A%20'Two'%2C%20value%3A%202%20%7D%2C%0A%20%20%20%20%7B%20label%3A%20'Zero'%2C%20value%3A%200%20%7D%2C%0A%20%20%20%20%7B%20label%3A%20'Four'%2C%20value%3A%204%2C%20readOnly%3A%20true%20%7D%2C%0A%20%20%5D%3B%0A%20%20public%20withNumbersValue%3A%20number%20%3D%204%3B%0A%20%20public%20value%3A%20string%20%3D%20'Bravo'%3B%0A%20%20public%20headerConfig%3A%20any%20%3D%20%7B%0A%20%20%20%20label%3A%20'Add%20New%20Item'%2C%0A%20%20%20%20placeholder%3A%20'Enter%20item%20here'%2C%0A%20%20%20%20onSave%3A%20this.create.bind(this)%2C%0A%20%20%7D%3B%0A%0A%20%20public%20create(opt)%3A%20void%20%7B%0A%20%20%20%20this.options%20%3D%20%5B...this.options%2C%20opt%5D%3B%0A%20%20%7D%0A%7D%0A",
+        tsSource: "import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0A%0A%2F**%0A%20*%20%40title%20Basic%20Select%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'basic-select-example'%2C%0A%20%20templateUrl%3A%20'basic-select-example.html'%2C%0A%20%20styleUrls%3A%20%5B'basic-select-example.css'%5D%2C%0A%7D)%0Aexport%20class%20BasicSelectExample%20%7B%0A%20%20public%20placeholder%3A%20string%20%3D%20'Select...'%3B%0A%20%20public%20options%3A%20Array%3Cstring%3E%20%3D%20%5B'Alpha'%2C%20'Bravo'%2C%20'Charlie'%5D%3B%0A%20%20public%20withNumbers%3A%20Array%3Cany%3E%20%3D%20%5B%0A%20%20%20%20%7B%20label%3A%20'One'%2C%20value%3A%201%20%7D%2C%0A%20%20%20%20%7B%20label%3A%20'Two'%2C%20value%3A%202%20%7D%2C%0A%20%20%20%20%7B%20label%3A%20'Zero'%2C%20value%3A%200%20%7D%2C%0A%20%20%20%20%7B%20label%3A%20'Four'%2C%20value%3A%204%2C%20readOnly%3A%20true%20%7D%2C%0A%20%20%5D%3B%0A%20%20public%20withNumbersValue%3A%20number%20%3D%204%3B%0A%20%20public%20withNumbersObject%3A%20any%20%3D%20%7B%20id%3A%204%2C%20label%3A%20'Four'%20%7D%3B%0A%20%20public%20value%3A%20string%20%3D%20'Bravo'%3B%0A%20%20public%20headerConfig%3A%20any%20%3D%20%7B%0A%20%20%20%20label%3A%20'Add%20New%20Item'%2C%0A%20%20%20%20placeholder%3A%20'Enter%20item%20here'%2C%0A%20%20%20%20onSave%3A%20this.create.bind(this)%2C%0A%20%20%7D%3B%0A%0A%20%20public%20create(opt)%3A%20void%20%7B%0A%20%20%20%20this.options%20%3D%20%5B...this.options%2C%20opt%5D%3B%0A%20%20%7D%0A%7D%0A",
         cssSource: "%2F**%20No%20CSS%20for%20this%20example%20*%2F%0A%3Ahost%20%7B%0A%20%20padding%3A%2020px%2030px%3B%0A%20%20border-top-right-radius%3A%203px%3B%0A%20%20border-top-left-radius%3A%203px%3B%0A%20%20display%3A%20flex%3B%0A%20%20flex-direction%3A%20row%3B%0A%20%20flex-shrink%3A%200%3B%0A%20%20flex-grow%3A%200%3B%0A%20%20align-items%3A%20flex-start%3B%0A%20%20flex-wrap%3A%20wrap%3B%0A%20%20transition%3A%20background%20460ms%20ease-in-out%3B%0A%7D%0A%0A%3Ahost%20label%20%7B%0A%20%20margin-bottom%3A%2010px%3B%0A%20%20display%3A%20block%3B%0A%7D%0A%0A%3Ahost%20.caption%20%7B%0A%20%20font-size%3A%200.9em%3B%0A%20%20margin-right%3A%205px%3B%0A%7D%0A",
-        htmlSource: "%3Cdiv%3E%0A%20%20%20%20%3Clabel%3E%0A%20%20%20%20%20%20%20%20%3Cspan%20class%3D%22caption%22%3ESelected%20Value%3A%3C%2Fspan%3E%20%7B%7Bvalue%7D%7D%0A%20%20%20%20%3C%2Flabel%3E%0A%20%20%20%20%3Cnovo-select%20%5Boptions%5D%3D%22options%22%20%5Bplaceholder%5D%3D%22placeholder%22%20%5B(ngModel)%5D%3D%22value%22%3E%3C%2Fnovo-select%3E%0A%3C%2Fdiv%3E%0A%3Cdiv%3E%0A%20%20%20%20%3Clabel%3E%0A%20%20%20%20%20%20%20%20%3Cspan%20class%3D%22caption%22%3ESelected%20Value%3A%3C%2Fspan%3E%20%7B%7BwithNumbersValue%7D%7D%0A%20%20%20%20%3C%2Flabel%3E%0A%20%20%20%20%3Cnovo-select%20%5Boptions%5D%3D%22withNumbers%22%20%5B(ngModel)%5D%3D%22withNumbersValue%22%3E%3C%2Fnovo-select%3E%0A%3C%2Fdiv%3E%0A%3Cdiv%3E%0A%20%20%20%20%3Clabel%3E%0A%20%20%20%20%20%20%20%20%3Cspan%20class%3D%22caption%22%3EDisabled%20State%3C%2Fspan%3E%0A%20%20%20%20%3C%2Flabel%3E%0A%20%20%20%20%3Cnovo-select%20%5Boptions%5D%3D%22options%22%20%5Bplaceholder%5D%3D%22placeholder%22%20%5B(ngModel)%5D%3D%22value%22%20disabled%3E%3C%2Fnovo-select%3E%0A%3C%2Fdiv%3E%0A%3Cdiv%3E%0A%20%20%20%20%3Clabel%3E%0A%20%20%20%20%20%20%20%20%3Cspan%20class%3D%22caption%22%3ENo%20Model%20With%20Header%3C%2Fspan%3E%0A%20%20%20%20%3C%2Flabel%3E%0A%20%20%20%20%3Cnovo-select%20%5Boptions%5D%3D%22options%22%20%5Bplaceholder%5D%3D%22placeholder%22%20%5BheaderConfig%5D%3D%22headerConfig%22%3E%3C%2Fnovo-select%3E%0A%3C%2Fdiv%3E%0A"
+        htmlSource: "%3Cdiv%3E%0A%20%20%20%20%3Clabel%3E%0A%20%20%20%20%20%20%20%20%3Cspan%20class%3D%22caption%22%3ESelected%20Value%3A%3C%2Fspan%3E%20%7B%7Bvalue%7D%7D%0A%20%20%20%20%3C%2Flabel%3E%0A%20%20%20%20%3Cnovo-select%20%5Boptions%5D%3D%22options%22%20%5Bplaceholder%5D%3D%22placeholder%22%20%5B(ngModel)%5D%3D%22value%22%3E%3C%2Fnovo-select%3E%0A%3C%2Fdiv%3E%0A%3Cdiv%3E%0A%20%20%20%20%3Clabel%3E%0A%20%20%20%20%20%20%20%20%3Cspan%20class%3D%22caption%22%3ESelected%20Value%3A%3C%2Fspan%3E%20%7B%7BwithNumbersValue%7D%7D%0A%20%20%20%20%3C%2Flabel%3E%0A%20%20%20%20%3Cnovo-select%20%5Boptions%5D%3D%22withNumbers%22%20%5B(ngModel)%5D%3D%22withNumbersValue%22%3E%3C%2Fnovo-select%3E%0A%3C%2Fdiv%3E%0A%3Cdiv%3E%0A%20%20%20%20%3Clabel%3E%0A%20%20%20%20%20%20%20%20%3Cspan%20class%3D%22caption%22%3ESelected%20Value%3A%3C%2Fspan%3E%20%7B%7BwithNumbersObject.label%7D%7D%0A%20%20%20%20%3C%2Flabel%3E%0A%20%20%20%20%3Cnovo-select%20%5Boptions%5D%3D%22withNumbers%22%20%5B(ngModel)%5D%3D%22withNumbersObject%22%3E%3C%2Fnovo-select%3E%0A%3C%2Fdiv%3E%0A%3Cdiv%3E%0A%20%20%20%20%3Clabel%3E%0A%20%20%20%20%20%20%20%20%3Cspan%20class%3D%22caption%22%3EDisabled%20State%3C%2Fspan%3E%0A%20%20%20%20%3C%2Flabel%3E%0A%20%20%20%20%3Cnovo-select%20%5Boptions%5D%3D%22options%22%20%5Bplaceholder%5D%3D%22placeholder%22%20%5B(ngModel)%5D%3D%22value%22%20disabled%3E%3C%2Fnovo-select%3E%0A%3C%2Fdiv%3E%0A%3Cdiv%3E%0A%20%20%20%20%3Clabel%3E%0A%20%20%20%20%20%20%20%20%3Cspan%20class%3D%22caption%22%3ENo%20Model%20With%20Header%3C%2Fspan%3E%0A%20%20%20%20%3C%2Flabel%3E%0A%20%20%20%20%3Cnovo-select%20%5Boptions%5D%3D%22options%22%20%5Bplaceholder%5D%3D%22placeholder%22%20%5BheaderConfig%5D%3D%22headerConfig%22%3E%3C%2Fnovo-select%3E%0A%3C%2Fdiv%3E%0A"
       },
       'long-select': {
         title: 'Long Select Example',
@@ -88294,7 +88298,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
   /***/
   function _(module, exports, __webpack_require__) {
     module.exports = __webpack_require__(
-    /*! /home/travis/build/bullhorn/novo-elements/demo/main.ts */
+    /*! /home/runner/work/novo-elements/novo-elements/demo/main.ts */
     "./demo/main.ts");
     /***/
   }
