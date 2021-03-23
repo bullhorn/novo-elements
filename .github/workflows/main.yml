@@ -36,7 +36,7 @@ jobs:
   publish:
     runs-on: ubuntu-16.04
     needs: build
-    if: github.event_name == 'pull_request'
+    if: github.event_name == 'push'
     steps:
       - uses: actions/checkout@master
       - uses: actions/download-artifact@master
