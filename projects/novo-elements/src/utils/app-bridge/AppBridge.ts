@@ -560,7 +560,7 @@ export class AppBridge {
         });
       } else {
         postRobot
-          .sendToParent(MESSAGE_TYPES.HTTP_GET, { relativeURL, timeout })
+          .sendToParent(MESSAGE_TYPES.HTTP_GET, { relativeURL }, { timeout })
           .then((event: any) => {
             resolve({ data: event.data.data, error: event.data.error });
           })
@@ -583,7 +583,7 @@ export class AppBridge {
         });
       } else {
         postRobot
-          .sendToParent(MESSAGE_TYPES.HTTP_POST, { timeout, relativeURL, data: postData })
+          .sendToParent(MESSAGE_TYPES.HTTP_POST, { relativeURL, data: postData }, { timeout })
           .then((event: any) => {
             resolve({ data: event.data.data, error: event.data.error });
           })
@@ -601,12 +601,12 @@ export class AppBridge {
   public httpPUT(relativeURL: string, putData: any, timeout: number = 50000): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       if (this._handlers[AppBridgeHandler.HTTP]) {
-        this._handlers[AppBridgeHandler.HTTP]({ verb: HTTP_VERBS.PUT, relativeURL, timeout, data: putData }, (data: any, error: any) => {
+        this._handlers[AppBridgeHandler.HTTP]({ verb: HTTP_VERBS.PUT, relativeURL, data: putData }, (data: any, error: any) => {
           resolve({ data, error });
         });
       } else {
         postRobot
-          .sendToParent(MESSAGE_TYPES.HTTP_PUT, { relativeURL, data: putData })
+          .sendToParent(MESSAGE_TYPES.HTTP_PUT, { relativeURL, data: putData }, { timeout })
           .then((event: any) => {
             resolve({ data: event.data.data, error: event.data.error });
           })
@@ -629,7 +629,7 @@ export class AppBridge {
         });
       } else {
         postRobot
-          .sendToParent(MESSAGE_TYPES.HTTP_DELETE, { relativeURL, timeout })
+          .sendToParent(MESSAGE_TYPES.HTTP_DELETE, { relativeURL }, { timeout })
           .then((event: any) => {
             resolve({ data: event.data.data, error: event.data.error });
           })
