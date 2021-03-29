@@ -552,7 +552,7 @@ export class AppBridge {
    * Fires or responds to an HTTP_GET event
    * @param packet any - packet of data to send with the event
    */
-  public httpGET(relativeURL: string, timeout: number = 50000): Promise<any> {
+  public httpGET(relativeURL: string, timeout: number = 10000): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       if (this._handlers[AppBridgeHandler.HTTP]) {
         this._handlers[AppBridgeHandler.HTTP]({ verb: HTTP_VERBS.GET, relativeURL }, (data: any, error: any) => {
@@ -575,7 +575,7 @@ export class AppBridge {
    * Fires or responds to an HTTP_POST event
    * @param packet any - packet of data to send with the event
    */
-  public httpPOST(relativeURL: string, postData: any, timeout: number = 50000): Promise<any> {
+  public httpPOST(relativeURL: string, postData: any, timeout: number = 10000): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       if (this._handlers[AppBridgeHandler.HTTP]) {
         this._handlers[AppBridgeHandler.HTTP]({ verb: HTTP_VERBS.POST, relativeURL, data: postData }, (data: any, error: any) => {
@@ -598,7 +598,7 @@ export class AppBridge {
    * Fires or responds to an HTTP_PUT event
    * @param packet any - packet of data to send with the event
    */
-  public httpPUT(relativeURL: string, putData: any, timeout: number = 50000): Promise<any> {
+  public httpPUT(relativeURL: string, putData: any, timeout: number = 10000): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       if (this._handlers[AppBridgeHandler.HTTP]) {
         this._handlers[AppBridgeHandler.HTTP]({ verb: HTTP_VERBS.PUT, relativeURL, data: putData }, (data: any, error: any) => {
@@ -621,7 +621,7 @@ export class AppBridge {
    * Fires or responds to an HTTP_DELETE event
    * @param packet any - packet of data to send with the event
    */
-  public httpDELETE(relativeURL: string, timeout: number = 50000): Promise<any> {
+  public httpDELETE(relativeURL: string, timeout: number = 10000): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       if (this._handlers[AppBridgeHandler.HTTP]) {
         this._handlers[AppBridgeHandler.HTTP]({ verb: HTTP_VERBS.DELETE, relativeURL }, (data: any, error: any) => {
