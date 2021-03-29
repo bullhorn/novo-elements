@@ -64720,6 +64720,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         /**
          * Fires or responds to an HTTP_GET event
          * @param {?} relativeURL
+         * @param {?=} timeout
          * @return {?}
          */
 
@@ -64728,6 +64729,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         value: function httpGET(relativeURL) {
           var _this262 = this;
 
+          var timeout = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 10000;
           return new Promise(
           /**
           * @param {?} resolve
@@ -64754,6 +64756,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             } else {
               postRobot.sendToParent(MESSAGE_TYPES.HTTP_GET, {
                 relativeURL: relativeURL
+              }, {
+                timeout: timeout
               }).then(
               /**
               * @param {?} event
@@ -64779,6 +64783,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
          * Fires or responds to an HTTP_POST event
          * @param {?} relativeURL
          * @param {?} postData
+         * @param {?=} timeout
          * @return {?}
          */
 
@@ -64787,6 +64792,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         value: function httpPOST(relativeURL, postData) {
           var _this263 = this;
 
+          var timeout = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 10000;
           return new Promise(
           /**
           * @param {?} resolve
@@ -64815,6 +64821,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               postRobot.sendToParent(MESSAGE_TYPES.HTTP_POST, {
                 relativeURL: relativeURL,
                 data: postData
+              }, {
+                timeout: timeout
               }).then(
               /**
               * @param {?} event
@@ -64840,6 +64848,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
          * Fires or responds to an HTTP_PUT event
          * @param {?} relativeURL
          * @param {?} putData
+         * @param {?=} timeout
          * @return {?}
          */
 
@@ -64848,6 +64857,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         value: function httpPUT(relativeURL, putData) {
           var _this264 = this;
 
+          var timeout = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 10000;
           return new Promise(
           /**
           * @param {?} resolve
@@ -64876,6 +64886,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               postRobot.sendToParent(MESSAGE_TYPES.HTTP_PUT, {
                 relativeURL: relativeURL,
                 data: putData
+              }, {
+                timeout: timeout
               }).then(
               /**
               * @param {?} event
@@ -64900,6 +64912,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         /**
          * Fires or responds to an HTTP_DELETE event
          * @param {?} relativeURL
+         * @param {?=} timeout
          * @return {?}
          */
 
@@ -64908,6 +64921,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         value: function httpDELETE(relativeURL) {
           var _this265 = this;
 
+          var timeout = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 10000;
           return new Promise(
           /**
           * @param {?} resolve
@@ -64934,6 +64948,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             } else {
               postRobot.sendToParent(MESSAGE_TYPES.HTTP_DELETE, {
                 relativeURL: relativeURL
+              }, {
+                timeout: timeout
               }).then(
               /**
               * @param {?} event
