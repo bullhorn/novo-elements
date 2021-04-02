@@ -228,8 +228,4 @@ export class NovoFormControl extends FormControl {
     this.markAsTouched();
     this.setErrors(Object.assign({}, this.errors, { custom: message }));
   }
-
-  markAsValid(): void {
-    this.setErrors(null);
-  }
 }

@@ -12,7 +12,6 @@ export class NovoFormGroup extends FormGroup {
   public currentEntity: string;
   public currentEntityId: string;
   public associations: object;
-  public fieldsets: any[];
   public _value: any;
 
   get value() {
