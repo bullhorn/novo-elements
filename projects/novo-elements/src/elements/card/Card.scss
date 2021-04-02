@@ -134,15 +134,17 @@
   align-self: start;
 }
 
+.novo-card-inset-none {
+  padding: 0;
+}
 .novo-card-inset-small {
-  .novo-card-content {
-    padding: $spacing-sm;
-  }
+  padding: $spacing-sm;
+}
+.novo-card-inset-medium {
+  padding: $spacing-md;
 }
 .novo-card-inset-large {
-  .novo-card-content {
-    padding: $spacing-lg;
-  }
+  padding: $spacing-lg;
 }
 
 [novo-card-image] {

@@ -29,6 +29,7 @@ import {
   IDataTableSortFilter,
 } from '../interfaces';
 import { NovoDataTableFilterUtils } from '../services/data-table-filter-utils';
+import { SortDirection } from '../sort-filter';
 import { NovoDataTableSortFilter } from '../sort-filter/sort-filter.directive';
 import { DataTableState } from '../state/data-table-state.service';
 
@@ -38,17 +39,16 @@ import { DataTableState } from '../state/data-table-state.service';
     <i class="bhi-{{ labelIcon }} label-icon" *ngIf="labelIcon" data-automation-id="novo-data-table-header-icon"></i>
     <label data-automation-id="novo-data-table-label">{{ label }}</label>
     <div>
-      <button
+      <novo-sort-button
         *ngIf="config.sortable"
+        data-automation-id="novo-data-table-sort"
         tooltipPosition="right"
         [tooltip]="labels.sort"
-        theme="icon"
-        [icon]="icon"
-        (click)="sort()"
-        [class.active]="sortActive"
-        data-automation-id="novo-data-table-sort"
         [attr.data-feature-id]="'novo-data-table-sort-' + this.id"
-      ></button>
+        (sortChange)="sort()"
+        [value]="sortValue"
+      ></novo-sort-button>
+
       <novo-dropdown
         *ngIf="config.filterable"
         side="right"
@@ -57,20 +57,22 @@ import { DataTableState } from '../state/data-table-state.service';
         data-automation-id="novo-data-table-filter"
       >
         <button
+          class="filter-button"
           type="button"
           theme="icon"
-          icon="filter"
-          [class.active]="filterActive"
           (click)="focusInput()"
           tooltipPosition="right"
           [tooltip]="labels.filters"
           [attr.data-feature-id]="'novo-data-table-filter-' + this.id"
-        ></button>
+        >
+          <novo-icon [class.filter-active]="filterActive">filter</novo-icon>
+        </button>
         <div class="header">
-          <span>{{ labels.filters }}</span>
+          <novo-label>{{ labels.filters }}</novo-label>
           <button
             theme="dialogue"
             color="negative"
+            size="small"
             icon="times"
             (click)="clearFilter()"
             *ngIf="filter !== null && filter !== undefined && filter !== ''"
@@ -249,6 +251,7 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
   public direction: string;
   public filterActive: boolean = false;
   public sortActive: boolean = false;
+  public sortValue: SortDirection = SortDirection.NONE;
   public showCustomRange: boolean = false;
   public activeDateFilter: string;
   public config: {
@@ -302,9 +305,11 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
   public checkSortFilterState(sortFilterState: IDataTableChangeEvent, initialConfig: boolean = false): void {
     if (sortFilterState.sort && sortFilterState.sort.id === this.id) {
       this.icon = `sort-${sortFilterState.sort.value}`;
+      this.sortValue = sortFilterState.sort.value === 'asc' ? SortDirection.ASC : SortDirection.DESC;
       this.sortActive = true;
     } else {
       this.icon = 'sortable';
+      this.sortValue = SortDirection.NONE;
       this.sortActive = false;
     }
 

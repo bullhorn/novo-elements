@@ -141,14 +141,11 @@ export class CardElement implements OnChanges, OnInit {
   inline: boolean;
 
   @Input()
-  @BooleanInput()
-  @HostBinding('class.novo-card-inset-large')
-  insetLarge: boolean;
-
-  @Input()
-  @BooleanInput()
-  @HostBinding('class.novo-card-inset-small')
-  insetSmall: boolean;
+  inset: string = 'none';
+  @HostBinding('class')
+  get hbInset() {
+    return `novo-card-inset-${this.inset}`;
+  }
 
   @Output()
   onClose: EventEmitter<any> = new EventEmitter();

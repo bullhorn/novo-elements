@@ -4,7 +4,7 @@ novo-toast {
   position: relative;
   background: $navy;
   color: $white;
-  padding: 1rem 1rem 1rem 2rem;
+  padding: $spacing-md;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
   &.show {
     display: block;

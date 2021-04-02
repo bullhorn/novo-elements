@@ -1,21 +1,36 @@
+@import "../../styles/global/variables.scss";
+
 novo-search {
   display: grid;
   grid-template-areas: "icon input";
   grid-template-columns: 3.2rem 1fr;
   grid-template-rows: 1fr;
   align-items: center;
-  height: 3.2em;
+  height: 3.2rem;
+  background: $white;
   border: 1px solid $light;
   border-radius: 0.2rem;
   max-width: 400px;
   min-width: 100px;
-  transition: border-color 250ms ease-in-out, 250ms ease-in-out, opacity 150ms ease-in-out, 250ms width ease-in-out;
+  transition: all 250ms ease-in-out;
+
+  &[size="small"] {
+    font-size: 1rem;
+    height: 2.4rem;
+    grid-template-columns: 2.4rem 1fr;
+  }
+
+  &[size="large"] {
+    font-size: 1.8rem;
+    height: 4rem;
+    grid-template-columns: 4rem 1fr;
+  }
 
   > input {
     height: 100%;
     max-width: 400px;
     display: block;
-    background: $white;
+    background: transparent;
     position: relative;
     font-size: 1.4em;
     color: $dark;
@@ -28,6 +43,10 @@ novo-search {
     &:active {
       outline: none;
     }
+  }
+
+  novo-icon {
+    color: $dark;
   }
 
   &.focused {
@@ -50,8 +69,8 @@ novo-search {
         background: $color !important;
         novo-icon,
         input {
+          transition: all 250ms;
           color: $white !important;
-          background: transparent !important;
           &::placeholder {
             color: $off-white;
           }

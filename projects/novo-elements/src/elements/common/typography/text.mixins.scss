@@ -32,6 +32,18 @@
   }
 }
 
+@mixin text-lengths() {
+  &.text-length-small {
+    max-width: 40ch;
+  }
+  &.text-length-medium {
+    max-width: 55ch;
+  }
+  &.text-length-large {
+    max-width: 70ch;
+  }
+}
+
 @mixin text-colors() {
   @each $basic, $color in $all-colors {
     &.text-color-#{$basic} {

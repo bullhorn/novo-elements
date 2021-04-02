@@ -150,6 +150,16 @@ cdk-table {
   novo-dropdown {
     display: inline-block;
   }
+  .filter-button {
+    color: $light;
+    &:hover {
+      color: $dark;
+    }
+    .filter-active {
+      color: $positive;
+    }
+  }
+
   button.active {
     color: $white;
     background: $positive;
@@ -243,6 +253,7 @@ cdk-table {
   > div {
     width: 55px;
     display: flex;
+    align-items: center;
     flex: 0;
   }
   novo-dropdown[side="right"] {
@@ -618,12 +629,12 @@ novo-data-table-pagination {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    button {
-      padding: 3px;
-      icon {
-        font-size: 0.8em;
-      }
-    }
+    // button {
+    //   padding: 3px;
+    //   icon {
+    //     font-size: 0.8em;
+    //   }
+    // }
   }
   .dropdown-list-options {
     max-height: 346px;

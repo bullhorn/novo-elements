@@ -1,10 +1,8 @@
 <novo-search></novo-search>
 
-<br />
+<novo-search size="small" placeholder="Small Search..."></novo-search>
 
-<novo-search alwaysOpen="true"></novo-search>
-
-<br />
+<novo-search size="large" placeholder="Large Search..."></novo-search>
 
 <novo-search theme="positive" [ngModel]="test" (ngModelChange)="search($event)">
   <novo-list direction="vertical">
@@ -17,14 +15,11 @@
   </novo-list>
 </novo-search>
 
-<br />
-
 <novo-search icon="location" color="grapefruit" alwaysOpen="true" [(ngModel)]="geo" displayField="formatted_address"
   [closeOnSelect]="false" hint="Search Google to find your address.">
   <google-places-list [(term)]="geo"></google-places-list>
 </novo-search>
 <div>Value is: {{geo}}</div>
-<br />
 
 <novo-search icon="candidate" color="candidate" alwaysOpen="true" [(ngModel)]="entity">
   <entity-picker-results [matches]="searchData" (select)="onSelectEntity($event)"></entity-picker-results>

@@ -13,6 +13,7 @@
   @include text-colors();
   @include text-weights();
   @include text-margins();
+  @include text-lengths();
 
   novo-icon {
     vertical-align: top;

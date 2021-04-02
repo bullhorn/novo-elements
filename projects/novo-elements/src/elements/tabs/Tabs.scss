@@ -13,7 +13,7 @@ novo-nav {
     novo-tab-link {
       font-size: 1rem;
       .novo-tab-link {
-        padding: 0.8rem;
+        padding: $spacing-sm;
       }
     }
   }
@@ -46,7 +46,7 @@ novo-nav {
       color: #fff;
       display: flex;
       align-items: center;
-      gap: 0.5em;
+      gap: $spacing-xs;
       cursor: pointer;
       text-transform: uppercase;
       &:focus {
@@ -87,7 +87,7 @@ novo-nav {
     border-radius: 3px;
     border: 2px solid #fff;
     novo-tab-button {
-      padding: 1rem;
+      padding: $spacing-md;
       cursor: pointer;
       transition: all 120ms ease-in-out;
       &.disabled {
@@ -232,7 +232,7 @@ novo-nav {
         width: 100%;
         display: flex;
         flex-flow: row nowrap;
-        gap: 0.4rem;
+        gap: $spacing-xs;
         max-width: 90%;
         white-space: nowrap;
         overflow: hidden;
@@ -292,8 +292,8 @@ novo-nav-outlet {
   display: block;
   novo-nav-header {
     display: block;
-    padding: 0.8rem;
-    margin: 0.8rem;
+    padding: $spacing-sm;
+    margin: $spacing-sm;
     border: 1px solid #333;
   }
   novo-nav-content {

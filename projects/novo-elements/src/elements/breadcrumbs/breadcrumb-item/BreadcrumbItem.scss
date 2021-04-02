@@ -11,7 +11,7 @@
   flex-flow: row nowrap;
 
   .novo-breadcrumb-item {
-    @extend.novo-breadcrumb-font-style;
+    @extend .novo-breadcrumb-font-style;
     cursor: auto;
     display: flex;
     align-items: center;
@@ -22,7 +22,8 @@
     }
 
     ::ng-deep a {
-      @extend.novo-breadcrumb-font-style;
+      @extend .novo-breadcrumb-font-style;
+      color: $ocean;
       cursor: pointer;
       &:focus {
         text-decoration: none;

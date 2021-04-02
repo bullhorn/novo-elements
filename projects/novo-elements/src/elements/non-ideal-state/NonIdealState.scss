@@ -6,15 +6,10 @@
   align-items: center;
   text-align: center;
   // gap: 1.2rem;
-
-  &::ng-deep {
-    novo-icon {
-      font-size: xx-large;
-      i {
-        margin: 0;
-      }
-    }
+  .novo-non-ideal-state-icon {
+    font-size: xx-large;
   }
+
   button {
     display: inline-block;
   }

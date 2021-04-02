@@ -2,6 +2,7 @@
 /** DO NOT MANUALLY EDIT THIS FILE, IT IS GENERATED 'build-examples-module' */
 import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { NovoElementsModule } from 'novo-elements';
 import { NovoExamplesModule } from './examples.module';
 import { NovoExamplesSharedModule } from './_shared/shared.module';
 
@@ -14,7 +15,9 @@ import { NovoExamplesSharedModule } from './_shared/shared.module';
     <h5>Basic Example</h5>
     <p><code-example example="basic-ace"></code-example></p>`,
 })
-export class AceEditorPage {}
+export class AceEditorPage {
+  public params: any = {};
+}
 
 @Component({
   selector: 'autocomplete-page',
@@ -33,7 +36,9 @@ export class AceEditorPage {}
     <p>Autocompletes are images used to represent users and organizations on GitHub. They typically are squares with rounded edges.</p>
     <p><code-example example="autocomplete-stacked-chips"></code-example></p>`,
 })
-export class AutocompletePage {}
+export class AutocompletePage {
+  public params: any = {};
+}
 
 @Component({
   selector: 'avatar-page',
@@ -49,7 +54,9 @@ export class AutocompletePage {}
     <p>AvatarStack is used to display more than one Avatar in an inline stack.</p>
     <p><code-example example="avatar-stack-usage"></code-example></p>`,
 })
-export class AvatarPage {}
+export class AvatarPage {
+  public params: any = {};
+}
 
 @Component({
   selector: 'breadcrumb-page',
@@ -78,7 +85,9 @@ export class AvatarPage {}
     </p>
     <p><code-example example="breadcrumb-source-usage"></code-example></p>`,
 })
-export class BreadcrumbPage {}
+export class BreadcrumbPage {
+  public params: any = {};
+}
 
 @Component({
   selector: 'buttons-page',
@@ -163,7 +172,9 @@ export class BreadcrumbPage {}
     </p>
     <p><code-example example="button-loading"></code-example></p>`,
 })
-export class ButtonsPage {}
+export class ButtonsPage {
+  public params: any = {};
+}
 
 @Component({
   selector: 'calendar-page',
@@ -190,14 +201,18 @@ export class ButtonsPage {}
     <h5>Big Calendar Picker</h5>
     <p><code-example example="big-calendar"></code-example></p>`,
 })
-export class CalendarPage {}
+export class CalendarPage {
+  public params: any = {};
+}
 
 @Component({
   selector: 'components-page',
   template: `<h1>Components</h1>
     <p>This is a landing page</p>`,
 })
-export class ComponentsPage {}
+export class ComponentsPage {
+  public params: any = {};
+}
 
 @Component({
   selector: 'data-table-page',
@@ -222,7 +237,9 @@ export class ComponentsPage {}
     <h6>URL</h6>
     <p><code-example example="data-table-remote"></code-example></p>`,
 })
-export class DataTablePage {}
+export class DataTablePage {
+  public params: any = {};
+}
 
 @Component({
   selector: 'dropdown-page',
@@ -261,7 +278,9 @@ export class DataTablePage {}
     </p>
     <p><code-example example="multi-drop-down"></code-example></p>`,
 })
-export class DropdownPage {}
+export class DropdownPage {
+  public params: any = {};
+}
 
 @Component({
   selector: 'field-page',
@@ -311,7 +330,9 @@ export class DropdownPage {}
     <p>How to use form fields tied to a form with FormControls and validation</p>
     <p><code-example example="form-usage"></code-example></p>`,
 })
-export class FieldPage {}
+export class FieldPage {
+  public params: any = {};
+}
 
 @Component({
   selector: 'icon-page',
@@ -329,7 +350,9 @@ export class FieldPage {}
     <h5>Raised Icons</h5>
     <p><code-example example="raised-icons"></code-example></p>`,
 })
-export class IconPage {}
+export class IconPage {
+  public params: any = {};
+}
 
 @Component({
   selector: 'loading-page',
@@ -349,7 +372,9 @@ export class IconPage {}
     <p>The Dot Spinner animation is used as an alternate to the loading line animation.</p>
     <p><code-example example="loading-circle"></code-example></p>`,
 })
-export class LoadingPage {}
+export class LoadingPage {
+  public params: any = {};
+}
 
 @Component({
   selector: 'menu-page',
@@ -370,7 +395,9 @@ export class LoadingPage {}
     </p>
     <p><code-example example="menu-context"></code-example></p>`,
 })
-export class MenuPage {}
+export class MenuPage {
+  public params: any = {};
+}
 
 @Component({
   selector: 'non-ideal-state-page',
@@ -397,7 +424,9 @@ export class MenuPage {}
     <p>The call to action doesn't necessarily need to be a button, for example:</p>
     <p><code-example example="non-ideal-state-search-usage"></code-example></p>`,
 })
-export class NonIdealStatePage {}
+export class NonIdealStatePage {
+  public params: any = {};
+}
 
 @Component({
   selector: 'progress-page',
@@ -413,7 +442,9 @@ export class NonIdealStatePage {}
     <p>Radial Progress can be used to show a percent complete or multiple statuses in a circle.</p>
     <p><code-example example="progress-bar-radial-usage"></code-example></p>`,
 })
-export class ProgressPage {}
+export class ProgressPage {
+  public params: any = {};
+}
 
 @Component({
   selector: 'quick-note-page',
@@ -428,7 +459,9 @@ export class ProgressPage {}
     <h5>Custom Results Template</h5>
     <p><code-example example="custom-quick-note-results"></code-example></p>`,
 })
-export class QuickNotePage {}
+export class QuickNotePage {
+  public params: any = {};
+}
 
 @Component({
   selector: 'search-page',
@@ -444,7 +477,9 @@ export class QuickNotePage {}
     <p>Searches are a binary toggle that allow the user to select one of two options. They are most frequently used for an on-off model.</p>
     <p><code-example example="search-usage"></code-example></p>`,
 })
-export class SearchPage {}
+export class SearchPage {
+  public params: any = {};
+}
 
 @Component({
   selector: 'slides-page',
@@ -454,7 +489,9 @@ export class SearchPage {}
     <h5>Basic</h5>
     <p><code-example example="basic-slide"></code-example></p>`,
 })
-export class SlidesPage {}
+export class SlidesPage {
+  public params: any = {};
+}
 
 @Component({
   selector: 'switch-page',
@@ -476,7 +513,9 @@ export class SlidesPage {}
     <p>Switches are a binary toggle that allow the user to select one of two options. They are most frequently used for an on-off model.</p>
     <p><code-example example="switch-usage"></code-example></p>`,
 })
-export class SwitchPage {}
+export class SwitchPage {
+  public params: any = {};
+}
 
 @Component({
   selector: 'tabbed-group-picker-page',
@@ -503,7 +542,9 @@ export class SwitchPage {}
     <h2>Big Groups</h2>
     <p><code-example example="tabbed-group-picker-big-groups"></code-example></p>`,
 })
-export class TabbedGroupPickerPage {}
+export class TabbedGroupPickerPage {
+  public params: any = {};
+}
 
 @Component({
   selector: 'table-page',
@@ -531,7 +572,9 @@ export class TabbedGroupPickerPage {}
     <p>Easily configure a footer to sum or average up columns.</p>
     <p><code-example example="total-footer-table"></code-example></p>`,
 })
-export class TablePage {}
+export class TablePage {
+  public params: any = {};
+}
 
 @Component({
   selector: 'colors-page',
@@ -551,7 +594,9 @@ export class TablePage {}
     <p>This palette features vibrant, bold colors for use in data visualization.</p>
     <p><analytics-colors-example></analytics-colors-example></p>`,
 })
-export class ColorsPage {}
+export class ColorsPage {
+  public params: any = {};
+}
 
 @Component({
   selector: 'composition-page',
@@ -648,27 +693,34 @@ export class ColorsPage {}
     </p>
     <p><img src="assets/images/LayoutMobileCard.svg" alt="mobile cards" /></p>`,
 })
-export class CompositionPage {}
+export class CompositionPage {
+  public params: any = {};
+}
 
 @Component({
   selector: 'design-page',
   template: `<h1>Design</h1>
     <p>This is a landing page</p>`,
 })
-export class DesignPage {}
+export class DesignPage {
+  public params: any = {};
+}
 
 @Component({
   selector: 'iconography-page',
   template: `<h1>Iconography</h1>
     <h2>Certified Pixel-Perfect</h2>
-    <p>
-      Icons are used to represent an action or concept through the most simplistic imagery possible. Icons give additional context to
-      written material, allowing the user to quickly comprehend any given concept. The icons are designed on a highly specific grid to
-      ensure maximum clarity even at a small size. Their design is friendly, human, and bold.
-    </p>
+    <novo-grid columns="1fr 128px">
+      <novo-text
+        >Icons are used to represent an action or concept through the most simplistic imagery possible. Icons give additional context to
+        written material, allowing the user to quickly comprehend any given concept. The icons are designed on a highly specific grid to
+        ensure maximum clarity even at a small size. Their design is friendly, human, and bold.</novo-text
+      >
+      <img src="assets/images/IconographyPageIcon.svg"
+    /></novo-grid>
     <p><a href="http://bullhorn.github.io/bullhorn-icons/">Bullhorn's Icon Set</a></p>
-    <p><img src="assets/images/IconographyPageIcon.svg" alt="" /></p>
-    <h2>Icons with Typography</h2>
+    <p><iconset-example></iconset-example></p>
+    <h2>Visual Guidelines</h2>
     <p>
       An icon will always have slightly larger dimensions than text when they are paired together. This ensures that the icon is visually
       the same size as the text and that it scales proportionally.
@@ -676,64 +728,50 @@ export class DesignPage {}
     <h5>Base sizing</h5>
     <p>Icons placed next to typography should alays follow this convention.</p>
     <p>Bullhorn Glyphicons <strong>Size:</strong> 1.29em <strong>Padding:</strong> .25em <strong>Border Radius:</strong> .625em</p>
-    <h1>Company Name</h1>
-    <h5>Padding</h5>
-    <p>Icons should have sufficient padding when followed by text.</p>
-    <div class="padding">
-      <div>
-        <h4><i class="bhi-circle"></i>Alice Hughes</h4>
-        <h6><i class="bhi-location"></i>Boston, MA</h6>
-        <span class="not-accepted"><i class="bhi-close-o"></i>I feel squished</span>
-      </div>
-      <div>
-        <h4><i class="bhi-circle"></i>Alice Hughes</h4>
-        <h6><i class="bhi-location"></i>Boston, MA</h6>
-        <span class="accepted"><i class="bhi-check"></i>Much better</span>
-      </div>
-    </div>
-    <h4>Alice Hughes</h4>
-    <h6>Boston, MA</h6>
-    <p>I feel squished</p>
-    <h4>Alice Hughes</h4>
-    <h6>Boston, MA</h6>
-    <p>Much better</p>
-    <h2>Entity Icons</h2>
-    <h5>Standard Entity Icons</h5>
-    <p>Used with corresponding entity color.</p>
-    <p>Lead</p>
-    <p>Contact</p>
-    <p>Company</p>
-    <p>Candidate</p>
-    <p>Opportunity</p>
-    <p>Job</p>
-    <p>Placement</p>
-    <pre><code>            &lt;i theme=&quot;entity&quot; class=&quot;bhi-lead lead&quot;&gt;&lt;/i&gt;            &lt;h6&gt;Lead&lt;/h6&gt;            &lt;i theme=&quot;entity&quot; class=&quot;bhi-person contact&quot;&gt;&lt;/i&gt;            &lt;h6&gt;Contact&lt;/h6&gt;            &lt;i theme=&quot;entity&quot; class=&quot;bhi-company company&quot;&gt;&lt;/i&gt;            &lt;h6&gt;Company&lt;/h6&gt;            &lt;i theme=&quot;entity&quot; class=&quot;bhi-candidate candidate&quot;&gt;&lt;/i&gt;            &lt;h6&gt;Candidate&lt;/h6&gt;            &lt;i theme=&quot;entity&quot; class=&quot;bhi-opportunity opportunity&quot;&gt;&lt;/i&gt;            &lt;h6&gt;Opportunity&lt;/h6&gt;            &lt;i theme=&quot;entity&quot; class=&quot;bhi-job job&quot;&gt;&lt;/i&gt;            &lt;h6&gt;Job&lt;/h6&gt;            &lt;i theme=&quot;entity&quot; class=&quot;bhi-star placement&quot;&gt;&lt;/i&gt;            &lt;h6&gt;Placement&lt;/h6&gt;</code></pre>
-    <h2>Contained Icons</h2>
     <h5>Scaling</h5>
     <p>Make sure to scale the corner radius appropriately when enlarging or decreasing the size of the icon.</p>
-    <p><img src="assets/images/IconographyScalingDont.svg" alt="" /></p>
-    <p>That doesn't look like a rectangle</p>
-    <p><img src="assets/images/IconographyScalingDo.svg" alt="" /></p>
-    <p>Always maintain the proportions</p>
+    <novo-grid columns="2">
+      <figure-example theme="success">
+        <img src="assets/images/IconographyScalingDo.svg" />
+        <novo-label> <novo-icon color="success">check-circle-filled</novo-icon> DO </novo-label>
+        <novo-text>Always maintain the proportions</novo-text>
+      </figure-example>
+      <figure-example theme="negative">
+        <img src="assets/images/IconographyScalingDont.svg" />
+        <novo-label> <novo-icon color="negative">close</novo-icon> DON'T </novo-label>
+        <novo-text>That doesn't look like a rectangle</novo-text>
+      </figure-example></novo-grid
+    >
     <h5>Padding</h5>
     <p>
       To preserve readability, icons should have sufficient padding from the edges of their containers. Additionally, the icons should be
       visually centered in their containers.
     </p>
-    <p><img src="assets/images/IconographyPaddingDont.svg" alt="" /></p>
-    <p>It's getting crowded in here</p>
-    <p><img src="assets/images/IconographyPaddingDo.svg" alt="" /></p>
-    <p>It's good to have some breathing room</p>
-    <h5>Examples</h5>
-    <h1>Heading One</h1>
-    <h2>Heading Two</h2>
-    <h3>Heading Three</h3>
-    <h4>Heading Four</h4>
-    <h5>Heading Five</h5>
-    <h6>Heading Six</h6>
-    <pre><code>            &lt;h1&gt;&lt;i theme=&quot;contained&quot; class=&quot;bhi-lead lead&quot;&gt;&lt;/i&gt;Heading One&lt;/h1&gt;            &lt;h2&gt;&lt;i theme=&quot;contained&quot; class=&quot;bhi-person contact&quot;&gt;&lt;/i&gt;Heading Two&lt;/h2&gt;            &lt;h3&gt;&lt;i theme=&quot;contained&quot; class=&quot;bhi-company company&quot;&gt;&lt;/i&gt;Heading Three&lt;/h3&gt;            &lt;h4&gt;&lt;i theme=&quot;contained&quot; class=&quot;bhi-candidate candidate&quot;&gt;&lt;/i&gt;Heading Four&lt;/h4&gt;            &lt;h5&gt;&lt;i theme=&quot;contained&quot; class=&quot;bhi-opportunity opportunity&quot;&gt;&lt;/i&gt;Heading Five&lt;/h5&gt;            &lt;h6&gt;&lt;i theme=&quot;contained&quot; class=&quot;bhi-job job&quot;&gt;&lt;/i&gt;Heading Six&lt;/h6&gt;</code></pre>`,
+    <novo-grid columns="2">
+      <figure-example theme="success">
+        <img src="assets/images/IconographyPaddingDo.svg" />
+        <novo-label> <novo-icon color="success">check-circle-filled</novo-icon> DO </novo-label>
+        <novo-text>It's good to have some breathing room</novo-text>
+      </figure-example>
+      <figure-example theme="negative">
+        <img src="assets/images/IconographyPaddingDont.svg" />
+        <novo-label> <novo-icon color="negative">close</novo-icon> DON'T </novo-label> <novo-text>It's getting crowded in here</novo-text>
+      </figure-example></novo-grid
+    >`,
 })
-export class IconographyPage {}
+export class IconographyPage {
+  public params: any = {};
+}
+
+@Component({
+  selector: 'spacing-page',
+  template: `<h1>Spacing</h1>
+    <h2>WIP</h2>
+    <p>to be written</p>`,
+})
+export class SpacingPage {
+  public params: any = {};
+}
 
 @Component({
   selector: 'typography-page',
@@ -745,7 +783,7 @@ export class IconographyPage {}
     </p>
     <p><a href="https://www.google.com/fonts/specimen/Roboto">Roboto Typeface on Google Fonts</a></p>
     <p><img src="assets/images/TypographyPageIcon.svg" alt="" /></p>
-    <h6>Design Principle: Clarity</h6>
+    <h3>Design Principle: Clarity</h3>
     <p>
       Proper line length, adequate white space, and appropriate line breaks are necessary to preserve readability, rhythm, and overall
       clarity.
@@ -766,35 +804,47 @@ export class IconographyPage {}
       minim veniam, quis nostrud exercitation ullamco labor.
     </p>
     <p>I'm losing focus with all this space</p>
-    <h6>Design Principle: Balance</h6>
+    <h3>Design Principle: Balance</h3>
     <p>
       Typographic balance is critical to readability and understanding information hierarchy. The weight and size of the font helps
       determine which element on a page receives a user’s attention first.
     </p>
     <h5>Line Length</h5>
     <hr />
-    <p>30</p>
-    <p>Short lines interrupt the reader's rhythm</p>
     <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-      minim veniam, quis nostrud exercitation ullamco labor.
+      In general when determinining readability we try to stay within the optimal line length of <strong>55-75</strong> characters, this
+      varies based on the layout the text is contained within as well as the size of the font. Becauase of the condensed nature of the data
+      we generally present most common is for the text to fill its container but when necessary we apply these principles.
     </p>
-    <hr />
-    <p>55-75</p>
-    <p>Optimal line length for readability</p>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-      minim veniam, quis nostrud exercitation ullamco labor.
-    </p>
-    <hr />
-    <p>100</p>
-    <p>Difficult to jump to the next line</p>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-      minim veniam, quis nostrud exercitation ullamco labor. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-      incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco labor.
-    </p>
-    <h6>How does this work with responsive design?</h6>
+    <ul>
+      <li>🚫 <strong>30</strong> Short lines interrupt the reader's rhythm</li>
+      <li>✅ <strong>55-75</strong> Optimal line length for readability</li>
+      <li>🚫 <strong>100</strong> Difficult to jump to the next line</li>
+    </ul>
+    <typedef-example>
+      <typedef-content>
+        <novo-text [lineLength]="lineLength.value">
+          The Highland (Scottish Gaelic: Bò Ghàidhealach; Scots: Hielan coo) is a Scottish breed of rustic cattle. It originated in the
+          <novo-link>Scottish Highlands</novo-link> and the Outer Hebrides islands of Scotland and has long horns and a long shaggy coat. It
+          is a hardy breed, bred to withstand the intemperate conditions in the region. The first herd-book dates from 1885; two different
+          types – a smaller island type, usually black, and a larger mainland type, usually dun – were registered as a single breed. It is
+          reared primarily for beef, and has been exported to several other countries.<sup>[1]</sup>
+        </novo-text>
+      </typedef-content>
+      <typedef-specs>
+        <novo-label>Line Length</novo-label>
+        <novo-radio-group #lineLength appearance="vertical">
+          <novo-radio name="length" value="small">small (40)</novo-radio>
+          <novo-radio checked name="length" value="medium">medium (55)</novo-radio>
+          <novo-radio name="length" value="large">large (70)</novo-radio>
+        </novo-radio-group>
+      </typedef-specs>
+      <typedef-snippet>
+        <code class="tc-positive">&lt;novo-text&gt;...&lt;/novo-text&gt;</code> or
+        <code class="tc-negative">@include novo-body-text-medium()</code>
+      </typedef-snippet></typedef-example
+    >
+    <h5>How does this work with responsive design?</h5>
     <p>
       Line length is always relative to its font-size. This means that if a font scales up or down in sizing (relative to its device's
       screen size) the line length will automatically scale with it. Line length is about maintaining a comfortable reading flow and rhythm
@@ -809,47 +859,160 @@ export class IconographyPage {}
       There a number of general styles that are present throughout the application. To maintain consistency, these styles should be adhered
       to as much as possible.
     </p>
-    <h1>Header 1</h1>
+    <h3>Body Text</h3>
     <p>
-      Roboto <strong>Size:</strong> 2.5em (35px) <strong>Weight:</strong> 400 <strong>Margin:</strong> 0 <strong>Padding:</strong> 0.45em 0
-      0.35em
+      Body text is available in three different sizes. Use body text to present the bulk of a page’s content. All body text uses a line
+      height of 1.375 relative to the font size.
     </p>
-    <h2>Header 2</h2>
+    <typedef-example>
+      <typedef-content>
+        <novo-text>
+          The Highland (Scottish Gaelic: Bò Ghàidhealach; Scots: Hielan coo) is a Scottish breed of rustic cattle. It originated in the
+          <novo-link>Scottish Highlands</novo-link> and the Outer Hebrides islands of Scotland and has long horns and a long shaggy coat. It
+          is a hardy breed, bred to withstand the intemperate conditions in the region. The first herd-book dates from 1885; two different
+          types – a smaller island type, usually black, and a larger mainland type, usually dun – were registered as a single breed. It is
+          reared primarily for beef, and has been exported to several other countries.<sup>[1]</sup>
+        </novo-text>
+      </typedef-content>
+      <typedef-specs>
+        <novo-label>Body Medium</novo-label>
+        <dl>
+          <dt>Font Size</dt>
+          <dd>1.2rem</dd>
+          <dt>Line Height</dt>
+          <dd>1.375 (28px)</dd>
+          <dt>Font Weight</dt>
+          <dd>300</dd>
+          <dt>Max Line Length</dt>
+          <dd>550px</dd>
+        </dl>
+      </typedef-specs>
+      <typedef-snippet>
+        <code class="tc-positive">&lt;novo-text&gt;...&lt;/novo-text&gt;</code> or
+        <code class="tc-negative">@include novo-body-text-medium()</code>
+      </typedef-snippet></typedef-example
+    ><typedef-example>
+      <typedef-content>
+        <novo-text size="large">
+          The Highland (Scottish Gaelic: Bò Ghàidhealach; Scots: Hielan coo) is a Scottish breed of rustic cattle. It originated in the
+          <novo-link>Scottish Highlands</novo-link> and the Outer Hebrides islands of Scotland and has long horns and a long shaggy coat. It
+          is a hardy breed, bred to withstand the intemperate conditions in the region. The first herd-book dates from 1885; two different
+          types – a smaller island type, usually black, and a larger mainland type, usually dun – were registered as a single breed. It is
+          reared primarily for beef, and has been exported to several other countries.<sup>[1]</sup>
+        </novo-text>
+      </typedef-content>
+      <typedef-specs>
+        <novo-label>Body Large</novo-label>
+        <dl>
+          <dt>Font Size</dt>
+          <dd>1.2rem</dd>
+          <dt>Line Height</dt>
+          <dd>1.375 (28px)</dd>
+          <dt>Font Weight</dt>
+          <dd>300</dd>
+          <dt>Max Line Length</dt>
+          <dd>550px</dd>
+        </dl>
+      </typedef-specs>
+      <typedef-snippet>
+        <code class="tc-positive">&lt;novo-text size="large"&gt;...&lt;/novo-text&gt;</code> or
+        <code class="tc-negative">@include novo-body-text-large()</code>
+      </typedef-snippet></typedef-example
+    ><typedef-example>
+      <typedef-content>
+        <novo-text size="small">
+          The Highland (Scottish Gaelic: Bò Ghàidhealach; Scots: Hielan coo) is a Scottish breed of rustic cattle. It originated in the
+          <novo-link>Scottish Highlands</novo-link> and the Outer Hebrides islands of Scotland and has long horns and a long shaggy coat. It
+          is a hardy breed, bred to withstand the intemperate conditions in the region. The first herd-book dates from 1885; two different
+          types – a smaller island type, usually black, and a larger mainland type, usually dun – were registered as a single breed. It is
+          reared primarily for beef, and has been exported to several other countries.<sup>[1]</sup>
+        </novo-text>
+      </typedef-content>
+      <typedef-specs>
+        <novo-label>Body Large</novo-label>
+        <dl>
+          <dt>Font Size</dt>
+          <dd>1.2rem</dd>
+          <dt>Line Height</dt>
+          <dd>1.375 (28px)</dd>
+          <dt>Font Weight</dt>
+          <dd>300</dd>
+          <dt>Max Line Length</dt>
+          <dd>550px</dd>
+        </dl>
+      </typedef-specs>
+      <typedef-snippet>
+        <code class="tc-positive">&lt;novo-text size="small"&gt;...&lt;/novo-text&gt;</code> or
+        <code class="tc-negative">@include novo-body-text-small()</code>
+      </typedef-snippet></typedef-example
+    >
+    <h3>Title Text</h3>
     <p>
-      Roboto <strong>Size:</strong> 2em (28px) <strong>Weight:</strong> 500 <strong>Margin:</strong> 0 <strong>Padding:</strong> 0.75em 0
-      0.3em
+      Titles are available in six different sizes. To create an optical balance between the six levels, titles are set in two weights:
+      Condensed Thin and Condensed Light. All titles use a line height of 1.2 relative to the font size.
     </p>
-    <h3>Header 3</h3>
     <p>
-      Roboto <strong>Size:</strong> 1.75em (24px) <strong>Weight:</strong> 300 <strong>Margin:</strong> 0 <strong>Padding:</strong> 0.6em 0
-      0.4em
+      Title mixins and constants can be applied to any HTML element, but we recommend using &lt;h1&gt; through &lt;h6&gt; elements for
+      titles to ensure markup is semantic and accessible.
     </p>
-    <h4>Header 4</h4>
-    <p>
-      Roboto <strong>Size:</strong> 1.375em (19.25px) <strong>Weight:</strong> 400 <strong>Margin:</strong> 0
-      <strong>Padding:</strong> 0.75em 0 0.5em
-    </p>
-    <h5>Header 5</h5>
-    <p>
-      Roboto <strong>Size:</strong> 1.125em (15.75px) <strong>Weight:</strong> 700 <strong>Margin:</strong> 0
-      <strong>Padding:</strong> 0.75em 0 0.25em <strong>Transform:</strong> UPPERCASE
-    </p>
-    <h6>Header 6</h6>
-    <p>
-      Roboto <strong>Size:</strong> 1.125em (15.75px) <strong>Weight:</strong> 500 <strong>Margin:</strong> 0
-      <strong>Padding:</strong> 0.75em 0 0.25em
-    </p>
-    <p>Caption</p>
-    <h4>Section Header</h4>
-    <h2>Large Section Header with Icon</h2>
-    <h6>Small Section Header with Icon</h6>
-    <pre><code>        &lt;h1&gt;Heading 1&lt;/h1&gt;        &lt;h2&gt;Heading 2&lt;/h2&gt;        &lt;h3&gt;Heading 3&lt;/h3&gt;        &lt;h4&gt;Heading 4&lt;/h4&gt;        &lt;h5&gt;Heading 5&lt;/h5&gt;        &lt;h6&gt;Heading 6&lt;/h6&gt;        &lt;p&gt;        Body        &lt;/p&gt;        &lt;hr&gt;        &lt;span class=&quot;caption&quot;&gt;Caption&lt;/span&gt;        &lt;h4 class=&quot;novo-section-header&quot;&gt;Section Header&lt;/h4&gt;        &lt;h2 class=&quot;novo-section-header&quot;&gt;          &lt;i class=&quot;bhi-section&quot;&gt;          Large Section Header with Icon        &lt;/h2&gt;        &lt;h6 class=&quot;novo-section-header&quot;&gt;          &lt;i class=&quot;bhi-idea&quot;&gt;          Small Section Header with Icon        &lt;/h6&gt;</code></pre>
-    <h2>Title Text</h2>
-    <p>These are the base colors of the application.</p>
-    <p><code-example example="title"></code-example></p>
-    <h2>Body Text</h2>
-    <p>These are the base colors of the application.</p>
-    <p><code-example example="text"></code-example></p>
+    <typedef-example>
+      <typedef-content> <novo-title> Creating an incredible customer experience </novo-title> </typedef-content>
+      <typedef-specs>
+        <novo-label>Title Medium</novo-label>
+        <dl>
+          <dt>Font Size</dt>
+          <dd>1.2rem</dd>
+          <dt>Line Height</dt>
+          <dd>1.375 (28px)</dd>
+          <dt>Font Weight</dt>
+          <dd>300</dd>
+          <dt>Max Line Length</dt>
+          <dd>550px</dd>
+        </dl>
+      </typedef-specs>
+      <typedef-snippet>
+        <code class="tc-positive">&lt;novo-title&gt;...&lt;/novo-title&gt;</code> or
+        <code class="tc-negative">@include novo-title-text-medium()</code>
+      </typedef-snippet></typedef-example
+    ><typedef-example>
+      <typedef-content> <novo-title size="large"> Creating an incredible customer experience </novo-title> </typedef-content>
+      <typedef-specs>
+        <novo-label>Title Large</novo-label>
+        <dl>
+          <dt>Font Size</dt>
+          <dd>1.2rem</dd>
+          <dt>Line Height</dt>
+          <dd>1.375 (28px)</dd>
+          <dt>Font Weight</dt>
+          <dd>300</dd>
+          <dt>Max Line Length</dt>
+          <dd>550px</dd>
+        </dl>
+      </typedef-specs>
+      <typedef-snippet>
+        <code class="tc-positive">&lt;novo-title size="large"&gt;...&lt;/novo-title&gt;</code> or
+        <code class="tc-negative">@include novo-title-text-large()</code>
+      </typedef-snippet></typedef-example
+    ><typedef-example>
+      <typedef-content> <novo-title size="small"> Creating an incredible customer experience </novo-title> </typedef-content>
+      <typedef-specs>
+        <novo-label>Title Small</novo-label>
+        <dl>
+          <dt>Font Size</dt>
+          <dd>1.2rem</dd>
+          <dt>Line Height</dt>
+          <dd>1.375 (28px)</dd>
+          <dt>Font Weight</dt>
+          <dd>300</dd>
+          <dt>Max Line Length</dt>
+          <dd>550px</dd>
+        </dl>
+      </typedef-specs>
+      <typedef-snippet>
+        <code class="tc-positive">&lt;novo-title size="small"&gt;...&lt;/novo-title&gt;</code> or
+        <code class="tc-negative">@include novo-title-text-small()</code>
+      </typedef-snippet></typedef-example
+    >
     <h2>Label Text</h2>
     <p>These are the base colors of the application.</p>
     <p><code-example example="label"></code-example></p>
@@ -860,7 +1023,9 @@ export class IconographyPage {}
     <p>These are the base colors of the application.</p>
     <p><code-example example="link"></code-example></p>`,
 })
-export class TypographyPage {}
+export class TypographyPage {
+  public params: any = {};
+}
 
 @Component({
   selector: 'chips-page',
@@ -907,7 +1072,9 @@ export class TypographyPage {}
     </p>
     <p><code-example example="row-chips"></code-example></p>`,
 })
-export class ChipsPage {}
+export class ChipsPage {
+  public params: any = {};
+}
 
 @Component({
   selector: 'color-picker-page',
@@ -923,7 +1090,9 @@ export class ChipsPage {}
     <h5>Color Input Example</h5>
     <p><code-example example="color-input"></code-example></p>`,
 })
-export class ColorPickerPage {}
+export class ColorPickerPage {
+  public params: any = {};
+}
 
 @Component({
   selector: 'date-picker-page',
@@ -956,7 +1125,9 @@ export class ColorPickerPage {}
     <h5>Different Locale</h5>
     <p>TBD</p>`,
 })
-export class DatePickerPage {}
+export class DatePickerPage {
+  public params: any = {};
+}
 
 @Component({
   selector: 'editor-page',
@@ -969,14 +1140,18 @@ export class DatePickerPage {}
     <h5>Minimal Example</h5>
     <p><code-example example="minimal-editor"></code-example></p>`,
 })
-export class EditorPage {}
+export class EditorPage {
+  public params: any = {};
+}
 
 @Component({
   selector: 'form-controls-page',
   template: `<h1>Form Controls</h1>
     <p>This is a landing page</p>`,
 })
-export class FormControlsPage {}
+export class FormControlsPage {
+  public params: any = {};
+}
 
 @Component({
   selector: 'form-groups-page',
@@ -996,7 +1171,9 @@ export class FormControlsPage {}
     <h5>Custom Template (you control everything!)</h5>
     <p><code-example example="custom-template"></code-example></p>`,
 })
-export class FormGroupsPage {}
+export class FormGroupsPage {
+  public params: any = {};
+}
 
 @Component({
   selector: 'form-page',
@@ -1039,7 +1216,9 @@ export class FormGroupsPage {}
     <h5>Enable/Disable All Fields in Form</h5>
     <p><code-example example="enable-disable-all-fields-in-form"></code-example></p>`,
 })
-export class FormPage {}
+export class FormPage {
+  public params: any = {};
+}
 
 @Component({
   selector: 'multi-picker-page',
@@ -1066,7 +1245,9 @@ export class FormPage {}
     </p>
     <p><code-example example="nested-multi-picker"></code-example></p>`,
 })
-export class MultiPickerPage {}
+export class MultiPickerPage {
+  public params: any = {};
+}
 
 @Component({
   selector: 'picker-page',
@@ -1120,7 +1301,9 @@ export class MultiPickerPage {}
     <p>Having custom templates makes it easy to customize the functionality of the picker, here is an example of a category selector</p>
     <p><code-example example="grouped-picker"></code-example></p>`,
 })
-export class PickerPage {}
+export class PickerPage {
+  public params: any = {};
+}
 
 @Component({
   selector: 'radio-buttons-page',
@@ -1137,7 +1320,9 @@ export class PickerPage {}
     <h5>Icon Radio</h5>
     <p><code-example example="icon-radio"></code-example></p>`,
 })
-export class RadioButtonsPage {}
+export class RadioButtonsPage {
+  public params: any = {};
+}
 
 @Component({
   selector: 'select-page',
@@ -1167,7 +1352,9 @@ export class RadioButtonsPage {}
     </p>
     <p><code-example example="multiple-select"></code-example></p>`,
 })
-export class SelectPage {}
+export class SelectPage {
+  public params: any = {};
+}
 
 @Component({
   selector: 'tiles-page',
@@ -1179,7 +1366,9 @@ export class SelectPage {}
     <p><code-example example="tiles-usage"></code-example></p>
     <h4>Code</h4>`,
 })
-export class TilesPage {}
+export class TilesPage {
+  public params: any = {};
+}
 
 @Component({
   selector: 'value-page',
@@ -1225,7 +1414,9 @@ export class TilesPage {}
     <p>Render multi option fields (Checkbox, radio, etc.)</p>
     <p><code-example example="multi-option-value"></code-example></p>`,
 })
-export class ValuePage {}
+export class ValuePage {
+  public params: any = {};
+}
 
 @Component({
   selector: 'home-page',
@@ -1251,7 +1442,9 @@ export class ValuePage {}
     <p>Are you a developer and what to skip right to the code?<br /><a href="#">View Components here</a></p>
     <p>Looking for the Bullhorn corporate brand guidelines?<br /><a href="https://brandfolder.com/bullhorn">Bullhorn Brand Folder</a></p>`,
 })
-export class HomePage {}
+export class HomePage {
+  public params: any = {};
+}
 
 @Component({
   selector: 'cards-page',
@@ -1267,7 +1460,9 @@ export class HomePage {}
     <h2>Card with Image</h2>
     <p><code-example example="card-with-image"></code-example></p>`,
 })
-export class CardsPage {}
+export class CardsPage {
+  public params: any = {};
+}
 
 @Component({
   selector: 'expansion-page',
@@ -1297,7 +1492,9 @@ export class CardsPage {}
     <h5>Patterns</h5>
     <p>Check out the <a routerLink="/patterns">Activity Section</a> pattern</p>`,
 })
-export class ExpansionPage {}
+export class ExpansionPage {
+  public params: any = {};
+}
 
 @Component({
   selector: 'header-page',
@@ -1317,14 +1514,18 @@ export class ExpansionPage {}
     <h5>With Search</h5>
     <p><code-example example="header-searchbar"></code-example></p>`,
 })
-export class HeaderPage {}
+export class HeaderPage {
+  public params: any = {};
+}
 
 @Component({
   selector: 'layouts-page',
   template: `<h1>Layouts</h1>
     <p>This is a landing page</p>`,
 })
-export class LayoutsPage {}
+export class LayoutsPage {
+  public params: any = {};
+}
 
 @Component({
   selector: 'list-page',
@@ -1343,7 +1544,9 @@ export class LayoutsPage {}
     <p>This is an example of a themed list.</p>
     <p><code-example example="themed-list"></code-example></p>`,
 })
-export class ListPage {}
+export class ListPage {
+  public params: any = {};
+}
 
 @Component({
   selector: 'sidenav-page',
@@ -1355,7 +1558,9 @@ export class ListPage {}
     <h2>Basic SideNav (using attributes)</h2>
     <p><code-example example="basic-sidenav"></code-example></p>`,
 })
-export class SidenavPage {}
+export class SidenavPage {
+  public params: any = {};
+}
 
 @Component({
   selector: 'stepper-page',
@@ -1391,7 +1596,9 @@ export class SidenavPage {}
     <p>This is an alternative stepper great for many other reasons.</p>
     <p><code-example example="stepper-vertical"></code-example></p>`,
 })
-export class StepperPage {}
+export class StepperPage {
+  public params: any = {};
+}
 
 @Component({
   selector: 'tabs-page',
@@ -1428,7 +1635,9 @@ export class StepperPage {}
     </p>
     <p><code-example example="tabs-router"></code-example></p>`,
 })
-export class TabsPage {}
+export class TabsPage {
+  public params: any = {};
+}
 
 @Component({
   selector: 'patterns-page',
@@ -1450,7 +1659,9 @@ export class TabsPage {}
     <p>Displaying a form inside a cards, used for email &amp; sms messages</p>
     <p><code-example example="card-form"></code-example></p>`,
 })
-export class PatternsPage {}
+export class PatternsPage {
+  public params: any = {};
+}
 
 @Component({
   selector: 'templates-page',
@@ -1461,7 +1672,9 @@ export class PatternsPage {}
       started building custom apps using Novo Elements.
     </p>`,
 })
-export class TemplatesPage {}
+export class TemplatesPage {
+  public params: any = {};
+}
 
 @Component({
   selector: 'aside-page',
@@ -1487,7 +1700,9 @@ export class TemplatesPage {}
     </p>
     <p><code-example example="aside-form"></code-example></p>`,
 })
-export class AsidePage {}
+export class AsidePage {
+  public params: any = {};
+}
 
 @Component({
   selector: 'chomsky-page',
@@ -1520,7 +1735,9 @@ export class AsidePage {}
     <h5>Translation with Pluralization and Gender</h5>
     <p><code-example example="plural-translations"></code-example></p>`,
 })
-export class ChomskyPage {}
+export class ChomskyPage {
+  public params: any = {};
+}
 
 @Component({
   selector: 'field-interactions-page',
@@ -1620,7 +1837,9 @@ export class ChomskyPage {}
     <p>You are able to dynamically change a field's tooltip.</p>
     <p><code-example example="fi-tooltip"></code-example></p>`,
 })
-export class FieldInteractionsPage {}
+export class FieldInteractionsPage {
+  public params: any = {};
+}
 
 @Component({
   selector: 'modal-page',
@@ -1671,7 +1890,9 @@ export class FieldInteractionsPage {}
     </p>
     <p><code-example example="modal-edit-form"></code-example></p>`,
 })
-export class ModalPage {}
+export class ModalPage {
+  public params: any = {};
+}
 
 @Component({
   selector: 'pipes-page',
@@ -1681,7 +1902,9 @@ export class ModalPage {}
     <p>Makes works plural or vice-versa</p>
     <p><code-example example="pluralize"></code-example></p>`,
 })
-export class PipesPage {}
+export class PipesPage {
+  public params: any = {};
+}
 
 @Component({
   selector: 'pop-over-page',
@@ -1705,7 +1928,9 @@ export class PipesPage {}
     <h5>Automatic Placement of PopOver</h5>
     <p><code-example example="pop-over-auto-placement"></code-example></p>`,
 })
-export class PopOverPage {}
+export class PopOverPage {
+  public params: any = {};
+}
 
 @Component({
   selector: 'security-page',
@@ -1715,7 +1940,9 @@ export class PopOverPage {}
     <p>blah blah blah</p>
     <p><code-example example="security"></code-example></p>`,
 })
-export class SecurityPage {}
+export class SecurityPage {
+  public params: any = {};
+}
 
 @Component({
   selector: 'tip-well-page',
@@ -1732,7 +1959,9 @@ export class SecurityPage {}
     <h4>HTML Demo</h4>
     <p><code-example example="html-tip-well"></code-example></p>`,
 })
-export class TipWellPage {}
+export class TipWellPage {
+  public params: any = {};
+}
 
 @Component({
   selector: 'toaster-page',
@@ -1754,7 +1983,9 @@ export class TipWellPage {}
     <h2>Toaster Actions</h2>
     <p><code-example example="toast-actions"></code-example></p>`,
 })
-export class ToasterPage {}
+export class ToasterPage {
+  public params: any = {};
+}
 
 @Component({
   selector: 'tooltip-page',
@@ -1776,7 +2007,9 @@ export class ToasterPage {}
     <h5>Toggle Trigger</h5>
     <p><code-example example="tooltip-toggle"></code-example></p>`,
 })
-export class TooltipPage {}
+export class TooltipPage {
+  public params: any = {};
+}
 
 const routes: Routes = [
   //{ path: '', component: Home, data: {} },
@@ -1809,6 +2042,7 @@ const routes: Routes = [
   { path: 'design/composition', component: CompositionPage, data: { title: 'Composition', section: 'design' } },
   { path: 'design', component: DesignPage, data: { title: 'Design', section: 'src' } },
   { path: 'design/iconography', component: IconographyPage, data: { title: 'Iconography', section: 'design' } },
+  { path: 'design/spacing', component: SpacingPage, data: { title: 'Spacing', section: 'design' } },
   { path: 'design/typography', component: TypographyPage, data: { title: 'Typography', section: 'design' } },
   { path: 'form-controls/chips', component: ChipsPage, data: { title: 'Chips', section: 'form-controls' } },
   { path: 'form-controls/color-picker', component: ColorPickerPage, data: { title: 'Color Picker', section: 'form-controls' } },
@@ -1874,6 +2108,7 @@ export const PAGE_LIST = [
   CompositionPage,
   DesignPage,
   IconographyPage,
+  SpacingPage,
   TypographyPage,
   ChipsPage,
   ColorPickerPage,
@@ -1914,7 +2149,7 @@ export const PAGE_LIST = [
 @NgModule({
   declarations: PAGE_LIST,
   entryComponents: PAGE_LIST,
-  imports: [RouterModule.forRoot(routes, { useHash: true }), NovoExamplesModule, NovoExamplesSharedModule],
+  imports: [RouterModule.forRoot(routes, { useHash: true }), NovoElementsModule, NovoExamplesModule, NovoExamplesSharedModule],
   exports: [RouterModule],
 })
 export class NovoExamplesRoutesModule {}

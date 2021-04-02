@@ -1,6 +1,6 @@
 import { Directive, ElementRef, HostBinding, Input } from '@angular/core';
 import { BooleanInput } from '../../../../utils';
-import { TypographySize, TypographyWeight } from '../text.types';
+import { TypographyLength, TypographySize, TypographyWeight } from '../text.types';
 
 @Directive()
 export class NovoBaseTextElement {
@@ -8,6 +8,8 @@ export class NovoBaseTextElement {
   size: TypographySize;
   @Input()
   weight: TypographyWeight;
+  @Input()
+  lineLength: TypographyLength;
   @Input()
   color: string;
 
@@ -47,8 +49,10 @@ export class NovoBaseTextElement {
   }
 
   @HostBinding('class')
-  get hb_color(): string {
-    return this.color ? `text-color-${this.color}` : '';
+  get hb_classBinding(): string {
+    return [this.color ? `text-color-${this.color}` : null, this.lineLength ? `text-length-${this.lineLength}` : null]
+      .filter(Boolean)
+      .join(' ');
   }
 
   @HostBinding('class.text-disabled')

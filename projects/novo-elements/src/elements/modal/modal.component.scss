@@ -9,7 +9,7 @@ novo-modal {
   }
 
   & > section {
-    padding: 1em 3em;
+    padding: $spacing-md $spacing-xl;
     max-height: 500px;
     overflow: auto;
   }
@@ -17,7 +17,7 @@ novo-modal {
   & > footer {
     display: flex;
     align-items: center;
-    padding: 0.5em;
+    padding: $spacing-sm;
 
     button {
       width: 50%;
@@ -35,7 +35,7 @@ novo-modal {
 
 novo-notification {
   text-align: center;
-  padding: 0.5em;
+  padding: $spacing-sm;
 
   & > section {
     text-align: center;
@@ -46,7 +46,7 @@ novo-modal,
 novo-notification {
   display: block;
   background-color: #fff;
-  margin-bottom: 1em;
+  margin-bottom: $spacing-md;
   border-radius: 4px;
   box-shadow: 0 1px 7px rgba(0, 0, 0, 0.09), 0 1px 3px rgba(0, 0, 0, 0.2);
   z-index: 1000;
@@ -56,8 +56,8 @@ novo-notification {
 
   & > button.modal-close {
     position: absolute;
-    right: 10px;
-    top: 10px;
+    right: $spacing-sm;
+    top: $spacing-sm;
   }
 
   & > header {
@@ -110,16 +110,6 @@ novo-notification {
 
     button {
       flex: 1;
-
-      //   .flex-wrapper {
-      //     justify-content: center !important;
-      //   }
-
-      //   &[theme='primary'] {
-      //     .flex-wrapper {
-      //       justify-content: center !important;
-      //     }
-      //   }
     }
   }
 
@@ -175,8 +165,8 @@ novo-notification {
 
 novo-notification {
   & > section {
-    padding: 0 20px;
-    margin: 15px 0 55px;
+    padding: 0 $spacing-xl;
+    margin: $spacing-lg 0 55px;
 
     h1 {
       margin: 10px auto 0;

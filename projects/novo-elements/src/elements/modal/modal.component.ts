@@ -17,7 +17,7 @@ export class NovoModalElement {
 @Component({
   selector: 'novo-notification',
   template: `
-    <button class="modal-close" theme="icon" icon="times" (click)="close()"></button>
+    <button class="modal-close" theme="icon" icon="x" (click)="close()"></button>
     <header><ng-content select="label"></ng-content></header>
     <section class="notification-body">
       <i class="indicator" [ngClass]="iconType" *ngIf="iconType"></i>

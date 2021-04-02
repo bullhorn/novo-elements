@@ -1,14 +1,14 @@
 novo-tip-well {
   &.active {
     display: inline-block;
-    margin-bottom: 1rem;
+    margin-bottom: $spacing-md;
   }
   > div {
     display: inline-block;
     border-radius: 0.25rem;
     background-color: $off-white;
     color: $dark;
-    padding: 1rem;
+    padding: $spacing-md;
     text-align: right;
     > div {
       display: flex;
@@ -16,7 +16,7 @@ novo-tip-well {
         flex-shrink: 0;
         text-align: center;
         margin-top: 0.3rem;
-        margin-right: 1rem;
+        margin-right: $spacing-md;
         color: #aaaaaa;
       }
       > p {
