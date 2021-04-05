@@ -145,8 +145,3 @@ You are able to dynamically change a field's tooltip.
 
 <code-example example="fi-tooltip"></code-example>
 
-##### Interacting with Nested Forms
-
-Field Interactions can navigate nested forms to interact with parent and child forms. This example uses the Form Group component which contains an array of nested forms that are kept in sync by field interactions.
-
-<code-example example="fi-nested"></code-example>

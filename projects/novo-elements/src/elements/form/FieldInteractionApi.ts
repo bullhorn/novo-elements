@@ -1,23 +1,22 @@
 // NG2
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { FormArray } from '@angular/forms';
-// Vendor
 import { Subscription } from 'rxjs';
+// Vendor
 import { map } from 'rxjs/operators';
-// APP
-import { Helpers } from '../../utils/Helpers';
+import { NovoLabelService } from '../../services/novo-label-service';
 import { AppBridge } from '../../utils/app-bridge/AppBridge';
 import { FormUtils } from '../../utils/form-utils/FormUtils';
-import { NovoLabelService } from '../../services/novo-label-service';
-import { NovoFormControl } from './NovoFormControl';
+import { Helpers } from '../../utils/Helpers';
 import { NovoModalService } from '../modal/ModalService';
 import { EntityPickerResults } from '../picker/extras/entity-picker-results/EntityPickerResults';
 import { NovoToastService, ToastOptions } from '../toast/ToastService';
 import { CustomHttp, ModifyPickerConfigArgs, OptionsFunction } from './FieldInteractionApiTypes';
 import { ControlConfirmModal, ControlPromptModal } from './FieldInteractionModals';
 import { NovoControlConfig } from './FormControls';
-import { IFieldInteractionEvent, NovoFieldset, NovoFormGroup, ResultsTemplateType } from './FormInterfaces';
+import { IFieldInteractionEvent, NovoFieldset, ResultsTemplateType, NovoFormGroup } from './FormInterfaces';
+// APP
+import { NovoFormControl } from './NovoFormControl';
 
 class CustomHttpImpl implements CustomHttp {
   url: string;
@@ -124,14 +123,13 @@ export class FieldInteractionApi {
     return this.getInitialValue(this.currentKey);
   }
 
-  getFieldSet(key: string, otherForm?: NovoFormGroup): NovoFieldset {
+  getFieldSet(key: string): NovoFieldset {
     if (!key) {
       console.error('[FieldInteractionAPI] - invalid or missing "key"'); // tslint:disable-line
       return null;
     }
 
-    const form = otherForm || this.form;
-    const fieldSet = form.fieldsets.find((fs: NovoFieldset) => fs.key && fs.key.toLowerCase() === key.toLowerCase());
+    const fieldSet = this.form.fieldsets.find((fs: NovoFieldset) => fs.key && fs.key.toLowerCase() === key.toLowerCase());
     if (!fieldSet) {
       console.error('[FieldInteractionAPI] - could not find a fieldset in the form by the key --', key); // tslint:disable-line
       return null;
@@ -140,14 +138,13 @@ export class FieldInteractionApi {
     return fieldSet as NovoFieldset;
   }
 
-  getControl(key: string, otherForm?: NovoFormGroup) {
+  getControl(key: string) {
     if (!key) {
       console.error('[FieldInteractionAPI] - invalid or missing "key"'); // tslint:disable-line
       return null;
     }
 
-    const form = otherForm || this.form;
-    const control = form.controls[key] as NovoFormControl;
+    const control = this.form.controls[key] as NovoFormControl;
     if (!control) {
       console.error('[FieldInteractionAPI] - could not find a control in the form by the key --', key); // tslint:disable-line
       return null;
@@ -156,40 +153,24 @@ export class FieldInteractionApi {
     return control;
   }
 
-  getFormGroupArray(key: string, otherForm?: NovoFormGroup): NovoFormGroup[] {
-    if (!key) {
-      console.error('[FieldInteractionAPI] - invalid or missing "key"'); // tslint:disable-line
-      return null;
-    }
-
-    const form = otherForm || this.form;
-    const formArray = form.controls[key] as FormArray;
-    if (!formArray || !formArray.controls) {
-      console.error('[FieldInteractionAPI] - could not find a form array in the form by the key --', key); // tslint:disable-line
-      return null;
-    }
-
-    return formArray.controls as NovoFormGroup[] | any;
-  }
-
-  getValue(key: string, otherForm?: NovoFormGroup) {
-    const control = this.getControl(key, otherForm);
+  getValue(key: string) {
+    const control = this.getControl(key);
     if (control) {
       return control.value;
     }
     return null;
   }
 
-  getRawValue(key: string, otherForm?: NovoFormGroup) {
-    const control = this.getControl(key, otherForm);
+  getRawValue(key: string) {
+    const control = this.getControl(key);
     if (control) {
       return control.rawValue;
     }
     return null;
   }
 
-  getInitialValue(key: string, otherForm?: NovoFormGroup) {
-    const control = this.getControl(key, otherForm);
+  getInitialValue(key: string) {
+    const control = this.getControl(key);
     if (control) {
       return control.initialValue;
     }
@@ -205,12 +186,11 @@ export class FieldInteractionApi {
       emitModelToViewChange?: boolean;
       emitViewToModelChange?: boolean;
     },
-    otherForm?: NovoFormGroup,
   ): void {
-    const control = this.getControl(key, otherForm);
+    const control = this.getControl(key);
     if (control && !control.restrictFieldInteractions) {
       control.setValue(value, options);
-      this.triggerEvent({ controlKey: key, prop: 'value', value }, otherForm);
+      this.triggerEvent({ controlKey: key, prop: 'value', value });
     }
   }
 
@@ -223,47 +203,46 @@ export class FieldInteractionApi {
       emitModelToViewChange?: boolean;
       emitViewToModelChange?: boolean;
     },
-    otherForm?: NovoFormGroup,
   ): void {
-    const control = this.getControl(key, otherForm);
+    const control = this.getControl(key);
     if (control && !control.restrictFieldInteractions) {
       control.setValue(value, options);
-      this.triggerEvent({ controlKey: key, prop: 'value', value }, otherForm);
+      this.triggerEvent({ controlKey: key, prop: 'value', value });
     }
   }
 
-  setReadOnly(key: string, isReadOnly: boolean, otherForm?: NovoFormGroup): void {
-    const control = this.getControl(key, otherForm);
+  setReadOnly(key: string, isReadOnly: boolean): void {
+    const control = this.getControl(key);
     if (control && !control.restrictFieldInteractions) {
       control.setReadOnly(isReadOnly);
-      this.triggerEvent({ controlKey: key, prop: 'readOnly', value: isReadOnly }, otherForm);
+      this.triggerEvent({ controlKey: key, prop: 'readOnly', value: isReadOnly });
     }
   }
 
-  setRequired(key: string, required: boolean, otherForm?: NovoFormGroup): void {
-    const control = this.getControl(key, otherForm);
+  setRequired(key: string, required: boolean): void {
+    const control = this.getControl(key);
     if (control && !control.restrictFieldInteractions) {
       control.setRequired(required);
-      this.triggerEvent({ controlKey: key, prop: 'required', value: required }, otherForm);
+      this.triggerEvent({ controlKey: key, prop: 'required', value: required });
     }
   }
 
-  hide(key: string, clearValue = true, otherForm?: NovoFormGroup) {
-    const control = this.getControl(key, otherForm);
+  hide(key: string, clearValue = true) {
+    const control = this.getControl(key);
     if (control && !control.restrictFieldInteractions) {
       control.hide(clearValue);
       this.disable(key, { emitEvent: false });
-      this.triggerEvent({ controlKey: key, prop: 'hidden', value: true }, otherForm);
+      this.triggerEvent({ controlKey: key, prop: 'hidden', value: true });
     }
     return control;
   }
 
-  show(key: string, otherForm?: NovoFormGroup): void {
-    const control = this.getControl(key, otherForm);
+  show(key: string): void {
+    const control = this.getControl(key);
     if (control && !control.restrictFieldInteractions) {
       control.show();
       this.enable(key, { emitEvent: false });
-      this.triggerEvent({ controlKey: key, prop: 'hidden', value: false }, otherForm);
+      this.triggerEvent({ controlKey: key, prop: 'hidden', value: false });
     }
   }
 
@@ -287,12 +266,11 @@ export class FieldInteractionApi {
       onlySelf?: boolean;
       emitEvent?: boolean;
     },
-    otherForm?: NovoFormGroup,
   ): void {
-    const control = this.getControl(key, otherForm);
+    const control = this.getControl(key);
     if (control && !control.restrictFieldInteractions) {
       control.disable(options);
-      this.triggerEvent({ controlKey: key, prop: 'readOnly', value: true }, otherForm);
+      this.triggerEvent({ controlKey: key, prop: 'readOnly', value: true });
     }
   }
 
@@ -302,31 +280,19 @@ export class FieldInteractionApi {
       onlySelf?: boolean;
       emitEvent?: boolean;
     },
-    otherForm?: NovoFormGroup,
   ): void {
-    const control = this.getControl(key, otherForm);
+    const control = this.getControl(key);
     if (control && !control.restrictFieldInteractions) {
       control.enable(options);
-      this.triggerEvent({ controlKey: key, prop: 'readOnly', value: false }, otherForm);
+      this.triggerEvent({ controlKey: key, prop: 'readOnly', value: false });
     }
   }
 
-  markAsInvalid(key: string, validationMessage?: string, otherForm?: NovoFormGroup): void {
-    const control = this.getControl(key, otherForm);
+  markAsInvalid(key: string, validationMessage?: string): void {
+    const control = this.getControl(key);
     if (control) {
       if (control && !control.restrictFieldInteractions) {
         control.markAsInvalid(validationMessage);
-        this.triggerEvent({ controlKey: key, prop: 'errors', value: validationMessage }, otherForm);
-      }
-    }
-  }
-
-  markAsValid(key: string, otherForm?: NovoFormGroup): void {
-    const control = this.getControl(key, otherForm);
-    if (control) {
-      if (control && !control.restrictFieldInteractions) {
-        control.markAsValid();
-        this.triggerEvent({ controlKey: key, prop: 'errors', value: null }, otherForm);
       }
     }
   }
@@ -336,9 +302,8 @@ export class FieldInteractionApi {
     options?: {
       onlySelf?: boolean;
     },
-    otherForm?: NovoFormGroup,
   ): void {
-    const control = this.getControl(key, otherForm);
+    const control = this.getControl(key);
     if (control && !control.restrictFieldInteractions) {
       control.markAsDirty(options);
     }
@@ -349,9 +314,8 @@ export class FieldInteractionApi {
     options?: {
       onlySelf?: boolean;
     },
-    otherForm?: NovoFormGroup,
   ): void {
-    const control = this.getControl(key, otherForm);
+    const control = this.getControl(key);
     if (control && !control.restrictFieldInteractions) {
       control.markAsPending(options);
     }
@@ -362,9 +326,8 @@ export class FieldInteractionApi {
     options?: {
       onlySelf?: boolean;
     },
-    otherForm?: NovoFormGroup,
   ): void {
-    const control = this.getControl(key, otherForm);
+    const control = this.getControl(key);
     if (control && !control.restrictFieldInteractions) {
       control.markAsPristine(options);
     }
@@ -375,9 +338,8 @@ export class FieldInteractionApi {
     options?: {
       onlySelf?: boolean;
     },
-    otherForm?: NovoFormGroup,
   ): void {
-    const control = this.getControl(key, otherForm);
+    const control = this.getControl(key);
     if (control && !control.restrictFieldInteractions) {
       control.markAsTouched(options);
     }
@@ -388,9 +350,8 @@ export class FieldInteractionApi {
     options?: {
       onlySelf?: boolean;
     },
-    otherForm?: NovoFormGroup,
   ): void {
-    const control = this.getControl(key, otherForm);
+    const control = this.getControl(key);
     if (control && !control.restrictFieldInteractions) {
       control.markAsUntouched(options);
     }
@@ -402,9 +363,8 @@ export class FieldInteractionApi {
       onlySelf?: boolean;
       emitEvent?: boolean;
     },
-    otherForm?: NovoFormGroup,
   ): void {
-    const control = this.getControl(key, otherForm);
+    const control = this.getControl(key);
     if (control && !control.restrictFieldInteractions) {
       control.updateValueAndValidity(options);
     }
@@ -416,8 +376,8 @@ export class FieldInteractionApi {
     }
   }
 
-  displayTip(key: string, tip: string, icon?: string, allowDismiss?: boolean, sanitize?: boolean, otherForm?: NovoFormGroup): void {
-    const control = this.getControl(key, otherForm);
+  displayTip(key: string, tip: string, icon?: string, allowDismiss?: boolean, sanitize?: boolean): void {
+    const control = this.getControl(key);
     if (control && !control.restrictFieldInteractions) {
       control.tipWell = {
         tip,
@@ -425,20 +385,12 @@ export class FieldInteractionApi {
         button: allowDismiss,
         sanitize: sanitize !== false, // defaults to true when undefined
       };
-      this.triggerEvent({ controlKey: key, prop: 'tipWell', value: tip }, otherForm);
+      this.triggerEvent({ controlKey: key, prop: 'tipWell', value: tip });
     }
   }
 
-  clearTip(key: string, otherForm?: NovoFormGroup): void {
-    const control = this.getControl(key, otherForm);
-    if (control && !control.restrictFieldInteractions) {
-      control.tipWell = null;
-      this.triggerEvent({ controlKey: key, prop: 'tipWell', value: null }, otherForm);
-    }
-  }
-
-  setTooltip(key: string, tooltip: string, otherForm?: NovoFormGroup): void {
-    const control = this.getControl(key, otherForm);
+  setTooltip(key: string, tooltip: string): void {
+    const control = this.getControl(key);
     if (control && !control.restrictFieldInteractions) {
       control.tooltip = tooltip;
       if (tooltip.length >= 40 && tooltip.length <= 400) {
@@ -447,7 +399,7 @@ export class FieldInteractionApi {
       } else if (tooltip.length > 400) {
         control.tooltipSize = 'extra-large';
       }
-      this.triggerEvent({ controlKey: key, prop: 'tooltip', value: tooltip }, otherForm);
+      this.triggerEvent({ controlKey: key, prop: 'tooltip', value: tooltip });
     }
   }
 
@@ -469,16 +421,16 @@ export class FieldInteractionApi {
     return this.modalService.open(ControlPromptModal, { changes, key }).onClosed;
   }
 
-  setProperty(key: string, prop: string, value, otherForm?: NovoFormGroup): void {
-    const control = this.getControl(key, otherForm);
+  setProperty(key: string, prop: string, value): void {
+    const control = this.getControl(key);
     if (control && !control.restrictFieldInteractions) {
       control[prop] = value;
-      this.triggerEvent({ controlKey: key, prop, value }, otherForm);
+      this.triggerEvent({ controlKey: key, prop, value });
     }
   }
 
-  getProperty(key: string, prop: string, otherForm?: NovoFormGroup) {
-    const control = this.getControl(key, otherForm);
+  getProperty(key: string, prop: string) {
+    const control = this.getControl(key);
     if (control && !control.restrictFieldInteractions) {
       return control[prop];
     }
@@ -495,13 +447,12 @@ export class FieldInteractionApi {
     return Helpers.isBlank(value);
   }
 
-  hasField(key: string, otherForm?: NovoFormGroup): boolean {
-    const form = otherForm || this.form;
-    return !!form.controls[key];
+  hasField(key: string): boolean {
+    return !!this.form.controls[key];
   }
 
-  addStaticOption(key: string, newOption, otherForm?: NovoFormGroup): void {
-    const control = this.getControl(key, otherForm);
+  addStaticOption(key: string, newOption): void {
+    const control = this.getControl(key);
     let optionToAdd = newOption;
     let isUnique = true;
     if (control && !control.restrictFieldInteractions) {
@@ -533,13 +484,13 @@ export class FieldInteractionApi {
         }
       }
       if (isUnique) {
-        this.triggerEvent({ controlKey: key, prop: 'options', value: [...currentOptions, optionToAdd] }, otherForm);
+        this.triggerEvent({ controlKey: key, prop: 'options', value: [...currentOptions, optionToAdd] });
       }
     }
   }
 
-  removeStaticOption(key: string, optionToRemove: string, otherForm?: NovoFormGroup): void {
-    const control = this.getControl(key, otherForm);
+  removeStaticOption(key: string, optionToRemove: string): void {
+    const control = this.getControl(key);
     if (control && !control.restrictFieldInteractions) {
       let currentOptions = this.getProperty(key, 'options');
       if (!currentOptions || !currentOptions.length) {
@@ -584,7 +535,7 @@ export class FieldInteractionApi {
         }
         this.setProperty(key, 'options', [...currentOptions]);
       }
-      this.triggerEvent({ controlKey: key, prop: 'options', value: control.options }, otherForm);
+      this.triggerEvent({ controlKey: key, prop: 'options', value: control.options });
     }
   }
 
@@ -604,8 +555,8 @@ export class FieldInteractionApi {
     this.mutatePickerConfig(key, config as ModifyPickerConfigArgs, mapper);
   }
 
-  mutatePickerConfig(key: string, args: ModifyPickerConfigArgs, mapper?: (item: unknown) => unknown, otherForm?: NovoFormGroup): void {
-    const control = this.getControl(key, otherForm);
+  mutatePickerConfig(key: string, args: ModifyPickerConfigArgs, mapper?: (item: unknown) => unknown): void {
+    const control = this.getControl(key);
     if (control && !control.restrictFieldInteractions) {
       const { minSearchLength, enableInfiniteScroll, filteredOptionsCreator, format, getLabels, emptyPickerMessage } = control.config;
       const optionsConfig = this.getOptionsConfig(args, mapper, filteredOptionsCreator, format);
@@ -622,12 +573,12 @@ export class FieldInteractionApi {
       };
 
       this.setProperty(key, 'config', newConfig);
-      this.triggerEvent({ controlKey: key, prop: 'pickerConfig', value: args }, otherForm);
+      this.triggerEvent({ controlKey: key, prop: 'pickerConfig', value: args });
     }
   }
 
-  addPropertiesToPickerConfig(key: string, properties: { [key: string]: unknown }, otherForm?: NovoFormGroup) {
-    const control = this.getControl(key, otherForm);
+  addPropertiesToPickerConfig(key: string, properties: { [key: string]: unknown }) {
+    const control = this.getControl(key);
     if (!control || control.restrictFieldInteractions) {
       return;
     }
@@ -638,7 +589,7 @@ export class FieldInteractionApi {
     };
 
     this.setProperty(key, 'config', config);
-    this.triggerEvent({ controlKey: key, prop: 'pickerConfig', value: properties }, otherForm);
+    this.triggerEvent({ controlKey: key, prop: 'pickerConfig', value: properties });
   }
   getOptionsConfig = (
     args: ModifyPickerConfigArgs,
@@ -702,12 +653,11 @@ export class FieldInteractionApi {
     }
   };
 
-  setLoading(key: string, loading: boolean, otherForm?: NovoFormGroup) {
-    const form = otherForm || this.form;
-    const control = this.getControl(key, otherForm);
+  setLoading(key: string, loading: boolean) {
+    const control = this.getControl(key);
     if (control && !control.restrictFieldInteractions) {
       if (loading) {
-        form.controls[key].fieldInteractionloading = true;
+        this.form.controls[key].fieldInteractionloading = true;
         control.setErrors({ loading: true });
         // History
         clearTimeout(this.asyncBlockTimeout);
@@ -717,7 +667,7 @@ export class FieldInteractionApi {
           this.setProperty(key, '_displayedAsyncFailure', true);
         }, 10000);
       } else {
-        form.controls[key].fieldInteractionloading = false;
+        this.form.controls[key].fieldInteractionloading = false;
         clearTimeout(this.asyncBlockTimeout);
         control.setErrors({ loading: null });
         control.updateValueAndValidity({ emitEvent: false });
@@ -725,7 +675,7 @@ export class FieldInteractionApi {
           this.setProperty(key, 'tipWell', null);
         }
       }
-      this.triggerEvent({ controlKey: key, prop: 'loading', value: loading }, otherForm);
+      this.triggerEvent({ controlKey: key, prop: 'loading', value: loading });
     }
   }
 
@@ -734,7 +684,6 @@ export class FieldInteractionApi {
     metaForNewField: { key?: string, type?: string, name?: string, label?: string },
     position: string = FieldInteractionApi.FIELD_POSITIONS.ABOVE_FIELD,
     initialValue?,
-    otherForm?: NovoFormGroup,
   ): void {
     if (!metaForNewField.key && !metaForNewField.name) {
       console.error('[FieldInteractionAPI] - missing "key" in meta for new field'); // tslint:disable-line
@@ -746,20 +695,19 @@ export class FieldInteractionApi {
       metaForNewField.key = metaForNewField.name;
     }
 
-    const form = otherForm || this.form;
-    if (form.controls[metaForNewField.key]) {
+    if (this.form.controls[metaForNewField.key]) {
       // Field is already on the form
       return null;
     }
 
-    const control = form.controls[key];
+    const control = this.form.controls[key];
     let fieldsetIndex: number;
     let controlIndex: number;
     if (control) {
       fieldsetIndex = -1;
       controlIndex = -1;
 
-      form.fieldsets.forEach((fieldset, fi) => {
+      this.form.fieldsets.forEach((fieldset, fi) => {
         fieldset.controls.forEach((fieldsetControl, ci) => {
           if (fieldsetControl.key === key) {
             fieldsetIndex = fi;
@@ -785,8 +733,8 @@ export class FieldInteractionApi {
           break;
         case FieldInteractionApi.FIELD_POSITIONS.BOTTOM_OF_FORM:
           // Adding field to the bottom of the form
-          fieldsetIndex = form.fieldsets.length - 1;
-          controlIndex = form.fieldsets[fieldsetIndex].controls.length;
+          fieldsetIndex = this.form.fieldsets.length - 1;
+          controlIndex = this.form.fieldsets[fieldsetIndex].controls.length;
           break;
         default:
           break;
@@ -796,25 +744,24 @@ export class FieldInteractionApi {
         const novoControl = this.formUtils.getControlForField(metaForNewField, this.http, {});
         novoControl.hidden = false;
         const formControl = new NovoFormControl(initialValue, novoControl);
-        form.addControl(novoControl.key, formControl);
-        form.fieldsets[fieldsetIndex].controls.splice(controlIndex, 0, novoControl);
-        this.triggerEvent({ controlKey: key, prop: 'addControl', value: formControl }, otherForm);
+        this.form.addControl(novoControl.key, formControl);
+        this.form.fieldsets[fieldsetIndex].controls.splice(controlIndex, 0, novoControl);
+        this.triggerEvent({ controlKey: key, prop: 'addControl', value: formControl });
       }
     }
   }
 
-  removeControl(key: string, otherForm?: NovoFormGroup): void {
-    const form = otherForm || this.form;
-    if (!form.controls[key]) {
+  removeControl(key: string): void {
+    if (!this.form.controls[key]) {
       // Field is not on the form
       return null;
     }
-    const control = this.getControl(key, otherForm);
+    const control = this.getControl(key);
     if (control && !control.restrictFieldInteractions) {
       let fieldsetIndex = -1;
       let controlIndex = -1;
 
-      form.fieldsets.forEach((fieldset, fi) => {
+      this.form.fieldsets.forEach((fieldset, fi) => {
         fieldset.controls.forEach((fieldsetControl, ci) => {
           if (fieldsetControl.key === key) {
             fieldsetIndex = fi;
@@ -824,9 +771,9 @@ export class FieldInteractionApi {
       });
 
       if (fieldsetIndex !== -1 && controlIndex !== -1) {
-        form.removeControl(key);
-        form.fieldsets[fieldsetIndex].controls.splice(controlIndex, 1);
-        this.triggerEvent({ controlKey: key, prop: 'removeControl', value: key }, otherForm);
+        this.form.removeControl(key);
+        this.form.fieldsets[fieldsetIndex].controls.splice(controlIndex, 1);
+        this.triggerEvent({ controlKey: key, prop: 'removeControl', value: key });
       }
     }
   }
@@ -837,32 +784,9 @@ export class FieldInteractionApi {
     h = setTimeout(() => func(), wait);
   }
 
-  /**
-   * Allows traversing nested forms by accessing the parent form.
-   *
-   * @param otherForm optional parameter for getting the parent of a different form.
-   * If not provided will default to the parent of the current form.
-   */
-  getParent(otherForm?: NovoFormGroup) {
-    const form = otherForm || this.form;
-    return form.parent;
-  }
-
-  /**
-   * The index is assigned as a property on the form's associations object when the form is part of a NovoControlGroup array.
-   *
-   * @param otherForm optional parameter for getting the index of a different form. If not provided will default to the current form.
-   * @returns the index if it exists for the current or form, or null otherwise.
-   */
-  getIndex(otherForm?: NovoFormGroup) {
-    const form = otherForm || this.form;
-    return (form.associations && form.associations.hasOwnProperty('index')) ? form.associations.index : null;
-  }
-
-  private triggerEvent(event: IFieldInteractionEvent, otherForm?: NovoFormGroup): void {
-    const form = otherForm || this.form;
-    if (form && form.fieldInteractionEvents) {
-      form.fieldInteractionEvents.emit(event);
+  private triggerEvent(event: IFieldInteractionEvent): void {
+    if (this.form && this.form.fieldInteractionEvents) {
+      this.form.fieldInteractionEvents.emit(event);
     }
   }
 }

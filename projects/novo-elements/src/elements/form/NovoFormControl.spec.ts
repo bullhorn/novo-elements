@@ -91,7 +91,7 @@ describe('Elements: NovoFormControl', () => {
     });
   });
 
-  describe('Method: markAsInvalid(message) / markAsValid()', () => {
+  describe('Method: markAsInvalid(message)', () => {
     beforeEach(() => {
       jest.spyOn(component, 'markAsDirty');
       jest.spyOn(component, 'markAsTouched');
@@ -103,15 +103,6 @@ describe('Elements: NovoFormControl', () => {
       expect(component.markAsDirty).toHaveBeenCalled();
       expect(component.markAsTouched).toHaveBeenCalled();
       expect(component.setErrors).toHaveBeenCalledWith({ custom: 'Derp' });
-    });
-    it('should reset the errors when marked as valid.', () => {
-      expect(component.markAsInvalid).toBeDefined();
-      component.markAsInvalid('Derp');
-      expect(component.markAsDirty).toHaveBeenCalled();
-      expect(component.markAsTouched).toHaveBeenCalled();
-      expect(component.setErrors).toHaveBeenCalledWith({ custom: 'Derp' });
-      component.markAsValid();
-      expect(component.setErrors).toHaveBeenCalledWith(null);
     });
   });
 });
