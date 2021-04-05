@@ -18,7 +18,7 @@ export enum AppBridgeHandler {
 // add/fast-add - the add page for a new record
 // custom       - custom action that opens the url provided in data.url
 // preview      - the preview slideout available only in Novo
-export type NovoApps = 'record' | 'add' | 'fast-add' | 'custom' | 'preview';
+export type NovoApps = 'record' | 'add' | 'fast-add' | 'custom' | 'preview' | 'Modal';
 
 export interface IAppBridgeOpenEvent {
   type: NovoApps;
