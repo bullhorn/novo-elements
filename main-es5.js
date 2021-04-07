@@ -42744,6 +42744,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             custom: message
           }));
         }
+        /**
+         * @return {?}
+         */
+
+      }, {
+        key: "markAsValid",
+        value: function markAsValid() {
+          this.setErrors(null);
+        }
       }]);
 
       return NovoFormControl;
@@ -45378,12 +45387,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         }
         /**
          * @param {?} key
+         * @param {?=} otherForm
          * @return {?}
          */
 
       }, {
         key: "getFieldSet",
-        value: function getFieldSet(key) {
+        value: function getFieldSet(key, otherForm) {
           if (!key) {
             console.error('[FieldInteractionAPI] - invalid or missing "key"'); // tslint:disable-line
 
@@ -45392,7 +45402,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           /** @type {?} */
 
 
-          var fieldSet = this.form.fieldsets.find(
+          var form = otherForm || this.form;
+          /** @type {?} */
+
+          var fieldSet = form.fieldsets.find(
           /**
           * @param {?} fs
           * @return {?}
@@ -45414,12 +45427,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         }
         /**
          * @param {?} key
+         * @param {?=} otherForm
          * @return {?}
          */
 
       }, {
         key: "getControl",
-        value: function getControl(key) {
+        value: function getControl(key, otherForm) {
           if (!key) {
             console.error('[FieldInteractionAPI] - invalid or missing "key"'); // tslint:disable-line
 
@@ -45428,9 +45442,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           /** @type {?} */
 
 
+          var form = otherForm || this.form;
+          /** @type {?} */
+
           var control =
           /** @type {?} */
-          this.form.controls[key];
+          form.controls[key];
 
           if (!control) {
             console.error('[FieldInteractionAPI] - could not find a control in the form by the key --', key); // tslint:disable-line
@@ -45442,14 +45459,50 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         }
         /**
          * @param {?} key
+         * @param {?=} otherForm
+         * @return {?}
+         */
+
+      }, {
+        key: "getFormGroupArray",
+        value: function getFormGroupArray(key, otherForm) {
+          if (!key) {
+            console.error('[FieldInteractionAPI] - invalid or missing "key"'); // tslint:disable-line
+
+            return null;
+          }
+          /** @type {?} */
+
+
+          var form = otherForm || this.form;
+          /** @type {?} */
+
+          var formArray =
+          /** @type {?} */
+          form.controls[key];
+
+          if (!formArray || !formArray.controls) {
+            console.error('[FieldInteractionAPI] - could not find a form array in the form by the key --', key); // tslint:disable-line
+
+            return null;
+          }
+
+          return (
+            /** @type {?} */
+            formArray.controls
+          );
+        }
+        /**
+         * @param {?} key
+         * @param {?=} otherForm
          * @return {?}
          */
 
       }, {
         key: "getValue",
-        value: function getValue(key) {
+        value: function getValue(key, otherForm) {
           /** @type {?} */
-          var control = this.getControl(key);
+          var control = this.getControl(key, otherForm);
 
           if (control) {
             return control.value;
@@ -45459,14 +45512,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         }
         /**
          * @param {?} key
+         * @param {?=} otherForm
          * @return {?}
          */
 
       }, {
         key: "getRawValue",
-        value: function getRawValue(key) {
+        value: function getRawValue(key, otherForm) {
           /** @type {?} */
-          var control = this.getControl(key);
+          var control = this.getControl(key, otherForm);
 
           if (control) {
             return control.rawValue;
@@ -45476,14 +45530,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         }
         /**
          * @param {?} key
+         * @param {?=} otherForm
          * @return {?}
          */
 
       }, {
         key: "getInitialValue",
-        value: function getInitialValue(key) {
+        value: function getInitialValue(key, otherForm) {
           /** @type {?} */
-          var control = this.getControl(key);
+          var control = this.getControl(key, otherForm);
 
           if (control) {
             return control.initialValue;
@@ -45495,14 +45550,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
          * @param {?} key
          * @param {?} value
          * @param {?=} options
+         * @param {?=} otherForm
          * @return {?}
          */
 
       }, {
         key: "setValue",
-        value: function setValue(key, value, options) {
+        value: function setValue(key, value, options, otherForm) {
           /** @type {?} */
-          var control = this.getControl(key);
+          var control = this.getControl(key, otherForm);
 
           if (control && !control.restrictFieldInteractions) {
             control.setValue(value, options);
@@ -45510,21 +45566,22 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               controlKey: key,
               prop: 'value',
               value: value
-            });
+            }, otherForm);
           }
         }
         /**
          * @param {?} key
          * @param {?} value
          * @param {?=} options
+         * @param {?=} otherForm
          * @return {?}
          */
 
       }, {
         key: "patchValue",
-        value: function patchValue(key, value, options) {
+        value: function patchValue(key, value, options, otherForm) {
           /** @type {?} */
-          var control = this.getControl(key);
+          var control = this.getControl(key, otherForm);
 
           if (control && !control.restrictFieldInteractions) {
             control.setValue(value, options);
@@ -45532,20 +45589,21 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               controlKey: key,
               prop: 'value',
               value: value
-            });
+            }, otherForm);
           }
         }
         /**
          * @param {?} key
          * @param {?} isReadOnly
+         * @param {?=} otherForm
          * @return {?}
          */
 
       }, {
         key: "setReadOnly",
-        value: function setReadOnly(key, isReadOnly) {
+        value: function setReadOnly(key, isReadOnly, otherForm) {
           /** @type {?} */
-          var control = this.getControl(key);
+          var control = this.getControl(key, otherForm);
 
           if (control && !control.restrictFieldInteractions) {
             control.setReadOnly(isReadOnly);
@@ -45553,20 +45611,21 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               controlKey: key,
               prop: 'readOnly',
               value: isReadOnly
-            });
+            }, otherForm);
           }
         }
         /**
          * @param {?} key
          * @param {?} required
+         * @param {?=} otherForm
          * @return {?}
          */
 
       }, {
         key: "setRequired",
-        value: function setRequired(key, required) {
+        value: function setRequired(key, required, otherForm) {
           /** @type {?} */
-          var control = this.getControl(key);
+          var control = this.getControl(key, otherForm);
 
           if (control && !control.restrictFieldInteractions) {
             control.setRequired(required);
@@ -45574,12 +45633,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               controlKey: key,
               prop: 'required',
               value: required
-            });
+            }, otherForm);
           }
         }
         /**
          * @param {?} key
          * @param {?=} clearValue
+         * @param {?=} otherForm
          * @return {?}
          */
 
@@ -45587,9 +45647,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         key: "hide",
         value: function hide(key) {
           var clearValue = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+          var otherForm = arguments.length > 2 ? arguments[2] : undefined;
 
           /** @type {?} */
-          var control = this.getControl(key);
+          var control = this.getControl(key, otherForm);
 
           if (control && !control.restrictFieldInteractions) {
             control.hide(clearValue);
@@ -45600,21 +45661,22 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               controlKey: key,
               prop: 'hidden',
               value: true
-            });
+            }, otherForm);
           }
 
           return control;
         }
         /**
          * @param {?} key
+         * @param {?=} otherForm
          * @return {?}
          */
 
       }, {
         key: "show",
-        value: function show(key) {
+        value: function show(key, otherForm) {
           /** @type {?} */
-          var control = this.getControl(key);
+          var control = this.getControl(key, otherForm);
 
           if (control && !control.restrictFieldInteractions) {
             control.show();
@@ -45625,7 +45687,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               controlKey: key,
               prop: 'hidden',
               value: false
-            });
+            }, otherForm);
           }
         }
         /**
@@ -45661,14 +45723,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         /**
          * @param {?} key
          * @param {?=} options
+         * @param {?=} otherForm
          * @return {?}
          */
 
       }, {
         key: "disable",
-        value: function disable(key, options) {
+        value: function disable(key, options, otherForm) {
           /** @type {?} */
-          var control = this.getControl(key);
+          var control = this.getControl(key, otherForm);
 
           if (control && !control.restrictFieldInteractions) {
             control.disable(options);
@@ -45676,20 +45739,21 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               controlKey: key,
               prop: 'readOnly',
               value: true
-            });
+            }, otherForm);
           }
         }
         /**
          * @param {?} key
          * @param {?=} options
+         * @param {?=} otherForm
          * @return {?}
          */
 
       }, {
         key: "enable",
-        value: function enable(key, options) {
+        value: function enable(key, options, otherForm) {
           /** @type {?} */
-          var control = this.getControl(key);
+          var control = this.getControl(key, otherForm);
 
           if (control && !control.restrictFieldInteractions) {
             control.enable(options);
@@ -45697,38 +45761,68 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               controlKey: key,
               prop: 'readOnly',
               value: false
-            });
+            }, otherForm);
           }
         }
         /**
          * @param {?} key
          * @param {?=} validationMessage
+         * @param {?=} otherForm
          * @return {?}
          */
 
       }, {
         key: "markAsInvalid",
-        value: function markAsInvalid(key, validationMessage) {
+        value: function markAsInvalid(key, validationMessage, otherForm) {
           /** @type {?} */
-          var control = this.getControl(key);
+          var control = this.getControl(key, otherForm);
 
           if (control) {
             if (control && !control.restrictFieldInteractions) {
               control.markAsInvalid(validationMessage);
+              this.triggerEvent({
+                controlKey: key,
+                prop: 'errors',
+                value: validationMessage
+              }, otherForm);
+            }
+          }
+        }
+        /**
+         * @param {?} key
+         * @param {?=} otherForm
+         * @return {?}
+         */
+
+      }, {
+        key: "markAsValid",
+        value: function markAsValid(key, otherForm) {
+          /** @type {?} */
+          var control = this.getControl(key, otherForm);
+
+          if (control) {
+            if (control && !control.restrictFieldInteractions) {
+              control.markAsValid();
+              this.triggerEvent({
+                controlKey: key,
+                prop: 'errors',
+                value: null
+              }, otherForm);
             }
           }
         }
         /**
          * @param {?} key
          * @param {?=} options
+         * @param {?=} otherForm
          * @return {?}
          */
 
       }, {
         key: "markAsDirty",
-        value: function markAsDirty(key, options) {
+        value: function markAsDirty(key, options, otherForm) {
           /** @type {?} */
-          var control = this.getControl(key);
+          var control = this.getControl(key, otherForm);
 
           if (control && !control.restrictFieldInteractions) {
             control.markAsDirty(options);
@@ -45737,14 +45831,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         /**
          * @param {?} key
          * @param {?=} options
+         * @param {?=} otherForm
          * @return {?}
          */
 
       }, {
         key: "markAsPending",
-        value: function markAsPending(key, options) {
+        value: function markAsPending(key, options, otherForm) {
           /** @type {?} */
-          var control = this.getControl(key);
+          var control = this.getControl(key, otherForm);
 
           if (control && !control.restrictFieldInteractions) {
             control.markAsPending(options);
@@ -45753,14 +45848,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         /**
          * @param {?} key
          * @param {?=} options
+         * @param {?=} otherForm
          * @return {?}
          */
 
       }, {
         key: "markAsPristine",
-        value: function markAsPristine(key, options) {
+        value: function markAsPristine(key, options, otherForm) {
           /** @type {?} */
-          var control = this.getControl(key);
+          var control = this.getControl(key, otherForm);
 
           if (control && !control.restrictFieldInteractions) {
             control.markAsPristine(options);
@@ -45769,14 +45865,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         /**
          * @param {?} key
          * @param {?=} options
+         * @param {?=} otherForm
          * @return {?}
          */
 
       }, {
         key: "markAsTouched",
-        value: function markAsTouched(key, options) {
+        value: function markAsTouched(key, options, otherForm) {
           /** @type {?} */
-          var control = this.getControl(key);
+          var control = this.getControl(key, otherForm);
 
           if (control && !control.restrictFieldInteractions) {
             control.markAsTouched(options);
@@ -45785,14 +45882,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         /**
          * @param {?} key
          * @param {?=} options
+         * @param {?=} otherForm
          * @return {?}
          */
 
       }, {
         key: "markAsUntouched",
-        value: function markAsUntouched(key, options) {
+        value: function markAsUntouched(key, options, otherForm) {
           /** @type {?} */
-          var control = this.getControl(key);
+          var control = this.getControl(key, otherForm);
 
           if (control && !control.restrictFieldInteractions) {
             control.markAsUntouched(options);
@@ -45801,14 +45899,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         /**
          * @param {?} key
          * @param {?=} options
+         * @param {?=} otherForm
          * @return {?}
          */
 
       }, {
         key: "updateValueAndValidity",
-        value: function updateValueAndValidity(key, options) {
+        value: function updateValueAndValidity(key, options, otherForm) {
           /** @type {?} */
-          var control = this.getControl(key);
+          var control = this.getControl(key, otherForm);
 
           if (control && !control.restrictFieldInteractions) {
             control.updateValueAndValidity(options);
@@ -45832,14 +45931,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
          * @param {?=} icon
          * @param {?=} allowDismiss
          * @param {?=} sanitize
+         * @param {?=} otherForm
          * @return {?}
          */
 
       }, {
         key: "displayTip",
-        value: function displayTip(key, tip, icon, allowDismiss, sanitize) {
+        value: function displayTip(key, tip, icon, allowDismiss, sanitize, otherForm) {
           /** @type {?} */
-          var control = this.getControl(key);
+          var control = this.getControl(key, otherForm);
 
           if (control && !control.restrictFieldInteractions) {
             control.tipWell = {
@@ -45852,20 +45952,42 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               controlKey: key,
               prop: 'tipWell',
               value: tip
-            });
+            }, otherForm);
+          }
+        }
+        /**
+         * @param {?} key
+         * @param {?=} otherForm
+         * @return {?}
+         */
+
+      }, {
+        key: "clearTip",
+        value: function clearTip(key, otherForm) {
+          /** @type {?} */
+          var control = this.getControl(key, otherForm);
+
+          if (control && !control.restrictFieldInteractions) {
+            control.tipWell = null;
+            this.triggerEvent({
+              controlKey: key,
+              prop: 'tipWell',
+              value: null
+            }, otherForm);
           }
         }
         /**
          * @param {?} key
          * @param {?} tooltip
+         * @param {?=} otherForm
          * @return {?}
          */
 
       }, {
         key: "setTooltip",
-        value: function setTooltip(key, tooltip) {
+        value: function setTooltip(key, tooltip, otherForm) {
           /** @type {?} */
-          var control = this.getControl(key);
+          var control = this.getControl(key, otherForm);
 
           if (control && !control.restrictFieldInteractions) {
             control.tooltip = tooltip;
@@ -45881,7 +46003,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               controlKey: key,
               prop: 'tooltip',
               value: tooltip
-            });
+            }, otherForm);
           }
         }
         /**
@@ -45948,14 +46070,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
          * @param {?} key
          * @param {?} prop
          * @param {?} value
+         * @param {?=} otherForm
          * @return {?}
          */
 
       }, {
         key: "setProperty",
-        value: function setProperty(key, prop, value) {
+        value: function setProperty(key, prop, value, otherForm) {
           /** @type {?} */
-          var control = this.getControl(key);
+          var control = this.getControl(key, otherForm);
 
           if (control && !control.restrictFieldInteractions) {
             control[prop] = value;
@@ -45963,20 +46086,21 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               controlKey: key,
               prop: prop,
               value: value
-            });
+            }, otherForm);
           }
         }
         /**
          * @param {?} key
          * @param {?} prop
+         * @param {?=} otherForm
          * @return {?}
          */
 
       }, {
         key: "getProperty",
-        value: function getProperty(key, prop) {
+        value: function getProperty(key, prop, otherForm) {
           /** @type {?} */
-          var control = this.getControl(key);
+          var control = this.getControl(key, otherForm);
 
           if (control && !control.restrictFieldInteractions) {
             return control[prop];
@@ -46010,25 +46134,29 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         }
         /**
          * @param {?} key
+         * @param {?=} otherForm
          * @return {?}
          */
 
       }, {
         key: "hasField",
-        value: function hasField(key) {
-          return !!this.form.controls[key];
+        value: function hasField(key, otherForm) {
+          /** @type {?} */
+          var form = otherForm || this.form;
+          return !!form.controls[key];
         }
         /**
          * @param {?} key
          * @param {?} newOption
+         * @param {?=} otherForm
          * @return {?}
          */
 
       }, {
         key: "addStaticOption",
-        value: function addStaticOption(key, newOption) {
+        value: function addStaticOption(key, newOption, otherForm) {
           /** @type {?} */
-          var control = this.getControl(key);
+          var control = this.getControl(key, otherForm);
           /** @type {?} */
 
           var optionToAdd = newOption;
@@ -46089,21 +46217,22 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                 controlKey: key,
                 prop: 'options',
                 value: [].concat(_toConsumableArray(currentOptions), [optionToAdd])
-              });
+              }, otherForm);
             }
           }
         }
         /**
          * @param {?} key
          * @param {?} optionToRemove
+         * @param {?=} otherForm
          * @return {?}
          */
 
       }, {
         key: "removeStaticOption",
-        value: function removeStaticOption(key, optionToRemove) {
+        value: function removeStaticOption(key, optionToRemove, otherForm) {
           /** @type {?} */
-          var control = this.getControl(key);
+          var control = this.getControl(key, otherForm);
 
           if (control && !control.restrictFieldInteractions) {
             /** @type {?} */
@@ -46178,7 +46307,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               controlKey: key,
               prop: 'options',
               value: control.options
-            });
+            }, otherForm);
           }
         }
         /**
@@ -46200,14 +46329,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
          * @param {?} key
          * @param {?} args
          * @param {?=} mapper
+         * @param {?=} otherForm
          * @return {?}
          */
 
       }, {
         key: "mutatePickerConfig",
-        value: function mutatePickerConfig(key, args, mapper) {
+        value: function mutatePickerConfig(key, args, mapper, otherForm) {
           /** @type {?} */
-          var control = this.getControl(key);
+          var control = this.getControl(key, otherForm);
 
           if (control && !control.restrictFieldInteractions) {
             var _control$config = control.config,
@@ -46240,20 +46370,21 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               controlKey: key,
               prop: 'pickerConfig',
               value: args
-            });
+            }, otherForm);
           }
         }
         /**
          * @param {?} key
          * @param {?} properties
+         * @param {?=} otherForm
          * @return {?}
          */
 
       }, {
         key: "addPropertiesToPickerConfig",
-        value: function addPropertiesToPickerConfig(key, properties) {
+        value: function addPropertiesToPickerConfig(key, properties, otherForm) {
           /** @type {?} */
-          var control = this.getControl(key);
+          var control = this.getControl(key, otherForm);
 
           if (!control || control.restrictFieldInteractions) {
             return;
@@ -46267,7 +46398,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             controlKey: key,
             prop: 'pickerConfig',
             value: properties
-          });
+          }, otherForm);
         }
         /**
          * @private
@@ -46289,20 +46420,24 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         /**
          * @param {?} key
          * @param {?} loading
+         * @param {?=} otherForm
          * @return {?}
          */
 
       }, {
         key: "setLoading",
-        value: function setLoading(key, loading) {
+        value: function setLoading(key, loading, otherForm) {
           var _this150 = this;
 
           /** @type {?} */
-          var control = this.getControl(key);
+          var form = otherForm || this.form;
+          /** @type {?} */
+
+          var control = this.getControl(key, otherForm);
 
           if (control && !control.restrictFieldInteractions) {
             if (loading) {
-              this.form.controls[key].fieldInteractionloading = true;
+              form.controls[key].fieldInteractionloading = true;
               control.setErrors({
                 loading: true
               }); // History
@@ -46320,7 +46455,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                 _this150.setProperty(key, '_displayedAsyncFailure', true);
               }, 10000);
             } else {
-              this.form.controls[key].fieldInteractionloading = false;
+              form.controls[key].fieldInteractionloading = false;
               clearTimeout(this.asyncBlockTimeout);
               control.setErrors({
                 loading: null
@@ -46338,7 +46473,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               controlKey: key,
               prop: 'loading',
               value: loading
-            });
+            }, otherForm);
           }
         }
         /**
@@ -46346,6 +46481,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
          * @param {?} metaForNewField
          * @param {?=} position
          * @param {?=} initialValue
+         * @param {?=} otherForm
          * @return {?}
          */
 
@@ -46354,6 +46490,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         value: function addControl(key, metaForNewField) {
           var position = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : FieldInteractionApi.FIELD_POSITIONS.ABOVE_FIELD;
           var initialValue = arguments.length > 3 ? arguments[3] : undefined;
+          var otherForm = arguments.length > 4 ? arguments[4] : undefined;
 
           if (!metaForNewField.key && !metaForNewField.name) {
             console.error('[FieldInteractionAPI] - missing "key" in meta for new field'); // tslint:disable-line
@@ -46365,15 +46502,19 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             // If key is not explicitly declared, use name as key
             metaForNewField.key = metaForNewField.name;
           }
+          /** @type {?} */
 
-          if (this.form.controls[metaForNewField.key]) {
+
+          var form = otherForm || this.form;
+
+          if (form.controls[metaForNewField.key]) {
             // Field is already on the form
             return null;
           }
           /** @type {?} */
 
 
-          var control = this.form.controls[key];
+          var control = form.controls[key];
           /** @type {?} */
 
           var fieldsetIndex;
@@ -46384,7 +46525,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           if (control) {
             fieldsetIndex = -1;
             controlIndex = -1;
-            this.form.fieldsets.forEach(
+            form.fieldsets.forEach(
             /**
             * @param {?} fieldset
             * @param {?} fi
@@ -46424,8 +46565,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
               case FieldInteractionApi.FIELD_POSITIONS.BOTTOM_OF_FORM:
                 // Adding field to the bottom of the form
-                fieldsetIndex = this.form.fieldsets.length - 1;
-                controlIndex = this.form.fieldsets[fieldsetIndex].controls.length;
+                fieldsetIndex = form.fieldsets.length - 1;
+                controlIndex = form.fieldsets[fieldsetIndex].controls.length;
                 break;
 
               default:
@@ -46439,32 +46580,36 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               /** @type {?} */
 
               var formControl = new NovoFormControl(initialValue, novoControl);
-              this.form.addControl(novoControl.key, formControl);
-              this.form.fieldsets[fieldsetIndex].controls.splice(controlIndex, 0, novoControl);
+              form.addControl(novoControl.key, formControl);
+              form.fieldsets[fieldsetIndex].controls.splice(controlIndex, 0, novoControl);
               this.triggerEvent({
                 controlKey: key,
                 prop: 'addControl',
                 value: formControl
-              });
+              }, otherForm);
             }
           }
         }
         /**
          * @param {?} key
+         * @param {?=} otherForm
          * @return {?}
          */
 
       }, {
         key: "removeControl",
-        value: function removeControl(key) {
-          if (!this.form.controls[key]) {
+        value: function removeControl(key, otherForm) {
+          /** @type {?} */
+          var form = otherForm || this.form;
+
+          if (!form.controls[key]) {
             // Field is not on the form
             return null;
           }
           /** @type {?} */
 
 
-          var control = this.getControl(key);
+          var control = this.getControl(key, otherForm);
 
           if (control && !control.restrictFieldInteractions) {
             /** @type {?} */
@@ -46472,7 +46617,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             /** @type {?} */
 
             var controlIndex = -1;
-            this.form.fieldsets.forEach(
+            form.fieldsets.forEach(
             /**
             * @param {?} fieldset
             * @param {?} fi
@@ -46494,13 +46639,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             });
 
             if (fieldsetIndex !== -1 && controlIndex !== -1) {
-              this.form.removeControl(key);
-              this.form.fieldsets[fieldsetIndex].controls.splice(controlIndex, 1);
+              form.removeControl(key);
+              form.fieldsets[fieldsetIndex].controls.splice(controlIndex, 1);
               this.triggerEvent({
                 controlKey: key,
                 prop: 'removeControl',
                 value: key
-              });
+              }, otherForm);
             }
           }
         }
@@ -46527,16 +46672,49 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           }, wait);
         }
         /**
+         * Allows traversing nested forms by accessing the parent form.
+         *
+         * @param {?=} otherForm optional parameter for getting the parent of a different form.
+         * If not provided will default to the parent of the current form.
+         * @return {?}
+         */
+
+      }, {
+        key: "getParent",
+        value: function getParent(otherForm) {
+          /** @type {?} */
+          var form = otherForm || this.form;
+          return form.parent;
+        }
+        /**
+         * The index is assigned as a property on the form's associations object when the form is part of a NovoControlGroup array.
+         *
+         * @param {?=} otherForm optional parameter for getting the index of a different form. If not provided will default to the current form.
+         * @return {?} the index if it exists for the current or form, or null otherwise.
+         */
+
+      }, {
+        key: "getIndex",
+        value: function getIndex(otherForm) {
+          /** @type {?} */
+          var form = otherForm || this.form;
+          return form.associations && form.associations.hasOwnProperty('index') ? form.associations.index : null;
+        }
+        /**
          * @private
          * @param {?} event
+         * @param {?=} otherForm
          * @return {?}
          */
 
       }, {
         key: "triggerEvent",
-        value: function triggerEvent(event) {
-          if (this.form && this.form.fieldInteractionEvents) {
-            this.form.fieldInteractionEvents.emit(event);
+        value: function triggerEvent(event, otherForm) {
+          /** @type {?} */
+          var form = otherForm || this.form;
+
+          if (form && form.fieldInteractionEvents) {
+            form.fieldInteractionEvents.emit(event);
           }
         }
       }, {
@@ -47841,15 +48019,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
        * @param {?} formUtils
        * @param {?} fb
        * @param {?} ref
-       * @param {?} labels
        */
-      function NovoControlGroup(formUtils, fb, ref, labels) {
+      function NovoControlGroup(formUtils, fb, ref) {
         _classCallCheck(this, NovoControlGroup);
 
         this.formUtils = formUtils;
         this.fb = fb;
         this.ref = ref;
-        this.labels = labels;
         this._vertical = false;
         this._remove = false;
         this._edit = false;
@@ -47935,13 +48111,21 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           }
         }
         /**
-         * @param {?} change
+         * @return {?}
+         */
+
+      }, {
+        key: "ngOnDestroy",
+        value: function ngOnDestroy() {
+          this.clearControls();
+        }
+        /**
          * @return {?}
          */
 
       }, {
         key: "onChange",
-        value: function onChange(change) {
+        value: function onChange() {
           this.change.emit(this);
         }
         /**
@@ -47974,17 +48158,19 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         key: "addNewControl",
         value: function addNewControl(value) {
           /** @type {?} */
-          var control =
+          var controlsArray =
           /** @type {?} */
           this.form.controls[this.key];
           /** @type {?} */
 
-          var newCtrl = this.buildControl(value);
+          var nestedFormGroup = this.buildNestedFormGroup(value);
 
-          if (control) {
-            control.push(newCtrl);
+          if (controlsArray) {
+            controlsArray.push(nestedFormGroup);
           } else {
-            this.form.addControl(this.key, this.fb.array([newCtrl]));
+            this.form.addControl(this.key, this.fb.array([nestedFormGroup])); // Ensure that field interaction changes for nested forms originating from outside the form will be reflected in the nested elements
+
+            nestedFormGroup.fieldInteractionEvents.subscribe(this.onFieldInteractionEvent.bind(this));
           }
 
           this.disabledArray.push({
@@ -47998,27 +48184,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           }
 
           this.currentIndex++;
+          this.assignIndexes();
           this.ref.markForCheck();
-        }
-        /**
-         * @param {?=} value
-         * @return {?}
-         */
-
-      }, {
-        key: "buildControl",
-        value: function buildControl(value) {
-          /** @type {?} */
-          var newControls = this.getNewControls(this.controls);
-
-          if (value) {
-            this.formUtils.setInitialValues(newControls, value);
-          }
-          /** @type {?} */
-
-
-          var ctrl = this.formUtils.toFormGroup(newControls);
-          return ctrl;
         }
         /**
          * @param {?} index
@@ -48032,18 +48199,24 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           var emitEvent = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
 
           /** @type {?} */
-          var control =
+          var controlsArray =
           /** @type {?} */
           this.form.controls[this.key];
+          /** @type {?} */
+
+          var nestedFormGroup =
+          /** @type {?} */
+          controlsArray.at(index);
+          nestedFormGroup.fieldInteractionEvents.unsubscribe();
 
           if (emitEvent) {
             this.onRemove.emit({
-              value: control.at(index).value,
+              value: nestedFormGroup.value,
               index: index
             });
           }
 
-          control.removeAt(index);
+          controlsArray.removeAt(index);
           this.disabledArray = this.disabledArray.filter(
           /**
           * @param {?} value
@@ -48055,6 +48228,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           });
           this.resetAddRemove();
           this.currentIndex--;
+          this.assignIndexes();
           this.ref.markForCheck();
         }
         /**
@@ -48066,11 +48240,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         key: "editControl",
         value: function editControl(index) {
           /** @type {?} */
-          var control =
+          var controlsArray =
           /** @type {?} */
           this.form.controls[this.key];
           this.onEdit.emit({
-            value: control.at(index).value,
+            value: controlsArray.at(index).value,
             index: index
           });
         }
@@ -48091,6 +48265,24 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         }
         /**
          * @private
+         * @param {?=} value
+         * @return {?}
+         */
+
+      }, {
+        key: "buildNestedFormGroup",
+        value: function buildNestedFormGroup(value) {
+          /** @type {?} */
+          var newControls = this.getNewControls();
+
+          if (value) {
+            this.formUtils.setInitialValues(newControls, value);
+          }
+
+          return this.formUtils.toFormGroup(newControls);
+        }
+        /**
+         * @private
          * @return {?}
          */
 
@@ -48098,12 +48290,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         key: "clearControls",
         value: function clearControls() {
           /** @type {?} */
-          var control =
+          var controlsArray =
           /** @type {?} */
           this.form.controls[this.key];
 
-          if (control) {
-            for (var i = control.controls.length; i >= 0; i--) {
+          if (controlsArray) {
+            for (var i = controlsArray.length - 1; i >= 0; i--) {
               this.removeControl(i, false);
             }
 
@@ -48121,10 +48313,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         value: function checkCanEdit(index) {
           if (this.canEdit) {
             /** @type {?} */
-            var control =
+            var controlsArray =
             /** @type {?} */
             this.form.controls[this.key];
-            return this.canEdit(control.at(index).value, index);
+            return this.canEdit(controlsArray.at(index).value, index);
           }
 
           return true;
@@ -48140,12 +48332,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         value: function checkCanRemove(index) {
           if (this.canRemove) {
             /** @type {?} */
-            var control =
+            var controlsArray =
             /** @type {?} */
             this.form.controls[this.key];
 
-            if (control.at(index)) {
-              return this.canRemove(control.at(index).value, index);
+            if (controlsArray.at(index)) {
+              return this.canRemove(controlsArray.at(index).value, index);
             }
 
             return true;
@@ -48155,13 +48347,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         }
         /**
          * @private
-         * @param {?} controls
          * @return {?}
          */
 
       }, {
         key: "getNewControls",
-        value: function getNewControls(controls) {
+        value: function getNewControls() {
           /** @type {?} */
           var ret = [];
           (this.controls || []).forEach(
@@ -48173,6 +48364,41 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             ret.push(new BaseControl(control.__type, control));
           });
           return ret;
+        }
+        /**
+         * @private
+         * @return {?}
+         */
+
+      }, {
+        key: "assignIndexes",
+        value: function assignIndexes() {
+          /** @type {?} */
+          var controlsArray =
+          /** @type {?} */
+          this.form.controls[this.key];
+
+          if (controlsArray) {
+            for (var i = 0; i < controlsArray.length; i++) {
+              /** @type {?} */
+              var form =
+              /** @type {?} */
+              controlsArray.at(i);
+              form.associations = Object.assign({}, form.associations, {
+                index: i
+              });
+            }
+          }
+        }
+        /**
+         * @private
+         * @return {?}
+         */
+
+      }, {
+        key: "onFieldInteractionEvent",
+        value: function onFieldInteractionEvent() {
+          this.ref.markForCheck();
         }
       }, {
         key: "vertical",
@@ -48267,7 +48493,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
       args: [{
         selector: 'novo-control-group',
-        template: "<h6 class=\"novo-section-header\" *ngIf=\"label\">\n  <span (click)=\"toggle($event)\" [class.clickable]=\"collapsible\">\n    <i *ngIf=\"icon && !collapsible\" [ngClass]=\"icon\" [attr.data-automation-id]=\"'novo-control-group-icon-' + key\"></i>\n    <i *ngIf=\"collapsible\" class=\"bhi-next\" [class.toggled]=\"toggled\" [attr.data-automation-id]=\"'novo-control-group-collapse-' + key\"></i>\n    <span [attr.data-automation-id]=\"'novo-control-group-label-' + key\">{{ label }}</span>\n  </span>\n  <label class=\"novo-control-group-description\" *ngIf=\"description\" [attr.data-automation-id]=\"'novo-control-group-description-' + key\">{{ description }}</label>\n</h6>\n<div class=\"novo-control-group-controls\" [class.vertical]=\"vertical\" [class.horizontal]=\"!vertical\" [class.hidden]=\"collapsible && !toggled\">\n  <ng-template #defaultTemplate let-index=\"index\" let-form=\"form\" let-key=\"key\">\n    <div class=\"novo-control-group-control\">\n      <div *ngFor=\"let c of controls\" class=\"novo-control-container {{c.key}}\" [class.is-label]=\"c.controlType === 'read-only'\" [style.max-width.px]=\"c.width\">\n        <novo-control (change)=\"onChange($event)\" [form]=\"(form?.controls)[key]['controls'][index]\" [control]=\"c\" [condensed]=\"!vertical || c.controlType === 'read-only'\"></novo-control>\n      </div>\n      <div class=\"novo-control-container last\" *ngIf=\"edit && !vertical\">\n        <button [disabled]=\"!disabledArray[index].edit\" type=\"button\" *ngIf=\"edit && !vertical\" theme=\"icon\" icon=\"edit\" (click)=\"editControl(index)\" [attr.data-automation-id]=\"'novo-control-group-edit-' + key\" index=\"-1\"></button>\n      </div>\n      <div class=\"novo-control-container last\" *ngIf=\"remove && !vertical\">\n        <button [disabled]=\"!disabledArray[index].remove\" type=\"button\" *ngIf=\"remove && !vertical\" theme=\"icon\" icon=\"delete-o\" (click)=\"removeControl(index)\" [attr.data-automation-id]=\"'novo-control-group-delete-' + key\" index=\"-1\"></button>\n      </div>\n    </div>\n    <button [disabled]=\"!disabledArray[index].edit\" type=\"button\" *ngIf=\"edit && vertical\" theme=\"icon\" icon=\"edit\" (click)=\"editControl(index)\" [attr.data-automation-id]=\"'novo-control-group-edit-' + key\" index=\"-1\"></button>\n    <button [disabled]=\"!disabledArray[index].remove\" type=\"button\" *ngIf=\"remove && vertical\" theme=\"icon\" icon=\"delete-o\" (click)=\"removeControl(index)\" [attr.data-automation-id]=\"'novo-control-group-delete-' + key\" index=\"-1\"></button>\n  </ng-template>\n  <ng-template #defaultColumnLabelTemplate let-form=\"form\" let-key=\"key\">\n      <div class=\"novo-control-group-control-label {{ label.key }}\" *ngFor=\"let label of controlLabels\" [style.max-width.px]=\"label.width\" [class.column-required]=\"label.required\">\n        <span [attr.data-automation-id]=\"'novo-control-group-label-' + label.value\">{{ label.value }}</span>\n      </div>\n      <div class=\"novo-control-group-control-label last\" *ngIf=\"edit\" [attr.data-automation-id]=\"'novo-control-group-edit-' + key\"></div>\n      <div class=\"novo-control-group-control-label last\" *ngIf=\"remove\" [attr.data-automation-id]=\"'novo-control-group-delete-' + key\"></div>\n  </ng-template>\n  <ng-container *ngIf=\"!vertical && (form?.controls)[key] && (form?.controls)[key]['controls'].length !== 0\">\n    <div class=\"novo-control-group-labels\" *ngIf=\"!vertical && (form?.controls)[key] && (form?.controls)[key]['controls'].length !== 0\">\n      <ng-template [ngTemplateOutlet]=\"columnLabelTemplate || defaultColumnLabelTemplate\" [ngTemplateOutletContext]=\"{ form: form, key: key, controlLabels: controlLabels }\">\n      </ng-template>\n    </div>\n  </ng-container>\n  <ng-container *ngIf=\"(form?.controls)[key]\">\n    <div class=\"novo-control-group-row\" *ngFor=\"let control of (form?.controls)[key]['controls']; let index = index\">\n      <ng-template [ngTemplateOutlet]=\"rowTemplate || defaultTemplate\" [ngTemplateOutletContext]=\"{ form: form, index: index, key: key, controls: controls }\">\n      </ng-template>\n    </div>\n  </ng-container>\n  <div class=\"novo-control-group-empty\" *ngIf=\"(form?.controls)[key] && (form?.controls)[key]['controls'].length === 0\" [attr.data-automation-id]=\"'novo-control-group-empty-' + key\">\n    {{ emptyMessage }}\n  </div>\n  <p *ngIf=\"add\">\n    <button type=\"button\" theme=\"dialogue\" icon=\"add-thin\" (click)=\"addNewControl()\" [attr.data-automation-id]=\"'novo-control-group-bottom-add-' + key\" index=\"-1\">\n      {{ add?.label }}\n    </button>\n  </p>\n</div>\n",
+        template: "<h6 class=\"novo-section-header\" *ngIf=\"label\">\n  <span (click)=\"toggle($event)\" [class.clickable]=\"collapsible\">\n    <i *ngIf=\"icon && !collapsible\" [ngClass]=\"icon\" [attr.data-automation-id]=\"'novo-control-group-icon-' + key\"></i>\n    <i *ngIf=\"collapsible\" class=\"bhi-next\" [class.toggled]=\"toggled\" [attr.data-automation-id]=\"'novo-control-group-collapse-' + key\"></i>\n    <span [attr.data-automation-id]=\"'novo-control-group-label-' + key\">{{ label }}</span>\n  </span>\n  <label class=\"novo-control-group-description\" *ngIf=\"description\" [attr.data-automation-id]=\"'novo-control-group-description-' + key\">{{ description }}</label>\n</h6>\n<div class=\"novo-control-group-controls\" [class.vertical]=\"vertical\" [class.horizontal]=\"!vertical\" [class.hidden]=\"collapsible && !toggled\">\n  <ng-template #defaultTemplate let-index=\"index\" let-form=\"form\" let-key=\"key\">\n    <div class=\"novo-control-group-control\">\n      <div *ngFor=\"let c of controls\" class=\"novo-control-container {{c.key}}\" [class.is-label]=\"c.controlType === 'read-only'\" [style.max-width.px]=\"c.width\">\n        <novo-control (change)=\"onChange()\" [form]=\"(form?.controls)[key]['controls'][index]\" [control]=\"c\" [condensed]=\"!vertical || c.controlType === 'read-only'\"></novo-control>\n      </div>\n      <div class=\"novo-control-container last\" *ngIf=\"edit && !vertical\">\n        <button [disabled]=\"!disabledArray[index].edit\" type=\"button\" *ngIf=\"edit && !vertical\" theme=\"icon\" icon=\"edit\" (click)=\"editControl(index)\" [attr.data-automation-id]=\"'novo-control-group-edit-' + key\" index=\"-1\"></button>\n      </div>\n      <div class=\"novo-control-container last\" *ngIf=\"remove && !vertical\">\n        <button [disabled]=\"!disabledArray[index].remove\" type=\"button\" *ngIf=\"remove && !vertical\" theme=\"icon\" icon=\"delete-o\" (click)=\"removeControl(index)\" [attr.data-automation-id]=\"'novo-control-group-delete-' + key\" index=\"-1\"></button>\n      </div>\n    </div>\n    <button [disabled]=\"!disabledArray[index].edit\" type=\"button\" *ngIf=\"edit && vertical\" theme=\"icon\" icon=\"edit\" (click)=\"editControl(index)\" [attr.data-automation-id]=\"'novo-control-group-edit-' + key\" index=\"-1\"></button>\n    <button [disabled]=\"!disabledArray[index].remove\" type=\"button\" *ngIf=\"remove && vertical\" theme=\"icon\" icon=\"delete-o\" (click)=\"removeControl(index)\" [attr.data-automation-id]=\"'novo-control-group-delete-' + key\" index=\"-1\"></button>\n  </ng-template>\n  <ng-template #defaultColumnLabelTemplate let-form=\"form\" let-key=\"key\">\n      <div class=\"novo-control-group-control-label {{ label.key }}\" *ngFor=\"let label of controlLabels\" [style.max-width.px]=\"label.width\" [class.column-required]=\"label.required\">\n        <span [attr.data-automation-id]=\"'novo-control-group-label-' + label.value\">{{ label.value }}</span>\n      </div>\n      <div class=\"novo-control-group-control-label last\" *ngIf=\"edit\" [attr.data-automation-id]=\"'novo-control-group-edit-' + key\"></div>\n      <div class=\"novo-control-group-control-label last\" *ngIf=\"remove\" [attr.data-automation-id]=\"'novo-control-group-delete-' + key\"></div>\n  </ng-template>\n  <ng-container *ngIf=\"!vertical && (form?.controls)[key] && (form?.controls)[key]['controls'].length !== 0\">\n    <div class=\"novo-control-group-labels\" *ngIf=\"!vertical && (form?.controls)[key] && (form?.controls)[key]['controls'].length !== 0\">\n      <ng-template [ngTemplateOutlet]=\"columnLabelTemplate || defaultColumnLabelTemplate\" [ngTemplateOutletContext]=\"{ form: form, key: key, controlLabels: controlLabels }\">\n      </ng-template>\n    </div>\n  </ng-container>\n  <ng-container *ngIf=\"(form?.controls)[key]\">\n    <div class=\"novo-control-group-row\" *ngFor=\"let control of (form?.controls)[key]['controls']; let index = index\">\n      <ng-template [ngTemplateOutlet]=\"rowTemplate || defaultTemplate\" [ngTemplateOutletContext]=\"{ form: form, index: index, key: key, controls: controls }\">\n      </ng-template>\n    </div>\n  </ng-container>\n  <div class=\"novo-control-group-empty\" *ngIf=\"(form?.controls)[key] && (form?.controls)[key]['controls'].length === 0\" [attr.data-automation-id]=\"'novo-control-group-empty-' + key\">\n    {{ emptyMessage }}\n  </div>\n  <p *ngIf=\"add\">\n    <button type=\"button\" theme=\"dialogue\" icon=\"add-thin\" (click)=\"addNewControl()\" [attr.data-automation-id]=\"'novo-control-group-bottom-add-' + key\" index=\"-1\">\n      {{ add?.label }}\n    </button>\n  </p>\n</div>\n",
         changeDetection: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ChangeDetectionStrategy"].OnPush
       }]
     }];
@@ -48280,8 +48506,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         type: _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormBuilder"]
       }, {
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ChangeDetectorRef"]
-      }, {
-        type: NovoLabelService
       }];
     };
 
@@ -65003,7 +65227,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     !*** ./dist/novo-examples/fesm2015/novo-examples.js ***!
     \******************************************************/
 
-  /*! exports provided: AccordionExample, AceEditorPage, ActionsCellExample, ActivitySectionExample, AddressControlExample, AddressValueExample, AnalyticsColorsExample, AssociatedValueExample, AsyncChipsExample, AsyncPickerExample, BasicAceExample, BasicCardExample, BasicChipsExample, BasicDropDownExample, BasicEditorExample, BasicExpansionExample, BasicHeaderExample, BasicIconsExample, BasicListExample, BasicMultiPickerExample, BasicPickerExample, BasicQuickNoteExample, BasicRadioExample, BasicSelectExample, BasicSlideExample, BasicTipWellExample, BasicValueExample, BigCalendarExample, ButtonDialogueExample, ButtonDynamicExample, ButtonFabExample, ButtonIconExample, ButtonInverseExample, ButtonLoadingExample, ButtonOverviewExample, ButtonPrimaryExample, ButtonRadioExample, ButtonSecondaryExample, ButtonStandardExample, ButtonlessTipWellExample, ButtonsPage, CalendarExample, CalendarInputControlsExample, CalendarPage, CardConfigExample, CardsPage, CategoryValueExample, CheckBoxControlsExample, ChipsPage, ChomskyPage, CloseOnSelectChipsExample, ColorsPage, ComponentsPage, CompositionPage, CondensedHeaderExample, ConfigureColumnsModal, CorporateUserValueExample, CustomDemoControlExample, CustomDropDownExample, CustomModalExample, CustomPickerResults, CustomPickerResultsExample, CustomQuickNoteExample, CustomQuickNoteResults, CustomQuickNoteResultsExample, CustomTemplateExample, DataTablePage, DataTableRemoteExample, DataTableRowsExample, DataTableServiceExample, DatePickerExample, DatePickerPage, DateRangeExample, DateTimeExample, DateTimeInputExample, DateTimeValueExample, DateTranslationsExample, DefaultOptionsPickerExample, DesignPage, DetailsTableExample, DisabledFormExample, DropdownPage, DynamicFormExample, DynamicFormFieldSetsExample, EXAMPLE_COMPONENTS, EXAMPLE_LIST, EditableTableExample, EditorPage, EnableDisableAllFieldsInFormExample, EntityColorsExample, EntityListValueExample, EntityPickerExample, ErrorModalExample, ExampleData, ExpansionPage, ExternalLinkValueExample, ExtraDetails, FiAddingRemovingExample, FiAsyncExample, FiCalculationExample, FiConfirmExample, FiEnableDisableExample, FiGlobalsExample, FiHideShowExample, FiMessagingExample, FiModifyAddedPickerExample, FiModifyOptionsExample, FiRequiredExample, FiTooltipExample, FiValidationExample, FieldInteractionsPage, FileInputControlsExample, FormControlsPage, FormGroupsPage, FormPage, FormattedChipsExample, FormattedPickerExample, FormatterValueExample, GroupedMultiPickerExample, GroupedPickerExample, HeaderPage, HeaderSearchbarExample, HeaderSubtitleExample, HomePage, HorizontalExample, HorizontalOptionsExample, HtmlTipWellExample, IconPage, IconRadioExample, IconTipWellExample, IconValueExample, IconographyPage, LargeDropDownExample, LayoutsPage, LazyExpansionExample, ListPage, LoadingCircleExample, LoadingLineExample, LoadingPage, LongSelectExample, MinimalEditorExample, ModalAddFormDemo, ModalAddFormExample, ModalCustomDemo, ModalEditFormDemo, ModalEditFormExample, ModalErrorDemo, ModalPage, ModalSuccessDemo, ModalWarningDemo, MultiDropDownExample, MultiOptionValueExample, MultiPickerPage, NestedMultiPickerExample, NovoExamplesModule, NovoExamplesRoutesModule, NumberTranslationsExample, OverrideTemplateExample, PAGE_LIST, PatternsPage, PickerControlsExample, PickerPage, PipesPage, PluralTranslationsExample, PluralizeExample, PopOverAutoPlacementExample, PopOverBehaviorsExample, PopOverDynamicExample, PopOverHorizontalExample, PopOverPage, PopOverPlacementExample, PopOverVerticalExample, PositionDropDownExample, PrimaryColorsExample, QuickNotePage, RadioButtonsPage, RaisedIconsExample, RangeExample, RecordHeaderExample, RowChipsExample, ScrollableDropDownExample, SearchPage, SearchUsageExample, SecurityExample, SecurityPage, SelectAllTableExample, SelectPage, SimpleTranslationsExample, SlidesPage, StepperHorizontalExample, StepperPage, StepperVerticalExample, SuccessModalExample, SwitchPage, SwitchUsageExample, TabbedGroupPickerBasicExample, TabbedGroupPickerBigGroupsExample, TabbedGroupPickerGroupsExample, TabbedGroupPickerPage, TabbedGroupPickerQuickSelectExample, TableExample, TablePage, TabsBasicExample, TabsColorExample, TabsCondensedExample, TabsPage, TabsRouterExample, TabsVerticalExample, TemplatesPage, TextBasedControlsExample, ThemedIconsExample, ThemedListExample, TilesPage, TilesUsageExample, TimeExample, TimePickerExample, TipWellPage, ToastServiceExample, ToastUsageExample, ToasterPage, TooltipAlignExample, TooltipOptionsExample, TooltipPage, TooltipPlacementExample, TooltipSizesExample, TooltipToggleExample, TooltipTypesExample, TotalFooterTableExample, TranslationsVariablesExample, TypographyPage, UpdatingFormExample, ValuePage, VerticalDynamicFormExample, VerticalExample, VerticalOptionsExample, VerticalRadioExample, WarningModalExample, WeekStartExample, ɵa, ɵb, ɵc, ɵd, ɵe */
+  /*! exports provided: AccordionExample, AceEditorPage, ActionsCellExample, ActivitySectionExample, AddressControlExample, AddressValueExample, AnalyticsColorsExample, AssociatedValueExample, AsyncChipsExample, AsyncPickerExample, BasicAceExample, BasicCardExample, BasicChipsExample, BasicDropDownExample, BasicEditorExample, BasicExpansionExample, BasicHeaderExample, BasicIconsExample, BasicListExample, BasicMultiPickerExample, BasicPickerExample, BasicQuickNoteExample, BasicRadioExample, BasicSelectExample, BasicSlideExample, BasicTipWellExample, BasicValueExample, BigCalendarExample, ButtonDialogueExample, ButtonDynamicExample, ButtonFabExample, ButtonIconExample, ButtonInverseExample, ButtonLoadingExample, ButtonOverviewExample, ButtonPrimaryExample, ButtonRadioExample, ButtonSecondaryExample, ButtonStandardExample, ButtonlessTipWellExample, ButtonsPage, CalendarExample, CalendarInputControlsExample, CalendarPage, CardConfigExample, CardsPage, CategoryValueExample, CheckBoxControlsExample, ChipsPage, ChomskyPage, CloseOnSelectChipsExample, ColorsPage, ComponentsPage, CompositionPage, CondensedHeaderExample, ConfigureColumnsModal, CorporateUserValueExample, CustomDemoControlExample, CustomDropDownExample, CustomModalExample, CustomPickerResults, CustomPickerResultsExample, CustomQuickNoteExample, CustomQuickNoteResults, CustomQuickNoteResultsExample, CustomTemplateExample, DataTablePage, DataTableRemoteExample, DataTableRowsExample, DataTableServiceExample, DatePickerExample, DatePickerPage, DateRangeExample, DateTimeExample, DateTimeInputExample, DateTimeValueExample, DateTranslationsExample, DefaultOptionsPickerExample, DesignPage, DetailsTableExample, DisabledFormExample, DropdownPage, DynamicFormExample, DynamicFormFieldSetsExample, EXAMPLE_COMPONENTS, EXAMPLE_LIST, EditableTableExample, EditorPage, EnableDisableAllFieldsInFormExample, EntityColorsExample, EntityListValueExample, EntityPickerExample, ErrorModalExample, ExampleData, ExpansionPage, ExternalLinkValueExample, ExtraDetails, FiAddingRemovingExample, FiAsyncExample, FiCalculationExample, FiConfirmExample, FiEnableDisableExample, FiGlobalsExample, FiHideShowExample, FiMessagingExample, FiModifyAddedPickerExample, FiModifyOptionsExample, FiNestedExample, FiRequiredExample, FiTooltipExample, FiValidationExample, FieldInteractionsPage, FileInputControlsExample, FormControlsPage, FormGroupsPage, FormPage, FormattedChipsExample, FormattedPickerExample, FormatterValueExample, GroupedMultiPickerExample, GroupedPickerExample, HeaderPage, HeaderSearchbarExample, HeaderSubtitleExample, HomePage, HorizontalExample, HorizontalOptionsExample, HtmlTipWellExample, IconPage, IconRadioExample, IconTipWellExample, IconValueExample, IconographyPage, LargeDropDownExample, LayoutsPage, LazyExpansionExample, ListPage, LoadingCircleExample, LoadingLineExample, LoadingPage, LongSelectExample, MinimalEditorExample, ModalAddFormDemo, ModalAddFormExample, ModalCustomDemo, ModalEditFormDemo, ModalEditFormExample, ModalErrorDemo, ModalPage, ModalSuccessDemo, ModalWarningDemo, MultiDropDownExample, MultiOptionValueExample, MultiPickerPage, NestedMultiPickerExample, NovoExamplesModule, NovoExamplesRoutesModule, NumberTranslationsExample, OverrideTemplateExample, PAGE_LIST, PatternsPage, PickerControlsExample, PickerPage, PipesPage, PluralTranslationsExample, PluralizeExample, PopOverAutoPlacementExample, PopOverBehaviorsExample, PopOverDynamicExample, PopOverHorizontalExample, PopOverPage, PopOverPlacementExample, PopOverVerticalExample, PositionDropDownExample, PrimaryColorsExample, QuickNotePage, RadioButtonsPage, RaisedIconsExample, RangeExample, RecordHeaderExample, RowChipsExample, ScrollableDropDownExample, SearchPage, SearchUsageExample, SecurityExample, SecurityPage, SelectAllTableExample, SelectPage, SimpleTranslationsExample, SlidesPage, StepperHorizontalExample, StepperPage, StepperVerticalExample, SuccessModalExample, SwitchPage, SwitchUsageExample, TabbedGroupPickerBasicExample, TabbedGroupPickerBigGroupsExample, TabbedGroupPickerGroupsExample, TabbedGroupPickerPage, TabbedGroupPickerQuickSelectExample, TableExample, TablePage, TabsBasicExample, TabsColorExample, TabsCondensedExample, TabsPage, TabsRouterExample, TabsVerticalExample, TemplatesPage, TextBasedControlsExample, ThemedIconsExample, ThemedListExample, TilesPage, TilesUsageExample, TimeExample, TimePickerExample, TipWellPage, ToastServiceExample, ToastUsageExample, ToasterPage, TooltipAlignExample, TooltipOptionsExample, TooltipPage, TooltipPlacementExample, TooltipSizesExample, TooltipToggleExample, TooltipTypesExample, TotalFooterTableExample, TranslationsVariablesExample, TypographyPage, UpdatingFormExample, ValuePage, VerticalDynamicFormExample, VerticalExample, VerticalOptionsExample, VerticalRadioExample, WarningModalExample, WeekStartExample, ɵa, ɵb, ɵc, ɵd, ɵe */
 
   /***/
   function distNovoExamplesFesm2015NovoExamplesJs(module, __webpack_exports__, __webpack_require__) {
@@ -65651,6 +65875,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     __webpack_require__.d(__webpack_exports__, "FiModifyOptionsExample", function () {
       return FiModifyOptionsExample;
+    });
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "FiNestedExample", function () {
+      return FiNestedExample;
     });
     /* harmony export (binding) */
 
@@ -82851,6 +83081,334 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     if (false) {}
     /**
      * @fileoverview added by tsickle
+     * Generated from: utils/field-interactions/fi-nested/fi-nested-example.ts
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+
+    /**
+     * \@title Fi Nested Form Example
+     */
+
+
+    var FiNestedExample = /*#__PURE__*/function () {
+      /**
+       * @param {?} formUtils
+       */
+      function FiNestedExample(formUtils) {
+        var _this290 = this;
+
+        _classCallCheck(this, FiNestedExample);
+
+        this.formUtils = formUtils;
+        this.initialValue = [{
+          selected: true,
+          label: "First Shift",
+          multiplier: 1,
+          payRate: 40
+        }, {
+          selected: false,
+          label: "",
+          multiplier: 1.5,
+          payRate: 60
+        }, {
+          selected: false,
+          label: "",
+          multiplier: 2.0,
+          payRate: 80
+        }];
+        /** @type {?} */
+
+        var onMinMaxPayRateChanged =
+        /**
+        * @param {?} API
+        * @return {?}
+        */
+        function onMinMaxPayRateChanged(API) {
+          // Validate the min/max range
+
+          /** @type {?} */
+          var minPayRate = Number(API.getValue('minPayRate'));
+          /** @type {?} */
+
+          var maxPayRate = Number(API.getValue('maxPayRate'));
+
+          if (minPayRate > maxPayRate) {
+            API.markAsInvalid(API.getActiveKey(), 'Range is invalid. Please ensure that the minimum does not exceed the maximum.');
+            API.displayTip('minPayRate', 'Range is invalid. Please ensure that the minimum does not exceed the maximum.', 'caution');
+          } else {
+            // The API.form is equal the top level form since the min/max fields are directly on the form, not part of a nested form
+            _this290.calculatePayRates(API, API.form);
+
+            API.clearTip('minPayRate');
+          }
+        };
+        /** @type {?} */
+
+
+        var onSelectedChanged =
+        /**
+        * @param {?} API
+        * @return {?}
+        */
+        function onSelectedChanged(API) {
+          // If my row is selected, deselect other rows without causing cascading changes
+          if (API.getActiveValue() === true) {
+            API.getParent().controls.forEach(
+            /**
+            * @param {?} form
+            * @return {?}
+            */
+            function (form) {
+              if (API.getIndex() !== API.getIndex(form)) {
+                API.setValue(API.getActiveKey(), false, {
+                  emitEvent: false
+                }, form);
+              }
+            });
+          }
+        };
+        /** @type {?} */
+
+
+        var onLabelChanged =
+        /**
+        * @param {?} API
+        * @return {?}
+        */
+        function onLabelChanged(API) {
+          // Update the labels for the Overtime/Double Time earn codes
+          if (API.getIndex() === 0) {
+            /** @type {?} */
+            var overtimeForm = API.getParent().controls[1];
+            /** @type {?} */
+
+            var doubleTimeForm = API.getParent().controls[2];
+
+            if (overtimeForm) {
+              API.setValue(API.getActiveKey(), API.getActiveValue() + ' - OT', {
+                emitEvent: false
+              }, overtimeForm);
+              API.setReadOnly(API.getActiveKey(), true, overtimeForm);
+            }
+
+            if (doubleTimeForm) {
+              API.setValue(API.getActiveKey(), API.getActiveValue() + ' - DT', {
+                emitEvent: false
+              }, doubleTimeForm);
+              API.setReadOnly(API.getActiveKey(), true, doubleTimeForm);
+            }
+          }
+        };
+        /** @type {?} */
+
+
+        var onMultiplierChanged =
+        /**
+        * @param {?} API
+        * @return {?}
+        */
+        function onMultiplierChanged(API) {
+          // Disable the base rate multiplier since it is fixed at one
+          API.setReadOnly(API.getActiveKey(), API.getIndex() === 0); // The parent of this nested row form is the rows form array, and the grandparent is the main form object
+
+          /** @type {?} */
+
+          var rowsFormArray = API.getParent();
+          /** @type {?} */
+
+          var topLevelForm = API.getParent(rowsFormArray);
+
+          _this290.calculatePayRates(API, topLevelForm);
+        };
+        /** @type {?} */
+
+
+        var onPayRateChanged =
+        /**
+        * @param {?} API
+        * @return {?}
+        */
+        function onPayRateChanged(API) {
+          // Disable the non-base rate payRates since they are auto calculated
+          API.setReadOnly(API.getActiveKey(), API.getIndex() > 0); // The parent of this nested row form is the rows form array, and the grandparent is the main form object
+
+          /** @type {?} */
+
+          var rowsFormArray = API.getParent();
+          /** @type {?} */
+
+          var topLevelForm = API.getParent(rowsFormArray);
+
+          _this290.calculatePayRates(API, topLevelForm);
+        };
+
+        this.minPayRateControl = new novo_elements__WEBPACK_IMPORTED_MODULE_3__["TextBoxControl"]({
+          key: 'minPayRate',
+          type: 'currency',
+          label: 'Minimum Pay Rate',
+          value: 20,
+          currencyFormat: '$ USD',
+          interactions: [{
+            event: 'change',
+            script: onMinMaxPayRateChanged
+          }],
+          tooltip: 'If the value of any pay rates are below this value then the form will be marked invalid.'
+        });
+        this.maxPayRateControl = new novo_elements__WEBPACK_IMPORTED_MODULE_3__["TextBoxControl"]({
+          key: 'maxPayRate',
+          type: 'currency',
+          label: 'Maximum Pay Rate',
+          value: 80,
+          tooltip: 'If the value of any pay rates are above this value then the form will be marked invalid.',
+          currencyFormat: '$ USD',
+          interactions: [{
+            event: 'change',
+            script: onMinMaxPayRateChanged
+          }],
+          tipWell: {
+            tip: 'This form is interactive! Try adjusting the min/max and pay rates to see the custom form validation logic that is enabled by field interactions across nested forms.',
+            icon: 'info'
+          }
+        });
+        this.form = formUtils.toFormGroup([this.minPayRateControl, this.maxPayRateControl]);
+        this.controls = [new novo_elements__WEBPACK_IMPORTED_MODULE_3__["RadioControl"]({
+          key: 'selected',
+          label: 'Selected',
+          options: [{
+            label: '',
+            value: true
+          }],
+          interactions: [{
+            event: 'change',
+            script: onSelectedChanged
+          }],
+          tooltip: 'Selecting a radio button will de-select buttons on the other forms, making multiple nested forms appear as a single form.'
+        }), new novo_elements__WEBPACK_IMPORTED_MODULE_3__["TextBoxControl"]({
+          key: 'label',
+          label: 'Earn Code',
+          required: true,
+          interactions: [{
+            invokeOnInit: true,
+            event: 'change',
+            script: onLabelChanged
+          }],
+          tooltip: 'Labels on other nested forms will be updated based on this label.'
+        }), new novo_elements__WEBPACK_IMPORTED_MODULE_3__["TextBoxControl"]({
+          key: 'multiplier',
+          label: 'Multiplier',
+          type: 'bigdecimal',
+          required: true,
+          interactions: [{
+            invokeOnInit: true,
+            event: 'change',
+            script: onMultiplierChanged
+          }],
+          tooltip: 'Updating the multiplier will auto calculate the resulting pay rate.'
+        }), new novo_elements__WEBPACK_IMPORTED_MODULE_3__["TextBoxControl"]({
+          key: 'payRate',
+          label: 'Pay Rate',
+          type: 'currency',
+          required: true,
+          interactions: [{
+            invokeOnInit: true,
+            event: 'change',
+            script: onPayRateChanged
+          }],
+          currencyFormat: '$ USD'
+        })];
+      }
+      /**
+       * @private
+       * @param {?} API
+       * @param {?} topLevelForm
+       * @return {?}
+       */
+
+
+      _createClass(FiNestedExample, [{
+        key: "calculatePayRates",
+        value: function calculatePayRates(API, topLevelForm) {
+          // Get values from the top level form controls
+
+          /** @type {?} */
+          var minPayRate = Number(API.getValue('minPayRate', topLevelForm));
+          /** @type {?} */
+
+          var maxPayRate = Number(API.getValue('maxPayRate', topLevelForm)); // Walk down to the nested forms: 'rows' is the key input value passed to the NovoControlGroup for constructing the formArray
+
+          /** @type {?} */
+
+          var rowForms = API.getFormGroupArray('rows', topLevelForm);
+          /** @type {?} */
+
+          var baseRowForm = rowForms[0];
+          /** @type {?} */
+
+          var basePayRate = Number(API.getValue('payRate', baseRowForm));
+          /** @type {?} */
+
+          var isPayRateValid = true;
+          rowForms.forEach(
+          /**
+          * @param {?} form
+          * @return {?}
+          */
+          function (form) {
+            // Calculate the payRate for read only Overtime / Double time fields
+            if (API.getIndex(form) > 0) {
+              /** @type {?} */
+              var multiplier = Number(API.getValue('multiplier', form));
+              API.setValue('payRate', basePayRate * multiplier, {
+                emitEvent: false
+              }, form);
+            } // Determine if each pay rate is valid. Put a tipWell on the invalid rows.
+
+            /** @type {?} */
+
+
+            var payRate = Number(API.getValue('payRate', form));
+
+            if (payRate < minPayRate) {
+              isPayRateValid = false;
+              API.displayTip('payRate', 'rate is below the minimum', 'caution', false, false, form);
+            } else if (payRate > maxPayRate) {
+              isPayRateValid = false;
+              API.displayTip('payRate', 'rate exceeds the maximum', 'caution', false, false, form);
+            } else {
+              API.clearTip('payRate', form);
+            }
+          }); // Mark the editable row as invalid if any nested payRate form has a value outside of the min/max bounds
+
+          if (isPayRateValid) {
+            API.markAsValid('payRate', baseRowForm);
+          } else {
+            API.markAsInvalid('payRate', 'pay rate is less than the minimum pay rate', baseRowForm);
+          }
+        }
+      }]);
+
+      return FiNestedExample;
+    }();
+
+    FiNestedExample.decorators = [{
+      type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
+      args: [{
+        selector: 'fi-nested-example',
+        template: "<novo-form [form]=\"form\">\n  <div class=\"novo-form-row\">\n    <novo-control [form]=\"form\" [control]=\"minPayRateControl\"></novo-control>\n  </div>\n  <div class=\"novo-form-row\">\n    <novo-control [form]=\"form\" [control]=\"maxPayRateControl\"></novo-control>\n  </div>\n  <novo-control-group [form]=\"form\"\n                      [controls]=\"controls\"\n                      [initialValue]=\"initialValue\"\n                      remove=\"false\"\n                      edit=\"false\"\n                      key=\"rows\"></novo-control-group>\n</novo-form>\n\n<div class=\"final-value\">Form Value - <pre>{{ form.value | json }}</pre></div>\n<div class=\"final-value\">Form Dirty - {{ form.dirty }}</div>\n<div class=\"final-value\">Is Form Valid? - {{ form.valid }}</div>\n",
+        styles: [""]
+      }]
+    }];
+    /** @nocollapse */
+
+    FiNestedExample.ctorParameters = function () {
+      return [{
+        type: novo_elements__WEBPACK_IMPORTED_MODULE_3__["FormUtils"]
+      }];
+    };
+
+    if (false) {}
+    /**
+     * @fileoverview added by tsickle
      * Generated from: utils/field-interactions/fi-required/fi-required-example.ts
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
@@ -82942,7 +83500,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @param {?} formUtils
      */
     function FiTooltipExample(formUtils) {
-      var _this290 = this;
+      var _this291 = this;
 
       _classCallCheck(this, FiTooltipExample);
 
@@ -82972,8 +83530,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       function tooltipUpdateFunction(API) {
         console.log('[FieldInteractionDemo] - tooltipUpdateFunction'); // tslint:disable-line
 
-        API.getControl(_this290.controls.tooltipControl.key).tooltipSize = API.getValue(_this290.controls.tooltipSizeControl.key);
-        API.getControl(_this290.controls.tooltipControl.key).tooltipPreline = API.getValue(_this290.controls.tooltipPrelineControl.key);
+        API.getControl(_this291.controls.tooltipControl.key).tooltipSize = API.getValue(_this291.controls.tooltipSizeControl.key);
+        API.getControl(_this291.controls.tooltipControl.key).tooltipPreline = API.getValue(_this291.controls.tooltipPrelineControl.key);
       }; // Tooltip Field Interactions
 
 
@@ -85508,6 +86066,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         cssSource: "%2F**%20No%20CSS%20for%20this%20example%20*%2F%0A",
         htmlSource: "%3Cnovo-form%20%5Bform%5D%3D%22form%22%20layout%3D%22vertical%22%3E%0A%20%20%20%20%3Cdiv%20class%3D%22novo-form-row%22%3E%0A%20%20%20%20%20%20%20%20%3Cnovo-control%20%5Bform%5D%3D%22form%22%20%5Bcontrol%5D%3D%22controls.selectControl%22%3E%3C%2Fnovo-control%3E%0A%20%20%20%20%3C%2Fdiv%3E%0A%20%20%20%20%3Cdiv%20class%3D%22novo-form-row%22%3E%0A%20%20%20%20%20%20%20%20%3Cnovo-control%20%5Bform%5D%3D%22form%22%20%5Bcontrol%5D%3D%22controls.pickerControl%22%3E%3C%2Fnovo-control%3E%0A%20%20%20%20%3C%2Fdiv%3E%0A%20%20%20%20%3Cdiv%20class%3D%22novo-form-row%22%3E%0A%20%20%20%20%20%20%20%20%3Cnovo-control%20%5Bform%5D%3D%22form%22%20%5Bcontrol%5D%3D%22controls.toggleControl%22%3E%3C%2Fnovo-control%3E%0A%20%20%20%20%3C%2Fdiv%3E%0A%20%20%20%20%3Cdiv%20class%3D%22novo-form-row%22%3E%0A%20%20%20%20%20%20%20%20%3Cnovo-control%20%5Bform%5D%3D%22form%22%20%5Bcontrol%5D%3D%22controls.makePickerAsyncControl%22%3E%3C%2Fnovo-control%3E%0A%20%20%20%20%3C%2Fdiv%3E%0A%3C%2Fnovo-form%3E%0A%3Cdiv%20class%3D%22final-value%22%3EForm%20Value%20-%20%7B%7B%20form.value%20%7C%20json%20%7D%7D%3C%2Fdiv%3E%0A%3Cdiv%20class%3D%22final-value%22%3EForm%20Dirty%20-%20%7B%7B%20form.dirty%20%7C%20json%20%7D%7D%3C%2Fdiv%3E%0A%3Cdiv%20class%3D%22final-value%22%3EIs%20Form%20Valid%3F%20-%20%7B%7B%20form.valid%20%7C%20json%20%7D%7D%3C%2Fdiv%3E%0A"
       },
+      'fi-nested': {
+        title: 'Fi Nested Form Example',
+        component: FiNestedExample,
+        tsSource: "import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0A%2F%2F%20Vendor%0Aimport%20%7B%20FieldInteractionApi%2C%20FormUtils%2C%20NovoControlConfig%2C%20NovoFormGroup%2C%20RadioControl%2C%20TextBoxControl%20%7D%20from%20'novo-elements'%3B%0A%0A%2F**%0A%20*%20%40title%20Fi%20Nested%20Form%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'fi-nested-example'%2C%0A%20%20templateUrl%3A%20'fi-nested-example.html'%2C%0A%20%20styleUrls%3A%20%5B'fi-nested-example.css'%5D%2C%0A%7D)%0Aexport%20class%20FiNestedExample%20%7B%0A%20%20public%20form%3A%20NovoFormGroup%3B%0A%20%20public%20minPayRateControl%3A%20TextBoxControl%3B%0A%20%20public%20maxPayRateControl%3A%20TextBoxControl%3B%0A%20%20public%20controls%3A%20NovoControlConfig%5B%5D%3B%0A%20%20public%20initialValue%20%3D%20%5B%0A%20%20%20%20%7B%20selected%3A%20true%2C%20label%3A%20%60First%20Shift%60%2C%20multiplier%3A%201%2C%20payRate%3A%2040%20%7D%2C%0A%20%20%20%20%7B%20selected%3A%20false%2C%20label%3A%20%60%60%2C%20multiplier%3A%201.5%2C%20payRate%3A%2060%20%7D%2C%0A%20%20%20%20%7B%20selected%3A%20false%2C%20label%3A%20%60%60%2C%20multiplier%3A%202.0%2C%20payRate%3A%2080%20%7D%2C%0A%20%20%5D%3B%0A%0A%20%20constructor(private%20formUtils%3A%20FormUtils)%20%7B%0A%20%20%20%20const%20onMinMaxPayRateChanged%20%3D%20(API%3A%20FieldInteractionApi)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%2F%2F%20Validate%20the%20min%2Fmax%20range%0A%20%20%20%20%20%20const%20minPayRate%20%3D%20Number(API.getValue('minPayRate'))%3B%0A%20%20%20%20%20%20const%20maxPayRate%20%3D%20Number(API.getValue('maxPayRate'))%3B%0A%20%20%20%20%20%20if%20(minPayRate%20%3E%20maxPayRate)%20%7B%0A%20%20%20%20%20%20%20%20API.markAsInvalid(API.getActiveKey()%2C%20'Range%20is%20invalid.%20Please%20ensure%20that%20the%20minimum%20does%20not%20exceed%20the%20maximum.')%3B%0A%20%20%20%20%20%20%20%20API.displayTip('minPayRate'%2C%20'Range%20is%20invalid.%20Please%20ensure%20that%20the%20minimum%20does%20not%20exceed%20the%20maximum.'%2C%20'caution')%3B%0A%20%20%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%20The%20API.form%20is%20equal%20the%20top%20level%20form%20since%20the%20min%2Fmax%20fields%20are%20directly%20on%20the%20form%2C%20not%20part%20of%20a%20nested%20form%0A%20%20%20%20%20%20%20%20this.calculatePayRates(API%2C%20API.form)%3B%0A%20%20%20%20%20%20%20%20API.clearTip('minPayRate')%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20const%20onSelectedChanged%20%3D%20(API%3A%20FieldInteractionApi)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%2F%2F%20If%20my%20row%20is%20selected%2C%20deselect%20other%20rows%20without%20causing%20cascading%20changes%0A%20%20%20%20%20%20if%20(API.getActiveValue()%20%3D%3D%3D%20true)%20%7B%0A%20%20%20%20%20%20%20%20API.getParent().controls.forEach(form%20%3D%3E%20%7B%0A%20%20%20%20%20%20%20%20%20%20if%20(API.getIndex()%20!%3D%3D%20API.getIndex(form))%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20API.setValue(API.getActiveKey()%2C%20false%2C%20%7B%20emitEvent%3A%20false%20%7D%2C%20form)%3B%0A%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%7D)%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20const%20onLabelChanged%20%3D%20(API%3A%20FieldInteractionApi)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%2F%2F%20Update%20the%20labels%20for%20the%20Overtime%2FDouble%20Time%20earn%20codes%0A%20%20%20%20%20%20if%20(API.getIndex()%20%3D%3D%3D%200)%20%7B%0A%20%20%20%20%20%20%20%20const%20overtimeForm%20%3D%20API.getParent().controls%5B1%5D%3B%0A%20%20%20%20%20%20%20%20const%20doubleTimeForm%20%3D%20API.getParent().controls%5B2%5D%3B%0A%20%20%20%20%20%20%20%20if%20(overtimeForm)%20%7B%0A%20%20%20%20%20%20%20%20%20%20API.setValue(API.getActiveKey()%2C%20API.getActiveValue()%20%2B%20'%20-%20OT'%2C%20%7B%20emitEvent%3A%20false%20%7D%2C%20overtimeForm)%3B%0A%20%20%20%20%20%20%20%20%20%20API.setReadOnly(API.getActiveKey()%2C%20true%2C%20overtimeForm)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20if%20(doubleTimeForm)%20%7B%0A%20%20%20%20%20%20%20%20%20%20API.setValue(API.getActiveKey()%2C%20API.getActiveValue()%20%2B%20'%20-%20DT'%2C%20%7B%20emitEvent%3A%20false%20%7D%2C%20doubleTimeForm)%3B%0A%20%20%20%20%20%20%20%20%20%20API.setReadOnly(API.getActiveKey()%2C%20true%2C%20doubleTimeForm)%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20const%20onMultiplierChanged%20%3D%20(API%3A%20FieldInteractionApi)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%2F%2F%20Disable%20the%20base%20rate%20multiplier%20since%20it%20is%20fixed%20at%20one%0A%20%20%20%20%20%20API.setReadOnly(API.getActiveKey()%2C%20API.getIndex()%20%3D%3D%3D%200)%3B%0A%0A%20%20%20%20%20%20%2F%2F%20The%20parent%20of%20this%20nested%20row%20form%20is%20the%20rows%20form%20array%2C%20and%20the%20grandparent%20is%20the%20main%20form%20object%0A%20%20%20%20%20%20const%20rowsFormArray%20%3D%20API.getParent()%3B%0A%20%20%20%20%20%20const%20topLevelForm%20%3D%20API.getParent(rowsFormArray)%3B%0A%20%20%20%20%20%20this.calculatePayRates(API%2C%20topLevelForm)%3B%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20const%20onPayRateChanged%20%3D%20(API%3A%20FieldInteractionApi)%20%3D%3E%20%7B%0A%20%20%20%20%20%20%2F%2F%20Disable%20the%20non-base%20rate%20payRates%20since%20they%20are%20auto%20calculated%0A%20%20%20%20%20%20API.setReadOnly(API.getActiveKey()%2C%20API.getIndex()%20%3E%200)%3B%0A%0A%20%20%20%20%20%20%2F%2F%20The%20parent%20of%20this%20nested%20row%20form%20is%20the%20rows%20form%20array%2C%20and%20the%20grandparent%20is%20the%20main%20form%20object%0A%20%20%20%20%20%20const%20rowsFormArray%20%3D%20API.getParent()%3B%0A%20%20%20%20%20%20const%20topLevelForm%20%3D%20API.getParent(rowsFormArray)%3B%0A%20%20%20%20%20%20this.calculatePayRates(API%2C%20topLevelForm)%3B%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20this.minPayRateControl%20%3D%20new%20TextBoxControl(%7B%0A%20%20%20%20%20%20key%3A%20'minPayRate'%2C%0A%20%20%20%20%20%20type%3A%20'currency'%2C%0A%20%20%20%20%20%20label%3A%20'Minimum%20Pay%20Rate'%2C%0A%20%20%20%20%20%20value%3A%2020%2C%0A%20%20%20%20%20%20currencyFormat%3A%20'%24%20USD'%2C%0A%20%20%20%20%20%20interactions%3A%20%5B%7B%20event%3A%20'change'%2C%20script%3A%20onMinMaxPayRateChanged%20%7D%5D%2C%0A%20%20%20%20%20%20tooltip%3A%20'If%20the%20value%20of%20any%20pay%20rates%20are%20below%20this%20value%20then%20the%20form%20will%20be%20marked%20invalid.'%2C%0A%20%20%20%20%7D)%3B%0A%0A%20%20%20%20this.maxPayRateControl%20%3D%20new%20TextBoxControl(%7B%0A%20%20%20%20%20%20key%3A%20'maxPayRate'%2C%0A%20%20%20%20%20%20type%3A%20'currency'%2C%0A%20%20%20%20%20%20label%3A%20'Maximum%20Pay%20Rate'%2C%0A%20%20%20%20%20%20value%3A%2080%2C%0A%20%20%20%20%20%20tooltip%3A%20'If%20the%20value%20of%20any%20pay%20rates%20are%20above%20this%20value%20then%20the%20form%20will%20be%20marked%20invalid.'%2C%0A%20%20%20%20%20%20currencyFormat%3A%20'%24%20USD'%2C%0A%20%20%20%20%20%20interactions%3A%20%5B%7B%20event%3A%20'change'%2C%20script%3A%20onMinMaxPayRateChanged%20%7D%5D%2C%0A%20%20%20%20%20%20tipWell%3A%20%7B%0A%20%20%20%20%20%20%20%20tip%3A%20'This%20form%20is%20interactive!%20Try%20adjusting%20the%20min%2Fmax%20and%20pay%20rates%20to%20see%20the%20custom%20form%20validation%20logic%20that%20is%20enabled%20by%20field%20interactions%20across%20nested%20forms.'%2C%0A%20%20%20%20%20%20%20%20icon%3A%20'info'%2C%0A%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%7D)%3B%0A%0A%20%20%20%20this.form%20%3D%20formUtils.toFormGroup(%5Bthis.minPayRateControl%2C%20this.maxPayRateControl%5D)%3B%0A%0A%20%20%20%20this.controls%20%3D%20%5B%0A%20%20%20%20%20%20new%20RadioControl(%7B%0A%20%20%20%20%20%20%20%20key%3A%20'selected'%2C%0A%20%20%20%20%20%20%20%20label%3A%20'Selected'%2C%0A%20%20%20%20%20%20%20%20options%3A%20%5B%7B%20label%3A%20''%2C%20value%3A%20true%20%7D%5D%2C%0A%20%20%20%20%20%20%20%20interactions%3A%20%5B%7B%20event%3A%20'change'%2C%20script%3A%20onSelectedChanged%20%7D%5D%2C%0A%20%20%20%20%20%20%20%20tooltip%3A%20'Selecting%20a%20radio%20button%20will%20de-select%20buttons%20on%20the%20other%20forms%2C%20making%20multiple%20nested%20forms%20appear%20as%20a%20single%20form.'%2C%0A%20%20%20%20%20%20%7D)%2C%0A%20%20%20%20%20%20new%20TextBoxControl(%7B%0A%20%20%20%20%20%20%20%20key%3A%20'label'%2C%0A%20%20%20%20%20%20%20%20label%3A%20'Earn%20Code'%2C%0A%20%20%20%20%20%20%20%20required%3A%20true%2C%0A%20%20%20%20%20%20%20%20interactions%3A%20%5B%7B%20invokeOnInit%3A%20true%2C%20event%3A%20'change'%2C%20script%3A%20onLabelChanged%20%7D%5D%2C%0A%20%20%20%20%20%20%20%20tooltip%3A%20'Labels%20on%20other%20nested%20forms%20will%20be%20updated%20based%20on%20this%20label.'%2C%0A%20%20%20%20%20%20%7D)%2C%0A%20%20%20%20%20%20new%20TextBoxControl(%7B%0A%20%20%20%20%20%20%20%20key%3A%20'multiplier'%2C%0A%20%20%20%20%20%20%20%20label%3A%20'Multiplier'%2C%0A%20%20%20%20%20%20%20%20type%3A%20'bigdecimal'%2C%0A%20%20%20%20%20%20%20%20required%3A%20true%2C%0A%20%20%20%20%20%20%20%20interactions%3A%20%5B%7B%20invokeOnInit%3A%20true%2C%20event%3A%20'change'%2C%20script%3A%20onMultiplierChanged%20%7D%5D%2C%0A%20%20%20%20%20%20%20%20tooltip%3A%20'Updating%20the%20multiplier%20will%20auto%20calculate%20the%20resulting%20pay%20rate.'%2C%0A%20%20%20%20%20%20%7D)%2C%0A%20%20%20%20%20%20new%20TextBoxControl(%7B%0A%20%20%20%20%20%20%20%20key%3A%20'payRate'%2C%0A%20%20%20%20%20%20%20%20label%3A%20'Pay%20Rate'%2C%0A%20%20%20%20%20%20%20%20type%3A%20'currency'%2C%0A%20%20%20%20%20%20%20%20required%3A%20true%2C%0A%20%20%20%20%20%20%20%20interactions%3A%20%5B%7B%20invokeOnInit%3A%20true%2C%20event%3A%20'change'%2C%20script%3A%20onPayRateChanged%20%7D%5D%2C%0A%20%20%20%20%20%20%20%20currencyFormat%3A%20'%24%20USD'%2C%0A%20%20%20%20%20%20%7D)%2C%0A%20%20%20%20%5D%3B%0A%20%20%7D%0A%0A%20%20private%20calculatePayRates(API%3A%20FieldInteractionApi%2C%20topLevelForm%3A%20NovoFormGroup%20%7C%20any)%20%7B%0A%20%20%20%20%2F%2F%20Get%20values%20from%20the%20top%20level%20form%20controls%0A%20%20%20%20const%20minPayRate%20%3D%20Number(API.getValue('minPayRate'%2C%20topLevelForm))%3B%0A%20%20%20%20const%20maxPayRate%20%3D%20Number(API.getValue('maxPayRate'%2C%20topLevelForm))%3B%0A%0A%20%20%20%20%2F%2F%20Walk%20down%20to%20the%20nested%20forms%3A%20'rows'%20is%20the%20key%20input%20value%20passed%20to%20the%20NovoControlGroup%20for%20constructing%20the%20formArray%0A%20%20%20%20const%20rowForms%3A%20NovoFormGroup%5B%5D%20%7C%20any%5B%5D%20%3D%20API.getFormGroupArray('rows'%2C%20topLevelForm)%3B%0A%20%20%20%20const%20baseRowForm%20%3D%20rowForms%5B0%5D%3B%0A%20%20%20%20const%20basePayRate%20%3D%20Number(API.getValue('payRate'%2C%20baseRowForm))%3B%0A%0A%20%20%20%20let%20isPayRateValid%20%3D%20true%3B%0A%20%20%20%20rowForms.forEach(form%20%3D%3E%20%7B%0A%20%20%20%20%20%20%2F%2F%20Calculate%20the%20payRate%20for%20read%20only%20Overtime%20%2F%20Double%20time%20fields%0A%20%20%20%20%20%20if%20(API.getIndex(form)%20%3E%200)%20%7B%0A%20%20%20%20%20%20%20%20const%20multiplier%20%3D%20Number(API.getValue('multiplier'%2C%20form))%3B%0A%20%20%20%20%20%20%20%20API.setValue('payRate'%2C%20basePayRate%20*%20multiplier%2C%20%7B%20emitEvent%3A%20false%20%7D%2C%20form)%3B%0A%20%20%20%20%20%20%7D%0A%0A%20%20%20%20%20%20%2F%2F%20Determine%20if%20each%20pay%20rate%20is%20valid.%20Put%20a%20tipWell%20on%20the%20invalid%20rows.%0A%20%20%20%20%20%20const%20payRate%20%3D%20Number(API.getValue('payRate'%2C%20form))%3B%0A%20%20%20%20%20%20if%20(payRate%20%3C%20minPayRate)%20%7B%0A%20%20%20%20%20%20%20%20isPayRateValid%20%3D%20false%3B%0A%20%20%20%20%20%20%20%20API.displayTip('payRate'%2C%20'rate%20is%20below%20the%20minimum'%2C%20'caution'%2C%20false%2C%20false%2C%20form)%3B%0A%20%20%20%20%20%20%7D%20else%20if%20(payRate%20%3E%20maxPayRate)%20%7B%0A%20%20%20%20%20%20%20%20isPayRateValid%20%3D%20false%3B%0A%20%20%20%20%20%20%20%20API.displayTip('payRate'%2C%20'rate%20exceeds%20the%20maximum'%2C%20'caution'%2C%20false%2C%20false%2C%20form)%3B%0A%20%20%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20API.clearTip('payRate'%2C%20form)%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D)%3B%0A%0A%20%20%20%20%2F%2F%20Mark%20the%20editable%20row%20as%20invalid%20if%20any%20nested%20payRate%20form%20has%20a%20value%20outside%20of%20the%20min%2Fmax%20bounds%0A%20%20%20%20if%20(isPayRateValid)%20%7B%0A%20%20%20%20%20%20API.markAsValid('payRate'%2C%20baseRowForm)%3B%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20API.markAsInvalid('payRate'%2C%20'pay%20rate%20is%20less%20than%20the%20minimum%20pay%20rate'%2C%20baseRowForm)%3B%0A%20%20%20%20%7D%0A%20%20%7D%0A%7D%0A",
+        cssSource: "%2F**%20No%20CSS%20for%20this%20example%20*%2F%0A",
+        htmlSource: "%3Cnovo-form%20%5Bform%5D%3D%22form%22%3E%0A%20%20%3Cdiv%20class%3D%22novo-form-row%22%3E%0A%20%20%20%20%3Cnovo-control%20%5Bform%5D%3D%22form%22%20%5Bcontrol%5D%3D%22minPayRateControl%22%3E%3C%2Fnovo-control%3E%0A%20%20%3C%2Fdiv%3E%0A%20%20%3Cdiv%20class%3D%22novo-form-row%22%3E%0A%20%20%20%20%3Cnovo-control%20%5Bform%5D%3D%22form%22%20%5Bcontrol%5D%3D%22maxPayRateControl%22%3E%3C%2Fnovo-control%3E%0A%20%20%3C%2Fdiv%3E%0A%20%20%3Cnovo-control-group%20%5Bform%5D%3D%22form%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%5Bcontrols%5D%3D%22controls%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%5BinitialValue%5D%3D%22initialValue%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20remove%3D%22false%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20edit%3D%22false%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20key%3D%22rows%22%3E%3C%2Fnovo-control-group%3E%0A%3C%2Fnovo-form%3E%0A%0A%3Cdiv%20class%3D%22final-value%22%3EForm%20Value%20-%20%3Cpre%3E%7B%7B%20form.value%20%7C%20json%20%7D%7D%3C%2Fpre%3E%3C%2Fdiv%3E%0A%3Cdiv%20class%3D%22final-value%22%3EForm%20Dirty%20-%20%7B%7B%20form.dirty%20%7D%7D%3C%2Fdiv%3E%0A%3Cdiv%20class%3D%22final-value%22%3EIs%20Form%20Valid%3F%20-%20%7B%7B%20form.valid%20%7D%7D%3C%2Fdiv%3E%0A"
+      },
       'fi-required': {
         title: 'Fi Required Example',
         component: FiRequiredExample,
@@ -85720,7 +86285,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     };
     /** @type {?} */
 
-    var EXAMPLE_LIST = [BasicAceExample, ButtonDialogueExample, ButtonDynamicExample, ButtonFabExample, ButtonIconExample, ButtonInverseExample, ButtonLoadingExample, ButtonOverviewExample, ButtonPrimaryExample, ButtonSecondaryExample, ButtonStandardExample, BigCalendarExample, CalendarExample, RangeExample, TimeExample, DataTableRemoteExample, DataTableRowsExample, DataTableServiceExample, ConfigureColumnsModal, BasicDropDownExample, CustomDropDownExample, LargeDropDownExample, MultiDropDownExample, PositionDropDownExample, ScrollableDropDownExample, BasicIconsExample, RaisedIconsExample, ThemedIconsExample, LoadingCircleExample, LoadingLineExample, BasicQuickNoteExample, CustomQuickNoteResults, CustomQuickNoteResultsExample, CustomQuickNoteExample, SearchUsageExample, BasicSlideExample, SwitchUsageExample, TabbedGroupPickerBasicExample, TabbedGroupPickerBigGroupsExample, TabbedGroupPickerGroupsExample, TabbedGroupPickerQuickSelectExample, ActionsCellExample, ExtraDetails, DetailsTableExample, EditableTableExample, SelectAllTableExample, TableExample, TotalFooterTableExample, AnalyticsColorsExample, EntityColorsExample, PrimaryColorsExample, AsyncChipsExample, BasicChipsExample, CloseOnSelectChipsExample, FormattedChipsExample, GroupedMultiPickerExample, RowChipsExample, DatePickerExample, DateRangeExample, DateTimeInputExample, DateTimeExample, TimePickerExample, WeekStartExample, BasicEditorExample, MinimalEditorExample, CustomTemplateExample, HorizontalOptionsExample, HorizontalExample, VerticalOptionsExample, VerticalExample, AddressControlExample, CalendarInputControlsExample, CheckBoxControlsExample, CustomDemoControlExample, DisabledFormExample, DynamicFormFieldSetsExample, DynamicFormExample, EnableDisableAllFieldsInFormExample, FileInputControlsExample, PickerControlsExample, TextBasedControlsExample, UpdatingFormExample, VerticalDynamicFormExample, BasicMultiPickerExample, NestedMultiPickerExample, AsyncPickerExample, BasicPickerExample, CustomPickerResults, CustomPickerResultsExample, DefaultOptionsPickerExample, EntityPickerExample, FormattedPickerExample, GroupedPickerExample, OverrideTemplateExample, BasicRadioExample, ButtonRadioExample, IconRadioExample, VerticalRadioExample, BasicSelectExample, LongSelectExample, TilesUsageExample, AddressValueExample, AssociatedValueExample, BasicValueExample, CategoryValueExample, CorporateUserValueExample, DateTimeValueExample, EntityListValueExample, ExternalLinkValueExample, FormatterValueExample, IconValueExample, MultiOptionValueExample, BasicCardExample, CardConfigExample, AccordionExample, BasicExpansionExample, LazyExpansionExample, BasicHeaderExample, CondensedHeaderExample, HeaderSearchbarExample, HeaderSubtitleExample, BasicListExample, ThemedListExample, StepperHorizontalExample, StepperVerticalExample, TabsBasicExample, TabsColorExample, TabsCondensedExample, TabsRouterExample, TabsVerticalExample, ActivitySectionExample, RecordHeaderExample, DateTranslationsExample, NumberTranslationsExample, PluralTranslationsExample, SimpleTranslationsExample, TranslationsVariablesExample, FiAddingRemovingExample, FiAsyncExample, FiCalculationExample, FiConfirmExample, FiEnableDisableExample, FiGlobalsExample, FiHideShowExample, FiMessagingExample, FiModifyAddedPickerExample, FiModifyOptionsExample, FiRequiredExample, FiTooltipExample, FiValidationExample, ModalCustomDemo, CustomModalExample, ModalErrorDemo, ErrorModalExample, ModalAddFormDemo, ModalAddFormExample, ModalEditFormDemo, ModalEditFormExample, ModalSuccessDemo, SuccessModalExample, ModalWarningDemo, WarningModalExample, PluralizeExample, PopOverAutoPlacementExample, PopOverBehaviorsExample, PopOverDynamicExample, PopOverHorizontalExample, PopOverPlacementExample, PopOverVerticalExample, SecurityExample, BasicTipWellExample, ButtonlessTipWellExample, HtmlTipWellExample, IconTipWellExample, ToastServiceExample, ToastUsageExample, TooltipAlignExample, TooltipOptionsExample, TooltipPlacementExample, TooltipSizesExample, TooltipToggleExample, TooltipTypesExample];
+    var EXAMPLE_LIST = [BasicAceExample, ButtonDialogueExample, ButtonDynamicExample, ButtonFabExample, ButtonIconExample, ButtonInverseExample, ButtonLoadingExample, ButtonOverviewExample, ButtonPrimaryExample, ButtonSecondaryExample, ButtonStandardExample, BigCalendarExample, CalendarExample, RangeExample, TimeExample, DataTableRemoteExample, DataTableRowsExample, DataTableServiceExample, ConfigureColumnsModal, BasicDropDownExample, CustomDropDownExample, LargeDropDownExample, MultiDropDownExample, PositionDropDownExample, ScrollableDropDownExample, BasicIconsExample, RaisedIconsExample, ThemedIconsExample, LoadingCircleExample, LoadingLineExample, BasicQuickNoteExample, CustomQuickNoteResults, CustomQuickNoteResultsExample, CustomQuickNoteExample, SearchUsageExample, BasicSlideExample, SwitchUsageExample, TabbedGroupPickerBasicExample, TabbedGroupPickerBigGroupsExample, TabbedGroupPickerGroupsExample, TabbedGroupPickerQuickSelectExample, ActionsCellExample, ExtraDetails, DetailsTableExample, EditableTableExample, SelectAllTableExample, TableExample, TotalFooterTableExample, AnalyticsColorsExample, EntityColorsExample, PrimaryColorsExample, AsyncChipsExample, BasicChipsExample, CloseOnSelectChipsExample, FormattedChipsExample, GroupedMultiPickerExample, RowChipsExample, DatePickerExample, DateRangeExample, DateTimeInputExample, DateTimeExample, TimePickerExample, WeekStartExample, BasicEditorExample, MinimalEditorExample, CustomTemplateExample, HorizontalOptionsExample, HorizontalExample, VerticalOptionsExample, VerticalExample, AddressControlExample, CalendarInputControlsExample, CheckBoxControlsExample, CustomDemoControlExample, DisabledFormExample, DynamicFormFieldSetsExample, DynamicFormExample, EnableDisableAllFieldsInFormExample, FileInputControlsExample, PickerControlsExample, TextBasedControlsExample, UpdatingFormExample, VerticalDynamicFormExample, BasicMultiPickerExample, NestedMultiPickerExample, AsyncPickerExample, BasicPickerExample, CustomPickerResults, CustomPickerResultsExample, DefaultOptionsPickerExample, EntityPickerExample, FormattedPickerExample, GroupedPickerExample, OverrideTemplateExample, BasicRadioExample, ButtonRadioExample, IconRadioExample, VerticalRadioExample, BasicSelectExample, LongSelectExample, TilesUsageExample, AddressValueExample, AssociatedValueExample, BasicValueExample, CategoryValueExample, CorporateUserValueExample, DateTimeValueExample, EntityListValueExample, ExternalLinkValueExample, FormatterValueExample, IconValueExample, MultiOptionValueExample, BasicCardExample, CardConfigExample, AccordionExample, BasicExpansionExample, LazyExpansionExample, BasicHeaderExample, CondensedHeaderExample, HeaderSearchbarExample, HeaderSubtitleExample, BasicListExample, ThemedListExample, StepperHorizontalExample, StepperVerticalExample, TabsBasicExample, TabsColorExample, TabsCondensedExample, TabsRouterExample, TabsVerticalExample, ActivitySectionExample, RecordHeaderExample, DateTranslationsExample, NumberTranslationsExample, PluralTranslationsExample, SimpleTranslationsExample, TranslationsVariablesExample, FiAddingRemovingExample, FiAsyncExample, FiCalculationExample, FiConfirmExample, FiEnableDisableExample, FiGlobalsExample, FiHideShowExample, FiMessagingExample, FiModifyAddedPickerExample, FiModifyOptionsExample, FiNestedExample, FiRequiredExample, FiTooltipExample, FiValidationExample, ModalCustomDemo, CustomModalExample, ModalErrorDemo, ErrorModalExample, ModalAddFormDemo, ModalAddFormExample, ModalEditFormDemo, ModalEditFormExample, ModalSuccessDemo, SuccessModalExample, ModalWarningDemo, WarningModalExample, PluralizeExample, PopOverAutoPlacementExample, PopOverBehaviorsExample, PopOverDynamicExample, PopOverHorizontalExample, PopOverPlacementExample, PopOverVerticalExample, SecurityExample, BasicTipWellExample, ButtonlessTipWellExample, HtmlTipWellExample, IconTipWellExample, ToastServiceExample, ToastUsageExample, TooltipAlignExample, TooltipOptionsExample, TooltipPlacementExample, TooltipSizesExample, TooltipToggleExample, TooltipTypesExample];
 
     var NovoExamplesModule = function NovoExamplesModule() {
       _classCallCheck(this, NovoExamplesModule);
@@ -85985,7 +86550,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "_loadScript",
         value: function _loadScript() {
-          var _this291 = this;
+          var _this292 = this;
 
           /** @type {?} */
           var script = document.createElement('script');
@@ -85997,9 +86562,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function () {
-            hljs.configure(_this291.options.config);
+            hljs.configure(_this292.options.config);
 
-            _this291._isReady$.next(true);
+            _this292._isReady$.next(true);
           };
 
           script.src = "".concat(this.options.path, "/highlight.pack.js");
@@ -86075,7 +86640,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _createClass(CodeSnippetComponent, [{
         key: "ngOnInit",
         value: function ngOnInit() {
-          var _this292 = this;
+          var _this293 = this;
 
           this.hljs.isReady.subscribe(
           /**
@@ -86083,18 +86648,18 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           */
           function () {
             /** @type {?} */
-            var code = decodeURIComponent(EXAMPLE_COMPONENTS[_this292.example].tsSource);
+            var code = decodeURIComponent(EXAMPLE_COMPONENTS[_this293.example].tsSource);
             /** @type {?} */
 
-            var markup = decodeURIComponent(EXAMPLE_COMPONENTS[_this292.example].htmlSource);
+            var markup = decodeURIComponent(EXAMPLE_COMPONENTS[_this293.example].htmlSource);
             /** @type {?} */
 
-            var style = decodeURIComponent(EXAMPLE_COMPONENTS[_this292.example].cssSource);
-            _this292.highlightTS = _this292.sanitizer.bypassSecurityTrustHtml(_this292.hljs.highlightAuto(code, ['typescript']).value.trim());
-            _this292.highlightHTML = _this292.sanitizer.bypassSecurityTrustHtml(_this292.hljs.highlightAuto(markup, ['html']).value.trim());
-            _this292.highlightCSS = _this292.sanitizer.bypassSecurityTrustHtml(_this292.hljs.highlightAuto(style, ['css']).value.trim());
+            var style = decodeURIComponent(EXAMPLE_COMPONENTS[_this293.example].cssSource);
+            _this293.highlightTS = _this293.sanitizer.bypassSecurityTrustHtml(_this293.hljs.highlightAuto(code, ['typescript']).value.trim());
+            _this293.highlightHTML = _this293.sanitizer.bypassSecurityTrustHtml(_this293.hljs.highlightAuto(markup, ['html']).value.trim());
+            _this293.highlightCSS = _this293.sanitizer.bypassSecurityTrustHtml(_this293.hljs.highlightAuto(style, ['css']).value.trim());
 
-            _this292.cdr.markForCheck();
+            _this293.cdr.markForCheck();
           });
         }
       }]);
@@ -86298,7 +86863,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _createClass(StackblitzWriter, [{
         key: "constructStackblitzForm",
         value: function constructStackblitzForm(data) {
-          var _this293 = this;
+          var _this294 = this;
 
           /** @type {?} */
           var indexFile = "app%2F".concat(data.indexFilename, ".ts");
@@ -86313,7 +86878,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (tag, i) {
-            return _this293._appendFormInput(form, "tags[".concat(i, "]"), tag);
+            return _this294._appendFormInput(form, "tags[".concat(i, "]"), tag);
           });
 
           this._appendFormInput(form, 'private', 'true');
@@ -86335,15 +86900,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             * @return {?}
             */
             function (file) {
-              return _this293._readFile(form, data, file, TEMPLATE_PATH);
+              return _this294._readFile(form, data, file, TEMPLATE_PATH);
             });
             /** @type {?} */
 
             var exampleContents = [];
-            exampleContents.push(Promise.resolve(_this293._addFileToForm(form, data, decodeURIComponent(data.source.tsSource), "app/".concat(data.selectorName, ".ts"), TEMPLATE_PATH)));
-            exampleContents.push(Promise.resolve(_this293._addFileToForm(form, data, decodeURIComponent(data.source.htmlSource), "app/".concat(data.selectorName, ".html"), TEMPLATE_PATH)));
-            exampleContents.push(Promise.resolve(_this293._addFileToForm(form, data, decodeURIComponent(data.source.cssSource), "app/".concat(data.selectorName, ".css"), TEMPLATE_PATH)));
-            exampleContents.push(Promise.resolve(_this293._addFileToForm(form, data, JSON.stringify({
+            exampleContents.push(Promise.resolve(_this294._addFileToForm(form, data, decodeURIComponent(data.source.tsSource), "app/".concat(data.selectorName, ".ts"), TEMPLATE_PATH)));
+            exampleContents.push(Promise.resolve(_this294._addFileToForm(form, data, decodeURIComponent(data.source.htmlSource), "app/".concat(data.selectorName, ".html"), TEMPLATE_PATH)));
+            exampleContents.push(Promise.resolve(_this294._addFileToForm(form, data, decodeURIComponent(data.source.cssSource), "app/".concat(data.selectorName, ".css"), TEMPLATE_PATH)));
+            exampleContents.push(Promise.resolve(_this294._addFileToForm(form, data, JSON.stringify({
               apps: [{
                 styles: ['styles.scss']
               }]
@@ -86408,7 +86973,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "_readFile",
         value: function _readFile(form, data, filename, path) {
-          var _this294 = this;
+          var _this295 = this;
 
           var prependApp = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : true;
 
@@ -86420,7 +86985,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (response) {
-            return _this294._addFileToForm(form, data, response, filename, path, prependApp);
+            return _this295._addFileToForm(form, data, response, filename, path, prependApp);
           },
           /**
           * @param {?} error
@@ -86579,7 +87144,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "example",
         set: function set(example) {
-          var _this295 = this;
+          var _this296 = this;
 
           /** @type {?} */
           var exampleData = new ExampleData(example);
@@ -86591,8 +87156,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             * @return {?}
             */
             function (stackblitzForm) {
-              _this295.stackblitzForm = stackblitzForm;
-              _this295.isDisabled = false;
+              _this296.stackblitzForm = stackblitzForm;
+              _this296.isDisabled = false;
             });
           } else {
             this.isDisabled = true;
@@ -87186,7 +87751,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
       args: [{
         selector: 'field-interactions-page',
-        template: "<h1>Field Interactions</h1><p>Field Interactions is a simple API that allows you to modify NovoForms based on field changes.</p><p>The Field Interaction API gives you a simple to use API object when writing your field interaction functions.</p><p>Look below for samples of what you can do with this API...</p><h2>Configuration</h2><p>Inspect Form Configuration on Field Getting Current Context Write Field Interaction</p><h5>Inspect Form</h5><p>There is a special <code>data-control-key</code> property added to the <code>novo-control</code> element.</p><p>You can inspec the DOM at the input and see the property to know what 'key' to use in the API</p><p>By default, if you are writing a Field Interaction for the active field you can use <code>API.getActiveKey()</code></p><h5>Configuration on Field</h5><pre><code>event: 'change|focus|blur|init', script: Function, invokeOnInit?: boolean</code></pre><p>The Field Interactions are configured on a per control basis. There are three scenarios in which they will be fired: 'change', 'focus' and 'blur'.</p><p>init -- gets fired only when the form is initialized</p><p>change -- gets fired when the value of the form control changes</p><p>focus -- gets fired when the field gets focused</p><p>blur -- gets fired when the field loses focus</p><p>The script function represents the function that will be fired for the event, you can see examples of these below.</p><p>Lastly, 'invokeOnInit' will also trigger the Field Interaction when the form is created as well.</p><h5>Getting Current Context</h5><p>If you need to write Field Interaction based on if you are on an add or edit page, or you need to know the current entity type and ID then you can get those via:</p><p>edit: 'API.isEdit'</p><p>entity: 'API.currentEntity'</p><p>id: 'API.currentEntityId'</p><h5>Write Field Interaction</h5><p>Writing Field Interactions is very simple. You can refer to all the examples below. If you ever get stuck, you can always open a <a href=\"https://github.com/bullhorn/novo-elements/issues\">Github Issue</a> as well!</p><p><strong>IMPORTANT</strong></p><p>When writing field interactions, you will be writing everything only the contents of the function. <strong>You do not</strong> write the surrounding function.</p><p><strong>All field interactions must be written in vanilla ES5 as well!</strong></p><h2>Basic API</h2><p>Validation Mark Fields as Required Field Calculations &amp; Modification Hide / Show Fields Enable / Disable Fields Messaging / Notifications Modifying Config on Static Pickers / Selects Using Globals Async Interactions Confirm Changes Adding / Removing Fields Add Tooltip</p><h5>Validation</h5><p>If you need to perform some custom validation on a field, you can use the API to quickly mark a field as invalid</p><p><code-example example=\"fi-validation\"></code-example></p><h5>Mark Fields as Required</h5><p>If you need to mark fields as required or not based on some changes in the form, you can use the API to do that!</p><p><code-example example=\"fi-required\"></code-example></p><h5>Field Calculations &amp; Modification</h5><p>If you need to do some custom calculations based off other form data, you can do that easily with the API</p><p><code-example example=\"fi-calculation\"></code-example></p><h5>Hide / Show Fields</h5><p>You can also hide or show certain fields based on interaction with the form. Note that the value is still present in the form's value</p><p><code-example example=\"fi-hide-show\"></code-example></p><h5>Enable / Disable Fields</h5><p>You can also enable or disable certain fields based on interaction with the form. Note that the value is still present in the form's value but does not respond to any interactions</p><p><code-example example=\"fi-enable-disable\"></code-example></p><h5>Messaging / Notifications</h5><p>You can trigger messages to users in a few different ways using the API</p><p><code-example example=\"fi-messaging\"></code-example></p><h5>Modifying Config on Static Pickers / Selects</h5><p>You have full control over the control, you can modify the options array of static pickers and select controls!</p><p><code-example example=\"fi-modify-options\"></code-example></p><h5>Modifying Config on Static Pickers / Selects to mimic an Entity Picker</h5><p>You can modify a picker added to a form via field interactions to look like an entity picker!</p><p><code-example example=\"fi-modify-added-picker\"></code-example></p><h5>Using Globals</h5><p>Using the config from above, you can figure the API to have a set of global variables that you can key off of inside your field interactions</p><p><code-example example=\"fi-globals\"></code-example></p><h5>Async Interactions</h5><p>You can perform async interactions and keep the form from saving by setting a loading state</p><p><code-example example=\"fi-async\"></code-example></p><h5>Confirm Changes</h5><p>You can prompt the user if they want to update the field or not too!</p><p><code-example example=\"fi-confirm\"></code-example></p><h5>Adding / Removing Fields</h5><p>With the API you can quickly add and remove fields on the form.</p><p><strong>ONLY WORKS WITH DYNAMIC FORMS</strong></p><p><code-example example=\"fi-adding-removing\"></code-example></p><h5>Add Tooltip</h5><p>You are able to dynamically change a field's tooltip.</p><p><code-example example=\"fi-tooltip\"></code-example></p>"
+        template: "<h1>Field Interactions</h1><p>Field Interactions is a simple API that allows you to modify NovoForms based on field changes.</p><p>The Field Interaction API gives you a simple to use API object when writing your field interaction functions.</p><p>Look below for samples of what you can do with this API...</p><h2>Configuration</h2><p>Inspect Form Configuration on Field Getting Current Context Write Field Interaction</p><h5>Inspect Form</h5><p>There is a special <code>data-control-key</code> property added to the <code>novo-control</code> element.</p><p>You can inspec the DOM at the input and see the property to know what 'key' to use in the API</p><p>By default, if you are writing a Field Interaction for the active field you can use <code>API.getActiveKey()</code></p><h5>Configuration on Field</h5><pre><code>event: 'change|focus|blur|init', script: Function, invokeOnInit?: boolean</code></pre><p>The Field Interactions are configured on a per control basis. There are three scenarios in which they will be fired: 'change', 'focus' and 'blur'.</p><p>init -- gets fired only when the form is initialized</p><p>change -- gets fired when the value of the form control changes</p><p>focus -- gets fired when the field gets focused</p><p>blur -- gets fired when the field loses focus</p><p>The script function represents the function that will be fired for the event, you can see examples of these below.</p><p>Lastly, 'invokeOnInit' will also trigger the Field Interaction when the form is created as well.</p><h5>Getting Current Context</h5><p>If you need to write Field Interaction based on if you are on an add or edit page, or you need to know the current entity type and ID then you can get those via:</p><p>edit: 'API.isEdit'</p><p>entity: 'API.currentEntity'</p><p>id: 'API.currentEntityId'</p><h5>Write Field Interaction</h5><p>Writing Field Interactions is very simple. You can refer to all the examples below. If you ever get stuck, you can always open a <a href=\"https://github.com/bullhorn/novo-elements/issues\">Github Issue</a> as well!</p><p><strong>IMPORTANT</strong></p><p>When writing field interactions, you will be writing everything only the contents of the function. <strong>You do not</strong> write the surrounding function.</p><p><strong>All field interactions must be written in vanilla ES5 as well!</strong></p><h2>Basic API</h2><p>Validation Mark Fields as Required Field Calculations &amp; Modification Hide / Show Fields Enable / Disable Fields Messaging / Notifications Modifying Config on Static Pickers / Selects Using Globals Async Interactions Confirm Changes Adding / Removing Fields Add Tooltip</p><h5>Validation</h5><p>If you need to perform some custom validation on a field, you can use the API to quickly mark a field as invalid</p><p><code-example example=\"fi-validation\"></code-example></p><h5>Mark Fields as Required</h5><p>If you need to mark fields as required or not based on some changes in the form, you can use the API to do that!</p><p><code-example example=\"fi-required\"></code-example></p><h5>Field Calculations &amp; Modification</h5><p>If you need to do some custom calculations based off other form data, you can do that easily with the API</p><p><code-example example=\"fi-calculation\"></code-example></p><h5>Hide / Show Fields</h5><p>You can also hide or show certain fields based on interaction with the form. Note that the value is still present in the form's value</p><p><code-example example=\"fi-hide-show\"></code-example></p><h5>Enable / Disable Fields</h5><p>You can also enable or disable certain fields based on interaction with the form. Note that the value is still present in the form's value but does not respond to any interactions</p><p><code-example example=\"fi-enable-disable\"></code-example></p><h5>Messaging / Notifications</h5><p>You can trigger messages to users in a few different ways using the API</p><p><code-example example=\"fi-messaging\"></code-example></p><h5>Modifying Config on Static Pickers / Selects</h5><p>You have full control over the control, you can modify the options array of static pickers and select controls!</p><p><code-example example=\"fi-modify-options\"></code-example></p><h5>Modifying Config on Static Pickers / Selects to mimic an Entity Picker</h5><p>You can modify a picker added to a form via field interactions to look like an entity picker!</p><p><code-example example=\"fi-modify-added-picker\"></code-example></p><h5>Using Globals</h5><p>Using the config from above, you can figure the API to have a set of global variables that you can key off of inside your field interactions</p><p><code-example example=\"fi-globals\"></code-example></p><h5>Async Interactions</h5><p>You can perform async interactions and keep the form from saving by setting a loading state</p><p><code-example example=\"fi-async\"></code-example></p><h5>Confirm Changes</h5><p>You can prompt the user if they want to update the field or not too!</p><p><code-example example=\"fi-confirm\"></code-example></p><h5>Adding / Removing Fields</h5><p>With the API you can quickly add and remove fields on the form.</p><p><strong>ONLY WORKS WITH DYNAMIC FORMS</strong></p><p><code-example example=\"fi-adding-removing\"></code-example></p><h5>Add Tooltip</h5><p>You are able to dynamically change a field's tooltip.</p><p><code-example example=\"fi-tooltip\"></code-example></p><h5>Interacting with Nested Forms</h5><p>Field Interactions can navigate nested forms to interact with parent and child forms. This example uses the Form Group component which contains an array of nested forms that are kept in sync by field interactions.</p><p><code-example example=\"fi-nested\"></code-example></p>"
       }]
     }];
 
