@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.5.0](https://github.com/bullhorn/novo-elements/compare/v4.4.4...v4.5.0) (2021-04-07)
+
+
+### Features
+
+* **DatePickerInput:** moving change event emit from handleBlur to dispatchOnChange ([#1162](https://github.com/bullhorn/novo-elements/issues/1162)) ([72472e3](https://github.com/bullhorn/novo-elements/commit/72472e376455508ff705aef5d802b59dd206a37d))
+* **Forms:** REVERT - Support for nested form field interactions ([#1159](https://github.com/bullhorn/novo-elements/issues/1159))" - migrating these changes from the .4 release to the .5 release ([#1174](https://github.com/bullhorn/novo-elements/issues/1174)) ([a91200e](https://github.com/bullhorn/novo-elements/commit/a91200e2cc63a7e8073545afde66247859499295))
+* **Forms:** Support for nested form field interactions ([#1159](https://github.com/bullhorn/novo-elements/issues/1159)) ([f0c391e](https://github.com/bullhorn/novo-elements/commit/f0c391e49c149d1fa70ead2ab79550e2c4d7c924))
+
+
+### Bug Fixes
+
+* **Select:** fixing logic around specialized lookup options ([#1165](https://github.com/bullhorn/novo-elements/issues/1165)) ([ec77415](https://github.com/bullhorn/novo-elements/commit/ec774151802ecde6d227668dd76539af66e4ac8b))
+
 ### [4.4.4](https://github.com/bullhorn/novo-elements/compare/v4.4.3...v4.4.4) (2021-03-11)
 
 ### [4.4.3](https://github.com/bullhorn/novo-elements/compare/v4.4.2...v4.4.3) (2021-02-10)
