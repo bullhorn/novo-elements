@@ -45254,6 +45254,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         this.formUtils = formUtils;
         this.http = http;
         this.labels = labels;
+        this._isInvokedOnInit = false;
 
         this.getOptionsConfig =
         /**
@@ -46792,6 +46793,23 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         get: function get() {
           return this._currentKey;
         }
+        /**
+         * @param {?} isOnInit
+         * @return {?}
+         */
+
+      }, {
+        key: "isInvokedOnInit",
+        set: function set(isOnInit) {
+          this._isInvokedOnInit = isOnInit;
+        }
+        /**
+         * @return {?}
+         */
+        ,
+        get: function get() {
+          return this._isInvokedOnInit;
+        }
       }]);
 
       return FieldInteractionApi;
@@ -47150,7 +47168,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
                 if (interaction.invokeOnInit) {
                   if (!_this155.form.controls[_this155.control.key].restrictFieldInteractions) {
-                    _this155.executeInteraction(interaction);
+                    _this155.executeInteraction(interaction, true);
                   }
                 }
               };
@@ -47314,10 +47332,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         /**
          * @param {?} interaction
+         * @param {?=} isInvokedOnInit
          * @return {?}
          */
         value: function executeInteraction(interaction) {
           var _this157 = this;
+
+          var isInvokedOnInit = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
 
           if (interaction.script && Helpers.isFunction(interaction.script)) {
             setTimeout(
@@ -47327,6 +47348,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             function () {
               _this157.fieldInteractionApi.form = _this157.form;
               _this157.fieldInteractionApi.currentKey = _this157.control.key;
+              _this157.fieldInteractionApi.isInvokedOnInit = isInvokedOnInit;
 
               try {
                 interaction.script(_this157.fieldInteractionApi, _this157.control.key);
@@ -83616,11 +83638,14 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @param {?} formUtils
      */
     function FiValidationExample(formUtils) {
+      var _this292 = this;
+
       _classCallCheck(this, FiValidationExample);
 
       this.formUtils = formUtils;
       this.form = {};
       this.controls = {};
+      this.isUserModified = false;
       /** @type {?} */
 
       var validationFunction =
@@ -83639,6 +83664,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         if (activeValue > 10) {
           API.markAsInvalid(API.getActiveKey(), 'Too high! Make it a lot lower!!');
         }
+
+        _this292.isUserModified = !API.isInvokedOnInit;
       }; // Validation Field Interactions
 
 
@@ -83661,7 +83688,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
       args: [{
         selector: 'fi-validation-example',
-        template: "<novo-form [form]=\"form\" layout=\"vertical\">\n    <div class=\"novo-form-row\">\n        <novo-control [form]=\"form\" [control]=\"controls.validationControl\"></novo-control>\n    </div>\n</novo-form>\n<div class=\"final-value\">Form Value - {{ form.value | json }}</div>\n<div class=\"final-value\">Form Dirty - {{ form.dirty | json }}</div>\n<div class=\"final-value\">Is Form Valid? - {{ form.valid | json }}</div>\n",
+        template: "<novo-form [form]=\"form\" layout=\"vertical\">\n    <div class=\"novo-form-row\">\n        <novo-control [form]=\"form\" [control]=\"controls.validationControl\"></novo-control>\n    </div>\n</novo-form>\n<div class=\"final-value\">Form Value - {{ form.value | json }}</div>\n<div class=\"final-value\">Form Dirty - {{ form.dirty | json }}</div>\n<div class=\"final-value\">Is Form Valid? - {{ form.valid | json }}</div>\n<div class=\"final-value\">Is User Modified? - {{ isUserModified }}</div>\n",
         styles: [""]
       }]
     }];
@@ -86090,9 +86117,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       'fi-validation': {
         title: 'Fi Validation Example',
         component: FiValidationExample,
-        tsSource: "import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0A%2F%2F%20Vendor%0Aimport%20%7B%20FormUtils%2C%20TextBoxControl%2C%20FieldInteractionApi%20%7D%20from%20'novo-elements'%3B%0A%0A%2F**%0A%20*%20%40title%20Fi%20Validation%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'fi-validation-example'%2C%0A%20%20templateUrl%3A%20'fi-validation-example.html'%2C%0A%20%20styleUrls%3A%20%5B'fi-validation-example.css'%5D%2C%0A%7D)%0Aexport%20class%20FiValidationExample%20%7B%0A%20%20public%20form%3A%20any%20%3D%20%7B%7D%3B%0A%20%20public%20controls%3A%20any%20%3D%20%7B%7D%3B%0A%0A%20%20constructor(private%20formUtils%3A%20FormUtils)%20%7B%0A%20%20%20%20const%20validationFunction%20%3D%20(API%3A%20FieldInteractionApi)%20%3D%3E%20%7B%0A%20%20%20%20%20%20console.log('%5BFieldInteractionDemo%5D%20-%20validationFunction')%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%20%20%20%20const%20activeValue%20%3D%20API.getActiveValue()%3B%0A%20%20%20%20%20%20if%20(activeValue%20%3E%2010)%20%7B%0A%20%20%20%20%20%20%20%20API.markAsInvalid(API.getActiveKey()%2C%20'Too%20high!%20Make%20it%20a%20lot%20lower!!')%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20%2F%2F%20Validation%20Field%20Interactions%0A%20%20%20%20this.controls.validationControl%20%3D%20new%20TextBoxControl(%7B%0A%20%20%20%20%20%20type%3A%20'number'%2C%0A%20%20%20%20%20%20key%3A%20'validation'%2C%0A%20%20%20%20%20%20value%3A%205%2C%0A%20%20%20%20%20%20label%3A%20'Validation%20Test'%2C%0A%20%20%20%20%20%20description%3A%20'Try%20to%20input%20a%20number%20larger%20then%2010!'%2C%0A%20%20%20%20%20%20interactions%3A%20%5B%7B%20event%3A%20'change'%2C%20script%3A%20validationFunction%2C%20invokeOnInit%3A%20true%20%7D%5D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.form%20%3D%20formUtils.toFormGroup(%5Bthis.controls.validationControl%5D)%3B%0A%20%20%7D%0A%7D%0A",
+        tsSource: "import%20%7B%20Component%20%7D%20from%20'%40angular%2Fcore'%3B%0A%2F%2F%20Vendor%0Aimport%20%7B%20FormUtils%2C%20TextBoxControl%2C%20FieldInteractionApi%20%7D%20from%20'novo-elements'%3B%0A%0A%2F**%0A%20*%20%40title%20Fi%20Validation%20Example%0A%20*%2F%0A%40Component(%7B%0A%20%20selector%3A%20'fi-validation-example'%2C%0A%20%20templateUrl%3A%20'fi-validation-example.html'%2C%0A%20%20styleUrls%3A%20%5B'fi-validation-example.css'%5D%2C%0A%7D)%0Aexport%20class%20FiValidationExample%20%7B%0A%20%20public%20form%3A%20any%20%3D%20%7B%7D%3B%0A%20%20public%20controls%3A%20any%20%3D%20%7B%7D%3B%0A%20%20public%20isUserModified%20%3D%20false%3B%0A%0A%20%20constructor(private%20formUtils%3A%20FormUtils)%20%7B%0A%20%20%20%20const%20validationFunction%20%3D%20(API%3A%20FieldInteractionApi)%20%3D%3E%20%7B%0A%20%20%20%20%20%20console.log('%5BFieldInteractionDemo%5D%20-%20validationFunction')%3B%20%2F%2F%20tslint%3Adisable-line%0A%20%20%20%20%20%20const%20activeValue%20%3D%20API.getActiveValue()%3B%0A%20%20%20%20%20%20if%20(activeValue%20%3E%2010)%20%7B%0A%20%20%20%20%20%20%20%20API.markAsInvalid(API.getActiveKey()%2C%20'Too%20high!%20Make%20it%20a%20lot%20lower!!')%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20this.isUserModified%20%3D%20!API.isInvokedOnInit%3B%0A%20%20%20%20%7D%3B%0A%0A%20%20%20%20%2F%2F%20Validation%20Field%20Interactions%0A%20%20%20%20this.controls.validationControl%20%3D%20new%20TextBoxControl(%7B%0A%20%20%20%20%20%20type%3A%20'number'%2C%0A%20%20%20%20%20%20key%3A%20'validation'%2C%0A%20%20%20%20%20%20value%3A%205%2C%0A%20%20%20%20%20%20label%3A%20'Validation%20Test'%2C%0A%20%20%20%20%20%20description%3A%20'Try%20to%20input%20a%20number%20larger%20then%2010!'%2C%0A%20%20%20%20%20%20interactions%3A%20%5B%7B%20event%3A%20'change'%2C%20script%3A%20validationFunction%2C%20invokeOnInit%3A%20true%20%7D%5D%2C%0A%20%20%20%20%7D)%3B%0A%20%20%20%20this.form%20%3D%20formUtils.toFormGroup(%5Bthis.controls.validationControl%5D)%3B%0A%20%20%7D%0A%7D%0A",
         cssSource: "%2F**%20No%20CSS%20for%20this%20example%20*%2F%0A",
-        htmlSource: "%3Cnovo-form%20%5Bform%5D%3D%22form%22%20layout%3D%22vertical%22%3E%0A%20%20%20%20%3Cdiv%20class%3D%22novo-form-row%22%3E%0A%20%20%20%20%20%20%20%20%3Cnovo-control%20%5Bform%5D%3D%22form%22%20%5Bcontrol%5D%3D%22controls.validationControl%22%3E%3C%2Fnovo-control%3E%0A%20%20%20%20%3C%2Fdiv%3E%0A%3C%2Fnovo-form%3E%0A%3Cdiv%20class%3D%22final-value%22%3EForm%20Value%20-%20%7B%7B%20form.value%20%7C%20json%20%7D%7D%3C%2Fdiv%3E%0A%3Cdiv%20class%3D%22final-value%22%3EForm%20Dirty%20-%20%7B%7B%20form.dirty%20%7C%20json%20%7D%7D%3C%2Fdiv%3E%0A%3Cdiv%20class%3D%22final-value%22%3EIs%20Form%20Valid%3F%20-%20%7B%7B%20form.valid%20%7C%20json%20%7D%7D%3C%2Fdiv%3E%0A"
+        htmlSource: "%3Cnovo-form%20%5Bform%5D%3D%22form%22%20layout%3D%22vertical%22%3E%0A%20%20%20%20%3Cdiv%20class%3D%22novo-form-row%22%3E%0A%20%20%20%20%20%20%20%20%3Cnovo-control%20%5Bform%5D%3D%22form%22%20%5Bcontrol%5D%3D%22controls.validationControl%22%3E%3C%2Fnovo-control%3E%0A%20%20%20%20%3C%2Fdiv%3E%0A%3C%2Fnovo-form%3E%0A%3Cdiv%20class%3D%22final-value%22%3EForm%20Value%20-%20%7B%7B%20form.value%20%7C%20json%20%7D%7D%3C%2Fdiv%3E%0A%3Cdiv%20class%3D%22final-value%22%3EForm%20Dirty%20-%20%7B%7B%20form.dirty%20%7C%20json%20%7D%7D%3C%2Fdiv%3E%0A%3Cdiv%20class%3D%22final-value%22%3EIs%20Form%20Valid%3F%20-%20%7B%7B%20form.valid%20%7C%20json%20%7D%7D%3C%2Fdiv%3E%0A%3Cdiv%20class%3D%22final-value%22%3EIs%20User%20Modified%3F%20-%20%7B%7B%20isUserModified%20%7D%7D%3C%2Fdiv%3E%0A"
       },
       'custom-modal': {
         title: 'Custom Modal Example',
@@ -86550,7 +86577,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "_loadScript",
         value: function _loadScript() {
-          var _this292 = this;
+          var _this293 = this;
 
           /** @type {?} */
           var script = document.createElement('script');
@@ -86562,9 +86589,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function () {
-            hljs.configure(_this292.options.config);
+            hljs.configure(_this293.options.config);
 
-            _this292._isReady$.next(true);
+            _this293._isReady$.next(true);
           };
 
           script.src = "".concat(this.options.path, "/highlight.pack.js");
@@ -86640,7 +86667,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _createClass(CodeSnippetComponent, [{
         key: "ngOnInit",
         value: function ngOnInit() {
-          var _this293 = this;
+          var _this294 = this;
 
           this.hljs.isReady.subscribe(
           /**
@@ -86648,18 +86675,18 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           */
           function () {
             /** @type {?} */
-            var code = decodeURIComponent(EXAMPLE_COMPONENTS[_this293.example].tsSource);
+            var code = decodeURIComponent(EXAMPLE_COMPONENTS[_this294.example].tsSource);
             /** @type {?} */
 
-            var markup = decodeURIComponent(EXAMPLE_COMPONENTS[_this293.example].htmlSource);
+            var markup = decodeURIComponent(EXAMPLE_COMPONENTS[_this294.example].htmlSource);
             /** @type {?} */
 
-            var style = decodeURIComponent(EXAMPLE_COMPONENTS[_this293.example].cssSource);
-            _this293.highlightTS = _this293.sanitizer.bypassSecurityTrustHtml(_this293.hljs.highlightAuto(code, ['typescript']).value.trim());
-            _this293.highlightHTML = _this293.sanitizer.bypassSecurityTrustHtml(_this293.hljs.highlightAuto(markup, ['html']).value.trim());
-            _this293.highlightCSS = _this293.sanitizer.bypassSecurityTrustHtml(_this293.hljs.highlightAuto(style, ['css']).value.trim());
+            var style = decodeURIComponent(EXAMPLE_COMPONENTS[_this294.example].cssSource);
+            _this294.highlightTS = _this294.sanitizer.bypassSecurityTrustHtml(_this294.hljs.highlightAuto(code, ['typescript']).value.trim());
+            _this294.highlightHTML = _this294.sanitizer.bypassSecurityTrustHtml(_this294.hljs.highlightAuto(markup, ['html']).value.trim());
+            _this294.highlightCSS = _this294.sanitizer.bypassSecurityTrustHtml(_this294.hljs.highlightAuto(style, ['css']).value.trim());
 
-            _this293.cdr.markForCheck();
+            _this294.cdr.markForCheck();
           });
         }
       }]);
@@ -86863,7 +86890,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _createClass(StackblitzWriter, [{
         key: "constructStackblitzForm",
         value: function constructStackblitzForm(data) {
-          var _this294 = this;
+          var _this295 = this;
 
           /** @type {?} */
           var indexFile = "app%2F".concat(data.indexFilename, ".ts");
@@ -86878,7 +86905,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (tag, i) {
-            return _this294._appendFormInput(form, "tags[".concat(i, "]"), tag);
+            return _this295._appendFormInput(form, "tags[".concat(i, "]"), tag);
           });
 
           this._appendFormInput(form, 'private', 'true');
@@ -86900,15 +86927,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             * @return {?}
             */
             function (file) {
-              return _this294._readFile(form, data, file, TEMPLATE_PATH);
+              return _this295._readFile(form, data, file, TEMPLATE_PATH);
             });
             /** @type {?} */
 
             var exampleContents = [];
-            exampleContents.push(Promise.resolve(_this294._addFileToForm(form, data, decodeURIComponent(data.source.tsSource), "app/".concat(data.selectorName, ".ts"), TEMPLATE_PATH)));
-            exampleContents.push(Promise.resolve(_this294._addFileToForm(form, data, decodeURIComponent(data.source.htmlSource), "app/".concat(data.selectorName, ".html"), TEMPLATE_PATH)));
-            exampleContents.push(Promise.resolve(_this294._addFileToForm(form, data, decodeURIComponent(data.source.cssSource), "app/".concat(data.selectorName, ".css"), TEMPLATE_PATH)));
-            exampleContents.push(Promise.resolve(_this294._addFileToForm(form, data, JSON.stringify({
+            exampleContents.push(Promise.resolve(_this295._addFileToForm(form, data, decodeURIComponent(data.source.tsSource), "app/".concat(data.selectorName, ".ts"), TEMPLATE_PATH)));
+            exampleContents.push(Promise.resolve(_this295._addFileToForm(form, data, decodeURIComponent(data.source.htmlSource), "app/".concat(data.selectorName, ".html"), TEMPLATE_PATH)));
+            exampleContents.push(Promise.resolve(_this295._addFileToForm(form, data, decodeURIComponent(data.source.cssSource), "app/".concat(data.selectorName, ".css"), TEMPLATE_PATH)));
+            exampleContents.push(Promise.resolve(_this295._addFileToForm(form, data, JSON.stringify({
               apps: [{
                 styles: ['styles.scss']
               }]
@@ -86973,7 +87000,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "_readFile",
         value: function _readFile(form, data, filename, path) {
-          var _this295 = this;
+          var _this296 = this;
 
           var prependApp = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : true;
 
@@ -86985,7 +87012,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (response) {
-            return _this295._addFileToForm(form, data, response, filename, path, prependApp);
+            return _this296._addFileToForm(form, data, response, filename, path, prependApp);
           },
           /**
           * @param {?} error
@@ -87144,7 +87171,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "example",
         set: function set(example) {
-          var _this296 = this;
+          var _this297 = this;
 
           /** @type {?} */
           var exampleData = new ExampleData(example);
@@ -87156,8 +87183,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             * @return {?}
             */
             function (stackblitzForm) {
-              _this296.stackblitzForm = stackblitzForm;
-              _this296.isDisabled = false;
+              _this297.stackblitzForm = stackblitzForm;
+              _this297.isDisabled = false;
             });
           } else {
             this.isDisabled = true;
@@ -87751,7 +87778,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
       args: [{
         selector: 'field-interactions-page',
-        template: "<h1>Field Interactions</h1><p>Field Interactions is a simple API that allows you to modify NovoForms based on field changes.</p><p>The Field Interaction API gives you a simple to use API object when writing your field interaction functions.</p><p>Look below for samples of what you can do with this API...</p><h2>Configuration</h2><p>Inspect Form Configuration on Field Getting Current Context Write Field Interaction</p><h5>Inspect Form</h5><p>There is a special <code>data-control-key</code> property added to the <code>novo-control</code> element.</p><p>You can inspec the DOM at the input and see the property to know what 'key' to use in the API</p><p>By default, if you are writing a Field Interaction for the active field you can use <code>API.getActiveKey()</code></p><h5>Configuration on Field</h5><pre><code>event: 'change|focus|blur|init', script: Function, invokeOnInit?: boolean</code></pre><p>The Field Interactions are configured on a per control basis. There are three scenarios in which they will be fired: 'change', 'focus' and 'blur'.</p><p>init -- gets fired only when the form is initialized</p><p>change -- gets fired when the value of the form control changes</p><p>focus -- gets fired when the field gets focused</p><p>blur -- gets fired when the field loses focus</p><p>The script function represents the function that will be fired for the event, you can see examples of these below.</p><p>Lastly, 'invokeOnInit' will also trigger the Field Interaction when the form is created as well.</p><h5>Getting Current Context</h5><p>If you need to write Field Interaction based on if you are on an add or edit page, or you need to know the current entity type and ID then you can get those via:</p><p>edit: 'API.isEdit'</p><p>entity: 'API.currentEntity'</p><p>id: 'API.currentEntityId'</p><h5>Write Field Interaction</h5><p>Writing Field Interactions is very simple. You can refer to all the examples below. If you ever get stuck, you can always open a <a href=\"https://github.com/bullhorn/novo-elements/issues\">Github Issue</a> as well!</p><p><strong>IMPORTANT</strong></p><p>When writing field interactions, you will be writing everything only the contents of the function. <strong>You do not</strong> write the surrounding function.</p><p><strong>All field interactions must be written in vanilla ES5 as well!</strong></p><h2>Basic API</h2><p>Validation Mark Fields as Required Field Calculations &amp; Modification Hide / Show Fields Enable / Disable Fields Messaging / Notifications Modifying Config on Static Pickers / Selects Using Globals Async Interactions Confirm Changes Adding / Removing Fields Add Tooltip</p><h5>Validation</h5><p>If you need to perform some custom validation on a field, you can use the API to quickly mark a field as invalid</p><p><code-example example=\"fi-validation\"></code-example></p><h5>Mark Fields as Required</h5><p>If you need to mark fields as required or not based on some changes in the form, you can use the API to do that!</p><p><code-example example=\"fi-required\"></code-example></p><h5>Field Calculations &amp; Modification</h5><p>If you need to do some custom calculations based off other form data, you can do that easily with the API</p><p><code-example example=\"fi-calculation\"></code-example></p><h5>Hide / Show Fields</h5><p>You can also hide or show certain fields based on interaction with the form. Note that the value is still present in the form's value</p><p><code-example example=\"fi-hide-show\"></code-example></p><h5>Enable / Disable Fields</h5><p>You can also enable or disable certain fields based on interaction with the form. Note that the value is still present in the form's value but does not respond to any interactions</p><p><code-example example=\"fi-enable-disable\"></code-example></p><h5>Messaging / Notifications</h5><p>You can trigger messages to users in a few different ways using the API</p><p><code-example example=\"fi-messaging\"></code-example></p><h5>Modifying Config on Static Pickers / Selects</h5><p>You have full control over the control, you can modify the options array of static pickers and select controls!</p><p><code-example example=\"fi-modify-options\"></code-example></p><h5>Modifying Config on Static Pickers / Selects to mimic an Entity Picker</h5><p>You can modify a picker added to a form via field interactions to look like an entity picker!</p><p><code-example example=\"fi-modify-added-picker\"></code-example></p><h5>Using Globals</h5><p>Using the config from above, you can figure the API to have a set of global variables that you can key off of inside your field interactions</p><p><code-example example=\"fi-globals\"></code-example></p><h5>Async Interactions</h5><p>You can perform async interactions and keep the form from saving by setting a loading state</p><p><code-example example=\"fi-async\"></code-example></p><h5>Confirm Changes</h5><p>You can prompt the user if they want to update the field or not too!</p><p><code-example example=\"fi-confirm\"></code-example></p><h5>Adding / Removing Fields</h5><p>With the API you can quickly add and remove fields on the form.</p><p><strong>ONLY WORKS WITH DYNAMIC FORMS</strong></p><p><code-example example=\"fi-adding-removing\"></code-example></p><h5>Add Tooltip</h5><p>You are able to dynamically change a field's tooltip.</p><p><code-example example=\"fi-tooltip\"></code-example></p><h5>Interacting with Nested Forms</h5><p>Field Interactions can navigate nested forms to interact with parent and child forms. This example uses the Form Group component which contains an array of nested forms that are kept in sync by field interactions.</p><p><code-example example=\"fi-nested\"></code-example></p>"
+        template: "<h1>Field Interactions</h1><p>Field Interactions is a simple API that allows you to modify NovoForms based on field changes.</p><p>The Field Interaction API gives you a simple to use API object when writing your field interaction functions.</p><p>Look below for samples of what you can do with this API...</p><h2>Configuration</h2><p>Inspect Form Configuration on Field Getting Current Context Write Field Interaction</p><h5>Inspect Form</h5><p>There is a special <code>data-control-key</code> property added to the <code>novo-control</code> element.</p><p>You can inspec the DOM at the input and see the property to know what 'key' to use in the API</p><p>By default, if you are writing a Field Interaction for the active field you can use <code>API.getActiveKey()</code></p><h5>Configuration on Field</h5><pre><code>event: 'change|focus|blur|init', script: Function, invokeOnInit?: boolean</code></pre><p>The Field Interactions are configured on a per control basis. There are three scenarios in which they will be fired: 'change', 'focus' and 'blur'.</p><p>init -- gets fired only when the form is initialized</p><p>change -- gets fired when the value of the form control changes</p><p>focus -- gets fired when the field gets focused</p><p>blur -- gets fired when the field loses focus</p><p>The script function represents the function that will be fired for the event, you can see examples of these below.</p><p>Lastly, 'invokeOnInit' will also trigger the Field Interaction when the form is created as well. A script can check <code>API.isInvokedOnInit</code> to determine if the current call is due to initialization or due to a user change.</p><h5>Getting Current Context</h5><p>If you need to write Field Interaction based on if you are on an add or edit page, or you need to know the current entity type and ID then you can get those via:</p><p>edit: 'API.isEdit'</p><p>entity: 'API.currentEntity'</p><p>id: 'API.currentEntityId'</p><h5>Write Field Interaction</h5><p>Writing Field Interactions is very simple. You can refer to all the examples below. If you ever get stuck, you can always open a <a href=\"https://github.com/bullhorn/novo-elements/issues\">Github Issue</a> as well!</p><p><strong>IMPORTANT</strong></p><p>When writing field interactions, you will be writing everything only the contents of the function. <strong>You do not</strong> write the surrounding function.</p><p><strong>All field interactions must be written in vanilla ES5 as well!</strong></p><h2>Basic API</h2><p>Validation Mark Fields as Required Field Calculations &amp; Modification Hide / Show Fields Enable / Disable Fields Messaging / Notifications Modifying Config on Static Pickers / Selects Using Globals Async Interactions Confirm Changes Adding / Removing Fields Add Tooltip</p><h5>Validation</h5><p>If you need to perform some custom validation on a field, you can use the API to quickly mark a field as invalid</p><p><code-example example=\"fi-validation\"></code-example></p><h5>Mark Fields as Required</h5><p>If you need to mark fields as required or not based on some changes in the form, you can use the API to do that!</p><p><code-example example=\"fi-required\"></code-example></p><h5>Field Calculations &amp; Modification</h5><p>If you need to do some custom calculations based off other form data, you can do that easily with the API</p><p><code-example example=\"fi-calculation\"></code-example></p><h5>Hide / Show Fields</h5><p>You can also hide or show certain fields based on interaction with the form. Note that the value is still present in the form's value</p><p><code-example example=\"fi-hide-show\"></code-example></p><h5>Enable / Disable Fields</h5><p>You can also enable or disable certain fields based on interaction with the form. Note that the value is still present in the form's value but does not respond to any interactions</p><p><code-example example=\"fi-enable-disable\"></code-example></p><h5>Messaging / Notifications</h5><p>You can trigger messages to users in a few different ways using the API</p><p><code-example example=\"fi-messaging\"></code-example></p><h5>Modifying Config on Static Pickers / Selects</h5><p>You have full control over the control, you can modify the options array of static pickers and select controls!</p><p><code-example example=\"fi-modify-options\"></code-example></p><h5>Modifying Config on Static Pickers / Selects to mimic an Entity Picker</h5><p>You can modify a picker added to a form via field interactions to look like an entity picker!</p><p><code-example example=\"fi-modify-added-picker\"></code-example></p><h5>Using Globals</h5><p>Using the config from above, you can figure the API to have a set of global variables that you can key off of inside your field interactions</p><p><code-example example=\"fi-globals\"></code-example></p><h5>Async Interactions</h5><p>You can perform async interactions and keep the form from saving by setting a loading state</p><p><code-example example=\"fi-async\"></code-example></p><h5>Confirm Changes</h5><p>You can prompt the user if they want to update the field or not too!</p><p><code-example example=\"fi-confirm\"></code-example></p><h5>Adding / Removing Fields</h5><p>With the API you can quickly add and remove fields on the form.</p><p><strong>ONLY WORKS WITH DYNAMIC FORMS</strong></p><p><code-example example=\"fi-adding-removing\"></code-example></p><h5>Add Tooltip</h5><p>You are able to dynamically change a field's tooltip.</p><p><code-example example=\"fi-tooltip\"></code-example></p><h5>Interacting with Nested Forms</h5><p>Field Interactions can navigate nested forms to interact with parent and child forms. This example uses the Form Group component which contains an array of nested forms that are kept in sync by field interactions.</p><p><code-example example=\"fi-nested\"></code-example></p>"
       }]
     }];
 
