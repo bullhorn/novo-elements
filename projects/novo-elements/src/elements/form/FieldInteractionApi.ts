@@ -52,6 +52,7 @@ export class FieldInteractionApi {
   private _currentKey: string;
   appBridge: AppBridge;
   private asyncBlockTimeout;
+  private _isInvokedOnInit = false;
 
   static FIELD_POSITIONS = {
     ABOVE_FIELD: 'ABOVE_FIELD',
@@ -102,6 +103,14 @@ export class FieldInteractionApi {
 
   get currentKey(): string {
     return this._currentKey;
+  }
+
+  set isInvokedOnInit(isOnInit: boolean) {
+    this._isInvokedOnInit = isOnInit;
+  }
+
+  get isInvokedOnInit(): boolean {
+    return this._isInvokedOnInit;
   }
 
   isActiveControlValid(): boolean {

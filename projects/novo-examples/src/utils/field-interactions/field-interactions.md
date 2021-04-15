@@ -36,7 +36,7 @@ blur -- gets fired when the field loses focus
 
 The script function represents the function that will be fired for the event, you can see examples of these below.
 
-Lastly, 'invokeOnInit' will also trigger the Field Interaction when the form is created as well.
+Lastly, 'invokeOnInit' will also trigger the Field Interaction when the form is created as well. A script can check `API.isInvokedOnInit` to determine if the current call is due to initialization or due to a user change. 
 
 ##### Getting Current Context
 

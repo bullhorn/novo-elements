@@ -336,7 +336,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
         }
         if (interaction.invokeOnInit) {
           if (!this.form.controls[this.control.key].restrictFieldInteractions) {
-            this.executeInteraction(interaction);
+            this.executeInteraction(interaction, true);
           }
         }
       }
@@ -533,11 +533,12 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     return false;
   }
 
-  executeInteraction(interaction) {
+  executeInteraction(interaction, isInvokedOnInit = false) {
     if (interaction.script && Helpers.isFunction(interaction.script)) {
       setTimeout(() => {
         this.fieldInteractionApi.form = this.form;
         this.fieldInteractionApi.currentKey = this.control.key;
+        this.fieldInteractionApi.isInvokedOnInit = isInvokedOnInit;
         try {
           interaction.script(this.fieldInteractionApi, this.control.key);
         } catch (err) {
