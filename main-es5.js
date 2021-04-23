@@ -47284,6 +47284,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             function (value) {
               if (!Helpers.isEmpty(value)) {
                 _this156.templateContext.$implicit.percentValue = Number((value * 100).toFixed(6).replace(/\.?0*$/, ''));
+              } else {
+                _this156.templateContext.$implicit.percentValue = null;
               }
             });
           }

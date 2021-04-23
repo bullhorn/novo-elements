@@ -42806,6 +42806,9 @@ class NovoControlElement extends OutsideClick {
                 if (!Helpers.isEmpty(value)) {
                     this.templateContext.$implicit.percentValue = Number((value * 100).toFixed(6).replace(/\.?0*$/, ''));
                 }
+                else {
+                    this.templateContext.$implicit.percentValue = null;
+                }
             }));
         }
     }
