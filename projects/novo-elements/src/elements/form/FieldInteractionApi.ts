@@ -740,7 +740,7 @@ export class FieldInteractionApi {
 
   addControl(
     key: string,
-    metaForNewField: { key?: string, type?: string, name?: string, label?: string },
+    metaForNewField: { key?: string, type?: string, name?: string, label?: string, interactions: Array<{ event?: 'change' | 'focus' | string, invokeOnInit?: boolean, script? }> },
     position: string = FieldInteractionApi.FIELD_POSITIONS.ABOVE_FIELD,
     initialValue?,
     otherForm?: NovoFormGroup,
