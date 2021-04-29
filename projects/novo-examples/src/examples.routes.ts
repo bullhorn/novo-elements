@@ -710,13 +710,13 @@ export class DesignPage {
   selector: 'iconography-page',
   template: `<h1>Iconography</h1>
     <h2>Certified Pixel-Perfect</h2>
-    <novo-grid columns="1fr 128px">
+    <novo-grid columns="1fr 200px">
       <novo-text
         >Icons are used to represent an action or concept through the most simplistic imagery possible. Icons give additional context to
         written material, allowing the user to quickly comprehend any given concept. The icons are designed on a highly specific grid to
         ensure maximum clarity even at a small size. Their design is friendly, human, and bold.</novo-text
       >
-      <img src="assets/images/IconographyPageIcon.svg"
+      <img src="assets/images/IconographyPageIcon.svg" width="64px"
     /></novo-grid>
     <p><a href="http://bullhorn.github.io/bullhorn-icons/">Bullhorn's Icon Set</a></p>
     <p><iconset-example></iconset-example></p>
@@ -966,8 +966,6 @@ export class SpacingPage {
           <dd>1.375 (28px)</dd>
           <dt>Font Weight</dt>
           <dd>300</dd>
-          <dt>Max Line Length</dt>
-          <dd>550px</dd>
         </dl>
       </typedef-specs>
       <typedef-snippet>
@@ -985,8 +983,6 @@ export class SpacingPage {
           <dd>1.375 (28px)</dd>
           <dt>Font Weight</dt>
           <dd>300</dd>
-          <dt>Max Line Length</dt>
-          <dd>550px</dd>
         </dl>
       </typedef-specs>
       <typedef-snippet>
@@ -1004,8 +1000,6 @@ export class SpacingPage {
           <dd>1.375 (28px)</dd>
           <dt>Font Weight</dt>
           <dd>300</dd>
-          <dt>Max Line Length</dt>
-          <dd>550px</dd>
         </dl>
       </typedef-specs>
       <typedef-snippet>

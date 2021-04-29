@@ -201,7 +201,7 @@ export class NovoChipsElement implements OnInit, ControlValueAccessor {
   }
 
   getAvatarType(item: any) {
-    return this.type || item?.value?.searchEntity;
+    return (this.type || item?.value?.searchEntity || '').toLowerCase();
   }
 
   deselectAll(event?) {

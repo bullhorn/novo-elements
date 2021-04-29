@@ -12,8 +12,8 @@ export interface ModalParams {
 }
 export class NovoModalParams implements ModalParams {}
 
-export class NovoModalRef {
-  constructor(public component: any, public params: any, private overlayRef: OverlayRef) {}
+export class NovoModalRef<T = any> {
+  constructor(public component: any, public params: T, private overlayRef: OverlayRef) {}
 
   private _beforeClose = new Subject<any>();
   private _afterClosed = new Subject<any>();

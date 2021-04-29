@@ -69,7 +69,7 @@ Line length is always relative to its font\-size. This means that if a font scal
 
 There a number of general styles that are present throughout the application. To maintain consistency, these styles should be adhered to as much as possible.
 
-### Body Text
+## Body Text
 
 Body text is available in three different sizes. Use body text to present the bulk of a page’s content. All body text uses a line height of 1.375 relative to the font size.
 
@@ -133,7 +133,7 @@ Body text is available in three different sizes. Use body text to present the bu
   </typedef-snippet>
 </typedef-example>
 
-### Title Text
+## Title Text
 
 Titles are available in six different sizes. To create an optical balance between the six levels, titles are set in two weights: Condensed Thin and Condensed Light. All titles use a line height of 1.2 relative to the font size.
 
