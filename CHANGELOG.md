@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.6.0](https://github.com/bullhorn/novo-elements/compare/v4.5.0...v4.6.0) (2021-05-06)
+
+
+### Features
+
+* **Field Interactions:** Adding isInvokedOnInit to identify to field interactions whether the operation is happening on init or not ([#1176](https://github.com/bullhorn/novo-elements/issues/1176)) ([649f1be](https://github.com/bullhorn/novo-elements/commit/649f1beed6efc63db18bca5755c83ebf9fee3339))
+* **Forms:** Enabling nested form field interactions ([#1175](https://github.com/bullhorn/novo-elements/issues/1175)) ([c317249](https://github.com/bullhorn/novo-elements/commit/c3172496b4aeaa21cf6cd7c8e167e3d507902aa4))
+
 ## [4.5.0](https://github.com/bullhorn/novo-elements/compare/v4.4.4...v4.5.0) (2021-04-07)
 
 
