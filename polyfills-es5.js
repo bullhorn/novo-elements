@@ -1,4 +1,4 @@
-function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
 
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 
@@ -21168,6 +21168,16 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         }
 
         _createClass(Zone, [{
+          key: "parent",
+          get: function get() {
+            return this._parent;
+          }
+        }, {
+          key: "name",
+          get: function get() {
+            return this._name;
+          }
+        }, {
           key: "get",
           value: function get(key) {
             var zone = this.getZoneWith(key);
@@ -21400,35 +21410,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               zoneDelegates[i]._updateTaskCount(task.type, count);
             }
           }
-        }, {
-          key: "parent",
-          get: function get() {
-            return this._parent;
-          }
-        }, {
-          key: "name",
-          get: function get() {
-            return this._name;
-          }
         }], [{
           key: "assertZonePatched",
           value: function assertZonePatched() {
             if (global['Promise'] !== patches['ZoneAwarePromise']) {
               throw new Error('Zone.js has detected that ZoneAwarePromise `(window|global).Promise` ' + 'has been overwritten.\n' + 'Most likely cause is that a Promise polyfill has been loaded ' + 'after Zone.js (Polyfilling Promise api is not necessary when zone.js is loaded. ' + 'If you must load one, do so before loading zone.js.)');
-            }
-          }
-        }, {
-          key: "__load_patch",
-          value: function __load_patch(name, fn) {
-            if (patches.hasOwnProperty(name)) {
-              if (checkDuplicate) {
-                throw Error('Already loaded patch: ' + name);
-              }
-            } else if (!global['__Zone_disable_' + name]) {
-              var perfName = 'Zone:' + name;
-              mark(perfName);
-              patches[name] = fn(global, Zone, _api);
-              performanceMeasure(perfName, perfName);
             }
           }
         }, {
@@ -21451,6 +21437,20 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           key: "currentTask",
           get: function get() {
             return _currentTask;
+          }
+        }, {
+          key: "__load_patch",
+          value: function __load_patch(name, fn) {
+            if (patches.hasOwnProperty(name)) {
+              if (checkDuplicate) {
+                throw Error('Already loaded patch: ' + name);
+              }
+            } else if (!global['__Zone_disable_' + name]) {
+              var perfName = 'Zone:' + name;
+              mark(perfName);
+              patches[name] = fn(global, Zone, _api);
+              performanceMeasure(perfName, perfName);
+            }
           }
         }]);
 
@@ -21670,6 +21670,16 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         }
 
         _createClass(ZoneTask, [{
+          key: "zone",
+          get: function get() {
+            return this._zone;
+          }
+        }, {
+          key: "state",
+          get: function get() {
+            return this._state;
+          }
+        }, {
           key: "cancelScheduleRequest",
           value: function cancelScheduleRequest() {
             this._transitionTo(notScheduled, scheduling);
@@ -21708,16 +21718,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               zone: this.zone.name,
               runCount: this.runCount
             };
-          }
-        }, {
-          key: "zone",
-          get: function get() {
-            return this._zone;
-          }
-        }, {
-          key: "state",
-          get: function get() {
-            return this._state;
           }
         }], [{
           key: "invokeTask",
@@ -22230,6 +22230,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         }
 
         _createClass(ZoneAwarePromise, [{
+          key: Symbol.toStringTag,
+          get: function get() {
+            return 'Promise';
+          }
+        }, {
           key: "then",
           value: function then(onFulfilled, onRejected) {
             var chainPromise = new this.constructor(null);
@@ -22262,11 +22267,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             }
 
             return chainPromise;
-          }
-        }, {
-          key: Symbol.toStringTag,
-          get: function get() {
-            return 'Promise';
           }
         }], [{
           key: "toString",

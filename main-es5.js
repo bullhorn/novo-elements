@@ -6,7 +6,7 @@ function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArra
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]); if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
@@ -20,11 +20,11 @@ function _possibleConstructorReturn(self, call) { if (call && (typeof call === "
 
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
-function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e2) { throw _e2; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e3) { didErr = true; err = _e3; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e2) { throw _e2; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e3) { didErr = true; err = _e3; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
@@ -32,7 +32,7 @@ function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread n
 
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
 
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
 
@@ -534,12 +534,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
       _createClass(Loader, [{
         key: "load",
-
+        value:
         /**
          * @param {?} url
          * @return {?}
          */
-        value: function load(url) {
+        function load(url) {
           return new Promise(
           /**
           * @param {?} resolve
@@ -1699,11 +1699,16 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
       _createClass(TranslateDirective, [{
-        key: "ngOnInit",
-
+        key: "innerHTML",
+        get: function get() {
+          return this.translatedValue;
+        }
         /**
          * @return {?}
          */
+
+      }, {
+        key: "ngOnInit",
         value: function ngOnInit() {
           var _this5 = this;
 
@@ -1735,11 +1740,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         key: "renderContent",
         value: function renderContent(key, interpolation) {
           return this.sanitizer.bypassSecurityTrustHtml(TranslateService.translate(key, interpolation));
-        }
-      }, {
-        key: "innerHTML",
-        get: function get() {
-          return this.translatedValue;
         }
       }]);
 
@@ -3956,13 +3956,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
       _createClass(Helpers, null, [{
         key: "swallowEvent",
-
+        value:
         /**
          * Swallows an event to stop further execution
          * @param {?} event
          * @return {?}
          */
-        value: function swallowEvent(event) {
+        function swallowEvent(event) {
           if (event) {
             event.stopPropagation();
             event.preventDefault();
@@ -4732,11 +4732,36 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
       _createClass(NovoAceEditor, [{
-        key: "ngOnDestroy",
+        key: "theme",
+        set: function set(theme) {
+          this.setTheme(theme);
+        }
+        /**
+         * @param {?} options
+         * @return {?}
+         */
 
+      }, {
+        key: "options",
+        set: function set(options) {
+          this.setOptions(options);
+        }
+        /**
+         * @param {?} mode
+         * @return {?}
+         */
+
+      }, {
+        key: "mode",
+        set: function set(mode) {
+          this.setMode(mode);
+        }
         /**
          * @return {?}
          */
+
+      }, {
+        key: "ngOnDestroy",
         value: function ngOnDestroy() {
           if (this.editor) {
             this.editor.destroy();
@@ -4924,31 +4949,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         value: function registerOnTouched(fn) {
           this.onTouched = fn;
         }
-      }, {
-        key: "theme",
-        set: function set(theme) {
-          this.setTheme(theme);
-        }
-        /**
-         * @param {?} options
-         * @return {?}
-         */
-
-      }, {
-        key: "options",
-        set: function set(options) {
-          this.setOptions(options);
-        }
-        /**
-         * @param {?} mode
-         * @return {?}
-         */
-
-      }, {
-        key: "mode",
-        set: function set(mode) {
-          this.setMode(mode);
-        }
       }]);
 
       return NovoAceEditor;
@@ -5031,17 +5031,17 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
       _createClass(NovoButtonElement, [{
         key: "icon",
+        get:
+        /**
+         * @return {?}
+         */
+        function get() {
+          return this._icon;
+        },
         set: function set(icon) {
           if (icon) {
             this._icon = "bhi-".concat(icon);
           }
-        }
-        /**
-         * @return {?}
-         */
-        ,
-        get: function get() {
-          return this._icon;
         }
       }]);
 
@@ -5788,14 +5788,14 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
       _createClass(Pluralize, null, [{
         key: "pluralize",
-
+        value:
         /**
          * @param {?} word
          * @param {?=} count
          * @param {?=} inclusive
          * @return {?}
          */
-        value: function pluralize(word) {
+        function pluralize(word) {
           var count = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
           var inclusive = arguments.length > 2 ? arguments[2] : undefined;
 
@@ -5940,12 +5940,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
       _createClass(PluralPipe, [{
         key: "transform",
-
+        value:
         /**
          * @param {?} value
          * @return {?}
          */
-        value: function transform(value) {
+        function transform(value) {
           return Pluralize.pluralize(value);
         }
       }]);
@@ -5974,12 +5974,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
       _createClass(DecodeURIPipe, [{
         key: "transform",
-
+        value:
         /**
          * @param {?} encodedString
          * @return {?}
          */
-        value: function transform(encodedString) {
+        function transform(encodedString) {
           /** @type {?} */
           var decodedString = '';
 
@@ -6015,13 +6015,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
       _createClass(GroupByPipe, [{
         key: "transform",
-
+        value:
         /**
          * @param {?} input
          * @param {?} prop
          * @return {?}
          */
-        value: function transform(input, prop) {
+        function transform(input, prop) {
           if (!Array.isArray(input)) {
             return input;
           }
@@ -9931,12 +9931,25 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
       _createClass(NovoIsLoadingDirective, [{
-        key: "createViews",
-
+        key: "isLoading",
+        set: function set(condition) {
+          if (!condition && !this.hasView) {
+            this.destroyViews(this.loadedViews);
+            this.skeletonViews = this.createViews(this.skeletonTemplates);
+            this.hasView = true;
+          } else if (condition && this.hasView) {
+            this.destroyViews(this.skeletonViews);
+            this.loadedViews = this.createViews(this.loadedTemplates);
+            this.hasView = false;
+          }
+        }
         /**
          * @param {?} templates
          * @return {?}
          */
+
+      }, {
+        key: "createViews",
         value: function createViews(templates) {
           var _this14 = this;
 
@@ -9971,19 +9984,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             } finally {
               _iterator3.f();
             }
-          }
-        }
-      }, {
-        key: "isLoading",
-        set: function set(condition) {
-          if (!condition && !this.hasView) {
-            this.destroyViews(this.loadedViews);
-            this.skeletonViews = this.createViews(this.skeletonTemplates);
-            this.hasView = true;
-          } else if (condition && this.hasView) {
-            this.destroyViews(this.skeletonViews);
-            this.loadedViews = this.createViews(this.loadedTemplates);
-            this.hasView = false;
           }
         }
       }]);
@@ -10293,11 +10293,18 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
       _createClass(NovoCategoryDropdownElement, [{
-        key: "ngOnInit",
-
+        key: "categories",
+        set: function set(categories) {
+          this._masterCategoryMap = Object.assign({}, categories);
+          this._categoryMap = Object.assign({}, categories);
+          this._categories = Object.keys(categories);
+        }
         /**
          * @return {?}
          */
+
+      }, {
+        key: "ngOnInit",
         value: function ngOnInit() {
           /** @type {?} */
           var button = this.element.nativeElement.querySelector('button');
@@ -10475,13 +10482,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           if (this.closeOnSelect) {
             this.toggleActive();
           }
-        }
-      }, {
-        key: "categories",
-        set: function set(categories) {
-          this._masterCategoryMap = Object.assign({}, categories);
-          this._categoryMap = Object.assign({}, categories);
-          this._categories = Object.keys(categories);
         }
       }]);
 
@@ -11126,12 +11126,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
       _createClass(NovoItemAvatarElement, [{
         key: "ngOnChanges",
-
+        value:
         /**
          * @param {?=} changes
          * @return {?}
          */
-        value: function ngOnChanges(changes) {
+        function ngOnChanges(changes) {
           this.iconClass = this.icon ? "bhi-".concat(this.icon) : null;
           this.classMap = [this.iconClass, this.icon];
         }
@@ -11366,12 +11366,17 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
       _createClass(NovoChipElement, [{
-        key: "onRemove",
-
+        key: "type",
+        set: function set(type) {
+          this._type = type ? type.toLowerCase() : null;
+        }
         /**
          * @param {?} e
          * @return {?}
          */
+
+      }, {
+        key: "onRemove",
         value: function onRemove(e) {
           if (e) {
             e.stopPropagation();
@@ -11412,11 +11417,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
           this.deselect.emit(e);
           return false;
-        }
-      }, {
-        key: "type",
-        set: function set(type) {
-          this._type = type ? type.toLowerCase() : null;
         }
       }]);
 
@@ -11495,11 +11495,23 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
       _createClass(NovoChipsElement, [{
-        key: "ngOnInit",
-
+        key: "disablePickerInput",
+        get:
         /**
          * @return {?}
          */
+        function get() {
+          return this._disablePickerInput;
+        }
+        /**
+         * @return {?}
+         */
+        ,
+        set: function set(v) {
+          this._disablePickerInput = Object(_angular_cdk_coercion__WEBPACK_IMPORTED_MODULE_12__["coerceBooleanProperty"])(v);
+        }
+      }, {
+        key: "ngOnInit",
         value: function ngOnInit() {
           this.setItems();
         }
@@ -11508,11 +11520,33 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
          */
 
       }, {
-        key: "clearValue",
+        key: "value",
+        get: function get() {
+          return this._value;
+        }
+        /**
+         * @param {?} selected
+         * @return {?}
+         */
+        ,
+        set: function set(selected) {
+          this.itemToAdd = '';
 
+          if (selected !== this._value) {
+            this._value = selected;
+            this.changed.emit({
+              value: selected,
+              rawValue: this.items
+            });
+            this.onModelChange(selected);
+          }
+        }
         /**
          * @return {?}
          */
+
+      }, {
+        key: "clearValue",
         value: function clearValue() {
           this.items = [];
 
@@ -11888,40 +11922,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             this.popup = null;
           }
         }
-      }, {
-        key: "disablePickerInput",
-        set: function set(v) {
-          this._disablePickerInput = Object(_angular_cdk_coercion__WEBPACK_IMPORTED_MODULE_12__["coerceBooleanProperty"])(v);
-        }
-        /**
-         * @return {?}
-         */
-        ,
-        get: function get() {
-          return this._disablePickerInput;
-        }
-      }, {
-        key: "value",
-        get: function get() {
-          return this._value;
-        }
-        /**
-         * @param {?} selected
-         * @return {?}
-         */
-        ,
-        set: function set(selected) {
-          this.itemToAdd = '';
-
-          if (selected !== this._value) {
-            this._value = selected;
-            this.changed.emit({
-              value: selected,
-              rawValue: this.items
-            });
-            this.onModelChange(selected);
-          }
-        }
       }]);
 
       return NovoChipsElement;
@@ -12040,11 +12040,34 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
          */
 
       }, {
-        key: "openPanel",
+        key: "panelOpen",
+        get: function get() {
+          return this.overlayRef && this.overlayRef.hasAttached();
+        }
+        /**
+         * @param {?} value
+         * @return {?}
+         */
 
+      }, {
+        key: "parent",
+        get:
         /**
          * @return {?}
          */
+        function get() {
+          return this._parent;
+        }
+        /**
+         * @return {?}
+         */
+        ,
+        set: function set(value) {
+          this._parent = value;
+          this.checkSizes();
+        }
+      }, {
+        key: "openPanel",
         value: function openPanel() {
           var _this20 = this;
 
@@ -12114,16 +12137,58 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
          */
 
       }, {
-        key: "subscribeToClosingActions",
+        key: "panelClosingActions",
+        get: function get() {
+          return Object(rxjs__WEBPACK_IMPORTED_MODULE_11__["merge"])( // this.overlayTemplate._keyManager.tabOut,
+          this.outsideClickStream);
+        }
+        /**
+         * Stream of clicks outside of the autocomplete panel.
+         * @protected
+         * @return {?}
+         */
 
+      }, {
+        key: "outsideClickStream",
+        get: function get() {
+          var _this22 = this;
+
+          if (!this.document) {
+            return Object(rxjs__WEBPACK_IMPORTED_MODULE_11__["of"])();
+          }
+
+          return Object(rxjs__WEBPACK_IMPORTED_MODULE_11__["merge"])(Object(rxjs__WEBPACK_IMPORTED_MODULE_11__["fromEvent"])(this.document, 'mousedown'), Object(rxjs__WEBPACK_IMPORTED_MODULE_11__["fromEvent"])(this.document, 'touchend')).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_14__["filter"])(
+          /**
+          * @param {?} event
+          * @return {?}
+          */
+          function (event) {
+            /** @type {?} */
+            var clickTarget =
+            /** @type {?} */
+            event.target;
+            /** @type {?} */
+
+            var clicked = _this22.panelOpen && clickTarget !== _this22.getConnectedElement().nativeElement && !_this22.getConnectedElement().nativeElement.contains(clickTarget) && !!_this22.overlayRef && !_this22.overlayRef.overlayElement.contains(clickTarget);
+
+            if (_this22.panelOpen && !!_this22.overlayRef && _this22.overlayRef.overlayElement.contains(clickTarget) && _this22.closeOnSelect) {
+              _this22.select.emit(event);
+            }
+
+            return clicked;
+          }));
+        }
         /**
          * This method listens to a stream of panel closing actions and resets the
          * stream every time the option list changes.
          * @protected
          * @return {?}
          */
+
+      }, {
+        key: "subscribeToClosingActions",
         value: function subscribeToClosingActions() {
-          var _this22 = this;
+          var _this23 = this;
 
           /** @type {?} */
           var firstStable = this.zone.onStable.asObservable().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_14__["first"])()); // const valueChanges = Observable.from(this.value);
@@ -12136,7 +12201,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function () {
-            return _this22.panelClosingActions;
+            return _this23.panelClosingActions;
           }), // when the first closing event occurs...
           Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_14__["first"])()) // set the value, close the panel, and complete.
           .subscribe(
@@ -12145,7 +12210,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (event) {
-            return _this22.onClosingAction(event);
+            return _this23.onClosingAction(event);
           });
         }
         /**
@@ -12157,7 +12222,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "createOverlay",
         value: function createOverlay(template) {
-          var _this23 = this;
+          var _this24 = this;
 
           this.portal = new _angular_cdk_portal__WEBPACK_IMPORTED_MODULE_8__["TemplatePortal"](template, this.viewContainerRef);
           this.overlayRef = this.overlay.create(this.getOverlayConfig());
@@ -12166,7 +12231,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function () {
-            return _this23.closePanel();
+            return _this24.closePanel();
           });
         }
         /**
@@ -12371,71 +12436,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         value: function getHostWidth() {
           return this.getConnectedElement().nativeElement.getBoundingClientRect().width;
         }
-      }, {
-        key: "panelOpen",
-        get: function get() {
-          return this.overlayRef && this.overlayRef.hasAttached();
-        }
-        /**
-         * @param {?} value
-         * @return {?}
-         */
-
-      }, {
-        key: "parent",
-        set: function set(value) {
-          this._parent = value;
-          this.checkSizes();
-        }
-        /**
-         * @return {?}
-         */
-        ,
-        get: function get() {
-          return this._parent;
-        }
-      }, {
-        key: "panelClosingActions",
-        get: function get() {
-          return Object(rxjs__WEBPACK_IMPORTED_MODULE_11__["merge"])( // this.overlayTemplate._keyManager.tabOut,
-          this.outsideClickStream);
-        }
-        /**
-         * Stream of clicks outside of the autocomplete panel.
-         * @protected
-         * @return {?}
-         */
-
-      }, {
-        key: "outsideClickStream",
-        get: function get() {
-          var _this24 = this;
-
-          if (!this.document) {
-            return Object(rxjs__WEBPACK_IMPORTED_MODULE_11__["of"])();
-          }
-
-          return Object(rxjs__WEBPACK_IMPORTED_MODULE_11__["merge"])(Object(rxjs__WEBPACK_IMPORTED_MODULE_11__["fromEvent"])(this.document, 'mousedown'), Object(rxjs__WEBPACK_IMPORTED_MODULE_11__["fromEvent"])(this.document, 'touchend')).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_14__["filter"])(
-          /**
-          * @param {?} event
-          * @return {?}
-          */
-          function (event) {
-            /** @type {?} */
-            var clickTarget =
-            /** @type {?} */
-            event.target;
-            /** @type {?} */
-
-            var clicked = _this24.panelOpen && clickTarget !== _this24.getConnectedElement().nativeElement && !_this24.getConnectedElement().nativeElement.contains(clickTarget) && !!_this24.overlayRef && !_this24.overlayRef.overlayElement.contains(clickTarget);
-
-            if (_this24.panelOpen && !!_this24.overlayRef && _this24.overlayRef.overlayElement.contains(clickTarget) && _this24.closeOnSelect) {
-              _this24.select.emit(event);
-            }
-
-            return clicked;
-          }));
-        }
       }]);
 
       return NovoOverlayTemplateComponent;
@@ -12580,12 +12580,25 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
       _createClass(NovoSwitchElement, [{
-        key: "onKeydown",
-
+        key: "disabled",
+        get: function get() {
+          return this._disabled;
+        }
+        /**
+         * @param {?} value
+         * @return {?}
+         */
+        ,
+        set: function set(value) {
+          this._disabled = !value;
+        }
         /**
          * @param {?} event
          * @return {?}
          */
+
+      }, {
+        key: "onKeydown",
         value: function onKeydown(event) {
           if (event.keyCode === KeyCodes.SPACE) {
             event.preventDefault();
@@ -12644,19 +12657,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         key: "registerOnTouched",
         value: function registerOnTouched(fn) {
           this.onModelTouched = fn;
-        }
-      }, {
-        key: "disabled",
-        get: function get() {
-          return this._disabled;
-        }
-        /**
-         * @param {?} value
-         * @return {?}
-         */
-        ,
-        set: function set(value) {
-          this._disabled = !value;
         }
       }]);
 
@@ -12801,12 +12801,54 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
          */
 
       }, {
-        key: "shouldSearch",
-
+        key: "term",
+        get: function get() {
+          return this._term;
+        }
         /**
          * @param {?} value
          * @return {?}
          */
+        ,
+        set: function set(value) {
+          if (this.shouldSearch(value)) {
+            this._term = value;
+            this.page = 0;
+            this.optionsFunctionHasChanged = false;
+            this.matches = [];
+            this.processSearch(true);
+          } else {
+            this.addScrollListener();
+          }
+        }
+        /**
+         * @param {?} value
+         * @return {?}
+         */
+
+      }, {
+        key: "config",
+        get:
+        /**
+         * @return {?}
+         */
+        function get() {
+          return this._config;
+        }
+        /**
+         * @param {?} value
+         * @return {?}
+         */
+        ,
+        set: function set(value) {
+          if (this.config && this.config.options !== value.options) {
+            this.optionsFunctionHasChanged = true; // reset page so that new options call is used to search
+          }
+
+          this._config = value;
+        }
+      }, {
+        key: "shouldSearch",
         value: function shouldSearch(value) {
           /** @type {?} */
           var termHasChanged = value !== this._term;
@@ -13267,48 +13309,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             return isPreselected;
           }) !== -1;
         }
-      }, {
-        key: "term",
-        get: function get() {
-          return this._term;
-        }
-        /**
-         * @param {?} value
-         * @return {?}
-         */
-        ,
-        set: function set(value) {
-          if (this.shouldSearch(value)) {
-            this._term = value;
-            this.page = 0;
-            this.optionsFunctionHasChanged = false;
-            this.matches = [];
-            this.processSearch(true);
-          } else {
-            this.addScrollListener();
-          }
-        }
-        /**
-         * @param {?} value
-         * @return {?}
-         */
-
-      }, {
-        key: "config",
-        set: function set(value) {
-          if (this.config && this.config.options !== value.options) {
-            this.optionsFunctionHasChanged = true; // reset page so that new options call is used to search
-          }
-
-          this._config = value;
-        }
-        /**
-         * @return {?}
-         */
-        ,
-        get: function get() {
-          return this._config;
-        }
       }]);
 
       return BasePickerResults;
@@ -13353,11 +13353,16 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
       _createClass(PickerResults, [{
-        key: "getEmptyMessage",
-
+        key: "hasNonErrorMessage",
+        get: function get() {
+          return !this.isLoading && !this.matches.length && !this.hasError;
+        }
         /**
          * @return {?}
          */
+
+      }, {
+        key: "getEmptyMessage",
         value: function getEmptyMessage() {
           if (this.shouldShowMessageForZeroLengthSearch()) {
             // this property comes from Field Interactions
@@ -13383,11 +13388,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         key: "getListElement",
         value: function getListElement() {
           return this.element.nativeElement.querySelector('novo-list');
-        }
-      }, {
-        key: "hasNonErrorMessage",
-        get: function get() {
-          return !this.isLoading && !this.matches.length && !this.hasError;
         }
       }]);
 
@@ -13519,11 +13519,23 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
       _createClass(NovoPickerElement, [{
-        key: "ngOnInit",
-
+        key: "disablePickerInput",
+        get:
         /**
          * @return {?}
          */
+        function get() {
+          return this._disablePickerInput;
+        }
+        /**
+         * @return {?}
+         */
+        ,
+        set: function set(v) {
+          this._disablePickerInput = Object(_angular_cdk_coercion__WEBPACK_IMPORTED_MODULE_12__["coerceBooleanProperty"])(v);
+        }
+      }, {
+        key: "ngOnInit",
         value: function ngOnInit() {
           var _this30 = this;
 
@@ -13616,13 +13628,18 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
          */
 
       }, {
-        key: "show",
-
+        key: "panelOpen",
+        get: function get() {
+          return this.container && this.container.panelOpen;
+        }
         /**
          * @private
          * @param {?=} term
          * @return {?}
          */
+
+      }, {
+        key: "show",
         value: function show(term) {
           this.openPanel(); // Show the results inside
 
@@ -13789,13 +13806,58 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
          */
 
       }, {
-        key: "checkTerm",
-        // Makes sure to clear the model if the user clears the text box
+        key: "value",
+        get: function get() {
+          return this._value;
+        } // set accessor including call the onchange callback
+
+        /**
+         * @param {?} selected
+         * @return {?}
+         */
+        ,
+        set: function set(selected) {
+          if (!selected) {
+            this.term = '';
+            this._value = null;
+            this.onModelChange(this._value);
+          } else if (selected.value !== this._value) {
+            this.term = this.clearValueOnSelect ? '' : selected.label;
+            this._value = selected.value;
+            this.changed.emit({
+              value: selected.value,
+              rawValue: {
+                label: this.term,
+                value: selected.value
+              }
+            });
+            this.select.emit(selected);
+            this.onModelChange(selected.value);
+
+            if (this.popup) {
+              this.popup.instance.selected = this.selected;
+            }
+          } else {
+            this.changed.emit({
+              value: selected.value,
+              rawValue: {
+                label: this.term,
+                value: this._value
+              }
+            });
+            this.select.emit(selected);
+          }
+
+          this.ref.markForCheck();
+        } // Makes sure to clear the model if the user clears the text box
 
         /**
          * @param {?} event
          * @return {?}
          */
+
+      }, {
+        key: "checkTerm",
         value: function checkTerm(event) {
           this.typing.emit(event);
 
@@ -13894,68 +13956,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         key: "setDisabledState",
         value: function setDisabledState(disabled) {
           this._disablePickerInput = disabled;
-        }
-      }, {
-        key: "disablePickerInput",
-        set: function set(v) {
-          this._disablePickerInput = Object(_angular_cdk_coercion__WEBPACK_IMPORTED_MODULE_12__["coerceBooleanProperty"])(v);
-        }
-        /**
-         * @return {?}
-         */
-        ,
-        get: function get() {
-          return this._disablePickerInput;
-        }
-      }, {
-        key: "panelOpen",
-        get: function get() {
-          return this.container && this.container.panelOpen;
-        }
-      }, {
-        key: "value",
-        get: function get() {
-          return this._value;
-        } // set accessor including call the onchange callback
-
-        /**
-         * @param {?} selected
-         * @return {?}
-         */
-        ,
-        set: function set(selected) {
-          if (!selected) {
-            this.term = '';
-            this._value = null;
-            this.onModelChange(this._value);
-          } else if (selected.value !== this._value) {
-            this.term = this.clearValueOnSelect ? '' : selected.label;
-            this._value = selected.value;
-            this.changed.emit({
-              value: selected.value,
-              rawValue: {
-                label: this.term,
-                value: selected.value
-              }
-            });
-            this.select.emit(selected);
-            this.onModelChange(selected.value);
-
-            if (this.popup) {
-              this.popup.instance.selected = this.selected;
-            }
-          } else {
-            this.changed.emit({
-              value: selected.value,
-              rawValue: {
-                label: this.term,
-                value: this._value
-              }
-            });
-            this.select.emit(selected);
-          }
-
-          this.ref.markForCheck();
         }
       }]);
 
@@ -14275,11 +14275,16 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
       _createClass(EntityPickerResults, [{
-        key: "getListElement",
-
+        key: "hasNonErrorMessage",
+        get: function get() {
+          return !this.isLoading && !this.matches.length && !this.hasError;
+        }
         /**
          * @return {?}
          */
+
+      }, {
+        key: "getListElement",
         value: function getListElement() {
           return this.element.nativeElement.querySelector('novo-list');
         }
@@ -14294,11 +14299,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         value: function selectMatch(event, item) {
           this.select.next(item);
           return _get(_getPrototypeOf(EntityPickerResults.prototype), "selectMatch", this).call(this, event, item);
-        }
-      }, {
-        key: "hasNonErrorMessage",
-        get: function get() {
-          return !this.isLoading && !this.matches.length && !this.hasError;
         }
       }]);
 
@@ -14542,13 +14542,76 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
       _createClass(GroupedMultiPickerResults, [{
-        key: "ngOnInit",
+        key: "term",
+        set: function set(value) {
+          var _this37 = this;
 
+          // Display all only will work for static categories
+          if (this.config.displayAll && this.config.getItemsForCategoryAsync) {
+            throw new Error('[GroupedMultiPickerResults] - you can only have `displayAll` with a static `categoryMap`. Not available with `getItemsForCategoryAsync`');
+          } // Custom filter
+
+
+          if (this.config.customFilter) {
+            this.customFilterEnabled = true;
+            this.customFilterLabel = this.config.customFilter.label;
+            this.customFilterValue = !!this.config.customFilter.defaultFilterValue;
+            this.ref.markForCheck();
+
+            if (!this.customFilterLabel || !this.config.customFilter.matchFunction) {
+              throw new Error('[GroupedMultiPickerResults] - custom filter/matchFunction set no label was provided!');
+            }
+          } else {
+            this.customFilterEnabled = false;
+          } // Configure ALL
+
+
+          if (this.config.displayAll && !this.selectedCategory) {
+            this.setAllCategory();
+          } // Placeholder
+
+
+          if (this.config.placeholder) {
+            this.placeholder = this.config.placeholder;
+          } // Focus
+
+
+          setTimeout(
+          /**
+          * @return {?}
+          */
+          function () {
+            _this37.inputElement.nativeElement.focus();
+          });
+        }
         /**
          * @return {?}
          */
+
+      }, {
+        key: "categories",
+        get: function get() {
+          if (this.config.categories || this.config.categoryMap) {
+            return this.config.categories || Array.from(this.config.categoryMap.values()).filter(
+            /**
+            * @param {?} category
+            * @return {?}
+            */
+            function (category) {
+              return category.value !== 'all';
+            });
+          }
+
+          return [];
+        }
+        /**
+         * @return {?}
+         */
+
+      }, {
+        key: "ngOnInit",
         value: function ngOnInit() {
-          var _this37 = this;
+          var _this38 = this;
 
           // Subscribe to keyboard events and debounce
           this.keyboardSubscription = Object(rxjs__WEBPACK_IMPORTED_MODULE_11__["fromEvent"])(this.inputElement.nativeElement, 'keyup').pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_14__["debounceTime"])(350), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_14__["distinctUntilChanged"])()).subscribe(
@@ -14557,10 +14620,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (event) {
-            _this37.searchTerm = event.target['value'];
-            _this37.matches = _this37.filterData();
+            _this38.searchTerm = event.target['value'];
+            _this38.matches = _this38.filterData();
 
-            _this37.ref.markForCheck();
+            _this38.ref.markForCheck();
           });
         }
         /**
@@ -14673,7 +14736,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "fireCustomFilter",
         value: function fireCustomFilter(value) {
-          var _this38 = this;
+          var _this39 = this;
 
           this.customFilterValue = value; // Clear cache map
 
@@ -14695,7 +14758,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function () {
-            _this38.inputElement.nativeElement.focus();
+            _this39.inputElement.nativeElement.focus();
           });
         }
         /**
@@ -14725,7 +14788,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "getNewMatches",
         value: function getNewMatches(category, key) {
-          var _this39 = this;
+          var _this40 = this;
 
           // Get new matches
           if (this.config.categoryMap) {
@@ -14744,23 +14807,23 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               * @return {?}
               */
               function (items) {
-                _this39.internalMap.set(key, {
+                _this40.internalMap.set(key, {
                   value: category.value,
                   label: category.label,
                   items: items
                 });
 
-                _this39.matches = _this39.filter(items, true);
-                _this39.isLoading = false;
+                _this40.matches = _this40.filter(items, true);
+                _this40.isLoading = false;
 
-                _this39.ref.markForCheck();
+                _this40.ref.markForCheck();
 
                 setTimeout(
                 /**
                 * @return {?}
                 */
                 function () {
-                  _this39.inputElement.nativeElement.focus();
+                  _this40.inputElement.nativeElement.focus();
                 });
               });
             } else {
@@ -14779,7 +14842,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "filter",
         value: function filter(array) {
-          var _this40 = this;
+          var _this41 = this;
 
           var ignoreCustomFilter = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
 
@@ -14794,7 +14857,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             */
             function (match) {
               /** @type {?} */
-              var searchTerm = _this40.searchTerm.toLowerCase();
+              var searchTerm = _this41.searchTerm.toLowerCase();
 
               return match.label.toLowerCase().indexOf(searchTerm) > -1 || match.value.toLowerCase().indexOf(searchTerm) > -1;
             });
@@ -14807,74 +14870,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             * @return {?}
             */
             function (match) {
-              return _this40.config.customFilter.matchFunction(match, _this40.customFilterValue);
+              return _this41.config.customFilter.matchFunction(match, _this41.customFilterValue);
             });
           }
 
           return matches;
-        }
-      }, {
-        key: "term",
-        set: function set(value) {
-          var _this41 = this;
-
-          // Display all only will work for static categories
-          if (this.config.displayAll && this.config.getItemsForCategoryAsync) {
-            throw new Error('[GroupedMultiPickerResults] - you can only have `displayAll` with a static `categoryMap`. Not available with `getItemsForCategoryAsync`');
-          } // Custom filter
-
-
-          if (this.config.customFilter) {
-            this.customFilterEnabled = true;
-            this.customFilterLabel = this.config.customFilter.label;
-            this.customFilterValue = !!this.config.customFilter.defaultFilterValue;
-            this.ref.markForCheck();
-
-            if (!this.customFilterLabel || !this.config.customFilter.matchFunction) {
-              throw new Error('[GroupedMultiPickerResults] - custom filter/matchFunction set no label was provided!');
-            }
-          } else {
-            this.customFilterEnabled = false;
-          } // Configure ALL
-
-
-          if (this.config.displayAll && !this.selectedCategory) {
-            this.setAllCategory();
-          } // Placeholder
-
-
-          if (this.config.placeholder) {
-            this.placeholder = this.config.placeholder;
-          } // Focus
-
-
-          setTimeout(
-          /**
-          * @return {?}
-          */
-          function () {
-            _this41.inputElement.nativeElement.focus();
-          });
-        }
-        /**
-         * @return {?}
-         */
-
-      }, {
-        key: "categories",
-        get: function get() {
-          if (this.config.categories || this.config.categoryMap) {
-            return this.config.categories || Array.from(this.config.categoryMap.values()).filter(
-            /**
-            * @param {?} category
-            * @return {?}
-            */
-            function (category) {
-              return category.value !== 'all';
-            });
-          }
-
-          return [];
         }
       }]);
 
@@ -15053,11 +15053,16 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
       _createClass(DistributionListPickerResults, [{
-        key: "getListElement",
-
+        key: "isHidden",
+        get: function get() {
+          return this.matches.length === 0;
+        }
         /**
          * @return {?}
          */
+
+      }, {
+        key: "getListElement",
         value: function getListElement() {
           return this.element.nativeElement.querySelector('novo-list');
         }
@@ -15070,11 +15075,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         key: "sanitizeHTML",
         value: function sanitizeHTML(html) {
           return this.sanitizer.bypassSecurityTrustHtml(html);
-        }
-      }, {
-        key: "isHidden",
-        get: function get() {
-          return this.matches.length === 0;
         }
       }]);
 
@@ -15150,11 +15150,16 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
       _createClass(WorkersCompCodesPickerResults, [{
-        key: "getListElement",
-
+        key: "isHidden",
+        get: function get() {
+          return this.matches.length === 0;
+        }
         /**
          * @return {?}
          */
+
+      }, {
+        key: "getListElement",
         value: function getListElement() {
           return this.element.nativeElement.querySelector('novo-list');
         }
@@ -15168,11 +15173,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         key: "sanitizeHTML",
         value: function sanitizeHTML(compCode, name) {
           return this.sanitizer.bypassSecurityTrustHtml("".concat(compCode, " | ").concat(name));
-        }
-      }, {
-        key: "isHidden",
-        get: function get() {
-          return this.matches.length === 0;
         }
       }]);
 
@@ -15266,12 +15266,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
       _createClass(NovoRowChipElement, [{
         key: "onSelect",
-
+        value:
         /**
          * @param {?} e
          * @return {?}
          */
-        value: function onSelect(e) {
+        function onSelect(e) {
           return false;
         }
       }]);
@@ -15422,11 +15422,27 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
       _createClass(NovoCKEditorElement, [{
-        key: "ngOnDestroy",
-
+        key: "value",
+        get: function get() {
+          return this._value;
+        }
+        /**
+         * @param {?} v
+         * @return {?}
+         */
+        ,
+        set: function set(v) {
+          if (v !== this._value) {
+            this._value = v;
+            this.onChange(v);
+          }
+        }
         /**
          * @return {?}
          */
+
+      }, {
+        key: "ngOnDestroy",
         value: function ngOnDestroy() {
           var _this46 = this;
 
@@ -15726,22 +15742,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           var trimmedText = text.trim();
           this.instance.insertText(trimmedText);
         }
-      }, {
-        key: "value",
-        get: function get() {
-          return this._value;
-        }
-        /**
-         * @param {?} v
-         * @return {?}
-         */
-        ,
-        set: function set(v) {
-          if (v !== this._value) {
-            this._value = v;
-            this.onChange(v);
-          }
-        }
       }]);
 
       return NovoCKEditorElement;
@@ -15921,14 +15921,14 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
       _createClass(NovoDataTableFilterUtils, null, [{
         key: "constructFilter",
-
+        value:
         /**
          * @param {?=} filter
          * @param {?=} type
          * @param {?=} multiSelect
          * @return {?}
          */
-        value: function constructFilter(filter, type, multiSelect) {
+        function constructFilter(filter, type, multiSelect) {
           /** @type {?} */
           var actualFilter = filter;
 
@@ -16008,13 +16008,36 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
       _createClass(DataTableState, [{
-        key: "reset",
+        key: "userFiltered",
+        get: function get() {
+          return !!(this.filter || this.sort || this.globalSearch || this.outsideFilter);
+        }
+        /**
+         * @return {?}
+         */
 
+      }, {
+        key: "userFilteredInternal",
+        get: function get() {
+          return !!(this.filter || this.sort || this.globalSearch);
+        }
+        /**
+         * @return {?}
+         */
+
+      }, {
+        key: "selected",
+        get: function get() {
+          return Array.from(this.selectedRows.values());
+        }
         /**
          * @param {?=} fireUpdate
          * @param {?=} persistUserFilters
          * @return {?}
          */
+
+      }, {
+        key: "reset",
         value: function reset() {
           var fireUpdate = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
           var persistUserFilters = arguments.length > 1 ? arguments[1] : undefined;
@@ -16158,29 +16181,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               this.filter = filters;
             }
           }
-        }
-      }, {
-        key: "userFiltered",
-        get: function get() {
-          return !!(this.filter || this.sort || this.globalSearch || this.outsideFilter);
-        }
-        /**
-         * @return {?}
-         */
-
-      }, {
-        key: "userFilteredInternal",
-        get: function get() {
-          return !!(this.filter || this.sort || this.globalSearch);
-        }
-        /**
-         * @return {?}
-         */
-
-      }, {
-        key: "selected",
-        get: function get() {
-          return Array.from(this.selectedRows.values());
         }
       }]);
 
@@ -16330,11 +16330,25 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
       _createClass(DataTableSource, [{
-        key: "connect",
-
+        key: "totallyEmpty",
+        get: function get() {
+          return this.total === 0;
+        }
         /**
          * @return {?}
          */
+
+      }, {
+        key: "currentlyEmpty",
+        get: function get() {
+          return this.current === 0;
+        }
+        /**
+         * @return {?}
+         */
+
+      }, {
+        key: "connect",
         value: function connect() {
           var _this50 = this;
 
@@ -16411,20 +16425,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "disconnect",
         value: function disconnect() {}
-      }, {
-        key: "totallyEmpty",
-        get: function get() {
-          return this.total === 0;
-        }
-        /**
-         * @return {?}
-         */
-
-      }, {
-        key: "currentlyEmpty",
-        get: function get() {
-          return this.current === 0;
-        }
       }]);
 
       return DataTableSource;
@@ -16636,11 +16636,36 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
          */
 
       }, {
-        key: "openPanel",
+        key: "items",
+        set: function set(items) {
+          this._items = items;
+          this.activeIndex = -1; // Get the innerText of all the items to allow for searching
 
+          this._textItems = items.map(
+          /**
+          * @param {?} item
+          * @return {?}
+          */
+          function (item) {
+            return item.element.nativeElement.innerText;
+          });
+        }
+        /**
+         * BEGIN: Convenient Panel Methods.
+         * @return {?}
+         */
+
+      }, {
+        key: "panelOpen",
+        get: function get() {
+          return this.overlay && this.overlay.panelOpen;
+        }
         /**
          * @return {?}
          */
+
+      }, {
+        key: "openPanel",
         value: function openPanel() {
           this.overlay.openPanel();
 
@@ -16826,31 +16851,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           if (container && item) {
             container.scrollTop = item.element.nativeElement.offsetTop;
           }
-        }
-      }, {
-        key: "items",
-        set: function set(items) {
-          this._items = items;
-          this.activeIndex = -1; // Get the innerText of all the items to allow for searching
-
-          this._textItems = items.map(
-          /**
-          * @param {?} item
-          * @return {?}
-          */
-          function (item) {
-            return item.element.nativeElement.innerText;
-          });
-        }
-        /**
-         * BEGIN: Convenient Panel Methods.
-         * @return {?}
-         */
-
-      }, {
-        key: "panelOpen",
-        get: function get() {
-          return this.overlay && this.overlay.panelOpen;
         }
       }]);
 
@@ -17279,11 +17279,67 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
       _createClass(NovoDataTableCellHeader, [{
-        key: "ngOnInit",
+        key: "column",
+        set: function set(column) {
+          this._column = column;
+          this.label = column.type === 'action' ? '' : column.label;
+          this.labelIcon = column.labelIcon;
+          this.config = {
+            sortable: !!column.sortable,
+            filterable: !!column.filterable,
+            resizable: !!column.resizable
+          };
+          this.resizable = this.config.resizable;
+          /** @type {?} */
 
+          var transforms = {};
+
+          if (column.filterable && Helpers.isObject(column.filterable)) {
+            this.config.filterConfig =
+            /** @type {?} */
+            column.filterable;
+
+            if (!this.config.filterConfig.type) {
+              this.config.filterConfig = {
+                type: 'text'
+              };
+            }
+
+            if (
+            /** @type {?} */
+            column.filterable.transform) {
+              transforms.filter =
+              /** @type {?} */
+              column.filterable.transform;
+            }
+          } else {
+            this.config.filterConfig = {
+              type: 'text'
+            };
+          }
+
+          if (column.sortable && Helpers.isObject(column.sortable)) {
+            if (
+            /** @type {?} */
+            column.sortable.transform) {
+              transforms.sort =
+              /** @type {?} */
+              column.sortable.transform;
+            }
+          }
+
+          if (this.config.filterConfig.type === 'date' && !this.config.filterConfig.options) {
+            this.config.filterConfig.options = this.getDefaultDateFilterOptions();
+          }
+
+          this.config.transforms = transforms;
+        }
         /**
          * @return {?}
          */
+
+      }, {
+        key: "ngOnInit",
         value: function ngOnInit() {
           if (this._cdkColumnDef) {
             this.id = this._cdkColumnDef.name;
@@ -17914,62 +17970,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           }];
           return opts;
         }
-      }, {
-        key: "column",
-        set: function set(column) {
-          this._column = column;
-          this.label = column.type === 'action' ? '' : column.label;
-          this.labelIcon = column.labelIcon;
-          this.config = {
-            sortable: !!column.sortable,
-            filterable: !!column.filterable,
-            resizable: !!column.resizable
-          };
-          this.resizable = this.config.resizable;
-          /** @type {?} */
-
-          var transforms = {};
-
-          if (column.filterable && Helpers.isObject(column.filterable)) {
-            this.config.filterConfig =
-            /** @type {?} */
-            column.filterable;
-
-            if (!this.config.filterConfig.type) {
-              this.config.filterConfig = {
-                type: 'text'
-              };
-            }
-
-            if (
-            /** @type {?} */
-            column.filterable.transform) {
-              transforms.filter =
-              /** @type {?} */
-              column.filterable.transform;
-            }
-          } else {
-            this.config.filterConfig = {
-              type: 'text'
-            };
-          }
-
-          if (column.sortable && Helpers.isObject(column.sortable)) {
-            if (
-            /** @type {?} */
-            column.sortable.transform) {
-              transforms.sort =
-              /** @type {?} */
-              column.sortable.transform;
-            }
-          }
-
-          if (this.config.filterConfig.type === 'date' && !this.config.filterConfig.options) {
-            this.config.filterConfig.options = this.getDefaultDateFilterOptions();
-          }
-
-          this.config.transforms = transforms;
-        }
       }]);
 
       return NovoDataTableCellHeader;
@@ -18166,13 +18166,257 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
       _createClass(NovoDataTable, [{
-        key: "modifyCellHeaderMultiSelectFilterOptions",
+        key: "displayedColumns",
+        get:
+        /**
+         * @return {?}
+         */
+        function get() {
+          return this._disabledColumns;
+        }
+        /**
+         * @param {?} service
+         * @return {?}
+         */
+        ,
+        set: function set(displayedColumns) {
+          var _this63 = this;
 
+          if (this.displayedColumns && this.displayedColumns.length !== 0) {
+            if (this.name !== 'novo-data-table') {
+              this.preferencesChanged.emit({
+                name: this.name,
+                displayedColumns: displayedColumns
+              });
+            } else {
+              notify('Must have [name] set on data-table to use preferences!');
+            }
+          }
+
+          this._disabledColumns = displayedColumns;
+          this.configureLastDisplayedColumn();
+
+          if (this.initialized) {
+            setTimeout(
+            /**
+            * @return {?}
+            */
+            function () {
+              _this63.scrollListener();
+            });
+          }
+        }
+      }, {
+        key: "dataTableService",
+        set: function set(service) {
+          this.loading = false;
+
+          if (!service) {
+            service = new StaticDataTableService([]);
+          }
+
+          this.dataSource = new DataTableSource(service, this.state, this.ref);
+          this.ref.detectChanges();
+        }
+        /**
+         * @param {?} rows
+         * @return {?}
+         */
+
+      }, {
+        key: "rows",
+        set: function set(rows) {
+          this.loading = false;
+          /** @type {?} */
+
+          var service = new StaticDataTableService(rows);
+          this.dataSource = new DataTableSource(service, this.state, this.ref);
+          this.ref.detectChanges();
+        }
+        /**
+         * @param {?} outsideFilter
+         * @return {?}
+         */
+
+      }, {
+        key: "outsideFilter",
+        set: function set(outsideFilter) {
+          var _this64 = this;
+
+          // Unsubscribe
+          if (this.outsideFilterSubscription) {
+            this.outsideFilterSubscription.unsubscribe();
+          }
+
+          if (outsideFilter) {
+            // Re-subscribe
+            this.outsideFilterSubscription = outsideFilter.subscribe(
+            /**
+            * @param {?} filter
+            * @return {?}
+            */
+            function (filter) {
+              _this64.state.outsideFilter = filter;
+
+              _this64.state.updates.next({
+                globalSearch: _this64.state.globalSearch,
+                filter: _this64.state.filter,
+                sort: _this64.state.sort
+              });
+
+              _this64.ref.markForCheck();
+            });
+          }
+        }
+        /**
+         * @param {?} refreshSubject
+         * @return {?}
+         */
+
+      }, {
+        key: "refreshSubject",
+        set: function set(refreshSubject) {
+          var _this65 = this;
+
+          // Unsubscribe
+          if (this.refreshSubscription) {
+            this.refreshSubscription.unsubscribe();
+          }
+
+          if (refreshSubject) {
+            // Re-subscribe
+            this.refreshSubscription = refreshSubject.subscribe(
+            /**
+            * @param {?} filter
+            * @return {?}
+            */
+            function (filter) {
+              _this65.state.isForceRefresh = true;
+
+              _this65.state.updates.next({
+                globalSearch: _this65.state.globalSearch,
+                filter: _this65.state.filter,
+                sort: _this65.state.sort
+              });
+
+              _this65.ref.markForCheck();
+            });
+          }
+        }
+        /**
+         * @param {?} columns
+         * @return {?}
+         */
+
+      }, {
+        key: "columns",
+        get:
+        /**
+         * @return {?}
+         */
+        function get() {
+          return this._columns;
+        }
+        /**
+         * @param {?} v
+         * @return {?}
+         */
+        ,
+        set: function set(columns) {
+          this._columns = columns;
+          this.configureColumns();
+          this.performInteractions('init');
+        }
+      }, {
+        key: "customFilter",
+        get:
+        /**
+         * @return {?}
+         */
+        function get() {
+          return this._customFilter;
+        }
+        /**
+         * @param {?} v
+         * @return {?}
+         */
+        ,
+        set: function set(v) {
+          this._customFilter = Object(_angular_cdk_coercion__WEBPACK_IMPORTED_MODULE_12__["coerceBooleanProperty"])(v);
+        }
+      }, {
+        key: "hasExandedRows",
+        get:
+        /**
+         * @return {?}
+         */
+        function get() {
+          return this._hasExandedRows;
+        }
+        /**
+         * @param {?} v
+         * @return {?}
+         */
+        ,
+        set: function set(v) {
+          this._hasExandedRows = Object(_angular_cdk_coercion__WEBPACK_IMPORTED_MODULE_12__["coerceBooleanProperty"])(v);
+        }
+      }, {
+        key: "forceShowHeader",
+        get:
+        /**
+         * @return {?}
+         */
+        function get() {
+          return this._forceShowHeader;
+        }
+        /**
+         * @param {?} v
+         * @return {?}
+         */
+        ,
+        set: function set(v) {
+          this._forceShowHeader = Object(_angular_cdk_coercion__WEBPACK_IMPORTED_MODULE_12__["coerceBooleanProperty"])(v);
+        }
+      }, {
+        key: "hideGlobalSearch",
+        get:
+        /**
+         * @return {?}
+         */
+        function get() {
+          return this._hideGlobalSearch;
+        }
+        /**
+         * @return {?}
+         */
+        ,
+        set: function set(v) {
+          this._hideGlobalSearch = Object(_angular_cdk_coercion__WEBPACK_IMPORTED_MODULE_12__["coerceBooleanProperty"])(v);
+          this.globalSearchHiddenClassToggle = this._hideGlobalSearch;
+        }
+      }, {
+        key: "empty",
+        get: function get() {
+          return this.dataSource && this.dataSource.totallyEmpty;
+        }
+        /**
+         * @return {?}
+         */
+
+      }, {
+        key: "loadingClass",
+        get: function get() {
+          return this.loading || this.dataSource && this.dataSource.loading;
+        }
         /**
          * @param {?} column
          * @param {?} newOptions
          * @return {?}
          */
+
+      }, {
+        key: "modifyCellHeaderMultiSelectFilterOptions",
         value: function modifyCellHeaderMultiSelectFilterOptions(column, newOptions) {
           /** @type {?} */
           var header = this.cellHeaders.find(
@@ -18247,7 +18491,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "ngAfterContentInit",
         value: function ngAfterContentInit() {
-          var _this63 = this;
+          var _this66 = this;
 
           if (this.displayedColumns && this.displayedColumns.length) {
             this.expandable = this.displayedColumns.includes('expand');
@@ -18261,8 +18505,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           */
           function (item) {
             // Only override if it doesn't already exist
-            if (!_this63.templates[item.getType()]) {
-              _this63.templates[item.getType()] = item.template;
+            if (!_this66.templates[item.getType()]) {
+              _this66.templates[item.getType()] = item.template;
             }
           }); // Custom templates passed in
 
@@ -18273,7 +18517,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           */
           function (item) {
             // Override anything that is custom and in HTML
-            _this63.templates[item.getType()] = item.template;
+            _this66.templates[item.getType()] = item.template;
           }); // Load columns
 
           this.configureColumns(); // State
@@ -18389,7 +18633,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "expandRows",
         value: function expandRows(expand) {
-          var _this64 = this;
+          var _this67 = this;
 
           (this.dataSource.data || []).forEach(
           /**
@@ -18398,9 +18642,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           */
           function (row) {
             if (!expand) {
-              _this64.state.expandedRows["delete"]("".concat(row[_this64.rowIdentifier]));
+              _this67.state.expandedRows["delete"]("".concat(row[_this67.rowIdentifier]));
             } else {
-              _this64.state.expandedRows.add("".concat(row[_this64.rowIdentifier]));
+              _this67.state.expandedRows.add("".concat(row[_this67.rowIdentifier]));
             }
           });
           this.state.onExpandChange();
@@ -18461,7 +18705,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "selectRows",
         value: function selectRows(selected) {
-          var _this65 = this;
+          var _this68 = this;
 
           (this.dataSource.data || []).forEach(
           /**
@@ -18470,9 +18714,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           */
           function (row) {
             if (!selected) {
-              _this65.state.selectedRows["delete"]("".concat(row[_this65.rowIdentifier]));
+              _this68.state.selectedRows["delete"]("".concat(row[_this68.rowIdentifier]));
             } else {
-              _this65.state.selectedRows.set("".concat(row[_this65.rowIdentifier]), row);
+              _this68.state.selectedRows.set("".concat(row[_this68.rowIdentifier]), row);
             }
           });
           this.state.onSelectionChange();
@@ -18500,7 +18744,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "configureLastDisplayedColumn",
         value: function configureLastDisplayedColumn() {
-          var _this66 = this;
+          var _this69 = this;
 
           if (this.columns && this.displayedColumns && 0 !== this.columns.length && 0 !== this.displayedColumns.length) {
             this.columns.forEach(
@@ -18523,7 +18767,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             * @return {?}
             */
             function (name) {
-              return _this66.columns.findIndex(
+              return _this69.columns.findIndex(
               /**
               * @param {?} column
               * @return {?}
@@ -18560,7 +18804,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "configureColumns",
         value: function configureColumns() {
-          var _this67 = this;
+          var _this70 = this;
 
           if (this.columns && this.columns.length !== 0 && Object.keys(this.templates).length !== 0) {
             // Figure the column templates
@@ -18578,7 +18822,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               if (column.template) {
                 // Pass it in as template
                 templateName = column.template;
-              } else if (!!_this67.templates[column.id]) {
+              } else if (!!_this70.templates[column.id]) {
                 // Custom template for the column id
                 templateName = column.id;
               } else {
@@ -18602,7 +18846,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                 }
               }
 
-              _this67.columnToTemplate[column.id] = _this67.templates[templateName];
+              _this70.columnToTemplate[column.id] = _this70.templates[templateName];
             });
             this.configureLastDisplayedColumn();
             this.columnsLoaded = true;
@@ -18669,250 +18913,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               _iterator6.f();
             }
           }
-        }
-      }, {
-        key: "displayedColumns",
-        set: function set(displayedColumns) {
-          var _this68 = this;
-
-          if (this.displayedColumns && this.displayedColumns.length !== 0) {
-            if (this.name !== 'novo-data-table') {
-              this.preferencesChanged.emit({
-                name: this.name,
-                displayedColumns: displayedColumns
-              });
-            } else {
-              notify('Must have [name] set on data-table to use preferences!');
-            }
-          }
-
-          this._disabledColumns = displayedColumns;
-          this.configureLastDisplayedColumn();
-
-          if (this.initialized) {
-            setTimeout(
-            /**
-            * @return {?}
-            */
-            function () {
-              _this68.scrollListener();
-            });
-          }
-        }
-        /**
-         * @return {?}
-         */
-        ,
-        get: function get() {
-          return this._disabledColumns;
-        }
-        /**
-         * @param {?} service
-         * @return {?}
-         */
-
-      }, {
-        key: "dataTableService",
-        set: function set(service) {
-          this.loading = false;
-
-          if (!service) {
-            service = new StaticDataTableService([]);
-          }
-
-          this.dataSource = new DataTableSource(service, this.state, this.ref);
-          this.ref.detectChanges();
-        }
-        /**
-         * @param {?} rows
-         * @return {?}
-         */
-
-      }, {
-        key: "rows",
-        set: function set(rows) {
-          this.loading = false;
-          /** @type {?} */
-
-          var service = new StaticDataTableService(rows);
-          this.dataSource = new DataTableSource(service, this.state, this.ref);
-          this.ref.detectChanges();
-        }
-        /**
-         * @param {?} outsideFilter
-         * @return {?}
-         */
-
-      }, {
-        key: "outsideFilter",
-        set: function set(outsideFilter) {
-          var _this69 = this;
-
-          // Unsubscribe
-          if (this.outsideFilterSubscription) {
-            this.outsideFilterSubscription.unsubscribe();
-          }
-
-          if (outsideFilter) {
-            // Re-subscribe
-            this.outsideFilterSubscription = outsideFilter.subscribe(
-            /**
-            * @param {?} filter
-            * @return {?}
-            */
-            function (filter) {
-              _this69.state.outsideFilter = filter;
-
-              _this69.state.updates.next({
-                globalSearch: _this69.state.globalSearch,
-                filter: _this69.state.filter,
-                sort: _this69.state.sort
-              });
-
-              _this69.ref.markForCheck();
-            });
-          }
-        }
-        /**
-         * @param {?} refreshSubject
-         * @return {?}
-         */
-
-      }, {
-        key: "refreshSubject",
-        set: function set(refreshSubject) {
-          var _this70 = this;
-
-          // Unsubscribe
-          if (this.refreshSubscription) {
-            this.refreshSubscription.unsubscribe();
-          }
-
-          if (refreshSubject) {
-            // Re-subscribe
-            this.refreshSubscription = refreshSubject.subscribe(
-            /**
-            * @param {?} filter
-            * @return {?}
-            */
-            function (filter) {
-              _this70.state.isForceRefresh = true;
-
-              _this70.state.updates.next({
-                globalSearch: _this70.state.globalSearch,
-                filter: _this70.state.filter,
-                sort: _this70.state.sort
-              });
-
-              _this70.ref.markForCheck();
-            });
-          }
-        }
-        /**
-         * @param {?} columns
-         * @return {?}
-         */
-
-      }, {
-        key: "columns",
-        set: function set(columns) {
-          this._columns = columns;
-          this.configureColumns();
-          this.performInteractions('init');
-        }
-        /**
-         * @return {?}
-         */
-        ,
-        get: function get() {
-          return this._columns;
-        }
-        /**
-         * @param {?} v
-         * @return {?}
-         */
-
-      }, {
-        key: "customFilter",
-        set: function set(v) {
-          this._customFilter = Object(_angular_cdk_coercion__WEBPACK_IMPORTED_MODULE_12__["coerceBooleanProperty"])(v);
-        }
-        /**
-         * @return {?}
-         */
-        ,
-        get: function get() {
-          return this._customFilter;
-        }
-        /**
-         * @param {?} v
-         * @return {?}
-         */
-
-      }, {
-        key: "hasExandedRows",
-        set: function set(v) {
-          this._hasExandedRows = Object(_angular_cdk_coercion__WEBPACK_IMPORTED_MODULE_12__["coerceBooleanProperty"])(v);
-        }
-        /**
-         * @return {?}
-         */
-        ,
-        get: function get() {
-          return this._hasExandedRows;
-        }
-        /**
-         * @param {?} v
-         * @return {?}
-         */
-
-      }, {
-        key: "forceShowHeader",
-        set: function set(v) {
-          this._forceShowHeader = Object(_angular_cdk_coercion__WEBPACK_IMPORTED_MODULE_12__["coerceBooleanProperty"])(v);
-        }
-        /**
-         * @return {?}
-         */
-        ,
-        get: function get() {
-          return this._forceShowHeader;
-        }
-        /**
-         * @param {?} v
-         * @return {?}
-         */
-
-      }, {
-        key: "hideGlobalSearch",
-        set: function set(v) {
-          this._hideGlobalSearch = Object(_angular_cdk_coercion__WEBPACK_IMPORTED_MODULE_12__["coerceBooleanProperty"])(v);
-          this.globalSearchHiddenClassToggle = this._hideGlobalSearch;
-        }
-        /**
-         * @return {?}
-         */
-        ,
-        get: function get() {
-          return this._hideGlobalSearch;
-        }
-        /**
-         * @return {?}
-         */
-
-      }, {
-        key: "empty",
-        get: function get() {
-          return this.dataSource && this.dataSource.totallyEmpty;
-        }
-        /**
-         * @return {?}
-         */
-
-      }, {
-        key: "loadingClass",
-        get: function get() {
-          return this.loading || this.dataSource && this.dataSource.loading;
         }
       }]);
 
@@ -19286,8 +19286,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
          */
 
       }, {
-        key: "setValueAndClose",
-
+        key: "panelOpen",
+        get: function get() {
+          return this.overlay && this.overlay.panelOpen;
+        }
         /** END: Convenient Panel Methods. */
 
         /**
@@ -19297,6 +19299,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
          * @param {?} event
          * @return {?}
          */
+
+      }, {
+        key: "setValueAndClose",
         value: function setValueAndClose(event) {
           if (event.value && event.index >= 0) {
             this.select(event.value, event.index);
@@ -19633,11 +19638,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         key: "setDisabledState",
         value: function setDisabledState(disabled) {
           this.disabled = disabled;
-        }
-      }, {
-        key: "panelOpen",
-        get: function get() {
-          return this.overlay && this.overlay.panelOpen;
         }
       }]);
 
@@ -33426,11 +33426,37 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
       _createClass(NovoAddressElement, [{
-        key: "ngOnInit",
-
+        key: "readOnly",
+        get:
         /**
          * @return {?}
          */
+        function get() {
+          return this._readOnly;
+        }
+        /**
+         * @return {?}
+         */
+        ,
+        set: function set(readOnly) {
+          var _this76 = this;
+
+          this._readOnly = readOnly;
+          this.fieldList.forEach(
+          /**
+          * @param {?} field
+          * @return {?}
+          */
+          function (field) {
+            _this76.disabled[field] = _this76._readOnly;
+          });
+
+          if (this.model) {
+            this.updateStates();
+          }
+        }
+      }, {
+        key: "ngOnInit",
         value: function ngOnInit() {
           if (!this.config) {
             this.config = {};
@@ -33456,7 +33482,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "initConfig",
         value: function initConfig() {
-          var _this76 = this;
+          var _this77 = this;
 
           this.fieldList.forEach(
           /**
@@ -33464,52 +33490,52 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (field) {
-            if (!_this76.config.hasOwnProperty(field)) {
-              _this76.config[field] = {
+            if (!_this77.config.hasOwnProperty(field)) {
+              _this77.config[field] = {
                 hidden: true
               };
             }
 
-            if (!_this76.config[field].hasOwnProperty('label')) {
-              _this76.config[field].label = _this76.labels[field];
+            if (!_this77.config[field].hasOwnProperty('label')) {
+              _this77.config[field].label = _this77.labels[field];
             }
 
-            if (_this76.config.required) {
-              _this76.config[field].required = true;
+            if (_this77.config.required) {
+              _this77.config[field].required = true;
             }
 
-            if (_this76.config[field].readOnly || _this76.config.readOnly) {
-              _this76.config[field].readOnly = true;
-              _this76.disabled[field] = true;
+            if (_this77.config[field].readOnly || _this77.config.readOnly) {
+              _this77.config[field].readOnly = true;
+              _this77.disabled[field] = true;
             }
 
             if (field === 'countryID') {
-              if (!_this76.config[field].pickerConfig) {
-                _this76.config.countryID.pickerConfig = _this76.getDefaultCountryConfig();
+              if (!_this77.config[field].pickerConfig) {
+                _this77.config.countryID.pickerConfig = _this77.getDefaultCountryConfig();
               }
 
-              _this76.config[field].pickerConfig.defaultOptions = _this76.config.countryID.pickerConfig.options;
+              _this77.config[field].pickerConfig.defaultOptions = _this77.config.countryID.pickerConfig.options;
             }
 
             if (field === 'state') {
-              if (!_this76.config[field].pickerConfig) {
-                _this76.config.state.pickerConfig = _this76.getDefaultStateConfig();
-                _this76.config[field].pickerConfig.defaultOptions = _this76.config[field].pickerConfig.options;
+              if (!_this77.config[field].pickerConfig) {
+                _this77.config.state.pickerConfig = _this77.getDefaultStateConfig();
+                _this77.config[field].pickerConfig.defaultOptions = _this77.config[field].pickerConfig.options;
               }
 
-              _this76.stateOptions = _this76.config[field].pickerConfig.options;
+              _this77.stateOptions = _this77.config[field].pickerConfig.options;
 
-              _this76.config[field].pickerConfig.options =
+              _this77.config[field].pickerConfig.options =
               /**
               * @param {?=} query
               * @return {?}
               */
               function () {
                 var query = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
-                return _this76.stateOptions(query, _this76.model.countryID);
+                return _this77.stateOptions(query, _this77.model.countryID);
               };
 
-              _this76.config[field].pickerConfig.defaultOptions = _this76.stateOptions;
+              _this77.config[field].pickerConfig.defaultOptions = _this77.stateOptions;
             }
           });
         }
@@ -33699,7 +33725,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "updateStates",
         value: function updateStates() {
-          var _this77 = this;
+          var _this78 = this;
 
           if (this.config.state.pickerConfig.options && !Helpers.isBlank(this.model.countryID)) {
             this.config.state.pickerConfig.options =
@@ -33709,7 +33735,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             */
             function () {
               var query = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
-              return _this77.stateOptions(query, _this77.model.countryID);
+              return _this78.stateOptions(query, _this78.model.countryID);
             };
 
             this.stateOptions('', this.model.countryID).then(
@@ -33718,25 +33744,25 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             * @return {?}
             */
             function (results) {
-              _this77.config.state.pickerConfig.defaultOptions = results;
+              _this78.config.state.pickerConfig.defaultOptions = results;
 
               if (results.length) {
-                _this77.tooltip.state = undefined;
-                _this77.disabled.state = _this77._readOnly;
+                _this78.tooltip.state = undefined;
+                _this78.disabled.state = _this78._readOnly;
 
-                _this77.setStateLabel(_this77.model);
+                _this78.setStateLabel(_this78.model);
               } else {
-                _this77.disabled.state = true;
-                _this77.tooltip.state = _this77.labels.noStatesForCountry;
+                _this78.disabled.state = true;
+                _this78.tooltip.state = _this78.labels.noStatesForCountry;
 
-                if (_this77.config.state.required) {
-                  _this77.valid.state = true;
+                if (_this78.config.state.required) {
+                  _this78.valid.state = true;
                 }
               }
 
-              _this77.validityChange.emit();
+              _this78.validityChange.emit();
 
-              _this77.onInput(null, 'state');
+              _this78.onInput(null, 'state');
             });
           } else {
             this.config.state.pickerConfig.defaultOptions = [];
@@ -33802,7 +33828,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "writeValue",
         value: function writeValue(model) {
-          var _this78 = this;
+          var _this79 = this;
 
           /** @type {?} */
           var loadingCountries = false;
@@ -33828,12 +33854,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                     */
                     function (result) {
                       loadingCountries = false;
-                      countryName = Helpers.interpolateWithFallback(_this78.config.countryID.pickerConfig.format, result);
-                      _this78.model = Object.assign(model, {
+                      countryName = Helpers.interpolateWithFallback(_this79.config.countryID.pickerConfig.format, result);
+                      _this79.model = Object.assign(model, {
                         countryName: countryName
                       });
 
-                      _this78.updateStates();
+                      _this79.updateStates();
                     });
                   }
                 }
@@ -33861,7 +33887,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (field) {
-            _this78.onInput(null, field);
+            _this79.onInput(null, field);
           });
         }
         /**
@@ -33892,7 +33918,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "getDefaultStateConfig",
         value: function getDefaultStateConfig() {
-          var _this79 = this;
+          var _this80 = this;
 
           return {
             field: 'value',
@@ -33906,7 +33932,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             function options() {
               var query = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
               var countryID = arguments.length > 1 ? arguments[1] : undefined;
-              return Promise.resolve(_this79.getStateOptions(query, countryID));
+              return Promise.resolve(_this80.getStateOptions(query, countryID));
             },
             getLabels:
             /**
@@ -33995,32 +34021,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               });
             }
           };
-        }
-      }, {
-        key: "readOnly",
-        set: function set(readOnly) {
-          var _this80 = this;
-
-          this._readOnly = readOnly;
-          this.fieldList.forEach(
-          /**
-          * @param {?} field
-          * @return {?}
-          */
-          function (field) {
-            _this80.disabled[field] = _this80._readOnly;
-          });
-
-          if (this.model) {
-            this.updateStates();
-          }
-        }
-        /**
-         * @return {?}
-         */
-        ,
-        get: function get() {
-          return this._readOnly;
         }
       }]);
 
@@ -35574,13 +35574,27 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
          */
 
       }, {
-        key: "_handleKeydown",
+        key: "panelOpen",
+        get: function get() {
+          return this.overlay && this.overlay.panelOpen;
+        }
+        /**
+         * @return {?}
+         */
 
+      }, {
+        key: "active",
+        get: function get() {
+          return this.panelOpen || this.alwaysOpen;
+        }
         /**
          * END: Convenient Panel Methods.
          * @param {?} event
          * @return {?}
          */
+
+      }, {
+        key: "_handleKeydown",
         value: function _handleKeydown(event) {
           if ((event.keyCode === _angular_cdk_keycodes__WEBPACK_IMPORTED_MODULE_19__["ESCAPE"] || event.keyCode === _angular_cdk_keycodes__WEBPACK_IMPORTED_MODULE_19__["ENTER"] || event.keyCode === _angular_cdk_keycodes__WEBPACK_IMPORTED_MODULE_19__["TAB"]) && this.panelOpen) {
             this.closePanel();
@@ -35703,20 +35717,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           this.writeValue(null);
 
           this._onChange(null);
-        }
-      }, {
-        key: "panelOpen",
-        get: function get() {
-          return this.overlay && this.overlay.panelOpen;
-        }
-        /**
-         * @return {?}
-         */
-
-      }, {
-        key: "active",
-        get: function get() {
-          return this.panelOpen || this.alwaysOpen;
         }
       }]);
 
@@ -37085,13 +37085,18 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
          */
 
       }, {
-        key: "_handleKeydown",
-
+        key: "panelOpen",
+        get: function get() {
+          return this.overlay && this.overlay.panelOpen;
+        }
         /**
          * END: Convenient Panel Methods.
          * @param {?} event
          * @return {?}
          */
+
+      }, {
+        key: "_handleKeydown",
         value: function _handleKeydown(event) {
           if ((event.keyCode === _angular_cdk_keycodes__WEBPACK_IMPORTED_MODULE_19__["ESCAPE"] || event.keyCode === _angular_cdk_keycodes__WEBPACK_IMPORTED_MODULE_19__["ENTER"] || event.keyCode === _angular_cdk_keycodes__WEBPACK_IMPORTED_MODULE_19__["TAB"]) && this.panelOpen) {
             this._handleEvent(event, true);
@@ -37367,11 +37372,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
          * @return {?}
          */
 
-      }, {
-        key: "panelOpen",
-        get: function get() {
-          return this.overlay && this.overlay.panelOpen;
-        }
       }, {
         key: "hasValue",
         get: function get() {
@@ -38350,11 +38350,87 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
       _createClass(NovoDataTablePagination, [{
-        key: "ngOnInit",
-
+        key: "page",
+        get: function get() {
+          return this._page;
+        }
+        /**
+         * @param {?} page
+         * @return {?}
+         */
+        ,
+        set: function set(page) {
+          this._page = page;
+          this.changeDetectorRef.markForCheck();
+          this.longRangeLabel = this.labels.getRangeText(this.page, this.pageSize, this.length, false);
+          this.shortRangeLabel = this.labels.getRangeText(this.page, this.pageSize, this.length, true);
+          this.state.page = this._page;
+        }
         /**
          * @return {?}
          */
+
+      }, {
+        key: "pageSize",
+        get: function get() {
+          return this._pageSize;
+        }
+        /**
+         * @param {?} pageSize
+         * @return {?}
+         */
+        ,
+        set: function set(pageSize) {
+          this._pageSize = pageSize;
+          this.updateDisplayedPageSizeOptions();
+          this.state.pageSize = this._pageSize;
+        }
+        /**
+         * @return {?}
+         */
+
+      }, {
+        key: "pageSizeOptions",
+        get: function get() {
+          return this._pageSizeOptions;
+        }
+        /**
+         * @param {?} pageSizeOptions
+         * @return {?}
+         */
+        ,
+        set: function set(pageSizeOptions) {
+          this._pageSizeOptions = pageSizeOptions;
+          this.updateDisplayedPageSizeOptions();
+        }
+        /**
+         * @return {?}
+         */
+
+      }, {
+        key: "length",
+        get: function get() {
+          return this._length;
+        }
+        /**
+         * @param {?} length
+         * @return {?}
+         */
+        ,
+        set: function set(length) {
+          this._length = length;
+          this.changeDetectorRef.markForCheck();
+          this.longRangeLabel = this.labels.getRangeText(this.page, this.pageSize, this.length, false);
+          this.shortRangeLabel = this.labels.getRangeText(this.page, this.pageSize, this.length, true);
+          this.totalPages = this.calculateTotalPages();
+          this.pages = this.getPages(this.page, this.totalPages);
+        }
+        /**
+         * @return {?}
+         */
+
+      }, {
+        key: "ngOnInit",
         value: function ngOnInit() {
           this._initialized = true;
           this.updateDisplayedPageSizeOptions();
@@ -38581,82 +38657,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
           return pages;
         }
-      }, {
-        key: "page",
-        get: function get() {
-          return this._page;
-        }
-        /**
-         * @param {?} page
-         * @return {?}
-         */
-        ,
-        set: function set(page) {
-          this._page = page;
-          this.changeDetectorRef.markForCheck();
-          this.longRangeLabel = this.labels.getRangeText(this.page, this.pageSize, this.length, false);
-          this.shortRangeLabel = this.labels.getRangeText(this.page, this.pageSize, this.length, true);
-          this.state.page = this._page;
-        }
-        /**
-         * @return {?}
-         */
-
-      }, {
-        key: "pageSize",
-        get: function get() {
-          return this._pageSize;
-        }
-        /**
-         * @param {?} pageSize
-         * @return {?}
-         */
-        ,
-        set: function set(pageSize) {
-          this._pageSize = pageSize;
-          this.updateDisplayedPageSizeOptions();
-          this.state.pageSize = this._pageSize;
-        }
-        /**
-         * @return {?}
-         */
-
-      }, {
-        key: "pageSizeOptions",
-        get: function get() {
-          return this._pageSizeOptions;
-        }
-        /**
-         * @param {?} pageSizeOptions
-         * @return {?}
-         */
-        ,
-        set: function set(pageSizeOptions) {
-          this._pageSizeOptions = pageSizeOptions;
-          this.updateDisplayedPageSizeOptions();
-        }
-        /**
-         * @return {?}
-         */
-
-      }, {
-        key: "length",
-        get: function get() {
-          return this._length;
-        }
-        /**
-         * @param {?} length
-         * @return {?}
-         */
-        ,
-        set: function set(length) {
-          this._length = length;
-          this.changeDetectorRef.markForCheck();
-          this.longRangeLabel = this.labels.getRangeText(this.page, this.pageSize, this.length, false);
-          this.shortRangeLabel = this.labels.getRangeText(this.page, this.pageSize, this.length, true);
-          this.totalPages = this.calculateTotalPages();
-          this.pages = this.getPages(this.page, this.totalPages);
-        }
       }]);
 
       return NovoDataTablePagination;
@@ -38743,13 +38743,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
       _createClass(DataTableInterpolatePipe, [{
         key: "transform",
-
+        value:
         /**
          * @param {?} value
          * @param {?} column
          * @return {?}
          */
-        value: function transform(value, column) {
+        function transform(value, column) {
           if (!Helpers.isEmpty(value)) {
             return interpolateCell(value, column);
           }
@@ -40306,13 +40306,18 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
          */
 
       }, {
-        key: "_handleKeydown",
-
+        key: "panelOpen",
+        get: function get() {
+          return this.overlay && this.overlay.panelOpen;
+        }
         /**
          * END: Convenient Panel Methods.
          * @param {?} event
          * @return {?}
          */
+
+      }, {
+        key: "_handleKeydown",
         value: function _handleKeydown(event) {
           if ((event.keyCode === _angular_cdk_keycodes__WEBPACK_IMPORTED_MODULE_19__["ESCAPE"] || event.keyCode === _angular_cdk_keycodes__WEBPACK_IMPORTED_MODULE_19__["ENTER"] || event.keyCode === _angular_cdk_keycodes__WEBPACK_IMPORTED_MODULE_19__["TAB"]) && this.panelOpen) {
             this.closePanel();
@@ -40526,12 +40531,17 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
          */
 
       }, {
-        key: "scrollToIndex",
-
+        key: "hasValue",
+        get: function get() {
+          return !Helpers.isEmpty(this.value);
+        }
         /**
          * @param {?} index
          * @return {?}
          */
+
+      }, {
+        key: "scrollToIndex",
         value: function scrollToIndex(index) {
           /** @type {?} */
           var element = this.overlay.overlayRef.overlayElement;
@@ -40550,16 +40560,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             /** @type {?} */
             item.offsetTop;
           }
-        }
-      }, {
-        key: "panelOpen",
-        get: function get() {
-          return this.overlay && this.overlay.panelOpen;
-        }
-      }, {
-        key: "hasValue",
-        get: function get() {
-          return !Helpers.isEmpty(this.value);
         }
       }]);
 
@@ -40894,12 +40894,42 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
       _createClass(NovoExpansionPanel, [{
-        key: "_getHideToggle",
+        key: "hideToggle",
+        get: function get() {
+          return this._hideToggle;
+        }
+        /**
+         * @param {?} value
+         * @return {?}
+         */
+        ,
+        set: function set(value) {
+          this._hideToggle = Object(_angular_cdk_coercion__WEBPACK_IMPORTED_MODULE_12__["coerceBooleanProperty"])(value);
+        }
+        /**
+         * @return {?}
+         */
 
+      }, {
+        key: "padding",
+        get: function get() {
+          return this._padding;
+        }
+        /**
+         * @param {?} value
+         * @return {?}
+         */
+        ,
+        set: function set(value) {
+          this._padding = Object(_angular_cdk_coercion__WEBPACK_IMPORTED_MODULE_12__["coerceBooleanProperty"])(value);
+        }
         /**
          * Whether the expansion indicator should be hidden.
          * @return {?}
          */
+
+      }, {
+        key: "_getHideToggle",
         value: function _getHideToggle() {
           if (this.accordion) {
             return this.accordion.hideToggle;
@@ -41002,36 +41032,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           } else if (phaseName === 'start' && toState === 'collapsed') {
             classList.remove(cssClass);
           }
-        }
-      }, {
-        key: "hideToggle",
-        get: function get() {
-          return this._hideToggle;
-        }
-        /**
-         * @param {?} value
-         * @return {?}
-         */
-        ,
-        set: function set(value) {
-          this._hideToggle = Object(_angular_cdk_coercion__WEBPACK_IMPORTED_MODULE_12__["coerceBooleanProperty"])(value);
-        }
-        /**
-         * @return {?}
-         */
-
-      }, {
-        key: "padding",
-        get: function get() {
-          return this._padding;
-        }
-        /**
-         * @param {?} value
-         * @return {?}
-         */
-        ,
-        set: function set(value) {
-          this._padding = Object(_angular_cdk_coercion__WEBPACK_IMPORTED_MODULE_12__["coerceBooleanProperty"])(value);
         }
       }]);
 
@@ -41525,14 +41525,14 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
       _createClass(FormValidators, [{
         key: "showStateRequiredFlag",
-
+        value:
         /**
          * @private
          * @param {?} subfield
          * @param {?} control
          * @return {?}
          */
-        value: function showStateRequiredFlag(subfield, control) {
+        function showStateRequiredFlag(subfield, control) {
           return subfield === 'state' && !Helpers.isEmpty(control.config.state) && control.config.state.required && Helpers.isBlank(control.value.state) && control.config.state.updated && !Helpers.isBlank(control.value.countryName) && control.config.state.pickerConfig && control.config.state.pickerConfig.defaultOptions && control.config.state.pickerConfig.defaultOptions.length > 0;
         } // Makes sure the control value does not exceed the max integer value
 
@@ -42369,13 +42369,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
       _createClass(ControlFactory, null, [{
         key: "create",
-
+        value:
         /**
          * @param {?} type
          * @param {?} config
          * @return {?}
          */
-        value: function create(type, config) {
+        function create(type, config) {
           switch (type) {
             case 'AddressControl':
               return new AddressControl(config);
@@ -42786,11 +42786,24 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
       _createClass(NovoFormGroup, [{
-        key: "enableAllControls",
-
+        key: "value",
+        get: function get() {
+          return this.getRawValue();
+        }
+        /**
+         * @param {?} v
+         * @return {?}
+         */
+        ,
+        set: function set(v) {
+          this._value = v;
+        }
         /**
          * @return {?}
          */
+
+      }, {
+        key: "enableAllControls",
         value: function enableAllControls() {
           for (var key in this.controls) {
             if (
@@ -42818,19 +42831,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               this.controls[key].disable();
             }
           }
-        }
-      }, {
-        key: "value",
-        get: function get() {
-          return this.getRawValue();
-        }
-        /**
-         * @param {?} v
-         * @return {?}
-         */
-        ,
-        set: function set(v) {
-          this._value = v;
         }
       }]);
 
@@ -44340,11 +44340,16 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
       _createClass(NovoModalRef, [{
-        key: "open",
-
+        key: "onClosed",
+        get: function get() {
+          return this._onClosed;
+        }
         /**
          * @return {?}
          */
+
+      }, {
+        key: "open",
         value: function open() {
           document.body.classList.add('modal-open');
         }
@@ -44367,11 +44372,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           }
 
           this._onClosed.resolve(result);
-        }
-      }, {
-        key: "onClosed",
-        get: function get() {
-          return this._onClosed;
         }
       }]);
 
@@ -44594,14 +44594,19 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
       _createClass(NovoModalService, [{
-        key: "open",
-
+        key: "parentViewContainer",
+        set: function set(view) {
+          this._parentViewContainer = view;
+        }
         /**
          * @template T
          * @param {?} component
          * @param {?=} scope
          * @return {?}
          */
+
+      }, {
+        key: "open",
         value: function open(component) {
           var scope = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
@@ -44625,11 +44630,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           }];
           modal.containerRef = this.componentUtils.append(NovoModalContainerElement, this._parentViewContainer, providers);
           return modal;
-        }
-      }, {
-        key: "parentViewContainer",
-        set: function set(view) {
-          this._parentViewContainer = view;
         }
       }]);
 
@@ -44680,11 +44680,16 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
       _createClass(NovoToastElement, [{
-        key: "ngOnInit",
-
+        key: "message",
+        set: function set(m) {
+          this._message = this.sanitizer.bypassSecurityTrustHtml(m);
+        }
         /**
          * @return {?}
          */
+
+      }, {
+        key: "ngOnInit",
         value: function ngOnInit() {
           if (!this.launched) {
             // clear position and time
@@ -44758,11 +44763,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               closed: true
             });
           }
-        }
-      }, {
-        key: "message",
-        set: function set(m) {
-          this._message = this.sanitizer.bypassSecurityTrustHtml(m);
         }
       }]);
 
@@ -44863,13 +44863,18 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
       _createClass(NovoToastService, [{
-        key: "alert",
-
+        key: "parentViewContainer",
+        set: function set(view) {
+          this._parentViewContainer = view;
+        }
         /**
          * @param {?} options
          * @param {?=} toastElement
          * @return {?}
          */
+
+      }, {
+        key: "alert",
         value: function alert(options) {
           var _this144 = this;
 
@@ -45039,11 +45044,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           function () {
             _this147.hide(toast);
           }, toast.hideDelay);
-        }
-      }, {
-        key: "parentViewContainer",
-        set: function set(view) {
-          this._parentViewContainer = view;
         }
       }]);
 
@@ -45342,11 +45342,103 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
       _createClass(FieldInteractionApi, [{
-        key: "isActiveControlValid",
-
+        key: "associations",
+        get: function get() {
+          return this.form.hasOwnProperty('associations') ? this.form.associations : {};
+        }
         /**
          * @return {?}
          */
+
+      }, {
+        key: "currentEntity",
+        get: function get() {
+          return this.form.hasOwnProperty('currentEntity') ? this.form.currentEntity : undefined;
+        }
+        /**
+         * @return {?}
+         */
+
+      }, {
+        key: "currentEntityId",
+        get: function get() {
+          return this.form.hasOwnProperty('currentEntityId') ? this.form.currentEntityId : undefined;
+        }
+        /**
+         * @return {?}
+         */
+
+      }, {
+        key: "isEdit",
+        get: function get() {
+          return this.form.hasOwnProperty('edit') ? this.form.edit : false;
+        }
+        /**
+         * @return {?}
+         */
+
+      }, {
+        key: "isAdd",
+        get: function get() {
+          return this.form.hasOwnProperty('edit') ? !this.form.edit : false;
+        }
+        /**
+         * @param {?} globals
+         * @return {?}
+         */
+
+      }, {
+        key: "globals",
+        get:
+        /**
+         * @return {?}
+         */
+        function get() {
+          return this._globals;
+        }
+        /**
+         * @param {?} key
+         * @return {?}
+         */
+        ,
+        set: function set(globals) {
+          this._globals = globals;
+        }
+      }, {
+        key: "currentKey",
+        get:
+        /**
+         * @return {?}
+         */
+        function get() {
+          return this._currentKey;
+        }
+        /**
+         * @param {?} isOnInit
+         * @return {?}
+         */
+        ,
+        set: function set(key) {
+          this._currentKey = key;
+        }
+      }, {
+        key: "isInvokedOnInit",
+        get:
+        /**
+         * @return {?}
+         */
+        function get() {
+          return this._isInvokedOnInit;
+        }
+        /**
+         * @return {?}
+         */
+        ,
+        set: function set(isOnInit) {
+          this._isInvokedOnInit = isOnInit;
+        }
+      }, {
+        key: "isActiveControlValid",
         value: function isActiveControlValid() {
           return !!this.getValue(this.currentKey);
         }
@@ -46718,98 +46810,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             form.fieldInteractionEvents.emit(event);
           }
         }
-      }, {
-        key: "associations",
-        get: function get() {
-          return this.form.hasOwnProperty('associations') ? this.form.associations : {};
-        }
-        /**
-         * @return {?}
-         */
-
-      }, {
-        key: "currentEntity",
-        get: function get() {
-          return this.form.hasOwnProperty('currentEntity') ? this.form.currentEntity : undefined;
-        }
-        /**
-         * @return {?}
-         */
-
-      }, {
-        key: "currentEntityId",
-        get: function get() {
-          return this.form.hasOwnProperty('currentEntityId') ? this.form.currentEntityId : undefined;
-        }
-        /**
-         * @return {?}
-         */
-
-      }, {
-        key: "isEdit",
-        get: function get() {
-          return this.form.hasOwnProperty('edit') ? this.form.edit : false;
-        }
-        /**
-         * @return {?}
-         */
-
-      }, {
-        key: "isAdd",
-        get: function get() {
-          return this.form.hasOwnProperty('edit') ? !this.form.edit : false;
-        }
-        /**
-         * @param {?} globals
-         * @return {?}
-         */
-
-      }, {
-        key: "globals",
-        set: function set(globals) {
-          this._globals = globals;
-        }
-        /**
-         * @return {?}
-         */
-        ,
-        get: function get() {
-          return this._globals;
-        }
-        /**
-         * @param {?} key
-         * @return {?}
-         */
-
-      }, {
-        key: "currentKey",
-        set: function set(key) {
-          this._currentKey = key;
-        }
-        /**
-         * @return {?}
-         */
-        ,
-        get: function get() {
-          return this._currentKey;
-        }
-        /**
-         * @param {?} isOnInit
-         * @return {?}
-         */
-
-      }, {
-        key: "isInvokedOnInit",
-        set: function set(isOnInit) {
-          this._isInvokedOnInit = isOnInit;
-        }
-        /**
-         * @return {?}
-         */
-        ,
-        get: function get() {
-          return this._isInvokedOnInit;
-        }
       }]);
 
       return FieldInteractionApi;
@@ -47077,13 +47077,138 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
       _createClass(NovoControlElement, [{
-        key: "ngAfterViewInit",
-
+        key: "onBlur",
+        get: function get() {
+          return this._blurEmitter.asObservable();
+        }
         /**
          * @return {?}
          */
-        value: function ngAfterViewInit() {
+
+      }, {
+        key: "onFocus",
+        get: function get() {
+          return this._focusEmitter.asObservable();
+        }
+        /**
+         * @return {?}
+         */
+
+      }, {
+        key: "maxlengthMetField",
+        get: function get() {
           var _this154 = this;
+
+          if (this.maxLengthMetErrorfields && this.maxLengthMetErrorfields.length) {
+            return this.maxLengthMetErrorfields.find(
+            /**
+            * @param {?} field
+            * @return {?}
+            */
+            function (field) {
+              return field === _this154.focusedField;
+            }) || '';
+          } else {
+            return '';
+          }
+        }
+        /**
+         * @return {?}
+         */
+
+      }, {
+        key: "maxlengthErrorField",
+        get: function get() {
+          var _this155 = this;
+
+          if (this.errors && this.errors.maxlengthFields && this.errors.maxlengthFields.length) {
+            return this.errors.maxlengthFields.find(
+            /**
+            * @param {?} field
+            * @return {?}
+            */
+            function (field) {
+              return field === _this155.focusedField;
+            }) || '';
+          } else {
+            return '';
+          }
+        }
+        /**
+         * @return {?}
+         */
+
+      }, {
+        key: "showFieldMessage",
+        get: function get() {
+          return !this.errors && !this.maxLengthMet && Helpers.isBlank(this.control.description);
+        }
+        /**
+         * @return {?}
+         */
+
+      }, {
+        key: "showMaxLengthMetMessage",
+        get: function get() {
+          return this.isDirty && this.maxLengthMet && this.focused && (!this.errors || this.errors && !this.errors.maxlength) || this.isDirty && this.maxlengthMetField && this.focused && (!this.errors || this.errors && !this.errors.maxlengthFields.includes(this.maxlengthMetField));
+        }
+        /**
+         * @return {?}
+         */
+
+      }, {
+        key: "showErrorState",
+        get: function get() {
+          return this.isDirty && this.errors || this.focused && this.errors && this.errors.maxlength && this.errors.maxlengthFields || this.focused && this.errors && this.errors.maxlength && this.errors.maxlengthFields && this.maxlengthErrorField;
+        }
+        /**
+         * @return {?}
+         */
+
+      }, {
+        key: "showCount",
+        get: function get() {
+          /** @type {?} */
+          var MAX_LENGTH_CONTROL_TYPES = ['textbox', 'picker', 'text-area'];
+          /** @type {?} */
+
+          var charCount = this.focused && !!this.form.controls[this.control.key].maxlength && MAX_LENGTH_CONTROL_TYPES.includes(this.form.controls[this.control.key].controlType);
+          return this._showCount || charCount;
+        }
+        /**
+         * @param {?} value
+         * @return {?}
+         */
+        ,
+        set: function set(value) {
+          this._showCount = value;
+        }
+        /**
+         * @return {?}
+         */
+
+      }, {
+        key: "showMessages",
+        get: function get() {
+          return this.showCount || !Helpers.isEmpty(this.form.controls[this.control.key].warning) || !Helpers.isEmpty(this.form.controls[this.control.key].description);
+        }
+        /**
+         * @return {?}
+         */
+
+      }, {
+        key: "decimalSeparator",
+        get: function get() {
+          return new Intl.NumberFormat(this.locale).format(1.2)[1];
+        }
+        /**
+         * @return {?}
+         */
+
+      }, {
+        key: "ngAfterViewInit",
+        value: function ngAfterViewInit() {
+          var _this156 = this;
 
           /** @type {?} */
           var DO_NOT_FOCUS_ME = ['picker', 'time', 'date', 'date-time'];
@@ -47095,7 +47220,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             */
             function () {
               /** @type {?} */
-              var input = _this154.element.nativeElement.querySelector('input');
+              var input = _this156.element.nativeElement.querySelector('input');
 
               if (input) {
                 input.focus();
@@ -47110,7 +47235,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "ngAfterContentInit",
         value: function ngAfterContentInit() {
-          var _this155 = this;
+          var _this157 = this;
 
           // Subscribe to control interactions
           if (this.control.interactions && !this.form.controls[this.control.key].restrictFieldInteractions) {
@@ -47123,37 +47248,37 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
                 switch (interaction.event) {
                   case 'blur':
-                    _this155.valueChangeSubscription = _this155.onBlur.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_14__["debounceTime"])(300)).subscribe(
+                    _this157.valueChangeSubscription = _this157.onBlur.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_14__["debounceTime"])(300)).subscribe(
                     /**
                     * @return {?}
                     */
                     function () {
-                      if (!_this155.form.controls[_this155.control.key].restrictFieldInteractions) {
-                        _this155.executeInteraction(interaction);
+                      if (!_this157.form.controls[_this157.control.key].restrictFieldInteractions) {
+                        _this157.executeInteraction(interaction);
                       }
                     });
                     break;
 
                   case 'focus':
-                    _this155.valueChangeSubscription = _this155.onFocus.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_14__["debounceTime"])(300)).subscribe(
+                    _this157.valueChangeSubscription = _this157.onFocus.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_14__["debounceTime"])(300)).subscribe(
                     /**
                     * @return {?}
                     */
                     function () {
-                      if (!_this155.form.controls[_this155.control.key].restrictFieldInteractions) {
-                        _this155.executeInteraction(interaction);
+                      if (!_this157.form.controls[_this157.control.key].restrictFieldInteractions) {
+                        _this157.executeInteraction(interaction);
                       }
                     });
                     break;
 
                   case 'change':
-                    _this155.valueChangeSubscription = _this155.form.controls[_this155.control.key].valueChanges.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_14__["debounceTime"])(300)).subscribe(
+                    _this157.valueChangeSubscription = _this157.form.controls[_this157.control.key].valueChanges.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_14__["debounceTime"])(300)).subscribe(
                     /**
                     * @return {?}
                     */
                     function () {
-                      if (!_this155.form.controls[_this155.control.key].restrictFieldInteractions) {
-                        _this155.executeInteraction(interaction);
+                      if (!_this157.form.controls[_this157.control.key].restrictFieldInteractions) {
+                        _this157.executeInteraction(interaction);
                       }
                     });
                     break;
@@ -47167,8 +47292,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                 }
 
                 if (interaction.invokeOnInit) {
-                  if (!_this155.form.controls[_this155.control.key].restrictFieldInteractions) {
-                    _this155.executeInteraction(interaction, true);
+                  if (!_this157.form.controls[_this157.control.key].restrictFieldInteractions) {
+                    _this157.executeInteraction(interaction, true);
                   }
                 }
               };
@@ -47188,10 +47313,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function () {
-            _this155.templates = _this155.templateService.getAll();
-            _this155.loading = false;
+            _this157.templates = _this157.templateService.getAll();
+            _this157.loading = false;
 
-            _this155.changeDetectorRef.markForCheck();
+            _this157.changeDetectorRef.markForCheck();
           });
         }
         /**
@@ -47201,7 +47326,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "ngOnInit",
         value: function ngOnInit() {
-          var _this156 = this;
+          var _this158 = this;
 
           this.loading = true; // Make sure to initially format the time controls
 
@@ -47218,7 +47343,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             * @return {?}
             */
             function () {
-              _this156.clearValue();
+              _this158.clearValue();
             }); // For Asynchronous validations
 
             this.statusChangeSubscription = this.form.controls[this.control.key].statusChanges.subscribe(
@@ -47227,10 +47352,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             * @return {?}
             */
             function (validity) {
-              _this156.form.controls[_this156.control.key] = _this156.templateContext.$implicit;
+              _this158.form.controls[_this158.control.key] = _this158.templateContext.$implicit;
 
-              if (validity !== 'PENDING' && _this156.form.updateValueAndValidity) {
-                _this156.form.updateValueAndValidity();
+              if (validity !== 'PENDING' && _this158.form.updateValueAndValidity) {
+                _this158.form.updateValueAndValidity();
               }
             });
           }
@@ -47283,9 +47408,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             */
             function (value) {
               if (!Helpers.isEmpty(value)) {
-                _this156.templateContext.$implicit.percentValue = Number((value * 100).toFixed(6).replace(/\.?0*$/, ''));
+                _this158.templateContext.$implicit.percentValue = Number((value * 100).toFixed(6).replace(/\.?0*$/, ''));
               } else {
-                _this156.templateContext.$implicit.percentValue = null;
+                _this158.templateContext.$implicit.percentValue = null;
               }
             });
           }
@@ -47330,15 +47455,146 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
          */
 
       }, {
-        key: "executeInteraction",
+        key: "errors",
+        get: function get() {
+          return this.form.controls[this.control.key].errors;
+        }
+        /**
+         * @return {?}
+         */
 
+      }, {
+        key: "isValid",
+        get: function get() {
+          return this.form.controls[this.control.key].valid;
+        }
+        /**
+         * @return {?}
+         */
+
+      }, {
+        key: "isDirty",
+        get: function get() {
+          return this.form.controls[this.control.key].dirty || this.control.dirty;
+        }
+        /**
+         * @return {?}
+         */
+
+      }, {
+        key: "hasValue",
+        get: function get() {
+          return !Helpers.isEmpty(this.form.value[this.control.key]);
+        }
+        /**
+         * @return {?}
+         */
+
+      }, {
+        key: "focused",
+        get: function get() {
+          return this._focused;
+        }
+        /**
+         * @return {?}
+         */
+
+      }, {
+        key: "tooltip",
+        get: function get() {
+          return this.form.controls[this.control.key].tooltip;
+        }
+        /**
+         * @return {?}
+         */
+
+      }, {
+        key: "tooltipPosition",
+        get: function get() {
+          if (Helpers.isBlank(this.form.controls[this.control.key].tooltipPosition)) {
+            return 'right';
+          }
+
+          return this.form.controls[this.control.key].tooltipPosition;
+        }
+        /**
+         * @return {?}
+         */
+
+      }, {
+        key: "tooltipSize",
+        get: function get() {
+          if (Helpers.isBlank(this.form.controls[this.control.key].tooltipSize)) {
+            return '';
+          }
+
+          return this.form.controls[this.control.key].tooltipSize;
+        }
+        /**
+         * @return {?}
+         */
+
+      }, {
+        key: "tooltipPreline",
+        get: function get() {
+          if (Helpers.isBlank(this.form.controls[this.control.key].tooltipPreline)) {
+            return false;
+          }
+
+          return this.form.controls[this.control.key].tooltipPreline;
+        }
+        /**
+         * @return {?}
+         */
+
+      }, {
+        key: "removeTooltipArrow",
+        get: function get() {
+          if (Helpers.isBlank(this.form.controls[this.control.key].removeTooltipArrow)) {
+            return false;
+          }
+
+          return this.form.controls[this.control.key].removeTooltipArrow;
+        }
+        /**
+         * @return {?}
+         */
+
+      }, {
+        key: "alwaysActive",
+        get: function get() {
+          // Controls that have the label active if there is any user entered text in the field
+          if (this.form.controls[this.control.key].controlType === 'picker' && this._enteredText.length) {
+            return true;
+          } // Controls that always have the label active
+
+
+          return ['tiles', 'checklist', 'checkbox', 'date', 'time', 'date-time', 'address', 'file', 'editor', 'ace-editor', 'radio', 'text-area', 'quick-note'].indexOf(this.form.controls[this.control.key].controlType) !== -1;
+        }
+        /**
+         * @return {?}
+         */
+
+      }, {
+        key: "requiresExtraSpacing",
+        get: function get() {
+          // Chips
+          if (this.form.controls[this.control.key].controlType === 'picker' && this.form.controls[this.control.key].multiple && this.hasValue) {
+            return true;
+          }
+
+          return false;
+        }
         /**
          * @param {?} interaction
          * @param {?=} isInvokedOnInit
          * @return {?}
          */
+
+      }, {
+        key: "executeInteraction",
         value: function executeInteraction(interaction) {
-          var _this157 = this;
+          var _this159 = this;
 
           var isInvokedOnInit = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
 
@@ -47348,14 +47604,14 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             * @return {?}
             */
             function () {
-              _this157.fieldInteractionApi.form = _this157.form;
-              _this157.fieldInteractionApi.currentKey = _this157.control.key;
-              _this157.fieldInteractionApi.isInvokedOnInit = isInvokedOnInit;
+              _this159.fieldInteractionApi.form = _this159.form;
+              _this159.fieldInteractionApi.currentKey = _this159.control.key;
+              _this159.fieldInteractionApi.isInvokedOnInit = isInvokedOnInit;
 
               try {
-                interaction.script(_this157.fieldInteractionApi, _this157.control.key);
+                interaction.script(_this159.fieldInteractionApi, _this159.control.key);
               } catch (err) {
-                console.info('Field Interaction Error!', _this157.control.key); // tslint:disable-line
+                console.info('Field Interaction Error!', _this159.control.key); // tslint:disable-line
 
                 console.error(err); // tslint:disable-line
               }
@@ -47675,262 +47931,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             emitEvent: emitEvent
           });
         }
-      }, {
-        key: "onBlur",
-        get: function get() {
-          return this._blurEmitter.asObservable();
-        }
-        /**
-         * @return {?}
-         */
-
-      }, {
-        key: "onFocus",
-        get: function get() {
-          return this._focusEmitter.asObservable();
-        }
-        /**
-         * @return {?}
-         */
-
-      }, {
-        key: "maxlengthMetField",
-        get: function get() {
-          var _this158 = this;
-
-          if (this.maxLengthMetErrorfields && this.maxLengthMetErrorfields.length) {
-            return this.maxLengthMetErrorfields.find(
-            /**
-            * @param {?} field
-            * @return {?}
-            */
-            function (field) {
-              return field === _this158.focusedField;
-            }) || '';
-          } else {
-            return '';
-          }
-        }
-        /**
-         * @return {?}
-         */
-
-      }, {
-        key: "maxlengthErrorField",
-        get: function get() {
-          var _this159 = this;
-
-          if (this.errors && this.errors.maxlengthFields && this.errors.maxlengthFields.length) {
-            return this.errors.maxlengthFields.find(
-            /**
-            * @param {?} field
-            * @return {?}
-            */
-            function (field) {
-              return field === _this159.focusedField;
-            }) || '';
-          } else {
-            return '';
-          }
-        }
-        /**
-         * @return {?}
-         */
-
-      }, {
-        key: "showFieldMessage",
-        get: function get() {
-          return !this.errors && !this.maxLengthMet && Helpers.isBlank(this.control.description);
-        }
-        /**
-         * @return {?}
-         */
-
-      }, {
-        key: "showMaxLengthMetMessage",
-        get: function get() {
-          return this.isDirty && this.maxLengthMet && this.focused && (!this.errors || this.errors && !this.errors.maxlength) || this.isDirty && this.maxlengthMetField && this.focused && (!this.errors || this.errors && !this.errors.maxlengthFields.includes(this.maxlengthMetField));
-        }
-        /**
-         * @return {?}
-         */
-
-      }, {
-        key: "showErrorState",
-        get: function get() {
-          return this.isDirty && this.errors || this.focused && this.errors && this.errors.maxlength && this.errors.maxlengthFields || this.focused && this.errors && this.errors.maxlength && this.errors.maxlengthFields && this.maxlengthErrorField;
-        }
-        /**
-         * @return {?}
-         */
-
-      }, {
-        key: "showCount",
-        get: function get() {
-          /** @type {?} */
-          var MAX_LENGTH_CONTROL_TYPES = ['textbox', 'picker', 'text-area'];
-          /** @type {?} */
-
-          var charCount = this.focused && !!this.form.controls[this.control.key].maxlength && MAX_LENGTH_CONTROL_TYPES.includes(this.form.controls[this.control.key].controlType);
-          return this._showCount || charCount;
-        }
-        /**
-         * @param {?} value
-         * @return {?}
-         */
-        ,
-        set: function set(value) {
-          this._showCount = value;
-        }
-        /**
-         * @return {?}
-         */
-
-      }, {
-        key: "showMessages",
-        get: function get() {
-          return this.showCount || !Helpers.isEmpty(this.form.controls[this.control.key].warning) || !Helpers.isEmpty(this.form.controls[this.control.key].description);
-        }
-        /**
-         * @return {?}
-         */
-
-      }, {
-        key: "decimalSeparator",
-        get: function get() {
-          return new Intl.NumberFormat(this.locale).format(1.2)[1];
-        }
-      }, {
-        key: "errors",
-        get: function get() {
-          return this.form.controls[this.control.key].errors;
-        }
-        /**
-         * @return {?}
-         */
-
-      }, {
-        key: "isValid",
-        get: function get() {
-          return this.form.controls[this.control.key].valid;
-        }
-        /**
-         * @return {?}
-         */
-
-      }, {
-        key: "isDirty",
-        get: function get() {
-          return this.form.controls[this.control.key].dirty || this.control.dirty;
-        }
-        /**
-         * @return {?}
-         */
-
-      }, {
-        key: "hasValue",
-        get: function get() {
-          return !Helpers.isEmpty(this.form.value[this.control.key]);
-        }
-        /**
-         * @return {?}
-         */
-
-      }, {
-        key: "focused",
-        get: function get() {
-          return this._focused;
-        }
-        /**
-         * @return {?}
-         */
-
-      }, {
-        key: "tooltip",
-        get: function get() {
-          return this.form.controls[this.control.key].tooltip;
-        }
-        /**
-         * @return {?}
-         */
-
-      }, {
-        key: "tooltipPosition",
-        get: function get() {
-          if (Helpers.isBlank(this.form.controls[this.control.key].tooltipPosition)) {
-            return 'right';
-          }
-
-          return this.form.controls[this.control.key].tooltipPosition;
-        }
-        /**
-         * @return {?}
-         */
-
-      }, {
-        key: "tooltipSize",
-        get: function get() {
-          if (Helpers.isBlank(this.form.controls[this.control.key].tooltipSize)) {
-            return '';
-          }
-
-          return this.form.controls[this.control.key].tooltipSize;
-        }
-        /**
-         * @return {?}
-         */
-
-      }, {
-        key: "tooltipPreline",
-        get: function get() {
-          if (Helpers.isBlank(this.form.controls[this.control.key].tooltipPreline)) {
-            return false;
-          }
-
-          return this.form.controls[this.control.key].tooltipPreline;
-        }
-        /**
-         * @return {?}
-         */
-
-      }, {
-        key: "removeTooltipArrow",
-        get: function get() {
-          if (Helpers.isBlank(this.form.controls[this.control.key].removeTooltipArrow)) {
-            return false;
-          }
-
-          return this.form.controls[this.control.key].removeTooltipArrow;
-        }
-        /**
-         * @return {?}
-         */
-
-      }, {
-        key: "alwaysActive",
-        get: function get() {
-          // Controls that have the label active if there is any user entered text in the field
-          if (this.form.controls[this.control.key].controlType === 'picker' && this._enteredText.length) {
-            return true;
-          } // Controls that always have the label active
-
-
-          return ['tiles', 'checklist', 'checkbox', 'date', 'time', 'date-time', 'address', 'file', 'editor', 'ace-editor', 'radio', 'text-area', 'quick-note'].indexOf(this.form.controls[this.control.key].controlType) !== -1;
-        }
-        /**
-         * @return {?}
-         */
-
-      }, {
-        key: "requiresExtraSpacing",
-        get: function get() {
-          // Chips
-          if (this.form.controls[this.control.key].controlType === 'picker' && this.form.controls[this.control.key].multiple && this.hasValue) {
-            return true;
-          }
-
-          return false;
-        }
       }]);
 
       return NovoControlElement;
@@ -48071,11 +48071,95 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
       _createClass(NovoControlGroup, [{
-        key: "ngAfterContentInit",
-
+        key: "vertical",
+        get:
         /**
          * @return {?}
          */
+        function get() {
+          return this._vertical;
+        } // Hide/shows the remove button for removing a control
+
+        /**
+         * @param {?} v
+         * @return {?}
+         */
+        ,
+        set: function set(v) {
+          this._vertical = Object(_angular_cdk_coercion__WEBPACK_IMPORTED_MODULE_12__["coerceBooleanProperty"])(v);
+        }
+      }, {
+        key: "remove",
+        get:
+        /**
+         * @return {?}
+         */
+        function get() {
+          return this._remove;
+        } // Hide/shows the edit button for editing a control
+
+        /**
+         * @param {?} v
+         * @return {?}
+         */
+        ,
+        set: function set(v) {
+          this._remove = Object(_angular_cdk_coercion__WEBPACK_IMPORTED_MODULE_12__["coerceBooleanProperty"])(v);
+        }
+      }, {
+        key: "edit",
+        get:
+        /**
+         * @return {?}
+         */
+        function get() {
+          return this._edit;
+        } // Allows the control to collapse or not
+
+        /**
+         * @param {?} v
+         * @return {?}
+         */
+        ,
+        set: function set(v) {
+          this._edit = Object(_angular_cdk_coercion__WEBPACK_IMPORTED_MODULE_12__["coerceBooleanProperty"])(v);
+        }
+      }, {
+        key: "collapsible",
+        get:
+        /**
+         * @return {?}
+         */
+        function get() {
+          return this._collapsible;
+        } // Icon of the control group (can have bhi prefix or not)
+
+        /**
+         * @param {?} v
+         * @return {?}
+         */
+        ,
+        set: function set(v) {
+          this._collapsible = Object(_angular_cdk_coercion__WEBPACK_IMPORTED_MODULE_12__["coerceBooleanProperty"])(v);
+        }
+      }, {
+        key: "icon",
+        get:
+        /**
+         * @return {?}
+         */
+        function get() {
+          return this._icon;
+        }
+        /**
+         * @return {?}
+         */
+        ,
+        set: function set(v) {
+          this._icon = v && v.indexOf('bhi') !== -1 ? v : "bhi-".concat(v);
+        }
+      }, {
+        key: "ngAfterContentInit",
         value: function ngAfterContentInit() {
           if (!this.key) {
             throw new Error('novo-control-group must have the [key] attribute provided!');
@@ -48423,90 +48507,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         key: "onFieldInteractionEvent",
         value: function onFieldInteractionEvent() {
           this.ref.markForCheck();
-        }
-      }, {
-        key: "vertical",
-        set: function set(v) {
-          this._vertical = Object(_angular_cdk_coercion__WEBPACK_IMPORTED_MODULE_12__["coerceBooleanProperty"])(v);
-        }
-        /**
-         * @return {?}
-         */
-        ,
-        get: function get() {
-          return this._vertical;
-        } // Hide/shows the remove button for removing a control
-
-        /**
-         * @param {?} v
-         * @return {?}
-         */
-
-      }, {
-        key: "remove",
-        set: function set(v) {
-          this._remove = Object(_angular_cdk_coercion__WEBPACK_IMPORTED_MODULE_12__["coerceBooleanProperty"])(v);
-        }
-        /**
-         * @return {?}
-         */
-        ,
-        get: function get() {
-          return this._remove;
-        } // Hide/shows the edit button for editing a control
-
-        /**
-         * @param {?} v
-         * @return {?}
-         */
-
-      }, {
-        key: "edit",
-        set: function set(v) {
-          this._edit = Object(_angular_cdk_coercion__WEBPACK_IMPORTED_MODULE_12__["coerceBooleanProperty"])(v);
-        }
-        /**
-         * @return {?}
-         */
-        ,
-        get: function get() {
-          return this._edit;
-        } // Allows the control to collapse or not
-
-        /**
-         * @param {?} v
-         * @return {?}
-         */
-
-      }, {
-        key: "collapsible",
-        set: function set(v) {
-          this._collapsible = Object(_angular_cdk_coercion__WEBPACK_IMPORTED_MODULE_12__["coerceBooleanProperty"])(v);
-        }
-        /**
-         * @return {?}
-         */
-        ,
-        get: function get() {
-          return this._collapsible;
-        } // Icon of the control group (can have bhi prefix or not)
-
-        /**
-         * @param {?} v
-         * @return {?}
-         */
-
-      }, {
-        key: "icon",
-        set: function set(v) {
-          this._icon = v && v.indexOf('bhi') !== -1 ? v : "bhi-".concat(v);
-        }
-        /**
-         * @return {?}
-         */
-        ,
-        get: function get() {
-          return this._icon;
         }
       }]);
 
@@ -48955,11 +48955,25 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
          */
 
       }, {
-        key: "updatedValues",
-
+        key: "values",
+        get: function get() {
+          return this.form ? this.form.value : null;
+        }
         /**
          * @return {?}
          */
+
+      }, {
+        key: "isValid",
+        get: function get() {
+          return this.form ? this.form.valid : false;
+        }
+        /**
+         * @return {?}
+         */
+
+      }, {
+        key: "updatedValues",
         value: function updatedValues() {
           var _this167 = this;
 
@@ -49011,20 +49025,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               control.markAsTouched();
             }
           });
-        }
-      }, {
-        key: "values",
-        get: function get() {
-          return this.form ? this.form.value : null;
-        }
-        /**
-         * @return {?}
-         */
-
-      }, {
-        key: "isValid",
-        get: function get() {
-          return this.form ? this.form.valid : false;
         }
       }]);
 
@@ -49100,11 +49100,25 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
       _createClass(NovoFormElement, [{
-        key: "ngOnInit",
-
+        key: "value",
+        get: function get() {
+          return this.form.getRawValue();
+        }
         /**
          * @return {?}
          */
+
+      }, {
+        key: "isValid",
+        get: function get() {
+          return this.form.valid;
+        }
+        /**
+         * @return {?}
+         */
+
+      }, {
+        key: "ngOnInit",
         value: function ngOnInit() {
           this.form.layout = this.layout;
         }
@@ -49206,20 +49220,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               control.markAsTouched();
             }
           });
-        }
-      }, {
-        key: "value",
-        get: function get() {
-          return this.form.getRawValue();
-        }
-        /**
-         * @return {?}
-         */
-
-      }, {
-        key: "isValid",
-        get: function get() {
-          return this.form.valid;
         }
       }]);
 
@@ -49487,15 +49487,49 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
       _createClass(QuickNoteResults, [{
-        key: "search",
+        key: "term",
+        get: function get() {
+          return this._term;
+        }
+        /**
+         * @param {?} value
+         * @return {?}
+         */
+        ,
+        set: function set(value) {
+          var _this174 = this;
 
+          this._term = value.searchTerm;
+          this.taggingMode = value.taggingMode;
+          this.hasError = false;
+          this.isLoading = true;
+          this.search(value, this.taggingMode).subscribe(
+          /**
+          * @param {?} results
+          * @return {?}
+          */
+          function (results) {
+            _this174.matches = _this174.isStatic ? _this174.filterData(results) : results;
+            _this174.isLoading = false;
+          },
+          /**
+          * @return {?}
+          */
+          function () {
+            _this174.hasError = true;
+            _this174.isLoading = false;
+          });
+        }
         /**
          * @param {?} term
          * @param {?} taggingMode
          * @return {?}
          */
+
+      }, {
+        key: "search",
         value: function search(term, taggingMode) {
-          var _this174 = this;
+          var _this175 = this;
 
           /** @type {?} */
           var searchCall = this.config.options[taggingMode];
@@ -49510,17 +49544,17 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             if (searchCall) {
               // Resolve the data
               if (Array.isArray(searchCall)) {
-                _this174.isStatic = true; // Arrays are returned immediately
+                _this175.isStatic = true; // Arrays are returned immediately
 
-                resolve(_this174.structureArray(searchCall));
+                resolve(_this175.structureArray(searchCall));
               } else if (searchCall.hasOwnProperty('reject') && searchCall.hasOwnProperty('resolve') || Object.getPrototypeOf(searchCall).hasOwnProperty('then')) {
-                _this174.isStatic = false; // Promises (ES6 or Deferred) are resolved whenever they resolve
+                _this175.isStatic = false; // Promises (ES6 or Deferred) are resolved whenever they resolve
 
-                searchCall.then(_this174.structureArray.bind(_this174)).then(resolve, reject);
+                searchCall.then(_this175.structureArray.bind(_this175)).then(resolve, reject);
               } else if (typeof searchCall === 'function') {
-                _this174.isStatic = false; // Promises (ES6 or Deferred) are resolved whenever they resolve
+                _this175.isStatic = false; // Promises (ES6 or Deferred) are resolved whenever they resolve
 
-                searchCall(term).then(_this174.structureArray.bind(_this174)).then(resolve, reject);
+                searchCall(term).then(_this175.structureArray.bind(_this175)).then(resolve, reject);
               } else {
                 // All other kinds of data are rejected
                 reject('The data provided is not an array or a promise');
@@ -49544,7 +49578,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "structureArray",
         value: function structureArray(collection) {
-          var _this175 = this;
+          var _this176 = this;
 
           if (collection && (typeof collection[0] === 'string' || typeof collection[0] === 'number')) {
             return collection.map(
@@ -49567,10 +49601,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           */
           function (data) {
             /** @type {?} */
-            var value = _this175.config.field ? data[_this175.config.field[_this175.taggingMode]] : data.value || data;
+            var value = _this176.config.field ? data[_this176.config.field[_this176.taggingMode]] : data.value || data;
             /** @type {?} */
 
-            var label = _this175.config.format ? Helpers.interpolate(_this175.config.format[_this175.taggingMode], data) : data.label || String(value);
+            var label = _this176.config.format ? Helpers.interpolate(_this176.config.format[_this176.taggingMode], data) : data.label || String(value);
             return {
               value: value,
               label: label,
@@ -49604,40 +49638,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           }
 
           return false;
-        }
-      }, {
-        key: "term",
-        get: function get() {
-          return this._term;
-        }
-        /**
-         * @param {?} value
-         * @return {?}
-         */
-        ,
-        set: function set(value) {
-          var _this176 = this;
-
-          this._term = value.searchTerm;
-          this.taggingMode = value.taggingMode;
-          this.hasError = false;
-          this.isLoading = true;
-          this.search(value, this.taggingMode).subscribe(
-          /**
-          * @param {?} results
-          * @return {?}
-          */
-          function (results) {
-            _this176.matches = _this176.isStatic ? _this176.filterData(results) : results;
-            _this176.isLoading = false;
-          },
-          /**
-          * @return {?}
-          */
-          function () {
-            _this176.hasError = true;
-            _this176.isLoading = false;
-          });
         }
       }]);
 
@@ -49965,14 +49965,14 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
       }, {
         key: "getRenderer",
-
+        value:
         /**
          * Returns the renderer for a given tagging mode if it exists in the config, otherwise the default.
          * @private
          * @param {?} taggingMode
          * @return {?}
          */
-        value: function getRenderer(taggingMode) {
+        function getRenderer(taggingMode) {
           return this.config.renderer ? this.config.renderer[taggingMode] : QuickNoteElement.defaultRenderer;
         }
         /**
@@ -50717,33 +50717,33 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
       _createClass(NovoHeaderComponent, [{
         key: "theme",
-        set: function set(theme) {
-          this._theme = theme;
-          this.inverse = theme === 'white' || theme === 'off-white' || theme === 'light' ? undefined : 'inverse';
-        }
+        get:
         /**
          * @return {?}
          */
-        ,
-        get: function get() {
+        function get() {
           return this._theme;
         }
         /**
          * @param {?} icon
          * @return {?}
          */
-
+        ,
+        set: function set(theme) {
+          this._theme = theme;
+          this.inverse = theme === 'white' || theme === 'off-white' || theme === 'light' ? undefined : 'inverse';
+        }
       }, {
         key: "icon",
-        set: function set(icon) {
-          this._icon = "bhi-".concat(icon);
-        }
+        get:
         /**
          * @return {?}
          */
-        ,
-        get: function get() {
+        function get() {
           return this._icon;
+        },
+        set: function set(icon) {
+          this._icon = "bhi-".concat(icon);
         }
       }]);
 
@@ -50855,11 +50855,21 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
       _createClass(NovoTipWellElement, [{
-        key: "ngOnInit",
+        key: "tipWithStyles",
+        get: function get() {
+          if (!this._tipWithStyles || this._lastTipStyled !== this.tip) {
+            this._tipWithStyles = this.sanitizer.bypassSecurityTrustHtml(this.tip);
+            this._lastTipStyled = this.tip;
+          }
 
+          return this._tipWithStyles;
+        }
         /**
          * @return {?}
          */
+
+      }, {
+        key: "ngOnInit",
         value: function ngOnInit() {
           this.tip = this.tip || '';
           this.buttonText = this.buttonText || this.labels.okGotIt;
@@ -50888,16 +50898,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
           this.isActive = false;
           this.confirmed.emit();
-        }
-      }, {
-        key: "tipWithStyles",
-        get: function get() {
-          if (!this._tipWithStyles || this._lastTipStyled !== this.tip) {
-            this._tipWithStyles = this.sanitizer.bypassSecurityTrustHtml(this.tip);
-            this._lastTipStyled = this.tip;
-          }
-
-          return this._tipWithStyles;
         }
       }]);
 
@@ -51033,11 +51033,40 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
       _createClass(NovoIconComponent, [{
-        key: "ngAfterViewInit",
-
+        key: "alt",
+        get:
         /**
          * @return {?}
          */
+        function get() {
+          return this.ariaLabel;
+        }
+        /**
+         * @param {?} iconName
+         * @return {?}
+         */
+        ,
+        set: function set(value) {
+          this.ariaLabel = value;
+        }
+      }, {
+        key: "name",
+        get:
+        /**
+         * @return {?}
+         */
+        function get() {
+          return this.iconName;
+        }
+        /**
+         * @return {?}
+         */
+        ,
+        set: function set(iconName) {
+          this.iconName = "bhi-".concat(iconName);
+        }
+      }, {
+        key: "ngAfterViewInit",
         value: function ngAfterViewInit() {
           var _this182 = this;
 
@@ -51052,35 +51081,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               _this182.cdr.markForCheck();
             });
           }
-        }
-      }, {
-        key: "alt",
-        set: function set(value) {
-          this.ariaLabel = value;
-        }
-        /**
-         * @return {?}
-         */
-        ,
-        get: function get() {
-          return this.ariaLabel;
-        }
-        /**
-         * @param {?} iconName
-         * @return {?}
-         */
-
-      }, {
-        key: "name",
-        set: function set(iconName) {
-          this.iconName = "bhi-".concat(iconName);
-        }
-        /**
-         * @return {?}
-         */
-        ,
-        get: function get() {
-          return this.iconName;
         }
       }]);
 
@@ -51235,11 +51235,48 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
       _createClass(NovoMultiPickerElement, [{
-        key: "ngOnInit",
+        key: "value",
+        get: function get() {
+          return this._value;
+        }
+        /**
+         * @param {?} selectedItems
+         * @return {?}
+         */
+        ,
+        set: function set(selectedItems) {
+          var _this183 = this;
 
+          if (selectedItems) {
+            this.types.forEach(
+            /**
+            * @param {?} x
+            * @return {?}
+            */
+            function (x) {
+              return _this183._value[x.value] = selectedItems[x.value];
+            });
+          } else {
+            this._value = {};
+            this.types.forEach(
+            /**
+            * @param {?} x
+            * @return {?}
+            */
+            function (x) {
+              return _this183._value[x.value] = [];
+            });
+          }
+
+          this.changed.emit(selectedItems);
+          this.onModelChange(selectedItems);
+        }
         /**
          * @return {?}
          */
+
+      }, {
+        key: "ngOnInit",
         value: function ngOnInit() {
           this.selectAllOption = this.source.selectAllOption || false;
           this.chipsCount = this.source.chipsCount || 4;
@@ -51253,7 +51290,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "clearValue",
         value: function clearValue() {
-          var _this183 = this;
+          var _this184 = this;
 
           this.types.forEach(
           /**
@@ -51261,7 +51298,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (type) {
-            return _this183.modifyAllOfType(type.value, 'unselect');
+            return _this184.modifyAllOfType(type.value, 'unselect');
           });
           this.items = [];
 
@@ -51289,7 +51326,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "setupOptions",
         value: function setupOptions() {
-          var _this184 = this;
+          var _this185 = this;
 
           this.options = this.source.options || [];
           this._options = [];
@@ -51302,9 +51339,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             */
             function (option) {
               /** @type {?} */
-              var formattedOption = _this184.setupOptionsByType(option);
+              var formattedOption = _this185.setupOptionsByType(option);
 
-              _this184._options.push(formattedOption);
+              _this185._options.push(formattedOption);
             });
           }
 
@@ -51318,7 +51355,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "setupOptionsByType",
         value: function setupOptionsByType(section) {
-          var _this185 = this;
+          var _this186 = this;
 
           /** @type {?} */
           var formattedSection = {
@@ -51331,7 +51368,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (item) {
-            return _this185.formatOption(section, item);
+            return _this186.formatOption(section, item);
           });
 
           if (this.selectAllOption) {
@@ -51554,7 +51591,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "updateDisplayText",
         value: function updateDisplayText(items) {
-          var _this186 = this;
+          var _this187 = this;
 
           this.notShown = [];
           /** @type {?} */
@@ -51582,7 +51619,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               });
 
               if (selectedOfType.length === 1 && selectedOfType[0].value === 'ALL') {
-                count = _this186.getAllOfType(type.value).length - 1;
+                count = _this187.getAllOfType(type.value).length - 1;
               } else {
                 count = selectedOfType.length;
               }
@@ -51592,7 +51629,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               var displayType = count === 1 ? type.singular : type.plural || type.value;
 
               if (count > 0) {
-                _this186.notShown.push({
+                _this187.notShown.push({
                   type: displayType,
                   count: count
                 });
@@ -51765,7 +51802,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "triggerValueUpdate",
         value: function triggerValueUpdate() {
-          var _this187 = this;
+          var _this188 = this;
 
           /** @type {?} */
           var updatedObject = {};
@@ -51775,7 +51812,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (x) {
-            return updatedObject[x.value] = _this187.value[x.value];
+            return updatedObject[x.value] = _this188.value[x.value];
           });
           this.value = updatedObject;
         }
@@ -51920,7 +51957,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "modifyAffectedParentsOrChildren",
         value: function modifyAffectedParentsOrChildren(selecting, itemChanged) {
-          var _this188 = this;
+          var _this189 = this;
 
           if (!itemChanged.isChildOf && !itemChanged.isParentOf) {
             return;
@@ -52012,25 +52049,25 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
               if (selectedChildrenOfParent.length > 0) {
                 if (obj.checked) {
-                  if (_this188.strictRelationship && allChildrenOfParent.length !== selectedChildrenOfParent.length) {
+                  if (_this189.strictRelationship && allChildrenOfParent.length !== selectedChildrenOfParent.length) {
                     obj.indeterminate = true;
                     obj.checked = false;
 
-                    _this188.removeValue(obj);
+                    _this189.removeValue(obj);
 
-                    _this188.addIndividualChildren(selectedChildrenOfParent);
+                    _this189.addIndividualChildren(selectedChildrenOfParent);
                   }
                 } else {
                   obj.indeterminate = true;
                 }
 
-                if (_this188.strictRelationship && itemChanged.type !== parentType) {
+                if (_this189.strictRelationship && itemChanged.type !== parentType) {
                   if (obj.checked) {
                     obj.checked = false;
 
-                    _this188.removeValue(obj);
+                    _this189.removeValue(obj);
 
-                    _this188.addIndividualChildren(selectedChildrenOfParent);
+                    _this189.addIndividualChildren(selectedChildrenOfParent);
                   }
                 }
               } else {
@@ -52039,8 +52076,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                 if (allChildrenOfParent.length === 0) {
                   // if it has no children and is checked, it should stay checked
                   return;
-                } else if (_this188.strictRelationship && itemChanged.type !== parentType) {
-                  _this188.remove(null, obj);
+                } else if (_this189.strictRelationship && itemChanged.type !== parentType) {
+                  _this189.remove(null, obj);
                 }
               }
             }
@@ -52074,7 +52111,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "updateAllChildrenValue",
         value: function updateAllChildrenValue(item, action) {
-          var _this189 = this;
+          var _this190 = this;
 
           /** @type {?} */
           var selecting = action === 'select';
@@ -52104,7 +52141,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               x.indeterminate = selecting;
             } else {
               if (x.checked && !selecting) {
-                _this189.remove(null, x);
+                _this190.remove(null, x);
               }
 
               x.checked = selecting;
@@ -52176,7 +52213,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "updateChildrenValue",
         value: function updateChildrenValue(parent, action) {
-          var _this190 = this;
+          var _this191 = this;
 
           /** @type {?} */
           var selecting = action === 'select';
@@ -52207,10 +52244,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               if (x.checked && !selecting) {
                 x.checked = false;
 
-                if (_this190.allOfTypeSelected(childType)) {
-                  _this190.handleRemoveItemIfAllSelected(x);
+                if (_this191.allOfTypeSelected(childType)) {
+                  _this191.handleRemoveItemIfAllSelected(x);
                 } else {
-                  _this190.removeValue(x);
+                  _this191.removeValue(x);
                 }
               }
 
@@ -52242,7 +52279,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "addIndividualChildren",
         value: function addIndividualChildren(children) {
-          var _this191 = this;
+          var _this192 = this;
 
           /** @type {?} */
           var parentAlreadySelected = false;
@@ -52260,7 +52297,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               * @return {?}
               */
               function (parent) {
-                if (_this191.value[x.isChildOf].filter(
+                if (_this192.value[x.isChildOf].filter(
                 /**
                 * @param {?} p
                 * @return {?}
@@ -52273,7 +52310,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               });
             }
 
-            if (_this191.value[x.type].filter(
+            if (_this192.value[x.type].filter(
             /**
             * @param {?} item
             * @return {?}
@@ -52281,7 +52318,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             function (item) {
               return item === x.value;
             }).length === 0 && !parentAlreadySelected) {
-              _this191.add(x);
+              _this192.add(x);
             }
           });
         }
@@ -52293,7 +52330,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "setInitialValue",
         value: function setInitialValue(model) {
-          var _this192 = this;
+          var _this193 = this;
 
           this.items = [];
           this.value = model || {};
@@ -52311,12 +52348,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             /** @type {?} */
             var type = typeObj.value;
 
-            if (_this192.value[type]) {
+            if (_this193.value[type]) {
               /** @type {?} */
               var indeterminateIsSet = false;
               /** @type {?} */
 
-              var options = _this192.updateAllItemState(type);
+              var options = _this193.updateAllItemState(type);
               /** @type {?} */
 
 
@@ -52325,7 +52362,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
               var allSelected = options.allOfTypeSelected;
 
-              _this192.value[type].forEach(
+              _this193.value[type].forEach(
               /**
               * @param {?} item
               * @return {?}
@@ -52334,7 +52371,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                 if (!allSelected && !indeterminateIsSet) {
                   indeterminateIsSet = true;
 
-                  _this192.setIndeterminateState(optionsByType, true);
+                  _this193.setIndeterminateState(optionsByType, true);
                 }
                 /** @type {?} */
 
@@ -52350,22 +52387,22 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                 value.checked = true;
 
                 if (!allSelected) {
-                  _this192.updateDisplayItems(value, 'add');
+                  _this193.updateDisplayItems(value, 'add');
                 }
 
-                if (_this192.strictRelationship && value.isParentOf) {
-                  _this192.updateChildrenValue(value, 'select');
+                if (_this193.strictRelationship && value.isParentOf) {
+                  _this193.updateChildrenValue(value, 'select');
                 }
               });
 
               if (typeObj.isChildOf) {
-                _this192.modifyAffectedParentsOrChildren(true, {
+                _this193.modifyAffectedParentsOrChildren(true, {
                   value: type,
                   isChildOf: true
                 });
               }
             } else {
-              _this192.value[type] = [];
+              _this193.value[type] = [];
             }
           });
         }
@@ -52423,43 +52460,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         key: "registerOnTouched",
         value: function registerOnTouched(fn) {
           this.onModelTouched = fn;
-        }
-      }, {
-        key: "value",
-        get: function get() {
-          return this._value;
-        }
-        /**
-         * @param {?} selectedItems
-         * @return {?}
-         */
-        ,
-        set: function set(selectedItems) {
-          var _this193 = this;
-
-          if (selectedItems) {
-            this.types.forEach(
-            /**
-            * @param {?} x
-            * @return {?}
-            */
-            function (x) {
-              return _this193._value[x.value] = selectedItems[x.value];
-            });
-          } else {
-            this._value = {};
-            this.types.forEach(
-            /**
-            * @param {?} x
-            * @return {?}
-            */
-            function (x) {
-              return _this193._value[x.value] = [];
-            });
-          }
-
-          this.changed.emit(selectedItems);
-          this.onModelChange(selectedItems);
         }
       }]);
 
@@ -52566,11 +52566,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
       _createClass(BrowserGlobalRef, [{
         key: "nativeGlobal",
-
+        get:
         /**
          * @return {?}
          */
-        get: function get() {
+        function get() {
           return (
             /** @type {?} */
             window
@@ -52594,11 +52594,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
       _createClass(NodeGlobalRef, [{
         key: "nativeGlobal",
-
+        get:
         /**
          * @return {?}
          */
-        get: function get() {
+        function get() {
           throw new Error('global doesn\'t compile for some reason'); // return global as Global;
         }
       }]);
@@ -52619,13 +52619,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
       _createClass(LocalStorageService, [{
         key: "setItem",
-
+        value:
         /**
          * @param {?} key
          * @param {?} value
          * @return {?}
          */
-        value: function setItem(key, value) {
+        function setItem(key, value) {
           localStorage.setItem(key, value);
         }
         /**
@@ -54585,13 +54585,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
       _createClass(ActivityTableRenderers, null, [{
         key: "propertyRenderer",
-
+        value:
         /**
          * @template T
          * @param {?} prop
          * @return {?}
          */
-        value: function propertyRenderer(prop) {
+        function propertyRenderer(prop) {
           /** @type {?} */
           var ret =
           /**
@@ -54657,13 +54657,18 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
       _createClass(NovoActivityTableState, [{
-        key: "reset",
-
+        key: "userFiltered",
+        get: function get() {
+          return !!(this.filter || this.sort || this.globalSearch || this.outsideFilter);
+        }
         /**
          * @param {?=} fireUpdate
          * @param {?=} persistUserFilters
          * @return {?}
          */
+
+      }, {
+        key: "reset",
         value: function reset() {
           var fireUpdate = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
           var persistUserFilters = arguments.length > 1 ? arguments[1] : undefined;
@@ -54685,11 +54690,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               globalSearch: this.globalSearch
             });
           }
-        }
-      }, {
-        key: "userFiltered",
-        get: function get() {
-          return !!(this.filter || this.sort || this.globalSearch || this.outsideFilter);
         }
       }]);
 
@@ -55660,11 +55660,45 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
       _createClass(NovoSimpleCellHeader, [{
-        key: "ngOnInit",
+        key: "config",
+        get: function get() {
+          return this._config;
+        }
+        /**
+         * @param {?} v
+         * @return {?}
+         */
+        ,
+        set: function set(v) {
+          if (!v) {
+            this._config = {
+              sortable: false,
+              filterable: false,
+              filterConfig: {
+                type: 'text'
+              }
+            };
+          } else {
+            this._config = {
+              sortable: Object(_angular_cdk_coercion__WEBPACK_IMPORTED_MODULE_12__["coerceBooleanProperty"])(v.sortable),
+              filterable: Object(_angular_cdk_coercion__WEBPACK_IMPORTED_MODULE_12__["coerceBooleanProperty"])(v.filterable),
+              transforms: v.transforms || {},
+              filterConfig: v.filterConfig || {
+                type: 'text'
+              }
+            };
 
+            if (this._config.filterConfig.type === 'date' && !this._config.filterConfig.options) {
+              this._config.filterConfig.options = this.getDefaultDateFilterOptions();
+            }
+          }
+        }
         /**
          * @return {?}
          */
+
+      }, {
+        key: "ngOnInit",
         value: function ngOnInit() {
           if (this._cdkColumnDef) {
             this.id = this._cdkColumnDef.name;
@@ -55857,40 +55891,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           }];
           return opts;
         }
-      }, {
-        key: "config",
-        get: function get() {
-          return this._config;
-        }
-        /**
-         * @param {?} v
-         * @return {?}
-         */
-        ,
-        set: function set(v) {
-          if (!v) {
-            this._config = {
-              sortable: false,
-              filterable: false,
-              filterConfig: {
-                type: 'text'
-              }
-            };
-          } else {
-            this._config = {
-              sortable: Object(_angular_cdk_coercion__WEBPACK_IMPORTED_MODULE_12__["coerceBooleanProperty"])(v.sortable),
-              filterable: Object(_angular_cdk_coercion__WEBPACK_IMPORTED_MODULE_12__["coerceBooleanProperty"])(v.filterable),
-              transforms: v.transforms || {},
-              filterConfig: v.filterConfig || {
-                type: 'text'
-              }
-            };
-
-            if (this._config.filterConfig.type === 'date' && !this._config.filterConfig.options) {
-              this._config.filterConfig.options = this.getDefaultDateFilterOptions();
-            }
-          }
-        }
       }]);
 
       return NovoSimpleCellHeader;
@@ -55995,11 +55995,85 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
       _createClass(NovoSimpleTablePagination, [{
-        key: "ngOnInit",
-
+        key: "page",
+        get: function get() {
+          return this._page;
+        }
+        /**
+         * @param {?} page
+         * @return {?}
+         */
+        ,
+        set: function set(page) {
+          this._page = page;
+          this.changeDetectorRef.markForCheck();
+          this.longRangeLabel = this.labels.getRangeText(this.page, this.pageSize, this.length, false);
+          this.shortRangeLabel = this.labels.getRangeText(this.page, this.pageSize, this.length, true);
+          this.state.page = this._page;
+        }
         /**
          * @return {?}
          */
+
+      }, {
+        key: "length",
+        get: function get() {
+          return this._length;
+        }
+        /**
+         * @param {?} length
+         * @return {?}
+         */
+        ,
+        set: function set(length) {
+          this._length = length;
+          this.changeDetectorRef.markForCheck();
+          this.longRangeLabel = this.labels.getRangeText(this.page, this.pageSize, this.length, false);
+          this.shortRangeLabel = this.labels.getRangeText(this.page, this.pageSize, this.length, true);
+        }
+        /**
+         * @return {?}
+         */
+
+      }, {
+        key: "pageSize",
+        get: function get() {
+          return this._pageSize;
+        }
+        /**
+         * @param {?} pageSize
+         * @return {?}
+         */
+        ,
+        set: function set(pageSize) {
+          this._pageSize = pageSize;
+          this.updateDisplayedPageSizeOptions();
+          this.state.pageSize = this._pageSize;
+        }
+        /**
+         * @return {?}
+         */
+
+      }, {
+        key: "pageSizeOptions",
+        get: function get() {
+          return this._pageSizeOptions;
+        }
+        /**
+         * @param {?} pageSizeOptions
+         * @return {?}
+         */
+        ,
+        set: function set(pageSizeOptions) {
+          this._pageSizeOptions = pageSizeOptions;
+          this.updateDisplayedPageSizeOptions();
+        }
+        /**
+         * @return {?}
+         */
+
+      }, {
+        key: "ngOnInit",
         value: function ngOnInit() {
           this._initialized = true;
           this.updateDisplayedPageSizeOptions();
@@ -56128,80 +56202,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           this.longRangeLabel = this.labels.getRangeText(this.page, this.pageSize, this.length, false);
           this.shortRangeLabel = this.labels.getRangeText(this.page, this.pageSize, this.length, true);
           this.state.updates.next(event);
-        }
-      }, {
-        key: "page",
-        get: function get() {
-          return this._page;
-        }
-        /**
-         * @param {?} page
-         * @return {?}
-         */
-        ,
-        set: function set(page) {
-          this._page = page;
-          this.changeDetectorRef.markForCheck();
-          this.longRangeLabel = this.labels.getRangeText(this.page, this.pageSize, this.length, false);
-          this.shortRangeLabel = this.labels.getRangeText(this.page, this.pageSize, this.length, true);
-          this.state.page = this._page;
-        }
-        /**
-         * @return {?}
-         */
-
-      }, {
-        key: "length",
-        get: function get() {
-          return this._length;
-        }
-        /**
-         * @param {?} length
-         * @return {?}
-         */
-        ,
-        set: function set(length) {
-          this._length = length;
-          this.changeDetectorRef.markForCheck();
-          this.longRangeLabel = this.labels.getRangeText(this.page, this.pageSize, this.length, false);
-          this.shortRangeLabel = this.labels.getRangeText(this.page, this.pageSize, this.length, true);
-        }
-        /**
-         * @return {?}
-         */
-
-      }, {
-        key: "pageSize",
-        get: function get() {
-          return this._pageSize;
-        }
-        /**
-         * @param {?} pageSize
-         * @return {?}
-         */
-        ,
-        set: function set(pageSize) {
-          this._pageSize = pageSize;
-          this.updateDisplayedPageSizeOptions();
-          this.state.pageSize = this._pageSize;
-        }
-        /**
-         * @return {?}
-         */
-
-      }, {
-        key: "pageSizeOptions",
-        get: function get() {
-          return this._pageSizeOptions;
-        }
-        /**
-         * @param {?} pageSizeOptions
-         * @return {?}
-         */
-        ,
-        set: function set(pageSizeOptions) {
-          this._pageSizeOptions = pageSizeOptions;
-          this.updateDisplayedPageSizeOptions();
         }
       }]);
 
@@ -56564,11 +56564,25 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
       _createClass(ActivityTableDataSource, [{
-        key: "connect",
-
+        key: "totallyEmpty",
+        get: function get() {
+          return this.total === 0;
+        }
         /**
          * @return {?}
          */
+
+      }, {
+        key: "currentlyEmpty",
+        get: function get() {
+          return this.current === 0;
+        }
+        /**
+         * @return {?}
+         */
+
+      }, {
+        key: "connect",
         value: function connect() {
           var _this225 = this;
 
@@ -56618,20 +56632,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "disconnect",
         value: function disconnect() {}
-      }, {
-        key: "totallyEmpty",
-        get: function get() {
-          return this.total === 0;
-        }
-        /**
-         * @return {?}
-         */
-
-      }, {
-        key: "currentlyEmpty",
-        get: function get() {
-          return this.current === 0;
-        }
       }]);
 
       return ActivityTableDataSource;
@@ -56760,12 +56760,94 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
       _createClass(NovoActivityTable, [{
-        key: "ngOnChanges",
+        key: "customFilter",
+        get:
+        /**
+         * @return {?}
+         */
+        function get() {
+          return this._customFilter;
+        }
+        /**
+         * @param {?} v
+         * @return {?}
+         */
+        ,
+        set: function set(v) {
+          this._customFilter = Object(_angular_cdk_coercion__WEBPACK_IMPORTED_MODULE_12__["coerceBooleanProperty"])(v);
+        }
+      }, {
+        key: "forceShowHeader",
+        get:
+        /**
+         * @return {?}
+         */
+        function get() {
+          return this._forceShowHeader;
+        }
+        /**
+         * @param {?} v
+         * @return {?}
+         */
+        ,
+        set: function set(v) {
+          this._forceShowHeader = Object(_angular_cdk_coercion__WEBPACK_IMPORTED_MODULE_12__["coerceBooleanProperty"])(v);
+        }
+      }, {
+        key: "hideGlobalSearch",
+        get:
+        /**
+         * @return {?}
+         */
+        function get() {
+          return this._hideGlobalSearch;
+        }
+        /**
+         * @param {?} v
+         * @return {?}
+         */
+        ,
+        set: function set(v) {
+          this._hideGlobalSearch = Object(_angular_cdk_coercion__WEBPACK_IMPORTED_MODULE_12__["coerceBooleanProperty"])(v);
+          this.globalSearchHiddenClassToggle = this._hideGlobalSearch;
+        }
+      }, {
+        key: "debug",
+        get:
+        /**
+         * @return {?}
+         */
+        function get() {
+          return this._debug;
+        }
+        /**
+         * @return {?}
+         */
+        ,
+        set: function set(v) {
+          this._debug = Object(_angular_cdk_coercion__WEBPACK_IMPORTED_MODULE_12__["coerceBooleanProperty"])(v);
+        }
+      }, {
+        key: "empty",
+        get: function get() {
+          return this.dataSource && this.dataSource.totallyEmpty;
+        }
+        /**
+         * @return {?}
+         */
 
+      }, {
+        key: "loadingClass",
+        get: function get() {
+          return this.loading || this.dataSource && this.dataSource.loading;
+        }
         /**
          * @param {?} changes
          * @return {?}
          */
+
+      }, {
+        key: "ngOnChanges",
         value: function ngOnChanges(changes) {
           var _this226 = this;
 
@@ -56848,88 +56930,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             filter: this.state.filter,
             sort: this.state.sort
           });
-        }
-      }, {
-        key: "customFilter",
-        set: function set(v) {
-          this._customFilter = Object(_angular_cdk_coercion__WEBPACK_IMPORTED_MODULE_12__["coerceBooleanProperty"])(v);
-        }
-        /**
-         * @return {?}
-         */
-        ,
-        get: function get() {
-          return this._customFilter;
-        }
-        /**
-         * @param {?} v
-         * @return {?}
-         */
-
-      }, {
-        key: "forceShowHeader",
-        set: function set(v) {
-          this._forceShowHeader = Object(_angular_cdk_coercion__WEBPACK_IMPORTED_MODULE_12__["coerceBooleanProperty"])(v);
-        }
-        /**
-         * @return {?}
-         */
-        ,
-        get: function get() {
-          return this._forceShowHeader;
-        }
-        /**
-         * @param {?} v
-         * @return {?}
-         */
-
-      }, {
-        key: "hideGlobalSearch",
-        set: function set(v) {
-          this._hideGlobalSearch = Object(_angular_cdk_coercion__WEBPACK_IMPORTED_MODULE_12__["coerceBooleanProperty"])(v);
-          this.globalSearchHiddenClassToggle = this._hideGlobalSearch;
-        }
-        /**
-         * @return {?}
-         */
-        ,
-        get: function get() {
-          return this._hideGlobalSearch;
-        }
-        /**
-         * @param {?} v
-         * @return {?}
-         */
-
-      }, {
-        key: "debug",
-        set: function set(v) {
-          this._debug = Object(_angular_cdk_coercion__WEBPACK_IMPORTED_MODULE_12__["coerceBooleanProperty"])(v);
-        }
-        /**
-         * @return {?}
-         */
-        ,
-        get: function get() {
-          return this._debug;
-        }
-        /**
-         * @return {?}
-         */
-
-      }, {
-        key: "empty",
-        get: function get() {
-          return this.dataSource && this.dataSource.totallyEmpty;
-        }
-        /**
-         * @return {?}
-         */
-
-      }, {
-        key: "loadingClass",
-        get: function get() {
-          return this.loading || this.dataSource && this.dataSource.loading;
         }
       }]);
 
@@ -57242,45 +57242,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
       _createClass(NovoStepHeader, [{
-        key: "ngOnDestroy",
-
-        /**
-         * @return {?}
-         */
-        value: function ngOnDestroy() {
-          this._focusMonitor.stopMonitoring(this._element.nativeElement);
-        }
-        /**
-         * Returns string label of given step if it is a text label.
-         * @return {?}
-         */
-
-      }, {
-        key: "_stringLabel",
-        value: function _stringLabel() {
-          return this.label instanceof NovoStepLabel ? null : this.label;
-        }
-        /**
-         * Returns NovoStepLabel if the label of given step is a template label.
-         * @return {?}
-         */
-
-      }, {
-        key: "_templateLabel",
-        value: function _templateLabel() {
-          return this.label instanceof NovoStepLabel ? this.label : null;
-        }
-        /**
-         * Returns the host HTML element.
-         * @return {?}
-         */
-
-      }, {
-        key: "_getHostElement",
-        value: function _getHostElement() {
-          return this._element.nativeElement;
-        }
-      }, {
         key: "index",
         get: function get() {
           return this._index;
@@ -57356,6 +57317,45 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         ,
         set: function set(value) {
           this._optional = Object(_angular_cdk_coercion__WEBPACK_IMPORTED_MODULE_12__["coerceBooleanProperty"])(value);
+        }
+        /**
+         * @return {?}
+         */
+
+      }, {
+        key: "ngOnDestroy",
+        value: function ngOnDestroy() {
+          this._focusMonitor.stopMonitoring(this._element.nativeElement);
+        }
+        /**
+         * Returns string label of given step if it is a text label.
+         * @return {?}
+         */
+
+      }, {
+        key: "_stringLabel",
+        value: function _stringLabel() {
+          return this.label instanceof NovoStepLabel ? null : this.label;
+        }
+        /**
+         * Returns NovoStepLabel if the label of given step is a template label.
+         * @return {?}
+         */
+
+      }, {
+        key: "_templateLabel",
+        value: function _templateLabel() {
+          return this.label instanceof NovoStepLabel ? this.label : null;
+        }
+        /**
+         * Returns the host HTML element.
+         * @return {?}
+         */
+
+      }, {
+        key: "_getHostElement",
+        value: function _getHostElement() {
+          return this._element.nativeElement;
         }
       }]);
 
@@ -57562,11 +57562,26 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
       _createClass(NovoStepper, [{
-        key: "ngAfterContentInit",
+        key: "completed",
+        get: function get() {
+          try {
+            /** @type {?} */
+            var steps = this._steps.toArray();
+            /** @type {?} */
 
+
+            var length = steps.length - 1;
+            return steps[length].completed && length === this.selectedIndex;
+          } catch (err) {
+            return false;
+          }
+        }
         /**
          * @return {?}
          */
+
+      }, {
+        key: "ngAfterContentInit",
         value: function ngAfterContentInit() {
           var _this229 = this;
 
@@ -57621,21 +57636,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           }
 
           return 'none';
-        }
-      }, {
-        key: "completed",
-        get: function get() {
-          try {
-            /** @type {?} */
-            var steps = this._steps.toArray();
-            /** @type {?} */
-
-
-            var length = steps.length - 1;
-            return steps[length].completed && length === this.selectedIndex;
-          } catch (err) {
-            return false;
-          }
         }
       }]);
 
@@ -57938,11 +57938,50 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
       _createClass(NovoTabbedGroupPickerElement, [{
-        key: "ngOnInit",
-
+        key: "displayTab",
+        get: function get() {
+          return this.displayTabs[this.displayTabIndex];
+        }
+        /**
+         * @param {?} tab
+         * @return {?}
+         */
+        ,
+        set: function set(tab) {
+          this.displayTabIndex = this.tabs.map(
+          /**
+          * @param {?} __0
+          * @return {?}
+          */
+          function (_ref18) {
+            var typeName = _ref18.typeName;
+            return typeName;
+          }).indexOf(tab.typeName);
+        }
         /**
          * @return {?}
          */
+
+      }, {
+        key: "minBufferPx",
+        get: function get() {
+          return this.scrollViewportHeight; // render at least 2x the number of items visible (viewport + min buffer)
+        }
+        /**
+         * @return {?}
+         */
+
+      }, {
+        key: "maxBufferPx",
+        get: function get() {
+          return 2 * this.scrollViewportHeight; // render at most 3x the number of items visible (viewport + max buffer)
+        }
+        /**
+         * @return {?}
+         */
+
+      }, {
+        key: "ngOnInit",
         value: function ngOnInit() {
           this.setupDisplayData();
           this.createChildrenReferences();
@@ -58037,8 +58076,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               * @param {?} __0
               * @return {?}
               */
-              function (_ref18) {
-                var typeName = _ref18.typeName;
+              function (_ref19) {
+                var typeName = _ref19.typeName;
                 return typeName === tab.childTypeName;
               });
               /** @type {?} */
@@ -58058,8 +58097,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               * @param {?} __0
               * @return {?}
               */
-              function (_ref19) {
-                var children = _ref19.children;
+              function (_ref20) {
+                var children = _ref20.children;
                 return children && children.length;
               }).forEach(
               /**
@@ -58093,8 +58132,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               * @param {?} __0
               * @return {?}
               */
-              function (_ref20) {
-                var typeName = _ref20.typeName;
+              function (_ref21) {
+                var typeName = _ref21.typeName;
                 return parent.childTypeName === typeName;
               }).data;
             });
@@ -58117,8 +58156,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               * @param {?} __0
               * @return {?}
               */
-              function (_ref21) {
-                var typeName = _ref21.typeName;
+              function (_ref22) {
+                var typeName = _ref22.typeName;
                 return typeName === parent.childTypeName;
               });
               /** @type {?} */
@@ -58326,9 +58365,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               * @param {?} __0
               * @return {?}
               */
-              function (_ref22) {
-                var selected = _ref22.selected,
-                    indeterminate = _ref22.indeterminate;
+              function (_ref23) {
+                var selected = _ref23.selected,
+                    indeterminate = _ref23.indeterminate;
                 return selected || indeterminate;
               });
             } else {
@@ -58337,8 +58376,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               * @param {?} __0
               * @return {?}
               */
-              function (_ref23) {
-                var selected = _ref23.selected;
+              function (_ref24) {
+                var selected = _ref24.selected;
                 return selected;
               });
             }
@@ -58373,8 +58412,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             * @param {?} __0
             * @return {?}
             */
-            function (_ref24) {
-              var children = _ref24.children;
+            function (_ref25) {
+              var children = _ref25.children;
               return children && children.length;
             });
             parents.forEach(
@@ -58441,8 +58480,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               * @param {?} __0
               * @return {?}
               */
-              function (_ref25) {
-                var selected = _ref25.selected;
+              function (_ref26) {
+                var selected = _ref26.selected;
                 return selected;
               })
             });
@@ -58532,45 +58571,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         key: "onFilter",
         value: function onFilter(event) {
           this.filterText.next(event.target.value);
-        }
-      }, {
-        key: "displayTab",
-        get: function get() {
-          return this.displayTabs[this.displayTabIndex];
-        }
-        /**
-         * @param {?} tab
-         * @return {?}
-         */
-        ,
-        set: function set(tab) {
-          this.displayTabIndex = this.tabs.map(
-          /**
-          * @param {?} __0
-          * @return {?}
-          */
-          function (_ref26) {
-            var typeName = _ref26.typeName;
-            return typeName;
-          }).indexOf(tab.typeName);
-        }
-        /**
-         * @return {?}
-         */
-
-      }, {
-        key: "minBufferPx",
-        get: function get() {
-          return this.scrollViewportHeight; // render at least 2x the number of items visible (viewport + min buffer)
-        }
-        /**
-         * @return {?}
-         */
-
-      }, {
-        key: "maxBufferPx",
-        get: function get() {
-          return 2 * this.scrollViewportHeight; // render at most 3x the number of items visible (viewport + max buffer)
         }
       }]);
 
@@ -58741,11 +58741,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
       _createClass(NovoDropdownCell, [{
         key: "ngOnInit",
-
+        value:
         /**
          * @return {?}
          */
-        value: function ngOnInit() {
+        function ngOnInit() {
           // Check for and fix bad config
           if (!this.meta.dropdownCellConfig) {
             throw new Error('Missing "dropdownCellConfig" on the column setup');
@@ -58868,11 +58868,24 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
       _createClass(Pagination, [{
-        key: "ngOnInit",
-
+        key: "disablePageSelection",
+        get: function get() {
+          return this.pageSelectDisabled;
+        }
+        /**
+         * @param {?} val
+         * @return {?}
+         */
+        ,
+        set: function set(val) {
+          this.pageSelectDisabled = Object(_angular_cdk_coercion__WEBPACK_IMPORTED_MODULE_12__["coerceBooleanProperty"])(val);
+        }
         /**
          * @return {?}
          */
+
+      }, {
+        key: "ngOnInit",
         value: function ngOnInit() {
           this.label = this.label || this.labels.itemsPerPage;
           this.rowOptions = this.rowOptions || this.getDefaultRowOptions();
@@ -59040,19 +59053,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           /** @type {?} */
           var totalPages = this.itemsPerPage < 1 ? 1 : Math.ceil(this.totalItems / this.itemsPerPage);
           return Math.max(totalPages || 0, 1);
-        }
-      }, {
-        key: "disablePageSelection",
-        get: function get() {
-          return this.pageSelectDisabled;
-        }
-        /**
-         * @param {?} val
-         * @return {?}
-         */
-        ,
-        set: function set(val) {
-          this.pageSelectDisabled = Object(_angular_cdk_coercion__WEBPACK_IMPORTED_MODULE_12__["coerceBooleanProperty"])(val);
         }
       }]);
 
@@ -59555,11 +59555,25 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
       _createClass(ThOrderable, [{
-        key: "ngOnInit",
+        key: "index",
+        get: function get() {
+          /** @type {?} */
+          var index = null;
 
+          if (this.element.nativeElement && this.element.nativeElement.parentNode) {
+            /** @type {?} */
+            var children = Array.prototype.slice.call(this.element.nativeElement.parentNode.children);
+            index = children.indexOf(this.element.nativeElement);
+          }
+
+          return index;
+        }
         /**
          * @return {?}
          */
+
+      }, {
+        key: "ngOnInit",
         value: function ngOnInit() {
           if (this.column.ordering) {
             this.element.nativeElement.setAttribute('draggable', true);
@@ -59715,20 +59729,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         key: "onDragLeave",
         value: function onDragLeave(event) {
           this.element.nativeElement.classList.remove('over');
-        }
-      }, {
-        key: "index",
-        get: function get() {
-          /** @type {?} */
-          var index = null;
-
-          if (this.element.nativeElement && this.element.nativeElement.parentNode) {
-            /** @type {?} */
-            var children = Array.prototype.slice.call(this.element.nativeElement.parentNode.children);
-            index = children.indexOf(this.element.nativeElement);
-          }
-
-          return index;
         }
       }]);
 
@@ -59940,11 +59940,34 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
       _createClass(ArrayCollection, [{
-        key: "isEmpty",
-
+        key: "length",
+        get: function get() {
+          return this.filterData.length;
+        }
         /**
          * @return {?}
          */
+
+      }, {
+        key: "total",
+        get: function get() {
+          return this.filterData.length;
+        }
+        /**
+         * @return {?}
+         */
+
+      }, {
+        key: "list",
+        get: function get() {
+          return this.filterData;
+        }
+        /**
+         * @return {?}
+         */
+
+      }, {
+        key: "isEmpty",
         value: function isEmpty() {
           return this.length <= 0 && !this.isLoading() && !this.hasErrors();
         }
@@ -60287,8 +60310,19 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
          */
 
       }, {
-        key: "sortOn",
-
+        key: "sort",
+        get: function get() {
+          return this._sort;
+        }
+        /**
+         * @param {?} value
+         * @return {?}
+         */
+        ,
+        set: function set(value) {
+          this._sort = value;
+          this.refresh();
+        }
         /**
          * Sorts the items that the data provider contains by the specified field and dispatches a CollectionEvent.SORT event.
          *
@@ -60297,6 +60331,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
          * @param {?=} reverse
          * @return {?}
          */
+
+      }, {
+        key: "sortOn",
         value: function sortOn(fieldName) {
           var reverse = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
           this.filterData = this.filterData.sort(Helpers.sortByField(fieldName, reverse));
@@ -60308,13 +60345,27 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
          */
 
       }, {
-        key: "filterOn",
-
+        key: "filter",
+        get: function get() {
+          return this._filter;
+        }
+        /**
+         * @param {?} value
+         * @return {?}
+         */
+        ,
+        set: function set(value) {
+          this._filter = value;
+          this.refresh();
+        }
         /**
          * @param {?} fieldName
          * @param {?=} value
          * @return {?}
          */
+
+      }, {
+        key: "filterOn",
         value: function filterOn(fieldName) {
           var value = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
           this.filterData = this.filterData.filter(Helpers.filterByField(fieldName, value));
@@ -60382,57 +60433,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         value: function toJSON() {
           return this.isEditing ? this.editData : this.source;
         }
-      }, {
-        key: "length",
-        get: function get() {
-          return this.filterData.length;
-        }
-        /**
-         * @return {?}
-         */
-
-      }, {
-        key: "total",
-        get: function get() {
-          return this.filterData.length;
-        }
-        /**
-         * @return {?}
-         */
-
-      }, {
-        key: "list",
-        get: function get() {
-          return this.filterData;
-        }
-      }, {
-        key: "sort",
-        get: function get() {
-          return this._sort;
-        }
-        /**
-         * @param {?} value
-         * @return {?}
-         */
-        ,
-        set: function set(value) {
-          this._sort = value;
-          this.refresh();
-        }
-      }, {
-        key: "filter",
-        get: function get() {
-          return this._filter;
-        }
-        /**
-         * @param {?} value
-         * @return {?}
-         */
-        ,
-        set: function set(value) {
-          this._filter = value;
-          this.refresh();
-        }
       }]);
 
       return ArrayCollection;
@@ -60477,11 +60477,55 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
       _createClass(PagedArrayCollection, [{
-        key: "next",
-
+        key: "numberOfPages",
+        get: function get() {
+          /** @type {?} */
+          var result = this.source.length / this.pageSize;
+          result = Math.ceil(result);
+          return result;
+        }
         /**
          * @return {?}
          */
+
+      }, {
+        key: "page",
+        get: function get() {
+          return this._page;
+        }
+        /**
+         * @param {?} value
+         * @return {?}
+         */
+        ,
+        set: function set(value) {
+          this._page = value;
+          this.refresh();
+        }
+        /**
+         * @return {?}
+         */
+
+      }, {
+        key: "pageSize",
+        get: function get() {
+          return this._pageSize;
+        }
+        /**
+         * @param {?} value
+         * @return {?}
+         */
+        ,
+        set: function set(value) {
+          this._pageSize = value;
+          this.refresh();
+        }
+        /**
+         * @return {?}
+         */
+
+      }, {
+        key: "next",
         value: function next() {
           if (this.page === this.numberOfPages) {
             return this.page;
@@ -60575,50 +60619,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             this.onDataChange(new CollectionEvent(CollectionEvent.CHANGE, this.filterData));
           }
         }
-      }, {
-        key: "numberOfPages",
-        get: function get() {
-          /** @type {?} */
-          var result = this.source.length / this.pageSize;
-          result = Math.ceil(result);
-          return result;
-        }
-        /**
-         * @return {?}
-         */
-
-      }, {
-        key: "page",
-        get: function get() {
-          return this._page;
-        }
-        /**
-         * @param {?} value
-         * @return {?}
-         */
-        ,
-        set: function set(value) {
-          this._page = value;
-          this.refresh();
-        }
-        /**
-         * @return {?}
-         */
-
-      }, {
-        key: "pageSize",
-        get: function get() {
-          return this._pageSize;
-        }
-        /**
-         * @param {?} value
-         * @return {?}
-         */
-        ,
-        set: function set(value) {
-          this._pageSize = value;
-          this.refresh();
-        }
       }]);
 
       return PagedArrayCollection;
@@ -60698,13 +60698,247 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
       _createClass(NovoTableElement, [{
-        key: "onDropdownToggled",
+        key: "rows",
+        get:
+        /**
+         * @return {?}
+         */
+        function get() {
+          return this._rows;
+        }
+        /**
+         * @param {?} dp
+         * @return {?}
+         */
+        ,
+        set: function set(rows) {
+          this.dataProvider = rows;
 
+          if (rows && rows.length > 0) {
+            this.setupColumnDefaults();
+          } // this is a temporary/hacky fix until async dataloading is handled within the table
+
+
+          if (!this.skipSortAndFilterClear) {
+            this.clearAllSortAndFilters();
+          }
+        }
+      }, {
+        key: "dataProvider",
+        get:
+        /**
+         * @return {?}
+         */
+        function get() {
+          return this._dataProvider;
+        }
+        /**
+         * @return {?}
+         */
+        ,
+        set: function set(dp) {
+          var _this239 = this;
+
+          this._dataProvider = Array.isArray(dp) ? new PagedArrayCollection(dp) : dp;
+
+          this._dataProvider.dataChange.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_14__["debounceTime"])(100)).subscribe(
+          /**
+          * @param {?} event
+          * @return {?}
+          */
+          function (event) {
+            switch (event.type) {
+              case CollectionEvent.CHANGE:
+                _this239._rows = event.data; // Setup form
+
+                _this239.tableForm = _this239.builder.group({
+                  rows: _this239.builder.array([])
+                }); // Remove all selection on sort change if selection is on
+
+                if (_this239.config.rowSelectionStyle === 'checkbox') {
+                  _this239.pagedData = event.data;
+                  _this239.pageSelected = _this239.pagedData.filter(
+                  /**
+                  * @param {?} r
+                  * @return {?}
+                  */
+                  function (r) {
+                    return r._selected;
+                  });
+
+                  _this239.rowSelectHandler();
+                } // Find that columns we might need to sum up via the footer
+
+                /** @type {?} */
+
+
+                var columnsToSum = [];
+                /** @type {?} */
+
+                var columnSums = {};
+
+                if (_this239.config.footers) {
+                  _this239.config.footers.forEach(
+                  /**
+                  * @param {?} config
+                  * @return {?}
+                  */
+                  function (config) {
+                    var _columnsToSum;
+
+                    (_columnsToSum = columnsToSum).push.apply(_columnsToSum, _toConsumableArray(config.columns));
+                  }); // Only have unique columns, filter out duplicates
+
+
+                  columnsToSum = columnsToSum.filter(
+                  /**
+                  * @param {?} item
+                  * @param {?} index
+                  * @param {?} array
+                  * @return {?}
+                  */
+                  function (item, index, array) {
+                    return array.indexOf(item) === index;
+                  });
+                } // Make a form for each row
+
+                /** @type {?} */
+
+
+                var tableFormRows =
+                /** @type {?} */
+                _this239.tableForm.controls['rows'];
+
+                _this239._rows.forEach(
+                /**
+                * @param {?} row
+                * @param {?} index
+                * @return {?}
+                */
+                function (row, index) {
+                  /** @type {?} */
+                  var rowControls = [];
+                  row.controls = {};
+                  row._editing = {};
+                  row._expanded = _this239.config.expandAll;
+                  row.rowId = _this239._rows.length;
+
+                  _this239.columns.forEach(
+                  /**
+                  * @param {?} column
+                  * @return {?}
+                  */
+                  function (column) {
+                    // Use the control passed or use a ReadOnlyControl so that the form has the values
+
+                    /** @type {?} */
+                    var control = column.editorConfig ? ControlFactory.create(column.editorType, column.editorConfig) : new ReadOnlyControl({
+                      key: column.name
+                    });
+                    row.controls[column.name] = control;
+                    rowControls.push(control);
+                  });
+
+                  _this239.formUtils.setInitialValues(rowControls, row, false);
+
+                  tableFormRows.push(_this239.formUtils.toFormGroup(rowControls)); // Setup the total footer if configured
+                  // Array of keys to total
+
+                  if (columnsToSum.length !== 0) {
+                    columnsToSum.forEach(
+                    /**
+                    * @param {?} column
+                    * @return {?}
+                    */
+                    function (column) {
+                      if (Helpers.isBlank(columnSums[column])) {
+                        columnSums[column] = 0;
+                      }
+
+                      columnSums[column] += row[column];
+                    });
+                  }
+                });
+
+                if (_this239.mode === NovoTableMode.EDIT) {
+                  _this239.setTableEdit();
+                } // Setup the footers (if any)
+
+
+                if (_this239.config.footers) {
+                  _this239.footers = [];
+
+                  _this239.config.footers.forEach(
+                  /**
+                  * @param {?} footerConfig
+                  * @param {?} footerConfigIndex
+                  * @return {?}
+                  */
+                  function (footerConfig, footerConfigIndex) {
+                    /** @type {?} */
+                    var footer = {};
+                    footer[footerConfig.labelColumn] = footerConfig.label;
+                    footerConfig.columns.forEach(
+                    /**
+                    * @param {?} column
+                    * @return {?}
+                    */
+                    function (column) {
+                      if (footerConfig.method === 'AVG' && _this239._rows.length !== 0) {
+                        footer[column] = columnSums[column] / _this239._rows.length;
+                      } else {
+                        footer[column] = columnSums[column];
+                      }
+                    });
+
+                    _this239.footers.push(footer);
+                  });
+                }
+
+                break;
+
+              default:
+                break;
+            }
+          });
+
+          if (this.config.paging) {
+            this._dataProvider.page = this.config.paging.current;
+            this._dataProvider.pageSize = this.config.paging.itemsPerPage;
+          } else {
+            // Paging turned off, return basically all of the data
+            this._dataProvider.page = 1;
+            this._dataProvider.pageSize = 500;
+          }
+
+          if (dp && dp.length > 0) {
+            this.setupColumnDefaults();
+          }
+
+          this._dataProvider.refresh();
+        }
+      }, {
+        key: "editing",
+        get: function get() {
+          return this.mode === NovoTableMode.EDIT;
+        }
+        /**
+         * @return {?}
+         */
+
+      }, {
+        key: "formValue",
+        get: function get() {
+          return this.tableForm.value;
+        }
         /**
          * @param {?} event
          * @param {?} column
          * @return {?}
          */
+
+      }, {
+        key: "onDropdownToggled",
         value: function onDropdownToggled(event, column) {
           this.toggledDropdownMap[column] = event;
         }
@@ -60765,7 +60999,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "setupColumnDefaults",
         value: function setupColumnDefaults() {
-          var _this239 = this;
+          var _this240 = this;
 
           // Check columns for cell option types
           this.columns.forEach(
@@ -60778,7 +61012,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               switch (column.type) {
                 case 'date':
                   // Set options based on dates if there are none
-                  column.options = column.options || _this239.getDefaultOptions(column);
+                  column.options = column.options || _this240.getDefaultOptions(column);
                   break;
 
                 default:
@@ -60880,7 +61114,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "onFilterClear",
         value: function onFilterClear(column) {
-          var _this240 = this;
+          var _this241 = this;
 
           setTimeout(
           /**
@@ -60890,7 +61124,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             column.filter = null;
             column.freetextFilter = null;
 
-            _this240.onFilterChange();
+            _this241.onFilterChange();
 
             if (column.originalOptions) {
               column.options = column.originalOptions;
@@ -60925,7 +61159,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "onFilterChange",
         value: function onFilterChange(event) {
-          var _this241 = this;
+          var _this242 = this;
 
           if (this.config.filtering) {
             // Array of filters
@@ -60962,7 +61196,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                       return column.match(record, column.filter);
                     };
                   } else if (column.preFilter && Helpers.isFunction(column.preFilter)) {
-                    query = Object.assign({}, query, column.preFilter(_this241.escapeCharacters(column.filter)));
+                    query = Object.assign({}, query, column.preFilter(_this242.escapeCharacters(column.filter)));
                   } else if (Array.isArray(column.filter)) {
                     // The filters are an array (multi-select), check value
 
@@ -61093,7 +61327,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "onSortChange",
         value: function onSortChange(column) {
-          var _this242 = this;
+          var _this243 = this;
 
           this.currentSortColumn = column;
           /** @type {?} */
@@ -61104,7 +61338,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function (thisColumn) {
-            return thisColumn.sort && thisColumn !== _this242.currentSortColumn;
+            return thisColumn.sort && thisColumn !== _this243.currentSortColumn;
           });
 
           var _iterator17 = _createForOfIteratorHelper(sortedColumns),
@@ -61450,7 +61684,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "onCalenderSelect",
         value: function onCalenderSelect(column, event) {
-          var _this243 = this;
+          var _this244 = this;
 
           setTimeout(
           /**
@@ -61458,7 +61692,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           */
           function () {
             if (event.startDate && event.endDate) {
-              _this243.onFilterChange();
+              _this244.onFilterChange();
             }
           }, 10);
         }
@@ -61520,7 +61754,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "setTableEdit",
         value: function setTableEdit(rowNumber, columnNumber) {
-          var _this244 = this;
+          var _this245 = this;
 
           this.mode = NovoTableMode.EDIT;
 
@@ -61535,7 +61769,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           function (row, rowIndex) {
             row._editing = row._editing || {};
 
-            _this244.columns.forEach(
+            _this245.columns.forEach(
             /**
             * @param {?} column
             * @param {?} columnIndex
@@ -61567,7 +61801,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "leaveEditMode",
         value: function leaveEditMode(cancel) {
-          var _this245 = this;
+          var _this246 = this;
 
           this.mode = NovoTableMode.VIEW;
 
@@ -61579,7 +61813,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           function (row) {
             row._editing = row._editing || {};
 
-            _this245.columns.forEach(
+            _this246.columns.forEach(
             /**
             * @param {?} column
             * @return {?}
@@ -61657,7 +61891,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "validateAndGetUpdatedData",
         value: function validateAndGetUpdatedData() {
-          var _this246 = this;
+          var _this247 = this;
 
           if (this.tableForm && this.tableForm.controls && this.tableForm.controls['rows']) {
             /** @type {?} */
@@ -61694,15 +61928,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                     // Append the ID, so we have some key to save against
                     changedRow = {};
 
-                    if (_this246._rows[index].id) {
-                      changedRow.id = _this246._rows[index].id;
+                    if (_this247._rows[index].id) {
+                      changedRow.id = _this247._rows[index].id;
                     }
                   } // If dirty, grab value off the form
 
 
-                  changedRow[key] = _this246.tableForm.value['rows'][index][key]; // Set value back to row (should be already done via the server call, but do it anyway)
+                  changedRow[key] = _this247.tableForm.value['rows'][index][key]; // Set value back to row (should be already done via the server call, but do it anyway)
 
-                  _this246._rows[index][key] = changedRow[key];
+                  _this247._rows[index][key] = changedRow[key];
                 } else if (control && control.errors) {
                   // Handle errors
                   if (!error) {
@@ -61722,7 +61956,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               if (error) {
                 errors.push({
                   errors: error,
-                  row: _this246._rows[index],
+                  row: _this247._rows[index],
                   index: index
                 });
               }
@@ -61772,7 +62006,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "displayToastMessage",
         value: function displayToastMessage(toast, hideDelay) {
-          var _this247 = this;
+          var _this248 = this;
 
           this.loading = false;
           this.toast = toast;
@@ -61783,7 +62017,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             * @return {?}
             */
             function () {
-              return _this247.hideToastMessage();
+              return _this248.hideToastMessage();
             }, hideDelay);
           }
         }
@@ -61796,7 +62030,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "hideToastMessage",
         value: function hideToastMessage() {
-          var _this248 = this;
+          var _this249 = this;
 
           this.toast = null; // Hack to make the table display properly after hiding the toast
 
@@ -61806,7 +62040,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           * @return {?}
           */
           function () {
-            _this248.grossFlagToAvoidTheTableFromBeingUglyWhenHidingTheToast = false;
+            _this249.grossFlagToAvoidTheTableFromBeingUglyWhenHidingTheToast = false;
           });
         }
         /**
@@ -61832,240 +62066,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         key: "isColumnHidden",
         value: function isColumnHidden(column) {
           return this.editing ? !!column.hideColumnOnEdit : !!column.hideColumnOnView;
-        }
-      }, {
-        key: "rows",
-        set: function set(rows) {
-          this.dataProvider = rows;
-
-          if (rows && rows.length > 0) {
-            this.setupColumnDefaults();
-          } // this is a temporary/hacky fix until async dataloading is handled within the table
-
-
-          if (!this.skipSortAndFilterClear) {
-            this.clearAllSortAndFilters();
-          }
-        }
-        /**
-         * @return {?}
-         */
-        ,
-        get: function get() {
-          return this._rows;
-        }
-        /**
-         * @param {?} dp
-         * @return {?}
-         */
-
-      }, {
-        key: "dataProvider",
-        set: function set(dp) {
-          var _this249 = this;
-
-          this._dataProvider = Array.isArray(dp) ? new PagedArrayCollection(dp) : dp;
-
-          this._dataProvider.dataChange.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_14__["debounceTime"])(100)).subscribe(
-          /**
-          * @param {?} event
-          * @return {?}
-          */
-          function (event) {
-            switch (event.type) {
-              case CollectionEvent.CHANGE:
-                _this249._rows = event.data; // Setup form
-
-                _this249.tableForm = _this249.builder.group({
-                  rows: _this249.builder.array([])
-                }); // Remove all selection on sort change if selection is on
-
-                if (_this249.config.rowSelectionStyle === 'checkbox') {
-                  _this249.pagedData = event.data;
-                  _this249.pageSelected = _this249.pagedData.filter(
-                  /**
-                  * @param {?} r
-                  * @return {?}
-                  */
-                  function (r) {
-                    return r._selected;
-                  });
-
-                  _this249.rowSelectHandler();
-                } // Find that columns we might need to sum up via the footer
-
-                /** @type {?} */
-
-
-                var columnsToSum = [];
-                /** @type {?} */
-
-                var columnSums = {};
-
-                if (_this249.config.footers) {
-                  _this249.config.footers.forEach(
-                  /**
-                  * @param {?} config
-                  * @return {?}
-                  */
-                  function (config) {
-                    var _columnsToSum;
-
-                    (_columnsToSum = columnsToSum).push.apply(_columnsToSum, _toConsumableArray(config.columns));
-                  }); // Only have unique columns, filter out duplicates
-
-
-                  columnsToSum = columnsToSum.filter(
-                  /**
-                  * @param {?} item
-                  * @param {?} index
-                  * @param {?} array
-                  * @return {?}
-                  */
-                  function (item, index, array) {
-                    return array.indexOf(item) === index;
-                  });
-                } // Make a form for each row
-
-                /** @type {?} */
-
-
-                var tableFormRows =
-                /** @type {?} */
-                _this249.tableForm.controls['rows'];
-
-                _this249._rows.forEach(
-                /**
-                * @param {?} row
-                * @param {?} index
-                * @return {?}
-                */
-                function (row, index) {
-                  /** @type {?} */
-                  var rowControls = [];
-                  row.controls = {};
-                  row._editing = {};
-                  row._expanded = _this249.config.expandAll;
-                  row.rowId = _this249._rows.length;
-
-                  _this249.columns.forEach(
-                  /**
-                  * @param {?} column
-                  * @return {?}
-                  */
-                  function (column) {
-                    // Use the control passed or use a ReadOnlyControl so that the form has the values
-
-                    /** @type {?} */
-                    var control = column.editorConfig ? ControlFactory.create(column.editorType, column.editorConfig) : new ReadOnlyControl({
-                      key: column.name
-                    });
-                    row.controls[column.name] = control;
-                    rowControls.push(control);
-                  });
-
-                  _this249.formUtils.setInitialValues(rowControls, row, false);
-
-                  tableFormRows.push(_this249.formUtils.toFormGroup(rowControls)); // Setup the total footer if configured
-                  // Array of keys to total
-
-                  if (columnsToSum.length !== 0) {
-                    columnsToSum.forEach(
-                    /**
-                    * @param {?} column
-                    * @return {?}
-                    */
-                    function (column) {
-                      if (Helpers.isBlank(columnSums[column])) {
-                        columnSums[column] = 0;
-                      }
-
-                      columnSums[column] += row[column];
-                    });
-                  }
-                });
-
-                if (_this249.mode === NovoTableMode.EDIT) {
-                  _this249.setTableEdit();
-                } // Setup the footers (if any)
-
-
-                if (_this249.config.footers) {
-                  _this249.footers = [];
-
-                  _this249.config.footers.forEach(
-                  /**
-                  * @param {?} footerConfig
-                  * @param {?} footerConfigIndex
-                  * @return {?}
-                  */
-                  function (footerConfig, footerConfigIndex) {
-                    /** @type {?} */
-                    var footer = {};
-                    footer[footerConfig.labelColumn] = footerConfig.label;
-                    footerConfig.columns.forEach(
-                    /**
-                    * @param {?} column
-                    * @return {?}
-                    */
-                    function (column) {
-                      if (footerConfig.method === 'AVG' && _this249._rows.length !== 0) {
-                        footer[column] = columnSums[column] / _this249._rows.length;
-                      } else {
-                        footer[column] = columnSums[column];
-                      }
-                    });
-
-                    _this249.footers.push(footer);
-                  });
-                }
-
-                break;
-
-              default:
-                break;
-            }
-          });
-
-          if (this.config.paging) {
-            this._dataProvider.page = this.config.paging.current;
-            this._dataProvider.pageSize = this.config.paging.itemsPerPage;
-          } else {
-            // Paging turned off, return basically all of the data
-            this._dataProvider.page = 1;
-            this._dataProvider.pageSize = 500;
-          }
-
-          if (dp && dp.length > 0) {
-            this.setupColumnDefaults();
-          }
-
-          this._dataProvider.refresh();
-        }
-        /**
-         * @return {?}
-         */
-        ,
-        get: function get() {
-          return this._dataProvider;
-        }
-        /**
-         * @return {?}
-         */
-
-      }, {
-        key: "editing",
-        get: function get() {
-          return this.mode === NovoTableMode.EDIT;
-        }
-        /**
-         * @return {?}
-         */
-
-      }, {
-        key: "formValue",
-        get: function get() {
-          return this.tableForm.value;
         }
       }]);
 
@@ -62379,11 +62379,17 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
       _createClass(Unless, [{
-        key: "check",
-
+        key: "bhUnless",
+        set: function set(value) {
+          this.permissions = value || '';
+          this.check();
+        }
         /**
          * @return {?}
          */
+
+      }, {
+        key: "check",
         value: function check() {
           var _this251 = this;
 
@@ -62430,12 +62436,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             this.isDisplayed = false;
             this.viewContainer.clear();
           }
-        }
-      }, {
-        key: "bhUnless",
-        set: function set(value) {
-          this.permissions = value || '';
-          this.check();
         }
       }]);
 
@@ -63281,11 +63281,40 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
       _createClass(NovoValueElement, [{
-        key: "ngOnInit",
-
+        key: "label",
+        get:
         /**
          * @return {?}
          */
+        function get() {
+          return this.meta.label;
+        }
+        /**
+         * @param {?} typ
+         * @return {?}
+         */
+        ,
+        set: function set(lbl) {
+          this.meta.label = lbl;
+        }
+      }, {
+        key: "type",
+        get:
+        /**
+         * @return {?}
+         */
+        function get() {
+          return this.meta.type;
+        }
+        /**
+         * @return {?}
+         */
+        ,
+        set: function set(typ) {
+          this.meta.type = typ;
+        }
+      }, {
+        key: "ngOnInit",
         value: function ngOnInit() {
           if (Helpers.isEmpty(this.meta)) {
             this.meta = {
@@ -63298,12 +63327,17 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
          */
 
       }, {
-        key: "iconClass",
-
+        key: "isMobile",
+        get: function get() {
+          return this.theme === NOVO_VALUE_THEME.MOBILE;
+        }
         /**
          * @param {?} icon
          * @return {?}
          */
+
+      }, {
+        key: "iconClass",
         value: function iconClass(icon) {
           /** @type {?} */
           var iconClass = '';
@@ -63325,12 +63359,35 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
          */
 
       }, {
-        key: "onValueClick",
+        key: "isDefault",
+        get: function get() {
+          return true;
+        }
+        /**
+         * @return {?}
+         */
 
+      }, {
+        key: "showLabel",
+        get: function get() {
+          return this._type === NOVO_VALUE_TYPE.INTERNAL_LINK || this._type === NOVO_VALUE_TYPE.LINK || this._type === NOVO_VALUE_TYPE.ENTITY_LIST;
+        }
+        /**
+         * @return {?}
+         */
+
+      }, {
+        key: "showIcon",
+        get: function get() {
+          return this.meta && this.meta.icons && this.meta.icons.length && !Helpers.isEmpty(this.data);
+        }
         /**
          * @param {?} icon
          * @return {?}
          */
+
+      }, {
+        key: "onValueClick",
         value: function onValueClick(icon) {
           if (icon.onIconClick && typeof icon.onIconClick === 'function') {
             icon.onIconClick(this.data, this.meta);
@@ -63430,63 +63487,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         key: "isHTMLField",
         value: function isHTMLField(meta) {
           return meta.dataSpecialization === 'HTML' || meta.inputType === 'TEXTAREA';
-        }
-      }, {
-        key: "label",
-        set: function set(lbl) {
-          this.meta.label = lbl;
-        }
-        /**
-         * @return {?}
-         */
-        ,
-        get: function get() {
-          return this.meta.label;
-        }
-        /**
-         * @param {?} typ
-         * @return {?}
-         */
-
-      }, {
-        key: "type",
-        set: function set(typ) {
-          this.meta.type = typ;
-        }
-        /**
-         * @return {?}
-         */
-        ,
-        get: function get() {
-          return this.meta.type;
-        }
-      }, {
-        key: "isMobile",
-        get: function get() {
-          return this.theme === NOVO_VALUE_THEME.MOBILE;
-        }
-      }, {
-        key: "isDefault",
-        get: function get() {
-          return true;
-        }
-        /**
-         * @return {?}
-         */
-
-      }, {
-        key: "showLabel",
-        get: function get() {
-          return this._type === NOVO_VALUE_TYPE.INTERNAL_LINK || this._type === NOVO_VALUE_TYPE.LINK || this._type === NOVO_VALUE_TYPE.ENTITY_LIST;
-        }
-        /**
-         * @return {?}
-         */
-
-      }, {
-        key: "showIcon",
-        get: function get() {
-          return this.meta && this.meta.icons && this.meta.icons.length && !Helpers.isEmpty(this.data);
         }
       }]);
 
@@ -63631,11 +63631,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
       _createClass(NovoElementProviders, null, [{
         key: "forRoot",
-
+        value:
         /**
          * @return {?}
          */
-        value: function forRoot() {
+        function forRoot() {
           return {
             ngModule: NovoElementProviders,
             providers: [].concat(NOVO_ELEMENTS_PROVIDERS)
@@ -63751,12 +63751,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
       _createClass(AppBridgeService, [{
         key: "create",
-
+        value:
         /**
          * @param {?} name
          * @return {?}
          */
-        value: function create(name) {
+        function create(name) {
           return new AppBridge(name);
         }
       }]);
@@ -63825,13 +63825,18 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
       _createClass(AppBridge, [{
-        key: "handle",
-
+        key: "tracing",
+        set: function set(tracing) {
+          this._tracing = tracing;
+        }
         /**
          * @param {?} type
          * @param {?} handler
          * @return {?}
          */
+
+      }, {
+        key: "handle",
         value: function handle(type, handler) {
           this._handlers[type] = handler;
         }
@@ -65071,11 +65076,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           }
 
           this._eventListeners[event].push(callback);
-        }
-      }, {
-        key: "tracing",
-        set: function set(tracing) {
-          this._tracing = tracing;
         }
       }]);
 
@@ -69329,12 +69329,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
       _createClass(BasicDropDownExample, [{
         key: "clickMe",
-
+        value:
         /**
          * @param {?=} event
          * @return {?}
          */
-        value: function clickMe(event) {
+        function clickMe(event) {
           window.alert(event);
         }
       }]);
@@ -69367,12 +69367,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
       _createClass(CustomDropDownExample, [{
         key: "clickMe",
-
+        value:
         /**
          * @param {?=} event
          * @return {?}
          */
-        value: function clickMe(event) {
+        function clickMe(event) {
           window.alert(event);
         }
       }]);
@@ -69448,12 +69448,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
       _createClass(MultiDropDownExample, [{
         key: "clickMe",
-
+        value:
         /**
          * @param {?} data
          * @return {?}
          */
-        value: function clickMe(data) {
+        function clickMe(data) {
           console.log('CLICKED!', data); // tslint:disable-line
         }
       }]);
@@ -69559,12 +69559,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
       _createClass(ScrollableDropDownExample, [{
         key: "clickMe",
-
+        value:
         /**
          * @param {?=} event
          * @return {?}
          */
-        value: function clickMe(event) {
+        function clickMe(event) {
           window.alert(event);
         }
       }]);
@@ -79030,12 +79030,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
       _createClass(BasicRadioExample, [{
         key: "onChange",
-
+        value:
         /**
          * @param {?} change
          * @return {?}
          */
-        value: function onChange(change) {
+        function onChange(change) {
           console.log('Radio Change:', change); // tslint:disable-line
         }
       }]);
@@ -79068,12 +79068,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
       _createClass(ButtonRadioExample, [{
         key: "onChange",
-
+        value:
         /**
          * @param {?} change
          * @return {?}
          */
-        value: function onChange(change) {
+        function onChange(change) {
           console.log('Radio Change:', change); // tslint:disable-line
         }
       }]);
@@ -79106,12 +79106,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
       _createClass(IconRadioExample, [{
         key: "onChange",
-
+        value:
         /**
          * @param {?} change
          * @return {?}
          */
-        value: function onChange(change) {
+        function onChange(change) {
           console.log('Radio Change:', change); // tslint:disable-line
         }
       }]);
@@ -79144,12 +79144,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
       _createClass(VerticalRadioExample, [{
         key: "onChange",
-
+        value:
         /**
          * @param {?} change
          * @return {?}
          */
-        value: function onChange(change) {
+        function onChange(change) {
           console.log('Radio Change:', change); // tslint:disable-line
         }
       }]);
@@ -81044,11 +81044,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
       _createClass(TabsBasicExample, [{
         key: "tabSelected",
-
+        value:
         /**
          * @return {?}
          */
-        value: function tabSelected() {
+        function tabSelected() {
           console.log('TAB SELECTED'); // tslint:disable-line
         }
         /**
@@ -81090,11 +81090,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
       _createClass(TabsColorExample, [{
         key: "tabSelected",
-
+        value:
         /**
          * @return {?}
          */
-        value: function tabSelected() {
+        function tabSelected() {
           console.log('TAB SELECTED'); // tslint:disable-line
         }
         /**
@@ -81136,11 +81136,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
       _createClass(TabsCondensedExample, [{
         key: "tabSelected",
-
+        value:
         /**
          * @return {?}
          */
-        value: function tabSelected() {
+        function tabSelected() {
           console.log('TAB SELECTED'); // tslint:disable-line
         }
         /**
@@ -81182,11 +81182,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
       _createClass(TabsRouterExample, [{
         key: "tabSelected",
-
+        value:
         /**
          * @return {?}
          */
-        value: function tabSelected() {
+        function tabSelected() {
           console.log('TAB SELECTED'); // tslint:disable-line
         }
         /**
@@ -81228,11 +81228,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
       _createClass(TabsVerticalExample, [{
         key: "tabSelected",
-
+        value:
         /**
          * @return {?}
          */
-        value: function tabSelected() {
+        function tabSelected() {
           console.log('TAB SELECTED'); // tslint:disable-line
         }
         /**
@@ -85022,11 +85022,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
       _createClass(TooltipToggleExample, [{
         key: "toggleTooltip",
-
+        value:
         /**
          * @return {?}
          */
-        value: function toggleTooltip() {
+        function toggleTooltip() {
           this.tooltipActive = !this.tooltipActive;
         }
       }]);
@@ -86450,8 +86450,17 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
       _createClass(HighlightJS, [{
-        key: "highlight",
-
+        key: "isReady",
+        get: function get() {
+          return this._isReady$.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["filter"])(
+          /**
+          * @param {?} isReady
+          * @return {?}
+          */
+          function (isReady) {
+            return isReady;
+          }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["take"])(1));
+        }
         /**
          * @param {?} name
          * @param {?} value
@@ -86459,6 +86468,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
          * @param {?=} continuation
          * @return {?}
          */
+
+      }, {
+        key: "highlight",
         value: function highlight(name, value, ignore_illegals, continuation) {
           if (typeof hljs !== 'undefined') {
             return hljs.highlight(name, value, ignore_illegals, continuation);
@@ -86614,18 +86626,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           style.href = "".concat(this.options.path, "/styles/").concat(this.options.theme, ".css");
           document.head.appendChild(style);
         }
-      }, {
-        key: "isReady",
-        get: function get() {
-          return this._isReady$.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["filter"])(
-          /**
-          * @param {?} isReady
-          * @return {?}
-          */
-          function (isReady) {
-            return isReady;
-          }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["take"])(1));
-        }
       }]);
 
       return HighlightJS;
@@ -86744,15 +86744,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
       _createClass(CodeExampleComponent, [{
-        key: "toggleSourceView",
-
-        /**
-         * @return {?}
-         */
-        value: function toggleSourceView() {
-          this.showSource = !this.showSource;
-        }
-      }, {
         key: "example",
         get: function get() {
           return this._example;
@@ -86770,6 +86761,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           } else {
             console.log('MISSING EXAMPLE: ', example);
           }
+        }
+        /**
+         * @return {?}
+         */
+
+      }, {
+        key: "toggleSourceView",
+        value: function toggleSourceView() {
+          this.showSource = !this.showSource;
         }
       }]);
 
@@ -87156,21 +87156,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
       _createClass(StackblitzButton, [{
-        key: "openStackblitz",
-
-        /**
-         * @return {?}
-         */
-        value: function openStackblitz() {
-          // When the form is submitted, it must be in the document body. The standard of forms is not
-          // to submit if it is detached from the document. See the following chromium commit for
-          // more details:
-          // https://chromium.googlesource.com/chromium/src/+/962c2a22ddc474255c776aefc7abeba00edc7470%5E!
-          document.body.appendChild(this.stackblitzForm);
-          this.stackblitzForm.submit();
-          document.body.removeChild(this.stackblitzForm);
-        }
-      }, {
         key: "example",
         set: function set(example) {
           var _this297 = this;
@@ -87191,6 +87176,21 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           } else {
             this.isDisabled = true;
           }
+        }
+        /**
+         * @return {?}
+         */
+
+      }, {
+        key: "openStackblitz",
+        value: function openStackblitz() {
+          // When the form is submitted, it must be in the document body. The standard of forms is not
+          // to submit if it is detached from the document. See the following chromium commit for
+          // more details:
+          // https://chromium.googlesource.com/chromium/src/+/962c2a22ddc474255c776aefc7abeba00edc7470%5E!
+          document.body.appendChild(this.stackblitzForm);
+          this.stackblitzForm.submit();
+          document.body.removeChild(this.stackblitzForm);
         }
       }]);
 
