@@ -418,7 +418,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
         if (!Helpers.isEmpty(value)) {
           this.templateContext.$implicit.percentValue = Number((value * 100).toFixed(6).replace(/\.?0*$/, ''));
         } else {
-          this.templateContext.$implicit.percentValue = null;
+          this.templateContext.$implicit.percentValue = undefined;
         }
       });
     }
