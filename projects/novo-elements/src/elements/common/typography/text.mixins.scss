@@ -64,7 +64,6 @@
 
 @mixin novo-body-text() {
   display: inline;
-  font-family: Roboto, sans-serif;
   font-weight: normal;
   line-height: 1.5rem;
   color: inherit;
@@ -72,7 +71,6 @@
 
 @mixin novo-title-text() {
   display: block;
-  font-family: Roboto, sans-serif;
   font-weight: 500;
   line-height: 1.2rem;
   color: $dark;
@@ -82,7 +80,6 @@
 
 @mixin novo-label-text() {
   display: inline;
-  font-family: Roboto, sans-serif;
   font-weight: 500;
   transition: 0.2s ease-out;
   text-transform: uppercase;
@@ -94,7 +91,6 @@
 
 @mixin novo-caption-text() {
   display: inline;
-  font-family: Roboto, sans-serif;
   font-size: 0.8rem;
   font-weight: 400;
   line-height: 1.2rem;
