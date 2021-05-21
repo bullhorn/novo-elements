@@ -2,6 +2,39 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.6.1](https://github.com/bullhorn/novo-elements/compare/v4.6.0...v4.6.1) (2021-05-06)
+
+## [4.6.0](https://github.com/bullhorn/novo-elements/compare/v4.5.0...v4.6.0) (2021-05-06)
+
+
+### Features
+
+* **Field Interactions:** Adding isInvokedOnInit to identify to field interactions whether the operation is happening on init or not ([#1176](https://github.com/bullhorn/novo-elements/issues/1176)) ([649f1be](https://github.com/bullhorn/novo-elements/commit/649f1beed6efc63db18bca5755c83ebf9fee3339))
+* **Forms:** Enabling nested form field interactions ([#1175](https://github.com/bullhorn/novo-elements/issues/1175)) ([c317249](https://github.com/bullhorn/novo-elements/commit/c3172496b4aeaa21cf6cd7c8e167e3d507902aa4))
+
+## [4.5.0](https://github.com/bullhorn/novo-elements/compare/v4.4.4...v4.5.0) (2021-04-07)
+
+
+### Features
+
+* **DatePickerInput:** moving change event emit from handleBlur to dispatchOnChange ([#1162](https://github.com/bullhorn/novo-elements/issues/1162)) ([72472e3](https://github.com/bullhorn/novo-elements/commit/72472e376455508ff705aef5d802b59dd206a37d))
+* **Forms:** REVERT - Support for nested form field interactions ([#1159](https://github.com/bullhorn/novo-elements/issues/1159))" - migrating these changes from the .4 release to the .5 release ([#1174](https://github.com/bullhorn/novo-elements/issues/1174)) ([a91200e](https://github.com/bullhorn/novo-elements/commit/a91200e2cc63a7e8073545afde66247859499295))
+* **Forms:** Support for nested form field interactions ([#1159](https://github.com/bullhorn/novo-elements/issues/1159)) ([f0c391e](https://github.com/bullhorn/novo-elements/commit/f0c391e49c149d1fa70ead2ab79550e2c4d7c924))
+
+
+### Bug Fixes
+
+* **Select:** fixing logic around specialized lookup options ([#1165](https://github.com/bullhorn/novo-elements/issues/1165)) ([ec77415](https://github.com/bullhorn/novo-elements/commit/ec774151802ecde6d227668dd76539af66e4ac8b))
+
+### [4.4.4](https://github.com/bullhorn/novo-elements/compare/v4.4.3...v4.4.4) (2021-03-11)
+
+### [4.4.3](https://github.com/bullhorn/novo-elements/compare/v4.4.2...v4.4.3) (2021-02-10)
+
+
+### Bug Fixes
+
+* **i18n:** Non-English support for dropdown searching ([390133e](https://github.com/bullhorn/novo-elements/commit/390133e387287926a4ccc763bb1d614a1a43f20c))
+
 ### [4.4.2](https://github.com/bullhorn/novo-elements/compare/v4.4.0...v4.4.2) (2020-12-09)
 
 ## [4.4.0](https://github.com/bullhorn/novo-elements/compare/v4.3.10...v4.4.0) (2020-12-09)

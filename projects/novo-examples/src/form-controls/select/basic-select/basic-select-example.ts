@@ -18,6 +18,7 @@ export class BasicSelectExample {
     { label: 'Four', value: 4, readOnly: true },
   ];
   public withNumbersValue: number = 4;
+  public withNumbersObject: any = { id: 4, label: 'Four' };
   public value: string = 'Bravo';
   public headerConfig: any = {
     label: 'Add New Item',
