@@ -1,11 +1,5 @@
 name: Release Novo Elements
-on:
-  workflow_dispatch:
-    inputs:
-      type:
-        description: 'Update Type (major, minor, patch)'
-        required: true
-        default: 'patch'
+on: [workflow_dispatch]
 
 jobs:
   build:
@@ -26,21 +20,6 @@ jobs:
           npm ci
       - name: Update Version Number
         run: |
-          npm version ${{ github.event.inputs.type }}
-          cd projects/novo-elements
-          npm version ${{ github.event.inputs.type }}
-          cd ../..
-      - name: Commit & Push Token
-        uses: actions-js/push@v1.2
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          tags: true
-      - name: Build
-        run: |
-          npm run build
-      - name: Publish
-        run: |
-          cd dist/novo-elements
-          npm publish
+          npm run release:elements
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
