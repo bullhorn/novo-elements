@@ -39,6 +39,8 @@ jobs:
         run: |
           npm run build
       - name: Publish
-        run: npm publish
+        run: |
+          cd dist/novo-elements
+          npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
