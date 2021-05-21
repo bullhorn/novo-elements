@@ -2,10 +2,10 @@ name: Release Novo Elements
 on:
   workflow_dispatch:
     inputs:
-    type:
-      description: 'Update Type (patch, major, minor)'
-      required: true
-      default: 'patch'
+      type:
+        description: 'Update Type (major, minor, patch)'
+        required: true
+        default: 'patch'
 
 jobs:
   build:
