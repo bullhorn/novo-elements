@@ -20,6 +20,33 @@ export enum AppBridgeHandler {
 // preview      - the preview slideout available only in Novo
 export type NovoApps = 'record' | 'add' | 'fast-add' | 'custom' | 'preview';
 
+export type AlleyLinkColors =
+  | 'purple'
+  | 'green'
+  | 'blue'
+  | 'lead'
+  | 'candidate'
+  | 'contact'
+  | 'company'
+  | 'opportunity'
+  | 'job'
+  | 'billable-charge'
+  | 'earn-code'
+  | 'invoice-statement'
+  | 'job-code'
+  | 'payable-charge'
+  | 'sales-tax-rate'
+  | 'tax-rules'
+  | 'submission'
+  | 'placement'
+  | 'navigation'
+  | 'canvas'
+  | 'neutral'
+  | 'neutral-italic'
+  | 'initial'
+  | 'distributionList'
+  | 'contract';
+
 export interface IAppBridgeOpenEvent {
   type: NovoApps;
   entityType: string;
@@ -312,7 +339,7 @@ export class AppBridge {
    * @param packet any - packet of data to send with the close event
    */
   public update(
-    packet: Partial<{ entityType: string; entityId: string; title: string; titleKey: string; color: string }>,
+    packet: Partial<{ entityType: string; entityId: string; title: string; titleKey: string; color: AlleyLinkColors }>,
   ): Promise<boolean> {
     return new Promise<boolean>((resolve, reject) => {
       if (this._handlers[AppBridgeHandler.UPDATE]) {
@@ -517,7 +544,7 @@ export class AppBridge {
    * Fires or responds to an register event
    * @param packet any - packet of data to send with the event
    */
-  public register(packet: Partial<{ title: string; url: string; color: string }> = {}): Promise<string> {
+  public register(packet: Partial<{ title: string; url: string; color: AlleyLinkColors }> = {}): Promise<string> {
     return new Promise<string>((resolve, reject) => {
       if (this._handlers[AppBridgeHandler.REGISTER]) {
         this._handlers[AppBridgeHandler.REGISTER](packet, (windowName: string) => {
