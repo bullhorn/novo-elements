@@ -89,6 +89,7 @@ import { NovoDataTableClearButton } from './data-table-clear-button.component';
     DateTableTimeRendererPipe,
     DataTableBigDecimalRendererPipe,
     NovoDataTableClearButton,
+    NovoDataTableSortFilter,
   ],
 })
 export class NovoDataTableModule {}
