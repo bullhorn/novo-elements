@@ -260,7 +260,7 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   @HostBinding('class.global-search-hidden') globalSearchHiddenClassToggle: boolean = false;
 
   @ContentChildren(NovoTemplate) customTemplates: QueryList<NovoTemplate>;
-  @ContentChild(NovoDataTableSortFilter) sortFilterDirective: NovoDataTableSortFilter<T>;
+  @ContentChild(NovoDataTableSortFilter, { static: false }) sortFilterDirective: NovoDataTableSortFilter<T>;
   @ViewChildren(NovoTemplate) defaultTemplates: QueryList<NovoTemplate>;
   @ViewChildren(NovoDataTableCellHeader) cellHeaders: QueryList<NovoDataTableCellHeader<T>>;
   @ViewChild('novoDataTableContainer', { static: false }) novoDataTableContainer: ElementRef;
