@@ -647,7 +647,6 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
     this.sortFilterDirective.sort(id, value, transform);
   }
 
-
   private configureLastDisplayedColumn(): void {
     if (this.columns && this.displayedColumns && 0 !== this.columns.length && 0 !== this.displayedColumns.length) {
       this.columns.forEach((column: IDataTableColumn<T>) => {
