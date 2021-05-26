@@ -17,6 +17,7 @@ import {
   TemplateRef,
   ViewChild,
   ViewChildren,
+  forwardRef
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { NovoLabelService } from '../../services/novo-label-service';
@@ -260,7 +261,7 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   @HostBinding('class.global-search-hidden') globalSearchHiddenClassToggle: boolean = false;
 
   @ContentChildren(NovoTemplate) customTemplates: QueryList<NovoTemplate>;
-  @ContentChild(NovoDataTableSortFilter, { static: false }) sortFilterDirective: NovoDataTableSortFilter<T>;
+  @ContentChild(forwardRef(() => NovoDataTableSortFilter), { static: false }) sortFilterDirective: NovoDataTableSortFilter<T>;
   @ViewChildren(NovoTemplate) defaultTemplates: QueryList<NovoTemplate>;
   @ViewChildren(NovoDataTableCellHeader) cellHeaders: QueryList<NovoDataTableCellHeader<T>>;
   @ViewChild('novoDataTableContainer', { static: false }) novoDataTableContainer: ElementRef;
