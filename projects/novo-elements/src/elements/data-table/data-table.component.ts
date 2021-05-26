@@ -261,10 +261,10 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   @HostBinding('class.global-search-hidden') globalSearchHiddenClassToggle: boolean = false;
 
   @ContentChildren(NovoTemplate) customTemplates: QueryList<NovoTemplate>;
-  @ContentChild(forwardRef(() => NovoDataTableSortFilter), { static: false }) sortFilterDirective: NovoDataTableSortFilter<T>;
   @ViewChildren(NovoTemplate) defaultTemplates: QueryList<NovoTemplate>;
   @ViewChildren(NovoDataTableCellHeader) cellHeaders: QueryList<NovoDataTableCellHeader<T>>;
   @ViewChild('novoDataTableContainer', { static: false }) novoDataTableContainer: ElementRef;
+  @ViewChild(forwardRef(() => NovoDataTableSortFilter), { static: false }) sortFilterDirective: NovoDataTableSortFilter<T>;
   @Output() resized: EventEmitter<IDataTableColumn<T>> = new EventEmitter();
 
   @Input()
@@ -642,6 +642,11 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
     ): void {
     this.sortFilterDirective.filter(id, type, value, transform, allowMultipleFilters, selectedOption);
   }
+
+  public sort(id: string, value: string, transform: Function): void {
+    this.sortFilterDirective.sort(id, value, transform);
+  }
+
 
   private configureLastDisplayedColumn(): void {
     if (this.columns && this.displayedColumns && 0 !== this.columns.length && 0 !== this.displayedColumns.length) {
