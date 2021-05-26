@@ -5,6 +5,7 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  ContentChild,
   ContentChildren,
   ElementRef,
   EventEmitter,
@@ -35,6 +36,7 @@ import { StaticDataTableService } from './services/static-data-table.service';
 import { DataTableState } from './state/data-table-state.service';
 import { NovoDataTableCellHeader } from './cell-headers/data-table-header-cell.component';
 import { ListInteractionDictionary, ListInteractionEvent } from './ListInteractionTypes';
+import { NovoDataTableSortFilter } from './sort-filter/sort-filter.directive';
 
 @Component({
   selector: 'novo-data-table',
@@ -258,6 +260,7 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   @HostBinding('class.global-search-hidden') globalSearchHiddenClassToggle: boolean = false;
 
   @ContentChildren(NovoTemplate) customTemplates: QueryList<NovoTemplate>;
+  @ContentChild(NovoDataTableSortFilter) sortFilterDirective: NovoDataTableSortFilter<T>;
   @ViewChildren(NovoTemplate) defaultTemplates: QueryList<NovoTemplate>;
   @ViewChildren(NovoDataTableCellHeader) cellHeaders: QueryList<NovoDataTableCellHeader<T>>;
   @ViewChild('novoDataTableContainer', { static: false }) novoDataTableContainer: ElementRef;
@@ -626,6 +629,17 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
       }
     }
     return true;
+  }
+
+  public filter(
+    id: string,
+    type: string,
+    value: any,
+    transform: Function,
+    allowMultipleFilters: boolean = false,
+    selectedOption?: Object,
+    ): void {
+    this.sortFilterDirective.filter(id, type, value, transform, allowMultipleFilters, selectedOption);
   }
 
   private configureLastDisplayedColumn(): void {
