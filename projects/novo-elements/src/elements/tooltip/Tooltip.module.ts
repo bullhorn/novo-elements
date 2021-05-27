@@ -8,6 +8,6 @@ import { NovoTooltip } from './Tooltip.component';
 @NgModule({
   imports: [CommonModule],
   declarations: [TooltipDirective, NovoTooltip],
-  exports: [TooltipDirective, NovoTooltip],
+  exports: [TooltipDirective],
 })
 export class NovoTooltipModule { }

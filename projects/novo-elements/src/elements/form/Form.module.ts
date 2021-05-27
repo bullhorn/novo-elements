@@ -77,8 +77,6 @@ import { NovoCommonModule } from '../common/common.module';
     NovoFieldsetHeaderElement,
     NovoControlGroup,
     NovoControlTemplates,
-    ControlConfirmModal,
-    ControlPromptModal,
   ],
   providers: [NovoTemplateService],
 })

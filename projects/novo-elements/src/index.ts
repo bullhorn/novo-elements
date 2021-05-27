@@ -119,7 +119,6 @@ export { NovoFileInputElement } from './elements/form/extras/file/FileInput';
 export { NovoFormExtrasModule } from './elements/form/extras/FormExtras.module';
 export { FieldInteractionApi } from './elements/form/FieldInteractionApi';
 export { ModifyPickerConfigArgs } from './elements/form/FieldInteractionApiTypes';
-export { ControlConfirmModal, ControlPromptModal } from './elements/form/FieldInteractionModals';
 export { NovoFormElement } from './elements/form/Form';
 export { NovoFormModule } from './elements/form/Form.module';
 export { FormField, IFieldInteractionEvent, NovoFieldset } from './elements/form/FormInterfaces';
@@ -149,7 +148,7 @@ export {
   NovoSpinnerElement,
 } from './elements/loading/Loading';
 export { NovoLoadingModule } from './elements/loading/Loading.module';
-export { NovoModalElement, NovoModalNotificationElement, NovoModalParams, NovoModalRef, NovoModalContainerElement } from './elements/modal/Modal';
+export { NovoModalElement, NovoModalNotificationElement, NovoModalParams, NovoModalRef } from './elements/modal/Modal';
 export { NovoModalModule } from './elements/modal/Modal.module';
 export { NovoModalService } from './elements/modal/ModalService';
 export { NovoMultiPickerElement } from './elements/multi-picker/MultiPicker';
@@ -285,7 +284,6 @@ export { NovoToastModule } from './elements/toast/Toast.module';
 export { NovoToastService, ToastOptions } from './elements/toast/ToastService';
 export { TooltipDirective } from './elements/tooltip/Tooltip.directive';
 export { NovoTooltipModule } from './elements/tooltip/Tooltip.module';
-export { NovoTooltip } from './elements/tooltip/Tooltip.component';
 export { Unless } from './elements/unless/Unless';
 export { UnlessModule } from './elements/unless/Unless.module';
 export { EntityList } from './elements/value/EntityList';

@@ -8,6 +8,6 @@ import { NovoModalContainerElement, NovoModalElement, NovoModalNotificationEleme
 @NgModule({
   imports: [CommonModule, NovoButtonModule],
   declarations: [NovoModalContainerElement, NovoModalElement, NovoModalNotificationElement],
-  exports: [NovoModalContainerElement, NovoModalElement, NovoModalNotificationElement],
+  exports: [NovoModalElement, NovoModalNotificationElement],
 })
 export class NovoModalModule { }

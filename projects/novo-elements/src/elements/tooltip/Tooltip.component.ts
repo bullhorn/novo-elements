@@ -4,7 +4,7 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
 
 @Component({
   selector: 'novo-tooltip',
-  templateUrl: './Tooltip.html',
+  templateUrl: 'Tooltip.html',
   styleUrls: ['./Tooltip.scss'],
   animations: [
     trigger('state', [
