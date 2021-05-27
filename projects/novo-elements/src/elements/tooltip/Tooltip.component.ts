@@ -7,7 +7,6 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
   template: `
     <div [@state]="noAnimate ? 'no-animation' : 'visible'"
          [ngClass]="[tooltipType, this.rounded ? 'rounded' : '', size ? size : '', this.preline? 'preline' : '', position]">{{message}}</div>`,
-  styleUrls: ['./Tooltip.scss'],
   animations: [
     trigger('state', [
       state('initial, void, hidden', style({ opacity: '0' })),
