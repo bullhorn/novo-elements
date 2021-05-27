@@ -169,10 +169,18 @@ export class NovoTimePickerInputElement implements OnInit, ControlValueAccessor 
   /** END: Convenient Panel Methods. */
 
   _handleKeydown(event: KeyboardEvent): void {
+    const input = event.target as HTMLInputElement;
+    let inputArr = input.value.split('');
     if ((event.key === Key.Escape || event.key === Key.Enter || event.key === Key.Tab) && this.panelOpen) {
       this.closePanel();
       event.stopPropagation();
       event.stopImmediatePropagation();
+    }
+
+    if (event.key === Key.Backspace && input.selectionStart === input.value.length) {
+      inputArr[inputArr.length - 2] = 'x';
+      inputArr[inputArr.length - 1] = 'x';
+      (event.target as HTMLInputElement).value = inputArr.join('');
     }
   }
 
@@ -184,11 +192,45 @@ export class NovoTimePickerInputElement implements OnInit, ControlValueAccessor 
         event.preventDefault();
         (event.target as HTMLInputElement).value = `0${text}`;
       }
+      if (!this.military) {
+        let inputArr = text.split('');
+        const timeValue = this.maskOptions.blocks.aa.enum.find((element) => {
+          for (let i = 1; i < 5; i++) {
+            if (element[0] === text[text.length - i]) {
+              return true;
+            }
+          }
+        });
+        if (timeValue) {
+          inputArr[inputArr.length - 2] = timeValue[0];
+          inputArr[inputArr.length - 1] = timeValue[1];
+          (event.target as HTMLInputElement).value = inputArr.join('');
+        }
+      }
     }
   }
 
   _handleBlur(event: FocusEvent): void {
-    this.blurEvent.emit(event);
+    const text = (event.target as HTMLInputElement).value;
+    if (!this.military) {
+      let inputArr = text.split('');
+      const timeValue = this.maskOptions.blocks.aa.enum.find((element) => {
+        for (let i = 1; i < 3; i++) {
+          if (element[0] === text[text.length - i]) {
+            return true;
+          }
+        }
+      });
+      if (timeValue) {
+        inputArr[inputArr.length - 2] = timeValue[0];
+        inputArr[inputArr.length - 1] = timeValue[1];
+        (event.target as HTMLInputElement).value = inputArr.join('');
+      } else {
+        inputArr[inputArr.length - 2] = '';
+        inputArr[inputArr.length - 1] = '';
+        (event.target as HTMLInputElement).value = inputArr.join('');
+      }
+    }
   }
 
   _handleFocus(event: FocusEvent): void {
