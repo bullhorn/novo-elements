@@ -204,6 +204,10 @@ export class NovoTimePickerInputElement implements OnInit, ControlValueAccessor 
         if (timeValue) {
           inputArr[inputArr.length - 2] = timeValue[0];
           inputArr[inputArr.length - 1] = timeValue[1];
+          const trailingX = inputArr.indexOf('x');
+          if (trailingX > -1) {
+            inputArr.splice(trailingX, 1);
+          }
           (event.target as HTMLInputElement).value = inputArr.join('');
         }
       }
@@ -221,11 +225,7 @@ export class NovoTimePickerInputElement implements OnInit, ControlValueAccessor 
           }
         }
       });
-      if (timeValue) {
-        inputArr[inputArr.length - 2] = timeValue[0];
-        inputArr[inputArr.length - 1] = timeValue[1];
-        (event.target as HTMLInputElement).value = inputArr.join('');
-      } else {
+      if (!timeValue) {
         inputArr[inputArr.length - 2] = '';
         inputArr[inputArr.length - 1] = '';
         (event.target as HTMLInputElement).value = inputArr.join('');
