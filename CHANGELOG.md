@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.7.0](https://github.com/bullhorn/novo-elements/compare/v4.6.1...v4.7.0) (2021-06-02)
+
+
+### Features
+
+* **AppBridge:** Type the supported colors for  AppBridge registration and update ([#1152](https://github.com/bullhorn/novo-elements/issues/1152)) ([f2cca31](https://github.com/bullhorn/novo-elements/commit/f2cca315b2016c8c4fa2418464c438002f251a60))
+
+
+### Bug Fixes
+
+* **Control:** bug with dot and minus symbols on percentage fields ([#1181](https://github.com/bullhorn/novo-elements/issues/1181)) ([be12f60](https://github.com/bullhorn/novo-elements/commit/be12f604687898e0b7fc28737a044aa664967f04))
+
 ### [4.6.1](https://github.com/bullhorn/novo-elements/compare/v4.6.0...v4.6.1) (2021-05-06)
 
 ## [4.6.0](https://github.com/bullhorn/novo-elements/compare/v4.5.0...v4.6.0) (2021-05-06)
