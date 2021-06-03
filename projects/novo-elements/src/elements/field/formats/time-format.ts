@@ -9,12 +9,15 @@ import {
   Input,
   Optional,
   Renderer2,
+  ViewChild,
 } from '@angular/core';
 import { COMPOSITION_BUFFER_MODE, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { IMaskDirective, IMaskFactory } from 'angular-imask';
 import { format, isValid, parse } from 'date-fns';
 import * as IMask from 'imask';
 import { NovoLabelService } from '../../../services/novo-label-service';
+import { Key } from '../../../utils';
+import { NovoOverlayTemplateComponent } from '../../common/overlay';
 import { NovoInputFormat, NOVO_INPUT_FORMAT } from './base-format';
 
 export const TIMEFORMAT_VALUE_ACCESSOR = {
@@ -34,6 +37,8 @@ export enum TIME_FORMATS {
   host: {
     class: 'novo-time-format',
     '(input)': '_checkInput($event)',
+    '(blur)': '_handleBlur($event)',
+    '(keydown)': '_handleKeydown($event)',
   },
   providers: [TIMEFORMAT_VALUE_ACCESSOR, { provide: NOVO_INPUT_FORMAT, useExisting: NovoTimeFormatDirective }],
 })
@@ -42,6 +47,8 @@ export class NovoTimeFormatDirective extends IMaskDirective<any> implements Novo
 
   @Input() military: boolean = false;
   @Input() timeFormat: TIME_FORMATS = TIME_FORMATS.DATE;
+  @ViewChild(NovoOverlayTemplateComponent)
+  overlay: NovoOverlayTemplateComponent;
 
   constructor(
     private _element: ElementRef,
@@ -111,7 +118,46 @@ export class NovoTimeFormatDirective extends IMaskDirective<any> implements Novo
         (event.target as HTMLInputElement).value = value;
         // this.onChange(value);
       }
+      if (!this.military) {
+        const test = text.substr(5, 4).replace(/x/g, '').trim().slice(0, 2);
+        const timePeriod = this.imask.blocks.aa.enum.find((it) => it[0] === test[0]);
+        if (timePeriod) {
+          (event.target as HTMLInputElement).value = `${text.slice(0, 5)} ${timePeriod}`;
+        }
+      }
     }
+  }
+
+  _handleBlur(event: FocusEvent): void {
+    const text = (event.target as HTMLInputElement).value;
+    if (!this.military) {
+      const test = text.substr(5, 4).replace(/x/g, '').trim().slice(0, 2);
+      const timePeriod = this.imask.blocks.aa.enum.find((it) => it[0] === test[0]);
+      if (!timePeriod) {
+        (event.target as HTMLInputElement).value = `${text.slice(0, 5)} xx`;
+      }
+    }
+  }
+
+  _handleKeydown(event: KeyboardEvent): void {
+    const input = event.target as HTMLInputElement;
+    if ((event.key === Key.Escape || event.key === Key.Enter || event.key === Key.Tab) && this.panelOpen) {
+      this.closePanel();
+      event.stopPropagation();
+      event.stopImmediatePropagation();
+    }
+
+    if (event.key === Key.Backspace && input.selectionStart === input.value.length) {
+      (event.target as HTMLInputElement).value = `${input.value.slice(0, 5)} xx`;
+    }
+  }
+
+  closePanel(): void {
+    this.overlay.closePanel();
+  }
+
+  get panelOpen(): boolean {
+    return this.overlay && this.overlay.panelOpen;
   }
 
   normalize(value: string) {
