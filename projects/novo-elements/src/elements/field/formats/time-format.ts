@@ -115,8 +115,8 @@ export class NovoTimeFormatDirective extends IMaskDirective<any> implements Novo
         // this.onChange(value);
       }
       if (!this.military) {
-        const test = text.substr(5, 4).replace(/\-/g, '').trim().slice(0, 2);
-        const timePeriod = this.imask.blocks.aa.enum.find((it) => it[0] === test[0]);
+        const input = text.substr(5, 4).replace(/\-/g, '').trim().slice(0, 2);
+        const timePeriod = this.imask.blocks.aa.enum.find((it) => it[0] === input[0]);
         if (timePeriod) {
           (event.target as HTMLInputElement).value = `${text.slice(0, 5)} ${timePeriod}`;
         }
@@ -127,8 +127,8 @@ export class NovoTimeFormatDirective extends IMaskDirective<any> implements Novo
   _handleBlur(event: FocusEvent): void {
     const text = (event.target as HTMLInputElement).value;
     if (!this.military) {
-      const test = text.substr(5, 4).replace(/\-/g, '').trim().slice(0, 2);
-      const timePeriod = this.imask.blocks.aa.enum.find((it) => it[0] === test[0]);
+      const input = text.substr(5, 4).replace(/\-/g, '').trim().slice(0, 2);
+      const timePeriod = this.imask.blocks.aa.enum.find((it) => it[0] === input[0]);
       if (!timePeriod) {
         (event.target as HTMLInputElement).value = `${text.slice(0, 5)} --`;
       }
