@@ -415,10 +415,10 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
         );
       }
       this.percentChangeSubscription = this.form.controls[this.control.key].displayValueChanges.subscribe((value) => {
-        if (!Helpers.isEmpty(value)) {
+        if (!Helpers.isEmpty(value) && !isNaN(value)) {
           this.templateContext.$implicit.percentValue = Number((value * 100).toFixed(6).replace(/\.?0*$/, ''));
-        } else {
-          this.templateContext.$implicit.percentValue = null;
+        } else if (Helpers.isEmpty(value)) {
+          this.templateContext.$implicit.percentValue = undefined;
         }
       });
     }
@@ -663,8 +663,8 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
   }
 
   handlePercentChange(event: KeyboardEvent) {
-    const value = event.target['value'];
-    const percent = Helpers.isEmpty(value) ? null : Number((value / 100).toFixed(6).replace(/\.?0*$/, ''));
+    const value = event.target['value'] || event['data'];
+    const percent = (Helpers.isEmpty(value) || isNaN(value)) ? value : Number((value / 100).toFixed(6).replace(/\.?0*$/, ''));
     if (!Helpers.isEmpty(percent)) {
       this.change.emit(percent);
       this.form.controls[this.control.key].setValue(percent);
