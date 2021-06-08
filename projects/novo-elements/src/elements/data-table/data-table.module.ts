@@ -4,9 +4,11 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NovoButtonModule } from '../button/Button.module';
 import { NovoCommonModule } from '../common/common.module';
+import { NovoOptionModule } from '../common/option';
 import { NovoDatePickerModule } from '../date-picker/DatePicker.module';
 import { NovoDropdownModule } from '../dropdown/Dropdown.module';
 import { NovoFormExtrasModule } from '../form/extras/FormExtras.module';
+import { NovoIconModule } from '../icon/Icon.module';
 import { NovoLoadingModule } from '../loading/Loading.module';
 import { NovoSearchBoxModule } from '../search/SearchBox.module';
 import { NovoSelectModule } from '../select/Select.module';
@@ -34,6 +36,7 @@ import {
 import { NovoDataTablePagination } from './pagination/data-table-pagination.component';
 import { NovoDataTableHeaderRow } from './rows/data-table-header-row.component';
 import { NovoDataTableRow } from './rows/data-table-row.component';
+import { NovoDataTableSortButton } from './sort-filter/sort-button.component';
 import { NovoDataTableSortFilter } from './sort-filter/sort-filter.directive';
 import { DataTableState } from './state/data-table-state.service';
 
@@ -43,6 +46,7 @@ import { DataTableState } from './state/data-table-state.service';
     CdkTableModule,
     CommonModule,
     FormsModule,
+    NovoIconModule,
     NovoButtonModule,
     NovoDropdownModule,
     NovoFormExtrasModule,
@@ -52,6 +56,7 @@ import { DataTableState } from './state/data-table-state.service';
     NovoCommonModule,
     NovoSelectModule,
     NovoTooltipModule,
+    NovoOptionModule,
   ],
   declarations: [
     DataTableInterpolatePipe,
@@ -75,6 +80,7 @@ import { DataTableState } from './state/data-table-state.service';
     NovoDataTable,
     NovoDataTableExpandDirective,
     NovoDataTableClearButton,
+    NovoDataTableSortButton,
   ],
   providers: [DataTableState],
   exports: [
@@ -87,6 +93,7 @@ import { DataTableState } from './state/data-table-state.service';
     DateTableTimeRendererPipe,
     DataTableBigDecimalRendererPipe,
     NovoDataTableClearButton,
+    NovoDataTableSortButton,
   ],
 })
 export class NovoDataTableModule {}

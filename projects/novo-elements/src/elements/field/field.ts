@@ -15,37 +15,50 @@ import {
   ViewChild,
 } from '@angular/core';
 import { NgControl } from '@angular/forms';
-import { Subject } from 'rxjs';
+import { fromEvent, Subject, Subscription } from 'rxjs';
 import { startWith, takeUntil } from 'rxjs/operators';
+import { NovoLabel } from '../common';
 import { NovoErrorElement } from './error/error';
 import { NovoFieldControl } from './field-control';
 import { NovoHintElement } from './hint/hint';
-import { NovoLabelElement } from './label/label';
 
 @Directive({ selector: '[novoPrefix]' })
 export class NovoFieldPrefixDirective {}
 @Directive({ selector: '[novoSuffix]' })
 export class NovoFieldSuffixDirective {}
 
-const NOVO_INPUT_UNDERLINED_TYPES = ['text', 'date', 'time', 'datetime-local', 'password', 'email', 'tel', 'select', 'textarea', 'number'];
+const NOVO_INPUT_UNDERLINED_TYPES = [
+  'text',
+  'date',
+  'time',
+  'datetime-local',
+  'password',
+  'email',
+  'tel',
+  'select',
+  'textarea',
+  'number',
+  'novo-chip-list',
+];
 export const NOVO_FORM_FIELD = new InjectionToken<NovoFieldElement>('NovoFormField');
 
 @Component({
   selector: 'novo-field',
   templateUrl: './field.html',
-  styleUrls: ['./field.scss'],
+  styleUrls: ['./field.scss', './field-standard.scss', './field-fill.scss', './field-outline.scss', './field-list.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     class: 'novo-field',
-    '[class.novo-field-appearance-horizontal]': 'appearance=="horizontal"',
-    '[class.novo-field-appearance-vertical]': 'appearance=="vertical"',
-    // '[class.novo-field-appearance-standard]': 'appearance == "standard"',
-    // '[class.novo-field-appearance-fill]': 'appearance == "fill"',
-    // '[class.novo-field-appearance-outline]': 'appearance == "outline"',
-    // '[class.novo-field-appearance-legacy]': 'appearance == "legacy"',
+    '[class.novo-field-layout-horizontal]': 'layout=="horizontal"',
+    '[class.novo-field-layout-vertical]': 'layout=="vertical"',
+    '[class.novo-field-appearance-standard]': 'appearance == "standard"',
+    '[class.novo-field-appearance-fill]': 'appearance == "fill"',
+    '[class.novo-field-appearance-outline]': 'appearance == "outline"',
+    '[class.novo-field-appearance-list]': 'appearance == "list"',
     '[class.novo-field-appearance-underlined]': '_isUnderlinedInput()',
     '[class.novo-field-invalid]': '_control.errorState',
     '[class.novo-field-has-label]': '_hasLabel()',
+    '[class.novo-field-no-label]': '!_hasLabel()',
     // '[class.novo-field-hide-placeholder]': '_hideControlPlaceholder()',
     '[class.novo-field-disabled]': '_control.disabled',
     '[class.novo-field-autofilled]': '_control.autofilled',
@@ -63,11 +76,13 @@ export const NOVO_FORM_FIELD = new InjectionToken<NovoFieldElement>('NovoFormFie
   providers: [{ provide: NOVO_FORM_FIELD, useExisting: NovoFieldElement }],
 })
 export class NovoFieldElement implements AfterContentInit, OnDestroy {
+  private _labelClicks = Subscription.EMPTY;
+
   // @ViewChild('connectionContainer') _connectionContainerRef: ElementRef;
   @ViewChild('inputContainer') _inputContainerRef: ElementRef;
   // @ViewChild('label') private _label: ElementRef<HTMLElement>;
 
-  @ContentChild(NovoLabelElement) _labelElement: NovoLabelElement;
+  @ContentChild(NovoLabel) _labelElement: NovoLabel;
   @ContentChildren(NovoHintElement) _hintElements: QueryList<NovoHintElement>;
   @ContentChildren(NovoErrorElement) _errorElements: QueryList<NovoErrorElement>;
   @ContentChildren(NovoFieldPrefixDirective) _prefixElements: QueryList<NovoFieldPrefixDirective>;
@@ -75,7 +90,8 @@ export class NovoFieldElement implements AfterContentInit, OnDestroy {
 
   @ContentChild(NovoFieldControl) _control: NovoFieldControl<any>;
 
-  @Input() appearance: 'horizontal' | 'vertical' = 'vertical';
+  @Input() layout: 'horizontal' | 'vertical' = 'vertical';
+  @Input() appearance: 'standard' | 'outline' | 'fill' | 'list' = 'standard';
 
   @Input()
   width: string;
@@ -90,6 +106,7 @@ export class NovoFieldElement implements AfterContentInit, OnDestroy {
   getConnectedOverlayOrigin(): ElementRef {
     return this._inputContainerRef || this._elementRef;
   }
+
   ngAfterContentInit(): any {
     this._validateControlChild();
 
@@ -109,11 +126,16 @@ export class NovoFieldElement implements AfterContentInit, OnDestroy {
     if (control.ngControl && control.ngControl.valueChanges) {
       control.ngControl.valueChanges.pipe(takeUntil(this._destroyed)).subscribe(() => this._changeDetectorRef.markForCheck());
     }
+
+    if (this._hasLabel()) {
+      this._labelClicks = fromEvent(this._labelElement.nativeElement, 'click').subscribe(() => this._control.focus());
+    }
   }
 
   ngOnDestroy() {
     this._destroyed.next();
     this._destroyed.complete();
+    this._labelClicks.unsubscribe();
   }
 
   /** Throws an error if the form field's control is missing. */

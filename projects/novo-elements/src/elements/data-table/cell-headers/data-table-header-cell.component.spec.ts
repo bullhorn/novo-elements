@@ -11,7 +11,7 @@ import {
   NovoLabelService,
   NovoTooltipModule,
 } from '../../..';
-import { KeyCodes } from '../../../utils/key-codes/KeyCodes';
+import { Key } from '../../../utils';
 import { DataTableState } from '../state/data-table-state.service';
 import { NovoDataTableCellHeader } from './data-table-header-cell.component';
 
@@ -255,7 +255,7 @@ xdescribe('Elements: NovoDataTableCellHeader', () => {
         component.multiSelect = true;
       });
       it('should clear filter text and close dropdown on ESC', () => {
-        const event = { keyCode: KeyCodes.ESC, stopPropagation: () => {}, preventDefault: () => {} };
+        const event = { key: Key.Escape, stopPropagation: () => {}, preventDefault: () => {} };
         spyOn(component.dropdown, 'closePanel');
         spyOn(component, 'clearOptionFilter');
         component.multiSelectOptionFilterHandleKeydown(event);
@@ -264,7 +264,7 @@ xdescribe('Elements: NovoDataTableCellHeader', () => {
       });
 
       it('should attempt to filter on ENTER', () => {
-        const event = { keyCode: KeyCodes.ENTER, stopPropagation: () => {}, preventDefault: () => {} };
+        const event = { key: Key.Enter, stopPropagation: () => {}, preventDefault: () => {} };
         spyOn(component, 'filterMultiSelect');
         component.multiSelectOptionFilterHandleKeydown(event);
         expect(component.filterMultiSelect).toHaveBeenCalled();

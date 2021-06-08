@@ -1,6 +1,7 @@
 // NG2
 import { fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
+import { Key } from '../../utils';
 import { ComponentUtils } from '../../utils/component-utils/ComponentUtils';
 import { KeyCodes } from '../../utils/key-codes/KeyCodes';
 // App
@@ -317,8 +318,8 @@ describe('Elements: QuickNoteElement', () => {
         references: {},
       });
 
-      fakeCkEditorInstance.keyEnteredByUser('DownArrow', KeyCodes.DOWN);
-      fakeCkEditorInstance.keyEnteredByUser('Enter', KeyCodes.ENTER);
+      fakeCkEditorInstance.keyEnteredByUser(Key.ArrowDown, KeyCodes.DOWN);
+      fakeCkEditorInstance.keyEnteredByUser(Key.Enter, KeyCodes.ENTER);
 
       expect(fakeParentForm.getValue()).toEqual({
         note: 'Note about: <a href="http://www.bullhorn.com">@John Bullhorn</a> ',
@@ -345,8 +346,8 @@ describe('Elements: QuickNoteElement', () => {
       fakeCkEditorInstance.keyEnteredByUser('h');
       fakeCkEditorInstance.keyEnteredByUser('n');
       fakeCkEditorInstance.userPausedAfterEntry();
-      fakeCkEditorInstance.keyEnteredByUser('DownArrow', KeyCodes.DOWN);
-      fakeCkEditorInstance.keyEnteredByUser('Enter', KeyCodes.ENTER);
+      fakeCkEditorInstance.keyEnteredByUser(Key.ArrowDown, KeyCodes.DOWN);
+      fakeCkEditorInstance.keyEnteredByUser(Key.Enter, KeyCodes.ENTER);
 
       expect(fakeParentForm.getValue()).toEqual({
         note: 'Note about: <a href="http://www.bullhorn.com">@John Bullhorn</a> ',
@@ -375,8 +376,8 @@ describe('Elements: QuickNoteElement', () => {
       fakeCkEditorInstance.keyEnteredByUser('h');
       fakeCkEditorInstance.keyEnteredByUser('n');
       fakeCkEditorInstance.userPausedAfterEntry();
-      fakeCkEditorInstance.keyEnteredByUser('DownArrow', KeyCodes.DOWN);
-      fakeCkEditorInstance.keyEnteredByUser('Enter', KeyCodes.ENTER);
+      fakeCkEditorInstance.keyEnteredByUser(Key.ArrowDown, KeyCodes.DOWN);
+      fakeCkEditorInstance.keyEnteredByUser(Key.Enter, KeyCodes.ENTER);
 
       expect(fakeParentForm.getValue()).toEqual({
         note: 'Note about: <a href="http://www.bullhorn.com">@John Bullhorn</a> ',
@@ -399,8 +400,8 @@ describe('Elements: QuickNoteElement', () => {
       fakeCkEditorInstance.keyEnteredByUser('h');
       fakeCkEditorInstance.keyEnteredByUser('n');
       fakeCkEditorInstance.userPausedAfterEntry();
-      fakeCkEditorInstance.keyEnteredByUser('DownArrow', KeyCodes.DOWN);
-      fakeCkEditorInstance.keyEnteredByUser('Enter', KeyCodes.ENTER);
+      fakeCkEditorInstance.keyEnteredByUser(Key.ArrowDown, KeyCodes.DOWN);
+      fakeCkEditorInstance.keyEnteredByUser(Key.Enter, KeyCodes.ENTER);
 
       expect(fakeParentForm.getValue()).toEqual({
         note: 'Note about: <a href="http://www.bullhorn.com">@John Bullhorn</a> ',
@@ -421,8 +422,8 @@ describe('Elements: QuickNoteElement', () => {
       fakeCkEditorInstance.keyEnteredByUser('h');
       fakeCkEditorInstance.keyEnteredByUser('n');
       fakeCkEditorInstance.userPausedAfterEntry();
-      fakeCkEditorInstance.keyEnteredByUser('DownArrow', KeyCodes.DOWN);
-      fakeCkEditorInstance.keyEnteredByUser('Enter', KeyCodes.ENTER);
+      fakeCkEditorInstance.keyEnteredByUser(Key.ArrowDown, KeyCodes.DOWN);
+      fakeCkEditorInstance.keyEnteredByUser(Key.Enter, KeyCodes.ENTER);
 
       expect(fakeParentForm.getValue()).toEqual({
         note: 'Note about: <a href="http://www.bullhorn.com">@John Bullhorn</a>  <a href="http://www.bullhorn.com">@John Bullhorn</a> ',
@@ -446,18 +447,18 @@ describe('Elements: QuickNoteElement', () => {
       expect(fakeResultsDropdown.visible).toBe(true);
       expect(fakeResultsDropdown.selectedIndex).toBe(0);
 
-      fakeCkEditorInstance.keyEnteredByUser('DownArrow', KeyCodes.DOWN);
-      fakeCkEditorInstance.keyEnteredByUser('DownArrow', KeyCodes.DOWN);
+      fakeCkEditorInstance.keyEnteredByUser(Key.ArrowDown, KeyCodes.DOWN);
+      fakeCkEditorInstance.keyEnteredByUser(Key.ArrowDown, KeyCodes.DOWN);
 
       expect(fakeResultsDropdown.visible).toBe(true);
       expect(fakeResultsDropdown.selectedIndex).toBe(2);
 
-      fakeCkEditorInstance.keyEnteredByUser('UpArrow', KeyCodes.UP);
+      fakeCkEditorInstance.keyEnteredByUser(Key.ArrowUp, KeyCodes.UP);
 
       expect(fakeResultsDropdown.visible).toBe(true);
       expect(fakeResultsDropdown.selectedIndex).toBe(1);
 
-      fakeCkEditorInstance.keyEnteredByUser('Escape', KeyCodes.ESC);
+      fakeCkEditorInstance.keyEnteredByUser(Key.Escape, KeyCodes.ESC);
 
       expect(fakeResultsDropdown.visible).toBe(false);
 
@@ -474,7 +475,7 @@ describe('Elements: QuickNoteElement', () => {
 
       expect(fakeResultsDropdown.visible).toBe(true);
       expect(fakeResultsDropdown.selectedIndex).toBe(0);
-      fakeCkEditorInstance.keyEnteredByUser('Enter', KeyCodes.ENTER);
+      fakeCkEditorInstance.keyEnteredByUser(Key.Enter, KeyCodes.ENTER);
 
       expect(fakeResultsDropdown.visible).toBe(false);
     }));
@@ -511,8 +512,8 @@ describe('Elements: QuickNoteElement', () => {
       fakeCkEditorInstance.keyEnteredByUser('b');
       fakeCkEditorInstance.keyEnteredByUser('u');
       fakeCkEditorInstance.userPausedAfterEntry();
-      fakeCkEditorInstance.keyEnteredByUser('DownArrow', KeyCodes.DOWN);
-      fakeCkEditorInstance.keyEnteredByUser('Enter', KeyCodes.ENTER);
+      fakeCkEditorInstance.keyEnteredByUser(Key.ArrowDown, KeyCodes.DOWN);
+      fakeCkEditorInstance.keyEnteredByUser(Key.Enter, KeyCodes.ENTER);
 
       expect(fakeParentForm.getValue()).toEqual({
         note: 'Note about: <a href="http://www.bullhorn.com">@John Bullhorn</a> ',
@@ -536,8 +537,8 @@ describe('Elements: QuickNoteElement', () => {
       fakeCkEditorInstance.keyEnteredByUser('n');
       fakeCkEditorInstance.keyEnteredByUser(' ');
       fakeCkEditorInstance.userPausedAfterEntry();
-      fakeCkEditorInstance.keyEnteredByUser('DownArrow', KeyCodes.DOWN);
-      fakeCkEditorInstance.keyEnteredByUser('Enter', KeyCodes.ENTER);
+      fakeCkEditorInstance.keyEnteredByUser(Key.ArrowDown, KeyCodes.DOWN);
+      fakeCkEditorInstance.keyEnteredByUser(Key.Enter, KeyCodes.ENTER);
 
       expect(fakeParentForm.getValue()).toEqual({
         note: 'Note about: <a href="http://www.bullhorn.com">@John Bullhorn</a>  ',

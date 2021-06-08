@@ -5,9 +5,9 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  padding: 0 0.8rem;
-  font-size: 1rem;
-  line-height: 2.6rem;
+  padding: 0 $spacing-md;
+  font-size: 1.2rem;
+  line-height: 3.2rem;
   border: none;
   background: transparent;
   border-radius: 3px;
@@ -16,26 +16,32 @@
   gap: 0.4rem;
   cursor: pointer;
   user-select: none;
+  text-overflow: clip;
+  white-space: nowrap;
+  overflow: hidden;
+
+  .button-contents {
+    line-height: inherit;
+    font-size: inherit;
+    color: inherit;
+  }
 
   &[size="small"] {
-    padding: 0.4rem;
-    font-size: 0.8rem;
-    min-width: 2rem;
+    font-size: 1rem;
+    padding: 0 $spacing-sm;
+    line-height: 2.4rem;
   }
 
   &[size="large"] {
-    font-size: 1.2rem;
-    padding: 1rem;
+    font-size: 1.8rem;
+    padding: 0 $spacing-lg;
+    line-height: 4rem;
   }
 
   i {
-    font-size: 1em;
-  }
-
-  &[icon="times"] {
-    i {
-      font-size: 1rem;
-    }
+    font-size: 0.8em;
+    line-height: inherit;
+    vertical-align: middle;
   }
 
   &:focus {
@@ -87,35 +93,14 @@
         }
       }
     }
-    &[side="left"]:not([theme="fab"]) {
-      i {
-        margin-right: 0.8rem;
-      }
-    }
-    &[side="right"]:not([theme="fab"]) {
-      i {
-        margin-left: 0.8rem;
-      }
-    }
   }
 
   // Primary theme
   &[theme="primary"] {
     background: $positive;
     color: #fff;
-    min-width: 8rem;
     text-align: left;
-    // &[icon] {
-    //   i {
-    //     background: rgba(0, 0, 0, 0.15);
-    //     padding: 0.5rem;
-    //     border-radius: 50%;
-    //     margin: -0.5rem;
-    //     &:before {
-    //       vertical-align: baseline;
-    //     }
-    //   }
-    // }
+
     &:hover,
     &:focus {
       background: lighten($positive, 10%);
@@ -159,7 +144,8 @@
     background: #fff;
     color: $positive;
     border: 1px solid $positive;
-    line-height: calc(2.6rem - 2px);
+    padding: 0 calc(#{$spacing-md} - 1px);
+    line-height: calc(3.2rem - 2px);
 
     @each $name, $color in $all-colors {
       &[color="#{$name}"] {
@@ -316,8 +302,8 @@
   }
   // Icon Themed Button
   &[theme="icon"] {
-    padding: 0.6rem;
-    font-size: 1.2rem;
+    padding: $spacing-sm;
+    font-size: 1.6rem;
     &[inverse] {
       color: #fff;
     }
@@ -335,14 +321,24 @@
         color: $color;
       }
     }
+    &[size="small"] {
+      font-size: 1.2rem;
+      padding: $spacing-sm;
+    }
+
+    &[size="large"] {
+      font-size: 2rem;
+      padding: $spacing-md;
+    }
   }
   // Fab Themed Button
   &[theme="fab"] {
     &[inverse] {
       color: #fff;
     }
-    padding: 0.8rem;
+    padding: $spacing-md;
     font-size: 1.2rem;
+    line-height: 2.4rem;
     border-radius: 50% !important;
     @each $button, $color in $all-colors {
       &[color="#{$button}"] {
@@ -372,8 +368,8 @@
     border-radius: 0;
     border-bottom: 1px solid $dark;
     margin-bottom: 4px;
-    padding: 0.2rem 0.4rem;
-    font-size: 0.8rem;
+    padding: $spacing-xs $spacing-sm;
+    font-size: 1.2rem;
     text-align: left;
     &:hover,
     &:focus,

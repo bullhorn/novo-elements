@@ -19,16 +19,19 @@ export class FormattedChipsExample {
         id: 1,
         firstName: 'Brian',
         lastName: 'Kimball',
+        searchEntity: 'candidate',
       },
       {
         id: 2,
         firstName: 'Josh',
         lastName: 'Godi',
+        searchEntity: 'contact',
       },
       {
         id: 3,
         firstName: 'Alec',
         lastName: 'Sibilia',
+        searchEntity: 'candidate',
       },
       {
         id: 4,

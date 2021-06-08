@@ -15,9 +15,10 @@ import {
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { first } from 'rxjs/operators';
+import { NovoOption } from '../common';
 import { MenuItemDirective } from './menu-item.directive';
 import { CloseMenuEvent, IMenuClickEvent, NovoMenuService } from './menu.service';
-import { MENU_OPTIONS } from './menu.tokens';
+import { MENU_OPTIONS, PARENT_MENU } from './menu.tokens';
 import { ILinkConfig, IMenuOptions } from './menu.types';
 
 export interface MouseLocation {
@@ -49,6 +50,7 @@ export interface MouseLocation {
     `,
   ],
   template: ``,
+  providers: [{ provide: PARENT_MENU, useExisting: MenuComponent }],
 })
 export class MenuComponent implements OnDestroy {
   @Input() public menuClass = '';
@@ -57,6 +59,7 @@ export class MenuComponent implements OnDestroy {
   @Output() public close: EventEmitter<CloseMenuEvent> = new EventEmitter();
   @Output() public open: EventEmitter<IMenuClickEvent> = new EventEmitter();
   @ContentChildren(MenuItemDirective) public menuItems: QueryList<MenuItemDirective>;
+  @ContentChildren(NovoOption) public menuOptions: QueryList<NovoOption>;
   @ViewChild('menu') public menuElement: ElementRef;
   public visibleMenuItems: MenuItemDirective[] = [];
 
@@ -107,7 +110,7 @@ export class MenuComponent implements OnDestroy {
   }
 
   public isMenuItemVisible(menuItem: MenuItemDirective): boolean {
-    return this.evaluateIfFunction(menuItem.visible);
+    return this.evaluateIfFunction(menuItem.menuItemVisible);
   }
 
   public setVisibleMenuItems(): void {

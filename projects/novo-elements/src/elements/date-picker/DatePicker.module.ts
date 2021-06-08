@@ -4,10 +4,11 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 // Vendor
 import { TextMaskModule } from 'angular2-text-mask';
-// APP
 import { NovoPipesModule } from '../../pipes/Pipes.module';
+// APP
+import { NovoButtonModule } from '../button';
+import { NovoOverlayModule } from '../common/overlay/Overlay.module';
 import { NovoIconModule } from '../icon/Icon.module';
-import { NovoOverlayModule } from '../overlay/Overlay.module';
 import { NovoChipsModule } from './../chips/Chips.module';
 import { NovoCalendarElement } from './calendar/calendar.component';
 import { NovoDatePickerElement } from './DatePicker';
@@ -19,7 +20,16 @@ import { NovoMultiDateInputElement } from './MultiDateInput';
 import { NovoYearSelectElement } from './year-select/year-select.component';
 
 @NgModule({
-  imports: [CommonModule, FormsModule, NovoPipesModule, NovoOverlayModule, TextMaskModule, NovoIconModule, NovoChipsModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    NovoButtonModule,
+    NovoPipesModule,
+    NovoOverlayModule,
+    TextMaskModule,
+    NovoIconModule,
+    NovoChipsModule,
+  ],
   declarations: [
     NovoDatePickerElement,
     NovoDatePickerInputElement,

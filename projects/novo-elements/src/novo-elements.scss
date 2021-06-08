@@ -8,6 +8,9 @@
 @import "./styles/global/flex-grid";
 @import "./styles/global/layout";
 @import "./styles/global/cdk";
+// Typography
+@import "./elements/common/typography/text.mixins";
+
 @include cdk-overlay();
 // --------------------------------------------------
 // Plugins (Third-Party-Libraries)
@@ -123,4 +126,19 @@
 .aside-overlay-panel {
   position: relative;
   // z-index: 1001;
+}
+
+@keyframes iconEnter {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  90% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
 }

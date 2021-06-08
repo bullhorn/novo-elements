@@ -19,3 +19,9 @@ Entity Record Headers Patterns.
 When Displaying list of fields & values in a card, follow this pattern.
 
 <code-example example="details-card"></code-example>
+
+## Card Form
+
+Displaying a form inside a cards, used for email & sms messages
+
+<code-example example="card-form"></code-example>

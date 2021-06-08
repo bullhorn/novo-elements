@@ -1,8 +1,8 @@
 // NG2
 import { Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { NovoLabelService } from '../../services/novo-label-service';
+import { Key } from '../../utils';
 import { Helpers } from '../../utils/Helpers';
-import { KeyCodes } from '../../utils/key-codes/KeyCodes';
 // APP
 import { OutsideClick } from '../../utils/outside-click/OutsideClick';
 
@@ -118,7 +118,7 @@ export class NovoCategoryDropdownElement extends OutsideClick implements OnInit,
   }
 
   onKeyDown(event) {
-    if (this.active && (event.keyCode === KeyCodes.ESC || event.keyCode === KeyCodes.ENTER)) {
+    if (this.active && (event.key === Key.Escape || event.key === Key.Enter)) {
       this.toggleActive();
     }
   }

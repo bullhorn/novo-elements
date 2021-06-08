@@ -1,0 +1,64 @@
+@import "../../../styles/global/variables.scss";
+
+:host {
+  // Secondary Themed Button
+  &[theme="secondary"] {
+    text-align: left;
+    align-items: center;
+    background: $white;
+    color: $positive;
+    border: 1px solid $positive;
+    padding: 0 calc(#{$spacing-md} - 1px);
+    line-height: calc(3.2rem - 2px);
+
+    &[size="small"] {
+      line-height: calc(2.4rem - 2px);
+    }
+
+    &[size="large"] {
+      line-height: calc(4rem - 2px);
+    }
+
+    @each $name, $color in $all-colors {
+      &[color="#{$name}"] {
+        color: $color;
+        border: 1px solid $color;
+      }
+    }
+
+    i.loading {
+      margin-left: 0.8rem;
+      svg {
+        .spinner {
+          fill: $positive;
+        }
+      }
+    }
+    &:hover,
+    &:focus {
+      box-shadow: 0 3px 7px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.15);
+    }
+    &:active {
+      box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+    }
+    &[inverse] {
+      background: rgba(0, 0, 0, 0.25);
+      color: #fff;
+      border: 1px solid #fff;
+      &:hover,
+      &:focus {
+        background: rgba(0, 0, 0, 0.35);
+      }
+      &:active {
+        background: rgba(0, 0, 0, 0.45);
+      }
+      i.loading {
+        svg {
+          .spinner {
+            fill: $white;
+          }
+        }
+      }
+    }
+  }
+}

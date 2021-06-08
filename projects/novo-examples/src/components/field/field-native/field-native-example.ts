@@ -9,6 +9,7 @@ import { Component } from '@angular/core';
   styleUrls: ['field-native-example.css'],
 })
 export class FieldNativeExample {
+  appearance = 'standard';
   direction = 'horizontal';
   fullWidth = false;
   hide = true;

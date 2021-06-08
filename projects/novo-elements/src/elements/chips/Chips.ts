@@ -5,10 +5,9 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 // Vendor
 import { ReplaySubject } from 'rxjs';
 import { NovoLabelService } from '../../services/novo-label-service';
+import { Key } from '../../utils';
 import { ComponentUtils } from '../../utils/component-utils/ComponentUtils';
 import { Helpers } from '../../utils/Helpers';
-// APP
-import { KeyCodes } from '../../utils/key-codes/KeyCodes';
 
 // Value accessor for the component (supports ngModel)
 const CHIPS_VALUE_ACCESSOR = {
@@ -24,14 +23,15 @@ const CHIPS_VALUE_ACCESSOR = {
     <div class="novo-chip-container">
       <novo-chip
         *ngFor="let item of _items | async"
-        [type]="type || item?.value?.searchEntity"
         [class.selected]="item == selected"
         [disabled]="disablePickerInput"
-        (remove)="remove($event, item)"
-        (select)="select($event, item)"
+        (removed)="remove($event, item)"
+        (selectionChange)="select($event, item)"
         (deselect)="deselect($event, item)"
       >
+        <novo-icon *ngIf="getAvatarType(item)" size="small" class="tc-{{ getAvatarType(item) }}" novoChipAvatar>circle</novo-icon>
         {{ item.label }}
+        <novo-icon size="small" color="light" novoChipRemove>close</novo-icon>
       </novo-chip>
     </div>
     <div class="chip-input-container" *ngIf="!maxlength || (maxlength && items.length < maxlength)">
@@ -200,6 +200,10 @@ export class NovoChipsElement implements OnInit, ControlValueAccessor {
     };
   }
 
+  getAvatarType(item: any) {
+    return (this.type || item?.value?.searchEntity || '').toLowerCase();
+  }
+
   deselectAll(event?) {
     this.selected = null;
     this.hidePreview();
@@ -241,10 +245,6 @@ export class NovoChipsElement implements OnInit, ControlValueAccessor {
   }
 
   remove(event, item) {
-    if (event) {
-      event.stopPropagation();
-      event.preventDefault();
-    }
     this.items.splice(this.items.indexOf(item), 1);
     this.deselectAll();
     this.value = this.source && this.source.valueFormatter ? this.source.valueFormatter(this.items) : this.items.map((i) => i.value);
@@ -254,7 +254,7 @@ export class NovoChipsElement implements OnInit, ControlValueAccessor {
   }
 
   onKeyDown(event) {
-    if (event.keyCode === KeyCodes.BACKSPACE) {
+    if (event.key === Key.Backspace) {
       if (event.target && event.target.value.length === 0 && this.items.length) {
         if (event) {
           event.stopPropagation();

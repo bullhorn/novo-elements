@@ -5,9 +5,9 @@ import { FormsModule } from '@angular/forms';
 import { IMaskDirectiveModule } from 'angular-imask';
 // Vendor
 import { TextMaskModule } from 'angular2-text-mask';
-import { NovoDatePickerModule } from '../date-picker/DatePicker.module';
 // APP
-import { NovoOverlayModule } from '../overlay/Overlay.module';
+import { NovoOverlayModule } from '../common/overlay/Overlay.module';
+import { NovoDatePickerModule } from '../date-picker/DatePicker.module';
 import { NovoTimePickerModule } from '../time-picker/TimePicker.module';
 import { NovoDateTimePickerElement } from './DateTimePicker';
 import { NovoDateTimePickerInputElement } from './DateTimePickerInput';

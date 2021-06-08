@@ -309,27 +309,6 @@ export class PlacesListComponent implements OnInit, OnChanges {
     });
   }
 
-  // //function to navigate through list when up and down keyboard key is pressed;
-  // private navigateInList(keyCode: number): any {
-  //     let arrayIndex: number = 0;
-  //     //arrow down
-  //     if (keyCode === 40) {
-  //         if (this.selectedDataIndex >= 0) {
-  //             arrayIndex = ((this.selectedDataIndex + 1) <= (this.queryItems.length - 1)) ? (this.selectedDataIndex + 1) : 0;
-  //         }
-  //         this.activeListNode(arrayIndex);
-  //     } else if (keyCode === 38) {//arrow up
-  //         if (this.selectedDataIndex >= 0) {
-  //             arrayIndex = ((this.selectedDataIndex - 1) >= 0) ? (this.selectedDataIndex - 1) : (this.queryItems.length - 1);
-  //         } else {
-  //             arrayIndex = this.queryItems.length - 1;
-  //         }
-  //         this.activeListNode(arrayIndex);
-  //     } else {
-  //         this.processSearchQuery();
-  //     }
-  // }
-
   // function to execute to get location detail based on latitude and longitude.
   private getCurrentLocationInfo(latlng: any): any {
     if (this.settings.useGoogleGeoApi) {

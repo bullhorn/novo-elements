@@ -1,5 +1,6 @@
 // NG2
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, HostBinding, Input } from '@angular/core';
+import { BooleanInput } from '../../utils';
 
 @Component({
   selector: 'button[theme],novo-button',
@@ -12,12 +13,22 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
     '[attr.side]': 'side',
     '[attr.size]': 'size',
   },
-  styleUrls: ['./Button.scss'],
+  styleUrls: [
+    './styles/button.scss',
+    './styles/button-standard.scss',
+    './styles/button-primary.scss',
+    './styles/button-secondary.scss',
+    './styles/button-fab.scss',
+    './styles/button-icon.scss',
+    './styles/button-dialogue.scss',
+    './styles/button-other.scss',
+  ],
+
   template: `
     <!--Left Icon-->
     <i *ngIf="icon && side === 'left' && !loading" [ngClass]="icon"></i>
     <!--Transcluded Content-->
-    <ng-content></ng-content>
+    <span #textContent class="button-contents"><ng-content></ng-content></span>
     <!--Right Icon-->
     <i *ngIf="icon && side === 'right' && !loading" [ngClass]="icon"></i>
     <!--Loading-->
@@ -67,5 +78,12 @@ export class NovoButtonElement {
     return this._icon;
   }
 
+  @Input()
+  @BooleanInput()
+  @HostBinding('class.novo-button-disabled')
+  disabled: boolean = false;
+
   private _icon: string;
+
+  constructor(public element: ElementRef) {}
 }

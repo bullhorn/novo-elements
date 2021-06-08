@@ -199,14 +199,12 @@ export class NovoCalendarElement implements OnInit {
     Helpers.swallowEvent(event);
     const tmp = subMonths(this.activeDate, 1);
     this.updateView(tmp);
-    console.log('selection', this.selected);
   }
 
   nextMonth(event: Event): void {
     Helpers.swallowEvent(event);
     const tmp = addMonths(this.activeDate, 1);
     this.updateView(tmp);
-    console.log('selection', this.selected);
   }
 
   openView(event: Event, type: string) {

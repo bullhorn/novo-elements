@@ -4,7 +4,7 @@ $black: #000000;
 $white: #ffffff;
 $grey: #999999;
 $off-white: #f4f4f4;
-$light: #d9dadc;
+$light: #bebebe; // #d9dadc;
 $navy: #0d2d42;
 $pulse: #3bafda;
 // New grays below are being added as placeholder.
@@ -58,9 +58,19 @@ $neutral: #4f5361;
 $empty: #cccdcc;
 $disabled: $stone;
 
+// Spacing
+// --------------------------------------------------
+$spacing-none: 0;
+$spacing-px: 1px;
+$spacing-xs: 0.4rem; // +3
+$spacing-sm: 0.8rem; // +5
+$spacing-md: 1.2rem; // +6
+$spacing-lg: 1.6rem; // +8
+$spacing-xl: 2rem; // +8
+
 // Typography
 // --------------------------------------------------
-$base-font-size: 13px;
+$base-font-size: 10px;
 $base-font-color: $dark;
 $base-line-height: 1em;
 $base-font-family: "Roboto", sans-serif;
@@ -211,7 +221,7 @@ $all-colors: map-merge($dark-colors, $light-colors);
 // -------------------------
 $whiteframe-shadow-z1: 0px 2px 5px 0 rgba(0, 0, 0, 0.26) !default;
 $whiteframe-zindex-z1: 1 !default;
-$whiteframe-shadow-z2: 0px 8px 17px rgba(0, 0, 0, 0.2) !default;
+$whiteframe-shadow-z2: 0px 3px 8px rgba(0, 0, 0, 0.2) !default;
 $whiteframe-zindex-z2: 2 !default;
 $whiteframe-shadow-z3: 0px 4px 10px rgba(0, 0, 0, 0.15) !default;
 $whiteframe-zindex-z3: 3 !default;
@@ -219,6 +229,8 @@ $whiteframe-shadow-z4: 0px 16px 28px 0 rgba(0, 0, 0, 0.22) !default;
 $whiteframe-zindex-z4: 4 !default;
 $whiteframe-shadow-z5: 0px 27px 24px 0 rgba(0, 0, 0, 0.2) !default;
 $whiteframe-zindex-z5: 5 !default;
+
+$multi-shadow: 0 -1px 3px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
 
 // Z-indexes
 // -------------------------

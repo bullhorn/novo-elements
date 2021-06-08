@@ -1,7 +1,7 @@
 import { AnimationEvent } from '@angular/animations';
 import { FocusMonitor, FocusOrigin, FocusTrap, FocusTrapFactory } from '@angular/cdk/a11y';
 import { BooleanInput, coerceBooleanProperty, coerceNumberProperty, NumberInput } from '@angular/cdk/coercion';
-import { ESCAPE, hasModifierKey } from '@angular/cdk/keycodes';
+import { hasModifierKey } from '@angular/cdk/keycodes';
 import { Platform } from '@angular/cdk/platform';
 import { DOCUMENT } from '@angular/common';
 import {
@@ -21,6 +21,7 @@ import {
   Output,
   ViewEncapsulation,
 } from '@angular/core';
+import { Key } from 'projects/novo-elements/src/utils';
 import { fromEvent, Observable, Subject } from 'rxjs';
 import { distinctUntilChanged, filter, map, mapTo, take, takeUntil } from 'rxjs/operators';
 import { NovoLayoutContainer } from '..';
@@ -255,7 +256,7 @@ export class NovoSidenavComponent implements AfterContentInit, AfterContentCheck
       (fromEvent(this._elementRef.nativeElement, 'keydown') as Observable<KeyboardEvent>)
         .pipe(
           filter((event) => {
-            return event.keyCode === ESCAPE && !this.disableClose && !hasModifierKey(event);
+            return event.key === Key.Escape && !this.disableClose && !hasModifierKey(event);
           }),
           takeUntil(this._destroyed),
         )

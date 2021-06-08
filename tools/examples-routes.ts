@@ -1,8 +1,7 @@
-import { sync as glob } from 'glob';
 import * as fs from 'fs';
-import * as path from 'path';
-import * as ts from 'typescript';
+import { sync as glob } from 'glob';
 import * as Markdown from 'markdown-it';
+import * as path from 'path';
 
 interface PageMetadata {
   id: string;
@@ -39,7 +38,9 @@ function generatePageComponent(metadata: PageMetadata): string {
   selector: '${metadata.id}-page',
   template: \`${metadata.template}\`
 })
-export class ${metadata.name}Page {}
+export class ${metadata.name}Page {
+  public params: any = {};
+}
 `;
 }
 
@@ -47,9 +48,7 @@ export class ${metadata.name}Page {}
  * Builds the template for the examples module
  */
 function generatePageRoute(metadata: PageMetadata): string {
-  return `  { path: '${metadata.route}', component: ${metadata.name}Page, data: { title: '${metadata.title}', section: '${
-    metadata.section
-  }' } },
+  return `  { path: '${metadata.route}', component: ${metadata.name}Page, data: { title: '${metadata.title}', section: '${metadata.section}' } },
 `;
 }
 
@@ -64,11 +63,12 @@ import {NgModule, Component} from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { NovoExamplesModule } from './examples.module';
 import { NovoExamplesSharedModule } from './_shared/shared.module';
+import { NovoElementsModule } from 'novo-elements';
 
 ${extractedMetadata
-    .map((r) => generatePageComponent(r))
-    .join('\n')
-    .trim()}
+  .map((r) => generatePageComponent(r))
+  .join('\n')
+  .trim()}
 
 const routes: Routes = [
   //{ path: '', component: Home, data: {} },
@@ -90,7 +90,7 @@ export const PAGE_LIST = [
 @NgModule({
   declarations: PAGE_LIST,
   entryComponents: PAGE_LIST,
-  imports: [RouterModule.forRoot(routes, { useHash: true }), NovoExamplesModule, NovoExamplesSharedModule],
+  imports: [RouterModule.forRoot(routes, { useHash: true }), NovoElementsModule, NovoExamplesModule, NovoExamplesSharedModule],
   exports: [RouterModule],
 })
 export class NovoExamplesRoutesModule {}
@@ -113,7 +113,7 @@ function convertToDashCase(name: string): string {
  */
 function convertToCamelCase(name: string): string {
   return name
-    .replace(/(\b[a-z]+\b)/g, function(a, b) {
+    .replace(/(\b[a-z]+\b)/g, function (a, b) {
       return b[0].toUpperCase() + b.slice(1);
     })
     .replace(/-/g, '');
@@ -125,7 +125,7 @@ function convertToCamelCase(name: string): string {
  */
 function convertToSentence(name: string): string {
   return name
-    .replace(/(\b[a-z]+\b)/g, function(a, b) {
+    .replace(/(\b[a-z]+\b)/g, function (a, b) {
       return b[0].toUpperCase() + b.slice(1);
     })
     .replace(/-/g, ' ');
@@ -146,11 +146,7 @@ function parsePageMetadata(filePath: string, sourceContent: string): PageMetadat
       .split('/') // Platform specific File separator doesn't apply
       .slice(-2, -1)[0],
     template: markup,
-    route: path
-      .dirname(filePath)
-      .split('/')
-      .slice(3)
-      .join('/'),
+    route: path.dirname(filePath).split('/').slice(3).join('/'),
   };
 }
 

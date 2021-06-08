@@ -1,0 +1,6 @@
+<novo-field>
+  <novo-label>Selected Value: <span class="caption">{{selected}}</span></novo-label>
+  <novo-select [placeholder]="placeholder" [(ngModel)]="selected" multiple>
+    <novo-option *ngFor="let state of states" [value]="state">{{state}}</novo-option>
+  </novo-select>
+</novo-field>

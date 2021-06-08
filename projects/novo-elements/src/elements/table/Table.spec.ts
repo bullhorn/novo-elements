@@ -11,6 +11,8 @@ import { OptionsService } from '../../services/options/OptionsService';
 import { FormUtils } from '../../utils/form-utils/FormUtils';
 import { NovoChipElement } from '../chips/Chip';
 import { NovoChipsElement } from '../chips/Chips';
+// App
+import { NovoOverlayModule } from '../common/overlay/Overlay.module';
 import { NovoDatePickerElement } from '../date-picker/DatePicker';
 import { NovoDropdownElement, NovoDropdownListElement, NovoItemElement } from '../dropdown/Dropdown';
 import { NovoControlElement } from '../form/Control';
@@ -19,8 +21,6 @@ import { NovoCheckboxElement } from '../form/extras/checkbox/Checkbox';
 import { NovoCheckListElement } from '../form/extras/checkbox/CheckList';
 import { NovoFormElement } from '../form/Form';
 import { NovoLoadingElement } from '../loading/Loading';
-// App
-import { NovoOverlayModule } from '../overlay/Overlay.module';
 import { NovoSelectElement } from '../select/Select';
 import { NovoToastElement } from '../toast/Toast';
 import { TooltipDirective } from '../tooltip/Tooltip.directive';

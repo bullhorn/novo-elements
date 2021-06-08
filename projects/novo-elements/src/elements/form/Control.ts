@@ -21,8 +21,8 @@ import { debounceTime } from 'rxjs/operators';
 import { DateFormatService } from '../../services/date-format/DateFormat';
 import { NovoLabelService } from '../../services/novo-label-service';
 import { NovoTemplateService } from '../../services/template/NovoTemplateService';
+import { Key } from '../../utils';
 import { Helpers } from '../../utils/Helpers';
-import { KeyCodes } from '../../utils/key-codes/KeyCodes';
 // APP
 import { OutsideClick } from '../../utils/outside-click/OutsideClick';
 import { FieldInteractionApi } from './FieldInteractionApi';
@@ -377,7 +377,6 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
   }
 
   get decimalSeparator(): string {
-    console.log('this.locale', this.locale);
     return new Intl.NumberFormat(this.locale).format(1.2)[1];
   }
 
@@ -767,8 +766,8 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
   }
 
   handleTabForPickers(event: any): void {
-    if (this.active && event && event.keyCode) {
-      if (event.keyCode === KeyCodes.ESC || event.keyCode === KeyCodes.TAB) {
+    if (this.active && event && event.key) {
+      if (event.key === Key.Escape || event.key === Key.Tab) {
         this.toggleActive(event, false);
       }
     }

@@ -3,10 +3,10 @@
 
 :host {
   display: inline;
-  font-family: Roboto, san-serif;
+  font-family: Roboto, sans-serif;
   font-weight: normal;
   font-size: 1em;
-  line-height: 1em;
+  line-height: inherit;
 
   &::ng-deep {
     novo-icon {

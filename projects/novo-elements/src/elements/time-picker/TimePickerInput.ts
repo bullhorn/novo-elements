@@ -1,5 +1,4 @@
 // NG
-import { ENTER, ESCAPE, TAB } from '@angular/cdk/keycodes';
 import {
   ChangeDetectorRef,
   Component,
@@ -17,9 +16,10 @@ import { format, parse } from 'date-fns';
 import * as IMask from 'imask';
 import { DateFormatService } from '../../services/date-format/DateFormat';
 import { NovoLabelService } from '../../services/novo-label-service';
+import { Key } from '../../utils';
 import { Helpers } from '../../utils/Helpers';
 // App
-import { NovoOverlayTemplateComponent } from '../overlay/Overlay';
+import { NovoOverlayTemplateComponent } from '../common/overlay/Overlay';
 
 // Value accessor for the component (supports ngModel)
 const DATE_VALUE_ACCESSOR = {
@@ -169,10 +169,15 @@ export class NovoTimePickerInputElement implements OnInit, ControlValueAccessor 
   /** END: Convenient Panel Methods. */
 
   _handleKeydown(event: KeyboardEvent): void {
-    if ((event.keyCode === ESCAPE || event.keyCode === ENTER || event.keyCode === TAB) && this.panelOpen) {
+    const input = event.target as HTMLInputElement;
+    if ((event.key === Key.Escape || event.key === Key.Enter || event.key === Key.Tab) && this.panelOpen) {
       this.closePanel();
       event.stopPropagation();
       event.stopImmediatePropagation();
+    }
+
+    if (event.key === Key.Backspace && input.selectionStart === input.value.length) {
+      (event.target as HTMLInputElement).value = `${input.value.slice(0, 5)} xx`;
     }
   }
 
@@ -184,11 +189,25 @@ export class NovoTimePickerInputElement implements OnInit, ControlValueAccessor 
         event.preventDefault();
         (event.target as HTMLInputElement).value = `0${text}`;
       }
+      if (!this.military) {
+        const test = text.substr(5, 4).replace(/x/g, '').trim().slice(0, 2);
+        const timePeriod = this.maskOptions.blocks.aa.enum.find((it) => it[0] === test[0]);
+        if (timePeriod) {
+          (event.target as HTMLInputElement).value = `${text.slice(0, 5)} ${timePeriod}`;
+        }
+      }
     }
   }
 
   _handleBlur(event: FocusEvent): void {
-    this.blurEvent.emit(event);
+    const text = (event.target as HTMLInputElement).value;
+    if (!this.military) {
+      const test = text.substr(5, 4).replace(/x/g, '').trim().slice(0, 2);
+      const timePeriod = this.maskOptions.blocks.aa.enum.find((it) => it[0] === test[0]);
+      if (!timePeriod) {
+        (event.target as HTMLInputElement).value = `${text.slice(0, 5)} xx`;
+      }
+    }
   }
 
   _handleFocus(event: FocusEvent): void {

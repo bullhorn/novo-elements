@@ -61,7 +61,7 @@
     "template-banana-in-box": true,
     "template-no-negated-async": false,
     "no-output-on-prefix": false,
-    "no-inputs-metadata-property": true,
+    "no-inputs-metadata-property": false,
     "no-outputs-metadata-property": true,
     "no-host-metadata-property": false,
     "no-input-rename": false,

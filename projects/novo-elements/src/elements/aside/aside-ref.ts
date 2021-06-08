@@ -3,8 +3,8 @@ import { Observable, Subject } from 'rxjs';
 import { filter, take } from 'rxjs/operators';
 import { AsideComponent } from './aside.component';
 
-export class NovoAsideRef {
-  constructor(public component: any, public params: any, private overlayRef: OverlayRef) {}
+export class NovoAsideRef<T = any> {
+  constructor(public component: any, public params: T, private overlayRef: OverlayRef) {}
 
   private _beforeClose = new Subject<void>();
   private _afterClosed = new Subject<void>();

@@ -1,0 +1,96 @@
+@import "../../../styles/global/variables.scss";
+
+:host {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 0 $spacing-md;
+  font-size: 1.2rem;
+  line-height: 3.2rem;
+  border: none;
+  background: transparent;
+  border-radius: 3px;
+  text-transform: uppercase;
+  transition: all 200ms ease-in-out;
+  gap: 0.4rem;
+  cursor: pointer;
+  user-select: none;
+  text-overflow: clip;
+  white-space: nowrap;
+  overflow: hidden;
+
+  .button-contents {
+    line-height: inherit;
+    font-size: inherit;
+    color: inherit;
+    display: contents;
+  }
+
+  i {
+    font-size: inherit;
+    line-height: inherit;
+    &::before {
+      vertical-align: top;
+    }
+  }
+
+  &[size="small"] {
+    font-size: 1rem;
+    padding: 0 $spacing-sm;
+    line-height: 2.4rem;
+  }
+
+  &[size="large"] {
+    font-size: 1.8rem;
+    padding: 0 $spacing-lg;
+    line-height: 4rem;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &[disabled],
+  .novo-button-disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  &[disabled="false"] {
+    opacity: 1;
+    cursor: pointer;
+    pointer-events: auto;
+  }
+
+  &[loading="true"] {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+    i.loading {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: rotate 1200ms linear infinite;
+      svg {
+        width: 100%;
+        height: 100%;
+        max-width: 15px;
+        max-height: 15px;
+        .spinner {
+          fill: currentColor;
+        }
+      }
+    }
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

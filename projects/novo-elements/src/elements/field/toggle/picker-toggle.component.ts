@@ -18,7 +18,7 @@ import {
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { NovoButtonElement } from '../../button';
-import { NovoOverlayTemplateComponent } from '../../overlay';
+import { NovoOverlayTemplateComponent } from '../../common/overlay';
 import { NovoFieldElement, NOVO_FORM_FIELD } from '../field';
 
 @Component({
@@ -66,9 +66,6 @@ export class NovoPickerToggleElement<T = any> implements AfterContentInit, After
     this._disabled = coerceBooleanProperty(value);
   }
   private _disabled: boolean;
-
-  /** Whether ripples on the toggle should be disabled. */
-  @Input() disableRipple: boolean;
 
   /** Underlying button element. */
   @ViewChild('button') _button: NovoButtonElement;

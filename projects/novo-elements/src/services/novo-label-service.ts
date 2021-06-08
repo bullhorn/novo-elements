@@ -175,7 +175,6 @@ export class NovoLabelService {
       }, {});
     const dayPeriod = timeParts.dayPeriod ? timeParts.dayPeriod : '';
     const res = `${timeParts.hour}:${timeParts.minute} ${dayPeriod}`;
-    console.log('formatting', res);
     return res;
   }
 

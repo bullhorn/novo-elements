@@ -5,12 +5,14 @@ import { Subject, Subscription } from 'rxjs';
 import { MenuContentComponent } from './menu-content.component';
 import { MenuItemDirective } from './menu-item.directive';
 import { MenuComponent } from './menu.component';
+import { MenuDirective } from './menu.directive';
 
 export interface IMenuClickEvent {
   anchorElement?: Element | EventTarget;
   menu?: MenuComponent;
   event?: MouseEvent | KeyboardEvent;
-  parentMenu?: MenuContentComponent;
+  parentMenu?: MenuComponent;
+  menuTrigger?: MenuDirective;
   item: any;
   activeMenuItemIndex?: number;
 }
@@ -111,30 +113,35 @@ export class NovoMenuService {
         panelClass: 'novo-menu',
         scrollStrategy: this.scrollStrategy.close(),
       });
-      this.destroySubMenus(parentMenu);
+      // this.destroySubMenus(parentMenu);
       this.overlays = this.overlays.concat(newOverlay);
       this.attachMenu(newOverlay, context);
     }
   }
 
   public attachMenu(overlay: OverlayRef, context: IMenuContext): void {
-    const { event, item, menuItems, menuClass } = context;
+    const { event, item, menu, menuItems, menuClass, menuTrigger } = context;
 
     const menuContent: ComponentRef<MenuContentComponent> = overlay.attach(new ComponentPortal(MenuContentComponent));
     menuContent.instance.event = event;
     menuContent.instance.item = item;
+    menuContent.instance.menu = menu;
     menuContent.instance.menuItems = menuItems;
     menuContent.instance.overlay = overlay;
     menuContent.instance.isLeaf = true;
     menuContent.instance.menuClass = menuClass;
     (overlay as OverlayRefWithMenu).menu = menuContent.instance;
 
+    if (!!menuTrigger) {
+      menuTrigger.menuContent = menuContent.instance;
+    }
+
     const subscriptions: Subscription = new Subscription();
-    subscriptions.add(
-      menuContent.instance.execute
-        .asObservable()
-        .subscribe((executeEvent) => this.closeAllMenus({ eventType: 'execute', ...executeEvent })),
-    );
+    // subscriptions.add(
+    //   menuContent.instance.execute
+    //     .asObservable()
+    //     .subscribe((executeEvent) => this.closeAllMenus({ eventType: 'execute', ...executeEvent })),
+    // );
     subscriptions.add(
       menuContent.instance.closeAllMenus
         .asObservable()
@@ -155,7 +162,7 @@ export class NovoMenuService {
       }),
     );
     menuContent.onDestroy(() => {
-      menuItems.forEach((menuItem) => (menuItem.isActive = false));
+      // menuItems.forEach((menuItem) => (menuItem.isActive = false));
       subscriptions.unsubscribe();
     });
     menuContent.changeDetectorRef.detectChanges();

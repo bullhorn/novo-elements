@@ -30,7 +30,8 @@ export abstract class NovoFieldControl<T> {
   readonly empty: boolean;
 
   /** Whether the `NovoField` label should try to float. */
-  readonly shouldLabelFloat: boolean;
+  // readonly shouldLabelFloat: boolean;
+  // readonly shouldFieldHaveUnderline: boolean;
 
   /** Whether the control is required. */
   readonly required: boolean;
@@ -59,4 +60,6 @@ export abstract class NovoFieldControl<T> {
 
   /** Handles a click on the control's container. */
   abstract onContainerClick(event: MouseEvent): void;
+
+  abstract focus(options?: FocusOptions): void;
 }

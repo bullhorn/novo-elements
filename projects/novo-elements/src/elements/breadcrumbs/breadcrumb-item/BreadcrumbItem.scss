@@ -1,8 +1,8 @@
 @import "../../../styles/global/variables.scss";
+@import "../../common/typography/text.mixins";
 
 .novo-breadcrumb-font-style {
-  font-size: 1rem;
-  color: $dark;
+  @include novo-text-medium();
 }
 
 :host {
@@ -11,22 +11,20 @@
   flex-flow: row nowrap;
 
   .novo-breadcrumb-item {
-    @extend.novo-breadcrumb-font-style;
+    @extend .novo-breadcrumb-font-style;
     cursor: auto;
     display: flex;
     align-items: center;
     flex-flow: row nowrap;
 
     ::ng-deep a:hover {
-      color: $dark;
       text-decoration: none;
     }
 
     ::ng-deep a {
-      @extend.novo-breadcrumb-font-style;
-
+      @extend .novo-breadcrumb-font-style;
+      color: $ocean;
       cursor: pointer;
-
       &:focus {
         text-decoration: none;
       }

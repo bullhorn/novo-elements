@@ -1,5 +1,4 @@
 // NG2
-import { ENTER, ESCAPE, TAB } from '@angular/cdk/keycodes';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -15,8 +14,9 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { NovoLabelService } from '../../services/novo-label-service';
+import { Key } from '../../utils';
 // APP
-import { NovoOverlayTemplateComponent } from '../overlay/Overlay';
+import { NovoOverlayTemplateComponent } from '../common/overlay/Overlay';
 
 // Value accessor for the component (supports ngModel)
 const SEARCH_VALUE_ACCESSOR = {
@@ -31,15 +31,7 @@ const SEARCH_VALUE_ACCESSOR = {
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <!-- SEARCH ICON -->
-    <button
-      theme="fab"
-      [color]="color"
-      [icon]="icon"
-      (click)="showSearch()"
-      [tooltip]="hint"
-      tooltipPosition="bottom"
-      data-automation-id="novo-search-fab"
-    ></button>
+    <novo-icon (click)="showSearch($event)" [tooltip]="hint" tooltipPosition="bottom">{{ icon }}</novo-icon>
     <!-- SEARCH INPUT -->
     <input
       type="text"
@@ -159,7 +151,7 @@ export class NovoSearchBoxElement implements ControlValueAccessor {
   /** END: Convenient Panel Methods. */
 
   _handleKeydown(event: KeyboardEvent): void {
-    if ((event.keyCode === ESCAPE || event.keyCode === ENTER || event.keyCode === TAB) && this.panelOpen) {
+    if ((event.key === Key.Escape || event.key === Key.Enter || event.key === Key.Tab) && this.panelOpen) {
       this.closePanel();
       event.stopPropagation();
     }

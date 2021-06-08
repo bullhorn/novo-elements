@@ -1,3 +1,5 @@
+@import "../common/typography/text.mixins";
+
 .novo-expansion-panel-header {
   display: flex;
   flex-direction: row;
@@ -32,6 +34,7 @@
   flex-grow: 1;
   margin-right: 16px;
   align-items: center;
+  gap: 1rem;
 
   [dir="rtl"] & {
     margin-right: 0;

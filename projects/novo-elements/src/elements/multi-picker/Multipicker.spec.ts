@@ -2,8 +2,8 @@
 import { async, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { NovoLabelService } from '../../services/novo-label-service';
+import { Key } from '../../utils';
 import { ComponentUtils } from '../../utils/component-utils/ComponentUtils';
-import { KeyCodes } from '../../utils/key-codes/KeyCodes';
 // App
 import { NovoMultiPickerElement } from './MultiPicker';
 import { NovoMultiPickerModule } from './MultiPicker.module';
@@ -653,7 +653,7 @@ describe('Element: NovoMultiPickerElement', () => {
   describe('Method: onKeyDown(selecting, itemChanged)', () => {
     it('remove item if selected', () => {
       const event = {
-        keyCode: KeyCodes.BACKSPACE,
+        key: Key.Backspace,
         target: { value: [] },
         stopPropagation: () => {},
         preventDefault: () => {},
@@ -666,7 +666,7 @@ describe('Element: NovoMultiPickerElement', () => {
     });
     it('select item if none selected', () => {
       const event = {
-        keyCode: KeyCodes.BACKSPACE,
+        key: Key.Backspace,
         target: { value: [] },
         stopPropagation: () => {},
         preventDefault: () => {},

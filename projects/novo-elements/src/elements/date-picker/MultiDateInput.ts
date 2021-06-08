@@ -1,5 +1,4 @@
 // NG
-import { ENTER, ESCAPE, TAB } from '@angular/cdk/keycodes';
 import {
   ChangeDetectorRef,
   Component,
@@ -15,10 +14,11 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { DateFormatService } from '../../services/date-format/DateFormat';
 import { NovoLabelService } from '../../services/novo-label-service';
+import { Key } from '../../utils';
 import { Helpers } from '../../utils/Helpers';
 // Vendor
 // App
-import { NovoOverlayTemplateComponent } from '../overlay/Overlay';
+import { NovoOverlayTemplateComponent } from '../common/overlay/Overlay';
 
 // Value accessor for the component (supports ngModel)
 const MULTI_DATE_VALUE_ACCESSOR = {
@@ -31,9 +31,10 @@ const MULTI_DATE_VALUE_ACCESSOR = {
   selector: 'novo-multi-date-input',
   providers: [MULTI_DATE_VALUE_ACCESSOR],
   template: `
-    <chip *ngFor="let date of value | default: []" (remove)="remove($event, date)">
+    <novo-chip *ngFor="let date of value | default: []" (removed)="remove($event, date)">
       {{ date | date: format }}
-    </chip>
+      <novo-icon size="small" novoChipRemove>close</novo-icon>
+    </novo-chip>
     <!-- <div *ngIf="value.length > chipsCount">
       <ul class="summary">
         <li *ngFor="let type of notShown">+ {{ type.count }} {{ labels.more }} {{ type.type }}</li>
@@ -158,7 +159,7 @@ export class NovoMultiDateInputElement implements OnInit, ControlValueAccessor {
   /** END: Convenient Panel Methods. */
 
   _handleKeydown(event: KeyboardEvent): void {
-    if ((event.keyCode === ESCAPE || event.keyCode === ENTER || event.keyCode === TAB) && this.panelOpen) {
+    if ((event.key === Key.Escape || event.key === Key.Enter || event.key === Key.Tab) && this.panelOpen) {
       this.closePanel();
       event.stopPropagation();
     }

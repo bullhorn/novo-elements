@@ -264,12 +264,8 @@ novo-date-picker-input {
   }
   .calendar-footer {
     width: 100%;
-    padding: 15px 10px;
+    padding: 1rem 0.8rem;
     text-align: left;
-    .today {
-      cursor: pointer;
-      color: $positive;
-    }
   }
 }
 

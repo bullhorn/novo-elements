@@ -1,5 +1,4 @@
 // NG
-import { ENTER, ESCAPE, TAB } from '@angular/cdk/keycodes';
 import {
   ChangeDetectorRef,
   Component,
@@ -14,9 +13,10 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { NovoLabelService } from '../../services/novo-label-service';
+import { Key } from '../../utils';
 import { Helpers } from '../../utils/Helpers';
 // App
-import { NovoOverlayTemplateComponent } from '../overlay/Overlay';
+import { NovoOverlayTemplateComponent } from '../common/overlay/Overlay';
 
 // Value accessor for the component (supports ngModel)
 const COLOR_VALUE_ACCESSOR = {
@@ -45,7 +45,7 @@ const COLOR_VALUE_ACCESSOR = {
         #input
       />
       <novo-icon *ngIf="!hasValue" (click)="openPanel()">complex</novo-icon>
-      <novo-icon *ngIf="hasValue" size="small" (click)="clearValue()">times</novo-icon>
+      <novo-icon *ngIf="hasValue" size="small" (click)="clearValue()">x</novo-icon>
     </novo-field>
     <novo-overlay-template [parent]="element" position="above-below">
       <novo-color-picker [(color)]="value" (onChange)="setValueAndClose($event)"></novo-color-picker>
@@ -113,7 +113,7 @@ export class NovoColorInputElement implements OnInit, ControlValueAccessor {
   /** END: Convenient Panel Methods. */
 
   _handleKeydown(event: KeyboardEvent): void {
-    if ((event.keyCode === ESCAPE || event.keyCode === ENTER || event.keyCode === TAB) && this.panelOpen) {
+    if ((event.key === Key.Escape || event.key === Key.Enter || event.key === Key.Tab) && this.panelOpen) {
       this.closePanel();
       event.stopPropagation();
     }

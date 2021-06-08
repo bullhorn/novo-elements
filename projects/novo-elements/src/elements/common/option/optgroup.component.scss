@@ -1,0 +1,29 @@
+@import "../../../styles/global/variables.scss";
+@import "../typography/text.mixins.scss";
+// @import "../style/menu-common";
+// @import "../style/vendor-prefixes";
+
+.novo-optgroup-label {
+  @include novo-label-medium();
+  color: $grey;
+  cursor: default;
+  flex: 1;
+  padding: 5px 10px;
+  display: block;
+}
+div.filter-search {
+  input {
+    border: none;
+    border-bottom: 2px solid #bebebe;
+    width: 90%;
+    margin: 0 auto;
+    background: transparent;
+    &:focus {
+      outline: none;
+      border-bottom: 2px solid $ocean;
+      ~ i.bhi-search {
+        color: $ocean;
+      }
+    }
+  }
+}

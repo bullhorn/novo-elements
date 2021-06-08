@@ -1,0 +1,38 @@
+@import "../../../../styles/global/variables.scss";
+
+$novo-checkbox-border-width: 1px;
+$novo-checkbox-size: 16px;
+$novo-checkbox-transition-duration: 300ms;
+$novo-linear-out-slow-in-timing-function: ease-in-out;
+
+// Padding inside of a pseudo checkbox.
+$_novo-pseudo-checkbox-padding: $novo-checkbox-border-width * 3;
+// Size of the checkmark in a pseudo checkbox.
+$_novo-pseudo-checkmark-size: $novo-checkbox-size - (2 * $_novo-pseudo-checkbox-padding);
+
+.novo-pseudo-checkbox {
+  width: $novo-checkbox-size;
+  height: $novo-checkbox-size;
+  cursor: pointer;
+  display: inline-block;
+  vertical-align: middle;
+  box-sizing: border-box;
+  position: relative;
+  flex-shrink: 0;
+  transition: color $novo-checkbox-transition-duration $novo-linear-out-slow-in-timing-function;
+
+  &.novo-pseudo-checkbox-checked,
+  &.novo-pseudo-checkbox-indeterminate {
+    color: $ocean;
+    animation: iconEnter 160ms ease-in-out;
+  }
+
+  i {
+    font-size: 1.4rem;
+    line-height: 1rem;
+  }
+}
+
+.novo-pseudo-checkbox-disabled {
+  cursor: default;
+}

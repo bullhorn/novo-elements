@@ -2,11 +2,14 @@
 import { Directive, ElementRef, Input } from '@angular/core';
 
 @Directive({
-  selector: '[color]',
+  selector: '[tc]',
 })
-export class ColorDirective {
-  @Input() set color(value: string) {
-    this.el.nativeElement.style.color = value;
+export class TextColorDirective {
+  @Input() bgc: string;
+
+  @HostBinding('class')
+  get background() {
+    return `novo-text-color-${this.bgc}`;
   }
 
   constructor(private el: ElementRef) {}

@@ -18,14 +18,6 @@ describe('Elements: NovoRowChipElement', () => {
     fixture = TestBed.createComponent(NovoRowChipElement);
     component = fixture.debugElement.componentInstance;
   }));
-
-  describe('Method: onSelect(event)', () => {
-    it('should not emit select event', () => {
-      spyOn(component.select, 'emit');
-      component.onSelect();
-      expect(component.select.emit).not.toHaveBeenCalled();
-    });
-  });
 });
 
 describe('Elements: NovoRowChipsElement', () => {

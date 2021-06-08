@@ -1,8 +1,10 @@
-<button type="button" theme="secondary" icon="collapse" [menu]="menu" [menuContext]="reference">Actions</button>
-
+<button type="button" theme="secondary" icon="collapse" [menu]="menu" [menuContext]="apple">Apples</button>
+<button type="button" theme="secondary" icon="collapse" [menu]="menu" [menuContext]="orange">Oranges</button>
 <!-- Menu Template -->
 <novo-menu #menu>
-  <ng-template menuItem (execute)="clickMe($event.item)">Preview</ng-template>
-  <ng-template menuItem (execute)="clickMe($event.item)">Edit</ng-template>
-  <ng-template menuItem (execute)="clickMe($event.item)">Delete</ng-template>
+  <novo-option *menuItem="let item" (click)="clickMe(item)">Preview</novo-option>
+  <novo-option *menuItem="let item" (click)="clickMe(item)">Edit</novo-option>
+  <novo-option *menuItem="let item" (click)="clickMe(item)">Delete</novo-option>
+  <novo-option *menuItem="let item" [disabled]="isOrange(item)">Disabled if Orange</novo-option>
+  <novo-option *menuItem="let item;visible:isOrange;">Visible if Orange</novo-option>
 </novo-menu>
