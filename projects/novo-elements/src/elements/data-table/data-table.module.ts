@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NovoButtonModule } from '../button/Button.module';
 import { NovoCommonModule } from '../common/common.module';
+import { NovoOptionModule } from '../common/option';
 import { NovoDatePickerModule } from '../date-picker/DatePicker.module';
 import { NovoDropdownModule } from '../dropdown/Dropdown.module';
 import { NovoFormExtrasModule } from '../form/extras/FormExtras.module';
@@ -55,6 +56,7 @@ import { DataTableState } from './state/data-table-state.service';
     NovoCommonModule,
     NovoSelectModule,
     NovoTooltipModule,
+    NovoOptionModule,
   ],
   declarations: [
     DataTableInterpolatePipe,
