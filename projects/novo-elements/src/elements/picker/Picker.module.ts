@@ -40,15 +40,5 @@ import { WorkersCompCodesPickerResults } from './extras/workers-comp-codes-picke
     WorkersCompCodesPickerResults,
     SkillsSpecialtyPickerResults,
   ],
-  entryComponents: [
-    PickerResults,
-    EntityPickerResult,
-    EntityPickerResults,
-    ChecklistPickerResults,
-    GroupedMultiPickerResults,
-    DistributionListPickerResults,
-    WorkersCompCodesPickerResults,
-    SkillsSpecialtyPickerResults,
-  ],
 })
-export class NovoPickerModule {}
+export class NovoPickerModule { }

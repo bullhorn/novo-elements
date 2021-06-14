@@ -1,5 +1,5 @@
 // NG2
-import { NgModule } from '@angular/core';
+import { NgModule, ModuleWithProviders } from '@angular/core';
 // APP
 import { GooglePlacesService } from './elements/places/places.service';
 import { NovoDragulaService } from './elements/dragula/DragulaService';
@@ -35,14 +35,14 @@ const NOVO_ELEMENTS_PROVIDERS = [
   imports: [],
 })
 export class NovoElementProviders {
-  static forRoot() {
+  static forRoot(): ModuleWithProviders<NovoElementProviders> {
     return {
       ngModule: NovoElementProviders,
       providers: [...NOVO_ELEMENTS_PROVIDERS],
     };
   }
 
-  static forChild() {
+  static forChild(): ModuleWithProviders<NovoElementProviders> {
     return {
       ngModule: NovoElementProviders,
     };

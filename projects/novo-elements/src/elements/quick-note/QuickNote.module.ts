@@ -12,6 +12,5 @@ import { QuickNoteResults } from './extras/quick-note-results/QuickNoteResults';
   imports: [CommonModule, FormsModule, NovoLoadingModule, NovoListModule],
   declarations: [QuickNoteElement, QuickNoteResults],
   exports: [QuickNoteElement, QuickNoteResults],
-  entryComponents: [QuickNoteResults],
 })
-export class NovoQuickNoteModule {}
+export class NovoQuickNoteModule { }
