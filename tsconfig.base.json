@@ -11,10 +11,11 @@
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "resolveJsonModule": true,
     "target": "es2015",
     "typeRoots": ["node_modules/@types"],
     "types": ["jest"],
-    "lib": ["es2018", "dom"],
+    "lib": ["es2020", "dom"],
     "paths": {
       "novo-elements": ["dist/novo-elements"],
       "novo-examples": ["dist/novo-examples"],

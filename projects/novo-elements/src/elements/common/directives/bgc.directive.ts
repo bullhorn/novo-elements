@@ -9,6 +9,6 @@ export class BackgroundColorDirective {
 
   @HostBinding('class')
   get background() {
-    return `novo-background-color-${this.bgc}`;
+    return `bgc-${this.bgc}`;
   }
 }

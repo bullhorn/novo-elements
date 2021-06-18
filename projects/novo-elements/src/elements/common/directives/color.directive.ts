@@ -1,15 +1,15 @@
 // tslint:disable: directive-selector
-import { Directive, ElementRef, Input } from '@angular/core';
+import { Directive, ElementRef, HostBinding, Input } from '@angular/core';
 
 @Directive({
-  selector: '[tc]',
+  selector: '[txc]',
 })
 export class TextColorDirective {
-  @Input() bgc: string;
+  @Input() txc: string;
 
   @HostBinding('class')
-  get background() {
-    return `novo-text-color-${this.bgc}`;
+  get hb_textColor() {
+    return `txc-${this.txc}`;
   }
 
   constructor(private el: ElementRef) {}

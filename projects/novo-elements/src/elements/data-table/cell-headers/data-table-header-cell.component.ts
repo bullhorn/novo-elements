@@ -82,32 +82,32 @@ import { DataTableState } from '../state/data-table-state.service';
           </button>
         </div>
         <ng-container [ngSwitch]="config.filterConfig.type">
-          <list *ngSwitchCase="'date'">
+          <novo-optgroup *ngSwitchCase="'date'">
             <ng-container *ngIf="!showCustomRange">
-              <item
+              <novo-option
                 [class.active]="activeDateFilter === option.label"
                 *ngFor="let option of config.filterConfig.options"
                 (click)="filterData(option)"
                 [attr.data-automation-id]="'novo-data-table-filter-' + option.label"
               >
                 {{ option.label }} <i class="bhi-check" *ngIf="activeDateFilter === option.label"></i>
-              </item>
+              </novo-option>
             </ng-container>
-            <item
+            <novo-option
               [class.active]="labels.customDateRange === activeDateFilter"
               (click)="toggleCustomRange($event, true)"
               *ngIf="config.filterConfig.allowCustomRange && !showCustomRange"
               [keepOpen]="true"
             >
               {{ labels.customDateRange }} <i class="bhi-check" *ngIf="labels.customDateRange === activeDateFilter"></i>
-            </item>
+            </novo-option>
             <div class="calendar-container" *ngIf="showCustomRange">
               <div (click)="toggleCustomRange($event, false)"><i class="bhi-previous"></i>{{ labels.backToPresetFilters }}</div>
               <novo-date-picker (onSelect)="filterData($event)" [(ngModel)]="filter" range="true"></novo-date-picker>
             </div>
-          </list>
-          <list *ngSwitchCase="'select'">
-            <item
+          </novo-optgroup>
+          <novo-optgroup *ngSwitchCase="'select'">
+            <novo-option
               [class.active]="filter === option"
               *ngFor="let option of config.filterConfig.options"
               (click)="filterData(option)"
@@ -115,11 +115,11 @@ import { DataTableState } from '../state/data-table-state.service';
             >
               <span>{{ option?.label || option }}</span>
               <i class="bhi-check" *ngIf="option.hasOwnProperty('value') ? filter === option.value : filter === option"></i>
-            </item>
-          </list>
-          <list *ngSwitchCase="'multi-select'">
+            </novo-option>
+          </novo-optgroup>
+          <novo-optgroup *ngSwitchCase="'multi-select'">
             <div class="dropdown-list-filter" (keydown)="multiSelectOptionFilterHandleKeydown($event)">
-              <item class="filter-search" keepOpen="true">
+              <div class="filter-search" keepOpen="true">
                 <input
                   [(ngModel)]="optionFilter"
                   (ngModelChange)="multiSelectOptionFilter($event)"
@@ -128,10 +128,10 @@ import { DataTableState } from '../state/data-table-state.service';
                 />
                 <i class="bhi-search"></i>
                 <span class="error-text" [hidden]="!error || !multiSelectHasVisibleOptions()">{{ labels.selectFilterOptions }}</span>
-              </item>
+              </div>
             </div>
             <div class="dropdown-list-options">
-              <item
+              <novo-option
                 *ngFor="let option of config.filterConfig.options"
                 [hidden]="multiSelectOptionIsHidden(option)"
                 (click)="toggleSelection(option)"
@@ -143,17 +143,17 @@ import { DataTableState } from '../state/data-table-state.service';
                   [class.bhi-checkbox-empty]="!isSelected(option, multiSelectedOptions)"
                   [class.bhi-checkbox-filled]="isSelected(option, multiSelectedOptions)"
                 ></i>
-              </item>
+              </novo-option>
             </div>
             <p class="filter-null-results" [hidden]="multiSelectHasVisibleOptions()">{{ labels.pickerEmpty }}</p>
-          </list>
-          <list *ngSwitchCase="'custom'">
-            <item class="filter-search" keepOpen="true">
+          </novo-optgroup>
+          <novo-optgroup *ngSwitchCase="'custom'">
+            <div class="filter-search" keepOpen="true">
               <ng-container *ngTemplateOutlet="filterTemplate; context: { $implicit: config }"></ng-container>
-            </item>
-          </list>
-          <list *ngSwitchDefault>
-            <item class="filter-search" keepOpen="true">
+            </div>
+          </novo-optgroup>
+          <novo-optgroup *ngSwitchDefault>
+            <div class="filter-search" keepOpen="true">
               <input
                 [type]="config.filterConfig.type"
                 [(ngModel)]="filter"
@@ -161,8 +161,8 @@ import { DataTableState } from '../state/data-table-state.service';
                 #filterInput
                 data-automation-id="novo-data-table-filter-input"
               />
-            </item>
-          </list>
+            </div>
+          </novo-optgroup>
         </ng-container>
         <div class="footer" *ngIf="multiSelect">
           <button theme="dialogue" color="dark" (click)="cancel()" data-automation-id="novo-data-table-multi-select-cancel">

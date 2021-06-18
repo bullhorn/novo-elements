@@ -5,25 +5,34 @@ $positive: #4a89dc;
 .figure-example {
   display: flex;
   flex-direction: column;
-  margin-bottom: 2rem;
   font-size: 1.2rem;
+  gap: 1rem;
+
   .figure-container {
-    border: 1px solid #eee;
+    // border: 1px solid #eee;
   }
 
   .figure-content {
     background-color: #eee;
-    padding: 2rem;
     display: flex;
     align-items: center;
     justify-content: center;
+    & > pre,
+    & > code {
+      flex: 1;
+      margin: 0;
+    }
+    & > img {
+      padding: 2rem;
+      background-color: none !important;
+    }
   }
 
   .figure-caption {
     display: flex;
     flex-flow: column;
-    padding: 0.4rem;
-    gap: 0.4rem;
+    padding: 1rem 0;
+    gap: 1rem;
   }
 
   &.figure-theme-negative {

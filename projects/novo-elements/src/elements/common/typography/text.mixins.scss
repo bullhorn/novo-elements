@@ -65,14 +65,14 @@
 @mixin novo-body-text() {
   display: inline;
   font-weight: normal;
-  line-height: 1.5rem;
+  // line-height: 1.5rem;
   color: inherit;
 }
 
 @mixin novo-title-text() {
   display: block;
   font-weight: 500;
-  line-height: 1.2rem;
+  line-height: 1.5;
   color: $dark;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -85,7 +85,7 @@
   text-transform: uppercase;
   word-break: word-break;
   overflow-wrap: break-word;
-  line-height: 1.2rem;
+  line-height: 1.375;
   color: $slate;
 }
 
@@ -93,7 +93,7 @@
   display: inline;
   font-size: 0.8rem;
   font-weight: 400;
-  line-height: 1.2rem;
+  line-height: 1.375;
   color: $neutral;
 }
 

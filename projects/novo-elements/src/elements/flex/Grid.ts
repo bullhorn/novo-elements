@@ -19,7 +19,7 @@ export class NovoGridElement {
 
   @HostBinding('style.align-items')
   @Input()
-  align: string = 'center';
+  align: string = 'start';
 
   @HostBinding('style.justify-content')
   @Input()

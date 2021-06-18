@@ -1,0 +1,8 @@
+<novo-header>
+  <novo-title size="large">{{title}}</novo-title>
+</novo-header>
+<novo-nav theme="white" borderBottom="1px solid #eaecef" marginBottom="2rem">
+  <novo-tab-link *ngFor="let page of pages" [routerLink]="[page.route]">{{page.title}}</novo-tab-link>
+</novo-nav>
+
+<router-outlet></router-outlet>

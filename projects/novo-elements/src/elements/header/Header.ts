@@ -32,6 +32,9 @@ export class NovoUtilActionComponent {
 
 @Component({
   selector: 'novo-header,header[theme]',
+  host: {
+    '[attr.role]': 'heading',
+  },
   template: `
     <section>
       <div class="header-title">

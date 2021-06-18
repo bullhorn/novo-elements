@@ -1,5 +1,6 @@
 // NG2
-import { Component, HostBinding, Input, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, HostBinding, Input, ViewEncapsulation } from '@angular/core';
+import { HighlightJS } from '../highlight.service';
 
 @Component({
   selector: 'figure-example',
@@ -8,11 +9,20 @@ import { Component, HostBinding, Input, ViewEncapsulation } from '@angular/core'
   host: { class: 'figure-example' },
   encapsulation: ViewEncapsulation.None,
 })
-export class FigureExample {
+export class FigureExample implements AfterViewInit {
   @Input()
   theme: string;
+
   @HostBinding('class')
   get hb_theme() {
     return this.theme ? `figure-theme-${this.theme}` : '';
+  }
+  constructor(private element: ElementRef, private hljs: HighlightJS) {}
+
+  ngAfterViewInit() {
+    console.log('View Init');
+    this.element.nativeElement.querySelectorAll('code').forEach((el) => {
+      setTimeout(() => this.hljs.highlightBlock(el), 300);
+    });
   }
 }

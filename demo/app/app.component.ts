@@ -2,7 +2,7 @@
 import { Component, ViewContainerRef } from '@angular/core';
 import { Router } from '@angular/router';
 // Vendor
-import { NovoToastService, NovoModalService } from 'novo-elements';
+import { NovoModalService, NovoToastService } from 'novo-elements';
 
 @Component({
   selector: 'novo-demo-app',
@@ -10,6 +10,7 @@ import { NovoToastService, NovoModalService } from 'novo-elements';
 })
 export class AppComponent {
   menuOpen: boolean = false;
+  sectionRoutes: Array<any>;
   designRoutes: Array<any>;
   componentRoutes: Array<any>;
   formRoutes: Array<any>;
@@ -22,7 +23,7 @@ export class AppComponent {
     modalService.parentViewContainer = viewContainerRef;
 
     this.menuOpen = false;
-
+    this.sectionRoutes = ['Home', 'Design', 'Components', 'Patterns', 'Resources'];
     this.designRoutes = router.config.filter((r: any) => r.data.section === 'design').sort(this.sortMenu);
     this.componentRoutes = router.config.filter((r: any) => r.data.section === 'components').sort(this.sortMenu);
     this.formRoutes = router.config.filter((r: any) => r.data.section === 'form-controls').sort(this.sortMenu);

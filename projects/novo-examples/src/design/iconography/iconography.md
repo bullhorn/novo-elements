@@ -26,22 +26,22 @@ Bullhorn Glyphicons **Size:** 1.29em **Padding:** .25em **Border Radius:** .625e
 Make sure to scale the corner radius appropriately when enlarging or decreasing the size of the icon.
 
 <novo-grid columns="2">
-  <figure-example theme="success">
+  <figure-example>
     <img src="assets/images/IconographyScalingDo.svg">
-    <novo-label>
-      <novo-icon color="success">check-circle-filled</novo-icon>
-      DO
-    </novo-label>
-    <novo-text>Always maintain the proportions</novo-text>
+    <novo-text color="grass">
+      <novo-icon mr="1rem">check</novo-icon>
+      <strong>Always maintain the proportions</strong>
+    </novo-text>
+    <novo-text>The border radius should scale as the icon does in order to keep the same aspect ratio.</novo-text>
   </figure-example>
 
-  <figure-example theme="negative">
+  <figure-example>
     <img src="assets/images/IconographyScalingDont.svg">
-    <novo-label>
-      <novo-icon color="negative">close</novo-icon>
-      DON'T
-    </novo-label>
-    <novo-text>That doesn't look like a rectangle</novo-text>
+    <novo-text color="grapefruit">
+      <novo-icon mr="1rem">times</novo-icon>
+      <strong>That doesn't look like a rectangle</strong>
+    </novo-text>
+    <novo-text>If the border radius isn't relative to the size of the icon, you will create inconsistent patterns within the application.</novo-text>
   </figure-example>
 </novo-grid>
 
@@ -50,21 +50,22 @@ Make sure to scale the corner radius appropriately when enlarging or decreasing 
 To preserve readability, icons should have sufficient padding from the edges of their containers. Additionally, the icons should be visually centered in their containers.
 
 <novo-grid columns="2">
-  <figure-example theme="success">
+  <figure-example>
     <img src="assets/images/IconographyPaddingDo.svg">
-    <novo-label>
-      <novo-icon color="success">check-circle-filled</novo-icon>
-      DO
-    </novo-label>
-    <novo-text>It's good to have some breathing room</novo-text>
+    <novo-text color="grass">
+      <novo-icon mr="1rem">check</novo-icon>
+      <strong>It's good to have some breathing room</strong>
+    </novo-text>
+    <novo-text>Consistent spacing will create a more concise and fluid layout that will allow the user to parse information on the page easier.</novo-text>
+
   </figure-example>
 
-  <figure-example theme="negative">
+  <figure-example>
     <img src="assets/images/IconographyPaddingDont.svg">
-    <novo-label>
-      <novo-icon color="negative">close</novo-icon>
-      DON'T
-    </novo-label>
-    <novo-text>It's getting crowded in here</novo-text>
+    <novo-text color="grapefruit">
+      <novo-icon mr="1rem">times</novo-icon>
+      <strong>It's getting crowded in here</strong>
+    </novo-text>
+    <novo-text>Give icons the space they need, the color and background color can convey additional meaning. That meaning can be obscured if the layout seems to crowded. </novo-text>
   </figure-example>
 </novo-grid>

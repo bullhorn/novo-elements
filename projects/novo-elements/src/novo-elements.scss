@@ -72,31 +72,62 @@
 @import "./elements/simple-table/table";
 @import "./elements/tabbed-group-picker/TabbedGroupPicker";
 
-@each $basic, $color in $dark-colors {
-  .bgc-#{$basic} {
+@each $name, $color in $dark-colors {
+  .bgc-#{$name} {
     background: $color;
     color: $white;
   }
 }
 
-@each $basic, $color in $light-colors {
-  .bgc-#{$basic} {
+@each $name, $color in $light-colors {
+  .bgc-#{$name} {
     background: $color;
     color: $dark;
   }
 }
 
-@each $basic, $color in $all-colors {
-  .bgc-#{$basic}-striped {
+@each $name, $color in $all-colors {
+  .bgc-#{$name}-striped {
     & > *:nth-child(odd) {
       background: $color;
     }
   }
+
+  .txc-#{$name} {
+    color: $color;
+  }
 }
 
-@each $basic, $color in $all-colors {
-  .tc-#{$basic} {
-    color: $color;
+@each $key, $value in $spacing-rules {
+  .padding-#{$key} {
+    padding: $value;
+  }
+  .px-#{$key} {
+    padding-left: $value;
+    padding-right: $value;
+  }
+  .py-#{$key} {
+    padding-top: $value;
+    padding-bottom: $value;
+  }
+  .margin-#{$key} {
+    margin: $value;
+  }
+  .ml-#{$key},
+  .mx-#{$key} {
+    margin-left: $value;
+  }
+  .mr-#{$key},
+  .mx-#{$key} {
+    margin-right: $value;
+  }
+  .mt-#{$key},
+  .my-#{$key} {
+    margin-top: $value;
+  }
+  .mb-#{$key},
+  .my-#{$key} {
+    margin-bottom: $value;
   }
 }
 

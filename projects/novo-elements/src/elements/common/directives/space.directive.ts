@@ -60,8 +60,8 @@ export class MarginDirective {
   @Input() marginY: string;
   @Input() my: string;
 
-  @HostBinding('style.margin') get hb_margin() {
-    return this.margin || this.m;
+  @HostBinding('class') get hb_margin() {
+    return `margin-${this.margin || this.m}`;
   }
   @HostBinding('style.margin-left') get hb_margin_left() {
     return this.marginLeft || this.ml || this.mx || this.marginX;
@@ -98,9 +98,13 @@ export class PaddingDirective {
   @Input() paddingY: string;
   @Input() py: string;
 
-  @HostBinding('style.padding') get hb_padding() {
-    return this.padding || this.p;
+  // @HostBinding('style.padding') get hb_padding() {
+  //   return this.padding || this.p;
+  // }
+  @HostBinding('class') get hb_padding() {
+    return `padding-${this.padding || this.p}`;
   }
+
   @HostBinding('style.padding-left') get hb_padding_left() {
     return this.paddingLeft || this.pl || this.px || this.paddingX;
   }

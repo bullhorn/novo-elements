@@ -30,7 +30,11 @@
   </novo-chip-list>
   <novo-autocomplete (optionSelected)="selected($event)">
     <novo-option *ngFor="let shift of filteredShifts | async" [value]="shift">
-      {{shift}}
+      <novo-text>
+        <novo-icon>calendar</novo-icon>
+        {{shift.startTime | isoDate}}
+        {{[shift.startTime, shift.endTime] | isoTimeRange}}
+      </novo-text>
     </novo-option>
   </novo-autocomplete>
 </novo-field>

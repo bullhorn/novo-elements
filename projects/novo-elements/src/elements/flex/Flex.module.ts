@@ -1,13 +1,12 @@
-// NG2
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-// APP
-import { NovoFlexElement } from './Flex';
+import { NovoBoxElement } from './Box';
+import { NovoFlexElement, NovoStackElement } from './Flex';
 import { NovoGridElement } from './Grid';
 
 @NgModule({
   imports: [CommonModule],
-  declarations: [NovoFlexElement, NovoGridElement],
-  exports: [NovoFlexElement, NovoGridElement],
+  declarations: [NovoFlexElement, NovoStackElement, NovoGridElement, NovoBoxElement],
+  exports: [NovoFlexElement, NovoStackElement, NovoGridElement, NovoBoxElement],
 })
 export class NovoFlexModule {}

@@ -37,6 +37,7 @@ testem.log
 /typings
 /projects/novo-examples/src/examples.module.ts
 /projects/novo-examples/src/examples.routes.ts
+/projects/novo-examples/src/documentation.json
 
 # System Files
 .DS_Store

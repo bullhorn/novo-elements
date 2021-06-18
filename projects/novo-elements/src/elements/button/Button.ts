@@ -12,6 +12,7 @@ import { BooleanInput } from '../../utils';
     '[attr.loading]': 'loading',
     '[attr.side]': 'side',
     '[attr.size]': 'size',
+    '[attr.role]': 'button',
   },
   styleUrls: [
     './styles/button.scss',
@@ -63,11 +64,31 @@ import { BooleanInput } from '../../utils';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NovoButtonElement {
+  /**
+   * The text color of the button. Should be used for Icon buttons. see theme.
+   */
   @Input() color: string;
+  /**
+   * The side of the button to display the icon.
+   * @deprecated
+   */
   @Input() side: string = 'right';
+  /**
+   * 	Sets the size of the button. One of: small, medium, large
+   */
   @Input() size: string;
+  /**
+   * The base styling to apply to the button.
+   */
   @Input() theme: string = 'dialogue';
+  /**
+   * Conditionally show a spinner over the top of a button.
+   */
   @Input() loading: boolean;
+  /**
+   * Optionally display `bullhorn-icon` with the button along with the text.
+   * @deprecated
+   */
   @Input()
   set icon(icon: string) {
     if (icon) {
@@ -78,6 +99,9 @@ export class NovoButtonElement {
     return this._icon;
   }
 
+  /**
+   * Make the button non-interactive.
+   */
   @Input()
   @BooleanInput()
   @HostBinding('class.novo-button-disabled')

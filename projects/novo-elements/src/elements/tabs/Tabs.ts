@@ -5,6 +5,9 @@ import { BooleanInput } from '../../utils';
 @Component({
   selector: 'novo-nav',
   template: '<ng-content></ng-content>',
+  host: {
+    '[attr.role]': 'tablist',
+  },
 })
 export class NovoNavElement {
   @Input()
@@ -66,6 +69,7 @@ export class NovoNavElement {
     '(click)': 'select()',
     '[class.active]': 'active',
     '[class.disabled]': 'disabled',
+    '[attr.role]': 'tab',
   },
   template: `
     <div #tablink class="novo-tab-link">
@@ -125,6 +129,7 @@ export class NovoTabElement implements AfterViewInit {
     '(click)': 'select()',
     '[class.active]': 'active',
     '[class.disabled]': 'disabled',
+    '[attr.role]': 'tab',
   },
   template: '<ng-content></ng-content>',
 })
@@ -154,6 +159,7 @@ export class NovoTabButtonElement {
     '(click)': 'select()',
     '[class.active]': 'active',
     '[class.disabled]': 'disabled',
+    '[attr.role]': 'tab',
   },
   template: `
     <div class="novo-tab-link">
@@ -167,6 +173,8 @@ export class NovoTabLinkElement {
   active: boolean = false;
   @Input()
   disabled: boolean = false;
+  @Input()
+  spy: string;
 
   nav: any;
 
@@ -178,6 +186,10 @@ export class NovoTabLinkElement {
   select() {
     if (!this.disabled) {
       this.nav.select(this);
+      if (this.spy) {
+        const el = document.querySelector(`#${this.spy}`);
+        el?.scrollIntoView(true);
+      }
     }
   }
 }
@@ -221,6 +233,7 @@ export class NovoNavOutletElement {
   selector: 'novo-nav-content',
   host: {
     '[class.active]': 'active',
+    '[attr.role]': 'tabpanel',
   },
   template: '<ng-content></ng-content>',
 })

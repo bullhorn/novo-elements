@@ -193,22 +193,10 @@ export class NovoTimePickerInputElement implements OnInit, ControlValueAccessor 
         (event.target as HTMLInputElement).value = `0${text}`;
       }
       if (!this.military) {
-        let inputArr = text.split('');
-        const timeValue = this.maskOptions.blocks.aa.enum.find((element) => {
-          for (let i = 1; i < 5; i++) {
-            if (element[0] === text[text.length - i]) {
-              return true;
-            }
-          }
-        });
-        if (timeValue) {
-          inputArr[inputArr.length - 2] = timeValue[0];
-          inputArr[inputArr.length - 1] = timeValue[1];
-          const trailingX = inputArr.indexOf('x');
-          if (trailingX > -1) {
-            inputArr.splice(trailingX, 1);
-          }
-          (event.target as HTMLInputElement).value = inputArr.join('');
+        const test = text.substr(5, 4).replace(/x/g, '').trim().slice(0, 2);
+        const timePeriod = this.maskOptions.blocks.aa.enum.find((it) => it[0] === test[0]);
+        if (timePeriod) {
+          (event.target as HTMLInputElement).value = `${text.slice(0, 5)} ${timePeriod}`;
         }
       }
     }
@@ -217,18 +205,10 @@ export class NovoTimePickerInputElement implements OnInit, ControlValueAccessor 
   _handleBlur(event: FocusEvent): void {
     const text = (event.target as HTMLInputElement).value;
     if (!this.military) {
-      let inputArr = text.split('');
-      const timeValue = this.maskOptions.blocks.aa.enum.find((element) => {
-        for (let i = 1; i < 3; i++) {
-          if (element[0] === text[text.length - i]) {
-            return true;
-          }
-        }
-      });
-      if (!timeValue) {
-        inputArr[inputArr.length - 2] = '';
-        inputArr[inputArr.length - 1] = '';
-        (event.target as HTMLInputElement).value = inputArr.join('');
+      const test = text.substr(5, 4).replace(/x/g, '').trim().slice(0, 2);
+      const timePeriod = this.maskOptions.blocks.aa.enum.find((it) => it[0] === test[0]);
+      if (!timePeriod) {
+        (event.target as HTMLInputElement).value = `${text.slice(0, 5)}`;
       }
     }
   }

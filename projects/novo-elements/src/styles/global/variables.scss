@@ -68,6 +68,16 @@ $spacing-md: 1.2rem; // +6
 $spacing-lg: 1.6rem; // +8
 $spacing-xl: 2rem; // +8
 
+$spacing-rules: (
+  "none": $spacing-none,
+  "px": $spacing-px,
+  "xs": $spacing-xs,
+  "sm": $spacing-sm,
+  "md": $spacing-md,
+  "lg": $spacing-lg,
+  "xl": $spacing-xl,
+);
+
 // Typography
 // --------------------------------------------------
 $base-font-size: 10px;

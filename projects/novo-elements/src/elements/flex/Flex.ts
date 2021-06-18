@@ -2,7 +2,7 @@
 import { Component, HostBinding, Input } from '@angular/core';
 
 @Component({
-  selector: 'novo-flex',
+  selector: 'novo-flex,novo-row',
   template: ` <ng-content></ng-content> `,
 })
 export class NovoFlexElement {
@@ -29,9 +29,23 @@ export class NovoFlexElement {
 
   @HostBinding('style.gap')
   @Input()
-  gap: string = 'nowrap';
+  gap: string;
 
   // get hb_gridCols() {
   //   return this._sanitizer.bypassSecurityTrustStyle(`repeat(${this.columns}, ${ResourceSettings.eventWidth})`);
   // }
+}
+
+@Component({
+  selector: 'novo-stack,novo-column',
+  template: ` <ng-content></ng-content> `,
+})
+export class NovoStackElement extends NovoFlexElement {
+  @HostBinding('style.flex-direction')
+  @Input()
+  direction: string = 'column';
+
+  @HostBinding('style.align-items')
+  @Input()
+  align: string = 'start';
 }

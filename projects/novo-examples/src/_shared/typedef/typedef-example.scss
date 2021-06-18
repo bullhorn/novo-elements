@@ -50,7 +50,11 @@ as-split {
   border-top: 1px solid lightgray;
   padding: 1rem;
   background-color: #eee;
-  code {
-    font-size: 1.1rem;
+  pre {
+    margin: 0 0 0px !important;
+    code {
+      font-size: 1.1rem;
+      padding: 0.2rem !important;
+    }
   }
 }
