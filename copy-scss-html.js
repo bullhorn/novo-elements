@@ -9,8 +9,8 @@ const srcFolder = path.join(rootFolder, 'projects/novo-elements/src');
 const distFolder = path.join(rootFolder, 'dist/novo-elements');
 
 return Promise.resolve()
-  .then(() => _relativeCopy('**/*.scss', srcFolder, distFolder))
-  .then(() => console.log('SCSS files copy succeeded.'))
+  .then(() => _relativeCopy('**/*.{scss,html}', srcFolder, distFolder))
+  .then(() => console.log('SCSS/HTML files copy succeeded.'))
   .catch(e => {
     console.error('Build failed. See below for errors.\n');
     console.error(e);
