@@ -7,7 +7,7 @@
   "scripts": {
     "precommit": "lint-staged",
     "build": "ng build novo-elements && ng build chomsky",
-    "postbuild": "npm run copy-scss && npm run build:examples",
+    "postbuild": "npm run copy-scss-html && npm run build:examples",
     "postinstall": "ngcc ... --tsconfig './projects/novo-elements/tsconfig.lib.json'",
     "build:watch": "ng build novo-elements --watch",
     "build:chomsky": "ng build chomsky",
@@ -20,7 +20,7 @@
     "generate:routes": "ts-node --project tools/tsconfig.json ./tools/examples-routes.ts",
     "generate:all": "npm run generate:examples && npm run generate:routes",
     "start": "ng serve demo",
-    "copy-scss": "node copy-scss.js",
+    "copy-scss-html": "node copy-scss-html.js",
     "test": "jest projects",
     "test:watch": "jest projects --watch",
     "lint": "ng lint",
