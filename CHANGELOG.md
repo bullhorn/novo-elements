@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.1.0](https://github.com/bullhorn/novo-elements/compare/v4.7.0...v5.1.0) (2021-06-30)
+
+
+### Features
+
+* enable angular ivy compiler ([#1195](https://github.com/bullhorn/novo-elements/issues/1195)) ([084998c](https://github.com/bullhorn/novo-elements/commit/084998c13474806789e061952975746b069e1ec1))
+
+
+### Bug Fixes
+
+* **GroupedMultiPicker:** correct typo in groupedMultiPicker empty state ([f03a0f4](https://github.com/bullhorn/novo-elements/commit/f03a0f4789492fb470fe2d62576f4a86b35fd067))
+
 ## [4.7.0](https://github.com/bullhorn/novo-elements/compare/v4.6.1...v4.7.0) (2021-06-02)
 
 
