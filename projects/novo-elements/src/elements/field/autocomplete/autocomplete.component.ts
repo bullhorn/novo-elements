@@ -38,6 +38,7 @@ import {
 } from '../../common';
 import { NovoOverlayTemplateComponent } from '../../common/overlay';
 import { NovoFieldElement, NOVO_FORM_FIELD } from '../field';
+import { NovoFieldControl } from '../field-control';
 
 /** Event object that is emitted when an autocomplete option is selected. */
 export class NovoOptionSelectedEvent {
@@ -97,11 +98,24 @@ export class NovoAutocompleteElement
   /** Tabindex for the toggle. */
   @Input() tabIndex: number | null;
 
+  /** Key to use to trigger autocomplete. used for textarea. */
+  @Input() triggerOn: (control: NovoFieldControl<any>) => boolean = (control) => control.focused;
+
   /** Function that maps an option's control value to its display value in the trigger. */
   @Input() displayWith: ((value: any) => string) | null = null;
 
   /** Screenreader label for the button. */
   @Input('aria-label') ariaLabel: string;
+
+  /** Whether the user should be allowed to select multiple options. */
+  @Input()
+  get multiple(): boolean {
+    return this._multiple || !!this._formField._control?.multiple || this._formField._control?.controlType === 'chip-list';
+  }
+  set multiple(value: boolean) {
+    this._multiple = coerceBooleanProperty(value);
+  }
+  private _multiple: boolean = false;
 
   /** Whether the toggle button is disabled. */
   @Input()
@@ -162,8 +176,11 @@ export class NovoAutocompleteElement
     this._watchStateChanges();
     this._watchSelectionEvents();
   }
+
   checkPanel() {
-    if (this._formField._control.focused && this.element) {
+    const isTriggered = this.triggerOn(this._formField._control);
+    console.log('Is Triggered', isTriggered);
+    if (isTriggered && this.element) {
       this.openPanel();
     }
   }
@@ -176,7 +193,24 @@ export class NovoAutocompleteElement
     // If it's used within a `NovoField`, we should set it through the property so it can go
     // through change detection.
     if (this._formField) {
-      this._formField._control.value = inputValue;
+      const { controlType, lastCaretPosition = 0 } = this._formField._control;
+      if (controlType == 'textarea') {
+        const currentValue = this._formField._control.value.split('');
+        currentValue.splice(lastCaretPosition, 0, inputValue);
+        this._formField._control.value = currentValue.join('');
+      } else {
+        let valueToEmit: any = inputValue;
+        if (this.multiple) {
+          console.log('Current Field', this._formField._control);
+          const currentValue = this._formField._control.value;
+          if (Array.isArray(currentValue)) {
+            valueToEmit = [...currentValue, inputValue];
+          } else {
+            valueToEmit = [currentValue, inputValue];
+          }
+        }
+        this._formField._control.value = valueToEmit;
+      }
     } else {
       // this._element.nativeElement.value = inputValue;
       console.warn(`AutoComplete only intended to be used within a NovoField`);

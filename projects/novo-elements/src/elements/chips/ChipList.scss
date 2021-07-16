@@ -1,4 +1,4 @@
-@import "../../styles/global/variables.scss";
+@import "../../styles/variables.scss";
 @import "../common/typography/text.mixins";
 
 $novo-chip-border-radius: 0.4rem;
@@ -21,131 +21,134 @@ $novo-chip-input-margin: 4px;
 $novo-chip-avatar-size: 24px;
 $novo-chip-remove-size: 18px;
 
-.novo-chip {
-  position: relative;
-  box-sizing: border-box;
-  -webkit-tap-highlight-color: transparent;
-  // Chips could be set on buttons so we need to reset the user agent styles.
-  border: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-}
-
-.novo-chip {
-  @include novo-text-medium();
-  background: $off-white;
-  color: $ocean;
-  margin-right: 5px;
-
-  border: 1px solid transparent;
-  transition: all 200ms ease-in-out;
-  display: inline-flex;
-  padding: $novo-chip-vertical-padding $novo-chip-horizontal-padding;
-  border-radius: $novo-chip-border-radius;
-  align-items: center;
-  cursor: default;
-  gap: 1rem;
-  min-height: $novo-chip-min-height;
-
-  // Centering the content using flexbox won't work on IE, if we have
-  // a `min-height` without setting a `height`. This height won't do
-  // anything since it's less than the minimum set above.
-  height: 1px;
-
-  // Overlay used to darken the chip on hover and focus.
-  &::after {
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    position: absolute;
-    border-radius: inherit;
-    opacity: 0;
-    background-color: black;
-    content: "";
-    pointer-events: none;
-    transition: opacity 200ms ease-in-out;
+.novo-chip-list,
+novo-chips {
+  .novo-chip {
+    position: relative;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+    // Chips could be set on buttons so we need to reset the user agent styles.
+    border: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
   }
 
-  &:hover {
-    border: 1px solid $positive;
-    // &::after {
-    //   opacity: 0.12;
-    // }
-  }
+  .novo-chip {
+    @include novo-text-medium();
+    background: $off-white;
+    color: $ocean;
+    margin-right: 5px;
 
-  &:focus {
-    outline: none;
-    border: 1px solid $positive;
+    border: 1px solid transparent;
+    transition: all 200ms ease-in-out;
+    display: inline-flex;
+    padding: $novo-chip-vertical-padding $novo-chip-horizontal-padding;
+    border-radius: $novo-chip-border-radius;
+    align-items: center;
+    cursor: default;
+    gap: 1rem;
+    min-height: $novo-chip-min-height;
 
+    // Centering the content using flexbox won't work on IE, if we have
+    // a `min-height` without setting a `height`. This height won't do
+    // anything since it's less than the minimum set above.
+    height: 1px;
+
+    // Overlay used to darken the chip on hover and focus.
     &::after {
-      opacity: 0.16;
-    }
-  }
-
-  &.novo-chip-disabled {
-    &::after {
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      position: absolute;
+      border-radius: inherit;
       opacity: 0;
+      background-color: black;
+      content: "";
+      pointer-events: none;
+      transition: opacity 200ms ease-in-out;
+    }
+
+    &:hover {
+      border: 1px solid $positive;
+      // &::after {
+      //   opacity: 0.12;
+      // }
+    }
+
+    &:focus {
+      outline: none;
+      border: 1px solid $positive;
+
+      &::after {
+        opacity: 0.16;
+      }
+    }
+
+    &.novo-chip-disabled {
+      &::after {
+        opacity: 0;
+      }
+
+      .novo-chip-remove,
+      .novo-chip-trailing-icon {
+        cursor: default;
+      }
+    }
+
+    // &.novo-chip-with-trailing-icon.novo-chip-with-avatar,
+    // &.novo-chip-with-avatar {
+    //   padding-top: $novo-chip-avatar-vertical-padding;
+    //   padding-bottom: $novo-chip-avatar-vertical-padding;
+    // }
+
+    // &.novo-chip-with-trailing-icon.novo-chip-with-avatar {
+    //   padding-right: $novo-chip-remove-after-padding;
+    //   padding-left: $novo-chip-avatar-before-padding;
+    // }
+
+    // &.novo-chip-with-trailing-icon {
+    //   padding-top: $novo-chip-remove-vertical-padding;
+    //   padding-bottom: $novo-chip-remove-vertical-padding;
+    //   padding-right: $novo-chip-remove-after-padding;
+    //   padding-left: $novo-chip-horizontal-padding;
+    // }
+
+    // &.novo-chip-with-avatar {
+    //   padding-left: $novo-chip-avatar-before-padding;
+    //   padding-right: $novo-chip-horizontal-padding;
+    // }
+
+    .novo-chip-avatar::not(novo-icon) {
+      width: $novo-chip-avatar-size;
+      height: $novo-chip-avatar-size;
+    }
+
+    .novo-chip-avatar {
+      margin-right: $novo-chip-avatar-after-margin;
+      margin-left: $novo-chip-avatar-before-margin;
     }
 
     .novo-chip-remove,
     .novo-chip-trailing-icon {
-      cursor: default;
+      width: $novo-chip-remove-size;
+      height: $novo-chip-remove-size;
+      cursor: pointer;
     }
-  }
 
-  // &.novo-chip-with-trailing-icon.novo-chip-with-avatar,
-  // &.novo-chip-with-avatar {
-  //   padding-top: $novo-chip-avatar-vertical-padding;
-  //   padding-bottom: $novo-chip-avatar-vertical-padding;
-  // }
+    .novo-chip-remove,
+    .novo-chip-trailing-icon {
+      margin-left: $novo-chip-remove-before-margin;
+      margin-right: 0;
+    }
 
-  // &.novo-chip-with-trailing-icon.novo-chip-with-avatar {
-  //   padding-right: $novo-chip-remove-after-padding;
-  //   padding-left: $novo-chip-avatar-before-padding;
-  // }
-
-  // &.novo-chip-with-trailing-icon {
-  //   padding-top: $novo-chip-remove-vertical-padding;
-  //   padding-bottom: $novo-chip-remove-vertical-padding;
-  //   padding-right: $novo-chip-remove-after-padding;
-  //   padding-left: $novo-chip-horizontal-padding;
-  // }
-
-  // &.novo-chip-with-avatar {
-  //   padding-left: $novo-chip-avatar-before-padding;
-  //   padding-right: $novo-chip-horizontal-padding;
-  // }
-
-  .novo-chip-avatar::not(novo-icon) {
-    width: $novo-chip-avatar-size;
-    height: $novo-chip-avatar-size;
-  }
-
-  .novo-chip-avatar {
-    margin-right: $novo-chip-avatar-after-margin;
-    margin-left: $novo-chip-avatar-before-margin;
-  }
-
-  .novo-chip-remove,
-  .novo-chip-trailing-icon {
-    width: $novo-chip-remove-size;
-    height: $novo-chip-remove-size;
-    cursor: pointer;
-  }
-
-  .novo-chip-remove,
-  .novo-chip-trailing-icon {
-    margin-left: $novo-chip-remove-before-margin;
-    margin-right: 0;
-  }
-
-  .novo-chip-remove {
-    color: $light;
-  }
-  &:not(.novo-chip-disabled) {
-    .novo-chip-remove:hover {
-      color: darken($light, 30%);
+    .novo-chip-remove {
+      color: $light;
+    }
+    &:not(.novo-chip-disabled) {
+      .novo-chip-remove:hover {
+        color: darken($light, 30%);
+      }
     }
   }
 }

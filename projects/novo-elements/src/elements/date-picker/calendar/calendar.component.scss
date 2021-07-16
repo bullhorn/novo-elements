@@ -1,4 +1,4 @@
-@import "../../../styles/global/variables.scss";
+@import "../../../styles/variables.scss";
 
 :host(.layout-horizontal) {
   font-size: 1.2rem;
@@ -29,8 +29,8 @@
   display: block;
   width: 100%;
   text-align: center;
-  background: $white;
-  color: $dark;
+  background: var(--background-alt);
+  color: var(--text-bright);
   position: relative;
   user-select: none;
 
@@ -54,7 +54,7 @@
     justify-content: space-between;
     align-items: center;
     cursor: default;
-    border-bottom: 1px solid $off-white;
+    border-bottom: 1px solid var(--border);
     .previous {
       width: 30px;
       height: 15px;

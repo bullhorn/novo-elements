@@ -12,7 +12,7 @@ novo-category-dropdown {
       max-width: 400px;
       min-width: 400px;
       display: block;
-      z-index: 1000;
+      z-index: z("max");
       border-radius: 2px;
       top: 100%;
       margin-top: 5px;

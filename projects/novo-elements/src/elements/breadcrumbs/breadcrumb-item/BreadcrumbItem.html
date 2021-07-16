@@ -4,17 +4,17 @@
     <ng-template [ngTemplateOutlet]="breadcrumbContentTpl"></ng-template>
     <novo-dropdown>
       <button theme="icon" icon="collapse" size="small"></button>
-      <list class="novo-breadcrumb-dropdown-menu">
+      <novo-optgroup class="novo-breadcrumb-dropdown-menu">
         <div *ngIf="isSearch" class="dropdown-search-container">
           <novo-search alwaysOpen="true" (searchFn)="searchEvent($event)" [class]="'search-in-dropdown'"></novo-search>
         </div>
-        <item *ngFor="let item of menuListDisplay" title="{{ item.name }}">
+        <novo-option *ngFor="let item of menuListDisplay" title="{{ item.name }}">
           <a *ngIf="!item.linkType || item.linkType === 'hrefLink'" [href]="item.link" rel="noopener"
             [target]="item.target ? item.target : '_self'">{{ item.name }}</a>
           <a *ngIf="item.linkType === 'routerLink'" rel="noopener" [target]="item.target" [href]="item.link"
             (click)="navigateTo($event, item)">{{ item.name }}</a>
-        </item>
-      </list>
+        </novo-option>
+      </novo-optgroup>
     </novo-dropdown>
   </span>
 </ng-container>

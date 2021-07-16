@@ -6,6 +6,41 @@ order: 1
 ---
 
 <novo-grid columns="2" align="start" gap="2rem">
+<div>
+
+### Why?
+
+A card is a container that organizes a related grouping of information. Cards can sometimes be configured and reordered on a page allowing for optimal user customization. A card is content container for the presentation information with a shared singular context, usually related in some way to the main content.
+
+</div>
+
+<img src="https://via.placeholder.com/350x250"/>
+
+<div>
+
+### Use When
+
+- (✓) When information can be grouped and the user might need access to multiple groups of information at once.
+
+  TBW
+
+- (✓) When providing a summary of content as an entry point to a larger grouping of information
+
+  TBW
+
+</div>
+<div>
+
+### Don′t Use When
+
+- (x) When a lot of information on the card makes it too large. Instead consider using a modal or showing the information on a new page.
+
+  TBW
+
+</div>
+</novo-grid>
+
+<novo-grid columns="2" align="start" gap="2rem">
   <novo-stack gap="2rem">
     <novo-title>Why?</novo-title>
     <novo-text>

@@ -154,6 +154,13 @@ export class NovoSelectElement
   private _selectedOptionChanges = Subscription.EMPTY;
   protected readonly _destroy = new Subject<void>();
 
+  readonly controlType: string = 'select';
+
+  /** @docs-private Implemented as part of NovoFieldControl. */
+  lastKeyValue: string = null;
+  /** @docs-private Implemented as part of NovoFieldControl.*/
+  lastCaretPosition: number | null;
+
   _selectionModel: SelectionModel<NovoOption>;
 
   /** The aria-describedby attribute on the chip list for improved a11y. */

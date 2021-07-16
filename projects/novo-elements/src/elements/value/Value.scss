@@ -47,15 +47,15 @@ novo-value {
   }
   novo-entity-list {
     display: block;
+    @include entity-colors() using ($color, $name) {
+      i.#{$name} {
+        background: $color;
+      }
+    }
     .entity {
       padding-top: 6px;
       padding-bottom: 6px;
       font-size: 1.15em;
-    }
-    @each $entity, $color in $entity-colors {
-      i.#{$entity} {
-        color: $color;
-      }
     }
     i {
       font-size: 1.1em;

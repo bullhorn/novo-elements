@@ -1,4 +1,4 @@
-@import "../../../styles/global/variables.scss";
+@import "../../../styles/variables.scss";
 @import "../../common/typography/text.mixins";
 
 .novo-breadcrumb-font-style {
@@ -43,25 +43,25 @@
 
     &:hover {
       svg g polygon {
-        fill: $dark;
+        fill: var(--text-main, $dark);
       }
     }
   }
 
   .novo-breadcrumb-item-active {
-    color: $dark;
+    color: var(--text-main, $dark);
 
     ::ng-deep a {
-      color: $dark;
+      color: var(--text-main, $dark);
       text-decoration: none;
     }
 
     svg g polygon {
-      fill: $dark;
+      fill: var(--text-main, $dark);
     }
 
     span {
-      color: $dark;
+      color: var(--text-main, $dark);
     }
   }
 

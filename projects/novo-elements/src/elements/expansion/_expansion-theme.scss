@@ -1,14 +1,14 @@
-@import "../../styles/global/variables";
+@import "../../styles/variables";
 @import "../../styles/global/functions";
 
 @mixin novo-expansion-panel-theme() {
   .novo-expansion-panel {
-    background: $white;
-    color: $dark;
+    background: var(--background-alt, $white);
+    color: var(--text-main, $dark);
   }
 
   .novo-action-row {
-    border-top-color: $dark;
+    border-top-color: var(--border, $dark);
   }
 
   .novo-expansion-panel:not(.novo-expanded) .novo-expansion-panel-header {
@@ -22,7 +22,7 @@
   }
 
   .novo-expansion-panel-header-title {
-    color: $dark;
+    color: var(--text-main, $dark);
   }
 
   .novo-expansion-panel-header-description,
@@ -41,8 +41,8 @@
   }
 
   .novo-expansion-panel.novo-expanded {
-    @each $basic, $color in $all-colors {
-      &[theme="#{$basic}"] {
+    @include theme-colors() using ($color, $name) {
+      &[theme="#{$name}"] {
         border-top: 3px solid $color;
       }
     }

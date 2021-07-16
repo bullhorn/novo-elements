@@ -1,4 +1,4 @@
-@import "../../styles/global/variables.scss";
+@import "../../styles/variables.scss";
 @import "../common/typography/text.mixins";
 
 :host {
@@ -15,9 +15,9 @@
     .menu {
       cursor: default;
       list-style: none;
-      background-color: $white;
+      background-color: var(--background-alt);
       padding-inline-start: 0px !important;
-      box-shadow: $multi-shadow;
+      box-shadow: $shadow-multi;
       :hover {
         background: rgba($ocean, 0.1);
         color: $dark;

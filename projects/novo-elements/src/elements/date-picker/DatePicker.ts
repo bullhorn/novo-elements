@@ -104,27 +104,52 @@ const DATE_PICKER_VALUE_ACCESSOR = {
   `,
 })
 export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
+  /**
+   * The minimum year to allow selected in year select view
+   **/
   @Input()
   minYear: string | number;
+  /**
+   * The maximum year to allow selected in year select view
+   **/
   @Input()
   maxYear: string | number;
+  /**
+   * The minimum date that can be selected.
+   **/
   @Input()
   start: Date;
+  /**
+   * The maximum date that can be selected.
+   **/
   @Input()
   end: Date;
+  /**
+   * **Deprecated** Whether the date-picker is used outside of an overlay.
+   **/
   @Input()
   @BooleanInput()
   inline: boolean;
+  /**
+   * Day of the week the calendar should display first, Sunday=0...Saturday=6
+   **/
   @Input()
   weekStart: number = 0;
+  /**
+   * Certain dates that are already selected.
+   **/
   @Input()
   preselected: Date[] = [];
-
+  /**
+   * Whether the days for the previous and next month should be hidden.
+   **/
   @Input()
   @BooleanInput()
   @HostBinding('class.hide-overflow-days')
   public hideOverflowDays: boolean = false;
-
+  /**
+   * Whether the footer which contains `today` button should be hidden.
+   **/
   @Input()
   @BooleanInput()
   public hideFooter: boolean = false;
@@ -138,6 +163,10 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
   _weekRangeSelect: boolean;
   _numberOfMonths: number[] = [0];
 
+  /**
+   * Number of months to display at once.
+   * @default 1
+   **/
   @Input()
   get numberOfMonths(): number {
     return this._numberOfMonths.length;
@@ -146,6 +175,10 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
     this._numberOfMonths = Array.from(Array(Number(value)).keys());
   }
 
+  /**
+   * How the date selection should work.
+   * @default single
+   **/
   @Input()
   get mode(): DatePickerSelectModes {
     return this._mode;
@@ -155,6 +188,9 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
       this._mode = value;
     }
   }
+  /**
+   * **deprecated** please use `mode="range"`.
+   **/
   @Input()
   get range(): boolean {
     return ['range', 'week'].includes(this.mode) || this._range;
@@ -166,6 +202,9 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
       this.mode = 'range';
     }
   }
+  /**
+   * **deprecated** please use `mode="week"`.
+   **/
   @Input()
   get weekRangeSelect(): boolean {
     return this._mode === 'week' || this._weekRangeSelect;

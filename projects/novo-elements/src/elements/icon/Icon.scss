@@ -20,8 +20,16 @@ novo-icon {
       display: none;
     }
   }
-  @each $basic, $color in $all-colors {
-    &[theme="#{$basic}"] {
+  @include theme-colors() using ($color, $name) {
+    &[color="#{$name}"] {
+      i {
+        color: $color;
+        &:before {
+          color: $color;
+        }
+      }
+    }
+    &[theme="#{$name}"] {
       i {
         color: $white;
         background: $color;
@@ -49,16 +57,7 @@ novo-icon {
       }
     }
   }
-  @each $basic, $color in $all-colors {
-    &[color="#{$basic}"] {
-      i {
-        color: $color;
-        &:before {
-          color: $color;
-        }
-      }
-    }
-  }
+
   &[size="small"] {
     font-size: 1.5em;
     i {

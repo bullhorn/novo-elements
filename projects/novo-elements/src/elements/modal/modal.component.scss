@@ -45,11 +45,11 @@ novo-notification {
 novo-modal,
 novo-notification {
   display: block;
-  background-color: #fff;
+  background-color: var(--background-alt);
   margin-bottom: $spacing-md;
   border-radius: 4px;
   box-shadow: 0 1px 7px rgba(0, 0, 0, 0.09), 0 1px 3px rgba(0, 0, 0, 0.2);
-  z-index: 1000;
+  z-index: z(modal);
   position: relative;
   min-width: 330px;
   max-width: 600px;
@@ -81,24 +81,24 @@ novo-notification {
 
     h1 {
       font-size: 1.8em;
-      color: darken($light, 45%);
+      color: var(--text-bright);
       margin: 0 auto;
     }
 
     h2,
     h4 {
       font-size: 1.3em;
-      color: darken($light, 15%);
+      color: var(--text-muted);
       margin: 0 auto;
       padding: 0;
     }
 
     i.indicator {
-      color: darken($light, 10%);
+      color: var(--text-muted);
       font-size: 1.7em;
       border-radius: 50%;
       padding: 0.4em;
-      border: 2px solid darken($light, 10%);
+      border: 2px solid var(--text-muted);
       margin: 0 auto;
       align-self: center;
     }

@@ -6,24 +6,44 @@ order: 1
 ---
 
 <novo-grid columns="2" align="start" gap="2rem">
-  <novo-stack gap="2rem">
-    <novo-title>Why?</novo-title>
-    <novo-text>
-      Tabs make it easy to explore and switch between different views or functional aspects of an app or to browse categorized data sets. Tabs in Bullhorn have two different themes; A 'color' theme for tabbed navigation on a colored background, and a 'white' theme for tabs on a white background.
-    </novo-text>
-  </novo-stack>
-  <img src="https://via.placeholder.com/350x250"/>
-  <novo-stack gap="2rem">
-    <novo-title>When to Use</novo-title>
-    <novo-text color="grass"><novo-icon mr="1rem">check</novo-icon>Do use navigate between content with a shared context.</novo-text>
-    <novo-text>Use a notification modal to ask the user to confirm when performing an action that cannot be undone; such as deleting a record, navigating away from something unsaved, or converting a file.</novo-text>
-  </novo-stack>
-  <novo-stack gap="2rem">
-    <novo-title>When <em>NOT</em> to Use</novo-title>
-    <novo-text color="grapefruit"><novo-icon mr="1rem">times</novo-icon>Don't use main page navigation</novo-text>
-    <novo-text>Notification modals should **NOT** be used to confirm actions that have already completed. Conveying information that does not require action is not critical enough to fully obscure the main content instead. Use [toast](/components/toast) instead.</novo-text>
-    <novo-text color="grapefruit"><novo-icon mr="1rem">times</novo-icon>Don't use toggle between option values</novo-text>
-    <novo-text>While a tab list is similar to selection list it is not meant to provide a way to toggle between options for the display of a single item. Use [radio](/components/radio) or [radio](/components/select) instead.</novo-text>
+<div>
 
-  </novo-stack>
+### Why?
+
+Tabs make it easy to explore and switch between different views or functional aspects of an app or to browse categorized data sets. Tabs are used to section information over multiple pages within the same context. Only a single tab can be open at a time, allowing the user to focus on the information that the tab contains.
+
+</div>
+
+<img src="/assets/images/ButtonOverview.png"/>
+
+<div>
+
+### Use When
+
+- (✓) When a page contains a lot of information that can be clearly grouped and named.
+
+  E.g. A Candidate record page can be split up into Work History, Credentials, Education, etc.
+
+- (✓) For top level page navigation
+
+  For example: Vertical tabs can be used in a side navigation to switch between pages or bottom tabs can be used in mobile.
+
+</div>
+<div>
+
+### Don′t Use When
+
+- (x) Do not use to separate related content into multiple parts or break up (inter)actions that are important to continue with the user’s workflow.
+
+  A user should be able to start and finish an action within a single tab. Instead consider using a Stepper component. Within a form, to organize and grouping fields together use a section divider.
+
+- (x) Do not use when the users needs to see the information on each tab at the same time.
+
+  If users need to see correlated content that is not on the tab they are viewing, consider using a Slideout. Or when data needs to be grouped further, use Cards.
+
+- (x) Do not use to control the view of a single component, instead use radio buttons or tiles (button bar / segmented button).
+
+  Don’t use tab to switch table data between states (past, present) (original, adjusted).
+
+</div>
 </novo-grid>

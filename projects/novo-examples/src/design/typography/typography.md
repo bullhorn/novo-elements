@@ -1,5 +1,12 @@
 # Typography
 
+Aim for about 140%-180% for optimal readability and accessibility.
+Limit line length to 70–80 characters.
+Font size should be a minimum of 16pt.
+Small fonts need more spacing.
+Experiment with tighter spacing on pull quotes or other short texts.
+Check your line spacing when you change font or font size.
+
 ## Roboto, not robotic.
 
 Roboto's refined letterforms combine geometry with open, rounded features to create a structured, yet friendly typeface. It maintains a human\-like quality while expressing a clean and modern aesthetic.

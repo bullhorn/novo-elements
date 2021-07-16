@@ -1,4 +1,4 @@
-@import "../../styles/global/variables";
+@import "../../styles/variables";
 @import "../../styles/global/functions";
 
 /* default styling for progress bar */
@@ -7,6 +7,7 @@
   height: 100%;
 
   &.linear {
+    @include theme-backgrounds("color");
     background-color: $positive;
 
     &:first-child {
@@ -33,15 +34,16 @@
     &.animated {
       animation: progress-bar-stripes 2s linear infinite;
     }
-
-    @each $basic, $color in $all-colors {
-      &[color="#{$basic}"] {
-        background-color: $color;
-      }
-    }
   }
 
   &.radial {
+    @include theme-colors() using ($color, $name) {
+      &[color="#{$name}"] {
+        svg circle {
+          stroke: $color;
+        }
+      }
+    }
     position: absolute;
 
     svg {
@@ -57,14 +59,6 @@
         font-family: sans-serif;
         font-size: 0.5em;
         text-anchor: middle;
-      }
-    }
-
-    @each $basic, $color in $all-colors {
-      &[color="#{$basic}"] {
-        svg circle {
-          stroke: $color;
-        }
       }
     }
   }

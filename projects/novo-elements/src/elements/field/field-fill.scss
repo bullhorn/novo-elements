@@ -1,16 +1,16 @@
-@import "../../styles/global/variables.scss";
+@import "../../styles/variables.scss";
 @import "../common/typography/text.mixins";
 
 :host {
   &.novo-field-appearance-fill {
     &.novo-field-layout-horizontal {
       .novo-field-input {
-        background: $off-white;
+        background: var(--background);
       }
     }
 
     &.novo-field-layout-vertical {
-      background: $off-white;
+      background: var(--background);
       .novo-field-label {
         padding-top: 0.5em;
         padding-left: 0.5em;

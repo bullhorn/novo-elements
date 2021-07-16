@@ -1,9 +1,9 @@
-@import "../../../styles/global/variables.scss";
+@import "../../../styles/variables.scss";
 @import "../../common/typography/text.mixins";
 
 .novo-autocomplete-options {
   list-style: none;
-  background-color: $white;
+  background-color: var(--background-alt);
   cursor: default;
   list-style: none;
   padding-inline-start: 0px !important;

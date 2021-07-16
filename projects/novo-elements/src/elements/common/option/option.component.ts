@@ -45,6 +45,10 @@ export class NovoOptionBase implements FocusableOption, AfterViewChecked, OnDest
   private _disabled = false;
   private _mostRecentViewValue = '';
 
+  /** TODOL deprecate maybe, check support for table headers */
+  @Input()
+  keepOpen: boolean = false;
+
   /** Whether the wrapping component is in multiple selection mode. */
   get multiple() {
     return this._parent && this._parent.multiple;

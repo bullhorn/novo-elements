@@ -5,77 +5,52 @@ title: Design
 order: 2
 ---
 
-:::: grid 2
+## Anatomy
+
+<novo-grid columns="2" align="start" gap="2rem">
 
 <img src="assets/images/ModalAnatomy.png" width="450">
 
-::: box
-
-1. **Container**<br>
-   Description and purpose of this element
+<div>
 
 1. **Header**<br>
-   Description and purpose of this element
+   Cards can have a header row that always contains a title. If the card can be reordered on the page, a handle is placed left of the title that allows dragging of the card. Between the handle and the title an icon can be added. On the far right of the header row, actions can be added.
 
-1. **Icon (Optional)**<br>
-   Description and purpose of this element
+1. **Shadow**<br>
+   Novo-elements has 5 elevation layers by default; cards should float just above the content they are contained within.
 
-1. **Title (Optional)**<br>
-   Description and purpose of this element
+</div>
+</novo-grid>
 
-1. **Content**<br>
-   Description and purpose of this element
+## Best Practices
 
-1. **Footer**<br>
-   Description and purpose of this element
+- Card dimensions are based on its content and the container in which it resides.
+- Apply custom heights and width to meet product requirements.
+- Avoid the appearance of nested cards, and therefore don’t use cards within a modal or another card.
+- When creating a group of cards, use consistently sized content within a grid or flex layout.
 
-:::
-::::
+## Color
 
-## How to configure
-
-::::: grid 2
-:::: figure
-![placeholder](https://via.placeholder.com/350x250)
-::: do Always do this
-Explain this
-:::
-::::
-
-:::: figure
-![placeholder](https://via.placeholder.com/350x250)
-::: dont Never do this
-Explain this
-:::
-::::
-:::::
+> > ![placeholder](https://via.placeholder.com/350x250)
+> >
+> > **Theme - background**
+> >
+> > Any theme color can be applied to tabs which will make the background color match the color.
+> > Any theme color can be applied to tabs with the `color` attribute to change the text color
+> > {.two-columns}
 
 ## Patterns
 
-::::: grid 2
-::: box
+<novo-grid columns="2" align="start" gap="2rem">
 
-**Pattern**
+> **Details Card**
+>
+> Cards can use a list to display information. In this case the label and content are ordered left to right. Every other row has a darker background to improve readability.
 
-Why is it configured like this
-
-:::
 ![placeholder](https://via.placeholder.com/350x250)
-:::::
 
-::::: grid 2
-::: box
-
-**Pattern**
-
-Why is it configured like this
-
-:::
-![placeholder](https://via.placeholder.com/350x250)
-:::::
+</novo-grid>
 
 ## Accessibility
 
-**Implementation**
-
-Always include an `alt` attribute describing the information that is visually displayed in the image.
+- If using an illustrative image for the supplement content, it’s generally safe to use an empty or null alternative text for example alt=""

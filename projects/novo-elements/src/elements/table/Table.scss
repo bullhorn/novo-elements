@@ -91,7 +91,7 @@ novo-table {
     right: 0;
     bottom: 0;
     background: rgba(0, 0, 0, 0.07);
-    z-index: 9999;
+    z-index: z(overlay);
   }
   novo-form {
     max-width: inherit;
@@ -438,6 +438,38 @@ novo-table {
 }
 
 novo-table {
+  @include theme-colors() using ($color, $name) {
+    $contrast: getContrastColor($name);
+    &[theme="#{$name}"] {
+      > header {
+        background: $color;
+        color: $contrast;
+        novo-pagination {
+          background: rgba(0, 0, 0, 0.15);
+          > * {
+            color: $white;
+            opacity: 1;
+          }
+          .page {
+            color: $white;
+          }
+          h5.rows {
+            opacity: 0.75;
+          }
+          novo-select {
+            div[type="button"] {
+              color: $white;
+              border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+              i {
+                color: $white !important;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
   &[dark] {
     .table > thead > tr > th {
       border-right: 1px solid rgba(#f4f4f4, 0.04);
@@ -454,127 +486,6 @@ novo-table {
       > tbody tr:nth-of-type(4n + 2),
       > tbody tr:nth-of-type(4n + 1) {
         background-color: rgba($table-bg-accent, 0.04);
-      }
-    }
-  }
-  @each $analytics, $color in $analytics-colors {
-    &[theme="#{$analytics}"] {
-      > header {
-        background: $color;
-        color: #fff;
-        novo-pagination {
-          background: rgba(0, 0, 0, 0.15);
-          > * {
-            color: $white;
-            opacity: 1;
-          }
-          .page {
-            color: $white;
-          }
-          h5.rows {
-            opacity: 0.75;
-          }
-          novo-select {
-            div[type="button"] {
-              color: $white;
-              border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-              i {
-                color: $white !important;
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-  @each $entity, $color in $entity-colors {
-    &[theme="#{$entity}"] {
-      > header {
-        background: $color;
-        color: #fff;
-        novo-pagination {
-          background: rgba(0, 0, 0, 0.15);
-          > * {
-            color: $white;
-            opacity: 1;
-          }
-          .page {
-            color: $white;
-          }
-          h5.rows {
-            opacity: 0.75;
-          }
-          novo-select {
-            div[type="button"] {
-              color: $white;
-              border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-              i {
-                color: $white !important;
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-  @each $basic, $color in $app-colors {
-    &[theme="#{$basic}"] {
-      > header {
-        background: $color;
-        color: #fff;
-        novo-pagination {
-          background: rgba(0, 0, 0, 0.15);
-          > * {
-            color: $white;
-            opacity: 1;
-          }
-          .page {
-            color: $white;
-          }
-          h5.rows {
-            opacity: 0.75;
-          }
-          novo-select {
-            div[type="button"] {
-              color: $white;
-              border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-              i {
-                color: $white !important;
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-  &[dark] {
-    > header {
-      color: #fff;
-      novo-pagination {
-        background: rgba(0, 0, 0, 0.15);
-        > * {
-          color: $white;
-          opacity: 1;
-        }
-        .page {
-          color: $white;
-          &.active {
-            color: #fff;
-            background: rgba(0, 0, 0, 0.15);
-          }
-        }
-        h5.rows {
-          opacity: 0.75;
-        }
-        novo-select {
-          div[type="button"] {
-            color: $white;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-            i {
-              color: $white !important;
-            }
-          }
-        }
       }
     }
   }

@@ -1,15 +1,13 @@
-<table class="calendar-table" cellspacing="0" cellpadding="0">
-  <thead>
-    <tr>
-      <th *ngFor="let day of weekdays" title="{{ day }}" class="weekday" [attr.data-automation-id]="day.substr(0, 2)">
-        {{ day.substr(0, 2) }}
-      </th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let week of weeks">
-      <td
-        *ngFor="let day of week.days"
+<div class="calendar-table" cellspacing="0" cellpadding="0">
+  <div class="calendar-thead">
+    <div class="calendar-th weekday" *ngFor="let day of weekdays" title="{{ day }}"
+      [attr.data-automation-id]="day.substr(0, 2)">
+      {{ day.substr(0, 2) }}
+    </div>
+  </div>
+  <div class="calendar-body">
+    <div class="calendar-week" *ngFor="let week of weeks">
+      <div *ngFor="let day of week.days"
         [class.today]="day.isToday"
         [class.notinmonth]="day.date.getMonth() !== activeDate.getMonth()"
         [class.selected]="_isSelected(day.date)"
@@ -22,6 +20,7 @@
         [class.inPreview]="_isInPreview(day.date)"
         [class.previewStart]="_isPreviewStart(day.date)"
         [class.previewEnd]="_isPreviewEnd(day.date)"
+        [class.calendar-date]="true"
         [attr.aria-label]="day.name"
         [attr.aria-disabled]="isDisabled(day.date)"
         [attr.aria-selected]="_isSelected(day.date)"
@@ -34,7 +33,7 @@
           (click)="onSelect($event, day)">
           {{ day.number }}
         </button>
-      </td>
-    </tr>
-  </tbody>
-</table>
+      </div>
+    </div>
+  </div>
+</div>

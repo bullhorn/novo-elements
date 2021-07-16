@@ -1,4 +1,4 @@
-@import "../../../styles/global/variables.scss";
+@import "../../../styles/variables.scss";
 
 :host {
   // Field Themed Button
@@ -37,7 +37,7 @@
     text-align: left;
     text-shadow: none;
     width: 100%;
-    z-index: 1;
+    z-index: z("default");
     text-transform: none;
     font-size: 1.2rem;
     line-height: 1.8rem;

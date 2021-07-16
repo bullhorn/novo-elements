@@ -8,6 +8,11 @@ export abstract class NovoFieldControl<T> {
   /** The value of the control. */
   value: T | null;
 
+  /** The last key pressed. */
+  lastKeyValue: string | null;
+  /** The last cursor position. */
+  lastCaretPosition: number | null;
+
   /**
    * Stream that emits whenever the state of the control changes such that the parent `NovoField`
    * needs to run change detection.
@@ -42,6 +47,8 @@ export abstract class NovoFieldControl<T> {
   /** Whether the control is in an error state. */
   readonly errorState: boolean;
 
+  /** Whether the control can have multiple values. */
+  readonly multiple?: boolean;
   /**
    * An optional name for the control type that can be used to distinguish `novo-form-field` elements
    * based on their control type. The form field will add a class,

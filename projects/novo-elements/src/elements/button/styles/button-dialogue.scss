@@ -1,8 +1,9 @@
-@import "../../../styles/global/variables.scss";
+@import "../../../styles/variables.scss";
 
 :host {
   // Dialoge Themed Button
   &[theme="dialogue"] {
+    @include theme-text-colors("color");
     background: transparent;
     color: $positive;
     &:hover,
@@ -19,23 +20,6 @@
       }
       &:active {
         background: rgba(0, 0, 0, 0.35);
-      }
-    }
-    // Loop Generic Colors (Primary, Success, Negative, Etc.)
-    @each $button, $color in $app-colors {
-      &[color="#{$button}"] {
-        color: $color;
-        i {
-          color: $color;
-        }
-      }
-    } // Loop Analytics Colors
-    @each $analytics, $color in $analytics-colors {
-      &[color="#{$analytics}"] {
-        color: $color;
-        i {
-          color: $color;
-        }
       }
     }
   }

@@ -1,6 +1,8 @@
+@import "~novo-design-tokens/scss";
+
 :host {
   .aside-panel {
-    background-color: #fff;
+    background-color: var(--background-alt, $color-white);
     height: 100vh;
     width: 50%;
     min-width: min-content;

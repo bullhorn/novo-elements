@@ -1,4 +1,4 @@
-@import "../../../styles/global/variables.scss";
+@import "../../../styles/variables.scss";
 
 @mixin text-disabled($property) {
   pointer-events: none;
@@ -45,8 +45,8 @@
 }
 
 @mixin text-colors() {
-  @each $basic, $color in $all-colors {
-    &.text-color-#{$basic} {
+  @include theme-colors() using ($color, $name) {
+    &.text-color-#{$name} {
       color: $color;
     }
   }
@@ -73,7 +73,7 @@
   display: block;
   font-weight: 500;
   line-height: 1.5;
-  color: $dark;
+  color: var(--text-main, $dark);
   white-space: nowrap;
   text-overflow: ellipsis;
 }
@@ -94,7 +94,7 @@
   font-size: 0.8rem;
   font-weight: 400;
   line-height: 1.375;
-  color: $neutral;
+  color: var(--text-muted, $dark);
 }
 
 // Body Text

@@ -40,7 +40,3 @@ Dropdown allow users to take an action by selecting from a list of choices revea
 
 </div>
 </novo-grid>
-
-### Overview
-
-<code-example example="button-overview"></code-example>

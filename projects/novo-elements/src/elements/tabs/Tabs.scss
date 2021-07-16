@@ -43,7 +43,7 @@ novo-nav {
     }
     .novo-tab-link {
       padding: 1rem;
-      color: #fff;
+      color: var(--text-main);
       display: flex;
       align-items: center;
       gap: $spacing-xs;
@@ -69,7 +69,7 @@ novo-nav {
         font-weight: 500;
       }
       .indicator {
-        background: #fff;
+        background: var(--focus);
         width: 100%;
       }
     }
@@ -280,11 +280,7 @@ novo-nav {
 }
 
 novo-tab-link {
-  @each $name, $color in $all-colors {
-    &[color="#{$name}"] {
-      color: $color;
-    }
-  }
+  @include theme-text-colors();
 }
 
 // Outlets

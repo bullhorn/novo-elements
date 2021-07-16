@@ -9,7 +9,7 @@ order: 1
   <novo-stack gap="2rem">
     <novo-title>Why?</novo-title>
     <novo-text>
-      Avatars are images used to represent users and organizations on GitHub. They typically are squares with rounded edges.
+      Avatars are images used to represent users and organizations. They typically are squares with rounded edges.
       An avatar acts as a proxy for a user or entity (such as a project, repository, or space), in a product. They're often combined with status or presence indicators to give more context. Users generally upload their own image, otherwise, a default image is displayed
     </novo-text>
   </novo-stack>

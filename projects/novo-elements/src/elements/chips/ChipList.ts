@@ -24,7 +24,7 @@ import { ControlValueAccessor, FormGroupDirective, NgControl, NgForm } from '@an
 import { merge, Observable, Subject, Subscription } from 'rxjs';
 import { startWith, takeUntil } from 'rxjs/operators';
 import { Key } from '../../utils';
-import { CanUpdateErrorState, CanUpdateErrorStateCtor, ErrorStateMatcher, mixinErrorState } from '../common';
+import { CanUpdateErrorState, CanUpdateErrorStateCtor, ErrorStateMatcher, mixinErrorState, NOVO_OPTION_PARENT_COMPONENT } from '../common';
 import { NovoFieldControl } from '../field';
 import { NovoChipElement, NovoChipEvent, NovoChipSelectionChange } from './Chip';
 import { NovoChipTextControl } from './ChipTextControl';
@@ -82,7 +82,10 @@ export class NovoChipListChange {
     '(keydown)': '_keydown($event)',
     '[id]': '_uid',
   },
-  providers: [{ provide: NovoFieldControl, useExisting: NovoChipList }],
+  providers: [
+    { provide: NovoFieldControl, useExisting: NovoChipList },
+    { provide: NOVO_OPTION_PARENT_COMPONENT, useExisting: NovoChipList },
+  ],
   // styleUrls: ['./ChipList.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -94,7 +97,7 @@ export class NovoChipList
    * Implemented as part of NovoFieldControl.
    * @docs-private
    */
-  readonly controlType: string = 'novo-chip-list';
+  readonly controlType: string = 'chip-list';
 
   /**
    * When a chip is destroyed, we store the index of the destroyed chip until the chips
@@ -347,6 +350,11 @@ export class NovoChipList
     descendants: true,
   })
   chips: QueryList<NovoChipElement>;
+
+  /** @docs-private Implemented as part of NovoFieldControl. */
+  lastKeyValue: string = null;
+  /** @docs-private Implemented as part of NovoFieldControl.*/
+  lastCaretPosition: number | null;
 
   constructor(
     protected _elementRef: ElementRef<HTMLElement>,

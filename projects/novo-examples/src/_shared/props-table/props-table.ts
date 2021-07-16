@@ -7,19 +7,24 @@ interface PropType {
   defaultValue: string;
   description: string;
 }
+
+interface PropTypeDeclaration {
+  name?: string;
+  type: string;
+  types: { type: string; value: string }[];
+  elementType?: { name: string; type: string };
+}
 interface PropertyDeclartion {
   name: string;
   kindString: string;
   decorators: any[];
-  type: {
-    name?: string;
-    type: string;
-    types: { type: string; value: string }[];
-  };
+  type: PropTypeDeclaration;
   defaultValue: string;
   comment: {
     shortText: string;
+    tags?: { tag: string; text: string }[];
   };
+  getSignature?: Omit<PropertyDeclartion, 'getSignature'>;
 }
 
 @Component({
@@ -44,21 +49,45 @@ export class PropsTableComponent implements OnInit {
       .then((documentation) => {
         const comp = documentation.children.find((it) => it.name === this.component);
         // Get properties for now, could add methods
-        const props: PropertyDeclartion[] = comp.children.filter((p) => p.kindString === 'Property');
+        const props: PropertyDeclartion[] = comp.children.filter((p) => p.kindString === 'Property' || p.kindString === 'Accessor');
         const inputs = props.filter((p) => (p.decorators || []).filter((d) => d.name === 'Input').length);
         this.props = inputs.map((p) => {
-          return {
-            name: p.name,
-            type: this.getType(p),
-            defaultValue: p.defaultValue || 'none',
-            description: p.comment ? p.comment.shortText : 'No Description',
-          };
+          switch (p.kindString) {
+            case 'Accessor':
+              return {
+                name: p.name,
+                type: this.getType(p.getSignature[0]),
+                defaultValue: this.getDefaultValue(p.getSignature[0]),
+                description: p.comment ? p.comment.shortText : 'No Description',
+              };
+            default:
+              return {
+                name: p.name,
+                type: this.getType(p),
+                defaultValue: this.getDefaultValue(p),
+                description: p.comment ? p.comment.shortText : 'No Description',
+              };
+          }
         });
       });
   }
 
+  getDefaultValue(p: PropertyDeclartion) {
+    if (p.comment?.tags) {
+      const hasDefault = p.comment.tags.find((t) => t.tag === 'default');
+      if (hasDefault) {
+        return hasDefault.text.trim();
+      }
+    }
+    return p.defaultValue || 'none';
+  }
+
   getType(p: PropertyDeclartion) {
-    if (p.type.type == 'union') {
+    if (p.type?.type == 'array') {
+      return `${p.type.elementType.name} []`;
+    }
+
+    if (p.type?.type == 'union') {
       return `One of [ ${p.type.types.map((t) => t.value).join(', ')} ]`;
     }
     return p.type.name;

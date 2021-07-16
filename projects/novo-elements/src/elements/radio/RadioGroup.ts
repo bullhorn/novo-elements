@@ -63,6 +63,12 @@ export class NovoRadioGroup extends NovoRadioGroupMixins implements NovoFieldCon
   /** The FocusKeyManager which handles focus. */
   _keyManager: FocusKeyManager<NovoRadioElement>;
 
+  readonly controlType: string = 'radio-group';
+  /** @docs-private Implemented as part of NovoFieldControl. */
+  lastKeyValue: string = null;
+  /** @docs-private Implemented as part of NovoFieldControl.*/
+  lastCaretPosition: number | null;
+
   @Input() id: string = this._uniqueId;
   @Input() tabindex: number = 0;
   /** An object used to control when error messages are shown. */

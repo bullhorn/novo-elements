@@ -18,14 +18,14 @@ novo-dropdown {
 }
 
 .dropdown-container {
-  background-color: $white;
+  background-color: var(--background-alt, $color-bright);
   list-style: none;
   margin: 0;
   padding: 0;
   min-width: 180px;
   margin-top: $spacing-sm;
   margin-bottom: $spacing-sm;
-  box-shadow: $whiteframe-shadow-z3;
+  box-shadow: $shadow-3;
   &.has-height {
     overflow: auto;
   }

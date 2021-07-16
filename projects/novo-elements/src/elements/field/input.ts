@@ -92,6 +92,11 @@ export class NovoInput extends NovoInputBase implements NovoFieldControl<any>, O
 
   errorState: boolean = false;
 
+  /** @docs-private Implemented as part of NovoFieldControl. */
+  lastKeyValue: string = null;
+  /** @docs-private Implemented as part of NovoFieldControl.*/
+  lastCaretPosition: number | null;
+
   /**
    * Implemented as part of NovoFieldControl.
    * @docs-private
@@ -311,12 +316,8 @@ export class NovoInput extends NovoInputBase implements NovoFieldControl<any>, O
   // We have to use a `HostListener` here in order to support both Ivy and ViewEngine.
   // In Ivy the `host` bindings will be merged when this class is extended, whereas in
   // ViewEngine they're overwritten.
-  // TODO(crisbeto): we move this back into `host` once Ivy is turned on by default.
-  /** Callback for the cases where the focused state of the input changes. */
-  // tslint:disable:no-host-decorator-in-concrete
   @HostListener('focus', ['true'])
   @HostListener('blur', ['false'])
-  // tslint:enable:no-host-decorator-in-concrete
   _focusChanged(isFocused: boolean) {
     if (isFocused !== this.focused && (!this.readonly || !isFocused)) {
       this.focused = isFocused;
@@ -327,17 +328,14 @@ export class NovoInput extends NovoInputBase implements NovoFieldControl<any>, O
   // We have to use a `HostListener` here in order to support both Ivy and ViewEngine.
   // In Ivy the `host` bindings will be merged when this class is extended, whereas in
   // ViewEngine they're overwritten.
-  // TODO(crisbeto): we move this back into `host` once Ivy is turned on by default.
-  // tslint:disable-next-line:no-host-decorator-in-concrete
-  @HostListener('input')
-  _onInput() {
-    // This is a noop function and is used to let Angular know whenever the value changes.
-    // Angular will run a new change detection each time the `input` event has been dispatched.
-    // It's necessary that Angular recognizes the value change, because when floatingLabel
-    // is set to false and Angular forms aren't used, the placeholder won't recognize the
-    // value changes and will not disappear.
+  @HostListener('input', ['$event'])
+  _onInput(event: InputEvent) {
     // Listening to the input event wouldn't be necessary when the input is using the
     // FormsModule or ReactiveFormsModule, because Angular forms also listens to input events.
+    this.lastKeyValue = event.data;
+    if (this._isTextarea) {
+      this.lastCaretPosition = (this._elementRef.nativeElement as HTMLTextAreaElement).selectionStart;
+    }
   }
 
   /** Does some manual dirty checking on the native input `value` property. */

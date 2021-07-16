@@ -18,46 +18,44 @@ export class RowChipsExample {
     const collaborators = [
       {
         id: 1,
-        firstName: 'Brian',
-        lastName: 'Kimball',
+        shiftDate: '2021-04-03',
+        openings: 1,
       },
       {
         id: 2,
-        firstName: 'Josh',
-        lastName: 'Godi',
+        shiftDate: '2021-04-06',
+        openings: 1,
       },
       {
         id: 3,
-        firstName: 'Alec',
-        lastName: 'Sibilia',
+        shiftDate: '2021-04-10',
+        openings: 1,
       },
       {
         id: 4,
-        firstName: 'Kameron',
-        lastName: 'Sween',
+        shiftDate: '2021-04-12',
+        openings: 1,
       },
     ];
-    this.rowValue = [
-      {
-        id: 1,
-        firstName: 'Brian',
-        lastName: 'Kimball',
-      },
-    ];
+    this.rowValue = [];
     this.rowDemo = {
-      format: '$firstName $lastName',
+      format: '$shiftDate',
       options: collaborators,
       columns: [
         {
-          label: 'Name',
+          label: 'Shift Date',
           data: (item: any): string => {
             return item.label;
           },
         },
         {
-          label: 'Id',
+          label: 'Openings',
+          editable: true,
+          type: 'number',
+          width: 80,
+          name: 'openings',
           data: (item: any): string => {
-            return item.value.id;
+            return item.value.openings;
           },
         },
       ],

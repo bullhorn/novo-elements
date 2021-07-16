@@ -4,10 +4,12 @@ import { sync as glob } from 'glob';
 import * as HLJS from 'highlight.js';
 import { HLJSApi } from 'highlight.js';
 import * as Markdown from 'markdown-it';
+import * as markdownItAttrs from 'markdown-it-attrs';
 import * as Container from 'markdown-it-container';
 import * as taskLists from 'markdown-it-task-lists';
 import * as path from 'path';
 import * as TypeDoc from 'typedoc';
+import { BullhornFlavoredMarkdownPlugin } from './markdown/bfm-blocks';
 import { DoListPlugin } from './markdown/dos-list';
 
 // Typedefs are not valid
@@ -49,8 +51,10 @@ const md = new Markdown({
   },
 });
 
+md.use(markdownItAttrs);
 md.use(taskLists);
 md.use(DoListPlugin);
+md.use(BullhornFlavoredMarkdownPlugin);
 md.use(Container, 'grid', {
   validate: (params) => params.trim().match(/^grid\s+(.*)$/),
   render: (tokens, idx) => {
@@ -143,7 +147,8 @@ function generatePageComponent(metadata: PageMetadata): string {
   return `
 @Component({
   selector: '${metadata.id}-page',
-  template: \`${metadata.template}\`
+  template: \`${metadata.template}\`,
+  host: { class: 'markdown-page' }
 })
 export class ${metadata.name}Page {
   public params: any = {};
@@ -157,18 +162,19 @@ export class ${metadata.name}Page {
 function generatePageRoute(metadata: PageMetadata[]): string {
   const sections = aggregatePages(metadata);
   const chooseLayout = (section: string, page: string, comps: PageMetadata[]) => {
+    const pathRoot = convertToDashCase(section);
     const subs = `[${comps.map((it) => `{ title: '${it.title}', route: './${it.route}'}`).join()}]`;
     return comps.length > 1
       ? `  {
-    path: '${section}/${page}',
+    path: '${pathRoot}/${page}',
     component: TabsLayout,
-    data: { title: '${convertToSentence(page)}', section: '${section}', pages: ${subs} },
+    data: { title: '${convertToSentence(page)}', section: '${pathRoot}', pages: ${subs} },
     children: [
 ${comps.map((comp) => `      { path: '${comp.route}', component: ${comp.name}Page }`).join(',\n')},
-      { path: '', redirectTo: '/${section}/${page}/${comps[0].route}', pathMatch: 'full' },
+      { path: '', redirectTo: '/${pathRoot}/${page}/${comps[0].route}', pathMatch: 'full' },
     ]
   }`
-      : `  { path: '${section}/${page}', component: ${comps[0].name}Page, data: { title: '${comps[0].title}', section: '${comps[0].section}' } }`;
+      : `  { path: '${pathRoot}/${page}', component: ${comps[0].name}Page, data: { title: '${comps[0].title}', section: '${comps[0].section}' } }`;
   };
 
   return Object.entries(sections)

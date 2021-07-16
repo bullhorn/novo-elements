@@ -1,4 +1,4 @@
-@import "../../styles/global/variables.scss";
+@import "../../styles/variables.scss";
 
 novo-search {
   display: grid;
@@ -34,7 +34,7 @@ novo-search {
     position: relative;
     font-size: 1.4em;
     color: $dark;
-    z-index: 12;
+    z-index: z(above);
     border: none;
     transition: all 250ms;
     backface-visibility: hidden;
@@ -56,34 +56,21 @@ novo-search {
       color: $positive !important;
     }
 
-    @each $key, $color in $all-colors {
-      &[color="#{$key}"] {
+    @include theme-colors() using ($color, $name) {
+      &[color="#{$name}"] {
         > novo-icon {
           color: $color !important;
         }
       }
     }
 
-    @each $key, $color in $dark-colors {
-      &[theme="#{$key}"] {
-        background: $color !important;
-        novo-icon,
-        input {
-          transition: all 250ms;
-          color: $white !important;
-          &::placeholder {
-            color: $off-white;
-          }
-        }
-      }
-    }
-
-    @each $key, $color in $light-colors {
-      &[theme="#{$key}"] {
-        background: $color !important;
-        novo-icon,
-        input {
-          color: $dark !important;
+    @include theme-backgrounds() using ($color, $name) {
+      novo-icon,
+      input {
+        transition: all 250ms;
+        color: inherit !important;
+        &::placeholder {
+          color: $color-grey;
         }
       }
     }

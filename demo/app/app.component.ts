@@ -1,14 +1,13 @@
-// NG2
-import { Component, ViewContainerRef } from '@angular/core';
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { AfterViewInit, Component, ViewChild, ViewContainerRef } from '@angular/core';
 import { Router } from '@angular/router';
-// Vendor
-import { NovoModalService, NovoToastService } from 'novo-elements';
+import { NovoModalService, NovoSidenavComponent, NovoToastService } from 'novo-elements';
 
 @Component({
   selector: 'novo-demo-app',
   templateUrl: './app.component.html',
 })
-export class AppComponent {
+export class AppComponent implements AfterViewInit {
   menuOpen: boolean = false;
   sectionRoutes: Array<any>;
   designRoutes: Array<any>;
@@ -17,8 +16,17 @@ export class AppComponent {
   navigationRoutes: Array<any>;
   layoutRoutes: Array<any>;
   utilRoutes: Array<any>;
+  patternRoutes: Array<any>;
+  @ViewChild(NovoSidenavComponent)
+  sidenav!: NovoSidenavComponent;
 
-  constructor(router: Router, viewContainerRef: ViewContainerRef, toaster: NovoToastService, modalService: NovoModalService) {
+  constructor(
+    router: Router,
+    viewContainerRef: ViewContainerRef,
+    toaster: NovoToastService,
+    modalService: NovoModalService,
+    private observer: BreakpointObserver,
+  ) {
     toaster.parentViewContainer = viewContainerRef;
     modalService.parentViewContainer = viewContainerRef;
 
@@ -29,10 +37,23 @@ export class AppComponent {
     this.formRoutes = router.config.filter((r: any) => r.data.section === 'form-controls').sort(this.sortMenu);
     this.layoutRoutes = router.config.filter((r: any) => r.data.section === 'layouts').sort(this.sortMenu);
     this.utilRoutes = router.config.filter((r: any) => r.data.section === 'utils').sort(this.sortMenu);
+    this.patternRoutes = router.config.filter((r: any) => r.data.section === 'patterns').sort(this.sortMenu);
 
     router.events.subscribe(() => {
       window.scrollTo(0, 0);
       this.menuOpen = false;
+    });
+  }
+
+  ngAfterViewInit() {
+    this.observer.observe(['(max-width: 480px)']).subscribe((res) => {
+      if (res.matches) {
+        this.sidenav.mode = 'over';
+        this.sidenav.close();
+      } else {
+        this.sidenav.mode = 'side';
+        this.sidenav.open();
+      }
     });
   }
 
@@ -48,5 +69,9 @@ export class AppComponent {
 
   toggleMenu() {
     this.menuOpen = !this.menuOpen;
+  }
+
+  toggleDarkMode() {
+    document.documentElement.classList.toggle('theme-dark');
   }
 }

@@ -4,13 +4,13 @@ starting at line 82. >>
 */
 
 // Main content container
-main.main-content {
+.main-content {
   position: relative;
   min-height: 300px;
-  margin: 0 0 0 300px; // Container class to center content
   .container {
     padding: 2rem;
     margin: 0 auto;
+    max-width: 840px;
     h1 {
       small {
         font-size: 14px;
@@ -20,7 +20,7 @@ main.main-content {
   } // Contains component demos
   .example {
     margin-top: 10px;
-    border: 1px solid #e9eaea;
+    border: 1px solid var(--border, #e9eaea);
     box-sizing: border-box;
   } // Contains code snippet
   .example-container {
@@ -31,8 +31,8 @@ main.main-content {
     margin: 0 0 35px;
     box-sizing: border-box;
     font-size: 0.9em;
-    background: #f8f8f8;
-    border: 1px solid #e9eaea;
+    background: var(--background, #f8f8f8);
+    border: 1px solid var(--border, #e9eaea);
     color: #4c545a;
     code {
       border: none;
@@ -44,7 +44,7 @@ main.main-content {
       line-height: 1.5em;
       padding: 15px 25px;
       &.hljs {
-        background: #f9f9f9 !important;
+        background: var(--background) !important;
       }
     }
   } // DESIGN STYLES
@@ -146,6 +146,14 @@ main.main-content {
   switch-demo,
   tooltip-demo {
     display: block;
+  }
+  svg {
+    max-width: 90px;
+    display: inline-block;
+    margin: 0 auto;
+    .st0 {
+      fill: #3d464d;
+    }
   }
 }
 

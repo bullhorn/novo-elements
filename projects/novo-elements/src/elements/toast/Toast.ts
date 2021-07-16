@@ -10,6 +10,7 @@ import { Deferred, DeferredPromise } from '../../utils';
     '[class.show]': 'show',
     '[class.animate]': 'animate',
     '[class.embedded]': 'embedded',
+    '[attr.theme]': 'theme',
     '(click)': '!isCloseable && clickHandler($event)',
   },
   template: `

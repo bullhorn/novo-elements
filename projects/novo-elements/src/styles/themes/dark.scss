@@ -1,0 +1,25 @@
+@mixin dark-variables {
+  --background-body: #{$color-midnight}; //#202b38;
+  --background: #{$color-darkness}; //#161f27;
+  --background-alt: #{$color-moonlight};
+  --selection: #{$color-ocean}; // #1c76c5;
+  --text-main: #{$color-light};
+  --text-bright: #{$color-white};
+  --text-muted: #a9b1ba;
+  --links: #{$color-sky-blue}; // #41adff;
+  --focus: #0096bfab;
+  --border: #{$color-onyx};
+  --code: #ffbe85;
+  --animation-duration: 0.1s;
+  --button-hover: #324759;
+  --scrollbar-thumb: var(--button-hover);
+  --scrollbar-thumb-hover: color-mod(var(--scrollbar-thumb) lightness(+8%));
+  --form-placeholder: #a9a9a9;
+  --form-text: #fff;
+  --variable: #d941e2;
+  --highlight: #efdb43;
+}
+
+.theme-dark {
+  @include dark-variables();
+}

@@ -51,9 +51,9 @@ novo-time-picker {
   width: min-content;
   overflow: hidden;
   border-radius: 4px;
-  background-color: #fff;
+  background-color: var(--background-alt);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15), 0 2px 7px rgba(0, 0, 0, 0.1);
-  z-index: 999;
+  z-index: z(overlay);
   .digital {
     background-color: $positive;
     display: flex;

@@ -127,12 +127,12 @@ novo-toast.warning-outline,
 novo-toast.success-outline,
 novo-toast.info-outline,
 novo-toast.danger-outline {
-  color: $base-font-color;
+  color: $font-color-base;
   .toast-content > h5 {
-    color: $base-font-color;
+    color: $font-color-base;
   }
   .toast-container .toast-content .link-generated input {
-    color: $base-font-color;
+    color: $font-color-base;
   }
 }
 
@@ -183,21 +183,7 @@ novo-toast.danger-outline {
 }
 
 novo-toast {
-  @each $analytics, $color in $analytics-colors {
-    &.#{$analytics} {
-      background: $color;
-    }
-  }
-  @each $entity, $color in $entity-colors {
-    &.#{$entity} {
-      background: $color;
-    }
-  }
-  @each $entity, $color in $app-colors {
-    &.#{$entity} {
-      background: $color;
-    }
-  }
+  @include theme-backgrounds();
   &.text {
     background: $dark;
   }

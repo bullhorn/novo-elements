@@ -15,6 +15,7 @@
     "classlist.js": "^1.1.20150312",
     "date-fns": ">=1",
     "post-robot": "^8.0.0",
+    "novo-design-tokens": "^0.0.1",
     "rxjs": ">=6",
     "text-mask-addons": "^3.7.0",
     "timezone-support": "^2.0.2"

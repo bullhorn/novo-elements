@@ -16,7 +16,7 @@ Bullhorn button themes were hand crafted to make your life easier. Most buttons 
 
 </div>
 
-<img src="https://via.placeholder.com/350x250"/>
+<img src="/assets/images/ButtonOverview.png"/>
 
 <div>
 
@@ -42,7 +42,3 @@ Bullhorn button themes were hand crafted to make your life easier. Most buttons 
 
 </div>
 </novo-grid>
-
-### Overview
-
-<code-example example="button-overview"></code-example>

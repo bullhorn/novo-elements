@@ -1,4 +1,4 @@
-$table-bg-accent: #f4f4f4;
+$table-bg-accent: var(--background-alt, $off-white);
 $novo-row-horizontal-padding: 20px;
 $table-header-font-weight: 400;
 $breakpoint: 1000px;
@@ -44,7 +44,7 @@ cdk-table {
     .novo-data-table-dropdown-cell,
     .novo-data-table-expand-cell,
     .novo-data-table-checkbox-cell {
-      background-color: $white;
+      background-color: var(--background, $white);
     }
     &.active {
       .novo-data-table-cell,
@@ -71,7 +71,7 @@ cdk-table {
 .novo-data-table-header-row,
 .novo-data-table-header-cell {
   position: relative;
-  z-index: 1;
+  z-index: z(default);
 }
 
 .novo-data-table-header-row.fixed-header,
@@ -85,11 +85,11 @@ cdk-table {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  background-color: $white;
+  background-color: var(--background, $white);
   .novo-data-table-header-cell,
   .novo-data-table-checkbox-header-cell {
-    border-bottom: 1px solid $off-white;
-    background-color: $white;
+    // border-bottom: 1px solid var(--border, $off-white);
+    background-color: var(--background, $white);
   }
   &.expanded {
     i.bhi-next.data-table-icon {
@@ -233,7 +233,7 @@ cdk-table {
 }
 
 .novo-data-table-header-cell {
-  border-left: 1px solid $off-white;
+  // border-left: 1px solid var(--border, $off-white);
   white-space: nowrap;
   display: flex;
   align-items: center;
@@ -332,7 +332,7 @@ novo-data-table {
     display: flex;
     align-items: center;
     flex-shrink: 0;
-    border-bottom: 1px solid $off-white;
+    border-bottom: 1px solid var(--border, $off-white);
     &.empty {
       padding: 0;
     }
@@ -401,7 +401,7 @@ novo-data-table {
     right: 0;
     bottom: 0;
     background: rgba(0, 0, 0, 0.07);
-    z-index: 99;
+    z-index: z(above);
   }
   .clickable {
     @extend a;
@@ -433,7 +433,7 @@ novo-data-table {
     display: flex;
     flex: 1;
     .novo-data-table-custom-filter {
-      border-right: 1px solid $off-white;
+      border-right: 1px solid var(--border, $off-white);
       novo-date-picker {
         .calendar {
           box-shadow: none;
@@ -483,7 +483,7 @@ novo-data-table {
     align-items: center;
     > div,
     div.novo-data-table-footer-cell {
-      border-top: 1px solid $off-white;
+      border-top: 1px solid var(--border, $off-white);
       flex: 1;
       min-width: 200px;
       display: flex;
@@ -642,7 +642,7 @@ novo-data-table-pagination {
     overflow-x: hidden;
   }
   .footer {
-    border-top: 1px solid $light;
+    border-top: 1px solid var(--border, $off-white);
     padding: 5px 10px;
     display: flex;
     justify-content: flex-end;
@@ -698,7 +698,7 @@ novo-data-table-pagination {
       }
       input {
         border: none;
-        border-bottom: 2px solid #bebebe;
+        border-bottom: 2px solid var(--border, $off-white);
         width: 90%;
         margin: 0 auto;
         background: transparent;

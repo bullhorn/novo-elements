@@ -65,8 +65,9 @@ novo-picker {
     border-radius: 3px;
     padding: 3px;
     color: $white;
-    @each $entity, $color in $entity-colors {
-      &.#{$entity} {
+
+    @include theme-colors() using ($color, $name) {
+      &.#{$name} {
         background: $color;
       }
     }
@@ -171,7 +172,7 @@ quick-note-results {
     }
   }
   &.active {
-    z-index: 1000;
+    z-index: z(overlay);
   }
   &:focus {
     outline: none;

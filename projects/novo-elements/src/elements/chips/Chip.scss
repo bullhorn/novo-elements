@@ -1,4 +1,4 @@
-@import "../../styles/global/variables.scss";
+@import "../../styles/variables.scss";
 
 novo-chip,
 [novo-chip] {
@@ -6,7 +6,7 @@ novo-chip,
   flex-grow: inherit;
   align-items: center;
   justify-content: space-between;
-  background: #eeeeee;
+  background: var(--background-alt);
   border-radius: 4px;
   padding: 0.3em 0.5em;
   margin-right: 5px;

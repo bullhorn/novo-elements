@@ -22,6 +22,29 @@
       </novo-picker-toggle>
     </novo-field>
 
+
+    <!-- <novo-field>
+      <novo-label>Shift Needs?</novo-label>
+      <novo-association-table>
+        <ng-container novoColumnDef="position">
+          <th mat-header-cell *novoHeaderCellDef>No.</th>
+          <td mat-cell *novoCellDef="let element">{{element.position}}</td>
+        </ng-container>
+
+        <tr>
+          <td colspan="3">
+            <novo-field>
+              <novo-label>Date of Birth</novo-label>
+              <input novoInput dateFormat [picker]="datepicker" [formControl]="dateControl" />
+              <novo-picker-toggle novoSuffix icon="calendar">
+                <novo-date-picker #datepicker></novo-date-picker>
+              </novo-picker-toggle>
+            </novo-field>
+          </td>
+        </tr>
+      </novo-association-table>
+    </novo-field> -->
+
     <button theme="primary" [disabled]="!options.valid" (click)="onSubmit(options.value)">Submit
       Form</button>
   </novo-fields>

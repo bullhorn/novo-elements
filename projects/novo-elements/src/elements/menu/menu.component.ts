@@ -35,7 +35,7 @@ export interface MouseLocation {
     `
       .cdk-overlay-container {
         position: fixed;
-        z-index: 1000;
+        z-index: z(overlay);
         pointer-events: none;
         top: 0;
         left: 0;

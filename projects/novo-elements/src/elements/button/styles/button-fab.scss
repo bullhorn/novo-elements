@@ -1,11 +1,9 @@
-@import "../../../styles/global/variables.scss";
+@import "../../../styles/variables.scss";
 
 :host {
   // Fab Themed Button
   &[theme="fab"] {
-    &[inverse] {
-      color: #fff;
-    }
+    @include theme-backgrounds("color", false);
     border-radius: 50% !important;
     padding: 0;
     font-size: 1.2rem;
@@ -15,11 +13,8 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    @each $button, $color in $all-colors {
-      &[color="#{$button}"] {
-        color: $white;
-        background: $color;
-      }
+    &[inverse] {
+      color: #fff;
     }
     &:hover {
       box-shadow: 0px 1px 2px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);

@@ -1,5 +1,5 @@
 // App side menu styles
-nav.main-nav {
+.main-nav {
   position: fixed;
   top: 0;
   left: 0;
@@ -8,7 +8,7 @@ nav.main-nav {
   color: $white;
   background-color: #1b2127;
   overflow-y: scroll;
-  z-index: 2000;
+  z-index: 20;
 
   .fork-me {
     width: 80%;
@@ -62,7 +62,7 @@ nav.main-nav {
   }
 
   // Logo SVG
-  [data-name='novo-logo'] {
+  [data-name="novo-logo"] {
     width: 100%;
     max-width: 100px;
     margin: 0 auto 20px;
@@ -92,7 +92,7 @@ nav.main-nav {
   }
 
   // Bullhorn SVG
-  [data-name='bullhorn-text'] {
+  [data-name="bullhorn-text"] {
     width: 100%;
     max-width: 150px;
     margin: 0 20px;

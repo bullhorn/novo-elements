@@ -16,9 +16,27 @@ const CHIPS_VALUE_ACCESSOR = {
 
 @Component({
   selector: 'novo-row-chip',
-  template: `<div class="novo-row-chips-columns">
-    <ng-content></ng-content><i class="bhi-delete-o" *ngIf="!disabled" (click)="remove()"></i>
-  </div>`,
+  template: `
+    <div class="novo-row-chips-columns">
+      <ng-content></ng-content>
+      <i class="bhi-delete-o" *ngIf="!disabled" (click)="remove()"></i>
+    </div>
+  `,
+  host: {
+    class: 'novo-row-chip novo-focus-indicator',
+    '[attr.tabindex]': 'disabled ? null : tabIndex',
+    role: 'option',
+    '[class.novo-row-chip-selected]': 'selected',
+    '[class.novo-row-chip-with-trailing-icon]': 'removeIcon',
+    '[class.novo-row-chip-disabled]': 'disabled',
+    '[attr.disabled]': 'disabled || null',
+    '[attr.aria-disabled]': 'disabled.toString()',
+    '[attr.aria-selected]': 'ariaSelected',
+    '(click)': '_handleClick($event)',
+    '(keydown)': '_handleKeydown($event)',
+    '(focus)': 'focus()',
+    '(blur)': '_blur()',
+  },
 })
 export class NovoRowChipElement extends NovoChipElement {
   onSelect(e) {
@@ -34,7 +52,7 @@ export class NovoRowChipElement extends NovoChipElement {
   },
   template: `
     <div class="novo-row-chips-columns" *ngIf="items.length > 0">
-      <div class="column-label" *ngFor="let column of source.columns">{{ column.label }}</div>
+      <div class="column-label" [style.flexBasis.px]="column.width || 200" *ngFor="let column of source.columns">{{ column.label }}</div>
     </div>
     <div class="novo-row-chips-empty-message" *ngIf="source.emptyReadOnlyMessage && disablePickerInput && items.length === 0">
       {{ source.emptyReadOnlyMessage }}
@@ -47,8 +65,20 @@ export class NovoRowChipElement extends NovoChipElement {
       (removed)="remove($event, item)"
       (selectionChange)="select($event, item)"
     >
-      <div class="column-data" *ngFor="let column of source.columns">
-        <span>{{ column.data(item) }}</span>
+      <div
+        class="column-data"
+        [class.editable]="column.editable"
+        [style.flexBasis.px]="column.width || 200"
+        *ngFor="let column of source.columns"
+      >
+        <ng-container *ngIf="column.editable">
+          <novo-field>
+            <input novoInput [type]="column.type || 'text'" [(ngModel)]="item.value[column.name]" />
+          </novo-field>
+        </ng-container>
+        <ng-container *ngIf="!column.editable">
+          <span>{{ column.data(item) }}</span>
+        </ng-container>
       </div>
     </novo-row-chip>
     <novo-picker

@@ -5,13 +5,13 @@ popover-content {
     position: absolute;
     top: 0;
     left: 0;
-    z-index: 10000;
+    z-index: z(overlay);
     display: none;
     width: 40rem;
     padding: 2rem;
-    background-color: #fff;
+    background-color: $white;
     background-clip: padding-box;
-    box-shadow: $whiteframe-shadow-z1;
+    box-shadow: $shadow-popover;
 
     &.top {
       margin-top: -1rem;

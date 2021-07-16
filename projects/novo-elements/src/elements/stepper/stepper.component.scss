@@ -1,4 +1,4 @@
-@import "../../styles/global/variables";
+@import "../../styles/variables";
 
 $novo-horizontal-stepper-header-height: 80px !default;
 $novo-stepper-label-header-height: 24px !default;
@@ -97,7 +97,7 @@ $novo-stepper-line-gap: 8px !default;
       }
       & > * {
         position: relative;
-        z-index: 1;
+        z-index: z(default);
       }
     }
   }
@@ -151,7 +151,7 @@ $novo-stepper-line-gap: 8px !default;
     top: $novo-stepper-line-gap - $novo-stepper-side-gap;
     bottom: $novo-stepper-line-gap - $novo-stepper-side-gap;
     left: 0;
-    z-index: -1;
+    z-index: z(below);
     border-left-width: $novo-stepper-line-width;
     border-left-style: solid;
     border-left-color: $light;

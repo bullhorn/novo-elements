@@ -82,22 +82,13 @@ novo-header {
       display: flex;
     }
   }
-  @each $basic, $color in $all-colors {
-    &[theme="#{$basic}"] {
+  @include theme-backgrounds("theme") using ($color, $name) {
+    & > section.primary {
       background: $color;
-      color: #fff;
-      & > section.primary {
-        background: $color;
-      }
-      novo-title {
-        color: inherit;
-      }
     }
-  }
-  &[theme="light"],
-  &[theme="off-white"],
-  &[theme="white"] {
-    color: $dark;
+    novo-title {
+      color: inherit;
+    }
   }
   & > main {
     padding: 4px 16px 4px 32px;

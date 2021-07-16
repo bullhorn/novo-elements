@@ -3,6 +3,7 @@
   <novo-chip-list #chipList aria-label="Fruit selection">
     <novo-chip
       *ngFor="let fruit of fruits"
+      [value]="fruit"
       (removed)="remove(fruit)">
       {{fruit}}
       <novo-icon size="small" novoChipRemove>close</novo-icon>
@@ -15,11 +16,12 @@
       autocomplete="off"
       (novoChipInputTokenEnd)="add($event)" />
   </novo-chip-list>
-  <novo-autocomplete (optionSelected)="selected($event)">
+  <novo-autocomplete (optionSelected)="selected($event)" multiple>
     <novo-option *ngFor="let fruit of filteredFruits | async" [value]="fruit">
       {{fruit}}
     </novo-option>
   </novo-autocomplete>
 </novo-field>
 
-<div>{{chipList.value}}</div>
+<div>Chip List Value: {{chipList.value}}</div>
+<div>Form Control Value: {{fruitCtrl.value}}</div>

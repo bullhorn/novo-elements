@@ -1,0 +1,75 @@
+// Iconography
+// --------------------------------------------------
+$icon-height: 1.7rem; // 24px Base background size
+$icon-width: 1.7rem; // 24px Base background size
+$base-icon-size: 1.4rem; //18px Base font-size
+i {
+  font-size: $base-icon-size;
+  display: inline-block;
+  &[theme] {
+    &[theme="contained"] {
+      font-size: 0.8rem;
+      border-radius: 0.55rem;
+      height: $icon-height;
+      width: $icon-width;
+      text-align: center;
+      &:before {
+        vertical-align: baseline;
+        line-height: 1.8;
+      }
+      @each $entity, $color in $entity-colors {
+        &.#{$entity} {
+          color: $white;
+          background: $color;
+        }
+      }
+      @each $key, $color in $analytics-colors {
+        &.#{$key} {
+          color: $white;
+          background: $color;
+        }
+      }
+      &.large {
+        font-size: 1.2rem;
+      }
+    }
+    &[theme="entity"] {
+      @each $entity, $color in $entity-colors {
+        &.#{$entity} {
+          color: $color;
+          background: transparent;
+        }
+      }
+    }
+  }
+}
+
+// Nested icons
+figcaption,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span {
+  > i {
+    margin: 0 0.4rem 0 0;
+    padding: 0;
+    &:before {
+      vertical-align: middle !important;
+    }
+    &[theme] {
+      &[theme="contained"] {
+        font-size: 0.8rem;
+        vertical-align: 0.1rem;
+        &:before {
+          vertical-align: baseline;
+          line-height: $icon-width;
+          display: block;
+        }
+      }
+    }
+  }
+}

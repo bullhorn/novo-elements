@@ -1,24 +1,26 @@
 // --------------------------------------------------
 // Global
 // --------------------------------------------------
-@import "./styles/global/reset";
+@import "~novo-design-tokens/scss";
+
+@import "./styles/variables";
+@import "./styles/reset";
+@import "./styles/base";
 @import "./styles/global/functions";
-@import "./styles/global/variables";
 @import "./styles/global/include-media";
 @import "./styles/global/flex-grid";
-@import "./styles/global/layout";
-@import "./styles/global/cdk";
-// Typography
-@import "./elements/common/typography/text.mixins";
 
-@include cdk-overlay();
-// --------------------------------------------------
-// Plugins (Third-Party-Libraries)
-// --------------------------------------------------
 // --------------------------------------------------
 // Content
 // --------------------------------------------------
-@import "./styles/content/typography";
+@import "./styles/typography";
+@import "./styles/iconography";
+@import "./elements/common/typography/text.mixins";
+
+// CDK
+@import "./styles/cdk";
+@include cdk-overlay();
+
 // --------------------------------------------------
 // Elements
 // --------------------------------------------------
@@ -72,27 +74,16 @@
 @import "./elements/simple-table/table";
 @import "./elements/tabbed-group-picker/TabbedGroupPicker";
 
-@each $name, $color in $dark-colors {
+@include theme-colors() using ($color, $name) {
   .bgc-#{$name} {
     background: $color;
-    color: $white;
+    color: getContrastColor($name);
   }
-}
-
-@each $name, $color in $light-colors {
-  .bgc-#{$name} {
-    background: $color;
-    color: $dark;
-  }
-}
-
-@each $name, $color in $all-colors {
   .bgc-#{$name}-striped {
     & > *:nth-child(odd) {
       background: $color;
     }
   }
-
   .txc-#{$name} {
     color: $color;
   }
@@ -128,24 +119,6 @@
   .mb-#{$key},
   .my-#{$key} {
     margin-bottom: $value;
-  }
-}
-
-.skeleton:empty {
-  width: 100px;
-  margin: 0.2em 0px;
-  height: 1em;
-  display: inline-flex;
-  background: rgba($dark, 0.1);
-  background-image: linear-gradient(to right, rgba($grey, 0.2) 0%, rgba($grey, 0.3) 50%, rgba($grey, 0.2) 100%);
-  background-repeat: repeat-y;
-  background-size: 25% 100%;
-  background-position: 0 0;
-  animation: shine 1s infinite;
-  @keyframes shine {
-    to {
-      background-position: 100% 0;
-    }
   }
 }
 

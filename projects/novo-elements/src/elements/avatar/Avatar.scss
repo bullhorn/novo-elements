@@ -12,19 +12,6 @@
     height: inherit;
     border-radius: inherit;
   }
-  // @each $basic, $color in $all-colors {
-  //   &[theme='#{$basic}'] {
-  //     color: $white;
-  //     background: $color;
-  //   }
-  // }
-  // @each $basic, $color in $all-colors {
-  //   &[color='#{$basic}'] {
-  //     color: $color;
-  //     border: $color;
-  //     background: $white;
-  //   }
-  // }
 }
 
 :host([size="small"]) {

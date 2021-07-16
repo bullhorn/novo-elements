@@ -1,9 +1,9 @@
 // We want overlays to always appear over user content, so set a baseline
 // very high z-index for the overlay container, which is where we create the new
 // stacking context for all overlays.
-$cdk-z-index-overlay-container: 1000;
-$cdk-z-index-overlay: 1000;
-$cdk-z-index-overlay-backdrop: 1000;
+$cdk-z-index-overlay-container: z(overlay);
+$cdk-z-index-overlay: z(overlay);
+$cdk-z-index-overlay-backdrop: z(backdrop);
 
 // Background color for all of the backdrops
 $cdk-overlay-dark-backdrop-background: rgba(0, 0, 0, 0.6);
@@ -56,13 +56,11 @@ $backdrop-animation-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1) !default;
   }
 
   .cdk-overlay-backdrop {
-    // TODO(jelbourn): reuse sidenav fullscreen mixin.
     position: absolute;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
-
     z-index: $cdk-z-index-overlay-backdrop;
     pointer-events: auto;
     -webkit-tap-highlight-color: transparent;
@@ -71,6 +69,7 @@ $backdrop-animation-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1) !default;
 
     &.cdk-overlay-backdrop-showing {
       opacity: 0.48;
+      backdrop-filter: blur(4px);
     }
   }
 

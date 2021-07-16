@@ -179,7 +179,7 @@ novo-entity-chips {
       min-width: 180px;
       max-height: 49vh;
       overflow: auto;
-      z-index: 900;
+      z-index: z("max");
       border: 1px solid #4a89dc;
       transition: all 200ms ease-in-out;
       novo-list-item {
@@ -211,8 +211,11 @@ entity-chip-results {
   max-width: none !important;
 }
 
-novo-row-chips,
-novo-row-chip {
+novo-row-chips {
+  display: flex;
+  flex-flow: column;
+  gap: 0.8rem;
+
   .novo-row-chips-columns {
     display: flex;
     align-items: flex-end;
@@ -232,7 +235,7 @@ novo-row-chip {
     }
     .column-data {
       display: flex;
-      flex: 1;
+      flex: 0 0 200px;
       align-items: center;
       background: transparent !important;
       border: none;
@@ -242,9 +245,13 @@ novo-row-chip {
       height: 2em;
       width: 100%;
       margin: 0 1em 0 0;
-      padding: 0 0 0.5em 0;
-      &:first-of-type {
-        flex: 0 0 275px;
+      // padding: 0 0 0.5em 0;
+      &.editable {
+        border-bottom: none;
+        input {
+          background: none;
+          border: none;
+        }
       }
       span {
         color: inherit;

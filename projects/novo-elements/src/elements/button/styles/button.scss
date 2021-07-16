@@ -1,4 +1,4 @@
-@import "../../../styles/global/variables.scss";
+@import "../../../styles/variables.scss";
 
 :host {
   display: inline-flex;
@@ -9,6 +9,7 @@
   font-size: 1.2rem;
   line-height: 3.2rem;
   border: none;
+  color: var(--text-main, $dark);
   background: transparent;
   border-radius: 3px;
   text-transform: uppercase;

@@ -22,7 +22,7 @@ novo-date-time-picker {
   border-radius: 4px;
   background-color: #fff;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15), 0 2px 7px rgba(0, 0, 0, 0.1);
-  z-index: 999;
+  z-index: z(max);
   .date-time-container {
     position: relative;
     .view-container {
@@ -35,7 +35,7 @@ novo-date-time-picker {
       background: #fff;
       transform: translateX(100%);
       transition: transform 200ms ease-in-out;
-      z-index: 2;
+      z-index: z(above);
       top: 0;
       novo-time-picker {
         width: inherit;

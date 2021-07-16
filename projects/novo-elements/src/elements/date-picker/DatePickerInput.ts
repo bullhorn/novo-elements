@@ -72,25 +72,49 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
   /** View -> model callback called when autocomplete has been touched */
   _onTouched = () => {};
 
+  /**
+   * The name of the form field, get passed to the native `input` element
+   **/
   @Input()
   name: string;
+  /**
+   * The minimum date that can be selected.
+   **/
   @Input()
   start: Date;
+  /**
+   * The maximum date that can be selected.
+   **/
   @Input()
   end: Date;
+  /**
+   * Placeholder text to display in the input when it is empty.
+   **/
   @Input()
   placeholder: string;
+  /**
+   * MaskOptions to pass to the textMaskAddons plugin
+   **/
   @Input()
   maskOptions: any;
+  /**
+   * The format to use to parse and render dates: DD/MM/YYYY or MM/DD/YYYY
+   **/
   @Input()
   format: string;
   @Input()
   textMaskEnabled: boolean = true;
   @Input()
   allowInvalidDate: boolean = false;
+  /**
+   * Sets the field as to appear disabled, users will not be able to interact with the text field.
+   **/
   @HostBinding('class.disabled')
   @Input()
   disabled: boolean = false;
+  /**
+   * Day of the week the calendar should display first, Sunday=0...Saturday=6
+   **/
   @Input()
   weekStart: number = 0;
   @Output()

@@ -485,7 +485,7 @@ novo-form {
                         display: flex;
                         flex-direction: column;
                         background: #fff;
-                        z-index: 9;
+                        z-index: z(above);
                         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
                         border-bottom-right-radius: 3px;
                         border-bottom-left-radius: 3px;
@@ -746,7 +746,7 @@ novo-form {
                   position: absolute;
                   left: 22px;
                   pointer-events: none;
-                  z-index: 1;
+                  z-index: z(default);
                   width: 100%;
                   display: block;
                   cursor: text;

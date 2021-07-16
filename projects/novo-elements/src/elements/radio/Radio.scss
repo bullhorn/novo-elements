@@ -60,7 +60,7 @@ novo-radio {
   }
   > input {
     position: absolute;
-    z-index: -1;
+    z-index: z(below);
     opacity: 0;
     &:focus + label {
       i {
@@ -111,7 +111,7 @@ novo-radio {
       background: $positive;
     }
 
-    @each $name, $color in $all-colors {
+    @include theme-colors() using ($color, $name) {
       &.checked[color="#{$name}"] {
         color: $white;
         background: $color;

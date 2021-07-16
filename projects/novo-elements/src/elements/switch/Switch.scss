@@ -66,7 +66,7 @@ novo-switch {
     width: $switch-width - $switch-thumb-size;
     position: absolute;
     transform: translate3d(0, 0, 0);
-    z-index: 1;
+    z-index: z(default);
   }
   &[aria-checked="true"] .novo-switch-thumb-container {
     transform: translate3d(100%, 0, 0);
@@ -80,7 +80,7 @@ novo-switch {
     height: $switch-thumb-size;
     width: $switch-thumb-size;
     border-radius: 50%;
-    box-shadow: $whiteframe-shadow-z1; // todo
+    box-shadow: $shadow-1; // todo
     .bh-ripple-container {
       position: absolute;
       display: block;

@@ -13,8 +13,6 @@
 @import "assets/styles/media";
 @import "assets/styles/markdown";
 
-.markdown-body h1,
-.markdown-body h2 {
-  padding-bottom: 0.3em;
-  border-bottom: 1px solid #eaecef;
+body {
+  font-size: 1.4rem;
 }

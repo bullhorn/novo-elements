@@ -1,5 +1,6 @@
 export * from './chips';
 export * from './date-picker';
+export * from './date-time-picker';
 export * from './editor';
 export * from './form';
 export * from './form-groups';
@@ -8,4 +9,5 @@ export * from './picker';
 export * from './radio-buttons';
 export * from './select';
 export * from './tiles';
+export * from './time-picker';
 export * from './value';

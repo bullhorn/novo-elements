@@ -1,4 +1,4 @@
-@import "../../../styles/global/variables.scss";
+@import "../../../styles/variables.scss";
 @import "../typography/text.mixins.scss";
 
 $novo-menu-side-padding: 0.5rem;
@@ -20,8 +20,8 @@ $novo-menu-side-padding: 0.5rem;
   -webkit-tap-highlight-color: transparent;
 
   &:hover {
-    background: rgba($ocean, 0.1);
-    color: $dark;
+    background: var(--background, rgba($ocean, 0.1));
+    color: var(--text-bright, $dark);
   }
 
   &:active {

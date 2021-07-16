@@ -1,8 +1,9 @@
-@import "../../../styles/global/variables.scss";
+@import "../../../styles/variables.scss";
 
 :host {
   // Standard Themed Icon
   &[theme="standard"] {
+    @include theme-backgrounds("color", false);
     color: $dark;
     background: $light;
     &:hover,
@@ -11,25 +12,6 @@
     }
     &:active {
       box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
-    } // Loop Generic Colors (Primary, Success, Negative, Etc.)
-    @each $button, $color in $app-colors {
-      &[color="#{$button}"] {
-        color: $white;
-        background: $color;
-      }
-    } // Loop Analytics Colors
-    @each $analytics, $color in $analytics-colors {
-      &[color="#{$analytics}"] {
-        color: $white;
-        background: $color;
-      }
-    }
-    &[color="background"],
-    &[color="gray"],
-    &[color="light"],
-    &[color="off-white"],
-    &[color="white"] {
-      color: $dark;
     }
   }
 }
