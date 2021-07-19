@@ -234,7 +234,7 @@ export class NovoTableElement implements DoCheck {
   @Input()
   config: NovoTableConfig = {};
   @Input()
-  columns: Array<any>;
+  columns: Array<any> = [];
   @Input()
   theme: string;
   @Input()
