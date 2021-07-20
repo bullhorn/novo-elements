@@ -48,7 +48,7 @@ describe('Directive: Translate', () => {
           subscribe: () => {},
         },
       };
-      spyOn(directive.translateService.onLocaleChange, 'subscribe').and.callThrough();
+      jest.spyOn(directive.translateService.onLocaleChange, 'subscribe');
       directive.ngOnInit();
       expect(directive.translateService.onLocaleChange.subscribe).toHaveBeenCalled();
     });
@@ -63,7 +63,7 @@ describe('Directive: Translate', () => {
           unsubscribe: () => {},
         },
       };
-      spyOn(directive.translateService.onLocaleChange, 'unsubscribe').and.callThrough();
+      jest.spyOn(directive.translateService.onLocaleChange, 'unsubscribe');
       directive.ngOnDestroy();
       expect(directive.translateService.onLocaleChange.unsubscribe).toHaveBeenCalled();
     });

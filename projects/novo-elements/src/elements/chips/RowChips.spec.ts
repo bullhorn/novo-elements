@@ -5,20 +5,20 @@ import { NovoLabelService } from '../../services/novo-label-service';
 import { ComponentUtils } from '../../utils/component-utils/ComponentUtils';
 import { NovoChipsModule } from './Chips.module';
 // App
-import { NovoRowChipElement, NovoRowChipsElement } from './RowChips';
+import { NovoRowChipsElement } from './RowChips';
 
-describe('Elements: NovoRowChipElement', () => {
-  let fixture;
-  let component;
+// describe('Elements: NovoRowChipElement', () => {
+//   let fixture;
+//   let component;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [FormsModule, NovoChipsModule],
-    }).compileComponents();
-    fixture = TestBed.createComponent(NovoRowChipElement);
-    component = fixture.debugElement.componentInstance;
-  }));
-});
+//   beforeEach(async(() => {
+//     TestBed.configureTestingModule({
+//       imports: [FormsModule, NovoChipsModule],
+//     }).compileComponents();
+//     fixture = TestBed.createComponent(NovoRowChipElement);
+//     component = fixture.debugElement.componentInstance;
+//   }));
+// });
 
 describe('Elements: NovoRowChipsElement', () => {
   let fixture;
@@ -38,8 +38,8 @@ describe('Elements: NovoRowChipsElement', () => {
 
   describe('Method: onKeyDown(event)', () => {
     it('should not call select or remove.', () => {
-      spyOn(component, 'select');
-      spyOn(component, 'remove');
+      jest.spyOn(component, 'select');
+      jest.spyOn(component, 'remove');
       component.onKeyDown();
       expect(component.select).not.toHaveBeenCalled();
       expect(component.remove).not.toHaveBeenCalled();

@@ -56,14 +56,12 @@ describe('Elements: BasePickerResults', () => {
 
   describe('Method: selectActiveMatch()', () => {
     it('should be defined.', () => {
-      spyOn(component, 'selectMatch');
       expect(component.selectActiveMatch).toBeDefined();
-      component.selectActiveMatch();
     });
     it('should call selectMatch.', () => {
-      spyOn(component, 'selectMatch');
+      let spy = jest.spyOn(component, 'selectMatch');
       component.selectActiveMatch();
-      expect(component.selectMatch).toHaveBeenCalled();
+      expect(spy).toHaveBeenCalled();
     });
   });
 
@@ -73,7 +71,7 @@ describe('Elements: BasePickerResults', () => {
       component.prevActiveMatch();
     });
     it('should scroll to active.', () => {
-      spyOn(component, 'scrollToActive');
+      jest.spyOn(component, 'scrollToActive');
       component.prevActiveMatch();
       expect(component.scrollToActive).toHaveBeenCalled();
     });
@@ -114,8 +112,8 @@ describe('Elements: BasePickerResults', () => {
     });
     it('should prevent events from bubbling up', () => {
       const mockEvent: any = {
-        stopPropagation: jasmine.createSpy('stopPropagation'),
-        preventDefault: jasmine.createSpy('preventDefault'),
+        stopPropagation: jest.fn(() => true),
+        preventDefault: jest.fn(() => true),
       };
       component.selectMatch(mockEvent);
       expect(mockEvent.stopPropagation).toHaveBeenCalled();
@@ -130,7 +128,7 @@ describe('Elements: BasePickerResults', () => {
     it('should handle closeOnSelect', () => {
       component.parent = {
         closeOnSelect: true,
-        hideResults: jasmine.createSpy('hideResults'),
+        hideResults: jest.fn(() => true),
       };
       component.activeMatch = 'Stuff';
       component.selectMatch();

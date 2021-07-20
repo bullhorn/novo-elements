@@ -30,7 +30,7 @@ describe('Components: SkillsSpecialtyPickerResults', () => {
 
   describe('Function: getListElement()', () => {
     it('should return novo-list', () => {
-      spyOn(component.element.nativeElement, 'querySelector').and.callFake((arg) => arg);
+      jest.spyOn(component.element.nativeElement, 'querySelector').mockImplementation((arg) => arg);
       expect(component.getListElement()).toEqual('novo-list');
     });
   });

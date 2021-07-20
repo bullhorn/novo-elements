@@ -44,13 +44,13 @@ xdescribe('Element: Unless', () => {
         createEmbeddedView: () => { },
         clear: () => { },
       } as any;
-      spyOn(service.security, 'has').and.callFake((arg) => {
+      jest.spyOn(service.security, 'has').mockImplementation((arg) => {
         if (arg === 'A') {
           return true;
         }
         return false;
       });
-      spyOn(service.viewContainer, 'createEmbeddedView');
+      jest.spyOn(service.viewContainer, 'createEmbeddedView');
     });
     it('should set isDisplayed to true if one of 2 permissions exist', () => {
       service.permissions = 'A||B';

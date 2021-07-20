@@ -83,11 +83,11 @@ export class PropsTableComponent implements OnInit {
   }
 
   getType(p: PropertyDeclartion) {
-    if (p.type?.type == 'array') {
+    if (p.type?.type === 'array') {
       return `${p.type.elementType.name} []`;
     }
 
-    if (p.type?.type == 'union') {
+    if (p.type?.type === 'union') {
       return `One of [ ${p.type.types.map((t) => t.value).join(', ')} ]`;
     }
     return p.type.name;

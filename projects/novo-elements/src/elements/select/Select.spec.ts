@@ -81,7 +81,7 @@ xdescribe('Elements: NovoSelectElement', () => {
       expect(comp.empty).toEqual(true);
     });
     it('should invoke select', () => {
-      spyOn(comp.onSelect, 'emit');
+      jest.spyOn(comp.onSelect, 'emit');
       comp.createdItem = 'baz';
       comp.options = [
         { label: 'foo', value: 'foo' },
@@ -95,7 +95,7 @@ xdescribe('Elements: NovoSelectElement', () => {
       expect(comp.onSelect.emit).toHaveBeenCalledWith({ selected: 'baz' });
     });
     it('should invoke writeValue', () => {
-      spyOn(comp, 'select');
+      jest.spyOn(comp, 'select');
       comp.model = 'bar';
       comp.options = [{ value: 'foo' }, { value: 'bar' }, { value: 'baz' }];
       comp.filteredOptions = [{ value: 'foo' }, { value: 'bar' }];
@@ -115,7 +115,7 @@ xdescribe('Elements: NovoSelectElement', () => {
 
   describe('Function: openPanel', () => {
     it('should call overlay.openPanel', () => {
-      spyOn(comp.overlay, 'openPanel');
+      jest.spyOn(comp.overlay, 'openPanel');
       comp.openPanel();
       expect(comp.overlay.openPanel).toHaveBeenCalled();
     });
@@ -123,7 +123,7 @@ xdescribe('Elements: NovoSelectElement', () => {
 
   describe('Function: closePanel', () => {
     it('should call overlay.closePanel', () => {
-      spyOn(comp.overlay, 'closePanel');
+      jest.spyOn(comp.overlay, 'closePanel');
       comp.closePanel();
       expect(comp.overlay.closePanel).toHaveBeenCalled();
     });
@@ -152,7 +152,7 @@ xdescribe('Elements: NovoSelectElement', () => {
       expect(comp.empty).toEqual(false);
     });
     it('should invoke closePanel', () => {
-      spyOn(comp.overlay, 'closePanel');
+      jest.spyOn(comp.overlay, 'closePanel');
       comp.setValueAndClose({});
       expect(comp.overlay.closePanel).toHaveBeenCalled();
     });
@@ -172,22 +172,22 @@ xdescribe('Elements: NovoSelectElement', () => {
       expect(comp.empty).toEqual(false);
     });
     it('should invoke onModelChange', () => {
-      spyOn(comp, 'onModelChange');
+      jest.spyOn(comp, 'onModelChange');
       comp.select({ value: 'foo' }, 1);
       expect(comp.onModelChange).toHaveBeenCalledWith('foo');
     });
     it('should emit onSelect', () => {
-      spyOn(comp.onSelect, 'emit');
+      jest.spyOn(comp.onSelect, 'emit');
       comp.select({ value: 'foo' });
       expect(comp.onSelect.emit).toHaveBeenCalledWith({ selected: 'foo' });
     });
     it('should not invoke onModelChange', () => {
-      spyOn(comp, 'onModelChange');
+      jest.spyOn(comp, 'onModelChange');
       comp.select({ value: 'foo' }, 1, false);
       expect(comp.onModelChange).not.toHaveBeenCalled();
     });
     it('should not emit onSelect', () => {
-      spyOn(comp.onSelect, 'emit');
+      jest.spyOn(comp.onSelect, 'emit');
       comp.select({ value: 'foo' }, 1, false);
       expect(comp.onSelect.emit).not.toHaveBeenCalled();
     });
@@ -232,7 +232,7 @@ xdescribe('Elements: NovoSelectElement', () => {
   describe('Function: _handleKeydown(event)', () => {
     xit('should not scroll', () => {});
     it('should close panel', () => {
-      spyOn(comp.overlay, 'closePanel');
+      jest.spyOn(comp.overlay, 'closePanel');
       const mockEvent: any = { key: Key.Escape };
       comp.header.open = true;
       comp._handleKeydown(mockEvent);

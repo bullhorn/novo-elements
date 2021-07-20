@@ -337,7 +337,7 @@ describe('Utils: FormUtils', () => {
     });
     it('should return the right component for WorkflowOptions and call getControlOptions with data', () => {
       const field: { type: string } = { type: 'select' };
-      spyOn(formUtils, 'getControlOptions');
+      jest.spyOn(formUtils, 'getControlOptions');
       const result = formUtils.getControlForField(field, undefined, undefined, undefined, undefined, 'First');
       expect(formUtils.getControlOptions).toHaveBeenCalledWith(field, undefined, undefined, 'First');
       expect(result instanceof SelectControl).toBeTruthy();
@@ -486,7 +486,7 @@ describe('Utils: FormUtils', () => {
           },
         ],
       };
-      spyOn(formUtils, 'getControlForField').and.returnValue({});
+      jest.spyOn(formUtils, 'getControlForField').mockReturnValue({});
       formUtils.toFieldSets(meta, 'USD', {}, {}, {}, { firstName: 'First' });
       expect(formUtils.getControlForField).toHaveBeenCalledWith(meta.fields[0], {}, {}, {}, undefined, 'First');
     });

@@ -12,7 +12,7 @@ describe('Utils: ComponentUtils', () => {
   }));
 
   it('function append() should call location.createComponent', () => {
-    spyOn(service.componentFactoryResolver, 'resolveComponentFactory');
+    jest.spyOn(service.componentFactoryResolver, 'resolveComponentFactory');
     const location = { createComponent: () => {} };
     service.append(ComponentUtils, location as any);
     expect(service.componentFactoryResolver.resolveComponentFactory).toHaveBeenCalled();

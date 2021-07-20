@@ -3,10 +3,11 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { ChangeDetectorRef, Component, ElementRef, NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { FieldInteractionApi, NovoLabelService, NovoTemplateService } from '../..';
+import { NovoLabelService, NovoTemplateService } from '../../services';
 import { DateFormatService } from '../../services/date-format/DateFormat';
 // App
 import { NovoAutoSize, NovoControlElement } from './Control';
+import { FieldInteractionApi } from './FieldInteractionApi';
 
 @Component({
   selector: 'novo-auto-size-test-component',

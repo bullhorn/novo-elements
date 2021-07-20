@@ -43,8 +43,8 @@ describe('FieldInteractionApi', () => {
   beforeEach(inject([FieldInteractionApi], (_service) => {
     service = _service;
     service.form = { controls: { doughnuts: { restrictFieldInteractions: false } } };
-    triggerEvent = spyOn(service as any, 'triggerEvent');
-    setProperty = spyOn(service as any, 'setProperty');
+    triggerEvent = jest.spyOn(service as any, 'triggerEvent');
+    setProperty = jest.spyOn(service as any, 'setProperty');
   }));
 
   describe('Function: addPropertiesToPickerConfig', () => {
@@ -78,47 +78,42 @@ describe('FieldInteractionApi', () => {
     it('is defined', () => {
       expect(service.getOptionsConfig).toBeDefined();
     });
-    it('returns a new options call that calls optionsPromise', async (done) => {
+    it('returns a new options call that calls optionsPromise', async () => {
       const args = {
         optionsPromise: async (str: string) => [],
       };
-      const spy = spyOn(args, 'optionsPromise').and.returnValue(Promise.resolve([]));
+      const spy = jest.spyOn(args, 'optionsPromise').mockResolvedValue([]);
 
       const result = service.getOptionsConfig(args) as { options: OptionsFunction };
       await result.options('asdf');
 
-      const [firstArg, secondArg] = spy.calls.mostRecent().args;
-      expect(firstArg).toEqual('asdf');
-      done();
+      expect(spy).toHaveBeenLastCalledWith('asdf', expect.any(Object), undefined);
     });
-    it('calls optionsPromise if optionsUrl is also present', async (done) => {
+    it('calls optionsPromise if optionsUrl is also present', async () => {
       const args = {
         optionsPromise: async (str: string) => [],
         optionsUrl: 'fake/url',
       };
-      const spy = spyOn(args, 'optionsPromise').and.returnValue(Promise.resolve([]));
+      const spy = jest.spyOn(args, 'optionsPromise').mockResolvedValue([]);
       const query = 'Novo Elem';
       const page = 9;
 
       const result = service.getOptionsConfig(args) as { options: OptionsFunction };
       await result.options(query, page);
 
-      expect(spy).toHaveBeenCalledWith(query, jasmine.any(Object), page);
-      done();
+      expect(spy).toHaveBeenCalledWith(query, expect.any(Object), page);
     });
-    it('uses the optionsURLBuilder if included and not optionsUrl', async (done) => {
+    it('uses the optionsURLBuilder if included and not optionsUrl', async () => {
       const args: ModifyPickerConfigArgs = {
         optionsUrlBuilder: (query) => `asdf${query}`,
         optionsUrl: 'fake/url',
       };
 
       const result = service.getOptionsConfig(args) as { options: OptionsFunction };
-      spyOn(result, 'options').and.callThrough();
-      const spy = spyOn((service as any).http, 'get').and.returnValue(of([]));
+      jest.spyOn(result, 'options');
+      const spy = jest.spyOn((service as any).http, 'get').mockReturnValue(of([]));
       await result.options('asdf');
-      const [firstArg] = spy.calls.mostRecent().args;
-      expect(firstArg).toEqual('asdfasdf');
-      done();
+      expect(spy).toHaveBeenLastCalledWith('asdfasdf');
     });
     it('passes down format if optionsUrl, optionsUrlBuilder, or optionsPromise is present', () => {
       const args: ModifyPickerConfigArgs = {
@@ -135,16 +130,15 @@ describe('FieldInteractionApi', () => {
       const result = service.getOptionsConfig(args);
       expect(result.options).toEqual(['asdf']);
     });
-    it('uses the mapper if present', async (done) => {
+    it('uses the mapper if present', async () => {
       const args: ModifyPickerConfigArgs = {
         optionsUrl: 'fake/url',
       };
       const mapper = ({ name }) => name;
-      spyOn((service as any).http, 'get').and.returnValue(of([{ name: 'Dr. Strangelove' }]));
+      jest.spyOn((service as any).http, 'get').mockReturnValue(of([{ name: 'Dr. Strangelove' }]));
       const result = service.getOptionsConfig(args, mapper);
       const results = await (result.options as OptionsFunction)('asdf');
       expect(results).toEqual(['Dr. Strangelove']);
-      done();
     });
   });
 
@@ -192,13 +186,13 @@ describe('FieldInteractionApi', () => {
       expect(service.getFieldSet).toBeDefined();
     });
     it('should return null and log to console if no key', () => {
-      spyOn(console, 'error');
+      jest.spyOn(console, 'error');
       const returnValue = service.getFieldSet(null);
       expect(returnValue).toBeNull();
       expect(console.error).toBeCalled();
     });
     it('should return null and log to console if no match for key', () => {
-      spyOn(console, 'error');
+      jest.spyOn(console, 'error');
       const returnValue = service.getFieldSet('test1');
       expect(returnValue).toBeNull();
       expect(console.error).toBeCalled();

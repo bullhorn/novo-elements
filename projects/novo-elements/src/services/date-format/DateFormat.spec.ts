@@ -344,12 +344,12 @@ describe('Service: DateFormatService', () => {
       expect(service.parseString).toBeDefined();
     });
     it('should call parseDateString for dates', () => {
-      spyOn(service, 'parseDateString');
+      jest.spyOn(service, 'parseDateString');
       service.parseString('', false, 'date');
       expect(service.parseDateString).toHaveBeenCalled();
     });
     it('should call parseTimeString for time', () => {
-      spyOn(service, 'parseTimeString');
+      jest.spyOn(service, 'parseTimeString');
       service.parseString('', false, 'time');
       expect(service.parseTimeString).toHaveBeenCalledWith('', false);
     });

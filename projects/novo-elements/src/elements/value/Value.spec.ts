@@ -134,7 +134,7 @@ xdescribe('Elements: NovoValueElement', () => {
         onIconClick() {},
       };
       component.data = 'test';
-      spyOn(icon, 'onIconClick');
+      jest.spyOn(icon, 'onIconClick');
       component.onValueClick(icon);
       expect(icon.onIconClick).toHaveBeenCalledWith(component.data, component.meta);
     });
@@ -145,7 +145,7 @@ xdescribe('Elements: NovoValueElement', () => {
         onIconClick: '',
       };
       component.data = 'test';
-      spyOn(icon, 'onIconClick');
+      jest.spyOn(icon, 'onIconClick');
       component.onValueClick(icon);
       expect(icon.onIconClick).toHaveBeenCalledWith(component.data, component.meta);
     });
@@ -157,7 +157,7 @@ xdescribe('Elements: NovoValueElement', () => {
         openLink() {},
       };
       component.data = 'test';
-      spyOn(component.meta, 'openLink');
+      jest.spyOn(component.meta, 'openLink');
       component.openLink();
       expect(component.meta.openLink).toHaveBeenCalledWith(component.data, component.meta);
     });

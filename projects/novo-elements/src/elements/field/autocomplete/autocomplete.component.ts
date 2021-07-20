@@ -194,7 +194,7 @@ export class NovoAutocompleteElement
     // through change detection.
     if (this._formField) {
       const { controlType, lastCaretPosition = 0 } = this._formField._control;
-      if (controlType == 'textarea') {
+      if (controlType === 'textarea') {
         const currentValue = this._formField._control.value.split('');
         currentValue.splice(lastCaretPosition, 0, inputValue);
         this._formField._control.value = currentValue.join('');

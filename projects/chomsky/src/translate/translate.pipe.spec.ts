@@ -60,7 +60,7 @@ describe('Pipe: TranslatePipe', () => {
 
   describe('Function: ngOnDestroy()', () => {
     it('should call unsubscribe.', () => {
-      spyOn(pipe, 'unsubscribe').and.callFake(() => {});
+      jest.spyOn(pipe, 'unsubscribe').mockImplementation(() => {});
       expect(pipe.ngOnDestroy).toBeDefined();
       pipe.ngOnDestroy();
       expect(pipe.unsubscribe).toHaveBeenCalled();
@@ -87,7 +87,7 @@ describe('Pipe: TranslatePipe', () => {
       pipe.onLangChange = {
         unsubscribe: () => {},
       };
-      spyOn(pipe.onLangChange, 'unsubscribe').and.callThrough();
+      jest.spyOn(pipe.onLangChange, 'unsubscribe');
       pipe.unsubscribe();
       expect(pipe.onLangChange).toBeUndefined();
     });

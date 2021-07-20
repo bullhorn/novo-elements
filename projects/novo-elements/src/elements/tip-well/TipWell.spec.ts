@@ -15,7 +15,7 @@ describe('Elements: NovoTipWellElement', () => {
     }).compileComponents();
     fixture = TestBed.createComponent(NovoTipWellElement);
     component = fixture.debugElement.componentInstance;
-    spyOn(component.sanitizer, 'bypassSecurityTrustHtml').and.returnValue('TRUSTED_HTML');
+    jest.spyOn(component.sanitizer, 'bypassSecurityTrustHtml').mockReturnValue('TRUSTED_HTML');
   }));
 
   it('should initialize with defaults', () => {

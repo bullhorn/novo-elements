@@ -3,15 +3,13 @@ import { EventEmitter } from '@angular/core';
 import { async, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { IMaskDirectiveModule } from 'angular-imask';
-import {
-  IDataTableColumnFilterOption,
-  NovoButtonModule,
-  NovoDatePickerModule,
-  NovoDropdownModule,
-  NovoLabelService,
-  NovoTooltipModule,
-} from '../../..';
+import { NovoLabelService } from '../../../services';
 import { Key } from '../../../utils';
+import { NovoButtonModule } from '../../button';
+import { NovoDatePickerModule } from '../../date-picker/DatePicker.module';
+import { NovoDropdownModule } from '../../dropdown';
+import { NovoTooltipModule } from '../../tooltip/Tooltip.module';
+import { IDataTableColumnFilterOption } from '../interfaces';
 import { DataTableState } from '../state/data-table-state.service';
 import { NovoDataTableCellHeader } from './data-table-header-cell.component';
 
@@ -100,7 +98,7 @@ xdescribe('Elements: NovoDataTableCellHeader', () => {
         component.dropdown = {
           closePanel: () => {},
         };
-        spyOn(component.dropdown, 'closePanel');
+        jest.spyOn(component.dropdown, 'closePanel');
       });
       it('should reset multiSelectOptions', () => {
         component.filter = [1, 2];
@@ -256,8 +254,8 @@ xdescribe('Elements: NovoDataTableCellHeader', () => {
       });
       it('should clear filter text and close dropdown on ESC', () => {
         const event = { key: Key.Escape, stopPropagation: () => {}, preventDefault: () => {} };
-        spyOn(component.dropdown, 'closePanel');
-        spyOn(component, 'clearOptionFilter');
+        jest.spyOn(component.dropdown, 'closePanel');
+        jest.spyOn(component, 'clearOptionFilter');
         component.multiSelectOptionFilterHandleKeydown(event);
         expect(component.dropdown.closePanel).toHaveBeenCalled();
         expect(component.clearOptionFilter).toHaveBeenCalled();
@@ -265,7 +263,7 @@ xdescribe('Elements: NovoDataTableCellHeader', () => {
 
       it('should attempt to filter on ENTER', () => {
         const event = { key: Key.Enter, stopPropagation: () => {}, preventDefault: () => {} };
-        spyOn(component, 'filterMultiSelect');
+        jest.spyOn(component, 'filterMultiSelect');
         component.multiSelectOptionFilterHandleKeydown(event);
         expect(component.filterMultiSelect).toHaveBeenCalled();
       });
@@ -293,11 +291,11 @@ xdescribe('Elements: NovoDataTableCellHeader', () => {
     beforeEach(() => {
       mouseDownEvent = window.document.createEvent('MouseEvents');
       mouseDownEvent.initMouseEvent('mousedown', true, true, window, 1, 50, 50, 500, 50, false, false, false, false, 0, null);
-      spyOn(mouseDownEvent, 'preventDefault');
+      jest.spyOn(mouseDownEvent, 'preventDefault');
 
       mouseUpEvent = window.document.createEvent('MouseEvents');
       mouseUpEvent.initMouseEvent('mouseup', true, true, window, 1, 50, 50, 550, 50, false, false, false, false, 0, null);
-      spyOn(mouseUpEvent, 'preventDefault');
+      jest.spyOn(mouseUpEvent, 'preventDefault');
       component.elementRef = {
         nativeElement: {
           getBoundingClientRect: () => {
@@ -320,7 +318,7 @@ xdescribe('Elements: NovoDataTableCellHeader', () => {
     });
 
     it('should change the width when moving mouse', async () => {
-      spyOn(component.renderer, 'setStyle');
+      jest.spyOn(component.renderer, 'setStyle');
       component.startResize(mouseDownEvent);
 
       const mouseMoveEvent: MouseEvent = window.document.createEvent('MouseEvents');
