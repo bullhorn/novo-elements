@@ -37,7 +37,7 @@ tfoot {
 }
 
 tbody tr:nth-child(even) {
-  background-color: var(--background);
+  background-color: var(--background-alt);
 }
 
 tbody tr:nth-child(even) button {
@@ -55,12 +55,12 @@ tbody tr:nth-child(even) button:hover {
 
 ::-webkit-scrollbar-track {
   background: var(--background);
-  border-radius: 6px;
+  // border-radius: 6px;
 }
 
-::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb:not(:hover) {
   background: var(--scrollbar-thumb);
-  border-radius: 6px;
+  // border-radius: 6px;
 }
 
 ::-webkit-scrollbar-thumb:hover {

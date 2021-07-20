@@ -27,8 +27,8 @@ export class AppComponent implements AfterViewInit {
     modalService: NovoModalService,
     private observer: BreakpointObserver,
   ) {
-    toaster.parentViewContainer = viewContainerRef;
-    modalService.parentViewContainer = viewContainerRef;
+    // toaster.parentViewContainer = viewContainerRef;
+    // modalService.parentViewContainer = viewContainerRef;
 
     this.menuOpen = false;
     this.sectionRoutes = ['Home', 'Design', 'Components', 'Patterns', 'Resources'];

@@ -5435,7 +5435,7 @@ export class TabsUsagePage {
         <input type="submit" value="Send" />
         <input type="reset" value="Reset" />
       </fieldset>
-    </form>`,
+    </form> `,
   host: { class: 'markdown-page' },
 })
 export class PatternsNativeFormsPage {

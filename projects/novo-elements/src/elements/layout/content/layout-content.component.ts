@@ -5,12 +5,12 @@ import {
   ChangeDetectorRef,
   Component,
   ElementRef,
-  forwardRef,
   Inject,
   NgZone,
   ViewEncapsulation,
 } from '@angular/core';
-import { NovoLayoutContainer } from '../container/layout-container.component';
+import type { NovoLayoutContainer } from '../container/layout-container.component';
+import { NOVO_LAYOUT_CONTAINER } from '../layout.constants';
 
 @Component({
   selector: 'novo-layout-content',
@@ -27,7 +27,7 @@ import { NovoLayoutContainer } from '../container/layout-container.component';
 export class NovoLayoutContent extends CdkScrollable implements AfterContentInit {
   constructor(
     private _changeDetectorRef: ChangeDetectorRef,
-    @Inject(forwardRef(() => NovoLayoutContainer)) public _container: NovoLayoutContainer,
+    @Inject(NOVO_LAYOUT_CONTAINER) public _container: NovoLayoutContainer,
     elementRef: ElementRef<HTMLElement>,
     scrollDispatcher: ScrollDispatcher,
     ngZone: NgZone,

@@ -24,7 +24,7 @@ import {
 import { Key } from 'projects/novo-elements/src/utils';
 import { fromEvent, Observable, Subject } from 'rxjs';
 import { distinctUntilChanged, filter, map, mapTo, take, takeUntil } from 'rxjs/operators';
-import { NovoLayoutContainer } from '..';
+import type { NovoLayoutContainer } from '../container/layout-container.component';
 import { NovoSidenavMode, NovoSidenavToggleResult, NOVO_LAYOUT_CONTAINER } from '../layout.constants';
 import { novoSidenavAnimations } from './sidenav.animations';
 

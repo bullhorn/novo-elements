@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs';
 import { Key } from '../../utils';
 import { NovoOption } from '../common';
 import { MenuItemDirective } from './menu-item.directive';
-import { MenuComponent } from './menu.component';
+import type { MenuComponent } from './menu.component';
 import { CloseLeafMenuEvent, IMenuClickEvent } from './menu.service';
 import { ILinkConfig } from './menu.types';
 

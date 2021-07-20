@@ -13,9 +13,9 @@
   --border: #{$color-light}; //#dbdbdb;
   --code: #000;
   --animation-duration: 0.1s;
-  --button-hover: #ddd;
-  --scrollbar-thumb: color-mod(var(--button-hover) lightness(-3%));
-  --scrollbar-thumb-hover: color-mod(var(--button-hover) lightness(-10%));
+  --button-hover: #aaa;
+  --scrollbar-thumb: #{$color-dark};
+  --scrollbar-thumb-hover: #{$color-dark};
   --form-placeholder: #949494;
   --form-text: #000;
   --variable: #39a33c;

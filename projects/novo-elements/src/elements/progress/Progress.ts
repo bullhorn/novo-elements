@@ -1,16 +1,18 @@
 // NG2
 import { AfterContentInit, Component, ContentChildren, forwardRef, HostBinding, Input, QueryList } from '@angular/core';
 import { NovoProgressBarElement } from './ProgressBar';
-
-export enum ProgressAppearance {
-  LINEAR = 'linear',
-  RADIAL = 'radial',
-}
+import { NOVO_PROGRESS_CONTAINER, ProgressAppearance } from './ProgressConstants';
 
 @Component({
   selector: 'novo-progress',
   styleUrls: ['./Progress.scss'],
   template: ` <ng-content></ng-content> `,
+  providers: [
+    {
+      provide: NOVO_PROGRESS_CONTAINER,
+      useExisting: NovoProgressElement,
+    },
+  ],
 })
 export class NovoProgressElement implements AfterContentInit {
   @Input()
@@ -29,10 +31,10 @@ export class NovoProgressElement implements AfterContentInit {
 
   @HostBinding('class')
   @Input()
-  get appearance(): ProgressAppearance | string {
+  get appearance(): ProgressAppearance {
     return this._appearance;
   }
-  set appearance(value: ProgressAppearance | string) {
+  set appearance(value: ProgressAppearance) {
     if (this._appearance !== value) {
       this._appearance = value as ProgressAppearance;
       this._updateBarAppearance();

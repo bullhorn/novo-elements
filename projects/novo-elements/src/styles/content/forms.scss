@@ -18,7 +18,7 @@ select {
   transition: border-bottom 0.2s, background-color 0.2s;
 }
 
-input:not([type="submit"]):not([type="reset"]):not([type="button"]),
+input:not([type="submit"]):not([type="reset"]):not([type="button"]):not([type="checkbox"]):not([type="radio"]):not([type="range"]),
 textarea,
 select {
   color: var(--form-text);

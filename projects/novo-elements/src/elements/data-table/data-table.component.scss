@@ -20,7 +20,7 @@ cdk-table {
     .novo-data-table-dropdown-cell,
     .novo-data-table-expand-cell,
     .novo-data-table-checkbox-cell {
-      background-color: $table-bg-accent;
+      background-color: var(--background-alt, $white);
     }
     &.active {
       .novo-data-table-cell,
@@ -44,7 +44,7 @@ cdk-table {
     .novo-data-table-dropdown-cell,
     .novo-data-table-expand-cell,
     .novo-data-table-checkbox-cell {
-      background-color: var(--background, $white);
+      background-color: var(--background-alt, $white);
     }
     &.active {
       .novo-data-table-cell,

@@ -3,9 +3,9 @@ import { ComponentPortal } from '@angular/cdk/portal';
 import { ComponentRef, ElementRef, Injectable } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 import { MenuContentComponent } from './menu-content.component';
-import { MenuItemDirective } from './menu-item.directive';
-import { MenuComponent } from './menu.component';
-import { MenuDirective } from './menu.directive';
+import type { MenuItemDirective } from './menu-item.directive';
+import type { MenuComponent } from './menu.component';
+import type { MenuDirective } from './menu.directive';
 
 export interface IMenuClickEvent {
   anchorElement?: Element | EventTarget;
