@@ -160,6 +160,7 @@ export { ChecklistPickerResults } from './elements/picker/extras/checklist-picke
 export { DistributionListPickerResults } from './elements/picker/extras/distributionlist-picker-results/DistributionListPickerResults';
 export { EntityPickerResult, EntityPickerResults } from './elements/picker/extras/entity-picker-results/EntityPickerResults';
 export { GroupedMultiPickerResults } from './elements/picker/extras/grouped-multi-picker-results/GroupedMultiPickerResults';
+export { MixedMultiPickerResults } from './elements/picker/extras/mixed-multi-picker-results/MixedMultiPickerResults';
 export { PickerResults } from './elements/picker/extras/picker-results/PickerResults';
 export { SkillsSpecialtyPickerResults } from './elements/picker/extras/skills-picker-results/SkillsSpecialtyPickerResults';
 export { WorkersCompCodesPickerResults } from './elements/picker/extras/workers-comp-codes-picker-results/WorkersCompCodesPickerResults';
