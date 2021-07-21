@@ -1,0 +1,10 @@
+<novo-dropdown>
+    <button type="button"
+            theme="secondary"
+            icon="collapse"
+            inverse>Actions</button>
+    <list>
+      <item (action)="clickMe('Action!')">Normal Menu Item</item>
+      <item [submenuItems]="SUBMENU_ITEMS" (onSubmenuClick)="submenuClick($event)">Menu item with Submenu</item>
+    </list>
+  </novo-dropdown>

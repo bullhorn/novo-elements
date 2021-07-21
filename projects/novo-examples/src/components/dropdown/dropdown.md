@@ -42,3 +42,9 @@ You can have custom classes on the dropdown container that opens up by using the
 You can set the "keepOpen" property on the "item" in order to keep it from closing the dropdown automatically.
 
 <code-example example="multi-drop-down"></code-example>
+
+##### Dropdown with Submenu
+
+You can create a Submenu for an "item"
+
+<code-example example="submenu-drop-down"></code-example>

@@ -62,11 +62,12 @@ novo-dropdown {
         margin: 0 !important;
         color: $positive;
       }
-      &:focus,
-      &:hover {
-        background: lighten($light, 10%);
-        color: darken($light, 55%);
+      i.bhi-expand{
+        color: darken($light, 45%);
+        font-size: smaller;
+        padding-left: 20px;
       }
+      &:focus,
       &.active {
         background: lighten($light, 10%);
         color: darken($light, 55%);
