@@ -29,7 +29,7 @@ jobs:
         run: |
           cd projects/novo-elements
           npm version ${{ github.event.inputs.type }}  --no-git-tag-version
-          cd projects/novo-elements
+          cd projects/chomsky
           npm version ${{ github.event.inputs.type }}  --no-git-tag-version
           cd ../..
           npm version ${{ github.event.inputs.type }}
@@ -47,6 +47,6 @@ jobs:
           npm publish
           cd ../chomsky
           npm publish
-          npm run release:elements
+          git push --follow-tags origin master
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
