@@ -26,7 +26,9 @@ jobs:
           npm test
       - name: Build
         run: |
-          npm run build
+          ng build novo-elements --configuration production
+          ng build chomsky --configuration production
+          npm run postbuild
           npm run build:demo
       - uses: actions/upload-artifact@master
         with:
