@@ -197,9 +197,12 @@ import { ListInteractionDictionary, ListInteractionEvent } from './ListInteracti
       <a
         [attr.data-feature-id]="col?.attributes?.dataFeatureId"
         (click)="col.handlers?.click({ originalEvent: $event, row: row })"
+        (auxclick)="col.handlers?.auxClick({ originalEvent: $event, row: row })"
         [style.width.px]="col?.width"
         [style.min-width.px]="col?.width"
         [style.max-width.px]="col?.width"
+        [attr.target]="col.target"
+        [attr.href]="col.href"
         >{{ row[col.id] | dataTableInterpolate: col }}</a
       >
     </ng-template>
