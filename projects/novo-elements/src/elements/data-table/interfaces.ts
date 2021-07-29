@@ -47,7 +47,7 @@ export interface IDataTableColumn<T> {
       label: string;
       handlers: {
         click({ originalEvent: MouseEvent, row: T }): void;
-        auxClick({ originalEvent: MouseEvent, row: T }): void;
+        auxClick?({ originalEvent: MouseEvent, row: T }): void;
       };
       disabled?: boolean;
       disabledFunc?: (row: T) => boolean;
