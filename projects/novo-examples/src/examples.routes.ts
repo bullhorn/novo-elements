@@ -28,6 +28,13 @@ export class CalendarPage {}
 
 
 @Component({
+  selector: 'collapsable-column-page',
+  template: `<h1>Collapsable Columns <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/collapsable-columns">(source)</a></h1><p>Basic collapsable column example.</p><h5>Basic Example</h5><p><code-example example="collapsable-column-usage"></code-example></p>`
+})
+export class CollapsableColumnPage {}
+
+
+@Component({
   selector: 'components-page',
   template: `<h1>Components</h1><p>This is a landing page</p>`
 })
@@ -360,6 +367,7 @@ const routes: Routes = [
   { path: 'components/ace-editor', component: AceEditorPage, data: { title: 'Ace Editor', section: 'components' } },
   { path: 'components/buttons', component: ButtonsPage, data: { title: 'Buttons', section: 'components' } },
   { path: 'components/calendar', component: CalendarPage, data: { title: 'Calendar', section: 'components' } },
+  { path: 'components/collapsable-column', component: CollapsableColumnPage, data: { title: 'Collapsable Column', section: 'components' } },
   { path: 'components', component: ComponentsPage, data: { title: 'Components', section: 'src' } },
   { path: 'components/data-table', component: DataTablePage, data: { title: 'Data Table', section: 'components' } },
   { path: 'components/dropdown', component: DropdownPage, data: { title: 'Dropdown', section: 'components' } },
@@ -412,7 +420,7 @@ const routes: Routes = [
 ];
 
 export const PAGE_LIST = [
-  AceEditorPage,ButtonsPage,CalendarPage,ComponentsPage,DataTablePage,DropdownPage,IconPage,LoadingPage,QuickNotePage,SearchPage,SlidesPage,SwitchPage,TabbedGroupPickerPage,TablePage,ColorsPage,CompositionPage,DesignPage,IconographyPage,TypographyPage,ChipsPage,DatePickerPage,EditorPage,FormControlsPage,FormGroupsPage,FormPage,MultiPickerPage,PickerPage,RadioButtonsPage,SelectPage,TilesPage,ValuePage,HomePage,CardsPage,ExpansionPage,HeaderPage,LayoutsPage,ListPage,StepperPage,TabsPage,PatternsPage,TemplatesPage,ChomskyPage,FieldInteractionsPage,ModalPage,PipesPage,PopOverPage,SecurityPage,TipWellPage,ToasterPage,TooltipPage
+  AceEditorPage,ButtonsPage,CalendarPage,CollapsableColumnPage,ComponentsPage,DataTablePage,DropdownPage,IconPage,LoadingPage,QuickNotePage,SearchPage,SlidesPage,SwitchPage,TabbedGroupPickerPage,TablePage,ColorsPage,CompositionPage,DesignPage,IconographyPage,TypographyPage,ChipsPage,DatePickerPage,EditorPage,FormControlsPage,FormGroupsPage,FormPage,MultiPickerPage,PickerPage,RadioButtonsPage,SelectPage,TilesPage,ValuePage,HomePage,CardsPage,ExpansionPage,HeaderPage,LayoutsPage,ListPage,StepperPage,TabsPage,PatternsPage,TemplatesPage,ChomskyPage,FieldInteractionsPage,ModalPage,PipesPage,PopOverPage,SecurityPage,TipWellPage,ToasterPage,TooltipPage
 ];
 
 @NgModule({

@@ -6,4 +6,4 @@ import { NovoCollapsableColumnComponent } from './CollapsableColumn.component';
   declarations: [NovoCollapsableColumnComponent],
   exports: [NovoCollapsableColumnComponent],
 })
-export class CollapsableColumnModule {}
+export class NovoCollapsableColumnModule {}

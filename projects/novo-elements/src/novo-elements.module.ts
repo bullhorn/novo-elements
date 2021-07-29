@@ -57,6 +57,7 @@ import { ComponentUtils } from './utils/component-utils/ComponentUtils';
 import { FormUtils } from './utils/form-utils/FormUtils';
 import { OptionsService } from './services/options/OptionsService';
 import { NovoTabbedGroupPickerModule } from './elements/tabbed-group-picker/TabbedGroupPicker.module';
+import { NovoCollapsableColumnModule } from './elements/collapsable-column/CollapsableColumn.module';
 
 import { NovoCommonModule } from './elements/common/common.module';
 
@@ -110,6 +111,7 @@ import { NovoCommonModule } from './elements/common/common.module';
     NovoStepperModule,
     ScrollingModule,
     NovoTabbedGroupPickerModule,
+    NovoCollapsableColumnModule,
   ],
   providers: [
     { provide: ComponentUtils, useClass: ComponentUtils },
