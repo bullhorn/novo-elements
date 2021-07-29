@@ -7,6 +7,6 @@ import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@a
   `,
   styleUrls: ['./CollapsableColumn.component.scss']
 })
-export class NovoCollapsableColumnComponent {
+export class NovoCollapsableColumnElement {
 
 }

@@ -110,8 +110,8 @@ import { NovoCommonModule } from './elements/common/common.module';
     NovoCommonModule,
     NovoStepperModule,
     ScrollingModule,
-    NovoTabbedGroupPickerModule,
     NovoCollapsableColumnModule,
+    NovoTabbedGroupPickerModule,
   ],
   providers: [
     { provide: ComponentUtils, useClass: ComponentUtils },

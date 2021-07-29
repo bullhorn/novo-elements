@@ -12,6 +12,8 @@ export { NovoCalendarHourSegmentElement } from './elements/calendar/day/Calendar
 export { NovoCalendarMonthDayElement } from './elements/calendar/month/CalendarMonthDay';
 export { NovoCalendarMonthHeaderElement } from './elements/calendar/month/CalendarMonthHeader';
 export { NovoCalendarMonthViewElement } from './elements/calendar/month/CalendarMonthView';
+export { NovoCollapsableColumnElement } from './elements/collapsable-column/CollapsableColumn.component';
+export { NovoCollapsableColumnModule } from './elements/collapsable-column/CollapsableColumn.module';
 export { DayOfMonthPipe } from './elements/calendar/pipe/DayOfMonth.pipe';
 export { EndOfWeekDisplayPipe } from './elements/calendar/pipe/EndOfWeekDisplayPipe.pipe';
 export { HoursPipe } from './elements/calendar/pipe/Hours.pipe';

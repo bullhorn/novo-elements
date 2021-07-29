@@ -1,9 +1,9 @@
 // NG2
 import { NgModule } from '@angular/core';
-import { NovoCollapsableColumnComponent } from './CollapsableColumn.component';
+import { NovoCollapsableColumnElement } from './CollapsableColumn.component';
 
 @NgModule({
-  declarations: [NovoCollapsableColumnComponent],
-  exports: [NovoCollapsableColumnComponent],
+  declarations: [NovoCollapsableColumnElement],
+  exports: [NovoCollapsableColumnElement],
 })
 export class NovoCollapsableColumnModule {}
