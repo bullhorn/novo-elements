@@ -1,5 +1,20 @@
 @import '../../styles/global/variables';
 :host {
+  h1 {
+    color: $slate;
+    margin: auto;
+    //if it has submission
+    .active {
+      color: $ocean;
+    }
+  }
+  justify-content: flex-start;
+  min-width: 15%;
+  display: inline-block;
+  background: $white;
+  margin: 1em;
+  border-radius: .5em;
+  padding-bottom: 2em;
   div.card-container {
     min-height: 5em;
     div.info-card {
