@@ -4,8 +4,8 @@ import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@a
   selector: 'novo-collapsable-column',
   template: `
     <h1><i [class]="icon"></i> {{header}}</h1>
-    <div [dragula]="dragulaName" [dragulaModel]="dragulaModel" class="card-container">
-      <div *ngFor="let card of dragulaModel" class="info-card">
+    <div [dragula]="dragulaName" [dragulaModel]="dragulaModelData" class="card-container">
+      <div *ngFor="let card of dragulaModelData" class="info-card">
         {{ entity === 'Candidate' ? card?.jobOrder?.title : card?.candidate?.firstName + ' ' + card?.candidate?.lastName }}
       </div>
     </div>
@@ -29,7 +29,7 @@ export class NovoCollapsableColumnElement {
   @Input()
   dragulaName: string;
   @Input()
-  dragulaModel: any;
+  dragulaModelData: any;
   @Input()
   entity: 'Candidate' | 'JobOrder';
 }
