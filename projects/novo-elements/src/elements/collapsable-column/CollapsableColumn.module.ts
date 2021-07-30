@@ -1,7 +1,7 @@
 // NG2
 import { NgModule } from '@angular/core';
 import { NovoCollapsableColumnElement } from './CollapsableColumn.component';
-import {NovoDragulaModule} from 'novo-elements';
+import { NovoDragulaModule } from '../dragula/Dragula.module';
 
 @NgModule({
     declarations: [NovoCollapsableColumnElement],
