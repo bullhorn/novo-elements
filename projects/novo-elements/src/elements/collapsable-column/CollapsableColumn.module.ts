@@ -9,7 +9,7 @@ import {CommonModule} from '@angular/common';
     exports: [NovoCollapsableColumnElement],
   imports: [
     NovoDragulaModule,
-    CommonModule
+    CommonModule,
   ]
 })
 export class NovoCollapsableColumnModule {}

@@ -4,6 +4,14 @@ import { Component, Input } from '@angular/core';
   selector: 'novo-collapsable-column',
   template: `
     <h1><i [class]="icon"></i> {{header}}</h1>
+    <div class="mini-check-all-container">
+      <div class="check-all-checkbox">
+        <i class="bhi-checkbox-empty"></i>
+      </div>
+      <div class="check-all-header">
+            Candidate
+      </div>
+    </div>
     <div [dragula]="dragulaName" [dragulaModel]="dragulaModelData" class="card-container">
       <div *ngFor="let card of dragulaModelData" class="info-card">
         {{ entity === 'Candidate' ? card?.jobOrder?.title : card?.candidate?.firstName + ' ' + card?.candidate?.lastName }}
