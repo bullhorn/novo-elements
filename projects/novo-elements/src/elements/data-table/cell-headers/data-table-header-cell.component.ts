@@ -14,7 +14,7 @@ import { DataTableState } from '../state/data-table-state.service';
   selector: '[novo-data-table-cell-config]',
   template: `
     <i class="bhi-{{ labelIcon }} label-icon" *ngIf="labelIcon" data-automation-id="novo-data-table-header-icon"></i>
-    <label data-automation-id="novo-data-table-label">{{ label }}</label>
+    <label data-automation-id="novo-data-table-label" (dblclick)="this.handleDoubleClick()">{{ label }}</label>
     <div>
       <button
         *ngIf="config.sortable"
@@ -561,5 +561,20 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
       { label: this.labels.next1Year, min: 0, max: 366 },
     ];
     return opts;
+  }
+
+  public handleDoubleClick(): any {
+    console.log('attempt column width change!');
+    console.log(this._column);
+    console.log(this.label.length);
+    const newWidth = this.label.length * 8 + 88;
+    if (newWidth < 200) {
+      this._column.width = newWidth;
+    }
+    this.renderer.setStyle(this.elementRef.nativeElement, 'min-width', `${this._column.width}px`);
+    this.renderer.setStyle(this.elementRef.nativeElement, 'max-width', `${this._column.width}px`);
+    this.renderer.setStyle(this.elementRef.nativeElement, 'width', `${this._column.width}px`);
+    this.changeDetectorRef.markForCheck();
+    this.resized.next(this._column);
   }
 }
