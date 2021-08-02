@@ -20,7 +20,7 @@ $off-white-border: 1px solid $off-white;
     .check-all-checkbox {
       color: $stone;
       flex-basis: 30%;
-      padding: 1.5em;
+      padding: 1.5em 1.5em 1.5em 2em;
       border-right: $off-white-border;
     }
     .check-all-header {
@@ -50,6 +50,21 @@ $off-white-border: 1px solid $off-white;
       box-shadow: 0 1px 2px rgba(0,0,0,0.15);
       transition: all 0.2s ease-in-out;
       position: relative;
+      span {
+        display: inline-block;
+      }
+      &-checkbox {
+        padding: 1em 1em 1em 0;
+      }
+      &-menu {
+        padding-right: 1.5em;
+        padding-left: .5em;
+      }
+      &-status-dot {
+        color: $grass;
+        padding-right: .5em;
+        padding-left: .5em;
+      }
       &:hover {
         cursor: grab;
         box-shadow: -2px 2px 2px 0px rgba($black,0.3);
