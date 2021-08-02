@@ -9,9 +9,10 @@ import { Component } from '@angular/core';
   styleUrls: ['collapsable-column-usage-example.css'],
 })
 export class CollapsableColumnUsageExample {
-  entity: string = 'Candidate';
+  entity: string = 'JobOrder';
   columns: Array<any> = [{
     header: 'Web Responses',
+    icon: 'sendout',
     data: [{
       candidate: {
         id: 5091979,
@@ -91,11 +92,12 @@ export class CollapsableColumnUsageExample {
     }]
   }, {
     header: 'Submissions',
+    icon: 'star-o',
     data: [{
       candidate: {
         id: 5091979,
-        firstName: 'Bruce',
-        lastName: 'Banner',
+        firstName: 'Clark',
+        lastName: 'Kent',
         email: 'test@email1.com',
       },
       clientCorporation: {
@@ -104,8 +106,8 @@ export class CollapsableColumnUsageExample {
       },
       clientContact: {
         id: 5575734,
-        firstName: 'Clark',
-        lastName: 'Kent'
+        firstName: 'Lois',
+        lastName: 'Lane'
       },
       dateAdded: 1621351181253,
       id: 41988,
@@ -115,7 +117,7 @@ export class CollapsableColumnUsageExample {
       },
       jobOrder: {
         id: 146435,
-        title: 'Truck Driver',
+        title: 'Cargo Loader',
         employmentType: 'Contract-to-hire',
         owner: {
           id: 5467570,
@@ -132,8 +134,8 @@ export class CollapsableColumnUsageExample {
     }, {
       candidate: {
         id: 5091979,
-        firstName: 'Barry',
-        lastName: 'Allen',
+        firstName: 'Wally',
+        lastName: 'West',
         email: 'test@email2.com',
       },
       clientCorporation: {
@@ -142,8 +144,8 @@ export class CollapsableColumnUsageExample {
       },
       clientContact: {
         id: 5575734,
-        firstName: 'Bruce',
-        lastName: 'Wayne'
+        firstName: 'Joe',
+        lastName: 'West'
       },
       dateAdded: 1621351181253,
       id: 41988,
@@ -153,7 +155,7 @@ export class CollapsableColumnUsageExample {
       },
       jobOrder: {
         id: 146435,
-        title: 'Insurance Broker',
+        title: 'Racecar Driver',
         employmentType: 'Full-time',
         owner: {
           id: 5467570,

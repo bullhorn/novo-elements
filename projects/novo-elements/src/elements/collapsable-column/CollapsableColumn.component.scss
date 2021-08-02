@@ -68,7 +68,7 @@ $off-white-border: 1px solid $off-white;
       &:hover {
         cursor: grab;
         box-shadow: -2px 2px 2px 0px rgba($black,0.3);
-        transform: translate(3px, -3px);
+        transform: translate(1px, -1px);
       }
       &:active {
         cursor: grabbing;

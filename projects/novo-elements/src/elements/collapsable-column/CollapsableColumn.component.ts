@@ -3,13 +3,13 @@ import { Component, Input } from '@angular/core';
 @Component({
   selector: 'novo-collapsable-column',
   template: `
-    <h1><i [class]="icon"></i> {{header}}</h1>
+    <h1><i [class]="icon"></i>{{header}}</h1>
     <div class="mini-check-all-container">
       <div class="check-all-checkbox">
         <i class="bhi-checkbox-empty"></i>
       </div>
       <div class="check-all-header">
-            Candidate
+       {{ entity === 'Candidate' ? 'Job Order' : 'Candidate' }}
       </div>
     </div>
     <div [dragula]="dragulaName" [dragulaModel]="dragulaModelData" class="card-container">
@@ -18,7 +18,7 @@ import { Component, Input } from '@angular/core';
             <i class="bhi-checkbox-empty"></i>
           </div>
           <div class="info-card-menu">
-            <i class="bhi-circle-o"></i>
+            <i class="bhi-more"></i>
           </div>
           <div class="info-card-status-dot">
             <i class="bhi-circle"></i>
