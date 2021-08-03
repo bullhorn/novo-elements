@@ -691,7 +691,7 @@ export class FormUtils {
       field.dataSpecialization === 'SPECIALIZED_OPTIONS' ||
       (field.options && ['SpecializedOptionsLookup', 'SimplifiedOptionsLookup'].includes(field.dataType))
     ) {
-      return field.options.filter((o) => !o.readOnly);
+      return field.options;
     } else if (field.optionsUrl) {
       return this.optionsService.getOptionsConfig(http, field, config);
     } else if (Array.isArray(field.options) && field.type === 'chips') {

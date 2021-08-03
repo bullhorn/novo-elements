@@ -2,8 +2,11 @@
   "name": "chomsky",
   "version": "4.1.0",
   "peerDependencies": {
-    "@angular/common": ">=8",
-    "@angular/core": ">=8",
+    "@angular/common": ">=10",
+    "@angular/core": ">=10",
     "rxjs": ">=6"
+  },
+  "dependencies": {
+    "tslib": "^2.0.0"
   }
 }

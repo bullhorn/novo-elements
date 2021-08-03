@@ -233,7 +233,7 @@ export class Helpers {
       }
       return newArr;
     }
-    if (typeof item === 'function' && !/\(\) \{ \[native/.test(item.toString())) {
+    if (typeof item === 'function' && !/\(\) \{ \[native/.test(item.toString()) && !item.toString().startsWith('class')) {
       let obj;
       for (const k in item) {
         if (k in item) {

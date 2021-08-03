@@ -1,0 +1,66 @@
+name: CI
+
+on: [push]
+
+
+jobs:
+  build:
+    name: Build & Test
+    runs-on: ubuntu-16.04
+    timeout-minutes: 25
+    strategy:
+      fail-fast: false
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Setup NodeJS
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.16.3
+      - name: Install Dependencies
+        run: |
+          npm install
+      - name: Test
+        run: |
+          npm run lint
+          npm test
+      - name: Build
+        run: |
+          npm run build
+          npm run build:demo
+      - uses: actions/upload-artifact@master
+        with:
+          name: build-artifact
+          path: dist
+
+  publish:
+    runs-on: ubuntu-16.04
+    needs: build
+    if: github.event_name == 'push'
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/download-artifact@master
+        with:
+          name: build-artifact
+          path: dist
+      - uses: bvkimball/branch-vars@1.0.1
+      - env:
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+        run: sh snapshot-publish
+
+  deploy:
+    runs-on: ubuntu-16.04
+    needs: build
+    if: github.ref == 'refs/heads/master'
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12.16.3
+      - run: npm install -g angular-cli-ghpages
+      - uses: actions/download-artifact@master
+        with:
+          name: build-artifact
+          path: dist
+      - name: Deploy Demo
+        run: angular-cli-ghpages --dir="dist/demo" --repo="https://${{secrets.API_TOKEN_GITHUB}}@github.com/bullhorn/novo-elements.git" --name="Brian Kimball" --email="bkimball@bullhorn.com";

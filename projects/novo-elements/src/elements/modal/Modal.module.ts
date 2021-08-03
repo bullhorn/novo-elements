@@ -9,6 +9,5 @@ import { NovoModalContainerElement, NovoModalElement, NovoModalNotificationEleme
   imports: [CommonModule, NovoButtonModule],
   declarations: [NovoModalContainerElement, NovoModalElement, NovoModalNotificationElement],
   exports: [NovoModalElement, NovoModalNotificationElement],
-  entryComponents: [NovoModalContainerElement],
 })
-export class NovoModalModule {}
+export class NovoModalModule { }
