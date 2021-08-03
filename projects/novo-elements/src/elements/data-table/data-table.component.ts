@@ -168,38 +168,41 @@ import { ListInteractionDictionary, ListInteractionEvent } from './ListInteracti
     </div>
     <!-- DEFAULT CELL TEMPLATE -->
     <ng-template novoTemplate="textCellTemplate" let-row let-col="col">
-      <span [style.width.px]="col?.width" [style.min-width.px]="col?.width" [style.max-width.px]="col?.width">{{
+      <span [tooltipSize]="toolTipSize" tooltipPreline="true" tooltipPosition="top" [tooltip]="row[col.id] | dataTableInterpolate: col" [style.width.px]="col?.width" [style.min-width.px]="col?.width" [style.max-width.px]="col?.width">{{
         row[col.id] | dataTableInterpolate: col
       }}</span>
     </ng-template>
     <ng-template novoTemplate="dateCellTemplate" let-row let-col="col">
-      <span>{{ row[col.id] | dataTableInterpolate: col | dataTableDateRenderer: col }}</span>
+      <span [tooltip]="row[col.id] | dataTableInterpolate: col | dataTableDateRenderer: col">{{ row[col.id] | dataTableInterpolate: col | dataTableDateRenderer: col }}</span>
     </ng-template>
     <ng-template novoTemplate="datetimeCellTemplate" let-row let-col="col">
-      <span>{{ row[col.id] | dataTableInterpolate: col | dataTableDateTimeRenderer: col }}</span>
+      <span [tooltip]="row[col.id] | dataTableInterpolate: col | dataTableDateTimeRenderer: col">{{ row[col.id] | dataTableInterpolate: col | dataTableDateTimeRenderer: col }}</span>
     </ng-template>
     <ng-template novoTemplate="timeCellTemplate" let-row let-col="col">
-      <span>{{ row[col.id] | dataTableInterpolate: col | dataTableTimeRenderer: col }}</span>
+      <span [tooltip]="row[col.id] | dataTableInterpolate: col | dataTableTimeRenderer: col">{{ row[col.id] | dataTableInterpolate: col | dataTableTimeRenderer: col }}</span>
     </ng-template>
     <ng-template novoTemplate="currencyCellTemplate" let-row let-col="col">
-      <span>{{ row[col.id] | dataTableInterpolate: col | dataTableCurrencyRenderer: col }}</span>
+      <span [tooltip]="row[col.id] | dataTableInterpolate: col | dataTableCurrencyRenderer: col">{{ row[col.id] | dataTableInterpolate: col | dataTableCurrencyRenderer: col }}</span>
     </ng-template>
     <ng-template novoTemplate="bigdecimalCellTemplate" let-row let-col="col">
-      <span>{{ row[col.id] | dataTableInterpolate: col | dataTableBigDecimalRenderer: col }}</span>
+      <span [tooltip]="row[col.id] | dataTableInterpolate: col | dataTableBigDecimalRenderer: col">{{ row[col.id] | dataTableInterpolate: col | dataTableBigDecimalRenderer: col }}</span>
     </ng-template>
     <ng-template novoTemplate="numberCellTemplate" let-row let-col="col">
-      <span>{{ row[col.id] | dataTableInterpolate: col | dataTableNumberRenderer: col }}</span>
+      <span [tooltip]="row[col.id] | dataTableInterpolate: col | dataTableNumberRenderer: col">{{ row[col.id] | dataTableInterpolate: col | dataTableNumberRenderer: col }}</span>
     </ng-template>
     <ng-template novoTemplate="percentCellTemplate" let-row let-col="col">
-      <span>{{ row[col.id] | dataTableInterpolate: col | dataTableNumberRenderer: col:true }}</span>
+      <span tooltip="row[col.id] | dataTableInterpolate: col | dataTableNumberRenderer: col:true">{{ row[col.id] | dataTableInterpolate: col | dataTableNumberRenderer: col:true }}</span>
     </ng-template>
     <ng-template novoTemplate="linkCellTemplate" let-row let-col="col">
       <a
         [attr.data-feature-id]="col?.attributes?.dataFeatureId"
         (click)="col.handlers?.click({ originalEvent: $event, row: row })"
+        (auxclick)="col.handlers?.auxClick({ originalEvent: $event, row: row })"
         [style.width.px]="col?.width"
         [style.min-width.px]="col?.width"
         [style.max-width.px]="col?.width"
+        [attr.target]="col.target"
+        [attr.href]="col.href"
         >{{ row[col.id] | dataTableInterpolate: col }}</a
       >
     </ng-template>
@@ -418,6 +421,8 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   private scrollListenerHandler: any;
   private initialized: boolean = false;
 
+  public toolTipSize: 'extra-large';
+
   @HostBinding('class.empty')
   get empty() {
     return this.dataSource && this.dataSource.totallyEmpty;
@@ -474,6 +479,7 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
     header.setupFilterOptions();
     header.changeDetectorRef.markForCheck();
   }
+
 
   public ngOnDestroy(): void {
     if (this.outsideFilterSubscription) {
