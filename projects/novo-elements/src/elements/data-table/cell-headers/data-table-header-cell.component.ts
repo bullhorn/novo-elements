@@ -181,6 +181,7 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
     this._column = column;
     this.label = column.type === 'action' ? '' : column.label;
     this.labelIcon = column.labelIcon;
+    column.resizable = true;
 
     this.config = {
       sortable: !!column.sortable,
@@ -564,12 +565,11 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
   }
 
   public handleDoubleClick(): any {
-    console.log('attempt column width change!');
-    console.log(this._column);
-    console.log(this.label.length);
     const newWidth = this.label.length * 8 + 88;
     if (newWidth < 200) {
       this._column.width = newWidth;
+    } else {
+      this._column.width = 200;
     }
     this.renderer.setStyle(this.elementRef.nativeElement, 'min-width', `${this._column.width}px`);
     this.renderer.setStyle(this.elementRef.nativeElement, 'max-width', `${this._column.width}px`);
