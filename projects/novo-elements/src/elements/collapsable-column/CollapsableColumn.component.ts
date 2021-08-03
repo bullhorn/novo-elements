@@ -14,15 +14,15 @@ import { Component, Input } from '@angular/core';
     </div>
     <div [dragula]="dragulaName" [dragulaModel]="dragulaModelData" class="card-container">
       <div *ngFor="let card of dragulaModelData" class="info-card">
-          <div class="info-card-checkbox">
+          <span id="info-card-checkbox">
             <i class="bhi-checkbox-empty"></i>
-          </div>
-          <div class="info-card-menu">
+          </span>
+          <span id="info-card-menu">
             <i class="bhi-more"></i>
-          </div>
-          <div class="info-card-status-dot">
+          </span>
+          <span id="info-card-status-dot">
             <i class="bhi-circle"></i>
-          </div>
+          </span>
           {{ entity === 'Candidate' ? card?.jobOrder?.title : card?.candidate?.firstName + ' ' + card?.candidate?.lastName }}
       </div>
     </div>
