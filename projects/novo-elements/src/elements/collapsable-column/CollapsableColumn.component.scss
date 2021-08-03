@@ -18,8 +18,7 @@ $off-white-border: 1px solid $off-white;
     border-bottom: $off-white-border;
     display: flex;
     align-items: baseline;
-    .check-all-checkbox {
-      color: $stone;
+    novo-checkbox {
       flex-basis: 30%;
       padding: 1.5em 1.5em 1.5em 2em;
       border-right: $off-white-border;
@@ -34,6 +33,7 @@ $off-white-border: 1px solid $off-white;
   justify-content: flex-start;
   min-width: 15%;
   display: inline-block;
+  vertical-align: top;
   background: $white;
   margin: 1em;
   border-radius: .5em;

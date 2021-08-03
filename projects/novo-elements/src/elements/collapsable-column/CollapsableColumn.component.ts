@@ -5,18 +5,14 @@ import { Component, Input } from '@angular/core';
   template: `
     <h1><i [class]="icon"></i>{{header}}</h1>
     <div class="mini-check-all-container">
-      <div class="check-all-checkbox">
-        <i class="bhi-checkbox-empty"></i>
-      </div>
+      <novo-checkbox [(ngModel)]="isChecked"></novo-checkbox>
       <div class="check-all-header">
        {{ entity === 'Candidate' ? 'Job Order' : 'Candidate' }}
       </div>
     </div>
     <div [dragula]="dragulaName" [dragulaModel]="dragulaModelData" class="card-container">
       <div *ngFor="let card of dragulaModelData" class="info-card">
-          <span id="info-card-checkbox">
-            <i class="bhi-checkbox-empty"></i>
-          </span>
+        <novo-checkbox [(ngModel)]="card.selected"></novo-checkbox>
           <span id="info-card-menu">
             <i class="bhi-more"></i>
           </span>
@@ -41,6 +37,7 @@ export class NovoCollapsableColumnElement {
   get icon(): string {
     return this._icon;
   }
+  isChecked = false;
 
   private _icon: string;
   @Input()
