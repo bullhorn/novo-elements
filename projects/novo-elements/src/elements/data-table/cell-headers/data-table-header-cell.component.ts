@@ -565,12 +565,8 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
   }
 
   public handleDoubleClick(): any {
-    const newWidth = this.label.length * 8 + 88;
-    if (newWidth < 200) {
-      this._column.width = newWidth;
-    } else {
-      this._column.width = 200;
-    }
+    const newWidth = this.label.length * 6 + 96;
+    this._column.width = newWidth;
     this.renderer.setStyle(this.elementRef.nativeElement, 'min-width', `${this._column.width}px`);
     this.renderer.setStyle(this.elementRef.nativeElement, 'max-width', `${this._column.width}px`);
     this.renderer.setStyle(this.elementRef.nativeElement, 'width', `${this._column.width}px`);
