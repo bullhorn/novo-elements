@@ -66,6 +66,7 @@ export class NovoDragulaService {
     let dragIndex;
     let dropIndex;
     let sourceModel;
+    let elmData;
     drake.on('remove', (el, source) => {
       if (!drake.models) {
         return;
@@ -84,6 +85,7 @@ export class NovoDragulaService {
       }
       dropIndex = this.domIndexOf(dropElm, target);
       sourceModel = drake.models[drake.containers.indexOf(source)];
+      elmData = sourceModel[dropIndex];
       if (target === source) {
         sourceModel.splice(dropIndex, 0, sourceModel.splice(dragIndex, 1)[0]);
       } else {
@@ -97,7 +99,7 @@ export class NovoDragulaService {
         targetModel.splice(dropIndex, 0, dropElmModel);
         target.removeChild(dropElm); // element must be removed for ngFor to apply correctly
       }
-      this.dropModel.emit([name, dropElm, target, source]);
+      this.dropModel.emit([name, dropElm, target, source, elmData]);
     });
   }
 
