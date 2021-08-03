@@ -7,6 +7,5 @@ import { PopOverDirective } from './PopOver';
 @NgModule({
   declarations: [PopOverContent, PopOverDirective],
   exports: [PopOverContent, PopOverDirective],
-  entryComponents: [PopOverContent],
 })
-export class NovoPopOverModule {}
+export class NovoPopOverModule { }

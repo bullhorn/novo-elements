@@ -35,6 +35,7 @@ export interface IDataTableColumn<T> {
   disabledFunc?: (row: T) => boolean;
   handlers?: {
     click?({ originalEvent: MouseEvent, row: T }): void;
+    auxClick?({ originalEvent: MouseEvent, row: T }): void;
   };
   width?: number;
   sortable?: boolean | IDataTableColumnSortConfig;
@@ -47,6 +48,7 @@ export interface IDataTableColumn<T> {
       label: string;
       handlers: {
         click({ originalEvent: MouseEvent, row: T }): void;
+        auxClick?({ originalEvent: MouseEvent, row: T }): void;
       };
       disabled?: boolean;
       disabledFunc?: (row: T) => boolean;
@@ -59,6 +61,8 @@ export interface IDataTableColumn<T> {
   };
   rightAlignCellContent?: boolean;
   configuration?: object; // intended to be implemented by each column type if and as needed
+  target?: string;
+  href?: string;
 }
 
 export interface IDataTablePaginationOptions {

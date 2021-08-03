@@ -564,6 +564,23 @@ describe('Utils: FormUtils', () => {
       const result = formUtils.getControlOptions(field, undefined, undefined, { label: '2' });
       expect(result).toEqual(expected);
     });
+    it('should return all options when there are SpecializedOptions', () => {
+      const field: any = {
+        dataType: 'SpecializedOptionsLookup',
+        options: [
+          { value: '1', label: 'one', readOnly: true },
+          { value: '2', label: 'two', readOnly: false },
+          { value: '3', label: 'three', readOnly: false },
+        ]
+      };
+      const expected: Array<{ value: string; label: string; readOnly: boolean }> = [
+        { value: '1', label: 'one', readOnly: true },
+        { value: '2', label: 'two', readOnly: false },
+        { value: '3', label: 'three', readOnly: false }
+      ];
+      const result = formUtils.getControlOptions(field, undefined, undefined, { id: '1', label: 'one' });
+      expect(result).toEqual(expected);
+    });
   });
 
   describe('Method: setInitialValues(controls, values, keepClean)', () => {

@@ -4,9 +4,10 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
 
 @Component({
   selector: 'novo-tooltip',
-  template: `<div [@state]="noAnimate ? 'no-animation' : 'visible'"
-  [ngClass]="[tooltipType, this.rounded ? 'rounded' : '', size ? size : '', this.preline? 'preline' : '', position]">{{message}}</div>`,
-  styleUrls: ['./Tooltip.scss'],
+  template: `
+    <div [@state]="noAnimate ? 'no-animation' : 'visible'"
+         [ngClass]="[tooltipType, this.rounded ? 'rounded' : '', size ? size : '', this.preline? 'preline' : '', position]"
+         [innerHTML]="message"></div>`,
   animations: [
     trigger('state', [
       state('initial, void, hidden', style({ opacity: '0' })),

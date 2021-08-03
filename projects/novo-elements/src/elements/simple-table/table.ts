@@ -31,7 +31,9 @@ export const _NovoTable = CdkTable;
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NovoTable<T> extends _NovoTable<T> {}
+export class NovoTable<T> extends _NovoTable<T> {
+  // TODO: add explicit constructor
+}
 
 @Directive({
   selector: 'novo-activity-table-actions',
