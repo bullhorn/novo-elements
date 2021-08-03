@@ -181,6 +181,7 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
     this._column = column;
     this.label = column.type === 'action' ? '' : column.label;
     this.labelIcon = column.labelIcon;
+    column.resizable = true;
 
     this.config = {
       sortable: !!column.sortable,
