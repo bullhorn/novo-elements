@@ -9,6 +9,7 @@ import {
   NovoItemHeaderElement,
   NovoItemTitleElement,
   NovoItemContentElement,
+  NovoItemEndElement
 } from '../../../list/List';
 import { fromEvent } from 'rxjs';
 import { ElementRef } from '@angular/core';
@@ -30,6 +31,7 @@ describe('Elements: MixedMultiPickerResults', () => {
           NovoItemContentElement,
           NovoItemHeaderElement,
           NovoItemTitleElement,
+          NovoItemEndElement
         ],
         providers: [{ provide: NovoLabelService, useClass: NovoLabelService }],
       }).compileComponents();
