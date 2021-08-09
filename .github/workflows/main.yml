@@ -27,7 +27,6 @@ jobs:
       - name: Build
         run: |
           npm run build:ci
-          npm run build:demo
       - uses: actions/upload-artifact@master
         with:
           name: build-artifact
@@ -62,5 +61,8 @@ jobs:
         with:
           name: build-artifact
           path: dist
+      - name: Build Demo
+        run: |
+          npm run build:demo
       - name: Deploy Demo
         run: angular-cli-ghpages --dir="dist/demo" --repo="https://${{secrets.API_TOKEN_GITHUB}}@github.com/bullhorn/novo-elements.git" --name="Brian Kimball" --email="bkimball@bullhorn.com";
