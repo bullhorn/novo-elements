@@ -77,7 +77,8 @@ export class ChecklistPickerResults extends BasePickerResults {
               options(term, ++this.page)
                 .then(this.structureArray.bind(this))
                 .then(resolve, reject);
-            } else {
+            }
+          } else {
             // All other kinds of data are rejected
             reject('The data provided is not an array or a promise');
             throw new Error('The data provided is not an array or a promise');
