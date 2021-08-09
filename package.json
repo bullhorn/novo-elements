@@ -10,7 +10,6 @@
     "postbuild": "npm run copy-scss && npm run build:examples",
     "build:ci":"ng build novo-elements --configuration production && ng build chomsky --configuration production",
     "postbuild:ci": "npm run postbuild",
-    "postinstall": "ngcc ... --tsconfig './projects/novo-elements/tsconfig.lib.json'",
     "build:watch": "ng build novo-elements --watch",
     "build:chomsky": "ng build chomsky",
     "build:chomsky:watch": "ng build chomsky --watch",
