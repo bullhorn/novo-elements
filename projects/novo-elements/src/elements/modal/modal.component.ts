@@ -5,9 +5,9 @@ import { NovoModalRef } from './modal-ref';
 @Component({
   selector: 'novo-modal',
   template: `
-    <ng-content select="header"></ng-content>
-    <ng-content select="section"></ng-content>
-    <footer><ng-content select="button"></ng-content></footer>
+    <ng-content select="header,novo-header,novo-card-header"></ng-content>
+    <ng-content select="section,novo-card-content"></ng-content>
+    <footer><ng-content select="button,novo-button"></ng-content></footer>
   `,
 })
 export class NovoModalElement {
@@ -18,14 +18,14 @@ export class NovoModalElement {
   selector: 'novo-notification',
   template: `
     <button class="modal-close" theme="icon" icon="x" (click)="close()"></button>
-    <header><ng-content select="label"></ng-content></header>
+    <header><ng-content select="label,novo-label"></ng-content></header>
     <section class="notification-body">
       <i class="indicator" [ngClass]="iconType" *ngIf="iconType"></i>
       <ng-content select="h1"></ng-content>
       <ng-content select="h2"></ng-content>
       <ng-content select="p"></ng-content>
     </section>
-    <footer><ng-content select="button"></ng-content></footer>
+    <footer><ng-content select="button,novo-button"></ng-content></footer>
   `,
 })
 export class NovoModalNotificationElement implements OnInit {

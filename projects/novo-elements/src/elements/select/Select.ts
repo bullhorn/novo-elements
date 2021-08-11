@@ -100,7 +100,13 @@ let nextId = 0;
       <span class="novo-select-display-value" *ngIf="!empty">{{ displayValue }}</span>
       <i class="bhi-collapse"></i>
     </div>
-    <novo-overlay-template [parent]="elementRef" [position]="position" (closing)="dropdown.nativeElement.focus()">
+    <novo-overlay-template
+      [parent]="elementRef"
+      [position]="position"
+      [width]="overlayWidth"
+      [height]="overlayHeight"
+      (closing)="dropdown.nativeElement.focus()"
+    >
       <div #panel class="novo-select-list" tabIndex="-1" [class.has-header]="headerConfig" [class.active]="panelOpen">
         <novo-option *ngIf="headerConfig" class="select-header" [class.open]="header.open">
           <novo-button *ngIf="!header.open" icon="add-thin" (click)="toggleHeader($event); (false)" tabIndex="-1" class="header">
@@ -186,6 +192,10 @@ export class NovoSelectElement
   headerConfig: any;
   @Input()
   position: string = 'center';
+  @Input()
+  overlayWidth: number;
+  @Input()
+  overlayHeight: number;
   @Output()
   onSelect: EventEmitter<any> = new EventEmitter();
   /** Event emitted when the selected value has been changed by the user. */

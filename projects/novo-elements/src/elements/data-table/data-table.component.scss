@@ -35,7 +35,7 @@ cdk-table {
       }
     }
     + .novo-data-table-detail-row {
-      background: $table-bg-accent;
+      background: var(--background-alt, $white); //$table-bg-accent;
     }
   }
   > .novo-data-table-row:nth-of-type(even) {
@@ -44,7 +44,7 @@ cdk-table {
     .novo-data-table-dropdown-cell,
     .novo-data-table-expand-cell,
     .novo-data-table-checkbox-cell {
-      background-color: var(--background-alt, $white);
+      background-color: var(--background-body, $white);
     }
     &.active {
       .novo-data-table-cell,
@@ -59,7 +59,7 @@ cdk-table {
       }
     }
     + .novo-data-table-detail-row {
-      background: $white;
+      background-color: var(--background-body, $white);
     }
   }
 }
@@ -85,11 +85,11 @@ cdk-table {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  background-color: var(--background, $white);
+  background-color: var(--background-body, $white);
   .novo-data-table-header-cell,
   .novo-data-table-checkbox-header-cell {
     // border-bottom: 1px solid var(--border, $off-white);
-    background-color: var(--background, $white);
+    background-color: var(--background-body, $white);
   }
   &.expanded {
     i.bhi-next.data-table-icon {
@@ -152,6 +152,11 @@ cdk-table {
   }
   .filter-button {
     color: $light;
+    width: 1.6rem;
+    height: 1.6rem;
+    background: transparent;
+    pointer-events: all;
+    margin-left: 0.5rem;
     &:hover {
       color: $dark;
     }
@@ -260,7 +265,7 @@ cdk-table {
     display: inline-block;
   }
   &.button-header-cell {
-    min-width: 40px;
+    min-width: 28px;
     max-width: 40px;
   }
   &.dropdown-header-cell {
@@ -371,6 +376,7 @@ novo-data-table {
         align-items: center;
         button {
           margin-left: 3px;
+          margin-bottom: 0px;
         }
         button[theme][theme="icon"] {
           height: 35px;

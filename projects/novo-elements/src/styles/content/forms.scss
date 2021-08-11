@@ -9,28 +9,35 @@ input[type="radio"] {
   cursor: pointer;
 }
 
-input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="submit"]):not([type="reset"]):not([type="button"]),
-select {
-  display: block;
-  border-bottom: 1px solid var(--border);
-  border-radius: 4px 4px 0 0;
-  caret-color: var(--form-text);
-  transition: border-bottom 0.2s, background-color 0.2s;
-}
+// input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="submit"]):not([type="reset"]):not([type="button"]),
+// select {
+//   display: block;
+//   border-bottom: 1px solid var(--border);
+//   border-radius: 4px 4px 0 0;
+//   caret-color: var(--form-text);
+//   transition: border-bottom 0.2s, background-color 0.2s;
+// }
 
-input:not([type="submit"]):not([type="reset"]):not([type="button"]):not([type="checkbox"]):not([type="radio"]):not([type="range"]),
-textarea,
-select {
-  color: var(--form-text);
-  background-color: var(--background);
-  font-family: inherit;
-  font-size: inherit;
-  margin-right: 6px;
-  margin-bottom: 6px;
-  padding: 0.5em 1em;
-  outline: none;
-  border: none;
-}
+// input:not([type="submit"]):not([type="reset"]):not([type="button"]):not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+// textarea,
+// select {
+//   color: var(--form-text);
+//   background-color: var(--background);
+//   font-family: inherit;
+//   font-size: inherit;
+//   margin-right: 6px;
+//   margin-bottom: 6px;
+//   padding: 0.5em 1em;
+//   outline: none;
+//   border: none;
+// }
+
+// input:not([type="checkbox"]):not([type="radio"]):focus:not([type="range"]):not([type="submit"]):not([type="reset"]):not([type="button"]),
+// select:focus,
+// textarea:focus {
+//   // box-shadow: 0 0 0 2px var(--focus);
+//   border-bottom: 1px solid var(--focus) !important;
+// }
 
 input[type="color"] {
   min-height: 3.4rem;
@@ -106,8 +113,6 @@ input[type="button"] {
   background-color: var(--background);
   font-family: inherit;
   font-size: inherit;
-  margin-right: 6px;
-  margin-bottom: 6px;
   padding: 0.5em 1em;
   outline: none;
   border: none;
@@ -119,13 +124,6 @@ input[type="submit"]:hover,
 input[type="reset"]:hover,
 input[type="button"]:hover {
   background: var(--button-hover);
-}
-
-input:not([type="checkbox"]):not([type="radio"]):focus:not([type="range"]):not([type="submit"]):not([type="reset"]):not([type="button"]),
-select:focus,
-textarea:focus {
-  // box-shadow: 0 0 0 2px var(--focus);
-  border-bottom: 1px solid var(--focus) !important;
 }
 
 input[type="checkbox"]:active,

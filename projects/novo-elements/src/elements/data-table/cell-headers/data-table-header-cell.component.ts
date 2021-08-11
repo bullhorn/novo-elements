@@ -56,17 +56,17 @@ import { DataTableState } from '../state/data-table-state.service';
         containerClass="data-table-dropdown"
         data-automation-id="novo-data-table-filter"
       >
-        <button
+        <novo-icon
+          dropdownTrigger
           class="filter-button"
-          type="button"
-          theme="icon"
-          (click)="focusInput()"
-          tooltipPosition="right"
+          [class.filter-active]="filterActive"
           [tooltip]="labels.filters"
+          [tooltipPosition]="'right'"
           [attr.data-feature-id]="'novo-data-table-filter-' + this.id"
+          (click)="focusInput()"
+          >filter</novo-icon
         >
-          <novo-icon [class.filter-active]="filterActive">filter</novo-icon>
-        </button>
+
         <div class="header">
           <novo-label>{{ labels.filters }}</novo-label>
           <button

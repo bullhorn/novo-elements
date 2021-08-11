@@ -65,6 +65,7 @@ class NovoInputBase {
     '[attr.readonly]': 'readonly && !_isNativeSelect || null',
     '[attr.aria-invalid]': 'errorState',
     '[attr.aria-required]': 'required.toString()',
+    '[attr.autocomplete]': "'off'",
   },
   providers: [{ provide: NovoFieldControl, useExisting: NovoInput }],
 })

@@ -4,6 +4,9 @@ novo-dropdown {
   display: inline-block;
   position: relative;
 
+  .novo-dropdown-trigger {
+    cursor: pointer;
+  }
   button,
   novo-button {
     position: relative;

@@ -252,7 +252,7 @@ export class NovoChipList
   }
   protected _placeholder: string;
 
-  /** Whether any chips or the matChipInput inside of this chip-list has focus. */
+  /** Whether any chips or the novoChipInput inside of this chip-list has focus. */
   get focused(): boolean {
     return (this._chipInput && this._chipInput.focused) || this._hasFocusedChip();
   }

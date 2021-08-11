@@ -70,7 +70,6 @@
 }
 
 @mixin novo-title-text() {
-  display: block;
   font-weight: 500;
   line-height: 1.5;
   color: var(--text-main, $dark);
@@ -79,7 +78,6 @@
 }
 
 @mixin novo-label-text() {
-  display: inline;
   font-weight: 500;
   transition: 0.2s ease-out;
   text-transform: uppercase;
@@ -90,7 +88,6 @@
 }
 
 @mixin novo-caption-text() {
-  display: inline;
   font-size: 0.8rem;
   font-weight: 400;
   line-height: 1.375;

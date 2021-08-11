@@ -84,8 +84,8 @@ export class NovoOptionBase implements FocusableOption, AfterViewChecked, OnDest
   constructor(
     private _element: ElementRef<HTMLElement>,
     private _changeDetectorRef: ChangeDetectorRef,
-    private _parent: NovoOptionParentComponent,
-    readonly group: NovoOptgroupBase,
+    @Optional() @Inject(NOVO_OPTION_PARENT_COMPONENT) private _parent: NovoOptionParentComponent,
+    @Optional() @Inject(NOVO_OPTGROUP) readonly group: NovoOptgroupBase,
   ) {
     this._element.nativeElement.addEventListener('click', this._handleDisabledClick, false);
   }

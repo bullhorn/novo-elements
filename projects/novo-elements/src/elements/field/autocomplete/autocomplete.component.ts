@@ -251,7 +251,7 @@ export class NovoAutocompleteElement
       this._watchSelectionEvents();
     }
 
-    this.closePanel();
+    if (!this._multiple) this.closePanel();
   }
 
   private _watchSelectionEvents() {

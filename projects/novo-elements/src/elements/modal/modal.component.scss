@@ -17,19 +17,9 @@ novo-modal {
   & > footer {
     display: flex;
     align-items: center;
+    justify-content: flex-end;
     padding: $spacing-sm;
-
-    button {
-      width: 50%;
-
-      &:first-of-type {
-        margin: 0 0.5% 0 0;
-      }
-
-      &:last-of-type {
-        margin: 0 0 0 0.5%;
-      }
-    }
+    gap: $spacing-md;
   }
 }
 

@@ -25,6 +25,14 @@ export class NovoNavElement {
 
   items: Array<any> = [];
 
+  /** The index of the active tab. */
+  @Input()
+  get selectedIndex(): number | null {
+    return this._selectedIndex;
+  }
+
+  private _selectedIndex: number | null = null;
+
   select(item) {
     /**
      * Deactivate all other tabs

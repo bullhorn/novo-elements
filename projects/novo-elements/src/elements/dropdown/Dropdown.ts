@@ -8,6 +8,7 @@ import {
   Component,
   ContentChild,
   ContentChildren,
+  Directive,
   ElementRef,
   EventEmitter,
   HostListener,
@@ -40,6 +41,16 @@ import {
 // APP
 import { NovoOverlayTemplateComponent } from '../common/overlay/Overlay';
 
+@Directive({
+  selector: '[dropdownTrigger]',
+  host: {
+    class: 'novo-dropdown-trigger',
+  },
+})
+export class NovoDropDownTrigger {
+  constructor(public element: ElementRef) {}
+}
+
 // Create Base Class from Mixins
 // Boilerplate for applying mixins
 class NovoDropdownBase {
@@ -52,7 +63,7 @@ const NovoDropdowMixins: HasOverlayCtor & CanDisableCtor & HasTabIndexCtor & typ
 @Component({
   selector: 'novo-dropdown',
   template: `
-    <ng-content select="button,novo-button" #trigger></ng-content>
+    <ng-content select="button,novo-button,[dropdownTrigger]" #trigger></ng-content>
     <novo-overlay-template [parent]="element" [width]="width" [position]="side" [scrollStrategy]="scrollStrategy">
       <div #panel class="dropdown-container {{ containerClass }}" [style.height.px]="height" [class.has-height]="!!height">
         <ng-content></ng-content>
@@ -99,7 +110,9 @@ export class NovoDropdownElement extends NovoDropdowMixins implements OnInit, Af
   overlay: NovoOverlayTemplateComponent;
 
   @ContentChild(NovoButtonElement)
-  button: NovoButtonElement;
+  _button: NovoButtonElement;
+  @ContentChild(NovoDropDownTrigger)
+  _trigger: NovoDropDownTrigger;
 
   @ContentChildren(NovoOptgroup, { descendants: true })
   optionGroups: QueryList<NovoOptgroup>;
@@ -126,6 +139,11 @@ export class NovoDropdownElement extends NovoDropdowMixins implements OnInit, Af
   }
   private _multiple: boolean = false;
 
+  get button() {
+    console.log('button', this._button, this._trigger);
+    return this._button || this._trigger;
+  }
+
   constructor(public element: ElementRef, private ref: ChangeDetectorRef) {
     super();
     this.clickHandler = this.togglePanel.bind(this);
@@ -151,9 +169,8 @@ export class NovoDropdownElement extends NovoDropdowMixins implements OnInit, Af
     this._onDestroy.next();
     this._onDestroy.complete();
     // Remove listener
-    const button = this.element.nativeElement.querySelector('button');
-    if (button) {
-      button.removeEventListener('click', this.clickHandler);
+    if (this.button) {
+      this.button.element.nativeElement.removeEventListener('click', this.clickHandler);
     }
   }
 
