@@ -1,6 +1,6 @@
 {
   "name": "novo-elements-projects",
-  "version": "4.7.0",
+  "version": "5.1.1",
   "description": "Bullhorn's Novo-Elements repository, including core projects and tools",
   "license": "MIT",
   "private": true,
@@ -8,6 +8,8 @@
     "precommit": "lint-staged",
     "build": "ng build novo-elements && ng build chomsky",
     "postbuild": "npm run copy-scss && npm run build:examples",
+    "build:ci":"ng build novo-elements --configuration production && ng build chomsky --configuration production",
+    "postbuild:ci": "npm run postbuild",
     "postinstall": "ngcc ... --tsconfig './projects/novo-elements/tsconfig.lib.json'",
     "build:watch": "ng build novo-elements --watch",
     "build:chomsky": "ng build chomsky",
