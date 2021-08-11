@@ -206,11 +206,17 @@ describe('Utils: FormUtils', () => {
     it('should return the type of WorkflowOptionsLookup correctly.', () => {
       expect(formUtils.determineInputType({ dataSpecialization: 'WorkflowOptionsLookup' })).toBe('select');
     });
+    it('should return the type of AllWorkflowOptionsLookup correctly.', () => {
+      expect(formUtils.determineInputType({ dataSpecialization: 'AllWorkflowOptionsLookup' })).toBe('select');
+    });
     it('should return the type of SpecializedOptionsLookup correctly.', () => {
       expect(formUtils.determineInputType({ dataSpecialization: 'SpecializedOptionsLookup' })).toBe('select');
     });
     it('should return the type of WorkflowOptions correctly.', () => {
       expect(formUtils.determineInputType({ dataSpecialization: 'WORKFLOW_OPTIONS' })).toBe('select');
+    });
+    it('should return the type of AllWorkflowOptions correctly.', () => {
+      expect(formUtils.determineInputType({ dataSpecialization: 'ALL_WORKFLOW_OPTIONS' })).toBe('select');
     });
     it('should return the type of SpecializedOptions correctly.', () => {
       expect(formUtils.determineInputType({ dataSpecialization: 'SPECIALIZED_OPTIONS' })).toBe('select');
@@ -579,6 +585,23 @@ describe('Utils: FormUtils', () => {
         { value: '3', label: 'three', readOnly: false }
       ];
       const result = formUtils.getControlOptions(field, undefined, undefined, { id: '1', label: 'one' });
+      expect(result).toEqual(expected);
+    });
+    it('should return all options when dataSpecialization is ALL_WORKFLOW_OPTIONS', () => {
+      const field: any = {
+        dataType: 'ALL_WORKFLOW_OPTIONS',
+        options: [
+          { value: '1', label: 'uno', readOnly: false },
+          { value: '2', label: 'dos', readOnly: false },
+          { value: '3', label: 'tres', readOnly: false },
+        ]
+      };
+      const expected: Array<{ value: string; label: string; readOnly: boolean }> = [
+        { value: '1', label: 'uno', readOnly: false },
+        { value: '2', label: 'dos', readOnly: false },
+        { value: '3', label: 'tres', readOnly: false }
+      ];
+      const result = formUtils.getControlOptions(field, undefined, undefined);
       expect(result).toEqual(expected);
     });
   });

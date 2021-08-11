@@ -20,7 +20,7 @@ Vast data reservoirs need a finely tuned system to surface the critical informat
 
 Users have vastly differing needs and goals. By identifying key commonalities and themes, we provide a strong experience for all.
 
-Are you a developer and what to skip right to the code?  
+Are you a developer and want to skip right to the code?  
 [View Components here](#)
 
 Looking for the Bullhorn corporate brand guidelines?  
