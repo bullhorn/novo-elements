@@ -1,9 +1,12 @@
 novo-control-group {
   display: block;
-  border-radius: 0.4rem;
-  box-shadow: rgba(0, 0, 0, 0.09) 0px 1px 7px 0px, rgba(0, 0, 0, 0.2) 0px 1px 3px 0px;
   margin-bottom: 0.5em;
   background: var(--background-alt, $color-white);
+
+  &.novo-control-group-appearance-card {
+    border-radius: 0.4rem;
+    box-shadow: rgba(0, 0, 0, 0.09) 0px 1px 7px 0px, rgba(0, 0, 0, 0.2) 0px 1px 3px 0px;
+  }
 
   .novo-section-header {
     box-sizing: border-box;

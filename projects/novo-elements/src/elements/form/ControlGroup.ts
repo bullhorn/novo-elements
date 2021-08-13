@@ -40,8 +40,21 @@ export interface NovoControlGroupRowConfig {
   selector: 'novo-control-group',
   templateUrl: './ControlGroup.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    '[class.novo-control-group-appearance-card]': "appearance=='card'",
+    '[class.novo-control-group-appearance-none]': "appearance=='none'",
+  },
 })
 export class NovoControlGroup implements AfterContentInit, OnChanges {
+  @Input()
+  set appearance(value: 'none' | 'card') {
+    this._appearance = value;
+  }
+  get appearance() {
+    return this._appearance;
+  }
+  private _appearance: 'none' | 'card' = 'none';
+
   // Sets the display of the group to either be row (default) or vertical via flex-box
   @Input()
   set vertical(v: boolean) {
