@@ -124,7 +124,7 @@ export class NovoCheckboxElement implements ControlValueAccessor, OnInit {
     return this._checked;
   }
   set checked(value: boolean) {
-    if (value != this.checked) {
+    if (value !== this.checked) {
       this._checked = value;
       this._cdr.markForCheck();
     }
@@ -137,7 +137,7 @@ export class NovoCheckboxElement implements ControlValueAccessor, OnInit {
     return this._indeterminate;
   }
   set indeterminate(value: boolean) {
-    const changed = value != this._indeterminate;
+    const changed = value !== this._indeterminate;
     this._indeterminate = coerceBooleanProperty(value);
     if (changed) {
       this.indeterminateChange.emit(this._indeterminate);
@@ -166,7 +166,7 @@ export class NovoCheckboxElement implements ControlValueAccessor, OnInit {
 
   constructor(private _cdr: ChangeDetectorRef, private _focusMonitor: FocusMonitor, @Attribute('tabindex') tabIndex: string) {
     // this.color = this.defaultColor = this._options.color || defaults.color;
-    this.tabIndex = parseInt(tabIndex) || 0;
+    this.tabIndex = parseInt(tabIndex, 10) || 0;
   }
 
   ngOnInit() {

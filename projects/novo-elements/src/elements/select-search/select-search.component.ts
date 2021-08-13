@@ -1,5 +1,4 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { A, DOWN_ARROW, END, ENTER, ESCAPE, HOME, NINE, SPACE, UP_ARROW, Z, ZERO } from '@angular/cdk/keycodes';
 import { ViewportRuler } from '@angular/cdk/scrolling';
 import {
   ChangeDetectionStrategy,
@@ -20,6 +19,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { isAlphaNumeric, Key } from 'projects/novo-elements/src/utils';
 import { BehaviorSubject, combineLatest, Observable, of, Subject } from 'rxjs';
 import { delay, filter, map, startWith, switchMap, take, takeUntil, tap } from 'rxjs/operators';
 import { NovoOption, _countGroupLabelsBeforeOption } from '../common';
@@ -421,21 +421,20 @@ export class NovoSelectSearchComponent implements OnInit, OnDestroy, ControlValu
     // Prevent propagation for all alphanumeric characters in order to avoid selection issues
     if (
       (event.key && event.key.length === 1) ||
-      (event.keyCode >= A && event.keyCode <= Z) ||
-      (event.keyCode >= ZERO && event.keyCode <= NINE) ||
-      event.keyCode === SPACE ||
-      (this.preventHomeEndKeyPropagation && (event.keyCode === HOME || event.keyCode === END))
+      isAlphaNumeric(event.key) ||
+      event.key === Key.Space ||
+      (this.preventHomeEndKeyPropagation && (event.key === Key.Home || event.key === Key.End))
     ) {
       event.stopPropagation();
     }
 
-    if (this.novoSelect.multiple && event.key && event.keyCode === ENTER) {
+    if (this.novoSelect.multiple && event.key && event.key === Key.Enter) {
       // Regain focus after multiselect, so we can further type
       setTimeout(() => this._focus());
     }
 
     // Special case if click Escape, if input is empty, close the dropdown, if not, empty out the search field
-    if (this.enableClearOnEscapePressed === true && event.keyCode === ESCAPE && this.value) {
+    if (this.enableClearOnEscapePressed === true && event.key === Key.Escape && this.value) {
       this._reset(true);
       event.stopPropagation();
     }
@@ -446,7 +445,7 @@ export class NovoSelectSearchComponent implements OnInit, OnDestroy, ControlValu
    * Allows e.g. the announcing of the currently activeDescendant by screen readers.
    */
   _handleKeyup(event: KeyboardEvent) {
-    if (event.keyCode === UP_ARROW || event.keyCode === DOWN_ARROW) {
+    if (event.key === Key.ArrowUp || event.key === Key.ArrowDown) {
       const ariaActiveDescendantId = this.novoSelect._getAriaActiveDescendant();
       const index = this._options.toArray().findIndex((item) => item.id === ariaActiveDescendantId);
       if (index !== -1) {
@@ -581,7 +580,7 @@ export class NovoSelectSearchComponent implements OnInit, OnDestroy, ControlValu
 
       if (restoreSelectedValues) {
         // TODO: Fix this
-        //this.novoSelect._onChange(values);
+        // this.novoSelect._onChange(values);
       }
     });
   }

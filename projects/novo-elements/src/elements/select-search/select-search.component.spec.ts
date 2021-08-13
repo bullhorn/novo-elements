@@ -333,7 +333,7 @@ xdescribe('NovoSelectSearchComponent', () => {
     });
 
     it('should not announce active option if there are no options', (done) => {
-      const announcer = TestBed.get(LiveAnnouncer);
+      const announcer = TestBed.inject(LiveAnnouncer);
       component.filteredBanks.pipe(take(1), delay(1)).subscribe(() => {
         // when the filtered banks are initialized
         fixture.detectChanges();
@@ -352,7 +352,7 @@ xdescribe('NovoSelectSearchComponent', () => {
             setTimeout(() => {
               expect(component.novoSelect.contentOptions.length).toBe(0);
 
-              component.novoSelectSearch._handleKeyup(<KeyboardEvent>{ keyCode: DOWN_ARROW });
+              component.novoSelectSearch._handleKeyup({ keyCode: DOWN_ARROW } as KeyboardEvent);
               expect(announcer.announce).not.toHaveBeenCalled();
               done();
             });

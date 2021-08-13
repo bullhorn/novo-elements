@@ -982,3 +982,7 @@ export declare const enum Key {
    */
   Space = ' ',
 }
+
+export const isAlphaNumeric = (letter: string) => {
+  return 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890'.includes(letter.toUpperCase());
+};
