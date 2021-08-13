@@ -5,6 +5,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NovoLabelService } from '../../services/novo-label-service';
 import { NovoButtonModule } from '../button/Button.module';
+import { NovoCheckboxModule } from '../checkbox';
 import { NovoOptionModule } from '../common';
 import { NovoDropdownModule } from '../dropdown/Dropdown.module';
 import { NovoFormExtrasModule } from '../form/extras/FormExtras.module';
@@ -24,6 +25,7 @@ import { NovoTabbedGroupPickerElement } from './TabbedGroupPicker';
     NovoButtonModule,
     NovoDropdownModule,
     NovoOptionModule,
+    NovoCheckboxModule,
   ],
   providers: [NovoLabelService],
   declarations: [NovoTabbedGroupPickerElement],

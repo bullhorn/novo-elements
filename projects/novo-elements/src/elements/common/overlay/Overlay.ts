@@ -71,6 +71,8 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
   @Output()
   public select: EventEmitter<any> = new EventEmitter();
   @Output()
+  public opening: EventEmitter<any> = new EventEmitter();
+  @Output()
   public closing: EventEmitter<any> = new EventEmitter();
 
   public overlayRef: OverlayRef | null;
@@ -122,6 +124,7 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
     setTimeout(() => {
       if (this.overlayRef) {
         this.overlayRef.updatePosition();
+        this.opening.emit(true);
       }
     });
   }

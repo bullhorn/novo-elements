@@ -6,6 +6,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { IMaskDirectiveModule } from 'angular-imask';
 // Vendor
 import { TextMaskModule } from 'angular2-text-mask';
+import { NovoCheckboxModule } from '../checkbox';
 import { NovoCommonModule } from '../common/common.module';
 import { NovoTemplateService } from './../../services/template/NovoTemplateService';
 import { NovoAceEditorModule } from './../ace-editor/AceEditor.module';
@@ -60,6 +61,7 @@ import { NovoFormElement } from './Form';
     NovoButtonModule,
     NovoAceEditorModule,
     NovoCommonModule,
+    NovoCheckboxModule,
   ],
   declarations: [
     NovoAutoSize,

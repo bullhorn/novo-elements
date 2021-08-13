@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NovoButtonModule } from '../button/Button.module';
+import { NovoCheckboxModule } from '../checkbox';
 import { NovoCommonModule } from '../common/common.module';
 import { NovoOptionModule } from '../common/option';
 import { NovoDatePickerModule } from '../date-picker/DatePicker.module';
@@ -57,6 +58,7 @@ import { DataTableState } from './state/data-table-state.service';
     NovoSelectModule,
     NovoTooltipModule,
     NovoOptionModule,
+    NovoCheckboxModule,
   ],
   declarations: [
     DataTableInterpolatePipe,

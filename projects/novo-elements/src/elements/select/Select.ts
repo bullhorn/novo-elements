@@ -25,8 +25,8 @@ import {
   ViewChildren,
 } from '@angular/core';
 import { ControlValueAccessor, FormGroupDirective, NgControl, NgForm } from '@angular/forms';
-import { merge, of, Subject, Subscription } from 'rxjs';
-import { take, takeUntil } from 'rxjs/operators';
+import { merge, Observable, of, Subject, Subscription } from 'rxjs';
+import { filter, map, take, takeUntil } from 'rxjs/operators';
 import { NovoLabelService } from '../../services/novo-label-service';
 import { Key } from '../../utils';
 import {
@@ -119,7 +119,7 @@ let nextId = 0;
               [placeholder]="headerConfig.placeholder"
               [attr.id]="name"
               autocomplete="off"
-              [(ngModel)]="header.value"
+              [value]="header.value"
               [ngClass]="{ invalid: !header.valid }"
             />
             <footer>
@@ -181,7 +181,7 @@ export class NovoSelectElement
   @Input()
   id: string = this._uniqueId;
   @Input()
-  name: string;
+  name: string = this._uniqueId;
   @Input()
   options: Array<any>;
   @Input()
@@ -202,6 +202,19 @@ export class NovoSelectElement
   @Output() readonly selectionChange: EventEmitter<NovoSelectChange> = new EventEmitter<NovoSelectChange>();
   /** Event that emits whenever the raw value of the select changes.*/
   @Output() readonly valueChange: EventEmitter<any> = new EventEmitter<any>();
+
+  /** Event emitted when the select panel has been toggled. */
+  @Output() readonly openedChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+  /** Event emitted when the select has been opened. */
+  @Output('opened') readonly _openedStream: Observable<void> = this.openedChange.pipe(
+    filter((o) => o),
+    map(() => {}),
+  );
+  /** Event emitted when the select has been closed. */
+  @Output('closed') readonly _closedStream: Observable<void> = this.openedChange.pipe(
+    filter((o) => !o),
+    map(() => {}),
+  );
 
   /** Function that maps an option's control value to its display value in the trigger. */
   @Input() displayWith: ((value: any) => string) | null = null;
@@ -352,6 +365,12 @@ export class NovoSelectElement
       .subscribe(() => {
         this._watchSelectionEvents();
         this._initializeSelection();
+      });
+
+    merge(this.overlay.opening, this.overlay.closing)
+      .pipe(takeUntil(this._destroy))
+      .subscribe(() => {
+        this.openedChange.emit(this.panelOpen);
       });
   }
 
@@ -748,5 +767,14 @@ export class NovoSelectElement
     } else {
       this.header.valid = false;
     }
+  }
+
+  /** Determines the `aria-activedescendant` to be set on the host. */
+  _getAriaActiveDescendant(): string | null {
+    if (this.panelOpen && this._keyManager && this._keyManager.activeItem) {
+      return this._keyManager.activeItem.id;
+    }
+
+    return null;
   }
 }

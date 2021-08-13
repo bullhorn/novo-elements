@@ -4194,6 +4194,12 @@ export class RadioButtonsPage {
       item in the list. The value selected will be displayed and the options list will be removed.
     </p>
     <p><code-example example="basic-select"></code-example></p>
+    <h5>Basic Selections With Search</h5>
+    <p>
+      Use the <code>novo-select-search</code> to provide searching functionality to the select component. Can be used to support remote
+      options.
+    </p>
+    <p><code-example example="basic-select-with-search"></code-example></p>
     <h5>Lots of Options</h5>
     <p>
       The most common need for the <code>select</code> component is when there are too many options that would fit on on the screen. The
@@ -4205,7 +4211,10 @@ export class RadioButtonsPage {
       When many option can be selected, use the <code>multiple</code> attribute which allows for a simple iterface to select multiple
       options.
     </p>
-    <p><code-example example="multiple-select"></code-example></p> `,
+    <p><code-example example="multiple-select"></code-example></p>
+    <h5>Multiple Selections With Search</h5>
+    <p>The <code>novo-select-search</code> is compatible with the <code>multiple</code> option as well.</p>
+    <p><code-example example="multiple-select-with-search"></code-example></p> `,
   host: { class: 'markdown-page' },
 })
 export class SelectPage {

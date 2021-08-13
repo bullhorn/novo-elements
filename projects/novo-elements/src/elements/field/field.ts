@@ -39,6 +39,7 @@ const NOVO_INPUT_UNDERLINED_TYPES = [
   'textarea',
   'number',
   'novo-chip-list',
+  'chip-list',
 ];
 export const NOVO_FORM_FIELD = new InjectionToken<NovoFieldElement>('NovoFormField');
 

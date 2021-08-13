@@ -1,0 +1,19 @@
+<h3>Multiple selection</h3>
+<p>
+  <novo-field>
+    <novo-select [formControl]="stateMultiCtrl" placeholder="States" [multiple]="true" #multiSelect>
+      <novo-option>
+        <novo-select-search [formControl]="stateMultiFilterCtrl"></novo-select-search>
+      </novo-option>
+      <novo-option *ngFor="let state of filteredStatesMulti | async" [value]="state">
+        {{state.name}}
+      </novo-option>
+    </novo-select>
+  </novo-field>
+</p>
+<p>
+  Selected States:
+</p>
+<ul *ngFor="let state of stateMultiCtrl?.value">
+  <li>{{state.name}}</li>
+</ul>

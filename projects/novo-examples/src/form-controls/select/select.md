@@ -8,6 +8,12 @@ By clicking on the `novo-select` element, the options list will be displayed. Se
 
 <code-example example="basic-select"></code-example>
 
+##### Basic Selections With Search
+
+Use the `novo-select-search` to provide searching functionality to the select component. Can be used to support remote options.
+
+<code-example example="basic-select-with-search"></code-example>
+
 ##### Lots of Options
 
 The most common need for the `select` component is when there are too many options that would fit on on the screen. The options list will display appropriately and scroll as needed.
@@ -19,3 +25,9 @@ The most common need for the `select` component is when there are too many optio
 When many option can be selected, use the `multiple` attribute which allows for a simple iterface to select multiple options.
 
 <code-example example="multiple-select"></code-example>
+
+##### Multiple Selections With Search
+
+The `novo-select-search` is compatible with the `multiple` option as well.
+
+<code-example example="multiple-select-with-search"></code-example>

@@ -1,0 +1,18 @@
+<h3>Single selection</h3>
+<p>
+  <novo-field>
+    <novo-label>State</novo-label>
+    <novo-select [formControl]="stateCtrl" placeholder="Select" #singleSelect>
+      <novo-option>
+        <novo-select-search [formControl]="stateFilterCtrl"></novo-select-search>
+      </novo-option>
+
+      <novo-option *ngFor="let state of filteredStates | async" [value]="state">
+        {{state.name}}
+      </novo-option>
+    </novo-select>
+  </novo-field>
+</p>
+<p>
+  Selected Bank: {{stateCtrl.value?.name}}
+</p>

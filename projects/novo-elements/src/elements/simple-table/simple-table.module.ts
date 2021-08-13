@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NovoButtonModule } from '../button/Button.module';
+import { NovoCheckboxModule } from '../checkbox';
 import { NovoDatePickerModule } from '../date-picker/DatePicker.module';
 import { NovoDropdownModule } from '../dropdown/Dropdown.module';
 import { NovoFormExtrasModule } from '../form/extras/FormExtras.module';
@@ -47,6 +48,7 @@ import {
     NovoLoadingModule,
     NovoTilesModule,
     NovoSearchBoxModule,
+    NovoCheckboxModule,
   ],
   exports: [
     NovoTable,

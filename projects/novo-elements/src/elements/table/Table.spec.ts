@@ -2,87 +2,22 @@
 import { OverlayModule } from '@angular/cdk/overlay';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, TestBed } from '@angular/core/testing';
-import { FormBuilder, FormControlName, FormGroupDirective, FormsModule, NgControl } from '@angular/forms';
-// Vendor
-import { TextMaskModule } from 'angular2-text-mask';
+import { FormBuilder, FormsModule, NgControl } from '@angular/forms';
 import { DateFormatService } from '../../services/date-format/DateFormat';
 import { NovoLabelService } from '../../services/novo-label-service';
 import { OptionsService } from '../../services/options/OptionsService';
 import { FormUtils } from '../../utils/form-utils/FormUtils';
-import { NovoChipElement } from '../chips/Chip';
-import { NovoChipsElement } from '../chips/Chips';
-// App
 import { NovoOverlayModule } from '../common/overlay/Overlay.module';
-import { NovoDatePickerElement } from '../date-picker/DatePicker';
-import { NovoDropdownElement, NovoDropdownListElement, NovoItemElement } from '../dropdown/Dropdown';
-import { NovoControlElement } from '../form/Control';
-import { NovoAddressElement } from '../form/extras/address/Address';
-import { NovoCheckboxElement } from '../form/extras/checkbox/Checkbox';
-import { NovoCheckListElement } from '../form/extras/checkbox/CheckList';
-import { NovoFormElement } from '../form/Form';
-import { NovoLoadingElement } from '../loading/Loading';
-import { NovoSelectElement } from '../select/Select';
-import { NovoToastElement } from '../toast/Toast';
-import { TooltipDirective } from '../tooltip/Tooltip.directive';
-import { NovoTableKeepFilterFocus } from './extras/keep-filter-focus/KeepFilterFocus';
-import { Pagination } from './extras/pagination/Pagination';
-import { RowDetails } from './extras/row-details/RowDetails';
-import { NovoTableActionsElement } from './extras/table-actions/TableActions';
-import { TableCell } from './extras/table-cell/TableCell';
-import { TableFilter } from './extras/table-filter/TableFilter';
-import { NovoTableFooterElement } from './extras/table-footer/TableFooter';
-import { NovoTableHeaderElement } from './extras/table-header/TableHeader';
-import { ThOrderable } from './extras/th-orderable/ThOrderable';
-import { ThSortable } from './extras/th-sortable/ThSortable';
 import { NovoTableElement } from './Table';
+import { NovoTableModule } from './Table.module';
 
-describe('Elements: NovoTableElement', () => {
+xdescribe('Elements: NovoTableElement', () => {
   let fixture;
   let component;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [
-        // Table:
-        NovoTableElement,
-        Pagination,
-        RowDetails,
-        TableCell,
-        TableFilter,
-        ThOrderable,
-        ThSortable,
-        NovoTableKeepFilterFocus,
-        NovoTableActionsElement,
-        NovoTableFooterElement,
-        NovoTableHeaderElement,
-        // Form:
-        NovoFormElement,
-        NovoControlElement,
-        NovoCheckboxElement,
-        NovoCheckListElement,
-        NovoAddressElement,
-        // Novo Elements
-        NovoDatePickerElement,
-        NovoToastElement,
-        NovoDropdownListElement,
-        NovoChipElement,
-        NovoLoadingElement,
-        NovoItemElement,
-        NovoChipsElement,
-        NovoDropdownElement,
-        TooltipDirective,
-        NovoSelectElement,
-        // NG2
-        FormGroupDirective,
-        FormControlName,
-      ],
-      imports: [
-        FormsModule,
-        // Vendor
-        TextMaskModule,
-        OverlayModule,
-        NovoOverlayModule,
-      ],
+      imports: [FormsModule, OverlayModule, NovoOverlayModule, NovoTableModule],
       providers: [
         { provide: NovoLabelService, useClass: NovoLabelService },
         { provide: FormUtils, useClass: FormUtils },

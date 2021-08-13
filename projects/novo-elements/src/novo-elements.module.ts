@@ -10,6 +10,7 @@ import { NovoButtonModule } from './elements/button/Button.module';
 import { NovoCalendarModule } from './elements/calendar/Calendar.module';
 import { NovoCardModule } from './elements/card/Card.module';
 import { NovoCategoryDropdownModule } from './elements/category-dropdown/CategoryDropdown.module';
+import { NovoCheckboxModule } from './elements/checkbox/Checkbox.module';
 import { NovoChipsModule } from './elements/chips/Chips.module';
 import { NovoNovoCKEditorModule } from './elements/ckeditor/CKEditor.module';
 import { NovoColorPickerModule } from './elements/color-picker/color-picker.module';
@@ -44,6 +45,7 @@ import { NovoProgressModule } from './elements/progress/Progress.module';
 import { NovoQuickNoteModule } from './elements/quick-note/QuickNote.module';
 import { NovoRadioModule } from './elements/radio/Radio.module';
 import { NovoSearchBoxModule } from './elements/search/SearchBox.module';
+import { NovoSelectSearchModule } from './elements/select-search/select-search.module';
 import { NovoSelectModule } from './elements/select/Select.module';
 import { NovoSimpleTableModule } from './elements/simple-table/simple-table.module';
 import { NovoSliderModule } from './elements/slider/Slider.module';
@@ -80,6 +82,7 @@ import { FormUtils } from './utils/form-utils/FormUtils';
     NovoLoadingModule,
     NovoCardModule,
     NovoCalendarModule,
+    NovoCheckboxModule,
     NovoFlexModule,
     NovoLayoutModule,
     NovoDividerModule,
@@ -132,6 +135,7 @@ import { FormUtils } from './utils/form-utils/FormUtils';
     NovoFieldModule,
     NovoColorPickerModule,
     NovoMenuModule,
+    NovoSelectSearchModule,
   ],
   providers: [
     { provide: ComponentUtils, useClass: ComponentUtils },
