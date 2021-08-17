@@ -9,12 +9,10 @@ import {
   NovoItemHeaderElement,
   NovoItemTitleElement,
   NovoItemContentElement,
-  NovoItemEndElement
 } from '../../../list/List';
 import { fromEvent } from 'rxjs';
 import { ElementRef } from '@angular/core';
 import { BasePickerResults } from '../base-picker-results/BasePickerResults';
-import { FormsModule } from '@angular/forms';
 
 
 describe('Elements: MixedMultiPickerResults', () => {
@@ -32,9 +30,7 @@ describe('Elements: MixedMultiPickerResults', () => {
           NovoItemContentElement,
           NovoItemHeaderElement,
           NovoItemTitleElement,
-          NovoItemEndElement
         ],
-        imports: [FormsModule],
         providers: [{ provide: NovoLabelService, useClass: NovoLabelService }],
       }).compileComponents();
       fixture = TestBed.createComponent(MixedMultiPickerResults);
