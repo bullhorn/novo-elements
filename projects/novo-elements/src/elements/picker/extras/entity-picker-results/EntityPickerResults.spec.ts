@@ -11,6 +11,7 @@ import {
   NovoItemHeaderElement,
   NovoItemTitleElement,
   NovoItemContentElement,
+  NovoItemEndElement,
 } from '../../../list/List';
 
 describe('Elements: EntityPickerResult', () => {
@@ -28,6 +29,7 @@ describe('Elements: EntityPickerResult', () => {
         NovoItemContentElement,
         NovoItemHeaderElement,
         NovoItemTitleElement,
+        NovoItemEndElement,
       ],
       providers: [{ provide: NovoLabelService, useClass: NovoLabelService }],
     }).compileComponents();

@@ -8,7 +8,7 @@
     "precommit": "lint-staged",
     "build": "ng build novo-elements && ng build chomsky",
     "postbuild": "npm run copy-scss && npm run build:examples",
-    "build:ci":"ng build novo-elements --configuration production && ng build chomsky --configuration production",
+    "build:ci": "ng build novo-elements --configuration production && ng build chomsky --configuration production",
     "postbuild:ci": "npm run copy-scss",
     "build:watch": "ng build novo-elements --watch",
     "build:chomsky": "ng build chomsky",
