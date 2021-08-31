@@ -27,12 +27,7 @@ jobs:
           npm ci
       - name: Update Version Number
         run: |
-          cd projects/novo-elements
-          npm version ${{ github.event.inputs.type }}  --no-git-tag-version
-          cd projects/chomsky
-          npm version ${{ github.event.inputs.type }}  --no-git-tag-version
-          cd ../..
-          npm version ${{ github.event.inputs.type }}
+          npm run version:elements
       - name: Commit & Push Token
         uses: actions-js/push@v1.2
         with:

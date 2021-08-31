@@ -27,6 +27,7 @@
     "test:watch": "jest projects --watch",
     "lint": "ng lint",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
+    "version:elements": "standard-version",
     "snapshot-publish": "bash snapshot-publish"
   },
   "jest": {
@@ -110,6 +111,7 @@
     "markdown-it": "^8.4.2",
     "ng-packagr": "^10.0.3",
     "prettier": "^2.2.1",
+    "standard-version": "^9.1.0",
     "ts-jest": "~26.4.0",
     "ts-node": "~9.1.1",
     "tslint": "~6.1.3",
