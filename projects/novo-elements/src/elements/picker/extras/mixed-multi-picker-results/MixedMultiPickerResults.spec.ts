@@ -24,7 +24,6 @@ describe('Elements: MixedMultiPickerResults', () => {
     beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
         declarations: [
-          MixedMultiPickerResults,
           NovoLoadingElement,
           NovoListElement,
           NovoListItemElement,
