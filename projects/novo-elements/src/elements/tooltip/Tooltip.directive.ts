@@ -43,6 +43,9 @@ export class TooltipDirective implements OnDestroy, OnInit {
   removeArrow: boolean = false;
   @Input('tooltipAutoPosition')
   autoPosition: boolean = false;
+  @Input('tooltipIsHTML')
+  isHTML: boolean;
+
   private tooltipInstance: NovoTooltip | null;
   private portal: ComponentPortal<NovoTooltip>;
   private overlayRef: OverlayRef;
@@ -112,6 +115,7 @@ export class TooltipDirective implements OnDestroy, OnInit {
     tooltipInstance.preline = this.preline;
     tooltipInstance.noAnimate = this.noAnimate;
     tooltipInstance.position = this.removeArrow ? 'no-arrow' : this.position;
+    tooltipInstance.isHTML = this.isHTML;
   }
 
   private hide(): void {

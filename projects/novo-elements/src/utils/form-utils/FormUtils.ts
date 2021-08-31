@@ -118,9 +118,11 @@ export class FormUtils {
       YEAR: 'year',
       WORKFLOW_OPTIONS: 'select',
       SPECIALIZED_OPTIONS: 'select',
+      ALL_WORKFLOW_OPTIONS: 'select',
       WorkflowOptionsLookup: 'select',
       SpecializedOptionsLookup: 'select',
       SimplifiedOptionsLookup: 'select',
+      AllWorkflowOptionsLookup: 'select',
     };
     const dataTypeToTypeMap = {
       Timestamp: 'date',
@@ -162,9 +164,9 @@ export class FormUtils {
         }
       }
     } else if (field.type === 'TO_ONE') {
-      if ('SYSTEM' === field.dataSpecialization && ['WorkflowOptionsLookup', 'SpecializedOptionsLookup'].includes(field.dataType)) {
+      if ('SYSTEM' === field.dataSpecialization && ['WorkflowOptionsLookup', 'SpecializedOptionsLookup', 'AllWorkflowOptionsLookup'].includes(field.dataType)) {
         type = dataSpecializationTypeMap[field.dataType];
-      } else if (['WORKFLOW_OPTIONS', 'SPECIALIZED_OPTIONS'].includes(field.dataSpecialization)) {
+      } else if (['WORKFLOW_OPTIONS', 'SPECIALIZED_OPTIONS', 'ALL_WORKFLOW_OPTIONS'].includes(field.dataSpecialization)) {
         type = dataSpecializationTypeMap[field.dataSpecialization];
       } else if (['SimplifiedOptionsLookup', 'SpecializedOptionsLookup'].includes(field.dataType)) {
         if (field.options && Object.keys(inputTypeToTypeMap).indexOf(field.inputType) > -1 && !field.multiValue) {
@@ -685,6 +687,8 @@ export class FormUtils {
       // TODO: dataType should only be determined by `determineInputType` which doesn't ever return 'Boolean' it
       // TODO: (cont.) returns `tiles`
       return [{ value: false, label: this.labels.no }, { value: true, label: this.labels.yes }];
+    } else if (field.dataSpecialization === 'ALL_WORKFLOW_OPTIONS' && field.options) {
+      return field.options;
     } else if (field.workflowOptions && fieldData) {
       return this.getWorkflowOptions(field.workflowOptions, fieldData);
     } else if (

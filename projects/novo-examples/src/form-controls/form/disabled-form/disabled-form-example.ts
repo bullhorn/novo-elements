@@ -31,6 +31,21 @@ export class DisabledFormExample {
       textbox: {
         readOnly: true,
       },
+      number: {
+        readOnly: true,
+      },
+      year: {
+        readOnly: true,
+      },
+      float: {
+        readOnly: true,
+      },
+      currency: {
+        readOnly: true,
+      },
+      percent: {
+        readOnly: true,
+      },
       textarea: {
         readOnly: true,
       },
@@ -104,6 +119,11 @@ export class DisabledFormExample {
       textbox: 'Disabled TextBox',
       textarea:
         'Disabled TextArea Disabled TextArea Disabled TextArea Disabled TextArea Disabled TextArea Disabled TextArea Disabled TextArea ',
+      number: 42,
+      year: 2000,
+      float: 3.14,
+      currency: 1000000,
+      percent: 1.21,
       select: 'disabledValue',
       checklist: 'Disabled',
       tiles: 'Disabled',

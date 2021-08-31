@@ -5,7 +5,10 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
 @Component({
   selector: 'novo-tooltip',
   template: `
-    <div [@state]="noAnimate ? 'no-animation' : 'visible'"
+    <div *ngIf="this.isHTML" [@state]="noAnimate ? 'no-animation' : 'visible'"
+         [ngClass]="[tooltipType, this.rounded ? 'rounded' : '', size ? size : '', this.preline? 'preline' : '', position]"
+         [innerHTML]="message"></div>
+    <div *ngIf="!this.isHTML" [@state]="noAnimate ? 'no-animation' : 'visible'"
          [ngClass]="[tooltipType, this.rounded ? 'rounded' : '', size ? size : '', this.preline? 'preline' : '', position]">{{message}}</div>`,
   animations: [
     trigger('state', [
@@ -38,4 +41,5 @@ export class NovoTooltip {
   public preline: boolean;
   public noAnimate: boolean;
   public position: string;
+  public isHTML: boolean;
 }
