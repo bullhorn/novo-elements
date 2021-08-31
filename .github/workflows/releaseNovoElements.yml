@@ -1,11 +1,4 @@
 name: Release Novo Elements
-on:
-  workflow_dispatch:
-    inputs:
-      type:
-        description: 'Update Type (major, minor, patch)'
-        required: true
-        default: 'patch'
 on: [workflow_dispatch]
 
 jobs:
@@ -35,7 +28,7 @@ jobs:
           tags: true
       - name: Build
         run: |
-          npm run build
+          npm run build:ci
       - name: Publish
         run: |
           cd dist/novo-elements
