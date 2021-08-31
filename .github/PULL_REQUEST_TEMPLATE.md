@@ -12,6 +12,5 @@ INSERT A SMALL DESCRIPTION OF WHAT YOU CHANGED HERE
 
 #### **Bullhorn Internal Developers**
 - [ ] Run `Novo Automation`
-- [ ] Run `BBO Automation`
 
 ##### **Screenshots**

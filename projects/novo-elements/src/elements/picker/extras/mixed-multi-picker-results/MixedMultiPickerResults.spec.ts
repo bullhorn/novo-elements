@@ -1,7 +1,6 @@
 import { TestBed, waitForAsync } from '@angular/core/testing';
 import { MixedMultiPickerResults} from './MixedMultiPickerResults';
 import { NovoLabelService } from '../../../../services/novo-label-service';
-import { NovoLoadingElement } from '../../../loading/Loading';
 import {
   NovoListElement,
   NovoListItemElement,
@@ -9,10 +8,11 @@ import {
   NovoItemHeaderElement,
   NovoItemTitleElement,
   NovoItemContentElement,
+  NovoItemEndElement,
 } from '../../../list/List';
-import { fromEvent } from 'rxjs';
 import { ElementRef } from '@angular/core';
 import { BasePickerResults } from '../base-picker-results/BasePickerResults';
+import { NovoFormModule } from '../../../form/Form.module';
 
 
 describe('Elements: MixedMultiPickerResults', () => {
@@ -21,16 +21,7 @@ describe('Elements: MixedMultiPickerResults', () => {
 
     beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
-        declarations: [
-          MixedMultiPickerResults,
-          NovoLoadingElement,
-          NovoListElement,
-          NovoListItemElement,
-          NovoItemAvatarElement,
-          NovoItemContentElement,
-          NovoItemHeaderElement,
-          NovoItemTitleElement,
-        ],
+        imports: [NovoFormModule],
         providers: [{ provide: NovoLabelService, useClass: NovoLabelService }],
       }).compileComponents();
       fixture = TestBed.createComponent(MixedMultiPickerResults);
