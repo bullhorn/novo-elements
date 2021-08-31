@@ -14,6 +14,7 @@ import {
 import { fromEvent } from 'rxjs';
 import { ElementRef } from '@angular/core';
 import { BasePickerResults } from '../base-picker-results/BasePickerResults';
+import { NovoFormModule } from '../../../form/Form.module';
 
 
 describe('Elements: MixedMultiPickerResults', () => {
@@ -33,6 +34,7 @@ describe('Elements: MixedMultiPickerResults', () => {
           NovoItemTitleElement,
           NovoItemEndElement,
         ],
+        imports: [NovoFormModule],
         providers: [{ provide: NovoLabelService, useClass: NovoLabelService }],
       }).compileComponents();
       fixture = TestBed.createComponent(MixedMultiPickerResults);
