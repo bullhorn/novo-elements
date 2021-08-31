@@ -15,7 +15,7 @@
     "build:chomsky:watch": "ng build chomsky --watch",
     "build:demo": "ng build demo",
     "prebuild:examples": "npm run generate:all",
-    "build:examples": "ng build novo-examples --configuration production",
+    "build:examples": "ng build novo-examples",
     "build:examples:watch": "ng build novo-examples --watch",
     "generate:examples": "ts-node --project tools/tsconfig.json ./tools/examples-module.ts",
     "generate:routes": "ts-node --project tools/tsconfig.json ./tools/examples-routes.ts",
