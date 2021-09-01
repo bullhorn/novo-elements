@@ -100,7 +100,7 @@ export class StackblitzWriter {
       );
       exampleContents.push(
         Promise.resolve(
-          this._addFileToForm(form, data, JSON.stringify({ apps: [{ styles: ['styles.scss'] }] }), `.angular-cli.json`, TEMPLATE_PATH),
+          this._addFileToForm(form, data, JSON.stringify({ apps: [{ styles: ['styles.scss', 'node_modules/@bullhorn/bullhorn-icons/fonts/Bullhorn-Glyphicons.css'] }] }), `.angular-cli.json`, TEMPLATE_PATH),
         ),
       );
 
