@@ -103,10 +103,16 @@ novo-select {
       color: $positive;
       line-height: 1.4em;
     }
-    &:focus,
-    &:hover {
-      background: lighten($light, 10%);
-      color: darken($light, 55%);
+    &.disabled {
+      cursor: not-allowed;
+      color: $grey;
+    }
+    &:not(.disabled) {
+      &:focus,
+      &:hover {
+        background: lighten($light, 10%);
+        color: darken($light, 55%);
+      }
     }
     &.active {
       color: darken($light, 55%);

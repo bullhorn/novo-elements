@@ -1,4 +1,3 @@
-/** No CSS for this example */
 :host {
   padding: 20px 30px;
   border-top-right-radius: 3px;
@@ -20,4 +19,8 @@
 :host .caption {
   font-size: 0.9em;
   margin-right: 5px;
+}
+
+.select-example-container {
+  margin: 1em;
 }
