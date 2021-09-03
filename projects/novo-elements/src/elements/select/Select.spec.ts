@@ -171,7 +171,7 @@ describe('Elements: NovoSelectElement', () => {
       comp.setValueAndClose({});
       expect(comp.overlay.closePanel).toHaveBeenCalled();
     });
-    it('should invoke not invoke select and close panel for disabled item', () => {
+    it('should not invoke select or close panel for a disabled item', () => {
       const mockEvent: any = {
         value: { id: 1, label: 'one', disabled: true },
         index: 1,
