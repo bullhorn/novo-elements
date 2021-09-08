@@ -1,6 +1,6 @@
 // NG2
 import { ChangeDetectorRef } from '@angular/core';
-import { async, TestBed } from '@angular/core/testing';
+import { fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { FormBuilder } from '@angular/forms';
 // App
 import { NovoControlGroup } from './ControlGroup';
@@ -13,7 +13,7 @@ describe('Elements: NovoControlGroup', () => {
   let fixture;
   let component;
 
-  beforeEach(async(() => {
+  beforeEach(fakeAsync(() => {
     TestBed.configureTestingModule({
       imports: [NovoFormModule],
       providers: [FormUtils, FormBuilder, ChangeDetectorRef, NovoLabelService, OptionsService],
@@ -166,5 +166,55 @@ describe('Elements: NovoControlGroup', () => {
       expect(component.canRemove).toHaveBeenCalledWith({ 'myPercent': 0.2, 'myString': '20%' }, 1);
       expect(component.canRemove).toHaveBeenCalledWith({ 'myPercent': 0.3, 'myString': '30%' }, 2);
     });
+    it('should call shouldRemove() function when set and emitting events', fakeAsync(() => {
+      component.shouldRemove = (index: number) => new Promise(resolve => {
+        // Example promise for testing that will only allow the first group to be deleted
+        resolve(index === 0);
+      });
+      spyOn(component, 'shouldRemove').and.callThrough();
+      expect(component.form.controls.myControls.controls.length).toEqual(3);
+
+      component.removeControl(2);
+      tick();
+      expect(component.shouldRemove).toHaveBeenCalledWith(2);
+      expect(component.form.controls.myControls.controls.length).toEqual(3);
+
+      component.removeControl(1);
+      tick();
+      expect(component.shouldRemove).toHaveBeenCalledWith(1);
+      expect(component.form.controls.myControls.controls.length).toEqual(3);
+
+      component.removeControl(0);
+      tick();
+      expect(component.shouldRemove).toHaveBeenCalledWith(0);
+      expect(component.form.controls.myControls.controls.length).toEqual(2);
+
+      component.shouldRemove = null;
+    }));
+    it('should not call shouldRemove() function when events are not being emitted', fakeAsync(() => {
+      component.shouldRemove = (index: number) => new Promise(resolve => {
+        // Example promise for testing that will only allow the first group to be deleted
+        resolve(index === 0);
+      });
+      spyOn(component, 'shouldRemove').and.callThrough();
+      expect(component.form.controls.myControls.controls.length).toEqual(3);
+
+      component.removeControl(2, false);
+      tick();
+      expect(component.shouldRemove).not.toHaveBeenCalled();
+      expect(component.form.controls.myControls.controls.length).toEqual(2);
+
+      component.removeControl(1, false);
+      tick();
+      expect(component.shouldRemove).not.toHaveBeenCalled();
+      expect(component.form.controls.myControls.controls.length).toEqual(1);
+
+      component.removeControl(0, false);
+      tick();
+      expect(component.shouldRemove).not.toHaveBeenCalled();
+      expect(component.form.controls.myControls.controls.length).toEqual(0);
+
+      component.shouldRemove = null;
+    }));
   });
 });
