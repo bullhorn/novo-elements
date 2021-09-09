@@ -91,6 +91,8 @@ export class NovoControlGroup implements AfterContentInit, OnChanges, OnDestroy 
   @Input() canEdit: Function;
   // Callback to determine if the user can delete
   @Input() canRemove: Function;
+  // Optional callback for whether or not to remove the given row
+  @Input() shouldRemove: (number) => Promise<boolean>;
   // Template for custom row rendering
   @Input() rowTemplate: TemplateRef<any>;
   // Template for custom column label rendering
@@ -186,7 +188,23 @@ export class NovoControlGroup implements AfterContentInit, OnChanges, OnDestroy 
     this.ref.markForCheck();
   }
 
+  /**
+   * Will remove the control, and optionally, if the event is to be publicized (emitEvent = true) and there is a
+   * shouldRemove callback, then call the shouldRemove() callback to determine if the doRemoveControl should be called.
+   */
   removeControl(index: number, emitEvent = true) {
+    if (emitEvent && Helpers.isFunction(this.shouldRemove)) {
+      this.shouldRemove(index).then((shouldRemove: boolean) => {
+        if (shouldRemove) {
+          this.doRemoveControl(index, emitEvent);
+        }
+      });
+    } else {
+      this.doRemoveControl(index, emitEvent);
+    }
+  }
+
+  private doRemoveControl(index: number, emitEvent: boolean) {
     const controlsArray: FormArray = <FormArray>this.form.controls[this.key];
     const nestedFormGroup = controlsArray.at(index) as NovoFormGroup;
     nestedFormGroup.fieldInteractionEvents.unsubscribe();
