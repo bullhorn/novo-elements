@@ -21,7 +21,8 @@ jobs:
       - name: Set Up Git
         uses: oleksiyrudenko/gha-git-credentials@v2-latest
         with:
-          token: '${{ secrets.GITHUB_TOKEN }}'
+          email: 'cbarnes@bullhorn.com'
+          token: '${{ secrets.BH_GIT_TOKEN }}'
       - name: Install Dependencies
         run: |
           npm ci
