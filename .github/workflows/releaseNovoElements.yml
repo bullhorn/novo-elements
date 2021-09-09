@@ -21,7 +21,9 @@ jobs:
       - name: Set Up Git
         uses: oleksiyrudenko/gha-git-credentials@v2-latest
         with:
+          name: 'Charles Barnes'
           email: 'cbarnes@bullhorn.com'
+          actor: 'charlesabarnes'
           token: '${{ secrets.BH_GIT_TOKEN }}'
       - name: Install Dependencies
         run: |
