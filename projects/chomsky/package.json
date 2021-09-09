@@ -1,6 +1,6 @@
 {
   "name": "chomsky",
-  "version": "5.1.2",
+  "version": "5.1.3",
   "peerDependencies": {
     "@angular/common": ">=10",
     "@angular/core": ">=10",
