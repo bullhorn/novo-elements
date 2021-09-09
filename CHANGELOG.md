@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 5.1.4 (2021-09-09)
+
 ### 5.1.3 (2021-09-09)
 
 ## [5.1.0](https://github.com/bullhorn/novo-elements/compare/v4.7.0...v5.1.0) (2021-06-30)
