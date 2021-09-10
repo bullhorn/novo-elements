@@ -1,28 +1,34 @@
-<div>
+<div class="select-example-container">
     <label>
         <span class="caption">Selected Value:</span> {{value}}
     </label>
     <novo-select [options]="options" [placeholder]="placeholder" [(ngModel)]="value"></novo-select>
 </div>
-<div>
+<div class="select-example-container">
     <label>
         <span class="caption">Selected Value:</span> {{withNumbersValue}}
     </label>
     <novo-select [options]="withNumbers" [(ngModel)]="withNumbersValue"></novo-select>
 </div>
-<div>
+<div class="select-example-container">
     <label>
-        <span class="caption">Selected Value:</span> {{withNumbersObject.label}}
+        <span class="caption">Selected Value:</span> {{withNumbersObject | json}}
     </label>
     <novo-select [options]="withNumbers" [(ngModel)]="withNumbersObject"></novo-select>
 </div>
-<div>
+<div class="select-example-container">
+  <label>
+    <span class="caption">Disabled Item with Tooltip - Value: </span> {{disabledWithTooltipValue}}
+  </label>
+  <novo-select [options]="withDisabledAndTooltip" [placeholder]="placeholder" [(ngModel)]="disabledWithTooltipValue"></novo-select>
+</div>
+<div class="select-example-container">
     <label>
         <span class="caption">Disabled State</span>
     </label>
     <novo-select [options]="options" [placeholder]="placeholder" [(ngModel)]="value" disabled></novo-select>
 </div>
-<div>
+<div class="select-example-container">
     <label>
         <span class="caption">No Model With Header</span>
     </label>

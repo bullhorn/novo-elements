@@ -62,9 +62,11 @@ const SELECT_VALUE_ACCESSOR = {
         </li>
         <li
           *ngFor="let option of filteredOptions; let i = index"
-          [ngClass]="{ active: option.active }"
+          [ngClass]="{ active: option.active, disabled: option.disabled }"
           (click)="setValueAndClose({ value: option, index: i })"
           [attr.data-automation-value]="option.label"
+          [tooltip]="option.tooltip"
+          [tooltipPosition]="option.tooltipPosition || 'right'"
         >
           <span [innerHtml]="highlight(option.label, filterTerm)"></span> <i *ngIf="option.active" class="bhi-check"></i>
         </li>
@@ -193,15 +195,17 @@ export class NovoSelectElement implements OnInit, OnChanges, OnDestroy, ControlV
   /** END: Convenient Panel Methods. */
 
   /**
-   * This method closes the panel, and if a value is specified, also sets the associated
-   * control to that value. It will also mark the control as dirty if this interaction
-   * stemmed from the user.
+   * If the item is not disabled, this method closes the panel, and if a value is specified,
+   * also sets the associated control to that value. It will also mark the control as dirty
+   * if this interaction stemmed from the user.
    */
   setValueAndClose(event: any | null): void {
-    if (event.value && event.index >= 0) {
-      this.select(event.value, event.index);
+    if (!event.value?.disabled) {
+      if (event.value && event.index >= 0) {
+        this.select(event.value, event.index);
+      }
+      this.closePanel();
     }
-    this.closePanel();
   }
 
   select(option, i, fireEvents: boolean = true) {
