@@ -33,5 +33,5 @@ jobs:
       - name: Publish Novo Elements
         uses: JS-DevTools/npm-publish@v1
         with:
-          token: ${{ secrets.NPM_TOKEN }}
+          token: ${{ secrets.NE_NPM_TOKEN }}
           package: ./dist/novo-elements/package.json
