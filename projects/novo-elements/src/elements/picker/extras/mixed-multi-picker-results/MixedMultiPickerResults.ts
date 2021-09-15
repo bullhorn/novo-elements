@@ -5,7 +5,7 @@ import { BasePickerResults } from '../base-picker-results/BasePickerResults';
 import { Helpers } from '../../../../utils/Helpers';
 import { NovoLabelService } from '../../../../services/novo-label-service';
 import { NovoListElement } from '../../../list/List';
-import { fromEvent, Subscription } from 'rxjs';
+import { BehaviorSubject, fromEvent, Observable, Subscription } from 'rxjs';
 
 
 export interface IMixedMultiPickerOption {
@@ -17,6 +17,7 @@ export interface IMixedMultiPickerOption {
         filterValue?: any,
     }[];
     getSecondaryOptionsAsync?(): Promise<{value: string, label: string}[]>;
+    clearSecondaryOptions?: BehaviorSubject<Boolean>;
     showSearchOnSecondaryOptions?: boolean;
 }
 
@@ -166,6 +167,14 @@ export class MixedMultiPickerResults extends BasePickerResults implements OnDest
         return !!(primaryOption && primaryOption.showSearchOnSecondaryOptions);
     }
 
+    public resetPrimaryOption(primaryOption: IMixedMultiPickerOption) {
+        if (this.internalMap.get(primaryOption.value)) {
+            this.matches = [];
+            this.internalMap.delete(primaryOption.value);
+            this.selectPrimaryOption(primaryOption);
+        }
+    }
+
     filterData(): { value: string; label: string }[] {
         if (this.selectedPrimaryOption) {
             if (this.selectedPrimaryOption.secondaryOptions) {
@@ -212,6 +221,12 @@ export class MixedMultiPickerResults extends BasePickerResults implements OnDest
                         this.inputElement.nativeElement.focus();
                     });
                 });
+                if (primaryOption.clearSecondaryOptions) {
+                    primaryOption.clearSecondaryOptions.subscribe(() => {
+                        this.resetPrimaryOption(primaryOption);
+                        this.ref.markForCheck();
+                    });
+                }
             } else {
                 this.matches = this.filter(this.internalMap.get(primaryOption.value).items);
                 this.ref.markForCheck();
