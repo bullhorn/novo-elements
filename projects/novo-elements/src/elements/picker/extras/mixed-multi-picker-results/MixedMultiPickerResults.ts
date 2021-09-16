@@ -5,7 +5,7 @@ import { BasePickerResults } from '../base-picker-results/BasePickerResults';
 import { Helpers } from '../../../../utils/Helpers';
 import { NovoLabelService } from '../../../../services/novo-label-service';
 import { NovoListElement } from '../../../list/List';
-import { BehaviorSubject, fromEvent, Observable, Subscription } from 'rxjs';
+import { BehaviorSubject, fromEvent, Subscription } from 'rxjs';
 
 
 export interface IMixedMultiPickerOption {
