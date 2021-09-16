@@ -169,7 +169,6 @@ export class MixedMultiPickerResults extends BasePickerResults implements OnDest
 
     public resetPrimaryOption(primaryOption: IMixedMultiPickerOption) {
         if (this.internalMap.get(primaryOption.value)) {
-            this.matches = [];
             this.internalMap.delete(primaryOption.value);
             this.selectPrimaryOption(primaryOption);
         }
