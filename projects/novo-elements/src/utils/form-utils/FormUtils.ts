@@ -689,7 +689,7 @@ export class FormUtils {
       return [{ value: false, label: this.labels.no }, { value: true, label: this.labels.yes }];
     } else if (field.dataSpecialization === 'ALL_WORKFLOW_OPTIONS' && field.options) {
       return field.options;
-    } else if (field.workflowOptions && fieldData) {
+    } else if (field.workflowOptions) {
       return this.getWorkflowOptions(field.workflowOptions, fieldData);
     } else if (
       field.dataSpecialization === 'SPECIALIZED_OPTIONS' ||
@@ -711,18 +711,17 @@ export class FormUtils {
     return null;
   }
 
-  private getWorkflowOptions(
-    workflowOptions: { [key: string]: any },
-    fieldData: { [key: string]: any },
-  ): Array<{ value: string | number; label: string | number }> {
-    let currentValue: { value: string | number; label: string | number };
-    if (fieldData.id) {
+  private getWorkflowOptions(workflowOptions: { [key: string]: any },
+                             fieldData: { [key: string]: any } | null) : Array<{ value: string | number; label: string | number }> {
+    let currentValue: { value: string | number; label: string | number } = null;
+    let currentWorkflowOption: number | string = 'initial';
+    if (fieldData?.id) {
       currentValue = { value: fieldData.id, label: fieldData.label ? fieldData.label : fieldData.id };
+      currentWorkflowOption = fieldData.id;
     }
-
-    const currentWorkflowOption: number | string = fieldData.id ? fieldData.id : 'initial';
     const updateWorkflowOptions: Array<{ value: string | number; label: string | number }> = workflowOptions[currentWorkflowOption] || [];
 
+    // Ensure that the current value is added to the beginning of the options list
     if (currentValue && !updateWorkflowOptions.find((option) => option.value === currentValue.value)) {
       updateWorkflowOptions.unshift(currentValue);
     }
