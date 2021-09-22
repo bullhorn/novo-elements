@@ -167,10 +167,15 @@ export class MixedMultiPickerResults extends BasePickerResults implements OnDest
         return !!(primaryOption && primaryOption.showSearchOnSecondaryOptions);
     }
 
-    public resetPrimaryOption(primaryOption: IMixedMultiPickerOption) {
+    public clearPrimaryOption(primaryOption: IMixedMultiPickerOption) {
         if (this.internalMap.get(primaryOption.value)) {
+            if (primaryOption.value === this.selectedPrimaryOption?.value) {
+                this.activeMatch = null;
+                this.matches = [];
+                this.selectedPrimaryOption = null;
+            }
             this.internalMap.delete(primaryOption.value);
-            this.selectPrimaryOption(primaryOption);
+            this.ref.markForCheck();
         }
     }
 
@@ -222,8 +227,7 @@ export class MixedMultiPickerResults extends BasePickerResults implements OnDest
                 });
                 if (primaryOption.clearSecondaryOptions) {
                     primaryOption.clearSecondaryOptions.subscribe(() => {
-                        this.resetPrimaryOption(primaryOption);
-                        this.ref.markForCheck();
+                        this.clearPrimaryOption(primaryOption);
                     });
                 }
             } else {
