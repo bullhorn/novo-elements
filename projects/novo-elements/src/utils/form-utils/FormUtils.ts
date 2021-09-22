@@ -712,7 +712,7 @@ export class FormUtils {
   }
 
   private getWorkflowOptions(workflowOptions: { [key: string]: any },
-                             fieldData: { [key: string]: any } | null) : Array<{ value: string | number; label: string | number }> {
+                             fieldData: { [key: string]: any } | null): Array<{ value: string | number; label: string | number }> {
     let currentValue: { value: string | number; label: string | number } = null;
     let currentWorkflowOption: number | string = 'initial';
     if (fieldData?.id) {
