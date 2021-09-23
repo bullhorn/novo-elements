@@ -343,7 +343,7 @@ describe('Elements: MixedMultiPickerResults', () => {
                 { value: 's-2', label: 'DEF - Async Secondary Option 2'},
             ]});
             const primaryOption = {value: '3', label: 'GHI', getSecondaryOptionsAsync: () => Promise.resolve(), clearSecondaryOptions: new BehaviorSubject<Boolean>(true)};
-            spyOn(primaryOption, 'clearSecondaryOptions').and.callThrough();
+            spyOn(primaryOption.clearSecondaryOptions, 'subscribe').and.callThrough();
             component.getNewMatches(primaryOption);
             expect(primaryOption.clearSecondaryOptions.subscribe).toHaveBeenCalled();
         });
