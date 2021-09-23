@@ -216,7 +216,7 @@ describe('Elements: MixedMultiPickerResults', () => {
         it('shouldn"t reset selectedPrimaryOption if primaryOption being cleared is not selected', () => {
             component.internalMap.set('4', {value: '4', label: 'JKL', items: [{value: '4.1', label: '4-1'}]});
             component.clearPrimaryOption({value: '4', label: 'JKL'});
-            expect(component.selectedPrimaryOption).toEqual({value: '3', label: 'GHI', getSecondaryOptionsAsync: () => {}});
+            expect(component.selectedPrimaryOption.value).toEqual('3');
         });
     });
 
@@ -343,7 +343,7 @@ describe('Elements: MixedMultiPickerResults', () => {
                 { value: 's-2', label: 'DEF - Async Secondary Option 2'},
             ]});
             const primaryOption = {value: '3', label: 'GHI', getSecondaryOptionsAsync: () => Promise.resolve(), clearSecondaryOptions: new BehaviorSubject<Boolean>(true)};
-            spyOn(primaryOption, 'getSecondaryOptionsAsync').and.callThrough();
+            spyOn(primaryOption, 'clearSecondaryOptions').and.callThrough();
             component.getNewMatches(primaryOption);
             expect(primaryOption.clearSecondaryOptions.subscribe).toHaveBeenCalled();
         });
