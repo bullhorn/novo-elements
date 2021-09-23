@@ -215,7 +215,7 @@ describe('Elements: MixedMultiPickerResults', () => {
         it('shouldn"t reset selectedPrimaryOption if primaryOption being cleared is not selected', () => {
             component.internalMap.set('4', {value: '4', label: 'JKL', items: [{value: '4.1', label: '4-1'}]});
             component.clearPrimaryOption({value: '4', label: 'JKL'});
-            expect(component.selectedPrimaryOption).toBe({value: '3', label: 'GHI', items: [{value: '3.1', label: '3-1'}]});
+            expect(component.selectedPrimaryOption).toBe({value: '3', label: 'GHI', getSecondaryOptionsAsync: () => {}});
         });
     });
 
