@@ -4,15 +4,16 @@ on: [workflow_dispatch]
 jobs:
   build:
     name: Build & Publish
-    runs-on: ubuntu-16.04
+    runs-on: ubuntu-latest
     timeout-minutes: 25
     strategy:
       fail-fast: false
     steps:
       - name: Checkout
-        uses: actions/checkout@v1
-      - name: Setup Git
-        uses: fregante/setup-git-user@v1
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.BH_GIT_TOKEN }}
       - name: Setup NodeJS
         uses: actions/setup-node@v1
         with:
@@ -22,6 +23,15 @@ jobs:
           npm ci
       - name: Update Version Number
         run: |
-          npm run release:elements
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "GitHub Action"
+          npm run version:elements
+          git push --follow-tags origin master
+      - name: Build
+        run: |
+          npm run build:ci
+      - name: Publish Novo Elements
+        uses: JS-DevTools/npm-publish@v1
+        with:
+          token: ${{ secrets.NE_NPM_TOKEN }}
+          package: ./dist/novo-elements/package.json

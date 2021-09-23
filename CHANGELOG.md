@@ -2,6 +2,38 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [5.2.11](https://github.com/bullhorn/novo-elements/compare/v5.2.10...v5.2.11) (2021-09-15)
+
+### [5.2.10](https://github.com/bullhorn/novo-elements/compare/v5.2.9...v5.2.10) (2021-09-15)
+
+### [5.2.9](https://github.com/bullhorn/novo-elements/compare/v5.2.8...v5.2.9) (2021-09-15)
+
+### [5.2.8](https://github.com/bullhorn/novo-elements/compare/v5.2.7...v5.2.8) (2021-09-15)
+
+### [5.2.7](https://github.com/bullhorn/novo-elements/compare/v5.2.6...v5.2.7) (2021-09-15)
+
+### [5.2.6](https://github.com/bullhorn/novo-elements/compare/v5.2.5...v5.2.6) (2021-09-15)
+
+### [5.2.5](https://github.com/bullhorn/novo-elements/compare/v5.2.4...v5.2.5) (2021-09-15)
+
+### [5.2.4](https://github.com/bullhorn/novo-elements/compare/v5.2.3...v5.2.4) (2021-09-15)
+
+### [5.2.3](https://github.com/bullhorn/novo-elements/compare/v5.2.2...v5.2.3) (2021-09-15)
+
+### [5.2.2](https://github.com/bullhorn/novo-elements/compare/v5.2.1...v5.2.2) (2021-09-15)
+
+### [5.2.1](https://github.com/bullhorn/novo-elements/compare/v5.2.0...v5.2.1) (2021-09-11)
+
+## [5.2.0](https://github.com/bullhorn/novo-elements/compare/v5.1.2...v5.2.0) (2021-09-11)
+
+
+### Features
+
+* **ControlGroup:** Add optional delete button confirmation ([#1216](https://github.com/bullhorn/novo-elements/issues/1216)) ([5905159](https://github.com/bullhorn/novo-elements/commit/5905159efdc03480cf4ed0b6237ce96ebc2715b3))
+* **Select:** Add optional disabled state and tooltip ([#1220](https://github.com/bullhorn/novo-elements/issues/1220)) ([b3156c2](https://github.com/bullhorn/novo-elements/commit/b3156c22d7c37fdc9e865af42ac8da28c5cecf52))
+
+### 5.1.3 (2021-09-09)
+
 ## [5.1.0](https://github.com/bullhorn/novo-elements/compare/v4.7.0...v5.1.0) (2021-06-30)
 
 

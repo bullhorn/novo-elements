@@ -171,6 +171,18 @@ describe('Elements: NovoSelectElement', () => {
       comp.setValueAndClose({});
       expect(comp.overlay.closePanel).toHaveBeenCalled();
     });
+    it('should not invoke select or close panel for a disabled item', () => {
+      const mockEvent: any = {
+        value: { id: 1, label: 'one', disabled: true },
+        index: 1,
+      };
+      spyOn(comp.overlay, 'closePanel');
+      comp.setValueAndClose(mockEvent);
+      expect(comp.selectedIndex).toEqual(-1);
+      expect(comp.selected).toBeUndefined();
+      expect(comp.empty).toEqual(true);
+      expect(comp.overlay.closePanel).not.toHaveBeenCalled();
+    });
   });
 
   describe('Function: select(option, i, fireEvents)', () => {
