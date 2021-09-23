@@ -195,6 +195,30 @@ describe('Elements: MixedMultiPickerResults', () => {
         });
     });
 
+    describe('Method: clearPrimaryOption(primaryOption: IMixedMultiPickerOption)', () => {
+        beforeEach(() => {
+            component.selectedPrimaryOption = {value: '3', label: 'GHI', getSecondaryOptionsAsync: () => {}};
+            component.internalMap.set('3', {value: '3', label: 'GHI', items: [{value: '3.1', label: '3-1'}]});
+        });
+        it('should clearPrimaryOption if primaryOption exists in internal map', () => {
+            component.clearPrimaryOption({value: '3', label: 'GHI'});
+            expect(component.internalMap.get(3)).toBe(undefined);
+        });
+        it('shouldn"t error if primaryOption doesn"t exists in internal map', () => {
+            component.clearPrimaryOption({value: '4', label: 'GHI'});
+            expect(component.internalMap.get(3)).toBe(component.internalMap.get(3));
+        });
+        it('should reset selectedPrimaryOption if primaryOption being cleared is selected', () => {
+            component.clearPrimaryOption({value: '3', label: 'GHI'});
+            expect(component.selectedPrimaryOption).toBe(null);
+        });
+        it('shouldn"t reset selectedPrimaryOption if primaryOption being cleared is not selected', () => {
+            component.internalMap.set('4', {value: '4', label: 'JKL', items: [{value: '4.1', label: '4-1'}]});
+            component.clearPrimaryOption({value: '4', label: 'JKL'});
+            expect(component.selectedPrimaryOption).toBe({value: '3', label: 'GHI', items: [{value: '3.1', label: '3-1'}]});
+        });
+    });
+
     describe('Method: filterData())', () => {
         it('should return an empty array if there is no selectedPrimaryOption', () => {
             expect(component.filterData()).toEqual([]);
