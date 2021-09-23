@@ -338,10 +338,6 @@ describe('Elements: MixedMultiPickerResults', () => {
             expect(primaryOption.getSecondaryOptionsAsync).not.toHaveBeenCalled();
         });
         it('should subscribe clearSecondaryOptions if defined on primaryOption', () => {
-            component.internalMap.set('3', {value: '3', label: 'GHI', items: [
-                { value: 's-1', label: 'ABC - Async Secondary Option 1'},
-                { value: 's-2', label: 'DEF - Async Secondary Option 2'},
-            ]});
             const primaryOption = {value: '3', label: 'GHI', getSecondaryOptionsAsync: () => Promise.resolve(), clearSecondaryOptions: new BehaviorSubject<Boolean>(true)};
             spyOn(primaryOption.clearSecondaryOptions, 'subscribe').and.callThrough();
             component.getNewMatches(primaryOption);
