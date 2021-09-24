@@ -509,7 +509,7 @@ export class FieldInteractionApi {
     return !!form.controls[key];
   }
 
-  addStaticOption(key: string, newOption, otherForm?: NovoFormGroup): void {
+  addStaticOption(key: string, newOption: any, otherForm?: NovoFormGroup): void {
     const control = this.getControl(key, otherForm);
     let optionToAdd = newOption;
     let isUnique = true;
@@ -547,7 +547,7 @@ export class FieldInteractionApi {
     }
   }
 
-  removeStaticOption(key: string, optionToRemove: string, otherForm?: NovoFormGroup): void {
+  removeStaticOption(key: string, optionToRemove: any, otherForm?: NovoFormGroup): void {
     const control = this.getControl(key, otherForm);
     if (control && !control.restrictFieldInteractions) {
       let currentOptions = this.getProperty(key, 'options', otherForm);
