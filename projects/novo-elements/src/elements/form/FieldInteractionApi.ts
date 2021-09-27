@@ -509,7 +509,7 @@ export class FieldInteractionApi {
     return !!form.controls[key];
   }
 
-  addStaticOption(key: string, newOption, otherForm?: NovoFormGroup): void {
+  addStaticOption(key: string, newOption: any, otherForm?: NovoFormGroup): void {
     const control = this.getControl(key, otherForm);
     let optionToAdd = newOption;
     let isUnique = true;
@@ -547,12 +547,12 @@ export class FieldInteractionApi {
     }
   }
 
-  removeStaticOption(key: string, optionToRemove: string, otherForm?: NovoFormGroup): void {
+  removeStaticOption(key: string, optionToRemove: any, otherForm?: NovoFormGroup): void {
     const control = this.getControl(key, otherForm);
     if (control && !control.restrictFieldInteractions) {
-      let currentOptions = this.getProperty(key, 'options');
+      let currentOptions = this.getProperty(key, 'options', otherForm);
       if (!currentOptions || !currentOptions.length) {
-        const config = this.getProperty(key, 'config');
+        const config = this.getProperty(key, 'config', otherForm);
         if (config) {
           currentOptions = config.options;
           if (currentOptions && Array.isArray(currentOptions)) {
@@ -572,7 +572,7 @@ export class FieldInteractionApi {
               currentOptions.splice(index, 1);
             }
             config.options = [...currentOptions];
-            this.setProperty(key, 'config', config);
+            this.setProperty(key, 'config', config, otherForm);
           }
         }
       } else {
@@ -591,7 +591,7 @@ export class FieldInteractionApi {
         if (index !== -1) {
           currentOptions.splice(index, 1);
         }
-        this.setProperty(key, 'options', [...currentOptions]);
+        this.setProperty(key, 'options', [...currentOptions], otherForm);
       }
       this.triggerEvent({ controlKey: key, prop: 'options', value: control.options }, otherForm);
     }

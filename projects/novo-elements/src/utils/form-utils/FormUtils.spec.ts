@@ -1,24 +1,12 @@
 // NG2
 import { FormGroup } from '@angular/forms';
-import { TestBed, async, inject } from '@angular/core/testing';
+import { async, inject, TestBed } from '@angular/core/testing';
 // Vendor
 import { from } from 'rxjs';
 // APP
 import {
-  AddressControl,
-  CheckListControl,
-  CheckboxControl,
-  DateControl,
-  DateTimeControl,
-  EditorControl,
-  FileControl,
-  PickerControl,
-  RadioControl,
-  SelectControl,
-  TextAreaControl,
-  TextBoxControl,
-  TilesControl,
-  TimeControl,
+  AddressControl, CheckboxControl, CheckListControl, DateControl, DateTimeControl, EditorControl, FileControl, PickerControl, RadioControl, SelectControl, TextAreaControl,
+  TextBoxControl, TilesControl, TimeControl,
 } from '../../elements/form/FormControls';
 import { FormUtils } from './FormUtils';
 import { NovoFormControl } from '../../elements/form/NovoFormControl';
@@ -537,38 +525,60 @@ describe('Utils: FormUtils', () => {
       expect(formUtils.getControlOptions).toBeDefined();
       const result = formUtils.getControlOptions({ dataSpecialization: 'DATETIME' });
     });
-    it('should return an array when there are WorkflowOptions', () => {
+    it('should return an array when there are WorkflowOptions and a value', () => {
       const field: { workflowOptions: Object } = {
         workflowOptions: {
-          1: [{ value: '1', label: '1' }],
-          2: [{ value: '2', label: '2' }],
+          initial: [{ value: 1, label: 'one' }, { value: 2, label: 'two' }],
+          1: [{ value: 2, label: 'two' }],
+          2: [{ value: 3, label: 'three' }],
+          3: [],
         },
       };
-      const expected: Array<{ value: string; label: string }> = [{ value: '2', label: '2' }];
-      const result = formUtils.getControlOptions(field, undefined, undefined, { id: '2' });
-      expect(result).toEqual(expected);
+      const result = formUtils.getControlOptions(field, undefined, undefined, { id: 2 });
+      expect(result).toEqual([{ value: 2, label: 2 }, { value: 3, label: 'three' }]);
     });
     it('should add current option to array if current value is not there for WorkflowOptions', () => {
       const field: { workflowOptions: Object } = {
         workflowOptions: {
-          1: [{ value: '1', label: 'one' }, { value: '3', label: 'three' }],
-          2: [{ value: '2', label: 'two' }],
+          initial: [{ value: 1, label: 'one' }, { value: 2, label: 'two' }],
+          1: [{ value: 2, label: 'two' }],
+          2: [{ value: 3, label: 'three' }],
+          3: [],
         },
       };
-      const expected: Array<{ value: string; label: string }> = [{ value: '1', label: 'one' }, { value: '3', label: 'three' }];
-      const result = formUtils.getControlOptions(field, undefined, undefined, { id: '1', label: 'one' });
-      expect(result).toEqual(expected);
+      const result = formUtils.getControlOptions(field, undefined, undefined, { id: 3, label: 'three' });
+      expect(result).toEqual([{ value: 3, label: 'three' }]);
     });
-    it('should return an array when there are WorkflowOptions and value has no id', () => {
+    it('should return initial options when value has no id', () => {
       const field: { workflowOptions: Object } = {
         workflowOptions: {
-          initial: [{ value: '1', label: '1' }],
-          2: [{ value: '2', label: '2' }],
+          initial: [{ value: 1, label: 'one' }, { value: 2, label: 'two' }],
+          1: [{ value: 2, label: 'two' }],
+          2: [{ value: 3, label: 'three' }],
+          3: [],
         },
       };
-      const expected: Array<{ value: string; label: string }> = [{ value: '1', label: '1' }];
       const result = formUtils.getControlOptions(field, undefined, undefined, { label: '2' });
-      expect(result).toEqual(expected);
+      expect(result).toEqual([{ value: 1, label: 'one' }, { value: 2, label: 'two' }]);
+    });
+    it('should return initial options when value is null', () => {
+      const field: { workflowOptions: Object } = {
+        workflowOptions: {
+          initial: [{ value: 1, label: 'one' }, { value: 2, label: 'two' }],
+          1: [{ value: 2, label: 'two' }],
+          2: [{ value: 3, label: 'three' }],
+          3: [],
+        },
+      };
+      const result = formUtils.getControlOptions(field, undefined, undefined, null);
+      expect(result).toEqual([{ value: 1, label: 'one' }, { value: 2, label: 'two' }]);
+    });
+    it('should return empty array when workflow options are missing', () => {
+      const field: { workflowOptions: Object } = {
+        workflowOptions: {},
+      };
+      const result = formUtils.getControlOptions(field, undefined, undefined, null);
+      expect(result).toEqual([]);
     });
     it('should return all options when there are SpecializedOptions', () => {
       const field: any = {
