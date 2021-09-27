@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.3.0](https://github.com/bullhorn/novo-elements/compare/v5.2.11...v5.3.0) (2021-09-27)
+
+
+### Features
+
+* **FormUtils:** Enable workflow options to be used in an initial state ([#1223](https://github.com/bullhorn/novo-elements/issues/1223)) ([217f541](https://github.com/bullhorn/novo-elements/commit/217f541bfc978079602230a151362eec82061dda))
+
 ### [5.2.11](https://github.com/bullhorn/novo-elements/compare/v5.2.10...v5.2.11) (2021-09-15)
 
 ### [5.2.10](https://github.com/bullhorn/novo-elements/compare/v5.2.9...v5.2.10) (2021-09-15)
