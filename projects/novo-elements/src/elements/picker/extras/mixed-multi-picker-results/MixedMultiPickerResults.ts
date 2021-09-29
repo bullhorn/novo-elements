@@ -17,6 +17,8 @@ export interface IMixedMultiPickerOption {
         filterValue?: any,
     }[];
     getSecondaryOptionsAsync?(): Promise<{value: string, label: string}[]>;
+    // TODO: Refactor to prevent the need for a behaviorSubject to allow primaryOption's secondaryOptions to be cleared
+    // Currently secondaryOptions cannot be cleared via FieldInteraction API and must use a behavior subject - this includes modifyPickerConfig
     clearSecondaryOptions?: BehaviorSubject<Boolean>;
     showSearchOnSecondaryOptions?: boolean;
 }
