@@ -69,7 +69,7 @@ export class FieldInteractionApi {
     private labels: NovoLabelService,
   ) { }
 
-  get associations() {
+  get associations(): object {
     return this.form.hasOwnProperty('associations') ? this.form.associations : {};
   }
 
@@ -254,6 +254,14 @@ export class FieldInteractionApi {
     if (control && !control.restrictFieldInteractions) {
       control.setRequired(required);
       this.triggerEvent({ controlKey: key, prop: 'required', value: required }, otherForm);
+    }
+  }
+
+  highlight(key: string, isHighlighted: boolean, otherForm?: NovoFormGroup): void {
+    const control = this.getControl(key, otherForm);
+    if (control && !control.restrictFieldInteractions) {
+      control.highlighted = isHighlighted;
+      this.triggerEvent({ controlKey: key, prop: 'highlight', value: isHighlighted }, otherForm);
     }
   }
 

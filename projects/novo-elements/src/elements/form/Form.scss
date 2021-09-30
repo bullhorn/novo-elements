@@ -395,6 +395,9 @@ novo-form {
                       &.maxlength-error {
                         border-bottom: 1px solid $negative !important;
                       }
+                      &.highlighted {
+                        background-color: lighten($ocean, 35%) !important;
+                      }
                     }
                     textarea {
                       font-size: 1em;
