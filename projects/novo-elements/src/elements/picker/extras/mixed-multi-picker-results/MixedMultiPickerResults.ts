@@ -65,7 +65,7 @@ export interface IMixedMultiPickerOption {
                 </novo-list-item>
             </novo-list>
             <div class="mixed-multi-picker-no-results" *ngIf="matches.length === 0 && !isLoading && selectedPrimaryOption" data-automation-id="empty-message">
-                {{ labels.groupedMultiPickerEmpty }}
+                {{ config.emptyOptionsLabel ? config.emptyOptionsLabel : labels.groupedMultiPickerEmpty }}
             </div>
             <div class="mixed-multi-picker-loading" *ngIf="isLoading" data-automation-id="loading-message">
                 <novo-loading theme="line"></novo-loading>
@@ -82,6 +82,7 @@ export class MixedMultiPickerResults extends BasePickerResults implements OnDest
     public selectedPrimaryOption: IMixedMultiPickerOption;
     public searchTerm: string;
     public placeholder: string = '';
+    public emptyOptionsLabel: string = '';
 
     private keyboardSubscription: Subscription;
 
