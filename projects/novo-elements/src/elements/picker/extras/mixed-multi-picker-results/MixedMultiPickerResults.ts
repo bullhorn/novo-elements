@@ -5,7 +5,7 @@ import { BasePickerResults } from '../base-picker-results/BasePickerResults';
 import { Helpers } from '../../../../utils/Helpers';
 import { NovoLabelService } from '../../../../services/novo-label-service';
 import { NovoListElement } from '../../../list/List';
-import { BehaviorSubject, fromEvent, Subscription } from 'rxjs';
+import { Subject, fromEvent, Subscription } from 'rxjs';
 
 
 export interface IMixedMultiPickerOption {
@@ -19,7 +19,7 @@ export interface IMixedMultiPickerOption {
     getSecondaryOptionsAsync?(): Promise<{value: string, label: string}[]>;
     // TODO: Refactor to prevent the need for a behaviorSubject to allow primaryOption's secondaryOptions to be cleared
     // Currently secondaryOptions cannot be cleared via FieldInteraction API and must use a behavior subject - this includes modifyPickerConfig
-    clearSecondaryOptions?: BehaviorSubject<Boolean>;
+    clearSecondaryOptions?: Subject<any>;
     showSearchOnSecondaryOptions?: boolean;
 }
 
@@ -113,6 +113,9 @@ export class MixedMultiPickerResults extends BasePickerResults implements OnDest
         // Cleanup
         if (this.keyboardSubscription) {
             this.keyboardSubscription.unsubscribe();
+        }
+        if (this.config.clearSecondaryOptions) {
+            this.config.clearSecondaryOptions.unsubscribe();
         }
     }
 
