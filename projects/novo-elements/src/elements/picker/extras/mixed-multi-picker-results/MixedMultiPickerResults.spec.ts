@@ -64,6 +64,7 @@ describe('Elements: MixedMultiPickerResults', () => {
     describe('Method: ngOnDestroy()', () => {
         it('should unsubscribe the keyboardSubscription', () => {
             component.keyboardSubscription = {unsubscribe: () => {}};
+            component.config = {options: []};
             spyOn(component.keyboardSubscription, 'unsubscribe').and.callThrough();
             component.ngOnDestroy();
             expect(component.keyboardSubscription.unsubscribe).toHaveBeenCalled();
