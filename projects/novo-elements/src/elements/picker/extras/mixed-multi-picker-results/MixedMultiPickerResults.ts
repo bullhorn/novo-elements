@@ -114,7 +114,7 @@ export class MixedMultiPickerResults extends BasePickerResults implements OnDest
         if (this.keyboardSubscription) {
             this.keyboardSubscription.unsubscribe();
         }
-        this.options.forEach(option => {
+        this.config.options.forEach(option => {
             if (option.clearSecondaryOptions) {
                 option.clearSecondaryOptions.unsubscribe();
             }
