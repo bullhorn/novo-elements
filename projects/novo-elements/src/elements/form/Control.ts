@@ -89,7 +89,7 @@ export class NovoAutoSize implements AfterContentInit {
                             [ngClass]="{'bhi-circle': !isValid, 'bhi-check': isValid}" *ngIf="!condensed || form.controls[control.key].required">
                         </i>
                         <!--Form Controls-->
-                        <div class="novo-control-input {{ form.controls[control.key].controlType }}" [attr.data-automation-id]="control.key" [class.control-disabled]="form.controls[control.key].disabled">
+                        <div class="novo-control-input {{ form.controls[control.key].controlType }}" [attr.data-automation-id]="control.key" [class.control-disabled]="form.controls[control.key].disabled" [class.highlighted]="form.controls[control.key].highlighted">
                             <!--TODO prefix/suffix on the control-->
                             <ng-container *ngIf="templates">
                               <ng-container *ngTemplateOutlet="templates[form.controls[control.key].controlType]; context: templateContext"></ng-container>

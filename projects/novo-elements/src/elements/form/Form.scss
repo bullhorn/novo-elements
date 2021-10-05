@@ -395,7 +395,9 @@ novo-form {
                       &.maxlength-error {
                         border-bottom: 1px solid $negative !important;
                       }
-                      &.highlighted {
+                    }
+                    &.highlighted {
+                      input {
                         background-color: lighten($ocean, 35%) !important;
                       }
                     }
