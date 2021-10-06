@@ -13,6 +13,7 @@ import {
 import { ElementRef } from '@angular/core';
 import { BasePickerResults } from '../base-picker-results/BasePickerResults';
 import { NovoFormModule } from '../../../form/Form.module';
+import { BehaviorSubject } from 'rxjs';
 
 
 describe('Elements: MixedMultiPickerResults', () => {
@@ -63,6 +64,7 @@ describe('Elements: MixedMultiPickerResults', () => {
     describe('Method: ngOnDestroy()', () => {
         it('should unsubscribe the keyboardSubscription', () => {
             component.keyboardSubscription = {unsubscribe: () => {}};
+            component.config = {options: []};
             spyOn(component.keyboardSubscription, 'unsubscribe').and.callThrough();
             component.ngOnDestroy();
             expect(component.keyboardSubscription.unsubscribe).toHaveBeenCalled();
@@ -195,6 +197,30 @@ describe('Elements: MixedMultiPickerResults', () => {
         });
     });
 
+    describe('Method: clearPrimaryOption(primaryOption: IMixedMultiPickerOption)', () => {
+        beforeEach(() => {
+            component.selectedPrimaryOption = {value: '3', label: 'GHI', getSecondaryOptionsAsync: () => {}};
+            component.internalMap.set('3', {value: '3', label: 'GHI', items: [{value: '3.1', label: '3-1'}]});
+        });
+        it('should clearPrimaryOption if primaryOption exists in internal map', () => {
+            component.clearPrimaryOption({value: '3', label: 'GHI'});
+            expect(component.internalMap.get(3)).toBe(undefined);
+        });
+        it('shouldn"t error if primaryOption doesn"t exists in internal map', () => {
+            component.clearPrimaryOption({value: '4', label: 'GHI'});
+            expect(component.internalMap.get(3)).toBe(component.internalMap.get(3));
+        });
+        it('should reset selectedPrimaryOption if primaryOption being cleared is selected', () => {
+            component.clearPrimaryOption({value: '3', label: 'GHI'});
+            expect(component.selectedPrimaryOption).toBe(null);
+        });
+        it('shouldn"t reset selectedPrimaryOption if primaryOption being cleared is not selected', () => {
+            component.internalMap.set('4', {value: '4', label: 'JKL', items: [{value: '4.1', label: '4-1'}]});
+            component.clearPrimaryOption({value: '4', label: 'JKL'});
+            expect(component.selectedPrimaryOption.value).toEqual('3');
+        });
+    });
+
     describe('Method: filterData())', () => {
         it('should return an empty array if there is no selectedPrimaryOption', () => {
             expect(component.filterData()).toEqual([]);
@@ -311,6 +337,12 @@ describe('Elements: MixedMultiPickerResults', () => {
             spyOn(primaryOption, 'getSecondaryOptionsAsync').and.callThrough();
             component.getNewMatches(primaryOption);
             expect(primaryOption.getSecondaryOptionsAsync).not.toHaveBeenCalled();
+        });
+        it('should subscribe clearSecondaryOptions if defined on primaryOption', () => {
+            const primaryOption = {value: '3', label: 'GHI', getSecondaryOptionsAsync: () => Promise.resolve(), clearSecondaryOptions: new BehaviorSubject<Boolean>(true)};
+            spyOn(primaryOption.clearSecondaryOptions, 'subscribe').and.callThrough();
+            component.getNewMatches(primaryOption);
+            expect(primaryOption.clearSecondaryOptions.subscribe).toHaveBeenCalled();
         });
     });
 });

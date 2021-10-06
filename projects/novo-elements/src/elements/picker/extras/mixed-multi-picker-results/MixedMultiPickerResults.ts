@@ -5,7 +5,7 @@ import { BasePickerResults } from '../base-picker-results/BasePickerResults';
 import { Helpers } from '../../../../utils/Helpers';
 import { NovoLabelService } from '../../../../services/novo-label-service';
 import { NovoListElement } from '../../../list/List';
-import { fromEvent, Subscription } from 'rxjs';
+import { Subject, fromEvent, Subscription } from 'rxjs';
 
 
 export interface IMixedMultiPickerOption {
@@ -17,6 +17,9 @@ export interface IMixedMultiPickerOption {
         filterValue?: any,
     }[];
     getSecondaryOptionsAsync?(): Promise<{value: string, label: string}[]>;
+    // TODO: Refactor to prevent the need for a behaviorSubject to allow primaryOption's secondaryOptions to be cleared
+    // Currently secondaryOptions cannot be cleared via FieldInteraction API and must use a behavior subject - this includes modifyPickerConfig
+    clearSecondaryOptions?: Subject<any>;
     showSearchOnSecondaryOptions?: boolean;
 }
 
@@ -62,7 +65,7 @@ export interface IMixedMultiPickerOption {
                 </novo-list-item>
             </novo-list>
             <div class="mixed-multi-picker-no-results" *ngIf="matches.length === 0 && !isLoading && selectedPrimaryOption" data-automation-id="empty-message">
-                {{ labels.groupedMultiPickerEmpty }}
+                {{ config.emptyOptionsLabel ? config.emptyOptionsLabel : labels.groupedMultiPickerEmpty }}
             </div>
             <div class="mixed-multi-picker-loading" *ngIf="isLoading" data-automation-id="loading-message">
                 <novo-loading theme="line"></novo-loading>
@@ -79,6 +82,7 @@ export class MixedMultiPickerResults extends BasePickerResults implements OnDest
     public selectedPrimaryOption: IMixedMultiPickerOption;
     public searchTerm: string;
     public placeholder: string = '';
+    public emptyOptionsLabel: string = '';
 
     private keyboardSubscription: Subscription;
 
@@ -109,6 +113,13 @@ export class MixedMultiPickerResults extends BasePickerResults implements OnDest
         // Cleanup
         if (this.keyboardSubscription) {
             this.keyboardSubscription.unsubscribe();
+        }
+        if (this.config.options) {
+            this.config.options.forEach(option => {
+                if (option.clearSecondaryOptions) {
+                    option.clearSecondaryOptions.unsubscribe();
+                }
+            });
         }
     }
 
@@ -166,6 +177,18 @@ export class MixedMultiPickerResults extends BasePickerResults implements OnDest
         return !!(primaryOption && primaryOption.showSearchOnSecondaryOptions);
     }
 
+    public clearPrimaryOption(primaryOption: IMixedMultiPickerOption) {
+        if (this.internalMap.get(primaryOption.value)) {
+            if (primaryOption.value === this.selectedPrimaryOption?.value) {
+                this.activeMatch = null;
+                this.matches = [];
+                this.selectedPrimaryOption = null;
+            }
+            this.internalMap.delete(primaryOption.value);
+            this.ref.markForCheck();
+        }
+    }
+
     filterData(): { value: string; label: string }[] {
         if (this.selectedPrimaryOption) {
             if (this.selectedPrimaryOption.secondaryOptions) {
@@ -212,6 +235,11 @@ export class MixedMultiPickerResults extends BasePickerResults implements OnDest
                         this.inputElement.nativeElement.focus();
                     });
                 });
+                if (primaryOption.clearSecondaryOptions) {
+                    primaryOption.clearSecondaryOptions.subscribe(() => {
+                        this.clearPrimaryOption(primaryOption);
+                    });
+                }
             } else {
                 this.matches = this.filter(this.internalMap.get(primaryOption.value).items);
                 this.ref.markForCheck();
