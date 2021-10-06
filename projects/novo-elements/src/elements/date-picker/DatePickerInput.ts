@@ -231,6 +231,8 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
     if (this.value) {
       const test = this.formatDateValue(this.value);
       this.formattedValue = test;
+    } else {
+      this.formattedValue = '';
     }
   }
 
