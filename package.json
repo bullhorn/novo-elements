@@ -78,6 +78,7 @@
     "@angular/platform-browser-dynamic": "~10.2.4",
     "@angular/platform-server": "~10.2.4",
     "@angular/router": "~10.2.4",
+    "@bullhorn/connect": "^1.4.0",
     "@bullhorn/dragula": "1.0.1",
     "ace-builds": "~1.4.12",
     "angular2-text-mask": "9.0.0",

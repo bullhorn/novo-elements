@@ -7,7 +7,6 @@ import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 // APP
 import { Helpers } from '../../utils/Helpers';
-import { AppBridge } from '../../utils/app-bridge/AppBridge';
 import { FormUtils } from '../../utils/form-utils/FormUtils';
 import { NovoLabelService } from '../../services/novo-label-service';
 import { NovoFormControl } from './NovoFormControl';
@@ -18,6 +17,7 @@ import { CustomHttp, ModifyPickerConfigArgs, OptionsFunction } from './FieldInte
 import { ControlConfirmModal, ControlPromptModal } from './FieldInteractionModals';
 import { NovoControlConfig } from './FormControls';
 import { IFieldInteractionEvent, NovoFieldset, NovoFormGroup, ResultsTemplateType } from './FormInterfaces';
+import { AppBridge } from '@bullhorn/connect';
 
 class CustomHttpImpl implements CustomHttp {
   url: string;

@@ -308,13 +308,9 @@ export { Security } from './services/security/Security';
 export { LocalStorageService } from './services/storage/storage.service';
 export { NovoTemplateService } from './services/template/NovoTemplateService';
 export {
-  AppBridge,
-  AppBridgeHandler,
-  AppBridgeService,
   DevAppBridge,
   DevAppBridgeService,
-  IAppBridgeOpenEvent,
-} from './utils/app-bridge/AppBridge';
+} from './utils/app-bridge/DevAppBridge';
 export {
   CalendarEvent,
   CalendarEventResponse,
