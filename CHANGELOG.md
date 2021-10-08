@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.4.0](https://github.com/bullhorn/novo-elements/compare/v5.3.0...v5.4.0) (2021-10-06)
+
+
+### Features
+
+* **MixedMultiPicker:** Allow secondaryOptions to be cleared and reset on a primary option ([#1221](https://github.com/bullhorn/novo-elements/issues/1221)) ([c918232](https://github.com/bullhorn/novo-elements/commit/c91823251f4e33ae763fb8f89fcf16ce20cc5f35))
+
 ## [5.3.0](https://github.com/bullhorn/novo-elements/compare/v5.2.11...v5.3.0) (2021-09-27)
 
 
