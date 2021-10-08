@@ -42,7 +42,9 @@ xdescribe('Elements: NovoDatePickerInputElement', () => {
       expect(component._setFormValue).toHaveBeenCalled();
       expect(component.formattedValue).toEqual('');
     });
-    it('should set formattedValue to empty string if value is undefined', () => {
+    it('should set formattedValue to empty string if value changed back to undefined', () => {
+      const now = new Date();
+      component._setTriggerValue(now);
       component._setTriggerValue(undefined);
       expect(component._setFormValue).toHaveBeenCalled();
       expect(component.formattedValue).toEqual('');
