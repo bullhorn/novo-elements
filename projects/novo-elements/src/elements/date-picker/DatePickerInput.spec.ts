@@ -32,4 +32,15 @@ xdescribe('Elements: NovoDatePickerInputElement', () => {
       expect(component.dispatchOnChange).toHaveBeenCalled();
     });
   });
+
+  describe('Method: _setFormValue()', () => {
+    beforeEach(() => {
+      spyOn(component, '_setFormValue');
+    });
+    it('should set formattedValue to empty string if value is null', () => {
+      component._setTriggerValue(null);
+      expect(component._setFormValue).toHaveBeenCalled();
+      expect(component.formattedValue).toEqual('');
+    });
+  });
 });
