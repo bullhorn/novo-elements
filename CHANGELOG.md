@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.5.0](https://github.com/bullhorn/novo-elements/compare/v5.4.0...v5.5.0) (2021-10-08)
+
+
+### Features
+
+* **Forms:** Enable highlighting of fields ([#1224](https://github.com/bullhorn/novo-elements/issues/1224)) ([7004fab](https://github.com/bullhorn/novo-elements/commit/7004fabbf436ae1462158cb367a4e90fb9b99071))
+
 ## [5.4.0](https://github.com/bullhorn/novo-elements/compare/v5.3.0...v5.4.0) (2021-10-06)
 
 
