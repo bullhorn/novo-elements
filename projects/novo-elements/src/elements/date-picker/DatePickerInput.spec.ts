@@ -33,12 +33,17 @@ xdescribe('Elements: NovoDatePickerInputElement', () => {
     });
   });
 
-  describe('Method: _setFormValue()', () => {
+  describe('Method: _setTriggerValue()', () => {
     beforeEach(() => {
       spyOn(component, '_setFormValue');
     });
     it('should set formattedValue to empty string if value is null', () => {
       component._setTriggerValue(null);
+      expect(component._setFormValue).toHaveBeenCalled();
+      expect(component.formattedValue).toEqual('');
+    });
+    it('should set formattedValue to empty string if value is undefined', () => {
+      component._setTriggerValue(undefined);
       expect(component._setFormValue).toHaveBeenCalled();
       expect(component.formattedValue).toEqual('');
     });
