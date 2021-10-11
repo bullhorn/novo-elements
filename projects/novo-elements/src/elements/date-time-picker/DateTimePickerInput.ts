@@ -150,7 +150,7 @@ export class NovoDateTimePickerInputElement implements ControlValueAccessor {
     }
   }
   private _setTriggerValue(value: any): void {
-    if (value) {
+    if (null !== value) {
       this.value = value;
     } else {
       this.value = '';
