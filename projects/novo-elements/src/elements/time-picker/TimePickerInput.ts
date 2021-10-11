@@ -174,16 +174,25 @@ export class NovoTimePickerInputElement implements OnInit, ControlValueAccessor 
   }
 
   private _setTriggerValue(value: any): void {
+    this._setCalendarValue(value);
+    this._setFormValue(value);
+    this._changeDetectorRef.markForCheck();
+  }
+
+  private _setCalendarValue(value: any): void {
     if (value instanceof Date && this.value instanceof Date) {
       value = new Date(value.setFullYear(this.value.getFullYear(), this.value.getMonth(), this.value.getDate()));
     }
     this.value = value;
+  }
+
+  private _setFormValue(value: any): void {
     if (this.value) {
-      this.formattedValue = this.formatDateValue(this.value);
+      const test = this.formatDateValue(this.value);
+      this.formattedValue = test;
     } else {
       this.formattedValue = '';
     }
-    this._changeDetectorRef.markForCheck();
   }
 
   public setValue(event: any | null): void {
