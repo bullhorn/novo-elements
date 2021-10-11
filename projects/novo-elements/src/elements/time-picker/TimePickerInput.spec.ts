@@ -6,7 +6,7 @@ import { NovoTimePickerModule } from './TimePicker.module';
 import { DateFormatService } from '../../services/date-format/DateFormat';
 import {NovoTimePickerInputElement} from './TimePickerInput';
 
-xdescribe('Elements: NovoTimePickerInputElement', () => {
+describe('Elements: NovoTimePickerInputElement', () => {
   let fixture;
   let component;
 
