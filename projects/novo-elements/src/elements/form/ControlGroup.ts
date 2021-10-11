@@ -172,8 +172,6 @@ export class NovoControlGroup implements AfterContentInit, OnChanges, OnDestroy 
       controlsArray.push(nestedFormGroup);
     } else {
       this.form.addControl(this.key, this.fb.array([nestedFormGroup]));
-      // Ensure that field interaction changes for nested forms originating from outside the form will be reflected in the nested elements
-      nestedFormGroup.fieldInteractionEvents.subscribe(this.onFieldInteractionEvent.bind(this));
     }
     this.disabledArray.push({
       edit: true,
@@ -185,6 +183,8 @@ export class NovoControlGroup implements AfterContentInit, OnChanges, OnDestroy 
     }
     this.currentIndex++;
     this.assignIndexes();
+    // Ensure that field interaction changes for nested forms originating from outside the form will be reflected in the nested elements
+    nestedFormGroup.fieldInteractionEvents.subscribe(this.onFieldInteractionEvent.bind(this));
     this.ref.markForCheck();
   }
 
