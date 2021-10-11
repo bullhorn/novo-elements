@@ -180,6 +180,8 @@ export class NovoTimePickerInputElement implements OnInit, ControlValueAccessor 
     this.value = value;
     if (this.value) {
       this.formattedValue = this.formatDateValue(this.value);
+    } else {
+      this.formattedValue = '';
     }
     this._changeDetectorRef.markForCheck();
   }

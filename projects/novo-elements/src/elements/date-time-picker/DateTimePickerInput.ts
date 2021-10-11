@@ -77,8 +77,8 @@ export class NovoDateTimePickerInputElement implements ControlValueAccessor {
   constructor(public element: ElementRef, public labels: NovoLabelService, private _changeDetectorRef: ChangeDetectorRef) { }
 
   writeValue(value: any): void {
-    this.datePart = isDate(value) ? parse(value) : '';
-    this.timePart = isDate(value) ? parse(value) : '';
+    this.datePart = isDate(value) ? parse(value) : value;
+    this.timePart = isDate(value) ? parse(value) : value;
     Promise.resolve(null).then(() => this._setTriggerValue(value));
   }
   updateDate(event) {
@@ -150,11 +150,7 @@ export class NovoDateTimePickerInputElement implements ControlValueAccessor {
     }
   }
   private _setTriggerValue(value: any): void {
-    if (null != value) {
-      this.value = value;
-    } else {
-      this.value = '';
-    }
+    this.value = value;
     this._changeDetectorRef.markForCheck();
   }
 
