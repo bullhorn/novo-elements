@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [5.5.2](https://github.com/bullhorn/novo-elements/compare/v5.5.1...v5.5.2) (2021-10-11)
+
+
+### Bug Fixes
+
+* **form:** Added blank value for Date Picker reset ([#1227](https://github.com/bullhorn/novo-elements/issues/1227)) ([67aada5](https://github.com/bullhorn/novo-elements/commit/67aada51a9486b1758c420cff481fcf3ad7bbc0a))
+
 ### [5.5.1](https://github.com/bullhorn/novo-elements/compare/v5.5.0...v5.5.1) (2021-10-08)
 
 ## [5.5.0](https://github.com/bullhorn/novo-elements/compare/v5.4.0...v5.5.0) (2021-10-08)
