@@ -54,12 +54,17 @@ export class FiNestedExample {
         const doubleTimeForm = API.getParent().controls[2];
         if (overtimeForm) {
           API.setValue(API.getActiveKey(), API.getActiveValue() + ' - OT', { emitEvent: false }, overtimeForm);
-          API.setReadOnly(API.getActiveKey(), true, overtimeForm);
+          // Highlight value to show that it has been automatically updated
+          API.highlight(API.getActiveKey(), true, overtimeForm);
         }
         if (doubleTimeForm) {
           API.setValue(API.getActiveKey(), API.getActiveValue() + ' - DT', { emitEvent: false }, doubleTimeForm);
-          API.setReadOnly(API.getActiveKey(), true, doubleTimeForm);
+          // Highlight value to show that it has been automatically updated
+          API.highlight(API.getActiveKey(), true, doubleTimeForm);
         }
+      } else {
+        // Remove highlight since it is being changed by the user. Highlights can be used for any purpose, it doesn't have to be as in this example.
+        API.highlight(API.getActiveKey(), false);
       }
     };
 
