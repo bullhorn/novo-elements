@@ -162,28 +162,28 @@ export class AppBridge {
     postRobot.on(MESSAGE_TYPES.REGISTER, (event) => {
       this._trace(MESSAGE_TYPES.REGISTER, event);
       this._registeredFrames.push(event);
-        return this.register(event.data).then(windowName => {
-          return { windowName };
+      return this.register(event.data).then(windowName => {
+        return { windowName };
       });
     });
     // Update
     postRobot.on(MESSAGE_TYPES.UPDATE, (event) => {
       this._trace(MESSAGE_TYPES.UPDATE, event);
-        return this.update(event.data).then(success => {
-          return { success };
+      return this.update(event.data).then(success => {
+        return { success };
       });
     });
     // Open
     postRobot.on(MESSAGE_TYPES.OPEN, (event) => {
       this._trace(MESSAGE_TYPES.OPEN, event);
-        return this.open(event.data).then(success => {
-          return { success };
+      return this.open(event.data).then(success => {
+        return { success };
       });
     });
     postRobot.on(MESSAGE_TYPES.OPEN_LIST, (event) => {
       this._trace(MESSAGE_TYPES.OPEN_LIST, event);
-        return this.openList(event.data).then(success => {
-          return { success };
+      return this.openList(event.data).then(success => {
+        return { success };
       });
     });
     // Close
@@ -269,7 +269,7 @@ export class AppBridge {
         });
       }
       if (this._registeredFrames.length > 0) {
-          this._registeredFrames.forEach(frame => {
+        this._registeredFrames.forEach(frame => {
           postRobot.send(frame.source, MESSAGE_TYPES.CUSTOM_EVENT, event.data);
         });
       }
