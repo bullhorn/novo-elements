@@ -162,87 +162,87 @@ export class AppBridge {
     postRobot.on(MESSAGE_TYPES.REGISTER, (event) => {
       this._trace(MESSAGE_TYPES.REGISTER, event);
       this._registeredFrames.push(event);
-            return this.register(event.data).then(windowName => {
-        return { windowName };
+        return this.register(event.data).then(windowName => {
+          return { windowName };
       });
     });
     // Update
     postRobot.on(MESSAGE_TYPES.UPDATE, (event) => {
       this._trace(MESSAGE_TYPES.UPDATE, event);
-            return this.update(event.data).then(success => {
-        return { success };
+        return this.update(event.data).then(success => {
+          return { success };
       });
     });
     // Open
     postRobot.on(MESSAGE_TYPES.OPEN, (event) => {
       this._trace(MESSAGE_TYPES.OPEN, event);
-            return this.open(event.data).then(success => {
-        return { success };
+        return this.open(event.data).then(success => {
+          return { success };
       });
     });
     postRobot.on(MESSAGE_TYPES.OPEN_LIST, (event) => {
       this._trace(MESSAGE_TYPES.OPEN_LIST, event);
-            return this.openList(event.data).then(success => {
-        return { success };
+        return this.openList(event.data).then(success => {
+          return { success };
       });
     });
     // Close
     postRobot.on(MESSAGE_TYPES.CLOSE, (event) => {
       this._trace(MESSAGE_TYPES.CLOSE, event);
-            const index = this._registeredFrames.findIndex(frame => frame.data.id === event.data.id);
+      const index = this._registeredFrames.findIndex(frame => frame.data.id === event.data.id);
       if (index !== -1) {
         this._registeredFrames.splice(index, 1);
       }
-            return this.close(event.data).then(success => {
+      return this.close(event.data).then(success => {
         return { success };
       });
     });
     // Refresh
     postRobot.on(MESSAGE_TYPES.REFRESH, (event) => {
       this._trace(MESSAGE_TYPES.REFRESH, event);
-            return this.refresh(event.data).then(success => {
+      return this.refresh(event.data).then(success => {
         return { success };
       });
     });
     // PIN
     postRobot.on(MESSAGE_TYPES.PIN, (event) => {
       this._trace(MESSAGE_TYPES.PIN, event);
-            return this.pin(event.data).then(success => {
+      return this.pin(event.data).then(success => {
         return { success };
       });
     });
-        // PING
-        postRobot.on(MESSAGE_TYPES.PING, (event) => {
-            this._trace(MESSAGE_TYPES.PING, event);
-            return this.httpGET('ping').then(result => {
-                return { data: result.data, error: result.error };
-            });
-        });
+    // PING
+    postRobot.on(MESSAGE_TYPES.PING, (event) => {
+      this._trace(MESSAGE_TYPES.PING, event);
+      return this.httpGET('ping').then(result => {
+        return { data: result.data, error: result.error };
+      });
+    });
     // REQUEST_DATA
     postRobot.on(MESSAGE_TYPES.REQUEST_DATA, (event) => {
       this._trace(MESSAGE_TYPES.REQUEST_DATA, event);
-            return this.requestData(event.data).then(result => {
+      return this.requestData(event.data).then(result => {
         return { data: result.data, error: result.error };
       });
     });
     // CALLBACKS
     postRobot.on(MESSAGE_TYPES.CALLBACK, (event) => {
       this._trace(MESSAGE_TYPES.CALLBACK, event);
-            return this.callback(event.data).then(success => {
+      return this.callback(event.data).then(success => {
         return { success };
       });
     });
     // HTTP-GET
     postRobot.on(MESSAGE_TYPES.HTTP_GET, (event) => {
       this._trace(MESSAGE_TYPES.HTTP_GET, event);
-            return this.httpGET(event.data.relativeURL).then(result => {
+      return this.httpGET(event.data.relativeURL).then(result => {
         return { data: result.data, error: result.error };
       });
     });
     // HTTP-POST
     postRobot.on(MESSAGE_TYPES.HTTP_POST, (event) => {
       this._trace(MESSAGE_TYPES.HTTP_POST, event);
-            return this.httpPOST(event.data.relativeURL, event.data.data).then(result => {
+      return this.httpPOST(event.data.relativeURL, event.data.data).then(result => {
         return { data: result.data, error: result.error };
       });
     });
@@ -256,7 +256,7 @@ export class AppBridge {
     // HTTP-DELETE
     postRobot.on(MESSAGE_TYPES.HTTP_DELETE, (event) => {
       this._trace(MESSAGE_TYPES.HTTP_DELETE, event);
-            return this.httpDELETE(event.data.relativeURL).then(result => {
+      return this.httpDELETE(event.data.relativeURL).then(result => {
         return { data: result.data, error: result.error };
       });
     });
@@ -269,7 +269,7 @@ export class AppBridge {
         });
       }
       if (this._registeredFrames.length > 0) {
-                this._registeredFrames.forEach(frame => {
+          this._registeredFrames.forEach(frame => {
           postRobot.send(frame.source, MESSAGE_TYPES.CUSTOM_EVENT, event.data);
         });
       }
@@ -449,19 +449,19 @@ export class AppBridge {
   }
 
     public ping(): Promise<boolean> {
-        return new Promise<any>((resolve, reject) => {
-            if (this._handlers[AppBridgeHandler.PING]) {
-                this._handlers[AppBridgeHandler.PING]({}, (data: any, error: any) => {
-                    resolve({ data, error });
-                });
-            } else {
-                postRobot.sendToParent(MESSAGE_TYPES.PING, {}).then((event: any) => {
-                    resolve({ data: event.data.data, error: event.data.error });
-                }).catch((err) => {
-                    reject(null);
-                });
-            }
-        });
+      return new Promise<any>((resolve, reject) => {
+        if (this._handlers[AppBridgeHandler.PING]) {
+          this._handlers[AppBridgeHandler.PING]({}, (data: any, error: any) => {
+            resolve({ data, error });
+          });
+        } else {
+          postRobot.sendToParent(MESSAGE_TYPES.PING, {}).then((event: any) => {
+            resolve({ data: event.data.data, error: event.data.error });
+          }).catch((err) => {
+            reject(null);
+          });
+        }
+      });
     }
 
   /**
@@ -717,9 +717,9 @@ export class AppBridge {
    */
   public fireEventToChildren(event: string, data: any): void {
     if (this._registeredFrames.length > 0) {
-            this._registeredFrames.forEach(frame => {
+      this._registeredFrames.forEach(frame => {
         postRobot.send(frame.source, MESSAGE_TYPES.CUSTOM_EVENT, {
-                    event: event,
+          event: event,
           eventType: event,
           data,
         });
@@ -734,10 +734,10 @@ export class AppBridge {
      * @param data any - data to be sent along with the event
      */
     public fireEventToChild(source: Window | HTMLIFrameElement, event: string, data: any): void {
-        if (source instanceof HTMLIFrameElement) {
-            source = source.contentWindow;
-        }
-        postRobot.send(source, MESSAGE_TYPES.CUSTOM_EVENT, { event, data });
+      if (source instanceof HTMLIFrameElement) {
+        source = source.contentWindow;
+      }
+      postRobot.send(source, MESSAGE_TYPES.CUSTOM_EVENT, { event, data });
     }
 
   /**
