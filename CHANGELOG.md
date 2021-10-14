@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.6.0](https://github.com/bullhorn/novo-elements/compare/v5.5.2...v5.6.0) (2021-10-14)
+
+
+### Features
+
+* Updating AppBridge from Bullhorn/Connect. ([#1228](https://github.com/bullhorn/novo-elements/issues/1228)) ([6d249b4](https://github.com/bullhorn/novo-elements/commit/6d249b4d99db758f553fa42dded067b55d74bcd6))
+
 ### [5.5.2](https://github.com/bullhorn/novo-elements/compare/v5.5.1...v5.5.2) (2021-10-11)
 
 
