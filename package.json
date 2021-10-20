@@ -8,6 +8,8 @@
     "build": "ng build novo-elements && ng build chomsky",
     "postbuild": "npm run copy-scss && npm run build:examples",
     "postinstall": "npm run prettier -s",
+    "build:ci": "ng build novo-elements --configuration production && ng build chomsky --configuration production",
+    "postbuild:ci": "npm run copy-scss",
     "build:watch": "ng build novo-elements --watch",
     "build:chomsky": "ng build chomsky",
     "build:chomsky:watch": "ng build chomsky --watch",
@@ -26,6 +28,7 @@
     "lint:scss": "stylelint \"projects/**/*.scss\" --syntax scss",
     "compat": "ngcc ... --tsconfig './projects/novo-elements/tsconfig.lib.json'",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
+    "version:elements": "standard-version",
     "release:elements": "standard-version",
     "postrelease:elements": "git push --follow-tags origin master; npm run build; cd dist/novo-elements && npm publish",
     "snapshot-publish": "bash snapshot-publish",
@@ -39,13 +42,15 @@
     ],
     "globals": {
       "ts-jest": {
-        "tsConfig": "<rootDir>/projects/novo-elements/tsconfig.spec.json",
+        "tsconfig": "<rootDir>/projects/novo-elements/tsconfig.spec.json",
         "diagnostics": true,
         "stringifyContentPathRegex": "\\.html$",
-        "astTransformers": [
-          "jest-preset-angular/build/InlineFilesTransformer",
-          "jest-preset-angular/build/StripStylesTransformer"
-        ]
+        "astTransformers": {
+          "before": [
+            "jest-preset-angular/build/InlineFilesTransformer",
+            "jest-preset-angular/build/StripStylesTransformer"
+          ]
+        }
       }
     },
     "collectCoverage": true,
@@ -63,16 +68,16 @@
     "testURL": "http://localhost"
   },
   "dependencies": {
-    "@angular/animations": "~10.0.10",
-    "@angular/cdk": "^10.1.3",
-    "@angular/common": "~10.0.10",
-    "@angular/compiler": "~10.0.10",
-    "@angular/core": "~10.0.10",
-    "@angular/forms": "~10.0.10",
-    "@angular/platform-browser": "~10.0.10",
-    "@angular/platform-browser-dynamic": "~10.0.10",
-    "@angular/platform-server": "~10.0.10",
-    "@angular/router": "~10.0.10",
+    "@angular/animations": "~10.2.4",
+    "@angular/cdk": "~10.2.7",
+    "@angular/common": "~10.2.4",
+    "@angular/compiler": "~10.2.4",
+    "@angular/core": "~10.2.4",
+    "@angular/forms": "~10.2.4",
+    "@angular/platform-browser": "~10.2.4",
+    "@angular/platform-browser-dynamic": "~10.2.4",
+    "@angular/platform-server": "~10.2.4",
+    "@angular/router": "~10.2.4",
     "@bullhorn/dragula": "1.0.1",
     "@qiwi/mixin": "^1.2.6",
     "ace-builds": "~1.4.12",
@@ -89,11 +94,11 @@
     "zone.js": "~0.10.3"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~0.1000.5",
-    "@angular-devkit/build-ng-packagr": "~0.1000.5",
+    "@angular-devkit/build-angular": "~0.1002.3",
+    "@angular-devkit/build-ng-packagr": "~0.1002.3",
     "@angular/cli": "^10.0.5",
-    "@angular/compiler-cli": "~10.0.10",
-    "@angular/language-service": "~10.0.10",
+    "@angular/compiler-cli": "~10.2.4",
+    "@angular/language-service": "~10.2.4",
     "@bullhorn/bullhorn-icons": "^2.16.1",
     "@types/glob": "^7.1.3",
     "@types/jest": "~26.0.9",
@@ -107,20 +112,20 @@
     "husky": "^4.2.3",
     "jasmine-core": "~3.6.0",
     "jest": "~26.3.0",
-    "jest-preset-angular": "~8.2.1",
+    "jest-preset-angular": "~8.3.2",
     "markdown-it": "^8.4.2",
     "ng-packagr": "^10.0.3",
-    "prettier": "^2.0.5",
+    "prettier": "^2.2.1",
     "prettier-plugin-organize-imports": "^1.1.1",
     "pretty-quick": "^2.0.1",
-    "standard-version": "^8.0.2",
+    "standard-version": "^9.1.0",
     "stylelint": "~13.2.1",
     "stylelint-config-prettier": "^8.0.1",
     "stylelint-config-recommended-scss": "~4.2.0",
     "stylelint-config-standard": "~20.0.0",
     "stylelint-scss": "~3.16.0",
     "ts-jest": "~26.4.0",
-    "ts-node": "~8.10.2",
+    "ts-node": "~9.1.1",
     "tslint": "~6.1.3",
     "tslint-config-prettier": "^1.14.0",
     "typescript": "3.9.7"
