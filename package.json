@@ -42,7 +42,7 @@
     ],
     "globals": {
       "ts-jest": {
-        "tsconfig": "<rootDir>/projects/novo-elements/tsconfig.spec.json",
+        "tsConfig": "<rootDir>/projects/novo-elements/tsconfig.spec.json",
         "diagnostics": true,
         "stringifyContentPathRegex": "\\.html$",
         "astTransformers": [
