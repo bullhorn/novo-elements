@@ -46,8 +46,8 @@ describe('FieldInteractionApi', () => {
   beforeEach(inject([FieldInteractionApi], (_service) => {
     service = _service;
     service.form = { controls: { doughnuts: { restrictFieldInteractions: false } } };
-    triggerEvent = jest.spyOn(service as any, 'triggerEvent');
-    setProperty = jest.spyOn(service as any, 'setProperty');
+    triggerEvent = spyOn(service as any, 'triggerEvent');
+    setProperty = spyOn(service as any, 'setProperty');
   }));
 
   describe('Function: addPropertiesToPickerConfig', () => {
@@ -189,13 +189,13 @@ describe('FieldInteractionApi', () => {
       expect(service.getFieldSet).toBeDefined();
     });
     it('should return null and log to console if no key', () => {
-      jest.spyOn(console, 'error');
+      spyOn(console, 'error');
       const returnValue = service.getFieldSet(null);
       expect(returnValue).toBeNull();
       expect(console.error).toBeCalled();
     });
     it('should return null and log to console if no match for key', () => {
-      jest.spyOn(console, 'error');
+      spyOn(console, 'error');
       const returnValue = service.getFieldSet('test1');
       expect(returnValue).toBeNull();
       expect(console.error).toBeCalled();
@@ -228,19 +228,19 @@ describe('FieldInteractionApi', () => {
       expect(service.getFormGroupArray).toBeDefined();
     });
     it('should log to console if no key', () => {
-      jest.spyOn(console, 'error');
+      spyOn(console, 'error');
       const returnValue = service.getFormGroupArray(null);
       expect(returnValue).toBeNull();
       expect(console.error).toBeCalled();
     });
     it('should log to console if no match for key', () => {
-      jest.spyOn(console, 'error');
+      spyOn(console, 'error');
       const returnValue = service.getFormGroupArray('bogus');
       expect(returnValue).toBeNull();
       expect(console.error).toBeCalled();
     });
     it('should get the form group array when key exists', () => {
-      jest.spyOn(console, 'error');
+      spyOn(console, 'error');
       const formGroupArray = service.getFormGroupArray('myFormGroupArray', service.getParent());
       expect(formGroupArray.length).toBe(3);
       expect(service.getValue('group1Control', formGroupArray[0])).toBe(1);
@@ -256,38 +256,38 @@ describe('FieldInteractionApi', () => {
         controls: { myControl: { value: 1 } },
         parent: {
           controls: { parentControl: { value: 2 } },
-        }
+        },
       };
     });
     it('is defined', () => {
       expect(service.getValue).toBeDefined();
     });
     it('should log to console if no key', () => {
-      jest.spyOn(console, 'error');
+      spyOn(console, 'error');
       const returnValue = service.getValue(null);
       expect(returnValue).toBeNull();
       expect(console.error).toBeCalled();
     });
     it('should log to console if no match for key', () => {
-      jest.spyOn(console, 'error');
+      spyOn(console, 'error');
       const returnValue = service.getValue('myControl1');
       expect(returnValue).toBeNull();
       expect(console.error).toBeCalled();
     });
     it('should get value when key exists', () => {
-      jest.spyOn(console, 'error');
+      spyOn(console, 'error');
       const returnValue = service.getValue('myControl');
       expect(returnValue).toBe(1);
       expect(console.error).not.toBeCalled();
     });
     it('should get value on current form when provided as argument', () => {
-      jest.spyOn(console, 'error');
+      spyOn(console, 'error');
       const returnValue = service.getValue('myControl', service.form);
       expect(returnValue).toBe(1);
       expect(console.error).not.toBeCalled();
     });
     it('should get value on parent form when provided as argument', () => {
-      jest.spyOn(console, 'error');
+      spyOn(console, 'error');
       const returnValue = service.getValue('parentControl', service.getParent());
       expect(returnValue).toBe(2);
       expect(console.error).not.toBeCalled();
@@ -303,55 +303,55 @@ describe('FieldInteractionApi', () => {
         },
         parent: {
           controls: { parentControl: { setValue: () => {} } },
-        }
+        },
       };
     });
     it('is defined', () => {
       expect(service.setValue).toBeDefined();
     });
     it('should log to console if no key', () => {
-      jest.spyOn(service.form.controls.myControl, 'setValue');
-      jest.spyOn(console, 'error');
+      spyOn(service.form.controls.myControl, 'setValue');
+      spyOn(console, 'error');
       service.setValue(null, null);
       expect(service.form.controls.myControl.setValue).not.toBeCalled();
       expect(triggerEvent).not.toBeCalled();
       expect(console.error).toBeCalled();
     });
     it('should log to console if no match for key', () => {
-      jest.spyOn(service.form.controls.myControl, 'setValue');
-      jest.spyOn(console, 'error');
+      spyOn(service.form.controls.myControl, 'setValue');
+      spyOn(console, 'error');
       service.setValue('myControl1', null);
       expect(service.form.controls.myControl.setValue).not.toBeCalled();
       expect(triggerEvent).not.toBeCalled();
       expect(console.error).toBeCalled();
     });
     it('should set value when key exists', () => {
-      jest.spyOn(service.form.controls.myControl, 'setValue');
-      jest.spyOn(console, 'error');
+      spyOn(service.form.controls.myControl, 'setValue');
+      spyOn(console, 'error');
       service.setValue('myControl', 1);
       expect(service.form.controls.myControl.setValue).toBeCalled();
       expect(triggerEvent).toBeCalledWith({ controlKey: 'myControl', prop: 'value', value: 1 }, undefined);
       expect(console.error).not.toBeCalled();
     });
     it('should set value on current form when provided as argument', () => {
-      jest.spyOn(service.form.controls.myControl, 'setValue');
-      jest.spyOn(console, 'error');
+      spyOn(service.form.controls.myControl, 'setValue');
+      spyOn(console, 'error');
       service.setValue('myControl', 1, {}, service.form);
       expect(service.form.controls.myControl.setValue).toBeCalled();
       expect(triggerEvent).toBeCalledWith({ controlKey: 'myControl', prop: 'value', value: 1 }, service.form);
       expect(console.error).not.toBeCalled();
     });
     it('should do nothing when field interactions are restricted', () => {
-      jest.spyOn(service.form.controls.restrictedControl, 'setValue');
-      jest.spyOn(console, 'error');
+      spyOn(service.form.controls.restrictedControl, 'setValue');
+      spyOn(console, 'error');
       service.setValue('restrictedControl', 1);
       expect(service.form.controls.restrictedControl.setValue).not.toBeCalled();
       expect(triggerEvent).not.toBeCalled();
       expect(console.error).not.toBeCalled();
     });
     it('should set value on parent form when provided as argument', () => {
-      jest.spyOn(service.form.parent.controls.parentControl, 'setValue');
-      jest.spyOn(console, 'error');
+      spyOn(service.form.parent.controls.parentControl, 'setValue');
+      spyOn(console, 'error');
       service.setValue('parentControl', 1, {}, service.getParent());
       expect(service.form.parent.controls.parentControl.setValue).toBeCalled();
       expect(triggerEvent).toBeCalledWith({ controlKey: 'parentControl', prop: 'value', value: 1 }, service.form.parent);
@@ -364,8 +364,8 @@ describe('FieldInteractionApi', () => {
       service.form = {
         associations: {},
         parent: {
-          associations: {}
-        }
+          associations: {},
+        },
       };
     });
     it('is defined', () => {
@@ -398,21 +398,21 @@ describe('FieldInteractionApi', () => {
         },
         parent: {
           controls: { parentControl: {} },
-        }
+        },
       };
     });
     it('is defined', () => {
       expect(service.displayTip).toBeDefined();
     });
     it('should log to console if no match for key', () => {
-      jest.spyOn(console, 'error');
+      spyOn(console, 'error');
       service.displayTip('outOfControl', 'this is a tip');
       expect(service.form.controls.myControl.tipWell).toBeUndefined();
       expect(triggerEvent).not.toBeCalled();
       expect(console.error).toBeCalled();
     });
     it('should set tipWell and clear on a control in the current form', () => {
-      jest.spyOn(console, 'error');
+      spyOn(console, 'error');
       expect(service.form.controls.myControl.tipWell).toBeUndefined();
 
       service.displayTip('myControl', 'this is a tip', 'caution', true, true);
@@ -428,21 +428,21 @@ describe('FieldInteractionApi', () => {
       expect(console.error).not.toBeCalled();
     });
     it('should set tipWell on current form when provided as argument', () => {
-      jest.spyOn(console, 'error');
+      spyOn(console, 'error');
       service.displayTip('myControl', 'this is a tip', 'caution', true, true, service.form);
       expect(service.form.controls.myControl.tipWell).toEqual({ tip: 'this is a tip', icon: 'caution', button: true, sanitize: true });
       expect(triggerEvent).toBeCalledWith({ controlKey: 'myControl', prop: 'tipWell', value: 'this is a tip' }, service.form);
       expect(console.error).not.toBeCalled();
     });
     it('should do nothing when field interactions are restricted', () => {
-      jest.spyOn(console, 'error');
+      spyOn(console, 'error');
       service.displayTip('restrictedControl', 'this is a tip that will not be applied');
       expect(service.form.controls.myControl.tipWell).toBeUndefined();
       expect(triggerEvent).not.toBeCalled();
       expect(console.error).not.toBeCalled();
     });
     it('should set tipWell and clear on a separate form', () => {
-      jest.spyOn(console, 'error');
+      spyOn(console, 'error');
       expect(service.form.parent.controls.parentControl.tipWell).toBeUndefined();
 
       service.displayTip('parentControl', 'this is a tip', 'caution', true, true, service.form.parent);
@@ -451,7 +451,7 @@ describe('FieldInteractionApi', () => {
         tip: 'this is a tip',
         icon: 'caution',
         button: true,
-        sanitize: true
+        sanitize: true,
       });
       expect(triggerEvent).toBeCalledWith({ controlKey: 'parentControl', prop: 'tipWell', value: 'this is a tip' }, service.form.parent);
       expect(console.error).not.toBeCalled();
@@ -473,32 +473,32 @@ describe('FieldInteractionApi', () => {
         },
         parent: {
           controls: { parentControl: { markAsInvalid: () => {}, markAsValid: () => {} } },
-        }
+        },
       };
     });
     it('is defined', () => {
       expect(service.markAsInvalid).toBeDefined();
     });
     it('should log to console if no key', () => {
-      jest.spyOn(service.form.controls.myControl, 'markAsInvalid');
-      jest.spyOn(console, 'error');
+      spyOn(service.form.controls.myControl, 'markAsInvalid');
+      spyOn(console, 'error');
       service.markAsInvalid(null, null);
       expect(service.form.controls.myControl.markAsInvalid).not.toBeCalled();
       expect(triggerEvent).not.toBeCalled();
       expect(console.error).toBeCalled();
     });
     it('should log to console if no match for key', () => {
-      jest.spyOn(service.form.controls.myControl, 'markAsInvalid');
-      jest.spyOn(console, 'error');
+      spyOn(service.form.controls.myControl, 'markAsInvalid');
+      spyOn(console, 'error');
       service.markAsInvalid('myControl1', null);
       expect(service.form.controls.myControl.markAsInvalid).not.toBeCalled();
       expect(triggerEvent).not.toBeCalled();
       expect(console.error).toBeCalled();
     });
     it('should set value when key exists', () => {
-      jest.spyOn(service.form.controls.myControl, 'markAsInvalid');
-      jest.spyOn(service.form.controls.myControl, 'markAsValid');
-      jest.spyOn(console, 'error');
+      spyOn(service.form.controls.myControl, 'markAsInvalid');
+      spyOn(service.form.controls.myControl, 'markAsValid');
+      spyOn(console, 'error');
 
       service.markAsInvalid('myControl', 'error message');
       expect(service.form.controls.myControl.markAsInvalid).toBeCalled();
@@ -511,9 +511,9 @@ describe('FieldInteractionApi', () => {
       expect(console.error).not.toBeCalled();
     });
     it('should set value on current form when provided as argument', () => {
-      jest.spyOn(service.form.controls.myControl, 'markAsInvalid');
-      jest.spyOn(service.form.controls.myControl, 'markAsValid');
-      jest.spyOn(console, 'error');
+      spyOn(service.form.controls.myControl, 'markAsInvalid');
+      spyOn(service.form.controls.myControl, 'markAsValid');
+      spyOn(console, 'error');
 
       service.markAsInvalid('myControl', 'error message', service.form);
       expect(service.form.controls.myControl.markAsInvalid).toBeCalled();
@@ -526,9 +526,9 @@ describe('FieldInteractionApi', () => {
       expect(console.error).not.toBeCalled();
     });
     it('should do nothing when field interactions are restricted', () => {
-      jest.spyOn(service.form.controls.restrictedControl, 'markAsInvalid');
-      jest.spyOn(service.form.controls.restrictedControl, 'markAsValid');
-      jest.spyOn(console, 'error');
+      spyOn(service.form.controls.restrictedControl, 'markAsInvalid');
+      spyOn(service.form.controls.restrictedControl, 'markAsValid');
+      spyOn(console, 'error');
 
       service.markAsInvalid('restrictedControl', 'error message');
       expect(service.form.controls.restrictedControl.markAsInvalid).not.toBeCalled();
@@ -541,9 +541,9 @@ describe('FieldInteractionApi', () => {
       expect(console.error).not.toBeCalled();
     });
     it('should set value on parent form when provided as argument', () => {
-      jest.spyOn(service.form.parent.controls.parentControl, 'markAsInvalid');
-      jest.spyOn(service.form.parent.controls.parentControl, 'markAsValid');
-      jest.spyOn(console, 'error');
+      spyOn(service.form.parent.controls.parentControl, 'markAsInvalid');
+      spyOn(service.form.parent.controls.parentControl, 'markAsValid');
+      spyOn(console, 'error');
 
       service.markAsInvalid('parentControl', 'error message', service.getParent());
       expect(service.form.parent.controls.parentControl.markAsInvalid).toBeCalled();

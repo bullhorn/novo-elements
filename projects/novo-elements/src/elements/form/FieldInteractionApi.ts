@@ -5,13 +5,13 @@ import { FormArray } from '@angular/forms';
 // Vendor
 import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
-// APP
-import { Helpers } from '../../utils/Helpers';
+import { NovoLabelService } from '../../services/novo-label-service';
 import { AppBridge } from '../../utils/app-bridge/AppBridge';
 import { FormUtils } from '../../utils/form-utils/FormUtils';
+// APP
+import { Helpers } from '../../utils/Helpers';
 import { NovoModalService } from '../modal/modal.service';
 import { EntityPickerResults } from '../picker/extras/entity-picker-results/EntityPickerResults';
-import { NovoLabelService } from '../../services/novo-label-service';
 import { NovoToastService, ToastOptions } from '../toast/ToastService';
 import { CustomHttp, ModifyPickerConfigArgs, OptionsFunction } from './FieldInteractionApiTypes';
 import { ControlConfirmModal, ControlPromptModal } from './FieldInteractionModals';
@@ -687,36 +687,38 @@ export class FieldInteractionApi {
     }
   }
 
-  createOptionsFunction = (
-    config: ModifyPickerConfigArgs,
-    mapper?: (item: unknown) => unknown,
-    filteredOptionsCreator?: (where?: string) => (query: string, page?: number) => Promise<unknown[]>,
-  ): ((query: string) => Promise<unknown[]>) => (query: string, page?: number) => {
-    if ('optionsPromise' in config && config.optionsPromise) {
-      return config.optionsPromise(query, new CustomHttpImpl(this.http), page);
-    } else if (('optionsUrlBuilder' in config && config.optionsUrlBuilder) || ('optionsUrl' in config && config.optionsUrl)) {
-      return new Promise((resolve, reject) => {
-        const url = 'optionsUrlBuilder' in config ? config.optionsUrlBuilder(query) : `${config.optionsUrl}?filter=${query || ''}`;
-        this.http
-          .get(url)
-          .pipe(
-            map((results: unknown[]) => {
-              if (mapper) {
-                return results.map(mapper);
-              }
-              return results;
-            }),
-          )
-          .subscribe(resolve, reject);
-      });
-    } else if (filteredOptionsCreator) {
-      if ('where' in config) {
-        return filteredOptionsCreator(config.where)(query, page);
-      } else {
-        return filteredOptionsCreator()(query, page);
+  createOptionsFunction =
+    (
+      config: ModifyPickerConfigArgs,
+      mapper?: (item: unknown) => unknown,
+      filteredOptionsCreator?: (where?: string) => (query: string, page?: number) => Promise<unknown[]>,
+    ): ((query: string) => Promise<unknown[]>) =>
+    (query: string, page?: number) => {
+      if ('optionsPromise' in config && config.optionsPromise) {
+        return config.optionsPromise(query, new CustomHttpImpl(this.http), page);
+      } else if (('optionsUrlBuilder' in config && config.optionsUrlBuilder) || ('optionsUrl' in config && config.optionsUrl)) {
+        return new Promise((resolve, reject) => {
+          const url = 'optionsUrlBuilder' in config ? config.optionsUrlBuilder(query) : `${config.optionsUrl}?filter=${query || ''}`;
+          this.http
+            .get(url)
+            .pipe(
+              map((results: unknown[]) => {
+                if (mapper) {
+                  return results.map(mapper);
+                }
+                return results;
+              }),
+            )
+            .subscribe(resolve, reject);
+        });
+      } else if (filteredOptionsCreator) {
+        if ('where' in config) {
+          return filteredOptionsCreator(config.where)(query, page);
+        } else {
+          return filteredOptionsCreator()(query, page);
+        }
       }
-    }
-  };
+    };
 
   setLoading(key: string, loading: boolean, otherForm?: NovoFormGroup) {
     const form = otherForm || this.form;
@@ -747,7 +749,13 @@ export class FieldInteractionApi {
 
   addControl(
     key: string,
-    metaForNewField: { key?: string, type?: string, name?: string, label?: string, interactions?: Array<{ event?: string, invokeOnInit?: boolean, script? }> },
+    metaForNewField: {
+      key?: string;
+      type?: string;
+      name?: string;
+      label?: string;
+      interactions?: Array<{ event?: string; invokeOnInit?: boolean; script? }>;
+    },
     position: string = FieldInteractionApi.FIELD_POSITIONS.ABOVE_FIELD,
     initialValue?,
     otherForm?: NovoFormGroup,
@@ -872,7 +880,7 @@ export class FieldInteractionApi {
    */
   getIndex(otherForm?: NovoFormGroup) {
     const form = otherForm || this.form;
-    return (form.associations && form.associations.hasOwnProperty('index')) ? form.associations.index : null;
+    return form.associations && form.associations.hasOwnProperty('index') ? form.associations.index : null;
   }
 
   private triggerEvent(event: IFieldInteractionEvent, otherForm?: NovoFormGroup): void {

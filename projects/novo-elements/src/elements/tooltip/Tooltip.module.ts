@@ -10,4 +10,4 @@ import { TooltipDirective } from './Tooltip.directive';
   exports: [TooltipDirective],
   imports: [CommonModule],
 })
-export class NovoTooltipModule { }
+export class NovoTooltipModule {}

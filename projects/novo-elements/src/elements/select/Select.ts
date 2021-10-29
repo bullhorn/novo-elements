@@ -10,7 +10,6 @@ import {
   ContentChildren,
   ElementRef,
   EventEmitter,
-  forwardRef,
   HostListener,
   Input,
   NgZone,
@@ -159,7 +158,8 @@ let nextId = 0;
 })
 export class NovoSelectElement
   extends NovoSelectMixins
-  implements OnInit, AfterViewInit, OnChanges, OnDestroy, ControlValueAccessor, NovoFieldControl<any> {
+  implements OnInit, AfterViewInit, OnChanges, OnDestroy, ControlValueAccessor, NovoFieldControl<any>
+{
   private _uniqueId: string = `novo-select-${++nextId}`;
   private _stateChanges = Subscription.EMPTY;
   private _activeOptionChanges = Subscription.EMPTY;

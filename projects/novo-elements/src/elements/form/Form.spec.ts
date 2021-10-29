@@ -1,10 +1,10 @@
 // NG2
 import { OverlayModule } from '@angular/cdk/overlay';
 import { async, TestBed } from '@angular/core/testing';
+import { NovoTemplateService } from '../../services/template/NovoTemplateService';
 // App
 import { NovoFormElement } from './Form';
 import { NovoFormModule } from './Form.module';
-import { NovoTemplateService } from '../../services/template/NovoTemplateService';
 xdescribe('Elements: NovoFormElement', () => {
   let fixture;
   let component;

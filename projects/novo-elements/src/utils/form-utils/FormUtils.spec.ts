@@ -542,21 +542,27 @@ describe('Utils: FormUtils', () => {
     it('should return an array when there are WorkflowOptions and a value', () => {
       const field: { workflowOptions: Object } = {
         workflowOptions: {
-          initial: [{ value: 1, label: 'one' }, { value: 2, label: 'two' }],
+          initial: [
+            { value: 1, label: 'one' },
+            { value: 2, label: 'two' },
+          ],
           1: [{ value: 2, label: 'two' }],
           2: [{ value: 3, label: 'three' }],
           3: [],
         },
       };
       const result = formUtils.getControlOptions(field, undefined, undefined, { id: 2 });
-      expect(result).toEqual([{ value: 2, label: 2 }, { value: 3, label: 'three' }]);
+      expect(result).toEqual([
+        { value: 2, label: 2 },
+        { value: 3, label: 'three' },
+      ]);
     });
     it('should add current option to array if current value is not there for WorkflowOptions', () => {
       const field: { workflowOptions: Object } = {
         workflowOptions: {
           initial: [
             { value: 1, label: 'one' },
-            { value: 2, label: 'two' }
+            { value: 2, label: 'two' },
           ],
           1: [{ value: 2, label: 'two' }],
           2: [{ value: 3, label: 'three' }],
@@ -569,26 +575,38 @@ describe('Utils: FormUtils', () => {
     it('should return initial options when value has no id', () => {
       const field: { workflowOptions: Object } = {
         workflowOptions: {
-          initial: [{ value: 1, label: 'one' }, { value: 2, label: 'two' }],
+          initial: [
+            { value: 1, label: 'one' },
+            { value: 2, label: 'two' },
+          ],
           1: [{ value: 2, label: 'two' }],
           2: [{ value: 3, label: 'three' }],
           3: [],
         },
       };
       const result = formUtils.getControlOptions(field, undefined, undefined, { label: '2' });
-      expect(result).toEqual([{ value: 1, label: 'one' }, { value: 2, label: 'two' }]);
+      expect(result).toEqual([
+        { value: 1, label: 'one' },
+        { value: 2, label: 'two' },
+      ]);
     });
     it('should return initial options when value is null', () => {
       const field: { workflowOptions: Object } = {
         workflowOptions: {
-          initial: [{ value: 1, label: 'one' }, { value: 2, label: 'two' }],
+          initial: [
+            { value: 1, label: 'one' },
+            { value: 2, label: 'two' },
+          ],
           1: [{ value: 2, label: 'two' }],
           2: [{ value: 3, label: 'three' }],
           3: [],
         },
       };
       const result = formUtils.getControlOptions(field, undefined, undefined, null);
-      expect(result).toEqual([{ value: 1, label: 'one' }, { value: 2, label: 'two' }]);
+      expect(result).toEqual([
+        { value: 1, label: 'one' },
+        { value: 2, label: 'two' },
+      ]);
     });
     it('should return empty array when workflow options are missing', () => {
       const field: { workflowOptions: Object } = {
@@ -604,12 +622,12 @@ describe('Utils: FormUtils', () => {
           { value: '1', label: 'one', readOnly: true },
           { value: '2', label: 'two', readOnly: false },
           { value: '3', label: 'three', readOnly: false },
-        ]
+        ],
       };
       const expected: Array<{ value: string; label: string; readOnly: boolean }> = [
         { value: '1', label: 'one', readOnly: true },
         { value: '2', label: 'two', readOnly: false },
-        { value: '3', label: 'three', readOnly: false }
+        { value: '3', label: 'three', readOnly: false },
       ];
       const result = formUtils.getControlOptions(field, undefined, undefined, { id: '1', label: 'one' });
       expect(result).toEqual(expected);
@@ -621,12 +639,12 @@ describe('Utils: FormUtils', () => {
           { value: '1', label: 'uno', readOnly: false },
           { value: '2', label: 'dos', readOnly: false },
           { value: '3', label: 'tres', readOnly: false },
-        ]
+        ],
       };
       const expected: Array<{ value: string; label: string; readOnly: boolean }> = [
         { value: '1', label: 'uno', readOnly: false },
         { value: '2', label: 'dos', readOnly: false },
-        { value: '3', label: 'tres', readOnly: false }
+        { value: '3', label: 'tres', readOnly: false },
       ];
       const result = formUtils.getControlOptions(field, undefined, undefined);
       expect(result).toEqual(expected);

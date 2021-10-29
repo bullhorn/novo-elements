@@ -15,8 +15,6 @@ import {
   TemplateRef,
 } from '@angular/core';
 import { FormArray, FormBuilder } from '@angular/forms';
-// App
-import { NovoLabelService } from '../../services/novo-label-service';
 import { Helpers } from '../../utils/Helpers';
 import { FormUtils } from './../../utils/form-utils/FormUtils';
 import { BaseControl } from './controls/BaseControl';

@@ -27,16 +27,19 @@ xdescribe('Elements: NovoControlGroup', () => {
     component.edit = true;
     component.remove = true;
     component.form = component.formUtils.toFormGroup([{ key: 'myPercent' }, { key: 'myString' }]);
-    component.controls = [{
-      key: 'myPercent',
-      controlType: 'textbox',
-      type: 'number',
-      subtype: 'percentage',
-    }, {
-      key: 'myString',
-      controlType: 'textbox',
-      type: 'string',
-    }];
+    component.controls = [
+      {
+        key: 'myPercent',
+        controlType: 'textbox',
+        type: 'number',
+        subtype: 'percentage',
+      },
+      {
+        key: 'myString',
+        controlType: 'textbox',
+        type: 'string',
+      },
+    ];
     component.key = 'myControls';
     component.canEdit = () => true;
     component.canRemove = () => true;
@@ -50,7 +53,7 @@ xdescribe('Elements: NovoControlGroup', () => {
       expect(component.currentIndex).toEqual(0);
     });
     it('should add single control with initial values object', () => {
-      component.initialValue = { myPercent: .1, myString: '10%' };
+      component.initialValue = { myPercent: 0.1, myString: '10%' };
       component.ngOnChanges({ initialValue: { previousValue: '', currentValue: component.initialValue } });
       expect(component.form.value.myControls).toEqual([component.initialValue]);
       expect(component.form.controls.myControls.controls.length).toEqual(1);
@@ -60,7 +63,7 @@ xdescribe('Elements: NovoControlGroup', () => {
     });
     it('should not overwrite existing form associations', () => {
       // Setup the form like the above test
-      component.initialValue = { myPercent: .1, myString: '10%' };
+      component.initialValue = { myPercent: 0.1, myString: '10%' };
       component.ngOnChanges({ initialValue: { previousValue: '', currentValue: component.initialValue } });
 
       // Simulate a form interaction modifying the associations by adding custom properties
@@ -76,7 +79,7 @@ xdescribe('Elements: NovoControlGroup', () => {
       expect(component.form.controls.myControls.controls[1].associations.customProperty).not.toBeDefined();
     });
     it('should handle null associations', () => {
-      component.initialValue = { myPercent: .1, myString: '10%' };
+      component.initialValue = { myPercent: 0.1, myString: '10%' };
       component.ngOnChanges({ initialValue: { previousValue: '', currentValue: component.initialValue } });
       component.form.controls.myControls.controls[0].associations = undefined;
       component.addNewControl();
@@ -84,7 +87,11 @@ xdescribe('Elements: NovoControlGroup', () => {
       expect(component.form.controls.myControls.controls[1].associations.index).toEqual(1);
     });
     it('should add multiple controls with initial values array', () => {
-      component.initialValue = [{ myPercent: .1, myString: '10%' }, { myPercent: .2, myString: '20%' }, { myPercent: .3, myString: '30%' }];
+      component.initialValue = [
+        { myPercent: 0.1, myString: '10%' },
+        { myPercent: 0.2, myString: '20%' },
+        { myPercent: 0.3, myString: '30%' },
+      ];
       component.ngOnChanges({ initialValue: { previousValue: '', currentValue: component.initialValue } });
       expect(component.form.value.myControls).toEqual(component.initialValue);
       expect(component.form.controls.myControls.controls.length).toEqual(3);
@@ -100,7 +107,11 @@ xdescribe('Elements: NovoControlGroup', () => {
 
   describe('destruction', () => {
     it('should remove all controls when destroying in order to properly unsubscribe to form interaction events', () => {
-      component.initialValue = [{ myPercent: .1, myString: '10%' }, { myPercent: .2, myString: '20%' }, { myPercent: .3, myString: '30%' }];
+      component.initialValue = [
+        { myPercent: 0.1, myString: '10%' },
+        { myPercent: 0.2, myString: '20%' },
+        { myPercent: 0.3, myString: '30%' },
+      ];
       component.ngOnChanges({ initialValue: { previousValue: '', currentValue: component.initialValue } });
       expect(component.form.value.myControls).toEqual(component.initialValue);
       expect(component.currentIndex).toEqual(3);
@@ -111,8 +122,12 @@ xdescribe('Elements: NovoControlGroup', () => {
 
   describe('field interaction events', () => {
     it('should call markForCheck when there are field interaction events on a nested form', () => {
-      jest.spyOn(component.ref, 'markForCheck');
-      component.initialValue = [{ myPercent: .1, myString: '10%' }, { myPercent: .2, myString: '20%' }, { myPercent: .3, myString: '30%' }];
+      spyOn(component.ref, 'markForCheck');
+      component.initialValue = [
+        { myPercent: 0.1, myString: '10%' },
+        { myPercent: 0.2, myString: '20%' },
+        { myPercent: 0.3, myString: '30%' },
+      ];
       component.ngOnChanges({ initialValue: { previousValue: '', currentValue: component.initialValue } });
 
       // Simulate a field interaction event
@@ -131,7 +146,7 @@ xdescribe('Elements: NovoControlGroup', () => {
       expect(component.form.controls.myControls.controls[0].controls.myString.value).toEqual('');
     });
     it('should add controls with initial values', () => {
-      component.addNewControl({ myPercent: .4, myString: '40%' });
+      component.addNewControl({ myPercent: 0.4, myString: '40%' });
       expect(component.form.controls.myControls.controls.length).toEqual(1);
       expect(component.currentIndex).toEqual(1);
       expect(component.form.controls.myControls.controls[0].controls.myPercent.value).toEqual(0.4);
@@ -141,7 +156,11 @@ xdescribe('Elements: NovoControlGroup', () => {
 
   describe('Removing controls', () => {
     beforeEach(() => {
-      component.initialValue = [{ myPercent: .1, myString: '10%' }, { myPercent: .2, myString: '20%' }, { myPercent: .3, myString: '30%' }];
+      component.initialValue = [
+        { myPercent: 0.1, myString: '10%' },
+        { myPercent: 0.2, myString: '20%' },
+        { myPercent: 0.3, myString: '30%' },
+      ];
       component.ngOnChanges({ initialValue: { previousValue: '', currentValue: component.initialValue } });
       expect(component.form.controls.myControls.controls.length).toEqual(3);
     });
@@ -155,24 +174,25 @@ xdescribe('Elements: NovoControlGroup', () => {
       expect(component.form.controls.myControls.controls[1].associations.index).toEqual(1);
     });
     it('should check canRemove() function after removal', () => {
-      jest.spyOn(component, 'canRemove').and.returnValue(true);
+      spyOn(component, 'canRemove').and.returnValue(true);
       component.removeControl(0);
-      expect(component.canRemove).toHaveBeenCalledWith({ 'myPercent': 0.2, 'myString': '20%' }, 0);
-      expect(component.canRemove).toHaveBeenCalledWith({ 'myPercent': 0.3, 'myString': '30%' }, 1);
+      expect(component.canRemove).toHaveBeenCalledWith({ myPercent: 0.2, myString: '20%' }, 0);
+      expect(component.canRemove).toHaveBeenCalledWith({ myPercent: 0.3, myString: '30%' }, 1);
     });
     it('should check canRemove() function when reset', () => {
-      jest.spyOn(component, 'canRemove').and.returnValue(false);
+      spyOn(component, 'canRemove').and.returnValue(false);
       component.resetAddRemove();
-      expect(component.canRemove).toHaveBeenCalledWith({ 'myPercent': 0.1, 'myString': '10%' }, 0);
-      expect(component.canRemove).toHaveBeenCalledWith({ 'myPercent': 0.2, 'myString': '20%' }, 1);
-      expect(component.canRemove).toHaveBeenCalledWith({ 'myPercent': 0.3, 'myString': '30%' }, 2);
+      expect(component.canRemove).toHaveBeenCalledWith({ myPercent: 0.1, myString: '10%' }, 0);
+      expect(component.canRemove).toHaveBeenCalledWith({ myPercent: 0.2, myString: '20%' }, 1);
+      expect(component.canRemove).toHaveBeenCalledWith({ myPercent: 0.3, myString: '30%' }, 2);
     });
     it('should call shouldRemove() function when set and emitting events', fakeAsync(() => {
-      component.shouldRemove = (index: number) => new Promise(resolve => {
-        // Example promise for testing that will only allow the first group to be deleted
-        resolve(index === 0);
-      });
-      jest.spyOn(component, 'shouldRemove').and.callThrough();
+      component.shouldRemove = (index: number) =>
+        new Promise((resolve) => {
+          // Example promise for testing that will only allow the first group to be deleted
+          resolve(index === 0);
+        });
+      spyOn(component, 'shouldRemove').and.callThrough();
       expect(component.form.controls.myControls.controls.length).toEqual(3);
 
       component.removeControl(2);
@@ -193,11 +213,12 @@ xdescribe('Elements: NovoControlGroup', () => {
       component.shouldRemove = null;
     }));
     it('should not call shouldRemove() function when events are not being emitted', fakeAsync(() => {
-      component.shouldRemove = (index: number) => new Promise(resolve => {
-        // Example promise for testing that will only allow the first group to be deleted
-        resolve(index === 0);
-      });
-      jest.spyOn(component, 'shouldRemove').and.callThrough();
+      component.shouldRemove = (index: number) =>
+        new Promise((resolve) => {
+          // Example promise for testing that will only allow the first group to be deleted
+          resolve(index === 0);
+        });
+      spyOn(component, 'shouldRemove').and.callThrough();
       expect(component.form.controls.myControls.controls.length).toEqual(3);
 
       component.removeControl(2, false);

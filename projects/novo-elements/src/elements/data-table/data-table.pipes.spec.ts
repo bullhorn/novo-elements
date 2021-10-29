@@ -31,7 +31,7 @@ describe('Pipe: DateTableDateTimeRendererPipe', () => {
   describe('When rendering strings', () => {
     it('DateTimePipe should make a call to the novo-label service if the value is not null', () => {
       // Arrange
-      jest.spyOn(dateTimePipe.labels, 'formatDateShort');
+      spyOn(dateTimePipe.labels, 'formatDateShort');
       const testVal = 1234567890;
       const testColumn = {
         label: 'Test',
@@ -46,7 +46,7 @@ describe('Pipe: DateTableDateTimeRendererPipe', () => {
 
     it('DateTimePipe should Not make a call to the novo-label service if a format is provided', () => {
       // Arrange
-      jest.spyOn(dateTimePipe.labels, 'formatDateShort');
+      spyOn(dateTimePipe.labels, 'formatDateShort');
       const testVal = 1234567890;
       const testColumn = {
         label: 'Test',
@@ -62,7 +62,7 @@ describe('Pipe: DateTableDateTimeRendererPipe', () => {
 
     it('DateTimePipe should return an empty string if the value is null', () => {
       // Arrange
-      jest.spyOn(dateTimePipe.labels, 'formatDateShort');
+      spyOn(dateTimePipe.labels, 'formatDateShort');
       const testVal = null;
       const testColumn = {
         label: 'Test',
@@ -77,7 +77,7 @@ describe('Pipe: DateTableDateTimeRendererPipe', () => {
 
     it('DatePipe should make a call to the novo-label service if the value is not null', () => {
       // Arrange
-      jest.spyOn(datePipe.labels, 'formatDate');
+      spyOn(datePipe.labels, 'formatDate');
       const testVal = 1234567890;
       const testColumn = {
         label: 'Test',
@@ -92,7 +92,7 @@ describe('Pipe: DateTableDateTimeRendererPipe', () => {
 
     it('DatePipe should Not make a call to the novo-label service if a format is provided', () => {
       // Arrange
-      jest.spyOn(datePipe.labels, 'formatDate');
+      spyOn(datePipe.labels, 'formatDate');
       const testVal = 1234567890;
       const testColumn = {
         label: 'Test',
@@ -108,7 +108,7 @@ describe('Pipe: DateTableDateTimeRendererPipe', () => {
 
     it('DatePipe should return an empty string if the value is null', () => {
       // Arrange
-      jest.spyOn(datePipe.labels, 'formatDate');
+      spyOn(datePipe.labels, 'formatDate');
       const testVal = null;
       const testColumn = {
         label: 'Test',
@@ -123,7 +123,7 @@ describe('Pipe: DateTableDateTimeRendererPipe', () => {
 
     it('TimePipe should make a call to the novo-label service if the value is not null', () => {
       // Arrange
-      jest.spyOn(timePipe.labels, 'formatTime');
+      spyOn(timePipe.labels, 'formatTime');
       const testVal = 1234567890;
       const testColumn = {
         label: 'Test',
@@ -138,7 +138,7 @@ describe('Pipe: DateTableDateTimeRendererPipe', () => {
 
     it('TimePipe should Not make a call to the novo-label service if a format is provided', () => {
       // Arrange
-      jest.spyOn(timePipe.labels, 'formatTime');
+      spyOn(timePipe.labels, 'formatTime');
       const testVal = 1234567890;
       const testColumn = {
         label: 'Test',
@@ -154,7 +154,7 @@ describe('Pipe: DateTableDateTimeRendererPipe', () => {
 
     it('DataTableBigDecimalRendererPipe should pass on the column configuration to formatBigDecimal', () => {
       // Arrange
-      jest.spyOn(dataTableBigDecimalRendererPipe.labels, 'formatBigDecimal');
+      spyOn(dataTableBigDecimalRendererPipe.labels, 'formatBigDecimal');
       const testVal = '12.52';
       const testColumn = {
         label: 'Total',
@@ -170,7 +170,7 @@ describe('Pipe: DateTableDateTimeRendererPipe', () => {
 
     it('TimePipe should return an empty string if the value is null', () => {
       // Arrange
-      jest.spyOn(timePipe.labels, 'formatTime');
+      spyOn(timePipe.labels, 'formatTime');
       const testVal = null;
       const testColumn = {
         label: 'Test',

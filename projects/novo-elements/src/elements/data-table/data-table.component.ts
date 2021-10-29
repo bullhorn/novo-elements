@@ -21,6 +21,7 @@ import { Subscription } from 'rxjs';
 import { NovoLabelService } from '../../services/novo-label-service';
 import { notify } from '../../utils/notifier/notifier.util';
 import { NovoTemplate } from '../common/novo-template/novo-template.directive';
+import { NovoDataTableCellHeader } from './cell-headers/data-table-header-cell.component';
 import { DataTableSource } from './data-table.source';
 import {
   IDataTableColumn,
@@ -31,10 +32,9 @@ import {
   IDataTableService,
   IDataTableSort,
 } from './interfaces';
+import { ListInteractionDictionary, ListInteractionEvent } from './ListInteractionTypes';
 import { StaticDataTableService } from './services/static-data-table.service';
 import { DataTableState } from './state/data-table-state.service';
-import { NovoDataTableCellHeader } from './cell-headers/data-table-header-cell.component';
-import { ListInteractionDictionary, ListInteractionEvent } from './ListInteractionTypes';
 
 @Component({
   selector: 'novo-data-table',
@@ -571,7 +571,7 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
     } else {
       this.state.expandedRows.add(`${row[this.rowIdentifier]}`);
     }
-    this.state.onExpandChange(((row as unknown) as { id: number }).id);
+    this.state.onExpandChange((row as unknown as { id: number }).id);
   }
 
   public expandRows(expand: boolean): void {
