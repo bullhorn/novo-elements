@@ -30,8 +30,13 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["projects/novo-elements/tsconfig.lib.json", "projects/novo-elements/tsconfig.spec.json"],
-            "exclude": ["**/node_modules/**"]
+            "tsConfig": [
+              "projects/novo-elements/tsconfig.lib.json",
+              "projects/novo-elements/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         }
       }
@@ -65,8 +70,13 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["projects/novo-examples/tsconfig.lib.json", "projects/novo-examples/tsconfig.spec.json"],
-            "exclude": ["**/node_modules/**"]
+            "tsConfig": [
+              "projects/novo-examples/tsconfig.lib.json",
+              "projects/novo-examples/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         }
       }
@@ -87,10 +97,17 @@
             "main": "demo/main.ts",
             "polyfills": "demo/polyfills.ts",
             "tsConfig": "demo/tsconfig.app.json",
-            "assets": ["demo/favicon.ico", "demo/assets"],
-            "styles": ["demo/styles.scss"],
+            "assets": [
+              "demo/favicon.ico",
+              "demo/assets"
+            ],
+            "styles": [
+              "demo/styles.scss"
+            ],
             "stylePreprocessorOptions": {
-              "includePaths": ["projects/novo-elements/src"]
+              "includePaths": [
+                "projects/novo-elements/src"
+              ]
             },
             "scripts": []
           },
@@ -140,8 +157,13 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["demo/tsconfig.app.json", "demo/tsconfig.spec.json"],
-            "exclude": ["**/node_modules/**"]
+            "tsConfig": [
+              "demo/tsconfig.app.json",
+              "demo/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         }
       }
@@ -175,8 +197,13 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["projects/chomsky/tsconfig.lib.json", "projects/chomsky/tsconfig.spec.json"],
-            "exclude": ["**/node_modules/**"]
+            "tsConfig": [
+              "projects/chomsky/tsconfig.lib.json",
+              "projects/chomsky/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         }
       }

@@ -92,7 +92,7 @@ export class DataTableBigDecimalRendererPipe<T> implements PipeTransform {
   transform(value: any, column: IDataTableColumn<T>): string {
     if (!Helpers.isEmpty(value)) {
       const val = interpolateCell<T>(value, column);
-      return this.labels.formatBigDecimal(Number(val));
+      return this.labels.formatBigDecimal(Number(val), column.configuration);
     }
     return '';
   }

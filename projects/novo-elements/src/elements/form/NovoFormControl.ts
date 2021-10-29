@@ -64,6 +64,7 @@ export class NovoFormControl extends FormControl {
   checkboxLabel?: string;
   restrictFieldInteractions?: boolean;
   warning?: string;
+  highlighted?: boolean;
   private historyTimeout: any;
 
   constructor(value: any, control: NovoControlConfig) {
@@ -227,5 +228,9 @@ export class NovoFormControl extends FormControl {
     this.markAsDirty();
     this.markAsTouched();
     this.setErrors(Object.assign({}, this.errors, { custom: message }));
+  }
+
+  markAsValid(): void {
+    this.setErrors(null);
   }
 }

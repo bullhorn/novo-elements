@@ -92,7 +92,8 @@ export class NovoChipListChange {
 })
 export class NovoChipList
   extends _NovoChipListMixinBase
-  implements NovoFieldControl<any>, ControlValueAccessor, AfterContentInit, DoCheck, OnInit, OnDestroy, CanUpdateErrorState {
+  implements NovoFieldControl<any>, ControlValueAccessor, AfterContentInit, DoCheck, OnInit, OnDestroy, CanUpdateErrorState
+{
   /**
    * Implemented as part of NovoFieldControl.
    * @docs-private

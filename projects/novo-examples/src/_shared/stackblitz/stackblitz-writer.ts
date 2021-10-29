@@ -12,7 +12,7 @@ const TEMPLATE_PATH = './assets/stackblitz/';
 const TEMPLATE_FILES = ['index.html', 'styles.scss', 'polyfills.ts', 'main.ts'];
 
 const TAGS: string[] = ['angular', 'bullhon', 'novo-elements', 'example'];
-const angularVersion = '^7.2.0';
+const angularVersion = '~10.2.4';
 
 const dependencies = {
   '@angular/cdk': angularVersion,
@@ -21,23 +21,22 @@ const dependencies = {
   '@angular/compiler': angularVersion,
   '@angular/core': angularVersion,
   '@angular/forms': angularVersion,
-  '@angular/http': angularVersion,
   '@angular/platform-browser': angularVersion,
   '@angular/platform-browser-dynamic': angularVersion,
+  '@angular/platform-server': angularVersion,
   '@angular/router': angularVersion,
-  'novo-elements': '3.6.0',
-  'angular-in-memory-web-api': '~0.5.0',
-  'core-js': '^2.6.2',
-  rxjs: '^6.3.3',
-  'rxjs-compat': '^6.3.3',
+  '@bullhorn/bullhorn-icons': '2.17.0',
+  'novo-elements': '5.1.2',
+  'core-js': '3.16.4',
+  rxjs: '6.5.5',
   '@bullhorn/dragula': '1.0.1',
-  'ace-builds': '1.4.2',
+  'ace-builds': '1.4.12',
   'angular2-text-mask': '9.0.0',
   brace: '0.11.1',
   'classlist.js': '^1.1.20150312',
   'date-fns': '1.30.1',
   'post-robot': '9.0.30',
-  'web-animations-js': '^2.3.1',
+  'web-animations-js': '2.3.2',
   'text-mask-addons': '^3.8.0',
   'zone.js': '^0.8.14',
   hammerjs: '^2.0.8',
@@ -101,7 +100,13 @@ export class StackblitzWriter {
       );
       exampleContents.push(
         Promise.resolve(
-          this._addFileToForm(form, data, JSON.stringify({ apps: [{ styles: ['styles.scss'] }] }), `.angular-cli.json`, TEMPLATE_PATH),
+          this._addFileToForm(
+            form,
+            data,
+            JSON.stringify({ apps: [{ styles: ['styles.scss', 'node_modules/@bullhorn/bullhorn-icons/fonts/Bullhorn-Glyphicons.css'] }] }),
+            `.angular-cli.json`,
+            TEMPLATE_PATH,
+          ),
         ),
       );
 

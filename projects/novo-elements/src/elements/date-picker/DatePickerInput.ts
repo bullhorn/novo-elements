@@ -121,6 +121,8 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
   blurEvent: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
   @Output()
   focusEvent: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
+  @Output()
+  changeEvent: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
   /** Element for the panel containing the autocomplete options. */
   @ViewChild(NovoOverlayTemplateComponent)
   overlay: NovoOverlayTemplateComponent;
@@ -227,6 +229,7 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
   public dispatchOnChange(newValue?: any, blur: boolean = false, skip: boolean = false) {
     if (newValue !== this.value) {
       this._onChange(newValue);
+      this.changeEvent.emit(newValue);
       if (blur) {
         !skip && this.writeValue(newValue);
       } else {
@@ -243,7 +246,7 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
 
   private _setCalendarValue(value: any): void {
     if (value instanceof Date && this.value instanceof Date) {
-      value = new Date(value.setHours(this.value.getHours(), this.value.getMinutes()));
+      value = new Date(value).setHours(0, 0, 0, 0);
     }
     this.value = value;
   }
@@ -252,6 +255,8 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
     if (this.value) {
       const test = this.formatDateValue(this.value);
       this.formattedValue = test;
+    } else {
+      this.formattedValue = '';
     }
   }
 

@@ -33,6 +33,8 @@ import {
 } from './interfaces';
 import { StaticDataTableService } from './services/static-data-table.service';
 import { DataTableState } from './state/data-table-state.service';
+import { NovoDataTableCellHeader } from './cell-headers/data-table-header-cell.component';
+import { ListInteractionDictionary, ListInteractionEvent } from './ListInteractionTypes';
 
 @Component({
   selector: 'novo-data-table',
@@ -261,6 +263,7 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
 
   @ContentChildren(NovoTemplate) customTemplates: QueryList<NovoTemplate>;
   @ViewChildren(NovoTemplate) defaultTemplates: QueryList<NovoTemplate>;
+  @ViewChildren(NovoDataTableCellHeader) cellHeaders: QueryList<NovoDataTableCellHeader<T>>;
   @ViewChild('novoDataTableContainer') novoDataTableContainer: ElementRef;
   @Output() resized: EventEmitter<IDataTableColumn<T>> = new EventEmitter();
 
@@ -357,6 +360,7 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   set columns(columns: IDataTableColumn<T>[]) {
     this._columns = columns;
     this.configureColumns();
+    this.performInteractions('init');
   }
   get columns(): IDataTableColumn<T>[] {
     return this._columns;
@@ -428,12 +432,15 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
     return this.loading || (this.dataSource && this.dataSource.loading);
   }
 
+  @Input() listInteractions: ListInteractionDictionary;
+
   constructor(public labels: NovoLabelService, private ref: ChangeDetectorRef, public state: DataTableState<T>) {
     this.scrollListenerHandler = this.scrollListener.bind(this);
     this.sortFilterSubscription = this.state.sortFilterSource.subscribe(
       (event: { sort: IDataTableSort; filter: IDataTableFilter | IDataTableFilter[]; globalSearch: string }) => {
         if (this.name !== 'novo-data-table') {
           this.preferencesChanged.emit({ name: this.name, sort: event.sort, filter: event.filter, globalSearch: event.globalSearch });
+          this.performInteractions('change');
         } else {
           notify('Must have [name] set on data-table to use preferences!');
         }
@@ -453,6 +460,23 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
         this.ref.detectChanges();
       }, 300);
     });
+  }
+
+  public modifyCellHeaderMultiSelectFilterOptions(column: string, newOptions: { value: any; label: string }[]): void {
+    const header = this.cellHeaders.find((cellHeader) => cellHeader.id === column);
+    if (header && header.config && header.config.filterConfig && header.config.filterConfig.options) {
+      const filterOptions: any[] = header.config.filterConfig.options;
+      const optionsToKeep = filterOptions.filter(
+        (opt) =>
+          header.isSelected(opt, header.multiSelectedOptions) &&
+          !newOptions.find((newOpt) => opt.value && newOpt.value && newOpt.value === opt.value),
+      );
+      header.config.filterConfig.options = [...optionsToKeep, ...newOptions];
+    } else {
+      header.config.filterConfig['options'] = newOptions;
+    }
+    header.setupFilterOptions();
+    header.changeDetectorRef.markForCheck();
   }
 
   public ngOnDestroy(): void {
@@ -508,7 +532,6 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
 
     // Scrolling inside table
     (this.novoDataTableContainer.nativeElement as Element).addEventListener('scroll', this.scrollListenerHandler);
-
     this.initialized = true;
     this.ref.markForCheck();
   }
@@ -684,5 +707,17 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
       this.scrollLeft = target.scrollLeft;
     }
     this.ref.markForCheck();
+  }
+
+  performInteractions(event: ListInteractionEvent): void {
+    if (this.listInteractions) {
+      for (const column of this.columns) {
+        const allListColumnInteractions = this.listInteractions[column.id];
+        const listColumnInteraction = allListColumnInteractions && allListColumnInteractions.find((int) => int.event.includes(event));
+        if (listColumnInteraction) {
+          listColumnInteraction.script(this, column.id);
+        }
+      }
+    }
   }
 }

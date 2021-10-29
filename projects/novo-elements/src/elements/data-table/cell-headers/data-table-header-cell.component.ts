@@ -270,7 +270,7 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
   private _column: IDataTableColumn<T>;
 
   constructor(
-    private changeDetectorRef: ChangeDetectorRef,
+    public changeDetectorRef: ChangeDetectorRef,
     public labels: NovoLabelService,
     private state: DataTableState<T>,
     private renderer: Renderer2,
@@ -285,14 +285,18 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
     if (this._cdkColumnDef) {
       this.id = this._cdkColumnDef.name;
     }
+    this.setupFilterOptions();
 
+    this.changeDetectorRef.markForCheck();
+  }
+
+  public setupFilterOptions() {
     this.checkSortFilterState({ filter: this.state.filter, sort: this.state.sort }, true);
 
     this.multiSelect = this.config.filterConfig && this.config.filterConfig.type ? this.config.filterConfig.type === 'multi-select' : false;
     if (this.multiSelect) {
       this.multiSelectedOptions = this.filter ? [...this.filter] : [];
     }
-    this.changeDetectorRef.markForCheck();
   }
 
   public ngOnDestroy(): void {
@@ -337,10 +341,14 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
       this.multiSelectedOptions = this.filter ? [...this.filter] : [];
       if (this.config.filterConfig.options) {
         if (typeof this.config.filterConfig.options[0] === 'string') {
-          this.multiSelectedOptionIsHidden = (this.config.filterConfig.options as string[]).map((option: string): {
-            option: string;
-            hidden: boolean;
-          } => ({ option, hidden: false }));
+          this.multiSelectedOptionIsHidden = (this.config.filterConfig.options as string[]).map(
+            (
+              option: string,
+            ): {
+              option: string;
+              hidden: boolean;
+            } => ({ option, hidden: false }),
+          );
         } else {
           this.multiSelectedOptionIsHidden = (this.config.filterConfig.options as IDataTableColumnFilterOption[]).map(
             (option: IDataTableColumnFilterOption): { option: IDataTableColumnFilterOption; hidden: boolean } => ({

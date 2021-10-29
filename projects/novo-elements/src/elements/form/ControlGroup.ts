@@ -8,17 +8,18 @@ import {
   EventEmitter,
   Input,
   OnChanges,
+  OnDestroy,
   Output,
   SimpleChange,
   SimpleChanges,
   TemplateRef,
 } from '@angular/core';
 import { FormArray, FormBuilder } from '@angular/forms';
+// App
 import { NovoLabelService } from '../../services/novo-label-service';
 import { Helpers } from '../../utils/Helpers';
 import { FormUtils } from './../../utils/form-utils/FormUtils';
 import { BaseControl } from './controls/BaseControl';
-// App
 import { NovoFormGroup } from './NovoFormGroup';
 
 export interface NovoControlGroupAddConfig {
@@ -45,7 +46,7 @@ export interface NovoControlGroupRowConfig {
     '[class.novo-control-group-appearance-none]': "appearance=='none'",
   },
 })
-export class NovoControlGroup implements AfterContentInit, OnChanges {
+export class NovoControlGroup implements AfterContentInit, OnChanges, OnDestroy {
   @Input()
   set appearance(value: 'none' | 'card') {
     this._appearance = value;
@@ -129,6 +130,8 @@ export class NovoControlGroup implements AfterContentInit, OnChanges {
   @Input() canEdit: Function;
   // Callback to determine if the user can delete
   @Input() canRemove: Function;
+  // Optional callback for whether or not to remove the given row
+  @Input() shouldRemove: (number) => Promise<boolean>;
   // Template for custom row rendering
   @Input() rowTemplate: TemplateRef<any>;
   // Template for custom column label rendering
@@ -145,7 +148,7 @@ export class NovoControlGroup implements AfterContentInit, OnChanges {
   editState: EditState = EditState.NOT_EDITING;
   currentIndex = 0;
 
-  constructor(private formUtils: FormUtils, private fb: FormBuilder, private ref: ChangeDetectorRef, private labels: NovoLabelService) {}
+  constructor(private formUtils: FormUtils, private fb: FormBuilder, private ref: ChangeDetectorRef) {}
 
   ngAfterContentInit() {
     if (!this.key) {
@@ -186,7 +189,11 @@ export class NovoControlGroup implements AfterContentInit, OnChanges {
     }
   }
 
-  onChange(change) {
+  ngOnDestroy() {
+    this.clearControls();
+  }
+
+  onChange() {
     this.change.emit(this);
   }
 
@@ -219,12 +226,12 @@ export class NovoControlGroup implements AfterContentInit, OnChanges {
   }
 
   addNewControl(value?: {}) {
-    const control: FormArray = this.form.controls[this.key] as FormArray;
-    const newCtrl: NovoFormGroup = this.buildControl(value);
-    if (control) {
-      control.push(newCtrl);
+    const controlsArray: FormArray = this.form.controls[this.key] as FormArray;
+    const nestedFormGroup: NovoFormGroup = this.buildNestedFormGroup(value);
+    if (controlsArray) {
+      controlsArray.push(nestedFormGroup);
     } else {
-      this.form.addControl(this.key, this.fb.array([newCtrl]));
+      this.form.addControl(this.key, this.fb.array([nestedFormGroup]));
     }
     this.disabledArray.push({
       state: EditState.EDITING,
@@ -233,38 +240,51 @@ export class NovoControlGroup implements AfterContentInit, OnChanges {
     });
     this.resetAddRemove();
     if (!value) {
-      this.onAdd.emit(newCtrl);
+      this.onAdd.emit(nestedFormGroup);
     }
     this.currentIndex++;
+    this.assignIndexes();
+    // Ensure that field interaction changes for nested forms originating from outside the form will be reflected in the nested elements
+    nestedFormGroup.fieldInteractionEvents.subscribe(this.onFieldInteractionEvent.bind(this));
     this.ref.markForCheck();
   }
 
-  buildControl(value?: {}): NovoFormGroup {
-    const newControls = this.getNewControls(this.controls);
-    if (value) {
-      this.formUtils.setInitialValues(newControls, value);
+  /**
+   * Will remove the control, and optionally, if the event is to be publicized (emitEvent = true) and there is a
+   * shouldRemove callback, then call the shouldRemove() callback to determine if the doRemoveControl should be called.
+   */
+  removeControl(index: number, emitEvent = true) {
+    if (emitEvent && Helpers.isFunction(this.shouldRemove)) {
+      this.shouldRemove(index).then((shouldRemove: boolean) => {
+        if (shouldRemove) {
+          this.doRemoveControl(index, emitEvent);
+        }
+      });
+    } else {
+      this.doRemoveControl(index, emitEvent);
     }
-    const ctrl: NovoFormGroup = this.formUtils.toFormGroup(newControls);
-    return ctrl;
   }
 
-  removeControl(index: number, emitEvent = true) {
-    const control: FormArray = this.form.controls[this.key] as FormArray;
+  private doRemoveControl(index: number, emitEvent: boolean) {
+    const controlsArray: FormArray = this.form.controls[this.key] as FormArray;
+    const nestedFormGroup = controlsArray.at(index) as NovoFormGroup;
+    nestedFormGroup.fieldInteractionEvents.unsubscribe();
     if (emitEvent) {
-      this.onRemove.emit({ value: control.at(index).value, index });
+      this.onRemove.emit({ value: nestedFormGroup.value, index });
     }
-    control.removeAt(index);
+    controlsArray.removeAt(index);
     this.disabledArray = this.disabledArray.filter((value: NovoControlGroupRowConfig, idx: number) => idx !== index);
     this.resetAddRemove();
     this.currentIndex--;
+    this.assignIndexes();
     this.ref.markForCheck();
   }
 
   editControl(index: number) {
-    const control: FormArray = this.form.controls[this.key] as FormArray;
-    const fg = control.at(index) as NovoFormGroup;
+    const controlsArray: FormArray = this.form.controls[this.key] as FormArray;
+    const fg = controlsArray.at(index) as NovoFormGroup;
     fg.enableAllControls();
-    this.onEdit.emit({ value: control.at(index).value, index });
+    this.onEdit.emit({ value: controlsArray.at(index).value, index });
   }
 
   toggle(event: MouseEvent) {
@@ -275,10 +295,18 @@ export class NovoControlGroup implements AfterContentInit, OnChanges {
     }
   }
 
+  private buildNestedFormGroup(value?: {}): NovoFormGroup {
+    const newControls = this.getNewControls();
+    if (value) {
+      this.formUtils.setInitialValues(newControls, value);
+    }
+    return this.formUtils.toFormGroup(newControls);
+  }
+
   private clearControls() {
-    const control: FormArray = this.form.controls[this.key] as FormArray;
-    if (control) {
-      for (let i: number = control.controls.length; i >= 0; i--) {
+    const controlsArray: FormArray = this.form.controls[this.key] as FormArray;
+    if (controlsArray) {
+      for (let i: number = controlsArray.length - 1; i >= 0; i--) {
         this.removeControl(i, false);
       }
       this.currentIndex = 0;
@@ -287,29 +315,43 @@ export class NovoControlGroup implements AfterContentInit, OnChanges {
 
   private checkCanEdit(index: number): boolean {
     if (this.canEdit) {
-      const control: FormArray = this.form.controls[this.key] as FormArray;
-      return this.canEdit(control.at(index).value, index);
+      const controlsArray: FormArray = this.form.controls[this.key] as FormArray;
+      return this.canEdit(controlsArray.at(index).value, index);
     }
     return true;
   }
 
   private checkCanRemove(index: number): boolean {
     if (this.canRemove) {
-      const control: FormArray = this.form.controls[this.key] as FormArray;
-      if (control.at(index)) {
-        return this.canRemove(control.at(index).value, index);
+      const controlsArray: FormArray = this.form.controls[this.key] as FormArray;
+      if (controlsArray.at(index)) {
+        return this.canRemove(controlsArray.at(index).value, index);
       }
       return true;
     }
     return true;
   }
 
-  private getNewControls(controls: BaseControl[]) {
+  private getNewControls() {
     const ret: BaseControl[] = [];
     (this.controls || []).forEach((control: BaseControl) => {
       ret.push(new BaseControl(control.__type, control));
     });
     return ret;
+  }
+
+  private assignIndexes() {
+    const controlsArray: FormArray = this.form.controls[this.key] as FormArray;
+    if (controlsArray) {
+      for (let i: number = 0; i < controlsArray.length; i++) {
+        const form = controlsArray.at(i) as NovoFormGroup;
+        form.associations = { ...form.associations, index: i };
+      }
+    }
+  }
+
+  private onFieldInteractionEvent() {
+    this.ref.markForCheck();
   }
 
   static ngAcceptInputType_disabled: BooleanInput;

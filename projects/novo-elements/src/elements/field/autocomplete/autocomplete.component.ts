@@ -75,7 +75,8 @@ const NovoAutocompleteMixins: HasOverlayCtor & CanDisableCtor & typeof NovoAutoc
 })
 export class NovoAutocompleteElement
   extends NovoAutocompleteMixins
-  implements CanDisable, AfterContentInit, AfterViewInit, OnChanges, OnDestroy {
+  implements CanDisable, AfterContentInit, AfterViewInit, OnChanges, OnDestroy
+{
   private _stateChanges = Subscription.EMPTY;
   private _activeOptionChanges = Subscription.EMPTY;
   private _selectedOptionChanges = Subscription.EMPTY;

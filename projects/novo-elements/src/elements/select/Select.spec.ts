@@ -1,8 +1,8 @@
 // NG
 import { async, TestBed } from '@angular/core/testing';
+// App
 import { NovoLabelService } from '../../services/novo-label-service';
 import { Key } from '../../utils';
-// App
 import { NovoSelectElement } from './Select';
 import { NovoSelectModule } from './Select.module';
 
@@ -97,10 +97,25 @@ xdescribe('Elements: NovoSelectElement', () => {
     it('should invoke writeValue', () => {
       jest.spyOn(comp, 'select');
       comp.model = 'bar';
-      comp.options = [{ value: 'foo' }, { value: 'bar' }, { value: 'baz' }];
-      comp.filteredOptions = [{ value: 'foo' }, { value: 'bar' }];
+      comp.options = [
+        { label: 'foo', value: 'foo', readOnly: false },
+        { label: 'bar', value: 'bar', readOnly: false },
+        { label: 'baz', value: 'baz', readOnly: true },
+      ];
       comp.ngOnChanges();
-      expect(comp.select).toHaveBeenCalledWith({ value: 'bar', active: false }, 1, false);
+      expect(comp.select).toHaveBeenCalledWith({ label: 'bar', value: 'bar', readOnly: false, active: false }, 1, false);
+      expect(comp.empty).toEqual(false);
+    });
+    it('should invoke writeValue with readOnly option', () => {
+      spyOn(comp, 'select');
+      comp.model = 'baz';
+      comp.options = [
+        { label: 'foo', value: 'foo', readOnly: false },
+        { label: 'bar', value: 'bar', readOnly: false },
+        { label: 'baz', value: 'baz', readOnly: true },
+      ];
+      comp.ngOnChanges();
+      expect(comp.select).toHaveBeenCalledWith({ label: 'baz', value: 'baz', readOnly: true }, -1, false);
       expect(comp.empty).toEqual(false);
     });
     it('should invoke openPanel', () => {
@@ -155,6 +170,18 @@ xdescribe('Elements: NovoSelectElement', () => {
       jest.spyOn(comp.overlay, 'closePanel');
       comp.setValueAndClose({});
       expect(comp.overlay.closePanel).toHaveBeenCalled();
+    });
+    it('should not invoke select or close panel for a disabled item', () => {
+      const mockEvent: any = {
+        value: { id: 1, label: 'one', disabled: true },
+        index: 1,
+      };
+      spyOn(comp.overlay, 'closePanel');
+      comp.setValueAndClose(mockEvent);
+      expect(comp.selectedIndex).toEqual(-1);
+      expect(comp.selected).toBeUndefined();
+      expect(comp.empty).toEqual(true);
+      expect(comp.overlay.closePanel).not.toHaveBeenCalled();
     });
   });
 

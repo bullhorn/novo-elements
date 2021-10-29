@@ -16,8 +16,8 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
     valueField: 'chickenId',
     labelField: 'bwaack',
     data: [
-      ({ chickenId: 3, bwaack: 'bwock?' } as unknown) as { selected?: boolean },
-      ({ chickenId: 4, bwaack: 'baa bock' } as unknown) as { selected?: boolean },
+      { chickenId: 3, bwaack: 'bwock?' } as unknown as { selected?: boolean },
+      { chickenId: 4, bwaack: 'baa bock' } as unknown as { selected?: boolean },
     ],
   });
 
@@ -153,11 +153,11 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
           labelField: 'name',
           childTypeName: 'chickens',
           data: [
-            ({
+            {
               id: 5,
               name: 'Allosaurus',
-              children: [({ chickenId: 3, bwaack: 'bwock?' } as unknown) as { selected?: boolean }],
-            } as unknown) as { selected?: boolean },
+              children: [{ chickenId: 3, bwaack: 'bwock?' } as unknown as { selected?: boolean }],
+            } as unknown as { selected?: boolean },
           ],
         },
       ];
@@ -181,12 +181,12 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
           labelField: 'name',
           childTypeName: 'chickens',
           data: [
-            ({
+            {
               selected: true,
               id: 5,
               name: 'Allosaurus',
               children: [...getChickenTab().data],
-            } as unknown) as { selected?: boolean },
+            } as unknown as { selected?: boolean },
           ],
         },
       ];
@@ -206,12 +206,12 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
         labelField: 'name',
         childTypeName: 'chickens',
         data: [
-          ({
+          {
             selected: true,
             id: 5,
             name: 'Allosaurus',
             children: [...getChickenTab().data],
-          } as unknown) as { selected?: boolean; indeterminate?: boolean },
+          } as unknown as { selected?: boolean; indeterminate?: boolean },
         ],
       };
       component.tabs = [

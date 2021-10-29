@@ -15,7 +15,7 @@
     <div class="novo-control-group-control">
       <div *ngFor="let c of controls" class="novo-control-container {{c.key}}"
         [class.is-label]="c.controlType === 'read-only'" [style.max-width.px]="c.width">
-        <novo-control (change)="onChange($event)" [form]="(form?.controls)[key]['controls'][index]" [control]="c"
+        <novo-control (change)="onChange()" [form]="(form?.controls)[key]['controls'][index]" [control]="c"
           [condensed]="!vertical || c.controlType === 'read-only'"></novo-control>
       </div>
       <div class="novo-control-container last" *ngIf="edit && !vertical">

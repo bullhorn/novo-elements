@@ -4,6 +4,7 @@ import { NovoLabelService } from '../../../../services/novo-label-service';
 import {
   NovoItemAvatarElement,
   NovoItemContentElement,
+  NovoItemEndElement,
   NovoItemHeaderElement,
   NovoItemTitleElement,
   NovoListElement,
@@ -28,6 +29,7 @@ describe('Elements: EntityPickerResult', () => {
         NovoItemContentElement,
         NovoItemHeaderElement,
         NovoItemTitleElement,
+        NovoItemEndElement,
       ],
       providers: [{ provide: NovoLabelService, useClass: NovoLabelService }],
     }).compileComponents();

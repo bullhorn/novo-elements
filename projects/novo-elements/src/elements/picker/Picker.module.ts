@@ -11,6 +11,7 @@ import { ChecklistPickerResults } from './extras/checklist-picker-results/Checkl
 import { DistributionListPickerResults } from './extras/distributionlist-picker-results/DistributionListPickerResults';
 import { EntityPickerResult, EntityPickerResults } from './extras/entity-picker-results/EntityPickerResults';
 import { GroupedMultiPickerResults } from './extras/grouped-multi-picker-results/GroupedMultiPickerResults';
+import { MixedMultiPickerResults } from './extras/mixed-multi-picker-results/MixedMultiPickerResults';
 import { PickerResults } from './extras/picker-results/PickerResults';
 import { SkillsSpecialtyPickerResults } from './extras/skills-picker-results/SkillsSpecialtyPickerResults';
 import { WorkersCompCodesPickerResults } from './extras/workers-comp-codes-picker-results/WorkersCompCodesPickerResults';
@@ -25,6 +26,7 @@ import { NovoPickerElement } from './Picker';
     EntityPickerResults,
     ChecklistPickerResults,
     GroupedMultiPickerResults,
+    MixedMultiPickerResults,
     DistributionListPickerResults,
     WorkersCompCodesPickerResults,
     SkillsSpecialtyPickerResults,
@@ -36,6 +38,7 @@ import { NovoPickerElement } from './Picker';
     EntityPickerResults,
     ChecklistPickerResults,
     GroupedMultiPickerResults,
+    MixedMultiPickerResults,
     DistributionListPickerResults,
     WorkersCompCodesPickerResults,
     SkillsSpecialtyPickerResults,

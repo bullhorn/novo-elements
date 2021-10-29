@@ -110,6 +110,16 @@ describe('Service: NovoLabelService', () => {
   });
 
   describe('Method: formatBigDecimal', () => {
+    it('should handle null value', () => {
+      const value = service.formatBigDecimal(null);
+      expect(value).toEqual('0.00');
+    });
+
+    it('should handle undefined value', () => {
+      const value = service.formatBigDecimal(undefined);
+      expect(value).toEqual('0.00');
+    });
+
     it('should format positive value as decimal, whole number', () => {
       const value = service.formatBigDecimal(2);
       expect(value).toEqual('2.00');
@@ -135,6 +145,11 @@ describe('Service: NovoLabelService', () => {
       expect(value).toEqual('(2.00)');
     });
 
+    it('should allow override of negative values to non-accounting format', () => {
+      const value = service.formatBigDecimal(-2, { useAccountingFormat: false });
+      expect(value).toEqual('-2.00');
+    });
+
     it('should format positive value as decimal, one decimal', () => {
       const value = service.formatBigDecimal(2.3);
       expect(value).toEqual('2.30');
@@ -150,9 +165,39 @@ describe('Service: NovoLabelService', () => {
       expect(value).toEqual('23,444.00');
     });
 
+    it('should allow removal of comma separator', () => {
+      const value = service.formatBigDecimal(23444, { useGrouping: false });
+      expect(value).toEqual('23444.00');
+    });
+
     it('should format positive value as decimal, large number with four decimal should truncate', () => {
       const value = service.formatBigDecimal(23444.1273);
       expect(value).toEqual('23,444.12');
+    });
+
+    it('should allow overloaded precision', () => {
+      const value = service.formatBigDecimal(123.123456789, { maximumFractionDigits: 6 });
+      expect(value).toEqual('123.123456');
+    });
+
+    it('should allow overloaded precision while enforcing minimum default', () => {
+      const value = service.formatBigDecimal(123, { maximumFractionDigits: 6 });
+      expect(value).toEqual('123.00');
+    });
+
+    it('should format large negative numbers with commas', () => {
+      const value = service.formatBigDecimal(-1234.5678);
+      expect(value).toEqual('(1,234.56)');
+    });
+
+    it('should allow for multiple override values', () => {
+      const value = service.formatBigDecimal(-1234.123456789, { useGrouping: false, maximumFractionDigits: 6, useAccountingFormat: false });
+      expect(value).toEqual('-1234.123456');
+    });
+
+    it('should allow for negative', () => {
+      const value = service.formatBigDecimal(2.14);
+      expect(value).toEqual('2.14');
     });
   });
 });

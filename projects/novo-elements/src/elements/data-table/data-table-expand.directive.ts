@@ -29,7 +29,7 @@ export class NovoDataTableExpandDirective<T> implements OnDestroy {
 
   shouldExpandAllRows = (targetId: number): boolean => targetId === undefined;
 
-  shouldExpandOneRow = (targetId: number) => targetId === ((this.row as unknown) as { id: number }).id;
+  shouldExpandOneRow = (targetId: number) => targetId === (this.row as unknown as { id: number }).id;
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
