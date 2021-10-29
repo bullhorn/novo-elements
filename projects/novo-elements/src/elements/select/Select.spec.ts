@@ -107,7 +107,7 @@ xdescribe('Elements: NovoSelectElement', () => {
       expect(comp.empty).toEqual(false);
     });
     it('should invoke writeValue with readOnly option', () => {
-      spyOn(comp, 'select');
+      jest.spyOn(comp, 'select');
       comp.model = 'baz';
       comp.options = [
         { label: 'foo', value: 'foo', readOnly: false },
@@ -176,7 +176,7 @@ xdescribe('Elements: NovoSelectElement', () => {
         value: { id: 1, label: 'one', disabled: true },
         index: 1,
       };
-      spyOn(comp.overlay, 'closePanel');
+      jest.spyOn(comp.overlay, 'closePanel');
       comp.setValueAndClose(mockEvent);
       expect(comp.selectedIndex).toEqual(-1);
       expect(comp.selected).toBeUndefined();

@@ -154,7 +154,7 @@ describe('Pipe: DateTableDateTimeRendererPipe', () => {
 
     it('DataTableBigDecimalRendererPipe should pass on the column configuration to formatBigDecimal', () => {
       // Arrange
-      spyOn(dataTableBigDecimalRendererPipe.labels, 'formatBigDecimal');
+      jest.spyOn(dataTableBigDecimalRendererPipe.labels, 'formatBigDecimal');
       const testVal = '12.52';
       const testColumn = {
         label: 'Total',

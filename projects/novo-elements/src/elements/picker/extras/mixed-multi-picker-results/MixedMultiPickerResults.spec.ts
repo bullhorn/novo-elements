@@ -33,7 +33,7 @@ describe('Elements: MixedMultiPickerResults', () => {
     });
     it('should focus on inputElement', (done) => {
       component.config = {};
-      spyOn(component.inputElement.nativeElement, 'focus');
+      jest.spyOn(component.inputElement.nativeElement, 'focus');
       component.term = 'test';
       setTimeout(() => {
         expect(component.inputElement.nativeElement.focus).toHaveBeenCalled();
@@ -57,7 +57,7 @@ describe('Elements: MixedMultiPickerResults', () => {
     it('should unsubscribe the keyboardSubscription', () => {
       component.keyboardSubscription = { unsubscribe: () => {} };
       component.config = { options: [] };
-      spyOn(component.keyboardSubscription, 'unsubscribe').and.callThrough();
+      jest.spyOn(component.keyboardSubscription, 'unsubscribe').and.callThrough();
       component.ngOnDestroy();
       expect(component.keyboardSubscription.unsubscribe).toHaveBeenCalled();
     });
@@ -67,7 +67,7 @@ describe('Elements: MixedMultiPickerResults', () => {
     let keyboardSubscription: { unsubscribe: () => void };
     beforeEach(() => {
       keyboardSubscription = { unsubscribe: () => {} };
-      spyOn(keyboardSubscription, 'unsubscribe').and.callThrough();
+      jest.spyOn(keyboardSubscription, 'unsubscribe').and.callThrough();
       const elem: HTMLElement = document.createElement('list');
       const elemRef: ElementRef = new ElementRef(elem);
       component.listElement = { element: elemRef };
@@ -86,12 +86,12 @@ describe('Elements: MixedMultiPickerResults', () => {
       expect(keyboardSubscription.unsubscribe).not.toHaveBeenCalled();
     });
     it('should scroll to the top', () => {
-      spyOn(component.renderer, 'setProperty').and.stub();
+      jest.spyOn(component.renderer, 'setProperty').and.stub();
       component.selectPrimaryOption({ value: '1', label: 'ABC' });
       expect(component.renderer.setProperty).toHaveBeenCalled();
     });
     it('should focus on the input element', () => {
-      spyOn(component.inputElement.nativeElement, 'focus').and.stub();
+      jest.spyOn(component.inputElement.nativeElement, 'focus').and.stub();
       component.selectPrimaryOption({ value: '1', label: 'ABC' });
       expect(component.inputElement.nativeElement.focus).toHaveBeenCalled();
     });
@@ -104,7 +104,7 @@ describe('Elements: MixedMultiPickerResults', () => {
       expect(component.keyboardSubscription).toBeDefined();
     });
     it('should call getNewMatches()', () => {
-      spyOn(component, 'getNewMatches').and.stub();
+      jest.spyOn(component, 'getNewMatches').and.stub();
       component.selectPrimaryOption({ value: '2', label: 'DEF', secondaryOptions: [{ value: '2.1', label: '2-1' }] });
       expect(component.getNewMatches).toHaveBeenCalledWith({
         value: '2',
@@ -123,8 +123,8 @@ describe('Elements: MixedMultiPickerResults', () => {
       }, 400);
     });
     it('should call selectActive and selectMatch if there are not secondary options', () => {
-      spyOn(component, 'selectActive').and.stub();
-      spyOn(component, 'selectMatch').and.stub();
+      jest.spyOn(component, 'selectActive').and.stub();
+      jest.spyOn(component, 'selectMatch').and.stub();
       component.selectPrimaryOption({ value: '1', label: 'ABC' });
       expect(component.selectActive).toHaveBeenCalledWith({ value: '1', label: 'ABC' });
       expect(component.selectMatch).toHaveBeenCalled();
@@ -138,12 +138,12 @@ describe('Elements: MixedMultiPickerResults', () => {
       component.inputElement = inputElemRef;
     });
     it('should focus on the input element', () => {
-      spyOn(component.inputElement.nativeElement, 'focus').and.stub();
+      jest.spyOn(component.inputElement.nativeElement, 'focus').and.stub();
       component.selectMatch();
       expect(component.inputElement.nativeElement.focus).toHaveBeenCalled();
     });
     it('should call super', () => {
-      spyOn(BasePickerResults.prototype, 'selectMatch').and.stub();
+      jest.spyOn(BasePickerResults.prototype, 'selectMatch').and.stub();
       component.selectMatch();
       expect(BasePickerResults.prototype.selectMatch).toHaveBeenCalled();
     });
@@ -154,7 +154,7 @@ describe('Elements: MixedMultiPickerResults', () => {
     beforeEach(() => {
       mouseEvent = new MouseEvent('');
       component.selectedPrimaryOption = { value: '1', label: 'ABC' };
-      spyOn(component, 'selectPrimaryOption').and.stub();
+      jest.spyOn(component, 'selectPrimaryOption').and.stub();
     });
     it('should clear out the search term', () => {
       component.searchTerm = 'ABC';
@@ -278,7 +278,7 @@ describe('Elements: MixedMultiPickerResults', () => {
     });
     it('should call the getSecondaryOptionsAsync function if a primaryOption has a getSecondaryOptionsAsync function', () => {
       const primaryOption = { value: '3', label: 'GHI', getSecondaryOptionsAsync: () => Promise.resolve() };
-      spyOn(primaryOption, 'getSecondaryOptionsAsync').and.callThrough();
+      jest.spyOn(primaryOption, 'getSecondaryOptionsAsync').and.callThrough();
       component.getNewMatches(primaryOption);
       expect(primaryOption.getSecondaryOptionsAsync).toHaveBeenCalled();
     });
@@ -359,7 +359,7 @@ describe('Elements: MixedMultiPickerResults', () => {
         ],
       });
       const primaryOption = { value: '3', label: 'GHI', getSecondaryOptionsAsync: () => Promise.resolve() };
-      spyOn(primaryOption, 'getSecondaryOptionsAsync').and.callThrough();
+      jest.spyOn(primaryOption, 'getSecondaryOptionsAsync').and.callThrough();
       component.getNewMatches(primaryOption);
       expect(component.matches).toEqual([
         { value: 's-1', label: 'ABC - Async Secondary Option 1' },
@@ -376,7 +376,7 @@ describe('Elements: MixedMultiPickerResults', () => {
         ],
       });
       const primaryOption = { value: '3', label: 'GHI', getSecondaryOptionsAsync: () => Promise.resolve() };
-      spyOn(primaryOption, 'getSecondaryOptionsAsync').and.callThrough();
+      jest.spyOn(primaryOption, 'getSecondaryOptionsAsync').and.callThrough();
       component.getNewMatches(primaryOption);
       expect(primaryOption.getSecondaryOptionsAsync).not.toHaveBeenCalled();
     });
@@ -387,7 +387,7 @@ describe('Elements: MixedMultiPickerResults', () => {
         getSecondaryOptionsAsync: () => Promise.resolve(),
         clearSecondaryOptions: new BehaviorSubject<Boolean>(true),
       };
-      spyOn(primaryOption.clearSecondaryOptions, 'subscribe').and.callThrough();
+      jest.spyOn(primaryOption.clearSecondaryOptions, 'subscribe').and.callThrough();
       component.getNewMatches(primaryOption);
       expect(primaryOption.clearSecondaryOptions.subscribe).toHaveBeenCalled();
     });

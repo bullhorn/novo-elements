@@ -35,7 +35,7 @@ describe('Elements: NovoDatePickerInputElement', () => {
 
   describe('Method: _setTriggerValue()', () => {
     beforeEach(() => {
-      spyOn(component, '_setFormValue');
+      jest.spyOn(component, '_setFormValue');
     });
     it('should set formattedValue to empty string if value is null', () => {
       component._setTriggerValue(null);
