@@ -473,7 +473,7 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
       );
       header.config.filterConfig.options = [...optionsToKeep, ...newOptions];
     } else {
-      header.config.filterConfig['options'] = newOptions;
+      header.config.filterConfig.options = newOptions;
     }
     header.setupFilterOptions();
     header.changeDetectorRef.markForCheck();

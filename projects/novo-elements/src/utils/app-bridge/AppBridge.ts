@@ -722,7 +722,7 @@ export class AppBridge {
     if (this._registeredFrames.length > 0) {
       this._registeredFrames.forEach((frame) => {
         postRobot.send(frame.source, MESSAGE_TYPES.CUSTOM_EVENT, {
-          event: event,
+          event,
           eventType: event,
           data,
         });

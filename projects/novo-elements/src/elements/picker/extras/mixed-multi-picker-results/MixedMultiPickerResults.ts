@@ -156,7 +156,7 @@ export class MixedMultiPickerResults extends BasePickerResults implements OnDest
       this.keyboardSubscription = fromEvent(this.inputElement.nativeElement, 'keyup')
         .pipe(debounceTime(350), distinctUntilChanged())
         .subscribe((keyEvent: KeyboardEvent) => {
-          this.searchTerm = keyEvent.target['value'];
+          this.searchTerm = (keyEvent.target as HTMLInputElement).value;
           this.matches = this.filterData();
           this.ref.markForCheck();
         });
