@@ -154,6 +154,15 @@ export class EntityPickerResult {
     return timestamp;
   }
 
+  renderTimeNoOffset(dateStr?: string) {
+    let timestamp = '';
+    if (dateStr) {
+      dateStr = dateStr.slice(0, 19);
+      timestamp = this.labels.formatTime(dateStr);
+    }
+    return timestamp;
+  }
+
   getNameForResult(result?: any) {
     if (result) {
       switch (result.searchEntity) {
