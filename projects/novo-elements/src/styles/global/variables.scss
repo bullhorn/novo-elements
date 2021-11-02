@@ -48,6 +48,7 @@ $earnCode: #696d79;
 $invoiceStatement: #696d79;
 $billableCharge: #696d79;
 $payableCharge: #696d79;
+$jobShift: #454ea0;
 // Color Applications
 $dark: #3d464d;
 $navigation: #2f384f;
@@ -99,6 +100,7 @@ $entity-colors: ('star': $placement,
   'billableCharge': $billableCharge,
   'payableCharge': $payableCharge,
   'invoiceStatement': $invoiceStatement,
+  'jobShift': $jobShift,
 );
 // Generic Color Map
 $app-colors: ('positive': $ocean,
@@ -174,6 +176,7 @@ $dark-colors: ('company': $company,
   'ash': $ash,
   'slate': $slate,
   'charcoal': $charcoal,
+  'jobShift': $jobShift,
 );
 // Light map
 $light-colors: ('background': $off-white,
