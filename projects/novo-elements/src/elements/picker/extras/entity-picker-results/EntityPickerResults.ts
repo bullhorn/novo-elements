@@ -137,6 +137,8 @@ export class EntityPickerResult {
           return 'user';
         case 'CorporationDepartment':
           return 'department';
+        case 'JobShift':
+          return 'timetable contract';
         default:
           return '';
       }
