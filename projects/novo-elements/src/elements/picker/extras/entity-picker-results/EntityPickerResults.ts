@@ -34,6 +34,26 @@ import { NovoLabelService } from '../../../../services/novo-label-service';
           <i class="bhi-calendar"></i>
           <span [innerHtml]="renderTimestamp(match.data.dateBegin) + ' - ' + renderTimestamp(match.data.dateEnd)"></span>
         </p>
+        <!-- START Date -->
+        <p class="start-date" *ngIf="match.data.startTime && match.data.searchEntity === 'JobShift'">
+            <i class="bhi-calendar"></i>
+            <span [innerHtml]="renderTimestamp(match.data.startTime)"></span>
+        </p>
+        <!-- START & END TIME -->
+        <p class="start-time" *ngIf="match.data.startTime && match.data.searchEntity === 'JobShift'">
+            <i class="bhi-clock"></i>
+            <span [innerHtml]="renderTimeNoOffset(match.data.startTime) + ' - ' + renderTimeNoOffset(match.data.endTime)"></span>
+        </p>
+        <!-- JOBORDER -->
+        <p class="job" *ngIf="match.data.jobOrder && match.data.searchEntity === 'JobShift'">
+            <i class="bhi-job"></i>
+            <span [innerHtml]="highlight(match.data.jobOrder.title, term)"></span>
+        </p>
+        <!-- OPENINGS -->
+        <p class="openings" *ngIf="match.data.openings && match.data.searchEntity === 'JobShift'">
+            <i class="bhi-candidate"></i>
+            <span>{{ match.data.numAssigned }} / {{ match.data.openings }}</span>
+        </p>
         <!-- EMAIL -->
         <p class="email" *ngIf="match.data.email">
           <i class="bhi-email"></i> <span [innerHtml]="highlight(match.data.email, term)"></span>
