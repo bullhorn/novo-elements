@@ -112,8 +112,8 @@ let nextId = 0;
       <div #panel class="novo-select-list" tabIndex="-1" [class.has-header]="headerConfig" [class.active]="panelOpen">
         <novo-option *ngIf="headerConfig" class="select-header" [class.open]="header.open">
           <novo-button *ngIf="!header.open" icon="add-thin" (click)="toggleHeader($event); (false)" tabIndex="-1" class="header">
-            {{ headerConfig.label }}
-          </novo-button>
+            {{ headerConfig.label }} </novo-button
+          >>
           <div *ngIf="header.open" [ngClass]="{ active: header.open }">
             <input
               autofocus
@@ -125,8 +125,9 @@ let nextId = 0;
               [ngClass]="{ invalid: !header.valid }"
             />
             <footer>
-              <novo-button (click)="toggleHeader($event, false)">{{ labels.cancel }}</novo-button>
-              <novo-button (click)="saveHeader()" class="primary">{{ labels.save }}</novo-button>
+              <novo-button (click)="toggleHeader($event, false)">{{ labels.cancel }}</novo-button
+              >> <novo-button (click)="saveHeader()" class="primary">{{ labels.save }}</novo-button
+              >>
             </footer>
           </div>
         </novo-option>

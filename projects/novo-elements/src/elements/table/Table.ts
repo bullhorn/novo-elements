@@ -85,20 +85,20 @@ export enum NovoTableMode {
             <tr role="row">
               <!-- DETAILS -->
               <th class="row-actions" *ngIf="config.hasDetails">
-                <button
+                <novo-button
                   theme="icon"
                   icon="next"
                   (click)="expandAllOnPage(config.expandAll)"
                   *ngIf="!config.expandAll"
                   data-automation-id="expand-all"
-                ></button>
-                <button
+                ></novo-button>
+                <novo-button
                   theme="icon"
                   icon="sort-desc"
                   (click)="expandAllOnPage(config.expandAll)"
                   *ngIf="config.expandAll"
                   data-automation-id="collapse-all"
-                ></button>
+                ></novo-button>
               </th>
               <!-- CHECKBOX -->
               <th class="row-actions checkbox mass-action" *ngIf="config.rowSelectionStyle === 'checkbox'">
@@ -153,7 +153,7 @@ export enum NovoTableMode {
                     parentScrollSelector=".table-container"
                     containerClass="table-dropdown"
                   >
-                    <button
+                    <novo-button
                       type="button"
                       theme="icon"
                       icon="filter"
@@ -161,7 +161,7 @@ export enum NovoTableMode {
                       [tooltip]="labels.filters"
                       [class.filtered]="column.filter || column.filter === false"
                       (click)="focusInput()"
-                    ></button>
+                    ></novo-button>
                     <!-- FILTER OPTIONS LIST -->
                     <list
                       *ngIf="
@@ -173,7 +173,7 @@ export enum NovoTableMode {
                       <item class="filter-search">
                         <div class="header">
                           <span>{{ labels.filters }}</span>
-                          <button
+                          <novo-button
                             theme="dialogue"
                             color="negative"
                             icon="times"
@@ -181,7 +181,7 @@ export enum NovoTableMode {
                             *ngIf="column.filter || column.filter === false"
                           >
                             {{ labels.clear }}
-                          </button>
+                          </novo-button>
                         </div>
                         <input
                           type="text"
@@ -208,9 +208,9 @@ export enum NovoTableMode {
                       <item class="filter-search">
                         <div class="header">
                           <span>{{ labels.filters }}</span>
-                          <button theme="dialogue" color="negative" icon="times" (click)="onFilterClear(column)" *ngIf="column.filter">
+                          <novo-button theme="dialogue" color="negative" icon="times" (click)="onFilterClear(column)" *ngIf="column.filter">
                             {{ labels.clear }}
-                          </button>
+                          </novo-button>
                         </div>
                         <input
                           type="text"
@@ -228,9 +228,9 @@ export enum NovoTableMode {
                       <item class="filter-search" *ngIf="!column.calenderShow">
                         <div class="header">
                           <span>{{ labels.filters }}</span>
-                          <button theme="dialogue" color="negative" icon="times" (click)="onFilterClear(column)" *ngIf="column.filter">
+                          <novo-button theme="dialogue" color="negative" icon="times" (click)="onFilterClear(column)" *ngIf="column.filter">
                             {{ labels.clear }}
-                          </button>
+                          </novo-button>
                         </div>
                       </item>
                       <item
@@ -280,8 +280,8 @@ export enum NovoTableMode {
                 [class.active]="row.id === activeId"
               >
                 <td class="row-actions" *ngIf="config.hasDetails">
-                  <button theme="icon" icon="next" (click)="row._expanded = !row._expanded" *ngIf="!row._expanded"></button>
-                  <button theme="icon" icon="sort-desc" (click)="row._expanded = !row._expanded" *ngIf="row._expanded"></button>
+                  <novo-button theme="icon" icon="next" (click)="row._expanded = !row._expanded" *ngIf="!row._expanded"></novo-button>
+                  <novo-button theme="icon" icon="sort-desc" (click)="row._expanded = !row._expanded" *ngIf="row._expanded"></novo-button>
                 </td>
                 <td class="row-actions checkbox" *ngIf="config.rowSelectionStyle === 'checkbox'">
                   <novo-checkbox

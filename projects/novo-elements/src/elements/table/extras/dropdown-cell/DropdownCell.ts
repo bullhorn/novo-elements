@@ -13,9 +13,9 @@ export interface INovoDropdownCellConfig {
   selector: 'novo-dropdown-cell',
   template: `
     <novo-dropdown parentScrollSelector=".table-container" containerClass="novo-table-dropdown-cell">
-      <button type="button" theme="secondary" icon="collapse" inverse>
+      <novo-button type="button" theme="secondary" icon="collapse" inverse>
         <span data-automation-id="novo-dropdown-cell-value">{{ value }}</span>
-      </button>
+      </novo-button>
       <list>
         <ng-container *ngFor="let config of meta.dropdownCellConfig; let i = index">
           <dropdown-item-header *ngIf="config.category">{{ config.category }}</dropdown-item-header>

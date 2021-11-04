@@ -13,10 +13,10 @@ import { NovoModalParams, NovoModalRef } from '../modal/modal-ref';
         <label>{{ params['label'] }}:</label> {{ params['oldValue'] }} <i class="bhi-arrow-right"></i> {{ params['newValue'] }}
       </h2>
       <h2 *ngIf="params['message']">{{ params['message'] }}</h2>
-      <button theme="standard" (click)="close(false)" [attr.data-automation-id]="'field-interaction-modal-cancel' + params['key']">
+      <novo-button theme="standard" (click)="close(false)" [attr.data-automation-id]="'field-interaction-modal-cancel' + params['key']">
         {{ labels.cancel }}
-      </button>
-      <button
+      </novo-button>
+      <novo-button
         theme="primary"
         icon="check"
         (click)="close(true)"
@@ -24,7 +24,7 @@ import { NovoModalParams, NovoModalRef } from '../modal/modal-ref';
         [attr.data-automation-id]="'field-interaction-modal-save-' + params['key']"
       >
         {{ labels.save }}
-      </button>
+      </novo-button>
     </novo-notification>
   `,
 })
@@ -42,10 +42,10 @@ export class ControlConfirmModal {
     <novo-notification type="warning" [attr.data-automation-id]="'field-interaction-modal-' + params['key']">
       <h1>{{ labels.promptModalMessage }}</h1>
       <p *ngFor="let change of params['changes']">{{ change }}</p>
-      <button theme="standard" (click)="close(false)" [attr.data-automation-id]="'field-interaction-modal-cancel' + params['key']">
+      <novo-button theme="standard" (click)="close(false)" [attr.data-automation-id]="'field-interaction-modal-cancel' + params['key']">
         {{ labels.cancel }}
-      </button>
-      <button
+      </novo-button>
+      <novo-button
         theme="primary"
         icon="check"
         (click)="close(true)"
@@ -53,7 +53,7 @@ export class ControlConfirmModal {
         [attr.data-automation-id]="'field-interaction-modal-yes-' + params['key']"
       >
         {{ labels.yes }}
-      </button>
+      </novo-button>
     </novo-notification>
   `,
 })

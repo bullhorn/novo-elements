@@ -16,9 +16,9 @@ export class NovoUtilsComponent {}
 @Component({
   selector: 'util-action, novo-action',
   template: `
-    <button theme="icon" [icon]="icon" [attr.inverse]="inverse" [disabled]="disabled">
+    <novo-button theme="icon" [icon]="icon" [attr.inverse]="inverse" [disabled]="disabled">
       <ng-content></ng-content>
-    </button>
+    </novo-button>
   `,
 })
 export class NovoUtilActionComponent {
@@ -32,9 +32,6 @@ export class NovoUtilActionComponent {
 
 @Component({
   selector: 'novo-header,header[theme]',
-  host: {
-    '[attr.role]': 'heading',
-  },
   template: `
     <section>
       <div class="header-title">
@@ -65,6 +62,8 @@ export class NovoUtilActionComponent {
   `,
 })
 export class NovoHeaderComponent {
+  @HostBinding('attr.role')
+  public role = 'heading';
   @HostBinding('class')
   public headerClass: string = 'novo-header';
   @HostBinding('class.condensed')

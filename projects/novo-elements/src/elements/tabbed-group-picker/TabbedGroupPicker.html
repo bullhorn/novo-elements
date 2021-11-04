@@ -1,12 +1,12 @@
 <novo-dropdown (toggled)="onDropdownToggle($event)" multiple>
-  <button
+  <novo-button
     class="tabbed-group-picker-button"
     [theme]="buttonConfig.theme"
     [side]="buttonConfig.side"
     [icon]="buttonConfig.icon"
     [loading]="loading">
     <div class="tabbed-group-picker-button-label">{{ buttonConfig.label }}</div>
-  </button>
+  </novo-button>
   <div class="tabbed-group-picker-search" data-automation-id="tabbed-group-picker-search">
     <input type="text" [placeholder]="labelService.search" [value]="filterText | async" (input)="onFilter($event)" />
     <i class="bhi-search" *ngIf="!(filterText | async)"></i>
@@ -20,8 +20,8 @@
           <span>{{ tab.typeLabel }} ({{ tab.data.length }})</span><i class="bhi-next"></i>
         </novo-tab>
       </novo-nav>
-      <button *ngIf="showClearAll" class="clear-all-button" theme="dialogue" icon="times" side="right"
-        color="grapefruit" (click)="deselectEverything($event)">{{ labelService.clear }}</button>
+      <novo-button *ngIf="showClearAll" class="clear-all-button" theme="dialogue" icon="times" side="right"
+        color="grapefruit" (click)="deselectEverything($event)">{{ labelService.clear }}</novo-button>
     </div>
     <div class="tabbed-group-picker-column right">
       <div class="quick-select" *ngIf="quickSelectConfig && !(filterText | async)">
@@ -65,7 +65,8 @@
       <div class="tabbed-group-picker-empty-item" *ngIf="!displayTab.data.length && (filterText | async)">
         <i class="{{ displayTab.icon || 'bhi-search' }}"></i>
         <div class="empty-item-main-message">{{ labelService.tabbedGroupPickerEmpty }}</div>
-        <div class="empty-item-sub-message">{{ labelService.tabbedGroupClearSuggestion(displayTab.typeLabel) }}</div>
+        <div class="empty-item-sub-message">{{ labelService.tabbedGroupClearSuggestion(displayTab.typeLabel) }}
+        </div>
       </div>
     </div>
   </div>

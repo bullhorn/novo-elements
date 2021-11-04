@@ -26,13 +26,13 @@
         [attr.aria-selected]="_isSelected(day.date)"
         [attr.data-automation-id]="day.number"
         (mouseover)="onHover($event, day)">
-        <button
+        <novo-button
           class="day"
           [attr.data-automation-id]="day.number"
           [disabled]="isDisabled(day.date)"
           (click)="onSelect($event, day)">
           {{ day.number }}
-        </button>
+        </novo-button>
       </div>
     </div>
   </div>

@@ -6,9 +6,9 @@ import { DataTableState } from './state/data-table-state.service';
   selector: 'novo-data-table-clear-button',
   template: `
     <novo-dropdown side="bottom-right" class="novo-data-table-clear-button" data-automation-id="novo-data-table-clear-dropdown">
-      <button type="button" theme="primary" color="negative" icon="collapse" data-automation-id="novo-data-table-clear-dropdown-btn">
+      <novo-button type="button" theme="primary" color="negative" icon="collapse" data-automation-id="novo-data-table-clear-dropdown-btn">
         {{ labels.clear }}
-      </button>
+      </novo-button>
       <list>
         <item *ngIf="state.sort" (click)="clearSort()" data-automation-id="novo-data-table-clear-dropdown-clear-sort">{{
           labels.clearSort

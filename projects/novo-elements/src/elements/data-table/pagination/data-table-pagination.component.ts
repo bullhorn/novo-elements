@@ -39,7 +39,7 @@ const MAX_PAGES_DISPLAYED = 5;
         {{ shortRangeLabel }}
       </div>
       <span class="spacer novo-data-table-spacer" *ngIf="theme === 'basic-wide'"></span>
-      <button
+      <novo-button
         theme="dialogue"
         type="button"
         class="novo-data-table-pagination-navigation-previous"
@@ -50,8 +50,8 @@ const MAX_PAGES_DISPLAYED = 5;
         data-automation-id="novo-data-table-pagination-previous"
       >
         <span>{{ labels.previous }}</span>
-      </button>
-      <button
+      </novo-button>
+      <novo-button
         theme="dialogue"
         type="button"
         class="novo-data-table-pagination-navigation-next"
@@ -62,7 +62,7 @@ const MAX_PAGES_DISPLAYED = 5;
         data-automation-id="novo-data-table-pagination-next"
       >
         <span>{{ labels.next }}</span>
-      </button>
+      </novo-button>
     </ng-container>
     <ng-container *ngIf="theme === 'standard'">
       <h5 class="rows">{{ labels.itemsPerPage }}</h5>

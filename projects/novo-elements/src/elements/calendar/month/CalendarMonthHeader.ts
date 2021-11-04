@@ -8,9 +8,9 @@ import { WeekDay } from '../../../utils/calendar-utils/CalendarUtils';
     <ng-template #defaultTemplate>
       <div class="calendar-header">
         <div class="calendar-header-top">
-          <button theme="icon" icon="previous" (click)="prevMonth($event)"></button>
+          <novo-button theme="icon" icon="previous" (click)="prevMonth($event)"></novo-button>>
           <div class="calendar-month">{{ viewDate | month: locale }}</div>
-          <button theme="icon" icon="next" (click)="nextMonth($event)"></button>
+          <novo-button theme="icon" icon="next" (click)="nextMonth($event)"></novo-button>>
         </div>
         <div class="calendar-weekdays">
           <div

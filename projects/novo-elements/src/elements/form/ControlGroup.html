@@ -19,24 +19,31 @@
           [condensed]="!vertical || c.controlType === 'read-only'"></novo-control>
       </div>
       <div class="novo-control-container last" *ngIf="edit && !vertical">
-        <button class="control-group-action" [disabled]="!disabledArray[index].edit" type="button"
+        <novo-button class="control-group-action" [disabled]="!disabledArray[index].edit" type="button"
           *ngIf="edit && !vertical" theme="icon" icon="edit"
-          (click)="editControl(index)" [attr.data-automation-id]="'novo-control-group-edit-' + key" index="-1"></button>
+          (click)="editControl(index)" [attr.data-automation-id]="'novo-control-group-edit-' + key" index="-1">
+        </novo-button>
       </div>
       <div class="novo-control-container last" *ngIf="remove && !vertical">
-        <button class="control-group-action" [disabled]="!disabledArray[index].remove" type="button"
+        <novo-button class="control-group-action" [disabled]="!disabledArray[index].remove" type="button"
           *ngIf="remove && !vertical" theme="icon"
-          icon="delete-o" (click)="removeControl(index)" [attr.data-automation-id]="'novo-control-group-delete-' + key"
-          index="-1"></button>
+          icon="delete-o" (click)="removeControl(index)"
+          [attr.data-automation-id]="'novo-control-group-delete-' + key"
+          index="-1">
+        </novo-button>
       </div>
     </div>
-    <button class="control-group-action" [disabled]="!disabledArray[index].edit" type="button" *ngIf="edit && vertical"
+    <novo-button class="control-group-action" [disabled]="!disabledArray[index].edit" type="button"
+      *ngIf="edit && vertical"
       theme="icon" icon="edit"
-      (click)="editControl(index)" [attr.data-automation-id]="'novo-control-group-edit-' + key" index="-1"></button>
-    <button class="control-group-action" [disabled]="!disabledArray[index].remove" type="button"
+      (click)="editControl(index)" [attr.data-automation-id]="'novo-control-group-edit-' + key" index="-1">
+    </novo-button>
+    <novo-button class="control-group-action" [disabled]="!disabledArray[index].remove" type="button"
       *ngIf="remove && vertical" theme="icon"
-      icon="delete-o" (click)="removeControl(index)" [attr.data-automation-id]="'novo-control-group-delete-' + key"
-      index="-1"></button>
+      icon="delete-o" (click)="removeControl(index)"
+      [attr.data-automation-id]="'novo-control-group-delete-' + key"
+      index="-1">
+    </novo-button>
   </ng-template>
 
   <ng-template #defaultColumnLabelTemplate let-form="form" let-key="key">
@@ -62,30 +69,34 @@
   </ng-container>
 
   <ng-container *ngIf="(form?.controls)[key]">
-    <div class="novo-control-group-row" *ngFor="let control of (form?.controls)[key]['controls']; let index = index">
+    <div class="novo-control-group-row"
+      *ngFor="let control of (form?.controls)[key]['controls']; let index = index">
       <ng-template [ngTemplateOutlet]="rowTemplate || defaultTemplate"
         [ngTemplateOutletContext]="{ form: form, formGroup: control, index: index, key: key, controls: controls }">
       </ng-template>
     </div>
   </ng-container>
 
-  <div class="novo-control-group-empty" *ngIf="(form?.controls)[key] && (form?.controls)[key]['controls'].length === 0"
+  <div class="novo-control-group-empty"
+    *ngIf="(form?.controls)[key] && (form?.controls)[key]['controls'].length === 0"
     [attr.data-automation-id]="'novo-control-group-empty-' + key">
     {{ emptyMessage }}
   </div>
 
   <div *ngIf="add" class="novo-control-group-footer">
-    <button type="button" theme="dialogue" icon="add-thin" side="left" (click)="onClickAdd()"
+    <novo-button type="button" theme="dialogue" icon="add-thin" side="left" (click)="onClickAdd()"
       [attr.data-automation-id]="'novo-control-group-bottom-add-' + key" index="-1">
       {{ add?.label }}
-    </button>
-    <!-- <button *ngIf="editState==='editing'" type="button" theme="dialogue" icon="close" side="left"
-      (click)="onClickCancel()" [attr.data-automation-id]="'novo-control-group-bottom-cancel-' + key" index="-1">
-      {{ 'cancel' }}
-    </button>
-    <button *ngIf="editState==='editing'" type="button" theme="dialogue" icon="check" side="left"
-      (click)="onClickSave()" [attr.data-automation-id]="'novo-control-group-bottom-save-' + key" index="-1">
-      {{ add?.label }}
-    </button> -->
+    </novo-button>
+    <!-- <novo-button *ngIf="editState==='editing'" type="button" theme="dialogue" icon="close" side="left"
+                  (click)="onClickCancel()" [attr.data-automation-id]="'novo-control-group-bottom-cancel-' + key"
+                  index="-1">
+                {{ 'cancel' }}
+                </novo-button>
+                  <novo-button *ngIf="editState==='editing'" type="button" theme="dialogue" icon="check" side="left"
+                  (click)="onClickSave()" [attr.data-automation-id]="'novo-control-group-bottom-save-' + key"
+                  index="-1">
+                {{ add?.label }}
+                </novo-button> -->
   </div>
 </div>

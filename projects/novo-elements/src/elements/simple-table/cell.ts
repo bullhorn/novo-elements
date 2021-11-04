@@ -246,11 +246,11 @@ export class NovoSimpleCheckboxCell extends _NovoCell implements OnDestroy, OnIn
   selector: 'novo-simple-action-cell',
   template: `
     <ng-container *ngIf="!column.options">
-      <button theme="icon" [icon]="column.icon" (click)="column.onClick(row)" [disabled]="isDisabled(column, row)"></button>
+      <novo-button theme="icon" [icon]="column.icon" (click)="column.onClick(row)" [disabled]="isDisabled(column, row)"></novo-button>
     </ng-container>
     <ng-container *ngIf="column.options">
       <novo-dropdown parentScrollSelector=".novo-simple-table" containerClass="novo-table-dropdown-cell">
-        <button type="button" theme="dialogue" icon="collapse" inverse>{{ column.label || labels.actions }}</button>
+        <novo-button type="button" theme="dialogue" icon="collapse" inverse>{{ column.label || labels.actions }}</novo-button>
         <list>
           <item *ngFor="let option of column.options" (action)="option.onClick(row)" [disabled]="isDisabled(option, row)">
             <span [attr.data-automation-id]="option.label">{{ option.label }}</span>

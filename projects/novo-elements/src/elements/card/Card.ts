@@ -74,7 +74,7 @@ export class CardFooterElement {}
       <!--Card Actions-->
       <div class="actions" [attr.data-automation-id]="cardAutomationId + '-actions'">
         <ng-content select="novo-card-actions"></ng-content>
-        <button
+        <novo-button
           theme="icon"
           icon="refresh"
           (click)="toggleRefresh()"
@@ -82,8 +82,9 @@ export class CardFooterElement {}
           [attr.data-automation-id]="cardAutomationId + '-refresh'"
           tooltip="{{ labels.refresh }}"
           tooltipPosition="bottom-left"
-        ></button>
-        <button
+        ></novo-button
+        >>
+        <novo-button
           theme="icon"
           icon="close-o"
           (click)="toggleClose()"
@@ -91,7 +92,8 @@ export class CardFooterElement {}
           [attr.data-automation-id]="cardAutomationId + '-close'"
           tooltip="{{ labels.close }}"
           tooltipPosition="bottom-left"
-        ></button>
+        ></novo-button
+        >>
       </div>
     </header>
     <!--Content (transcluded)-->

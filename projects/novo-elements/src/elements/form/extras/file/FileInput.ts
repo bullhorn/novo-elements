@@ -84,7 +84,7 @@ const LAYOUT_DEFAULTS = { order: 'default', download: true, removable: true, lab
           <label *ngIf="!file.link">{{ file.name | decodeURI }}</label>
           <div class="actions" [attr.data-automation-id]="'file-actions'" *ngIf="file.loaded">
             <div *ngIf="!layoutOptions.customActions">
-              <button
+              <novo-button
                 *ngIf="layoutOptions.download"
                 type="button"
                 theme="icon"
@@ -92,8 +92,8 @@ const LAYOUT_DEFAULTS = { order: 'default', download: true, removable: true, lab
                 (click)="download(file)"
                 [attr.data-automation-id]="'file-download'"
                 tabindex="-1"
-              ></button>
-              <button
+              ></novo-button>
+              <novo-button
                 *ngIf="!disabled && (layoutOptions.removable || (!layoutOptions.removable && layoutOptions.removableWhenNew && !file.link))"
                 type="button"
                 theme="icon"
@@ -101,10 +101,10 @@ const LAYOUT_DEFAULTS = { order: 'default', download: true, removable: true, lab
                 (click)="remove(file)"
                 [attr.data-automation-id]="'file-remove'"
                 tabindex="-1"
-              ></button>
+              ></novo-button>
             </div>
             <div *ngIf="layoutOptions.customActions">
-              <button
+              <novo-button
                 *ngIf="layoutOptions.edit && !disabled"
                 type="button"
                 theme="icon"
@@ -112,8 +112,8 @@ const LAYOUT_DEFAULTS = { order: 'default', download: true, removable: true, lab
                 (click)="customEdit(file)"
                 [attr.data-automation-id]="'file-edit'"
                 tabindex="-1"
-              ></button>
-              <button
+              ></novo-button>
+              <novo-button
                 *ngIf="layoutOptions.download"
                 type="button"
                 theme="icon"
@@ -121,8 +121,8 @@ const LAYOUT_DEFAULTS = { order: 'default', download: true, removable: true, lab
                 (click)="customSave(file)"
                 [attr.data-automation-id]="'file-download'"
                 tabindex="-1"
-              ></button>
-              <button
+              ></novo-button>
+              <novo-button
                 *ngIf="!disabled"
                 type="button"
                 theme="icon"
@@ -130,7 +130,7 @@ const LAYOUT_DEFAULTS = { order: 'default', download: true, removable: true, lab
                 (click)="customDelete(file)"
                 [attr.data-automation-id]="'file-remove'"
                 tabindex="-1"
-              ></button>
+              ></novo-button>
             </div>
           </div>
           <novo-loading *ngIf="!file.loaded"></novo-loading>
