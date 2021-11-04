@@ -80,6 +80,11 @@ export class NovoBaseTextElement {
   @BooleanInput()
   marginAfter: boolean;
 
+  @HostBinding('class.text-nowrap')
+  @Input()
+  @BooleanInput()
+  nowrap: boolean;
+
   constructor(protected element: ElementRef) {}
 
   get nativeElement() {

@@ -74,10 +74,29 @@
 @import "./elements/simple-table/table";
 @import "./elements/tabbed-group-picker/TabbedGroupPicker";
 
+.bgc-main {
+  background-color: var(--background, $color-bright);
+}
+.bgc-alt {
+  background-color: var(--background-alt, $color-white);
+}
+.bgc-body {
+  background-color: var(--background-body, $color-silver);
+}
+.txc-main {
+  color: var(--text-main, $color-dark);
+}
+.txc-bright {
+  color: var(--text-bright, $color-black);
+}
+.txc-muted {
+  color: var(--text-muted, $color-slate);
+}
+
 @include theme-colors() using ($color, $name) {
   .bgc-#{$name} {
     background: $color;
-    color: getContrastColor($name);
+    // color: getContrastColor($name); // this overwrites deeper than we want
   }
   .bgc-#{$name}-striped {
     & > *:nth-child(odd) {

@@ -20,6 +20,7 @@
     }
   }
 
+  @include base-text-rules();
   @include text-sizing(1rem, 1.1rem, 1.2rem);
   @include text-colors();
   @include text-margins();

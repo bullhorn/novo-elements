@@ -12,6 +12,7 @@
   // color: $dark;
   color: inherit;
 
+  @include base-text-rules();
   @include text-sizing(1.5rem, 1.8rem, 2.1rem);
   @include text-colors();
   @include text-margins();

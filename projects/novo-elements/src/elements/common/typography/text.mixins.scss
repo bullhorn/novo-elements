@@ -5,6 +5,12 @@
   color: $disabled;
 }
 
+@mixin base-text-rules() {
+  &.text-nowrap {
+    white-space: nowrap;
+  }
+}
+
 @mixin text-sizing($small, $base, $large) {
   &.text-size-default {
     font-size: $base;

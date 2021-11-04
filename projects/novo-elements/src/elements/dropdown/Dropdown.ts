@@ -140,7 +140,6 @@ export class NovoDropdownElement extends NovoDropdowMixins implements OnInit, Af
   private _multiple: boolean = false;
 
   get button() {
-    console.log('button', this._button, this._trigger);
     return this._button || this._trigger;
   }
 

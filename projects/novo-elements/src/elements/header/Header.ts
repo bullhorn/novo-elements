@@ -78,6 +78,9 @@ export class NovoHeaderComponent {
   public inverse: string = 'inverse';
 
   @Input()
+  public icon: string;
+
+  @Input()
   public size: 'small' | 'medium' | 'large';
 
   @HostBinding('class.header-size-small')
@@ -106,15 +109,5 @@ export class NovoHeaderComponent {
     return this._theme;
   }
 
-  @Input()
-  set icon(icon: string) {
-    this._icon = `bhi-${icon}`;
-  }
-
-  get icon(): string {
-    return this._icon;
-  }
-
   private _theme: string;
-  private _icon: string;
 }

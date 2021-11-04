@@ -179,7 +179,6 @@ export class NovoAutocompleteElement
 
   checkPanel() {
     const isTriggered = this.triggerOn(this._formField._control);
-    console.log('Is Triggered', isTriggered);
     if (isTriggered && this.element) {
       this.openPanel();
     }
@@ -201,7 +200,6 @@ export class NovoAutocompleteElement
       } else {
         let valueToEmit: any = inputValue;
         if (this.multiple) {
-          console.log('Current Field', this._formField._control);
           const currentValue = this._formField._control.value;
           if (Array.isArray(currentValue)) {
             valueToEmit = [...currentValue, inputValue];
