@@ -6,22 +6,23 @@
   <novo-icon [theme]="theme" [name]="icon">{{icon}}</novo-icon>
   <novo-title>
     <span class="id">123456</span>
+    <novo-divider vertical></novo-divider>
     <span class="name">Steve Jobs</span>
   </novo-title>
   <section class="links">
-    <button theme="icon" [icon]="'google'"></button>
-    <button theme="icon" [icon]="'linkedin-f'"></button>
-    <button theme="icon" [icon]="'location'"></button>
+    <button theme="icon" color="white" [icon]="'google'"></button>
+    <button theme="icon" color="white" [icon]="'linkedin-f'"></button>
+    <button theme="icon" color="white" [icon]="'location'"></button>
   </section>
-  <novo-nav theme="white" direction="horizontal" condensed>
-    <novo-tab>
-      <span>Overview</span>
-    </novo-tab>
-    <novo-tab>
-      <span>Activity</span>
-    </novo-tab>
-    <novo-tab>
-      <span>Email</span>
-    </novo-tab>
-  </novo-nav>
 </header>
+<novo-nav theme="white" direction="horizontal">
+  <novo-tab>
+    <span>Overview</span>
+  </novo-tab>
+  <novo-tab>
+    <span>Activity</span>
+  </novo-tab>
+  <novo-tab>
+    <span>Email</span>
+  </novo-tab>
+</novo-nav>

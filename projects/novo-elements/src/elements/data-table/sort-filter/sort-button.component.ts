@@ -27,7 +27,6 @@ export class NovoDataTableSortButton<T> {
 
   changeSort(dir: SortDirection): void {
     this.value = dir;
-    console.log('sort', dir);
     this.sortChange.emit(dir);
   }
 

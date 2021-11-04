@@ -15,6 +15,7 @@
     }
   }
 
+  @include base-text-rules();
   @include text-sizing(0.8em, 1em, 1.2em);
   @include text-colors();
   @include text-weights();

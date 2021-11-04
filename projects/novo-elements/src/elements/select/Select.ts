@@ -158,8 +158,7 @@ let nextId = 0;
 })
 export class NovoSelectElement
   extends NovoSelectMixins
-  implements OnInit, AfterViewInit, OnChanges, OnDestroy, ControlValueAccessor, NovoFieldControl<any>
-{
+  implements OnInit, AfterViewInit, OnChanges, OnDestroy, ControlValueAccessor, NovoFieldControl<any> {
   private _uniqueId: string = `novo-select-${++nextId}`;
   private _stateChanges = Subscription.EMPTY;
   private _activeOptionChanges = Subscription.EMPTY;
@@ -398,7 +397,6 @@ export class NovoSelectElement
     // Defer setting the value in order to avoid the "Expression
     // has changed after it was checked" errors from Angular.
     Promise.resolve().then(() => {
-      console.log('Initialize selection', this.ngControl ? this.ngControl.value : this._value);
       this._setSelectionByValue(this.ngControl ? this.ngControl.value : this._value);
       this.stateChanges.next();
     });
@@ -434,7 +432,8 @@ export class NovoSelectElement
    * @returns Option that has the corresponding value.
    */
   private _selectValue(value: any): NovoOption | undefined {
-    const correspondingOption = this._getOptions().find((option: NovoOption) => {
+    const allOptions = this._getOptions();
+    const correspondingOption = allOptions.find((option: NovoOption) => {
       // Skip options that are already in the model. This allows us to handle cases
       // where the same primitive value is selected multiple times.
       if (this._selectionModel.isSelected(option)) {
@@ -497,8 +496,8 @@ export class NovoSelectElement
     const toDisplay = this.displayWith ? this.displayWith(option.value) : option.viewValue;
     // Simply falling back to an empty string if the display value is falsy does not work properly.
     // The display value can also be the number zero and shouldn't fall back to an empty string.
-    const dispalyValue = toDisplay != null ? toDisplay : '';
-    return dispalyValue;
+    const displayValue = toDisplay != null ? toDisplay : '';
+    return displayValue;
   }
 
   /**

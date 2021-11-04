@@ -1,3 +1,12 @@
-span[tooltip]{
-  margin-left: 10px;
+/** CSS for this example */
+:host {
+  margin: auto;
+  padding: 20px 30px;
+  position: relative;
+  display: flex;
+}
+
+:host > span {
+  cursor: pointer;
+  margin: auto;
 }

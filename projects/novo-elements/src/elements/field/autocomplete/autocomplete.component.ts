@@ -75,8 +75,7 @@ const NovoAutocompleteMixins: HasOverlayCtor & CanDisableCtor & typeof NovoAutoc
 })
 export class NovoAutocompleteElement
   extends NovoAutocompleteMixins
-  implements CanDisable, AfterContentInit, AfterViewInit, OnChanges, OnDestroy
-{
+  implements CanDisable, AfterContentInit, AfterViewInit, OnChanges, OnDestroy {
   private _stateChanges = Subscription.EMPTY;
   private _activeOptionChanges = Subscription.EMPTY;
   private _selectedOptionChanges = Subscription.EMPTY;
@@ -180,7 +179,6 @@ export class NovoAutocompleteElement
 
   checkPanel() {
     const isTriggered = this.triggerOn(this._formField._control);
-    console.log('Is Triggered', isTriggered);
     if (isTriggered && this.element) {
       this.openPanel();
     }
@@ -202,7 +200,6 @@ export class NovoAutocompleteElement
       } else {
         let valueToEmit: any = inputValue;
         if (this.multiple) {
-          console.log('Current Field', this._formField._control);
           const currentValue = this._formField._control.value;
           if (Array.isArray(currentValue)) {
             valueToEmit = [...currentValue, inputValue];

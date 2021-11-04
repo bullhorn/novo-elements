@@ -1,17 +1,21 @@
+$small-spinner-size: 1.2em;
+$medium-spinner-size: 1.8em;
+$large-spinner-size: 2.1em;
+
 novo-spinner {
-  display: block;
-  width: 40px;
-  height: 40px;
+  display: inline-block;
+  width: $medium-spinner-size;
+  height: $medium-spinner-size;
   position: relative;
 
   &.small {
-    width: 20px;
-    height: 20px;
+    width: $small-spinner-size;
+    height: $small-spinner-size;
   }
 
   &.large {
-    width: 60px;
-    height: 60px;
+    width: $large-spinner-size;
+    height: $large-spinner-size;
   }
 
   .dot {

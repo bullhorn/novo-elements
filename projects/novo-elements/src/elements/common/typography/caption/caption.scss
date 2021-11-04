@@ -9,6 +9,7 @@
   line-height: 1.2rem;
   color: $neutral;
 
+  @include base-text-rules();
   @include text-sizing(0.8rem, 0.9rem, 1rem);
   @include text-colors();
   @include text-weights();

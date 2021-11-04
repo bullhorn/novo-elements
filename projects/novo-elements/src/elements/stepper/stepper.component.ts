@@ -49,7 +49,10 @@ export class NovoStep extends CdkStep {
 
 @Directive({
   selector: '[novoStepper]',
-  providers: [{ provide: CdkStepper, useExisting: NovoStepper }],
+  providers: [
+    { provide: CdkStep, useExisting: NovoStep },
+    { provide: CdkStepper, useExisting: NovoStepper },
+  ],
 })
 export class NovoStepper extends CdkStepper implements AfterContentInit {
   /** The list of step headers of the steps in the stepper. */
@@ -57,8 +60,16 @@ export class NovoStepper extends CdkStepper implements AfterContentInit {
   _stepHeader: QueryList<FocusableOption>;
 
   /** Steps that the stepper holds. */
-  @ContentChildren(NovoStep)
+  @ContentChildren(NovoStep, { descendants: true })
   _steps: QueryList<NovoStep>;
+
+  /** Steps that belong to the current stepper, excluding ones from nested steppers. */
+  public get steps(): QueryList<NovoStep> {
+    return this._steps;
+  }
+  public set steps(value: QueryList<NovoStep>) {
+    this._steps = value;
+  }
 
   /** Custom icon overrides passed in by the consumer. */
   @ContentChildren(NovoIconComponent)
