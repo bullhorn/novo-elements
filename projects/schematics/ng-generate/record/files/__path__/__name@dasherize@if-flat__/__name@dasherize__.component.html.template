@@ -1,0 +1,28 @@
+<header theme="company">
+  <novo-icon>company</novo-icon>
+  <h1 novo-title [isLoading]="record">
+    <span *skeleton></span>
+    <span *loaded>{{record.id}} | {{record.name}}</span>
+  </h1>
+  <novo-action icon="convert" tooltip="Change Theme" (click)="changeTheme()"></novo-action>
+  <novo-action icon="refresh" tooltip="Refresh" (click)="refresh()"></novo-action>
+  <novo-action icon="times" tooltip="Show Popup" (click)="catchEv('close', $event)"></novo-action>
+  <section>
+    <button theme="icon" icon="google"></button>
+    <button theme="icon" icon="linkedin-f"></button>
+    <button theme="icon" icon="location"></button>
+  </section>
+  <novo-list class="bgc-off-white" direction="horizontal" [isLoading]="values">
+    <novo-value *skeleton></novo-value>
+    <novo-value *skeleton></novo-value>
+    <novo-value *ngFor="let value of values" [label]="value.label" [data]="value.data"></novo-value>
+  </novo-list>
+  <novo-nav theme="white" direction="horizontal" condensed="true" [isLoading]="tabs">
+    <novo-tab *skeleton></novo-tab>
+    <novo-tab *skeleton></novo-tab>
+    <novo-tab *skeleton></novo-tab>
+    <novo-tab *ngFor="let tab of tabs">
+      <span>{{tab}}</span>
+    </novo-tab>
+  </novo-nav>
+</header>

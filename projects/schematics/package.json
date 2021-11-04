@@ -1,0 +1,15 @@
+{
+  "name": "schematics",
+  "version": "0.0.0",
+  "description": "A novo-element schematics",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "npm run build && jasmine **/*_spec.js"
+  },
+  "keywords": [
+    "schematics"
+  ],
+  "author": "",
+  "license": "MIT",
+  "schematics": "./src/collection.json"
+}

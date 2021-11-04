@@ -346,10 +346,14 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
       this.multiSelectedOptions = this.filter ? [...this.filter] : [];
       if (this.config.filterConfig.options) {
         if (typeof this.config.filterConfig.options[0] === 'string') {
-          this.multiSelectedOptionIsHidden = (this.config.filterConfig.options as string[]).map((option: string): {
-            option: string;
-            hidden: boolean;
-          } => ({ option, hidden: false }));
+          this.multiSelectedOptionIsHidden = (this.config.filterConfig.options as string[]).map(
+            (
+              option: string,
+            ): {
+              option: string;
+              hidden: boolean;
+            } => ({ option, hidden: false }),
+          );
         } else {
           this.multiSelectedOptionIsHidden = (this.config.filterConfig.options as IDataTableColumnFilterOption[]).map(
             (option: IDataTableColumnFilterOption): { option: IDataTableColumnFilterOption; hidden: boolean } => ({
