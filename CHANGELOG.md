@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [5.6.1](https://github.com/bullhorn/novo-elements/compare/v5.6.0...v5.6.1) (2021-11-05)
+
+
+### Bug Fixes
+
+* **WorkflowOptions:** Allow additional data in workflow option ([#1234](https://github.com/bullhorn/novo-elements/issues/1234)) ([4c960a0](https://github.com/bullhorn/novo-elements/commit/4c960a0c2e17d829ef7fbbc238c6be5fbbe69685))
+
 ## [5.6.0](https://github.com/bullhorn/novo-elements/compare/v5.5.2...v5.6.0) (2021-10-14)
 
 
