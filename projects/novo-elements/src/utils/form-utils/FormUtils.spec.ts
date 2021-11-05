@@ -534,8 +534,8 @@ describe('Utils: FormUtils', () => {
           3: [],
         },
       };
-      const result = formUtils.getControlOptions(field, undefined, undefined, { id: 2 });
-      expect(result).toEqual([{ value: 2, label: 2 }, { value: 3, label: 'three' }]);
+      const result = formUtils.getControlOptions(field, undefined, undefined, { id: 2, label: 'two', shouldRunValidationsOnSave: true, });
+      expect(result).toEqual([{ id: 2, shouldRunValidationsOnSave: true, value: 2, label: 'two' }, { value: 3, label: 'three' }]);
     });
     it('should add current option to array if current value is not there for WorkflowOptions', () => {
       const field: { workflowOptions: Object } = {
@@ -547,7 +547,7 @@ describe('Utils: FormUtils', () => {
         },
       };
       const result = formUtils.getControlOptions(field, undefined, undefined, { id: 3, label: 'three' });
-      expect(result).toEqual([{ value: 3, label: 'three' }]);
+      expect(result).toEqual([{ id: 3, value: 3, label: 'three' }]);
     });
     it('should return initial options when value has no id', () => {
       const field: { workflowOptions: Object } = {
