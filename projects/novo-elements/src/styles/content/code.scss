@@ -3,7 +3,7 @@
 code,
 samp,
 time {
-  background: var(--background);
+  background: var(--background-main);
   color: var(--code);
   border: 1px solid var(--border);
   padding: 2px 4px;
@@ -26,7 +26,7 @@ var {
 
 kbd {
   font-family: $font-family-mono;
-  background: var(--background);
+  background: var(--background-main);
   border: 1px solid var(--border);
   border-radius: 2px;
   color: var(--text-main);

@@ -19,14 +19,15 @@ order: 3
 # Roadmap
 
 - [x] Improve Typing Support
-- [ ] Make color and theming consistent
-- [ ] Dark Mode
+- [x] Make color and theming consistent
+- [x] Dark Mode
+- [ ] Depreacted `theme` property in favor of `type`
 
 # Changelog
 
-### 5.0.0
+### 6.0.0
 
-_added in this version_
+_better sizing_
 
 # Components
 

@@ -5,11 +5,49 @@ title: Design
 order: 2
 ---
 
+## Usage
+
+<novo-grid columns="2" align="start" gap="2rem">
+<div>
+
+A toast provides feedback about an operation while maintaining visibility and interaction with the current activity. It conveys information to the user that is not critical and does not require specific attention. A toast does not prevent the user from continuing their activity.
+
+When the user is not presented with some form of confirmation about the completion of the action.
+
+**Works with following input types**
+
+- Default input, select, textarea
+- novo-select
+- novo-datepicker
+
+</div>
+
+<img src="assets/images/ToastBanners.png"/>
+
+<div>
+
+### Use When
+
+- (✓) Use a Banner when a form cannot be saved to show an error occurred.
+- (✓) Use a Banner when an action can’t be completed due to an error or failure.
+- (✓) Use a Growl when an action is successfully performed and the context, i.e. modal, is no longer available.
+- (✓) When an action happens asynchronously, e.g. file upload.
+
+</div>
+<div>
+
+### Don′t Use When
+
+- (x) Don’t use it to confirm an action, a toast should be reactive not pro-active.
+
+</div>
+</novo-grid>
+
 ## Anatomy
 
 <novo-grid columns="2" align="start" gap="2rem">
 
-<img src="assets/images/ModalAnatomy.png" width="450">
+<img src="assets/images/ToastBanners.png" width="450">
 
 <div>
 
@@ -46,28 +84,6 @@ order: 2
 
 Background utilises color to indicate status of the message. Icon is often synonymous with the status of the color, _e.g. warning icon goes with yellow background_
 
-<novo-grid columns="2" align="start" gap="2rem">
-
-> **Pattern**
->
-> Yellow for warnings
-
-![placeholder](https://via.placeholder.com/350x250)
-
-> **Pattern**
->
-> Green for successful actions
-
-![placeholder](https://via.placeholder.com/350x250)
-
-> **Pattern**
->
-> Red for errors or unsuccessfully attempted actions
-
-![placeholder](https://via.placeholder.com/350x250)
-
-</novo-grid>
-
 ## Behaviors
 
 **Movement**
@@ -76,13 +92,26 @@ A toast appears through an animated movement to draw the users attention. A bann
 
 <novo-grid columns="2" align="start" gap="2rem">
 
-> **Pattern**
+> **Embedded**
 >
-> Yellow for warnings
+> Banners should be used as static notifications, usually shown at the top of content.
 
-![placeholder](https://via.placeholder.com/350x250)
+![placeholder](assets/images/ToastEmbedded.png)
+
+> **Position**
+>
+> Growl notifications can be displayed at the top, left, right, bottom or corner of the page. Notification will also stack on top of each other until dismissed.  In general that an application use the same location for all growl notications, so the user will know where to look for them.
+
+![placeholder](assets/images/ToastLayout.png)
+
+> **Actions**
+>
+> Growls and Banners can have actions that can be invoked before being dismissed.  This action should be contextual to the action that triggered the toast in the first place.  eg. Actions like "Undo" or "See more" are common use-case, this helps create a workflow that is streamlined for the user but provides optional actions when needed.
+
+![placeholder](assets/images/ToastGrowlAction.png)
 
 </novo-grid>
+
 
 ## How to configure
 
@@ -102,23 +131,6 @@ A toast appears through an animated movement to draw the users attention. A bann
 
 </novo-grid>
 
-## Patterns
-
-<novo-grid columns="2" align="start" gap="2rem">
-
-> **Pattern**
->
-> Why is it configured like this
-
-![placeholder](https://via.placeholder.com/350x250)
-
-> **Pattern**
->
-> Why is it configured like this
-
-![placeholder](https://via.placeholder.com/350x250)
-
-</novo-grid>
 
 ## Accessibility
 

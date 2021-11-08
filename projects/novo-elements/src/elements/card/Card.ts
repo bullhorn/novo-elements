@@ -82,8 +82,8 @@ export class CardFooterElement {}
           [attr.data-automation-id]="cardAutomationId + '-refresh'"
           tooltip="{{ labels.refresh }}"
           tooltipPosition="bottom-left"
-        ></novo-button
-        >>
+        ></novo-button>
+
         <novo-button
           theme="icon"
           icon="close-o"
@@ -92,8 +92,7 @@ export class CardFooterElement {}
           [attr.data-automation-id]="cardAutomationId + '-close'"
           tooltip="{{ labels.close }}"
           tooltipPosition="bottom-left"
-        ></novo-button
-        >>
+        ></novo-button>
       </div>
     </header>
     <!--Content (transcluded)-->

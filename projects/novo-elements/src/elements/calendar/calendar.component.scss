@@ -1,0 +1,125 @@
+@import "../../styles/variables.scss";
+
+:host(.layout-horizontal) {
+  font-size: 1.2rem;
+
+  .calendar-content {
+    flex-flow: row nowrap;
+  }
+
+  .month-view + .month-view {
+    border-collapse: unset;
+    border-left: 1px solid $light;
+    margin-left: 0.5rem;
+    padding-left: 0.5rem;
+  }
+}
+:host(.layout-vertical) {
+  .calendar-content {
+    flex-flow: column nowrap;
+  }
+  .calendar-header {
+    .heading.secondary {
+      display: none;
+    }
+  }
+}
+
+:host {
+  display: block;
+  width: 100%;
+  text-align: center;
+  background: var(--background-bright);
+  color: var(--text-bright);
+  position: relative;
+  user-select: none;
+
+  .calendar-content {
+    display: flex;
+    width: 100%;
+    height: min-content;
+    position: static;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+  }
+
+  .calendar-header {
+    width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    border-collapse: collapse;
+    padding: 1rem 0.8rem;
+    -webkit-user-select: none;
+    justify-content: space-between;
+    align-items: center;
+    cursor: default;
+    border-bottom: 1px solid var(--border);
+    .previous {
+      width: 30px;
+      height: 15px;
+      display: inline-block;
+      cursor: pointer;
+      &:after {
+        content: "";
+        border-bottom: 4px solid transparent;
+        border-top: 4px solid transparent;
+        border-right: 4px solid #aaa;
+        display: inline-block;
+        height: 0;
+        vertical-align: middle;
+        width: 0;
+      }
+      &:hover:after {
+        border-right: 4px solid $positive;
+        cursor: pointer;
+      }
+    }
+    .heading {
+      flex: 1;
+      display: inline-block;
+      vertical-align: middle;
+      color: $positive;
+      font-weight: 600;
+      .month {
+        border-radius: 2px;
+        padding: 3px 8px;
+        &:hover {
+          background: $positive;
+          color: #fff;
+          cursor: pointer;
+        }
+      }
+      .year {
+        border-radius: 2px;
+        padding: 3px 8px;
+        &:hover {
+          background: $positive;
+          color: #fff;
+          cursor: pointer;
+        }
+      }
+    }
+    .next {
+      width: 30px;
+      height: 15px;
+      display: inline-block;
+      cursor: pointer;
+      &:before {
+        content: "";
+        border-bottom: 4px solid transparent;
+        border-top: 4px solid transparent;
+        border-left: 4px solid #aaa;
+        display: inline-block;
+        height: 0;
+        vertical-align: middle;
+        width: 0;
+      }
+      &:hover:before {
+        opacity: 1;
+        border-left: 4px solid $positive;
+        cursor: pointer;
+      }
+    }
+  }
+}

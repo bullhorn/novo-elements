@@ -4,11 +4,12 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 // APP
 import { NovoAceEditorModule } from './elements/ace-editor/AceEditor.module';
+import { NovoAgendaModule } from './elements/agenda/Agenda.module';
 import { NovoAsideModule } from './elements/aside/aside.module';
 import { NovoAvatarModule } from './elements/avatar/Avatar.module';
 import { NovoBreadcrumbModule } from './elements/breadcrumbs/Breadcrumb.module';
 import { NovoButtonModule } from './elements/button/Button.module';
-import { NovoCalendarModule } from './elements/calendar/Calendar.module';
+import { NovoCalendarModule } from './elements/calendar/calendar.module';
 import { NovoCardModule } from './elements/card/Card.module';
 import { NovoCategoryDropdownModule } from './elements/category-dropdown/CategoryDropdown.module';
 import { NovoCheckboxModule } from './elements/checkbox/Checkbox.module';
@@ -81,6 +82,7 @@ import { FormUtils } from './utils/form-utils/FormUtils';
     NovoButtonModule,
     NovoLoadingModule,
     NovoCardModule,
+    NovoAgendaModule,
     NovoCalendarModule,
     NovoCheckboxModule,
     NovoFlexModule,

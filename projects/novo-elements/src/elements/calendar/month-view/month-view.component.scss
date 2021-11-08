@@ -1,0 +1,190 @@
+@import "../../../styles/variables.scss";
+
+:host {
+  background: var(--background-bright);
+  width: 100%;
+  height: min-content;
+  position: relative;
+  .calendar-table {
+    display: table;
+    // border-collapse: collapse;
+    .calendar-thead {
+      display: table-header-group;
+    }
+    .calendar-th {
+      display: table-cell;
+      width: 30px;
+      padding: 10px 0;
+    }
+    .calendar-body {
+      display: table-row-group;
+    }
+    .calendar-week {
+      display: table-row;
+    }
+    .month,
+    .year {
+      text-align: center;
+      padding: 4px 15px;
+      color: #666666;
+      overflow-x: hidden;
+      text-overflow: ellipsis;
+      margin: 5px;
+      font-weight: normal;
+      border-radius: 3px;
+      &.selected {
+        background-color: $positive;
+        color: #fff;
+      }
+      &:hover {
+        cursor: pointer;
+        background-color: $positive;
+        color: #fff;
+      }
+    }
+    .day {
+      height: 3.2rem;
+      width: 3.2rem;
+      line-height: 1;
+      font-size: 1.2rem;
+      padding: 1px;
+      border: none;
+      background-color: transparent;
+      border-radius: 50%;
+      box-shadow: inset 0 0 0 2px transparent;
+      transition: box-shadow 140ms ease-in-out;
+      position: relative;
+      color: var(--text-main, $dark);
+
+      &:focus {
+        outline: none;
+      }
+      &:disabled {
+        color: var(--text-muted, #d7d9e4);
+        cursor: not-allowed !important;
+        box-shadow: none !important;
+      }
+    }
+    .calendar-date {
+      display: table-cell;
+
+      &.notinmonth {
+        color: var(--text-muted, #d7d9e4);
+      }
+      &:hover {
+        .day {
+          cursor: pointer;
+          box-shadow: inset 0 0 0 2px $positive;
+        }
+      }
+      &.inRange:hover {
+        .day {
+          box-shadow: inset 0 0 0 2px $white;
+        }
+      }
+
+      &.inRange {
+        background: $positive;
+        color: #fff;
+        height: 3.2rem;
+        width: 3.2rem;
+        border-radius: 0;
+        .day {
+          color: white;
+        }
+      }
+
+      &.rangeStart {
+        border-radius: 50%;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        box-shadow: none !important;
+        position: relative;
+        &:before {
+          content: "";
+          position: absolute;
+          height: 100%;
+          background: #4a89dc;
+          width: 10px;
+          top: 0;
+          right: -5px;
+          z-index: z(below);
+        }
+      }
+      &.rangeEnd {
+        border-radius: 50%;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        box-shadow: none !important;
+        position: relative;
+        &:before {
+          content: "";
+          position: absolute;
+          height: 100%;
+          background: #4a89dc;
+          width: 10px;
+          top: 0;
+          left: -5px;
+          z-index: z(below);
+        }
+      }
+      &.selected {
+        .day {
+          background: $positive;
+          color: #fff;
+        }
+      }
+      &.preview:not(.previewStart):not(.previewEnd) {
+        .day {
+          border: 1px dashed $positive;
+        }
+        &.selected {
+          .day {
+            border: 1px dashed #9dbeff;
+          }
+        }
+      }
+      &.today {
+        .day:after {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          border-radius: 100%;
+          width: 100%;
+          height: 100%;
+          max-width: 3.2rem;
+          margin: 0 auto;
+          box-shadow: inset 0 0 0 2px $light;
+        }
+        &.inRange,
+        &.selected {
+          .day:after {
+            box-shadow: inset 0 0 0 2px #9dbeff;
+          }
+        }
+      }
+
+      &.inPreview .day {
+        border-radius: 0;
+        border-top: 1px dashed $positive;
+        border-bottom: 1px dashed $positive;
+      }
+
+      &.previewStart .day {
+        border-radius: 50%;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        box-shadow: none !important;
+        border-left: 1px dashed $positive;
+      }
+      &.previewEnd .day {
+        border-radius: 50%;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        box-shadow: none !important;
+        border-right: 1px dashed $positive;
+      }
+    }
+  }
+}

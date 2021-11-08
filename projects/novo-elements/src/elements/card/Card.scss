@@ -3,7 +3,7 @@
 .novo-card {
   display: flex;
   flex-flow: column;
-  background-color: var(--background-alt, $color-white);
+  background-color: var(--background-bright, $color-white);
   box-shadow: $shadow-card;
   border-radius: 0.4em;
   position: relative;

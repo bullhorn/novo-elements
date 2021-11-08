@@ -51,13 +51,13 @@ With Novo Elements there are a few hard coded labels throughout the library. To 
 
 To make Angular2 use this new class over the default one you can provide in the bootstrapping of your application as a provider.
 
-```
+```ts
 { provide: NovoLabelService, useClass: MyLabelService }
 ```
 
 To use the default labels, you will need to provide the `NOVO_ELEMENTS_LABELS_PROVIDERS` via
 
-```
+```ts
 import {NOVO_ELEMENTS_LABELS_PROVIDERS} from 'novo-elements';
 bootstrap(MyApp [..NOVO_ELEMENTS_LABELS_PROVIDERS]);
 ```

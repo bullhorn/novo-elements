@@ -1,7 +1,8 @@
 @mixin dark-variables {
   --background-body: #{$color-midnight}; //#202b38;
-  --background: #{$color-darkness}; //#161f27;
-  --background-alt: #{$color-moonlight};
+  --background-main: #{$color-darkness}; //#161f27;
+  --background-bright: #{$color-moonlight};
+  --background-muted: #{$color-neutral};
   --selection: #{$color-ocean}; // #1c76c5;
   --text-main: #{$color-light};
   --text-bright: #{$color-white};

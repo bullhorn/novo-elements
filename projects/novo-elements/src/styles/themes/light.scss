@@ -2,8 +2,9 @@
 
 :root {
   --background-body: #{$color-white};
-  --background: #{$color-silver}; //efefef
-  --background-alt: #{$color-bright}; //f7f7f7
+  --background-main: #{$color-silver}; //efefef
+  --background-bright: #{$color-bright}; //f7f7f7
+  --background-muted: #{$color-sand}; //f7f7f7
   --selection: #{$color-gray}; //#9e9e9e;
   --text-main: #{$color-dark}; //#363636;
   --text-bright: #{$color-black};

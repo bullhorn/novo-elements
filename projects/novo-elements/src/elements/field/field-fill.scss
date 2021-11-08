@@ -5,12 +5,12 @@
   &.novo-field-appearance-fill {
     &.novo-field-layout-horizontal {
       .novo-field-input {
-        background: var(--background);
+        background: var(--background-main);
       }
     }
 
     &.novo-field-layout-vertical {
-      background: var(--background);
+      background: var(--background-main);
       .novo-field-label {
         padding-top: 0.5em;
         padding-left: 0.5em;

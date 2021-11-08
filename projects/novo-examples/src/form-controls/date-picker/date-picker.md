@@ -20,7 +20,7 @@ Time pickers come in 12 hour or 24 hour style.
 
 ##### Range Picker
 
-<code-example example="date-range"></code-example>
+<code-example example="date-range-input"></code-example>
 
 ##### Multi Date Selection Picker
 

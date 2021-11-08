@@ -3,7 +3,7 @@
 
 @mixin novo-expansion-panel-theme() {
   .novo-expansion-panel {
-    background: var(--background-alt, $white);
+    background: var(--background-bright, $white);
     color: var(--text-main, $dark);
   }
 

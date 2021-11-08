@@ -22,7 +22,7 @@ import {
   Self,
   SimpleChanges,
   ViewChild,
-  ViewChildren,
+  ViewChildren
 } from '@angular/core';
 import { ControlValueAccessor, FormGroupDirective, NgControl, NgForm } from '@angular/forms';
 // Vendor
@@ -48,7 +48,7 @@ import {
   NovoOptionSelectionChange,
   NOVO_OPTION_PARENT_COMPONENT,
   _countGroupLabelsBeforeOption,
-  _getOptionScrollPosition,
+  _getOptionScrollPosition
 } from '../common';
 import { NovoOverlayTemplateComponent } from '../common/overlay/Overlay';
 import { NovoFieldControl } from '../field';
@@ -112,8 +112,7 @@ let nextId = 0;
       <div #panel class="novo-select-list" tabIndex="-1" [class.has-header]="headerConfig" [class.active]="panelOpen">
         <novo-option *ngIf="headerConfig" class="select-header" [class.open]="header.open">
           <novo-button *ngIf="!header.open" icon="add-thin" (click)="toggleHeader($event); (false)" tabIndex="-1" class="header">
-            {{ headerConfig.label }} </novo-button
-          >>
+            {{ headerConfig.label }} </novo-button>
           <div *ngIf="header.open" [ngClass]="{ active: header.open }">
             <input
               autofocus
@@ -125,9 +124,8 @@ let nextId = 0;
               [ngClass]="{ invalid: !header.valid }"
             />
             <footer>
-              <novo-button (click)="toggleHeader($event, false)">{{ labels.cancel }}</novo-button
-              >> <novo-button (click)="saveHeader()" class="primary">{{ labels.save }}</novo-button
-              >>
+              <novo-button (click)="toggleHeader($event, false)">{{ labels.cancel }}</novo-button>
+              <novo-button (click)="saveHeader()" class="primary">{{ labels.save }}</novo-button>
             </footer>
           </div>
         </novo-option>
@@ -159,8 +157,7 @@ let nextId = 0;
 })
 export class NovoSelectElement
   extends NovoSelectMixins
-  implements OnInit, AfterViewInit, OnChanges, OnDestroy, ControlValueAccessor, NovoFieldControl<any>
-{
+  implements OnInit, AfterViewInit, OnChanges, OnDestroy, ControlValueAccessor, NovoFieldControl<any> {
   private _uniqueId: string = `novo-select-${++nextId}`;
   private _stateChanges = Subscription.EMPTY;
   private _activeOptionChanges = Subscription.EMPTY;

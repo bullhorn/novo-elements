@@ -5,7 +5,7 @@ import { FormUtils, NovoModalRef, NovoModalService, PickerControl, PickerResults
   selector: 'modal-edit-form-demo',
   template: `
     <novo-modal>
-      <header title="John Deere" icon="candidate" theme="candidate">
+      <header title="Ferdinand del Toro" icon="candidate" theme="candidate">
         <utils>
           <util-action icon="times" (click)="close()"></util-action>
         </utils>

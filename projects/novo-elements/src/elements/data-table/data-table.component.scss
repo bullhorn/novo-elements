@@ -1,4 +1,4 @@
-$table-bg-accent: var(--background-alt, $off-white);
+$table-bg-accent: var(--background-bright, $off-white);
 $novo-row-horizontal-padding: 20px;
 $table-header-font-weight: 400;
 $breakpoint: 1000px;
@@ -20,7 +20,7 @@ cdk-table {
     .novo-data-table-dropdown-cell,
     .novo-data-table-expand-cell,
     .novo-data-table-checkbox-cell {
-      background-color: var(--background-alt, $white);
+      background-color: var(--background-bright, $white);
     }
     &.active {
       .novo-data-table-cell,
@@ -35,7 +35,7 @@ cdk-table {
       }
     }
     + .novo-data-table-detail-row {
-      background: var(--background-alt, $white); //$table-bg-accent;
+      background: var(--background-bright, $white); //$table-bg-accent;
     }
   }
   > .novo-data-table-row:nth-of-type(even) {

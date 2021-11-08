@@ -223,8 +223,8 @@ import { DataTableState } from './state/data-table-state.service';
         [disabled]="isDisabled(col, row)"
         (click)="col.handlers?.click({ originalEvent: $event, row: row })"
       >
-        <novo-icon>{{ col?.action?.icon }}</novo-icon> </novo-button
-      >>
+        <novo-icon>{{ col?.action?.icon }}</novo-icon>
+      </novo-button>
     </ng-template>
     <ng-template novoTemplate="dropdownCellTemplate" let-row let-col="col">
       <novo-dropdown parentScrollSelector=".novo-data-table-container" containerClass="novo-data-table-dropdown">
@@ -571,7 +571,7 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
     } else {
       this.state.expandedRows.add(`${row[this.rowIdentifier]}`);
     }
-    this.state.onExpandChange((row as unknown as { id: number }).id);
+    this.state.onExpandChange(((row as unknown) as { id: number }).id);
   }
 
   public expandRows(expand: boolean): void {

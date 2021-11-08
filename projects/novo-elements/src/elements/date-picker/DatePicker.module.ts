@@ -7,18 +7,14 @@ import { TextMaskModule } from 'angular2-text-mask';
 import { NovoPipesModule } from '../../pipes/Pipes.module';
 // APP
 import { NovoButtonModule } from '../button';
+import { NovoCalendarModule } from '../calendar/calendar.module';
 import { NovoOverlayModule } from '../common/overlay/Overlay.module';
 import { NovoIconModule } from '../icon/Icon.module';
 import { NovoChipsModule } from './../chips/Chips.module';
-import { NovoCalendarElement } from './calendar/calendar.component';
 import { NovoDatePickerElement } from './DatePicker';
 import { NovoDatePickerInputElement } from './DatePickerInput';
 import { NovoDateRangeInputElement } from './DateRangeInput';
-import { NovoMonthSelectElement } from './month-select/month-select.component';
-import { NovoMonthViewElement } from './month-view/month-view.component';
 import { NovoMultiDateInputElement } from './MultiDateInput';
-import { NovoYearSelectElement } from './year-select/year-select.component';
-
 @NgModule({
   imports: [
     CommonModule,
@@ -29,26 +25,9 @@ import { NovoYearSelectElement } from './year-select/year-select.component';
     TextMaskModule,
     NovoIconModule,
     NovoChipsModule,
+    NovoCalendarModule,
   ],
-  declarations: [
-    NovoDatePickerElement,
-    NovoDatePickerInputElement,
-    NovoDateRangeInputElement,
-    NovoMultiDateInputElement,
-    NovoMonthViewElement,
-    NovoMonthSelectElement,
-    NovoYearSelectElement,
-    NovoCalendarElement,
-  ],
-  exports: [
-    NovoDatePickerElement,
-    NovoDatePickerInputElement,
-    NovoDateRangeInputElement,
-    NovoMultiDateInputElement,
-    NovoMonthViewElement,
-    NovoMonthSelectElement,
-    NovoYearSelectElement,
-    NovoCalendarElement,
-  ],
+  declarations: [NovoDatePickerElement, NovoDatePickerInputElement, NovoDateRangeInputElement, NovoMultiDateInputElement],
+  exports: [NovoDatePickerElement, NovoDatePickerInputElement, NovoDateRangeInputElement, NovoMultiDateInputElement],
 })
 export class NovoDatePickerModule {}
