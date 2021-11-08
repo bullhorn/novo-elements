@@ -1,6 +1,6 @@
 <div class="calendar-header">
   <novo-button theme="icon" icon="previous" size="small" (click)="prevMonth($event)"
-    data-automation-id="calendar-previous"></novo-button>>
+    data-automation-id="calendar-previous"></novo-button>
   <ng-container *ngFor="let month of months; let i = index;">
     <span class="heading" [class.secondary]="i > 0">
       <span class="month" (click)="openView($event, 'months')"
@@ -10,7 +10,7 @@
     </span>
   </ng-container>
   <novo-button theme="icon" icon="next" size="small" (click)="nextMonth($event)" data-automation-id="calendar-next">
-  </novo-button>>
+  </novo-button>
 </div>
 <section class="calendar-content" [ngSwitch]="activeView">
   <ng-container *ngSwitchCase="'days'">
