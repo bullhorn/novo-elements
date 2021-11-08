@@ -11,11 +11,11 @@ import { Key } from '../../utils';
       <ng-content select="div[slide]"></ng-content>
     </section>
     <div class="controls">
-      <novo-button *ngIf="!start" theme="icon" icon="previous" (click)="changeSlide('back')"></novo-button>
+      <button *ngIf="!start" theme="icon" icon="previous" (click)="changeSlide('back')"></button>
       <div class="indicators">
         <div class="indicator-circle" *ngFor="let indicator of currSlides; let i = index" [ngClass]="indicator"></div>
       </div>
-      <novo-button *ngIf="!end" theme="primary" icon="next" (click)="changeSlide('next')">{{ labels.next }}</novo-button>
+      <button *ngIf="!end" theme="primary" icon="next" (click)="changeSlide('next')">{{ labels.next }}</button>
       <ng-content select="button" *ngIf="end"></ng-content>
     </div>
   `,

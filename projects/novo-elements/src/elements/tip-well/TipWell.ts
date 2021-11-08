@@ -13,7 +13,7 @@ import { NovoLabelService } from '../../services/novo-label-service';
         <p *ngIf="sanitize" [attr.data-automation-id]="'novo-tip-well-tip-' + name">{{ tip }}</p>
         <p *ngIf="!sanitize" [attr.data-automation-id]="'novo-tip-well-tip-' + name" [innerHTML]="tipWithStyles"></p>
       </div>
-      <novo-button
+      <button
         theme="dialogue"
         size="small"
         (click)="hideTip()"
@@ -21,7 +21,7 @@ import { NovoLabelService } from '../../services/novo-label-service';
         [attr.data-automation-id]="'novo-tip-well-button-' + name"
       >
         {{ buttonText }}
-      </novo-button>
+      </button>
     </div>
   `,
   host: {

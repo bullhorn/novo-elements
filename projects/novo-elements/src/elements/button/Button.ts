@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, ElementRef, HostBinding, Input } fr
 import { BooleanInput } from '../../utils';
 
 @Component({
-  selector: 'button[theme],novo-button',
+  selector: 'novo-button,button[theme]',
   host: {
     class: 'novo-button',
     '[attr.theme]': 'theme',

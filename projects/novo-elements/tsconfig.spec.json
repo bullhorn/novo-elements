@@ -4,12 +4,12 @@
     "outDir": "../../out-tsc/spec",
     "module": "commonjs",
     "types": [
-        "jest"
+      "jest"
     ]
   },
   "files": [],
   "include": [
     "**/*.spec.ts",
     "**/*.d.ts"
-]
+  ]
 }
