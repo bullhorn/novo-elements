@@ -209,6 +209,12 @@ novo-entity-chips {
           color: $neutral;
         }
       }
+      &.jobshift {
+        color: $positive;
+        i {
+          color: $jobShift;
+        }
+      }
     }
   }
   picker-results {
