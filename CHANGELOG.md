@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.7.0](https://github.com/bullhorn/novo-elements/compare/v5.6.1...v5.7.0) (2021-11-08)
+
+
+### Features
+
+* **AppBridge:** add 'slide-out-add' to NovoApps type ([#1232](https://github.com/bullhorn/novo-elements/issues/1232)) ([16f07b2](https://github.com/bullhorn/novo-elements/commit/16f07b266d7ff373fb84b9fe7ca3e81a7b557391))
+
 ### [5.6.1](https://github.com/bullhorn/novo-elements/compare/v5.6.0...v5.6.1) (2021-11-05)
 
 
