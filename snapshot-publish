@@ -36,15 +36,15 @@ echo "https://${API_TOKEN_GITHUB}:@github.com" > .git/credentials
 git status
 git add -A
 if ! git diff-index --quiet HEAD; then
-git commit -m "$commitMessage"
-
-if "$CURRENT_BRANCH" == "master"; then
+  git commit -m "$commitMessage"
+  if "$CURRENT_BRANCH" == "master"; then
     echo "Committing and pushing to master"
     git tag "$commitSha"
     git push origin master --tags
-else
+  else
     echo "Committing and pushing to $CURRENT_BRANCH"
     git push -u origin $CURRENT_BRANCH --force
+  fi
 fi
 
 echo "Finished publishing snapshot build to $CURRENT_BRANCH"
