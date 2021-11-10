@@ -16,6 +16,14 @@ html {
       display: block;
     }
   }
+
+  .markdown-page > h2 {
+    margin-top: 5rem;
+    margin-bottom: 2rem;
+    &:not(:first-child) {
+      border-top: 2px solid #ccc;
+    }
+  }
 }
 
 code-snippet,

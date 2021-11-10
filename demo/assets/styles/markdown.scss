@@ -216,7 +216,7 @@
   }
 
   blockquote {
-    margin: 0 0 0 1em;
+    // margin: 0 0 0 1em;
     padding: 0;
     border: none;
     font-style: normal;
@@ -473,12 +473,15 @@
       list-style-type: none;
       padding-bottom: 1rem;
       align-items: flex-start;
+
       p {
         margin-top: 0rem;
         margin-bottom: 0rem;
       }
       & > p:first-child {
         display: flex;
+        align-items: center;
+        justify-content: flex-start;
       }
       & > p + p,
       & > .p + .p {

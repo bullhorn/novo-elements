@@ -113,24 +113,6 @@ Menus are contextual and all for actions to be performed based upon the context 
 
 </novo-grid>
 
-## Patterns
-
-<novo-grid columns="2" align="start" gap="2rem">
-
-> **Pattern**
->
-> Why is it configured like this
-
-![placeholder](https://via.placeholder.com/350x250)
-
-> **Pattern**
->
-> Why is it configured like this
-
-![placeholder](https://via.placeholder.com/350x250)
-
-</novo-grid>
-
 ## Accessibility
 
 **Implementation**

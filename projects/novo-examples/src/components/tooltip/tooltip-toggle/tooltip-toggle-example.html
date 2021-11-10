@@ -1,0 +1,5 @@
+<span tooltip="I HAVE A TOOLTIP!" [tooltipActive]="tooltipActive">
+    <span *ngIf="tooltipActive">My tooltip can display!</span>
+    <span *ngIf="!tooltipActive">My tooltip is disabled!</span>
+</span>
+<button theme="secondary" (click)="toggleTooltip()">Toggle</button>

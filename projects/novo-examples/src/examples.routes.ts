@@ -211,37 +211,201 @@ export class AgendaExamplesPage {
 
 
 @Component({
-  selector: 'autocomplete-design-page',
-  template: `<h2>Anatomy</h2>
+  selector: 'aside-design-page',
+  template: `<h2>Usage</h2>
 <novo-grid columns="2" align="start" gap="2rem">
-<img src="assets/images/ModalAnatomy.png" width="450">
 <div>
-<ol>
-<li>
-<p><strong>Container</strong><br>
-Defines the layout for the form field (horizontal vs vertical)</p>
-</li>
-<li>
-<p><strong>Input Prefix (Optional element)</strong><br>
-An element/icon displayed before the input. eg. $</p>
-</li>
-<li>
-<p><strong>Label</strong><br>
-A label for a group of menu actions.</p>
-</li>
-<li>
-<p><strong>Input Control</strong><br>
-The element representing the input control: <code>input</code>, <code>select</code>, etc...</p>
-</li>
-<li>
-<p><strong>Input Suffix (Optional element)</strong><br>
-The element/icon displayed after the input. eg. calendar icon for date picker.</p>
-</li>
-<li>
-<p><strong>Helper/Error text (Optional element)</strong><br>
-Caption text to display helpful information, warnings, or errors.</p>
-</li>
-</ol>
+<p>Asides are slideouts designed to provide a view into related content within the page without navigating away.  Asides work similar to Modal but the content is meant to be correlated and the workflow should be non-blocking.</p>
+</div>
+<img src="/assets/images/AsideOverview.png"/>
+<div>
+<h3>Use When</h3>
+<ul class="contains-do-list">
+<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Providing supporting visual content, e.g., an image or chart, within the context of a larger composition</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> The content provided doesn't block the workflow of the previous context.</novo-text></li>
+</ul>
+</div>
+<div>
+<h3>Don′t Use When</h3>
+<ul class="contains-do-list">
+<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">times</novo-icon><novo-text color="grapefruit"> The content of the aside requires immediate action or response. Instead, use a modal.</novo-text></li>
+</ul>
+</div>
+</novo-grid>
+<h2>Best Practices</h2>
+<ul>
+<li>Ensure the content opened is highly correlated to the context that opened it. When showing a preview of a related content that can opened for various contexts, present the user with the data related to the context that opened it, rather than the same view.</li>
+<li>When using an aside to present the user with a form, ensure that it is beneficial to have the current view still available to the user, if not consider opening a new page.</li>
+</ul>
+<h2>Patterns</h2>
+<novo-grid columns="2" align="start" gap="2rem">
+<blockquote>
+<div class="p"><img src="https://via.placeholder.com/350x250" alt="placeholder"></div>
+<ul class="contains-do-list">
+<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Form Slideout</novo-text></li>
+</ul>
+<div class="p">Utilize the aside to open quick forms within the application. With the <code>aside</code> you can provide a workflow to enter data quickly while still provide a partial view of the parent context. This will allow the user to maintain context and see how the addition of new data affects there current view.</div>
+</blockquote>
+<blockquote>
+<div class="p"><img src="https://via.placeholder.com/350x250" alt="placeholder"></div>
+<ul class="contains-do-list">
+<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">times</novo-icon><novo-text color="grapefruit"> Record Preview</novo-text></li>
+</ul>
+<div class="p">Utilize the aside to open record previews within the application. With the <code>aside</code> you can allow the user to view a significant amount data about a related entity with losing the context of the current view.</div>
+</blockquote>
+</novo-grid>
+<h2>Accessibility</h2>
+<p><strong>Implementation</strong></p>
+<p>Always include an <code>alt</code> attribute describing the information that is visually displayed in the image.</p>
+`,
+  host: { class: 'markdown-page' }
+})
+export class AsideDesignPage {
+  public params: any = {};
+}
+
+
+@Component({
+  selector: 'aside-develop-page',
+  template: `<h1>Technical Details</h1>
+<ul>
+<li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/aside">(github)</a></li>
+<li><strong>module:</strong> <code>import &#123; NovoAsideModule &#125; from 'novo-elements';</code></li>
+<li><strong>service:</strong> <code>import &#123; NovoAsideService &#125; form 'novo-elements/aside';</code></li>
+</ul>
+<h1>Roadmap</h1>
+<ul class="contains-task-list">
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox"> Better support for common patterns</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox"> Investigate Sharing injection tokens with Modal</li>
+</ul>
+<h1>Changelog</h1>
+<h3>5.0.0</h3>
+<p><em>Added in v5.0.0</em></p>
+<h2>Properties</h2>
+<p><em>No Properties</em></p>
+<h1>Services</h1>
+<h2>NovoAsideService</h2>
+<p>Asides (a.k.a. Slideout) should be invoked via <code>NovoAsideService</code> and therefore all properties should be private or internal. Any values that need to be passed to the your <code>aside</code> instance should be passed by the service and will be available in your slideout via <code>NovoAsideRef.params</code>.</p>
+<pre><code class="language-typescript"><span class="hljs-meta">@Component</span>(&#123;...&#125;)
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">RandomComponent</span> &#123;
+  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> aside:NovoAsideService</span>) &#123;&#125;
+  <span class="hljs-title function_">handleAction</span>(<span class="hljs-params"></span>) &#123;
+    <span class="hljs-keyword">const</span> ref = <span class="hljs-variable language_">this</span>.<span class="hljs-property">aside</span>.<span class="hljs-title function_">open</span>(<span class="hljs-title class_">AddFormSlideout</span>, &#123; <span class="hljs-attr">record</span>: <span class="hljs-number">123</span> &#125;);
+    <span class="hljs-comment">/* you can listen to the close event */</span>
+    ref.<span class="hljs-property">onClosed</span>.<span class="hljs-title function_">then</span>(<span class="hljs-function">(<span class="hljs-params">result</span>) =&gt;</span> &#123;
+      <span class="hljs-comment">/* result is the argument sent via the ref */</span>
+      <span class="hljs-keyword">if</span> (res === <span class="hljs-string">&#x27;success&#x27;</span>) &#123;
+        <span class="hljs-comment">/* perfom some action */</span>
+      &#125;
+    &#125;);
+    <span class="hljs-comment">/* close the slideout from the parent */</span>
+    ref.<span class="hljs-title function_">close</span>(<span class="hljs-string">&#x27;success&#x27;</span>)
+  &#125;
+&#125;
+</code></pre>
+<h3>Methods</h3>
+<h4><strong>open(component, params)</strong></h4>
+<p>Used to open all modals via the service. Use <code>params</code> to pass values to you component.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Name</th>
+<th style="text-align:left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">component</td>
+<td style="text-align:left"><em>Class</em><br>The angular component which represents the Modal to be opened.</td>
+</tr>
+<tr>
+<td style="text-align:left">params</td>
+<td style="text-align:left"><em>Object</em><br><strong>Optional</strong> arguments that will be injected into <code>NovoAsideRef.params</code></td>
+</tr>
+</tbody>
+</table>
+<p><em>Note:</em> All modal components should be declared as <code>entryComponents</code> in the module.</p>
+<h2>NovoAsideRef&lt;T&gt;</h2>
+<p><code>NovoAsideRef</code> should be injected into your modal component and all pass params can be accessed in the <code>params</code> property.</p>
+<pre><code class="language-typescript"><span class="hljs-keyword">interface</span> <span class="hljs-title class_">AddFormParams</span> &#123;
+  <span class="hljs-attr">record</span>: <span class="hljs-built_in">number</span>;
+&#125;
+<span class="hljs-meta">@Component</span>(&#123;&#125;)
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">AddFormSlideout</span> &#123;
+  <span class="hljs-title function_">constructor</span>(<span class="hljs-params">ref:NovoAsideRef&lt;AddFormParams&gt;</span>) &#123;
+    <span class="hljs-comment">/**
+     * All passed values are available
+     * via ref.params
+     **/</span>
+  &#125;
+
+  <span class="hljs-title function_">handleClose</span>(<span class="hljs-params"></span>) &#123;
+    <span class="hljs-comment">/* To close the modal use the close method */</span>
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">ref</span>.<span class="hljs-title function_">close</span>(<span class="hljs-comment">/* Return a value */</span>)
+  &#125;
+
+&#125;
+</code></pre>
+<h3>Methods</h3>
+<h4><strong>close(response)</strong></h4>
+<p>Will close the modal will emit events to both the <code>beforeClose</code> and <code>afterClosed</code> observables, as well as the .</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Name</th>
+<th style="text-align:left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">response</td>
+<td style="text-align:left"><em>any</em><br>Any value you wish to return to calling components, will be resovled in the <code>onClosed</code> promise.</td>
+</tr>
+</tbody>
+</table>
+`,
+  host: { class: 'markdown-page' }
+})
+export class AsideDevelopPage {
+  public params: any = {};
+}
+
+
+@Component({
+  selector: 'aside-examples-page',
+  template: `<h2>Custom</h2>
+<p>In the case where &quot;Success&quot;, &quot;Warning&quot;, and &quot;Error&quot; notfications aren't enough, use the custom notification. Custom notifcations allow any of the Bullhorn Icons to be used in the notification.</p>
+<p><code-example example="aside-usage"></code-example></p>
+<h2>Add</h2>
+<p>Add modals have a colored title bar based on the record type being created. Additionally, due to a greater than average amount of content, they have fixed footers.</p>
+<p><code-example example="aside-form"></code-example></p>
+`,
+  host: { class: 'markdown-page' }
+})
+export class AsideExamplesPage {
+  public params: any = {};
+}
+
+
+@Component({
+  selector: 'autocomplete-design-page',
+  template: `<h2>Usage</h2>
+<novo-grid columns="2" align="start" gap="2rem">
+<div>
+<p>The autocomplete component is designed to provide a list of options as the user types that can be used to set the field value.  The component can be used to set more complex data to the form. Usually the input does not require a valid option to be selected.</p>
+</div>
+<img src="/assets/images/AutocompleteOverview.png"/>
+<div>
+<h3>Use When</h3>
+<ul class="contains-do-list">
+<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> A list of possible values are known but not required.</novo-text></li>
+</ul>
+</div>
+<div>
+<h3>Don′t Use When</h3>
+<ul class="contains-do-list">
+<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">times</novo-icon><novo-text color="grapefruit"> The form field requires the value to be one of the predefined options. use a select or picker instead.</novo-text></li>
+</ul>
 </div>
 </novo-grid>
 <h2>Best Practices</h2>
@@ -252,39 +416,22 @@ Caption text to display helpful information, warnings, or errors.</p>
 <li>If only a portion of a page is loading new content or being updated, place the loading element in that part of the page.</li>
 <li>There should only be a single loading element on a page at one time.</li>
 </ul>
-<h2>How to configure</h2>
+<h2>Behaviors</h2>
 <novo-grid columns="2" align="start" gap="2rem">
 <blockquote>
-<div class="p"><img src="https://via.placeholder.com/350x250" alt="placeholder"></div>
-<ul class="contains-do-list">
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Always do this</novo-text></li>
-</ul>
-<div class="p">Explain this</div>
+<div class="p"><strong>Sizing</strong></div>
+<div class="p">A popovers width should match the width of the input it is correlated to a min width of 15rem is set to avoid readability issues.  The popover have a fixed height and should be scrollable, a persistent scrollbar should be visible if this is the case.</div>
 </blockquote>
 <blockquote>
-<div class="p"><img src="https://via.placeholder.com/350x250" alt="placeholder"></div>
-<ul class="contains-do-list">
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">times</novo-icon><novo-text color="grapefruit"> Never do this</novo-text></li>
-</ul>
-<div class="p">Explain this</div>
+<div class="p"><strong>Multiple Selections</strong></div>
+<div class="p">When the input allows multiple selection the autocomplete popover should add values to the input as a comma-separated list.  The component can be paired with a chip-list as-well.</div>
 </blockquote>
-</novo-grid>
-<h2>Patterns</h2>
-<novo-grid columns="2" align="start" gap="2rem">
-<blockquote>
-<div class="p"><strong>Pattern</strong></div>
-<div class="p">Why is it configured like this</div>
-</blockquote>
-<p><img src="https://via.placeholder.com/350x250" alt="placeholder"></p>
-<blockquote>
-<div class="p"><strong>Pattern</strong></div>
-<div class="p">Why is it configured like this</div>
-</blockquote>
-<p><img src="https://via.placeholder.com/350x250" alt="placeholder"></p>
 </novo-grid>
 <h2>Accessibility</h2>
+<p><strong>KeyBoard Controls</strong></p>
+<p>The user should be able to use the <code>up</code> and <code>own</code> arrows to navigate between options and press <code>enter</code> to select the active option.</p>
 <p><strong>Implementation</strong></p>
-<p>Always include an <code>alt</code> attribute describing the information that is visually displayed in the image.</p>
+<p>The component should follow the <a href="https://www.w3.org/TR/wai-aria-practices/examples/combobox/aria1.1pattern/listbox-combo.html">ARIA combobox interaction</a> pattern and have a role of <code>combobox</code>.</p>
 `,
   host: { class: 'markdown-page' }
 })
@@ -352,100 +499,35 @@ export class AutocompleteExamplesPage {
 
 
 @Component({
-  selector: 'autocomplete-usage-page',
-  template: `<novo-grid columns="2" align="start" gap="2rem">
-<div>
-<h3>Why?</h3>
-<p>Loading animations are used to help indicate to the user that some sort of progress is taking place. These are especially helpful for intensive operations that might take extra time.</p>
-</div>
-<img src="/assets/images/AutocompleteOverview.png"/>
-<div>
-<h3>Use When</h3>
-<ul class="contains-do-list">
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Loading content.</novo-text></li>
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Processing an long running action.</novo-text></li>
-</ul>
-</div>
-<div>
-<h3>Don′t Use When</h3>
-<ul class="contains-do-list">
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">times</novo-icon><novo-text color="grapefruit"> When not loading data.</novo-text></li>
-</ul>
-</div>
-</novo-grid>
-`,
-  host: { class: 'markdown-page' }
-})
-export class AutocompleteUsagePage {
-  public params: any = {};
-}
-
-
-@Component({
   selector: 'avatar-design-page',
-  template: `<novo-grid columns="2">
-<img src="assets/images/ModalAnatomy.png" width="450">
-<novo-box>
-<ol>
-<li>
-<p><strong>Container</strong><br>
-Description and purpose of this element</p>
-</li>
-<li>
-<p><strong>Header</strong><br>
-Description and purpose of this element</p>
-</li>
-<li>
-<p><strong>Icon (Optional)</strong><br>
-Description and purpose of this element</p>
-</li>
-<li>
-<p><strong>Title (Optional)</strong><br>
-Description and purpose of this element</p>
-</li>
-<li>
-<p><strong>Content</strong><br>
-Description and purpose of this element</p>
-</li>
-<li>
-<p><strong>Footer</strong><br>
-Description and purpose of this element</p>
-</li>
-</ol>
-</novo-box>
+  template: `<h2>Usage</h2>
+<novo-grid columns="2" align="start" gap="2rem">
+<div>
+<p>Avatars are images used to represent users and organizations. They typically are squares with rounded edges.</p>
+<p>An avatar acts as a proxy for a user or entity (such as a company) in a product. They're often combined with status or presence indicators to give more context. Users generally upload their own image, otherwise, a default image is displayed</p>
+</div>
+<img src="/assets/images/AvatarOverview.png"/>
 </novo-grid>
-<h2>How to configure</h2>
-<novo-grid columns="2">
-<figure-example theme="">
-<p><img src="https://via.placeholder.com/350x250" alt="placeholder"></p>
-<novo-text color="grass"><novo-icon mr="1rem">check</novo-icon><strong>Always do this</strong></novo-text>
-<novo-text><p>Explain this</p>
-</novo-text>
-</figure-example>
-<figure-example theme="">
-<p><img src="https://via.placeholder.com/350x250" alt="placeholder"></p>
-<novo-text color="grapefruit"><novo-icon mr="1rem">times</novo-icon><strong>Never do this</strong></novo-text>
-<novo-text><p>Explain this</p>
-</novo-text>
-</figure-example>
-</novo-grid>
+<h2>Best Practices</h2>
+<ul>
+<li>circular avatars to quickly identify people (users, contact)</li>
+<li>square avatars to help identify other entities like companies, jobs</li>
+</ul>
 <h2>Patterns</h2>
-<novo-grid columns="2">
-<novo-box>
-<p><strong>Pattern</strong></p>
-<p>Why is it configured like this</p>
-</novo-box>
-<p><img src="https://via.placeholder.com/350x250" alt="placeholder"></p>
-</novo-grid>
-<novo-grid columns="2">
-<novo-box>
-<p><strong>Pattern</strong></p>
-<p>Why is it configured like this</p>
-</novo-box>
-<p><img src="https://via.placeholder.com/350x250" alt="placeholder"></p>
+<novo-grid columns="2" align="start" gap="2rem">
+<blockquote>
+<div class="p"><strong>Avatar Menu</strong></div>
+<div class="p">Avatars are a great place to attach a menu with options that you can perform against that user.  This is a common web paradigm that the user will understand intuitively.</div>
+</blockquote>
+<p><img src="/assets/images/AvatarMenu.png" alt="placeholder"></p>
+<blockquote>
+<div class="p"><strong>Avatar Stack</strong></div>
+<div class="p">Avatars are a great place to attach a menu with options that you can perform against that user.  This is a common web paradigm that the user will understand intuitively.</div>
+</blockquote>
+<p><img src="/assets/images/AvatarStack.gif" alt="placeholder"></p>
 </novo-grid>
 <h2>Accessibility</h2>
-<p><strong>Implementation</strong></p>
+<p><strong>ARIA Implementation</strong></p>
 <p>Always include an <code>alt</code> attribute describing the information that is visually displayed in the image.</p>
 `,
   host: { class: 'markdown-page' }
@@ -567,102 +649,29 @@ export class AvatarExamplesPage {
 
 
 @Component({
-  selector: 'avatar-usage-page',
-  template: `<novo-grid columns="2" align="start" gap="2rem">
-  <novo-stack gap="2rem">
-    <novo-title>Why?</novo-title>
-    <novo-text>
-      Avatars are images used to represent users and organizations. They typically are squares with rounded edges.
-      An avatar acts as a proxy for a user or entity (such as a project, repository, or space), in a product. They're often combined with status or presence indicators to give more context. Users generally upload their own image, otherwise, a default image is displayed
-    </novo-text>
-  </novo-stack>
-  <img src="https://via.placeholder.com/350x250"/>
-  <novo-stack gap="2rem">
-    <novo-title>When to Use</novo-title>
-    <novo-text color="grass"><novo-icon mr="1rem">check</novo-icon>circular avatars to quickly identify users</novo-text>
-    <novo-text color="grass"><novo-icon mr="1rem">check</novo-icon>square avatars to help identify large product entities like projects, spaces, groups, rooms, or repositories
-</novo-text>
-  </novo-stack>
-  <novo-stack gap="2rem">
-    <novo-title>When <em>NOT</em> to Use</novo-title>
-    <novo-text color="grapefruit"><novo-icon mr="1rem">times</novo-icon>For some reason</novo-text>
-    <novo-text>Because we said so...</novo-text>
-  </novo-stack>
-</novo-grid>
-`,
-  host: { class: 'markdown-page' }
-})
-export class AvatarUsagePage {
-  public params: any = {};
-}
-
-
-@Component({
   selector: 'breadcrumb-design-page',
-  template: `<novo-grid columns="2">
-<img src="assets/images/ModalAnatomy.png" width="450">
-<novo-box>
-<ol>
-<li>
-<p><strong>Container</strong><br>
-Description and purpose of this element</p>
-</li>
-<li>
-<p><strong>Header</strong><br>
-Description and purpose of this element</p>
-</li>
-<li>
-<p><strong>Icon (Optional)</strong><br>
-Description and purpose of this element</p>
-</li>
-<li>
-<p><strong>Title (Optional)</strong><br>
-Description and purpose of this element</p>
-</li>
-<li>
-<p><strong>Content</strong><br>
-Description and purpose of this element</p>
-</li>
-<li>
-<p><strong>Footer</strong><br>
-Description and purpose of this element</p>
-</li>
-</ol>
-</novo-box>
+  template: `<h2>Usage</h2>
+<novo-grid columns="2" align="start" gap="2rem">
+<div>
+<p>A breadcrumb displays the current location within a hierarchy. It allows going back to states higher up in the hierarchy.</p>
+</div>
+<img src="/assets/images/AsideOverview.png"/>
 </novo-grid>
-<h2>How to configure</h2>
-<novo-grid columns="2">
-<figure-example theme="">
-<p><img src="https://via.placeholder.com/350x250" alt="placeholder"></p>
-<novo-text color="grass"><novo-icon mr="1rem">check</novo-icon><strong>Always do this</strong></novo-text>
-<novo-text><p>Explain this</p>
-</novo-text>
-</figure-example>
-<figure-example theme="">
-<p><img src="https://via.placeholder.com/350x250" alt="placeholder"></p>
-<novo-text color="grapefruit"><novo-icon mr="1rem">times</novo-icon><strong>Never do this</strong></novo-text>
-<novo-text><p>Explain this</p>
-</novo-text>
-</figure-example>
-</novo-grid>
-<h2>Patterns</h2>
-<novo-grid columns="2">
-<novo-box>
-<p><strong>Pattern</strong></p>
-<p>Why is it configured like this</p>
-</novo-box>
-<p><img src="https://via.placeholder.com/350x250" alt="placeholder"></p>
-</novo-grid>
-<novo-grid columns="2">
-<novo-box>
-<p><strong>Pattern</strong></p>
-<p>Why is it configured like this</p>
-</novo-box>
-<p><img src="https://via.placeholder.com/350x250" alt="placeholder"></p>
-</novo-grid>
+<h3>Use When</h3>
+<ul class="contains-do-list">
+<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> When the system has more than two layers in a hierarchy.</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> When you need to inform the user of where they are.</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> When the user may need to navigate back to a higher level.</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> When the application has multi-layer architecture.</novo-text></li>
+</ul>
+<h2>Best Practices</h2>
+<ul>
+<li>Ensure the content opened is highly correlated to the context that opened it. When showing a preview of a related content that can opened for various contexts, present the user with the data related to the context that opened it, rather than the same view.</li>
+<li>When using an aside to present the user with a form, ensure that it is beneficial to have the current view still available to the user, if not consider opening a new page.</li>
+</ul>
 <h2>Accessibility</h2>
 <p><strong>Implementation</strong></p>
-<p>Always include an <code>alt</code> attribute describing the information that is visually displayed in the image.</p>
+<p>This component is intended to follow the <a href="https://www.w3.org/TR/wai-aria-practices/#breadcrumb">Aria Breadcrumb Design Pattern</a>.</p>
 `,
   host: { class: 'markdown-page' }
 })
@@ -784,37 +793,6 @@ export class BreadcrumbDevelopPage {
   host: { class: 'markdown-page' }
 })
 export class BreadcrumbExamplesPage {
-  public params: any = {};
-}
-
-
-@Component({
-  selector: 'breadcrumb-usage-page',
-  template: `<novo-grid columns="2" align="start" gap="2rem">
-  <novo-stack gap="2rem">
-    <novo-title>Why?</novo-title>
-    <novo-text>
-      A breadcrumb displays the current location within a hierarchy. It allows going back to states higher up in the hierarchy.
-    </novo-text>
-  </novo-stack>
-  <img src="https://via.placeholder.com/350x250"/>
-  <novo-stack gap="2rem">
-    <novo-title>When to Use</novo-title>
-    <novo-text color="grass"><novo-icon mr="1rem">check</novo-icon>When the system has more than two layers in a hierarchy.</novo-text>
-    <novo-text color="grass"><novo-icon mr="1rem">check</novo-icon>When you need to inform the user of where they are.</novo-text>
-    <novo-text color="grass"><novo-icon mr="1rem">check</novo-icon>When the user may need to navigate back to a higher level.</novo-text>
-    <novo-text color="grass"><novo-icon mr="1rem">check</novo-icon>When the application has multi-layer architecture.</novo-text>
-  </novo-stack>
-  <novo-stack gap="2rem">
-    <novo-title>When <em>NOT</em> to Use</novo-title>
-    <novo-text color="grapefruit"><novo-icon mr="1rem">times</novo-icon>For some reason</novo-text>
-    <novo-text>Because we said so...</novo-text>
-  </novo-stack>
-</novo-grid>
-`,
-  host: { class: 'markdown-page' }
-})
-export class BreadcrumbUsagePage {
   public params: any = {};
 }
 
@@ -1597,37 +1575,19 @@ export class FieldUsagePage {
 
 @Component({
   selector: 'icon-design-page',
-  template: `<h2>Anatomy</h2>
+  template: `<h2>Usage</h2>
 <novo-grid columns="2" align="start" gap="2rem">
-<img src="assets/images/ModalAnatomy.png" width="450">
 <div>
-<ol>
-<li>
-<p><strong>Container</strong><br>
-Defines the layout for the form field (horizontal vs vertical)</p>
-</li>
-<li>
-<p><strong>Input Prefix (Optional element)</strong><br>
-An element/icon displayed before the input. eg. $</p>
-</li>
-<li>
-<p><strong>Label</strong><br>
-A label for a group of menu actions.</p>
-</li>
-<li>
-<p><strong>Input Control</strong><br>
-The element representing the input control: <code>input</code>, <code>select</code>, etc...</p>
-</li>
-<li>
-<p><strong>Input Suffix (Optional element)</strong><br>
-The element/icon displayed after the input. eg. calendar icon for date picker.</p>
-</li>
-<li>
-<p><strong>Helper/Error text (Optional element)</strong><br>
-Caption text to display helpful information, warnings, or errors.</p>
-</li>
-</ol>
+<p>If you want to use bullhorn icons, it is easier to use the <code>novo-icon</code> element to style them. You can always style them within the <code>i</code> tag too.</p>
+<p><strong>Use When</strong></p>
+<ul class="contains-do-list">
+<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Additional context for action is required.</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Help user easily identify what action does.</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Help identify state, ie. error, warning, etc.</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Spacing is limited.</novo-text></li>
+</ul>
 </div>
+<img src="https://via.placeholder.com/350x250"/>
 </novo-grid>
 <h2>Best Practices</h2>
 <ul>
@@ -1637,35 +1597,16 @@ Caption text to display helpful information, warnings, or errors.</p>
 <li>If only a portion of a page is loading new content or being updated, place the loading element in that part of the page.</li>
 <li>There should only be a single loading element on a page at one time.</li>
 </ul>
-<h2>How to configure</h2>
+<h2>Variations</h2>
 <novo-grid columns="2" align="start" gap="2rem">
 <blockquote>
-<div class="p"><img src="https://via.placeholder.com/350x250" alt="placeholder"></div>
-<ul class="contains-do-list">
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Always do this</novo-text></li>
-</ul>
-<div class="p">Explain this</div>
+<div class="p"><strong>Color</strong></div>
+<div class="p">Use color to convey additional meaning when displaying icons. Application colors such as <code>success</code> and <code>negative</code> can help express the meaning of the context being used.  Entity colors such as <code>job</code> and <code>candidate</code> can help the user identify context quickly when parsing large amounts of data.</div>
 </blockquote>
 <blockquote>
-<div class="p"><img src="https://via.placeholder.com/350x250" alt="placeholder"></div>
-<ul class="contains-do-list">
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">times</novo-icon><novo-text color="grapefruit"> Never do this</novo-text></li>
-</ul>
-<div class="p">Explain this</div>
+<div class="p"><strong>Filled</strong></div>
+<div class="p">Icons can have color and optionally you can set the background color to show as well. This creates a visual emphasis on the icon and context it is describing. This style can be used when it is important to draw more attention to an item or when it asthetically makes sense for the icon to have a heavier presence in the UI.</div>
 </blockquote>
-</novo-grid>
-<h2>Patterns</h2>
-<novo-grid columns="2" align="start" gap="2rem">
-<blockquote>
-<div class="p"><strong>Pattern</strong></div>
-<div class="p">Why is it configured like this</div>
-</blockquote>
-<p><img src="https://via.placeholder.com/350x250" alt="placeholder"></p>
-<blockquote>
-<div class="p"><strong>Pattern</strong></div>
-<div class="p">Why is it configured like this</div>
-</blockquote>
-<p><img src="https://via.placeholder.com/350x250" alt="placeholder"></p>
 </novo-grid>
 <h2>Accessibility</h2>
 <p><strong>Implementation</strong></p>
@@ -1723,58 +1664,28 @@ export class IconExamplesPage {
 
 
 @Component({
-  selector: 'icon-usage-page',
-  template: `<novo-grid columns="2" align="start" gap="2rem">
+  selector: 'loading-design-page',
+  template: `<h2>Usage</h2>
+<novo-grid columns="2" align="start" gap="2rem">
 <div>
-<h3>Why?</h3>
-<p>If you want to use bullhorn icons, it is easier to use the <code>novo-icon</code> element to style them. You can always style them within the <code>i</code> tag too.</p>
+<p>Loading animations are used to help indicate to the user that some sort of progress is taking place. These are especially helpful for intensive operations that might take extra time.</p>
 </div>
 <img src="https://via.placeholder.com/350x250"/>
 <div>
 <h3>Use When</h3>
 <ul class="contains-do-list">
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Additional context for action is required.</novo-text></li>
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Help user easily identify what action does.</novo-text></li>
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Help identify state, ie. error, warning, etc.</novo-text></li>
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Spacing is limited.</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Loading content.</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Processing an long running action.</novo-text></li>
 </ul>
 </div>
 <div>
 <h3>Don′t Use When</h3>
 <ul class="contains-do-list">
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">times</novo-icon><novo-text color="grapefruit"> ....</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">times</novo-icon><novo-text color="grapefruit"> When not loading data.</novo-text></li>
 </ul>
 </div>
 </novo-grid>
-`,
-  host: { class: 'markdown-page' }
-})
-export class IconUsagePage {
-  public params: any = {};
-}
-
-
-@Component({
-  selector: 'icon-page',
-  template: `<h1>Icons <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/icon">(source)</a></h1>
-<p>If you want to use bullhorn icons, it is easier to use the <code>novo-icon</code> element to style them.  You can always style them within the <code>i</code> tag too.</p>
-<h5>Basic Usage</h5>
-<p><code-example example="basic-icons"></code-example></p>
-<h5>Themes &amp; Colors</h5>
-<p><code-example example="themed-icons"></code-example></p>
-<h5>Raised Icons</h5>
-<p><code-example example="raised-icons"></code-example></p>
-`,
-  host: { class: 'markdown-page' }
-})
-export class IconPage {
-  public params: any = {};
-}
-
-
-@Component({
-  selector: 'loading-design-page',
-  template: `<h2>Anatomy</h2>
+<h2>Anatomy</h2>
 <novo-grid columns="2" align="start" gap="2rem">
 <img src="assets/images/ModalAnatomy.png" width="450">
 <div>
@@ -1904,36 +1815,6 @@ export class LoadingExamplesPage {
 
 
 @Component({
-  selector: 'loading-usage-page',
-  template: `<novo-grid columns="2" align="start" gap="2rem">
-<div>
-<h3>Why?</h3>
-<p>Loading animations are used to help indicate to the user that some sort of progress is taking place. These are especially helpful for intensive operations that might take extra time.</p>
-</div>
-<img src="https://via.placeholder.com/350x250"/>
-<div>
-<h3>Use When</h3>
-<ul class="contains-do-list">
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Loading content.</novo-text></li>
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Processing an long running action.</novo-text></li>
-</ul>
-</div>
-<div>
-<h3>Don′t Use When</h3>
-<ul class="contains-do-list">
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">times</novo-icon><novo-text color="grapefruit"> When not loading data.</novo-text></li>
-</ul>
-</div>
-</novo-grid>
-`,
-  host: { class: 'markdown-page' }
-})
-export class LoadingUsagePage {
-  public params: any = {};
-}
-
-
-@Component({
   selector: 'menu-design-page',
   template: `<h2>Usage</h2>
 <novo-grid columns="2" align="start" gap="2rem">
@@ -2025,19 +1906,6 @@ options to create multiple levels of hierarchy.</div>
 the right or left of parent list items, depending on available space.</div>
 </blockquote>
 </novo-grid>
-<h2>Patterns</h2>
-<novo-grid columns="2" align="start" gap="2rem">
-<blockquote>
-<div class="p"><strong>Pattern</strong></div>
-<div class="p">Why is it configured like this</div>
-</blockquote>
-<p><img src="https://via.placeholder.com/350x250" alt="placeholder"></p>
-<blockquote>
-<div class="p"><strong>Pattern</strong></div>
-<div class="p">Why is it configured like this</div>
-</blockquote>
-<p><img src="https://via.placeholder.com/350x250" alt="placeholder"></p>
-</novo-grid>
 <h2>Accessibility</h2>
 <p><strong>Implementation</strong></p>
 <p>Always include an <code>alt</code> attribute describing the information that is visually displayed in the image.</p>
@@ -2126,8 +1994,357 @@ export class MenuExamplesPage {
 
 
 @Component({
+  selector: 'modal-design-page',
+  template: `<h2>Usage</h2>
+<novo-grid columns="2" align="start" gap="2rem">
+<div>
+<p>A modal is a pop-up dialog that appears on top of the main content, requiring the user to focus only on the content that the modal presents.</p>
+<p>Modals are used to inform the user of something critical, force a decision, or extend a series of tasks. There are two categories of modals in the system: confirmation and workflow.</p>
+</div>
+<img src="https://via.placeholder.com/350x250"/>
+<div>
+<h3>Use When</h3>
+<ul class="contains-do-list">
+<li class="bullhorn-do-item">
+<p><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Do use to confirm irreversible actions:</novo-text></p>
+<p>Use a notification modal to ask the user to confirm when performing an irreversible action such as deleting a record, navigating away from something unsaved, or converting a file.</p>
+</li>
+<li class="bullhorn-do-item">
+<p><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Do use to confirm actions that will affect other records:</novo-text></p>
+<p>Use notification modals to make the user aware that their action will affect other records. The modal should ask them to confirm this action and explicitly say what the changes to other records will be. (find an example for this - deleting shifts could work, sending out bulk emails)</p>
+</li>
+<li class="bullhorn-do-item">
+<p><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Do use for a task related to the main content:</novo-text></p>
+<p>Workflow modals should always be related to the main content of the screen they are on top of. For example, when assigning candidates to shifts in the Scheduler.</p>
+</li>
+</ul>
+</div>
+<div>
+<h3>Don′t Use When</h3>
+<ul class="contains-do-list">
+<li class="bullhorn-do-item">
+<p><novo-icon color="grapefruit" mr="1rem">times</novo-icon><novo-text color="grapefruit"> Don’t use to confirm an action that has already happened:</novo-text></p>
+<p>Don’t use a notification modal to confirm an action that has already been completed. Conveying information that does not require action is not critical enough to fully obscure the main content of the page. Use a <a href="/components/toast">toast</a> instead.</p>
+</li>
+<li class="bullhorn-do-item">
+<p><novo-icon color="grapefruit" mr="1rem">times</novo-icon><novo-text color="grapefruit"> Don’t use for a task unrelated to the main content:</novo-text></p>
+<p>Don’t obscure the main content of the screen for a task that is not directly related to the subject matter of that screen. Open a new page or use a <a href="/components/aside">slideout</a> instead.</p>
+</li>
+</ul>
+</div>
+</novo-grid>
+<h2>Anatomy</h2>
+<novo-grid columns="2" align="start" gap="2rem">
+<img src="assets/images/ModalAnatomy.png" width="450">
+<div>
+<ol>
+<li>
+<p><strong>Container</strong><br>
+Description and purpose of this element</p>
+</li>
+<li>
+<p><strong>Header</strong><br>
+Description and purpose of this element</p>
+</li>
+<li>
+<p><strong>Icon (Optional)</strong><br>
+Description and purpose of this element</p>
+</li>
+<li>
+<p><strong>Title (Optional)</strong><br>
+Description and purpose of this element</p>
+</li>
+<li>
+<p><strong>Content</strong><br>
+Description and purpose of this element</p>
+</li>
+<li>
+<p><strong>Footer</strong><br>
+Description and purpose of this element</p>
+</li>
+</ol>
+</div>
+</novo-grid>
+<h2>Best Practices</h2>
+<ul class="contains-do-list">
+<li class="bullhorn-do-item">
+<p><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Do Use Multiple Columns to make content digestible:</novo-text></p>
+<p>If a Modal contains a lot of data, multiple columns help to make sure the user doesn’t miss any aspects of the task at hand. (Example - Make Offer modal from shifts, conflict management from shifts)</p>
+</li>
+<li class="bullhorn-do-item">
+<p><novo-icon color="grapefruit" mr="1rem">times</novo-icon><novo-text color="grapefruit"> Don’t Use a lot of scrolling in a narrow space:</novo-text></p>
+<p>Too much scrolling makes content hard to digest, and can cause the user to miss important information or steps in a task.</p>
+<p>Consider using a full page or a slideout if the modal can’t display the full content without significant scrolling.</p>
+</li>
+</ul>
+<h3>Footer Usage</h3>
+<ul>
+<li>The footer will usually be comprised of Primary button and a ‘Standard’ button</li>
+<li>If there’s more than one action available from the modal, use a Secondary button for the less important of those actions.</li>
+<li>If the primary action off of the modal is DESTRUCTIVE, use a red Primary button. RED ($grapefruit, $negative)</li>
+</ul>
+<h2>Color</h2>
+<blockquote class="two-columns">
+<blockquote>
+<div class="p"><img src="https://via.placeholder.com/350x250" alt="placeholder"></div>
+<ul class="contains-do-list">
+<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Do use color to relate modals in a multi-step workflow:</novo-text></li>
+</ul>
+<div class="p">Carry over the Entity color from the main content of the screen if the task in the modal is directly related to that Entity. (Ex: adding a shift)</div>
+</blockquote>
+<blockquote>
+<div class="p"><img src="https://via.placeholder.com/350x250" alt="placeholder"></div>
+<ul class="contains-do-list">
+<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">times</novo-icon><novo-text color="grapefruit"> Don’t use an Entity Color for something unrelated:</novo-text></li>
+</ul>
+<div class="p">Don’t use an Entity color in the header of a modal if the task is not directly related to that Entity. Instead, make reference to the entity elsewhere in the modal if necessary.</div>
+</blockquote>
+</blockquote>
+<h2>Accessibility</h2>
+<ul class="contains-do-list">
+<li class="bullhorn-do-item">
+<p><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Do use multiple avenues to convey meaning</novo-text></p>
+<p>Using color, iconography, and text together to convey a warning makes it clearer for people to understand. (show delete modal that is right)</p>
+</li>
+<li class="bullhorn-do-item">
+<p><novo-icon color="grapefruit" mr="1rem">times</novo-icon><novo-text color="grapefruit"> Don’t rely on just color to convey meaning</novo-text></p>
+<p>Using color alone to indicate a destructive action may not be clear to everyone. (show a modal with red yes button but no ‘delete’ in the text or trashcan)</p>
+</li>
+</ul>
+<h3>Keyboard Behaviors</h3>
+<p>When a dialog opens, focus moves to an element inside the dialog. See notes below regarding initial focus placement.</p>
+<ul>
+<li>Tab:
+<ul>
+<li>Moves focus to the next tabbable element inside the dialog.</li>
+<li>If focus is on the last tabbable element inside the dialog, moves focus to the first tabbable element inside the dialog.</li>
+</ul>
+</li>
+<li>Shift + Tab:
+<ul>
+<li>Moves focus to the previous tabbable element inside the dialog.</li>
+<li>If focus is on the first tabbable element inside the dialog, moves focus to the last tabbable element inside the dialog.</li>
+</ul>
+</li>
+<li>Escape: Closes the dialog.</li>
+</ul>
+<h3>Roles, States, and Properties</h3>
+<p>The element that contains all elements of the dialog, including the alert message and any dialog buttons, has role <code>alertdialog</code>.</p>
+<ul>
+<li>The element with role alertdialog has either:
+<ul>
+<li>A value for aria-labelledby that refers to the element containing the title of the dialog if the dialog has a visible label.</li>
+<li>A value for aria-label if the dialog does not have a visible label.</li>
+</ul>
+</li>
+<li>The element with role alertdialog has a value set for aria-describedby that refers to the element containing the alert message.</li>
+</ul>
+<h2>Behaviors</h2>
+<p><strong>Workflow modals</strong> should be triggered either from a button or link on the main content of the screen to initiate a workflow (add shift, add certification)</p>
+<p><strong>Confirmation Modals</strong> should be triggered immediately as the action they are confirming is triggered. (example: after ‘delete record’ is clicked from action dropdown)</p>
+<h3>Expansion</h3>
+<p>If the content in the modal gets bigger, the modal should expand before adding scrolling.</p>
+<h2>Patterns</h2>
+<novo-grid columns="2" align="start" gap="2rem">
+<blockquote>
+<div class="p"><strong>Pattern</strong></div>
+<div class="p">Why is it configured like this</div>
+</blockquote>
+<p><img src="https://via.placeholder.com/350x250" alt="placeholder"></p>
+<blockquote>
+<div class="p"><strong>Pattern</strong></div>
+<div class="p">Why is it configured like this</div>
+</blockquote>
+<p><img src="https://via.placeholder.com/350x250" alt="placeholder"></p>
+</novo-grid>
+`,
+  host: { class: 'markdown-page' }
+})
+export class ModalDesignPage {
+  public params: any = {};
+}
+
+
+@Component({
+  selector: 'modal-develop-page',
+  template: `<h1>Technical Details</h1>
+<ul>
+<li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/modal">(github)</a></li>
+<li><strong>module:</strong> <code>import &#123; NovoModal &#125; form 'novo-elements/modal';</code></li>
+<li><strong>service:</strong> <code>import &#123; NovoModalService &#125; form 'novo-elements/modal';</code></li>
+</ul>
+<h1>Roadmap</h1>
+<ul class="contains-task-list">
+<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox"> Improve Typing Support</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox"> Remove <code>NovoModalParams</code> support in v6.0.0</li>
+</ul>
+<h1>Changelog</h1>
+<h3>5.0.0</h3>
+<p><strong>Deprecation</strong></p>
+<ul>
+<li>
+<p><code>NovoModalParams</code> should no longer be used, instead use <code>NovoModalRef.params</code>. This is because <code>NovoModalRef</code> accepts a generic for the params property.</p>
+<pre><code class="language-typescript"><span class="hljs-keyword">interface</span> <span class="hljs-title class_">MyParams</span> &#123;
+  <span class="hljs-attr">isDefault</span>: <span class="hljs-built_in">boolean</span>;
+&#125;
+...
+<span class="hljs-title function_">constructor</span>(<span class="hljs-params">ref:NovoModalRef&lt;MyParams&gt;</span>) &#123;
+  <span class="hljs-keyword">if</span>(ref.<span class="hljs-property">params</span>.<span class="hljs-property">isDefault</span>) &#123;
+    <span class="hljs-comment">/* ^ Will not need to by type cast */</span>
+  &#125;
+&#125;
+</code></pre>
+</li>
+</ul>
+<h2>Properties</h2>
+<p><em>No Properties</em></p>
+<h1>Services</h1>
+<h2>NovoModalService</h2>
+<p>Modals should be invoked via <code>NovoModalService</code> and therefore all properties should be private or internal. Any values that need to be passed to the your <code>Modal</code> instance should be passed by the service and available in your modal.</p>
+<pre><code class="language-typescript"><span class="hljs-meta">@Component</span>(&#123;...&#125;)
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">RandomComponent</span> &#123;
+  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> modal:NovoModalService</span>) &#123;&#125;
+  <span class="hljs-title function_">handleAction</span>(<span class="hljs-params"></span>) &#123;
+    <span class="hljs-keyword">const</span> ref = <span class="hljs-variable language_">this</span>.<span class="hljs-property">modal</span>.<span class="hljs-title function_">open</span>(<span class="hljs-title class_">ConfirmDeleteModal</span>, &#123; <span class="hljs-attr">record</span>: <span class="hljs-number">123</span> &#125;);
+    <span class="hljs-comment">/* you can listen to the close event */</span>
+    ref.<span class="hljs-property">onClosed</span>.<span class="hljs-title function_">then</span>(<span class="hljs-function">(<span class="hljs-params">result</span>) =&gt;</span> &#123;
+      <span class="hljs-comment">/* result is the argument sent via the ref */</span>
+      <span class="hljs-keyword">if</span> (res === <span class="hljs-string">&#x27;success&#x27;</span>) &#123;
+        <span class="hljs-comment">/* perfom some action */</span>
+      &#125;
+    &#125;);
+    <span class="hljs-comment">/* close the modal from the parent */</span>
+    ref.<span class="hljs-title function_">close</span>(<span class="hljs-string">&#x27;success&#x27;</span>)
+  &#125;
+&#125;
+</code></pre>
+<h3>Methods</h3>
+<h4><strong>open(component, params)</strong></h4>
+<p>Used to open all modals via the service. Use <code>params</code> to pass values to you component.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Name</th>
+<th style="text-align:left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">component</td>
+<td style="text-align:left"><em>Class</em><br>The angular component which represents the Modal to be opened.</td>
+</tr>
+<tr>
+<td style="text-align:left">params</td>
+<td style="text-align:left"><em>Object</em><br><strong>Optional</strong> arguments that will be injected into <code>NovoModalRef.params</code></td>
+</tr>
+</tbody>
+</table>
+<p><em>Note:</em> All modal components should be declared as <code>entryComponents</code> in the module.</p>
+<h2>NovoModalRef&lt;T&gt;</h2>
+<p><code>NovoModalRef</code> should be injected into your modal component and all pass params can be accessed in the <code>params</code> property.</p>
+<pre><code class="language-typescript"><span class="hljs-keyword">interface</span> <span class="hljs-title class_">DeleteModalParams</span> &#123;
+  <span class="hljs-attr">record</span>: <span class="hljs-built_in">number</span>;
+&#125;
+<span class="hljs-meta">@Component</span>(&#123;&#125;)
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">ConfirmDeleteModal</span> &#123;
+  <span class="hljs-title function_">constructor</span>(<span class="hljs-params">ref:NovoModalRef&lt;DeleteModalParams&gt;</span>) &#123;
+    <span class="hljs-comment">/**
+     * All passed values are available
+     * via ref.params
+     **/</span>
+  &#125;
+
+  <span class="hljs-title function_">handleClose</span>(<span class="hljs-params"></span>) &#123;
+    <span class="hljs-comment">/* To close the modal use the close method */</span>
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">ref</span>.<span class="hljs-title function_">close</span>(<span class="hljs-comment">/* Return a value */</span>)
+  &#125;
+
+&#125;
+</code></pre>
+<h3>Methods</h3>
+<h4><strong>close(response)</strong></h4>
+<p>Will close the modal will emit events to both the <code>beforeClose</code> and <code>afterClosed</code> observables, as well as the .</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Name</th>
+<th style="text-align:left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">response</td>
+<td style="text-align:left"><em>any</em><br>Any value you wish to return to calling components, will be resovled in the <code>onClosed</code> promise.</td>
+</tr>
+</tbody>
+</table>
+`,
+  host: { class: 'markdown-page' }
+})
+export class ModalDevelopPage {
+  public params: any = {};
+}
+
+
+@Component({
+  selector: 'modal-examples-page',
+  template: `<h2>Notification Modals</h2>
+<h3>Success</h3>
+<p>This modal uses only a primary action button. It is a confirmation that an action has been completed when the result is not immediately apparent. A workflow modal often transitions into a success modal.</p>
+<p><code-example example="success-modal"></code-example></p>
+<h3>Warning</h3>
+<p>Warning modals ask for additional confirmation to complete an action because the action is either irreversible or there is an exception. The first line should always clarify the action or eventual result.</p>
+<p><code-example example="warning-modal"></code-example></p>
+<h3>Error</h3>
+<p>Error modals indicate that an attempted action has failed. The first line should apologize and state the what happened. The second line should quickly attempt to explain to the user why this has happened, and instruct the user on the best course of action.</p>
+<p><code-example example="error-modal"></code-example></p>
+<h3>Custom</h3>
+<p>In the case where &quot;Success&quot;, &quot;Warning&quot;, and &quot;Error&quot; notfications aren't enough, use the custom notification. Custom notifcations allow any of the Bullhorn Icons to be used in the notification.</p>
+<p><code-example example="custom-modal"></code-example></p>
+<h2>Workflow Modals</h2>
+<h3>Add</h3>
+<p>Add modals have a colored title bar based on the record type being created. Additionally, due to a greater than average amount of content, they have fixed footers.</p>
+<p><code-example example="modal-add-form"></code-example></p>
+<h3>Edit &amp; Send</h3>
+<p>Edit, Send, and non-Add workflow modals possess a plain header to remind the user of the action they are taking. They generally have a neutralizing button, and a primary button.</p>
+<p><code-example example="modal-edit-form"></code-example></p>
+`,
+  host: { class: 'markdown-page' }
+})
+export class ModalExamplesPage {
+  public params: any = {};
+}
+
+
+@Component({
   selector: 'non-ideal-state-design-page',
-  template: `<h2>Anatomy</h2>
+  template: `<h2>Usage</h2>
+<novo-grid columns="2" align="start" gap="2rem">
+<div>
+<p>Non-ideal UI states inform the user that some content is unavailable. There are several types of non-ideal states, including:</p>
+<ul>
+<li><strong>Empty state</strong>: when a list has no data in it yet, or a container's contents have been intentionally removed.</li>
+<li><strong>Loading state</strong>: when waiting for data to load, Best practice is to show a spinner for this state, with optional explanatory text below the spinner.</li>
+<li><strong>Error state</strong>: its broken (for instance, 404 and 500 HTTP errors). In this case, best practice is to add a call to action directing the user what to do next.</li>
+</ul>
+</div>
+<img src="https://via.placeholder.com/350x250"/>
+<div>
+<h3>Use When</h3>
+<ul class="contains-do-list">
+<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Content is missing from a page and you need to communicate why.</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> A user is starting a new workflow and hasn’t created any content yet.</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> A user has nothing more to do. For example, when they have completed all tasks, read all messages, or seen all notifications</novo-text></li>
+</ul>
+</div>
+<div>
+<h3>Don′t Use When</h3>
+<ul class="contains-do-list">
+<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">times</novo-icon><novo-text color="grapefruit"> tbw</novo-text></li>
+</ul>
+</div>
+</novo-grid>
+<h2>Anatomy</h2>
 <novo-grid columns="2" align="start" gap="2rem">
 <img src="assets/images/ModalAnatomy.png" width="450">
 <div>
@@ -2361,37 +2578,138 @@ export class NonIdealStateExamplesPage {
 
 
 @Component({
-  selector: 'non-ideal-state-usage-page',
-  template: `<novo-grid columns="2" align="start" gap="2rem">
+  selector: 'popover-design-page',
+  template: `<h2>Usage</h2>
+<novo-grid columns="2" align="start" gap="2rem">
 <div>
-<h3>Why?</h3>
-<p>Non-ideal UI states inform the user that some content is unavailable. There are several types of non-ideal states, including:</p>
-<ul>
-<li><strong>Empty state</strong>: when a list has no data in it yet, or a container's contents have been intentionally removed.</li>
-<li><strong>Loading state</strong>: when waiting for data to load, Best practice is to show a spinner for this state, with optional explanatory text below the spinner.</li>
-<li><strong>Error state</strong>: its broken (for instance, 404 and 500 HTTP errors). In this case, best practice is to add a call to action directing the user what to do next.</li>
-</ul>
+<p>Popovers are layered containers that hold additional information or controls. Popovers are containers used to display transient content such as menus, options, additional actions, and more. They visually stand out through stroke and drop shadow and float on top of the interface.</p>
 </div>
-<img src="https://via.placeholder.com/350x250"/>
+<img src="/assets/images/PopoverOverview.png"/>
 <div>
 <h3>Use When</h3>
 <ul class="contains-do-list">
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Content is missing from a page and you need to communicate why.</novo-text></li>
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> A user is starting a new workflow and hasn’t created any content yet.</novo-text></li>
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> A user has nothing more to do. For example, when they have completed all tasks, read all messages, or seen all notifications</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Displaying supplementary content or actions, without obscuring the page.</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Creating a menu by placing a list group inside of a popover.</novo-text></li>
 </ul>
 </div>
 <div>
 <h3>Don′t Use When</h3>
 <ul class="contains-do-list">
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">times</novo-icon><novo-text color="grapefruit"> tbw</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">times</novo-icon><novo-text color="grapefruit"> When content is 10 words or fewer. Instead, use a tooltip.</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">times</novo-icon><novo-text color="grapefruit"> Requiring a user to complete a complex task. Instead, use a modal or a separate page.</novo-text></li>
 </ul>
 </div>
 </novo-grid>
+<h2>Anatomy</h2>
+<novo-grid columns="2" align="start" gap="2rem">
+<img src="assets/images/PopoverAnatomy.png" width="450">
+<div>
+<ol>
+<li>
+<p><strong>Content</strong><br>
+The pop-overs contents, defined based on the application needs and business use-cases.</p>
+</li>
+<li>
+<p><strong>Trigger</strong><br>
+The element that anchors the popover and controls how the popover will be trigger (click, hover).</p>
+</li>
+<li>
+<p><strong>Container</strong><br>
+The popover container will be positioned based on the alignment to the trigger element.</p>
+</li>
+</ol>
+</div>
+</novo-grid>
+<h2>Guidelines</h2>
+<novo-grid columns="2" align="start" gap="2rem">
+<blockquote>
+<div class="p"><img src="assets/images/PopoverPointer.png" alt="placeholder"></div>
+<div class="p"><strong>With Pointer</strong></div>
+<div class="p">By default, popovers have a pointers. Popovers without a pointer should be used when the trigger has a visually distinctive selected state, in order to show the connection between the popover and its trigger.</div>
+<div class="p">Most Popovers should have a pointer which should be used to help show the connection to the trigger, in cases where the trigger is not easily identifiable.</div>
+</blockquote>
+<blockquote>
+<div class="p"><img src="assets/images/PopoverPosition.png" alt="placeholder"></div>
+<div class="p"><strong>Placement</strong></div>
+<div class="p">A popover is positioned in relation to its source. The placement property values are the following: top, top left, top right, top start, top end, bottom, bottom left, bottom right, bottom start, bottom end, left, left top, left bottom, start, start top, start bottom, right, right top, right bottom, end, end top, end bottom. The default placement value is at the top.</div>
+</blockquote>
+</novo-grid>
+<h2>Accessibility</h2>
+<p><strong>Implementation</strong></p>
+<p>the popover should follow the Aria <code>complementary</code> role <a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/complementary_role">guidelines</a>.</p>
 `,
   host: { class: 'markdown-page' }
 })
-export class NonIdealStateUsagePage {
+export class PopoverDesignPage {
+  public params: any = {};
+}
+
+
+@Component({
+  selector: 'popover-develop-page',
+  template: `<h1>Technical Details</h1>
+<p>Tooltips are used as system notifications. They can contain custom text titles and messages, as well as any icons from bh-icons and any color from our color palletes.</p>
+<ul>
+<li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/tooltips">(github)</a></li>
+<li><strong>module:</strong> <code>import &#123; NovoFieldModule &#125; from 'novo-elements';</code></li>
+</ul>
+<p><strong>Usage</strong></p>
+<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">novo-field</span> <span class="hljs-attr">layout</span>=<span class="hljs-string">&quot;horizontal&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">novo-label</span>&gt;</span>Amount<span class="hljs-tag">&lt;/<span class="hljs-name">novo-label</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">novoInput</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;number&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;example-right-align&quot;</span> /&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">novoPrefix</span>&gt;</span>$<span class="hljs-symbol">&amp;nbsp;</span><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">novoSuffix</span>&gt;</span>.00<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">novo-hint</span>&gt;</span>Enter some money<span class="hljs-tag">&lt;/<span class="hljs-name">novo-hint</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">novo-field</span>&gt;</span>
+</code></pre>
+<h1>Roadmap</h1>
+<ul class="contains-task-list">
+<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox"> Improve Typing Support</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox"> Make color and theming consistent</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox"> Dark Mode</li>
+</ul>
+<h1>Changelog</h1>
+<h3>5.0.0</h3>
+<p><strong>Deprecation</strong></p>
+<ul>
+<li>You should no longer use <code>list</code> and <code>item</code> components, these are non-standard components and have been replaced with <code>novo-option</code> as used in the usage above.</li>
+</ul>
+<h1>Components</h1>
+<h2>NovoFieldElement <code>novo-field</code></h2>
+<p>The <code>novo-field</code> component expects 1 <code>button</code> or <code>novo-button</code> as the trigger for the menu list which is comprised of all the <code>novo-option</code> or <code>novo-optgroup</code> child components.</p>
+<h3>Properties</h3>
+<p><props-table component="NovoFieldElement"></props-table></p>
+<h1>Directive</h1>
+<h2>NovoInput <code>[novoInput]</code></h2>
+<p>The <code>novoInput</code> component expects 1 <code>button</code> or <code>novo-button</code> as the trigger for the menu list which is comprised of all the <code>novo-option</code> or <code>novo-optgroup</code> child components.</p>
+<h3>Properties</h3>
+<p><props-table component="NovoInput"></props-table></p>
+`,
+  host: { class: 'markdown-page' }
+})
+export class PopoverDevelopPage {
+  public params: any = {};
+}
+
+
+@Component({
+  selector: 'popover-examples-page',
+  template: `<h2>Placement</h2>
+<p><code-example example="pop-over-placement"></code-example></p>
+<h2>Horizontal Alignment</h2>
+<p><code-example example="pop-over-horizontal"></code-example></p>
+<h2>Vertical Alignment</h2>
+<p><code-example example="pop-over-vertical"></code-example></p>
+<h2>Behavior</h2>
+<p><code-example example="pop-over-behaviors"></code-example></p>
+<h2>Dynamic HTML in PopOver</h2>
+<p><code-example example="pop-over-dynamic"></code-example></p>
+<h2>Automatic Placement of PopOver</h2>
+<p><code-example example="pop-over-auto-placement"></code-example></p>
+`,
+  host: { class: 'markdown-page' }
+})
+export class PopoverExamplesPage {
   public params: any = {};
 }
 
@@ -2670,6 +2988,516 @@ export class TabbedGroupPickerPage {
   host: { class: 'markdown-page' }
 })
 export class TablePage {
+  public params: any = {};
+}
+
+
+@Component({
+  selector: 'tip-well-design-page',
+  template: `<h2>Usage</h2>
+<novo-grid columns="2" align="start" gap="2rem">
+<div>
+<p>The TipWell is a small container for displaying help text.  It is meant to be shown only once and dismissable to the user.  Typical usage is to provide additional detail on data being displayed or explain how a feature works to the user for their first time using it.</p>
+</div>
+<img src="assets/images/TipWellOverview.png"/>
+<div>
+<h3>Use When</h3>
+<ul class="contains-do-list">
+<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> The help text is no longer needed after the user has read the contents.</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> To provide additional context and links related to the data to educate the user on how the a feature works.</novo-text></li>
+</ul>
+</div>
+<div>
+<h3>Don′t Use When</h3>
+<ul class="contains-do-list">
+<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">times</novo-icon><novo-text color="grapefruit"> Don’t use it show error states, use novo-error or a banner.</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">times</novo-icon><novo-text color="grapefruit"> Don’t use it to display tutorials.</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">times</novo-icon><novo-text color="grapefruit"> Don’t use it to explain text fields, use novo-hint.</novo-text></li>
+</ul>
+</div>
+</novo-grid>
+<h2>Anatomy</h2>
+<novo-grid columns="2" align="start" gap="2rem">
+<img src="assets/images/ToastBanners.png" width="450">
+<div>
+<ol>
+<li>
+<p><strong>Icon</strong><br>
+Use an Icon to quickly convey context of the action. ie. If a file is ready to download, show a download or file icon.</p>
+</li>
+<li>
+<p><strong>Container</strong><br>
+Used to quickly describe the action that occurred. eg. File Uploaded!</p>
+</li>
+<li>
+<p><strong>Dismiss Action</strong><br>
+A longer description of the outcome of the related action.</p>
+</li>
+</ol>
+</div>
+</novo-grid>
+<h2>Accessibility</h2>
+<p><strong>Implementation</strong></p>
+<p>Always include an <code>alt</code> attribute describing the information that is visually displayed in the image.</p>
+`,
+  host: { class: 'markdown-page' }
+})
+export class TipWellDesignPage {
+  public params: any = {};
+}
+
+
+@Component({
+  selector: 'tip-well-develop-page',
+  template: `<h1>Technical Details</h1>
+<p>Tip Wells are used as ephemeral containers of helpful text. The importance of the content is usually short-lived and no longer needed once disseminated.</p>
+<ul>
+<li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/tip-well">(github)</a></li>
+<li><strong>module:</strong> <code>import &#123; NovoTipWellModule &#125; from 'novo-elements';</code></li>
+</ul>
+<p><strong>Usage</strong></p>
+<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">novo-tip-well</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;Demo&quot;</span> <span class="hljs-attr">icon</span>=<span class="hljs-string">&quot;info&quot;</span>&gt;</span>
+  Sed sodales ligula et fermentum bibendum. Aliquam tincidunt sagittis leo eget auctor. Fusce eu sagittis metus, ut viverra magna. Mauris mollis nisl nec libero tincidunt posuere.
+<span class="hljs-tag">&lt;/<span class="hljs-name">novo-tip-well</span>&gt;</span>
+</code></pre>
+<h1>Roadmap</h1>
+<ul class="contains-task-list">
+<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox"> Improve Typing Support</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox"> Dark Mode</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox"> Create a Provider for TipWell states</li>
+</ul>
+<h1>Changelog</h1>
+<h3>6.0.0</h3>
+<p><strong>Deprecation</strong></p>
+<ul>
+<li>You should no longer use <code>tip</code> property and instead add the contents as children with the template.</li>
+</ul>
+<h1>Components</h1>
+<h2>NovoTipWellElement <code>novo-tip-well</code></h2>
+<p>The <code>novo-tip-well</code> component expects a <code>name</code> property, which will be used to store the state of the tipwell in local-storage.</p>
+<h3>Properties</h3>
+<p><props-table component="NovoTipWellElement"></props-table></p>
+`,
+  host: { class: 'markdown-page' }
+})
+export class TipWellDevelopPage {
+  public params: any = {};
+}
+
+
+@Component({
+  selector: 'tip-well-examples-page',
+  template: `<h2>Basic Usage</h2>
+<p><code-example example="basic-tip-well"></code-example></p>
+<h2>No Button Demo</h2>
+<p><code-example example="buttonless-tip-well"></code-example></p>
+<h2>Icon Demo</h2>
+<p><code-example example="icon-tip-well"></code-example></p>
+<h2>HTML Demo</h2>
+<p><code-example example="html-tip-well"></code-example></p>
+`,
+  host: { class: 'markdown-page' }
+})
+export class TipWellExamplesPage {
+  public params: any = {};
+}
+
+
+@Component({
+  selector: 'toaster-design-page',
+  template: `<h2>Usage</h2>
+<novo-grid columns="2" align="start" gap="2rem">
+<div>
+<p>A toast provides feedback about an operation while maintaining visibility and interaction with the current activity. It conveys information to the user that is not critical and does not require specific attention. A toast does not prevent the user from continuing their activity.</p>
+<p>When the user is not presented with some form of confirmation about the completion of the action.</p>
+<p><strong>Works with following input types</strong></p>
+<ul>
+<li>Default input, select, textarea</li>
+<li>novo-select</li>
+<li>novo-datepicker</li>
+</ul>
+</div>
+<img src="assets/images/ToastBanners.png"/>
+<div>
+<h3>Use When</h3>
+<ul class="contains-do-list">
+<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Use a Banner when a form cannot be saved to show an error occurred.</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Use a Banner when an action can’t be completed due to an error or failure.</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Use a Growl when an action is successfully performed and the context, i.e. modal, is no longer available.</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> When an action happens asynchronously, e.g. file upload.</novo-text></li>
+</ul>
+</div>
+<div>
+<h3>Don′t Use When</h3>
+<ul class="contains-do-list">
+<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">times</novo-icon><novo-text color="grapefruit"> Don’t use it to confirm an action, a toast should be reactive not pro-active.</novo-text></li>
+</ul>
+</div>
+</novo-grid>
+<h2>Anatomy</h2>
+<novo-grid columns="2" align="start" gap="2rem">
+<img src="assets/images/ToastBanners.png" width="450">
+<div>
+<ol>
+<li>
+<p><strong>Icon</strong><br>
+Use an Icon to quickly convey context of the action. ie. If a file is ready to download, show a download or file icon.</p>
+</li>
+<li>
+<p><strong>Title (Optional)</strong><br>
+Used to quickly describe the action that occurred. eg. File Uploaded!</p>
+</li>
+<li>
+<p><strong>Message</strong><br>
+A longer description of the outcome of the related action.</p>
+</li>
+<li>
+<p><strong>Follow-up Action (Optional)</strong><br>
+By default the a toast will always have a dismiss action, but can also have a follow up action related to the previous action, eg. Undo, Open, View....</p>
+</li>
+</ol>
+</div>
+</novo-grid>
+<h2>Best Practices</h2>
+<ul>
+<li>Use a banner when a form can’t be saved, banner appears, should be dismissed manually</li>
+<li>Use a growl when something is successfully saved, growl should disappears after X seconds</li>
+<li>A toast should only have 1 follow-up action.</li>
+<li>If the toast has an follow-up action, i.e. Undo, View, etc, then dismiss the Toast manually…</li>
+<li>If a growl has no follow-up action, the toast should dismiss automatically after X seconds</li>
+<li>If the growl has under 30 characters, dismiss automatically after 3 seconds</li>
+<li>If the growl has between 30 and 100 characters, dismiss automatically after 10 seconds</li>
+<li>If the growl has over 100 characters, dismiss manually</li>
+<li>If the growl has over X characters or X lines of text, add a View More action</li>
+</ul>
+<h2>Color</h2>
+<p><strong>How to use color</strong></p>
+<p>Background utilises color to indicate status of the message. Icon is often synonymous with the status of the color, <em>e.g. warning icon goes with yellow background</em></p>
+<h2>Behaviors</h2>
+<p><strong>Movement</strong></p>
+<p>A toast appears through an animated movement to draw the users attention. A banner slides in from the top of the page. A growl slides in from the side of the screen on which it is located. Multiple growls will stack by moving to the background when a new one appears.</p>
+<novo-grid columns="2" align="start" gap="2rem">
+<blockquote>
+<div class="p"><strong>Embedded</strong></div>
+<div class="p">Banners should be used as static notifications, usually shown at the top of content.</div>
+</blockquote>
+<p><img src="assets/images/ToastEmbedded.png" alt="placeholder"></p>
+<blockquote>
+<div class="p"><strong>Position</strong></div>
+<div class="p">Growl notifications can be displayed at the top, left, right, bottom or corner of the page. Notification will also stack on top of each other until dismissed.  In general that an application use the same location for all growl notications, so the user will know where to look for them.</div>
+</blockquote>
+<p><img src="assets/images/ToastLayout.png" alt="placeholder"></p>
+<blockquote>
+<div class="p"><strong>Actions</strong></div>
+<div class="p">Growls and Banners can have actions that can be invoked before being dismissed.  This action should be contextual to the action that triggered the toast in the first place.  eg. Actions like &quot;Undo&quot; or &quot;See more&quot; are common use-case, this helps create a workflow that is streamlined for the user but provides optional actions when needed.</div>
+</blockquote>
+<p><img src="assets/images/ToastGrowlAction.png" alt="placeholder"></p>
+</novo-grid>
+<h2>How to configure</h2>
+<novo-grid columns="2" align="start" gap="2rem">
+<blockquote>
+<div class="p"><img src="https://via.placeholder.com/350x250" alt="placeholder"></div>
+<ul class="contains-do-list">
+<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Always do this</novo-text></li>
+</ul>
+<div class="p">Explain this</div>
+</blockquote>
+<blockquote>
+<div class="p"><img src="https://via.placeholder.com/350x250" alt="placeholder"></div>
+<ul class="contains-do-list">
+<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">times</novo-icon><novo-text color="grapefruit"> Never do this</novo-text></li>
+</ul>
+<div class="p">Explain this</div>
+</blockquote>
+</novo-grid>
+<h2>Accessibility</h2>
+<p><strong>Implementation</strong></p>
+<p>Always include an <code>alt</code> attribute describing the information that is visually displayed in the image.</p>
+`,
+  host: { class: 'markdown-page' }
+})
+export class ToasterDesignPage {
+  public params: any = {};
+}
+
+
+@Component({
+  selector: 'toaster-develop-page',
+  template: `<h1>Technical Details</h1>
+<p>Toasts are used as system notifications. They can contain custom text titles and messages, as well as any icons from bh-icons and any color from our color palletes.</p>
+<ul>
+<li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/field">(github)</a></li>
+<li><strong>module:</strong> <code>import &#123; NovoFieldModule &#125; from 'novo-elements';</code></li>
+</ul>
+<p><strong>Usage</strong></p>
+<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">novo-field</span> <span class="hljs-attr">layout</span>=<span class="hljs-string">&quot;horizontal&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">novo-label</span>&gt;</span>Amount<span class="hljs-tag">&lt;/<span class="hljs-name">novo-label</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">novoInput</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;number&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;example-right-align&quot;</span> /&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">novoPrefix</span>&gt;</span>$<span class="hljs-symbol">&amp;nbsp;</span><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">novoSuffix</span>&gt;</span>.00<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">novo-hint</span>&gt;</span>Enter some money<span class="hljs-tag">&lt;/<span class="hljs-name">novo-hint</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">novo-field</span>&gt;</span>
+</code></pre>
+<h1>Roadmap</h1>
+<ul class="contains-task-list">
+<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox"> Improve Typing Support</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox"> Make color and theming consistent</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox"> Dark Mode</li>
+</ul>
+<h1>Changelog</h1>
+<h3>5.0.0</h3>
+<p><strong>Deprecation</strong></p>
+<ul>
+<li>You should no longer use <code>list</code> and <code>item</code> components, these are non-standard components and have been replaced with <code>novo-option</code> as used in the usage above.</li>
+</ul>
+<h1>Components</h1>
+<h2>NovoFieldElement <code>novo-field</code></h2>
+<p>The <code>novo-field</code> component expects 1 <code>button</code> or <code>novo-button</code> as the trigger for the menu list which is comprised of all the <code>novo-option</code> or <code>novo-optgroup</code> child components.</p>
+<h3>Properties</h3>
+<p><props-table component="NovoFieldElement"></props-table></p>
+<h1>Directive</h1>
+<h2>NovoInput <code>[novoInput]</code></h2>
+<p>The <code>novoInput</code> component expects 1 <code>button</code> or <code>novo-button</code> as the trigger for the menu list which is comprised of all the <code>novo-option</code> or <code>novo-optgroup</code> child components.</p>
+<h3>Properties</h3>
+<p><props-table component="NovoInput"></props-table></p>
+`,
+  host: { class: 'markdown-page' }
+})
+export class ToasterDevelopPage {
+  public params: any = {};
+}
+
+
+@Component({
+  selector: 'toaster-examples-page',
+  template: `<h2>Alert</h2>
+<p>This type of toast notification takes a template, a style, and a location.</p>
+<h2>Embedded Toast</h2>
+<p><code-example example="toast-usage"></code-example></p>
+<h2>Toaster Service</h2>
+<p><code-example example="toast-service"></code-example></p>
+<h2>Toaster Actions</h2>
+<p><code-example example="toast-actions"></code-example></p>
+`,
+  host: { class: 'markdown-page' }
+})
+export class ToasterExamplesPage {
+  public params: any = {};
+}
+
+
+@Component({
+  selector: 'tooltip-design-page',
+  template: `<h2>Anatomy</h2>
+<novo-grid columns="2" align="start" gap="2rem">
+<img src="assets/images/ModalAnatomy.png" width="450">
+<div>
+<ol>
+<li>
+<p><strong>Icon</strong><br>
+Use an Icon to quickly convey context of the action. ie. If a file is ready to download, show a download or file icon.</p>
+</li>
+<li>
+<p><strong>Title (Optional)</strong><br>
+Used to quickly describe the action that occurred. eg. File Uploaded!</p>
+</li>
+<li>
+<p><strong>Message</strong><br>
+A longer description of the outcome of the related action.</p>
+</li>
+<li>
+<p><strong>Follow-up Action (Optional)</strong><br>
+By default the a toast will always have a dismiss action, but can also have a follow up action related to the previous action, eg. Undo, Open, View....</p>
+</li>
+</ol>
+</div>
+</novo-grid>
+<h2>Best Practices</h2>
+<ul>
+<li>Use a banner when a form can’t be saved, banner appears, should be dismissed manually</li>
+<li>Use a growl when something is successfully saved, growl should disappears after X seconds</li>
+<li>A toast should only have 1 follow-up action.</li>
+<li>If the toast has an follow-up action, i.e. Undo, View, etc, then dismiss the Toast manually…</li>
+<li>If a growl has no follow-up action, the toast should dismiss automatically after X seconds</li>
+<li>If the growl has under 30 characters, dismiss automatically after 3 seconds</li>
+<li>If the growl has between 30 and 100 characters, dismiss automatically after 10 seconds</li>
+<li>If the growl has over 100 characters, dismiss manually</li>
+<li>If the growl has over X characters or X lines of text, add a View More action</li>
+</ul>
+<h2>Color</h2>
+<p><strong>How to use color</strong></p>
+<p>Background utilises color to indicate status of the message. Icon is often synonymous with the status of the color, <em>e.g. warning icon goes with yellow background</em></p>
+<novo-grid columns="2" align="start" gap="2rem">
+<blockquote>
+<div class="p"><strong>Pattern</strong></div>
+<div class="p">Yellow for warnings</div>
+</blockquote>
+<p><img src="https://via.placeholder.com/350x250" alt="placeholder"></p>
+<blockquote>
+<div class="p"><strong>Pattern</strong></div>
+<div class="p">Green for successful actions</div>
+</blockquote>
+<p><img src="https://via.placeholder.com/350x250" alt="placeholder"></p>
+<blockquote>
+<div class="p"><strong>Pattern</strong></div>
+<div class="p">Red for errors or unsuccessfully attempted actions</div>
+</blockquote>
+<p><img src="https://via.placeholder.com/350x250" alt="placeholder"></p>
+</novo-grid>
+<h2>Behaviors</h2>
+<p><strong>Movement</strong></p>
+<p>A toast appears through an animated movement to draw the users attention. A banner slides in from the top of the page. A growl slides in from the side of the screen on which it is located. Multiple growls will stack by moving to the background when a new one appears.</p>
+<novo-grid columns="2" align="start" gap="2rem">
+<blockquote>
+<div class="p"><strong>Pattern</strong></div>
+<div class="p">Yellow for warnings</div>
+</blockquote>
+<p><img src="https://via.placeholder.com/350x250" alt="placeholder"></p>
+</novo-grid>
+<h2>How to configure</h2>
+<novo-grid columns="2" align="start" gap="2rem">
+<blockquote>
+<div class="p"><img src="https://via.placeholder.com/350x250" alt="placeholder"></div>
+<ul class="contains-do-list">
+<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Always do this</novo-text></li>
+</ul>
+<div class="p">Explain this</div>
+</blockquote>
+<blockquote>
+<div class="p"><img src="https://via.placeholder.com/350x250" alt="placeholder"></div>
+<ul class="contains-do-list">
+<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">times</novo-icon><novo-text color="grapefruit"> Never do this</novo-text></li>
+</ul>
+<div class="p">Explain this</div>
+</blockquote>
+</novo-grid>
+<h2>Patterns</h2>
+<novo-grid columns="2" align="start" gap="2rem">
+<blockquote>
+<div class="p"><strong>Pattern</strong></div>
+<div class="p">Why is it configured like this</div>
+</blockquote>
+<p><img src="https://via.placeholder.com/350x250" alt="placeholder"></p>
+<blockquote>
+<div class="p"><strong>Pattern</strong></div>
+<div class="p">Why is it configured like this</div>
+</blockquote>
+<p><img src="https://via.placeholder.com/350x250" alt="placeholder"></p>
+</novo-grid>
+<h2>Accessibility</h2>
+<p><strong>Implementation</strong></p>
+<p>Always include an <code>alt</code> attribute describing the information that is visually displayed in the image.</p>
+`,
+  host: { class: 'markdown-page' }
+})
+export class TooltipDesignPage {
+  public params: any = {};
+}
+
+
+@Component({
+  selector: 'tooltip-develop-page',
+  template: `<h1>Technical Details</h1>
+<p>Tooltips are used as system notifications. They can contain custom text titles and messages, as well as any icons from bh-icons and any color from our color palletes.</p>
+<ul>
+<li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/tooltips">(github)</a></li>
+<li><strong>module:</strong> <code>import &#123; NovoFieldModule &#125; from 'novo-elements';</code></li>
+</ul>
+<p><strong>Usage</strong></p>
+<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">novo-field</span> <span class="hljs-attr">layout</span>=<span class="hljs-string">&quot;horizontal&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">novo-label</span>&gt;</span>Amount<span class="hljs-tag">&lt;/<span class="hljs-name">novo-label</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">novoInput</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;number&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;example-right-align&quot;</span> /&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">novoPrefix</span>&gt;</span>$<span class="hljs-symbol">&amp;nbsp;</span><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">novoSuffix</span>&gt;</span>.00<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">novo-hint</span>&gt;</span>Enter some money<span class="hljs-tag">&lt;/<span class="hljs-name">novo-hint</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">novo-field</span>&gt;</span>
+</code></pre>
+<h1>Roadmap</h1>
+<ul class="contains-task-list">
+<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox"> Improve Typing Support</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox"> Make color and theming consistent</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox"> Dark Mode</li>
+</ul>
+<h1>Changelog</h1>
+<h3>5.0.0</h3>
+<p><strong>Deprecation</strong></p>
+<ul>
+<li>You should no longer use <code>list</code> and <code>item</code> components, these are non-standard components and have been replaced with <code>novo-option</code> as used in the usage above.</li>
+</ul>
+<h1>Components</h1>
+<h2>NovoFieldElement <code>novo-field</code></h2>
+<p>The <code>novo-field</code> component expects 1 <code>button</code> or <code>novo-button</code> as the trigger for the menu list which is comprised of all the <code>novo-option</code> or <code>novo-optgroup</code> child components.</p>
+<h3>Properties</h3>
+<p><props-table component="NovoFieldElement"></props-table></p>
+<h1>Directive</h1>
+<h2>NovoInput <code>[novoInput]</code></h2>
+<p>The <code>novoInput</code> component expects 1 <code>button</code> or <code>novo-button</code> as the trigger for the menu list which is comprised of all the <code>novo-option</code> or <code>novo-optgroup</code> child components.</p>
+<h3>Properties</h3>
+<p><props-table component="NovoInput"></props-table></p>
+`,
+  host: { class: 'markdown-page' }
+})
+export class TooltipDevelopPage {
+  public params: any = {};
+}
+
+
+@Component({
+  selector: 'tooltip-examples-page',
+  template: `<h2>Placement</h2>
+<p><code-example example="tooltip-placement"></code-example></p>
+<h2>Alignment</h2>
+<p><code-example example="tooltip-align"></code-example></p>
+<h2>Types</h2>
+<p><code-example example="tooltip-types"></code-example></p>
+<h2>Sizes</h2>
+<p><code-example example="tooltip-sizes"></code-example></p>
+<h2>Options</h2>
+<p><code-example example="tooltip-options"></code-example></p>
+<h2>Toggle Trigger</h2>
+<p><code-example example="tooltip-toggle"></code-example></p>
+`,
+  host: { class: 'markdown-page' }
+})
+export class TooltipExamplesPage {
+  public params: any = {};
+}
+
+
+@Component({
+  selector: 'tooltip-usage-page',
+  template: `<novo-grid columns="2" align="start" gap="2rem">
+<div>
+<h3>Why?</h3>
+<p>Helper tooltips contain basic text that provides some additional information about an element.</p>
+<p><strong>Works with following input types</strong></p>
+<ul>
+<li>Default input, select, textarea</li>
+<li>novo-select</li>
+<li>novo-datepicker</li>
+</ul>
+</div>
+<img src="https://via.placeholder.com/350x250"/>
+<div>
+<h3>Use When</h3>
+<ul class="contains-do-list">
+<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Use a Banner when a form cannot be saved to show an error occurred.</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Use a Banner when an action can’t be completed due to an error or failure.</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Use a Growl when an action is successfully performed and the context, i.e. modal, is no longer available.</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> When an action happens asynchronously, e.g. file upload.</novo-text></li>
+</ul>
+</div>
+<div>
+<h3>Don′t Use When</h3>
+<ul class="contains-do-list">
+<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">times</novo-icon><novo-text color="grapefruit"> Don’t use it to confirm an action, a toast should be reactive not pro-active.</novo-text></li>
+</ul>
+</div>
+</novo-grid>
+`,
+  host: { class: 'markdown-page' }
+})
+export class TooltipUsagePage {
   public params: any = {};
 }
 
@@ -4023,7 +4851,36 @@ export class HomePage {
 
 @Component({
   selector: 'card-design-page',
-  template: `<h2>Anatomy</h2>
+  template: `<h2>Usage</h2>
+<novo-grid columns="2" align="start" gap="2rem">
+<div>
+<p>A card is a container that organizes a related grouping of information. Cards can sometimes be configured and reordered on a page allowing for optimal user customization. A card is content container for the presentation information with a shared singular context, usually related in some way to the main content.</p>
+</div>
+<img src="https://via.placeholder.com/350x250"/>
+<div>
+<h3>Use When</h3>
+<ul class="contains-do-list">
+<li class="bullhorn-do-item">
+<p><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> When information can be grouped and the user might need access to multiple groups of information at once.</novo-text></p>
+<p>TBW</p>
+</li>
+<li class="bullhorn-do-item">
+<p><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> When providing a summary of content as an entry point to a larger grouping of information</novo-text></p>
+<p>TBW</p>
+</li>
+</ul>
+</div>
+<div>
+<h3>Don′t Use When</h3>
+<ul class="contains-do-list">
+<li class="bullhorn-do-item">
+<p><novo-icon color="grapefruit" mr="1rem">times</novo-icon><novo-text color="grapefruit"> When a lot of information on the card makes it too large. Instead consider using a modal or showing the information on a new page.</novo-text></p>
+<p>TBW</p>
+</li>
+</ul>
+</div>
+</novo-grid>
+<h2>Anatomy</h2>
 <novo-grid columns="2" align="start" gap="2rem">
 <img src="assets/images/ModalAnatomy.png" width="450">
 <div>
@@ -4192,65 +5049,6 @@ export class CardDevelopPage {
   host: { class: 'markdown-page' }
 })
 export class CardExamplesPage {
-  public params: any = {};
-}
-
-
-@Component({
-  selector: 'card-usage-page',
-  template: `<novo-grid columns="2" align="start" gap="2rem">
-<div>
-<h3>Why?</h3>
-<p>A card is a container that organizes a related grouping of information. Cards can sometimes be configured and reordered on a page allowing for optimal user customization. A card is content container for the presentation information with a shared singular context, usually related in some way to the main content.</p>
-</div>
-<img src="https://via.placeholder.com/350x250"/>
-<div>
-<h3>Use When</h3>
-<ul class="contains-do-list">
-<li class="bullhorn-do-item">
-<p><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> When information can be grouped and the user might need access to multiple groups of information at once.</novo-text></p>
-<p>TBW</p>
-</li>
-<li class="bullhorn-do-item">
-<p><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> When providing a summary of content as an entry point to a larger grouping of information</novo-text></p>
-<p>TBW</p>
-</li>
-</ul>
-</div>
-<div>
-<h3>Don′t Use When</h3>
-<ul class="contains-do-list">
-<li class="bullhorn-do-item">
-<p><novo-icon color="grapefruit" mr="1rem">times</novo-icon><novo-text color="grapefruit"> When a lot of information on the card makes it too large. Instead consider using a modal or showing the information on a new page.</novo-text></p>
-<p>TBW</p>
-</li>
-</ul>
-</div>
-</novo-grid>
-<novo-grid columns="2" align="start" gap="2rem">
-  <novo-stack gap="2rem">
-    <novo-title>Why?</novo-title>
-    <novo-text>
-      A card is content container for to present information with a shared singular context, usually related in some way to the main content.
-    </novo-text>
-  </novo-stack>
-  <img src="https://via.placeholder.com/350x250"/>
-  <novo-stack gap="2rem">
-    <novo-title>When to Use</novo-title>
-    <novo-text color="grass"><novo-icon mr="1rem">check</novo-icon>Providing a summary of content as an entry point to a larger grouping of information.</novo-text>
-    <novo-text color="grass"><novo-icon mr="1rem">check</novo-icon>square avatars to help identify large product entities like projects, spaces, groups, rooms, or repositories
-</novo-text>
-  </novo-stack>
-  <novo-stack gap="2rem">
-    <novo-title>When <em>NOT</em> to Use</novo-title>
-    <novo-text color="grapefruit"><novo-icon mr="1rem">times</novo-icon>For some reason</novo-text>
-    <novo-text>Because we said so...</novo-text>
-  </novo-stack>
-</novo-grid>
-`,
-  host: { class: 'markdown-page' }
-})
-export class CardUsagePage {
   public params: any = {};
 }
 
@@ -4781,20 +5579,18 @@ export class PatternsNativeFormsPage {
 
 @Component({
   selector: 'patterns-test-page',
-  template: `<h1>Water.css</h1>
-<p>
-  Water.css is a drop-in collection of CSS styles to make simple websites like this just a
+  template: `<p>
+  This is a drop-in collection of CSS styles to make simple websites like this just a
   little bit nicer.
 </p>
 <p>
-  Now you can write your simple static site with nice semantic html, and Water.css will manage
+  Now you can write your simple static site with nice semantic html, and will manage
   the styling for you.
 </p>
 <div class="row">
   <div>
     <a href="#installation"><b>Get it already!</b></a>
     <br />
-    <a href="https://github.com/kognise/water.css"><b>GitHub</b></a>
   </div>
 </div>
 <h2>Installation</h2>
@@ -4859,7 +5655,7 @@ export class PatternsNativeFormsPage {
   A bookmarklet is a snippet of JavaScript that sits in your bookmarks bar.
 </p>
 <p>
-  The Waterize bookmarklet can be used to make ugly websites more readable by replacing the styles with Water.css. Just drag this link to your bookmarks bar:
+  The Waterize bookmarklet can be used to make ugly websites more readable by replacing the styles with. Just drag this link to your bookmarks bar:
 </p>
 <strong>
   test
@@ -5052,237 +5848,6 @@ export class TemplatesPage {
 
 
 @Component({
-  selector: 'aside-design-page',
-  template: `<h2>Anatomy</h2>
-<novo-grid columns="2" align="start" gap="2rem">
-<img src="assets/images/ModalAnatomy.png" width="450">
-<div>
-<ol>
-<li>
-<p><strong>Container</strong><br>
-Defines the layout for the form field (horizontal vs vertical)</p>
-</li>
-<li>
-<p><strong>Input Prefix (Optional element)</strong><br>
-An element/icon displayed before the input. eg. $</p>
-</li>
-<li>
-<p><strong>Label</strong><br>
-A label for a group of menu actions.</p>
-</li>
-<li>
-<p><strong>Input Control</strong><br>
-The element representing the input control: <code>input</code>, <code>select</code>, etc...</p>
-</li>
-<li>
-<p><strong>Input Suffix (Optional element)</strong><br>
-The element/icon displayed after the input. eg. calendar icon for date picker.</p>
-</li>
-<li>
-<p><strong>Helper/Error text (Optional element)</strong><br>
-Caption text to display helpful information, warnings, or errors.</p>
-</li>
-</ol>
-</div>
-</novo-grid>
-<h2>Best Practices</h2>
-<ul>
-<li>Only supply placeholder text where clarification is required, try not to overuse it.</li>
-<li>Place labels directly above the input, and align to the left.</li>
-</ul>
-<h2>How to configure</h2>
-<novo-grid columns="2" align="start" gap="2rem">
-<blockquote>
-<div class="p"><img src="https://via.placeholder.com/350x250" alt="placeholder"></div>
-<ul class="contains-do-list">
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Always do this</novo-text></li>
-</ul>
-<div class="p">Explain this</div>
-</blockquote>
-<blockquote>
-<div class="p"><img src="https://via.placeholder.com/350x250" alt="placeholder"></div>
-<ul class="contains-do-list">
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">times</novo-icon><novo-text color="grapefruit"> Never do this</novo-text></li>
-</ul>
-<div class="p">Explain this</div>
-</blockquote>
-</novo-grid>
-<h2>Patterns</h2>
-<novo-grid columns="2" align="start" gap="2rem">
-<blockquote>
-<div class="p"><strong>Pattern</strong></div>
-<div class="p">Why is it configured like this</div>
-</blockquote>
-<p><img src="https://via.placeholder.com/350x250" alt="placeholder"></p>
-<blockquote>
-<div class="p"><strong>Pattern</strong></div>
-<div class="p">Why is it configured like this</div>
-</blockquote>
-<p><img src="https://via.placeholder.com/350x250" alt="placeholder"></p>
-</novo-grid>
-<h2>Accessibility</h2>
-<p><strong>Implementation</strong></p>
-<p>Always include an <code>alt</code> attribute describing the information that is visually displayed in the image.</p>
-`,
-  host: { class: 'markdown-page' }
-})
-export class AsideDesignPage {
-  public params: any = {};
-}
-
-
-@Component({
-  selector: 'aside-develop-page',
-  template: `<h1>Technical Details</h1>
-<ul>
-<li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/aside">(github)</a></li>
-<li><strong>module:</strong> <code>import &#123; NovoAsideModule &#125; from 'novo-elements';</code></li>
-<li><strong>service:</strong> <code>import &#123; NovoAsideService &#125; form 'novo-elements/aside';</code></li>
-</ul>
-<h1>Roadmap</h1>
-<ul class="contains-task-list">
-<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox"> Better support for common patterns</li>
-<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox"> Investigate Sharing injection tokens with Modal</li>
-</ul>
-<h1>Changelog</h1>
-<h3>5.0.0</h3>
-<p><em>Added in v5.0.0</em></p>
-<h2>Properties</h2>
-<p><em>No Properties</em></p>
-<h1>Services</h1>
-<h2>NovoAsideService</h2>
-<p>Asides (a.k.a. Slideout) should be invoked via <code>NovoAsideService</code> and therefore all properties should be private or internal. Any values that need to be passed to the your <code>aside</code> instance should be passed by the service and will be available in your slideout via <code>NovoAsideRef.params</code>.</p>
-<pre><code class="language-typescript"><span class="hljs-meta">@Component</span>(&#123;...&#125;)
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">RandomComponent</span> &#123;
-  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> aside:NovoAsideService</span>) &#123;&#125;
-  <span class="hljs-title function_">handleAction</span>(<span class="hljs-params"></span>) &#123;
-    <span class="hljs-keyword">const</span> ref = <span class="hljs-variable language_">this</span>.<span class="hljs-property">aside</span>.<span class="hljs-title function_">open</span>(<span class="hljs-title class_">AddFormSlideout</span>, &#123; <span class="hljs-attr">record</span>: <span class="hljs-number">123</span> &#125;);
-    <span class="hljs-comment">/* you can listen to the close event */</span>
-    ref.<span class="hljs-property">onClosed</span>.<span class="hljs-title function_">then</span>(<span class="hljs-function">(<span class="hljs-params">result</span>) =&gt;</span> &#123;
-      <span class="hljs-comment">/* result is the argument sent via the ref */</span>
-      <span class="hljs-keyword">if</span> (res === <span class="hljs-string">&#x27;success&#x27;</span>) &#123;
-        <span class="hljs-comment">/* perfom some action */</span>
-      &#125;
-    &#125;);
-    <span class="hljs-comment">/* close the slideout from the parent */</span>
-    ref.<span class="hljs-title function_">close</span>(<span class="hljs-string">&#x27;success&#x27;</span>)
-  &#125;
-&#125;
-</code></pre>
-<h3>Methods</h3>
-<h4><strong>open(component, params)</strong></h4>
-<p>Used to open all modals via the service. Use <code>params</code> to pass values to you component.</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">Name</th>
-<th style="text-align:left">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">component</td>
-<td style="text-align:left"><em>Class</em><br>The angular component which represents the Modal to be opened.</td>
-</tr>
-<tr>
-<td style="text-align:left">params</td>
-<td style="text-align:left"><em>Object</em><br><strong>Optional</strong> arguments that will be injected into <code>NovoAsideRef.params</code></td>
-</tr>
-</tbody>
-</table>
-<p><em>Note:</em> All modal components should be declared as <code>entryComponents</code> in the module.</p>
-<h2>NovoAsideRef&lt;T&gt;</h2>
-<p><code>NovoAsideRef</code> should be injected into your modal component and all pass params can be accessed in the <code>params</code> property.</p>
-<pre><code class="language-typescript"><span class="hljs-keyword">interface</span> <span class="hljs-title class_">AddFormParams</span> &#123;
-  <span class="hljs-attr">record</span>: <span class="hljs-built_in">number</span>;
-&#125;
-<span class="hljs-meta">@Component</span>(&#123;&#125;)
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">AddFormSlideout</span> &#123;
-  <span class="hljs-title function_">constructor</span>(<span class="hljs-params">ref:NovoAsideRef&lt;AddFormParams&gt;</span>) &#123;
-    <span class="hljs-comment">/**
-     * All passed values are available
-     * via ref.params
-     **/</span>
-  &#125;
-
-  <span class="hljs-title function_">handleClose</span>(<span class="hljs-params"></span>) &#123;
-    <span class="hljs-comment">/* To close the modal use the close method */</span>
-    <span class="hljs-variable language_">this</span>.<span class="hljs-property">ref</span>.<span class="hljs-title function_">close</span>(<span class="hljs-comment">/* Return a value */</span>)
-  &#125;
-
-&#125;
-</code></pre>
-<h3>Methods</h3>
-<h4><strong>close(response)</strong></h4>
-<p>Will close the modal will emit events to both the <code>beforeClose</code> and <code>afterClosed</code> observables, as well as the .</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">Name</th>
-<th style="text-align:left">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">response</td>
-<td style="text-align:left"><em>any</em><br>Any value you wish to return to calling components, will be resovled in the <code>onClosed</code> promise.</td>
-</tr>
-</tbody>
-</table>
-`,
-  host: { class: 'markdown-page' }
-})
-export class AsideDevelopPage {
-  public params: any = {};
-}
-
-
-@Component({
-  selector: 'aside-examples-page',
-  template: `<h2>Custom</h2>
-<p>In the case where &quot;Success&quot;, &quot;Warning&quot;, and &quot;Error&quot; notfications aren't enough, use the custom notification. Custom notifcations allow any of the Bullhorn Icons to be used in the notification.</p>
-<p><code-example example="aside-usage"></code-example></p>
-<h2>Add</h2>
-<p>Add modals have a colored title bar based on the record type being created. Additionally, due to a greater than average amount of content, they have fixed footers.</p>
-<p><code-example example="aside-form"></code-example></p>
-`,
-  host: { class: 'markdown-page' }
-})
-export class AsideExamplesPage {
-  public params: any = {};
-}
-
-
-@Component({
-  selector: 'aside-usage-page',
-  template: `<novo-grid columns="2" align="start" gap="2rem">
-<div>
-<h3>Why?</h3>
-<p>Asides are pop-up dialogues designed to grab attention and inform the user of something critical, force a decision, or extend a workflow. There are two categories of modals: notification and workflow. Regardless of type, a modal should have a maximum of two main buttons.</p>
-</div>
-<img src="https://via.placeholder.com/350x250"/>
-<div>
-<h3>Use When</h3>
-<ul class="contains-do-list">
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Providing supporting visual content, e.g., an image or chart, within the context of a larger composition</novo-text></li>
-</ul>
-</div>
-<div>
-<h3>Don′t Use When</h3>
-<ul class="contains-do-list">
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">times</novo-icon><novo-text color="grapefruit"> Grouping visual content and text to provide an entry point into more information. Instead, use a modal.</novo-text></li>
-</ul>
-</div>
-</novo-grid>
-`,
-  host: { class: 'markdown-page' }
-})
-export class AsideUsagePage {
-  public params: any = {};
-}
-
-
-@Component({
   selector: 'chomsky-page',
   template: `<h1>Chomsky-NG2 Documentation</h1>
 <p>A lightweight Angular 2 i18n wrapper.</p>
@@ -5405,339 +5970,6 @@ export class FieldInteractionsPage {
 
 
 @Component({
-  selector: 'modal-design-page',
-  template: `<h2>Anatomy</h2>
-<novo-grid columns="2" align="start" gap="2rem">
-<img src="assets/images/ModalAnatomy.png" width="450">
-<div>
-<ol>
-<li>
-<p><strong>Container</strong><br>
-Description and purpose of this element</p>
-</li>
-<li>
-<p><strong>Header</strong><br>
-Description and purpose of this element</p>
-</li>
-<li>
-<p><strong>Icon (Optional)</strong><br>
-Description and purpose of this element</p>
-</li>
-<li>
-<p><strong>Title (Optional)</strong><br>
-Description and purpose of this element</p>
-</li>
-<li>
-<p><strong>Content</strong><br>
-Description and purpose of this element</p>
-</li>
-<li>
-<p><strong>Footer</strong><br>
-Description and purpose of this element</p>
-</li>
-</ol>
-</div>
-</novo-grid>
-<h2>Best Practices</h2>
-<ul class="contains-do-list">
-<li class="bullhorn-do-item">
-<p><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Do Use Multiple Columns to make content digestible:</novo-text></p>
-<p>If a Modal contains a lot of data, multiple columns help to make sure the user doesn’t miss any aspects of the task at hand. (Example - Make Offer modal from shifts, conflict management from shifts)</p>
-</li>
-<li class="bullhorn-do-item">
-<p><novo-icon color="grapefruit" mr="1rem">times</novo-icon><novo-text color="grapefruit"> Don’t Use a lot of scrolling in a narrow space:</novo-text></p>
-<p>Too much scrolling makes content hard to digest, and can cause the user to miss important information or steps in a task.</p>
-<p>Consider using a full page or a slideout if the modal can’t display the full content without significant scrolling.</p>
-</li>
-</ul>
-<h3>Footer Usage</h3>
-<ul>
-<li>The footer will usually be comprised of Primary button and a ‘Standard’ button</li>
-<li>If there’s more than one action available from the modal, use a Secondary button for the less important of those actions.</li>
-<li>If the primary action off of the modal is DESTRUCTIVE, use a red Primary button. RED ($grapefruit, $negative)</li>
-</ul>
-<h2>Color</h2>
-<blockquote class="two-columns">
-<blockquote>
-<div class="p"><img src="https://via.placeholder.com/350x250" alt="placeholder"></div>
-<ul class="contains-do-list">
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Do use color to relate modals in a multi-step workflow:</novo-text></li>
-</ul>
-<div class="p">Carry over the Entity color from the main content of the screen if the task in the modal is directly related to that Entity. (Ex: adding a shift)</div>
-</blockquote>
-<blockquote>
-<div class="p"><img src="https://via.placeholder.com/350x250" alt="placeholder"></div>
-<ul class="contains-do-list">
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">times</novo-icon><novo-text color="grapefruit"> Don’t use an Entity Color for something unrelated:</novo-text></li>
-</ul>
-<div class="p">Don’t use an Entity color in the header of a modal if the task is not directly related to that Entity. Instead, make reference to the entity elsewhere in the modal if necessary.</div>
-</blockquote>
-</blockquote>
-<h2>Accessibility</h2>
-<ul class="contains-do-list">
-<li class="bullhorn-do-item">
-<p><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Do use multiple avenues to convey meaning</novo-text></p>
-<p>Using color, iconography, and text together to convey a warning makes it clearer for people to understand. (show delete modal that is right)</p>
-</li>
-<li class="bullhorn-do-item">
-<p><novo-icon color="grapefruit" mr="1rem">times</novo-icon><novo-text color="grapefruit"> Don’t rely on just color to convey meaning</novo-text></p>
-<p>Using color alone to indicate a destructive action may not be clear to everyone. (show a modal with red yes button but no ‘delete’ in the text or trashcan)</p>
-</li>
-</ul>
-<h3>Keyboard Behaviors</h3>
-<p>When a dialog opens, focus moves to an element inside the dialog. See notes below regarding initial focus placement.</p>
-<ul>
-<li>Tab:
-<ul>
-<li>Moves focus to the next tabbable element inside the dialog.</li>
-<li>If focus is on the last tabbable element inside the dialog, moves focus to the first tabbable element inside the dialog.</li>
-</ul>
-</li>
-<li>Shift + Tab:
-<ul>
-<li>Moves focus to the previous tabbable element inside the dialog.</li>
-<li>If focus is on the first tabbable element inside the dialog, moves focus to the last tabbable element inside the dialog.</li>
-</ul>
-</li>
-<li>Escape: Closes the dialog.</li>
-</ul>
-<h3>Roles, States, and Properties</h3>
-<p>The element that contains all elements of the dialog, including the alert message and any dialog buttons, has role <code>alertdialog</code>.</p>
-<ul>
-<li>The element with role alertdialog has either:
-<ul>
-<li>A value for aria-labelledby that refers to the element containing the title of the dialog if the dialog has a visible label.</li>
-<li>A value for aria-label if the dialog does not have a visible label.</li>
-</ul>
-</li>
-<li>The element with role alertdialog has a value set for aria-describedby that refers to the element containing the alert message.</li>
-</ul>
-<h2>Behaviors</h2>
-<p><strong>Workflow modals</strong> should be triggered either from a button or link on the main content of the screen to initiate a workflow (add shift, add certification)</p>
-<p><strong>Confirmation Modals</strong> should be triggered immediately as the action they are confirming is triggered. (example: after ‘delete record’ is clicked from action dropdown)</p>
-<h3>Expansion</h3>
-<p>If the content in the modal gets bigger, the modal should expand before adding scrolling.</p>
-<h2>Patterns</h2>
-<novo-grid columns="2" align="start" gap="2rem">
-<blockquote>
-<div class="p"><strong>Pattern</strong></div>
-<div class="p">Why is it configured like this</div>
-</blockquote>
-<p><img src="https://via.placeholder.com/350x250" alt="placeholder"></p>
-<blockquote>
-<div class="p"><strong>Pattern</strong></div>
-<div class="p">Why is it configured like this</div>
-</blockquote>
-<p><img src="https://via.placeholder.com/350x250" alt="placeholder"></p>
-</novo-grid>
-`,
-  host: { class: 'markdown-page' }
-})
-export class ModalDesignPage {
-  public params: any = {};
-}
-
-
-@Component({
-  selector: 'modal-develop-page',
-  template: `<h1>Technical Details</h1>
-<ul>
-<li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/modal">(github)</a></li>
-<li><strong>module:</strong> <code>import &#123; NovoModal &#125; form 'novo-elements/modal';</code></li>
-<li><strong>service:</strong> <code>import &#123; NovoModalService &#125; form 'novo-elements/modal';</code></li>
-</ul>
-<h1>Roadmap</h1>
-<ul class="contains-task-list">
-<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox"> Improve Typing Support</li>
-<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox"> Remove <code>NovoModalParams</code> support in v6.0.0</li>
-</ul>
-<h1>Changelog</h1>
-<h3>5.0.0</h3>
-<p><strong>Deprecation</strong></p>
-<ul>
-<li>
-<p><code>NovoModalParams</code> should no longer be used, instead use <code>NovoModalRef.params</code>. This is because <code>NovoModalRef</code> accepts a generic for the params property.</p>
-<pre><code class="language-typescript"><span class="hljs-keyword">interface</span> <span class="hljs-title class_">MyParams</span> &#123;
-  <span class="hljs-attr">isDefault</span>: <span class="hljs-built_in">boolean</span>;
-&#125;
-...
-<span class="hljs-title function_">constructor</span>(<span class="hljs-params">ref:NovoModalRef&lt;MyParams&gt;</span>) &#123;
-  <span class="hljs-keyword">if</span>(ref.<span class="hljs-property">params</span>.<span class="hljs-property">isDefault</span>) &#123;
-    <span class="hljs-comment">/* ^ Will not need to by type cast */</span>
-  &#125;
-&#125;
-</code></pre>
-</li>
-</ul>
-<h2>Properties</h2>
-<p><em>No Properties</em></p>
-<h1>Services</h1>
-<h2>NovoModalService</h2>
-<p>Modals should be invoked via <code>NovoModalService</code> and therefore all properties should be private or internal. Any values that need to be passed to the your <code>Modal</code> instance should be passed by the service and available in your modal.</p>
-<pre><code class="language-typescript"><span class="hljs-meta">@Component</span>(&#123;...&#125;)
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">RandomComponent</span> &#123;
-  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> modal:NovoModalService</span>) &#123;&#125;
-  <span class="hljs-title function_">handleAction</span>(<span class="hljs-params"></span>) &#123;
-    <span class="hljs-keyword">const</span> ref = <span class="hljs-variable language_">this</span>.<span class="hljs-property">modal</span>.<span class="hljs-title function_">open</span>(<span class="hljs-title class_">ConfirmDeleteModal</span>, &#123; <span class="hljs-attr">record</span>: <span class="hljs-number">123</span> &#125;);
-    <span class="hljs-comment">/* you can listen to the close event */</span>
-    ref.<span class="hljs-property">onClosed</span>.<span class="hljs-title function_">then</span>(<span class="hljs-function">(<span class="hljs-params">result</span>) =&gt;</span> &#123;
-      <span class="hljs-comment">/* result is the argument sent via the ref */</span>
-      <span class="hljs-keyword">if</span> (res === <span class="hljs-string">&#x27;success&#x27;</span>) &#123;
-        <span class="hljs-comment">/* perfom some action */</span>
-      &#125;
-    &#125;);
-    <span class="hljs-comment">/* close the modal from the parent */</span>
-    ref.<span class="hljs-title function_">close</span>(<span class="hljs-string">&#x27;success&#x27;</span>)
-  &#125;
-&#125;
-</code></pre>
-<h3>Methods</h3>
-<h4><strong>open(component, params)</strong></h4>
-<p>Used to open all modals via the service. Use <code>params</code> to pass values to you component.</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">Name</th>
-<th style="text-align:left">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">component</td>
-<td style="text-align:left"><em>Class</em><br>The angular component which represents the Modal to be opened.</td>
-</tr>
-<tr>
-<td style="text-align:left">params</td>
-<td style="text-align:left"><em>Object</em><br><strong>Optional</strong> arguments that will be injected into <code>NovoModalRef.params</code></td>
-</tr>
-</tbody>
-</table>
-<p><em>Note:</em> All modal components should be declared as <code>entryComponents</code> in the module.</p>
-<h2>NovoModalRef&lt;T&gt;</h2>
-<p><code>NovoModalRef</code> should be injected into your modal component and all pass params can be accessed in the <code>params</code> property.</p>
-<pre><code class="language-typescript"><span class="hljs-keyword">interface</span> <span class="hljs-title class_">DeleteModalParams</span> &#123;
-  <span class="hljs-attr">record</span>: <span class="hljs-built_in">number</span>;
-&#125;
-<span class="hljs-meta">@Component</span>(&#123;&#125;)
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">ConfirmDeleteModal</span> &#123;
-  <span class="hljs-title function_">constructor</span>(<span class="hljs-params">ref:NovoModalRef&lt;DeleteModalParams&gt;</span>) &#123;
-    <span class="hljs-comment">/**
-     * All passed values are available
-     * via ref.params
-     **/</span>
-  &#125;
-
-  <span class="hljs-title function_">handleClose</span>(<span class="hljs-params"></span>) &#123;
-    <span class="hljs-comment">/* To close the modal use the close method */</span>
-    <span class="hljs-variable language_">this</span>.<span class="hljs-property">ref</span>.<span class="hljs-title function_">close</span>(<span class="hljs-comment">/* Return a value */</span>)
-  &#125;
-
-&#125;
-</code></pre>
-<h3>Methods</h3>
-<h4><strong>close(response)</strong></h4>
-<p>Will close the modal will emit events to both the <code>beforeClose</code> and <code>afterClosed</code> observables, as well as the .</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">Name</th>
-<th style="text-align:left">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">response</td>
-<td style="text-align:left"><em>any</em><br>Any value you wish to return to calling components, will be resovled in the <code>onClosed</code> promise.</td>
-</tr>
-</tbody>
-</table>
-`,
-  host: { class: 'markdown-page' }
-})
-export class ModalDevelopPage {
-  public params: any = {};
-}
-
-
-@Component({
-  selector: 'modal-examples-page',
-  template: `<h2>Notification Modals</h2>
-<h3>Success</h3>
-<p>This modal uses only a primary action button. It is a confirmation that an action has been completed when the result is not immediately apparent. A workflow modal often transitions into a success modal.</p>
-<p><code-example example="success-modal"></code-example></p>
-<h3>Warning</h3>
-<p>Warning modals ask for additional confirmation to complete an action because the action is either irreversible or there is an exception. The first line should always clarify the action or eventual result.</p>
-<p><code-example example="warning-modal"></code-example></p>
-<h3>Error</h3>
-<p>Error modals indicate that an attempted action has failed. The first line should apologize and state the what happened. The second line should quickly attempt to explain to the user why this has happened, and instruct the user on the best course of action.</p>
-<p><code-example example="error-modal"></code-example></p>
-<h3>Custom</h3>
-<p>In the case where &quot;Success&quot;, &quot;Warning&quot;, and &quot;Error&quot; notfications aren't enough, use the custom notification. Custom notifcations allow any of the Bullhorn Icons to be used in the notification.</p>
-<p><code-example example="custom-modal"></code-example></p>
-<h2>Workflow Modals</h2>
-<h3>Add</h3>
-<p>Add modals have a colored title bar based on the record type being created. Additionally, due to a greater than average amount of content, they have fixed footers.</p>
-<p><code-example example="modal-add-form"></code-example></p>
-<h3>Edit &amp; Send</h3>
-<p>Edit, Send, and non-Add workflow modals possess a plain header to remind the user of the action they are taking. They generally have a neutralizing button, and a primary button.</p>
-<p><code-example example="modal-edit-form"></code-example></p>
-`,
-  host: { class: 'markdown-page' }
-})
-export class ModalExamplesPage {
-  public params: any = {};
-}
-
-
-@Component({
-  selector: 'modal-usage-page',
-  template: `<novo-grid columns="2" align="start" gap="2rem">
-<div>
-<h3>Why?</h3>
-<p>A modal is a pop-up dialog that appears on top of the main content, requiring the user to focus only on the content that the modal presents.</p>
-<p>Modals are used to inform the user of something critical, force a decision, or extend a series of tasks. There are two categories of modals in the system: confirmation and workflow.</p>
-</div>
-<img src="https://via.placeholder.com/350x250"/>
-<div>
-<h3>Use When</h3>
-<ul class="contains-do-list">
-<li class="bullhorn-do-item">
-<p><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Do use to confirm irreversible actions:</novo-text></p>
-<p>Use a notification modal to ask the user to confirm when performing an irreversible action such as deleting a record, navigating away from something unsaved, or converting a file.</p>
-</li>
-<li class="bullhorn-do-item">
-<p><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Do use to confirm actions that will affect other records:</novo-text></p>
-<p>Use notification modals to make the user aware that their action will affect other records. The modal should ask them to confirm this action and explicitly say what the changes to other records will be. (find an example for this - deleting shifts could work, sending out bulk emails)</p>
-</li>
-<li class="bullhorn-do-item">
-<p><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Do use for a task related to the main content:</novo-text></p>
-<p>Workflow modals should always be related to the main content of the screen they are on top of. For example, when assigning candidates to shifts in the Scheduler.</p>
-</li>
-</ul>
-</div>
-<div>
-<h3>Don′t Use When</h3>
-<ul class="contains-do-list">
-<li class="bullhorn-do-item">
-<p><novo-icon color="grapefruit" mr="1rem">times</novo-icon><novo-text color="grapefruit"> Don’t use to confirm an action that has already happened:</novo-text></p>
-<p>Don’t use a notification modal to confirm an action that has already been completed. Conveying information that does not require action is not critical enough to fully obscure the main content of the page. Use a <a href="/components/toast">toast</a> instead.</p>
-</li>
-<li class="bullhorn-do-item">
-<p><novo-icon color="grapefruit" mr="1rem">times</novo-icon><novo-text color="grapefruit"> Don’t use for a task unrelated to the main content:</novo-text></p>
-<p>Don’t obscure the main content of the screen for a task that is not directly related to the subject matter of that screen. Open a new page or use a <a href="/components/aside">slideout</a> instead.</p>
-</li>
-</ul>
-</div>
-</novo-grid>
-`,
-  host: { class: 'markdown-page' }
-})
-export class ModalUsagePage {
-  public params: any = {};
-}
-
-
-@Component({
   selector: 'pipes-page',
   template: `<h1>Pipes</h1>
 <p>Utility and helpful pipes.</p>
@@ -5748,222 +5980,6 @@ export class ModalUsagePage {
   host: { class: 'markdown-page' }
 })
 export class PipesPage {
-  public params: any = {};
-}
-
-
-@Component({
-  selector: 'popover-design-page',
-  template: `<h2>Anatomy</h2>
-<novo-grid columns="2" align="start" gap="2rem">
-<img src="assets/images/ModalAnatomy.png" width="450">
-<div>
-<ol>
-<li>
-<p><strong>Icon</strong><br>
-Use an Icon to quickly convey context of the action. ie. If a file is ready to download, show a download or file icon.</p>
-</li>
-<li>
-<p><strong>Title (Optional)</strong><br>
-Used to quickly describe the action that occurred. eg. File Uploaded!</p>
-</li>
-<li>
-<p><strong>Message</strong><br>
-A longer description of the outcome of the related action.</p>
-</li>
-<li>
-<p><strong>Follow-up Action (Optional)</strong><br>
-By default the a toast will always have a dismiss action, but can also have a follow up action related to the previous action, eg. Undo, Open, View....</p>
-</li>
-</ol>
-</div>
-</novo-grid>
-<h2>Best Practices</h2>
-<ul>
-<li>Use a banner when a form can’t be saved, banner appears, should be dismissed manually</li>
-<li>Use a growl when something is successfully saved, growl should disappears after X seconds</li>
-<li>A toast should only have 1 follow-up action.</li>
-<li>If the toast has an follow-up action, i.e. Undo, View, etc, then dismiss the Toast manually…</li>
-<li>If a growl has no follow-up action, the toast should dismiss automatically after X seconds</li>
-<li>If the growl has under 30 characters, dismiss automatically after 3 seconds</li>
-<li>If the growl has between 30 and 100 characters, dismiss automatically after 10 seconds</li>
-<li>If the growl has over 100 characters, dismiss manually</li>
-<li>If the growl has over X characters or X lines of text, add a View More action</li>
-</ul>
-<h2>Color</h2>
-<p><strong>How to use color</strong></p>
-<p>Background utilises color to indicate status of the message. Icon is often synonymous with the status of the color, <em>e.g. warning icon goes with yellow background</em></p>
-<novo-grid columns="2" align="start" gap="2rem">
-<blockquote>
-<div class="p"><strong>Pattern</strong></div>
-<div class="p">Yellow for warnings</div>
-</blockquote>
-<p><img src="https://via.placeholder.com/350x250" alt="placeholder"></p>
-<blockquote>
-<div class="p"><strong>Pattern</strong></div>
-<div class="p">Green for successful actions</div>
-</blockquote>
-<p><img src="https://via.placeholder.com/350x250" alt="placeholder"></p>
-<blockquote>
-<div class="p"><strong>Pattern</strong></div>
-<div class="p">Red for errors or unsuccessfully attempted actions</div>
-</blockquote>
-<p><img src="https://via.placeholder.com/350x250" alt="placeholder"></p>
-</novo-grid>
-<h2>Behaviors</h2>
-<p><strong>Movement</strong></p>
-<p>A toast appears through an animated movement to draw the users attention. A banner slides in from the top of the page. A growl slides in from the side of the screen on which it is located. Multiple growls will stack by moving to the background when a new one appears.</p>
-<novo-grid columns="2" align="start" gap="2rem">
-<blockquote>
-<div class="p"><strong>Pattern</strong></div>
-<div class="p">Yellow for warnings</div>
-</blockquote>
-<p><img src="https://via.placeholder.com/350x250" alt="placeholder"></p>
-</novo-grid>
-<h2>How to configure</h2>
-<novo-grid columns="2" align="start" gap="2rem">
-<blockquote>
-<div class="p"><img src="https://via.placeholder.com/350x250" alt="placeholder"></div>
-<ul class="contains-do-list">
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Always do this</novo-text></li>
-</ul>
-<div class="p">Explain this</div>
-</blockquote>
-<blockquote>
-<div class="p"><img src="https://via.placeholder.com/350x250" alt="placeholder"></div>
-<ul class="contains-do-list">
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">times</novo-icon><novo-text color="grapefruit"> Never do this</novo-text></li>
-</ul>
-<div class="p">Explain this</div>
-</blockquote>
-</novo-grid>
-<h2>Patterns</h2>
-<novo-grid columns="2" align="start" gap="2rem">
-<blockquote>
-<div class="p"><strong>Pattern</strong></div>
-<div class="p">Why is it configured like this</div>
-</blockquote>
-<p><img src="https://via.placeholder.com/350x250" alt="placeholder"></p>
-<blockquote>
-<div class="p"><strong>Pattern</strong></div>
-<div class="p">Why is it configured like this</div>
-</blockquote>
-<p><img src="https://via.placeholder.com/350x250" alt="placeholder"></p>
-</novo-grid>
-<h2>Accessibility</h2>
-<p><strong>Implementation</strong></p>
-<p>Always include an <code>alt</code> attribute describing the information that is visually displayed in the image.</p>
-`,
-  host: { class: 'markdown-page' }
-})
-export class PopoverDesignPage {
-  public params: any = {};
-}
-
-
-@Component({
-  selector: 'popover-develop-page',
-  template: `<h1>Technical Details</h1>
-<p>Tooltips are used as system notifications. They can contain custom text titles and messages, as well as any icons from bh-icons and any color from our color palletes.</p>
-<ul>
-<li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/tooltips">(github)</a></li>
-<li><strong>module:</strong> <code>import &#123; NovoFieldModule &#125; from 'novo-elements';</code></li>
-</ul>
-<p><strong>Usage</strong></p>
-<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">novo-field</span> <span class="hljs-attr">layout</span>=<span class="hljs-string">&quot;horizontal&quot;</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">novo-label</span>&gt;</span>Amount<span class="hljs-tag">&lt;/<span class="hljs-name">novo-label</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">novoInput</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;number&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;example-right-align&quot;</span> /&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">novoPrefix</span>&gt;</span>$<span class="hljs-symbol">&amp;nbsp;</span><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">novoSuffix</span>&gt;</span>.00<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">novo-hint</span>&gt;</span>Enter some money<span class="hljs-tag">&lt;/<span class="hljs-name">novo-hint</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">novo-field</span>&gt;</span>
-</code></pre>
-<h1>Roadmap</h1>
-<ul class="contains-task-list">
-<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox"> Improve Typing Support</li>
-<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox"> Make color and theming consistent</li>
-<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox"> Dark Mode</li>
-</ul>
-<h1>Changelog</h1>
-<h3>5.0.0</h3>
-<p><strong>Deprecation</strong></p>
-<ul>
-<li>You should no longer use <code>list</code> and <code>item</code> components, these are non-standard components and have been replaced with <code>novo-option</code> as used in the usage above.</li>
-</ul>
-<h1>Components</h1>
-<h2>NovoFieldElement <code>novo-field</code></h2>
-<p>The <code>novo-field</code> component expects 1 <code>button</code> or <code>novo-button</code> as the trigger for the menu list which is comprised of all the <code>novo-option</code> or <code>novo-optgroup</code> child components.</p>
-<h3>Properties</h3>
-<p><props-table component="NovoFieldElement"></props-table></p>
-<h1>Directive</h1>
-<h2>NovoInput <code>[novoInput]</code></h2>
-<p>The <code>novoInput</code> component expects 1 <code>button</code> or <code>novo-button</code> as the trigger for the menu list which is comprised of all the <code>novo-option</code> or <code>novo-optgroup</code> child components.</p>
-<h3>Properties</h3>
-<p><props-table component="NovoInput"></props-table></p>
-`,
-  host: { class: 'markdown-page' }
-})
-export class PopoverDevelopPage {
-  public params: any = {};
-}
-
-
-@Component({
-  selector: 'popover-examples-page',
-  template: `<h2>Placement</h2>
-<p><code-example example="pop-over-placement"></code-example></p>
-<h2>Horizontal Alignment</h2>
-<p><code-example example="pop-over-horizontal"></code-example></p>
-<h2>Vertical Alignment</h2>
-<p><code-example example="pop-over-vertical"></code-example></p>
-<h2>Behavior</h2>
-<p><code-example example="pop-over-behaviors"></code-example></p>
-<h2>Dynamic HTML in PopOver</h2>
-<p><code-example example="pop-over-dynamic"></code-example></p>
-<h2>Automatic Placement of PopOver</h2>
-<p><code-example example="pop-over-auto-placement"></code-example></p>
-`,
-  host: { class: 'markdown-page' }
-})
-export class PopoverExamplesPage {
-  public params: any = {};
-}
-
-
-@Component({
-  selector: 'popover-usage-page',
-  template: `<novo-grid columns="2" align="start" gap="2rem">
-<div>
-<h3>Why?</h3>
-<p>PopOvers are tooltips with dynamic html content. This component is used when you need help text that requires the user to perform an action before closing.</p>
-<p><strong>Works with following input types</strong></p>
-<ul>
-<li>Default input, select, textarea</li>
-<li>novo-select</li>
-<li>novo-datepicker</li>
-</ul>
-</div>
-<img src="https://via.placeholder.com/350x250"/>
-<div>
-<h3>Use When</h3>
-<ul class="contains-do-list">
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Use a Banner when a form cannot be saved to show an error occurred.</novo-text></li>
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Use a Banner when an action can’t be completed due to an error or failure.</novo-text></li>
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Use a Growl when an action is successfully performed and the context, i.e. modal, is no longer available.</novo-text></li>
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> When an action happens asynchronously, e.g. file upload.</novo-text></li>
-</ul>
-</div>
-<div>
-<h3>Don′t Use When</h3>
-<ul class="contains-do-list">
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">times</novo-icon><novo-text color="grapefruit"> Don’t use it to confirm an action, a toast should be reactive not pro-active.</novo-text></li>
-</ul>
-</div>
-</novo-grid>
-`,
-  host: { class: 'markdown-page' }
-})
-export class PopoverUsagePage {
   public params: any = {};
 }
 
@@ -5982,536 +5998,6 @@ export class SecurityPage {
   public params: any = {};
 }
 
-
-@Component({
-  selector: 'tip-well-design-page',
-  template: `<h2>Usage</h2>
-<novo-grid columns="2" align="start" gap="2rem">
-<div>
-<p>The TipWell is a small container for displaying help text.  It is meant to be shown only once and dismissable to the user.  Typical usage is to provide additional detail on data being displayed or explain how a feature works to the user for their first time using it.</p>
-</div>
-<img src="assets/images/TipWellOverview.png"/>
-<div>
-<h3>Use When</h3>
-<ul class="contains-do-list">
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> The help text is no longer needed after the user has read the contents.</novo-text></li>
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> To provide additional context and links related to the data to educate the user on how the a feature works.</novo-text></li>
-</ul>
-</div>
-<div>
-<h3>Don′t Use When</h3>
-<ul class="contains-do-list">
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">times</novo-icon><novo-text color="grapefruit"> Don’t use it show error states, use novo-error or a banner.</novo-text></li>
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">times</novo-icon><novo-text color="grapefruit"> Don’t use it to display tutorials.</novo-text></li>
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">times</novo-icon><novo-text color="grapefruit"> Don’t use it to explain text fields, use novo-hint.</novo-text></li>
-</ul>
-</div>
-</novo-grid>
-<h2>Anatomy</h2>
-<novo-grid columns="2" align="start" gap="2rem">
-<img src="assets/images/ToastBanners.png" width="450">
-<div>
-<ol>
-<li>
-<p><strong>Icon</strong><br>
-Use an Icon to quickly convey context of the action. ie. If a file is ready to download, show a download or file icon.</p>
-</li>
-<li>
-<p><strong>Container</strong><br>
-Used to quickly describe the action that occurred. eg. File Uploaded!</p>
-</li>
-<li>
-<p><strong>Dismiss Action</strong><br>
-A longer description of the outcome of the related action.</p>
-</li>
-</ol>
-</div>
-</novo-grid>
-<h2>Accessibility</h2>
-<p><strong>Implementation</strong></p>
-<p>Always include an <code>alt</code> attribute describing the information that is visually displayed in the image.</p>
-`,
-  host: { class: 'markdown-page' }
-})
-export class TipWellDesignPage {
-  public params: any = {};
-}
-
-
-@Component({
-  selector: 'tip-well-develop-page',
-  template: `<h1>Technical Details</h1>
-<p>Tip Wells are used as ephemeral containers of helpful text. The importance of the content is usually short-lived and no longer needed once disseminated.</p>
-<ul>
-<li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/tip-well">(github)</a></li>
-<li><strong>module:</strong> <code>import &#123; NovoTipWellModule &#125; from 'novo-elements';</code></li>
-</ul>
-<p><strong>Usage</strong></p>
-<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">novo-tip-well</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;Demo&quot;</span> <span class="hljs-attr">icon</span>=<span class="hljs-string">&quot;info&quot;</span>&gt;</span>
-  Sed sodales ligula et fermentum bibendum. Aliquam tincidunt sagittis leo eget auctor. Fusce eu sagittis metus, ut viverra magna. Mauris mollis nisl nec libero tincidunt posuere.
-<span class="hljs-tag">&lt;/<span class="hljs-name">novo-tip-well</span>&gt;</span>
-</code></pre>
-<h1>Roadmap</h1>
-<ul class="contains-task-list">
-<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox"> Improve Typing Support</li>
-<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox"> Dark Mode</li>
-<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox"> Create a Provider for TipWell states</li>
-</ul>
-<h1>Changelog</h1>
-<h3>6.0.0</h3>
-<p><strong>Deprecation</strong></p>
-<ul>
-<li>You should no longer use <code>tip</code> property and instead add the contents as children with the template.</li>
-</ul>
-<h1>Components</h1>
-<h2>NovoTipWellElement <code>novo-tip-well</code></h2>
-<p>The <code>novo-tip-well</code> component expects a <code>name</code> property, which will be used to store the state of the tipwell in local-storage.</p>
-<h3>Properties</h3>
-<p><props-table component="NovoTipWellElement"></props-table></p>
-`,
-  host: { class: 'markdown-page' }
-})
-export class TipWellDevelopPage {
-  public params: any = {};
-}
-
-
-@Component({
-  selector: 'tip-well-examples-page',
-  template: `<h2>Basic Usage</h2>
-<p><code-example example="basic-tip-well"></code-example></p>
-<h2>No Button Demo</h2>
-<p><code-example example="buttonless-tip-well"></code-example></p>
-<h2>Icon Demo</h2>
-<p><code-example example="icon-tip-well"></code-example></p>
-<h2>HTML Demo</h2>
-<p><code-example example="html-tip-well"></code-example></p>
-`,
-  host: { class: 'markdown-page' }
-})
-export class TipWellExamplesPage {
-  public params: any = {};
-}
-
-
-@Component({
-  selector: 'tip-well-page',
-  template: `<h1>TipWell <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/tip-well">(source)</a></h1>
-<p>This component is meant to be akin to Bootstrap's 'well'. It's a small container for help text.</p>
-<h4>Demo</h4>
-<p><code-example example="basic-tip-well"></code-example></p>
-<h4>No Button Demo</h4>
-<p><code-example example="buttonless-tip-well"></code-example></p>
-<h4>Icon Demo</h4>
-<p><code-example example="icon-tip-well"></code-example></p>
-<h4>HTML Demo</h4>
-<p><code-example example="html-tip-well"></code-example></p>
-`,
-  host: { class: 'markdown-page' }
-})
-export class TipWellPage {
-  public params: any = {};
-}
-
-
-@Component({
-  selector: 'toaster-design-page',
-  template: `<h2>Usage</h2>
-<novo-grid columns="2" align="start" gap="2rem">
-<div>
-<p>A toast provides feedback about an operation while maintaining visibility and interaction with the current activity. It conveys information to the user that is not critical and does not require specific attention. A toast does not prevent the user from continuing their activity.</p>
-<p>When the user is not presented with some form of confirmation about the completion of the action.</p>
-<p><strong>Works with following input types</strong></p>
-<ul>
-<li>Default input, select, textarea</li>
-<li>novo-select</li>
-<li>novo-datepicker</li>
-</ul>
-</div>
-<img src="assets/images/ToastBanners.png"/>
-<div>
-<h3>Use When</h3>
-<ul class="contains-do-list">
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Use a Banner when a form cannot be saved to show an error occurred.</novo-text></li>
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Use a Banner when an action can’t be completed due to an error or failure.</novo-text></li>
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Use a Growl when an action is successfully performed and the context, i.e. modal, is no longer available.</novo-text></li>
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> When an action happens asynchronously, e.g. file upload.</novo-text></li>
-</ul>
-</div>
-<div>
-<h3>Don′t Use When</h3>
-<ul class="contains-do-list">
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">times</novo-icon><novo-text color="grapefruit"> Don’t use it to confirm an action, a toast should be reactive not pro-active.</novo-text></li>
-</ul>
-</div>
-</novo-grid>
-<h2>Anatomy</h2>
-<novo-grid columns="2" align="start" gap="2rem">
-<img src="assets/images/ToastBanners.png" width="450">
-<div>
-<ol>
-<li>
-<p><strong>Icon</strong><br>
-Use an Icon to quickly convey context of the action. ie. If a file is ready to download, show a download or file icon.</p>
-</li>
-<li>
-<p><strong>Title (Optional)</strong><br>
-Used to quickly describe the action that occurred. eg. File Uploaded!</p>
-</li>
-<li>
-<p><strong>Message</strong><br>
-A longer description of the outcome of the related action.</p>
-</li>
-<li>
-<p><strong>Follow-up Action (Optional)</strong><br>
-By default the a toast will always have a dismiss action, but can also have a follow up action related to the previous action, eg. Undo, Open, View....</p>
-</li>
-</ol>
-</div>
-</novo-grid>
-<h2>Best Practices</h2>
-<ul>
-<li>Use a banner when a form can’t be saved, banner appears, should be dismissed manually</li>
-<li>Use a growl when something is successfully saved, growl should disappears after X seconds</li>
-<li>A toast should only have 1 follow-up action.</li>
-<li>If the toast has an follow-up action, i.e. Undo, View, etc, then dismiss the Toast manually…</li>
-<li>If a growl has no follow-up action, the toast should dismiss automatically after X seconds</li>
-<li>If the growl has under 30 characters, dismiss automatically after 3 seconds</li>
-<li>If the growl has between 30 and 100 characters, dismiss automatically after 10 seconds</li>
-<li>If the growl has over 100 characters, dismiss manually</li>
-<li>If the growl has over X characters or X lines of text, add a View More action</li>
-</ul>
-<h2>Color</h2>
-<p><strong>How to use color</strong></p>
-<p>Background utilises color to indicate status of the message. Icon is often synonymous with the status of the color, <em>e.g. warning icon goes with yellow background</em></p>
-<h2>Behaviors</h2>
-<p><strong>Movement</strong></p>
-<p>A toast appears through an animated movement to draw the users attention. A banner slides in from the top of the page. A growl slides in from the side of the screen on which it is located. Multiple growls will stack by moving to the background when a new one appears.</p>
-<novo-grid columns="2" align="start" gap="2rem">
-<blockquote>
-<div class="p"><strong>Embedded</strong></div>
-<div class="p">Banners should be used as static notifications, usually shown at the top of content.</div>
-</blockquote>
-<p><img src="assets/images/ToastEmbedded.png" alt="placeholder"></p>
-<blockquote>
-<div class="p"><strong>Position</strong></div>
-<div class="p">Growl notifications can be displayed at the top, left, right, bottom or corner of the page. Notification will also stack on top of each other until dismissed.  In general that an application use the same location for all growl notications, so the user will know where to look for them.</div>
-</blockquote>
-<p><img src="assets/images/ToastLayout.png" alt="placeholder"></p>
-<blockquote>
-<div class="p"><strong>Actions</strong></div>
-<div class="p">Growls and Banners can have actions that can be invoked before being dismissed.  This action should be contextual to the action that triggered the toast in the first place.  eg. Actions like &quot;Undo&quot; or &quot;See more&quot; are common use-case, this helps create a workflow that is streamlined for the user but provides optional actions when needed.</div>
-</blockquote>
-<p><img src="assets/images/ToastGrowlAction.png" alt="placeholder"></p>
-</novo-grid>
-<h2>How to configure</h2>
-<novo-grid columns="2" align="start" gap="2rem">
-<blockquote>
-<div class="p"><img src="https://via.placeholder.com/350x250" alt="placeholder"></div>
-<ul class="contains-do-list">
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Always do this</novo-text></li>
-</ul>
-<div class="p">Explain this</div>
-</blockquote>
-<blockquote>
-<div class="p"><img src="https://via.placeholder.com/350x250" alt="placeholder"></div>
-<ul class="contains-do-list">
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">times</novo-icon><novo-text color="grapefruit"> Never do this</novo-text></li>
-</ul>
-<div class="p">Explain this</div>
-</blockquote>
-</novo-grid>
-<h2>Accessibility</h2>
-<p><strong>Implementation</strong></p>
-<p>Always include an <code>alt</code> attribute describing the information that is visually displayed in the image.</p>
-`,
-  host: { class: 'markdown-page' }
-})
-export class ToasterDesignPage {
-  public params: any = {};
-}
-
-
-@Component({
-  selector: 'toaster-develop-page',
-  template: `<h1>Technical Details</h1>
-<p>Toasts are used as system notifications. They can contain custom text titles and messages, as well as any icons from bh-icons and any color from our color palletes.</p>
-<ul>
-<li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/field">(github)</a></li>
-<li><strong>module:</strong> <code>import &#123; NovoFieldModule &#125; from 'novo-elements';</code></li>
-</ul>
-<p><strong>Usage</strong></p>
-<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">novo-field</span> <span class="hljs-attr">layout</span>=<span class="hljs-string">&quot;horizontal&quot;</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">novo-label</span>&gt;</span>Amount<span class="hljs-tag">&lt;/<span class="hljs-name">novo-label</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">novoInput</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;number&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;example-right-align&quot;</span> /&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">novoPrefix</span>&gt;</span>$<span class="hljs-symbol">&amp;nbsp;</span><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">novoSuffix</span>&gt;</span>.00<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">novo-hint</span>&gt;</span>Enter some money<span class="hljs-tag">&lt;/<span class="hljs-name">novo-hint</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">novo-field</span>&gt;</span>
-</code></pre>
-<h1>Roadmap</h1>
-<ul class="contains-task-list">
-<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox"> Improve Typing Support</li>
-<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox"> Make color and theming consistent</li>
-<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox"> Dark Mode</li>
-</ul>
-<h1>Changelog</h1>
-<h3>5.0.0</h3>
-<p><strong>Deprecation</strong></p>
-<ul>
-<li>You should no longer use <code>list</code> and <code>item</code> components, these are non-standard components and have been replaced with <code>novo-option</code> as used in the usage above.</li>
-</ul>
-<h1>Components</h1>
-<h2>NovoFieldElement <code>novo-field</code></h2>
-<p>The <code>novo-field</code> component expects 1 <code>button</code> or <code>novo-button</code> as the trigger for the menu list which is comprised of all the <code>novo-option</code> or <code>novo-optgroup</code> child components.</p>
-<h3>Properties</h3>
-<p><props-table component="NovoFieldElement"></props-table></p>
-<h1>Directive</h1>
-<h2>NovoInput <code>[novoInput]</code></h2>
-<p>The <code>novoInput</code> component expects 1 <code>button</code> or <code>novo-button</code> as the trigger for the menu list which is comprised of all the <code>novo-option</code> or <code>novo-optgroup</code> child components.</p>
-<h3>Properties</h3>
-<p><props-table component="NovoInput"></props-table></p>
-`,
-  host: { class: 'markdown-page' }
-})
-export class ToasterDevelopPage {
-  public params: any = {};
-}
-
-
-@Component({
-  selector: 'toaster-examples-page',
-  template: `<h2>Alert</h2>
-<p>This type of toast notification takes a template, a style, and a location.</p>
-<h2>Embedded Toast</h2>
-<p><code-example example="toast-usage"></code-example></p>
-<h2>Toaster Service</h2>
-<p><code-example example="toast-service"></code-example></p>
-<h2>Toaster Actions</h2>
-<p><code-example example="toast-actions"></code-example></p>
-`,
-  host: { class: 'markdown-page' }
-})
-export class ToasterExamplesPage {
-  public params: any = {};
-}
-
-
-@Component({
-  selector: 'tooltip-design-page',
-  template: `<h2>Anatomy</h2>
-<novo-grid columns="2" align="start" gap="2rem">
-<img src="assets/images/ModalAnatomy.png" width="450">
-<div>
-<ol>
-<li>
-<p><strong>Icon</strong><br>
-Use an Icon to quickly convey context of the action. ie. If a file is ready to download, show a download or file icon.</p>
-</li>
-<li>
-<p><strong>Title (Optional)</strong><br>
-Used to quickly describe the action that occurred. eg. File Uploaded!</p>
-</li>
-<li>
-<p><strong>Message</strong><br>
-A longer description of the outcome of the related action.</p>
-</li>
-<li>
-<p><strong>Follow-up Action (Optional)</strong><br>
-By default the a toast will always have a dismiss action, but can also have a follow up action related to the previous action, eg. Undo, Open, View....</p>
-</li>
-</ol>
-</div>
-</novo-grid>
-<h2>Best Practices</h2>
-<ul>
-<li>Use a banner when a form can’t be saved, banner appears, should be dismissed manually</li>
-<li>Use a growl when something is successfully saved, growl should disappears after X seconds</li>
-<li>A toast should only have 1 follow-up action.</li>
-<li>If the toast has an follow-up action, i.e. Undo, View, etc, then dismiss the Toast manually…</li>
-<li>If a growl has no follow-up action, the toast should dismiss automatically after X seconds</li>
-<li>If the growl has under 30 characters, dismiss automatically after 3 seconds</li>
-<li>If the growl has between 30 and 100 characters, dismiss automatically after 10 seconds</li>
-<li>If the growl has over 100 characters, dismiss manually</li>
-<li>If the growl has over X characters or X lines of text, add a View More action</li>
-</ul>
-<h2>Color</h2>
-<p><strong>How to use color</strong></p>
-<p>Background utilises color to indicate status of the message. Icon is often synonymous with the status of the color, <em>e.g. warning icon goes with yellow background</em></p>
-<novo-grid columns="2" align="start" gap="2rem">
-<blockquote>
-<div class="p"><strong>Pattern</strong></div>
-<div class="p">Yellow for warnings</div>
-</blockquote>
-<p><img src="https://via.placeholder.com/350x250" alt="placeholder"></p>
-<blockquote>
-<div class="p"><strong>Pattern</strong></div>
-<div class="p">Green for successful actions</div>
-</blockquote>
-<p><img src="https://via.placeholder.com/350x250" alt="placeholder"></p>
-<blockquote>
-<div class="p"><strong>Pattern</strong></div>
-<div class="p">Red for errors or unsuccessfully attempted actions</div>
-</blockquote>
-<p><img src="https://via.placeholder.com/350x250" alt="placeholder"></p>
-</novo-grid>
-<h2>Behaviors</h2>
-<p><strong>Movement</strong></p>
-<p>A toast appears through an animated movement to draw the users attention. A banner slides in from the top of the page. A growl slides in from the side of the screen on which it is located. Multiple growls will stack by moving to the background when a new one appears.</p>
-<novo-grid columns="2" align="start" gap="2rem">
-<blockquote>
-<div class="p"><strong>Pattern</strong></div>
-<div class="p">Yellow for warnings</div>
-</blockquote>
-<p><img src="https://via.placeholder.com/350x250" alt="placeholder"></p>
-</novo-grid>
-<h2>How to configure</h2>
-<novo-grid columns="2" align="start" gap="2rem">
-<blockquote>
-<div class="p"><img src="https://via.placeholder.com/350x250" alt="placeholder"></div>
-<ul class="contains-do-list">
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Always do this</novo-text></li>
-</ul>
-<div class="p">Explain this</div>
-</blockquote>
-<blockquote>
-<div class="p"><img src="https://via.placeholder.com/350x250" alt="placeholder"></div>
-<ul class="contains-do-list">
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">times</novo-icon><novo-text color="grapefruit"> Never do this</novo-text></li>
-</ul>
-<div class="p">Explain this</div>
-</blockquote>
-</novo-grid>
-<h2>Patterns</h2>
-<novo-grid columns="2" align="start" gap="2rem">
-<blockquote>
-<div class="p"><strong>Pattern</strong></div>
-<div class="p">Why is it configured like this</div>
-</blockquote>
-<p><img src="https://via.placeholder.com/350x250" alt="placeholder"></p>
-<blockquote>
-<div class="p"><strong>Pattern</strong></div>
-<div class="p">Why is it configured like this</div>
-</blockquote>
-<p><img src="https://via.placeholder.com/350x250" alt="placeholder"></p>
-</novo-grid>
-<h2>Accessibility</h2>
-<p><strong>Implementation</strong></p>
-<p>Always include an <code>alt</code> attribute describing the information that is visually displayed in the image.</p>
-`,
-  host: { class: 'markdown-page' }
-})
-export class TooltipDesignPage {
-  public params: any = {};
-}
-
-
-@Component({
-  selector: 'tooltip-develop-page',
-  template: `<h1>Technical Details</h1>
-<p>Tooltips are used as system notifications. They can contain custom text titles and messages, as well as any icons from bh-icons and any color from our color palletes.</p>
-<ul>
-<li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/tooltips">(github)</a></li>
-<li><strong>module:</strong> <code>import &#123; NovoFieldModule &#125; from 'novo-elements';</code></li>
-</ul>
-<p><strong>Usage</strong></p>
-<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">novo-field</span> <span class="hljs-attr">layout</span>=<span class="hljs-string">&quot;horizontal&quot;</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">novo-label</span>&gt;</span>Amount<span class="hljs-tag">&lt;/<span class="hljs-name">novo-label</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">novoInput</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;number&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;example-right-align&quot;</span> /&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">novoPrefix</span>&gt;</span>$<span class="hljs-symbol">&amp;nbsp;</span><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">novoSuffix</span>&gt;</span>.00<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">novo-hint</span>&gt;</span>Enter some money<span class="hljs-tag">&lt;/<span class="hljs-name">novo-hint</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">novo-field</span>&gt;</span>
-</code></pre>
-<h1>Roadmap</h1>
-<ul class="contains-task-list">
-<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox"> Improve Typing Support</li>
-<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox"> Make color and theming consistent</li>
-<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox"> Dark Mode</li>
-</ul>
-<h1>Changelog</h1>
-<h3>5.0.0</h3>
-<p><strong>Deprecation</strong></p>
-<ul>
-<li>You should no longer use <code>list</code> and <code>item</code> components, these are non-standard components and have been replaced with <code>novo-option</code> as used in the usage above.</li>
-</ul>
-<h1>Components</h1>
-<h2>NovoFieldElement <code>novo-field</code></h2>
-<p>The <code>novo-field</code> component expects 1 <code>button</code> or <code>novo-button</code> as the trigger for the menu list which is comprised of all the <code>novo-option</code> or <code>novo-optgroup</code> child components.</p>
-<h3>Properties</h3>
-<p><props-table component="NovoFieldElement"></props-table></p>
-<h1>Directive</h1>
-<h2>NovoInput <code>[novoInput]</code></h2>
-<p>The <code>novoInput</code> component expects 1 <code>button</code> or <code>novo-button</code> as the trigger for the menu list which is comprised of all the <code>novo-option</code> or <code>novo-optgroup</code> child components.</p>
-<h3>Properties</h3>
-<p><props-table component="NovoInput"></props-table></p>
-`,
-  host: { class: 'markdown-page' }
-})
-export class TooltipDevelopPage {
-  public params: any = {};
-}
-
-
-@Component({
-  selector: 'tooltip-examples-page',
-  template: `<h2>Placement</h2>
-<p><code-example example="tooltip-placement"></code-example></p>
-<h2>Alignment</h2>
-<p><code-example example="tooltip-align"></code-example></p>
-<h2>Types</h2>
-<p><code-example example="tooltip-types"></code-example></p>
-<h2>Sizes</h2>
-<p><code-example example="tooltip-sizes"></code-example></p>
-<h2>Options</h2>
-<p><code-example example="tooltip-options"></code-example></p>
-<h2>Toggle Trigger</h2>
-<p><code-example example="tooltip-toggle"></code-example></p>
-`,
-  host: { class: 'markdown-page' }
-})
-export class TooltipExamplesPage {
-  public params: any = {};
-}
-
-
-@Component({
-  selector: 'tooltip-usage-page',
-  template: `<novo-grid columns="2" align="start" gap="2rem">
-<div>
-<h3>Why?</h3>
-<p>Helper tooltips contain basic text that provides some additional information about an element.</p>
-<p><strong>Works with following input types</strong></p>
-<ul>
-<li>Default input, select, textarea</li>
-<li>novo-select</li>
-<li>novo-datepicker</li>
-</ul>
-</div>
-<img src="https://via.placeholder.com/350x250"/>
-<div>
-<h3>Use When</h3>
-<ul class="contains-do-list">
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Use a Banner when a form cannot be saved to show an error occurred.</novo-text></li>
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Use a Banner when an action can’t be completed due to an error or failure.</novo-text></li>
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Use a Growl when an action is successfully performed and the context, i.e. modal, is no longer available.</novo-text></li>
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> When an action happens asynchronously, e.g. file upload.</novo-text></li>
-</ul>
-</div>
-<div>
-<h3>Don′t Use When</h3>
-<ul class="contains-do-list">
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">times</novo-icon><novo-text color="grapefruit"> Don’t use it to confirm an action, a toast should be reactive not pro-active.</novo-text></li>
-</ul>
-</div>
-</novo-grid>
-`,
-  host: { class: 'markdown-page' }
-})
-export class TooltipUsagePage {
-  public params: any = {};
-}
-
 const routes: Routes = [
   //{ path: '', component: Home, data: {} },
   { path: 'components/ace-editor', component: AceEditorPage, data: { title: 'Ace Editor', section: 'components' } },
@@ -6527,39 +6013,47 @@ const routes: Routes = [
     ]
   },
   {
+    path: 'components/aside',
+    component: TabsLayout,
+    data: { title: 'Aside', section: 'components', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}] },
+    children: [
+      { path: 'design', component: AsideDesignPage },
+      { path: 'develop', component: AsideDevelopPage },
+      { path: 'examples', component: AsideExamplesPage },
+      { path: '', redirectTo: '/components/aside/design', pathMatch: 'full' },
+    ]
+  },
+  {
     path: 'components/autocomplete',
     component: TabsLayout,
-    data: { title: 'Autocomplete', section: 'components', pages: [{ title: 'Usage', route: './usage'},{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}] },
+    data: { title: 'Autocomplete', section: 'components', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}] },
     children: [
-      { path: 'usage', component: AutocompleteUsagePage },
       { path: 'design', component: AutocompleteDesignPage },
       { path: 'develop', component: AutocompleteDevelopPage },
       { path: 'examples', component: AutocompleteExamplesPage },
-      { path: '', redirectTo: '/components/autocomplete/usage', pathMatch: 'full' },
+      { path: '', redirectTo: '/components/autocomplete/design', pathMatch: 'full' },
     ]
   },
   {
     path: 'components/avatar',
     component: TabsLayout,
-    data: { title: 'Avatar', section: 'components', pages: [{ title: 'Usage', route: './usage'},{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}] },
+    data: { title: 'Avatar', section: 'components', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}] },
     children: [
-      { path: 'usage', component: AvatarUsagePage },
       { path: 'design', component: AvatarDesignPage },
       { path: 'develop', component: AvatarDevelopPage },
       { path: 'examples', component: AvatarExamplesPage },
-      { path: '', redirectTo: '/components/avatar/usage', pathMatch: 'full' },
+      { path: '', redirectTo: '/components/avatar/design', pathMatch: 'full' },
     ]
   },
   {
     path: 'components/breadcrumbs',
     component: TabsLayout,
-    data: { title: 'Breadcrumbs', section: 'components', pages: [{ title: 'Usage', route: './usage'},{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}] },
+    data: { title: 'Breadcrumbs', section: 'components', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}] },
     children: [
-      { path: 'usage', component: BreadcrumbUsagePage },
       { path: 'design', component: BreadcrumbDesignPage },
       { path: 'develop', component: BreadcrumbDevelopPage },
       { path: 'examples', component: BreadcrumbExamplesPage },
-      { path: '', redirectTo: '/components/breadcrumbs/usage', pathMatch: 'full' },
+      { path: '', redirectTo: '/components/breadcrumbs/design', pathMatch: 'full' },
     ]
   },
   {
@@ -6613,26 +6107,23 @@ const routes: Routes = [
   {
     path: 'components/icon',
     component: TabsLayout,
-    data: { title: 'Icon', section: 'components', pages: [{ title: 'Usage', route: './usage'},{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'},{ title: 'Icon', route: './icon'}] },
+    data: { title: 'Icon', section: 'components', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}] },
     children: [
-      { path: 'usage', component: IconUsagePage },
       { path: 'design', component: IconDesignPage },
       { path: 'develop', component: IconDevelopPage },
       { path: 'examples', component: IconExamplesPage },
-      { path: 'icon', component: IconPage },
-      { path: '', redirectTo: '/components/icon/usage', pathMatch: 'full' },
+      { path: '', redirectTo: '/components/icon/design', pathMatch: 'full' },
     ]
   },
   {
     path: 'components/loading',
     component: TabsLayout,
-    data: { title: 'Loading', section: 'components', pages: [{ title: 'Usage', route: './usage'},{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}] },
+    data: { title: 'Loading', section: 'components', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}] },
     children: [
-      { path: 'usage', component: LoadingUsagePage },
       { path: 'design', component: LoadingDesignPage },
       { path: 'develop', component: LoadingDevelopPage },
       { path: 'examples', component: LoadingExamplesPage },
-      { path: '', redirectTo: '/components/loading/usage', pathMatch: 'full' },
+      { path: '', redirectTo: '/components/loading/design', pathMatch: 'full' },
     ]
   },
   {
@@ -6647,15 +6138,36 @@ const routes: Routes = [
     ]
   },
   {
+    path: 'components/modals',
+    component: TabsLayout,
+    data: { title: 'Modals', section: 'components', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}] },
+    children: [
+      { path: 'design', component: ModalDesignPage },
+      { path: 'develop', component: ModalDevelopPage },
+      { path: 'examples', component: ModalExamplesPage },
+      { path: '', redirectTo: '/components/modals/design', pathMatch: 'full' },
+    ]
+  },
+  {
     path: 'components/non ideal state',
     component: TabsLayout,
-    data: { title: 'Non Ideal State', section: 'components', pages: [{ title: 'Usage', route: './usage'},{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}] },
+    data: { title: 'Non Ideal State', section: 'components', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}] },
     children: [
-      { path: 'usage', component: NonIdealStateUsagePage },
       { path: 'design', component: NonIdealStateDesignPage },
       { path: 'develop', component: NonIdealStateDevelopPage },
       { path: 'examples', component: NonIdealStateExamplesPage },
-      { path: '', redirectTo: '/components/non ideal state/usage', pathMatch: 'full' },
+      { path: '', redirectTo: '/components/non ideal state/design', pathMatch: 'full' },
+    ]
+  },
+  {
+    path: 'components/pop over',
+    component: TabsLayout,
+    data: { title: 'Pop Over', section: 'components', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}] },
+    children: [
+      { path: 'design', component: PopoverDesignPage },
+      { path: 'develop', component: PopoverDevelopPage },
+      { path: 'examples', component: PopoverExamplesPage },
+      { path: '', redirectTo: '/components/pop over/design', pathMatch: 'full' },
     ]
   },
   {
@@ -6677,27 +6189,37 @@ const routes: Routes = [
   { path: 'components/tabbed-group-picker', component: TabbedGroupPickerPage, data: { title: 'Tabbed Group Picker', section: 'components' } },
   { path: 'components/table', component: TablePage, data: { title: 'Table', section: 'components' } },
   {
-    path: 'components/aside',
+    path: 'components/tip well',
     component: TabsLayout,
-    data: { title: 'Aside', section: 'components', pages: [{ title: 'Usage', route: './usage'},{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}] },
+    data: { title: 'Tip Well', section: 'components', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}] },
     children: [
-      { path: 'usage', component: AsideUsagePage },
-      { path: 'design', component: AsideDesignPage },
-      { path: 'develop', component: AsideDevelopPage },
-      { path: 'examples', component: AsideExamplesPage },
-      { path: '', redirectTo: '/components/aside/usage', pathMatch: 'full' },
+      { path: 'design', component: TipWellDesignPage },
+      { path: 'develop', component: TipWellDevelopPage },
+      { path: 'examples', component: TipWellExamplesPage },
+      { path: '', redirectTo: '/components/tip well/design', pathMatch: 'full' },
     ]
   },
   {
-    path: 'components/modals',
+    path: 'components/toaster',
     component: TabsLayout,
-    data: { title: 'Modals', section: 'components', pages: [{ title: 'Usage', route: './usage'},{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}] },
+    data: { title: 'Toaster', section: 'components', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}] },
     children: [
-      { path: 'usage', component: ModalUsagePage },
-      { path: 'design', component: ModalDesignPage },
-      { path: 'develop', component: ModalDevelopPage },
-      { path: 'examples', component: ModalExamplesPage },
-      { path: '', redirectTo: '/components/modals/usage', pathMatch: 'full' },
+      { path: 'design', component: ToasterDesignPage },
+      { path: 'develop', component: ToasterDevelopPage },
+      { path: 'examples', component: ToasterExamplesPage },
+      { path: '', redirectTo: '/components/toaster/design', pathMatch: 'full' },
+    ]
+  },
+  {
+    path: 'components/tooltip',
+    component: TabsLayout,
+    data: { title: 'Tooltip', section: 'components', pages: [{ title: 'Usage', route: './usage'},{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}] },
+    children: [
+      { path: 'usage', component: TooltipUsagePage },
+      { path: 'design', component: TooltipDesignPage },
+      { path: 'develop', component: TooltipDevelopPage },
+      { path: 'examples', component: TooltipExamplesPage },
+      { path: '', redirectTo: '/components/tooltip/usage', pathMatch: 'full' },
     ]
   },
   { path: 'src/components', component: ComponentsPage, data: { title: 'Components', section: 'src' } },
@@ -6763,13 +6285,12 @@ const routes: Routes = [
   {
     path: 'layouts/card',
     component: TabsLayout,
-    data: { title: 'Card', section: 'layouts', pages: [{ title: 'Usage', route: './usage'},{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}] },
+    data: { title: 'Card', section: 'layouts', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}] },
     children: [
-      { path: 'usage', component: CardUsagePage },
       { path: 'design', component: CardDesignPage },
       { path: 'develop', component: CardDevelopPage },
       { path: 'examples', component: CardExamplesPage },
-      { path: '', redirectTo: '/layouts/card/usage', pathMatch: 'full' },
+      { path: '', redirectTo: '/layouts/card/design', pathMatch: 'full' },
     ]
   },
   { path: 'layouts/expansion', component: ExpansionPage, data: { title: 'Expansion', section: 'layouts' } },
@@ -6802,60 +6323,13 @@ const routes: Routes = [
   { path: 'utils/chomsky', component: ChomskyPage, data: { title: 'Chomsky', section: 'utils' } },
   { path: 'utils/field-interactions', component: FieldInteractionsPage, data: { title: 'Field Interactions', section: 'utils' } },
   { path: 'utils/pipes', component: PipesPage, data: { title: 'Pipes', section: 'utils' } },
-  {
-    path: 'utils/pop over',
-    component: TabsLayout,
-    data: { title: 'Pop Over', section: 'utils', pages: [{ title: 'Usage', route: './usage'},{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}] },
-    children: [
-      { path: 'usage', component: PopoverUsagePage },
-      { path: 'design', component: PopoverDesignPage },
-      { path: 'develop', component: PopoverDevelopPage },
-      { path: 'examples', component: PopoverExamplesPage },
-      { path: '', redirectTo: '/utils/pop over/usage', pathMatch: 'full' },
-    ]
-  },
   { path: 'utils/security', component: SecurityPage, data: { title: 'Security', section: 'utils' } },
-  {
-    path: 'utils/tip well',
-    component: TabsLayout,
-    data: { title: 'Tip Well', section: 'utils', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}] },
-    children: [
-      { path: 'design', component: TipWellDesignPage },
-      { path: 'develop', component: TipWellDevelopPage },
-      { path: 'examples', component: TipWellExamplesPage },
-      { path: '', redirectTo: '/utils/tip well/design', pathMatch: 'full' },
-    ]
-  },
-  { path: 'utils/tip-well', component: TipWellPage, data: { title: 'Tip Well', section: 'utils' } },
-  {
-    path: 'utils/toaster',
-    component: TabsLayout,
-    data: { title: 'Toaster', section: 'utils', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}] },
-    children: [
-      { path: 'design', component: ToasterDesignPage },
-      { path: 'develop', component: ToasterDevelopPage },
-      { path: 'examples', component: ToasterExamplesPage },
-      { path: '', redirectTo: '/utils/toaster/design', pathMatch: 'full' },
-    ]
-  },
-  {
-    path: 'utils/tooltip',
-    component: TabsLayout,
-    data: { title: 'Tooltip', section: 'utils', pages: [{ title: 'Usage', route: './usage'},{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}] },
-    children: [
-      { path: 'usage', component: TooltipUsagePage },
-      { path: 'design', component: TooltipDesignPage },
-      { path: 'develop', component: TooltipDevelopPage },
-      { path: 'examples', component: TooltipExamplesPage },
-      { path: '', redirectTo: '/utils/tooltip/usage', pathMatch: 'full' },
-    ]
-  },
   // Catch All
   { path: '**', redirectTo: '/home', data: {} },
 ];
 
 export const PAGE_LIST = [
-  AceEditorPage,AgendaDesignPage,AgendaDevelopPage,AgendaExamplesPage,AutocompleteDesignPage,AutocompleteDevelopPage,AutocompleteExamplesPage,AutocompleteUsagePage,AvatarDesignPage,AvatarDevelopPage,AvatarExamplesPage,AvatarUsagePage,BreadcrumbDesignPage,BreadcrumbDevelopPage,BreadcrumbExamplesPage,BreadcrumbUsagePage,ButtonDesignPage,ButtonDevelopPage,ButtonExamplesPage,CalendarDesignPage,CalendarDevelopPage,CalendarExamplesPage,CalendarPage,ComponentsPage,DataTablePage,DropdownDesignPage,DropdownDevelopPage,DropdownExamplesPage,DropdownUsagePage,FieldDesignPage,FieldDevelopPage,FieldExamplesPage,FieldUsagePage,IconDesignPage,IconDevelopPage,IconExamplesPage,IconUsagePage,IconPage,LoadingDesignPage,LoadingDevelopPage,LoadingExamplesPage,LoadingUsagePage,MenuDesignPage,MenuDevelopPage,MenuExamplesPage,NonIdealStateDesignPage,NonIdealStateDevelopPage,NonIdealStateExamplesPage,NonIdealStateUsagePage,ProgressDesignPage,ProgressDevelopPage,ProgressExamplesPage,ProgressUsagePage,QuickNotePage,SearchPage,SlidesPage,SwitchPage,TabbedGroupPickerPage,TablePage,ColorsPage,CompositionPage,DesignPage,IconographyPage,SpacingPage,TypographyPage,ChipsPage,ColorPickerPage,DatePickerDesignPage,DatePickerDevelopPage,DatePickerExamplesPage,DatePickerUsagePage,DatePickerPage,DateTimePickerDesignPage,DateTimePickerDevelopPage,DateTimePickerExamplesPage,DateTimePickerUsagePage,EditorPage,FormControlsPage,FormGroupsPage,FormPage,MultiPickerPage,PickerPage,RadioButtonsPage,SelectPage,TilesPage,TimePickerDesignPage,TimePickerDevelopPage,TimePickerExamplesPage,TimePickerUsagePage,ValuePage,HomePage,CardDesignPage,CardDevelopPage,CardExamplesPage,CardUsagePage,ExpansionPage,HeaderPage,LayoutsPage,ListPage,SidenavPage,StepperPage,TabsDesignPage,TabsDevelopPage,TabsExamplesPage,TabsUsagePage,PatternsNativeFormsPage,PatternsTestPage,PatternsPage,TemplatesPage,AsideDesignPage,AsideDevelopPage,AsideExamplesPage,AsideUsagePage,ChomskyPage,FieldInteractionsPage,ModalDesignPage,ModalDevelopPage,ModalExamplesPage,ModalUsagePage,PipesPage,PopoverDesignPage,PopoverDevelopPage,PopoverExamplesPage,PopoverUsagePage,SecurityPage,TipWellDesignPage,TipWellDevelopPage,TipWellExamplesPage,TipWellPage,ToasterDesignPage,ToasterDevelopPage,ToasterExamplesPage,TooltipDesignPage,TooltipDevelopPage,TooltipExamplesPage,TooltipUsagePage
+  AceEditorPage,AgendaDesignPage,AgendaDevelopPage,AgendaExamplesPage,AsideDesignPage,AsideDevelopPage,AsideExamplesPage,AutocompleteDesignPage,AutocompleteDevelopPage,AutocompleteExamplesPage,AvatarDesignPage,AvatarDevelopPage,AvatarExamplesPage,BreadcrumbDesignPage,BreadcrumbDevelopPage,BreadcrumbExamplesPage,ButtonDesignPage,ButtonDevelopPage,ButtonExamplesPage,CalendarDesignPage,CalendarDevelopPage,CalendarExamplesPage,CalendarPage,ComponentsPage,DataTablePage,DropdownDesignPage,DropdownDevelopPage,DropdownExamplesPage,DropdownUsagePage,FieldDesignPage,FieldDevelopPage,FieldExamplesPage,FieldUsagePage,IconDesignPage,IconDevelopPage,IconExamplesPage,LoadingDesignPage,LoadingDevelopPage,LoadingExamplesPage,MenuDesignPage,MenuDevelopPage,MenuExamplesPage,ModalDesignPage,ModalDevelopPage,ModalExamplesPage,NonIdealStateDesignPage,NonIdealStateDevelopPage,NonIdealStateExamplesPage,PopoverDesignPage,PopoverDevelopPage,PopoverExamplesPage,ProgressDesignPage,ProgressDevelopPage,ProgressExamplesPage,ProgressUsagePage,QuickNotePage,SearchPage,SlidesPage,SwitchPage,TabbedGroupPickerPage,TablePage,TipWellDesignPage,TipWellDevelopPage,TipWellExamplesPage,ToasterDesignPage,ToasterDevelopPage,ToasterExamplesPage,TooltipDesignPage,TooltipDevelopPage,TooltipExamplesPage,TooltipUsagePage,ColorsPage,CompositionPage,DesignPage,IconographyPage,SpacingPage,TypographyPage,ChipsPage,ColorPickerPage,DatePickerDesignPage,DatePickerDevelopPage,DatePickerExamplesPage,DatePickerUsagePage,DatePickerPage,DateTimePickerDesignPage,DateTimePickerDevelopPage,DateTimePickerExamplesPage,DateTimePickerUsagePage,EditorPage,FormControlsPage,FormGroupsPage,FormPage,MultiPickerPage,PickerPage,RadioButtonsPage,SelectPage,TilesPage,TimePickerDesignPage,TimePickerDevelopPage,TimePickerExamplesPage,TimePickerUsagePage,ValuePage,HomePage,CardDesignPage,CardDevelopPage,CardExamplesPage,ExpansionPage,HeaderPage,LayoutsPage,ListPage,SidenavPage,StepperPage,TabsDesignPage,TabsDevelopPage,TabsExamplesPage,TabsUsagePage,PatternsNativeFormsPage,PatternsTestPage,PatternsPage,TemplatesPage,ChomskyPage,FieldInteractionsPage,PipesPage,SecurityPage
 ];
 
 @NgModule({

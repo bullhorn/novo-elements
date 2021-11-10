@@ -4,14 +4,13 @@ title: Test
 order: 1
 ---
 
-<h1>Water.css</h1>
 
 <p>
-  Water.css is a drop-in collection of CSS styles to make simple websites like this just a
+  This is a drop-in collection of CSS styles to make simple websites like this just a
   little bit nicer.
 </p>
 <p>
-  Now you can write your simple static site with nice semantic html, and Water.css will manage
+  Now you can write your simple static site with nice semantic html, and will manage
   the styling for you.
 </p>
 
@@ -19,7 +18,6 @@ order: 1
   <div>
     <a href="#installation"><b>Get it already!</b></a>
     <br />
-    <a href="https://github.com/kognise/water.css"><b>GitHub</b></a>
   </div>
 </div>
 
@@ -90,7 +88,7 @@ order: 1
   A bookmarklet is a snippet of JavaScript that sits in your bookmarks bar.
 </p>
 <p>
-  The Waterize bookmarklet can be used to make ugly websites more readable by replacing the styles with Water.css. Just drag this link to your bookmarks bar:
+  The Waterize bookmarklet can be used to make ugly websites more readable by replacing the styles with. Just drag this link to your bookmarks bar:
 </p>
 <strong>
   test

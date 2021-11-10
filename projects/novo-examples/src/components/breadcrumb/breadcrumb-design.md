@@ -5,77 +5,34 @@ title: Design
 order: 2
 ---
 
-:::: grid 2
+## Usage
 
-<img src="assets/images/ModalAnatomy.png" width="450">
+<novo-grid columns="2" align="start" gap="2rem">
+<div>
 
-::: box
+A breadcrumb displays the current location within a hierarchy. It allows going back to states higher up in the hierarchy.
 
-1. **Container**<br>
-   Description and purpose of this element
+</div>
 
-1. **Header**<br>
-   Description and purpose of this element
+<img src="/assets/images/AsideOverview.png"/>
 
-1. **Icon (Optional)**<br>
-   Description and purpose of this element
+</novo-grid>
 
-1. **Title (Optional)**<br>
-   Description and purpose of this element
+### Use When
 
-1. **Content**<br>
-   Description and purpose of this element
+- (✓) When the system has more than two layers in a hierarchy.
+- (✓) When you need to inform the user of where they are.
+- (✓) When the user may need to navigate back to a higher level.
+- (✓) When the application has multi-layer architecture.
 
-1. **Footer**<br>
-   Description and purpose of this element
 
-:::
-::::
+## Best Practices
 
-## How to configure
-
-::::: grid 2
-:::: figure
-![placeholder](https://via.placeholder.com/350x250)
-::: do Always do this
-Explain this
-:::
-::::
-
-:::: figure
-![placeholder](https://via.placeholder.com/350x250)
-::: dont Never do this
-Explain this
-:::
-::::
-:::::
-
-## Patterns
-
-::::: grid 2
-::: box
-
-**Pattern**
-
-Why is it configured like this
-
-:::
-![placeholder](https://via.placeholder.com/350x250)
-:::::
-
-::::: grid 2
-::: box
-
-**Pattern**
-
-Why is it configured like this
-
-:::
-![placeholder](https://via.placeholder.com/350x250)
-:::::
+- Ensure the content opened is highly correlated to the context that opened it. When showing a preview of a related content that can opened for various contexts, present the user with the data related to the context that opened it, rather than the same view.
+- When using an aside to present the user with a form, ensure that it is beneficial to have the current view still available to the user, if not consider opening a new page.
 
 ## Accessibility
 
 **Implementation**
 
-Always include an `alt` attribute describing the information that is visually displayed in the image.
+This component is intended to follow the [Aria Breadcrumb Design Pattern](https://www.w3.org/TR/wai-aria-practices/#breadcrumb).

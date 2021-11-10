@@ -3,7 +3,7 @@
   "schematics": {
     "migration-v6": {
       "version": "6.0.0",
-      "description": "Updates Angular Material to v6",
+      "description": "Updates Novo Elements to v6",
       "factory": "./ng-update/index#updateToV6"
     },
     "ng-post-update": {
