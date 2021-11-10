@@ -5,123 +5,58 @@ title: Design
 order: 2
 ---
 
-## Anatomy
+## Usage
 
 <novo-grid columns="2" align="start" gap="2rem">
+<div>
 
-<img src="assets/images/ModalAnatomy.png" width="450">
+Helper tooltips contain basic text that provides some additional information about an element.
+
+</div>
+
+<img src="https://via.placeholder.com/350x250"/>
 
 <div>
 
-1. **Icon**<br>
-   Use an Icon to quickly convey context of the action. ie. If a file is ready to download, show a download or file icon.
+### Use When
 
-1. **Title (Optional)**<br>
-   Used to quickly describe the action that occurred. eg. File Uploaded!
+- (✓) Providing a short description of a page element or control.
+- (✓) Describing the action of an icon-only button.
+- (✓) Revealing the full text of truncated data.
 
-1. **Message**<br>
-   A longer description of the outcome of the related action.
+</div>
+<div>
 
-1. **Follow-up Action (Optional)**<br>
-   By default the a toast will always have a dismiss action, but can also have a follow up action related to the previous action, eg. Undo, Open, View....
+### Don′t Use When
+
+- (x) Providing a description longer than 10 words. Instead, use a popover.
+- (x) Don't use tooltips to communicate crucial information
 
 </div>
 </novo-grid>
 
-## Best Practices
-
-- Use a banner when a form can’t be saved, banner appears, should be dismissed manually
-- Use a growl when something is successfully saved, growl should disappears after X seconds
-- A toast should only have 1 follow-up action.
-- If the toast has an follow-up action, i.e. Undo, View, etc, then dismiss the Toast manually…
-- If a growl has no follow-up action, the toast should dismiss automatically after X seconds
-- If the growl has under 30 characters, dismiss automatically after 3 seconds
-- If the growl has between 30 and 100 characters, dismiss automatically after 10 seconds
-- If the growl has over 100 characters, dismiss manually
-- If the growl has over X characters or X lines of text, add a View More action
-
-## Color
-
-**How to use color**
-
-Background utilises color to indicate status of the message. Icon is often synonymous with the status of the color, _e.g. warning icon goes with yellow background_
+## Options
 
 <novo-grid columns="2" align="start" gap="2rem">
 
-> **Pattern**
+> **Colors**
 >
-> Yellow for warnings
+> Tooltips also come in semantic variants: informative (blue), positive (green), and negative (red). These use semantic colors to communicate the meaning.
 
-![placeholder](https://via.placeholder.com/350x250)
+![placeholder](https://via.placeholder.com/250x200)
 
-> **Pattern**
+> **Sizing**
 >
-> Green for successful actions
+> When the label is too long for the available horizontal space, it wraps to form another line. To control the visually display text-length you can set the size of the tooltip with the `tooltip-size` property.
 
-![placeholder](https://via.placeholder.com/350x250)
+![placeholder](https://via.placeholder.com/250x200)
 
-> **Pattern**
+> **Placement**
 >
-> Red for errors or unsuccessfully attempted actions
+> A tooltip is positioned in relation to its target. Placement property values are at the: top, top left, top right, top start, top end, bottom, bottom left, bottom right, bottom start, bottom end, left, left top, left bottom, start, start top, start bottom, right, right top, right bottom, end, end top, end bottom. The default placement value is at the top.
 
-![placeholder](https://via.placeholder.com/350x250)
+![placeholder](https://via.placeholder.com/250x200)
 
 </novo-grid>
 
-## Behaviors
 
-**Movement**
-
-A toast appears through an animated movement to draw the users attention. A banner slides in from the top of the page. A growl slides in from the side of the screen on which it is located. Multiple growls will stack by moving to the background when a new one appears.
-
-<novo-grid columns="2" align="start" gap="2rem">
-
-> **Pattern**
->
-> Yellow for warnings
-
-![placeholder](https://via.placeholder.com/350x250)
-
-</novo-grid>
-
-## How to configure
-
-<novo-grid columns="2" align="start" gap="2rem">
-
-> ![placeholder](https://via.placeholder.com/350x250)
->
-> - (✓) Always do this
->
-> Explain this
-
-> ![placeholder](https://via.placeholder.com/350x250)
->
-> - (x) Never do this
->
-> Explain this
-
-</novo-grid>
-
-## Patterns
-
-<novo-grid columns="2" align="start" gap="2rem">
-
-> **Pattern**
->
-> Why is it configured like this
-
-![placeholder](https://via.placeholder.com/350x250)
-
-> **Pattern**
->
-> Why is it configured like this
-
-![placeholder](https://via.placeholder.com/350x250)
-
-</novo-grid>
-
-## Accessibility
-
-**Implementation**
-
-Always include an `alt` attribute describing the information that is visually displayed in the image.

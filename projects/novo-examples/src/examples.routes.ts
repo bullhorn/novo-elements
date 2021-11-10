@@ -3288,105 +3288,46 @@ export class ToasterExamplesPage {
 
 @Component({
   selector: 'tooltip-design-page',
-  template: `<h2>Anatomy</h2>
+  template: `<h2>Usage</h2>
 <novo-grid columns="2" align="start" gap="2rem">
-<img src="assets/images/ModalAnatomy.png" width="450">
 <div>
-<ol>
-<li>
-<p><strong>Icon</strong><br>
-Use an Icon to quickly convey context of the action. ie. If a file is ready to download, show a download or file icon.</p>
-</li>
-<li>
-<p><strong>Title (Optional)</strong><br>
-Used to quickly describe the action that occurred. eg. File Uploaded!</p>
-</li>
-<li>
-<p><strong>Message</strong><br>
-A longer description of the outcome of the related action.</p>
-</li>
-<li>
-<p><strong>Follow-up Action (Optional)</strong><br>
-By default the a toast will always have a dismiss action, but can also have a follow up action related to the previous action, eg. Undo, Open, View....</p>
-</li>
-</ol>
+<p>Helper tooltips contain basic text that provides some additional information about an element.</p>
+</div>
+<img src="https://via.placeholder.com/350x250"/>
+<div>
+<h3>Use When</h3>
+<ul class="contains-do-list">
+<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Providing a short description of a page element or control.</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Describing the action of an icon-only button.</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Revealing the full text of truncated data.</novo-text></li>
+</ul>
+</div>
+<div>
+<h3>Don′t Use When</h3>
+<ul class="contains-do-list">
+<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">times</novo-icon><novo-text color="grapefruit"> Providing a description longer than 10 words. Instead, use a popover.</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">times</novo-icon><novo-text color="grapefruit"> Don't use tooltips to communicate crucial information</novo-text></li>
+</ul>
 </div>
 </novo-grid>
-<h2>Best Practices</h2>
-<ul>
-<li>Use a banner when a form can’t be saved, banner appears, should be dismissed manually</li>
-<li>Use a growl when something is successfully saved, growl should disappears after X seconds</li>
-<li>A toast should only have 1 follow-up action.</li>
-<li>If the toast has an follow-up action, i.e. Undo, View, etc, then dismiss the Toast manually…</li>
-<li>If a growl has no follow-up action, the toast should dismiss automatically after X seconds</li>
-<li>If the growl has under 30 characters, dismiss automatically after 3 seconds</li>
-<li>If the growl has between 30 and 100 characters, dismiss automatically after 10 seconds</li>
-<li>If the growl has over 100 characters, dismiss manually</li>
-<li>If the growl has over X characters or X lines of text, add a View More action</li>
-</ul>
-<h2>Color</h2>
-<p><strong>How to use color</strong></p>
-<p>Background utilises color to indicate status of the message. Icon is often synonymous with the status of the color, <em>e.g. warning icon goes with yellow background</em></p>
+<h2>Options</h2>
 <novo-grid columns="2" align="start" gap="2rem">
 <blockquote>
-<div class="p"><strong>Pattern</strong></div>
-<div class="p">Yellow for warnings</div>
+<div class="p"><strong>Colors</strong></div>
+<div class="p">Tooltips also come in semantic variants: informative (blue), positive (green), and negative (red). These use semantic colors to communicate the meaning.</div>
 </blockquote>
-<p><img src="https://via.placeholder.com/350x250" alt="placeholder"></p>
+<p><img src="https://via.placeholder.com/250x200" alt="placeholder"></p>
 <blockquote>
-<div class="p"><strong>Pattern</strong></div>
-<div class="p">Green for successful actions</div>
+<div class="p"><strong>Sizing</strong></div>
+<div class="p">When the label is too long for the available horizontal space, it wraps to form another line. To control the visually display text-length you can set the size of the tooltip with the <code>tooltip-size</code> property.</div>
 </blockquote>
-<p><img src="https://via.placeholder.com/350x250" alt="placeholder"></p>
+<p><img src="https://via.placeholder.com/250x200" alt="placeholder"></p>
 <blockquote>
-<div class="p"><strong>Pattern</strong></div>
-<div class="p">Red for errors or unsuccessfully attempted actions</div>
+<div class="p"><strong>Placement</strong></div>
+<div class="p">A tooltip is positioned in relation to its target. Placement property values are at the: top, top left, top right, top start, top end, bottom, bottom left, bottom right, bottom start, bottom end, left, left top, left bottom, start, start top, start bottom, right, right top, right bottom, end, end top, end bottom. The default placement value is at the top.</div>
 </blockquote>
-<p><img src="https://via.placeholder.com/350x250" alt="placeholder"></p>
+<p><img src="https://via.placeholder.com/250x200" alt="placeholder"></p>
 </novo-grid>
-<h2>Behaviors</h2>
-<p><strong>Movement</strong></p>
-<p>A toast appears through an animated movement to draw the users attention. A banner slides in from the top of the page. A growl slides in from the side of the screen on which it is located. Multiple growls will stack by moving to the background when a new one appears.</p>
-<novo-grid columns="2" align="start" gap="2rem">
-<blockquote>
-<div class="p"><strong>Pattern</strong></div>
-<div class="p">Yellow for warnings</div>
-</blockquote>
-<p><img src="https://via.placeholder.com/350x250" alt="placeholder"></p>
-</novo-grid>
-<h2>How to configure</h2>
-<novo-grid columns="2" align="start" gap="2rem">
-<blockquote>
-<div class="p"><img src="https://via.placeholder.com/350x250" alt="placeholder"></div>
-<ul class="contains-do-list">
-<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Always do this</novo-text></li>
-</ul>
-<div class="p">Explain this</div>
-</blockquote>
-<blockquote>
-<div class="p"><img src="https://via.placeholder.com/350x250" alt="placeholder"></div>
-<ul class="contains-do-list">
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">times</novo-icon><novo-text color="grapefruit"> Never do this</novo-text></li>
-</ul>
-<div class="p">Explain this</div>
-</blockquote>
-</novo-grid>
-<h2>Patterns</h2>
-<novo-grid columns="2" align="start" gap="2rem">
-<blockquote>
-<div class="p"><strong>Pattern</strong></div>
-<div class="p">Why is it configured like this</div>
-</blockquote>
-<p><img src="https://via.placeholder.com/350x250" alt="placeholder"></p>
-<blockquote>
-<div class="p"><strong>Pattern</strong></div>
-<div class="p">Why is it configured like this</div>
-</blockquote>
-<p><img src="https://via.placeholder.com/350x250" alt="placeholder"></p>
-</novo-grid>
-<h2>Accessibility</h2>
-<p><strong>Implementation</strong></p>
-<p>Always include an <code>alt</code> attribute describing the information that is visually displayed in the image.</p>
 `,
   host: { class: 'markdown-page' }
 })
@@ -3460,44 +3401,6 @@ export class TooltipDevelopPage {
   host: { class: 'markdown-page' }
 })
 export class TooltipExamplesPage {
-  public params: any = {};
-}
-
-
-@Component({
-  selector: 'tooltip-usage-page',
-  template: `<novo-grid columns="2" align="start" gap="2rem">
-<div>
-<h3>Why?</h3>
-<p>Helper tooltips contain basic text that provides some additional information about an element.</p>
-<p><strong>Works with following input types</strong></p>
-<ul>
-<li>Default input, select, textarea</li>
-<li>novo-select</li>
-<li>novo-datepicker</li>
-</ul>
-</div>
-<img src="https://via.placeholder.com/350x250"/>
-<div>
-<h3>Use When</h3>
-<ul class="contains-do-list">
-<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Use a Banner when a form cannot be saved to show an error occurred.</novo-text></li>
-<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Use a Banner when an action can’t be completed due to an error or failure.</novo-text></li>
-<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Use a Growl when an action is successfully performed and the context, i.e. modal, is no longer available.</novo-text></li>
-<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> When an action happens asynchronously, e.g. file upload.</novo-text></li>
-</ul>
-</div>
-<div>
-<h3>Don′t Use When</h3>
-<ul class="contains-do-list">
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">times</novo-icon><novo-text color="grapefruit"> Don’t use it to confirm an action, a toast should be reactive not pro-active.</novo-text></li>
-</ul>
-</div>
-</novo-grid>
-`,
-  host: { class: 'markdown-page' }
-})
-export class TooltipUsagePage {
   public params: any = {};
 }
 
@@ -3944,31 +3847,140 @@ export class TypographyPage {
 
 
 @Component({
-  selector: 'chips-page',
-  template: `<h1>Chips <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/chips">(source)</a></h1>
-<p>The chips element (<code>chips</code>) represents a control that presents a menu of options. The options within are set by the <code>source</code> attribute. Options can be pre-selected for the user using the <code>ngModel</code> attribute. Chips are the multi-select version of <code>pickers</code></p>
-<h5>Basic Examples</h5>
+  selector: 'chips-design-page',
+  template: `<h2>Usage</h2>
+<novo-grid columns="2" align="start" gap="2rem">
+<div>
+<p>Chips show the user that a view or component represents data from multiple contexts. They can present as keywords, people or selected values, whether as an form input or filter criteria.</p>
+</div>
+<img src="/assets/images/ChipsOverview.png"/>
+<div>
+<h3>Use When</h3>
+<ul class="contains-do-list">
+<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> When you can select multiple items in a picker and you have selected the item.</novo-text></li>
+</ul>
+</div>
+<div>
+<h3>Don′t Use When</h3>
+<ul class="contains-do-list">
+<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">times</novo-icon><novo-text color="grapefruit"> When the user is only allowed to make a single selection from a picker input.</novo-text></li>
+</ul>
+</div>
+</novo-grid>
+<h2>Anatomy</h2>
+<novo-grid columns="2" align="start" gap="2rem">
+<img src="assets/images/ChipsAnatomy.png" width="450">
+<div>
+<ol>
+<li>
+<p><strong>Container</strong><br>
+This defines the boundaries of the chip.</p>
+</li>
+<li>
+<p><strong>Remove Button (Optional)</strong><br>
+Chips that can be removed should include the ‘close’ icon.</p>
+</li>
+<li>
+<p><strong>Text</strong><br>
+This will contain the display value of the chip.</p>
+</li>
+<li>
+<p><strong>Indicator/Avatar/Icon</strong><br>
+To convey additional context to the user about the type of content, use the Chip Indicator. ie, This should be set to the contact icon and color when displaying contact data vs the candidate icon and color when the Chip represents a selected candidate</p>
+</li>
+<li>
+<p><strong>Preview (optional)</strong><br>
+Additional details can be displayed in a Chip Preview PopOver, see [New Component]</p>
+</li>
+</ol>
+</div>
+</novo-grid>
+<h2>Behaviors</h2>
+<novo-grid columns="2" align="start" gap="2rem">
+<blockquote>
+<div class="p"><strong>Text Overflow</strong></div>
+<div class="p">When the chip text is too long for the available horizontal space, it truncates. The full text should be revealed with a tooltip on hover.</div>
+</blockquote>
+<blockquote>
+<div class="p"><strong>Chip List Overflow</strong></div>
+<div class="p">When horizontal space is limited in a chip list, the individual chips wrap to form another line.</div>
+</blockquote>
+</novo-grid>
+<h2>Accessibility</h2>
+<p><strong>KeyBoard Controls</strong></p>
+<p>The user should be able to use the <code>up</code> and <code>own</code> arrows to navigate between options and press <code>enter</code> to select the active option.</p>
+<p><strong>Implementation</strong></p>
+<p>The component should follow the <a href="https://www.w3.org/TR/wai-aria-practices/examples/combobox/aria1.1pattern/listbox-combo.html">ARIA combobox interaction</a> pattern and have a role of <code>combobox</code>.</p>
+`,
+  host: { class: 'markdown-page' }
+})
+export class ChipsDesignPage {
+  public params: any = {};
+}
+
+
+@Component({
+  selector: 'chips-develop-page',
+  template: `<h1>Technical Details</h1>
+<ul>
+<li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/chips">(github)</a></li>
+<li><strong>module:</strong> <strong>part of</strong> <code>NovoChipsModule</code></li>
+</ul>
+<p><strong>Usage</strong></p>
+<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">novo-chip-list</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">novo-chip</span>&gt;</span>Celtics<span class="hljs-tag">&lt;/<span class="hljs-name">novo-chips</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">novo-chip</span>&gt;</span>Bulls<span class="hljs-tag">&lt;/<span class="hljs-name">novo-chips</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">novo-chip-list</span>&gt;</span>
+</code></pre>
+<h1>Roadmap</h1>
+<ul class="contains-task-list">
+<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox"> Dark Mode</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox"> Chip List</li>
+</ul>
+<h1>Changelog</h1>
+<h3>6.0.0</h3>
+<p>Chips are now separated into their atomic parts: <code>novo-chip</code>, <code>novo-chip-list</code>, <code>novo-chip-input</code>.</p>
+<h1>Components</h1>
+<h2>NovoChipElement <code>novo-chip</code></h2>
+<p>The <code>novo-chip</code> component is the lowest level component for the chips module.  Contains all the styles contained with a single chip.  This component can start being used for more use-cases other than the multi-select picker.</p>
+<h3>Properties</h3>
+<p><props-table component="NovoChipElement"></props-table></p>
+<h2>NovoChipListElement <code>novo-chip-list</code></h2>
+<p>The <code>novo-chip-list</code> is just a container to wrap many chips within.  This should control basic flow and layout of the contained chips.</p>
+<h3>Properties</h3>
+<p><props-table component="NovoChipListElement"></props-table></p>
+`,
+  host: { class: 'markdown-page' }
+})
+export class ChipsDevelopPage {
+  public params: any = {};
+}
+
+
+@Component({
+  selector: 'chips-examples-page',
+  template: `<h2>Basic Examples</h2>
 <p>By clicking on the <code>chips</code> element, the options list will be displayed. Select any of the options by clicking on the item in the list. The value selected will be added to the list of selected values.</p>
 <p><code-example example="basic-chips"></code-example></p>
-<h5>Async Examples</h5>
+<h2>Async Examples</h2>
 <p>By clicking on the <code>chips</code> element, the options list will be displayed. Select any of the options by clicking on the item in the list. The value selected will be added to the list of selected values.</p>
 <p><code-example example="async-chips"></code-example></p>
-<h5>Formatted Examples</h5>
+<h2>Formatted Examples</h2>
 <p>By clicking on the <code>chips</code> element, the options list will be displayed. Select any of the options by clicking on the item in the list. The value selected will be added to the list of selected values.</p>
 <p><code-example example="formatted-chips"></code-example></p>
-<h5>Options Closing Example</h5>
+<h2>Options Closing Example</h2>
 <p>By clicking on the <code>chips</code> element, the options list will be displayed. Select any of the options by clicking on the item in the list. The value selected will be added to the list of selected values and the options list will be removed.</p>
 <p><code-example example="close-on-select-chips"></code-example></p>
-<h5>Grouped Multi Picker (categories) with Chips</h5>
+<h2>Grouped Multi Picker (categories) with Chips</h2>
 <p>Having custom templates makes it easy to customize the functionality of the picker, here is an example of a category selector</p>
 <p><code-example example="grouped-multi-picker"></code-example></p>
-<h5>Row Chips Example</h5>
+<h2>Row Chips Example</h2>
 <p>By clicking on the <code>row-chips</code> element, the options list will be displayed.  Select any of the options by clicking on the item in the list.  The value selected will be added to the list of selected values as a new row. By clicking the delete icon at the end of the row, the row will be removed from the list of selected values.</p>
 <p><code-example example="row-chips"></code-example></p>
 `,
   host: { class: 'markdown-page' }
 })
-export class ChipsPage {
+export class ChipsExamplesPage {
   public params: any = {};
 }
 
@@ -5174,7 +5186,44 @@ export class StepperPage {
 
 @Component({
   selector: 'tabs-design-page',
-  template: `<h2>Anatomy</h2>
+  template: `<h2>Usage</h2>
+<novo-grid columns="2" align="start" gap="2rem">
+<div>
+<p>Tabs make it easy to explore and switch between different views or functional aspects of an app or to browse categorized data sets. Tabs are used to section information over multiple pages within the same context. Only a single tab can be open at a time, allowing the user to focus on the information that the tab contains.</p>
+</div>
+<img src="/assets/images/ButtonOverview.png"/>
+<div>
+<h3>Use When</h3>
+<ul class="contains-do-list">
+<li class="bullhorn-do-item">
+<p><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> When a page contains a lot of information that can be clearly grouped and named.</novo-text></p>
+<p>E.g. A Candidate record page can be split up into Work History, Credentials, Education, etc.</p>
+</li>
+<li class="bullhorn-do-item">
+<p><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> For top level page navigation</novo-text></p>
+<p>For example: Vertical tabs can be used in a side navigation to switch between pages or bottom tabs can be used in mobile.</p>
+</li>
+</ul>
+</div>
+<div>
+<h3>Don′t Use When</h3>
+<ul class="contains-do-list">
+<li class="bullhorn-do-item">
+<p><novo-icon color="grapefruit" mr="1rem">times</novo-icon><novo-text color="grapefruit"> Do not use to separate related content into multiple parts or break up (inter)actions that are important to continue with the user’s workflow.</novo-text></p>
+<p>A user should be able to start and finish an action within a single tab. Instead consider using a Stepper component. Within a form, to organize and grouping fields together use a section divider.</p>
+</li>
+<li class="bullhorn-do-item">
+<p><novo-icon color="grapefruit" mr="1rem">times</novo-icon><novo-text color="grapefruit"> Do not use when the users needs to see the information on each tab at the same time.</novo-text></p>
+<p>If users need to see correlated content that is not on the tab they are viewing, consider using a Slideout. Or when data needs to be grouped further, use Cards.</p>
+</li>
+<li class="bullhorn-do-item">
+<p><novo-icon color="grapefruit" mr="1rem">times</novo-icon><novo-text color="grapefruit"> Do not use to control the view of a single component, instead use radio buttons or tiles (button bar / segmented button).</novo-text></p>
+<p>Don’t use tab to switch table data between states (past, present) (original, adjusted).</p>
+</li>
+</ul>
+</div>
+</novo-grid>
+<h2>Anatomy</h2>
 <novo-grid columns="2" align="start" gap="2rem">
 <img src="assets/images/ModalAnatomy.png" width="450">
 <div>
@@ -5448,53 +5497,6 @@ export class TabsDevelopPage {
   host: { class: 'markdown-page' }
 })
 export class TabsExamplesPage {
-  public params: any = {};
-}
-
-
-@Component({
-  selector: 'tabs-usage-page',
-  template: `<novo-grid columns="2" align="start" gap="2rem">
-<div>
-<h3>Why?</h3>
-<p>Tabs make it easy to explore and switch between different views or functional aspects of an app or to browse categorized data sets. Tabs are used to section information over multiple pages within the same context. Only a single tab can be open at a time, allowing the user to focus on the information that the tab contains.</p>
-</div>
-<img src="/assets/images/ButtonOverview.png"/>
-<div>
-<h3>Use When</h3>
-<ul class="contains-do-list">
-<li class="bullhorn-do-item">
-<p><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> When a page contains a lot of information that can be clearly grouped and named.</novo-text></p>
-<p>E.g. A Candidate record page can be split up into Work History, Credentials, Education, etc.</p>
-</li>
-<li class="bullhorn-do-item">
-<p><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> For top level page navigation</novo-text></p>
-<p>For example: Vertical tabs can be used in a side navigation to switch between pages or bottom tabs can be used in mobile.</p>
-</li>
-</ul>
-</div>
-<div>
-<h3>Don′t Use When</h3>
-<ul class="contains-do-list">
-<li class="bullhorn-do-item">
-<p><novo-icon color="grapefruit" mr="1rem">times</novo-icon><novo-text color="grapefruit"> Do not use to separate related content into multiple parts or break up (inter)actions that are important to continue with the user’s workflow.</novo-text></p>
-<p>A user should be able to start and finish an action within a single tab. Instead consider using a Stepper component. Within a form, to organize and grouping fields together use a section divider.</p>
-</li>
-<li class="bullhorn-do-item">
-<p><novo-icon color="grapefruit" mr="1rem">times</novo-icon><novo-text color="grapefruit"> Do not use when the users needs to see the information on each tab at the same time.</novo-text></p>
-<p>If users need to see correlated content that is not on the tab they are viewing, consider using a Slideout. Or when data needs to be grouped further, use Cards.</p>
-</li>
-<li class="bullhorn-do-item">
-<p><novo-icon color="grapefruit" mr="1rem">times</novo-icon><novo-text color="grapefruit"> Do not use to control the view of a single component, instead use radio buttons or tiles (button bar / segmented button).</novo-text></p>
-<p>Don’t use tab to switch table data between states (past, present) (original, adjusted).</p>
-</li>
-</ul>
-</div>
-</novo-grid>
-`,
-  host: { class: 'markdown-page' }
-})
-export class TabsUsagePage {
   public params: any = {};
 }
 
@@ -6213,13 +6215,12 @@ const routes: Routes = [
   {
     path: 'components/tooltip',
     component: TabsLayout,
-    data: { title: 'Tooltip', section: 'components', pages: [{ title: 'Usage', route: './usage'},{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}] },
+    data: { title: 'Tooltip', section: 'components', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}] },
     children: [
-      { path: 'usage', component: TooltipUsagePage },
       { path: 'design', component: TooltipDesignPage },
       { path: 'develop', component: TooltipDevelopPage },
       { path: 'examples', component: TooltipExamplesPage },
-      { path: '', redirectTo: '/components/tooltip/usage', pathMatch: 'full' },
+      { path: '', redirectTo: '/components/tooltip/design', pathMatch: 'full' },
     ]
   },
   { path: 'src/components', component: ComponentsPage, data: { title: 'Components', section: 'src' } },
@@ -6234,18 +6235,17 @@ const routes: Routes = [
   { path: 'design/iconography', component: IconographyPage, data: { title: 'Iconography', section: 'design' } },
   { path: 'design/spacing', component: SpacingPage, data: { title: 'Spacing', section: 'design' } },
   { path: 'design/typography', component: TypographyPage, data: { title: 'Typography', section: 'design' } },
-  { path: 'form-controls/chips', component: ChipsPage, data: { title: 'Chips', section: 'form-controls' } },
-  { path: 'form-controls/color-picker', component: ColorPickerPage, data: { title: 'Color Picker', section: 'form-controls' } },
-  { path: 'form-controls/date-picker', component: DatePickerPage, data: { title: 'Date Picker', section: 'form-controls' } },
-  { path: 'form-controls/editor', component: EditorPage, data: { title: 'Editor', section: 'form-controls' } },
-  { path: 'form-controls/form-groups', component: FormGroupsPage, data: { title: 'Form Groups', section: 'form-controls' } },
-  { path: 'form-controls/form', component: FormPage, data: { title: 'Form', section: 'form-controls' } },
-  { path: 'form-controls/multi-picker', component: MultiPickerPage, data: { title: 'Multi Picker', section: 'form-controls' } },
-  { path: 'form-controls/picker', component: PickerPage, data: { title: 'Picker', section: 'form-controls' } },
-  { path: 'form-controls/radio-buttons', component: RadioButtonsPage, data: { title: 'Radio Buttons', section: 'form-controls' } },
-  { path: 'form-controls/select', component: SelectPage, data: { title: 'Select', section: 'form-controls' } },
-  { path: 'form-controls/tiles', component: TilesPage, data: { title: 'Tiles', section: 'form-controls' } },
-  { path: 'form-controls/value', component: ValuePage, data: { title: 'Value', section: 'form-controls' } },
+  {
+    path: 'form-controls/chips',
+    component: TabsLayout,
+    data: { title: 'Chips', section: 'form-controls', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}] },
+    children: [
+      { path: 'design', component: ChipsDesignPage },
+      { path: 'develop', component: ChipsDevelopPage },
+      { path: 'examples', component: ChipsExamplesPage },
+      { path: '', redirectTo: '/form-controls/chips/design', pathMatch: 'full' },
+    ]
+  },
   {
     path: 'form-controls/date picker',
     component: TabsLayout,
@@ -6282,6 +6282,17 @@ const routes: Routes = [
       { path: '', redirectTo: '/form-controls/time picker/usage', pathMatch: 'full' },
     ]
   },
+  { path: 'form-controls/color-picker', component: ColorPickerPage, data: { title: 'Color Picker', section: 'form-controls' } },
+  { path: 'form-controls/date-picker', component: DatePickerPage, data: { title: 'Date Picker', section: 'form-controls' } },
+  { path: 'form-controls/editor', component: EditorPage, data: { title: 'Editor', section: 'form-controls' } },
+  { path: 'form-controls/form-groups', component: FormGroupsPage, data: { title: 'Form Groups', section: 'form-controls' } },
+  { path: 'form-controls/form', component: FormPage, data: { title: 'Form', section: 'form-controls' } },
+  { path: 'form-controls/multi-picker', component: MultiPickerPage, data: { title: 'Multi Picker', section: 'form-controls' } },
+  { path: 'form-controls/picker', component: PickerPage, data: { title: 'Picker', section: 'form-controls' } },
+  { path: 'form-controls/radio-buttons', component: RadioButtonsPage, data: { title: 'Radio Buttons', section: 'form-controls' } },
+  { path: 'form-controls/select', component: SelectPage, data: { title: 'Select', section: 'form-controls' } },
+  { path: 'form-controls/tiles', component: TilesPage, data: { title: 'Tiles', section: 'form-controls' } },
+  { path: 'form-controls/value', component: ValuePage, data: { title: 'Value', section: 'form-controls' } },
   {
     path: 'layouts/card',
     component: TabsLayout,
@@ -6301,13 +6312,12 @@ const routes: Routes = [
   {
     path: 'layouts/tabs',
     component: TabsLayout,
-    data: { title: 'Tabs', section: 'layouts', pages: [{ title: 'Usage', route: './usage'},{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}] },
+    data: { title: 'Tabs', section: 'layouts', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}] },
     children: [
-      { path: 'usage', component: TabsUsagePage },
       { path: 'design', component: TabsDesignPage },
       { path: 'develop', component: TabsDevelopPage },
       { path: 'examples', component: TabsExamplesPage },
-      { path: '', redirectTo: '/layouts/tabs/usage', pathMatch: 'full' },
+      { path: '', redirectTo: '/layouts/tabs/design', pathMatch: 'full' },
     ]
   },
   {
@@ -6329,7 +6339,7 @@ const routes: Routes = [
 ];
 
 export const PAGE_LIST = [
-  AceEditorPage,AgendaDesignPage,AgendaDevelopPage,AgendaExamplesPage,AsideDesignPage,AsideDevelopPage,AsideExamplesPage,AutocompleteDesignPage,AutocompleteDevelopPage,AutocompleteExamplesPage,AvatarDesignPage,AvatarDevelopPage,AvatarExamplesPage,BreadcrumbDesignPage,BreadcrumbDevelopPage,BreadcrumbExamplesPage,ButtonDesignPage,ButtonDevelopPage,ButtonExamplesPage,CalendarDesignPage,CalendarDevelopPage,CalendarExamplesPage,CalendarPage,ComponentsPage,DataTablePage,DropdownDesignPage,DropdownDevelopPage,DropdownExamplesPage,DropdownUsagePage,FieldDesignPage,FieldDevelopPage,FieldExamplesPage,FieldUsagePage,IconDesignPage,IconDevelopPage,IconExamplesPage,LoadingDesignPage,LoadingDevelopPage,LoadingExamplesPage,MenuDesignPage,MenuDevelopPage,MenuExamplesPage,ModalDesignPage,ModalDevelopPage,ModalExamplesPage,NonIdealStateDesignPage,NonIdealStateDevelopPage,NonIdealStateExamplesPage,PopoverDesignPage,PopoverDevelopPage,PopoverExamplesPage,ProgressDesignPage,ProgressDevelopPage,ProgressExamplesPage,ProgressUsagePage,QuickNotePage,SearchPage,SlidesPage,SwitchPage,TabbedGroupPickerPage,TablePage,TipWellDesignPage,TipWellDevelopPage,TipWellExamplesPage,ToasterDesignPage,ToasterDevelopPage,ToasterExamplesPage,TooltipDesignPage,TooltipDevelopPage,TooltipExamplesPage,TooltipUsagePage,ColorsPage,CompositionPage,DesignPage,IconographyPage,SpacingPage,TypographyPage,ChipsPage,ColorPickerPage,DatePickerDesignPage,DatePickerDevelopPage,DatePickerExamplesPage,DatePickerUsagePage,DatePickerPage,DateTimePickerDesignPage,DateTimePickerDevelopPage,DateTimePickerExamplesPage,DateTimePickerUsagePage,EditorPage,FormControlsPage,FormGroupsPage,FormPage,MultiPickerPage,PickerPage,RadioButtonsPage,SelectPage,TilesPage,TimePickerDesignPage,TimePickerDevelopPage,TimePickerExamplesPage,TimePickerUsagePage,ValuePage,HomePage,CardDesignPage,CardDevelopPage,CardExamplesPage,ExpansionPage,HeaderPage,LayoutsPage,ListPage,SidenavPage,StepperPage,TabsDesignPage,TabsDevelopPage,TabsExamplesPage,TabsUsagePage,PatternsNativeFormsPage,PatternsTestPage,PatternsPage,TemplatesPage,ChomskyPage,FieldInteractionsPage,PipesPage,SecurityPage
+  AceEditorPage,AgendaDesignPage,AgendaDevelopPage,AgendaExamplesPage,AsideDesignPage,AsideDevelopPage,AsideExamplesPage,AutocompleteDesignPage,AutocompleteDevelopPage,AutocompleteExamplesPage,AvatarDesignPage,AvatarDevelopPage,AvatarExamplesPage,BreadcrumbDesignPage,BreadcrumbDevelopPage,BreadcrumbExamplesPage,ButtonDesignPage,ButtonDevelopPage,ButtonExamplesPage,CalendarDesignPage,CalendarDevelopPage,CalendarExamplesPage,CalendarPage,ComponentsPage,DataTablePage,DropdownDesignPage,DropdownDevelopPage,DropdownExamplesPage,DropdownUsagePage,FieldDesignPage,FieldDevelopPage,FieldExamplesPage,FieldUsagePage,IconDesignPage,IconDevelopPage,IconExamplesPage,LoadingDesignPage,LoadingDevelopPage,LoadingExamplesPage,MenuDesignPage,MenuDevelopPage,MenuExamplesPage,ModalDesignPage,ModalDevelopPage,ModalExamplesPage,NonIdealStateDesignPage,NonIdealStateDevelopPage,NonIdealStateExamplesPage,PopoverDesignPage,PopoverDevelopPage,PopoverExamplesPage,ProgressDesignPage,ProgressDevelopPage,ProgressExamplesPage,ProgressUsagePage,QuickNotePage,SearchPage,SlidesPage,SwitchPage,TabbedGroupPickerPage,TablePage,TipWellDesignPage,TipWellDevelopPage,TipWellExamplesPage,ToasterDesignPage,ToasterDevelopPage,ToasterExamplesPage,TooltipDesignPage,TooltipDevelopPage,TooltipExamplesPage,ColorsPage,CompositionPage,DesignPage,IconographyPage,SpacingPage,TypographyPage,ChipsDesignPage,ChipsDevelopPage,ChipsExamplesPage,ColorPickerPage,DatePickerDesignPage,DatePickerDevelopPage,DatePickerExamplesPage,DatePickerUsagePage,DatePickerPage,DateTimePickerDesignPage,DateTimePickerDevelopPage,DateTimePickerExamplesPage,DateTimePickerUsagePage,EditorPage,FormControlsPage,FormGroupsPage,FormPage,MultiPickerPage,PickerPage,RadioButtonsPage,SelectPage,TilesPage,TimePickerDesignPage,TimePickerDevelopPage,TimePickerExamplesPage,TimePickerUsagePage,ValuePage,HomePage,CardDesignPage,CardDevelopPage,CardExamplesPage,ExpansionPage,HeaderPage,LayoutsPage,ListPage,SidenavPage,StepperPage,TabsDesignPage,TabsDevelopPage,TabsExamplesPage,PatternsNativeFormsPage,PatternsTestPage,PatternsPage,TemplatesPage,ChomskyPage,FieldInteractionsPage,PipesPage,SecurityPage
 ];
 
 @NgModule({

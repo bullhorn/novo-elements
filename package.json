@@ -33,7 +33,6 @@
     "version:elements": "standard-version",
     "release:elements": "standard-version",
     "postrelease:elements": "git push --follow-tags origin master; npm run build; cd dist/novo-elements && npm publish",
-    "version:elements": "standard-version",
     "snapshot-publish": "bash snapshot-publish",
     "prettier": "prettier --write \"./projects/**/*.{ts,js,html,scss}\"",
     "prettier:check": "prettier --list-different \"./projects/**/*.{ts,js,html,scss}\""
