@@ -48,7 +48,6 @@ import { DataTableState } from '../state/data-table-state.service';
         (sortChange)="sort()"
         [value]="sortValue"
       ></novo-sort-button>
-
       <novo-dropdown
         *ngIf="config.filterable"
         side="right"
@@ -97,7 +96,6 @@ import { DataTableState } from '../state/data-table-state.service';
               [class.active]="labels.customDateRange === activeDateFilter"
               (click)="toggleCustomRange($event, true)"
               *ngIf="config.filterConfig.allowCustomRange && !showCustomRange"
-              [keepOpen]="true"
             >
               {{ labels.customDateRange }} <i class="bhi-check" *ngIf="labels.customDateRange === activeDateFilter"></i>
             </novo-option>
@@ -136,7 +134,6 @@ import { DataTableState } from '../state/data-table-state.service';
                 [hidden]="multiSelectOptionIsHidden(option)"
                 (click)="toggleSelection(option)"
                 [attr.data-automation-id]="'novo-data-table-filter-' + (option?.label || option)"
-                [keepOpen]="true"
               >
                 <span>{{ option?.label || option }}</span>
                 <i
@@ -148,12 +145,12 @@ import { DataTableState } from '../state/data-table-state.service';
             <p class="filter-null-results" [hidden]="multiSelectHasVisibleOptions()">{{ labels.pickerEmpty }}</p>
           </novo-optgroup>
           <novo-optgroup *ngSwitchCase="'custom'">
-            <div class="filter-search" keepOpen="true">
+            <div class="filter-search">
               <ng-container *ngTemplateOutlet="filterTemplate; context: { $implicit: config }"></ng-container>
             </div>
           </novo-optgroup>
           <novo-optgroup *ngSwitchDefault>
-            <div class="filter-search" keepOpen="true">
+            <div class="filter-search">
               <input
                 [type]="config.filterConfig.type"
                 [(ngModel)]="filter"
@@ -346,14 +343,10 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
       this.multiSelectedOptions = this.filter ? [...this.filter] : [];
       if (this.config.filterConfig.options) {
         if (typeof this.config.filterConfig.options[0] === 'string') {
-          this.multiSelectedOptionIsHidden = (this.config.filterConfig.options as string[]).map(
-            (
-              option: string,
-            ): {
-              option: string;
-              hidden: boolean;
-            } => ({ option, hidden: false }),
-          );
+          this.multiSelectedOptionIsHidden = (this.config.filterConfig.options as string[]).map((option: string): {
+            option: string;
+            hidden: boolean;
+          } => ({ option, hidden: false }));
         } else {
           this.multiSelectedOptionIsHidden = (this.config.filterConfig.options as IDataTableColumnFilterOption[]).map(
             (option: IDataTableColumnFilterOption): { option: IDataTableColumnFilterOption; hidden: boolean } => ({
