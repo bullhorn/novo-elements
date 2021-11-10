@@ -70,7 +70,7 @@ function makeNode(token, TokenConstructor) {
   let content = token.content.slice(3);
 
   if (token.content.indexOf('(✓) ') === 0) {
-    node.content = `<novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass">${content}</novo-text>`;
+    node.content = `<novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass">${content}</novo-text>`;
   } else if (token.content.indexOf('(x) ') === 0 || token.content.indexOf('(X) ') === 0) {
     node.content = `<novo-icon color="grapefruit" mr="1rem">times</novo-icon><novo-text color="grapefruit">${content}</novo-text>`;
   }

@@ -33,11 +33,11 @@ Used to help display scheduled events for the day/week/month. The agenda compone
 <h3>Use When</h3>
 <ul class="contains-do-list">
 <li class="bullhorn-do-item">
-<p><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> When information can be grouped and the user might need access to multiple groups of information at once.</novo-text></p>
+<p><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> When information can be grouped and the user might need access to multiple groups of information at once.</novo-text></p>
 <p>TBW</p>
 </li>
 <li class="bullhorn-do-item">
-<p><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> When providing a summary of content as an entry point to a larger grouping of information</novo-text></p>
+<p><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> When providing a summary of content as an entry point to a larger grouping of information</novo-text></p>
 <p>TBW</p>
 </li>
 </ul>
@@ -257,7 +257,7 @@ Caption text to display helpful information, warnings, or errors.</p>
 <blockquote>
 <div class="p"><img src="https://via.placeholder.com/350x250" alt="placeholder"></div>
 <ul class="contains-do-list">
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Always do this</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Always do this</novo-text></li>
 </ul>
 <div class="p">Explain this</div>
 </blockquote>
@@ -362,8 +362,8 @@ export class AutocompleteExamplesPage {
 <div>
 <h3>Use When</h3>
 <ul class="contains-do-list">
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Loading content.</novo-text></li>
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Processing an long running action.</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Loading content.</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Processing an long running action.</novo-text></li>
 </ul>
 </div>
 <div>
@@ -831,15 +831,15 @@ export class BreadcrumbUsagePage {
 <div>
 <h3>Use When</h3>
 <ul class="contains-do-list">
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Affording interaction to key behaviors and features.</novo-text></li>
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Confirming or submitting information entered into a form.</novo-text></li>
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Cancelling an action.</novo-text></li>
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Resetting a form or dataset.</novo-text></li>
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Closing a container or section.</novo-text></li>
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Opening a popover.</novo-text></li>
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Moving forward or backward through a stepper workflow.</novo-text></li>
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Creating an object within a group.</novo-text></li>
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Applying a non-critical action to a dataset.</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Affording interaction to key behaviors and features.</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Confirming or submitting information entered into a form.</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Cancelling an action.</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Resetting a form or dataset.</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Closing a container or section.</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Opening a popover.</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Moving forward or backward through a stepper workflow.</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Creating an object within a group.</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Applying a non-critical action to a dataset.</novo-text></li>
 </ul>
 </div>
 <div>
@@ -1006,7 +1006,7 @@ export class ButtonExamplesPage {
 <h3>Use When</h3>
 <ul class="contains-do-list">
 <li class="bullhorn-do-item">
-<p><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> When the user needs to select a date to control or filter data on the page.</novo-text></p>
+<p><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> When the user needs to select a date to control or filter data on the page.</novo-text></p>
 <p>The <code>novo-calendar</code> component by itself is just a way to store a date or date range value in the view model.  These date can be used to manipulate the UI.</p>
 </li>
 </ul>
@@ -1255,7 +1255,7 @@ The action items displayed within the list.</p>
 <blockquote>
 <div class="p"><img src="https://via.placeholder.com/350x250" alt="placeholder"></div>
 <ul class="contains-do-list">
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Always do this</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Always do this</novo-text></li>
 </ul>
 <div class="p">Explain this</div>
 </blockquote>
@@ -1369,15 +1369,15 @@ export class DropdownExamplesPage {
 <div>
 <h3>Use When</h3>
 <ul class="contains-do-list">
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Affording interaction to key behaviors and features.</novo-text></li>
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Confirming or submitting information entered into a form.</novo-text></li>
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Cancelling an action.</novo-text></li>
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Resetting a form or dataset.</novo-text></li>
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Closing a container or section.</novo-text></li>
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Opening a popover.</novo-text></li>
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Moving forward or backward through a stepper workflow.</novo-text></li>
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Creating an object within a group.</novo-text></li>
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Applying a non-critical action to a dataset.</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Affording interaction to key behaviors and features.</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Confirming or submitting information entered into a form.</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Cancelling an action.</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Resetting a form or dataset.</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Closing a container or section.</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Opening a popover.</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Moving forward or backward through a stepper workflow.</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Creating an object within a group.</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Applying a non-critical action to a dataset.</novo-text></li>
 </ul>
 </div>
 <div>
@@ -1440,7 +1440,7 @@ Caption text to display helpful information, warnings, or errors.</p>
 <blockquote>
 <div class="p"><img src="https://via.placeholder.com/350x250" alt="placeholder"></div>
 <ul class="contains-do-list">
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Always do this</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Always do this</novo-text></li>
 </ul>
 <div class="p">Explain this</div>
 </blockquote>
@@ -1576,7 +1576,7 @@ export class FieldExamplesPage {
 <div>
 <h3>Use When</h3>
 <ul class="contains-do-list">
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> A user must enter text data</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> A user must enter text data</novo-text></li>
 </ul>
 </div>
 <div>
@@ -1642,7 +1642,7 @@ Caption text to display helpful information, warnings, or errors.</p>
 <blockquote>
 <div class="p"><img src="https://via.placeholder.com/350x250" alt="placeholder"></div>
 <ul class="contains-do-list">
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Always do this</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Always do this</novo-text></li>
 </ul>
 <div class="p">Explain this</div>
 </blockquote>
@@ -1733,10 +1733,10 @@ export class IconExamplesPage {
 <div>
 <h3>Use When</h3>
 <ul class="contains-do-list">
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Additional context for action is required.</novo-text></li>
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Help user easily identify what action does.</novo-text></li>
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Help identify state, ie. error, warning, etc.</novo-text></li>
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Spacing is limited.</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Additional context for action is required.</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Help user easily identify what action does.</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Help identify state, ie. error, warning, etc.</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Spacing is limited.</novo-text></li>
 </ul>
 </div>
 <div>
@@ -1819,7 +1819,7 @@ Caption text to display helpful information, warnings, or errors.</p>
 <blockquote>
 <div class="p"><img src="https://via.placeholder.com/350x250" alt="placeholder"></div>
 <ul class="contains-do-list">
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Always do this</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Always do this</novo-text></li>
 </ul>
 <div class="p">Explain this</div>
 </blockquote>
@@ -1914,8 +1914,8 @@ export class LoadingExamplesPage {
 <div>
 <h3>Use When</h3>
 <ul class="contains-do-list">
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Loading content.</novo-text></li>
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Processing an long running action.</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Loading content.</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Processing an long running action.</novo-text></li>
 </ul>
 </div>
 <div>
@@ -1945,8 +1945,8 @@ export class LoadingUsagePage {
 <div>
 <h3>Use When</h3>
 <ul class="contains-do-list">
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Displaying multiple actions to perform on an item or selection</novo-text></li>
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Processing an long running action.</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Displaying multiple actions to perform on an item or selection</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Processing an long running action.</novo-text></li>
 </ul>
 </div>
 <div>
@@ -2376,9 +2376,9 @@ export class NonIdealStateExamplesPage {
 <div>
 <h3>Use When</h3>
 <ul class="contains-do-list">
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Content is missing from a page and you need to communicate why.</novo-text></li>
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> A user is starting a new workflow and hasn’t created any content yet.</novo-text></li>
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> A user has nothing more to do. For example, when they have completed all tasks, read all messages, or seen all notifications</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Content is missing from a page and you need to communicate why.</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> A user is starting a new workflow and hasn’t created any content yet.</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> A user has nothing more to do. For example, when they have completed all tasks, read all messages, or seen all notifications</novo-text></li>
 </ul>
 </div>
 <div>
@@ -2443,7 +2443,7 @@ Caption text to display helpful information, warnings, or errors.</p>
 <blockquote>
 <div class="p"><img src="https://via.placeholder.com/350x250" alt="placeholder"></div>
 <ul class="contains-do-list">
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Always do this</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Always do this</novo-text></li>
 </ul>
 <div class="p">Explain this</div>
 </blockquote>
@@ -2537,8 +2537,8 @@ export class ProgressExamplesPage {
 <div>
 <h3>Use When</h3>
 <ul class="contains-do-list">
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Processing an long running action.</novo-text></li>
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Displaying metrics data that can be represents as a bar.</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Processing an long running action.</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Displaying metrics data that can be represents as a bar.</novo-text></li>
 </ul>
 </div>
 <div>
@@ -3210,7 +3210,7 @@ Caption text to display helpful information, warnings, or errors.</p>
 <blockquote>
 <div class="p"><img src="https://via.placeholder.com/350x250" alt="placeholder"></div>
 <ul class="contains-do-list">
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Always do this</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Always do this</novo-text></li>
 </ul>
 <div class="p">Explain this</div>
 </blockquote>
@@ -3331,8 +3331,8 @@ export class DatePickerExamplesPage {
 <div>
 <h3>Use When</h3>
 <ul class="contains-do-list">
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Loading content.</novo-text></li>
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Processing an long running action.</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Loading content.</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Processing an long running action.</novo-text></li>
 </ul>
 </div>
 <div>
@@ -3429,7 +3429,7 @@ Caption text to display helpful information, warnings, or errors.</p>
 <blockquote>
 <div class="p"><img src="https://via.placeholder.com/350x250" alt="placeholder"></div>
 <ul class="contains-do-list">
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Always do this</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Always do this</novo-text></li>
 </ul>
 <div class="p">Explain this</div>
 </blockquote>
@@ -3543,8 +3543,8 @@ export class DateTimePickerExamplesPage {
 <div>
 <h3>Use When</h3>
 <ul class="contains-do-list">
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Loading content.</novo-text></li>
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Processing an long running action.</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Loading content.</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Processing an long running action.</novo-text></li>
 </ul>
 </div>
 <div>
@@ -3819,7 +3819,7 @@ Caption text to display helpful information, warnings, or errors.</p>
 <blockquote>
 <div class="p"><img src="https://via.placeholder.com/350x250" alt="placeholder"></div>
 <ul class="contains-do-list">
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Always do this</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Always do this</novo-text></li>
 </ul>
 <div class="p">Explain this</div>
 </blockquote>
@@ -3932,8 +3932,8 @@ export class TimePickerExamplesPage {
 <div>
 <h3>Use When</h3>
 <ul class="contains-do-list">
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Loading content.</novo-text></li>
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Processing an long running action.</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Loading content.</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Processing an long running action.</novo-text></li>
 </ul>
 </div>
 <div>
@@ -4208,11 +4208,11 @@ export class CardExamplesPage {
 <h3>Use When</h3>
 <ul class="contains-do-list">
 <li class="bullhorn-do-item">
-<p><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> When information can be grouped and the user might need access to multiple groups of information at once.</novo-text></p>
+<p><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> When information can be grouped and the user might need access to multiple groups of information at once.</novo-text></p>
 <p>TBW</p>
 </li>
 <li class="bullhorn-do-item">
-<p><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> When providing a summary of content as an entry point to a larger grouping of information</novo-text></p>
+<p><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> When providing a summary of content as an entry point to a larger grouping of information</novo-text></p>
 <p>TBW</p>
 </li>
 </ul>
@@ -4434,7 +4434,7 @@ Any theme color can be applied to tabs with the <code>color</code> attribute to 
 <blockquote>
 <div class="p"><img src="https://via.placeholder.com/350x250" alt="placeholder"></div>
 <ul class="contains-do-list">
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Horizontal Tabs</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Horizontal Tabs</novo-text></li>
 </ul>
 <div class="p">This is the default behavior</div>
 </blockquote>
@@ -4666,11 +4666,11 @@ export class TabsExamplesPage {
 <h3>Use When</h3>
 <ul class="contains-do-list">
 <li class="bullhorn-do-item">
-<p><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> When a page contains a lot of information that can be clearly grouped and named.</novo-text></p>
+<p><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> When a page contains a lot of information that can be clearly grouped and named.</novo-text></p>
 <p>E.g. A Candidate record page can be split up into Work History, Credentials, Education, etc.</p>
 </li>
 <li class="bullhorn-do-item">
-<p><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> For top level page navigation</novo-text></p>
+<p><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> For top level page navigation</novo-text></p>
 <p>For example: Vertical tabs can be used in a side navigation to switch between pages or bottom tabs can be used in mobile.</p>
 </li>
 </ul>
@@ -5095,7 +5095,7 @@ Caption text to display helpful information, warnings, or errors.</p>
 <blockquote>
 <div class="p"><img src="https://via.placeholder.com/350x250" alt="placeholder"></div>
 <ul class="contains-do-list">
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Always do this</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Always do this</novo-text></li>
 </ul>
 <div class="p">Explain this</div>
 </blockquote>
@@ -5264,7 +5264,7 @@ export class AsideExamplesPage {
 <div>
 <h3>Use When</h3>
 <ul class="contains-do-list">
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Providing supporting visual content, e.g., an image or chart, within the context of a larger composition</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Providing supporting visual content, e.g., an image or chart, within the context of a larger composition</novo-text></li>
 </ul>
 </div>
 <div>
@@ -5441,7 +5441,7 @@ Description and purpose of this element</p>
 <h2>Best Practices</h2>
 <ul class="contains-do-list">
 <li class="bullhorn-do-item">
-<p><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Do Use Multiple Columns to make content digestible:</novo-text></p>
+<p><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Do Use Multiple Columns to make content digestible:</novo-text></p>
 <p>If a Modal contains a lot of data, multiple columns help to make sure the user doesn’t miss any aspects of the task at hand. (Example - Make Offer modal from shifts, conflict management from shifts)</p>
 </li>
 <li class="bullhorn-do-item">
@@ -5461,7 +5461,7 @@ Description and purpose of this element</p>
 <blockquote>
 <div class="p"><img src="https://via.placeholder.com/350x250" alt="placeholder"></div>
 <ul class="contains-do-list">
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Do use color to relate modals in a multi-step workflow:</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Do use color to relate modals in a multi-step workflow:</novo-text></li>
 </ul>
 <div class="p">Carry over the Entity color from the main content of the screen if the task in the modal is directly related to that Entity. (Ex: adding a shift)</div>
 </blockquote>
@@ -5476,7 +5476,7 @@ Description and purpose of this element</p>
 <h2>Accessibility</h2>
 <ul class="contains-do-list">
 <li class="bullhorn-do-item">
-<p><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Do use multiple avenues to convey meaning</novo-text></p>
+<p><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Do use multiple avenues to convey meaning</novo-text></p>
 <p>Using color, iconography, and text together to convey a warning makes it clearer for people to understand. (show delete modal that is right)</p>
 </li>
 <li class="bullhorn-do-item">
@@ -5702,15 +5702,15 @@ export class ModalExamplesPage {
 <h3>Use When</h3>
 <ul class="contains-do-list">
 <li class="bullhorn-do-item">
-<p><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Do use to confirm irreversible actions:</novo-text></p>
+<p><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Do use to confirm irreversible actions:</novo-text></p>
 <p>Use a notification modal to ask the user to confirm when performing an irreversible action such as deleting a record, navigating away from something unsaved, or converting a file.</p>
 </li>
 <li class="bullhorn-do-item">
-<p><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Do use to confirm actions that will affect other records:</novo-text></p>
+<p><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Do use to confirm actions that will affect other records:</novo-text></p>
 <p>Use notification modals to make the user aware that their action will affect other records. The modal should ask them to confirm this action and explicitly say what the changes to other records will be. (find an example for this - deleting shifts could work, sending out bulk emails)</p>
 </li>
 <li class="bullhorn-do-item">
-<p><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Do use for a task related to the main content:</novo-text></p>
+<p><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Do use for a task related to the main content:</novo-text></p>
 <p>Workflow modals should always be related to the main content of the screen they are on top of. For example, when assigning candidates to shifts in the Scheduler.</p>
 </li>
 </ul>
@@ -5825,7 +5825,7 @@ By default the a toast will always have a dismiss action, but can also have a fo
 <blockquote>
 <div class="p"><img src="https://via.placeholder.com/350x250" alt="placeholder"></div>
 <ul class="contains-do-list">
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Always do this</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Always do this</novo-text></li>
 </ul>
 <div class="p">Explain this</div>
 </blockquote>
@@ -5947,10 +5947,10 @@ export class PopoverExamplesPage {
 <div>
 <h3>Use When</h3>
 <ul class="contains-do-list">
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Use a Banner when a form cannot be saved to show an error occurred.</novo-text></li>
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Use a Banner when an action can’t be completed due to an error or failure.</novo-text></li>
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Use a Growl when an action is successfully performed and the context, i.e. modal, is no longer available.</novo-text></li>
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> When an action happens asynchronously, e.g. file upload.</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Use a Banner when a form cannot be saved to show an error occurred.</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Use a Banner when an action can’t be completed due to an error or failure.</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Use a Growl when an action is successfully performed and the context, i.e. modal, is no longer available.</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> When an action happens asynchronously, e.g. file upload.</novo-text></li>
 </ul>
 </div>
 <div>
@@ -5994,8 +5994,8 @@ export class SecurityPage {
 <div>
 <h3>Use When</h3>
 <ul class="contains-do-list">
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> The help text is no longer needed after the user has read the contents.</novo-text></li>
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> To provide additional context and links related to the data to educate the user on how the a feature works.</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> The help text is no longer needed after the user has read the contents.</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> To provide additional context and links related to the data to educate the user on how the a feature works.</novo-text></li>
 </ul>
 </div>
 <div>
@@ -6132,10 +6132,10 @@ export class TipWellPage {
 <div>
 <h3>Use When</h3>
 <ul class="contains-do-list">
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Use a Banner when a form cannot be saved to show an error occurred.</novo-text></li>
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Use a Banner when an action can’t be completed due to an error or failure.</novo-text></li>
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Use a Growl when an action is successfully performed and the context, i.e. modal, is no longer available.</novo-text></li>
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> When an action happens asynchronously, e.g. file upload.</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Use a Banner when a form cannot be saved to show an error occurred.</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Use a Banner when an action can’t be completed due to an error or failure.</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Use a Growl when an action is successfully performed and the context, i.e. modal, is no longer available.</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> When an action happens asynchronously, e.g. file upload.</novo-text></li>
 </ul>
 </div>
 <div>
@@ -6209,7 +6209,7 @@ By default the a toast will always have a dismiss action, but can also have a fo
 <blockquote>
 <div class="p"><img src="https://via.placeholder.com/350x250" alt="placeholder"></div>
 <ul class="contains-do-list">
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Always do this</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Always do this</novo-text></li>
 </ul>
 <div class="p">Explain this</div>
 </blockquote>
@@ -6370,7 +6370,7 @@ By default the a toast will always have a dismiss action, but can also have a fo
 <blockquote>
 <div class="p"><img src="https://via.placeholder.com/350x250" alt="placeholder"></div>
 <ul class="contains-do-list">
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Always do this</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Always do this</novo-text></li>
 </ul>
 <div class="p">Explain this</div>
 </blockquote>
@@ -6492,10 +6492,10 @@ export class TooltipExamplesPage {
 <div>
 <h3>Use When</h3>
 <ul class="contains-do-list">
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Use a Banner when a form cannot be saved to show an error occurred.</novo-text></li>
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Use a Banner when an action can’t be completed due to an error or failure.</novo-text></li>
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> Use a Growl when an action is successfully performed and the context, i.e. modal, is no longer available.</novo-text></li>
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">check</novo-icon><novo-text color="grass"> When an action happens asynchronously, e.g. file upload.</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Use a Banner when a form cannot be saved to show an error occurred.</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Use a Banner when an action can’t be completed due to an error or failure.</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Use a Growl when an action is successfully performed and the context, i.e. modal, is no longer available.</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> When an action happens asynchronously, e.g. file upload.</novo-text></li>
 </ul>
 </div>
 <div>
