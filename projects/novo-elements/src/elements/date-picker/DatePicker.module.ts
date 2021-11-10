@@ -7,7 +7,7 @@ import { TextMaskModule } from 'angular2-text-mask';
 import { NovoPipesModule } from '../../pipes/Pipes.module';
 // APP
 import { NovoButtonModule } from '../button';
-import { NovoCalendarModule } from '../calendar/calendar.module';
+import { NovoCalendarModule } from '../calendar/Calendar.module';
 import { NovoOverlayModule } from '../common/overlay/Overlay.module';
 import { NovoIconModule } from '../icon/Icon.module';
 import { NovoChipsModule } from './../chips/Chips.module';

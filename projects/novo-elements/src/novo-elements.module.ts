@@ -9,7 +9,7 @@ import { NovoAsideModule } from './elements/aside/aside.module';
 import { NovoAvatarModule } from './elements/avatar/Avatar.module';
 import { NovoBreadcrumbModule } from './elements/breadcrumbs/Breadcrumb.module';
 import { NovoButtonModule } from './elements/button/Button.module';
-import { NovoCalendarModule } from './elements/calendar/calendar.module';
+import { NovoCalendarModule } from './elements/calendar/Calendar.module';
 import { NovoCardModule } from './elements/card/Card.module';
 import { NovoCategoryDropdownModule } from './elements/category-dropdown/CategoryDropdown.module';
 import { NovoCheckboxModule } from './elements/checkbox/Checkbox.module';
