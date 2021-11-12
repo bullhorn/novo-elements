@@ -217,6 +217,18 @@ $light-colors: (
 // All colors
 $all-colors: map-merge($dark-colors, $light-colors);
 
+// Typography
+// --------------------------------------------------
+$base-font-size: 13px;
+$base-font-family: 'Roboto',
+  sans-serif;
+$base-font-color: $dark;
+$base-line-height: 1rem;
+$alt-font-family: Georgia,
+  'Times New Roman',
+  Times,
+  serif;
+
 // Whiteframes
 // -------------------------
 $whiteframe-shadow-z1: 0px 2px 5px 0 rgba(0, 0, 0, 0.26) !default;
