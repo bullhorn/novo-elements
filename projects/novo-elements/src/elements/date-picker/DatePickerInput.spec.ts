@@ -6,7 +6,7 @@ import { NovoDatePickerModule } from './DatePicker.module';
 // App
 import { NovoDatePickerInputElement } from './DatePickerInput';
 
-xdescribe('Elements: NovoDatePickerInputElement', () => {
+describe('Elements: NovoDatePickerInputElement', () => {
   let fixture;
   let component;
 
@@ -30,6 +30,24 @@ xdescribe('Elements: NovoDatePickerInputElement', () => {
       component.formatDate(mockValue, true);
       expect(component.dateFormatService.parseString).toHaveBeenCalled();
       expect(component.dispatchOnChange).toHaveBeenCalled();
+    });
+  });
+
+  describe('Method: _setTriggerValue()', () => {
+    beforeEach(() => {
+      jest.spyOn(component, '_setFormValue');
+    });
+    it('should set formattedValue to empty string if value is null', () => {
+      component._setTriggerValue(null);
+      expect(component._setFormValue).toHaveBeenCalled();
+      expect(component.formattedValue).toEqual('');
+    });
+    it('should set formattedValue to empty string if value changed back to undefined', () => {
+      const now = new Date();
+      component._setTriggerValue(now);
+      component._setTriggerValue(undefined);
+      expect(component._setFormValue).toHaveBeenCalled();
+      expect(component.formattedValue).toEqual('');
     });
   });
 });

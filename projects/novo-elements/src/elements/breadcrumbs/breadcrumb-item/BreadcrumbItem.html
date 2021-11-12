@@ -3,7 +3,7 @@
     class="novo-dropdown-no-border novo-dropdown-origin novo-breadcrumb-dropdown-origin">
     <ng-template [ngTemplateOutlet]="breadcrumbContentTpl"></ng-template>
     <novo-dropdown>
-      <button theme="icon" icon="collapse" size="small"></button>
+      <novo-button theme="icon" icon="collapse" size="small"></novo-button>
       <novo-optgroup class="novo-breadcrumb-dropdown-menu">
         <div *ngIf="isSearch" class="dropdown-search-container">
           <novo-search alwaysOpen="true" (searchFn)="searchEvent($event)" [class]="'search-in-dropdown'"></novo-search>

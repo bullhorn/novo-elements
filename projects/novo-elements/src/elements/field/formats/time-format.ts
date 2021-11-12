@@ -15,6 +15,7 @@ import { IMaskDirective, IMaskFactory } from 'angular-imask';
 import { format, isValid, parse } from 'date-fns';
 import * as IMask from 'imask';
 import { NovoLabelService } from '../../../services/novo-label-service';
+import { Key } from '../../../utils';
 import { NovoInputFormat, NOVO_INPUT_FORMAT } from './base-format';
 
 export const TIMEFORMAT_VALUE_ACCESSOR = {
@@ -34,6 +35,8 @@ export enum TIME_FORMATS {
   host: {
     class: 'novo-time-format',
     '(input)': '_checkInput($event)',
+    '(blur)': '_handleBlur($event)',
+    '(keydown)': '_handleKeydown($event)',
   },
   providers: [TIMEFORMAT_VALUE_ACCESSOR, { provide: NOVO_INPUT_FORMAT, useExisting: NovoTimeFormatDirective }],
 })
@@ -103,7 +106,7 @@ export class NovoTimeFormatDirective extends IMaskDirective<any> implements Novo
   }
 
   _checkInput(event: InputEvent): void {
-    if (document.activeElement === event.target && isFinite(Number(event.data))) {
+    if (document.activeElement === event.target) {
       const text = (event.target as HTMLInputElement).value;
       if ((this.military && Number(text[0]) > 2) || (!this.military && Number(text[0]) > 1)) {
         event.preventDefault();
@@ -111,6 +114,32 @@ export class NovoTimeFormatDirective extends IMaskDirective<any> implements Novo
         (event.target as HTMLInputElement).value = value;
         // this.onChange(value);
       }
+      if (!this.military) {
+        const input = text.substr(5, 4).replace(/\-/g, '').trim().slice(0, 2);
+        const timePeriod = this.imask.blocks.aa.enum.find((it) => it[0] === input[0]);
+        if (timePeriod) {
+          (event.target as HTMLInputElement).value = `${text.slice(0, 5)} ${timePeriod}`;
+        }
+      }
+    }
+  }
+
+  _handleBlur(event: FocusEvent): void {
+    const text = (event.target as HTMLInputElement).value;
+    if (!this.military) {
+      const input = text.substr(5, 4).replace(/\-/g, '').trim().slice(0, 2);
+      const timePeriod = this.imask.blocks.aa.enum.find((it) => it[0] === input[0]);
+      if (!timePeriod) {
+        (event.target as HTMLInputElement).value = `${text.slice(0, 5)} --`;
+      }
+    }
+  }
+
+  _handleKeydown(event: KeyboardEvent): void {
+    const input = event.target as HTMLInputElement;
+
+    if (event.key === Key.Backspace && input.selectionStart === input.value.length) {
+      (event.target as HTMLInputElement).value = `${input.value.slice(0, 5)} --`;
     }
   }
 

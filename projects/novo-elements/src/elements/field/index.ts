@@ -9,6 +9,5 @@ export * from './formats/date-format';
 export * from './formats/time-format';
 export * from './hint';
 export * from './input';
-export * from './label';
 export * from './picker.directive';
 export * from './toggle/picker-toggle.component';

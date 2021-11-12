@@ -61,12 +61,16 @@ import { NovoTemplate } from '../common/novo-template/novo-template.directive';
           (mousewheel)="numberInput.blur()"
           #numberInput
         />
+        <!-- the percentage input does not use formControlName like a normal reactive input because instead of
+          setting the floating point value directly, it is multiplied by 100 into a percentage value -->
         <input
           *ngIf="control?.type === 'number' && control?.subType === 'percentage'"
+          [id]="control.key"
           [type]="control?.type"
           [placeholder]="control?.placeholder"
           (keydown)="methods.restrictKeys($event)"
           [value]="control?.percentValue"
+          [disabled]="control?.readOnly"
           (input)="methods.handlePercentChange($event)"
           (focus)="methods.handleFocus($event)"
           (blur)="methods.handleBlur($event)"
@@ -392,6 +396,7 @@ import { NovoTemplate } from '../common/novo-template/novo-template.directive';
           [weekStart]="control.weekStart"
           (focusEvent)="methods.handleFocus($event)"
           (blurEvent)="methods.handleBlur($event)"
+          (changeEvent)="methods.emitChange($event)"
         ></novo-date-picker-input>
       </div>
     </ng-template>
@@ -419,6 +424,7 @@ import { NovoTemplate } from '../common/novo-template/novo-template.directive';
           [weekStart]="control.weekStart"
           (focusEvent)="methods.handleFocus($event)"
           (blurEvent)="methods.handleBlur($event)"
+          (changeEvent)="methods.emitChange($event)"
         ></novo-date-time-picker-input>
       </div>
     </ng-template>

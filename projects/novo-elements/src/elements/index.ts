@@ -1,4 +1,5 @@
 export * from './ace-editor';
+export * from './agenda';
 export * from './aside';
 export * from './avatar';
 export * from './breadcrumbs';

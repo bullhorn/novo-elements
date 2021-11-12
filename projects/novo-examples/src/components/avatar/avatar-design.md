@@ -5,77 +5,47 @@ title: Design
 order: 2
 ---
 
-:::: grid 2
+## Usage
 
-<img src="assets/images/ModalAnatomy.png" width="450">
+<novo-grid columns="2" align="start" gap="2rem">
+<div>
 
-::: box
+Avatars are images used to represent users and organizations. They typically are squares with rounded edges.
 
-1. **Container**<br>
-   Description and purpose of this element
+An avatar acts as a proxy for a user or entity (such as a company) in a product. They're often combined with status or presence indicators to give more context. Users generally upload their own image, otherwise, a default image is displayed
 
-1. **Header**<br>
-   Description and purpose of this element
+</div>
 
-1. **Icon (Optional)**<br>
-   Description and purpose of this element
+<img src="/assets/images/AvatarOverview.png"/>
 
-1. **Title (Optional)**<br>
-   Description and purpose of this element
+</novo-grid>
 
-1. **Content**<br>
-   Description and purpose of this element
+## Best Practices
 
-1. **Footer**<br>
-   Description and purpose of this element
-
-:::
-::::
-
-## How to configure
-
-::::: grid 2
-:::: figure
-![placeholder](https://via.placeholder.com/350x250)
-::: do Always do this
-Explain this
-:::
-::::
-
-:::: figure
-![placeholder](https://via.placeholder.com/350x250)
-::: dont Never do this
-Explain this
-:::
-::::
-:::::
+- circular avatars to quickly identify people (users, contact)
+- square avatars to help identify other entities like companies, jobs
 
 ## Patterns
 
-::::: grid 2
-::: box
+<novo-grid columns="2" align="start" gap="2rem">
 
-**Pattern**
+> **Avatar Menu**
+>
+> Avatars are a great place to attach a menu with options that you can perform against that user.  This is a common web paradigm that the user will understand intuitively.
 
-Why is it configured like this
+![placeholder](/assets/images/AvatarMenu.png)
 
-:::
-![placeholder](https://via.placeholder.com/350x250)
-:::::
+> **Avatar Stack**
+>
+> Avatars are a great place to attach a menu with options that you can perform against that user.  This is a common web paradigm that the user will understand intuitively.
 
-::::: grid 2
-::: box
+![placeholder](/assets/images/AvatarStack.gif)
 
-**Pattern**
-
-Why is it configured like this
-
-:::
-![placeholder](https://via.placeholder.com/350x250)
-:::::
+</novo-grid>
 
 ## Accessibility
 
-**Implementation**
+**ARIA Implementation**
 
 Always include an `alt` attribute describing the information that is visually displayed in the image.
+

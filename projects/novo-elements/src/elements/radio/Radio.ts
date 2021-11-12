@@ -40,7 +40,7 @@ const RADIO_VALUE_ACCESSOR = {
       (change)="_onInputChange($event)"
     />
     <label [attr.for]="id" [class.disabled]="disabled">
-      <button
+      <novo-button
         *ngIf="button"
         [ngClass]="{ unchecked: !checked, checked: checked, 'has-icon': !!icon }"
         [theme]="theme"
@@ -49,7 +49,7 @@ const RADIO_VALUE_ACCESSOR = {
         [size]="size"
       >
         {{ label }}
-      </button>
+      </novo-button>
       <div *ngIf="!button" class="novo-radio-button-label">
         <i [ngClass]="{ 'bhi-radio-empty': !checked, 'bhi-radio-filled': checked }"></i>
         {{ label }}

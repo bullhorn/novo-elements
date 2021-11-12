@@ -1,7 +1,7 @@
 novo-control-group {
   display: block;
   margin-bottom: 0.5em;
-  background: var(--background-alt, $color-white);
+  background: var(--background-bright, $color-white);
 
   &.novo-control-group-appearance-card {
     border-radius: 0.4rem;
@@ -74,7 +74,7 @@ novo-control-group {
         }
       }
       .novo-control-group-labels {
-        background: var(--background, $color-light);
+        background: var(--background-main, $color-light);
         border-top: 1px solid var(--border, $color-grey);
         border-bottom: 1px solid var(--border, $color-grey);
         align-items: center;

@@ -25,8 +25,10 @@ import {
   ViewChildren,
 } from '@angular/core';
 import { ControlValueAccessor, FormGroupDirective, NgControl, NgForm } from '@angular/forms';
+// Vendor
 import { merge, Observable, of, Subject, Subscription } from 'rxjs';
 import { filter, map, take, takeUntil } from 'rxjs/operators';
+// App
 import { NovoLabelService } from '../../services/novo-label-service';
 import { Key } from '../../utils';
 import {
@@ -136,8 +138,11 @@ let nextId = 0;
             *ngIf="!option.divider; else divider"
             class="select-item"
             [class.active]="option.active"
+            [class.disabled]="option.disabled"
             [attr.data-automation-value]="option.label"
             [value]="option.value"
+            [tooltip]="option.tooltip"
+            [tooltipPosition]="option.tooltipPosition || 'right'"
           >
             <span [innerHtml]="highlight(option.label, filterTerm)"></span> <i *ngIf="option.active" class="bhi-check"></i>
           </novo-option>
@@ -153,7 +158,8 @@ let nextId = 0;
 })
 export class NovoSelectElement
   extends NovoSelectMixins
-  implements OnInit, AfterViewInit, OnChanges, OnDestroy, ControlValueAccessor, NovoFieldControl<any> {
+  implements OnInit, AfterViewInit, OnChanges, OnDestroy, ControlValueAccessor, NovoFieldControl<any>
+{
   private _uniqueId: string = `novo-select-${++nextId}`;
   private _stateChanges = Subscription.EMPTY;
   private _activeOptionChanges = Subscription.EMPTY;
@@ -452,9 +458,9 @@ export class NovoSelectElement
   }
 
   /**
-   * This method closes the panel, and if a value is specified, also sets the associated
-   * control to that value. It will also mark the control as dirty if this interaction
-   * stemmed from the user.
+   * If the item is not disabled, this method closes the panel, and if a value is specified,
+   * also sets the associated control to that value. It will also mark the control as dirty
+   * if this interaction stemmed from the user.
    */
   handleSelection(option: NovoOption, isUserInput: boolean = false): void {
     const wasSelected = this._selectionModel.isSelected(option);

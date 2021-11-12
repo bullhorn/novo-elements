@@ -25,7 +25,3 @@ Time pickers come in 12 hour or 24 hour style.
 ##### Standalone Calendar
 
 <code-example example="standalone-calendar"></code-example>
-
-##### Big Calendar Picker
-
-<code-example example="big-calendar"></code-example>

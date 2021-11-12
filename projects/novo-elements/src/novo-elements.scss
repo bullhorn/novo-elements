@@ -31,15 +31,16 @@
 @import "./elements/toast/Toast";
 @import "./elements/modal/modal.component";
 @import "./elements/card/Card";
-@import "./elements/calendar/month/CalendarMonthView";
-@import "./elements/calendar/week/CalendarWeekView";
-@import "./elements/calendar/day/CalendarDayView";
-@import "./elements/calendar/common/CalendarDateChange";
+@import "./elements/agenda/month/AgendaMonthView";
+@import "./elements/agenda/week/AgendaWeekView";
+@import "./elements/agenda/day/AgendaDayView";
+@import "./elements/agenda/common/AgendaDateChange";
 @import "./elements/loading/Loading";
 @import "./elements/loading/NovoSpinner";
 @import "./elements/select/Select";
 @import "./elements/picker/Picker";
 @import "./elements/picker/extras/grouped-multi-picker-results/GroupedMultiPickerResults";
+@import "./elements/picker/extras/mixed-multi-picker-results/MixedMultiPickerResults";
 @import "./elements/picker/extras/skills-picker-results/SkillsSpecialtyPickerResults";
 @import "./elements/chips/Chips";
 @import "./elements/dropdown/Dropdown";
@@ -67,18 +68,18 @@
 @import "./elements/places/places.component";
 @import "./elements/value/Values";
 @import "./elements/icon/Icon";
-// @import './elements/expansion/expansion-panel';
-// @import './elements/expansion/expansion-panel-header';
+// @import "./elements/expansion/expansion-panel";
+// @import "./elements/expansion/expansion-panel-header";
 @import "./elements/stepper/stepper.component";
 @import "./elements/stepper/step-header.component";
 @import "./elements/simple-table/table";
 @import "./elements/tabbed-group-picker/TabbedGroupPicker";
 
 .bgc-main {
-  background-color: var(--background, $color-bright);
+  background-color: var(--background-main, $color-bright);
 }
 .bgc-alt {
-  background-color: var(--background-alt, $color-white);
+  background-color: var(--background-bright, $color-white);
 }
 .bgc-body {
   background-color: var(--background-body, $color-silver);

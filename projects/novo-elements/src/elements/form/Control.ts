@@ -112,6 +112,7 @@ export class NovoAutoSize implements AfterContentInit {
               class="novo-control-input {{ form.controls[control.key].controlType }}"
               [attr.data-automation-id]="control.key"
               [class.control-disabled]="form.controls[control.key].disabled"
+              [class.highlighted]="form.controls[control.key].highlighted"
             >
               <!--TODO prefix/suffix on the control-->
               <ng-container *ngIf="templates">
@@ -426,7 +427,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
         }
         if (interaction.invokeOnInit) {
           if (!this.form.controls[this.control.key].restrictFieldInteractions) {
-            this.executeInteraction(interaction);
+            this.executeInteraction(interaction, true);
           }
         }
       }
@@ -505,8 +506,10 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
         );
       }
       this.percentChangeSubscription = this.form.controls[this.control.key].displayValueChanges.subscribe((value) => {
-        if (!Helpers.isEmpty(value)) {
+        if (!Helpers.isEmpty(value) && !isNaN(value)) {
           this.templateContext.$implicit.percentValue = Number((value * 100).toFixed(6).replace(/\.?0*$/, ''));
+        } else if (Helpers.isEmpty(value)) {
+          this.templateContext.$implicit.percentValue = undefined;
         }
       });
     }
@@ -627,11 +630,12 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     return false;
   }
 
-  executeInteraction(interaction) {
+  executeInteraction(interaction, isInvokedOnInit = false) {
     if (interaction.script && Helpers.isFunction(interaction.script)) {
       setTimeout(() => {
         this.fieldInteractionApi.form = this.form;
         this.fieldInteractionApi.currentKey = this.control.key;
+        this.fieldInteractionApi.isInvokedOnInit = isInvokedOnInit;
         try {
           interaction.script(this.fieldInteractionApi, this.control.key);
         } catch (err) {
@@ -754,8 +758,8 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
   }
 
   handlePercentChange(event: KeyboardEvent) {
-    const value = (event.target as HTMLInputElement).value;
-    const percent = Helpers.isEmpty(value) ? null : Number((Number(value) / 100).toFixed(6).replace(/\.?0*$/, ''));
+    const value = (event.target as HTMLInputElement).value || (event as any).data;
+    const percent = Helpers.isEmpty(value) || isNaN(value) ? value : Number((Number(value) / 100).toFixed(6).replace(/\.?0*$/, ''));
     if (!Helpers.isEmpty(percent)) {
       this.change.emit(percent);
       this.form.controls[this.control.key].setValue(percent);

@@ -14,6 +14,5 @@ import { NovoModalService } from './modal.service';
   declarations: [NovoModalContainerComponent, NovoModalElement, NovoModalNotificationElement],
   exports: [NovoModalElement, NovoModalNotificationElement],
   providers: [NovoModalService],
-  entryComponents: [NovoModalContainerComponent],
 })
 export class NovoModalModule {}

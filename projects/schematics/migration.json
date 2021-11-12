@@ -1,0 +1,15 @@
+{
+  "$schema": "./node_modules/@angular-devkit/schematics/collection-schema.json",
+  "schematics": {
+    "migration-v6": {
+      "version": "6.0.0",
+      "description": "Updates Novo Elements to v6",
+      "factory": "./ng-update/index#updateToV6"
+    },
+    "ng-post-update": {
+      "description": "Prints out results after ng-update.",
+      "factory": "./ng-update/index#postUpdate",
+      "private": true
+    }
+  }
+}

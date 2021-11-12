@@ -2,7 +2,9 @@
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+// APP
 import { NovoAceEditorModule } from './elements/ace-editor/AceEditor.module';
+import { NovoAgendaModule } from './elements/agenda/Agenda.module';
 import { NovoAsideModule } from './elements/aside/aside.module';
 import { NovoAvatarModule } from './elements/avatar/Avatar.module';
 import { NovoBreadcrumbModule } from './elements/breadcrumbs/Breadcrumb.module';
@@ -62,7 +64,6 @@ import { NovoToastModule } from './elements/toast/Toast.module';
 import { NovoTooltipModule } from './elements/tooltip/Tooltip.module';
 import { UnlessModule } from './elements/unless/Unless.module';
 import { NovoValueModule } from './elements/value/Value.module';
-// APP
 import { NovoPipesModule } from './pipes/Pipes.module';
 import { DateFormatService } from './services/date-format/DateFormat';
 import { BrowserGlobalRef, GlobalRef } from './services/global/global.service';
@@ -81,6 +82,7 @@ import { FormUtils } from './utils/form-utils/FormUtils';
     NovoButtonModule,
     NovoLoadingModule,
     NovoCardModule,
+    NovoAgendaModule,
     NovoCalendarModule,
     NovoCheckboxModule,
     NovoFlexModule,

@@ -18,7 +18,7 @@ novo-radio-group {
 
   > novo-radio {
     margin: 0;
-    button {
+    novo-button {
       pointer-events: none;
       border-radius: 0 !important;
       &.unchecked {
@@ -30,7 +30,7 @@ novo-radio-group {
       }
     }
     &:first-child {
-      button {
+      novo-button {
         border-top-left-radius: 3px !important;
         border-bottom-left-radius: 3px !important;
         &[theme="icon"] {
@@ -39,7 +39,7 @@ novo-radio-group {
       }
     }
     &:last-child {
-      button {
+      novo-button {
         border-top-right-radius: 3px !important;
         border-bottom-right-radius: 3px !important;
         border-right-width: 1px !important;
@@ -101,7 +101,7 @@ novo-radio {
       }
     }
   }
-  button[theme].has-icon {
+  novo-button[theme].has-icon {
     transition: all 100ms ease-in-out;
     color: $positive;
     background: $white;

@@ -55,8 +55,8 @@ h6 {
 // Body And Paragraph
 // --------------------------------------------------
 p {
-  font-size: 1.2rem;
-  line-height: 1.2;
+  font-size: 1.4rem;
+  line-height: 1.375em;
   margin: 0;
   padding: 0.25rem 0 0.55rem;
 }
@@ -123,7 +123,7 @@ h3.novo-section-header,
 h4.novo-section-header,
 h5.novo-section-header,
 h6.novo-section-header {
-  background: var(--background-alt, $color-white);
+  background: var(--background-bright, $color-white);
   box-sizing: content-box;
   font-weight: 400;
   display: flex;

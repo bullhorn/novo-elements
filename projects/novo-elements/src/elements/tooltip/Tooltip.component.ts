@@ -37,4 +37,5 @@ export class NovoTooltip {
   public preline: boolean;
   public noAnimate: boolean;
   public position: string;
+  public isHTML: boolean;
 }

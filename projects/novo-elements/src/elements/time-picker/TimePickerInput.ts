@@ -170,7 +170,6 @@ export class NovoTimePickerInputElement implements OnInit, ControlValueAccessor 
 
   _handleKeydown(event: KeyboardEvent): void {
     const input = event.target as HTMLInputElement;
-    let inputArr = input.value.split('');
     if ((event.key === Key.Escape || event.key === Key.Enter || event.key === Key.Tab) && this.panelOpen) {
       this.closePanel();
       event.stopPropagation();
@@ -178,9 +177,7 @@ export class NovoTimePickerInputElement implements OnInit, ControlValueAccessor 
     }
 
     if (event.key === Key.Backspace && input.selectionStart === input.value.length) {
-      inputArr[inputArr.length - 2] = 'x';
-      inputArr[inputArr.length - 1] = 'x';
-      (event.target as HTMLInputElement).value = inputArr.join('');
+      (event.target as HTMLInputElement).value = `${input.value.slice(0, 5)} xx`;
     }
   }
 
@@ -208,7 +205,7 @@ export class NovoTimePickerInputElement implements OnInit, ControlValueAccessor 
       const test = text.substr(5, 4).replace(/x/g, '').trim().slice(0, 2);
       const timePeriod = this.maskOptions.blocks.aa.enum.find((it) => it[0] === test[0]);
       if (!timePeriod) {
-        (event.target as HTMLInputElement).value = `${text.slice(0, 5)}`;
+        (event.target as HTMLInputElement).value = `${text.slice(0, 5)} xx`;
       }
     }
   }

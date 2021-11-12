@@ -20,16 +20,11 @@ header to indicate the expansion state. This icon can be hidden via the
 ```html
 <novo-expansion-panel>
   <novo-expansion-panel-header>
-    <novo-panel-title>
-      This is the expansion title
-    </novo-panel-title>
-    <novo-panel-description>
-      This is a summary of the content
-    </novo-panel-description>
+    <novo-panel-title> This is the expansion title </novo-panel-title>
+    <novo-panel-description> This is a summary of the content </novo-panel-description>
   </novo-expansion-panel-header>
 
   <p>This is the primary content of the panel.</p>
-
 </novo-expansion-panel>
 ```
 
@@ -40,14 +35,12 @@ is in its expanded state.
 
 ```html
 <novo-expansion-panel>
-  <novo-expansion-panel-header>
-    This is the expansion title
-  </novo-expansion-panel-header>
+  <novo-expansion-panel-header> This is the expansion title </novo-expansion-panel-header>
 
   <p>This is the primary content of the panel.</p>
 
   <novo-action-row>
-    <button novo-button>Click me</button>
+    <novo-button novo-button>Click me</novo-button>
   </novo-action-row>
 </novo-expansion-panel>
 ```
@@ -59,15 +52,10 @@ be toggled by the user, but can still be manipulated programmatically.
 
 ```html
 <novo-expansion-panel [disabled]="isDisabled">
-  <novo-expansion-panel-header>
-    This is the expansion title
-  </novo-expansion-panel-header>
-  <novo-panel-description>
-    This is a summary of the content
-  </novo-panel-description>
+  <novo-expansion-panel-header> This is the expansion title </novo-expansion-panel-header>
+  <novo-panel-description> This is a summary of the content </novo-panel-description>
 </novo-expansion-panel>
 ```
-
 
 ### Accordion
 
@@ -77,45 +65,36 @@ panel can be expanded at a given time:
 
 ```html
 <novo-accordion>
-
   <novo-expansion-panel>
-    <novo-expansion-panel-header>
-      This is the expansion 1 title
-    </novo-expansion-panel-header>
+    <novo-expansion-panel-header> This is the expansion 1 title </novo-expansion-panel-header>
 
     This the expansion 1 content
-
   </novo-expansion-panel>
 
   <novo-expansion-panel>
-    <novo-expansion-panel-header>
-      This is the expansion 2 title
-    </novo-expansion-panel-header>
+    <novo-expansion-panel-header> This is the expansion 2 title </novo-expansion-panel-header>
 
     This the expansion 2 content
-
   </novo-expansion-panel>
-
 </novo-accordion>
 ```
 
 ### Lazy rendering
+
 By default, the expansion panel content will be initialized even when the panel is closed.
 To instead defer initialization until the panel is open, the content should be provided as
 an `ng-template`:
+
 ```html
 <novo-expansion-panel>
-  <novo-expansion-panel-header>
-    This is the expansion title
-  </novo-expansion-panel-header>
+  <novo-expansion-panel-header> This is the expansion title </novo-expansion-panel-header>
 
-  <ng-template matExpansionPanelContent>
-    Some deferred content
-  </ng-template>
+  <ng-template matExpansionPanelContent> Some deferred content </ng-template>
 </novo-expansion-panel>
 ```
 
 ### Accessibility
+
 The expansion-panel aims to mimic the experience of the native `<details>` and `<summary>` elements.
 The expansion panel header has `role="button"` and also the attribute `aria-controls` with the
 expansion panel's id as value.

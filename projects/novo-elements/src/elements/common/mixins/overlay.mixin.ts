@@ -19,7 +19,7 @@ export type HasOverlayCtor = Constructor<HasOverlay>;
 export function mixinOverlay<T extends AbstractConstructor<CanDisable>>(base: T): HasOverlayCtor & T {
   // Note: We cast `base` to `unknown` and then `Constructor`. It could be an abstract class,
   // but given we `extend` it from another class, we can assume a constructor being accessible.
-  abstract class Mixin extends ((base as unknown) as Constructor<CanDisable>) {
+  abstract class Mixin extends (base as unknown as Constructor<CanDisable>) {
     abstract overlay: NovoOverlayTemplateComponent;
 
     constructor(...args: any[]) {
@@ -52,5 +52,5 @@ export function mixinOverlay<T extends AbstractConstructor<CanDisable>>(base: T)
   // Since we don't directly extend from `base` with it's original types, and we instruct
   // TypeScript that `T` actually is instantiatable through `new`, the types don't overlap.
   // This is a limitation in TS as abstract classes cannot be typed properly dynamically.
-  return (Mixin as unknown) as T & Constructor<HasOverlay>;
+  return Mixin as unknown as T & Constructor<HasOverlay>;
 }

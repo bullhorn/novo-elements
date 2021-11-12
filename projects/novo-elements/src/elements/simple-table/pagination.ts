@@ -28,7 +28,7 @@ const DEFAULT_PAGE_SIZE = 50;
       {{ shortRangeLabel }}
     </div>
 
-    <button
+    <novo-button
       theme="dialogue"
       type="button"
       class="novo-simple-table-pagination-navigation-previous"
@@ -39,8 +39,8 @@ const DEFAULT_PAGE_SIZE = 50;
       data-automation-id="novo-simple-table-pagination-previous"
     >
       <span>{{ labels.previous }}</span>
-    </button>
-    <button
+    </novo-button>
+    <novo-button
       theme="dialogue"
       type="button"
       class="novo-simple-table-pagination-navigation-next"
@@ -51,7 +51,7 @@ const DEFAULT_PAGE_SIZE = 50;
       data-automation-id="novo-simple-table-pagination-next"
     >
       <span>{{ labels.next }}</span>
-    </button>
+    </novo-button>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -8,12 +8,12 @@ novo-spinner {
   height: $medium-spinner-size;
   position: relative;
 
-  &.small {
+  &.size-small {
     width: $small-spinner-size;
     height: $small-spinner-size;
   }
 
-  &.large {
+  &.size-large {
     width: $large-spinner-size;
     height: $large-spinner-size;
   }

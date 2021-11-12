@@ -12,10 +12,10 @@ export class NovoFormGroup extends FormGroup {
   public currentEntity: string;
   public currentEntityId: string;
   public associations: object;
+  public fieldsets: any[];
   public _value: any;
   public controls: { [key: string]: any };
   public novoControls: any[];
-  public fieldsets: any[];
 
   public enableAllControls(): void {
     for (const key in this.controls) {

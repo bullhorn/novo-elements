@@ -394,6 +394,11 @@ novo-form {
                         border-bottom: 1px solid $negative !important;
                       }
                     }
+                    &.highlighted {
+                      input {
+                        background-color: lighten($ocean, 35%) !important;
+                      }
+                    }
                     textarea {
                       height: 2rem;
                       background: transparent !important;

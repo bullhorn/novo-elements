@@ -1,4 +1,4 @@
-$table-bg-accent: var(--background-alt, $off-white);
+$table-bg-accent: var(--background-bright, $off-white);
 $novo-row-horizontal-padding: 20px;
 $table-header-font-weight: 400;
 $breakpoint: 1000px;
@@ -20,7 +20,7 @@ cdk-table {
     .novo-data-table-dropdown-cell,
     .novo-data-table-expand-cell,
     .novo-data-table-checkbox-cell {
-      background-color: var(--background-alt, $white);
+      background-color: var(--background-bright, $white);
     }
     &.active {
       .novo-data-table-cell,
@@ -35,7 +35,7 @@ cdk-table {
       }
     }
     + .novo-data-table-detail-row {
-      background: var(--background-alt, $white); //$table-bg-accent;
+      background: var(--background-bright, $white); //$table-bg-accent;
     }
   }
   > .novo-data-table-row:nth-of-type(even) {
@@ -671,60 +671,24 @@ novo-data-table-pagination {
     display: inline-block;
     line-height: inherit;
   }
-  list {
-    item.filter-search {
-      padding: 10px 0;
-      width: 100%;
-      height: auto;
-      flex-direction: column;
-      align-items: flex-start;
-      cursor: initial;
-      &:hover {
-        background: transparent;
-      }
-      .header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        width: 90%;
-        font-size: 0.9em;
-        margin: 0 auto;
-        span {
-          text-transform: uppercase;
-          font-weight: $table-header-font-weight;
-        }
-        button {
-          padding: 0 5px;
-          i {
-            height: auto !important;
-            width: auto !important;
-            font-size: 0.9em;
-          }
+
+  .novo-optgroup .filter-search {
+    input {
+      border: none;
+      border-bottom: 2px solid #bebebe;
+      width: 90%;
+      margin: 0 auto;
+      background: transparent;
+      &:focus {
+        outline: none;
+        border-bottom: 2px solid $ocean;
+        ~ i.bhi-search {
+          color: $ocean;
         }
       }
-      input {
-        border: none;
-        border-bottom: 2px solid var(--border, $off-white);
-        width: 90%;
-        margin: 0 auto;
-        background: transparent;
-        &:focus {
-          outline: none;
-          border-bottom: 2px solid $ocean;
-          ~ i.bhi-search {
-            color: $ocean;
-          }
-        }
-      }
-    }
-    item > span {
-      display: inline-block;
-      max-width: calc(100% - 20px);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
     }
   }
+
   .calendar-container {
     height: 100%;
     min-height: 200px;

@@ -41,14 +41,14 @@ export class NovoSimpleFilterFocus implements AfterViewInit {
       <ng-content></ng-content>
     </label>
     <div>
-      <button
+      <novo-button
         *ngIf="config.sortable"
         theme="icon"
         [icon]="icon"
         (click)="sort()"
         [class.active]="sortActive"
         data-automation-id="novo-activity-table-sort"
-      ></button>
+      ></novo-button>
       <novo-dropdown
         *ngIf="config.filterable"
         side="right"
@@ -56,10 +56,10 @@ export class NovoSimpleFilterFocus implements AfterViewInit {
         containerClass="simple-table-dropdown"
         data-automation-id="novo-activity-table-filter"
       >
-        <button type="button" theme="icon" icon="filter" [class.active]="filterActive"></button>
+        <novo-button type="button" theme="icon" icon="filter" [class.active]="filterActive"></novo-button>
         <div class="header">
           <span>{{ labels.filters }}</span>
-          <button
+          <novo-button
             theme="dialogue"
             color="negative"
             icon="times"
@@ -68,7 +68,7 @@ export class NovoSimpleFilterFocus implements AfterViewInit {
             data-automation-id="novo-activity-table-filter-clear"
           >
             {{ labels.clear }}
-          </button>
+          </novo-button>
         </div>
         <ng-container [ngSwitch]="config.filterConfig.type">
           <list *ngSwitchCase="'date'">

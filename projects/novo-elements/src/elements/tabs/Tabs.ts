@@ -5,9 +5,6 @@ import { BooleanInput } from '../../utils';
 @Component({
   selector: 'novo-nav',
   template: '<ng-content></ng-content>',
-  host: {
-    '[attr.role]': 'tablist',
-  },
 })
 export class NovoNavElement {
   @Input()
@@ -87,6 +84,9 @@ export class NovoNavElement {
   `,
 })
 export class NovoTabElement implements AfterViewInit {
+  @HostBinding('attr.role')
+  public role = 'tab';
+
   @Input()
   active: boolean = false;
 
@@ -137,11 +137,12 @@ export class NovoTabElement implements AfterViewInit {
     '(click)': 'select()',
     '[class.active]': 'active',
     '[class.disabled]': 'disabled',
-    '[attr.role]': 'tab',
   },
   template: '<ng-content></ng-content>',
 })
 export class NovoTabButtonElement {
+  @HostBinding('attr.role')
+  public role = 'tab';
   @Input()
   active: boolean = false;
   @Input()
@@ -167,7 +168,6 @@ export class NovoTabButtonElement {
     '(click)': 'select()',
     '[class.active]': 'active',
     '[class.disabled]': 'disabled',
-    '[attr.role]': 'tab',
   },
   template: `
     <div class="novo-tab-link">
@@ -177,6 +177,8 @@ export class NovoTabButtonElement {
   `,
 })
 export class NovoTabLinkElement {
+  @HostBinding('attr.role')
+  public role = 'tab';
   @Input()
   active: boolean = false;
   @Input()
@@ -241,7 +243,6 @@ export class NovoNavOutletElement {
   selector: 'novo-nav-content',
   host: {
     '[class.active]': 'active',
-    '[attr.role]': 'tabpanel',
   },
   template: '<ng-content></ng-content>',
 })
@@ -263,6 +264,8 @@ export class NovoNavContentElement {
   template: '<ng-content></ng-content>',
 })
 export class NovoNavHeaderElement {
+  @HostBinding('attr.role')
+  public role = 'tabpanel';
   @Input()
   active: boolean = false;
   @Input('for')

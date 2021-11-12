@@ -1,5 +1,3 @@
-export * from './big-calendar';
+export * from '../agenda/agenda';
 export * from './calendar';
-export * from './range';
-export * from './standalone-calendar';
 export * from './time';

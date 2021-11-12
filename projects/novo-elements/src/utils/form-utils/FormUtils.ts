@@ -121,9 +121,11 @@ export class FormUtils {
       YEAR: 'year',
       WORKFLOW_OPTIONS: 'select',
       SPECIALIZED_OPTIONS: 'select',
+      ALL_WORKFLOW_OPTIONS: 'select',
       WorkflowOptionsLookup: 'select',
       SpecializedOptionsLookup: 'select',
       SimplifiedOptionsLookup: 'select',
+      AllWorkflowOptionsLookup: 'select',
     };
     const dataTypeToTypeMap = {
       Timestamp: 'date',
@@ -165,9 +167,12 @@ export class FormUtils {
         }
       }
     } else if (field.type === 'TO_ONE') {
-      if ('SYSTEM' === field.dataSpecialization && ['WorkflowOptionsLookup', 'SpecializedOptionsLookup'].includes(field.dataType)) {
+      if (
+        'SYSTEM' === field.dataSpecialization &&
+        ['WorkflowOptionsLookup', 'SpecializedOptionsLookup', 'AllWorkflowOptionsLookup'].includes(field.dataType)
+      ) {
         type = dataSpecializationTypeMap[field.dataType];
-      } else if (['WORKFLOW_OPTIONS', 'SPECIALIZED_OPTIONS'].includes(field.dataSpecialization)) {
+      } else if (['WORKFLOW_OPTIONS', 'SPECIALIZED_OPTIONS', 'ALL_WORKFLOW_OPTIONS'].includes(field.dataSpecialization)) {
         type = dataSpecializationTypeMap[field.dataSpecialization];
       } else if (['SimplifiedOptionsLookup', 'SpecializedOptionsLookup'].includes(field.dataType)) {
         if (field.options && Object.keys(inputTypeToTypeMap).indexOf(field.inputType) > -1 && !field.multiValue) {
@@ -705,13 +710,15 @@ export class FormUtils {
         { value: false, label: this.labels.no },
         { value: true, label: this.labels.yes },
       ];
-    } else if (field.workflowOptions && fieldData) {
+    } else if (field.dataSpecialization === 'ALL_WORKFLOW_OPTIONS' && field.options) {
+      return field.options;
+    } else if (field.workflowOptions) {
       return this.getWorkflowOptions(field.workflowOptions, fieldData);
     } else if (
       field.dataSpecialization === 'SPECIALIZED_OPTIONS' ||
       (field.options && ['SpecializedOptionsLookup', 'SimplifiedOptionsLookup'].includes(field.dataType))
     ) {
-      return field.options.filter((o) => !o.readOnly);
+      return field.options;
     } else if (field.optionsUrl) {
       return this.optionsService.getOptionsConfig(http, field, config);
     } else if (Array.isArray(field.options) && field.type === 'chips') {
@@ -729,16 +736,17 @@ export class FormUtils {
 
   private getWorkflowOptions(
     workflowOptions: { [key: string]: any },
-    fieldData: { [key: string]: any },
+    fieldData: { [key: string]: any } | null,
   ): Array<{ value: string | number; label: string | number }> {
-    let currentValue: { value: string | number; label: string | number };
-    if (fieldData.id) {
+    let currentValue: { value: string | number; label: string | number } = null;
+    let currentWorkflowOption: number | string = 'initial';
+    if (fieldData?.id) {
       currentValue = { value: fieldData.id, label: fieldData.label ? fieldData.label : fieldData.id };
+      currentWorkflowOption = fieldData.id;
     }
-
-    const currentWorkflowOption: number | string = fieldData.id ? fieldData.id : 'initial';
     const updateWorkflowOptions: Array<{ value: string | number; label: string | number }> = workflowOptions[currentWorkflowOption] || [];
 
+    // Ensure that the current value is added to the beginning of the options list
     if (currentValue && !updateWorkflowOptions.find((option) => option.value === currentValue.value)) {
       updateWorkflowOptions.unshift(currentValue);
     }

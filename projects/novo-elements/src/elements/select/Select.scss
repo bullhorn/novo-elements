@@ -69,7 +69,7 @@ novo-select {
     overflow: auto;
     opacity: 1;
   }
-  background-color: var(--background-alt);
+  background-color: var(--background-bright);
   cursor: default;
   list-style: none;
   overflow: auto;
@@ -105,10 +105,16 @@ novo-select {
       color: $positive;
       line-height: 1.4em;
     }
-    &:focus,
-    &:hover {
-      background: lighten($light, 10%);
-      color: darken($light, 55%);
+    &.disabled {
+      cursor: not-allowed;
+      color: $grey;
+    }
+    &:not(.disabled) {
+      &:focus,
+      &:hover {
+        background: lighten($light, 10%);
+        color: darken($light, 55%);
+      }
     }
     &.active {
       color: darken($light, 55%);

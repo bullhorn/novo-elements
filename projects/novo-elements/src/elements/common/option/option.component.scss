@@ -20,7 +20,7 @@ $novo-menu-side-padding: 0.5rem;
   -webkit-tap-highlight-color: transparent;
 
   &:hover {
-    background: var(--background, rgba($ocean, 0.1));
+    background: var(--background-main, rgba($ocean, 0.1));
     color: var(--text-bright, $dark);
   }
 

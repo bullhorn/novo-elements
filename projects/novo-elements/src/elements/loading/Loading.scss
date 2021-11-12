@@ -5,12 +5,12 @@ novo-loading {
   font-size: 13px;
   gap: 0.3em;
 
-  &.small {
+  &.size-small {
     padding: 8px;
     font-size: 8px;
   }
 
-  &.large {
+  &.size-large {
     font-size: 18px;
   }
 
@@ -22,8 +22,9 @@ novo-loading {
     @include enumerate($dot-colors, "background-color", "map-val", "");
     @include animationMapDelay($dot-colors, jump, 1600ms, ease-in-out, 70ms, forward, infinite, "", "");
   }
+
   @each $analytics, $color in $analytics-colors {
-    &.#{$analytics} {
+    &.color-#{$analytics} {
       span.dot {
         background-color: $color;
       }

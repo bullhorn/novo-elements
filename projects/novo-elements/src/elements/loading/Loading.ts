@@ -14,9 +14,6 @@ import {
 
 @Component({
   selector: 'novo-loading',
-  host: {
-    '[class]': 'theme || ""',
-  },
   template: `
     <span class="dot"></span>
     <span class="dot"></span>
@@ -26,21 +23,28 @@ import {
   `,
 })
 export class NovoLoadingElement {
+  /**
+   * **deprecated** please use `color`.
+   * @deprecated
+   **/
   @Input()
-  theme: string;
-  private _small: boolean = false;
-  get small(): boolean {
-    return this._small;
+  set theme(value: string) {
+    console.warn(`'theme' property is deprecated, please use 'color'.`);
+    this.color = value;
   }
-  @Input()
-  @HostBinding('class.small')
-  set small(value: boolean) {
-    this._small = coerceBooleanProperty(value);
+  get theme(): string {
+    return this.color;
   }
 
-  private _large: boolean = false;
-  get large(): boolean {
-    return this._large;
+  @Input()
+  color: string;
+
+  @Input()
+  size: string = 'medium';
+
+  @HostBinding('class')
+  get hb_class() {
+    return [`color-${this.color}`, `size-${this.size}`].join(' ');
   }
 }
 
@@ -62,28 +66,24 @@ export class NovoLoadingElement {
   `,
 })
 export class NovoSpinnerElement {
+  /**
+   * **deprecated** please use `color`.
+   * @deprecated
+   **/
   @Input()
-  theme: string = 'multicolor';
+  set theme(value: string) {
+    console.warn(`'theme' property is deprecated, please use 'color'.`);
+    this.color = value;
+  }
+  get theme(): string {
+    return this.color;
+  }
 
-  private _small: boolean = false;
-  get small(): boolean {
-    return this._small;
-  }
   @Input()
-  @HostBinding('class.small')
-  set small(value: boolean) {
-    this._small = coerceBooleanProperty(value);
-  }
+  color: string;
 
-  private _large: boolean = false;
-  get large(): boolean {
-    return this._large;
-  }
   @Input()
-  @HostBinding('class.large')
-  set large(value: boolean) {
-    this._large = coerceBooleanProperty(value);
-  }
+  size: string = 'medium';
 
   private _inverse: boolean;
   get inverse(): boolean {
@@ -96,7 +96,7 @@ export class NovoSpinnerElement {
 
   @HostBinding('class')
   get hb_class() {
-    return this.inverse ? 'white' : this.theme;
+    return [this.inverse ? 'color-white' : `color-${this.color}`, `size-${this.size}`].join(' ');
   }
 }
 

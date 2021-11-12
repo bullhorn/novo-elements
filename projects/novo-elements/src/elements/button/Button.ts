@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, ElementRef, HostBinding, Input } fr
 import { BooleanInput } from '../../utils';
 
 @Component({
-  selector: 'button[theme],novo-button',
+  selector: 'novo-button,button[theme]',
   host: {
     class: 'novo-button',
     '[attr.theme]': 'theme',
@@ -12,7 +12,7 @@ import { BooleanInput } from '../../utils';
     '[attr.loading]': 'loading',
     '[attr.side]': 'side',
     '[attr.size]': 'size',
-    '[attr.role]': 'button',
+    '[attr.role]': "'button'",
   },
   styleUrls: [
     './styles/button.scss',
@@ -110,4 +110,9 @@ export class NovoButtonElement {
   private _icon: string;
 
   constructor(public element: ElementRef) {}
+
+  /** Focuses the input. */
+  focus(options?: FocusOptions): void {
+    this.element.nativeElement.focus(options);
+  }
 }

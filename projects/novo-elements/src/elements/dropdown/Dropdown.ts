@@ -19,8 +19,10 @@ import {
   QueryList,
   ViewChild,
 } from '@angular/core';
+// Vendor
 import { merge, of, Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+// App
 import { Key } from '../../utils/key-codes';
 import { notify } from '../../utils/notifier/notifier.util';
 import { NovoButtonElement } from '../button';
@@ -38,7 +40,6 @@ import {
   _countGroupLabelsBeforeOption,
   _getOptionScrollPosition,
 } from '../common';
-// APP
 import { NovoOverlayTemplateComponent } from '../common/overlay/Overlay';
 
 @Directive({

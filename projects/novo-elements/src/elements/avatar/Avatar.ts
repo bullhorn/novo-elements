@@ -10,16 +10,27 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class NovoAvatarElement implements OnInit {
   @Input() source: any;
   @Input() label: string;
-  @Input() color: string;
   @Input() theme: string;
+  @Input() image: string;
 
-  @HostBinding('attr.size')
   @Input()
-  size: string;
+  size: string = 'medium';
+
+  @Input()
+  shape: string = 'round';
+
+  @Input()
+  color: string;
+
+  @HostBinding('class')
+  get hb_classBinding() {
+    return [`avatar-size-${this.size}`, `avatar-shape-${this.shape}`, `avatar-color-${this.color}`];
+  }
 
   @HostBinding('style.backgroundImage')
   get background(): string {
-    return `url(${this.source.profileImage})`;
+    if (!this.image && !this.source.profileImage) return;
+    return `url(${this.image || this.source.profileImage})`;
   }
 
   src: any;
@@ -30,7 +41,7 @@ export class NovoAvatarElement implements OnInit {
     let src: any;
     if ((this.source && this.source !== '') || this.label) {
       if (this.source.profileImage) {
-        // this.background = this.source.profileImage;
+        // this.src = this.source.profileImage;
         return;
       } else if (this.source.logo) {
         src = this.source.logo;
@@ -181,5 +192,18 @@ export class NovoAvatarElement implements OnInit {
         // no op
       }
     }
+  }
+
+  private _isValidURL(str: string) {
+    const pattern = new RegExp(
+      '^(https?:\\/\\/)?' + // protocol
+        '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // domain name
+        '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
+        '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
+        '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
+        '(\\#[-a-z\\d_]*)?$',
+      'i',
+    ); // fragment locator
+    return !!pattern.test(str);
   }
 }
