@@ -13,4 +13,4 @@ import { QuickNoteElement } from './QuickNote';
   declarations: [QuickNoteElement, QuickNoteResults],
   exports: [QuickNoteElement, QuickNoteResults],
 })
-export class NovoQuickNoteModule { }
+export class NovoQuickNoteModule {}

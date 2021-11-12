@@ -86,4 +86,4 @@ import { NovoFormElement } from './Form';
   ],
   providers: [NovoTemplateService],
 })
-export class NovoFormModule { }
+export class NovoFormModule {}

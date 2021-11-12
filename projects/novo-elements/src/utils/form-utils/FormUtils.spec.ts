@@ -551,7 +551,7 @@ describe('Utils: FormUtils', () => {
           3: [],
         },
       };
-      const result = formUtils.getControlOptions(field, undefined, undefined, { id: 2, label: 'two', shouldRunValidationsOnSave: true, });
+      const result = formUtils.getControlOptions(field, undefined, undefined, { id: 2, label: 'two', shouldRunValidationsOnSave: true });
       expect(result).toEqual([
         { id: 2, shouldRunValidationsOnSave: true, value: 2, label: 'two' },
         { value: 3, label: 'three' },
