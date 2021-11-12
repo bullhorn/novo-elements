@@ -217,6 +217,19 @@ $light-colors: (
 // All colors
 $all-colors: map-merge($dark-colors, $light-colors);
 
+// Whiteframes
+// -------------------------
+$whiteframe-shadow-z1: 0px 2px 5px 0 rgba(0, 0, 0, 0.26) !default;
+$whiteframe-zindex-z1: 1 !default;
+$whiteframe-shadow-z2: 0px 8px 17px rgba(0, 0, 0, 0.2) !default;
+$whiteframe-zindex-z2: 2 !default;
+$whiteframe-shadow-z3: 0px 4px 10px rgba(0, 0, 0, 0.15) !default;
+$whiteframe-zindex-z3: 3 !default;
+$whiteframe-shadow-z4: 0px 16px 28px 0 rgba(0, 0, 0, 0.22) !default;
+$whiteframe-zindex-z4: 4 !default;
+$whiteframe-shadow-z5: 0px 27px 24px 0 rgba(0, 0, 0, 0.2) !default;
+$whiteframe-zindex-z5: 5 !default;
+
 // Z-indexes
 // -------------------------
 // Function to call z-indexes.
