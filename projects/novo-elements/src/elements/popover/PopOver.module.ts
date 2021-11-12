@@ -8,4 +8,4 @@ import { PopOverContent } from './PopOverContent';
   declarations: [PopOverContent, PopOverDirective],
   exports: [PopOverContent, PopOverDirective],
 })
-export class NovoPopOverModule {}
+export class NovoPopOverModule { }

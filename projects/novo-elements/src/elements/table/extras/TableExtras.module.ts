@@ -53,4 +53,4 @@ import { ThSortable } from './th-sortable/ThSortable';
     NovoDropdownCell,
   ],
 })
-export class NovoTableExtrasModule {}
+export class NovoTableExtrasModule { }

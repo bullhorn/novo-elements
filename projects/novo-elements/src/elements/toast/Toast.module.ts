@@ -10,4 +10,4 @@ import { NovoToastElement } from './Toast';
   declarations: [NovoToastElement],
   exports: [NovoToastElement],
 })
-export class NovoToastModule {}
+export class NovoToastModule { }

@@ -736,15 +736,15 @@ export class FormUtils {
 
   private getWorkflowOptions(
     workflowOptions: { [key: string]: any },
-    fieldData: { [key: string]: any } | null,
-  ): Array<{ value: string | number; label: string | number }> {
-    let currentValue: { value: string | number; label: string | number } = null;
+    fieldData: { id?: number; value?: string | number; label?: string | number } | null
+  ): Array<{ id?: number; value?: string | number; label?: string | number }> {
+    let currentValue: { id?: number; value?: string | number; label?: string | number } = null;
     let currentWorkflowOption: number | string = 'initial';
     if (fieldData?.id) {
-      currentValue = { value: fieldData.id, label: fieldData.label ? fieldData.label : fieldData.id };
+      currentValue = { ...fieldData, value: fieldData.id, label: fieldData.label || fieldData.id };
       currentWorkflowOption = fieldData.id;
     }
-    const updateWorkflowOptions: Array<{ value: string | number; label: string | number }> = workflowOptions[currentWorkflowOption] || [];
+    const updateWorkflowOptions: Array<{ id?: number; value?: string | number; label?: string | number }> = workflowOptions[currentWorkflowOption] || [];
 
     // Ensure that the current value is added to the beginning of the options list
     if (currentValue && !updateWorkflowOptions.find((option) => option.value === currentValue.value)) {

@@ -12,7 +12,10 @@
     "importHelpers": true,
     "resolveJsonModule": true,
     "types": [],
-    "lib": ["dom", "es2020"]
+    "lib": [
+      "dom",
+      "es2020",
+    ]
   },
   "angularCompilerOptions": {
     "skipTemplateCodegen": true,
