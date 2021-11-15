@@ -58,6 +58,7 @@ export {
   IDataTablePreferences,
   IDataTableSearchOptions,
   IDataTableSelectionChangeEvent,
+  IDataTableSelectionOption,
   IDataTableService,
   IDataTableSort,
   IDataTableSortFilter,
