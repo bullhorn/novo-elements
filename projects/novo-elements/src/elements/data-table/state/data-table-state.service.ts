@@ -46,7 +46,7 @@ export class DataTableState<T> {
       this.filter = undefined;
     }
     this.page = 0;
-    if (!this.selectionOptions.some(option => option.label === caller)) {
+    if (!this.selectionOptions?.some(option => option.label === caller)) {
       this.selectedRows.clear();
       this.resetSource.next();
     }
