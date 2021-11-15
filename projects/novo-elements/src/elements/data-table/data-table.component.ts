@@ -28,6 +28,7 @@ import {
   IDataTablePaginationOptions,
   IDataTablePreferences,
   IDataTableSearchOptions,
+  IDataTableSelectionOption,
   IDataTableService,
   IDataTableSort,
 } from './interfaces';
@@ -291,6 +292,7 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
 
   @Input() paginationOptions: IDataTablePaginationOptions;
   @Input() searchOptions: IDataTableSearchOptions;
+  @Input() selectionOptions: IDataTableSelectionOption[];
   @Input() defaultSort: { id: string; value: string };
   @Input() name = 'novo-data-table';
   @Input() allowMultipleFilters = false;
@@ -525,6 +527,7 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
     }
     this.state.page = this.paginationOptions ? this.paginationOptions.page : undefined;
     this.state.pageSize = this.paginationOptions ? this.paginationOptions.pageSize : undefined;
+    this.state.selectionOptions = this.selectionOptions ?? undefined;
 
     // Scrolling inside table
     (this.novoDataTableContainer.nativeElement as Element).addEventListener('scroll', this.scrollListenerHandler);

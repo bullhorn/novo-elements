@@ -1,7 +1,7 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 
-import { IDataTableChangeEvent, IDataTableFilter, IDataTableSort } from '../interfaces';
+import { IDataTableChangeEvent, IDataTableFilter, IDataTableSelectionOption, IDataTableSort } from '../interfaces';
 import { Helpers } from '../../../utils/Helpers';
 import { NovoDataTableFilterUtils } from '../services/data-table-filter-utils';
 
@@ -23,6 +23,7 @@ export class DataTableState<T> {
   expandedRows: Set<string> = new Set<string>();
   outsideFilter: any;
   isForceRefresh: boolean = false;
+  selectionOptions: IDataTableSelectionOption[];
 
   updates: EventEmitter<IDataTableChangeEvent> = new EventEmitter<IDataTableChangeEvent>();
 
@@ -38,15 +39,17 @@ export class DataTableState<T> {
     return Array.from(this.selectedRows.values());
   }
 
-  public reset(fireUpdate: boolean = true, persistUserFilters?: boolean): void {
+  public reset(fireUpdate: boolean = true, persistUserFilters?: boolean, caller?: string): void {
     if (!persistUserFilters) {
       this.sort = undefined;
       this.globalSearch = undefined;
       this.filter = undefined;
     }
     this.page = 0;
-    this.selectedRows.clear();
-    this.resetSource.next();
+    if (!this.selectionOptions.some(option => option.label === caller)) {
+      this.selectedRows.clear();
+      this.resetSource.next();
+    }
     this.onSortFilterChange();
     if (fireUpdate) {
       this.updates.emit({
