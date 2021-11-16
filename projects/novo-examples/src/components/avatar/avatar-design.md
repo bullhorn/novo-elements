@@ -16,7 +16,7 @@ An avatar acts as a proxy for a user or entity (such as a company) in a product.
 
 </div>
 
-<img src="/assets/images/AvatarOverview.png"/>
+<img src="assets/images/AvatarOverview.png"/>
 
 </novo-grid>
 
@@ -33,13 +33,13 @@ An avatar acts as a proxy for a user or entity (such as a company) in a product.
 >
 > Avatars are a great place to attach a menu with options that you can perform against that user.  This is a common web paradigm that the user will understand intuitively.
 
-![placeholder](/assets/images/AvatarMenu.png)
+![placeholder](assets/images/AvatarMenu.png)
 
 > **Avatar Stack**
 >
 > Avatars are a great place to attach a menu with options that you can perform against that user.  This is a common web paradigm that the user will understand intuitively.
 
-![placeholder](/assets/images/AvatarStack.gif)
+![placeholder](assets/images/AvatarStack.gif)
 
 </novo-grid>
 

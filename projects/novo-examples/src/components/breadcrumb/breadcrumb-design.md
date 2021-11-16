@@ -14,7 +14,7 @@ A breadcrumb displays the current location within a hierarchy. It allows going b
 
 </div>
 
-<img src="/assets/images/AsideOverview.png"/>
+<img src="assets/images/AsideOverview.png"/>
 
 </novo-grid>
 

@@ -14,7 +14,7 @@ Asides are slideouts designed to provide a view into related content within the 
 
 </div>
 
-<img src="/assets/images/AsideOverview.png"/>
+<img src="assets/images/AsideOverview.png"/>
 
 <div>
 

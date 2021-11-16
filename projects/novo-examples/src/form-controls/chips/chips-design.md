@@ -14,7 +14,7 @@ Chips show the user that a view or component represents data from multiple conte
 
 </div>
 
-<img src="/assets/images/ChipsOverview.png"/>
+<img src="assets/images/ChipsOverview.png"/>
 
 <div>
 

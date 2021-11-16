@@ -15,7 +15,7 @@ Popovers are layered containers that hold additional information or controls. Po
 
 </div>
 
-<img src="/assets/images/PopoverOverview.png"/>
+<img src="assets/images/PopoverOverview.png"/>
 
 <div>
 

@@ -14,7 +14,7 @@ Tabs make it easy to explore and switch between different views or functional as
 
 </div>
 
-<img src="/assets/images/ButtonOverview.png"/>
+<img src="assets/images/ButtonOverview.png"/>
 
 <div>
 

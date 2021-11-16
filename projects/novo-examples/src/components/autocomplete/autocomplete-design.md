@@ -15,7 +15,7 @@ The autocomplete component is designed to provide a list of options as the user 
 
 </div>
 
-<img src="/assets/images/AutocompleteOverview.png"/>
+<img src="assets/images/AutocompleteOverview.png"/>
 
 <div>
 

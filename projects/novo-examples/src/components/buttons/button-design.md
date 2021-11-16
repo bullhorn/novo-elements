@@ -16,7 +16,7 @@ Bullhorn button themes were hand crafted to make your life easier. Most buttons 
 
 </div>
 
-<img src="/assets/images/ButtonOverview.png"/>
+<img src="assets/images/ButtonOverview.png"/>
 
 <div>
 
