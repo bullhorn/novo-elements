@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="52px" height="50px" viewBox="0 0 52 50" version="1.1" xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.4.4 (17249) - http://www.bohemiancoding.com/sketch -->
+    <title>Component - Code</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="--Images" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="Component---Code-" sketch:type="MSArtboardGroup">
+            <g id="Oval-26-+-Type-something" sketch:type="MSLayerGroup" transform="translate(6.000000, 5.000000)">
+                <circle id="Oval-26" stroke="#474747" stroke-width="2" sketch:type="MSShapeGroup" cx="19.7047843"
+                        cy="19.7047843" r="19.7047843"></circle>
+                <path
+                    d="M9.87059199,19.596577 L15.5941296,21.6148771 L15.5941296,24.4264395 L6.94857544,20.7613671 L6.94857544,18.3916218 L15.5941296,14.7265495 L15.5941296,17.5381118 L9.87059199,19.596577 Z M18.8977153,27.0572585 L16.7388371,27.0572585 L22.1209707,11.1819727 L24.2798489,11.1819727 L18.8977153,27.0572585 Z M31.5899109,19.5664532 L25.7559191,17.5280705 L25.7559191,14.7365908 L34.5018861,18.4016631 L34.5018861,20.7613671 L25.7559191,24.4364807 L25.7559191,21.6349597 L31.5899109,19.5664532 Z"
+                    id="Type-something" fill="#474747" sketch:type="MSShapeGroup"></path>
+            </g>
+        </g>
+    </g>
+</svg>
