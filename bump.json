@@ -17,7 +17,7 @@
   ],
   "docs": {
     "type": "ghpages",
-    "dir": "docs",
+    "dir": "dist/demo",
     "prepublish": [
       "npm run build:examples",
       {
