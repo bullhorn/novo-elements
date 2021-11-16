@@ -46,10 +46,18 @@ export class DataTableState<T> {
       this.filter = undefined;
     }
     this.page = 0;
-    if (!this.selectionOptions?.some(option => option.label === caller)) {
-      this.selectedRows.clear();
-      this.resetSource.next();
+    switch (caller) {
+      case "page":
+        if (!this.selectionOptions?.some(option => option.label === caller)) {
+          this.selectedRows.clear();
+        }
+        break;
+      default:
+        this.selectedRows.clear();
+        this.resetSource.next();
+        break;
     }
+    this.onSelectionChange();
     this.onSortFilterChange();
     if (fireUpdate) {
       this.updates.emit({

@@ -111,7 +111,7 @@ export interface IDataTableSelectionChangeEvent {
 }
 
 export interface IDataTableSelectionOption {
-  label: 'none' | 'page' | 'sort' | 'filter' | 'globalSearch';
+  label: 'none' | 'page' | 'pageSize' | 'sort' | 'filter' | 'globalSearch';
 }
 
 export interface IDataTablePaginationEvent {

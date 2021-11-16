@@ -46,6 +46,7 @@ export class NovoDataTableCheckboxHeaderCell<T> extends CdkHeaderCell implements
       if (event.isPageSizeChange) {
         this.checked = false;
         this.dataTable.selectRows(false);
+        this.dataTable.state.reset(false, true, 'pageSize');
       } else {
         this.checked = this.dataTable.allCurrentRowsSelected();
       }
