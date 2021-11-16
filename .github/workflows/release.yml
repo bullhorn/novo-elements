@@ -30,7 +30,7 @@ jobs:
         run: |
           npm ci
       - name: Bump And Release
-        uses: bvkimball/bump-and-release@v0.2.0
+        uses: bvkimball/bump-and-release@main
         with:
           git-user-email: 'bvkimball@users.noreply.github.com'
           skip-bump: ${{ github.event.inputs.skip-bump }}
