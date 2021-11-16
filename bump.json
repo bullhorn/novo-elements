@@ -18,16 +18,19 @@
   "docs": {
     "type": "ghpages",
     "dir": "docs",
-    "build": {
-      "preset": "angular",
-      "app": "demo"
-    }
+    "prepublish": [
+      "npm run build:examples",
+      {
+        "preset": "angular",
+        "app": "demo"
+      }
+    ]
   },
   "bundles": [
     {
       "type": "npm",
       "folder": "dist/novo-elements",
-      "prepublish": "npm run build"
+      "prepublish": "npm run build:ci"
     }
   ],
   "bumpFiles": ["package.json", "projects/**/package.json"]
