@@ -26,45 +26,8 @@
   "bundles": [
     {
       "type": "npm",
-      "folder": "./dist",
+      "folder": "dist/novo-elements",
       "prepublish": "npm run build"
-    }
-  ],
-  "bumpFiles": ["package.json"]
-}
-
-
-
-
-{
-  "branches": [
-    {
-      "name": "master",
-      "docs": {
-        "dest": "docs/"
-      }
-    },
-    {
-      "name": "next",
-      "prerelease": "rc",
-      "skipChangeLog": true,
-      "docs": {
-        "dest": "next"
-      }
-    }
-  ],
-  "docs": {
-    "type": "ghpages",
-    "dir": "dist/demo",
-    "build": {
-      "preset": "angular",
-      "app": "demo"
-    }
-  },
-  "bundles": [
-    {
-      "type": "npm",
-      "folder": "dist/novo-elements"
     }
   ],
   "bumpFiles": ["package.json", "projects/**/package.json"]
