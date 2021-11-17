@@ -18,12 +18,6 @@
     },
     {
       "path": "./demo/tsconfig.app.json"
-    },
-    {
-      "path": "./projects/chomsky/tsconfig.lib.json"
-    },
-    {
-      "path": "./projects/chomsky/tsconfig.spec.json"
     }
   ]
 }

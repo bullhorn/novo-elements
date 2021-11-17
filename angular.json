@@ -167,46 +167,6 @@
           }
         }
       }
-    },
-    "chomsky": {
-      "root": "projects/chomsky",
-      "sourceRoot": "projects/chomsky/src",
-      "projectType": "library",
-      "prefix": "lib",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
-          "options": {
-            "tsConfig": "projects/chomsky/tsconfig.lib.json",
-            "project": "projects/chomsky/ng-package.json"
-          },
-          "configurations": {
-            "production": {
-              "tsConfig": "projects/chomsky/tsconfig.lib.prod.json"
-            }
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "projects/chomsky/src/test.ts",
-            "tsConfig": "projects/chomsky/tsconfig.spec.json",
-            "karmaConfig": "projects/chomsky/karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/chomsky/tsconfig.lib.json",
-              "projects/chomsky/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        }
-      }
     }
   },
   "defaultProject": "demo",
