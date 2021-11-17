@@ -706,23 +706,15 @@ describe('Utils: FormUtils', () => {
       expect(formUtils.isAddressEmpty(control)).toEqual(true);
     });
   });
-  describe('Method: getStartDate(data: any, meta: any): string | null', () => {
-    it('should use minDate', () => {
-      const field = { allowedDateRange: { minDate: '2019-01-26' } };
-      const startDate = formUtils.getStartDate(field);
-      expect(startDate).toBeInstanceOf(Date);
-    });
-    it('should use minOffset', () => {
-      const field = { allowedDateRange: { minOffset: 1 } };
-      const startDate = formUtils.getStartDate(field);
-      expect(startDate).toBeInstanceOf(Date);
-    });
-  });
-  describe('Method: inferStartDate()', () => {
-    it('should return Date', () => {
-      const field = { dataType: 'Date', allowedDateRange: { minOffset: 1 } };
-      const startDate = formUtils.inferStartDate({}, field);
-      expect(startDate).toBeInstanceOf(Date);
+  describe('Method: inferDateRange()', () => {
+    it('should set start and end dates', () => {
+      const field = { dataType: 'Date', allowedDateRange: { minDate: '2021-01-01', maxDate: '2021-12-31' } };
+      const controlConfig = {};
+      formUtils.inferDateRange(controlConfig, field);
+      expect(Object.keys(controlConfig).length).toBeGreaterThan(0);
+      expect(controlConfig.hasOwnProperty('startDate')).toBe(true);
+      expect(controlConfig.hasOwnProperty('endDate')).toBe(true);
+      expect(controlConfig.hasOwnProperty('customTooltip')).toBe(true);
     });
   });
   describe('Method: inflateEmbeddedProperties()', () => {
