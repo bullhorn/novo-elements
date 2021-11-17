@@ -52,6 +52,7 @@ export * from './tiles';
 export * from './time-picker';
 export * from './tip-well';
 export * from './toast';
+export * from './toolbar';
 export * from './tooltip';
 export * from './unless';
 export * from './value';

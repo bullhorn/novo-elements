@@ -1,6 +1,6 @@
 // tslint:disable: directive-selector
 import { Directive, HostBinding, Input } from '@angular/core';
-
+import * as tokens from 'novo-design-tokens';
 /*
 Prop	CSS Property	Theme Field
 m, margin	margin	space
@@ -39,6 +39,14 @@ const paddingAttrs = [
 const selectors = [...marginAttrs, ...paddingAttrs];
 */
 
+const getSpacingToken = (value: string) => {
+  if (Object.keys(tokens.spacing).includes(value)) {
+    return tokens.spacing[value];
+  }
+  // TODO: Maybe Validate Value ie.(rem, px)
+  return value;
+};
+
 @Directive({
   // tslint:disable-next-line: max-line-length
   selector: '[m],[margin],[marginTop],[marginRight],[marginBottom],[marginLeft],[marginX],[marginY],[mt],[mr],[mb],[ml],[mx],[my]',
@@ -60,20 +68,20 @@ export class MarginDirective {
   @Input() marginY: string;
   @Input() my: string;
 
-  @HostBinding('class') get hb_margin() {
-    return `margin-${this.margin || this.m}`;
+  @HostBinding('style.margin') get hb_margin() {
+    return getSpacingToken(this.margin || this.m);
   }
   @HostBinding('style.margin-left') get hb_margin_left() {
-    return this.marginLeft || this.ml || this.mx || this.marginX;
+    return getSpacingToken(this.marginLeft || this.ml || this.mx || this.marginX);
   }
   @HostBinding('style.margin-right') get hb_margin_right() {
-    return this.marginRight || this.mr || this.mx || this.marginX;
+    return getSpacingToken(this.marginRight || this.mr || this.mx || this.marginX);
   }
   @HostBinding('style.margin-top') get hb_margin_top() {
-    return this.marginTop || this.mt || this.my || this.marginY;
+    return getSpacingToken(this.marginTop || this.mt || this.my || this.marginY);
   }
   @HostBinding('style.margin-bottom') get hb_margin_bottom() {
-    return this.marginBottom || this.mb || this.my || this.marginY;
+    return getSpacingToken(this.marginBottom || this.mb || this.my || this.marginY);
   }
 }
 
@@ -98,23 +106,35 @@ export class PaddingDirective {
   @Input() paddingY: string;
   @Input() py: string;
 
-  // @HostBinding('style.padding') get hb_padding() {
-  //   return this.padding || this.p;
-  // }
-  @HostBinding('class') get hb_padding() {
-    return `padding-${this.padding || this.p}`;
+  @HostBinding('style.padding') get hb_padding() {
+    return getSpacingToken(this.padding || this.p);
   }
+  // @HostBinding('class') get hb_padding() {
+  //   return `padding-${this.padding || this.p}`;
+  // }
 
   @HostBinding('style.padding-left') get hb_padding_left() {
-    return this.paddingLeft || this.pl || this.px || this.paddingX;
+    return getSpacingToken(this.paddingLeft || this.pl || this.px || this.paddingX);
   }
   @HostBinding('style.padding-right') get hb_padding_right() {
-    return this.paddingRight || this.pr || this.px || this.paddingX;
+    return getSpacingToken(this.paddingRight || this.pr || this.px || this.paddingX);
   }
   @HostBinding('style.padding-top') get hb_padding_top() {
-    return this.paddingTop || this.pt || this.py || this.paddingY;
+    return getSpacingToken(this.paddingTop || this.pt || this.py || this.paddingY);
   }
   @HostBinding('style.padding-bottom') get hb_padding_bottom() {
-    return this.paddingBottom || this.pb || this.py || this.paddingY;
+    return getSpacingToken(this.paddingBottom || this.pb || this.py || this.paddingY);
+  }
+}
+
+@Directive({
+  selector: '[gap]',
+})
+export class GapDirective {
+  @Input() gap: string;
+
+  @HostBinding('style.gap')
+  get hb_gap() {
+    return getSpacingToken(this.gap);
   }
 }

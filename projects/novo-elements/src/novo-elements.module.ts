@@ -61,6 +61,7 @@ import { NovoTilesModule } from './elements/tiles/Tiles.module';
 import { NovoTimePickerModule } from './elements/time-picker/TimePicker.module';
 import { NovoTipWellModule } from './elements/tip-well/TipWell.module';
 import { NovoToastModule } from './elements/toast/Toast.module';
+import { NovoToolbarModule } from './elements/toolbar/toolbar.module';
 import { NovoTooltipModule } from './elements/tooltip/Tooltip.module';
 import { UnlessModule } from './elements/unless/Unless.module';
 import { NovoValueModule } from './elements/value/Value.module';
@@ -130,6 +131,7 @@ import { FormUtils } from './utils/form-utils/FormUtils';
     NovoCommonModule,
     NovoOptionModule,
     NovoStepperModule,
+    NovoToolbarModule,
     ScrollingModule,
     NovoTabbedGroupPickerModule,
     NovoNonIdealStateModule,

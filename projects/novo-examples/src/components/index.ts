@@ -24,4 +24,5 @@ export * from './tabbed-group-picker';
 export * from './table';
 export * from './tip-well';
 export * from './toaster';
+export * from './toolbar';
 export * from './tooltip';

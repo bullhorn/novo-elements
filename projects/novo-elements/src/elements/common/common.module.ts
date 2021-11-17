@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { BackgroundColorDirective } from './directives/bgc.directive';
 import { BorderDirective } from './directives/border.directive';
 import { TextColorDirective } from './directives/color.directive';
-import { MarginDirective, PaddingDirective } from './directives/space.directive';
+import { GapDirective, MarginDirective, PaddingDirective } from './directives/space.directive';
 import { NovoTemplate } from './novo-template/novo-template.directive';
 import { NovoOptionModule } from './option';
 import { NovoCaption } from './typography/caption/caption.component';
@@ -25,6 +25,7 @@ import { NovoTitle } from './typography/title/title.component';
     BackgroundColorDirective,
     TextColorDirective,
     BorderDirective,
+    GapDirective,
   ],
   declarations: [
     NovoTemplate,
@@ -38,6 +39,7 @@ import { NovoTitle } from './typography/title/title.component';
     BackgroundColorDirective,
     TextColorDirective,
     BorderDirective,
+    GapDirective,
   ],
 })
 export class NovoCommonModule {}

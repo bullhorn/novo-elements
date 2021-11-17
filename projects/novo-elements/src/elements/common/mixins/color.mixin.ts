@@ -35,10 +35,10 @@ export function mixinColor<T extends Constructor<HasElementRef>>(base: T, defaul
 
       if (colorPalette !== this._color) {
         if (this._color) {
-          this._elementRef.nativeElement.classList.remove(`novo-${this._color}`);
+          this._elementRef.nativeElement.classList.remove(`novo-color-${this._color}`);
         }
         if (colorPalette) {
-          this._elementRef.nativeElement.classList.add(`novo-${colorPalette}`);
+          this._elementRef.nativeElement.classList.add(`novo-color-${colorPalette}`);
         }
 
         this._color = colorPalette;
