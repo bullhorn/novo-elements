@@ -256,7 +256,7 @@ export class FormUtils {
       closeOnSelect: field.closeOnSelect,
       layoutOptions: field.layoutOptions,
     };
-    this.inferStartDate(controlConfig, field);
+    this.inferDateRange(controlConfig, field);
     // TODO: getControlOptions should always return the correct format
     const optionsConfig = this.getControlOptions(field, http, config, fieldData);
     if (Array.isArray(optionsConfig) && !(type === 'chips' || type === 'picker')) {
@@ -835,24 +835,23 @@ export class FormUtils {
     }
   }
 
+  private getEndDateFromRange(dateRange: { maxDate: string; minOffset: number }): Date {
+    if (dateRange.maxDate) {
+      return dateFns.parse(dateRange.maxDate);
+    } else if (dateRange.minOffset) {
+      return dateFns.addDays(dateFns.startOfToday(), dateRange.minOffset);
+    }
+  }
+
   /**
    * Get the min start date of a Date base on field data.
    */
-  private getStartDate(field: any): Date | null {
-    if (field.allowedDateRange) {
-      return this.getStartDateFromRange(field.allowedDateRange);
-    }
-    // there is no restriction on the start date
-    return null;
-  }
 
-  private inferStartDate(controlConfig, field) {
-    if (field.dataType === 'Date') {
-      const startDate = this.getStartDate(field);
-      if (startDate) {
-        controlConfig.startDate = startDate;
-      }
-      return startDate;
+  private inferDateRange(controlConfig, field): void {
+    if (field.dataType === 'Date' && field.allowedDateRange) {
+      controlConfig.startDate = this.getStartDateFromRange(field.allowedDateRange);
+      controlConfig.endDate = this.getEndDateFromRange(field.allowedDateRange);
+      controlConfig.customTooltip = field.allowedDateRange.customTooltip;
     }
   }
 
