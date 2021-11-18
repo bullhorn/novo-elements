@@ -1,6 +1,7 @@
 import { CdkColumnDef, CdkHeaderCell } from '@angular/cdk/table';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, HostBinding, OnDestroy, Renderer2 } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { NovoToastService } from '../../toast/ToastService';
 import { NovoDataTable } from '../data-table.component';
 
 
@@ -32,6 +33,7 @@ export class NovoDataTableCheckboxHeaderCell<T> extends CdkHeaderCell implements
     renderer: Renderer2,
     private dataTable: NovoDataTable<T>,
     private ref: ChangeDetectorRef,
+    private toaster: NovoToastService,
   ) {
     super(columnDef, elementRef);
     renderer.setAttribute(elementRef.nativeElement, 'data-automation-id', `novo-checkbox-column-header-${columnDef.cssClassFriendlyName}`);
@@ -46,7 +48,8 @@ export class NovoDataTableCheckboxHeaderCell<T> extends CdkHeaderCell implements
       if (event.isPageSizeChange) {
         this.checked = false;
         this.dataTable.selectRows(false);
-        this.dataTable.state.reset(false, true, 'pageSize');
+        this.dataTable.state.checkRetainment('pageSize');
+        this.dataTable.state.reset(false, true);
       } else {
         this.checked = this.dataTable.allCurrentRowsSelected();
       }
@@ -71,6 +74,19 @@ export class NovoDataTableCheckboxHeaderCell<T> extends CdkHeaderCell implements
   }
 
   public onClick(): void {
-    this.dataTable.selectRows(!this.checked);
+    if (this.isAtLimit()) {
+      this.toaster.alert({
+        theme: 'danger',
+        position: 'fixedTop',
+        message: 'Error, more than 500 files are not able to be selected at one time',
+        icon: 'caution',
+      })
+    } else {
+      this.dataTable.selectRows(!this.checked);
+    }
+  }
+
+  public isAtLimit() {
+    return this.dataTable.state.selectedRows.size + this.dataTable.state.pageSize >= 5;
   }
 }

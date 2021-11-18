@@ -24,8 +24,8 @@ export class DataTableState<T> {
   outsideFilter: any;
   isForceRefresh: boolean = false;
   selectionOptions: IDataTableSelectionOption[];
-
   updates: EventEmitter<IDataTableChangeEvent> = new EventEmitter<IDataTableChangeEvent>();
+  retainSelected: boolean = false;
 
   get userFiltered(): boolean {
     return !!(this.filter || this.sort || this.globalSearch || this.outsideFilter);
@@ -39,26 +39,19 @@ export class DataTableState<T> {
     return Array.from(this.selectedRows.values());
   }
 
-  public reset(fireUpdate: boolean = true, persistUserFilters?: boolean, caller?: string): void {
+  public reset(fireUpdate: boolean = true, persistUserFilters?): void {
     if (!persistUserFilters) {
       this.sort = undefined;
       this.globalSearch = undefined;
       this.filter = undefined;
     }
     this.page = 0;
-    switch (caller) {
-      case "page":
-        if (!this.selectionOptions?.some(option => option.label === caller)) {
-          this.selectedRows.clear();
-        }
-        break;
-      default:
-        this.selectedRows.clear();
-        this.resetSource.next();
-        break;
+    if (!this.retainSelected) {
+      this.selectedRows.clear();
+      this.resetSource.next();
     }
-    this.onSelectionChange();
     this.onSortFilterChange();
+    this.retainSelected = false;
     if (fireUpdate) {
       this.updates.emit({
         sort: this.sort,
@@ -71,8 +64,8 @@ export class DataTableState<T> {
   public clearSort(fireUpdate: boolean = true): void {
     this.sort = undefined;
     this.page = 0;
-    this.selectedRows.clear();
-    this.resetSource.next();
+    this.checkRetainment('sort');
+    this.reset(fireUpdate, true)
     this.onSortFilterChange();
     if (fireUpdate) {
       this.updates.emit({
@@ -87,9 +80,23 @@ export class DataTableState<T> {
     this.filter = undefined;
     this.globalSearch = undefined;
     this.page = 0;
-    this.selectedRows.clear();
-    this.resetSource.next();
+    this.checkRetainment('filter');
+    this.reset(fireUpdate, true)
     this.onSortFilterChange();
+    if (fireUpdate) {
+      this.updates.emit({
+        sort: this.sort,
+        filter: this.filter,
+        globalSearch: this.globalSearch,
+      });
+    }
+  }
+
+  public clearSelected(fireUpdate: boolean = true): void {
+    this.globalSearch = undefined;
+    this.page = 0;
+    this.reset(fireUpdate, true)
+    this.onSelectionChange();
     if (fireUpdate) {
       this.updates.emit({
         sort: this.sort,
@@ -108,10 +115,13 @@ export class DataTableState<T> {
   }
 
   public onPaginationChange(isPageSizeChange: boolean, pageSize: number): void {
+    this.checkRetainment('page');
     this.paginationSource.next({ isPageSizeChange, pageSize });
   }
 
   public onSortFilterChange(): void {
+    this.checkRetainment('sort');
+    this.checkRetainment('filter');
     this.sortFilterSource.next({
       sort: this.sort,
       filter: this.filter,
@@ -136,5 +146,9 @@ export class DataTableState<T> {
         this.filter = filters;
       }
     }
+  }
+
+  public checkRetainment(caller: string): void {
+    this.retainSelected = this.selectionOptions?.some(option => option.label === caller) || this.retainSelected;
   }
 }

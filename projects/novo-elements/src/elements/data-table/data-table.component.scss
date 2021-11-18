@@ -290,6 +290,9 @@ cdk-table {
     cursor: pointer;
     i {
       cursor: pointer;
+      &.bhi-checkbox-disabled {
+        cursor: not-allowed !important
+      }
       &.bhi-checkbox-empty {
         color: #d2d2d2;
       }

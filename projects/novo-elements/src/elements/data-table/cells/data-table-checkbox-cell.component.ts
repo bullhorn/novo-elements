@@ -17,10 +17,11 @@ import { NovoDataTable } from '../data-table.component';
 @Component({
   selector: 'novo-data-table-checkbox-cell',
   template: `
-    <div class="data-table-checkbox" (click)="onClick()">
+    <div class="data-table-checkbox" (click)="onClick()" [tooltip]="getTooltip()" tooltipPosition="right">
       <input type="checkbox" [checked]="checked">
       <label>
-        <i [class.bhi-checkbox-empty]="!checked"
+        <i [class.bhi-checkbox-disabled]="isAtLimit()"
+          [class.bhi-checkbox-empty]="!checked"
           [class.bhi-checkbox-filled]="checked"></i>
       </label>
     </div>
@@ -66,7 +67,17 @@ export class NovoDataTableCheckboxCell<T> extends CdkCell implements OnInit, OnD
   }
 
   public onClick(): void {
-    this.dataTable.selectRow(this.row);
+    if (!this.isAtLimit()) {
+      this.dataTable.selectRow(this.row);
+    }
+  }
+
+  public getTooltip() {
+    return this.isAtLimit() ? "More than 500 files are not able to be selected at one time" : ""
+  }
+
+  public isAtLimit() {
+    return this.dataTable.state.selectedRows.size >= 5 && !this.checked ;
   }
 
   public ngOnDestroy(): void {
