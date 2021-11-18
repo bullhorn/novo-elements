@@ -73,7 +73,7 @@ export class NovoDataTableCheckboxCell<T> extends CdkCell implements OnInit, OnD
   }
 
   public getTooltip() {
-    return this.isAtLimit() ? 'More than 500 files are not able to be selected at one time' : ''
+    return this.isAtLimit() ? 'More than 500 files are not able to be selected at one time' : '';
   }
 
   public isAtLimit() {

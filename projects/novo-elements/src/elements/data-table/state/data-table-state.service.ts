@@ -65,7 +65,7 @@ export class DataTableState<T> {
     this.sort = undefined;
     this.page = 0;
     this.checkRetainment('sort');
-    this.reset(fireUpdate, true)
+    this.reset(fireUpdate, true);
     this.onSortFilterChange();
     if (fireUpdate) {
       this.updates.emit({
@@ -81,7 +81,7 @@ export class DataTableState<T> {
     this.globalSearch = undefined;
     this.page = 0;
     this.checkRetainment('filter');
-    this.reset(fireUpdate, true)
+    this.reset(fireUpdate, true);
     this.onSortFilterChange();
     if (fireUpdate) {
       this.updates.emit({
@@ -95,7 +95,7 @@ export class DataTableState<T> {
   public clearSelected(fireUpdate: boolean = true): void {
     this.globalSearch = undefined;
     this.page = 0;
-    this.reset(fireUpdate, true)
+    this.reset(fireUpdate, true);
     this.onSelectionChange();
     if (fireUpdate) {
       this.updates.emit({
