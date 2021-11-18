@@ -22,7 +22,7 @@ const DATE_VALUE_ACCESSOR = {
       (ngModelChange)="updateDate($event)"
       [start]="start"
       [end]="end"
-      [tooltip]="tooltip"
+      [customTooltip]="customTooltip"
       [maskOptions]="maskOptions"
       (blurEvent)="handleBlur($event)"
       (focusEvent)="handleFocus($event)"
@@ -69,7 +69,7 @@ export class NovoDateTimePickerInputElement implements ControlValueAccessor {
   @Input()
   weekStart: number = 0;
   @Input()
-  tooltip: string;
+  customTooltip: string;
   @Output()
   blurEvent: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
   @Output()
