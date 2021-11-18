@@ -80,7 +80,7 @@ export class NovoDataTableCheckboxHeaderCell<T> extends CdkHeaderCell implements
         position: 'fixedTop',
         message: 'Error, more than 500 files are not able to be selected at one time',
         icon: 'caution',
-      })
+      });
     } else {
       this.dataTable.selectRows(!this.checked);
     }
