@@ -3,6 +3,7 @@ novo-loading {
   display: flex;
   flex-direction: row;
   font-size: 13px;
+  $jump-percentage: 1;
 
   span.dot {
     display: block;
@@ -27,6 +28,17 @@ novo-loading {
       background-color: #fff !important;
     }
   }
+
+  &[size="small"] {
+    padding: 0;
+    font-size: 3px;
+    span.dot {
+      height: 2px;
+      width: 2px;
+      margin: .5px;
+      $jump-percentage: .3;
+    }
+  }
 }
 
 @keyframes jump {
@@ -40,12 +52,12 @@ novo-loading {
   }
 
   45% {
-    transform: translateY(-1.5em);
+    transform: translateY(calc(-1.5em * $jump-percentage));
     opacity: 0.5;
   }
 
   60% {
-    transform: translateY(0.8em);
+    transform: translateY(calc(0.8em * $jump-percentage));
     opacity: 0.95;
   }
 

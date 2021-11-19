@@ -1,4 +1,3 @@
-// NG2
 import { Component, ContentChildren, Directive, EmbeddedViewRef, HostBinding, Input, QueryList, TemplateRef, ViewContainerRef } from '@angular/core';
 
 @Component({
@@ -6,17 +5,23 @@ import { Component, ContentChildren, Directive, EmbeddedViewRef, HostBinding, In
   host: {
     '[class]': 'theme || ""',
   },
-  template: `
-        <span class="dot"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
-    `,
+  template: `<span class="dot" *ngFor="let dot of countArray"></span>`,
 })
 export class NovoLoadingElement {
-  @Input()
-  theme: string;
+  @Input() theme: string;
+  @Input() size: 'small' | 'medium' = 'medium';
+
+  countArray: number[];
+  @Input() set count(value: number) {
+    if (!value) {
+      value = 5;
+    }
+    if (value > 5) {
+      console.warn('Only 5 loading dots are allowed');
+      value = 5;
+    }
+    this.countArray = new Array(value);
+  }
 }
 
 @Component({
