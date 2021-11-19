@@ -77,7 +77,7 @@ export class NovoDataTableCheckboxCell<T> extends CdkCell implements OnInit, OnD
   }
 
   public isAtLimit() {
-    return this.dataTable.state.selectedRows.size >= 5 && !this.checked ;
+    return this.dataTable.state.selectedRows.size >= 500 && !this.checked ;
   }
 
   public ngOnDestroy(): void {
