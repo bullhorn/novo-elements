@@ -27,6 +27,10 @@ export class NovoDataTableCheckboxHeaderCell<T> extends CdkHeaderCell implements
   private paginationSubscription: Subscription;
   private resetSubscription: Subscription;
 
+  get isAtLimit(): boolean {
+    return this.dataTable.state.selectedRows.size + this.dataTable.state.pageSize >= 500;
+  }
+
   constructor(
     columnDef: CdkColumnDef,
     elementRef: ElementRef,
@@ -74,19 +78,15 @@ export class NovoDataTableCheckboxHeaderCell<T> extends CdkHeaderCell implements
   }
 
   public onClick(): void {
-    if (this.isAtLimit()) {
+    if (this.isAtLimit) {
       this.toaster.alert({
         theme: 'danger',
         position: 'fixedTop',
-        message: 'Error, more than 500 files are not able to be selected at one time',
+        message: 'Error, more than 500 items are not able to be selected at one time',
         icon: 'caution',
       });
     } else {
       this.dataTable.selectRows(!this.checked);
     }
-  }
-
-  public isAtLimit() {
-    return this.dataTable.state.selectedRows.size + this.dataTable.state.pageSize >= 500;
   }
 }

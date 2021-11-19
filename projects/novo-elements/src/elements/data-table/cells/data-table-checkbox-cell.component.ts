@@ -20,7 +20,7 @@ import { NovoDataTable } from '../data-table.component';
     <div class="data-table-checkbox" (click)="onClick()" [tooltip]="getTooltip()" tooltipPosition="right">
       <input type="checkbox" [checked]="checked">
       <label>
-        <i [class.bhi-checkbox-disabled]="isAtLimit()"
+        <i [class.bhi-checkbox-disabled]="isAtLimit"
           [class.bhi-checkbox-empty]="!checked"
           [class.bhi-checkbox-filled]="checked"></i>
       </label>
@@ -39,6 +39,10 @@ export class NovoDataTableCheckboxCell<T> extends CdkCell implements OnInit, OnD
 
   private selectionSubscription: Subscription;
   private resetSubscription: Subscription;
+
+  get isAtLimit(): boolean {
+    return this.dataTable.state.selectedRows.size + this.dataTable.state.pageSize >= 500;
+  }
 
   constructor(
     public columnDef: CdkColumnDef,
@@ -67,17 +71,13 @@ export class NovoDataTableCheckboxCell<T> extends CdkCell implements OnInit, OnD
   }
 
   public onClick(): void {
-    if (!this.isAtLimit()) {
+    if (!this.isAtLimit) {
       this.dataTable.selectRow(this.row);
     }
   }
 
   public getTooltip() {
-    return this.isAtLimit() ? 'More than 500 files are not able to be selected at one time' : '';
-  }
-
-  public isAtLimit() {
-    return this.dataTable.state.selectedRows.size >= 500 && !this.checked ;
+    return this.isAtLimit ? 'More than 500 items are not able to be selected at one time' : '';
   }
 
   public ngOnDestroy(): void {
