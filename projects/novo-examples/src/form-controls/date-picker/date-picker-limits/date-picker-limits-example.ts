@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NovoLabelService } from 'novo-elements';
+import { FormUtils, BaseControl, NovoFormGroup, TextBoxControl } from 'novo-elements';
 
 /**
  * @title Date picker limits Example
@@ -13,4 +14,19 @@ export class DatePickerLimitsExample {
   startDate: Date = new Date();
   endDate: Date = new Date();
   tooltip: String = 'this is a disabled date tooltip';
+  public initValue: {}[] = [{ tooltip: this.tooltip }];
+
+  public formGroup: NovoFormGroup;
+  public controls: BaseControl[] = [];
+
+  constructor(private formUtils: FormUtils) {
+    this.formGroup = this.formUtils.emptyFormGroup();
+    const c1 = new TextBoxControl({ key: 'tooltip', label: 'what is your tooltip be?' });
+    this.controls.push(c1);
+  }
+
+  public updateInitialValue() {
+    this.tooltip = this.formGroup.value?.horizontal[0]?.tooltip;
+    this.initValue = [{ tooltip: this.tooltip }];
+  }
 }
