@@ -41,7 +41,7 @@ export class NovoDataTableCheckboxCell<T> extends CdkCell implements OnInit, OnD
   private resetSubscription: Subscription;
 
   get isAtLimit(): boolean {
-    return this.dataTable.state.selectedRows.size + this.dataTable.state.pageSize >= 500;
+    return this.dataTable.state.selectedRows.size >= 500 && !this.checked;
   }
 
   constructor(

@@ -9,6 +9,7 @@ import {
   NovoModalService,
   NovoDataTable,
   IDataTablePreferences,
+  IDataTableSelectionOption,
 } from 'novo-elements';
 
 import { ConfigureColumnsModal, MockData } from '../extras';
@@ -30,6 +31,7 @@ export class DataTableRowsExample {
   public dataSetOptions: any[] = [{ label: 'Dataset #1', value: 1 }, { label: 'Dataset #2', value: 2 }, { label: 'Dataset #3', value: 3 }];
   public loadedDataSet: number = 1;
   public paginationTypeOptions: any[] = [{ label: 'Standard', value: 'standard' }, { label: 'Basic', value: 'basic' }];
+  public selectionOptions: IDataTableSelectionOption[] = [{label: 'page'}];
   public loadedPaginationType: string = 'standard';
   public globalSearchOptions: any[] = [{ label: 'Show', value: true }, { label: 'Hide', value: false }];
   public loadedGlobalSearch: boolean = false;

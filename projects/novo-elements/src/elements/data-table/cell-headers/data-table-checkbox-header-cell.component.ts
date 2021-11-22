@@ -28,7 +28,7 @@ export class NovoDataTableCheckboxHeaderCell<T> extends CdkHeaderCell implements
   private resetSubscription: Subscription;
 
   get isAtLimit(): boolean {
-    return this.dataTable.state.selectedRows.size + this.dataTable.state.pageSize >= 500;
+    return this.dataTable.state.selectedRows.size + this.dataTable.dataSource.data.length > 500;
   }
 
   constructor(

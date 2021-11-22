@@ -9,6 +9,8 @@
     <h6>Configure Columns</h6>
     <button theme="primary" (click)="toggleRowDetails(true)">Show Row Details (first table)</button>
     <button theme="primary" (click)="toggleRowDetails(false)">Hide Row Details (first table)</button>
+    <h6>Selection retention across pagination configured</h6>
+    Selection retention can be configured to keep records selected across pagination, sorting, and filtering
 
 <div class="fixedWindowSize">
 <novo-data-table [rows]="basicRows"
@@ -17,6 +19,7 @@
                  [hideGlobalSearch]="!globalSearchEnabled"
                  [displayedColumns]="sharedDisplayColumns"
                  [paginationOptions]="sharedPaginationOptions"
+                 [selectionOptions]="selectionOptions"
                  name="demo-basic-rows"
                  [refreshSubject]="refreshSubject"
                  (preferencesChanged)="onPreferencesChanged($event)"
