@@ -1,0 +1,10 @@
+<div class="date-picker-demo-side-by-side">
+  <div>
+    <label>Start Date</label>
+    <novo-date-picker-input [(ngModel)]="startDate"></novo-date-picker-input>
+    <label>End Date</label>
+    <novo-date-picker-input [(ngModel)]="endDate"></novo-date-picker-input>
+    <label>Date Picker With Disabled Tooltip</label>
+  </div>
+  <novo-date-picker [start]="startDate" [end]="endDate" [disabledTooltip]="tooltip"></novo-date-picker>
+</div>
