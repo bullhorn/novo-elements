@@ -5,8 +5,21 @@ import { async, inject, TestBed } from '@angular/core/testing';
 import { from } from 'rxjs';
 // APP
 import {
-  AddressControl, CheckboxControl, CheckListControl, DateControl, DateTimeControl, EditorControl, FileControl, PickerControl, RadioControl, SelectControl, TextAreaControl,
-  TextBoxControl, TilesControl, TimeControl,
+  AddressControl,
+  CheckboxControl,
+  CheckListControl,
+  DateControl,
+  DateTimeControl,
+  EditorControl,
+  FileControl,
+  NovoControlConfig,
+  PickerControl,
+  RadioControl,
+  SelectControl,
+  TextAreaControl,
+  TextBoxControl,
+  TilesControl,
+  TimeControl,
 } from '../../elements/form/FormControls';
 import { FormUtils } from './FormUtils';
 import { NovoFormControl } from '../../elements/form/NovoFormControl';
@@ -707,14 +720,71 @@ describe('Utils: FormUtils', () => {
     });
   });
   describe('Method: inferDateRange()', () => {
+    it('should not set start and end dates', () => {
+      const field = { dataType: 'Date' };
+      const controlConfig = {};
+      formUtils.inferDateRange(controlConfig, field);
+      expect(Object.keys(controlConfig).length).toBe(0);
+      expect(controlConfig.hasOwnProperty('startDate')).toBe(false);
+      expect(controlConfig.hasOwnProperty('endDate')).toBe(false);
+      expect(controlConfig.hasOwnProperty('disabledTooltip')).toBe(false);
+    });
     it('should set start and end dates', () => {
       const field = { dataType: 'Date', allowedDateRange: { minDate: '2021-01-01', maxDate: '2021-12-31' } };
-      const controlConfig = {};
+      const controlConfig: NovoControlConfig = {};
       formUtils.inferDateRange(controlConfig, field);
       expect(Object.keys(controlConfig).length).toBeGreaterThan(0);
       expect(controlConfig.hasOwnProperty('startDate')).toBe(true);
       expect(controlConfig.hasOwnProperty('endDate')).toBe(true);
       expect(controlConfig.hasOwnProperty('disabledTooltip')).toBe(true);
+    });
+    it('should set start date only when just minOffset is passed', () => {
+      const field = { dataType: 'Date', allowedDateRange: { minOffset: 1 } };
+      const controlConfig = {};
+      formUtils.inferDateRange(controlConfig, field);
+      expect(Object.keys(controlConfig).length).toBeGreaterThan(0);
+      expect(controlConfig.hasOwnProperty('startDate')).toBe(true);
+      expect(controlConfig['startDate']).toBeDefined;
+      expect(controlConfig.hasOwnProperty('endDate')).toBe(true);
+      expect(controlConfig['endDate']).not.toBeDefined;
+      expect(controlConfig.hasOwnProperty('disabledTooltip')).toBe(true);
+      expect(controlConfig['disabledTooltip']).not.toBeDefined;
+    });
+    it('should set start date only when just minDate is passed', () => {
+      const field = { dataType: 'Date', allowedDateRange: { minDate: '2021-01-01' } };
+      const controlConfig = {};
+      formUtils.inferDateRange(controlConfig, field);
+      expect(Object.keys(controlConfig).length).toBeGreaterThan(0);
+      expect(controlConfig.hasOwnProperty('startDate')).toBe(true);
+      expect(controlConfig['startDate']).toBeDefined;
+      expect(controlConfig.hasOwnProperty('endDate')).toBe(true);
+      expect(controlConfig['endDate']).not.toBeDefined;
+      expect(controlConfig.hasOwnProperty('disabledTooltip')).toBe(true);
+      expect(controlConfig['disabledTooltip']).not.toBeDefined;
+    });
+    it('should set end date only when just maxOffset is passed', () => {
+      const field = { dataType: 'Date', allowedDateRange: { maxOffset: 1 } };
+      const controlConfig = {};
+      formUtils.inferDateRange(controlConfig, field);
+      expect(Object.keys(controlConfig).length).toBeGreaterThan(0);
+      expect(controlConfig.hasOwnProperty('startDate')).toBe(true);
+      expect(controlConfig['startDate']).not.toBeDefined;
+      expect(controlConfig.hasOwnProperty('endDate')).toBe(true);
+      expect(controlConfig['endDate']).toBeDefined;
+      expect(controlConfig.hasOwnProperty('disabledTooltip')).toBe(true);
+      expect(controlConfig['disabledTooltip']).not.toBeDefined;
+    });
+    it('should set end date only when just maxOffset is passed', () => {
+      const field = { dataType: 'Date', allowedDateRange: { maxDate: '2021-01-01' } };
+      const controlConfig = {};
+      formUtils.inferDateRange(controlConfig, field);
+      expect(Object.keys(controlConfig).length).toBeGreaterThan(0);
+      expect(controlConfig.hasOwnProperty('startDate')).toBe(true);
+      expect(controlConfig['startDate']).not.toBeDefined;
+      expect(controlConfig.hasOwnProperty('endDate')).toBe(true);
+      expect(controlConfig['endDate']).toBeDefined;
+      expect(controlConfig.hasOwnProperty('disabledTooltip')).toBe(true);
+      expect(controlConfig['disabledTooltip']).not.toBeDefined;
     });
   });
   describe('Method: inflateEmbeddedProperties()', () => {
