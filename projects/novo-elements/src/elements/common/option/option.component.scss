@@ -25,11 +25,11 @@ $novo-menu-side-padding: 0.5rem;
   }
 
   &:active {
-    background: rgba($ocean, 0.3);
+    background: rgba($ocean, 0.3); //TODO: use selection css var
   }
 
   &.novo-active {
-    background: rgba($ocean, 0.3);
+    background: rgba($ocean, 0.3); //TODO: use selection css var
   }
 
   &.novo-selected {
@@ -51,6 +51,23 @@ $novo-menu-side-padding: 0.5rem;
     [dir="rtl"] & {
       padding-left: $novo-menu-side-padding;
       padding-right: $novo-menu-side-padding * 2;
+    }
+  }
+
+  @include theme-colors() using ($color, $name) {
+    &.novo-accent-#{$name} {
+      border-left: 4px solid $color;
+    }
+    &.novo-fill-#{$name} {
+      color: getContrastColor($name);
+      background: $color;
+      &:hover,
+      &:focus {
+        background: getTintColor($name);
+      }
+      &:active {
+        background: getShadeColor($name);
+      }
     }
   }
 }

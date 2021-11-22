@@ -5,8 +5,9 @@ export const elementSelectors: VersionChanges<ElementSelectorUpgradeData> = {
     {
       pr: 'https://github.com/angular/components/pull/10297',
       changes: [
-        { replace: 'button', replaceWith: 'novo-button' },
-        { replace: 'header', replaceWith: 'novo-header' },
+        // { replace: 'button', replaceWith: 'novo-button' },
+        // { replace: 'header', replaceWith: 'novo-header' },
+        // { replace: 'utils', replaceWith: 'novo-utils' },
         { replace: 'util-action', replaceWith: 'novo-action' },
         { replace: 'novo-calendar-day', replaceWith: 'novo-agenda-day' },
         { replace: 'novo-calendar-week', replaceWith: 'novo-agenda-week' },

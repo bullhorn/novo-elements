@@ -1,10 +1,10 @@
-import { getAllVersionNames } from '@angular/cdk/schematics';
-import { defineJasmineTestCases, findBazelVersionTestCases } from '@angular/cdk/schematics/testing';
+import * as path from 'path';
 import { MIGRATION_PATH } from '../../paths';
+import { defineJasmineTestCases, findVersionTestCases } from '../../testing';
 
-describe('Material upgrade test cases', () => {
-  const versionNames = getAllVersionNames().map((versionName) => versionName.toLowerCase());
-  const testCasesMap = findBazelVersionTestCases('angular_material/src/material/schematics/ng-update/test-cases');
+describe('NovoElement upgrade test cases', () => {
+  const versionNames = ['v6'];
+  const testCasesMap = findVersionTestCases(path.join(__dirname));
 
   // Setup the test cases for each target version. The test cases will be automatically
   // detected through Bazel's runfiles manifest.

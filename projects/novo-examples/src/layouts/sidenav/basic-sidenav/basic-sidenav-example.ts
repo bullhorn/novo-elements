@@ -10,5 +10,23 @@ import { Component } from '@angular/core';
 })
 export class BasicSidenavExample {
   isMobile = false;
+  collapsed = false;
+  openWindows = [
+    {
+      type: 'record',
+      accent: 'candidate',
+      label: `101 | Ferdinand del Toro`,
+    },
+    {
+      type: 'record',
+      accent: 'job',
+      label: `101 | Ferdinand del Toro`,
+    },
+    {
+      type: 'list',
+      accent: 'company',
+      label: `Companies`,
+    },
+  ];
   constructor() {}
 }

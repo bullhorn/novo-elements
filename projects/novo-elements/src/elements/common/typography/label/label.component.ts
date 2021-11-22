@@ -17,5 +17,8 @@ import { NovoBaseTextElement } from '../base/base-text.component';
   selector: 'novo-label,[novo-label]',
   template: ` <ng-content></ng-content> `,
   styleUrls: ['./label.scss'],
+  host: {
+    class: 'novo-label',
+  },
 })
 export class NovoLabel extends NovoBaseTextElement {}

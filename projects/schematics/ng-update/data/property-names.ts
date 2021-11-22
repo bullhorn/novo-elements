@@ -5,16 +5,10 @@ export const propertyNames: VersionChanges<PropertyNameUpgradeData> = {
     {
       pr: 'https://github.com/angular/components/pull/10163',
       changes: [
-        { replace: 'change', replaceWith: 'selectionChange', limitedTo: { classes: ['MatSelect'] } },
         {
-          replace: 'onOpen',
-          replaceWith: 'openedChange.pipe(filter(isOpen => isOpen))',
-          limitedTo: { classes: ['MatSelect'] },
-        },
-        {
-          replace: 'onClose',
-          replaceWith: 'openedChange.pipe(filter(isOpen => !isOpen))',
-          limitedTo: { classes: ['MatSelect'] },
+          replace: '_onClosed',
+          replaceWith: 'onClosed',
+          limitedTo: { classes: ['NovoModalRef'] },
         },
       ],
     },

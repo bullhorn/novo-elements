@@ -18,6 +18,9 @@ import { NovoBaseTextElement } from '../base/base-text.component';
   template: `<a [attr.href]="href"><ng-content></ng-content></a>`,
   styleUrls: ['./link.scss'],
   encapsulation: ViewEncapsulation.None,
+  host: {
+    class: 'novo-link',
+  },
 })
 export class NovoLink extends NovoBaseTextElement {
   @Input()

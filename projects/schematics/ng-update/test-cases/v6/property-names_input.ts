@@ -3,46 +3,27 @@
  * properly by using type checking.
  */
 
-class MatSelect {
-  change: any;
-  onOpen: any;
-  onClose: any;
+class NovoModalRef {
+  _onClosed: any;
 }
 
-class MatRadioGroup {
-  align: any;
-}
-
-class MatSnackBarConfig {
-  extraClasses: any;
-}
-
-class MatDrawer {
-  align: any;
-  onAlignChanged: any;
-  onOpen: any;
-  onClose: any;
+class NovoModalService {
+  open: (x: string) => NovoModalRef;
 }
 
 /* Actual test case using the previously defined definitions. */
 
 class A {
   self = { me: this };
-  b: MatRadioGroup;
+  b: NovoModalRef;
 
-  constructor(private a: MatSelect, public c: MatSnackBarConfig, private e: MatDrawer) {}
+  constructor(private a: NovoModalRef, private s: NovoModalService) {}
 
   onClick() {
-    this.a.change.subscribe(() => console.log('On Change'));
-    this.a.onOpen.subscribe(() => console.log('On Open'));
-    this.a.onClose.subscribe(() => console.log('On Close'));
+    this.a._onClosed.then(() => console.log('Closed'));
+    this.b._onClosed.then(() => console.log('Closed'));
 
-    this.b.align = 'end';
-    this.c.extraClasses = ['x', 'y', 'z'];
-
-    this.e.align = 'end';
-    this.e.onAlignChanged.subscribe(() => console.log('Align Changed'));
-    this.e.onOpen.subscribe(() => console.log('Open'));
-    this.e.onClose.subscribe(() => console.log('Close'));
+    const c = this.s.open('test');
+    c._onClosed.then(() => console.log('Closed'));
   }
 }

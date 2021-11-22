@@ -20,6 +20,9 @@ export class NovoUtilsComponent {}
       <ng-content></ng-content>
     </novo-button>
   `,
+  host: {
+    class: 'novo-action',
+  },
 })
 export class NovoUtilActionComponent {
   @Input()

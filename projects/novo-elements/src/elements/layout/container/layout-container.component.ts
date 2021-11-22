@@ -27,6 +27,7 @@ import { merge, Subject } from 'rxjs';
 import { debounceTime, filter, startWith, take, takeUntil } from 'rxjs/operators';
 import { NovoLayoutContent } from '../content/layout-content.component';
 import { NOVO_LAYOUT_CONTAINER, NOVO_LAYOUT_DEFAULT_AUTOSIZE } from '../layout.constants';
+import { NovoRailComponent } from '../rail/rail.component';
 import { NovoSidenavComponent } from '../sidenav/sidenav.component';
 
 @Component({
@@ -54,6 +55,8 @@ export class NovoLayoutContainer implements AfterContentInit, DoCheck, OnDestroy
     descendants: true,
   })
   _allDrawers: QueryList<NovoSidenavComponent>;
+
+  @ContentChild(NovoRailComponent) _rail: NovoRailComponent;
 
   @ContentChild(NovoLayoutContent) _content: NovoLayoutContent;
 

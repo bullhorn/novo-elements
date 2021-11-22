@@ -72,6 +72,13 @@ There are many ways to **[contribute](https://github.com/bullhorn/novo-elements/
 
 > TL;DR: Fork this repository, make any required change and then submit a PR :)
 
+### Contributors
+
+<object type="image/svg+xml" data="contributors.svg">
+  <!-- Your fall back here -->
+  <img src="contributors.svg" />
+</object>
+
 # License
 
 Copyright (c) forever [Bullhorn](http://www.bullhorn.com).

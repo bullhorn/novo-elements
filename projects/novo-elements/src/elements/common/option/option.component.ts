@@ -49,6 +49,11 @@ export class NovoOptionBase implements FocusableOption, AfterViewChecked, OnDest
   @Input()
   keepOpen: boolean = false;
 
+  /** If there is no parent then nothing is managing the selection. */
+  get selectable() {
+    return this._parent;
+  }
+
   /** Whether the wrapping component is in multiple selection mode. */
   get multiple() {
     return this._parent && this._parent.multiple;

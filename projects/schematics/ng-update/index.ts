@@ -1,8 +1,14 @@
 import { Rule, SchematicContext } from '@angular-devkit/schematics';
 import { createMigrationSchematicRule, NullableDevkitMigration, TargetVersion } from '@angular/cdk/schematics';
+import { ScssVariablesMigration } from './migrations/all/scss-variables';
+import { ImportVariableFileMigration } from './migrations/v6/import-variable-file';
+import { RewriteDropdownMigration } from './migrations/v6/rewrite-dropdown-template';
 import { elementsUpgradeData } from './upgrade-data';
 
 const novoElementMigrations: NullableDevkitMigration[] = [
+  ScssVariablesMigration,
+  ImportVariableFileMigration,
+  RewriteDropdownMigration,
   // MiscClassInheritanceMigration,
   // MiscClassNamesMigration,
   // MiscImportsMigration,

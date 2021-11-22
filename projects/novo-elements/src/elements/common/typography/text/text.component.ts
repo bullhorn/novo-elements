@@ -1,5 +1,5 @@
 // NG2
-import { Component, HostBinding, Input } from '@angular/core';
+import { Component, HostBinding, Input, ViewEncapsulation } from '@angular/core';
 import { BooleanInput } from '../../../../utils';
 import { NovoBaseTextElement } from '../base/base-text.component';
 
@@ -18,6 +18,10 @@ import { NovoBaseTextElement } from '../base/base-text.component';
   selector: 'novo-text,[novo-text]',
   template: ` <ng-content></ng-content> `,
   styleUrls: ['./text.scss'],
+  encapsulation: ViewEncapsulation.None,
+  host: {
+    class: 'novo-text',
+  },
 })
 export class NovoText extends NovoBaseTextElement {
   @HostBinding('class.text-block')

@@ -3,46 +3,27 @@
  * properly by using type checking.
  */
 
-class MatSelect {
-  change: any;
-  onOpen: any;
-  onClose: any;
+class NovoModalRef {
+  _onClosed: any;
 }
 
-class MatRadioGroup {
-  align: any;
-}
-
-class MatSnackBarConfig {
-  extraClasses: any;
-}
-
-class MatDrawer {
-  align: any;
-  onAlignChanged: any;
-  onOpen: any;
-  onClose: any;
+class NovoModalService {
+  open: (x: string) => NovoModalRef;
 }
 
 /* Actual test case using the previously defined definitions. */
 
 class A {
   self = { me: this };
-  b: MatRadioGroup;
+  b: NovoModalRef;
 
-  constructor(private a: MatSelect, public c: MatSnackBarConfig, private e: MatDrawer) {}
+  constructor(private a: NovoModalRef, private s: NovoModalService) {}
 
   onClick() {
-    this.a.selectionChange.subscribe(() => console.log('On Change'));
-    this.a.openedChange.pipe(filter((isOpen) => isOpen)).subscribe(() => console.log('On Open'));
-    this.a.openedChange.pipe(filter((isOpen) => !isOpen)).subscribe(() => console.log('On Close'));
+    this.a.onClosed.then(() => console.log('Closed'));
+    this.b.onClosed.then(() => console.log('Closed'));
 
-    this.b.labelPosition = 'end';
-    this.c.panelClass = ['x', 'y', 'z'];
-
-    this.e.position = 'end';
-    this.e.onPositionChanged.subscribe(() => console.log('Align Changed'));
-    this.e.openedChange.pipe(filter((isOpen) => isOpen)).subscribe(() => console.log('Open'));
-    this.e.openedChange.pipe(filter((isOpen) => !isOpen)).subscribe(() => console.log('Close'));
+    const c = this.s.open('test');
+    c.onClosed.then(() => console.log('Closed'));
   }
 }

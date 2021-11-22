@@ -12,20 +12,6 @@ export const outputNames: VersionChanges<OutputNameUpgradeData> = {
             elements: ['novo-select'],
           },
         },
-        {
-          replace: 'onClose',
-          replaceWith: 'closed',
-          limitedTo: {
-            elements: ['novo-select'],
-          },
-        },
-        {
-          replace: 'onOpen',
-          replaceWith: 'opened',
-          limitedTo: {
-            elements: ['novo-select'],
-          },
-        },
       ],
     },
   ],

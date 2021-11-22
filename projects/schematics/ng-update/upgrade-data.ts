@@ -1,4 +1,4 @@
-import { UpgradeData } from '@angular/cdk/schematics';
+import { UpgradeData, VersionChanges } from '@angular/cdk/schematics';
 import {
   attributeSelectors,
   classNames,
@@ -9,10 +9,15 @@ import {
   methodCallChecks,
   outputNames,
   propertyNames,
+  ScssVariableData,
+  scssVariables,
 } from './data';
 
+export interface NovoUpgradeData extends UpgradeData {
+  scssVariables: VersionChanges<ScssVariableData>;
+}
 /** Upgrade data that will be used for the Novo Elements ng-update schematic. */
-export const elementsUpgradeData: UpgradeData = {
+export const elementsUpgradeData: NovoUpgradeData = {
   attributeSelectors,
   classNames,
   constructorChecks,
@@ -22,5 +27,6 @@ export const elementsUpgradeData: UpgradeData = {
   methodCallChecks,
   outputNames,
   propertyNames,
+  scssVariables,
   // symbolRemoval,
 };

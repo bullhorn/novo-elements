@@ -23,6 +23,32 @@
       height: inherit;
       min-height: inherit;
     }
+
+    @include theme-colors() using ($color, $name) {
+      &.novo-color-#{$name} {
+        color: getContrastColor($name);
+        background: $color;
+        & > novo-text,
+        & > novo-label,
+        & > novo-icon,
+        & > novo-title {
+          color: inherit;
+        }
+        & > novo-action {
+          button,
+          novo-button {
+            color: inherit;
+          }
+        }
+        .novo-divider.novo-divider-vertical {
+          border-right-color: getTintColor($name);
+        }
+      }
+
+      &.novo-accent-#{$name} {
+        border-bottom: 2px solid $color;
+      }
+    }
   }
 
   &.novo-toolbar-multiple-rows {
@@ -30,28 +56,5 @@
     box-sizing: border-box;
     flex-direction: column;
     width: 100%;
-  }
-
-  @include theme-colors() using ($color, $name) {
-    .novo-color-#{$name},
-    &.novo-color-#{$name} {
-      color: getContrastColor($name);
-      background: $color;
-      & > novo-text,
-      & > novo-label,
-      & > novo-icon,
-      & > novo-title {
-        color: inherit;
-      }
-      & > novo-action {
-        button,
-        novo-button {
-          color: inherit;
-        }
-      }
-      .novo-divider.novo-divider-vertical {
-        border-right-color: getTintColor($name);
-      }
-    }
   }
 }

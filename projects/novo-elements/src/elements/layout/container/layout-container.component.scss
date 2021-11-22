@@ -107,3 +107,29 @@ $novo-drawer-over-drawer-z-index: 4;
     }
   }
 }
+
+.novo-rail {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  height: inherit;
+  height: 100%;
+  min-width: 5rem;
+  width: max-content;
+  background: var(--background-bright);
+  .novo-rail-contents {
+    display: inline-flex;
+    flex-direction: column;
+    width: -webkit-fill-available;
+  }
+}
+
+.novo-layout-content-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  height: 100%;
+  &.and-has-rail {
+    grid-template-columns: auto 1fr;
+  }
+}

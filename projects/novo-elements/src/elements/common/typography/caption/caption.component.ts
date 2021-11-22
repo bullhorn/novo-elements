@@ -17,5 +17,8 @@ import { NovoBaseTextElement } from '../base/base-text.component';
   selector: 'novo-caption,[novo-caption]',
   template: ` <ng-content></ng-content> `,
   styleUrls: ['./caption.scss'],
+  host: {
+    class: 'novo-caption',
+  },
 })
 export class NovoCaption extends NovoBaseTextElement {}

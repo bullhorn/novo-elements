@@ -16,6 +16,7 @@
     "noUnusedParameters": false,
     "strictFunctionTypes": true,
     "skipLibCheck": true,
+    "esModuleInterop": true,
     "sourceMap": true,
     "declaration": true,
     "target": "es6",
