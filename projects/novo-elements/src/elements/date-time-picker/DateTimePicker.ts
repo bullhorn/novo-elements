@@ -112,7 +112,7 @@ const DATE_TIME_PICKER_VALUE_ACCESSOR = {
             [maxYear]="maxYear"
             [start]="start"
             [end]="end"
-            [customTooltip]="customTooltip"
+            [disabledTooltip]="disabledTooltip"
             [weekStart]="weekStart"
           ></novo-date-picker>
         </div>
@@ -137,7 +137,7 @@ export class NovoDateTimePickerElement implements ControlValueAccessor {
   @Input()
   weekStart: number = 0;
   @Input()
-  customTooltip: string;
+  disabledTooltip: string;
   // Select callback for output
   @Output()
   onSelect: EventEmitter<any> = new EventEmitter(false);

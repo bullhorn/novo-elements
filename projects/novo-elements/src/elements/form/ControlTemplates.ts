@@ -100,7 +100,7 @@ import { NovoTemplate } from '../common/novo-template/novo-template.directive';
         <!--Date-->
         <ng-template novoTemplate="date" let-control let-form="form" let-errors="errors" let-methods="methods">
           <div [formGroup]="form" class="novo-control-input-container" [tooltip]="control.tooltip" [tooltipPosition]="control.tooltipPosition" [tooltipSize]="control?.tooltipSize" [tooltipPreline]="control?.tooltipPreline" [removeTooltipArrow]="control?.removeTooltipArrow" [tooltipAutoPosition]="control?.tooltipAutoPosition">
-            <novo-date-picker-input [attr.id]="control.key" [name]="control.key" [formControlName]="control.key" [start]="control.startDate" [end]="control.endDate" [customTooltip]="control.customTooltip" [format]="control.dateFormat" [allowInvalidDate]="control.allowInvalidDate" [textMaskEnabled]="control.textMaskEnabled" [placeholder]="control.placeholder" [weekStart]="control.weekStart" (focusEvent)="methods.handleFocus($event)" (blurEvent)="methods.handleBlur($event)" (changeEvent)="methods.emitChange($event)"></novo-date-picker-input>
+            <novo-date-picker-input [attr.id]="control.key" [name]="control.key" [formControlName]="control.key" [start]="control.startDate" [end]="control.endDate" [disabledTooltip]="control.disabledTooltip" [format]="control.dateFormat" [allowInvalidDate]="control.allowInvalidDate" [textMaskEnabled]="control.textMaskEnabled" [placeholder]="control.placeholder" [weekStart]="control.weekStart" (focusEvent)="methods.handleFocus($event)" (blurEvent)="methods.handleBlur($event)" (changeEvent)="methods.emitChange($event)"></novo-date-picker-input>
           </div>
         </ng-template>
 

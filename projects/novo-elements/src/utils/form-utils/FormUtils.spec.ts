@@ -714,7 +714,7 @@ describe('Utils: FormUtils', () => {
       expect(Object.keys(controlConfig).length).toBeGreaterThan(0);
       expect(controlConfig.hasOwnProperty('startDate')).toBe(true);
       expect(controlConfig.hasOwnProperty('endDate')).toBe(true);
-      expect(controlConfig.hasOwnProperty('customTooltip')).toBe(true);
+      expect(controlConfig.hasOwnProperty('disabledTooltip')).toBe(true);
     });
   });
   describe('Method: inflateEmbeddedProperties()', () => {

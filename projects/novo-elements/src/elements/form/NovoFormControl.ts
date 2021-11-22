@@ -65,7 +65,7 @@ export class NovoFormControl extends FormControl {
   restrictFieldInteractions?: boolean;
   warning?: string;
   highlighted?: boolean;
-  customTooltip?: string;
+  disabledTooltip?: string;
   private historyTimeout: any;
 
   constructor(value: any, control: NovoControlConfig) {
@@ -127,7 +127,7 @@ export class NovoFormControl extends FormControl {
     this.tipWell = control.tipWell;
     this.customControlConfig = control.customControlConfig;
     this.warning = control.warning;
-    this.customTooltip = control.customTooltip;
+    this.disabledTooltip = control.disabledTooltip;
 
     // Reactive Form, need to enable/disable, can't bind to [disabled]
     if (this.readOnly) {
