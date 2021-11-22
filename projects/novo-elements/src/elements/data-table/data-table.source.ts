@@ -59,6 +59,7 @@ export class DataTableSource<T> extends DataSource<T> {
         if (!this.state.retainSelected) {
           this.state.selectedRows.clear();
         }
+        this.state.retainSelected = false;
         this.state.onSelectionChange();
         // Mark changes
         setTimeout(() => {

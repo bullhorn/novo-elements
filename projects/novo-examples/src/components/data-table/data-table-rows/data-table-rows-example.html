@@ -9,7 +9,8 @@
     <h6>Configure Columns</h6>
     <button theme="primary" (click)="toggleRowDetails(true)">Show Row Details (first table)</button>
     <button theme="primary" (click)="toggleRowDetails(false)">Hide Row Details (first table)</button>
-    <h6>Selection retention across pagination configured</h6>
+    <h6>Enable Selection Retention</h6>
+    <novo-checkbox label="Paginated Selection Retention Enabled" [(ngModel)]="retentionEnabled" (ngModelChange)="toggle($event)"></novo-checkbox>
     Selection retention can be configured to keep records selected across pagination, sorting, and filtering
 
 <div class="fixedWindowSize">
@@ -32,7 +33,7 @@
     <span>Total: {{ basic.dataSource.currentTotal }}</span>
     <novo-data-table-clear-button *ngIf="basic.state.userFiltered"></novo-data-table-clear-button>
     <button theme="secondary"
-            (click)="refresh()">Refresh</button>
+            (click)="refresh()">Refresh</button>   
     <novo-dropdown side="right">
       <button theme="primary"
               icon="collapse"
