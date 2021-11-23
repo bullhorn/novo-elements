@@ -3,7 +3,7 @@
 // export const symbolRemoval: VersionChanges<SymbolRemovalUpgradeData> = {
 //   [TargetVersion.V13]: [
 //     {
-//       pr: 'https://github.com/angular/components/pull/23529',
+//       pr: 'https://github.com/bullhorn/novo-elements/pull/1241',
 //       changes: [
 //         'CanColorCtor',
 //         'CanDisableRippleCtor',

@@ -3,7 +3,7 @@ import { ElementSelectorUpgradeData, TargetVersion, VersionChanges } from '@angu
 export const elementSelectors: VersionChanges<ElementSelectorUpgradeData> = {
   [TargetVersion.V6]: [
     {
-      pr: 'https://github.com/angular/components/pull/10297',
+      pr: 'https://github.com/bullhorn/novo-elements/pull/1241',
       changes: [
         // { replace: 'button', replaceWith: 'novo-button' },
         // { replace: 'header', replaceWith: 'novo-header' },

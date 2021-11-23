@@ -4,7 +4,7 @@
   "description": "A novo-element schematics",
   "scripts": {
     "build": "tsc -p tsconfig.json",
-    "test": "jest --expand *.spec.js"
+    "test": "jest --expand --verbose *.spec.js"
   },
   "keywords": [
     "schematics"

@@ -1,3 +1,5 @@
-import { NovoElementsModule } from 'novo-elements';
+import { NovoCalendarDayViewElement, NovoCalendarMonthViewElement, NovoCalendarWeekViewElement } from 'novo-elements';
 
-const a: NovoElementsModule;
+const a: NovoCalendarMonthViewElement;
+const b: NovoCalendarWeekViewElement;
+const c: NovoCalendarDayViewElement;

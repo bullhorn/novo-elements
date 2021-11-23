@@ -22,7 +22,7 @@ export interface MaterialCssSelectorData {
 export const cssSelectors: VersionChanges<MaterialCssSelectorData> = {
   [TargetVersion.V6]: [
     {
-      pr: 'https://github.com/angular/components/pull/10296',
+      pr: 'https://github.com/bullhorn/novo-elements/pull/1241',
       changes: [{ replace: '.flex-wrapper', replaceWith: '.button-contents' }],
     },
   ],
