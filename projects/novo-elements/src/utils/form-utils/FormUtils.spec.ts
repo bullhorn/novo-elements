@@ -727,7 +727,7 @@ describe('Utils: FormUtils', () => {
       expect(Object.keys(controlConfig).length).toBe(0);
       expect(controlConfig.hasOwnProperty('startDate')).toBe(false);
       expect(controlConfig.hasOwnProperty('endDate')).toBe(false);
-      expect(controlConfig.hasOwnProperty('disabledTooltip')).toBe(false);
+      expect(controlConfig.hasOwnProperty('disabledDateMessage')).toBe(false);
     });
     it('should set start and end dates', () => {
       const field = { dataType: 'Date', allowedDateRange: { minDate: '2021-01-01', maxDate: '2021-12-31' } };
@@ -736,7 +736,7 @@ describe('Utils: FormUtils', () => {
       expect(Object.keys(controlConfig).length).toBeGreaterThan(0);
       expect(controlConfig.hasOwnProperty('startDate')).toBe(true);
       expect(controlConfig.hasOwnProperty('endDate')).toBe(true);
-      expect(controlConfig.hasOwnProperty('disabledTooltip')).toBe(true);
+      expect(controlConfig.hasOwnProperty('disabledDateMessage')).toBe(true);
     });
     it('should set start date only when just minOffset is passed', () => {
       const field = { dataType: 'Date', allowedDateRange: { minOffset: 1 } };
@@ -747,8 +747,8 @@ describe('Utils: FormUtils', () => {
       expect(controlConfig['startDate']).toBeDefined;
       expect(controlConfig.hasOwnProperty('endDate')).toBe(true);
       expect(controlConfig['endDate']).not.toBeDefined;
-      expect(controlConfig.hasOwnProperty('disabledTooltip')).toBe(true);
-      expect(controlConfig['disabledTooltip']).not.toBeDefined;
+      expect(controlConfig.hasOwnProperty('disabledDateMessage')).toBe(true);
+      expect(controlConfig['disabledDateMessage']).not.toBeDefined;
     });
     it('should set start date only when just minDate is passed', () => {
       const field = { dataType: 'Date', allowedDateRange: { minDate: '2021-01-01' } };
@@ -759,8 +759,8 @@ describe('Utils: FormUtils', () => {
       expect(controlConfig['startDate']).toBeDefined;
       expect(controlConfig.hasOwnProperty('endDate')).toBe(true);
       expect(controlConfig['endDate']).not.toBeDefined;
-      expect(controlConfig.hasOwnProperty('disabledTooltip')).toBe(true);
-      expect(controlConfig['disabledTooltip']).not.toBeDefined;
+      expect(controlConfig.hasOwnProperty('disabledDateMessage')).toBe(true);
+      expect(controlConfig['disabledDateMessage']).not.toBeDefined;
     });
     it('should set end date only when just maxOffset is passed', () => {
       const field = { dataType: 'Date', allowedDateRange: { maxOffset: 1 } };
@@ -771,8 +771,8 @@ describe('Utils: FormUtils', () => {
       expect(controlConfig['startDate']).not.toBeDefined;
       expect(controlConfig.hasOwnProperty('endDate')).toBe(true);
       expect(controlConfig['endDate']).toBeDefined;
-      expect(controlConfig.hasOwnProperty('disabledTooltip')).toBe(true);
-      expect(controlConfig['disabledTooltip']).not.toBeDefined;
+      expect(controlConfig.hasOwnProperty('disabledDateMessage')).toBe(true);
+      expect(controlConfig['disabledDateMessage']).not.toBeDefined;
     });
     it('should set end date only when just maxOffset is passed', () => {
       const field = { dataType: 'Date', allowedDateRange: { maxDate: '2021-01-01' } };
@@ -783,8 +783,8 @@ describe('Utils: FormUtils', () => {
       expect(controlConfig['startDate']).not.toBeDefined;
       expect(controlConfig.hasOwnProperty('endDate')).toBe(true);
       expect(controlConfig['endDate']).toBeDefined;
-      expect(controlConfig.hasOwnProperty('disabledTooltip')).toBe(true);
-      expect(controlConfig['disabledTooltip']).not.toBeDefined;
+      expect(controlConfig.hasOwnProperty('disabledDateMessage')).toBe(true);
+      expect(controlConfig['disabledDateMessage']).not.toBeDefined;
     });
   });
   describe('Method: inflateEmbeddedProperties()', () => {

@@ -851,7 +851,7 @@ export class FormUtils {
     if (field.dataType === 'Date' && field.allowedDateRange) {
       controlConfig.startDate = this.getStartDateFromRange(field.allowedDateRange);
       controlConfig.endDate = this.getEndDateFromRange(field.allowedDateRange);
-      controlConfig.disabledTooltip = field.allowedDateRange?.disabledTooltip;
+      controlConfig.disabledDateMessage = field.allowedDateRange?.disabledDateMessage;
     }
   }
 

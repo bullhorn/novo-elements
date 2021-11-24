@@ -55,7 +55,7 @@ const DATE_VALUE_ACCESSOR = {
         [end]="end"
         inline="true"
         (onSelect)="setValueAndClose($event)"
-        [disabledTooltip]="disabledTooltip"
+        [disabledDateMessage]="disabledDateMessage"
         [ngModel]="value"
         [weekStart]="weekStart"
       ></novo-date-picker>
@@ -90,7 +90,7 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
   @Input()
   allowInvalidDate: boolean = false;
   @Input()
-  disabledTooltip: string;
+  disabledDateMessage: string;
   @HostBinding('class.disabled')
   @Input()
   disabled: boolean = false;
