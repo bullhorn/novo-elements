@@ -34,6 +34,8 @@ export class NovoDataTableCheckboxCell<T> extends CdkCell implements OnInit, OnD
 
   @Input()
   public row: T;
+  @Input()
+  public maxSelected: number = undefined;
 
   public checked: boolean = false;
 
@@ -41,7 +43,7 @@ export class NovoDataTableCheckboxCell<T> extends CdkCell implements OnInit, OnD
   private resetSubscription: Subscription;
 
   get isAtLimit(): boolean {
-    return this.dataTable.state.selectedRows.size >= 500 && !this.checked;
+    return this.maxSelected && this.dataTable.state.selectedRows.size >= this.maxSelected && !this.checked;
   }
 
   constructor(
@@ -77,7 +79,7 @@ export class NovoDataTableCheckboxCell<T> extends CdkCell implements OnInit, OnD
   }
 
   public getTooltip() {
-    return this.isAtLimit ? 'More than 500 items are not able to be selected at one time' : '';
+    return (this.isAtLimit) ? 'More than ' + this.maxSelected + ' items are not able to be selected at one time' : '';
   }
 
   public ngOnDestroy(): void {

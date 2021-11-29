@@ -1,5 +1,5 @@
 import { CdkColumnDef, CdkHeaderCell } from '@angular/cdk/table';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, HostBinding, OnDestroy, Renderer2 } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, HostBinding, Input, OnDestroy, Renderer2 } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { NovoToastService } from '../../toast/ToastService';
 import { NovoDataTable } from '../data-table.component';
@@ -21,6 +21,8 @@ import { NovoDataTable } from '../data-table.component';
 export class NovoDataTableCheckboxHeaderCell<T> extends CdkHeaderCell implements OnDestroy {
   @HostBinding('attr.role')
   public role = 'columnheader';
+  @Input()
+  public maxSelected: number = undefined;
 
   public checked: boolean = false;
   private selectionSubscription: Subscription;
@@ -28,7 +30,7 @@ export class NovoDataTableCheckboxHeaderCell<T> extends CdkHeaderCell implements
   private resetSubscription: Subscription;
 
   get isAtLimit(): boolean {
-    return this.dataTable.state.selectedRows.size + this.dataTable.dataSource.data.length > 500;
+    return this.maxSelected && this.dataTable.state.selectedRows.size + this.dataTable.dataSource.data.length > this.maxSelected && !this.checked;
   }
 
   constructor(

@@ -99,8 +99,8 @@ import { ListInteractionDictionary, ListInteractionEvent } from './ListInteracti
           [hidden]="dataSource?.totallyEmpty && !state.userFiltered"
         >
           <ng-container cdkColumnDef="selection">
-            <novo-data-table-checkbox-header-cell *cdkHeaderCellDef></novo-data-table-checkbox-header-cell>
-            <novo-data-table-checkbox-cell *cdkCellDef="let row; let i = index" [row]="row"></novo-data-table-checkbox-cell>
+            <novo-data-table-checkbox-header-cell *cdkHeaderCellDef [maxSelected]="maxSelected"></novo-data-table-checkbox-header-cell>
+            <novo-data-table-checkbox-cell *cdkCellDef="let row; let i = index" [row]="row" [maxSelected]="maxSelected"></novo-data-table-checkbox-cell>
           </ng-container>
           <ng-container cdkColumnDef="expand">
             <novo-data-table-expand-header-cell *cdkHeaderCellDef></novo-data-table-expand-header-cell>
@@ -303,6 +303,7 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   @Input() templates: { [key: string]: TemplateRef<any> } = {};
   @Input() fixedHeader = false;
   @Input() paginatorDataFeatureId: string;
+  @Input() maxSelected: number = undefined;
 
   @Input()
   set dataTableService(service: IDataTableService<T>) {
