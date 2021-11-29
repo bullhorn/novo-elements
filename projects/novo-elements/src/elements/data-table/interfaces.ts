@@ -110,6 +110,10 @@ export interface IDataTableSelectionChangeEvent {
   selected: any[];
 }
 
+export interface IDataTableSelectionOption {
+  label: 'none' | 'page' | 'pageSize' | 'sort' | 'filter' | 'globalSearch';
+}
+
 export interface IDataTablePaginationEvent {
   page: number;
   pageSize: number;

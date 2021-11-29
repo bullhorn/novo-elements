@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [5.8.1](https://github.com/bullhorn/novo-elements/compare/v5.8.0...v5.8.1) (2021-11-29)
+
+# [5.8.0](https://github.com/bullhorn/novo-elements/compare/v5.7.0...v5.8.0) (2021-11-29)
+
+
+### Features
+
+* **dataTable:** Selection Retention ([#1237](https://github.com/bullhorn/novo-elements/issues/1237)) ([cad88a4](https://github.com/bullhorn/novo-elements/commit/cad88a40662972ed58adbf664241831ba75ff663))
+
+
+
+# Changelog
+
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
 ## [5.7.0](https://github.com/bullhorn/novo-elements/compare/v5.6.1...v5.7.0) (2021-11-08)
 
 

@@ -17,10 +17,11 @@ import { NovoDataTable } from '../data-table.component';
 @Component({
   selector: 'novo-data-table-checkbox-cell',
   template: `
-    <div class="data-table-checkbox" (click)="onClick()">
+    <div class="data-table-checkbox" (click)="onClick()" [tooltip]="getTooltip()" tooltipPosition="right">
       <input type="checkbox" [checked]="checked">
       <label>
-        <i [class.bhi-checkbox-empty]="!checked"
+        <i [class.bhi-checkbox-disabled]="isAtLimit"
+          [class.bhi-checkbox-empty]="!checked"
           [class.bhi-checkbox-filled]="checked"></i>
       </label>
     </div>
@@ -33,11 +34,17 @@ export class NovoDataTableCheckboxCell<T> extends CdkCell implements OnInit, OnD
 
   @Input()
   public row: T;
+  @Input()
+  public maxSelected: number = undefined;
 
   public checked: boolean = false;
 
   private selectionSubscription: Subscription;
   private resetSubscription: Subscription;
+
+  get isAtLimit(): boolean {
+    return this.maxSelected && this.dataTable.state.selectedRows.size >= this.maxSelected && !this.checked;
+  }
 
   constructor(
     public columnDef: CdkColumnDef,
@@ -66,7 +73,13 @@ export class NovoDataTableCheckboxCell<T> extends CdkCell implements OnInit, OnD
   }
 
   public onClick(): void {
-    this.dataTable.selectRow(this.row);
+    if (!this.isAtLimit) {
+      this.dataTable.selectRow(this.row);
+    }
+  }
+
+  public getTooltip() {
+    return (this.isAtLimit) ? 'More than ' + this.maxSelected + ' items are not able to be selected at one time' : '';
   }
 
   public ngOnDestroy(): void {

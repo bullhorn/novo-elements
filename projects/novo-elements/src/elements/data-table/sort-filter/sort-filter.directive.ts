@@ -30,6 +30,7 @@ export class NovoDataTableSortFilter<T> {
     }
 
     this.state.filter = filter;
+    this.state.checkRetainment('filter');
     this.state.reset(false, true);
     this.state.updates.next({ filter, sort: this.state.sort });
     this.state.onSortFilterChange();
@@ -38,6 +39,7 @@ export class NovoDataTableSortFilter<T> {
   public sort(id: string, value: string, transform: Function): void {
     const sort = { id, value, transform };
     this.state.sort = sort;
+    this.state.checkRetainment('sort');
     this.state.reset(false, true);
     this.state.updates.next({ sort, filter: this.state.filter });
     this.state.onSortFilterChange();
