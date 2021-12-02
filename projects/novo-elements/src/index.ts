@@ -1,5 +1,3 @@
-export { NovoAceEditor } from './elements/ace-editor/AceEditor';
-export { NovoAceEditorModule } from './elements/ace-editor/AceEditor.module';
 export { NovoButtonElement } from './elements/button/Button';
 export { NovoButtonModule } from './elements/button/Button.module';
 export { NovoCalendarModule } from './elements/calendar/Calendar.module';
