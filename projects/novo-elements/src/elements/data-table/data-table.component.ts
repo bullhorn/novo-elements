@@ -24,7 +24,7 @@ import { NovoTemplate } from '../common/novo-template/novo-template.directive';
 import { DataTableSource } from './data-table.source';
 import {
   IDataTableColumn,
-  IDataTableFilter,
+  IDataTableFilter, IDataTablePaginationEvent,
   IDataTablePaginationOptions,
   IDataTablePreferences,
   IDataTableSearchOptions,
@@ -436,9 +436,9 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   constructor(public labels: NovoLabelService, private ref: ChangeDetectorRef, public state: DataTableState<T>) {
     this.scrollListenerHandler = this.scrollListener.bind(this);
     this.sortFilterSubscription = this.state.sortFilterSource.subscribe(
-      (event: { sort: IDataTableSort; filter: IDataTableFilter | IDataTableFilter[]; globalSearch: string }) => {
+      (event: { sort: IDataTableSort; filter: IDataTableFilter | IDataTableFilter[]; globalSearch: string; page: IDataTablePaginationEvent }) => {
         if (this.name !== 'novo-data-table') {
-          this.preferencesChanged.emit({ name: this.name, sort: event.sort, filter: event.filter, globalSearch: event.globalSearch });
+          this.preferencesChanged.emit({ name: this.name, sort: event.sort, filter: event.filter, globalSearch: event.globalSearch, pageSize: event.page.pageSize });
           this.performInteractions('change');
         } else {
           notify('Must have [name] set on data-table to use preferences!');
