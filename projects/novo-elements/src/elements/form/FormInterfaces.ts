@@ -33,6 +33,7 @@ export interface FormField {
   associatedEntity?: { entity: string };
   optionsUrl?: string;
   optionsType?: string;
+  parentEntity?: string;
 }
 
 export type ResultsTemplateType = 'entity-picker';
