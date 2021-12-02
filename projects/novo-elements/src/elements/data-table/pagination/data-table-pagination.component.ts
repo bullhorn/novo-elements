@@ -11,7 +11,7 @@ import {
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { IDataTablePaginationEvent } from '../interfaces';
+import {IDataTableChangeEvent, IDataTablePaginationEvent, IDataTableSelectionOption} from '../interfaces';
 import { NovoLabelService } from '../../../services/novo-label-service';
 import { DataTableState } from '../state/data-table-state.service';
 
@@ -194,6 +194,7 @@ export class NovoDataTablePagination<T> implements OnInit, OnDestroy {
   }
 
   public changePageSize(pageSize: number): void {
+    this.state.checkRetainment('pageSize');
     this.page = 0;
     this.pageSize = pageSize;
     this.emitPageEvent(true);
