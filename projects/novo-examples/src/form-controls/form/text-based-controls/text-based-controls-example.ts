@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 // Vendor
-import { FormUtils, TextBoxControl, QuickNoteControl, TextAreaControl, AceEditorControl } from 'novo-elements';
+import { FormUtils, TextBoxControl, QuickNoteControl, TextAreaControl } from 'novo-elements';
 
 // import { MockMeta, MockMetaHeaders } from './MockMeta';
 
@@ -19,7 +19,6 @@ export class TextBasedControlsExample {
   public emailControl: any;
   public numberControl: any;
   public currencyControl: any;
-  public aceEditorControl: any;
   public floatControl: any;
   public percentageControl: any;
   public quickNoteControl: any;
@@ -91,7 +90,6 @@ export class TextBasedControlsExample {
       required: true,
       tooltip: 'Quicknote',
     });
-    this.aceEditorControl = new AceEditorControl({ key: 'ace', label: 'CODE', tooltip: 'CODE', value: 'var i = 0;' });
     this.textForm = formUtils.toFormGroup([
       this.textControl,
       this.emailControl,
@@ -101,7 +99,6 @@ export class TextBasedControlsExample {
       this.floatControl,
       this.percentageControl,
       this.quickNoteControl,
-      this.aceEditorControl,
     ]);
   }
 }

@@ -4,7 +4,6 @@ export { CheckboxControl } from './checkbox/CheckboxControl';
 export { DateControl } from './date/DateControl';
 export { DateTimeControl } from './date-time/DateTimeControl';
 export { EditorControl } from './editor/EditorControl';
-export { AceEditorControl } from './ace-editor/AceEditorControl';
 export { FileControl } from './file/FileControl';
 export { NativeSelectControl } from './native-select/NativeSelectControl';
 export { PickerControl, TablePickerControl } from './picker/PickerControl';

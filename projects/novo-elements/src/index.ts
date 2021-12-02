@@ -83,7 +83,6 @@ export {
 export { NovoExpansionModule } from './elements/expansion/expansion.module';
 export { NovoAutoSize, NovoControlElement } from './elements/form/Control';
 export { NovoControlGroup, NovoControlGroupAddConfig } from './elements/form/ControlGroup';
-export { AceEditorControl } from './elements/form/controls/ace-editor/AceEditorControl';
 export { AddressControl } from './elements/form/controls/address/AddressControl';
 export { BaseControl, NovoControlConfig, NovoGroupedControlConfig } from './elements/form/controls/BaseControl';
 export { CheckListControl } from './elements/form/controls/check-list/CheckListControl';

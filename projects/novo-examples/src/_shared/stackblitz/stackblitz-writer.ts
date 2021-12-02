@@ -31,7 +31,6 @@ const dependencies = {
   rxjs: '6.5.5',
   'ace-builds': '1.4.12',
   'angular2-text-mask': '9.0.0',
-  brace: '0.11.1',
   'classlist.js': '^1.1.20150312',
   'date-fns': '1.30.1',
   'post-robot': '9.0.30',
