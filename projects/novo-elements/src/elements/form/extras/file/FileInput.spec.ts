@@ -4,8 +4,6 @@ import { TestBed, async } from '@angular/core/testing';
 import { NovoFileInputElement } from './FileInput';
 import { NovoLoadingElement } from '../../../loading/Loading';
 import { NovoLabelService } from '../../../../services/novo-label-service';
-import { NovoDragulaElement } from '../../../../elements/dragula/Dragula';
-import { NovoDragulaService } from '../../../../elements/dragula/DragulaService';
 import { DecodeURIPipe } from '../../../../pipes/decode-uri/DecodeURI';
 
 describe('Elements: NovoFileInputElement', () => {
@@ -16,8 +14,8 @@ describe('Elements: NovoFileInputElement', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [NovoFileInputElement, NovoLoadingElement, NovoDragulaElement, DecodeURIPipe],
-      providers: [{ provide: NovoLabelService, useClass: NovoLabelService }, { provide: NovoDragulaService, useClass: NovoDragulaService }],
+      declarations: [NovoFileInputElement, NovoLoadingElement, DecodeURIPipe],
+      providers: [{ provide: NovoLabelService, useClass: NovoLabelService }],
     }).compileComponents();
     fixture = TestBed.createComponent(NovoFileInputElement);
     component = fixture.debugElement.componentInstance;
@@ -45,12 +43,7 @@ describe('Elements: NovoFileInputElement', () => {
       component.ngOnInit();
       expect(component.setInitialFileList).toHaveBeenCalled();
     });
-    it('should initialize dragula', () => {
-      expect(component.ngOnInit).toBeDefined();
-      spyOn(component, 'initializeDragula');
-      component.ngOnInit();
-      expect(component.initializeDragula).toHaveBeenCalled();
-    });
+
   });
   describe('Method: updateLayout()', () => {
     it('should set default layoutOptions and call insertTemplatesBasedOnLayout', () => {
@@ -67,21 +60,6 @@ describe('Elements: NovoFileInputElement', () => {
         draggable: false,
       });
       expect(component.insertTemplatesBasedOnLayout).toHaveBeenCalled();
-    });
-  });
-  describe('Method: initializeDragula()', () => {
-    it('should correctly initialize dragula', () => {
-      const expectedBag = 'file-output-1';
-      component.dragula = {
-        bags: [{ name: 'TEST', drake: {} }],
-        setOptions: () => {},
-      };
-      expect(component.initializeDragula).toBeDefined();
-      expect(component.fileOutputBag).not.toBeDefined();
-      spyOn(component.dragula, 'setOptions');
-      component.initializeDragula();
-      expect(component.fileOutputBag).toBe(expectedBag);
-      expect(component.dragula.setOptions).toHaveBeenCalled();
     });
   });
   describe('Method: insertTemplatesBasedOnLayout()', () => {

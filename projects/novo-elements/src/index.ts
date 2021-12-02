@@ -72,9 +72,6 @@ export { NovoDatePickerInputElement } from './elements/date-picker/DatePickerInp
 export { NovoDateTimePickerElement } from './elements/date-time-picker/DateTimePicker';
 export { NovoDateTimePickerModule } from './elements/date-time-picker/DateTimePicker.module';
 export { NovoDateTimePickerInputElement } from './elements/date-time-picker/DateTimePickerInput';
-export { NovoDragulaElement } from './elements/dragula/Dragula';
-export { NovoDragulaModule } from './elements/dragula/Dragula.module';
-export { NovoDragulaService } from './elements/dragula/DragulaService';
 export { NovoDropdownElement, NovoDropDownItemHeaderElement, NovoDropdownListElement, NovoItemElement } from './elements/dropdown/Dropdown';
 export { NovoDropdownModule } from './elements/dropdown/Dropdown.module';
 export { NovoAccordion } from './elements/expansion/accordion';

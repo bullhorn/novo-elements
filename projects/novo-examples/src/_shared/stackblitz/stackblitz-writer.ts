@@ -29,7 +29,6 @@ const dependencies = {
   'novo-elements': '5.1.2',
   'core-js': '3.16.4',
   rxjs: '6.5.5',
-  '@bullhorn/dragula': '1.0.1',
   'ace-builds': '1.4.12',
   'angular2-text-mask': '9.0.0',
   brace: '0.11.1',

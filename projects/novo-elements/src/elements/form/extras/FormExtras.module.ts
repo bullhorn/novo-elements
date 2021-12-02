@@ -8,7 +8,6 @@ import { NovoSelectModule } from './../../select/Select.module';
 import { NovoPickerModule } from './../../picker/Picker.module';
 import { NovoLoadingModule } from './../../loading/Loading.module';
 import { NovoPipesModule } from './../../../pipes/Pipes.module';
-import { NovoDragulaModule } from './../../dragula/Dragula.module';
 import { NovoAddressElement } from './address/Address';
 import { NovoCheckboxElement } from './checkbox/Checkbox';
 import { NovoCheckListElement } from './checkbox/CheckList';
@@ -24,7 +23,6 @@ import { NovoTooltipModule } from './../../tooltip/Tooltip.module';
     NovoSelectModule,
     NovoPickerModule,
     NovoLoadingModule,
-    NovoDragulaModule,
     NovoTooltipModule,
   ],
   declarations: [NovoAddressElement, NovoCheckboxElement, NovoCheckListElement, NovoFileInputElement],

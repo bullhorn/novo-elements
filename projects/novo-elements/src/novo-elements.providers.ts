@@ -2,7 +2,6 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 // APP
 import { GooglePlacesService } from './elements/places/places.service';
-import { NovoDragulaService } from './elements/dragula/DragulaService';
 import { NovoModalService } from './elements/modal/ModalService';
 import { NovoModalRef } from './elements/modal/Modal';
 import { NovoToastService } from './elements/toast/ToastService';
@@ -16,7 +15,6 @@ import { OptionsService } from './services/options/OptionsService';
 import { NovoTemplateService } from './services/template/NovoTemplateService';
 
 const NOVO_ELEMENTS_PROVIDERS = [
-  { provide: NovoDragulaService, useClass: NovoDragulaService },
   { provide: NovoModalRef, useClass: NovoModalRef },
   { provide: NovoModalService, useClass: NovoModalService },
   { provide: GooglePlacesService, useClass: GooglePlacesService },

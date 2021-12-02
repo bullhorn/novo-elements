@@ -5,7 +5,6 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 // APP
 import { NovoPipesModule } from './pipes/Pipes.module';
 import { NovoButtonModule } from './elements/button/Button.module';
-import { NovoAceEditorModule } from './elements/ace-editor/AceEditor.module';
 import { NovoLoadingModule } from './elements/loading/Loading.module';
 import { NovoCardModule } from './elements/card/Card.module';
 import { NovoCalendarModule } from './elements/calendar/Calendar.module';
@@ -21,7 +20,6 @@ import { NovoDropdownModule } from './elements/dropdown/Dropdown.module';
 import { NovoSelectModule } from './elements/select/Select.module';
 import { NovoListModule } from './elements/list/List.module';
 import { NovoSwitchModule } from './elements/switch/Switch.module';
-import { NovoDragulaModule } from './elements/dragula/Dragula.module';
 import { NovoSliderModule } from './elements/slider/Slider.module';
 import { NovoPickerModule } from './elements/picker/Picker.module';
 import { NovoChipsModule } from './elements/chips/Chips.module';
@@ -49,7 +47,6 @@ import { UnlessModule } from './elements/unless/Unless.module';
 import { NovoOverlayModule } from './elements/overlay/Overlay.module';
 import { DateFormatService } from './services/date-format/DateFormat';
 import { NovoLabelService } from './services/novo-label-service';
-import { NovoDragulaService } from './elements/dragula/DragulaService';
 import { GooglePlacesService } from './elements/places/places.service';
 import { GlobalRef, BrowserGlobalRef } from './services/global/global.service';
 import { LocalStorageService } from './services/storage/storage.service';
@@ -80,7 +77,6 @@ import { NovoCommonModule } from './elements/common/common.module';
     NovoSelectModule,
     NovoListModule,
     NovoSwitchModule,
-    NovoDragulaModule,
     NovoSliderModule,
     NovoPickerModule,
     NovoChipsModule,
@@ -102,7 +98,6 @@ import { NovoCommonModule } from './elements/common/common.module';
     NovoOverlayModule,
     GooglePlacesModule,
     NovoValueModule,
-    NovoAceEditorModule,
     NovoIconModule,
     NovoExpansionModule,
     UnlessModule,
@@ -115,7 +110,6 @@ import { NovoCommonModule } from './elements/common/common.module';
     { provide: ComponentUtils, useClass: ComponentUtils },
     { provide: DateFormatService, useClass: DateFormatService },
     { provide: NovoLabelService, useClass: NovoLabelService },
-    { provide: NovoDragulaService, useClass: NovoDragulaService },
     { provide: GooglePlacesService, useClass: GooglePlacesService },
     { provide: GlobalRef, useClass: BrowserGlobalRef },
     { provide: LocalStorageService, useClass: LocalStorageService },
