@@ -56,6 +56,7 @@ export class DataTableState<T> {
       this.updates.emit({
         sort: this.sort,
         filter: this.filter,
+        pageSize: this.pageSize,
         globalSearch: this.globalSearch,
       });
     }
@@ -71,6 +72,7 @@ export class DataTableState<T> {
       this.updates.emit({
         sort: this.sort,
         filter: this.filter,
+        pageSize: this.pageSize,
         globalSearch: this.globalSearch,
       });
     }
@@ -87,6 +89,7 @@ export class DataTableState<T> {
       this.updates.emit({
         sort: this.sort,
         filter: this.filter,
+        pageSize: this.pageSize,
         globalSearch: this.globalSearch,
       });
     }
@@ -101,6 +104,7 @@ export class DataTableState<T> {
       this.updates.emit({
         sort: this.sort,
         filter: this.filter,
+        pageSize: this.pageSize,
         globalSearch: this.globalSearch,
       });
     }
@@ -125,6 +129,7 @@ export class DataTableState<T> {
     this.sortFilterSource.next({
       sort: this.sort,
       filter: this.filter,
+      pageSize: this.pageSize,
       globalSearch: this.globalSearch,
     });
   }
