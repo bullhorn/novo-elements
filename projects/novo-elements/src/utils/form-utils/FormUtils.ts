@@ -593,6 +593,7 @@ export class FormUtils {
       : [];
 
     let fields = meta.fields.map((field) => {
+      field.parentEntity = meta.entity;
       if (!field.hasOwnProperty('sortOrder')) {
         field.sortOrder = Number.MAX_SAFE_INTEGER - 1;
       }
