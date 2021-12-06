@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.9.0](https://github.com/bullhorn/novo-elements/compare/v5.8.1...v5.9.0) (2021-12-06)
+
+
+### Features
+
+* **Form:** Add parentEntity to formFields ([#1242](https://github.com/bullhorn/novo-elements/issues/1242)) ([837ce40](https://github.com/bullhorn/novo-elements/commit/837ce40e87944741a7a75a4deef32ac259b16ea1))
+
 ### [5.8.1](https://github.com/bullhorn/novo-elements/compare/v5.8.0...v5.8.1) (2021-11-29)
 
 # [5.8.0](https://github.com/bullhorn/novo-elements/compare/v5.7.0...v5.8.0) (2021-11-29)
