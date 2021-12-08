@@ -39,7 +39,7 @@ const paddingAttrs = [
 const selectors = [...marginAttrs, ...paddingAttrs];
 */
 
-const getSpacingToken = (value: string) => {
+export const getSpacingToken = (value: string) => {
   if (Object.keys(tokens.spacing).includes(value)) {
     return tokens.spacing[value];
   }

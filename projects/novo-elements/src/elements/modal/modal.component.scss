@@ -44,7 +44,7 @@ novo-notification {
   min-width: 330px;
   max-width: 600px;
 
-  & > button.modal-close {
+  & > .novo-button.modal-close {
     position: absolute;
     right: $spacing-sm;
     top: $spacing-sm;

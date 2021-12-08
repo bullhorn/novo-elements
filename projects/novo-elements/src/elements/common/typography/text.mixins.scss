@@ -13,9 +13,12 @@
 
 @mixin text-sizing($small, $base, $large) {
   &.text-size-default {
-    font-size: $base;
+    font-size: inherit;
   }
   &.text-size-small {
+    font-size: $small;
+  }
+  &.text-size-medium {
     font-size: $small;
   }
   &.text-size-large {

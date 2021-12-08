@@ -1,11 +1,18 @@
 @import "~novo-design-tokens/scss";
 
-novo-checkbox,
-novo-check-list {
+:host {
   display: flex;
   flex-flow: row wrap;
+  &.has-label {
+    [class*="-group"] {
+      margin-right: 15px;
+    }
+  }
+  .novo-checkbox-text {
+    margin-left: 15px;
+  }
+
   [class*="-group"] {
-    margin-right: 15px;
     cursor: pointer;
     position: relative;
     &:hover {
@@ -35,7 +42,7 @@ novo-check-list {
       }
       pointer-events: none;
     }
-    input {
+    input[type="checkbox"] {
       appearance: none !important;
       height: 0 !important;
       border: none !important;

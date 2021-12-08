@@ -5,6 +5,7 @@ import { DOCUMENT } from '@angular/common';
 import {
   Attribute,
   ChangeDetectorRef,
+  Component,
   ContentChild,
   Directive,
   ElementRef,
@@ -16,12 +17,13 @@ import {
   OnDestroy,
   Optional,
   Output,
+  ViewEncapsulation,
 } from '@angular/core';
 import { ANIMATION_MODULE_TYPE } from '@angular/platform-browser/animations';
 import { Subject } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { Key } from '../../utils';
-import { CanColor, CanColorCtor, HasTabIndex, HasTabIndexCtor, mixinColor, mixinTabIndex } from '../common';
+import { CanColor, CanColorCtor, CanSizeCtor, HasTabIndex, HasTabIndexCtor, mixinColor, mixinSize, mixinTabIndex } from '../common';
 
 export interface IRemovable {
   remove: () => void;
@@ -56,7 +58,10 @@ class NovoChipBase {
   constructor(public _elementRef: ElementRef) {}
 }
 
-const NovoChipMixinBase: CanColorCtor & HasTabIndexCtor & typeof NovoChipBase = mixinTabIndex(mixinColor(NovoChipBase, 'primary'), -1);
+const NovoChipMixinBase: CanSizeCtor & CanColorCtor & HasTabIndexCtor & typeof NovoChipBase = mixinSize(
+  mixinTabIndex(mixinColor(NovoChipBase, null), -1),
+  'md',
+);
 
 /**
  * Dummy directive to add CSS class to chip avatar.
@@ -69,13 +74,11 @@ const NovoChipMixinBase: CanColorCtor & HasTabIndexCtor & typeof NovoChipBase = 
 export class NovoChipAvatar {}
 
 /**
- * Applies proper (click) support and adds styling for use with the Material Design "cancel" icon
- * available at https://material.io/icons/#ic_cancel.
- *
+ * Applies proper (click) support and adds styling for use with Bullhorn's "x" icon *
  * Example:
  *
  *     `<novo-chip>
- *       <novo-icon novoChipRemove>cancel</novo-icon>
+ *       <novo-icon novoChipRemove>x</novo-icon>
  *     </novo-chip>`
  *
  * You *may* use a custom icon, but you may need to override the `novo-chip-remove` positioning
@@ -112,22 +115,25 @@ export class NovoChipRemove {
 }
 
 /**
- * Material design styled Chip component. Used inside the NovoChipList component.
+ * Chip component. Used inside the NovoChipList component.
  */
-@Directive({
+@Component({
   selector: `novo-chip, [novo-chip]`,
-  inputs: ['color', 'tabIndex'],
-  exportAs: 'novoChip',
+  template: `<ng-content></ng-content>`,
+  styleUrls: ['./Chip.scss'],
+  encapsulation: ViewEncapsulation.None,
+  inputs: ['color', 'tabIndex', 'size'],
   providers: [{ provide: REMOVABLE_REF, useExisting: NovoChipElement }],
   host: {
     class: 'novo-chip novo-focus-indicator',
-    '[attr.tabindex]': 'disabled ? null : tabIndex',
     role: 'option',
+    '[class.novo-chip-selectable]': 'selectable',
     '[class.novo-chip-selected]': 'selected',
     '[class.novo-chip-with-avatar]': 'avatar',
     '[class.novo-chip-with-trailing-icon]': 'removeIcon',
     '[class.novo-chip-disabled]': 'disabled',
     '[class._novo-animation-noopable]': '_animationsDisabled',
+    '[attr.tabindex]': 'disabled ? null : tabIndex',
     '[attr.disabled]': 'disabled || null',
     '[attr.aria-disabled]': 'disabled.toString()',
     '[attr.aria-selected]': 'ariaSelected',
@@ -147,7 +153,7 @@ export class NovoChipElement extends NovoChipMixinBase implements FocusableOptio
   _animationsDisabled: boolean;
 
   /** Whether the chip list is selectable */
-  chipListSelectable: boolean = true;
+  _chipListSelectable: boolean = true;
 
   /** Whether the chip list is in multi-selection mode. */
   _chipListMultiple: boolean = false;
@@ -195,12 +201,12 @@ export class NovoChipElement extends NovoChipMixinBase implements FocusableOptio
    */
   @Input()
   get selectable(): boolean {
-    return this._selectable && this.chipListSelectable;
+    return this._selectable && this._chipListSelectable;
   }
   set selectable(value: boolean) {
     this._selectable = coerceBooleanProperty(value);
   }
-  protected _selectable: boolean = true;
+  protected _selectable: boolean = false;
 
   /** Whether the chip is disabled. */
   @Input()

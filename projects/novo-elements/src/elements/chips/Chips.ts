@@ -24,14 +24,15 @@ const CHIPS_VALUE_ACCESSOR = {
       <novo-chip
         *ngFor="let item of _items | async"
         [class.selected]="item == selected"
+        [selectable]="true"
         [disabled]="disablePickerInput"
         (removed)="remove($event, item)"
         (selectionChange)="select($event, item)"
         (deselect)="deselect($event, item)"
       >
-        <novo-icon *ngIf="getAvatarType(item)" size="small" class="tc-{{ getAvatarType(item) }}" novoChipAvatar>circle</novo-icon>
+        <novo-icon *ngIf="getAvatarType(item)" class="txc-{{ getAvatarType(item) }}" novoChipAvatar>circle</novo-icon>
         {{ item.label }}
-        <novo-icon size="small" color="light" novoChipRemove>close</novo-icon>
+        <novo-icon novoChipRemove>x</novo-icon>
       </novo-chip>
     </div>
     <div class="chip-input-container" *ngIf="!maxlength || (maxlength && items.length < maxlength)">

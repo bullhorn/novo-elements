@@ -40,7 +40,7 @@ let nextId = 0;
   providers: [CHECKBOX_VALUE_ACCESSOR],
   styleUrls: ['./Checkbox.scss'],
   template: `
-    <div class="check-box-group" [class.checked]="model" [class.disabled]="disabled">
+    <div class="check-box-group" [class.checked]="checked" [class.disabled]="disabled">
       <input
         #input
         type="checkbox"
@@ -58,21 +58,24 @@ let nextId = 0;
         (change)="_onInteractionEvent($event)"
         (click)="_onInputClick($event)"
       />
-      <!-- <input type="checkbox" [(ngModel)]="model" [attr.id]="name" [disabled]="disabled" /> -->
       <label [attr.for]="name" (click)="select($event)" [class.disabled]="disabled">
         <i
-          [class.bhi-checkbox-empty]="!model && !indeterminate && boxIcon"
-          [class.bhi-checkbox-filled]="model && !indeterminate && boxIcon"
+          [class.bhi-checkbox-empty]="!checked && !indeterminate && boxIcon"
+          [class.bhi-checkbox-filled]="checked && !indeterminate && boxIcon"
           [class.bhi-checkbox-indeterminate]="indeterminate && boxIcon"
-          [class.bhi-circle-o]="!model && !indeterminate && !boxIcon"
-          [class.bhi-check]="model && !indeterminate && !boxIcon"
+          [class.bhi-circle-o]="!checked && !indeterminate && !boxIcon"
+          [class.bhi-check]="checked && !indeterminate && !boxIcon"
           [class.bhi-circle]="indeterminate && !boxIcon"
         ></i>
         <span *ngIf="label">{{ label }}</span>
-        <span *ngIf="!label"><ng-content></ng-content></span>
+        <span *ngIf="!label" class="novo-checkbox-text"><ng-content></ng-content></span>
       </label>
     </div>
   `,
+  host: {
+    class: 'novo-checkbox',
+    '[class.has-label]': 'label',
+  },
 })
 export class NovoCheckboxElement implements ControlValueAccessor, OnInit {
   /**
@@ -159,7 +162,6 @@ export class NovoCheckboxElement implements ControlValueAccessor, OnInit {
   onSelect: EventEmitter<any> = new EventEmitter();
 
   boxIcon: boolean = true;
-  model;
 
   onModelChange: Function = () => {};
   onModelTouched: Function = () => {};
@@ -177,9 +179,9 @@ export class NovoCheckboxElement implements ControlValueAccessor, OnInit {
   select(event: Event) {
     Helpers.swallowEvent(event);
     if (!this.disabled) {
-      this.model = !this.model;
-      this.onModelChange(this.model);
-      this.onSelect.emit({ originalEvent: event, value: this.model });
+      this.checked = !this.checked;
+      this.onModelChange(this.checked);
+      this.onSelect.emit({ originalEvent: event, value: this.checked });
     }
   }
 

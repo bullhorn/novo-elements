@@ -9,7 +9,7 @@ novo-select {
   min-width: 180px;
   cursor: pointer;
 
-  div[type="button"] {
+  .novo-select-trigger {
     @include novo-text-medium();
     display: flex;
     justify-content: space-between;
@@ -26,6 +26,7 @@ novo-select {
     cursor: pointer;
     text-transform: none;
     padding: 0 $spacing-sm;
+    margin-bottom: -1px;
 
     &.empty {
       color: #a9a9a9;
@@ -43,6 +44,11 @@ novo-select {
         color: rgba(0, 0, 0, 0.73);
       }
     }
+
+    .novo-select-placeholder {
+      color: var(--form-placeholder);
+    }
+
     i {
       font-size: 0.8em;
       color: $dark;

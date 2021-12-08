@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
-import { ModifyPickerConfigArgs } from 'novo-elements';
-import { NovoFormGroup } from 'novo-elements';
-import { ToastPositions } from 'novo-elements';
+import { ModifyPickerConfigArgs, NovoFormGroup, ToastPositions } from 'novo-elements';
 
 @Component({
   template: ` <div></div> `,

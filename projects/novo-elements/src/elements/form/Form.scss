@@ -2,8 +2,8 @@
 @import "./extras/file/FileInput";
 @import "./ControlGroup";
 .novo-form-control-label {
-  color: $dark;
-  font-size: 0.9rem;
+  color: var(--text-main);
+  font-size: 1.1rem;
   flex: 1;
   max-width: 130px;
   min-width: 130px;
@@ -132,7 +132,7 @@ novo-form {
               -webkit-text-fill-color: $dark;
             }
             input:not(.picker-input):not(.tiles-input) {
-              &::-webkit-input-placeholder {
+              &::placeholder {
                 color: lighten($dark, 30%) !important;
               }
               border-bottom-style: dashed !important;
@@ -645,7 +645,7 @@ novo-form {
             }
             &.disabled {
               input:not(.picker-input):not(.tiles-input) {
-                &::-webkit-input-placeholder {
+                &::placeholder {
                   color: lighten($dark, 30%) !important;
                 }
                 border-bottom-style: dashed !important;
@@ -743,8 +743,8 @@ novo-form {
                 }
                 > label.novo-control-label {
                   bottom: 20px;
-                  color: $dark;
-                  font-size: 0.9em;
+                  color: var(--text-main);
+                  font-size: 1.1rem;
                   font-weight: 500;
                   text-transform: uppercase;
                   position: absolute;
@@ -756,7 +756,7 @@ novo-form {
                   cursor: text;
                   white-space: nowrap;
                   text-overflow: ellipsis;
-                  overflow-x: hidden;
+                  overflow: hidden;
                   transform: translateY(0);
                   transform-origin: bottom left;
                   transition: transform 400ms cubic-bezier(0.25, 0.8, 0.25, 1), scale 400ms cubic-bezier(0.25, 0.8, 0.25, 1),
@@ -764,7 +764,7 @@ novo-form {
                   &.novo-control-empty {
                     display: block;
                     cursor: text;
-                    top: 7px;
+                    top: 2px;
                     bottom: 0;
                   }
                   &.novo-control-extra-spacing,

@@ -29,8 +29,8 @@
     box-sizing: content-box;
     transition: all 300ms;
     color: $dark;
-    &::-webkit-input-placeholder {
-      color: $grey;
+    &::placeholder {
+      color: var(--form-placeholder);
     }
   }
   i.bhi-search,

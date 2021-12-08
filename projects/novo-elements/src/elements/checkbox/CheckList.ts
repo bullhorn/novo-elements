@@ -13,6 +13,7 @@ const CHECKLIST_VALUE_ACCESSOR = {
 
 @Component({
   selector: 'novo-check-list',
+  styleUrls: ['./CheckList.scss'],
   providers: [CHECKLIST_VALUE_ACCESSOR],
   template: `
     <div

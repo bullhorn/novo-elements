@@ -1,102 +1,200 @@
 @import "../../styles/variables.scss";
+@import "../common/typography/text.mixins";
 
-novo-chip,
-[novo-chip] {
-  display: flex;
-  flex-grow: inherit;
-  align-items: center;
-  justify-content: space-between;
+$novo-chip-border-radius: 0.4rem;
+$novo-chip-min-height: 2.4rem;
+$novo-chip-vertical-padding: 0rem;
+$novo-chip-horizontal-padding: 0.5rem;
+$novo-chip-remove-before-margin: 0rem;
+$novo-chip-remove-after-padding: 0rem;
+$novo-chip-avatar-before-margin: 0rem;
+$novo-chip-avatar-after-margin: 0rem;
+
+$novo-chip-avatar-size: 24px;
+$novo-chip-remove-size: 18px;
+
+$chip-sizes: "xs", "sm", "md", "lg", "xl";
+$chip-fontsize: (
+  "xs": 0.8rem,
+  "sm": 0.9rem,
+  "md": 1rem,
+  "lg": 1.2rem,
+  "xl": 1.4rem,
+);
+$chip-height: (
+  "xs": 1.6rem,
+  "sm": 1.9rem,
+  "md": 2.4rem,
+  "lg": 2.8rem,
+  "xl": 3.2rem,
+);
+$chip-spacing: (
+  "xs": $spacing-xs,
+  "sm": $spacing-sm,
+  "md": $spacing-md,
+  "lg": $spacing-lg,
+  "xl": $spacing-xl,
+);
+
+.novo-chip {
+  position: relative;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  // Chips could be set on buttons so we need to reset the user agent styles.
+  border: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.novo-chip {
+  @include novo-body-text();
   background: var(--background-bright);
-  border-radius: 4px;
-  padding: 0.3em 0.5em;
-  margin-right: 5px;
-  margin-bottom: 5px;
-  width: auto;
-  max-width: 180px;
+  box-sizing: border-box;
   border: 1px solid transparent;
   transition: all 200ms ease-in-out;
-  span {
-    vertical-align: middle;
-    display: flex;
-    align-items: center;
-    span {
-      color: $ocean;
-      cursor: pointer;
-      max-width: 115px;
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-      display: block;
+  display: inline-flex;
+  align-items: center;
+  cursor: default;
+  gap: 1rem;
+  border-radius: 0.4rem;
+  padding: $spacing-none $spacing-md;
+  min-height: 2.4rem;
+  height: 1px;
+
+  &.novo-chip-selectable {
+    color: var(--selection);
+    // Overlay used to darken the chip on hover and focus.
+    &::after {
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      position: absolute;
+      border-radius: inherit;
+      opacity: 0;
+      background-color: black;
+      content: "";
+      pointer-events: none;
+      transition: opacity 200ms ease-in-out;
     }
-    i {
-      font-size: 0.8em;
-      margin-right: 0.4rem;
+
+    &:focus {
+      outline: none;
+      border: 1px solid var(--selection);
+
+      &::after {
+        opacity: 0.16;
+      }
     }
-  }
-  i.bhi-close {
-    margin-left: 1rem;
-    cursor: pointer;
-    color: darken(#eee, 15%);
+
     &:hover {
-      color: darken(#eee, 35%);
+      border: 1px solid var(--selection);
     }
-  }
-  &.selected {
-    border: 1px solid $positive;
   }
 
-  span {
-    &.contact,
-    &.clientcontact {
-      color: $positive;
-      i {
-        color: $contact;
+  &.novo-chip-disabled {
+    opacity: 0.4;
+    pointer-events: none;
+    &::after {
+      opacity: 0;
+    }
+
+    .novo-chip-remove,
+    .novo-chip-trailing-icon {
+      cursor: default;
+    }
+  }
+
+  // &.novo-chip-with-trailing-icon.novo-chip-with-avatar,
+  // &.novo-chip-with-avatar {
+  //   padding-top: $novo-chip-avatar-vertical-padding;
+  //   padding-bottom: $novo-chip-avatar-vertical-padding;
+  // }
+
+  // &.novo-chip-with-trailing-icon.novo-chip-with-avatar {
+  //   padding-right: $novo-chip-remove-after-padding;
+  //   padding-left: $novo-chip-avatar-before-padding;
+  // }
+
+  // &.novo-chip-with-avatar {
+  //   padding-left: $novo-chip-avatar-before-padding;
+  //   padding-right: $novo-chip-horizontal-padding;
+  // }
+
+  .novo-chip-avatar::not(novo-icon) {
+    width: $novo-chip-avatar-size;
+    height: $novo-chip-avatar-size;
+  }
+
+  .novo-chip-avatar {
+    margin-right: $novo-chip-avatar-after-margin;
+    margin-left: $novo-chip-avatar-before-margin;
+  }
+
+  .novo-chip-avatar {
+    border-radius: 50%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    overflow: hidden;
+
+    // Makes `<img>` tags behave like `background-size: cover`. Not supported
+    // in IE, but we're using it as a progressive enhancement.
+    object-fit: cover;
+  }
+
+  .novo-chip-remove,
+  .novo-chip-trailing-icon {
+    width: $novo-chip-remove-size;
+    height: $novo-chip-remove-size;
+    cursor: pointer;
+  }
+
+  .novo-chip-remove,
+  .novo-chip-trailing-icon {
+    margin-left: $novo-chip-remove-before-margin;
+    margin-right: 0;
+  }
+
+  .novo-chip-remove {
+    color: $light;
+  }
+  &:not(.novo-chip-disabled) {
+    .novo-chip-remove:hover {
+      color: darken($light, 30%);
+    }
+  }
+
+  // iterate over each size
+  @each $size in $chip-sizes {
+    $spacing: map-get($chip-spacing, $size);
+    $height: map-get($chip-height, $size);
+    &.novo-size-#{$size} {
+      font-size: map-get($chip-fontsize, $size);
+      border-radius: 0.4rem;
+      padding: $spacing-none $spacing;
+      min-height: $height;
+      &.novo-chip-with-avatar {
+        padding-left: $spacing / 2;
+      }
+      &.novo-chip-with-trailing-icon {
+        padding-right: $spacing / 2;
       }
     }
-    &.company,
-    &.clientcorporation {
-      color: $positive;
-      i {
-        color: $company;
+  }
+
+  @include theme-colors() using ($color, $name) {
+    &.novo-color-#{$name} {
+      color: getContrastColor($name);
+      background: $color;
+      & > * {
+        color: inherit;
       }
     }
-    &.candidate {
-      color: $positive;
-      i {
-        color: $candidate;
-      }
-    }
-    &.job,
-    &.joborder {
-      color: $positive;
-      i {
-        color: $job;
-      }
-    }
-    &.placement {
-      color: $positive;
-      i {
-        color: $placement;
-      }
-    }
-    &.opportunity {
-      color: $positive;
-      i {
-        color: $opportunity;
-      }
-    }
-    &.lead {
-      color: $positive;
-      i {
-        color: $lead;
-      }
-    }
-    &.user,
-    &.corporateuser {
-      color: $positive;
-      i {
-        color: $neutral;
-      }
+
+    &.novo-accent-#{$name} {
+      border: 1px solid $color;
+      color: $color;
     }
   }
 }

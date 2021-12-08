@@ -23,11 +23,6 @@ export class NovoBaseTextElement {
     return this.size === 'large';
   }
 
-  @HostBinding('class.text-size-default')
-  get hb_isSizeDefault(): boolean {
-    return !['small', 'large'].includes(this.size);
-  }
-
   @HostBinding('class.text-weight-thin')
   get hb_isWeightThin(): boolean {
     return this.weight === 'thin';

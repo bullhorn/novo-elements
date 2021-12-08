@@ -1,5 +1,6 @@
 // NG2
-import { AfterViewInit, Component, EventEmitter, HostBinding, Input, Output, ViewChild } from '@angular/core';
+import { AfterContentInit, AfterViewInit, Component, EventEmitter, HostBinding, Input, Optional, Output, ViewChild } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
 import { BooleanInput } from '../../utils';
 
 @Component({
@@ -176,7 +177,7 @@ export class NovoTabButtonElement {
     <span class="indicator"></span>
   `,
 })
-export class NovoTabLinkElement {
+export class NovoTabLinkElement implements AfterContentInit {
   @HostBinding('attr.role')
   public role = 'tab';
   @Input()
@@ -188,9 +189,15 @@ export class NovoTabLinkElement {
 
   nav: any;
 
-  constructor(nav: NovoNavElement) {
+  constructor(nav: NovoNavElement, private router: Router, @Optional() private link?: RouterLink) {
     this.nav = nav;
     this.nav.add(this);
+  }
+
+  ngAfterContentInit(): void {
+    if (this.isLinkActive(this.link)) {
+      this.nav.select(this);
+    }
   }
 
   select() {
@@ -201,6 +208,10 @@ export class NovoTabLinkElement {
         el?.scrollIntoView(true);
       }
     }
+  }
+
+  private isLinkActive(link: RouterLink) {
+    return link.urlTree ? this.router.isActive(link.urlTree, false) : false;
   }
 }
 

@@ -78,7 +78,7 @@ novo-address {
     }
     pointer-events: none;
     input {
-      &::-webkit-input-placeholder {
+      &::placeholder {
         color: lighten($dark, 30%) !important;
       }
       border-bottom-style: dashed !important;

@@ -336,7 +336,7 @@ novo-multi-date-input {
   .chip-input-container {
     padding-top: 10px;
     .placeholder {
-      color: $empty;
+      color: var(--form-placeholder);
     }
   }
 

@@ -2,7 +2,8 @@
   <novo-title size="large">{{title}}</novo-title>
 </novo-header>
 <novo-nav borderBottom="1px solid var(--border)" marginBottom="2rem">
-  <novo-tab-link *ngFor="let page of pages" [routerLink]="[page.route]">{{page.title}}</novo-tab-link>
+  <novo-tab-link *ngFor="let page of pages" [routerLink]="[page.route]">{{page.title}}
+  </novo-tab-link>
 </novo-nav>
 
 <router-outlet></router-outlet>

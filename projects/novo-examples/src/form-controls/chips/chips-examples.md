@@ -5,6 +5,12 @@ title: Examples
 order: 4
 ---
 
+## Chip Usage
+
+The `chip` element can be used for several purposes, such as tags, badges, filters, or declare multi-inputs.
+
+<code-example example="chip-usage"></code-example>
+
 ## Basic Examples
 
 By clicking on the `chips` element, the options list will be displayed. Select any of the options by clicking on the item in the list. The value selected will be added to the list of selected values.
