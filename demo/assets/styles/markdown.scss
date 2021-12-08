@@ -21,6 +21,14 @@
     margin-bottom: 0 !important;
   }
 
+  .markdown-img {
+    background: lightgray;
+    min-height: 120px;
+    max-height: 360px;
+    display: flex;
+    justify-content: center;
+  }
+
   .octicon {
     display: inline-block;
     fill: currentColor;

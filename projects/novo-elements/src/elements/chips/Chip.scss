@@ -48,7 +48,7 @@ $chip-spacing: (
 
 .novo-chip {
   @include novo-body-text();
-  background: var(--background-bright);
+  background: var(--background-main);
   box-sizing: border-box;
   border: 1px solid transparent;
   transition: all 200ms ease-in-out;

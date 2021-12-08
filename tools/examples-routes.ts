@@ -162,10 +162,11 @@ function generatePageRoute(metadata: PageMetadata[]): string {
   const sections = aggregatePages(metadata);
   const chooseLayout = (section: string, page: string, comps: PageMetadata[]) => {
     const pathRoot = convertToDashCase(section);
+    const route = `${pathRoot}/${page}`.replace('src/', '');
     const subs = `[${comps.map((it) => `{ title: '${it.title}', route: './${it.route}'}`).join()}]`;
     return comps.length > 1
       ? `  {
-    path: '${pathRoot}/${page}',
+    path: '${route}',
     component: TabsLayout,
     data: { title: '${convertToSentence(page)}', section: '${pathRoot}', pages: ${subs} },
     children: [
@@ -173,7 +174,7 @@ ${comps.map((comp) => `      { path: '${comp.route}', component: ${comp.name}Pag
       { path: '', redirectTo: '/${pathRoot}/${page}/${comps[0].route}', pathMatch: 'full' },
     ]
   }`
-      : `  { path: '${pathRoot}/${page}', component: ${comps[0].name}Page, data: { title: '${comps[0].title}', section: '${comps[0].section}' } }`;
+      : `  { path: '${route}', component: ${comps[0].name}Page, data: { title: '${comps[0].title}', section: '${comps[0].section}' } }`;
   };
 
   return Object.entries(sections)

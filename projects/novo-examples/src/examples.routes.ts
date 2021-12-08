@@ -3560,48 +3560,80 @@ export class ColorsPage {
   template: `<h1>Composition</h1>
 <h2>A universal language</h2>
 <p>Comprehensive design principles and language helps maintain usability and a sense of harmony across a large family of products. Consistency and common elements greatly reduce the user effort requred to learn a new interface.</p>
-<p><img src="assets/images/CompositionPageIcon.svg" alt=""></p>
 <h2>Mainframe</h2>
 <p>The Mainframe refers to the permanently fixed portions of the application that never change. It contains the primary navigation and core functions.</p>
+<blockquote>
 <h6>Design Principles: Hierarchy &amp; Unity</h6>
-<p>Unity implies relation through proximity, size, and color. Making elements clearly distinct or unified helps create a strong visual hierarchy. This is important because it helps to easily differentiate the level of importance between different elements, and controls a user's cognitive flow.</p>
-<h5>Top Frame</h5>
-<p>The top frame contains key functions (Find, Add) and navigation to the Resource Center and to User Profile options.</p>
-<p><img src="assets/images/LayoutMainframeTopFrame.svg" alt="mainframe"></p>
-<h5>Bowling Alley</h5>
-<p>The bowling alley is where all active items are displayed, allowing users to easily shift between them.</p>
-<img src="assets/images/LayoutMainframeBowlingAlley.svg" alt="bowling alley" width="300"/>
-<h5>Menu</h5>
-<p>The menu functions as the primary navigation for the application. It contains links to every list, the dashboard, admin functions, tools, and third-party applications. The items on the menu can be toggled, grouped, and organized however the user wishes.</p>
-<p><img src="assets/images/LayoutMainframeMenu.svg" alt="menu"></p>
+<div class="p">Unity implies relation through proximity, size, and color. Making elements clearly distinct or unified helps create a strong visual hierarchy. This is important because it helps to easily differentiate the level of importance between different elements, and controls a user's cognitive flow.</div>
+</blockquote>
+<novo-grid columns="2" align="start" gap="2rem">
+<blockquote>
+<div class="p"><strong>Top Frame</strong></div>
+<div class="p">The top frame contains key functions (Find, Add) and navigation to the Resource Center and to User Profile options.</div>
+</blockquote>
+<p class="markdown-img"><img src="assets/images/LayoutMainframeTopFrame.svg" alt="mainframe"></p>
+<blockquote>
+<div class="p"><strong>Bowling Alley</strong></div>
+<div class="p">The bowling alley is where all active items are displayed, allowing users to easily shift between them.</div>
+</blockquote>
+<p class="markdown-img"><img src="assets/images/LayoutMainframeBowlingAlley.svg" alt="bowling alley"></p>
+<blockquote>
+<div class="p"><strong>Menu</strong></div>
+<div class="p">The menu functions as the primary navigation for the application. It contains links to every list, the dashboard, admin functions, tools, and third-party applications. The items on the menu can be toggled, grouped, and organized however the user wishes.</div>
+</blockquote>
+<p class="markdown-img"><img src="assets/images/LayoutMainframeMenu.svg" alt="menu"></p>
+</novo-grid>
 <h2>Headers</h2>
 <p>Headers hold key information and controls for a page. They serve as a wayfinding marker to help the user understand context and easily access important actions.</p>
-<h5>Overviews &amp; Slideouts</h5>
-<p>Overview and Slideout headers are dominant features which focus the user's attention to the context of a particular record and contains key information on the left, and actions on the right. These headers inherit the color of the entity type.</p>
-<p><img src="assets/images/LayoutMainframeHeaderOverview.svg" alt="overview header"></p>
-<h5>List Headers</h5>
-<p>List headers contain the filter and column controls for the list and the primary actions. They are fixed so that results can eaily be modified and actioned regardless of scrolling position.</p>
-<p><img src="assets/images/LayoutMainframeHeaderList.svg" alt="list header"></p>
+<novo-grid columns="2" align="start" gap="2rem">
+<blockquote>
+<div class="p"><strong>Overviews &amp; Slideouts</strong></div>
+<div class="p">Overview and Slideout headers are dominant features which focus the user's attention to the context of a particular record and contains key information on the left, and actions on the right. These headers inherit the color of the entity type.</div>
+</blockquote>
+<p class="markdown-img"><img src="assets/images/LayoutMainframeHeaderOverview.svg" alt="overview header"></p>
+<blockquote>
+<div class="p"><strong>List Headers</strong></div>
+<div class="p">List headers contain the filter and column controls for the list and the primary actions. They are fixed so that results can eaily be modified and actioned regardless of scrolling position.</div>
+</blockquote>
+<p class="markdown-img"><img src="assets/images/LayoutMainframeHeaderList.svg" alt="list header"></p>
+</novo-grid>
 <h6>Design Principles: Navigation &amp; Consistency</h6>
 <p>A consistent navigation structure allows users to master an interface much more quickly, as they know that certain functions are always in the same place. We use headers to provide quick access to key functions and aid findability of data in a complex system.</p>
-<h5>Add &amp; Edit Pages</h5>
-<p>The headers of Add and Edit pages generally serve as a simple visual element to help provide context.</p>
-<p><img src="assets/images/LayoutMainframeHeaderEditPage.svg" alt="add page header"></p>
+<novo-grid columns="2" align="start" gap="2rem">
+<blockquote>
+<div class="p"><strong>Add &amp; Edit Pages</strong></div>
+<div class="p">The headers of Add and Edit pages generally serve as a simple visual element to help provide context.</div>
+</blockquote>
+<p class="markdown-img"><img src="assets/images/LayoutMainframeHeaderEditPage.svg" alt="add page header"></p>
+</novo-grid>
 <h2>Cards</h2>
 <p>Essential to our design paradigm, cards are independent blocks of information. They can contain text, tables, and data visualizations. They offer a curated view of data. Bringing the most pertinent information to the forefont, they allow users to scan large amounts of data quickly.</p>
-<h5>Basic Structure</h5>
-<p>Cards have a header which contains the card title and the card controls. The controls can vary depending on card type, gut generally include move, refresh, configure, and remove. The content area has padding by default but can also run edge-to-edge. Pulse cards have a special icon next to the title.</p>
-<p><img src="assets/images/LayoutMainframeCardsNPSCard.svg" alt="card"></p>
-<h6>Design Principle: Cards</h6>
-<p>The card system scales easily, both in individual size and in groups. Because of this, cards are essential to our design language. Cards balance and align very easily, promoting findability. These handy little containers also provide a contextually relevant home for all content.</p>
-<p><strong>Hint:</strong> This is a great place for third-party developers to fit into the Bullhorn system. <strong>Are you a developer?</strong> Check out card markup and documentation here</p>
-<h5>Dashboard &amp; Overviews</h5>
-<p>Dashboards and Records Overviews are the primary home for our cards. They offer a customizable workspace to arrange and configure to most appropriately fit the user's needs. Cards have a fixed height, but mildly flexible width. They can also be expanded to full-screen. The &quot;add card&quot; control is always located in the top right, to be consistent with the placement of action buttons on tables and lists.</p>
-<p><img src="assets/images/LayoutMainframeCardsDashboard.svg" alt="dashboard cards"></p>
-<h5>Slideouts and Mobile</h5>
-<p>Cards are so flexible, they also work well in a mobile setting. They help users to easily scan chunks of information and find what they need.</p>
-<p><img src="assets/images/LayoutMobileCard.svg" alt="mobile cards"></p>
-`,
+<novo-grid columns="2" align="start" gap="2rem">
+<blockquote>
+<div class="p"><strong>Basic Structure</strong></div>
+<div class="p">Cards have a header which contains the card title and the card controls. The controls can vary depending on card type, gut generally include move, refresh, configure, and remove. The content area has padding by default but can also run edge-to-edge. Pulse cards have a special icon next to the title.</div>
+</blockquote>
+<p class="markdown-img"><img src="assets/images/LayoutMainframeCardsNPSCard.svg" alt="card"></p>
+</novo-grid>
+<blockquote>
+<div class="p"><strong>Design Principle: Cards</strong></div>
+<div class="p">The card system scales easily, both in individual size and in groups. Because of this, cards are essential to our design language. Cards balance and align very easily, promoting findability. These handy little containers also provide a contextually relevant home for all content.</div>
+</blockquote>
+<blockquote>
+<div class="p"><strong>Hint:</strong> This is a great place for third-party developers to fit into the Bullhorn system. <strong>Are you a developer?</strong> Check out card markup and documentation here</div>
+</blockquote>
+<novo-grid columns="2" align="start" gap="2rem">
+<blockquote>
+<div class="p"><strong>Dashboard &amp; Overviews</strong></div>
+<div class="p">Dashboards and Records Overviews are the primary home for our cards. They offer a customizable workspace to arrange and configure to most appropriately fit the user's needs. Cards have a fixed height, but mildly flexible width. They can also be expanded to full-screen. The &quot;add card&quot; control is always located in the top right, to be consistent with the placement of action buttons on tables and lists.</div>
+</blockquote>
+<p class="markdown-img"><img src="assets/images/LayoutMainframeCardsDashboard.svg" alt="dashboard cards"></p>
+<blockquote>
+<div class="p"><strong>Slideouts and Mobile</strong></div>
+<div class="p">Cards are so flexible, they also work well in a mobile setting. They help users to easily scan chunks of information and find what they need.</div>
+</blockquote>
+<p class="markdown-img"><img src="assets/images/LayoutMobileCard.svg" alt="mobile cards"></p>
+</novo-grid>`,
   host: { class: 'markdown-page' }
 })
 export class CompositionPage {
@@ -3625,7 +3657,7 @@ export class DesignPage {
   selector: 'iconography-page',
   template: `<h1>Iconography</h1>
 <h2>Certified Pixel-Perfect</h2>
-<novo-grid columns="1fr 200px">
+<novo-grid columns="1fr 200px" gap="2rem">
   <novo-text>Icons are used to represent an action or concept through the most simplistic imagery possible. Icons give additional context to written material, allowing the user to quickly comprehend any given concept. The icons are designed on a highly specific grid to ensure maximum clarity even at a small size. Their design is friendly, human, and bold.</novo-text>
   <img src="assets/images/IconographyPageIcon.svg" width="64px">
 </novo-grid>
@@ -6365,13 +6397,13 @@ const routes: Routes = [
       { path: '', redirectTo: '/components/tooltip/design', pathMatch: 'full' },
     ]
   },
-  { path: 'src/components', component: ComponentsPage, data: { title: 'Components', section: 'src' } },
-  { path: 'src/design', component: DesignPage, data: { title: 'Design', section: 'src' } },
-  { path: 'src/form-controls', component: FormControlsPage, data: { title: 'Form Controls', section: 'src' } },
-  { path: 'src/home', component: HomePage, data: { title: 'Home', section: 'src' } },
-  { path: 'src/layouts', component: LayoutsPage, data: { title: 'Layouts', section: 'src' } },
-  { path: 'src/patterns', component: PatternsPage, data: { title: 'Patterns', section: 'src' } },
-  { path: 'src/templates', component: TemplatesPage, data: { title: 'Templates', section: 'src' } },
+  { path: 'components', component: ComponentsPage, data: { title: 'Components', section: 'src' } },
+  { path: 'design', component: DesignPage, data: { title: 'Design', section: 'src' } },
+  { path: 'form-controls', component: FormControlsPage, data: { title: 'Form Controls', section: 'src' } },
+  { path: 'home', component: HomePage, data: { title: 'Home', section: 'src' } },
+  { path: 'layouts', component: LayoutsPage, data: { title: 'Layouts', section: 'src' } },
+  { path: 'patterns', component: PatternsPage, data: { title: 'Patterns', section: 'src' } },
+  { path: 'templates', component: TemplatesPage, data: { title: 'Templates', section: 'src' } },
   { path: 'design/colors', component: ColorsPage, data: { title: 'Colors', section: 'design' } },
   { path: 'design/composition', component: CompositionPage, data: { title: 'Composition', section: 'design' } },
   { path: 'design/iconography', component: IconographyPage, data: { title: 'Iconography', section: 'design' } },
