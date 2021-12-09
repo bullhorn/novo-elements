@@ -763,51 +763,51 @@ describe('Utils: FormUtils', () => {
     });
     it('should set start date only when just minOffset is passed', () => {
       const field = { dataType: 'Date', allowedDateRange: { minOffset: 1 } };
-      const controlConfig = {};
+      const controlConfig: NovoControlConfig = {};
       formUtils.inferDateRange(controlConfig, field);
       expect(Object.keys(controlConfig).length).toBeGreaterThan(0);
       expect(controlConfig.hasOwnProperty('startDate')).toBe(true);
-      expect(controlConfig['startDate']).toBeDefined;
+      expect(controlConfig.startDate).toBeDefined;
       expect(controlConfig.hasOwnProperty('endDate')).toBe(true);
-      expect(controlConfig['endDate']).not.toBeDefined;
+      expect(controlConfig.endDate).not.toBeDefined;
       expect(controlConfig.hasOwnProperty('disabledDateMessage')).toBe(true);
-      expect(controlConfig['disabledDateMessage']).not.toBeDefined;
+      expect(controlConfig.disabledDateMessage).not.toBeDefined;
     });
     it('should set start date only when just minDate is passed', () => {
       const field = { dataType: 'Date', allowedDateRange: { minDate: '2021-01-01' } };
-      const controlConfig = {};
+      const controlConfig: NovoControlConfig = {};
       formUtils.inferDateRange(controlConfig, field);
       expect(Object.keys(controlConfig).length).toBeGreaterThan(0);
       expect(controlConfig.hasOwnProperty('startDate')).toBe(true);
-      expect(controlConfig['startDate']).toBeDefined;
+      expect(controlConfig.startDate).toBeDefined;
       expect(controlConfig.hasOwnProperty('endDate')).toBe(true);
-      expect(controlConfig['endDate']).not.toBeDefined;
+      expect(controlConfig.endDate).not.toBeDefined;
       expect(controlConfig.hasOwnProperty('disabledDateMessage')).toBe(true);
-      expect(controlConfig['disabledDateMessage']).not.toBeDefined;
+      expect(controlConfig.disabledDateMessage).not.toBeDefined;
     });
     it('should set end date only when just maxOffset is passed', () => {
       const field = { dataType: 'Date', allowedDateRange: { maxOffset: 1 } };
-      const controlConfig = {};
+      const controlConfig: NovoControlConfig = {};
       formUtils.inferDateRange(controlConfig, field);
       expect(Object.keys(controlConfig).length).toBeGreaterThan(0);
       expect(controlConfig.hasOwnProperty('startDate')).toBe(true);
-      expect(controlConfig['startDate']).not.toBeDefined;
+      expect(controlConfig.startDate).not.toBeDefined;
       expect(controlConfig.hasOwnProperty('endDate')).toBe(true);
-      expect(controlConfig['endDate']).toBeDefined;
+      expect(controlConfig.endDate).toBeDefined;
       expect(controlConfig.hasOwnProperty('disabledDateMessage')).toBe(true);
-      expect(controlConfig['disabledDateMessage']).not.toBeDefined;
+      expect(controlConfig.disabledDateMessage).not.toBeDefined;
     });
     it('should set end date only when just maxOffset is passed', () => {
       const field = { dataType: 'Date', allowedDateRange: { maxDate: '2021-01-01' } };
-      const controlConfig = {};
+      const controlConfig: NovoControlConfig = {};
       formUtils.inferDateRange(controlConfig, field);
       expect(Object.keys(controlConfig).length).toBeGreaterThan(0);
       expect(controlConfig.hasOwnProperty('startDate')).toBe(true);
-      expect(controlConfig['startDate']).not.toBeDefined;
+      expect(controlConfig.startDate).not.toBeDefined;
       expect(controlConfig.hasOwnProperty('endDate')).toBe(true);
-      expect(controlConfig['endDate']).toBeDefined;
+      expect(controlConfig.endDate).toBeDefined;
       expect(controlConfig.hasOwnProperty('disabledDateMessage')).toBe(true);
-      expect(controlConfig['disabledDateMessage']).not.toBeDefined;
+      expect(controlConfig.disabledDateMessage).not.toBeDefined;
     });
   });
   describe('Method: inflateEmbeddedProperties()', () => {
