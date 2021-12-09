@@ -177,7 +177,7 @@ export class NovoTabButtonElement {
     <span class="indicator"></span>
   `,
 })
-export class NovoTabLinkElement implements AfterContentInit { // here
+export class NovoTabLinkElement implements AfterContentInit {
   @HostBinding('attr.role')
   public role = 'tab';
   @Input()
