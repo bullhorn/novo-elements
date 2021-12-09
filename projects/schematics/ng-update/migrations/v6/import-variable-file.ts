@@ -9,7 +9,7 @@ export class ImportVariableFileMigration extends DevkitMigration<null> {
     const extension = extname(stylesheet.filePath);
     if (extension === '.scss' || extension === '.sass') {
       const content = stylesheet.content;
-      const replaceObj = {
+      const replaceObj: any = {
         '~novo-elements/styles/global/variables': '~novo-elements/styles/variables',
         '../../../../../node_modules/novo-elements/styles/global/variables': 'styles/variables',
         'styles/global/variables': 'styles/variables',
