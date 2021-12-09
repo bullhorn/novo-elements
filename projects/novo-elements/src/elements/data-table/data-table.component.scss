@@ -224,7 +224,8 @@ cdk-table {
 
 .novo-data-table-header-cell {
   border-left: 1px solid $off-white;
-  white-space: nowrap;
+  white-space: normal;
+  overflow-wrap: break-word;
   display: flex;
   align-items: center;
   + .button-header-cell,
