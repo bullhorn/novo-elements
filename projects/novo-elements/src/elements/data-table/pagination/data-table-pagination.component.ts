@@ -173,11 +173,13 @@ export class NovoDataTablePagination<T> implements OnInit, OnDestroy {
   }
 
   public selectPage(page) {
+    this.state.checkRetainment('page');
     this.page = page;
     this.emitPageEvent();
   }
 
   public nextPage(): void {
+    this.state.checkRetainment('page');
     if (!this.hasNextPage()) {
       return;
     }
@@ -187,6 +189,7 @@ export class NovoDataTablePagination<T> implements OnInit, OnDestroy {
   }
 
   public previousPage(): void {
+    this.state.checkRetainment('page');
     if (!this.hasPreviousPage()) {
       return;
     }

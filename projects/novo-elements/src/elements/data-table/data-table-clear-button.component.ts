@@ -10,6 +10,9 @@ import { DataTableState } from './state/data-table-state.service';
         {{ labels.clear }}
       </novo-button>
       <list>
+        <item *ngIf="state.selected.length > 0" (click)="clearSelected()" data-automation-id="novo-data-table-clear-dropdown-clear-selected">{{
+          labels.clearSelected
+        }}</item>
         <item *ngIf="state.sort" (click)="clearSort()" data-automation-id="novo-data-table-clear-dropdown-clear-sort">{{
           labels.clearSort
         }}</item>
@@ -25,6 +28,8 @@ import { DataTableState } from './state/data-table-state.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NovoDataTableClearButton<T> {
+  @Output()
+  selectedClear: EventEmitter<boolean> = new EventEmitter();
   @Output()
   sortClear: EventEmitter<boolean> = new EventEmitter();
   @Output()
@@ -44,9 +49,15 @@ export class NovoDataTableClearButton<T> {
     this.filterClear.emit(true);
   }
 
+  clearSelected(): void {
+    this.state.clearSelected();
+    this.selectedClear.emit(true);
+  }
+
   clearAll(): void {
     this.state.reset();
     this.allClear.emit(true);
+    this.selectedClear.emit(true);
     this.sortClear.emit(true);
     this.filterClear.emit(true);
   }

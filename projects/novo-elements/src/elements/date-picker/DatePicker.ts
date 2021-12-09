@@ -154,6 +154,9 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
   @BooleanInput()
   public hideFooter: boolean = false;
 
+  @Input()
+  disabledDateMessage: string;
+
   // Select callback for output
   @Output()
   onSelect: EventEmitter<any> = new EventEmitter(false);

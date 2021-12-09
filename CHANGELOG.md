@@ -2,6 +2,57 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.11.0](https://github.com/bullhorn/novo-elements/compare/v5.10.0...v5.11.0) (2021-12-09)
+
+
+### Features
+
+* **DatePicker:** limiting selection of effective date range ([#1239](https://github.com/bullhorn/novo-elements/issues/1239)) ([4a865eb](https://github.com/bullhorn/novo-elements/commit/4a865ebb1f08a8ce2caf1cf8d7f437f784888aaa))
+
+## [5.10.0](https://github.com/bullhorn/novo-elements/compare/v5.9.0...v5.10.0) (2021-12-07)
+
+
+### Features
+
+* **Address:** Disable address field to prevent tabbing into address field when set to read only ([#1243](https://github.com/bullhorn/novo-elements/issues/1243)) ([8bd2d42](https://github.com/bullhorn/novo-elements/commit/8bd2d42d255f2f5a64b0100f0417011c6141015a))
+* **data table:** Enable data table headers to word wrap ([#1244](https://github.com/bullhorn/novo-elements/issues/1244)) ([0896e83](https://github.com/bullhorn/novo-elements/commit/0896e835748f5ff1576e914d052db60b5fee3b10))
+
+## [5.9.0](https://github.com/bullhorn/novo-elements/compare/v5.8.1...v5.9.0) (2021-12-06)
+
+
+### Features
+
+* **Form:** Add parentEntity to formFields ([#1242](https://github.com/bullhorn/novo-elements/issues/1242)) ([837ce40](https://github.com/bullhorn/novo-elements/commit/837ce40e87944741a7a75a4deef32ac259b16ea1))
+
+### [5.8.1](https://github.com/bullhorn/novo-elements/compare/v5.8.0...v5.8.1) (2021-11-29)
+
+# [5.8.0](https://github.com/bullhorn/novo-elements/compare/v5.7.0...v5.8.0) (2021-11-29)
+
+
+### Features
+
+* **dataTable:** Selection Retention ([#1237](https://github.com/bullhorn/novo-elements/issues/1237)) ([cad88a4](https://github.com/bullhorn/novo-elements/commit/cad88a40662972ed58adbf664241831ba75ff663))
+
+
+
+# Changelog
+
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+## [5.7.0](https://github.com/bullhorn/novo-elements/compare/v5.6.1...v5.7.0) (2021-11-08)
+
+
+### Features
+
+* **AppBridge:** add 'slide-out-add' to NovoApps type ([#1232](https://github.com/bullhorn/novo-elements/issues/1232)) ([16f07b2](https://github.com/bullhorn/novo-elements/commit/16f07b266d7ff373fb84b9fe7ca3e81a7b557391))
+
+### [5.6.1](https://github.com/bullhorn/novo-elements/compare/v5.6.0...v5.6.1) (2021-11-05)
+
+
+### Bug Fixes
+
+* **WorkflowOptions:** Allow additional data in workflow option ([#1234](https://github.com/bullhorn/novo-elements/issues/1234)) ([4c960a0](https://github.com/bullhorn/novo-elements/commit/4c960a0c2e17d829ef7fbbc238c6be5fbbe69685))
+
 ## [5.6.0](https://github.com/bullhorn/novo-elements/compare/v5.5.2...v5.6.0) (2021-10-14)
 
 

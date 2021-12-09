@@ -4373,6 +4373,8 @@ export class DatePickerUsagePage {
 <p><code-example example="week-start"></code-example></p>
 <h5>Different Locale</h5>
 <p>TBD</p>
+<h5>Date Picker Limits</h5>
+<p><code-example example="date-picker-limits"></code-example></p>
 `,
   host: { class: 'markdown-page' }
 })

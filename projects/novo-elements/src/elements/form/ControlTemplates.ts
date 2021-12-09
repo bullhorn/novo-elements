@@ -394,6 +394,7 @@ import { NovoTemplate } from '../common/novo-template/novo-template.directive';
           [textMaskEnabled]="control.textMaskEnabled"
           [placeholder]="control.placeholder"
           [weekStart]="control.weekStart"
+          [disabledDateMessage]="control.disabledDateMessage"
           (focusEvent)="methods.handleFocus($event)"
           (blurEvent)="methods.handleBlur($event)"
           (changeEvent)="methods.emitChange($event)"
