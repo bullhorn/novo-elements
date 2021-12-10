@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [5.11.1](https://github.com/bullhorn/novo-elements/compare/v5.11.0...v5.11.1) (2021-12-10)
+
+
+### Bug Fixes
+
+* **Select:** Allow highlighting of select element ([#1245](https://github.com/bullhorn/novo-elements/issues/1245)) ([7583c6d](https://github.com/bullhorn/novo-elements/commit/7583c6d1ee00b09ca9e4217ef4eba5fa7c809644))
+
 ## [5.11.0](https://github.com/bullhorn/novo-elements/compare/v5.10.0...v5.11.0) (2021-12-09)
 
 
