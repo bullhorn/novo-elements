@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.11.0](https://github.com/bullhorn/novo-elements/compare/v5.10.0...v5.11.0) (2021-12-09)
+
+
+### Features
+
+* **DatePicker:** limiting selection of effective date range ([#1239](https://github.com/bullhorn/novo-elements/issues/1239)) ([4a865eb](https://github.com/bullhorn/novo-elements/commit/4a865ebb1f08a8ce2caf1cf8d7f437f784888aaa))
+
 ## [5.10.0](https://github.com/bullhorn/novo-elements/compare/v5.9.0...v5.10.0) (2021-12-07)
 
 
