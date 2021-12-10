@@ -99,7 +99,7 @@ import { ListInteractionDictionary, ListInteractionEvent } from './ListInteracti
           [hidden]="dataSource?.totallyEmpty && !state.userFiltered"
         >
           <ng-container cdkColumnDef="selection">
-            <novo-data-table-checkbox-header-cell *cdkHeaderCellDef [maxSelected]="maxSelected"></novo-data-table-checkbox-header-cell>
+            <novo-data-table-checkbox-header-cell *cdkHeaderCellDef [maxSelected]="maxSelected" [canSelectAll]="canSelectAll"></novo-data-table-checkbox-header-cell>
             <novo-data-table-checkbox-cell *cdkCellDef="let row; let i = index" [row]="row" [maxSelected]="maxSelected"></novo-data-table-checkbox-cell>
           </ng-container>
           <ng-container cdkColumnDef="expand">
@@ -304,6 +304,7 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   @Input() fixedHeader = false;
   @Input() paginatorDataFeatureId: string;
   @Input() maxSelected: number = undefined;
+  @Input() canSelectAll: boolean = false;
 
   @Input()
   set dataTableService(service: IDataTableService<T>) {
@@ -403,6 +404,7 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   private _hideGlobalSearch: boolean = true;
 
   @Output() preferencesChanged: EventEmitter<IDataTablePreferences> = new EventEmitter<IDataTablePreferences>();
+  @Output() allSelected: EventEmitter<any> = new EventEmitter<any>(); // TODO: figure out a type
 
   public dataSource: DataTableSource<T>;
   public loading: boolean = true;
