@@ -404,7 +404,7 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   private _hideGlobalSearch: boolean = true;
 
   @Output() preferencesChanged: EventEmitter<IDataTablePreferences> = new EventEmitter<IDataTablePreferences>();
-  @Output() allSelected: EventEmitter<any> = new EventEmitter<any>(); // TODO: figure out a type
+  @Output() allSelected: EventEmitter<{ allSelected: boolean, selectedCount: number }> = new EventEmitter<{ allSelected: boolean, selectedCount: number }>();
 
   public dataSource: DataTableSource<T>;
   public loading: boolean = true;
