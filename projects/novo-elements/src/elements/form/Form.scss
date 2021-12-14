@@ -397,7 +397,8 @@ novo-form {
                       }
                     }
                     &.highlighted {
-                      input {
+                      input,
+                      novo-select {
                         background-color: lighten($ocean, 35%) !important;
                       }
                     }

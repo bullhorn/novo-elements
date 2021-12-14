@@ -130,7 +130,7 @@ export type rangeSelectModes = 'startDate' | 'endDate';
                             endfill: isEndFill(range, day.date, selected, selected2),
                             'selecting-range': isSelectingRange(range, day.date, selected, selected2, hoverDay, rangeSelectMode, weekRangeSelect)
                            }" (mouseover)="rangeHover($event, day)" [attr.data-automation-id]="day.number">
-                            <button class="day" [attr.data-automation-id]="day.number" [disabled]="isDisabled(day.date, start, end)" (click)="select($event, day, true)">{{day.number}}</button>
+                            <button [title]="isDisabled(day.date, start, end) ? disabledDateMessage : ''" class="day" [attr.data-automation-id]="day.number" [disabled]="isDisabled(day.date, start, end)" (click)="select($event, day, true)">{{day.number}}</button>
                         </td>
                     </tr>
                 </tbody>
@@ -168,6 +168,8 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit, OnCh
   weekRangeSelect: boolean;
   @Input()
   weekStart: number = 0;
+  @Input()
+  disabledDateMessage: string;
   // Select callback for output
   @Output()
   onSelect: EventEmitter<any> = new EventEmitter(false);
