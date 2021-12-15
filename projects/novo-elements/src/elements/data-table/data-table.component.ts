@@ -626,6 +626,9 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   }
 
   public allCurrentRowsSelected(): boolean {
+    if (!this.dataSource?.data?.length) {
+      return false;
+    }
     for (let i = 0; i < (this.dataSource.data || []).length; i++) {
       if (!this.isSelected((this.dataSource.data || [])[i])) {
         return false;
