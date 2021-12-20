@@ -72,7 +72,7 @@ describe('Elements: NovoDataTableCheckboxHeaderCell', () => {
         position: 'fixedTop',
         message: 'Error, more than 500 items are not able to be selected at one time',
         icon: 'caution',
-      }
+      };
       component.maxSelected = 1;
       component.dataTable.state = {
         selectedRows: {
@@ -80,7 +80,7 @@ describe('Elements: NovoDataTableCheckboxHeaderCell', () => {
         },
       };
       component.dataTable.dataSource = {
-        data: [1,2,3,4],
+        data: [1, 2, 3, 4],
       };
       component.checked = false;
       component.onClick();
