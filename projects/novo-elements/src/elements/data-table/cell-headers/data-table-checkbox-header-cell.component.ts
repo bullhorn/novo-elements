@@ -112,7 +112,7 @@ export class NovoDataTableCheckboxHeaderCell<T> extends CdkHeaderCell implements
   public selectAllChanged(): void {
     const allSelectedEvent = {
       allSelected: this.checked,
-      selectedCount: this.dataTable.state.selected.length,
+      selectedCount: this.dataTable?.state?.selected?.length,
     };
     this.dataTable.allSelected.emit(allSelectedEvent);
   }
