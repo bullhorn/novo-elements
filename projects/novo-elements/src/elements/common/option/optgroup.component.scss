@@ -4,7 +4,7 @@
 // @import "../style/vendor-prefixes";
 
 .novo-optgroup-label {
-  @include novo-label-medium();
+  @include novo-label-text();
   color: $grey;
   cursor: default;
   flex: 1;

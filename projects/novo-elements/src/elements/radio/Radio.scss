@@ -77,7 +77,7 @@ novo-radio {
   > label {
     cursor: pointer;
     .novo-radio-button-label {
-      @include novo-text-medium();
+      @include novo-body-text();
       display: inline;
     }
     i {

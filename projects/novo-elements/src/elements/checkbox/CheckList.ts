@@ -17,7 +17,7 @@ const CHECKLIST_VALUE_ACCESSOR = {
   providers: [CHECKLIST_VALUE_ACCESSOR],
   template: `
     <div
-      class="check-box-group"
+      class="novo-checkbox-group"
       *ngFor="let option of _options; let i = index"
       [ngClass]="{ checked: option.checked }"
       [class.disabled]="disabled"

@@ -42,8 +42,8 @@ export class NovoUtilActionComponent {
         <ng-container *ngIf="title">
           <novo-icon class="header-icon" *ngIf="icon">{{ icon }}</novo-icon>
           <div class="header-titles">
-            <novo-title size="large">{{ title }}</novo-title>
-            <novo-title size="small">{{ subTitle }}</novo-title>
+            <novo-title size="lg">{{ title }}</novo-title>
+            <novo-title size="sm">{{ subTitle }}</novo-title>
           </div>
         </ng-container>
         <ng-container *ngIf="!title">

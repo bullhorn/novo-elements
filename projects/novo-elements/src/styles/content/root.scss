@@ -3,10 +3,14 @@
 html {
   scrollbar-color: var(--scrollbar-thumb) var(--background-body);
   scrollbar-width: none;
+  font-family: $font-family-base;
+  font-size: $font-size-base;
+  color: $font-color-base;
 }
 
 body {
   font-family: $font-family-body;
+  font-size: $font-size-body;
   line-height: 1.4;
   word-wrap: break-word;
   color: var(--text-main);

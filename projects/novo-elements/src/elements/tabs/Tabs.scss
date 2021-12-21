@@ -37,12 +37,12 @@ novo-nav {
     }
     &.text-only {
       .novo-tab-link {
-        @include novo-label-medium();
+        @include novo-label-text();
       }
     }
     .novo-tab-link {
       padding: 1rem;
-      color: var(--text-main);
+      // color: var(--text-main);
       display: flex;
       align-items: center;
       gap: $spacing-xs;
@@ -166,14 +166,14 @@ novo-nav {
         }
       }
       .novo-tab-link {
-        color: $dark;
+        color: var(--text-main);
         opacity: 0.75;
       }
       &.active,
       &.router-link-active {
-        color: $positive;
+        color: var(--selection);
         .novo-tab-link {
-          color: $positive;
+          color: var(--selection);
           opacity: 1;
         }
         .indicator {
@@ -189,10 +189,10 @@ novo-nav {
     &[type="button-bar"] {
       border: 2px solid $light;
       novo-tab-button {
-        color: $dark;
+        color: var(--text-main);
         opacity: 0.75;
         &.active {
-          color: $positive;
+          color: var(--selection);
           background: rgba(0, 0, 0, 0.05);
           opacity: 1;
         }

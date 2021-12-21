@@ -19,13 +19,21 @@ import { NovoFormGroup } from './NovoFormGroup';
 
 @Component({
   selector: 'novo-fieldset-header',
-  template: ` <h6><i [class]="icon || 'bhi-section'"></i>{{ title }}</h6> `,
+  template: `
+    <novo-title smaller>
+      <novo-icon>{{ icon.replace('bhi-', '') }}</novo-icon
+      >{{ title }}
+    </novo-title>
+  `,
+  host: {
+    class: 'novo-fieldset-header',
+  },
 })
 export class NovoFieldsetHeaderElement {
   @Input()
   title: string;
   @Input()
-  icon: string;
+  icon: string = 'section';
 }
 
 @Component({

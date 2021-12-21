@@ -60,6 +60,7 @@ export class ToastServiceExample {
         icon: 'times',
         theme: 'danger',
         position: 'growlBottomRight',
+        isCloseable: true,
       };
     } else if (arg === 'growlBottomLeft') {
       this.options = {

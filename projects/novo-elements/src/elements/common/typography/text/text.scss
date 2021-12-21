@@ -3,15 +3,14 @@
 
 .novo-text {
   display: inline;
-  font-family: Roboto, sans-serif;
-  font-size: 1.2rem;
+  font-size: var(--font-size-text);
   font-weight: normal;
-  line-height: 1.5rem;
+  line-height: 1.375em;
   color: inherit;
 
   &.text-block {
     display: block;
-    line-height: 1.5rem;
+    line-height: 1.375em;
     min-width: 55ch;
     max-width: 75ch;
   }
@@ -19,12 +18,12 @@
   &::ng-deep {
     novo-icon {
       vertical-align: top;
-      font-size: 1.2em;
+      font-size: inherit;
     }
   }
 
   @include base-text-rules();
-  @include text-sizing(1rem, 1.2rem, 1.4rem);
+  @include text-sizing($font-size-sm, $font-size-lg); // @include text-sizing(1rem, 1.2rem, 1.4rem);
   @include text-colors();
   @include text-weights();
   @include text-margins();

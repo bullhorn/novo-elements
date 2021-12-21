@@ -1,19 +1,25 @@
 # Typography
 
-Aim for about 140%-180% for optimal readability and accessibility.
-Limit line length to 70–80 characters.
-Font size should be a minimum of 16pt.
-Small fonts need more spacing.
-Experiment with tighter spacing on pull quotes or other short texts.
-Check your line spacing when you change font or font size.
-
-## Roboto, not robotic.
-
-Roboto's refined letterforms combine geometry with open, rounded features to create a structured, yet friendly typeface. It maintains a human\-like quality while expressing a clean and modern aesthetic.
-
-[Roboto Typeface on Google Fonts](https://www.google.com/fonts/specimen/Roboto)
+<novo-grid columns="200px 1fr" align="start" gap="2rem">
 
 ![](assets/images/TypographyPageIcon.svg)
+
+> ## Gotham, Montserrat.
+>
+> Bullhorn's Branding uses the Gotham font family, this is not a free font. With that in mind we build novo-elements to work with both the Gotham font and Monteserrat which is a very similar font face available on Google Fonts.  Both fonts provide a characters that are clean and easy to read with good weight when the font-size is small.
+>
+> [Gotham Font Overview](https://www.typography.com/fonts/gotham/overview)
+>
+> [Montserrat Typeface on Google Fonts](https://fonts.google.com/specimen/Montserrat)
+
+</novo-grid>
+
+## Best Practices
+
+- (✓) Limit line length to 70–80 characters.
+- (✓) Paragraph text should be a minimum of 14pt.
+- (✓) Small fonts need more spacing.
+- (✓) Check your line spacing when you change font or font size.
 
 ### Design Principle: Clarity
 
@@ -62,7 +68,7 @@ In general when determinining readability we try to stay within the optimal line
     </novo-radio-group>
   </typedef-specs>
   <typedef-snippet>
-    <code class="tc-positive">&lt;novo-text&gt;...&lt;/novo-text&gt;</code> or <code class="tc-negative">@include novo-body-text-medium()</code>
+    <code class="tc-positive">&lt;novo-text&gt;...&lt;/novo-text&gt;</code> or <code class="tc-negative">@include novo-body-text()</code>
   </typedef-snippet>
 </typedef-example>
 
@@ -74,7 +80,7 @@ Line length is always relative to its font\-size. This means that if a font scal
 
 ## Styles
 
-There a number of general styles that are present throughout the application. To maintain consistency, these styles should be adhered to as much as possible.
+There a number of general styles that are present throughout the application. To maintain consistency, these styles should be adhered to as much as possible. Most text components can be adjusted by setting the `size`, `length`, `weight`, or `color` attributes, these values are all theme aware based on novo design tokens.
 
 ## Body Text
 
@@ -87,11 +93,11 @@ Body text is available in three different sizes. Use body text to present the bu
     </novo-text>
   </typedef-content>
   <typedef-specs>
-    <novo-label>Body Medium</novo-label>
+    <novo-label>Body Text</novo-label>
     <dl>
       <dt>Font Size       </dt><dd>1.2rem</dd>
-      <dt>Line Height     </dt><dd>1.375 (28px)</dd>
-      <dt>Font Weight     </dt><dd>300</dd>
+      <dt>Line Height     </dt><dd>1.375</dd>
+      <dt>Font Weight     </dt><dd>400</dd>
       <dt>Max Line Length </dt><dd>550px</dd>
     </dl>
   </typedef-specs>
@@ -102,47 +108,47 @@ Body text is available in three different sizes. Use body text to present the bu
 
 <typedef-example>
   <typedef-content>
-    <novo-text size="large">
+    <novo-text larger>
       The Highland (Scottish Gaelic: Bò Ghàidhealach; Scots: Hielan coo) is a Scottish breed of rustic cattle. It originated in the <novo-link>Scottish Highlands</novo-link> and the Outer Hebrides islands of Scotland and has long horns and a long shaggy coat. It is a hardy breed, bred to withstand the intemperate conditions in the region. The first herd-book dates from 1885; two different types – a smaller island type, usually black, and a larger mainland type, usually dun – were registered as a single breed. It is reared primarily for beef, and has been exported to several other countries.<sup>[1]</sup>
     </novo-text>
   </typedef-content>
   <typedef-specs>
-    <novo-label>Body Large</novo-label>
+    <novo-label>Body Larger</novo-label>
     <dl>
-      <dt>Font Size       </dt><dd>1.2rem</dd>
-      <dt>Line Height     </dt><dd>1.375 (28px)</dd>
-      <dt>Font Weight     </dt><dd>300</dd>
+      <dt>Font Size       </dt><dd>1.4rem</dd>
+      <dt>Line Height     </dt><dd>1.375</dd>
+      <dt>Font Weight     </dt><dd>400</dd>
       <dt>Max Line Length </dt><dd>550px</dd>
     </dl>
   </typedef-specs>
   <typedef-snippet>
-    <code class="tc-positive">&lt;novo-text size="large"&gt;...&lt;/novo-text&gt;</code> or <code class="tc-negative">@include novo-body-text-large()</code>
+    <code class="tc-positive">&lt;novo-text larger&gt;...&lt;/novo-text&gt;</code>
   </typedef-snippet>
 </typedef-example>
 
 <typedef-example>
   <typedef-content>
-    <novo-text size="small">
+    <novo-text smaller>
       The Highland (Scottish Gaelic: Bò Ghàidhealach; Scots: Hielan coo) is a Scottish breed of rustic cattle. It originated in the <novo-link>Scottish Highlands</novo-link> and the Outer Hebrides islands of Scotland and has long horns and a long shaggy coat. It is a hardy breed, bred to withstand the intemperate conditions in the region. The first herd-book dates from 1885; two different types – a smaller island type, usually black, and a larger mainland type, usually dun – were registered as a single breed. It is reared primarily for beef, and has been exported to several other countries.<sup>[1]</sup>
     </novo-text>
   </typedef-content>
   <typedef-specs>
-    <novo-label>Body Large</novo-label>
+    <novo-label>Body Smaller</novo-label>
     <dl>
-      <dt>Font Size       </dt><dd>1.2rem</dd>
-      <dt>Line Height     </dt><dd>1.375 (28px)</dd>
-      <dt>Font Weight     </dt><dd>300</dd>
+      <dt>Font Size       </dt><dd>1.1rem</dd>
+      <dt>Line Height     </dt><dd>1.375</dd>
+      <dt>Font Weight     </dt><dd>400</dd>
       <dt>Max Line Length </dt><dd>550px</dd>
     </dl>
   </typedef-specs>
   <typedef-snippet>
-    <code class="tc-positive">&lt;novo-text size="small"&gt;...&lt;/novo-text&gt;</code> or <code class="tc-negative">@include novo-body-text-small()</code>
+    <code class="tc-positive">&lt;novo-text size="small"&gt;...&lt;/novo-text&gt;</code>
   </typedef-snippet>
 </typedef-example>
 
 ## Title Text
 
-Titles are available in six different sizes. To create an optical balance between the six levels, titles are set in two weights: Condensed Thin and Condensed Light. All titles use a line height of 1.2 relative to the font size.
+Titles are available in six different sizes. To create an optical balance between the six levels, titles are set in two weights: Condensed Thin and Condensed Light. All titles use a line height of 1.375 relative to the font size.
 
 Title mixins and constants can be applied to any HTML element, but we recommend using \<h1\> through \<h6\> elements for titles to ensure markup is semantic and accessible.
 
@@ -153,53 +159,37 @@ Title mixins and constants can be applied to any HTML element, but we recommend 
     </novo-title>
   </typedef-content>
   <typedef-specs>
-    <novo-label>Title Medium</novo-label>
+    <novo-label>Title</novo-label>
     <dl>
-      <dt>Font Size       </dt><dd>1.2rem</dd>
-      <dt>Line Height     </dt><dd>1.375 (28px)</dd>
-      <dt>Font Weight     </dt><dd>300</dd>
+      <dt>Font Size       </dt><dd>1.8rem</dd>
+      <dt>Line Height     </dt><dd>1.375</dd>
+      <dt>Font Weight     </dt><dd>500</dd>
     </dl>
   </typedef-specs>
   <typedef-snippet>
-    <code class="tc-positive">&lt;novo-title&gt;...&lt;/novo-title&gt;</code> or <code class="tc-negative">@include novo-title-text-medium()</code>
+    <code class="tc-positive">&lt;novo-title&gt;...&lt;/novo-title&gt;</code> or <code class="tc-negative">@include novo-title-text()</code>
   </typedef-snippet>
 </typedef-example>
 
 <typedef-example>
   <typedef-content>
-    <novo-title size="large">
+    <novo-title [size]="size.value">
       Creating an incredible customer experience
     </novo-title>
   </typedef-content>
   <typedef-specs>
-    <novo-label>Title Large</novo-label>
-    <dl>
-      <dt>Font Size       </dt><dd>1.2rem</dd>
-      <dt>Line Height     </dt><dd>1.375 (28px)</dd>
-      <dt>Font Weight     </dt><dd>300</dd>
-    </dl>
+     <novo-label>Size</novo-label>
+    <novo-radio-group #size appearance="vertical" value="xl">
+      <novo-radio value="xs">xs</novo-radio>
+      <novo-radio value="sm">sm</novo-radio>
+      <novo-radio value="md">md</novo-radio>
+      <novo-radio value="lg">lg</novo-radio>
+      <novo-radio value="xl">xl</novo-radio>
+      <novo-radio value="2xl">2xl</novo-radio>
+    </novo-radio-group>
   </typedef-specs>
   <typedef-snippet>
-    <code class="tc-positive">&lt;novo-title size="large"&gt;...&lt;/novo-title&gt;</code> or <code class="tc-negative">@include novo-title-text-large()</code>
-  </typedef-snippet>
-</typedef-example>
-
-<typedef-example>
-  <typedef-content>
-    <novo-title size="small">
-      Creating an incredible customer experience
-    </novo-title>
-  </typedef-content>
-  <typedef-specs>
-    <novo-label>Title Small</novo-label>
-    <dl>
-      <dt>Font Size       </dt><dd>1.2rem</dd>
-      <dt>Line Height     </dt><dd>1.375 (28px)</dd>
-      <dt>Font Weight     </dt><dd>300</dd>
-    </dl>
-  </typedef-specs>
-  <typedef-snippet>
-    <code class="tc-positive">&lt;novo-title size="small"&gt;...&lt;/novo-title&gt;</code> or <code class="tc-negative">@include novo-title-text-small()</code>
+    <code class="tc-positive">&lt;novo-title&gt;...&lt;/novo-title&gt;</code> or <code class="tc-negative">@include novo-title-text()</code>
   </typedef-snippet>
 </typedef-example>
 

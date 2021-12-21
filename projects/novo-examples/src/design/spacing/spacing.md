@@ -67,8 +67,8 @@ Apply spacing constants to components to set element's padding and margins.
     </novo-flex>
   </typedef-content>
   <typedef-specs>
-    <novo-label txc="grass">Padding & Margin</novo-label><br/>
-    <novo-label txc="ocean">Margin</novo-label>
+    <novo-label color="grass">Padding</novo-label><br/>
+    <novo-label color="ocean">Margin</novo-label>
     <dl>
       <dt>xs </dt><dd>0.4rem</dd>
       <dt>sm </dt><dd>0.8rem</dd>

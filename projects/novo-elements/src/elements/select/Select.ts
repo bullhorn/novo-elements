@@ -22,7 +22,7 @@ import {
   Self,
   SimpleChanges,
   ViewChild,
-  ViewChildren
+  ViewChildren,
 } from '@angular/core';
 import { ControlValueAccessor, FormGroupDirective, NgControl, NgForm } from '@angular/forms';
 // Vendor
@@ -48,7 +48,7 @@ import {
   NovoOptionSelectionChange,
   NOVO_OPTION_PARENT_COMPONENT,
   _countGroupLabelsBeforeOption,
-  _getOptionScrollPosition
+  _getOptionScrollPosition,
 } from '../common';
 import { NovoOverlayTemplateComponent } from '../common/overlay/Overlay';
 import { NovoFieldControl } from '../field';

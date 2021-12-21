@@ -163,18 +163,24 @@ function generatePageRoute(metadata: PageMetadata[]): string {
   const chooseLayout = (section: string, page: string, comps: PageMetadata[]) => {
     const pathRoot = convertToDashCase(section);
     const route = `${pathRoot}/${page}`.replace('src/', '');
-    const subs = `[${comps.map((it) => `{ title: '${it.title}', route: './${it.route}'}`).join()}]`;
-    return comps.length > 1
+    const tabs = comps.filter((it) => it.order !== -1);
+    const subs = `[${tabs.map((it) => `{ title: '${it.title}', route: './${it.route}'}`).join()}]`;
+    const hasDesc = comps.filter((it) => it.order === -1);
+    let desc = 'null';
+    if (hasDesc.length) {
+      desc = `${hasDesc[0].name}Page`;
+    }
+    return tabs.length > 1
       ? `  {
     path: '${route}',
     component: TabsLayout,
-    data: { title: '${convertToSentence(page)}', section: '${pathRoot}', pages: ${subs} },
+    data: { title: '${convertToSentence(page)}', section: '${pathRoot}', pages: ${subs}, description: ${desc} },
     children: [
-${comps.map((comp) => `      { path: '${comp.route}', component: ${comp.name}Page }`).join(',\n')},
-      { path: '', redirectTo: '/${pathRoot}/${page}/${comps[0].route}', pathMatch: 'full' },
+${tabs.map((comp) => `      { path: '${comp.route}', component: ${comp.name}Page }`).join(',\n')},
+      { path: '', redirectTo: '/${pathRoot}/${page}/${tabs[0].route}', pathMatch: 'full' },
     ]
   }`
-      : `  { path: '${route}', component: ${comps[0].name}Page, data: { title: '${comps[0].title}', section: '${comps[0].section}' } }`;
+      : `  { path: '${route}', component: ${tabs[0].name}Page, data: { title: '${tabs[0].title}', section: '${tabs[0].section}' } }`;
   };
 
   return Object.entries(sections)

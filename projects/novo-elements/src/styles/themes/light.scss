@@ -21,4 +21,10 @@
   --form-text: #000;
   --variable: #39a33c;
   --highlight: #ff0;
+
+  // Share
+  --font-size-caption: #{$font-size-xs};
+  --font-size-label: #{$font-size-sm};
+  --font-size-text: #{$font-size-lg};
+  --font-size-title: #{$font-size-xl};
 }

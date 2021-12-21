@@ -8,6 +8,7 @@ import { IMaskDirectiveModule } from 'angular-imask';
 import { TextMaskModule } from 'angular2-text-mask';
 import { NovoCheckboxModule } from '../checkbox';
 import { NovoCommonModule } from '../common/common.module';
+import { NovoIconModule } from '../icon';
 import { NovoTemplateService } from './../../services/template/NovoTemplateService';
 import { NovoAceEditorModule } from './../ace-editor/AceEditor.module';
 import { NovoButtonModule } from './../button/Button.module';
@@ -62,6 +63,8 @@ import { NovoFormElement } from './Form';
     NovoAceEditorModule,
     NovoCommonModule,
     NovoCheckboxModule,
+    NovoIconModule,
+    NovoRadioModule,
   ],
   declarations: [
     NovoAutoSize,

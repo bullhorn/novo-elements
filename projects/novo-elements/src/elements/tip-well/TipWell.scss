@@ -20,7 +20,7 @@ novo-tip-well {
         color: #aaaaaa;
       }
       > p {
-        @include novo-text-medium();
+        @include novo-body-text();
         width: 100%;
         max-width: 40rem;
         padding: 0;

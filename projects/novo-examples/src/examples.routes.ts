@@ -28,17 +28,13 @@ export class AceEditorPage {
 <div>
 Used to help display scheduled events for the day/week/month. The agenda component allow you to display events for any range grouped by days.  You can provide custom templates to each view to modify how the event is displayed and to add additional content.
 </div>
-<p><img src="https://via.placeholder.com/350x250" alt="placeholder"></p>
+<p><img src="assets/images/AgendaDayView.png" alt="Overview"></p>
 <div>
 <h3>Use When</h3>
 <ul class="contains-do-list">
 <li class="bullhorn-do-item">
-<p><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> When information can be grouped and the user might need access to multiple groups of information at once.</novo-text></p>
-<p>TBW</p>
-</li>
-<li class="bullhorn-do-item">
-<p><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> When providing a summary of content as an entry point to a larger grouping of information</novo-text></p>
-<p>TBW</p>
+<p><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> When representing scheduled events or a history of actions.</novo-text></p>
+<p>The Agenda should be used to plot dates or events already tracked in the system and should be used as a way to visualize those events.</p>
 </li>
 </ul>
 </div>
@@ -46,51 +42,35 @@ Used to help display scheduled events for the day/week/month. The agenda compone
 <h3>Don′t Use When</h3>
 <ul class="contains-do-list">
 <li class="bullhorn-do-item">
-<p><novo-icon color="grapefruit" mr="1rem">times</novo-icon><novo-text color="grapefruit"> When a lot of information on the card makes it too large. Instead consider using a modal or showing the information on a new page.</novo-text></p>
-<p>TBW</p>
+<p><novo-icon color="grapefruit" mr="1rem">times</novo-icon><novo-text color="grapefruit"> Don't use to select a date or range of dates.</novo-text></p>
+<p>While the Agenda and events can be interactive it should not be used to select dates.  Instead use the <code>calendar</code> or <code>date-picker</code></p>
 </li>
 </ul>
-</div>
-</novo-grid>
-<h2>Anatomy</h2>
-<novo-grid columns="2" align="start" gap="2rem">
-<img src="assets/images/ModalAnatomy.png" width="450">
-<div>
-<ol>
-<li>
-<p><strong>Header</strong><br>
-Cards can have a header row that always contains a title. If the card can be reordered on the page, a handle is placed left of the title that allows dragging of the card. Between the handle and the title an icon can be added. On the far right of the header row, actions can be added.</p>
-</li>
-<li>
-<p><strong>Shadow</strong><br>
-Novo-elements has 5 elevation layers by default; cards should float just above the content they are contained within.</p>
-</li>
-</ol>
 </div>
 </novo-grid>
 <h2>Best Practices</h2>
 <ul>
-<li>Card dimensions are based on its content and the container in which it resides.</li>
-<li>Apply custom heights and width to meet product requirements.</li>
-<li>Avoid the appearance of nested cards, and therefore don’t use cards within a modal or another card.</li>
-<li>When creating a group of cards, use consistently sized content within a grid or flex layout.</li>
+<li>Ensure the view has enough space to display the Agenda components, the often take up the whole page.</li>
+<li>Allow the user to switch between Month, Week, Day views of their data.</li>
+<li>Avoid showing to many types of events, the views will get bloated and hard to read.</li>
 </ul>
-<h2>Color</h2>
-<blockquote class="two-columns">
-<blockquote>
-<div class="p"><img src="https://via.placeholder.com/350x250" alt="placeholder"></div>
-<div class="p"><strong>Theme - background</strong></div>
-<div class="p">Any theme color can be applied to tabs which will make the background color match the color.
-Any theme color can be applied to tabs with the <code>color</code> attribute to change the text color</div>
-</blockquote>
-</blockquote>
-<h2>Patterns</h2>
+<h2>Options</h2>
 <novo-grid columns="2" align="start" gap="2rem">
 <blockquote>
-<div class="p"><strong>Details Card</strong></div>
-<div class="p">Cards can use a list to display information. In this case the label and content are ordered left to right. Every other row has a darker background to improve readability.</div>
+<div class="p"><strong>Month View</strong></div>
+<div class="p">Used to present the user with a calendar of scheduled event for a month.  The event styles can be overridden with a custom template, this allows the implementation to determine how the display should change based on the context of the scheduled event.</div>
 </blockquote>
-<p><img src="https://via.placeholder.com/350x250" alt="placeholder"></p>
+<p><img src="assets/images/AgendaMonthView.png" alt="Month View"></p>
+<p><img src="assets/images/AgendaWeekView.png" alt="Week View"></p>
+<blockquote>
+<div class="p"><strong>Week View</strong></div>
+<div class="p">The agenda's week view component can disply the scheduled events showing the 5-7 days of that week.  Unlike the Month View, events will be plotted vertically based on the time of day the event starts. Event containers height will only be as tall as the duration of the event.</div>
+</blockquote>
+<blockquote>
+<div class="p"><strong>Day View</strong></div>
+<div class="p">Similar to the Week View but only display events for a single day.  This is helpful when the week view is very congested because this allows overlapping events to stack horizontally, allowing for better readability.</div>
+</blockquote>
+<p><img src="assets/images/AgendaDayView.png" alt="Day View"></p>
 </novo-grid>
 <h2>Accessibility</h2>
 <ul>
@@ -112,7 +92,9 @@ export class AgendaDesignPage {
 <li><strong>module:</strong> <code>import &#123; NovoAgendaModule &#125; form 'novo-elements';</code></li>
 </ul>
 <p><strong>Basic Usage</strong></p>
-<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">novo-avatar</span> [<span class="hljs-attr">source</span>]=<span class="hljs-string">&quot;&#123;name: &#x27;Brian Kimball&#x27;&#125;&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">novo-avatar</span>&gt;</span>
+<pre><code class="language-html">  <span class="hljs-tag">&lt;<span class="hljs-name">novo-agenda-month</span> [(<span class="hljs-attr">viewDate</span>)]=<span class="hljs-string">&quot;viewDate&quot;</span> [<span class="hljs-attr">events</span>]=<span class="hljs-string">&quot;events&quot;</span>
+    (<span class="hljs-attr">dayClicked</span>)=<span class="hljs-string">&quot;dayClicked($event.day.date)&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">novo-agenda-month</span>&gt;</span>
 </code></pre>
 <h1>Roadmap</h1>
 <ul class="contains-task-list">
@@ -121,75 +103,21 @@ export class AgendaDesignPage {
 <li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox"> Dark Mode</li>
 </ul>
 <h1>Changelog</h1>
-<h3>5.0.0</h3>
-<p><em>added in this version</em></p>
+<h3>6.0.0</h3>
+<p><em>renamed to Agenda in this version</em></p>
 <h1>Components</h1>
-<h2>NovoAgendaElement <code>novo-avatar</code></h2>
-<p>All tabs must be incapsulated in a <code>novo-nav</code> container. The nav will control the context and active tab.</p>
+<h2>NovoAgendaMonthViewElement <code>novo-agenda-month</code></h2>
+<p>Display <code>events</code> with a Month view calendar.</p>
 <h3>Properties</h3>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">Name</th>
-<th style="text-align:left">Type</th>
-<th style="text-align:left">Default</th>
-<th style="text-align:left">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">theme</td>
-<td style="text-align:left"><em>String</em></td>
-<td style="text-align:left">--</td>
-<td style="text-align:left">Color theme used.</td>
-</tr>
-<tr>
-<td style="text-align:left">color</td>
-<td style="text-align:left"><em>String</em></td>
-<td style="text-align:left">--</td>
-<td style="text-align:left">Color theme used.</td>
-</tr>
-<tr>
-<td style="text-align:left">label</td>
-<td style="text-align:left"><em>String</em></td>
-<td style="text-align:left">--</td>
-<td style="text-align:left">refs to the <code>novo-tab-outlet</code> these navigation controls.</td>
-</tr>
-<tr>
-<td style="text-align:left">source</td>
-<td style="text-align:left"><em>Object</em></td>
-<td style="text-align:left">--</td>
-<td style="text-align:left">Object containing props used to generate avatar. <code>name</code>, <code>firstName</code>, or <code>profileImage</code></td>
-</tr>
-<tr>
-<td style="text-align:left">size</td>
-<td style="text-align:left"><em>Size</em></td>
-<td style="text-align:left">'medium'</td>
-<td style="text-align:left">Determines the height and widht of the avatar. (<code>small</code>, <code>medium</code> or <code>large</code>)</td>
-</tr>
-</tbody>
-</table>
-<h2>NovoAgendaStackElement <code>novo-avatar-stack</code></h2>
-<p>An avatar stack displays a number of avatars grouped together in a row or list.</p>
+<p><props-table component="NovoAgendaMonthViewElement"></props-table></p>
+<h2>NovoAgendaWeekViewElement <code>novo-agenda-month</code></h2>
+<p>Display <code>events</code> within a Week view calendar.</p>
 <h3>Properties</h3>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">Name</th>
-<th style="text-align:left">Type</th>
-<th style="text-align:left">Default</th>
-<th style="text-align:left">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">total</td>
-<td style="text-align:left"><em>Number</em></td>
-<td style="text-align:left">--</td>
-<td style="text-align:left">Used to calculate <code>+N</code> icon based on ViewChildren added</td>
-</tr>
-</tbody>
-</table>
+<p><props-table component="NovoAgendaWeekViewElement"></props-table></p>
+<h2>NovoAgendaDayViewElement <code>novo-agenda-month</code></h2>
+<p>Display <code>events</code> within single day view</p>
+<h3>Properties</h3>
+<p><props-table component="NovoAgendaDayViewElement"></props-table></p>
 `,
   host: { class: 'markdown-page' }
 })
@@ -1132,30 +1060,6 @@ export class CalendarExamplesPage {
 
 
 @Component({
-  selector: 'calendar-page',
-  template: `<h1>Calendars &amp; Schedules</h1>
-<p>These allow users to easily select a time and date. It comes in a handful of varieties based on the content of the field.</p>
-<h2>Calendar Picker <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/date-picker">(source)</a></h2>
-<p>The calendar picker is used to select a date. It appears in all date picker fields.</p>
-<h5>Full Calendar Picker</h5>
-<p><code-example example="calendar"></code-example></p>
-<h2>Time Picker <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/time-picker">(source)</a></h2>
-<p>Time pickers come in 12 hour or 24 hour style.</p>
-<h5>Standalone Time Picker</h5>
-<p><code-example example="time"></code-example></p>
-<h5>Range Picker</h5>
-<p><code-example example="range"></code-example></p>
-<h5>Standalone Calendar</h5>
-<p><code-example example="standalone-calendar"></code-example></p>
-`,
-  host: { class: 'markdown-page' }
-})
-export class CalendarPage {
-  public params: any = {};
-}
-
-
-@Component({
   selector: 'components-page',
   template: `<h1>Components</h1>
 <p>This is a landing page</p>
@@ -1197,7 +1101,35 @@ export class DataTablePage {
 
 @Component({
   selector: 'dropdown-design-page',
-  template: `<h2>Anatomy</h2>
+  template: `<novo-grid columns="2" align="start" gap="2rem">
+<div>
+<h3>Why?</h3>
+<p>Dropdown allow users to take an action by selecting from a list of choices revealed upon opening a temporary menu.</p>
+</div>
+<img src="https://via.placeholder.com/350x250"/>
+<div>
+<h3>Use When</h3>
+<ul class="contains-do-list">
+<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Affording interaction to key behaviors and features.</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Confirming or submitting information entered into a form.</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Cancelling an action.</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Resetting a form or dataset.</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Closing a container or section.</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Opening a popover.</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Moving forward or backward through a stepper workflow.</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Creating an object within a group.</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Applying a non-critical action to a dataset.</novo-text></li>
+</ul>
+</div>
+<div>
+<h3>Don′t Use When</h3>
+<ul class="contains-do-list">
+<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">times</novo-icon><novo-text color="grapefruit"> Displaying a collection of links to sections. Use links instead.</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">times</novo-icon><novo-text color="grapefruit"> Linking to an external site. Use links instead.</novo-text></li>
+</ul>
+</div>
+</novo-grid>
+<h2>Anatomy</h2>
 <novo-grid columns="2" align="start" gap="2rem">
 <img src="assets/images/ModalAnatomy.png" width="450">
 <div>
@@ -1332,44 +1264,6 @@ export class DropdownDevelopPage {
   host: { class: 'markdown-page' }
 })
 export class DropdownExamplesPage {
-  public params: any = {};
-}
-
-
-@Component({
-  selector: 'dropdown-usage-page',
-  template: `<novo-grid columns="2" align="start" gap="2rem">
-<div>
-<h3>Why?</h3>
-<p>Dropdown allow users to take an action by selecting from a list of choices revealed upon opening a temporary menu.</p>
-</div>
-<img src="https://via.placeholder.com/350x250"/>
-<div>
-<h3>Use When</h3>
-<ul class="contains-do-list">
-<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Affording interaction to key behaviors and features.</novo-text></li>
-<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Confirming or submitting information entered into a form.</novo-text></li>
-<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Cancelling an action.</novo-text></li>
-<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Resetting a form or dataset.</novo-text></li>
-<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Closing a container or section.</novo-text></li>
-<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Opening a popover.</novo-text></li>
-<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Moving forward or backward through a stepper workflow.</novo-text></li>
-<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Creating an object within a group.</novo-text></li>
-<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Applying a non-critical action to a dataset.</novo-text></li>
-</ul>
-</div>
-<div>
-<h3>Don′t Use When</h3>
-<ul class="contains-do-list">
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">times</novo-icon><novo-text color="grapefruit"> Displaying a collection of links to sections. Use links instead.</novo-text></li>
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">times</novo-icon><novo-text color="grapefruit"> Linking to an external site. Use links instead.</novo-text></li>
-</ul>
-</div>
-</novo-grid>
-`,
-  host: { class: 'markdown-page' }
-})
-export class DropdownUsagePage {
   public params: any = {};
 }
 
@@ -2415,145 +2309,28 @@ export class NonIdealStateDesignPage {
   selector: 'non-ideal-state-develop-page',
   template: `<h1>Technical Details</h1>
 <ul>
-<li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/tabs">(github)</a></li>
-<li><strong>module:</strong> <code>import &#123; NovoTabModule &#125; form 'novo-elements/modal';</code></li>
+<li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/non-ideal-state">(github)</a></li>
+<li><strong>module:</strong> <code>import &#123; NovoNonIdealStateModule &#125; form 'novo-elements/modal';</code></li>
 </ul>
 <p><strong>Basic Usage</strong></p>
-<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">novo-nav</span> [<span class="hljs-attr">outlet</span>]=<span class="hljs-string">&quot;ref&quot;</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">novo-tab</span>&gt;</span>Overview<span class="hljs-tag">&lt;/<span class="hljs-name">novo-tab</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">novo-tab</span>&gt;</span>Activity<span class="hljs-tag">&lt;/<span class="hljs-name">novo-tab</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">novo-nav</span>&gt;</span>
-
-<span class="hljs-tag">&lt;<span class="hljs-name">novo-nav-outlet</span> #<span class="hljs-attr">ref</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">novo-nav-content</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Overview<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
-  <span class="hljs-tag">&lt;/<span class="hljs-name">novo-nav-content</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">novo-nav-content</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Activity<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
-  <span class="hljs-tag">&lt;/<span class="hljs-name">novo-nav-content</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">novo-nav-outlet</span>&gt;</span>
+<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">novo-non-ideal-state</span> <span class="hljs-attr">icon</span>=<span class="hljs-string">&quot;file&quot;</span> <span class="hljs-attr">title</span>=<span class="hljs-string">&quot;This folder is empty&quot;</span> <span class="hljs-attr">description</span>=<span class="hljs-string">&quot;Upload a new file to populate the folder.&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">novo-button</span> <span class="hljs-attr">theme</span>=<span class="hljs-string">&quot;primary&quot;</span> <span class="hljs-attr">icon</span>=<span class="hljs-string">&quot;upload&quot;</span>&gt;</span>Upload<span class="hljs-tag">&lt;/<span class="hljs-name">novo-button</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">novo-non-ideal-state</span>&gt;</span>
 </code></pre>
 <h1>Roadmap</h1>
 <ul class="contains-task-list">
 <li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox"> Improve Typing Support</li>
-<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox"> Deprecate <code>condensed</code> in favor of <code>size</code></li>
-<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox"> Deprecate <code>novo-tab-link</code> and make router navigation easier...</li>
 <li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox"> Make color and theming consistent</li>
 <li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox"> Dark Mode</li>
 </ul>
 <h1>Changelog</h1>
-<h3>5.0.0</h3>
-<p><em>Should be backwards compatible</em></p>
+<h3>6.0.0</h3>
+<p><em>Added in this version</em></p>
 <h1>Components</h1>
-<h2>NovoNavElement <code>novo-nav</code></h2>
-<p>All tabs must be incapsulated in a <code>novo-nav</code> container. The nav will control the context and active tab.</p>
+<h2>NovoNavElement <code>novo-non-ideal-state</code></h2>
+<p>Used as a placeholder template when every components or views are in a non-ideal state suchas empty, error, loading, etc...</p>
 <h3>Properties</h3>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">Name</th>
-<th style="text-align:left">Type</th>
-<th style="text-align:left">Default</th>
-<th style="text-align:left">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">theme</td>
-<td style="text-align:left"><em>String</em></td>
-<td style="text-align:left">--</td>
-<td style="text-align:left">Color theme used to display tab color.</td>
-</tr>
-<tr>
-<td style="text-align:left">direction</td>
-<td style="text-align:left"><em>String</em></td>
-<td style="text-align:left">horizontal</td>
-<td style="text-align:left">The layout direction of the tabs. (<code>horizontal</code> or <code>vertical</code>)</td>
-</tr>
-<tr>
-<td style="text-align:left">outlet</td>
-<td style="text-align:left"><em>Ref</em></td>
-<td style="text-align:left">--</td>
-<td style="text-align:left">refs to the <code>novo-tab-outlet</code> these navigation controls.</td>
-</tr>
-<tr>
-<td style="text-align:left">router</td>
-<td style="text-align:left"><em>NgRouter</em></td>
-<td style="text-align:left">--</td>
-<td style="text-align:left">an instance of an angular router. Used when tabs are used for page nav.</td>
-</tr>
-<tr>
-<td style="text-align:left">condensed</td>
-<td style="text-align:left"><em>Boolean</em></td>
-<td style="text-align:left">false</td>
-<td style="text-align:left"><strong>Deprecated</strong> used to show a more compact view.</td>
-</tr>
-</tbody>
-</table>
-<h2>NovoTabElement <code>novo-tab</code></h2>
-<p>The core element for displaying tabs.</p>
-<h3>Properties</h3>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">Name</th>
-<th style="text-align:left">Type</th>
-<th style="text-align:left">Default</th>
-<th style="text-align:left">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">active</td>
-<td style="text-align:left"><em>Boolean</em></td>
-<td style="text-align:left">false</td>
-<td style="text-align:left">Whether this tab is current active tab. Can be set manually but value is controlled by <code>novo-nav</code>.</td>
-</tr>
-<tr>
-<td style="text-align:left">color</td>
-<td style="text-align:left"><em>String</em></td>
-<td style="text-align:left">--</td>
-<td style="text-align:left">highlight color to use when this tab is active.</td>
-</tr>
-<tr>
-<td style="text-align:left">disabled</td>
-<td style="text-align:left"><em>Object</em></td>
-<td style="text-align:left">false</td>
-<td style="text-align:left">Whether the tab will accept user interactions.</td>
-</tr>
-</tbody>
-</table>
-<h2>NovoTabLinkElement <code>novo-tab-link</code></h2>
-<p>Used instead of <code>novo-tab</code> when using router navigation.</p>
-<h3>Properties</h3>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">Name</th>
-<th style="text-align:left">Type</th>
-<th style="text-align:left">Default</th>
-<th style="text-align:left">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">active</td>
-<td style="text-align:left"><em>Boolean</em></td>
-<td style="text-align:left">false</td>
-<td style="text-align:left">Whether this tab is current active tab. Can be set manually but value is controlled by <code>novo-nav</code></td>
-</tr>
-<tr>
-<td style="text-align:left">disabled</td>
-<td style="text-align:left"><em>Object</em></td>
-<td style="text-align:left">false</td>
-<td style="text-align:left">Whether the tab will accept user interactions.</td>
-</tr>
-</tbody>
-</table>
-<h2>NovoNavOutletElement <code>novo-nav-outlet</code></h2>
-<p>The Container for all the <code>novo-nav-content</code>. A <code>#</code> reference should be added an passed to the <code>novo-nav</code> component to link the content to the tab view. The order of the content should be the same as the tabs that control them.</p>
-<h2>NovoNavContentElement <code>novo-nav-content</code></h2>
-<p>Used to incapsulate the navigation content. This wrapper will ensure on the active content is displayed.</p>
+<p><props-table component="NonIdealStateElement"></props-table></p>
 `,
   host: { class: 'markdown-page' }
 })
@@ -2878,7 +2655,6 @@ export class ProgressUsagePage {
 @Component({
   selector: 'quick-note-page',
   template: `<h1>Quick Note <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/quick-note">(source)</a></h1>
-<p>Tag Autocomplete</p>
 <h5>Basic Examples</h5>
 <p><code-example example="basic-quick-note"></code-example></p>
 <h5>Custom Triggers</h5>
@@ -3272,6 +3048,8 @@ export class ToasterDevelopPage {
   selector: 'toaster-examples-page',
   template: `<h2>Alert</h2>
 <p>This type of toast notification takes a template, a style, and a location.</p>
+<h2>Toast Options</h2>
+<p><code-example example="toast-options"></code-example></p>
 <h2>Embedded Toast</h2>
 <p><code-example example="toast-usage"></code-example></p>
 <h2>Toaster Service</h2>
@@ -3391,7 +3169,11 @@ export class ToolbarDesignPage {
 <h2>NovoToolbarElement <code>novo-toolbar</code></h2>
 <p>The <code>novo-toolbar</code> component is just a container, look at patterns to determine correct usage.</p>
 <h3>Properties</h3>
-<p><props-table component="NovoToolbarElement"></props-table></p>
+<p><props-table component="NovoToolbar"></props-table></p>
+<h2>NovoToolbarRowElement <code>novo-toolbar-row</code></h2>
+<p>The <code>novo-toolbar-row</code> component is also just a container to help create multi-row toolbars, look at examples to determine correct usage.</p>
+<h3>Properties</h3>
+<p><props-table component="NovoToolbarRow"></props-table></p>
 `,
   host: { class: 'markdown-page' }
 })
@@ -3469,16 +3251,13 @@ export class TooltipDesignPage {
   template: `<h1>Technical Details</h1>
 <p>Tooltips are used as system notifications. They can contain custom text titles and messages, as well as any icons from bh-icons and any color from our color palletes.</p>
 <ul>
-<li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/tooltips">(github)</a></li>
-<li><strong>module:</strong> <code>import &#123; NovoFieldModule &#125; from 'novo-elements';</code></li>
+<li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/tooltip">(github)</a></li>
+<li><strong>module:</strong> <code>import &#123; NovoTooltipModule &#125; from 'novo-elements';</code></li>
 </ul>
 <p><strong>Usage</strong></p>
 <pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">novo-field</span> <span class="hljs-attr">layout</span>=<span class="hljs-string">&quot;horizontal&quot;</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">novo-label</span>&gt;</span>Amount<span class="hljs-tag">&lt;/<span class="hljs-name">novo-label</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">novo-label</span> <span class="hljs-attr">tooltip</span>=<span class="hljs-string">&quot;This Field is REQUIRED&quot;</span> <span class="hljs-attr">tooltipPosition</span>=<span class="hljs-string">&quot;top-left&quot;</span>&gt;</span>Amount<span class="hljs-tag">&lt;/<span class="hljs-name">novo-label</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">novoInput</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;number&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;example-right-align&quot;</span> /&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">novoPrefix</span>&gt;</span>$<span class="hljs-symbol">&amp;nbsp;</span><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">novoSuffix</span>&gt;</span>.00<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">novo-hint</span>&gt;</span>Enter some money<span class="hljs-tag">&lt;/<span class="hljs-name">novo-hint</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">novo-field</span>&gt;</span>
 </code></pre>
 <h1>Roadmap</h1>
@@ -3488,21 +3267,13 @@ export class TooltipDesignPage {
 <li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox"> Dark Mode</li>
 </ul>
 <h1>Changelog</h1>
-<h3>5.0.0</h3>
-<p><strong>Deprecation</strong></p>
-<ul>
-<li>You should no longer use <code>list</code> and <code>item</code> components, these are non-standard components and have been replaced with <code>novo-option</code> as used in the usage above.</li>
-</ul>
+<h3>6.0.0</h3>
+<p><em>none</em></p>
 <h1>Components</h1>
-<h2>NovoFieldElement <code>novo-field</code></h2>
-<p>The <code>novo-field</code> component expects 1 <code>button</code> or <code>novo-button</code> as the trigger for the menu list which is comprised of all the <code>novo-option</code> or <code>novo-optgroup</code> child components.</p>
+<h2>TooltipDirective <code>[tooltip]</code></h2>
+<p>Adds a tooltip to the element the directive is attached too. Use the input option to align and control how the tooltip displays.</p>
 <h3>Properties</h3>
-<p><props-table component="NovoFieldElement"></props-table></p>
-<h1>Directive</h1>
-<h2>NovoInput <code>[novoInput]</code></h2>
-<p>The <code>novoInput</code> component expects 1 <code>button</code> or <code>novo-button</code> as the trigger for the menu list which is comprised of all the <code>novo-option</code> or <code>novo-optgroup</code> child components.</p>
-<h3>Properties</h3>
-<p><props-table component="NovoInput"></props-table></p>
+<p><props-table component="TooltipDirective"></props-table></p>
 `,
   host: { class: 'markdown-page' }
 })
@@ -3585,6 +3356,8 @@ export class ColorsPage {
 </novo-grid>
 <h2>Headers</h2>
 <p>Headers hold key information and controls for a page. They serve as a wayfinding marker to help the user understand context and easily access important actions.</p>
+<h6>Design Principles: Navigation &amp; Consistency</h6>
+<p>A consistent navigation structure allows users to master an interface much more quickly, as they know that certain functions are always in the same place. We use headers to provide quick access to key functions and aid findability of data in a complex system.</p>
 <novo-grid columns="2" align="start" gap="2rem">
 <blockquote>
 <div class="p"><strong>Overviews &amp; Slideouts</strong></div>
@@ -3596,10 +3369,6 @@ export class ColorsPage {
 <div class="p">List headers contain the filter and column controls for the list and the primary actions. They are fixed so that results can eaily be modified and actioned regardless of scrolling position.</div>
 </blockquote>
 <p class="markdown-img"><img src="assets/images/LayoutMainframeHeaderList.svg" alt="list header"></p>
-</novo-grid>
-<h6>Design Principles: Navigation &amp; Consistency</h6>
-<p>A consistent navigation structure allows users to master an interface much more quickly, as they know that certain functions are always in the same place. We use headers to provide quick access to key functions and aid findability of data in a complex system.</p>
-<novo-grid columns="2" align="start" gap="2rem">
 <blockquote>
 <div class="p"><strong>Add &amp; Edit Pages</strong></div>
 <div class="p">The headers of Add and Edit pages generally serve as a simple visual element to help provide context.</div>
@@ -3608,13 +3377,6 @@ export class ColorsPage {
 </novo-grid>
 <h2>Cards</h2>
 <p>Essential to our design paradigm, cards are independent blocks of information. They can contain text, tables, and data visualizations. They offer a curated view of data. Bringing the most pertinent information to the forefont, they allow users to scan large amounts of data quickly.</p>
-<novo-grid columns="2" align="start" gap="2rem">
-<blockquote>
-<div class="p"><strong>Basic Structure</strong></div>
-<div class="p">Cards have a header which contains the card title and the card controls. The controls can vary depending on card type, gut generally include move, refresh, configure, and remove. The content area has padding by default but can also run edge-to-edge. Pulse cards have a special icon next to the title.</div>
-</blockquote>
-<p class="markdown-img"><img src="assets/images/LayoutMainframeCardsNPSCard.svg" alt="card"></p>
-</novo-grid>
 <blockquote>
 <div class="p"><strong>Design Principle: Cards</strong></div>
 <div class="p">The card system scales easily, both in individual size and in groups. Because of this, cards are essential to our design language. Cards balance and align very easily, promoting findability. These handy little containers also provide a contextually relevant home for all content.</div>
@@ -3623,6 +3385,11 @@ export class ColorsPage {
 <div class="p"><strong>Hint:</strong> This is a great place for third-party developers to fit into the Bullhorn system. <strong>Are you a developer?</strong> Check out card markup and documentation here</div>
 </blockquote>
 <novo-grid columns="2" align="start" gap="2rem">
+<blockquote>
+<div class="p"><strong>Basic Structure</strong></div>
+<div class="p">Cards have a header which contains the card title and the card controls. The controls can vary depending on card type, gut generally include move, refresh, configure, and remove. The content area has padding by default but can also run edge-to-edge. Pulse cards have a special icon next to the title.</div>
+</blockquote>
+<p class="markdown-img"><img src="assets/images/LayoutMainframeCardsNPSCard.svg" alt="card"></p>
 <blockquote>
 <div class="p"><strong>Dashboard &amp; Overviews</strong></div>
 <div class="p">Dashboards and Records Overviews are the primary home for our cards. They offer a customizable workspace to arrange and configure to most appropriately fit the user's needs. Cards have a fixed height, but mildly flexible width. They can also be expanded to full-screen. The &quot;add card&quot; control is always located in the top right, to be consistent with the placement of action buttons on tables and lists.</div>
@@ -3767,8 +3534,8 @@ export class IconographyPage {
     </novo-flex>
   </typedef-content>
   <typedef-specs>
-    <novo-label txc="grass">Padding & Margin</novo-label><br/>
-    <novo-label txc="ocean">Margin</novo-label>
+    <novo-label color="grass">Padding</novo-label><br/>
+    <novo-label color="ocean">Margin</novo-label>
     <dl>
       <dt>xs </dt><dd>0.4rem</dd>
       <dt>sm </dt><dd>0.8rem</dd>
@@ -3821,16 +3588,22 @@ export class SpacingPage {
 @Component({
   selector: 'typography-page',
   template: `<h1>Typography</h1>
-<p>Aim for about 140%-180% for optimal readability and accessibility.
-Limit line length to 70–80 characters.
-Font size should be a minimum of 16pt.
-Small fonts need more spacing.
-Experiment with tighter spacing on pull quotes or other short texts.
-Check your line spacing when you change font or font size.</p>
-<h2>Roboto, not robotic.</h2>
-<p>Roboto's refined letterforms combine geometry with open, rounded features to create a structured, yet friendly typeface. It maintains a human-like quality while expressing a clean and modern aesthetic.</p>
-<p><a href="https://www.google.com/fonts/specimen/Roboto">Roboto Typeface on Google Fonts</a></p>
+<novo-grid columns="200px 1fr" align="start" gap="2rem">
 <p><img src="assets/images/TypographyPageIcon.svg" alt=""></p>
+<blockquote>
+<h2>Gotham, Montserrat.</h2>
+<div class="p">Bullhorn's Branding uses the Gotham font family, this is not a free font. With that in mind we build novo-elements to work with both the Gotham font and Monteserrat which is a very similar font face available on Google Fonts.  Both fonts provide a characters that are clean and easy to read with good weight when the font-size is small.</div>
+<div class="p"><a href="https://www.typography.com/fonts/gotham/overview">Gotham Font Overview</a></div>
+<div class="p"><a href="https://fonts.google.com/specimen/Montserrat">Montserrat Typeface on Google Fonts</a></div>
+</blockquote>
+</novo-grid>
+<h2>Best Practices</h2>
+<ul class="contains-do-list">
+<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Limit line length to 70–80 characters.</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Paragraph text should be a minimum of 14pt.</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Small fonts need more spacing.</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Check your line spacing when you change font or font size.</novo-text></li>
+</ul>
 <h3>Design Principle: Clarity</h3>
 <p>Proper line length, adequate white space, and appropriate line breaks are necessary to preserve readability, rhythm, and overall clarity.</p>
 <h5>Line Height</h5>
@@ -3865,14 +3638,14 @@ Check your line spacing when you change font or font size.</p>
     </novo-radio-group>
   </typedef-specs>
   <typedef-snippet>
-    <code class="tc-positive">&lt;novo-text&gt;...&lt;/novo-text&gt;</code> or <code class="tc-negative">@include novo-body-text-medium()</code>
+    <code class="tc-positive">&lt;novo-text&gt;...&lt;/novo-text&gt;</code> or <code class="tc-negative">@include novo-body-text()</code>
   </typedef-snippet>
 </typedef-example>
 <h5>How does this work with responsive design?</h5>
 <p>Line length is always relative to its font-size. This means that if a font scales up or down in sizing (relative to its device's screen size) the line length will automatically scale with it. Line length is about maintaining a comfortable reading flow and rhythm from line to line.</p>
 <p><strong>When implementing</strong>, native line length will always be secondary to the width of the text's container. This means that if a screen's width is smaller than the text's native line length, the text will wrap early.</p>
 <h2>Styles</h2>
-<p>There a number of general styles that are present throughout the application. To maintain consistency, these styles should be adhered to as much as possible.</p>
+<p>There a number of general styles that are present throughout the application. To maintain consistency, these styles should be adhered to as much as possible. Most text components can be adjusted by setting the <code>size</code>, <code>length</code>, <code>weight</code>, or <code>color</code> attributes, these values are all theme aware based on novo design tokens.</p>
 <h2>Body Text</h2>
 <p>Body text is available in three different sizes. Use body text to present the bulk of a page’s content. All body text uses a line height of 1.375 relative to the font size.</p>
 <typedef-example>
@@ -3882,11 +3655,11 @@ Check your line spacing when you change font or font size.</p>
     </novo-text>
   </typedef-content>
   <typedef-specs>
-    <novo-label>Body Medium</novo-label>
+    <novo-label>Body Text</novo-label>
     <dl>
       <dt>Font Size       </dt><dd>1.2rem</dd>
-      <dt>Line Height     </dt><dd>1.375 (28px)</dd>
-      <dt>Font Weight     </dt><dd>300</dd>
+      <dt>Line Height     </dt><dd>1.375</dd>
+      <dt>Font Weight     </dt><dd>400</dd>
       <dt>Max Line Length </dt><dd>550px</dd>
     </dl>
   </typedef-specs>
@@ -3896,44 +3669,44 @@ Check your line spacing when you change font or font size.</p>
 </typedef-example>
 <typedef-example>
   <typedef-content>
-    <novo-text size="large">
+    <novo-text larger>
       The Highland (Scottish Gaelic: Bò Ghàidhealach; Scots: Hielan coo) is a Scottish breed of rustic cattle. It originated in the <novo-link>Scottish Highlands</novo-link> and the Outer Hebrides islands of Scotland and has long horns and a long shaggy coat. It is a hardy breed, bred to withstand the intemperate conditions in the region. The first herd-book dates from 1885; two different types – a smaller island type, usually black, and a larger mainland type, usually dun – were registered as a single breed. It is reared primarily for beef, and has been exported to several other countries.<sup>[1]</sup>
     </novo-text>
   </typedef-content>
   <typedef-specs>
-    <novo-label>Body Large</novo-label>
+    <novo-label>Body Larger</novo-label>
     <dl>
-      <dt>Font Size       </dt><dd>1.2rem</dd>
-      <dt>Line Height     </dt><dd>1.375 (28px)</dd>
-      <dt>Font Weight     </dt><dd>300</dd>
+      <dt>Font Size       </dt><dd>1.4rem</dd>
+      <dt>Line Height     </dt><dd>1.375</dd>
+      <dt>Font Weight     </dt><dd>400</dd>
       <dt>Max Line Length </dt><dd>550px</dd>
     </dl>
   </typedef-specs>
   <typedef-snippet>
-    <code class="tc-positive">&lt;novo-text size="large"&gt;...&lt;/novo-text&gt;</code> or <code class="tc-negative">@include novo-body-text-large()</code>
+    <code class="tc-positive">&lt;novo-text larger&gt;...&lt;/novo-text&gt;</code>
   </typedef-snippet>
 </typedef-example>
 <typedef-example>
   <typedef-content>
-    <novo-text size="small">
+    <novo-text smaller>
       The Highland (Scottish Gaelic: Bò Ghàidhealach; Scots: Hielan coo) is a Scottish breed of rustic cattle. It originated in the <novo-link>Scottish Highlands</novo-link> and the Outer Hebrides islands of Scotland and has long horns and a long shaggy coat. It is a hardy breed, bred to withstand the intemperate conditions in the region. The first herd-book dates from 1885; two different types – a smaller island type, usually black, and a larger mainland type, usually dun – were registered as a single breed. It is reared primarily for beef, and has been exported to several other countries.<sup>[1]</sup>
     </novo-text>
   </typedef-content>
   <typedef-specs>
-    <novo-label>Body Large</novo-label>
+    <novo-label>Body Smaller</novo-label>
     <dl>
-      <dt>Font Size       </dt><dd>1.2rem</dd>
-      <dt>Line Height     </dt><dd>1.375 (28px)</dd>
-      <dt>Font Weight     </dt><dd>300</dd>
+      <dt>Font Size       </dt><dd>1.1rem</dd>
+      <dt>Line Height     </dt><dd>1.375</dd>
+      <dt>Font Weight     </dt><dd>400</dd>
       <dt>Max Line Length </dt><dd>550px</dd>
     </dl>
   </typedef-specs>
   <typedef-snippet>
-    <code class="tc-positive">&lt;novo-text size="small"&gt;...&lt;/novo-text&gt;</code> or <code class="tc-negative">@include novo-body-text-small()</code>
+    <code class="tc-positive">&lt;novo-text size="small"&gt;...&lt;/novo-text&gt;</code>
   </typedef-snippet>
 </typedef-example>
 <h2>Title Text</h2>
-<p>Titles are available in six different sizes. To create an optical balance between the six levels, titles are set in two weights: Condensed Thin and Condensed Light. All titles use a line height of 1.2 relative to the font size.</p>
+<p>Titles are available in six different sizes. To create an optical balance between the six levels, titles are set in two weights: Condensed Thin and Condensed Light. All titles use a line height of 1.375 relative to the font size.</p>
 <p>Title mixins and constants can be applied to any HTML element, but we recommend using &lt;h1&gt; through &lt;h6&gt; elements for titles to ensure markup is semantic and accessible.</p>
 <typedef-example>
   <typedef-content>
@@ -3942,51 +3715,36 @@ Check your line spacing when you change font or font size.</p>
     </novo-title>
   </typedef-content>
   <typedef-specs>
-    <novo-label>Title Medium</novo-label>
+    <novo-label>Title</novo-label>
     <dl>
-      <dt>Font Size       </dt><dd>1.2rem</dd>
-      <dt>Line Height     </dt><dd>1.375 (28px)</dd>
-      <dt>Font Weight     </dt><dd>300</dd>
+      <dt>Font Size       </dt><dd>1.8rem</dd>
+      <dt>Line Height     </dt><dd>1.375</dd>
+      <dt>Font Weight     </dt><dd>500</dd>
     </dl>
   </typedef-specs>
   <typedef-snippet>
-    <code class="tc-positive">&lt;novo-title&gt;...&lt;/novo-title&gt;</code> or <code class="tc-negative">@include novo-title-text-medium()</code>
+    <code class="tc-positive">&lt;novo-title&gt;...&lt;/novo-title&gt;</code> or <code class="tc-negative">@include novo-title-text()</code>
   </typedef-snippet>
 </typedef-example>
 <typedef-example>
   <typedef-content>
-    <novo-title size="large">
+    <novo-title [size]="size.value">
       Creating an incredible customer experience
     </novo-title>
   </typedef-content>
   <typedef-specs>
-    <novo-label>Title Large</novo-label>
-    <dl>
-      <dt>Font Size       </dt><dd>1.2rem</dd>
-      <dt>Line Height     </dt><dd>1.375 (28px)</dd>
-      <dt>Font Weight     </dt><dd>300</dd>
-    </dl>
+     <novo-label>Size</novo-label>
+    <novo-radio-group #size appearance="vertical" value="xl">
+      <novo-radio value="xs">xs</novo-radio>
+      <novo-radio value="sm">sm</novo-radio>
+      <novo-radio value="md">md</novo-radio>
+      <novo-radio value="lg">lg</novo-radio>
+      <novo-radio value="xl">xl</novo-radio>
+      <novo-radio value="2xl">2xl</novo-radio>
+    </novo-radio-group>
   </typedef-specs>
   <typedef-snippet>
-    <code class="tc-positive">&lt;novo-title size="large"&gt;...&lt;/novo-title&gt;</code> or <code class="tc-negative">@include novo-title-text-large()</code>
-  </typedef-snippet>
-</typedef-example>
-<typedef-example>
-  <typedef-content>
-    <novo-title size="small">
-      Creating an incredible customer experience
-    </novo-title>
-  </typedef-content>
-  <typedef-specs>
-    <novo-label>Title Small</novo-label>
-    <dl>
-      <dt>Font Size       </dt><dd>1.2rem</dd>
-      <dt>Line Height     </dt><dd>1.375 (28px)</dd>
-      <dt>Font Weight     </dt><dd>300</dd>
-    </dl>
-  </typedef-specs>
-  <typedef-snippet>
-    <code class="tc-positive">&lt;novo-title size="small"&gt;...&lt;/novo-title&gt;</code> or <code class="tc-negative">@include novo-title-text-small()</code>
+    <code class="tc-positive">&lt;novo-title&gt;...&lt;/novo-title&gt;</code> or <code class="tc-negative">@include novo-title-text()</code>
   </typedef-snippet>
 </typedef-example>
 <h2>Label Text</h2>
@@ -5002,18 +4760,59 @@ export class ValuePage {
 
 @Component({
   selector: 'home-page',
-  template: `<h1>Introduction</h1>
+  template: `<h1>Novo Elements, Bullhorn's design system</h1>
 <h2>Crafted amid Complexity</h2>
 <p>Enterprise software is highly complex and demands a high level of flexibility. Design offers clarity and enables us to make deep, powerful connections.</p>
-<img src="assets/images/IntroPageHeaderImage.svg" width="300"/>
+<img class="cover-img" src="assets/images/DesignSystem.png" width="100%"/>
+<novo-grid columns="3" align="start" gap="2rem">
+<blockquote>
 <h5>A NEW STANDARD</h5>
-<p>Elegance in utility helps to create a system for humans, not robots. We strive not just to empower users but to delight them in the process.</p>
+<div class="p">Elegance in utility helps to create a system for humans, not robots. We strive not just to empower users but to delight them in the process.</div>
+</blockquote>
+<blockquote>
 <h5>INSIGHTS AT SCALE</h5>
-<p>Vast data reservoirs need a finely tuned system to surface the critical information right when it is needed, no matter the scale or setting.</p>
+<div class="p">Vast data reservoirs need a finely tuned system to surface the critical information right when it is needed, no matter the scale or setting.</div>
+</blockquote>
+<blockquote>
 <h5>POWER IN FLEXIBILITY</h5>
-<p>Users have vastly differing needs and goals. By identifying key commonalities and themes, we provide a strong experience for all.</p>
-<p>Are you a developer and want to skip right to the code?<br>
-<a href="#">View Components here</a></p>
+<div class="p">Users have vastly differing needs and goals. By identifying key commonalities and themes, we provide a strong experience for all.</div>
+</blockquote>
+</novo-grid>
+<h2>Quick Start</h2>
+<p>Use the Angular CLI's installation schematic to set up your project by running the following command:</p>
+<pre><code class="language-bash">
+<span class="hljs-comment"># Install</span>
+ng add novo-elements
+
+</code></pre>
+<p>The ng add command will install Novo-Element and Novo Design Tokens library, it will additionally perform the following actions:</p>
+<ul>
+<li>Add project dependencies to package.json</li>
+<li>Add the Gotham and Montserrat font to your index.html</li>
+<li>Add the Bullhorn Glyphicon font to your index.html</li>
+<li>Add a few global CSS styles to:</li>
+</ul>
+<p>You did it! Your application is now configured to use Novo Elements.</p>
+<h2>Using a component</h2>
+<p>Let's add a <strong>button</strong> component to our app and verify that everything works.</p>
+<p>You need to import the <code>NovoButtonModule</code> for the component to display, add the following lines to your <code>app.module.ts</code> file.</p>
+<pre><code class="language-ts"><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">NovoButtonModule</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;novo-elements&#x27;</span>;
+
+<span class="hljs-meta">@NgModule</span> (&#123;
+  <span class="hljs-attr">imports</span>: [
+    <span class="hljs-title class_">NovoButtonModule</span>,
+  ]
+&#125;)
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">AppModule</span> &#123;&#125;
+</code></pre>
+<p>Add the <code>&lt;novo-button&gt;</code> tag to the <code>app.component.html</code> like so:</p>
+<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">novo-button</span> <span class="hljs-attr">theme</span>=<span class="hljs-string">&quot;primary&quot;</span>&gt;</span>Default<span class="hljs-tag">&lt;/<span class="hljs-name">novo-button</span>&gt;</span>
+</code></pre>
+<p>Run your local dev server:</p>
+<pre><code class="language-bash">ng serve
+</code></pre>
+<p>Open your browser to (http://localhost:4200)[http://localhost:4200] to see the results!</p>
+<h2>References</h2>
 <p>Looking for the Bullhorn corporate brand guidelines?<br>
 <a href="https://brandfolder.com/bullhorn">Bullhorn Brand Folder</a></p>
 `,
@@ -5025,13 +4824,25 @@ export class HomePage {
 
 
 @Component({
-  selector: 'card-design-page',
-  template: `<h2>Usage</h2>
-<novo-grid columns="2" align="start" gap="2rem">
+  selector: 'card-description-page',
+  template: `<novo-grid columns="2" align="start" gap="2rem">
 <div>
 <p>A card is a container that organizes a related grouping of information. Cards can sometimes be configured and reordered on a page allowing for optimal user customization. A card is content container for the presentation information with a shared singular context, usually related in some way to the main content.</p>
 </div>
 <img src="https://via.placeholder.com/350x250"/>
+<div>
+`,
+  host: { class: 'markdown-page' }
+})
+export class CardDescriptionPage {
+  public params: any = {};
+}
+
+
+@Component({
+  selector: 'card-design-page',
+  template: `<h2>Usage Guidelines</h2>
+<novo-grid columns="2" align="start" gap="2rem">
 <div>
 <h3>Use When</h3>
 <ul class="contains-do-list">
@@ -5744,88 +5555,7 @@ export class PatternsNativeFormsPage {
 
 @Component({
   selector: 'patterns-test-page',
-  template: `<p>
-  This is a drop-in collection of CSS styles to make simple websites like this just a
-  little bit nicer.
-</p>
-<p>
-  Now you can write your simple static site with nice semantic html, and will manage
-  the styling for you.
-</p>
-<div class="row">
-  <div>
-    <a href="#installation"><b>Get it already!</b></a>
-    <br />
-  </div>
-</div>
-<h2>Installation</h2>
-<div id="installation">
-  <header class="row">
-    <h3 id="link-snippet-headline">
-      Paste this into the <code>&lt;head&gt;</code> of your HTML:
-    </h3>
-    <button type="button" id="copy-button">
-      <span id="copy-button-feedback"></span>
-      Copy to clipboard
-    </button>
-  </header>
-  <h3>Options</h3>
-  <form id="theme-form">
-    <input type="radio" value="auto" checked name="theme" id="theme-auto" />
-    <label for="theme-auto">Automatic 🌙 / ☀</label>
-    <input type="radio" value="dark" name="theme" id="theme-dark" />
-    <label for="theme-dark">Dark theme 🌙</label>
-    <input type="radio" value="light" name="theme" id="theme-light" />
-    <label for="theme-light">Light theme ☀</label>
-  </form>
-  <table id="version-info">
-    <caption>
-      <h3>Version info</h3>
-    </caption>
-    <tbody>
-      <tr>
-        <th scope="row">File</th>
-        <td id="table-file-name"></td>
-      </tr>
-      <tr>
-        <th scope="row">Size (min + gzip)</th>
-        <td id="table-file-size"></td>
-      </tr>
-      <tr>
-        <th scope="row">Theme</th>
-        <td id="table-theme"></td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-<h2 id="goals">Goals</h2>
-<ul>
-  <li>Responsive</li>
-  <li>Good code quality</li>
-  <li>Good browser support</li>
-  <li>Small size (&lt; 2kb)</li>
-  <li>Beautiful</li>
-  <li>No classes</li>
-</ul>
-<h2 id="responsive">Is it responsive?</h2>
-<p>
-  <strong>Heck yeah!</strong> It doesn't include any fancy styles so it's easily mobile
-  responsive. Just add the famous
-  <a href="https://www.w3schools.com/css/css_rwd_viewport.asp">responsive viewport tag</a> and
-  you'll be good to go!
-</p>
-<p>In fact, try resizing this page. Everything flows super nicely as you'll see.</p>
-<h2 id="bookmarklet">Bookmarklet</h2>
-<p>
-  A bookmarklet is a snippet of JavaScript that sits in your bookmarks bar.
-</p>
-<p>
-  The Waterize bookmarklet can be used to make ugly websites more readable by replacing the styles with. Just drag this link to your bookmarks bar:
-</p>
-<strong>
-  test
-</strong>
-<h2 id="demo">Element demos</h2>
+  template: `<h2 id="demo">Element demos</h2>
 <p>This is supposed to be a demo page so we need more elements!</p>
 <h3 id="form-elements">Form elements</h3>
 <form>
@@ -6165,11 +5895,16 @@ export class SecurityPage {
 
 const routes: Routes = [
   //{ path: '', component: Home, data: {} },
-  { path: 'components/ace-editor', component: AceEditorPage, data: { title: 'Ace Editor', section: 'components' } },
+  { path: 'utils/ace editor', component: AceEditorPage, data: { title: 'Ace Editor', section: 'utils' } },
+  { path: 'utils/quick note', component: QuickNotePage, data: { title: 'Quick Note', section: 'utils' } },
+  { path: 'utils/chomsky', component: ChomskyPage, data: { title: 'Chomsky', section: 'utils' } },
+  { path: 'utils/field-interactions', component: FieldInteractionsPage, data: { title: 'Field Interactions', section: 'utils' } },
+  { path: 'utils/pipes', component: PipesPage, data: { title: 'Pipes', section: 'utils' } },
+  { path: 'utils/security', component: SecurityPage, data: { title: 'Security', section: 'utils' } },
   {
     path: 'components/agenda',
     component: TabsLayout,
-    data: { title: 'Agenda', section: 'components', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}] },
+    data: { title: 'Agenda', section: 'components', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}], description: null },
     children: [
       { path: 'design', component: AgendaDesignPage },
       { path: 'develop', component: AgendaDevelopPage },
@@ -6180,7 +5915,7 @@ const routes: Routes = [
   {
     path: 'components/aside',
     component: TabsLayout,
-    data: { title: 'Aside', section: 'components', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}] },
+    data: { title: 'Aside', section: 'components', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}], description: null },
     children: [
       { path: 'design', component: AsideDesignPage },
       { path: 'develop', component: AsideDevelopPage },
@@ -6191,7 +5926,7 @@ const routes: Routes = [
   {
     path: 'components/autocomplete',
     component: TabsLayout,
-    data: { title: 'Autocomplete', section: 'components', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}] },
+    data: { title: 'Autocomplete', section: 'components', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}], description: null },
     children: [
       { path: 'design', component: AutocompleteDesignPage },
       { path: 'develop', component: AutocompleteDevelopPage },
@@ -6202,7 +5937,7 @@ const routes: Routes = [
   {
     path: 'components/avatar',
     component: TabsLayout,
-    data: { title: 'Avatar', section: 'components', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}] },
+    data: { title: 'Avatar', section: 'components', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}], description: null },
     children: [
       { path: 'design', component: AvatarDesignPage },
       { path: 'develop', component: AvatarDevelopPage },
@@ -6213,7 +5948,7 @@ const routes: Routes = [
   {
     path: 'components/breadcrumbs',
     component: TabsLayout,
-    data: { title: 'Breadcrumbs', section: 'components', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}] },
+    data: { title: 'Breadcrumbs', section: 'components', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}], description: null },
     children: [
       { path: 'design', component: BreadcrumbDesignPage },
       { path: 'develop', component: BreadcrumbDevelopPage },
@@ -6224,7 +5959,7 @@ const routes: Routes = [
   {
     path: 'components/button',
     component: TabsLayout,
-    data: { title: 'Button', section: 'components', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}] },
+    data: { title: 'Button', section: 'components', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}], description: null },
     children: [
       { path: 'design', component: ButtonDesignPage },
       { path: 'develop', component: ButtonDevelopPage },
@@ -6235,11 +5970,10 @@ const routes: Routes = [
   {
     path: 'components/calendar',
     component: TabsLayout,
-    data: { title: 'Calendar', section: 'components', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Calendar', route: './calendar'},{ title: 'Examples', route: './examples'}] },
+    data: { title: 'Calendar', section: 'components', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}], description: null },
     children: [
       { path: 'design', component: CalendarDesignPage },
       { path: 'develop', component: CalendarDevelopPage },
-      { path: 'calendar', component: CalendarPage },
       { path: 'examples', component: CalendarExamplesPage },
       { path: '', redirectTo: '/components/calendar/design', pathMatch: 'full' },
     ]
@@ -6248,19 +5982,18 @@ const routes: Routes = [
   {
     path: 'components/dropdown',
     component: TabsLayout,
-    data: { title: 'Dropdown', section: 'components', pages: [{ title: 'Usage', route: './usage'},{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}] },
+    data: { title: 'Dropdown', section: 'components', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}], description: null },
     children: [
-      { path: 'usage', component: DropdownUsagePage },
       { path: 'design', component: DropdownDesignPage },
       { path: 'develop', component: DropdownDevelopPage },
       { path: 'examples', component: DropdownExamplesPage },
-      { path: '', redirectTo: '/components/dropdown/usage', pathMatch: 'full' },
+      { path: '', redirectTo: '/components/dropdown/design', pathMatch: 'full' },
     ]
   },
   {
     path: 'components/field',
     component: TabsLayout,
-    data: { title: 'Field', section: 'components', pages: [{ title: 'Usage', route: './usage'},{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}] },
+    data: { title: 'Field', section: 'components', pages: [{ title: 'Usage', route: './usage'},{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}], description: null },
     children: [
       { path: 'usage', component: FieldUsagePage },
       { path: 'design', component: FieldDesignPage },
@@ -6272,7 +6005,7 @@ const routes: Routes = [
   {
     path: 'components/icon',
     component: TabsLayout,
-    data: { title: 'Icon', section: 'components', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}] },
+    data: { title: 'Icon', section: 'components', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}], description: null },
     children: [
       { path: 'design', component: IconDesignPage },
       { path: 'develop', component: IconDevelopPage },
@@ -6283,7 +6016,7 @@ const routes: Routes = [
   {
     path: 'components/loading',
     component: TabsLayout,
-    data: { title: 'Loading', section: 'components', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}] },
+    data: { title: 'Loading', section: 'components', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}], description: null },
     children: [
       { path: 'design', component: LoadingDesignPage },
       { path: 'develop', component: LoadingDevelopPage },
@@ -6294,7 +6027,7 @@ const routes: Routes = [
   {
     path: 'components/menu',
     component: TabsLayout,
-    data: { title: 'Menu', section: 'components', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}] },
+    data: { title: 'Menu', section: 'components', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}], description: null },
     children: [
       { path: 'design', component: MenuDesignPage },
       { path: 'develop', component: MenuDevelopPage },
@@ -6305,7 +6038,7 @@ const routes: Routes = [
   {
     path: 'components/modals',
     component: TabsLayout,
-    data: { title: 'Modals', section: 'components', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}] },
+    data: { title: 'Modals', section: 'components', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}], description: null },
     children: [
       { path: 'design', component: ModalDesignPage },
       { path: 'develop', component: ModalDevelopPage },
@@ -6316,7 +6049,7 @@ const routes: Routes = [
   {
     path: 'components/non ideal state',
     component: TabsLayout,
-    data: { title: 'Non Ideal State', section: 'components', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}] },
+    data: { title: 'Non Ideal State', section: 'components', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}], description: null },
     children: [
       { path: 'design', component: NonIdealStateDesignPage },
       { path: 'develop', component: NonIdealStateDevelopPage },
@@ -6327,7 +6060,7 @@ const routes: Routes = [
   {
     path: 'components/pop over',
     component: TabsLayout,
-    data: { title: 'Pop Over', section: 'components', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}] },
+    data: { title: 'Pop Over', section: 'components', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}], description: null },
     children: [
       { path: 'design', component: PopoverDesignPage },
       { path: 'develop', component: PopoverDevelopPage },
@@ -6338,7 +6071,7 @@ const routes: Routes = [
   {
     path: 'components/progress',
     component: TabsLayout,
-    data: { title: 'Progress', section: 'components', pages: [{ title: 'Usage', route: './usage'},{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}] },
+    data: { title: 'Progress', section: 'components', pages: [{ title: 'Usage', route: './usage'},{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}], description: null },
     children: [
       { path: 'usage', component: ProgressUsagePage },
       { path: 'design', component: ProgressDesignPage },
@@ -6347,7 +6080,6 @@ const routes: Routes = [
       { path: '', redirectTo: '/components/progress/usage', pathMatch: 'full' },
     ]
   },
-  { path: 'components/quick-note', component: QuickNotePage, data: { title: 'Quick Note', section: 'components' } },
   { path: 'components/search', component: SearchPage, data: { title: 'Search', section: 'components' } },
   { path: 'components/slides', component: SlidesPage, data: { title: 'Slides', section: 'components' } },
   { path: 'components/switch', component: SwitchPage, data: { title: 'Switch', section: 'components' } },
@@ -6356,7 +6088,7 @@ const routes: Routes = [
   {
     path: 'components/tip well',
     component: TabsLayout,
-    data: { title: 'Tip Well', section: 'components', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}] },
+    data: { title: 'Tip Well', section: 'components', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}], description: null },
     children: [
       { path: 'design', component: TipWellDesignPage },
       { path: 'develop', component: TipWellDevelopPage },
@@ -6367,7 +6099,7 @@ const routes: Routes = [
   {
     path: 'components/toaster',
     component: TabsLayout,
-    data: { title: 'Toaster', section: 'components', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}] },
+    data: { title: 'Toaster', section: 'components', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}], description: null },
     children: [
       { path: 'design', component: ToasterDesignPage },
       { path: 'develop', component: ToasterDevelopPage },
@@ -6378,7 +6110,7 @@ const routes: Routes = [
   {
     path: 'components/toolbar',
     component: TabsLayout,
-    data: { title: 'Toolbar', section: 'components', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}] },
+    data: { title: 'Toolbar', section: 'components', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}], description: null },
     children: [
       { path: 'design', component: ToolbarDesignPage },
       { path: 'develop', component: ToolbarDevelopPage },
@@ -6389,7 +6121,7 @@ const routes: Routes = [
   {
     path: 'components/tooltip',
     component: TabsLayout,
-    data: { title: 'Tooltip', section: 'components', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}] },
+    data: { title: 'Tooltip', section: 'components', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}], description: null },
     children: [
       { path: 'design', component: TooltipDesignPage },
       { path: 'develop', component: TooltipDevelopPage },
@@ -6412,7 +6144,7 @@ const routes: Routes = [
   {
     path: 'form-controls/chips',
     component: TabsLayout,
-    data: { title: 'Chips', section: 'form-controls', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}] },
+    data: { title: 'Chips', section: 'form-controls', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}], description: null },
     children: [
       { path: 'design', component: ChipsDesignPage },
       { path: 'develop', component: ChipsDevelopPage },
@@ -6423,7 +6155,7 @@ const routes: Routes = [
   {
     path: 'form-controls/date picker',
     component: TabsLayout,
-    data: { title: 'Date Picker', section: 'form-controls', pages: [{ title: 'Usage', route: './usage'},{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}] },
+    data: { title: 'Date Picker', section: 'form-controls', pages: [{ title: 'Usage', route: './usage'},{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}], description: null },
     children: [
       { path: 'usage', component: DatePickerUsagePage },
       { path: 'design', component: DatePickerDesignPage },
@@ -6435,7 +6167,7 @@ const routes: Routes = [
   {
     path: 'form-controls/date time picker',
     component: TabsLayout,
-    data: { title: 'Date Time Picker', section: 'form-controls', pages: [{ title: 'Usage', route: './usage'},{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}] },
+    data: { title: 'Date Time Picker', section: 'form-controls', pages: [{ title: 'Usage', route: './usage'},{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}], description: null },
     children: [
       { path: 'usage', component: DateTimePickerUsagePage },
       { path: 'design', component: DateTimePickerDesignPage },
@@ -6447,7 +6179,7 @@ const routes: Routes = [
   {
     path: 'form-controls/time picker',
     component: TabsLayout,
-    data: { title: 'Time Picker', section: 'form-controls', pages: [{ title: 'Usage', route: './usage'},{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}] },
+    data: { title: 'Time Picker', section: 'form-controls', pages: [{ title: 'Usage', route: './usage'},{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}], description: null },
     children: [
       { path: 'usage', component: TimePickerUsagePage },
       { path: 'design', component: TimePickerDesignPage },
@@ -6470,7 +6202,7 @@ const routes: Routes = [
   {
     path: 'layouts/card',
     component: TabsLayout,
-    data: { title: 'Card', section: 'layouts', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}] },
+    data: { title: 'Card', section: 'layouts', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}], description: CardDescriptionPage },
     children: [
       { path: 'design', component: CardDesignPage },
       { path: 'develop', component: CardDevelopPage },
@@ -6486,7 +6218,7 @@ const routes: Routes = [
   {
     path: 'layouts/tabs',
     component: TabsLayout,
-    data: { title: 'Tabs', section: 'layouts', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}] },
+    data: { title: 'Tabs', section: 'layouts', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}], description: null },
     children: [
       { path: 'design', component: TabsDesignPage },
       { path: 'develop', component: TabsDevelopPage },
@@ -6497,23 +6229,19 @@ const routes: Routes = [
   {
     path: 'patterns/patterns',
     component: TabsLayout,
-    data: { title: 'Patterns', section: 'patterns', pages: [{ title: 'Test', route: './test'},{ title: 'Native Forms', route: './native--forms'}] },
+    data: { title: 'Patterns', section: 'patterns', pages: [{ title: 'Test', route: './test'},{ title: 'Native Forms', route: './native--forms'}], description: null },
     children: [
       { path: 'test', component: PatternsTestPage },
       { path: 'native--forms', component: PatternsNativeFormsPage },
       { path: '', redirectTo: '/patterns/patterns/test', pathMatch: 'full' },
     ]
   },
-  { path: 'utils/chomsky', component: ChomskyPage, data: { title: 'Chomsky', section: 'utils' } },
-  { path: 'utils/field-interactions', component: FieldInteractionsPage, data: { title: 'Field Interactions', section: 'utils' } },
-  { path: 'utils/pipes', component: PipesPage, data: { title: 'Pipes', section: 'utils' } },
-  { path: 'utils/security', component: SecurityPage, data: { title: 'Security', section: 'utils' } },
   // Catch All
   { path: '**', redirectTo: '/home', data: {} },
 ];
 
 export const PAGE_LIST = [
-  AceEditorPage,AgendaDesignPage,AgendaDevelopPage,AgendaExamplesPage,AsideDesignPage,AsideDevelopPage,AsideExamplesPage,AutocompleteDesignPage,AutocompleteDevelopPage,AutocompleteExamplesPage,AvatarDesignPage,AvatarDevelopPage,AvatarExamplesPage,BreadcrumbDesignPage,BreadcrumbDevelopPage,BreadcrumbExamplesPage,ButtonDesignPage,ButtonDevelopPage,ButtonExamplesPage,CalendarDesignPage,CalendarDevelopPage,CalendarExamplesPage,CalendarPage,ComponentsPage,DataTablePage,DropdownDesignPage,DropdownDevelopPage,DropdownExamplesPage,DropdownUsagePage,FieldDesignPage,FieldDevelopPage,FieldExamplesPage,FieldUsagePage,IconDesignPage,IconDevelopPage,IconExamplesPage,LoadingDesignPage,LoadingDevelopPage,LoadingExamplesPage,MenuDesignPage,MenuDevelopPage,MenuExamplesPage,ModalDesignPage,ModalDevelopPage,ModalExamplesPage,NonIdealStateDesignPage,NonIdealStateDevelopPage,NonIdealStateExamplesPage,PopoverDesignPage,PopoverDevelopPage,PopoverExamplesPage,ProgressDesignPage,ProgressDevelopPage,ProgressExamplesPage,ProgressUsagePage,QuickNotePage,SearchPage,SlidesPage,SwitchPage,TabbedGroupPickerPage,TablePage,TipWellDesignPage,TipWellDevelopPage,TipWellExamplesPage,ToasterDesignPage,ToasterDevelopPage,ToasterExamplesPage,ToolbarDesignPage,ToolbarDevelopPage,ToolbarExamplesPage,TooltipDesignPage,TooltipDevelopPage,TooltipExamplesPage,ColorsPage,CompositionPage,DesignPage,IconographyPage,SpacingPage,TypographyPage,ChipsDesignPage,ChipsDevelopPage,ChipsExamplesPage,ColorPickerPage,DatePickerDesignPage,DatePickerDevelopPage,DatePickerExamplesPage,DatePickerUsagePage,DatePickerPage,DateTimePickerDesignPage,DateTimePickerDevelopPage,DateTimePickerExamplesPage,DateTimePickerUsagePage,EditorPage,FormControlsPage,FormGroupsPage,FormPage,MultiPickerPage,PickerPage,RadioButtonsPage,SelectPage,TilesPage,TimePickerDesignPage,TimePickerDevelopPage,TimePickerExamplesPage,TimePickerUsagePage,ValuePage,HomePage,CardDesignPage,CardDevelopPage,CardExamplesPage,ExpansionPage,HeaderPage,LayoutsPage,ListPage,SidenavPage,StepperPage,TabsDesignPage,TabsDevelopPage,TabsExamplesPage,PatternsNativeFormsPage,PatternsTestPage,PatternsPage,TemplatesPage,ChomskyPage,FieldInteractionsPage,PipesPage,SecurityPage
+  AceEditorPage,AgendaDesignPage,AgendaDevelopPage,AgendaExamplesPage,AsideDesignPage,AsideDevelopPage,AsideExamplesPage,AutocompleteDesignPage,AutocompleteDevelopPage,AutocompleteExamplesPage,AvatarDesignPage,AvatarDevelopPage,AvatarExamplesPage,BreadcrumbDesignPage,BreadcrumbDevelopPage,BreadcrumbExamplesPage,ButtonDesignPage,ButtonDevelopPage,ButtonExamplesPage,CalendarDesignPage,CalendarDevelopPage,CalendarExamplesPage,ComponentsPage,DataTablePage,DropdownDesignPage,DropdownDevelopPage,DropdownExamplesPage,FieldDesignPage,FieldDevelopPage,FieldExamplesPage,FieldUsagePage,IconDesignPage,IconDevelopPage,IconExamplesPage,LoadingDesignPage,LoadingDevelopPage,LoadingExamplesPage,MenuDesignPage,MenuDevelopPage,MenuExamplesPage,ModalDesignPage,ModalDevelopPage,ModalExamplesPage,NonIdealStateDesignPage,NonIdealStateDevelopPage,NonIdealStateExamplesPage,PopoverDesignPage,PopoverDevelopPage,PopoverExamplesPage,ProgressDesignPage,ProgressDevelopPage,ProgressExamplesPage,ProgressUsagePage,QuickNotePage,SearchPage,SlidesPage,SwitchPage,TabbedGroupPickerPage,TablePage,TipWellDesignPage,TipWellDevelopPage,TipWellExamplesPage,ToasterDesignPage,ToasterDevelopPage,ToasterExamplesPage,ToolbarDesignPage,ToolbarDevelopPage,ToolbarExamplesPage,TooltipDesignPage,TooltipDevelopPage,TooltipExamplesPage,ColorsPage,CompositionPage,DesignPage,IconographyPage,SpacingPage,TypographyPage,ChipsDesignPage,ChipsDevelopPage,ChipsExamplesPage,ColorPickerPage,DatePickerDesignPage,DatePickerDevelopPage,DatePickerExamplesPage,DatePickerUsagePage,DatePickerPage,DateTimePickerDesignPage,DateTimePickerDevelopPage,DateTimePickerExamplesPage,DateTimePickerUsagePage,EditorPage,FormControlsPage,FormGroupsPage,FormPage,MultiPickerPage,PickerPage,RadioButtonsPage,SelectPage,TilesPage,TimePickerDesignPage,TimePickerDevelopPage,TimePickerExamplesPage,TimePickerUsagePage,ValuePage,HomePage,CardDescriptionPage,CardDesignPage,CardDevelopPage,CardExamplesPage,ExpansionPage,HeaderPage,LayoutsPage,ListPage,SidenavPage,StepperPage,TabsDesignPage,TabsDevelopPage,TabsExamplesPage,PatternsNativeFormsPage,PatternsTestPage,PatternsPage,TemplatesPage,ChomskyPage,FieldInteractionsPage,PipesPage,SecurityPage
 ];
 
 @NgModule({

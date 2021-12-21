@@ -2,7 +2,7 @@
 @import "../../common/typography/text.mixins";
 
 :host {
-  @include novo-caption-medium();
+  @include novo-caption-text();
   display: flex;
   flex: 1 0 auto;
   width: max-content;

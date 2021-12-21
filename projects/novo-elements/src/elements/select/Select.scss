@@ -10,7 +10,7 @@ novo-select {
   cursor: pointer;
 
   .novo-select-trigger {
-    @include novo-text-medium();
+    @include novo-body-text();
     display: flex;
     justify-content: space-between;
     align-items: center;

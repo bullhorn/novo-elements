@@ -102,7 +102,7 @@
 
   .bgc-#{$name} {
     background: $color;
-    // color: getContrastColor($name); // this overwrites deeper than we want
+    color: getContrastColor($name); // this overwrites deeper than we want
   }
   .bgc-#{$name}-striped {
     & > *:nth-child(odd) {

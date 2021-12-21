@@ -40,7 +40,7 @@ let nextId = 0;
   providers: [CHECKBOX_VALUE_ACCESSOR],
   styleUrls: ['./Checkbox.scss'],
   template: `
-    <div class="check-box-group" [class.checked]="checked" [class.disabled]="disabled">
+    <div class="novo-checkbox-group" [class.checked]="checked" [class.disabled]="disabled">
       <input
         #input
         type="checkbox"

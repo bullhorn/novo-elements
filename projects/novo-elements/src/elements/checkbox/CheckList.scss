@@ -3,12 +3,13 @@
 :host {
   display: flex;
   flex-flow: row wrap;
+  gap: 1rem;
   &.hasLabel {
     [class*="-group"] {
       margin-right: 15px;
     }
   }
-  [class*="-group"] {
+  .novo-checkbox-group {
     cursor: pointer;
     position: relative;
     &:hover {
@@ -26,7 +27,7 @@
     }
     &.checked {
       label {
-        color: darken(#d2d2d2, 60%);
+        color: var(--text-main);
         i {
           animation: iconEnter 160ms ease-in-out;
         }

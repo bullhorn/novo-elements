@@ -45,7 +45,7 @@
 
     &::ng-deep {
       .novo-input-element {
-        @include novo-text-medium();
+        @include novo-body-text();
         border: none;
         background-image: none;
         background-color: transparent;

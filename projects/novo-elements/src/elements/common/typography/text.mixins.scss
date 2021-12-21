@@ -11,18 +11,36 @@
   }
 }
 
-@mixin text-sizing($small, $base, $large) {
+@mixin text-sizing($smaller, $larger) {
   &.text-size-default {
     font-size: inherit;
   }
-  &.text-size-small {
-    font-size: $small;
+  &.text-size-xs {
+    font-size: $font-size-xs;
   }
-  &.text-size-medium {
-    font-size: $small;
+  &.text-size-sm {
+    font-size: $font-size-sm;
   }
-  &.text-size-large {
-    font-size: $large;
+  &.text-size-md {
+    font-size: $font-size-md;
+  }
+  &.text-size-lg {
+    font-size: $font-size-lg;
+  }
+  &.text-size-xl {
+    font-size: $font-size-xl;
+  }
+  &.text-size-2xl {
+    font-size: $font-size-2xl;
+  }
+  &.text-size-3xl {
+    font-size: $font-size-3xl;
+  }
+  &.text-size-smaller {
+    font-size: $smaller;
+  }
+  &.text-size-larger {
+    font-size: $larger;
   }
 }
 
@@ -74,8 +92,8 @@
 @mixin novo-body-text() {
   display: inline;
   font-weight: normal;
-  // line-height: 1.5rem;
   color: inherit;
+  font-size: var(--font-size-text);
 }
 
 @mixin novo-title-text() {
@@ -84,6 +102,7 @@
   color: var(--text-main, $dark);
   white-space: nowrap;
   text-overflow: ellipsis;
+  font-size: var(--font-size-title);
 }
 
 @mixin novo-label-text() {
@@ -94,75 +113,12 @@
   overflow-wrap: break-word;
   line-height: 1.375;
   color: $slate;
+  font-size: var(--font-size-label);
 }
 
 @mixin novo-caption-text() {
-  font-size: 0.8rem;
+  font-size: var(--font-size-caption);
   font-weight: 400;
   line-height: 1.375;
   color: var(--text-muted, $dark);
-}
-
-// Body Text
-@mixin novo-text-small() {
-  @include novo-body-text();
-  font-size: 1rem;
-}
-
-@mixin novo-text-medium() {
-  @include novo-body-text();
-  font-size: 1.2rem;
-}
-
-@mixin novo-text-large() {
-  @include novo-body-text();
-  font-size: 1.4rem;
-}
-
-// TITLE
-@mixin novo-title-small() {
-  @include novo-title-text();
-  font-size: 1.5rem;
-}
-
-@mixin novo-title-medium() {
-  @include novo-title-text();
-  font-size: 1.8rem;
-}
-
-@mixin novo-title-large() {
-  @include novo-title-text();
-  font-size: 2.1rem;
-}
-
-// LABEL
-@mixin novo-label-small() {
-  @include novo-label-text();
-  font-size: 1rem;
-}
-
-@mixin novo-label-medium() {
-  @include novo-label-text();
-  font-size: 1.1rem;
-}
-
-@mixin novo-label-large() {
-  @include novo-label-text();
-  font-size: 1.2rem;
-}
-
-// CAPTIONS
-@mixin novo-caption-small() {
-  @include novo-caption-text();
-  font-size: 0.8rem;
-}
-
-@mixin novo-caption-medium() {
-  @include novo-caption-text();
-  font-size: 0.9rem;
-}
-
-@mixin novo-caption-large() {
-  @include novo-caption-text();
-  font-size: 1rem;
 }

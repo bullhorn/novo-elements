@@ -13,19 +13,15 @@ order: 1
 Used to help display scheduled events for the day/week/month. The agenda component allow you to display events for any range grouped by days.  You can provide custom templates to each view to modify how the event is displayed and to add additional content.
 </div>
 
-![placeholder](https://via.placeholder.com/350x250)
+![Overview](assets/images/AgendaDayView.png)
 
 <div>
 
 ### Use When
 
-- (✓) When information can be grouped and the user might need access to multiple groups of information at once.
+- (✓) When representing scheduled events or a history of actions.
 
-  TBW
-
-- (✓) When providing a summary of content as an entry point to a larger grouping of information
-
-  TBW
+  The Agenda should be used to plot dates or events already tracked in the system and should be used as a way to visualize those events.
 
 </div>
 
@@ -33,56 +29,39 @@ Used to help display scheduled events for the day/week/month. The agenda compone
 
 ### Don′t Use When
 
-- (x) When a lot of information on the card makes it too large. Instead consider using a modal or showing the information on a new page.
+- (x) Don't use to select a date or range of dates.
 
-  TBW
-
-</div>
-</novo-grid>
-
-## Anatomy
-
-<novo-grid columns="2" align="start" gap="2rem">
-
-<img src="assets/images/ModalAnatomy.png" width="450">
-
-<div>
-
-1. **Header**<br>
-   Cards can have a header row that always contains a title. If the card can be reordered on the page, a handle is placed left of the title that allows dragging of the card. Between the handle and the title an icon can be added. On the far right of the header row, actions can be added.
-
-1. **Shadow**<br>
-   Novo-elements has 5 elevation layers by default; cards should float just above the content they are contained within.
+  While the Agenda and events can be interactive it should not be used to select dates.  Instead use the `calendar` or `date-picker`
 
 </div>
 </novo-grid>
 
 ## Best Practices
 
-- Card dimensions are based on its content and the container in which it resides.
-- Apply custom heights and width to meet product requirements.
-- Avoid the appearance of nested cards, and therefore don’t use cards within a modal or another card.
-- When creating a group of cards, use consistently sized content within a grid or flex layout.
-
-## Color
-
-> > ![placeholder](https://via.placeholder.com/350x250)
-> >
-> > **Theme - background**
-> >
-> > Any theme color can be applied to tabs which will make the background color match the color.
-> > Any theme color can be applied to tabs with the `color` attribute to change the text color
-> > {.two-columns}
-
-## Patterns
+- Ensure the view has enough space to display the Agenda components, the often take up the whole page.
+- Allow the user to switch between Month, Week, Day views of their data.
+- Avoid showing to many types of events, the views will get bloated and hard to read.
+## Options
 
 <novo-grid columns="2" align="start" gap="2rem">
 
-> **Details Card**
+> **Month View**
 >
-> Cards can use a list to display information. In this case the label and content are ordered left to right. Every other row has a darker background to improve readability.
+> Used to present the user with a calendar of scheduled event for a month.  The event styles can be overridden with a custom template, this allows the implementation to determine how the display should change based on the context of the scheduled event.
 
-![placeholder](https://via.placeholder.com/350x250)
+![Month View](assets/images/AgendaMonthView.png)
+
+![Week View](assets/images/AgendaWeekView.png)
+
+> **Week View**
+>
+> The agenda's week view component can disply the scheduled events showing the 5-7 days of that week.  Unlike the Month View, events will be plotted vertically based on the time of day the event starts. Event containers height will only be as tall as the duration of the event.
+
+> **Day View**
+>
+> Similar to the Week View but only display events for a single day.  This is helpful when the week view is very congested because this allows overlapping events to stack horizontally, allowing for better readability.
+
+![Day View](assets/images/AgendaDayView.png)
 
 </novo-grid>
 

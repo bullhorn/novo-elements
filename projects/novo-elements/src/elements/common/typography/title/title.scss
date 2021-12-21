@@ -3,17 +3,16 @@
 
 :host {
   display: block;
-  font-family: Roboto, sans-serif;
-  font-size: 1.8rem;
+  font-size: var(--font-size-title);
   font-weight: 500;
-  line-height: 1.2rem;
+  line-height: 1.175em;
   white-space: nowrap;
   text-overflow: ellipsis;
   // color: $dark;
   color: inherit;
 
   @include base-text-rules();
-  @include text-sizing(1.5rem, 1.8rem, 2.1rem);
+  @include text-sizing($font-size-lg, $font-size-2xl); // @include text-sizing(1.5rem, 1.8rem, 2.1rem);
   @include text-colors();
   @include text-margins();
 

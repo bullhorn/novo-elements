@@ -14,6 +14,7 @@ export interface ToastOptions {
   action?: string;
   icon?: ToastIcons;
   theme?: ToastThemes;
+  accent?: ToastThemes;
   hideDelay?: number;
   position?: ToastPositions;
   isCloseable?: boolean;
@@ -86,7 +87,7 @@ export class NovoToastService {
     toast.isCloseable = OPTIONS.isCloseable || false;
 
     const CUSTOM_CLASS = OPTIONS.customClass || '';
-    const ALERT_STYLE = OPTIONS.theme || this.defaults.theme;
+    const ALERT_STYLE = OPTIONS.accent ? `novo-accent-${OPTIONS.accent}` : OPTIONS.theme || this.defaults.theme;
     const ALERT_POSITION = OPTIONS.position || this.defaults.position;
     const ALERT_ICON = OPTIONS.icon || this.icons.default;
 
