@@ -22,6 +22,7 @@ const DATE_VALUE_ACCESSOR = {
       (ngModelChange)="updateDate($event)"
       [start]="start"
       [end]="end"
+      [disabledDateMessage]="disabledDateMessage"
       [maskOptions]="maskOptions"
       (blurEvent)="handleBlur($event)"
       (focusEvent)="handleFocus($event)"
@@ -67,6 +68,8 @@ export class NovoDateTimePickerInputElement implements ControlValueAccessor {
   format: string;
   @Input()
   weekStart: number = 0;
+  @Input()
+  disabledDateMessage: string;
   @Output()
   blurEvent: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
   @Output()

@@ -55,6 +55,7 @@ const DATE_VALUE_ACCESSOR = {
         [end]="end"
         inline="true"
         (onSelect)="setValueAndClose($event)"
+        [disabledDateMessage]="disabledDateMessage"
         [ngModel]="value"
         [weekStart]="weekStart"
       ></novo-date-picker>
@@ -112,6 +113,8 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
   @HostBinding('class.disabled')
   @Input()
   disabled: boolean = false;
+  @Input()
+  disabledDateMessage: string;
   /**
    * Day of the week the calendar should display first, Sunday=0...Saturday=6
    **/

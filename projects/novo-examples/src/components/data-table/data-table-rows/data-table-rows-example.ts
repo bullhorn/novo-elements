@@ -5,6 +5,7 @@ import {
   IDataTablePaginationOptions,
   IDataTablePreferences,
   IDataTableSearchOptions,
+  IDataTableSelectionOption,
   NovoDataTable,
   NovoModalService,
 } from 'novo-elements';
@@ -35,6 +36,7 @@ export class DataTableRowsExample {
     { label: 'Standard', value: 'standard' },
     { label: 'Basic', value: 'basic' },
   ];
+  public selectionOptions: IDataTableSelectionOption[] = [];
   public loadedPaginationType: string = 'standard';
   public globalSearchOptions: any[] = [
     { label: 'Show', value: true },
@@ -52,6 +54,7 @@ export class DataTableRowsExample {
       value: '',
     },
   ];
+  public retentionEnabled: boolean = false;
 
   // Shared configuration
   public sharedColumns: IDataTableColumn<MockData>[] = [
@@ -399,6 +402,7 @@ export class DataTableRowsExample {
   }
 
   public refresh(): void {
+    this.table.state.reset();
     this.refreshSubject.next();
   }
 
@@ -414,5 +418,14 @@ export class DataTableRowsExample {
       sort: this.table.state.sort,
     });
     this.ref.markForCheck();
+  }
+
+  public toggle(event) {
+    if (event) {
+      this.selectionOptions = [{label: 'page'}];
+    } else {
+      this.selectionOptions = [];
+    }
+    this.table.state.selectionOptions = this.selectionOptions;
   }
 }

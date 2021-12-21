@@ -98,6 +98,7 @@ class ControlConfig {
   isInlineEmbedded = false;
   weekStart?: number;
   highlighted = false;
+  disabledDateMessage?: string;
 }
 
 export type NovoControlConfig = Partial<ControlConfig>;
@@ -193,5 +194,6 @@ export class BaseControl extends ControlConfig {
       this.isEmpty = config.isEmpty;
     }
     this.weekStart = config.weekStart || 0;
+    this.disabledDateMessage = config.disabledDateMessage;
   }
 }
