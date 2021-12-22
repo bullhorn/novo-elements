@@ -9,7 +9,7 @@
     "url": "bullhorn/novo-elements"
   },
   "scripts": {
-    "build": "ng build novo-elements && ng build chomsky",
+    "build": "ng build novo-elements",
     "postbuild": "npm run copy:scss && npm run build:examples",
     "postinstall": "npm run prettier -s",
     "build:ci": "ng build novo-elements --configuration production && ng build chomsky --configuration production",

@@ -14,8 +14,8 @@ export class ImportVariableFileMigration extends DevkitMigration<null> {
         '../../../../../node_modules/novo-elements/styles/global/variables': 'styles/variables',
         'styles/global/variables': 'styles/variables',
       };
-      var replaceStrings = new RegExp(Object.keys(replaceObj).join("|"),"gi");
-      const migratedContent = content.replace(replaceStrings, function(matched){
+      var replaceStrings = new RegExp(Object.keys(replaceObj).join('|'), 'gi');
+      const migratedContent = content.replace(replaceStrings, function (matched) {
         return replaceObj[matched];
       });
 

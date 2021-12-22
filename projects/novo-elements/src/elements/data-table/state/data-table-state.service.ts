@@ -148,6 +148,6 @@ export class DataTableState<T> {
   }
 
   public checkRetainment(caller: string): void {
-    this.retainSelected = this.selectionOptions?.some(option => option.label === caller) || this.retainSelected;
+    this.retainSelected = this.selectionOptions?.some((option) => option.label === caller) || this.retainSelected;
   }
 }

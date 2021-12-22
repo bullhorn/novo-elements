@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { NovoLabelService } from 'novo-elements';
-import { FormUtils, BaseControl, NovoFormGroup, TextBoxControl } from 'novo-elements';
+import { BaseControl, FormUtils, NovoFormGroup, TextBoxControl } from 'novo-elements';
 
 /**
  * @title Date picker limits Example

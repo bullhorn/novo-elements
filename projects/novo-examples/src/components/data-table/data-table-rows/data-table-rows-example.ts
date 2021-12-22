@@ -422,7 +422,7 @@ export class DataTableRowsExample {
 
   public toggle(event) {
     if (event) {
-      this.selectionOptions = [{label: 'page'}];
+      this.selectionOptions = [{ label: 'page' }];
     } else {
       this.selectionOptions = [];
     }
