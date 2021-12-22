@@ -41,7 +41,7 @@ novo-header {
       max-width: calc(100% - 40px);
 
       novo-icon {
-        margin-right: 1rem;
+        margin-right: 1.2rem;
       }
     }
     .header-titles {
@@ -113,8 +113,11 @@ novo-header {
         font-size: 1.2rem;
       }
     }
-    novo-icon > i {
-      font-size: 1.4rem;
+    novo-icon {
+      margin-right: .5rem !important;
+      > i {
+        font-size: 1.4rem;
+      }
     }
     button[theme][theme="icon"] {
       width: 30px !important;
