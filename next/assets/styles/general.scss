@@ -30,3 +30,10 @@ code-snippet,
 multi-code-snippet {
   margin-bottom: 20px;
 }
+
+.cover-img {
+  background: #aaa;
+  width: 100%;
+  max-height: 340px;
+  object-fit: contain;
+}
