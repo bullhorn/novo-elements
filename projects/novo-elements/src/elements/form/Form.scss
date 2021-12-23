@@ -730,7 +730,7 @@ novo-form {
                   left: 22px;
                   pointer-events: none;
                   z-index: z(default);
-                  width: 100%;
+                  width: calc(100% - 22px);
                   display: block;
                   cursor: text;
                   white-space: nowrap;

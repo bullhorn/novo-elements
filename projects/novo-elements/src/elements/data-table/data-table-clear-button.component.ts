@@ -10,9 +10,12 @@ import { DataTableState } from './state/data-table-state.service';
         {{ labels.clear }}
       </novo-button>
       <list>
-        <item *ngIf="state.selected.length > 0" (click)="clearSelected()" data-automation-id="novo-data-table-clear-dropdown-clear-selected">{{
-          labels.clearSelected
-        }}</item>
+        <item
+          *ngIf="state.selected.length > 0"
+          (click)="clearSelected()"
+          data-automation-id="novo-data-table-clear-dropdown-clear-selected"
+          >{{ labels.clearSelected }}</item
+        >
         <item *ngIf="state.sort" (click)="clearSort()" data-automation-id="novo-data-table-clear-dropdown-clear-sort">{{
           labels.clearSort
         }}</item>

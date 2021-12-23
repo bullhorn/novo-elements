@@ -19,9 +19,7 @@ import { NovoDataTable } from '../data-table.component';
     <div class="data-table-checkbox" (click)="onClick()" [tooltip]="getTooltip()" tooltipPosition="right">
       <input type="checkbox" [checked]="checked" />
       <label>
-        <i [class.bhi-checkbox-disabled]="isAtLimit"
-           [class.bhi-checkbox-empty]="!checked"
-           [class.bhi-checkbox-filled]="checked"></i>
+        <i [class.bhi-checkbox-disabled]="isAtLimit" [class.bhi-checkbox-empty]="!checked" [class.bhi-checkbox-filled]="checked"></i>
       </label>
     </div>
   `,
@@ -78,7 +76,7 @@ export class NovoDataTableCheckboxCell<T> extends CdkCell implements OnInit, OnD
   }
 
   public getTooltip() {
-    return (this.isAtLimit) ? 'More than ' + this.maxSelected + ' items are not able to be selected at one time' : '';
+    return this.isAtLimit ? 'More than ' + this.maxSelected + ' items are not able to be selected at one time' : '';
   }
 
   public ngOnDestroy(): void {
