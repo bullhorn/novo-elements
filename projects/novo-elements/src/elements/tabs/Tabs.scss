@@ -35,13 +35,10 @@ novo-nav {
         }
       }
     }
-    &.text-only {
-      .novo-tab-link {
-        @include novo-label-text();
-      }
-    }
+
     .novo-tab-link {
-      padding: 1rem;
+      @include novo-label-text();
+      padding: $spacing-lg;
       // color: var(--text-main);
       display: flex;
       align-items: center;

@@ -15,6 +15,9 @@
   &.text-size-default {
     font-size: inherit;
   }
+  &.text-size-body {
+    font-size: $font-size-body;
+  }
   &.text-size-xs {
     font-size: $font-size-xs;
   }

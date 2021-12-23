@@ -111,7 +111,6 @@ export class PaddingDirective {
   @Input() py: string;
 
   @HostBinding('class') get hb_padding() {
-    console.log('looking for padding', this.padding, getSpacingToken(this.padding));
     return `padding-${this.padding || this.p}`;
   }
   // @HostBinding('class') get hb_padding() {

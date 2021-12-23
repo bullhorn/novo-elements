@@ -2,6 +2,7 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 import { AfterViewInit, Component, ViewChild, ViewContainerRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { NovoModalService, NovoSidenavComponent, NovoToastService } from 'novo-elements';
+import { delay, startWith } from 'rxjs/operators';
 
 @Component({
   selector: 'novo-demo-app',
@@ -46,15 +47,18 @@ export class AppComponent implements AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.observer.observe(['(max-width: 480px)']).subscribe((res) => {
-      if (res.matches) {
-        this.sidenav.mode = 'over';
-        this.sidenav.close();
-      } else {
-        this.sidenav.mode = 'side';
-        this.sidenav.open();
-      }
-    });
+    this.observer
+      .observe(['(max-width: 480px)'])
+      .pipe(startWith({ matches: false }), delay(10))
+      .subscribe((res) => {
+        if (res.matches) {
+          this.sidenav.mode = 'over';
+          this.sidenav.close();
+        } else {
+          this.sidenav.mode = 'side';
+          this.sidenav.open();
+        }
+      });
   }
 
   sortMenu(a, b) {

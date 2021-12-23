@@ -1,10 +1,13 @@
+@import "../common/typography/text.mixins.scss";
+
 novo-modal {
   & > header {
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
 
+    h1,
     h2 {
-      padding: 0.75em;
+      @include novo-title-text();
     }
   }
 
@@ -46,8 +49,8 @@ novo-notification {
 
   & > .novo-button.modal-close {
     position: absolute;
-    right: $spacing-sm;
-    top: $spacing-sm;
+    right: $spacing-xl;
+    top: $spacing-xl;
   }
 
   & > header {
@@ -61,7 +64,7 @@ novo-notification {
     }
   }
 
-  & > section {
+  .notification-body {
     display: flex;
     flex-direction: column;
 
@@ -69,27 +72,49 @@ novo-notification {
       width: 100%;
     }
 
-    h1 {
-      font-size: 1.8em;
-      color: var(--text-bright);
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-size: 0.8em;
       margin: 0 auto;
     }
 
     h2,
     h4 {
-      font-size: 1.3em;
       color: var(--text-muted);
       margin: 0 auto;
       padding: 0;
     }
 
+    h1 {
+      font-size: $font-size-2xl;
+    }
+    h2 {
+      font-size: $font-size-xl;
+    }
+    h3 {
+      font-size: $font-size-lg;
+    }
+    h4 {
+      font-size: $font-size-lg;
+    }
+    h5 {
+      font-size: $font-size-md;
+    }
+    h6 {
+      font-size: $font-size-md;
+    }
+
     i.indicator {
       color: var(--text-muted);
-      font-size: 1.7em;
+      border: 1px solid var(--text-muted);
+      font-size: $font-size-2xl;
       border-radius: 50%;
-      padding: 0.4em;
-      border: 2px solid var(--text-muted);
-      margin: 0 auto;
+      padding: $spacing-md;
+      margin: 2rem auto;
       align-self: center;
     }
   }

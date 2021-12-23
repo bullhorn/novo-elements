@@ -1,3 +1,5 @@
+@import "../common/typography/text.mixins.scss";
+
 $small-themed-icon-size: 1.6em;
 $medium-themed-icon-size: 2em;
 $large-themed-icon-size: 2.4em;
@@ -5,6 +7,7 @@ $small-icon-size: 1.2em;
 $medium-icon-size: 1.8em;
 $large-icon-size: 2.1em;
 $icon-border-radius: 0.3em;
+
 novo-icon {
   display: inline-flex;
   align-items: center;
@@ -16,70 +19,32 @@ novo-icon {
     align-items: center;
     font-size: inherit;
     line-height: inherit;
+    width: 1em;
+    height: 1em;
+    color: inherit;
+    &:before {
+      color: inherit;
+    }
     * {
       display: none;
     }
   }
+
+  @include text-sizing(1em, 1.4em);
+  @include text-colors();
   @include theme-colors() using ($color, $name) {
-    &[color="#{$name}"] {
-      i {
-        color: $color;
-        &:before {
-          color: $color;
-        }
-      }
-    }
     &[theme="#{$name}"] {
       i {
         color: $white;
         background: $color;
         border-radius: $icon-border-radius;
-        width: $medium-themed-icon-size;
-        height: $medium-themed-icon-size;
-      }
-      &[size="small"] {
-        i {
-          width: $small-themed-icon-size;
-          height: $small-themed-icon-size;
-        }
-      }
-      &[size="medium"] {
-        i {
-          width: $medium-themed-icon-size;
-          height: $medium-themed-icon-size;
-        }
-      }
-      &[size="large"] {
-        i {
-          width: $large-themed-icon-size;
-          height: $large-themed-icon-size;
-        }
+        width: 1.6em;
+        height: 1.6em;
       }
     }
   }
 
-  &[size="small"] {
-    font-size: 1.5em;
-    i {
-      width: $small-icon-size;
-      height: $small-icon-size;
-    }
-  }
-  &[size="medium"] {
-    font-size: 1.8em;
-    i {
-      width: $medium-icon-size;
-      height: $medium-icon-size;
-    }
-  }
-  &[size="large"] {
-    font-size: 2.1em;
-    i {
-      width: $large-icon-size;
-      height: $large-icon-size;
-    }
-  }
-  &[raised="true"] {
+  &.novo-icon-raised {
     i {
       // background-color: rgba(0, 0, 0, .25);
       box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.2);

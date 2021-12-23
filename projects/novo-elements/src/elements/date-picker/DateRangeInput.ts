@@ -50,7 +50,7 @@ const DATE_VALUE_ACCESSOR = {
         [disabled]="disabled"
       />
       <novo-icon *ngIf="!hasStartValue" (click)="openPanel()">calendar</novo-icon>
-      <novo-icon *ngIf="hasStartValue" size="small" (click)="clearStartValue()">times</novo-icon>
+      <novo-icon *ngIf="hasStartValue" (click)="clearStartValue()">x</novo-icon>
     </div>
     <div class="date-range-input-divider">-</div>
     <div class="date-range-input-container">
@@ -69,7 +69,7 @@ const DATE_VALUE_ACCESSOR = {
         [disabled]="disabled"
       />
       <novo-icon *ngIf="!hasEndValue" (click)="openPanel()">calendar</novo-icon>
-      <novo-icon *ngIf="hasEndValue" size="small" (click)="clearEndValue()">times</novo-icon>
+      <novo-icon *ngIf="hasEndValue" (click)="clearEndValue()">x</novo-icon>
     </div>
     <novo-overlay-template [parent]="element" position="above-below">
       <novo-date-picker

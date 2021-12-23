@@ -33,7 +33,7 @@ const MULTI_DATE_VALUE_ACCESSOR = {
   template: `
     <novo-chip *ngFor="let date of value | default: []" (removed)="remove($event, date)">
       {{ date | date: format }}
-      <novo-icon size="small" novoChipRemove>close</novo-icon>
+      <novo-icon novoChipRemove>close</novo-icon>
     </novo-chip>
     <!-- <div *ngIf="value.length > chipsCount">
       <ul class="summary">

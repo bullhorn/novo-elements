@@ -27,13 +27,13 @@ import { BooleanInput } from '../../utils';
 
   template: `
     <!--Left Icon-->
-    <i *ngIf="icon && side === 'left' && !loading" [ngClass]="icon"></i>
+    <i *ngIf="icon && side === 'left' && !loading" [ngClass]="icon" class="novo-button-icon novo-button-icon-left"></i>
     <!--Transcluded Content-->
     <span #textContent class="button-contents"><ng-content></ng-content></span>
     <!--Right Icon-->
-    <i *ngIf="icon && side === 'right' && !loading" [ngClass]="icon"></i>
+    <i *ngIf="icon && side === 'right' && !loading" [ngClass]="icon" class="novo-button-icon novo-button-icon-right"></i>
     <!--Loading-->
-    <i *ngIf="loading" class="loading">
+    <i *ngIf="loading" class="loading novo-button-loading">
       <svg
         version="1.1"
         xmlns="http://www.w3.org/2000/svg"

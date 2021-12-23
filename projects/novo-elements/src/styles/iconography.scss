@@ -5,7 +5,8 @@ $icon-width: 1.7rem; // 24px Base background size
 $base-icon-size: 1.4rem; //18px Base font-size
 i {
   font-size: $base-icon-size;
-  display: inline-block;
+  display: inline-table;
+  flex: 0 0 auto;
   &[theme] {
     &[theme="contained"] {
       font-size: 0.8rem;

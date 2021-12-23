@@ -43,7 +43,7 @@
             *ngFor="let person of recipients | slice:0"
             (removed)="remove(person)">
             {{person.name}}
-            <novo-icon size="small" novoChipRemove>box-times-o</novo-icon>
+            <novo-icon novoChipRemove>box-times-o</novo-icon>
           </novo-chip>
           <input
             novoChipInput

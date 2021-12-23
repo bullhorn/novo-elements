@@ -2,7 +2,7 @@ import { Constructor } from './constructor';
 import { HasElementRef } from './types';
 
 /** Possible size palette values. */
-export type ElementSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | 'xxxl' | undefined;
+export type ElementSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | 'body' | undefined;
 
 /** @docs-private */
 export interface CanSize {

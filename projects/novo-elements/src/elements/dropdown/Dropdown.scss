@@ -11,10 +11,10 @@ novo-dropdown {
   novo-button {
     position: relative;
     z-index: 0;
-    i {
+    .novo-button-icon {
       font-size: 0.8em !important;
-      width: inherit !important;
-      height: inherit !important;
+      width: 1em !important;
+      height: 1em !important;
       margin: 0 0.5em;
     }
   }

@@ -1,5 +1,17 @@
 // NG2
-import { AfterContentInit, AfterViewInit, Component, EventEmitter, HostBinding, Input, Optional, Output, ViewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  EventEmitter,
+  HostBinding,
+  Input,
+  OnInit,
+  Optional,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { BooleanInput } from '../../utils';
 
@@ -83,8 +95,9 @@ export class NovoNavElement {
     </div>
     <span class="indicator"></span>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NovoTabElement implements AfterViewInit {
+export class NovoTabElement {
   @HostBinding('attr.role')
   public role = 'tab';
 
@@ -112,15 +125,14 @@ export class NovoTabElement implements AfterViewInit {
 
   nav: any;
 
-  constructor(nav: NovoNavElement) {
+  constructor(nav: NovoNavElement, private el: ElementRef, private cdr: ChangeDetectorRef) {
     this.nav = nav;
     this.nav.add(this);
-  }
-
-  ngAfterViewInit() {
-    const nodes = this.tablink.nativeElement.childNodes;
-    for (let i = 0; i < nodes.length; i++) {
-      if (nodes[i].nodeType !== Node.TEXT_NODE) this.onlyText = false;
+    const tablink = el.nativeElement.querySelector('.novo-tab-link');
+    if (tablink) {
+      for (let i = 0; i < tablink.childNodes.length; i++) {
+        if (tablink.childNodes[i].nodeType !== Node.TEXT_NODE) this.onlyText = false;
+      }
     }
   }
 
@@ -129,6 +141,7 @@ export class NovoTabElement implements AfterViewInit {
       this.activeChange.emit(true);
       this.nav.select(this);
     }
+    this.cdr.detectChanges();
   }
 }
 
@@ -176,8 +189,9 @@ export class NovoTabButtonElement {
     </div>
     <span class="indicator"></span>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NovoTabLinkElement implements AfterContentInit {
+export class NovoTabLinkElement implements OnInit {
   @HostBinding('attr.role')
   public role = 'tab';
   @Input()
@@ -189,16 +203,15 @@ export class NovoTabLinkElement implements AfterContentInit {
 
   nav: any;
 
-  constructor(nav: NovoNavElement, private router: Router, @Optional() private link?: RouterLink) {
+  constructor(nav: NovoNavElement, private router: Router, private cdr: ChangeDetectorRef, @Optional() private link?: RouterLink) {
     this.nav = nav;
     this.nav.add(this);
-  }
-
-  ngAfterContentInit(): void {
     if (this.isLinkActive(this.link)) {
       this.nav.select(this);
     }
   }
+
+  ngOnInit(): void {}
 
   select() {
     if (!this.disabled) {
@@ -207,11 +220,12 @@ export class NovoTabLinkElement implements AfterContentInit {
         const el = document.querySelector(`#${this.spy}`);
         el?.scrollIntoView(true);
       }
+      this.cdr.detectChanges();
     }
   }
 
   private isLinkActive(link: RouterLink) {
-    return link.urlTree ? this.router.isActive(link.urlTree, false) : false;
+    return link && link.urlTree ? this.router.isActive(link.urlTree, false) : false;
   }
 }
 

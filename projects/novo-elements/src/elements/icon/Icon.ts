@@ -1,4 +1,6 @@
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, HostBinding, Input } from '@angular/core';
+import { BooleanInput } from '../../utils/decorators/BooleanInput';
+import { TypographySize } from '../common/typography';
 
 @Component({
   selector: 'novo-icon',
@@ -10,22 +12,32 @@ import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, E
   `,
 })
 export class NovoIconComponent implements AfterViewInit {
-  @HostBinding('attr.raised')
+  @HostBinding('class.novo-icon-raised')
   @Input()
   public raised: boolean;
-  @HostBinding('attr.size')
-  @Input()
-  public size: string;
+
   @HostBinding('attr.theme')
   @Input()
   public theme: string;
-  @HostBinding('attr.color')
   @Input()
   public color: string;
   @HostBinding('attr.role')
   public role: string = 'img';
   @HostBinding('attr.aria-label')
   public ariaLabel: string;
+
+  @Input()
+  public size: TypographySize;
+
+  @HostBinding('class.text-size-smaller')
+  @Input()
+  @BooleanInput()
+  public smaller: boolean;
+
+  @HostBinding('class.text-size-larger')
+  @Input()
+  @BooleanInput()
+  public larger: boolean;
 
   @Input()
   set alt(value: string) {
@@ -43,6 +55,11 @@ export class NovoIconComponent implements AfterViewInit {
 
   get name(): string {
     return this.iconName;
+  }
+
+  @HostBinding('class')
+  get hb_classBinding(): string {
+    return [this.color ? `text-color-${this.color}` : null, this.size ? `text-size-${this.size}` : null].filter(Boolean).join(' ');
   }
 
   public iconName: string;

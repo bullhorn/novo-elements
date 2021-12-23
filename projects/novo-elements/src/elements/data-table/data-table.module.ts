@@ -8,6 +8,7 @@ import { NovoCommonModule } from '../common/common.module';
 import { NovoOptionModule } from '../common/option';
 import { NovoDatePickerModule } from '../date-picker/DatePicker.module';
 import { NovoDropdownModule } from '../dropdown/Dropdown.module';
+import { NovoFlexModule } from '../flex';
 import { NovoFormExtrasModule } from '../form/extras/FormExtras.module';
 import { NovoIconModule } from '../icon/Icon.module';
 import { NovoLoadingModule } from '../loading/Loading.module';
@@ -59,6 +60,7 @@ import { DataTableState } from './state/data-table-state.service';
     NovoTooltipModule,
     NovoOptionModule,
     NovoCheckboxModule,
+    NovoFlexModule,
   ],
   declarations: [
     DataTableInterpolatePipe,
