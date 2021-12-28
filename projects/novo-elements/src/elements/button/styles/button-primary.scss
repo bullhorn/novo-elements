@@ -7,6 +7,9 @@
     background: $positive;
     color: #fff;
     text-align: left;
+    i {
+      margin-left: 5px;
+    }
 
     &:hover,
     &:focus {
@@ -31,6 +34,16 @@
       }
       i {
         background: rgba(0, 0, 0, 0.05);
+      }
+    }
+    &[size="small"] {
+      i {
+        margin: 0 2px;
+      }
+    }
+    &[size="large"] {
+      i {
+        margin-left: 7px;
       }
     }
   }
