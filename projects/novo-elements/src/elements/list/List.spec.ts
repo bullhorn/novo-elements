@@ -87,7 +87,7 @@ describe('Elements: NovoItemHeaderElement', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [NovoItemHeaderElement],
+      imports: [NovoListModule],
     }).compileComponents();
     fixture = TestBed.createComponent(NovoItemHeaderElement);
     component = fixture.debugElement.componentInstance;
