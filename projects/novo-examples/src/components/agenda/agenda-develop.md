@@ -13,7 +13,9 @@ order: 2
 **Basic Usage**
 
 ```html
-<novo-avatar [source]="{name: 'Brian Kimball'}"></novo-avatar>
+  <novo-agenda-month [(viewDate)]="viewDate" [events]="events"
+    (dayClicked)="dayClicked($event.day.date)">
+  </novo-agenda-month>
 ```
 
 # Roadmap
@@ -24,32 +26,30 @@ order: 2
 
 # Changelog
 
-### 5.0.0
+### 6.0.0
 
-_added in this version_
+_renamed to Agenda in this version_
 
 # Components
 
-## NovoAgendaElement `novo-avatar`
+## NovoAgendaMonthViewElement `novo-agenda-month`
 
-All tabs must be incapsulated in a `novo-nav` container. The nav will control the context and active tab.
-
+Display `events` with a Month view calendar.
 ### Properties
 
-| Name   | Type     | Default  | Description                                                                             |
-| :----- | :------- | :------- | :-------------------------------------------------------------------------------------- |
-| theme  | _String_ | --       | Color theme used.                                                                       |
-| color  | _String_ | --       | Color theme used.                                                                       |
-| label  | _String_ | --       | refs to the `novo-tab-outlet` these navigation controls.                                |
-| source | _Object_ | --       | Object containing props used to generate avatar. `name`, `firstName`, or `profileImage` |
-| size   | _Size_   | 'medium' | Determines the height and widht of the avatar. (`small`, `medium` or `large`)           |
+<props-table component="NovoAgendaMonthViewElement"></props-table>
 
-## NovoAgendaStackElement `novo-avatar-stack`
+## NovoAgendaWeekViewElement `novo-agenda-month`
 
-An avatar stack displays a number of avatars grouped together in a row or list.
-
+Display `events` within a Week view calendar.
 ### Properties
 
-| Name  | Type     | Default | Description                                             |
-| :---- | :------- | :------ | :------------------------------------------------------ |
-| total | _Number_ | --      | Used to calculate `+N` icon based on ViewChildren added |
+<props-table component="NovoAgendaWeekViewElement"></props-table>
+
+
+## NovoAgendaDayViewElement `novo-agenda-month`
+
+Display `events` within single day view
+### Properties
+
+<props-table component="NovoAgendaDayViewElement"></props-table>

@@ -62,6 +62,19 @@ import {NOVO_ELEMENTS_LABELS_PROVIDERS} from 'novo-elements';
 bootstrap(MyApp [..NOVO_ELEMENTS_LABELS_PROVIDERS]);
 ```
 
+## Upgrading NovoElement
+
+### To Version 6
+
+> Note: Ensure your tsconfig.app.json `include` property references all the ts files the migrations should be run against.  You can add a glob then remove it to ensure your build system works the same as before.
+
+```
+npm install --save timezone-support@2 novo-design-tokens@0 angular-imask@6 imask@6
+npm install --save novo-elements@6
+ng update novo-elements --migrate-only --from=0.0.0 --to=6.0.0 --force --allow-dirty  
+```
+
+
 ## Contribute
 
 There are many ways to **[contribute](https://github.com/bullhorn/novo-elements/blob/master/CONTRIBUTING.md)** to our OpenSource projects.

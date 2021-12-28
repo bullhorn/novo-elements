@@ -25,5 +25,7 @@ class A {
 
     const c = this.s.open('test');
     c._onClosed.then(() => console.log('Closed'));
+
+    this.s.open('test')._onClosed(() => console.log('Closed'));
   }
 }

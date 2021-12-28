@@ -9,6 +9,10 @@ order: 4
 
 This type of toast notification takes a template, a style, and a location.
 
+## Toast Options
+
+<code-example example="toast-options"></code-example>
+
 ## Embedded Toast
 
 <code-example example="toast-usage"></code-example>

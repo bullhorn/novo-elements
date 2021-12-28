@@ -1,7 +1,7 @@
+import fs from 'fs';
 import { sync as glob } from 'glob';
-import * as fs from 'fs';
-import * as path from 'path';
-import * as ts from 'typescript';
+import path from 'path';
+import ts from 'typescript';
 
 interface ExampleMetadata {
   component: string;
@@ -37,10 +37,7 @@ function buildImportsTemplate(metadata: ExampleMetadata, prefix = 'import'): str
 
   // Create a relative path to the source file of the current example.
   // The relative path will be used inside of a TypeScript import statement.
-  const relativeSrcPath = path
-    .relative(examplesPath, metadata.sourcePath)
-    .replace(/\\/g, '/')
-    .replace('.ts', '');
+  const relativeSrcPath = path.relative(examplesPath, metadata.sourcePath).replace(/\\/g, '/').replace('.ts', '');
 
   return `${prefix} { ${components.join(',')} } from './${relativeSrcPath}';
 `;
@@ -106,9 +103,15 @@ import { NovoElementsModule } from 'novo-elements';
 import { ChomskyModule } from 'chomsky';
 
 // Examples
-${extractedMetadata.map((r) => buildImportsTemplate(r)).join('').trim()}
+${extractedMetadata
+  .map((r) => buildImportsTemplate(r))
+  .join('')
+  .trim()}
 
-${extractedMetadata.map((r) => buildImportsTemplate(r, 'export')).join('').trim()}
+${extractedMetadata
+  .map((r) => buildImportsTemplate(r, 'export'))
+  .join('')
+  .trim()}
 
 export interface LiveExample {
   title: string;
@@ -121,11 +124,17 @@ export interface LiveExample {
 }
 
 export const EXAMPLE_COMPONENTS: {[key: string]: LiveExample} = {
-  ${extractedMetadata.map((r) => buildExamplesTemplate(r)).join('').trim()}
+  ${extractedMetadata
+    .map((r) => buildExamplesTemplate(r))
+    .join('')
+    .trim()}
 };
 
 export const EXAMPLE_LIST = [
-  ${extractedMetadata.map((r) => buildListTemplate(r)).join('').trim()}
+  ${extractedMetadata
+    .map((r) => buildListTemplate(r))
+    .join('')
+    .trim()}
 ];
 
 @NgModule({

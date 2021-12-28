@@ -20,6 +20,7 @@
   text-overflow: clip;
   white-space: nowrap;
   overflow: hidden;
+  flex: 0 0 auto;
 
   .button-contents {
     line-height: inherit;
@@ -31,9 +32,6 @@
   i {
     font-size: inherit;
     line-height: inherit;
-    &::before {
-      vertical-align: top;
-    }
   }
 
   &[size="small"] {
@@ -43,9 +41,9 @@
   }
 
   &[size="large"] {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     padding: 0 $spacing-lg;
-    line-height: 4rem;
+    line-height: 3.6rem;
   }
 
   &:focus {
@@ -53,7 +51,7 @@
   }
 
   &[disabled],
-  .novo-button-disabled {
+  &.novo-button-disabled {
     opacity: 0.5;
     cursor: not-allowed;
     pointer-events: none;

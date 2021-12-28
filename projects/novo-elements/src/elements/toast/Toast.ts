@@ -7,6 +7,8 @@ import { Deferred, DeferredPromise } from '../../utils';
   selector: 'novo-toast',
   host: {
     '[class]': 'alertTheme',
+    '[class.growl]': 'appearance == "growl"',
+    '[class.banner]': 'appearance == "banner"',
     '[class.show]': 'show',
     '[class.animate]': 'animate',
     '[class.embedded]': 'embedded',
@@ -36,6 +38,8 @@ import { Deferred, DeferredPromise } from '../../utils';
   `,
 })
 export class NovoToastElement implements OnInit, OnChanges {
+  @Input()
+  appearance: 'growl' | 'banner' = 'banner';
   @Input()
   theme: string = 'danger';
   @Input()

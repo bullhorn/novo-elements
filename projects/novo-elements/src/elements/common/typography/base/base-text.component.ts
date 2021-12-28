@@ -13,21 +13,6 @@ export class NovoBaseTextElement {
   @Input()
   color: string;
 
-  @HostBinding('class.text-size-small')
-  get hb_isSizeSmall(): boolean {
-    return this.size === 'small';
-  }
-
-  @HostBinding('class.text-size-large')
-  get hb_isSizeLarge(): boolean {
-    return this.size === 'large';
-  }
-
-  @HostBinding('class.text-size-default')
-  get hb_isSizeDefault(): boolean {
-    return !['small', 'large'].includes(this.size);
-  }
-
   @HostBinding('class.text-weight-thin')
   get hb_isWeightThin(): boolean {
     return this.weight === 'thin';
@@ -50,7 +35,11 @@ export class NovoBaseTextElement {
 
   @HostBinding('class')
   get hb_classBinding(): string {
-    return [this.color ? `text-color-${this.color}` : null, this.lineLength ? `text-length-${this.lineLength}` : null]
+    return [
+      this.color ? `text-color-${this.color}` : null,
+      this.lineLength ? `text-length-${this.lineLength}` : null,
+      this.size ? `text-size-${this.size}` : null,
+    ]
       .filter(Boolean)
       .join(' ');
   }
@@ -84,6 +73,16 @@ export class NovoBaseTextElement {
   @Input()
   @BooleanInput()
   nowrap: boolean;
+
+  @HostBinding('class.text-size-smaller')
+  @Input()
+  @BooleanInput()
+  smaller: boolean;
+
+  @HostBinding('class.text-size-larger')
+  @Input()
+  @BooleanInput()
+  larger: boolean;
 
   constructor(protected element: ElementRef) {}
 

@@ -1,5 +1,5 @@
 // NG2
-import { Component, DoCheck, ElementRef, EventEmitter, Input, Output, QueryList, ViewChildren } from '@angular/core';
+import { ChangeDetectorRef, Component, DoCheck, ElementRef, EventEmitter, Input, Output, QueryList, ViewChildren } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormGroup } from '@angular/forms';
 // Vendor
 import * as dateFns from 'date-fns';
@@ -51,6 +51,7 @@ export enum NovoTableMode {
 @Component({
   selector: 'novo-table',
   host: {
+    class: 'novo-table',
     '[attr.theme]': 'theme',
     '[class.editing]': 'mode === NovoTableMode.EDIT',
     '[class.novo-table-loading]': 'loading',
@@ -553,7 +554,7 @@ export class NovoTableElement implements DoCheck {
     return this.tableForm.value;
   }
 
-  constructor(public labels: NovoLabelService, private formUtils: FormUtils, private builder: FormBuilder) {
+  constructor(public labels: NovoLabelService, private formUtils: FormUtils, private builder: FormBuilder, private cdr: ChangeDetectorRef) {
     notify('[Deprecated]: The table is deprecated. Please migrate to novo-data-tables!');
   }
 
@@ -849,6 +850,7 @@ export class NovoTableElement implements DoCheck {
       this.selectedPageCount++;
       this.showSelectAllMessage = this.selectedPageCount === 1 && this.selected.length !== this.dataProvider.total;
     }
+    this.cdr.detectChanges();
   }
 
   selectAll(value) {

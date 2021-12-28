@@ -3,7 +3,7 @@ import { OutputNameUpgradeData, TargetVersion, VersionChanges } from '@angular/c
 export const outputNames: VersionChanges<OutputNameUpgradeData> = {
   [TargetVersion.V6]: [
     {
-      pr: 'https://github.com/angular/components/pull/10163',
+      pr: 'https://github.com/bullhorn/novo-elements/pull/1241',
       changes: [
         {
           replace: 'change',

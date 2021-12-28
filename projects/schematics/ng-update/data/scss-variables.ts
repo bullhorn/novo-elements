@@ -22,7 +22,7 @@ export interface ScssVariableData {
 export const scssVariables: VersionChanges<ScssVariableData> = {
   [TargetVersion.V6]: [
     {
-      pr: 'https://github.com/angular/components/pull/10296',
+      pr: 'https://github.com/bullhorn/novo-elements/pull/1241',
       changes: [
         { replace: '$base-font-size', replaceWith: '$font-size-base' },
         { replace: '$base-font-family', replaceWith: '$font-family-body' },

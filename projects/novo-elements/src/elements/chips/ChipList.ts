@@ -303,7 +303,7 @@ export class NovoChipList
     this._selectable = coerceBooleanProperty(value);
 
     if (this.chips) {
-      this.chips.forEach((chip) => (chip.chipListSelectable = this._selectable));
+      this.chips.forEach((chip) => (chip._chipListSelectable = this._selectable));
     }
   }
   protected _selectable: boolean = true;
@@ -827,6 +827,7 @@ export class NovoChipList
       this.chips.forEach((chip) => {
         chip._chipListDisabled = this._disabled;
         chip._chipListMultiple = this.multiple;
+        chip._chipListSelectable = this.selectable;
       });
     }
   }

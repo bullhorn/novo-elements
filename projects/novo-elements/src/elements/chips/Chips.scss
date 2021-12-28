@@ -44,6 +44,7 @@ novo-entity-chips {
   .novo-chip-container {
     display: flex;
     flex-flow: row wrap;
+    gap: 0.4rem;
   }
   novo-picker {
     position: inherit;
@@ -76,9 +77,9 @@ novo-entity-chips {
     right: 0;
     font-size: 1.1em;
     color: $dark;
-    &.has-value {
-      bottom: 14px;
-    }
+    // &.has-value {
+    //   bottom: 14px;
+    // }
   }
 }
 

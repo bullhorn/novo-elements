@@ -150,11 +150,11 @@ popover-content {
     }
   }
   .popover-title {
-    @include novo-title-medium();
+    @include novo-title-text();
     margin-bottom: 1rem;
   }
   .popover-content {
-    @include novo-text-medium();
+    @include novo-body-text();
     .popover-content-text {
       white-space: pre-line;
     }

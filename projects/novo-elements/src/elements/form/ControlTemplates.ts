@@ -318,7 +318,7 @@ import { NovoTemplate } from '../common/novo-template/novo-template.directive';
             [button]="!!option.icon"
             [icon]="option.icon"
             [color]="option.color"
-            [theme]="!!option.icon && !option.label ? 'icon' : null"
+            [theme]="!!option.icon && !option.label ? 'icon' : 'secondary'"
             [attr.data-automation-id]="control.key + '-' + (option?.label || option?.value)"
           ></novo-radio>
         </novo-radio-group>
@@ -394,6 +394,7 @@ import { NovoTemplate } from '../common/novo-template/novo-template.directive';
           [textMaskEnabled]="control.textMaskEnabled"
           [placeholder]="control.placeholder"
           [weekStart]="control.weekStart"
+          [disabledDateMessage]="control.disabledDateMessage"
           (focusEvent)="methods.handleFocus($event)"
           (blurEvent)="methods.handleBlur($event)"
           (changeEvent)="methods.emitChange($event)"

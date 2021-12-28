@@ -6,9 +6,9 @@ novo-tip-well {
   > div {
     display: inline-block;
     border-radius: 0.25rem;
-    background-color: var(--background-bright, $off-white);
+    background-color: var(--background-main, $off-white);
     color: var(--text-main, $dark);
-    padding: $spacing-md;
+    padding: $spacing-lg;
     text-align: right;
     > div {
       display: flex;
@@ -20,7 +20,7 @@ novo-tip-well {
         color: #aaaaaa;
       }
       > p {
-        @include novo-text-medium();
+        @include novo-body-text();
         width: 100%;
         max-width: 40rem;
         padding: 0;

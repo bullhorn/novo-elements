@@ -27,8 +27,8 @@ novo-header {
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 0.8rem;
-    padding: 0.75rem;
+    padding: 0 $spacing-lg;
+    gap: $spacing-sm;
     box-sizing: border-box;
     // line-height: 4rem;
 
@@ -39,9 +39,10 @@ novo-header {
       display: flex;
       align-items: center;
       max-width: calc(100% - 40px);
+      gap: $spacing-sm;
 
       novo-icon {
-        margin-right: 0.6rem;
+        margin-right: 1.2rem;
       }
     }
     .header-titles {
@@ -49,8 +50,8 @@ novo-header {
       flex-direction: column;
       max-width: 100%;
       h1 {
-        font-size: 2em;
-        line-height: 1.5;
+        font-size: 1.8rem;
+        // line-height: 1.5;
         margin: 0;
         padding: 0;
         display: inline-block;
@@ -77,6 +78,7 @@ novo-header {
       display: flex;
       align-items: center;
       justify-content: flex-start;
+      gap: $spacing-sm;
     }
 
     novo-action {
@@ -86,6 +88,7 @@ novo-header {
   @include theme-backgrounds("theme") using ($color, $name) {
     & > section.primary {
       background: $color;
+      border-bottom: none;
     }
     novo-title {
       color: inherit;
@@ -113,8 +116,11 @@ novo-header {
         font-size: 1.2rem;
       }
     }
-    novo-icon > i {
-      font-size: 1.4rem;
+    novo-icon {
+      margin-right: 0.5rem !important;
+      > i {
+        font-size: 1.4rem;
+      }
     }
     button[theme][theme="icon"] {
       width: 30px !important;

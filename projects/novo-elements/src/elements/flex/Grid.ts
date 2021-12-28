@@ -25,10 +25,6 @@ export class NovoGridElement {
   @Input()
   justify: string = 'flex-start';
 
-  @HostBinding('style.gap')
-  @Input()
-  gap: string = 'nowrap';
-
   @Input()
   columns: string = '1';
 

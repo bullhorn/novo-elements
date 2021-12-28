@@ -13,12 +13,20 @@
     clear: both;
   }
 
-  * > :first-child:not([class^="analog"]) {
-    margin-top: 0 !important;
-  }
+  // * > :first-child:not([class^="analog"]) {
+  //   margin-top: 0 !important;
+  // }
 
   & > :last-child {
     margin-bottom: 0 !important;
+  }
+
+  .markdown-img {
+    background: lightgray;
+    min-height: 120px;
+    max-height: 360px;
+    display: flex;
+    justify-content: center;
   }
 
   .octicon {
@@ -349,16 +357,14 @@
   }
 
   dl dt {
-    padding: 0;
-    margin-top: 16px;
+    padding: 4px;
     font-size: 1em;
     font-style: italic;
     font-weight: 600;
   }
 
   dl dd {
-    padding: 0 16px;
-    margin-bottom: 16px;
+    padding: 4px;
   }
 
   & > table {

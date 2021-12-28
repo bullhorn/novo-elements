@@ -4,7 +4,7 @@
 $novo-menu-side-padding: 0.5rem;
 
 .novo-option {
-  @include novo-text-medium();
+  @include novo-body-text();
   position: relative;
   cursor: pointer;
   outline: none;

@@ -53,7 +53,7 @@ const NovoRadioGroupMixins: CanUpdateErrorStateCtor & typeof NovoRadioGroupBase 
   },
 })
 export class NovoRadioGroup extends NovoRadioGroupMixins implements NovoFieldControl<any>, ControlValueAccessor, AfterContentInit {
-  private _uniqueId: string = `ngx-radio-group-${++nextId}`;
+  private _uniqueId: string = `novo-radio-group-${++nextId}`;
   /** The aria-describedby attribute on the chip list for improved a11y. */
   _ariaDescribedby: string;
   /** Tab index for the chip list. */

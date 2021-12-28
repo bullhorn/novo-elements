@@ -1,4 +1,4 @@
-novo-list {
+.novo-list {
   display: flex;
   &.vertical-list {
     flex-direction: column;
@@ -8,19 +8,20 @@ novo-list {
   }
 
   a[list-item],
-  button[list-item] {
+  button[list-item],
+  .novo-list-item {
     outline: none;
     &:hover {
       background: rgba($positive, 0.2);
     }
     &.active {
-      background: darken($positive, 20%);
+      background: rgba($positive, 0.3);
     }
   }
   @include theme-colors() using ($color, $name) {
     $contrast: getContrastColor($name);
     &[theme="#{$name}"] {
-      novo-list-item,
+      .novo-list-item,
       a[list-item],
       button[list-item] {
         background: $color;
@@ -49,7 +50,7 @@ novo-list {
   }
 }
 
-novo-list-item,
+.novo-list-item,
 a[list-item],
 button[list-item] {
   border-bottom: 1px solid var(--border, #f4f4f4);
@@ -64,12 +65,13 @@ button[list-item] {
     flex-direction: column;
     flex: 1 0 auto;
   }
-  item-header {
-    display: flex;
-    align-items: center;
-    item-avatar {
+  .novo-item-header {
+    .novo-item-header-container {
+      display: flex;
+      align-items: center;
+    }
+    .novo-item-avatar {
       margin-right: 0.5em;
-      font-size: 20px;
       i {
         @include theme-colors() using ($color, $name) {
           &.#{$name} {
@@ -78,7 +80,7 @@ button[list-item] {
         }
       }
     }
-    item-title {
+    .novo-item-title {
       flex: 2 0 0;
       h6 {
         margin: 0;
@@ -86,15 +88,15 @@ button[list-item] {
         padding: 0;
       }
     }
-    item-header-end {
+    .novo-item-header-end {
       flex: 1 0 0;
       text-align: right;
     }
   }
-  .avatar item-content {
+  .avatar .novo-item-content {
     margin-left: 2.7em;
   }
-  item-content {
+  .novo-item-content {
     display: flex;
     margin-left: 0.2em;
     > * {
@@ -114,7 +116,7 @@ button[list-item] {
       flex-direction: row;
     }
   }
-  item-end {
+  .novo-item-end {
     align-self: center;
     flex: 1;
     text-align: right;

@@ -36,7 +36,6 @@ import {
   NovoOptgroup,
   NovoOption,
   NovoOptionSelectionChange,
-  NOVO_OPTION_PARENT_COMPONENT,
   _countGroupLabelsBeforeOption,
   _getOptionScrollPosition,
 } from '../common';
@@ -71,7 +70,7 @@ const NovoDropdowMixins: HasOverlayCtor & CanDisableCtor & HasTabIndexCtor & typ
       </div>
     </novo-overlay-template>
   `,
-  providers: [{ provide: NOVO_OPTION_PARENT_COMPONENT, useExisting: NovoDropdownElement }],
+  // providers: [{ provide: NOVO_OPTION_PARENT_COMPONENT, useExisting: NovoDropdownElement }],
   host: {
     '[attr.tabIndex]': 'disabled ? -1 : 0',
   },

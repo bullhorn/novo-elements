@@ -64,6 +64,7 @@ export interface NovoAddressConfig {
         (focus)="isFocused($event, 'address1')"
         (blur)="isBlurred($event, 'address1')"
         (input)="onInput($event, 'address1')"
+        [disabled]="disabled.address1"
       />
     </span>
     <span
@@ -92,6 +93,7 @@ export interface NovoAddressConfig {
         (focus)="isFocused($event, 'address2')"
         (blur)="isBlurred($event, 'address2')"
         (input)="onInput($event, 'address2')"
+        [disabled]="disabled.address2"
       />
     </span>
     <span
@@ -115,6 +117,7 @@ export interface NovoAddressConfig {
         (focus)="isFocused($event, 'city')"
         (blur)="isBlurred($event, 'city')"
         (input)="onInput($event, 'city')"
+        [disabled]="disabled.city"
       />
     </span>
     <span
@@ -156,6 +159,7 @@ export interface NovoAddressConfig {
         (focus)="isFocused($event, 'zip')"
         (blur)="isBlurred($event, 'zip')"
         (input)="onInput($event, 'zip')"
+        [disabled]="disabled.zip"
       />
     </span>
     <span

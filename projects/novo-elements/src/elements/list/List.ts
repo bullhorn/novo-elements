@@ -1,9 +1,10 @@
 // NG2
-import { Component, ContentChild, ElementRef, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, ContentChild, ElementRef, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'novo-list',
   host: {
+    class: 'novo-list',
     '[class.vertical-list]': 'direction === "vertical"',
     '[class.horizontal-list]': 'direction === "horizontal"',
     '[attr.theme]': 'theme',
@@ -20,51 +21,56 @@ export class NovoListElement {
 }
 
 @Component({
-  selector: 'item-avatar',
-  template: ` <i *ngIf="iconClass" [ngClass]="classMap" theme="contained"></i> `,
+  selector: 'item-avatar, novo-item-avatar',
+  template: ` <novo-icon *ngIf="icon" [color]="color || icon">{{ icon }}</novo-icon> `,
+  host: {
+    class: 'novo-item-avatar',
+  },
 })
-export class NovoItemAvatarElement implements OnChanges, OnInit {
+export class NovoItemAvatarElement {
   @Input()
   icon: string;
-
-  iconClass: string;
-  classMap: any;
-
-  ngOnChanges(changes?: SimpleChanges) {
-    this.iconClass = this.icon ? `bhi-${this.icon}` : null;
-    this.classMap = [this.iconClass, this.icon];
-  }
-
-  ngOnInit() {
-    this.ngOnChanges();
-  }
+  @Input()
+  color: string;
 }
 
 @Component({
-  selector: 'item-title',
-  template: ` <h6><ng-content></ng-content></h6> `,
+  selector: 'item-title, novo-item-title',
+  template: `<ng-content></ng-content>`,
+  host: {
+    class: 'novo-item-title',
+  },
 })
 export class NovoItemTitleElement {}
 
 @Component({
-  selector: 'item-header',
+  selector: 'item-header, novo-item-header',
   template: `
-    <ng-content select="item-avatar"></ng-content>
-    <ng-content select="item-title"></ng-content>
-    <ng-content select="item-header-end"></ng-content>
+    <novo-title class="novo-item-header-container" smaller>
+      <ng-content select="item-avatar, novo-item-avatar"></ng-content>
+      <ng-content select="item-title, novo-item-title"></ng-content>
+      <ng-content select="item-header-end, novo-item-header-end"></ng-content>
+    </novo-title>
   `,
+  host: {
+    class: 'novo-item-header',
+  },
 })
 export class NovoItemHeaderElement {}
 
 @Component({
-  selector: 'item-header-end',
+  selector: 'item-header-end, novo-item-header-end',
   template: ` <ng-content></ng-content> `,
+  host: {
+    class: 'novo-item-header-end',
+  },
 })
 export class NovoItemDateElement {}
 
 @Component({
-  selector: 'item-content',
+  selector: 'item-content, novo-item-content',
   host: {
+    class: 'novo-item-content',
     '[class.vertical-list]': 'direction === "vertical"',
     '[class.horizontal-list]': 'direction === "horizontal"',
   },
@@ -76,8 +82,11 @@ export class NovoItemContentElement {
 }
 
 @Component({
-  selector: 'item-end',
+  selector: 'item-end, novo-item-end',
   template: ` <ng-content></ng-content> `,
+  host: {
+    class: 'novo-item-end',
+  },
 })
 export class NovoItemEndElement {}
 
@@ -85,12 +94,15 @@ export class NovoItemEndElement {}
   selector: 'novo-list-item, a[list-item], button[list-item]',
   template: `
     <div class="list-item" [ngClass]="{ avatar: avatar }" *ngIf="_content || _header">
-      <ng-content select="item-header"></ng-content>
-      <ng-content select="item-content"></ng-content>
+      <ng-content select="item-header, novo-item-header"></ng-content>
+      <ng-content select="item-content, novo-item-content"></ng-content>
     </div>
     <ng-content></ng-content>
-    <ng-content select="item-end"></ng-content>
+    <ng-content select="item-end, novo-item-end"></ng-content>
   `,
+  host: {
+    class: 'novo-list-item',
+  },
 })
 export class NovoListItemElement implements OnInit {
   avatar: boolean = false;

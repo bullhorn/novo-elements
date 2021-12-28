@@ -1,7 +1,7 @@
 <div [class.novo-step-icon]="touched"
   [class.novo-step-icon-not-touched]="!touched">
   <ng-container *ngIf="icon">
-    <novo-icon size="small" raised="true" [theme]="theme">{{icon}}</novo-icon>
+    <novo-icon raised="true" [theme]="theme">{{icon}}</novo-icon>
   </ng-container>
   <ng-container *ngIf="!icon">
     <span class="novo-step-number">{{index + 1}}</span>

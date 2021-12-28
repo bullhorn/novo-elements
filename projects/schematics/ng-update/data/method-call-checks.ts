@@ -11,7 +11,7 @@ import { MethodCallUpgradeData, TargetVersion, VersionChanges } from '@angular/c
 export const methodCallChecks: VersionChanges<MethodCallUpgradeData> = {
   [TargetVersion.V6]: [
     {
-      pr: 'https://github.com/angular/components/pull/20499',
+      pr: 'https://github.com/bullhorn/novo-elements/pull/1241',
       changes: [
         {
           className: 'MatTabNav',

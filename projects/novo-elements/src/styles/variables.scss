@@ -220,7 +220,7 @@ $all-colors: map-merge($dark-colors, $light-colors);
 // Typography
 // --------------------------------------------------
 $base-font-size: 13px;
-$base-font-family: "Roboto", sans-serif;
+$base-font-family: "Montserrat", sans-serif;
 $base-font-color: $dark;
 $base-line-height: 1rem;
 $alt-font-family: Georgia, "Times New Roman", Times, serif;
@@ -298,60 +298,4 @@ $easing-curves: (
   $duration: map-deep-get($easing-curves, $curve-name, "duration");
   $curve: map-deep-get($easing-curves, $curve-name, "curve");
   transition: #{$target $duration $curve};
-}
-
-// Animations
-// -------------------------
-@keyframes rotate {
-  0% {
-    transform: rotateZ(0deg);
-  }
-
-  75% {
-    transform: rotateZ(200deg);
-  }
-
-  100% {
-    transform: rotateZ(180deg);
-  }
-}
-
-@keyframes half-rotate {
-  0% {
-    transform: rotateZ(45deg);
-  }
-
-  75% {
-    transform: rotateZ(100deg);
-  }
-
-  100% {
-    transform: rotateZ(90deg);
-  }
-}
-
-@keyframes rotateBack {
-  0% {
-    transform: rotateZ(90deg);
-  }
-
-  100% {
-    transform: rotateZ(0deg);
-  }
-}
-
-@keyframes show {
-  0% {
-    opacity: 0;
-    transform: translateX(-100%);
-  }
-
-  75% {
-    transform: translateX(0px);
-  }
-
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
 }

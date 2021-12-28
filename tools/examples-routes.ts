@@ -1,19 +1,18 @@
-import * as frontmatter from '@github-docs/frontmatter';
-import * as fs from 'fs';
+import frontmatter from '@github-docs/frontmatter';
+import fs from 'fs';
 import { sync as glob } from 'glob';
-import * as HLJS from 'highlight.js';
-import { HLJSApi } from 'highlight.js';
-import * as Markdown from 'markdown-it';
-import * as markdownItAttrs from 'markdown-it-attrs';
-import * as Container from 'markdown-it-container';
-import * as taskLists from 'markdown-it-task-lists';
-import * as path from 'path';
-import * as TypeDoc from 'typedoc';
+import HLJS, { HLJSApi } from 'highlight.js';
+import Markdown from 'markdown-it';
+import markdownItAttrs from 'markdown-it-attrs';
+import Container from 'markdown-it-container';
+import taskLists from 'markdown-it-task-lists';
+import path from 'path';
+import { Application, TSConfigReader } from 'typedoc';
 import { BullhornFlavoredMarkdownPlugin } from './markdown/bfm-blocks';
 import { DoListPlugin } from './markdown/dos-list';
 
 // Typedefs are not valid
-const hljs = (HLJS as unknown) as HLJSApi;
+const hljs = HLJS as unknown as HLJSApi;
 
 interface PageMetadata {
   id: string;
@@ -163,18 +162,25 @@ function generatePageRoute(metadata: PageMetadata[]): string {
   const sections = aggregatePages(metadata);
   const chooseLayout = (section: string, page: string, comps: PageMetadata[]) => {
     const pathRoot = convertToDashCase(section);
-    const subs = `[${comps.map((it) => `{ title: '${it.title}', route: './${it.route}'}`).join()}]`;
-    return comps.length > 1
+    const route = `${pathRoot}/${page}`.replace('src/', '');
+    const tabs = comps.filter((it) => it.order !== -1);
+    const subs = `[${tabs.map((it) => `{ title: '${it.title}', route: './${it.route}'}`).join()}]`;
+    const hasDesc = comps.filter((it) => it.order === -1);
+    let desc = 'null';
+    if (hasDesc.length) {
+      desc = `${hasDesc[0].name}Page`;
+    }
+    return tabs.length > 1
       ? `  {
-    path: '${pathRoot}/${page}',
+    path: '${route}',
     component: TabsLayout,
-    data: { title: '${convertToSentence(page)}', section: '${pathRoot}', pages: ${subs} },
+    data: { title: '${convertToSentence(page)}', section: '${pathRoot}', pages: ${subs}, description: ${desc} },
     children: [
-${comps.map((comp) => `      { path: '${comp.route}', component: ${comp.name}Page }`).join(',\n')},
-      { path: '', redirectTo: '/${pathRoot}/${page}/${comps[0].route}', pathMatch: 'full' },
+${tabs.map((comp) => `      { path: '${comp.route}', component: ${comp.name}Page }`).join(',\n')},
+      { path: '', redirectTo: '/${pathRoot}/${page}/${tabs[0].route}', pathMatch: 'full' },
     ]
   }`
-      : `  { path: '${pathRoot}/${page}', component: ${comps[0].name}Page, data: { title: '${comps[0].title}', section: '${comps[0].section}' } }`;
+      : `  { path: '${route}', component: ${tabs[0].name}Page, data: { title: '${tabs[0].title}', section: '${tabs[0].section}' } }`;
   };
 
   return Object.entries(sections)
@@ -308,10 +314,10 @@ function parsePageMetadata(filePath: string, sourceContent: string): PageMetadat
 }
 
 async function generateApiDocs() {
-  const app = new TypeDoc.Application();
+  const app = new Application();
 
   // If you want TypeDoc to load tsconfig.json / typedoc.json files
-  app.options.addReader(new TypeDoc.TSConfigReader());
+  app.options.addReader(new TSConfigReader());
   // app.options.addReader(new TypeDoc.TypeDocReader());
 
   app.bootstrap({

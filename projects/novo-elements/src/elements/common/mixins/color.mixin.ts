@@ -1,5 +1,5 @@
-import { ElementRef } from '@angular/core';
 import { Constructor } from './constructor';
+import { HasElementRef } from './types';
 
 /** @docs-private */
 export interface CanColor {
@@ -12,11 +12,6 @@ export interface CanColor {
 
 /** @docs-private */
 export type CanColorCtor = Constructor<CanColor>;
-
-/** @docs-private */
-export interface HasElementRef {
-  _elementRef: ElementRef;
-}
 
 /** Possible color palette values. */
 export type ThemePalette = 'primary' | 'accent' | 'warn' | undefined;

@@ -97,7 +97,7 @@ let nextId = 0;
     { provide: NOVO_OPTION_PARENT_COMPONENT, useExisting: NovoSelectElement },
   ],
   template: `
-    <div #dropdownElement (click)="togglePanel(); (false)" tabIndex="{{ disabled ? -1 : 0 }}" type="button">
+    <div class="novo-select-trigger" #dropdownElement (click)="togglePanel(); (false)" tabIndex="{{ disabled ? -1 : 0 }}" type="button">
       <span class="novo-select-placeholder" *ngIf="empty">{{ placeholder }}</span>
       <span class="novo-select-display-value" *ngIf="!empty">{{ displayValue }}</span>
       <i class="bhi-collapse"></i>
@@ -283,6 +283,7 @@ export class NovoSelectElement
   }
   set multiple(value: boolean) {
     this._multiple = coerceBooleanProperty(value);
+    this.position = 'above-below';
   }
   private _multiple: boolean = false;
 

@@ -1,0 +1,5 @@
+:host {
+  display: grid;
+  grid-template-rows: 200px 1fr;
+  gap: 2rem;
+}

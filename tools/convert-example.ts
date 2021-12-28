@@ -1,6 +1,6 @@
+import fs from 'fs';
 import { sync as glob } from 'glob';
-import * as fs from 'fs';
-import * as path from 'path';
+import path from 'path';
 
 const srcPath = path.join('./demo/', 'app/pages/elements');
 /** Path to find the examples */
@@ -71,7 +71,7 @@ function convertToDashCase(name: string): string {
  */
 function convertToCamelCase(name: string): string {
   return name
-    .replace(/(\b[a-z]+\b)/g, function(a, b) {
+    .replace(/(\b[a-z]+\b)/g, function (a, b) {
       return b[0].toUpperCase() + b.slice(1);
     })
     .replace(/-/g, '');
@@ -83,7 +83,7 @@ function convertToCamelCase(name: string): string {
  */
 function convertToSentence(name: string): string {
   return name
-    .replace(/(\b[a-z]+\b)/g, function(a, b) {
+    .replace(/(\b[a-z]+\b)/g, function (a, b) {
       return b[0].toUpperCase() + b.slice(1);
     })
     .replace(/-/g, ' ');

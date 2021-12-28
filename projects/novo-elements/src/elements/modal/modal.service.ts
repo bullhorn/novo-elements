@@ -29,7 +29,7 @@ export class NovoModalService {
 
   constructor(private injector: Injector, private overlay: Overlay) {}
 
-  open(component, params = {}) {
+  open<T extends Record<string, any>>(component, params: Partial<T> = {}) {
     // Override default configuration
     const modalConfig = DEFAULT_CONFIG;
 
@@ -37,7 +37,7 @@ export class NovoModalService {
     const overlayRef = this.createOverlay(modalConfig);
 
     // Instantiate remote control
-    const modalRef = new NovoModalRef(component, params, overlayRef);
+    const modalRef = new NovoModalRef<typeof params>(component, params, overlayRef);
 
     const overlayComponent = this.attachModalContainer(NovoModalContainerComponent, overlayRef, modalConfig, modalRef);
 

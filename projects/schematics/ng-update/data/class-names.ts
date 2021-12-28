@@ -3,8 +3,12 @@ import { ClassNameUpgradeData, TargetVersion, VersionChanges } from '@angular/cd
 export const classNames: VersionChanges<ClassNameUpgradeData> = {
   [TargetVersion.V6]: [
     {
-      pr: 'https://github.com/angular/components/pull/10291',
-      changes: [],
+      pr: 'https://github.com/bullhorn/novo-elements/pull/1241',
+      changes: [
+        { replace: 'NovoCalendarMonthViewElement', replaceWith: 'NovoAgendaMonthViewElement' },
+        { replace: 'NovoCalendarWeekViewElement', replaceWith: 'NovoAgendaWeekViewElement' },
+        { replace: 'NovoCalendarDayViewElement', replaceWith: 'NovoAgendaDayViewElement' },
+      ],
     },
   ],
 };

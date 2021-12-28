@@ -2,7 +2,7 @@
 
 ## Certified Pixel\-Perfect
 
-<novo-grid columns="1fr 200px">
+<novo-grid columns="1fr 200px" gap="2rem">
   <novo-text>Icons are used to represent an action or concept through the most simplistic imagery possible. Icons give additional context to written material, allowing the user to quickly comprehend any given concept. The icons are designed on a highly specific grid to ensure maximum clarity even at a small size. Their design is friendly, human, and bold.</novo-text>
   <img src="assets/images/IconographyPageIcon.svg" width="64px">
 </novo-grid>

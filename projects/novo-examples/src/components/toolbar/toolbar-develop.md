@@ -44,5 +44,14 @@ The `novo-toolbar` component is just a container, look at patterns to determine 
 
 ### Properties
 
-<props-table component="NovoToolbarElement"></props-table>
+<props-table component="NovoToolbar"></props-table>
+
+
+## NovoToolbarRowElement `novo-toolbar-row`
+
+The `novo-toolbar-row` component is also just a container to help create multi-row toolbars, look at examples to determine correct usage.
+
+### Properties
+
+<props-table component="NovoToolbarRow"></props-table>
 

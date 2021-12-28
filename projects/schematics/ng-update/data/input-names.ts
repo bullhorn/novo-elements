@@ -3,7 +3,7 @@ import { InputNameUpgradeData, TargetVersion, VersionChanges } from '@angular/cd
 export const inputNames: VersionChanges<InputNameUpgradeData> = {
   [TargetVersion.V6]: [
     {
-      pr: 'https://github.com/angular/components/pull/10218',
+      pr: 'https://github.com/bullhorn/novo-elements/pull/1241',
       changes: [
         {
           replace: 'align',
@@ -14,7 +14,7 @@ export const inputNames: VersionChanges<InputNameUpgradeData> = {
     },
 
     {
-      pr: 'https://github.com/angular/components/pull/10279',
+      pr: 'https://github.com/bullhorn/novo-elements/pull/1241',
       changes: [
         {
           replace: 'align',
@@ -25,7 +25,7 @@ export const inputNames: VersionChanges<InputNameUpgradeData> = {
     },
 
     {
-      pr: 'https://github.com/angular/components/pull/10294',
+      pr: 'https://github.com/bullhorn/novo-elements/pull/1241',
       changes: [
         { replace: 'dividerColor', replaceWith: 'color', limitedTo: { elements: ['mat-form-field'] } },
         {
@@ -37,7 +37,7 @@ export const inputNames: VersionChanges<InputNameUpgradeData> = {
     },
 
     {
-      pr: 'https://github.com/angular/components/pull/10309',
+      pr: 'https://github.com/bullhorn/novo-elements/pull/1241',
       changes: [
         {
           replace: 'mat-dynamic-height',
@@ -48,12 +48,12 @@ export const inputNames: VersionChanges<InputNameUpgradeData> = {
     },
 
     {
-      pr: 'https://github.com/angular/components/pull/10342',
+      pr: 'https://github.com/bullhorn/novo-elements/pull/1241',
       changes: [{ replace: 'align', replaceWith: 'labelPosition', limitedTo: { elements: ['mat-checkbox'] } }],
     },
 
     {
-      pr: 'https://github.com/angular/components/pull/10344',
+      pr: 'https://github.com/bullhorn/novo-elements/pull/1241',
       changes: [
         {
           replace: 'tooltip-position',
@@ -64,7 +64,7 @@ export const inputNames: VersionChanges<InputNameUpgradeData> = {
     },
 
     {
-      pr: 'https://github.com/angular/components/pull/10373',
+      pr: 'https://github.com/bullhorn/novo-elements/pull/1241',
       changes: [
         { replace: 'thumb-label', replaceWith: 'thumbLabel', limitedTo: { elements: ['mat-slider'] } },
         {

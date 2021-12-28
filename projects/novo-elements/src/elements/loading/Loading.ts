@@ -140,7 +140,7 @@ export class NovoIsLoadingDirective {
     }
   }
   createViews(templates: QueryList<TemplateRef<any>>) {
-    return templates && templates.map((v) => this.viewContainer.createEmbeddedView(v));
+    return templates && templates.map((v, i) => this.viewContainer.createEmbeddedView(v, null, i));
   }
   destroyViews(views: EmbeddedViewRef<any>[]) {
     if (views) {

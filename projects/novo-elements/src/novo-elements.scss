@@ -102,7 +102,7 @@
 
   .bgc-#{$name} {
     background: $color;
-    // color: getContrastColor($name); // this overwrites deeper than we want
+    color: getContrastColor($name); // this overwrites deeper than we want
   }
   .bgc-#{$name}-striped {
     & > *:nth-child(odd) {
@@ -169,5 +169,61 @@
   100% {
     opacity: 1;
     transform: scale(1);
+  }
+}
+
+// Animations
+// -------------------------
+@keyframes rotate {
+  0% {
+    transform: rotateZ(0deg);
+  }
+
+  75% {
+    transform: rotateZ(200deg);
+  }
+
+  100% {
+    transform: rotateZ(180deg);
+  }
+}
+
+@keyframes half-rotate {
+  0% {
+    transform: rotateZ(45deg);
+  }
+
+  75% {
+    transform: rotateZ(100deg);
+  }
+
+  100% {
+    transform: rotateZ(90deg);
+  }
+}
+
+@keyframes rotateBack {
+  0% {
+    transform: rotateZ(90deg);
+  }
+
+  100% {
+    transform: rotateZ(0deg);
+  }
+}
+
+@keyframes show {
+  0% {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+
+  75% {
+    transform: translateX(0px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
   }
 }

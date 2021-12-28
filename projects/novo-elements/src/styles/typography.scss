@@ -1,11 +1,3 @@
-// HTML Root
-// --------------------------------------------------
-html {
-  font-family: $font-family-base;
-  font-size: $font-size-base;
-  color: $font-color-base;
-}
-
 // Headers
 // --------------------------------------------------
 h1 {
@@ -24,7 +16,7 @@ h2 {
 
 h3 {
   font-size: 1.75rem;
-  font-weight: 300;
+  font-weight: 500;
   margin: 0;
   padding: 0.6rem 0 0.4rem;
 }
@@ -61,15 +53,15 @@ p {
   padding: 0.25rem 0 0.55rem;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-strong {
-  color: var(--text-bright);
-}
+// h1,
+// h2,
+// h3,
+// h4,
+// h5,
+// h6,
+// strong {
+//   color: var(--text-bright);
+// }
 
 q::before {
   content: none;

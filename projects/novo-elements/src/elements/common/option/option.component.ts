@@ -272,7 +272,7 @@ export class NovoOptionBase implements FocusableOption, AfterViewChecked, OnDest
     '[attr.aria-selected]': '_getAriaSelected()',
     '[attr.aria-disabled]': 'disabled.toString()',
     '[class.novo-active]': 'active',
-    '[class.novo-selected]': 'selected',
+    '[class.novo-selected]': 'selectable && selected',
     '[class.novo-option-multiple]': 'multiple',
     '[class.novo-option-disabled]': 'disabled',
     '(click)': '_selectViaInteraction()',

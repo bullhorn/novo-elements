@@ -2,8 +2,8 @@
 
 :root {
   --background-body: #{$color-white};
-  --background-main: #{$color-silver}; //efefef
-  --background-bright: #{$color-bright}; //f7f7f7
+  --background-main: #{$color-bright}; //efefef
+  --background-bright: #{$color-white}; //f7f7f7
   --background-muted: #{$color-sand}; //f7f7f7
   --selection: #{$color-ocean}; //#9e9e9e;
   --text-main: #{$color-dark}; //#363636;
@@ -21,4 +21,10 @@
   --form-text: #000;
   --variable: #39a33c;
   --highlight: #ff0;
+
+  // Share
+  --font-size-caption: #{$font-size-xs};
+  --font-size-label: #{$font-size-md};
+  --font-size-text: #{$font-size-body};
+  --font-size-title: #{$font-size-xl};
 }

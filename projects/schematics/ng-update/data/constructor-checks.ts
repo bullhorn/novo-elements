@@ -8,23 +8,23 @@ import { ConstructorChecksUpgradeData, TargetVersion, VersionChanges } from '@an
 export const constructorChecks: VersionChanges<ConstructorChecksUpgradeData> = {
   [TargetVersion.V6]: [
     {
-      pr: 'https://github.com/angular/components/pull/9190',
+      pr: 'https://github.com/bullhorn/novo-elements/pull/1241',
       changes: ['NativeDateAdapter'],
     },
     {
-      pr: 'https://github.com/angular/components/pull/10319',
+      pr: 'https://github.com/bullhorn/novo-elements/pull/1241',
       changes: ['MatAutocomplete'],
     },
     {
-      pr: 'https://github.com/angular/components/pull/10344',
+      pr: 'https://github.com/bullhorn/novo-elements/pull/1241',
       changes: ['MatTooltip'],
     },
     {
-      pr: 'https://github.com/angular/components/pull/10389',
+      pr: 'https://github.com/bullhorn/novo-elements/pull/1241',
       changes: ['MatIconRegistry'],
     },
     {
-      pr: 'https://github.com/angular/components/pull/9775',
+      pr: 'https://github.com/bullhorn/novo-elements/pull/1241',
       changes: ['MatCalendar'],
     },
   ],

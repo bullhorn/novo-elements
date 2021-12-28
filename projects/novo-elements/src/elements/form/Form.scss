@@ -2,8 +2,8 @@
 @import "./extras/file/FileInput";
 @import "./ControlGroup";
 .novo-form-control-label {
-  color: $dark;
-  font-size: 0.9rem;
+  color: var(--text-main);
+  font-size: 1.1rem;
   flex: 1;
   max-width: 130px;
   min-width: 130px;
@@ -35,30 +35,11 @@ novo-form {
     width: 100%;
     form {
       width: 100%;
-      novo-fieldset-header {
-        background: $off-white;
-        box-sizing: content-box;
-        padding: 1em 1em 1em 3em;
-        margin-bottom: 2em;
-        display: flex;
-        margin-left: -1.5em;
-        margin-right: -1.5em;
-        i {
-          margin-right: 10px;
-        }
-        h6 {
-          font-weight: 400;
-          padding: 0;
-          display: flex;
-          > i {
-            display: flex;
-            margin-top: -3px; // Icon itself is not centered in the SVG
-          }
-        }
-        &.hidden {
-          display: none;
-        }
+
+      .novo-fieldset-header {
+        padding: 1rem 1rem 1rem 3rem;
       }
+
       div.novo-form-row,
       div.novo-control-group-control,
       td.novo-form-row {
@@ -129,10 +110,10 @@ novo-form {
           }
           &.disabled {
             input {
-              -webkit-text-fill-color: $dark;
+              -webkit-text-fill-color: var(--text-main);
             }
             input:not(.picker-input):not(.tiles-input) {
-              &::-webkit-input-placeholder {
+              &::placeholder {
                 color: lighten($dark, 30%) !important;
               }
               border-bottom-style: dashed !important;
@@ -142,7 +123,7 @@ novo-form {
             }
             textarea {
               border-bottom-style: dashed !important;
-              -webkit-text-fill-color: $dark;
+              -webkit-text-fill-color: var(--text-main);
             }
             div[type="button"] {
               border-bottom-style: dashed !important;
@@ -380,7 +361,7 @@ novo-form {
                       box-shadow: none;
                       box-sizing: content-box;
                       transition: all 300ms;
-                      color: #26282b;
+                      color: var(--text-main);
                       &:hover {
                         border-bottom: 1px solid lighten($dark, 15%);
                       }
@@ -459,7 +440,6 @@ novo-form {
                       }
                     }
                     > div.novo-control-input-container {
-                      font-size: 1rem;
                       flex: 1;
                       position: relative;
                       > i.bhi-clock,
@@ -469,11 +449,10 @@ novo-form {
                         position: absolute;
                         right: 0;
                         top: 0;
-                        font-size: 1.2em;
+                        font-size: 1.2rem;
                       }
                       > i.bhi-times {
                         cursor: pointer;
-                        font-size: 1.1em;
                       }
                       > novo-time-picker,
                       > novo-date-picker,
@@ -645,7 +624,7 @@ novo-form {
             }
             &.disabled {
               input:not(.picker-input):not(.tiles-input) {
-                &::-webkit-input-placeholder {
+                &::placeholder {
                   color: lighten($dark, 30%) !important;
                 }
                 border-bottom-style: dashed !important;
@@ -743,20 +722,20 @@ novo-form {
                 }
                 > label.novo-control-label {
                   bottom: 20px;
-                  color: $dark;
-                  font-size: 0.9em;
+                  color: var(--text-main);
+                  font-size: 1.1rem;
                   font-weight: 500;
                   text-transform: uppercase;
                   position: absolute;
                   left: 22px;
                   pointer-events: none;
                   z-index: z(default);
-                  width: 100%;
+                  width: calc(100% - 22px);
                   display: block;
                   cursor: text;
                   white-space: nowrap;
                   text-overflow: ellipsis;
-                  overflow-x: hidden;
+                  overflow: hidden;
                   transform: translateY(0);
                   transform-origin: bottom left;
                   transition: transform 400ms cubic-bezier(0.25, 0.8, 0.25, 1), scale 400ms cubic-bezier(0.25, 0.8, 0.25, 1),
@@ -764,7 +743,7 @@ novo-form {
                   &.novo-control-empty {
                     display: block;
                     cursor: text;
-                    top: 7px;
+                    top: 2px;
                     bottom: 0;
                   }
                   &.novo-control-extra-spacing,
@@ -840,5 +819,21 @@ control-prompt-modal {
     label {
       margin-right: 10px;
     }
+  }
+}
+
+.novo-fieldset-header {
+  background: $off-white;
+  box-sizing: content-box;
+  padding: 1rem 1rem 1rem 2rem;
+  margin-bottom: 2rem;
+  display: flex;
+  margin-left: -1.5rem;
+  margin-right: -1.5rem;
+  i {
+    margin-right: 10px;
+  }
+  &.hidden {
+    display: none;
   }
 }

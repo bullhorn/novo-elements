@@ -3,7 +3,7 @@ import { ElementSelectorUpgradeData, TargetVersion, VersionChanges } from '@angu
 export const elementSelectors: VersionChanges<ElementSelectorUpgradeData> = {
   [TargetVersion.V6]: [
     {
-      pr: 'https://github.com/angular/components/pull/10297',
+      pr: 'https://github.com/bullhorn/novo-elements/pull/1241',
       changes: [
         // { replace: 'button', replaceWith: 'novo-button' },
         // { replace: 'header', replaceWith: 'novo-header' },
@@ -13,6 +13,13 @@ export const elementSelectors: VersionChanges<ElementSelectorUpgradeData> = {
         { replace: 'novo-calendar-week', replaceWith: 'novo-agenda-week' },
         { replace: 'novo-calendar-month', replaceWith: 'novo-agenda-month' },
         { replace: 'novo-calendar-date-change', replaceWith: 'novo-agenda-date-change' },
+        { replace: 'list-item', replaceWith: 'novo-list-item' },
+        { replace: 'item-header', replaceWith: 'novo-item-header' },
+        { replace: 'item-title', replaceWith: 'novo-item-title' },
+        { replace: 'item-header-end', replaceWith: 'novo-item-header-end' },
+        { replace: 'item-end', replaceWith: 'novo-item-end' },
+        { replace: 'item-avatar', replaceWith: 'novo-item-avatar' },
+        { replace: 'item-content', replaceWith: 'novo-item-content' },
       ],
     },
   ],

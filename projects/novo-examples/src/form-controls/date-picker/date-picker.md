@@ -41,3 +41,7 @@ Time pickers come in 12 hour or 24 hour style.
 ##### Different Locale
 
 TBD
+
+##### Date Picker Limits
+
+<code-example example="date-picker-limits"></code-example>

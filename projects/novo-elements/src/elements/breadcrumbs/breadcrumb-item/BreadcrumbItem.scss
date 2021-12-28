@@ -2,7 +2,7 @@
 @import "../../common/typography/text.mixins";
 
 .novo-breadcrumb-font-style {
-  @include novo-text-medium();
+  @include novo-body-text();
 }
 
 :host {

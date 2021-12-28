@@ -44,7 +44,7 @@
         cursor: pointer;
       }
       h3 {
-        @include novo-title-medium();
+        @include novo-title-text();
         padding: 0;
         white-space: nowrap;
         overflow: hidden;

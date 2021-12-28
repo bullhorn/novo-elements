@@ -28,3 +28,25 @@
   <novo-hint>value is: {{date}}</novo-hint>
 
 </novo-field>
+
+<novo-fieldset-header icon="section" title="Section Header"></novo-fieldset-header>
+
+<novo-field>
+  <novo-label>
+    <novo-flex justify="space-between">
+      <span>Effective On</span>
+      <novo-chip size="sm" accent="success">current</novo-chip>
+    </novo-flex>
+  </novo-label>
+  <novo-select value="08/01/2021">
+    <novo-option value="08/01/2021">
+      <novo-text>08/01/2021</novo-text>
+      <novo-chip accent="success">current</novo-chip>
+    </novo-option>
+    <novo-option value="09/01/2021">
+      <novo-text>09/01/2021</novo-text>
+    </novo-option>
+  </novo-select>
+  <novo-icon novoPrefix>previous</novo-icon>
+  <novo-icon novoSuffix>next</novo-icon>
+</novo-field>
