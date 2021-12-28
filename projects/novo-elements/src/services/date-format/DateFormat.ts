@@ -47,7 +47,7 @@ export class DateFormatService {
     return this.labels.timeFormatPlaceholderAM;
   }
 
-  parseDateString(dateString: string): [Date, string] {
+  parseDateString(dateString: string): [Date, string, boolean] {
     let dateFormat: string = this.labels.dateFormatString();
     const dateFormatRegex = /(\w+)[\/|\.|\-](\w+)[\/|\.|\-](\w+)/gi;
     const dateValueRegex = /(\d+)[\/|\.|\-](\d+)[\/|\.|\-](\d+)/gi;
@@ -57,6 +57,7 @@ export class DateFormatService {
     let month: number;
     let day: number;
     let date: Date = new Date();
+    let isInvalidDate = true;
     if (Helpers.isEmpty(dateFormat)) {
       // Default to MM/dd/yyyy
       dateFormat = 'mm/dd/yyyy';
@@ -77,6 +78,7 @@ export class DateFormatService {
       }
       if (month >= 0 && month <= 11 && year > 1900 && day > 0 && day <= 31) {
         date = new Date(year, month, day);
+        isInvalidDate = false;
       }
     } else if (dateFormatTokens && dateFormatTokens.length === 4 && dateString.length >= 1) {
       const twoTokens = /\d{1,4}(\/|\.|\-)(\d{1,2})/.exec(dateString);
@@ -89,7 +91,7 @@ export class DateFormatService {
         dateString = `${dateString}${delimiter[1]}`;
       }
     }
-    return [date, dateString];
+    return [date, dateString, isInvalidDate];
   }
 
   parseTimeString(timeString: string, militaryTime: boolean): [Date, string] {
@@ -143,7 +145,7 @@ export class DateFormatService {
     return [value, timeString];
   }
 
-  parseString(dateTimeString: string, militaryTime: boolean, type: string): [Date, string] {
+  parseString(dateTimeString: string, militaryTime: boolean, type: string): [Date, string, boolean?] {
     switch (type) {
       case 'datetime':
         const str = dateTimeString.replace(/-/g, '/');

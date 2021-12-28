@@ -145,7 +145,7 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
 
   _handleKeydown(event: KeyboardEvent): void {
     if ((event.keyCode === ESCAPE || event.keyCode === ENTER || event.keyCode === TAB) && this.panelOpen) {
-      this._handleEvent(event, true);
+      this._handleEvent(event, true, true);
       this.closePanel();
       event.stopPropagation();
     }
@@ -153,7 +153,7 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
 
   _handleInput(event: KeyboardEvent): void {
     if (document.activeElement === event.target) {
-      this._handleEvent(event, false);
+      this._handleEvent(event, false, false);
     }
   }
 
@@ -166,23 +166,26 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
     this.focusEvent.emit(event);
   }
 
-  _handleEvent(event: Event, blur: boolean): void {
+  _handleEvent(event: Event, blur: boolean, checkInvalidDate: boolean): void {
     const value = (event.target as HTMLInputElement).value;
     if (value === '') {
       this.clearValue();
       this.closePanel();
     } else {
-      this.formatDate(value, blur);
+      this.formatDate(value, blur, checkInvalidDate);
       this.openPanel();
     }
   }
 
-  protected formatDate(value: string, blur: boolean) {
+  protected formatDate(value: string, blur: boolean, checkInvalidDate?: boolean) {
     try {
-      const [dateTimeValue, formatted] = this.dateFormatService.parseString(value, false, 'date');
-      if (!isNaN(dateTimeValue.getUTCDate())) {
+      const [dateTimeValue, formatted, isInvalidDate] = this.dateFormatService.parseString(value, false, 'date');
+      if (!isNaN(dateTimeValue.getUTCDate()) && !isInvalidDate) {
         const dt = new Date(dateTimeValue);
         this.dispatchOnChange(dt, blur);
+      } else if (checkInvalidDate && isInvalidDate) {
+        this.clearValue();
+        this.closePanel();
       } else {
         this.dispatchOnChange(null, blur);
       }
