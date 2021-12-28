@@ -24,18 +24,6 @@ describe('Elements: EntityPickerResult', () => {
       imports: [
         NovoPickerModule,
       ],
-      declarations: [
-        EntityPickerResult,
-        NovoLoadingElement,
-        NovoListElement,
-        NovoListItemElement,
-        NovoItemAvatarElement,
-        NovoItemContentElement,
-        NovoItemHeaderElement,
-        NovoItemTitleElement,
-        NovoItemEndElement,
-      ],
-      providers: [{ provide: NovoLabelService, useClass: NovoLabelService }],
     }).compileComponents();
     fixture = TestBed.createComponent(EntityPickerResult);
     component = fixture.debugElement.componentInstance;
