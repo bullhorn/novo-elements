@@ -15,7 +15,7 @@ import { NovoLoadingElement } from '../../../loading/Loading';
 import { EntityPickerResult } from './EntityPickerResults';
 import { NovoPickerModule } from '../../Picker.module';
 
-xdescribe('Elements: EntityPickerResult', () => {
+describe('Elements: EntityPickerResult', () => {
   let fixture;
   let component;
 
