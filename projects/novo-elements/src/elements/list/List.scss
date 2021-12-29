@@ -75,7 +75,7 @@ button[list-item] {
       i {
         @include theme-colors() using ($color, $name) {
           &.#{$name} {
-            background: $color;
+            color: $color;
           }
         }
       }
