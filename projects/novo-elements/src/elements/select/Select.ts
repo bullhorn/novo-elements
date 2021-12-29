@@ -330,10 +330,10 @@ export class NovoSelectElement
     if (ngControl) {
       ngControl.valueAccessor = this;
     }
+    this._selectionModel = new SelectionModel<NovoOption>(this.multiple);
   }
 
   ngOnInit() {
-    this._selectionModel = new SelectionModel<NovoOption>(this.multiple);
     this.stateChanges.next();
     this._initLegacyOptions();
     this.focusMonitor.monitor(this.dropdown.nativeElement).subscribe((origin) =>
@@ -350,6 +350,10 @@ export class NovoSelectElement
     // the parent form field know to run change detection when the disabled state changes.
     if (changes?.disabled) {
       this.stateChanges.next();
+    }
+    if (changes?.multiple) {
+      // TODO: copy selection over??
+      this._selectionModel = new SelectionModel<NovoOption>(this.multiple);
     }
     this._initLegacyOptions();
   }
@@ -414,7 +418,7 @@ export class NovoSelectElement
     if (this.multiple && value) {
       value.forEach((currentValue: any) => this._selectValue(currentValue));
       this._sortValues();
-    } else {
+    } else if (this._keyManager) {
       const correspondingOption = this._selectValue(value);
       // Shift focus to the active item. Note that we shouldn't do this in multiple
       // mode, because we don't know what option the user interacted with last.

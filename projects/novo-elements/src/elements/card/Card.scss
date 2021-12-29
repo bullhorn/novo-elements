@@ -43,13 +43,18 @@
         margin-right: 0.3em;
         cursor: pointer;
       }
+      h1,
+      h2,
       h3 {
-        @include novo-title-text();
+        font-size: $font-size-lg;
+        font-weight: 500;
+        line-height: 1.5;
+        color: var(--text-main, #3d464d);
+        width: 100%;
         padding: 0;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-        width: 100%;
         i {
           font-size: 1.2em;
           &.bhi-info {

@@ -63,7 +63,7 @@ export class HorizontalExample {
 
   public updateInitialValue() {
     this.initValue = [
-      { text: 'TEXT 111', percentage: 100, checkbox: false, test4: 'TEST 111' },
+      { text: 'hello', percentage: 100, checkbox: false, test4: 'TEST 111' },
       { text: 'TEXT 222', percentage: 5, checkbox: false, test4: 'TEST 222' },
       { text: 'TEXT 333', percentage: 60, checkbox: true, test4: 'TEST 333' },
     ];

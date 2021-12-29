@@ -45,9 +45,6 @@ novo-table {
             margin-right: 0;
           }
         }
-        > button {
-          height: 39px;
-        }
       }
     }
   }
@@ -115,11 +112,11 @@ novo-table {
         position: relative;
         text-align: left;
         padding: $table-condensed-cell-padding;
-        button {
-          padding: 5px !important;
-          width: inherit !important;
-          height: inherit !important;
-        }
+        // button {
+        //   padding: 5px !important;
+        //   width: inherit !important;
+        //   height: inherit !important;
+        // }
         .th-title {
           padding: 5px 5px 5px 0;
         }

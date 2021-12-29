@@ -39,7 +39,8 @@ novo-pagination {
     .page {
       display: inline-block;
       padding: 0 10px;
-      line-height: 30px;
+      line-height: 2.4rem;
+      font-size: var(--font-size-text);
       border-radius: 2px;
       text-align: center;
       list-style-type: none;
