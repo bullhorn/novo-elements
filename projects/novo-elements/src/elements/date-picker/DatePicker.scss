@@ -36,6 +36,12 @@ novo-date-picker-input {
       border-bottom: 1px solid $ocean;
     }
   }
+  span.error-text {
+    color: $negative;
+    padding-top: 10px;
+    flex: 1;
+    display: flex;
+  }
   > i.bhi-clock,
   > i.bhi-search,
   > i.bhi-times,
