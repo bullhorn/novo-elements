@@ -11,6 +11,7 @@ import {
   NovoListElement,
   NovoListItemElement,
 } from './List';
+import { NovoListModule } from './List.module';
 
 describe('Elements: NovoListElement', () => {
   let fixture;
@@ -52,7 +53,7 @@ describe('Elements: NovoItemAvatarElement', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [NovoItemAvatarElement],
+      imports: [NovoListModule],
     }).compileComponents();
     fixture = TestBed.createComponent(NovoItemAvatarElement);
     component = fixture.debugElement.componentInstance;
@@ -86,7 +87,7 @@ describe('Elements: NovoItemHeaderElement', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [NovoItemHeaderElement],
+      imports: [NovoListModule],
     }).compileComponents();
     fixture = TestBed.createComponent(NovoItemHeaderElement);
     component = fixture.debugElement.componentInstance;

@@ -13,6 +13,7 @@ import {
 import { NovoLoadingElement } from '../../../loading/Loading';
 // APP
 import { EntityPickerResult } from './EntityPickerResults';
+import { NovoPickerModule } from '../../Picker.module';
 
 describe('Elements: EntityPickerResult', () => {
   let fixture;
@@ -20,16 +21,8 @@ describe('Elements: EntityPickerResult', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [
-        EntityPickerResult,
-        NovoLoadingElement,
-        NovoListElement,
-        NovoListItemElement,
-        NovoItemAvatarElement,
-        NovoItemContentElement,
-        NovoItemHeaderElement,
-        NovoItemTitleElement,
-        NovoItemEndElement,
+      imports: [
+        NovoPickerModule,
       ],
       providers: [{ provide: NovoLabelService, useClass: NovoLabelService }],
     }).compileComponents();

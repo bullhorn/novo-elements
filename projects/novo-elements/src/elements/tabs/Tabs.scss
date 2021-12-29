@@ -95,6 +95,7 @@ novo-nav {
       }
     }
   }
+  &[theme="neutral"], // temporarily added back for backwards compatibility
   &[theme="color"] {
     background: rgba(0, 0, 0, 0.2);
     novo-tab,

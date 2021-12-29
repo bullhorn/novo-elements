@@ -16,7 +16,8 @@
     font-size: inherit;
   }
   &.text-size-body {
-    font-size: $font-size-body;
+    // font-size: $font-size-body;
+    font-size: 1.2rem; // testing out smaller font size
   }
   &.text-size-xs {
     font-size: $font-size-xs;

@@ -72,7 +72,7 @@ describe('Test Localization', () => {
   it('should set decimal separator based on locale correctly', () => {
     const component = new NovoControlElement(mockElement, null, null, null, null, null, 'fr-FR');
     expect(component.locale).toBe('fr-FR');
-    expect(component.decimalSeparator).toBe('.');
+    expect(component.decimalSeparator).toBe(',');
   });
 });
 
