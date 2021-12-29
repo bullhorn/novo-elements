@@ -25,6 +25,7 @@
   // Share
   --font-size-caption: #{$font-size-xs};
   --font-size-label: #{$font-size-md};
-  --font-size-text: #{$font-size-body};
+  // --font-size-text: #{$font-size-body};
+  --font-size-text: 1.2rem; // testing out smaller font size
   --font-size-title: #{$font-size-xl};
 }

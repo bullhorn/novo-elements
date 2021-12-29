@@ -10,7 +10,8 @@ html {
 
 body {
   font-family: $font-family-body;
-  font-size: $font-size-body;
+  // font-size: $font-size-body;
+  font-size: 1.2rem; // testing out smaller font size
   line-height: 1.4;
   word-wrap: break-word;
   color: var(--text-main);
