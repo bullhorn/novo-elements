@@ -229,7 +229,7 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
     } else {
       dateFormat = dateFormat.toLowerCase();
     }
-    this.invalidDateErrorMessage = `Invalid date field entered. Date format of ${dateFormat} is required.`
+    this.invalidDateErrorMessage = `Invalid date field entered. Date format of ${dateFormat} is required.`;
   }
 
   public dispatchOnChange(newValue?: any, blur: boolean = false, skip: boolean = false) {
