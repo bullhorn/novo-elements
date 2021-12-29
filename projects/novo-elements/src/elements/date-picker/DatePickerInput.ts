@@ -316,4 +316,3 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
     return !Helpers.isEmpty(this.value);
   }
 }
-
