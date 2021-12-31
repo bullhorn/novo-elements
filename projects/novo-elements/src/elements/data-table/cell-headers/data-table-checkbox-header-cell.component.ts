@@ -1,5 +1,5 @@
 import { CdkColumnDef, CdkHeaderCell } from '@angular/cdk/table';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, HostBinding, Input, OnDestroy, Renderer2 } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, EventEmitter, HostBinding, Input, OnDestroy, Output, Renderer2 } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { NovoToastService } from '../../toast/ToastService';
 import { NovoDataTable } from '../data-table.component';
@@ -23,6 +23,8 @@ export class NovoDataTableCheckboxHeaderCell<T> extends CdkHeaderCell implements
   public role = 'columnheader';
   @Input()
   public maxSelected: number = undefined;
+  @Input()
+  public canSelectAll: boolean = false;
 
   public checked: boolean = false;
   private selectionSubscription: Subscription;
@@ -48,21 +50,33 @@ export class NovoDataTableCheckboxHeaderCell<T> extends CdkHeaderCell implements
 
     this.selectionSubscription = this.dataTable.state.selectionSource.subscribe(() => {
       this.checked = this.dataTable.allCurrentRowsSelected();
+      if (this.canSelectAll) {
+        this.selectAllChanged();
+      }
       this.ref.markForCheck();
     });
     this.paginationSubscription = this.dataTable.state.paginationSource.subscribe((event: { isPageSizeChange: boolean }) => {
       if (event.isPageSizeChange) {
         this.checked = false;
+        if (this.canSelectAll) {
+          this.selectAllChanged();
+        }
         this.dataTable.selectRows(false);
         this.dataTable.state.checkRetainment('pageSize');
         this.dataTable.state.reset(false, true);
       } else {
         this.checked = this.dataTable.allCurrentRowsSelected();
+        if (this.canSelectAll) {
+          this.selectAllChanged();
+        }
       }
       this.ref.markForCheck();
     });
     this.resetSubscription = this.dataTable.state.resetSource.subscribe(() => {
       this.checked = false;
+      if (this.canSelectAll) {
+        this.selectAllChanged();
+      }
       this.ref.markForCheck();
     });
   }
@@ -90,5 +104,16 @@ export class NovoDataTableCheckboxHeaderCell<T> extends CdkHeaderCell implements
     } else {
       this.dataTable.selectRows(!this.checked);
     }
+    if (this.canSelectAll) {
+      this.selectAllChanged();
+    }
+  }
+
+  public selectAllChanged(): void {
+    const allSelectedEvent = {
+      allSelected: this.checked,
+      selectedCount: this.dataTable?.state?.selected?.length,
+    };
+    this.dataTable.allSelected.emit(allSelectedEvent);
   }
 }
