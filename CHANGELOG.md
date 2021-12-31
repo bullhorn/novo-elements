@@ -1,3 +1,12 @@
+# [5.12.0](https://github.com/bullhorn/novo-elements/compare/v5.11.1...v5.12.0) (2021-12-31)
+
+
+### Features
+
+* **NovoDataTable:** Add ability to communicate when all rows are sel… ([#1246](https://github.com/bullhorn/novo-elements/issues/1246)) ([bc0317e](https://github.com/bullhorn/novo-elements/commit/bc0317e36a12ef870f676ab054567ea269c73537))
+
+
+
 # Changelog
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
