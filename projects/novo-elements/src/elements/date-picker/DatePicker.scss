@@ -12,7 +12,7 @@ input[type='calendar'] {
 novo-date-picker-input {
   flex: 1;
   position: relative;
-  display: block;
+  display: block !important;
   &.disabled {
     pointer-events: none;
     opacity: 1;
@@ -35,6 +35,12 @@ novo-date-picker-input {
     &:focus {
       border-bottom: 1px solid $ocean;
     }
+  }
+  span.error-text {
+    color: $negative;
+    padding-top: 10px;
+    flex: 1;
+    display: flex;
   }
   > i.bhi-clock,
   > i.bhi-search,

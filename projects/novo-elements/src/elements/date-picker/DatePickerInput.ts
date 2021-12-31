@@ -47,6 +47,7 @@ const DATE_VALUE_ACCESSOR = {
       data-automation-id="date-input"
       [disabled]="disabled"
     />
+    <span class="error-text" *ngIf="showInvalidDateError">{{invalidDateErrorMessage}}</span>
     <i *ngIf="!hasValue" (click)="openPanel()" class="bhi-calendar"></i>
     <i *ngIf="hasValue" (click)="clearValue()" class="bhi-times"></i>
     <novo-overlay-template [parent]="element" position="above-below">
@@ -65,7 +66,10 @@ const DATE_VALUE_ACCESSOR = {
 export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor {
   public value: any;
   public formattedValue: string = '';
+  public showInvalidDateError: boolean;
+  public invalidDateErrorMessage: string = '';
   private userDefinedFormat: boolean;
+  private isInvalidDate: boolean;
 
   /** View -> model callback called when value changes */
   _onChange: (value: any) => void = () => {};
@@ -127,6 +131,7 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
     } else {
       this.maskOptions = { mask: false };
     }
+    this.setupInvalidDateErrorMessage();
   }
 
   /** BEGIN: Convenient Panel Methods. */
@@ -158,10 +163,12 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
   }
 
   _handleBlur(event: FocusEvent): void {
+    this.handleInvalidDate();
     this.blurEvent.emit(event);
   }
 
   _handleFocus(event: FocusEvent): void {
+    this.showInvalidDateError = false;
     this.openPanel();
     this.focusEvent.emit(event);
   }
@@ -179,7 +186,8 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
 
   protected formatDate(value: string, blur: boolean) {
     try {
-      const [dateTimeValue, formatted] = this.dateFormatService.parseString(value, false, 'date');
+      const [dateTimeValue, formatted, isInvalidDate] = this.dateFormatService.parseString(value, false, 'date');
+      this.isInvalidDate = isInvalidDate;
       if (!isNaN(dateTimeValue.getUTCDate())) {
         const dt = new Date(dateTimeValue);
         this.dispatchOnChange(dt, blur);
@@ -203,6 +211,25 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
 
   setDisabledState(disabled: boolean): void {
     this.disabled = disabled;
+  }
+
+  handleInvalidDate(): void {
+    if (this.isInvalidDate && this.value) {
+      this.showInvalidDateError = true;
+      this.clearValue();
+      this.closePanel();
+    }
+  }
+
+  setupInvalidDateErrorMessage(): void {
+    let dateFormat: string = this.labels.dateFormatString();
+    if (Helpers.isEmpty(dateFormat)) {
+      // Default to mm/dd/yyyy
+      dateFormat = 'mm/dd/yyyy';
+    } else {
+      dateFormat = dateFormat.toLowerCase();
+    }
+    this.invalidDateErrorMessage = `Invalid date field entered. Date format of ${dateFormat} is required.`;
   }
 
   public dispatchOnChange(newValue?: any, blur: boolean = false, skip: boolean = false) {
