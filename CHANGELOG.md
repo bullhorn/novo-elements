@@ -1,3 +1,9 @@
+# Changelog
+
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+### [5.12.1](https://github.com/bullhorn/novo-elements/compare/v5.12.0...v5.12.1) (2021-12-31)
+
 # [5.12.0](https://github.com/bullhorn/novo-elements/compare/v5.11.1...v5.12.0) (2021-12-31)
 
 
