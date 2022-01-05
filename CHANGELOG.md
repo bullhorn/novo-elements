@@ -2,6 +2,35 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.13.0](https://github.com/bullhorn/novo-elements/compare/v5.12.1...v5.13.0) (2021-12-31)
+
+
+### Features
+
+* **datePickerInput:** Clear invalid date field when tabbing out ([#1247](https://github.com/bullhorn/novo-elements/issues/1247)) ([7870521](https://github.com/bullhorn/novo-elements/commit/787052169b3db77cbc882af64c09b6185d1cf559))
+
+### [5.12.1](https://github.com/bullhorn/novo-elements/compare/v5.12.0...v5.12.1) (2021-12-31)
+
+# [5.12.0](https://github.com/bullhorn/novo-elements/compare/v5.11.1...v5.12.0) (2021-12-31)
+
+
+### Features
+
+* **NovoDataTable:** Add ability to communicate when all rows are sel… ([#1246](https://github.com/bullhorn/novo-elements/issues/1246)) ([bc0317e](https://github.com/bullhorn/novo-elements/commit/bc0317e36a12ef870f676ab054567ea269c73537))
+
+
+
+# Changelog
+
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+### [5.11.1](https://github.com/bullhorn/novo-elements/compare/v5.11.0...v5.11.1) (2021-12-10)
+
+
+### Bug Fixes
+
+* **Select:** Allow highlighting of select element ([#1245](https://github.com/bullhorn/novo-elements/issues/1245)) ([7583c6d](https://github.com/bullhorn/novo-elements/commit/7583c6d1ee00b09ca9e4217ef4eba5fa7c809644))
+
 ## [5.11.0](https://github.com/bullhorn/novo-elements/compare/v5.10.0...v5.11.0) (2021-12-09)
 
 
