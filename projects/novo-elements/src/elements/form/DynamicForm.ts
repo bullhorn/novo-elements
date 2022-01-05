@@ -29,7 +29,7 @@ import { NovoFormGroup } from './NovoFormGroup';
     class: 'novo-fieldset-header',
   },
 })
-export class NovoFieldsetHeaderElement {
+export class NovoFieldsetHeaderElement implements OnInit {
   @Input()
   title: string;
   @Input()
