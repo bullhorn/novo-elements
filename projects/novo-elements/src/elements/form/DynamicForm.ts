@@ -21,7 +21,7 @@ import { NovoFormGroup } from './NovoFormGroup';
   selector: 'novo-fieldset-header',
   template: `
     <novo-title smaller>
-      <novo-icon>{{ icon.replace('bhi-', '') }}</novo-icon
+      <novo-icon>{{ icon }}</novo-icon
       >{{ title }}
     </novo-title>
   `,
@@ -34,6 +34,10 @@ export class NovoFieldsetHeaderElement {
   title: string;
   @Input()
   icon: string = 'section';
+
+  public ngOnInit(): void {
+    this.icon = this.icon.replace('bhi-', '');
+  }
 }
 
 @Component({
