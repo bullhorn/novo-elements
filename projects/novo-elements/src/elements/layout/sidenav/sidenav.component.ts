@@ -24,7 +24,7 @@ import {
 import { Key } from 'projects/novo-elements/src/utils';
 import { fromEvent, Observable, Subject } from 'rxjs';
 import { distinctUntilChanged, filter, map, mapTo, take, takeUntil } from 'rxjs/operators';
-import type { NovoLayoutContainer } from '../container/layout-container.component';
+// import type { NovoLayoutContainer } from '../container/layout-container.component';
 import { NovoSidenavMode, NovoSidenavToggleResult, NOVO_LAYOUT_CONTAINER } from '../layout.constants';
 import { novoSidenavAnimations } from './sidenav.animations';
 
@@ -233,7 +233,7 @@ export class NovoSidenavComponent implements AfterContentInit, AfterContentCheck
     private _platform: Platform,
     private _ngZone: NgZone,
     @Optional() @Inject(DOCUMENT) private _doc: any,
-    @Optional() @Inject(NOVO_LAYOUT_CONTAINER) public _container?: NovoLayoutContainer,
+    @Optional() @Inject(NOVO_LAYOUT_CONTAINER) public _container?: any, // NovoLayoutContainer
   ) {
     this.openedChange.subscribe((opened: boolean) => {
       if (opened) {

@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs';
 import { Key } from '../../utils';
 import { NovoOption } from '../common';
 import { MenuItemDirective } from './menu-item.directive';
-import type { MenuComponent } from './menu.component';
+// import type { MenuComponent } from './menu.component';
 import { CloseLeafMenuEvent, IMenuClickEvent } from './menu.service';
 import { ILinkConfig } from './menu.types';
 
@@ -25,7 +25,7 @@ export class MenuContentComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input() public menuItems: MenuItemDirective[] = [];
   @Input() public item: any;
   @Input() public event: MouseEvent | KeyboardEvent;
-  @Input() public menu: MenuComponent;
+  @Input() public menu: any; // MenuComponent
   @Input() public parentMenu: MenuContentComponent;
   @Input() public menuClass: string;
   @Input() public overlay: OverlayRef;
