@@ -9,7 +9,7 @@ import {
   NgZone,
   ViewEncapsulation,
 } from '@angular/core';
-import type { NovoLayoutContainer } from '../container/layout-container.component';
+// import type { NovoLayoutContainer } from '../container/layout-container.component';
 import { NOVO_LAYOUT_CONTAINER } from '../layout.constants';
 
 @Component({
@@ -27,7 +27,7 @@ import { NOVO_LAYOUT_CONTAINER } from '../layout.constants';
 export class NovoLayoutContent extends CdkScrollable implements AfterContentInit {
   constructor(
     private _changeDetectorRef: ChangeDetectorRef,
-    @Inject(NOVO_LAYOUT_CONTAINER) public _container: NovoLayoutContainer,
+    @Inject(NOVO_LAYOUT_CONTAINER) public _container: any, // NovoLayoutContainer
     elementRef: ElementRef<HTMLElement>,
     scrollDispatcher: ScrollDispatcher,
     ngZone: NgZone,

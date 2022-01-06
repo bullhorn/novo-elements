@@ -37,7 +37,19 @@ novo-form {
       width: 100%;
 
       .novo-fieldset-header {
-        padding: 1rem 1rem 1rem 3rem;
+        background: $off-white;
+        box-sizing: content-box;
+        padding: 1rem 1rem 1rem 2rem;
+        margin-bottom: 2rem;
+        display: flex;
+        margin-left: -1.5rem;
+        margin-right: -1.5rem;
+        i {
+          margin: 1px 10px 1px 6px;
+        }
+        &.hidden {
+          display: none;
+        }
       }
 
       div.novo-form-row,
@@ -376,7 +388,8 @@ novo-form {
                       }
                     }
                     &.highlighted {
-                      input {
+                      input,
+                      novo-select {
                         background-color: lighten($ocean, 35%) !important;
                       }
                     }
@@ -819,21 +832,5 @@ control-prompt-modal {
     label {
       margin-right: 10px;
     }
-  }
-}
-
-.novo-fieldset-header {
-  background: $off-white;
-  box-sizing: content-box;
-  padding: 1rem 1rem 1rem 2rem;
-  margin-bottom: 2rem;
-  display: flex;
-  margin-left: -1.5rem;
-  margin-right: -1.5rem;
-  i {
-    margin-right: 10px;
-  }
-  &.hidden {
-    display: none;
   }
 }

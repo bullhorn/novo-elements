@@ -12,7 +12,7 @@ import {
   Output,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import type { NovoProgressElement } from './Progress';
+// import type { NovoProgressElement } from './Progress';
 import { NOVO_PROGRESS_CONTAINER, ProgressAppearance } from './ProgressConstants';
 
 // make radio-button-group ids unique
@@ -111,7 +111,7 @@ export class NovoProgressBarElement implements ControlValueAccessor, OnInit {
     this._disabled = !!value;
   }
 
-  constructor(private ref: ChangeDetectorRef, @Optional() @Inject(NOVO_PROGRESS_CONTAINER) public progress: NovoProgressElement) {
+  constructor(private ref: ChangeDetectorRef, @Optional() @Inject(NOVO_PROGRESS_CONTAINER) public progress: any) { // NovoProgressElement
     this.progress = progress;
   }
 

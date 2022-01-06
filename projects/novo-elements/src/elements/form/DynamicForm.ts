@@ -21,7 +21,7 @@ import { NovoFormGroup } from './NovoFormGroup';
   selector: 'novo-fieldset-header',
   template: `
     <novo-title smaller>
-      <novo-icon>{{ icon.replace('bhi-', '') }}</novo-icon
+      <novo-icon>{{ icon?.replace('bhi-', '') }}</novo-icon
       >{{ title }}
     </novo-title>
   `,
