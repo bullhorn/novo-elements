@@ -331,7 +331,7 @@ async function generateApiDocs() {
 
   if (project) {
     // Project may not have converted correctly
-    const outputDir = 'demo/assets';
+    const outputDir = 'projects/demo/assets';
 
     // Alternatively generate JSON output
     await app.generateJson(project, outputDir + '/documentation.json');
