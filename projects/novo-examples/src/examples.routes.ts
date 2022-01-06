@@ -3926,9 +3926,22 @@ export class ColorPickerPage {
 
 @Component({
   selector: 'date-picker-design-page',
-  template: `<h2>Anatomy</h2>
+  template: `<h2>Usage</h2>
 <novo-grid columns="2" align="start" gap="2rem">
-<img src="assets/images/ModalAnatomy.png" width="450">
+<div>
+<p>Date Pickers allow users to easily select a date. It comes in a handful of varieties based on the content of the field.</p>
+</div>
+<img src="https://via.placeholder.com/350x250"/>
+</novo-grid>
+<h2>Best Practices</h2>
+<ul>
+<li>Use when a single date selection is required from the user, especially when additional context is around the date selection is needed. e.g. selecting a date within a specific date range.</li>
+<li>Always use <code>novo-date-picker-input</code> when part of a larger form.</li>
+<li>Only use standalone <code>date-picker</code> as filter for content displayed on the page.</li>
+</ul>
+<h2>Anatomy</h2>
+<novo-grid columns="2" align="start" gap="2rem">
+<img src="https://via.placeholder.com/350x250" width="450">
 <div>
 <ol>
 <li>
@@ -4063,10 +4076,10 @@ export class DatePickerDevelopPage {
 
 @Component({
   selector: 'date-picker-examples-page',
-  template: `<h2>Date Picker</h2>
+  template: `<h2>Date Picker Standalone</h2>
 <p><code-example example="date-picker"></code-example></p>
 <h2>Date Picker Input</h2>
-<p><code-example example="date-picker"></code-example></p>
+<p><code-example example="date-picker-input"></code-example></p>
 <h2>Range Picker</h2>
 <p><code-example example="date-range-input"></code-example></p>
 <h2>Customizing Week Start</h2>
@@ -4082,72 +4095,21 @@ export class DatePickerExamplesPage {
 
 
 @Component({
-  selector: 'date-picker-usage-page',
-  template: `<novo-grid columns="2" align="start" gap="2rem">
+  selector: 'date-time-picker-design-page',
+  template: `<h2>Usage</h2>
+<novo-grid columns="2" align="start" gap="2rem">
 <div>
-<h3>Why?</h3>
-<p>Date Pickers allow users to easily select a time and date. It comes in a handful of varieties based on the content of the field.</p>
+<p>Date Time Pickers allow users to easily select a time and date. It comes in a handful of varieties based on the content of the field.</p>
 </div>
 <img src="https://via.placeholder.com/350x250"/>
-<div>
-<h3>Use When</h3>
-<ul class="contains-do-list">
-<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Loading content.</novo-text></li>
-<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Processing an long running action.</novo-text></li>
-</ul>
-</div>
-<div>
-<h3>Don′t Use When</h3>
-<ul class="contains-do-list">
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">times</novo-icon><novo-text color="grapefruit"> When not loading data.</novo-text></li>
-</ul>
-</div>
 </novo-grid>
-`,
-  host: { class: 'markdown-page' }
-})
-export class DatePickerUsagePage {
-  public params: any = {};
-}
-
-
-@Component({
-  selector: 'date-picker-page',
-  template: `<h1>Date and Time Pickers</h1>
-<p>These allow users to easily select a time and date. It comes in a handful of varieties based on the content of the field.</p>
-<h2>Date Picker <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/date-picker">(source)</a></h2>
-<p>The calendar picker is used to select a date. It appears in all date picker fields.</p>
-<h5>Full Date Picker</h5>
-<p><code-example example="date-picker"></code-example></p>
-<h2>Time Picker <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/time-picker">(source)</a></h2>
-<p>Time pickers come in 12 hour or 24 hour style.</p>
-<h5>Standalone Time Picker</h5>
-<p><code-example example="time-picker"></code-example></p>
-<h5>Range Picker</h5>
-<p><code-example example="date-range-input"></code-example></p>
-<h5>Multi Date Selection Picker</h5>
-<p><code-example example="multi-date"></code-example></p>
-<h5>Date Time Picker</h5>
-<p><code-example example="date-time"></code-example></p>
-<h5>Date Time Input Picker</h5>
-<p><code-example example="date-time-input"></code-example></p>
-<h5>Customizing Week Start</h5>
-<p><code-example example="week-start"></code-example></p>
-<h5>Different Locale</h5>
-<p>TBD</p>
-<h5>Date Picker Limits</h5>
-<p><code-example example="date-picker-limits"></code-example></p>
-`,
-  host: { class: 'markdown-page' }
-})
-export class DatePickerPage {
-  public params: any = {};
-}
-
-
-@Component({
-  selector: 'date-time-picker-design-page',
-  template: `<h2>Anatomy</h2>
+<h2>Best Practices</h2>
+<ul>
+<li>Use when a single date selection is required from the user, especially when additional context is around the date selection is needed. e.g. selecting a date within a specific date range.</li>
+<li>Always use <code>novo-date-picker-input</code> when part of a larger form.</li>
+<li>Only use standalone <code>date-picker</code> as filter for content displayed on the page.</li>
+</ul>
+<h2>Anatomy</h2>
 <novo-grid columns="2" align="start" gap="2rem">
 <img src="assets/images/ModalAnatomy.png" width="450">
 <div>
@@ -4291,36 +4253,6 @@ export class DateTimePickerDevelopPage {
   host: { class: 'markdown-page' }
 })
 export class DateTimePickerExamplesPage {
-  public params: any = {};
-}
-
-
-@Component({
-  selector: 'date-time-picker-usage-page',
-  template: `<novo-grid columns="2" align="start" gap="2rem">
-<div>
-<h3>Why?</h3>
-<p>Loading animations are used to help indicate to the user that some sort of progress is taking place. These are especially helpful for intensive operations that might take extra time.</p>
-</div>
-<img src="https://via.placeholder.com/350x250"/>
-<div>
-<h3>Use When</h3>
-<ul class="contains-do-list">
-<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Loading content.</novo-text></li>
-<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Processing an long running action.</novo-text></li>
-</ul>
-</div>
-<div>
-<h3>Don′t Use When</h3>
-<ul class="contains-do-list">
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">times</novo-icon><novo-text color="grapefruit"> When not loading data.</novo-text></li>
-</ul>
-</div>
-</novo-grid>
-`,
-  host: { class: 'markdown-page' }
-})
-export class DateTimePickerUsagePage {
   public params: any = {};
 }
 
@@ -4537,9 +4469,22 @@ export class TilesPage {
 
 @Component({
   selector: 'time-picker-design-page',
-  template: `<h2>Anatomy</h2>
+  template: `<h2>Usage</h2>
 <novo-grid columns="2" align="start" gap="2rem">
-<img src="assets/images/ModalAnatomy.png" width="450">
+<div>
+<p>Time Pickers allow users to easily select a time. It comes in a handful of varieties based on the content of the field.</p>
+</div>
+<img src="https://via.placeholder.com/350x250"/>
+</novo-grid>
+<h2>Best Practices</h2>
+<ul>
+<li>Use when a single date selection is required from the user, especially when additional context is around the date selection is needed. e.g. selecting a date within a specific date range.</li>
+<li>Always use <code>novo-time-picker-input</code> when part of a larger form.</li>
+<li>Only use standalone <code>time-picker</code> as filter for content displayed on the page.</li>
+</ul>
+<h2>Anatomy</h2>
+<novo-grid columns="2" align="start" gap="2rem">
+<img src="https://via.placeholder.com/350x250" width="450">
 <div>
 <ol>
 <li>
@@ -4680,36 +4625,6 @@ export class TimePickerDevelopPage {
   host: { class: 'markdown-page' }
 })
 export class TimePickerExamplesPage {
-  public params: any = {};
-}
-
-
-@Component({
-  selector: 'time-picker-usage-page',
-  template: `<novo-grid columns="2" align="start" gap="2rem">
-<div>
-<h3>Why?</h3>
-<p>Loading animations are used to help indicate to the user that some sort of progress is taking place. These are especially helpful for intensive operations that might take extra time.</p>
-</div>
-<img src="https://via.placeholder.com/350x250"/>
-<div>
-<h3>Use When</h3>
-<ul class="contains-do-list">
-<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Loading content.</novo-text></li>
-<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Processing an long running action.</novo-text></li>
-</ul>
-</div>
-<div>
-<h3>Don′t Use When</h3>
-<ul class="contains-do-list">
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">times</novo-icon><novo-text color="grapefruit"> When not loading data.</novo-text></li>
-</ul>
-</div>
-</novo-grid>
-`,
-  host: { class: 'markdown-page' }
-})
-export class TimePickerUsagePage {
   public params: any = {};
 }
 
@@ -5745,43 +5660,6 @@ export class TemplatesPage {
 
 
 @Component({
-  selector: 'chomsky-page',
-  template: `<h1>Chomsky-NG2 Documentation</h1>
-<p>A lightweight Angular 2 i18n wrapper.</p>
-<ul>
-<li>English</li>
-<li>Russian</li>
-<li>French</li>
-</ul>
-<h5>Simple Translation</h5>
-<p><code-example example="simple-translations"></code-example></p>
-<h5>Translation with Variables</h5>
-<p><code-example example="translations-variables"></code-example></p>
-<h5>Translation with Date Variables</h5>
-<p>Other short formats include (bold is default):<br>
-<em>short - 02/14/2017, 1:17 PM</em><br>
-<em>medium - Feb 14, 2017, 1:17 PM</em><br>
-<em>long - Febuary 14, 2017, 1:17 PM CST</em><br>
-<strong><em>dateShort - 02/14/2017</em></strong><br>
-<em>dateMedium - Feb 14, 2017</em><br>
-<em>dateLong - Febuary 14, 2017</em><br>
-<em>timeShort - 1:17 PM</em><br>
-<em>timeLong - 1:17 PM CST</em></p>
-<p><code-example example="date-translations"></code-example></p>
-<h5>Translation with Number &amp; Currency Variables</h5>
-<p>Can be used with syntax from <a href="//developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NumberFormat">Intl.NumberFormat</a>.</p>
-<p><code-example example="number-translations"></code-example></p>
-<h5>Translation with Pluralization and Gender</h5>
-<p><code-example example="plural-translations"></code-example></p>
-`,
-  host: { class: 'markdown-page' }
-})
-export class ChomskyPage {
-  public params: any = {};
-}
-
-
-@Component({
   selector: 'field-interactions-page',
   template: `<h1>Field Interactions</h1>
 <p>Field Interactions is a simple API that allows you to modify NovoForms based on field changes.</p>
@@ -5899,7 +5777,6 @@ const routes: Routes = [
   //{ path: '', component: Home, data: {} },
   { path: 'utils/ace editor', component: AceEditorPage, data: { title: 'Ace Editor', section: 'utils' } },
   { path: 'utils/quick note', component: QuickNotePage, data: { title: 'Quick Note', section: 'utils' } },
-  { path: 'utils/chomsky', component: ChomskyPage, data: { title: 'Chomsky', section: 'utils' } },
   { path: 'utils/field-interactions', component: FieldInteractionsPage, data: { title: 'Field Interactions', section: 'utils' } },
   { path: 'utils/pipes', component: PipesPage, data: { title: 'Pipes', section: 'utils' } },
   { path: 'utils/security', component: SecurityPage, data: { title: 'Security', section: 'utils' } },
@@ -6157,41 +6034,37 @@ const routes: Routes = [
   {
     path: 'form-controls/date picker',
     component: TabsLayout,
-    data: { title: 'Date Picker', section: 'form-controls', pages: [{ title: 'Usage', route: './usage'},{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}], description: null },
+    data: { title: 'Date Picker', section: 'form-controls', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}], description: null },
     children: [
-      { path: 'usage', component: DatePickerUsagePage },
       { path: 'design', component: DatePickerDesignPage },
       { path: 'develop', component: DatePickerDevelopPage },
       { path: 'examples', component: DatePickerExamplesPage },
-      { path: '', redirectTo: '/form-controls/date picker/usage', pathMatch: 'full' },
+      { path: '', redirectTo: '/form-controls/date picker/design', pathMatch: 'full' },
     ]
   },
   {
     path: 'form-controls/date time picker',
     component: TabsLayout,
-    data: { title: 'Date Time Picker', section: 'form-controls', pages: [{ title: 'Usage', route: './usage'},{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}], description: null },
+    data: { title: 'Date Time Picker', section: 'form-controls', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}], description: null },
     children: [
-      { path: 'usage', component: DateTimePickerUsagePage },
       { path: 'design', component: DateTimePickerDesignPage },
       { path: 'develop', component: DateTimePickerDevelopPage },
       { path: 'examples', component: DateTimePickerExamplesPage },
-      { path: '', redirectTo: '/form-controls/date time picker/usage', pathMatch: 'full' },
+      { path: '', redirectTo: '/form-controls/date time picker/design', pathMatch: 'full' },
     ]
   },
   {
     path: 'form-controls/time picker',
     component: TabsLayout,
-    data: { title: 'Time Picker', section: 'form-controls', pages: [{ title: 'Usage', route: './usage'},{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}], description: null },
+    data: { title: 'Time Picker', section: 'form-controls', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}], description: null },
     children: [
-      { path: 'usage', component: TimePickerUsagePage },
       { path: 'design', component: TimePickerDesignPage },
       { path: 'develop', component: TimePickerDevelopPage },
       { path: 'examples', component: TimePickerExamplesPage },
-      { path: '', redirectTo: '/form-controls/time picker/usage', pathMatch: 'full' },
+      { path: '', redirectTo: '/form-controls/time picker/design', pathMatch: 'full' },
     ]
   },
   { path: 'form-controls/color-picker', component: ColorPickerPage, data: { title: 'Color Picker', section: 'form-controls' } },
-  { path: 'form-controls/date-picker', component: DatePickerPage, data: { title: 'Date Picker', section: 'form-controls' } },
   { path: 'form-controls/editor', component: EditorPage, data: { title: 'Editor', section: 'form-controls' } },
   { path: 'form-controls/form-groups', component: FormGroupsPage, data: { title: 'Form Groups', section: 'form-controls' } },
   { path: 'form-controls/form', component: FormPage, data: { title: 'Form', section: 'form-controls' } },
@@ -6243,7 +6116,7 @@ const routes: Routes = [
 ];
 
 export const PAGE_LIST = [
-  AceEditorPage,AgendaDesignPage,AgendaDevelopPage,AgendaExamplesPage,AsideDesignPage,AsideDevelopPage,AsideExamplesPage,AutocompleteDesignPage,AutocompleteDevelopPage,AutocompleteExamplesPage,AvatarDesignPage,AvatarDevelopPage,AvatarExamplesPage,BreadcrumbDesignPage,BreadcrumbDevelopPage,BreadcrumbExamplesPage,ButtonDesignPage,ButtonDevelopPage,ButtonExamplesPage,CalendarDesignPage,CalendarDevelopPage,CalendarExamplesPage,ComponentsPage,DataTablePage,DropdownDesignPage,DropdownDevelopPage,DropdownExamplesPage,FieldDesignPage,FieldDevelopPage,FieldExamplesPage,FieldUsagePage,IconDesignPage,IconDevelopPage,IconExamplesPage,LoadingDesignPage,LoadingDevelopPage,LoadingExamplesPage,MenuDesignPage,MenuDevelopPage,MenuExamplesPage,ModalDesignPage,ModalDevelopPage,ModalExamplesPage,NonIdealStateDesignPage,NonIdealStateDevelopPage,NonIdealStateExamplesPage,PopoverDesignPage,PopoverDevelopPage,PopoverExamplesPage,ProgressDesignPage,ProgressDevelopPage,ProgressExamplesPage,ProgressUsagePage,QuickNotePage,SearchPage,SlidesPage,SwitchPage,TabbedGroupPickerPage,TablePage,TipWellDesignPage,TipWellDevelopPage,TipWellExamplesPage,ToasterDesignPage,ToasterDevelopPage,ToasterExamplesPage,ToolbarDesignPage,ToolbarDevelopPage,ToolbarExamplesPage,TooltipDesignPage,TooltipDevelopPage,TooltipExamplesPage,ColorsPage,CompositionPage,DesignPage,IconographyPage,SpacingPage,TypographyPage,ChipsDesignPage,ChipsDevelopPage,ChipsExamplesPage,ColorPickerPage,DatePickerDesignPage,DatePickerDevelopPage,DatePickerExamplesPage,DatePickerUsagePage,DatePickerPage,DateTimePickerDesignPage,DateTimePickerDevelopPage,DateTimePickerExamplesPage,DateTimePickerUsagePage,EditorPage,FormControlsPage,FormGroupsPage,FormPage,MultiPickerPage,PickerPage,RadioButtonsPage,SelectPage,TilesPage,TimePickerDesignPage,TimePickerDevelopPage,TimePickerExamplesPage,TimePickerUsagePage,ValuePage,HomePage,CardDescriptionPage,CardDesignPage,CardDevelopPage,CardExamplesPage,ExpansionPage,HeaderPage,LayoutsPage,ListPage,SidenavPage,StepperPage,TabsDesignPage,TabsDevelopPage,TabsExamplesPage,PatternsNativeFormsPage,PatternsTestPage,PatternsPage,TemplatesPage,ChomskyPage,FieldInteractionsPage,PipesPage,SecurityPage
+  AceEditorPage,AgendaDesignPage,AgendaDevelopPage,AgendaExamplesPage,AsideDesignPage,AsideDevelopPage,AsideExamplesPage,AutocompleteDesignPage,AutocompleteDevelopPage,AutocompleteExamplesPage,AvatarDesignPage,AvatarDevelopPage,AvatarExamplesPage,BreadcrumbDesignPage,BreadcrumbDevelopPage,BreadcrumbExamplesPage,ButtonDesignPage,ButtonDevelopPage,ButtonExamplesPage,CalendarDesignPage,CalendarDevelopPage,CalendarExamplesPage,ComponentsPage,DataTablePage,DropdownDesignPage,DropdownDevelopPage,DropdownExamplesPage,FieldDesignPage,FieldDevelopPage,FieldExamplesPage,FieldUsagePage,IconDesignPage,IconDevelopPage,IconExamplesPage,LoadingDesignPage,LoadingDevelopPage,LoadingExamplesPage,MenuDesignPage,MenuDevelopPage,MenuExamplesPage,ModalDesignPage,ModalDevelopPage,ModalExamplesPage,NonIdealStateDesignPage,NonIdealStateDevelopPage,NonIdealStateExamplesPage,PopoverDesignPage,PopoverDevelopPage,PopoverExamplesPage,ProgressDesignPage,ProgressDevelopPage,ProgressExamplesPage,ProgressUsagePage,QuickNotePage,SearchPage,SlidesPage,SwitchPage,TabbedGroupPickerPage,TablePage,TipWellDesignPage,TipWellDevelopPage,TipWellExamplesPage,ToasterDesignPage,ToasterDevelopPage,ToasterExamplesPage,ToolbarDesignPage,ToolbarDevelopPage,ToolbarExamplesPage,TooltipDesignPage,TooltipDevelopPage,TooltipExamplesPage,ColorsPage,CompositionPage,DesignPage,IconographyPage,SpacingPage,TypographyPage,ChipsDesignPage,ChipsDevelopPage,ChipsExamplesPage,ColorPickerPage,DatePickerDesignPage,DatePickerDevelopPage,DatePickerExamplesPage,DateTimePickerDesignPage,DateTimePickerDevelopPage,DateTimePickerExamplesPage,EditorPage,FormControlsPage,FormGroupsPage,FormPage,MultiPickerPage,PickerPage,RadioButtonsPage,SelectPage,TilesPage,TimePickerDesignPage,TimePickerDevelopPage,TimePickerExamplesPage,ValuePage,HomePage,CardDescriptionPage,CardDesignPage,CardDevelopPage,CardExamplesPage,ExpansionPage,HeaderPage,LayoutsPage,ListPage,SidenavPage,StepperPage,TabsDesignPage,TabsDevelopPage,TabsExamplesPage,PatternsNativeFormsPage,PatternsTestPage,PatternsPage,TemplatesPage,FieldInteractionsPage,PipesPage,SecurityPage
 ];
 
 @NgModule({

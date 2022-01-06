@@ -1,0 +1,18 @@
+// --------------------------------------------------
+// Plugins (Third-Party-Libraries)
+// --------------------------------------------------
+@import "novo-elements";
+// --------------------------------------------------
+// Global
+// --------------------------------------------------
+@import "assets/styles/reset";
+@import "assets/styles/general";
+@import "assets/styles/main";
+@import "assets/styles/sidenav";
+@import "assets/styles/highlight";
+@import "assets/styles/media";
+@import "assets/styles/markdown";
+
+body {
+  font-size: 1.4rem;
+}

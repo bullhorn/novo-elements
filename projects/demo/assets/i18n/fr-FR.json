@@ -1,0 +1,37 @@
+{
+  "greeting": "Bonjour!",
+  "farewell": "Au revoir, {name}.",
+  "today": "Aujourd hui est {today:date}.",
+  "long": "Aujourd hui est {today:date:long}.",
+  "timeLong": "Aujourd hui est {today:date:timeLong}.",
+  "formatToday": "Aujourd hui est {today:date}.",
+  "militaryFormat": "Pour tester le temps militaire: {today:date:short}.",
+  "alert": "Vous avez {count:number} message.",
+  "debt": "Vouz devez: {balance:currency}",
+  "html": "<b>I am HTML!</b>",
+  "messages": {
+    "other": {
+      "zero": "Vous n'avez pas de messages.",
+      "1": "Vous avez {quantity:number} message.",
+      "20": "Vous avez {quantity:number} messages.",
+      "many": "Vous avez {quantity:number} messages."
+    }
+  },
+  "candidate": {
+    "male": {
+      "zero": "{host} n'a pas de {candidate} et il est triste.",
+      "1": "{host} a un {candidate} et il est excité.",
+      "many": "{host} a des {candidate} et il est extatique."
+    },
+    "female": {
+      "zero": "{host} n'a pas de {candidate} et elle est triste.",
+      "1": "{host} a un {candidate} et elle est excité.",
+      "many": "{host} a des {candidate} et elle est extatique."
+    },
+    "other": {
+      "zero": "{host} ont pas de {candidate} et ils sont tristes.",
+      "1": "{host} ont un {candidate} et ils sont excités.",
+      "many": "{host} ont des {candidate} et ils sont ravis."
+    }
+  }
+}

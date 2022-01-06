@@ -5,14 +5,13 @@ title: Examples
 order: 4
 ---
 
-## Date Picker
+## Date Picker Standalone
 
 <code-example example="date-picker"></code-example>
-
 
 ## Date Picker Input
 
-<code-example example="date-picker"></code-example>
+<code-example example="date-picker-input"></code-example>
 
 ## Range Picker
 

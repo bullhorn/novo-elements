@@ -4,6 +4,24 @@ page: Date Time Picker
 title: Design
 order: 2
 ---
+## Usage
+
+<novo-grid columns="2" align="start" gap="2rem">
+<div>
+
+Date Time Pickers allow users to easily select a time and date. It comes in a handful of varieties based on the content of the field.
+
+</div>
+
+<img src="https://via.placeholder.com/350x250"/>
+
+</novo-grid>
+
+## Best Practices
+
+- Use when a single date selection is required from the user, especially when additional context is around the date selection is needed. e.g. selecting a date within a specific date range.
+- Always use `novo-date-picker-input` when part of a larger form.
+- Only use standalone `date-picker` as filter for content displayed on the page.
 
 ## Anatomy
 

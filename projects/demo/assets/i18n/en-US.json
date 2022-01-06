@@ -1,0 +1,37 @@
+{
+  "greeting": "Hello!",
+  "farewell": "Goodbye, {name}.",
+  "today": "Today is {today:date}.",
+  "long": "Today is {today:date:long}.",
+  "timeLong": "Today is {today:date:timeLong}.",
+  "formatToday": "Today is {today:date}.",
+  "militaryFormat": "For testing military time: {today:date:short}.",
+  "alert": "You have {count:number} message.",
+  "debt": "You owe: {balance:currency}",
+  "html": "<b>I am HTML!</b>",
+  "messages": {
+    "other": {
+      "zero": "You have no messages.",
+      "1": "You have {quantity:number} message.",
+      "20": "You have {quantity:number} messages.",
+      "many": "You have {quantity:number} messages."
+    }
+  },
+  "candidate": {
+    "male": {
+      "zero": "{host} has no {candidate} and he is sad.",
+      "1": "{host} has one {candidate} and he is excited.",
+      "many": "{host} has some {candidate} and he's ecstatic."
+    },
+    "female": {
+      "zero": "{host} has no {candidate} and she is sad.",
+      "1": "{host} has one {candidate} and she is excited.",
+      "many": "{host} has some {candidate} and she's ecstatic."
+    },
+    "other": {
+      "zero": "{host} have no {candidate} and they are sad.",
+      "1": "{host} have one {candidate} and they are excited.",
+      "many": "{host} have some {candidate} and they are ecstatic."
+    }
+  }
+}

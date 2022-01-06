@@ -1,7 +1,7 @@
 // NG2
-import { ChangeDetectorRef, Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, forwardRef, HostBinding, Input, Output } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { Key } from '../../utils';
+import { BooleanInput, Key } from '../../utils';
 
 // Value accessor for the component (supports ngModel)
 const SWITCH_VALUE_ACCESSOR = {
@@ -18,7 +18,10 @@ const SWITCH_VALUE_ACCESSOR = {
       <div class="novo-switch-container">
         <div class="novo-switch-bar"></div>
         <div class="novo-switch-thumb-container">
-          <div class="novo-switch-thumb"></div>
+          <div class="novo-switch-thumb">
+            <novo-icon *ngIf="!model" smaller>{{ icons[0] }}</novo-icon>
+            <novo-icon *ngIf="model" smaller>{{ icons[1] }}</novo-icon>
+          </div>
         </div>
       </div>
       <div class="novo-switch-label"><ng-content></ng-content></div>
@@ -26,6 +29,7 @@ const SWITCH_VALUE_ACCESSOR = {
   `,
   host: {
     role: 'checkbox',
+    class: 'novo-switch',
     '[attr.aria-checked]': 'model',
     '[attr.aria-disabled]': 'disabled',
     '(keydown)': 'onKeydown($event)',
@@ -34,23 +38,22 @@ const SWITCH_VALUE_ACCESSOR = {
 })
 export class NovoSwitchElement implements ControlValueAccessor {
   @Input()
-  theme: string;
+  theme: string = 'ocean';
+
+  @Input()
+  icons: [string, string] = ['x', 'check'];
+
+  @Input()
+  @BooleanInput()
+  @HostBinding('class.novo-switch-disabled')
+  disabled: boolean = false;
+
   @Output()
   onChange: EventEmitter<any> = new EventEmitter();
 
-  _disabled: boolean = false;
   model: boolean;
   onModelChange: Function = () => {};
   onModelTouched: Function = () => {};
-
-  get disabled() {
-    return this._disabled;
-  }
-
-  @Input('disabled')
-  set disabled(value) {
-    this._disabled = !value;
-  }
 
   constructor(private ref: ChangeDetectorRef) {}
 

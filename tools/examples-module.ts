@@ -100,7 +100,6 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { NovoElementsModule } from 'novo-elements';
-import { ChomskyModule } from 'chomsky';
 
 // Examples
 ${extractedMetadata
@@ -145,8 +144,7 @@ export const EXAMPLE_LIST = [
     FormsModule,
     ReactiveFormsModule,
     CommonModule,
-    NovoElementsModule,
-    ChomskyModule
+    NovoElementsModule
   ]
 })
 export class NovoExamplesModule { }

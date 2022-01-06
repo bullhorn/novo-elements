@@ -5,11 +5,30 @@ title: Design
 order: 2
 ---
 
+## Usage
+
+<novo-grid columns="2" align="start" gap="2rem">
+<div>
+
+Time Pickers allow users to easily select a time. It comes in a handful of varieties based on the content of the field.
+
+</div>
+
+<img src="https://via.placeholder.com/350x250"/>
+
+</novo-grid>
+
+## Best Practices
+
+- Use when a single date selection is required from the user, especially when additional context is around the date selection is needed. e.g. selecting a date within a specific date range.
+- Always use `novo-time-picker-input` when part of a larger form.
+- Only use standalone `time-picker` as filter for content displayed on the page.
+
 ## Anatomy
 
 <novo-grid columns="2" align="start" gap="2rem">
 
-<img src="assets/images/ModalAnatomy.png" width="450">
+<img src="https://via.placeholder.com/350x250" width="450">
 
 <div>
 

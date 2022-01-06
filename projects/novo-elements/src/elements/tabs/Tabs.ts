@@ -44,31 +44,11 @@ export class NovoNavElement {
   private _selectedIndex: number | null = null;
 
   select(item) {
-    /**
-     * Deactivate all other tabs
-     */
-    function _deactivateAllItems(items) {
-      items.forEach((t) => {
-        if (t.active === true) {
-          // t.deselected.next();
-        }
-        t.active = false;
-      });
-    }
-
-    _deactivateAllItems(this.items);
+    // Deactivate all other tabs
+    this._deactivateAllItems(this.items);
     item.active = true;
     if (this.outlet) {
       this.outlet.show(this.items.indexOf(item));
-    }
-
-    // TODO - remove hack to make DOM rerender - jgodi
-    const element = document.querySelector('novo-tab-link.active span.indicator') as any;
-    if (element) {
-      element.style.opacity = 0.99;
-      setTimeout(() => {
-        element.style.opacity = 1;
-      }, 10);
     }
   }
 
@@ -78,6 +58,15 @@ export class NovoNavElement {
       // item.selected.next();
     }
     this.items.push(item);
+  }
+
+  private _deactivateAllItems(items: Array<any>) {
+    items.forEach((t) => {
+      if (t.active === true) {
+        // t.deselected.next();
+      }
+      t.active = false;
+    });
   }
 }
 
@@ -206,12 +195,13 @@ export class NovoTabLinkElement implements OnInit {
   constructor(nav: NovoNavElement, private router: Router, private cdr: ChangeDetectorRef, @Optional() private link?: RouterLink) {
     this.nav = nav;
     this.nav.add(this);
+  }
+
+  ngOnInit(): void {
     if (this.isLinkActive(this.link)) {
       this.nav.select(this);
     }
   }
-
-  ngOnInit(): void {}
 
   select() {
     if (!this.disabled) {
@@ -220,7 +210,6 @@ export class NovoTabLinkElement implements OnInit {
         const el = document.querySelector(`#${this.spy}`);
         el?.scrollIntoView(true);
       }
-      this.cdr.detectChanges();
     }
   }
 

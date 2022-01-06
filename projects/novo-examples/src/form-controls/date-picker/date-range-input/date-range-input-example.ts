@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
   templateUrl: 'date-range-input-example.html',
   styleUrls: ['date-range-input-example.css'],
 })
-export class DateRangeExample {
+export class DateRangeInputExample {
   selected: any = {
     startDate: null,
     endDate: null,
