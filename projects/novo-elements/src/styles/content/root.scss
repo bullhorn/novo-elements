@@ -4,14 +4,14 @@ html {
   scrollbar-color: var(--scrollbar-thumb) var(--background-body);
   scrollbar-width: none;
   font-family: $font-family-base;
-  // font-size: $font-size-base;
-  font-size: 9px;
+  font-size: $font-size-base;
   color: $font-color-base;
 }
 
 body {
   font-family: $font-family-body;
-  font-size: $font-size-body;
+  // font-size: $font-size-body;
+  font-size: 1.2rem; // novo-design-tokens is 1.4rem
   line-height: 1.4;
   word-wrap: break-word;
   color: var(--text-main);
