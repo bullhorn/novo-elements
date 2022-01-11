@@ -4,3 +4,10 @@
   flex-flow: row nowrap;
   justify-content: space-between;
 }
+
+.dropdown-search {
+  padding: 1rem;
+}
+.dropdown-footer {
+  padding: 0.5rem;
+}

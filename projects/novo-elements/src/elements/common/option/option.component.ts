@@ -18,7 +18,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { Key } from 'projects/novo-elements/src/utils';
-import { Subject } from 'rxjs';
+import { fromEvent, Subject, Subscription } from 'rxjs';
 import { NovoOptgroup, NovoOptgroupBase, NOVO_OPTGROUP } from './optgroup.component';
 import { NovoOptionParentComponent, NOVO_OPTION_PARENT_COMPONENT } from './option-parent';
 
@@ -44,6 +44,7 @@ export class NovoOptionBase implements FocusableOption, AfterViewChecked, OnDest
   private _active = false;
   private _disabled = false;
   private _mostRecentViewValue = '';
+  private _clickListener: Subscription;
 
   /** TODOL deprecate maybe, check support for table headers */
   @Input()
@@ -92,7 +93,10 @@ export class NovoOptionBase implements FocusableOption, AfterViewChecked, OnDest
     @Optional() @Inject(NOVO_OPTION_PARENT_COMPONENT) private _parent: NovoOptionParentComponent,
     @Optional() @Inject(NOVO_OPTGROUP) readonly group: NovoOptgroupBase,
   ) {
-    this._element.nativeElement.addEventListener('click', this._handleDisabledClick, false);
+    // (click) is overridden when defined by user.
+    this._clickListener = fromEvent<MouseEvent>(this._element.nativeElement, 'click').subscribe((evt: MouseEvent) =>
+      this._handleDisabledClick(evt),
+    );
   }
 
   /**
@@ -176,6 +180,8 @@ export class NovoOptionBase implements FocusableOption, AfterViewChecked, OnDest
       event.preventDefault();
       event.stopPropagation();
       event.stopImmediatePropagation();
+    } else {
+      this._selectViaInteraction();
     }
   }
 
@@ -248,7 +254,7 @@ export class NovoOptionBase implements FocusableOption, AfterViewChecked, OnDest
 
   ngOnDestroy() {
     this._stateChanges.complete();
-    this._element.nativeElement.removeEventListener('click', this._handleDisabledClick, false);
+    this._clickListener.unsubscribe();
   }
 
   /** Emits the selection change event. */
@@ -275,7 +281,6 @@ export class NovoOptionBase implements FocusableOption, AfterViewChecked, OnDest
     '[class.novo-selected]': 'selectable && selected',
     '[class.novo-option-multiple]': 'multiple',
     '[class.novo-option-disabled]': 'disabled',
-    '(click)': '_selectViaInteraction()',
     '(keydown)': '_handleKeydown($event)',
     class: 'novo-option novo-focus-indicator',
   },

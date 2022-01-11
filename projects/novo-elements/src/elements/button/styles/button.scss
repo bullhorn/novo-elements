@@ -6,7 +6,7 @@
   align-items: center;
   justify-content: center;
   padding: 0 $spacing-md;
-  font-size: 1.1rem;
+  font-size: var(--font-size-button);
   line-height: 2.9rem;
   border: none;
   color: var(--text-main, $dark);

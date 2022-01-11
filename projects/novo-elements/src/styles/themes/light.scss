@@ -9,6 +9,7 @@
   --text-main: #{$color-dark}; //#363636;
   --text-bright: #{$color-black};
   --text-muted: #{$color-slate}; //#70777f;
+  // do we need disabled.
   --links: #{$color-ocean};
   --focus: #{$color-ocean};
   --border: #{$color-light}; //#dbdbdb;
@@ -24,7 +25,8 @@
 
   // Share
   --font-size-caption: #{$font-size-xs};
-  --font-size-label: #{$font-size-md};
+  --font-size-label: #{$font-size-sm};
   --font-size-text: #{$font-size-body};
+  --font-size-button: #{$font-size-body};
   --font-size-title: #{$font-size-xl};
 }

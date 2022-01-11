@@ -10,6 +10,6 @@ import { Component } from '@angular/core';
 })
 export class BasicDropDownExample {
   public clickMe(event?: string) {
-    window.alert(event);
+    console.log(event);
   }
 }

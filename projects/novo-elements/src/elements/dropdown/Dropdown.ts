@@ -22,6 +22,7 @@ import {
 // Vendor
 import { merge, of, Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { BooleanInput } from '../../utils';
 // App
 import { Key } from '../../utils/key-codes';
 import { notify } from '../../utils/notifier/notifier.util';
@@ -96,13 +97,20 @@ export class NovoDropdownElement extends NovoDropdowMixins implements OnInit, Af
     | 'top-right' = 'default';
   @Input()
   scrollStrategy: 'reposition' | 'block' | 'close' = 'reposition';
+
+  /**
+   * Keep dropdown open after an item is selected
+   */
+  @Input()
+  @BooleanInput()
+  keepOpen: boolean = false;
+
   @Input()
   height: number;
   @Input()
   width: number = -1; // Defaults to dynamic width (no hardcoded width value and no host width lookup)
   @Input()
   appendToBody: boolean = false; // Deprecated
-
   @Output()
   toggled: EventEmitter<boolean> = new EventEmitter<boolean>();
 
@@ -247,10 +255,12 @@ export class NovoDropdownElement extends NovoDropdowMixins implements OnInit, Af
     this._selectedOptionChanges.unsubscribe();
     this._selectedOptionChanges = selectionEvents.pipe(takeUntil(this._onDestroy)).subscribe((event: NovoOptionSelectionChange) => {
       // this.handleSelection(event.source, event.isUserInput);
-      if (event.isUserInput && !this.multiple && this.panelOpen) {
+      if (event.isUserInput && !this.multiple) {
         this._clearPreviousSelectedOption(this._keyManager.activeItem);
-        this.closePanel();
-        this.focus();
+        if (!this.keepOpen && this.panelOpen) {
+          this.closePanel();
+          this.focus();
+        }
       }
     });
   }

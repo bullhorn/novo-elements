@@ -1,14 +1,22 @@
-<novo-dropdown>
-  <button type="button"
+<novo-dropdown keepOpen>
+  <novo-button type="button"
     theme="secondary"
     icon="collapse"
-    inverse>Keep Open</button>
+    inverse>Keep Open</novo-button>
+  <novo-field class="dropdown-search">
+    <input novoInput placeholder="Search..." type="search" width="100%" />
+    <novo-icon novoPrefix>search</novo-icon>
+  </novo-field>
+  <novo-divider></novo-divider>
   <novo-optgroup>
     <novo-option (click)="clickMe('Hello!')">Action 1</novo-option>
     <novo-option (click)="clickMe('Another!')">Action 2</novo-option>
   </novo-optgroup>
+  <novo-divider></novo-divider>
+  <div class="dropdown-footer">
+    <button theme="dialogue" icon="add-thin">Add</button>
+  </div>
 </novo-dropdown>
-
 
 <novo-dropdown side="right" multiple>
   <novo-button theme="secondary" icon="overview" side="left">Hide/Show</novo-button>

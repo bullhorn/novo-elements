@@ -9,85 +9,86 @@ import { BasePickerResults } from '../base-picker-results/BasePickerResults';
   selector: 'entity-picker-result',
   template: `
     <novo-list-item *ngIf="match.data" (click)="select.next(match.data)">
-      <item-header>
-        <item-avatar [icon]="getIconForResult(match.data)"></item-avatar>
-        <item-title> <span [innerHtml]="highlight(getNameForResult(match.data), term)"></span> </item-title>
-      </item-header>
-      <item-content direction="horizontal">
+      <novo-item-header>
+        <novo-item-avatar [icon]="getIconForResult(match.data)"></novo-item-avatar>
+        <novo-item-title> <span [innerHtml]="highlight(getNameForResult(match.data), term)"></span> </novo-item-title>
+      </novo-item-header>
+      <novo-item-content direction="horizontal">
         <!-- COMPANY 1 -->
-        <p class="company" *ngIf="match.data.companyName || match.data?.clientCorporation?.name">
-          <i class="bhi-company"></i>
+        <novo-text smaller class="company" *ngIf="match.data.companyName || match.data?.clientCorporation?.name">
+          <i class="bhi-company company"></i>
           <span [innerHtml]="highlight(match.data.companyName || match.data?.clientCorporation?.name, term)"></span>
-        </p>
+        </novo-text>
         <!-- CLIENT CONTACT -->
-        <p class="contact" *ngIf="match.data?.clientContact?.firstName">
+        <novo-text smaller class="contact" *ngIf="match.data?.clientContact?.firstName">
           <i class="bhi-person contact person"></i>
           <span [innerHtml]="highlight(match.data.clientContact.firstName + ' ' + match.data.clientContact.lastName, term)"></span>
-        </p>
+        </novo-text>
         <!-- CANDIDATE -->
-        <p class="candidate" *ngIf="match.data.candidate && match.data.searchEntity === 'Placement'">
-          <i class="bhi-candidate"></i>
+        <novo-text smaller class="candidate" *ngIf="match.data.candidate && match.data.searchEntity === 'Placement'">
+          <i class="bhi-candidate candidate"></i>
           <span [innerHtml]="highlight(match.data.candidate.firstName + ' ' + match.data.candidate.lastName, term)"></span>
-        </p>
+        </novo-text>
         <!-- START & END DATE -->
-        <p class="start-date" *ngIf="match.data.dateBegin && match.data.searchEntity === 'Placement'">
+        <novo-text smaller class="start-date" *ngIf="match.data.dateBegin && match.data.searchEntity === 'Placement'">
           <i class="bhi-calendar"></i>
           <span [innerHtml]="renderTimestamp(match.data.dateBegin) + ' - ' + renderTimestamp(match.data.dateEnd)"></span>
-        </p>
+        </novo-text>
         <!-- START Date -->
-        <p class="start-date" *ngIf="match.data.startTime && match.data.searchEntity === 'JobShift'">
+        <novo-text smaller class="start-date" *ngIf="match.data.startTime && match.data.searchEntity === 'JobShift'">
           <i class="bhi-calendar"></i>
           <span [innerHtml]="renderTimestamp(match.data.startTime)"></span>
-        </p>
+        </novo-text>
         <!-- START & END TIME -->
-        <p class="start-time" *ngIf="match.data.startTime && match.data.searchEntity === 'JobShift'">
+        <novo-text smaller class="start-time" *ngIf="match.data.startTime && match.data.searchEntity === 'JobShift'">
           <i class="bhi-clock"></i>
           <span [innerHtml]="renderTimeNoOffset(match.data.startTime) + ' - ' + renderTimeNoOffset(match.data.endTime)"></span>
-        </p>
+        </novo-text>
         <!-- JOBORDER -->
-        <p class="job" *ngIf="match.data.jobOrder && match.data.searchEntity === 'JobShift'">
-          <i class="bhi-job"></i>
+        <novo-text smaller class="job" *ngIf="match.data.jobOrder && match.data.searchEntity === 'JobShift'">
+          <i class="bhi-job job"></i>
           <span [innerHtml]="highlight(match.data.jobOrder.title, term)"></span>
-        </p>
+        </novo-text>
         <!-- OPENINGS -->
-        <p class="openings" *ngIf="match.data.openings && match.data.searchEntity === 'JobShift'">
+        <novo-text smaller class="openings" *ngIf="match.data.openings && match.data.searchEntity === 'JobShift'">
           <i class="bhi-candidate"></i>
           <span>{{ match.data.numAssigned }} / {{ match.data.openings }}</span>
-        </p>
+        </novo-text>
         <!-- EMAIL -->
-        <p class="email" *ngIf="match.data.email">
+        <novo-text smaller class="email" *ngIf="match.data.email">
           <i class="bhi-email"></i> <span [innerHtml]="highlight(match.data.email, term)"></span>
-        </p>
+        </novo-text>
         <!-- PHONE -->
-        <p class="phone" *ngIf="match.data.phone">
+        <novo-text smaller class="phone" *ngIf="match.data.phone">
           <i class="bhi-phone"></i> <span [innerHtml]="highlight(match.data.phone, term)"></span>
-        </p>
+        </novo-text>
         <!-- ADDRESS -->
-        <p class="location" *ngIf="match.data.address && (match.data.address.city || match.data.address.state)">
+        <novo-text smaller class="location" *ngIf="match.data.address && (match.data.address.city || match.data.address.state)">
           <i class="bhi-location"></i> <span *ngIf="match.data.address.city" [innerHtml]="highlight(match.data.address.city, term)"></span>
           <span *ngIf="match.data.address.city && match.data.address.state">, </span>
           <span *ngIf="match.data.address.state" [innerHtml]="highlight(match.data.address.state, term)"></span>
-        </p>
+        </novo-text>
         <!-- STATUS -->
-        <p class="status" *ngIf="match.data.status">
+        <novo-text smaller class="status" *ngIf="match.data.status">
           <i class="bhi-info"></i> <span [innerHtml]="highlight(match.data.status, term)"></span>
-        </p>
+        </novo-text>
         <!-- OWNER -->
-        <p class="owner" *ngIf="match.data.owner && match.data.owner.name && match.data.searchEntity === 'Candidate'">
+        <novo-text smaller class="owner" *ngIf="match.data.owner && match.data.owner.name && match.data.searchEntity === 'Candidate'">
           <i class="bhi-person"></i> <span [innerHtml]="highlight(match.data.owner.name, term)"></span>
-        </p>
+        </novo-text>
         <!-- PRIMARY DEPARTMENT -->
-        <p
+        <novo-text
+          smaller
           class="primary-department"
           *ngIf="match.data.primaryDepartment && match.data.primaryDepartment.name && match.data.searchEntity === 'CorporateUser'"
         >
           <i class="bhi-department"></i> <span [innerHtml]="highlight(match.data.primaryDepartment.name, term)"></span>
-        </p>
+        </novo-text>
         <!-- OCCUPATION -->
-        <p class="occupation" *ngIf="match.data.occupation && match.data.searchEntity === 'CorporateUser'">
+        <novo-text smaller class="occupation" *ngIf="match.data.occupation && match.data.searchEntity === 'CorporateUser'">
           <i class="bhi-occupation"></i> <span [innerHtml]="highlight(match.data.occupation, term)"></span>
-        </p>
-      </item-content>
+        </novo-text>
+      </novo-item-content>
     </novo-list-item>
   `,
 })
@@ -225,10 +226,13 @@ export class EntityPickerResult {
       </entity-picker-result>
       <novo-loading theme="line" *ngIf="isLoading && matches.length > 0"></novo-loading>
     </novo-list>
-    <p class="picker-error" *ngIf="hasError">{{ labels.pickerError }}</p>
-    <p class="picker-null-results" *ngIf="hasNonErrorMessage && term !== ''">{{ labels.pickerEmpty }}</p>
-    <p class="picker-null-results" *ngIf="hasNonErrorMessage && term === ''">{{ labels.pickerTextFieldEmpty }}</p>
+    <div class="picker-error" *ngIf="hasError">{{ labels.pickerError }}</div>
+    <div class="picker-null-results" *ngIf="hasNonErrorMessage && term !== ''">{{ labels.pickerEmpty }}</div>
+    <div class="picker-null-results" *ngIf="hasNonErrorMessage && term === ''">{{ labels.pickerTextFieldEmpty }}</div>
   `,
+  host: {
+    class: 'novo-entity-picker-results',
+  },
 })
 export class EntityPickerResults extends BasePickerResults {
   @Output() select: EventEmitter<any> = new EventEmitter();

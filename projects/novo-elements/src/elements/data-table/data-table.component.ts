@@ -99,7 +99,11 @@ import { DataTableState } from './state/data-table-state.service';
           [hidden]="dataSource?.totallyEmpty && !state.userFiltered"
         >
           <ng-container cdkColumnDef="selection">
-            <novo-data-table-checkbox-header-cell *cdkHeaderCellDef [maxSelected]="maxSelected" [canSelectAll]="canSelectAll"></novo-data-table-checkbox-header-cell>
+            <novo-data-table-checkbox-header-cell
+              *cdkHeaderCellDef
+              [maxSelected]="maxSelected"
+              [canSelectAll]="canSelectAll"
+            ></novo-data-table-checkbox-header-cell>
             <novo-data-table-checkbox-cell
               *cdkCellDef="let row; let i = index"
               [row]="row"
@@ -234,15 +238,15 @@ import { DataTableState } from './state/data-table-state.service';
     <ng-template novoTemplate="dropdownCellTemplate" let-row let-col="col">
       <novo-dropdown parentScrollSelector=".novo-data-table-container" containerClass="novo-data-table-dropdown">
         <novo-button type="button" theme="dialogue" [icon]="col.action.icon" inverse>{{ col.label }}</novo-button>
-        <list>
-          <item
+        <novo-optgroup>
+          <novo-option
             *ngFor="let option of col?.action?.options"
-            (action)="option.handlers.click({ originalEvent: $event?.originalEvent, row: row })"
+            (click)="option.handlers.click({ originalEvent: $event?.originalEvent, row: row })"
             [disabled]="isDisabled(option, row)"
           >
             <span [attr.data-automation-id]="option.label">{{ option.label }}</span>
-          </item>
-        </list>
+          </novo-option>
+        </novo-optgroup>
       </novo-dropdown>
     </ng-template>
     <ng-template novoTemplate="defaultNoResultsMessage">
@@ -412,7 +416,10 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   private _hideGlobalSearch: boolean = true;
 
   @Output() preferencesChanged: EventEmitter<IDataTablePreferences> = new EventEmitter<IDataTablePreferences>();
-  @Output() allSelected: EventEmitter<{ allSelected: boolean, selectedCount: number }> = new EventEmitter<{ allSelected: boolean, selectedCount: number }>();
+  @Output() allSelected: EventEmitter<{ allSelected: boolean; selectedCount: number }> = new EventEmitter<{
+    allSelected: boolean;
+    selectedCount: number;
+  }>();
 
   public dataSource: DataTableSource<T>;
   public loading: boolean = true;

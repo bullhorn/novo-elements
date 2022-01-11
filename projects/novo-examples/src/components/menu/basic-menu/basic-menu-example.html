@@ -6,7 +6,10 @@
   <novo-option id="mi-edit" *menuItem (click)="clickMe($event)">Edit</novo-option>
   <novo-option id="mi-disabled" *menuItem (click)="clickMe($event)" disabled>Disabled</novo-option>
   <novo-divider *menuItem></novo-divider>
-  <novo-option id="mi-delete" *menuItem (click)="clickMe($event)">Delete</novo-option>
+  <novo-option id="mi-delete" *menuItem (click)="clickMe($event)">
+    <span>Delete</span>
+    <novo-icon novoSuffix>delete-o</novo-icon>
+  </novo-option>
 </novo-menu>
 
 

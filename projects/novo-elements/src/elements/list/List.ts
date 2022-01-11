@@ -46,7 +46,7 @@ export class NovoItemTitleElement {}
 @Component({
   selector: 'item-header, novo-item-header',
   template: `
-    <novo-title class="novo-item-header-container" smaller>
+    <novo-title class="novo-item-header-container" size="md">
       <ng-content select="item-avatar, novo-item-avatar"></ng-content>
       <ng-content select="item-title, novo-item-title"></ng-content>
       <ng-content select="item-header-end, novo-item-header-end"></ng-content>

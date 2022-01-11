@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 // APP
+import { NovoCommonModule } from '../common';
 import { NovoOverlayModule } from '../common/overlay/Overlay.module';
 import { NovoListModule } from '../list/List.module';
 import { NovoLoadingModule } from '../loading/Loading.module';
@@ -18,7 +19,7 @@ import { WorkersCompCodesPickerResults } from './extras/workers-comp-codes-picke
 import { NovoPickerElement } from './Picker';
 
 @NgModule({
-  imports: [CommonModule, FormsModule, NovoLoadingModule, NovoListModule, NovoOverlayModule, NovoSwitchModule],
+  imports: [CommonModule, FormsModule, NovoCommonModule, NovoLoadingModule, NovoListModule, NovoOverlayModule, NovoSwitchModule],
   declarations: [
     NovoPickerElement,
     PickerResults,

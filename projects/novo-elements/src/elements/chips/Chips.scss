@@ -183,12 +183,12 @@ novo-entity-chips {
       z-index: z("max");
       border: 1px solid #4a89dc;
       transition: all 200ms ease-in-out;
-      novo-list-item {
+      .novo-list-item {
         flex: 0 0;
         & > div {
           width: 100%;
         }
-        item-content {
+        .novo-item-content {
           flex-flow: row wrap;
           & > * {
             flex: 0 0 33%;
