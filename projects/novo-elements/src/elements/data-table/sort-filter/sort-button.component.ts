@@ -21,6 +21,11 @@ export class NovoDataTableSortButton<T> {
   public set value(value: SortDirection) {
     this._value = value;
   }
+
+  public get isActive() {
+    return this.value !== SortDirection.NONE;
+  }
+
   private _value: SortDirection = SortDirection.NONE;
 
   constructor(public state: DataTableState<T>, private ref: ChangeDetectorRef, public labels: NovoLabelService) {}

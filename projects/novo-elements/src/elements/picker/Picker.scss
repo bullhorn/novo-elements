@@ -290,7 +290,7 @@ picker-results {
       &:hover {
         background-color: lighten($positive, 39%);
       }
-      novo.item-content {
+      .novo-item-content {
         flex-flow: row wrap;
         & > * {
           flex: 0 0 33%;
