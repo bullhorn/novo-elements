@@ -219,7 +219,7 @@ export class EntityPickerResult {
         [match]="match"
         [term]="term"
         [ngClass]="{ active: isActive(match) }"
-        (mousedown)="selectMatch($event, match)"
+        (click)="selectMatch($event, match)"
         (mouseenter)="selectActive(match)"
         [class.disabled]="preselected(match)"
       >
