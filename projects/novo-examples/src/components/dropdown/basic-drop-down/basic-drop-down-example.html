@@ -21,16 +21,7 @@
 <novo-dropdown side="right">
   <novo-button theme="icon" icon="menu"></novo-button>
   <novo-optgroup>
-    <novo-option>Action 1</novo-option>
-    <novo-option tooltip="Test tooltip :)" tooltipPosition="left">Action 2</novo-option>
-    <novo-option>Action 3</novo-option>
-    <novo-option>Action 4</novo-option>
-    <novo-option>Action 5</novo-option>
-    <novo-option>Action 6</novo-option>
-    <novo-option>Action 7</novo-option>
-    <novo-option>Action 8</novo-option>
-    <novo-option>Action 9</novo-option>
-    <novo-option>Action 10</novo-option>
+    <novo-option *ngFor="let action of asyncItems" (click)="clickMe(action)">{{action}}</novo-option>
     <novo-divider></novo-divider>
     <novo-option>Menu Item With Lots of Text in it to Show Dynamic Width</novo-option>
   </novo-optgroup>

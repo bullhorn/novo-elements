@@ -1,5 +1,5 @@
 import { BooleanInput } from '@angular/cdk/coercion';
-import { ChangeDetectionStrategy, Component, Directive, Inject, InjectionToken, Input, Optional, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Directive, Inject, InjectionToken, Optional, ViewEncapsulation } from '@angular/core';
 import { CanDisable, CanDisableCtor, mixinDisabled } from '../mixins/disabled.mixin';
 import { NovoOptionParentComponent, NOVO_OPTION_PARENT_COMPONENT } from './option-parent';
 
@@ -29,7 +29,7 @@ export class NovoOptgroupBase implements CanDisable {
   disabled: boolean;
 
   /** Label for the option group. */
-  @Input() label: string;
+  label: string;
 
   /** Unique id for the underlying label. */
   _labelId: string = `novo-optgroup-label-${_uniqueOptgroupIdCounter++}`;
@@ -58,7 +58,7 @@ export const NOVO_OPTGROUP = new InjectionToken<NovoOptgroup>('NovoOptgroup');
   templateUrl: 'optgroup.component.html',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  inputs: ['disabled'],
+  inputs: ['disabled', 'label'],
   styleUrls: ['optgroup.component.scss'],
   host: {
     class: 'novo-optgroup',

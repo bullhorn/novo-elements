@@ -94,9 +94,9 @@ export class NovoOptionBase implements FocusableOption, AfterViewChecked, OnDest
     @Optional() @Inject(NOVO_OPTGROUP) readonly group: NovoOptgroupBase,
   ) {
     // (click) is overridden when defined by user.
-    this._clickListener = fromEvent<MouseEvent>(this._element.nativeElement, 'click').subscribe((evt: MouseEvent) =>
-      this._handleDisabledClick(evt),
-    );
+    this._clickListener = fromEvent<MouseEvent>(this._element.nativeElement, 'click').subscribe((evt: MouseEvent) => {
+      this._handleDisabledClick(evt);
+    });
   }
 
   /**

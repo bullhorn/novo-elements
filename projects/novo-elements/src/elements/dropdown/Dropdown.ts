@@ -167,6 +167,10 @@ export class NovoDropdownElement extends NovoDropdowMixins implements OnInit, Af
     // Add a click handler to the button to toggle the menu
     this.button.element.nativeElement.addEventListener('click', this.clickHandler);
     this.button.element.nativeElement.tabIndex = -1;
+    this.options.changes.pipe(takeUntil(this._onDestroy)).subscribe(() => {
+      this._initKeyManager();
+      this._watchSelectionEvents();
+    });
     this._initKeyManager();
     this._watchSelectionEvents();
     this.focus();
