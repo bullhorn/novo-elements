@@ -111,7 +111,8 @@ export class NovoProgressBarElement implements ControlValueAccessor, OnInit {
     this._disabled = !!value;
   }
 
-  constructor(private ref: ChangeDetectorRef, @Optional() @Inject(NOVO_PROGRESS_CONTAINER) public progress: any) { // NovoProgressElement
+  constructor(private ref: ChangeDetectorRef, @Optional() @Inject(NOVO_PROGRESS_CONTAINER) public progress: any) {
+    // NovoProgressElement
     this.progress = progress;
   }
 
