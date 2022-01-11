@@ -47,7 +47,7 @@ const DATE_VALUE_ACCESSOR = {
       data-automation-id="date-input"
       [disabled]="disabled"
     />
-    <span class="error-text" *ngIf="showInvalidDateError">{{invalidDateErrorMessage}}</span>
+    <span class="error-text" *ngIf="showInvalidDateError">{{ invalidDateErrorMessage }}</span>
     <i *ngIf="!hasValue" (click)="openPanel()" class="bhi-calendar"></i>
     <i *ngIf="hasValue" (click)="clearValue()" class="bhi-times"></i>
     <novo-overlay-template [parent]="element" position="above-below">

@@ -1,28 +1,25 @@
 // NG2
+import { ScrollingModule } from '@angular/cdk/scrolling';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ScrollingModule } from '@angular/cdk/scrolling';
-import { NovoExamplesRoutesModule } from 'novo-examples';
-
 // Vendor
 import {
-  NovoElementsModule,
-  NovoElementProviders,
-  FormUtils,
-  NovoLabelService,
-  FieldInteractionApi,
-  NovoToastService,
-  NovoModalService,
   AppBridgeService,
   DevAppBridgeService,
-  // NovoTemplateService,
+  FieldInteractionApi,
+  FormUtils,
+  NovoElementProviders,
+  NovoElementsModule,
+  NovoLabelService,
+  NovoModalService,
+  NovoToastService,
 } from 'novo-elements';
-
-import { AppComponent } from './app.component';
+import { NovoExamplesRoutesModule } from 'novo-examples';
 import { environment } from '../environments/environment';
+import { AppComponent } from './app.component';
 
 export function provideFieldInteractionAPI(toast, modal, formUtils, http, labels) {
   const fieldInteractionApi = new FieldInteractionApi(toast, modal, formUtils, http, labels);
@@ -72,4 +69,4 @@ export function provideAppBridgeService(http) {
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

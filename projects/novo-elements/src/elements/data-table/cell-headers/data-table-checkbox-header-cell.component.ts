@@ -1,5 +1,5 @@
 import { CdkColumnDef, CdkHeaderCell } from '@angular/cdk/table';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, EventEmitter, HostBinding, Input, OnDestroy, Output, Renderer2 } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, HostBinding, Input, OnDestroy, Renderer2 } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { NovoToastService } from '../../toast/ToastService';
 import { NovoDataTable } from '../data-table.component';
