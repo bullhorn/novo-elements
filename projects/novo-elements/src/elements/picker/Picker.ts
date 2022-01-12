@@ -60,6 +60,7 @@ const PICKER_VALUE_ACCESSOR = {
       autocomplete="off"
       #input
       [disabled]="disablePickerInput"
+      [attr.style]="getIconBackgroundColor()"
     />
     <i class="bhi-search" *ngIf="(!_value || clearValueOnSelect) && !disablePickerInput"></i>
     <i
@@ -109,6 +110,8 @@ export class NovoPickerElement implements OnInit {
   autoSelectFirstOption: boolean = true;
   @Input()
   overrideElement: ElementRef;
+  @Input()
+  customNavbarColors: any;
 
   // Disable from typing into the picker (result template does everything)
   @Input()
@@ -383,5 +386,17 @@ export class NovoPickerElement implements OnInit {
 
   setDisabledState(disabled: boolean): void {
     this._disablePickerInput = disabled;
+  }
+
+  private iconBackgroundColorExist(): boolean {
+    return this.customNavbarColors &&
+        typeof this.customNavbarColors === "object" &&
+        this.customNavbarColors.addAndFindIcon &&
+        this.customNavbarColors.addAndFindIcon.color
+  }
+
+  getIconBackgroundColor() {
+    return this.iconBackgroundColorExist() ?
+    `background-color: ${this.customNavbarColors.addAndFindIcon.color} !important` : null;
   }
 }
