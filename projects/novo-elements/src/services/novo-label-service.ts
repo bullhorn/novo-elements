@@ -90,7 +90,7 @@ export class NovoLabelService {
   noItems = 'There are no items';
   dateFormat = 'MM/dd/yyyy';
   dateFormatPlaceholder = 'MM/DD/YYYY';
-  localDatePlaceholder ='mm/dd/yyyy';
+  localDatePlaceholder = 'mm/dd/yyyy';
   timeFormatPlaceholderAM = 'hh:mm AM';
   timeFormatPlaceholder24Hour = 'HH:mm';
   timeFormatAM = 'AM';
