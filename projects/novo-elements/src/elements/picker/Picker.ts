@@ -390,9 +390,9 @@ export class NovoPickerElement implements OnInit {
 
   private iconBackgroundColorExist(): boolean {
     return this.customNavbarColors &&
-        typeof this.customNavbarColors === "object" &&
+        typeof this.customNavbarColors === 'object' &&
         this.customNavbarColors.addAndFindIcon &&
-        this.customNavbarColors.addAndFindIcon.color
+        this.customNavbarColors.addAndFindIcon.color;
   }
 
   getIconBackgroundColor() {
