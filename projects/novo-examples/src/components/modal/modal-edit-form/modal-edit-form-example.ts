@@ -5,10 +5,10 @@ import { FormUtils, NovoModalRef, NovoModalService, PickerControl, PickerResults
   selector: 'modal-edit-form-demo',
   template: `
     <novo-modal>
-      <header title="Ferdinand del Toro" icon="candidate" theme="candidate">
-        <utils>
-          <util-action icon="times" (click)="close()"></util-action>
-        </utils>
+      <header theme="candidate">
+        <novo-icon>candidate</novo-icon>
+        <novo-title>Ferdinand del Toro</novo-title>
+        <novo-action icon="times" (click)="close()"></novo-action>
       </header>
       <section>
         <novo-form [form]="textForm">
@@ -27,7 +27,7 @@ import { FormUtils, NovoModalRef, NovoModalService, PickerControl, PickerResults
         </novo-form>
       </section>
       <button theme="standard" (click)="close()">Cancel</button>
-      <button theme="primary" color="success" icon="check" (click)="close()">Save</button>
+      <button theme="primary" icon="check" (click)="close()">Save</button>
     </novo-modal>
   `,
 })

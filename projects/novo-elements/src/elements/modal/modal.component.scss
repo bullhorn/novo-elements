@@ -1,6 +1,6 @@
 @import "../common/typography/text.mixins.scss";
 
-novo-modal {
+.novo-modal {
   & > header {
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
@@ -17,95 +17,58 @@ novo-modal {
     overflow: auto;
   }
 
-  & > footer {
+  .novo-modal-footer {
     display: flex;
     align-items: center;
     justify-content: flex-end;
     padding: $spacing-sm;
     gap: $spacing-md;
-  }
-}
-
-novo-notification {
-  text-align: center;
-  padding: $spacing-sm;
-
-  & > section {
-    text-align: center;
-  }
-}
-
-novo-modal,
-novo-notification {
-  display: block;
-  background-color: var(--background-bright);
-  margin-bottom: $spacing-md;
-  border-radius: 4px;
-  box-shadow: 0 1px 7px rgba(0, 0, 0, 0.09), 0 1px 3px rgba(0, 0, 0, 0.2);
-  z-index: z(modal);
-  position: relative;
-  min-width: 330px;
-  max-width: 600px;
-
-  & > .novo-button.modal-close {
-    position: absolute;
-    right: $spacing-xl;
-    top: $spacing-xl;
-  }
-
-  & > header {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-
-    h1 {
-      margin: 0;
-      text-align: left;
+    button {
+      min-width: 10rem;
     }
   }
+}
 
-  .notification-body {
+.novo-notification {
+  text-align: center;
+
+  .novo-notification-body {
     display: flex;
     flex-direction: column;
+    padding: 0 $spacing-xl;
+    margin: $spacing-lg 0 55px;
 
     & > img {
       width: 100%;
     }
 
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-      font-size: 0.8em;
-      margin: 0 auto;
+    h1 {
+      font-size: $font-size-2xl;
+      margin: 10px auto 0;
     }
-
-    h2,
-    h4 {
+    h2 {
+      font-size: $font-size-xl;
       color: var(--text-muted);
       margin: 0 auto;
       padding: 0;
     }
-
-    h1 {
-      font-size: $font-size-2xl;
-    }
-    h2 {
-      font-size: $font-size-xl;
-    }
     h3 {
       font-size: $font-size-lg;
+      margin: 0 auto;
     }
     h4 {
       font-size: $font-size-lg;
+      color: var(--text-muted);
+      margin: 0 auto;
+      padding: 0;
     }
     h5 {
       font-size: $font-size-md;
+      margin: 0 auto;
     }
     h6 {
       font-size: $font-size-md;
+      margin: 0 auto;
     }
 
     i.indicator {
@@ -119,72 +82,60 @@ novo-notification {
     }
   }
 
-  & > footer {
-    display: flex;
-    flex-flow: row nowrap;
-
-    button {
-      flex: 1;
-    }
-  }
-
   &[type="success"] {
-    & > section {
+    .novo-notification-body {
       i {
         color: $success;
         border-color: $success;
       }
     }
-
-    button[theme="primary"] {
-      width: 100%;
-
-      .flex-wrapper {
-        justify-content: center;
-      }
-    }
   }
 
   &[type="warning"] {
-    footer {
-      display: flex;
-
-      .flex-wrapper {
-        justify-content: center;
-      }
-    }
-
-    button {
-      justify-content: center;
-
-      &:first-of-type {
-        margin: 0 0.5% 0 0;
-      }
-
-      &:last-of-type {
-        margin: 0 0 0 0.5%;
+    .novo-notification-body {
+      i {
+        color: $warning;
+        border-color: $warning;
       }
     }
   }
 
   &[type="error"] {
-    button[theme="primary"].primary {
-      width: 100%;
-
-      .flex-wrapper {
-        justify-content: center;
+    .novo-notification-body {
+      i {
+        color: $negative;
+        border-color: $negative;
       }
+    }
+  }
+
+  .novo-notification-footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: $spacing-sm;
+    gap: $spacing-md;
+
+    button {
+      min-width: 10rem;
     }
   }
 }
 
-novo-notification {
-  & > section {
-    padding: 0 $spacing-xl;
-    margin: $spacing-lg 0 55px;
+.novo-modal,
+.novo-notification {
+  display: block;
+  background-color: var(--background-bright);
+  border-radius: 4px;
+  box-shadow: 0 1px 7px rgba(0, 0, 0, 0.09), 0 1px 3px rgba(0, 0, 0, 0.2);
+  z-index: z(modal);
+  position: relative;
+  min-width: 330px;
+  max-width: 600px;
 
-    h1 {
-      margin: 10px auto 0;
-    }
+  & > .novo-button.modal-close {
+    position: absolute;
+    right: $spacing-xl;
+    top: $spacing-xl;
   }
 }
