@@ -9,7 +9,7 @@ import { NovoOptionModule } from '../common/option';
 import { NovoDatePickerModule } from '../date-picker/DatePicker.module';
 import { NovoDropdownModule } from '../dropdown/Dropdown.module';
 import { NovoFieldModule } from '../field/field.module';
-import { NovoFlexModule } from '../flex';
+import { NovoFlexModule } from '../flex/Flex.module';
 import { NovoFormExtrasModule } from '../form/extras/FormExtras.module';
 import { NovoIconModule } from '../icon/Icon.module';
 import { NovoLoadingModule } from '../loading/Loading.module';
@@ -56,10 +56,10 @@ import { DataTableState } from './state/data-table-state.service';
     NovoLoadingModule,
     NovoTilesModule,
     NovoSearchBoxModule,
+    NovoOptionModule,
     NovoCommonModule,
     NovoSelectModule,
     NovoTooltipModule,
-    NovoOptionModule,
     NovoCheckboxModule,
     NovoFlexModule,
     NovoFieldModule,

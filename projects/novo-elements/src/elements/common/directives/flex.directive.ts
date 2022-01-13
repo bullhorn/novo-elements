@@ -17,13 +17,14 @@ export class FlexDirective {
   // @Input()
   // flow: string = 'row nowrap';
 
-  @HostBinding('style.flex')
   private _flex: string;
 
+  @HostBinding('style.flex')
+  @Input()
   public get flex(): string {
     return this._flex;
   }
-  @Input()
+
   public set flex(value: string) {
     if (!value) {
       this._flex = '1 1 auto';
@@ -33,6 +34,6 @@ export class FlexDirective {
   }
 
   constructor(private readonly el: ElementRef, private readonly renderer: Renderer2) {
-    this.renderer.setStyle(this.el.nativeElement, 'display', 'flex');
+    // this.renderer.setStyle(this.el.nativeElement, 'display', 'flex');
   }
 }

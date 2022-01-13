@@ -107,7 +107,7 @@ export class NovoSimpleFilterFocus implements AfterViewInit {
             </novo-option>
           </novo-optgroup>
           <novo-optgroup *ngSwitchDefault>
-            <novo-option class="filter-search" keepOpen="true">
+            <novo-option class="filter-search" keepOpen>
               <input
                 type="text"
                 [(ngModel)]="filter"

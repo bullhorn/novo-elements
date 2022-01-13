@@ -290,6 +290,7 @@ export class NovoOptionBase implements FocusableOption, AfterViewChecked, OnDest
     '(keydown)': '_handleKeydown($event)',
     class: 'novo-option novo-focus-indicator',
   },
+  inputs: ['selected', 'keepOpen', 'inert', 'value', 'inert', 'disabled'],
   styleUrls: ['option.component.scss'],
   templateUrl: 'option.component.html',
   encapsulation: ViewEncapsulation.None,

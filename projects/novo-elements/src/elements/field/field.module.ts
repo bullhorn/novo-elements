@@ -2,7 +2,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { NovoButtonModule } from '../button/Button.module';
-import { NovoOptionModule } from '../common';
+import { NovoCommonModule, NovoOptionModule } from '../common';
 // APP
 import { NovoOverlayModule } from '../common/overlay/Overlay.module';
 import { NovoAutocompleteElement } from './autocomplete/autocomplete.component';
@@ -17,7 +17,7 @@ import { NovoPickerDirective } from './picker.directive';
 import { NovoPickerToggleElement } from './toggle/picker-toggle.component';
 
 @NgModule({
-  imports: [CommonModule, NovoButtonModule, NovoOverlayModule, NovoOptionModule],
+  imports: [CommonModule, NovoButtonModule, NovoOverlayModule, NovoOptionModule, NovoCommonModule],
   declarations: [
     NovoFieldElement,
     // NovoLabelElement,
