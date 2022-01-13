@@ -19,17 +19,14 @@ $novo-menu-side-padding: 0.5rem;
   flex: 1;
   -webkit-tap-highlight-color: transparent;
 
-  &:hover {
+  &:hover:not(.novo-option-inert) {
     background: var(--background-main, rgba($ocean, 0.1));
     color: var(--text-bright, $dark);
   }
 
-  &:active {
-    background: rgba($ocean, 0.3); //TODO: use selection css var
-  }
-
-  &.novo-active {
-    background: rgba($ocean, 0.3); //TODO: use selection css var
+  &:active:not(.novo-option-inert),
+  &.novo-active:not(.novo-option-inert) {
+    background: rgba($ocean, 0.3);
   }
 
   &.novo-selected {
@@ -58,7 +55,7 @@ $novo-menu-side-padding: 0.5rem;
     &.novo-accent-#{$name} {
       border-left: 4px solid $color;
     }
-    &.novo-fill-#{$name} {
+    &.novo-fill-#{$name}:not(.novo-option-inert) {
       color: getContrastColor($name);
       background: $color;
       &:hover,

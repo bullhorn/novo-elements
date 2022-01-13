@@ -5,6 +5,7 @@ import { BackgroundColorDirective } from './directives/bgc.directive';
 import { BorderDirective } from './directives/border.directive';
 import { TextColorDirective } from './directives/color.directive';
 import { FillColorDirective } from './directives/fill.directive';
+import { FlexDirective } from './directives/flex.directive';
 import { GapDirective, MarginDirective, PaddingDirective } from './directives/space.directive';
 import { NovoTemplate } from './novo-template/novo-template.directive';
 import { NovoOptionModule } from './option';
@@ -31,6 +32,7 @@ import { NovoTitle } from './typography/title/title.component';
     GapDirective,
     AccentColorDirective,
     FillColorDirective,
+    FlexDirective,
   ],
   declarations: [
     NovoTemplate,
@@ -47,6 +49,7 @@ import { NovoTitle } from './typography/title/title.component';
     GapDirective,
     AccentColorDirective,
     FillColorDirective,
+    FlexDirective,
   ],
 })
 export class NovoCommonModule {}

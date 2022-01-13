@@ -148,7 +148,7 @@ export class NovoDropdownElement extends NovoDropdowMixins implements OnInit, Af
   private _multiple: boolean = false;
 
   get button() {
-    return this._button || this._trigger;
+    return this._trigger || this._button;
   }
 
   constructor(public element: ElementRef, private ref: ChangeDetectorRef) {
@@ -227,7 +227,8 @@ export class NovoDropdownElement extends NovoDropdowMixins implements OnInit, Af
     const key = event.key;
     const isArrowKey = key === Key.ArrowDown || key === Key.ArrowUp;
     const isTyping = manager.isTyping();
-
+    const isInputField = event.target;
+    console.log('is input', isInputField);
     if (isArrowKey && event.altKey) {
       // Close the select on ALT + arrow key to match the native <select>
       event.preventDefault();

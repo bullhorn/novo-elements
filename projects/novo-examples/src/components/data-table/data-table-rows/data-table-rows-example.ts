@@ -254,6 +254,7 @@ export class DataTableRowsExample {
     'bigdecimal',
     'embeddedObj',
     'edit',
+    'enabled',
   ];
   public sharedPaginationOptions: IDataTablePaginationOptions = {
     theme: 'standard',

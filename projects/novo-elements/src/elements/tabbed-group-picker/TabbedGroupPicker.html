@@ -25,12 +25,13 @@
     </div>
     <div class="tabbed-group-picker-column right">
       <div class="quick-select" *ngIf="quickSelectConfig && !(filterText | async)">
-        <div class="quick-select-label">{{ quickSelectConfig.label }}</div>
-        <novo-optgroup class="quick-select-list">
+        <!-- <div class="quick-select-label">{{ quickSelectConfig.label }}</div> -->
+        <novo-optgroup class="quick-select-list" [label]="quickSelectConfig.label">
           <novo-option
             class="quick-select-item"
             *ngFor="let quickSelect of quickSelectConfig.items"
             [attr.data-automation-id]="quickSelect.label"
+            [selected]="quickSelect.selected"
             (click)="quickSelect.selected = !quickSelect.selected; onItemToggled(quickSelect)">
             {{quickSelect.label}}
             <!-- <novo-checkbox
@@ -50,8 +51,10 @@
           <novo-option
             *cdkVirtualFor="let item of displayTab.data"
             [attr.data-automation-id]="item[displayTab.labelField]"
+            [selected]="item.selected"
             (click)="item.selected = !item.selected; onItemToggled(item)">
             {{item[displayTab.labelField]}}
+
             <!-- <novo-checkbox
               [label]="item[displayTab.labelField]"
               [name]="'selected'"

@@ -161,7 +161,7 @@ cdk-table {
     &:hover {
       color: $dark;
     }
-    .filter-active {
+    &.filter-active {
       color: $positive;
     }
   }
@@ -678,23 +678,6 @@ novo-data-table-pagination {
     line-height: inherit;
   }
 
-  .novo-optgroup .filter-search {
-    input {
-      border: none;
-      border-bottom: 2px solid #bebebe;
-      width: 90%;
-      margin: 0 auto;
-      background: transparent;
-      &:focus {
-        outline: none;
-        border-bottom: 2px solid $ocean;
-        ~ i.bhi-search {
-          color: $ocean;
-        }
-      }
-    }
-  }
-
   .calendar-container {
     height: 100%;
     min-height: 200px;
@@ -719,12 +702,12 @@ novo-data-table-pagination {
       }
     }
   }
-  i.bhi-search {
-    color: inherit;
-    position: relative;
-    left: 196px;
-    top: -25px;
-  }
+  // i.bhi-search {
+  //   color: inherit;
+  //   position: relative;
+  //   left: 196px;
+  //   top: -25px;
+  // }
   span.error-text {
     color: $negative;
     position: relative;

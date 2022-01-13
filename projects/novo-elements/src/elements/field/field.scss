@@ -42,6 +42,7 @@
     grid-area: input;
     display: grid;
     grid-template-columns: minmax(auto, max-content) 1fr minmax(auto, max-content);
+    flex: 1 1 100%;
 
     &::ng-deep {
       .novo-input-element {
@@ -71,7 +72,8 @@
     .novo-field-infix {
       display: flex;
       align-items: center;
-      select {
+      select,
+      &::ng-deep .novo-input-element {
         width: 100%;
       }
     }

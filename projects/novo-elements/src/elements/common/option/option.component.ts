@@ -1,5 +1,5 @@
 import { FocusableOption, FocusOptions, FocusOrigin } from '@angular/cdk/a11y';
-import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { hasModifierKey } from '@angular/cdk/keycodes';
 import {
   AfterViewChecked,
@@ -17,8 +17,8 @@ import {
   QueryList,
   ViewEncapsulation,
 } from '@angular/core';
-import { Key } from 'projects/novo-elements/src/utils';
 import { fromEvent, Subject, Subscription } from 'rxjs';
+import { BooleanInput, Key } from '../../../utils';
 import { NovoOptgroup, NovoOptgroupBase, NOVO_OPTGROUP } from './optgroup.component';
 import { NovoOptionParentComponent, NOVO_OPTION_PARENT_COMPONENT } from './option-parent';
 
@@ -46,9 +46,14 @@ export class NovoOptionBase implements FocusableOption, AfterViewChecked, OnDest
   private _mostRecentViewValue = '';
   private _clickListener: Subscription;
 
-  /** TODOL deprecate maybe, check support for table headers */
+  /** TODO: deprecate maybe, check support for table headers */
+  @BooleanInput()
   @Input()
   keepOpen: boolean = false;
+
+  @BooleanInput()
+  @Input()
+  inert: boolean = false;
 
   /** If there is no parent then nothing is managing the selection. */
   get selectable() {
@@ -58,11 +63,6 @@ export class NovoOptionBase implements FocusableOption, AfterViewChecked, OnDest
   /** Whether the wrapping component is in multiple selection mode. */
   get multiple() {
     return this._parent && this._parent.multiple;
-  }
-
-  /** Whether or not the option is currently selected. */
-  get selected(): boolean {
-    return this._selected;
   }
 
   /** The form value of the option. */
@@ -80,6 +80,14 @@ export class NovoOptionBase implements FocusableOption, AfterViewChecked, OnDest
     this._disabled = coerceBooleanProperty(value);
   }
 
+  @Input()
+  get selected() {
+    return this._selected;
+  }
+  set selected(value: any) {
+    this._selected = coerceBooleanProperty(value);
+  }
+
   /** Event emitted when the option is selected or deselected. */
   // tslint:disable-next-line:no-output-on-prefix
   @Output() readonly onSelectionChange = new EventEmitter<NovoOptionSelectionChange>();
@@ -94,7 +102,7 @@ export class NovoOptionBase implements FocusableOption, AfterViewChecked, OnDest
     @Optional() @Inject(NOVO_OPTGROUP) readonly group: NovoOptgroupBase,
   ) {
     // (click) is overridden when defined by user.
-    this._clickListener = fromEvent<MouseEvent>(this._element.nativeElement, 'click').subscribe((evt: MouseEvent) => {
+    this._clickListener = fromEvent<MouseEvent>(this._element.nativeElement, 'click', { capture: true }).subscribe((evt: MouseEvent) => {
       this._handleDisabledClick(evt);
     });
   }
@@ -176,7 +184,7 @@ export class NovoOptionBase implements FocusableOption, AfterViewChecked, OnDest
   }
 
   _handleDisabledClick(event: MouseEvent) {
-    if (this.disabled) {
+    if (this.disabled || this.inert) {
       event.preventDefault();
       event.stopPropagation();
       event.stopImmediatePropagation();
@@ -187,9 +195,8 @@ export class NovoOptionBase implements FocusableOption, AfterViewChecked, OnDest
 
   /** Ensures the option is selected when activated from the keyboard. */
   _handleKeydown(event: KeyboardEvent): void {
-    if ((event.key === Key.Enter || event.key === Key.Space) && !hasModifierKey(event)) {
+    if (!(event.target instanceof HTMLInputElement) && (event.key === Key.Enter || event.key === Key.Space) && !hasModifierKey(event)) {
       this._selectViaInteraction();
-
       // Prevent the page from scrolling down and form submits.
       event.preventDefault();
     }
@@ -203,7 +210,7 @@ export class NovoOptionBase implements FocusableOption, AfterViewChecked, OnDest
     if (!this.disabled) {
       this._selected = this.multiple ? !this._selected : true;
       this._changeDetectorRef.markForCheck();
-      this._emitSelectionChangeEvent(true);
+      this._emitSelectionChangeEvent(!this.keepOpen);
     }
   }
 
@@ -261,8 +268,6 @@ export class NovoOptionBase implements FocusableOption, AfterViewChecked, OnDest
   private _emitSelectionChangeEvent(isUserInput = false): void {
     this.onSelectionChange.emit(new NovoOptionSelectionChange(this, isUserInput));
   }
-
-  static ngAcceptInputType_disabled: BooleanInput;
 }
 
 /**
@@ -281,6 +286,7 @@ export class NovoOptionBase implements FocusableOption, AfterViewChecked, OnDest
     '[class.novo-selected]': 'selectable && selected',
     '[class.novo-option-multiple]': 'multiple',
     '[class.novo-option-disabled]': 'disabled',
+    '[class.novo-option-inert]': 'inert',
     '(keydown)': '_handleKeydown($event)',
     class: 'novo-option novo-focus-indicator',
   },

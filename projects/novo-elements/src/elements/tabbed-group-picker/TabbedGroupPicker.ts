@@ -14,6 +14,7 @@ import { BehaviorSubject, Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { NovoLabelService } from '../../services/novo-label-service';
 import { binarySearch, Helpers } from '../../utils/Helpers';
+import { NOVO_OPTION_PARENT_COMPONENT } from '../common';
 
 export type TabbedGroupPickerTab = {
   typeName: string;
@@ -60,10 +61,13 @@ export type TabbedGroupPickerButtonConfig = {
   selector: 'novo-tabbed-group-picker',
   templateUrl: './TabbedGroupPicker.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [{ provide: NOVO_OPTION_PARENT_COMPONENT, useExisting: NovoTabbedGroupPickerElement }],
 })
 export class NovoTabbedGroupPickerElement implements OnDestroy, OnInit {
   @ViewChild('tabbedGroupPickerVirtualScrollViewport')
   private scrollableInstance: CdkScrollable;
+
+  multiple = true;
 
   @Input() buttonConfig: TabbedGroupPickerButtonConfig;
   @Input() tabs: TabbedGroupPickerTab[];
