@@ -103,7 +103,7 @@ import { DataTableState } from '../state/data-table-state.service';
             </novo-option>
             <novo-option class="calendar-container" *ngIf="showCustomRange" keepOpen>
               <novo-stack>
-                <div (click)="toggleCustomRange($event, false)"><i class="bhi-previous"></i>{{ labels.backToPresetFilters }}</div>
+                <div class="back-link" (click)="toggleCustomRange($event, false)"><i class="bhi-previous"></i>{{ labels.backToPresetFilters }}</div>
                 <novo-date-picker (onSelect)="filterData($event)" [(ngModel)]="filter" range="true"></novo-date-picker>
               </novo-stack>
             </novo-option>

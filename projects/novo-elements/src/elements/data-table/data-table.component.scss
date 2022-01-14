@@ -628,7 +628,7 @@ novo-data-table-pagination {
 }
 
 .dropdown-container.data-table-dropdown {
-  min-width: 230px;
+  min-width: 220px;
   max-width: 230px;
   max-height: 500px;
   overflow-x: hidden;
@@ -683,7 +683,8 @@ novo-data-table-pagination {
     min-height: 200px;
     width: 100%;
     background: #fff;
-    > div {
+    padding: 0 !important;
+    .back-link {
       color: $positive;
       line-height: 3em;
       font-size: 0.9em;
