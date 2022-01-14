@@ -116,7 +116,7 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
     private _changeDetectorRef: ChangeDetectorRef,
     public dateFormatService: DateFormatService,
   ) {
-    this.placeholder = this.labels.dateFormatString().toUpperCase() || this.labels.dateFormatPlaceholder;
+    this.placeholder = this.labels.localizedDatePlaceholder();
   }
 
   ngOnInit() {
