@@ -8,6 +8,7 @@ import { TextMaskModule } from 'angular2-text-mask';
 // APP
 import { NovoButtonModule } from '../button/Button.module';
 import { NovoCheckboxModule } from '../checkbox';
+import { NovoCommonModule, NovoOptionModule } from '../common';
 import { NovoDatePickerModule } from '../date-picker/DatePicker.module';
 import { NovoDropdownModule } from '../dropdown/Dropdown.module';
 import { NovoFormExtrasModule } from '../form/extras/FormExtras.module';
@@ -34,6 +35,8 @@ import { NovoTableElement } from './Table';
     NovoCheckboxModule,
     TextMaskModule,
     IMaskDirectiveModule,
+    NovoOptionModule,
+    NovoCommonModule,
   ],
   declarations: [NovoTableElement],
   exports: [NovoTableElement],

@@ -164,14 +164,14 @@ export enum NovoTableMode {
                       (click)="focusInput()"
                     ></novo-button>
                     <!-- FILTER OPTIONS LIST -->
-                    <list
+                    <novo-optgroup
                       *ngIf="
                         (column?.options?.length || column?.originalOptions?.length) &&
                         column?.type !== 'date' &&
                         toggledDropdownMap[column.name]
                       "
                     >
-                      <item class="filter-search">
+                      <novo-option class="filter-search" inert>
                         <div class="header">
                           <span>{{ labels.filters }}</span>
                           <novo-button
@@ -194,19 +194,19 @@ export enum NovoTableMode {
                           keepFilterFocused
                           #filterInput
                         />
-                      </item>
-                      <item
+                      </novo-option>
+                      <novo-option
                         [ngClass]="{ active: isFilterActive(column, option) }"
                         *ngFor="let option of column.options"
                         (click)="onFilterClick(column, option)"
                         [attr.data-automation-id]="getOptionDataAutomationId(option)"
                       >
                         <span>{{ option?.label || option }}</span> <i class="bhi-check" *ngIf="isFilterActive(column, option)"></i>
-                      </item>
-                    </list>
+                      </novo-option>
+                    </novo-optgroup>
                     <!-- FILTER SEARCH INPUT -->
-                    <list *ngIf="!(column?.options?.length || column?.originalOptions?.length) && toggledDropdownMap[column.name]">
-                      <item class="filter-search">
+                    <novo-optgroup *ngIf="!(column?.options?.length || column?.originalOptions?.length) && toggledDropdownMap[column.name]">
+                      <novo-option class="filter-search" inert>
                         <div class="header">
                           <span>{{ labels.filters }}</span>
                           <novo-button theme="dialogue" color="negative" icon="times" (click)="onFilterClear(column)" *ngIf="column.filter">
@@ -222,19 +222,19 @@ export enum NovoTableMode {
                           keepFilterFocused
                           #filterInput
                         />
-                      </item>
-                    </list>
+                      </novo-option>
+                    </novo-optgroup>
                     <!-- FILTER DATE OPTIONS -->
-                    <list *ngIf="column?.options?.length && column?.type === 'date' && toggledDropdownMap[column.name]">
-                      <item class="filter-search" *ngIf="!column.calenderShow">
+                    <novo-optgroup *ngIf="column?.options?.length && column?.type === 'date' && toggledDropdownMap[column.name]">
+                      <novo-option class="filter-search" *ngIf="!column.calenderShow" inert>
                         <div class="header">
                           <span>{{ labels.filters }}</span>
                           <novo-button theme="dialogue" color="negative" icon="times" (click)="onFilterClear(column)" *ngIf="column.filter">
                             {{ labels.clear }}
                           </novo-button>
                         </div>
-                      </item>
-                      <item
+                      </novo-option>
+                      <novo-option
                         [ngClass]="{ active: isFilterActive(column, option) }"
                         *ngFor="let option of column.options"
                         (click)="onFilterClick(column, option)"
@@ -243,7 +243,7 @@ export enum NovoTableMode {
                         [attr.data-automation-id]="option?.label || option"
                       >
                         {{ option?.label || option }} <i class="bhi-check" *ngIf="isFilterActive(column, option)"></i>
-                      </item>
+                      </novo-option>
                       <div class="calendar-container" [hidden]="!column.calenderShow">
                         <div (click)="column.calenderShow = false"><i class="bhi-previous"></i>{{ labels.backToPresetFilters }}</div>
                         <novo-date-picker
@@ -253,7 +253,7 @@ export enum NovoTableMode {
                           range="true"
                         ></novo-date-picker>
                       </div>
-                    </list>
+                    </novo-optgroup>
                   </novo-dropdown>
                 </div>
               </th>
@@ -423,7 +423,7 @@ export class NovoTableElement implements DoCheck {
   pagedData: Array<any> = [];
   pageSelected: any;
   // Map to keep track of what dropdowns are toggled
-  // Used to properly *ngIf the <list> so that the keepFilterFocused Directive
+  // Used to properly *ngIf the <novo-optgroup> so that the keepFilterFocused Directive
   // will properly fire the ngAfterViewInit event
   toggledDropdownMap: any = {};
   public NovoTableMode = NovoTableMode;

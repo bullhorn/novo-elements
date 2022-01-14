@@ -4,6 +4,7 @@ import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { hasModifierKey } from '@angular/cdk/keycodes';
 import {
   AfterContentInit,
+  AfterViewInit,
   ChangeDetectorRef,
   Component,
   ContentChild,
@@ -76,7 +77,7 @@ const NovoDropdowMixins: HasOverlayCtor & CanDisableCtor & HasTabIndexCtor & typ
     '[attr.tabIndex]': 'disabled ? -1 : 0',
   },
 })
-export class NovoDropdownElement extends NovoDropdowMixins implements OnInit, AfterContentInit, OnDestroy {
+export class NovoDropdownElement extends NovoDropdowMixins implements OnInit, AfterContentInit, AfterViewInit, OnDestroy {
   @Input()
   parentScrollSelector: string;
   @Input()
@@ -176,6 +177,10 @@ export class NovoDropdownElement extends NovoDropdowMixins implements OnInit, Af
     this.focus();
   }
 
+  public ngAfterViewInit(): void {
+    this._watchPanelEvents();
+  }
+
   public ngOnDestroy(): void {
     this._onDestroy.next();
     this._onDestroy.complete();
@@ -228,7 +233,6 @@ export class NovoDropdownElement extends NovoDropdowMixins implements OnInit, Af
     const isArrowKey = key === Key.ArrowDown || key === Key.ArrowUp;
     const isTyping = manager.isTyping();
     const isInputField = event.target;
-    console.log('is input', isInputField);
     if (isArrowKey && event.altKey) {
       // Close the select on ALT + arrow key to match the native <select>
       event.preventDefault();
@@ -253,6 +257,11 @@ export class NovoDropdownElement extends NovoDropdowMixins implements OnInit, Af
         manager.activeItem._selectViaInteraction();
       }
     }
+  }
+
+  private _watchPanelEvents() {
+    const panelStateChanges = merge(this.overlay.opening, this.overlay.closing);
+    panelStateChanges.pipe(takeUntil(this._onDestroy)).subscribe((event: boolean) => this.toggled.emit(event));
   }
 
   private _watchSelectionEvents() {

@@ -302,14 +302,16 @@ novo-table {
     display: inline-block;
     line-height: inherit;
   }
-  list {
-    item.filter-search {
-      padding: 10px 0;
-      width: 100%;
-      height: auto;
-      flex-direction: column;
-      align-items: flex-start;
-      cursor: initial;
+  .novo-optgroup {
+    .novo-option.filter-search {
+      .novo-option-text {
+        padding: 10px 0;
+        width: 100%;
+        height: auto;
+        flex-direction: column;
+        align-items: flex-start;
+        cursor: initial;
+      }
       &:hover {
         background: transparent;
       }

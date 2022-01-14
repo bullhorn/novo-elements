@@ -135,7 +135,7 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
         this.overlayRef.detach();
         this.closingActionsSubscription.unsubscribe();
       }
-      this.closing.emit(true);
+      this.closing.emit(false);
       if (this.panelOpen) {
         this.changeDetectorRef.markForCheck();
       }
