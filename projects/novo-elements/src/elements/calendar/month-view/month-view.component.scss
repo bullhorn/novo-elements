@@ -95,9 +95,7 @@
       }
 
       &.rangeStart {
-        border-radius: 50%;
-        border-top-right-radius: 0;
-        border-bottom-right-radius: 0;
+        border-radius: 50% 0 0 50%;
         box-shadow: none !important;
         position: relative;
         &:before {
@@ -112,9 +110,7 @@
         }
       }
       &.rangeEnd {
-        border-radius: 50%;
-        border-top-left-radius: 0;
-        border-bottom-left-radius: 0;
+        border-radius: 0 50% 50% 0;
         box-shadow: none !important;
         position: relative;
         &:before {
