@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [5.13.1](https://github.com/bullhorn/novo-elements/compare/v5.13.0...v5.13.1) (2022-01-14)
+
+
+### Bug Fixes
+
+* **datePickerInput:** use translated and local format as date placeholder ([#1250](https://github.com/bullhorn/novo-elements/issues/1250)) ([386b099](https://github.com/bullhorn/novo-elements/commit/386b09925269c8ffa2385f052d1f293594c63d70))
+
 ## [5.13.0](https://github.com/bullhorn/novo-elements/compare/v5.12.1...v5.13.0) (2021-12-31)
 
 
