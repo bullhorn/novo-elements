@@ -1,5 +1,5 @@
 // NG2
-import { ChangeDetectorRef, Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 // APP
 import { Helpers } from '../../utils/Helpers';
@@ -14,6 +14,7 @@ const RADIO_VALUE_ACCESSOR = {
 @Component({
   selector: 'novo-radio-group',
   template: '<ng-content></ng-content>',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NovoRadioGroup { }
 
@@ -34,6 +35,7 @@ export class NovoRadioGroup { }
   host: {
     '[class.vertical]': 'vertical',
   },
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NovoRadioElement implements ControlValueAccessor {
   @Input()

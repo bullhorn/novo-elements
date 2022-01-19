@@ -1,5 +1,5 @@
 // NG2
-import { ChangeDetectorRef, Component, EventEmitter, forwardRef, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, forwardRef, Input, OnInit, Output } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 // APP
 import { Helpers } from '../../../../utils/Helpers';
@@ -30,6 +30,7 @@ const LAYOUT_DEFAULTS = { iconStyle: 'box' };
         </label>
     </div>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NovoCheckboxElement implements ControlValueAccessor, OnInit {
   @Input()

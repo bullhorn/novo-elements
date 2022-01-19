@@ -1,5 +1,5 @@
 // NG
-import { ChangeDetectorRef, Component, ElementRef, EventEmitter, forwardRef, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, EventEmitter, forwardRef, Input, Output } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 // Vendor
 import { isDate, parse } from 'date-fns';
@@ -38,6 +38,7 @@ const DATE_VALUE_ACCESSOR = {
       [disabled]="disabled"
     ></novo-time-picker-input>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NovoDateTimePickerInputElement implements ControlValueAccessor {
   public value: any;

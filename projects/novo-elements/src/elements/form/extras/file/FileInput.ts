@@ -13,6 +13,7 @@ import {
   SimpleChanges,
   Output,
   EventEmitter,
+  ChangeDetectionStrategy,
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 // APP
@@ -138,6 +139,7 @@ const LAYOUT_DEFAULTS = { order: 'default', download: true, removable: true, lab
       </div>
     </ng-template>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NovoFileInputElement implements ControlValueAccessor, OnInit, OnDestroy, OnChanges {
   @ViewChild('fileInput', { static: true })

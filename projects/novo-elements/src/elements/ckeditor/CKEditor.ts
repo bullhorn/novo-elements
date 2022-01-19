@@ -1,5 +1,5 @@
 // NG2
-import { Component, Input, Output, ViewChild, EventEmitter, NgZone, forwardRef, AfterViewInit, OnDestroy } from '@angular/core';
+import { Component, Input, Output, ViewChild, EventEmitter, NgZone, forwardRef, AfterViewInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 
 // Value accessor for the component (supports ngModel)
@@ -20,6 +20,7 @@ declare var CKEDITOR: any;
   selector: 'novo-editor',
   providers: [CKEDITOR_CONTROL_VALUE_ACCESSOR],
   template: '<textarea [name]="name" [id]="name" #host></textarea>',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NovoCKEditorElement implements OnDestroy, AfterViewInit, ControlValueAccessor {
   @Input()

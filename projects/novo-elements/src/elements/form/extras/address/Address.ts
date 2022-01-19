@@ -1,5 +1,5 @@
 // NG2
-import { Component, EventEmitter, forwardRef, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, forwardRef, Input, OnInit, Output } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 // APP
 import { NovoLabelService } from '../../../../services/novo-label-service';
@@ -185,6 +185,7 @@ export interface NovoAddressConfig {
       ></novo-picker>
     </span>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NovoAddressElement implements ControlValueAccessor, OnInit {
   @Input()

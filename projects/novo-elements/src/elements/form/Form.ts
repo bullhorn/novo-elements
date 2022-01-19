@@ -1,5 +1,5 @@
 // NG
-import { AfterContentInit, Component, ContentChildren, Input, OnInit, QueryList } from '@angular/core';
+import { AfterContentInit, ChangeDetectionStrategy, Component, ContentChildren, Input, OnInit, QueryList } from '@angular/core';
 // App
 import { NovoTemplateService } from '../../services/template/NovoTemplateService';
 import { Helpers } from '../../utils/Helpers';
@@ -21,6 +21,7 @@ import { NovoFormGroup } from './FormInterfaces';
         </div>
     `,
   providers: [NovoTemplateService],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NovoFormElement implements AfterContentInit, OnInit {
   @Input()

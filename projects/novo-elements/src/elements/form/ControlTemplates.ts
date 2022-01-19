@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, QueryList, ViewChildren } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, QueryList, ViewChildren } from '@angular/core';
 import { NovoTemplateService } from '../../services/template/NovoTemplateService';
 import { NovoTemplate } from '../common/novo-template/novo-template.directive';
 
@@ -139,6 +139,7 @@ import { NovoTemplate } from '../common/novo-template/novo-template.directive';
           </div>
         </ng-template>
     `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NovoControlTemplates implements AfterViewInit {
   @ViewChildren(NovoTemplate)

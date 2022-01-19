@@ -1,6 +1,7 @@
 // NG
 import { FocusMonitor } from '@angular/cdk/a11y';
 import {
+  ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   ElementRef,
@@ -76,6 +77,7 @@ const SELECT_VALUE_ACCESSOR = {
   host: {
     '(keydown)': 'onKeyDown($event)',
   },
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NovoSelectElement implements OnInit, OnChanges, OnDestroy, ControlValueAccessor {
   @Input()

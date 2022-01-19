@@ -10,6 +10,7 @@ import {
   ViewChild,
   EventEmitter,
   HostBinding,
+  ChangeDetectionStrategy,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { TAB, ENTER, ESCAPE } from '@angular/cdk/keycodes';
@@ -62,6 +63,7 @@ const DATE_VALUE_ACCESSOR = {
       ></novo-date-picker>
     </novo-overlay-template>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor {
   public value: any;

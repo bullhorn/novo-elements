@@ -1,5 +1,5 @@
 // NG2
-import { Component, EventEmitter, Output, ElementRef, Input, forwardRef, OnInit, OnDestroy } from '@angular/core';
+import { Component, EventEmitter, Output, ElementRef, Input, forwardRef, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 // Vendor
 import 'brace/index';
@@ -21,6 +21,7 @@ const ACE_VALUE_ACCESSOR = {
   selector: 'novo-ace-editor',
   template: '',
   providers: [ACE_VALUE_ACCESSOR],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NovoAceEditor implements ControlValueAccessor, OnInit, OnDestroy {
   @Input()

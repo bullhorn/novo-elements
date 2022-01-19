@@ -1,5 +1,5 @@
 // NG2
-import { ElementRef, Component, EventEmitter, Input, Output, forwardRef } from '@angular/core';
+import { ElementRef, Component, EventEmitter, Input, Output, forwardRef, ChangeDetectionStrategy } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 // Vendor
@@ -122,6 +122,7 @@ const DATE_TIME_PICKER_VALUE_ACCESSOR = {
       </div>
     </div>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NovoDateTimePickerElement implements ControlValueAccessor {
   @Input()
