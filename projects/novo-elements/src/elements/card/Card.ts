@@ -172,7 +172,7 @@ export class CardElement implements OnChanges, OnInit {
 
   ngOnChanges(changes?: SimpleChanges) {
     this.config = this.config || {};
-    this.cardAutomationId = `${(this.title || this.config.title || 'no-title').toLowerCase().replace(/\s/g, '-')}-card`;
+    this.cardAutomationId = `${(this.title || this.config.title || 'no-title').trim().toLowerCase().replace(/\s/g, '-')}-card`;
 
     const newIcon: string = this.icon || this.config.icon;
     const newMessageIcon: string = this.messageIcon || this.config.messageIcon;
