@@ -7,7 +7,6 @@
     border-radius: 50% !important;
     padding: 0;
     font-size: 1.2rem;
-    line-height: 1.6rem;
     width: 3.2rem;
     height: 3.2rem;
     display: inline-flex;
@@ -22,6 +21,9 @@
     }
     &:active {
       box-shadow: 0px 1px 2px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+    }
+    .button-contents {
+      display: contents;
     }
     i {
       margin: 0;

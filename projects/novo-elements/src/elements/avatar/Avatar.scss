@@ -31,7 +31,7 @@
     border-radius: 0.4em;
   }
 
-  @include theme-colors() using ($color, $name) {
+  @include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
     &.avatar-color-#{$name} {
       color: getContrastColor($name);
       background-color: $color;

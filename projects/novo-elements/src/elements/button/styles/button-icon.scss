@@ -6,7 +6,7 @@
     @include theme-text-colors("color");
     padding: $spacing-sm;
     font-size: 1.6rem;
-    line-height: 1.6rem;
+    height: 2.4rem;
     &[inverse] {
       color: #fff;
     }
@@ -21,14 +21,17 @@
     &:active {
       background: rgba(0, 0, 0, 0.25);
     }
+    .button-contents {
+      display: contents;
+    }
     &[size="small"] {
       padding: $spacing-sm;
       font-size: 1.2rem;
-      line-height: 1.2rem;
+      height: 2rem;
     }
     &[size="large"] {
       font-size: 2rem;
-      line-height: 2rem;
+      height: 2.8rem;
       padding: $spacing-md;
     }
   }

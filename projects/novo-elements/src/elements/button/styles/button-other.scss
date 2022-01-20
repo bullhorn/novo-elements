@@ -11,7 +11,7 @@
     margin-bottom: 4px;
     padding: $spacing-xs $spacing-sm;
     font-size: 1.2rem;
-    line-height: 1.8rem;
+    height: 1.8rem;
     text-align: left;
     &:hover,
     &:focus,
@@ -40,7 +40,7 @@
     z-index: z("default");
     text-transform: none;
     font-size: 1.2rem;
-    line-height: 1.8rem;
+    height: 1.8rem;
 
     &.empty {
       color: #a9a9a9;

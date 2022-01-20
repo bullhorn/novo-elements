@@ -3,10 +3,7 @@
 
 .novo-text {
   display: inline;
-  font-size: var(--font-size-text);
-  font-weight: normal;
-  line-height: 1.375em;
-  color: inherit;
+  @include novo-body-text();
 
   &.text-block {
     display: block;
@@ -21,11 +18,4 @@
       font-size: inherit;
     }
   }
-
-  @include base-text-rules();
-  @include text-sizing($font-size-sm, $font-size-lg); // @include text-sizing(1rem, 1.2rem, 1.4rem);
-  @include text-colors();
-  @include text-weights();
-  @include text-margins();
-  @include text-lengths();
 }

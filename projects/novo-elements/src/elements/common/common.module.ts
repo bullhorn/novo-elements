@@ -1,12 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { AccentColorDirective } from './directives/accent.directive';
-import { BackgroundColorDirective } from './directives/bgc.directive';
+import { BackgroundColorDirective } from './directives/bg.directive';
 import { BorderDirective } from './directives/border.directive';
 import { TextColorDirective } from './directives/color.directive';
 import { FillColorDirective } from './directives/fill.directive';
 import { FlexDirective } from './directives/flex.directive';
 import { GapDirective, MarginDirective, PaddingDirective } from './directives/space.directive';
+import { ThemeColorDirective } from './directives/theme.directive';
 import { NovoTemplate } from './novo-template/novo-template.directive';
 import { NovoOptionModule } from './option';
 import { NovoCaption } from './typography/caption/caption.component';
@@ -50,6 +51,7 @@ import { NovoTitle } from './typography/title/title.component';
     AccentColorDirective,
     FillColorDirective,
     FlexDirective,
+    ThemeColorDirective,
   ],
 })
 export class NovoCommonModule {}

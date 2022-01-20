@@ -134,6 +134,7 @@ export class NovoRadioElement implements ControlValueAccessor, OnInit {
   ngOnInit() {
     if (this.radioGroup) {
       this.checked = this.radioGroup.value === this._value;
+      this.vertical = this.radioGroup.appearance === 'vertical';
       this.name = this.radioGroup.name;
     }
   }

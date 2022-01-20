@@ -13,32 +13,13 @@ export class NovoBaseTextElement {
   @Input()
   color: string;
 
-  @HostBinding('class.text-weight-thin')
-  get hb_isWeightThin(): boolean {
-    return this.weight === 'thin';
-  }
-
-  @HostBinding('class.text-weight-medium')
-  get hb_isWeightMedium(): boolean {
-    return this.weight === 'medium';
-  }
-
-  @HostBinding('class.text-weight-bold')
-  get hb_isWeightBold(): boolean {
-    return this.weight === 'bold';
-  }
-
-  @HostBinding('class.text-weight-default')
-  get hb_isWeightDefault(): boolean {
-    return !['thin', 'medium', 'bold'].includes(this.weight);
-  }
-
   @HostBinding('class')
   get hb_classBinding(): string {
     return [
       this.color ? `text-color-${this.color}` : null,
       this.lineLength ? `text-length-${this.lineLength}` : null,
       this.size ? `text-size-${this.size}` : null,
+      this.weight ? `text-weight-${this.weight}` : null,
     ]
       .filter(Boolean)
       .join(' ');
@@ -83,6 +64,41 @@ export class NovoBaseTextElement {
   @Input()
   @BooleanInput()
   larger: boolean;
+
+  @HostBinding('class.text-weight-thin')
+  @Input()
+  @BooleanInput()
+  thin: boolean;
+
+  @HostBinding('class.text-weight-lighter')
+  @Input()
+  @BooleanInput()
+  lighter: boolean;
+
+  @HostBinding('class.text-weight-light')
+  @Input()
+  @BooleanInput()
+  light: boolean;
+
+  @HostBinding('class.text-weight-medium')
+  @Input()
+  @BooleanInput()
+  medium: boolean;
+
+  @HostBinding('class.text-weight-bold')
+  @Input()
+  @BooleanInput()
+  bold: boolean;
+
+  @HostBinding('class.text-weight-bolder')
+  @Input()
+  @BooleanInput()
+  bolder: boolean;
+
+  @HostBinding('class.text-weight-extrabold')
+  @Input()
+  @BooleanInput()
+  extrabold: boolean;
 
   constructor(protected element: ElementRef) {}
 

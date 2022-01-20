@@ -236,7 +236,7 @@ export class NovoFileInputElement
   }
 
   set name(value: string) {
-    this.name = value;
+    this._name = value;
   }
 
   @HostBinding('class.disabled')

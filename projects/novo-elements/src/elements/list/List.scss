@@ -18,7 +18,7 @@
       background: rgba($positive, 0.3);
     }
   }
-  @include theme-colors() using ($color, $name) {
+  @include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
     $contrast: getContrastColor($name);
     &[theme="#{$name}"] {
       .novo-list-item,
@@ -73,7 +73,7 @@ button[list-item] {
     .novo-item-avatar {
       margin-right: 0.5em;
       i {
-        @include theme-colors() using ($color, $name) {
+        @include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
           &.#{$name} {
             color: $color;
           }
@@ -103,7 +103,7 @@ button[list-item] {
       color: rgba(#434343, 0.85);
     }
     i {
-      @include theme-colors() using ($color, $name) {
+      @include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
         &.#{$name} {
           color: $color;
         }

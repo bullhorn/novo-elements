@@ -111,7 +111,7 @@ $switch-thumb-size: 20px !default;
   // Base color: $ocean
   // @include novo-switch-style($ocean, lighten($ocean, 18%));
   // Loop through analytics colors and make a switch color class for each
-  @include theme-colors() using ($color, $name) {
+  @include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
     &.#{$name} {
       @include novo-switch-style($color, lighten($color, 18%));
       &[aria-checked="true"] {

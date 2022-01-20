@@ -7,14 +7,14 @@
   justify-content: center;
   padding: 0 $spacing-md;
   font-size: var(--font-size-button);
-  line-height: 2.9rem;
+  height: 3rem;
   border: none;
   color: var(--text-main, $dark);
   background: transparent;
   border-radius: 3px;
   text-transform: uppercase;
   transition: all 200ms ease-in-out;
-  gap: 0.4rem;
+  gap: $spacing-md;
   cursor: pointer;
   user-select: none;
   text-overflow: clip;
@@ -23,29 +23,41 @@
   flex: 0 0 auto;
 
   .button-contents {
-    line-height: inherit;
+    height: var(--font-size-button);
+    display: inline-flex;
+    align-items: center;
+    line-height: 1;
     font-size: inherit;
     color: inherit;
-    display: contents;
     text-transform: uppercase;
   }
 
   i {
+    height: var(--font-size-button);
     font-size: inherit;
-    line-height: inherit;
-    padding: 0 5px;
+    line-height: 1;
   }
 
   &[size="small"] {
     font-size: 1rem;
-    padding: 0 $spacing-sm;
-    line-height: 2.4rem;
+    padding: 0 $spacing-md;
+    height: 2.4rem;
+    gap: $spacing-sm;
+    .button-contents,
+    i {
+      height: 1rem;
+    }
   }
 
   &[size="large"] {
     font-size: 1.6rem;
     padding: 0 $spacing-lg;
-    line-height: 3.6rem;
+    height: 3.6rem;
+    gap: $spacing-lg;
+    .button-contents,
+    i {
+      height: 1.6rem;
+    }
   }
 
   &:focus {

@@ -1,5 +1,4 @@
-header[theme],
-novo-header {
+.novo-header {
   display: block;
 
   .spacer {
@@ -85,21 +84,30 @@ novo-header {
       display: flex;
     }
   }
-  @include theme-backgrounds("theme") using ($color, $name) {
-    & > section.primary {
-      background: $color;
-      border-bottom: none;
+
+  @include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
+    &.novo-accent-#{$name} {
+      & > section.primary {
+        border-bottom: 2px solid $color;
+      }
     }
-    novo-title {
-      color: inherit;
-    }
-    novo-action {
-      button,
-      novo-button {
+    &.novo-theme-#{$name} {
+      & > section.primary {
+        background: $color;
+        border-bottom: none;
+      }
+      novo-title {
         color: inherit;
+      }
+      novo-action {
+        button,
+        novo-button {
+          color: inherit;
+        }
       }
     }
   }
+
   & > main {
     padding: 4px 16px 4px 32px;
   }

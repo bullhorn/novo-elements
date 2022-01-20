@@ -438,7 +438,7 @@ novo-table {
 }
 
 novo-table {
-  @include theme-colors() using ($color, $name) {
+  @include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
     $contrast: getContrastColor($name);
     &[theme="#{$name}"] {
       > header {

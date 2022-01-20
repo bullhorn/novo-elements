@@ -59,11 +59,11 @@ Apply spacing constants to components to set element's padding and margins.
 <typedef-example>
   <typedef-content>
     <novo-flex gap="1rem">
-      <novo-box bgc="ocean"><novo-box margin="xs" padding="xl" bgc="grass">xs/xl</novo-box></novo-box>
-      <novo-box bgc="ocean"><novo-box margin="sm" padding="lg" bgc="grass">sm/lg</novo-box></novo-box>
-      <novo-box bgc="ocean"><novo-box margin="md" padding="md" bgc="grass">md/md</novo-box></novo-box>
-      <novo-box bgc="ocean"><novo-box margin="lg" padding="sm" bgc="grass">lg/sm</novo-box></novo-box>
-      <novo-box bgc="ocean"><novo-box margin="xl" padding="xs" bgc="grass">xl/xs</novo-box></novo-box>
+      <novo-box bg="ocean"><novo-box margin="xs" padding="xl" bg="grass">xs/xl</novo-box></novo-box>
+      <novo-box bg="ocean"><novo-box margin="sm" padding="lg" bg="grass">sm/lg</novo-box></novo-box>
+      <novo-box bg="ocean"><novo-box margin="md" padding="md" bg="grass">md/md</novo-box></novo-box>
+      <novo-box bg="ocean"><novo-box margin="lg" padding="sm" bg="grass">lg/sm</novo-box></novo-box>
+      <novo-box bg="ocean"><novo-box margin="xl" padding="xs" bg="grass">xl/xs</novo-box></novo-box>
     </novo-flex>
   </typedef-content>
   <typedef-specs>
@@ -90,11 +90,11 @@ Apply spacing constants to components to set element's padding and margins.
 <typedef-example>
   <typedef-content>
     <novo-flex gap="1rem">
-      <novo-box bgc="ocean"><novo-box margin="xs" padding="xl" bgc="white">xs</novo-box></novo-box>
-      <novo-box bgc="ocean"><novo-box margin="sm" padding="lg" bgc="white">sm</novo-box></novo-box>
-      <novo-box bgc="ocean"><novo-box margin="md" padding="md" bgc="white">md</novo-box></novo-box>
-      <novo-box bgc="ocean"><novo-box margin="lg" padding="sm" bgc="white">lg</novo-box></novo-box>
-      <novo-box bgc="ocean"><novo-box margin="xl" padding="xs" bgc="white">xl</novo-box></novo-box>
+      <novo-box bg="ocean"><novo-box margin="xs" padding="xl" bg="white">xs</novo-box></novo-box>
+      <novo-box bg="ocean"><novo-box margin="sm" padding="lg" bg="white">sm</novo-box></novo-box>
+      <novo-box bg="ocean"><novo-box margin="md" padding="md" bg="white">md</novo-box></novo-box>
+      <novo-box bg="ocean"><novo-box margin="lg" padding="sm" bg="white">lg</novo-box></novo-box>
+      <novo-box bg="ocean"><novo-box margin="xl" padding="xs" bg="white">xl</novo-box></novo-box>
     </novo-flex>
   </typedef-content>
   <typedef-specs>

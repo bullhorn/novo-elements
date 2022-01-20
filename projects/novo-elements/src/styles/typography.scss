@@ -1,3 +1,6 @@
+@import "./variables.scss";
+@import "../elements/common/typography/text.mixins.scss";
+
 // Headers
 // --------------------------------------------------
 h1 {
@@ -131,4 +134,16 @@ h6.novo-section-header {
       margin-top: -0.2rem;
     }
   }
+}
+
+// Utility classes
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span {
+  @include base-text-rules();
 }

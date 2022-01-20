@@ -183,7 +183,7 @@ $chip-spacing: (
     }
   }
 
-  @include theme-colors() using ($color, $name) {
+  @include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
     &.novo-color-#{$name} {
       color: getContrastColor($name);
       background: $color;

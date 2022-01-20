@@ -47,7 +47,7 @@ novo-value {
   }
   novo-entity-list {
     display: block;
-    @include entity-colors() using ($color, $name) {
+    @include entity-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
       i.#{$name} {
         background: $color;
       }

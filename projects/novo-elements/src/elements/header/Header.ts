@@ -34,7 +34,7 @@ export class NovoUtilActionComponent {
 }
 
 @Component({
-  selector: 'novo-header,header[theme]',
+  selector: 'novo-header,header[theme],header[accent]',
   template: `
     <section>
       <div class="header-title">

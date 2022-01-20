@@ -7,10 +7,10 @@
   flex: 1;
   max-width: 130px;
   min-width: 130px;
-  font-weight: 500;
+  font-weight: 600;
   transition: 200ms ease-out;
   margin-right: 35px;
-  text-transform: uppercase;
+  // text-transform: uppercase;
   padding-top: 8px;
   word-break: word-break;
   overflow-wrap: break-word;
@@ -36,6 +36,7 @@ novo-form {
     form {
       width: 100%;
 
+<<<<<<< Updated upstream
       .novo-fieldset-header {
         background: $off-white;
         box-sizing: content-box;
@@ -53,6 +54,8 @@ novo-form {
         }
       }
 
+=======
+>>>>>>> Stashed changes
       div.novo-form-row,
       div.novo-control-group-control,
       td.novo-form-row {
@@ -738,8 +741,8 @@ novo-form {
                   bottom: 20px;
                   color: var(--text-main);
                   font-size: 1.1rem;
-                  font-weight: 500;
-                  text-transform: uppercase;
+                  font-weight: 600;
+                  // text-transform: uppercase;
                   position: absolute;
                   left: 22px;
                   pointer-events: none;
@@ -833,5 +836,23 @@ control-prompt-modal {
     label {
       margin-right: 10px;
     }
+  }
+}
+
+// Isolate styles
+.novo-fieldset-header {
+  background: $off-white;
+  box-sizing: content-box;
+  padding: 1rem 1rem 1rem 2rem;
+  margin-bottom: 2rem;
+  display: flex;
+  margin-left: -1.5rem;
+  margin-right: -1.5rem;
+  i,
+  novo-icon {
+    margin: 1px 10px 1px 6px;
+  }
+  &.hidden {
+    display: none;
   }
 }

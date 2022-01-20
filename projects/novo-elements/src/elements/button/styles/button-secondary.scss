@@ -12,15 +12,6 @@
     color: $positive;
     border: 1px solid $positive;
     padding: 0 calc(#{$spacing-md} - 1px);
-    line-height: calc(3.2rem - 2px);
-
-    &[size="small"] {
-      line-height: calc(2.4rem - 2px);
-    }
-
-    &[size="large"] {
-      line-height: calc(4rem - 2px);
-    }
 
     i.loading {
       margin-left: 0.8rem;

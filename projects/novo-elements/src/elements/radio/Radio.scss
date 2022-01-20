@@ -111,7 +111,7 @@ novo-radio {
       background: $positive;
     }
 
-    @include theme-colors() using ($color, $name) {
+    @include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
       &.checked[color="#{$name}"] {
         color: $white;
         background: $color;

@@ -6,7 +6,7 @@ novo-value {
   align-items: flex-start;
   width: max-content;
   padding: 8px;
-  @include entity-colors() using ($color, $name) {
+  @include entity-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
     i.#{$name} {
       color: $color;
     }
@@ -41,7 +41,7 @@ novo-value {
   }
   novo-entity-list {
     display: block;
-    @include entity-colors() using ($color, $name) {
+    @include entity-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
       i.#{$name} {
         color: $color;
       }

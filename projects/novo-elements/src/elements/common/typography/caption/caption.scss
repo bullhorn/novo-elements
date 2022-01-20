@@ -3,17 +3,7 @@
 
 :host {
   display: inline;
-  font-size: var(--font-size-caption);
-  font-weight: 400;
-  line-height: 1.375em;
-  color: $neutral;
-
-  @include base-text-rules();
-  @include text-sizing(0.8rem, 1rem); // @include text-sizing(0.8rem, 0.9rem, 1rem);
-  @include text-colors();
-  @include text-weights();
-  @include text-margins();
-  @include text-lengths();
+  @include novo-caption-text();
 
   novo-icon {
     vertical-align: top;

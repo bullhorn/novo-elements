@@ -6,12 +6,26 @@
 }
 
 @mixin base-text-rules() {
+  transition: 0.2s ease-out;
+
   &.text-nowrap {
     white-space: nowrap;
   }
+  &.text-ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  @include text-sizing();
+  @include text-colors();
+  @include text-margins();
+  @include text-lengths();
+  @include text-weights();
 }
 
-@mixin text-sizing($smaller, $larger) {
+@mixin text-sizing() {
+  // Controls font-size of text
   &.text-size-default {
     font-size: inherit;
   }
@@ -40,25 +54,47 @@
     font-size: $font-size-3xl;
   }
   &.text-size-smaller {
-    font-size: $smaller;
+    font-size: 0.8em;
   }
   &.text-size-larger {
-    font-size: $larger;
+    font-size: 1.2em;
   }
 }
 
 @mixin text-weights() {
+  // Font Weight Utils
+  &.text-weight-hairline {
+    font-weight: 100;
+  }
   &.text-weight-thin {
     font-weight: 200;
   }
-  &.text-weight-default {
+  &.text-weight-light {
+    font-weight: 300;
+  }
+  &.text-weight-normal {
     font-weight: 400;
   }
   &.text-weight-medium {
     font-weight: 500;
   }
+  &.text-weight-semibold {
+    font-weight: 600;
+  }
   &.text-weight-bold {
     font-weight: 700;
+  }
+  &.text-weight-extrabold {
+    font-weight: 800;
+  }
+  &.text-weight-heavy {
+    font-weight: 900;
+  }
+  &.text-weight-lighter {
+    font-weight: lighter;
+  }
+  &.text-weight-bolder {
+    font-weight: bolder;
   }
 }
 
@@ -75,7 +111,7 @@
 }
 
 @mixin text-colors() {
-  @include theme-colors() using ($color, $name) {
+  @include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
     &.text-color-#{$name} {
       color: $color;
     }
@@ -97,26 +133,28 @@
   font-weight: normal;
   color: inherit;
   font-size: var(--font-size-text);
+  @include base-text-rules();
 }
 
 @mixin novo-title-text() {
-  font-weight: 500;
+  font-weight: 600;
   line-height: 1.5;
   color: var(--text-main, $dark);
   white-space: nowrap;
   text-overflow: ellipsis;
   font-size: var(--font-size-title);
+  @include base-text-rules();
 }
 
 @mixin novo-label-text() {
-  font-weight: 500;
-  transition: 0.2s ease-out;
-  text-transform: uppercase;
+  font-weight: 600;
+  // text-transform: uppercase;
   word-break: word-break;
   overflow-wrap: break-word;
   line-height: 1.375;
-  color: $slate;
+  color: var(--text-muted);
   font-size: var(--font-size-label);
+  @include base-text-rules();
 }
 
 @mixin novo-caption-text() {
@@ -124,4 +162,5 @@
   font-weight: 400;
   line-height: 1.375;
   color: var(--text-muted, $dark);
+  @include base-text-rules();
 }

@@ -184,6 +184,7 @@ export class NovoOptionBase implements FocusableOption, AfterViewChecked, OnDest
   }
 
   _handleDisabledClick(event: MouseEvent) {
+    console.log('Captured click');
     if (this.disabled) {
       event.preventDefault();
       event.stopPropagation();

@@ -56,7 +56,7 @@ novo-search {
       color: $positive !important;
     }
 
-    @include theme-colors() using ($color, $name) {
+    @include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
       &[color="#{$name}"] {
         > novo-icon {
           color: $color !important;
@@ -64,7 +64,7 @@ novo-search {
       }
     }
 
-    @include theme-backgrounds() using ($color, $name) {
+    @include theme-backgrounds() using ($name, $color, $contrast, $tint, $shade, $pale) {
       novo-icon,
       input {
         transition: all 250ms;

@@ -3,14 +3,7 @@
 
 :host {
   display: inline-block;
-  font-size: var(--font-size-label);
-  font-weight: 500;
-  line-height: 1.375em;
-  transition: 0.2s ease-out;
-  text-transform: uppercase;
-  word-break: word-break;
-  overflow-wrap: break-word;
-  color: inherit;
+  @include novo-label-text();
 
   &::ng-deep {
     novo-icon {
@@ -18,10 +11,4 @@
       font-size: 1em;
     }
   }
-
-  @include base-text-rules();
-  @include text-sizing(1rem, $font-size-md);
-  // @include text-sizing(1rem, 1.1rem, 1.2rem);
-  @include text-colors();
-  @include text-margins();
 }

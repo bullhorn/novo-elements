@@ -1,5 +1,6 @@
 // NG2
 import { Component } from '@angular/core';
+import { TypographyWeight } from '..';
 import { NovoBaseTextElement } from '../base/base-text.component';
 
 /**
@@ -21,4 +22,6 @@ import { NovoBaseTextElement } from '../base/base-text.component';
     class: 'novo-title',
   },
 })
-export class NovoTitle extends NovoBaseTextElement {}
+export class NovoTitle extends NovoBaseTextElement {
+  weight: TypographyWeight = 'semibold';
+}

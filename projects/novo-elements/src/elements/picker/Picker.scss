@@ -66,7 +66,7 @@ novo-picker {
     padding: 3px;
     color: $white;
 
-    @include theme-colors() using ($color, $name) {
+    @include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
       &.#{$name} {
         background: $color;
       }
