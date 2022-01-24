@@ -25,6 +25,8 @@ export class NovoDataTableCheckboxHeaderCell<T> extends CdkHeaderCell implements
   public maxSelected: number = undefined;
   @Input()
   public canSelectAll: boolean = false;
+  @Input()
+  public allMatchingSelected: boolean = false;
 
   public checked: boolean = false;
   private selectionSubscription: Subscription;
@@ -49,7 +51,7 @@ export class NovoDataTableCheckboxHeaderCell<T> extends CdkHeaderCell implements
     renderer.addClass(elementRef.nativeElement, 'novo-data-table-checkbox-header-cell');
 
     this.selectionSubscription = this.dataTable.state.selectionSource.subscribe(() => {
-      this.checked = this.dataTable.allCurrentRowsSelected();
+      this.checked = this.dataTable.allCurrentRowsSelected() || this.dataTable.allMatchingSelected;
       if (this.canSelectAll) {
         this.selectAllChanged();
       }
@@ -65,7 +67,7 @@ export class NovoDataTableCheckboxHeaderCell<T> extends CdkHeaderCell implements
         this.dataTable.state.checkRetainment('pageSize');
         this.dataTable.state.reset(false, true);
       } else {
-        this.checked = this.dataTable.allCurrentRowsSelected();
+        this.checked = this.dataTable.allCurrentRowsSelected() || this.dataTable.allMatchingSelected;
         if (this.canSelectAll) {
           this.selectAllChanged();
         }
@@ -113,6 +115,7 @@ export class NovoDataTableCheckboxHeaderCell<T> extends CdkHeaderCell implements
     const allSelectedEvent = {
       allSelected: this.checked,
       selectedCount: this.dataTable?.state?.selected?.length,
+      allMatchingSelected: this.allMatchingSelected,
     };
     this.dataTable.allSelected.emit(allSelectedEvent);
   }

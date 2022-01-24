@@ -69,6 +69,8 @@ import { ListInteractionDictionary, ListInteractionEvent } from './ListInteracti
         [pageSize]="paginationOptions.pageSize"
         [pageSizeOptions]="paginationOptions.pageSizeOptions"
         [dataFeatureId]="paginatorDataFeatureId"
+        [canSelectAll]="canSelectAll"
+        [allMatchingSelected]="allMatchingSelected"
       >
       </novo-data-table-pagination>
       <div class="novo-data-table-actions" *ngIf="templates['customActions']">
@@ -99,8 +101,8 @@ import { ListInteractionDictionary, ListInteractionEvent } from './ListInteracti
           [hidden]="dataSource?.totallyEmpty && !state.userFiltered"
         >
           <ng-container cdkColumnDef="selection">
-            <novo-data-table-checkbox-header-cell *cdkHeaderCellDef [maxSelected]="maxSelected" [canSelectAll]="canSelectAll"></novo-data-table-checkbox-header-cell>
-            <novo-data-table-checkbox-cell *cdkCellDef="let row; let i = index" [row]="row" [maxSelected]="maxSelected"></novo-data-table-checkbox-cell>
+            <novo-data-table-checkbox-header-cell *cdkHeaderCellDef [maxSelected]="maxSelected" [canSelectAll]="canSelectAll" [allMatchingSelected]="allMatchingSelected"></novo-data-table-checkbox-header-cell>
+            <novo-data-table-checkbox-cell *cdkCellDef="let row; let i = index" [row]="row" [maxSelected]="maxSelected" [canSelectAll]="canSelectAll" [allMatchingSelected]="allMatchingSelected"></novo-data-table-checkbox-cell>
           </ng-container>
           <ng-container cdkColumnDef="expand">
             <novo-data-table-expand-header-cell *cdkHeaderCellDef></novo-data-table-expand-header-cell>
@@ -305,6 +307,7 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   @Input() paginatorDataFeatureId: string;
   @Input() maxSelected: number = undefined;
   @Input() canSelectAll: boolean = false;
+  @Input() allMatchingSelected = false;
 
   @Input()
   set dataTableService(service: IDataTableService<T>) {
@@ -419,6 +422,7 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   private resetSubscription: Subscription;
   private paginationSubscription: Subscription;
   private sortFilterSubscription: Subscription;
+  private allMatchingSelectedSubscription: Subscription;
   private _columns: IDataTableColumn<T>[];
   private scrollListenerHandler: any;
   private initialized: boolean = false;
@@ -461,6 +465,12 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
         this.ref.detectChanges();
       }, 300);
     });
+    // TODO: hide
+    this.allMatchingSelectedSubscription = this.state.allMatchingSelectedSource.subscribe(
+      (event: boolean) => {
+        this.allMatchingSelected = event;
+      },
+    );
   }
 
   public modifyCellHeaderMultiSelectFilterOptions(column: string, newOptions: { value: any; label: string }[]): void {
@@ -495,6 +505,9 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
     }
     if (this.sortFilterSubscription) {
       this.sortFilterSubscription.unsubscribe();
+    }
+    if (this.allMatchingSelectedSubscription) {
+      this.allMatchingSelectedSubscription.unsubscribe();
     }
   }
 
@@ -596,21 +609,28 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
     return true;
   }
 
-  public isSelected(row: T): boolean {
+  public isSelected(row: T, origin?: string): boolean {
     if (!row) {
       return false;
     }
     return this.state.selectedRows.has(`${row[this.rowIdentifier]}`);
   }
 
-  public selectRow(row: T): void {
-    const selected = this.isSelected(row);
-
+  public selectRow(row: T, origin?: string): void {
+    const selected = this.isSelected(row, origin);
+    // TODO: fix logic
     if (selected) {
       this.state.selectedRows.delete(`${row[this.rowIdentifier]}`);
     } else {
-      this.state.selectedRows.set(`${row[this.rowIdentifier]}`, row);
+      if (this.allMatchingSelected && ['onClick'].includes(origin)) {
+        this.state.selectedRows.clear();
+        this.selectRows(true);
+        this.state.selectedRows.delete(`${row[this.rowIdentifier]}`);
+      } else {
+        this.state.selectedRows.set(`${row[this.rowIdentifier]}`, row);
+      }
     }
+    this.state.allMatchingSelectedSource.next(false);
     this.state.onSelectionChange();
   }
 
@@ -626,6 +646,9 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   }
 
   public allCurrentRowsSelected(): boolean {
+    if (this.allMatchingSelected) {
+      return true;
+    }
     if (!this.dataSource?.data?.length) {
       return false;
     }
