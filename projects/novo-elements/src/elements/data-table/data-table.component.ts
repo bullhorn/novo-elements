@@ -101,8 +101,8 @@ import { ListInteractionDictionary, ListInteractionEvent } from './ListInteracti
           [hidden]="dataSource?.totallyEmpty && !state.userFiltered"
         >
           <ng-container cdkColumnDef="selection">
-            <novo-data-table-checkbox-header-cell *cdkHeaderCellDef [maxSelected]="maxSelected" [canSelectAll]="canSelectAll" [allMatchingSelected]="allMatchingSelected"></novo-data-table-checkbox-header-cell>
-            <novo-data-table-checkbox-cell *cdkCellDef="let row; let i = index" [row]="row" [maxSelected]="maxSelected" [canSelectAll]="canSelectAll" [allMatchingSelected]="allMatchingSelected"></novo-data-table-checkbox-cell>
+            <novo-data-table-checkbox-header-cell *cdkHeaderCellDef [maxSelected]="maxSelected"></novo-data-table-checkbox-header-cell>
+            <novo-data-table-checkbox-cell *cdkCellDef="let row; let i = index" [row]="row" [maxSelected]="maxSelected"></novo-data-table-checkbox-cell>
           </ng-container>
           <ng-container cdkColumnDef="expand">
             <novo-data-table-expand-header-cell *cdkHeaderCellDef></novo-data-table-expand-header-cell>
@@ -465,7 +465,6 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
         this.ref.detectChanges();
       }, 300);
     });
-    // TODO: hide
     this.allMatchingSelectedSubscription = this.state.allMatchingSelectedSource.subscribe(
       (event: boolean) => {
         this.allMatchingSelected = event;
@@ -609,7 +608,7 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
     return true;
   }
 
-  public isSelected(row: T, origin?: string): boolean {
+  public isSelected(row: T): boolean {
     if (!row) {
       return false;
     }
@@ -617,12 +616,13 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   }
 
   public selectRow(row: T, origin?: string): void {
-    const selected = this.isSelected(row, origin);
-    // TODO: fix logic
+    const selected = this.isSelected(row);
     if (selected) {
       this.state.selectedRows.delete(`${row[this.rowIdentifier]}`);
     } else {
-      if (this.allMatchingSelected && ['onClick'].includes(origin)) {
+      if (this.canSelectAll && this.allMatchingSelected && ['onClick'].includes(origin)) {
+        // When all matching records are select the user could be on another page where all rows only appear selected
+        // Need to reset the rows that are actually selected, select rows on the current page and deselect the chosen record
         this.state.selectedRows.clear();
         this.selectRows(true);
         this.state.selectedRows.delete(`${row[this.rowIdentifier]}`);

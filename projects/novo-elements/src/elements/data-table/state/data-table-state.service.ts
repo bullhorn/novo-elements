@@ -94,7 +94,6 @@ export class DataTableState<T> {
   }
 
   public clearSelected(fireUpdate: boolean = true): void {
-    // TODO: hide behind if
     this.allMatchingSelectedSource.next(false);
     this.globalSearch = undefined;
     this.page = 0;
@@ -152,6 +151,6 @@ export class DataTableState<T> {
   }
 
   public checkRetainment(caller: string, allMatchingSelected = false): void {
-    this.retainSelected = this.selectionOptions?.some(option => option.label === caller) || this.retainSelected || allMatchingSelected;
+    this.retainSelected = this.selectionOptions?.some(option => option.label === caller) || this.retainSelected || allMatchingSelected || allMatchingSelected;
   }
 }
