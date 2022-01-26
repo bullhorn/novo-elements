@@ -1,7 +1,7 @@
 // NG2
 import { TestBed, async } from '@angular/core/testing';
 import { NovoDataTablePagination } from './data-table-pagination.component';
-import { NovoLabelService, NovoTilesModule } from '../../..';
+import { NovoLabelService, NovoSelectModule, NovoTilesModule } from '../../..';
 import { DataTableState } from '../state/data-table-state.service';
 import { ChangeDetectorRef } from '@angular/core';
 
@@ -14,7 +14,7 @@ describe('Elements: NovoDataTablePagination', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [NovoDataTablePagination],
-      imports: [NovoTilesModule],
+      imports: [NovoTilesModule, NovoSelectModule],
       providers: [NovoLabelService,
                   DataTableState,
                   ChangeDetectorRef,
