@@ -151,6 +151,6 @@ export class DataTableState<T> {
   }
 
   public checkRetainment(caller: string, allMatchingSelected = false): void {
-    this.retainSelected = this.selectionOptions?.some(option => option.label === caller) || this.retainSelected || allMatchingSelected || allMatchingSelected;
+    this.retainSelected = this.selectionOptions?.some(option => option.label === caller) || this.retainSelected || allMatchingSelected;
   }
 }

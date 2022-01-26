@@ -94,13 +94,15 @@ describe('Elements: NovoDataTableCheckboxHeaderCell', () => {
     });
   });
 
-  describe('Method: selectAllChanged(()', () => {
+  describe('Method: selectAllChanged()', () => {
     it('should emit and allSelected event', () => {
       const expected = {
         allSelected: false,
         selectedCount: 3,
+        allMatchingSelected: true,
       };
       component.dataTable = {
+        allMatchingSelected: true,
         state: {
           selected: [{ id: 1 }, { id: 2 }, { id: 3 }],
         },
