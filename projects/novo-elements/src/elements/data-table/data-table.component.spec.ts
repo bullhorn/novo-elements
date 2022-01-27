@@ -2,7 +2,7 @@ import { TestBed, async } from '@angular/core/testing';
 import { NovoDataTable } from './data-table.component';
 import { ChangeDetectorRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { NovoDropdownModule, NovoLabelService, NovoSearchBoxModule } from '../..';
+import { NovoDropdownModule, NovoLabelService, NovoLoadingModule, NovoSearchBoxModule } from '../..';
 import { DataTableState } from './state/data-table-state.service';
 import { NovoDataTableRow } from './rows/data-table-row.component';
 import { NovoDataTableHeaderRow } from './rows/data-table-header-row.component';
@@ -10,6 +10,7 @@ import { NovoDataTableCell } from './cells/data-table-cell.component';
 import { NovoDataTableHeaderCell } from './cell-headers/data-table-header-cell.directive';
 import { NovoDataTableExpandCell } from './cells/data-table-expand-cell.component';
 import { NovoDataTablePagination } from './pagination/data-table-pagination.component';
+import { CdkTableModule } from '@angular/cdk/table';
 
 describe('Elements: NovoDataTable', () => {
   let fixture;
@@ -19,6 +20,13 @@ describe('Elements: NovoDataTable', () => {
     TestBed.configureTestingModule({
       declarations: [
         NovoDataTable,
+      ],
+      imports: [
+        FormsModule,
+        NovoDropdownModule,
+        NovoSearchBoxModule,
+        NovoLoadingModule,
+        CdkTableModule,
         NovoDataTableRow,
         NovoDataTableHeaderRow,
         NovoDataTableCell,
@@ -26,7 +34,6 @@ describe('Elements: NovoDataTable', () => {
         NovoDataTableExpandCell,
         NovoDataTablePagination,
       ],
-      imports: [FormsModule, NovoDropdownModule, NovoSearchBoxModule],
       providers: [NovoLabelService,
                   DataTableState,
                   ChangeDetectorRef,
