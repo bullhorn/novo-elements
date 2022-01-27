@@ -31,6 +31,127 @@ describe('Elements: NovoDataTable', () => {
     });
   });
 
+  describe('Method: onSearchChange(term: string)', () => {
+    it('should set state.globalSearch., state.reset, and state.updates.next', () => {
+      const expected = {
+        globalSearch: 'test',
+        filter: 'filter',
+        sort: 'sort',
+      };
+      component.state.globalSearch = 'notTest';
+      component.state.filter = 'filter';
+      component.state.sort = 'sort';
+      spyOn(component.state, 'reset');
+      spyOn(component.state.updates, 'next');
+      component.onSearchChange('test');
+      expect(component.state.globalSearch).toEqual('test');
+      expect(component.state.reset).toHaveBeenCalledWith(false, true);
+      expect(component.state.updates.next).toHaveBeenCalledWith(expected);
+    });
+  });
+
+  describe('Method: isDisabled(check: any, row: T)', () => {
+    const row = { id: 1 };
+    it('should return true if check.disabled is true', () => {
+      const check = { disabled: true };
+      const actual = component.isDisabled(check, row);
+      expect(actual).toBeTruthy();
+    });
+    it('should return false if check.disabled is false and there is no check.disabledFunc', () => {
+      const check = { disabled: false };
+      const actual = component.isDisabled(check, row);
+      expect(actual).toBeFalsy();
+    });
+    it('should return check.disabledFunc if check.disabled is false', () => {
+      const check = { disabled: false, disabledFunc: () => { return true } };
+      const actual = component.isDisabled(check, row);
+      expect(actual).toBeTruthy();
+    });
+  });
+
+  describe('Method: isExpanded(row: T)', () => {
+    beforeEach(() => {
+      spyOn(component.state.expandedRows, 'has');
+    });
+    it('should call expandedRows.has if row passed in', () => {
+      const row = { id: 1 };
+      component.rowIdentifier = 'id';
+      component.isExpanded(row);
+      expect(component.state.expandedRows.has).toHaveBeenCalledWith('1');
+    });
+    it('should return false if no row passed in', () => {
+      expect(component.isExpanded()).toBeFalsy();
+      expect(component.state.expandedRows.has).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('Method: expandRow()', () => {
+    const row = { id: 1 };
+
+    it('should call isExpanded and state.onExpandChange', () => {
+      spyOn(component, 'isExpanded');
+      spyOn(component.state, 'onExpandChange');
+      component.expandRow(row);
+      expect(component.isExpanded).toHaveBeenCalledWith(row);
+      expect(component.state.onExpandChange).toHaveBeenCalled();
+    });
+    it('should call state.expandedRows.delete if selected', () => {
+      spyOn(component.state.expandedRows, 'delete');
+      spyOn(component, 'isExpanded').and.returnValue(true);
+      component.expandRow(row);
+      expect(component.state.expandedRows.delete).toHaveBeenCalled();
+    });
+    it('should call state.selectedRows.set if not selected', () => {
+      spyOn(component.state.expandedRows, 'add');
+      spyOn(component, 'isExpanded').and.returnValue(false);
+      component.expandRow(row);
+      expect(component.state.expandedRows.add).toHaveBeenCalled();
+    });
+  });
+
+  describe('Method: expandRows(expand: boolean)', () => {
+    beforeEach(() => {
+      component.dataSource = {
+        data: [{ id: 1 }, { id: 2 }],
+      };
+    });
+    it('should call expandedRows.add if selected is true', () => {
+      spyOn(component.state.expandedRows, 'add');
+      component.expandRows(true);
+      expect(component.state.expandedRows.add).toHaveBeenCalledTimes(2);
+    });
+    it('should call selectedRows.delete if selected is false', () => {
+      spyOn(component.state.expandedRows, 'delete');
+      component.expandRows(false);
+      expect(component.state.expandedRows.delete).toHaveBeenCalledTimes(2);
+    });
+    it('should call onExpandChange', () => {
+      spyOn(component.state, 'onExpandChange');
+      component.expandRows(true);
+      expect(component.state.onExpandChange).toHaveBeenCalled();
+    });
+  });
+
+  describe('Method: allCurrentRowsExpanded()', () => {
+    beforeEach(() => {
+      component.dataSource = {
+        data: [{ id: 1 }, { id: 2 }],
+      };
+    });
+    it('should return false if one of the records is not selected', () => {
+      spyOn(component, 'isExpanded').and.returnValue(false);
+      const actual = component.allCurrentRowsExpanded();
+      expect(component.isExpanded).toHaveBeenCalledTimes(1);
+      expect(actual).toBeFalsy();
+    });
+    it('should return true if every row is selected', () => {
+      spyOn(component, 'isExpanded').and.returnValue(true);
+      const actual = component.allCurrentRowsExpanded();
+      expect(component.isExpanded).toHaveBeenCalledTimes(2);
+      expect(actual).toBeTruthy();
+    });
+  });
+
   describe('Method: isSelected(row: T)', () => {
     beforeEach(() => {
       spyOn(component.state.selectedRows, 'has');
@@ -140,6 +261,11 @@ describe('Elements: NovoDataTable', () => {
   });
 
   describe('Method: allCurrentRowsSelected()', () => {
+    beforeEach(() => {
+      component.dataSource = {
+        data: [{ id: 1 }, { id: 2 }],
+      };
+    });
     it('should return true if allMatching selected is true', () => {
       component.allMatchingSelected = true;
       const actual = component.allCurrentRowsSelected();
@@ -154,9 +280,6 @@ describe('Elements: NovoDataTable', () => {
     it('should return false if one of the records is not selected', () => {
       spyOn(component, 'isSelected').and.returnValue(false);
       component.allMatchingSelected = false;
-      component.dataSource = {
-        data: [{ id: 1 }, { id: 2 }],
-      };
       const actual = component.allCurrentRowsSelected();
       expect(component.isSelected).toHaveBeenCalledTimes(1);
       expect(actual).toBeFalsy();
@@ -164,9 +287,6 @@ describe('Elements: NovoDataTable', () => {
     it('should return true if every row is selected', () => {
       spyOn(component, 'isSelected').and.returnValue(true);
       component.allMatchingSelected = false;
-      component.dataSource = {
-        data: [{ id: 1 }, { id: 2 }],
-      };
       const actual = component.allCurrentRowsSelected();
       expect(component.isSelected).toHaveBeenCalledTimes(2);
       expect(actual).toBeTruthy();
