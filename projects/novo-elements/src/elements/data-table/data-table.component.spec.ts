@@ -20,6 +20,12 @@ describe('Elements: NovoDataTable', () => {
     TestBed.configureTestingModule({
       declarations: [
         NovoDataTable,
+        NovoDataTableRow,
+        NovoDataTableHeaderRow,
+        NovoDataTableCell,
+        NovoDataTableHeaderCell,
+        NovoDataTableExpandCell,
+        NovoDataTablePagination,
       ],
       imports: [
         FormsModule,
@@ -27,12 +33,6 @@ describe('Elements: NovoDataTable', () => {
         NovoSearchBoxModule,
         NovoLoadingModule,
         CdkTableModule,
-        NovoDataTableRow,
-        NovoDataTableHeaderRow,
-        NovoDataTableCell,
-        NovoDataTableHeaderCell,
-        NovoDataTableExpandCell,
-        NovoDataTablePagination,
       ],
       providers: [NovoLabelService,
                   DataTableState,
