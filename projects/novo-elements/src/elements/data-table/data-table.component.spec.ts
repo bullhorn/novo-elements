@@ -63,7 +63,7 @@ describe('Elements: NovoDataTable', () => {
       expect(actual).toBeFalsy();
     });
     it('should return check.disabledFunc if check.disabled is false', () => {
-      const check = { disabled: false, disabledFunc: () => { return true } };
+      const check = { disabled: false, disabledFunc: () => true };
       const actual = component.isDisabled(check, row);
       expect(actual).toBeTruthy();
     });
