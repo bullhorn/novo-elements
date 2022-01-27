@@ -621,7 +621,7 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
       this.state.selectedRows.delete(`${row[this.rowIdentifier]}`);
     } else {
       if (this.canSelectAll && this.allMatchingSelected && ['onClick'].includes(origin)) {
-        // When all matching records are select the user could be on another page where all rows only appear selected
+        // When all matching records are selected the user could be on another page where all rows only appear selected
         // Need to reset the rows that are actually selected, select rows on the current page and deselect the chosen record
         this.state.selectedRows.clear();
         this.selectRows(true);
