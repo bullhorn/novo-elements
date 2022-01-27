@@ -4,6 +4,7 @@ import { NovoDataTablePagination } from './data-table-pagination.component';
 import { NovoLabelService, NovoSelectModule, NovoTilesModule } from '../../..';
 import { DataTableState } from '../state/data-table-state.service';
 import { ChangeDetectorRef } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 // App
 
@@ -14,7 +15,7 @@ describe('Elements: NovoDataTablePagination', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [NovoDataTablePagination],
-      imports: [NovoTilesModule, NovoSelectModule],
+      imports: [FormsModule, NovoTilesModule, NovoSelectModule],
       providers: [NovoLabelService,
                   DataTableState,
                   ChangeDetectorRef,
