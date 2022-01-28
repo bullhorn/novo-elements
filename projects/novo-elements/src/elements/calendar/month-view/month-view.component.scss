@@ -68,9 +68,9 @@
     .calendar-date {
       display: table-cell;
 
-      &.notinmonth, &.noinmonth>novo-button.day {
+      &.notinmonth,
+      &.noinmonth > novo-button.day {
         color: var(--text-muted, #d7d9e4);
-
       }
       &:hover {
         .day {
