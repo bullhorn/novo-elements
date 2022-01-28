@@ -16,17 +16,20 @@ export interface INovoDropdownCellConfig {
       <novo-button type="button" theme="secondary" icon="collapse" inverse>
         <span data-automation-id="novo-dropdown-cell-value">{{ value }}</span>
       </novo-button>
-      <novo-optgroup *ngFor="let config of meta.dropdownCellConfig; let i = index" [title]="config.category">
-        <novo-option
-          *ngFor="let option of config.options"
-          (click)="onClick(config, option, option.value)"
-          [class.active]="(option || option.value) === value"
-        >
-          <span [attr.data-automation-id]="option.label || option">{{ option.label || option }}</span>
-          <i *ngIf="(option || option.value) === value" class="bhi-check"></i>
-        </novo-option>
-        <novo-divider *ngIf="i < meta.dropdownCellConfig.length - 1"></novo-divider>
-      </novo-optgroup>
+      <list>
+        <ng-container *ngFor="let config of meta.dropdownCellConfig; let i = index">
+          <dropdown-item-header *ngIf="config.category">{{ config.category }}</dropdown-item-header>
+          <item
+            *ngFor="let option of config.options"
+            (action)="onClick(config, option, option.value)"
+            [class.active]="(option || option.value) === value"
+          >
+            <span [attr.data-automation-id]="option.label || option">{{ option.label || option }}</span>
+            <i *ngIf="(option || option.value) === value" class="bhi-check"></i>
+          </item>
+          <hr *ngIf="i < meta.dropdownCellConfig.length - 1" />
+        </ng-container>
+      </list>
     </novo-dropdown>
   `,
 })
