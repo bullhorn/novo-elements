@@ -68,7 +68,7 @@ export class NovoRadioElement implements ControlValueAccessor, OnInit {
   @Input() tabindex: number = 0;
 
   @Input()
-  vertical: boolean;
+  vertical: boolean = false;
   @Input()
   label: string;
   @Input()
