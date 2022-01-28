@@ -235,24 +235,28 @@ export enum NovoTableMode {
                         </div>
                       </novo-option>
                       <novo-option
-                        [ngClass]="{ active: isFilterActive(column, option) }"
+                        [class.active]="isFilterActive(column, option)"
                         *ngFor="let option of column.options"
                         (click)="onFilterClick(column, option)"
                         [keepOpen]="option.range"
                         [hidden]="column.calenderShow"
                         [attr.data-automation-id]="option?.label || option"
                       >
-                        {{ option?.label || option }} <i class="bhi-check" *ngIf="isFilterActive(column, option)"></i>
+                        {{ option?.label || option }}
+                        <novo-icon novoSuffix color="positive" *ngIf="isFilterActive(column, option)">check</novo-icon>
                       </novo-option>
-                      <div class="calendar-container" [hidden]="!column.calenderShow">
-                        <div (click)="column.calenderShow = false"><i class="bhi-previous"></i>{{ labels.backToPresetFilters }}</div>
-                        <novo-date-picker
-                          #rangePicker
-                          (onSelect)="onCalenderSelect(column, $event)"
-                          [(ngModel)]="column.filter"
-                          range="true"
-                        ></novo-date-picker>
-                      </div>
+                      <novo-option class="calendar-container" *ngIf="column.calenderShow" keepOpen inert>
+                        <novo-stack>
+                          <div class="back-link" (click)="column.calenderShow = false">
+                            <i class="bhi-previous"></i>{{ labels.backToPresetFilters }}
+                          </div>
+                          <novo-date-picker
+                            (onSelect)="onCalenderSelect(column, $event)"
+                            [(ngModel)]="column.filter"
+                            mode="range"
+                          ></novo-date-picker>
+                        </novo-stack>
+                      </novo-option>
                     </novo-optgroup>
                   </novo-dropdown>
                 </div>
@@ -622,7 +626,7 @@ export class NovoTableElement implements DoCheck {
   }
 
   onFilterClick(column, filter) {
-    console.log('clicking filter');
+    console.log('clicking filter', filter);
     if (filter.range && !column.calendarShow) {
       column.calenderShow = true;
       return;

@@ -60,6 +60,7 @@ export class TableFilter implements OnInit, OnChanges {
 
   @HostListener('click', ['$event'])
   public onClick(event) {
+    console.log('hmmm');
     Helpers.swallowEvent(event);
   }
 }

@@ -49,8 +49,8 @@ tbody tr:nth-child(even) button:hover {
 }
 
 ::-webkit-scrollbar {
-  height: 10px;
-  width: 10px;
+  height: 12px;
+  width: 12px;
 }
 
 ::-webkit-scrollbar-track {
@@ -58,9 +58,13 @@ tbody tr:nth-child(even) button:hover {
   // border-radius: 6px;
 }
 
+::-webkit-scrollbar-thumb {
+  border-radius: 6px;
+  border: 2px solid var(--background-main);
+}
+
 ::-webkit-scrollbar-thumb:not(:hover) {
   background: var(--scrollbar-thumb);
-  // border-radius: 6px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -69,7 +73,7 @@ tbody tr:nth-child(even) button:hover {
 
 ::selection {
   background-color: var(--selection);
-  color: var(--text-bright);
+  color: var(--text-selection);
 }
 
 details {

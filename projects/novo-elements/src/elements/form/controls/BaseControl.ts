@@ -35,6 +35,7 @@ class ControlConfig {
   description?: string;
   dirty: boolean;
   disabled: boolean;
+  enabled: boolean;
   encrypted: boolean;
   endDate?: Date | Number;
   fileBrowserImageUploadUrl?: string;
@@ -139,6 +140,7 @@ export class BaseControl extends ControlConfig {
     this.forceClear = new EventEmitter();
     this.readOnly = !!config.readOnly || !!config.disabled;
     this.disabled = !!config.disabled;
+    this.enabled = true;
     this.layoutOptions = config.layoutOptions || {};
     this.military = !!config.military;
     this.dateFormat = config.dateFormat;

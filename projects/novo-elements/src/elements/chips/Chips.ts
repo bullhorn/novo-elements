@@ -124,19 +124,14 @@ export class NovoChipsElement implements OnInit, ControlValueAccessor {
   @Input()
   set value(selected) {
     this.itemToAdd = '';
-    if (selected !== this._value) {
-      this._value = selected;
-      this.changed.emit({ value: selected, rawValue: this.items });
-      this.onModelChange(selected);
-    }
+    this._value = selected;
   }
 
   clearValue() {
     this.items = [];
     this._items.next(this.items);
     this.value = null;
-    this.changed.emit({ value: this.value, rawValue: this.items });
-    this.onModelChange(this.value);
+    this._propagateChanges();
   }
 
   setItems() {
@@ -184,8 +179,9 @@ export class NovoChipsElement implements OnInit, ControlValueAccessor {
         });
       }
     }
-    this.changed.emit({ value: this.model, rawValue: this.items });
     this._items.next(this.items);
+    this.value = this.source && this.source.valueFormatter ? this.source.valueFormatter(this.items) : this.items.map((i) => i.value);
+    this._propagateChanges();
   }
 
   getLabelFromOptions(value) {
@@ -243,15 +239,15 @@ export class NovoChipsElement implements OnInit, ControlValueAccessor {
       }
     }
     this._items.next(this.items);
+    this._propagateChanges();
   }
 
   remove(event, item) {
     this.items.splice(this.items.indexOf(item), 1);
     this.deselectAll();
     this.value = this.source && this.source.valueFormatter ? this.source.valueFormatter(this.items) : this.items.map((i) => i.value);
-    this.changed.emit({ value: this.value.length ? this.value : '', rawValue: this.items });
-    this.onModelChange(this.value.length ? this.value : '');
     this._items.next(this.items);
+    this._propagateChanges();
   }
 
   onKeyDown(event) {
@@ -292,6 +288,12 @@ export class NovoChipsElement implements OnInit, ControlValueAccessor {
 
   setDisabledState(disabled: boolean): void {
     this._disablePickerInput = disabled;
+  }
+
+  /** Emits change event to set the model value. */
+  private _propagateChanges(fallbackValue?: any): void {
+    this.changed.emit({ value: this.value.length ? this.value : '', rawValue: this.items });
+    this.onModelChange(this.value);
   }
 
   /**

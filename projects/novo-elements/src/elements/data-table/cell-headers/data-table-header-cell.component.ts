@@ -42,7 +42,7 @@ import { DataTableState } from '../state/data-table-state.service';
       <novo-sort-button
         *ngIf="config.sortable"
         data-automation-id="novo-data-table-sort"
-        tooltipPosition="right"
+        tooltipPosition="left"
         [tooltip]="labels.sort"
         [attr.data-feature-id]="'novo-data-table-sort-' + this.id"
         (sortChange)="sort()"
@@ -61,7 +61,7 @@ import { DataTableState } from '../state/data-table-state.service';
           class="filter-button"
           [class.filter-active]="filterActive"
           [tooltip]="labels.filters"
-          [tooltipPosition]="'right'"
+          [tooltipPosition]="'left'"
           [attr.data-feature-id]="'novo-data-table-filter-' + this.id"
           (click)="focusInput()"
           >filter</novo-icon
@@ -163,7 +163,7 @@ import { DataTableState } from '../state/data-table-state.service';
           </novo-optgroup>
           <novo-optgroup *ngSwitchDefault>
             <novo-option class="filter-search" inert>
-              <novo-field flex>
+              <novo-field flex fullWidth>
                 <input
                   novoInput
                   [type]="config.filterConfig.type"

@@ -115,6 +115,7 @@ export class PickerControlsExample {
       key: 'multiPickerControlWithMaxlengthAndPreselects',
       tooltip: 'Multiple With Maxlength and Preselects',
       label: 'Multiple With Maxlength & Preselects',
+      readOnly: true,
       multiple: true,
       maxlength: 2,
       config: {

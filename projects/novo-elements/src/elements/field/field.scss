@@ -15,7 +15,7 @@
   }
 
   &.novo-field-layout-vertical {
-    grid-template-columns: minmax(min-content, max-content);
+    grid-template-columns: minmax(min-content, 100%);
     grid-template-rows: repeat(3, minmax(min-content, max-content));
     grid-template-areas:
       "label"

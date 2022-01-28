@@ -11,8 +11,10 @@ import { NovoCheckboxModule } from '../checkbox';
 import { NovoCommonModule, NovoOptionModule } from '../common';
 import { NovoDatePickerModule } from '../date-picker/DatePicker.module';
 import { NovoDropdownModule } from '../dropdown/Dropdown.module';
+import { NovoFlexModule } from '../flex/Flex.module';
 import { NovoFormExtrasModule } from '../form/extras/FormExtras.module';
 import { NovoFormModule } from '../form/Form.module';
+import { NovoIconModule } from '../icon/Icon.module';
 import { NovoLoadingModule } from '../loading/Loading.module';
 import { NovoToastModule } from '../toast/Toast.module';
 import { NovoTooltipModule } from '../tooltip/Tooltip.module';
@@ -37,6 +39,8 @@ import { NovoTableElement } from './Table';
     IMaskDirectiveModule,
     NovoOptionModule,
     NovoCommonModule,
+    NovoFlexModule,
+    NovoIconModule,
   ],
   declarations: [NovoTableElement],
   exports: [NovoTableElement],

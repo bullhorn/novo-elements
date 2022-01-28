@@ -7,10 +7,10 @@
   flex: 1;
   max-width: 130px;
   min-width: 130px;
-  font-weight: 600;
+  font-weight: 500;
   transition: 200ms ease-out;
   margin-right: 35px;
-  // text-transform: uppercase;
+  text-transform: uppercase;
   padding-top: 8px;
   word-break: word-break;
   overflow-wrap: break-word;
@@ -36,7 +36,6 @@ novo-form {
     form {
       width: 100%;
 
-<<<<<<< Updated upstream
       .novo-fieldset-header {
         background: $off-white;
         box-sizing: content-box;
@@ -54,8 +53,6 @@ novo-form {
         }
       }
 
-=======
->>>>>>> Stashed changes
       div.novo-form-row,
       div.novo-control-group-control,
       td.novo-form-row {
@@ -741,8 +738,8 @@ novo-form {
                   bottom: 20px;
                   color: var(--text-main);
                   font-size: 1.1rem;
-                  font-weight: 600;
-                  // text-transform: uppercase;
+                  font-weight: 500;
+                  text-transform: uppercase;
                   position: absolute;
                   left: 22px;
                   pointer-events: none;

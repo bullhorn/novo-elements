@@ -30,6 +30,7 @@ novo-icon {
     }
   }
 
+  @include base-text-rules();
   @include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
     &[theme="#{$name}"] {
       i {

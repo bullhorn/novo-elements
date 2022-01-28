@@ -34,6 +34,7 @@ import { NovoTitle } from './typography/title/title.component';
     AccentColorDirective,
     FillColorDirective,
     FlexDirective,
+    ThemeColorDirective,
   ],
   declarations: [
     NovoTemplate,

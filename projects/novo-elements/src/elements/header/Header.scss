@@ -87,21 +87,22 @@
 
   @include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
     &.novo-accent-#{$name} {
-      & > section.primary {
+      & > section:first-of-type {
         border-bottom: 2px solid $color;
       }
     }
     &.novo-theme-#{$name} {
-      & > section.primary {
+      & > section:first-of-type {
         background: $color;
+        color: $contrast;
         border-bottom: none;
       }
-      novo-title {
+      .novo-title {
         color: inherit;
       }
-      novo-action {
+      .novo-action {
         button,
-        novo-button {
+        .novo-button {
           color: inherit;
         }
       }

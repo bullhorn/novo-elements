@@ -186,19 +186,29 @@ export class NovoOptionBase implements FocusableOption, AfterViewChecked, OnDest
   _handleDisabledClick(event: MouseEvent) {
     console.log('Captured click');
     if (this.disabled) {
+      console.log('disabled');
       event.preventDefault();
       event.stopPropagation();
       event.stopImmediatePropagation();
     } else if (this.inert) {
       // do nothing
+      console.log('this is inert');
     } else {
+      console.log('selecting');
       this._selectViaInteraction();
     }
   }
 
   /** Ensures the option is selected when activated from the keyboard. */
   _handleKeydown(event: KeyboardEvent): void {
-    if (!(event.target instanceof HTMLInputElement) && (event.key === Key.Enter || event.key === Key.Space) && !hasModifierKey(event)) {
+    console.log('KEY DOWN');
+    if (event.target instanceof HTMLInputElement && event.key === Key.Enter) {
+      this._emitSelectionChangeEvent(!this.keepOpen);
+    } else if (
+      !(event.target instanceof HTMLInputElement) &&
+      (event.key === Key.Enter || event.key === Key.Space) &&
+      !hasModifierKey(event)
+    ) {
       this._selectViaInteraction();
       // Prevent the page from scrolling down and form submits.
       event.preventDefault();
