@@ -17,7 +17,6 @@ export class ThSortable {
 
   onToggleSort(event) {
     if (event) {
-      console.log('sorting');
       // event.preventDefault();
     }
 

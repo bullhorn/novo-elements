@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NovoButtonModule } from '../../button/Button.module';
+import { NovoCommonModule } from '../../common/common.module';
 import { NovoDropdownModule } from '../../dropdown/Dropdown.module';
 // APP
 import { NovoSelectModule } from '../../select/Select.module';
@@ -21,7 +22,7 @@ import { ThOrderable } from './th-orderable/ThOrderable';
 import { ThSortable } from './th-sortable/ThSortable';
 
 @NgModule({
-  imports: [CommonModule, FormsModule, NovoSelectModule, NovoDropdownModule, NovoButtonModule],
+  imports: [CommonModule, FormsModule, NovoSelectModule, NovoDropdownModule, NovoButtonModule, NovoCommonModule],
   declarations: [
     NovoTableHeaderElement,
     NovoTableFooterElement,

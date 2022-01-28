@@ -313,7 +313,6 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
 
     this.multiSelect = this.config.filterConfig && this.config.filterConfig.type ? this.config.filterConfig.type === 'multi-select' : false;
     if (this.multiSelect) {
-      console.log('is multiselect');
       this.multiSelectedOptions = this.filter ? [...this.filter] : [];
     }
   }
@@ -530,7 +529,6 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
       setTimeout(() => this.filterInput.nativeElement.focus(), 0);
     }
     if (this.multiSelect && this.dropdown) {
-      console.log('focussing');
       this.dropdown._handleKeydown = (event: KeyboardEvent) => {
         this.multiSelectOptionFilterHandleKeydown(event);
       };

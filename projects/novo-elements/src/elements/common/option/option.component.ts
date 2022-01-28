@@ -44,7 +44,8 @@ export class NovoOptionBase implements FocusableOption, AfterViewChecked, OnDest
   private _active = false;
   private _disabled = false;
   private _mostRecentViewValue = '';
-  private _clickListener: Subscription;
+  private _clickCapture: Subscription;
+  private _clickPassive: Subscription;
 
   /** TODO: deprecate maybe, check support for table headers */
   @BooleanInput()
@@ -102,8 +103,11 @@ export class NovoOptionBase implements FocusableOption, AfterViewChecked, OnDest
     @Optional() @Inject(NOVO_OPTGROUP) readonly group: NovoOptgroupBase,
   ) {
     // (click) is overridden when defined by user.
-    this._clickListener = fromEvent<MouseEvent>(this._element.nativeElement, 'click', { capture: true }).subscribe((evt: MouseEvent) => {
+    this._clickCapture = fromEvent<MouseEvent>(this._element.nativeElement, 'click', { capture: true }).subscribe((evt: MouseEvent) => {
       this._handleDisabledClick(evt);
+    });
+    this._clickPassive = fromEvent<MouseEvent>(this._element.nativeElement, 'click').subscribe((evt: MouseEvent) => {
+      setTimeout(() => this._handlePassiveClick(evt));
     });
   }
 
@@ -184,24 +188,20 @@ export class NovoOptionBase implements FocusableOption, AfterViewChecked, OnDest
   }
 
   _handleDisabledClick(event: MouseEvent) {
-    console.log('Captured click');
     if (this.disabled) {
-      console.log('disabled');
       event.preventDefault();
       event.stopPropagation();
       event.stopImmediatePropagation();
-    } else if (this.inert) {
-      // do nothing
-      console.log('this is inert');
-    } else {
-      console.log('selecting');
+    }
+  }
+  _handlePassiveClick(event: MouseEvent) {
+    if (!this.inert) {
       this._selectViaInteraction();
     }
   }
 
   /** Ensures the option is selected when activated from the keyboard. */
   _handleKeydown(event: KeyboardEvent): void {
-    console.log('KEY DOWN');
     if (event.target instanceof HTMLInputElement && event.key === Key.Enter) {
       this._emitSelectionChangeEvent(!this.keepOpen);
     } else if (
@@ -274,7 +274,8 @@ export class NovoOptionBase implements FocusableOption, AfterViewChecked, OnDest
 
   ngOnDestroy() {
     this._stateChanges.complete();
-    this._clickListener.unsubscribe();
+    this._clickCapture.unsubscribe();
+    this._clickPassive.unsubscribe();
   }
 
   /** Emits the selection change event. */

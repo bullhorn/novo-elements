@@ -626,7 +626,6 @@ export class NovoTableElement implements DoCheck {
   }
 
   onFilterClick(column, filter) {
-    console.log('clicking filter', filter);
     if (filter.range && !column.calendarShow) {
       column.calenderShow = true;
       return;
