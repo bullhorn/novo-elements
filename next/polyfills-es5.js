@@ -457,9 +457,9 @@
 
     /***/
     1:
-    /*!*****************************************************************************************************************************************************!*\
-      !*** multi ./node_modules/@angular-devkit/build-angular/src/angular-cli-files/models/es5-polyfills.js zone.js/dist/zone-legacy ./demo/polyfills.ts ***!
-      \*****************************************************************************************************************************************************/
+    /*!**************************************************************************************************************************************************************!*\
+      !*** multi ./node_modules/@angular-devkit/build-angular/src/angular-cli-files/models/es5-polyfills.js zone.js/dist/zone-legacy ./projects/demo/polyfills.ts ***!
+      \**************************************************************************************************************************************************************/
 
     /*! no static exports found */
 
@@ -474,8 +474,8 @@
       "R0gw");
 
       module.exports = __webpack_require__(
-      /*! /home/runner/work/novo-elements/novo-elements/demo/polyfills.ts */
-      "2Zch");
+      /*! /home/runner/work/novo-elements/novo-elements/projects/demo/polyfills.ts */
+      "xIsm");
       /***/
     },
 
@@ -849,91 +849,6 @@
           return $map(this, callbackfn, arguments.length > 1 ? arguments[1] : undefined);
         }
       });
-      /***/
-    },
-
-    /***/
-    "2Zch":
-    /*!***************************!*\
-      !*** ./demo/polyfills.ts ***!
-      \***************************/
-
-    /*! no exports provided */
-
-    /***/
-    function Zch(module, __webpack_exports__, __webpack_require__) {
-      "use strict";
-
-      __webpack_require__.r(__webpack_exports__);
-      /* harmony import */
-
-
-      var classlist_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
-      /*! classlist.js */
-      "5yqK");
-      /* harmony import */
-
-
-      var classlist_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(classlist_js__WEBPACK_IMPORTED_MODULE_0__);
-      /* harmony import */
-
-
-      var zone_js_dist_zone__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
-      /*! zone.js/dist/zone */
-      "pDpN");
-      /* harmony import */
-
-
-      var zone_js_dist_zone__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(zone_js_dist_zone__WEBPACK_IMPORTED_MODULE_1__);
-      /**
-       * This file includes polyfills needed by Angular and is loaded before the app.
-       * You can add your own extra polyfills to this file.
-       *
-       * This file is divided into 2 sections:
-       *   1. Browser polyfills. These are applied before loading ZoneJS and are sorted by browsers.
-       *   2. Application imports. Files imported after ZoneJS that should be loaded before your main
-       *      file.
-       *
-       * The current setup is for so-called "evergreen" browsers; the last versions of browsers that
-       * automatically update themselves. This includes Safari >= 10, Chrome >= 55 (including Opera),
-       * Edge >= 13 on the desktop, and iOS 10 and Chrome on mobile.
-       *
-       * Learn more in https://angular.io/guide/browser-support
-       */
-
-      /***************************************************************************************************
-       * BROWSER POLYFILLS
-       */
-
-      /** IE10 and IE11 requires the following for NgClass support on SVG elements */
-      // Run `npm install --save classlist.js`.
-      // import 'core-js/es/array';
-
-      /**
-       * By default, zone.js will patch all possible macroTask and DomEvents
-       * user can disable parts of macroTask/DomEvents patch by setting following flags
-       */
-      // (window as any).__Zone_disable_requestAnimationFrame = true; // disable patch requestAnimationFrame
-      // (window as any).__Zone_disable_on_property = true; // disable patch onProperty such as onclick
-      // (window as any).__zone_symbol__BLACK_LISTED_EVENTS = ['scroll', 'mousemove']; // disable patch specified eventNames
-
-      /*
-       * in IE/Edge developer tools, the addEventListener will also be wrapped by zone.js
-       * with the following flag, it will bypass `zone.js` patch for IE/Edge
-       */
-      // (window as any).__Zone_enable_cross_context_check = true;
-
-      /***************************************************************************************************
-       * Zone JS is required by default for Angular itself.
-       */
-      // Included with Angular CLI.
-
-      /***************************************************************************************************
-       * APPLICATION IMPORTS
-       */
-
-
-      window.global = window;
       /***/
     },
 
@@ -18584,6 +18499,91 @@
     /***/
     function xDBR(module, exports) {
       module.exports = false;
+      /***/
+    },
+
+    /***/
+    "xIsm":
+    /*!************************************!*\
+      !*** ./projects/demo/polyfills.ts ***!
+      \************************************/
+
+    /*! no exports provided */
+
+    /***/
+    function xIsm(module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony import */
+
+
+      var classlist_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+      /*! classlist.js */
+      "5yqK");
+      /* harmony import */
+
+
+      var classlist_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(classlist_js__WEBPACK_IMPORTED_MODULE_0__);
+      /* harmony import */
+
+
+      var zone_js_dist_zone__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+      /*! zone.js/dist/zone */
+      "pDpN");
+      /* harmony import */
+
+
+      var zone_js_dist_zone__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(zone_js_dist_zone__WEBPACK_IMPORTED_MODULE_1__);
+      /**
+       * This file includes polyfills needed by Angular and is loaded before the app.
+       * You can add your own extra polyfills to this file.
+       *
+       * This file is divided into 2 sections:
+       *   1. Browser polyfills. These are applied before loading ZoneJS and are sorted by browsers.
+       *   2. Application imports. Files imported after ZoneJS that should be loaded before your main
+       *      file.
+       *
+       * The current setup is for so-called "evergreen" browsers; the last versions of browsers that
+       * automatically update themselves. This includes Safari >= 10, Chrome >= 55 (including Opera),
+       * Edge >= 13 on the desktop, and iOS 10 and Chrome on mobile.
+       *
+       * Learn more in https://angular.io/guide/browser-support
+       */
+
+      /***************************************************************************************************
+       * BROWSER POLYFILLS
+       */
+
+      /** IE10 and IE11 requires the following for NgClass support on SVG elements */
+      // Run `npm install --save classlist.js`.
+      // import 'core-js/es/array';
+
+      /**
+       * By default, zone.js will patch all possible macroTask and DomEvents
+       * user can disable parts of macroTask/DomEvents patch by setting following flags
+       */
+      // (window as any).__Zone_disable_requestAnimationFrame = true; // disable patch requestAnimationFrame
+      // (window as any).__Zone_disable_on_property = true; // disable patch onProperty such as onclick
+      // (window as any).__zone_symbol__BLACK_LISTED_EVENTS = ['scroll', 'mousemove']; // disable patch specified eventNames
+
+      /*
+       * in IE/Edge developer tools, the addEventListener will also be wrapped by zone.js
+       * with the following flag, it will bypass `zone.js` patch for IE/Edge
+       */
+      // (window as any).__Zone_enable_cross_context_check = true;
+
+      /***************************************************************************************************
+       * Zone JS is required by default for Angular itself.
+       */
+      // Included with Angular CLI.
+
+      /***************************************************************************************************
+       * APPLICATION IMPORTS
+       */
+
+
+      window.global = window;
       /***/
     },
 
