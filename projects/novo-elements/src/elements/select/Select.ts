@@ -582,6 +582,8 @@ export class NovoSelectElement
           hasDeselectedOptions ? option.select() : option.deselect();
         }
       });
+    } else if(Key.Escape === key) {
+      this.closePanel();
     } else {
       const previouslyFocusedIndex = manager.activeItemIndex;
       manager.onKeydown(event);
