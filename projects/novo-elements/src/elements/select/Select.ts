@@ -413,7 +413,11 @@ export class NovoSelectElement
    * found with the designated value, the select trigger is cleared.
    */
   private _setSelectionByValue(value: any | any[]): void {
-    this._selectionModel.selected.forEach((option) => option.setInactiveStyles());
+    this._selectionModel.selected.forEach((option) => {
+      if (option.setInactiveStyles) {
+        option.setInactiveStyles();
+      }
+    });
     this._selectionModel.clear();
     if (this.multiple && value) {
       value.forEach((currentValue: any) => this._selectValue(currentValue));
@@ -499,9 +503,17 @@ export class NovoSelectElement
     this._watchSelectionEvents();
   }
 
-  private _getDisplayValue(option: NovoOption): string {
-    if (!option) return '';
-    const toDisplay = this.displayWith ? this.displayWith(option.value) : option.viewValue;
+  private _getDisplayValue(option: NovoOption & {value: any, label: string}): string {
+    if (!option) {
+      return '';
+    }
+    let toDisplay = option.viewValue;
+    if (this.displayWith) {
+      toDisplay = this.displayWith(option.value);
+    }
+    if (option.label) {
+      toDisplay = option.label
+    }
     // Simply falling back to an empty string if the display value is falsy does not work properly.
     // The display value can also be the number zero and shouldn't fall back to an empty string.
     const displayValue = toDisplay != null ? toDisplay : '';
@@ -584,7 +596,7 @@ export class NovoSelectElement
           hasDeselectedOptions ? option.select() : option.deselect();
         }
       });
-    } else if(Key.Escape === key) {
+    } else if (Key.Escape === key) {
       this.closePanel();
     } else {
       const previouslyFocusedIndex = manager.activeItemIndex;
