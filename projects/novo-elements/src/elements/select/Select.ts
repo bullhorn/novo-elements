@@ -429,6 +429,8 @@ export class NovoSelectElement
         // closed, because doing it while open can shift the user's focus unnecessarily.
         this._keyManager.updateActiveItem(-1);
       }
+    } else if (!this.multiple && value) {
+      this._selectionModel.select(value);
     }
     this.ref.markForCheck();
   }
