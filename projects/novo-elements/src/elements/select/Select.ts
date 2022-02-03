@@ -367,7 +367,11 @@ export class NovoSelectElement
     this._initializeSelection();
     // Listen to selection changes to select and deselect options
     this._selectionModel.changed.pipe(takeUntil(this._destroy)).subscribe((event) => {
-      event.added.forEach((option) => option.select());
+      event.added.forEach((option) => {
+        if(option.select) {
+          option.select();
+        }
+      });
       event.removed.forEach((option) => {
         if(option.deselect) {
           option.deselect();
