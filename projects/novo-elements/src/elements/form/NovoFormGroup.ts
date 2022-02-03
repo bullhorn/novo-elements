@@ -18,7 +18,7 @@ export class NovoFormGroup extends FormGroup {
   public novoControls: any[];
 
   get value() {
-    return this.getRawValue();
+    return this.getRawValue(); // The value property on Angular form groups do not include disabled form control values.  Find way to address this.
   }
 
   set value(v: any) {
