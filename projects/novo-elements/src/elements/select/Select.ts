@@ -368,7 +368,11 @@ export class NovoSelectElement
     // Listen to selection changes to select and deselect options
     this._selectionModel.changed.pipe(takeUntil(this._destroy)).subscribe((event) => {
       event.added.forEach((option) => option.select());
-      event.removed.forEach((option) => option.deselect());
+      event.removed.forEach((option) => {
+        if(option.deselect) {
+          option.deselect();
+        }
+      });
     });
     // Listen to QueryList changes
     merge(this.contentOptions.changes, this.viewOptions.changes)
