@@ -145,9 +145,6 @@ export class NovoTimePickerInputElement implements OnInit, ControlValueAccessor 
 
   onComplete(dt) {
     if (this.value !== dt) {
-        if (this.value instanceof Date && dt instanceof Date && this.value.getTime() === dt.getTime()) {
-          return;
-        }
       this.dispatchOnChange(dt);
     }
   }
@@ -236,6 +233,9 @@ export class NovoTimePickerInputElement implements OnInit, ControlValueAccessor 
 
   public dispatchOnChange(newValue?: any, skip: boolean = false) {
     if (newValue !== this.value) {
+      if (this.value instanceof Date && newValue instanceof Date && this.value.getTime() === newValue.getTime()) {
+        return;
+      }
       this._onChange(newValue);
       !skip && this.writeValue(newValue);
     }
