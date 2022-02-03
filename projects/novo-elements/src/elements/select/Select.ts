@@ -503,7 +503,7 @@ export class NovoSelectElement
     this._watchSelectionEvents();
   }
 
-  private _getDisplayValue(option: NovoOption & {value: any, label: string}): string {
+  private _getDisplayValue(option): string {
     if (!option) {
       return '';
     }
@@ -511,7 +511,7 @@ export class NovoSelectElement
     if (this.displayWith) {
       toDisplay = this.displayWith(option.value);
     }
-    if (option.label) {
+    if ((option).label) {
       toDisplay = option.label
     }
     // Simply falling back to an empty string if the display value is falsy does not work properly.
