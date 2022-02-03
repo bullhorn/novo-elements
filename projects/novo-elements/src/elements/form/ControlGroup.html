@@ -12,22 +12,22 @@
       <div *ngFor="let c of controls" class="novo-control-container {{c.key}}" [class.is-label]="c.controlType === 'read-only'" [style.max-width.px]="c.width">
         <novo-control (change)="onChange()" [form]="(form?.controls)[key]['controls'][index]" [control]="c" [condensed]="!vertical || c.controlType === 'read-only'"></novo-control>
       </div>
-      <div class="novo-control-container last" *ngIf="edit && !vertical">
-        <button [disabled]="!disabledArray[index].edit" type="button" *ngIf="edit && !vertical" theme="icon" icon="edit" (click)="editControl(index)" [attr.data-automation-id]="'novo-control-group-edit-' + key" index="-1"></button>
+      <div class="novo-control-container edit last" *ngIf="edit && !vertical">
+        <button [disabled]="!disabledArray[index].edit" type="button" *ngIf="edit && !vertical" theme="icon" [icon]="editIcon" (click)="editControl(index)" [attr.data-automation-id]="'novo-control-group-edit-' + key" index="-1"></button>
       </div>
-      <div class="novo-control-container last" *ngIf="remove && !vertical">
-        <button [disabled]="!disabledArray[index].remove" type="button" *ngIf="remove && !vertical" theme="icon" icon="delete-o" (click)="removeControl(index)" [attr.data-automation-id]="'novo-control-group-delete-' + key" index="-1"></button>
+      <div class="novo-control-container remove last" *ngIf="remove && !vertical">
+        <button [disabled]="!disabledArray[index].remove" type="button" *ngIf="remove && !vertical" theme="icon" [icon]="removeIcon" (click)="removeControl(index)" [attr.data-automation-id]="'novo-control-group-delete-' + key" index="-1"></button>
       </div>
     </div>
-    <button [disabled]="!disabledArray[index].edit" type="button" *ngIf="edit && vertical" theme="icon" icon="edit" (click)="editControl(index)" [attr.data-automation-id]="'novo-control-group-edit-' + key" index="-1"></button>
-    <button [disabled]="!disabledArray[index].remove" type="button" *ngIf="remove && vertical" theme="icon" icon="delete-o" (click)="removeControl(index)" [attr.data-automation-id]="'novo-control-group-delete-' + key" index="-1"></button>
+    <button [disabled]="!disabledArray[index].edit" type="button" *ngIf="edit && vertical" theme="icon" [icon]="editIcon" (click)="editControl(index)" [attr.data-automation-id]="'novo-control-group-edit-' + key" index="-1"></button>
+    <button [disabled]="!disabledArray[index].remove" type="button" *ngIf="remove && vertical" theme="icon" [icon]="removeIcon" (click)="removeControl(index)" [attr.data-automation-id]="'novo-control-group-delete-' + key" index="-1"></button>
   </ng-template>
   <ng-template #defaultColumnLabelTemplate let-form="form" let-key="key">
       <div class="novo-control-group-control-label {{ label.key }}" *ngFor="let label of controlLabels" [style.max-width.px]="label.width" [class.column-required]="label.required">
         <span [attr.data-automation-id]="'novo-control-group-label-' + label.value">{{ label.value }}</span>
       </div>
-      <div class="novo-control-group-control-label last" *ngIf="edit" [attr.data-automation-id]="'novo-control-group-edit-' + key"></div>
-      <div class="novo-control-group-control-label last" *ngIf="remove" [attr.data-automation-id]="'novo-control-group-delete-' + key"></div>
+      <div class="novo-control-group-control-label edit last" *ngIf="edit" [attr.data-automation-id]="'novo-control-group-edit-' + key"></div>
+      <div class="novo-control-group-control-label remove last" *ngIf="remove" [attr.data-automation-id]="'novo-control-group-delete-' + key"></div>
   </ng-template>
   <ng-container *ngIf="!vertical && (form?.controls)[key] && (form?.controls)[key]['controls'].length !== 0">
     <div class="novo-control-group-labels" *ngIf="!vertical && (form?.controls)[key] && (form?.controls)[key]['controls'].length !== 0">

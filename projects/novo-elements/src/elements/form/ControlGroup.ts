@@ -85,6 +85,10 @@ export class NovoControlGroup implements AfterContentInit, OnChanges, OnDestroy 
     return this._icon;
   }
   private _icon: string;
+  // Edit icon at the end of each row (no bhi- prefix)
+  @Input() editIcon = 'edit';
+  // Remove icon at the end of each row (no bhi- prefix)
+  @Input() removeIcon = 'delete-o';
   // The initial value object, will create the form rows off of
   @Input() initialValue: {}[];
   // Callback to determine if the user can edit
