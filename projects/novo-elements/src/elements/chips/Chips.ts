@@ -292,7 +292,7 @@ export class NovoChipsElement implements OnInit, ControlValueAccessor {
 
   /** Emits change event to set the model value. */
   private _propagateChanges(fallbackValue?: any): void {
-    this.changed.emit({ value: this.value.length ? this.value : '', rawValue: this.items });
+    this.changed.emit({ value: this.value?.length ? this.value : '', rawValue: this.items });
     this.onModelChange(this.value);
   }
 
