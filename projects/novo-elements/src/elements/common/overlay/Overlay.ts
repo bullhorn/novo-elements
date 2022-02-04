@@ -1,6 +1,7 @@
 // Angular
 import {
   ConnectedPositionStrategy,
+  FlexibleConnectedPositionStrategy,
   HorizontalConnectionPos,
   Overlay,
   OverlayConfig,
@@ -50,6 +51,7 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
   @Input()
   public position:
     | 'default'
+    | 'flexible'
     | 'right'
     | 'above-below'
     | 'right-above-below'
@@ -244,13 +246,19 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
    * Supports the following position strategies:
    * 'default', 'right', 'bottom', 'center', 'bottom-left', 'bottom-right', 'top-left', 'top-right'
    */
-  protected getPosition(): ConnectedPositionStrategy {
+  protected getPosition(): ConnectedPositionStrategy | FlexibleConnectedPositionStrategy {
     if (this.position === 'center') {
       return this.overlay
         .position()
         .connectedTo(this.getConnectedElement(), { originX: 'start', originY: 'center' }, { overlayX: 'start', overlayY: 'center' })
         .withFallbackPosition({ originX: 'start', originY: 'top' }, { overlayX: 'start', overlayY: 'top' })
         .withFallbackPosition({ originX: 'start', originY: 'bottom' }, { overlayX: 'start', overlayY: 'bottom' });
+    }
+
+    if(this.position === 'flexible') {
+     return this.overlay
+      .position()
+      .flexibleConnectedTo(this.getConnectedElement())
     }
 
     const [originX, fallbackX]: HorizontalConnectionPos[] = this.position.includes('right') ? ['end', 'start'] : ['start', 'end'];

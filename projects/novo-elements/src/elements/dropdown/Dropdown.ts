@@ -87,6 +87,7 @@ export class NovoDropdownElement extends NovoDropdowMixins implements OnInit, Af
   @Input()
   side:
     | 'default'
+    | 'flexible'
     | 'right'
     | 'above-below'
     | 'right-above-below'
