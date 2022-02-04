@@ -125,6 +125,11 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
       if (this.overlayRef) {
         this.overlayRef.updatePosition();
         this.opening.emit(true);
+        setTimeout(() => { // TODO: @charlesabarnes Remove this once we remove table
+          if (this.overlayRef) {
+            this.overlayRef.updatePosition();
+          }
+        });
       }
     });
   }
