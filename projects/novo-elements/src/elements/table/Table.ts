@@ -147,7 +147,7 @@ export enum NovoTableMode {
                   </div>
                   <!-- FILTER DROP-DOWN -->
                   <novo-dropdown
-                    side="flexible"
+                    side="default"
                     *ngIf="config.filtering !== false && column.filtering !== false"
                     class="column-filters"
                     (toggled)="onDropdownToggled($event, column.name)"
