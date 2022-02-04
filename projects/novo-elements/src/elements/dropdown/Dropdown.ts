@@ -250,6 +250,8 @@ export class NovoDropdownElement extends NovoDropdowMixins implements OnInit, Af
           hasDeselectedOptions ? option.select() : option.deselect();
         }
       });
+    } else if (Key.Escape === key) {
+      this.closePanel();
     } else {
       const previouslyFocusedIndex = manager.activeItemIndex;
       manager.onKeydown(event);
