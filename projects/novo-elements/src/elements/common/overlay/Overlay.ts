@@ -259,6 +259,26 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
      return this.overlay
       .position()
       .flexibleConnectedTo(this.getConnectedElement())
+      .withPositions([
+      {
+        originX: 'end',
+        originY: 'top',
+        overlayX: 'end',
+        overlayY: 'bottom',
+      },
+      {
+        originX: 'start',
+        originY: 'top',
+        overlayX: 'start',
+        overlayY: 'bottom',
+      },
+      {
+        originX: 'end',
+        originY: 'bottom',
+        overlayX: 'end',
+        overlayY: 'top',
+      },
+    ]);
     }
 
     const [originX, fallbackX]: HorizontalConnectionPos[] = this.position.includes('right') ? ['end', 'start'] : ['start', 'end'];
