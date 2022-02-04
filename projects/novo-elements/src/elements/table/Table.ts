@@ -147,6 +147,7 @@ export enum NovoTableMode {
                   </div>
                   <!-- FILTER DROP-DOWN -->
                   <novo-dropdown
+                    side="top-right"
                     *ngIf="config.filtering !== false && column.filtering !== false"
                     class="column-filters"
                     (toggled)="onDropdownToggled($event, column.name)"
@@ -563,6 +564,7 @@ export class NovoTableElement implements DoCheck {
 
   onDropdownToggled(event, column): void {
     this.toggledDropdownMap[column] = event;
+    this.cdr.markForCheck();
   }
 
   focusInput(): void {
