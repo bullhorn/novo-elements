@@ -368,12 +368,12 @@ export class NovoSelectElement
     // Listen to selection changes to select and deselect options
     this._selectionModel.changed.pipe(takeUntil(this._destroy)).subscribe((event) => {
       event.added.forEach((option) => {
-        if(option.select) {
+        if (option.select) {
           option.select();
         }
       });
       event.removed.forEach((option) => {
-        if(option.deselect) {
+        if (option.deselect) {
           option.deselect();
         }
       });
@@ -511,7 +511,7 @@ export class NovoSelectElement
     this._watchSelectionEvents();
   }
 
-  private _getDisplayValue(option: NovoOption & {value?: any, label?: string}): string {
+  private _getDisplayValue(option: NovoOption & { value?: any; label?: string }): string {
     if (!option) {
       return '';
     }
@@ -520,7 +520,7 @@ export class NovoSelectElement
       toDisplay = this.displayWith(option.value);
     }
     if (option.label) {
-      toDisplay = option.label
+      toDisplay = option.label;
     }
     // Simply falling back to an empty string if the display value is falsy does not work properly.
     // The display value can also be the number zero and shouldn't fall back to an empty string.

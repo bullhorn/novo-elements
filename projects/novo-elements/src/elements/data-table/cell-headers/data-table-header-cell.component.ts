@@ -81,7 +81,7 @@ import { DataTableState } from '../state/data-table-state.service';
           </novo-button>
         </div>
         <ng-container [ngSwitch]="config.filterConfig.type">
-          <novo-optgroup *ngSwitchCase="'date'">
+          <novo-optgroup *ngSwitchCase="'date'" (keydown.escape)="handleEscapeKeydown($event)">
             <ng-container *ngIf="!showCustomRange">
               <novo-option
                 [class.active]="activeDateFilter === option.label"
@@ -106,7 +106,7 @@ import { DataTableState } from '../state/data-table-state.service';
                 <div class="back-link" (click)="toggleCustomRange($event, false)">
                   <i class="bhi-previous"></i>{{ labels.backToPresetFilters }}
                 </div>
-                <novo-date-picker (onSelect)="filterData($event)" [(ngModel)]="filter" range="true"></novo-date-picker>
+                <novo-date-picker (onSelect)="filterData($event)" [(ngModel)]="filter" range="true" (keydown.escape)="handleEscapeKeydown($event)"></novo-date-picker>
               </novo-stack>
             </novo-option>
           </novo-optgroup>
@@ -141,7 +141,7 @@ import { DataTableState } from '../state/data-table-state.service';
                 </novo-field>
               </novo-option>
             </novo-optgroup>
-            <novo-optgroup class="dropdown-list-options">
+            <novo-optgroup class="dropdown-list-options" (keydown.escape)="handleEscapeKeydown($event)">
               <novo-option
                 *ngFor="let option of config.filterConfig.options"
                 [hidden]="multiSelectOptionIsHidden(option)"
@@ -161,7 +161,7 @@ import { DataTableState } from '../state/data-table-state.service';
               <ng-container *ngTemplateOutlet="filterTemplate; context: { $implicit: config }"></ng-container>
             </novo-option>
           </novo-optgroup>
-          <novo-optgroup *ngSwitchDefault>
+          <novo-optgroup *ngSwitchDefault (keydown.escape)="handleEscapeKeydown($event)">
             <novo-option class="filter-search" inert>
               <novo-field flex fullWidth>
                 <input
@@ -171,6 +171,7 @@ import { DataTableState } from '../state/data-table-state.service';
                   (ngModelChange)="filterData($event)"
                   #filterInput
                   data-automation-id="novo-data-table-filter-input"
+                  (keydown.escape)="handleEscapeKeydown($event)"
                 />
                 <novo-icon novoSuffix>search</novo-icon>
               </novo-field>
@@ -477,6 +478,14 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
       ) {
         this.optionFilterInput.nativeElement.focus();
       }
+    }
+  }
+
+  @HostListener('keydown.escape', ['$event'])
+  public handleEscapeKeydown(event: KeyboardEvent) {
+    if (!this.multiSelect) {
+      this.error = false;
+      this.dropdown.closePanel();
     }
   }
 
