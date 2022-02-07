@@ -20,7 +20,7 @@ export class BasicSelectExample {
     { label: 'Five', divider: true },
     { label: 'Six', value: 6 },
   ];
-  public withNumbersValue: number = 4;
+  public withNumbersValue: number = 25;
   public withNumbersObject: any = { id: 4, label: 'Four' };
   public withDisabledAndTooltip: Array<any> = [
     { label: 'One', value: 1 },

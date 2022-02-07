@@ -137,8 +137,8 @@ let nextId = 0;
           <novo-option
             *ngIf="!option.divider; else divider"
             class="select-item"
+            [disabled]="option.disabled"
             [class.active]="option.active"
-            [class.disabled]="option.disabled"
             [attr.data-automation-value]="option.label"
             [value]="option.value"
             [tooltip]="option.tooltip"
@@ -464,6 +464,19 @@ export class NovoSelectElement
 
     if (correspondingOption) {
       this._selectionModel.select(correspondingOption);
+    } else if (value && !correspondingOption) {
+      // Double Check option not already added.
+      const legacyOption = this.filteredOptions.find((it) => it.value === value);
+      if (!legacyOption) {
+        // Add a disabled option to the list and select it
+        this.filteredOptions.push({
+          disabled: true,
+          tooltip: 'Value is not provided in list of valid options.',
+          label: value,
+          value,
+        });
+        this.ref.detectChanges();
+      }
     }
 
     return correspondingOption;
@@ -756,12 +769,15 @@ export class NovoSelectElement
       });
     } else {
       this.filteredOptions = (this.options || [])
-        .filter((item) => {
-          return !item.readOnly;
-        })
-        .map((element) => {
+        .map((item) => {
           return {
-            ...element,
+            ...item,
+            disabled: item.readOnly || item.disabled,
+          };
+        })
+        .map((item) => {
+          return {
+            ...item,
             active: false,
           };
         });
