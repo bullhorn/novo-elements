@@ -228,12 +228,11 @@ novo-row-chips {
       flex: 1;
       margin-right: 1em;
       &:first-of-type {
-        flex: 0 1 275px;
+        flex: 0 0 275px;
       }
     }
     .column-data {
       display: flex;
-      flex: 0 0 200px;
       align-items: center;
       background: transparent !important;
       border: none;
@@ -243,13 +242,15 @@ novo-row-chips {
       height: 2em;
       width: 100%;
       margin: 0 1em 0 0;
-      // padding: 0 0 0.5em 0;
       &.editable {
         border-bottom: none;
         input {
           background: none;
           border: none;
         }
+      }
+      &:first-of-type {
+        flex: 0 0 275px;
       }
       span {
         color: inherit;
@@ -264,6 +265,9 @@ novo-row-chips {
         min-height: 1em;
       }
     }
+  }
+  .novo-chip.novo-row-chip {
+    padding: 0;
   }
   .novo-row-chips-empty-message {
     font-style: italic;
