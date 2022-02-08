@@ -106,7 +106,12 @@ import { DataTableState } from '../state/data-table-state.service';
                 <div class="back-link" (click)="toggleCustomRange($event, false)">
                   <i class="bhi-previous"></i>{{ labels.backToPresetFilters }}
                 </div>
-                <novo-date-picker (onSelect)="filterData($event)" [(ngModel)]="filter" range="true" (keydown.escape)="handleEscapeKeydown($event)"></novo-date-picker>
+                <novo-date-picker
+                  (onSelect)="filterData($event)"
+                  [(ngModel)]="filter"
+                  range="true"
+                  (keydown.escape)="handleEscapeKeydown($event)"
+                ></novo-date-picker>
               </novo-stack>
             </novo-option>
           </novo-optgroup>
