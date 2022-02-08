@@ -459,6 +459,9 @@ export class NovoSelectElement
       if (this._selectionModel.isSelected(option)) {
         return false;
       }
+      if (option.value === value?.id) {
+        option.value = value;
+      }
       return option.value != null && this.compareWith(option.value, value);
     });
 
@@ -472,7 +475,7 @@ export class NovoSelectElement
         this.filteredOptions.push({
           disabled: true,
           tooltip: 'Value is not provided in list of valid options.',
-          label: value,
+          label: value.label,
           value,
         });
         this.ref.detectChanges();
@@ -531,6 +534,9 @@ export class NovoSelectElement
     let toDisplay = option.viewValue;
     if (this.displayWith) {
       toDisplay = this.displayWith(option.value);
+    }
+    if (option.value?.name) {
+      toDisplay = option.value.name;
     }
     if (option.label) {
       toDisplay = option.label;
