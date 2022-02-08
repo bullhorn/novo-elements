@@ -67,6 +67,7 @@ describe('Service: NovoLabelService', () => {
     expect(service.yes).toBeDefined();
     expect(service.search).toBeDefined();
     expect(service.noItems).toBeDefined();
+    expect(service.localDatePlaceholder).toBeDefined();
   });
 
   it('should initialize with all its label values.', () => {
@@ -198,6 +199,13 @@ describe('Service: NovoLabelService', () => {
     it('should allow for negative', () => {
       const value = service.formatBigDecimal(2.14);
       expect(value).toEqual('2.14');
+    });
+  });
+
+  describe('Method: localizedDatePlaceholder()', () => {
+    it('returns the localDatePlaceholder', () => {
+      service.localDatePlaceholder = 'dd.MM.YYYY';
+      expect(service.localizedDatePlaceholder()).toEqual('dd.MM.YYYY');
     });
   });
 });
