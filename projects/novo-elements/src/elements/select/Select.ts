@@ -30,7 +30,7 @@ import { merge, Observable, of, Subject, Subscription } from 'rxjs';
 import { filter, map, take, takeUntil } from 'rxjs/operators';
 // App
 import { NovoLabelService } from '../../services/novo-label-service';
-import { Key } from '../../utils';
+import { Helpers, Key } from '../../utils';
 import {
   CanDisableCtor,
   CanRequireCtor,
@@ -225,7 +225,7 @@ export class NovoSelectElement
   /** Function that maps an option's control value to its display value in the trigger. */
   @Input() displayWith: ((value: any) => string) | null = null;
   /** * Function to compare the option values with the selected values. */
-  @Input() compareWith: (o1: any, o2: any) => boolean = (o1: any, o2: any) => o1 === o2;
+  @Input() compareWith: (o1: any, o2: any) => boolean = (o1: any, o2: any) => o1 === o2 || o1 === o2.id || ((!Helpers.isEmpty(o1.id) && !Helpers.isEmpty(o2.id)) && o1.id === o2.id);
 
   header: any = {
     open: false,
@@ -441,8 +441,6 @@ export class NovoSelectElement
         // closed, because doing it while open can shift the user's focus unnecessarily.
         this._keyManager.updateActiveItem(-1);
       }
-    } else if (!this.multiple && value) {
-      this._selectionModel.select(value);
     }
     this.ref.markForCheck();
   }
@@ -459,12 +457,8 @@ export class NovoSelectElement
       if (this._selectionModel.isSelected(option)) {
         return false;
       }
-      if (option.value === value?.id) {
-        option.value = value;
-      }
-      return option.value != null && this.compareWith(option.value, value);
+      return !Helpers.isEmpty(value) && !Helpers.isEmpty(option.value) && this.compareWith(option.value, value);
     });
-
     if (correspondingOption) {
       this._selectionModel.select(correspondingOption);
     } else if (value && !correspondingOption) {
@@ -475,7 +469,7 @@ export class NovoSelectElement
         this.filteredOptions.push({
           disabled: true,
           tooltip: 'Value is not provided in list of valid options.',
-          label: value.label,
+          label: value?.label || value,
           value,
         });
         this.ref.detectChanges();
@@ -534,12 +528,6 @@ export class NovoSelectElement
     let toDisplay = option.viewValue;
     if (this.displayWith) {
       toDisplay = this.displayWith(option.value);
-    }
-    if (option.value?.name) {
-      toDisplay = option.value.name;
-    }
-    if (option.label) {
-      toDisplay = option.label;
     }
     // Simply falling back to an empty string if the display value is falsy does not work properly.
     // The display value can also be the number zero and shouldn't fall back to an empty string.
