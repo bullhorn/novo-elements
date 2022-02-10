@@ -121,7 +121,7 @@ export class NovoTimeFormatDirective extends IMaskDirective<any> implements Novo
         if (timePeriod) {
           (event.target as HTMLInputElement).value = `${text.slice(0, 5)} ${timePeriod}`;
         }
-        if ((event.target as HTMLInputElement).selectionStart >= 3 && this.hourOneFormatRequired) {
+        if ((event.target as HTMLInputElement).selectionStart >= 3 && this.hourOneFormatRequired(hour)) {
           (event.target as HTMLInputElement).value = `01:${(event.target as HTMLInputElement).value.slice(
             3,
             (event.target as HTMLInputElement).value.length,
@@ -137,7 +137,7 @@ export class NovoTimeFormatDirective extends IMaskDirective<any> implements Novo
     if (!this.military) {
       const input = text.substr(5, 4).replace(/\-/g, '').trim().slice(0, 2);
       const timePeriod = this.imask.blocks.aa.enum.find((it) => it[0] === input[0]);
-      if (this.hourOneFormatRequired) {
+      if (this.hourOneFormatRequired(hour)) {
         (event.target as HTMLInputElement).value = `01:${text.slice(3, text.length)}`;
       }
       if (!timePeriod) {
@@ -152,13 +152,13 @@ export class NovoTimeFormatDirective extends IMaskDirective<any> implements Novo
 
     if (event.key === Key.Backspace && input.selectionStart === input.value.length) {
       (event.target as HTMLInputElement).value = `${input.value.slice(0, 5)} --`;
-    } else if (event.key === Key.Tab && input.selectionStart <= 2 && this.hourOneFormatRequired) {
+    } else if (event.key === Key.Tab && input.selectionStart <= 2 && this.hourOneFormatRequired(hour)) {
       event.preventDefault();
       event.stopPropagation();
       event.stopImmediatePropagation();
       input.value = `01:${input.value.slice(3, input.value.length)}`;
       input.setSelectionRange(3, 3);
-    } else if (event.key === Key.ArrowRight && input.selectionStart >= 2 && this.hourOneFormatRequired) {
+    } else if (event.key === Key.ArrowRight && input.selectionStart >= 2 && this.hourOneFormatRequired(hour)) {
       input.value = `01:${input.value.slice(3, input.value.length)}`;
       input.setSelectionRange(2, 2);
     }
