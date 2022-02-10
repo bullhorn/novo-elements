@@ -108,6 +108,7 @@ export class NovoTimeFormatDirective extends IMaskDirective<any> implements Novo
   _checkInput(event: InputEvent): void {
     if (document.activeElement === event.target) {
       const text = (event.target as HTMLInputElement).value;
+      const hour = text.slice(0, 2);
       if ((this.military && Number(text[0]) > 2) || (!this.military && Number(text[0]) > 1)) {
         event.preventDefault();
         const value = `0${text}`;
@@ -120,15 +121,25 @@ export class NovoTimeFormatDirective extends IMaskDirective<any> implements Novo
         if (timePeriod) {
           (event.target as HTMLInputElement).value = `${text.slice(0, 5)} ${timePeriod}`;
         }
+        if ((event.target as HTMLInputElement).selectionStart >= 3 && (hour === 'h1' || hour === '1h')) {
+          (event.target as HTMLInputElement).value = `01:${(event.target as HTMLInputElement).value.slice(
+            3,
+            (event.target as HTMLInputElement).value.length,
+          )}`;
+        }
       }
     }
   }
 
   _handleBlur(event: FocusEvent): void {
     const text = (event.target as HTMLInputElement).value;
+    const hour: string = text.slice(0, 2);
     if (!this.military) {
       const input = text.substr(5, 4).replace(/\-/g, '').trim().slice(0, 2);
       const timePeriod = this.imask.blocks.aa.enum.find((it) => it[0] === input[0]);
+      if (hour === 'h1' || hour === '1h') {
+        (event.target as HTMLInputElement).value = `01:${text.slice(3, text.length)}`;
+      }
       if (!timePeriod) {
         (event.target as HTMLInputElement).value = `${text.slice(0, 5)} --`;
       }
@@ -137,9 +148,19 @@ export class NovoTimeFormatDirective extends IMaskDirective<any> implements Novo
 
   _handleKeydown(event: KeyboardEvent): void {
     const input = event.target as HTMLInputElement;
+    const hour: string = input.value.slice(0, 2);
 
     if (event.key === Key.Backspace && input.selectionStart === input.value.length) {
       (event.target as HTMLInputElement).value = `${input.value.slice(0, 5)} --`;
+    } else if (event.key === Key.Tab && input.selectionStart <= 2 && (hour === 'h1' || hour === '1h')) {
+      event.preventDefault();
+      event.stopPropagation();
+      event.stopImmediatePropagation();
+      input.value = `01:${input.value.slice(3, input.value.length)}`;
+      input.setSelectionRange(3, 3);
+    } else if (event.key === Key.ArrowRight && input.selectionStart >= 2 && (hour === 'h1' || hour === '1h')) {
+      input.value = `01:${input.value.slice(3, input.value.length)}`;
+      input.setSelectionRange(2, 2);
     }
   }
 
