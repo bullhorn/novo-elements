@@ -362,7 +362,7 @@ function aggregatePages(metadata: PageMetadata[]): SectionTree {
  * Creates the examples module and metadata
  */
 const task = async () => {
-  // await generateApiDocs();
+  await generateApiDocs();
 
   const results: PageMetadata[] = [];
   const matchedFiles = glob(path.join(examplesPath, '**/*.md'));
