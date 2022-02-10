@@ -23,6 +23,7 @@ interface PageMetadata {
   template: string;
   route: string;
   order: number;
+  tag: string;
 }
 
 interface PageTree {
@@ -166,6 +167,8 @@ function generatePageRoute(metadata: PageMetadata[]): string {
     const tabs = comps.filter((it) => it.order !== -1);
     const subs = `[${tabs.map((it) => `{ title: '${it.title}', route: './${it.route}'}`).join()}]`;
     const hasDesc = comps.filter((it) => it.order === -1);
+    const tags = comps.reduce((agg, it) => [...agg, it.tag], []).filter(Boolean);
+    const tag = tags.length ? `, tag: '${tags[0]}'` : '';
     let desc = 'null';
     if (hasDesc.length) {
       desc = `${hasDesc[0].name}Page`;
@@ -174,13 +177,13 @@ function generatePageRoute(metadata: PageMetadata[]): string {
       ? `  {
     path: '${route}',
     component: TabsLayout,
-    data: { title: '${convertToSentence(page)}', section: '${pathRoot}', pages: ${subs}, description: ${desc} },
+    data: { title: '${convertToSentence(page)}', section: '${pathRoot}', pages: ${subs}, description: ${desc}${tag} },
     children: [
 ${tabs.map((comp) => `      { path: '${comp.route}', component: ${comp.name}Page }`).join(',\n')},
       { path: '', redirectTo: '/${pathRoot}/${page}/${tabs[0].route}', pathMatch: 'full' },
     ]
   }`
-      : `  { path: '${route}', component: ${tabs[0].name}Page, data: { title: '${tabs[0].title}', section: '${tabs[0].section}' } }`;
+      : `  { path: '${route}', component: ${tabs[0].name}Page, data: { title: '${tabs[0].title}', section: '${tabs[0].section}'${tag} } }`;
   };
 
   return Object.entries(sections)
@@ -231,7 +234,7 @@ export const PAGE_LIST = [
 @NgModule({
   declarations: PAGE_LIST,
   entryComponents: PAGE_LIST,
-  imports: [RouterModule.forRoot(routes, { useHash: true }), NovoElementsModule, NovoExamplesModule, NovoExamplesSharedModule],
+  imports: [RouterModule.forRoot(routes, { useHash: true, anchorScrolling: 'enabled' }), NovoElementsModule, NovoExamplesModule, NovoExamplesSharedModule],
   exports: [RouterModule],
 })
 export class NovoExamplesRoutesModule {}
@@ -243,9 +246,9 @@ export class NovoExamplesRoutesModule {}
  * this function will convert to dash case.
  */
 function convertToDashCase(name: string): string {
-  name = name.replace(/[A-Z]/g, ' $&');
+  name = name.replace(/[A-Z-]/g, ' $&');
   name = name.toLowerCase().trim();
-  return name.split(' ').join('-');
+  return name.split(' ').join('-').replace('--', '-');
 }
 
 /**
@@ -299,7 +302,7 @@ function parsePageMetadata(filePath: string, sourceContent: string): PageMetadat
   // }
 
   const [root = 'root', parent = 'parent'] = path.dirname(filePath).split('/').slice(-2);
-  const { section = root, page = parent, title = convertToSentence(fileName), order = ++_pageOrder } = data;
+  const { section = root, page = parent, title = convertToSentence(fileName), order = ++_pageOrder, tag = null } = data;
 
   return {
     id: fileName,
@@ -308,8 +311,9 @@ function parsePageMetadata(filePath: string, sourceContent: string): PageMetadat
     section: section.toLowerCase(),
     page: page.toLowerCase(),
     template: markup.replace(/\{/g, '&#123;').replace(/\}/g, '&#125;'),
-    route: convertToDashCase(title),
+    route: convertToDashCase(title).replace('src/', ''),
     order: order,
+    tag: tag,
   };
 }
 
@@ -358,7 +362,7 @@ function aggregatePages(metadata: PageMetadata[]): SectionTree {
  * Creates the examples module and metadata
  */
 const task = async () => {
-  await generateApiDocs();
+  // await generateApiDocs();
 
   const results: PageMetadata[] = [];
   const matchedFiles = glob(path.join(examplesPath, '**/*.md'));

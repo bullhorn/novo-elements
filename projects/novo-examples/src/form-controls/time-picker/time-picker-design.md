@@ -14,7 +14,7 @@ Time Pickers allow users to easily select a time. It comes in a handful of varie
 
 </div>
 
-<img src="https://via.placeholder.com/350x250"/>
+![TimePicker](assets/images/TimePickerOverview.png)
 
 </novo-grid>
 
@@ -28,7 +28,7 @@ Time Pickers allow users to easily select a time. It comes in a handful of varie
 
 <novo-grid columns="2" align="start" gap="2rem">
 
-<img src="https://via.placeholder.com/350x250" width="450">
+![TimePicker Anatomy](assets/images/TimePickerOverview.png){width=450}
 
 <div>
 

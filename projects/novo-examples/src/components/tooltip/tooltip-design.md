@@ -14,7 +14,7 @@ Helper tooltips contain basic text that provides some additional information abo
 
 </div>
 
-<img src="https://via.placeholder.com/350x250"/>
+<img src="assets/images/TooltipOverview.png"/>
 
 <div>
 
@@ -43,19 +43,19 @@ Helper tooltips contain basic text that provides some additional information abo
 >
 > Tooltips also come in semantic variants: informative (blue), positive (green), and negative (red). These use semantic colors to communicate the meaning.
 
-![placeholder](https://via.placeholder.com/250x200)
+![Tooltip Colors](assets/images/TooltipColor.png)
 
 > **Sizing**
 >
 > When the label is too long for the available horizontal space, it wraps to form another line. To control the visually display text-length you can set the size of the tooltip with the `tooltip-size` property.
 
-![placeholder](https://via.placeholder.com/250x200)
+![Tooltip Size](assets/images/TooltipSize.png)
 
 > **Placement**
 >
-> A tooltip is positioned in relation to its target. Placement property values are at the: top, top left, top right, top start, top end, bottom, bottom left, bottom right, bottom start, bottom end, left, left top, left bottom, start, start top, start bottom, right, right top, right bottom, end, end top, end bottom. The default placement value is at the top.
+> A tooltip is positioned in relation to its target. Placement property values are at the: `top`, `top left`, `top right`, `bottom`, `bottom left`, `bottom right`, `left`, `right`. The default placement value is at the top.
 
-![placeholder](https://via.placeholder.com/250x200)
+![Tooltip Placement](assets/images/TooltipPosition.png)
 
 </novo-grid>
 

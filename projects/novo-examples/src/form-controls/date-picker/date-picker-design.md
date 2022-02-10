@@ -14,7 +14,7 @@ Date Pickers allow users to easily select a date. It comes in a handful of varie
 
 </div>
 
-<img src="https://via.placeholder.com/350x250"/>
+![DatePicker](assets/images/DatePickerOverview.png)
 
 </novo-grid>
 
@@ -28,7 +28,7 @@ Date Pickers allow users to easily select a date. It comes in a handful of varie
 
 <novo-grid columns="2" align="start" gap="2rem">
 
-<img src="https://via.placeholder.com/350x250" width="450">
+![DatePicker Anatomy](assets/images/DatePickerOverview.png){width=450}
 
 <div>
 
@@ -60,42 +60,6 @@ Date Pickers allow users to easily select a date. It comes in a handful of varie
 - If a spinner is triggered by a button, place the spinner in the button, and disable the button while the spinner is visible.
 - If only a portion of a page is loading new content or being updated, place the loading element in that part of the page.
 - There should only be a single loading element on a page at one time.
-
-## How to configure
-
-<novo-grid columns="2" align="start" gap="2rem">
-
-> ![placeholder](https://via.placeholder.com/350x250)
->
-> - (✓) Always do this
->
-> Explain this
-
-> ![placeholder](https://via.placeholder.com/350x250)
->
-> - (x) Never do this
->
-> Explain this
-
-</novo-grid>
-
-## Patterns
-
-<novo-grid columns="2" align="start" gap="2rem">
-
-> **Pattern**
->
-> Why is it configured like this
-
-![placeholder](https://via.placeholder.com/350x250)
-
-> **Pattern**
->
-> Why is it configured like this
-
-![placeholder](https://via.placeholder.com/350x250)
-
-</novo-grid>
 
 ## Accessibility
 

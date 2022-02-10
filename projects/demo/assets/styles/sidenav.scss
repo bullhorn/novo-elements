@@ -105,8 +105,12 @@
   }
 
   .menu-item {
-    display: block;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    gap: $spacing-md;
     margin: 0;
+    margin-right: 20px;
     height: 2.5rem;
   }
 
@@ -141,10 +145,13 @@
   }
 
   .menu-section-header {
-    display: block;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    gap: $spacing-md;
 
     .menu-item-header {
-      color: darken(#acaeb1, 4%);
+      color: $sand;
       height: 2.5rem;
       line-height: 2.5rem;
       display: block;

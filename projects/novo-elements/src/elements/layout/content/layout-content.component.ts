@@ -40,4 +40,8 @@ export class NovoLayoutContent extends CdkScrollable implements AfterContentInit
       this._changeDetectorRef.markForCheck();
     });
   }
+
+  getHostElement() {
+    return this.elementRef.nativeElement;
+  }
 }

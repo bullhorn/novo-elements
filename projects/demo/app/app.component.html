@@ -58,11 +58,25 @@
     </novo-stack>
     <nav>
       <ul class="menu-list">
+
         <li class="menu-section-header"
           routerLinkActive="current"
           [routerLinkActiveOptions]="{exact: true}">
-          <a routerLink="/src/home"
+          <a routerLink="/home"
             class="menu-item-header">Introduction</a>
+        </li>
+
+        <li class="menu-section-header new-section">
+          <span class="menu-item-header">Updates</span>
+        </li>
+
+        <li class="menu-item"
+          *ngFor="let route of updateRoutes"
+          routerLinkActive="current"
+          [routerLinkActiveOptions]="{exact: true}">
+          <a [routerLink]="route.path"
+            class="menu-link">{{route.data.title}}</a>
+          <novo-chip color="success" size="sm" *ngIf="route.data.tag==='new'">new</novo-chip>
         </li>
 
         <li class="menu-section-header">
@@ -84,6 +98,9 @@
           [routerLinkActiveOptions]="{exact: true}">
           <a [routerLink]="route.path"
             class="menu-link">{{route.data.title}}</a>
+          <novo-chip color="success" size="sm" *ngIf="route.data.tag==='new'">new</novo-chip>
+          <novo-chip color="positive" size="sm" *ngIf="route.data.tag==='experiment'">experiment</novo-chip>
+          <novo-chip color="danger" size="sm" *ngIf="route.data.tag==='deprecated'">deprecated</novo-chip>
         </li>
         <li class="menu-section-header">
           <span class="menu-item-header">Form Controls</span>
@@ -94,6 +111,9 @@
           [routerLinkActiveOptions]="{exact: true}">
           <a [routerLink]="route.path"
             class="menu-link">{{route.data.title}}</a>
+          <novo-chip color="success" size="sm" *ngIf="route.data.tag==='new'">new</novo-chip>
+          <novo-chip color="positive" size="sm" *ngIf="route.data.tag==='experiment'">experiment</novo-chip>
+          <novo-chip color="danger" size="sm" *ngIf="route.data.tag==='deprecated'">deprecated</novo-chip>
         </li>
         <li class="menu-section-header">
           <span class="menu-item-header">Layout</span>
@@ -104,6 +124,9 @@
           [routerLinkActiveOptions]="{exact: true}">
           <a [routerLink]="route.path"
             class="menu-link">{{route.data.title}}</a>
+          <novo-chip color="success" size="sm" *ngIf="route.data.tag==='new'">new</novo-chip>
+          <novo-chip color="positive" size="sm" *ngIf="route.data.tag==='experiment'">experiment</novo-chip>
+          <novo-chip color="danger" size="sm" *ngIf="route.data.tag==='deprecated'">deprecated</novo-chip>
         </li>
         <li class="menu-section-header">
           <span class="menu-item-header">Utils</span>
@@ -138,7 +161,7 @@
       </ul>
     </nav>
   </novo-sidenav>
-  <novo-layout-content class="main-content">
+  <novo-layout-content class="main-content" #scrollContainer>
     <novo-header [hidden]="sidenav.mode=='side'">
       <div novo-title>
         <novo-flex align="center">

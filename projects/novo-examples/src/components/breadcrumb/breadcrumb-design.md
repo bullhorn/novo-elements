@@ -3,6 +3,7 @@ section: Components
 page: Breadcrumbs
 title: Design
 order: 2
+tag: new
 ---
 
 ## Usage
@@ -14,7 +15,7 @@ A breadcrumb displays the current location within a hierarchy. It allows going b
 
 </div>
 
-<img src="assets/images/AsideOverview.png"/>
+<img src="assets/images/BreadcrumbsOverview.png"/>
 
 </novo-grid>
 

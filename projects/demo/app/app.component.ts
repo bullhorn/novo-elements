@@ -1,9 +1,9 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { AfterViewInit, Component, ViewChild, ViewContainerRef } from '@angular/core';
-import { Router } from '@angular/router';
-import { NovoModalService, NovoSidenavComponent, NovoToastService } from 'novo-elements';
-import { delay, startWith } from 'rxjs/operators';
-
+import { Router, Scroll } from '@angular/router';
+import { NovoLayoutContent, NovoModalService, NovoSidenavComponent, NovoToastService } from 'novo-elements';
+import { delay, filter, startWith } from 'rxjs/operators';
+import { AnchorViewportScroller } from './anchor-scroller';
 @Component({
   selector: 'novo-demo-app',
   templateUrl: './app.component.html',
@@ -18,11 +18,15 @@ export class AppComponent implements AfterViewInit {
   layoutRoutes: Array<any>;
   utilRoutes: Array<any>;
   patternRoutes: Array<any>;
+  updateRoutes: Array<any>;
   @ViewChild(NovoSidenavComponent)
   sidenav!: NovoSidenavComponent;
 
+  @ViewChild('scrollContainer')
+  scrollContainer!: NovoLayoutContent;
+
   constructor(
-    router: Router,
+    private router: Router,
     viewContainerRef: ViewContainerRef,
     toaster: NovoToastService,
     modalService: NovoModalService,
@@ -39,11 +43,7 @@ export class AppComponent implements AfterViewInit {
     this.layoutRoutes = router.config.filter((r: any) => r.data.section === 'layouts').sort(this.sortMenu);
     this.utilRoutes = router.config.filter((r: any) => r.data.section === 'utils').sort(this.sortMenu);
     this.patternRoutes = router.config.filter((r: any) => r.data.section === 'patterns').sort(this.sortMenu);
-
-    router.events.subscribe(() => {
-      window.scrollTo(0, 0);
-      this.menuOpen = false;
-    });
+    this.updateRoutes = router.config.filter((r: any) => r.data.section === 'updates').sort(this.sortMenu);
   }
 
   ngAfterViewInit() {
@@ -59,6 +59,24 @@ export class AppComponent implements AfterViewInit {
           this.sidenav.open();
         }
       });
+    const viewportScroller = new AnchorViewportScroller(document, this.scrollContainer.getHostElement());
+
+    this.router.events.pipe(filter((e) => e instanceof Scroll)).subscribe((e: Scroll) => {
+      this.menuOpen = false;
+      if (e.anchor) {
+        console.log('anchor', e.anchor);
+        // anchor navigation
+        setTimeout(() => {
+          viewportScroller.scrollToAnchor(e.anchor);
+        });
+      } else if (e.position) {
+        // backward navigation
+        viewportScroller.scrollToPosition(e.position);
+      } else {
+        // forward navigation
+        viewportScroller.scrollToPosition([0, 0]);
+      }
+    });
   }
 
   sortMenu(a, b) {

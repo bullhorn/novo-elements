@@ -196,10 +196,10 @@
     border-collapse: collapse;
   }
 
-  td,
-  th {
-    padding: 0;
-  }
+  // td,
+  // th {
+  //   padding: 0;
+  // }
 
   details summary {
     cursor: pointer;
@@ -342,6 +342,7 @@
 
   li {
     word-wrap: break-all;
+    line-height: 1.375;
   }
 
   li > p {

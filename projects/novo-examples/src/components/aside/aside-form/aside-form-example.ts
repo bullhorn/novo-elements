@@ -9,7 +9,7 @@ import { FormUtils, NovoAsideRef, NovoAsideService, PickerControl, PickerResults
         <util-action icon="times" (click)="close()"></util-action>
       </utils>
     </header>
-    <section>
+    <section padding="lg">
       <novo-form [form]="textForm">
         <div class="novo-form-row">
           <novo-control [form]="textForm" [control]="textControl"></novo-control>
