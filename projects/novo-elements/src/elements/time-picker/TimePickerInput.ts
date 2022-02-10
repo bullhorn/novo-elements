@@ -211,9 +211,12 @@ export class NovoTimePickerInputElement implements OnInit, ControlValueAccessor 
         if (timePeriod) {
           (event.target as HTMLInputElement).value = `${(event.target as HTMLInputElement).value.slice(0, 5)} ${timePeriod}`;
         }
-        // if ((event.target as HTMLInputElement).selectionStart >= 3 && (hour === 'h1' || hour === '1h')) {
-        //   (event.target as HTMLInputElement).value = `01:${(event.target as HTMLInputElement).value.slice(3, (event.target as HTMLInputElement).value.length)}`;
-        // }
+        if ((event.target as HTMLInputElement).selectionStart >= 3 && (hour === 'h1' || hour === '1h')) {
+          (event.target as HTMLInputElement).value = `01:${(event.target as HTMLInputElement).value.slice(
+            3,
+            (event.target as HTMLInputElement).value.length,
+          )}`;
+        }
       }
     }
   }
