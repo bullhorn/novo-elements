@@ -27,6 +27,7 @@ novo-select {
     text-transform: none;
     padding: 0 $spacing-sm;
     margin-bottom: -1px;
+    -webkit-appearance: none;
 
     &.empty {
       color: #a9a9a9;
