@@ -175,10 +175,10 @@ export class NovoTimePickerInputElement implements OnInit, ControlValueAccessor 
       this.closePanel();
       event.stopPropagation();
       event.stopImmediatePropagation();
-      if (hour === 'h1' || hour === '1h') {
+      if (this.hourOneFormatRequired) {
         input.value = `01:${input.value.slice(3, input.value.length)}`;
       }
-    } else if (event.key === Key.Tab && input.selectionStart <= 2 && (hour === 'h1' || hour === '1h')) {
+    } else if (event.key === Key.Tab && input.selectionStart <= 2 && this.hourOneFormatRequired) {
       event.preventDefault();
       event.stopPropagation();
       event.stopImmediatePropagation();
@@ -190,7 +190,7 @@ export class NovoTimePickerInputElement implements OnInit, ControlValueAccessor 
       this.closePanel();
       event.stopPropagation();
       event.stopImmediatePropagation();
-    } else if (event.key === Key.ArrowRight && input.selectionStart >= 2 && (hour === 'h1' || hour === '1h')) {
+    } else if (event.key === Key.ArrowRight && input.selectionStart >= 2 && this.hourOneFormatRequired) {
       input.value = `01:${input.value.slice(3, input.value.length)}`;
       input.setSelectionRange(2, 2);
     }
@@ -211,7 +211,7 @@ export class NovoTimePickerInputElement implements OnInit, ControlValueAccessor 
         if (timePeriod) {
           (event.target as HTMLInputElement).value = `${(event.target as HTMLInputElement).value.slice(0, 5)} ${timePeriod}`;
         }
-        if ((event.target as HTMLInputElement).selectionStart >= 3 && (hour === 'h1' || hour === '1h')) {
+        if ((event.target as HTMLInputElement).selectionStart >= 3 && this.hourOneFormatRequired) {
           (event.target as HTMLInputElement).value = `01:${(event.target as HTMLInputElement).value.slice(
             3,
             (event.target as HTMLInputElement).value.length,
@@ -227,7 +227,7 @@ export class NovoTimePickerInputElement implements OnInit, ControlValueAccessor 
     if (!this.military) {
       const test = text.substr(5, 4).replace(/x/g, '').trim().slice(0, 2);
       const timePeriod = this.maskOptions.blocks.aa.enum.find((it) => it[0] === test[0]);
-      if (hour === 'h1' || hour === '1h') {
+      if (this.hourOneFormatRequired) {
         (event.target as HTMLInputElement).value = `01:${text.slice(3, text.length)}`;
       }
       if (!timePeriod) {
@@ -316,5 +316,9 @@ export class NovoTimePickerInputElement implements OnInit, ControlValueAccessor 
       hours = `${parseInt(hours, 10) + 12}`.padStart(2, '0');
     }
     return `${hours}:${minutes}`;
+  }
+
+  hourOneFormatRequired(hourInput: string): boolean {
+    return hourInput === 'h1' || hourInput === '1h';
   }
 }
