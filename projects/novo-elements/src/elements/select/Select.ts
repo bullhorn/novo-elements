@@ -225,7 +225,8 @@ export class NovoSelectElement
   /** Function that maps an option's control value to its display value in the trigger. */
   @Input() displayWith: ((value: any) => string) | null = null;
   /** * Function to compare the option values with the selected values. */
-  @Input() compareWith: (o1: any, o2: any) => boolean = (o1: any, o2: any) => o1 === o2 || o1 === o2.id || ((!Helpers.isEmpty(o1.id) && !Helpers.isEmpty(o2.id)) && o1.id === o2.id);
+  @Input() compareWith: (o1: any, o2: any) => boolean = (o1: any, o2: any) =>
+    o1 === o2 || o1 === o2.id || (!Helpers.isEmpty(o1.id) && !Helpers.isEmpty(o2.id) && o1.id === o2.id);
 
   header: any = {
     open: false,
