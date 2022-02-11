@@ -131,7 +131,7 @@ export class NovoTimeFormatDirective extends IMaskDirective<any> implements Novo
     }
   }
 
-  _handleBlur(event: FocusEvent): void {
+  _handleBlur(event: InputEvent): void {
     const text = (event.target as HTMLInputElement).value;
     const hour: string = text.slice(0, 2);
     console.log('blurred');
@@ -140,7 +140,9 @@ export class NovoTimeFormatDirective extends IMaskDirective<any> implements Novo
       const timePeriod = this.imask.blocks.aa.enum.find((it) => it[0] === input[0]);
       if (this.hourOneFormatRequired(hour)) {
         console.log('format required');
+        console.log((event.target as HTMLInputElement).value);
         (event.target as HTMLInputElement).value = `01:${text.slice(3, text.length)}`;
+        console.log((event.target as HTMLInputElement).value);
       }
       if (!timePeriod) {
         (event.target as HTMLInputElement).value = `${text.slice(0, 5)} --`;
