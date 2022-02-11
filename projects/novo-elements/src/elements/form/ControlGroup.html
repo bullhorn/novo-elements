@@ -18,16 +18,16 @@
         <novo-control (change)="onChange()" [form]="(form?.controls)[key]['controls'][index]" [control]="c"
           [condensed]="!vertical || c.controlType === 'read-only'"></novo-control>
       </div>
-      <div class="novo-control-container last" *ngIf="edit && !vertical">
+      <div class="novo-control-container edit last" *ngIf="edit && !vertical">
         <novo-button class="control-group-action" [disabled]="!disabledArray[index].edit" type="button"
-          *ngIf="edit && !vertical" theme="icon" icon="edit"
+          *ngIf="edit && !vertical" theme="icon" icon="editIcon"
           (click)="editControl(index)" [attr.data-automation-id]="'novo-control-group-edit-' + key" index="-1">
         </novo-button>
       </div>
-      <div class="novo-control-container last" *ngIf="remove && !vertical">
+      <div class="novo-control-container remove last" *ngIf="remove && !vertical">
         <novo-button class="control-group-action" [disabled]="!disabledArray[index].remove" type="button"
           *ngIf="remove && !vertical" theme="icon"
-          icon="delete-o" (click)="removeControl(index)"
+          icon="removeIcon" (click)="removeControl(index)"
           [attr.data-automation-id]="'novo-control-group-delete-' + key"
           index="-1">
         </novo-button>
@@ -35,12 +35,12 @@
     </div>
     <novo-button class="control-group-action" [disabled]="!disabledArray[index].edit" type="button"
       *ngIf="edit && vertical"
-      theme="icon" icon="edit"
+      theme="icon" icon="editIcon"
       (click)="editControl(index)" [attr.data-automation-id]="'novo-control-group-edit-' + key" index="-1">
     </novo-button>
     <novo-button class="control-group-action" [disabled]="!disabledArray[index].remove" type="button"
       *ngIf="remove && vertical" theme="icon"
-      icon="delete-o" (click)="removeControl(index)"
+      icon="removeIcon" (click)="removeControl(index)"
       [attr.data-automation-id]="'novo-control-group-delete-' + key"
       index="-1">
     </novo-button>
@@ -53,9 +53,9 @@
       [style.max-width.px]="label.width" [class.column-required]="label.required">
       <span [attr.data-automation-id]="'novo-control-group-label-' + label.value">{{ label.value }}</span>
     </div>
-    <div class="novo-control-group-control-label last" *ngIf="edit"
+    <div class="novo-control-group-control-label edit last" *ngIf="edit"
       [attr.data-automation-id]="'novo-control-group-edit-' + key"></div>
-    <div class="novo-control-group-control-label last" *ngIf="remove"
+    <div class="novo-control-group-control-label remove last" *ngIf="remove"
       [attr.data-automation-id]="'novo-control-group-delete-' + key"></div>
   </ng-template>
 
