@@ -4,7 +4,7 @@ novo-tooltip {
     color: #fff;
     padding: 8px 10px;
     font-size: 12px;
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    // font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     line-height: 12px;
     white-space: nowrap;
     text-shadow: 0 -1px 0 #000;
@@ -206,7 +206,7 @@ novo-tooltip {
       border-right-color: #458746;
     }
     &:before {
-      content: '';
+      content: "";
       position: absolute;
       background: 0 0;
       border: 6px solid transparent;

@@ -1,15 +1,15 @@
 // NG2
 import {
-  Directive,
-  OnChanges,
-  ComponentRef,
-  ViewContainerRef,
   ComponentFactoryResolver,
-  Input,
-  Output,
+  ComponentRef,
+  Directive,
   EventEmitter,
   HostListener,
+  Input,
+  OnChanges,
+  Output,
   SimpleChange,
+  ViewContainerRef,
 } from '@angular/core';
 import { PopOverContent } from './PopOverContent';
 
@@ -75,13 +75,13 @@ export class PopOverDirective implements OnChanges {
   }
 
   ngOnChanges(changes: { [propertyName: string]: SimpleChange }) {
-    if (changes['popoverDisabled']) {
-      if (changes['popoverDisabled'].currentValue) {
+    if (changes.popoverDisabled) {
+      if (changes.popoverDisabled.currentValue) {
         this.hide();
       }
     }
-    if (changes['popoverAlways']) {
-      if (changes['popoverAlways'].currentValue) {
+    if (changes.popoverAlways) {
+      if (changes.popoverAlways.currentValue) {
         this.show();
       }
     }

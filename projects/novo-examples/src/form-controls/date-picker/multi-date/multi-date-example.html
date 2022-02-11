@@ -1,0 +1,12 @@
+<div class="date-picker-demo-side-by-side">
+  <section>
+    <p>
+      <label>Dates</label>
+      <span *ngFor="let dt of multi">{{(dt | date) || 'N/A'}}</span>
+    </p>
+    <novo-date-picker [(ngModel)]="multi" mode="multiple"></novo-date-picker>
+  </section>
+  <section>
+    <novo-multi-date-input [(ngModel)]="input"></novo-multi-date-input>
+  </section>
+</div>

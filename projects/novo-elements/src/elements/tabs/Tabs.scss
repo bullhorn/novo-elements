@@ -1,5 +1,6 @@
+@import "../common/typography/text.mixins";
+
 novo-nav {
-  background: rgba(0, 0, 0, 0.15);
   padding: 0;
   list-style: none;
   display: flex;
@@ -9,21 +10,19 @@ novo-nav {
   &.condensed {
     novo-tab,
     novo-tab-link {
-      font-size: 12px;
+      font-size: 1rem;
       .novo-tab-link {
-        padding: 8px 12px;
+        padding: $spacing-sm;
       }
     }
   }
   novo-tab,
   novo-tab-link {
-    font-size: 14px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100%;
-    min-height: 45px;
     position: relative;
     &.disabled {
       .novo-tab-link {
@@ -36,11 +35,14 @@ novo-nav {
         }
       }
     }
+
     .novo-tab-link {
-      padding: 10px 20px;
-      color: #fff;
-      opacity: 0.7;
-      font-weight: 400;
+      @include novo-label-text();
+      padding: $spacing-lg;
+      // color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: $spacing-xs;
       cursor: pointer;
       text-transform: uppercase;
       &:focus {
@@ -63,7 +65,7 @@ novo-nav {
         font-weight: 500;
       }
       .indicator {
-        background: #fff;
+        background: var(--focus);
         width: 100%;
       }
     }
@@ -76,12 +78,12 @@ novo-nav {
       outline: none;
     }
   }
-  &[type='button-bar'] {
+  &[type="button-bar"] {
     display: inline-flex;
     border-radius: 3px;
     border: 2px solid #fff;
     novo-tab-button {
-      padding: 15px 20px;
+      padding: $spacing-md;
       cursor: pointer;
       transition: all 120ms ease-in-out;
       &.disabled {
@@ -93,7 +95,8 @@ novo-nav {
       }
     }
   }
-  &[theme='color'] {
+  &[theme="neutral"], // temporarily added back for backwards compatibility
+  &[theme="color"] {
     background: rgba(0, 0, 0, 0.2);
     novo-tab,
     novo-tab-link {
@@ -118,7 +121,7 @@ novo-nav {
         }
       }
     }
-    &[type='button-bar'] {
+    &[type="button-bar"] {
       border: 2px solid #fff;
       novo-tab-button {
         color: rgba(255, 255, 255, 0.75);
@@ -139,13 +142,15 @@ novo-nav {
       }
     }
   }
-  &[theme='white'] {
+  &[theme="white"] {
     background-color: $white;
-    &[direction='vertical'] {
+    &[direction="vertical"] {
       background: transparent;
     }
     novo-tab,
     novo-tab-link {
+      height: auto;
+
       &.disabled {
         .novo-tab-link {
           opacity: 0.5;
@@ -159,18 +164,18 @@ novo-nav {
         }
       }
       .novo-tab-link {
-        color: $dark;
+        color: var(--text-main);
         opacity: 0.75;
       }
       &.active,
       &.router-link-active {
-        color: $positive;
+        color: var(--selection);
         .novo-tab-link {
-          color: $positive;
+          color: var(--selection);
           opacity: 1;
         }
         .indicator {
-          background: $positive;
+          background: currentColor;
         }
       }
       &:hover {
@@ -179,13 +184,13 @@ novo-nav {
         }
       }
     }
-    &[type='button-bar'] {
+    &[type="button-bar"] {
       border: 2px solid $light;
       novo-tab-button {
-        color: $dark;
+        color: var(--text-main);
         opacity: 0.75;
         &.active {
-          color: $positive;
+          color: var(--selection);
           background: rgba(0, 0, 0, 0.05);
           opacity: 1;
         }
@@ -202,7 +207,7 @@ novo-nav {
       }
     }
   }
-  &[direction='vertical'] {
+  &[direction="vertical"] {
     flex-direction: column;
     width: auto;
     novo-tab,
@@ -211,8 +216,7 @@ novo-nav {
       width: 100%;
       flex-direction: row;
       align-items: center;
-      height: 50px;
-      min-width: 150px;
+      min-width: 12rem;
       justify-content: space-between;
       transition: all 120ms ease-in-out;
       &:first-of-type {
@@ -223,7 +227,9 @@ novo-nav {
         order: 2;
         flex: 1;
         width: 100%;
-        display: block;
+        display: flex;
+        flex-flow: row nowrap;
+        gap: $spacing-xs;
         max-width: 90%;
         white-space: nowrap;
         overflow: hidden;
@@ -232,7 +238,6 @@ novo-nav {
       }
       .indicator {
         order: 1;
-        position: relative;
         width: 4px;
         height: 0;
         display: block;
@@ -247,6 +252,8 @@ novo-nav {
         }
         .indicator {
           height: 100%;
+          top: 0;
+          bottom: 0;
         }
       }
       &:hover {
@@ -269,14 +276,18 @@ novo-nav {
   }
 }
 
+novo-tab-link {
+  @include theme-text-colors();
+}
+
 // Outlets
 novo-nav-outlet {
   display: block;
   novo-nav-header {
     display: block;
-    padding: 8px;
+    padding: $spacing-sm;
+    margin: $spacing-sm;
     border: 1px solid #333;
-    margin: 8px;
   }
   novo-nav-content {
     display: none;

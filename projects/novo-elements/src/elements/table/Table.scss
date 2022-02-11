@@ -45,9 +45,6 @@ novo-table {
             margin-right: 0;
           }
         }
-        > button {
-          height: 39px;
-        }
       }
     }
   }
@@ -91,7 +88,7 @@ novo-table {
     right: 0;
     bottom: 0;
     background: rgba(0, 0, 0, 0.07);
-    z-index: 9999;
+    z-index: z(overlay);
   }
   novo-form {
     max-width: inherit;
@@ -103,7 +100,8 @@ novo-table {
 
 // Baseline styles
 .table {
-  width: 100%;
+  width: auto;
+  width: -webkit-fill-available;
   max-width: 100%;
   background-color: $table-bg;
   > tbody,
@@ -114,11 +112,11 @@ novo-table {
         position: relative;
         text-align: left;
         padding: $table-condensed-cell-padding;
-        button {
-          padding: 5px !important;
-          width: inherit !important;
-          height: inherit !important;
-        }
+        // button {
+        //   padding: 5px !important;
+        //   width: inherit !important;
+        //   height: inherit !important;
+        // }
         .th-title {
           padding: 5px 5px 5px 0;
         }
@@ -162,7 +160,7 @@ novo-table {
       flex-direction: row;
       align-items: center;
       novo-dropdown.column-filters {
-        button.filtered {
+        .novo-button.filtered {
           i {
             color: $positive;
           }
@@ -296,7 +294,7 @@ novo-table {
   max-height: 500px;
   overflow-x: hidden;
   overflow-y: auto;
-  button[theme][theme='dialogue'][icon] i {
+  .novo-button[theme][theme="dialogue"][icon] i {
     padding: inherit;
     padding-left: 5px;
     height: inherit;
@@ -304,14 +302,16 @@ novo-table {
     display: inline-block;
     line-height: inherit;
   }
-  list {
-    item.filter-search {
-      padding: 10px 0;
-      width: 100%;
-      height: auto;
-      flex-direction: column;
-      align-items: flex-start;
-      cursor: initial;
+  .novo-optgroup {
+    .novo-option.filter-search {
+      .novo-option-text {
+        padding: 10px 0;
+        width: 100%;
+        height: auto;
+        flex-direction: column;
+        align-items: flex-start;
+        cursor: initial;
+      }
       &:hover {
         background: transparent;
       }
@@ -438,6 +438,38 @@ novo-table {
 }
 
 novo-table {
+  @include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
+    $contrast: getContrastColor($name);
+    &[theme="#{$name}"] {
+      > header {
+        background: $color;
+        color: $contrast;
+        novo-pagination {
+          background: rgba(0, 0, 0, 0.15);
+          > * {
+            color: $white;
+            opacity: 1;
+          }
+          .page {
+            color: $white;
+          }
+          h5.rows {
+            opacity: 0.75;
+          }
+          novo-select {
+            div[type="button"] {
+              color: $white;
+              border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+              i {
+                color: $white !important;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
   &[dark] {
     .table > thead > tr > th {
       border-right: 1px solid rgba(#f4f4f4, 0.04);
@@ -454,127 +486,6 @@ novo-table {
       > tbody tr:nth-of-type(4n + 2),
       > tbody tr:nth-of-type(4n + 1) {
         background-color: rgba($table-bg-accent, 0.04);
-      }
-    }
-  }
-  @each $analytics, $color in $analytics-colors {
-    &[theme='#{$analytics}'] {
-      > header {
-        background: $color;
-        color: #fff;
-        novo-pagination {
-          background: rgba(0, 0, 0, 0.15);
-          > * {
-            color: $white;
-            opacity: 1;
-          }
-          .page {
-            color: $white;
-          }
-          h5.rows {
-            opacity: 0.75;
-          }
-          novo-select {
-            div[type='button'] {
-              color: $white;
-              border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-              i {
-                color: $white !important;
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-  @each $entity, $color in $entity-colors {
-    &[theme='#{$entity}'] {
-      > header {
-        background: $color;
-        color: #fff;
-        novo-pagination {
-          background: rgba(0, 0, 0, 0.15);
-          > * {
-            color: $white;
-            opacity: 1;
-          }
-          .page {
-            color: $white;
-          }
-          h5.rows {
-            opacity: 0.75;
-          }
-          novo-select {
-            div[type='button'] {
-              color: $white;
-              border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-              i {
-                color: $white !important;
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-  @each $basic, $color in $app-colors {
-    &[theme='#{$basic}'] {
-      > header {
-        background: $color;
-        color: #fff;
-        novo-pagination {
-          background: rgba(0, 0, 0, 0.15);
-          > * {
-            color: $white;
-            opacity: 1;
-          }
-          .page {
-            color: $white;
-          }
-          h5.rows {
-            opacity: 0.75;
-          }
-          novo-select {
-            div[type='button'] {
-              color: $white;
-              border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-              i {
-                color: $white !important;
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-  &[dark] {
-    > header {
-      color: #fff;
-      novo-pagination {
-        background: rgba(0, 0, 0, 0.15);
-        > * {
-          color: $white;
-          opacity: 1;
-        }
-        .page {
-          color: $white;
-          &.active {
-            color: #fff;
-            background: rgba(0, 0, 0, 0.15);
-          }
-        }
-        h5.rows {
-          opacity: 0.75;
-        }
-        novo-select {
-          div[type='button'] {
-            color: $white;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-            i {
-              color: $white !important;
-            }
-          }
-        }
       }
     }
   }

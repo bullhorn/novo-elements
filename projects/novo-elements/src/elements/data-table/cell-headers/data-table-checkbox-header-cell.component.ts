@@ -1,18 +1,16 @@
 import { CdkColumnDef, CdkHeaderCell } from '@angular/cdk/table';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, EventEmitter, HostBinding, Input, OnDestroy, Output, Renderer2 } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, HostBinding, Input, OnDestroy, Renderer2 } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { NovoToastService } from '../../toast/ToastService';
 import { NovoDataTable } from '../data-table.component';
-
 
 @Component({
   selector: 'novo-data-table-checkbox-header-cell',
   template: `
     <div class="data-table-checkbox" (click)="onClick()">
-      <input type="checkbox" [checked]="checked">
+      <input type="checkbox" [checked]="checked" />
       <label>
-        <i [class.bhi-checkbox-empty]="!checked"
-          [class.bhi-checkbox-filled]="checked"></i>
+        <i [class.bhi-checkbox-empty]="!checked" [class.bhi-checkbox-filled]="checked"></i>
       </label>
     </div>
   `,
@@ -30,7 +28,9 @@ export class NovoDataTableCheckboxHeaderCell<T> extends CdkHeaderCell implements
   private resetSubscription: Subscription;
 
   get isAtLimit(): boolean {
-    return this.maxSelected && this.dataTable.state.selectedRows.size + this.dataTable.dataSource.data.length > this.maxSelected && !this.checked;
+    return (
+      this.maxSelected && this.dataTable.state.selectedRows.size + this.dataTable.dataSource.data.length > this.maxSelected && !this.checked
+    );
   }
 
   constructor(

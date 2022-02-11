@@ -1,0 +1,59 @@
+<novo-stack gap="md">
+  <novo-row gap="md">
+    <novo-chip [size]="size.value">Standard</novo-chip>
+    <novo-chip [size]="size.value">
+      <novo-icon>bell</novo-icon>
+    </novo-chip>
+    <novo-chip [size]="size.value">
+      <novo-text>Removable</novo-text>
+      <novo-icon novoChipRemove>x</novo-icon>
+    </novo-chip>
+    <novo-chip [size]="size.value" disabled>
+      <novo-icon>candidate</novo-icon>
+      <novo-text>Disabled</novo-text>
+    </novo-chip>
+  </novo-row>
+  <novo-row gap="md">
+    <novo-chip color="success" [size]="size.value">Standard</novo-chip>
+    <novo-chip color="negative" [size]="size.value">
+      <novo-icon>bell</novo-icon>
+    </novo-chip>
+    <novo-chip color="ocean" [size]="size.value">
+      <novo-text>Removable</novo-text>
+      <novo-icon novoChipRemove>x</novo-icon>
+    </novo-chip>
+    <novo-chip color="candidate" [size]="size.value" disabled>
+      <novo-icon>candidate</novo-icon>
+      <novo-text>Disabled</novo-text>
+    </novo-chip>
+  </novo-row>
+  <novo-row gap="md">
+    <novo-chip accent="success" [size]="size.value">Standard</novo-chip>
+    <novo-chip accent="negative" [size]="size.value">
+      <novo-icon>bell</novo-icon>
+    </novo-chip>
+    <novo-chip accent="ocean" [size]="size.value">
+      <novo-text>Removable</novo-text>
+      <novo-icon novoChipRemove>x</novo-icon>
+    </novo-chip>
+    <novo-chip accent="candidate" [size]="size.value" disabled>
+      <novo-icon>candidate</novo-icon>
+      <novo-text>Disabled</novo-text>
+    </novo-chip>
+  </novo-row>
+
+</novo-stack>
+
+<section>
+  <novo-label>Size</novo-label>
+  <novo-radio-group #size appearance="vertical" value="md">
+    <novo-radio name="size" value="xs">xs</novo-radio>
+    <novo-radio name="size" value="sm">sm</novo-radio>
+    <novo-radio name="size" value="md">md</novo-radio>
+    <novo-radio name="size" value="lg">lg</novo-radio>
+    <novo-radio name="size" value="xl">xl</novo-radio>
+  </novo-radio-group>
+
+
+
+</section>

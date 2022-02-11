@@ -1,0 +1,27 @@
+@import "../../styles/variables.scss";
+@import "../common/typography/text.mixins";
+
+:host {
+  &.novo-field-appearance-standard {
+    &.novo-field-appearance-underlined {
+      .novo-field-input {
+        border-bottom: 1px solid lighten($dark, 45%) !important;
+      }
+      &:not(.novo-focused):hover {
+        .novo-field-input {
+          border-bottom: 1px solid $dark !important;
+        }
+      }
+      &.novo-focused {
+        .novo-field-input {
+          border-bottom: 1px solid $positive !important;
+        }
+      }
+      &.novo-field-invalid {
+        .novo-field-input {
+          border-bottom: 1px solid $negative !important;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,33 @@
+@import "~novo-design-tokens/scss";
+
+:root {
+  --background-body: #{$color-white};
+  --background-main: #{$color-bright}; //efefef
+  --background-bright: #{$color-white}; //f7f7f7
+  --background-muted: #{$color-sand}; //f7f7f7
+  --selection: #{$color-ocean}; //#9e9e9e;
+  --text-selection: #{$color-white};
+  --text-main: #{$color-dark}; //#363636;
+  --text-bright: #{$color-black};
+  --text-muted: #{$color-slate}; //#70777f;
+  // do we need disabled.
+  --links: #{$color-ocean};
+  --focus: #{$color-ocean};
+  --border: #{$color-light}; //#dbdbdb;
+  --code: #000;
+  --animation-duration: 0.1s;
+  --button-hover: #aaa;
+  --scrollbar-thumb: #{$color-stone};
+  --scrollbar-thumb-hover: #{$color-slate};
+  --form-placeholder: #949494;
+  --form-text: #000;
+  --variable: #39a33c;
+  --highlight: #ff0;
+
+  // Share
+  --font-size-caption: #{$font-size-xs};
+  --font-size-label: #{$font-size-sm};
+  --font-size-text: #{$font-size-body};
+  --font-size-button: #{$font-size-body};
+  --font-size-title: #{$font-size-xl};
+}

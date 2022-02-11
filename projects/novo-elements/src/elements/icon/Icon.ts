@@ -1,29 +1,43 @@
-import { Component, ElementRef, Input, HostBinding, AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, HostBinding, Input } from '@angular/core';
+import { BooleanInput } from '../../utils/decorators/BooleanInput';
+import { TypographySize } from '../common/typography';
 
 @Component({
   selector: 'novo-icon',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-        <i [class]="iconName"><span><ng-content></ng-content></span></i>
-    `,
+    <i [class]="iconName"
+      ><span (cdkObserveContent)="projectContentChanged($event)"><ng-content></ng-content></span
+    ></i>
+  `,
 })
 export class NovoIconComponent implements AfterViewInit {
-  @HostBinding('attr.raised')
+  @HostBinding('class.novo-icon-raised')
   @Input()
   public raised: boolean;
-  @HostBinding('attr.size')
-  @Input()
-  public size: string = 'medium';
+
   @HostBinding('attr.theme')
   @Input()
   public theme: string;
-  @HostBinding('attr.color')
   @Input()
   public color: string;
   @HostBinding('attr.role')
   public role: string = 'img';
   @HostBinding('attr.aria-label')
   public ariaLabel: string;
+
+  @Input()
+  public size: TypographySize;
+
+  @HostBinding('class.text-size-smaller')
+  @Input()
+  @BooleanInput()
+  public smaller: boolean;
+
+  @HostBinding('class.text-size-larger')
+  @Input()
+  @BooleanInput()
+  public larger: boolean;
 
   @Input()
   set alt(value: string) {
@@ -43,6 +57,11 @@ export class NovoIconComponent implements AfterViewInit {
     return this.iconName;
   }
 
+  @HostBinding('class')
+  get hb_classBinding(): string {
+    return [this.color ? `text-color-${this.color}` : null, this.size ? `text-size-${this.size}` : null].filter(Boolean).join(' ');
+  }
+
   public iconName: string;
 
   constructor(public element: ElementRef, private cdr: ChangeDetectorRef) {}
@@ -54,5 +73,10 @@ export class NovoIconComponent implements AfterViewInit {
         this.cdr.markForCheck();
       });
     }
+  }
+
+  public projectContentChanged(record: MutationRecord) {
+    this.name = this.element.nativeElement.textContent.trim();
+    this.cdr.detectChanges();
   }
 }

@@ -1,8 +1,8 @@
 // NG2
 import { Injectable } from '@angular/core';
+import { ComponentUtils } from '../../utils/component-utils/ComponentUtils';
 // APP
 import { NovoToastElement } from './Toast';
-import { ComponentUtils } from '../../utils/component-utils/ComponentUtils';
 
 export type ToastThemes = 'default' | 'success' | 'info' | 'warning' | 'danger' | 'positive' | string;
 export type ToastIcons = 'bell' | 'check' | 'info' | 'warning' | 'remove' | 'caution' | 'times' | 'coffee' | 'danger' | string;
@@ -11,8 +11,10 @@ export type ToastPositions = 'fixedTop' | 'fixedBottom' | 'growlTopRight' | 'gro
 export interface ToastOptions {
   title?: string;
   message?: string;
+  action?: string;
   icon?: ToastIcons;
   theme?: ToastThemes;
+  accent?: ToastThemes;
   hideDelay?: number;
   position?: ToastPositions;
   isCloseable?: boolean;
@@ -43,7 +45,7 @@ export class NovoToastService {
       const toast = this.componentUtils.append(toastElement, this._parentViewContainer);
       this.references.push(toast);
       this.handleAlert(toast.instance, options);
-      resolve(toast);
+      resolve(toast.instance);
     });
   }
 
@@ -79,12 +81,13 @@ export class NovoToastService {
     toast.parent = this;
     toast.title = OPTIONS.title || '';
     toast.message = OPTIONS.message || '';
+    toast.action = OPTIONS.action || null;
     toast.hideDelay = OPTIONS.hideDelay || this.defaults.hideDelay;
     toast.link = OPTIONS.link || '';
     toast.isCloseable = OPTIONS.isCloseable || false;
 
     const CUSTOM_CLASS = OPTIONS.customClass || '';
-    const ALERT_STYLE = OPTIONS.theme || this.defaults.theme;
+    const ALERT_STYLE = OPTIONS.accent ? `novo-accent-${OPTIONS.accent}` : OPTIONS.theme || this.defaults.theme;
     const ALERT_POSITION = OPTIONS.position || this.defaults.position;
     const ALERT_ICON = OPTIONS.icon || this.icons.default;
 

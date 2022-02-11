@@ -1,0 +1,87 @@
+<novo-card class="card-form-example" [padding]="false">
+  <novo-card-header theme="off-white">
+    <novo-dropdown>
+      <button theme="dialogue" icon="collapse">Message Template</button>
+      <list>
+        <item>Message 1</item>
+        <item>Message 2</item>
+      </list>
+    </novo-dropdown>
+    <novo-dropdown>
+      <button theme="dialogue" icon="collapse">Personalize</button>
+      <list>
+        <item>First Name</item>
+        <item>Last Name</item>
+      </list>
+    </novo-dropdown>
+  </novo-card-header>
+  <novo-card-content>
+    <novo-fields appearance="list" [fullWidth]="true">
+      <!-- How do we deliver the message -->
+      <novo-field>
+        <novo-label>Delivery Method</novo-label>
+        <select required novoInput>
+          <option value="pink">Candidate Preferred</option>
+          <option value="purple">Email Only</option>
+          <option value="sparkles">SMS</option>
+        </select>
+      </novo-field>
+      <!-- Who does the message come from -->
+      <novo-field>
+        <novo-label>From</novo-label>
+        <select required novoInput>
+          <option value="pink">Candidate Owner</option>
+          <option value="purple">Job Owner</option>
+          <option value="sparkles">Me</option>
+        </select>
+      </novo-field>
+      <!-- Needs to be chip picker -->
+      <novo-field>
+        <novo-label>To</novo-label>
+        <novo-chip-list #chips aria-label="Recipients">
+          <novo-chip
+            *ngFor="let person of recipients | slice:0"
+            (removed)="remove(person)">
+            {{person.name}}
+            <novo-icon novoChipRemove>box-times-o</novo-icon>
+          </novo-chip>
+          <input
+            novoChipInput
+            #searchInput
+            placeholder="Search..."
+            autocomplete="off"
+            [formControl]="recipientCtrl"
+            (novoChipInputTokenEnd)="add($event)" />
+          <novo-text *ngIf="recipients.length">+{{recipients.length - 2}}</novo-text>
+        </novo-chip-list>
+        <novo-autocomplete (optionSelected)="selected($event)">
+          <novo-option *ngFor="let person of filteredPeople | async" [value]="person">
+            <novo-flex gap="1rem">
+              <novo-avatar [source]="person"></novo-avatar>
+              <novo-flex direction="column" align="start">
+                <novo-text>{{person.name}}</novo-text>
+                <novo-caption>{{person.email}}</novo-caption>
+              </novo-flex>
+            </novo-flex>
+          </novo-option>
+        </novo-autocomplete>
+      </novo-field>
+      <!-- Email Subject Line -->
+      <novo-field>
+        <novo-label>Subject</novo-label>
+        <input novoInput type="text" />
+      </novo-field>
+      <!-- PRE-HEADER -->
+      <novo-field>
+        <novo-label>Pre-Header</novo-label>
+        <input novoInput type="text" />
+      </novo-field>
+      <!-- The message to deliver -->
+      <novo-field>
+        <textarea #message novoInput placeholder="Message..."></textarea>
+        <novo-hint>{{message.value.length}} / 256</novo-hint>
+        <novo-hint align="end">Messages over 140 characters may be sent as multiple messages.</novo-hint>
+      </novo-field>
+    </novo-fields>
+  </novo-card-content>
+</novo-card>

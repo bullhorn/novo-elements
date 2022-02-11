@@ -1,0 +1,20 @@
+<table class="props-table">
+  <thead>
+    <tr class="props-table-header-row">
+      <th class="props-table-header-cell">Prop Name</th>
+      <th class="props-table-header-cell">Type</th>
+      <th class="props-table-header-cell">Default Value</th>
+      <th class="props-table-header-cell">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let prop of props" class="props-table-row">
+      <td class="props-table-cell props-name">{{prop.name}}</td>
+      <td class="props-table-cell props-type">{{prop.type}}</td>
+      <td class="props-table-cell props-default">{{prop.defaultValue}}</td>
+      <td class="props-table-cell props-description">
+        <p class="props-description-wrapper">{{prop.description}}</p>
+      </td>
+    </tr>
+  </tbody>
+</table>

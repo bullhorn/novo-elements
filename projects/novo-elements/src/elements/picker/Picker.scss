@@ -65,8 +65,9 @@ novo-picker {
     border-radius: 3px;
     padding: 3px;
     color: $white;
-    @each $entity, $color in $entity-colors {
-      &.#{$entity} {
+
+    @include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
+      &.#{$name} {
         background: $color;
       }
     }
@@ -81,13 +82,13 @@ novo-picker {
     }
   }
   i.bhi-search {
-    top: 6px;
-    font-size: 1.1em;
+    top: 0px;
+    font-size: 1.2rem;
   }
   i.bhi-times {
-    top: 6px;
+    top: 0px;
     cursor: pointer;
-    font-size: 1em;
+    font-size: 1.2rem;
   }
 }
 
@@ -171,14 +172,14 @@ quick-note-results {
     }
   }
   &.active {
-    z-index: 1000;
+    z-index: z(overlay);
   }
   &:focus {
     outline: none;
   }
 }
 
-novo-list-item.disabled,
+.novo-list-item.disabled,
 entity-picker-result.disabled {
   opacity: 0.5;
   pointer-events: none;
@@ -190,15 +191,15 @@ entity-picker-result.active {
   }
 }
 
-entity-picker-results {
+.novo-entity-picker-results {
   background: $white;
   width: 100%;
-  novo-list {
+  .novo-list {
     background: $white;
-    item-content {
-      > p {
-        min-width: 15em;
-        font-size: 0.9em;
+    .novo-item-content {
+      margin-top: $spacing-sm;
+      margin-left: 1.8rem;
+      .novo-text {
         white-space: nowrap;
         text-overflow: ellipsis;
         overflow: hidden;
@@ -226,6 +227,7 @@ picker-null-results,
   border: 1px solid $positive;
   transform: translateY(0%);
   transition: all 0.15s cubic-bezier(0.35, 0, 0.25, 1);
+  padding: $spacing-sm;
 }
 
 p.picker-error,
@@ -273,9 +275,9 @@ picker-results {
   max-width: 100%;
   z-index: 10;
   top: 100%;
-  novo-list {
+  .novo-list {
     border: 1px solid #4a89dc;
-    novo-list-item {
+    .novo-list-item {
       cursor: pointer;
       flex: 0 0;
       transition: background-color 250ms;
@@ -288,7 +290,7 @@ picker-results {
       &:hover {
         background-color: lighten($positive, 39%);
       }
-      item-content {
+      .novo-item-content {
         flex-flow: row wrap;
         & > * {
           flex: 0 0 33%;
@@ -344,13 +346,13 @@ distribution-list-picker-results {
   &.active {
     border: 1px solid $positive;
   }
-  novo-list {
+  .novo-list {
     min-height: 100%;
     background: $white;
     max-height: 330px;
     overflow-y: auto;
     overflow-x: hidden;
-    novo-list-item {
+    .novo-list-item {
       display: block;
       transition: background-color 250ms;
       border-bottom: 1px solid $background-dark;
@@ -423,8 +425,6 @@ distribution-list-picker-results {
     }
     > h4 {
       font-weight: 500;
-    }
-    > p {
     }
   }
   section {

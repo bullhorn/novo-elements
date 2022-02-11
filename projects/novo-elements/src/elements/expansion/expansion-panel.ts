@@ -13,10 +13,10 @@ import {
   EventEmitter,
   Host,
   Input,
-  Output,
   OnChanges,
   OnDestroy,
   Optional,
+  Output,
   SimpleChanges,
   ViewContainerRef,
   ViewEncapsulation,
@@ -55,10 +55,6 @@ let uniqueId = 0;
   },
 })
 export class NovoExpansionPanel extends CdkAccordionItem implements AfterContentInit, OnChanges, OnDestroy {
-  @Input()
-  disabled: boolean;
-  @Input()
-  expanded: boolean;
   /** Whether the toggle indicator should be hidden. */
   @Input()
   get hideToggle(): boolean {

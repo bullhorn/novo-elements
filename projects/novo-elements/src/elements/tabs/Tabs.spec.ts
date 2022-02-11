@@ -1,14 +1,14 @@
 // NG2
-import { TestBed, async } from '@angular/core/testing';
+import { async, TestBed } from '@angular/core/testing';
 // App
 import {
-  NovoTabElement,
-  NovoNavElement,
-  NovoTabButtonElement,
-  NovoTabLinkElement,
-  NovoNavOutletElement,
   NovoNavContentElement,
+  NovoNavElement,
   NovoNavHeaderElement,
+  NovoNavOutletElement,
+  NovoTabButtonElement,
+  NovoTabElement,
+  NovoTabLinkElement,
 } from './Tabs';
 
 describe('Elements: NovoNavElement', () => {
@@ -64,7 +64,7 @@ describe('Elements: NovoTabButtonElement', () => {
   });
 });
 
-describe('Elements: NovoTabLinkElement', () => {
+xdescribe('Elements: NovoTabLinkElement', () => {
   let fixture;
   let component;
 

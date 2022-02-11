@@ -1,0 +1,135 @@
+@import "../../../styles/variables.scss";
+
+$novo-layout-content-z-index: 1;
+$novo-layout-side-drawer-z-index: 2;
+$novo-layout-backdrop-z-index: 3;
+$novo-drawer-over-drawer-z-index: 4;
+
+// stylelint-disable max-line-length
+// Mixin that creates a new stacking context.
+// see https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Positioning/Understanding_z_index/The_stacking_context
+// stylelint-enable
+@mixin novo-stacking-context($z-index: 1) {
+  position: relative;
+
+  // Use a z-index to create a new stacking context. (We can't use transform because it breaks fixed
+  // positioning inside of the transformed element).
+  z-index: $z-index;
+}
+
+.novo-layout-container {
+  // We need a stacking context here so that the backdrop and drawers are clipped to the
+  // MatDrawerContainer. This creates a new z-index stack so we use low numbered z-indices.
+  // We create another stacking context in the '.novo-layout-content' and in each drawer so that
+  // the application content does not get messed up with our own CSS.
+  @include novo-stacking-context();
+
+  box-sizing: border-box;
+  -webkit-overflow-scrolling: touch;
+
+  // Need this to take up space in the layout.
+  display: block;
+
+  // Hide the drawers when they're closed.
+  overflow: hidden;
+
+  height: 100%;
+
+  // TODO(hansl): Update this with a more robust solution.
+  &[fullscreen] {
+    &.novo-layout-container-has-open {
+      overflow: hidden;
+    }
+  }
+
+  // When the consumer explicitly enabled the backdrop,
+  // we have to pull the side drawers above it.
+  &.novo-layout-container-explicit-backdrop .novo-drawer-side {
+    z-index: $novo-layout-backdrop-z-index;
+  }
+
+  // Note that the `NoopAnimationsModule` is being handled inside of the component code.
+  &.ng-animate-disabled,
+  .ng-animate-disabled & {
+    .novo-drawer-backdrop,
+    .novo-layout-content {
+      transition: none;
+    }
+  }
+}
+
+.novo-drawer-backdrop {
+  display: block;
+  position: absolute;
+  background: #000;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  // Because of the new stacking context, the z-index stack is new and we can use our own
+  // numbers.
+  z-index: $novo-layout-backdrop-z-index;
+
+  // We use 'visibility: hidden | visible' because 'display: none' will not animate any
+  // transitions, while visibility will interpolate transitions properly.
+  // see https://developer.mozilla.org/en-US/docs/Web/CSS/visibility, the Interpolation
+  // section.
+  visibility: hidden;
+
+  &.novo-drawer-shown {
+    visibility: visible;
+  }
+
+  .novo-drawer-transition & {
+    transition: {
+      duration: 100ms;
+      timing-function: ease-out;
+      property: background-color, visibility;
+    }
+  }
+
+  opacity: 0.5;
+}
+
+.novo-layout-content {
+  @include novo-stacking-context($novo-layout-content-z-index);
+
+  display: block;
+  height: 100%;
+  overflow: auto;
+
+  .novo-drawer-transition & {
+    transition: {
+      duration: 100ms;
+      timing-function: ease-out;
+      property: transform, margin-left, margin-right;
+    }
+  }
+}
+
+.novo-rail {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  height: inherit;
+  height: 100%;
+  min-width: 5rem;
+  width: max-content;
+  background: var(--background-bright);
+  .novo-rail-contents {
+    display: inline-flex;
+    flex-direction: column;
+    width: -webkit-fill-available;
+  }
+}
+
+.novo-layout-content-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  height: 100%;
+  &.and-has-rail {
+    grid-template-columns: auto 1fr;
+  }
+}

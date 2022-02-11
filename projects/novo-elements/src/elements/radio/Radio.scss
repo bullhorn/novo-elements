@@ -1,30 +1,51 @@
+@import "../common/typography/text.mixins";
+
 novo-radio-group {
   display: flex;
+
+  &.novo-radio-group-appearance-horizontal {
+    novo-radio:not(:last-child) {
+      .novo-radio-button-label {
+        margin-right: 1rem;
+      }
+    }
+  }
+
+  &.novo-radio-group-appearance-vertical {
+    flex-flow: column;
+    gap: 0.2rem;
+  }
+
   > novo-radio {
     margin: 0;
-    button {
+    novo-button {
+      pointer-events: none;
       border-radius: 0 !important;
       &.unchecked {
         opacity: 0.5;
       }
-      &[theme='icon'] i {
+      &[theme="icon"] {
         margin-right: 0;
+        border: 1px solid $positive;
       }
     }
     &:first-child {
-      button {
-        border-top-left-radius: 3px;
-        border-bottom-left-radius: 3px;
+      novo-button {
+        border-top-left-radius: 3px !important;
+        border-bottom-left-radius: 3px !important;
+        &[theme="icon"] {
+          border-right-width: 0px !important;
+        }
       }
     }
     &:last-child {
-      button {
-        border-top-right-radius: 3px;
-        border-bottom-right-radius: 3px;
+      novo-button {
+        border-top-right-radius: 3px !important;
+        border-bottom-right-radius: 3px !important;
         border-right-width: 1px !important;
         border-right-style: solid !important;
-        &[theme='icon'] {
-          border-right-width: 0px !important;
+        &[theme="icon"] {
+          border-left-width: 0px !important;
         }
       }
     }
@@ -39,7 +60,7 @@ novo-radio {
   }
   > input {
     position: absolute;
-    z-index: -1;
+    z-index: z(below);
     opacity: 0;
     &:focus + label {
       i {
@@ -55,7 +76,8 @@ novo-radio {
   }
   > label {
     cursor: pointer;
-    > div {
+    .novo-radio-button-label {
+      @include novo-body-text();
       display: inline;
     }
     i {
@@ -79,16 +101,21 @@ novo-radio {
       }
     }
   }
-  button[theme].has-icon {
-    opacity: 0.7;
+  novo-button[theme].has-icon {
     transition: all 100ms ease-in-out;
-    &:hover {
-      opacity: 1;
-    }
+    color: $positive;
+    background: $white;
+    opacity: 1;
     &.checked {
       color: $white;
       background: $positive;
-      opacity: 1;
+    }
+
+    @include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
+      &.checked[color="#{$name}"] {
+        color: $white;
+        background: $color;
+      }
     }
   }
 }

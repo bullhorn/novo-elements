@@ -20,10 +20,10 @@
  * $fg-class-off string used for the offset class
  */
 $fg-columns: 12 !default;
-$fg-gutter: 0.5rem !default;
-$fg-class-row: 'row' !default;
-$fg-class-col: 'col' !default;
-$fg-class-off: 'off' !default;
+$fg-gutter: 0rem !default;
+$fg-class-row: "row" !default;
+$fg-class-col: "col" !default;
+$fg-class-off: "off" !default;
 
 /**
  * Break point namespace object

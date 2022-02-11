@@ -1,12 +1,6 @@
 import { Component } from '@angular/core';
-
 // Vendor
-import {
-  FormUtils,
-  CheckboxControl,
-  CheckListControl,
-  TilesControl,
-} from 'novo-elements';
+import { CheckboxControl, CheckListControl, FormUtils, TilesControl } from 'novo-elements';
 
 // import { MockMeta, MockMetaHeaders } from './MockMeta';
 
@@ -38,14 +32,21 @@ export class CheckBoxControlsExample {
     this.tilesControl = new TilesControl({
       key: 'tiles',
       label: 'Tiles',
-      options: [{ value: 'one', label: 'One' }, { value: 'two', label: 'Two' }, { value: 'disabled', label: 'Disabled', disabled: true }],
+      options: [
+        { value: 'one', label: 'One' },
+        { value: 'two', label: 'Two' },
+        { value: 'disabled', label: 'Disabled', disabled: true },
+      ],
       tooltip: 'Tiles',
     });
     this.disabledTilesControl = new TilesControl({
       key: 'disabledTiles',
       label: 'Disabled Tiles',
       readOnly: true,
-      options: [{ value: 'one', label: 'One' }, { value: 'two', label: 'Two' }],
+      options: [
+        { value: 'one', label: 'One' },
+        { value: 'two', label: 'Two' },
+      ],
       tooltip: 'Tiles',
     });
     this.checkForm = formUtils.toFormGroup([this.checkControl, this.checkListControl, this.tilesControl, this.disabledTilesControl]);

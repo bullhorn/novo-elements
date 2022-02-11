@@ -1,88 +1,46 @@
+@import "../common/typography/text.mixins";
+
 novo-dropdown {
-  display: block;
+  display: inline-block;
   position: relative;
-  button {
+
+  .novo-dropdown-trigger {
+    cursor: pointer;
+    -webkit-appearance: none;
+  }
+  button,
+  novo-button {
     position: relative;
     z-index: 0;
-    i {
+    .novo-button-icon {
       font-size: 0.8em !important;
-      width: inherit !important;
-      height: inherit !important;
+      width: 1em !important;
+      height: 1em !important;
       margin: 0 0.5em;
     }
   }
 }
 
 .dropdown-container {
-  background-color: $white;
+  background-color: var(--background-bright, $color-bright);
   list-style: none;
   margin: 0;
   padding: 0;
   min-width: 180px;
-  margin-top: 5px;
-  margin-bottom: 5px;
-  box-shadow: $whiteframe-shadow-z3;
+  margin-top: $spacing-sm;
+  margin-bottom: $spacing-sm;
+  box-shadow: $shadow-3;
   &.has-height {
     overflow: auto;
   }
   list {
-    item {
-      cursor: pointer;
-      width: 100%;
-      margin: 0;
-      padding: 0.8em 1em;
-      box-sizing: border-box;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      color: darken($light, 45%);
-      white-space: nowrap;
-      text-align: left;
-      span {
-        display: inline-block;
-      }
-      a {
-        color: inherit;
-        font-weight: inherit;
-        cursor: pointer;
-        flex: 1;
-        display: flex;
-        align-items: center;
-        height: 48px;
-        &:focus,
-        &:visited,
-        &:active,
-        &:hover {
-          color: inherit;
-          font-weight: inherit;
-        }
-      }
-      i {
-        border-radius: 0;
-        margin: 0 !important;
-        color: $positive;
-      }
-      &:focus,
-      &:hover {
-        background: lighten($light, 10%);
-        color: darken($light, 55%);
-      }
-      &.active {
-        background: lighten($light, 10%);
-        color: darken($light, 55%);
-      }
-      &.disabled {
-        color: $light;
-        cursor: not-allowed;
-      }
-    }
     dropdown-item-header {
       color: #9e9e9e;
       font-size: 0.8em;
       flex: 1;
       font-weight: 500;
       text-transform: uppercase;
-      padding: 5px 10px;
+      padding: $spacing-sm $spacing-md;
       display: block;
     }
     hr {

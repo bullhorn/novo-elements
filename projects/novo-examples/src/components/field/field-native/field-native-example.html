@@ -1,0 +1,82 @@
+<div class="example-container">
+
+  <novo-label>Appearance</novo-label>
+  <novo-radio-group [(ngModel)]="appearance">
+    <novo-radio value="standard">Standard</novo-radio>
+    <novo-radio value="fill">Filled</novo-radio>
+    <novo-radio value="outline">Outlined</novo-radio>
+    <novo-radio value="list">List</novo-radio>
+  </novo-radio-group>
+
+  <novo-label>Layout</novo-label>
+  <novo-radio-group [(ngModel)]="direction">
+    <novo-radio value="horizontal">Horizontal</novo-radio>
+    <novo-radio value="vertical">Vertical</novo-radio>
+  </novo-radio-group>
+
+
+  <novo-fields [appearance]="appearance" [layout]="direction" [fullWidth]="fullWidth">
+    <novo-field>
+      <novo-label>Full Width?</novo-label>
+      <novo-radio-group [(ngModel)]="fullWidth">
+        <novo-radio [value]="false">Condensed</novo-radio>
+        <novo-radio [value]="true">Full Width</novo-radio>
+      </novo-radio-group>
+    </novo-field>
+
+    <novo-field>
+      <novo-label>Username</novo-label>
+      <input novoInput type="text" />
+    </novo-field>
+
+    <novo-field>
+      <novo-label>Email</novo-label>
+      <input novoInput type="email" />
+    </novo-field>
+
+    <novo-field>
+      <novo-label>Enter your password</novo-label>
+      <input novoInput [type]="hide ? 'password' : 'text'" />
+      <novo-icon (click)="hide = !hide">{{hide ? 'overview' : 'hidden'}}</novo-icon>
+    </novo-field>
+
+    <novo-field>
+      <novo-label>Select your favorite color?</novo-label>
+      <select required novoInput>
+        <option value="pink">Pink</option>
+        <option value="purple">Purple</option>
+        <option value="sparkles">Sparkles</option>
+      </select>
+    </novo-field>
+
+    <novo-field>
+      <novo-label>Short description...</novo-label>
+      <textarea novoInput></textarea>
+    </novo-field>
+
+    <novo-field>
+      <novo-label>Choose your favorite color?</novo-label>
+      <input novoInput type="color" />
+    </novo-field>
+
+    <novo-field>
+      <novo-label>Set Volume</novo-label>
+      <input novoInput type="range" min="0" max="100" value="90" step="10" />
+    </novo-field>
+
+    <novo-field>
+      <novo-label>Birthday</novo-label>
+      <input novoInput type="date" />
+    </novo-field>
+
+    <novo-field>
+      <novo-label>Scheduled End Time</novo-label>
+      <input novoInput type="time" />
+    </novo-field>
+
+    <novo-field>
+      <novo-label>Next Appointment Time?</novo-label>
+      <input novoInput type="datetime-local" />
+    </novo-field>
+  </novo-fields>
+</div>

@@ -10,10 +10,11 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "importHelpers": true,
+    "resolveJsonModule": true,
     "types": [],
     "lib": [
       "dom",
-      "es2018"
+      "es2020",
     ]
   },
   "angularCompilerOptions": {

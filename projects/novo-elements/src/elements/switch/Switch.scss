@@ -3,13 +3,8 @@ $switch-height: 24px !default;
 $switch-bar-height: 14px !default;
 $switch-thumb-size: 20px !default;
 @mixin novo-switch-style($thumb, $track) {
-  .novo-switch-thumb {
-    background-color: $light;
-  }
-  .novo-switch-bar {
-    background-color: lighten($light, 10%);
-  } // Can make the checked version style different (same for now)
-  &[aria-checked='true'] {
+  // Can make the checked version style different (same for now)
+  &[aria-checked="true"] {
     .novo-switch-thumb {
       background-color: $thumb;
     }
@@ -19,7 +14,7 @@ $switch-thumb-size: 20px !default;
   }
 }
 
-novo-switch {
+.novo-switch {
   display: flex;
   align-items: center;
   margin: 15px;
@@ -27,7 +22,7 @@ novo-switch {
   cursor: pointer;
   outline: none;
   user-select: none;
-  @include ease('all', 'swift-ease-in-out');
+  @include ease("all", "swift-ease-in-out");
   * {
     box-sizing: border-box;
   }
@@ -43,7 +38,7 @@ novo-switch {
     user-select: none;
     margin-right: 8px;
   }
-  &:not([disabled]) {
+  &:not(.novo-switch-disabled) {
     &.novo-switch-dragging .novo-switch-container,
     .novo-switch-dragging {
       cursor: grabbing;
@@ -66,13 +61,16 @@ novo-switch {
     width: $switch-width - $switch-thumb-size;
     position: absolute;
     transform: translate3d(0, 0, 0);
-    z-index: 1;
+    z-index: z(default);
   }
-  &[aria-checked='true'] .novo-switch-thumb-container {
+  &[aria-checked="true"] .novo-switch-thumb-container {
     transform: translate3d(100%, 0, 0);
   }
   .novo-switch-thumb {
     position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin: 0;
     left: 0;
     top: 0;
@@ -80,61 +78,64 @@ novo-switch {
     height: $switch-thumb-size;
     width: $switch-thumb-size;
     border-radius: 50%;
-    box-shadow: $whiteframe-shadow-z1; // todo
-    .bh-ripple-container {
-      position: absolute;
-      display: block;
-      width: auto;
-      height: auto;
-      left: -$switch-thumb-size;
-      top: -$switch-thumb-size;
-      right: -$switch-thumb-size;
-      bottom: -$switch-thumb-size;
+    box-shadow: $shadow-1; // todo
+    color: getContrastColor("light");
+
+    .novo-icon {
+      color: inherit;
     }
   }
   &:not(.novo-switch-dragging) {
     .novo-switch-bar,
     .novo-switch-thumb,
     .novo-switch-thumb-container {
-      @include ease('all', 'swift-ease-in-out');
-      transition-property: transform, background-color;
+      @include ease("all", "swift-ease-in-out");
+      transition-property: transform, background-color, color;
     }
     .novo-switch-bar,
     .novo-switch-thumb {
       transition-delay: 0.05s;
     }
   }
-  &[disabled] {
+  &.novo-switch-disabled {
     opacity: 0.5;
     cursor: not-allowed;
     .novo-switch-container {
       cursor: not-allowed;
+      pointer-events: none;
     }
   }
 }
 
-novo-switch {
+.novo-switch {
   // Base color: $ocean
-  @include novo-switch-style($ocean, lighten($ocean, 18%)); // Loop through analytics colors and make a switch color class for each
-  @each $analytic, $color in $analytics-colors {
-    &.#{$analytic} {
+  // @include novo-switch-style($ocean, lighten($ocean, 18%));
+  // Loop through analytics colors and make a switch color class for each
+  @include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
+    &.#{$name} {
       @include novo-switch-style($color, lighten($color, 18%));
+      &[aria-checked="true"] {
+        .novo-switch-thumb {
+          color: getContrastColor($name);
+        }
+      }
     }
   }
+
   &.dark {
     @include novo-switch-style($dark, darken($dark, 5%));
   }
   &.light {
     @include novo-switch-style(darken($light, 3%), $light);
   }
-  &[disabled] {
-    .novo-switch-thumb {
-      background-color: darken($light, 20%);
-    }
-    .novo-switch-bar {
-      background-color: $light;
-    }
+
+  .novo-switch-thumb {
+    background-color: $light;
   }
+  .novo-switch-bar {
+    background-color: lighten($light, 10%);
+  }
+
   &:focus {
     .novo-switch-label:not(:empty) {
       border: 1px dotted $light;

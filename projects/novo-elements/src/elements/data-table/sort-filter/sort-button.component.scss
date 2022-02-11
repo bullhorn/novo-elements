@@ -1,0 +1,26 @@
+@import "../../../styles/variables.scss";
+
+:host {
+  display: inline-flex;
+  position: relative;
+  width: 1.6rem;
+  height: 1.6rem;
+  cursor: pointer;
+  novo-icon {
+    position: absolute;
+    opacity: 0;
+    color: $light;
+    &:hover {
+      color: var(--selection);
+    }
+  }
+
+  .novo-sort-asc-icon {
+    top: 10px;
+    color: var(--selection);
+  }
+  .novo-sort-desc-icon {
+    top: -10px;
+    color: var(--selection);
+  }
+}

@@ -1,18 +1,30 @@
-import { Component, ChangeDetectionStrategy, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
-
-import { DataTableState } from './state/data-table-state.service';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Output } from '@angular/core';
 import { NovoLabelService } from '../../services/novo-label-service';
+import { DataTableState } from './state/data-table-state.service';
 
 @Component({
   selector: 'novo-data-table-clear-button',
   template: `
     <novo-dropdown side="bottom-right" class="novo-data-table-clear-button" data-automation-id="novo-data-table-clear-dropdown">
-      <button type="button" theme="primary" color="negative" icon="collapse" data-automation-id="novo-data-table-clear-dropdown-btn">{{ labels.clear }}</button>
+      <novo-button type="button" theme="primary" color="negative" icon="collapse" data-automation-id="novo-data-table-clear-dropdown-btn">
+        {{ labels.clear }}
+      </novo-button>
       <list>
-          <item *ngIf="state.selected.length > 0" (click)="clearSelected()" data-automation-id="novo-data-table-clear-dropdown-clear-selected">{{ labels.clearSelected }}</item>
-          <item *ngIf="state.sort" (click)="clearSort()" data-automation-id="novo-data-table-clear-dropdown-clear-sort">{{ labels.clearSort }}</item>
-          <item *ngIf="state.filter" (click)="clearFilter()" data-automation-id="novo-data-table-clear-dropdown-clear-filter">{{ labels.clearFilter }}</item>
-          <item *ngIf="state.sort && state.filter" (click)="clearAll()" data-automation-id="novo-data-table-clear-dropdown-clear-all">{{ labels.clearAllNormalCase }}</item>
+        <item
+          *ngIf="state.selected.length > 0"
+          (click)="clearSelected()"
+          data-automation-id="novo-data-table-clear-dropdown-clear-selected"
+          >{{ labels.clearSelected }}</item
+        >
+        <item *ngIf="state.sort" (click)="clearSort()" data-automation-id="novo-data-table-clear-dropdown-clear-sort">{{
+          labels.clearSort
+        }}</item>
+        <item *ngIf="state.filter" (click)="clearFilter()" data-automation-id="novo-data-table-clear-dropdown-clear-filter">{{
+          labels.clearFilter
+        }}</item>
+        <item *ngIf="state.sort && state.filter" (click)="clearAll()" data-automation-id="novo-data-table-clear-dropdown-clear-all">{{
+          labels.clearAllNormalCase
+        }}</item>
       </list>
     </novo-dropdown>
   `,

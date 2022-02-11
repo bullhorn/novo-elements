@@ -3,24 +3,24 @@ import {
   ChangeDetectorRef,
   Component,
   ElementRef,
-  OnInit,
+  EventEmitter,
   forwardRef,
+  HostBinding,
   Input,
+  OnInit,
   Output,
   ViewChild,
-  EventEmitter,
-  HostBinding,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { TAB, ENTER, ESCAPE } from '@angular/cdk/keycodes';
 // Vendor
 import * as dateFns from 'date-fns';
 import createAutoCorrectedDatePipe from 'text-mask-addons/dist/createAutoCorrectedDatePipe';
-// App
-import { NovoOverlayTemplateComponent } from '../overlay/Overlay';
-import { NovoLabelService } from '../../services/novo-label-service';
-import { Helpers } from '../../utils/Helpers';
 import { DateFormatService } from '../../services/date-format/DateFormat';
+import { NovoLabelService } from '../../services/novo-label-service';
+import { Key } from '../../utils';
+import { Helpers } from '../../utils/Helpers';
+// App
+import { NovoOverlayTemplateComponent } from '../common/overlay/Overlay';
 
 // Value accessor for the component (supports ngModel)
 const DATE_VALUE_ACCESSOR = {
@@ -47,7 +47,7 @@ const DATE_VALUE_ACCESSOR = {
       data-automation-id="date-input"
       [disabled]="disabled"
     />
-    <span class="error-text" *ngIf="showInvalidDateError">{{invalidDateErrorMessage}}</span>
+    <span class="error-text" *ngIf="showInvalidDateError">{{ invalidDateErrorMessage }}</span>
     <i *ngIf="!hasValue" (click)="openPanel()" class="bhi-calendar"></i>
     <i *ngIf="hasValue" (click)="clearValue()" class="bhi-times"></i>
     <novo-overlay-template [parent]="element" position="above-below">
@@ -77,27 +77,51 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
   /** View -> model callback called when autocomplete has been touched */
   _onTouched = () => {};
 
+  /**
+   * The name of the form field, get passed to the native `input` element
+   **/
   @Input()
   name: string;
+  /**
+   * The minimum date that can be selected.
+   **/
   @Input()
   start: Date;
+  /**
+   * The maximum date that can be selected.
+   **/
   @Input()
   end: Date;
+  /**
+   * Placeholder text to display in the input when it is empty.
+   **/
   @Input()
   placeholder: string;
+  /**
+   * MaskOptions to pass to the textMaskAddons plugin
+   **/
   @Input()
   maskOptions: any;
+  /**
+   * The format to use to parse and render dates: DD/MM/YYYY or MM/DD/YYYY
+   **/
   @Input()
   format: string;
   @Input()
   textMaskEnabled: boolean = true;
   @Input()
   allowInvalidDate: boolean = false;
-  @Input()
-  disabledDateMessage: string;
+  /**
+   * Sets the field as to appear disabled, users will not be able to interact with the text field.
+   **/
   @HostBinding('class.disabled')
   @Input()
   disabled: boolean = false;
+  @Input()
+  disabledDateMessage: string;
+  /**
+   * Day of the week the calendar should display first, Sunday=0...Saturday=6
+   **/
   @Input()
   weekStart: number = 0;
   @Output()
@@ -149,7 +173,7 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
   /** END: Convenient Panel Methods. */
 
   _handleKeydown(event: KeyboardEvent): void {
-    if ((event.keyCode === ESCAPE || event.keyCode === ENTER || event.keyCode === TAB) && this.panelOpen) {
+    if ((event.key === Key.Escape || event.key === Key.Enter || event.key === Key.Tab) && this.panelOpen) {
       this._handleEvent(event, true);
       this.closePanel();
       event.stopPropagation();

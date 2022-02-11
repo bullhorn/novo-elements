@@ -1,0 +1,60 @@
+@import "../../styles/variables.scss";
+
+.novo-toolbar {
+  .novo-toolbar-row,
+  &.novo-toolbar-single-row {
+    display: flex;
+    box-sizing: border-box;
+    background-color: var(--background-bright);
+    color: var(--text-main);
+    padding: 0 $spacing-md;
+    width: 100%;
+    // Flexbox Vertical Alignment
+    flex-direction: row;
+    align-items: center;
+    min-height: 5rem;
+    // Per Novo specs a toolbar cannot have multiple lines inside of a single row.
+    // Disable text wrapping inside of the toolbar. Developers are still able to overwrite it.
+    white-space: nowrap;
+
+    .novo-divider.novo-divider-vertical,
+    novo-nav,
+    novo-tab {
+      height: inherit;
+      min-height: inherit;
+    }
+
+    @include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
+      &.novo-color-#{$name} {
+        color: $contrast;
+        background: $color;
+        & > novo-text,
+        & > novo-label,
+        & > novo-icon,
+        & > novo-title {
+          color: inherit;
+        }
+        & > novo-action {
+          button,
+          novo-button {
+            color: inherit;
+          }
+        }
+        .novo-divider.novo-divider-vertical {
+          border-right-color: $tint;
+        }
+      }
+
+      &.novo-accent-#{$name} {
+        border-bottom: 2px solid $color;
+      }
+    }
+  }
+
+  &.novo-toolbar-multiple-rows {
+    display: flex;
+    box-sizing: border-box;
+    flex-direction: column;
+    width: 100%;
+  }
+}

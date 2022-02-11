@@ -1,0 +1,95 @@
+@import "../../styles/variables.scss";
+@import "../common/typography/text.mixins";
+
+:host {
+  display: grid;
+  position: relative;
+  // margin: 0 0.5em;
+
+  &.novo-field-layout-horizontal {
+    grid-gap: 0rem 1rem;
+    grid-template-columns: 150px minmax(min-content, max-content);
+    grid-template-areas:
+      "label input"
+      ". messages";
+  }
+
+  &.novo-field-layout-vertical {
+    grid-template-columns: minmax(min-content, 100%);
+    grid-template-rows: repeat(3, minmax(min-content, max-content));
+    grid-template-areas:
+      "label"
+      "input"
+      "messages";
+    width: max-content;
+  }
+
+  .novo-field-label {
+    grid-area: label;
+    display: grid;
+    align-items: center;
+  }
+
+  &.novo-field-type-color {
+    .novo-field-input {
+      &::ng-deep .novo-input-element {
+        padding: 0;
+      }
+    }
+  }
+
+  .novo-field-input {
+    grid-area: input;
+    display: grid;
+    grid-template-columns: minmax(auto, max-content) 1fr minmax(auto, max-content);
+    flex: 1 1 100%;
+
+    &::ng-deep {
+      .novo-input-element {
+        @include novo-body-text();
+        border: none;
+        background-image: none;
+        background-color: transparent;
+        box-shadow: none;
+        padding: 0.4rem 0.2rem;
+        border-bottom: none !important;
+
+        &:focus {
+          outline: none;
+        }
+      }
+
+      .novo-radio-group {
+        padding: 0.5rem 0;
+      }
+    }
+
+    .novo-field-prefix {
+      display: flex;
+      align-items: center;
+    }
+
+    .novo-field-infix {
+      display: flex;
+      align-items: center;
+      select,
+      &::ng-deep .novo-input-element {
+        width: 100%;
+      }
+    }
+
+    .novo-field-suffix {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  .novo-field-messages {
+    grid-area: messages;
+    display: grid;
+  }
+
+  .novo-field-hint-wrapper {
+    display: flex;
+  }
+}

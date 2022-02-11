@@ -1,4 +1,4 @@
-@import '../../styles/global/variables';
+@import "../../styles/variables";
 
 .tabbed-group-picker-button {
   .tabbed-group-picker-button-label {
@@ -16,7 +16,7 @@
   border-bottom: 0.1em solid #ccc;
   position: relative;
   input {
-    font-size: 1em;
+    font-size: 1.2em;
     background: transparent;
     border: none;
     border-radius: 0;
@@ -29,8 +29,8 @@
     box-sizing: content-box;
     transition: all 300ms;
     color: $dark;
-    &::-webkit-input-placeholder {
-      color: $grey;
+    &::placeholder {
+      color: var(--form-placeholder);
     }
   }
   i.bhi-search,
@@ -39,12 +39,11 @@
     bottom: 1em;
     right: 0.5em;
     color: $grey;
-    font-size: 1em;
+    font-size: 1.2rem;
     margin-right: 1em;
   }
   i.bhi-times {
     cursor: pointer;
-    font-size: 1em;
   }
 }
 
@@ -62,7 +61,7 @@
       justify-content: space-between;
 
       .clear-all-button {
-        margin-bottom: .5em;
+        margin-bottom: 0.5em;
       }
 
       novo-nav {
@@ -126,8 +125,7 @@
           }
         }
       }
-      novo-list {
-
+      novo-optgroup {
         cdk-virtual-scroll-viewport {
           height: 27em;
           overflow-x: hidden;
@@ -136,6 +134,7 @@
           }
 
           novo-list-item {
+            font-size: 1.2em;
             padding: 0.75em 1.75em;
             cursor: pointer;
             border-bottom: none;

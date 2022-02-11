@@ -1,0 +1,46 @@
+<ng-container *ngIf="showMenu; else breadcrumbContentTpl">
+  <span [ngClass]="{ 'novo-breadcrumb-item-active': isOpen }" #origin
+    class="novo-dropdown-no-border novo-dropdown-origin novo-breadcrumb-dropdown-origin">
+    <ng-template [ngTemplateOutlet]="breadcrumbContentTpl"></ng-template>
+    <novo-dropdown>
+      <novo-button theme="icon" icon="collapse" size="small"></novo-button>
+      <novo-optgroup class="novo-breadcrumb-dropdown-menu">
+        <div *ngIf="isSearch" class="dropdown-search-container">
+          <novo-search alwaysOpen="true" (searchFn)="searchEvent($event)" [class]="'search-in-dropdown'"></novo-search>
+        </div>
+        <novo-option *ngFor="let item of menuListDisplay" title="{{ item.name }}">
+          <a *ngIf="!item.linkType || item.linkType === 'hrefLink'" [href]="item.link" rel="noopener"
+            [target]="item.target ? item.target : '_self'">{{ item.name }}</a>
+          <a *ngIf="item.linkType === 'routerLink'" rel="noopener" [target]="item.target" [href]="item.link"
+            (click)="navigateTo($event, item)">{{ item.name }}</a>
+        </novo-option>
+      </novo-optgroup>
+    </novo-dropdown>
+  </span>
+</ng-container>
+
+<ng-template #breadcrumbContentTpl>
+  <span class="novo-breadcrumb-item">
+    <ng-content></ng-content>
+  </span>
+</ng-template>
+
+<ng-template #dropDownMenuTpl>
+  <div>test</div>
+
+</ng-template>
+
+<span class="novo-breadcrumb-separator">
+  <ng-template
+    [ngTemplateOutlet]="breadcrumbComponent.separatorIcon ? breadcrumbComponent.separatorIcon : defaultSeparator"
+    [ngTemplateOutletContext]="{
+    $implicit: this
+  }">
+  </ng-template>
+</span>
+
+<ng-template #defaultSeparator>
+  <span class="novo-breadcrumb-separator">
+    /
+  </span>
+</ng-template>

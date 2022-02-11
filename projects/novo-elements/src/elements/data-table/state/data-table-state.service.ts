@@ -1,8 +1,7 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-
-import { IDataTableChangeEvent, IDataTableFilter, IDataTableSelectionOption, IDataTableSort } from '../interfaces';
 import { Helpers } from '../../../utils/Helpers';
+import { IDataTableChangeEvent, IDataTableFilter, IDataTableSelectionOption, IDataTableSort } from '../interfaces';
 import { NovoDataTableFilterUtils } from '../services/data-table-filter-utils';
 
 @Injectable()
@@ -151,6 +150,6 @@ export class DataTableState<T> {
   }
 
   public checkRetainment(caller: string, allMatchingSelected = false): void {
-    this.retainSelected = this.selectionOptions?.some(option => option.label === caller) || this.retainSelected || allMatchingSelected;
+    this.retainSelected = this.selectionOptions?.some((option) => option.label === caller) || this.retainSelected || allMatchingSelected;
   }
 }

@@ -62,7 +62,7 @@ describe('Elements: NovoTilesElement', () => {
     });
 
     it('should emit event but not allow disabled tiles to be checked', () => {
-      spyOn(component.onDisabledOptionClick, 'emit');
+      jest.spyOn(component.onDisabledOptionClick, 'emit');
       component.select(false, component.options[0]);
       expect(component.options[0].checked).toBeTruthy();
       expect(component.options[1].checked).toBeFalsy();
@@ -77,7 +77,7 @@ describe('Elements: NovoTilesElement', () => {
     });
 
     it('should emit event when checked tiles are clicked', () => {
-      spyOn(component.onSelectedOptionClick, 'emit');
+      jest.spyOn(component.onSelectedOptionClick, 'emit');
       component.select(false, component.options[0]);
       expect(component.options[0].checked).toBeTruthy();
       expect(component.options[1].checked).toBeFalsy();

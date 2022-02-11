@@ -1,0 +1,14 @@
+@import "../../../../styles/variables.scss";
+@import "../text.mixins.scss";
+
+:host {
+  display: inline;
+  @include novo-body-text();
+
+  &::ng-deep {
+    novo-icon {
+      vertical-align: top;
+      font-size: 1em;
+    }
+  }
+}

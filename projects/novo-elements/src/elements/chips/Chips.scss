@@ -1,3 +1,6 @@
+@import "./ChipList.scss";
+@import "../common/typography/text.mixins.scss";
+
 chips,
 novo-chips,
 entity-chips,
@@ -27,55 +30,6 @@ novo-entity-chips {
   &.disabled {
     border-bottom-style: dashed !important;
   }
-  chip,
-  novo-chip {
-    display: flex;
-    flex-grow: inherit;
-    align-items: center;
-    justify-content: space-between;
-    background: #eeeeee;
-    border-radius: 4px;
-    padding: 0.3em 0.5em;
-    margin-right: 5px;
-    margin-bottom: 5px;
-    width: auto;
-    max-width: 180px;
-    border: 1px solid transparent;
-    transition: all 200ms ease-in-out;
-    span {
-      vertical-align: middle;
-      display: flex;
-      align-items: center;
-      span {
-        color: $ocean;
-        cursor: pointer;
-        max-width: 115px;
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        display: block;
-      }
-      i {
-        font-size: 0.8em;
-      }
-    }
-    i.bhi-close {
-      margin-left: 10px;
-      font-size: 1.1em;
-      cursor: pointer;
-      color: darken(#eee, 15%);
-      &:hover {
-        color: darken(#eee, 35%);
-      }
-    }
-    &.selected {
-      border: 1px solid $positive;
-    }
-  }
-  .novo-chip-container {
-    display: flex;
-    flex-wrap: wrap;
-  }
   .chip-input-container {
     flex-grow: 4;
     input {
@@ -87,6 +41,11 @@ novo-entity-chips {
         outline: none;
       }
     }
+  }
+  .novo-chip-container {
+    display: flex;
+    flex-flow: row wrap;
+    gap: 0.4rem;
   }
   novo-picker {
     position: inherit;
@@ -119,9 +78,9 @@ novo-entity-chips {
     right: 0;
     font-size: 1.1em;
     color: $dark;
-    &.has-value {
-      bottom: 14px;
-    }
+    // &.has-value {
+    //   bottom: 14px;
+    // }
   }
 }
 
@@ -154,69 +113,6 @@ chips,
 novo-chips,
 entity-chips,
 novo-entity-chips {
-  chip,
-  novo-chip {
-    span {
-      &.contact,
-      &.clientcontact {
-        color: $positive;
-        i {
-          color: $contact;
-        }
-      }
-      &.company,
-      &.clientcorporation {
-        color: $positive;
-        i {
-          color: $company;
-        }
-      }
-      &.candidate {
-        color: $positive;
-        i {
-          color: $candidate;
-        }
-      }
-      &.job,
-      &.joborder {
-        color: $positive;
-        i {
-          color: $job;
-        }
-      }
-      &.placement {
-        color: $positive;
-        i {
-          color: $placement;
-        }
-      }
-      &.opportunity {
-        color: $positive;
-        i {
-          color: $opportunity;
-        }
-      }
-      &.lead {
-        color: $positive;
-        i {
-          color: $lead;
-        }
-      }
-      &.user,
-      &.corporateuser {
-        color: $positive;
-        i {
-          color: $neutral;
-        }
-      }
-      &.jobshift {
-        color: $positive;
-        i {
-          color: $jobShift;
-        }
-      }
-    }
-  }
   picker-results {
     position: absolute;
     color: black;
@@ -285,15 +181,15 @@ novo-entity-chips {
       min-width: 180px;
       max-height: 49vh;
       overflow: auto;
-      z-index: 900;
+      z-index: z("max");
       border: 1px solid #4a89dc;
       transition: all 200ms ease-in-out;
-      novo-list-item {
+      .novo-list-item {
         flex: 0 0;
         & > div {
           width: 100%;
         }
-        item-content {
+        .novo-item-content {
           flex-flow: row wrap;
           & > * {
             flex: 0 0 33%;
@@ -317,28 +213,26 @@ entity-chip-results {
   max-width: none !important;
 }
 
-novo-row-chips,
-novo-row-chip {
+novo-row-chips {
+  display: flex;
+  flex-flow: column;
+  gap: 0.8rem;
+
   .novo-row-chips-columns {
     display: flex;
     align-items: flex-end;
     margin-bottom: 1em;
     .column-label {
+      @include novo-label-text();
       display: flex;
       flex: 1;
-      font-size: 0.9em;
-      font-weight: 500;
-      text-transform: uppercase;
-      overflow: hidden;
-      text-overflow: ellipsis;
       margin-right: 1em;
       &:first-of-type {
-        flex: 0 1 275px;
+        flex: 0 0 275px;
       }
     }
     .column-data {
       display: flex;
-      flex: 1;
       align-items: center;
       background: transparent !important;
       border: none;
@@ -348,7 +242,13 @@ novo-row-chip {
       height: 2em;
       width: 100%;
       margin: 0 1em 0 0;
-      padding: 0 0 0.5em 0;
+      &.editable {
+        border-bottom: none;
+        input {
+          background: none;
+          border: none;
+        }
+      }
       &:first-of-type {
         flex: 0 0 275px;
       }
@@ -365,6 +265,9 @@ novo-row-chip {
         min-height: 1em;
       }
     }
+  }
+  .novo-chip.novo-row-chip {
+    padding: 0;
   }
   .novo-row-chips-empty-message {
     font-style: italic;

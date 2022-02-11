@@ -1,104 +1,146 @@
-novo-card {
-  .novo-card {
-    background-color: $white;
-    box-shadow: $whiteframe-shadow-z3;
+@import "../common/typography/text.mixins";
+
+.novo-card {
+  display: flex;
+  flex-flow: column;
+  background-color: var(--background-bright, $color-white);
+  box-shadow: $shadow-card;
+  border-radius: 0.4em;
+  position: relative;
+  overflow-x: hidden;
+
+  &.loading {
+    min-height: 200px;
+  }
+
+  div.card-loading-container {
+    position: absolute;
+    top: 43px;
+    left: 0;
+    right: 0;
+    bottom: 0;
     border-radius: 0.4em;
-    position: relative;
-    overflow-x: hidden;
-    &.loading {
-      min-height: 200px;
-    }
-    div.card-loading-container {
-      position: absolute;
-      top: 43px;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      border-radius: 0.4em;
-      background: $white;
+    background: $white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: z("default");
+  }
+  header {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5em;
+    .title {
       display: flex;
-      flex-direction: column;
-      justify-content: center;
       align-items: center;
-      z-index: 1;
-    }
-    header {
-      display: flex;
-      flex-flow: row nowrap;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0.5em;
-      .title {
-        display: flex;
-        align-items: center;
-        min-width: 0;
-        flex: 1;
-        i.bhi-move {
-          color: $light;
-          margin-right: 0.3em;
-          cursor: pointer;
-        }
-        h3 {
-          font-weight: 500;
-          font-size: 1.3em;
-          padding: 0;
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          width: 100%;
-          i {
-            font-size: 1.2em;
-            &.bhi-info {
-              color: $light;
-            }
+      min-width: 0;
+      flex: 1;
+      i.bhi-move {
+        color: $light;
+        margin-right: 0.3em;
+        cursor: pointer;
+      }
+      h1,
+      h2,
+      h3 {
+        font-size: $font-size-lg;
+        font-weight: 500;
+        line-height: 1.5;
+        color: var(--text-main, #3d464d);
+        width: 100%;
+        padding: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        i {
+          font-size: 1.2em;
+          &.bhi-info {
+            color: $light;
           }
         }
       }
-      .actions {
-        color: lighten($dark, 15%);
-        white-space: nowrap;
-        button {
-          height: 30px;
-          width: 30px;
-          padding: 5px;
-          font-size: 1.2em;
-          text-transform: none;
-        }
-      }
     }
-    novo-card-actions {
-      button {
-        font-size: 1.05rem;
-        i {
-          font-size: 1.05em;
-        }
-      }
-    }
-    main {
-      padding: 0 0.8em 0.8em;
-      background-color: $white;
-      p.card-message {
-        padding: 20px 0;
-        max-width: inherit;
-        text-align: center;
-        line-height: 25px;
-        color: lighten($grey, 10%);
-        i {
-          display: block;
-          font-size: 24px;
-          margin: 0 0 0.5em;
-          color: lighten($grey, 20%);
-        }
-      }
-    }
-    &.no-padding {
-      main {
-        padding: 0;
-      }
-    }
-    footer {
-      display: flex;
-      justify-content: center;
+    .actions {
+      color: lighten($dark, 15%);
+      white-space: nowrap;
     }
   }
+
+  p.card-message {
+    padding: 20px 0;
+    max-width: inherit;
+    text-align: center;
+    line-height: 25px;
+    color: lighten($grey, 10%);
+    i {
+      display: block;
+      font-size: 24px;
+      margin: 0 0 0.5em;
+      color: lighten($grey, 20%);
+    }
+  }
+
+  footer {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.novo-card-header,
+.novo-card-footer {
+  @include theme-backgrounds();
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: $spacing-md;
+}
+
+.novo-card-header-text {
+  flex: 1 1 0px;
+}
+
+.novo-card-content {
+  display: block;
+}
+
+.novo-card-header {
+  padding: $spacing-md $spacing-md 0 $spacing-md;
+}
+.novo-card-footer {
+  padding: 0 $spacing-md $spacing-md $spacing-md;
+}
+.novo-card-content:not(.condensed) {
+  padding: $spacing-md $spacing-md;
+}
+
+.novo-card-header + .novo-card-content.condensed,
+.novo-card-header + :not(.novo-card-content) {
+  margin-top: $spacing-sm;
+}
+
+.novo-card-inline {
+  display: inline-flex;
+  justify-self: start;
+  align-self: start;
+}
+
+.novo-card-inset-none {
+  padding: 0;
+}
+.novo-card-inset-small {
+  padding: $spacing-sm;
+}
+.novo-card-inset-medium {
+  padding: $spacing-md;
+}
+.novo-card-inset-large {
+  padding: $spacing-lg;
+}
+
+[novo-card-image] {
+  width: calc(100%);
+  margin: $spacing-md 0;
 }

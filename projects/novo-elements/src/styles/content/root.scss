@@ -1,0 +1,27 @@
+@import "~novo-design-tokens/scss";
+
+html {
+  scrollbar-color: var(--scrollbar-thumb) var(--background-body);
+  scrollbar-width: none;
+  font-family: $font-family-base;
+  font-size: $font-size-base;
+  color: $font-color-base;
+}
+
+body {
+  font-family: $font-family-body;
+  // font-size: $font-size-body;
+  font-size: 1.2rem; // novo-design-tokens is 1.4rem
+  line-height: 1.2;
+  word-wrap: break-word;
+  color: var(--text-main);
+  background: var(--background-body);
+  text-rendering: optimizeLegibility;
+}
+
+button,
+input,
+textarea {
+  transition: background-color var(--animation-duration) linear, border-color var(--animation-duration) linear,
+    color var(--animation-duration) linear, box-shadow var(--animation-duration) linear, transform var(--animation-duration) ease;
+}

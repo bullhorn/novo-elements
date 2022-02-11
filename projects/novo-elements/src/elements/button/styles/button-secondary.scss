@@ -1,0 +1,51 @@
+@import "../../../styles/variables.scss";
+
+:host {
+  // Secondary Themed Button
+  &[theme="secondary"] {
+    @include theme-text-colors("color");
+    @include theme-borders("color");
+
+    text-align: left;
+    align-items: center;
+    background: $white;
+    color: $positive;
+    border: 1px solid $positive;
+    padding: 0 calc(#{$spacing-md} - 1px);
+
+    i.loading {
+      margin-left: 0.8rem;
+      svg {
+        .spinner {
+          fill: $positive;
+        }
+      }
+    }
+    &:hover,
+    &:focus {
+      box-shadow: $shadow-2, $shadow-1;
+    }
+    &:active {
+      box-shadow: $shadow-1;
+    }
+    &[inverse] {
+      background: rgba(0, 0, 0, 0.25);
+      color: #fff;
+      border: 1px solid #fff;
+      &:hover,
+      &:focus {
+        background: rgba(0, 0, 0, 0.35);
+      }
+      &:active {
+        background: rgba(0, 0, 0, 0.45);
+      }
+      i.loading {
+        svg {
+          .spinner {
+            fill: $white;
+          }
+        }
+      }
+    }
+  }
+}

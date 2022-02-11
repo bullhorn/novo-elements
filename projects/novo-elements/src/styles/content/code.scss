@@ -1,0 +1,34 @@
+@import "~novo-design-tokens/scss";
+
+code,
+samp,
+time {
+  background: var(--background-main);
+  color: var(--code);
+  border: 1px solid var(--border);
+  padding: 2px 4px;
+  border-radius: 6px;
+  font-size: 1em;
+  font-family: $font-family-mono;
+}
+
+pre > code {
+  padding: 10px;
+  display: block;
+  overflow-x: auto;
+}
+
+var {
+  color: var(--variable);
+  font-style: normal;
+  font-family: $font-family-mono;
+}
+
+kbd {
+  font-family: $font-family-mono;
+  background: var(--background-main);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  color: var(--text-main);
+  padding: 2px 4px 2px 4px;
+}

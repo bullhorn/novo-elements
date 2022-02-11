@@ -17,7 +17,7 @@ export class ThSortable {
 
   onToggleSort(event) {
     if (event) {
-      event.preventDefault();
+      // event.preventDefault();
     }
 
     if (this.config && this.column && this.config.sorting !== false && this.column.sorting !== false) {

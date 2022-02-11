@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-
 // Vendor
-import { FormUtils, AddressControl, findByCountryId } from 'novo-elements';
+import { AddressControl, findByCountryId, FormUtils } from 'novo-elements';
 
 /**
  * @title Address Control Example

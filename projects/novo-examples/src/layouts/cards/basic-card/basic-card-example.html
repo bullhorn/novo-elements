@@ -1,13 +1,31 @@
 <novo-card [title]="'All Attributes'"
-           icon="activity"
-           [loading]="loading"
-           [message]="message"
-           [messageIcon]="messageIcon"
-           [refresh]="refresh"
-           [move]="move"
-           [close]="close"
-           (onRefresh)="onRefresh()"
-           (onClose)="onClose()"
-           [padding]="padding">
-    This is the ALL attribute card content!
+  icon="activity"
+  [loading]="loading"
+  [message]="message"
+  [messageIcon]="messageIcon"
+  [refresh]="refresh"
+  [move]="move"
+  [close]="close"
+  (onRefresh)="onRefresh()"
+  (onClose)="onClose()"
+  [padding]="padding">
+  This is the ALL attribute card content!
+</novo-card>
+
+
+<novo-card inline inset="small">
+  <novo-card-content px="4rem">
+    <novo-title larger>500</novo-title>
+    <novo-caption>people</novo-caption>
+  </novo-card-content>
+</novo-card>
+
+<novo-card inline inset="large">
+  <novo-title larger>500</novo-title>
+  <novo-caption>people</novo-caption>
+</novo-card>
+
+<novo-card inline>
+  <novo-title larger>500</novo-title>
+  <novo-caption>people</novo-caption>
 </novo-card>

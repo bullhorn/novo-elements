@@ -1,0 +1,149 @@
+@import "./variables.scss";
+@import "../elements/common/typography/text.mixins.scss";
+
+// Headers
+// --------------------------------------------------
+h1 {
+  font-size: 2.5rem;
+  font-weight: 400;
+  margin: 0;
+  padding: 0.45rem 0 0.35rem;
+}
+
+h2 {
+  font-size: 2rem;
+  font-weight: 500;
+  margin: 0;
+  padding: 0.75rem 0 0.3rem;
+}
+
+h3 {
+  font-size: 1.75rem;
+  font-weight: 400;
+  margin: 0;
+  padding: 0.6rem 0 0.4rem;
+}
+
+h4 {
+  font-size: 1.375rem;
+  font-weight: 400;
+  margin: 0;
+  padding: 0.75rem 0 0.5rem;
+}
+
+h5 {
+  font-size: 1.125rem;
+  font-weight: 700;
+  margin: 0;
+  padding: 0.75rem 0 0.25rem;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+h6 {
+  font-size: 1.125rem;
+  font-weight: 500;
+  margin: 0;
+  padding: 0.75rem 0 0.25rem;
+}
+
+// Body And Paragraph
+// --------------------------------------------------
+p {
+  font-size: 1.4rem;
+  line-height: 1.375em;
+  margin: 0;
+  padding: 0.25rem 0 0.55rem;
+}
+
+// h1,
+// h2,
+// h3,
+// h4,
+// h5,
+// h6,
+// strong {
+//   color: var(--text-bright);
+// }
+
+q::before {
+  content: none;
+}
+
+q::after {
+  content: none;
+}
+
+blockquote,
+q {
+  border-left: 4px solid var(--focus);
+  margin: 1.5em 0;
+  padding: 0.5em 1em;
+  font-style: italic;
+}
+
+blockquote > footer {
+  font-style: normal;
+  border: 0;
+}
+
+blockquote cite {
+  font-style: normal;
+}
+
+address {
+  font-style: normal;
+}
+
+mark {
+  background-color: var(--highlight);
+  border-radius: 2px;
+  padding: 0 2px 0 2px;
+  color: #000;
+}
+
+// Special Classes
+// --------------------------------------------------
+.caption {
+  font-size: 1.125rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  opacity: 0.55;
+  letter-spacing: 0.1px;
+}
+
+h1.novo-section-header,
+h2.novo-section-header,
+h3.novo-section-header,
+h4.novo-section-header,
+h5.novo-section-header,
+h6.novo-section-header {
+  background: var(--background-bright, $color-white);
+  box-sizing: content-box;
+  font-weight: 400;
+  display: flex;
+  width: 100%;
+  padding: 1rem 0.5rem 1rem 1.5rem;
+  margin-left: -1.5rem;
+  margin-right: -1.5rem;
+  > i {
+    display: flex;
+    margin-right: 10px;
+    &.bhi-section {
+      // Special case for icons that are not vertically centered
+      margin-top: -0.2rem;
+    }
+  }
+}
+
+// Utility classes
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span {
+  @include base-text-rules();
+}

@@ -1,9 +1,15 @@
 // NG2
+import { ActiveDescendantKeyManager } from '@angular/cdk/a11y';
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import { hasModifierKey } from '@angular/cdk/keycodes';
 import {
   AfterContentInit,
+  AfterViewInit,
   ChangeDetectorRef,
   Component,
+  ContentChild,
   ContentChildren,
+  Directive,
   ElementRef,
   EventEmitter,
   HostListener,
@@ -14,29 +20,64 @@ import {
   QueryList,
   ViewChild,
 } from '@angular/core';
-import { Helpers } from '../../utils/Helpers';
-import { KeyCodes } from '../../utils/key-codes/KeyCodes';
+// Vendor
+import { merge, of, Subject, Subscription } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { BooleanInput } from '../../utils';
+// App
+import { Key } from '../../utils/key-codes';
 import { notify } from '../../utils/notifier/notifier.util';
-// APP
-import { NovoOverlayTemplateComponent } from '../overlay/Overlay';
+import { NovoButtonElement } from '../button';
+import {
+  CanDisableCtor,
+  HasOverlayCtor,
+  HasTabIndexCtor,
+  mixinDisabled,
+  mixinOverlay,
+  mixinTabIndex,
+  NovoOptgroup,
+  NovoOption,
+  NovoOptionSelectionChange,
+  _countGroupLabelsBeforeOption,
+  _getOptionScrollPosition,
+} from '../common';
+import { NovoOverlayTemplateComponent } from '../common/overlay/Overlay';
+
+@Directive({
+  selector: '[dropdownTrigger]',
+  host: {
+    class: 'novo-dropdown-trigger',
+  },
+})
+export class NovoDropDownTrigger {
+  constructor(public element: ElementRef) {}
+}
+
+// Create Base Class from Mixins
+// Boilerplate for applying mixins
+class NovoDropdownBase {
+  constructor() {}
+}
+const NovoDropdowMixins: HasOverlayCtor & CanDisableCtor & HasTabIndexCtor & typeof NovoDropdownBase = mixinOverlay(
+  mixinTabIndex(mixinDisabled(NovoDropdownBase), 1),
+);
 
 @Component({
   selector: 'novo-dropdown',
   template: `
-    <ng-content select="button" #trigger></ng-content>
+    <ng-content select="button,novo-button,[dropdownTrigger]" #trigger></ng-content>
     <novo-overlay-template [parent]="element" [width]="width" [position]="side" [scrollStrategy]="scrollStrategy">
-      <div
-        class="dropdown-container {{ containerClass }}"
-        [style.height.px]="height"
-        [class.has-height]="!!height"
-        (keydown)="onOverlayKeyDown($event)"
-      >
+      <div #panel class="dropdown-container {{ containerClass }}" [style.height.px]="height" [class.has-height]="!!height">
         <ng-content></ng-content>
       </div>
     </novo-overlay-template>
   `,
+  // providers: [{ provide: NOVO_OPTION_PARENT_COMPONENT, useExisting: NovoDropdownElement }],
+  host: {
+    '[attr.tabIndex]': 'disabled ? -1 : 0',
+  },
 })
-export class NovoDropdownElement implements OnInit, OnDestroy {
+export class NovoDropdownElement extends NovoDropdowMixins implements OnInit, AfterContentInit, AfterViewInit, OnDestroy {
   @Input()
   parentScrollSelector: string;
   @Input()
@@ -57,29 +98,62 @@ export class NovoDropdownElement implements OnInit, OnDestroy {
     | 'top-right' = 'default';
   @Input()
   scrollStrategy: 'reposition' | 'block' | 'close' = 'reposition';
+
+  /**
+   * Keep dropdown open after an item is selected
+   */
+  @Input()
+  @BooleanInput()
+  keepOpen: boolean = false;
+
   @Input()
   height: number;
   @Input()
   width: number = -1; // Defaults to dynamic width (no hardcoded width value and no host width lookup)
   @Input()
   appendToBody: boolean = false; // Deprecated
-
   @Output()
   toggled: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   @ViewChild(NovoOverlayTemplateComponent)
   overlay: NovoOverlayTemplateComponent;
 
-  clickHandler: any;
-  closeHandler: any;
-  parentScrollElement: Element;
-  private _items: QueryList<NovoItemElement>;
-  private _textItems: string[];
-  private activeIndex: number = -1;
-  private filterTerm: string = '';
-  private filterTermTimeout: any;
+  @ContentChild(NovoButtonElement)
+  _button: NovoButtonElement;
+  @ContentChild(NovoDropDownTrigger)
+  _trigger: NovoDropDownTrigger;
+
+  @ContentChildren(NovoOptgroup, { descendants: true })
+  optionGroups: QueryList<NovoOptgroup>;
+  @ContentChildren(NovoOption, { descendants: true })
+  options: QueryList<NovoOption>;
+  @ViewChild('panel')
+  panel: ElementRef;
+
+  private clickHandler: any;
+  private closeHandler: any;
+  private _selectedOptionChanges = Subscription.EMPTY;
+  /** The Subject to complete all subscriptions when destroyed. */
+  private _onDestroy: Subject<void> = new Subject();
+  /** The FocusKeyManager which handles focus. */
+  private _keyManager: ActiveDescendantKeyManager<NovoOption>;
+
+  /** Whether the user should be allowed to select multiple options. */
+  @Input()
+  get multiple(): boolean {
+    return this._multiple;
+  }
+  set multiple(value: boolean) {
+    this._multiple = coerceBooleanProperty(value);
+  }
+  private _multiple: boolean = false;
+
+  get button() {
+    return this._trigger || this._button;
+  }
 
   constructor(public element: ElementRef, private ref: ChangeDetectorRef) {
+    super();
     this.clickHandler = this.togglePanel.bind(this);
     this.closeHandler = this.closePanel.bind(this);
   }
@@ -88,169 +162,183 @@ export class NovoDropdownElement implements OnInit, OnDestroy {
     if (this.appendToBody) {
       notify(`'appendToBody' has been deprecated. Please remove this attribute.`);
     }
+  }
+
+  public ngAfterContentInit(): void {
     // Add a click handler to the button to toggle the menu
-    const button = this.element.nativeElement.querySelector('button');
-    button.addEventListener('click', this.clickHandler);
-    if (this.parentScrollSelector) {
-      this.parentScrollElement = Helpers.findAncestor(this.element.nativeElement, this.parentScrollSelector);
-    }
+    this.button.element.nativeElement.addEventListener('click', this.clickHandler);
+    this.button.element.nativeElement.tabIndex = -1;
+    this.options.changes.pipe(takeUntil(this._onDestroy)).subscribe(() => {
+      this._initKeyManager();
+      this._watchSelectionEvents();
+    });
+    this._initKeyManager();
+    this._watchSelectionEvents();
+    this.focus();
+  }
+
+  public ngAfterViewInit(): void {
+    this._watchPanelEvents();
   }
 
   public ngOnDestroy(): void {
+    this._onDestroy.next();
+    this._onDestroy.complete();
     // Remove listener
-    const button = this.element.nativeElement.querySelector('button');
-    if (button) {
-      button.removeEventListener('click', this.clickHandler);
+    if (this.button) {
+      this.button.element.nativeElement.removeEventListener('click', this.clickHandler);
     }
-    if (this.parentScrollElement && this.parentScrollAction === 'close') {
-      this.parentScrollElement.removeEventListener('scroll', this.closeHandler);
+  }
+
+  focus(options?: FocusOptions): void {
+    if (!this.disabled) {
+      this.element.nativeElement.focus(options);
     }
   }
 
   public set items(items: QueryList<NovoItemElement>) {
-    this._items = items;
-    this.activeIndex = -1;
-    // Get the innerText of all the items to allow for searching
-    this._textItems = items.map((item: NovoItemElement) => {
-      return item.element.nativeElement.innerText;
+    // this._items = items;
+    // this.activeIndex = -1;
+    // // Get the innerText of all the items to allow for searching
+    // this._textItems = items.map((item: NovoItemElement) => {
+    //   return item.element.nativeElement.innerText;
+    // });
+  }
+
+  /** Handles all keydown events on the select. */
+  @HostListener('keydown', ['$event'])
+  _handleKeydown(event: KeyboardEvent): void {
+    if (!this.disabled) {
+      this.panelOpen ? this._handleOpenKeydown(event) : this._handleClosedKeydown(event);
+    }
+  }
+
+  /** Handles keyboard events while the select is closed. */
+  private _handleClosedKeydown(event: KeyboardEvent): void {
+    const key = event.key;
+    const isArrowKey = key === Key.ArrowDown || key === Key.ArrowUp || key === Key.ArrowLeft || key === Key.ArrowRight;
+    const isOpenKey = key === Key.Enter || key === Key.Space;
+    const manager = this._keyManager;
+    // Open the select on ALT + arrow key to match the native <select>
+    if ((!manager.isTyping() && isOpenKey && !hasModifierKey(event)) || ((this.multiple || event.altKey) && isArrowKey)) {
+      event.preventDefault(); // prevents the page from scrolling down when pressing space
+      this.openPanel();
+    }
+  }
+
+  /** Handles keyboard events when the selected is open. */
+  private _handleOpenKeydown(event: KeyboardEvent): void {
+    const manager = this._keyManager;
+    const key = event.key;
+    const isArrowKey = key === Key.ArrowDown || key === Key.ArrowUp;
+    const isTyping = manager.isTyping();
+    const isInputField = event.target;
+    if (isArrowKey && event.altKey) {
+      // Close the select on ALT + arrow key to match the native <select>
+      event.preventDefault();
+      this.closePanel();
+      // Don't do anything in this case if the user is typing,
+      // because the typing sequence can include the space key.
+    } else if (!isTyping && (key === Key.Enter || key === Key.Space) && manager.activeItem && !hasModifierKey(event)) {
+      event.preventDefault();
+      this._multiple ? manager.activeItem._selectViaInteraction() : manager.activeItem._clickViaInteraction();
+    } else if (!isTyping && this._multiple && ['a', 'A'].includes(key) && event.ctrlKey) {
+      event.preventDefault();
+      const hasDeselectedOptions = this.options.some((opt) => !opt.disabled && !opt.selected);
+      this.options.forEach((option) => {
+        if (!option.disabled) {
+          hasDeselectedOptions ? option.select() : option.deselect();
+        }
+      });
+    } else if (Key.Escape === key) {
+      this.closePanel();
+    } else {
+      const previouslyFocusedIndex = manager.activeItemIndex;
+      manager.onKeydown(event);
+      if (this._multiple && isArrowKey && event.shiftKey && manager.activeItem && manager.activeItemIndex !== previouslyFocusedIndex) {
+        manager.activeItem._selectViaInteraction();
+      }
+    }
+  }
+
+  private _watchPanelEvents() {
+    const panelStateChanges = merge(this.overlay.opening, this.overlay.closing);
+    panelStateChanges.pipe(takeUntil(this._onDestroy)).subscribe((event: boolean) => this.toggled.emit(event));
+  }
+
+  private _watchSelectionEvents() {
+    const selectionEvents = this.options ? merge(...this.options.map((option) => option.onSelectionChange)) : of();
+    this._selectedOptionChanges.unsubscribe();
+    this._selectedOptionChanges = selectionEvents.pipe(takeUntil(this._onDestroy)).subscribe((event: NovoOptionSelectionChange) => {
+      // this.handleSelection(event.source, event.isUserInput);
+      if (event.isUserInput && !this.multiple) {
+        this._clearPreviousSelectedOption(this._keyManager.activeItem);
+        if (!this.keepOpen && this.panelOpen) {
+          this.closePanel();
+          this.focus();
+        }
+      }
+    });
+  }
+  /**
+   * Clear any previous selected option and emit a selection change event for this option
+   */
+  private _clearPreviousSelectedOption(skip: NovoOption) {
+    this.options.forEach((option) => {
+      if (option !== skip && option.selected) {
+        option.deselect();
+      }
     });
   }
 
-  /** BEGIN: Convenient Panel Methods. */
-  public get panelOpen(): boolean {
-    return this.overlay && this.overlay.panelOpen;
+  /** Sets up a key manager to listen to keyboard events on the overlay panel. */
+  private _initKeyManager() {
+    this._keyManager = new ActiveDescendantKeyManager<NovoOption>(this.options).withTypeAhead(100).withHomeAndEnd();
+    // .withAllowedModifierKeys(['shiftKey']);
+
+    this._keyManager.tabOut.pipe(takeUntil(this._onDestroy)).subscribe(() => {
+      if (this.panelOpen) {
+        // Restore focus to the trigger before closing. Ensures that the focus
+        // position won't be lost if the user got focus into the overlay.
+        this.focus();
+        this.closePanel();
+      }
+    });
+
+    this._keyManager.change.pipe(takeUntil(this._onDestroy)).subscribe(() => {
+      if (this.panelOpen && this.overlay) {
+        this._scrollOptionIntoView(this._keyManager.activeItemIndex || 0);
+      }
+    });
   }
 
-  public openPanel(): void {
-    this.overlay.openPanel();
-    if (this.parentScrollElement && this.parentScrollAction === 'close') {
-      this.parentScrollElement.addEventListener('scroll', this.closeHandler);
-    }
-    this.toggled.emit(true);
+  /** Scrolls the active option into view. */
+  protected _scrollOptionIntoView(index: number): void {
+    const labelCount = _countGroupLabelsBeforeOption(index, this.options, this.optionGroups);
+    const itemHeight = this._getItemHeight();
+    this.panel.nativeElement.scrollTop = _getOptionScrollPosition(
+      (index + labelCount) * itemHeight,
+      itemHeight,
+      this.panel.nativeElement.scrollTop,
+      this.panel.nativeElement.offsetHeight,
+    );
   }
 
-  public closePanel(): void {
-    this.overlay.closePanel();
-    if (this.parentScrollElement && this.parentScrollAction === 'close') {
-      this.parentScrollElement.removeEventListener('scroll', this.closeHandler);
+  /** Calculates the height of the select's options. */
+  private _getItemHeight(): number {
+    let [first] = this.options;
+    if (first) {
+      return first._getHostElement().offsetHeight;
     }
-    // Clear active index
-    if (this.activeIndex !== -1) {
-      this._items.toArray()[this.activeIndex].active = false;
-    }
-    this.activeIndex = -1;
-    this.ref.markForCheck();
-    this.toggled.emit(false);
-  }
-
-  public togglePanel(): void {
-    this.panelOpen ? this.closePanel() : this.openPanel();
-  }
-
-  /** END: Convenient Panel Methods. */
-
-  @HostListener('keydown', ['$event'])
-  public onKeyDown(event: KeyboardEvent): void {
-    if (this.panelOpen && event.keyCode === KeyCodes.ESC) {
-      Helpers.swallowEvent(event);
-      // active & esc hit -- close
-      this.closePanel();
-    } else if (event.keyCode === KeyCodes.ENTER) {
-      Helpers.swallowEvent(event);
-      // enter -- perform the "click"
-      this._items.toArray()[this.activeIndex].onClick(event);
-    } else if (event.keyCode === KeyCodes.DOWN) {
-      Helpers.swallowEvent(event);
-      // down - navigate through the list ignoring disabled ones
-      if (this.activeIndex !== -1) {
-        this._items.toArray()[this.activeIndex].active = false;
-      }
-      this.activeIndex++;
-      if (this.activeIndex === this._items.length) {
-        this.activeIndex = 0;
-      }
-      while (this._items.toArray()[this.activeIndex].disabled) {
-        this.activeIndex++;
-        if (this.activeIndex === this._items.length) {
-          this.activeIndex = 0;
-        }
-      }
-      this._items.toArray()[this.activeIndex].active = true;
-      this.scrollToActive();
-    } else if (event.keyCode === KeyCodes.UP) {
-      Helpers.swallowEvent(event);
-      // up -- navigate through the list ignoring disabled ones
-      if (this.activeIndex !== -1) {
-        this._items.toArray()[this.activeIndex].active = false;
-      }
-      this.activeIndex--;
-      if (this.activeIndex < 0) {
-        this.activeIndex = this._items.length - 1;
-      }
-      while (this._items.toArray()[this.activeIndex].disabled) {
-        this.activeIndex--;
-        if (this.activeIndex < 0) {
-          this.activeIndex = this._items.length - 1;
-        }
-      }
-      this._items.toArray()[this.activeIndex].active = true;
-      this.scrollToActive();
-    } else if (
-      (event.keyCode >= 65 && event.keyCode <= 90) ||
-      (event.keyCode >= 96 && event.keyCode <= 105) ||
-      (event.keyCode >= 48 && event.keyCode <= 57) ||
-      event.keyCode === KeyCodes.SPACE
-    ) {
-      Helpers.swallowEvent(event);
-      // A-Z, 0-9, space -- filter the list and scroll to active filter
-      // filter has hard reset after 2s
-      clearTimeout(this.filterTermTimeout);
-      this.filterTermTimeout = setTimeout(() => {
-        this.filterTerm = '';
-      }, 2000);
-      const char = event.key;
-      this.filterTerm = this.filterTerm.concat(char);
-      const index = this._textItems.findIndex((value: string) => {
-        return new RegExp(`^${this.filterTerm.toLowerCase()}`).test(value.trim().toLowerCase());
-      });
-      if (index !== -1) {
-        if (this.activeIndex !== -1) {
-          this._items.toArray()[this.activeIndex].active = false;
-        }
-        this.activeIndex = index;
-        this._items.toArray()[this.activeIndex].active = true;
-        this.scrollToActive();
-      }
-    } else if ([KeyCodes.BACKSPACE, KeyCodes.DELETE].includes(event.keyCode)) {
-      Helpers.swallowEvent(event);
-      // backspace, delete -- remove partial filters
-      clearTimeout(this.filterTermTimeout);
-      this.filterTermTimeout = setTimeout(() => {
-        this.filterTerm = '';
-      }, 2000);
-      this.filterTerm = this.filterTerm.slice(0, -1);
-    }
-  }
-
-  public onOverlayKeyDown(event: KeyboardEvent): void {
-    if (event.keyCode === KeyCodes.ESC || event.keyCode === KeyCodes.ENTER) {
-      Helpers.swallowEvent(event);
-      this.closePanel();
-    }
-  }
-
-  private scrollToActive(): void {
-    const container = this.overlay.overlayRef.overlayElement.querySelector('.dropdown-container');
-    const item = this._items.toArray()[this.activeIndex];
-    if (container && item) {
-      container.scrollTop = item.element.nativeElement.offsetTop;
-    }
+    return 0;
   }
 }
 
+// Deprecated below here ---------------------------
+
 @Component({
   selector: 'item',
-  template: '<ng-content></ng-content>',
+  template: '<novo-option><ng-content></ng-content></novo-option>',
   host: {
     '[class.disabled]': 'disabled',
     '[class.active]': 'active',
@@ -266,7 +354,9 @@ export class NovoItemElement {
 
   public active: boolean = false;
 
-  constructor(private dropdown: NovoDropdownElement, public element: ElementRef) {}
+  constructor(private dropdown: NovoDropdownElement, public element: ElementRef) {
+    notify(`'item' element has been deprecated. Please use 'novo-option' and 'novo-optgroup'.`);
+  }
 
   @HostListener('click', ['$event'])
   public onClick(event: Event): void {
@@ -290,7 +380,9 @@ export class NovoDropdownListElement implements AfterContentInit {
   @ContentChildren(NovoItemElement)
   public items: QueryList<NovoItemElement>;
 
-  constructor(private dropdown: NovoDropdownElement) {}
+  constructor(private dropdown: NovoDropdownElement) {
+    notify(`'list' element has been deprecated. Please use novo-option and novo-optgroup.`);
+  }
 
   public ngAfterContentInit(): void {
     this.dropdown.items = this.items;
@@ -304,4 +396,8 @@ export class NovoDropdownListElement implements AfterContentInit {
   selector: 'dropdown-item-header',
   template: '<ng-content></ng-content>',
 })
-export class NovoDropDownItemHeaderElement {}
+export class NovoDropDownItemHeaderElement {
+  constructor() {
+    notify(`'dropdown-item-header' element has been deprecated. Please use novo-option and novo-optgroup.`);
+  }
+}

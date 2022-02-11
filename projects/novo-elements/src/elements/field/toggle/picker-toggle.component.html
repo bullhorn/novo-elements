@@ -1,0 +1,12 @@
+<novo-button
+  #button
+  theme="icon"
+  [icon]="icon"
+  [attr.aria-haspopup]="'dialog'"
+  [attr.tabindex]="disabled ? -1 : tabIndex"
+  [disabled]="disabled"
+  (click)="togglePanel($event)"></novo-button>
+
+<novo-overlay-template [parent]="element" position="above-below">
+  <ng-content></ng-content>
+</novo-overlay-template>

@@ -1,0 +1,12 @@
+<button type="button" theme="secondary" icon="collapse" [menu]="menu">Actions</button>
+
+<!-- Menu Template -->
+<novo-menu #menu>
+  <novo-option *menuItem (click)="clickMe($event)">Preview</novo-option>
+  <novo-option *menuItem (click)="clickMe($event)">Edit</novo-option>
+  <novo-option *menuItem [menu]="subMenu">Choose...</novo-option>
+  <novo-menu #subMenu>
+    <novo-option *menuItem (click)="clickMe($event)">Available</novo-option>
+    <novo-option *menuItem (click)="clickMe($event)">Not Available</novo-option>
+  </novo-menu>
+</novo-menu>

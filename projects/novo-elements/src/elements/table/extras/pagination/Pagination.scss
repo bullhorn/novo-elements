@@ -7,7 +7,7 @@ novo-pagination {
   }
   h5.rows {
     padding: 0;
-    font-size: 12px;
+    font-size: 1rem;
     opacity: 0.75;
     letter-spacing: 0.1px;
   }
@@ -17,7 +17,7 @@ novo-pagination {
   novo-select {
     max-width: 100px;
     min-width: 100px;
-    div[type='button'] {
+    div[type="button"] {
       &:hover {
         i {
           opacity: 0.75;
@@ -39,7 +39,8 @@ novo-pagination {
     .page {
       display: inline-block;
       padding: 0 10px;
-      line-height: 30px;
+      line-height: 2.4rem;
+      font-size: var(--font-size-text);
       border-radius: 2px;
       text-align: center;
       list-style-type: none;

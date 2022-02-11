@@ -17,13 +17,12 @@ novo-date-time-picker-input {
 
 novo-date-time-picker {
   display: block;
-  width: 250px;
-  min-width: 250px;
+  width: min-content;
   overflow: hidden;
   border-radius: 4px;
   background-color: #fff;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15), 0 2px 7px rgba(0, 0, 0, 0.1);
-  z-index: 999;
+  z-index: z(max);
   .date-time-container {
     position: relative;
     .view-container {
@@ -32,14 +31,18 @@ novo-date-time-picker {
     .time-picker {
       position: absolute;
       height: 100%;
+      width: 100%;
       background: #fff;
       transform: translateX(100%);
       transition: transform 200ms ease-in-out;
-      z-index: 2;
+      z-index: z(above);
       top: 0;
+      novo-time-picker {
+        width: inherit;
+        border-radius: 0;
+      }
       .increments {
-        height: 275px;
-        width: 250px;
+        width: unset;
         novo-list-item {
           width: auto;
         }

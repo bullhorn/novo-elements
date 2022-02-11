@@ -7,6 +7,7 @@ novo-tiles {
   position: relative;
   color: $positive-lighter;
   $border-properties: solid $border-width $positive-lighter;
+
   input {
     appearance: none !important;
     height: 0 !important;
@@ -16,14 +17,14 @@ novo-tiles {
   & > .tile-container {
     display: flex;
     text-align: center;
-    background-color: $white;
+    background-color: var(--background-bright);
     border: solid thin $ocean;
     border-radius: $border-radius;
     position: relative;
     align-items: center;
     .tile {
-      padding: 10px 15px;
-      line-height: 1.7em;
+      padding: 0 $spacing-md;
+      line-height: 3.2rem;
       height: 100%;
       z-index: 1;
       position: relative;

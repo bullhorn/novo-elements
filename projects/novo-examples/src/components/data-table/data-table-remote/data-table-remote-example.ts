@@ -1,19 +1,17 @@
-import { Component, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
-import { delay } from 'rxjs/operators';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
 import * as dateFns from 'date-fns';
-import { Subject, Observable, of } from 'rxjs';
-
 import {
+  Helpers,
   IDataTableColumn,
-  RemoteDataTableService,
+  IDataTableFilter,
   IDataTablePaginationOptions,
+  IDataTablePreferences,
   IDataTableSearchOptions,
   NovoModalService,
-  IDataTablePreferences,
-  IDataTableFilter,
-  Helpers,
+  RemoteDataTableService,
 } from 'novo-elements';
-
+import { Observable, of, Subject } from 'rxjs';
+import { delay } from 'rxjs/operators';
 import { ConfigureColumnsModal, MockData } from '../extras';
 
 /**
@@ -27,11 +25,21 @@ import { ConfigureColumnsModal, MockData } from '../extras';
 })
 export class DataTableRemoteExample {
   // Table configuration
-  public dataSetOptions: any[] = [{ label: 'Dataset #1', value: 1 }, { label: 'Dataset #2', value: 2 }, { label: 'Dataset #3', value: 3 }];
+  public dataSetOptions: any[] = [
+    { label: 'Dataset #1', value: 1 },
+    { label: 'Dataset #2', value: 2 },
+    { label: 'Dataset #3', value: 3 },
+  ];
   public loadedDataSet: number = 1;
-  public paginationTypeOptions: any[] = [{ label: 'Standard', value: 'standard' }, { label: 'Basic', value: 'basic' }];
+  public paginationTypeOptions: any[] = [
+    { label: 'Standard', value: 'standard' },
+    { label: 'Basic', value: 'basic' },
+  ];
   public loadedPaginationType: string = 'standard';
-  public globalSearchOptions: any[] = [{ label: 'Show', value: true }, { label: 'Hide', value: false }];
+  public globalSearchOptions: any[] = [
+    { label: 'Show', value: true },
+    { label: 'Hide', value: false },
+  ];
   public loadedGlobalSearch: boolean = false;
 
   // Shared configuration
@@ -186,7 +194,10 @@ export class DataTableRemoteExample {
       sortable: true,
       filterable: {
         type: 'select',
-        options: [{ value: true, label: 'True' }, { value: false, label: 'False' }],
+        options: [
+          { value: true, label: 'True' },
+          { value: false, label: 'False' },
+        ],
       },
     },
     {

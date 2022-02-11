@@ -1,18 +1,17 @@
 // NG2
 import {
   Directive,
-  EventEmitter,
   ElementRef,
-  Renderer2,
+  EventEmitter,
+  HostListener,
+  Input,
   OnChanges,
   OnInit,
-  Input,
   Output,
+  Renderer2,
   SimpleChanges,
-  HostListener,
 } from '@angular/core';
-// APP
-import { KeyCodes } from './../../../../utils/key-codes/KeyCodes';
+import { Key } from 'projects/novo-elements/src/utils';
 import { Helpers } from './../../../../utils/Helpers';
 
 @Directive({
@@ -48,7 +47,7 @@ export class TableFilter implements OnInit, OnChanges {
   @HostListener('keydown', ['$event'])
   public onChangeFilter(event: KeyboardEvent) {
     clearTimeout(this.filterThrottle);
-    if (KeyCodes.ENTER === event.keyCode) {
+    if (Key.Enter === event.key) {
       this.config.filter = (event.target as any).value;
       this.onFilterChange.emit({ filtering: this.config });
     } else {

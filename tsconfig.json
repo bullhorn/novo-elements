@@ -17,13 +17,7 @@
       "path": "./projects/novo-examples/tsconfig.spec.json"
     },
     {
-      "path": "./demo/tsconfig.app.json"
-    },
-    {
-      "path": "./projects/chomsky/tsconfig.lib.json"
-    },
-    {
-      "path": "./projects/chomsky/tsconfig.spec.json"
+      "path": "./projects/demo/tsconfig.app.json"
     }
   ]
 }

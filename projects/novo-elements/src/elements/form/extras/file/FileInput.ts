@@ -1,37 +1,54 @@
 // NG2
+import { FocusKeyManager } from '@angular/cdk/a11y';
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import {
   Component,
-  Input,
   ElementRef,
-  forwardRef,
-  OnInit,
-  OnDestroy,
+  EventEmitter,
+  HostBinding,
+  Input,
   OnChanges,
+  OnDestroy,
+  OnInit,
+  Optional,
+  Output,
+  Self,
+  SimpleChanges,
+  TemplateRef,
   ViewChild,
   ViewContainerRef,
-  TemplateRef,
-  SimpleChanges,
-  Output,
-  EventEmitter,
 } from '@angular/core';
-import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
-// APP
-import { NovoLabelService } from '../../../../services/novo-label-service';
+import { ControlValueAccessor, FormGroupDirective, NgControl, NgForm } from '@angular/forms';
 import { NovoDragulaService } from '../../../../elements/dragula/DragulaService';
+import { NovoLabelService } from '../../../../services/novo-label-service';
+import { CanUpdateErrorStateCtor, ErrorStateMatcher, mixinErrorState } from '../../../common';
+import { NovoFieldControl } from '../../../field';
 import { NovoFile } from './extras/file/File';
 
 // Value accessor for the component (supports ngModel)
-const FILE_VALUE_ACCESSOR = {
-  provide: NG_VALUE_ACCESSOR,
-  useExisting: forwardRef(() => NovoFileInputElement),
-  multi: true,
-};
+// const FILE_VALUE_ACCESSOR = {
+//   provide: NG_VALUE_ACCESSOR,
+//   useExisting: forwardRef(() => NovoFileInputElement),
+//   multi: true,
+// };
 
 const LAYOUT_DEFAULTS = { order: 'default', download: true, removable: true, labelStyle: 'default', draggable: false };
+// make file-input ids unique
+let nextId = 0;
+
+class NovoFileInputBase {
+  constructor(
+    public _defaultErrorStateMatcher: ErrorStateMatcher,
+    public _parentForm: NgForm,
+    public _parentFormGroup: FormGroupDirective,
+    public ngControl: NgControl,
+  ) {}
+}
+const NovoFileInputMixins: CanUpdateErrorStateCtor & typeof NovoFileInputBase = mixinErrorState(NovoFileInputBase);
 
 @Component({
   selector: 'novo-file-input',
-  providers: [FILE_VALUE_ACCESSOR],
+  providers: [{ provide: NovoFieldControl, useExisting: NovoFileInputElement }],
   template: `
     <div #container></div>
     <ng-template #fileInput>
@@ -139,7 +156,32 @@ const LAYOUT_DEFAULTS = { order: 'default', download: true, removable: true, lab
     </ng-template>
   `,
 })
-export class NovoFileInputElement implements ControlValueAccessor, OnInit, OnDestroy, OnChanges {
+export class NovoFileInputElement
+  extends NovoFileInputMixins
+  implements NovoFieldControl<any>, ControlValueAccessor, OnInit, OnDestroy, OnChanges
+{
+  private _uniqueId: string = `novo-file-input-${++nextId}`;
+  /** The aria-describedby attribute on the chip list for improved a11y. */
+  _ariaDescribedby: string;
+  /** Tab index for the chip list. */
+  _tabIndex = 0;
+  /** User defined tab index. */
+  _userTabIndex: number | null = null;
+  /** The FocusKeyManager which handles focus. */
+  _keyManager: FocusKeyManager<NovoFileInputElement>;
+
+  readonly controlType: string = 'file-input';
+  /** @docs-private Implemented as part of NovoFieldControl. */
+  lastKeyValue: string = null;
+  /** @docs-private Implemented as part of NovoFieldControl.*/
+  lastCaretPosition: number | null;
+
+  @Input() id: string = this._uniqueId;
+  @Input() tabindex: number = 0;
+  /** An object used to control when error messages are shown. */
+  @Input() errorStateMatcher: ErrorStateMatcher;
+
+  // ----------
   @ViewChild('fileInput', { static: true })
   fileInput: TemplateRef<any>;
   @ViewChild('fileOutput', { static: true })
@@ -148,13 +190,8 @@ export class NovoFileInputElement implements ControlValueAccessor, OnInit, OnDes
   container: ViewContainerRef;
 
   @Input()
-  name: string;
-  @Input()
   multiple: boolean = false;
-  @Input()
-  disabled: boolean = false;
-  @Input()
-  placeholder: string;
+
   @Input()
   layoutOptions: {
     order?: string;
@@ -190,10 +227,68 @@ export class NovoFileInputElement implements ControlValueAccessor, OnInit, OnDes
   target: any;
   fileOutputBag: string;
 
-  onModelChange: Function = () => { };
-  onModelTouched: Function = () => { };
+  onModelChange: Function = () => {};
+  onModelTouched: Function = () => {};
 
-  constructor(private element: ElementRef, public labels: NovoLabelService, private dragula: NovoDragulaService) {
+  @Input()
+  get name(): string {
+    return this._name;
+  }
+
+  set name(value: string) {
+    this._name = value;
+  }
+
+  @HostBinding('class.disabled')
+  @Input()
+  get disabled(): boolean {
+    return this.ngControl ? !!this.ngControl.disabled : this._disabled;
+  }
+  set disabled(value: boolean) {
+    this._disabled = coerceBooleanProperty(value);
+  }
+
+  /**
+   * Implemented as part of NovoFieldControl.
+   * @docs-private
+   */
+  @Input()
+  get required(): boolean {
+    return this._required;
+  }
+  set required(value: boolean) {
+    this._required = coerceBooleanProperty(value);
+    this.stateChanges.next();
+  }
+
+  /** Implemented as part of NovoFieldControl. */
+  @Input()
+  get placeholder(): string {
+    return this._placeholder;
+  }
+  set placeholder(value: string) {
+    this._placeholder = value;
+  }
+
+  protected _name: string = this._uniqueId;
+  protected _value: boolean = false;
+  protected _required: boolean = false;
+  protected _disabled: boolean = false;
+  protected _placeholder: string;
+
+  constructor(
+    private element: ElementRef,
+    public labels: NovoLabelService,
+    private dragula: NovoDragulaService,
+    _defaultErrorStateMatcher: ErrorStateMatcher,
+    @Optional() _parentForm: NgForm,
+    @Optional() _parentFormGroup: FormGroupDirective,
+    @Optional() @Self() _ngControl: NgControl,
+  ) {
+    super(_defaultErrorStateMatcher, _parentForm, _parentFormGroup, _ngControl);
+    if (_ngControl) {
+      _ngControl.valueAccessor = this;
+    }
     this.commands = {
       dragenter: this.dragEnterHandler.bind(this),
       dragleave: this.dragLeaveHandler.bind(this),
@@ -216,7 +311,8 @@ export class NovoFileInputElement implements ControlValueAccessor, OnInit, OnDes
     ['dragenter', 'dragleave', 'dragover', 'drop'].forEach((type) => {
       this.element.nativeElement.removeEventListener(type, this.commands[type]);
     });
-    const dragulaHasFileOutputBag = this.dragula.bags.length > 0 && this.dragula.bags.filter((x) => x.name === this.fileOutputBag).length > 0;
+    const dragulaHasFileOutputBag =
+      this.dragula.bags.length > 0 && this.dragula.bags.filter((x) => x.name === this.fileOutputBag).length > 0;
     if (dragulaHasFileOutputBag) {
       this.dragula.destroy(this.fileOutputBag);
     }
@@ -233,7 +329,7 @@ export class NovoFileInputElement implements ControlValueAccessor, OnInit, OnDes
 
   insertTemplatesBasedOnLayout() {
     let order;
-    switch (this.layoutOptions['order']) {
+    switch (this.layoutOptions.order) {
       case 'displayFilesBelow':
         order = ['fileInput', 'fileOutput'];
         break;
@@ -343,7 +439,10 @@ export class NovoFileInputElement implements ControlValueAccessor, OnInit, OnDes
   }
 
   remove(file) {
-    this.files.splice(this.files.findIndex((f) => f.name === file.name && f.size === file.size), 1);
+    this.files.splice(
+      this.files.findIndex((f) => f.name === file.name && f.size === file.size),
+      1,
+    );
     this.model = this.files;
     this.onModelChange(this.model);
   }
@@ -370,5 +469,42 @@ export class NovoFileInputElement implements ControlValueAccessor, OnInit, OnDes
 
   setDisabledState(disabled: boolean): void {
     this.disabled = disabled;
+  }
+
+  /** Whether any radio buttons has focus. */
+  get focused(): boolean {
+    // todo: implement this.
+    return false;
+  }
+
+  /** Implemented as part of NovoFieldControl. */
+  get empty(): boolean {
+    return this.value === null;
+  }
+
+  /** Implemented as part of NovoFieldControl. */
+  get shouldLabelFloat(): boolean {
+    return !this.empty || this.focused;
+  }
+
+  /** Implemented as part of NovoFieldControl. */
+  setDescribedByIds(ids: string[]) {
+    this._ariaDescribedby = ids.join(' ');
+  }
+
+  /** Implemented as part of NovoFieldControl. */
+  onContainerClick(event: MouseEvent) {
+    this.focus();
+  }
+
+  /**
+   * Focuses the first non-disabled chip in this chip list, or the associated input when there
+   * are no eligible chips.
+   */
+  focus(options?: FocusOptions): void {
+    if (this.disabled) {
+      return;
+    }
+    // TODO
   }
 }

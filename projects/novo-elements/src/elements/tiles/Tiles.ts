@@ -1,18 +1,18 @@
 // NG2
 import {
+  AfterContentInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
-  Input,
-  SimpleChanges,
-  Output,
+  ElementRef,
   EventEmitter,
   forwardRef,
-  ElementRef,
-  AfterContentInit,
+  Input,
   OnChanges,
-  ChangeDetectorRef,
-  ChangeDetectionStrategy,
+  Output,
+  SimpleChanges,
 } from '@angular/core';
-import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 // APP
 import { Helpers } from '../../utils/Helpers';
 
@@ -90,7 +90,7 @@ export class NovoTilesElement implements ControlValueAccessor, AfterContentInit,
   }
 
   ngOnChanges(change: SimpleChanges) {
-    if (change['options'] && change['options'].currentValue && !change['options'].firstChange) {
+    if (change.options && change.options.currentValue && !change.options.firstChange) {
       this.name = this.name || '';
       this._options = [];
       this.setupOptions();

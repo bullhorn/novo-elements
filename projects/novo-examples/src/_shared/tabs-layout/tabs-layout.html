@@ -1,0 +1,10 @@
+<novo-title size="3xl" mb="lg">{{title}}</novo-title>
+
+<ng-template #dynamic></ng-template>
+
+<novo-nav class="docs-page-nav" borderBottom="1px solid var(--border)" marginBottom="2rem">
+  <novo-tab-link *ngFor="let page of pages" [routerLink]="[page.route]">{{page.title}}
+  </novo-tab-link>
+</novo-nav>
+
+<router-outlet></router-outlet>

@@ -1,6 +1,19 @@
 // NG2
-import { Component, EventEmitter, forwardRef, Input, Output, OnInit, OnChanges, SimpleChanges } from '@angular/core';
-import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
+import {
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  EventEmitter,
+  forwardRef,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { format, isValid, parse } from 'date-fns';
+import { DateFormatService, NovoLabelService } from '../../services';
 // APP
 import { Helpers } from './../../utils/Helpers';
 
@@ -11,48 +24,99 @@ const TIME_PICKER_VALUE_ACCESSOR = {
   multi: true,
 };
 
+export enum TIME_VALUE_FORMATS {
+  iso8601 = 'iso8601',
+  Date = 'Date',
+}
+
 @Component({
   selector: 'novo-time-picker',
   providers: [TIME_PICKER_VALUE_ACCESSOR],
   template: `
-        <div class="digital" [class.inline]="inline" [class.military]="military">
-            <div class="digital--inner">
-                <span class="digital--clock" *ngIf="!inline">
-                    <span class="hours" data-automation-id="novo-time-picker-hours">{{hours}}</span>:<span class="minutes" data-automation-id="novo-time-picker-minutes">{{minutes}}</span>
-                </span>
-                <div class="control-block" *ngIf="!military">
-                    <span *ngFor="let period of MERIDIANS" class="digital--period" [class.active]="meridian==period" (click)="setPeriod($event, period, true)" [attr.data-automation-id]="period">{{period}}</span>
-                </div>
-            </div>
+    <!-- <div class="digital" [class.inline]="inline" [class.military]="military" *ngIf="inline">
+      <div class="digital--inner">
+        <span class="digital--clock" *ngIf="analog">
+          <span class="hours" data-automation-id="novo-time-picker-hours">{{ hours }}</span
+          >:<span class="minutes" data-automation-id="novo-time-picker-minutes">{{ minutes }}</span>
+        </span>
+        <div class="control-block" *ngIf="!military && analog">
+          <span
+            *ngFor="let period of MERIDIANS"
+            class="digital--period"
+            [class.active]="meridian == period"
+            (click)="setPeriod($event, period, true)"
+            [attr.data-automation-id]="period"
+            >{{ period }}</span
+          >
         </div>
-        <div class="increments" *ngIf="!analog">
-            <novo-list direction="vertical" data-automation-id="novo-time-picker-increments">
-                <novo-list-item *ngFor="let increment of increments" (click)="setValue($event, increment)" [class.active]="increment==selected" [attr.data-automation-id]="increment">
-                    <item-content>{{increment}}</item-content>
-                    <i *ngIf="increment==selected" class="bhi-check"></i>
-                </novo-list-item>
-            </novo-list>
+      </div>
+    </div> -->
+    <div class="increments" *ngIf="!analog">
+      <novo-list direction="vertical" data-automation-id="novo-time-picker-increments">
+        <novo-list-item
+          *ngFor="let increment of HOURS"
+          (click)="setHours($event, increment, true)"
+          [class.active]="increment == activeHour"
+          [attr.data-automation-id]="increment"
+        >
+          <item-content>{{ increment }}</item-content>
+        </novo-list-item>
+      </novo-list>
+      <novo-list direction="vertical" data-automation-id="novo-time-picker-increments">
+        <novo-list-item
+          *ngFor="let increment of MINUTES"
+          (click)="setMinutes($event, increment, true)"
+          [class.active]="increment == activeMinute"
+          [attr.data-automation-id]="increment"
+        >
+          <item-content>{{ increment }}</item-content>
+        </novo-list-item>
+      </novo-list>
+      <novo-list direction="vertical" *ngIf="!military" data-automation-id="novo-time-picker-meridians">
+        <novo-list-item
+          *ngFor="let period of MERIDIANS"
+          (click)="setPeriod($event, period, true)"
+          [class.active]="meridian == period"
+          [attr.data-automation-id]="period"
+        >
+          <item-content>{{ period }}</item-content>
+        </novo-list-item>
+      </novo-list>
+    </div>
+    <div class="analog" *ngIf="analog">
+      <div class="analog--inner">
+        <div class="analog--face">
+          <span class="analog--center"></span>
+          <span class="analog--hand--hours" [ngClass]="hoursClass">
+            <span class="analog--ball"></span>
+          </span>
+          <span class="analog--hand--minutes" [ngClass]="minutesClass">
+            <span class="analog--ball" [ngClass]="{ between: inBetween }"></span>
+          </span>
         </div>
-        <div class="analog" *ngIf="analog">
-            <div class="analog--inner">
-                <div class="analog--face">
-                    <span class="analog--center"></span>
-                    <span class="analog--hand--hours" [ngClass]="hoursClass">
-                        <span class="analog--ball"></span>
-                    </span>
-                    <span class="analog--hand--minutes" [ngClass]="minutesClass">
-                        <span class="analog--ball" [ngClass]="{between: inBetween}"></span>
-                    </span>
-                </div>
-                <div class="analog--hours">
-                    <span *ngFor="let hour of HOURS" class="analog--hour" [ngClass]="{active: activeHour == hour}" (click)="setHours($event, hour, true)" [attr.data-automation-id]="hour">{{hour}}</span>
-                </div>
-                <div class="analog--minutes">
-                    <span *ngFor="let minute of MINUTES" class="analog--minute" [ngClass]="{active: activeMinute == minute}" (click)="setMinutes($event, minute, true)" [attr.data-automation-id]="minute">{{minute}}</span>
-                </div>
-            </div>
+        <div class="analog--hours">
+          <span
+            *ngFor="let hour of HOURS"
+            class="analog--hour"
+            [ngClass]="{ active: activeHour == hour }"
+            (click)="setHours($event, hour, true)"
+            [attr.data-automation-id]="hour"
+            >{{ hour }}</span
+          >
         </div>
-    `,
+        <div class="analog--minutes">
+          <span
+            *ngFor="let minute of MINUTES"
+            class="analog--minute"
+            [ngClass]="{ active: activeMinute == minute }"
+            (click)="setMinutes($event, minute, true)"
+            [attr.data-automation-id]="minute"
+            >{{ minute }}</span
+          >
+        </div>
+      </div>
+    </div>
+  `,
   host: {
     '[class.military]': 'military',
   },
@@ -64,6 +128,9 @@ export class NovoTimePickerElement implements ControlValueAccessor, OnInit, OnCh
   analog: boolean = false;
   @Input()
   inline: boolean = false;
+  @Input()
+  step: number = 1;
+
   @Output()
   onSelect: EventEmitter<any> = new EventEmitter();
 
@@ -88,16 +155,21 @@ export class NovoTimePickerElement implements ControlValueAccessor, OnInit, OnCh
   flatten(arr) {
     return Array.prototype.concat(...arr);
   }
+
+  constructor(
+    public element: ElementRef,
+    public labels: NovoLabelService,
+    public dateFormatService: DateFormatService,
+    protected cdr: ChangeDetectorRef,
+  ) {}
+
   ngOnInit() {
     if (this.military) {
       this.HOURS = ['0', ...this.HOURS, '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23'];
-      this.increments = this.flatten([...this.HOURS.map((hour) => [`${hour}:00`, `${hour}:15`, `${hour}:30`, `${hour}:45`])]);
-    } else {
-      const hours: Array<string> = ['12', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11'];
-      this.increments = this.flatten([
-        ...hours.map((hour) => [`${hour}:00 AM`, `${hour}:15 AM`, `${hour}:30 AM`, `${hour}:45 AM`]),
-        ...hours.map((hour) => [`${hour}:00 PM`, `${hour}:15 PM`, `${hour}:30 PM`, `${hour}:45 PM`]),
-      ]);
+    }
+    if (!this.analog) {
+      const mins = Array.from(Array(60 / this.step).keys()).map((i) => i * this.step);
+      this.MINUTES = mins.map((m) => `${m}`.padStart(2, '0'));
     }
     this.ngOnChanges();
   }
@@ -210,6 +282,15 @@ export class NovoTimePickerElement implements ControlValueAccessor, OnInit, OnCh
     this.model = model;
     if (Helpers.isDate(model)) {
       this.init(model, false);
+      // this.dispatchChange();
+    }
+    if (Helpers.isString(model)) {
+      const time = this.military ? model : this.convertTime12to24(model);
+      const date = parse(`${format(Date.now(), 'YYYY-MM-DD')}T${time}`);
+      if (isValid(date)) {
+        this.init(date, false);
+        // this.dispatchChange();
+      }
     }
   }
 
@@ -219,5 +300,19 @@ export class NovoTimePickerElement implements ControlValueAccessor, OnInit, OnCh
 
   registerOnTouched(fn: Function): void {
     this._onTouched = fn;
+  }
+
+  convertTime12to24(time12h: string) {
+    const pmFormat = this.labels.timeFormatPM.toUpperCase();
+
+    const [time, modifier] = time12h.split(' ');
+    let [hours, minutes] = time.split(':');
+    if (hours === '12') {
+      hours = '00';
+    }
+    if (['PM', pmFormat].includes(modifier)) {
+      hours = `${parseInt(hours, 10) + 12}`.padStart(2, '0');
+    }
+    return `${hours}:${minutes}`;
   }
 }

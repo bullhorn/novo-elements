@@ -1,15 +1,16 @@
 // NG2
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { NovoButtonModule } from '../button/Button.module';
+import { NovoIconModule } from '../icon';
 // APP
 import { NovoLoadingModule } from '../loading/Loading.module';
-import { NovoButtonModule } from '../button/Button.module';
 import { NovoTooltipModule } from '../tooltip/Tooltip.module';
-import { CardElement, CardActionsElement } from './Card';
+import { CardActionsElement, CardContentElement, CardElement, CardFooterElement, CardHeaderElement } from './Card';
 
 @NgModule({
-  imports: [CommonModule, NovoButtonModule, NovoLoadingModule, NovoTooltipModule],
-  declarations: [CardElement, CardActionsElement],
-  exports: [CardElement, CardActionsElement],
+  imports: [CommonModule, NovoIconModule, NovoButtonModule, NovoLoadingModule, NovoTooltipModule],
+  declarations: [CardElement, CardActionsElement, CardContentElement, CardHeaderElement, CardFooterElement],
+  exports: [CardElement, CardActionsElement, CardContentElement, CardHeaderElement, CardFooterElement],
 })
 export class NovoCardModule {}

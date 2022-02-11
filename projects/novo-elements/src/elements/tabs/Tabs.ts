@@ -1,5 +1,19 @@
 // NG2
-import { Component, Input, EventEmitter, Output, HostBinding } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  EventEmitter,
+  HostBinding,
+  Input,
+  OnInit,
+  Optional,
+  Output,
+  ViewChild,
+} from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
+import { BooleanInput } from '../../utils';
 
 @Component({
   selector: 'novo-nav',
@@ -16,36 +30,25 @@ export class NovoNavElement {
   router: string;
   @HostBinding('class.condensed')
   @Input()
+  @BooleanInput()
   condensed: boolean = false;
 
   items: Array<any> = [];
 
-  select(item) {
-    /**
-     * Deactivate all other tabs
-     */
-    function _deactivateAllItems(items) {
-      items.forEach((t) => {
-        if (t.active === true) {
-          // t.deselected.next();
-        }
-        t.active = false;
-      });
-    }
+  /** The index of the active tab. */
+  @Input()
+  get selectedIndex(): number | null {
+    return this._selectedIndex;
+  }
 
-    _deactivateAllItems(this.items);
+  private _selectedIndex: number | null = null;
+
+  select(item) {
+    // Deactivate all other tabs
+    this._deactivateAllItems(this.items);
     item.active = true;
     if (this.outlet) {
       this.outlet.show(this.items.indexOf(item));
-    }
-
-    // TODO - remove hack to make DOM rerender - jgodi
-    const element = document.querySelector('novo-tab-link.active span.indicator') as any;
-    if (element) {
-      element.style.opacity = 0.99;
-      setTimeout(() => {
-        element.style.opacity = 1;
-      }, 10);
     }
   }
 
@@ -56,6 +59,15 @@ export class NovoNavElement {
     }
     this.items.push(item);
   }
+
+  private _deactivateAllItems(items: Array<any>) {
+    items.forEach((t) => {
+      if (t.active === true) {
+        // t.deselected.next();
+      }
+      t.active = false;
+    });
+  }
 }
 
 @Component({
@@ -64,27 +76,53 @@ export class NovoNavElement {
     '(click)': 'select()',
     '[class.active]': 'active',
     '[class.disabled]': 'disabled',
+    '[attr.role]': 'tab',
   },
   template: `
-        <div class="novo-tab-link">
-            <ng-content></ng-content>
-        </div>
-        <span class="indicator"></span>
-   `,
+    <div #tablink class="novo-tab-link">
+      <ng-content></ng-content>
+    </div>
+    <span class="indicator"></span>
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NovoTabElement {
+  @HostBinding('attr.role')
+  public role = 'tab';
+
   @Input()
   active: boolean = false;
+
   @Input()
+  color: string;
+
+  @Input()
+  @BooleanInput()
   disabled: boolean = false;
+
   @Output()
   activeChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
+  onlyText = true;
+  @HostBinding('class.text-only')
+  get hb_textOnly() {
+    return this.onlyText;
+  }
+
+  @ViewChild('tablink')
+  tablink;
+
   nav: any;
 
-  constructor(nav: NovoNavElement) {
+  constructor(nav: NovoNavElement, private el: ElementRef, private cdr: ChangeDetectorRef) {
     this.nav = nav;
     this.nav.add(this);
+    const tablink = el.nativeElement.querySelector('.novo-tab-link');
+    if (tablink) {
+      for (let i = 0; i < tablink.childNodes.length; i++) {
+        if (tablink.childNodes[i].nodeType !== Node.TEXT_NODE) this.onlyText = false;
+      }
+    }
   }
 
   select() {
@@ -92,6 +130,7 @@ export class NovoTabElement {
       this.activeChange.emit(true);
       this.nav.select(this);
     }
+    this.cdr.detectChanges();
   }
 }
 
@@ -105,6 +144,8 @@ export class NovoTabElement {
   template: '<ng-content></ng-content>',
 })
 export class NovoTabButtonElement {
+  @HostBinding('attr.role')
+  public role = 'tab';
   @Input()
   active: boolean = false;
   @Input()
@@ -132,29 +173,48 @@ export class NovoTabButtonElement {
     '[class.disabled]': 'disabled',
   },
   template: `
-        <div class="novo-tab-link">
-            <ng-content></ng-content>
-        </div>
-        <span class="indicator"></span>
-    `,
+    <div class="novo-tab-link">
+      <ng-content></ng-content>
+    </div>
+    <span class="indicator"></span>
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NovoTabLinkElement {
+export class NovoTabLinkElement implements OnInit {
+  @HostBinding('attr.role')
+  public role = 'tab';
   @Input()
   active: boolean = false;
   @Input()
   disabled: boolean = false;
+  @Input()
+  spy: string;
 
   nav: any;
 
-  constructor(nav: NovoNavElement) {
+  constructor(nav: NovoNavElement, private router: Router, private cdr: ChangeDetectorRef, @Optional() private link?: RouterLink) {
     this.nav = nav;
     this.nav.add(this);
+  }
+
+  ngOnInit(): void {
+    if (this.isLinkActive(this.link)) {
+      this.nav.select(this);
+    }
   }
 
   select() {
     if (!this.disabled) {
       this.nav.select(this);
+      if (this.spy) {
+        const el = document.querySelector(`#${this.spy}`);
+        el?.scrollIntoView(true);
+      }
     }
+  }
+
+  private isLinkActive(link: RouterLink) {
+    return link && link.urlTree ? this.router.isActive(link.urlTree, false) : false;
   }
 }
 
@@ -218,6 +278,8 @@ export class NovoNavContentElement {
   template: '<ng-content></ng-content>',
 })
 export class NovoNavHeaderElement {
+  @HostBinding('attr.role')
+  public role = 'tabpanel';
   @Input()
   active: boolean = false;
   @Input('for')

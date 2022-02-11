@@ -1,10 +1,10 @@
 // NG2
 import { async, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
-// App
-import { Pagination } from './Pagination';
 import { NovoLabelService } from '../../../../services/novo-label-service';
 import { NovoSelectModule } from '../../../select/Select.module';
+// App
+import { Pagination } from './Pagination';
 
 describe('Elements: NovoTable', () => {
   let fixture;

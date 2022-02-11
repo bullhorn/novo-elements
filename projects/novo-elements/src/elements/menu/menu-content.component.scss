@@ -1,0 +1,62 @@
+@import "../../styles/variables.scss";
+@import "../common/typography/text.mixins";
+
+:host {
+  .passive {
+    display: block;
+    padding: 3px 20px;
+    clear: both;
+    font-weight: normal;
+    white-space: nowrap;
+  }
+
+  .menu-container {
+    width: 180px;
+    .menu {
+      cursor: default;
+      list-style: none;
+      background-color: var(--background-bright);
+      padding-inline-start: 0px !important;
+      box-shadow: $shadow-multi;
+      :hover {
+        background: rgba($ocean, 0.1);
+        color: $dark;
+      }
+      :active {
+        background: rgba($ocean, 0.4);
+      }
+      .menu-item-container {
+        display: flex;
+        align-items: center;
+        position: relative;
+        .sub-menu-caret {
+          position: absolute;
+          right: $spacing-sm;
+        }
+      }
+
+      .menu-item {
+        @include novo-body-text();
+        cursor: pointer;
+        margin: 0;
+        padding: $spacing-md $spacing-md $spacing-md $spacing-lg;
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        flex: 1;
+      }
+      .divider {
+        order: none;
+        height: 1px;
+        background: $silver;
+      }
+      a {
+        &.disabled {
+          color: $disabled;
+          cursor: not-allowed;
+        }
+      }
+    }
+  }
+}

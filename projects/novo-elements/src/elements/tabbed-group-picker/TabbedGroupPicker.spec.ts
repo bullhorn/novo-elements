@@ -1,10 +1,10 @@
 // NG2
 import { async, TestBed } from '@angular/core/testing';
-// App
-import { NovoTabbedGroupPickerElement, TabbedGroupPickerTab, TabbedGroupPickerQuickSelect } from './TabbedGroupPicker';
-import { NovoTabbedGroupPickerModule } from './TabbedGroupPicker.module';
-import { ComponentUtils } from '../../utils/component-utils/ComponentUtils';
 import { NovoLabelService } from '../../services/novo-label-service';
+import { ComponentUtils } from '../../utils/component-utils/ComponentUtils';
+// App
+import { NovoTabbedGroupPickerElement, TabbedGroupPickerQuickSelect, TabbedGroupPickerTab } from './TabbedGroupPicker';
+import { NovoTabbedGroupPickerModule } from './TabbedGroupPicker.module';
 
 describe('Elements: NovoTabbedGroupPickerElement', () => {
   let fixture;
@@ -16,8 +16,8 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
     valueField: 'chickenId',
     labelField: 'bwaack',
     data: [
-      ({ chickenId: 3, bwaack: 'bwock?' } as unknown) as { selected?: boolean },
-      ({ chickenId: 4, bwaack: 'baa bock' } as unknown) as { selected?: boolean },
+      { chickenId: 3, bwaack: 'bwock?' } as unknown as { selected?: boolean },
+      { chickenId: 4, bwaack: 'baa bock' } as unknown as { selected?: boolean },
     ],
   });
 
@@ -84,10 +84,11 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
       const tabs = tabNames.map((typeName, i) => ({
         typeName,
         labelField: labelFieldNames[i], // search/filter only looks at labelField
+        data: null,
       }));
       tabs.forEach((tab) => {
         const { labelField } = tab;
-        tab['data'] = Array(1000)
+        tab.data = Array(1000)
           .fill(0)
           .map((n, i) => ({
             [labelField]: turnNumbersIntoLetters(`${labelField}${i}`),
@@ -114,7 +115,10 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
         {
           id: 5,
           name: 'Allosaurus',
-          children: [{ chickenId: 3, bwaack: 'bwock?' }, { chickenId: 4, bwaack: 'tweeet' }],
+          children: [
+            { chickenId: 3, bwaack: 'bwock?' },
+            { chickenId: 4, bwaack: 'tweeet' },
+          ],
         },
       ];
       component.tabs = [
@@ -129,12 +133,12 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
         },
       ];
       const chicken = component.tabs[0].data[0];
-      let childOfAllosaurus = component.tabs[1].data[0]['children'][0];
+      let childOfAllosaurus = component.tabs[1].data[0].children[0];
       expect(childOfAllosaurus).not.toBe(chicken);
 
       component.createChildrenReferences();
 
-      childOfAllosaurus = component.tabs[1].data[0]['children'][0];
+      childOfAllosaurus = component.tabs[1].data[0].children[0];
       expect(childOfAllosaurus).toBe(chicken);
     });
   });
@@ -149,11 +153,11 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
           labelField: 'name',
           childTypeName: 'chickens',
           data: [
-            ({
+            {
               id: 5,
               name: 'Allosaurus',
-              children: [({ chickenId: 3, bwaack: 'bwock?' } as unknown) as { selected?: boolean }],
-            } as unknown) as { selected?: boolean },
+              children: [{ chickenId: 3, bwaack: 'bwock?' } as unknown as { selected?: boolean }],
+            } as unknown as { selected?: boolean },
           ],
         },
       ];
@@ -177,12 +181,12 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
           labelField: 'name',
           childTypeName: 'chickens',
           data: [
-            ({
+            {
               selected: true,
               id: 5,
               name: 'Allosaurus',
               children: [...getChickenTab().data],
-            } as unknown) as { selected?: boolean },
+            } as unknown as { selected?: boolean },
           ],
         },
       ];
@@ -202,12 +206,12 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
         labelField: 'name',
         childTypeName: 'chickens',
         data: [
-          ({
+          {
             selected: true,
             id: 5,
             name: 'Allosaurus',
             children: [...getChickenTab().data],
-          } as unknown) as { selected?: boolean; indeterminate?: boolean },
+          } as unknown as { selected?: boolean; indeterminate?: boolean },
         ],
       };
       component.tabs = [
@@ -230,24 +234,36 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
   });
   describe('function: getSelectedValue', () => {
     it('should return indeterminate if one value is selected', () => {
-      const childArray = [{ id: 1, name: 'Scout', selected: true }, { id: 2, name: 'Atticus' }];
+      const childArray = [
+        { id: 1, name: 'Scout', selected: true },
+        { id: 2, name: 'Atticus' },
+      ];
       const result = component.getSelectedState(childArray);
       expect(result).toEqual('indeterminate');
     });
     it('should return selected if every element of the child array is selected', () => {
-      const childArray = [{ id: 1, name: 'Scout', selected: true }, { id: 2, name: 'Atticus', selected: true }];
+      const childArray = [
+        { id: 1, name: 'Scout', selected: true },
+        { id: 2, name: 'Atticus', selected: true },
+      ];
       const result = component.getSelectedState(childArray);
       expect(result).toEqual('selected');
     });
     it('should return undefined if none of the items in the child array are selected', () => {
-      const childArray = [{ id: 1, name: 'Scout' }, { id: 2, name: 'Atticus' }];
+      const childArray = [
+        { id: 1, name: 'Scout' },
+        { id: 2, name: 'Atticus' },
+      ];
       const result = component.getSelectedState(childArray as any);
       expect(result).toEqual(undefined);
     });
   });
   describe('function: updateParentsAndQuickSelect', () => {
     it('should select each item in the quick select group', () => {
-      const data = [{ id: 1, name: 'chicken', selected: true }, { id: 2, name: 'goldfish' }];
+      const data = [
+        { id: 1, name: 'chicken', selected: true },
+        { id: 2, name: 'goldfish' },
+      ];
       const quickSelectItem: TabbedGroupPickerQuickSelect = { childTypeName: 'animals', children: [1], label: 'chicken' };
       component.quickSelectConfig = {
         label: 'Quick Select',
@@ -320,7 +336,10 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
       expect(allAreSelected).toBe(true);
     });
     it('should select each item in the quick select group', () => {
-      const data = [{ id: 1, name: 'chicken', selected: false }, { id: 2, name: 'goldfish', selected: false }];
+      const data = [
+        { id: 1, name: 'chicken', selected: false },
+        { id: 2, name: 'goldfish', selected: false },
+      ];
       const quickSelectItem: TabbedGroupPickerQuickSelect = {
         childTypeName: 'animals',
         children: [data[0]],
@@ -343,7 +362,10 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
       expect(goldfish.selected).toEqual(false);
     });
     it('should unselect each item in the quick select group', () => {
-      const data = [{ id: 1, name: 'chicken', selected: true }, { id: 2, name: 'goldfish' }];
+      const data = [
+        { id: 1, name: 'chicken', selected: true },
+        { id: 2, name: 'goldfish' },
+      ];
       const quickSelectItem: TabbedGroupPickerQuickSelect = {
         childTypeName: 'animals',
         children: [data[0]],
@@ -390,7 +412,10 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
         {
           id: 5,
           name: 'Allosaurus',
-          children: [{ chickenId: 3, bwaack: 'bwock?' }, { chickenId: 4, bwaack: 'tweeet' }],
+          children: [
+            { chickenId: 3, bwaack: 'bwock?' },
+            { chickenId: 4, bwaack: 'tweeet' },
+          ],
         },
       ];
       component.tabs = [
@@ -415,7 +440,7 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
 
       const indeterminateGroup = component.tabs[1].data[0];
       expect(indeterminateGroup.selected).toBeFalsy();
-      expect(indeterminateGroup['indeterminate']).toEqual(true);
+      expect(indeterminateGroup.indeterminate).toEqual(true);
     });
     it('should update the selected status of a group if the only item in the group is selected', () => {
       const chickenTab = getChickenTab();

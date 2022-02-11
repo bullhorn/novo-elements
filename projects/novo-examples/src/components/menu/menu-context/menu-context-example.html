@@ -1,0 +1,10 @@
+<button type="button" theme="secondary" icon="collapse" [menu]="menu" [menuContext]="apple">Apples</button>
+<button type="button" theme="secondary" icon="collapse" [menu]="menu" [menuContext]="orange">Oranges</button>
+<!-- Menu Template -->
+<novo-menu #menu>
+  <novo-option *menuItem="let item" (click)="clickMe(item)">Preview</novo-option>
+  <novo-option *menuItem="let item" (click)="clickMe(item)">Edit</novo-option>
+  <novo-option *menuItem="let item" (click)="clickMe(item)">Delete</novo-option>
+  <novo-option *menuItem="let item" [disabled]="isOrange(item)">Disabled if Orange</novo-option>
+  <novo-option *menuItem="let item;visible:isOrange;">Visible if Orange</novo-option>
+</novo-menu>

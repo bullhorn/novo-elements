@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-
 // Vendor
 import { FormUtils } from 'novo-elements';
 import { MockMetaForDisabledForm } from '../MockMeta';
@@ -95,13 +94,13 @@ export class DisabledFormExample {
           {
             label: 'Value',
             data: (item: any): string => {
-              return item.value['value'];
+              return item.value.value;
             },
           },
           {
             label: 'Description',
             data: (item: any): string => {
-              return item.value['description'];
+              return item.value.description;
             },
           },
         ],

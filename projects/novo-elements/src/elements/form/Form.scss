@@ -1,10 +1,9 @@
-@import './extras/address/Address';
-@import './extras/checkbox/Checkbox';
-@import './extras/file/FileInput';
-@import './ControlGroup';
+@import "./extras/address/Address";
+@import "./extras/file/FileInput";
+@import "./ControlGroup";
 .novo-form-control-label {
-  color: $dark;
-  font-size: 0.9em;
+  color: var(--text-main);
+  font-size: 1.1rem;
   flex: 1;
   max-width: 130px;
   min-width: 130px;
@@ -27,7 +26,7 @@ novo-form {
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  max-width: 715px;
+  max-width: 64rem;
   .novo-form-container {
     display: flex;
     flex-direction: column;
@@ -36,30 +35,25 @@ novo-form {
     width: 100%;
     form {
       width: 100%;
-      novo-fieldset-header {
+
+      .novo-fieldset-header {
         background: $off-white;
         box-sizing: content-box;
-        padding: 1em 1em 1em 3em;
-        margin-bottom: 2em;
+        padding: 1rem 1rem 1rem 2rem;
+        margin-bottom: 2rem;
         display: flex;
-        margin-left: -1.5em;
-        margin-right: -1.5em;
-        i {
-          margin-right: 10px;
-        }
-        h6 {
-          font-weight: 400;
-          padding: 0;
-          display: flex;
-          > i {
-            display: flex;
-            margin-top: -3px; // Icon itself is not centered in the SVG
-          }
+        margin-left: -1.5rem;
+        margin-right: -1.5rem;
+        font-size: 1.8rem;
+        i,
+        novo-icon {
+          margin: 1px 10px 1px 6px;
         }
         &.hidden {
           display: none;
         }
       }
+
       div.novo-form-row,
       div.novo-control-group-control,
       td.novo-form-row {
@@ -130,22 +124,22 @@ novo-form {
           }
           &.disabled {
             input {
-              -webkit-text-fill-color: $dark;
+              -webkit-text-fill-color: var(--text-main);
             }
             input:not(.picker-input):not(.tiles-input) {
-              &::-webkit-input-placeholder {
+              &::placeholder {
                 color: lighten($dark, 30%) !important;
               }
               border-bottom-style: dashed !important;
             }
-            input[type='checkbox']:not(.picker-input):not(.tiles-input) {
+            input[type="checkbox"]:not(.picker-input):not(.tiles-input) {
               border-bottom-style: none !important;
             }
             textarea {
               border-bottom-style: dashed !important;
-              -webkit-text-fill-color: $dark;
+              -webkit-text-fill-color: var(--text-main);
             }
-            div[type='button'] {
+            div[type="button"] {
               border-bottom-style: dashed !important;
               i.bhi-collapse {
                 top: auto;
@@ -353,7 +347,7 @@ novo-form {
                     &.control-disabled:not(.file):not(.editor) {
                       pointer-events: none;
                     }
-                    &[type='picker'] {
+                    &[type="picker"] {
                       align-self: auto;
                     }
                     &.editor {
@@ -369,7 +363,6 @@ novo-form {
                       }
                     }
                     input {
-                      font-size: 1em;
                       background: transparent !important;
                       border: none;
                       border-bottom: 1px solid lighten($dark, 45%);
@@ -382,7 +375,7 @@ novo-form {
                       box-shadow: none;
                       box-sizing: content-box;
                       transition: all 300ms;
-                      color: #26282b;
+                      color: var(--text-main);
                       &:hover {
                         border-bottom: 1px solid lighten($dark, 15%);
                       }
@@ -403,7 +396,6 @@ novo-form {
                       }
                     }
                     textarea {
-                      font-size: 1em;
                       height: 2rem;
                       background: transparent !important;
                       border: none;
@@ -447,12 +439,12 @@ novo-form {
                     > div.novo-control-input-with-label {
                       display: flex;
                       align-items: center;
-                      @supports (not (-moz-appearance:none)) {
+                      @supports (not (-moz-appearance: none)) {
                         input {
                           flex: 1;
                         }
                       }
-                      @supports (-moz-appearance:none) {
+                      @supports (-moz-appearance: none) {
                         input {
                           flex: auto;
                         }
@@ -463,7 +455,6 @@ novo-form {
                       }
                     }
                     > div.novo-control-input-container {
-                      font-size: 1rem;
                       flex: 1;
                       position: relative;
                       > i.bhi-clock,
@@ -473,11 +464,10 @@ novo-form {
                         position: absolute;
                         right: 0;
                         top: 0;
-                        font-size: 1.2em;
+                        font-size: 1.2rem;
                       }
                       > i.bhi-times {
                         cursor: pointer;
-                        font-size: 1.1em;
                       }
                       > novo-time-picker,
                       > novo-date-picker,
@@ -493,7 +483,7 @@ novo-form {
                         display: flex;
                         flex-direction: column;
                         background: #fff;
-                        z-index: 9;
+                        z-index: z(above);
                         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
                         border-bottom-right-radius: 3px;
                         border-bottom-left-radius: 3px;
@@ -601,7 +591,7 @@ novo-form {
               }
             }
             novo-select {
-              > div[type='button'] {
+              > div[type="button"] {
                 color: $light;
                 border-bottom: 1px solid rgba(lighten($dark, 12%), 0.25);
                 &:focus {
@@ -636,7 +626,7 @@ novo-form {
       flex: 4 4 100%;
     }
   }
-  &[layout='vertical'] {
+  &[layout="vertical"] {
     .novo-form-container {
       form {
         div.novo-form-row,
@@ -649,18 +639,18 @@ novo-form {
             }
             &.disabled {
               input:not(.picker-input):not(.tiles-input) {
-                &::-webkit-input-placeholder {
+                &::placeholder {
                   color: lighten($dark, 30%) !important;
                 }
                 border-bottom-style: dashed !important;
               }
-              input[type='checkbox']:not(.picker-input):not(.tiles-input) {
+              input[type="checkbox"]:not(.picker-input):not(.tiles-input) {
                 border-bottom-style: none !important;
               }
               textarea {
                 border-bottom-style: dashed !important;
               }
-              div[type='button'] {
+              div[type="button"] {
                 border-bottom-style: dashed !important;
                 i.bhi-collapse {
                   top: auto;
@@ -747,20 +737,20 @@ novo-form {
                 }
                 > label.novo-control-label {
                   bottom: 20px;
-                  color: $dark;
-                  font-size: 0.9em;
+                  color: var(--text-main);
+                  font-size: 1.1rem;
                   font-weight: 500;
                   text-transform: uppercase;
                   position: absolute;
                   left: 22px;
                   pointer-events: none;
-                  z-index: 1;
-                  width: 100%;
+                  z-index: z(default);
+                  width: calc(100% - 22px);
                   display: block;
                   cursor: text;
                   white-space: nowrap;
                   text-overflow: ellipsis;
-                  overflow-x: hidden;
+                  overflow: hidden;
                   transform: translateY(0);
                   transform-origin: bottom left;
                   transition: transform 400ms cubic-bezier(0.25, 0.8, 0.25, 1), scale 400ms cubic-bezier(0.25, 0.8, 0.25, 1),
@@ -768,7 +758,7 @@ novo-form {
                   &.novo-control-empty {
                     display: block;
                     cursor: text;
-                    top: 7px;
+                    top: 2px;
                     bottom: 0;
                   }
                   &.novo-control-extra-spacing,
@@ -847,17 +837,20 @@ control-prompt-modal {
   }
 }
 
-@keyframes iconEnter {
-  0% {
-    opacity: 0;
-    transform: scale(0.8);
+// Isolate styles
+.novo-fieldset-header {
+  background: $off-white;
+  box-sizing: content-box;
+  padding: 1rem 1rem 1rem 2rem;
+  margin-bottom: 2rem;
+  display: flex;
+  margin-left: -1.5rem;
+  margin-right: -1.5rem;
+  i,
+  novo-icon {
+    margin: 1px 10px 1px 6px;
   }
-  90% {
-    opacity: 1;
-    transform: scale(1.1);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
+  &.hidden {
+    display: none;
   }
 }

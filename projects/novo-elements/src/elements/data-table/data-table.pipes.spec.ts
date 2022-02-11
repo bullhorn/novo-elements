@@ -1,9 +1,9 @@
 // APP
 import {
+  DataTableBigDecimalRendererPipe,
   DateTableDateRendererPipe,
   DateTableDateTimeRendererPipe,
   DateTableTimeRendererPipe,
-  DataTableBigDecimalRendererPipe,
 } from './data-table.pipes';
 
 class MockNovoLabelService {

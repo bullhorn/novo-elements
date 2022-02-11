@@ -82,7 +82,7 @@ export class ActivitySectionExample {
   }
 }
 
-export const TableData = [
+const TableData = [
   {
     name: 'Victoria Cantrell',
     position: 'Integer Corporation',

@@ -1,0 +1,17 @@
+@import "../../../styles/variables.scss";
+
+:host {
+  // Standard Themed Icon
+  &[theme="standard"] {
+    @include theme-backgrounds("color", false);
+    color: $dark;
+    background: $light;
+    &:hover,
+    &:focus {
+      box-shadow: $shadow-2, $shadow-1;
+    }
+    &:active {
+      box-shadow: $shadow-1;
+    }
+  }
+}

@@ -1,4 +1,4 @@
-@import '../../styles/global/variables';
+@import "../../styles/variables";
 
 $novo-horizontal-stepper-header-height: 80px !default;
 $novo-stepper-label-header-height: 24px !default;
@@ -53,14 +53,14 @@ $novo-stepper-line-gap: 8px !default;
       width: 100%;
       position: absolute;
       &:before {
-        content: '';
+        content: "";
         display: block;
         width: calc(50% - 8px);
         margin-right: 8px;
         border-bottom: 1px solid $light;
       }
       &:after {
-        content: '';
+        content: "";
         display: block;
         width: calc(50% - 8px);
         margin-left: calc(50% + 8px);
@@ -84,7 +84,7 @@ $novo-stepper-line-gap: 8px !default;
     .novo-stepper-status-icon {
       position: relative;
       &:before {
-        content: '';
+        content: "";
         display: block;
         background: $white;
         border-radius: 50%;
@@ -97,7 +97,7 @@ $novo-stepper-line-gap: 8px !default;
       }
       & > * {
         position: relative;
-        z-index: 1;
+        z-index: z(default);
       }
     }
   }
@@ -113,7 +113,7 @@ $novo-stepper-line-gap: 8px !default;
   .novo-step-icon-not-touched {
     margin-right: $novo-vertical-stepper-content-margin - $novo-stepper-side-gap;
 
-    [dir='rtl'] & {
+    [dir="rtl"] & {
       margin-right: 0;
       margin-left: $novo-vertical-stepper-content-margin - $novo-stepper-side-gap;
     }
@@ -123,7 +123,7 @@ $novo-stepper-line-gap: 8px !default;
 .novo-horizontal-stepper-content {
   overflow: hidden;
 
-  &[aria-expanded='false'] {
+  &[aria-expanded="false"] {
     height: 0;
   }
 }
@@ -138,7 +138,7 @@ $novo-stepper-line-gap: 8px !default;
   border: 0;
   position: relative;
 
-  [dir='rtl'] & {
+  [dir="rtl"] & {
     margin-left: 0;
     margin-right: $novo-vertical-stepper-content-margin;
   }
@@ -146,17 +146,17 @@ $novo-stepper-line-gap: 8px !default;
 
 .novo-stepper-vertical-line {
   &:before {
-    content: '';
+    content: "";
     position: absolute;
     top: $novo-stepper-line-gap - $novo-stepper-side-gap;
     bottom: $novo-stepper-line-gap - $novo-stepper-side-gap;
     left: 0;
-    z-index: -1;
+    z-index: z(below);
     border-left-width: $novo-stepper-line-width;
     border-left-style: solid;
     border-left-color: $light;
 
-    [dir='rtl'] & {
+    [dir="rtl"] & {
       left: auto;
       right: 0;
     }

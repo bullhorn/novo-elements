@@ -1,5 +1,5 @@
-import { NovoDataTableSortFilter } from './sort-filter.directive';
 import { DataTableState } from '../state/data-table-state.service';
+import { NovoDataTableSortFilter } from './sort-filter.directive';
 
 describe('Directive: sort-filter', () => {
   describe('Function: filter', () => {

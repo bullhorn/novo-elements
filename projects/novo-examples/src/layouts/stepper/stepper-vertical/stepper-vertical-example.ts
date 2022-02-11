@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NovoVerticalStepper, NovoStep } from 'novo-elements';
+import { NovoStep, NovoVerticalStepper } from 'novo-elements';
 
 /**
  * @title Stepper w/ Vertical Layout

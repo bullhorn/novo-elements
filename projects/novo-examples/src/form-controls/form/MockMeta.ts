@@ -6,11 +6,19 @@ export const MockMeta = {
     {
       name: 'firstName',
       type: 'text',
-      label: 'First Name',
+      label: 'Name',
       required: true,
       sortOrder: 10,
       maxLength: 10,
       description: 'First Name, Yo!',
+    },
+    {
+      name: 'lastName',
+      type: 'text',
+      label: 'Name',
+      hint: 'Last Name, Yo!',
+      description: 'Last Name, Yo!',
+      sortOrder: 10,
     },
     {
       name: 'groupedItems',
@@ -33,14 +41,6 @@ export const MockMeta = {
           sortOrder: 20,
         },
       ],
-    },
-    {
-      name: 'lastName',
-      type: 'text',
-      label: 'Last Name',
-      hint: 'Last Name, Yo!',
-      description: 'Last Name, Yo!',
-      sortOrder: 20,
     },
     {
       name: 'number',
@@ -93,6 +93,20 @@ export const MockMeta = {
       label: 'Time',
       required: true,
       sortOrder: 100,
+    },
+    {
+      name: 'native-time',
+      type: 'native-time',
+      label: 'Native Time',
+      required: true,
+      sortOrder: 101,
+    },
+    {
+      name: 'native-datetime-local',
+      type: 'native-datetime-local',
+      label: 'Native Date Time Local',
+      required: true,
+      sortOrder: 102,
     },
     {
       name: 'datetime',
@@ -418,14 +432,6 @@ export const MockMeta = {
       options: ['Morning', 'Day', 'Night', 'Overnight'],
       required: true,
       sortOrder: 610,
-    },
-    {
-      name: 'attachments',
-      type: 'file',
-      label: 'Attachments',
-      multiValue: true,
-      required: true,
-      sortOrder: 630,
     },
     {
       name: 'attachments',
