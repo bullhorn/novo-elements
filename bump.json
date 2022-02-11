@@ -19,7 +19,7 @@
     "type": "ghpages",
     "dir": "dist/demo",
     "prepublish": [
-      "npm run build:examples",
+      "npm run build:examples >/dev/null 2>&1",
       {
         "preset": "angular",
         "app": "demo"
