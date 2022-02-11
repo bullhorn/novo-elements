@@ -56,7 +56,7 @@ export class NovoDataTableCheckboxCell<T> extends CdkCell implements OnInit, OnD
     renderer.addClass(elementRef.nativeElement, 'novo-data-table-checkbox-cell');
 
     this.selectionSubscription = this.dataTable.state.selectionSource.subscribe(() => {
-      this.checked = this.dataTable.isSelected(this.row);
+      this.checked = this.dataTable.isSelected(this.row) || (this.dataTable?.canSelectAll && this.dataTable?.allMatchingSelected);
       this.ref.markForCheck();
     });
     this.resetSubscription = this.dataTable.state.resetSource.subscribe(() => {
@@ -66,12 +66,12 @@ export class NovoDataTableCheckboxCell<T> extends CdkCell implements OnInit, OnD
   }
 
   public ngOnInit(): void {
-    this.checked = this.dataTable.isSelected(this.row);
+    this.checked = this.dataTable.isSelected(this.row) || (this.dataTable?.canSelectAll && this.dataTable?.allMatchingSelected);
   }
 
   public onClick(): void {
     if (!this.isAtLimit) {
-      this.dataTable.selectRow(this.row);
+      this.dataTable.selectRow(this.row, 'onClick');
     }
   }
 

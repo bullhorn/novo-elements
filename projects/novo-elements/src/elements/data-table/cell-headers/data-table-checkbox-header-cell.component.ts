@@ -21,8 +21,6 @@ export class NovoDataTableCheckboxHeaderCell<T> extends CdkHeaderCell implements
   public role = 'columnheader';
   @Input()
   public maxSelected: number = undefined;
-  @Input()
-  public canSelectAll: boolean = false;
 
   public checked: boolean = false;
   private selectionSubscription: Subscription;
@@ -49,8 +47,8 @@ export class NovoDataTableCheckboxHeaderCell<T> extends CdkHeaderCell implements
     renderer.addClass(elementRef.nativeElement, 'novo-data-table-checkbox-header-cell');
 
     this.selectionSubscription = this.dataTable.state.selectionSource.subscribe(() => {
-      this.checked = this.dataTable.allCurrentRowsSelected();
-      if (this.canSelectAll) {
+      this.checked = this.dataTable.allCurrentRowsSelected() || (this.dataTable?.canSelectAll && this.dataTable?.allMatchingSelected);
+      if (this.dataTable?.canSelectAll) {
         this.selectAllChanged();
       }
       this.ref.markForCheck();
@@ -58,15 +56,15 @@ export class NovoDataTableCheckboxHeaderCell<T> extends CdkHeaderCell implements
     this.paginationSubscription = this.dataTable.state.paginationSource.subscribe((event: { isPageSizeChange: boolean }) => {
       if (event.isPageSizeChange) {
         this.checked = false;
-        if (this.canSelectAll) {
+        if (this.dataTable?.canSelectAll) {
           this.selectAllChanged();
         }
         this.dataTable.selectRows(false);
         this.dataTable.state.checkRetainment('pageSize');
         this.dataTable.state.reset(false, true);
       } else {
-        this.checked = this.dataTable.allCurrentRowsSelected();
-        if (this.canSelectAll) {
+        this.checked = this.dataTable.allCurrentRowsSelected() || (this.dataTable?.canSelectAll && this.dataTable?.allMatchingSelected);
+        if (this.dataTable?.canSelectAll) {
           this.selectAllChanged();
         }
       }
@@ -74,7 +72,7 @@ export class NovoDataTableCheckboxHeaderCell<T> extends CdkHeaderCell implements
     });
     this.resetSubscription = this.dataTable.state.resetSource.subscribe(() => {
       this.checked = false;
-      if (this.canSelectAll) {
+      if (this.dataTable?.canSelectAll) {
         this.selectAllChanged();
       }
       this.ref.markForCheck();
@@ -104,7 +102,7 @@ export class NovoDataTableCheckboxHeaderCell<T> extends CdkHeaderCell implements
     } else {
       this.dataTable.selectRows(!this.checked);
     }
-    if (this.canSelectAll) {
+    if (this.dataTable?.canSelectAll) {
       this.selectAllChanged();
     }
   }
@@ -113,6 +111,7 @@ export class NovoDataTableCheckboxHeaderCell<T> extends CdkHeaderCell implements
     const allSelectedEvent = {
       allSelected: this.checked,
       selectedCount: this.dataTable?.state?.selected?.length,
+      allMatchingSelected: this.dataTable?.allMatchingSelected,
     };
     this.dataTable.allSelected.emit(allSelectedEvent);
   }

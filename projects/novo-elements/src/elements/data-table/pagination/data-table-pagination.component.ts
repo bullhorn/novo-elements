@@ -132,6 +132,11 @@ export class NovoDataTablePagination<T> implements OnInit, OnDestroy {
   private _pageSizeOptions = [];
 
   @Input()
+  public canSelectAll: boolean = false;
+  @Input()
+  public allMatchingSelected: boolean = false;
+
+  @Input()
   get length(): number {
     return this._length;
   }
@@ -173,13 +178,13 @@ export class NovoDataTablePagination<T> implements OnInit, OnDestroy {
   }
 
   public selectPage(page) {
-    this.state.checkRetainment('page');
+    this.state.checkRetainment('page', (this.canSelectAll && this.allMatchingSelected));
     this.page = page;
     this.emitPageEvent();
   }
 
   public nextPage(): void {
-    this.state.checkRetainment('page');
+    this.state.checkRetainment('page', (this.canSelectAll && this.allMatchingSelected));
     if (!this.hasNextPage()) {
       return;
     }
@@ -189,7 +194,7 @@ export class NovoDataTablePagination<T> implements OnInit, OnDestroy {
   }
 
   public previousPage(): void {
-    this.state.checkRetainment('page');
+    this.state.checkRetainment('page', (this.canSelectAll && this.allMatchingSelected));
     if (!this.hasPreviousPage()) {
       return;
     }

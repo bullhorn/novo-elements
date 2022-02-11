@@ -69,6 +69,8 @@ import { DataTableState } from './state/data-table-state.service';
         [pageSize]="paginationOptions.pageSize"
         [pageSizeOptions]="paginationOptions.pageSizeOptions"
         [dataFeatureId]="paginatorDataFeatureId"
+        [canSelectAll]="canSelectAll"
+        [allMatchingSelected]="allMatchingSelected"
       >
       </novo-data-table-pagination>
       <div class="novo-data-table-actions" *ngIf="templates['customActions']">
@@ -102,7 +104,6 @@ import { DataTableState } from './state/data-table-state.service';
             <novo-data-table-checkbox-header-cell
               *cdkHeaderCellDef
               [maxSelected]="maxSelected"
-              [canSelectAll]="canSelectAll"
             ></novo-data-table-checkbox-header-cell>
             <novo-data-table-checkbox-cell
               *cdkCellDef="let row; let i = index"
@@ -317,6 +318,7 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   @Input() paginatorDataFeatureId: string;
   @Input() maxSelected: number = undefined;
   @Input() canSelectAll: boolean = false;
+  @Input() allMatchingSelected = false;
 
   @Input()
   set dataTableService(service: IDataTableService<T>) {
@@ -434,6 +436,7 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   private resetSubscription: Subscription;
   private paginationSubscription: Subscription;
   private sortFilterSubscription: Subscription;
+  private allMatchingSelectedSubscription: Subscription;
   private _columns: IDataTableColumn<T>[];
   private scrollListenerHandler: any;
   private initialized: boolean = false;
@@ -476,6 +479,11 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
         this.ref.detectChanges();
       }, 300);
     });
+    this.allMatchingSelectedSubscription = this.state.allMatchingSelectedSource.subscribe(
+      (event: boolean) => {
+        this.allMatchingSelected = event;
+      },
+    );
   }
 
   public modifyCellHeaderMultiSelectFilterOptions(column: string, newOptions: { value: any; label: string }[]): void {
@@ -510,6 +518,9 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
     }
     if (this.sortFilterSubscription) {
       this.sortFilterSubscription.unsubscribe();
+    }
+    if (this.allMatchingSelectedSubscription) {
+      this.allMatchingSelectedSubscription.unsubscribe();
     }
   }
 
@@ -618,14 +629,22 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
     return this.state.selectedRows.has(`${row[this.rowIdentifier]}`);
   }
 
-  public selectRow(row: T): void {
+  public selectRow(row: T, origin?: string): void {
     const selected = this.isSelected(row);
-
     if (selected) {
       this.state.selectedRows.delete(`${row[this.rowIdentifier]}`);
     } else {
-      this.state.selectedRows.set(`${row[this.rowIdentifier]}`, row);
+      if (this.canSelectAll && this.allMatchingSelected && ['onClick'].includes(origin)) {
+        // When all matching records are selected the user could be on another page where all rows only appear selected
+        // Need to reset the rows that are actually selected, select rows on the current page and deselect the chosen record
+        this.state.selectedRows.clear();
+        this.selectRows(true);
+        this.state.selectedRows.delete(`${row[this.rowIdentifier]}`);
+      } else {
+        this.state.selectedRows.set(`${row[this.rowIdentifier]}`, row);
+      }
     }
+    this.state.allMatchingSelectedSource.next(false);
     this.state.onSelectionChange();
   }
 
@@ -641,6 +660,9 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   }
 
   public allCurrentRowsSelected(): boolean {
+    if (this.allMatchingSelected) {
+      return true;
+    }
     if (!this.dataSource?.data?.length) {
       return false;
     }

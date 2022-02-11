@@ -61,7 +61,7 @@ describe('Elements: NovoDataTableCheckboxHeaderCell', () => {
       spyOn(component.toaster, 'alert');
     });
     it('should call dataTable.selectRows if isAtLimit is false', () => {
-      component.canSelectAll = false;
+      component.dataTable.canSelectAll = false;
       component.onClick();
       expect(component.dataTable.selectRows).toHaveBeenCalled();
       expect(component.selectAllChanged).not.toHaveBeenCalled();
@@ -88,19 +88,21 @@ describe('Elements: NovoDataTableCheckboxHeaderCell', () => {
       expect(component.toaster.alert).toHaveBeenCalledWith(expected);
     });
     it('should call selectAllChanged if canSelectAll is true', () => {
-      component.canSelectAll = true;
+      component.dataTable.canSelectAll = true;
       component.onClick();
       expect(component.selectAllChanged).toHaveBeenCalled();
     });
   });
 
-  describe('Method: selectAllChanged(()', () => {
+  describe('Method: selectAllChanged()', () => {
     it('should emit and allSelected event', () => {
       const expected = {
         allSelected: false,
         selectedCount: 3,
+        allMatchingSelected: true,
       };
       component.dataTable = {
+        allMatchingSelected: true,
         state: {
           selected: [{ id: 1 }, { id: 2 }, { id: 3 }],
         },
