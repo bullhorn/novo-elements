@@ -170,20 +170,36 @@ export class NovoTimePickerInputElement implements OnInit, ControlValueAccessor 
 
   _handleKeydown(event: KeyboardEvent): void {
     const input = event.target as HTMLInputElement;
-    if ((event.key === Key.Escape || event.key === Key.Enter || event.key === Key.Tab) && this.panelOpen) {
+    const hour: string = input.value.slice(0, 2);
+    if ((event.key === Key.Escape || event.key === Key.Enter) && this.panelOpen) {
       this.closePanel();
       event.stopPropagation();
       event.stopImmediatePropagation();
-    }
-
-    if (event.key === Key.Backspace && input.selectionStart === input.value.length) {
-      (event.target as HTMLInputElement).value = `${input.value.slice(0, 5)} xx`;
+      if (this.hourOneFormatRequired(hour)) {
+        input.value = `01:${input.value.slice(3, input.value.length)}`;
+      }
+    } else if (event.key === Key.Tab && input.selectionStart <= 2 && this.hourOneFormatRequired(hour)) {
+      event.preventDefault();
+      event.stopPropagation();
+      event.stopImmediatePropagation();
+      input.value = `01:${input.value.slice(3, input.value.length)}`;
+      input.setSelectionRange(3, 3);
+    } else if (event.key === Key.Backspace && input.selectionStart === input.value.length) {
+      input.value = `${input.value.slice(0, 5)} xx`;
+    } else if (event.key === Key.Tab && this.panelOpen) {
+      this.closePanel();
+      event.stopPropagation();
+      event.stopImmediatePropagation();
+    } else if (event.key === Key.ArrowRight && input.selectionStart >= 2 && this.hourOneFormatRequired(hour)) {
+      input.value = `01:${input.value.slice(3, input.value.length)}`;
+      input.setSelectionRange(2, 2);
     }
   }
 
   _handleInput(event: KeyboardEvent): void {
     if (document.activeElement === event.target) {
       const text = (event.target as HTMLInputElement).value;
+      const hour = text.slice(0, 2);
       this.openPanel();
       if ((this.military && Number(text[0]) > 2) || (!this.military && Number(text[0]) > 1)) {
         event.preventDefault();
@@ -193,7 +209,13 @@ export class NovoTimePickerInputElement implements OnInit, ControlValueAccessor 
         const test = text.substr(5, 4).replace(/x/g, '').trim().slice(0, 2);
         const timePeriod = this.maskOptions.blocks.aa.enum.find((it) => it[0] === test[0]);
         if (timePeriod) {
-          (event.target as HTMLInputElement).value = `${text.slice(0, 5)} ${timePeriod}`;
+          (event.target as HTMLInputElement).value = `${(event.target as HTMLInputElement).value.slice(0, 5)} ${timePeriod}`;
+        }
+        if ((event.target as HTMLInputElement).selectionStart >= 3 && this.hourOneFormatRequired(hour)) {
+          (event.target as HTMLInputElement).value = `01:${(event.target as HTMLInputElement).value.slice(
+            3,
+            (event.target as HTMLInputElement).value.length,
+          )}`;
         }
       }
     }
@@ -201,11 +223,15 @@ export class NovoTimePickerInputElement implements OnInit, ControlValueAccessor 
 
   _handleBlur(event: FocusEvent): void {
     const text = (event.target as HTMLInputElement).value;
+    const hour: string = text.slice(0, 2);
     if (!this.military) {
       const test = text.substr(5, 4).replace(/x/g, '').trim().slice(0, 2);
       const timePeriod = this.maskOptions.blocks.aa.enum.find((it) => it[0] === test[0]);
+      if (this.hourOneFormatRequired(hour)) {
+        (event.target as HTMLInputElement).value = `01:${text.slice(3, text.length)}`;
+      }
       if (!timePeriod) {
-        (event.target as HTMLInputElement).value = `${text.slice(0, 5)} xx`;
+        (event.target as HTMLInputElement).value = `${(event.target as HTMLInputElement).value.slice(0, 5)} xx`;
       }
     }
   }
@@ -290,5 +316,9 @@ export class NovoTimePickerInputElement implements OnInit, ControlValueAccessor 
       hours = `${parseInt(hours, 10) + 12}`.padStart(2, '0');
     }
     return `${hours}:${minutes}`;
+  }
+
+  hourOneFormatRequired(hourInput: string): boolean {
+    return hourInput === 'h1' || hourInput === '1h';
   }
 }
