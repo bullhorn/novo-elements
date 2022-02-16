@@ -349,6 +349,7 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
   setToday() {
     const tmp = new Date();
     this.updateView(tmp);
+    this.updateSelection(Array.of(tmp));
   }
 
   toggleRangeSelect(range: rangeSelectModes): void {
