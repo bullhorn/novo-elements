@@ -3161,7 +3161,6 @@ export class ToolbarExamplesPage {
   template: `<h2>Usage</h2>
 <novo-grid columns="2" align="start" gap="2rem">
 <div>
-<<<<<<< HEAD
 <p>Tooltips are layered containers that provide basic identifying information about an elment.  The are usually triggered by hovering over the buttons and icons. Tooltips are meant to stand out visually through their contrasting container color to draw immediate attention to their contents.</p>
 </div>
 <img src="assets/images/TooltipOverview.png"/>
@@ -3232,27 +3231,6 @@ The tooltip contents are defined based upon the application needs and business u
 <li>When choosing which tooltip position to use, try not to block important content, and make sure that the tooltip is still on the screen and readable.</li>
 <li>For longer tooltips, choose an approriate width based on a readable line-length.</li>
 </ul>
-=======
-<p>Helper tooltips contain basic text that provides some additional information about an element.</p>
-</div>
-<img src="assets/images/TooltipOverview.png"/>
-<div>
-<h3>Use When</h3>
-<ul class="contains-do-list">
-<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Providing a short description of a page element or control.</novo-text></li>
-<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Describing the action of an icon-only button.</novo-text></li>
-<li class="bullhorn-do-item"><novo-icon color="grass" mr="1rem">check</novo-icon><novo-text color="grass"> Revealing the full text of truncated data.</novo-text></li>
-</ul>
-</div>
-<div>
-<h3>Don′t Use When</h3>
-<ul class="contains-do-list">
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">times</novo-icon><novo-text color="grapefruit"> Providing a description longer than 10 words. Instead, use a popover.</novo-text></li>
-<li class="bullhorn-do-item"><novo-icon color="grapefruit" mr="1rem">times</novo-icon><novo-text color="grapefruit"> Don't use tooltips to communicate crucial information</novo-text></li>
-</ul>
-</div>
-</novo-grid>
->>>>>>> dd7f4f231c2f8d63417c28308e8aba96c4645dd9
 <h2>Options</h2>
 <novo-grid columns="2" align="start" gap="2rem">
 <blockquote>
@@ -3267,11 +3245,7 @@ The tooltip contents are defined based upon the application needs and business u
 <p><img src="assets/images/TooltipSize.png" alt="Tooltip Size"></p>
 <blockquote>
 <div class="p"><strong>Placement</strong></div>
-<<<<<<< HEAD
 <div class="p">A tooltip is positioned in relation to its source. The placement property values are at the: <code>top</code>, <code>top left</code>, <code>top right</code>, <code>bottom</code>, <code>bottom left</code>, <code>bottom right</code>, <code>left</code>, <code>right</code>. The default placement value is at the right.</div>
-=======
-<div class="p">A tooltip is positioned in relation to its target. Placement property values are at the: <code>top</code>, <code>top left</code>, <code>top right</code>, <code>bottom</code>, <code>bottom left</code>, <code>bottom right</code>, <code>left</code>, <code>right</code>. The default placement value is at the top.</div>
->>>>>>> dd7f4f231c2f8d63417c28308e8aba96c4645dd9
 </blockquote>
 <p><img src="assets/images/TooltipPosition.png" alt="Tooltip Placement"></p>
 </novo-grid>

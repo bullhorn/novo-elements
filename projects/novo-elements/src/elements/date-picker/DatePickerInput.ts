@@ -159,7 +159,7 @@ export class NovoDatePickerInputElement implements OnInit, OnChanges, ControlVal
     if (!this.userDefinedFormat && this.textMaskEnabled && !this.allowInvalidDate) {
       this.maskOptions = this.maskOptions || {
         mask: this.dateFormatService.getDateMask(),
-        pipe: createAutoCorrectedDatePipe(this.format || this.labels.dateFormatString().toLowerCase()),
+        pipe: createAutoCorrectedDatePipe((this.format || this.labels.dateFormatString()).toLowerCase()),
         keepCharPositions: false,
         guide: true,
       };
@@ -293,8 +293,8 @@ export class NovoDatePickerInputElement implements OnInit, OnChanges, ControlVal
   }
 
   private _setFormValue(value: any): void {
-    if (this.value) {
-      const test = this.formatDateValue(this.value);
+    if (value) {
+      const test = this.formatDateValue(value);
       this.formattedValue = test;
     } else {
       this.formattedValue = '';

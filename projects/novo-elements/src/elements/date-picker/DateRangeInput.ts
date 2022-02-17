@@ -172,7 +172,7 @@ export class NovoDateRangeInputElement implements OnInit, ControlValueAccessor {
     if (!this.userDefinedFormat && this.textMaskEnabled && !this.allowInvalidDate) {
       this.maskOptions = this.maskOptions || {
         mask: this.dateFormatService.getDateMask(),
-        pipe: createAutoCorrectedDatePipe(this.format || this.labels.dateFormatString().toLowerCase()),
+        pipe: createAutoCorrectedDatePipe((this.format || this.labels.dateFormatString()).toLowerCase()),
         keepCharPositions: false,
         guide: true,
       };
