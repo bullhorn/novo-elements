@@ -20,14 +20,14 @@
       </div>
       <div class="novo-control-container edit last" *ngIf="edit && !vertical">
         <novo-button class="control-group-action" [disabled]="!disabledArray[index].edit" type="button"
-          *ngIf="edit && !vertical" theme="icon" icon="editIcon"
+          *ngIf="edit && !vertical" theme="icon" [icon]="editIcon"
           (click)="editControl(index)" [attr.data-automation-id]="'novo-control-group-edit-' + key" index="-1">
         </novo-button>
       </div>
       <div class="novo-control-container remove last" *ngIf="remove && !vertical">
         <novo-button class="control-group-action" [disabled]="!disabledArray[index].remove" type="button"
           *ngIf="remove && !vertical" theme="icon"
-          icon="removeIcon" (click)="removeControl(index)"
+          [icon]="removeIcon" (click)="removeControl(index)"
           [attr.data-automation-id]="'novo-control-group-delete-' + key"
           index="-1">
         </novo-button>
@@ -35,12 +35,12 @@
     </div>
     <novo-button class="control-group-action" [disabled]="!disabledArray[index].edit" type="button"
       *ngIf="edit && vertical"
-      theme="icon" icon="editIcon"
+      theme="icon" [icon]="editIcon"
       (click)="editControl(index)" [attr.data-automation-id]="'novo-control-group-edit-' + key" index="-1">
     </novo-button>
     <novo-button class="control-group-action" [disabled]="!disabledArray[index].remove" type="button"
       *ngIf="remove && vertical" theme="icon"
-      icon="removeIcon" (click)="removeControl(index)"
+      [icon]="removeIcon" (click)="removeControl(index)"
       [attr.data-automation-id]="'novo-control-group-delete-' + key"
       index="-1">
     </novo-button>
