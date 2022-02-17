@@ -7,6 +7,7 @@ import {
   forwardRef,
   HostBinding,
   Input,
+  OnChanges,
   OnInit,
   Output,
   SimpleChanges,
@@ -86,7 +87,7 @@ const DATE_VALUE_ACCESSOR = {
     </novo-overlay-template>
   `,
 })
-export class NovoDateRangeInputElement implements OnInit, ControlValueAccessor {
+export class NovoDateRangeInputElement implements OnInit, OnChanges, ControlValueAccessor {
   public formattedStartDate: string = '';
   public formattedEndDate: string = '';
   private userDefinedFormat: boolean;
