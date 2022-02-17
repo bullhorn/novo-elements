@@ -33,7 +33,7 @@ novo-search {
     background: transparent;
     position: relative;
     font-size: 1.4em;
-    color: $dark;
+    color: var(--text-main);
     z-index: z(above);
     border: none;
     transition: all 250ms;
@@ -46,31 +46,20 @@ novo-search {
   }
 
   novo-icon {
-    color: $dark;
+    color: var(--text-main);
   }
 
   &.focused {
-    border: 1px solid $positive;
+    border: 1px solid var(--selection);
 
     > novo-icon {
-      color: $positive !important;
+      color: var(--selection) !important;
     }
 
     @include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
       &[color="#{$name}"] {
         > novo-icon {
           color: $color !important;
-        }
-      }
-    }
-
-    @include theme-backgrounds() using ($name, $color, $contrast, $tint, $shade, $pale) {
-      novo-icon,
-      input {
-        transition: all 250ms;
-        color: inherit !important;
-        &::placeholder {
-          color: var(--form-placeholder);
         }
       }
     }

@@ -3,15 +3,14 @@
 html {
   scrollbar-color: var(--scrollbar-thumb) var(--background-body);
   scrollbar-width: none;
-  font-family: $font-family-base;
-  font-size: $font-size-base;
-  color: $font-color-base;
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-base, 10px);
+  color: var(--font-color-base, #333);
 }
 
 body {
-  font-family: $font-family-body;
-  // font-size: $font-size-body;
-  font-size: 1.2rem; // novo-design-tokens is 1.4rem
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-body, 1.2rem);
   line-height: 1.2;
   word-wrap: break-word;
   color: var(--text-main);

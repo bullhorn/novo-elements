@@ -618,6 +618,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
         'quick-note',
         'date',
         'custom',
+        'switch',
       ].indexOf(this.form.controls[this.control.key].controlType) !== -1
     );
   }

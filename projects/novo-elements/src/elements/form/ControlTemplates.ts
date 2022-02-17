@@ -463,6 +463,21 @@ import { NovoTemplate } from '../common/novo-template/novo-template.directive';
       </div>
     </ng-template>
 
+    <!--Switch-->
+    <ng-template novoTemplate="switch" let-control let-form="form" let-errors="errors" let-methods="methods">
+      <div [formGroup]="form">
+        <novo-switch
+          [formControlName]="control?.key"
+          [tooltip]="control?.tooltip"
+          [tooltipPosition]="control?.tooltipPosition"
+          [tooltipSize]="control?.tooltipSize"
+          [tooltipPreline]="control?.tooltipPreline"
+          [removeTooltipArrow]="control?.removeTooltipArrow"
+          [tooltipAutoPosition]="control?.tooltipAutoPosition"
+        ></novo-switch>
+      </div>
+    </ng-template>
+
     <!--Checklist-->
     <ng-template novoTemplate="checklist" let-control let-form="form" let-errors="errors" let-methods="methods">
       <div [formGroup]="form">

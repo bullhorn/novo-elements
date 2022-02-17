@@ -38,8 +38,8 @@ novo-nav {
 
     .novo-tab-link {
       @include novo-label-text();
-      padding: $spacing-lg;
-      // color: var(--text-main);
+      font-size: var(--font-size-tab);
+      padding: $spacing-md;
       display: flex;
       align-items: center;
       gap: $spacing-xs;

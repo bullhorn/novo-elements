@@ -16,6 +16,7 @@ import {
   PickerControl,
   RadioControl,
   SelectControl,
+  SwitchControl,
   TextAreaControl,
   TextBoxControl,
   TilesControl,
@@ -400,6 +401,9 @@ export class FormUtils {
       case 'checkbox':
         controlConfig.checkboxLabel = field.checkboxLabel;
         control = new CheckboxControl(controlConfig);
+        break;
+      case 'switch':
+        control = new SwitchControl(controlConfig);
         break;
       case 'checklist':
         control = new CheckListControl(controlConfig);

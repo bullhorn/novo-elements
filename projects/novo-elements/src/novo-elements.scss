@@ -2,6 +2,7 @@
 // Global
 // --------------------------------------------------
 @import "~novo-design-tokens/scss";
+@import "novo-design-tokens/css/variables.min.css";
 
 @import "./styles/variables";
 @import "./styles/reset";
@@ -75,13 +76,25 @@
 @import "./elements/simple-table/table";
 @import "./elements/tabbed-group-picker/TabbedGroupPicker";
 
-.bgc-main {
+.bgc-main,
+.novo-background-main {
   background-color: var(--background-main, $color-bright);
 }
-.bgc-alt {
+.bgc-alt,
+.bgc-bright,
+.novo-background-bright {
   background-color: var(--background-bright, $color-white);
 }
-.bgc-body {
+.bgc-dark,
+.novo-background-dark {
+  background-color: var(--background-dark, $color-white);
+}
+.bgc-muted,
+.novo-background-muted {
+  background-color: var(--background-muted, $color-white);
+}
+.bgc-body,
+.novo-background-body {
   background-color: var(--background-body, $color-silver);
 }
 .txc-main {
@@ -95,26 +108,30 @@
 }
 
 @include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
-  .novo-background-#{$name} {
-    background: $color;
-    color: $contrast;
-  }
-  .novo-text-#{$name} {
-    color: $color;
-  }
+  $excluded: (bright, muted);
 
-  .bgc-#{$name} {
-    background: $color;
-    color: $contrast;
-  }
-
-  .bgc-#{$name}-striped {
-    & > *:nth-child(odd) {
+  @if index($excluded, $name) == null {
+    .novo-background-#{$name} {
       background: $color;
+      color: $contrast;
     }
-  }
-  .txc-#{$name} {
-    color: $color;
+    .novo-text-#{$name} {
+      color: $color;
+    }
+
+    .bgc-#{$name} {
+      background: $color;
+      color: $contrast;
+    }
+
+    .bgc-#{$name}-striped {
+      & > *:nth-child(odd) {
+        background: $color;
+      }
+    }
+    .txc-#{$name} {
+      color: $color;
+    }
   }
 }
 

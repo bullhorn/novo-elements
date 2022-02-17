@@ -12,6 +12,7 @@ import {
   RadioControl,
   ReadOnlyControl,
   SelectControl,
+  SwitchControl,
   TablePickerControl,
   TextAreaControl,
   TextBoxControl,
@@ -54,6 +55,8 @@ export class ControlFactory {
         return new TextBoxControl(config);
       case 'SelectControl':
         return new SelectControl(config);
+      case 'SwitchControl':
+        return new SwitchControl(config);
       case 'TilesControl':
         return new TilesControl(config);
       case 'TimeControl':

@@ -1,5 +1,6 @@
 export * from './ace-editor';
 export * from './address';
+export * from './BaseControl';
 export * from './check-list';
 export * from './checkbox';
 export * from './custom';
@@ -14,6 +15,7 @@ export * from './quick-note';
 export * from './radio';
 export * from './read-only';
 export * from './select';
+export * from './switch';
 export * from './text-area';
 export * from './textbox';
 export * from './tiles';

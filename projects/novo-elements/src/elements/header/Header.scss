@@ -1,5 +1,6 @@
 .novo-header {
   display: block;
+  background-color: var(--background-bright, $white);
 
   .spacer {
     flex: 1 1 0%;
@@ -14,7 +15,6 @@
   &.header-size-small > section {
     height: 3.2rem;
   }
-
   &.header-size-default > section {
     height: 5rem;
   }
@@ -31,8 +31,8 @@
     box-sizing: border-box;
     // line-height: 4rem;
 
-    i.header-icon {
-      padding: 12px;
+    .header-icon {
+      font-size: var(--font-size-2xl);
     }
     div.header-title {
       display: flex;
@@ -48,13 +48,16 @@
       display: flex;
       flex-direction: column;
       max-width: 100%;
+      .novo-title {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
       h1 {
-        font-size: 1.8rem;
-        // line-height: 1.5;
+        @include novo-title-text();
         margin: 0;
         padding: 0;
         display: inline-block;
-        font-weight: 500;
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
@@ -80,13 +83,19 @@
       gap: $spacing-sm;
     }
 
-    novo-action {
+    .novo-action {
       display: flex;
     }
   }
 
   @include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
     &.novo-accent-#{$name} {
+      .header-titles,
+      .header-title {
+        .novo-icon {
+          color: $color;
+        }
+      }
       & > section:first-of-type {
         border-bottom: 2px solid $color;
       }
@@ -119,22 +128,16 @@
     }
   }
   &.condensed {
+    .header-title,
+    .header-titles {
+      line-height: 1.375;
+    }
     > section {
-      padding: 0.2rem 1rem;
-      i {
-        font-size: 1.2rem;
-      }
+      height: 3.6rem;
     }
-    novo-icon {
+    .novo-icon {
       margin-right: 0.5rem !important;
-      > i {
-        font-size: 1.4rem;
-      }
-    }
-    button[theme][theme="icon"] {
-      width: 30px !important;
-      height: 30px !important;
-      padding: 5px;
+      font-size: 1.8rem;
     }
   }
 

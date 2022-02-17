@@ -9,5 +9,6 @@ import { Component } from '@angular/core';
   styleUrls: ['time-picker-example.css'],
 })
 export class TimePickerExample {
-  time: Date = new Date();
+  time1: Date = new Date();
+  time2: Date = new Date();
 }

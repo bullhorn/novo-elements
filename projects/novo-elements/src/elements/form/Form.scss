@@ -2,18 +2,20 @@
 @import "./extras/file/FileInput";
 @import "./ControlGroup";
 .novo-form-control-label {
-  color: var(--text-main);
-  font-size: 1.1rem;
+  font-weight: 500;
+  word-break: word-break;
+  overflow-wrap: break-word;
+  line-height: 1.375;
+  color: var(--text-muted);
+  font-size: var(--font-size-label);
+  // original
   flex: 1;
   max-width: 130px;
   min-width: 130px;
-  font-weight: 500;
   transition: 200ms ease-out;
   margin-right: 35px;
-  text-transform: uppercase;
   padding-top: 8px;
-  word-break: word-break;
-  overflow-wrap: break-word;
+
   &.encrypted {
     max-width: 110px;
     min-width: 110px;
@@ -35,24 +37,6 @@ novo-form {
     width: 100%;
     form {
       width: 100%;
-
-      .novo-fieldset-header {
-        background: $off-white;
-        box-sizing: content-box;
-        padding: 1rem 1rem 1rem 2rem;
-        margin-bottom: 2rem;
-        display: flex;
-        margin-left: -1.5rem;
-        margin-right: -1.5rem;
-        font-size: 1.8rem;
-        i,
-        novo-icon {
-          margin: 1px 10px 1px 6px;
-        }
-        &.hidden {
-          display: none;
-        }
-      }
 
       div.novo-form-row,
       div.novo-control-group-control,
@@ -204,7 +188,7 @@ novo-form {
           }
           .field-message,
           novo-tip-well.active {
-            font-size: 0.8em;
+            font-size: var(--font-size-caption);
             padding: 5px 0;
             margin-left: 22px;
             margin-bottom: 5px;
@@ -246,6 +230,7 @@ novo-form {
                 display: flex;
               }
               .description {
+                color: var(--text-muted);
                 display: flex;
                 padding-bottom: 5px;
                 flex: 1;
@@ -257,7 +242,7 @@ novo-form {
           }
           .error-message {
             color: $negative;
-            font-size: 0.8em;
+            font-size: var(--font-size-caption);
             padding: 5px 0;
             flex-basis: 100%;
             margin-left: 185px;
@@ -736,12 +721,15 @@ novo-form {
                   }
                 }
                 > label.novo-control-label {
-                  bottom: 20px;
-                  color: var(--text-main);
-                  font-size: 1.1rem;
                   font-weight: 500;
-                  text-transform: uppercase;
+                  word-break: word-break;
+                  overflow-wrap: break-word;
+                  line-height: 1.375;
+                  color: var(--text-muted);
+                  font-size: var(--font-size-label);
+                  // original
                   position: absolute;
+                  bottom: 20px;
                   left: 22px;
                   pointer-events: none;
                   z-index: z(default);
@@ -841,11 +829,12 @@ control-prompt-modal {
 .novo-fieldset-header {
   background: $off-white;
   box-sizing: content-box;
-  padding: 1rem 1rem 1rem 2rem;
+  padding: 1rem 1rem 1rem 0.5rem;
   margin-bottom: 2rem;
   display: flex;
   margin-left: -1.5rem;
   margin-right: -1.5rem;
+  font-size: 1.8rem;
   i,
   novo-icon {
     margin: 1px 10px 1px 6px;

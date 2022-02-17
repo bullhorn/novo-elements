@@ -24,6 +24,7 @@
     &:hover,
     &:focus {
       box-shadow: $shadow-2, $shadow-1;
+      background: $white;
     }
     &:active {
       box-shadow: $shadow-1;

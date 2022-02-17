@@ -23,5 +23,5 @@ import { NovoBaseTextElement } from '../base/base-text.component';
   },
 })
 export class NovoTitle extends NovoBaseTextElement {
-  weight: TypographyWeight = 'semibold';
+  weight: TypographyWeight = 'medium';
 }

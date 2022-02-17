@@ -74,7 +74,7 @@ export class NovoButtonElement {
    */
   @Input() side: string = 'right';
   /**
-   * 	Sets the size of the button. One of: small, medium, large
+   * 	Sets the size of the button. One of: sm, lg
    */
   @Input() size: string;
   /**

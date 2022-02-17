@@ -155,6 +155,25 @@ let nextId = 0;
       </div>
     </novo-overlay-template>
   `,
+  host: {
+    class: 'novo-select',
+    role: 'combobox',
+    'aria-autocomplete': 'none',
+    'aria-haspopup': 'true',
+    '[attr.id]': 'id',
+    '[attr.aria-controls]': 'panelOpen ? id + "-panel" : null',
+    '[attr.aria-expanded]': 'panelOpen',
+    '[attr.aria-required]': 'required.toString()',
+    '[attr.aria-disabled]': 'disabled.toString()',
+    '[attr.aria-invalid]': 'errorState',
+    '[attr.aria-describedby]': '_ariaDescribedby || null',
+    '[attr.aria-activedescendant]': '_getAriaActiveDescendant()',
+    '[class.novo-select-disabled]': 'disabled',
+    '[class.novo-select-invalid]': 'errorState',
+    '[class.novo-select-required]': 'required',
+    '[class.novo-select-empty]': 'empty',
+    '[class.novo-select-multiple]': 'multiple',
+  },
 })
 export class NovoSelectElement
   extends NovoSelectMixins
@@ -197,7 +216,7 @@ export class NovoSelectElement
   @Input()
   headerConfig: any;
   @Input()
-  position: string = 'center';
+  position: string = 'bottom';
   @Input()
   overlayWidth: number;
   @Input()
@@ -288,11 +307,11 @@ export class NovoSelectElement
   }
   private _multiple: boolean = false;
 
-  /** Whether any radio buttons has focus. */
+  /** Whether the select is focused. */
   get focused(): boolean {
-    // todo: implement this.
-    return false;
+    return this._focused || this.panelOpen;
   }
+  private _focused = false;
 
   /** Implemented as part of NovoFieldControl. */
   get empty(): boolean {
@@ -342,6 +361,8 @@ export class NovoSelectElement
         if (origin === 'keyboard' && !this.disabled) {
           this.openPanel();
         }
+        this._focused = !!origin;
+        this.stateChanges.next();
       }),
     );
   }

@@ -52,8 +52,9 @@ export enum TIME_VALUE_FORMATS {
       </div>
     </div> -->
     <div class="increments" *ngIf="!analog">
-      <novo-list direction="vertical" data-automation-id="novo-time-picker-increments">
+      <novo-list class="increments--hours" direction="vertical" data-automation-id="novo-time-picker-hours">
         <novo-list-item
+          class="increments--hour"
           *ngFor="let increment of HOURS"
           (click)="setHours($event, increment, true)"
           [class.active]="increment == activeHour"
@@ -62,8 +63,9 @@ export enum TIME_VALUE_FORMATS {
           <item-content>{{ increment }}</item-content>
         </novo-list-item>
       </novo-list>
-      <novo-list direction="vertical" data-automation-id="novo-time-picker-increments">
+      <novo-list class="increments--minutes" direction="vertical" data-automation-id="novo-time-picker-minutes">
         <novo-list-item
+          class="increments--minute"
           *ngFor="let increment of MINUTES"
           (click)="setMinutes($event, increment, true)"
           [class.active]="increment == activeMinute"
@@ -72,8 +74,9 @@ export enum TIME_VALUE_FORMATS {
           <item-content>{{ increment }}</item-content>
         </novo-list-item>
       </novo-list>
-      <novo-list direction="vertical" *ngIf="!military" data-automation-id="novo-time-picker-meridians">
+      <novo-list class="increments--meridians" direction="vertical" *ngIf="!military" data-automation-id="novo-time-picker-meridians">
         <novo-list-item
+          class="increments--meridian"
           *ngFor="let period of MERIDIANS"
           (click)="setPeriod($event, period, true)"
           [class.active]="meridian == period"
@@ -118,6 +121,7 @@ export enum TIME_VALUE_FORMATS {
     </div>
   `,
   host: {
+    class: 'novo-time-picker',
     '[class.military]': 'military',
   },
 })

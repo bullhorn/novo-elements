@@ -16,6 +16,7 @@ export { QuickNoteControl } from './controls/quick-note/QuickNoteControl';
 export { RadioControl } from './controls/radio/RadioControl';
 export { ReadOnlyControl } from './controls/read-only/ReadOnlyControl';
 export { SelectControl } from './controls/select/SelectControl';
+export { SwitchControl } from './controls/switch/SwitchControl';
 export { TextAreaControl } from './controls/text-area/TextAreaControl';
 export { TextBoxControl } from './controls/textbox/TextBoxControl';
 export { TilesControl } from './controls/tiles/TilesControl';

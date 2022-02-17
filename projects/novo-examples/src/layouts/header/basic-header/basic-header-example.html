@@ -1,4 +1,4 @@
-<header [theme]="theme">
+<header [accent]="theme">
   <novo-action icon="convert" tooltip="Change Theme" (click)="changeTheme()"></novo-action>
   <novo-action icon="refresh" tooltip="Show Popup" (click)="catchEv('refresh', $event)"></novo-action>
   <novo-action icon="times" tooltip="Show Popup" (click)="catchEv('close', $event)"></novo-action>
@@ -11,7 +11,7 @@
   <section>
     Extra Info
   </section>
-  <novo-nav theme="color" direction="horizontal">
+  <novo-nav direction="horizontal">
     <novo-tab>
       <span>Overview</span>
     </novo-tab>

@@ -408,11 +408,12 @@
   }
 
   code {
-    padding: 0.2em 0.4em;
-    margin: 0;
-    font-size: 85%;
+    padding: 0.2rem 0.5ch;
+    margin: -0.2rem 0.5ch;
+    font-size: inherit;
     background-color: rgba(27, 31, 35, 0.05);
     border-radius: 3px;
+    line-height: 1.1em;
   }
 
   pre {
