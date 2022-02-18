@@ -25,6 +25,7 @@
         [attr.aria-disabled]="isDisabled(day.date)"
         [attr.aria-selected]="_isSelected(day.date)"
         [attr.data-automation-id]="day.number"
+        [title]="isDisabled(day.date) ? disabledDateMessage : ''"
         (mouseover)="onHover($event, day)">
         <novo-button
           class="day"

@@ -34,6 +34,9 @@
         [isRange]="_isRange()"
         [hideOverflowDays]="months.length > 1"
         [weekStartsOn]="weekStartsOn"
+        [disabledDateMessage]="disabledDateMessage"
+        [minDate]="minDate"
+        [maxDate]="maxDate"
         (select)="dateSelected($event)"
         (hover)="updatePreview($event)"></novo-month-view>
     </ng-container>

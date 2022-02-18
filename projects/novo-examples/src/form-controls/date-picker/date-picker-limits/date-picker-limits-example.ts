@@ -20,7 +20,7 @@ export class DatePickerLimitsExample {
 
   constructor(private formUtils: FormUtils) {
     this.formGroup = this.formUtils.emptyFormGroup();
-    const c1 = new TextBoxControl({ key: 'tooltip', label: 'what is your tooltip be?' });
+    const c1 = new TextBoxControl({ key: 'tooltip', label: 'what should your tooltip be?' });
     this.controls.push(c1);
   }
 

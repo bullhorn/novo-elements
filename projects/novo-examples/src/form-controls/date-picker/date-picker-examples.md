@@ -21,6 +21,9 @@ order: 4
 
 <code-example example="week-start"></code-example>
 
+##### Date Picker Limits
+
+<code-example example="date-picker-limits"></code-example>
 
 ## Different Locale
 

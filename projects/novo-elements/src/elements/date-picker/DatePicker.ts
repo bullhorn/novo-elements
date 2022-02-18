@@ -95,6 +95,9 @@ const DATE_PICKER_VALUE_ACCESSOR = {
         [mode]="mode"
         [numberOfMonths]="numberOfMonths"
         [weekStartsOn]="weekStart"
+        [disabledDateMessage]="disabledDateMessage"
+        [minDate]="start"
+        [maxDate]="end"
       ></novo-calendar>
 
       <div class="calendar-footer" [hidden]="hideFooter">
