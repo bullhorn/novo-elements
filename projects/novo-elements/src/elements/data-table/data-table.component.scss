@@ -152,17 +152,17 @@ cdk-table {
     display: inline-block;
   }
   .filter-button {
-    color: $light;
+    color: var(--text-muted);
     background: transparent;
     pointer-events: all;
     margin-left: 0.5rem;
     line-height: 1em;
 
     &:hover {
-      color: $dark;
+      color: var(--text-main);
     }
     &.filter-active {
-      color: $positive;
+      color: var(--selection);
     }
   }
 
