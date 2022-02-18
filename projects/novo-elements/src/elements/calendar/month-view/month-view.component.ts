@@ -37,6 +37,8 @@ export class NovoMonthViewElement implements OnInit {
   preview: DateLike[] = [];
   @Input()
   overlays: OverlayDate[] = [];
+  @Input()
+  disabledDateMessage: string;
 
   @Input()
   @BooleanInput()

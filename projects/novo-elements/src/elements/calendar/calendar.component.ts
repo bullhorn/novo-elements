@@ -26,6 +26,10 @@ export class NovoCalendarElement implements OnInit {
   minYear: string | number;
   @Input()
   maxYear: string | number;
+  @Input()
+  minDate: string | number;
+  @Input()
+  maxDate: string | number;
   // Default view mode (select days)
   @Input()
   activeView: string = 'days';
@@ -51,6 +55,8 @@ export class NovoCalendarElement implements OnInit {
 
   @Input()
   overlays: OverlayDate[] = [];
+  @Input()
+  disabledDateMessage: string;
 
   _activeDate: Date = new Date();
   _mode: DatePickerSelectModes = 'single';

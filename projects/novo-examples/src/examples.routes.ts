@@ -4065,6 +4065,8 @@ export class DatePickerDevelopPage {
 <p><code-example example="date-range-input"></code-example></p>
 <h2>Customizing Week Start</h2>
 <p><code-example example="week-start"></code-example></p>
+<h5>Date Picker Limits</h5>
+<p><code-example example="date-picker-limits"></code-example></p>
 <h2>Different Locale</h2>
 <p>TBD</p>
 `,
