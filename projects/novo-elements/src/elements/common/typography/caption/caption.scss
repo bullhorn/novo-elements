@@ -4,9 +4,4 @@
 :host {
   display: inline;
   @include novo-caption-text();
-
-  novo-icon {
-    vertical-align: top;
-    font-size: 1em;
-  }
 }

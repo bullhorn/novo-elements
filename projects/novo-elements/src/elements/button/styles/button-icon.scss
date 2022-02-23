@@ -5,7 +5,7 @@
   &[theme="icon"] {
     @include theme-text-colors("color");
     padding: $spacing-sm;
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     height: 2.4rem;
     &[inverse] {
       color: #fff;

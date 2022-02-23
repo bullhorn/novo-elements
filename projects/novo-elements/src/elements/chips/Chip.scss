@@ -174,11 +174,16 @@ $chip-spacing: (
       border-radius: 0.4rem;
       padding: $spacing-none $spacing;
       min-height: $height;
+      gap: $spacing;
+
       &.novo-chip-with-avatar {
         padding-left: $spacing / 2;
       }
       &.novo-chip-with-trailing-icon {
         padding-right: $spacing / 2;
+      }
+      .novo-text {
+        font-size: inherit;
       }
     }
   }

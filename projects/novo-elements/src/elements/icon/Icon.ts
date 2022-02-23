@@ -10,6 +10,9 @@ import { TypographySize } from '../common/typography';
       ><span (cdkObserveContent)="projectContentChanged($event)"><ng-content></ng-content></span
     ></i>
   `,
+  host: {
+    class: 'novo-icon',
+  },
 })
 export class NovoIconComponent implements AfterViewInit {
   @HostBinding('class.novo-icon-raised')

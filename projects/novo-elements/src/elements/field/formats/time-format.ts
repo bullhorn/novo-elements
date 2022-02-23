@@ -7,8 +7,10 @@ import {
   forwardRef,
   Inject,
   Input,
+  OnChanges,
   Optional,
   Renderer2,
+  SimpleChanges,
 } from '@angular/core';
 import { COMPOSITION_BUFFER_MODE, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { IMaskDirective, IMaskFactory } from 'angular-imask';
@@ -40,7 +42,7 @@ export enum TIME_FORMATS {
   },
   providers: [TIMEFORMAT_VALUE_ACCESSOR, { provide: NOVO_INPUT_FORMAT, useExisting: NovoTimeFormatDirective }],
 })
-export class NovoTimeFormatDirective extends IMaskDirective<any> implements NovoInputFormat, AfterViewInit {
+export class NovoTimeFormatDirective extends IMaskDirective<any> implements NovoInputFormat, AfterViewInit, OnChanges {
   valueChange: EventEmitter<any> = new EventEmitter();
 
   @Input() military: boolean = false;
@@ -55,10 +57,19 @@ export class NovoTimeFormatDirective extends IMaskDirective<any> implements Novo
     private cdr: ChangeDetectorRef,
   ) {
     super(_element, _renderer, _factory, _compositionMode);
-    const pattern = this.military ? 'HH:mm' : 'hh:mm A';
+    this.initFormatOptions();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (Object.keys(changes).some((key) => ['military', 'timeFormat'].includes(key))) {
+      this.initFormatOptions();
+    }
+  }
+
+  initFormatOptions() {
+    // const pattern = this.military ? 'HH:mm' : 'hh:mm A';
     const amFormat = this.labels.timeFormatAM.toUpperCase();
     const pmFormat = this.labels.timeFormatPM.toUpperCase();
-
     this.unmask = 'typed';
     this.imask = {
       mask: Date,
@@ -108,6 +119,7 @@ export class NovoTimeFormatDirective extends IMaskDirective<any> implements Novo
   _checkInput(event: InputEvent): void {
     if (document.activeElement === event.target) {
       const text = (event.target as HTMLInputElement).value;
+      const hour = text.slice(0, 2);
       if ((this.military && Number(text[0]) > 2) || (!this.military && Number(text[0]) > 1)) {
         event.preventDefault();
         const value = `0${text}`;
@@ -120,15 +132,25 @@ export class NovoTimeFormatDirective extends IMaskDirective<any> implements Novo
         if (timePeriod) {
           (event.target as HTMLInputElement).value = `${text.slice(0, 5)} ${timePeriod}`;
         }
+        if ((event.target as HTMLInputElement).selectionStart >= 3 && this.hourOneFormatRequired(hour)) {
+          (event.target as HTMLInputElement).value = `01:${(event.target as HTMLInputElement).value.slice(
+            3,
+            (event.target as HTMLInputElement).value.length,
+          )}`;
+        }
       }
     }
   }
 
   _handleBlur(event: FocusEvent): void {
     const text = (event.target as HTMLInputElement).value;
+    const hour: string = text.slice(0, 2);
     if (!this.military) {
       const input = text.substr(5, 4).replace(/\-/g, '').trim().slice(0, 2);
       const timePeriod = this.imask.blocks.aa.enum.find((it) => it[0] === input[0]);
+      if (this.hourOneFormatRequired(hour)) {
+        (event.target as HTMLInputElement).value = `01:${text.slice(3, text.length)}`;
+      }
       if (!timePeriod) {
         (event.target as HTMLInputElement).value = `${text.slice(0, 5)} --`;
       }
@@ -137,9 +159,19 @@ export class NovoTimeFormatDirective extends IMaskDirective<any> implements Novo
 
   _handleKeydown(event: KeyboardEvent): void {
     const input = event.target as HTMLInputElement;
+    const hour: string = input.value.slice(0, 2);
 
     if (event.key === Key.Backspace && input.selectionStart === input.value.length) {
       (event.target as HTMLInputElement).value = `${input.value.slice(0, 5)} --`;
+    } else if (event.key === Key.Tab && input.selectionStart <= 2 && this.hourOneFormatRequired(hour)) {
+      event.preventDefault();
+      event.stopPropagation();
+      event.stopImmediatePropagation();
+      input.value = `01:${input.value.slice(3, input.value.length)}`;
+      input.setSelectionRange(3, 3);
+    } else if (event.key === Key.ArrowRight && input.selectionStart >= 2 && this.hourOneFormatRequired(hour)) {
+      input.value = `01:${input.value.slice(3, input.value.length)}`;
+      input.setSelectionRange(2, 2);
     }
   }
 
@@ -208,5 +240,9 @@ export class NovoTimeFormatDirective extends IMaskDirective<any> implements Novo
       this.valueChange.emit(date);
       fn(formatted);
     };
+  }
+
+  hourOneFormatRequired(hourInput: string): boolean {
+    return hourInput === '-1' || hourInput === '1-';
   }
 }

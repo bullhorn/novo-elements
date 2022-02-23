@@ -4,11 +4,4 @@
 :host {
   display: inline-block;
   @include novo-label-text();
-
-  &::ng-deep {
-    novo-icon {
-      vertical-align: top;
-      font-size: 1em;
-    }
-  }
 }

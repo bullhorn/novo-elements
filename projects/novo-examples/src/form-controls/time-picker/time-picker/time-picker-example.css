@@ -1,8 +1,6 @@
 /** No CSS for this example */
-.date-picker-demo-one-by-two {
+:host {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-}
-.date-picker-demo-one-by-two > *:first-child {
-  grid-column: 1 / span 2;
+  grid-template-rows: 120px 1fr;
+  gap: 2rem;
 }

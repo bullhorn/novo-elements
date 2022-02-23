@@ -1,10 +1,10 @@
 // NG2
-import { TestBed, async } from '@angular/core/testing';
-import { NovoDataTablePagination } from './data-table-pagination.component';
+import { ChangeDetectorRef } from '@angular/core';
+import { async, TestBed } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
 import { NovoLabelService, NovoSelectModule, NovoTilesModule } from '../../..';
 import { DataTableState } from '../state/data-table-state.service';
-import { ChangeDetectorRef } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { NovoDataTablePagination } from './data-table-pagination.component';
 
 // App
 
@@ -16,10 +16,7 @@ describe('Elements: NovoDataTablePagination', () => {
     TestBed.configureTestingModule({
       declarations: [NovoDataTablePagination],
       imports: [FormsModule, NovoTilesModule, NovoSelectModule],
-      providers: [NovoLabelService,
-                  DataTableState,
-                  ChangeDetectorRef,
-                ],
+      providers: [NovoLabelService, DataTableState, ChangeDetectorRef],
     }).compileComponents();
     fixture = TestBed.createComponent(NovoDataTablePagination);
     component = fixture.debugElement.componentInstance;

@@ -19,8 +19,8 @@ const SWITCH_VALUE_ACCESSOR = {
         <div class="novo-switch-bar"></div>
         <div class="novo-switch-thumb-container">
           <div class="novo-switch-thumb">
-            <novo-icon *ngIf="!model" smaller>{{ icons[0] }}</novo-icon>
-            <novo-icon *ngIf="model" smaller>{{ icons[1] }}</novo-icon>
+            <novo-icon *ngIf="!value" smaller>{{ icons[0] }}</novo-icon>
+            <novo-icon *ngIf="value" smaller>{{ icons[1] }}</novo-icon>
           </div>
         </div>
       </div>
@@ -30,7 +30,7 @@ const SWITCH_VALUE_ACCESSOR = {
   host: {
     role: 'checkbox',
     class: 'novo-switch',
-    '[attr.aria-checked]': 'model',
+    '[attr.aria-checked]': 'value',
     '[attr.aria-disabled]': 'disabled',
     '(keydown)': 'onKeydown($event)',
     '[class]': 'theme',
@@ -51,7 +51,13 @@ export class NovoSwitchElement implements ControlValueAccessor {
   @Output()
   onChange: EventEmitter<any> = new EventEmitter();
 
-  model: boolean;
+  private _value: boolean;
+  public get value(): boolean {
+    return this._value;
+  }
+  public set value(value: boolean) {
+    this._value = value;
+  }
   onModelChange: Function = () => {};
   onModelTouched: Function = () => {};
 
@@ -74,14 +80,14 @@ export class NovoSwitchElement implements ControlValueAccessor {
       return;
     }
 
-    this.model = !this.model;
-    this.onChange.next(this.model);
-    this.onModelChange(this.model);
+    this.value = !this.value;
+    this.onChange.next(this.value);
+    this.onModelChange(this.value);
     this.ref.markForCheck();
   }
 
   writeValue(model: boolean): void {
-    this.model = model;
+    this.value = model;
     this.ref.markForCheck();
   }
 

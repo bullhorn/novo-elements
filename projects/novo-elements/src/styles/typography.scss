@@ -147,3 +147,7 @@ p,
 span {
   @include base-text-rules();
 }
+
+span > span {
+  vertical-align: baseline;
+}

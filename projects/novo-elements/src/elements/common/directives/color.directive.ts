@@ -9,8 +9,16 @@ export class TextColorDirective {
 
   @HostBinding('class')
   get hb_textColor() {
-    return `txc-${this.txc}`;
+    return isValidColor(this.txc) ? 'novo-text-custom' : `novo-text-${this.txc}`;
+  }
+  @HostBinding('style.color')
+  get hb_textStyle() {
+    return isValidColor(this.txc) ? this.txc : null;
   }
 
   constructor(private el: ElementRef) {}
+}
+
+function isValidColor(color: string) {
+  return color.startsWith('#') || color.startsWith('rgb');
 }

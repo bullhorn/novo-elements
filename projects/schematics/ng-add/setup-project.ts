@@ -74,7 +74,7 @@ function addAnimationsModule(options: Schema) {
 }
 
 /**
- * Adds custom Novo styles to the project style file. The custom CSS sets up the Roboto font
+ * Adds custom Novo styles to the project style file. The custom CSS sets up the Montserrat font
  * and reset the default browser body margin.
  */
 function addNovoAppStyles(options: Schema) {
@@ -86,8 +86,8 @@ function addNovoAppStyles(options: Schema) {
 
     if (!styleFilePath) {
       logger.error(`Could not find the default style file for this project.`);
-      logger.info(`Consider manually adding the Roboto font to your CSS.`);
-      logger.info(`More information at https://fonts.google.com/specimen/Roboto`);
+      logger.info(`Consider manually adding the Montserrat font to your CSS.`);
+      logger.info(`More information at https://fonts.google.com/specimen/Montserrat`);
       return;
     }
 
@@ -95,12 +95,13 @@ function addNovoAppStyles(options: Schema) {
 
     if (!buffer) {
       logger.error(`Could not read the default style file within the project ` + `(${styleFilePath})`);
-      logger.info(`Please consider manually setting up the Roboto font.`);
+      logger.info(`Please consider manually setting up the Montserrat font.`);
       return;
     }
 
     const htmlContent = buffer.toString();
-    const insertion = '\n' + `html, body { height: 100%; }\n` + `body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }\n`;
+    const insertion =
+      '\n' + `html, body { height: 100%; }\n` + `body { margin: 0; font-family: Montserrat, "Helvetica Neue", sans-serif; }\n`;
 
     if (htmlContent.includes(insertion)) {
       return;

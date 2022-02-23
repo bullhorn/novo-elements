@@ -84,7 +84,7 @@
 
   &[type="success"] {
     .novo-notification-body {
-      i {
+      i.indicator {
         color: $success;
         border-color: $success;
       }
@@ -93,7 +93,7 @@
 
   &[type="warning"] {
     .novo-notification-body {
-      i {
+      i.indicator {
         color: $warning;
         border-color: $warning;
       }
@@ -102,7 +102,7 @@
 
   &[type="error"] {
     .novo-notification-body {
-      i {
+      i.indicator {
         color: $negative;
         border-color: $negative;
       }

@@ -1,7 +1,8 @@
 @mixin dark-variables {
   --background-body: #{$color-midnight}; //#202b38;
   --background-main: #{$color-darkness}; //#161f27;
-  --background-bright: #{$color-moonlight};
+  --background-bright: #{$color-moonlight}; //#1a242f
+  --background-dark: #{$color-onyx}; //e2e2e2
   --background-muted: #{$color-neutral};
   --selection: #{$color-ocean}; // #1c76c5;
   --text-selection: #{$color-white};
@@ -13,6 +14,8 @@
   --border: #{$color-onyx};
   --code: #ffbe85;
   --animation-duration: 0.1s;
+  --button-background: #{$dark};
+  --button-text: #{$light};
   --button-hover: #324759;
   --scrollbar-thumb: var(--button-hover);
   --scrollbar-thumb-hover: var(--button-hover);
@@ -24,4 +27,8 @@
 
 .theme-dark {
   @include dark-variables();
+
+  ::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+  }
 }

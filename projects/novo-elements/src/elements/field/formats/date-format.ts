@@ -92,6 +92,7 @@ export class NovoDateFormatDirective extends IMaskDirective<any> {
   }
 
   formatValue(value: any): string {
+    if (value == null) return '';
     // Use `parse` because it keeps dates in locale
     const date = parse(value);
     if (isValid(date)) {

@@ -7,7 +7,7 @@
     color: $dark;
     border: none;
     border-radius: 0;
-    border-bottom: 1px solid $dark;
+    border-bottom: 1px solid var(--border);
     margin-bottom: 4px;
     padding: $spacing-xs $spacing-sm;
     font-size: 1.2rem;
@@ -16,7 +16,7 @@
     &:hover,
     &:focus,
     &:active {
-      border-bottom: 1px solid $positive;
+      border-bottom: 1px solid var(--selection);
     }
   }
   // Select Themed Button
@@ -27,9 +27,9 @@
     align-items: center;
     background-color: transparent;
     border: none;
-    border-bottom: 1px solid lighten($dark, 45%);
+    border-bottom: 1px solid var(--border);
     border-radius: 0;
-    color: $dark;
+    color: var(--text-main);
     padding: 0;
     height: 2rem;
     min-height: 2rem;
@@ -43,7 +43,7 @@
     height: 1.8rem;
 
     &.empty {
-      color: #a9a9a9;
+      color: var(--text-muted);
     }
     &:focus,
     &:hover {
@@ -56,14 +56,14 @@
       }
     }
     &:focus {
-      border-bottom: 1px solid $positive;
+      border-bottom: 1px solid var(--selection);
       i {
         color: rgba(0, 0, 0, 0.73);
       }
     }
     i {
       font-size: 0.8rem;
-      color: $dark;
+      color: var(--text-main);
       opacity: 0.45;
     }
   }

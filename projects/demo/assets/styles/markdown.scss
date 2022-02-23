@@ -126,12 +126,13 @@
     border-style: none;
   }
 
-  code,
-  kbd,
-  pre {
-    font-family: monospace, monospace;
-    font-size: 1em;
-  }
+  // Set from typography
+  // code,
+  // kbd,
+  // pre {
+  //   font-family: monospace, monospace;
+  //   font-size: 1em;
+  // }
 
   hr {
     box-sizing: initial;
@@ -253,11 +254,12 @@
     margin-left: 0;
   }
 
-  code,
-  pre {
-    font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
-    font-size: 12px;
-  }
+  // Set from typography
+  // code,
+  // pre {
+  //   font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
+  //   font-size: 12px;
+  // }
 
   pre {
     margin-top: 0;
@@ -407,13 +409,15 @@
     padding-right: 20px;
   }
 
-  code {
-    padding: 0.2em 0.4em;
-    margin: 0;
-    font-size: 85%;
-    background-color: rgba(27, 31, 35, 0.05);
-    border-radius: 3px;
-  }
+  // Set from typography
+  // code {
+  //   padding: 0.2rem 0.5ch;
+  //   margin: -0.2rem 0.5ch;
+  //   font-size: inherit;
+  //   background-color: rgba(27, 31, 35, 0.05);
+  //   border-radius: 3px;
+  //   line-height: 1.1em;
+  // }
 
   pre {
     word-wrap: normal;
@@ -484,6 +488,7 @@
       p {
         margin-top: 0rem;
         margin-bottom: 0rem;
+        line-height: 1.5;
       }
       & > p:first-child {
         display: flex;
@@ -505,5 +510,10 @@
     display: grid;
     align-items: start;
     grid-template-columns: 1fr 1fr;
+  }
+
+  p,
+  .p {
+    line-height: 1.5 !important;
   }
 }

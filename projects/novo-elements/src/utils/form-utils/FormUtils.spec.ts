@@ -16,6 +16,7 @@ import {
   PickerControl,
   RadioControl,
   SelectControl,
+  SwitchControl,
   TextAreaControl,
   TextBoxControl,
   TilesControl,
@@ -322,6 +323,11 @@ describe('Utils: FormUtils', () => {
       expect(formUtils.getControlForField).toBeDefined();
       const result = formUtils.getControlForField({ type: 'checkbox' });
       expect(result instanceof CheckboxControl).toBe(true);
+    });
+    it('should return the right component for switch', () => {
+      expect(formUtils.getControlForField).toBeDefined();
+      const result = formUtils.getControlForField({ type: 'switch' });
+      expect(result instanceof SwitchControl).toBe(true);
     });
     it('should return the right component for checklist', () => {
       expect(formUtils.getControlForField).toBeDefined();

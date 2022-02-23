@@ -7,8 +7,10 @@ import {
   forwardRef,
   HostBinding,
   Input,
+  OnChanges,
   OnInit,
   Output,
+  SimpleChanges,
   ViewChild,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -75,7 +77,7 @@ const DATE_VALUE_ACCESSOR = {
       <novo-date-picker
         [start]="start"
         [end]="end"
-        [weekRangeSelect]="weekRangeSelect"
+        [mode]="mode"
         range="true"
         inline="true"
         (onSelect)="setValueAndClose($event)"
@@ -85,7 +87,7 @@ const DATE_VALUE_ACCESSOR = {
     </novo-overlay-template>
   `,
 })
-export class NovoDateRangeInputElement implements OnInit, ControlValueAccessor {
+export class NovoDateRangeInputElement implements OnInit, OnChanges, ControlValueAccessor {
   public formattedStartDate: string = '';
   public formattedEndDate: string = '';
   private userDefinedFormat: boolean;
@@ -98,6 +100,8 @@ export class NovoDateRangeInputElement implements OnInit, ControlValueAccessor {
   end: Date;
   @Input()
   weekRangeSelect: boolean = false;
+  @Input()
+  mode: string = 'range';
   @Input()
   placeholder: string;
   @Input()
@@ -156,11 +160,20 @@ export class NovoDateRangeInputElement implements OnInit, ControlValueAccessor {
   }
 
   ngOnInit() {
+    this._initFormatOptions();
+  }
+  ngOnChanges(changes: SimpleChanges): void {
+    if (Object.keys(changes).some((key) => ['format'].includes(key))) {
+      this._initFormatOptions();
+    }
+  }
+
+  _initFormatOptions() {
     this.userDefinedFormat = this.format ? !this.format.match(/^(DD\/MM\/YYYY|MM\/DD\/YYYY)$/g) : false;
     if (!this.userDefinedFormat && this.textMaskEnabled && !this.allowInvalidDate) {
       this.maskOptions = this.maskOptions || {
         mask: this.dateFormatService.getDateMask(),
-        pipe: createAutoCorrectedDatePipe(this.format || this.labels.dateFormatString().toLowerCase()),
+        pipe: createAutoCorrectedDatePipe((this.format || this.labels.dateFormatString()).toLowerCase()),
         keepCharPositions: false,
         guide: true,
       };

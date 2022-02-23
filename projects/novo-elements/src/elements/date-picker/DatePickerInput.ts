@@ -7,8 +7,10 @@ import {
   forwardRef,
   HostBinding,
   Input,
+  OnChanges,
   OnInit,
   Output,
+  SimpleChanges,
   ViewChild,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -63,7 +65,7 @@ const DATE_VALUE_ACCESSOR = {
     </novo-overlay-template>
   `,
 })
-export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor {
+export class NovoDatePickerInputElement implements OnInit, OnChanges, ControlValueAccessor {
   public value: any;
   public formattedValue: string = '';
   public showInvalidDateError: boolean;
@@ -144,11 +146,20 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
   }
 
   ngOnInit() {
+    this._initFormatOptions();
+  }
+  ngOnChanges(changes: SimpleChanges): void {
+    if (Object.keys(changes).some((key) => ['format'].includes(key))) {
+      this._initFormatOptions();
+    }
+  }
+
+  _initFormatOptions() {
     this.userDefinedFormat = this.format ? !this.format.match(/^(DD\/MM\/YYYY|MM\/DD\/YYYY)$/g) : false;
     if (!this.userDefinedFormat && this.textMaskEnabled && !this.allowInvalidDate) {
       this.maskOptions = this.maskOptions || {
         mask: this.dateFormatService.getDateMask(),
-        pipe: createAutoCorrectedDatePipe(this.format || this.labels.dateFormatString().toLowerCase()),
+        pipe: createAutoCorrectedDatePipe((this.format || this.labels.dateFormatString()).toLowerCase()),
         keepCharPositions: false,
         guide: true,
       };
@@ -282,8 +293,8 @@ export class NovoDatePickerInputElement implements OnInit, ControlValueAccessor 
   }
 
   private _setFormValue(value: any): void {
-    if (this.value) {
-      const test = this.formatDateValue(this.value);
+    if (value) {
+      const test = this.formatDateValue(value);
       this.formattedValue = test;
     } else {
       this.formattedValue = '';

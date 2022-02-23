@@ -6,7 +6,9 @@
 }
 
 @mixin base-text-rules() {
+  transition-property: color, opacity;
   transition: 0.2s ease-out;
+  vertical-align: middle;
 
   &.text-nowrap {
     white-space: nowrap;
@@ -137,7 +139,7 @@
 }
 
 @mixin novo-title-text() {
-  font-weight: 600;
+  font-weight: 500;
   line-height: 1.5;
   color: var(--text-main, $dark);
   white-space: nowrap;
@@ -148,7 +150,7 @@
 
 @mixin novo-label-text() {
   font-weight: 500;
-  text-transform: uppercase;
+  // text-transform: uppercase;
   word-break: word-break;
   overflow-wrap: break-word;
   line-height: 1.375;

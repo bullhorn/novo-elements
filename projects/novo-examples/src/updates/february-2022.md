@@ -346,5 +346,5 @@ Notable changes [#](https://bullhorn.github.io/novo-elements/#/updates/v6#notabl
 Thank you [#](https://bullhorn.github.io/novo-elements/#/updates/v6#thanks){#thanks}
 --------------------------------------------------------------------
 
-Last but certainly not least, a big *Thank You* to the contributors of Novo Elements throughout the years. For this release a special shout out to Dan V and Charles 
+Last but certainly not least, a big *Thank You* to the contributors of Novo Elements throughout the years. For this release a special shout out to our developers Dan Voegelin and Charles Barnes, the automation team for helping us test the changes: Jon Eman, Tiffany Bertolozzi, Tony Phu and Ashley Schroeder, and our UX Team include but not limited to: Jon Braun, Madeliene Valcour, Katie Todd, Daniel Long, Angela Wang and Gloria Nam.
 

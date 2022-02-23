@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 // Vendor
-import { CheckboxControl, CheckListControl, FormUtils, TilesControl } from 'novo-elements';
+import { CheckboxControl, CheckListControl, FormUtils, SwitchControl, TilesControl } from 'novo-elements';
 
 // import { MockMeta, MockMetaHeaders } from './MockMeta';
 
@@ -17,10 +17,12 @@ export class CheckBoxControlsExample {
   public checkListControl: any;
   public tilesControl: any;
   public disabledTilesControl: any;
+  public switchControl: any;
   public checkForm: any;
 
   constructor(private formUtils: FormUtils) {
     // Check box controls
+    this.switchControl = new SwitchControl({ key: 'switch', tooltip: 'Switch', label: 'Switch', checkboxLabel: 'Switch' });
     this.checkControl = new CheckboxControl({ key: 'check', tooltip: 'Checkbox', label: 'Checkbox', checkboxLabel: 'Checkbox' });
     this.checkListControl = new CheckListControl({
       key: 'checklist',
@@ -49,7 +51,13 @@ export class CheckBoxControlsExample {
       ],
       tooltip: 'Tiles',
     });
-    this.checkForm = formUtils.toFormGroup([this.checkControl, this.checkListControl, this.tilesControl, this.disabledTilesControl]);
+    this.checkForm = formUtils.toFormGroup([
+      this.switchControl,
+      this.checkControl,
+      this.checkListControl,
+      this.tilesControl,
+      this.disabledTilesControl,
+    ]);
   }
 
   onChange(value) {

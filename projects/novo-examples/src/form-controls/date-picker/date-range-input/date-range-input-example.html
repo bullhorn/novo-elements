@@ -1,7 +1,7 @@
 <novo-date-range-input
   [(ngModel)]="selected"
   [format]="format.value"
-  [weekRangeSelect]="weekSelect"
+  [mode]="mode.value"
   [weekStart]="weekStart.value">
 </novo-date-range-input>
 
@@ -11,16 +11,16 @@
 </section>
 
 <section>
-  <novo-label>Week Select mode</novo-label>
-  <novo-radio-group #weekSelect appearance="vertical" value="true">
-    <novo-radio name="weekSelect" [value]="true">true</novo-radio>
-    <novo-radio name="weekSelect" [value]="false">false</novo-radio>
+  <novo-label>Selection mode</novo-label>
+  <novo-radio-group #mode appearance="vertical" value="week">
+    <novo-radio name="mode" value="week">week</novo-radio>
+    <novo-radio name="mode" value="range">range</novo-radio>
   </novo-radio-group>
 
   <novo-label>Format</novo-label>
-  <novo-radio-group #format appearance="vertical" value="1">
-    <novo-radio name="format" value="mm/dd/yyyy">mm/dd/yyyy</novo-radio>
-    <novo-radio name="format" value="dd/mm/yyyy">dd/mm/yyyy</novo-radio>
+  <novo-radio-group #format appearance="vertical" value="MM-DD-YYYY">
+    <novo-radio name="format" value="MM-DD-YYYY">MM-dd-YYYY</novo-radio>
+    <novo-radio name="format" value="DD-MM-YYYY">dd-MM-YYYY</novo-radio>
   </novo-radio-group>
 
   <novo-label>Week Start</novo-label>

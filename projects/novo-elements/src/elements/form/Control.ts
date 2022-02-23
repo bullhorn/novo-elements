@@ -13,7 +13,7 @@ import {
   LOCALE_ID,
   OnDestroy,
   OnInit,
-  Output,
+  Output
 } from '@angular/core';
 // Vendor
 import { Observable } from 'rxjs';
@@ -618,6 +618,9 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
         'quick-note',
         'date',
         'custom',
+        'switch',
+        'native-select',
+        'native-input'
       ].indexOf(this.form.controls[this.control.key].controlType) !== -1
     );
   }

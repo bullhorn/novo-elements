@@ -101,10 +101,7 @@ import { DataTableState } from './state/data-table-state.service';
           [hidden]="dataSource?.totallyEmpty && !state.userFiltered"
         >
           <ng-container cdkColumnDef="selection">
-            <novo-data-table-checkbox-header-cell
-              *cdkHeaderCellDef
-              [maxSelected]="maxSelected"
-            ></novo-data-table-checkbox-header-cell>
+            <novo-data-table-checkbox-header-cell *cdkHeaderCellDef [maxSelected]="maxSelected"></novo-data-table-checkbox-header-cell>
             <novo-data-table-checkbox-cell
               *cdkCellDef="let row; let i = index"
               [row]="row"
@@ -479,11 +476,9 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
         this.ref.detectChanges();
       }, 300);
     });
-    this.allMatchingSelectedSubscription = this.state.allMatchingSelectedSource.subscribe(
-      (event: boolean) => {
-        this.allMatchingSelected = event;
-      },
-    );
+    this.allMatchingSelectedSubscription = this.state.allMatchingSelectedSource.subscribe((event: boolean) => {
+      this.allMatchingSelected = event;
+    });
   }
 
   public modifyCellHeaderMultiSelectFilterOptions(column: string, newOptions: { value: any; label: string }[]): void {

@@ -13,16 +13,14 @@ import { Component } from '@angular/core';
       transition('* => visible', [
         style({
           opacity: 0,
-          visibility: 'visible',
         }),
-        animate('0.3s ease-in'),
+        animate('0.3s 0.1s ease-in'),
       ]),
       transition('* => hidden', [
         style({
           opacity: 1,
-          visibility: 'hidden',
         }),
-        animate('0.3s ease-in'),
+        animate('0.3s 0.1s ease-in'),
       ]),
     ]),
   ],

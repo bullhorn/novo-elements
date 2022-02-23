@@ -29,6 +29,19 @@
 
 </novo-field>
 
+
+<novo-fieldset-header icon="calendar" title="Add Day Of Week"></novo-fieldset-header>
+
+<novo-field>
+  <novo-label>Date of Birth</novo-label>
+  <novo-text novoPrefix mr="sm">{{date2 | date : 'EEE' }}</novo-text>
+  <input novoInput dateFormat="iso8601" [picker]="datepicker2" [(ngModel)]="date2" />
+  <novo-picker-toggle novoSuffix icon="calendar">
+    <novo-date-picker #datepicker2></novo-date-picker>
+  </novo-picker-toggle>
+  <novo-hint>value is: {{date2}}</novo-hint>
+</novo-field>
+
 <novo-fieldset-header icon="section" title="Section Header"></novo-fieldset-header>
 
 <novo-field>

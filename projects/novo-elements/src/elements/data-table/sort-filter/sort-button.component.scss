@@ -9,7 +9,7 @@
   novo-icon {
     position: absolute;
     opacity: 0;
-    color: $light;
+    color: var(--text-muted);
     &:hover {
       color: var(--selection);
     }
