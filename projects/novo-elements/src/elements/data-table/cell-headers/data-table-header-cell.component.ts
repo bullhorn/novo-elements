@@ -80,7 +80,7 @@ import { DataTableState } from '../state/data-table-state.service';
             {{ labels.clear }}
           </novo-button>
         </div>
-        <ng-container [ngSwitch]="config.filterConfig.type">
+        <div class="optgroup-container"><ng-container [ngSwitch]="config.filterConfig.type">
           <novo-optgroup *ngSwitchCase="'date'" (keydown.escape)="handleEscapeKeydown($event)">
             <ng-container *ngIf="!showCustomRange">
               <novo-option
@@ -182,7 +182,7 @@ import { DataTableState } from '../state/data-table-state.service';
               </novo-field>
             </novo-option>
           </novo-optgroup>
-        </ng-container>
+        </ng-container></div>
         <div class="footer" *ngIf="multiSelect">
           <novo-button theme="dialogue" color="dark" (click)="cancel()" data-automation-id="novo-data-table-multi-select-cancel">
             {{ labels.cancel }}

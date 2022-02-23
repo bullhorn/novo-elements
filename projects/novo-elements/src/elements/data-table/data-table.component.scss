@@ -635,7 +635,7 @@ novo-data-table-pagination {
   max-width: 230px;
   max-height: 500px;
   overflow-x: hidden;
-  overflow-y: auto;
+  overflow-y: hidden;
   &.right {
     margin-left: -150px !important;
   }
@@ -650,6 +650,11 @@ novo-data-table-pagination {
     //     font-size: 0.8em;
     //   }
     // }
+  }
+  .optgroup-container {
+    max-height: 346px;
+    overflow-y: auto;
+    overflow-x: hidden;
   }
   .dropdown-list-options {
     max-height: 346px;
