@@ -4,7 +4,7 @@ import { ComponentRef, Injectable, Injector } from '@angular/core';
 import { NovoAsideRef } from './aside-ref';
 import { AsideComponent } from './aside.component';
 
-interface AsideConfig {
+interface AsideConfig extends OverlayConfig {
   panelClass?: string;
   hasBackdrop?: boolean;
   backdropClass?: string;
@@ -20,9 +20,9 @@ const DEFAULT_CONFIG: AsideConfig = {
 export class NovoAsideService {
   constructor(private injector: Injector, private overlay: Overlay) {}
 
-  open(component, params = {}) {
+  open(component, params = {}, config = {}) {
     // Override default configuration
-    const asideConfig = DEFAULT_CONFIG;
+    const asideConfig = this.getOverlayConfig({ ...DEFAULT_CONFIG, ...config });
 
     // Returns an OverlayRef which is a PortalHost
     const overlayRef = this.createOverlay(asideConfig);
@@ -41,7 +41,6 @@ export class NovoAsideService {
   }
 
   private createOverlay(config: AsideConfig) {
-    // const overlayConfig = this.getOverlayConfig(config);
     return this.overlay.create(config);
   }
 
@@ -62,16 +61,15 @@ export class NovoAsideService {
     return new PortalInjector(this.injector, injectionTokens);
   }
 
-  private getOverlayConfig(config: AsideConfig): OverlayConfig {
-    const positionStrategy = this.overlay.position().global().centerHorizontally().centerVertically();
+  private getOverlayConfig(config: AsideConfig): AsideConfig {
+    // const positionStrategy = this.overlay.position().global().centerHorizontally().centerVertically();
+    const scrollStrategy = config.hasBackdrop ? this.overlay.scrollStrategies.block() : this.overlay.scrollStrategies.noop();
 
-    const overlayConfig = new OverlayConfig({
-      positionStrategy,
+    return {
+      scrollStrategy,
       hasBackdrop: config.hasBackdrop,
       backdropClass: config.backdropClass,
       panelClass: config.panelClass,
-    });
-
-    return overlayConfig;
+    };
   }
 }
