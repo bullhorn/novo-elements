@@ -1,14 +1,15 @@
 code,
 samp {
+  font-family: var(--font-family-mono);
   background: var(--background-main);
   color: var(--code);
   border: 1px solid var(--border);
   border-radius: 4px;
-  padding: 0.2rem 0.5ch;
-  margin: -0.2rem 0.5ch;
-  line-height: 1.1em;
+  padding: 0 0.5ch;
+  margin: 0 0.5ch;
+  line-height: inherit;
   font-size: inherit;
-  font-family: var(--font-family-mono);
+  white-space: nowrap;
 }
 
 time {
