@@ -139,7 +139,7 @@ export class NovoSearchBoxElement implements ControlValueAccessor {
     this.overlay.openPanel();
   }
   closePanel(): void {
-    this.overlay.closePanel();
+    setTimeout(() => this.overlay.closePanel());
   }
   get panelOpen(): boolean {
     return this.overlay && this.overlay.panelOpen;
