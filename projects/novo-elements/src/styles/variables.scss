@@ -37,8 +37,10 @@ $company: $color-company;
 $candidate: $color-candidate;
 $lead: $color-lead;
 $contact: $color-contact;
+$clientcontact: $color-contact;
 $opportunity: $color-opportunity;
 $job: $color-job;
+$joborder: $color-job;
 $submission: $color-submission;
 $sendout: $color-sendout;
 $placement: $color-placement;
@@ -103,8 +105,10 @@ $entity-colors: (
   "navigation": $color-navigation,
   "lead": $color-lead,
   "contact": $color-contact,
+  "clientcontact": $color-contact,
   "opportunity": $color-opportunity,
   "job": $color-job,
+  "joborder": $color-job,
   "submission": $color-submission,
   "sendout": $color-sendout,
   "placement": $color-placement,
@@ -159,8 +163,10 @@ $dark-colors: (
   "navigation": $color-navigation,
   "lead": $color-lead,
   "contact": $color-contact,
+  "clientcontact": $color-contact,
   "opportunity": $color-opportunity,
   "job": $color-job,
+  "joborder": $color-job,
   "jobCode": $color-job-code,
   "earnCode": $color-earn-code,
   "sendout": $color-sendout,
