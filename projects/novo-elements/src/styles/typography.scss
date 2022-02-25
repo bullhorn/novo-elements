@@ -146,6 +146,7 @@ h6,
 p,
 span {
   @include base-text-rules();
+  vertical-align: baseline;
 }
 
 span > span {
