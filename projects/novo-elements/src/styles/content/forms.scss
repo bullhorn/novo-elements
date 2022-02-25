@@ -140,6 +140,9 @@ select:disabled,
 button:disabled,
 textarea:disabled {
   cursor: not-allowed;
+}
+
+button:disabled {
   opacity: 0.5;
 }
 
