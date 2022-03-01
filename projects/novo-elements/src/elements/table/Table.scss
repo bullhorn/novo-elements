@@ -160,9 +160,12 @@ novo-table {
       flex-direction: row;
       align-items: center;
       novo-dropdown.column-filters {
-        .novo-button.filtered {
-          i {
-            color: $positive;
+        .novo-button {
+          -webkit-appearance: none;
+          &.filtered {
+            i {
+              color: $positive;
+            }
           }
         }
       }
