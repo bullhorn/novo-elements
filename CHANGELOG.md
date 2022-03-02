@@ -1,3 +1,292 @@
+# [6.0.0](https://github.com/bullhorn/novo-elements/compare/v5.13.1...v6.0.0) (2022-03-02)
+
+
+* refactor!: Version 6.0.0 Release Candidate (#1241) ([9eea255](https://github.com/bullhorn/novo-elements/commit/9eea2550e4db367ccda64361ee7a3892a0b5f4c2)), closes [#1241](https://github.com/bullhorn/novo-elements/issues/1241) [#1154](https://github.com/bullhorn/novo-elements/issues/1154) [#1233](https://github.com/bullhorn/novo-elements/issues/1233) [#1253](https://github.com/bullhorn/novo-elements/issues/1253) [#1262](https://github.com/bullhorn/novo-elements/issues/1262)
+
+
+### Features
+
+* **Control Group:** Allow customizing of icons ([#1254](https://github.com/bullhorn/novo-elements/issues/1254)) ([d963c19](https://github.com/bullhorn/novo-elements/commit/d963c19088eb84640269e1cf0a6f2fbff87d6b58))
+
+
+### BREAKING CHANGES
+
+* Rename big `calendar` to agenda
+chore: Updated docs and examples for Menu, Toast, Button, Modal, Agenda, Calendar
+
+* updating some example styles
+
+* chore: Added/Updated/Cleaned new documentation for many components
+
+* updated more docs
+
+Co-authored-by: Vonterio Duncan <vonterio.duncan@bullhorn.com>
+Co-authored-by: Zachary Jorn <44657047+ZacharyJorn@users.noreply.github.com>
+Co-authored-by: zachary.jorn <zachary.jorn@bullhorn.com>
+Co-authored-by: james.wesselmann <james.wesselmann@bullhorn.com>
+Co-authored-by: Brian Kimball <brian.kimball@bullhorn.com>
+
+* adding back modal module file
+
+* adding back whiteframe styles in the interest of backwards compatibility
+
+* adding back typography styles for backwards compat
+
+* minor changes
+
+* BH-73101 decreasing header size to account for removal of zoom
+
+* chore: push new relase workflow
+
+* chore: fixed bump
+
+* chore: tied action to main branch
+
+* chore(release): 6.0.1-next.0
+
+* chore(release): 6.0.0-next.0
+
+* fix: package name
+
+* chore(release): 6.0.0-next.1
+
+* chore: pointing at wrong demo dir
+
+* chore(release): 6.0.0-next.2
+
+* fix: docs image urls now relative
+
+* feat(Toolbar): Add the Toolbar components
+
+* chore: remove ghpages action
+
+* chore(release): 6.0.0-next.3
+
+* feat(schematics): ng-update schematics updated and testing
+chore: Added contributors script and section
+
+* chore(release): 6.0.0-next.4
+
+* feat: Update Scripts added for more scenarios
+
+* fix: Checkbox and ChipList Styles
+feat: Added Accent and color options to chips
+chore: added/updated chip examples
+
+* fix: demo site
+fix: light theme now uses white bg more
+
+* updating migration schematic for stylesheet import
+
+* fixing schematic build error
+
+* updating scss schematic migration
+
+* upping angular-imask and novo-design-tokens versions
+
+* fix(Cleanup): Tweaking and fixing styles
+
+* a couple styling fixes for spacing issues
+
+* resolving some header icon spacing issues
+
+* resolving a header icon spacing issue
+
+* fix(Styles): All fixes to keep styles as compatable as possible
+
+* chore: updated package.lock
+
+* chore(release): 6.0.0-next.5
+
+* updating menu buttons
+
+* fixing a couple styling issues
+
+* chore(unit-tests): Fix EntityPickerResults unit tests
+
+* chore(action): setup node with node 14
+
+* chore(unit-test): import whole module for unit tests
+
+* updating some icon styles
+
+* chore(unit-test): import whole module for Item Header Test
+
+* chore(unit-test): import whole module for Item Header Test
+
+* chore(unit-test): import whole module for Item Header Test
+
+* chore(unit-test): add back providers
+
+* remove avatar background, make it the svg color
+
+* trying out smaller body font size
+
+* updating button icon spacing changes
+
+* font size scaling adjustment
+
+* tweaking button font size to center text better
+
+* removing some type declarations that were causing unit test failures
+
+* fixing undefined in template error
+
+* fix oninit implementation
+
+* trying another way to fix undefined in template error
+
+* styling update for table row font spacing
+
+* !: Removed chomsky
+chore: moved demo
+
+* chore: cleanup documentation generation
+
+* fixing htmlhint issues in demo
+
+* upping html font-size back up to 10px
+
+* a few changes to account for new font-size scaling
+
+* 5rem header height everywhere
+
+* fix(Dropdown): WIP on Dropdown errors.
+style(Form): max-width for form adjusted
+style(EntityPickerResults): fixed icon color and alignment
+
+* package-lock update
+
+* fix(Dropdown): `options` that were added asyncronously to content were missing select listeners. caused dropdown not to close on click.
+
+* not selecting entity picker results on right click
+
+* fixing picker style and adding active class to active sort icon
+
+* updating active sort class name
+
+* upping design tokens version
+
+* fix(modal): Modal and Notification styles were busted
+
+* fix(datatable): Fixed datatable header dropdowns
+
+* applying fieldset margin to novo-icon as well as i
+
+* fixing table headers
+
+* consolidating border-radius styles into one
+
+* fixing date range picker filter styling
+
+* trimming card label
+
+* Fixes for Table headers
+
+* Updated Design Token
+
+* fix(date-picker): fix date picker calendar styling for notinmonth
+
+* set default for novo radio vertical option
+
+* access raw value directly
+
+* add back in getter for value
+
+* chore(release): 6.0.0-next.6
+
+* fix: dropdown dropping click events
+
+* fix: don't update dropdown cell for now
+
+* fix: close dropdown panel if escape key is pressed
+
+* push initial value to selectionModel
+
+* fix: tweak logic for display with select dropdown
+
+* drop down to default side in simple table
+
+* use inferred type
+
+* fix types again
+
+* check if deselect option is present on value
+
+* check if select option is present on value
+
+* fixing clear chip picker default value error since this.value is undefined
+
+* update timePickerInput change comparator
+
+* add comment to formGroup for future developer
+
+* add handle changes in timePickerInput correctly
+
+* detect changes when the dropdown is toggled
+
+* fix table button styles
+
+* switch back to right side
+
+* try different overlay position strategy
+
+* try bottom position
+
+* create new positioning strategy
+
+* add positions to position strategy
+
+* set position to default
+
+* add additional set timeout for overlay positioning
+
+* close panel on esc novo-dropdown
+
+* fix: handle pressing escape on data-table filters
+
+* fix(Select): Unknown Options have not displayValue when set as intialValue. Disabled states also broken
+
+* adjusting fieldset-header sizing
+
+* fix for row ship width issue - was extending outside of form with 4+ chips
+
+* fix for novo-select display value issue
+
+* putting 1em font-size back on icon
+
+* pushed update icon file
+
+* fix for longstanding required address alignment issues
+
+* removing focus outline on filter icon after filter applied
+
+* fixing data-table header spacing for binocs
+
+* (fix): fixing appearance of select and dropdown buttons in safari
+
+* giving novo-fieldset-header a font-size for novo-title to inherit and then making it smaller
+
+* fix for another select value display issue plus refactoring my last fix a bit
+
+* chore(docs): New Documentation
+
+* chore: re-enabled api-doc generate
+
+* chore: update build version
+
+* chore: error in build on github action
+
+* chore: remove change
+
+* fix(bump): Relase is failing
+
+* fix(version): someone merged the version backwards
+
+* chore(release): 6.0.0-next.7
+
+
+
 # Changelog
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
