@@ -63,13 +63,6 @@
         text-overflow: ellipsis;
         padding-right: 20px;
       }
-      header-spacer {
-        display: inline-block;
-        height: 1.8em;
-        width: 2px;
-        margin: 0 0.6em;
-        background-color: rgba(0, 0, 0, 0.25);
-      }
     }
     > section {
       flex: 2 2 250px;
@@ -145,4 +138,12 @@
     display: flex;
     flex-flow: row nowrap;
   }
+}
+
+header-spacer {
+  display: inline-block;
+  height: 1.8em;
+  width: 2px;
+  margin: 0 0.6em;
+  background-color: rgba(0, 0, 0, 0.25);
 }

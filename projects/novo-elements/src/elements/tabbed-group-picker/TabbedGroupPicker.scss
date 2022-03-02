@@ -120,9 +120,6 @@
             padding: 0.5em 1.75em;
             border-bottom: none;
           }
-          novo-list-item:last-of-type {
-            padding-bottom: 1em;
-          }
         }
       }
       novo-optgroup {
@@ -132,29 +129,12 @@
           @media (max-height: 720px) {
             height: 18em;
           }
+        }
 
-          novo-list-item {
-            font-size: 1.2em;
-            padding: 0.75em 1.75em;
-            cursor: pointer;
-            border-bottom: none;
-            align-items: center;
-
-            &:focus,
-            &:hover {
-              background: lighten($light, 10%);
-              color: darken($light, 55%);
-            }
-
-            novo-checkbox .check-box-group {
-              margin-right: 0;
-              label span {
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                width: 16.23em;
-              }
-            }
+        novo-option {
+          &:hover.novo-option-inert {
+            background: var(--background-main, rgba($ocean, 0.1));
+            color: var(--text-bright, $dark);
           }
         }
       }

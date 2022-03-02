@@ -32,7 +32,8 @@
             *ngFor="let quickSelect of quickSelectConfig.items"
             [attr.data-automation-id]="quickSelect.label"
             [selected]="quickSelect.selected"
-            (click)="quickSelect.selected = !quickSelect.selected; onItemToggled(quickSelect)">
+            (click)="quickSelect.selected = !quickSelect.selected; onItemToggled(quickSelect)"
+            inert>
             {{quickSelect.label}}
             <!-- <novo-checkbox
               [label]="quickSelect.label"
@@ -52,7 +53,8 @@
             *cdkVirtualFor="let item of displayTab.data"
             [attr.data-automation-id]="item[displayTab.labelField]"
             [selected]="item.selected"
-            (click)="item.selected = !item.selected; onItemToggled(item)">
+            (click)="item.selected = !item.selected; onItemToggled(item)"
+            inert>
             {{item[displayTab.labelField]}}
 
             <!-- <novo-checkbox
