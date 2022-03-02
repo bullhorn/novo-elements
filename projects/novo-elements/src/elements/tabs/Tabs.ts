@@ -245,17 +245,9 @@ export class NovoNavOutletElement {
     item.active = true;
   }
 
-  /**
-   * This method is called by NovoNavContentElement.
-   * If any tabs have the active property set. set other tabs' active property to false.
-   * This also handles if multiple are set to active and goes with the last option.
-   */
   add(item) {
     if (this.items.length === 0) {
       item.active = true;
-    }
-    if (item.active) {
-      this.items = this.items.map(savedItem => ({...savedItem, active: false}));
     }
     this.items.push(item);
   }
