@@ -1,6 +1,7 @@
 // NG2
 import { coerceNumberProperty } from '@angular/cdk/coercion';
 import {
+  AfterContentChecked,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
@@ -20,7 +21,7 @@ import { BooleanInput } from '../../utils';
   selector: 'novo-nav',
   template: '<ng-content></ng-content>',
 })
-export class NovoNavElement {
+export class NovoNavElement implements AfterContentChecked {
   @Input()
   theme: string = '';
   @Input()
@@ -54,7 +55,7 @@ export class NovoNavElement {
     // Don't clamp the `indexToSelect` immediately in the setter because it can happen that
     // the amount of tabs changes before the actual change detection runs.
     const indexToSelect = (this._indexToSelect = this._clampTabIndex(this._indexToSelect));
-    if (this._selectedIndex != indexToSelect) {
+    if (this._selectedIndex !== indexToSelect) {
       const isFirstRun = this._selectedIndex == null;
       // Changing these values after change detection has run
       // since the checked content may contain references to them.
