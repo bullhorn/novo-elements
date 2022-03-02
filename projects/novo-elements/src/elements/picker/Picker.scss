@@ -199,6 +199,7 @@ entity-picker-result.active {
     .novo-item-content {
       margin-top: $spacing-sm;
       margin-left: 1.8rem;
+      row-gap: 1rem;
       .novo-text {
         white-space: nowrap;
         text-overflow: ellipsis;
@@ -262,6 +263,7 @@ novo-picker {
 }
 
 entity-picker-results {
+  min-width: 250px;
   novo-list {
     max-height: 49vh;
     overflow: auto;
@@ -327,10 +329,6 @@ picker-results {
     background-color: white;
     color: black;
   }
-}
-
-entity-picker-results {
-  min-width: 250px;
 }
 
 // Shared specialty picker styles
