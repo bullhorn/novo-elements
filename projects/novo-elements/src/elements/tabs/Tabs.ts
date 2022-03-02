@@ -1,4 +1,5 @@
 // NG2
+import { coerceNumberProperty } from '@angular/cdk/coercion';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -40,16 +41,43 @@ export class NovoNavElement {
   get selectedIndex(): number | null {
     return this._selectedIndex;
   }
-
+  set selectedIndex(value: number | null) {
+    this._indexToSelect = coerceNumberProperty(value, null);
+  }
   private _selectedIndex: number | null = null;
+  /** The tab index that should be selected after the content has been checked. */
+  private _indexToSelect: number | null = 0;
+  /** Output to enable support for two-way binding on `[(selectedIndex)]` */
+  @Output() readonly selectedIndexChange: EventEmitter<number> = new EventEmitter<number>();
+
+  ngAfterContentChecked() {
+    // Don't clamp the `indexToSelect` immediately in the setter because it can happen that
+    // the amount of tabs changes before the actual change detection runs.
+    const indexToSelect = (this._indexToSelect = this._clampTabIndex(this._indexToSelect));
+    if (this._selectedIndex != indexToSelect) {
+      const isFirstRun = this._selectedIndex == null;
+      // Changing these values after change detection has run
+      // since the checked content may contain references to them.
+      Promise.resolve().then(() => {
+        this._deactivateAllItems(this.items);
+        this._activateSelectedItem(indexToSelect);
+        this._showActiveContent(indexToSelect);
+        if (!isFirstRun) {
+          this.selectedIndexChange.emit(indexToSelect);
+        }
+      });
+
+      this._selectedIndex = indexToSelect;
+    }
+  }
 
   select(item) {
+    const indexToSelect = this.items.indexOf(item);
     // Deactivate all other tabs
     this._deactivateAllItems(this.items);
-    item.active = true;
-    if (this.outlet) {
-      this.outlet.show(this.items.indexOf(item));
-    }
+    this._activateSelectedItem(indexToSelect);
+    this._showActiveContent(indexToSelect);
+    this.selectedIndexChange.emit(indexToSelect);
   }
 
   add(item) {
@@ -60,6 +88,19 @@ export class NovoNavElement {
     this.items.push(item);
   }
 
+  private _activateSelectedItem(indexToSelect: number) {
+    const item = this.items[indexToSelect];
+    if (item) {
+      item.active = true;
+    }
+  }
+
+  private _showActiveContent(indexToSelect: number) {
+    if (this.outlet) {
+      this.outlet.show(indexToSelect);
+    }
+  }
+
   private _deactivateAllItems(items: Array<any>) {
     items.forEach((t) => {
       if (t.active === true) {
@@ -67,6 +108,11 @@ export class NovoNavElement {
       }
       t.active = false;
     });
+  }
+
+  /** Clamps the given index to the bounds of 0 and the tabs length. */
+  private _clampTabIndex(index: number | null): number {
+    return Math.min(this.items.length - 1, Math.max(index || 0, 0));
   }
 }
 
