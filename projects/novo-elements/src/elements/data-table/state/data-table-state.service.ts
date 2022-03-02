@@ -1,8 +1,7 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-
-import { IDataTableChangeEvent, IDataTableFilter, IDataTableSelectionOption, IDataTableSort } from '../interfaces';
 import { Helpers } from '../../../utils/Helpers';
+import { IDataTableChangeEvent, IDataTableFilter, IDataTableSelectionOption, IDataTableSort } from '../interfaces';
 import { NovoDataTableFilterUtils } from '../services/data-table-filter-utils';
 
 @Injectable()
@@ -12,6 +11,7 @@ export class DataTableState<T> {
   public sortFilterSource = new Subject();
   public resetSource = new Subject();
   public expandSource = new Subject();
+  public allMatchingSelectedSource = new Subject();
   public dataLoaded = new Subject();
 
   sort: IDataTableSort = undefined;
@@ -93,6 +93,7 @@ export class DataTableState<T> {
   }
 
   public clearSelected(fireUpdate: boolean = true): void {
+    this.allMatchingSelectedSource.next(false);
     this.globalSearch = undefined;
     this.page = 0;
     this.reset(fireUpdate, true);
@@ -148,7 +149,7 @@ export class DataTableState<T> {
     }
   }
 
-  public checkRetainment(caller: string): void {
-    this.retainSelected = this.selectionOptions?.some(option => option.label === caller) || this.retainSelected;
+  public checkRetainment(caller: string, allMatchingSelected = false): void {
+    this.retainSelected = this.selectionOptions?.some((option) => option.label === caller) || this.retainSelected || allMatchingSelected;
   }
 }

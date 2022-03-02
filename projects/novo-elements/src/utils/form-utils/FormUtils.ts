@@ -16,17 +16,19 @@ import {
   PickerControl,
   RadioControl,
   SelectControl,
+  SwitchControl,
   TextAreaControl,
   TextBoxControl,
   TilesControl,
   TimeControl,
+  TimezoneControl,
 } from '../../elements/form/FormControls';
-import { EntityPickerResult, EntityPickerResults } from '../../elements/picker/extras/entity-picker-results/EntityPickerResults';
-import { Helpers } from '../Helpers';
-import { NovoFieldset, FormField } from '../../elements/form/FormInterfaces';
+import { FormField, NovoFieldset } from '../../elements/form/FormInterfaces';
 import { NovoFormControl } from '../../elements/form/NovoFormControl';
 import { NovoFormGroup } from '../../elements/form/NovoFormGroup';
+import { EntityPickerResult, EntityPickerResults } from '../../elements/picker/extras/entity-picker-results/EntityPickerResults';
 import { NovoLabelService } from '../../services/novo-label-service';
+import { Helpers } from '../Helpers';
 import { OptionsService } from './../../services/options/OptionsService';
 
 @Injectable()
@@ -42,6 +44,7 @@ export class FormUtils {
     'CorporateUser',
     'Person',
     'Placement',
+    'JobShift',
   ];
   ENTITY_PICKER_LIST: string[] = [
     'Candidate',
@@ -63,6 +66,7 @@ export class FormUtils {
     'Person',
     'PersonText',
     'Placement',
+    'JobShift',
   ];
 
   constructor(public labels: NovoLabelService, public optionsService: OptionsService) {}
@@ -164,7 +168,10 @@ export class FormUtils {
         }
       }
     } else if (field.type === 'TO_ONE') {
-      if ('SYSTEM' === field.dataSpecialization && ['WorkflowOptionsLookup', 'SpecializedOptionsLookup', 'AllWorkflowOptionsLookup'].includes(field.dataType)) {
+      if (
+        'SYSTEM' === field.dataSpecialization &&
+        ['WorkflowOptionsLookup', 'SpecializedOptionsLookup', 'AllWorkflowOptionsLookup'].includes(field.dataType)
+      ) {
         type = dataSpecializationTypeMap[field.dataType];
       } else if (['WORKFLOW_OPTIONS', 'SPECIALIZED_OPTIONS', 'ALL_WORKFLOW_OPTIONS'].includes(field.dataSpecialization)) {
         type = dataSpecializationTypeMap[field.dataSpecialization];
@@ -214,7 +221,7 @@ export class FormUtils {
   getControlForField(
     field: any,
     http,
-    config: { token?: string; restUrl?: string; military?: boolean, weekStart?: number },
+    config: { token?: string; restUrl?: string; military?: boolean; weekStart?: number },
     overrides?: any,
     forTable: boolean = false,
     fieldData?: any,
@@ -347,6 +354,20 @@ export class FormUtils {
         controlConfig.military = config ? !!config.military : false;
         control = new TimeControl(controlConfig);
         break;
+      case 'native-time':
+      case 'native-date':
+      case 'native-week':
+      case 'native-year':
+      case 'native-datetime-local':
+      case 'native-tel':
+      case 'native-email':
+      case 'native-url':
+      case 'native-number':
+        control = new CustomControl({ ...controlConfig, template: 'native-input', type: type.replace('native-', ''), alwaysActive: true });
+        break;
+      case 'timezone':
+        control = new TimezoneControl(controlConfig);
+        break;
       case 'currency':
       case 'money':
       case 'email':
@@ -380,6 +401,9 @@ export class FormUtils {
       case 'checkbox':
         controlConfig.checkboxLabel = field.checkboxLabel;
         control = new CheckboxControl(controlConfig);
+        break;
+      case 'switch':
+        control = new SwitchControl(controlConfig);
         break;
       case 'checklist':
         control = new CheckListControl(controlConfig);
@@ -465,7 +489,7 @@ export class FormUtils {
     meta,
     currencyFormat,
     http,
-    config: { token?: string; restUrl?: string; military?: boolean, weekStart?: number },
+    config: { token?: string; restUrl?: string; military?: boolean; weekStart?: number },
     overrides?: any,
     forTable: boolean = false,
   ) {
@@ -503,7 +527,7 @@ export class FormUtils {
     meta,
     currencyFormat,
     http,
-    config: { token?: string; restUrl?: string; military?: boolean, weekStart?: number },
+    config: { token?: string; restUrl?: string; military?: boolean; weekStart?: number },
     overrides?,
     data?: { [key: string]: any },
   ) {
@@ -673,10 +697,10 @@ export class FormUtils {
   }
 
   private markControlAsEmbedded(control, dataSpecialization?: 'embedded' | 'inline_embedded') {
-    if (Helpers.isBlank(control['config'])) {
-      control['config'] = {};
+    if (Helpers.isBlank(control.config)) {
+      control.config = {};
     }
-    control['config']['embedded'] = true;
+    control.config.embedded = true;
     control.isEmbedded = dataSpecialization === 'embedded';
     control.isInlineEmbedded = dataSpecialization === 'inline_embedded';
     return control;
@@ -687,7 +711,10 @@ export class FormUtils {
     if (field.dataType === 'Boolean' && !field.options) {
       // TODO: dataType should only be determined by `determineInputType` which doesn't ever return 'Boolean' it
       // TODO: (cont.) returns `tiles`
-      return [{ value: false, label: this.labels.no }, { value: true, label: this.labels.yes }];
+      return [
+        { value: false, label: this.labels.no },
+        { value: true, label: this.labels.yes },
+      ];
     } else if (field.dataSpecialization === 'ALL_WORKFLOW_OPTIONS' && field.options) {
       return field.options;
     } else if (field.workflowOptions) {
@@ -712,15 +739,18 @@ export class FormUtils {
     return null;
   }
 
-  private getWorkflowOptions(workflowOptions: { [key: string]: any },
-                             fieldData: { id?: number; value?: string | number; label?: string | number } | null): Array<{ id?: number; value?: string | number; label?: string | number }> {
+  private getWorkflowOptions(
+    workflowOptions: { [key: string]: any },
+    fieldData: { id?: number; value?: string | number; label?: string | number } | null,
+  ): Array<{ id?: number; value?: string | number; label?: string | number }> {
     let currentValue: { id?: number; value?: string | number; label?: string | number } = null;
     let currentWorkflowOption: number | string = 'initial';
     if (fieldData?.id) {
       currentValue = { ...fieldData, value: fieldData.id, label: fieldData.label || fieldData.id };
       currentWorkflowOption = fieldData.id;
     }
-    const updateWorkflowOptions: Array<{ id?: number; value?: string | number; label?: string | number }> = workflowOptions[currentWorkflowOption] || [];
+    const updateWorkflowOptions: Array<{ id?: number; value?: string | number; label?: string | number }> =
+      workflowOptions[currentWorkflowOption] || [];
 
     // Ensure that the current value is added to the beginning of the options list
     if (currentValue && !updateWorkflowOptions.find((option) => option.value === currentValue.value)) {

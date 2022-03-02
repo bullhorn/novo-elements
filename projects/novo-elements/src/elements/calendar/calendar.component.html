@@ -1,0 +1,56 @@
+<div class="calendar-header">
+  <novo-button theme="icon" icon="previous" size="small" (click)="prevMonth($event)"
+    data-automation-id="calendar-previous"></novo-button>
+  <ng-container *ngFor="let month of months; let i = index;">
+    <span class="heading" [class.secondary]="i > 0">
+      <span class="month" (click)="openView($event, 'months')"
+        data-automation-id="header-month">{{ month.label }}</span>
+      <span class="year" (click)="openView($event, 'years')"
+        data-automation-id="header-year">{{ month.date?.getFullYear() }}</span>
+    </span>
+  </ng-container>
+  <novo-button theme="icon" icon="next" size="small" (click)="nextMonth($event)" data-automation-id="calendar-next">
+  </novo-button>
+</div>
+<section class="calendar-content" [ngSwitch]="activeView">
+  <ng-container *ngSwitchCase="'days'">
+    <ng-container *ngFor="let month of months; let i = index">
+      <div class="calendar-header" *ngIf="layout==='vertical' && i > 0">
+        <span class="previous" (click)="prevMonth($event)" data-automation-id="calendar-previous"></span>
+        <span class="heading">
+          <span class="month" (click)="openView($event, 'months')"
+            data-automation-id="header-month">{{ month.label }}</span>
+          <span class="year" (click)="openView($event, 'years')"
+            data-automation-id="header-year">{{ month.date?.getFullYear() }}</span>
+        </span>
+        <span class="next" (click)="nextMonth($event)" data-automation-id="calendar-next"></span>
+      </div>
+      <novo-month-view
+        class="month-view"
+        [activeDate]="month.date"
+        [selected]="selected"
+        [preview]="preview"
+        [overlays]="overlays"
+        [isRange]="_isRange()"
+        [hideOverflowDays]="months.length > 1"
+        [weekStartsOn]="weekStartsOn"
+        [disabledDateMessage]="disabledDateMessage"
+        [minDate]="minDate"
+        [maxDate]="maxDate"
+        (select)="dateSelected($event)"
+        (hover)="updatePreview($event)"></novo-month-view>
+    </ng-container>
+  </ng-container>
+  <novo-month-select
+    *ngSwitchCase="'months'"
+    [activeDate]="activeDate"
+    [selected]="selected"
+    (select)="monthSelected($event)">
+  </novo-month-select>
+  <novo-year-select
+    *ngSwitchCase="'years'"
+    [activeDate]="activeDate"
+    [selected]="selected"
+    (select)="yearSelected($event)">
+  </novo-year-select>
+</section>

@@ -1,0 +1,48 @@
+@import "../../styles/variables.scss";
+@import "../common/typography/text.mixins";
+
+:host {
+  &.novo-field-appearance-fill {
+    &.novo-field-layout-horizontal {
+      .novo-field-input {
+        background: var(--background-main);
+      }
+    }
+
+    &.novo-field-layout-vertical {
+      background: var(--background-main);
+      .novo-field-label {
+        padding-top: 0.5em;
+        padding-left: 0.5em;
+        padding-right: 0.5em;
+      }
+      .novo-field-input {
+        padding: 0 0.5em;
+      }
+    }
+
+    &.novo-field-appearance-underlined {
+      .novo-field-input {
+        border-bottom: 1px solid lighten($dark, 45%) !important;
+      }
+      &:not(.novo-focused):hover {
+        .novo-field-input {
+          border-bottom: 1px solid $dark !important;
+        }
+      }
+      &.novo-focused {
+        .novo-field-label {
+          color: $positive !important;
+        }
+        .novo-field-input {
+          border-bottom: 1px solid $positive !important;
+        }
+      }
+      &.novo-field-invalid {
+        .novo-field-input {
+          border-bottom: 1px solid $negative !important;
+        }
+      }
+    }
+  }
+}

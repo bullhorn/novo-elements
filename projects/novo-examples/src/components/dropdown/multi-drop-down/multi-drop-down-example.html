@@ -1,12 +1,33 @@
-<novo-dropdown>
-    <button type="button"
-            theme="secondary"
-            icon="collapse"
-            inverse>Keep Open</button>
-    <list>
-      <item (action)="clickMe('Hello!')"
-            keepOpen="true">Action 1</item>
-      <item (action)="clickMe('Another!')"
-            keepOpen="true">Action 2</item>
-    </list>
-  </novo-dropdown>
+<novo-dropdown keepOpen>
+  <novo-button type="button"
+    theme="secondary"
+    icon="collapse"
+    inverse>Keep Open</novo-button>
+  <novo-field class="dropdown-search">
+    <input novoInput placeholder="Search..." type="search" width="100%" />
+    <novo-icon novoPrefix>search</novo-icon>
+  </novo-field>
+  <novo-divider></novo-divider>
+  <novo-optgroup>
+    <novo-option (click)="clickMe('Hello!')">Action 1</novo-option>
+    <novo-option (click)="clickMe('Another!')">Action 2</novo-option>
+  </novo-optgroup>
+  <novo-divider></novo-divider>
+  <div class="dropdown-footer">
+    <button theme="dialogue" icon="add-thin">Add</button>
+  </div>
+</novo-dropdown>
+
+<novo-dropdown side="right" multiple>
+  <novo-button theme="secondary" icon="overview" side="left">Hide/Show</novo-button>
+  <novo-option>Action 1</novo-option>
+  <novo-option tooltip="Test tooltip :)" tooltipPosition="left">Action 2</novo-option>
+  <novo-option>Action 3</novo-option>
+  <novo-option>Action 4</novo-option>
+  <novo-option>Action 5</novo-option>
+  <novo-option>Action 6</novo-option>
+  <novo-option>Action 7</novo-option>
+  <novo-option>Action 8</novo-option>
+  <novo-option>Action 9</novo-option>
+  <novo-option>Action 10</novo-option>
+</novo-dropdown>

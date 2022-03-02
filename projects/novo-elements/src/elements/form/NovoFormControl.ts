@@ -1,10 +1,10 @@
 // NG2
-import { FormControl, Validators } from '@angular/forms';
 import { EventEmitter } from '@angular/core';
-// APP
-import { NovoControlConfig } from './FormControls';
+import { FormControl, Validators } from '@angular/forms';
 import { notify } from '../../utils/notifier/notifier.util';
 import { IMaskOptions } from './Control';
+// APP
+import { NovoControlConfig } from './FormControls';
 
 export class NovoFormControl extends FormControl {
   displayValueChanges: EventEmitter<any> = new EventEmitter<any>();

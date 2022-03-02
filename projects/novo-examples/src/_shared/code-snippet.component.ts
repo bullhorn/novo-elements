@@ -1,13 +1,12 @@
 // NG2
-import { Component, Input, OnInit, ChangeDetectorRef } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { HighlightJS } from './highlight.service';
 import { EXAMPLE_COMPONENTS } from '../examples.module';
+import { HighlightJS } from './highlight.service';
 
 @Component({
   selector: 'code-snippet',
   template: `
-
     <novo-nav theme="white" [outlet]="snippets">
       <novo-tab><span>HTML</span></novo-tab>
       <novo-tab><span>TS</span></novo-tab>
@@ -15,16 +14,16 @@ import { EXAMPLE_COMPONENTS } from '../examples.module';
     </novo-nav>
     <novo-nav-outlet #snippets>
       <novo-nav-content>
-          <pre><code [innerHtml]="highlightHTML"></code></pre>
+        <pre><code [innerHtml]="highlightHTML"></code></pre>
       </novo-nav-content>
       <novo-nav-content>
-          <pre><code [innerHtml]="highlightTS"></code></pre>
+        <pre><code [innerHtml]="highlightTS"></code></pre>
       </novo-nav-content>
       <novo-nav-content>
-          <pre><code [innerHtml]="highlightCSS"></code></pre>
+        <pre><code [innerHtml]="highlightCSS"></code></pre>
       </novo-nav-content>
     </novo-nav-outlet>
-    `,
+  `,
   // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CodeSnippetComponent implements OnInit {

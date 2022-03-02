@@ -12,7 +12,7 @@ novo-time-picker-input {
   input {
     font-size: 1em;
     border: none;
-    border-bottom: 1px solid rgba(lighten($dark, 12%), 0.25);
+    border-bottom: 1px solid var(--border);
     background: transparent !important;
     border-radius: 0;
     outline: none;
@@ -23,10 +23,10 @@ novo-time-picker-input {
     box-shadow: none;
     box-sizing: content-box;
     transition: all 300ms;
-    color: $light;
+    color: var(--text-main);
 
     &:focus {
-      border-bottom: 1px solid $ocean;
+      border-bottom: 1px solid var(--selection);
     }
   }
   > i.bhi-clock,
@@ -35,12 +35,11 @@ novo-time-picker-input {
   > i.bhi-calendar {
     position: absolute;
     right: 0;
-    top: 4px;
-    font-size: 1.2em;
+    top: 0px;
+    font-size: 1.2rem;
   }
   > i.bhi-times {
     cursor: pointer;
-    font-size: 1.1em;
   }
 }
 
@@ -48,14 +47,14 @@ novo-time-picker {
   display: block;
   // width: 250px;
   // min-width: 250px;
+  width: min-content;
   overflow: hidden;
   border-radius: 4px;
-  background-color: #fff;
+  background-color: var(--background-bright);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15), 0 2px 7px rgba(0, 0, 0, 0.1);
-  z-index: 999;
+  z-index: z(overlay);
   .digital {
-    padding: 6.5px 0;
-    background-color: $positive;
+    background-color: var(--selection);
     display: flex;
     justify-content: center;
     &.inline {
@@ -65,16 +64,21 @@ novo-time-picker {
         border-bottom: none;
       }
       .digital--inner {
+        flex: 1;
         .control-block {
           display: flex;
+          flex: 1;
           .digital--period {
-            color: $positive;
+            color: var(--selection);
             cursor: pointer;
             font-size: 1em;
             opacity: 0.6;
-            margin: 0 20px;
+            padding: 1rem;
+            flex: 1;
             &.active {
               opacity: 1;
+              background-color: var(--selection);
+              color: $white;
             }
           }
         }
@@ -102,34 +106,52 @@ novo-time-picker {
     font-size: 1em;
     opacity: 0.6;
     text-transform: uppercase;
-    margin-left: 5px;
     font-weight: 400;
     &.active {
       opacity: 1;
       font-weight: 600;
     }
   }
+
   .increments {
     position: relative;
     height: 250px;
-    width: 130px;
-    overflow-y: auto;
-    overflow-x: hidden;
+    width: auto;
+    display: flex;
+    flex-flow: row nowrap;
 
-    novo-list-item {
+    novo-list {
+      overflow-y: auto;
+      overflow-x: hidden;
+      height: 100%;
+      flex: 1;
+      scroll-snap-type: y mandatory;
+      -ms-overflow-style: none; /* Internet Explorer 10+ */
+      scrollbar-width: none; /* Firefox */
+      &::-webkit-scrollbar {
+        display: none; /* Safari and Chrome */
+      }
+    }
+
+    .increments--hour,
+    .increments--minute,
+    .increments--meridian {
       padding: 5px 16px;
-      width: 130px;
+      width: 50px;
+      scroll-snap-align: start;
+
       .list-item {
         line-height: 19px;
       }
       &:focus,
       &:hover {
-        background: lighten($light, 10%);
-        color: darken($light, 55%);
+        background: var(--selection);
+        color: var(--text-selection);
+        filter: brightness(1.25);
       }
       &.active {
-        // border: 1px solid $positive;
-        color: $positive;
+        background: var(--selection);
+        color: var(--text-selection);
         font-weight: 500;
       }
     }
@@ -171,7 +193,7 @@ novo-time-picker {
     transition: transform 100ms linear;
     z-index: 1;
     &:before {
-      content: ' ';
+      content: " ";
       width: 2px;
       top: 0;
       bottom: 0;
@@ -183,16 +205,16 @@ novo-time-picker {
       transform: rotate(90deg);
     }
     .analog--ball {
-      height: 37px;
-      width: 37px;
+      height: 3rem;
+      width: 3rem;
       display: block;
-      right: 8px;
+      right: 3.2rem;
       top: 50%;
-      margin-top: -18px;
+      margin-top: -1.5rem;
       border-radius: 50%;
       position: absolute;
-      border: 3px solid $positive;
-      background: $positive;
+      border: 3px solid var(--selection);
+      background: var(--selection);
     }
     &.hour-12 {
       transform: rotate(-90deg);
@@ -245,7 +267,7 @@ novo-time-picker {
     &:before {
       left: 23%;
       margin: 33%;
-      content: ' ';
+      content: " ";
       width: 2px;
       top: 0;
       bottom: 0;
@@ -259,12 +281,12 @@ novo-time-picker {
       top: 50%;
       border-radius: 50%;
       position: absolute;
-      height: 32px;
-      width: 32px;
-      right: 25px;
-      margin-top: -16px;
-      border: 2px solid lighten($positive, 10%);
-      background: lighten($positive, 10%);
+      height: 2.4rem;
+      width: 2.4rem;
+      right: 4.2rem;
+      margin-top: -1.2rem;
+      border: 2px solid var(--selection);
+      background: var(--selection);
       transition: all 160ms ease-in-out;
       &.between {
         height: 1px;
@@ -289,8 +311,8 @@ novo-time-picker {
     }
   }
   .analog--center {
-    height: 155px;
-    width: 155px;
+    height: 12rem;
+    width: 12rem;
     border-radius: 50%;
     top: 50%;
     left: 50%;
@@ -304,7 +326,7 @@ novo-time-picker {
   }
   .analog--hour,
   .analog--minute {
-    font-size: 1.6em;
+    font-size: 1.6rem;
     color: #666666;
     left: 50%;
     top: 50%;
@@ -322,7 +344,7 @@ novo-time-picker {
     }
   }
   .analog--minute {
-    font-size: 1em;
+    font-size: 1rem;
     margin-left: -20px;
     margin-top: -16px;
   }
@@ -347,7 +369,7 @@ novo-time-picker {
     }
   }
   &.military {
-    $md: 8em;
+    $md: 8rem;
     @for $i from 1 through 24 {
       $hour: $i - 1;
       $deg: ($i * 15 - 105);
@@ -369,19 +391,19 @@ novo-time-picker {
       bottom: 15px;
     }
     .analog--hour {
-      font-size: 0.9em;
-      margin-left: -20px;
-      margin-top: -16px;
+      font-size: 0.9rem;
+      margin-left: -2rem;
+      margin-top: -1.2rem;
     }
     .analog--hand--minutes {
       margin: 10px;
     }
     .analog--hand--hours {
       .analog--ball {
-        height: 28px;
-        width: 28px;
-        right: 13px;
-        margin-top: -14px;
+        height: 2.8rem;
+        width: 2.8rem;
+        right: 2.7rem;
+        margin-top: -1.4rem;
       }
     }
   }

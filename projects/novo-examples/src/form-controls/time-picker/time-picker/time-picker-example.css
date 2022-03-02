@@ -1,0 +1,6 @@
+/** No CSS for this example */
+:host {
+  display: grid;
+  grid-template-rows: 120px 1fr;
+  gap: 2rem;
+}

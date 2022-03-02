@@ -1,0 +1,18 @@
+<div>
+  <novo-agenda-date-change [view]="view" [(viewDate)]="viewDate">
+  </novo-agenda-date-change>
+
+  <novo-tiles [options]="views" [(ngModel)]="view"></novo-tiles>
+</div>
+<div [ngSwitch]="view" class="cal-demo-content">
+  <novo-agenda-month *ngSwitchCase="'month'" [(viewDate)]="viewDate" [events]="events"
+    (dayClicked)="dayClicked($event.day.date)">
+  </novo-agenda-month>
+
+  <novo-agenda-week *ngSwitchCase="'week'" [(viewDate)]="viewDate" [events]="events"
+    (dayClicked)="dayClicked($event.date)" [dayStartHour]="0" [dayEndHour]="23">
+  </novo-agenda-week>
+
+  <novo-agenda-day *ngSwitchCase="'day'" [(viewDate)]="viewDate" [events]="events" [dayStartHour]="0" [dayEndHour]="23">
+  </novo-agenda-day>
+</div>

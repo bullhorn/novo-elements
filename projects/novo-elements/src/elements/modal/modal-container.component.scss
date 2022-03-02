@@ -1,0 +1,15 @@
+:host {
+  background: rgba(0, 0, 0, 0.25);
+
+  .modal-container {
+    z-index: z(modal);
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+}

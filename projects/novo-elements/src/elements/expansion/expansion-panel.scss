@@ -1,7 +1,7 @@
-@import '../../styles/global/variables';
-@import '../../styles/global/functions';
+@import "../../styles/variables";
+@import "../../styles/global/functions";
 
-@import './_expansion-theme';
+@import "./_expansion-theme";
 
 @include novo-expansion-panel-theme();
 
@@ -60,7 +60,7 @@
   button.novo-button {
     margin-left: 8px;
 
-    [dir='rtl'] & {
+    [dir="rtl"] & {
       margin-left: 0;
       margin-right: 8px;
     }

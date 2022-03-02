@@ -1,0 +1,15 @@
+{
+  "name": "schematics",
+  "version": "6.0.0-next.12",
+  "description": "A novo-element schematics",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "jest --expand --verbose *.spec.js"
+  },
+  "keywords": [
+    "schematics"
+  ],
+  "author": "",
+  "license": "MIT",
+  "schematics": "./src/collection.json"
+}

@@ -18,11 +18,11 @@ multi-picker {
     }
 
     li:after {
-      content: ', ';
+      content: ", ";
     }
 
     li:last-child:after {
-      content: ' ';
+      content: " ";
     }
   }
 

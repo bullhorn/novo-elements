@@ -1,0 +1,91 @@
+@import "../../../styles/variables.scss";
+@import "../typography/text.mixins.scss";
+
+$novo-menu-side-padding: 0.5rem;
+
+.novo-option {
+  @include novo-body-text();
+  position: relative;
+  cursor: pointer;
+  outline: none;
+  display: flex;
+  flex-direction: row;
+  max-width: 100%;
+  box-sizing: border-box;
+  align-items: center;
+  margin: 0;
+  padding: 1rem 1rem 1rem 1.6rem;
+  gap: 1rem;
+  flex: 1;
+  -webkit-tap-highlight-color: transparent;
+
+  &:hover:not(.novo-option-inert) {
+    background: var(--background-main, rgba($ocean, 0.1));
+    color: var(--text-bright, $dark);
+  }
+
+  &:active:not(.novo-option-inert),
+  &.novo-active:not(.novo-option-inert) {
+    background: rgba($ocean, 0.3);
+  }
+
+  &.novo-selected {
+    color: $positive;
+  }
+
+  &.disabled,
+  &[aria-disabled="true"] {
+    cursor: not-allowed;
+    color: $disabled;
+    &:hover {
+      background: rgba($negative, 10%);
+    }
+  }
+
+  .novo-optgroup &:not(.novo-option-multiple) {
+    padding-left: $novo-menu-side-padding * 2;
+
+    [dir="rtl"] & {
+      padding-left: $novo-menu-side-padding;
+      padding-right: $novo-menu-side-padding * 2;
+    }
+  }
+
+  @include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
+    &.novo-accent-#{$name} {
+      border-left: 4px solid $color;
+    }
+    &.novo-fill-#{$name}:not(.novo-option-inert) {
+      color: getContrastColor($name);
+      background: $color;
+      &:hover,
+      &:focus {
+        background: getTintColor($name);
+      }
+      &:active {
+        background: getShadeColor($name);
+      }
+    }
+  }
+}
+
+.novo-option-text {
+  display: inline-block;
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  flex-grow: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  gap: 1rem;
+}
+
+.novo-option-pseudo-checkbox {
+  $margin: $novo-menu-side-padding / 2;
+  margin-right: $margin;
+
+  [dir="rtl"] & {
+    margin-left: $margin;
+    margin-right: 0;
+  }
+}

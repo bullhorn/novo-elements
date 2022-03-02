@@ -1,0 +1,51 @@
+:host {
+  .icon-blocks {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 120px);
+    grid-template-rows: 120px;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    width: 100%;
+
+    .block {
+      display: inline-block;
+      text-align: center;
+      position: relative;
+      padding: 3rem 0px;
+      border: 1px solid #eee;
+      cursor: pointer;
+
+      &:active,
+      &:focus,
+      &:hover {
+        .icon-square {
+          transform: scale(1.125);
+        }
+      }
+
+      .icon-square {
+        border-radius: 4px;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        position: relative;
+      }
+      &:hover {
+        .icon-text {
+          &:after {
+            content: "Click to copy";
+            position: absolute;
+            color: #333;
+            left: 50%;
+            top: 37px;
+            font-size: 10px;
+            text-transform: uppercase;
+            transform: translateX(-50%);
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+}

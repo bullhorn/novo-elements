@@ -1,12 +1,12 @@
 // NG
-import { TestBed, async } from '@angular/core/testing';
-// App
-import { NovoFileInputElement } from './FileInput';
-import { NovoLoadingElement } from '../../../loading/Loading';
-import { NovoLabelService } from '../../../../services/novo-label-service';
+import { async, TestBed } from '@angular/core/testing';
 import { NovoDragulaElement } from '../../../../elements/dragula/Dragula';
 import { NovoDragulaService } from '../../../../elements/dragula/DragulaService';
 import { DecodeURIPipe } from '../../../../pipes/decode-uri/DecodeURI';
+import { NovoLabelService } from '../../../../services/novo-label-service';
+import { NovoLoadingElement } from '../../../loading/Loading';
+// App
+import { NovoFileInputElement } from './FileInput';
 
 describe('Elements: NovoFileInputElement', () => {
   let fixture;
@@ -17,7 +17,10 @@ describe('Elements: NovoFileInputElement', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [NovoFileInputElement, NovoLoadingElement, NovoDragulaElement, DecodeURIPipe],
-      providers: [{ provide: NovoLabelService, useClass: NovoLabelService }, { provide: NovoDragulaService, useClass: NovoDragulaService }],
+      providers: [
+        { provide: NovoLabelService, useClass: NovoLabelService },
+        { provide: NovoDragulaService, useClass: NovoDragulaService },
+      ],
     }).compileComponents();
     fixture = TestBed.createComponent(NovoFileInputElement);
     component = fixture.debugElement.componentInstance;
@@ -29,25 +32,25 @@ describe('Elements: NovoFileInputElement', () => {
   describe('Method: ngOnInit()', () => {
     it('should setup drag events', () => {
       expect(component.ngOnInit).toBeDefined();
-      spyOn(component.element.nativeElement, 'addEventListener');
+      jest.spyOn(component.element.nativeElement, 'addEventListener');
       component.ngOnInit();
       expect(component.element.nativeElement.addEventListener).toHaveBeenCalled();
     });
     it('should update layout', () => {
       expect(component.ngOnInit).toBeDefined();
-      spyOn(component, 'updateLayout');
+      jest.spyOn(component, 'updateLayout');
       component.ngOnInit();
       expect(component.updateLayout).toHaveBeenCalled();
     });
     it('should setup initial files list', () => {
       expect(component.ngOnInit).toBeDefined();
-      spyOn(component, 'setInitialFileList');
+      jest.spyOn(component, 'setInitialFileList');
       component.ngOnInit();
       expect(component.setInitialFileList).toHaveBeenCalled();
     });
     it('should initialize dragula', () => {
       expect(component.ngOnInit).toBeDefined();
-      spyOn(component, 'initializeDragula');
+      jest.spyOn(component, 'initializeDragula');
       component.ngOnInit();
       expect(component.initializeDragula).toHaveBeenCalled();
     });
@@ -56,7 +59,7 @@ describe('Elements: NovoFileInputElement', () => {
     it('should set default layoutOptions and call insertTemplatesBasedOnLayout', () => {
       expect(component.updateLayout).toBeDefined();
       expect(component.layoutOptions).not.toBeDefined();
-      spyOn(component, 'insertTemplatesBasedOnLayout');
+      jest.spyOn(component, 'insertTemplatesBasedOnLayout');
       component.updateLayout();
       expect(component.layoutOptions).toBeDefined();
       expect(component.layoutOptions).toEqual({
@@ -78,7 +81,7 @@ describe('Elements: NovoFileInputElement', () => {
       };
       expect(component.initializeDragula).toBeDefined();
       expect(component.fileOutputBag).not.toBeDefined();
-      spyOn(component.dragula, 'setOptions');
+      jest.spyOn(component.dragula, 'setOptions');
       component.initializeDragula();
       expect(component.fileOutputBag).toBe(expectedBag);
       expect(component.dragula.setOptions).toHaveBeenCalled();
@@ -90,7 +93,7 @@ describe('Elements: NovoFileInputElement', () => {
     });
     it('should correctly insert templates by default', () => {
       expect(component.insertTemplatesBasedOnLayout).toBeDefined();
-      spyOn(component.container, 'createEmbeddedView');
+      jest.spyOn(component.container, 'createEmbeddedView');
       const expected = ['fileOutput', 'fileInput'];
       const insertedOrder = component.insertTemplatesBasedOnLayout();
       expect(component.container.createEmbeddedView).toHaveBeenCalled();
@@ -99,7 +102,7 @@ describe('Elements: NovoFileInputElement', () => {
     it('should correctly insert template if order is displayFilesBelow', () => {
       component.layoutOptions.order = 'displayFilesBelow';
       expect(component.insertTemplatesBasedOnLayout).toBeDefined();
-      spyOn(component.container, 'createEmbeddedView');
+      jest.spyOn(component.container, 'createEmbeddedView');
       const expected = ['fileInput', 'fileOutput'];
       const insertedOrder = component.insertTemplatesBasedOnLayout();
       expect(component.container.createEmbeddedView).toHaveBeenCalled();
@@ -110,7 +113,7 @@ describe('Elements: NovoFileInputElement', () => {
   describe('Method: ngOnDestroy()', () => {
     it('should destroy events.', () => {
       expect(component.ngOnDestroy).toBeDefined();
-      spyOn(component.element.nativeElement, 'removeEventListener');
+      jest.spyOn(component.element.nativeElement, 'removeEventListener');
       component.ngOnDestroy();
       expect(component.element.nativeElement.removeEventListener).toHaveBeenCalled();
     });
@@ -118,7 +121,7 @@ describe('Elements: NovoFileInputElement', () => {
 
   describe('Method: customEdit(file)', () => {
     beforeEach(() => {
-      spyOn(component.edit, 'emit');
+      jest.spyOn(component.edit, 'emit');
     });
     it('should emit an event', () => {
       component.customEdit({ name: 'file.pdf', loaded: true });
@@ -128,7 +131,7 @@ describe('Elements: NovoFileInputElement', () => {
 
   describe('Method: customSave(file)', () => {
     beforeEach(() => {
-      spyOn(component.save, 'emit');
+      jest.spyOn(component.save, 'emit');
     });
     it('should emit an event', () => {
       component.customSave({ name: 'file.pdf', loaded: true });
@@ -138,7 +141,7 @@ describe('Elements: NovoFileInputElement', () => {
 
   describe('Method: customDelete(file)', () => {
     beforeEach(() => {
-      spyOn(component.delete, 'emit');
+      jest.spyOn(component.delete, 'emit');
     });
     it('should emit an event', () => {
       component.customDelete({ name: 'file.pdf', loaded: true });
@@ -148,7 +151,7 @@ describe('Elements: NovoFileInputElement', () => {
 
   describe('Method: customCheck(files)', () => {
     beforeEach(() => {
-      spyOn(component.upload, 'emit');
+      jest.spyOn(component.upload, 'emit');
     });
     it('should emit an event', () => {
       component.customCheck({ name: 'file.pdf', loaded: true });

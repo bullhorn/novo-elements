@@ -1,8 +1,8 @@
 // NG2
-import { TestBed, async } from '@angular/core/testing';
+import { async, TestBed } from '@angular/core/testing';
+import { NovoTimePickerElement } from './TimePicker';
 // App
 import { NovoTimePickerModule } from './TimePicker.module';
-import { NovoTimePickerElement } from './TimePicker';
 
 xdescribe('Elements: NovoTimePickerElement', () => {
   let fixture;

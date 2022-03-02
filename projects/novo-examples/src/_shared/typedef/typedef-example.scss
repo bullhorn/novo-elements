@@ -1,0 +1,60 @@
+.typedef-example {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid lightgray;
+  margin-bottom: 2rem;
+  font-size: 1.2rem;
+}
+
+.as-split-gutter {
+  height: auto !important;
+}
+
+as-split {
+  .as-split-area {
+    height: auto !important;
+  }
+}
+
+.typedef-content {
+  display: flex;
+  padding: 1rem;
+  align-items: center;
+  height: 100%;
+}
+
+.typedef-specs {
+  display: block;
+  padding: 1rem;
+  dl {
+    display: grid;
+    grid-template-columns: 1fr min-content;
+  }
+
+  dt {
+    line-height: 1.25;
+    display: inline-block;
+    font-weight: 600;
+  }
+
+  dd {
+    line-height: 1.25;
+    display: inline-block;
+    font-weight: 400;
+  }
+}
+
+.typedef-snippet {
+  display: block;
+  grid-column-end: span 2;
+  border-top: 1px solid lightgray;
+  padding: 1rem;
+  background-color: #eee;
+  pre {
+    margin: 0 0 0px !important;
+    code {
+      font-size: 1.1rem;
+      padding: 0.2rem !important;
+    }
+  }
+}

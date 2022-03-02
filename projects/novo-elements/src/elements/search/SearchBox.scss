@@ -1,64 +1,64 @@
+@import "../../styles/variables.scss";
+
 novo-search {
-  display: flex;
-  flex-flow: row nowrap;
+  display: grid;
+  grid-template-areas: "icon input";
+  grid-template-columns: 3.2rem 1fr;
+  grid-template-rows: 1fr;
   align-items: center;
+  height: 3.2rem;
+  background: $white;
+  border: 1px solid $light;
+  border-radius: 0.2rem;
+  max-width: 400px;
+  min-width: 100px;
+  transition: all 250ms ease-in-out;
+
+  &[size="small"] {
+    font-size: 1rem;
+    height: 2.4rem;
+    grid-template-columns: 2.4rem 1fr;
+  }
+
+  &[size="large"] {
+    font-size: 1.8rem;
+    height: 4rem;
+    grid-template-columns: 4rem 1fr;
+  }
 
   > input {
     height: 100%;
-    width: 0;
+    max-width: 400px;
     display: block;
-    background: $white;
-    padding: 12px 8px;
+    background: transparent;
     position: relative;
-    border: 1px solid $light;
-    border-left: none;
-    border-radius: 0 2px 2px 0;
     font-size: 1.4em;
-    color: $dark;
-    z-index: 12;
-    opacity: 0;
-    transition: background-color 250ms ease-in-out, opacity 150ms ease-in-out, 250ms width ease-in-out;
+    color: var(--text-main);
+    z-index: z(above);
+    border: none;
+    transition: all 250ms;
+    backface-visibility: hidden;
+
     &:focus,
     &:active {
       outline: none;
-      border: 1px solid $positive;
-      border-left: none;
-    }
-    &::-webkit-input-placeholder {
-      color: $empty !important;
     }
   }
-  &.active {
-    max-width: 400px;
-    min-width: 250px;
-    z-index: 1000;
 
-    > button[theme='fab'] {
-      border-radius: 2px 0 0 2px !important;
-      width: 47px;
-      height: 47px;
-      box-shadow: none;
-    }
-
-    > input {
-      opacity: 1;
-      width: 100%;
-    }
+  novo-icon {
+    color: var(--text-main);
   }
+
   &.focused {
-    > button {
-      color: $positive !important;
-      border: 1px solid $positive;
-      border-right: none;
-      background: $white !important;
-      box-shadow: none !important;
-      &:hover {
-        box-shadow: none !important;
-      }
+    border: 1px solid var(--selection);
+
+    > novo-icon {
+      color: var(--selection) !important;
     }
-    @each $key, $color in $all-colors {
-      &[theme='#{$key}'] {
-        > button {
+
+    @include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
+      &[color="#{$name}"] {
+        > novo-icon {
           color: $color !important;
         }
       }

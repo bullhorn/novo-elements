@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { AfterContentInit, Component } from '@angular/core';
 
 /**
  * @title Basic Drop Down
@@ -8,8 +8,17 @@ import { Component } from '@angular/core';
   templateUrl: 'basic-drop-down-example.html',
   styleUrls: ['basic-drop-down-example.css'],
 })
-export class BasicDropDownExample {
+export class BasicDropDownExample implements AfterContentInit {
+  asyncItems: any[] = [];
   public clickMe(event?: string) {
-    window.alert(event);
+    console.log(event);
+  }
+
+  async ngAfterContentInit() {
+    this.asyncItems = await this.getAsyncItems();
+  }
+
+  async getAsyncItems() {
+    return [...Array(10).keys()].map((it) => `Action ${it}`);
   }
 }

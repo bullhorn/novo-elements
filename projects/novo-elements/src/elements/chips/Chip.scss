@@ -1,0 +1,205 @@
+@import "../../styles/variables.scss";
+@import "../common/typography/text.mixins";
+
+$novo-chip-border-radius: 0.4rem;
+$novo-chip-min-height: 2.4rem;
+$novo-chip-vertical-padding: 0rem;
+$novo-chip-horizontal-padding: 0.5rem;
+$novo-chip-remove-before-margin: 0rem;
+$novo-chip-remove-after-padding: 0rem;
+$novo-chip-avatar-before-margin: 0rem;
+$novo-chip-avatar-after-margin: 0rem;
+
+$novo-chip-avatar-size: 24px;
+$novo-chip-remove-size: 18px;
+
+$chip-sizes: "xs", "sm", "md", "lg", "xl";
+$chip-fontsize: (
+  "xs": 0.8rem,
+  "sm": 1rem,
+  "md": 1.2rem,
+  "lg": 1.4rem,
+  "xl": 1.8rem,
+);
+$chip-height: (
+  "xs": 1.6rem,
+  "sm": 2rem,
+  "md": 2.8rem,
+  "lg": 3.2rem,
+  "xl": 3.6rem,
+);
+$chip-spacing: (
+  "xs": $spacing-xs,
+  "sm": $spacing-sm,
+  "md": $spacing-md,
+  "lg": $spacing-lg,
+  "xl": $spacing-xl,
+);
+
+.novo-chip {
+  position: relative;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  // Chips could be set on buttons so we need to reset the user agent styles.
+  border: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.novo-chip {
+  @include novo-body-text();
+  background: var(--background-main);
+  box-sizing: border-box;
+  border: 1px solid transparent;
+  transition: all 200ms ease-in-out;
+  display: inline-flex;
+  align-items: center;
+  cursor: default;
+  gap: 1rem;
+  border-radius: 0.4rem;
+  padding: $spacing-none $spacing-md;
+  min-height: 2.4rem;
+  height: 1px;
+
+  &.novo-chip-selectable {
+    color: var(--selection);
+    // Overlay used to darken the chip on hover and focus.
+    &::after {
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      position: absolute;
+      border-radius: inherit;
+      opacity: 0;
+      background-color: black;
+      content: "";
+      pointer-events: none;
+      transition: opacity 200ms ease-in-out;
+    }
+
+    &:focus {
+      outline: none;
+      border: 1px solid var(--selection);
+
+      &::after {
+        opacity: 0.16;
+      }
+    }
+
+    &:hover {
+      border: 1px solid var(--selection);
+    }
+  }
+
+  &.novo-chip-disabled {
+    opacity: 0.4;
+    pointer-events: none;
+    &::after {
+      opacity: 0;
+    }
+
+    .novo-chip-remove,
+    .novo-chip-trailing-icon {
+      cursor: default;
+    }
+  }
+
+  // &.novo-chip-with-trailing-icon.novo-chip-with-avatar,
+  // &.novo-chip-with-avatar {
+  //   padding-top: $novo-chip-avatar-vertical-padding;
+  //   padding-bottom: $novo-chip-avatar-vertical-padding;
+  // }
+
+  // &.novo-chip-with-trailing-icon.novo-chip-with-avatar {
+  //   padding-right: $novo-chip-remove-after-padding;
+  //   padding-left: $novo-chip-avatar-before-padding;
+  // }
+
+  // &.novo-chip-with-avatar {
+  //   padding-left: $novo-chip-avatar-before-padding;
+  //   padding-right: $novo-chip-horizontal-padding;
+  // }
+
+  .novo-chip-avatar::not(novo-icon) {
+    width: $novo-chip-avatar-size;
+    height: $novo-chip-avatar-size;
+  }
+
+  .novo-chip-avatar {
+    margin-right: $novo-chip-avatar-after-margin;
+    margin-left: $novo-chip-avatar-before-margin;
+  }
+
+  .novo-chip-avatar {
+    border-radius: 50%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    overflow: hidden;
+
+    // Makes `<img>` tags behave like `background-size: cover`. Not supported
+    // in IE, but we're using it as a progressive enhancement.
+    object-fit: cover;
+  }
+
+  .novo-chip-remove,
+  .novo-chip-trailing-icon {
+    width: $novo-chip-remove-size;
+    height: $novo-chip-remove-size;
+    cursor: pointer;
+  }
+
+  .novo-chip-remove,
+  .novo-chip-trailing-icon {
+    margin-left: $novo-chip-remove-before-margin;
+    margin-right: 0;
+  }
+
+  .novo-chip-remove {
+    color: $light;
+  }
+  &:not(.novo-chip-disabled) {
+    .novo-chip-remove:hover {
+      color: darken($light, 30%);
+    }
+  }
+
+  // iterate over each size
+  @each $size in $chip-sizes {
+    $spacing: map-get($chip-spacing, $size);
+    $height: map-get($chip-height, $size);
+    &.novo-size-#{$size} {
+      font-size: map-get($chip-fontsize, $size);
+      border-radius: 0.4rem;
+      padding: $spacing-none $spacing;
+      min-height: $height;
+      gap: $spacing;
+
+      &.novo-chip-with-avatar {
+        padding-left: $spacing / 2;
+      }
+      &.novo-chip-with-trailing-icon {
+        padding-right: $spacing / 2;
+      }
+      .novo-text {
+        font-size: inherit;
+      }
+    }
+  }
+
+  @include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
+    &.novo-color-#{$name} {
+      color: getContrastColor($name);
+      background: $color;
+      & > * {
+        color: inherit;
+      }
+    }
+
+    &.novo-accent-#{$name} {
+      border: 1px solid $color;
+      color: $color;
+    }
+  }
+}

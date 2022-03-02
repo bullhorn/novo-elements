@@ -1,14 +1,14 @@
 // NG
-import { Directive, Input, HostListener, OnDestroy, ViewContainerRef, ElementRef, OnInit } from '@angular/core';
 import {
-  Overlay,
-  OverlayRef,
-  OverlayConfig,
   ConnectedPositionStrategy,
   OriginConnectionPosition,
+  Overlay,
+  OverlayConfig,
   OverlayConnectionPosition,
+  OverlayRef,
 } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
+import { Directive, ElementRef, HostListener, Input, OnDestroy, OnInit, ViewContainerRef } from '@angular/core';
 // APP
 import { NovoTooltip } from './Tooltip.component';
 

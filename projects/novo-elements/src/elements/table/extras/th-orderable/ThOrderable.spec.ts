@@ -1,6 +1,6 @@
 // NG2
 import { Component, ElementRef } from '@angular/core';
-import { TestBed, async } from '@angular/core/testing';
+import { async, TestBed } from '@angular/core/testing';
 // App
 import { ThOrderable } from './ThOrderable';
 
@@ -67,7 +67,7 @@ describe('Elements: ThOrderable', () => {
           rows: [],
           deleteRow: () => {},
         };
-        spyOn(mockTable, 'deleteRow').and.callThrough();
+        jest.spyOn(mockTable, 'deleteRow');
         subject.deleteColumns(mockTable);
       });
     });
@@ -90,7 +90,7 @@ describe('Elements: ThOrderable', () => {
     describe('Method: onDragEnd()', () => {
       it('should be defined', () => {
         expect(subject.onDragEnd).toBeDefined();
-        spyOn(document.body, 'removeChild').and.callFake(() => {});
+        jest.spyOn(document.body, 'removeChild').mockImplementation(() => null);
         subject.onDragEnd();
       });
     });

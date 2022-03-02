@@ -1,4 +1,4 @@
-$table-bg-accent: #f4f4f4;
+$table-bg-accent: var(--background-bright, $off-white);
 $novo-row-horizontal-padding: 20px;
 $table-header-font-weight: 400;
 $breakpoint: 1000px;
@@ -20,7 +20,7 @@ cdk-table {
     .novo-data-table-dropdown-cell,
     .novo-data-table-expand-cell,
     .novo-data-table-checkbox-cell {
-      background-color: $table-bg-accent;
+      background-color: var(--background-muted, $sand);
     }
     &.active {
       .novo-data-table-cell,
@@ -35,7 +35,7 @@ cdk-table {
       }
     }
     + .novo-data-table-detail-row {
-      background: $table-bg-accent;
+      background-color: var(--background-muted, $sand);
     }
   }
   > .novo-data-table-row:nth-of-type(even) {
@@ -44,7 +44,7 @@ cdk-table {
     .novo-data-table-dropdown-cell,
     .novo-data-table-expand-cell,
     .novo-data-table-checkbox-cell {
-      background-color: $white;
+      background-color: var(--background-body, $white);
     }
     &.active {
       .novo-data-table-cell,
@@ -59,7 +59,7 @@ cdk-table {
       }
     }
     + .novo-data-table-detail-row {
-      background: $white;
+      background-color: var(--background-body, $white);
     }
   }
 }
@@ -71,7 +71,7 @@ cdk-table {
 .novo-data-table-header-row,
 .novo-data-table-header-cell {
   position: relative;
-  z-index: 1;
+  z-index: z(default);
 }
 
 .novo-data-table-header-row.fixed-header,
@@ -85,11 +85,11 @@ cdk-table {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  background-color: $white;
+  background-color: var(--background-body, $white);
   .novo-data-table-header-cell,
   .novo-data-table-checkbox-header-cell {
-    border-bottom: 1px solid $off-white;
-    background-color: $white;
+    // border-bottom: 1px solid var(--border, $off-white);
+    background-color: var(--background-body, $white);
   }
   &.expanded {
     i.bhi-next.data-table-icon {
@@ -134,8 +134,9 @@ cdk-table {
 .novo-data-table-cell,
 .novo-data-table-header-cell {
   min-width: 200px;
-  padding: 10px;
+  padding: 9px;
   flex: 1;
+  line-height: 1.1em;
   > i.label-icon {
     margin-right: 0.5em;
   }
@@ -150,6 +151,21 @@ cdk-table {
   novo-dropdown {
     display: inline-block;
   }
+  .filter-button {
+    color: var(--text-muted);
+    background: transparent;
+    pointer-events: all;
+    margin-left: 0.5rem;
+    line-height: 1em;
+
+    &:hover {
+      color: var(--text-main);
+    }
+    &.filter-active {
+      color: var(--selection);
+    }
+  }
+
   button.active {
     color: $white;
     background: $positive;
@@ -223,7 +239,7 @@ cdk-table {
 }
 
 .novo-data-table-header-cell {
-  border-left: 1px solid $off-white;
+  // border-left: 1px solid var(--border, $off-white);
   white-space: normal;
   overflow-wrap: break-word;
   display: flex;
@@ -244,10 +260,14 @@ cdk-table {
   > div {
     width: 55px;
     display: flex;
+    align-items: center;
     flex: 0;
   }
-  novo-dropdown[side='right'] {
+  novo-dropdown[side="right"] {
     display: inline-block;
+    &:focus {
+      outline: none;
+    }
   }
   &.button-header-cell {
     min-width: 40px;
@@ -291,12 +311,14 @@ cdk-table {
     cursor: pointer;
     i {
       cursor: pointer;
+      &.bhi-box-empty,
       &.bhi-checkbox-disabled {
-        cursor: not-allowed !important
+        cursor: not-allowed !important;
       }
       &.bhi-checkbox-empty {
         color: #d2d2d2;
       }
+      &.bhi-box-yes,
       &.bhi-checkbox-filled {
         color: $positive;
       }
@@ -323,7 +345,7 @@ novo-data-table {
     display: flex;
     align-items: center;
     flex-shrink: 0;
-    border-bottom: 1px solid $off-white;
+    border-bottom: 1px solid var(--border, $off-white);
     &.empty {
       padding: 0;
     }
@@ -341,7 +363,7 @@ novo-data-table {
         font-size: 1.1em;
         height: 35px;
       }
-      &.active > button[theme='fab'] {
+      &.active > button[theme="fab"] {
         height: 35px;
         min-height: 35px;
       }
@@ -362,8 +384,9 @@ novo-data-table {
         align-items: center;
         button {
           margin-left: 3px;
+          margin-bottom: 0px;
         }
-        button[theme][theme='icon'] {
+        button[theme][theme="icon"] {
           height: 35px;
           width: 35px;
           font-size: 1.4em;
@@ -377,7 +400,7 @@ novo-data-table {
       }
     }
   }
-  button[theme][theme='icon'] {
+  button[theme][theme="icon"] {
     height: 30px;
     width: 30px;
     padding: 5px;
@@ -392,7 +415,7 @@ novo-data-table {
     right: 0;
     bottom: 0;
     background: rgba(0, 0, 0, 0.07);
-    z-index: 99;
+    z-index: z(above);
   }
   .clickable {
     @extend a;
@@ -424,7 +447,7 @@ novo-data-table {
     display: flex;
     flex: 1;
     .novo-data-table-custom-filter {
-      border-right: 1px solid $off-white;
+      border-right: 1px solid var(--border, $off-white);
       novo-date-picker {
         .calendar {
           box-shadow: none;
@@ -474,7 +497,7 @@ novo-data-table {
     align-items: center;
     > div,
     div.novo-data-table-footer-cell {
-      border-top: 1px solid $off-white;
+      border-top: 1px solid var(--border, $off-white);
       flex: 1;
       min-width: 200px;
       display: flex;
@@ -529,13 +552,13 @@ novo-data-table-pagination {
         }
       }
     }
-    > button[theme][theme='dialogue'][icon][side='left'] {
+    > button[theme][theme="dialogue"][icon][side="left"] {
       padding: 5px;
       @media (min-width: $breakpoint) {
         padding: 5px 15px 5px 5px;
       }
     }
-    > button[theme][theme='dialogue'][icon][side='right'] {
+    > button[theme][theme="dialogue"][icon][side="right"] {
       padding: 5px;
       @media (min-width: $breakpoint) {
         padding: 5px 5px 5px 15px;
@@ -561,7 +584,7 @@ novo-data-table-pagination {
     novo-select {
       max-width: 100px;
       min-width: 100px;
-      div[type='button'] {
+      div[type="button"] {
         &:hover {
           i {
             opacity: 0.75;
@@ -586,8 +609,9 @@ novo-data-table-pagination {
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 30px;
-        height: 30px;
+        width: 2.4rem;
+        height: 2.4rem;
+        font-size: var(--font-size-text);
         border-radius: 2px;
         list-style-type: none;
         cursor: pointer;
@@ -607,11 +631,11 @@ novo-data-table-pagination {
 }
 
 .dropdown-container.data-table-dropdown {
-  min-width: 230px;
+  min-width: 220px;
   max-width: 230px;
   max-height: 500px;
   overflow-x: hidden;
-  overflow-y: auto;
+  overflow-y: hidden;
   &.right {
     margin-left: -150px !important;
   }
@@ -620,12 +644,17 @@ novo-data-table-pagination {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    button {
-      padding: 3px;
-      icon {
-        font-size: 0.8em;
-      }
-    }
+    // button {
+    //   padding: 3px;
+    //   icon {
+    //     font-size: 0.8em;
+    //   }
+    // }
+  }
+  .optgroup-container {
+    max-height: 346px;
+    overflow-y: auto;
+    overflow-x: hidden;
   }
   .dropdown-list-options {
     max-height: 346px;
@@ -633,7 +662,7 @@ novo-data-table-pagination {
     overflow-x: hidden;
   }
   .footer {
-    border-top: 1px solid $light;
+    border-top: 1px solid var(--border, $off-white);
     padding: 5px 10px;
     display: flex;
     justify-content: flex-end;
@@ -648,7 +677,7 @@ novo-data-table-pagination {
     background: transparent;
     font-weight: 500;
   }
-  button[theme][theme='dialogue'][icon] i {
+  button[theme][theme="dialogue"][icon] i {
     padding: inherit;
     padding-left: 5px;
     height: inherit;
@@ -656,66 +685,14 @@ novo-data-table-pagination {
     display: inline-block;
     line-height: inherit;
   }
-  list {
-    item.filter-search {
-      padding: 10px 0;
-      width: 100%;
-      height: auto;
-      flex-direction: column;
-      align-items: flex-start;
-      cursor: initial;
-      &:hover {
-        background: transparent;
-      }
-      .header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        width: 90%;
-        font-size: 0.9em;
-        margin: 0 auto;
-        span {
-          text-transform: uppercase;
-          font-weight: $table-header-font-weight;
-        }
-        button {
-          padding: 0 5px;
-          i {
-            height: auto !important;
-            width: auto !important;
-            font-size: 0.9em;
-          }
-        }
-      }
-      input {
-        border: none;
-        border-bottom: 2px solid #bebebe;
-        width: 90%;
-        margin: 0 auto;
-        background: transparent;
-        &:focus {
-          outline: none;
-          border-bottom: 2px solid $ocean;
-          ~ i.bhi-search {
-            color: $ocean;
-          }
-        }
-      }
-    }
-    item > span {
-      display: inline-block;
-      max-width: calc(100% - 20px);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-  }
+
   .calendar-container {
     height: 100%;
     min-height: 200px;
     width: 100%;
     background: #fff;
-    > div {
+    padding: 0 !important;
+    .back-link {
       color: $positive;
       line-height: 3em;
       font-size: 0.9em;
@@ -734,12 +711,12 @@ novo-data-table-pagination {
       }
     }
   }
-  i.bhi-search {
-    color: inherit;
-    position: relative;
-    left: 196px;
-    top: -25px;
-  }
+  // i.bhi-search {
+  //   color: inherit;
+  //   position: relative;
+  //   left: 196px;
+  //   top: -25px;
+  // }
   span.error-text {
     color: $negative;
     position: relative;

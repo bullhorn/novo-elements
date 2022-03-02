@@ -1,0 +1,168 @@
+@import "../../../styles/variables.scss";
+
+@mixin text-disabled($property) {
+  pointer-events: none;
+  color: $disabled;
+}
+
+@mixin base-text-rules() {
+  transition-property: color, opacity;
+  transition: 0.2s ease-out;
+  vertical-align: middle;
+
+  &.text-nowrap {
+    white-space: nowrap;
+  }
+  &.text-ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  @include text-sizing();
+  @include text-colors();
+  @include text-margins();
+  @include text-lengths();
+  @include text-weights();
+}
+
+@mixin text-sizing() {
+  // Controls font-size of text
+  &.text-size-default {
+    font-size: inherit;
+  }
+  &.text-size-body {
+    font-size: $font-size-body;
+  }
+  &.text-size-xs {
+    font-size: $font-size-xs;
+  }
+  &.text-size-sm {
+    font-size: $font-size-sm;
+  }
+  &.text-size-md {
+    font-size: $font-size-md;
+  }
+  &.text-size-lg {
+    font-size: $font-size-lg;
+  }
+  &.text-size-xl {
+    font-size: $font-size-xl;
+  }
+  &.text-size-2xl {
+    font-size: $font-size-2xl;
+  }
+  &.text-size-3xl {
+    font-size: $font-size-3xl;
+  }
+  &.text-size-smaller {
+    font-size: 0.8em;
+  }
+  &.text-size-larger {
+    font-size: 1.2em;
+  }
+}
+
+@mixin text-weights() {
+  // Font Weight Utils
+  &.text-weight-hairline {
+    font-weight: 100;
+  }
+  &.text-weight-thin {
+    font-weight: 200;
+  }
+  &.text-weight-light {
+    font-weight: 300;
+  }
+  &.text-weight-normal {
+    font-weight: 400;
+  }
+  &.text-weight-medium {
+    font-weight: 500;
+  }
+  &.text-weight-semibold {
+    font-weight: 600;
+  }
+  &.text-weight-bold {
+    font-weight: 700;
+  }
+  &.text-weight-extrabold {
+    font-weight: 800;
+  }
+  &.text-weight-heavy {
+    font-weight: 900;
+  }
+  &.text-weight-lighter {
+    font-weight: lighter;
+  }
+  &.text-weight-bolder {
+    font-weight: bolder;
+  }
+}
+
+@mixin text-lengths() {
+  &.text-length-small {
+    max-width: 40ch;
+  }
+  &.text-length-medium {
+    max-width: 55ch;
+  }
+  &.text-length-large {
+    max-width: 70ch;
+  }
+}
+
+@mixin text-colors() {
+  @include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
+    &.text-color-#{$name} {
+      color: $color;
+    }
+  }
+}
+
+@mixin text-margins() {
+  &.margin-before {
+    margin-top: 0.4rem;
+  }
+
+  &.margin-after {
+    margin-bottom: 0.8rem;
+  }
+}
+
+@mixin novo-body-text() {
+  display: inline;
+  font-weight: normal;
+  color: inherit;
+  font-size: var(--font-size-text);
+  @include base-text-rules();
+}
+
+@mixin novo-title-text() {
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--text-main, $dark);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: var(--font-size-title);
+  @include base-text-rules();
+}
+
+@mixin novo-label-text() {
+  font-weight: 500;
+  // text-transform: uppercase;
+  word-break: word-break;
+  overflow-wrap: break-word;
+  line-height: 1.375;
+  color: var(--text-muted);
+  font-size: var(--font-size-label);
+  @include base-text-rules();
+}
+
+@mixin novo-caption-text() {
+  font-size: var(--font-size-caption);
+  font-weight: 400;
+  line-height: 1.375;
+  color: var(--text-muted, $dark);
+  @include base-text-rules();
+}

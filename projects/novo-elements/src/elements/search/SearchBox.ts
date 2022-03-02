@@ -1,22 +1,22 @@
 // NG2
 import {
-  Component,
-  Input,
-  Output,
-  EventEmitter,
-  ViewChild,
-  forwardRef,
-  ElementRef,
-  HostBinding,
-  ChangeDetectorRef,
-  NgZone,
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  EventEmitter,
+  forwardRef,
+  HostBinding,
+  Input,
+  NgZone,
+  Output,
+  ViewChild,
 } from '@angular/core';
-import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
-import { TAB, ENTER, ESCAPE } from '@angular/cdk/keycodes';
-// APP
-import { NovoOverlayTemplateComponent } from '../overlay/Overlay';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { NovoLabelService } from '../../services/novo-label-service';
+import { Key } from '../../utils';
+// APP
+import { NovoOverlayTemplateComponent } from '../common/overlay/Overlay';
 
 // Value accessor for the component (supports ngModel)
 const SEARCH_VALUE_ACCESSOR = {
@@ -31,15 +31,7 @@ const SEARCH_VALUE_ACCESSOR = {
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <!-- SEARCH ICON -->
-    <button
-      theme="fab"
-      [color]="theme"
-      [icon]="icon"
-      (click)="showSearch()"
-      [tooltip]="hint"
-      tooltipPosition="bottom"
-      data-automation-id="novo-search-fab"
-    ></button>
+    <novo-icon (click)="showSearch($event)" [tooltip]="hint" tooltipPosition="bottom">{{ icon }}</novo-icon>
     <!-- SEARCH INPUT -->
     <input
       type="text"
@@ -57,7 +49,7 @@ const SEARCH_VALUE_ACCESSOR = {
     <novo-overlay-template
       [parent]="element"
       [closeOnSelect]="closeOnSelect"
-      position="above-below"
+      [position]="position"
       (select)="closePanel()"
       (closing)="onBlur()"
     >
@@ -71,11 +63,16 @@ export class NovoSearchBoxElement implements ControlValueAccessor {
   @Input()
   public icon: string = 'search';
   @Input()
+  public position: string = 'bottom-left';
+  @Input()
   public placeholder: string = 'Search...';
   @Input()
+  @HostBinding('class.always-open')
   public alwaysOpen: boolean = false;
   @Input()
-  public theme: string = 'positive';
+  public theme: string;
+  @Input()
+  public color: string = 'positive';
   @Input()
   public closeOnSelect: boolean = true;
   @Input()
@@ -124,6 +121,8 @@ export class NovoSearchBoxElement implements ControlValueAccessor {
           element.focus();
         }
       }, 10);
+    } else {
+      this.closePanel();
     }
   }
   onFocus() {
@@ -140,7 +139,7 @@ export class NovoSearchBoxElement implements ControlValueAccessor {
     this.overlay.openPanel();
   }
   closePanel(): void {
-    this.overlay.closePanel();
+    setTimeout(() => this.overlay.closePanel());
   }
   get panelOpen(): boolean {
     return this.overlay && this.overlay.panelOpen;
@@ -152,13 +151,14 @@ export class NovoSearchBoxElement implements ControlValueAccessor {
   /** END: Convenient Panel Methods. */
 
   _handleKeydown(event: KeyboardEvent): void {
-    if ((event.keyCode === ESCAPE || event.keyCode === ENTER || event.keyCode === TAB) && this.panelOpen) {
+    if ((event.key === Key.Escape || event.key === Key.Enter || event.key === Key.Tab) && this.panelOpen) {
       this.closePanel();
       event.stopPropagation();
     }
   }
   _handleInput(event: KeyboardEvent): void {
     if (document.activeElement === event.target) {
+      this.value = (event.target as HTMLInputElement).value;
       this._onChange((event.target as HTMLInputElement).value);
 
       if (this.debounceSearchChange) {

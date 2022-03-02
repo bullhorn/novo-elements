@@ -1,16 +1,17 @@
 // NG2
-import { TestBed, async } from '@angular/core/testing';
+import { async, TestBed } from '@angular/core/testing';
 // App
 import {
+  NovoItemAvatarElement,
+  NovoItemContentElement,
+  NovoItemDateElement,
+  NovoItemEndElement,
+  NovoItemHeaderElement,
+  NovoItemTitleElement,
   NovoListElement,
   NovoListItemElement,
-  NovoItemAvatarElement,
-  NovoItemTitleElement,
-  NovoItemHeaderElement,
-  NovoItemDateElement,
-  NovoItemContentElement,
-  NovoItemEndElement,
 } from './List';
+import { NovoListModule } from './List.module';
 
 describe('Elements: NovoListElement', () => {
   let fixture;
@@ -52,7 +53,7 @@ describe('Elements: NovoItemAvatarElement', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [NovoItemAvatarElement],
+      imports: [NovoListModule],
     }).compileComponents();
     fixture = TestBed.createComponent(NovoItemAvatarElement);
     component = fixture.debugElement.componentInstance;
@@ -86,7 +87,7 @@ describe('Elements: NovoItemHeaderElement', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [NovoItemHeaderElement],
+      imports: [NovoListModule],
     }).compileComponents();
     fixture = TestBed.createComponent(NovoItemHeaderElement);
     component = fixture.debugElement.componentInstance;

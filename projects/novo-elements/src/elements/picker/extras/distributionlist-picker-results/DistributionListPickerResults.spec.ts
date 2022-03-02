@@ -1,12 +1,12 @@
 // NG2
 import { ElementRef } from '@angular/core';
-import { TestBed, async } from '@angular/core/testing';
+import { async, TestBed } from '@angular/core/testing';
 import { DomSanitizer } from '@angular/platform-browser';
+import { NovoLabelService } from '../../../../services/novo-label-service';
 // App
 import { NovoListModule } from './../../../list/List.module';
 import { NovoLoadingModule } from './../../../loading/Loading.module';
 import { DistributionListPickerResults } from './DistributionListPickerResults';
-import { NovoLabelService } from '../../../../services/novo-label-service';
 
 describe('Components: DistributionListPickerResults', () => {
   let fixture: any;

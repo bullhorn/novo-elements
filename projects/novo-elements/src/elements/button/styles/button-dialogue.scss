@@ -1,0 +1,26 @@
+@import "../../../styles/variables.scss";
+
+:host {
+  // Dialoge Themed Button
+  &[theme="dialogue"] {
+    @include theme-text-colors("color");
+    background: transparent;
+    color: $positive;
+    &:hover,
+    &:focus {
+      background: lighten($light, 7%);
+    }
+    &:active {
+      background: lighten($light, 2%);
+    }
+    &[inverse] {
+      &:hover,
+      &:focus {
+        background: rgba(0, 0, 0, 0.2);
+      }
+      &:active {
+        background: rgba(0, 0, 0, 0.35);
+      }
+    }
+  }
+}

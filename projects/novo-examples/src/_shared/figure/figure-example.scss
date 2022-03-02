@@ -1,0 +1,62 @@
+$success: #8cc152;
+$negative: #da4453;
+$positive: #4a89dc;
+
+.figure-example {
+  display: flex;
+  flex-direction: column;
+  font-size: 1.2rem;
+  gap: 1rem;
+
+  .figure-container {
+    // border: 1px solid #eee;
+  }
+
+  .figure-content {
+    background-color: #eee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    & > pre,
+    & > code {
+      flex: 1;
+      margin: 0;
+    }
+    & > img {
+      padding: 2rem;
+      background-color: none !important;
+    }
+  }
+
+  .figure-caption {
+    display: flex;
+    flex-flow: column;
+    padding: 1rem 0;
+    gap: 1rem;
+  }
+
+  &.figure-theme-negative {
+    .figure-caption {
+      border-top: 3px solid $negative;
+      novo-icon {
+        color: $negative;
+      }
+    }
+  }
+  &.figure-theme-success {
+    .figure-caption {
+      border-top: 3px solid $success;
+      novo-icon {
+        color: $success;
+      }
+    }
+  }
+  &.figure-theme-positive {
+    .figure-caption {
+      border-top: 3px solid $positive;
+      novo-icon {
+        color: $positive;
+      }
+    }
+  }
+}

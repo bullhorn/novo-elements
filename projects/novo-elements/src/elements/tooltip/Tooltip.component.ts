@@ -1,15 +1,11 @@
 // NG2
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component } from '@angular/core';
-import { trigger, state, style, animate, transition } from '@angular/animations';
 
 @Component({
   selector: 'novo-tooltip',
-  template: `
-    <div *ngIf="this.isHTML" [@state]="noAnimate ? 'no-animation' : 'visible'"
-         [ngClass]="[tooltipType, this.rounded ? 'rounded' : '', size ? size : '', this.preline? 'preline' : '', position]"
-         [innerHTML]="message"></div>
-    <div *ngIf="!this.isHTML" [@state]="noAnimate ? 'no-animation' : 'visible'"
-         [ngClass]="[tooltipType, this.rounded ? 'rounded' : '', size ? size : '', this.preline? 'preline' : '', position]">{{message}}</div>`,
+  templateUrl: './Tooltip.html',
+  styleUrls: ['./Tooltip.scss'],
   animations: [
     trigger('state', [
       state('initial, void, hidden', style({ opacity: '0' })),
@@ -17,16 +13,14 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
       transition('* => visible', [
         style({
           opacity: 0,
-          visibility: 'visible',
         }),
-        animate('0.3s ease-in'),
+        animate('0.3s 0.1s ease-in'),
       ]),
       transition('* => hidden', [
         style({
           opacity: 1,
-          visibility: 'hidden',
         }),
-        animate('0.3s ease-in'),
+        animate('0.3s 0.1s ease-in'),
       ]),
     ]),
   ],

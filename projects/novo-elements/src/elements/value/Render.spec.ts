@@ -1,10 +1,10 @@
 // NG2
-import { TestBed, async } from '@angular/core/testing';
 import { ChangeDetectorRef } from '@angular/core';
+import { async, TestBed } from '@angular/core/testing';
 import { DomSanitizer } from '@angular/platform-browser';
+import { NovoLabelService } from '../../services/novo-label-service';
 // APP
 import { RenderPipe } from './Render';
-import { NovoLabelService } from '../../services/novo-label-service';
 // TODO fix specs
 xdescribe('Render', () => {
   let fixture: any;
@@ -462,7 +462,11 @@ xdescribe('Render', () => {
     });
     it('should return an array of corresponding labels for values passed', () => {
       const values = ['1', '3'];
-      const list = [{ label: 'Archived', value: '1' }, { label: 'New Lead', value: '2' }, { label: 'Old Lead', value: '3' }];
+      const list = [
+        { label: 'Archived', value: '1' },
+        { label: 'New Lead', value: '2' },
+        { label: 'Old Lead', value: '3' },
+      ];
       expect(pipe.options(values, list)).toEqual(['Archived', 'Old Lead']);
     });
   });

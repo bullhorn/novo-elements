@@ -9,6 +9,6 @@ import { Component } from '@angular/core';
   styleUrls: ['calendar-example.css'],
 })
 export class CalendarExample {
-  public dateOne: Date;
-  public dateTwo: Date;
+  activeDate = new Date();
+  selection: Date[] = [];
 }

@@ -3,18 +3,28 @@ novo-loading {
   display: flex;
   flex-direction: row;
   font-size: 13px;
+  gap: 0.3em;
+
+  &.size-small {
+    padding: 8px;
+    font-size: 8px;
+  }
+
+  &.size-large {
+    font-size: 18px;
+  }
 
   span.dot {
     display: block;
     border-radius: 50%;
-    margin: 3px;
-    height: 13px;
-    width: 13px;
-    @include enumerate($dot-colors, 'background-color', 'map-val', '');
-    @include animationMapDelay($dot-colors, jump, 1600ms, ease-in-out, 70ms, forward, infinite, '', '');
+    height: 1em;
+    width: 1em;
+    @include enumerate($dot-colors, "background-color", "map-val", "");
+    @include animationMapDelay($dot-colors, jump, 1600ms, ease-in-out, 70ms, forward, infinite, "", "");
   }
+
   @each $analytics, $color in $analytics-colors {
-    &.#{$analytics} {
+    &.color-#{$analytics} {
       span.dot {
         background-color: $color;
       }
@@ -40,7 +50,7 @@ novo-loading {
   }
 
   45% {
-    transform: translateY(-1.5em);
+    transform: translateY(-1.2em);
     opacity: 0.5;
   }
 

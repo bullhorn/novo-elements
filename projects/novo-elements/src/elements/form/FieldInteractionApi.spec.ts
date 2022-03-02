@@ -1,20 +1,24 @@
-import { async, inject, TestBed } from '@angular/core/testing';
+// NG
+import { OverlayModule } from '@angular/cdk/overlay';
 import { HttpClient, HttpHandler } from '@angular/common/http';
+import { async, inject, TestBed } from '@angular/core/testing';
+// Vendor
 import { of } from 'rxjs';
-
-import { FieldInteractionApi } from './FieldInteractionApi';
-import { NovoToastService } from '../toast/ToastService';
-import { NovoModalService } from '../modal/ModalService';
-import { FormUtils } from '../../utils/form-utils/FormUtils';
+// App
 import { NovoLabelService } from '../../services/novo-label-service';
-import { ComponentUtils } from '../../utils/component-utils/ComponentUtils';
 import { OptionsService } from '../../services/options/OptionsService';
+import { ComponentUtils } from '../../utils/component-utils/ComponentUtils';
+import { FormUtils } from '../../utils/form-utils/FormUtils';
+import { NovoModalService } from '../modal/modal.service';
+import { NovoToastService } from '../toast/ToastService';
+import { FieldInteractionApi } from './FieldInteractionApi';
 import { ModifyPickerConfigArgs, OptionsFunction } from './FieldInteractionApiTypes';
 
 describe('FieldInteractionApi', () => {
   let service: FieldInteractionApi;
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [OverlayModule],
       providers: [
         {
           provide: FieldInteractionApi,
@@ -77,47 +81,42 @@ describe('FieldInteractionApi', () => {
     it('is defined', () => {
       expect(service.getOptionsConfig).toBeDefined();
     });
-    it('returns a new options call that calls optionsPromise', async (done) => {
+    it('returns a new options call that calls optionsPromise', async () => {
       const args = {
         optionsPromise: async (str: string) => [],
       };
-      const spy = spyOn(args, 'optionsPromise').and.returnValue(Promise.resolve([]));
+      const spy = jest.spyOn(args, 'optionsPromise').mockResolvedValue([]);
 
       const result = service.getOptionsConfig(args) as { options: OptionsFunction };
       await result.options('asdf');
 
-      const [firstArg, secondArg] = spy.calls.mostRecent().args;
-      expect(firstArg).toEqual('asdf');
-      done();
+      expect(spy).toHaveBeenLastCalledWith('asdf', expect.any(Object), undefined);
     });
-    it('calls optionsPromise if optionsUrl is also present', async (done) => {
+    it('calls optionsPromise if optionsUrl is also present', async () => {
       const args = {
         optionsPromise: async (str: string) => [],
         optionsUrl: 'fake/url',
       };
-      const spy = spyOn(args, 'optionsPromise').and.returnValue(Promise.resolve([]));
+      const spy = jest.spyOn(args, 'optionsPromise').mockResolvedValue([]);
       const query = 'Novo Elem';
       const page = 9;
 
       const result = service.getOptionsConfig(args) as { options: OptionsFunction };
       await result.options(query, page);
 
-      expect(spy).toBeCalledWith(query, jasmine.any(Object), page);
-      done();
+      expect(spy).toHaveBeenCalledWith(query, expect.any(Object), page);
     });
-    it('uses the optionsURLBuilder if included and not optionsUrl', async (done) => {
+    it('uses the optionsURLBuilder if included and not optionsUrl', async () => {
       const args: ModifyPickerConfigArgs = {
         optionsUrlBuilder: (query) => `asdf${query}`,
         optionsUrl: 'fake/url',
       };
 
       const result = service.getOptionsConfig(args) as { options: OptionsFunction };
-      spyOn(result, 'options').and.callThrough();
-      const spy = spyOn((service as any).http, 'get').and.returnValue(of([]));
+      jest.spyOn(result, 'options');
+      const spy = jest.spyOn((service as any).http, 'get').mockReturnValue(of([]));
       await result.options('asdf');
-      const [firstArg] = spy.calls.mostRecent().args;
-      expect(firstArg).toEqual('asdfasdf');
-      done();
+      expect(spy).toHaveBeenLastCalledWith('asdfasdf');
     });
     it('passes down format if optionsUrl, optionsUrlBuilder, or optionsPromise is present', () => {
       const args: ModifyPickerConfigArgs = {
@@ -134,16 +133,15 @@ describe('FieldInteractionApi', () => {
       const result = service.getOptionsConfig(args);
       expect(result.options).toEqual(['asdf']);
     });
-    it('uses the mapper if present', async (done) => {
+    it('uses the mapper if present', async () => {
       const args: ModifyPickerConfigArgs = {
         optionsUrl: 'fake/url',
       };
       const mapper = ({ name }) => name;
-      spyOn((service as any).http, 'get').and.returnValue(of([{ name: 'Dr. Strangelove' }]));
+      jest.spyOn((service as any).http, 'get').mockReturnValue(of([{ name: 'Dr. Strangelove' }]));
       const result = service.getOptionsConfig(args, mapper);
       const results = await (result.options as OptionsFunction)('asdf');
       expect(results).toEqual(['Dr. Strangelove']);
-      done();
     });
   });
 
@@ -258,7 +256,7 @@ describe('FieldInteractionApi', () => {
         controls: { myControl: { value: 1 } },
         parent: {
           controls: { parentControl: { value: 2 } },
-        }
+        },
       };
     });
     it('is defined', () => {
@@ -305,7 +303,7 @@ describe('FieldInteractionApi', () => {
         },
         parent: {
           controls: { parentControl: { setValue: () => {} } },
-        }
+        },
       };
     });
     it('is defined', () => {
@@ -366,8 +364,8 @@ describe('FieldInteractionApi', () => {
       service.form = {
         associations: {},
         parent: {
-          associations: {}
-        }
+          associations: {},
+        },
       };
     });
     it('is defined', () => {
@@ -400,7 +398,7 @@ describe('FieldInteractionApi', () => {
         },
         parent: {
           controls: { parentControl: {} },
-        }
+        },
       };
     });
     it('is defined', () => {
@@ -453,7 +451,7 @@ describe('FieldInteractionApi', () => {
         tip: 'this is a tip',
         icon: 'caution',
         button: true,
-        sanitize: true
+        sanitize: true,
       });
       expect(triggerEvent).toBeCalledWith({ controlKey: 'parentControl', prop: 'tipWell', value: 'this is a tip' }, service.form.parent);
       expect(console.error).not.toBeCalled();
@@ -475,7 +473,7 @@ describe('FieldInteractionApi', () => {
         },
         parent: {
           controls: { parentControl: { markAsInvalid: () => {}, markAsValid: () => {} } },
-        }
+        },
       };
     });
     it('is defined', () => {

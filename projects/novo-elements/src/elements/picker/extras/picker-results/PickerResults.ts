@@ -1,5 +1,5 @@
 // NG2
-import { Component, ElementRef, ChangeDetectorRef } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef } from '@angular/core';
 // APP
 import { NovoLabelService } from '../../../../services/novo-label-service';
 import { BasePickerResults } from '../base-picker-results/BasePickerResults';
@@ -38,8 +38,8 @@ export class PickerResults extends BasePickerResults {
 
   getEmptyMessage() {
     if (this.shouldShowMessageForZeroLengthSearch()) {
-        // this property comes from Field Interactions
-        return this.config.emptyPickerMessage;
+      // this property comes from Field Interactions
+      return this.config.emptyPickerMessage;
     } else {
       return this.term === '' ? this.labels.pickerTextFieldEmpty : this.labels.pickerEmpty;
     }

@@ -1,0 +1,4 @@
+<div class="aside-panel" [@slideInOut]="animationState" (@slideInOut.start)="onAnimationStart($event)"
+  (@slideInOut.done)="onAnimationDone($event)">
+  <ng-template [cdkPortalOutlet]="component"></ng-template>
+</div>

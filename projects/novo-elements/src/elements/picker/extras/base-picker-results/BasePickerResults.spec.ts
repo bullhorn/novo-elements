@@ -56,14 +56,12 @@ describe('Elements: BasePickerResults', () => {
 
   describe('Method: selectActiveMatch()', () => {
     it('should be defined.', () => {
-      spyOn(component, 'selectMatch');
       expect(component.selectActiveMatch).toBeDefined();
-      component.selectActiveMatch();
     });
     it('should call selectMatch.', () => {
-      spyOn(component, 'selectMatch');
+      let spy = jest.spyOn(component, 'selectMatch');
       component.selectActiveMatch();
-      expect(component.selectMatch).toHaveBeenCalled();
+      expect(spy).toHaveBeenCalled();
     });
   });
 
@@ -73,7 +71,7 @@ describe('Elements: BasePickerResults', () => {
       component.prevActiveMatch();
     });
     it('should scroll to active.', () => {
-      spyOn(component, 'scrollToActive');
+      jest.spyOn(component, 'scrollToActive');
       component.prevActiveMatch();
       expect(component.scrollToActive).toHaveBeenCalled();
     });
@@ -114,8 +112,8 @@ describe('Elements: BasePickerResults', () => {
     });
     it('should prevent events from bubbling up', () => {
       const mockEvent: any = {
-        stopPropagation: jasmine.createSpy('stopPropagation'),
-        preventDefault: jasmine.createSpy('preventDefault'),
+        stopPropagation: jest.fn(() => true),
+        preventDefault: jest.fn(() => true),
       };
       component.selectMatch(mockEvent);
       expect(mockEvent.stopPropagation).toHaveBeenCalled();
@@ -130,7 +128,7 @@ describe('Elements: BasePickerResults', () => {
     it('should handle closeOnSelect', () => {
       component.parent = {
         closeOnSelect: true,
-        hideResults: jasmine.createSpy('hideResults'),
+        hideResults: jest.fn(() => true),
       };
       component.activeMatch = 'Stuff';
       component.selectMatch();
@@ -162,17 +160,26 @@ describe('Elements: BasePickerResults', () => {
       // component.preselected();
     });
     it('should match by id when applicable', () => {
-      component.selected = [{ id: 1, value: 'test0' }, { id: 2, value: 'test1' }];
+      component.selected = [
+        { id: 1, value: 'test0' },
+        { id: 2, value: 'test1' },
+      ];
       expect(component.preselected({ id: 1, value: 'test0' })).toEqual(true);
       expect(component.preselected({ id: 5, value: 'not a match' })).toEqual(false);
     });
     it('should match by the nested value property when an object', () => {
-      component.selected = [{ id: 1, value: { value: 'test0' } }, { id: 2, value: { value: 'test1' } }];
+      component.selected = [
+        { id: 1, value: { value: 'test0' } },
+        { id: 2, value: { value: 'test1' } },
+      ];
       expect(component.preselected({ value: 'test0' })).toEqual(true);
       expect(component.preselected({ value: 'not a match' })).toEqual(false);
     });
     it('should match by the value property when applicable', () => {
-      component.selected = [{ id: 1, value: 'test0' }, { id: 2, value: 'test1' }];
+      component.selected = [
+        { id: 1, value: 'test0' },
+        { id: 2, value: 'test1' },
+      ];
       expect(component.preselected({ value: 'test0' })).toEqual(true);
       expect(component.preselected({ value: 'not a match' })).toEqual(false);
     });
@@ -180,7 +187,10 @@ describe('Elements: BasePickerResults', () => {
       component.config.preselected = (match, item) => {
         return match.testVal === item.testVal;
       };
-      component.selected = [{ id: 1, testVal: 'test0' }, { id: 2, testVal: 'test1' }];
+      component.selected = [
+        { id: 1, testVal: 'test0' },
+        { id: 2, testVal: 'test1' },
+      ];
       expect(component.preselected({ testVal: 'test0' })).toEqual(true);
       expect(component.preselected({ testVal: 'not a match' })).toEqual(false);
     });

@@ -1,6 +1,6 @@
 // NG2
-import { FormGroup } from '@angular/forms';
 import { async, inject, TestBed } from '@angular/core/testing';
+import { FormGroup } from '@angular/forms';
 // Vendor
 import { from } from 'rxjs';
 // APP
@@ -16,16 +16,17 @@ import {
   PickerControl,
   RadioControl,
   SelectControl,
+  SwitchControl,
   TextAreaControl,
   TextBoxControl,
   TilesControl,
   TimeControl,
 } from '../../elements/form/FormControls';
-import { FormUtils } from './FormUtils';
+import { FormField } from '../../elements/form/FormInterfaces';
 import { NovoFormControl } from '../../elements/form/NovoFormControl';
 import { NovoLabelService } from '../../services/novo-label-service';
 import { OptionsService } from '../../services/options/OptionsService';
-import { FormField } from '../../elements/form/FormInterfaces';
+import { FormUtils } from './FormUtils';
 
 /**
  * Creates a mock address
@@ -100,8 +101,8 @@ describe('Utils: FormUtils', () => {
       const formGroup: FormGroup = formUtils.toFormGroup([{ key: 'Test' }]);
       formUtils.addControls(formGroup, [{ key: 'Test2' }]);
       // Can't use `.Test2` because the formGroup isn't returned
-      expect(formGroup.controls['Test2']).toBeDefined();
-      expect(formGroup.controls['Test2'] instanceof NovoFormControl).toBe(true);
+      expect(formGroup.controls.Test2).toBeDefined();
+      expect(formGroup.controls.Test2 instanceof NovoFormControl).toBe(true);
     });
   });
 
@@ -111,7 +112,7 @@ describe('Utils: FormUtils', () => {
       const formGroup: FormGroup = formUtils.toFormGroup([{ key: 'Test' }, { key: 'Test2' }]);
       formUtils.removeControls(formGroup, [{ key: 'Test2' }]);
       // Can't use `.Test2` because the formGroup isn't returned
-      expect(formGroup.controls['Test2']).not.toBeDefined();
+      expect(formGroup.controls.Test2).not.toBeDefined();
     });
   });
 
@@ -323,6 +324,11 @@ describe('Utils: FormUtils', () => {
       const result = formUtils.getControlForField({ type: 'checkbox' });
       expect(result instanceof CheckboxControl).toBe(true);
     });
+    it('should return the right component for switch', () => {
+      expect(formUtils.getControlForField).toBeDefined();
+      const result = formUtils.getControlForField({ type: 'switch' });
+      expect(result instanceof SwitchControl).toBe(true);
+    });
     it('should return the right component for checklist', () => {
       expect(formUtils.getControlForField).toBeDefined();
       const result = formUtils.getControlForField({ type: 'checklist' });
@@ -344,7 +350,7 @@ describe('Utils: FormUtils', () => {
     });
     it('should return the right component for WorkflowOptions and call getControlOptions with data', () => {
       const field: { type: string } = { type: 'select' };
-      spyOn(formUtils, 'getControlOptions');
+      jest.spyOn(formUtils, 'getControlOptions');
       const result = formUtils.getControlForField(field, undefined, undefined, undefined, undefined, 'First');
       expect(formUtils.getControlOptions).toHaveBeenCalledWith(field, undefined, undefined, 'First');
       expect(result instanceof SelectControl).toBeTruthy();
@@ -435,18 +441,20 @@ describe('Utils: FormUtils', () => {
             dataSpecialization: 'INLINE_EMBEDDED',
             sortOrder: 10,
             associatedEntity: {
-              fields: [{
-                name: 'field1',
-                type: 'text',
-                label: 'Field 1',
-                sortOrder: 10,
-              },
-              {
-                name: 'field2',
-                type: 'text',
-                label: 'Field 2',
-                sortOrder: 30,
-              }],
+              fields: [
+                {
+                  name: 'field1',
+                  type: 'text',
+                  label: 'Field 1',
+                  sortOrder: 10,
+                },
+                {
+                  name: 'field2',
+                  type: 'text',
+                  label: 'Field 2',
+                  sortOrder: 30,
+                },
+              ],
             },
           },
         ],
@@ -491,7 +499,7 @@ describe('Utils: FormUtils', () => {
           },
         ],
       };
-      spyOn(formUtils, 'getControlForField').and.returnValue({});
+      jest.spyOn(formUtils, 'getControlForField').mockReturnValue({});
       formUtils.toFieldSets(meta, 'USD', {}, {}, {}, { firstName: 'First' });
       expect(formUtils.getControlForField).toHaveBeenCalledWith(meta.fields[0], {}, {}, {}, undefined, 'First');
     });
@@ -541,19 +549,28 @@ describe('Utils: FormUtils', () => {
     it('should return an array when there are WorkflowOptions and a value', () => {
       const field: { workflowOptions: Object } = {
         workflowOptions: {
-          initial: [{ value: 1, label: 'one' }, { value: 2, label: 'two' }],
+          initial: [
+            { value: 1, label: 'one' },
+            { value: 2, label: 'two' },
+          ],
           1: [{ value: 2, label: 'two' }],
           2: [{ value: 3, label: 'three' }],
           3: [],
         },
       };
-      const result = formUtils.getControlOptions(field, undefined, undefined, { id: 2, label: 'two', shouldRunValidationsOnSave: true, });
-      expect(result).toEqual([{ id: 2, shouldRunValidationsOnSave: true, value: 2, label: 'two' }, { value: 3, label: 'three' }]);
+      const result = formUtils.getControlOptions(field, undefined, undefined, { id: 2, label: 'two', shouldRunValidationsOnSave: true });
+      expect(result).toEqual([
+        { id: 2, shouldRunValidationsOnSave: true, value: 2, label: 'two' },
+        { value: 3, label: 'three' },
+      ]);
     });
     it('should add current option to array if current value is not there for WorkflowOptions', () => {
       const field: { workflowOptions: Object } = {
         workflowOptions: {
-          initial: [{ value: 1, label: 'one' }, { value: 2, label: 'two' }],
+          initial: [
+            { value: 1, label: 'one' },
+            { value: 2, label: 'two' },
+          ],
           1: [{ value: 2, label: 'two' }],
           2: [{ value: 3, label: 'three' }],
           3: [],
@@ -565,26 +582,38 @@ describe('Utils: FormUtils', () => {
     it('should return initial options when value has no id', () => {
       const field: { workflowOptions: Object } = {
         workflowOptions: {
-          initial: [{ value: 1, label: 'one' }, { value: 2, label: 'two' }],
+          initial: [
+            { value: 1, label: 'one' },
+            { value: 2, label: 'two' },
+          ],
           1: [{ value: 2, label: 'two' }],
           2: [{ value: 3, label: 'three' }],
           3: [],
         },
       };
       const result = formUtils.getControlOptions(field, undefined, undefined, { label: '2' });
-      expect(result).toEqual([{ value: 1, label: 'one' }, { value: 2, label: 'two' }]);
+      expect(result).toEqual([
+        { value: 1, label: 'one' },
+        { value: 2, label: 'two' },
+      ]);
     });
     it('should return initial options when value is null', () => {
       const field: { workflowOptions: Object } = {
         workflowOptions: {
-          initial: [{ value: 1, label: 'one' }, { value: 2, label: 'two' }],
+          initial: [
+            { value: 1, label: 'one' },
+            { value: 2, label: 'two' },
+          ],
           1: [{ value: 2, label: 'two' }],
           2: [{ value: 3, label: 'three' }],
           3: [],
         },
       };
       const result = formUtils.getControlOptions(field, undefined, undefined, null);
-      expect(result).toEqual([{ value: 1, label: 'one' }, { value: 2, label: 'two' }]);
+      expect(result).toEqual([
+        { value: 1, label: 'one' },
+        { value: 2, label: 'two' },
+      ]);
     });
     it('should return empty array when workflow options are missing', () => {
       const field: { workflowOptions: Object } = {
@@ -600,12 +629,12 @@ describe('Utils: FormUtils', () => {
           { value: '1', label: 'one', readOnly: true },
           { value: '2', label: 'two', readOnly: false },
           { value: '3', label: 'three', readOnly: false },
-        ]
+        ],
       };
       const expected: Array<{ value: string; label: string; readOnly: boolean }> = [
         { value: '1', label: 'one', readOnly: true },
         { value: '2', label: 'two', readOnly: false },
-        { value: '3', label: 'three', readOnly: false }
+        { value: '3', label: 'three', readOnly: false },
       ];
       const result = formUtils.getControlOptions(field, undefined, undefined, { id: '1', label: 'one' });
       expect(result).toEqual(expected);
@@ -617,12 +646,12 @@ describe('Utils: FormUtils', () => {
           { value: '1', label: 'uno', readOnly: false },
           { value: '2', label: 'dos', readOnly: false },
           { value: '3', label: 'tres', readOnly: false },
-        ]
+        ],
       };
       const expected: Array<{ value: string; label: string; readOnly: boolean }> = [
         { value: '1', label: 'uno', readOnly: false },
         { value: '2', label: 'dos', readOnly: false },
-        { value: '3', label: 'tres', readOnly: false }
+        { value: '3', label: 'tres', readOnly: false },
       ];
       const result = formUtils.getControlOptions(field, undefined, undefined);
       expect(result).toEqual(expected);
@@ -740,51 +769,51 @@ describe('Utils: FormUtils', () => {
     });
     it('should set start date only when just minOffset is passed', () => {
       const field = { dataType: 'Date', allowedDateRange: { minOffset: 1 } };
-      const controlConfig = {};
+      const controlConfig: NovoControlConfig = {};
       formUtils.inferDateRange(controlConfig, field);
       expect(Object.keys(controlConfig).length).toBeGreaterThan(0);
       expect(controlConfig.hasOwnProperty('startDate')).toBe(true);
-      expect(controlConfig['startDate']).toBeDefined;
+      expect(controlConfig.startDate).toBeDefined;
       expect(controlConfig.hasOwnProperty('endDate')).toBe(true);
-      expect(controlConfig['endDate']).not.toBeDefined;
+      expect(controlConfig.endDate).not.toBeDefined;
       expect(controlConfig.hasOwnProperty('disabledDateMessage')).toBe(true);
-      expect(controlConfig['disabledDateMessage']).not.toBeDefined;
+      expect(controlConfig.disabledDateMessage).not.toBeDefined;
     });
     it('should set start date only when just minDate is passed', () => {
       const field = { dataType: 'Date', allowedDateRange: { minDate: '2021-01-01' } };
-      const controlConfig = {};
+      const controlConfig: NovoControlConfig = {};
       formUtils.inferDateRange(controlConfig, field);
       expect(Object.keys(controlConfig).length).toBeGreaterThan(0);
       expect(controlConfig.hasOwnProperty('startDate')).toBe(true);
-      expect(controlConfig['startDate']).toBeDefined;
+      expect(controlConfig.startDate).toBeDefined;
       expect(controlConfig.hasOwnProperty('endDate')).toBe(true);
-      expect(controlConfig['endDate']).not.toBeDefined;
+      expect(controlConfig.endDate).not.toBeDefined;
       expect(controlConfig.hasOwnProperty('disabledDateMessage')).toBe(true);
-      expect(controlConfig['disabledDateMessage']).not.toBeDefined;
+      expect(controlConfig.disabledDateMessage).not.toBeDefined;
     });
     it('should set end date only when just maxOffset is passed', () => {
       const field = { dataType: 'Date', allowedDateRange: { maxOffset: 1 } };
-      const controlConfig = {};
+      const controlConfig: NovoControlConfig = {};
       formUtils.inferDateRange(controlConfig, field);
       expect(Object.keys(controlConfig).length).toBeGreaterThan(0);
       expect(controlConfig.hasOwnProperty('startDate')).toBe(true);
-      expect(controlConfig['startDate']).not.toBeDefined;
+      expect(controlConfig.startDate).not.toBeDefined;
       expect(controlConfig.hasOwnProperty('endDate')).toBe(true);
-      expect(controlConfig['endDate']).toBeDefined;
+      expect(controlConfig.endDate).toBeDefined;
       expect(controlConfig.hasOwnProperty('disabledDateMessage')).toBe(true);
-      expect(controlConfig['disabledDateMessage']).not.toBeDefined;
+      expect(controlConfig.disabledDateMessage).not.toBeDefined;
     });
     it('should set end date only when just maxOffset is passed', () => {
       const field = { dataType: 'Date', allowedDateRange: { maxDate: '2021-01-01' } };
-      const controlConfig = {};
+      const controlConfig: NovoControlConfig = {};
       formUtils.inferDateRange(controlConfig, field);
       expect(Object.keys(controlConfig).length).toBeGreaterThan(0);
       expect(controlConfig.hasOwnProperty('startDate')).toBe(true);
-      expect(controlConfig['startDate']).not.toBeDefined;
+      expect(controlConfig.startDate).not.toBeDefined;
       expect(controlConfig.hasOwnProperty('endDate')).toBe(true);
-      expect(controlConfig['endDate']).toBeDefined;
+      expect(controlConfig.endDate).toBeDefined;
       expect(controlConfig.hasOwnProperty('disabledDateMessage')).toBe(true);
-      expect(controlConfig['disabledDateMessage']).not.toBeDefined;
+      expect(controlConfig.disabledDateMessage).not.toBeDefined;
     });
   });
   describe('Method: inflateEmbeddedProperties()', () => {
@@ -827,12 +856,14 @@ describe('Utils: FormUtils', () => {
       const field = {
         name: 'embeddedField',
         associatedEntity: {
-          fields: [{
-            name: 'field1',
-          },
-          {
-            name: 'field2',
-          }],
+          fields: [
+            {
+              name: 'field1',
+            },
+            {
+              name: 'field2',
+            },
+          ],
         },
       };
       const embeddedfields = formUtils.getEmbeddedFields(field);
@@ -844,12 +875,14 @@ describe('Utils: FormUtils', () => {
       const field = {
         name: 'embeddedField',
         associatedEntity: {
-          fields: [{
-            name: 'embeddedField.field1',
-          },
-          {
-            name: 'embeddedField.field2',
-          }],
+          fields: [
+            {
+              name: 'embeddedField.field1',
+            },
+            {
+              name: 'embeddedField.field2',
+            },
+          ],
         },
       };
       const embeddedfields = formUtils.getEmbeddedFields(field);

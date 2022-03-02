@@ -1,0 +1,100 @@
+<div class="sidenav-example">
+  <novo-toolbar color="navigation">
+    <novo-action icon="menu" (click)="sidenav.toggle()"></novo-action>
+    <novo-divider vertical></novo-divider>
+    <img class="logo" src="assets/images/bullhorn-logo.svg" width="120" height="32" />
+
+    <div flex="1 1 auto"></div>
+    <novo-divider vertical></novo-divider>
+    <novo-action icon="question" tooltip="Support"></novo-action>
+    <novo-divider vertical></novo-divider>
+    <novo-action icon="configure-o" tooltip="Settings"></novo-action>
+    <novo-divider vertical></novo-divider>
+    <novo-avatar image="https://robohash.org/bvkimball" color="grass"></novo-avatar>
+  </novo-toolbar>
+
+  <novo-layout-container>
+    <novo-rail [class.expanded]="!collapsed">
+      <ng-container *ngFor="let win of openWindows">
+        <ng-container [ngSwitch]="win.type">
+          <novo-option *ngSwitchCase="'record'" [accent]="win.accent">
+            <novo-icon>{{win.accent}}</novo-icon>
+            <novo-text>{{win.label}}</novo-text>
+            <novo-action icon="x"></novo-action>
+          </novo-option>
+          <novo-option *ngSwitchCase="'list'" [fill]="win.accent">
+            <novo-icon>{{win.accent}}</novo-icon>
+            <novo-text>{{win.label}}</novo-text>
+            <novo-action icon="x"></novo-action>
+          </novo-option>
+        </ng-container>
+      </ng-container>
+      <novo-option (click)="collapsed=!collapsed">
+        <novo-icon>{{collapsed ? 'arrow-right' : 'arrow-left'}}</novo-icon>
+        <novo-text>Collapse All</novo-text>
+      </novo-option>
+    </novo-rail>
+
+    <novo-sidenav
+      #sidenav
+      [mode]="isMobile ? 'over' : 'side'"
+      [opened]="!isMobile"
+      [disableClose]="!isMobile"
+      theme="navigation">
+      <novo-header theme="navigation" [condensed]="true">
+        <div novo-title>Application Menu</div>
+      </novo-header>
+      <novo-list theme="navigation" direction="vertical">
+        <novo-divider></novo-divider>
+        <novo-list-item><a>Job Orders</a></novo-list-item>
+        <button list-item>Companies</button>
+        <novo-list-item>Placements</novo-list-item>
+        <novo-list-item>Contacts</novo-list-item>
+        <novo-list-item>Candidates</novo-list-item>
+        <novo-divider></novo-divider>
+        <novo-list-item>Reports</novo-list-item>
+        <novo-list-item>Settings</novo-list-item>
+        <novo-list-item>About</novo-list-item>
+        <a list-item>Users</a>
+
+      </novo-list>
+
+    </novo-sidenav>
+    <novo-layout-content>
+      <novo-toolbar accent="candidate" gap="md">
+        <novo-icon color="candidate">candidate</novo-icon>
+        <novo-title>Ferdinand del Toro</novo-title>
+      </novo-toolbar>
+      <novo-toolbar gap="md">
+        <novo-stack>
+          <novo-label>ID</novo-label>
+          <novo-text>101</novo-text>
+        </novo-stack>
+        <novo-stack>
+          <novo-label>Owner</novo-label>
+          <novo-text>Brian Kimball</novo-text>
+        </novo-stack>
+      </novo-toolbar>
+      <novo-toolbar gap="md">
+        <novo-nav outlet="pages">
+          <novo-tab>Overview</novo-tab>
+          <novo-tab>Activity</novo-tab>
+          <novo-tab>Files</novo-tab>
+        </novo-nav>
+      </novo-toolbar>
+      <novo-nav-outlet #pages>
+        <novo-nav-content>
+          <div>
+            SIDENAV CONTENT
+            <novo-label>Is Mobile?</novo-label>
+            <novo-switch [(ngModel)]="isMobile"></novo-switch>
+          </div>
+        </novo-nav-content>
+        <novo-nav-content>
+          <h1>Tab 2 Content</h1>
+        </novo-nav-content>
+      </novo-nav-outlet>
+
+    </novo-layout-content>
+  </novo-layout-container>
+</div>

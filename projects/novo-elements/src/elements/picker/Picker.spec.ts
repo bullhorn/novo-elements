@@ -1,11 +1,11 @@
 // NG2
 import { async, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
+import { ComponentUtils } from '../../utils/component-utils/ComponentUtils';
+import { PickerResults } from './extras/picker-results/PickerResults';
 // App
 import { NovoPickerElement } from './Picker';
 import { NovoPickerModule } from './Picker.module';
-import { ComponentUtils } from '../../utils/component-utils/ComponentUtils';
-import { PickerResults } from './extras/picker-results/PickerResults';
 
 describe('Elements: NovoPickerElement', () => {
   let fixture;

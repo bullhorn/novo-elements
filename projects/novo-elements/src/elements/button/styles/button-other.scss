@@ -1,0 +1,70 @@
+@import "../../../styles/variables.scss";
+
+:host {
+  // Field Themed Button
+  &[theme="field"] {
+    background: transparent;
+    color: $dark;
+    border: none;
+    border-radius: 0;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 4px;
+    padding: $spacing-xs $spacing-sm;
+    font-size: 1.2rem;
+    height: 1.8rem;
+    text-align: left;
+    &:hover,
+    &:focus,
+    &:active {
+      border-bottom: 1px solid var(--selection);
+    }
+  }
+  // Select Themed Button
+  &[theme="select"] {
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid var(--border);
+    border-radius: 0;
+    color: var(--text-main);
+    padding: 0;
+    height: 2rem;
+    min-height: 2rem;
+    position: relative;
+    text-align: left;
+    text-shadow: none;
+    width: 100%;
+    z-index: z("default");
+    text-transform: none;
+    font-size: 1.2rem;
+    height: 1.8rem;
+
+    &.empty {
+      color: var(--text-muted);
+    }
+    &:focus,
+    &:hover {
+      outline: none;
+    }
+    &:hover {
+      border-bottom: 1px solid lighten($dark, 15%);
+      i {
+        opacity: 0.75;
+      }
+    }
+    &:focus {
+      border-bottom: 1px solid var(--selection);
+      i {
+        color: rgba(0, 0, 0, 0.73);
+      }
+    }
+    i {
+      font-size: 0.8rem;
+      color: var(--text-main);
+      opacity: 0.45;
+    }
+  }
+}

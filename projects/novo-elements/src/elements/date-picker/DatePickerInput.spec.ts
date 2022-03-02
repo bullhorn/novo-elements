@@ -1,10 +1,10 @@
 // NG2
-import { TestBed, async } from '@angular/core/testing';
-// App
-import { NovoDatePickerInputElement } from './DatePickerInput';
+import { async, TestBed } from '@angular/core/testing';
+import { DateFormatService } from '../../services/date-format/DateFormat';
 import { NovoLabelService } from '../../services/novo-label-service';
 import { NovoDatePickerModule } from './DatePicker.module';
-import { DateFormatService } from '../../services/date-format/DateFormat';
+// App
+import { NovoDatePickerInputElement } from './DatePickerInput';
 
 describe('Elements: NovoDatePickerInputElement', () => {
   let fixture;
@@ -24,8 +24,8 @@ describe('Elements: NovoDatePickerInputElement', () => {
 
   describe('Method: formatDate()', () => {
     it('should call parseString from the dateFormatService and then dispatchOnChange.', () => {
-      spyOn(component.dateFormatService, 'parseString').and.callThrough();
-      spyOn(component, 'dispatchOnChange');
+      jest.spyOn(component.dateFormatService, 'parseString');
+      jest.spyOn(component, 'dispatchOnChange');
       const mockValue: String = '01/01/2020';
       component.formatDate(mockValue, true);
       expect(component.dateFormatService.parseString).toHaveBeenCalled();
@@ -35,7 +35,7 @@ describe('Elements: NovoDatePickerInputElement', () => {
 
   describe('Method: _setTriggerValue()', () => {
     beforeEach(() => {
-      spyOn(component, '_setFormValue');
+      jest.spyOn(component, '_setFormValue');
     });
     it('should set formattedValue to empty string if value is null', () => {
       component._setTriggerValue(null);

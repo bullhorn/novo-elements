@@ -10,7 +10,7 @@ novo-slider {
     $offset: (#{$i * 100%});
     $dist: (#{$i * -100%});
 
-    & > [slide='#{$i}'] {
+    & > [slide="#{$i}"] {
       left: $offset;
     }
 
@@ -53,11 +53,11 @@ novo-slider {
       top: 50%;
       transform: translateY(-50%);
 
-      &[icon='previous'] {
+      &[icon="previous"] {
         left: 10px;
       }
-      &[icon='next'],
-      &[icon='check'] {
+      &[icon="next"],
+      &[icon="check"] {
         right: 10px;
       }
     }

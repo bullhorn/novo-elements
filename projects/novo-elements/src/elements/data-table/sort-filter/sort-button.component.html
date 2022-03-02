@@ -1,0 +1,15 @@
+<novo-icon
+  class="novo-sort-asc-icon"
+  [class.sort-active]="isActive"
+  [@sortAsc]="value"
+  (click)="changeSort(SortDirection.DESC)">arrow-up</novo-icon>
+<novo-icon
+  class="novo-sort-desc-icon"
+  [class.sort-active]="isActive"
+  [@sortDesc]="value"
+  (click)="changeSort(SortDirection.NONE)">arrow-down</novo-icon>
+<novo-icon
+  class="novo-sortable-icon"
+  [class.sort-active]="isActive"
+  [@sortNone]="value"
+  (click)="changeSort(SortDirection.ASC)">sortable</novo-icon>

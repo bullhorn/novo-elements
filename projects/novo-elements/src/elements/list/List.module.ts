@@ -1,20 +1,22 @@
 // NG2
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { NovoCommonModule } from '../common';
+import { NovoIconModule } from '../icon';
 // APP
 import {
-  NovoListElement,
-  NovoListItemElement,
   NovoItemAvatarElement,
-  NovoItemTitleElement,
   NovoItemContentElement,
+  NovoItemDateElement,
   NovoItemEndElement,
   NovoItemHeaderElement,
-  NovoItemDateElement,
+  NovoItemTitleElement,
+  NovoListElement,
+  NovoListItemElement,
 } from './List';
 
 @NgModule({
-  imports: [CommonModule],
+  imports: [CommonModule, NovoCommonModule, NovoIconModule],
   declarations: [
     NovoListElement,
     NovoListItemElement,

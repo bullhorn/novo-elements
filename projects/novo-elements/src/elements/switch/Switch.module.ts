@@ -1,12 +1,11 @@
-// NG2
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-// APP
+import { NovoIconModule } from '../icon';
 import { NovoSwitchElement } from './Switch';
 
 @NgModule({
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, NovoIconModule],
   declarations: [NovoSwitchElement],
   exports: [NovoSwitchElement],
 })

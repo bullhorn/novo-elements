@@ -1,11 +1,11 @@
 // NG2
-import { Validators } from '@angular/forms';
 import { EventEmitter } from '@angular/core';
+import { Validators } from '@angular/forms';
 // APP
 import { Helpers } from '../../../utils/Helpers';
-import { NovoControlGroupAddConfig } from '../ControlGroup';
 import { notify } from '../../../utils/notifier/notifier.util';
 import { IMaskOptions } from '../Control';
+import { NovoControlGroupAddConfig } from '../ControlGroup';
 
 export interface NovoGroupedControlConfig {
   label?: string;
@@ -17,6 +17,7 @@ export interface NovoGroupedControlConfig {
 }
 
 class ControlConfig {
+  alwaysActive?: Boolean;
   allowInvalidDate?: boolean;
   appendToBody: boolean; // Deprecated;
   associatedEntity: string;
@@ -34,13 +35,14 @@ class ControlConfig {
   description?: string;
   dirty: boolean;
   disabled: boolean;
+  enabled: boolean;
   encrypted: boolean;
   endDate?: Date | Number;
   fileBrowserImageUploadUrl?: string;
   forceClear: EventEmitter<any>;
   headerConfig: any;
   hidden: boolean;
-  interactions: Array<{ event?: 'change' | 'focus' | string, invokeOnInit?: boolean, script? }>;
+  interactions: Array<{ event?: 'change' | 'focus' | string; invokeOnInit?: boolean; script? }>;
   isEmpty?: Function;
   key: string;
   label: string;
@@ -110,6 +112,7 @@ export class BaseControl extends ControlConfig {
     super();
     this.__type = type;
     this.__config = config;
+    this.alwaysActive = config.alwaysActive;
     this.validators = config.validators || [];
     this.asyncValidators = config.asyncValidators || [];
     this.value = config.value;
@@ -137,6 +140,7 @@ export class BaseControl extends ControlConfig {
     this.forceClear = new EventEmitter();
     this.readOnly = !!config.readOnly || !!config.disabled;
     this.disabled = !!config.disabled;
+    this.enabled = true;
     this.layoutOptions = config.layoutOptions || {};
     this.military = !!config.military;
     this.dateFormat = config.dateFormat;

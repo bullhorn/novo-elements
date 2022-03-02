@@ -1,31 +1,28 @@
-import {
-  ElementRef,
-  Input,
-  Renderer2,
-  HostBinding,
-  Component,
-  OnInit,
-  OnDestroy,
-  ChangeDetectorRef,
-  ChangeDetectionStrategy,
-} from '@angular/core';
 import { CdkCell, CdkColumnDef } from '@angular/cdk/table';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  HostBinding,
+  Input,
+  OnDestroy,
+  OnInit,
+  Renderer2,
+} from '@angular/core';
 import { Subscription } from 'rxjs';
-
 import { NovoDataTable } from '../data-table.component';
 
 @Component({
   selector: 'novo-data-table-checkbox-cell',
   template: `
     <div class="data-table-checkbox" (click)="onClick()" [tooltip]="getTooltip()" tooltipPosition="right">
-      <input type="checkbox" [checked]="checked">
+      <input type="checkbox" [checked]="checked" />
       <label>
-        <i [class.bhi-checkbox-disabled]="isAtLimit"
-          [class.bhi-checkbox-empty]="!checked"
-          [class.bhi-checkbox-filled]="checked"></i>
+        <i [class.bhi-checkbox-disabled]="isAtLimit" [class.bhi-checkbox-empty]="!checked" [class.bhi-checkbox-filled]="checked"></i>
       </label>
     </div>
-    `,
+  `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NovoDataTableCheckboxCell<T> extends CdkCell implements OnInit, OnDestroy {
@@ -59,7 +56,7 @@ export class NovoDataTableCheckboxCell<T> extends CdkCell implements OnInit, OnD
     renderer.addClass(elementRef.nativeElement, 'novo-data-table-checkbox-cell');
 
     this.selectionSubscription = this.dataTable.state.selectionSource.subscribe(() => {
-      this.checked = this.dataTable.isSelected(this.row);
+      this.checked = this.dataTable.isSelected(this.row) || (this.dataTable?.canSelectAll && this.dataTable?.allMatchingSelected);
       this.ref.markForCheck();
     });
     this.resetSubscription = this.dataTable.state.resetSource.subscribe(() => {
@@ -69,17 +66,17 @@ export class NovoDataTableCheckboxCell<T> extends CdkCell implements OnInit, OnD
   }
 
   public ngOnInit(): void {
-    this.checked = this.dataTable.isSelected(this.row);
+    this.checked = this.dataTable.isSelected(this.row) || (this.dataTable?.canSelectAll && this.dataTable?.allMatchingSelected);
   }
 
   public onClick(): void {
     if (!this.isAtLimit) {
-      this.dataTable.selectRow(this.row);
+      this.dataTable.selectRow(this.row, 'onClick');
     }
   }
 
   public getTooltip() {
-    return (this.isAtLimit) ? 'More than ' + this.maxSelected + ' items are not able to be selected at one time' : '';
+    return this.isAtLimit ? 'More than ' + this.maxSelected + ' items are not able to be selected at one time' : '';
   }
 
   public ngOnDestroy(): void {

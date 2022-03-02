@@ -1,0 +1,53 @@
+<novo-row gap="3rem" align="space-between">
+  <div flex>
+    <novo-time-picker-input
+      [military]="display.value"
+      [disabled]="disabled.value"
+      [analog]="appearance.value"
+      [(ngModel)]="time1"></novo-time-picker-input>
+  </div>
+
+  <novo-divider vertical></novo-divider>
+
+  <novo-field flex>
+    <novo-label>Set an Alarm</novo-label>
+    <input novoInput [(ngModel)]="time2" [timeFormat]="format.value" [picker]="timepicker" />
+    <novo-picker-toggle novoSuffix icon="clock">
+      <novo-time-picker #timepicker></novo-time-picker>
+    </novo-picker-toggle>
+    <novo-hint>value: {{time2}}</novo-hint>
+    <novo-hint>The <code>timeFormat</code> attribute controls model.</novo-hint>
+  </novo-field>
+
+</novo-row>
+<novo-row class="bgc-bright" align="flex-start" gap="xl" padding="md">
+  <novo-field>
+    <novo-label>Display Format?</novo-label>
+    <novo-radio-group #display appearance="vertical" [value]="true">
+      <novo-radio name="display" [value]="true">HH:mm</novo-radio>
+      <novo-radio name="display" [value]="false">hh:mm A</novo-radio>
+    </novo-radio-group>
+  </novo-field>
+  <novo-field>
+    <novo-label>Value Format?</novo-label>
+    <novo-radio-group #format appearance="vertical" value="iso8601">
+      <novo-radio name="format" value="date">date</novo-radio>
+      <novo-radio name="format" value="iso8601">iso8601</novo-radio>
+      <novo-radio name="format" value="string">string</novo-radio>
+    </novo-radio-group>
+  </novo-field>
+  <novo-field>
+    <novo-label>Appearance</novo-label>
+    <novo-radio-group #appearance appearance="vertical" [value]="false">
+      <novo-radio name="appearance" [value]="false">Default</novo-radio>
+      <novo-radio name="appearance" [value]="true">Analog (deprecated)</novo-radio>
+    </novo-radio-group>
+  </novo-field>
+  <novo-field>
+    <novo-label>Disabled?</novo-label>
+    <novo-radio-group #disabled appearance="vertical" [value]="false">
+      <novo-radio name="disabled" [value]="false">Enabled</novo-radio>
+      <novo-radio name="disabled" [value]="true">Disabled</novo-radio>
+    </novo-radio-group>
+  </novo-field>
+</novo-row>

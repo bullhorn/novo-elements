@@ -1,3 +1,7 @@
+---
+tag: deprecated
+---
+
 Table [(source)](https://bullhorn.github.io/novo-elements/tree/master/projects/novo-examples/src/elements/table)
 =========================================================================================
 

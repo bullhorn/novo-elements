@@ -1,6 +1,6 @@
 // APP
-import { DateFormatService } from './DateFormat';
 import { NovoLabelService } from '../../services/novo-label-service';
+import { DateFormatService } from './DateFormat';
 
 describe('Service: DateFormatService', () => {
   let service;
@@ -280,7 +280,7 @@ describe('Service: DateFormatService', () => {
     it('should be defined', () => {
       expect(service.parseTimeString).toBeDefined();
     });
-    it('should not parse if the string doesn\'t contain :', () => {
+    it(`should not parse if the string doesn't contain :`, () => {
       const [value, timeString] = service.parseTimeString('', false);
       expect(timeString).toEqual('');
     });
@@ -344,12 +344,12 @@ describe('Service: DateFormatService', () => {
       expect(service.parseString).toBeDefined();
     });
     it('should call parseDateString for dates', () => {
-      spyOn(service, 'parseDateString');
+      jest.spyOn(service, 'parseDateString');
       service.parseString('', false, 'date');
       expect(service.parseDateString).toHaveBeenCalled();
     });
     it('should call parseTimeString for time', () => {
-      spyOn(service, 'parseTimeString');
+      jest.spyOn(service, 'parseTimeString');
       service.parseString('', false, 'time');
       expect(service.parseTimeString).toHaveBeenCalledWith('', false);
     });

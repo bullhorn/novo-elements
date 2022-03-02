@@ -1,9 +1,9 @@
 // NG2
-import { TestBed, async } from '@angular/core/testing';
+import { async, TestBed } from '@angular/core/testing';
 // App
 import { NovoLoadingElement, NovoSpinnerElement } from './Loading';
 
-describe('Elements: NovoHeaderElement', () => {
+describe('Elements: NovoLoadingElement', () => {
   let fixture;
   let component;
 

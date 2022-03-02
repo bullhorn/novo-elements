@@ -1,25 +1,22 @@
-import {
-  ElementRef,
-  Input,
-  Renderer2,
-  HostBinding,
-  Component,
-  ChangeDetectionStrategy,
-  OnInit,
-  TemplateRef,
-  EventEmitter,
-  OnDestroy,
-} from '@angular/core';
 import { CdkCell, CdkColumnDef } from '@angular/cdk/table';
-
-import { IDataTableColumn } from '../interfaces';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  EventEmitter,
+  HostBinding,
+  Input,
+  OnDestroy,
+  OnInit,
+  Renderer2,
+  TemplateRef,
+} from '@angular/core';
 import { Subscription } from 'rxjs';
+import { IDataTableColumn } from '../interfaces';
 
 @Component({
   selector: 'novo-data-table-cell',
-  template: `
-    <ng-container *ngTemplateOutlet="template; context: {$implicit: row, col: column}"></ng-container>
-  `,
+  template: ` <ng-container *ngTemplateOutlet="template; context: { $implicit: row, col: column }"></ng-container> `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NovoDataTableCell<T> extends CdkCell implements OnInit, OnDestroy {

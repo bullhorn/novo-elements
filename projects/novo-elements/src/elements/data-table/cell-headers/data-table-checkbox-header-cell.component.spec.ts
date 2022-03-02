@@ -1,20 +1,20 @@
 // NG2
-import { TestBed, async } from '@angular/core/testing';
-import { NovoDataTableCheckboxHeaderCell } from './data-table-checkbox-header-cell.component';
-import {
-  NovoButtonModule,
-  NovoLabelService,
-  NovoTooltipModule,
-  NovoDropdownModule,
-  NovoDatePickerModule,
-  NovoToastService,
-  ComponentUtils,
-} from '../../..';
-import { FormsModule } from '@angular/forms';
-import { DataTableState } from '../state/data-table-state.service';
-import { ChangeDetectorRef } from '@angular/core';
 import { CdkColumnDef } from '@angular/cdk/table';
+import { ChangeDetectorRef } from '@angular/core';
+import { async, TestBed } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
+import {
+  ComponentUtils,
+  NovoButtonModule,
+  NovoDatePickerModule,
+  NovoDropdownModule,
+  NovoLabelService,
+  NovoToastService,
+  NovoTooltipModule,
+} from '../../..';
 import { NovoDataTable } from '../data-table.component';
+import { DataTableState } from '../state/data-table-state.service';
+import { NovoDataTableCheckboxHeaderCell } from './data-table-checkbox-header-cell.component';
 
 // App
 
@@ -26,23 +26,23 @@ describe('Elements: NovoDataTableCheckboxHeaderCell', () => {
     TestBed.configureTestingModule({
       declarations: [NovoDataTableCheckboxHeaderCell],
       imports: [FormsModule, NovoTooltipModule, NovoButtonModule, NovoDropdownModule, NovoDatePickerModule],
-      providers: [NovoLabelService,
-                  DataTableState,
-                  CdkColumnDef,
-                  NovoDataTable,
-                  ChangeDetectorRef,
-                  NovoToastService,
-                  ComponentUtils,
-                  {
-                    provide: CdkColumnDef,
-                    useFactory: () => {
-                        const columnDef = new CdkColumnDef();
-                        columnDef._columnCssClassName = ['test'];
-                        return columnDef;
-                    },
-                },
-
-                ],
+      providers: [
+        NovoLabelService,
+        DataTableState,
+        CdkColumnDef,
+        NovoDataTable,
+        ChangeDetectorRef,
+        NovoToastService,
+        ComponentUtils,
+        {
+          provide: CdkColumnDef,
+          useFactory: () => {
+            const columnDef = new CdkColumnDef();
+            columnDef._columnCssClassName = ['test'];
+            return columnDef;
+          },
+        },
+      ],
     }).compileComponents();
     fixture = TestBed.createComponent(NovoDataTableCheckboxHeaderCell);
     component = fixture.debugElement.componentInstance;
@@ -61,7 +61,7 @@ describe('Elements: NovoDataTableCheckboxHeaderCell', () => {
       spyOn(component.toaster, 'alert');
     });
     it('should call dataTable.selectRows if isAtLimit is false', () => {
-      component.canSelectAll = false;
+      component.dataTable.canSelectAll = false;
       component.onClick();
       expect(component.dataTable.selectRows).toHaveBeenCalled();
       expect(component.selectAllChanged).not.toHaveBeenCalled();
@@ -88,19 +88,21 @@ describe('Elements: NovoDataTableCheckboxHeaderCell', () => {
       expect(component.toaster.alert).toHaveBeenCalledWith(expected);
     });
     it('should call selectAllChanged if canSelectAll is true', () => {
-      component.canSelectAll = true;
+      component.dataTable.canSelectAll = true;
       component.onClick();
       expect(component.selectAllChanged).toHaveBeenCalled();
     });
   });
 
-  describe('Method: selectAllChanged(()', () => {
+  describe('Method: selectAllChanged()', () => {
     it('should emit and allSelected event', () => {
       const expected = {
         allSelected: false,
         selectedCount: 3,
+        allMatchingSelected: true,
       };
       component.dataTable = {
+        allMatchingSelected: true,
         state: {
           selected: [{ id: 1 }, { id: 2 }, { id: 3 }],
         },

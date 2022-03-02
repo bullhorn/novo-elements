@@ -1,41 +1,67 @@
-header[theme] {
+.novo-header {
+  display: block;
+  background-color: var(--background-bright, $white);
+
+  .spacer {
+    flex: 1 1 0%;
+  }
+
+  &[size="small"] {
+    & > section {
+      height: 3.6rem;
+    }
+  }
+
+  &.header-size-small > section {
+    height: 3.2rem;
+  }
+  &.header-size-default > section {
+    height: 5rem;
+  }
+  &.header-size-large > section {
+    height: 6.4rem;
+  }
+
   & > section {
-    height: $header-height;
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
-    padding: 8px;
-    i.header-icon {
-      padding: 12px;
+    padding: 0 $spacing-lg;
+    gap: $spacing-sm;
+    box-sizing: border-box;
+    // line-height: 4rem;
+
+    .header-icon {
+      font-size: var(--font-size-2xl);
     }
     div.header-title {
       display: flex;
       align-items: center;
       max-width: calc(100% - 40px);
+      gap: $spacing-sm;
+
+      novo-icon {
+        margin-right: 1rem;
+      }
     }
     .header-titles {
       display: flex;
       flex-direction: column;
-      padding: 0px 8px;
       max-width: 100%;
+      .novo-title {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
       h1 {
-        font-size: 1.7em;
+        @include novo-title-text();
         margin: 0;
         padding: 0;
         display: inline-block;
-        font-weight: 500;
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
         padding-right: 20px;
-      }
-      header-spacer {
-        display: inline-block;
-        height: 1.8em;
-        width: 2px;
-        margin: 0 0.6em;
-        background-color: rgba(0, 0, 0, 0.25);
       }
     }
     > section {
@@ -47,26 +73,44 @@ header[theme] {
       display: flex;
       align-items: center;
       justify-content: flex-start;
+      gap: $spacing-sm;
     }
 
-    novo-action {
+    .novo-action {
       display: flex;
     }
   }
-  @each $basic, $color in $all-colors {
-    &[theme='#{$basic}'] {
-      background: $color;
-      color: #fff;
-      & > section.primary {
+
+  @include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
+    &.novo-accent-#{$name} {
+      .header-titles,
+      .header-title {
+        .novo-icon {
+          color: $color;
+        }
+      }
+      & > section:first-of-type {
+        border-bottom: 2px solid $color;
+      }
+    }
+    &.novo-theme-#{$name} {
+      & > section:first-of-type {
         background: $color;
+        color: $contrast;
+        border-bottom: none;
+      }
+      .novo-title {
+        color: inherit;
+      }
+      .novo-action {
+        button,
+        .novo-button {
+          color: inherit;
+        }
       }
     }
   }
-  &[theme='light'],
-  &[theme='off-white'],
-  &[theme='white'] {
-    color: $dark;
-  }
+
   & > main {
     padding: 4px 16px 4px 32px;
   }
@@ -77,20 +121,29 @@ header[theme] {
     }
   }
   &.condensed {
+    .header-title,
+    .header-titles {
+      line-height: 1.375;
+    }
     > section {
-      padding: 0 1em;
-      height: $header-height;
-      i {
-        font-size: 1.2em;
-      }
+      height: 3.6rem;
     }
-    novo-icon > i {
-      font-size: 1.4em;
-    }
-    button[theme][theme='icon'] {
-      width: 30px !important;
-      height: 30px !important;
-      padding: 5px;
+    .novo-icon {
+      margin-right: 0.5rem !important;
+      font-size: 1.8rem;
     }
   }
+
+  .header-actions {
+    display: flex;
+    flex-flow: row nowrap;
+  }
+}
+
+header-spacer {
+  display: inline-block;
+  height: 1.8em;
+  width: 2px;
+  margin: 0 0.6em;
+  background-color: rgba(0, 0, 0, 0.25);
 }

@@ -1,0 +1,40 @@
+<div class="calendar-table" cellspacing="0" cellpadding="0">
+  <div class="calendar-thead">
+    <div class="calendar-th weekday" *ngFor="let day of weekdays" title="{{ day }}"
+      [attr.data-automation-id]="day.substr(0, 2)">
+      {{ day.substr(0, 2) }}
+    </div>
+  </div>
+  <div class="calendar-body">
+    <div class="calendar-week" *ngFor="let week of weeks">
+      <div class="calendar-date" *ngFor="let day of week.days"
+        [class.today]="day.isToday"
+        [class.notinmonth]="day.date.getMonth() !== activeDate.getMonth()"
+        [class.selected]="_isSelected(day.date)"
+        [class.preview]="_isPreview(day.date)"
+        [class.overlay]="_isOverlay(day.date)"
+        [class]="_hasOverlayType(day.date)"
+        [class.inRange]="_isInRange(day.date)"
+        [class.rangeStart]="_isRangeStart(day.date)"
+        [class.rangeEnd]="_isRangeEnd(day.date)"
+        [class.inPreview]="_isInPreview(day.date)"
+        [class.previewStart]="_isPreviewStart(day.date)"
+        [class.previewEnd]="_isPreviewEnd(day.date)"
+        [class.calendar-date]="true"
+        [attr.aria-label]="day.name"
+        [attr.aria-disabled]="isDisabled(day.date)"
+        [attr.aria-selected]="_isSelected(day.date)"
+        [attr.data-automation-id]="day.number"
+        [title]="isDisabled(day.date) ? disabledDateMessage : ''"
+        (mouseover)="onHover($event, day)">
+        <novo-button
+          class="day"
+          [attr.data-automation-id]="day.number"
+          [disabled]="isDisabled(day.date)"
+          (click)="onSelect($event, day)">
+          {{ day.number }}
+        </novo-button>
+      </div>
+    </div>
+  </div>
+</div>

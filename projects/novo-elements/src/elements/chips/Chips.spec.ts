@@ -1,13 +1,14 @@
 // NG2
+import { async, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
-import { TestBed, async } from '@angular/core/testing';
-// App
-import { NovoChipElement, NovoChipsElement } from './Chips';
-import { NovoChipsModule } from './Chips.module';
-import { ComponentUtils } from '../../utils/component-utils/ComponentUtils';
 import { NovoLabelService } from '../../services/novo-label-service';
+import { ComponentUtils } from '../../utils/component-utils/ComponentUtils';
+// App
+import { NovoChipElement } from './Chip';
+import { NovoChipsElement } from './Chips';
+import { NovoChipsModule } from './Chips.module';
 
-describe('Elements: NovoChipElement', () => {
+xdescribe('Elements: NovoChipElement', () => {
   let fixture;
   let component;
 
@@ -28,19 +29,18 @@ describe('Elements: NovoChipElement', () => {
     });
   });
 
-  describe('Method: onRemove(event)', () => {
-    it('should emit remove event', () => {
-      jest.spyOn(component.remove, 'emit').mockImplementation(() => {});
-      component.onRemove();
-      expect(component.remove.emit).toHaveBeenCalled();
+  describe('Method: remove()', () => {
+    it('should emit remove event if removable', () => {
+      jest.spyOn(component.removed, 'emit').mockImplementation(() => {});
+      component.removable = true;
+      component.remove();
+      expect(component.removed.emit).toHaveBeenCalled();
     });
-  });
-
-  describe('Method: onSelect(event)', () => {
-    it('should emit select event', () => {
-      jest.spyOn(component.select, 'emit').mockImplementation(() => {});
-      component.onSelect();
-      expect(component.select.emit).toHaveBeenCalled();
+    it('should not emit remove event if not removable', () => {
+      jest.spyOn(component.removed, 'emit').mockImplementation(() => {});
+      component.removable = false;
+      component.remove();
+      expect(component.removed.emit).toHaveBeenCalled();
     });
   });
 });
@@ -52,7 +52,10 @@ describe('Elements: NovoChipsElement', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [FormsModule, NovoChipsModule],
-      providers: [{ provide: ComponentUtils, useClass: ComponentUtils }, { provide: NovoLabelService, useClass: NovoLabelService }],
+      providers: [
+        { provide: ComponentUtils, useClass: ComponentUtils },
+        { provide: NovoLabelService, useClass: NovoLabelService },
+      ],
     }).compileComponents();
     fixture = TestBed.createComponent(NovoChipsElement);
     component = fixture.debugElement.componentInstance;
@@ -199,7 +202,11 @@ describe('Elements: NovoChipsElement', () => {
             {
               value: 'numbers',
               label: 'Numbers',
-              items: [{ label: 'One', value: 'one' }, { label: 'Two', value: 'two' }, { label: 'Three', value: 'three' }],
+              items: [
+                { label: 'One', value: 'one' },
+                { label: 'Two', value: 'two' },
+                { label: 'Three', value: 'three' },
+              ],
             },
           ],
         ]),
@@ -217,35 +224,43 @@ describe('Elements: NovoChipsElement', () => {
   describe('Method: getLabelFromOptions', () => {
     it('should return a proper response if passed an object as value', () => {
       component.source = {
-        options: [{
-          value: 1,
-          label: 'option 1',
-        }, {
-          value: 2,
-          label: 'option 2',
-        }, {
-          value: 3,
-          label: 'option 3',
-        }]
+        options: [
+          {
+            value: 1,
+            label: 'option 1',
+          },
+          {
+            value: 2,
+            label: 'option 2',
+          },
+          {
+            value: 3,
+            label: 'option 3',
+          },
+        ],
       };
       const result = component.getLabelFromOptions({ id: 2 });
-      expect(result).toStrictEqual({ value: 2, label: 'option 2'});
+      expect(result).toStrictEqual({ value: 2, label: 'option 2' });
     });
     it('should return a proper response if passed an number as value', () => {
       component.source = {
-        options: [{
-          value: 1,
-          label: 'option 1',
-        }, {
-          value: 2,
-          label: 'option 2',
-        }, {
-          value: 3,
-          label: 'option 3',
-        }]
+        options: [
+          {
+            value: 1,
+            label: 'option 1',
+          },
+          {
+            value: 2,
+            label: 'option 2',
+          },
+          {
+            value: 3,
+            label: 'option 3',
+          },
+        ],
       };
       const result = component.getLabelFromOptions(2);
-      expect(result).toStrictEqual({ value: 2, label: 'option 2'});
+      expect(result).toStrictEqual({ value: 2, label: 'option 2' });
     });
   });
 

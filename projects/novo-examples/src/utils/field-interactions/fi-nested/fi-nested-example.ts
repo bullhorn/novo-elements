@@ -39,7 +39,7 @@ export class FiNestedExample {
     const onSelectedChanged = (API: FieldInteractionApi) => {
       // If my row is selected, deselect other rows without causing cascading changes
       if (API.getActiveValue() === true) {
-        API.getParent().controls.forEach(form => {
+        API.getParent().controls.forEach((form) => {
           if (API.getIndex() !== API.getIndex(form)) {
             API.setValue(API.getActiveKey(), false, { emitEvent: false }, form);
           }
@@ -120,7 +120,8 @@ export class FiNestedExample {
         label: 'Selected',
         options: [{ label: '', value: true }],
         interactions: [{ event: 'change', script: onSelectedChanged }],
-        tooltip: 'Selecting a radio button will de-select buttons on the other forms, making multiple nested forms appear as a single form.',
+        tooltip:
+          'Selecting a radio button will de-select buttons on the other forms, making multiple nested forms appear as a single form.',
       }),
       new TextBoxControl({
         key: 'label',
@@ -159,7 +160,7 @@ export class FiNestedExample {
     const basePayRate = Number(API.getValue('payRate', baseRowForm));
 
     let isPayRateValid = true;
-    rowForms.forEach(form => {
+    rowForms.forEach((form) => {
       // Calculate the payRate for read only Overtime / Double time fields
       if (API.getIndex(form) > 0) {
         const multiplier = Number(API.getValue('multiplier', form));

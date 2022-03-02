@@ -3,16 +3,15 @@ import {
   ChangeDetectorRef,
   Component,
   EventEmitter,
+  HostBinding,
   Input,
   OnDestroy,
   OnInit,
   Output,
-  HostBinding,
 } from '@angular/core';
 import { Subscription } from 'rxjs';
-
-import { IDataTablePaginationEvent } from '../interfaces';
 import { NovoLabelService } from '../../../services/novo-label-service';
+import { IDataTablePaginationEvent } from '../interfaces';
 import { DataTableState } from '../state/data-table-state.service';
 
 const MAX_PAGES_DISPLAYED = 5;
@@ -20,60 +19,75 @@ const MAX_PAGES_DISPLAYED = 5;
 @Component({
   selector: 'novo-data-table-pagination',
   template: `
-      <ng-container *ngIf="theme === 'basic' || theme === 'basic-wide'">
-        <div class="novo-data-table-pagination-size">
-            <novo-tiles *ngIf="displayedPageSizeOptions.length > 1"
-                        [(ngModel)]="pageSize"
-                        [options]="displayedPageSizeOptions"
-                        (onChange)="changePageSize($event)"
-                        data-automation-id="novo-data-table-pagination-tiles">
-            </novo-tiles>
-            <div *ngIf="displayedPageSizeOptions.length <= 1">{{ pageSize }}</div>
-        </div>
-
-        <div class="novo-data-table-range-label-long" data-automation-id="novo-data-table-pagination-range-label-long">
-            {{ longRangeLabel }}
-        </div>
-        <div class="novo-data-table-range-label-short" data-automation-id="novo-data-table-pagination-range-label-short">
-            {{ shortRangeLabel }}
-        </div>
-        <span class="spacer novo-data-table-spacer" *ngIf="theme === 'basic-wide'"></span>
-        <button theme="dialogue" type="button"
-                class="novo-data-table-pagination-navigation-previous"
-                (click)="previousPage()"
-                icon="previous"
-                side="left"
-                [disabled]="!hasPreviousPage()"
-                data-automation-id="novo-data-table-pagination-previous">
-            <span>{{ labels.previous }}</span>
-        </button>
-        <button theme="dialogue" type="button"
-                class="novo-data-table-pagination-navigation-next"
-                (click)="nextPage()"
-                icon="next"
-                side="right"
-                [disabled]="!hasNextPage()"
-                data-automation-id="novo-data-table-pagination-next">
-            <span>{{ labels.next }}</span>
-        </button>
-      </ng-container>
-      <ng-container *ngIf="theme === 'standard'">
-        <h5 class="rows">{{ labels.itemsPerPage }}</h5>
-        <novo-select
-          [options]="displayedPageSizeOptions"
-          [placeholder]="labels.select"
+    <ng-container *ngIf="theme === 'basic' || theme === 'basic-wide'">
+      <div class="novo-data-table-pagination-size">
+        <novo-tiles
+          *ngIf="displayedPageSizeOptions.length > 1"
           [(ngModel)]="pageSize"
-          (onSelect)="changePageSize($event.selected)"
-          data-automation-id="pager-select"
-          [attr.data-feature-id]="dataFeatureId">
-        </novo-select>
-        <span class="spacer"></span>
-        <ul class="pager" data-automation-id="pager">
-            <li class="page" (click)="selectPage(page - 1)" [ngClass]="{ 'disabled': page === 0 }"><i class="bhi-previous" data-automation-id="pager-previous"></i></li>
-            <li class="page" [ngClass]="{active: p.number === page + 1}" *ngFor="let p of pages" (click)="selectPage(p.number - 1)">{{ p.text }}</li>
-            <li class="page" (click)="selectPage(page + 1)" [ngClass]="{ 'disabled': page + 1 === totalPages }"><i class="bhi-next" data-automation-id="pager-next"></i></li>
-        </ul>
-      </ng-container>
+          [options]="displayedPageSizeOptions"
+          (onChange)="changePageSize($event)"
+          data-automation-id="novo-data-table-pagination-tiles"
+        >
+        </novo-tiles>
+        <div *ngIf="displayedPageSizeOptions.length <= 1">{{ pageSize }}</div>
+      </div>
+
+      <div class="novo-data-table-range-label-long" data-automation-id="novo-data-table-pagination-range-label-long">
+        {{ longRangeLabel }}
+      </div>
+      <div class="novo-data-table-range-label-short" data-automation-id="novo-data-table-pagination-range-label-short">
+        {{ shortRangeLabel }}
+      </div>
+      <span class="spacer novo-data-table-spacer" *ngIf="theme === 'basic-wide'"></span>
+      <novo-button
+        theme="dialogue"
+        type="button"
+        class="novo-data-table-pagination-navigation-previous"
+        (click)="previousPage()"
+        icon="previous"
+        side="left"
+        [disabled]="!hasPreviousPage()"
+        data-automation-id="novo-data-table-pagination-previous"
+      >
+        <span>{{ labels.previous }}</span>
+      </novo-button>
+      <novo-button
+        theme="dialogue"
+        type="button"
+        class="novo-data-table-pagination-navigation-next"
+        (click)="nextPage()"
+        icon="next"
+        side="right"
+        [disabled]="!hasNextPage()"
+        data-automation-id="novo-data-table-pagination-next"
+      >
+        <span>{{ labels.next }}</span>
+      </novo-button>
+    </ng-container>
+    <ng-container *ngIf="theme === 'standard'">
+      <h5 class="rows">{{ labels.itemsPerPage }}</h5>
+      <novo-select
+        [options]="displayedPageSizeOptions"
+        [placeholder]="labels.select"
+        [(ngModel)]="pageSize"
+        (onSelect)="changePageSize($event.selected)"
+        data-automation-id="pager-select"
+        [attr.data-feature-id]="dataFeatureId"
+      >
+      </novo-select>
+      <span class="spacer"></span>
+      <ul class="pager" data-automation-id="pager">
+        <li class="page" (click)="selectPage(page - 1)" [ngClass]="{ disabled: page === 0 }">
+          <i class="bhi-previous" data-automation-id="pager-previous"></i>
+        </li>
+        <li class="page" [ngClass]="{ active: p.number === page + 1 }" *ngFor="let p of pages" (click)="selectPage(p.number - 1)">
+          {{ p.text }}
+        </li>
+        <li class="page" (click)="selectPage(page + 1)" [ngClass]="{ disabled: page + 1 === totalPages }">
+          <i class="bhi-next" data-automation-id="pager-next"></i>
+        </li>
+      </ul>
+    </ng-container>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -118,6 +132,11 @@ export class NovoDataTablePagination<T> implements OnInit, OnDestroy {
   private _pageSizeOptions = [];
 
   @Input()
+  public canSelectAll: boolean = false;
+  @Input()
+  public allMatchingSelected: boolean = false;
+
+  @Input()
   get length(): number {
     return this._length;
   }
@@ -159,13 +178,13 @@ export class NovoDataTablePagination<T> implements OnInit, OnDestroy {
   }
 
   public selectPage(page) {
-    this.state.checkRetainment('page');
+    this.state.checkRetainment('page', this.canSelectAll && this.allMatchingSelected);
     this.page = page;
     this.emitPageEvent();
   }
 
   public nextPage(): void {
-    this.state.checkRetainment('page');
+    this.state.checkRetainment('page', this.canSelectAll && this.allMatchingSelected);
     if (!this.hasNextPage()) {
       return;
     }
@@ -175,7 +194,7 @@ export class NovoDataTablePagination<T> implements OnInit, OnDestroy {
   }
 
   public previousPage(): void {
-    this.state.checkRetainment('page');
+    this.state.checkRetainment('page', this.canSelectAll && this.allMatchingSelected);
     if (!this.hasPreviousPage()) {
       return;
     }

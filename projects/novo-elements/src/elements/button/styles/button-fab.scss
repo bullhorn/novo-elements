@@ -1,0 +1,36 @@
+@import "../../../styles/variables.scss";
+
+:host {
+  // Fab Themed Button
+  &[theme="fab"] {
+    @include theme-backgrounds("color", false);
+    border-radius: 50% !important;
+    padding: 0;
+    font-size: 1.2rem;
+    width: 3.2rem;
+    height: 3.2rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    &[inverse] {
+      color: #fff;
+    }
+    &:focus,
+    &:hover {
+      box-shadow: 0px 1px 2px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+    }
+    &:active {
+      box-shadow: 0px 1px 2px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+    }
+    .button-contents {
+      display: contents;
+    }
+    i {
+      margin: 0;
+      padding: 0;
+      &:before {
+        display: block;
+      }
+    }
+  }
+}
