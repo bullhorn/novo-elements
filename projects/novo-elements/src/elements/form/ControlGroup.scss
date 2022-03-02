@@ -128,7 +128,7 @@ novo-control-group {
         }
       }
     }
-    > .novo-control-group-row {
+    .novo-control-group-row {
       .novo-control-group-control {
         display: flex;
       }
@@ -159,7 +159,8 @@ novo-control-group {
           align-items: center;
         }
       }
-      button.control-group-action[theme="icon"] {
+      button[theme="icon"],
+      novo-button[theme="icon"] {
         padding: 3px;
         height: 3rem;
         width: 3rem;
