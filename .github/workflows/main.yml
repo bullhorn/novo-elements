@@ -34,7 +34,6 @@ jobs:
   publish:
     runs-on: ubuntu-20.04
     needs: build
-    if: github.event_name == 'push'
     steps:
       - uses: actions/checkout@master
       - uses: actions/download-artifact@master
