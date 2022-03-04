@@ -822,7 +822,7 @@ export class FormUtils {
   forceValidation(form: NovoFormGroup): void {
     Object.keys(form.controls).forEach((key: string) => {
       const control: any = form.controls[key];
-      if (control.required && Helpers.isBlank(form.value[control.key])) {
+      if (control.required && Helpers.isBlank(form.getRawValue()[control.key])) {
         control.markAsDirty();
         control.markAsTouched();
       }
