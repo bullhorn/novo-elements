@@ -13,7 +13,6 @@ import { BaseRenderer } from '../base-renderer/BaseRenderer';
   `,
 })
 export class DateCell extends BaseRenderer {
-
   @Input()
   set value(v: any) {
     this._value = v;
