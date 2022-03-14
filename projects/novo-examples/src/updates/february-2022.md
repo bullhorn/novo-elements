@@ -19,7 +19,7 @@ npm install --save novo-elements@6
 ng update novo-elements --migrate-only --from=0.0.0 --to=6.0.0 --force --allow-dirty  
 ```
 
-Please contact Bullhorn support for assistance with any Novo Elements upgrade issues that are not corrected with the above command.
+For any issues that are not corrected with the above command, please ask questions in the [Q&A Page](https://github.com/bullhorn/novo-elements/discussions/categories/q-a) in github.
 
 Welcome to the February 2022 release of Novo Elements. There are many updates in this version that we hope you will like, some of the key highlights include:
 
