@@ -61,15 +61,7 @@ export class NovoStepper extends CdkStepper implements AfterContentInit {
 
   /** Steps that the stepper holds. */
   @ContentChildren(NovoStep, { descendants: true })
-  _steps: QueryList<NovoStep>;
-
-  /** Steps that belong to the current stepper, excluding ones from nested steppers. */
-  public get steps(): QueryList<NovoStep> {
-    return this._steps;
-  }
-  public set steps(value: QueryList<NovoStep>) {
-    this._steps = value;
-  }
+  steps: QueryList<NovoStep>;
 
   /** Custom icon overrides passed in by the consumer. */
   @ContentChildren(NovoIconComponent)
@@ -80,7 +72,7 @@ export class NovoStepper extends CdkStepper implements AfterContentInit {
 
   get completed(): boolean {
     try {
-      const steps = this._steps.toArray();
+      const steps = this.steps.toArray();
       const length = steps.length - 1;
       return steps[length].completed && length === this.selectedIndex;
     } catch (err) {
@@ -90,12 +82,12 @@ export class NovoStepper extends CdkStepper implements AfterContentInit {
 
   ngAfterContentInit() {
     // Mark the component for change detection whenever the content children query changes
-    this._steps.changes.pipe(takeUntil(this._destroyed)).subscribe(() => this._stateChanged());
+    this.steps.changes.pipe(takeUntil(this._destroyed)).subscribe(() => this._stateChanged());
   }
 
   complete() {
     try {
-      const steps = this._steps.toArray();
+      const steps = this.steps.toArray();
       steps[this.selectedIndex].completed = true;
       this.next();
       this._stateChanged();
@@ -105,7 +97,7 @@ export class NovoStepper extends CdkStepper implements AfterContentInit {
   }
 
   getIndicatorType(index: number): 'none' | '' | 'edit' | 'done' {
-    const steps = this._steps.toArray();
+    const steps = this.steps.toArray();
     if (index === this.selectedIndex) {
       if (steps[index] && index === steps.length - 1 && steps[index].completed) {
         return 'done';
