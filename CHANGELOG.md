@@ -1,3 +1,7 @@
+## [6.0.1](https://github.com/bullhorn/novo-elements/compare/v6.0.0...v6.0.1) (2022-03-14)
+
+
+
 # [6.0.0](https://github.com/bullhorn/novo-elements/compare/v5.13.1...v6.0.0) (2022-03-02)
 
 
