@@ -11,7 +11,9 @@ tag: new
 
 **Release v6.0.0**: This release contains several component updates and additional new components. Initial refactoring of component architecture to support future efforts to improve the design systems consistency along with improvements to the developer experience.
 
-Note: This update is a major release which includes changes that require updates to your code. When updating to Novo Elements V6 from prior versions, the following command is required:
+Note: This update is a major release which includes changes that require updates to your code. When updating to Novo Elements V6 from prior versions, the following commands are required:
+
+First follow the steps to update your angular app to [Version 10](https://update.angular.io/?v=9.0-10.0)
 
 ```
 npm install --save timezone-support@2 novo-design-tokens@0 angular-imask@6 imask@6
@@ -240,6 +242,7 @@ We already talked about the change from imperative to declarative. We have conso
 
 ```html
 <novo-dropdown>
+  <button>trigger</button>
   <novo-optgroup label="Cats">
     <novo-option (action)="action('1')">Persian</novo-option>
     <novo-option (action)="action('2')">Maine Coon</novo-option>
@@ -248,7 +251,7 @@ We already talked about the change from imperative to declarative. We have conso
     <novo-option (action)="action('3')">Cocker Spaniel</novo-option>
     <novo-option (action)="action('4')">Poodle</novo-option>
   <novo-optgroup>
-</novo-select>
+</novo-dropdown>
 ```
 
 Preview Features [#](https://bullhorn.github.io/novo-elements/docs/#/updates/v6#preview-features){#preview-features}
