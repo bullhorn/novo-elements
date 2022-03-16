@@ -3,7 +3,7 @@
     {
       "name": "master",
       "docs": {
-        "dest": "docs/"
+        "dest": "docs"
       }
     },
     {

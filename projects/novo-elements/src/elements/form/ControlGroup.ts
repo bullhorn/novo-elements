@@ -272,7 +272,7 @@ export class NovoControlGroup implements AfterContentInit, OnChanges, OnDestroy 
     const nestedFormGroup = controlsArray.at(index) as NovoFormGroup;
     nestedFormGroup.fieldInteractionEvents.unsubscribe();
     if (emitEvent) {
-      this.onRemove.emit({ value: nestedFormGroup.value, index });
+      this.onRemove.emit({ value: nestedFormGroup.getRawValue(), index });
     }
     controlsArray.removeAt(index);
     this.disabledArray = this.disabledArray.filter((value: NovoControlGroupRowConfig, idx: number) => idx !== index);
