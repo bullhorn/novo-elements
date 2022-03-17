@@ -42,6 +42,10 @@ export class NovoDropdownCell extends BaseRenderer implements OnInit {
     this._value = v;
   }
 
+  get value() {
+    return this._value;
+  }
+
   public ngOnInit(): void {
     // Check for and fix bad config
     if (!this.meta.dropdownCellConfig) {
