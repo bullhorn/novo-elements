@@ -14,10 +14,7 @@ import { BaseRenderer } from '../base-renderer/BaseRenderer';
 })
 export class DateCell extends BaseRenderer {
   @Input()
-  set value(v: any) {
-    this._value = v;
-  }
-
+  value: any;
   constructor(public labels: NovoLabelService) {
     super();
   }

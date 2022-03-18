@@ -74,7 +74,7 @@ export class NovoFormElement implements AfterContentInit, OnInit {
       }
 
       // Hide required fields that have been successfully filled out
-      if (hideRequiredWithValue && !Helpers.isBlank(this.form.getRawValue()[key])) {
+      if (hideRequiredWithValue && !Helpers.isBlank(this.form.value[key])) {
         this.form.controls[key].hidden = true;
       }
 
@@ -91,7 +91,7 @@ export class NovoFormElement implements AfterContentInit, OnInit {
   public forceValidation(): void {
     Object.keys(this.form.controls).forEach((key: string) => {
       const control: any = this.form.controls[key];
-      if (control.required && Helpers.isBlank(this.form.getRawValue()[control.key])) {
+      if (control.required && Helpers.isBlank(this.form.value[control.key])) {
         control.markAsDirty();
         control.markAsTouched();
       }
