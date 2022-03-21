@@ -73,7 +73,7 @@ export class NovoDataTableCheckboxHeaderCell<T> extends CdkHeaderCell implements
     this.resetSubscription = this.dataTable.state.resetSource.subscribe(() => {
       this.checked = false;
       if (this.dataTable?.canSelectAll) {
-        this.selectAllChanged();
+        this.resetAllMatchingSelected();
       }
       this.ref.markForCheck();
     });
@@ -103,8 +103,17 @@ export class NovoDataTableCheckboxHeaderCell<T> extends CdkHeaderCell implements
       this.dataTable.selectRows(!this.checked);
     }
     if (this.dataTable?.canSelectAll) {
-      this.selectAllChanged();
+      if (this.checked) {
+        this.resetAllMatchingSelected();
+      } else {
+        this.selectAllChanged();
+      }
     }
+  }
+
+  private resetAllMatchingSelected() {
+    this.dataTable.state?.allMatchingSelectedSource?.next(false);
+    this.dataTable.state?.onSelectionChange();
   }
 
   public selectAllChanged(): void {
