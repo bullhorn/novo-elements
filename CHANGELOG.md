@@ -1,3 +1,14 @@
+## [6.0.2](https://github.com/bullhorn/novo-elements/compare/v6.0.1...v6.0.2) (2022-03-21)
+
+
+### Bug Fixes
+
+* **Chips:** Chips on propugate change events if value !== previous value ([6b47f31](https://github.com/bullhorn/novo-elements/commit/6b47f31807a8dbec428025a46eb7aab90d9dc4d2))
+* **Chips:** pushed a refactor for checking if the value has changed when setting items ([7d4be18](https://github.com/bullhorn/novo-elements/commit/7d4be1837269f64262d17df5e4c3ea180f93d7b7))
+* remove reset styling for safari type='button' ([4eb2283](https://github.com/bullhorn/novo-elements/commit/4eb22832553bfd030758dc6e729d7556de0ed46e))
+
+
+
 ## [6.0.1](https://github.com/bullhorn/novo-elements/compare/v6.0.0...v6.0.1) (2022-03-14)
 
 
