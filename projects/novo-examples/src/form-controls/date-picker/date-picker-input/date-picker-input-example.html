@@ -1,7 +1,8 @@
 <novo-date-picker-input
   [(ngModel)]="selected"
   [format]="format.value"
-  [weekStart]="weekStart.value">
+  [weekStart]="weekStart.value"
+  [disabled]="disabled">
 </novo-date-picker-input>
 
 <section>
@@ -22,5 +23,11 @@
   <novo-radio-group #weekStart appearance="vertical" value="0">
     <novo-radio name="weekStart" value="0">Sun</novo-radio>
     <novo-radio name="weekStart" value="1">Mon</novo-radio>
+  </novo-radio-group>
+
+  <novo-label>Week Start</novo-label>
+  <novo-radio-group #disabled appearance="vertical" [value]="false">
+    <novo-radio name="disabled" [value]="false">Enabled</novo-radio>
+    <novo-radio name="disabled" [value]="true">Disabled</novo-radio>
   </novo-radio-group>
 </section>

@@ -35,7 +35,7 @@
 <novo-field>
   <novo-label>Date of Birth</novo-label>
   <novo-text novoPrefix mr="sm">{{date2 | date : 'EEE' }}</novo-text>
-  <input novoInput dateFormat="iso8601" [picker]="datepicker2" [(ngModel)]="date2" />
+  <input novoInput dateFormat="iso8601" [picker]="datepicker2" [(ngModel)]="date2" disabled readonly />
   <novo-picker-toggle novoSuffix icon="calendar">
     <novo-date-picker #datepicker2></novo-date-picker>
   </novo-picker-toggle>
