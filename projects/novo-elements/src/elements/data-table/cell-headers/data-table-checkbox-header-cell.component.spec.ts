@@ -57,6 +57,7 @@ describe('Elements: NovoDataTableCheckboxHeaderCell', () => {
         alert: () => {},
       };
       spyOn(component, 'selectAllChanged');
+      spyOn(component, 'resetAllMatchingSelected');
       spyOn(component.dataTable, 'selectRows');
       spyOn(component.toaster, 'alert');
     });
@@ -87,10 +88,19 @@ describe('Elements: NovoDataTableCheckboxHeaderCell', () => {
       expect(component.dataTable.selectRows).not.toHaveBeenCalled();
       expect(component.toaster.alert).toHaveBeenCalledWith(expected);
     });
-    it('should call selectAllChanged if canSelectAll is true', () => {
+    it('should call selectAllChanged if canSelectAll is true and this.checked is false', () => {
       component.dataTable.canSelectAll = true;
+      component.checked = false;
       component.onClick();
       expect(component.selectAllChanged).toHaveBeenCalled();
+      expect(component.resetAllMatchingSelected).not.toHaveBeenCalled();
+    });
+    it('should call resetAllMatchingSelected if canSelectAll is true and this.checked is true', () => {
+      component.dataTable.canSelectAll = true;
+      component.checked = true;
+      component.onClick();
+      expect(component.resetAllMatchingSelected).toHaveBeenCalled();
+      expect(component.selectAllChanged).not.toHaveBeenCalled();
     });
   });
 
