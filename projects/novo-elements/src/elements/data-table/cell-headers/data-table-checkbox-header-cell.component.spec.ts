@@ -66,6 +66,7 @@ describe('Elements: NovoDataTableCheckboxHeaderCell', () => {
       component.onClick();
       expect(component.dataTable.selectRows).toHaveBeenCalled();
       expect(component.selectAllChanged).not.toHaveBeenCalled();
+      expect(component.resetAllMatchingSelected).not.toHaveBeenCalled();
     });
     it('should call call toaster.alert isAtLimit is true', () => {
       const expected = {

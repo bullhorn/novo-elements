@@ -111,7 +111,7 @@ export class NovoDataTableCheckboxHeaderCell<T> extends CdkHeaderCell implements
     }
   }
 
-  private resetAllMatchingSelected() {
+  private resetAllMatchingSelected(): void {
     this.dataTable.state?.allMatchingSelectedSource?.next(false);
     this.dataTable.state?.onSelectionChange();
   }
