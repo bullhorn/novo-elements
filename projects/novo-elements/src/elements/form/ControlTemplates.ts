@@ -308,7 +308,10 @@ import { NovoTemplate } from '../common/novo-template/novo-template.directive';
             *ngFor="let option of control.options"
             [value]="option.value"
             [label]="option.label"
-            [checked]="option.value === form.getRawValue()[control.key] || (form.getRawValue()[control.key] && option.value === form.getRawValue()[control.key].id)"
+            [checked]="
+              option.value === form.getRawValue()[control.key] ||
+              (form.getRawValue()[control.key] && option.value === form.getRawValue()[control.key].id)
+            "
             [tooltip]="control.tooltip"
             [tooltipPosition]="control.tooltipPosition"
             [tooltipSize]="control?.tooltipSize"
