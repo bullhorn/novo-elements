@@ -1,3 +1,12 @@
+## [6.0.3](https://github.com/bullhorn/novo-elements/compare/v6.0.2...v6.0.3) (2022-03-23)
+
+
+### Bug Fixes
+
+* **select:** change select default position to above-below ([#1273](https://github.com/bullhorn/novo-elements/issues/1273)) ([9cf6c3c](https://github.com/bullhorn/novo-elements/commit/9cf6c3c9c6ad3f2edecfcca801f0738cd272e48b))
+
+
+
 ## [6.0.2](https://github.com/bullhorn/novo-elements/compare/v6.0.1...v6.0.2) (2022-03-21)
 
 
