@@ -216,7 +216,7 @@ export class NovoSelectElement
   @Input()
   headerConfig: any;
   @Input()
-  position: string = 'bottom';
+  position: string = 'above-below';
   @Input()
   overlayWidth: number;
   @Input()
