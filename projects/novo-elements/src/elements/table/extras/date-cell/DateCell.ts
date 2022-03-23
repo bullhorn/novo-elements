@@ -18,6 +18,10 @@ export class DateCell extends BaseRenderer {
     this._value = v;
   }
 
+  get value() {
+    return this._value;
+  }
+
   constructor(public labels: NovoLabelService) {
     super();
   }

@@ -555,7 +555,7 @@ export class NovoTableElement implements DoCheck {
   }
 
   get formValue() {
-    return this.tableForm.value;
+    return this.tableForm.getRawValue();
   }
 
   constructor(public labels: NovoLabelService, private formUtils: FormUtils, private builder: FormBuilder, private cdr: ChangeDetectorRef) {
@@ -1066,7 +1066,7 @@ export class NovoTableElement implements DoCheck {
               }
             }
             // If dirty, grab value off the form
-            changedRow[key] = this.tableForm.value.rows[index][key];
+            changedRow[key] = this.tableForm.getRawValue().rows[index][key];
             // Set value back to row (should be already done via the server call, but do it anyway)
             this._rows[index][key] = changedRow[key];
           } else if (control && control.errors) {
