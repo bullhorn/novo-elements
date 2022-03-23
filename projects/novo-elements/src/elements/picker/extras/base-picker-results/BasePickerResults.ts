@@ -15,7 +15,6 @@ import { NovoControlConfig } from '../../../form/controls/BaseControl';
 export class BasePickerResults {
   _term: string = '';
   selected: Array<any> = [];
-  @Input() matches: any = [];
   hasError: boolean = false;
   isLoading: boolean = false;
   isStatic: boolean = true;
@@ -31,6 +30,16 @@ export class BasePickerResults {
   optionsFunctionHasChanged: boolean = false;
   private selectingMatches: boolean = false;
   private scrollHandler: any;
+  _matches: Array<any> = [];
+
+  @Input()
+  set matches(m: Array<any>) {
+    this._matches = m;
+  }
+
+  get matches() {
+    return this._matches;
+  }
 
   constructor(element: ElementRef, ref: ChangeDetectorRef) {
     this.element = element;
