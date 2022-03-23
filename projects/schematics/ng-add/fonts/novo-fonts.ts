@@ -1,6 +1,6 @@
 import { Rule, SchematicsException, Tree } from '@angular-devkit/schematics';
 import { appendHtmlElementToHead, getProjectFromWorkspace, getProjectIndexFiles } from '@angular/cdk/schematics';
-import { getWorkspace } from '@schematics/angular/utility/config';
+import { getWorkspace } from '@schematics/angular/utility/workspace';
 import { Schema } from '../schema';
 
 /** Adds the Material Design fonts to the index HTML file. */
