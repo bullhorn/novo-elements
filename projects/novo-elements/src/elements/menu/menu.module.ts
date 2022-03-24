@@ -12,9 +12,9 @@ import { MENU_OPTIONS } from './menu.tokens';
 import { IMenuOptions } from './menu.types';
 
 @NgModule({
-    declarations: [MenuDirective, MenuComponent, MenuContentComponent, MenuItemDirective],
-    exports: [MenuDirective, MenuComponent, MenuItemDirective],
-    imports: [CommonModule, OverlayModule, NovoCommonModule, NovoIconModule]
+  declarations: [MenuDirective, MenuComponent, MenuContentComponent, MenuItemDirective],
+  exports: [MenuDirective, MenuComponent, MenuItemDirective],
+  imports: [CommonModule, OverlayModule, NovoCommonModule, NovoIconModule],
 })
 export class NovoMenuModule {
   public static forRoot(options?: IMenuOptions): ModuleWithProviders<NovoMenuModule> {

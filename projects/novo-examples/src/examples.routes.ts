@@ -8513,13 +8513,13 @@ export const PAGE_LIST = [
 ];
 
 @NgModule({
-    declarations: PAGE_LIST,
-    imports: [
-        RouterModule.forRoot(routes, { useHash: true, anchorScrolling: 'enabled' }),
-        NovoElementsModule,
-        NovoExamplesModule,
-        NovoExamplesSharedModule,
-    ],
-    exports: [RouterModule]
+  declarations: PAGE_LIST,
+  imports: [
+    RouterModule.forRoot(routes, { useHash: true, anchorScrolling: 'enabled' }),
+    NovoElementsModule,
+    NovoExamplesModule,
+    NovoExamplesSharedModule,
+  ],
+  exports: [RouterModule],
 })
 export class NovoExamplesRoutesModule {}
