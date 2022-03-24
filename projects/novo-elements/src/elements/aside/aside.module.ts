@@ -5,9 +5,8 @@ import { AsideComponent } from './aside.component';
 import { NovoAsideService } from './aside.service';
 
 @NgModule({
-  imports: [OverlayModule, PortalModule],
-  declarations: [AsideComponent],
-  providers: [NovoAsideService],
-  entryComponents: [AsideComponent],
+    imports: [OverlayModule, PortalModule],
+    declarations: [AsideComponent],
+    providers: [NovoAsideService]
 })
 export class NovoAsideModule {}
