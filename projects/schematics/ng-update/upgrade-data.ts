@@ -11,6 +11,7 @@ import {
   propertyNames,
   ScssVariableData,
   scssVariables,
+  symbolRemoval,
 } from './data';
 
 export interface NovoUpgradeData extends UpgradeData {
@@ -28,5 +29,5 @@ export const elementsUpgradeData: NovoUpgradeData = {
   outputNames,
   propertyNames,
   scssVariables,
-  // symbolRemoval,
+  symbolRemoval,
 };
