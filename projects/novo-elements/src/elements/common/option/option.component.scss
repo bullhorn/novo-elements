@@ -81,7 +81,7 @@ $novo-menu-side-padding: 0.5rem;
 }
 
 .novo-option-pseudo-checkbox {
-  $margin: $novo-menu-side-padding / 2;
+  $margin: math.div($novo-menu-side-padding, 2);
   margin-right: $margin;
 
   [dir="rtl"] & {
