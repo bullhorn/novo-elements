@@ -58,6 +58,9 @@ export class NovoMenuService {
       right: 0,
       top: 0,
       width: 0,
+      x: 0,
+      y: 0,
+      toJSON: JSON.parse(this.toString()),
     }),
   };
 
@@ -75,20 +78,24 @@ export class NovoMenuService {
         right: mouseEvent.clientX,
         top: mouseEvent.clientY,
         width: 0,
+        x: mouseEvent.clientX,
+        y: mouseEvent.clientY,
+        toJSON: JSON.parse(this.toString()),
       });
       this.closeAllMenus({ eventType: 'cancel', event });
       const positionStrategy = this.overlay
         .position()
-        .connectedTo(
-          new ElementRef(anchorElement || this.fakeElement),
-          { originX: 'start', originY: 'bottom' },
-          { overlayX: 'start', overlayY: 'top' },
-        )
-        .withFallbackPosition({ originX: 'start', originY: 'top' }, { overlayX: 'start', overlayY: 'bottom' })
-        .withFallbackPosition({ originX: 'end', originY: 'top' }, { overlayX: 'start', overlayY: 'top' })
-        .withFallbackPosition({ originX: 'start', originY: 'top' }, { overlayX: 'end', overlayY: 'top' })
-        .withFallbackPosition({ originX: 'end', originY: 'center' }, { overlayX: 'start', overlayY: 'center' })
-        .withFallbackPosition({ originX: 'start', originY: 'center' }, { overlayX: 'end', overlayY: 'center' });
+        .flexibleConnectedTo(
+          new ElementRef(anchorElement || this.fakeElement)
+          // { originX: 'start', originY: 'bottom' },
+          // { overlayX: 'start', overlayY: 'top' },
+        );
+        // Property 'withFallbackPosition' does not exist on type 'FlexibleConnectedPositionStrategy'.
+        // .withFallbackPosition({ originX: 'start', originY: 'top' }, { overlayX: 'start', overlayY: 'bottom' })
+        // .withFallbackPosition({ originX: 'end', originY: 'top' }, { overlayX: 'start', overlayY: 'top' })
+        // .withFallbackPosition({ originX: 'start', originY: 'top' }, { overlayX: 'end', overlayY: 'top' })
+        // .withFallbackPosition({ originX: 'end', originY: 'center' }, { overlayX: 'start', overlayY: 'center' })
+        // .withFallbackPosition({ originX: 'start', originY: 'center' }, { overlayX: 'end', overlayY: 'center' });
       this.overlays = [
         this.overlay.create({
           positionStrategy,
@@ -100,14 +107,15 @@ export class NovoMenuService {
     } else {
       const positionStrategy = this.overlay
         .position()
-        .connectedTo(
-          new ElementRef(event ? event.target : anchorElement),
-          { originX: 'end', originY: 'top' },
-          { overlayX: 'start', overlayY: 'top' },
-        )
-        .withFallbackPosition({ originX: 'start', originY: 'top' }, { overlayX: 'end', overlayY: 'top' })
-        .withFallbackPosition({ originX: 'end', originY: 'bottom' }, { overlayX: 'start', overlayY: 'bottom' })
-        .withFallbackPosition({ originX: 'start', originY: 'bottom' }, { overlayX: 'end', overlayY: 'bottom' });
+        .flexibleConnectedTo(
+          new ElementRef(event ? event.target : anchorElement)
+          // { originX: 'end', originY: 'top' },
+          // { overlayX: 'start', overlayY: 'top' },
+        );
+        // Property 'withFallbackPosition' does not exist on type 'FlexibleConnectedPositionStrategy'.
+        // .withFallbackPosition({ originX: 'start', originY: 'top' }, { overlayX: 'end', overlayY: 'top' })
+        // .withFallbackPosition({ originX: 'end', originY: 'bottom' }, { overlayX: 'start', overlayY: 'bottom' })
+        // .withFallbackPosition({ originX: 'start', originY: 'bottom' }, { overlayX: 'end', overlayY: 'bottom' });
       const newOverlay = this.overlay.create({
         positionStrategy,
         panelClass: 'novo-menu',
