@@ -1,4 +1,3 @@
-import { FocusableOption } from '@angular/cdk/a11y';
 import { Directionality } from '@angular/cdk/bidi';
 import { CdkStep, CdkStepHeader, CdkStepper } from '@angular/cdk/stepper';
 import {
