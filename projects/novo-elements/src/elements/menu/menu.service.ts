@@ -51,7 +51,7 @@ export class NovoMenuService {
   private menuContent: ComponentRef<MenuContentComponent>;
   private overlays: OverlayRef[] = [];
   private fakeElement: any = {
-    getBoundingClientRect: (): ClientRect => ({
+    getBoundingClientRect: (): any => ({
       bottom: 0,
       height: 0,
       left: 0,
@@ -60,7 +60,6 @@ export class NovoMenuService {
       width: 0,
       x: 0,
       y: 0,
-      toJSON: JSON.parse(this.toString()),
     }),
   };
 
@@ -71,7 +70,7 @@ export class NovoMenuService {
 
     if (!parentMenu) {
       const mouseEvent = event as MouseEvent;
-      this.fakeElement.getBoundingClientRect = (): ClientRect => ({
+      this.fakeElement.getBoundingClientRect = (): any => ({
         bottom: mouseEvent.clientY,
         height: 0,
         left: mouseEvent.clientX,
@@ -80,20 +79,19 @@ export class NovoMenuService {
         width: 0,
         x: mouseEvent.clientX,
         y: mouseEvent.clientY,
-        toJSON: JSON.parse(this.toString()),
       });
       this.closeAllMenus({ eventType: 'cancel', event });
-      const positionStrategy = this.overlay.position().flexibleConnectedTo(
-        new ElementRef(anchorElement || this.fakeElement),
-        // { originX: 'start', originY: 'bottom' },
-        // { overlayX: 'start', overlayY: 'top' },
-      );
-      // Property 'withFallbackPosition' does not exist on type 'FlexibleConnectedPositionStrategy'.
-      // .withFallbackPosition({ originX: 'start', originY: 'top' }, { overlayX: 'start', overlayY: 'bottom' })
-      // .withFallbackPosition({ originX: 'end', originY: 'top' }, { overlayX: 'start', overlayY: 'top' })
-      // .withFallbackPosition({ originX: 'start', originY: 'top' }, { overlayX: 'end', overlayY: 'top' })
-      // .withFallbackPosition({ originX: 'end', originY: 'center' }, { overlayX: 'start', overlayY: 'center' })
-      // .withFallbackPosition({ originX: 'start', originY: 'center' }, { overlayX: 'end', overlayY: 'center' });
+      const positionStrategy = this.overlay.position()
+        .flexibleConnectedTo(new ElementRef(anchorElement || this.fakeElement))
+        .withFlexibleDimensions(false)
+        .withPositions([
+          { originX: 'start', originY: 'bottom', overlayX: 'start', overlayY: 'top' },
+          { originX: 'start', originY: 'top', overlayX: 'start', overlayY: 'bottom' },
+          { originX: 'end', originY: 'top', overlayX: 'start', overlayY: 'top' },
+          { originX: 'start', originY: 'top', overlayX: 'end', overlayY: 'top' },
+          { originX: 'end', originY: 'center', overlayX: 'start', overlayY: 'center' },
+          { originX: 'start', originY: 'center', overlayX: 'end', overlayY: 'center' },
+        ]);
       this.overlays = [
         this.overlay.create({
           positionStrategy,
@@ -103,15 +101,15 @@ export class NovoMenuService {
       ];
       this.attachMenu(this.overlays[0], context);
     } else {
-      const positionStrategy = this.overlay.position().flexibleConnectedTo(
-        new ElementRef(event ? event.target : anchorElement),
-        // { originX: 'end', originY: 'top' },
-        // { overlayX: 'start', overlayY: 'top' },
-      );
-      // Property 'withFallbackPosition' does not exist on type 'FlexibleConnectedPositionStrategy'.
-      // .withFallbackPosition({ originX: 'start', originY: 'top' }, { overlayX: 'end', overlayY: 'top' })
-      // .withFallbackPosition({ originX: 'end', originY: 'bottom' }, { overlayX: 'start', overlayY: 'bottom' })
-      // .withFallbackPosition({ originX: 'start', originY: 'bottom' }, { overlayX: 'end', overlayY: 'bottom' });
+      const positionStrategy = this.overlay.position()
+        .flexibleConnectedTo(new ElementRef(event ? event.target : anchorElement))
+        .withFlexibleDimensions(false)
+        .withPositions([
+          { originX: 'end', originY: 'top', overlayX: 'start', overlayY: 'top' },
+          { originX: 'start', originY: 'top', overlayX: 'end', overlayY: 'top' },
+          { originX: 'end', originY: 'bottom', overlayX: 'end', overlayY: 'top' },
+          { originX: 'start', originY: 'bottom', overlayX: 'end', overlayY: 'bottom' },
+        ]);
       const newOverlay = this.overlay.create({
         positionStrategy,
         panelClass: 'novo-menu',

@@ -1,5 +1,6 @@
 // Angular
 import {
+  ConnectedPosition,
   FlexibleConnectedPositionStrategy,
   HorizontalConnectionPos,
   Overlay,
@@ -252,40 +253,48 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
    */
   protected getPosition(): FlexibleConnectedPositionStrategy {
     if (this.position === 'center') {
-      return this.overlay.position().flexibleConnectedTo(
-        this.getConnectedElement(),
-        // , { originX: 'start', originY: 'center' }, { overlayX: 'start', overlayY: 'center' }
-      );
-      // Property 'withFallbackPosition' does not exist on type 'FlexibleConnectedPositionStrategy'.
-      // .withFallbackPosition({ originX: 'start', originY: 'top' }, { overlayX: 'start', overlayY: 'top' })
-      // .withFallbackPosition({ originX: 'start', originY: 'bottom' }, { overlayX: 'start', overlayY: 'bottom' });
+      return this.overlay.position()
+        .flexibleConnectedTo(this.getConnectedElement())
+        .withFlexibleDimensions(false)
+        .withPositions([
+          { originX: 'start', originY: 'center', overlayX: 'start', overlayY: 'center' },
+          { originX: 'start', originY: 'top', overlayX: 'start', overlayY: 'top' },
+          { originX: 'start', originY: 'bottom', overlayX: 'start', overlayY: 'bottom' },
+        ]);
     }
 
     const [originX, fallbackX]: HorizontalConnectionPos[] = this.position.includes('right') ? ['end', 'start'] : ['start', 'end'];
     const [originY, overlayY]: VerticalConnectionPos[] = this.position.includes('top') ? ['top', 'bottom'] : ['bottom', 'top'];
-
-    let strategy: FlexibleConnectedPositionStrategy = this.overlay.position().flexibleConnectedTo(
-      this.getConnectedElement(),
-      // , { originX, originY }, { overlayX: originX, overlayY }
-    );
-    // .setDirection('ltr')
+    const defaultPosition: ConnectedPosition = { originX, originY, overlayX: originX, overlayY };
+    let strategy: FlexibleConnectedPositionStrategy = this.overlay.position()
+      .flexibleConnectedTo(this.getConnectedElement())
+      .withFlexibleDimensions(false)
+      .withPositions([defaultPosition]);
+      // .setDirection('ltr');
     if (this.position === 'bottom') {
-      strategy = strategy;
-      // Property 'withFallbackPosition' does not exist on type 'FlexibleConnectedPositionStrategy'.
-      // .withFallbackPosition({ originX: fallbackX, originY: 'bottom' }, { overlayX: fallbackX, overlayY: 'top' });
+      strategy = strategy
+        .withPositions([
+          defaultPosition,
+          { originX: fallbackX, originY: 'bottom', overlayX: fallbackX, overlayY: 'top' },
+        ]);
     } else if (this.position === 'right' || this.position === 'default' || this.position.includes('above-below')) {
-      strategy = strategy;
-      // Property 'withFallbackPosition' does not exist on type 'FlexibleConnectedPositionStrategy'.
-      // .withFallbackPosition({ originX, originY: 'top' }, { overlayX: originX, overlayY: 'bottom' })
-      // .withFallbackPosition({ originX: fallbackX, originY: 'bottom' }, { overlayX: fallbackX, overlayY: 'top' })
-      // .withFallbackPosition({ originX: fallbackX, originY: 'top' }, { overlayX: fallbackX, overlayY: 'bottom' });
+      strategy = strategy
+        .withPositions([
+          defaultPosition,
+          { originX, originY: 'top', overlayX: originX, overlayY: 'bottom' },
+          { originX: fallbackX, originY: 'bottom', overlayX: fallbackX, overlayY: 'top' },
+          { originX: fallbackX, originY: 'top', overlayX: fallbackX, overlayY: 'bottom' },
+        ]);
       if (!this.position.includes('above-below')) {
-        strategy = strategy;
-        // Property 'withFallbackPosition' does not exist on type 'FlexibleConnectedPositionStrategy'.
-        // .withFallbackPosition({ originX, originY: 'center' }, { overlayX: originX, overlayY: 'center' })
-        // .withFallbackPosition({ originX: fallbackX, originY: 'center' }, { overlayX: fallbackX, overlayY: 'center' });
+        strategy = strategy
+        .withPositions([
+          defaultPosition,
+          { originX, originY: 'center', overlayX: originX, overlayY: 'center' },
+          { originX: fallbackX, originY: 'center', overlayX: fallbackX, overlayY: 'center' },
+        ]);
       }
     }
+    console.log('overlay strategy', strategy)
     return strategy;
   }
 
