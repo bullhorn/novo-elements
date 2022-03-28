@@ -1,3 +1,12 @@
+## [6.0.4](https://github.com/bullhorn/novo-elements/compare/v6.0.3...v6.0.4) (2022-03-28)
+
+
+### Bug Fixes
+
+* **dataTable:** Clear all matching selected on reset and when deselec… ([#1272](https://github.com/bullhorn/novo-elements/issues/1272)) ([2f31644](https://github.com/bullhorn/novo-elements/commit/2f31644dc4ba656ba0a64d68ea30205c8884afc7))
+
+
+
 ## [6.0.3](https://github.com/bullhorn/novo-elements/compare/v6.0.2...v6.0.3) (2022-03-23)
 
 
