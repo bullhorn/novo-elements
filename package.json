@@ -29,7 +29,7 @@
     "copy:resources": "npm run copy:scss && npm run copy:schematics",
     "copy:schematics": "npx copyfiles -f projects/schematics/*.json dist/novo-elements/schematics/",
     "copy:scss": "node copy-scss.js",
-    "test": "jest projects/novo-elements/src/elements/data-table/cell-headers/ --no-coverage",
+    "test": "jest projects/novo-elements --no-coverage",
     "test:watch": "jest projects/chomsky projects/novo-elements --watch",
     "lint": "ng lint && htmlhint \"projects\" --config .htmlhintrc",
     "lint:scss": "stylelint \"projects/**/*.scss\" --syntax scss",

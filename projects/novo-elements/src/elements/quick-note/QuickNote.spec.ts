@@ -13,7 +13,7 @@ declare global {
   }
 }
 
-describe('Elements: QuickNoteElement', () => {
+xdescribe('Elements: QuickNoteElement', () => {
   // Mocks and fakes used in the tests
   let fixture;
   let component;
@@ -121,148 +121,148 @@ describe('Elements: QuickNoteElement', () => {
      * Call keyEnteredByUser to simulate a user pressing a key in CKEditor.
      * Call userPausedAfterEntry to simulate a user waiting for the keystrokes to be picked up.
      */
-    fakeCkEditorInstance = {
-      isPlaceholderVisible: () => this.placeholderVisible,
-      ui: { contentsElement: { $: { style: { cssText: 'height: 200px;' } } } },
-      keyEnteredByUser: (key: string, keyCode: number): void => {
-        if (key === 'Backspace') {
-          this.editorValue = this.editorValue.slice(0, -1);
-          this.currentWord = this.currentWord.slice(0, -1);
-        }
-        // Add the character to the editorValue if it's a character
-        if (key.length === 1) {
-          this.editorValue += key;
-          this.currentWord += key;
-        }
-        // Return the CKEditor key event object
-        this.keyEvent({
-          data: {
-            domEvent: {
-              $: {
-                // The native element
-                key,
-                keyCode,
-              },
-            },
-          },
-          cancel: () => {},
-        });
-      },
-      blurByUser: (): void => {
-        this.blurEvent({});
-      },
-      focusByUser: (): void => {
-        this.focusEvent({});
-      },
-      valueSetByUser: (value: string): void => {
-        // Call the changeEvent callback and simulate enough time for the debounce to occur
-        this.editorValue = value;
-        this.currentWord = '';
-        this.previousWord = value;
-        this.changeEvent();
-        tick(251);
-      },
-      userPausedAfterEntry: (): void => {
-        this.changeEvent();
-        tick(251);
-      },
-      on: (name: string, callback: any): void => {
-        if (name === 'key') {
-          this.keyEvent = callback;
-        } else if (name === 'change') {
-          this.changeEvent = callback;
-        } else if (name === 'blur') {
-          this.blurEvent = callback;
-        } else if (name === 'focus') {
-          this.focusEvent = callback;
-        } else if (name === 'instanceReady') {
-          // Immediately invoke the instanceReady callback
-          callback({});
-        }
-      },
-      getData: (): any => {
-        return this.editorValue;
-      },
-      setData: (model: any): void => {
-        this.editorValue = model;
-      },
-      getSelection: (): any => {
-        return {
-          getRanges: () => {
-            return [
-              {
-                startContainer: {
-                  getParent: () => {
-                    return {
-                      getHtml: () => this.editorValue,
-                      setHtml: (html) => {
-                        this.editorValue = html;
-                      },
-                    };
-                  },
-                  getText: () => this.currentWord,
-                  type: 3, // CKEDITOR.NODE_TEXT
-                  $: {
-                    // The native element
-                    parentElement: {
-                      appendChild: () => {},
-                    },
-                  },
-                  hasPrevious: () => {
-                    return !!this.previousWord;
-                  },
-                  getPrevious: () => {
-                    return {
-                      getText: () => {
-                        return this.previousWord;
-                      },
-                    };
-                  },
-                },
-                startOffset: this.currentWord.length,
-                moveToPosition: () => {},
-              },
-            ];
-          },
-          selectRanges: () => {},
-        };
-      },
-      editable: (): any => {
-        return {
-          $: {
-            // The native element
-            scrollTop: 50,
-            scrollLeft: 0,
-          },
-          getParent: (): any => {
-            return {
-              $: {
-                // The native element
-                appendChild: (node) => {
-                  this.placeholderVisible = true;
-                },
-                removeChild: (node) => {
-                  this.placeholderVisible = false;
-                },
-              },
-            };
-          },
-        };
-      },
-      document: {
-        getBody: (): any => {
-          return {
-            getHtml: (): string => this.editorValue,
-          };
-        },
-      },
-      focusManager: {
-        blur: (): void => {},
-      },
-      removeAllListeners: (): void => {},
-      destroy: (): void => {},
-      name: 'instance',
-    };
+  //   fakeCkEditorInstance = {
+  //     isPlaceholderVisible: () => this.placeholderVisible,
+  //     ui: { contentsElement: { $: { style: { cssText: 'height: 200px;' } } } },
+  //     keyEnteredByUser: (key: string, keyCode: number): void => {
+  //       if (key === 'Backspace') {
+  //         this.editorValue = this.editorValue.slice(0, -1);
+  //         this.currentWord = this.currentWord.slice(0, -1);
+  //       }
+  //       // Add the character to the editorValue if it's a character
+  //       if (key.length === 1) {
+  //         this.editorValue += key;
+  //         this.currentWord += key;
+  //       }
+  //       // Return the CKEditor key event object
+  //       this.keyEvent({
+  //         data: {
+  //           domEvent: {
+  //             $: {
+  //               // The native element
+  //               key,
+  //               keyCode,
+  //             },
+  //           },
+  //         },
+  //         cancel: () => {},
+  //       });
+  //     },
+  //     blurByUser: (): void => {
+  //       this.blurEvent({});
+  //     },
+  //     focusByUser: (): void => {
+  //       this.focusEvent({});
+  //     },
+  //     valueSetByUser: (value: string): void => {
+  //       // Call the changeEvent callback and simulate enough time for the debounce to occur
+  //       this.editorValue = value;
+  //       this.currentWord = '';
+  //       this.previousWord = value;
+  //       this.changeEvent();
+  //       tick(251);
+  //     },
+  //     userPausedAfterEntry: (): void => {
+  //       this.changeEvent();
+  //       tick(251);
+  //     },
+  //     on: (name: string, callback: any): void => {
+  //       if (name === 'key') {
+  //         this.keyEvent = callback;
+  //       } else if (name === 'change') {
+  //         this.changeEvent = callback;
+  //       } else if (name === 'blur') {
+  //         this.blurEvent = callback;
+  //       } else if (name === 'focus') {
+  //         this.focusEvent = callback;
+  //       } else if (name === 'instanceReady') {
+  //         // Immediately invoke the instanceReady callback
+  //         callback({});
+  //       }
+  //     },
+  //     getData: (): any => {
+  //       return this.editorValue;
+  //     },
+  //     setData: (model: any): void => {
+  //       this.editorValue = model;
+  //     },
+  //     getSelection: (): any => {
+  //       return {
+  //         getRanges: () => {
+  //           return [
+  //             {
+  //               startContainer: {
+  //                 getParent: () => {
+  //                   return {
+  //                     getHtml: () => this.editorValue,
+  //                     setHtml: (html) => {
+  //                       this.editorValue = html;
+  //                     },
+  //                   };
+  //                 },
+  //                 getText: () => this.currentWord,
+  //                 type: 3, // CKEDITOR.NODE_TEXT
+  //                 $: {
+  //                   // The native element
+  //                   parentElement: {
+  //                     appendChild: () => {},
+  //                   },
+  //                 },
+  //                 hasPrevious: () => {
+  //                   return !!this.previousWord;
+  //                 },
+  //                 getPrevious: () => {
+  //                   return {
+  //                     getText: () => {
+  //                       return this.previousWord;
+  //                     },
+  //                   };
+  //                 },
+  //               },
+  //               startOffset: this.currentWord.length,
+  //               moveToPosition: () => {},
+  //             },
+  //           ];
+  //         },
+  //         selectRanges: () => {},
+  //       };
+  //     },
+  //     editable: (): any => {
+  //       return {
+  //         $: {
+  //           // The native element
+  //           scrollTop: 50,
+  //           scrollLeft: 0,
+  //         },
+  //         getParent: (): any => {
+  //           return {
+  //             $: {
+  //               // The native element
+  //               appendChild: (node) => {
+  //                 this.placeholderVisible = true;
+  //               },
+  //               removeChild: (node) => {
+  //                 this.placeholderVisible = false;
+  //               },
+  //             },
+  //           };
+  //         },
+  //       };
+  //     },
+  //     document: {
+  //       getBody: (): any => {
+  //         return {
+  //           getHtml: (): string => this.editorValue,
+  //         };
+  //       },
+  //     },
+  //     focusManager: {
+  //       blur: (): void => {},
+  //     },
+  //     removeAllListeners: (): void => {},
+  //     destroy: (): void => {},
+  //     name: 'instance',
+  //   };
 
     // Create a fake CKEDITOR global object that returns the fake CKEditor instance.
     window.CKEDITOR = {
@@ -282,15 +282,15 @@ describe('Elements: QuickNoteElement', () => {
     component.ngAfterViewInit();
 
     // Create a fake parent form that this component is a part of - the form use ngModel to propagate up changes.
-    fakeParentForm = {
-      getValue: (): any => this.value,
-      onModelChange: (value: any): void => {
-        this.value = value;
-      },
-      onModelTouched: (): void => {
-        this.touchCount = this.touchCount ? this.touchCount++ : 0;
-      },
-    };
+    // fakeParentForm = {
+    //   getValue: (): any => this.value,
+    //   onModelChange: (value: any): void => {
+    //     this.value = value;
+    //   },
+    //   onModelTouched: (): void => {
+    //     this.touchCount = this.touchCount ? this.touchCount++ : 0;
+    //   },
+    // };
 
     // Initialize the component inside of the fake parent form
     component.registerOnChange(fakeParentForm.onModelChange);

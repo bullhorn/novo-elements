@@ -81,7 +81,8 @@ export class NovoMenuService {
         y: mouseEvent.clientY,
       });
       this.closeAllMenus({ eventType: 'cancel', event });
-      const positionStrategy = this.overlay.position()
+      const positionStrategy = this.overlay
+        .position()
         .flexibleConnectedTo(new ElementRef(anchorElement || this.fakeElement))
         .withFlexibleDimensions(false)
         .withPositions([
@@ -101,7 +102,8 @@ export class NovoMenuService {
       ];
       this.attachMenu(this.overlays[0], context);
     } else {
-      const positionStrategy = this.overlay.position()
+      const positionStrategy = this.overlay
+        .position()
         .flexibleConnectedTo(new ElementRef(event ? event.target : anchorElement))
         .withFlexibleDimensions(false)
         .withPositions([

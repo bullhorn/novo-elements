@@ -253,7 +253,8 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
    */
   protected getPosition(): FlexibleConnectedPositionStrategy {
     if (this.position === 'center') {
-      return this.overlay.position()
+      return this.overlay
+        .position()
         .flexibleConnectedTo(this.getConnectedElement())
         .withFlexibleDimensions(false)
         .withPositions([
@@ -266,35 +267,33 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
     const [originX, fallbackX]: HorizontalConnectionPos[] = this.position.includes('right') ? ['end', 'start'] : ['start', 'end'];
     const [originY, overlayY]: VerticalConnectionPos[] = this.position.includes('top') ? ['top', 'bottom'] : ['bottom', 'top'];
     const defaultPosition: ConnectedPosition = { originX, originY, overlayX: originX, overlayY };
-    let strategy: FlexibleConnectedPositionStrategy = this.overlay.position()
+    let strategy: FlexibleConnectedPositionStrategy = this.overlay
+      .position()
       .flexibleConnectedTo(this.getConnectedElement())
       .withFlexibleDimensions(false)
       .withPositions([defaultPosition]);
-      // .setDirection('ltr');
+    // .setDirection('ltr');
     if (this.position === 'bottom') {
-      strategy = strategy
-        .withPositions([
-          defaultPosition,
-          { originX: fallbackX, originY: 'bottom', overlayX: fallbackX, overlayY: 'top' },
-        ]);
+      strategy = strategy.withPositions([
+        defaultPosition,
+        { originX: fallbackX, originY: 'bottom', overlayX: fallbackX, overlayY: 'top' }
+      ]);
     } else if (this.position === 'right' || this.position === 'default' || this.position.includes('above-below')) {
-      strategy = strategy
-        .withPositions([
-          defaultPosition,
-          { originX, originY: 'top', overlayX: originX, overlayY: 'bottom' },
-          { originX: fallbackX, originY: 'bottom', overlayX: fallbackX, overlayY: 'top' },
-          { originX: fallbackX, originY: 'top', overlayX: fallbackX, overlayY: 'bottom' },
-        ]);
+      strategy = strategy.withPositions([
+        defaultPosition,
+        { originX, originY: 'top', overlayX: originX, overlayY: 'bottom' },
+        { originX: fallbackX, originY: 'bottom', overlayX: fallbackX, overlayY: 'top' },
+        { originX: fallbackX, originY: 'top', overlayX: fallbackX, overlayY: 'bottom' },
+      ]);
       if (!this.position.includes('above-below')) {
-        strategy = strategy
-        .withPositions([
+        strategy = strategy.withPositions([
           defaultPosition,
           { originX, originY: 'center', overlayX: originX, overlayY: 'center' },
           { originX: fallbackX, originY: 'center', overlayX: fallbackX, overlayY: 'center' },
         ]);
       }
     }
-    console.log('overlay strategy', strategy)
+    console.log('overlay strategy', strategy);
     return strategy;
   }
 

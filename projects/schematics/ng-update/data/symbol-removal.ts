@@ -1,4 +1,4 @@
-import {SymbolRemovalUpgradeData, TargetVersion, VersionChanges} from '@angular/cdk/schematics';
+import { SymbolRemovalUpgradeData, TargetVersion, VersionChanges } from '@angular/cdk/schematics';
 
 export const symbolRemoval: VersionChanges<SymbolRemovalUpgradeData> = {
   [TargetVersion.V13]: [

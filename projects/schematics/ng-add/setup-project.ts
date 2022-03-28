@@ -28,7 +28,7 @@ export default function (options: Schema): Rule {
     const workspace = await getWorkspace(host);
     const project = getProjectFromWorkspace(workspace, options.project);
     // if (project.projectType === 'application') { // project type ProjectDefinition no longer has projectType. find a way to re-enable this
-      return chain([addAnimationsModule(options), addFontsToIndex(options), addNovoAppStyles(options)]);
+    return chain([addAnimationsModule(options), addFontsToIndex(options), addNovoAppStyles(options)]);
     // }
     // context.logger.warn(
     //   'Novo Elements has been set up in your workspace. There is no additional setup ' +
