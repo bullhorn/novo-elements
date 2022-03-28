@@ -293,7 +293,6 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
         ]);
       }
     }
-    console.log('overlay strategy', strategy);
     return strategy;
   }
 
