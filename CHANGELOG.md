@@ -1,3 +1,12 @@
+## [6.0.5](https://github.com/bullhorn/novo-elements/compare/v6.0.4...v6.0.5) (2022-03-31)
+
+
+### Bug Fixes
+
+* **Chips:** Chips preview wasn't dispatch because select event was busted ([#1277](https://github.com/bullhorn/novo-elements/issues/1277)) ([52d3c9f](https://github.com/bullhorn/novo-elements/commit/52d3c9f9fcf43f268622d3dd35d4bca5628b343b))
+
+
+
 ## [6.0.4](https://github.com/bullhorn/novo-elements/compare/v6.0.3...v6.0.4) (2022-03-28)
 
 
