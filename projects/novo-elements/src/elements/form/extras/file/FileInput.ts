@@ -319,7 +319,8 @@ export class NovoFileInputElement
   }
 
   ngOnChanges(changes?: SimpleChanges) {
-    this.onModelChange(this.model);
+    // Removed 6.0.5, not sure why this was here
+    // this.onModelChange(this.model);}
   }
 
   updateLayout() {
