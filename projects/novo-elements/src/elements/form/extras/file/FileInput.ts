@@ -7,7 +7,6 @@ import {
   EventEmitter,
   HostBinding,
   Input,
-  OnChanges,
   OnDestroy,
   OnInit,
   Optional,
@@ -158,7 +157,7 @@ const NovoFileInputMixins: CanUpdateErrorStateCtor & typeof NovoFileInputBase = 
 })
 export class NovoFileInputElement
   extends NovoFileInputMixins
-  implements NovoFieldControl<any>, ControlValueAccessor, OnInit, OnDestroy, OnChanges
+  implements NovoFieldControl<any>, ControlValueAccessor, OnInit, OnDestroy
 {
   private _uniqueId: string = `novo-file-input-${++nextId}`;
   /** The aria-describedby attribute on the chip list for improved a11y. */
@@ -316,10 +315,6 @@ export class NovoFileInputElement
     if (dragulaHasFileOutputBag) {
       this.dragula.destroy(this.fileOutputBag);
     }
-  }
-
-  ngOnChanges(changes?: SimpleChanges) {
-    this.onModelChange(this.model);
   }
 
   updateLayout() {
