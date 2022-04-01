@@ -64,6 +64,43 @@ const MAX_PAGES_DISPLAYED = 5;
         <span>{{ labels.next }}</span>
       </novo-button>
     </ng-container>
+    <ng-container *ngIf="theme === 'bare'">
+      <h5 class="rows">{{ labels.itemsPerPage }}</h5>
+      <novo-select
+        [options]="displayedPageSizeOptions"
+        [placeholder]="labels.select"
+        [(ngModel)]="pageSize"
+        (onSelect)="changePageSize($event.selected)"
+        data-automation-id="pager-select"
+        [attr.data-feature-id]="dataFeatureId"
+      >
+      </novo-select>
+      <span class="spacer"></span>
+      <novo-button
+        theme="dialogue"
+        type="button"
+        class="novo-data-table-pagination-navigation-previous"
+        (click)="previousPage()"
+        icon="previous"
+        side="left"
+        [disabled]="!hasPreviousPage()"
+        data-automation-id="novo-data-table-pagination-previous"
+      >
+        <span>{{ labels.previous }}</span>
+      </novo-button>
+      <novo-button
+        theme="dialogue"
+        type="button"
+        class="novo-data-table-pagination-navigation-next"
+        (click)="nextPage()"
+        icon="next"
+        side="right"
+        [disabled]="!hasNextPage()"
+        data-automation-id="novo-data-table-pagination-next"
+      >
+        <span>{{ labels.next }}</span>
+      </novo-button>
+    </ng-container>
     <ng-container *ngIf="theme === 'standard'">
       <h5 class="rows">{{ labels.itemsPerPage }}</h5>
       <novo-select
@@ -135,6 +172,8 @@ export class NovoDataTablePagination<T> implements OnInit, OnDestroy {
   public canSelectAll: boolean = false;
   @Input()
   public allMatchingSelected: boolean = false;
+  @Input()
+  public currentlyEmpty: boolean = false;
 
   @Input()
   get length(): number {
@@ -208,6 +247,9 @@ export class NovoDataTablePagination<T> implements OnInit, OnDestroy {
   }
 
   public hasNextPage(): boolean {
+    if (this.length === null) {
+      return !(this.currentlyEmpty && (this.state.page > 0 || (this.state.page === 0 && this.state.userFiltered)));
+    }
     const numberOfPages = Math.ceil(this.length / this.pageSize) - 1;
     return this.page < numberOfPages && this.pageSize !== 0;
   }
@@ -262,6 +304,10 @@ export class NovoDataTablePagination<T> implements OnInit, OnDestroy {
   }
 
   private calculateTotalPages() {
+    if (this.length === null) {
+      return null;
+    }
+
     const totalPages = this.pageSize < 1 ? 1 : Math.ceil(this.length / this.pageSize);
     return Math.max(totalPages || 0, 1);
   }
@@ -276,6 +322,10 @@ export class NovoDataTablePagination<T> implements OnInit, OnDestroy {
 
   private getPages(currentPage: number, totalPages: number): { number: number; text: string; active: boolean }[] {
     const pages = [];
+
+    if (totalPages === null) {
+      return pages;
+    }
 
     // Default page limits
     let startPage = 1;

@@ -21,6 +21,7 @@ export class NovoLabelService {
   dateAdded = 'Date Added';
   emptyTableMessage = 'No Records to display...';
   noMatchingRecordsMessage = 'No Matching Records';
+  noMoreRecordsMessage = 'No more records. Click "Previous" to go back.';
   erroredTableMessage = 'Oops! An error occurred.';
   pickerError = 'Oops! An error occurred.';
   pickerTextFieldEmpty = 'Begin typing to see results.';
@@ -236,6 +237,10 @@ export class NovoLabelService {
   }
 
   getRangeText(page: number, pageSize: number, length: number, short: boolean): string {
+    if (length === null) {
+      return null;
+    }
+
     if (length === 0 || pageSize === 0) {
       return `Displaying 0 of ${length}`;
     }

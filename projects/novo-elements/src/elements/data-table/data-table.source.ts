@@ -16,7 +16,7 @@ export class DataTableSource<T> extends DataSource<T> {
   private totalSet: boolean = false;
 
   get totallyEmpty(): boolean {
-    return this.total === 0;
+    return this.total === 0 && this.current === 0;
   }
 
   get currentlyEmpty(): boolean {
@@ -43,7 +43,10 @@ export class DataTableSource<T> extends DataSource<T> {
           this.state.outsideFilter,
         );
       }),
-      map((data: { results: T[]; total: number }) => {
+      map((data: { results: T[]; total?: number }) => {
+        if (data.total === undefined) {
+          data.total = null;
+        }
         if (!this.totalSet || this.state.isForceRefresh) {
           this.total = data.total;
           this.totalSet = true;
