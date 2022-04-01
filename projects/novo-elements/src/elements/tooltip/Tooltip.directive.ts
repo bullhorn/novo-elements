@@ -21,7 +21,7 @@ export class TooltipDirective implements OnDestroy, OnInit {
   @Input('tooltipSize')
   size: string;
   @Input('tooltipBounce')
-  bounce: string;
+  bounce: boolean;
   @Input('tooltipNoAnimate')
   noAnimate: boolean;
   @Input('tooltipRounded')
@@ -109,6 +109,7 @@ export class TooltipDirective implements OnDestroy, OnInit {
     tooltipInstance.noAnimate = this.noAnimate;
     tooltipInstance.position = this.removeArrow ? 'no-arrow' : this.position;
     tooltipInstance.isHTML = this.isHTML;
+    tooltipInstance.bounce = this.bounce;
   }
 
   private hide(): void {
