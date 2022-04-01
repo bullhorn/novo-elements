@@ -426,7 +426,8 @@ novo-data-table {
   .novo-data-table-empty-container {
     padding-top: 0;
   }
-  .novo-data-table-no-results-container {
+  .novo-data-table-no-results-container,
+  .novo-data-table-no-more-results-container {
     position: absolute;
     top: 48%;
     left: 0;
@@ -434,7 +435,8 @@ novo-data-table {
     width: 100%;
   }
   .novo-data-table-empty-container,
-  .novo-data-table-no-results-container {
+  .novo-data-table-no-results-container,
+  .novo-data-table-no-more-results-container {
     padding: 2em;
     flex: 1;
     display: flex;
@@ -625,6 +627,66 @@ novo-data-table-pagination {
         color: $company;
         background-color: $off-white;
         opacity: 1;
+      }
+    }
+  }
+  &.bare {
+    display: flex;
+    flex-flow: row nowrap;
+    flex: 1;
+    > * {
+      margin: auto 5px;
+    }
+    h5.rows {
+      padding: 0;
+      font-size: 12px;
+      opacity: 0.75;
+      letter-spacing: 0.1px;
+    }
+    span.spacer {
+      flex: 1;
+    }
+    novo-select {
+      max-width: 100px;
+      min-width: 100px;
+      div[type="button"] {
+        &:hover {
+          i {
+            opacity: 0.75;
+          }
+        }
+        &:active,
+        &:focus {
+          i {
+            opacity: 1;
+          }
+        }
+        i {
+          opacity: 0.45;
+        }
+      }
+    }
+    > button:first-of-type {
+      margin-right: 5px;
+    }
+    > button {
+      span {
+        display: none;
+        @media (min-width: $breakpoint) {
+          display: block;
+        }
+      }
+    }
+    > button[theme][theme="dialogue"][icon][side="left"] {
+      padding: 5px;
+      @media (min-width: $breakpoint) {
+        padding: 5px 15px 5px 5px;
+      }
+    }
+    > button[theme][theme="dialogue"][icon][side="right"] {
+      padding: 5px;
+      @media (min-width: $breakpoint) {
+        padding: 5px 5px 5px 15px;
       }
     }
   }

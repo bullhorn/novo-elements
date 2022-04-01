@@ -71,6 +71,7 @@ import { DataTableState } from './state/data-table-state.service';
         [dataFeatureId]="paginatorDataFeatureId"
         [canSelectAll]="canSelectAll"
         [allMatchingSelected]="allMatchingSelected"
+        [currentlyEmpty]="dataSource?.currentlyEmpty"
       >
       </novo-data-table-pagination>
       <div class="novo-data-table-actions" *ngIf="templates['customActions']">
@@ -157,10 +158,19 @@ import { DataTableState } from './state/data-table-state.service';
         <div
           class="novo-data-table-no-results-container"
           [style.left.px]="scrollLeft"
-          *ngIf="dataSource?.currentlyEmpty && state.userFiltered && !dataSource?.loading && !loading && !dataSource.pristine"
+          *ngIf="dataSource?.currentlyEmpty && state.userFiltered && state.page === 0 && !dataSource?.loading && !loading && !dataSource.pristine"
         >
           <div class="novo-data-table-empty-message">
             <ng-container *ngTemplateOutlet="templates['noResultsMessage'] || templates['defaultNoResultsMessage']"></ng-container>
+          </div>
+        </div>
+        <div
+          class="novo-data-table-no-more-results-container"
+          [style.left.px]="scrollLeft"
+          *ngIf="dataSource?.currentlyEmpty && state.page > 0 && !dataSource?.loading && !loading && !dataSource.pristine"
+        >
+          <div class="novo-data-table-empty-message">
+            <ng-container *ngTemplateOutlet="templates['noMoreResultsMessage'] || templates['defaultNoMoreResultsMessage']"></ng-container>
           </div>
         </div>
       </div>
@@ -249,6 +259,9 @@ import { DataTableState } from './state/data-table-state.service';
     </ng-template>
     <ng-template novoTemplate="defaultNoResultsMessage">
       <h4><i class="bhi-search-question"></i> {{ labels.noMatchingRecordsMessage }}</h4>
+    </ng-template>
+    <ng-template novoTemplate="defaultNoMoreResultsMessage">
+      <h4><i class="bhi-search-question"></i> {{ labels.noMoreRecordsMessage }}</h4>
     </ng-template>
     <ng-template novoTemplate="defaultEmptyMessage">
       <h4><i class="bhi-search-question"></i> {{ labels.emptyTableMessage }}</h4>
