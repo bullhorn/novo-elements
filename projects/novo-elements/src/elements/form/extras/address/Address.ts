@@ -273,7 +273,7 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
         }
         this.stateOptions = this.config[field].pickerConfig.options;
         this.config[field].pickerConfig.options = (query = '') => {
-          return this.stateOptions(query, this.model.countryID);
+          return this.stateOptions(query, undefined, this.model.countryID);
         };
         this.config[field].pickerConfig.defaultOptions = this.stateOptions;
       }
