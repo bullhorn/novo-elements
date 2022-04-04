@@ -31,7 +31,6 @@ const MAX_PAGES_DISPLAYED = 5;
         </novo-tiles>
         <div *ngIf="displayedPageSizeOptions.length <= 1">{{ pageSize }}</div>
       </div>
-
       <div class="novo-data-table-range-label-long" data-automation-id="novo-data-table-pagination-range-label-long">
         {{ longRangeLabel }}
       </div>
@@ -39,32 +38,8 @@ const MAX_PAGES_DISPLAYED = 5;
         {{ shortRangeLabel }}
       </div>
       <span class="spacer novo-data-table-spacer" *ngIf="theme === 'basic-wide'"></span>
-      <novo-button
-        theme="dialogue"
-        type="button"
-        class="novo-data-table-pagination-navigation-previous"
-        (click)="previousPage()"
-        icon="previous"
-        side="left"
-        [disabled]="!hasPreviousPage()"
-        data-automation-id="novo-data-table-pagination-previous"
-      >
-        <span>{{ labels.previous }}</span>
-      </novo-button>
-      <novo-button
-        theme="dialogue"
-        type="button"
-        class="novo-data-table-pagination-navigation-next"
-        (click)="nextPage()"
-        icon="next"
-        side="right"
-        [disabled]="!hasNextPage()"
-        data-automation-id="novo-data-table-pagination-next"
-      >
-        <span>{{ labels.next }}</span>
-      </novo-button>
     </ng-container>
-    <ng-container *ngIf="theme === 'bare'">
+    <ng-container *ngIf="theme === 'standard' || theme === 'bare'">
       <h5 class="rows">{{ labels.itemsPerPage }}</h5>
       <novo-select
         [options]="displayedPageSizeOptions"
@@ -76,6 +51,8 @@ const MAX_PAGES_DISPLAYED = 5;
       >
       </novo-select>
       <span class="spacer"></span>
+    </ng-container>
+    <ng-container *ngIf="theme === 'basic' || theme === 'basic-wide' || theme === 'bare'">
       <novo-button
         theme="dialogue"
         type="button"
@@ -102,17 +79,6 @@ const MAX_PAGES_DISPLAYED = 5;
       </novo-button>
     </ng-container>
     <ng-container *ngIf="theme === 'standard'">
-      <h5 class="rows">{{ labels.itemsPerPage }}</h5>
-      <novo-select
-        [options]="displayedPageSizeOptions"
-        [placeholder]="labels.select"
-        [(ngModel)]="pageSize"
-        (onSelect)="changePageSize($event.selected)"
-        data-automation-id="pager-select"
-        [attr.data-feature-id]="dataFeatureId"
-      >
-      </novo-select>
-      <span class="spacer"></span>
       <ul class="pager" data-automation-id="pager">
         <li class="page" (click)="selectPage(page - 1)" [ngClass]="{ disabled: page === 0 }">
           <i class="bhi-previous" data-automation-id="pager-previous"></i>
