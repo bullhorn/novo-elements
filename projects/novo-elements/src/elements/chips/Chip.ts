@@ -334,6 +334,7 @@ export class NovoChipElement extends NovoChipMixinBase implements FocusableOptio
     } else {
       event.stopPropagation();
     }
+    this.toggleSelected(true);
   }
 
   /** Handle custom key presses. */
