@@ -32,10 +32,11 @@
         & > novo-text,
         & > novo-label,
         & > novo-icon,
-        & > novo-title {
+        & novo-title {
           color: inherit;
         }
-        & > novo-action {
+        novo-action,
+        .links {
           button,
           novo-button {
             color: inherit;
