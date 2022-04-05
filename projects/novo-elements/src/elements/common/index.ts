@@ -12,5 +12,5 @@ export * from './mixins';
 export * from './novo-template';
 export * from './option';
 export * from './selection';
-export * from './tokens/theme-options';
+export * from './theme/theme-options';
 export * from './typography';

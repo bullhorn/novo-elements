@@ -1,7 +1,7 @@
 // NG2
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -15,8 +15,8 @@ import {
   NovoElementsModule,
   NovoLabelService,
   NovoModalService,
+  NovoTheme,
   NovoToastService,
-  NOVO_THEME_OPTIONS,
 } from 'novo-elements';
 import { NovoExamplesRoutesModule } from 'novo-examples';
 import { environment } from '../environments/environment';
@@ -35,6 +35,12 @@ export function provideAppBridgeService(http) {
     return new DevAppBridgeService(http);
   }
   return new AppBridgeService();
+}
+
+export function provideApplicationContext(theme: NovoTheme) {
+  return async () => {
+    theme.use({ themeName: 'classic' });
+  };
 }
 
 @NgModule({
@@ -68,10 +74,10 @@ export function provideAppBridgeService(http) {
       deps: [HttpClient],
     },
     {
-      provide: NOVO_THEME_OPTIONS,
-      useValue: {
-        themeName: 'classic',
-      },
+      provide: APP_INITIALIZER,
+      multi: true,
+      deps: [NovoTheme],
+      useFactory: provideApplicationContext,
     },
   ],
   bootstrap: [AppComponent],

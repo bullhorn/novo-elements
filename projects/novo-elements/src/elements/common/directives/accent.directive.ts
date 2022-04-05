@@ -1,23 +1,34 @@
 // tslint:disable: directive-selector
-import { Directive, ElementRef, HostBinding, Inject, Input, Optional } from '@angular/core';
-import { NovoThemeOptions, NOVO_THEME_OPTIONS } from '../tokens/theme-options';
+import { ChangeDetectorRef, Directive, ElementRef, HostBinding, Input } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { NovoTheme, ThemeChangeEvent } from '../theme/theme-options';
 
 @Directive({
   selector: '[accent]',
 })
 export class AccentColorDirective {
+  private subscription: Subscription;
+
   @Input() accent: string;
 
   @HostBinding('class')
   get hb_textColor() {
     // Support legacy classic theme... for now
-    if (this.themeOptions.themeName === 'classic') {
+    if (this.theme.themeName === 'classic') {
       return `novo-theme-${this.accent}`;
     }
     return `novo-accent-${this.accent}`;
   }
 
-  constructor(private el: ElementRef, @Optional() @Inject(NOVO_THEME_OPTIONS) private themeOptions: NovoThemeOptions) {
-    console.log('Found Theme Options', themeOptions);
+  constructor(private el: ElementRef, private theme: NovoTheme, protected cdr: ChangeDetectorRef) {
+    console.log('Found Theme Options', theme);
+    this.subscription = this.theme.onThemeChange.subscribe((event: ThemeChangeEvent) => {
+      console.log('theme changed', event);
+      this.cdr.markForCheck();
+    });
+  }
+
+  onDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }
