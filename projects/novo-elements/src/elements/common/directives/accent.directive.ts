@@ -21,9 +21,7 @@ export class AccentColorDirective {
   }
 
   constructor(private el: ElementRef, private theme: NovoTheme, protected cdr: ChangeDetectorRef) {
-    console.log('Found Theme Options', theme);
     this.subscription = this.theme.onThemeChange.subscribe((event: ThemeChangeEvent) => {
-      console.log('theme changed', event);
       this.cdr.markForCheck();
     });
   }
