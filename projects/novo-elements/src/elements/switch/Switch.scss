@@ -36,7 +36,7 @@ $switch-thumb-size: 20px !default;
     height: $switch-height;
     position: relative;
     user-select: none;
-    margin-right: 8px;
+    margin: 0 8px;
   }
   &:not(.novo-switch-disabled) {
     &.novo-switch-dragging .novo-switch-container,
