@@ -273,7 +273,7 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
         }
         this.stateOptions = this.config[field].pickerConfig.options;
         this.config[field].pickerConfig.options = (query = '') => {
-          return this.stateOptions(query, this.model.countryID);
+          return this.stateOptions(query, undefined, this.model.countryID);
         };
         this.config[field].pickerConfig.defaultOptions = this.stateOptions;
       }
@@ -417,9 +417,9 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
   updateStates() {
     if (this.config.state.pickerConfig.options && !Helpers.isBlank(this.model.countryID)) {
       this.config.state.pickerConfig.options = (query = '') => {
-        return this.stateOptions(query, this.model.countryID);
+        return this.stateOptions(query, undefined, this.model.countryID);
       };
-      this.stateOptions('', this.model.countryID).then((results) => {
+      this.stateOptions('', undefined, this.model.countryID).then((results) => {
         this.config.state.pickerConfig.defaultOptions = results;
         if (results.length) {
           this.tooltip.state = undefined;
@@ -514,7 +514,7 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
     return {
       field: 'value',
       format: '$label',
-      options: (query = '', countryID) => {
+      options: (query = '', page: undefined, countryID) => {
         return Promise.resolve(this.getStateOptions(query, countryID));
       },
       getLabels: (state: string) => {
