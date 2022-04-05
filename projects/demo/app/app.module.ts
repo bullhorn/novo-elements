@@ -16,6 +16,7 @@ import {
   NovoLabelService,
   NovoModalService,
   NovoToastService,
+  NOVO_THEME_OPTIONS,
 } from 'novo-elements';
 import { NovoExamplesRoutesModule } from 'novo-examples';
 import { environment } from '../environments/environment';
@@ -65,6 +66,12 @@ export function provideAppBridgeService(http) {
       provide: AppBridgeService,
       useFactory: provideAppBridgeService,
       deps: [HttpClient],
+    },
+    {
+      provide: NOVO_THEME_OPTIONS,
+      useValue: {
+        themeName: 'classic',
+      },
     },
   ],
   bootstrap: [AppComponent],
