@@ -14,14 +14,14 @@ export class AccentColorDirective {
   @HostBinding('class')
   get hb_textColor() {
     // Support legacy classic theme... for now
-    if (this.theme.themeName === 'classic') {
-      return `novo-theme-${this.accent}`;
+    if (this.novoTheme.themeName === 'classic') {
+      return '';
     }
     return `novo-accent-${this.accent}`;
   }
 
-  constructor(private el: ElementRef, private theme: NovoTheme, protected cdr: ChangeDetectorRef) {
-    this.subscription = this.theme.onThemeChange.subscribe((event: ThemeChangeEvent) => {
+  constructor(private el: ElementRef, private novoTheme: NovoTheme, protected cdr: ChangeDetectorRef) {
+    this.subscription = this.novoTheme.onThemeChange.subscribe((event: ThemeChangeEvent) => {
       this.cdr.markForCheck();
     });
   }
