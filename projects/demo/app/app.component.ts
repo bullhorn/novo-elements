@@ -1,7 +1,7 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { AfterViewInit, Component, ViewChild, ViewContainerRef } from '@angular/core';
 import { Router, Scroll } from '@angular/router';
-import { NovoLayoutContent, NovoModalService, NovoSidenavComponent, NovoTheme, NovoToastService } from 'novo-elements';
+import { NovoLayoutContent, NovoModalService, NovoSidenavComponent, NovoToastService } from 'novo-elements';
 import { delay, filter, startWith } from 'rxjs/operators';
 import { AnchorViewportScroller } from './anchor-scroller';
 @Component({
@@ -31,7 +31,6 @@ export class AppComponent implements AfterViewInit {
     toaster: NovoToastService,
     modalService: NovoModalService,
     private observer: BreakpointObserver,
-    private theme: NovoTheme,
   ) {
     toaster.parentViewContainer = viewContainerRef;
     // modalService.parentViewContainer = viewContainerRef;
@@ -96,9 +95,5 @@ export class AppComponent implements AfterViewInit {
 
   toggleDarkMode() {
     document.documentElement.classList.toggle('theme-dark');
-  }
-
-  toggleClassicMode() {
-    this.theme.themeName = this.theme.themeName === 'classic' ? 'modern-light' : 'classic';
   }
 }
