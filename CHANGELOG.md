@@ -1,3 +1,12 @@
+# [6.1.0](https://github.com/bullhorn/novo-elements/compare/v6.0.5...v6.1.0) (2022-04-06)
+
+
+### Features
+
+* Added Theme Options Token to allow classic header theme support ([#1282](https://github.com/bullhorn/novo-elements/issues/1282)) ([cfcb92e](https://github.com/bullhorn/novo-elements/commit/cfcb92e5c8377d02536a42eaeead0f0ab63595b6))
+
+
+
 ## [6.0.5](https://github.com/bullhorn/novo-elements/compare/v6.0.4...v6.0.5) (2022-03-31)
 
 
