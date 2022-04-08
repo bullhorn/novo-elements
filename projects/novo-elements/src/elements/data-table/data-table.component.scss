@@ -534,15 +534,19 @@ novo-data-table-pagination {
         display: block;
       }
     }
-    > .novo-data-table-spacer {
-      width: 100%;
-    }
     > .novo-data-table-range-label-short {
       display: block;
       @media (min-width: $breakpoint) {
         display: none;
       }
     }
+    > .novo-data-table-spacer {
+      width: 100%;
+    }
+  }
+  &.basic,
+  &.basic-wide,
+  &.bare {
     > button:first-of-type {
       margin-right: 5px;
     }
@@ -567,7 +571,8 @@ novo-data-table-pagination {
       }
     }
   }
-  &.standard {
+  &.standard,
+  &.bare {
     display: flex;
     flex-flow: row nowrap;
     flex: 1;
@@ -579,9 +584,6 @@ novo-data-table-pagination {
       font-size: 12px;
       opacity: 0.75;
       letter-spacing: 0.1px;
-    }
-    span.spacer {
-      flex: 1;
     }
     novo-select {
       max-width: 100px;
@@ -603,6 +605,11 @@ novo-data-table-pagination {
         }
       }
     }
+    span.spacer {
+      flex: 1;
+    }
+  }
+  &.standard {
     .pager {
       list-style-type: none;
       user-select: none;
@@ -627,66 +634,6 @@ novo-data-table-pagination {
         color: $company;
         background-color: $off-white;
         opacity: 1;
-      }
-    }
-  }
-  &.bare {
-    display: flex;
-    flex-flow: row nowrap;
-    flex: 1;
-    > * {
-      margin: auto 5px;
-    }
-    h5.rows {
-      padding: 0;
-      font-size: 12px;
-      opacity: 0.75;
-      letter-spacing: 0.1px;
-    }
-    span.spacer {
-      flex: 1;
-    }
-    novo-select {
-      max-width: 100px;
-      min-width: 100px;
-      div[type="button"] {
-        &:hover {
-          i {
-            opacity: 0.75;
-          }
-        }
-        &:active,
-        &:focus {
-          i {
-            opacity: 1;
-          }
-        }
-        i {
-          opacity: 0.45;
-        }
-      }
-    }
-    > button:first-of-type {
-      margin-right: 5px;
-    }
-    > button {
-      span {
-        display: none;
-        @media (min-width: $breakpoint) {
-          display: block;
-        }
-      }
-    }
-    > button[theme][theme="dialogue"][icon][side="left"] {
-      padding: 5px;
-      @media (min-width: $breakpoint) {
-        padding: 5px 15px 5px 5px;
-      }
-    }
-    > button[theme][theme="dialogue"][icon][side="right"] {
-      padding: 5px;
-      @media (min-width: $breakpoint) {
-        padding: 5px 5px 5px 15px;
       }
     }
   }
