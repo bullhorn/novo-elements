@@ -139,7 +139,7 @@ export class NovoDataTablePagination<T> implements OnInit, OnDestroy {
   @Input()
   public allMatchingSelected: boolean = false;
   @Input()
-  public currentlyEmpty: boolean = false;
+  public currentTotal: number;
 
   @Input()
   get length(): number {
@@ -214,7 +214,7 @@ export class NovoDataTablePagination<T> implements OnInit, OnDestroy {
 
   public hasNextPage(): boolean {
     if (this.length === null) {
-      return !(this.currentlyEmpty && (this.state.page > 0 || (this.state.page === 0 && this.state.userFiltered)));
+      return !(this.currentTotal < this.pageSize);
     }
     const numberOfPages = Math.ceil(this.length / this.pageSize) - 1;
     return this.page < numberOfPages && this.pageSize !== 0;

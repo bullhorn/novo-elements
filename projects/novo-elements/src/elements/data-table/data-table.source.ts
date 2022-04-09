@@ -16,7 +16,7 @@ export class DataTableSource<T> extends DataSource<T> {
   private totalSet: boolean = false;
 
   get totallyEmpty(): boolean {
-    return this.total === 0 && this.current === 0;
+    return this.total === 0;
   }
 
   get currentlyEmpty(): boolean {
