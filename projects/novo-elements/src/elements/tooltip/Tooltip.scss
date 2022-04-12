@@ -144,13 +144,19 @@ novo-tooltip {
 
     // Bounce
     &.bounce {
-      animation: bounce .75s ease-in-out infinite;
+      animation: bounce 0.75s ease-in-out infinite;
     }
 
     @keyframes bounce {
-      0% { transform: translateY(0px); }
-      50% { transform: translateY(-10px); }
-      100% { transform: translateY(0px); }
+      0% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+      100% {
+        transform: translateY(0px);
+      }
     }
   }
 }

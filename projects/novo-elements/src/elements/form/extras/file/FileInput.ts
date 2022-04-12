@@ -12,7 +12,6 @@ import {
   Optional,
   Output,
   Self,
-  SimpleChanges,
   TemplateRef,
   ViewChild,
   ViewContainerRef,
@@ -155,10 +154,7 @@ const NovoFileInputMixins: CanUpdateErrorStateCtor & typeof NovoFileInputBase = 
     </ng-template>
   `,
 })
-export class NovoFileInputElement
-  extends NovoFileInputMixins
-  implements NovoFieldControl<any>, ControlValueAccessor, OnInit, OnDestroy
-{
+export class NovoFileInputElement extends NovoFileInputMixins implements NovoFieldControl<any>, ControlValueAccessor, OnInit, OnDestroy {
   private _uniqueId: string = `novo-file-input-${++nextId}`;
   /** The aria-describedby attribute on the chip list for improved a11y. */
   _ariaDescribedby: string;

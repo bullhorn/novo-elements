@@ -274,10 +274,7 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
       .withPositions([defaultPosition]);
     // .setDirection('ltr');
     if (this.position === 'bottom') {
-      strategy = strategy.withPositions([
-        defaultPosition,
-        { originX: fallbackX, originY: 'bottom', overlayX: fallbackX, overlayY: 'top' }
-      ]);
+      strategy = strategy.withPositions([defaultPosition, { originX: fallbackX, originY: 'bottom', overlayX: fallbackX, overlayY: 'top' }]);
     } else if (this.position === 'right' || this.position === 'default' || this.position.includes('above-below')) {
       strategy = strategy.withPositions([
         defaultPosition,
