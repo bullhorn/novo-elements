@@ -1,7 +1,7 @@
 // NG2
 import { EventEmitter, Injectable } from '@angular/core';
 
-@Injectable({ providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class Security {
   credentials: string[] = [];
   change: EventEmitter<any> = new EventEmitter();
