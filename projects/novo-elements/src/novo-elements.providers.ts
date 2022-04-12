@@ -13,7 +13,6 @@ import { NovoToastService } from './elements/toast/ToastService';
 import { DateFormatService } from './services/date-format/DateFormat';
 import { BrowserGlobalRef, GlobalRef } from './services/global/global.service';
 import { OptionsService } from './services/options/OptionsService';
-import { Security } from './services/security/Security';
 import { LocalStorageService } from './services/storage/storage.service';
 import { NovoTemplateService } from './services/template/NovoTemplateService';
 import { ComponentUtils } from './utils/component-utils/ComponentUtils';
@@ -32,7 +31,6 @@ const NOVO_ELEMENTS_PROVIDERS = [
   { provide: OptionsService, useClass: OptionsService },
   FieldInteractionApi,
   DateFormatService,
-  Security,
   NovoTemplateService,
 ];
 

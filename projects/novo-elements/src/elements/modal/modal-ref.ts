@@ -12,29 +12,29 @@ export interface ModalParams {
 }
 export class NovoModalParams implements ModalParams {}
 
-export class NovoModalRef<T = any> {
+export class NovoModalRef<T = any, R = any> {
   constructor(public component: any, public params: T, private overlayRef: OverlayRef) {}
 
-  private _beforeClose = new Subject<any>();
-  private _afterClosed = new Subject<any>();
+  private _beforeClose = new Subject<R>();
+  private _afterClosed = new Subject<R>();
 
   componentInstance: NovoModalContainerComponent;
   isClosed: boolean = false;
 
   // Gets a promise that is resolved when the dialog is closed.
-  get onClosed(): Promise<any> {
+  get onClosed(): Promise<R> {
     return this._afterClosed.toPromise();
   }
 
-  afterClosed(): Observable<any> {
+  afterClosed(): Observable<R> {
     return this._afterClosed.asObservable();
   }
 
-  beforeClose(): Observable<any> {
+  beforeClose(): Observable<R> {
     return this._beforeClose.asObservable();
   }
 
-  close(result?: any): void {
+  close(result?: R): void {
     // Listen for animation 'start' events
     this.componentInstance.animationStateChanged
       .pipe(
