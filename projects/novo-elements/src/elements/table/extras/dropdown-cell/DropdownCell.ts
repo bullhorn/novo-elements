@@ -36,11 +36,8 @@ export interface INovoDropdownCellConfig {
 export class NovoDropdownCell extends BaseRenderer implements OnInit {
   @Input()
   meta: any;
-
   @Input()
-  set value(v: any) {
-    this._value = v;
-  }
+  value: any;
 
   public ngOnInit(): void {
     // Check for and fix bad config

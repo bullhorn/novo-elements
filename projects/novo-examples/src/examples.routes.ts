@@ -302,7 +302,7 @@ export class AsideDevelopPage {
 @Component({
   selector: 'aside-examples-page',
   template: `<h2>Custom</h2>
-<p>In the case where &quot;Success&quot;, &quot;Warning&quot;, and &quot;Error&quot; notfications aren't enough, use the custom notification. Custom notifcations allow any of the Bullhorn Icons to be used in the notification.</p>
+<p>In the case where &quot;Success&quot;, &quot;Warning&quot;, and &quot;Error&quot; notifications aren't enough, use the custom notification. Custom notifications allow any of the Bullhorn Icons to be used in the notification.</p>
 <p><code-example example="aside-usage"></code-example></p>
 <h2>Add</h2>
 <p>Add modals have a colored title bar based on the record type being created. Additionally, due to a greater than average amount of content, they have fixed footers.</p>
@@ -2153,7 +2153,7 @@ export class ModalDevelopPage {
 <p>Error modals indicate that an attempted action has failed. The first line should apologize and state the what happened. The second line should quickly attempt to explain to the user why this has happened, and instruct the user on the best course of action.</p>
 <p><code-example example="error-modal"></code-example></p>
 <h3>Custom</h3>
-<p>In the case where &quot;Success&quot;, &quot;Warning&quot;, and &quot;Error&quot; notfications aren't enough, use the custom notification. Custom notifcations allow any of the Bullhorn Icons to be used in the notification.</p>
+<p>In the case where &quot;Success&quot;, &quot;Warning&quot;, and &quot;Error&quot; notifications aren't enough, use the custom notification. Custom notifications allow any of the Bullhorn Icons to be used in the notification.</p>
 <p><code-example example="custom-modal"></code-example></p>
 <h2>Workflow Modals</h2>
 <h3>Add</h3>
@@ -5619,40 +5619,46 @@ export class TemplatesPage {
   selector: 'february-2022-page',
   template: `<h1>🚀 February 2022 (version 6 - Golden)</h1>
 <p><strong>Release v6.0.0</strong>: This release contains several component updates and additional new components. Initial refactoring of component architecture to support future efforts to improve the design systems consistency along with improvements to the developer experience.</p>
+<p>Note: This update is a major release which includes changes that require updates to your code. When updating to Novo Elements V6 from prior versions, the following commands are required:</p>
+<p>First follow the steps to update your angular app to <a href="https://update.angular.io/?v=9.0-10.0">Version 10</a></p>
+<pre><code><span class="hljs-attribute">npm</span> install --save timezone-support@<span class="hljs-number">2</span> novo-design-tokens@<span class="hljs-number">0</span> angular-imask@<span class="hljs-number">6</span> imask@<span class="hljs-number">6</span>
+<span class="hljs-attribute">npm</span> install --save novo-elements@<span class="hljs-number">6</span>
+<span class="hljs-attribute">ng</span> update novo-elements --migrate-only --from=<span class="hljs-number">0</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span> --to=<span class="hljs-number">6</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span> --force --<span class="hljs-literal">allow</span>-dirty  
+</code></pre>
+<p>For any issues that are not corrected with the above command, please ask questions in the <a href="https://github.com/bullhorn/novo-elements/discussions/categories/q-a">Q&amp;A Page</a> in github.</p>
 <p>Welcome to the February 2022 release of Novo Elements. There are many updates in this version that we hope you will like, some of the key highlights include:</p>
 <ul>
-<li><a href="https://bullhorn.github.io/novo-elements/#/updates/v6#dev-principle">Development Principle</a> - Philosophy on why we are making these changes.</li>
-<li><a href="https://bullhorn.github.io/novo-elements/#/updates/v6#improved-docs">Improved Documentation</a> - Check out the new Design &amp; Developer Guideline.</li>
-<li><a href="https://bullhorn.github.io/novo-elements/#/updates/v6#design-tokens">Design Token &amp; Themes</a> - The Bullhorn brand has evolved and the design system.</li>
+<li><a href="https://bullhorn.github.io/novo-elements/docs/#/updates/v6#dev-principle">Development Principle</a> - Philosophy on why we are making these changes.</li>
+<li><a href="https://bullhorn.github.io/novo-elements/docs/#/updates/v6#improved-docs">Improved Documentation</a> - Check out the new Design &amp; Developer Guideline.</li>
+<li><a href="https://bullhorn.github.io/novo-elements/docs/#/updates/v6#design-tokens">Design Token &amp; Themes</a> - The Bullhorn brand has evolved and the design system.</li>
 <li><strong>New Components</strong>
 <ul>
-<li><a href="https://bullhorn.github.io/novo-elements/#/updates/v6#aside">Aside</a> - A replacement implementation for Preview slideouts, that is easy to use and works like modals.</li>
-<li><a href="https://bullhorn.github.io/novo-elements/#/updates/v6#autocomplete">Autocomplete</a> - Low-level feature to help composability of custom pickers.</li>
-<li><a href="https://bullhorn.github.io/novo-elements/#/updates/v6#avatar">Avatar</a> - Display user and entity images with fallback display.</li>
-<li><a href="https://bullhorn.github.io/novo-elements/#/updates/v6#breadcrumbs">Breadcrumbs</a> - Show nested navigation hierarchy.</li>
-<li><a href="https://bullhorn.github.io/novo-elements/#/updates/v6#menu">Menu</a> - Coalesce options into floating overlay with a myriad of trigger functionality.</li>
-<li><a href="https://bullhorn.github.io/novo-elements/#/updates/v6#layouts">Layout</a> - Easy to setup layouts with side navigation.</li>
-<li><a href="https://bullhorn.github.io/novo-elements/#/updates/v6#color-picker">Color Picker</a> - Pick a color, works with form inputs.</li>
-<li><a href="https://bullhorn.github.io/novo-elements/#/updates/v6#toolbar">Toolbar</a> - More flexible toolbar control, to use for page headers or navigation.</li>
+<li><a href="https://bullhorn.github.io/novo-elements/docs/#/updates/v6#aside">Aside</a> - A replacement implementation for Preview slideouts, that is easy to use and works like modals.</li>
+<li><a href="https://bullhorn.github.io/novo-elements/docs/#/updates/v6#autocomplete">Autocomplete</a> - Low-level feature to help composability of custom pickers.</li>
+<li><a href="https://bullhorn.github.io/novo-elements/docs/#/updates/v6#avatar">Avatar</a> - Display user and entity images with fallback display.</li>
+<li><a href="https://bullhorn.github.io/novo-elements/docs/#/updates/v6#breadcrumbs">Breadcrumbs</a> - Show nested navigation hierarchy.</li>
+<li><a href="https://bullhorn.github.io/novo-elements/docs/#/updates/v6#menu">Menu</a> - Coalesce options into floating overlay with a myriad of trigger functionality.</li>
+<li><a href="https://bullhorn.github.io/novo-elements/docs/#/updates/v6#layouts">Layout</a> - Easy to setup layouts with side navigation.</li>
+<li><a href="https://bullhorn.github.io/novo-elements/docs/#/updates/v6#color-picker">Color Picker</a> - Pick a color, works with form inputs.</li>
+<li><a href="https://bullhorn.github.io/novo-elements/docs/#/updates/v6#toolbar">Toolbar</a> - More flexible toolbar control, to use for page headers or navigation.</li>
 </ul>
 </li>
 <li><strong>Updated Components</strong>
 <ul>
-<li><a href="https://bullhorn.github.io/novo-elements/#/updates/v6#calendar">Calendar</a> - Support for multi-day selection, multi-month view, and can now be used independant of the data picker.</li>
-<li><a href="https://bullhorn.github.io/novo-elements/#/updates/v6#modals">Modal</a> - New animation and more events to better control Modals.</li>
-<li><a href="https://bullhorn.github.io/novo-elements/#/updates/v6#chips">Chips</a> - Still a WIP, but Chip, ChipList and ChipInput are now independant components that can be composed together separately.</li>
-<li><a href="https://bullhorn.github.io/novo-elements/#/updates/v6#select">Select &amp; Dropdown</a> - Overhaul of these component to consolidate functionality into the new <code>novo-option</code> component, to create a more declarative design.</li>
+<li><a href="https://bullhorn.github.io/novo-elements/docs/#/updates/v6#calendar">Calendar</a> - Support for multi-day selection, multi-month view, and can now be used independant of the data picker.</li>
+<li><a href="https://bullhorn.github.io/novo-elements/docs/#/updates/v6#modals">Modal</a> - New animation and more events to better control Modals.</li>
+<li><a href="https://bullhorn.github.io/novo-elements/docs/#/updates/v6#chips">Chips</a> - Still a WIP, but Chip, ChipList and ChipInput are now independant components that can be composed together separately.</li>
+<li><a href="https://bullhorn.github.io/novo-elements/docs/#/updates/v6#select">Select &amp; Dropdown</a> - Overhaul of these component to consolidate functionality into the new <code>novo-option</code> component, to create a more declarative design.</li>
 </ul>
 </li>
-<li><a href="https://bullhorn.github.io/novo-elements/#/updates/v6#preview-features">Preview Features</a> - Check some new features that are still in development.</li>
-<li><a href="https://bullhorn.github.io/novo-elements/#/updates/v6#notable-changes">Notable Changes</a> - We changed some things, we fixed some things, hopefully left everything better than before!</li>
+<li><a href="https://bullhorn.github.io/novo-elements/docs/#/updates/v6#preview-features">Preview Features</a> - Check some new features that are still in development.</li>
+<li><a href="https://bullhorn.github.io/novo-elements/docs/#/updates/v6#notable-changes">Notable Changes</a> - We changed some things, we fixed some things, hopefully left everything better than before!</li>
 </ul>
 <blockquote>
 <div class="p">If you'd like to read these release notes online, go to <a href="https://bullhorn.github.io/novo-elements/updates">Updates</a> on <a href="https://bullhorn.github.io/novo-elements">bullhorn.github.io/novo-elements</a>.</div>
 </blockquote>
 <p><strong>Notice</strong>: Want to try new features as soon as possible? You can always view the <code>upcoming</code> relase documentation for the <a href="https://bullhorn.github.io/novo-elements">Next Branch</a>. The code is available on <a href="https://github.com/bullhorn/novo-elements/tree/next">Github</a> follow the guides to build and try the latest updates as soon as they are available.</p>
-<h2 id="dev-principle">Development Principles <a href="https://bullhorn.github.io/novo-elements/#/updates/v6#dev-principle">#</a></h2>
-<p>This is a large update that helps clear a backlog of technical debt, there have been several breaking changes that should be covered with <code>ng update novo-elements --migrate-only --from=0.0.0 --to=6.0.0 --force --allow-dirty</code>.</p>
+<h2 id="dev-principle">Development Principles <a href="https://bullhorn.github.io/novo-elements/docs/#/updates/v6#dev-principle">#</a></h2>
 <p>The overall philosophy for the changes and improvement for the design system stems from the core principle of making each component more declarative vs imperative. To illustrate this with an example:</p>
 <p><strong>Source Options</strong></p>
 <pre><code class="language-ts"><span class="hljs-keyword">public</span> <span class="hljs-attr">options</span>: <span class="hljs-title class_">Array</span>&lt;<span class="hljs-built_in">any</span>&gt; = [
@@ -5674,58 +5680,58 @@ export class TemplatesPage {
 <span class="hljs-tag">&lt;/<span class="hljs-name">novo-select</span>&gt;</span>
 </code></pre>
 <p>While the <strong>New and Shiny Way</strong> might seem verbose, it actually creates infinite flexibility within the implementation.  When the developer is composing features within their application, the component will support things like adding icons on the left and right, displaying two rows of info in the options, alternatively before in our imperative design the design system would have to have be augmented to support subtle new variants.</p>
-<h2 id="improved-documentation">Improved Documentation <a href="https://bullhorn.github.io/novo-elements/#/updates/v6#improved-documentation">#</a></h2>
+<h2 id="improved-documentation">Improved Documentation <a href="https://bullhorn.github.io/novo-elements/docs/#/updates/v6#improved-documentation">#</a></h2>
 <p>The number one complaint we heard about the design system was that the documentation was sparse and not helpful. With the help of the UX teams we have Audited more than half of the components in the design system and added guidelines on the appropiate usage.  Developer docs with implementation and api details as well as an improvement to the Examples.</p>
 <p><img src="assets/images/updates/v6/v6-improved-docs.gif" alt="Design Guideline &amp; Best Practices" width="640px"></p>
-<h2 id="design-tokens">Design Token &amp; Themes <a href="https://bullhorn.github.io/novo-elements/#/updates/v6#design-tokens">#</a></h2>
+<h2 id="design-tokens">Design Token &amp; Themes <a href="https://bullhorn.github.io/novo-elements/docs/#/updates/v6#design-tokens">#</a></h2>
 <p>A significant milestone was reached in v6 which is to create a <a href="https://github.com/amzn/style-dictionary">Style Dictionary</a> to isolate our variables into a <a href="https://github.com/bullhorn/novo-design-tokens">design tokens library</a>.  A Style Dictionary uses design tokens to define styles once and use those styles on any platform or language. This will allow the novo design system to help us create a coheosive look and feel across all our product suites regardless of the technologies being used. It also helps create better structure of our variables and tokens to ensure ease of use.</p>
 <p>Future Plans are to:</p>
 <ul>
 <li>Create a base Bullhorn css stylesheet.</li>
 <li>Migrate all web tokens from sass variable to css variables</li>
 </ul>
-<h2 id="new-components">New Components<a href="https://bullhorn.github.io/novo-elements/#/updates/v6#new-components">#</a></h2>
-<h3 id="aside">Aside <a href="https://bullhorn.github.io/novo-elements/#/updates/v6#aside">#</a></h3>
+<h2 id="new-components">New Components<a href="https://bullhorn.github.io/novo-elements/docs/#/updates/v6#new-components">#</a></h2>
+<h3 id="aside">Aside <a href="https://bullhorn.github.io/novo-elements/docs/#/updates/v6#aside">#</a></h3>
 <p>Asides are slideouts designed to provide a view into related content within the page without navigating away. Asides work similar to Modal but the content is meant to be correlated and the workflow should be non-blocking.</p>
-<p>View the docs to <a href="https://bullhorn.github.io/novo-elements/#/components/aside/design">read more</a>.</p>
+<p>View the docs to <a href="https://bullhorn.github.io/novo-elements/docs/#/components/aside/design">read more</a>.</p>
 <p><img src="assets/images/updates/v6/v6-aside.gif" alt="New Aside Component" width="640px"></p>
 <hr>
-<h3 id="auto-complete">Autocomplete <a href="https://bullhorn.github.io/novo-elements/#/updates/v6#auto-complete">#</a></h3>
+<h3 id="auto-complete">Autocomplete <a href="https://bullhorn.github.io/novo-elements/docs/#/updates/v6#auto-complete">#</a></h3>
 <p>The autocomplete component is designed to provide a list of options as the user types that can be used to set the field value. The component can be used to set more complex data to the form. Usually the input does not require a valid option to be selected.</p>
-<p>View the docs to <a href="https://bullhorn.github.io/novo-elements/#/components/autocomplete/design">read more</a>.</p>
+<p>View the docs to <a href="https://bullhorn.github.io/novo-elements/docs/#/components/autocomplete/design">read more</a>.</p>
 <p><img src="assets/images/AutocompleteOverview.png" alt="New Autocomplete Component" width="640px"></p>
 <hr>
-<h3 id="avatar">Avatar <a href="https://bullhorn.github.io/novo-elements/#/updates/v6#avatar">#</a></h3>
+<h3 id="avatar">Avatar <a href="https://bullhorn.github.io/novo-elements/docs/#/updates/v6#avatar">#</a></h3>
 <p>Avatars are images used to represent users and organizations. They typically are squares with rounded edges.</p>
 <p>An avatar acts as a proxy for a user or entity (such as a company) in a product. They're often combined with status or presence indicators to give more context. Users generally upload their own image, otherwise, a default image is displayed</p>
-<p>View the docs to <a href="https://bullhorn.github.io/novo-elements/#/components/avatar/design">read more</a>.</p>
+<p>View the docs to <a href="https://bullhorn.github.io/novo-elements/docs/#/components/avatar/design">read more</a>.</p>
 <p><img src="assets/images/AvatarOverview.png" alt="New Avatar Component" width="640px"></p>
 <hr>
-<h3 id="breadcrumbs">Breadcrumbs <a href="https://bullhorn.github.io/novo-elements/#/updates/v6#breadcrumbs">#</a></h3>
+<h3 id="breadcrumbs">Breadcrumbs <a href="https://bullhorn.github.io/novo-elements/docs/#/updates/v6#breadcrumbs">#</a></h3>
 <p>A breadcrumb displays the current location within a hierarchy. It allows going back to states higher up in the hierarchy.</p>
-<p>View the docs to <a href="https://bullhorn.github.io/novo-elements/#/components/breadcrumbs/design">read more</a>.</p>
+<p>View the docs to <a href="https://bullhorn.github.io/novo-elements/docs/#/components/breadcrumbs/design">read more</a>.</p>
 <hr>
-<h3 id="menu">Menu <a href="https://bullhorn.github.io/novo-elements/#/updates/v6#menu">#</a></h3>
+<h3 id="menu">Menu <a href="https://bullhorn.github.io/novo-elements/docs/#/updates/v6#menu">#</a></h3>
 <p>Menu allow users to take an action by selecting from a list of choices revealed upon opening a temporary menu.</p>
 <p>Menus are contextual and all for actions to be performed based upon the context of the trigger or selection. Menus are great for consolidating many actions available to the user and can be used in a variety of different ways. Menus can be triggered from any element but usually limited to links, button, and icons.</p>
-<p>View the docs to <a href="https://bullhorn.github.io/novo-elements/#/components/menu/design">read more</a>.</p>
+<p>View the docs to <a href="https://bullhorn.github.io/novo-elements/docs/#/components/menu/design">read more</a>.</p>
 <p><img src="assets/images/MenuOverview.png" alt="New Menu Component" width="640px"></p>
 <hr>
-<h3 id="layout">Layout <a href="https://bullhorn.github.io/novo-elements/#/updates/v6#layout">#</a></h3>
+<h3 id="layout">Layout <a href="https://bullhorn.github.io/novo-elements/docs/#/updates/v6#layout">#</a></h3>
 <p>This is a series of components that introduce the ability to configure your application layout, we introduce the a new side navigation panel that can dock on the left or right or hide and collapse to make a more responsive application.</p>
-<p>Check out the <a href="https://bullhorn.github.io/novo-elements/#/layouts/sidenav">example</a> to learn more.</p>
+<p>Check out the <a href="https://bullhorn.github.io/novo-elements/docs/#/layouts/sidenav">example</a> to learn more.</p>
 <p><img src="assets/images/updates/v6/v6-sidenav.gif" alt="New Layout Components" width="640px"></p>
 <hr>
-<h3 id="color-picker">Color Picker <a href="https://bullhorn.github.io/novo-elements/#/updates/v6#color-picker">#</a></h3>
+<h3 id="color-picker">Color Picker <a href="https://bullhorn.github.io/novo-elements/docs/#/updates/v6#color-picker">#</a></h3>
 <p>Color Picker allow users to easily select a color swatch. It comes in a handful of varieties based on the content of the field.</p>
-<p>View the docs to <a href="https://bullhorn.github.io/novo-elements/#/form-controls/color-picker">read more</a>.</p>
+<p>View the docs to <a href="https://bullhorn.github.io/novo-elements/docs/#/form-controls/color-picker">read more</a>.</p>
 <hr>
-<h3 id="toolbar">Toolbar <a href="https://bullhorn.github.io/novo-elements/#/updates/v6#toolbar">#</a></h3>
+<h3 id="toolbar">Toolbar <a href="https://bullhorn.github.io/novo-elements/docs/#/updates/v6#toolbar">#</a></h3>
 <p>Toolbars are containers attached to the top or bottom of a page that contain actions and/or navigation. Toolbars can stack on-top of each providing varying levels of content. Toolbars usually act as headers or footers of the page.</p>
-<p>View the docs to <a href="https://bullhorn.github.io/novo-elements/#/components/toolbar/design">read more</a>.</p>
+<p>View the docs to <a href="https://bullhorn.github.io/novo-elements/docs/#/components/toolbar/design">read more</a>.</p>
 <p><img src="assets/images/ToolbarOverview.png" alt="New Toolbar Component" width="640px"></p>
-<h2 id="updated-components">Updated Components <a href="https://bullhorn.github.io/novo-elements/#/updates/v6#updated-components">#</a></h2>
-<h3 id="calendar">Calendar <a href="https://bullhorn.github.io/novo-elements/#/updates/v6#calendar">#</a></h3>
+<h2 id="updated-components">Updated Components <a href="https://bullhorn.github.io/novo-elements/docs/#/updates/v6#updated-components">#</a></h2>
+<h3 id="calendar">Calendar <a href="https://bullhorn.github.io/novo-elements/docs/#/updates/v6#calendar">#</a></h3>
 <p>The calendar has been refactored into smaller components to allow for a cleaner implementation when composing for the datepicker. Support for multi-day selection and multi-month view have been added. see new props below:</p>
 <table>
 <thead>
@@ -5749,17 +5755,17 @@ export class TemplatesPage {
 </tbody>
 </table>
 <hr>
-<h3 id="modal">Modal <a href="https://bullhorn.github.io/novo-elements/#/updates/v6#modal">#</a></h3>
+<h3 id="modal">Modal <a href="https://bullhorn.github.io/novo-elements/docs/#/updates/v6#modal">#</a></h3>
 <p>There are two objects injected into the Modal <code>NovoModalRef</code> and <code>NovoModalParams</code>.  Typing support for the NovoModalParams is difficult.  You no longer need to do this you only need the single reference to <code>NovoModalRef</code> which now accepts a generic. <code>ref:NovoModalRef&lt;DeleteModalParams&gt;</code> will now type the <code>ref.params</code>.</p>
 <p><code>NovoModalRef</code> used to only have the <code>onClosed</code> which returns a promise with and value returned from the Modal to the calling component.  We have added two new observables for <code>beforeClose</code> and <code>afterClosed</code> in order to</p>
 <p>Modals now have a smooth animation when opened and closed.</p>
-<p>View the docs to <a href="https://bullhorn.github.io/novo-elements/#/components/modals/design">read more</a>.</p>
+<p>View the docs to <a href="https://bullhorn.github.io/novo-elements/docs/#/components/modals/design">read more</a>.</p>
 <hr>
-<h3 id="chips">Chips <a href="https://bullhorn.github.io/novo-elements/#/updates/v6#chips">#</a></h3>
+<h3 id="chips">Chips <a href="https://bullhorn.github.io/novo-elements/docs/#/updates/v6#chips">#</a></h3>
 <p>This milestone, we introduce the Side Panel, a new surface in the workbench opposite the Side Bar, where you can house views from the Side Bar or the bottom Panel. Unlike moving the bottom Panel to the left or the right of the editor, the new Side Panel works in addition to the bottom Panel so you can see more sets of views at once.</p>
-<p>View the docs to <a href="https://bullhorn.github.io/novo-elements/#/form-controls/chips/design">read more</a>.</p>
+<p>View the docs to <a href="https://bullhorn.github.io/novo-elements/docs/#/form-controls/chips/design">read more</a>.</p>
 <hr>
-<h3 id="option">Select &amp; DropDowns <a href="https://bullhorn.github.io/novo-elements/#/updates/v6#option">#</a></h3>
+<h3 id="option">Select &amp; DropDowns <a href="https://bullhorn.github.io/novo-elements/docs/#/updates/v6#option">#</a></h3>
 <p>We already talked about the change from imperative to declarative. We have consolidated all of our display of option/menu-items used by many components into a single implmenation of <code>novo-option</code> and groupings with <code>novo-optgroup</code>.  Several new patterns for searching within optgroups are works in progress, but coming soon.  The major change is how to migrate <code>novo-dropdown</code> contents to the new implementation.</p>
 <p><strong>Old Way</strong></p>
 <pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">novo-dropdown</span>&gt;</span>
@@ -5776,6 +5782,7 @@ export class TemplatesPage {
 </code></pre>
 <p><strong>New and Shiny Way</strong></p>
 <pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">novo-dropdown</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">button</span>&gt;</span>trigger<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">novo-optgroup</span> <span class="hljs-attr">label</span>=<span class="hljs-string">&quot;Cats&quot;</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">novo-option</span> (<span class="hljs-attr">action</span>)=<span class="hljs-string">&quot;action(&#x27;1&#x27;)&quot;</span>&gt;</span>Persian<span class="hljs-tag">&lt;/<span class="hljs-name">novo-option</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">novo-option</span> (<span class="hljs-attr">action</span>)=<span class="hljs-string">&quot;action(&#x27;2&#x27;)&quot;</span>&gt;</span>Maine Coon<span class="hljs-tag">&lt;/<span class="hljs-name">novo-option</span>&gt;</span>
@@ -5784,10 +5791,10 @@ export class TemplatesPage {
     <span class="hljs-tag">&lt;<span class="hljs-name">novo-option</span> (<span class="hljs-attr">action</span>)=<span class="hljs-string">&quot;action(&#x27;3&#x27;)&quot;</span>&gt;</span>Cocker Spaniel<span class="hljs-tag">&lt;/<span class="hljs-name">novo-option</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">novo-option</span> (<span class="hljs-attr">action</span>)=<span class="hljs-string">&quot;action(&#x27;4&#x27;)&quot;</span>&gt;</span>Poodle<span class="hljs-tag">&lt;/<span class="hljs-name">novo-option</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">novo-optgroup</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">novo-select</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">novo-dropdown</span>&gt;</span>
 </code></pre>
-<h2 id="preview-features">Preview Features <a href="https://bullhorn.github.io/novo-elements/#/updates/v6#preview-features">#</a></h2>
-<h3 id="utility-directives">Utility Directives <a href="https://bullhorn.github.io/novo-elements/#/updates/v6#utility-directives">#</a></h3>
+<h2 id="preview-features">Preview Features <a href="https://bullhorn.github.io/novo-elements/docs/#/updates/v6#preview-features">#</a></h2>
+<h3 id="utility-directives">Utility Directives <a href="https://bullhorn.github.io/novo-elements/docs/#/updates/v6#utility-directives">#</a></h3>
 <p>Composing layouts is difficult especially when you need to create css classes for all your container.  It gets very repetitive add <code>display: flex</code> and <code>flex-direction: row</code>.  Now we have new utility components and directive to compose the general layout of a page without writing any css.  The goal is reduce application specific css to zero.  Here are the new features we have added to support this.</p>
 <ul>
 <li><code>&lt;novo-box&gt;</code></li>
@@ -5939,7 +5946,7 @@ export class TemplatesPage {
   <span class="hljs-tag">&lt;/<span class="hljs-name">novo-stack</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">novo-flex</span>&gt;</span>
 </code></pre>
-<h3 id="field">New Field Component <a href="https://bullhorn.github.io/novo-elements/#/updates/v6#field">#</a></h3>
+<h3 id="field">New Field Component <a href="https://bullhorn.github.io/novo-elements/docs/#/updates/v6#field">#</a></h3>
 <p>A new experimental <code>novo-field</code> component has been added to help improve the future of <code>novo-form</code> (which it is not currently using).  The <code>novo-field</code> and its supporting cast of components and directives makes it really easy to compose static forms.</p>
 <pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">form</span> [<span class="hljs-attr">formGroup</span>]=<span class="hljs-string">&quot;data&quot;</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">novo-fields</span> <span class="hljs-attr">appearance</span>=<span class="hljs-string">&quot;filled&quot;</span> <span class="hljs-attr">layout</span>=<span class="hljs-string">&quot;vertical&quot;</span> [<span class="hljs-attr">fullWidth</span>]=<span class="hljs-string">&quot;true&quot;</span>&gt;</span>
@@ -5960,8 +5967,8 @@ export class TemplatesPage {
   <span class="hljs-tag">&lt;/<span class="hljs-name">novo-fields</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span>
 </code></pre>
-<p>View the docs to <a href="https://bullhorn.github.io/novo-elements/#/components/field/design">read more</a>.</p>
-<h2 id="notable-changes">Notable changes <a href="https://bullhorn.github.io/novo-elements/#/updates/v6#notable-changes">#</a></h2>
+<p>View the docs to <a href="https://bullhorn.github.io/novo-elements/docs/#/components/field/design">read more</a>.</p>
+<h2 id="notable-changes">Notable changes <a href="https://bullhorn.github.io/novo-elements/docs/#/updates/v6#notable-changes">#</a></h2>
 <ul>
 <li><code>novo-table</code> is now deprecated use <code>novo-data-table</code> instead</li>
 <li><code>appendToBody</code> on dropdowns and pickers is deprecated</li>
@@ -5970,7 +5977,7 @@ export class TemplatesPage {
 <li><code>range</code> input on <code>date-picker</code> is deprecated please use <code>mode=&quot;range&quot;</code></li>
 <li><code>week</code> input on <code>date-picker</code> is deprecated please use <code>mode=&quot;week&quot;</code></li>
 </ul>
-<h2 id="thanks">Thank you <a href="https://bullhorn.github.io/novo-elements/#/updates/v6#thanks">#</a></h2>
+<h2 id="thanks">Thank you <a href="https://bullhorn.github.io/novo-elements/docs/#/updates/v6#thanks">#</a></h2>
 <p>Last but certainly not least, a big <em>Thank You</em> to the contributors of Novo Elements throughout the years. For this release a special shout out to our developers Dan Voegelin and Charles Barnes, the automation team for helping us test the changes: Jon Eman, Tiffany Bertolozzi, Tony Phu and Ashley Schroeder, and our UX Team include but not limited to: Jon Braun, Madeliene Valcour, Katie Todd, Daniel Long, Angela Wang and Gloria Nam.</p>
 `,
   host: { class: 'markdown-page' }

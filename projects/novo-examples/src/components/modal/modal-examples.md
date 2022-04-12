@@ -27,7 +27,7 @@ Error modals indicate that an attempted action has failed. The first line should
 
 ### Custom
 
-In the case where "Success", "Warning", and "Error" notfications aren't enough, use the custom notification. Custom notifcations allow any of the Bullhorn Icons to be used in the notification.
+In the case where "Success", "Warning", and "Error" notifications aren't enough, use the custom notification. Custom notifications allow any of the Bullhorn Icons to be used in the notification.
 
 <code-example example="custom-modal"></code-example>
 

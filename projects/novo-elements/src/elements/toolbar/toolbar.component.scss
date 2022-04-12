@@ -25,16 +25,18 @@
     }
 
     @include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
-      &.novo-color-#{$name} {
+      &.novo-color-#{$name},
+      &.novo-theme-#{$name} {
         color: $contrast;
         background: $color;
         & > novo-text,
         & > novo-label,
         & > novo-icon,
-        & > novo-title {
+        & novo-title {
           color: inherit;
         }
-        & > novo-action {
+        novo-action,
+        .links {
           button,
           novo-button {
             color: inherit;

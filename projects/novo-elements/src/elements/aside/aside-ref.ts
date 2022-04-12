@@ -3,23 +3,28 @@ import { Observable, Subject } from 'rxjs';
 import { filter, take } from 'rxjs/operators';
 import { AsideComponent } from './aside.component';
 
-export class NovoAsideRef<T = any> {
+export class NovoAsideRef<T = any, R = any> {
   constructor(public component: any, public params: T, private overlayRef: OverlayRef) {}
 
-  private _beforeClose = new Subject<void>();
-  private _afterClosed = new Subject<void>();
-
+  private _beforeClose = new Subject<R>();
+  private _afterClosed = new Subject<R>();
+  isClosed: boolean = false;
   componentInstance: AsideComponent;
 
-  afterClosed(): Observable<void> {
+  // Gets a promise that is resolved when the dialog is closed.
+  get onClosed(): Promise<R> {
+    return this._afterClosed.toPromise();
+  }
+
+  afterClosed(): Observable<R> {
     return this._afterClosed.asObservable();
   }
 
-  beforeClose(): Observable<void> {
+  beforeClose(): Observable<R> {
     return this._beforeClose.asObservable();
   }
 
-  close(): void {
+  close(result?: R): void {
     // Listen for animation 'start' events
     this.componentInstance.animationStateChanged
       .pipe(
@@ -27,7 +32,7 @@ export class NovoAsideRef<T = any> {
         take(1),
       )
       .subscribe(() => {
-        this._beforeClose.next();
+        this._beforeClose.next(result);
         this._beforeClose.complete();
         this.overlayRef.detachBackdrop();
       });
@@ -39,8 +44,9 @@ export class NovoAsideRef<T = any> {
         take(1),
       )
       .subscribe(() => {
+        this.isClosed = true;
         this.overlayRef.dispose();
-        this._afterClosed.next();
+        this._afterClosed.next(result);
         this._afterClosed.complete();
 
         // Make sure to also clear the reference to the

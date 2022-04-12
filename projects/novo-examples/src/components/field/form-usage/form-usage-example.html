@@ -16,7 +16,7 @@
 
     <novo-field>
       <novo-label>Date of Birth</novo-label>
-      <input novoInput dateFormat [picker]="datepicker" [formControl]="dateControl" />
+      <input novoInput dateFormat [picker]="datepicker" [formControl]="dateControl" disabled="true" readonly />
       <novo-picker-toggle novoSuffix icon="calendar">
         <novo-date-picker #datepicker></novo-date-picker>
       </novo-picker-toggle>
