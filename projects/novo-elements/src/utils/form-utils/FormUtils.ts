@@ -23,7 +23,7 @@ import {
   TimeControl,
   TimezoneControl,
 } from '../../elements/form/FormControls';
-import { FormField, NovoFieldset } from '../../elements/form/FormInterfaces';
+import type { FormField, NovoFieldset } from '../../elements/form/FormInterfaces';
 import { NovoFormControl } from '../../elements/form/NovoFormControl';
 import { NovoFormGroup } from '../../elements/form/NovoFormGroup';
 import { EntityPickerResult, EntityPickerResults } from '../../elements/picker/extras/entity-picker-results/EntityPickerResults';

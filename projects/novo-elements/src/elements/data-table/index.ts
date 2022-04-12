@@ -6,6 +6,7 @@ export * from './data-table.component';
 export * from './data-table.module';
 export * from './data-table.pipes';
 export * from './data-table.source';
+export * from './data-table.token';
 export * from './interfaces';
 export * from './pagination';
 export * from './rows';

@@ -5,13 +5,14 @@ import {
   Component,
   ElementRef,
   HostBinding,
+  Inject,
   Input,
   OnDestroy,
   OnInit,
   Renderer2,
 } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { NovoDataTable } from '../data-table.component';
+import { NovoDataTableRef, NOVO_DATA_TABLE_REF } from '../data-table.token';
 
 @Component({
   selector: 'novo-data-table-checkbox-cell',
@@ -47,7 +48,7 @@ export class NovoDataTableCheckboxCell<T> extends CdkCell implements OnInit, OnD
     public columnDef: CdkColumnDef,
     elementRef: ElementRef,
     renderer: Renderer2,
-    public dataTable: NovoDataTable<T>,
+    @Inject(NOVO_DATA_TABLE_REF) private dataTable: NovoDataTableRef,
     private ref: ChangeDetectorRef,
   ) {
     super(columnDef, elementRef);
