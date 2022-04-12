@@ -7,7 +7,7 @@ order: 4
 
 ## Custom
 
-In the case where "Success", "Warning", and "Error" notfications aren't enough, use the custom notification. Custom notifcations allow any of the Bullhorn Icons to be used in the notification.
+In the case where "Success", "Warning", and "Error" notifications aren't enough, use the custom notification. Custom notifications allow any of the Bullhorn Icons to be used in the notification.
 
 <code-example example="aside-usage"></code-example>
 

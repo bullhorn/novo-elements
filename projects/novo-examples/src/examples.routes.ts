@@ -302,7 +302,7 @@ export class AsideDevelopPage {
 @Component({
   selector: 'aside-examples-page',
   template: `<h2>Custom</h2>
-<p>In the case where &quot;Success&quot;, &quot;Warning&quot;, and &quot;Error&quot; notfications aren't enough, use the custom notification. Custom notifcations allow any of the Bullhorn Icons to be used in the notification.</p>
+<p>In the case where &quot;Success&quot;, &quot;Warning&quot;, and &quot;Error&quot; notifications aren't enough, use the custom notification. Custom notifications allow any of the Bullhorn Icons to be used in the notification.</p>
 <p><code-example example="aside-usage"></code-example></p>
 <h2>Add</h2>
 <p>Add modals have a colored title bar based on the record type being created. Additionally, due to a greater than average amount of content, they have fixed footers.</p>
@@ -2153,7 +2153,7 @@ export class ModalDevelopPage {
 <p>Error modals indicate that an attempted action has failed. The first line should apologize and state the what happened. The second line should quickly attempt to explain to the user why this has happened, and instruct the user on the best course of action.</p>
 <p><code-example example="error-modal"></code-example></p>
 <h3>Custom</h3>
-<p>In the case where &quot;Success&quot;, &quot;Warning&quot;, and &quot;Error&quot; notfications aren't enough, use the custom notification. Custom notifcations allow any of the Bullhorn Icons to be used in the notification.</p>
+<p>In the case where &quot;Success&quot;, &quot;Warning&quot;, and &quot;Error&quot; notifications aren't enough, use the custom notification. Custom notifications allow any of the Bullhorn Icons to be used in the notification.</p>
 <p><code-example example="custom-modal"></code-example></p>
 <h2>Workflow Modals</h2>
 <h3>Add</h3>

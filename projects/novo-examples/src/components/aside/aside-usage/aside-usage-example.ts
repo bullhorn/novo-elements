@@ -1,13 +1,18 @@
 import { Component } from '@angular/core';
 import { NovoAsideRef, NovoAsideService } from 'novo-elements';
 
+interface CustomParams {
+  id: number;
+  name: string;
+}
+
 @Component({
   selector: 'aside-custom-demo',
   template: `
     <novo-toolbar>
       <novo-toolbar-row accent="candidate" gap="md">
         <novo-icon>candidate</novo-icon>
-        <novo-title>Ferdinand del Toro</novo-title>
+        <novo-title>{{ ref.params.name }}</novo-title>
         <span class="example-spacer" flex="1"></span>
         <novo-action icon="times" (click)="close()" aria-label="close the aside icon"></novo-action>
       </novo-toolbar-row>
@@ -53,9 +58,9 @@ export class AsideCustomDemo {
     { label: 'Phone', data: '555-555-5555' },
     { label: 'Address', data: 'Boston, MA' },
   ];
-  constructor(private ref: NovoAsideRef) {}
+  constructor(public ref: NovoAsideRef<CustomParams, string>) {}
   close() {
-    this.ref.close();
+    this.ref.close(`successfully closed: ${this.ref.params.name}`);
   }
 }
 
@@ -70,6 +75,9 @@ export class AsideCustomDemo {
 export class AsideUsageExample {
   constructor(private aside: NovoAsideService) {}
   showAside() {
-    this.aside.open(AsideCustomDemo);
+    const ref = this.aside.open<string>(AsideCustomDemo, { id: 100, name: 'Ferdinand del Toro' });
+    ref.onClosed.then((result) => {
+      console.log('Aside has been closed, with result:', result);
+    });
   }
 }
