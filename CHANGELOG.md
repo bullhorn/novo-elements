@@ -1,3 +1,24 @@
+## [6.1.1](https://github.com/bullhorn/novo-elements/compare/v6.1.0...v6.1.1) (2022-04-12)
+
+
+### Bug Fixes
+
+* **Aside:** Aside ref was missing returning optional result and didn't conform to same api as ModalRef ([#1279](https://github.com/bullhorn/novo-elements/issues/1279)) ([fa2d0b3](https://github.com/bullhorn/novo-elements/commit/fa2d0b32f6431434e9a185b020310fcf8c5215d3))
+* **datepickerInput:** fix calendar UI not respecting valid date in input field ([31ed2a5](https://github.com/bullhorn/novo-elements/commit/31ed2a555b0533922b77c521be2ae22d94112f70))
+* **NovoDataTable:** making pagination marker background color dynamic ([#1290](https://github.com/bullhorn/novo-elements/issues/1290)) ([a39bf0d](https://github.com/bullhorn/novo-elements/commit/a39bf0d790acd5f4c5127b4ecc05dbab7d19e324))
+* **Security:** providing security service in root to avoid running more instances than necessary ([#1288](https://github.com/bullhorn/novo-elements/issues/1288)) ([73a6bf4](https://github.com/bullhorn/novo-elements/commit/73a6bf4f137b61800d92cd5c585341b5f641f46a))
+
+
+
+# [6.1.0](https://github.com/bullhorn/novo-elements/compare/v6.0.5...v6.1.0) (2022-04-06)
+
+
+### Features
+
+* Added Theme Options Token to allow classic header theme support ([#1282](https://github.com/bullhorn/novo-elements/issues/1282)) ([cfcb92e](https://github.com/bullhorn/novo-elements/commit/cfcb92e5c8377d02536a42eaeead0f0ab63595b6))
+
+
+
 ## [6.0.5](https://github.com/bullhorn/novo-elements/compare/v6.0.4...v6.0.5) (2022-03-31)
 
 
