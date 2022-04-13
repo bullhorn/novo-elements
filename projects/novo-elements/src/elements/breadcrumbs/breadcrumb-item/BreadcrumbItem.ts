@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, TemplateRef } from '@angular/core';
-import { BreadcrumbElement } from '../Breadcrumb';
+import { ChangeDetectionStrategy, Component, EventEmitter, Inject, Input, OnInit, Output, TemplateRef } from '@angular/core';
 import { BreadcrumbService } from '../Breadcrumb.service';
+import { NovoBreadcrumbRef, NOVO_BREADCRUMB_REF } from '../Breadcrumb.tokens';
 import { MenuConfig } from '../Breadcrumb.types';
 
 @Component({
@@ -19,7 +19,7 @@ export class BreadcrumbItemElement implements OnInit {
   menuListDisplay: Array<MenuConfig>;
   isOpen: boolean;
 
-  constructor(public breadcrumbComponent: BreadcrumbElement, private breadcrumbService: BreadcrumbService) {}
+  constructor(private breadcrumbService: BreadcrumbService, @Inject(NOVO_BREADCRUMB_REF) public breadcrumbComponent: NovoBreadcrumbRef) {}
   ngOnInit(): void {
     this.menuListDisplay = this.menuList;
   }
