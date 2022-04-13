@@ -3700,7 +3700,7 @@ novo-data-table-pagination.standard .pager .page.disabled {
 }
 novo-data-table-pagination.standard .pager .page.active {
   color: #3399dd;
-  background-color: #f7f7f7;
+  background-color: rgba(0, 0, 0, 0.1);
   opacity: 1;
 }
 .dropdown-container.data-table-dropdown {
@@ -13613,7 +13613,7 @@ novo-dropdown novo-button .novo-button-icon {
   -webkit-user-select: none;
      -moz-user-select: none;
           user-select: none;
-  margin-right: 8px;
+  margin: 0 8px;
 }
 .novo-switch:not(.novo-switch-disabled).novo-switch-dragging .novo-switch-container,
 .novo-switch:not(.novo-switch-disabled) .novo-switch-dragging {
