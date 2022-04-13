@@ -163,6 +163,6 @@
   font-size: var(--font-size-caption);
   font-weight: 400;
   line-height: 1.375;
-  color: var(--text-muted, $dark);
+  color: var(--text-muted);
   @include base-text-rules();
 }
