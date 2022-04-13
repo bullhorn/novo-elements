@@ -1,3 +1,12 @@
+## [6.1.2](https://github.com/bullhorn/novo-elements/compare/v6.1.1...v6.1.2) (2022-04-13)
+
+
+### Bug Fixes
+
+* **Theme:** text colors are now darker ([#1293](https://github.com/bullhorn/novo-elements/issues/1293)) ([a3b4b4e](https://github.com/bullhorn/novo-elements/commit/a3b4b4e6f11346fc32b983c2a33b3444fff9d60f))
+
+
+
 ## [6.1.1](https://github.com/bullhorn/novo-elements/compare/v6.1.0...v6.1.1) (2022-04-12)
 
 
