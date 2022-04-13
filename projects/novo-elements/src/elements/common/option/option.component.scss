@@ -21,7 +21,6 @@ $novo-menu-side-padding: 0.5rem;
 
   &:hover:not(.novo-option-inert) {
     background: var(--background-main, rgba($ocean, 0.1));
-    color: var(--text-bright, $dark);
   }
 
   &:active:not(.novo-option-inert),

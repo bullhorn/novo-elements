@@ -98,13 +98,13 @@
   background-color: var(--background-body, $color-silver);
 }
 .txc-main {
-  color: var(--text-main, $color-dark);
-}
-.txc-bright {
-  color: var(--text-bright, $color-black);
+  color: var(--text-main, $color-charcoal);
 }
 .txc-muted {
-  color: var(--text-muted, $color-slate);
+  color: var(--text-muted, $color-neutral);
+}
+.txc-disabled {
+  color: var(--text-disabled, $color-slate);
 }
 
 @include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {

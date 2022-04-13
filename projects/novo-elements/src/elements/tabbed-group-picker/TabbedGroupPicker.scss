@@ -134,7 +134,6 @@
         novo-option {
           &:hover.novo-option-inert {
             background: var(--background-main, rgba($ocean, 0.1));
-            color: var(--text-bright, $dark);
           }
         }
       }
