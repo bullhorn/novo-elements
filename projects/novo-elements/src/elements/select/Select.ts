@@ -728,7 +728,7 @@ export class NovoSelectElement
 
   /** Sets up a key manager to listen to keyboard events on the overlay panel. */
   private _initKeyManager() {
-    this._keyManager = new ActiveDescendantKeyManager<NovoOption>(this._getOptions()).withTypeAhead(300).withHomeAndEnd();
+    this._keyManager = new ActiveDescendantKeyManager<NovoOption>(this._getOptions()).withTypeAhead(250).withHomeAndEnd();
     // .withAllowedModifierKeys(['shiftKey']);
 
     this._keyManager.tabOut.pipe(takeUntil(this._destroy)).subscribe(() => {
