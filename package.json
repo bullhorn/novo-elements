@@ -11,7 +11,6 @@
   "scripts": {
     "build": "ng build novo-elements",
     "postbuild": "npm run copy:scss && npm run build:examples",
-    "postinstall": "npm run prettier -s",
     "build:ci": "ng build novo-elements --configuration production",
     "postbuild:ci": "npm run build:schematics && npm run copy:resources",
     "build:watch": "ng build novo-elements --watch",
