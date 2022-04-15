@@ -380,18 +380,18 @@ template {
   --background-bright: #ffffff;
   --background-dark: #e2e2e2;
   --background-muted: #f4f4f4;
+  --text-main: #282828;
+  --text-muted: #4f5361;
+  --text-disabled: #707070;
   --selection: #4a89dc;
   --text-selection: #ffffff;
-  --text-main: #3d464d;
-  --text-bright: #000000;
-  --text-muted: #707070;
   --links: #4a89dc;
   --focus: #4a89dc;
   --border: #dbdbdb;
   --code: #bb5566;
   --animation-duration: 0.1s;
   --button-background: #dbdbdb;
-  --button-text: #3d464d;
+  --button-text: #282828;
   --button-hover: #aaa;
   --scrollbar-thumb: #bebebe;
   --scrollbar-thumb-hover: #707070;
@@ -415,8 +415,8 @@ template {
   --selection: #4a89dc;
   --text-selection: #ffffff;
   --text-main: #dbdbdb;
-  --text-bright: #ffffff;
-  --text-muted: #a9b1ba;
+  --text-muted: #bebebe;
+  --text-disabled: #a9b1ba;
   --links: #009bdf;
   --focus: #0096bfab;
   --border: #526980;
@@ -479,7 +479,7 @@ kbd {
   border: 1px solid #dbdbdb;
   border: 1px solid var(--border);
   border-radius: 2px;
-  color: #3d464d;
+  color: #282828;
   color: var(--text-main);
   padding: 2px 4px 2px 4px;
 }
@@ -714,13 +714,13 @@ details > :not(summary) {
   margin-top: 0;
 }
 summary::-webkit-details-marker {
-  color: #3d464d;
+  color: #282828;
   color: var(--text-main);
 }
 dialog {
   background-color: #ffffff;
   background-color: var(--background-bright);
-  color: #3d464d;
+  color: #282828;
   color: var(--text-main);
   border: none;
   border-radius: 6px;
@@ -750,7 +750,7 @@ footer {
   border-top: 1px solid #dbdbdb;
   border-top: 1px solid var(--border);
   padding-top: 10px;
-  color: #707070;
+  color: #4f5361;
   color: var(--text-muted);
 }
 body > footer {
@@ -952,7 +952,7 @@ body {
   font-size: var(--font-size-body, 1.2rem);
   line-height: 1.2;
   word-wrap: break-word;
-  color: #3d464d;
+  color: #282828;
   color: var(--text-main);
   background: #ffffff;
   background: var(--background-body);
@@ -1533,7 +1533,7 @@ h5 {
   margin: 0;
   padding: 0.75rem 0 0.25rem;
   text-transform: uppercase;
-  color: #707070;
+  color: #4f5361;
   color: var(--text-muted);
 }
 h6 {
@@ -3197,7 +3197,7 @@ cdk-table > .novo-data-table-row:nth-of-type(even) + .novo-data-table-detail-row
 }
 .novo-data-table-cell .filter-button,
 .novo-data-table-header-cell .filter-button {
-  color: #707070;
+  color: #4f5361;
   color: var(--text-muted);
   background: transparent;
   pointer-events: all;
@@ -3206,7 +3206,7 @@ cdk-table > .novo-data-table-row:nth-of-type(even) + .novo-data-table-detail-row
 }
 .novo-data-table-cell .filter-button:hover,
 .novo-data-table-header-cell .filter-button:hover {
-  color: #3d464d;
+  color: #282828;
   color: var(--text-main);
 }
 .novo-data-table-cell .filter-button.filter-active,
@@ -3851,7 +3851,7 @@ novo-nav novo-tab-link .novo-tab-link {
   word-break: word-break;
   overflow-wrap: break-word;
   line-height: 1.375;
-  color: #707070;
+  color: #4f5361;
   color: var(--text-muted);
   font-size: 1.2rem;
   font-size: var(--font-size-label);
@@ -4393,7 +4393,7 @@ novo-nav[theme=white] novo-tab-link.disabled:hover .novo-tab-link {
 }
 novo-nav[theme=white] novo-tab .novo-tab-link,
 novo-nav[theme=white] novo-tab-link .novo-tab-link {
-  color: #3d464d;
+  color: #282828;
   color: var(--text-main);
   opacity: 0.75;
 }
@@ -4423,7 +4423,7 @@ novo-nav[theme=white][type=button-bar] {
   border: 2px solid #dbdbdb;
 }
 novo-nav[theme=white][type=button-bar] novo-tab-button {
-  color: #3d464d;
+  color: #282828;
   color: var(--text-main);
   opacity: 0.75;
 }
@@ -8974,7 +8974,7 @@ novo-toast.growlTopRight.animate {
 .novo-modal > header h2 {
   font-weight: 500;
   line-height: 1.5;
-  color: #3d464d;
+  color: #282828;
   color: var(--text-main, #3d464d);
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -9423,7 +9423,7 @@ novo-toast.growlTopRight.animate {
 }
 .novo-notification .novo-notification-body h2 {
   font-size: 2rem;
-  color: #707070;
+  color: #4f5361;
   color: var(--text-muted);
   margin: 0 auto;
   padding: 0;
@@ -9434,7 +9434,7 @@ novo-toast.growlTopRight.animate {
 }
 .novo-notification .novo-notification-body h4 {
   font-size: 1.6rem;
-  color: #707070;
+  color: #4f5361;
   color: var(--text-muted);
   margin: 0 auto;
   padding: 0;
@@ -9448,9 +9448,9 @@ novo-toast.growlTopRight.animate {
   margin: 0 auto;
 }
 .novo-notification .novo-notification-body i.indicator {
-  color: #707070;
+  color: #4f5361;
   color: var(--text-muted);
-  border: 1px solid #707070;
+  border: 1px solid #4f5361;
   border: 1px solid var(--text-muted);
   font-size: 2.6rem;
   border-radius: 50%;
@@ -9572,7 +9572,7 @@ novo-toast.growlTopRight.animate {
   font-size: 1.6rem;
   font-weight: 500;
   line-height: 1.5;
-  color: #3d464d;
+  color: #282828;
   color: var(--text-main, #3d464d);
   width: 100%;
   padding: 0;
@@ -10805,7 +10805,7 @@ novo-select .novo-select-trigger {
   background-color: transparent;
   border: none;
   border-bottom: 1px solid #afb9c0;
-  color: #3d464d;
+  color: #282828;
   color: var(--text-main, #3d464d);
   height: 2.05rem;
   position: relative;
@@ -13147,7 +13147,7 @@ novo-row-chips .novo-row-chips-columns .column-label {
   word-break: word-break;
   overflow-wrap: break-word;
   line-height: 1.375;
-  color: #707070;
+  color: #4f5361;
   color: var(--text-muted);
   font-size: 1.2rem;
   font-size: var(--font-size-label);
@@ -14655,7 +14655,7 @@ novo-date-range-input input {
   box-shadow: none;
   box-sizing: content-box;
   transition: all 300ms;
-  color: #3d464d;
+  color: #282828;
   color: var(--text-main);
 }
 novo-date-range-input input:focus {
@@ -14752,7 +14752,7 @@ novo-time-picker-input input {
   box-shadow: none;
   box-sizing: content-box;
   transition: all 300ms;
-  color: #3d464d;
+  color: #282828;
   color: var(--text-main);
 }
 novo-time-picker-input input:focus {
@@ -15750,7 +15750,7 @@ novo-date-time-picker novo-time-picker .analog {
 .novo-header > section .header-titles h1 {
   font-weight: 500;
   line-height: 1.5;
-  color: #3d464d;
+  color: #282828;
   color: var(--text-main, #3d464d);
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -24730,8 +24730,8 @@ novo-control-group .novo-control-group-controls > .novo-control-group-labels > .
   margin-left: 23px;
 }
 novo-control-group .novo-control-group-controls > .novo-control-group-labels > .novo-control-group-control-label > span {
-  color: #707070;
-  color: var(--text-muted, #9e9e9e);
+  color: #4f5361;
+  color: var(--text-muted);
   font-size: 1rem;
   font-weight: 500;
   text-transform: uppercase;
@@ -24807,7 +24807,7 @@ novo-form .novo-form-container form td.novo-form-row novo-custom-control-contain
   word-break: word-break;
   overflow-wrap: break-word;
   line-height: 1.375;
-  color: #707070;
+  color: #4f5361;
   color: var(--text-muted);
   font-size: 1.2rem;
   font-size: var(--font-size-label);
@@ -25214,7 +25214,7 @@ novo-form .novo-form-container form div.novo-control-group-control novo-control.
 novo-form .novo-form-container form div.novo-control-group-control novo-custom-control-container.disabled input,
 novo-form .novo-form-container form td.novo-form-row novo-control.disabled input,
 novo-form .novo-form-container form td.novo-form-row novo-custom-control-container.disabled input {
-  -webkit-text-fill-color: #3d464d;
+  -webkit-text-fill-color: #282828;
   -webkit-text-fill-color: var(--text-main);
 }
 novo-dynamic-form .novo-form-container form div.novo-form-row novo-control.disabled input:not(.picker-input):not(.tiles-input),
@@ -25275,7 +25275,7 @@ novo-form .novo-form-container form div.novo-control-group-control novo-custom-c
 novo-form .novo-form-container form td.novo-form-row novo-control.disabled textarea,
 novo-form .novo-form-container form td.novo-form-row novo-custom-control-container.disabled textarea {
   border-bottom-style: dashed !important;
-  -webkit-text-fill-color: #3d464d;
+  -webkit-text-fill-color: #282828;
   -webkit-text-fill-color: var(--text-main);
 }
 novo-dynamic-form .novo-form-container form div.novo-form-row novo-control.disabled div[type=button],
@@ -26033,7 +26033,7 @@ novo-form .novo-form-container form td.novo-form-row novo-control .field-message
 novo-form .novo-form-container form td.novo-form-row novo-control novo-tip-well.active .messages .description,
 novo-form .novo-form-container form td.novo-form-row novo-custom-control-container .field-message .messages .description,
 novo-form .novo-form-container form td.novo-form-row novo-custom-control-container novo-tip-well.active .messages .description {
-  color: #707070;
+  color: #4f5361;
   color: var(--text-muted);
   display: flex;
   padding-bottom: 5px;
@@ -26451,7 +26451,7 @@ novo-form .novo-form-container form td.novo-form-row novo-custom-control-contain
   box-shadow: none;
   box-sizing: content-box;
   transition: all 300ms;
-  color: #3d464d;
+  color: #282828;
   color: var(--text-main);
 }
 novo-dynamic-form .novo-form-container form div.novo-form-row novo-control > div.novo-control-container > div.novo-control-outer-container .novo-control-inner-container .novo-control-inner-input-container > div.novo-control-input input:hover,
@@ -26562,7 +26562,7 @@ novo-form .novo-form-container form td.novo-form-row novo-custom-control-contain
   box-sizing: content-box;
   transition: all 300ms;
   transition: height 0ms;
-  color: #3d464d;
+  color: #282828;
   color: var(--text-main);
   overflow-y: hidden;
 }
@@ -27649,7 +27649,7 @@ novo-form[layout=vertical] .novo-form-container form div.novo-control-group-cont
   word-break: word-break;
   overflow-wrap: break-word;
   line-height: 1.375;
-  color: #707070;
+  color: #4f5361;
   color: var(--text-muted);
   font-size: 1.2rem;
   font-size: var(--font-size-label);
@@ -28920,7 +28920,7 @@ novo-tip-well > div {
   border-radius: 0.25rem;
   background-color: #f7f7f7;
   background-color: var(--background-main, #f7f7f7);
-  color: #3d464d;
+  color: #282828;
   color: var(--text-main, #3d464d);
   padding: 1.25rem;
   text-align: right;
@@ -29540,7 +29540,7 @@ popover-content .popover {
   padding: 2rem;
   background-color: #ffffff;
   background-color: var(--background-bright, #ffffff);
-  color: #3d464d;
+  color: #282828;
   color: var(--text-main, #3d464d);
   background-clip: padding-box;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
@@ -29684,7 +29684,7 @@ popover-content .popover > .arrow:before {
 popover-content .popover-title {
   font-weight: 500;
   line-height: 1.5;
-  color: #3d464d;
+  color: #282828;
   color: var(--text-main, #3d464d);
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -30436,7 +30436,7 @@ novo-search > input {
   background: transparent;
   position: relative;
   font-size: 1.4em;
-  color: #3d464d;
+  color: #282828;
   color: var(--text-main);
   z-index: 10;
   border: none;
@@ -30448,7 +30448,7 @@ novo-search > input:focus, novo-search > input:active {
   outline: none;
 }
 novo-search novo-icon {
-  color: #3d464d;
+  color: #282828;
   color: var(--text-main);
 }
 novo-search.focused {
@@ -32513,8 +32513,6 @@ novo-simple-table-pagination > button[theme][theme=dialogue][icon][side=right] {
 .tabbed-group-picker-column-container .tabbed-group-picker-column.right novo-optgroup novo-option:hover.novo-option-inert {
   background: #f7f7f7;
   background: var(--background-main, rgba(74, 137, 220, 0.1));
-  color: #000000;
-  color: var(--text-bright, #3d464d);
 }
 .tabbed-group-picker-column-container .tabbed-group-picker-column.right .tabbed-group-picker-empty-item {
   display: flex;
@@ -32563,16 +32561,16 @@ novo-simple-table-pagination > button[theme][theme=dialogue][icon][side=right] {
   background-color: var(--background-body, #e2e2e2);
 }
 .txc-main {
-  color: #3d464d;
-  color: var(--text-main, #3d464d);
-}
-.txc-bright {
-  color: #000000;
-  color: var(--text-bright, #000000);
+  color: #282828;
+  color: var(--text-main, #282828);
 }
 .txc-muted {
+  color: #4f5361;
+  color: var(--text-muted, #4f5361);
+}
+.txc-disabled {
   color: #707070;
-  color: var(--text-muted, #707070);
+  color: var(--text-disabled, #707070);
 }
 .novo-background-black {
   background: #000000;
