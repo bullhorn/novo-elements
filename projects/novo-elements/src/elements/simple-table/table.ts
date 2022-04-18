@@ -100,8 +100,6 @@ export class NovoActivityTableNoResultsMessage {}
         <ng-content select="[novo-activity-table-custom-filter]"></ng-content>
       </div>
       <div class="novo-activity-table-container">
-
-
         <novo-simple-table
           *ngIf="columns?.length > 0"
           [dataSource]="dataSource"
@@ -134,8 +132,6 @@ export class NovoActivityTableNoResultsMessage {}
           <novo-simple-header-row *novoSimpleHeaderRowDef="displayedColumns"></novo-simple-header-row>
           <novo-simple-row *novoSimpleRowDef="let row; columns: displayedColumns"></novo-simple-row>
         </novo-simple-table>
-
-
         <div
           class="novo-activity-table-no-results-container"
           *ngIf="dataSource?.currentlyEmpty && state.userFiltered && !dataSource?.loading && !loading && !dataSource.pristine"
