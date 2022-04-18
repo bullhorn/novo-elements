@@ -1,3 +1,12 @@
+## [6.1.3](https://github.com/bullhorn/novo-elements/compare/v6.1.2...v6.1.3) (2022-04-15)
+
+
+### Bug Fixes
+
+* **Dropdown:** increasing debounce time for type-ahead ([#1294](https://github.com/bullhorn/novo-elements/issues/1294)) ([a1d9368](https://github.com/bullhorn/novo-elements/commit/a1d93689458912d245c0d1465d3063001bd6ddbe))
+
+
+
 ## [6.1.2](https://github.com/bullhorn/novo-elements/compare/v6.1.1...v6.1.2) (2022-04-13)
 
 
