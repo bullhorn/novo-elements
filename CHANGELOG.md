@@ -1,3 +1,12 @@
+# [6.2.0](https://github.com/bullhorn/novo-elements/compare/v6.1.3...v6.2.0) (2022-04-19)
+
+
+### Features
+
+* **picker:** Adjusting how picker overlay appears for row chips. ([#1278](https://github.com/bullhorn/novo-elements/issues/1278)) ([9d1c9fa](https://github.com/bullhorn/novo-elements/commit/9d1c9fab55fc49ce8c880fab9d3b01c9df119c7b))
+
+
+
 ## [6.1.3](https://github.com/bullhorn/novo-elements/compare/v6.1.2...v6.1.3) (2022-04-15)
 
 
