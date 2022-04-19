@@ -287,7 +287,10 @@ export class NovoDatePickerInputElement implements OnInit, OnChanges, ControlVal
 
   private _setCalendarValue(value: any): void {
     if (value instanceof Date && this.value instanceof Date) {
-      value = new Date(value).setHours(0, 0, 0, 0);
+      let newDate = new Date(value);
+      newDate.setHours(0, 0, 0, 0);
+      this.value = newDate;
+      return;
     }
     this.value = value;
   }

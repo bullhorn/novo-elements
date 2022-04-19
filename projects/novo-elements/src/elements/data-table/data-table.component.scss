@@ -623,7 +623,7 @@ novo-data-table-pagination {
       }
       .page.active {
         color: $company;
-        background-color: $off-white;
+        background-color: rgba($black, 0.1);
         opacity: 1;
       }
     }

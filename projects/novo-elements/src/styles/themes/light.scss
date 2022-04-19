@@ -6,19 +6,18 @@
   --background-bright: #{$color-white}; //fff
   --background-dark: #{$color-silver}; //e2e2e2
   --background-muted: #{$color-sand}; //f4f4f4
+  --text-main: #{$color-charcoal}; //#363636;
+  --text-muted: #{$color-neutral}; //#70777f;
+  --text-disabled: #{$color-slate}; //#70777f;
   --selection: #{$color-ocean}; //#9e9e9e;
   --text-selection: #{$color-white};
-  --text-main: #{$color-dark}; //#363636;
-  --text-bright: #{$color-black};
-  --text-muted: #{$color-slate}; //#70777f;
-  // do we need disabled.
   --links: #{$color-ocean};
   --focus: #{$color-ocean};
   --border: #{$color-light}; //#dbdbdb;
   --code: #{$color-job};
   --animation-duration: 0.1s;
   --button-background: #{$light};
-  --button-text: #{$dark};
+  --button-text: #{$color-charcoal};
   --button-hover: #aaa;
   --scrollbar-thumb: #{$color-stone};
   --scrollbar-thumb-hover: #{$color-slate};

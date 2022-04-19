@@ -378,8 +378,8 @@ export class AsideDevelopPage {
   selector: 'aside-examples-page',
   template: `<h2>Custom</h2>
     <p>
-      In the case where &quot;Success&quot;, &quot;Warning&quot;, and &quot;Error&quot; notfications aren't enough, use the custom
-      notification. Custom notifcations allow any of the Bullhorn Icons to be used in the notification.
+      In the case where &quot;Success&quot;, &quot;Warning&quot;, and &quot;Error&quot; notifications aren't enough, use the custom
+      notification. Custom notifications allow any of the Bullhorn Icons to be used in the notification.
     </p>
     <p><code-example example="aside-usage"></code-example></p>
     <h2>Add</h2>
@@ -2782,8 +2782,8 @@ export class ModalDevelopPage {
     <p><code-example example="error-modal"></code-example></p>
     <h3>Custom</h3>
     <p>
-      In the case where &quot;Success&quot;, &quot;Warning&quot;, and &quot;Error&quot; notfications aren't enough, use the custom
-      notification. Custom notifcations allow any of the Bullhorn Icons to be used in the notification.
+      In the case where &quot;Success&quot;, &quot;Warning&quot;, and &quot;Error&quot; notifications aren't enough, use the custom
+      notification. Custom notifications allow any of the Bullhorn Icons to be used in the notification.
     </p>
     <p><code-example example="custom-modal"></code-example></p>
     <h2>Workflow Modals</h2>

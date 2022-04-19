@@ -15,7 +15,6 @@ import { NovoLabel } from './typography/label/label.component';
 import { NovoLink } from './typography/link/link.component';
 import { NovoText } from './typography/text/text.component';
 import { NovoTitle } from './typography/title/title.component';
-
 @NgModule({
   imports: [CommonModule, NovoOptionModule],
   exports: [
