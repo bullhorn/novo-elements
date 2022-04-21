@@ -27,6 +27,7 @@ novo-elements.iml
 !.vscode/extensions.json
 
 # misc
+/.angular
 /.sass-cache
 /connect.lock
 /coverage
@@ -37,6 +38,7 @@ testem.log
 /typings
 /projects/novo-examples/src/examples.module.ts
 /projects/novo-examples/src/examples.routes.ts
+/projects/novo-examples/src/documentation.json
 
 # System Files
 .DS_Store

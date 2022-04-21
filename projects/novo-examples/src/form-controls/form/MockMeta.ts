@@ -6,11 +6,19 @@ export const MockMeta = {
     {
       name: 'firstName',
       type: 'text',
-      label: 'First Name',
+      label: 'Name',
       required: true,
       sortOrder: 10,
       maxLength: 10,
       description: 'First Name, Yo!',
+    },
+    {
+      name: 'lastName',
+      type: 'text',
+      label: 'Name',
+      hint: 'Last Name, Yo!',
+      description: 'Last Name, Yo!',
+      sortOrder: 10,
     },
     {
       name: 'groupedItems',
@@ -33,14 +41,6 @@ export const MockMeta = {
           sortOrder: 20,
         },
       ],
-    },
-    {
-      name: 'lastName',
-      type: 'text',
-      label: 'Last Name',
-      hint: 'Last Name, Yo!',
-      description: 'Last Name, Yo!',
-      sortOrder: 20,
     },
     {
       name: 'number',
@@ -85,6 +85,7 @@ export const MockMeta = {
       label: 'Date',
       required: true,
       sortOrder: 90,
+      dateFormat: 'ddd MMM DD, YYYY', // Add this to your MetaData to override the dateFormat
       defaultValue: new Date(2016, 1, 1),
     },
     {
@@ -93,6 +94,20 @@ export const MockMeta = {
       label: 'Time',
       required: true,
       sortOrder: 100,
+    },
+    {
+      name: 'native-time',
+      type: 'native-time',
+      label: 'Native Time',
+      required: true,
+      sortOrder: 101,
+    },
+    {
+      name: 'native-datetime-local',
+      type: 'native-datetime-local',
+      label: 'Native Date Time Local',
+      required: true,
+      sortOrder: 102,
     },
     {
       name: 'datetime',
@@ -428,14 +443,6 @@ export const MockMeta = {
       sortOrder: 630,
     },
     {
-      name: 'attachments',
-      type: 'file',
-      label: 'Attachments',
-      multiValue: true,
-      required: true,
-      sortOrder: 630,
-    },
-    {
       defaultValue: 'Cold',
       inputType: 'RADIO',
       label: 'Types/Ratings',
@@ -568,6 +575,43 @@ export const MockMetaForDisabledForm = {
       required: true,
       sortOrder: 120,
       maxLength: 10,
+    },
+    {
+      name: 'number',
+      type: 'number',
+      label: 'Number',
+      required: true,
+      sortOrder: 121,
+    },
+    {
+      name: 'year',
+      type: 'number',
+      label: 'Year',
+      dataSpecialization: 'YEAR',
+      required: true,
+      sortOrder: 122,
+    },
+    {
+      name: 'float',
+      type: 'float',
+      label: 'Float',
+      required: true,
+      sortOrder: 123,
+    },
+    {
+      name: 'currency',
+      type: 'money',
+      label: 'Currency',
+      currencyFormat: 'USD',
+      required: true,
+      sortOrder: 124,
+    },
+    {
+      name: 'percent',
+      type: 'percentage',
+      label: 'Percentage',
+      required: true,
+      sortOrder: 125,
     },
     {
       name: 'date',

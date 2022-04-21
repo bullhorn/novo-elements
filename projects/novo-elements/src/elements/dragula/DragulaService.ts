@@ -1,5 +1,5 @@
 // NG2
-import { Injectable, EventEmitter } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 // Vendor
 import * as dragulaImported from '@bullhorn/dragula';
 const dragula = dragulaImported;

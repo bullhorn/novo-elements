@@ -1,17 +1,9 @@
 // NG2
-import { TestBed, async } from '@angular/core/testing';
+import { async, TestBed } from '@angular/core/testing';
+import { NovoLabelService } from '../../../../services/novo-label-service';
+import { NovoPickerModule } from '../../Picker.module';
 // APP
 import { EntityPickerResult } from './EntityPickerResults';
-import { NovoLabelService } from '../../../../services/novo-label-service';
-import { NovoLoadingElement } from '../../../loading/Loading';
-import {
-  NovoListElement,
-  NovoListItemElement,
-  NovoItemAvatarElement,
-  NovoItemHeaderElement,
-  NovoItemTitleElement,
-  NovoItemContentElement,
-} from '../../../list/List';
 
 describe('Elements: EntityPickerResult', () => {
   let fixture;
@@ -19,16 +11,7 @@ describe('Elements: EntityPickerResult', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [
-        EntityPickerResult,
-        NovoLoadingElement,
-        NovoListElement,
-        NovoListItemElement,
-        NovoItemAvatarElement,
-        NovoItemContentElement,
-        NovoItemHeaderElement,
-        NovoItemTitleElement,
-      ],
+      imports: [NovoPickerModule],
       providers: [{ provide: NovoLabelService, useClass: NovoLabelService }],
     }).compileComponents();
     fixture = TestBed.createComponent(EntityPickerResult);

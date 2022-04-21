@@ -1,0 +1,16 @@
+<div class="example-container">
+  <novo-field layout="horizontal">
+    <novo-label>Enter your password</novo-label>
+    <input novoInput [type]="hide ? 'password' : 'text'" />
+    <novo-icon (click)="hide = !hide">{{hide ? 'overview' : 'hidden'}}</novo-icon>
+  </novo-field>
+
+  <novo-field layout="horizontal">
+    <novo-label>Amount</novo-label>
+    <input novoInput type="number" class="example-right-align" />
+    <span novoPrefix>$&nbsp;</span>
+    <span novoSuffix>.00</span>
+    <novo-hint>Enter some money</novo-hint>
+  </novo-field>
+
+</div>

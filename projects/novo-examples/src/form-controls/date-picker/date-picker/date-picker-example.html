@@ -1,11 +1,34 @@
-<div class="date-picker-demo-side-by-side">
-    <p>
-        <label>Value One</label> {{(dateOne | date) || 'N/A'}}
-        <label>Value Two</label> {{(dateTwo | date) || 'N/A'}}
-    </p>
-    <novo-date-picker [(ngModel)]="dateOne"></novo-date-picker>
-    <div>
-        <novo-date-picker-input [(ngModel)]="dateTwo" format="mm/dd/yyyy"></novo-date-picker-input>
-        <novo-date-picker-input [(ngModel)]="dateTwo" format="dd/mm/yyyy"></novo-date-picker-input>
-    </div>
-</div>
+<novo-date-picker
+  inline="true"
+  [(ngModel)]="selectedDates"
+  [mode]="mode.value"
+  [numberOfMonths]="months.value"
+  [weekStart]="weekStart.value">
+</novo-date-picker>
+
+<section>
+  <novo-label>Selected Values:</novo-label>
+  <div>{{selectedDates | json}}</div>
+</section>
+
+<section>
+  <novo-label>Selection mode</novo-label>
+  <novo-radio-group #mode appearance="vertical" value="single">
+    <novo-radio name="mode" value="single">single</novo-radio>
+    <novo-radio name="mode" value="multiple">multiple</novo-radio>
+    <novo-radio name="mode" value="range">range</novo-radio>
+    <novo-radio name="mode" value="week">week</novo-radio>
+  </novo-radio-group>
+
+  <novo-label># of Months</novo-label>
+  <novo-radio-group #months appearance="vertical" value="1">
+    <novo-radio name="months" value="1">1</novo-radio>
+    <novo-radio name="months" value="2">2</novo-radio>
+  </novo-radio-group>
+
+  <novo-label>Week Start</novo-label>
+  <novo-radio-group #weekStart appearance="vertical" value="0">
+    <novo-radio name="weekStart" value="0">Sun</novo-radio>
+    <novo-radio name="weekStart" value="1">Mon</novo-radio>
+  </novo-radio-group>
+</section>

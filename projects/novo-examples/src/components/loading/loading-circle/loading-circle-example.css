@@ -1,5 +1,5 @@
-/** CSS for this example */
-.flex {
-  display: flex;
-  flex-flow: row nowrap;
+:host {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
 }

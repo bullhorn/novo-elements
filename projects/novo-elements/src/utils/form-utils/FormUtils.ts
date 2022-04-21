@@ -16,17 +16,19 @@ import {
   PickerControl,
   RadioControl,
   SelectControl,
+  SwitchControl,
   TextAreaControl,
   TextBoxControl,
   TilesControl,
   TimeControl,
+  TimezoneControl,
 } from '../../elements/form/FormControls';
-import { EntityPickerResult, EntityPickerResults } from '../../elements/picker/extras/entity-picker-results/EntityPickerResults';
-import { Helpers } from '../Helpers';
-import { NovoFieldset, FormField } from '../../elements/form/FormInterfaces';
+import { FormField, NovoFieldset } from '../../elements/form/FormInterfaces';
 import { NovoFormControl } from '../../elements/form/NovoFormControl';
 import { NovoFormGroup } from '../../elements/form/NovoFormGroup';
+import { EntityPickerResult, EntityPickerResults } from '../../elements/picker/extras/entity-picker-results/EntityPickerResults';
 import { NovoLabelService } from '../../services/novo-label-service';
+import { Helpers } from '../Helpers';
 import { OptionsService } from './../../services/options/OptionsService';
 
 @Injectable()
@@ -42,6 +44,7 @@ export class FormUtils {
     'CorporateUser',
     'Person',
     'Placement',
+    'JobShift',
   ];
   ENTITY_PICKER_LIST: string[] = [
     'Candidate',
@@ -63,6 +66,7 @@ export class FormUtils {
     'Person',
     'PersonText',
     'Placement',
+    'JobShift',
   ];
 
   constructor(public labels: NovoLabelService, public optionsService: OptionsService) {}
@@ -118,9 +122,11 @@ export class FormUtils {
       YEAR: 'year',
       WORKFLOW_OPTIONS: 'select',
       SPECIALIZED_OPTIONS: 'select',
+      ALL_WORKFLOW_OPTIONS: 'select',
       WorkflowOptionsLookup: 'select',
       SpecializedOptionsLookup: 'select',
       SimplifiedOptionsLookup: 'select',
+      AllWorkflowOptionsLookup: 'select',
     };
     const dataTypeToTypeMap = {
       Timestamp: 'date',
@@ -162,9 +168,12 @@ export class FormUtils {
         }
       }
     } else if (field.type === 'TO_ONE') {
-      if ('SYSTEM' === field.dataSpecialization && ['WorkflowOptionsLookup', 'SpecializedOptionsLookup'].includes(field.dataType)) {
+      if (
+        'SYSTEM' === field.dataSpecialization &&
+        ['WorkflowOptionsLookup', 'SpecializedOptionsLookup', 'AllWorkflowOptionsLookup'].includes(field.dataType)
+      ) {
         type = dataSpecializationTypeMap[field.dataType];
-      } else if (['WORKFLOW_OPTIONS', 'SPECIALIZED_OPTIONS'].includes(field.dataSpecialization)) {
+      } else if (['WORKFLOW_OPTIONS', 'SPECIALIZED_OPTIONS', 'ALL_WORKFLOW_OPTIONS'].includes(field.dataSpecialization)) {
         type = dataSpecializationTypeMap[field.dataSpecialization];
       } else if (['SimplifiedOptionsLookup', 'SpecializedOptionsLookup'].includes(field.dataType)) {
         if (field.options && Object.keys(inputTypeToTypeMap).indexOf(field.inputType) > -1 && !field.multiValue) {
@@ -212,7 +221,7 @@ export class FormUtils {
   getControlForField(
     field: any,
     http,
-    config: { token?: string; restUrl?: string; military?: boolean, weekStart?: number },
+    config: { token?: string; restUrl?: string; military?: boolean; weekStart?: number },
     overrides?: any,
     forTable: boolean = false,
     fieldData?: any,
@@ -254,7 +263,7 @@ export class FormUtils {
       closeOnSelect: field.closeOnSelect,
       layoutOptions: field.layoutOptions,
     };
-    this.inferStartDate(controlConfig, field);
+    this.inferDateRange(controlConfig, field);
     // TODO: getControlOptions should always return the correct format
     const optionsConfig = this.getControlOptions(field, http, config, fieldData);
     if (Array.isArray(optionsConfig) && !(type === 'chips' || type === 'picker')) {
@@ -345,6 +354,20 @@ export class FormUtils {
         controlConfig.military = config ? !!config.military : false;
         control = new TimeControl(controlConfig);
         break;
+      case 'native-time':
+      case 'native-date':
+      case 'native-week':
+      case 'native-year':
+      case 'native-datetime-local':
+      case 'native-tel':
+      case 'native-email':
+      case 'native-url':
+      case 'native-number':
+        control = new CustomControl({ ...controlConfig, template: 'native-input', type: type.replace('native-', ''), alwaysActive: true });
+        break;
+      case 'timezone':
+        control = new TimezoneControl(controlConfig);
+        break;
       case 'currency':
       case 'money':
       case 'email':
@@ -378,6 +401,9 @@ export class FormUtils {
       case 'checkbox':
         controlConfig.checkboxLabel = field.checkboxLabel;
         control = new CheckboxControl(controlConfig);
+        break;
+      case 'switch':
+        control = new SwitchControl(controlConfig);
         break;
       case 'checklist':
         control = new CheckListControl(controlConfig);
@@ -463,7 +489,7 @@ export class FormUtils {
     meta,
     currencyFormat,
     http,
-    config: { token?: string; restUrl?: string; military?: boolean, weekStart?: number },
+    config: { token?: string; restUrl?: string; military?: boolean; weekStart?: number },
     overrides?: any,
     forTable: boolean = false,
   ) {
@@ -501,7 +527,7 @@ export class FormUtils {
     meta,
     currencyFormat,
     http,
-    config: { token?: string; restUrl?: string; military?: boolean, weekStart?: number },
+    config: { token?: string; restUrl?: string; military?: boolean; weekStart?: number },
     overrides?,
     data?: { [key: string]: any },
   ) {
@@ -591,6 +617,7 @@ export class FormUtils {
       : [];
 
     let fields = meta.fields.map((field) => {
+      field.parentEntity = meta.entity;
       if (!field.hasOwnProperty('sortOrder')) {
         field.sortOrder = Number.MAX_SAFE_INTEGER - 1;
       }
@@ -670,10 +697,10 @@ export class FormUtils {
   }
 
   private markControlAsEmbedded(control, dataSpecialization?: 'embedded' | 'inline_embedded') {
-    if (Helpers.isBlank(control['config'])) {
-      control['config'] = {};
+    if (Helpers.isBlank(control.config)) {
+      control.config = {};
     }
-    control['config']['embedded'] = true;
+    control.config.embedded = true;
     control.isEmbedded = dataSpecialization === 'embedded';
     control.isInlineEmbedded = dataSpecialization === 'inline_embedded';
     return control;
@@ -684,14 +711,19 @@ export class FormUtils {
     if (field.dataType === 'Boolean' && !field.options) {
       // TODO: dataType should only be determined by `determineInputType` which doesn't ever return 'Boolean' it
       // TODO: (cont.) returns `tiles`
-      return [{ value: false, label: this.labels.no }, { value: true, label: this.labels.yes }];
-    } else if (field.workflowOptions && fieldData) {
+      return [
+        { value: false, label: this.labels.no },
+        { value: true, label: this.labels.yes },
+      ];
+    } else if (field.dataSpecialization === 'ALL_WORKFLOW_OPTIONS' && field.options) {
+      return field.options;
+    } else if (field.workflowOptions) {
       return this.getWorkflowOptions(field.workflowOptions, fieldData);
     } else if (
       field.dataSpecialization === 'SPECIALIZED_OPTIONS' ||
       (field.options && ['SpecializedOptionsLookup', 'SimplifiedOptionsLookup'].includes(field.dataType))
     ) {
-      return field.options.filter((o) => !o.readOnly);
+      return field.options;
     } else if (field.optionsUrl) {
       return this.optionsService.getOptionsConfig(http, field, config);
     } else if (Array.isArray(field.options) && field.type === 'chips') {
@@ -709,16 +741,18 @@ export class FormUtils {
 
   private getWorkflowOptions(
     workflowOptions: { [key: string]: any },
-    fieldData: { [key: string]: any },
-  ): Array<{ value: string | number; label: string | number }> {
-    let currentValue: { value: string | number; label: string | number };
-    if (fieldData.id) {
-      currentValue = { value: fieldData.id, label: fieldData.label ? fieldData.label : fieldData.id };
+    fieldData: { id?: number; value?: string | number; label?: string | number } | null,
+  ): Array<{ id?: number; value?: string | number; label?: string | number }> {
+    let currentValue: { id?: number; value?: string | number; label?: string | number } = null;
+    let currentWorkflowOption: number | string = 'initial';
+    if (fieldData?.id) {
+      currentValue = { ...fieldData, value: fieldData.id, label: fieldData.label || fieldData.id };
+      currentWorkflowOption = fieldData.id;
     }
+    const updateWorkflowOptions: Array<{ id?: number; value?: string | number; label?: string | number }> =
+      workflowOptions[currentWorkflowOption] || [];
 
-    const currentWorkflowOption: number | string = fieldData.id ? fieldData.id : 'initial';
-    const updateWorkflowOptions: Array<{ value: string | number; label: string | number }> = workflowOptions[currentWorkflowOption] || [];
-
+    // Ensure that the current value is added to the beginning of the options list
     if (currentValue && !updateWorkflowOptions.find((option) => option.value === currentValue.value)) {
       updateWorkflowOptions.unshift(currentValue);
     }
@@ -832,24 +866,23 @@ export class FormUtils {
     }
   }
 
-  /**
-   * Get the min start date of a Date base on field data.
-   */
-  private getStartDate(field: any): Date | null {
-    if (field.allowedDateRange) {
-      return this.getStartDateFromRange(field.allowedDateRange);
+  private getEndDateFromRange(dateRange: { maxDate: string; minOffset: number }): Date {
+    if (dateRange.maxDate) {
+      return dateFns.parse(dateRange.maxDate);
+    } else if (dateRange.minOffset) {
+      return dateFns.addDays(dateFns.startOfToday(), dateRange.minOffset);
     }
-    // there is no restriction on the start date
-    return null;
   }
 
-  private inferStartDate(controlConfig, field) {
-    if (field.dataType === 'Date') {
-      const startDate = this.getStartDate(field);
-      if (startDate) {
-        controlConfig.startDate = startDate;
-      }
-      return startDate;
+  /**
+   * Get the min start date and max end date of a Date base on field data.
+   */
+
+  private inferDateRange(controlConfig, field): void {
+    if (field.dataType === 'Date' && field.allowedDateRange) {
+      controlConfig.startDate = this.getStartDateFromRange(field.allowedDateRange);
+      controlConfig.endDate = this.getEndDateFromRange(field.allowedDateRange);
+      controlConfig.disabledDateMessage = field.allowedDateRange?.disabledDateMessage;
     }
   }
 

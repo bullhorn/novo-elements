@@ -1,9 +1,0 @@
-<div class="date-picker-demo-side-by-side">
-    <p>
-        <label>Value</label>
-        {{(time | date:'mediumTime') || 'N/A'}}
-        <novo-time-picker-input [(ngModel)]="time"></novo-time-picker-input>
-    </p>
-    <novo-time-picker [(ngModel)]="time" analog="true"></novo-time-picker>
-    <novo-time-picker [(ngModel)]="time" military="true" analog="true"></novo-time-picker>
-</div>

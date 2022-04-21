@@ -1,13 +1,17 @@
-<header title="John Deere" [icon]="icon" [theme]="theme">
-  <utils>
-    <util-action icon="convert" tooltip="Change Theme" (click)="changeTheme()"></util-action>
-    <util-action icon="refresh" tooltip="Show Popup" (click)="catchEv('refresh', $event)"></util-action>
-    <util-action icon="times" tooltip="Show Popup" (click)="catchEv('close', $event)"></util-action>
-  </utils>
+<header [accent]="theme">
+  <novo-action icon="convert" tooltip="Change Theme" (click)="changeTheme()"></novo-action>
+  <novo-action icon="refresh" tooltip="Show Popup" (click)="catchEv('refresh', $event)"></novo-action>
+  <novo-action icon="times" tooltip="Show Popup" (click)="catchEv('close', $event)"></novo-action>
+
+  <!-- <novo-icon larger>{{icon}}</novo-icon> -->
+  <novo-title larger>
+    <novo-icon>{{icon}}</novo-icon>
+    <span>Ferdinand del Toro</span>
+  </novo-title>
   <section>
     Extra Info
   </section>
-  <novo-nav theme="color" direction="horizontal">
+  <novo-nav direction="horizontal">
     <novo-tab>
       <span>Overview</span>
     </novo-tab>

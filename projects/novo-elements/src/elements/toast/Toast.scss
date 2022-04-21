@@ -1,208 +1,121 @@
 novo-toast {
-  display: flex;
-  flex-shrink: 0;
-  position: relative;
-  background: $navy;
-  color: $white;
-  padding: 15px 15px 15px 25px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
-  &.show {
-    display: block;
-  }
-  p {
-    white-space: pre-line;
-  }
-}
-
-novo-toast.launched {
-  display: none;
-  position: fixed;
-  z-index: 9999;
-}
-
-novo-toast.toast-container {
-  display: flex;
+  display: grid;
+  grid-template-columns: 5rem 1fr;
   justify-content: flex-start;
   align-content: center;
   align-items: center;
-}
+  position: relative;
+  background: $navy;
+  color: $white;
+  padding: $spacing-md;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
 
-novo-toast.toast-container > .toast-icon {
-  display: flex;
-  justify-content: center;
-  align-content: center;
-  align-items: center;
-  float: left;
-  width: 32px;
-  height: 32px;
-  background: rgba(0, 0, 0, 0.15);
-  border-radius: 3px;
-  margin-right: 15px;
-  i {
+  &.show {
+    display: grid !important;
+  }
+
+  &.launched {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+  }
+
+  .toast-icon {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    width: 32px;
+    height: 32px;
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 3px;
+  }
+
+  .close-icon {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    align-self: flex-start;
+    cursor: pointer;
+    position: absolute;
+    top: 8px;
+    right: 8px;
+  }
+
+  .toast-icon i,
+  .close-icon i {
     display: flex;
     position: relative;
-    top: 0;
-    font-size: 16px;
-    line-height: 16px;
+    font-size: 1.2rem;
+    line-height: 1.2;
   }
-}
 
-novo-toast.toast-container > .close-icon {
-  display: flex;
-  justify-content: center;
-  align-content: center;
-  align-items: center;
-  align-self: flex-start;
-  cursor: pointer;
-  i {
-    display: flex;
-    position: relative;
-    top: 0;
-    font-size: 16px;
-    line-height: 16px;
+  &.toast-container {
+    .toast-content {
+      .link-generated {
+        width: 100%;
+        position: relative;
+        input {
+          background: transparent !important;
+          border: none;
+          border-bottom: 1px solid lighten($dark, 45%);
+          border-radius: 0;
+          outline: none;
+          height: 2rem;
+          width: 95%;
+          margin: 0;
+          padding: 0;
+          box-shadow: none;
+          box-sizing: content-box;
+          transition: all 300ms;
+          color: $white;
+          text-overflow: ellipsis;
+          &:focus {
+            background-color: $positive;
+          }
+          &:hover {
+            border-bottom: 1px solid lighten($dark, 15%);
+          }
+        }
+      }
+    }
   }
-}
 
-novo-toast.toast-container .toast-content {
-  float: left;
-  width: calc(100% - 47px);
-  flex-direction: column;
-  display: flex;
-  h5 + p {
-    top: 0;
-  }
   p {
-    position: relative;
-    top: -1px;
+    white-space: pre-line;
   }
-  .link-generated {
-    width: 100%;
-    position: relative;
-    input {
-      font-size: 1em;
-      background: transparent !important;
-      border: none;
-      border-bottom: 1px solid lighten($dark, 45%);
-      border-radius: 0;
-      outline: none;
-      height: 2rem;
-      width: 95%;
-      margin: 0;
-      padding: 0;
-      box-shadow: none;
-      box-sizing: content-box;
-      transition: all 300ms;
-      color: $white;
-      text-overflow: ellipsis;
-      &:focus {
-        background-color: $positive;
-      }
-      &:hover {
-        border-bottom: 1px solid lighten($dark, 15%);
-      }
+
+  @include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
+    &.#{$name} {
+      color: getContrastColor($name);
+      background: $color;
+    }
+    &.novo-accent-#{$name} {
+      border: 1px solid $color;
+      background: getPaleColor($name);
+      color: $dark;
     }
   }
 }
 
-novo-toast .toast-content > h5 {
+novo-toast h5 {
   display: block;
-  color: $white;
-  margin: 0 0 5px;
-  font-size: 14px;
-}
-
-novo-toast:not(.default) .toast-content > h5 {
-  color: $white;
+  font-size: 1.4rem;
+  color: inherit;
 }
 
 novo-toast .toast-content > p {
-  font-size: 14px;
-  line-height: 20px;
   margin: 0;
   max-width: inherit;
+  font-size: 1.3rem;
   &.message-only {
-    top: 0;
-    font-size: 16px;
-    line-height: 22px;
     padding: 0;
+    font-size: 1.4rem;
   }
-}
-
-novo-toast.warning-outline,
-novo-toast.success-outline,
-novo-toast.info-outline,
-novo-toast.danger-outline {
-  color: $base-font-color;
-  .toast-content > h5 {
-    color: $base-font-color;
-  }
-  .toast-container .toast-content .link-generated input {
-    color: $base-font-color;
-  }
-}
-
-novo-toast.danger,
-novo-toast.info,
-novo-toast.success,
-novo-toast.warning {
-  i,
-  p {
-    color: $white;
-  }
-}
-
-novo-toast.success {
-  background: $grass;
-}
-
-novo-toast.success-outline {
-  border: 1px solid $grass;
-  background: white;
-}
-
-novo-toast.info {
-  background: $ocean;
-}
-
-novo-toast.info-outline {
-  border: 1px solid $ocean;
-  background: white;
-}
-
-novo-toast.warning {
-  background: $sunflower;
-}
-
-novo-toast.warning-outline {
-  border: 1px solid $sunflower;
-  background: white;
-}
-
-novo-toast.danger {
-  background: $grapefruit;
-}
-
-novo-toast.danger-outline {
-  border: 1px solid $grapefruit;
-  background: white;
 }
 
 novo-toast {
-  @each $analytics, $color in $analytics-colors {
-    &.#{$analytics} {
-      background: $color;
-    }
-  }
-  @each $entity, $color in $entity-colors {
-    &.#{$entity} {
-      background: $color;
-    }
-  }
-  @each $entity, $color in $app-colors {
-    &.#{$entity} {
-      background: $color;
-    }
-  }
   &.text {
     background: $dark;
   }
@@ -230,7 +143,7 @@ novo-toast.fixedTop {
 novo-toast.fixedTop {
   top: -100%;
   padding-top: 20px;
-  @include ease('all', 'swift-ease-in-out');
+  @include ease("all", "swift-ease-in-out");
   &.animate {
     padding-top: 20px;
     top: -6px;
@@ -240,26 +153,16 @@ novo-toast.fixedTop {
 novo-toast.fixedBottom {
   bottom: -100%;
   padding-bottom: 20px;
-  @include ease('all', 'swift-ease-in-out');
+  @include ease("all", "swift-ease-in-out");
   &.animate {
     padding-bottom: 20px;
     bottom: -6px;
   }
 }
 
-novo-toast[class*='growl'] {
+novo-toast[class*="growl"] {
   border-radius: 3px;
   max-width: 350px;
-  .toast-content h5 {
-    display: block;
-    color: #fff;
-    margin: 0 0 5px;
-    font-size: 14px;
-  }
-  .toast-content p {
-    font-size: 14px;
-    width: 100%;
-  }
 }
 
 novo-toast.growlBottomLeft,
@@ -267,7 +170,7 @@ novo-toast.growlTopLeft {
   left: -100%;
   right: auto;
   width: calc(100% - 30px);
-  @include ease('all', 'swift-ease-in-out');
+  @include ease("all", "swift-ease-in-out");
   &.animate {
     left: 15px;
   }
@@ -275,12 +178,12 @@ novo-toast.growlTopLeft {
 
 novo-toast.growlTopLeft,
 novo-toast.growlTopRight {
-  top: 15px;
+  top: 1rem;
 }
 
 novo-toast.growlBottomLeft,
 novo-toast.growlBottomRight {
-  bottom: 15px;
+  bottom: 1rem;
 }
 
 novo-toast.growlBottomRight,
@@ -288,9 +191,9 @@ novo-toast.growlTopRight {
   right: -100%;
   left: auto;
   width: calc(100% - 30px);
-  @include ease('all', 'swift-ease-in-out');
+  @include ease("all", "swift-ease-in-out");
   &.animate {
-    right: 15px;
+    right: 1rem;
   }
 }
 
@@ -353,7 +256,7 @@ novo-toast.embedded.fixedTop {
   left: auto;
   right: auto;
   width: inherit;
-  margin: -1em -3em;
+  margin: -1rem -3rem;
   &.animate {
     top: auto;
   }
@@ -389,25 +292,25 @@ novo-toast.dialogue {
 }
 
 @media screen and (min-width: 350px) {
-  novo-toast[class*='growl-'] {
+  novo-toast[class*="growl"] {
     min-width: 350px;
   }
   novo-toast.growlBottomLeft,
   novo-toast.growlTopLeft {
     left: -100%;
     right: auto;
-    @include ease('all', 'swift-ease-in-out');
+    @include ease("all", "swift-ease-in-out");
     &.animate {
-      left: 15px;
+      left: 1rem;
     }
   }
   novo-toast.growlBottomRight,
   novo-toast.growlTopRight {
     right: -100%;
     left: auto;
-    @include ease('all', 'swift-ease-in-out');
+    @include ease("all", "swift-ease-in-out");
     &.animate {
-      right: 15px;
+      right: 1rem;
     }
   }
 }

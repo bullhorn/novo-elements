@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { FormArray } from '@angular/forms';
 import {
-  FormUtils,
-  TextBoxControl,
-  CheckboxControl,
-  NovoFormGroup,
   BaseControl,
+  CheckboxControl,
+  FormUtils,
   NovoControlGroupAddConfig,
+  NovoFormGroup,
   ReadOnlyControl,
   SelectControl,
+  TextBoxControl,
 } from 'novo-elements';
 
 /**
@@ -63,7 +63,7 @@ export class HorizontalExample {
 
   public updateInitialValue() {
     this.initValue = [
-      { text: 'TEXT 111', percentage: 100, checkbox: false, test4: 'TEST 111' },
+      { text: 'hello', percentage: 100, checkbox: false, test4: 'TEST 111' },
       { text: 'TEXT 222', percentage: 5, checkbox: false, test4: 'TEST 222' },
       { text: 'TEXT 333', percentage: 60, checkbox: true, test4: 'TEST 333' },
     ];
@@ -71,7 +71,7 @@ export class HorizontalExample {
 
   public customDelete(form: NovoFormGroup, key: string, index: number) {
     console.log('DELETE', form, key, index); // tslint:disable-line
-    const control: FormArray = <FormArray>form.controls[key];
+    const control: FormArray = form.controls[key] as FormArray;
     control.removeAt(index);
   }
 

@@ -1,0 +1,10 @@
+// Add to component in _scss-test-containers_input.ts
+body,
+html {
+  font-size: $font-size-base;
+  font-family: $font-family-body;
+  color: $font-color-base;
+  line-height: $font-height-base;
+  box-shadow: $shadow-1;
+  z-index: $zindex-1;
+}

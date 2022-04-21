@@ -1,16 +1,16 @@
 // NG2
 import { Component, Input } from '@angular/core';
+import { NovoLabelService } from '../../../../services/novo-label-service';
 // APP
 import { BaseRenderer } from '../base-renderer/BaseRenderer';
-import { NovoLabelService } from '../../../../services/novo-label-service';
 
 @Component({
   selector: 'date-cell',
   template: `
-        <div class="date-cell">
-            <label>{{ getFormattedDate() }}</label>
-        </div>
-    `,
+    <div class="date-cell">
+      <label>{{ getFormattedDate() }}</label>
+    </div>
+  `,
 })
 export class DateCell extends BaseRenderer {
   @Input()

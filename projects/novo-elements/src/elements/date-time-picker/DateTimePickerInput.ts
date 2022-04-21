@@ -22,6 +22,7 @@ const DATE_VALUE_ACCESSOR = {
       (ngModelChange)="updateDate($event)"
       [start]="start"
       [end]="end"
+      [disabledDateMessage]="disabledDateMessage"
       [maskOptions]="maskOptions"
       (blurEvent)="handleBlur($event)"
       (focusEvent)="handleFocus($event)"
@@ -44,10 +45,10 @@ export class NovoDateTimePickerInputElement implements ControlValueAccessor {
   public timePart: any;
 
   /** View -> model callback called when value changes */
-  _onChange: (value: any) => void = () => { };
+  _onChange: (value: any) => void = () => {};
 
   /** View -> model callback called when autocomplete has been touched */
-  _onTouched = () => { };
+  _onTouched = () => {};
 
   @Input()
   name: string;
@@ -67,12 +68,16 @@ export class NovoDateTimePickerInputElement implements ControlValueAccessor {
   format: string;
   @Input()
   weekStart: number = 0;
+  @Input()
+  disabledDateMessage: string;
   @Output()
   blurEvent: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
   @Output()
   focusEvent: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
+  @Output()
+  changeEvent: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
 
-  constructor(public element: ElementRef, public labels: NovoLabelService, private _changeDetectorRef: ChangeDetectorRef) { }
+  constructor(public element: ElementRef, public labels: NovoLabelService, private _changeDetectorRef: ChangeDetectorRef) {}
 
   writeValue(value: any): void {
     this.datePart = isDate(value) ? parse(value) : value;
@@ -90,6 +95,7 @@ export class NovoDateTimePickerInputElement implements ControlValueAccessor {
 
   handleBlur(event) {
     this.blurEvent.emit(event);
+    this.changeEvent.emit(event);
   }
 
   handleFocus(event) {

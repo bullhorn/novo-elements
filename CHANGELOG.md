@@ -1,6 +1,598 @@
+# [6.2.0](https://github.com/bullhorn/novo-elements/compare/v6.1.3...v6.2.0) (2022-04-19)
+
+
+### Features
+
+* **picker:** Adjusting how picker overlay appears for row chips. ([#1278](https://github.com/bullhorn/novo-elements/issues/1278)) ([9d1c9fa](https://github.com/bullhorn/novo-elements/commit/9d1c9fab55fc49ce8c880fab9d3b01c9df119c7b))
+
+
+
+## [6.1.3](https://github.com/bullhorn/novo-elements/compare/v6.1.2...v6.1.3) (2022-04-15)
+
+
+### Bug Fixes
+
+* **Dropdown:** increasing debounce time for type-ahead ([#1294](https://github.com/bullhorn/novo-elements/issues/1294)) ([a1d9368](https://github.com/bullhorn/novo-elements/commit/a1d93689458912d245c0d1465d3063001bd6ddbe))
+
+
+
+## [6.1.2](https://github.com/bullhorn/novo-elements/compare/v6.1.1...v6.1.2) (2022-04-13)
+
+
+### Bug Fixes
+
+* **Theme:** text colors are now darker ([#1293](https://github.com/bullhorn/novo-elements/issues/1293)) ([a3b4b4e](https://github.com/bullhorn/novo-elements/commit/a3b4b4e6f11346fc32b983c2a33b3444fff9d60f))
+
+
+
+## [6.1.1](https://github.com/bullhorn/novo-elements/compare/v6.1.0...v6.1.1) (2022-04-12)
+
+
+### Bug Fixes
+
+* **Aside:** Aside ref was missing returning optional result and didn't conform to same api as ModalRef ([#1279](https://github.com/bullhorn/novo-elements/issues/1279)) ([fa2d0b3](https://github.com/bullhorn/novo-elements/commit/fa2d0b32f6431434e9a185b020310fcf8c5215d3))
+* **datepickerInput:** fix calendar UI not respecting valid date in input field ([31ed2a5](https://github.com/bullhorn/novo-elements/commit/31ed2a555b0533922b77c521be2ae22d94112f70))
+* **NovoDataTable:** making pagination marker background color dynamic ([#1290](https://github.com/bullhorn/novo-elements/issues/1290)) ([a39bf0d](https://github.com/bullhorn/novo-elements/commit/a39bf0d790acd5f4c5127b4ecc05dbab7d19e324))
+* **Security:** providing security service in root to avoid running more instances than necessary ([#1288](https://github.com/bullhorn/novo-elements/issues/1288)) ([73a6bf4](https://github.com/bullhorn/novo-elements/commit/73a6bf4f137b61800d92cd5c585341b5f641f46a))
+
+
+
+# [6.1.0](https://github.com/bullhorn/novo-elements/compare/v6.0.5...v6.1.0) (2022-04-06)
+
+
+### Features
+
+* Added Theme Options Token to allow classic header theme support ([#1282](https://github.com/bullhorn/novo-elements/issues/1282)) ([cfcb92e](https://github.com/bullhorn/novo-elements/commit/cfcb92e5c8377d02536a42eaeead0f0ab63595b6))
+
+
+
+## [6.0.5](https://github.com/bullhorn/novo-elements/compare/v6.0.4...v6.0.5) (2022-03-31)
+
+
+### Bug Fixes
+
+* **Chips:** Chips preview wasn't dispatch because select event was busted ([#1277](https://github.com/bullhorn/novo-elements/issues/1277)) ([52d3c9f](https://github.com/bullhorn/novo-elements/commit/52d3c9f9fcf43f268622d3dd35d4bca5628b343b))
+
+
+
+## [6.0.4](https://github.com/bullhorn/novo-elements/compare/v6.0.3...v6.0.4) (2022-03-28)
+
+
+### Bug Fixes
+
+* **dataTable:** Clear all matching selected on reset and when deselec… ([#1272](https://github.com/bullhorn/novo-elements/issues/1272)) ([2f31644](https://github.com/bullhorn/novo-elements/commit/2f31644dc4ba656ba0a64d68ea30205c8884afc7))
+
+
+
+## [6.0.3](https://github.com/bullhorn/novo-elements/compare/v6.0.2...v6.0.3) (2022-03-23)
+
+
+### Bug Fixes
+
+* **select:** change select default position to above-below ([#1273](https://github.com/bullhorn/novo-elements/issues/1273)) ([9cf6c3c](https://github.com/bullhorn/novo-elements/commit/9cf6c3c9c6ad3f2edecfcca801f0738cd272e48b))
+
+
+
+## [6.0.2](https://github.com/bullhorn/novo-elements/compare/v6.0.1...v6.0.2) (2022-03-21)
+
+
+### Bug Fixes
+
+* **Chips:** Chips on propugate change events if value !== previous value ([6b47f31](https://github.com/bullhorn/novo-elements/commit/6b47f31807a8dbec428025a46eb7aab90d9dc4d2))
+* **Chips:** pushed a refactor for checking if the value has changed when setting items ([7d4be18](https://github.com/bullhorn/novo-elements/commit/7d4be1837269f64262d17df5e4c3ea180f93d7b7))
+* remove reset styling for safari type='button' ([4eb2283](https://github.com/bullhorn/novo-elements/commit/4eb22832553bfd030758dc6e729d7556de0ed46e))
+
+
+
+## [6.0.1](https://github.com/bullhorn/novo-elements/compare/v6.0.0...v6.0.1) (2022-03-14)
+
+
+
+# [6.0.0](https://github.com/bullhorn/novo-elements/compare/v5.13.1...v6.0.0) (2022-03-02)
+
+
+* refactor!: Version 6.0.0 Release Candidate (#1241) ([9eea255](https://github.com/bullhorn/novo-elements/commit/9eea2550e4db367ccda64361ee7a3892a0b5f4c2)), closes [#1241](https://github.com/bullhorn/novo-elements/issues/1241) [#1154](https://github.com/bullhorn/novo-elements/issues/1154) [#1233](https://github.com/bullhorn/novo-elements/issues/1233) [#1253](https://github.com/bullhorn/novo-elements/issues/1253) [#1262](https://github.com/bullhorn/novo-elements/issues/1262)
+
+
+### Features
+
+* **Control Group:** Allow customizing of icons ([#1254](https://github.com/bullhorn/novo-elements/issues/1254)) ([d963c19](https://github.com/bullhorn/novo-elements/commit/d963c19088eb84640269e1cf0a6f2fbff87d6b58))
+
+
+### BREAKING CHANGES
+
+* Rename big `calendar` to agenda
+chore: Updated docs and examples for Menu, Toast, Button, Modal, Agenda, Calendar
+
+* updating some example styles
+
+* chore: Added/Updated/Cleaned new documentation for many components
+
+* updated more docs
+
+Co-authored-by: Vonterio Duncan <vonterio.duncan@bullhorn.com>
+Co-authored-by: Zachary Jorn <44657047+ZacharyJorn@users.noreply.github.com>
+Co-authored-by: zachary.jorn <zachary.jorn@bullhorn.com>
+Co-authored-by: james.wesselmann <james.wesselmann@bullhorn.com>
+Co-authored-by: Brian Kimball <brian.kimball@bullhorn.com>
+
+* adding back modal module file
+
+* adding back whiteframe styles in the interest of backwards compatibility
+
+* adding back typography styles for backwards compat
+
+* minor changes
+
+* BH-73101 decreasing header size to account for removal of zoom
+
+* chore: push new relase workflow
+
+* chore: fixed bump
+
+* chore: tied action to main branch
+
+* chore(release): 6.0.1-next.0
+
+* chore(release): 6.0.0-next.0
+
+* fix: package name
+
+* chore(release): 6.0.0-next.1
+
+* chore: pointing at wrong demo dir
+
+* chore(release): 6.0.0-next.2
+
+* fix: docs image urls now relative
+
+* feat(Toolbar): Add the Toolbar components
+
+* chore: remove ghpages action
+
+* chore(release): 6.0.0-next.3
+
+* feat(schematics): ng-update schematics updated and testing
+chore: Added contributors script and section
+
+* chore(release): 6.0.0-next.4
+
+* feat: Update Scripts added for more scenarios
+
+* fix: Checkbox and ChipList Styles
+feat: Added Accent and color options to chips
+chore: added/updated chip examples
+
+* fix: demo site
+fix: light theme now uses white bg more
+
+* updating migration schematic for stylesheet import
+
+* fixing schematic build error
+
+* updating scss schematic migration
+
+* upping angular-imask and novo-design-tokens versions
+
+* fix(Cleanup): Tweaking and fixing styles
+
+* a couple styling fixes for spacing issues
+
+* resolving some header icon spacing issues
+
+* resolving a header icon spacing issue
+
+* fix(Styles): All fixes to keep styles as compatable as possible
+
+* chore: updated package.lock
+
+* chore(release): 6.0.0-next.5
+
+* updating menu buttons
+
+* fixing a couple styling issues
+
+* chore(unit-tests): Fix EntityPickerResults unit tests
+
+* chore(action): setup node with node 14
+
+* chore(unit-test): import whole module for unit tests
+
+* updating some icon styles
+
+* chore(unit-test): import whole module for Item Header Test
+
+* chore(unit-test): import whole module for Item Header Test
+
+* chore(unit-test): import whole module for Item Header Test
+
+* chore(unit-test): add back providers
+
+* remove avatar background, make it the svg color
+
+* trying out smaller body font size
+
+* updating button icon spacing changes
+
+* font size scaling adjustment
+
+* tweaking button font size to center text better
+
+* removing some type declarations that were causing unit test failures
+
+* fixing undefined in template error
+
+* fix oninit implementation
+
+* trying another way to fix undefined in template error
+
+* styling update for table row font spacing
+
+* !: Removed chomsky
+chore: moved demo
+
+* chore: cleanup documentation generation
+
+* fixing htmlhint issues in demo
+
+* upping html font-size back up to 10px
+
+* a few changes to account for new font-size scaling
+
+* 5rem header height everywhere
+
+* fix(Dropdown): WIP on Dropdown errors.
+style(Form): max-width for form adjusted
+style(EntityPickerResults): fixed icon color and alignment
+
+* package-lock update
+
+* fix(Dropdown): `options` that were added asyncronously to content were missing select listeners. caused dropdown not to close on click.
+
+* not selecting entity picker results on right click
+
+* fixing picker style and adding active class to active sort icon
+
+* updating active sort class name
+
+* upping design tokens version
+
+* fix(modal): Modal and Notification styles were busted
+
+* fix(datatable): Fixed datatable header dropdowns
+
+* applying fieldset margin to novo-icon as well as i
+
+* fixing table headers
+
+* consolidating border-radius styles into one
+
+* fixing date range picker filter styling
+
+* trimming card label
+
+* Fixes for Table headers
+
+* Updated Design Token
+
+* fix(date-picker): fix date picker calendar styling for notinmonth
+
+* set default for novo radio vertical option
+
+* access raw value directly
+
+* add back in getter for value
+
+* chore(release): 6.0.0-next.6
+
+* fix: dropdown dropping click events
+
+* fix: don't update dropdown cell for now
+
+* fix: close dropdown panel if escape key is pressed
+
+* push initial value to selectionModel
+
+* fix: tweak logic for display with select dropdown
+
+* drop down to default side in simple table
+
+* use inferred type
+
+* fix types again
+
+* check if deselect option is present on value
+
+* check if select option is present on value
+
+* fixing clear chip picker default value error since this.value is undefined
+
+* update timePickerInput change comparator
+
+* add comment to formGroup for future developer
+
+* add handle changes in timePickerInput correctly
+
+* detect changes when the dropdown is toggled
+
+* fix table button styles
+
+* switch back to right side
+
+* try different overlay position strategy
+
+* try bottom position
+
+* create new positioning strategy
+
+* add positions to position strategy
+
+* set position to default
+
+* add additional set timeout for overlay positioning
+
+* close panel on esc novo-dropdown
+
+* fix: handle pressing escape on data-table filters
+
+* fix(Select): Unknown Options have not displayValue when set as intialValue. Disabled states also broken
+
+* adjusting fieldset-header sizing
+
+* fix for row ship width issue - was extending outside of form with 4+ chips
+
+* fix for novo-select display value issue
+
+* putting 1em font-size back on icon
+
+* pushed update icon file
+
+* fix for longstanding required address alignment issues
+
+* removing focus outline on filter icon after filter applied
+
+* fixing data-table header spacing for binocs
+
+* (fix): fixing appearance of select and dropdown buttons in safari
+
+* giving novo-fieldset-header a font-size for novo-title to inherit and then making it smaller
+
+* fix for another select value display issue plus refactoring my last fix a bit
+
+* chore(docs): New Documentation
+
+* chore: re-enabled api-doc generate
+
+* chore: update build version
+
+* chore: error in build on github action
+
+* chore: remove change
+
+* fix(bump): Relase is failing
+
+* fix(version): someone merged the version backwards
+
+* chore(release): 6.0.0-next.7
+
+
+
 # Changelog
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+### [5.13.1](https://github.com/bullhorn/novo-elements/compare/v5.13.0...v5.13.1) (2022-01-14)
+
+
+### Bug Fixes
+
+* **datePickerInput:** use translated and local format as date placeholder ([#1250](https://github.com/bullhorn/novo-elements/issues/1250)) ([386b099](https://github.com/bullhorn/novo-elements/commit/386b09925269c8ffa2385f052d1f293594c63d70))
+
+## [5.13.0](https://github.com/bullhorn/novo-elements/compare/v5.12.1...v5.13.0) (2021-12-31)
+
+
+### Features
+
+* **datePickerInput:** Clear invalid date field when tabbing out ([#1247](https://github.com/bullhorn/novo-elements/issues/1247)) ([7870521](https://github.com/bullhorn/novo-elements/commit/787052169b3db77cbc882af64c09b6185d1cf559))
+
+### [5.12.1](https://github.com/bullhorn/novo-elements/compare/v5.12.0...v5.12.1) (2021-12-31)
+
+# [5.12.0](https://github.com/bullhorn/novo-elements/compare/v5.11.1...v5.12.0) (2021-12-31)
+
+
+### Features
+
+* **NovoDataTable:** Add ability to communicate when all rows are sel… ([#1246](https://github.com/bullhorn/novo-elements/issues/1246)) ([bc0317e](https://github.com/bullhorn/novo-elements/commit/bc0317e36a12ef870f676ab054567ea269c73537))
+
+
+
+# Changelog
+
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+### [5.11.1](https://github.com/bullhorn/novo-elements/compare/v5.11.0...v5.11.1) (2021-12-10)
+
+
+### Bug Fixes
+
+* **Select:** Allow highlighting of select element ([#1245](https://github.com/bullhorn/novo-elements/issues/1245)) ([7583c6d](https://github.com/bullhorn/novo-elements/commit/7583c6d1ee00b09ca9e4217ef4eba5fa7c809644))
+
+## [5.11.0](https://github.com/bullhorn/novo-elements/compare/v5.10.0...v5.11.0) (2021-12-09)
+
+
+### Features
+
+* **DatePicker:** limiting selection of effective date range ([#1239](https://github.com/bullhorn/novo-elements/issues/1239)) ([4a865eb](https://github.com/bullhorn/novo-elements/commit/4a865ebb1f08a8ce2caf1cf8d7f437f784888aaa))
+
+## [5.10.0](https://github.com/bullhorn/novo-elements/compare/v5.9.0...v5.10.0) (2021-12-07)
+
+
+### Features
+
+* **Address:** Disable address field to prevent tabbing into address field when set to read only ([#1243](https://github.com/bullhorn/novo-elements/issues/1243)) ([8bd2d42](https://github.com/bullhorn/novo-elements/commit/8bd2d42d255f2f5a64b0100f0417011c6141015a))
+* **data table:** Enable data table headers to word wrap ([#1244](https://github.com/bullhorn/novo-elements/issues/1244)) ([0896e83](https://github.com/bullhorn/novo-elements/commit/0896e835748f5ff1576e914d052db60b5fee3b10))
+
+## [5.9.0](https://github.com/bullhorn/novo-elements/compare/v5.8.1...v5.9.0) (2021-12-06)
+
+
+### Features
+
+* **Form:** Add parentEntity to formFields ([#1242](https://github.com/bullhorn/novo-elements/issues/1242)) ([837ce40](https://github.com/bullhorn/novo-elements/commit/837ce40e87944741a7a75a4deef32ac259b16ea1))
+
+### [5.8.1](https://github.com/bullhorn/novo-elements/compare/v5.8.0...v5.8.1) (2021-11-29)
+
+# [5.8.0](https://github.com/bullhorn/novo-elements/compare/v5.7.0...v5.8.0) (2021-11-29)
+
+
+### Features
+
+* **dataTable:** Selection Retention ([#1237](https://github.com/bullhorn/novo-elements/issues/1237)) ([cad88a4](https://github.com/bullhorn/novo-elements/commit/cad88a40662972ed58adbf664241831ba75ff663))
+
+
+
+# Changelog
+
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+## [5.7.0](https://github.com/bullhorn/novo-elements/compare/v5.6.1...v5.7.0) (2021-11-08)
+
+
+### Features
+
+* **AppBridge:** add 'slide-out-add' to NovoApps type ([#1232](https://github.com/bullhorn/novo-elements/issues/1232)) ([16f07b2](https://github.com/bullhorn/novo-elements/commit/16f07b266d7ff373fb84b9fe7ca3e81a7b557391))
+
+### [5.6.1](https://github.com/bullhorn/novo-elements/compare/v5.6.0...v5.6.1) (2021-11-05)
+
+
+### Bug Fixes
+
+* **WorkflowOptions:** Allow additional data in workflow option ([#1234](https://github.com/bullhorn/novo-elements/issues/1234)) ([4c960a0](https://github.com/bullhorn/novo-elements/commit/4c960a0c2e17d829ef7fbbc238c6be5fbbe69685))
+
+## [5.6.0](https://github.com/bullhorn/novo-elements/compare/v5.5.2...v5.6.0) (2021-10-14)
+
+
+### Features
+
+* Updating AppBridge from Bullhorn/Connect. ([#1228](https://github.com/bullhorn/novo-elements/issues/1228)) ([6d249b4](https://github.com/bullhorn/novo-elements/commit/6d249b4d99db758f553fa42dded067b55d74bcd6))
+
+### [5.5.2](https://github.com/bullhorn/novo-elements/compare/v5.5.1...v5.5.2) (2021-10-11)
+
+
+### Bug Fixes
+
+* **form:** Added blank value for Date Picker reset ([#1227](https://github.com/bullhorn/novo-elements/issues/1227)) ([67aada5](https://github.com/bullhorn/novo-elements/commit/67aada51a9486b1758c420cff481fcf3ad7bbc0a))
+
+### [5.5.1](https://github.com/bullhorn/novo-elements/compare/v5.5.0...v5.5.1) (2021-10-08)
+
+## [5.5.0](https://github.com/bullhorn/novo-elements/compare/v5.4.0...v5.5.0) (2021-10-08)
+
+
+### Features
+
+* **Forms:** Enable highlighting of fields ([#1224](https://github.com/bullhorn/novo-elements/issues/1224)) ([7004fab](https://github.com/bullhorn/novo-elements/commit/7004fabbf436ae1462158cb367a4e90fb9b99071))
+
+## [5.4.0](https://github.com/bullhorn/novo-elements/compare/v5.3.0...v5.4.0) (2021-10-06)
+
+
+### Features
+
+* **MixedMultiPicker:** Allow secondaryOptions to be cleared and reset on a primary option ([#1221](https://github.com/bullhorn/novo-elements/issues/1221)) ([c918232](https://github.com/bullhorn/novo-elements/commit/c91823251f4e33ae763fb8f89fcf16ce20cc5f35))
+
+## [5.3.0](https://github.com/bullhorn/novo-elements/compare/v5.2.11...v5.3.0) (2021-09-27)
+
+
+### Features
+
+* **FormUtils:** Enable workflow options to be used in an initial state ([#1223](https://github.com/bullhorn/novo-elements/issues/1223)) ([217f541](https://github.com/bullhorn/novo-elements/commit/217f541bfc978079602230a151362eec82061dda))
+
+### [5.2.11](https://github.com/bullhorn/novo-elements/compare/v5.2.10...v5.2.11) (2021-09-15)
+
+### [5.2.10](https://github.com/bullhorn/novo-elements/compare/v5.2.9...v5.2.10) (2021-09-15)
+
+### [5.2.9](https://github.com/bullhorn/novo-elements/compare/v5.2.8...v5.2.9) (2021-09-15)
+
+### [5.2.8](https://github.com/bullhorn/novo-elements/compare/v5.2.7...v5.2.8) (2021-09-15)
+
+### [5.2.7](https://github.com/bullhorn/novo-elements/compare/v5.2.6...v5.2.7) (2021-09-15)
+
+### [5.2.6](https://github.com/bullhorn/novo-elements/compare/v5.2.5...v5.2.6) (2021-09-15)
+
+### [5.2.5](https://github.com/bullhorn/novo-elements/compare/v5.2.4...v5.2.5) (2021-09-15)
+
+### [5.2.4](https://github.com/bullhorn/novo-elements/compare/v5.2.3...v5.2.4) (2021-09-15)
+
+### [5.2.3](https://github.com/bullhorn/novo-elements/compare/v5.2.2...v5.2.3) (2021-09-15)
+
+### [5.2.2](https://github.com/bullhorn/novo-elements/compare/v5.2.1...v5.2.2) (2021-09-15)
+
+### [5.2.1](https://github.com/bullhorn/novo-elements/compare/v5.2.0...v5.2.1) (2021-09-11)
+
+## [5.2.0](https://github.com/bullhorn/novo-elements/compare/v5.1.2...v5.2.0) (2021-09-11)
+
+
+### Features
+
+* **ControlGroup:** Add optional delete button confirmation ([#1216](https://github.com/bullhorn/novo-elements/issues/1216)) ([5905159](https://github.com/bullhorn/novo-elements/commit/5905159efdc03480cf4ed0b6237ce96ebc2715b3))
+* **Select:** Add optional disabled state and tooltip ([#1220](https://github.com/bullhorn/novo-elements/issues/1220)) ([b3156c2](https://github.com/bullhorn/novo-elements/commit/b3156c22d7c37fdc9e865af42ac8da28c5cecf52))
+
+### 5.1.3 (2021-09-09)
+
+## [5.1.0](https://github.com/bullhorn/novo-elements/compare/v4.7.0...v5.1.0) (2021-06-30)
+
+
+### Features
+
+* enable angular ivy compiler ([#1195](https://github.com/bullhorn/novo-elements/issues/1195)) ([084998c](https://github.com/bullhorn/novo-elements/commit/084998c13474806789e061952975746b069e1ec1))
+
+
+### Bug Fixes
+
+* **GroupedMultiPicker:** correct typo in groupedMultiPicker empty state ([f03a0f4](https://github.com/bullhorn/novo-elements/commit/f03a0f4789492fb470fe2d62576f4a86b35fd067))
+
+## [4.7.0](https://github.com/bullhorn/novo-elements/compare/v4.6.1...v4.7.0) (2021-06-02)
+
+
+### Features
+
+* **AppBridge:** Type the supported colors for  AppBridge registration and update ([#1152](https://github.com/bullhorn/novo-elements/issues/1152)) ([f2cca31](https://github.com/bullhorn/novo-elements/commit/f2cca315b2016c8c4fa2418464c438002f251a60))
+
+
+### Bug Fixes
+
+* **Control:** bug with dot and minus symbols on percentage fields ([#1181](https://github.com/bullhorn/novo-elements/issues/1181)) ([be12f60](https://github.com/bullhorn/novo-elements/commit/be12f604687898e0b7fc28737a044aa664967f04))
+
+### [4.6.1](https://github.com/bullhorn/novo-elements/compare/v4.6.0...v4.6.1) (2021-05-06)
+
+## [4.6.0](https://github.com/bullhorn/novo-elements/compare/v4.5.0...v4.6.0) (2021-05-06)
+
+
+### Features
+
+* **Field Interactions:** Adding isInvokedOnInit to identify to field interactions whether the operation is happening on init or not ([#1176](https://github.com/bullhorn/novo-elements/issues/1176)) ([649f1be](https://github.com/bullhorn/novo-elements/commit/649f1beed6efc63db18bca5755c83ebf9fee3339))
+* **Forms:** Enabling nested form field interactions ([#1175](https://github.com/bullhorn/novo-elements/issues/1175)) ([c317249](https://github.com/bullhorn/novo-elements/commit/c3172496b4aeaa21cf6cd7c8e167e3d507902aa4))
+
+## [4.5.0](https://github.com/bullhorn/novo-elements/compare/v4.4.4...v4.5.0) (2021-04-07)
+
+
+### Features
+
+* **DatePickerInput:** moving change event emit from handleBlur to dispatchOnChange ([#1162](https://github.com/bullhorn/novo-elements/issues/1162)) ([72472e3](https://github.com/bullhorn/novo-elements/commit/72472e376455508ff705aef5d802b59dd206a37d))
+* **Forms:** REVERT - Support for nested form field interactions ([#1159](https://github.com/bullhorn/novo-elements/issues/1159))" - migrating these changes from the .4 release to the .5 release ([#1174](https://github.com/bullhorn/novo-elements/issues/1174)) ([a91200e](https://github.com/bullhorn/novo-elements/commit/a91200e2cc63a7e8073545afde66247859499295))
+* **Forms:** Support for nested form field interactions ([#1159](https://github.com/bullhorn/novo-elements/issues/1159)) ([f0c391e](https://github.com/bullhorn/novo-elements/commit/f0c391e49c149d1fa70ead2ab79550e2c4d7c924))
+
+
+### Bug Fixes
+
+* **Select:** fixing logic around specialized lookup options ([#1165](https://github.com/bullhorn/novo-elements/issues/1165)) ([ec77415](https://github.com/bullhorn/novo-elements/commit/ec774151802ecde6d227668dd76539af66e4ac8b))
+
+### [4.4.4](https://github.com/bullhorn/novo-elements/compare/v4.4.3...v4.4.4) (2021-03-11)
+
+### [4.4.3](https://github.com/bullhorn/novo-elements/compare/v4.4.2...v4.4.3) (2021-02-10)
+
+
+### Bug Fixes
+
+* **i18n:** Non-English support for dropdown searching ([390133e](https://github.com/bullhorn/novo-elements/commit/390133e387287926a4ccc763bb1d614a1a43f20c))
 
 ### [4.4.2](https://github.com/bullhorn/novo-elements/compare/v4.4.0...v4.4.2) (2020-12-09)
 

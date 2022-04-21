@@ -1,0 +1,26 @@
+@import "~novo-design-tokens/scss";
+
+html {
+  scrollbar-color: var(--scrollbar-thumb) var(--background-body);
+  scrollbar-width: none;
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-base, 10px);
+  color: var(--font-color-base, #333);
+}
+
+body {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-body, 1.2rem);
+  line-height: 1.2;
+  word-wrap: break-word;
+  color: var(--text-main);
+  background: var(--background-body);
+  text-rendering: optimizeLegibility;
+}
+
+button,
+input,
+textarea {
+  transition: background-color var(--animation-duration) linear, border-color var(--animation-duration) linear,
+    color var(--animation-duration) linear, box-shadow var(--animation-duration) linear, transform var(--animation-duration) ease;
+}

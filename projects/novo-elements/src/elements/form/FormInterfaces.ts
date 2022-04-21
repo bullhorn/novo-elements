@@ -1,13 +1,3 @@
-export interface NovoFormGroup {
-  layout?: any;
-  controls: any[];
-  novoControls: any[];
-  fieldsets: any[];
-  value: any;
-  valid?: boolean;
-  getRawValue?: any;
-}
-
 export interface NovoFieldset {
   title?: string;
   icon?: string;
@@ -34,6 +24,7 @@ export interface FormField {
   associatedEntity?: { entity: string };
   optionsUrl?: string;
   optionsType?: string;
+  parentEntity?: string;
 }
 
 export type ResultsTemplateType = 'entity-picker';

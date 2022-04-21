@@ -1,0 +1,10 @@
+<article class="icon-blocks iconset">
+  <div *ngFor="let icon of icons" class="block" (click)="copyLink(icon)">
+    <div class="icon-square">
+      <span class="icon-text">
+        <novo-icon>{{icon}}</novo-icon>
+      </span>
+    </div>
+    <span>{{icon}}</span>
+  </div>
+</article>

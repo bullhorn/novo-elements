@@ -6,7 +6,7 @@
 
 ## Dependencies
 
-- [NodeJS v10.0+](https://nodejs.org/en/)
+- [NodeJS v14.0+](https://nodejs.org/en/)
 
 ## Quick Start
 
@@ -35,16 +35,6 @@ Depending on what system you are using (SystemJS, Webpack, etc..) the setup will
 
 If using SCSS/SASS you will need to include the following includes: `node_modules/novo-elements/lib`.
 
-## Build/Release/Publish
-
-    # Manually update the projects/*/package.json to the version you want
-    # TAG
-    # npm test
-    # npm run lint
-    # npm run build
-    # CD INTO EACH PROJECT IN DIST
-    # npm publish
-
 ## Building Examples
 
 > All examples can be added to the appropriate directory in the `novo-examples` project. Each markdown file will be converted to a demo page and a route will automatically be added to the demo. You can import any example project by using the angular selector, or inject it using the `code-example` tag, ie. `<code-example example="demo-name"></code-example>`.
@@ -61,16 +51,29 @@ With Novo Elements there are a few hard coded labels throughout the library. To 
 
 To make Angular2 use this new class over the default one you can provide in the bootstrapping of your application as a provider.
 
-```
+```ts
 { provide: NovoLabelService, useClass: MyLabelService }
 ```
 
 To use the default labels, you will need to provide the `NOVO_ELEMENTS_LABELS_PROVIDERS` via
 
-```
+```ts
 import {NOVO_ELEMENTS_LABELS_PROVIDERS} from 'novo-elements';
 bootstrap(MyApp [..NOVO_ELEMENTS_LABELS_PROVIDERS]);
 ```
+
+## Upgrading NovoElement
+
+### To Version 6
+
+> Note: Ensure your tsconfig.app.json `include` property references all the ts files the migrations should be run against.  You can add a glob then remove it to ensure your build system works the same as before.
+
+```
+npm install --save timezone-support@2 novo-design-tokens@0 angular-imask@6 imask@6
+npm install --save novo-elements@6
+ng update novo-elements --migrate-only --from=0.0.0 --to=6.0.0 --force --allow-dirty  
+```
+
 
 ## Contribute
 
@@ -81,6 +84,13 @@ There are many ways to **[contribute](https://github.com/bullhorn/novo-elements/
 - **[Contribute bug fixes](https://github.com/bullhorn/novo-elements/blob/master/CONTRIBUTING.md)**.
 
 > TL;DR: Fork this repository, make any required change and then submit a PR :)
+
+### Contributors
+
+<object type="image/svg+xml" data="contributors.svg">
+  <!-- Your fall back here -->
+  <img src="contributors.svg" />
+</object>
 
 # License
 

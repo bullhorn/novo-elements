@@ -4,22 +4,22 @@ import { AfterContentInit, Component, ContentChildren, Input, OnInit, QueryList 
 import { NovoTemplateService } from '../../services/template/NovoTemplateService';
 import { Helpers } from '../../utils/Helpers';
 import { NovoTemplate } from '../common/novo-template/novo-template.directive';
-import { NovoFormGroup } from './FormInterfaces';
+import { NovoFormGroup } from './NovoFormGroup';
 
 @Component({
   selector: 'novo-form',
   template: `
-        <novo-control-templates></novo-control-templates>
-        <div class="novo-form-container">
-            <header *ngIf="!hideHeader">
-                <ng-content select="form-title"></ng-content>
-                <ng-content select="form-subtitle"></ng-content>
-            </header>
-            <form class="novo-form" [formGroup]="form">
-                <ng-content></ng-content>
-            </form>
-        </div>
-    `,
+    <novo-control-templates></novo-control-templates>
+    <div class="novo-form-container">
+      <header *ngIf="!hideHeader">
+        <ng-content select="form-title"></ng-content>
+        <ng-content select="form-subtitle"></ng-content>
+      </header>
+      <form class="novo-form" [formGroup]="form">
+        <ng-content></ng-content>
+      </form>
+    </div>
+  `,
   providers: [NovoTemplateService],
 })
 export class NovoFormElement implements AfterContentInit, OnInit {
@@ -36,7 +36,7 @@ export class NovoFormElement implements AfterContentInit, OnInit {
   public showingAllFields: boolean = false;
   public showingRequiredFields: boolean = true;
 
-  constructor(private templates: NovoTemplateService) { }
+  constructor(private templates: NovoTemplateService) {}
 
   get value() {
     return this.form.getRawValue();

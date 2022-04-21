@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { TabbedGroupPickerTab, ChildTab, ParentTab } from 'novo-elements';
+import { ChildTab, ParentTab, TabbedGroupPickerTab } from 'novo-elements';
 
 /**
  * @title Tabbed Group Picker - Groups Example
@@ -84,9 +84,7 @@ export class TabbedGroupPickerGroupsExample {
   selectedAnimalCategories: string[] = [];
 
   onSelectionChange(selectedData: TabbedGroupPickerTab[]) {
-    this.selectedAnimals = (selectedData.find(({ typeName }) => typeName === 'animals') as ChildTab).data.map(
-      ({ animalId }) => animalId,
-    );
+    this.selectedAnimals = (selectedData.find(({ typeName }) => typeName === 'animals') as ChildTab).data.map(({ animalId }) => animalId);
     this.selectedAnimalCategories = (selectedData.find(({ typeName }) => typeName === 'animalCategories') as ParentTab).data.map(
       ({ groupId }) => groupId,
     );

@@ -1,0 +1,34 @@
+<novo-avatar [source]="{name: 'Brian Kimball'}" [menu]="menu"></novo-avatar>
+<novo-avatar image="https://robohash.org/jgodi" color="bittersweet"></novo-avatar>
+<novo-avatar image="https://www.bullhorn.com/wp-content/uploads/2021/08/bullhorn_bull.svg" shape="square"></novo-avatar>
+
+
+<!-- Menu Template -->
+<novo-menu #menu>
+  <novo-option *menuItem>
+    <novo-icon>person-circle</novo-icon>
+    <novo-text>My Profile</novo-text>
+  </novo-option>
+  <novo-option *menuItem>
+    <novo-icon>rate</novo-icon>
+    <novo-text>Billing</novo-text>
+  </novo-option>
+  <novo-option *menuItem>
+    <novo-icon>bell</novo-icon>
+    <novo-text>Notifications</novo-text>
+  </novo-option>
+  <novo-divider *menuItem></novo-divider>
+  <novo-option *menuItem>
+    <novo-icon>configure</novo-icon>
+    <novo-text>My Settings</novo-text>
+  </novo-option>
+  <novo-option *menuItem>
+    <novo-icon>company</novo-icon>
+    <novo-text>Org Settings</novo-text>
+  </novo-option>
+  <novo-divider *menuItem></novo-divider>
+  <novo-option *menuItem>
+    <novo-icon>logout</novo-icon>
+    <novo-text>Log out</novo-text>
+  </novo-option>
+</novo-menu>

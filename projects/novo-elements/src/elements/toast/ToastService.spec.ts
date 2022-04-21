@@ -1,6 +1,6 @@
 // App
-import { NovoToastService } from './ToastService';
 import { ComponentUtils } from '../../utils/component-utils/ComponentUtils';
+import { NovoToastService } from './ToastService';
 
 describe('Elements: NovoToastService', () => {
   describe('Service: ', () => {
@@ -24,22 +24,20 @@ describe('Elements: NovoToastService', () => {
           message: 'test message',
           header: 'test header',
         };
-        spyOn(service, 'setToastOnSession');
-
+        let spy = jest.spyOn(service, 'setToastOnSession');
         service.handleAlert({}, options);
-
-        expect(service.setToastOnSession).toHaveBeenCalledWith({}, options);
+        expect(spy).toHaveBeenLastCalledWith(expect.any(Object), options);
+        spy.mockReset();
       });
 
       it('should call toastTimer if not isCloseable.', () => {
         const toast = {
           isCloseable: false,
         };
-        spyOn(service, 'toastTimer');
-
+        let spy = jest.spyOn(service, 'toastTimer');
         service.handleAlert(toast, {});
-
-        expect(service.toastTimer).toHaveBeenCalledWith(toast);
+        expect(spy).toHaveBeenCalledWith(toast);
+        spy.mockReset();
       });
 
       it('should NOT call toastTimer if isCloseable.', () => {
@@ -49,11 +47,10 @@ describe('Elements: NovoToastService', () => {
         const options = {
           isCloseable: true,
         };
-        spyOn(service, 'toastTimer');
-
+        let spy = jest.spyOn(service, 'toastTimer');
         service.handleAlert(toast, options);
-
-        expect(service.toastTimer).not.toHaveBeenCalled();
+        expect(spy).not.toHaveBeenCalled();
+        spy.mockReset();
       });
     });
 

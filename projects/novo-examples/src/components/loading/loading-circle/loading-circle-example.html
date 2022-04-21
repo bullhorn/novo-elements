@@ -1,14 +1,19 @@
-<section class="flex">
-    <div class="white background">
-        <novo-spinner theme="multicolor"></novo-spinner>
-    </div>
-    <div class="light background">
-        <novo-spinner></novo-spinner>
-    </div>
-    <div class="ocean background">
-        <novo-spinner inverse></novo-spinner>
-    </div>
-    <div class="navy background">
-        <novo-spinner theme="bittersweet"></novo-spinner>
-    </div>
+<novo-spinner [size]="size.value" [color]="color.value"></novo-spinner>
+
+<section>
+  <novo-label>Size</novo-label>
+  <novo-radio-group #size appearance="vertical" value="medium">
+    <novo-radio name="size" value="small">small</novo-radio>
+    <novo-radio name="size" value="medium">medium</novo-radio>
+    <novo-radio name="size" value="large">large</novo-radio>
+  </novo-radio-group>
+
+  <novo-label>Color</novo-label>
+  <novo-radio-group #color appearance="vertical">
+    <novo-radio name="color" value="grapefruit">grapefruit</novo-radio>
+    <novo-radio name="color" value="aqua">aqua</novo-radio>
+    <novo-radio name="color" value="mint">mint</novo-radio>
+    <novo-radio name="color" value="ocean">ocean</novo-radio>
+  </novo-radio-group>
+
 </section>

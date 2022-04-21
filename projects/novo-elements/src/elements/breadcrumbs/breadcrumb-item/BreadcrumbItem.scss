@@ -1,0 +1,122 @@
+@import "../../../styles/variables.scss";
+@import "../../common/typography/text.mixins";
+
+.novo-breadcrumb-font-style {
+  @include novo-body-text();
+}
+
+:host {
+  display: flex;
+  align-items: center;
+  flex-flow: row nowrap;
+
+  .novo-breadcrumb-item {
+    @extend .novo-breadcrumb-font-style;
+    cursor: auto;
+    display: flex;
+    align-items: center;
+    flex-flow: row nowrap;
+
+    ::ng-deep a:hover {
+      text-decoration: none;
+    }
+
+    ::ng-deep a {
+      @extend .novo-breadcrumb-font-style;
+      color: $ocean;
+      cursor: pointer;
+      &:focus {
+        text-decoration: none;
+      }
+    }
+  }
+
+  .novo-breadcrumb-down-icon {
+    vertical-align: middle;
+    display: inline-block;
+    cursor: pointer;
+    width: 16px;
+    height: 16px;
+    margin-right: -5px;
+    text-align: center;
+    outline: none;
+
+    &:hover {
+      svg g polygon {
+        fill: var(--text-main, $dark);
+      }
+    }
+  }
+
+  .novo-breadcrumb-item-active {
+    color: var(--text-main, $dark);
+
+    ::ng-deep a {
+      color: var(--text-main, $dark);
+      text-decoration: none;
+    }
+
+    svg g polygon {
+      fill: var(--text-main, $dark);
+    }
+
+    span {
+      color: var(--text-main, $dark);
+    }
+  }
+
+  .novo-breadcrumb-separator {
+    @extend.novo-breadcrumb-font-style;
+
+    margin: 0 3px;
+  }
+
+  .novo-breadcrumb-dropdown-menu {
+    padding: 10px 0;
+    max-width: 200px;
+
+    li {
+      padding: 0 15px;
+      font-size: 12px;
+      line-height: 36px;
+      width: 200px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      cursor: pointer;
+
+      a {
+        color: $dark;
+        line-height: 36px;
+        width: 170px;
+        display: inline-block;
+
+        &:focus {
+          text-decoration: none;
+        }
+      }
+
+      &:hover {
+        background: $light;
+
+        a {
+          text-decoration: none;
+        }
+      }
+    }
+  }
+
+  .novo-search-container {
+    max-width: 200px;
+  }
+
+  span.novo-breadcrumb-dropdown-origin {
+    min-width: unset;
+    display: inline-flex;
+    padding: 0;
+  }
+
+  novo-search {
+    width: 100%;
+  }
+}

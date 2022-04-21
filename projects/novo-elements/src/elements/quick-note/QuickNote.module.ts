@@ -1,17 +1,16 @@
 // NG2
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+import { NovoListModule } from './../list/List.module';
 // APP
 import { NovoLoadingModule } from './../loading/Loading.module';
-import { NovoListModule } from './../list/List.module';
-import { QuickNoteElement } from './QuickNote';
 import { QuickNoteResults } from './extras/quick-note-results/QuickNoteResults';
+import { QuickNoteElement } from './QuickNote';
 
 @NgModule({
   imports: [CommonModule, FormsModule, NovoLoadingModule, NovoListModule],
   declarations: [QuickNoteElement, QuickNoteResults],
   exports: [QuickNoteElement, QuickNoteResults],
-  entryComponents: [QuickNoteResults],
 })
 export class NovoQuickNoteModule {}

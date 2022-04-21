@@ -1,0 +1,57 @@
+<!-- Placeholder to adjust vertical offset of the novo-option elements -->
+<input novoInput class="novo-select-search-input novo-select-search-hidden" />
+
+<!-- Note: the  novo-datepicker-content novo-tab-header are needed to inherit the novoerial theme colors, see PR #22 -->
+<div
+  #innerSelectSearch
+  class="novo-select-search-inner novo-typography novo-datepicker-content novo-tab-header"
+  [ngClass]="{'novo-select-search-inner-multiple': novoSelect.multiple, 'novo-select-search-inner-toggle-all': _isToggleAllCheckboxVisible() }">
+
+  <novo-checkbox *ngIf="_isToggleAllCheckboxVisible()"
+    [color]="'primary'"
+    class="novo-select-search-toggle-all-checkbox"
+    [checked]="toggleAllCheckboxChecked"
+    [indeterminate]="toggleAllCheckboxIndeterminate"
+    [tooltip]="toggleAllCheckboxTooltipMessage"
+    tooltipClass="ngx-novo-select-search-toggle-all-tooltip"
+    [tooltipPosition]="toogleAllCheckboxTooltipPosition"
+    (change)="_emitSelectAllBooleanToParent($event.checked)"></novo-checkbox>
+
+  <novo-icon class="novo-select-search-icon-prefix">search</novo-icon>
+
+  <input class="novo-select-search-input novo-input-element"
+    #searchSelectInput
+    [name]="name"
+    autocomplete="off"
+    [type]="type"
+    [formControl]="_formControl"
+    (keydown)="_handleKeydown($event)"
+    (keyup)="_handleKeyup($event)"
+    (blur)="onBlur()"
+    [placeholder]="placeholderLabel"
+    [attr.aria-label]="ariaLabel" />
+  <novo-spinner *ngIf="searching"
+    class="novo-select-search-spinner"
+    diameter="16"></novo-spinner>
+
+  <novo-button
+    *ngIf="!hideClearSearchButton && value && !searching"
+    aria-label="Clear"
+    (click)="_reset(true)"
+    theme="icon"
+    size="small"
+    class="novo-select-search-clear">
+    <ng-content *ngIf="clearIcon; else defaultIcon" select="[novoSelectSearchClear]"></ng-content>
+    <ng-template #defaultIcon>
+      <novo-icon>close</novo-icon>
+    </ng-template>
+  </novo-button>
+
+  <ng-content select=".novo-select-search-custom-header-content"></ng-content>
+
+</div>
+
+<div *ngIf="_showNoEntriesFound$ | async"
+  class="novo-select-search-no-entries-found">
+  {{noEntriesFoundLabel}}
+</div>

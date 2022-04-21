@@ -1,7 +1,6 @@
-import { Component, Input } from '@angular/core';
-
+import { Component } from '@angular/core';
 // Vendor
-import { FormUtils, PickerControl, EntityPickerResult, EntityPickerResults } from 'novo-elements';
+import { EntityPickerResult, EntityPickerResults, FormUtils, PickerControl } from 'novo-elements';
 
 // import { MockMeta, MockMetaHeaders } from './MockMeta';
 
@@ -116,6 +115,7 @@ export class PickerControlsExample {
       key: 'multiPickerControlWithMaxlengthAndPreselects',
       tooltip: 'Multiple With Maxlength and Preselects',
       label: 'Multiple With Maxlength & Preselects',
+      readOnly: true,
       multiple: true,
       maxlength: 2,
       config: {
@@ -213,13 +213,13 @@ export class PickerControlsExample {
           {
             label: 'Name',
             data: (item: any): string => {
-              return item['label'];
+              return item.label;
             },
           },
           {
             label: 'Id',
             data: (item: any): string => {
-              return item.value['id'];
+              return item.value.id;
             },
           },
         ],
@@ -239,13 +239,13 @@ export class PickerControlsExample {
           {
             label: 'Name',
             data: (item: any): string => {
-              return item['label'];
+              return item.label;
             },
           },
           {
             label: 'Id',
             data: (item: any): string => {
-              return item.value['id'];
+              return item.value.id;
             },
           },
         ],

@@ -1,0 +1,6 @@
+// Add to component in _scss-test-containers_input.ts
+@import "~novo-elements/styles/variables.scss";
+
+:host {
+  color: $candidate;
+}

@@ -1,10 +1,9 @@
-import { ChangeDetectorRef } from '@angular/core';
 import { DataSource } from '@angular/cdk/table';
-import { Observable, merge, of } from 'rxjs';
-import { startWith, switchMap, map, catchError } from 'rxjs/operators';
-
-import { DataTableState } from './state/data-table-state.service';
+import { ChangeDetectorRef } from '@angular/core';
+import { merge, Observable, of } from 'rxjs';
+import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 import { IDataTableService } from './interfaces';
+import { DataTableState } from './state/data-table-state.service';
 
 export class DataTableSource<T> extends DataSource<T> {
   public total = 0;
@@ -57,7 +56,10 @@ export class DataTableSource<T> extends DataSource<T> {
         this.current = data.results.length;
         this.data = data.results;
         // Clear selection
-        this.state.selectedRows.clear();
+        if (!this.state.retainSelected) {
+          this.state.selectedRows.clear();
+        }
+        this.state.retainSelected = false;
         this.state.onSelectionChange();
         // Mark changes
         setTimeout(() => {

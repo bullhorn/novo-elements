@@ -1,3 +1,4 @@
+import { BaseControl } from './BaseControl';
 import {
   AddressControl,
   CheckboxControl,
@@ -11,13 +12,13 @@ import {
   RadioControl,
   ReadOnlyControl,
   SelectControl,
+  SwitchControl,
   TablePickerControl,
   TextAreaControl,
   TextBoxControl,
   TilesControl,
   TimeControl,
 } from './index';
-import { BaseControl } from './BaseControl';
 
 export class ControlFactory {
   static create(type: string, config: BaseControl): BaseControl {
@@ -54,6 +55,8 @@ export class ControlFactory {
         return new TextBoxControl(config);
       case 'SelectControl':
         return new SelectControl(config);
+      case 'SwitchControl':
+        return new SwitchControl(config);
       case 'TilesControl':
         return new TilesControl(config);
       case 'TimeControl':

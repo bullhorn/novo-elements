@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, Directive, Input, HostBinding } from '@angular/core';
-import { CdkHeaderRow, CdkRow, CDK_ROW_TEMPLATE, CdkRowDef, CdkHeaderRowDef } from '@angular/cdk/table';
+import { CdkHeaderRow, CdkHeaderRowDef, CdkRow, CdkRowDef, CDK_ROW_TEMPLATE } from '@angular/cdk/table';
+import { ChangeDetectionStrategy, Component, Directive, HostBinding, Input } from '@angular/core';
 
 /** Workaround for https://github.com/angular/angular/issues/17849 */
 export const _NovoHeaderRowDef = CdkHeaderRowDef;
@@ -12,6 +12,8 @@ export const _NovoRow = CdkRow;
   providers: [{ provide: CdkHeaderRowDef, useExisting: NovoSimpleHeaderRowDef }],
 })
 export class NovoSimpleHeaderRowDef extends _NovoHeaderRowDef {
+  // TODO: add explicit constructor
+
   @Input('novoSimpleHeaderRowDef')
   columns;
 }
@@ -21,6 +23,8 @@ export class NovoSimpleHeaderRowDef extends _NovoHeaderRowDef {
   providers: [{ provide: CdkRowDef, useExisting: NovoSimpleRowDef }],
 })
 export class NovoSimpleRowDef<T> extends _NovoCdkRowDef<T> {
+  // TODO: add explicit constructor
+
   @Input('novoSimpleRowDefColumns')
   columns;
 }

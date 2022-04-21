@@ -1,0 +1,40 @@
+code,
+samp {
+  font-family: var(--font-family-mono);
+  background: var(--background-main);
+  color: var(--code);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0 0.5ch;
+  margin: 0 0.5ch;
+  line-height: inherit;
+  font-size: inherit;
+  white-space: nowrap;
+}
+
+time {
+  font-size: 1em;
+  font-family: var(--font-family-mono);
+  color: var(--code);
+}
+
+pre > code {
+  padding: 10px;
+  display: block;
+  overflow-x: auto;
+}
+
+var {
+  color: var(--variable);
+  font-style: normal;
+  font-family: var(--font-family-mono);
+}
+
+kbd {
+  font-family: var(--font-family-mono);
+  background: var(--background-main);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  color: var(--text-main);
+  padding: 2px 4px 2px 4px;
+}

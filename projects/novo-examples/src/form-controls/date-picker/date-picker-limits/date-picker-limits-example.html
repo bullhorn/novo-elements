@@ -1,0 +1,15 @@
+<div class="date-picker-demo-side-by-side">
+  <div>
+    <novo-label>EFFECTIVE START DATE</novo-label>
+    <novo-date-picker-input [(ngModel)]="startDate"></novo-date-picker-input>
+    <novo-label>EFFECTIVE END DATEE</novo-label>
+    <novo-date-picker-input [(ngModel)]="endDate"></novo-date-picker-input>
+
+    <novo-form [form]="formGroup">
+      <novo-control-group key="horizontal" [initialValue]="initValue" [form]="formGroup" [controls]="controls"></novo-control-group>
+    </novo-form>
+
+    <button theme="primary" (click)="updateInitialValue()">Update tooltip</button>
+  </div><br/>
+  <novo-date-picker [start]="startDate" [end]="endDate" [disabledDateMessage]="tooltip"></novo-date-picker>
+</div>

@@ -1,5 +1,5 @@
-import { NovoDataTableSortFilter } from './sort-filter.directive';
 import { DataTableState } from '../state/data-table-state.service';
+import { NovoDataTableSortFilter } from './sort-filter.directive';
 
 describe('Directive: sort-filter', () => {
   describe('Function: filter', () => {
@@ -22,6 +22,13 @@ describe('Directive: sort-filter', () => {
       directive.filter('test', 'text', null, undefined);
       expect(testState.filter).toEqual(undefined);
     });
+
+    it('should set check for selectionOptions', () => {
+      spyOn(testState, 'checkRetainment').and.callFake(() => {});
+      expect(directive.filter).toBeDefined();
+      directive.filter('test', 'text', null, undefined);
+      expect(testState.checkRetainment).toHaveBeenCalled();
+    });
   });
 
   describe('Function: sort', () => {
@@ -31,6 +38,13 @@ describe('Directive: sort-filter', () => {
     it('should set state sort to results', () => {
       directive.sort('test', 'test', undefined);
       expect(testState.sort).toEqual({ id: 'test', transform: undefined, value: 'test' });
+    });
+
+    it('should set check for selectionOptions', () => {
+      spyOn(testState, 'checkRetainment').and.callFake(() => {});
+      expect(directive.sort).toBeDefined();
+      directive.sort('test', 'test', undefined);
+      expect(testState.checkRetainment).toHaveBeenCalled();
     });
   });
 

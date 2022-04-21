@@ -1,25 +1,38 @@
 import { FocusableOption } from '@angular/cdk/a11y';
 import { Directionality } from '@angular/cdk/bidi';
 import { CdkStep, CdkStepper } from '@angular/cdk/stepper';
-import { AfterContentInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChild, ContentChildren, Directive, forwardRef, Inject, Input, Optional, QueryList, TemplateRef, ViewChildren } from '@angular/core';
+import {
+  AfterContentInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  ContentChild,
+  ContentChildren,
+  Directive,
+  forwardRef,
+  Inject,
+  Input,
+  Optional,
+  QueryList,
+  TemplateRef,
+  ViewChildren,
+} from '@angular/core';
 import { takeUntil } from 'rxjs/operators';
 import { NovoIconComponent } from '../icon/Icon';
 import { NovoStepHeader } from './step-header.component';
 import { NovoStepLabel } from './step-label.component';
 import { novoStepperAnimations } from './stepper.animations';
 
-export const _NovoStep = CdkStep;
-export const _NovoStepper = CdkStepper;
-
 @Component({
   selector: 'novo-step',
   templateUrl: 'step.component.html',
   preserveWhitespaces: false,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [{ provide: CdkStep, useExisting: NovoStep }],
 })
 export class NovoStep extends CdkStep {
   /** Content for step label given by `<ng-template novoStepLabel>`. */
-  @ContentChild(NovoStepLabel, { static: false })
+  @ContentChild(NovoStepLabel)
   stepLabel: NovoStepLabel;
 
   @Input()
@@ -36,6 +49,10 @@ export class NovoStep extends CdkStep {
 
 @Directive({
   selector: '[novoStepper]',
+  providers: [
+    { provide: CdkStep, useExisting: NovoStep },
+    { provide: CdkStepper, useExisting: NovoStepper },
+  ],
 })
 export class NovoStepper extends CdkStepper implements AfterContentInit {
   /** The list of step headers of the steps in the stepper. */
@@ -43,8 +60,16 @@ export class NovoStepper extends CdkStepper implements AfterContentInit {
   _stepHeader: QueryList<FocusableOption>;
 
   /** Steps that the stepper holds. */
-  @ContentChildren(NovoStep)
+  @ContentChildren(NovoStep, { descendants: true })
   _steps: QueryList<NovoStep>;
+
+  /** Steps that belong to the current stepper, excluding ones from nested steppers. */
+  public get steps(): QueryList<NovoStep> {
+    return this._steps;
+  }
+  public set steps(value: QueryList<NovoStep>) {
+    this._steps = value;
+  }
 
   /** Custom icon overrides passed in by the consumer. */
   @ContentChildren(NovoIconComponent)
@@ -96,6 +121,7 @@ export class NovoStepper extends CdkStepper implements AfterContentInit {
 
 @Component({
   selector: 'novo-horizontal-stepper',
+  exportAs: 'novoHorizontalStepper',
   templateUrl: 'stepper-horizontal.html',
   styleUrls: ['stepper.component.scss'],
   host: {
@@ -104,18 +130,19 @@ export class NovoStepper extends CdkStepper implements AfterContentInit {
     role: 'tablist',
   },
   animations: [novoStepperAnimations.horizontalStepTransition],
-  providers: [{ provide: NovoStepper, useExisting: NovoHorizontalStepper }],
+  providers: [
+    { provide: NovoStepper, useExisting: NovoHorizontalStepper },
+    { provide: CdkStepper, useExisting: NovoHorizontalStepper },
+  ],
   // encapsulation: ViewEncapsulation.None,
   preserveWhitespaces: false,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NovoHorizontalStepper extends NovoStepper {
-  @Input()
-  selectedIndex: number;
-}
+export class NovoHorizontalStepper extends NovoStepper {}
 
 @Component({
   selector: 'novo-vertical-stepper',
+  exportAs: 'novoVerticalStepper',
   templateUrl: 'stepper-vertical.html',
   styleUrls: ['stepper.component.scss'],
   host: {
@@ -124,14 +151,14 @@ export class NovoHorizontalStepper extends NovoStepper {
     role: 'tablist',
   },
   animations: [novoStepperAnimations.verticalStepTransition],
-  providers: [{ provide: NovoStepper, useExisting: NovoVerticalStepper }],
+  providers: [
+    { provide: NovoStepper, useExisting: NovoVerticalStepper },
+    { provide: CdkStepper, useExisting: NovoVerticalStepper },
+  ],
   preserveWhitespaces: false,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NovoVerticalStepper extends NovoStepper {
-  @Input()
-  selectedIndex: number;
-
   constructor(@Optional() dir: Directionality, changeDetectorRef: ChangeDetectorRef) {
     super(dir, changeDetectorRef);
     this._orientation = 'vertical';

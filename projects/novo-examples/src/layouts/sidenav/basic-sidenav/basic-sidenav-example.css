@@ -1,0 +1,18 @@
+/** No CSS for this example */
+.sidenav-example {
+  height: 640px;
+  width: 640px;
+  display: grid;
+  grid-template-rows: auto 1fr;
+}
+
+.novo-rail {
+  border-right: 1px solid var(--border);
+}
+.novo-rail .novo-text {
+  flex: 1;
+}
+.novo-rail:not(.expanded) .novo-text,
+.novo-rail:not(.expanded) .novo-action {
+  display: none;
+}

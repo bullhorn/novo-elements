@@ -1,0 +1,9 @@
+/** No CSS for this example */
+.example-card {
+  max-width: 400px;
+}
+
+.example-header-image {
+  background-image: url('https://upload.wikimedia.org/wikipedia/commons/4/43/Cow_on_Pupers.jpg');
+  background-size: cover;
+}

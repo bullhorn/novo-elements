@@ -1,0 +1,15 @@
+<form class="example-form">
+  <novo-field class="example-full-width">
+    <novo-label>Number</novo-label>
+    <input type="text"
+      novoInput
+      [formControl]="myControl"
+      placeholder="Pick one"
+      autocomplete="off" />
+    <novo-autocomplete #auto>
+      <novo-option *ngFor="let option of filteredOptions | async" [value]="option">
+        {{option}}
+      </novo-option>
+    </novo-autocomplete>
+  </novo-field>
+</form>

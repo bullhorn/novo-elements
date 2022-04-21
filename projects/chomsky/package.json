@@ -1,9 +1,0 @@
-{
-  "name": "chomsky",
-  "version": "4.1.0",
-  "peerDependencies": {
-    "@angular/common": ">=8",
-    "@angular/core": ">=8",
-    "rxjs": ">=6"
-  }
-}

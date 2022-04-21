@@ -1,0 +1,59 @@
+<div class="bgc-light">
+  <novo-toast
+    [theme]="style.value==='theme' ? color.value : null"
+    [accent]="style.value==='accent' ? color.value : null"
+    [appearance]="appearance.value"
+    [icon]="icon.value"
+    [title]="title.value ? 'Save Failed' : null"
+    [margin]="margin.value ? '1rem' : 0"
+    message="Oops! Looks like you're missing some required fields"></novo-toast>
+</div>
+<novo-row gap="3rem" align="flex-start">
+  <novo-field>
+    <novo-label>Appearance</novo-label>
+    <novo-radio-group #appearance appearance="vertical" value="banner">
+      <novo-radio name="appearance" value="banner">banner</novo-radio>
+      <novo-radio name="appearance" value="growl">growl</novo-radio>
+    </novo-radio-group>
+  </novo-field>
+  <novo-field>
+    <novo-label>Style</novo-label>
+    <novo-radio-group #style appearance="vertical" value="theme">
+      <novo-radio name="style" value="theme">theme</novo-radio>
+      <novo-radio name="style" value="accent">accent</novo-radio>
+    </novo-radio-group>
+  </novo-field>
+  <novo-field>
+    <novo-label>Color</novo-label>
+    <novo-radio-group #color appearance="vertical" value="info">
+      <novo-radio name="color" [value]="null">none</novo-radio>
+      <novo-radio name="color" value="info">info</novo-radio>
+      <novo-radio name="color" value="success">success</novo-radio>
+      <novo-radio name="color" value="warning">warning</novo-radio>
+      <novo-radio name="color" value="danger">danger</novo-radio>
+    </novo-radio-group>
+  </novo-field>
+  <novo-field>
+    <novo-label>Icon</novo-label>
+    <novo-radio-group #icon appearance="vertical" value="bell">
+      <novo-radio name="icon" [value]="null">none</novo-radio>
+      <novo-radio name="icon" value="check">check</novo-radio>
+      <novo-radio name="icon" value="bell">bell</novo-radio>
+      <novo-radio name="icon" value="caution">caution</novo-radio>
+    </novo-radio-group>
+  </novo-field>
+  <novo-field>
+    <novo-label>Show Title</novo-label>
+    <novo-radio-group #title appearance="vertical" [value]="true">
+      <novo-radio name="title" [value]="true">Show</novo-radio>
+      <novo-radio name="title" [value]="false">Hide</novo-radio>
+    </novo-radio-group>
+  </novo-field>
+  <novo-field>
+    <novo-label>Margin</novo-label>
+    <novo-radio-group #margin appearance="vertical" [value]="false">
+      <novo-radio name="margin" [value]="false">none</novo-radio>
+      <novo-radio name="margin" [value]="true">inset</novo-radio>
+    </novo-radio-group>
+  </novo-field>
+</novo-row>

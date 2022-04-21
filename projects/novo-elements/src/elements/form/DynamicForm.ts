@@ -1,37 +1,61 @@
 // NG
-import { AfterContentInit, Component, ContentChildren, ElementRef, Input, OnChanges, OnInit, QueryList, SimpleChanges } from '@angular/core';
+import {
+  AfterContentInit,
+  Component,
+  ContentChildren,
+  ElementRef,
+  Input,
+  OnChanges,
+  OnInit,
+  QueryList,
+  SimpleChanges,
+} from '@angular/core';
 import { NovoTemplateService } from '../../services/template/NovoTemplateService';
 import { NovoTemplate } from '../common/novo-template/novo-template.directive';
 // App
 import { Helpers } from './../../utils/Helpers';
-import { NovoFieldset, NovoFormGroup } from './FormInterfaces';
+import { NovoFieldset } from './FormInterfaces';
+import { NovoFormGroup } from './NovoFormGroup';
 
 @Component({
   selector: 'novo-fieldset-header',
   template: `
-        <h6><i [class]="icon || 'bhi-section'"></i>{{title}}</h6>
-    `,
+    <novo-title smaller>
+      <novo-icon>{{ icon?.replace('bhi-', '') }}</novo-icon
+      >{{ title }}
+    </novo-title>
+  `,
+  host: {
+    class: 'novo-fieldset-header',
+  },
 })
 export class NovoFieldsetHeaderElement {
   @Input()
   title: string;
   @Input()
-  icon: string;
+  icon: string = 'section';
 }
 
 @Component({
   selector: 'novo-fieldset',
   template: `
-        <div class="novo-fieldset-container">
-            <novo-fieldset-header [icon]="icon" [title]="title" *ngIf="title" [class.embedded]="isEmbedded" [class.inline-embedded]="isInlineEmbedded" [class.hidden]="hidden"></novo-fieldset-header>
-            <ng-container *ngFor="let control of controls;let controlIndex = index;">
-                <div class="novo-form-row" [class.disabled]="control.disabled" *ngIf="control.__type !== 'GroupedControl'">
-                    <novo-control [autoFocus]="autoFocus && index === 0 && controlIndex === 0" [control]="control" [form]="form"></novo-control>
-                </div>
-                <div *ngIf="control.__type === 'GroupedControl'">TODO - GroupedControl</div>
-            </ng-container>
+    <div class="novo-fieldset-container">
+      <novo-fieldset-header
+        [icon]="icon"
+        [title]="title"
+        *ngIf="title"
+        [class.embedded]="isEmbedded"
+        [class.inline-embedded]="isInlineEmbedded"
+        [class.hidden]="hidden"
+      ></novo-fieldset-header>
+      <ng-container *ngFor="let control of controls; let controlIndex = index">
+        <div class="novo-form-row" [class.disabled]="control.disabled" *ngIf="control.__type !== 'GroupedControl'">
+          <novo-control [autoFocus]="autoFocus && index === 0 && controlIndex === 0" [control]="control" [form]="form"></novo-control>
         </div>
-    `,
+        <div *ngIf="control.__type === 'GroupedControl'">TODO - GroupedControl</div>
+      </ng-container>
+    </div>
+  `,
 })
 export class NovoFieldsetElement {
   @Input()
@@ -57,19 +81,30 @@ export class NovoFieldsetElement {
 @Component({
   selector: 'novo-dynamic-form',
   template: `
-        <novo-control-templates></novo-control-templates>
-        <div class="novo-form-container">
-            <header>
-                <ng-content select="form-title"></ng-content>
-                <ng-content select="form-subtitle"></ng-content>
-            </header>
-            <form class="novo-form" [formGroup]="form">
-                <ng-container *ngFor="let fieldset of form.fieldsets;let i = index">
-                    <novo-fieldset *ngIf="fieldset.controls.length" [index]="i" [autoFocus]="autoFocusFirstField" [icon]="fieldset.icon" [controls]="fieldset.controls" [title]="fieldset.title" [form]="form" [isEmbedded]="fieldset.isEmbedded" [isInlineEmbedded]="fieldset.isInlineEmbedded" [hidden]="fieldset.hidden"></novo-fieldset>
-                </ng-container>
-            </form>
-        </div>
-    `,
+    <novo-control-templates></novo-control-templates>
+    <div class="novo-form-container">
+      <header>
+        <ng-content select="form-title"></ng-content>
+        <ng-content select="form-subtitle"></ng-content>
+      </header>
+      <form class="novo-form" [formGroup]="form">
+        <ng-container *ngFor="let fieldset of form.fieldsets; let i = index">
+          <novo-fieldset
+            *ngIf="fieldset.controls.length"
+            [index]="i"
+            [autoFocus]="autoFocusFirstField"
+            [icon]="fieldset.icon"
+            [controls]="fieldset.controls"
+            [title]="fieldset.title"
+            [form]="form"
+            [isEmbedded]="fieldset.isEmbedded"
+            [isInlineEmbedded]="fieldset.isInlineEmbedded"
+            [hidden]="fieldset.hidden"
+          ></novo-fieldset>
+        </ng-container>
+      </form>
+    </div>
+  `,
   providers: [NovoTemplateService],
 })
 export class NovoDynamicFormElement implements OnChanges, OnInit, AfterContentInit {
@@ -95,7 +130,7 @@ export class NovoDynamicFormElement implements OnChanges, OnInit, AfterContentIn
   showingRequiredFields = true;
   numControls = 0;
 
-  constructor(private element: ElementRef, private templates: NovoTemplateService) { }
+  constructor(private element: ElementRef, private templates: NovoTemplateService) {}
 
   public ngOnInit(): void {
     this.ngOnChanges();

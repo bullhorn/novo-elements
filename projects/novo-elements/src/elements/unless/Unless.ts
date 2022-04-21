@@ -10,7 +10,7 @@ export class Unless {
   permissions: string = '';
   isDisplayed: boolean = false;
 
-  constructor(private templateRef: TemplateRef<any>, private viewContainer: ViewContainerRef, private security: Security) {
+  constructor(public templateRef: TemplateRef<any>, public viewContainer: ViewContainerRef, public security: Security) {
     this.security.subscribe(this.check.bind(this));
   }
 

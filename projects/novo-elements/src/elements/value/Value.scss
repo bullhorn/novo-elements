@@ -4,16 +4,23 @@ novo-value {
   max-width: 500px;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
+  width: max-content;
   padding-left: 10px;
   padding-bottom: 10px;
   padding-right: 15px;
+
+  &.horizontal {
+    .value-outer {
+      display: grid;
+      grid-template-columns: minmax(200px, 300px) 1fr;
+    }
+  }
+
   .value-outer {
     display: flex;
     flex-direction: column;
     label {
       color: #9e9e9e;
-      font-size: 0.9em;
       flex: 1;
       font-weight: 500;
       transition: 200ms ease-out;
@@ -22,6 +29,7 @@ novo-value {
       overflow-wrap: break-word;
     }
   }
+
   .actions {
     i {
       cursor: default;
@@ -39,15 +47,15 @@ novo-value {
   }
   novo-entity-list {
     display: block;
+    @include entity-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
+      i.#{$name} {
+        background: $color;
+      }
+    }
     .entity {
       padding-top: 6px;
       padding-bottom: 6px;
       font-size: 1.15em;
-    }
-    @each $entity, $color in $entity-colors {
-      i.#{$entity} {
-        color: $color;
-      }
     }
     i {
       font-size: 1.1em;

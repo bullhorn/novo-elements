@@ -1,9 +1,12 @@
+import { Injectable } from '@angular/core';
+
 export interface Global {}
 
 export abstract class GlobalRef {
   abstract get nativeGlobal(): Global;
 }
 
+@Injectable()
 export class BrowserGlobalRef extends GlobalRef {
   get nativeGlobal(): Global {
     return window as Global;
@@ -11,7 +14,7 @@ export class BrowserGlobalRef extends GlobalRef {
 }
 export class NodeGlobalRef extends GlobalRef {
   get nativeGlobal(): Global {
-    throw new Error('global doesn\'t compile for some reason');
+    throw new Error(`global doesn't compile for some reason`);
     // return global as Global;
   }
 }

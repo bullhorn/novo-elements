@@ -1,12 +1,11 @@
 // NG2
 import { ElementRef } from '@angular/core';
-import { TestBed, async } from '@angular/core/testing';
-import { DomSanitizer } from '@angular/platform-browser';
+import { async, TestBed } from '@angular/core/testing';
+import { NovoLabelService } from '../../../../services/novo-label-service';
 // App
 import { NovoListModule } from './../../../list/List.module';
 import { NovoLoadingModule } from './../../../loading/Loading.module';
 import { SkillsSpecialtyPickerResults } from './SkillsSpecialtyPickerResults';
-import { NovoLabelService } from '../../../../services/novo-label-service';
 
 describe('Components: SkillsSpecialtyPickerResults', () => {
   let fixture: any;
@@ -31,7 +30,7 @@ describe('Components: SkillsSpecialtyPickerResults', () => {
 
   describe('Function: getListElement()', () => {
     it('should return novo-list', () => {
-      spyOn(component.element.nativeElement, 'querySelector').and.callFake((arg) => arg);
+      jest.spyOn(component.element.nativeElement, 'querySelector').mockImplementation((arg) => arg);
       expect(component.getListElement()).toEqual('novo-list');
     });
   });

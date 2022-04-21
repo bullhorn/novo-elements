@@ -1,6 +1,18 @@
-<header>
-    <novo-loading></novo-loading>
-</header>
-<header class="color-container">
-    <novo-loading inverse></novo-loading>
-</header>
+<novo-loading [size]="size.value" [color]="color.value"></novo-loading>
+
+<section>
+  <novo-label>Size</novo-label>
+  <novo-radio-group #size appearance="vertical" value="medium">
+    <novo-radio name="size" value="small">small</novo-radio>
+    <novo-radio name="size" value="medium">medium</novo-radio>
+    <novo-radio name="size" value="large">large</novo-radio>
+  </novo-radio-group>
+
+  <novo-label>Color</novo-label>
+  <novo-radio-group #color appearance="vertical">
+    <novo-radio name="color" value="grapefruit">grapefruit</novo-radio>
+    <novo-radio name="color" value="aqua">aqua</novo-radio>
+    <novo-radio name="color" value="mint">mint</novo-radio>
+    <novo-radio name="color" value="ocean">ocean</novo-radio>
+  </novo-radio-group>
+</section>

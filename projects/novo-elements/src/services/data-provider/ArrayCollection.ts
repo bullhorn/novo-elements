@@ -1,9 +1,9 @@
 // Ng
 import { EventEmitter } from '@angular/core';
+import { Helpers } from '../../utils/Helpers';
 // App
 import { Collection } from './Collection';
 import { CollectionEvent } from './CollectionEvent';
-import { Helpers } from '../../utils/Helpers';
 
 /**
  * Base Class for all Collection based data providers

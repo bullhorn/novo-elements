@@ -1,16 +1,17 @@
 // NG2
-import { ElementRef, Input, ChangeDetectorRef } from '@angular/core';
-// APP
-import { Helpers } from '../../../../utils/Helpers';
+import { OverlayRef } from '@angular/cdk/overlay';
+import { ChangeDetectorRef, Directive, ElementRef, Input } from '@angular/core';
 // Vendor
 import { from, Observable } from 'rxjs';
-import { OverlayRef } from '@angular/cdk/overlay';
+// APP
+import { Helpers } from '../../../../utils/Helpers';
 import { NovoControlConfig } from '../../../form/controls/BaseControl';
 
 /**
  * @description This is the actual list of matches that gets injected into the DOM. It's also the piece that can be
  * overwritten if custom list options are needed.
  */
+@Directive()
 export class BasePickerResults {
   _term: string = '';
   selected: Array<any> = [];
@@ -239,9 +240,7 @@ export class BasePickerResults {
   filterData(matches): Array<any> {
     if (this.term && matches) {
       return matches.filter((match) => {
-        return ~String(match.label)
-          .toLowerCase()
-          .indexOf(this.term.toLowerCase());
+        return ~String(match.label).toLowerCase().indexOf(this.term.toLowerCase());
       });
     }
     // Show no recent results template
@@ -351,16 +350,20 @@ export class BasePickerResults {
   }
 
   preselected(match) {
-    if (this.config.preselected) {
+    let selected = this.selected;
+    if (this.config && this.config.selected) {
+      selected = [...this.selected, ...this.config.selected];
+    }
+    if (this.config && this.config.preselected) {
       const preselectedFunc: Function = this.config.preselected;
       return (
-        this.selected.findIndex((item) => {
+        selected.findIndex((item) => {
           return preselectedFunc(match, item);
         }) !== -1
       );
     }
     return (
-      this.selected.findIndex((item) => {
+      selected.findIndex((item) => {
         let isPreselected = false;
         if (item && item.value && match && match.value) {
           if (item.value.id && match.value.id) {

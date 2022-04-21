@@ -1,0 +1,13 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "../../out-tsc/app",
+    "types": ["node"],
+    "paths": {
+      "novo-elements": ["projects/novo-elements/src/index"],
+      "novo-examples": ["projects/novo-examples/src/index"]
+    }
+  },
+  "files": ["main.ts", "polyfills.ts"],
+  "include": ["projects/demo/**/*.d.ts"]
+}

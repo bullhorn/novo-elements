@@ -1,76 +1,60 @@
-@mixin reset-text() {
-  font-family: $base-font-family; // We deliberately do NOT reset font-size.
-  font-style: normal;
-  font-weight: normal;
-  letter-spacing: normal;
-  line-break: auto;
-  line-height: 1.428571429;
-  text-align: left; // Fallback for where `flex-start` is not supported
-  text-align: flex-start;
-  text-decoration: none;
-  text-shadow: none;
-  text-transform: none;
-  white-space: normal;
-  word-break: normal;
-  word-spacing: normal;
-  word-wrap: normal;
-}
+@import "../common/typography/text.mixins";
 
 popover-content {
   .popover {
     position: absolute;
     top: 0;
     left: 0;
-    z-index: 10000;
+    z-index: z(overlay);
     display: none;
-    width: 400px;
-    padding: 23px 20px 16px 20px;
-    @include reset-text;
-    font-size: 14px;
-    background-color: #fff;
+    width: 40rem;
+    padding: 2rem;
+    background-color: var(--background-bright, $white);
+    color: var(--text-main, $dark);
     background-clip: padding-box;
-    box-shadow: 0 1px 7px rgba(0, 0, 0, 0.09), 0 1px 3px rgba(0, 0, 0, 0.2);
+    box-shadow: $shadow-popover;
+
     &.top {
-      margin-top: -10px;
+      margin-top: -1rem;
       &.virtual-area {
-        bottom: -11px;
+        bottom: -1.1rem;
       }
     }
     &.right {
-      margin-left: 10px;
+      margin-left: 1rem;
       &.virtual-area {
-        left: -11px;
+        left: -1.1rem;
       }
     }
     &.bottom {
-      margin-top: 10px;
+      margin-top: 1rem;
       &.virtual-area {
-        top: -11px;
+        top: -1.1rem;
       }
     }
     &.left {
-      margin-left: -10px;
+      margin-left: -1rem;
       &.virtual-area {
-        right: -11px;
+        right: -1.1rem;
       }
     }
     .virtual-area {
-      height: 11px;
+      height: 1.1rem;
       width: 100%;
       position: absolute;
     } // Arrows
-    // .arrow is outer, .arrow:after is inner
+    // .arrow is outer, .arrow:before is inner
     &.top > .arrow {
       margin-left: -9px;
       border-bottom-width: 0;
       border-top-color: rgba(0, 0, 0, 0.1);
       bottom: -9px;
-      &:after {
-        content: ' ';
+      &:before {
+        content: " ";
         bottom: 1px;
-        margin-left: -10px;
+        margin-left: -1rem;
         border-bottom-width: 0;
-        border-top-color: #fff;
+        border-top-color: var(--background-bright, $white);
       }
       &.center {
         left: 50%;
@@ -87,12 +71,12 @@ popover-content {
       margin-top: -9px;
       border-left-width: 0;
       border-right-color: rgba(0, 0, 0, 0.1);
-      &:after {
-        content: ' ';
+      &:before {
+        content: " ";
         left: 1px;
-        bottom: -10px;
+        bottom: -1rem;
         border-left-width: 0;
-        border-right-color: #fff;
+        border-right-color: var(--background-bright, $white);
       }
       &.center {
         top: 50%;
@@ -109,12 +93,12 @@ popover-content {
       border-top-width: 0;
       border-bottom-color: rgba(0, 0, 0, 0.1);
       top: -9px;
-      &:after {
-        content: ' ';
+      &:before {
+        content: " ";
         top: 1px;
-        margin-left: -10px;
+        margin-left: -1rem;
         border-top-width: 0;
-        border-bottom-color: #fff;
+        border-bottom-color: var(--background-bright, $white);
       }
       &.center {
         left: 50%;
@@ -131,12 +115,12 @@ popover-content {
       margin-top: -9px;
       border-right-width: 0;
       border-left-color: rgba(0, 0, 0, 0.1);
-      &:after {
-        content: ' ';
+      &:before {
+        content: " ";
         right: 1px;
         border-right-width: 0;
-        border-left-color: #fff;
-        bottom: -10px;
+        border-left-color: var(--background-bright, $white);
+        bottom: -1rem;
       }
       &.center {
         top: 50%;
@@ -152,7 +136,7 @@ popover-content {
   .popover > .arrow {
     border-width: 9px;
     &,
-    &:after {
+    &:before {
       position: absolute;
       display: block;
       width: 0;
@@ -160,18 +144,17 @@ popover-content {
       border-color: transparent;
       border-style: solid;
     }
-    &:after {
-      border-width: 10px;
-      content: '';
+    &:before {
+      border-width: 1rem;
+      content: "";
     }
   }
   .popover-title {
-    margin: 0; // reset heading margin
-    padding: 0 0 8px 0;
-    font-weight: 600;
+    @include novo-title-text();
+    margin-bottom: 1rem;
   }
   .popover-content {
-    padding: 9px 0;
+    @include novo-body-text();
     .popover-content-text {
       white-space: pre-line;
     }

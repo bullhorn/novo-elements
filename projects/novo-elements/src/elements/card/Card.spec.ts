@@ -1,11 +1,9 @@
 // NG2
-import { TestBed, async } from '@angular/core/testing';
-// App
-import { CardElement } from './Card';
-import { NovoLoadingElement } from '../loading/Loading';
-import { TooltipDirective } from '../tooltip/Tooltip.directive';
-import { NovoLabelService } from '../../services/novo-label-service';
 import { OverlayModule } from '@angular/cdk/overlay';
+import { async, TestBed } from '@angular/core/testing';
+import { NovoLabelService } from '../../services/novo-label-service';
+import { CardElement } from './Card';
+import { NovoCardModule } from './Card.module';
 
 describe('Elements: CardElement', () => {
   let fixture;
@@ -13,9 +11,8 @@ describe('Elements: CardElement', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [CardElement, NovoLoadingElement, TooltipDirective],
       providers: [{ provide: NovoLabelService, useClass: NovoLabelService }],
-      imports: [OverlayModule],
+      imports: [OverlayModule, NovoCardModule],
     }).compileComponents();
     fixture = TestBed.createComponent(CardElement);
     component = fixture.debugElement.componentInstance;
@@ -69,15 +66,15 @@ describe('Elements: CardElement', () => {
 
   describe('Method: toggleClose()', () => {
     it('should emit close event', () => {
-      spyOn(component.onClose, 'next');
+      jest.spyOn(component.onClose, 'next');
       component.toggleClose();
       expect(component.onClose.next).toHaveBeenCalledWith();
     });
 
     it('should call close function if defined in config', () => {
       component.config.onClose = () => {};
-      spyOn(component.onClose, 'next');
-      spyOn(component.config, 'onClose');
+      jest.spyOn(component.onClose, 'next');
+      jest.spyOn(component.config, 'onClose');
       component.toggleClose();
       expect(component.onClose.next).not.toHaveBeenCalled();
       expect(component.config.onClose).toHaveBeenCalled();
@@ -86,15 +83,15 @@ describe('Elements: CardElement', () => {
 
   describe('Method: toggleRefresh()', () => {
     it('should emit close event', () => {
-      spyOn(component.onRefresh, 'next');
+      jest.spyOn(component.onRefresh, 'next');
       component.toggleRefresh();
       expect(component.onRefresh.next).toHaveBeenCalledWith();
     });
 
     it('should call refresh function if defined in config', () => {
       component.config.onRefresh = () => {};
-      spyOn(component.onRefresh, 'next');
-      spyOn(component.config, 'onRefresh');
+      jest.spyOn(component.onRefresh, 'next');
+      jest.spyOn(component.config, 'onRefresh');
       component.toggleRefresh();
       expect(component.onRefresh.next).not.toHaveBeenCalled();
       expect(component.config.onRefresh).toHaveBeenCalled();

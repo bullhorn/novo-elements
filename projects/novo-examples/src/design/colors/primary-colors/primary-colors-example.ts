@@ -16,7 +16,7 @@ export class PrimaryColorsExample {
     {
       name: 'navigation',
       variables: ['navigation'],
-      hex: '2F384F',
+      hex: '202945',
     },
     {
       name: 'positive',

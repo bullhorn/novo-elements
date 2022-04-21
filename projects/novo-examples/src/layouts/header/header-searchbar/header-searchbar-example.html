@@ -1,12 +1,14 @@
-<header title="Header" [icon]="icon" [theme]="theme">
+<header [theme]="theme">
+  <novo-icon size="2xl">{{icon}}</novo-icon>
+  <novo-title size="2xl">Header</novo-title>
   <section class="header-content">
-    <novo-search [alwaysOpen]="isChecked" [theme]="theme"></novo-search>
+    <novo-search [theme]="theme"></novo-search>
   </section>
-  <utils>
-    <util-action icon="convert" tooltip="Change Theme" (click)="changeTheme()"></util-action>
-    <util-action icon="refresh" tooltip="Show Popup" (click)="catchEv('refresh', $event)"></util-action>
-    <util-action icon="times" tooltip="Show Popup" (click)="catchEv('close', $event)"></util-action>
-  </utils>
+
+  <novo-action icon="convert" tooltip="Change Theme" (click)="changeTheme()"></novo-action>
+  <novo-action icon="refresh" tooltip="Show Popup" (click)="catchEv('refresh', $event)"></novo-action>
+  <novo-action icon="times" tooltip="Show Popup" (click)="catchEv('close', $event)"></novo-action>
+
 </header>
-<br/>
+<br />
 <novo-checkbox label="Always Open?" [(ngModel)]="isChecked"></novo-checkbox>

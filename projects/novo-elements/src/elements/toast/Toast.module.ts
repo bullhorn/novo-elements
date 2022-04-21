@@ -1,13 +1,13 @@
 // NG2
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { NovoButtonModule } from '../button';
 // APP
 import { NovoToastElement } from './Toast';
 
 @NgModule({
-  imports: [CommonModule],
+  imports: [CommonModule, NovoButtonModule],
   declarations: [NovoToastElement],
   exports: [NovoToastElement],
-  entryComponents: [NovoToastElement],
 })
 export class NovoToastModule {}

@@ -1,0 +1,55 @@
+<form class="example-container" [formGroup]="options">
+  <novo-fields>
+    <novo-field>
+      <novo-label>Pick a Number?</novo-label>
+      <input novoInput type="number" placeholder="Ex. 12" [formControl]="numberControl" min="10" />
+      <novo-error *ngIf="numberControl.invalid">Minimum: 10</novo-error>
+    </novo-field>
+
+    <novo-field>
+      <novo-label>Set an Alarm</novo-label>
+      <input novoInput timeFormat [picker]="timepicker" [formControl]="timeControl" />
+      <novo-picker-toggle novoSuffix icon="clock">
+        <novo-time-picker #timepicker></novo-time-picker>
+      </novo-picker-toggle>
+    </novo-field>
+
+    <novo-field>
+      <novo-label>Date of Birth</novo-label>
+      <input novoInput dateFormat [picker]="datepicker" [formControl]="dateControl" disabled="true" readonly />
+      <novo-picker-toggle novoSuffix icon="calendar">
+        <novo-date-picker #datepicker></novo-date-picker>
+      </novo-picker-toggle>
+    </novo-field>
+
+
+    <!-- <novo-field>
+      <novo-label>Shift Needs?</novo-label>
+      <novo-association-table>
+        <ng-container novoColumnDef="position">
+          <th mat-header-cell *novoHeaderCellDef>No.</th>
+          <td mat-cell *novoCellDef="let element">{{element.position}}</td>
+        </ng-container>
+
+        <tr>
+          <td colspan="3">
+            <novo-field>
+              <novo-label>Date of Birth</novo-label>
+              <input novoInput dateFormat [picker]="datepicker" [formControl]="dateControl" />
+              <novo-picker-toggle novoSuffix icon="calendar">
+                <novo-date-picker #datepicker></novo-date-picker>
+              </novo-picker-toggle>
+            </novo-field>
+          </td>
+        </tr>
+      </novo-association-table>
+    </novo-field> -->
+
+    <button theme="primary" [disabled]="!options.valid" (click)="onSubmit(options.value)">Submit
+      Form</button>
+  </novo-fields>
+</form>
+
+<div class="example-container">
+  {{ post | json }}
+</div>

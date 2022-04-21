@@ -105,7 +105,7 @@ grouped-multi-picker-results {
         position: absolute;
         right: 10px;
         top: 12px;
-        font-size: 1.2em;
+        font-size: 1.2rem;
         &.disabled {
           pointer-events: none;
           opacity: 0.4;
@@ -113,7 +113,6 @@ grouped-multi-picker-results {
       }
       i.bhi-times {
         cursor: pointer;
-        font-size: 1.1em;
       }
     }
     .grouped-multi-picker-list-container {

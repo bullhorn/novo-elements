@@ -1,6 +1,5 @@
 // NG2
 import { Inject, Injectable, LOCALE_ID, Optional } from '@angular/core';
-
 //  import DateTimeFormatPart = Intl.DateTimeFormatPart;
 
 interface TimeFormatParts {
@@ -50,6 +49,7 @@ export class NovoLabelService {
   clearAllNormalCase = 'Clear All';
   clearSort = 'Clear Sort';
   clearFilter = 'Clear Filter';
+  clearSelected = 'Clear Selected';
   today = 'Today';
   now = 'Now';
   isRequired = 'is required';
@@ -89,6 +89,7 @@ export class NovoLabelService {
   noItems = 'There are no items';
   dateFormat = 'MM/dd/yyyy';
   dateFormatPlaceholder = 'MM/DD/YYYY';
+  localDatePlaceholder = 'mm/dd/yyyy';
   timeFormatPlaceholderAM = 'hh:mm AM';
   timeFormatPlaceholder24Hour = 'HH:mm';
   timeFormatAM = 'AM';
@@ -100,7 +101,7 @@ export class NovoLabelService {
   actions = 'Actions';
   all = 'All';
   groupedMultiPickerEmpty = 'No items to display';
-  groupedMultiPickerSelectCategory = 'Select a category from the right to get started';
+  groupedMultiPickerSelectCategory = 'Select a category from the left to get started';
   add = 'Add';
   encryptedFieldTooltip = 'This data has been stored at the highest level of security';
   noStatesForCountry = 'No states available for the selected country';
@@ -151,6 +152,10 @@ export class NovoLabelService {
     return this.dateFormat;
   }
 
+  localizedDatePlaceholder(): string {
+    return this.localDatePlaceholder;
+  }
+
   tabbedGroupClearSuggestion(tabLabelPlural: string): string {
     return `Clear your search to see all ${tabLabelPlural}.`;
   }
@@ -178,20 +183,27 @@ export class NovoLabelService {
         obj[part.type] = part.value;
         return obj;
       }, {});
-    const dayperiod = timeParts.dayperiod ? timeParts.dayperiod : '';
-    return `${timeParts.hour}:${timeParts.minute}${dayperiod}`;
+    const dayPeriod = timeParts.dayPeriod ? timeParts.dayPeriod : '';
+    const res = `${timeParts.hour}:${timeParts.minute} ${dayPeriod}`;
+    return res;
   }
 
-  getWeekdays(): string[] {
+  getWeekdays(weekStartsOn = 0): string[] {
     function getDay(dayOfWeek) {
       const dt = new Date();
       return dt.setDate(dt.getDate() - dt.getDay() + dayOfWeek);
     }
 
-    return [getDay(0), getDay(1), getDay(2), getDay(3), getDay(4), getDay(5), getDay(6)].reduce((weekdays, dt) => {
+    let weekdays = [getDay(0), getDay(1), getDay(2), getDay(3), getDay(4), getDay(5), getDay(6)].reduce((weekdays, dt) => {
       weekdays.push(new Intl.DateTimeFormat(this.userLocale, { weekday: 'long' }).format(dt));
       return weekdays;
     }, []);
+
+    if (weekStartsOn > 0 && weekStartsOn <= 6) {
+      const newStart = weekdays.splice(weekStartsOn);
+      weekdays = [...newStart, ...weekdays];
+    }
+    return weekdays;
   }
 
   getMonths(): string[] {

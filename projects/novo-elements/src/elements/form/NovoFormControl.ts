@@ -1,10 +1,10 @@
 // NG2
-import { FormControl, Validators } from '@angular/forms';
 import { EventEmitter } from '@angular/core';
-// APP
-import { NovoControlConfig } from './FormControls';
+import { FormControl, Validators } from '@angular/forms';
 import { notify } from '../../utils/notifier/notifier.util';
 import { IMaskOptions } from './Control';
+// APP
+import { NovoControlConfig } from './FormControls';
 
 export class NovoFormControl extends FormControl {
   displayValueChanges: EventEmitter<any> = new EventEmitter<any>();
@@ -64,6 +64,8 @@ export class NovoFormControl extends FormControl {
   checkboxLabel?: string;
   restrictFieldInteractions?: boolean;
   warning?: string;
+  highlighted?: boolean;
+  disabledDateMessage?: string;
   private historyTimeout: any;
 
   constructor(value: any, control: NovoControlConfig) {
@@ -125,6 +127,7 @@ export class NovoFormControl extends FormControl {
     this.tipWell = control.tipWell;
     this.customControlConfig = control.customControlConfig;
     this.warning = control.warning;
+    this.disabledDateMessage = control.disabledDateMessage;
 
     // Reactive Form, need to enable/disable, can't bind to [disabled]
     if (this.readOnly) {
@@ -227,5 +230,9 @@ export class NovoFormControl extends FormControl {
     this.markAsDirty();
     this.markAsTouched();
     this.setErrors(Object.assign({}, this.errors, { custom: message }));
+  }
+
+  markAsValid(): void {
+    this.setErrors(null);
   }
 }

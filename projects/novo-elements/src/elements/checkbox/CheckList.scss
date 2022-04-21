@@ -1,0 +1,93 @@
+@import "~novo-design-tokens/scss";
+
+:host {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 1rem;
+  &.hasLabel {
+    [class*="-group"] {
+      margin-right: 15px;
+    }
+  }
+  .novo-checkbox-group {
+    cursor: pointer;
+    position: relative;
+    &:hover {
+      label {
+        i {
+          &:before {
+            box-shadow: 0px 0px 15px 3px rgba(74, 137, 220, 0.25);
+          }
+          &.bhi-checkbox-empty,
+          &.bhi-radio-empty {
+            color: $color-positive;
+          }
+        }
+      }
+    }
+    &.checked {
+      label {
+        color: var(--text-main);
+        i {
+          animation: iconEnter 160ms ease-in-out;
+        }
+      }
+    }
+    &.disabled {
+      label > i {
+        opacity: 0.7;
+      }
+      pointer-events: none;
+    }
+    input[type="checkbox"] {
+      appearance: none !important;
+      height: 0 !important;
+      border: none !important;
+      position: absolute;
+      &:focus + label {
+        i {
+          &:before {
+            text-shadow: 0px 0px 20px rgba(74, 137, 220, 0.5);
+          }
+          &.bhi-checkbox-empty,
+          &.bhi-checkbox-filled {
+            color: $color-positive;
+          }
+        }
+      }
+    }
+    label {
+      color: darken(#d2d2d2, 30%);
+      margin-left: 0;
+      cursor: pointer;
+      transition: all 200ms ease-in-out;
+      display: flex;
+      align-items: baseline;
+      i {
+        margin-right: 5px;
+        transition: all 200ms ease-in-out;
+        &.bhi-checkbox-empty,
+        &.bhi-radio-empty,
+        &.bhi-circle-o {
+          color: #d2d2d2;
+        }
+        &.bhi-check {
+          background: #d2d2d2;
+          color: #fff;
+          padding: 0.15em 0 0 0.3em;
+          font-size: 1em;
+          width: 20px;
+          height: 20px;
+          border-radius: 50%;
+        }
+        &.bhi-checkbox-filled,
+        &.bhi-radio-filled {
+          color: $color-positive;
+        }
+      }
+      span {
+        display: inline-block;
+      }
+    }
+  }
+}

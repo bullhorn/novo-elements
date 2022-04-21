@@ -1,9 +1,9 @@
 // NG2
-import { Component, ElementRef, ChangeDetectorRef, HostBinding } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, HostBinding } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
+import { NovoLabelService } from '../../../../services/novo-label-service';
 // Vendor
 import { BasePickerResults } from '../base-picker-results/BasePickerResults';
-import { NovoLabelService } from '../../../../services/novo-label-service';
 
 @Component({
   selector: 'workers-comp-codes-picker-results',

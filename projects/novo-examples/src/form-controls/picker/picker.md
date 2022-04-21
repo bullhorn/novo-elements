@@ -52,3 +52,9 @@ You can provide custom config to style the picker to select entities too!
 Having custom templates makes it easy to customize the functionality of the picker, here is an example of a category selector
 
 <code-example example="grouped-picker"></code-example>
+
+##### Mixed Multi Picker (primary and secondary) with Picker
+
+It is possible to mix regular options with options with static or dynamic nested options
+
+<code-example example="mixed-picker"></code-example>

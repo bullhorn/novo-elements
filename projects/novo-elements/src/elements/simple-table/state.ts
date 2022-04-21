@@ -1,7 +1,7 @@
-import { EventEmitter } from '@angular/core';
-
+import { EventEmitter, Injectable } from '@angular/core';
 import { NovoSimpleTableChange } from './interfaces';
 
+@Injectable()
 export class NovoActivityTableState {
   id: number = Math.random();
   sort: { id: string; value: string } = undefined;

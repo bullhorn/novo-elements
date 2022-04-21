@@ -1,0 +1,5 @@
+/** No CSS for this example */
+.demo-side-by-side {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}

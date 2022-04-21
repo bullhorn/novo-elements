@@ -1,0 +1,42 @@
+<novo-field class="example-chip-list">
+  <novo-label>Shifts</novo-label>
+  <novo-chip-list #chipList stacked aria-label="Shift selection">
+    <novo-chip
+      *ngFor="let shift of shifts"
+      (removed)="remove(shift)">
+      <novo-flex gap="1rem">
+        <novo-text>
+          <novo-icon>calendar</novo-icon>
+          {{shift.startTime | isoDate}}
+        </novo-text>
+        <novo-text>
+          <novo-icon>clock</novo-icon>
+          {{[shift.startTime, shift.endTime] | isoTimeRange}}
+        </novo-text>
+        <novo-text>
+          <novo-icon>candidate-circle</novo-icon>
+          {{shift.numAssigned}} / {{shift.openings}}
+        </novo-text>
+      </novo-flex>
+      <novo-icon novoChipRemove>delete</novo-icon>
+    </novo-chip>
+    <input
+      novoChipInput
+      #searchInput
+      autocomplete="off"
+      placeholder="add shift..."
+      [formControl]="searchCtrl"
+      (novoChipInputTokenEnd)="add($event)" />
+  </novo-chip-list>
+  <novo-autocomplete (optionSelected)="selected($event)">
+    <novo-option *ngFor="let shift of filteredShifts | async" [value]="shift">
+      <novo-text>
+        <novo-icon>calendar</novo-icon>
+        {{shift.startTime | isoDate}}
+        {{[shift.startTime, shift.endTime] | isoTimeRange}}
+      </novo-text>
+    </novo-option>
+  </novo-autocomplete>
+</novo-field>
+
+<div>{{chipList.value}}</div>

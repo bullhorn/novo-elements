@@ -1,24 +1,28 @@
-<div>
-    <label>
-        <span class="caption">Selected Value:</span> {{value}}
-    </label>
-    <novo-select [options]="options" [placeholder]="placeholder" [(ngModel)]="value"></novo-select>
-</div>
-<div>
-    <label>
-        <span class="caption">Selected Value:</span> {{withNumbersValue}}
-    </label>
-    <novo-select [options]="withNumbers" [(ngModel)]="withNumbersValue"></novo-select>
-</div>
-<div>
-    <label>
-        <span class="caption">Disabled State</span>
-    </label>
-    <novo-select [options]="options" [placeholder]="placeholder" [(ngModel)]="value" disabled></novo-select>
-</div>
-<div>
-    <label>
-        <span class="caption">No Model With Header</span>
-    </label>
-    <novo-select [options]="options" [placeholder]="placeholder" [headerConfig]="headerConfig"></novo-select>
-</div>
+<novo-field>
+  <novo-label>
+    <span class="caption">Selected Value:</span> {{value}}
+  </novo-label>
+  <novo-select [placeholder]="placeholder" [(ngModel)]="value">
+    <novo-option *ngFor="let option of options" [value]="option">
+      {{option}}
+    </novo-option>
+  </novo-select>
+</novo-field>
+<novo-field>
+  <novo-label>
+    <span class="caption">Selected Value:</span> {{withNumbersValue.label}}
+  </novo-label>
+  <novo-select [options]="withNumbers" [(ngModel)]="withNumbersValue"></novo-select>
+</novo-field>
+<novo-field>
+  <novo-label>
+    <span class="caption">Disabled State</span>
+  </novo-label>
+  <novo-select [options]="options" [placeholder]="placeholder" [(ngModel)]="value" disabled></novo-select>
+</novo-field>
+<novo-field>
+  <novo-label>
+    <span class="caption">No Model With Header</span>
+  </novo-label>
+  <novo-select [options]="options" [placeholder]="placeholder" [headerConfig]="headerConfig"></novo-select>
+</novo-field>

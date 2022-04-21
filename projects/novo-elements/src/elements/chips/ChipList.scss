@@ -1,0 +1,53 @@
+@import "../../styles/variables.scss";
+@import "../common/typography/text.mixins";
+
+$novo-chip-list-margin: 4px;
+$novo-chip-input-width: 100px;
+$novo-chip-input-margin: 4px;
+
+.novo-chip-list-wrapper {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: -$novo-chip-list-margin;
+
+  input.novo-input-element,
+  .novo-chip {
+    margin: $novo-chip-list-margin;
+  }
+}
+
+.novo-chip-list-stacked {
+  flex: 1;
+  .novo-chip-list-wrapper {
+    flex-direction: column;
+    align-items: flex-start;
+
+    .novo-chip {
+      width: 100%;
+      height: 2.8rem;
+      .novo-chip-remove,
+      .novo-chip-trailing-icon {
+        margin-left: auto;
+      }
+    }
+    input.novo-chip-input {
+      flex: 1 0 auto;
+    }
+  }
+}
+
+novo-field.novo-focused {
+  input.novo-chip-input {
+    width: $novo-chip-input-width;
+    margin: $novo-chip-input-margin;
+    flex: 1 0 $novo-chip-input-width;
+  }
+}
+
+input.novo-chip-input {
+  width: 20px;
+  margin: $novo-chip-input-margin;
+  flex: 1 0 20px;
+}

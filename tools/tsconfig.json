@@ -7,11 +7,12 @@
     "declaration": false,
     "module": "commonjs",
     "moduleResolution": "node",
+    "esModuleInterop": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "target": "es2015",
     "typeRoots": ["node_modules/@types"],
     "types": ["jest"],
-    "lib": ["es2017", "dom"]
+    "lib": ["es2018", "dom"]
   }
 }

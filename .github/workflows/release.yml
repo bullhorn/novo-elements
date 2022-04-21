@@ -1,0 +1,40 @@
+name: Release Novo Elements (new)
+on: 
+  workflow_dispatch:
+    inputs:
+      skip-bump:
+        type: boolean
+        description: Skip Publish
+      skip-docs:
+        type: boolean
+        description: Skip Docs
+
+jobs:
+  build:
+    name: Build & Publish
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    strategy:
+      fail-fast: false
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.BH_GIT_TOKEN }}
+      - name: Setup NodeJS
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.15.0
+      - name: Install Dependencies
+        run: |
+          npm ci
+      - name: Bump And Release
+        uses: bvkimball/bump-and-release@main
+        with:
+          git-user-email: 'bvkimball@users.noreply.github.com'
+          skip-bump: ${{ github.event.inputs.skip-bump }}
+          skip-docs: ${{ github.event.inputs.skip-docs }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.BH_GIT_TOKEN }}
+          NPM_AUTH_TOKEN: ${{ secrets.NE_NPM_TOKEN }}

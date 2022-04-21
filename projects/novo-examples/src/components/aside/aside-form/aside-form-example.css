@@ -1,0 +1,9 @@
+/** CSS for this example */
+
+:host {
+  display: block;
+  background: rgba(0, 0, 0, 0.55);
+  padding: 35px 0;
+  position: relative;
+  text-align: center;
+}

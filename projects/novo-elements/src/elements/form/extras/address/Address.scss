@@ -11,11 +11,14 @@ novo-address {
     .country-name {
       &.invalid {
         input,
-        novo-select div[type='button'] {
+        novo-select div[type="button"] {
           border-bottom: 1px solid $negative !important;
         }
       }
     }
+  }
+  novo-picker i {
+    padding: 0 5px;
   }
   input {
     min-width: 10px;
@@ -78,7 +81,7 @@ novo-address {
     }
     pointer-events: none;
     input {
-      &::-webkit-input-placeholder {
+      &::placeholder {
         color: lighten($dark, 30%) !important;
       }
       border-bottom-style: dashed !important;
@@ -87,7 +90,7 @@ novo-address {
 }
 
 novo-form .novo-form-container form,
-novo-dynamic-form[layout='vertical'] .novo-form-container form,
+novo-dynamic-form[layout="vertical"] .novo-form-container form,
 novo-dynamic-form .novo-form-container form {
   div.novo-form-row
     novo-control
@@ -125,24 +128,17 @@ novo-dynamic-form .novo-form-container form {
         border-bottom: 1px solid $positive;
       }
     }
-    i.required-indicator.bhi-circle,
-    i.required-indicator.bhi-check {
+    i.required-indicator {
+      height: 19px;
+      width: 20px;
       display: flex;
       border-bottom: 1px solid #afb9c0;
-      padding-bottom: 18px;
       margin-right: 0;
-      padding-top: 10px;
-      padding-right: 20px;
       margin-top: 0px;
       align-self: flex-end;
-    }
-    i.required-indicator {
-      padding-bottom: 18px;
-      padding-top: 8px;
-    }
-    i.required-indicator.bhi-check {
-      padding-bottom: 20px;
-      padding-top: 6px;
+      &.bhi-circle {
+        height: 15px;
+      }
     }
     .invalid i.required-indicator,
     .invalid i.required-indicator {

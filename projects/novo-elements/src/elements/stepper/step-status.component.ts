@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, Component, Input, Inject, forwardRef } from '@angular/core';
-import { NovoStepper } from './stepper.component';
+import { ChangeDetectionStrategy, Component, forwardRef, Inject, Input } from '@angular/core';
 import { NovoStepHeader } from './step-header.component';
+import { NovoStepper } from './stepper.component';
 
 @Component({
   selector: 'novo-step-status',

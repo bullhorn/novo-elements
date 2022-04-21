@@ -1,3 +1,5 @@
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import { CdkColumnDef } from '@angular/cdk/table';
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
@@ -12,17 +14,14 @@ import {
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import { coerceBooleanProperty } from '@angular/cdk/coercion';
-import { CdkColumnDef } from '@angular/cdk/table';
-import { Subscription } from 'rxjs';
 import * as dateFns from 'date-fns';
-
+import { Subscription } from 'rxjs';
+import { NovoLabelService } from '../../services/novo-label-service';
+import { Helpers } from '../../utils/Helpers';
 import { NovoDropdownElement } from '../dropdown/Dropdown';
 import { NovoSimpleSortFilter, NovoSimpleTableChange, SimpleTableColumnFilterConfig, SimpleTableColumnFilterOption } from './interfaces';
 import { NovoSortFilter } from './sort';
-import { NovoLabelService } from '../../services/novo-label-service';
 import { NovoActivityTableState } from './state';
-import { Helpers } from '../../utils/Helpers';
 
 @Directive({
   selector: '[novoSimpleFilterFocus]',
@@ -42,14 +41,14 @@ export class NovoSimpleFilterFocus implements AfterViewInit {
       <ng-content></ng-content>
     </label>
     <div>
-      <button
+      <novo-button
         *ngIf="config.sortable"
         theme="icon"
         [icon]="icon"
         (click)="sort()"
         [class.active]="sortActive"
         data-automation-id="novo-activity-table-sort"
-      ></button>
+      ></novo-button>
       <novo-dropdown
         *ngIf="config.filterable"
         side="right"
@@ -57,10 +56,10 @@ export class NovoSimpleFilterFocus implements AfterViewInit {
         containerClass="simple-table-dropdown"
         data-automation-id="novo-activity-table-filter"
       >
-        <button type="button" theme="icon" icon="filter" [class.active]="filterActive"></button>
+        <novo-button type="button" theme="icon" icon="filter" [class.active]="filterActive"></novo-button>
         <div class="header">
           <span>{{ labels.filters }}</span>
-          <button
+          <novo-button
             theme="dialogue"
             color="negative"
             icon="times"
@@ -69,35 +68,35 @@ export class NovoSimpleFilterFocus implements AfterViewInit {
             data-automation-id="novo-activity-table-filter-clear"
           >
             {{ labels.clear }}
-          </button>
+          </novo-button>
         </div>
         <ng-container [ngSwitch]="config.filterConfig.type">
-          <list *ngSwitchCase="'date'">
+          <novo-optgroup *ngSwitchCase="'date'">
             <ng-container *ngIf="!showCustomRange">
-              <item
+              <novo-option
                 [class.active]="activeDateFilter === option.label"
                 *ngFor="let option of config.filterConfig.options"
                 (click)="filterData(option)"
                 [attr.data-automation-id]="'novo-activity-table-filter-' + option.label"
               >
                 {{ option.label }} <i class="bhi-check" *ngIf="activeDateFilter === option.label"></i>
-              </item>
+              </novo-option>
             </ng-container>
-            <item
+            <novo-option
               [class.active]="labels.customDateRange === activeDateFilter"
               (click)="toggleCustomRange($event, true)"
               *ngIf="config.filterConfig.allowCustomRange && !showCustomRange"
               [keepOpen]="true"
             >
               {{ labels.customDateRange }} <i class="bhi-check" *ngIf="labels.customDateRange === activeDateFilter"></i>
-            </item>
+            </novo-option>
             <div class="calendar-container" *ngIf="showCustomRange">
               <div (click)="toggleCustomRange($event, false)"><i class="bhi-previous"></i>{{ labels.backToPresetFilters }}</div>
               <novo-date-picker (onSelect)="filterData($event)" [(ngModel)]="filter" range="true"></novo-date-picker>
             </div>
-          </list>
-          <list *ngSwitchCase="'select'">
-            <item
+          </novo-optgroup>
+          <novo-optgroup *ngSwitchCase="'select'">
+            <novo-option
               [class.active]="filter === option"
               *ngFor="let option of config.filterConfig.options"
               (click)="filterData(option)"
@@ -105,10 +104,10 @@ export class NovoSimpleFilterFocus implements AfterViewInit {
             >
               <span>{{ option?.label || option }}</span>
               <i class="bhi-check" *ngIf="option.hasOwnProperty('value') ? filter === option.value : filter === option"></i>
-            </item>
-          </list>
-          <list *ngSwitchDefault>
-            <item class="filter-search" keepOpen="true">
+            </novo-option>
+          </novo-optgroup>
+          <novo-optgroup *ngSwitchDefault>
+            <novo-option class="filter-search" keepOpen>
               <input
                 type="text"
                 [(ngModel)]="filter"
@@ -116,8 +115,8 @@ export class NovoSimpleFilterFocus implements AfterViewInit {
                 novoSimpleFilterFocus
                 data-automation-id="novo-activity-table-filter-input"
               />
-            </item>
-          </list>
+            </novo-option>
+          </novo-optgroup>
         </ng-container>
       </novo-dropdown>
     </div>
@@ -126,7 +125,7 @@ export class NovoSimpleFilterFocus implements AfterViewInit {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NovoSimpleCellHeader implements NovoSimpleSortFilter, OnInit, OnDestroy {
-  @ViewChild(NovoDropdownElement, { static: false })
+  @ViewChild(NovoDropdownElement)
   dropdown: NovoDropdownElement;
 
   @Input()

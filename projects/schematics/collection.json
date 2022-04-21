@@ -1,0 +1,24 @@
+{
+  "$schema": "./node_modules/@angular-devkit/schematics/collection-schema.json",
+  "schematics": {
+    "ng-add": {
+      "description": "Adds Novo Elements to the application without affecting any templates",
+      "factory": "./ng-add/index",
+      "schema": "./ng-add/schema.json",
+      "aliases": ["novo-shell", "install"]
+    },
+    "ng-add-setup-project": {
+      "description": "Sets up the specified project after the ng-add dependencies have been installed.",
+      "private": true,
+      "factory": "./ng-add/setup-project",
+      "schema": "./ng-add/schema.json"
+    },
+
+    "record": {
+      "description": "Create a Record Component with navigation",
+      "factory": "./ng-generate/record/index",
+      "schema": "./ng-generate/record/schema.json",
+      "aliases": ["novo-record"]
+    }
+  }
+}

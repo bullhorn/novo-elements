@@ -17504,9 +17504,7 @@ export function getCountries(): string[] {
 /**
  * Gets a country by country ID
  */
-export function findByCountryId(
-  id: number,
-):
+export function findByCountryId(id: number):
   | {
       [key: string]: any;
     }
@@ -17518,9 +17516,7 @@ export function findByCountryId(
  * Gets a country by country name
  * @param name - Name of country to find
  */
-export function findByCountryName(
-  name: string,
-):
+export function findByCountryName(name: string):
   | {
       [key: string]: any;
     }
@@ -17532,9 +17528,7 @@ export function findByCountryName(
  * Gets a country by country code
  * @param code - Code of country to find
  */
-export function findByCountryCode(
-  code: string,
-):
+export function findByCountryCode(code: string):
   | {
       [key: string]: any;
     }

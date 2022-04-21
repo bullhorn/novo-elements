@@ -1,6 +1,6 @@
 // NG2
 import { Renderer2 } from '@angular/core';
-import { TestBed, async } from '@angular/core/testing';
+import { async, TestBed } from '@angular/core/testing';
 // App
 import { NovoCKEditorElement } from './CKEditor';
 
@@ -16,7 +16,7 @@ describe('Elements: NovoCKEditorElement', () => {
     fixture = TestBed.createComponent(NovoCKEditorElement);
     component = fixture.debugElement.componentInstance;
 
-    window['CKEDITOR'] = {
+    window.CKEDITOR = {
       ENTER_P: 1,
       ENTER_BR: 2,
     };
@@ -98,8 +98,8 @@ describe('Elements: NovoCKEditorElement', () => {
     it('should return extended config object #1', () => {
       component.minimal = false;
       expect(component.getBaseConfig()).toEqual({
-        enterMode: window['CKEDITOR'].ENTER_BR,
-        shiftEnterMode: window['CKEDITOR'].ENTER_P,
+        enterMode: window.CKEDITOR.ENTER_BR,
+        shiftEnterMode: window.CKEDITOR.ENTER_P,
         disableNativeSpellChecker: false,
         removePlugins: 'liststyle,tabletools,contextmenu',
         extraAllowedContent: '*(*){*};table tbody tr td th[*];',
@@ -148,8 +148,8 @@ describe('Elements: NovoCKEditorElement', () => {
       component.minimal = false;
       component.fileBrowserImageUploadUrl = '/foo/bar/baz.cfm';
       expect(component.getBaseConfig()).toEqual({
-        enterMode: window['CKEDITOR'].ENTER_BR,
-        shiftEnterMode: window['CKEDITOR'].ENTER_P,
+        enterMode: window.CKEDITOR.ENTER_BR,
+        shiftEnterMode: window.CKEDITOR.ENTER_P,
         disableNativeSpellChecker: false,
         removePlugins: 'liststyle,tabletools,contextmenu',
         extraAllowedContent: '*(*){*};table tbody tr td th[*];',
@@ -197,8 +197,8 @@ describe('Elements: NovoCKEditorElement', () => {
     it('should return minimal config object', () => {
       component.minimal = true;
       expect(component.getBaseConfig()).toEqual({
-        enterMode: window['CKEDITOR'].ENTER_BR,
-        shiftEnterMode: window['CKEDITOR'].ENTER_P,
+        enterMode: window.CKEDITOR.ENTER_BR,
+        shiftEnterMode: window.CKEDITOR.ENTER_P,
         disableNativeSpellChecker: false,
         removePlugins: 'liststyle,tabletools,contextmenu',
         extraAllowedContent: '*(*){*};table tbody tr td th[*];',

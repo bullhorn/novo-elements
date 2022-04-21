@@ -12,7 +12,7 @@ novo-category-dropdown {
       max-width: 400px;
       min-width: 400px;
       display: block;
-      z-index: 1000;
+      z-index: z("max");
       border-radius: 2px;
       top: 100%;
       margin-top: 5px;
@@ -58,22 +58,22 @@ novo-category-dropdown {
         &:focus {
           border-bottom: 1px solid $positive;
         }
-        &::-webkit-input-placeholder {
-          color: #aaaaaa;
+        &::placeholder {
+          color: var(--form-placeholder);
         }
       }
       i.bhi-search,
       i.bhi-times {
         position: absolute;
-        bottom: 8px;
+        bottom: 15px;
         right: 5px;
         color: #aaaaaa;
-        font-size: 1em;
+        font-size: 1.2rem;
         margin-right: 10px;
       }
       i.bhi-times {
         cursor: pointer;
-        font-size: 0.8em;
+        font-size: 1.2rem;
       }
     }
     footer {
@@ -141,12 +141,12 @@ novo-category-dropdown {
       }
     }
   }
-  &[side='left'] {
+  &[side="left"] {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
   }
-  &[side='right'] {
+  &[side="right"] {
     display: flex;
     flex-direction: column;
     align-items: flex-end;

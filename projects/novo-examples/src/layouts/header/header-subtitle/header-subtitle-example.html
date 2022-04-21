@@ -1,7 +1,9 @@
-<header title="Header" subTitle="with subtitle" [icon]="icon" [theme]="theme">
-  <utils>
-    <util-action icon="convert" tooltip="Change Theme" (click)="changeTheme()"></util-action>
-    <util-action icon="refresh" tooltip="Show Popup" (click)="catchEv('refresh', $event)"></util-action>
-    <util-action icon="times" tooltip="Show Popup" (click)="catchEv('close', $event)"></util-action>
-  </utils>
-</header>
+<novo-header [theme]="theme">
+  <novo-action icon="convert" tooltip="Change Theme" (click)="changeTheme()"></novo-action>
+  <novo-action icon="refresh" tooltip="Show Popup" (click)="catchEv('refresh', $event)"></novo-action>
+  <novo-action icon="times" tooltip="Show Popup" (click)="catchEv('close', $event)"></novo-action>
+
+  <novo-icon>{{icon}}</novo-icon>
+  <novo-title>Header</novo-title>
+  <novo-title size="sm">with subtitle</novo-title>
+</novo-header>

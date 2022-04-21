@@ -12,13 +12,41 @@ export enum AppBridgeHandler {
   UPDATE,
   REQUEST_DATA,
   CALLBACK,
+  PING,
 }
 
 // record       - an individual entity record
 // add/fast-add - the add page for a new record
 // custom       - custom action that opens the url provided in data.url
 // preview      - the preview slideout available only in Novo
-export type NovoApps = 'record' | 'add' | 'fast-add' | 'custom' | 'preview';
+export type NovoApps = 'record' | 'add' | 'fast-add' | 'slide-out-add' | 'custom' | 'preview';
+
+export type AlleyLinkColors =
+  | 'purple'
+  | 'green'
+  | 'blue'
+  | 'lead'
+  | 'candidate'
+  | 'contact'
+  | 'company'
+  | 'opportunity'
+  | 'job'
+  | 'billable-charge'
+  | 'earn-code'
+  | 'invoice-statement'
+  | 'job-code'
+  | 'payable-charge'
+  | 'sales-tax-rate'
+  | 'tax-rules'
+  | 'submission'
+  | 'placement'
+  | 'navigation'
+  | 'canvas'
+  | 'neutral'
+  | 'neutral-italic'
+  | 'initial'
+  | 'distributionList'
+  | 'contract';
 
 export interface IAppBridgeOpenEvent {
   type: NovoApps;
@@ -66,6 +94,7 @@ const MESSAGE_TYPES = {
   CLOSE: 'close',
   REFRESH: 'refresh',
   PIN: 'pin',
+  PING: 'ping',
   UPDATE: 'update',
   HTTP_GET: 'httpGET',
   HTTP_POST: 'httpPOST',
@@ -180,6 +209,13 @@ export class AppBridge {
       this._trace(MESSAGE_TYPES.PIN, event);
       return this.pin(event.data).then((success) => {
         return { success };
+      });
+    });
+    // PING
+    postRobot.on(MESSAGE_TYPES.PING, (event) => {
+      this._trace(MESSAGE_TYPES.PING, event);
+      return this.httpGET('ping').then((result) => {
+        return { data: result.data, error: result.error };
       });
     });
     // REQUEST_DATA
@@ -312,7 +348,7 @@ export class AppBridge {
    * @param packet any - packet of data to send with the close event
    */
   public update(
-    packet: Partial<{ entityType: string; entityId: string; title: string; titleKey: string; color: string }>,
+    packet: Partial<{ entityType: string; entityId: string; title: string; titleKey: string; color: AlleyLinkColors }>,
   ): Promise<boolean> {
     return new Promise<boolean>((resolve, reject) => {
       if (this._handlers[AppBridgeHandler.UPDATE]) {
@@ -407,6 +443,25 @@ export class AppBridge {
           })
           .catch((err) => {
             reject(false);
+          });
+      }
+    });
+  }
+
+  public ping(): Promise<boolean> {
+    return new Promise<any>((resolve, reject) => {
+      if (this._handlers[AppBridgeHandler.PING]) {
+        this._handlers[AppBridgeHandler.PING]({}, (data: any, error: any) => {
+          resolve({ data, error });
+        });
+      } else {
+        postRobot
+          .sendToParent(MESSAGE_TYPES.PING, {})
+          .then((event: any) => {
+            resolve({ data: event.data.data, error: event.data.error });
+          })
+          .catch((err) => {
+            reject(null);
           });
       }
     });
@@ -517,7 +572,7 @@ export class AppBridge {
    * Fires or responds to an register event
    * @param packet any - packet of data to send with the event
    */
-  public register(packet: Partial<{ title: string; url: string; color: string }> = {}): Promise<string> {
+  public register(packet: Partial<{ title: string; url: string; color: AlleyLinkColors }> = {}): Promise<string> {
     return new Promise<string>((resolve, reject) => {
       if (this._handlers[AppBridgeHandler.REGISTER]) {
         this._handlers[AppBridgeHandler.REGISTER](packet, (windowName: string) => {
@@ -552,7 +607,7 @@ export class AppBridge {
    * Fires or responds to an HTTP_GET event
    * @param packet any - packet of data to send with the event
    */
-  public httpGET(relativeURL: string): Promise<any> {
+  public httpGET(relativeURL: string, timeout: number = 10000): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       if (this._handlers[AppBridgeHandler.HTTP]) {
         this._handlers[AppBridgeHandler.HTTP]({ verb: HTTP_VERBS.GET, relativeURL }, (data: any, error: any) => {
@@ -560,7 +615,7 @@ export class AppBridge {
         });
       } else {
         postRobot
-          .sendToParent(MESSAGE_TYPES.HTTP_GET, { relativeURL })
+          .sendToParent(MESSAGE_TYPES.HTTP_GET, { relativeURL }, { timeout })
           .then((event: any) => {
             resolve({ data: event.data.data, error: event.data.error });
           })
@@ -575,18 +630,15 @@ export class AppBridge {
    * Fires or responds to an HTTP_POST event
    * @param packet any - packet of data to send with the event
    */
-  public httpPOST(relativeURL: string, postData: any): Promise<any> {
+  public httpPOST(relativeURL: string, postData: any, timeout: number = 10000): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       if (this._handlers[AppBridgeHandler.HTTP]) {
-        this._handlers[AppBridgeHandler.HTTP](
-          { verb: HTTP_VERBS.POST, relativeURL, data: postData },
-          (data: any, error: any) => {
-            resolve({ data, error });
-          },
-        );
+        this._handlers[AppBridgeHandler.HTTP]({ verb: HTTP_VERBS.POST, relativeURL, data: postData }, (data: any, error: any) => {
+          resolve({ data, error });
+        });
       } else {
         postRobot
-          .sendToParent(MESSAGE_TYPES.HTTP_POST, { relativeURL, data: postData })
+          .sendToParent(MESSAGE_TYPES.HTTP_POST, { relativeURL, data: postData }, { timeout })
           .then((event: any) => {
             resolve({ data: event.data.data, error: event.data.error });
           })
@@ -601,18 +653,15 @@ export class AppBridge {
    * Fires or responds to an HTTP_PUT event
    * @param packet any - packet of data to send with the event
    */
-  public httpPUT(relativeURL: string, putData: any): Promise<any> {
+  public httpPUT(relativeURL: string, putData: any, timeout: number = 10000): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       if (this._handlers[AppBridgeHandler.HTTP]) {
-        this._handlers[AppBridgeHandler.HTTP](
-          { verb: HTTP_VERBS.PUT, relativeURL, data: putData },
-          (data: any, error: any) => {
-            resolve({ data, error });
-          },
-        );
+        this._handlers[AppBridgeHandler.HTTP]({ verb: HTTP_VERBS.PUT, relativeURL, data: putData }, (data: any, error: any) => {
+          resolve({ data, error });
+        });
       } else {
         postRobot
-          .sendToParent(MESSAGE_TYPES.HTTP_PUT, { relativeURL, data: putData })
+          .sendToParent(MESSAGE_TYPES.HTTP_PUT, { relativeURL, data: putData }, { timeout })
           .then((event: any) => {
             resolve({ data: event.data.data, error: event.data.error });
           })
@@ -627,7 +676,7 @@ export class AppBridge {
    * Fires or responds to an HTTP_DELETE event
    * @param packet any - packet of data to send with the event
    */
-  public httpDELETE(relativeURL: string): Promise<any> {
+  public httpDELETE(relativeURL: string, timeout: number = 10000): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       if (this._handlers[AppBridgeHandler.HTTP]) {
         this._handlers[AppBridgeHandler.HTTP]({ verb: HTTP_VERBS.DELETE, relativeURL }, (data: any, error: any) => {
@@ -635,7 +684,7 @@ export class AppBridge {
         });
       } else {
         postRobot
-          .sendToParent(MESSAGE_TYPES.HTTP_DELETE, { relativeURL })
+          .sendToParent(MESSAGE_TYPES.HTTP_DELETE, { relativeURL }, { timeout })
           .then((event: any) => {
             resolve({ data: event.data.data, error: event.data.error });
           })
@@ -673,11 +722,25 @@ export class AppBridge {
     if (this._registeredFrames.length > 0) {
       this._registeredFrames.forEach((frame) => {
         postRobot.send(frame.source, MESSAGE_TYPES.CUSTOM_EVENT, {
+          event,
           eventType: event,
           data,
         });
       });
     }
+  }
+
+  /**
+   * Fires a custom event to specified frames
+   * @param source Window - specific iframe contentWindow
+   * @param event string - event name to fire
+   * @param data any - data to be sent along with the event
+   */
+  public fireEventToChild(source: Window | HTMLIFrameElement, event: string, data: any): void {
+    if (source instanceof HTMLIFrameElement) {
+      source = source.contentWindow;
+    }
+    postRobot.send(source, MESSAGE_TYPES.CUSTOM_EVENT, { event, data });
   }
 
   /**

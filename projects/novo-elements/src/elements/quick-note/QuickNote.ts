@@ -1,24 +1,24 @@
 // NG2
 import {
+  AfterViewInit,
   Component,
+  ElementRef,
   EventEmitter,
   forwardRef,
-  ElementRef,
+  Input,
+  NgZone,
+  OnDestroy,
+  OnInit,
+  Output,
   ViewChild,
   ViewContainerRef,
-  Input,
-  Output,
-  OnInit,
-  AfterViewInit,
-  OnDestroy,
-  NgZone,
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Key } from '../../utils';
+import { ComponentUtils } from './../../utils/component-utils/ComponentUtils';
 // APP
 import { OutsideClick } from './../../utils/outside-click/OutsideClick';
-import { KeyCodes } from './../../utils/key-codes/KeyCodes';
 import { QuickNoteResults } from './extras/quick-note-results/QuickNoteResults';
-import { ComponentUtils } from './../../utils/component-utils/ComponentUtils';
 
 // Value accessor for the component (supports ngModel)
 const QUICK_NOTE_VALUE_ACCESSOR = {
@@ -32,9 +32,7 @@ declare var CKEDITOR: any;
 @Component({
   selector: 'novo-quick-note',
   providers: [QUICK_NOTE_VALUE_ACCESSOR],
-  template: `
-    <div class="quick-note-wrapper" #wrapper><textarea #host></textarea> <span #results></span></div>
-  `,
+  template: ` <div class="quick-note-wrapper" #wrapper><textarea #host></textarea> <span #results></span></div> `,
 })
 export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('wrapper', { static: true })
@@ -72,8 +70,8 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
 
   private static TOOLBAR_HEIGHT = 40; // in pixels - configured by stylesheet
 
-  private onModelChange: Function = () => { };
-  private onModelTouched: Function = () => { };
+  private onModelChange: Function = () => {};
+  private onModelTouched: Function = () => {};
 
   constructor(private zone: NgZone, element: ElementRef, private componentUtils: ComponentUtils) {
     super(element);
@@ -242,7 +240,7 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
     if (event.key) {
       if (this.quickNoteResults) {
         // Hide results on escape key
-        if (event.keyCode === KeyCodes.ESC) {
+        if (event.key === Key.Escape) {
           this.zone.run(() => {
             this.hideResults();
           });
@@ -250,21 +248,21 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
         }
 
         // Navigation inside the results
-        if (event.keyCode === KeyCodes.UP) {
+        if (event.key === Key.ArrowUp) {
           this.zone.run(() => {
             this.quickNoteResults.instance.prevActiveMatch();
           });
           return false;
         }
 
-        if (event.keyCode === KeyCodes.DOWN) {
+        if (event.key === Key.ArrowDown) {
           this.zone.run(() => {
             this.quickNoteResults.instance.nextActiveMatch();
           });
           return false;
         }
 
-        if (event.keyCode === KeyCodes.ENTER) {
+        if (event.key === Key.Enter) {
           this.zone.run(() => {
             this.quickNoteResults.instance.selectActiveMatch();
           });
@@ -623,10 +621,7 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
    */
   private showPlaceholder(): void {
     if (!this.ckeInstance.getData() && !this.startupFocus) {
-      this.ckeInstance
-        .editable()
-        .getParent()
-        .$.appendChild(this.placeholderElement);
+      this.ckeInstance.editable().getParent().$.appendChild(this.placeholderElement);
       this.placeholderVisible = true;
     }
   }
@@ -636,10 +631,7 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
    */
   private hidePlaceholder(): void {
     if (this.placeholderVisible) {
-      this.ckeInstance
-        .editable()
-        .getParent()
-        .$.removeChild(this.placeholderElement);
+      this.ckeInstance.editable().getParent().$.removeChild(this.placeholderElement);
       this.placeholderVisible = false;
     }
   }

@@ -1,7 +1,8 @@
 // NG2
-import { TestBed, async } from '@angular/core/testing';
-// App
+import { async, TestBed } from '@angular/core/testing';
 import { NovoHeaderComponent } from './Header';
+// App
+import { NovoHeaderModule } from './Header.module';
 
 describe('Elements: NovoHeaderElement', () => {
   let fixture;
@@ -9,7 +10,7 @@ describe('Elements: NovoHeaderElement', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [NovoHeaderComponent],
+      imports: [NovoHeaderModule],
     }).compileComponents();
     fixture = TestBed.createComponent(NovoHeaderComponent);
     component = fixture.debugElement.componentInstance;

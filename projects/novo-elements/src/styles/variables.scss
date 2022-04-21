@@ -1,0 +1,306 @@
+@import "~novo-design-tokens/scss";
+
+// TODO: DEPRECATE COLORS AND USE TOKENS
+
+// Colors
+// --------------------------------------------------
+$black: $color-black;
+$white: $color-white;
+$grey: $color-grey;
+$off-white: $color-off-white;
+$light: $color-light;
+$navy: $color-navy;
+$pulse: $color-pulse;
+// New grays below are being added as placeholder.
+// Usages of similar shades will be replaced in App before removing similar legacy variables.
+$sand: $color-sand;
+$silver: $color-silver;
+$stone: $color-stone;
+$ash: $color-ash;
+$slate: $color-slate;
+$charcoal: $color-charcoal;
+$midnight: $color-midnight;
+
+// Analytics Colors
+$aqua: $color-aqua;
+$ocean: $color-ocean;
+$mint: $color-mint;
+$grass: $color-grass;
+$sunflower: $color-sunflower;
+$bittersweet: $color-bittersweet;
+$grapefruit: $color-grapefruit;
+$carnation: $color-carnation;
+$lavender: $color-lavender;
+$mountain: $color-mountain;
+// Entity Colors
+$company: $color-company;
+$candidate: $color-candidate;
+$lead: $color-lead;
+$contact: $color-contact;
+$clientcontact: $color-contact;
+$opportunity: $color-opportunity;
+$job: $color-job;
+$joborder: $color-job;
+$submission: $color-submission;
+$sendout: $color-sendout;
+$placement: $color-placement;
+$note: $color-note;
+$contract: $color-contract;
+$jobCode: $color-job-code;
+$earnCode: $color-earn-code;
+$invoiceStatement: $color-invoice-statement;
+$billableCharge: $color-billable-charge;
+$payableCharge: $color-payable-charge;
+// Color Applications
+$dark: $color-dark;
+$navigation: $color-navigation;
+$positive: $ocean;
+$success: $grass;
+$negative: $grapefruit;
+$warning: $sunflower;
+$background: $off-white;
+$background-dark: #e2e2e2;
+$neutral: $color-neutral;
+$empty: $color-empty;
+$disabled: $color-stone;
+
+// Spacing
+// --------------------------------------------------
+$spacing-rules: (
+  "none": $spacing-none,
+  "px": $spacing-px,
+  "xs": $spacing-xs,
+  "sm": $spacing-sm,
+  "md": $spacing-md,
+  "lg": $spacing-lg,
+  "xl": $spacing-xl,
+);
+
+// Sizes
+// --------------------------------------------------
+$header-height: 5rem;
+// $header-height-px: rem-to-px($header-height);
+
+// Color Maps
+// --------------------------------------------------
+// Analytics Color Map
+$analytics-colors: (
+  "aqua": $color-aqua,
+  "ocean": $color-ocean,
+  "mint": $color-mint,
+  "grass": $color-grass,
+  "sunflower": $color-sunflower,
+  "bittersweet": $color-bittersweet,
+  "grapefruit": $color-grapefruit,
+  "carnation": $color-carnation,
+  "lavender": $color-lavender,
+  "mountain": $color-mountain,
+);
+// Entity Color Map
+$entity-colors: (
+  "star": $color-placement,
+  "person": $color-contact,
+  "company": $color-company,
+  "candidate": $color-candidate,
+  "navigation": $color-navigation,
+  "lead": $color-lead,
+  "contact": $color-contact,
+  "clientcontact": $color-contact,
+  "opportunity": $color-opportunity,
+  "job": $color-job,
+  "joborder": $color-job,
+  "submission": $color-submission,
+  "sendout": $color-sendout,
+  "placement": $color-placement,
+  "note": $color-note,
+  "task": $color-neutral,
+  "distributionList": $color-neutral,
+  "credential": $color-neutral,
+  "user": $color-neutral,
+  "corporateuser": $color-neutral,
+  "contract": $color-contract,
+  "jobCode": $color-job-code,
+  "earnCode": $color-earn-code,
+  "billableCharge": $color-billable-charge,
+  "payableCharge": $color-payable-charge,
+  "invoiceStatement": $color-invoice-statement,
+);
+// Generic Color Map
+$app-colors: (
+  "positive": $color-ocean,
+  "success": $color-grass,
+  "negative": $color-grapefruit,
+  "warning": $color-sunflower,
+  "background": $color-off-white,
+  "black": $color-black,
+  "white": $color-white,
+  "grey": $color-grey,
+  "off-white": $color-off-white,
+  "dark": $color-dark,
+  "light": $color-light,
+  "pulse": $color-pulse,
+  "neutral": $color-neutral,
+  "empty": $color-empty,
+  "sand": $color-sand,
+  "silver": $color-silver,
+  "stone": $color-stone,
+  "ash": $color-ash,
+  "slate": $color-slate,
+  "charcoal": $color-charcoal,
+);
+// Loading Dot Color Map
+$dot-colors: (
+  "ocean": $color-ocean,
+  "lavender": $color-lavender,
+  "grapefruit": $color-grapefruit,
+  "sunflower": $color-sunflower,
+  "mint": $color-mint,
+);
+// Dark map
+$dark-colors: (
+  "company": $color-company,
+  "candidate": $color-candidate,
+  "navigation": $color-navigation,
+  "lead": $color-lead,
+  "contact": $color-contact,
+  "clientcontact": $color-contact,
+  "opportunity": $color-opportunity,
+  "job": $color-job,
+  "joborder": $color-job,
+  "jobCode": $color-job-code,
+  "earnCode": $color-earn-code,
+  "sendout": $color-sendout,
+  "placement": $color-placement,
+  "task": $color-neutral,
+  "distributionList": $color-neutral,
+  "credential": $color-neutral,
+  "user": $color-neutral,
+  "corporateuser": $color-neutral,
+  "aqua": $color-aqua,
+  "ocean": $color-ocean,
+  "mint": $color-mint,
+  "grass": $color-grass,
+  "sunflower": $color-sunflower,
+  "bittersweet": $color-bittersweet,
+  "grapefruit": $color-grapefruit,
+  "carnation": $color-carnation,
+  "lavender": $color-lavender,
+  "positive": $color-ocean,
+  "success": $color-grass,
+  "negative": $color-grapefruit,
+  "warning": $color-sunflower,
+  "black": $color-black,
+  "dark": $color-dark,
+  "pulse": $color-pulse,
+  "neutral": $color-neutral,
+  "navy": $color-navy,
+  "contract": $color-contract,
+  "mountain": $color-mountain,
+  "billableCharge": $color-billable-charge,
+  "payableCharge": $color-payable-charge,
+  "invoiceStatement": $color-invoice-statement,
+  "submission": $color-submission,
+  "note": $color-note,
+  "ash": $color-ash,
+  "slate": $color-slate,
+  "charcoal": $color-charcoal,
+  "midnight": $color-midnight,
+);
+// Light map
+$light-colors: (
+  "background": $color-off-white,
+  "background-dark": $color-background-dark,
+  "white": $color-white,
+  "grey": $color-grey,
+  "off-white": $color-off-white,
+  "light": $color-light,
+  "empty": $color-empty,
+  "disabled": $color-disabled,
+  "sand": $color-sand,
+  "silver": $color-silver,
+  "stone": $color-stone,
+);
+// All colors
+$all-colors: map-merge($dark-colors, $light-colors);
+
+// Typography
+// --------------------------------------------------
+$base-font-size: 13px;
+$base-font-family: var(--font-family-body);
+$base-font-color: var(--color-dark);
+$base-line-height: 1rem;
+
+// Whiteframes
+// -------------------------
+$whiteframe-shadow-z1: 0px 2px 5px 0 rgba(0, 0, 0, 0.26) !default;
+$whiteframe-zindex-z1: 1 !default;
+$whiteframe-shadow-z2: 0px 8px 17px rgba(0, 0, 0, 0.2) !default;
+$whiteframe-zindex-z2: 2 !default;
+$whiteframe-shadow-z3: 0px 4px 10px rgba(0, 0, 0, 0.15) !default;
+$whiteframe-zindex-z3: 3 !default;
+$whiteframe-shadow-z4: 0px 16px 28px 0 rgba(0, 0, 0, 0.22) !default;
+$whiteframe-zindex-z4: 4 !default;
+$whiteframe-shadow-z5: 0px 27px 24px 0 rgba(0, 0, 0, 0.2) !default;
+$whiteframe-zindex-z5: 5 !default;
+
+// Z-indexes
+// -------------------------
+// Function to call z-indexes.
+// Usage: z-index: z('modal');
+@function z($layer) {
+  $z-layers: (
+    "max": 9001,
+    "overlay": 1000,
+    "modal": 500,
+    "tooltip": 100,
+    "toast": 90,
+    "dialogue": 80,
+    "bottom-sheet": 70,
+    "aside": 61,
+    "sidenav": 60,
+    "backdrop": 50,
+    "fab": 20,
+    "above": 10,
+    "default": 1,
+    "below": -1,
+    "bottom": -9000,
+  );
+
+  @if not map-has-key($z-layers, $layer) {
+    @warn 'No layer found for `#{$layer}` in $z-layers map. Property omitted.';
+  }
+
+  @return map-get($z-layers, $layer);
+}
+
+// Easing Curves
+// -------------------------
+// Usage: html-tag { @include ease('all', 'swift-ease-in-out'); }
+$easing-curves: (
+  "swift-ease-out": (
+    "duration": 400ms,
+    "curve": "cubic-bezier(0.25, 0.8, 0.25, 1)",
+  ),
+  "swift-ease-in": (
+    "duration": 300ms,
+    "curve": "cubic-bezier(0.55, 0, 0.55, 0.2)",
+  ),
+  "swift-ease-in-out": (
+    "duration": 500ms,
+    "curve": "cubic-bezier(0.35, 0, 0.25, 1)",
+  ),
+);
+
+@function map-deep-get($map, $keys...) {
+  @each $key in $keys {
+    $map: map-get($map, $key);
+  }
+
+  @return $map;
+}
+
+@mixin ease($target, $curve-name) {
+  $duration: map-deep-get($easing-curves, $curve-name, "duration");
+  $curve: map-deep-get($easing-curves, $curve-name, "curve");
+  transition: #{$target $duration $curve};
+}

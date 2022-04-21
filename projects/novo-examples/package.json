@@ -1,8 +1,11 @@
 {
   "name": "novo-examples",
-  "version": "2.13.0",
+  "version": "6.2.0",
   "peerDependencies": {
-    "@angular/common": ">=8",
-    "@angular/core": ">=8"
+    "@angular/common": ">=10",
+    "@angular/core": ">=10"
+  },
+  "dependencies": {
+    "tslib": "^2.0.0"
   }
 }

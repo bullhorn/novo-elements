@@ -1,10 +1,10 @@
 <novo-dropdown height="250">
-    <button type="button"
-            theme="secondary"
-            icon="collapse"
-            inverse>Lots of Data Points!</button>
-    <list>
-      <item *ngFor="let name of MOCK_WORDS"
-            (action)="clickMe(name)">{{ name }}</item>
-    </list>
-  </novo-dropdown>
+  <button type="button"
+    theme="secondary"
+    icon="collapse"
+    inverse>Lots of Data Points!</button>
+  <novo-optgroup>
+    <novo-option *ngFor="let name of MOCK_WORDS"
+      (action)="clickMe(name)">{{ name }}</novo-option>
+  </novo-optgroup>
+</novo-dropdown>

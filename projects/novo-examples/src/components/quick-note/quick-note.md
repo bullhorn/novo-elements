@@ -1,10 +1,15 @@
+---
+section: Utils
+page: Quick Note
+title: Quick Note
+order: 1
+---
+
+
 Quick Note [(source)](https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/quick-note)
 ====================================================================================================
 
-Tag Autocomplete
-
   
-
 ##### Basic Examples
 
 <code-example example="basic-quick-note"></code-example>

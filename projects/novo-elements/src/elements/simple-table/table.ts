@@ -1,26 +1,25 @@
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import { CdkTable, CDK_TABLE_TEMPLATE } from '@angular/cdk/table';
 import {
+  AfterContentInit,
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
-  ViewEncapsulation,
-  HostBinding,
-  Input,
   Directive,
   EventEmitter,
-  AfterContentInit,
-  SimpleChanges,
-  ChangeDetectorRef,
+  HostBinding,
+  Input,
   OnChanges,
   OnDestroy,
+  SimpleChanges,
+  ViewEncapsulation,
 } from '@angular/core';
-import { CDK_TABLE_TEMPLATE, CdkTable } from '@angular/cdk/table';
-import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { Subscription } from 'rxjs';
-
-import { SimpleTableColumn, SimpleTableActionColumn, SimpleTablePaginationOptions, SimpleTableSearchOptions } from './interfaces';
-import { ActivityTableService, ActivityTableDataSource } from './table-source';
 import { NovoLabelService } from '../../services/novo-label-service';
-import { NovoActivityTableState } from './state';
 import { notify } from '../../utils/notifier/notifier.util';
+import { SimpleTableActionColumn, SimpleTableColumn, SimpleTablePaginationOptions, SimpleTableSearchOptions } from './interfaces';
+import { NovoActivityTableState } from './state';
+import { ActivityTableDataSource, ActivityTableService } from './table-source';
 
 /** Workaround for https://github.com/angular/angular/issues/17849 */
 export const _NovoTable = CdkTable;
@@ -31,7 +30,9 @@ export const _NovoTable = CdkTable;
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NovoTable<T> extends _NovoTable<T> {}
+export class NovoTable<T> extends _NovoTable<T> {
+  // TODO: add explicit constructor
+}
 
 @Directive({
   selector: 'novo-activity-table-actions',
@@ -61,76 +62,101 @@ export class NovoActivityTableNoResultsMessage {}
 @Component({
   selector: 'novo-activity-table',
   template: `
-        <div *ngIf="debug">
-            <p>Total: {{ dataSource?.total }}</p>
-            <p>Current: {{ dataSource?.current }}</p>
-            <p>Totally Empty: {{ dataSource?.totallyEmpty }}</p>
-            <p>Currently Empty: {{ dataSource?.currentlyEmpty }}</p>
-            <p>Loading (DataSource): {{ dataSource?.loading }}</p>
-            <p>User Filtered: {{ state.userFiltered }}</p>
-            <p>Loading (Table): {{ loading }}</p>
+    <div *ngIf="debug">
+      <p>Total: {{ dataSource?.total }}</p>
+      <p>Current: {{ dataSource?.current }}</p>
+      <p>Totally Empty: {{ dataSource?.totallyEmpty }}</p>
+      <p>Currently Empty: {{ dataSource?.currentlyEmpty }}</p>
+      <p>Loading (DataSource): {{ dataSource?.loading }}</p>
+      <p>User Filtered: {{ state.userFiltered }}</p>
+      <p>Loading (Table): {{ loading }}</p>
+    </div>
+    <header *ngIf="(!(dataSource?.totallyEmpty && !state.userFiltered) && !loading) || forceShowHeader">
+      <ng-content select="[novo-activity-table-custom-header]"></ng-content>
+      <novo-search
+        alwaysOpen="true"
+        (searchChanged)="onSearchChange($event)"
+        [(ngModel)]="state.globalSearch"
+        *ngIf="!hideGlobalSearch"
+        [placeholder]="searchOptions?.placeholder"
+        [hint]="searchOptions?.tooltip"
+      >
+      </novo-search>
+      <novo-simple-table-pagination
+        *ngIf="paginationOptions"
+        [length]="dataSource?.total"
+        [page]="paginationOptions.page"
+        [pageSize]="paginationOptions.pageSize"
+        [pageSizeOptions]="paginationOptions.pageSizeOptions"
+      >
+      </novo-simple-table-pagination>
+      <div class="novo-activity-table-actions">
+        <ng-content select="[novo-activity-table-actions]"></ng-content>
+      </div>
+    </header>
+    <div class="novo-activity-table-loading-mask" *ngIf="dataSource?.loading || loading" data-automation-id="novo-activity-table-loading">
+      <novo-loading></novo-loading>
+    </div>
+    <div class="novo-activity-table-filter-container">
+      <div class="novo-activity-table-custom-filter" *ngIf="customFilter">
+        <ng-content select="[novo-activity-table-custom-filter]"></ng-content>
+      </div>
+      <div class="novo-activity-table-container">
+        <novo-simple-table
+          *ngIf="columns?.length > 0"
+          [dataSource]="dataSource"
+          novoSortFilter
+          novoSelection
+          [class.empty]="dataSource?.currentlyEmpty && state.userFiltered"
+          [hidden]="dataSource?.totallyEmpty && !state.userFiltered"
+        >
+          <ng-content></ng-content>
+          <ng-container novoSimpleColumnDef="selection">
+            <novo-simple-checkbox-header-cell *novoSimpleHeaderCellDef></novo-simple-checkbox-header-cell>
+            <novo-simple-checkbox-cell *novoSimpleCellDef="let row; let i = index" [row]="row" [index]="i"></novo-simple-checkbox-cell>
+          </ng-container>
+          <ng-container *ngFor="let column of actionColumns" [novoSimpleColumnDef]="column.id">
+            <novo-simple-empty-header-cell
+              [class.button-header-cell]="!column.options"
+              [class.dropdown-header-cell]="column.options"
+              *novoSimpleHeaderCellDef
+            ></novo-simple-empty-header-cell>
+            <novo-simple-action-cell *novoSimpleCellDef="let row; let i = index" [row]="row" [column]="column"></novo-simple-action-cell>
+          </ng-container>
+          <ng-container *ngFor="let column of columns" [novoSimpleColumnDef]="column.id">
+            <novo-simple-header-cell
+              *novoSimpleHeaderCellDef
+              [column]="column"
+              [novo-simple-cell-config]="column.config"
+              [defaultSort]="defaultSort"
+              >{{ column.label }}</novo-simple-header-cell
+            >
+            <novo-simple-cell *novoSimpleCellDef="let row" [column]="column" [row]="row"></novo-simple-cell>
+          </ng-container>
+          <novo-simple-header-row *novoSimpleHeaderRowDef="displayedColumns"></novo-simple-header-row>
+          <novo-simple-row *novoSimpleRowDef="let row; columns: displayedColumns"></novo-simple-row>
+        </novo-simple-table>
+        <div
+          class="novo-activity-table-no-results-container"
+          *ngIf="dataSource?.currentlyEmpty && state.userFiltered && !dataSource?.loading && !loading && !dataSource.pristine"
+        >
+          <div #filtered><ng-content select="[novo-activity-table-no-results-message]"></ng-content></div>
+          <div class="novo-activity-table-empty-message" *ngIf="filtered.childNodes.length == 0">
+            <h4><i class="bhi-search-question"></i> {{ labels.noMatchingRecordsMessage }}</h4>
+          </div>
         </div>
-        <header *ngIf="(!(dataSource?.totallyEmpty && !state.userFiltered) && !loading) || forceShowHeader">
-            <ng-content select="[novo-activity-table-custom-header]"></ng-content>
-            <novo-search
-                alwaysOpen="true"
-                (searchChanged)="onSearchChange($event)"
-                [(ngModel)]="state.globalSearch"
-                *ngIf="!hideGlobalSearch"
-                [placeholder]="searchOptions?.placeholder"
-                [hint]="searchOptions?.tooltip">
-            </novo-search>
-            <novo-simple-table-pagination
-                *ngIf="paginationOptions"
-                [length]="dataSource?.total"
-                [page]="paginationOptions.page"
-                [pageSize]="paginationOptions.pageSize"
-                [pageSizeOptions]="paginationOptions.pageSizeOptions">
-            </novo-simple-table-pagination>
-            <div class="novo-activity-table-actions">
-                <ng-content select="[novo-activity-table-actions]"></ng-content>
-            </div>
-        </header>
-        <div class="novo-activity-table-loading-mask" *ngIf="dataSource?.loading || loading" data-automation-id="novo-activity-table-loading">
-            <novo-loading></novo-loading>
+        <div
+          class="novo-activity-table-empty-container"
+          *ngIf="dataSource?.totallyEmpty && !dataSource?.loading && !loading && !state.userFiltered && !dataSource.pristine"
+        >
+          <div #empty><ng-content select="[novo-activity-table-empty-message]"></ng-content></div>
+          <div class="novo-activity-table-empty-message" *ngIf="empty.childNodes.length == 0">
+            <h4><i class="bhi-search-question"></i> {{ labels.emptyTableMessage }}</h4>
+          </div>
         </div>
-        <div class="novo-activity-table-filter-container">
-            <div class="novo-activity-table-custom-filter" *ngIf="customFilter">
-                <ng-content select="[novo-activity-table-custom-filter]"></ng-content>
-            </div>
-            <div class="novo-activity-table-container">
-                <novo-simple-table *ngIf="(columns?.length > 0)" [dataSource]="dataSource" novoSortFilter novoSelection [class.empty]="dataSource?.currentlyEmpty && state.userFiltered" [hidden]="dataSource?.totallyEmpty && !state.userFiltered">
-                    <ng-content></ng-content>
-                    <ng-container novoSimpleColumnDef="selection">
-                        <novo-simple-checkbox-header-cell *novoSimpleHeaderCellDef></novo-simple-checkbox-header-cell>
-                        <novo-simple-checkbox-cell *novoSimpleCellDef="let row; let i = index" [row]="row" [index]="i"></novo-simple-checkbox-cell>
-                    </ng-container>
-                    <ng-container *ngFor="let column of actionColumns" [novoSimpleColumnDef]="column.id">
-                        <novo-simple-empty-header-cell [class.button-header-cell]="!column.options" [class.dropdown-header-cell]="column.options" *novoSimpleHeaderCellDef></novo-simple-empty-header-cell>
-                        <novo-simple-action-cell *novoSimpleCellDef="let row; let i = index" [row]="row" [column]="column"></novo-simple-action-cell>
-                    </ng-container>
-                    <ng-container *ngFor="let column of columns" [novoSimpleColumnDef]="column.id">
-                        <novo-simple-header-cell *novoSimpleHeaderCellDef [column]="column" [novo-simple-cell-config]="column.config" [defaultSort]="defaultSort">{{ column.label }}</novo-simple-header-cell>
-                        <novo-simple-cell *novoSimpleCellDef="let row" [column]="column" [row]="row"></novo-simple-cell>
-                    </ng-container>
-                    <novo-simple-header-row *novoSimpleHeaderRowDef="displayedColumns"></novo-simple-header-row>
-                    <novo-simple-row *novoSimpleRowDef="let row; columns: displayedColumns;"></novo-simple-row>
-                </novo-simple-table>
-                <div class="novo-activity-table-no-results-container" *ngIf="dataSource?.currentlyEmpty && state.userFiltered && !dataSource?.loading && !loading && !dataSource.pristine">
-                    <div #filtered><ng-content select="[novo-activity-table-no-results-message]"></ng-content></div>
-                    <div class="novo-activity-table-empty-message" *ngIf="filtered.childNodes.length == 0">
-                        <h4><i class="bhi-search-question"></i> {{ labels.noMatchingRecordsMessage }}</h4>
-                    </div>
-                </div>
-                <div class="novo-activity-table-empty-container" *ngIf="dataSource?.totallyEmpty && !dataSource?.loading && !loading && !state.userFiltered && !dataSource.pristine">
-                    <div #empty><ng-content select="[novo-activity-table-empty-message]"></ng-content></div>
-                    <div class="novo-activity-table-empty-message" *ngIf="empty.childNodes.length == 0">
-                        <h4><i class="bhi-search-question"></i> {{ labels.emptyTableMessage }}</h4>
-                    </div>
-                </div>
-            </div>
-        </div>
-    `,
+      </div>
+    </div>
+  `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [NovoActivityTableState],
 })
@@ -212,14 +238,14 @@ export class NovoActivityTable<T> implements AfterContentInit, OnChanges, OnDest
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
-    this.loading = changes['activityService'] && !changes['activityService'].currentValue;
+    this.loading = changes.activityService && !changes.activityService.currentValue;
     this.ref.detectChanges();
-    if (changes['activityService'] && changes['activityService'].currentValue) {
+    if (changes.activityService && changes.activityService.currentValue) {
       this.loading = false;
       this.dataSource = new ActivityTableDataSource<T>(this.activityService, this.state, this.ref);
       this.ref.detectChanges();
     }
-    if (changes['outsideFilter'] && changes['outsideFilter'].currentValue) {
+    if (changes.outsideFilter && changes.outsideFilter.currentValue) {
       if (!this.outsideFilterSubscription) {
         this.outsideFilterSubscription = this.outsideFilter.subscribe((filter: any) => {
           this.state.outsideFilter = filter;

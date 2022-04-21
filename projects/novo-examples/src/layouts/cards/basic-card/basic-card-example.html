@@ -1,13 +1,57 @@
 <novo-card [title]="'All Attributes'"
-           icon="activity"
-           [loading]="loading"
-           [message]="message"
-           [messageIcon]="messageIcon"
-           [refresh]="refresh"
-           [move]="move"
-           [close]="close"
-           (onRefresh)="onRefresh()"
-           (onClose)="onClose()"
-           [padding]="padding">
-    This is the ALL attribute card content!
+  icon="activity"
+  [loading]="loading"
+  [message]="message"
+  [messageIcon]="messageIcon"
+  [refresh]="refresh"
+  [move]="move"
+  [close]="close"
+  (onRefresh)="onRefresh()"
+  (onClose)="onClose()"
+  [padding]="padding">
+  This is the ALL attribute card content!
+</novo-card>
+
+
+<novo-row gap="lg">
+  <novo-card inline padding="lg">
+    <novo-stack align="center">
+      <novo-title larger>500</novo-title>
+      <novo-caption>Interviews</novo-caption>
+    </novo-stack>
+  </novo-card>
+
+  <novo-card inline padding="lg">
+    <novo-stack align="center">
+      <novo-caption>1st Interviews to Placements</novo-caption>
+      <novo-title larger>10 : 1</novo-title>
+    </novo-stack>
+  </novo-card>
+
+  <novo-card inline padding="lg">
+    <novo-stack align="center">
+      <novo-caption>CVs Sent to 1st Interviews</novo-caption>
+      <novo-title larger>83%</novo-title>
+    </novo-stack>
+  </novo-card>
+
+</novo-row>
+
+<novo-card inline inset="large">
+  <novo-row justify="space-between">
+    <novo-text bold>Total Sales</novo-text>
+    <novo-text bold>$10k</novo-text>
+  </novo-row>
+  <novo-row align="center">
+    <novo-caption>Target $50k</novo-caption>
+  </novo-row>
+  <novo-progress appearance="radial" total="60" mx="2xl">
+    <novo-progress-bar value="50" color="success"></novo-progress-bar>
+    <novo-progress-bar value="40" color="negative"></novo-progress-bar>
+    <novo-progress-bar value="30" color="warning"></novo-progress-bar>
+  </novo-progress>
+  <novo-row justify="space-between">
+    <novo-text><strong>$7,700</strong> ahead</novo-text>
+    <novo-icon>projects-square</novo-icon>
+  </novo-row>
 </novo-card>

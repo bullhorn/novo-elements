@@ -1,14 +1,14 @@
 // NG
-import { Directive, Input, HostListener, OnDestroy, ViewContainerRef, ElementRef, OnInit } from '@angular/core';
 import {
-  Overlay,
-  OverlayRef,
-  OverlayConfig,
   ConnectedPositionStrategy,
   OriginConnectionPosition,
+  Overlay,
+  OverlayConfig,
   OverlayConnectionPosition,
+  OverlayRef,
 } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
+import { Directive, ElementRef, HostListener, Input, OnDestroy, OnInit, ViewContainerRef } from '@angular/core';
 // APP
 import { NovoTooltip } from './Tooltip.component';
 
@@ -43,6 +43,9 @@ export class TooltipDirective implements OnDestroy, OnInit {
   removeArrow: boolean = false;
   @Input('tooltipAutoPosition')
   autoPosition: boolean = false;
+  @Input('tooltipIsHTML')
+  isHTML: boolean;
+
   private tooltipInstance: NovoTooltip | null;
   private portal: ComponentPortal<NovoTooltip>;
   private overlayRef: OverlayRef;
@@ -112,6 +115,7 @@ export class TooltipDirective implements OnDestroy, OnInit {
     tooltipInstance.preline = this.preline;
     tooltipInstance.noAnimate = this.noAnimate;
     tooltipInstance.position = this.removeArrow ? 'no-arrow' : this.position;
+    tooltipInstance.isHTML = this.isHTML;
   }
 
   private hide(): void {

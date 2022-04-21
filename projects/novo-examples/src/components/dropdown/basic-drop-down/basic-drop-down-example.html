@@ -1,42 +1,28 @@
 <novo-dropdown>
-  <button type="button"
-          theme="secondary"
-          icon="collapse"
-          inverse>Actions</button>
-  <list>
-    <dropdown-item-header>Section 1</dropdown-item-header>
-    <item (action)="clickMe('Hello!')">Test</item>
-    <item (action)="clickMe('Another!')">Josh</item>
-    <item tooltip="Test tooltip :)"
-          tooltipPosition="right"
-          [disabled]="true"
-          (action)="clickMe()">Menu Item With Lots of Text in it to Show Dynamic Width</item>
-    <dropdown-item-header>Section 2</dropdown-item-header>
-    <item (action)="clickMe('Hello!')">Germany</item>
-    <item (action)="clickMe('Another!')">Algebra</item>
-    <item tooltip="Test tooltip :)"
-          tooltipPosition="right"
-          [disabled]="true"
-          (action)="clickMe()">Blah</item>
-  </list>
+  <novo-button theme="secondary" icon="collapse">Actions</novo-button>
+  <novo-optgroup label="Engage">
+    <novo-option (click)="clickMe('Hello!')">Send Email</novo-option>
+    <novo-option (click)="clickMe('Another!')">Send SMS</novo-option>
+    <novo-option tooltip="Test tooltip :)"
+      tooltipPosition="right"
+      (click)="clickMe()"
+      disabled>Advertise Shifts</novo-option>
+  </novo-optgroup>
+  <novo-optgroup label="Manage">
+    <novo-option (click)="clickMe('Hello!')">Find Matching Jobs</novo-option>
+    <novo-option (click)="clickMe('Another!')">Update Record</novo-option>
+    <novo-option tooltip="Test tooltip :)"
+      tooltipPosition="right"
+      (click)="clickMe()"
+      disabled>Delete Record</novo-option>
+  </novo-optgroup>
 </novo-dropdown>
+
 <novo-dropdown side="right">
-  <button type="button"
-          theme="icon"
-          icon="menu"
-          inverse></button>
-  <list>
-    <item>Action 1</item>
-    <item tooltip="Test tooltip :)"
-          tooltipPosition="left">Action 2</item>
-    <item>Action 3</item>
-    <item>Action 4</item>
-    <item>Action 5</item>
-    <item>Action 6</item>
-    <item>Action 7</item>
-    <item>Action 8</item>
-    <item>Action 9</item>
-    <item>Action 10</item>
-    <item>Menu Item With Lots of Text in it to Show Dynamic Width</item>
-  </list>
+  <novo-button theme="icon" icon="menu"></novo-button>
+  <novo-optgroup>
+    <novo-option *ngFor="let action of asyncItems" (click)="clickMe(action)">{{action}}</novo-option>
+    <novo-divider></novo-divider>
+    <novo-option>Menu Item With Lots of Text in it to Show Dynamic Width</novo-option>
+  </novo-optgroup>
 </novo-dropdown>

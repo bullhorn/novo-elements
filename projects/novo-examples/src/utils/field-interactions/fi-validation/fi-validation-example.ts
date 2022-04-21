@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 // Vendor
-import { FormUtils, TextBoxControl, FieldInteractionApi } from 'novo-elements';
+import { FieldInteractionApi, FormUtils, TextBoxControl } from 'novo-elements';
 
 /**
  * @title Fi Validation Example
@@ -13,6 +13,7 @@ import { FormUtils, TextBoxControl, FieldInteractionApi } from 'novo-elements';
 export class FiValidationExample {
   public form: any = {};
   public controls: any = {};
+  public isUserModified = false;
 
   constructor(private formUtils: FormUtils) {
     const validationFunction = (API: FieldInteractionApi) => {
@@ -21,6 +22,7 @@ export class FiValidationExample {
       if (activeValue > 10) {
         API.markAsInvalid(API.getActiveKey(), 'Too high! Make it a lot lower!!');
       }
+      this.isUserModified = !API.isInvokedOnInit;
     };
 
     // Validation Field Interactions

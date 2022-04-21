@@ -1,6 +1,6 @@
 // App
-import { NovoFormGroup } from './NovoFormGroup';
 import { NovoFormControl } from './NovoFormControl';
+import { NovoFormGroup } from './NovoFormGroup';
 
 describe('Elements: NovoFormGroup', () => {
   const component = new NovoFormGroup({});
@@ -12,7 +12,7 @@ describe('Elements: NovoFormGroup', () => {
         lastName: new NovoFormControl('Doe', {}),
       };
       for (const key in component.controls) {
-        spyOn(component.controls[key], 'enable');
+        jest.spyOn(component.controls[key], 'enable');
         (component.controls[key] as NovoFormControl).readOnly = true;
       }
       component.enableAllControls();
@@ -30,7 +30,7 @@ describe('Elements: NovoFormGroup', () => {
         lastName: new NovoFormControl('Doe', {}),
       };
       for (const key in component.controls) {
-        spyOn(component.controls[key], 'disable');
+        jest.spyOn(component.controls[key], 'disable');
         (component.controls[key] as NovoFormControl).readOnly = false;
       }
       component.disableAllControls();

@@ -1,0 +1,22 @@
+<form class="example-form">
+  <novo-field class="example-full-width">
+    <novo-label>Number</novo-label>
+    <textarea
+      novoInput
+      [formControl]="myControl"
+      placeholder="Type $ to trigger autocomplete"
+      autocomplete="off"></textarea>
+    <novo-autocomplete [triggerOn]="triggerFn()" #auto>
+      <novo-option *ngFor="let option of filteredOptions | async" [value]="option">
+        {{option}}
+      </novo-option>
+    </novo-autocomplete>
+  </novo-field>
+
+  <novo-field appearance="fill">
+    <novo-label>Toppings</novo-label>
+    <novo-select [formControl]="myOtherControl" multiple>
+      <novo-option *ngFor="let option of options" [value]="option">{{option}}</novo-option>
+    </novo-select>
+  </novo-field>
+</form>

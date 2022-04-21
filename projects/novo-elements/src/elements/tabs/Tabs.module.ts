@@ -1,15 +1,15 @@
 // NG2
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 // APP
 import {
-  NovoNavElement,
-  NovoTabElement,
-  NovoTabButtonElement,
-  NovoTabLinkElement,
-  NovoNavOutletElement,
   NovoNavContentElement,
+  NovoNavElement,
   NovoNavHeaderElement,
+  NovoNavOutletElement,
+  NovoTabButtonElement,
+  NovoTabElement,
+  NovoTabLinkElement,
 } from './Tabs';
 
 @NgModule({

@@ -1,0 +1,23 @@
+<div class="novo-field-label">
+  <ng-content select="novo-label"></ng-content>
+</div>
+<div class="novo-field-input" [style.width]="width" #inputContainer>
+  <div class="novo-field-prefix">
+    <ng-content select="[novoPrefix]"></ng-content>
+  </div>
+  <div class="novo-field-infix">
+    <ng-content></ng-content>
+  </div>
+  <div class="novo-field-suffix">
+    <ng-content select="[novoSuffix]"></ng-content>
+  </div>
+</div>
+<div class="novo-field-messages" [ngSwitch]="_getDisplayedMessages()">
+  <div class="novo-field-hint-wrapper" *ngSwitchCase="'error'">
+    <ng-content select="novo-error"></ng-content>
+  </div>
+  <div class="novo-field-hint-wrapper" *ngSwitchCase="'hint'">
+    <ng-content select="novo-hint"></ng-content>
+    <ng-content select="novo-hint[align=end]"></ng-content>
+  </div>
+</div>

@@ -1,23 +1,27 @@
 // NG2
-import { NgModule } from '@angular/core';
+import { ModuleWithProviders, NgModule } from '@angular/core';
+import { NovoAsideService } from './elements/aside/aside.service';
+import { NovoDragulaService } from './elements/dragula/DragulaService';
+import { FieldInteractionApi } from './elements/form/FieldInteractionApi';
+import { MENU_OPTIONS } from './elements/menu/menu.tokens';
+import { IMenuOptions } from './elements/menu/menu.types';
+// import { NovoAsideRef } from './elements/aside/aside-ref';
+import { NovoModalService } from './elements/modal/modal.service';
 // APP
 import { GooglePlacesService } from './elements/places/places.service';
-import { NovoDragulaService } from './elements/dragula/DragulaService';
-import { NovoModalService } from './elements/modal/ModalService';
-import { NovoModalRef } from './elements/modal/Modal';
 import { NovoToastService } from './elements/toast/ToastService';
-import { ComponentUtils } from './utils/component-utils/ComponentUtils';
-import { FieldInteractionApi } from './elements/form/FieldInteractionApi';
 import { DateFormatService } from './services/date-format/DateFormat';
-import { GlobalRef, BrowserGlobalRef } from './services/global/global.service';
-import { LocalStorageService } from './services/storage/storage.service';
-import { Security } from './services/security/Security';
+import { BrowserGlobalRef, GlobalRef } from './services/global/global.service';
 import { OptionsService } from './services/options/OptionsService';
+import { LocalStorageService } from './services/storage/storage.service';
 import { NovoTemplateService } from './services/template/NovoTemplateService';
+import { ComponentUtils } from './utils/component-utils/ComponentUtils';
 
 const NOVO_ELEMENTS_PROVIDERS = [
   { provide: NovoDragulaService, useClass: NovoDragulaService },
-  { provide: NovoModalRef, useClass: NovoModalRef },
+  // { provide: NovoAsideRef, useClass: NovoAsideRef },
+  { provide: NovoAsideService, useClass: NovoAsideService },
+  // { provide: NovoModalRef, useClass: NovoModalRef },
   { provide: NovoModalService, useClass: NovoModalService },
   { provide: GooglePlacesService, useClass: GooglePlacesService },
   { provide: NovoToastService, useClass: NovoToastService },
@@ -27,7 +31,6 @@ const NOVO_ELEMENTS_PROVIDERS = [
   { provide: OptionsService, useClass: OptionsService },
   FieldInteractionApi,
   DateFormatService,
-  Security,
   NovoTemplateService,
 ];
 
@@ -35,14 +38,20 @@ const NOVO_ELEMENTS_PROVIDERS = [
   imports: [],
 })
 export class NovoElementProviders {
-  static forRoot() {
+  static forRoot(options?: { menu: IMenuOptions }): ModuleWithProviders<NovoElementProviders> {
     return {
       ngModule: NovoElementProviders,
-      providers: [...NOVO_ELEMENTS_PROVIDERS],
+      providers: [
+        ...NOVO_ELEMENTS_PROVIDERS,
+        {
+          provide: MENU_OPTIONS,
+          useValue: options && options.menu,
+        },
+      ],
     };
   }
 
-  static forChild() {
+  static forChild(): ModuleWithProviders<NovoElementProviders> {
     return {
       ngModule: NovoElementProviders,
     };

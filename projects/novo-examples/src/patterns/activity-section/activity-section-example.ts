@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DateCell, PercentageCell, NovoTableConfig, NovoDropdownCell } from 'novo-elements';
+import { DateCell, PercentageCell } from 'novo-elements';
 
 /**
  * @title Activity Section
@@ -82,7 +82,7 @@ export class ActivitySectionExample {
   }
 }
 
-export const TableData = [
+const TableData = [
   {
     name: 'Victoria Cantrell',
     position: 'Integer Corporation',

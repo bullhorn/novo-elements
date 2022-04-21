@@ -1,6 +1,6 @@
 // NG2
-import { Component, Input, Output, ViewChild, EventEmitter, NgZone, forwardRef, AfterViewInit, OnDestroy } from '@angular/core';
-import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
+import { AfterViewInit, Component, EventEmitter, forwardRef, Input, NgZone, OnDestroy, Output, ViewChild } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 // Value accessor for the component (supports ngModel)
 const CKEDITOR_CONTROL_VALUE_ACCESSOR = {
@@ -10,6 +10,11 @@ const CKEDITOR_CONTROL_VALUE_ACCESSOR = {
 };
 
 declare var CKEDITOR: any;
+declare global {
+  interface Window {
+    CKEDITOR: any;
+  }
+}
 
 /**
  * CKEditor component
@@ -49,7 +54,7 @@ export class NovoCKEditorElement implements OnDestroy, AfterViewInit, ControlVal
   paste = new EventEmitter();
   @Output()
   loaded = new EventEmitter();
-  @ViewChild('host', { static: false })
+  @ViewChild('host')
   host;
 
   _value: string = '';

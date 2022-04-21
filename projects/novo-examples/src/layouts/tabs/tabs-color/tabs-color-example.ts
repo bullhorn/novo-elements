@@ -9,11 +9,17 @@ import { Component } from '@angular/core';
   styleUrls: ['tabs-color-example.css'],
 })
 export class TabsColorExample {
+  public selected = 1;
+
   tabSelected() {
     console.log('TAB SELECTED'); // tslint:disable-line
   }
 
   tabDeselected() {
     console.log('TAB DESELECTED'); // tslint:disable-line
+  }
+
+  updateTabIndex(value: number) {
+    this.selected += value;
   }
 }
