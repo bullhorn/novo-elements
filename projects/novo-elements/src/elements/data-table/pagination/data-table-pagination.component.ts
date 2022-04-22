@@ -106,6 +106,9 @@ export class NovoDataTablePagination<T> implements OnInit, OnDestroy {
     this.longRangeLabel = this.labels.getRangeText(this.page, this.pageSize, this.length, false);
     this.shortRangeLabel = this.labels.getRangeText(this.page, this.pageSize, this.length, true);
     this.state.page = this._page;
+    if (this._page === 0) {
+      this.pages = this.getPages(this.page, this.totalPages);
+    }
   }
   _page: number = 0;
 
