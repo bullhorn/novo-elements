@@ -403,7 +403,7 @@ export class NovoFileInputElement extends NovoFileInputMixins implements NovoFie
   check(event) {
     this.process(Array.from(event.target.files));
     // After processing file upload, clear input element value. Allows for delete and upload of same file.
-    event.target.value = "";
+    event.target.value = '';
   }
 
   validate(files): boolean {

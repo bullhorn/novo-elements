@@ -227,10 +227,6 @@ describe('Elements: NovoFileInputElement', () => {
   // });
   //
   describe('Method: writeValue()', () => {
-      it('should be defined.', () => {
-          expect(component.writeValue).toBeDefined();
-      });
-
       it('should change the value', () => {
         component.writeValue(10);
         expect(component.model).toBe(10);
@@ -244,9 +240,6 @@ describe('Elements: NovoFileInputElement', () => {
   describe('Method: check(files)', () => {
     beforeEach(() => {
       component.layoutOptions = {};
-    });
-    it('should be defined.', () => {
-        expect(component.writeValue).toBeDefined();
     });
 
     it('should clear the input value after processing', () => {
