@@ -41,7 +41,7 @@ export class RenderPipe implements PipeTransform {
   lastValue: any;
   lastArgs: any;
 
-  constructor(private changeDetector: ChangeDetectorRef, private sanitizationService: DomSanitizer, private labels: NovoLabelService) {}
+  constructor(public changeDetector: ChangeDetectorRef, public sanitizationService: DomSanitizer, public labels: NovoLabelService) {}
 
   equals(objectOne: any, objectTwo: any): any {
     if (objectOne === objectTwo) {
