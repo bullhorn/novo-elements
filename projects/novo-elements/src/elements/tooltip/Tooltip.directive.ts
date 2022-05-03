@@ -35,7 +35,7 @@ export class TooltipDirective implements OnDestroy, OnInit {
   @Input('removeTooltipArrow')
   removeArrow: boolean = false;
   @Input('tooltipAutoPosition')
-  autoPosition: boolean = false;
+  autoPosition: boolean = true;
   @Input('tooltipIsHTML')
   isHTML: boolean;
 

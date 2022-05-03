@@ -61,7 +61,7 @@ import { DataTableState } from '../state/data-table-state.service';
           class="filter-button"
           [class.filter-active]="filterActive"
           [tooltip]="labels.filters"
-          [tooltipPosition]="'left'"
+          tooltipPosition="right"
           [attr.data-feature-id]="'novo-data-table-filter-' + this.id"
           (click)="focusInput()"
           >filter</novo-icon
