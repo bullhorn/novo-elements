@@ -22,7 +22,6 @@
     "watch:examples": "npm-watch generate:all",
     "generate:examples": "ts-node --project tools/tsconfig.json ./tools/examples-module.ts",
     "generate:routes": "ts-node --project tools/tsconfig.json ./tools/examples-routes.ts",
-    "generate:automation": "ts-node --project tools/tsconfig.json ./tools/automation-module.ts",
     "generate:contributors": "ts-node --project tools/tsconfig.json ./tools/contributors.ts",
     "generate:all": "npm run generate:examples && npm run generate:routes",
     "start": "ng serve demo",
