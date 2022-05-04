@@ -17,6 +17,7 @@
     "typeRoots": ["node_modules/@types"],
     "types": ["jest"],
     "lib": ["es2020", "dom"],
+    "skipLibCheck": true,
     "paths": {
       "novo-elements": ["dist/novo-elements"],
       "novo-examples": ["dist/novo-examples"],
