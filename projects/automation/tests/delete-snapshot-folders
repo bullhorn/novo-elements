@@ -1,0 +1,2 @@
+
+ find .  -type d -name '*-snapshots' -prune -exec rm -rf {} +

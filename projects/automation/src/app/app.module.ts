@@ -1,6 +1,6 @@
 // Ng
 import { CompHostDirective } from './directives/host.directive';
-import { NovoExamplesModule, NovoExamplesSharedModule } from 'novo-examples';
+import { NovoExamplesModule } from 'novo-examples';
 import { AutomationExamplesComponent } from './examples/examples.component';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser'; 

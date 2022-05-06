@@ -1,0 +1,33 @@
+upperpath=""
+find . -type d | while IFS= read -r d
+do 
+    ( 
+    cd "$d"
+    slash="${d//[^\/]/}"
+    depth=${#slash}
+    depth=$((++depth))
+    for i in $(seq $depth); do
+	    upperpath=${upperpath}"../"
+    done
+    subdircount=`find .  -maxdepth 1 -type d | wc -l`
+    testname="$(basename "$d")"
+    if [ $subdircount -eq 1 ];
+    then 
+        (   
+            upperpath=${upperpath}"utils/playwright-dev-page"
+            cat >$testname".spec.ts" <<EOF
+import { test, expect } from '@playwright/test';
+import { PlaywrightDevPage } from '$upperpath';
+
+test('$testname component should match snapshot', async ({ page }) => {
+  const playwrightDev = new PlaywrightDevPage(page);
+  await playwrightDev.setDateTime('January 01 2022 00:00:00');
+  await page.goto('http://localhost:4200/examples?componentName=$testname', { waitUntil: 'networkidle' });
+  expect(await page.screenshot({animations: "disabled"})).toMatchSnapshot();
+});
+EOF
+            upperpath=""
+        )
+    fi
+    )
+done
