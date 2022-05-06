@@ -12,6 +12,8 @@
 </novo-form>
 <div class="final-value">Value: {{fileForm.value | json}}</div>
 <br />
+<button class="clear-files-button" theme="secondary" (click)="clearFileLists()">Clear File Lists</button>
+<br />
 <br />
 <novo-form layout="vertical" [form]="customValidationFileForm">
     <div class="novo-form-row">

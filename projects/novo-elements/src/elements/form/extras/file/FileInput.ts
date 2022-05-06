@@ -52,6 +52,7 @@ const NovoFileInputMixins: CanUpdateErrorStateCtor & typeof NovoFileInputBase = 
     <ng-template #fileInput>
       <div class="file-input-group" [class.disabled]="disabled" [class.active]="active">
         <input
+          #inputElement
           *ngIf="!layoutOptions.customActions"
           type="file"
           [name]="name"
@@ -62,6 +63,7 @@ const NovoFileInputMixins: CanUpdateErrorStateCtor & typeof NovoFileInputBase = 
           [attr.data-feature-id]="dataFeatureId"
         />
         <input
+          #inputElement
           *ngIf="layoutOptions.customActions"
           type="file"
           [name]="name"
@@ -152,7 +154,7 @@ const NovoFileInputMixins: CanUpdateErrorStateCtor & typeof NovoFileInputBase = 
         </div>
       </div>
     </ng-template>
-  `,
+`,
 })
 export class NovoFileInputElement extends NovoFileInputMixins implements NovoFieldControl<any>, ControlValueAccessor, OnInit, OnDestroy {
   private _uniqueId: string = `novo-file-input-${++nextId}`;
@@ -183,6 +185,7 @@ export class NovoFileInputElement extends NovoFileInputMixins implements NovoFie
   fileOutput: TemplateRef<any>;
   @ViewChild('container', { read: ViewContainerRef, static: true })
   container: ViewContainerRef;
+  @ViewChild('inputElement') inputElement: ElementRef<HTMLInputElement>;
 
   @Input()
   multiple: boolean = false;
@@ -385,6 +388,8 @@ export class NovoFileInputElement extends NovoFileInputMixins implements NovoFie
 
   writeValue(model: any): void {
     this.model = model;
+    // If model is cleared programmatically (E.g. form.patchValue({file: undefined})), empty file list.
+    this.files = !model ? [] : this.files;
   }
 
   registerOnChange(fn: Function): void {
@@ -397,6 +402,8 @@ export class NovoFileInputElement extends NovoFileInputMixins implements NovoFie
 
   check(event) {
     this.process(Array.from(event.target.files));
+    // After processing file upload, clear input element value. Allows for delete and upload of same file.
+    event.target.value = '';
   }
 
   validate(files): boolean {

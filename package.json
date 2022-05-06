@@ -92,7 +92,7 @@
     "gh-got": "^9.0.0",
     "glob": "^7.1.6",
     "highlight.js": "^11.0.1",
-    "htmlhint": "^0.11.0",
+    "htmlhint": "^0.16.0",
     "husky": "^5.0.9",
     "jasmine": "^3.10.0",
     "jasmine-core": "~3.6.0",
