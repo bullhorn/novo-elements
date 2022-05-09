@@ -13,7 +13,6 @@ import { IMenuOptions } from './menu.types';
 
 @NgModule({
   declarations: [MenuDirective, MenuComponent, MenuContentComponent, MenuItemDirective],
-  entryComponents: [MenuContentComponent],
   exports: [MenuDirective, MenuComponent, MenuItemDirective],
   imports: [CommonModule, OverlayModule, NovoCommonModule, NovoIconModule],
 })

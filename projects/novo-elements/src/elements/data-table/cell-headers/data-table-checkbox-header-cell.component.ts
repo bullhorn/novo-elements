@@ -1,8 +1,18 @@
 import { CdkColumnDef, CdkHeaderCell } from '@angular/cdk/table';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, HostBinding, Input, OnDestroy, Renderer2 } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  HostBinding,
+  Inject,
+  Input,
+  OnDestroy,
+  Renderer2,
+} from '@angular/core';
 import { Subscription } from 'rxjs';
 import { NovoToastService } from '../../toast/ToastService';
-import { NovoDataTable } from '../data-table.component';
+import { NovoDataTableRef, NOVO_DATA_TABLE_REF } from '../data-table.token';
 
 @Component({
   selector: 'novo-data-table-checkbox-header-cell',
@@ -37,7 +47,7 @@ export class NovoDataTableCheckboxHeaderCell<T> extends CdkHeaderCell implements
     columnDef: CdkColumnDef,
     elementRef: ElementRef,
     renderer: Renderer2,
-    private dataTable: NovoDataTable<T>,
+    @Inject(NOVO_DATA_TABLE_REF) private dataTable: NovoDataTableRef,
     private ref: ChangeDetectorRef,
     private toaster: NovoToastService,
   ) {

@@ -23,7 +23,7 @@ import {
   TimeControl,
   TimezoneControl,
 } from '../../elements/form/FormControls';
-import { FormField, NovoFieldset } from '../../elements/form/FormInterfaces';
+import type { FormField, NovoFieldset } from '../../elements/form/FormInterfaces';
 import { NovoFormControl } from '../../elements/form/NovoFormControl';
 import { NovoFormGroup } from '../../elements/form/NovoFormGroup';
 import { EntityPickerResult, EntityPickerResults } from '../../elements/picker/extras/entity-picker-results/EntityPickerResults';
@@ -822,7 +822,7 @@ export class FormUtils {
   forceValidation(form: NovoFormGroup): void {
     Object.keys(form.controls).forEach((key: string) => {
       const control: any = form.controls[key];
-      if (control.required && Helpers.isBlank(form.value[control.key])) {
+      if (control.required && Helpers.isBlank(form.getRawValue()[control.key])) {
         control.markAsDirty();
         control.markAsTouched();
       }

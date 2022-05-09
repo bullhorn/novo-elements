@@ -1,12 +1,5 @@
 // NG
-import {
-  ConnectedPositionStrategy,
-  OriginConnectionPosition,
-  Overlay,
-  OverlayConfig,
-  OverlayConnectionPosition,
-  OverlayRef,
-} from '@angular/cdk/overlay';
+import { ConnectedPosition, FlexibleConnectedPositionStrategy, Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { Directive, ElementRef, HostListener, Input, OnDestroy, OnInit, ViewContainerRef } from '@angular/core';
 // APP
@@ -28,7 +21,7 @@ export class TooltipDirective implements OnDestroy, OnInit {
   @Input('tooltipSize')
   size: string;
   @Input('tooltipBounce')
-  bounce: string;
+  bounce: boolean;
   @Input('tooltipNoAnimate')
   noAnimate: boolean;
   @Input('tooltipRounded')
@@ -42,7 +35,7 @@ export class TooltipDirective implements OnDestroy, OnInit {
   @Input('removeTooltipArrow')
   removeArrow: boolean = false;
   @Input('tooltipAutoPosition')
-  autoPosition: boolean = false;
+  autoPosition: boolean = true;
   @Input('tooltipIsHTML')
   isHTML: boolean;
 
@@ -116,6 +109,7 @@ export class TooltipDirective implements OnDestroy, OnInit {
     tooltipInstance.noAnimate = this.noAnimate;
     tooltipInstance.position = this.removeArrow ? 'no-arrow' : this.position;
     tooltipInstance.isHTML = this.isHTML;
+    tooltipInstance.bounce = this.bounce;
   }
 
   private hide(): void {
@@ -124,89 +118,79 @@ export class TooltipDirective implements OnDestroy, OnInit {
     }
   }
 
-  private getPosition(): ConnectedPositionStrategy {
-    let strategy: ConnectedPositionStrategy;
-    let originPosition: OriginConnectionPosition;
-    let overlayPosition: OverlayConnectionPosition;
+  private getPosition(): FlexibleConnectedPositionStrategy {
+    let strategy: FlexibleConnectedPositionStrategy;
+    let defaultPosition: ConnectedPosition;
     let offsetX: number;
     let offsetY: number;
+    let autoPositions: ConnectedPosition[] = [
+      { originX: 'center', originY: 'bottom', overlayX: 'center', overlayY: 'top', offsetX: 0, offsetY: 12 },
+      { originX: 'end', originY: 'bottom', overlayX: 'end', overlayY: 'top', offsetX: 0, offsetY: 12 },
+      { originX: 'end', originY: 'center', overlayX: 'start', overlayY: 'center', offsetX: 12, offsetY: 0 },
+      { originX: 'start', originY: 'center', overlayX: 'end', overlayY: 'center', offsetX: -12, offsetY: 0 },
+      { originX: 'center', originY: 'top', overlayX: 'center', overlayY: 'bottom', offsetX: 0, offsetY: -12 },
+      { originX: 'start', originY: 'bottom', overlayX: 'start', overlayY: 'top', offsetX: 0, offsetY: 12 },
+      { originX: 'start', originY: 'top', overlayX: 'start', overlayY: 'bottom', offsetX: 0, offsetY: -12 },
+      { originX: 'end', originY: 'top', overlayX: 'end', overlayY: 'bottom', offsetX: 0, offsetY: -12 },
+      { originX: 'start', originY: 'top', overlayX: 'end', overlayY: 'bottom', offsetX: 12, offsetY: -12 },
+      { originX: 'start', originY: 'bottom', overlayX: 'end', overlayY: 'top', offsetX: 12, offsetY: 12 },
+      { originX: 'end', originY: 'top', overlayX: 'start', overlayY: 'bottom', offsetX: -12, offsetY: -12 },
+      { originX: 'end', originY: 'bottom', overlayX: 'start', overlayY: 'top', offsetX: -12, offsetY: 12 },
+    ];
 
     switch (this.position) {
       case 'right':
-        originPosition = { originX: 'end', originY: 'center' };
-        overlayPosition = { overlayX: 'start', overlayY: 'center' };
-        offsetX = 8;
+        defaultPosition = { originX: 'end', originY: 'center', overlayX: 'start', overlayY: 'center' };
+        offsetX = 12;
         offsetY = 0;
         break;
       case 'bottom':
-        originPosition = { originX: 'center', originY: 'bottom' };
-        overlayPosition = { overlayX: 'center', overlayY: 'top' };
+        defaultPosition = { originX: 'center', originY: 'bottom', overlayX: 'center', overlayY: 'top' };
         offsetX = 0;
-        offsetY = 8;
+        offsetY = 12;
         break;
       case 'top':
-        originPosition = { originX: 'center', originY: 'top' };
-        overlayPosition = { overlayX: 'center', overlayY: 'bottom' };
+        defaultPosition = { originX: 'center', originY: 'top', overlayX: 'center', overlayY: 'bottom' };
         offsetX = 0;
-        offsetY = -8;
+        offsetY = -12;
         break;
       case 'left':
-        originPosition = { originX: 'start', originY: 'center' };
-        overlayPosition = { overlayX: 'end', overlayY: 'center' };
-        offsetX = -8;
+        defaultPosition = { originX: 'start', originY: 'center', overlayX: 'end', overlayY: 'center' };
+        offsetX = -12;
         offsetY = 0;
         break;
       case 'top-left':
-        originPosition = { originX: 'start', originY: 'top' };
-        overlayPosition = { overlayX: 'end', overlayY: 'bottom' };
-        offsetX = 8;
-        offsetY = -8;
+        defaultPosition = { originX: 'start', originY: 'top', overlayX: 'end', overlayY: 'bottom' };
+        offsetX = 12;
+        offsetY = -12;
         break;
       case 'bottom-left':
-        originPosition = { originX: 'start', originY: 'bottom' };
-        overlayPosition = { overlayX: 'end', overlayY: 'top' };
-        offsetX = 8;
-        offsetY = 8;
+        defaultPosition = { originX: 'start', originY: 'bottom', overlayX: 'end', overlayY: 'top' };
+        offsetX = 12;
+        offsetY = 12;
         break;
       case 'top-right':
-        originPosition = { originX: 'end', originY: 'top' };
-        overlayPosition = { overlayX: 'start', overlayY: 'bottom' };
-        offsetX = -8;
-        offsetY = -8;
+        defaultPosition = { originX: 'end', originY: 'top', overlayX: 'start', overlayY: 'bottom' };
+        offsetX = -12;
+        offsetY = -12;
         break;
       case 'bottom-right':
-        originPosition = { originX: 'end', originY: 'bottom' };
-        overlayPosition = { overlayX: 'start', overlayY: 'top' };
-        offsetX = -8;
-        offsetY = 8;
+        defaultPosition = { originX: 'end', originY: 'bottom', overlayX: 'start', overlayY: 'top' };
+        offsetX = -12;
+        offsetY = 12;
         break;
-
       default:
         break;
     }
+
+    const allPositions = this.autoPosition ? [defaultPosition].concat(autoPositions) : [defaultPosition];
     strategy = this.overlay
       .position()
-      .connectedTo(this.elementRef, originPosition, overlayPosition)
-      .withOffsetX(offsetX)
-      .withOffsetY(offsetY);
-
-    return this.autoPosition ? this.withFallbackStrategy(strategy) : strategy;
-  }
-  private withFallbackStrategy(strategy: ConnectedPositionStrategy): ConnectedPositionStrategy {
-    strategy
-      .withFallbackPosition({ originX: 'center', originY: 'bottom' }, { overlayX: 'center', overlayY: 'top' }, 0, 8)
-      .withFallbackPosition({ originX: 'end', originY: 'bottom' }, { overlayX: 'end', overlayY: 'top' }, 0, 8)
-      .withFallbackPosition({ originX: 'end', originY: 'center' }, { overlayX: 'start', overlayY: 'center' }, 8, 0)
-      .withFallbackPosition({ originX: 'start', originY: 'center' }, { overlayX: 'end', overlayY: 'center' }, -8, 0)
-      .withFallbackPosition({ originX: 'center', originY: 'top' }, { overlayX: 'center', overlayY: 'bottom' }, 0, -8)
-      .withFallbackPosition({ originX: 'start', originY: 'bottom' }, { overlayX: 'start', overlayY: 'top' }, 0, 8)
-      .withFallbackPosition({ originX: 'start', originY: 'top' }, { overlayX: 'start', overlayY: 'bottom' }, 0, -8)
-      .withFallbackPosition({ originX: 'end', originY: 'top' }, { overlayX: 'end', overlayY: 'bottom' }, 0, -8)
-      .withFallbackPosition({ originX: 'start', originY: 'top' }, { overlayX: 'end', overlayY: 'bottom' }, 8, -8)
-      .withFallbackPosition({ originX: 'start', originY: 'bottom' }, { overlayX: 'end', overlayY: 'top' }, 8, 8)
-      .withFallbackPosition({ originX: 'end', originY: 'top' }, { overlayX: 'start', overlayY: 'bottom' }, -8, -8)
-      .withFallbackPosition({ originX: 'end', originY: 'bottom' }, { overlayX: 'start', overlayY: 'top' }, -8, 8);
-
+      .flexibleConnectedTo(this.elementRef)
+      .withFlexibleDimensions(false)
+      .withDefaultOffsetX(offsetX)
+      .withDefaultOffsetY(offsetY)
+      .withPositions(allPositions);
     return strategy;
   }
 }

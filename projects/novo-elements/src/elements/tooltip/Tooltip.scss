@@ -141,5 +141,22 @@ novo-tooltip {
     &.preline {
       white-space: pre-line;
     }
+
+    // Bounce
+    &.bounce {
+      animation: bounce 0.75s ease-in-out infinite;
+    }
+
+    @keyframes bounce {
+      0% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+      100% {
+        transform: translateY(0px);
+      }
+    }
   }
 }

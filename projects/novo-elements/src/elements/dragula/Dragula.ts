@@ -1,10 +1,9 @@
 // NG2
 import { Directive, ElementRef, Input, OnChanges, OnInit } from '@angular/core';
 // Vendor
-import * as dragulaImported from '@bullhorn/dragula';
+import dragula from '@bullhorn/dragula';
 // APP
 import { NovoDragulaService } from './DragulaService';
-const dragula = dragulaImported;
 
 @Directive({
   selector: '[dragula]',

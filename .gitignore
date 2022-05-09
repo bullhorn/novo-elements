@@ -27,7 +27,7 @@ novo-elements.iml
 !.vscode/extensions.json
 
 # misc
-/.angular
+/.angular/cache
 /.sass-cache
 /connect.lock
 /coverage

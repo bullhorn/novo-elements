@@ -1,5 +1,5 @@
 import { Directive, ElementRef, HostBinding, Input } from '@angular/core';
-import { BooleanInput } from '../../../../utils';
+import { BooleanInput } from '../../../../utils/decorators';
 import { TypographyLength, TypographySize, TypographyWeight } from '../text.types';
 
 @Directive()

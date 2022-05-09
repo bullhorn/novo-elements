@@ -8,6 +8,5 @@ import { NovoAsideService } from './aside.service';
   imports: [OverlayModule, PortalModule],
   declarations: [AsideComponent],
   providers: [NovoAsideService],
-  entryComponents: [AsideComponent],
 })
 export class NovoAsideModule {}

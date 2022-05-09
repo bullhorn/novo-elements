@@ -553,7 +553,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
   }
 
   get hasValue() {
-    return !Helpers.isEmpty(this.form.value[this.control.key]);
+    return !Helpers.isEmpty(this.form.getRawValue()[this.control.key]);
   }
 
   get focused() {
@@ -662,10 +662,10 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     } else if (
       this.form.controls[this.control.key].controlType === 'address' &&
       field &&
-      !Helpers.isEmpty(this.form.value[this.control.key]) &&
-      !Helpers.isBlank(this.form.value[this.control.key][field])
+      !Helpers.isEmpty(this.form.getRawValue()[this.control.key]) &&
+      !Helpers.isBlank(this.form.getRawValue()[this.control.key][field])
     ) {
-      this.handleAddressChange({ value: this.form.value[this.control.key][field], field });
+      this.handleAddressChange({ value: this.form.getRawValue()[this.control.key][field], field });
     }
     this._focusEmitter.emit(event);
   }

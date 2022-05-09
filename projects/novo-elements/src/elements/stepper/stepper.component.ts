@@ -1,6 +1,5 @@
-import { FocusableOption } from '@angular/cdk/a11y';
 import { Directionality } from '@angular/cdk/bidi';
-import { CdkStep, CdkStepper } from '@angular/cdk/stepper';
+import { CdkStep, CdkStepHeader, CdkStepper } from '@angular/cdk/stepper';
 import {
   AfterContentInit,
   ChangeDetectionStrategy,
@@ -9,6 +8,7 @@ import {
   ContentChild,
   ContentChildren,
   Directive,
+  ElementRef,
   forwardRef,
   Inject,
   Input,
@@ -57,19 +57,11 @@ export class NovoStep extends CdkStep {
 export class NovoStepper extends CdkStepper implements AfterContentInit {
   /** The list of step headers of the steps in the stepper. */
   @ViewChildren(NovoStepHeader)
-  _stepHeader: QueryList<FocusableOption>;
+  _stepHeader: QueryList<CdkStepHeader>;
 
   /** Steps that the stepper holds. */
   @ContentChildren(NovoStep, { descendants: true })
-  _steps: QueryList<NovoStep>;
-
-  /** Steps that belong to the current stepper, excluding ones from nested steppers. */
-  public get steps(): QueryList<NovoStep> {
-    return this._steps;
-  }
-  public set steps(value: QueryList<NovoStep>) {
-    this._steps = value;
-  }
+  steps: QueryList<NovoStep>;
 
   /** Custom icon overrides passed in by the consumer. */
   @ContentChildren(NovoIconComponent)
@@ -80,7 +72,7 @@ export class NovoStepper extends CdkStepper implements AfterContentInit {
 
   get completed(): boolean {
     try {
-      const steps = this._steps.toArray();
+      const steps = this.steps.toArray();
       const length = steps.length - 1;
       return steps[length].completed && length === this.selectedIndex;
     } catch (err) {
@@ -90,12 +82,12 @@ export class NovoStepper extends CdkStepper implements AfterContentInit {
 
   ngAfterContentInit() {
     // Mark the component for change detection whenever the content children query changes
-    this._steps.changes.pipe(takeUntil(this._destroyed)).subscribe(() => this._stateChanged());
+    this.steps.changes.pipe(takeUntil(this._destroyed)).subscribe(() => this._stateChanged());
   }
 
   complete() {
     try {
-      const steps = this._steps.toArray();
+      const steps = this.steps.toArray();
       steps[this.selectedIndex].completed = true;
       this.next();
       this._stateChanged();
@@ -105,7 +97,7 @@ export class NovoStepper extends CdkStepper implements AfterContentInit {
   }
 
   getIndicatorType(index: number): 'none' | '' | 'edit' | 'done' {
-    const steps = this._steps.toArray();
+    const steps = this.steps.toArray();
     if (index === this.selectedIndex) {
       if (steps[index] && index === steps.length - 1 && steps[index].completed) {
         return 'done';
@@ -159,8 +151,8 @@ export class NovoHorizontalStepper extends NovoStepper {}
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NovoVerticalStepper extends NovoStepper {
-  constructor(@Optional() dir: Directionality, changeDetectorRef: ChangeDetectorRef) {
-    super(dir, changeDetectorRef);
+  constructor(@Optional() dir: Directionality, changeDetectorRef: ChangeDetectorRef, elementRef: ElementRef) {
+    super(dir, changeDetectorRef, elementRef, '');
     this._orientation = 'vertical';
   }
 }

@@ -13,6 +13,7 @@ import {
   NovoTooltipModule,
 } from '../../..';
 import { NovoDataTable } from '../data-table.component';
+import { NOVO_DATA_TABLE_REF } from '../data-table.token';
 import { DataTableState } from '../state/data-table-state.service';
 import { NovoDataTableCheckboxHeaderCell } from './data-table-checkbox-header-cell.component';
 
@@ -34,6 +35,7 @@ describe('Elements: NovoDataTableCheckboxHeaderCell', () => {
         ChangeDetectorRef,
         NovoToastService,
         ComponentUtils,
+        { provide: NOVO_DATA_TABLE_REF, useExisting: NovoDataTable },
         {
           provide: CdkColumnDef,
           useFactory: () => {
