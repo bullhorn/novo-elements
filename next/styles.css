@@ -13510,9 +13510,6 @@ novo-row-chips .novo-row-chips-empty-message {
   font-style: italic;
   color: #9e9e9e;
 }
-novo-row-chips novo-picker {
-  max-width: 275px;
-}
 novo-row-chips i {
   cursor: pointer;
 }
@@ -24566,6 +24563,7 @@ novo-file-input .file-output-group .file-item.disabled {
 novo-file-input .file-input-group {
   cursor: pointer;
   width: 100%;
+  position: relative;
 }
 novo-file-input .file-input-group input[type=file] {
   opacity: 0;
