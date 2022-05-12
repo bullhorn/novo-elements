@@ -6,7 +6,7 @@ import { NovoTemplate } from '../common/novo-template/novo-template.directive';
   template: `
     <!---Readonly--->
     <ng-template novoTemplate="read-only" let-form="form" let-control>
-      <div>{{ form.value[control.key] }}</div>
+      <div>{{ form.getRawValue()[control.key] }}</div>
     </ng-template>
     <!--Textbox--->
     <ng-template novoTemplate="textbox" let-control let-form="form" let-errors="errors" let-methods="methods">
@@ -308,7 +308,10 @@ import { NovoTemplate } from '../common/novo-template/novo-template.directive';
             *ngFor="let option of control.options"
             [value]="option.value"
             [label]="option.label"
-            [checked]="option.value === form.value[control.key] || (form.value[control.key] && option.value === form.value[control.key].id)"
+            [checked]="
+              option.value === form.getRawValue()[control.key] ||
+              (form.getRawValue()[control.key] && option.value === form.getRawValue()[control.key].id)
+            "
             [tooltip]="control.tooltip"
             [tooltipPosition]="control.tooltipPosition"
             [tooltipSize]="control?.tooltipSize"

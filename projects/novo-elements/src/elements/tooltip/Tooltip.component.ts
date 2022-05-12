@@ -36,4 +36,5 @@ export class NovoTooltip {
   public noAnimate: boolean;
   public position: string;
   public isHTML: boolean;
+  public bounce: boolean;
 }

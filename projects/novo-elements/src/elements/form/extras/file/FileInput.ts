@@ -7,13 +7,11 @@ import {
   EventEmitter,
   HostBinding,
   Input,
-  OnChanges,
   OnDestroy,
   OnInit,
   Optional,
   Output,
   Self,
-  SimpleChanges,
   TemplateRef,
   ViewChild,
   ViewContainerRef,
@@ -54,6 +52,7 @@ const NovoFileInputMixins: CanUpdateErrorStateCtor & typeof NovoFileInputBase = 
     <ng-template #fileInput>
       <div class="file-input-group" [class.disabled]="disabled" [class.active]="active">
         <input
+          #inputElement
           *ngIf="!layoutOptions.customActions"
           type="file"
           [name]="name"
@@ -64,6 +63,7 @@ const NovoFileInputMixins: CanUpdateErrorStateCtor & typeof NovoFileInputBase = 
           [attr.data-feature-id]="dataFeatureId"
         />
         <input
+          #inputElement
           *ngIf="layoutOptions.customActions"
           type="file"
           [name]="name"
@@ -154,12 +154,9 @@ const NovoFileInputMixins: CanUpdateErrorStateCtor & typeof NovoFileInputBase = 
         </div>
       </div>
     </ng-template>
-  `,
+`,
 })
-export class NovoFileInputElement
-  extends NovoFileInputMixins
-  implements NovoFieldControl<any>, ControlValueAccessor, OnInit, OnDestroy, OnChanges
-{
+export class NovoFileInputElement extends NovoFileInputMixins implements NovoFieldControl<any>, ControlValueAccessor, OnInit, OnDestroy {
   private _uniqueId: string = `novo-file-input-${++nextId}`;
   /** The aria-describedby attribute on the chip list for improved a11y. */
   _ariaDescribedby: string;
@@ -188,6 +185,7 @@ export class NovoFileInputElement
   fileOutput: TemplateRef<any>;
   @ViewChild('container', { read: ViewContainerRef, static: true })
   container: ViewContainerRef;
+  @ViewChild('inputElement') inputElement: ElementRef<HTMLInputElement>;
 
   @Input()
   multiple: boolean = false;
@@ -318,11 +316,6 @@ export class NovoFileInputElement
     }
   }
 
-  ngOnChanges(changes?: SimpleChanges) {
-    // Removed 6.0.5, not sure why this was here
-    // this.onModelChange(this.model);}
-  }
-
   updateLayout() {
     this.layoutOptions = Object.assign({}, LAYOUT_DEFAULTS, this.layoutOptions);
     this.insertTemplatesBasedOnLayout();
@@ -395,6 +388,8 @@ export class NovoFileInputElement
 
   writeValue(model: any): void {
     this.model = model;
+    // If model is cleared programmatically (E.g. form.patchValue({file: undefined})), empty file list.
+    this.files = !model ? [] : this.files;
   }
 
   registerOnChange(fn: Function): void {
@@ -407,6 +402,8 @@ export class NovoFileInputElement
 
   check(event) {
     this.process(Array.from(event.target.files));
+    // After processing file upload, clear input element value. Allows for delete and upload of same file.
+    event.target.value = '';
   }
 
   validate(files): boolean {

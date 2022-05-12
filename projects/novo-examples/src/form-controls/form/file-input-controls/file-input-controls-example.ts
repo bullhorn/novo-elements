@@ -95,4 +95,8 @@ export class FileInputControlsExample {
     }
     return true;
   }
+
+  public clearFileLists(): void {
+    this.fileForm.patchValue({file: null, files: null, mixDeleteFiles: null});
+  }
 }
