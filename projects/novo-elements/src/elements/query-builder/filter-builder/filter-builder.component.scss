@@ -1,0 +1,51 @@
+@import "~novo-design-tokens/scss";
+
+:host {
+  position: relative;
+  display: block;
+  width: 100%;
+
+  
+  .condition-operator {
+    &::ng-deep {
+      .novo-select {
+        min-width: 10rem !important;
+      }
+    }
+  }  
+  
+  .and-or-filter-button {
+    box-sizing: border-box;
+    background: #fff;
+    border: 1px solid #ddd;
+    color: #5691f5;
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    margin: 0.4rem auto;
+    // vertical-align: middle;
+    align-items: center;
+    text-align: center;
+    user-select: none;
+    outline: none;
+    white-space: nowrap;
+    text-transform: uppercase;
+    overflow: hidden;
+    transition: box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), background-color 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  }
+}
+
+.field-select-picker {
+  display: grid;
+  grid-template-columns: min-content 1fr;
+  background-color: $color-white;
+  overflow: auto;
+  box-shadow: $shadow-1;
+  height: 219px; // match picker max-height
+  width: 32rem;
+  .filter-search-results {
+    border-left: 1px solid $color-light;
+    height: 100%;
+    overflow-y: scroll;
+  }
+}

@@ -1,0 +1,47 @@
+@import "~novo-design-tokens/scss";
+
+:host {
+  display: block;
+  min-width: 640px;
+  max-width: 640px;
+
+  .query-description-container {
+    gap: 1rem;
+  }
+
+  .query-criteria {
+    box-sizing: border-box;
+    background: #e6e6e6;
+    border-left: 5px solid $color-neutral;
+    border-radius: 3px;
+    display: inline-block;
+    margin-bottom: 20px;
+    padding: 0 0 10px 1px;
+    width: 100%;
+
+    &.query-criteria-include {
+      border-left: 5px solid $color-success;
+    }
+    &.query-criteria-exclude {
+      border-left: 5px solid $color-negative;
+    }
+
+    .query-criteria-header {
+      font-weight: 400;
+      line-height: 35px;
+      margin-top: 1rem;
+      padding: 0 1rem;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .query-condition-container {
+      padding: 1rem 0;
+      margin: 1rem;
+      align-self: stretch;
+    }
+    .flex {
+      flex: 1;
+    }
+  }
+}
