@@ -11,7 +11,7 @@ import {
   Renderer2,
   SimpleChanges,
 } from '@angular/core';
-import { Key } from 'projects/novo-elements/src/utils';
+import { Key } from '../../../../utils';
 import { Helpers } from './../../../../utils/Helpers';
 
 @Directive({

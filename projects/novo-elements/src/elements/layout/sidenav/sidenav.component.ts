@@ -21,7 +21,7 @@ import {
   Output,
   ViewEncapsulation,
 } from '@angular/core';
-import { Key } from 'projects/novo-elements/src/utils';
+import { Key } from '../../../utils';
 import { fromEvent, Observable, Subject } from 'rxjs';
 import { distinctUntilChanged, filter, map, mapTo, take, takeUntil } from 'rxjs/operators';
 // import type { NovoLayoutContainer } from '../container/layout-container.component';
