@@ -1,0 +1,60 @@
+<form [formGroup]="parentForm">
+  <novo-stack [formArrayName]="controlName" class="expression-builder">
+    <ng-container *ngFor="let andGroup of andGroups().controls; let andIndex = index; let isFirst = first">
+      <div *ngIf="!isFirst" class="and-connector" aria-hidden="false">
+        <div class="and-connector-line"></div>
+        <novo-caption class="and-connector-text">and</novo-caption>
+      </div>
+      <ng-container [formGroupName]="andIndex">
+        <novo-stack
+          class="expression-group"
+          [class.with-conditions]="orGroups(andIndex).controls.length > 1"
+          [class.with-one-condition]="orGroups(andIndex).controls.length == 1"
+          formArrayName="$or">
+          <ng-container
+            *ngFor="
+              let orGroup of orGroups(andIndex).controls;
+              let orIndex = index;
+              let isFirstOr = first;
+              let isLastOr = last
+            ">
+            <novo-flex class="expression-block" [class.or-block]="orGroups(andIndex).controls.length > 1 && !isLastOr">
+              <div *ngIf="!isFirstOr" class="or-connector" aria-hidden="false">
+                <!-- <div class="or-connector-line"></div> -->
+                <novo-text class="or-connector-text" color="ocean" weight="bold" padding="sm" mx="lg">OR</novo-text>
+              </div>
+              <novo-filter-builder [formGroupName]="orIndex" [config]="config">
+                <novo-date-filter-field-def name="Timestamp"></novo-date-filter-field-def>
+                <novo-string-filter-field-def name="String"></novo-string-filter-field-def>
+                <novo-id-filter-field-def name="ID"></novo-id-filter-field-def>
+                <novo-number-filter-field-def name="Float"></novo-number-filter-field-def>
+                <novo-number-filter-field-def name="Integer"></novo-number-filter-field-def>
+                <novo-number-filter-field-def name="BigDecimal"></novo-number-filter-field-def>
+                <novo-picker-filter-field-def name="SELECT"></novo-picker-filter-field-def>
+                <ng-content></ng-content>
+              </novo-filter-builder>
+              <button *ngIf="isLastOr" theme="secondary" size="sm" class="and-or-filter-button"
+                (click)="addOrGroup(andIndex)">Or</button>
+              <novo-button theme="icon" icon="delete-o" (click)="removeOrGroup(andIndex, orIndex)"></novo-button>
+            </novo-flex>
+
+          </ng-container>
+        </novo-stack>
+      </ng-container>
+    </ng-container>
+  </novo-stack>
+  <button class="and-or-filter-button" theme="secondary" size="sm" (click)="addAndGroup()"
+    [disabled]="!canAddGroup()">Add Criteria</button>
+</form>
+<!-- 
+  {
+    $and: [{
+      $or: [{
+        entity: 'JobOrder'
+        field: 'categories',
+        operator: 'doesNotContain',
+        value: 'Healthcare'
+      }]
+    }]
+  }
+ -->

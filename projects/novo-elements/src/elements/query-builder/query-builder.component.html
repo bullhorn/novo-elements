@@ -1,0 +1,42 @@
+<form [formGroup]="queryForm" (ngSubmit)="onSubmit()">
+  <novo-stack class="query-builder" gap="1rem">
+    <novo-flex class="query-description-container">
+      <novo-icon novoPrefix role="img" aria-label="description">note</novo-icon>
+      <novo-field class="query-description-field">
+        <input
+          novoInput
+          aria-label="Description"
+          placeholder="Add a description"
+          type="text"
+          maxlength="100"
+          formControlName="description" />
+      </novo-field>
+    </novo-flex>
+
+    <novo-stack class="query-criteria query-criteria-include">
+      <novo-flex class="query-criteria-header" gap="1rem">
+        <novo-icon role="img" aria-label="include records">circle</novo-icon>
+        <novo-text class="flex">Include <strong>Records</strong> when: </novo-text>
+        <novo-button theme="icon">
+          <novo-icon>delete</novo-icon>
+        </novo-button>
+      </novo-flex>
+      <novo-card class="query-condition-container">
+        <novo-expression-builder controlName="include" [config]="config"></novo-expression-builder>
+      </novo-card>
+    </novo-stack>
+
+    <novo-stack class="query-criteria query-criteria-exclude">
+      <novo-flex class="query-criteria-header" gap="1rem">
+        <novo-icon role="img" aria-label="include records">close-o</novo-icon>
+        <novo-text class="flex">Exclude <strong>Records</strong> when: </novo-text>
+        <novo-button theme="icon">
+          <novo-icon>delete</novo-icon>
+        </novo-button>
+      </novo-flex>
+      <novo-card class="query-condition-container">
+        <novo-expression-builder controlName="exclude" [config]="config"></novo-expression-builder>
+      </novo-card>
+    </novo-stack>
+  </novo-stack>
+</form>

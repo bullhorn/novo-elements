@@ -38,7 +38,8 @@
     line-height: 1;
   }
 
-  &[size="small"] {
+  &[size="small"],
+  &[size="sm"] {
     font-size: 1rem;
     padding: 0 $spacing-md;
     height: 2.4rem;
@@ -49,7 +50,8 @@
     }
   }
 
-  &[size="large"] {
+  &[size="large"],
+  &[size="lg"] {
     font-size: 1.6rem;
     padding: 0 $spacing-lg;
     height: 3.6rem;

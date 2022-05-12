@@ -93,7 +93,7 @@ export class NovoChipInput implements NovoChipTextControl, OnChanges {
   constructor(
     protected _elementRef: ElementRef<HTMLInputElement>,
     @Inject(NOVO_CHIPS_DEFAULT_OPTIONS) private _defaultOptions: NovoChipsDefaultOptions,
-    @Inject(forwardRef(() => NovoChipList)) private _chipList: NovoChipList,
+    @Inject(forwardRef(() => NovoChipList)) public _chipList: NovoChipList,
   ) {
     this._inputElement = this._elementRef.nativeElement as HTMLInputElement;
     this._chipList.registerInput(this);

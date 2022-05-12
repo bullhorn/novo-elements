@@ -1,0 +1,7 @@
+<form [formGroup]="queryForm" (ngSubmit)="onSubmit()">
+  <novo-expression-builder controlName="criteria" [config]="config">
+
+  </novo-expression-builder>
+</form>
+
+<pre><code>{{queryForm.value | json}}</code></pre>

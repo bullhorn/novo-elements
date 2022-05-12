@@ -389,6 +389,10 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
     if (this.mode === 'multiple') {
       this.selection = this.model as Date[];
     }
+    if (this.mode === 'range') {
+      const range = this.model as RangeModel;
+      this.selection = [range.startDate, range.endDate].filter(Boolean);
+    }
     if (Helpers.isDate(model)) {
       this.updateView(model);
       this.modelToSelection(model);

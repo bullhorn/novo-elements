@@ -93,4 +93,10 @@
     display: flex;
     flex-direction: column;
   }
+
+  &::ng-deep {
+    .novo-date-range-format {
+      min-width: 22rem;
+    }
+  }
 }
