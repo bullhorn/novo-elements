@@ -245,6 +245,7 @@ import { NovoTemplate } from '../common/novo-template/novo-template.directive';
           [type]="control.config.type"
           [formControlName]="control.key"
           [placeholder]="control.placeholder"
+          [maxlength]="control?.maxlength"
           *ngIf="control.multiple && control.config.columns"
           [closeOnSelect]="control.closeOnSelect"
           (changed)="methods.modelChangeWithRaw($event)"

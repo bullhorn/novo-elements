@@ -22,7 +22,7 @@ import {
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import { Key } from 'projects/novo-elements/src/utils';
+import { Key } from '../../../utils';
 import { fromEvent, merge, of, Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
 import {
