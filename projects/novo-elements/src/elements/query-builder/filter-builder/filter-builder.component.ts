@@ -112,6 +112,8 @@ export class FilterBuilderComponent<T extends BaseFieldDef> implements OnInit, A
   }
 
   ngAfterContentInit() {
+    const { fields = [] } = this.config || {};
+    fields.length && this.changeFieldOptions(fields[0]);
     this.searches = this.searchTerm.valueChanges.pipe(debounceTime(300), distinctUntilChanged()).subscribe((term) => {
       this.results$ = Promise.resolve(
         this.fieldConfig.options.filter(
@@ -218,7 +220,7 @@ export class FilterBuilderComponent<T extends BaseFieldDef> implements OnInit, A
     const editType = this.editTypeFn(field);
     const { name, inputType, dataSpecialization, dataType, type } = field;
     // Check Fields by priority for match Field Definition
-    const key = [name, editType, 'default'].find((it) => this._fieldDefsByName.has(it));
+    const key = [name, editType, inputType, dataSpecialization, dataType, type, 'default'].find((it) => this._fieldDefsByName.has(it));
     // console.log('looking for input', name, inputType, dataSpecialization, dataType, type, this._fieldDefsByName);
 
     return this._fieldDefsByName.get(key);
@@ -226,6 +228,7 @@ export class FilterBuilderComponent<T extends BaseFieldDef> implements OnInit, A
 
   private createFieldTemplates() {
     const definition = this.findDefinitionForField(this.getField());
+    console.log('found def', definition)
     this.parentForm.get('operator').setValue(definition.defaultOperator);
     this.parentForm.get('value').setValue(null);
 
