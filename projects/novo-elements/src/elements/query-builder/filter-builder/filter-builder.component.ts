@@ -72,7 +72,7 @@ export class QueryFilterOperatorOutlet implements QueryFilterOutlet {
 }
 
 export const defaultEditTypeFn = (field: BaseFieldDef) => {
-  return (field.inputType || field.dataSpecialization || field.dataType || field.type || 'unknown').toLowerCase();
+  return (field.inputType || field.dataType || field.type).toLowerCase();
 };
 
 @Component({
@@ -218,9 +218,10 @@ export class FilterBuilderComponent<T extends BaseFieldDef> implements OnInit, A
   private findDefinitionForField(field) {
     if (!field) return;
     const editType = this.editTypeFn(field);
-    const { name, inputType, dataSpecialization, dataType, type } = field;
+    // Don't look at dataSpecialization it is no good, this misses currency, and percent
+    const { name, inputType, dataType, type } = field;
     // Check Fields by priority for match Field Definition
-    const key = [name, editType, inputType, dataSpecialization, dataType, type, 'default'].find((it) => this._fieldDefsByName.has(it));
+    const key = [name, editType, inputType, dataType, type, 'default'].find((it) => this._fieldDefsByName.has(it));
     // console.log('looking for input', name, inputType, dataSpecialization, dataType, type, this._fieldDefsByName);
 
     return this._fieldDefsByName.get(key);
@@ -228,7 +229,7 @@ export class FilterBuilderComponent<T extends BaseFieldDef> implements OnInit, A
 
   private createFieldTemplates() {
     const definition = this.findDefinitionForField(this.getField());
-    console.log('found def', definition)
+    console.log('found def', definition);
     this.parentForm.get('operator').setValue(definition.defaultOperator);
     this.parentForm.get('value').setValue(null);
 

@@ -19,7 +19,7 @@
             <ng-container *ngIf="results$ | async as results; else loading">
               <ng-container *ngIf="results.length; else empty">
                 <novo-option *ngFor="let field of results" value="{{ fieldConfig.value }}.{{ field.name }}">
-                  {{ field.label }}
+                  {{ field.label || field.name }}
                 </novo-option>
               </ng-container>
               <!-- EMPTY STATE TEMPLATE -->
