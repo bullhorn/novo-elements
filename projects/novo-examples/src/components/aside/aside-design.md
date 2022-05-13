@@ -3,7 +3,6 @@ section: Components
 page: Aside
 title: Design
 order: 2
-tag: new
 ---
 
 ## Usage

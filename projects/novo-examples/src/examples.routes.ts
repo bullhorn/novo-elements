@@ -6004,6 +6004,49 @@ export class February2022Page {
 
 
 @Component({
+  selector: 'may-2022-page',
+  template: `<h1>📢  May 2022 (version 7)</h1>
+<p><strong>Announcement</strong>: Novo Elements is being updated to Angular 13</p>
+<p>Bullhorn is continually seeking to update and innovate our products, and leverage the latest features in the frameworks we use. In support of that mission, we are updating our Novo UI and its supporting novo-elements library to Angular 13.  This update  allows us to continue offering a streamlined and consistent experience across Bullhorn’s complete product portfolio.  This update includes both an Angular upgrade, as well as supporting the latest Typescript updates.  You can find more details in the Technical Release Notes section below.</p>
+<h2>Release Timeline</h2>
+<p>Bullhorn has released a Release Candidate v7 of Novo-elements. Bullhorn will update Novo to use Novo-Elements v7 in the 2022.6 release</p>
+<pre><code class="language-sh">npm install novo-elements@7.2.0-next.0
+</code></pre>
+<h2>Upgrading to V7</h2>
+<p>First follow the steps to update your angular app to <a href="https://update.angular.io/?v=10.0-13.0">Version 13</a></p>
+<pre><code><span class="hljs-attribute">npm</span> install --save novo-elements@<span class="hljs-number">7</span>.x.x
+<span class="hljs-attribute">ng</span> update novo-elements --migrate-only --from=<span class="hljs-number">0</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span> --to=<span class="hljs-number">7</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span> --force --<span class="hljs-literal">allow</span>-dirty  
+</code></pre>
+<h2 id="notable-changes">Notable changes <a href="https://bullhorn.github.io/novo-elements/docs/#/updates/v7-announce#notable-changes">#</a></h2>
+<ul>
+<li>Applications utilizing novo-elements v7 must be using Angular v13.3.1 and typescript v4.6.3</li>
+<li>Applications utilizing novo-elements must be built using Node 12.20.0 or later</li>
+<li><code>NovoFormGroup.value</code> references need to be updated to <code>.getRawValue()</code> to get values from disabled controls</li>
+<li>Stricter typing on date pipe values: More info here: https://github.com/microsoft/TypeScript/issues/35865</li>
+<li>Some getters/setters need to be updated to properties or vice versa when extending these components:</li>
+<li><code>NovoFormGroup.value</code>: getter/setter =&gt; property</li>
+<li><code>NovoStepper.steps</code>: getter/setter =&gt; property</li>
+<li><code>BasePickerResults.matches</code>: property =&gt; getter/setter</li>
+<li><code>BaseRenderer.data</code>: property =&gt; getter/setter</li>
+<li><code>BaseRenderer.value</code>: property =&gt; getter/setter</li>
+<li><code>DateCell.value</code>: property =&gt; getter/setter</li>
+<li><code>DropdownCell.value</code>: property =&gt; getter/setter</li>
+</ul>
+<p><strong>Deprecated</strong></p>
+<ul>
+<li>Internet Explorer 11 (current) support has been deprecated</li>
+</ul>
+<p><strong>Support Removed</strong></p>
+<p>Support for Internet Explorer 9, 10 and Internet Explorer mobile has been removed</p>
+`,
+  host: { class: 'markdown-page' }
+})
+export class May2022Page {
+  public params: any = {};
+}
+
+
+@Component({
   selector: 'field-interactions-page',
   template: `<h1>Field Interactions</h1>
 <p>Field Interactions is a simple API that allows you to modify NovoForms based on field changes.</p>
@@ -6138,7 +6181,7 @@ const routes: Routes = [
   {
     path: 'components/aside',
     component: TabsLayout,
-    data: { title: 'Aside', section: 'components', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}], description: null, tag: 'new' },
+    data: { title: 'Aside', section: 'components', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}], description: null },
     children: [
       { path: 'design', component: AsideDesignPage },
       { path: 'develop', component: AsideDevelopPage },
@@ -6149,7 +6192,7 @@ const routes: Routes = [
   {
     path: 'components/autocomplete',
     component: TabsLayout,
-    data: { title: 'Autocomplete', section: 'components', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}], description: null, tag: 'new' },
+    data: { title: 'Autocomplete', section: 'components', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}], description: null },
     children: [
       { path: 'design', component: AutocompleteDesignPage },
       { path: 'develop', component: AutocompleteDevelopPage },
@@ -6160,7 +6203,7 @@ const routes: Routes = [
   {
     path: 'components/avatar',
     component: TabsLayout,
-    data: { title: 'Avatar', section: 'components', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}], description: null, tag: 'new' },
+    data: { title: 'Avatar', section: 'components', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}], description: null },
     children: [
       { path: 'design', component: AvatarDesignPage },
       { path: 'develop', component: AvatarDevelopPage },
@@ -6171,7 +6214,7 @@ const routes: Routes = [
   {
     path: 'components/breadcrumbs',
     component: TabsLayout,
-    data: { title: 'Breadcrumbs', section: 'components', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}], description: null, tag: 'new' },
+    data: { title: 'Breadcrumbs', section: 'components', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}], description: null },
     children: [
       { path: 'design', component: BreadcrumbDesignPage },
       { path: 'develop', component: BreadcrumbDevelopPage },
@@ -6333,7 +6376,7 @@ const routes: Routes = [
   {
     path: 'components/toolbar',
     component: TabsLayout,
-    data: { title: 'Toolbar', section: 'components', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}], description: null, tag: 'new' },
+    data: { title: 'Toolbar', section: 'components', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}], description: null },
     children: [
       { path: 'design', component: ToolbarDesignPage },
       { path: 'develop', component: ToolbarDevelopPage },
@@ -6455,13 +6498,14 @@ const routes: Routes = [
       { path: '', redirectTo: '/patterns/patterns/test', pathMatch: 'full' },
     ]
   },
-  { path: 'updates/v6', component: February2022Page, data: { title: 'February 2022', section: 'updates', tag: 'new' } },
+  { path: 'updates/v6', component: February2022Page, data: { title: 'February 2022', section: 'updates' } },
+  { path: 'updates/v7-announce', component: May2022Page, data: { title: 'May 2022', section: 'updates', tag: 'new' } },
   // Catch All
   { path: '**', redirectTo: '/home', data: {} },
 ];
 
 export const PAGE_LIST = [
-  AceEditorPage,AgendaDesignPage,AgendaDevelopPage,AgendaExamplesPage,AsideDesignPage,AsideDevelopPage,AsideExamplesPage,AutocompleteDesignPage,AutocompleteDevelopPage,AutocompleteExamplesPage,AvatarDesignPage,AvatarDevelopPage,AvatarExamplesPage,BreadcrumbDesignPage,BreadcrumbDevelopPage,BreadcrumbExamplesPage,ButtonDesignPage,ButtonDevelopPage,ButtonExamplesPage,CalendarDesignPage,CalendarDevelopPage,CalendarExamplesPage,ComponentsPage,DataTablePage,DropdownDesignPage,DropdownDevelopPage,DropdownExamplesPage,FieldDesignPage,FieldDevelopPage,FieldExamplesPage,IconDesignPage,IconDevelopPage,IconExamplesPage,LoadingDesignPage,LoadingDevelopPage,LoadingExamplesPage,MenuDesignPage,MenuDevelopPage,MenuExamplesPage,ModalDesignPage,ModalDevelopPage,ModalExamplesPage,NonIdealStateDesignPage,NonIdealStateDevelopPage,NonIdealStateExamplesPage,PopoverDesignPage,PopoverDevelopPage,PopoverExamplesPage,ProgressDesignPage,ProgressDevelopPage,ProgressExamplesPage,ProgressUsagePage,QueryBuilderPage,QuickNotePage,SearchPage,SlidesPage,SwitchPage,TabbedGroupPickerPage,TablePage,TipWellDesignPage,TipWellDevelopPage,TipWellExamplesPage,ToasterDesignPage,ToasterDevelopPage,ToasterExamplesPage,ToolbarDesignPage,ToolbarDevelopPage,ToolbarExamplesPage,TooltipDesignPage,TooltipDevelopPage,TooltipExamplesPage,ColorsPage,CompositionPage,DesignPage,IconographyPage,SpacingPage,TypographyPage,ChipsDesignPage,ChipsDevelopPage,ChipsExamplesPage,ColorPickerPage,DatePickerDesignPage,DatePickerDevelopPage,DatePickerExamplesPage,DateTimePickerDesignPage,DateTimePickerDevelopPage,DateTimePickerExamplesPage,EditorPage,FormControlsPage,FormGroupsPage,FormPage,MultiPickerPage,PickerPage,RadioButtonsPage,SelectPage,TilesPage,TimePickerDesignPage,TimePickerDevelopPage,TimePickerExamplesPage,ValuePage,HomePage,CardDescriptionPage,CardDesignPage,CardDevelopPage,CardExamplesPage,ExpansionPage,HeaderPage,LayoutsPage,ListPage,SidenavPage,StepperPage,TabsDesignPage,TabsDevelopPage,TabsExamplesPage,PatternsNativeFormsPage,PatternsTestPage,PatternsPage,TemplatesPage,February2022Page,FieldInteractionsPage,PipesPage,SecurityPage
+  AceEditorPage,AgendaDesignPage,AgendaDevelopPage,AgendaExamplesPage,AsideDesignPage,AsideDevelopPage,AsideExamplesPage,AutocompleteDesignPage,AutocompleteDevelopPage,AutocompleteExamplesPage,AvatarDesignPage,AvatarDevelopPage,AvatarExamplesPage,BreadcrumbDesignPage,BreadcrumbDevelopPage,BreadcrumbExamplesPage,ButtonDesignPage,ButtonDevelopPage,ButtonExamplesPage,CalendarDesignPage,CalendarDevelopPage,CalendarExamplesPage,ComponentsPage,DataTablePage,DropdownDesignPage,DropdownDevelopPage,DropdownExamplesPage,FieldDesignPage,FieldDevelopPage,FieldExamplesPage,FieldInteractionsPage,IconDesignPage,IconDevelopPage,IconExamplesPage,LoadingDesignPage,LoadingDevelopPage,LoadingExamplesPage,MenuDesignPage,MenuDevelopPage,MenuExamplesPage,ModalDesignPage,ModalDevelopPage,ModalExamplesPage,NonIdealStateDesignPage,NonIdealStateDevelopPage,NonIdealStateExamplesPage,PipesPage,PopoverDesignPage,PopoverDevelopPage,PopoverExamplesPage,ProgressDesignPage,ProgressDevelopPage,ProgressExamplesPage,ProgressUsagePage,QueryBuilderPage,QuickNotePage,SearchPage,SecurityPage,SlidesPage,SwitchPage,TabbedGroupPickerPage,TablePage,TipWellDesignPage,TipWellDevelopPage,TipWellExamplesPage,ToasterDesignPage,ToasterDevelopPage,ToasterExamplesPage,ToolbarDesignPage,ToolbarDevelopPage,ToolbarExamplesPage,TooltipDesignPage,TooltipDevelopPage,TooltipExamplesPage,ColorsPage,CompositionPage,DesignPage,IconographyPage,SpacingPage,TypographyPage,ChipsDesignPage,ChipsDevelopPage,ChipsExamplesPage,ColorPickerPage,DatePickerDesignPage,DatePickerDevelopPage,DatePickerExamplesPage,DateTimePickerDesignPage,DateTimePickerDevelopPage,DateTimePickerExamplesPage,EditorPage,FormControlsPage,FormGroupsPage,FormPage,MultiPickerPage,PickerPage,RadioButtonsPage,SelectPage,TilesPage,TimePickerDesignPage,TimePickerDevelopPage,TimePickerExamplesPage,ValuePage,HomePage,CardDescriptionPage,CardDesignPage,CardDevelopPage,CardExamplesPage,ExpansionPage,HeaderPage,LayoutsPage,ListPage,SidenavPage,StepperPage,TabsDesignPage,TabsDevelopPage,TabsExamplesPage,PatternsNativeFormsPage,PatternsTestPage,PatternsPage,TemplatesPage,February2022Page,May2022Page
 ];
 
 @NgModule({
