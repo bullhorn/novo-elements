@@ -3,7 +3,6 @@ section: Components
 page: Autocomplete
 title: Design
 order: 2
-tag: new
 ---
 
  ## Usage
