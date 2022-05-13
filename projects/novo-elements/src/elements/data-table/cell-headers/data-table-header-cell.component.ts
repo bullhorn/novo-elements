@@ -15,7 +15,7 @@ import {
   TemplateRef,
   ViewChild,
 } from '@angular/core';
-import { Key } from 'projects/novo-elements/src/utils';
+import { Key } from '../../../utils';
 import { fromEvent, Subscription } from 'rxjs';
 import { NovoLabelService } from '../../../services/novo-label-service';
 import { Helpers } from '../../../utils/Helpers';
