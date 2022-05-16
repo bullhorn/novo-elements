@@ -16,6 +16,7 @@ export class ExpressionBuilderComponent implements OnInit {
   @Input() config: any;
   @Input() controlName: string;
   @Input() orEnabled = false;
+  @Input() addCriteriaLabel = 'Add Criteria';
 
   constructor(private controlContainer: ControlContainer, private formBuilder: FormBuilder) {}
 
