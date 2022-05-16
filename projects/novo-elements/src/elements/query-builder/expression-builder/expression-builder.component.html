@@ -33,18 +33,16 @@
                 <novo-picker-filter-field-def name="SELECT"></novo-picker-filter-field-def>
                 <ng-content></ng-content>
               </novo-filter-builder>
-              <button *ngIf="isLastOr" theme="secondary" size="sm" class="and-or-filter-button"
+              <button *ngIf="isLastOr && orEnabled" theme="secondary" size="sm" class="and-or-filter-button"
                 (click)="addOrGroup(andIndex)">Or</button>
               <novo-button theme="icon" icon="delete-o" (click)="removeOrGroup(andIndex, orIndex)"></novo-button>
             </novo-flex>
-
           </ng-container>
         </novo-stack>
       </ng-container>
     </ng-container>
   </novo-stack>
-  <button class="and-or-filter-button" theme="secondary" size="sm" (click)="addAndGroup()"
-    [disabled]="!canAddGroup()">Add Criteria</button>
+  <button class="and-or-filter-button" theme="secondary" size="sm" (click)="addAndGroup()">Add Criteria</button>
 </form>
 <!-- 
   {

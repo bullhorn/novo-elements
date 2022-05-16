@@ -15,11 +15,13 @@ export class ExpressionBuilderComponent implements OnInit {
   public parentForm: AbstractControl;
   @Input() config: any;
   @Input() controlName: string;
+  @Input() orEnabled = false;
 
   constructor(private controlContainer: ControlContainer, private formBuilder: FormBuilder) {}
 
   ngOnInit() {
     this.parentForm = this.controlContainer.control;
+    setTimeout(() => this.addAndGroup());
   }
 
   handleAddOrFilter(evt: any) {
