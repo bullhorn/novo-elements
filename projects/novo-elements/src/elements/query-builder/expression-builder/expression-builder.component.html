@@ -35,7 +35,7 @@
               </novo-filter-builder>
               <button *ngIf="isLastOr && orEnabled" theme="secondary" size="sm" class="and-or-filter-button"
                 (click)="addOrGroup(andIndex)">Or</button>
-              <novo-button theme="icon" icon="delete-o" (click)="removeOrGroup(andIndex, orIndex)"></novo-button>
+              <novo-button theme="icon" icon="delete-o" color="negative" (click)="removeOrGroup(andIndex, orIndex)"></novo-button>
             </novo-flex>
           </ng-container>
         </novo-stack>
