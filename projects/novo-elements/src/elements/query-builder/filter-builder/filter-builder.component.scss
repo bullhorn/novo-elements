@@ -12,7 +12,14 @@
         min-width: 10rem !important;
       }
     }
-  }  
+  }
+  .condition-value {
+    &::ng-deep {
+      .novo-input-element {
+        padding: 0.2rem !important;
+      }
+    }
+  }
   
   .and-or-filter-button {
     box-sizing: border-box;
