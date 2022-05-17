@@ -49,7 +49,7 @@
   overflow: auto;
   box-shadow: $shadow-1;
   height: 219px; // match picker max-height
-  width: 32rem;
+  width: auto;
   .filter-search-results {
     border-left: 1px solid $color-light;
     height: 100%;

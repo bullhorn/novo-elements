@@ -9,11 +9,11 @@
         overlayHeight="auto"
         [style.minWidth.px]="160">
         <div class="field-select-picker">
-          <novo-nav theme="white" direction="vertical">
+<!--           <novo-nav theme="white" direction="vertical">
             <novo-tab *ngFor="let entity of config?.fields" (activeChange)="changeFieldOptions(entity)">
               {{ entity.label }}
             </novo-tab>
-          </novo-nav>
+          </novo-nav> -->
           <div class="filter-search-results">
             <novo-search alwaysOpen="true" [formControl]="searchTerm"></novo-search>
             <ng-container *ngIf="results$ | async as results; else loading">
