@@ -1,4 +1,6 @@
-<novo-accordion>
+<novo-accordion
+  [displayMode]="isFlat ? 'flat' : 'default'"
+  [multi]="isMulti">
   <novo-expansion-panel>
     <novo-expansion-panel-header>
       This is the expansion 1 title
@@ -13,3 +15,10 @@
     <p>This the expansion 2 content</p>
   </novo-expansion-panel>
 </novo-accordion>
+<div>
+  <br/>
+  <span>Flat Expansion</span>
+  <novo-switch theme="grapefruit" [(ngModel)]="isFlat"></novo-switch>
+  <span>Multiple Expansion</span>
+  <novo-switch theme="grapefruit" [(ngModel)]="isMulti"></novo-switch>
+</div>
