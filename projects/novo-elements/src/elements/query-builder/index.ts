@@ -1,5 +1,6 @@
 export * from './expression-builder/expression-builder.component';
 export * from './filter-builder/base-filter-field.definition';
+export * from './filter-builder/default-condition-defs/boolean-filter-field.definition';
 export * from './filter-builder/default-condition-defs/date-filter-field.definition';
 export * from './filter-builder/default-condition-defs/id-filter-field.definition';
 export * from './filter-builder/default-condition-defs/number-filter-field.definition';

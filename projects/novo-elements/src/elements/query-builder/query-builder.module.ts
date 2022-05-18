@@ -25,6 +25,7 @@ import {
   NovoFilterFieldOperatorsDef,
   NovoFilterFieldTypeDef,
 } from './filter-builder/base-filter-field.definition';
+import { NovoDefaultBooleanFilterFieldDef } from './filter-builder/default-condition-defs/boolean-filter-field.definition';
 import { NovoDefaultDateFilterFieldDef } from './filter-builder/default-condition-defs/date-filter-field.definition';
 import { NovoDefaultIdFilterFieldDef } from './filter-builder/default-condition-defs/id-filter-field.definition';
 import { NovoDefaultNumberFilterFieldDef } from './filter-builder/default-condition-defs/number-filter-field.definition';
@@ -63,6 +64,7 @@ import { QueryBuilderComponent } from './query-builder.component';
     FilterBuilderComponent,
     QueryFilterInputOutlet,
     QueryFilterOperatorOutlet,
+    NovoDefaultBooleanFilterFieldDef,
     NovoDefaultDateFilterFieldDef,
     NovoFilterFieldOperatorsDef,
     NovoFilterFieldInputDef,
@@ -77,6 +79,7 @@ import { QueryBuilderComponent } from './query-builder.component';
     ExpressionBuilderComponent,
     QueryBuilderComponent,
     FilterBuilderComponent,
+    NovoDefaultBooleanFilterFieldDef,
     NovoDefaultDateFilterFieldDef,
     NovoFilterFieldOperatorsDef,
     NovoFilterFieldInputDef,

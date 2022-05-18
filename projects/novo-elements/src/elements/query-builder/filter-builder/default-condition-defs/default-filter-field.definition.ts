@@ -37,6 +37,7 @@ export class DefaultFilterFieldDef implements OnDestroy, OnInit {
     this._syncFieldDefName();
     this._syncFieldDefOperatorValue();
     // Need to add self to FilterBuilder because "ContentChildren won't find it"
+    console.log('adding field def', this.fieldDef)
     this._fb.addFieldDef(this.fieldDef);
   }
 

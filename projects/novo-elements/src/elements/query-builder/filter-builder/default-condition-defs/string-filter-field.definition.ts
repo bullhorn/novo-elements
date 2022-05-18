@@ -59,6 +59,7 @@ export class NovoDefaultStringFilterFieldDef extends DefaultFilterFieldDef {
   }
 
   getValue(formGroup: AbstractControl): any[] {
+    console.log('fg values', formGroup.value?.value || [])
     return formGroup.value?.value || [];
   }
 
