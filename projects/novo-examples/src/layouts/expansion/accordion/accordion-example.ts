@@ -8,4 +8,7 @@ import { Component } from '@angular/core';
   templateUrl: 'accordion-example.html',
   styleUrls: ['accordion-example.css'],
 })
-export class AccordionExample {}
+export class AccordionExample {
+  isFlat = false;
+  isMulti = false;
+}
