@@ -222,7 +222,7 @@ export class FilterBuilderComponent<T extends BaseFieldDef> implements OnInit, A
     const { name, inputType, dataType, type } = field;
     // Check Fields by priority for match Field Definition
     const key = [name, editType, inputType, dataType, type, 'default'].find((it) => this._fieldDefsByName.has(it));
-    console.log('looking for input', name, inputType, editType, dataType, type, key, this._fieldDefsByName);
+    console.log('field', name, editType, inputType, dataType, type, key, this._fieldDefsByName);
     return this._fieldDefsByName.get(key);
   }
 

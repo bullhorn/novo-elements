@@ -24,14 +24,16 @@
                 <novo-text class="or-connector-text" color="ocean" weight="bold" padding="sm" mx="lg">OR</novo-text>
               </div>
               <novo-filter-builder [formGroupName]="orIndex" [config]="config">
+                <novo-id-filter-field-def name="ID"></novo-id-filter-field-def>
                 <novo-date-filter-field-def name="Timestamp"></novo-date-filter-field-def>
                 <novo-string-filter-field-def name="String"></novo-string-filter-field-def>
                 <novo-boolean-filter-field-def name="Boolean"></novo-boolean-filter-field-def>
-                <novo-id-filter-field-def name="ID"></novo-id-filter-field-def>
                 <novo-number-filter-field-def name="Float"></novo-number-filter-field-def>
                 <novo-number-filter-field-def name="Integer"></novo-number-filter-field-def>
                 <novo-number-filter-field-def name="BigDecimal"></novo-number-filter-field-def>
                 <novo-picker-filter-field-def name="SELECT"></novo-picker-filter-field-def>
+                <novo-picker-filter-field-def name="TO_ONE"></novo-picker-filter-field-def>
+                <novo-address-filter-field-def name="Address"></novo-address-filter-field-def>
                 <ng-content></ng-content>
               </novo-filter-builder>
               <button *ngIf="isLastOr && orEnabled" theme="secondary" size="sm" class="and-or-filter-button"

@@ -10,14 +10,14 @@ import { DefaultFilterFieldDef } from './default-filter-field.definition';
     <ng-container novoFilterFieldTypeDef>
       <novo-field *novoFilterFieldOperatorsDef="let formGroup" [formGroup]="formGroup">
         <novo-select placeholder="Operator..." formControlName="operator">
-          <novo-option value="includes">Equals</novo-option>
-          <novo-option value="excludes">Does Not Equal</novo-option>
+          <novo-option value="include">Equals</novo-option>
+          <novo-option value="exclude">Does Not Equal</novo-option>
         </novo-select>
       </novo-field>
       <novo-field *novoFilterFieldInputDef="let formGroup" [style.width.px]="100" [formGroup]="formGroup">
         <novo-select placeholder="Value..." formControlName="value">
-          <novo-option value="true">True</novo-option>
-          <novo-option value="false">False</novo-option>
+          <novo-option [value]="true">True</novo-option>
+          <novo-option [value]="false">False</novo-option>
         </novo-select>
       </novo-field>
     </ng-container>
@@ -26,5 +26,5 @@ import { DefaultFilterFieldDef } from './default-filter-field.definition';
   changeDetection: ChangeDetectionStrategy.Default,
 })
 export class NovoDefaultBooleanFilterFieldDef extends DefaultFilterFieldDef {
-  defaultOperator = 'includes';
+  defaultOperator = 'include';
 }
