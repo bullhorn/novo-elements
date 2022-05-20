@@ -1,5 +1,5 @@
 import { ContentChild, Directive, Inject, Input, Optional, TemplateRef } from '@angular/core';
-import { NOVO_FILTER_BUILDER } from '../query-builder.tokens';
+import { NOVO_EXPRESSION_BUILDER } from '../query-builder.tokens';
 
 /** Base interface for a cell definition. Captures a column's cell template definition. */
 export interface FilterFieldDef {
@@ -87,7 +87,7 @@ export class BaseFilterFieldDef {
   selector: '[novoFilterFieldDef]',
 })
 export class NovoFilterFieldDef extends BaseFilterFieldDef {
-  constructor(@Inject(NOVO_FILTER_BUILDER) @Optional() public _filterBuilder?: any) {
+  constructor(@Inject(NOVO_EXPRESSION_BUILDER) @Optional() public _expressionBuilder?: any) {
     super();
   }
 }
@@ -96,7 +96,7 @@ export class NovoFilterFieldDef extends BaseFilterFieldDef {
   selector: '[novoFilterFieldTypeDef]',
 })
 export class NovoFilterFieldTypeDef extends BaseFilterFieldDef {
-  constructor(@Inject(NOVO_FILTER_BUILDER) @Optional() public _filterBuilder?: any) {
+  constructor(@Inject(NOVO_EXPRESSION_BUILDER) @Optional() public _expressionBuilder?: any) {
     super();
   }
 }

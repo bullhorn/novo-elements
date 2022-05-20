@@ -1,57 +1,25 @@
 import {
-  AfterContentChecked,
   AfterContentInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  ContentChildren,
   Directive,
   ElementRef,
+  Inject,
   Input,
   OnDestroy,
   OnInit,
-  QueryList,
+  Optional,
   ViewChild,
   ViewContainerRef,
 } from '@angular/core';
 import { AbstractControl, ControlContainer, FormControl } from '@angular/forms';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
-import { NOVO_FILTER_BUILDER } from '../query-builder.tokens';
-import { BaseFilterFieldDef, NovoFilterFieldDef, NovoFilterFieldTypeDef } from './base-filter-field.definition';
-
-export interface Condition {
-  field: string;
-  operator: string;
-  value: any;
-}
-
-export interface BaseFieldDef {
-  name: string;
-  label?: string;
-  type: string;
-  dataSpecialization?: string;
-  optional?: boolean;
-  multiValue?: boolean;
-  inputType?: string;
-  options?: { value: string | number; label: string; readOnly?: boolean }[];
-  optionsUrl?: string;
-  optionsType?: string;
-  dataType?: string;
-}
-
-export interface FieldConfig<T extends BaseFieldDef> {
-  value: string;
-  label: string;
-  options: T[];
-  search: (term: string) => T[];
-  find: (name: string) => T;
-}
-
-/** Interface used to provide an outlet for rows to be inserted into. */
-export interface QueryFilterOutlet {
-  viewContainer: ViewContainerRef;
-}
+import type { ExpressionBuilderComponent } from '../expression-builder/expression-builder.component';
+import { NOVO_EXPRESSION_BUILDER, NOVO_FILTER_BUILDER } from '../query-builder.tokens';
+import { BaseFieldDef, FieldConfig, QueryFilterOutlet } from '../query-builder.types';
+import { BaseFilterFieldDef } from './base-filter-field.definition';
 
 /**
  * Provides a handle for the table to grab the view container's ng-container to insert data rows.
@@ -82,15 +50,13 @@ export const defaultEditTypeFn = (field: BaseFieldDef) => {
   providers: [{ provide: NOVO_FILTER_BUILDER, useExisting: FilterBuilderComponent }],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FilterBuilderComponent<T extends BaseFieldDef> implements OnInit, AfterContentInit, AfterContentChecked, OnDestroy {
+export class FilterBuilderComponent<T extends BaseFieldDef> implements OnInit, AfterContentInit, OnDestroy {
   @ViewChild(QueryFilterOperatorOutlet, { static: true }) _operatorOutlet: QueryFilterOperatorOutlet;
   @ViewChild(QueryFilterInputOutlet, { static: true }) _inputOutlet: QueryFilterInputOutlet;
-  @ContentChildren(NovoFilterFieldTypeDef, { descendants: true }) _contentFieldTypeDefs: QueryList<NovoFilterFieldTypeDef>;
-  @ContentChildren(NovoFilterFieldDef, { descendants: true }) _contentFieldDefs: QueryList<NovoFilterFieldDef>;
 
   @Input() label: any;
   @Input() config: { fields: FieldConfig<T>[] } = { fields: [] };
-  @Input() editTypeFn: (field: BaseFieldDef) => string = defaultEditTypeFn;
+  @Input() editTypeFn: (field: BaseFieldDef) => string;
 
   public parentForm: AbstractControl;
   public fieldConfig: FieldConfig<T>;
@@ -99,15 +65,18 @@ export class FilterBuilderComponent<T extends BaseFieldDef> implements OnInit, A
   public searchTerm: FormControl = new FormControl();
 
   private _lastContext: any = {};
-  private _customFieldDefs = new Set<BaseFilterFieldDef>();
-  private _fieldDefsByName = new Map<string, BaseFilterFieldDef>();
 
   /** Subject that emits when the component has been destroyed. */
   private readonly _onDestroy = new Subject<void>();
 
-  constructor(private controlContainer: ControlContainer, private cdr: ChangeDetectorRef) {}
+  constructor(
+    private controlContainer: ControlContainer,
+    private cdr: ChangeDetectorRef,
+    @Optional() @Inject(NOVO_EXPRESSION_BUILDER) @Optional() public _expressionBuilder?: ExpressionBuilderComponent,
+  ) {}
 
   ngOnInit() {
+    this.editTypeFn = this.editTypeFn ?? defaultEditTypeFn;
     this.parentForm = this.controlContainer.control;
   }
 
@@ -124,14 +93,10 @@ export class FilterBuilderComponent<T extends BaseFieldDef> implements OnInit, A
     });
   }
 
-  ngAfterContentChecked() {
-    this._cacheFieldDefs();
-  }
-
   ngOnDestroy() {
     this.searches.unsubscribe();
     // Clear all outlets and Maps
-    [this._operatorOutlet.viewContainer, this._inputOutlet.viewContainer, this._customFieldDefs, this._fieldDefsByName].forEach((def) => {
+    [this._operatorOutlet.viewContainer, this._inputOutlet.viewContainer].forEach((def) => {
       def.clear();
     });
     // this._contentFieldTypeDefs = [];
@@ -186,44 +151,16 @@ export class FilterBuilderComponent<T extends BaseFieldDef> implements OnInit, A
     this.cdr.markForCheck();
   }
 
-  /** Adds a field definition that was not included as part of the content children. */
-  addFieldDef(fieldDef: BaseFilterFieldDef) {
-    this._customFieldDefs.add(fieldDef);
-  }
-
-  /** Removes a field definition that was not included as part of the content children. */
-  removeFieldDef(fieldDef: BaseFilterFieldDef) {
-    this._customFieldDefs.delete(fieldDef);
-  }
-
-  private _cacheFieldDefs() {
-    this._fieldDefsByName.clear();
-
-    const defs = [
-      // Dynamically Added Definitions
-      ...Array.from(this._customFieldDefs),
-      // Definitions added as Content
-      ...Array.from(this._contentFieldTypeDefs),
-      ...Array.from(this._contentFieldDefs),
-    ];
-    defs.forEach((fieldDef) => {
-      if (this._fieldDefsByName.has(fieldDef.name)) {
-        // throw new Error(`duplicate field name for ${fieldDef.name}`);
-        console.warn(`duplicate field name for ${fieldDef.name}`);
-      }
-      this._fieldDefsByName.set(fieldDef.name, fieldDef);
-    });
-  }
-
   private findDefinitionForField(field) {
     if (!field) return;
     const editType = this.editTypeFn(field);
     // Don't look at dataSpecialization it is no good, this misses currency, and percent
     const { name, inputType, dataType, type } = field;
+    const fieldDefsByName = this._expressionBuilder.getFieldDefsByName();
     // Check Fields by priority for match Field Definition
-    const key = [name, editType, inputType, dataType, type, 'default'].find((it) => this._fieldDefsByName.has(it));
-    console.log('looking for input', name, inputType, editType, dataType, type, key, this._fieldDefsByName);
-    return this._fieldDefsByName.get(key);
+    const key = [name, editType, inputType, dataType, type, 'default'].find((it) => fieldDefsByName.has(it));
+    console.log('looking for input', name, inputType, editType, dataType, type, key);
+    return fieldDefsByName.get(key);
   }
 
   private createFieldTemplates() {

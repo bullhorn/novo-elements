@@ -9,7 +9,7 @@
         overlayHeight="auto"
         [style.minWidth.px]="160">
         <div class="field-select-picker">
-<!--           <novo-nav theme="white" direction="vertical">
+          <!--           <novo-nav theme="white" direction="vertical">
             <novo-tab *ngFor="let entity of config?.fields" (activeChange)="changeFieldOptions(entity)">
               {{ entity.label }}
             </novo-tab>
@@ -48,4 +48,5 @@
       <ng-container queryFilterInputOutlet></ng-container>
     </div>
   </novo-grid>
+  <ng-content></ng-content>
 </form>

@@ -1,7 +1,6 @@
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { ChangeDetectionStrategy, Component, Optional, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { AbstractControl, FormControl } from '@angular/forms';
-import { FilterBuilderComponent } from '../filter-builder.component';
 import { DefaultFilterFieldDef } from './default-filter-field.definition';
 
 /**
@@ -54,12 +53,8 @@ export class NovoDefaultStringFilterFieldDef extends DefaultFilterFieldDef {
   separatorKeysCodes: number[] = [ENTER, COMMA];
   defaultOperator = 'includeAny';
 
-  constructor(@Optional() _fb: FilterBuilderComponent<any>) {
-    super(_fb);
-  }
-
   getValue(formGroup: AbstractControl): any[] {
-    console.log('fg values', formGroup.value?.value || [])
+    console.log('fg values', formGroup.value?.value || []);
     return formGroup.value?.value || [];
   }
 

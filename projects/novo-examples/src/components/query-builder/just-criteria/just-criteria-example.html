@@ -1,6 +1,6 @@
 <form [formGroup]="queryForm" (ngSubmit)="onSubmit()">
-  <novo-expression-builder controlName="criteria" [config]="config">
-
+  <novo-expression-builder controlName="criteria" [config]="config" [editTypeFn]="editTypeFn">
+    <custom-picker-filter-field-def name="custom"></custom-picker-filter-field-def>
   </novo-expression-builder>
 </form>
 

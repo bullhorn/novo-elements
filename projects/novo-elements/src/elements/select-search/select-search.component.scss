@@ -24,6 +24,7 @@ $novo-select-search-toggle-all-checkbox-x: 16px;
   font-size: inherit;
   box-shadow: none;
   border-radius: 0;
+  background-color: var(--background-main);
   /* Prevent iOS scroll issue */
   -webkit-transform: translate3d(0, 0, 0);
 
@@ -34,19 +35,10 @@ $novo-select-search-toggle-all-checkbox-x: 16px;
       align-items: center;
     }
   }
+}
 
-  .novo-input-element {
-    flex-basis: auto;
-    border: none;
-    &:focus {
-      outline: none;
-      border-radius: 0 !important;
-    }
-    &:-ms-input-placeholder {
-      // fix IE11 not able to focus programmatically with css style -ms-user-select: none
-      -ms-user-select: text;
-    }
-  }
+.novo-select-search-icon {
+  padding: var(--spacing-md);
 }
 
 ::ng-deep .novo-select-search-panel {
@@ -55,48 +47,8 @@ $novo-select-search-toggle-all-checkbox-x: 16px;
   overflow-x: hidden;
 }
 
-.novo-select-search-input {
-  padding: $spacing-md;
-  padding-left: $clear-button-width * 2;
-  padding-right: $clear-button-width + $novo-select-search-clear-x;
-  box-sizing: border-box;
-  width: 100%;
-
-  :host-context([dir="rtl"]) & {
-    padding-right: $novo-menu-side-padding;
-    padding-left: $clear-button-width + $novo-select-search-clear-x;
-  }
-}
 .novo-select-search-no-entries-found {
   padding: $novo-menu-side-padding;
-}
-
-.novo-select-search-icon-prefix {
-  position: absolute;
-  left: $clear-button-width - $novo-select-search-clear-x;
-  top: 7px;
-}
-
-.novo-select-search-clear {
-  position: absolute;
-  right: $novo-select-search-clear-x;
-  top: 5px;
-
-  :host-context([dir="rtl"]) & {
-    right: auto;
-    left: $novo-select-search-clear-x;
-  }
-}
-
-.novo-select-search-spinner {
-  position: absolute;
-  right: $novo-select-search-spinner-x;
-  top: calc(50% - 8px);
-
-  :host-context([dir="rtl"]) & {
-    right: auto;
-    left: $novo-select-search-spinner-x;
-  }
 }
 
 /** override styling when inside a novo-option */

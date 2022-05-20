@@ -16,8 +16,8 @@ import { DefaultFilterFieldDef } from './default-filter-field.definition';
       </novo-field>
       <novo-field *novoFilterFieldInputDef="let formGroup" [style.width.px]="100" [formGroup]="formGroup">
         <novo-select placeholder="Value..." formControlName="value">
-          <novo-option value="true">True</novo-option>
-          <novo-option value="false">False</novo-option>
+          <novo-option [value]="true">True</novo-option>
+          <novo-option [value]="false">False</novo-option>
         </novo-select>
       </novo-field>
     </ng-container>

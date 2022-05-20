@@ -1,5 +1,4 @@
-import { ChangeDetectionStrategy, Component, Optional, ViewEncapsulation } from '@angular/core';
-import { FilterBuilderComponent } from '../filter-builder.component';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { DefaultFilterFieldDef } from './default-filter-field.definition';
 
 /**
@@ -49,7 +48,4 @@ import { DefaultFilterFieldDef } from './default-filter-field.definition';
 })
 export class NovoDefaultDateFilterFieldDef extends DefaultFilterFieldDef {
   defaultOperator = 'within';
-  constructor(@Optional() _fb: FilterBuilderComponent<any>) {
-    super(_fb);
-  }
 }

@@ -1,6 +1,7 @@
-import { Directive, Input, OnDestroy, OnInit, Optional, ViewChild } from '@angular/core';
+import { Directive, Inject, Input, OnDestroy, OnInit, Optional, ViewChild } from '@angular/core';
+import { NovoLabelService } from '../../../../services';
+import { NOVO_EXPRESSION_BUILDER } from '../../query-builder.tokens';
 import { NovoFilterFieldInputDef, NovoFilterFieldOperatorsDef, NovoFilterFieldTypeDef } from '../base-filter-field.definition';
-import { FilterBuilderComponent } from '../filter-builder.component';
 
 @Directive()
 export class DefaultFilterFieldDef implements OnDestroy, OnInit {
@@ -31,20 +32,21 @@ export class DefaultFilterFieldDef implements OnDestroy, OnInit {
    */
   @ViewChild(NovoFilterFieldOperatorsDef, { static: true }) operatorDef: NovoFilterFieldOperatorsDef;
 
-  constructor(@Optional() private _fb: FilterBuilderComponent<any>) {}
+  constructor(public labels: NovoLabelService, @Inject(NOVO_EXPRESSION_BUILDER) @Optional() public _expressionBuilder?: any) {}
 
   ngOnInit() {
     this._syncFieldDefName();
     this._syncFieldDefOperatorValue();
     // Need to add self to FilterBuilder because "ContentChildren won't find it"
-    console.log('adding field def', this.fieldDef)
-    this._fb.addFieldDef(this.fieldDef);
+    if (this._expressionBuilder) {
+      this._expressionBuilder.addFieldDef(this.fieldDef);
+    }
   }
 
   ngOnDestroy() {
-    if (this._fb) {
+    if (this._expressionBuilder) {
       // Need to remove self to FilterBuilder
-      this._fb.removeFieldDef(this.fieldDef);
+      this._expressionBuilder.removeFieldDef(this.fieldDef);
     }
   }
 

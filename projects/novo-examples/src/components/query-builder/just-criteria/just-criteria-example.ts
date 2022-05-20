@@ -1,6 +1,68 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
+import { AbstractControl, FormBuilder, FormControl } from '@angular/forms';
+import { DefaultFilterFieldDef, NovoLabelService } from 'novo-elements';
+import { NOVO_EXPRESSION_BUILDER } from 'projects/novo-elements/src';
+import { ReplaySubject, Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
 import { MockMeta } from './MockMeta';
+
+@Component({
+  selector: 'custom-picker-filter-field-def',
+  template: `
+    <ng-container novoFilterFieldTypeDef>
+      <novo-field *novoFilterFieldOperatorsDef="let formGroup" [formGroup]="formGroup">
+        <novo-select placeholder="Operator..." formControlName="operator">
+          <novo-option value="includeAny">Include Any</novo-option>
+          <novo-option value="includeAll">Include All</novo-option>
+          <novo-option value="excludeAny">Exclude</novo-option>
+        </novo-select>
+      </novo-field>
+      <novo-field *novoFilterFieldInputDef="let formGroup; fieldMeta as meta" [formGroup]="formGroup">
+        <novo-select formControlName="value" placeholder="Select..." [multiple]="true">
+          <novo-select-search [formControl]="searchCtrl"></novo-select-search>
+          <novo-option *ngFor="let option of remoteResults | async" [value]="option.id">
+            {{ option.name }}
+          </novo-option>
+        </novo-select>
+      </novo-field>
+    </ng-container>
+  `,
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.Default,
+})
+export class CustomDefaultPickerFilterFieldDef extends DefaultFilterFieldDef implements OnInit {
+  defaultOperator = 'includeAny';
+  searchCtrl: FormControl = new FormControl();
+  /** list of results filtered by search keyword */
+  remoteResults: ReplaySubject<any[]> = new ReplaySubject<any[]>(1);
+  /** Subject that emits when the component has been destroyed. */
+  protected _onDestroy = new Subject<void>();
+
+  constructor(public http: HttpClient, labels: NovoLabelService, @Inject(NOVO_EXPRESSION_BUILDER) _expressionBuilder?: any) {
+    super(labels, _expressionBuilder);
+  }
+
+  ngOnInit() {
+    super.ngOnInit();
+    this.searchCtrl.valueChanges
+      .pipe(
+        // filter((res) => res.length > 2),
+        // Time in milliseconds between key events
+        debounceTime(500),
+        // If previous query is diffent from current
+        distinctUntilChanged(),
+        takeUntil(this._onDestroy),
+      )
+      .subscribe((term) => {
+        const extra = term.length ? `/autocomplete?query=${term}` : '';
+        this.http.get(`https://api.openbrewerydb.org/breweries${extra}`).subscribe((response: any) => {
+          this.remoteResults.next(response);
+        });
+      });
+    this.searchCtrl.setValue('', { emitEvent: true });
+  }
+}
 
 /**
  * @title Just Criteria Example
@@ -14,12 +76,12 @@ export class JustCriteriaExample implements OnInit {
   queryForm: AbstractControl;
   config: any = null;
 
-  constructor(private formBuilder: FormBuilder, private cdr: ChangeDetectorRef) {
-    // this.service.getFieldsForSegment().then((fields) => {
-    //   this.config = { fields };
-    //   this.cdr.detectChanges();
-    // });
-  }
+  editTypeFn = (field: any) => {
+    if (field.optionsType === 'Brewery') return 'custom';
+    return (field.inputType || field.dataType || field.type).toLowerCase();
+  };
+
+  constructor(private formBuilder: FormBuilder, private cdr: ChangeDetectorRef) {}
 
   ngOnInit() {
     this.getFieldConfig().then((fields) => {
