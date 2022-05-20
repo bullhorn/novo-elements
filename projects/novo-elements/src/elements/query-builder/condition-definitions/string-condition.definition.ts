@@ -23,7 +23,7 @@ import { AbstractConditionFieldDef } from './abstract-condition.definition';
       </novo-field>
       <novo-field *novoConditionInputDef="let formGroup">
         <novo-chip-list #chipList aria-label="filter value">
-          <novo-chip *ngFor="let chip of getValue(formGroup)" [value]="chip" (removed)="remove(chip, formGroup)">
+          <novo-chip *ngFor="let chip of formGroup.value?.value || []" [value]="chip" (removed)="remove(chip, formGroup)">
             {{ chip }}
             <novo-icon novoChipRemove>close</novo-icon>
           </novo-chip>
@@ -62,11 +62,13 @@ export class NovoDefaultStringConditionDef extends AbstractConditionFieldDef {
     const input = event.input;
     input.value = '';
     const valueToAdd = event.value;
-    const current = this.getValue(formGroup);
-    if (!Array.isArray(current)) {
-      formGroup.get('value').setValue([valueToAdd]);
-    } else {
-      formGroup.get('value').setValue([...current, valueToAdd]);
+    if (valueToAdd !== '') {
+      const current = this.getValue(formGroup);
+      if (!Array.isArray(current)) {
+        formGroup.get('value').setValue([valueToAdd]);
+      } else {
+        formGroup.get('value').setValue([...current, valueToAdd]);
+      }
     }
   }
 
