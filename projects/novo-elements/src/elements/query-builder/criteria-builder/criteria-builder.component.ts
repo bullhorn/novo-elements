@@ -1,20 +1,23 @@
 import { AfterContentChecked, Component, ContentChildren, forwardRef, Input, OnDestroy, OnInit, QueryList } from '@angular/core';
 import { AbstractControl, ControlContainer, FormArray, FormBuilder, FormGroup, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
-import { BaseFilterFieldDef, NovoFilterFieldDef, NovoFilterFieldTypeDef } from '../filter-builder/base-filter-field.definition';
-import { NOVO_EXPRESSION_BUILDER } from '../query-builder.tokens';
+import { BaseConditionFieldDef, NovoConditionFieldDef } from '../query-builder.directives';
+import { NOVO_CRITERIA_BUILDER } from '../query-builder.tokens';
 import { BaseFieldDef } from '../query-builder.types';
 
 @Component({
-  selector: 'novo-expression-builder',
-  templateUrl: './expression-builder.component.html',
-  styleUrls: ['./expression-builder.component.scss'],
+  selector: 'novo-criteria-builder',
+  templateUrl: './criteria-builder.component.html',
+  styleUrls: ['./criteria-builder.component.scss'],
   providers: [
-    { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => ExpressionBuilderComponent), multi: true },
-    { provide: NOVO_EXPRESSION_BUILDER, useExisting: ExpressionBuilderComponent },
+    { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => CriteriaBuilderComponent), multi: true },
+    { provide: NOVO_CRITERIA_BUILDER, useExisting: CriteriaBuilderComponent },
   ],
+  host: {
+    class: 'novo-criteria-builder',
+  },
 })
-export class ExpressionBuilderComponent implements OnInit, OnDestroy, AfterContentChecked {
+export class CriteriaBuilderComponent implements OnInit, OnDestroy, AfterContentChecked {
   public parentForm: AbstractControl;
   @Input() config: any;
   @Input() controlName: string;
@@ -22,11 +25,10 @@ export class ExpressionBuilderComponent implements OnInit, OnDestroy, AfterConte
   @Input() addCriteriaLabel = 'Add Criteria';
   @Input() editTypeFn: (field: BaseFieldDef) => string;
 
-  @ContentChildren(NovoFilterFieldTypeDef, { descendants: true }) _contentFieldTypeDefs: QueryList<NovoFilterFieldTypeDef>;
-  @ContentChildren(NovoFilterFieldDef, { descendants: true }) _contentFieldDefs: QueryList<NovoFilterFieldDef>;
+  @ContentChildren(NovoConditionFieldDef, { descendants: true }) _contentFieldDefs: QueryList<NovoConditionFieldDef>;
 
-  private _customFieldDefs = new Set<BaseFilterFieldDef>();
-  private _fieldDefsByName = new Map<string, BaseFilterFieldDef>();
+  private _customFieldDefs = new Set<BaseConditionFieldDef>();
+  private _fieldDefsByName = new Map<string, BaseConditionFieldDef>();
   /** Subject that emits when the component has been destroyed. */
   private readonly _onDestroy = new Subject<void>();
 
@@ -111,12 +113,12 @@ export class ExpressionBuilderComponent implements OnInit, OnDestroy, AfterConte
   }
 
   /** Adds a field definition that was not included as part of the content children. */
-  addFieldDef(fieldDef: BaseFilterFieldDef) {
+  addFieldDef(fieldDef: BaseConditionFieldDef) {
     this._customFieldDefs.add(fieldDef);
   }
 
   /** Removes a field definition that was not included as part of the content children. */
-  removeFieldDef(fieldDef: BaseFilterFieldDef) {
+  removeFieldDef(fieldDef: BaseConditionFieldDef) {
     this._customFieldDefs.delete(fieldDef);
   }
 
@@ -130,8 +132,6 @@ export class ExpressionBuilderComponent implements OnInit, OnDestroy, AfterConte
     const defs = [
       // Dynamically Added Definitions
       ...Array.from(this._customFieldDefs),
-      // Definitions added as Content
-      ...Array.from(this._contentFieldTypeDefs),
       ...Array.from(this._contentFieldDefs),
     ];
 

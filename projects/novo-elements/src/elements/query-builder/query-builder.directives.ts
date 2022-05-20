@@ -1,26 +1,25 @@
 import { ContentChild, Directive, Inject, Input, Optional, TemplateRef } from '@angular/core';
-import { NOVO_EXPRESSION_BUILDER } from '../query-builder.tokens';
+import { NOVO_CRITERIA_BUILDER } from './query-builder.tokens';
 
-/** Base interface for a cell definition. Captures a column's cell template definition. */
-export interface FilterFieldDef {
+/** Base interface for a condidation template directives. */
+export interface ConditionDef {
   template: TemplateRef<any>;
 }
 
 /**
- * Cell definition for a CDK table.
- * Captures the template of a column's data row cell as well as cell-specific properties.
+ * Contained within a novoConditionField definition describing what input should be
+ * used to capture the compare value of the Condtion
  */
-@Directive({ selector: '[novoFilterFieldInputDef]' })
-export class NovoFilterFieldInputDef implements FilterFieldDef {
+@Directive({ selector: '[novoConditionInputDef]' })
+export class NovoConditionInputDef implements ConditionDef {
   constructor(/** @docs-private */ public template: TemplateRef<any>) {}
 }
 
 /**
- * Cell definition for a CDK table.
- * Captures the template of a column's data row cell as well as cell-specific properties.
+ * Contained within a novoConditionField definition describing what operators should be available.
  */
-@Directive({ selector: '[novoFilterFieldOperatorsDef]' })
-export class NovoFilterFieldOperatorsDef implements FilterFieldDef {
+@Directive({ selector: '[novoConditionOperatorsDef]' })
+export class NovoConditionOperatorsDef implements ConditionDef {
   constructor(/** @docs-private */ public template: TemplateRef<any>) {}
 }
 
@@ -29,7 +28,7 @@ export class NovoFilterFieldOperatorsDef implements FilterFieldDef {
  * Defines the inputType and operators to use for the query builder.
  */
 @Directive()
-export class BaseFilterFieldDef {
+export class BaseConditionFieldDef {
   /** Unique name for this field. */
   @Input('novoFilterFieldDef')
   get name(): string {
@@ -40,8 +39,8 @@ export class BaseFilterFieldDef {
   }
   protected _name: string;
 
-  @ContentChild(NovoFilterFieldInputDef) fieldInput: NovoFilterFieldInputDef;
-  @ContentChild(NovoFilterFieldOperatorsDef) fieldOperators: NovoFilterFieldOperatorsDef;
+  @ContentChild(NovoConditionInputDef) fieldInput: NovoConditionInputDef;
+  @ContentChild(NovoConditionOperatorsDef) fieldOperators: NovoConditionOperatorsDef;
 
   /**
    * Transformed version of the column name that can be used as part of a CSS classname. Excludes
@@ -84,19 +83,16 @@ export class BaseFilterFieldDef {
 }
 
 @Directive({
-  selector: '[novoFilterFieldDef]',
+  selector: '[novoConditionFieldDef]',
 })
-export class NovoFilterFieldDef extends BaseFilterFieldDef {
-  constructor(@Inject(NOVO_EXPRESSION_BUILDER) @Optional() public _expressionBuilder?: any) {
+export class NovoConditionFieldDef extends BaseConditionFieldDef {
+  constructor(@Inject(NOVO_CRITERIA_BUILDER) @Optional() public criteriaBuilder?: any) {
     super();
   }
-}
-
-@Directive({
-  selector: '[novoFilterFieldTypeDef]',
-})
-export class NovoFilterFieldTypeDef extends BaseFilterFieldDef {
-  constructor(@Inject(NOVO_EXPRESSION_BUILDER) @Optional() public _expressionBuilder?: any) {
-    super();
+  register() {
+    this.criteriaBuilder.addFieldDef(this);
+  }
+  unregister() {
+    this.criteriaBuilder.removeFieldDef(this);
   }
 }

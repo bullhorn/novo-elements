@@ -1,7 +1,7 @@
 <form [formGroup]="queryForm" (ngSubmit)="onSubmit()">
-  <novo-expression-builder controlName="criteria" [config]="config" [editTypeFn]="editTypeFn">
-    <custom-picker-filter-field-def name="custom"></custom-picker-filter-field-def>
-  </novo-expression-builder>
+  <novo-criteria-builder controlName="criteria" [config]="config" [editTypeFn]="editTypeFn">
+    <custom-picker-condition-def name="custom"></custom-picker-condition-def>
+  </novo-criteria-builder>
 </form>
 
 <pre><code>{{queryForm.value | json}}</code></pre>

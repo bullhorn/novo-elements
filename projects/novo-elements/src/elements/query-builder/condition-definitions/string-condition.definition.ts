@@ -1,7 +1,7 @@
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { AbstractControl, FormControl } from '@angular/forms';
-import { DefaultFilterFieldDef } from './default-filter-field.definition';
+import { AbstractConditionFieldDef } from './abstract-condition.definition';
 
 /**
  * Contruction filters against String fields can be complex. Each "chip" added to the
@@ -10,18 +10,18 @@ import { DefaultFilterFieldDef } from './default-filter-field.definition';
  * performance penalty.
  */
 @Component({
-  selector: 'novo-string-filter-field-def',
+  selector: 'novo-string-condition-def',
   template: `
     <!-- fieldTypes should be UPPERCASE -->
-    <ng-container novoFilterFieldTypeDef="STRING">
-      <novo-field *novoFilterFieldOperatorsDef="let formGroup" [formGroup]="formGroup">
+    <ng-container novoConditionFieldDef="STRING">
+      <novo-field *novoConditionOperatorsDef="let formGroup" [formGroup]="formGroup">
         <novo-select placeholder="Operator..." formControlName="operator">
           <novo-option value="includeAny">Include Any</novo-option>
           <novo-option value="includeAll">Include All</novo-option>
           <novo-option value="excludeAny">Exclude</novo-option>
         </novo-select>
       </novo-field>
-      <novo-field *novoFilterFieldInputDef="let formGroup">
+      <novo-field *novoConditionInputDef="let formGroup">
         <novo-chip-list #chipList aria-label="filter value">
           <novo-chip *ngFor="let chip of getValue(formGroup)" [value]="chip" (removed)="remove(chip, formGroup)">
             {{ chip }}
@@ -48,7 +48,7 @@ import { DefaultFilterFieldDef } from './default-filter-field.definition';
   // tslint:disable-next-line:validate-decorators
   changeDetection: ChangeDetectionStrategy.Default,
 })
-export class NovoDefaultStringFilterFieldDef extends DefaultFilterFieldDef {
+export class NovoDefaultStringConditionDef extends AbstractConditionFieldDef {
   inputCtrl = new FormControl();
   separatorKeysCodes: number[] = [ENTER, COMMA];
   defaultOperator = 'includeAny';

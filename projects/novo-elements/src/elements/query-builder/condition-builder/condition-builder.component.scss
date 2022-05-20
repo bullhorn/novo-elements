@@ -5,7 +5,6 @@
   display: block;
   width: 100%;
 
-  
   .condition-operator {
     &::ng-deep {
       .novo-select {
@@ -13,7 +12,7 @@
       }
     }
   }
-  .condition-value {
+  .condition-input {
     &::ng-deep {
       .novo-input-element {
         padding: 0.2rem !important;
@@ -24,7 +23,7 @@
       }
     }
   }
-  
+
   .and-or-filter-button {
     box-sizing: border-box;
     background: #fff;

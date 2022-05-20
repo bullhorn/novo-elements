@@ -16,24 +16,20 @@ import { NovoLoadingModule } from '../loading';
 import { NovoNonIdealStateModule } from '../non-ideal-state';
 import { NovoSearchBoxModule } from '../search';
 import { NovoSelectModule } from '../select';
+import { NovoSelectSearchModule } from '../select-search';
 import { NovoSwitchModule } from '../switch';
 import { NovoTabModule } from '../tabs';
-import { ExpressionBuilderComponent } from './expression-builder/expression-builder.component';
-import {
-  NovoFilterFieldDef,
-  NovoFilterFieldInputDef,
-  NovoFilterFieldOperatorsDef,
-  NovoFilterFieldTypeDef,
-} from './filter-builder/base-filter-field.definition';
-import { NovoDefaultAddressFilterFieldDef } from './filter-builder/default-condition-defs/address-filter-field.definition';
-import { NovoDefaultBooleanFilterFieldDef } from './filter-builder/default-condition-defs/boolean-filter-field.definition';
-import { NovoDefaultDateFilterFieldDef } from './filter-builder/default-condition-defs/date-filter-field.definition';
-import { NovoDefaultIdFilterFieldDef } from './filter-builder/default-condition-defs/id-filter-field.definition';
-import { NovoDefaultNumberFilterFieldDef } from './filter-builder/default-condition-defs/number-filter-field.definition';
-import { NovoDefaultPickerFilterFieldDef } from './filter-builder/default-condition-defs/picker-filter-field.definition';
-import { NovoDefaultStringFilterFieldDef } from './filter-builder/default-condition-defs/string-filter-field.definition';
-import { FilterBuilderComponent, QueryFilterInputOutlet, QueryFilterOperatorOutlet } from './filter-builder/filter-builder.component';
+import { ConditionBuilderComponent, ConditionInputOutlet, ConditionOperatorOutlet } from './condition-builder/condition-builder.component';
+import { NovoDefaultAddressConditionDef } from './condition-definitions/address-condition.definition';
+import { NovoDefaultBooleanConditionDef } from './condition-definitions/boolean-condition.definition';
+import { NovoDefaultDateConditionDef } from './condition-definitions/date-condition.definition';
+import { NovoDefaultIdConditionDef } from './condition-definitions/id-condition.definition';
+import { NovoDefaultNumberConditionDef } from './condition-definitions/number-condition.definition';
+import { NovoDefaultPickerConditionDef } from './condition-definitions/picker-condition.definition';
+import { NovoDefaultStringConditionDef } from './condition-definitions/string-condition.definition';
+import { CriteriaBuilderComponent } from './criteria-builder/criteria-builder.component';
 import { QueryBuilderComponent } from './query-builder.component';
+import { NovoConditionFieldDef, NovoConditionInputDef, NovoConditionOperatorsDef } from './query-builder.directives';
 
 @NgModule({
   imports: [
@@ -58,40 +54,39 @@ import { QueryBuilderComponent } from './query-builder.component';
     NovoSearchBoxModule,
     NovoSwitchModule,
     NovoChipsModule,
+    NovoSelectSearchModule,
   ],
   declarations: [
-    ExpressionBuilderComponent,
+    CriteriaBuilderComponent,
     QueryBuilderComponent,
-    FilterBuilderComponent,
-    QueryFilterInputOutlet,
-    QueryFilterOperatorOutlet,
-    NovoDefaultAddressFilterFieldDef,
-    NovoDefaultBooleanFilterFieldDef,
-    NovoDefaultDateFilterFieldDef,
-    NovoFilterFieldOperatorsDef,
-    NovoFilterFieldInputDef,
-    NovoFilterFieldTypeDef,
-    NovoFilterFieldDef,
-    NovoDefaultStringFilterFieldDef,
-    NovoDefaultNumberFilterFieldDef,
-    NovoDefaultIdFilterFieldDef,
-    NovoDefaultPickerFilterFieldDef,
+    ConditionBuilderComponent,
+    ConditionInputOutlet,
+    ConditionOperatorOutlet,
+    NovoDefaultAddressConditionDef,
+    NovoDefaultBooleanConditionDef,
+    NovoDefaultDateConditionDef,
+    NovoConditionOperatorsDef,
+    NovoConditionInputDef,
+    NovoConditionFieldDef,
+    NovoDefaultStringConditionDef,
+    NovoDefaultNumberConditionDef,
+    NovoDefaultIdConditionDef,
+    NovoDefaultPickerConditionDef,
   ],
   exports: [
-    ExpressionBuilderComponent,
+    CriteriaBuilderComponent,
     QueryBuilderComponent,
-    FilterBuilderComponent,
-    NovoDefaultAddressFilterFieldDef,
-    NovoDefaultBooleanFilterFieldDef,
-    NovoDefaultDateFilterFieldDef,
-    NovoFilterFieldOperatorsDef,
-    NovoFilterFieldInputDef,
-    NovoFilterFieldTypeDef,
-    NovoFilterFieldDef,
-    NovoDefaultStringFilterFieldDef,
-    NovoDefaultNumberFilterFieldDef,
-    NovoDefaultIdFilterFieldDef,
-    NovoDefaultPickerFilterFieldDef,
+    ConditionBuilderComponent,
+    NovoDefaultAddressConditionDef,
+    NovoDefaultBooleanConditionDef,
+    NovoDefaultDateConditionDef,
+    NovoConditionOperatorsDef,
+    NovoConditionInputDef,
+    NovoConditionFieldDef,
+    NovoDefaultStringConditionDef,
+    NovoDefaultNumberConditionDef,
+    NovoDefaultIdConditionDef,
+    NovoDefaultPickerConditionDef,
   ],
 })
 export class NovoQueryBuilderModule {}

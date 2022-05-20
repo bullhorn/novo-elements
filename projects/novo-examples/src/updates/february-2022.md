@@ -2,7 +2,7 @@
 section: updates
 page: v6
 title: February 2022
-order: 2
+order: 3
 ---
 
 🚀 February 2022 (version 6 - Golden)

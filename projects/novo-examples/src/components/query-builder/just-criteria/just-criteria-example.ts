@@ -1,24 +1,23 @@
 import { HttpClient } from '@angular/common/http';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl } from '@angular/forms';
-import { DefaultFilterFieldDef, NovoLabelService } from 'novo-elements';
-import { NOVO_EXPRESSION_BUILDER } from 'projects/novo-elements/src';
+import { AbstractConditionFieldDef, NovoLabelService } from 'novo-elements';
 import { ReplaySubject, Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
 import { MockMeta } from './MockMeta';
 
 @Component({
-  selector: 'custom-picker-filter-field-def',
+  selector: 'custom-picker-condition-def',
   template: `
-    <ng-container novoFilterFieldTypeDef>
-      <novo-field *novoFilterFieldOperatorsDef="let formGroup" [formGroup]="formGroup">
+    <ng-container novoConditionFieldDef>
+      <novo-field *novoConditionOperatorsDef="let formGroup" [formGroup]="formGroup">
         <novo-select placeholder="Operator..." formControlName="operator">
           <novo-option value="includeAny">Include Any</novo-option>
           <novo-option value="includeAll">Include All</novo-option>
           <novo-option value="excludeAny">Exclude</novo-option>
         </novo-select>
       </novo-field>
-      <novo-field *novoFilterFieldInputDef="let formGroup; fieldMeta as meta" [formGroup]="formGroup">
+      <novo-field *novoConditionInputDef="let formGroup; fieldMeta as meta" [formGroup]="formGroup">
         <novo-select formControlName="value" placeholder="Select..." [multiple]="true">
           <novo-select-search [formControl]="searchCtrl"></novo-select-search>
           <novo-option *ngFor="let option of remoteResults | async" [value]="option.id">
@@ -31,7 +30,7 @@ import { MockMeta } from './MockMeta';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.Default,
 })
-export class CustomDefaultPickerFilterFieldDef extends DefaultFilterFieldDef implements OnInit {
+export class CustomPickerConditionDef extends AbstractConditionFieldDef implements OnInit {
   defaultOperator = 'includeAny';
   searchCtrl: FormControl = new FormControl();
   /** list of results filtered by search keyword */
@@ -39,8 +38,8 @@ export class CustomDefaultPickerFilterFieldDef extends DefaultFilterFieldDef imp
   /** Subject that emits when the component has been destroyed. */
   protected _onDestroy = new Subject<void>();
 
-  constructor(public http: HttpClient, labels: NovoLabelService, @Inject(NOVO_EXPRESSION_BUILDER) _expressionBuilder?: any) {
-    super(labels, _expressionBuilder);
+  constructor(public http: HttpClient, labels: NovoLabelService) {
+    super(labels);
   }
 
   ngOnInit() {

@@ -2,17 +2,17 @@
   position: relative;
   display: block;
 
-  .expression-builder {
+  .criteria-builder-inner {
     padding-bottom: 1rem;
-    .expression-block {
+    .condition-row {
       width: 100%;
       padding-bottom: 0.4rem;
     }
-    
-    .expression-group {
+
+    .condition-group {
       width: 100%;
       border: 1px solid transparent;
-      border-radius: .4rem;
+      border-radius: 0.4rem;
       padding: 1rem 0;
       &.with-conditions {
         padding: 0.5rem;
@@ -26,7 +26,7 @@
     }
   }
 
-  .and-or-filter-button {
+  .and-or-button {
     box-sizing: border-box;
     background: #fff;
     border: 1px solid #ddd;
@@ -63,24 +63,4 @@
       text-transform: uppercase;
     }
   }
-
-  // .or-connector {
-  //   background: #fff;
-  //   padding: 0 5px;
-  //   position: relative;
-  //   width: min-content;
-
-  //   .or-connector-line {
-  //     // background: #999;
-  //     height: 1px;
-  //     width: 100%;
-  //   }
-  //   .or-connector-text {
-  //     background-color: var(--background-alt, #ffffff);
-  //     margin: -8px 0 0 10px;
-  //     position: absolute;
-  //     text-align: center;
-  //     text-transform: uppercase;
-  //   }
-  // }
 }

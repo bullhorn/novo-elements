@@ -16,17 +16,17 @@ import {
 import { AbstractControl, ControlContainer, FormControl } from '@angular/forms';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
-import type { ExpressionBuilderComponent } from '../expression-builder/expression-builder.component';
-import { NOVO_EXPRESSION_BUILDER, NOVO_FILTER_BUILDER } from '../query-builder.tokens';
+import type { CriteriaBuilderComponent } from '../criteria-builder/criteria-builder.component';
+import { BaseConditionFieldDef } from '../query-builder.directives';
+import { NOVO_CONDITION_BUILDER, NOVO_CRITERIA_BUILDER } from '../query-builder.tokens';
 import { BaseFieldDef, FieldConfig, QueryFilterOutlet } from '../query-builder.types';
-import { BaseFilterFieldDef } from './base-filter-field.definition';
 
 /**
  * Provides a handle for the table to grab the view container's ng-container to insert data rows.
  * @docs-private
  */
-@Directive({ selector: '[queryFilterInputOutlet]' })
-export class QueryFilterInputOutlet implements QueryFilterOutlet {
+@Directive({ selector: '[conditionInputOutlet]' })
+export class ConditionInputOutlet implements QueryFilterOutlet {
   constructor(public viewContainer: ViewContainerRef, public elementRef: ElementRef) {}
 }
 
@@ -34,8 +34,8 @@ export class QueryFilterInputOutlet implements QueryFilterOutlet {
  * Provides a handle for the table to grab the view container's ng-container to insert data rows.
  * @docs-private
  */
-@Directive({ selector: '[queryFilterOperatorOutlet]' })
-export class QueryFilterOperatorOutlet implements QueryFilterOutlet {
+@Directive({ selector: '[conditionOperatorOutlet]' })
+export class ConditionOperatorOutlet implements QueryFilterOutlet {
   constructor(public viewContainer: ViewContainerRef, public elementRef: ElementRef) {}
 }
 
@@ -44,15 +44,15 @@ export const defaultEditTypeFn = (field: BaseFieldDef) => {
 };
 
 @Component({
-  selector: 'novo-filter-builder',
-  templateUrl: './filter-builder.component.html',
-  styleUrls: ['./filter-builder.component.scss'],
-  providers: [{ provide: NOVO_FILTER_BUILDER, useExisting: FilterBuilderComponent }],
+  selector: 'novo-condition-builder',
+  templateUrl: './condition-builder.component.html',
+  styleUrls: ['./condition-builder.component.scss'],
+  providers: [{ provide: NOVO_CONDITION_BUILDER, useExisting: ConditionBuilderComponent }],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FilterBuilderComponent<T extends BaseFieldDef> implements OnInit, AfterContentInit, OnDestroy {
-  @ViewChild(QueryFilterOperatorOutlet, { static: true }) _operatorOutlet: QueryFilterOperatorOutlet;
-  @ViewChild(QueryFilterInputOutlet, { static: true }) _inputOutlet: QueryFilterInputOutlet;
+export class ConditionBuilderComponent<T extends BaseFieldDef> implements OnInit, AfterContentInit, OnDestroy {
+  @ViewChild(ConditionOperatorOutlet, { static: true }) _operatorOutlet: ConditionOperatorOutlet;
+  @ViewChild(ConditionInputOutlet, { static: true }) _inputOutlet: ConditionInputOutlet;
 
   @Input() label: any;
   @Input() config: { fields: FieldConfig<T>[] } = { fields: [] };
@@ -72,7 +72,7 @@ export class FilterBuilderComponent<T extends BaseFieldDef> implements OnInit, A
   constructor(
     private controlContainer: ControlContainer,
     private cdr: ChangeDetectorRef,
-    @Optional() @Inject(NOVO_EXPRESSION_BUILDER) @Optional() public _expressionBuilder?: ExpressionBuilderComponent,
+    @Optional() @Inject(NOVO_CRITERIA_BUILDER) @Optional() public _expressionBuilder?: CriteriaBuilderComponent,
   ) {}
 
   ngOnInit() {
@@ -173,7 +173,7 @@ export class FilterBuilderComponent<T extends BaseFieldDef> implements OnInit, A
     this.createFieldInput(definition);
   }
 
-  private createFieldOperators(definition: BaseFilterFieldDef) {
+  private createFieldOperators(definition: BaseConditionFieldDef) {
     this._operatorOutlet.viewContainer.clear();
     if (definition) {
       const context = { $implicit: this.parentForm, fieldMeta: this.getField() };
@@ -182,7 +182,7 @@ export class FilterBuilderComponent<T extends BaseFieldDef> implements OnInit, A
     this.cdr.markForCheck();
   }
 
-  private createFieldInput(definition: BaseFilterFieldDef) {
+  private createFieldInput(definition: BaseConditionFieldDef) {
     this._inputOutlet.viewContainer.clear();
     if (definition) {
       const context = { $implicit: this.parentForm, fieldMeta: this.getField() };

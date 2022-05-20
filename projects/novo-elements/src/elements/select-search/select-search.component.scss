@@ -5,10 +5,16 @@
 $novo-menu-side-padding: 16px !default;
 $clear-button-width: 20px;
 $multiple-check-width: 33px;
-$novo-option-height: 3em;
+$novo-option-height: 3.6rem;
 $novo-select-search-clear-x: 4px;
 $novo-select-search-spinner-x: 16px;
 $novo-select-search-toggle-all-checkbox-x: 16px;
+
+:host {
+  display: block;
+  height: $novo-option-height;
+  // line-height: $novo-option-height;
+}
 
 .novo-select-search-hidden {
   visibility: hidden;
@@ -24,7 +30,7 @@ $novo-select-search-toggle-all-checkbox-x: 16px;
   font-size: inherit;
   box-shadow: none;
   border-radius: 0;
-  background-color: var(--background-main);
+  background-color: var(--background-bright);
   /* Prevent iOS scroll issue */
   -webkit-transform: translate3d(0, 0, 0);
 

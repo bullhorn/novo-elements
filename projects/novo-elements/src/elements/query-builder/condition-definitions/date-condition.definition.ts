@@ -1,15 +1,15 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { DefaultFilterFieldDef } from './default-filter-field.definition';
+import { AbstractConditionFieldDef } from './abstract-condition.definition';
 
 /**
  * Most complicated of the default conditions defs, a date needs to provide a different
  * input type depending on the operator selected.
  */
 @Component({
-  selector: 'novo-date-filter-field-def',
+  selector: 'novo-date-condition-def',
   template: `
-    <ng-container novoFilterFieldTypeDef="DATE">
-      <novo-field *novoFilterFieldOperatorsDef="let formGroup" [formGroup]="formGroup">
+    <ng-container novoConditionFieldDef="DATE">
+      <novo-field *novoConditionOperatorsDef="let formGroup" [formGroup]="formGroup">
         <novo-select placeholder="Operator..." formControlName="operator">
           <novo-option value="before">Before</novo-option>
           <novo-option value="after">After</novo-option>
@@ -17,7 +17,7 @@ import { DefaultFilterFieldDef } from './default-filter-field.definition';
           <novo-option value="within">Within</novo-option>
         </novo-select>
       </novo-field>
-      <ng-container *novoFilterFieldInputDef="let formGroup">
+      <ng-container *novoConditionInputDef="let formGroup">
         <ng-container [ngSwitch]="formGroup.value.operator" [formGroup]="formGroup">
           <novo-field *novoSwitchCases="['before', 'after']">
             <input novoInput dateFormat="iso8601" [picker]="datepicker" formControlName="value" />
@@ -46,6 +46,6 @@ import { DefaultFilterFieldDef } from './default-filter-field.definition';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.Default,
 })
-export class NovoDefaultDateFilterFieldDef extends DefaultFilterFieldDef {
+export class NovoDefaultDateConditionDef extends AbstractConditionFieldDef {
   defaultOperator = 'within';
 }
