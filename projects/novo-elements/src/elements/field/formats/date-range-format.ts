@@ -103,7 +103,11 @@ export class NovoDateRangeFormatDirective extends IMaskDirective<any> {
   }
 
   writeValue(value: any) {
-    super.writeValue(this.formatValue(value));
+    const formattedValue = this.formatValue(value);
+    if (formattedValue !== this.maskValue) {
+      super.writeValue(this.formatValue(value));
+      this.onChange(this.formatValue(value));
+    }
   }
 
   registerOnChange(fn: (_: any) => void): void {

@@ -1,6 +1,6 @@
 <form [formGroup]="parentForm">
   <novo-stack [formArrayName]="controlName" class="criteria-builder-inner">
-    <ng-container *ngFor="let andGroup of andGroups().controls; let andIndex = index; let isFirst = first">
+    <ng-container *ngFor="let andGroup of andGroups().controls; let andIndex = index; let isFirst = first; trackBy: trackByIndex">
       <div *ngIf="!isFirst" class="and-connector" aria-hidden="false">
         <div class="and-connector-line"></div>
         <novo-caption class="and-connector-text">and</novo-caption>
@@ -16,7 +16,8 @@
               let orGroup of orGroups(andIndex).controls;
               let orIndex = index;
               let isFirstOr = first;
-              let isLastOr = last
+              let isLastOr = last;
+              trackBy: trackByIndex
             ">
             <novo-flex class="condition-row" [class.or-block]="orGroups(andIndex).controls.length > 1 && !isLastOr">
               <div *ngIf="!isFirstOr" class="or-connector" aria-hidden="false">

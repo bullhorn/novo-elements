@@ -84,12 +84,13 @@ export class ConditionBuilderComponent<T extends BaseFieldDef> implements OnInit
     const { fields = [] } = this.config || {};
     fields.length && this.changeFieldOptions(fields[0]);
     this.searches = this.searchTerm.valueChanges.pipe(debounceTime(300), distinctUntilChanged()).subscribe((term) => {
-      this.results$ = Promise.resolve(
-        this.fieldConfig.options.filter(
-          (f) => f.name.toLowerCase().includes(term.toLowerCase()) || f.label?.toLowerCase().includes(term.toLowerCase()),
-        ),
-      );
-      this.cdr.markForCheck();
+      this.parentForm.get('field').setValue(null);
+        this.results$ = Promise.resolve(
+          this.fieldConfig.options.filter(
+            (f) => f.name.toLowerCase().includes(term.toLowerCase()) || f.label?.toLowerCase().includes(term.toLowerCase()),
+          ),
+        );
+        this.cdr.markForCheck();
     });
   }
 

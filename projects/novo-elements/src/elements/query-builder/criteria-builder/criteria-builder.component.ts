@@ -1,4 +1,4 @@
-import { AfterContentChecked, Component, ContentChildren, forwardRef, Input, OnDestroy, OnInit, QueryList } from '@angular/core';
+import { AfterContentChecked, ChangeDetectionStrategy, Component, ContentChildren, forwardRef, Input, OnDestroy, OnInit, QueryList, ChangeDetectorRef } from '@angular/core';
 import { AbstractControl, ControlContainer, FormArray, FormBuilder, FormGroup, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { BaseConditionFieldDef, NovoConditionFieldDef } from '../query-builder.directives';
@@ -9,6 +9,7 @@ import { BaseFieldDef } from '../query-builder.types';
   selector: 'novo-criteria-builder',
   templateUrl: './criteria-builder.component.html',
   styleUrls: ['./criteria-builder.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => CriteriaBuilderComponent), multi: true },
     { provide: NOVO_CRITERIA_BUILDER, useExisting: CriteriaBuilderComponent },
@@ -32,7 +33,7 @@ export class CriteriaBuilderComponent implements OnInit, OnDestroy, AfterContent
   /** Subject that emits when the component has been destroyed. */
   private readonly _onDestroy = new Subject<void>();
 
-  constructor(private controlContainer: ControlContainer, private formBuilder: FormBuilder) {}
+  constructor(private controlContainer: ControlContainer, private formBuilder: FormBuilder, private cdr: ChangeDetectorRef) {}
 
   ngOnInit() {
     this.parentForm = this.controlContainer.control;
@@ -72,11 +73,12 @@ export class CriteriaBuilderComponent implements OnInit, OnDestroy, AfterContent
 
   addAndGroup() {
     this.andGroups().push(this.newAndGroup());
-    // console.log(this.parentForm.value);
+    this.cdr.markForCheck();
   }
 
   removeAndGroup(index: number) {
     this.andGroups().removeAt(index);
+    this.cdr.markForCheck();
   }
 
   orGroups(index: number): FormArray {
@@ -93,6 +95,7 @@ export class CriteriaBuilderComponent implements OnInit, OnDestroy, AfterContent
 
   addOrGroup(index: number) {
     this.orGroups(index).push(this.newOrGroup());
+    this.cdr.markForCheck();
   }
 
   removeOrGroup(index: number, orIndex: number) {
@@ -100,14 +103,13 @@ export class CriteriaBuilderComponent implements OnInit, OnDestroy, AfterContent
     if (!this.orGroups(index).controls.length) {
       this.removeAndGroup(index);
     }
+    this.cdr.markForCheck();
   }
 
   canAddGroup() {
-    // console.log('can Add Group', this.andGroups().controls, this.parentForm.valid);
     if (this.andGroups().controls.length < 1) return true;
     const len = this.andGroups().controls.length - 1;
     const last = this.orGroups(len).controls.length - 1;
-    // console.log('last value', this.orGroups(len).at(last).value);
     const { field, value } = this.orGroups(len).at(last).value;
     return !!field && !!value;
   }
@@ -126,6 +128,10 @@ export class CriteriaBuilderComponent implements OnInit, OnDestroy, AfterContent
     return this._fieldDefsByName;
   }
 
+  trackByIndex(index: number, item: any) {
+    return index;
+  }
+
   private _cacheFieldDefs() {
     this._fieldDefsByName.clear();
 
@@ -138,7 +144,7 @@ export class CriteriaBuilderComponent implements OnInit, OnDestroy, AfterContent
     defs.forEach((fieldDef) => {
       if (this._fieldDefsByName.has(fieldDef.name)) {
         // throw new Error(`duplicate field name for ${fieldDef.name}`);
-        console.warn(`duplicate field name for ${fieldDef.name}`);
+        console.warn(`Duplicate field name for ${fieldDef.name}`);
       }
       this._fieldDefsByName.set(fieldDef.name, fieldDef);
     });

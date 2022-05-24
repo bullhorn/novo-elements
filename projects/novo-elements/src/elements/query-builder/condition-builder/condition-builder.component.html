@@ -8,14 +8,10 @@
         overlayWidth="24rem"
         overlayHeight="20rem"
         [style.minWidth.px]="160">
-        <!-- <div class="field-select-picker"> -->
-        <!--           <novo-nav theme="white" direction="vertical">
-            <novo-tab *ngFor="let entity of config?.fields" (activeChange)="changeFieldOptions(entity)">
-              {{ entity.label }}
-            </novo-tab>
-          </novo-nav> -->
-        <novo-select-search [formControl]="searchTerm"></novo-select-search>
         <novo-optgroup class="filter-search-results">
+          <novo-option>
+            <novo-select-search [formControl]="searchTerm" [clearSearchInput]="false"></novo-select-search>
+          </novo-option>
           <ng-container *ngIf="results$ | async as results; else loading">
             <ng-container *ngIf="results.length; else empty">
               <novo-option *ngFor="let field of results" value="{{ fieldConfig.value }}.{{ field.name }}">
@@ -24,7 +20,6 @@
             </ng-container>
           </ng-container>
         </novo-optgroup>
-        <!-- </div> -->
       </novo-select>
     </novo-field>
 
