@@ -171,7 +171,7 @@ export enum NovoTableMode {
                         toggledDropdownMap[column.name]
                       "
                     >
-                      <novo-option class="filter-search" inert>
+                      <novo-option class="filter-search" novoInert>
                         <div class="header">
                           <span>{{ labels.filters }}</span>
                           <novo-button
@@ -206,7 +206,7 @@ export enum NovoTableMode {
                     </novo-optgroup>
                     <!-- FILTER SEARCH INPUT -->
                     <novo-optgroup *ngIf="!(column?.options?.length || column?.originalOptions?.length) && toggledDropdownMap[column.name]">
-                      <novo-option class="filter-search" inert>
+                      <novo-option class="filter-search" novoInert>
                         <div class="header">
                           <span>{{ labels.filters }}</span>
                           <novo-button theme="dialogue" color="negative" icon="times" (click)="onFilterClear(column)" *ngIf="column.filter">
@@ -226,7 +226,7 @@ export enum NovoTableMode {
                     </novo-optgroup>
                     <!-- FILTER DATE OPTIONS -->
                     <novo-optgroup *ngIf="column?.options?.length && column?.type === 'date' && toggledDropdownMap[column.name]">
-                      <novo-option class="filter-search" *ngIf="!column.calenderShow" inert>
+                      <novo-option class="filter-search" *ngIf="!column.calenderShow" novoInert>
                         <div class="header">
                           <span>{{ labels.filters }}</span>
                           <novo-button theme="dialogue" color="negative" icon="times" (click)="onFilterClear(column)" *ngIf="column.filter">
@@ -245,7 +245,7 @@ export enum NovoTableMode {
                         {{ option?.label || option }}
                         <novo-icon novoSuffix color="positive" *ngIf="isFilterActive(column, option)">check</novo-icon>
                       </novo-option>
-                      <novo-option class="calendar-container" *ngIf="column.calenderShow" keepOpen inert>
+                      <novo-option class="calendar-container" *ngIf="column.calenderShow" keepOpen novoInert>
                         <novo-stack>
                           <div class="back-link" (click)="column.calenderShow = false">
                             <i class="bhi-previous"></i>{{ labels.backToPresetFilters }}

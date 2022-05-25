@@ -131,7 +131,7 @@ import { DataTableState } from '../state/data-table-state.service';
             </novo-optgroup>
             <ng-container *ngSwitchCase="'multi-select'">
               <novo-optgroup class="dropdown-list-filter" (keydown)="multiSelectOptionFilterHandleKeydown($event)">
-                <novo-option class="filter-search" inert>
+                <novo-option class="filter-search" [keepOpen]="true">
                   <novo-field flex>
                     <input
                       novoInput
@@ -139,6 +139,7 @@ import { DataTableState } from '../state/data-table-state.service';
                       (ngModelChange)="multiSelectOptionFilter($event)"
                       #optionFilterInput
                       data-automation-id="novo-data-table-multi-select-option-filter-input"
+                      (keydown.enter)="multiSelectOptionFilterHandleKeydown($event)"
                     />
                     <novo-icon novoSuffix>search</novo-icon>
                     <novo-error class="error-text" [hidden]="!error || !multiSelectHasVisibleOptions()">{{
@@ -163,12 +164,12 @@ import { DataTableState } from '../state/data-table-state.service';
               <novo-option class="filter-null-results" [hidden]="multiSelectHasVisibleOptions()">{{ labels.pickerEmpty }}</novo-option>
             </ng-container>
             <novo-optgroup *ngSwitchCase="'custom'">
-              <novo-option class="filter-search" inert>
+              <novo-option class="filter-search" [keepOpen]="true" (keydown.enter)="handleEscapeKeydown($event)">
                 <ng-container *ngTemplateOutlet="filterTemplate; context: { $implicit: config }"></ng-container>
               </novo-option>
             </novo-optgroup>
-            <novo-optgroup *ngSwitchDefault (keydown.escape)="handleEscapeKeydown($event)">
-              <novo-option class="filter-search" inert>
+            <novo-optgroup *ngSwitchDefault (keydown.escape)="handleEscapeKeydown($event)" (keydown.enter)="handleEscapeKeydown($event)">
+              <novo-option class="filter-search" [keepOpen]="true">
                 <novo-field flex fullWidth>
                   <input
                     novoInput
@@ -478,6 +479,7 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
       } else if (event.key === Key.Enter) {
         Helpers.swallowEvent(event);
         this.filterMultiSelect();
+        this.dropdown.closePanel();
       } else if (
         (event.keyCode >= 65 && event.keyCode <= 90) ||
         (event.keyCode >= 96 && event.keyCode <= 105) ||
