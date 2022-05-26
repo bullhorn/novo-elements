@@ -158,11 +158,14 @@ export class ConditionBuilderComponent<T extends BaseFieldDef> implements OnInit
     // Don't look at dataSpecialization it is no good, this misses currency, and percent
     const { name, inputType, dataType, type } = field;
     const fieldDefsByName = this._expressionBuilder.getFieldDefsByName();
+    console.log('looking for def', name, editType, inputType, dataType, type);
     // Check Fields by priority for match Field Definition
+    if (!dataType) {
+      return fieldDefsByName.get(type.toUpperCase())
+    }
     const key = [name, editType, inputType, dataType, type, 'default'].find((it) => {
       return fieldDefsByName.has(it?.toUpperCase());
     });
-    console.log('looking for def', name, editType, inputType, dataType, type, key);
     return fieldDefsByName.get(key.toUpperCase());
   }
 
