@@ -1,3 +1,13 @@
+## [6.1.4](https://github.com/bullhorn/novo-elements/compare/v6.1.3...v6.1.4) (2022-05-26)
+
+
+### Bug Fixes
+
+* **inert:** removing usage of the inert attribute since now it is supported in HTML ([126ea21](https://github.com/bullhorn/novo-elements/commit/126ea21938342cde59462e7c9794351df99d4f32))
+* **inert:** updating bump.json for this branch ([424d559](https://github.com/bullhorn/novo-elements/commit/424d55979cd42191b8891c3d9375b4aae74b27b5))
+
+
+
 ## [6.1.3](https://github.com/bullhorn/novo-elements/compare/v6.1.2...v6.1.3) (2022-04-15)
 
 
