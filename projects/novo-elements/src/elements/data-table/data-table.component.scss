@@ -157,7 +157,7 @@ cdk-table {
     pointer-events: all;
     margin-left: 0.5rem;
     line-height: 1em;
-
+    outline: none;
     &:hover {
       color: var(--text-main);
     }
