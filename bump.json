@@ -7,6 +7,12 @@
       }
     },
     {
+      "name": "support/inertFix",
+      "docs": {
+        "dest": "docs"
+      }
+    },
+    {
       "name": "next",
       "prerelease": "next",
       "skipChangeLog": true,
