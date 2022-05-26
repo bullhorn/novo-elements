@@ -3203,6 +3203,7 @@ cdk-table > .novo-data-table-row:nth-of-type(even) + .novo-data-table-detail-row
   pointer-events: all;
   margin-left: 0.5rem;
   line-height: 1em;
+  outline: none;
 }
 .novo-data-table-cell .filter-button:hover,
 .novo-data-table-header-cell .filter-button:hover {
@@ -13538,6 +13539,7 @@ novo-row-chips i {
 novo-dropdown {
   display: inline-block;
   position: relative;
+  outline: none;
 }
 novo-dropdown .novo-dropdown-trigger {
   cursor: pointer;
@@ -30940,6 +30942,7 @@ novo-icon i {
   width: 1em;
   height: 1em;
   color: inherit;
+  outline: none;
 }
 novo-icon i:before {
   color: inherit;
