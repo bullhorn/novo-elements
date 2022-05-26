@@ -160,11 +160,10 @@ export class ConditionBuilderComponent<T extends BaseFieldDef> implements OnInit
     const fieldDefsByName = this._expressionBuilder.getFieldDefsByName();
     // Check Fields by priority for match Field Definition
     const key = [name, editType, inputType, dataType, type, 'default'].find((it) => {
-      const isScalar = type === 'SCALAR'; // temp workaround for paymentTerms field
-      return (isScalar && it === 'SCALAR') || (!isScalar && fieldDefsByName.has(it));
+      return fieldDefsByName.has(it?.toUpperCase());
     });
-    console.log('looking for input', name, inputType, editType, dataType, type, key);
-    return fieldDefsByName.get(key);
+    console.log('looking for input', name, editType, inputType, dataType, type, key);
+    return fieldDefsByName.get(key.toUpperCase());
   }
 
   private createFieldTemplates() {
