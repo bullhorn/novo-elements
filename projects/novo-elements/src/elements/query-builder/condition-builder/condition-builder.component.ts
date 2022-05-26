@@ -162,13 +162,13 @@ export class ConditionBuilderComponent<T extends BaseFieldDef> implements OnInit
     const key = [name, editType, inputType, dataType, type, 'default'].find((it) => {
       return fieldDefsByName.has(it?.toUpperCase());
     });
-    console.log('looking for input', name, editType, inputType, dataType, type, key);
+    console.log('looking for def', name, editType, inputType, dataType, type, key);
     return fieldDefsByName.get(key.toUpperCase());
   }
 
   private createFieldTemplates() {
     const definition = this.findDefinitionForField(this.getField());
-    console.log('found def', definition);
+    console.log('found def', definition.name);
     this.parentForm.get('operator').setValue(definition.defaultOperator);
     this.parentForm.get('value').setValue(null);
 
