@@ -277,7 +277,7 @@ export class NovoSelectSearchComponent implements OnInit, OnDestroy, ControlValu
 
     // set custom novo-option class if the component was placed inside a novo-option
     if (this.novoOption) {
-      this.novoOption.inert = true;
+      this.novoOption.novoInert = true;
       this.novoOption._getHostElement().classList.add('contains-novo-select-search');
     } else {
       console.error('<novo-select-search> must be placed inside a <novo-option> element');
