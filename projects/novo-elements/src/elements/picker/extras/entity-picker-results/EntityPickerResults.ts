@@ -184,6 +184,8 @@ export class EntityPickerResult {
           return `${result.name || ''}`.trim();
         case 'Opportunity':
         case 'JobOrder':
+        case 'BillingProfile':
+        case 'InvoiceTerm':
           return `${result.id} | ${result.title || ''}`.trim();
         case 'Placement':
           let label = `${result.id}`;
