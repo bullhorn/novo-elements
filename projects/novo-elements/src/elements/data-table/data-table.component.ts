@@ -136,6 +136,8 @@ import { DataTableState } from './state/data-table-state.service';
               [class.empty]="column?.type === 'action' && !column?.label"
               [class.button-cell]="column?.type === 'expand' || (column?.type === 'action' && !column?.action?.options)"
               [class.dropdown-cell]="column?.type === 'action' && column?.action?.options"
+              [ngClass]="row.overrides?.class"
+              [tooltip]="row.overrides?.tooltip"
             ></novo-data-table-cell>
           </ng-container>
           <novo-data-table-header-row
@@ -146,6 +148,8 @@ import { DataTableState } from './state/data-table-state.service';
           <novo-data-table-row
             *cdkRowDef="let row; columns: displayedColumns"
             [ngClass]="{ active: row[rowIdentifier] == activeRowIdentifier }"
+            [class]="row.overrides?.class"
+            [tooltip]="row.overrides?.tooltip"
             [novoDataTableExpand]="detailRowTemplate"
             [row]="row"
             [id]="name + '-' + row[rowIdentifier]"
