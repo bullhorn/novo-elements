@@ -200,7 +200,7 @@ export class EntityPickerResult {
         case 'JobShift':
           return `${result.jobOrder?.title} @ ${result.jobOrder?.clientCorporation?.name || ''}`.trim();
         default:
-          return `${result.name || ''}`.trim();
+          return `${result.name || result.label || ''}`.trim();
       }
     }
     return '';
