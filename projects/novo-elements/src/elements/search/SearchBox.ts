@@ -51,6 +51,7 @@ const SEARCH_VALUE_ACCESSOR = {
       [parent]="element"
       [closeOnSelect]="closeOnSelect"
       [position]="position"
+      [hasBackdrop]="hasBackdrop"
       (select)="onSelect()"
       (closing)="onBlur()"
     >
@@ -84,6 +85,8 @@ export class NovoSearchBoxElement implements ControlValueAccessor {
   public hint: string;
   @Input()
   public keepOpen: boolean = false;
+  @Input()
+  public hasBackdrop: boolean = false;
   @Output()
   public searchChanged: EventEmitter<string> = new EventEmitter<string>();
   @Output()

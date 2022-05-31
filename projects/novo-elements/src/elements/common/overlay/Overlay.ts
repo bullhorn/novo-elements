@@ -68,6 +68,8 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
   public height: number;
   @Input()
   public closeOnSelect: boolean = true;
+  @Input()
+  public hasBackdrop: boolean = false;
 
   @Output()
   public select: EventEmitter<any> = new EventEmitter();
@@ -239,7 +241,7 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
     }
 
     config.positionStrategy = this.getPosition();
-    config.hasBackdrop = false;
+    config.hasBackdrop = this.hasBackdrop;
     config.direction = 'ltr';
     config.scrollStrategy = this.getScrollStrategy();
 
@@ -271,7 +273,6 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
       .flexibleConnectedTo(this.getConnectedElement())
       .withFlexibleDimensions(false)
       .withPositions([defaultPosition]);
-    // .setDirection('ltr');
     if (this.position === 'bottom') {
       strategy = strategy.withPositions([defaultPosition, { originX: fallbackX, originY: 'bottom', overlayX: fallbackX, overlayY: 'top' }]);
     } else if (this.position === 'right' || this.position === 'default' || this.position.includes('above-below')) {
