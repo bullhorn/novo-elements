@@ -53,11 +53,9 @@ export class CriteriaBuilderComponent implements OnInit, OnDestroy, AfterContent
   }
 
   handleAddOrFilter(evt: any) {
-    // console.log('Add Or', evt);
   }
 
   handleAddAndFilter(evt: any) {
-    // console.log('Add And', evt);
     this.addAndGroup();
   }
 

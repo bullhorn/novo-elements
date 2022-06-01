@@ -14,7 +14,7 @@
             <novo-select-search [formControl]="searchTerm" [clearSearchInput]="false"></novo-select-search>
           </novo-option>
           <ng-container *ngIf="results$ | async as results; else loading">
-            <ng-container *ngIf="results.length; else empty">
+            <ng-container *ngIf="results.length">
               <novo-option *ngFor="let field of results" value="{{ fieldConfig.value }}.{{ field.name }}">
                 {{ field.label || field.name }}
               </novo-option>
