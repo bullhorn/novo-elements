@@ -27,7 +27,6 @@ export abstract class AbstractConditionFieldDef implements OnDestroy, OnInit {
     this._syncFieldDefName();
     this._syncFieldDefOperatorValue();
     // Need to add self to FilterBuilder because "ContentChildren won't find it"
-    console.log('register', this.fieldDef, this.name);
     this.fieldDef?.register();
   }
 
