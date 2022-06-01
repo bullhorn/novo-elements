@@ -5,6 +5,15 @@
   display: block;
   width: 100%;
 
+  .condition-field {
+    &::ng-deep {
+      .novo-select-display-value {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      } 
+    }
+  }
   .condition-operator {
     &::ng-deep {
       .novo-select {
@@ -20,6 +29,19 @@
       novo-button[icon="bhi-calendar"] {
         padding: 0;
         height: 2rem;
+      }
+      novo-field {
+        width: fit-content;
+        
+      }
+      .novo-select-display-value {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      } 
+      .novo-field-infix {
+        white-space: nowrap;
+        overflow: hidden;
       }
     }
   }
@@ -42,20 +64,5 @@
     text-transform: uppercase;
     overflow: hidden;
     transition: box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), background-color 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-  }
-}
-
-.field-select-picker {
-  display: grid;
-  grid-template-columns: min-content 1fr;
-  background-color: $color-white;
-  overflow: auto;
-  box-shadow: $shadow-1;
-  height: 219px; // match picker max-height
-  width: auto;
-  .filter-search-results {
-    border-left: 1px solid $color-light;
-    height: 100%;
-    overflow-y: scroll;
   }
 }

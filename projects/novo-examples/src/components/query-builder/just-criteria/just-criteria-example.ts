@@ -19,7 +19,9 @@ import { MockMeta } from './MockMeta';
       </novo-field>
       <novo-field *novoConditionInputDef="let formGroup; fieldMeta as meta" [formGroup]="formGroup">
         <novo-select formControlName="value" placeholder="Select..." [multiple]="true">
-          <novo-select-search [formControl]="searchCtrl"></novo-select-search>
+          <novo-option>
+            <novo-select-search [formControl]="searchCtrl"></novo-select-search>
+          </novo-option>
           <novo-option *ngFor="let option of remoteResults | async" [value]="option.id">
             {{ option.name }}
           </novo-option>
