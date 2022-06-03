@@ -39,6 +39,7 @@ export class CriteriaBuilderComponent implements OnInit, OnDestroy, AfterContent
     this.parentForm = this.controlContainer.control;
     setTimeout(() => this.addAndGroup());
   }
+  
   ngAfterContentChecked() {
     this._cacheFieldDefs();
   }
@@ -124,10 +125,6 @@ export class CriteriaBuilderComponent implements OnInit, OnDestroy, AfterContent
 
   getFieldDefsByName() {
     return this._fieldDefsByName;
-  }
-
-  trackByIndex(index: number, item: any) {
-    return index;
   }
 
   private _cacheFieldDefs() {

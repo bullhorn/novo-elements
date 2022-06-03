@@ -76,7 +76,7 @@ export class NovoDefaultStringConditionDef extends AbstractConditionFieldDef {
     const current = this.getValue(formGroup);
     const index = current.indexOf(valueToRemove);
     if (index >= 0) {
-      const oldValue = [...current].splice(index, 1);
+      const oldValue = [...current]
       oldValue.splice(index, 1);
       formGroup.get('value').setValue(oldValue);
     }
