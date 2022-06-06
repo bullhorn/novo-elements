@@ -18,6 +18,9 @@ grouped-multi-picker-results {
       pointer-events: none;
       opacity: 0.75;
     }
+    div.list-item {
+      flex: 1 !important;
+    }
   }
   > .grouped-multi-picker-groups {
     flex: 1;
