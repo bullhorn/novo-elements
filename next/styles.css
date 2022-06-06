@@ -12315,6 +12315,9 @@ grouped-multi-picker-results novo-list-item.disabled {
   pointer-events: none;
   opacity: 0.75;
 }
+grouped-multi-picker-results novo-list-item div.list-item {
+  flex: 1 !important;
+}
 grouped-multi-picker-results > .grouped-multi-picker-groups {
   flex: 1;
   display: flex;
