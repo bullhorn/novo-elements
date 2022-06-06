@@ -30,7 +30,6 @@ import { AbstractConditionFieldDef } from './abstract-condition.definition';
           <input
             novoChipInput
             placeholder="Type to add chips..."
-            [formControl]="inputCtrl"
             autocomplete="off"
             (novoChipInputTokenEnd)="add($event, formGroup)"
           />
@@ -49,7 +48,6 @@ import { AbstractConditionFieldDef } from './abstract-condition.definition';
   changeDetection: ChangeDetectionStrategy.Default,
 })
 export class NovoDefaultStringConditionDef extends AbstractConditionFieldDef {
-  inputCtrl = new FormControl();
   separatorKeysCodes: number[] = [ENTER, COMMA];
   defaultOperator = 'includeAny';
 

@@ -70,7 +70,8 @@ export class NovoChipInput implements NovoChipTextControl, OnChanges {
   @Input() placeholder: string = '';
 
   /** Unique id for the input. */
-  @Input() id: string = `mat-chip-list-input-${nextUniqueId++}`;
+  @Input() id: string = `novo-chip-list-input-${nextUniqueId++}`;
+
 
   /** Whether the input is disabled. */
   @Input()
