@@ -2612,7 +2612,6 @@ export class ProgressUsagePage {
 }
 
 
-<<<<<<< HEAD
 @Component({
   selector: 'query-builder-design-page',
   template: `<h2>Usage</h2>
@@ -2773,8 +2772,6 @@ export class QueryBuilderExamplesPage {
 }
 
 
-=======
->>>>>>> master
 @Component({
   selector: 'quick-note-page',
   template: `<h1>Quick Note <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/quick-note">(source)</a></h1>
@@ -6151,7 +6148,6 @@ export class February2022Page {
 
 
 @Component({
-<<<<<<< HEAD
   selector: 'june-2022-page',
   template: `<h1>📢  June 2022 (version 7.2.x)</h1>
 <p><strong>New Feature: Query Builder</strong>: We have added a new component to help with building complex and modern interfaces.  At Bullhorn we have to enable our users to create advanced and dynamic searches against there data.  We have built many iterations of a query builder in the past but we think this one is our best and most re-usable.</p>
@@ -6178,21 +6174,15 @@ export class June2022Page {
 
 
 @Component({
-=======
->>>>>>> master
   selector: 'may-2022-page',
   template: `<h1>📢  May 2022 (version 7)</h1>
 <p><strong>Announcement</strong>: Novo Elements is being updated to Angular 13</p>
 <p>Bullhorn is continually seeking to update and innovate our products, and leverage the latest features in the frameworks we use. In support of that mission, we are updating our Novo UI and its supporting novo-elements library to Angular 13.  This update  allows us to continue offering a streamlined and consistent experience across Bullhorn’s complete product portfolio.  This update includes both an Angular upgrade, as well as supporting the latest Typescript updates.  You can find more details in the Technical Release Notes section below.</p>
 <h2>Release Timeline</h2>
 <p>Bullhorn has released a Release Candidate v7 of Novo-elements. Bullhorn will update Novo to use Novo-Elements v7 in the 2022.6 release</p>
-<<<<<<< HEAD
 <pre><code class="language-sh">npm install novo-elements@next
 <span class="hljs-comment"># or</span>
 npm install novo-elements@7.2.0-next.0
-=======
-<pre><code class="language-sh">npm install novo-elements@7.2.0-next.0
->>>>>>> master
 </code></pre>
 <h2>Upgrading to V7</h2>
 <p>First follow the steps to update your angular app to <a href="https://update.angular.io/?v=10.0-13.0">Version 13</a></p>
@@ -6526,7 +6516,6 @@ const routes: Routes = [
       { path: 'examples', component: ProgressExamplesPage },
       { path: '', redirectTo: '/components/progress/usage', pathMatch: 'full' },
     ]
-<<<<<<< HEAD
   },
   {
     path: 'components/query builder',
@@ -6538,8 +6527,6 @@ const routes: Routes = [
       { path: 'examples', component: QueryBuilderExamplesPage },
       { path: '', redirectTo: '/components/query builder/design', pathMatch: 'full' },
     ]
-=======
->>>>>>> master
   },
   { path: 'components/search', component: SearchPage, data: { title: 'Search', section: 'components' } },
   { path: 'components/slides', component: SlidesPage, data: { title: 'Slides', section: 'components' } },
@@ -6694,22 +6681,14 @@ const routes: Routes = [
     ]
   },
   { path: 'updates/v6', component: February2022Page, data: { title: 'February 2022', section: 'updates' } },
-<<<<<<< HEAD
   { path: 'updates/v7-query-builder', component: June2022Page, data: { title: 'June 2022', section: 'updates', tag: 'new' } },
   { path: 'updates/v7-announce', component: May2022Page, data: { title: 'May 2022', section: 'updates' } },
-=======
-  { path: 'updates/v7-announce', component: May2022Page, data: { title: 'May 2022', section: 'updates', tag: 'new' } },
->>>>>>> master
   // Catch All
   { path: '**', redirectTo: '/home', data: {} },
 ];
 
 export const PAGE_LIST = [
-<<<<<<< HEAD
   AceEditorPage,AgendaDesignPage,AgendaDevelopPage,AgendaExamplesPage,AsideDesignPage,AsideDevelopPage,AsideExamplesPage,AutocompleteDesignPage,AutocompleteDevelopPage,AutocompleteExamplesPage,AvatarDesignPage,AvatarDevelopPage,AvatarExamplesPage,BreadcrumbDesignPage,BreadcrumbDevelopPage,BreadcrumbExamplesPage,ButtonDesignPage,ButtonDevelopPage,ButtonExamplesPage,CalendarDesignPage,CalendarDevelopPage,CalendarExamplesPage,ComponentsPage,DataTablePage,DropdownDesignPage,DropdownDevelopPage,DropdownExamplesPage,FieldDesignPage,FieldDevelopPage,FieldExamplesPage,IconDesignPage,IconDevelopPage,IconExamplesPage,LoadingDesignPage,LoadingDevelopPage,LoadingExamplesPage,MenuDesignPage,MenuDevelopPage,MenuExamplesPage,ModalDesignPage,ModalDevelopPage,ModalExamplesPage,NonIdealStateDesignPage,NonIdealStateDevelopPage,NonIdealStateExamplesPage,PopoverDesignPage,PopoverDevelopPage,PopoverExamplesPage,ProgressDesignPage,ProgressDevelopPage,ProgressExamplesPage,ProgressUsagePage,QueryBuilderDesignPage,QueryBuilderDevelopPage,QueryBuilderExamplesPage,QuickNotePage,SearchPage,SlidesPage,SwitchPage,TabbedGroupPickerPage,TablePage,TipWellDesignPage,TipWellDevelopPage,TipWellExamplesPage,ToasterDesignPage,ToasterDevelopPage,ToasterExamplesPage,ToolbarDesignPage,ToolbarDevelopPage,ToolbarExamplesPage,TooltipDesignPage,TooltipDevelopPage,TooltipExamplesPage,ColorsPage,CompositionPage,DesignPage,IconographyPage,SpacingPage,TypographyPage,ChipsDesignPage,ChipsDevelopPage,ChipsExamplesPage,ColorPickerPage,DatePickerDesignPage,DatePickerDevelopPage,DatePickerExamplesPage,DateTimePickerDesignPage,DateTimePickerDevelopPage,DateTimePickerExamplesPage,EditorPage,FormControlsPage,FormGroupsPage,FormPage,MultiPickerPage,PickerPage,RadioButtonsPage,SelectPage,TilesPage,TimePickerDesignPage,TimePickerDevelopPage,TimePickerExamplesPage,ValuePage,HomePage,CardDescriptionPage,CardDesignPage,CardDevelopPage,CardExamplesPage,ExpansionPage,HeaderPage,LayoutsPage,ListPage,SidenavPage,StepperPage,TabsDesignPage,TabsDevelopPage,TabsExamplesPage,PatternsNativeFormsPage,PatternsTestPage,PatternsPage,TemplatesPage,February2022Page,June2022Page,May2022Page,FieldInteractionsPage,PipesPage,SecurityPage
-=======
-  AceEditorPage,AgendaDesignPage,AgendaDevelopPage,AgendaExamplesPage,AsideDesignPage,AsideDevelopPage,AsideExamplesPage,AutocompleteDesignPage,AutocompleteDevelopPage,AutocompleteExamplesPage,AvatarDesignPage,AvatarDevelopPage,AvatarExamplesPage,BreadcrumbDesignPage,BreadcrumbDevelopPage,BreadcrumbExamplesPage,ButtonDesignPage,ButtonDevelopPage,ButtonExamplesPage,CalendarDesignPage,CalendarDevelopPage,CalendarExamplesPage,ComponentsPage,DataTablePage,DropdownDesignPage,DropdownDevelopPage,DropdownExamplesPage,FieldDesignPage,FieldDevelopPage,FieldExamplesPage,IconDesignPage,IconDevelopPage,IconExamplesPage,LoadingDesignPage,LoadingDevelopPage,LoadingExamplesPage,MenuDesignPage,MenuDevelopPage,MenuExamplesPage,ModalDesignPage,ModalDevelopPage,ModalExamplesPage,NonIdealStateDesignPage,NonIdealStateDevelopPage,NonIdealStateExamplesPage,PopoverDesignPage,PopoverDevelopPage,PopoverExamplesPage,ProgressDesignPage,ProgressDevelopPage,ProgressExamplesPage,ProgressUsagePage,QuickNotePage,SearchPage,SlidesPage,SwitchPage,TabbedGroupPickerPage,TablePage,TipWellDesignPage,TipWellDevelopPage,TipWellExamplesPage,ToasterDesignPage,ToasterDevelopPage,ToasterExamplesPage,ToolbarDesignPage,ToolbarDevelopPage,ToolbarExamplesPage,TooltipDesignPage,TooltipDevelopPage,TooltipExamplesPage,ColorsPage,CompositionPage,DesignPage,IconographyPage,SpacingPage,TypographyPage,ChipsDesignPage,ChipsDevelopPage,ChipsExamplesPage,ColorPickerPage,DatePickerDesignPage,DatePickerDevelopPage,DatePickerExamplesPage,DateTimePickerDesignPage,DateTimePickerDevelopPage,DateTimePickerExamplesPage,EditorPage,FormControlsPage,FormGroupsPage,FormPage,MultiPickerPage,PickerPage,RadioButtonsPage,SelectPage,TilesPage,TimePickerDesignPage,TimePickerDevelopPage,TimePickerExamplesPage,ValuePage,HomePage,CardDescriptionPage,CardDesignPage,CardDevelopPage,CardExamplesPage,ExpansionPage,HeaderPage,LayoutsPage,ListPage,SidenavPage,StepperPage,TabsDesignPage,TabsDevelopPage,TabsExamplesPage,PatternsNativeFormsPage,PatternsTestPage,PatternsPage,TemplatesPage,February2022Page,May2022Page,FieldInteractionsPage,PipesPage,SecurityPage
->>>>>>> master
 ];
 
 @NgModule({
