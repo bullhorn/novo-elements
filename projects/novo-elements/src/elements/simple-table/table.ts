@@ -1,5 +1,6 @@
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
-import { CdkTable, CDK_TABLE_TEMPLATE } from '@angular/cdk/table';
+import { _VIEW_REPEATER_STRATEGY, _DisposeViewRepeaterStrategy } from '@angular/cdk/collections';
+import { CdkTable, CDK_TABLE_TEMPLATE, _COALESCED_STYLE_SCHEDULER, _CoalescedStyleScheduler } from '@angular/cdk/table';
 import {
   AfterContentInit,
   ChangeDetectionStrategy,
@@ -21,16 +22,13 @@ import { SimpleTableActionColumn, SimpleTableColumn, SimpleTablePaginationOption
 import { NovoActivityTableState } from './state';
 import { ActivityTableDataSource, ActivityTableService } from './table-source';
 
-/** Workaround for https://github.com/angular/angular/issues/17849 */
-export const _NovoTable = CdkTable;
-
 @Component({
   selector: 'novo-simple-table',
   template: CDK_TABLE_TEMPLATE,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NovoTable<T> extends _NovoTable<T> {
+export class NovoTable<T> extends CdkTable<T> {
   // TODO: add explicit constructor
 }
 
@@ -108,8 +106,7 @@ export class NovoActivityTableNoResultsMessage {}
           novoSortFilter
           novoSelection
           [class.empty]="dataSource?.currentlyEmpty && state.userFiltered"
-          [hidden]="dataSource?.totallyEmpty && !state.userFiltered"
-        >
+          [hidden]="dataSource?.totallyEmpty && !state.userFiltered">
           <ng-content></ng-content>
           <ng-container novoSimpleColumnDef="selection">
             <novo-simple-checkbox-header-cell *novoSimpleHeaderCellDef></novo-simple-checkbox-header-cell>
@@ -129,8 +126,7 @@ export class NovoActivityTableNoResultsMessage {}
               [column]="column"
               [novo-simple-cell-config]="column.config"
               [defaultSort]="defaultSort"
-              >{{ column.label }}</novo-simple-header-cell
-            >
+              >{{ column.label }}</novo-simple-header-cell>
             <novo-simple-cell *novoSimpleCellDef="let row" [column]="column" [row]="row"></novo-simple-cell>
           </ng-container>
           <novo-simple-header-row *novoSimpleHeaderRowDef="displayedColumns"></novo-simple-header-row>
@@ -158,7 +154,11 @@ export class NovoActivityTableNoResultsMessage {}
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [NovoActivityTableState],
+  providers: [
+    NovoActivityTableState,
+    { provide: _VIEW_REPEATER_STRATEGY, useClass: _DisposeViewRepeaterStrategy },
+    { provide: _COALESCED_STYLE_SCHEDULER, useClass: _CoalescedStyleScheduler },
+  ],
 })
 export class NovoActivityTable<T> implements AfterContentInit, OnChanges, OnDestroy {
   @HostBinding('class.global-search-hidden')

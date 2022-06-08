@@ -1,7 +1,7 @@
-import { Directive, HostListener, Input, OnDestroy, TemplateRef, ViewContainerRef } from '@angular/core';
+import { Directive, HostListener, Inject, Input, OnDestroy, TemplateRef, ViewContainerRef } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Helpers } from '../../utils/Helpers';
-import { NovoDataTable } from './data-table.component';
+import { NovoDataTableRef, NOVO_DATA_TABLE_REF } from './data-table.token';
 import { DataTableState } from './state/data-table-state.service';
 
 @Directive({
@@ -15,7 +15,11 @@ export class NovoDataTableExpandDirective<T> implements OnDestroy {
 
   private subscription: Subscription;
 
-  constructor(public vcRef: ViewContainerRef, private state: DataTableState<T>, private dataTable: NovoDataTable<T>) {
+  constructor(
+    public vcRef: ViewContainerRef,
+    private state: DataTableState<T>,
+    @Inject(NOVO_DATA_TABLE_REF) private dataTable: NovoDataTableRef,
+  ) {
     this.subscription = this.state.expandSource.subscribe((targetId?: number) => {
       if (this.shouldExpandAllRows(targetId) || this.shouldExpandOneRow(targetId)) {
         if (dataTable.isExpanded(this.row)) {

@@ -1,6 +1,6 @@
 {
   "name": "novo-examples",
-  "version": "6.2.2",
+  "version": "7.2.5-next.0",
   "peerDependencies": {
     "@angular/common": ">=10",
     "@angular/core": ">=10"

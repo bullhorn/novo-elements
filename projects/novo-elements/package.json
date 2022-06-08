@@ -1,6 +1,6 @@
 {
   "name": "novo-elements",
-  "version": "6.2.2",
+  "version": "7.2.5-next.0",
   "sideEffects": true,
   "peerDependencies": {
     "@angular/animations": ">=10",
@@ -14,7 +14,7 @@
     "brace": "^0.11.0",
     "classlist.js": "^1.1.20150312",
     "date-fns": ">=1",
-    "novo-design-tokens": "^0.0.8",
+    "novo-design-tokens": "^0.0.9",
     "post-robot": "^8.0.0",
     "rxjs": ">=6",
     "text-mask-addons": "^3.7.0",

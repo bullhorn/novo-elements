@@ -1,6 +1,6 @@
 // NG2
 import { Component, HostBinding, Input, ViewEncapsulation } from '@angular/core';
-import { BooleanInput } from '../../../../utils';
+import { BooleanInput } from '../../../../utils/decorators';
 import { NovoBaseTextElement } from '../base/base-text.component';
 
 /**

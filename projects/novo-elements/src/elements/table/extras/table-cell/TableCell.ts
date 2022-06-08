@@ -46,14 +46,14 @@ export class TableCell implements OnInit, OnDestroy {
         const componentRef = this.componentUtils.append(this.column.renderer, this.container) as any;
         componentRef.instance.meta = this.column;
         componentRef.instance.data = this.row;
-        componentRef.instance.value = this.form && this.hasEditor ? this.form.value[this.column.name] : this.row[this.column.name];
+        componentRef.instance.value = this.form && this.hasEditor ? this.form.getRawValue()[this.column.name] : this.row[this.column.name];
         // TODO - save ref to this and update in the valueChanges below!!
       } else {
         // TODO - wtf to do here?
         this.value = this.column.renderer(this.row);
       }
     } else {
-      this.value = this.form && this.hasEditor ? this.form.value[this.column.name] : this.row[this.column.name];
+      this.value = this.form && this.hasEditor ? this.form.getRawValue()[this.column.name] : this.row[this.column.name];
     }
 
     if (this.form && this.hasEditor) {

@@ -3,7 +3,6 @@ section: Components
 page: Breadcrumbs
 title: Design
 order: 2
-tag: new
 ---
 
 ## Usage

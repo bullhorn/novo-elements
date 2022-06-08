@@ -56,6 +56,7 @@ novo-file-input {
   .file-input-group {
     cursor: pointer;
     width: 100%;
+    position: relative;
     input[type="file"] {
       opacity: 0;
       position: absolute;

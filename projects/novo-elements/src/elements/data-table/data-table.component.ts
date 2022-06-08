@@ -23,6 +23,7 @@ import { notify } from '../../utils/notifier/notifier.util';
 import { NovoTemplate } from '../common/novo-template/novo-template.directive';
 import { NovoDataTableCellHeader } from './cell-headers/data-table-header-cell.component';
 import { DataTableSource } from './data-table.source';
+import { NOVO_DATA_TABLE_REF } from './data-table.token';
 import {
   IDataTableColumn,
   IDataTableFilter,
@@ -263,7 +264,7 @@ import { DataTableState } from './state/data-table-state.service';
     <ng-content></ng-content>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [DataTableState],
+  providers: [DataTableState, { provide: NOVO_DATA_TABLE_REF, useExisting: NovoDataTable }],
 })
 export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   @HostBinding('class.global-search-hidden') globalSearchHiddenClassToggle: boolean = false;
