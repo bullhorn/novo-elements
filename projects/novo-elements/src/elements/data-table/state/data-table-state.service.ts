@@ -16,6 +16,7 @@ export class DataTableState<T> {
 
   sort: IDataTableSort = undefined;
   filter: IDataTableFilter | IDataTableFilter[] = undefined;
+  where: string = undefined;
   page: number = 0;
   pageSize: number = undefined;
   globalSearch: string = undefined;
@@ -33,7 +34,7 @@ export class DataTableState<T> {
   }
 
   get userFilteredInternal(): boolean {
-    return !!(this.filter || this.sort || this.globalSearch);
+    return !!(this.filter || this.sort || this.globalSearch || this.where);
   }
 
   get selected(): T[] {
@@ -45,6 +46,7 @@ export class DataTableState<T> {
       this.sort = undefined;
       this.globalSearch = undefined;
       this.filter = undefined;
+      this.where = undefined;
     }
     this.page = 0;
     if (!this.retainSelected) {
@@ -58,6 +60,7 @@ export class DataTableState<T> {
         sort: this.sort,
         filter: this.filter,
         globalSearch: this.globalSearch,
+        where: this.where,
       });
     }
   }
@@ -73,6 +76,7 @@ export class DataTableState<T> {
         sort: this.sort,
         filter: this.filter,
         globalSearch: this.globalSearch,
+        where: this.where,
       });
     }
   }
@@ -89,6 +93,23 @@ export class DataTableState<T> {
         sort: this.sort,
         filter: this.filter,
         globalSearch: this.globalSearch,
+        where: this.where,
+      });
+    }
+  }
+
+  public clearQuery(fireUpdate: boolean = true): void {
+    this.where = undefined;
+    this.page = 0;
+    this.checkRetainment('where');
+    this.reset(fireUpdate, true);
+    this.onSortFilterChange();
+    if (fireUpdate) {
+      this.updates.emit({
+        sort: this.sort,
+        filter: this.filter,
+        globalSearch: this.globalSearch,
+        where: this.where,
       });
     }
   }
@@ -104,6 +125,7 @@ export class DataTableState<T> {
         sort: this.sort,
         filter: this.filter,
         globalSearch: this.globalSearch,
+        where: this.where,
       });
     }
   }
@@ -128,11 +150,16 @@ export class DataTableState<T> {
       sort: this.sort,
       filter: this.filter,
       globalSearch: this.globalSearch,
+      where: this.where,
     });
   }
 
   public setInitialSortFilter(preferences): void {
     if (preferences) {
+      if (preferences.where) {
+        this.where = preferences.where;
+      }
+
       if (preferences.sort) {
         this.sort = preferences.sort;
       }

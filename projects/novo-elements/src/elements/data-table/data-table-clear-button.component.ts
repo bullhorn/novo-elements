@@ -21,7 +21,11 @@ import { DataTableState } from './state/data-table-state.service';
         <item *ngIf="state.filter || state.globalSearch" (click)="clearFilter()" data-automation-id="novo-data-table-clear-dropdown-clear-filter">{{
           labels.clearFilter
         }}</item>
-        <item *ngIf="state.sort && (state.filter || state.globalSearch)" (click)="clearAll()" data-automation-id="novo-data-table-clear-dropdown-clear-all">{{
+        <item *ngIf="state.where" (click)="clearSearch()" data-automation-id="novo-data-table-clear-dropdown-clear-search">{{
+          labels.clearSearch
+        }}</item>
+        <item *ngIf="(state.sort && (state.filter || state.globalSearch)) || (state.sort && state.where) || (state.where && (state.filter || state.globalSearch))"
+          (click)="clearAll()" data-automation-id="novo-data-table-clear-dropdown-clear-all">{{
           labels.clearAllNormalCase
         }}</item>
       </list>
@@ -37,6 +41,8 @@ export class NovoDataTableClearButton<T> {
   @Output()
   filterClear: EventEmitter<boolean> = new EventEmitter();
   @Output()
+  queryClear: EventEmitter<boolean> = new EventEmitter();
+  @Output()
   allClear: EventEmitter<boolean> = new EventEmitter();
 
   constructor(public state: DataTableState<T>, private ref: ChangeDetectorRef, public labels: NovoLabelService) {}
@@ -51,6 +57,11 @@ export class NovoDataTableClearButton<T> {
     this.filterClear.emit(true);
   }
 
+  clearSearch(): void {
+    this.state.clearQuery();
+    this.queryClear.emit(true);
+  }
+
   clearSelected(): void {
     this.state.clearSelected();
     this.selectedClear.emit(true);
@@ -62,5 +73,6 @@ export class NovoDataTableClearButton<T> {
     this.selectedClear.emit(true);
     this.sortClear.emit(true);
     this.filterClear.emit(true);
+    this.queryClear.emit(true);
   }
 }

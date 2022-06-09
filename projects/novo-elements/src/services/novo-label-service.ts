@@ -49,6 +49,7 @@ export class NovoLabelService {
   clearAllNormalCase = 'Clear All';
   clearSort = 'Clear Sort';
   clearFilter = 'Clear Filter';
+  clearSearch = 'Clear Search';
   clearSelected = 'Clear Selected';
   today = 'Today';
   now = 'Now';
