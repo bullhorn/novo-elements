@@ -52,7 +52,6 @@ export class NovoDefaultStringConditionDef extends AbstractConditionFieldDef {
   defaultOperator = 'includeAny';
 
   getValue(formGroup: AbstractControl): any[] {
-    console.log('fg values', formGroup.value?.value || []);
     return formGroup.value?.value || [];
   }
 

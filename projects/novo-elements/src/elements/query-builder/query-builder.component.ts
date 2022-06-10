@@ -31,8 +31,4 @@ export class QueryBuilderComponent implements OnInit {
       });
     }
   }
-
-  onSubmit() {
-    console.log('Your form data : ', this.queryForm.value);
-  }
 }

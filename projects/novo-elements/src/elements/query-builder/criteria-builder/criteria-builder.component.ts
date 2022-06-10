@@ -139,7 +139,6 @@ export class CriteriaBuilderComponent implements OnInit, OnDestroy, AfterContent
     defs.forEach((fieldDef) => {
       if (this._fieldDefsByName.has(fieldDef.name)) {
         // throw new Error(`duplicate field name for ${fieldDef.name}`);
-        console.warn(`Duplicate field name for ${fieldDef.name}`);
       }
       this._fieldDefsByName.set(fieldDef.name, fieldDef);
     });

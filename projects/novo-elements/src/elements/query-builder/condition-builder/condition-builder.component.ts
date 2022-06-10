@@ -136,7 +136,6 @@ export class ConditionBuilderComponent<T extends BaseFieldDef> implements OnInit
     const fieldConf = this.getField();
     if (!fieldConf) {
       this.parentForm.get('field').setValue(this.getDefaultField());
-      console.warn(`No field found for field '${fieldConf.name}'. `);
       return;
     }
     const { field, operator } = this.parentForm.value;
@@ -160,13 +159,11 @@ export class ConditionBuilderComponent<T extends BaseFieldDef> implements OnInit
     const fieldDefsByName = this._expressionBuilder.getFieldDefsByName();
     // Check Fields by priority for match Field Definition
     const key = [name, editType?.toUpperCase(), 'DEFAULT'].find((it) => fieldDefsByName.has(it));
-    console.log('looking for def:', name, editType, inputType, dataType, type, key);
     return fieldDefsByName.get(key);
   }
 
   private createFieldTemplates() {
     const definition = this.findDefinitionForField(this.getField());
-    console.log('found def', definition.name);
     this.parentForm.get('operator').setValue(definition.defaultOperator);
     this.parentForm.get('value').setValue(null);
 

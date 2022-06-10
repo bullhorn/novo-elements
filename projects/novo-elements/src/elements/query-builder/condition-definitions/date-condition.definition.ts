@@ -1,3 +1,4 @@
+import { FormGroup } from '@angular/forms';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { AbstractConditionFieldDef } from './abstract-condition.definition';
 
@@ -10,7 +11,7 @@ import { AbstractConditionFieldDef } from './abstract-condition.definition';
   template: `
     <ng-container novoConditionFieldDef="DATE">
       <novo-field *novoConditionOperatorsDef="let formGroup" [formGroup]="formGroup">
-        <novo-select placeholder="Operator..." formControlName="operator">
+        <novo-select placeholder="Operator..." formControlName="operator" (onSelect)="onOperatorSelect(formGroup)">
           <novo-option value="before">Before</novo-option>
           <novo-option value="after">After</novo-option>
           <novo-option value="between">Between</novo-option>
@@ -48,4 +49,8 @@ import { AbstractConditionFieldDef } from './abstract-condition.definition';
 })
 export class NovoDefaultDateConditionDef extends AbstractConditionFieldDef {
   defaultOperator = 'within';
+
+  onOperatorSelect(formGroup: FormGroup): void {
+      formGroup.get('value').setValue(null);
+  }
 }
