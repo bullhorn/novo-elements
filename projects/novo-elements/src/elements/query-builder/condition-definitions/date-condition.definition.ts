@@ -22,13 +22,13 @@ import { AbstractConditionFieldDef } from './abstract-condition.definition';
         <ng-container [ngSwitch]="formGroup.value.operator" [formGroup]="formGroup">
           <novo-field *novoSwitchCases="['before', 'after']">
             <input novoInput dateFormat="iso8601" [picker]="datepicker" formControlName="value" />
-            <novo-picker-toggle novoSuffix icon="calendar">
+            <novo-picker-toggle triggerOnFocus novoSuffix icon="calendar">
               <novo-date-picker #datepicker></novo-date-picker>
             </novo-picker-toggle>
           </novo-field>
           <novo-field *novoSwitchCases="['between']">
             <input novoInput dateRangeFormat="iso8601" [picker]="daterangepicker" formControlName="value" />
-            <novo-picker-toggle novoSuffix icon="calendar">
+            <novo-picker-toggle triggerOnFocus novoSuffix icon="calendar">
               <novo-date-picker #daterangepicker mode="range" numberOfMonths="2"></novo-date-picker>
             </novo-picker-toggle>
           </novo-field>

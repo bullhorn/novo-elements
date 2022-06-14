@@ -16,7 +16,9 @@ import {
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { BooleanInput as BooleanInputUtil }  from 'projects/novo-elements/src/utils';
+import { of, Subscription } from 'rxjs';
+import { merge } from 'rxjs';
 import { NovoButtonElement } from '../../button';
 import { NovoOverlayTemplateComponent } from '../../common/overlay';
 import { NovoFieldElement, NOVO_FORM_FIELD } from '../field';
@@ -52,6 +54,11 @@ export class NovoPickerToggleElement<T = any> implements AfterContentInit, After
 
   /** Screenreader label for the button. */
   @Input('aria-label') ariaLabel: string;
+
+  /** . */
+  @Input()
+  @BooleanInputUtil()
+  triggerOnFocus: boolean = false;
 
   /** Whether the toggle button is disabled. */
   @Input()
@@ -104,6 +111,12 @@ export class NovoPickerToggleElement<T = any> implements AfterContentInit, After
     this.element = this._formField.getConnectedOverlayOrigin() || this._elementRef;
   }
 
+  checkPanel() {
+    if (this.triggerOnFocus && this.element) {
+      this.openPanel();
+    }
+  }
+
   togglePanel(event?: Event) {
     this.cdr.detectChanges();
     if (!this.overlay.panelOpen) {
@@ -129,11 +142,15 @@ export class NovoPickerToggleElement<T = any> implements AfterContentInit, After
   }
 
   private _watchStateChanges() {
-    // const pickerStateChanged = this.picker ? this.picker.stateChanges : observableOf();
-    // const inputStateChanged = this.picker && this.picker.pickerInput ? this.picker.pickerInput.stateChanges : observableOf();
-    // const pickerToggled = this.picker ? merge(this.picker.openedStream, this.picker.closedStream) : observableOf();
-    // this._stateChanges.unsubscribe();
-    // this._stateChanges = merge(pickerStateChanged, inputStateChanged, pickerToggled).subscribe(() => this.cdr.markForCheck());
+    if (this.triggerOnFocus) {
+      const inputStateChanged = this._formField && this._formField._control ? this._formField._control.stateChanges : of();
+      this._stateChanges.unsubscribe();
+      this._stateChanges = merge(inputStateChanged).subscribe(() => {
+        this.overlay.parent = this.element;
+        this.checkPanel();
+        this.cdr.markForCheck();
+      });
+    }
   }
 
   static ngAcceptInputType_disabled: BooleanInput;
