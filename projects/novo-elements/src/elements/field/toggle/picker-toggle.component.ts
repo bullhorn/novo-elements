@@ -16,7 +16,7 @@ import {
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import { BooleanInput as BooleanInputUtil }  from 'projects/novo-elements/src/utils';
+import { BooleanInput as BooleanInputUtil }  from '../../../utils';
 import { of, Subscription } from 'rxjs';
 import { merge } from 'rxjs';
 import { NovoButtonElement } from '../../button';
