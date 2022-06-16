@@ -55,6 +55,11 @@ export class NovoBaseTextElement {
   @BooleanInput()
   nowrap: boolean;
 
+  @HostBinding('class.text-ellipsis')
+  @Input()
+  @BooleanInput()
+  ellipsis: boolean;
+
   @HostBinding('class.text-size-smaller')
   @Input()
   @BooleanInput()

@@ -6,8 +6,7 @@
 }
 
 @mixin base-text-rules() {
-  transition-property: color, opacity;
-  transition: 0.2s ease-out;
+  transition: color 0.2s ease-out, opacity 0.2s ease-out;
   vertical-align: middle;
 
   &.text-nowrap {
