@@ -46,8 +46,11 @@
       .novo-chip-input {
         width: fit-content !important;
       }
-      .novo-field-input {
-        border: none !important;
+      novo-chips {
+        border-bottom: none !important;
+        input {
+          padding-left: 0 !important;
+        }
       }
     }
   }
