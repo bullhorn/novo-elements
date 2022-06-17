@@ -119,6 +119,7 @@ export class NovoPickerToggleElement<T = any> implements AfterContentInit, After
 
   togglePanel(event?: Event) {
     this.cdr.detectChanges();
+    this.overlay.parent = this.element;
     if (!this.overlay.panelOpen) {
       this.openPanel(event);
     } else {
@@ -142,15 +143,6 @@ export class NovoPickerToggleElement<T = any> implements AfterContentInit, After
   }
 
   private _watchStateChanges() {
-    if (this.triggerOnFocus) {
-      const inputStateChanged = this._formField && this._formField._control ? this._formField._control.stateChanges : of();
-      this._stateChanges.unsubscribe();
-      this._stateChanges = merge(inputStateChanged).subscribe(() => {
-        this.overlay.parent = this.element;
-        this.checkPanel();
-        this.cdr.markForCheck();
-      });
-    }
   }
 
   static ngAcceptInputType_disabled: BooleanInput;

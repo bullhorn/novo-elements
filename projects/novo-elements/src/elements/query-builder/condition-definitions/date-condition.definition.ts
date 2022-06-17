@@ -1,6 +1,8 @@
+import { NovoPickerToggleElement } from './../../field/toggle/picker-toggle.component';
 import { FormGroup } from '@angular/forms';
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewChild, ViewEncapsulation } from '@angular/core';
 import { AbstractConditionFieldDef } from './abstract-condition.definition';
+import { NovoOverlayTemplateComponent } from '../../common/overlay/Overlay';
 
 /**
  * Most complicated of the default conditions defs, a date needs to provide a different
@@ -21,15 +23,15 @@ import { AbstractConditionFieldDef } from './abstract-condition.definition';
       <ng-container *novoConditionInputDef="let formGroup">
         <ng-container [ngSwitch]="formGroup.value.operator" [formGroup]="formGroup">
           <novo-field *novoSwitchCases="['before', 'after']">
-            <input novoInput dateFormat="iso8601" [picker]="datepicker" formControlName="value" />
+            <input novoInput (focus)="togglePanel()" dateFormat="iso8601" [picker]="datepicker" formControlName="value" />
             <novo-picker-toggle triggerOnFocus novoSuffix icon="calendar">
-              <novo-date-picker #datepicker></novo-date-picker>
+              <novo-date-picker (onSelect)="togglePanel()" #datepicker></novo-date-picker>
             </novo-picker-toggle>
           </novo-field>
           <novo-field *novoSwitchCases="['between']">
-            <input novoInput dateRangeFormat="iso8601" [picker]="daterangepicker" formControlName="value" />
+            <input novoInput (focus)="togglePanel()" dateRangeFormat="iso8601" [picker]="daterangepicker" formControlName="value" />
             <novo-picker-toggle triggerOnFocus novoSuffix icon="calendar">
-              <novo-date-picker #daterangepicker mode="range" numberOfMonths="2"></novo-date-picker>
+              <novo-date-picker (onSelect)="togglePanel()" #daterangepicker mode="range" numberOfMonths="2"></novo-date-picker>
             </novo-picker-toggle>
           </novo-field>
           <novo-field *novoSwitchCases="['within']">
@@ -48,9 +50,15 @@ import { AbstractConditionFieldDef } from './abstract-condition.definition';
   changeDetection: ChangeDetectionStrategy.Default,
 })
 export class NovoDefaultDateConditionDef extends AbstractConditionFieldDef {
+  @ViewChild(NovoPickerToggleElement)
+  overlay: NovoPickerToggleElement;
   defaultOperator = 'within';
 
   onOperatorSelect(formGroup: FormGroup): void {
       formGroup.get('value').setValue(null);
+  }
+
+  togglePanel(): void {
+    this.overlay.togglePanel();
   }
 }
