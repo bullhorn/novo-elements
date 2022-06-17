@@ -5,19 +5,10 @@
   display: block;
   width: 100%;
 
-  .condition-field {
-    &::ng-deep {
-      .novo-select-display-value {
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      } 
-    }
-  }
   .condition-operator {
     &::ng-deep {
       .novo-select {
-        min-width: 13rem !important;
+        min-width: 13rem;
       }
     }
   }
@@ -26,13 +17,8 @@
       .novo-input-element {
         padding: 0.2rem !important;
       }
-      novo-button[icon="bhi-calendar"] {
-        padding: 0;
-        height: 2rem;
-      }
       novo-field {
         width: fit-content;
-        
       }
       .novo-select-display-value {
         white-space: nowrap;
