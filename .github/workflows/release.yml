@@ -2,12 +2,9 @@ name: Release Novo Elements (new)
 on: 
   workflow_dispatch:
     inputs:
-      skip-bump:
+      dry-run:
         type: boolean
-        description: Skip Publish
-      skip-docs:
-        type: boolean
-        description: Skip Docs
+        description: Dry Run
 
 jobs:
   build_and_release:
@@ -36,5 +33,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.BH_GIT_TOKEN }}
           NPM_AUTH_TOKEN: ${{ secrets.NE_NPM_TOKEN }}
-        run: npx semantic-release
+        run: |
+          npx semantic-release --dry-run ${{ github.event.inputs.skip-bump }}
+        
 
