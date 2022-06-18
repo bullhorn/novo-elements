@@ -34,6 +34,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.BH_GIT_TOKEN }}
           NPM_AUTH_TOKEN: ${{ secrets.NE_NPM_TOKEN }}
         run: |
-          npx semantic-release --dry-run ${{ github.event.inputs.skip-bump }}
+          npx semantic-release --dry-run ${{ github.event.inputs.dry-run }}
         
 
