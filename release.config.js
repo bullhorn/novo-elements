@@ -1,11 +1,15 @@
 module.exports = {
   branches: [
-    '+([0-9])?(.{+([0-9]),x}).x',
-    'master',
-    'next',
-    'next-major',
-    { name: 'beta', prerelease: true },
-    { name: 'alpha', prerelease: true },
+    "+([0-9])?(.{+([0-9]),x}).x",
+    "master",
+    {
+      "name": "next",
+      "prerelease": true
+    },
+    {
+      "name": "beta",
+      "prerelease": true
+    }
   ],
   plugins: [
     '@semantic-release/commit-analyzer',
@@ -19,5 +23,4 @@ module.exports = {
     ],
   ],
   repositoryUrl: 'https://github.com/bullhorn/novo-elements',
-  dryRun: true
 };
