@@ -5994,7 +5994,9 @@ export class February2022Page {
 <p>Bullhorn is continually seeking to update and innovate our products, and leverage the latest features in the frameworks we use. In support of that mission, we are updating our Novo UI and its supporting novo-elements library to Angular 13.  This update  allows us to continue offering a streamlined and consistent experience across Bullhorn’s complete product portfolio.  This update includes both an Angular upgrade, as well as supporting the latest Typescript updates.  You can find more details in the Technical Release Notes section below.</p>
 <h2>Release Timeline</h2>
 <p>Bullhorn has released a Release Candidate v7 of Novo-elements. Bullhorn will update Novo to use Novo-Elements v7 in the 2022.6 release</p>
-<pre><code class="language-sh">npm install novo-elements@7.2.0-next.0
+<pre><code class="language-sh">npm install novo-elements@next
+<span class="hljs-comment"># or</span>
+npm install novo-elements@7.2.0-next.0
 </code></pre>
 <h2>Upgrading to V7</h2>
 <p>First follow the steps to update your angular app to <a href="https://update.angular.io/?v=10.0-13.0">Version 13</a></p>
