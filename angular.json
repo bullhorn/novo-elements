@@ -36,14 +36,6 @@
             "tsConfig": "tsconfig.build.json",
             "project": "projects/novo-examples/ng-package.json"
           }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "projects/novo-examples/src/test.ts",
-            "tsConfig": "projects/novo-examples/tsconfig.spec.json",
-            "karmaConfig": "projects/novo-examples/karma.conf.js"
-          }
         }
       }
     },

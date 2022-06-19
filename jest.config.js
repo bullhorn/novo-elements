@@ -16,4 +16,5 @@ module.exports = {
     url: 'http://localhost',
   },
   testRunner: 'jest-jasmine2',
+  reporters: [ "default", "jest-junit" ]
 };

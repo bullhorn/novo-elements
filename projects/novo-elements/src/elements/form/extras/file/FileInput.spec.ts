@@ -227,15 +227,15 @@ describe('Elements: NovoFileInputElement', () => {
   // });
   //
   describe('Method: writeValue()', () => {
-      it('should change the value', () => {
-        component.writeValue(10);
-        expect(component.model).toBe(10);
-      });
-  
-      it('should empty the file list if a falsey value is programmatically set', () => {
-          component.writeValue(undefined);
-          expect(component.files).toEqual([]);
-      });
+    it('should change the value', () => {
+      component.writeValue(10);
+      expect(component.model).toBe(10);
+    });
+
+    it('should empty the file list if a falsey value is programmatically set', () => {
+      component.writeValue(undefined);
+      expect(component.files).toEqual([]);
+    });
   });
   describe('Method: check(files)', () => {
     beforeEach(() => {
@@ -243,16 +243,16 @@ describe('Elements: NovoFileInputElement', () => {
     });
 
     it('should clear the input value after processing', () => {
-      component.check({target: { files: [], value: 'test.txt'}});
+      component.check({ target: { files: [], value: 'test.txt' } });
       fixture.detectChanges();
       fixture.whenStable().then(() => {
         let input = fixture.debugElement.query(By.css('#file'));
-        let el = input.nativeElement;
+        let el = input?.nativeElement;
 
         expect(el.value).toBe('');
       });
     });
-});
+  });
   //
   // describe('Method: registerOnChange()', () => {
   //     it('should be defined.', () => {
