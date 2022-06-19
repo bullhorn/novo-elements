@@ -23,13 +23,13 @@ jobs:
         run: |
           npm run lint
           npm test
-      - name: Test Report
-        uses: dorny/test-reporter@v1
-        if: success() || failure()    # run this step even if previous step failed
+      - name: Jest Github Action Reporter
+        uses: IgnusG/jest-report-action@v2.3.3
+        if: always() 
         with:
-          name: JEST Tests            # Name of the check run which will be created
-          path: reports/jest-*.xml    # Path to test results
-          reporter: jest-junit        # Format of test results
+          access-token: ${{ secrets.GITHUB_TOKEN }}
+          junit-file: reports/jest-junit.xml
+          run-name: build
       - name: Build
         run: |
           npm run build:ci
