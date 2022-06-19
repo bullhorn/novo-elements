@@ -12,13 +12,8 @@
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "tsConfig": "projects/novo-elements/tsconfig.lib.json",
+            "tsConfig": "tsconfig.build.json",
             "project": "projects/novo-elements/ng-package.json"
-          },
-          "configurations": {
-            "production": {
-              "tsConfig": "projects/novo-elements/tsconfig.lib.prod.json"
-            }
           }
         },
         "test": {
@@ -38,13 +33,8 @@
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "tsConfig": "projects/novo-examples/tsconfig.lib.json",
+            "tsConfig": "tsconfig.build.json",
             "project": "projects/novo-examples/ng-package.json"
-          },
-          "configurations": {
-            "production": {
-              "tsConfig": "projects/novo-examples/tsconfig.lib.prod.json"
-            }
           }
         },
         "test": {
