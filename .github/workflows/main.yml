@@ -5,7 +5,7 @@ on: [pull_request]
 permissions:
   checks: write
   pull-requests: write
-  
+
 jobs:
   build:
     name: Build & Test
@@ -19,7 +19,7 @@ jobs:
       - name: Setup NodeJS
         uses: actions/setup-node@v1
         with:
-          node-version: 14.18.2
+          node-version: 14.19.1
       - name: Install Dependencies
         run: |
           npm install
