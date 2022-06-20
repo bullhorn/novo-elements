@@ -2,6 +2,10 @@ name: CI
 
 on: [pull_request]
 
+permissions:
+  checks: write
+  pull-requests: write
+  
 jobs:
   build:
     name: Build & Test
@@ -23,13 +27,13 @@ jobs:
         run: |
           npm run lint
           npm test
-      - name: Jest Github Action Reporter
-        uses: IgnusG/jest-report-action@v2.3.3
-        if: always() 
+      - name: Publish Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v1
+        id: test-results
+        if: always()
         with:
-          access-token: ${{ secrets.GITHUB_TOKEN }}
-          junit-file: reports/jest-junit.xml
-          run-name: build
+          files: "reports/**/*.xml"
+          
       - name: Build
         run: |
           npm run build:ci
