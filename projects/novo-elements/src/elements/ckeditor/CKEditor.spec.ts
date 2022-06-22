@@ -99,6 +99,7 @@ describe('Elements: NovoCKEditorElement', () => {
       component.minimal = false;
       expect(component.getBaseConfig()).toEqual({
         enterMode: window.CKEDITOR.ENTER_BR,
+        entities: false,
         shiftEnterMode: window.CKEDITOR.ENTER_P,
         disableNativeSpellChecker: false,
         removePlugins: 'liststyle,tabletools,contextmenu',
@@ -149,6 +150,7 @@ describe('Elements: NovoCKEditorElement', () => {
       component.fileBrowserImageUploadUrl = '/foo/bar/baz.cfm';
       expect(component.getBaseConfig()).toEqual({
         enterMode: window.CKEDITOR.ENTER_BR,
+        entities: false,
         shiftEnterMode: window.CKEDITOR.ENTER_P,
         disableNativeSpellChecker: false,
         removePlugins: 'liststyle,tabletools,contextmenu',
@@ -198,6 +200,7 @@ describe('Elements: NovoCKEditorElement', () => {
       component.minimal = true;
       expect(component.getBaseConfig()).toEqual({
         enterMode: window.CKEDITOR.ENTER_BR,
+        entities: false,
         shiftEnterMode: window.CKEDITOR.ENTER_P,
         disableNativeSpellChecker: false,
         removePlugins: 'liststyle,tabletools,contextmenu',
