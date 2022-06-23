@@ -127,7 +127,7 @@ export class ConditionBuilderComponent<T extends BaseFieldDef> implements OnInit
   getField() {
     const { field } = this.parentForm?.value;
     if (!field) return null;
-    const fieldName = field.split('.')[1];
+    const fieldName = field.charAt(0) === '.' ? field.slice(1) : field;
     return this.fieldConfig.find(fieldName);
   }
 
