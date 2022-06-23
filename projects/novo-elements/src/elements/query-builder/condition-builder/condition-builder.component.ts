@@ -1,5 +1,6 @@
 import {
   AfterContentInit,
+  AfterViewInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
@@ -50,7 +51,7 @@ export const defaultEditTypeFn = (field: BaseFieldDef) => {
   providers: [{ provide: NOVO_CONDITION_BUILDER, useExisting: ConditionBuilderComponent }],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ConditionBuilderComponent<T extends BaseFieldDef> implements OnInit, AfterContentInit, OnDestroy {
+export class ConditionBuilderComponent<T extends BaseFieldDef> implements OnInit, AfterContentInit, AfterViewInit, OnDestroy {
   @ViewChild(ConditionOperatorOutlet, { static: true }) _operatorOutlet: ConditionOperatorOutlet;
   @ViewChild(ConditionInputOutlet, { static: true }) _inputOutlet: ConditionInputOutlet;
 
@@ -92,6 +93,12 @@ export class ConditionBuilderComponent<T extends BaseFieldDef> implements OnInit
         );
         this.cdr.markForCheck();
     });
+  }
+
+  ngAfterViewInit() {
+    if (this.parentForm.value?.field !== null) {
+      setTimeout(() => this.onFieldSelect());
+    }
   }
 
   ngOnDestroy() {
@@ -143,9 +150,6 @@ export class ConditionBuilderComponent<T extends BaseFieldDef> implements OnInit
     if (this._lastContext.field !== field) {
       this.createFieldTemplates();
     }
-    if (this._lastContext.operator !== operator) {
-      this.parentForm.get('value').setValue(null);
-    }
 
     this._lastContext = { ...this.parentForm.value };
     this.cdr.markForCheck();
@@ -165,7 +169,6 @@ export class ConditionBuilderComponent<T extends BaseFieldDef> implements OnInit
   private createFieldTemplates() {
     const definition = this.findDefinitionForField(this.getField());
     this.parentForm.get('operator').setValue(definition.defaultOperator);
-    this.parentForm.get('value').setValue(null);
 
     this.createFieldOperators(definition);
     this.createFieldInput(definition);

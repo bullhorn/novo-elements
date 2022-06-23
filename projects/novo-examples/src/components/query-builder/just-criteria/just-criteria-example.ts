@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl } from '@angular/forms';
-import { AbstractConditionFieldDef, NovoLabelService } from 'novo-elements';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { AbstractControl, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { AbstractConditionFieldDef, CriteriaBuilderComponent, NovoLabelService } from 'novo-elements';
 import { ReplaySubject, Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
 import { MockMeta } from './MockMeta';
@@ -74,6 +74,9 @@ export class CustomPickerConditionDef extends AbstractConditionFieldDef implemen
   styleUrls: ['just-criteria-example.css'],
 })
 export class JustCriteriaExample implements OnInit {
+
+  @ViewChild('criteriaBuilder', { static: true }) criteriaBuilder: CriteriaBuilderComponent;
+
   queryForm: AbstractControl;
   config: any = null;
 
@@ -86,12 +89,9 @@ export class JustCriteriaExample implements OnInit {
 
   ngOnInit() {
     this.getFieldConfig().then((fields) => {
+      this.prepopulateForm();
       this.config = { fields };
       this.cdr.detectChanges();
-    });
-
-    this.queryForm = this.formBuilder.group({
-      criteria: this.formBuilder.array([]),
     });
   }
 
@@ -106,6 +106,33 @@ export class JustCriteriaExample implements OnInit {
           return it.fields.filter((f) => f.name.includes(term) || f.label.includes(term));
         },
       }));
+    });
+  }
+
+  prepopulateForm() {
+    const prepopulatedData = [{
+      field: ['Candidate.id', Validators.required],
+      operator: ['equalTo', Validators.required],
+      value: [123, Validators.required],
+    }, {
+      field: ['Candidate.availability', Validators.required],
+      operator: ['includeAny', Validators.required],
+      value: [['test'], Validators.required],
+    }];
+    const andGroups = [];
+    for (let row in prepopulatedData) {
+      andGroups.push(this.criteriaBuilder.newAndGroup(prepopulatedData[row]))
+    }
+    this.setQueryForm(andGroups);
+  }
+
+  resetQueryForm() {
+    this.setQueryForm([]);
+  }
+
+  setQueryForm(criteria?) {
+    this.queryForm = this.formBuilder.group({
+      criteria: this.formBuilder.array(criteria),
     });
   }
 

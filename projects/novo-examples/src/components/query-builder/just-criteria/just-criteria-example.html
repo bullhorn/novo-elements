@@ -1,7 +1,9 @@
 <form [formGroup]="queryForm" (ngSubmit)="onSubmit()">
-  <novo-criteria-builder controlName="criteria" [config]="config" [editTypeFn]="editTypeFn">
+  <novo-criteria-builder controlName="criteria" [config]="config" [editTypeFn]="editTypeFn" #criteriaBuilder>
     <custom-picker-condition-def name="CUSTOM"></custom-picker-condition-def>
   </novo-criteria-builder>
 </form>
+
+<button theme="primary" size="sm" (click)="criteriaBuilder.resetQueryForm()">Clear All</button>
 
 <pre><code>{{queryForm.value | json}}</code></pre>

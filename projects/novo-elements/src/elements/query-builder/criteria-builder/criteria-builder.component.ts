@@ -37,7 +37,6 @@ export class CriteriaBuilderComponent implements OnInit, OnDestroy, AfterContent
 
   ngOnInit() {
     this.parentForm = this.controlContainer.control;
-    setTimeout(() => this.addAndGroup());
   }
   
   ngAfterContentChecked() {
@@ -64,14 +63,14 @@ export class CriteriaBuilderComponent implements OnInit, OnDestroy, AfterContent
     return this.parentForm.get(this.controlName) as FormArray;
   }
 
-  newAndGroup(): FormGroup {
+  newAndGroup(data?: any): FormGroup {
     return this.formBuilder.group({
-      $or: this.formBuilder.array([this.newOrGroup()]),
+      $or: this.formBuilder.array([this.newOrGroup(data)]),
     });
   }
 
-  addAndGroup() {
-    this.andGroups().push(this.newAndGroup());
+  addAndGroup(data?: any) {
+    this.andGroups().push(this.newAndGroup(data));
     this.cdr.markForCheck();
   }
 
@@ -84,8 +83,8 @@ export class CriteriaBuilderComponent implements OnInit, OnDestroy, AfterContent
     return this.andGroups().at(index).get('$or') as FormArray;
   }
 
-  newOrGroup(): FormGroup {
-    return this.formBuilder.group({
+  newOrGroup(data?: any): FormGroup {
+    return this.formBuilder.group(data || {
       field: [null, Validators.required],
       operator: [null, Validators.required],
       value: [null, Validators.required],
@@ -103,6 +102,13 @@ export class CriteriaBuilderComponent implements OnInit, OnDestroy, AfterContent
       this.removeAndGroup(index);
     }
     this.cdr.markForCheck();
+  }
+
+  resetQueryForm() {
+    while (this.parentForm['controls'][this.controlName].length !== 0) {
+      this.parentForm['controls'][this.controlName].removeAt(0)
+    }
+    this.addAndGroup();
   }
 
   canAddGroup() {

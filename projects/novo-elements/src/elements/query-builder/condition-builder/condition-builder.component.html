@@ -15,7 +15,7 @@
           </novo-option>
           <ng-container *ngIf="results$ | async as results; else loading">
             <ng-container *ngIf="results.length">
-              <novo-option *ngFor="let field of results" value="{{ fieldConfig.value }}.{{ field.name }}">
+              <novo-option *ngFor="let field of results" value="{{ fieldConfig.value }}.{{ field.name }}" [attr.data-automation-id]="field.name">
                 {{ field.label || field.name }}
               </novo-option>
             </ng-container>
