@@ -28,11 +28,11 @@ export class NovoDateFormatDirective extends IMaskDirective<any> {
     private _element: ElementRef,
     _renderer: Renderer2,
     _factory: IMaskFactory,
-    @Optional() @Inject(PLATFORM_ID) _platformId: string,
+    // @Optional() @Inject(PLATFORM_ID) _platformId: string,
     @Optional() @Inject(COMPOSITION_BUFFER_MODE) _compositionMode: boolean,
     private labels: NovoLabelService,
   ) {
-    super(_element, _renderer, _factory, _platformId, _compositionMode);
+    super(_element, _renderer, _factory, _compositionMode);
     const dateFormat = this.labels.dateFormat.toUpperCase();
 
     this.unmask = 'typed';

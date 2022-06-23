@@ -53,12 +53,12 @@ export class NovoTimeFormatDirective extends IMaskDirective<any> implements Novo
     private _element: ElementRef,
     _renderer: Renderer2,
     _factory: IMaskFactory,
-    @Optional() @Inject(PLATFORM_ID) _platformId: string,
+    // @Optional() @Inject(PLATFORM_ID) _platformId: string,
     @Optional() @Inject(COMPOSITION_BUFFER_MODE) _compositionMode: boolean,
     private labels: NovoLabelService,
     private cdr: ChangeDetectorRef,
   ) {
-    super(_element, _renderer, _factory, _platformId, _compositionMode);
+    super(_element, _renderer, _factory, _compositionMode);
     this.initFormatOptions();
   }
 
