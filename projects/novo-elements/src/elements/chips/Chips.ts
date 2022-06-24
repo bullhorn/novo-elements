@@ -32,7 +32,7 @@ const CHIPS_VALUE_ACCESSOR = {
       >
         <novo-icon *ngIf="getAvatarType(item)" class="txc-{{ getAvatarType(item) }}" novoChipAvatar>circle</novo-icon>
         {{ item.label }}
-        <novo-icon novoChipRemove>x</novo-icon>
+        <novo-icon novoChipRemove *ngIf="!disablePickerInput">x</novo-icon>
       </novo-chip>
     </div>
     <div class="chip-input-container" *ngIf="!maxlength || (maxlength && items.length < maxlength)">

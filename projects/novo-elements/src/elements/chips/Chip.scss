@@ -93,7 +93,7 @@ $chip-spacing: (
   }
 
   &.novo-chip-disabled {
-    opacity: 0.4;
+    color: var(--text-main);
     pointer-events: none;
     &::after {
       opacity: 0;
