@@ -111,11 +111,11 @@ export class JustCriteriaExample implements OnInit {
 
   prepopulateForm() {
     const prepopulatedData = [{
-      field: ['Candidate.id', Validators.required],
+      field: ['id', Validators.required],
       operator: ['equalTo', Validators.required],
       value: [123, Validators.required],
     }, {
-      field: ['Candidate.availability', Validators.required],
+      field: ['availability', Validators.required],
       operator: ['includeAny', Validators.required],
       value: [['test'], Validators.required],
     }];
@@ -124,10 +124,6 @@ export class JustCriteriaExample implements OnInit {
       andGroups.push(this.criteriaBuilder.newAndGroup(prepopulatedData[row]))
     }
     this.setQueryForm(andGroups);
-  }
-
-  resetQueryForm() {
-    this.setQueryForm([]);
   }
 
   setQueryForm(criteria?) {
