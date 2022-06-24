@@ -1,6 +1,7 @@
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { hasModifierKey } from '@angular/cdk/keycodes';
 import { Directive, ElementRef, EventEmitter, forwardRef, Inject, Input, OnChanges, Output } from '@angular/core';
+import { NgControl } from '@angular/forms';
 import { Key } from '../../utils';
 import { NovoChipsDefaultOptions, NOVO_CHIPS_DEFAULT_OPTIONS } from './ChipDefaults';
 import { NovoChipList } from './ChipList';
@@ -19,8 +20,8 @@ export interface NovoChipInputEvent {
 let nextUniqueId = 0;
 
 /**
- * Directive that adds chip-specific behaviors to an input element inside `<mat-form-field>`.
- * May be placed inside or outside of an `<mat-chip-list>`.
+ * Directive that adds chip-specific behaviors to an input element inside `<novo-form-field>`.
+ * May be placed inside or outside of an `<novo-chip-list>`.
  */
 @Directive({
   selector: 'input[novoChipInput]',
@@ -70,7 +71,7 @@ export class NovoChipInput implements NovoChipTextControl, OnChanges {
   @Input() placeholder: string = '';
 
   /** Unique id for the input. */
-  @Input() id: string = `mat-chip-list-input-${nextUniqueId++}`;
+  @Input() id: string = `novo-chip-list-input-${nextUniqueId++}`;
 
   /** Whether the input is disabled. */
   @Input()
@@ -94,6 +95,7 @@ export class NovoChipInput implements NovoChipTextControl, OnChanges {
     protected _elementRef: ElementRef<HTMLInputElement>,
     @Inject(NOVO_CHIPS_DEFAULT_OPTIONS) private _defaultOptions: NovoChipsDefaultOptions,
     @Inject(forwardRef(() => NovoChipList)) private _chipList: NovoChipList,
+    protected ngControl: NgControl,
   ) {
     this._inputElement = this._elementRef.nativeElement as HTMLInputElement;
     this._chipList.registerInput(this);
@@ -154,6 +156,12 @@ export class NovoChipInput implements NovoChipTextControl, OnChanges {
   /** Focuses the input. */
   focus(options?: FocusOptions): void {
     this._inputElement.focus(options);
+  }
+
+  /** Focuses the input. */
+  clearValue(): void {
+    this._inputElement.value = '';
+    this.ngControl?.control.setValue('');
   }
 
   /** Checks whether a keycode is one of the configured separators. */
