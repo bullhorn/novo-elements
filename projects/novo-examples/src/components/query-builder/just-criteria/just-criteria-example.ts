@@ -111,13 +111,13 @@ export class JustCriteriaExample implements OnInit {
 
   prepopulateForm() {
     const prepopulatedData = [{
-      field: ['id', Validators.required],
-      operator: ['equalTo', Validators.required],
-      value: [123, Validators.required],
+      field: ['Candidate.customDate1', Validators.required],
+      operator: ['between', Validators.required],
+      value: [{ startDate: 1655697600000, endDate: 1656388799999 }, Validators.required],
     }, {
-      field: ['availability', Validators.required],
-      operator: ['includeAny', Validators.required],
-      value: [['test'], Validators.required],
+      field: ['Candidate.status', Validators.required],
+      operator: ['includeAll', Validators.required],
+      value: [['Active', 'Placed'], Validators.required],
     }];
     const andGroups = [];
     for (let row in prepopulatedData) {
