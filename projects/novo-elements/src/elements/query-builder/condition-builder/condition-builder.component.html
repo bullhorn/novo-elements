@@ -1,5 +1,5 @@
 <form [formGroup]="parentForm">
-  <novo-grid gap="1rem" columns="16rem 13rem 1fr" [align]="'end'">
+  <novo-grid gap="1rem" [columns]="isFirst ? '20rem 13rem 1fr' : '16rem 13rem 1fr'" align="end">
     <novo-field class="condition-field">
       <novo-select
         placeholder="Choose a field..."
@@ -8,14 +8,15 @@
         overlayWidth="24rem"
         overlayHeight="20rem"
         [style.minWidth.px]="160"
-        [style.maxWidth.px]="160">
+        [style.maxWidth.px]="200">
         <novo-optgroup class="filter-search-results">
           <novo-option>
             <novo-select-search [formControl]="searchTerm" [clearSearchInput]="false"></novo-select-search>
           </novo-option>
           <ng-container *ngIf="results$ | async as results; else loading">
             <ng-container *ngIf="results.length">
-              <novo-option *ngFor="let field of results" value="{{ fieldConfig.value }}.{{ field.name }}" [attr.data-automation-id]="field.name">
+              <novo-option *ngFor="let field of results" value="{{ field.name }}"
+                [attr.data-automation-id]="field.name">
                 {{ field.label || field.name }}
               </novo-option>
             </ng-container>

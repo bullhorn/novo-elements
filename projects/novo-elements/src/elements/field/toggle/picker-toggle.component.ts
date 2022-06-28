@@ -1,4 +1,4 @@
-import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import {
   AfterContentInit,
   AfterViewInit,
@@ -16,9 +16,9 @@ import {
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import { BooleanInput as BooleanInputUtil }  from '../../../utils';
-import { of, Subscription } from 'rxjs';
-import { merge } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { BooleanInput } from '../../../utils';
 import { NovoButtonElement } from '../../button';
 import { NovoOverlayTemplateComponent } from '../../common/overlay';
 import { NovoFieldElement, NOVO_FORM_FIELD } from '../field';
@@ -43,6 +43,7 @@ import { NovoFieldElement, NOVO_FORM_FIELD } from '../field';
 })
 export class NovoPickerToggleElement<T = any> implements AfterContentInit, AfterViewInit, OnChanges, OnDestroy {
   private _stateChanges = Subscription.EMPTY;
+  private _onDestroy = new Subject<void>();
 
   /** Datepicker instance that the button will toggle. */
   @Input('for') picker: T;
@@ -57,7 +58,7 @@ export class NovoPickerToggleElement<T = any> implements AfterContentInit, After
 
   /** . */
   @Input()
-  @BooleanInputUtil()
+  @BooleanInput()
   triggerOnFocus: boolean = false;
 
   /** Whether the toggle button is disabled. */
@@ -101,6 +102,8 @@ export class NovoPickerToggleElement<T = any> implements AfterContentInit, After
 
   ngOnDestroy() {
     this._stateChanges.unsubscribe();
+    this._onDestroy.next();
+    this._onDestroy.complete();
   }
 
   ngAfterContentInit() {
@@ -112,7 +115,8 @@ export class NovoPickerToggleElement<T = any> implements AfterContentInit, After
   }
 
   checkPanel() {
-    if (this.triggerOnFocus && this.element) {
+    console.log('checkPanel', this.triggerOnFocus, this._formField._control.focused);
+    if (this.triggerOnFocus && this._formField._control.focused) {
       this.openPanel();
     }
   }
@@ -130,6 +134,7 @@ export class NovoPickerToggleElement<T = any> implements AfterContentInit, After
   /** BEGIN: Convenient Panel Methods. */
   openPanel(event?: Event): void {
     if (!this.overlay.panelOpen) {
+      this.overlay.parent = this.element;
       this.overlay.openPanel();
     }
   }
@@ -143,7 +148,9 @@ export class NovoPickerToggleElement<T = any> implements AfterContentInit, After
   }
 
   private _watchStateChanges() {
+    console.log('this.control', this._formField, this._formField?._control);
+    this._formField._control?.stateChanges.pipe(takeUntil(this._onDestroy)).subscribe(() => {
+      this.checkPanel();
+    });
   }
-
-  static ngAcceptInputType_disabled: BooleanInput;
 }

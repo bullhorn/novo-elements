@@ -9,6 +9,12 @@
   transition: color 0.2s ease-out, opacity 0.2s ease-out;
   vertical-align: middle;
 
+  &.text-capitalize {
+    text-transform: capitalize;
+  }
+  &.text-uppercase {
+    text-transform: uppercase;
+  }
   &.text-nowrap {
     white-space: nowrap;
   }

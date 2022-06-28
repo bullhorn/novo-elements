@@ -8,6 +8,7 @@ export * from './directives/flex.directive';
 export * from './directives/space.directive';
 export * from './directives/switch-cases.directive';
 export * from './directives/theme.directive';
+export * from './directives/visible.directive';
 export * from './error/error-options';
 export * from './mixins';
 export * from './novo-template';

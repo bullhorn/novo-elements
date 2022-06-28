@@ -14,6 +14,8 @@ export interface BigDecimalFormatOptions extends Intl.NumberFormatOptions {
 
 @Injectable()
 export class NovoLabelService {
+  and = 'and';
+  not = 'not';
   filters = 'Filter';
   clear = 'Clear';
   sort = 'Sort';

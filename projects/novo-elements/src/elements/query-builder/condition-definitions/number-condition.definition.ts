@@ -17,7 +17,7 @@ import { AbstractConditionFieldDef } from './abstract-condition.definition';
           <!-- <novo-option value="equalTo">Between</novo-option> -->
         </novo-select>
       </novo-field>
-      <novo-field *novoConditionInputDef="let formGroup" [style.width.px]="100" [formGroup]="formGroup">
+      <novo-field *novoConditionInputDef="let formGroup" [formGroup]="formGroup">
         <input novoInput type="number" formControlName="value" />
       </novo-field>
     </ng-container>

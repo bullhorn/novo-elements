@@ -1,42 +1,12 @@
-<form [formGroup]="parentForm">
+<form [formGroup]="innerForm">
   <novo-stack [formArrayName]="controlName" class="criteria-builder-inner">
-    <ng-container *ngFor="let andGroup of andGroups().controls; let andIndex = index; let isFirst = first;">
-      <div *ngIf="!isFirst" class="and-connector" aria-hidden="false">
-        <div class="and-connector-line"></div>
-        <novo-caption class="and-connector-text">and</novo-caption>
-      </div>
-      <ng-container [formGroupName]="andIndex">
-        <novo-stack
-          class="condition-group"
-          [class.with-conditions]="orGroups(andIndex).controls.length > 1"
-          [class.with-one-condition]="orGroups(andIndex).controls.length == 1"
-          formArrayName="$or">
-          <ng-container
-            *ngFor="
-              let orGroup of orGroups(andIndex).controls;
-              let orIndex = index;
-              let isFirstOr = first;
-              let isLastOr = last;
-            ">
-            <novo-flex class="condition-row" [class.or-block]="orGroups(andIndex).controls.length > 1 && !isLastOr">
-              <div *ngIf="!isFirstOr" class="or-connector" aria-hidden="false">
-                <!-- <div class="or-connector-line"></div> -->
-                <novo-text class="or-connector-text" color="ocean" weight="bold" padding="sm" mx="lg">OR</novo-text>
-              </div>
-              <novo-condition-builder [formGroupName]="orIndex" [config]="config" [editTypeFn]="editTypeFn">
-              </novo-condition-builder>
-              <button *ngIf="isLastOr && orEnabled" theme="secondary" size="sm" class="and-or-button"
-                (click)="addOrGroup(andIndex)">Or</button>
-              <novo-button theme="icon" icon="delete-o" color="negative" (click)="removeOrGroup(andIndex, orIndex)">
-              </novo-button>
-            </novo-flex>
-          </ng-container>
-        </novo-stack>
-      </ng-container>
+    <ng-container
+      *ngFor="let andGroup of root.controls; let andIndex = index; let isFirst = first;let isLastAnd = last;">
+      <novo-label *ngIf="!isFirst" color="positive" size="xs" uppercase padding="sm">{{qbs.getConjunctionLabel('and')}}
+      </novo-label>
+      <novo-condition-group [formGroupName]="andIndex"></novo-condition-group>
     </ng-container>
   </novo-stack>
-  <button class="and-or-button" theme="secondary" size="sm" (click)="addAndGroup()">{{ addCriteriaLabel }}</button>
-
 </form>
 <novo-id-condition-def name="ID"></novo-id-condition-def>
 <novo-date-condition-def name="TIMESTAMP"></novo-date-condition-def>

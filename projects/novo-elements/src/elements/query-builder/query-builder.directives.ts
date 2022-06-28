@@ -1,5 +1,5 @@
-import { ContentChild, Directive, Inject, Input, Optional, TemplateRef } from '@angular/core';
-import { NOVO_CRITERIA_BUILDER } from './query-builder.tokens';
+import { ContentChild, Directive, Input, TemplateRef } from '@angular/core';
+import { QueryBuilderService } from './query-builder.service';
 
 /** Base interface for a condidation template directives. */
 export interface ConditionDef {
@@ -65,12 +65,6 @@ export class BaseConditionFieldDef {
     this._fieldCssClassName = [`novo-filter-field-${this.cssClassFriendlyName}`];
   }
 
-  /**
-   * This has been extracted to a util because of TS 4 and VE.
-   * View Engine doesn't support property rename inheritance.
-   * TS 4.0 doesn't allow properties to override accessors or vice-versa.
-   * @docs-private
-   */
   protected _setNameInput(value: string) {
     // If the directive is set without a name (updated programmatically), then this setter will
     // trigger with an empty string and should not overwrite the programmatically set value.
@@ -86,13 +80,13 @@ export class BaseConditionFieldDef {
   selector: '[novoConditionFieldDef]',
 })
 export class NovoConditionFieldDef extends BaseConditionFieldDef {
-  constructor(@Inject(NOVO_CRITERIA_BUILDER) @Optional() public criteriaBuilder?: any) {
+  constructor(private qbs: QueryBuilderService) {
     super();
   }
   register() {
-    this.criteriaBuilder.addFieldDef(this);
+    this.qbs.registerFieldDef(this);
   }
   unregister() {
-    this.criteriaBuilder.removeFieldDef(this);
+    this.qbs.unregisterFieldDef(this);
   }
 }

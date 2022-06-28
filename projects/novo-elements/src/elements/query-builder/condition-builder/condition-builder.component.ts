@@ -6,20 +6,18 @@ import {
   Component,
   Directive,
   ElementRef,
-  Inject,
   Input,
   OnDestroy,
   OnInit,
-  Optional,
   ViewChild,
   ViewContainerRef,
 } from '@angular/core';
 import { AbstractControl, ControlContainer, FormControl } from '@angular/forms';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
-import type { CriteriaBuilderComponent } from '../criteria-builder/criteria-builder.component';
 import { BaseConditionFieldDef } from '../query-builder.directives';
-import { NOVO_CONDITION_BUILDER, NOVO_CRITERIA_BUILDER } from '../query-builder.tokens';
+import { QueryBuilderService } from '../query-builder.service';
+import { NOVO_CONDITION_BUILDER } from '../query-builder.tokens';
 import { BaseFieldDef, FieldConfig, QueryFilterOutlet } from '../query-builder.types';
 
 /**
@@ -40,10 +38,6 @@ export class ConditionOperatorOutlet implements QueryFilterOutlet {
   constructor(public viewContainer: ViewContainerRef, public elementRef: ElementRef) {}
 }
 
-export const defaultEditTypeFn = (field: BaseFieldDef) => {
-  return field.inputType || field.dataType || field.type;
-};
-
 @Component({
   selector: 'novo-condition-builder',
   templateUrl: './condition-builder.component.html',
@@ -51,16 +45,15 @@ export const defaultEditTypeFn = (field: BaseFieldDef) => {
   providers: [{ provide: NOVO_CONDITION_BUILDER, useExisting: ConditionBuilderComponent }],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ConditionBuilderComponent<T extends BaseFieldDef> implements OnInit, AfterContentInit, AfterViewInit, OnDestroy {
+export class ConditionBuilderComponent implements OnInit, AfterContentInit, AfterViewInit, OnDestroy {
   @ViewChild(ConditionOperatorOutlet, { static: true }) _operatorOutlet: ConditionOperatorOutlet;
   @ViewChild(ConditionInputOutlet, { static: true }) _inputOutlet: ConditionInputOutlet;
 
   @Input() label: any;
-  @Input() config: { fields: FieldConfig<T>[] } = { fields: [] };
-  @Input() editTypeFn: (field: BaseFieldDef) => string;
+  @Input() isFirst: boolean;
 
   public parentForm: AbstractControl;
-  public fieldConfig: FieldConfig<T>;
+  public fieldConfig: FieldConfig<BaseFieldDef>;
   public searches!: Subscription;
   public results$: Promise<any[]>;
   public searchTerm: FormControl = new FormControl();
@@ -70,34 +63,32 @@ export class ConditionBuilderComponent<T extends BaseFieldDef> implements OnInit
   /** Subject that emits when the component has been destroyed. */
   private readonly _onDestroy = new Subject<void>();
 
-  constructor(
-    private controlContainer: ControlContainer,
-    private cdr: ChangeDetectorRef,
-    @Optional() @Inject(NOVO_CRITERIA_BUILDER) @Optional() public _expressionBuilder?: CriteriaBuilderComponent,
-  ) {}
+  constructor(private controlContainer: ControlContainer, private cdr: ChangeDetectorRef, private qbs: QueryBuilderService) {}
 
   ngOnInit() {
-    this.editTypeFn = this.editTypeFn ?? defaultEditTypeFn;
     this.parentForm = this.controlContainer.control;
+    this.parentForm.valueChanges.subscribe((value) => {
+      Promise.resolve().then(() => this.onFieldSelect());
+    });
   }
 
   ngAfterContentInit() {
-    const { fields = [] } = this.config || {};
+    const { fields = [] } = this.qbs.config || {};
     fields.length && this.changeFieldOptions(fields[0]);
     this.searches = this.searchTerm.valueChanges.pipe(debounceTime(300), distinctUntilChanged()).subscribe((term) => {
-      this.parentForm.get('field').setValue(null);
-        this.results$ = Promise.resolve(
-          this.fieldConfig.options.filter(
-            (f) => f.name.toLowerCase().includes(term.toLowerCase()) || f.label?.toLowerCase().includes(term.toLowerCase()),
-          ),
-        );
-        this.cdr.markForCheck();
+      // this.parentForm.get('field').setValue(null);
+      this.results$ = Promise.resolve(
+        this.fieldConfig.options.filter(
+          (f) => f.name.toLowerCase().includes(term.toLowerCase()) || f.label?.toLowerCase().includes(term.toLowerCase()),
+        ),
+      );
+      this.cdr.markForCheck();
     });
   }
 
   ngAfterViewInit() {
     if (this.parentForm.value?.field !== null) {
-      setTimeout(() => this.onFieldSelect());
+      Promise.resolve().then(() => this.onFieldSelect());
     }
   }
 
@@ -117,7 +108,7 @@ export class ConditionBuilderComponent<T extends BaseFieldDef> implements OnInit
    * Updates the Conditions "Field" Options to Change base on new Scope
    * @param fieldConfig
    */
-  changeFieldOptions(fieldConfig: FieldConfig<T>) {
+  changeFieldOptions(fieldConfig: FieldConfig<BaseFieldDef>) {
     // this.fields = entity.filter(term);
     this.fieldConfig = fieldConfig;
     this.searchTerm.setValue('');
@@ -127,7 +118,7 @@ export class ConditionBuilderComponent<T extends BaseFieldDef> implements OnInit
   getField() {
     const { field } = this.parentForm?.value;
     if (!field) return null;
-    const fieldName = field.charAt(0) === '.' ? field.slice(1) : field;
+    const fieldName = field.includes('.') ? field.split('.')[1] : field;
     return this.fieldConfig.find(fieldName);
   }
 
@@ -157,10 +148,10 @@ export class ConditionBuilderComponent<T extends BaseFieldDef> implements OnInit
 
   private findDefinitionForField(field) {
     if (!field) return;
-    const editType = this.editTypeFn(field);
+    const editType = this.qbs.editTypeFn(field);
     // Don't look at dataSpecialization it is no good, this misses currency, and percent
     const { name, inputType, dataType, type } = field;
-    const fieldDefsByName = this._expressionBuilder.getFieldDefsByName();
+    const fieldDefsByName = this.qbs.getFieldDefsByName();
     // Check Fields by priority for match Field Definition
     const key = [name, editType?.toUpperCase(), 'DEFAULT'].find((it) => fieldDefsByName.has(it));
     return fieldDefsByName.get(key);

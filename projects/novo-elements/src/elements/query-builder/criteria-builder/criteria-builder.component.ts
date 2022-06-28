@@ -1,10 +1,29 @@
-import { AfterContentChecked, ChangeDetectionStrategy, Component, ContentChildren, forwardRef, Input, OnDestroy, OnInit, QueryList, ChangeDetectorRef } from '@angular/core';
-import { AbstractControl, ControlContainer, FormArray, FormBuilder, FormGroup, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
-import { Subject } from 'rxjs';
-import { BaseConditionFieldDef, NovoConditionFieldDef } from '../query-builder.directives';
+import {
+  AfterContentChecked,
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  ContentChildren,
+  forwardRef,
+  Input,
+  OnDestroy,
+  OnInit,
+  QueryList,
+} from '@angular/core';
+import { ControlContainer, FormArray, FormBuilder, FormGroup, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
+import { interval, Subject } from 'rxjs';
+import { debounce, takeUntil } from 'rxjs/operators';
+import { NovoConditionFieldDef } from '../query-builder.directives';
+import { QueryBuilderService } from '../query-builder.service';
 import { NOVO_CRITERIA_BUILDER } from '../query-builder.tokens';
-import { BaseFieldDef } from '../query-builder.types';
+import { BaseFieldDef, Condition, ConditionGroup, Conjunction } from '../query-builder.types';
 
+const EMPTY_CONDITION: Condition = {
+  field: null,
+  operator: null,
+  value: null,
+};
 @Component({
   selector: 'novo-criteria-builder',
   templateUrl: './criteria-builder.component.html',
@@ -13,140 +32,138 @@ import { BaseFieldDef } from '../query-builder.types';
   providers: [
     { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => CriteriaBuilderComponent), multi: true },
     { provide: NOVO_CRITERIA_BUILDER, useExisting: CriteriaBuilderComponent },
+    { provide: QueryBuilderService, useClass: QueryBuilderService },
   ],
   host: {
     class: 'novo-criteria-builder',
   },
 })
-export class CriteriaBuilderComponent implements OnInit, OnDestroy, AfterContentChecked {
-  public parentForm: AbstractControl;
+export class CriteriaBuilderComponent implements OnInit, OnDestroy, AfterContentChecked, AfterViewInit {
   @Input() config: any;
   @Input() controlName: string;
-  @Input() orEnabled = false;
-  @Input() addCriteriaLabel = 'Add Criteria';
+  @Input() allowedGroupings = [Conjunction.AND, Conjunction.OR, Conjunction.NOT];
   @Input() editTypeFn: (field: BaseFieldDef) => string;
 
   @ContentChildren(NovoConditionFieldDef, { descendants: true }) _contentFieldDefs: QueryList<NovoConditionFieldDef>;
 
-  private _customFieldDefs = new Set<BaseConditionFieldDef>();
-  private _fieldDefsByName = new Map<string, BaseConditionFieldDef>();
+  public parentForm: FormGroup;
+  public innerForm: FormGroup;
   /** Subject that emits when the component has been destroyed. */
   private readonly _onDestroy = new Subject<void>();
 
-  constructor(private controlContainer: ControlContainer, private formBuilder: FormBuilder, private cdr: ChangeDetectorRef) {}
+  constructor(
+    private controlContainer: ControlContainer,
+    private formBuilder: FormBuilder,
+    private cdr: ChangeDetectorRef,
+    public qbs: QueryBuilderService,
+  ) {}
 
   ngOnInit() {
-    this.parentForm = this.controlContainer.control;
+    this.parentForm = this.controlContainer.control as FormGroup;
+    this.innerForm = this.formBuilder.group({
+      criteria: this.formBuilder.array([]),
+    });
+
+    this.parentForm.valueChanges.pipe(takeUntil(this._onDestroy)).subscribe((value) => {
+      Promise.resolve().then(() => {
+        this.setInitalValue(value[this.controlName]);
+        this.cdr.markForCheck();
+      });
+    });
+    this.innerForm.valueChanges
+      .pipe(
+        debounce(() => interval(10)),
+        takeUntil(this._onDestroy),
+      )
+      .subscribe((value) => {
+        const result = value.criteria.filter((it, i) => {
+          const key = Object.keys(it)[0];
+          if (it[key].length === 0) {
+            this.removeConditionGroupAt(i);
+          }
+          return it[key].length > 0;
+        });
+
+        Promise.resolve().then(() => {
+          this.parentForm.get(this.controlName).setValue(result, { emitEvent: false });
+          this.cdr.markForCheck();
+        });
+      });
   }
-  
-  ngAfterContentChecked() {
-    this._cacheFieldDefs();
+
+  ngAfterContentChecked(): void {
+    this._configureQueryBuilderService();
+    this.cdr.detectChanges();
+  }
+
+  ngAfterViewInit(): void {
+    this._registerFieldDefs();
   }
 
   ngOnDestroy() {
-    // Clear all outlets and Maps
-    [this._customFieldDefs, this._fieldDefsByName].forEach((def) => {
-      def.clear();
-    });
     this._onDestroy.next();
     this._onDestroy.complete();
   }
 
-  handleAddOrFilter(evt: any) {
+  private isConditionGroup(group: unknown) {
+    return Object.keys(group).every((key) => ['$and', '$or', '$not'].includes(key));
   }
 
-  handleAddAndFilter(evt: any) {
-    this.addAndGroup();
+  private setInitalValue(value: ConditionGroup[] | Condition[]) {
+    if (value.length && this.isConditionGroup(value[0])) {
+      value.forEach((it) => this.addConditionGroup(it));
+    } else {
+      this.addConditionGroup({ $and: value });
+    }
   }
 
-  andGroups(): FormArray {
-    return this.parentForm.get(this.controlName) as FormArray;
+  get root(): FormArray {
+    return this.innerForm.get('criteria') as FormArray;
   }
 
-  newAndGroup(data?: any): FormGroup {
+  addConditionGroup(data: any = { $and: [EMPTY_CONDITION] }) {
+    this.root.push(this.newConditionGroup(data));
+    this.cdr.markForCheck();
+  }
+
+  newConditionGroup(data: ConditionGroup): FormGroup {
+    const controls = Object.entries(data).reduce((obj, [key, val]) => {
+      return {
+        ...obj,
+        [key]: this.formBuilder.array(val.map((it) => this.newCondition(it))),
+      };
+    }, {});
+    return this.formBuilder.group(controls);
+  }
+
+  newCondition({ field, operator, value }: Condition = EMPTY_CONDITION): FormGroup {
     return this.formBuilder.group({
-      $or: this.formBuilder.array([this.newOrGroup(data)]),
+      field: [field, Validators.required],
+      operator: [operator, Validators.required],
+      value: [value, Validators.required],
     });
   }
 
-  addAndGroup(data?: any) {
-    this.andGroups().push(this.newAndGroup(data));
-    this.cdr.markForCheck();
+  removeConditionGroupAt(index: number) {
+    this.root.removeAt(index, { emitEvent: false });
   }
 
-  removeAndGroup(index: number) {
-    this.andGroups().removeAt(index);
-    this.cdr.markForCheck();
-  }
-
-  orGroups(index: number): FormArray {
-    return this.andGroups().at(index).get('$or') as FormArray;
-  }
-
-  newOrGroup(data?: any): FormGroup {
-    return this.formBuilder.group(data || {
-      field: [null, Validators.required],
-      operator: [null, Validators.required],
-      value: [null, Validators.required],
-    });
-  }
-
-  addOrGroup(index: number) {
-    this.orGroups(index).push(this.newOrGroup());
-    this.cdr.markForCheck();
-  }
-
-  removeOrGroup(index: number, orIndex: number) {
-    this.orGroups(index).removeAt(orIndex);
-    if (!this.orGroups(index).controls.length) {
-      this.removeAndGroup(index);
+  clearAllConditions() {
+    while (this.root.length) {
+      this.root.removeAt(0);
     }
-    this.cdr.markForCheck();
   }
 
-  resetQueryForm() {
-    while (this.parentForm['controls'][this.controlName].length !== 0) {
-      this.parentForm['controls'][this.controlName].removeAt(0)
-    }
-    this.addAndGroup();
+  private _configureQueryBuilderService() {
+    this.qbs.config = this.config;
+    this.qbs.editTypeFn = this.editTypeFn;
+    this.qbs.allowedGroupings = this.allowedGroupings as Conjunction[];
   }
 
-  canAddGroup() {
-    if (this.andGroups().controls.length < 1) return true;
-    const len = this.andGroups().controls.length - 1;
-    const last = this.orGroups(len).controls.length - 1;
-    const { field, value } = this.orGroups(len).at(last).value;
-    return !!field && !!value;
-  }
-
-  /** Adds a field definition that was not included as part of the content children. */
-  addFieldDef(fieldDef: BaseConditionFieldDef) {
-    this._customFieldDefs.add(fieldDef);
-  }
-
-  /** Removes a field definition that was not included as part of the content children. */
-  removeFieldDef(fieldDef: BaseConditionFieldDef) {
-    this._customFieldDefs.delete(fieldDef);
-  }
-
-  getFieldDefsByName() {
-    return this._fieldDefsByName;
-  }
-
-  private _cacheFieldDefs() {
-    this._fieldDefsByName.clear();
-
-    const defs = [
-      // Dynamically Added Definitions
-      ...Array.from(this._customFieldDefs),
-      ...Array.from(this._contentFieldDefs),
-    ];
-
+  private _registerFieldDefs() {
+    const defs = [...Array.from(this._contentFieldDefs)];
     defs.forEach((fieldDef) => {
-      if (this._fieldDefsByName.has(fieldDef.name)) {
-        // throw new Error(`duplicate field name for ${fieldDef.name}`);
-      }
-      this._fieldDefsByName.set(fieldDef.name, fieldDef);
+      this.qbs.registerFieldDef(fieldDef);
     });
   }
 }

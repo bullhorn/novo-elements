@@ -5,6 +5,12 @@
   display: block;
   width: 100%;
 
+  .condition-field {
+    grid-template-columns: minmax(fit-content, 1fr);
+    width: 100%;
+    width: -webkit-fill-available;
+  }
+
   .condition-operator {
     &::ng-deep {
       .novo-select {
@@ -14,8 +20,13 @@
   }
   .condition-input {
     &::ng-deep {
-      .novo-input-element {
-        padding: 0.2rem !important;
+      // Full Width
+      novo-field.novo-field-layout-vertical {
+        grid-template-columns: minmax(fit-content, 1fr);
+        width: -webkit-fill-available;
+        .novo-input-element {
+          width: 100%;
+        }
       }
       novo-field {
         width: fit-content;
@@ -24,13 +35,10 @@
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-      } 
+      }
       .novo-field-infix {
         white-space: nowrap;
         overflow: hidden;
-      }
-      .novo-chip-input {
-        width: fit-content !important;
       }
       novo-chips {
         border-bottom: none !important;

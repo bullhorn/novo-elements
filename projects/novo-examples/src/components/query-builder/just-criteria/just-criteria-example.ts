@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, Validators } from '@angular/forms';
-import { AbstractConditionFieldDef, CriteriaBuilderComponent, NovoLabelService } from 'novo-elements';
+import { AbstractControl, FormBuilder, FormControl } from '@angular/forms';
+import { AbstractConditionFieldDef, Conjunction, CriteriaBuilderComponent, NovoLabelService } from 'novo-elements';
 import { ReplaySubject, Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
 import { MockMeta } from './MockMeta';
@@ -74,11 +74,14 @@ export class CustomPickerConditionDef extends AbstractConditionFieldDef implemen
   styleUrls: ['just-criteria-example.css'],
 })
 export class JustCriteriaExample implements OnInit {
-
   @ViewChild('criteriaBuilder', { static: true }) criteriaBuilder: CriteriaBuilderComponent;
 
   queryForm: AbstractControl;
   config: any = null;
+
+  and = [Conjunction.AND];
+  andOr = [Conjunction.AND, Conjunction.OR];
+  andOrNot = [Conjunction.AND, Conjunction.OR, Conjunction.NOT];
 
   editTypeFn = (field: any) => {
     if (field.optionsType === 'Brewery') return 'custom';
@@ -88,6 +91,7 @@ export class JustCriteriaExample implements OnInit {
   constructor(private formBuilder: FormBuilder, private cdr: ChangeDetectorRef) {}
 
   ngOnInit() {
+    this.queryForm = this.formBuilder.group({ criteria: [] });
     this.getFieldConfig().then((fields) => {
       this.prepopulateForm();
       this.config = { fields };
@@ -110,30 +114,31 @@ export class JustCriteriaExample implements OnInit {
   }
 
   prepopulateForm() {
-    const prepopulatedData = [{
-      field: ['Candidate.id', Validators.required],
-      operator: ['equalTo', Validators.required],
-      value: [123, Validators.required],
-    }, {
-      field: ['Candidate.availability', Validators.required],
-      operator: ['includeAny', Validators.required],
-      value: [['test'], Validators.required],
-    }];
-    const andGroups = [];
-    for (let row in prepopulatedData) {
-      andGroups.push(this.criteriaBuilder.newAndGroup(prepopulatedData[row]))
-    }
-    this.setQueryForm(andGroups);
+    const prepopulatedData = [
+      {
+        scope: 'Candidate',
+        field: 'id',
+        operator: 'equalTo',
+        value: 123,
+      },
+      {
+        scope: 'Candidate',
+        field: 'availability',
+        operator: 'includeAny',
+        value: ['test'],
+      },
+      // where=category IN (1,2,3)
+      // where=category.id:[1 2 3]
+    ];
+    this.setQueryForm(prepopulatedData);
   }
 
   resetQueryForm() {
-    this.setQueryForm([]);
+    this.setQueryForm({ criteria: [] });
   }
 
   setQueryForm(criteria?) {
-    this.queryForm = this.formBuilder.group({
-      criteria: this.formBuilder.array(criteria),
-    });
+    this.queryForm.setValue({ criteria });
   }
 
   onSubmit() {

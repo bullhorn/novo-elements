@@ -8,6 +8,7 @@ import { NovoCardModule } from '../card';
 import { NovoChipsModule } from '../chips';
 import { NovoCommonModule, NovoOptionModule } from '../common';
 import { NovoDatePickerModule } from '../date-picker';
+import { NovoDropdownModule } from '../dropdown';
 import { NovoFieldModule } from '../field';
 import { NovoFlexModule } from '../flex';
 import { NovoFormModule } from '../form';
@@ -27,6 +28,7 @@ import { NovoDefaultIdConditionDef } from './condition-definitions/id-condition.
 import { NovoDefaultNumberConditionDef } from './condition-definitions/number-condition.definition';
 import { NovoDefaultPickerConditionDef } from './condition-definitions/picker-condition.definition';
 import { NovoDefaultStringConditionDef } from './condition-definitions/string-condition.definition';
+import { ConditionGroupComponent } from './condition-group/condition-group.component';
 import { CriteriaBuilderComponent } from './criteria-builder/criteria-builder.component';
 import { QueryBuilderComponent } from './query-builder.component';
 import { NovoConditionFieldDef, NovoConditionInputDef, NovoConditionOperatorsDef } from './query-builder.directives';
@@ -55,6 +57,7 @@ import { NovoConditionFieldDef, NovoConditionInputDef, NovoConditionOperatorsDef
     NovoSwitchModule,
     NovoChipsModule,
     NovoSelectSearchModule,
+    NovoDropdownModule,
   ],
   declarations: [
     CriteriaBuilderComponent,
@@ -62,6 +65,7 @@ import { NovoConditionFieldDef, NovoConditionInputDef, NovoConditionOperatorsDef
     ConditionBuilderComponent,
     ConditionInputOutlet,
     ConditionOperatorOutlet,
+    ConditionGroupComponent,
     NovoDefaultAddressConditionDef,
     NovoDefaultBooleanConditionDef,
     NovoDefaultDateConditionDef,

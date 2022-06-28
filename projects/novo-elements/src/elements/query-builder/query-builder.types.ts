@@ -1,5 +1,13 @@
 import { ViewContainerRef } from '@angular/core';
 
+export enum Conjunction {
+  AND = 'and',
+  OR = 'or',
+  NOT = 'not',
+}
+export type ConditionGroup = {
+  [key: string]: Condition[];
+};
 export interface Condition {
   field: string;
   operator: string;

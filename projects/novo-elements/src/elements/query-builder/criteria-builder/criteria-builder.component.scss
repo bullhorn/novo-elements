@@ -1,65 +1,9 @@
 :host {
   position: relative;
   display: block;
+  width: 74rem;
 
   .criteria-builder-inner {
     padding-bottom: 1rem;
-    .condition-row {
-      width: 100%;
-      padding-bottom: 0.4rem;
-    }
-
-    .condition-group {
-      width: 100%;
-      border: 1px solid transparent;
-      border-radius: 0.4rem;
-      padding: 1rem 0;
-      &.with-conditions {
-        padding: 0.5rem;
-        border-color: #e6e6e6;
-      }
-
-      &.with-one-condition {
-        border-bottom: 1px solid #e6e6e6;
-      }
-    }
-  }
-
-  .and-or-button {
-    box-sizing: border-box;
-    background: #fff;
-    border: 1px solid #ddd;
-    color: #5691f5;
-    display: inline-block;
-    position: relative;
-    cursor: pointer;
-    margin: 0.4rem;
-    // vertical-align: middle;
-    align-items: center;
-    text-align: center;
-    user-select: none;
-    outline: none;
-    white-space: nowrap;
-    text-transform: uppercase;
-    transition: box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), background-color 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-  }
-
-  .and-connector {
-    background: #fff;
-    padding: 0 5px;
-    position: relative;
-    width: 100%;
-    .and-connector-line {
-      // background: #999;
-      height: 1px;
-      width: 100%;
-    }
-    .and-connector-text {
-      background-color: var(--background-alt, #ffffff);
-      margin: -8px 0 0 10px;
-      position: absolute;
-      text-align: center;
-      text-transform: uppercase;
-    }
   }
 }

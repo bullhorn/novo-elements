@@ -9,6 +9,7 @@ import { FlexDirective } from './directives/flex.directive';
 import { GapDirective, MarginDirective, PaddingDirective } from './directives/space.directive';
 import { SwitchCasesDirective } from './directives/switch-cases.directive';
 import { ThemeColorDirective } from './directives/theme.directive';
+import { VisibleDirective } from './directives/visible.directive';
 import { NovoTemplate } from './novo-template/novo-template.directive';
 import { NovoOptionModule } from './option';
 import { NovoCaption } from './typography/caption/caption.component';
@@ -37,6 +38,7 @@ import { NovoTitle } from './typography/title/title.component';
     FlexDirective,
     ThemeColorDirective,
     SwitchCasesDirective,
+    VisibleDirective,
   ],
   declarations: [
     NovoTemplate,
@@ -56,6 +58,7 @@ import { NovoTitle } from './typography/title/title.component';
     FlexDirective,
     ThemeColorDirective,
     SwitchCasesDirective,
+    VisibleDirective,
   ],
 })
 export class NovoCommonModule {}

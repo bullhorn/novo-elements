@@ -13,12 +13,7 @@ export class QueryBuilderComponent implements OnInit {
   queryForm: AbstractControl;
   config: any = null;
 
-  constructor(private controlContainer: ControlContainer, private formBuilder: FormBuilder, private cdr: ChangeDetectorRef) {
-    // this.service.getFieldsForSegment().then((fields) => {
-    //   this.config = { fields };
-    //   this.cdr.detectChanges();
-    // });
-  }
+  constructor(private controlContainer: ControlContainer, private formBuilder: FormBuilder, private cdr: ChangeDetectorRef) {}
 
   ngOnInit() {
     if (this.controlContainer) {
