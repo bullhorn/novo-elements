@@ -129,8 +129,8 @@ export class ConditionBuilderComponent<T extends BaseFieldDef> implements OnInit
     const { field } = this.parentForm?.value;
     if (!field) return null;
     const fieldName = field.split('.')[1];
-    const fieldNameNew = field.charAt(0) === '.' ? field.slice(1) : field;
-    console.log('field:', field, 'fieldName:', fieldName, 'fieldNameNew:', fieldNameNew, 'fieldConfig:', this.fieldConfig.find(fieldName))
+    // const fieldNameNew = field.charAt(0) === '.' ? field.slice(1) : field;
+    // console.log('field:', field, 'fieldName:', fieldName, 'fieldNameNew:', fieldNameNew, 'fieldConfig:', this.fieldConfig.find(fieldName))
     return this.fieldConfig.find(fieldName);
   }
 
@@ -148,7 +148,7 @@ export class ConditionBuilderComponent<T extends BaseFieldDef> implements OnInit
       this.parentForm.get('field').setValue(this.getDefaultField());
       return;
     } else {
-      this.fieldDisplayWith = () => fieldConf.label;
+      this.fieldDisplayWith = () => fieldConf.label || fieldConf.name;
     }
     const { field, operator } = this.parentForm.value;
 

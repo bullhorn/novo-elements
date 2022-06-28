@@ -37,6 +37,7 @@ export class CriteriaBuilderComponent implements OnInit, OnDestroy, AfterContent
 
   ngOnInit() {
     this.parentForm = this.controlContainer.control;
+    Promise.resolve().then(() => this.addAndGroup());
   }
   
   ngAfterContentChecked() {
@@ -108,7 +109,6 @@ export class CriteriaBuilderComponent implements OnInit, OnDestroy, AfterContent
     while (this.parentForm['controls'][this.controlName].length !== 0) {
       this.parentForm['controls'][this.controlName].removeAt(0)
     }
-    this.addAndGroup();
   }
 
   canAddGroup() {
