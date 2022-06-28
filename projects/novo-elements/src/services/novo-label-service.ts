@@ -21,6 +21,7 @@ export class NovoLabelService {
   dateAdded = 'Date Added';
   emptyTableMessage = 'No Records to display...';
   noMatchingRecordsMessage = 'No Matching Records';
+  noMoreRecordsMessage = 'No More Records';
   erroredTableMessage = 'Oops! An error occurred.';
   pickerError = 'Oops! An error occurred.';
   pickerTextFieldEmpty = 'Begin typing to see results.';
