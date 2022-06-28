@@ -57,6 +57,7 @@ export class ConditionBuilderComponent implements OnInit, AfterContentInit, Afte
   public searches!: Subscription;
   public results$: Promise<any[]>;
   public searchTerm: FormControl = new FormControl();
+  public fieldDisplayWith;
 
   private _lastContext: any = {};
 
@@ -118,7 +119,9 @@ export class ConditionBuilderComponent implements OnInit, AfterContentInit, Afte
   getField() {
     const { field } = this.parentForm?.value;
     if (!field) return null;
-    const fieldName = field.includes('.') ? field.split('.')[1] : field;
+    const fieldName = field.split('.')[1];
+    // const fieldNameNew = field.charAt(0) === '.' ? field.slice(1) : field;
+    // console.log('field:', field, 'fieldName:', fieldName, 'fieldNameNew:', fieldNameNew, 'fieldConfig:', this.fieldConfig.find(fieldName))
     return this.fieldConfig.find(fieldName);
   }
 
@@ -135,6 +138,8 @@ export class ConditionBuilderComponent implements OnInit, AfterContentInit, Afte
     if (!fieldConf) {
       this.parentForm.get('field').setValue(this.getDefaultField());
       return;
+    } else {
+      this.fieldDisplayWith = () => fieldConf.label || fieldConf.name;
     }
     const { field, operator } = this.parentForm.value;
 
@@ -159,7 +164,10 @@ export class ConditionBuilderComponent implements OnInit, AfterContentInit, Afte
 
   private createFieldTemplates() {
     const definition = this.findDefinitionForField(this.getField());
-    this.parentForm.get('operator').setValue(definition.defaultOperator);
+
+    if (!this.parentForm.get('operator').value) {
+      this.parentForm.get('operator').setValue(definition.defaultOperator);
+    }
 
     this.createFieldOperators(definition);
     this.createFieldInput(definition);

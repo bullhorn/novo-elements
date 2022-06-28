@@ -4,7 +4,7 @@ export interface IDataTablePreferences {
   name: string;
   sort?: IDataTableSort;
   filter?: IDataTableFilter | IDataTableFilter[];
-  where?: string;
+  where?: { query: string; form: any };
   advancedFilter?: IDataTableFilter[];
   globalSearch?: any;
   pageSize?: number;
@@ -108,7 +108,7 @@ export interface IDataTableChangeEvent {
   globalSearch?: string;
   outsideFilter?: IDataTableFilter | IDataTableFilter[];
   advancedFilter?: IDataTableFilter[];
-  where?: string;
+  where?: { query: string; form: any };
 }
 
 export interface IDataTableSelectionChangeEvent {
@@ -148,7 +148,7 @@ export interface IDataTableService<T> {
     globalSearch?: string,
     outsideFilter?: any,
     advancedFilter?: IDataTableFilter[],
-    where?: string,
+    where?: { query: string; form: any },
   ): Observable<{ results: T[]; total: number }>;
 }
 
