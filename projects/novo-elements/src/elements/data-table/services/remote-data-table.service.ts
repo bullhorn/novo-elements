@@ -10,6 +10,6 @@ export abstract class RemoteDataTableService<T> implements IDataTableService<T> 
     globalSearch?: string,
     outsideFilter?: any,
     advancedFilter?: any,
-    where?: string,
+    where?: { query: string; form: any },
   ): Observable<{ results: T[]; total: number }>;
 }
