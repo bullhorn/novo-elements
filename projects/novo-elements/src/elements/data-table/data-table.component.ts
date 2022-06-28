@@ -167,7 +167,7 @@ import { DataTableState } from './state/data-table-state.service';
         <div
           class="novo-data-table-no-more-results-container"
           [style.left.px]="scrollLeft"
-          *ngIf="dataSource?.currentlyEmpty && !state.userFiltered && !dataSource?.loading && !loading && !dataSource.pristine"
+          *ngIf="!dataSource?.totallyEmpty && dataSource?.currentlyEmpty && !state.userFiltered && !dataSource?.loading && !loading && !dataSource.pristine"
         >
           <div class="novo-data-table-empty-message">
             <ng-container *ngTemplateOutlet="templates['noMoreResultsMessage'] || templates['defaultNoMoreResultsMessage']"></ng-container>
