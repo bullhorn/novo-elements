@@ -119,7 +119,7 @@ export class ConditionBuilderComponent implements OnInit, AfterContentInit, Afte
   getField() {
     const { field } = this.parentForm?.value;
     if (!field) return null;
-    const fieldName = field.split('.')[1];
+    const fieldName = field.includes('.') ? field.split('.')[1] : field;
     // const fieldNameNew = field.charAt(0) === '.' ? field.slice(1) : field;
     // console.log('field:', field, 'fieldName:', fieldName, 'fieldNameNew:', fieldNameNew, 'fieldConfig:', this.fieldConfig.find(fieldName))
     return this.fieldConfig.find(fieldName);
