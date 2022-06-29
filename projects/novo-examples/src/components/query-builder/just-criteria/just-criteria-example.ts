@@ -93,11 +93,11 @@ export class JustCriteriaExample implements OnInit {
   ngOnInit() {
     this.queryForm = this.formBuilder.group({ criteria: [] });
     this.getFieldConfig().then((fields) => {
-      // this.prepopulateForm();
+      this.prepopulateForm();
       this.config = { fields };
       this.cdr.detectChanges();
     });
-    this.setQueryForm([]);
+    // this.setQueryForm([]);
   }
 
   getFieldConfig() {
