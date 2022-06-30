@@ -426,7 +426,8 @@ novo-data-table {
   .novo-data-table-empty-container {
     padding-top: 0;
   }
-  .novo-data-table-no-results-container {
+  .novo-data-table-no-results-container,
+  .novo-data-table-no-more-results-container{
     position: absolute;
     top: 48%;
     left: 0;
@@ -434,7 +435,8 @@ novo-data-table {
     width: 100%;
   }
   .novo-data-table-empty-container,
-  .novo-data-table-no-results-container {
+  .novo-data-table-no-results-container,
+  .novo-data-table-no-more-results-container{
     padding: 2em;
     flex: 1;
     display: flex;
