@@ -128,6 +128,15 @@ export class JustCriteriaExample implements OnInit {
         operator: 'includeAny',
         value: ['test'],
       },
+      {
+        scope: 'Candidate',
+        field: 'customDate1',
+        operator: 'between',
+        value: {
+          startDate: '1922-01-01',
+          endDate: '1922-01-17',
+        }
+      },
       // where=category IN (1,2,3)
       // where=category.id:[1 2 3]
     ];

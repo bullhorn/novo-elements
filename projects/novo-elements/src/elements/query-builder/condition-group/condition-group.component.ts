@@ -22,7 +22,6 @@ const EMPTY_CONDITION: Condition = {
 })
 export class ConditionGroupComponent implements OnInit, OnDestroy {
   @Input() controlName: string = '$' + Conjunction.AND;
-  @Input() orEnabled = true;
 
   public parentForm: FormGroup;
   public innerForm: FormGroup;

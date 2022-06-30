@@ -28,7 +28,7 @@ import { AbstractConditionFieldDef } from './abstract-condition.definition';
             </novo-picker-toggle>
           </novo-field>
           <novo-field *novoSwitchCases="['between']">
-            <input novoInput dateRangeFormat="iso8601" [picker]="daterangepicker" formControlName="value" />
+            <input novoInput dateRangeFormat="date" [picker]="daterangepicker" formControlName="value" />
             <novo-picker-toggle [for]="daterangepicker" triggerOnFocus novoSuffix icon="calendar">
               <novo-date-picker #daterangepicker (onSelect)="togglePanel()" mode="range" numberOfMonths="2"></novo-date-picker>
             </novo-picker-toggle>
