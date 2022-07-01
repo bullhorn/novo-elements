@@ -6520,7 +6520,7 @@ const routes: Routes = [
   {
     path: 'components/query builder',
     component: TabsLayout,
-    data: { title: 'Query Builder', section: 'components', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}], description: null, tag: 'preview' },
+    data: { title: 'Query Builder', section: 'components', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}], description: null, tag: 'experiment' },
     children: [
       { path: 'design', component: QueryBuilderDesignPage },
       { path: 'develop', component: QueryBuilderDevelopPage },

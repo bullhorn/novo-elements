@@ -9,15 +9,15 @@ import { AbstractConditionFieldDef } from './abstract-condition.definition';
   template: `
     <ng-container novoConditionFieldDef>
       <novo-field *novoConditionOperatorsDef="let formGroup" [formGroup]="formGroup">
-        <novo-select placeholder="Operator..." formControlName="operator">
-          <novo-option value="include">Equals</novo-option>
-          <novo-option value="exclude">Does Not Equal</novo-option>
+        <novo-select [placeholder]="labels.operator" formControlName="operator">
+          <novo-option value="include">{{ labels.equals }}</novo-option>
+          <novo-option value="exclude">{{ labels.doesNotEqual }}</novo-option>
         </novo-select>
       </novo-field>
       <novo-field *novoConditionInputDef="let formGroup" [style.width.px]="100" [formGroup]="formGroup">
-        <novo-select placeholder="Value..." formControlName="value">
-          <novo-option [value]="true">True</novo-option>
-          <novo-option [value]="false">False</novo-option>
+        <novo-select [placeholder]="labels.value" formControlName="value">
+          <novo-option [value]="true">{{ labels.true }}</novo-option>
+          <novo-option [value]="false">{{ labels.false }}</novo-option>
         </novo-select>
       </novo-field>
     </ng-container>

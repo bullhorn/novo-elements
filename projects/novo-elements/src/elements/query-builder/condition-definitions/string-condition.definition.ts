@@ -15,10 +15,10 @@ import { AbstractConditionFieldDef } from './abstract-condition.definition';
     <!-- fieldTypes should be UPPERCASE -->
     <ng-container novoConditionFieldDef="STRING">
       <novo-field *novoConditionOperatorsDef="let formGroup" [formGroup]="formGroup">
-        <novo-select placeholder="Operator..." formControlName="operator">
-          <novo-option value="includeAny">Include Any</novo-option>
-          <novo-option value="includeAll">Include All</novo-option>
-          <novo-option value="excludeAny">Exclude</novo-option>
+        <novo-select [placeholder]="labels.operator" formControlName="operator">
+          <novo-option value="includeAny">{{ labels.includeAny }}</novo-option>
+          <novo-option value="includeAll">{{ labels.includeAll }}</novo-option>
+          <novo-option value="excludeAny">{{ labels.exclude }}</novo-option>
         </novo-select>
       </novo-field>
       <novo-field *novoConditionInputDef="let formGroup">
@@ -29,7 +29,7 @@ import { AbstractConditionFieldDef } from './abstract-condition.definition';
           </novo-chip>
           <input
             novoChipInput
-            placeholder="Type to add chips..."
+            [placeholder]="labels.typeToAddChips"
             autocomplete="off"
             (novoChipInputTokenEnd)="add($event, formGroup)"
           />

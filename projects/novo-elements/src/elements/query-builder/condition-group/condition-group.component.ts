@@ -4,6 +4,7 @@ import { merge, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { QueryBuilderService } from '../query-builder.service';
 import { Condition, Conjunction } from '../query-builder.types';
+import { NovoLabelService } from '../../../services/novo-label-service';
 
 const EMPTY_CONDITION: Condition = {
   field: null,
@@ -30,6 +31,7 @@ export class ConditionGroupComponent implements OnInit, OnDestroy {
 
   constructor(
     public qbs: QueryBuilderService,
+    public labels: NovoLabelService,
     private controlContainer: ControlContainer,
     private formBuilder: FormBuilder,
     private cdr: ChangeDetectorRef,

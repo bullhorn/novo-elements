@@ -9,14 +9,14 @@ import { AbstractConditionFieldDef } from './abstract-condition.definition';
   template: `
     <ng-container novoConditionFieldDef>
       <novo-field *novoConditionOperatorsDef="let formGroup" [formGroup]="formGroup">
-        <novo-select placeholder="Operator..." formControlName="operator">
-          <novo-option value="includeAny">Include Any</novo-option>
-          <novo-option value="includeAll">Include All</novo-option>
-          <novo-option value="excludeAny">Exclude</novo-option>
+        <novo-select [placeholder]="labels.operator" formControlName="operator">
+          <novo-option value="includeAny">{{ labels.includeAny }}</novo-option>
+          <novo-option value="includeAll">{{ labels.includeAll }}</novo-option>
+          <novo-option value="excludeAny">{{ labels.exclude }}</novo-option>
         </novo-select>
       </novo-field>
       <novo-field *novoConditionInputDef="let formGroup; fieldMeta as meta" [formGroup]="formGroup">
-        <novo-select formControlName="value" placeholder="Select..." [multiple]="true">
+        <novo-select formControlName="value" [placeholder]="labels.select" [multiple]="true">
           <!-- WHat about optionUrl/optionType -->
           <novo-option *ngFor="let option of meta?.options" [value]="option.value">
             {{ option.label }}

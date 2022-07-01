@@ -3,7 +3,7 @@ section: Components
 page: Query Builder
 title: Design
 order: 2
-tag: preview
+tag: experiment
 ---
 
 ## Usage

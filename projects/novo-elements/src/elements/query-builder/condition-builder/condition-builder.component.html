@@ -2,7 +2,7 @@
   <novo-grid gap="1rem" [columns]="isFirst ? '20rem 13rem 1fr' : '16rem 13rem 1fr'" align="end">
     <novo-field class="condition-field">
       <novo-select
-        placeholder="Choose a field..."
+        [placeholder]="labels.chooseAField"
         formControlName="field"
         (onSelect)="onFieldSelect()"
         overlayWidth="24rem"

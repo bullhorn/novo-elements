@@ -30,7 +30,6 @@ import { NovoDefaultPickerConditionDef } from './condition-definitions/picker-co
 import { NovoDefaultStringConditionDef } from './condition-definitions/string-condition.definition';
 import { ConditionGroupComponent } from './condition-group/condition-group.component';
 import { CriteriaBuilderComponent } from './criteria-builder/criteria-builder.component';
-import { QueryBuilderComponent } from './query-builder.component';
 import { NovoConditionFieldDef, NovoConditionInputDef, NovoConditionOperatorsDef } from './query-builder.directives';
 
 @NgModule({
@@ -61,7 +60,6 @@ import { NovoConditionFieldDef, NovoConditionInputDef, NovoConditionOperatorsDef
   ],
   declarations: [
     CriteriaBuilderComponent,
-    QueryBuilderComponent,
     ConditionBuilderComponent,
     ConditionInputOutlet,
     ConditionOperatorOutlet,
@@ -79,7 +77,6 @@ import { NovoConditionFieldDef, NovoConditionInputDef, NovoConditionOperatorsDef
   ],
   exports: [
     CriteriaBuilderComponent,
-    QueryBuilderComponent,
     ConditionBuilderComponent,
     NovoDefaultAddressConditionDef,
     NovoDefaultBooleanConditionDef,

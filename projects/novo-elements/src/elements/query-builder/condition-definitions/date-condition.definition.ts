@@ -12,11 +12,11 @@ import { AbstractConditionFieldDef } from './abstract-condition.definition';
   template: `
     <ng-container novoConditionFieldDef="DATE">
       <novo-field *novoConditionOperatorsDef="let formGroup" [formGroup]="formGroup">
-        <novo-select placeholder="Operator..." formControlName="operator" (onSelect)="onOperatorSelect(formGroup)">
-          <novo-option value="before">Before</novo-option>
-          <novo-option value="after">After</novo-option>
-          <novo-option value="between">Between</novo-option>
-          <novo-option value="within">Within</novo-option>
+        <novo-select [placeholder]="labels.operator" formControlName="operator" (onSelect)="onOperatorSelect(formGroup)">
+          <novo-option value="before">{{ labels.before }}</novo-option>
+          <novo-option value="after">{{ labels.after }}</novo-option>
+          <novo-option value="between">{{ labels.between }}</novo-option>
+          <novo-option value="within">{{ labels.within }}</novo-option>
         </novo-select>
       </novo-field>
       <ng-container *novoConditionInputDef="let formGroup">
@@ -34,11 +34,11 @@ import { AbstractConditionFieldDef } from './abstract-condition.definition';
             </novo-picker-toggle>
           </novo-field>
           <novo-field *novoSwitchCases="['within']">
-            <novo-select placeholder="Select Date Range..." formControlName="value">
-              <novo-option value="7">Next Week</novo-option>
-              <novo-option value="-7">Last Week</novo-option>
-              <novo-option value="-30">Last 30 Days</novo-option>
-              <novo-option value="-90">Last 90 Days</novo-option>
+            <novo-select [placeholder]="labels.selectDateRange" formControlName="value">
+              <novo-option value="7">{{ labels.next7Days }}</novo-option>
+              <novo-option value="-7">{{ labels.past7Days }}</novo-option>
+              <novo-option value="-30">{{ labels.past30Days }}</novo-option>
+              <novo-option value="-90">{{ labels.past90Days }}</novo-option>
             </novo-select>
           </novo-field>
         </ng-container>

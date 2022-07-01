@@ -19,6 +19,7 @@ import { BaseConditionFieldDef } from '../query-builder.directives';
 import { QueryBuilderService } from '../query-builder.service';
 import { NOVO_CONDITION_BUILDER } from '../query-builder.tokens';
 import { BaseFieldDef, FieldConfig, QueryFilterOutlet } from '../query-builder.types';
+import { NovoLabelService } from '../../../services';
 
 /**
  * Provides a handle for the table to grab the view container's ng-container to insert data rows.
@@ -64,7 +65,12 @@ export class ConditionBuilderComponent implements OnInit, AfterContentInit, Afte
   /** Subject that emits when the component has been destroyed. */
   private readonly _onDestroy = new Subject<void>();
 
-  constructor(private controlContainer: ControlContainer, private cdr: ChangeDetectorRef, private qbs: QueryBuilderService) {}
+  constructor(
+    public labels: NovoLabelService,
+    private cdr: ChangeDetectorRef,
+    private qbs: QueryBuilderService,
+    private controlContainer: ControlContainer,
+  ) {}
 
   ngOnInit() {
     this.parentForm = this.controlContainer.control;
