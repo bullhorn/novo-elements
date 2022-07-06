@@ -7,7 +7,7 @@ export const MockMeta = {
     {
       name: 'id',
       type: 'ID',
-      dataType: 'Integer',
+      dataType: 'id',
       optional: false,
     },
     {

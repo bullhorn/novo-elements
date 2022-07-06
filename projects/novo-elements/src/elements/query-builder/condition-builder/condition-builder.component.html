@@ -9,7 +9,7 @@
         overlayHeight="20rem"
         [displayWith]="fieldDisplayWith"
         [style.minWidth.px]="160"
-        [style.maxWidth.px]="200">
+        [style.maxWidth.px]="isFirst ? 200 : 160">
         <novo-optgroup class="filter-search-results">
           <novo-option>
             <novo-select-search [formControl]="searchTerm" [clearSearchInput]="false"></novo-select-search>

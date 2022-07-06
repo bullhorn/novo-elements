@@ -14,8 +14,8 @@ import { AbstractConditionFieldDef } from './abstract-condition.definition';
           <ng-content></ng-content>
         </novo-select>
       </novo-field>
-      <novo-field *novoConditionInputDef="let formGroup" [style.width.px]="100" [formGroup]="formGroup">
-        <input novoInput type="number" formControlName="value" />
+      <novo-field *novoConditionInputDef="let formGroup" [formGroup]="formGroup">
+        <input novoInput type="number" min="1" step="1" formControlName="value" />
       </novo-field>
     </ng-container>
   `,

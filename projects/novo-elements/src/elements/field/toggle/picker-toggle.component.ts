@@ -115,7 +115,6 @@ export class NovoPickerToggleElement<T = any> implements AfterContentInit, After
   }
 
   checkPanel() {
-    console.log('checkPanel', this.triggerOnFocus, this._formField._control.focused);
     if (this.triggerOnFocus && this._formField._control.focused) {
       this.openPanel();
     }
@@ -148,7 +147,6 @@ export class NovoPickerToggleElement<T = any> implements AfterContentInit, After
   }
 
   private _watchStateChanges() {
-    console.log('this.control', this._formField, this._formField?._control);
     this._formField._control?.stateChanges.pipe(takeUntil(this._onDestroy)).subscribe(() => {
       this.checkPanel();
     });
