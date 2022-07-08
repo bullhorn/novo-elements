@@ -25,9 +25,9 @@ import { DataTableState } from './state/data-table-state.service';
           labels.clearSearch
         }}</item>
         <item *ngIf="(state.sort && (state.filter || state.globalSearch)) || (state.sort && state.where) || (state.where && (state.filter || state.globalSearch))"
-          (click)="clearAll()" data-automation-id="novo-data-table-clear-dropdown-clear-all">{{
+          (click)="clearAll()" data-automation-id="novo-data-table-clear-dropdown-clear-all"><b>{{
           labels.clearAllNormalCase
-        }}</item>
+        }}</b></item>
       </list>
     </novo-dropdown>
   `,
