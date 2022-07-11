@@ -39,12 +39,12 @@ export class NovoIconComponent implements AfterViewInit {
   @Input()
   public size: TypographySize;
 
-  @HostBinding('class.text-size-smaller')
+  @HostBinding('class.icon-size-smaller')
   @Input()
   @BooleanInput()
   public smaller: boolean;
 
-  @HostBinding('class.text-size-larger')
+  @HostBinding('class.icon-size-larger')
   @Input()
   @BooleanInput()
   public larger: boolean;
