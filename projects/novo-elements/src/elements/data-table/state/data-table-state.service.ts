@@ -23,14 +23,13 @@ export class DataTableState<T> {
   selectedRows: Map<string, T> = new Map<string, T>();
   expandedRows: Set<string> = new Set<string>();
   outsideFilter: any;
-  advancedFilter: IDataTableFilter[] = undefined;
   isForceRefresh: boolean = false;
   selectionOptions: IDataTableSelectionOption[];
   updates: EventEmitter<IDataTableChangeEvent> = new EventEmitter<IDataTableChangeEvent>();
   retainSelected: boolean = false;
 
   get userFiltered(): boolean {
-    return !!(this.filter || this.sort || this.globalSearch || this.outsideFilter || this.advancedFilter);
+    return !!(this.filter || this.sort || this.globalSearch || this.outsideFilter || this.where);
   }
 
   get userFilteredInternal(): boolean {
@@ -146,6 +145,7 @@ export class DataTableState<T> {
   public onSortFilterChange(): void {
     this.checkRetainment('sort');
     this.checkRetainment('filter');
+    this.checkRetainment('where');
     this.sortFilterSource.next({
       sort: this.sort,
       filter: this.filter,
@@ -173,17 +173,6 @@ export class DataTableState<T> {
               : filter.value;
         });
         this.filter = filters;
-      }
-
-      if (preferences.advancedFilter) {
-        const advancedFilters = Helpers.convertToArray(preferences.advancedFilter);
-        advancedFilters.forEach((filter) => {
-          filter.value =
-            filter.selectedOption && filter.type
-              ? NovoDataTableFilterUtils.constructFilter(filter.selectedOption, filter.type)
-              : filter.value;
-        });
-        this.advancedFilter = advancedFilters;
       }
 
       if (preferences.globalSearch) {

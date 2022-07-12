@@ -16,7 +16,6 @@ export class StaticDataTableService<T> implements IDataTableService<T> {
     pageSize: number,
     globalSearch?: string,
     outsideFilter?: any,
-    advancedFilter?: IDataTableFilter[],
     where?: { query: string; form: any },
   ): Observable<{ results: T[]; total: number }> {
     this.currentData = [...this.originalData];

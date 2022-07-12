@@ -41,7 +41,6 @@ export class DataTableSource<T> extends DataSource<T> {
           this.state.pageSize,
           this.state.globalSearch,
           this.state.outsideFilter,
-          this.state.advancedFilter,
           this.state.where,
         );
       }),

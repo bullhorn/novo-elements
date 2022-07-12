@@ -358,23 +358,7 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
       // Re-subscribe
       this.outsideFilterSubscription = outsideFilter.subscribe((filter: any) => {
         this.state.outsideFilter = filter;
-        this.state.updates.next({ globalSearch: this.state.globalSearch, filter: this.state.filter, sort: this.state.sort, advancedFilter: this.state.advancedFilter });
-        this.ref.markForCheck();
-      });
-    }
-  }
-
-  @Input()
-  set advancedFilter(advancedFilter: EventEmitter<any>) {
-    // Unsubscribe
-    if (this.advancedFilterSubscription) {
-      this.advancedFilterSubscription.unsubscribe();
-    }
-    if (advancedFilter) {
-      // Re-subscribe
-      this.advancedFilterSubscription = advancedFilter.subscribe((filter: any) => {
-        this.state.advancedFilter = filter;
-        this.state.updates.next({ globalSearch: this.state.globalSearch, filter: this.state.filter, sort: this.state.sort, outsideFilter: this.state.outsideFilter });
+        this.state.updates.next({ globalSearch: this.state.globalSearch, filter: this.state.filter, sort: this.state.sort, where: this.state.where });
         this.ref.markForCheck();
       });
     }
@@ -390,7 +374,7 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
       // Re-subscribe
       this.refreshSubscription = refreshSubject.subscribe((filter: any) => {
         this.state.isForceRefresh = true;
-        this.state.updates.next({ globalSearch: this.state.globalSearch, filter: this.state.filter, sort: this.state.sort });
+        this.state.updates.next({ globalSearch: this.state.globalSearch, filter: this.state.filter, sort: this.state.sort, where: this.state.where });
         this.ref.markForCheck();
       });
     }
@@ -458,7 +442,6 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   public expandable: boolean = false;
 
   private outsideFilterSubscription: Subscription;
-  private advancedFilterSubscription: Subscription;
   private refreshSubscription: Subscription;
   private resetSubscription: Subscription;
   private paginationSubscription: Subscription;
@@ -485,7 +468,13 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
     this.sortFilterSubscription = this.state.sortFilterSource.subscribe(
       (event: { sort: IDataTableSort; filter: IDataTableFilter | IDataTableFilter[]; globalSearch: string; where: { query: string; form: any } }) => {
         if (this.name !== 'novo-data-table') {
-          this.preferencesChanged.emit({ name: this.name, sort: event.sort, filter: event.filter, globalSearch: event.globalSearch });
+          this.preferencesChanged.emit({
+            name: this.name,
+            sort: event.sort,
+            filter: event.filter,
+            globalSearch: event.globalSearch,
+            where: event.where,
+          });
           this.performInteractions('change');
         } else {
           notify('Must have [name] set on data-table to use preferences!');
@@ -529,26 +518,13 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   }
 
   public ngOnDestroy(): void {
-    if (this.advancedFilterSubscription) {
-      this.advancedFilterSubscription.unsubscribe();
-    }
-    if (this.outsideFilterSubscription) {
-      this.outsideFilterSubscription.unsubscribe();
-    }
+    this.outsideFilterSubscription?.unsubscribe();
+    this.refreshSubscription?.unsubscribe();
+    this.resetSubscription?.unsubscribe();
+    this.sortFilterSubscription?.unsubscribe();
+    this.allMatchingSelectedSubscription?.unsubscribe();
     if (this.novoDataTableContainer) {
       (this.novoDataTableContainer.nativeElement as Element).removeEventListener('scroll', this.scrollListenerHandler);
-    }
-    if (this.refreshSubscription) {
-      this.refreshSubscription.unsubscribe();
-    }
-    if (this.resetSubscription) {
-      this.resetSubscription.unsubscribe();
-    }
-    if (this.sortFilterSubscription) {
-      this.sortFilterSubscription.unsubscribe();
-    }
-    if (this.allMatchingSelectedSubscription) {
-      this.allMatchingSelectedSubscription.unsubscribe();
     }
   }
 
@@ -595,7 +571,7 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   public onSearchChange(term: string): void {
     this.state.globalSearch = term;
     this.state.reset(false, true);
-    this.state.updates.next({ globalSearch: term, filter: this.state.filter, sort: this.state.sort });
+    this.state.updates.next({ globalSearch: term, filter: this.state.filter, sort: this.state.sort, where: this.state.where });
   }
 
   public trackColumnsBy(index: number, item: IDataTableColumn<T>) {
