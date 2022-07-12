@@ -63,6 +63,7 @@ novo-select {
       color: $grey;
     }
   }
+
 }
 
 .novo-select-list {
@@ -87,6 +88,11 @@ novo-select {
   font-size: 1rem;
   z-index: z(below);
   opacity: 0;
+
+  .novo-empty-text {
+    width: $novo-checkbox-size;
+    height: $novo-checkbox-size;
+  }
 }
 
 .select-header {
