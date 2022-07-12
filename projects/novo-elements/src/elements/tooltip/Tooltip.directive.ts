@@ -112,6 +112,7 @@ export class TooltipDirective implements OnDestroy, OnInit {
     tooltipInstance.bounce = this.bounce;
   }
 
+  @HostListener('blur')
   private hide(): void {
     if (this.overlayRef) {
       this.overlayRef.detach();
