@@ -56,10 +56,13 @@ export class NovoPickerToggleElement<T = any> implements AfterContentInit, After
   /** Screenreader label for the button. */
   @Input('aria-label') ariaLabel: string;
 
-  /** . */
+  /** Determines whether the overlay is triggered on input focus or solely button click. */
   @Input()
   @BooleanInput()
   triggerOnFocus: boolean = false;
+
+  /** An id to select the correct overlay.*/
+  @Input() overlayId: string;
 
   /** Whether the toggle button is disabled. */
   @Input()

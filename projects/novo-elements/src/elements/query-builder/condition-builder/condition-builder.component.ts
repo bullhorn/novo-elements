@@ -52,6 +52,8 @@ export class ConditionBuilderComponent implements OnInit, AfterContentInit, Afte
 
   @Input() label: any;
   @Input() isFirst: boolean;
+  @Input() andIndex: number;
+  @Input() groupIndex: number;
 
   public parentForm: AbstractControl;
   public fieldConfig: FieldConfig<BaseFieldDef>;
@@ -190,7 +192,7 @@ export class ConditionBuilderComponent implements OnInit, AfterContentInit, Afte
   private createFieldInput(definition: BaseConditionFieldDef) {
     this._inputOutlet.viewContainer.clear();
     if (definition) {
-      const context = { $implicit: this.parentForm, fieldMeta: this.getField() };
+      const context = { $implicit: this.parentForm, fieldMeta: this.getField(), viewIndex: this.groupIndex.toString() + this.andIndex.toString() };
       this._inputOutlet.viewContainer.createEmbeddedView(definition.fieldInput.template, context);
     }
     this.cdr.markForCheck();

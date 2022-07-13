@@ -15,7 +15,7 @@
             <novo-label *ngIf="!isFirst" color="ash" size="xs" uppercase padding="sm">
               {{qbs.getConjunctionLabel(controlName)}}</novo-label>
           </ng-template>
-          <novo-condition-builder [isFirst]="isFirst"></novo-condition-builder>
+          <novo-condition-builder [groupIndex]="groupIndex" [andIndex]="andIndex" [isFirst]="isFirst"></novo-condition-builder>
           <novo-button theme="icon" icon="delete-o" color="negative" (click)="removeCondition(andIndex)"
             [disabled]="cantRemoveRow(isFirst)">
           </novo-button>
