@@ -116,6 +116,7 @@ export class NovoFieldElement implements AfterContentInit, OnDestroy {
 
     if (control.controlType) {
       this._elementRef.nativeElement.classList.add(`novo-field-type-${control.controlType}`);
+      this._elementRef.nativeElement.setAttribute('data-control-type', control.controlType);
     }
 
     // Subscribe to changes in the child control state in order to update the form field UI.
