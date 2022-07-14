@@ -88,9 +88,9 @@ novo-select {
   z-index: z(below);
   opacity: 0;
 
-  .novo-empty-text {
-    width: $novo-checkbox-size;
-    height: $novo-checkbox-size;
+  .select-item {
+    min-height: 35px;
+    max-height: 35px;
   }
 }
 

@@ -144,7 +144,7 @@ let nextId = 0;
             [tooltip]="option.tooltip"
             [tooltipPosition]="option.tooltipPosition || 'right'"
           >
-            <span [ngClass]="{'novo-empty-text' : !option.value}" [innerHtml]="highlight(option.label, filterTerm)"></span> <i *ngIf="option.active" class="bhi-check"></i>
+            <span [innerHtml]="highlight(option.label, filterTerm)"></span> <i *ngIf="option.active" class="bhi-check"></i>
           </novo-option>
           <ng-template #divider>
             <novo-divider class="select-item-divider" [class.with-label]="option.label" [class.without-label]="!option.label">
