@@ -89,8 +89,9 @@ novo-select {
   opacity: 0;
 
   .select-item {
-    min-height: 35px;
-    max-height: 35px;
+    height: 35px;
+    // min-height: 35px;
+    // max-height: 35px;
   }
 }
 
