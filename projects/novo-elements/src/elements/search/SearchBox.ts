@@ -87,6 +87,8 @@ export class NovoSearchBoxElement implements ControlValueAccessor {
   public keepOpen: boolean = false;
   @Input()
   public hasBackdrop: boolean = false;
+  @Input()
+  public allowPropagation: boolean = false;
   @Output()
   public searchChanged: EventEmitter<string> = new EventEmitter<string>();
   @Output()
@@ -173,7 +175,9 @@ export class NovoSearchBoxElement implements ControlValueAccessor {
         this.applySearch.emit(event);
       }
       this.closePanel();
-      event.stopPropagation();
+      if (!this.allowPropagation) {
+        event.stopPropagation();
+      }
     }
   }
   _handleInput(event: KeyboardEvent): void {
