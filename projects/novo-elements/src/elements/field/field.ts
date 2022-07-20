@@ -119,6 +119,10 @@ export class NovoFieldElement implements AfterContentInit, OnDestroy {
       this._elementRef.nativeElement.setAttribute('data-control-type', control.controlType);
     }
 
+    if (control.id) {
+      this._elementRef.nativeElement.setAttribute('data-control-id', control.id);
+    }
+
     // Subscribe to changes in the child control state in order to update the form field UI.
     // tslint:disable-next-line:deprecation
     control.stateChanges.pipe(startWith(null)).subscribe(() => {
