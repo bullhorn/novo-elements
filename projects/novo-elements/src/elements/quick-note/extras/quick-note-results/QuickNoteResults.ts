@@ -22,7 +22,7 @@ import { PickerResults } from '../../../picker/extras/picker-results/PickerResul
         (mouseenter)="selectActive(match)"
       >
         <item-content>
-          <p [innerHtml]="highlight(match.label, term)"></p>
+          <p [innerHtml]="match.label | highlight:term"></p>
         </item-content>
       </novo-list-item>
     </novo-list>
