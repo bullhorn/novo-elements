@@ -1,6 +1,6 @@
 import { AnimationEvent } from '@angular/animations';
 import { ComponentPortal, Portal } from '@angular/cdk/portal';
-import { Component, EventEmitter, Injector, Output } from '@angular/core';
+import { Component, EventEmitter, HostBinding, Injector, Output } from '@angular/core';
 import { NovoModalRef } from './modal-ref';
 import { zoomInOut } from './modal.animation';
 
@@ -12,10 +12,10 @@ import { zoomInOut } from './modal.animation';
 })
 export class NovoModalContainerComponent {
   @Output() animationStateChanged = new EventEmitter<AnimationEvent>();
-
   animationState: 'void' | 'enter' | 'leave' = 'enter';
-
   component: Portal<any>;
+  initTimestamp = Date.now();
+  @HostBinding('id') id = `modal-container-${this.initTimestamp}`;
 
   constructor(private injector: Injector, private modalRef: NovoModalRef) {
     this.component = new ComponentPortal(modalRef.component, null, injector);

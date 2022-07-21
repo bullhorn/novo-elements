@@ -324,8 +324,8 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
 
   protected elementIsInNestedOverlay(el): boolean {
     while (el.parentNode) {
-      if (el.id && el.id.includes('novo-overlay')) {
-        return this.id < el.id;
+      if (el.id?.includes('novo-overlay-') || el.id?.includes('modal-container-')) {
+        return this.id.split('-')[2] < el.id.split('-')[2];
       }
       el = el.parentNode;
     }
