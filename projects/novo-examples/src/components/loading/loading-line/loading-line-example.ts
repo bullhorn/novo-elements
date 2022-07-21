@@ -16,11 +16,11 @@ export class LoadingLineExample {
   public messageForm: any;
 
   constructor(private formUtils: FormUtils) {
-    this.switchControl = new SwitchControl({ key: 'switch', tooltip: 'Switch', label: 'Switch', checkboxLabel: 'Switch' });
+    this.switchControl = new SwitchControl({ key: 'switch', tooltip: 'Enable Message Switch', label: 'Enable Message', checkboxLabel: 'Switch' });
     this.textControl = new TextBoxControl({
       key: 'text',
-      label: 'Text Box',
-      tooltip: 'Textbox',
+      label: 'Loading Message',
+      tooltip: 'Loading Message Textbox',
       value: 'Hang tight, still loading.',
     });
 
