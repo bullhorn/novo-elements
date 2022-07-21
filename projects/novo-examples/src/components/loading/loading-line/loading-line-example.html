@@ -1,4 +1,4 @@
-<novo-loading [size]="size.value" [color]="color.value"></novo-loading>
+<novo-loading [size]="size.value" [color]="color.value" [showLoadMessage]="this.messageForm.value.switch" [loadMessage]="this.messageForm.value.text"></novo-loading>
 
 <section>
   <novo-label>Size</novo-label>
@@ -15,4 +15,16 @@
     <novo-radio name="color" value="mint">mint</novo-radio>
     <novo-radio name="color" value="ocean">ocean</novo-radio>
   </novo-radio-group>
+
+  <novo-label>Message</novo-label>
+  <novo-form [form]="messageForm">
+    <div class="novo-form-row">
+      <novo-control [form]="messageForm" [control]="switchControl"></novo-control>
+    </div>
+    <div class="novo-form-row">
+      <novo-control [form]="messageForm" [control]="textControl"></novo-control>
+  </div>
+  </novo-form>
+
+
 </section>

@@ -23,6 +23,11 @@ novo-loading {
     @include animationMapDelay($dot-colors, jump, 1600ms, ease-in-out, 70ms, forward, infinite, "", "");
   }
 
+  div.message {
+    position: absolute;
+    padding-top: 3em;
+}
+
   @each $analytics, $color in $analytics-colors {
     &.color-#{$analytics} {
       span.dot {
