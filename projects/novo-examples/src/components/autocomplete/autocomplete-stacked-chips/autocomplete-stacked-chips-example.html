@@ -1,8 +1,13 @@
 <novo-field class="example-chip-list">
   <novo-label>Shifts</novo-label>
-  <novo-chip-list #chipList stacked aria-label="Shift selection">
+  <novo-chip-list
+    #chipList
+    stacked
+    aria-label="Shift selection"
+    [formControl]="shiftCtrl"
+    [compareWith]="compareById">
     <novo-chip
-      *ngFor="let shift of shifts"
+      *ngFor="let shift of chipList.value"
       (removed)="remove(shift)">
       <novo-flex gap="1rem">
         <novo-text>
@@ -28,7 +33,7 @@
       [formControl]="searchCtrl"
       (novoChipInputTokenEnd)="add($event)" />
   </novo-chip-list>
-  <novo-autocomplete (optionSelected)="selected($event)">
+  <novo-autocomplete (optionSelected)="selected($event)" multiple>
     <novo-option *ngFor="let shift of filteredShifts | async" [value]="shift">
       <novo-text>
         <novo-icon>calendar</novo-icon>
