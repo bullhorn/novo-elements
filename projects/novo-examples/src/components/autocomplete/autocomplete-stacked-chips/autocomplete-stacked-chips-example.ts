@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { NovoOptionSelectedEvent } from 'novo-elements';
 // import { NovoChipInputEvent } from 'novo-elements';
@@ -22,12 +22,10 @@ interface ShiftData {
   styleUrls: ['autocomplete-stacked-chips-example.css'],
 })
 export class AutocompleteStackedChipsExample {
-  searchCtrl = new FormControl();
   filteredShifts: Observable<ShiftData[]>;
-  shifts: ShiftData[] = ALL_SHIFTS.slice(0, 3);
   allShifts: ShiftData[] = ALL_SHIFTS;
-
-  @ViewChild('searchInput') searchInput: ElementRef<HTMLInputElement>;
+  searchCtrl = new FormControl();
+  shiftCtrl = new FormControl(ALL_SHIFTS.slice(0, 3));
 
   constructor() {
     this.filteredShifts = this.searchCtrl.valueChanges.pipe(
@@ -36,40 +34,18 @@ export class AutocompleteStackedChipsExample {
     );
   }
 
-  add(event: any): void {
-    const input = event.input;
-    const value = event.value;
+  add(event: any): void {}
 
-    // Add our shift
-    if ((value || '').trim()) {
-      this.shifts.push(value.trim());
-    }
+  remove(shift: ShiftData): void {}
 
-    // Reset the input value
-    if (input) {
-      input.value = '';
-    }
+  selected(event: NovoOptionSelectedEvent): void {}
 
-    this.searchCtrl.setValue(null);
-  }
-
-  remove(shift: ShiftData): void {
-    const index = this.shifts.indexOf(shift);
-
-    if (index >= 0) {
-      this.shifts.splice(index, 1);
-    }
-  }
-
-  selected(event: NovoOptionSelectedEvent): void {
-    this.shifts.push(event.option.value);
-    this.searchInput.nativeElement.value = '';
-    this.searchCtrl.setValue(null);
+  compareById(o1: any, o2: any) {
+    return o1.id === o2.id;
   }
 
   private _filter(value: string): ShiftData[] {
     const filterValue = value.toLowerCase();
-
     return this.allShifts.filter((shift) => shift.startTime.toLowerCase().indexOf(filterValue) === 0);
   }
 }
