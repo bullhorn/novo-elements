@@ -8,6 +8,7 @@ export interface IDataTablePreferences {
   globalSearch?: any;
   pageSize?: number;
   displayedColumns?: string[];
+  savedSearchName?: string;
 }
 
 export interface IDataTableColumn<T> {
@@ -107,6 +108,7 @@ export interface IDataTableChangeEvent {
   globalSearch?: string;
   outsideFilter?: IDataTableFilter | IDataTableFilter[];
   where?: { query: string; form: any };
+  savedSearchName?: string;
 }
 
 export interface IDataTableSelectionChangeEvent {
