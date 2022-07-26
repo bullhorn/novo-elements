@@ -20,7 +20,7 @@ import {
     <span class="dot"></span>
     <span class="dot"></span>
     <span class="dot"></span>
-    <div class="message" *ngIf="showLoadMessage">{{loadMessage}}</div>
+    <div class="message" *ngIf="showLoadMessage" ng-transclude></div>
   `,
 })
 export class NovoLoadingElement {
@@ -42,9 +42,6 @@ export class NovoLoadingElement {
 
   @Input()
   size: string = 'medium';
-
-  @Input()
-  loadMessage: string;
 
   @Input()
   showLoadMessage: boolean;
