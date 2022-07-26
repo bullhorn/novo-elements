@@ -2306,6 +2306,7 @@ export class NonIdealStateDevelopPage {
 <p><code-example example="non-ideal-state-usage"></code-example></p>
 <p>The call to action doesn't necessarily need to be a button, for example:</p>
 <p><code-example example="non-ideal-state-search-usage"></code-example></p>
+<p><code-example example="non-ideal-state-loading-usage"></code-example></p>
 `,
   host: { class: 'markdown-page' }
 })

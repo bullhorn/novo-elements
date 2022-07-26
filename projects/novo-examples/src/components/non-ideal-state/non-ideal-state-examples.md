@@ -14,3 +14,4 @@ Basic use-case is to display an icon, message, and reason for this state to occu
 The call to action doesn't necessarily need to be a button, for example:
 
 <code-example example="non-ideal-state-search-usage"></code-example>
+<code-example example="non-ideal-state-loading-usage"></code-example>
