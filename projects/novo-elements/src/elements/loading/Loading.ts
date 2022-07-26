@@ -20,7 +20,7 @@ import {
     <span class="dot"></span>
     <span class="dot"></span>
     <span class="dot"></span>
-    <div class="message" *ngIf="showLoadMessage" ng-transclude></div>
+    <div class="message" *ngIf="showLoadMessage"><ng-content></ng-content></div>
   `,
 })
 export class NovoLoadingElement {
