@@ -2305,7 +2305,8 @@ export class NonIdealStateDevelopPage {
 <p>Basic use-case is to display an icon, message, and reason for this state to occur. And provide a call to action for the user.</p>
 <p><code-example example="non-ideal-state-usage"></code-example></p>
 <p>The call to action doesn't necessarily need to be a button, for example:</p>
-<p><code-example example="non-ideal-state-search-usage"></code-example></p>
+<p><code-example example="non-ideal-state-search-usage"></code-example>
+<code-example example="non-ideal-state-loading-usage"></code-example></p>
 `,
   host: { class: 'markdown-page' }
 })
