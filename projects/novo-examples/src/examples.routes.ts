@@ -6106,6 +6106,9 @@ export class May2022Page {
 <h5>Add Tooltip</h5>
 <p>You are able to dynamically change a field's tooltip.</p>
 <p><code-example example="fi-tooltip"></code-example></p>
+<h5>Modify Description</h5>
+<p>You are able to dynamically change the description if a field, potentially adding in custom HTML.</p>
+<p><code-example example="fi-description"></code-example></p>
 <h5>Interacting with Nested Forms</h5>
 <p>Field Interactions can navigate nested forms to interact with parent and child forms. This example uses the Form Group component which contains an array of nested forms that are kept in sync by field interactions.</p>
 <p><code-example example="fi-nested"></code-example></p>
