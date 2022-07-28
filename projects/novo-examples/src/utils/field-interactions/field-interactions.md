@@ -147,7 +147,7 @@ You are able to dynamically change a field's tooltip.
 
 ##### Modify Description
 
-You are able to dynamically change the description if a field, potentially adding in custom HTML.
+You are able to dynamically change the description of a field, potentially adding in custom HTML.
 
 <code-example example="fi-description"></code-example>
 
