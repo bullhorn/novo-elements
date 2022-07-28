@@ -1,5 +1,5 @@
 import { ActiveDescendantKeyManager } from '@angular/cdk/a11y';
-import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { hasModifierKey } from '@angular/cdk/keycodes';
 import {
   AfterContentInit,
@@ -22,9 +22,10 @@ import {
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import { Key } from '../../../utils';
-import { fromEvent, merge, of, Subscription } from 'rxjs';
-import { take } from 'rxjs/operators';
+import { fromEvent, interval, merge, of, Subscription } from 'rxjs';
+import { debounce, take } from 'rxjs/operators';
+import { BooleanInput, Key } from '../../../utils';
+import type { NovoChipList } from '../../chips';
 import {
   CanDisable,
   CanDisableCtor,
@@ -111,7 +112,7 @@ export class NovoAutocompleteElement
   /** Whether the user should be allowed to select multiple options. */
   @Input()
   get multiple(): boolean {
-    return this._multiple || !!this._formField._control?.multiple || this._formField._control?.controlType === 'chip-list';
+    return this._multiple;
   }
   set multiple(value: boolean) {
     this._multiple = coerceBooleanProperty(value);
@@ -120,6 +121,7 @@ export class NovoAutocompleteElement
 
   /** Whether the toggle button is disabled. */
   @Input()
+  @BooleanInput()
   get disabled(): boolean {
     if (this._disabled === undefined && this._formField?._control) {
       return this._formField._control.disabled;
@@ -170,6 +172,9 @@ export class NovoAutocompleteElement
     this.options.changes.subscribe(() => {
       this._watchStateChanges();
       this._watchSelectionEvents();
+      Promise.resolve().then(() => {
+        this.checkSelectedOptions();
+      });
     });
   }
 
@@ -180,32 +185,49 @@ export class NovoAutocompleteElement
 
   checkPanel() {
     const isTriggered = this.triggerOn(this._formField._control);
+    console.log('checking', isTriggered);
     if (isTriggered && this.element) {
       this.openPanel();
     }
   }
 
-  private _setTriggerValue(value: any): void {
-    const toDisplay = this.displayWith ? this.displayWith(value) : value;
+  private _setTriggerValue(option: NovoOption): void {
+    const toDisplay = this.displayWith ? this.displayWith(option) : option?.viewValue;
     // Simply falling back to an empty string if the display value is falsy does not work properly.
     // The display value can also be the number zero and shouldn't fall back to an empty string.
-    const inputValue = toDisplay != null ? toDisplay : '';
+    const displayValue = toDisplay != null ? toDisplay : '';
+    const optionValue = option.value;
+    console.log('optionValue', optionValue);
     // If it's used within a `NovoField`, we should set it through the property so it can go
     // through change detection.
     if (this._formField) {
       const { controlType, lastCaretPosition = 0 } = this._formField._control;
       if (controlType === 'textarea') {
         const currentValue = this._formField._control.value.split('');
-        currentValue.splice(lastCaretPosition, 0, inputValue);
+        currentValue.splice(lastCaretPosition, 0, displayValue);
         this._formField._control.value = currentValue.join('');
+      } else if (controlType === 'chip-list') {
+        const chipList = this._formField._control as NovoChipList;
+        const currentValue = this._formField._control.value;
+        if (currentValue.includes(optionValue)) {
+          chipList.removeValue(optionValue);
+        } else {
+          chipList.addValue(optionValue);
+        }
       } else {
-        let valueToEmit: any = inputValue;
+        let valueToEmit: any = optionValue;
         if (this.multiple) {
           const currentValue = this._formField._control.value;
           if (Array.isArray(currentValue)) {
-            valueToEmit = [...currentValue, inputValue];
+            if (currentValue.includes(optionValue)) {
+              valueToEmit = currentValue.filter((it) => it === optionValue);
+            } else {
+              valueToEmit = [...currentValue, optionValue];
+            }
+          } else if (currentValue === optionValue) {
+            valueToEmit = [];
           } else {
-            valueToEmit = [currentValue, inputValue];
+            valueToEmit = [currentValue, optionValue];
           }
         }
         this._formField._control.value = valueToEmit;
@@ -214,7 +236,7 @@ export class NovoAutocompleteElement
       // this._element.nativeElement.value = inputValue;
       console.warn(`AutoComplete only intended to be used within a NovoField`);
     }
-    this._previousValue = inputValue;
+    this._previousValue = optionValue;
   }
 
   /**
@@ -241,16 +263,16 @@ export class NovoAutocompleteElement
    */
   private _setValueAndClose(event: NovoOptionSelectionChange | null): void {
     if (event && event.source) {
-      this._clearPreviousSelectedOption(event.source);
-      this._setTriggerValue(event.source.value);
+      if (!this.multiple) this._clearPreviousSelectedOption(event.source);
+      this._setTriggerValue(event.source);
       // this._onChange(event.source.value);
       // this._element.nativeElement.focus();
-      this._formField._control.focus();
+      // this._formField._control.focus();
       this._emitSelectEvent(event.source);
       this._watchSelectionEvents();
     }
 
-    if (!this._multiple) this.closePanel();
+    if (!this.multiple) this.closePanel();
   }
 
   private _watchSelectionEvents() {
@@ -262,12 +284,16 @@ export class NovoAutocompleteElement
   }
 
   private _watchStateChanges() {
-    const inputStateChanged = this._formField && this._formField._control ? this._formField._control.stateChanges : of();
+    const inputStateChanged = this._formField.stateChanges;
     this._stateChanges.unsubscribe();
-    this._stateChanges = merge(inputStateChanged).subscribe(() => {
-      this.checkPanel();
-      this.cdr.markForCheck();
-    });
+    this._stateChanges = merge(inputStateChanged)
+      .pipe(debounce(() => interval(10)))
+      .subscribe(() => {
+        console.log('StateChagn');
+        this.checkSelectedOptions();
+        this.checkPanel();
+        this.cdr.markForCheck();
+      });
   }
 
   /** The currently active option, coerced to MatOption type. */
@@ -310,5 +336,22 @@ export class NovoAutocompleteElement
     }
   }
 
-  static ngAcceptInputType_disabled: BooleanInput;
+  private checkSelectedOptions() {
+    if (this.multiple && Array.isArray(this._formField._control.value)) {
+      const value = this._formField._control.value;
+      this.options.forEach((option) => option.deselect());
+      value.forEach((currentValue: any) => this._selectValue(currentValue));
+    }
+  }
+  /**
+   * Finds and selects and option based on its value.
+   * @returns Option that has the corresponding value.
+   */
+  private _selectValue(value: any): NovoOption | undefined {
+    const correspondingOption = this.options.find((option: NovoOption) => {
+      return option.value === value;
+    });
+    correspondingOption?.select();
+    return correspondingOption;
+  }
 }

@@ -87,6 +87,10 @@ novo-select {
   font-size: 1rem;
   z-index: z(below);
   opacity: 0;
+
+  .select-item {
+    height: 35px;
+  }
 }
 
 .select-header {
