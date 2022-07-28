@@ -255,6 +255,14 @@ export class FieldInteractionApi {
     }
   }
 
+  setDescription(key: string, description: string, otherForm?: NovoFormGroup): void {
+    const control = this.getControl(key, otherForm);
+    if (control && !control.restrictFieldInteractions) {
+      control.description = description;
+      this.triggerEvent({ controlKey: key, prop: 'description', value: description }, otherForm);
+    }
+  }
+
   highlight(key: string, isHighlighted: boolean, otherForm?: NovoFormGroup): void {
     const control = this.getControl(key, otherForm);
     if (control && !control.restrictFieldInteractions) {
