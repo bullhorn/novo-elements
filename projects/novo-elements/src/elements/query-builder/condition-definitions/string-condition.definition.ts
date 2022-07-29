@@ -29,6 +29,7 @@ import { AbstractConditionFieldDef } from './abstract-condition.definition';
           </novo-chip>
           <input
             novoChipInput
+            [(ngModel)]="model"
             [placeholder]="labels.typeToAddChips"
             autocomplete="off"
             (novoChipInputTokenEnd)="add($event, formGroup)"
@@ -50,6 +51,7 @@ import { AbstractConditionFieldDef } from './abstract-condition.definition';
 export class NovoDefaultStringConditionDef extends AbstractConditionFieldDef {
   separatorKeysCodes: number[] = [ENTER, COMMA];
   defaultOperator = 'includeAny';
+  model = '';
 
   getValue(formGroup: AbstractControl): any[] {
     return formGroup.value?.value || [];

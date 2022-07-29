@@ -402,7 +402,6 @@ export class NovoChipList
       }
 
       this._resetChips();
-
       // Check to see if we need to update our tab index
       this._updateTabIndex();
 
@@ -475,7 +474,9 @@ export class NovoChipList
   }
 
   removeValue(value: any): void {
-    this.value = this.value.filter((it) => !this.compareWith(it, value));
+    if (this.value) {
+      this.value = this.value.filter((it) => !this.compareWith(it, value));
+    }
   }
 
   // Implemented as part of ControlValueAccessor.
@@ -499,7 +500,6 @@ export class NovoChipList
    * @docs-private
    */
   onContainerClick(event: MouseEvent) {
-    console.log('container click', this._originatesFromChip(event));
     if (!this._originatesFromChip(event)) {
       this.focus();
     }
@@ -519,7 +519,6 @@ export class NovoChipList
     if (this._chipInput && this._chipInput.focused) {
       // do nothing
     } else if (this._chipInput) {
-      console.log('focus input');
       Promise.resolve().then(() => this._focusInput(options));
       this.stateChanges.next();
     } else if (this.chips.length > 0) {

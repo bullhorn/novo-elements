@@ -149,8 +149,11 @@ export class ConditionBuilderComponent implements OnInit, AfterContentInit, Afte
     const { field, operator } = this.parentForm.value;
 
     if (this._lastContext.field !== field) {
-      // this.parentForm.get('value').setValue(null);
-      // this.parentForm.get('operator').setValue(null);
+      if (!!this._lastContext.field) {
+        // only clearing operator/value is field was previously defined so we can preload values onto the form
+        this.parentForm.get('value').setValue(null);
+        this.parentForm.get('operator').setValue(null);
+      }
       this.createFieldTemplates();
     }
 
