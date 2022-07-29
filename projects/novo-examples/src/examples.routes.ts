@@ -2305,7 +2305,8 @@ export class NonIdealStateDevelopPage {
 <p>Basic use-case is to display an icon, message, and reason for this state to occur. And provide a call to action for the user.</p>
 <p><code-example example="non-ideal-state-usage"></code-example></p>
 <p>The call to action doesn't necessarily need to be a button, for example:</p>
-<p><code-example example="non-ideal-state-search-usage"></code-example></p>
+<p><code-example example="non-ideal-state-search-usage"></code-example>
+<code-example example="non-ideal-state-loading-usage"></code-example></p>
 `,
   host: { class: 'markdown-page' }
 })
@@ -6292,6 +6293,9 @@ export class May2022Page {
 <h5>Add Tooltip</h5>
 <p>You are able to dynamically change a field's tooltip.</p>
 <p><code-example example="fi-tooltip"></code-example></p>
+<h5>Modify Description</h5>
+<p>You are able to dynamically change the description of a field, potentially adding in custom HTML.</p>
+<p><code-example example="fi-description"></code-example></p>
 <h5>Interacting with Nested Forms</h5>
 <p>Field Interactions can navigate nested forms to interact with parent and child forms. This example uses the Form Group component which contains an array of nested forms that are kept in sync by field interactions.</p>
 <p><code-example example="fi-nested"></code-example></p>

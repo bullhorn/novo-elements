@@ -7,6 +7,7 @@ import { Component, HostBinding, Input } from '@angular/core';
   template: `
     <novo-icon class="novo-non-ideal-state-icon" *ngIf="icon" [color]="theme">{{ icon }}</novo-icon>
     <ng-content select="novo-icon"></ng-content>
+    <ng-content select="novo-icon,novo-loading,novo-avatar"></ng-content>
     <novo-title class="novo-non-ideal-state-title" *ngIf="title" marginBefore>{{ title }}</novo-title>
     <ng-content select="novo-title"></ng-content>
     <novo-text *ngIf="description" block marginBefore marginAfter>{{ description }}</novo-text>
