@@ -41,6 +41,7 @@ export class DataTableSource<T> extends DataSource<T> {
           this.state.pageSize,
           this.state.globalSearch,
           this.state.outsideFilter,
+          this.state.where,
         );
       }),
       map((data: { results: T[]; total: number }) => {

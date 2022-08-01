@@ -6,6 +6,9 @@
     @include theme-text-colors("color");
     background: transparent;
     color: $positive;
+    i {
+      line-height: 1.2;
+    }
     &:hover,
     &:focus {
       background: lighten($light, 7%);

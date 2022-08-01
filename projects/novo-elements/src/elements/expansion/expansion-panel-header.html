@@ -1,7 +1,7 @@
+<span [@indicatorRotate]="_getExpandedState()" *ngIf="_showToggle()"
+      class="novo-expansion-indicator" size="lg"></span>
 <span class="novo-content">
   <ng-content select="novo-panel-title"></ng-content>
   <ng-content select="novo-panel-description"></ng-content>
   <ng-content></ng-content>
 </span>
-<span [@indicatorRotate]="_getExpandedState()" *ngIf="_showToggle()"
-      class="novo-expansion-indicator"></span>

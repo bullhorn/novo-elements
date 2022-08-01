@@ -185,7 +185,6 @@ export class NovoAutocompleteElement
 
   checkPanel() {
     const isTriggered = this.triggerOn(this._formField._control);
-    console.log('checking', isTriggered);
     if (isTriggered && this.element) {
       this.openPanel();
     }
@@ -197,7 +196,6 @@ export class NovoAutocompleteElement
     // The display value can also be the number zero and shouldn't fall back to an empty string.
     const displayValue = toDisplay != null ? toDisplay : '';
     const optionValue = option.value;
-    console.log('optionValue', optionValue);
     // If it's used within a `NovoField`, we should set it through the property so it can go
     // through change detection.
     if (this._formField) {
@@ -289,7 +287,6 @@ export class NovoAutocompleteElement
     this._stateChanges = merge(inputStateChanged)
       .pipe(debounce(() => interval(10)))
       .subscribe(() => {
-        console.log('StateChagn');
         this.checkSelectedOptions();
         this.checkPanel();
         this.cdr.markForCheck();

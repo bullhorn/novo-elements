@@ -277,10 +277,10 @@ export class NovoSelectSearchComponent implements OnInit, OnDestroy, ControlValu
 
     // set custom novo-option class if the component was placed inside a novo-option
     if (this.novoOption) {
-      this.novoOption.disabled = true;
+      this.novoOption.novoInert = true;
       this.novoOption._getHostElement().classList.add('contains-novo-select-search');
     } else {
-      console.error('<ngx-novo-select-search> must be placed inside a <novo-option> element');
+      console.error('<novo-select-search> must be placed inside a <novo-option> element');
     }
 
     // when the select dropdown panel is opened or closed
@@ -542,7 +542,7 @@ export class NovoSelectSearchComponent implements OnInit, OnDestroy, ControlValu
       if (this.novoSelect.multiple) {
         // note: the access to novoSelect.ngControl (instead of novoSelect.value / novoSelect.valueChanges)
         // is necessary to properly work in multi-selection mode.
-        console.error('the novo-select containing ngx-novo-select-search must have a ngModel or formControl directive when multiple=true');
+        console.error('the novo-select containing novo-select-search must have a ngModel or formControl directive when multiple=true');
       }
       return;
     }

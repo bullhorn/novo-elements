@@ -41,8 +41,10 @@
   .novo-field-input {
     grid-area: input;
     display: grid;
+    align-items: center;
     grid-template-columns: minmax(auto, max-content) 1fr minmax(auto, max-content);
     flex: 1 1 100%;
+    min-height: 2.9rem;
 
     &::ng-deep {
       .novo-input-element {
@@ -51,7 +53,7 @@
         background-image: none;
         background-color: transparent;
         box-shadow: none;
-        padding: 0.4rem 0.2rem;
+        padding: 0.4rem 0.2rem 0rem;
         border-bottom: none !important;
 
         &:focus {
@@ -72,6 +74,7 @@
     .novo-field-infix {
       display: flex;
       align-items: center;
+      align-self: flex-end;
       select,
       &::ng-deep .novo-input-element {
         width: 100%;
@@ -92,5 +95,11 @@
   .novo-field-hint-wrapper {
     display: flex;
     flex-direction: column;
+  }
+
+  &::ng-deep {
+    .novo-date-range-format {
+      min-width: 22rem;
+    }
   }
 }

@@ -35,7 +35,7 @@ novo-entity-chips {
     input {
       padding-top: 0;
       border: none;
-      background: transparent;
+      background: transparent !important;
       width: 100%;
       &:focus {
         outline: none;
