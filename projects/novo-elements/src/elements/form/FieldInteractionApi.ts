@@ -263,9 +263,6 @@ export class FieldInteractionApi {
     }
   }
 
-  /**
-   * @deprecated use highlight pipe
-   */
   highlight(key: string, isHighlighted: boolean, otherForm?: NovoFormGroup): void {
     const control = this.getControl(key, otherForm);
     if (control && !control.restrictFieldInteractions) {

@@ -35,14 +35,11 @@ novo-search {
   > input {
     height: 100%;
     display: block;
-    // background: $white;
     background: transparent;
     position: relative;
     font-size: 1.4rem;
     color: var(--text-main);
     z-index: z(above);
-    // z-index: 12;
-    // opacity: 0;
     border: none;
     transition: all 250ms;
     backface-visibility: hidden;
@@ -51,9 +48,6 @@ novo-search {
     &:active {
       outline: none;
     }
-    // &::placeholder {
-    //   color: $empty;
-    // }
   }
 
   novo-icon {

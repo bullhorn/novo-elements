@@ -99,7 +99,7 @@ let nextId = 0;
   template: `
     <div class="novo-select-trigger" #dropdownElement (click)="togglePanel(); (false)" tabIndex="{{ disabled ? -1 : 0 }}" type="button">
       <span class="novo-select-placeholder" *ngIf="empty">{{ placeholder }}</span>
-      <span class="novo-select-display-value text-ellipsis" *ngIf="!empty">{{ displayValue }}</span>
+      <span class="text-ellipsis" *ngIf="!empty">{{ displayValue }}</span>
       <i class="bhi-collapse"></i>
     </div>
     <novo-overlay-template
