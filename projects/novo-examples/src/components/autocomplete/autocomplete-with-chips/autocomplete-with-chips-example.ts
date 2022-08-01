@@ -19,50 +19,25 @@ export class AutocompleteWithChipsExample {
   selectable = true;
   removable = true;
   separatorKeysCodes: number[] = [ENTER, COMMA];
-  fruitCtrl = new FormControl();
+  searchCtrl = new FormControl();
+  fieldCtrl = new FormControl(['Lemon']);
   filteredFruits: Observable<string[]>;
-  fruits: string[] = ['Lemon'];
   allFruits: string[] = ['Apple', 'Lemon', 'Lime', 'Orange', 'Strawberry'];
 
-  @ViewChild('fruitInput') fruitInput: ElementRef<HTMLInputElement>;
+  @ViewChild('chipInput') chipInput: ElementRef<HTMLInputElement>;
 
   constructor() {
-    this.filteredFruits = this.fruitCtrl.valueChanges.pipe(
+    this.filteredFruits = this.searchCtrl.valueChanges.pipe(
       startWith(null),
       map((fruit: string | null) => (fruit ? this._filter(fruit) : this.allFruits.slice())),
     );
   }
 
-  add(event: any): void {
-    const input = event.input;
-    const value = event.value;
+  add(event: any): void {}
 
-    // Add our fruit
-    if ((value || '').trim()) {
-      this.fruits.push(value.trim());
-    }
+  remove(fruit: string): void {}
 
-    // Reset the input value
-    if (input) {
-      input.value = '';
-    }
-
-    this.fruitCtrl.setValue(null);
-  }
-
-  remove(fruit: string): void {
-    const index = this.fruits.indexOf(fruit);
-
-    if (index >= 0) {
-      this.fruits.splice(index, 1);
-    }
-  }
-
-  selected(event: NovoOptionSelectedEvent): void {
-    this.fruits.push(event.option.viewValue);
-    this.fruitInput.nativeElement.value = '';
-    this.fruitCtrl.setValue(null);
-  }
+  selected(event: NovoOptionSelectedEvent): void {}
 
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();

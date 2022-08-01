@@ -145,6 +145,12 @@ You are able to dynamically change a field's tooltip.
 
 <code-example example="fi-tooltip"></code-example>
 
+##### Modify Description
+
+You are able to dynamically change the description of a field, potentially adding in custom HTML.
+
+<code-example example="fi-description"></code-example>
+
 ##### Interacting with Nested Forms
 
 Field Interactions can navigate nested forms to interact with parent and child forms. This example uses the Form Group component which contains an array of nested forms that are kept in sync by field interactions.

@@ -8,9 +8,11 @@ import {
   ContentChildren,
   Directive,
   ElementRef,
+  EventEmitter,
   InjectionToken,
   Input,
   OnDestroy,
+  Output,
   QueryList,
   ViewChild,
 } from '@angular/core';
@@ -99,6 +101,9 @@ export class NovoFieldElement implements AfterContentInit, OnDestroy {
 
   private _destroyed = new Subject<void>();
 
+  @Output() valueChanges: EventEmitter<any> = new EventEmitter();
+  @Output() stateChanges: EventEmitter<any> = new EventEmitter();
+
   constructor(public _elementRef: ElementRef, private _changeDetectorRef: ChangeDetectorRef) {}
   /**
    * Gets an ElementRef for the element that a overlay attached to the form-field should be
@@ -120,12 +125,16 @@ export class NovoFieldElement implements AfterContentInit, OnDestroy {
     // Subscribe to changes in the child control state in order to update the form field UI.
     // tslint:disable-next-line:deprecation
     control.stateChanges.pipe(startWith(null)).subscribe(() => {
+      this.stateChanges.next();
       this._changeDetectorRef.markForCheck();
     });
 
     // Run change detection if the value changes.
     if (control.ngControl && control.ngControl.valueChanges) {
-      control.ngControl.valueChanges.pipe(takeUntil(this._destroyed)).subscribe(() => this._changeDetectorRef.markForCheck());
+      control.ngControl.valueChanges.pipe(takeUntil(this._destroyed)).subscribe((v) => {
+        this.valueChanges.next(v);
+        this._changeDetectorRef.markForCheck();
+      });
     }
 
     if (this._hasLabel()) {

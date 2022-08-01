@@ -2,6 +2,7 @@ export * from './fi-adding-removing';
 export * from './fi-async';
 export * from './fi-calculation';
 export * from './fi-confirm';
+export * from './fi-description';
 export * from './fi-enable-disable';
 export * from './fi-globals';
 export * from './fi-hide-show';
