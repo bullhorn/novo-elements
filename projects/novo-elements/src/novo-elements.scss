@@ -107,6 +107,10 @@
   color: var(--text-disabled, $color-slate);
 }
 
+.novo-visibility-hidden {
+  visibility: hidden !important;
+}
+
 @include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
   $excluded: (bright, muted);
 

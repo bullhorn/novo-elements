@@ -40,9 +40,21 @@ $novo-chip-input-margin: 4px;
 
 novo-field.novo-focused {
   input.novo-chip-input {
+    opacity: 1;
     width: $novo-chip-input-width;
     margin: $novo-chip-input-margin;
     flex: 1 0 $novo-chip-input-width;
+  }
+}
+
+novo-field:not(.novo-focused) {
+  .novo-field-input .novo-chip-list-has-value {
+    margin-right: 2rem;
+    input.novo-chip-input {
+      opacity: 0;
+      width: 0px !important;
+      max-width: 0px !important;
+    }
   }
 }
 

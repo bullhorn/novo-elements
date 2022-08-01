@@ -29,6 +29,17 @@
 
 </novo-field>
 
+<novo-field>
+  <novo-label>Need a Vacation?</novo-label>
+  <input novoInput dateRangeFormat="iso8601" [picker]="daterangepicker" [(ngModel)]="daterange" />
+  <novo-picker-toggle novoSuffix icon="calendar">
+    <novo-date-picker #daterangepicker mode="range" numberOfMonths="2"></novo-date-picker>
+  </novo-picker-toggle>
+  <novo-hint>value is: {{daterange}}</novo-hint>
+
+</novo-field>
+
+
 
 <novo-fieldset-header icon="calendar" title="Add Day Of Week"></novo-fieldset-header>
 

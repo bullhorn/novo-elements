@@ -16,6 +16,7 @@ export * from './modal';
 export * from './non-ideal-state';
 export * from './pop-over';
 export * from './progress';
+export * from './query-builder';
 export * from './quick-note';
 export * from './search';
 export * from './slides';

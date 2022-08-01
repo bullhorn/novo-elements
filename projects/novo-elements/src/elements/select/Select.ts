@@ -99,7 +99,7 @@ let nextId = 0;
   template: `
     <div class="novo-select-trigger" #dropdownElement (click)="togglePanel(); (false)" tabIndex="{{ disabled ? -1 : 0 }}" type="button">
       <span class="novo-select-placeholder" *ngIf="empty">{{ placeholder }}</span>
-      <span class="novo-select-display-value" *ngIf="!empty">{{ displayValue }}</span>
+      <span class="text-ellipsis" *ngIf="!empty">{{ displayValue }}</span>
       <i class="bhi-collapse"></i>
     </div>
     <novo-overlay-template
@@ -144,7 +144,7 @@ let nextId = 0;
             [tooltip]="option.tooltip"
             [tooltipPosition]="option.tooltipPosition || 'right'"
           >
-            <span [innerHtml]="highlight(option.label, filterTerm)"></span> <i *ngIf="option.active" class="bhi-check"></i>
+            <span [innerHtml]="option.label | highlight:filterTerm"></span> <i *ngIf="option.active" class="bhi-check"></i>
           </novo-option>
           <ng-template #divider>
             <novo-divider class="select-item-divider" [class.with-label]="option.label" [class.without-label]="!option.label">
@@ -816,6 +816,9 @@ export class NovoSelectElement
     };
   }
 
+  /**
+   * @deprecated use highlight pipe
+   */
   highlight(match, query) {
     // Replaces the capture string with a the same string inside of a "strong" tag
     return query ? match.replace(new RegExp(this.escapeRegexp(query), 'gi'), '<strong>$&</strong>') : match;

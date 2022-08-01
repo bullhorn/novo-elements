@@ -1,13 +1,10 @@
-<!-- Placeholder to adjust vertical offset of the novo-option elements -->
-<input novoInput class="novo-select-search-input novo-select-search-hidden" />
-
-<!-- Note: the  novo-datepicker-content novo-tab-header are needed to inherit the novoerial theme colors, see PR #22 -->
-<div
+<novo-field
   #innerSelectSearch
-  class="novo-select-search-inner novo-typography novo-datepicker-content novo-tab-header"
+  class="novo-select-search-inner"
   [ngClass]="{'novo-select-search-inner-multiple': novoSelect.multiple, 'novo-select-search-inner-toggle-all': _isToggleAllCheckboxVisible() }">
 
   <novo-checkbox *ngIf="_isToggleAllCheckboxVisible()"
+    novoPrefix
     [color]="'primary'"
     class="novo-select-search-toggle-all-checkbox"
     [checked]="toggleAllCheckboxChecked"
@@ -17,10 +14,13 @@
     [tooltipPosition]="toogleAllCheckboxTooltipPosition"
     (change)="_emitSelectAllBooleanToParent($event.checked)"></novo-checkbox>
 
-  <novo-icon class="novo-select-search-icon-prefix">search</novo-icon>
+  <novo-icon
+    novoPrefix
+    class="novo-select-search-icon">search</novo-icon>
 
-  <input class="novo-select-search-input novo-input-element"
+  <input class="novo-select-search-input"
     #searchSelectInput
+    novoInput
     [name]="name"
     autocomplete="off"
     [type]="type"
@@ -30,11 +30,14 @@
     (blur)="onBlur()"
     [placeholder]="placeholderLabel"
     [attr.aria-label]="ariaLabel" />
+
   <novo-spinner *ngIf="searching"
+    novoSuffix
     class="novo-select-search-spinner"
     diameter="16"></novo-spinner>
 
   <novo-button
+    novoSuffix
     *ngIf="!hideClearSearchButton && value && !searching"
     aria-label="Clear"
     (click)="_reset(true)"
@@ -49,7 +52,7 @@
 
   <ng-content select=".novo-select-search-custom-header-content"></ng-content>
 
-</div>
+</novo-field>
 
 <div *ngIf="_showNoEntriesFound$ | async"
   class="novo-select-search-no-entries-found">
