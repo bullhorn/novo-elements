@@ -5777,6 +5777,80 @@ export class TemplatesPage {
 
 
 @Component({
+  selector: 'august-2022-page',
+  template: `<h1>📢  August 2022 (version 7.3.x)</h1>
+<p><strong>Announcement</strong>: New features and improvements!</p>
+<p>Bullhorn is continually seeking to update and innovate our products, and leverage the latest features in the frameworks we use. In support of that mission, we are updating our Novo UI and its supporting novo-elements library to Angular 13.  This update  allows us to continue offering a streamlined and consistent experience across Bullhorn’s complete product portfolio.  This update includes both an Angular upgrade, as well as supporting the latest Typescript updates.  You can find more details in the Technical Release Notes section below.</p>
+<h2>Release Timeline</h2>
+<p>Bullhorn has released a Release Candidate v7.3.x of Novo-elements. Bullhorn will update Novo to use Novo-Elements v7.3.x in the 2022.8 release</p>
+<pre><code class="language-sh">npm install novo-elements@next
+<span class="hljs-comment"># or</span>
+npm install novo-elements@7.3.x
+</code></pre>
+<h2 id="notable-changes">Notable changes <a href="https://bullhorn.github.io/novo-elements/docs/#/updates/v7dot3#notable-changes">#</a></h2>
+<ul>
+<li><a href="https://github.com/bullhorn/novo-elements/pull/1331">#1331</a> - Chips: updated disabled chip styles for better readability</li>
+<li><a href="https://github.com/bullhorn/novo-elements/pull/1326">#1326</a> - Autocomplete: Autocomplete now works with ChipList</li>
+<li><a href="https://github.com/bullhorn/novo-elements/pull/1334">#1334</a> - NonIdealState: New loading pattern for Non Ideal State</li>
+<li><a href="https://github.com/bullhorn/novo-elements/pull/1333">#1333</a> - Forms: field hints now support html text w/ FieldInteractionApi support</li>
+</ul>
+<h2 id="new-features">New Features<a href="https://bullhorn.github.io/novo-elements/docs/#/updates/v7dot3#new-features">#</a></h2>
+<h3 id="better-chips">Chips: updated disabled chip styles for better <a href="https://bullhorn.github.io/novo-elements/docs/#/updates/v7dot3#better-chips">#</a></h3>
+<ul>
+<li>darken the opacity to improve readability</li>
+<li>update text color of disabled chips to look non-selectable</li>
+<li>remove the X icon to further confer that this chip is read-only</li>
+</ul>
+<p>previous state was 40% opacity:
+<img src="https://user-images.githubusercontent.com/21197268/180056798-84c36888-96bb-4d72-99fd-ebd80a157f1a.png" alt="chips-before"></p>
+<p>After updates:</p>
+<p><img src="https://user-images.githubusercontent.com/21197268/180057064-f549895c-82f2-4092-bf05-00172f0dcb09.png" alt="chips-after"></p>
+<p>example with disabled and non disabled chips</p>
+<p><img src="https://user-images.githubusercontent.com/21197268/180057201-ab8717aa-17be-49c3-a18d-97bf1a8889dd.png" alt="after-example-both"></p>
+<hr>
+<h3 id="autocomplete">Autocomplete <a href="https://bullhorn.github.io/novo-elements/docs/#/updates/v7dot3#autocomplete">#</a></h3>
+<p>Autocomplete now works with the NovoChipList when used in a NovoFormField.  The manual events are no longer necessary to utilize the autocomplete functionality.  Now basic functionality can be supported with a limited specification.</p>
+<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">novo-field</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">novo-label</span>&gt;</span>Favorite Fruits<span class="hljs-tag">&lt;/<span class="hljs-name">novo-label</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">novo-chip-list</span> #<span class="hljs-attr">chipList</span> [<span class="hljs-attr">formControl</span>]=<span class="hljs-string">&quot;fieldCtrl&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">novo-chip</span> *<span class="hljs-attr">ngFor</span>=<span class="hljs-string">&quot;let fruit of chipList.value&quot;</span> [<span class="hljs-attr">value</span>]=<span class="hljs-string">&quot;fruit&quot;</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">novo-text</span>&gt;</span>fruit<span class="hljs-tag">&lt;/<span class="hljs-name">novo-text</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">novo-icon</span> <span class="hljs-attr">novoChipRemove</span>&gt;</span>close<span class="hljs-tag">&lt;/<span class="hljs-name">novo-icon</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">novo-chip</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">input</span> #<span class="hljs-attr">chipInput</span> <span class="hljs-attr">novoChipInput</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">&quot;New fruit...&quot;</span> <span class="hljs-attr">autocomplete</span>=<span class="hljs-string">&quot;off&quot;</span> [<span class="hljs-attr">formControl</span>]=<span class="hljs-string">&quot;searchCtrl&quot;</span> /&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">novo-chip-list</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">novo-autocomplete</span> (<span class="hljs-attr">optionSelected</span>)=<span class="hljs-string">&quot;selected($event)&quot;</span> <span class="hljs-attr">multiple</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">novo-option</span> *<span class="hljs-attr">ngFor</span>=<span class="hljs-string">&quot;let fruit of filteredFruits | async&quot;</span> [<span class="hljs-attr">value</span>]=<span class="hljs-string">&quot;fruit&quot;</span>&gt;</span>
+      fruit
+    <span class="hljs-tag">&lt;/<span class="hljs-name">novo-option</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">novo-autocomplete</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">novo-field</span>&gt;</span>
+</code></pre>
+<p><img src="https://user-images.githubusercontent.com/1056055/175618421-05e8898a-caaf-488d-b384-acdc922b6647.gif" alt="doqFeEqHOa"></p>
+<hr>
+<h3 id="loading-pattern">Loading Pattern for Non Ideal State <a href="https://bullhorn.github.io/novo-elements/docs/#/updates/v7dot3#loading-pattern">#</a></h3>
+<p>Adding a message next to the novo-loading component is not a known pattern. This could be used to display a message while loading with the flag controlled at implementation. This can be used for a loading message displaying all the time for a loading screen, or having a timer flipping the flag to show a message during a long long loading screen.</p>
+<h5><strong>Screenshots</strong></h5>
+<p><img src="https://user-images.githubusercontent.com/73492464/181272237-66468bd6-7b3c-443a-b5df-ae87a8cdae54.png" alt="image">
+<img src="https://user-images.githubusercontent.com/73492464/181272305-689554f1-2cb5-434d-af7c-8fbe10724728.png" alt="image"></p>
+<hr>
+<h3 id="html-hints">New HTML Form Field Hints <a href="https://bullhorn.github.io/novo-elements/docs/#/updates/v7dot3#html-hints">#</a></h3>
+<p>Added the ability to set the <code>description</code> (aka hint text) on form controls to display HTML</p>
+<p><img src="https://user-images.githubusercontent.com/1056055/181560747-1d77a522-bc0c-40c2-b117-330ec901aa29.png" alt="image"></p>
+<p>Also added the ability for the FieldInteractionAPI to update the description of a field (potentially adding in HTML):</p>
+<pre><code class="language-typescript"><span class="hljs-variable constant_">API</span>.<span class="hljs-title function_">setDescription</span>(<span class="hljs-string">&#x27;description&#x27;</span>, <span class="hljs-string">&#x27;&lt;span&gt;&lt;b&gt;BOLD&lt;/b&gt; description with a &lt;a target=&quot;_blank&quot; href=&quot;https://www.google.com&quot;&gt;Google&lt;/a&gt; Link&lt;/span&gt;&#x27;</span>);
+</code></pre>
+<p><img src="https://user-images.githubusercontent.com/5430919/181575015-bb30bcb2-c8a1-4ae0-b99c-1250d5784fd6.gif" alt="field-interaction-description"></p>
+<p><a href="https://bullhorn.github.io/novo-elements/docs/#/updates/v7dot3#html-hints">Check out the demo!</a></p>
+`,
+  host: { class: 'markdown-page' }
+})
+export class August2022Page {
+  public params: any = {};
+}
+
+
+@Component({
   selector: 'february-2022-page',
   template: `<h1>🚀 February 2022 (version 6 - Golden)</h1>
 <p><strong>Release v6.0.0</strong>: This release contains several component updates and additional new components. Initial refactoring of component architecture to support future efforts to improve the design systems consistency along with improvements to the developer experience.</p>
@@ -6684,6 +6758,7 @@ const routes: Routes = [
       { path: '', redirectTo: '/patterns/patterns/test', pathMatch: 'full' },
     ]
   },
+  { path: 'updates/v7dot3', component: August2022Page, data: { title: 'August 2022', section: 'updates', tag: 'new' } },
   { path: 'updates/v6', component: February2022Page, data: { title: 'February 2022', section: 'updates' } },
   { path: 'updates/v7-query-builder', component: June2022Page, data: { title: 'June 2022', section: 'updates', tag: 'new' } },
   { path: 'updates/v7-announce', component: May2022Page, data: { title: 'May 2022', section: 'updates' } },
@@ -6692,7 +6767,7 @@ const routes: Routes = [
 ];
 
 export const PAGE_LIST = [
-  AceEditorPage,AgendaDesignPage,AgendaDevelopPage,AgendaExamplesPage,AsideDesignPage,AsideDevelopPage,AsideExamplesPage,AutocompleteDesignPage,AutocompleteDevelopPage,AutocompleteExamplesPage,AvatarDesignPage,AvatarDevelopPage,AvatarExamplesPage,BreadcrumbDesignPage,BreadcrumbDevelopPage,BreadcrumbExamplesPage,ButtonDesignPage,ButtonDevelopPage,ButtonExamplesPage,CalendarDesignPage,CalendarDevelopPage,CalendarExamplesPage,ComponentsPage,DataTablePage,DropdownDesignPage,DropdownDevelopPage,DropdownExamplesPage,FieldDesignPage,FieldDevelopPage,FieldExamplesPage,IconDesignPage,IconDevelopPage,IconExamplesPage,LoadingDesignPage,LoadingDevelopPage,LoadingExamplesPage,MenuDesignPage,MenuDevelopPage,MenuExamplesPage,ModalDesignPage,ModalDevelopPage,ModalExamplesPage,NonIdealStateDesignPage,NonIdealStateDevelopPage,NonIdealStateExamplesPage,PopoverDesignPage,PopoverDevelopPage,PopoverExamplesPage,ProgressDesignPage,ProgressDevelopPage,ProgressExamplesPage,ProgressUsagePage,QueryBuilderDesignPage,QueryBuilderDevelopPage,QueryBuilderExamplesPage,QuickNotePage,SearchPage,SlidesPage,SwitchPage,TabbedGroupPickerPage,TablePage,TipWellDesignPage,TipWellDevelopPage,TipWellExamplesPage,ToasterDesignPage,ToasterDevelopPage,ToasterExamplesPage,ToolbarDesignPage,ToolbarDevelopPage,ToolbarExamplesPage,TooltipDesignPage,TooltipDevelopPage,TooltipExamplesPage,ColorsPage,CompositionPage,DesignPage,IconographyPage,SpacingPage,TypographyPage,ChipsDesignPage,ChipsDevelopPage,ChipsExamplesPage,ColorPickerPage,DatePickerDesignPage,DatePickerDevelopPage,DatePickerExamplesPage,DateTimePickerDesignPage,DateTimePickerDevelopPage,DateTimePickerExamplesPage,EditorPage,FormControlsPage,FormGroupsPage,FormPage,MultiPickerPage,PickerPage,RadioButtonsPage,SelectPage,TilesPage,TimePickerDesignPage,TimePickerDevelopPage,TimePickerExamplesPage,ValuePage,HomePage,CardDescriptionPage,CardDesignPage,CardDevelopPage,CardExamplesPage,ExpansionPage,HeaderPage,LayoutsPage,ListPage,SidenavPage,StepperPage,TabsDesignPage,TabsDevelopPage,TabsExamplesPage,PatternsNativeFormsPage,PatternsTestPage,PatternsPage,TemplatesPage,February2022Page,June2022Page,May2022Page,FieldInteractionsPage,PipesPage,SecurityPage
+  AceEditorPage,AgendaDesignPage,AgendaDevelopPage,AgendaExamplesPage,AsideDesignPage,AsideDevelopPage,AsideExamplesPage,AutocompleteDesignPage,AutocompleteDevelopPage,AutocompleteExamplesPage,AvatarDesignPage,AvatarDevelopPage,AvatarExamplesPage,BreadcrumbDesignPage,BreadcrumbDevelopPage,BreadcrumbExamplesPage,ButtonDesignPage,ButtonDevelopPage,ButtonExamplesPage,CalendarDesignPage,CalendarDevelopPage,CalendarExamplesPage,ComponentsPage,DataTablePage,DropdownDesignPage,DropdownDevelopPage,DropdownExamplesPage,FieldDesignPage,FieldDevelopPage,FieldExamplesPage,IconDesignPage,IconDevelopPage,IconExamplesPage,LoadingDesignPage,LoadingDevelopPage,LoadingExamplesPage,MenuDesignPage,MenuDevelopPage,MenuExamplesPage,ModalDesignPage,ModalDevelopPage,ModalExamplesPage,NonIdealStateDesignPage,NonIdealStateDevelopPage,NonIdealStateExamplesPage,PopoverDesignPage,PopoverDevelopPage,PopoverExamplesPage,ProgressDesignPage,ProgressDevelopPage,ProgressExamplesPage,ProgressUsagePage,QueryBuilderDesignPage,QueryBuilderDevelopPage,QueryBuilderExamplesPage,QuickNotePage,SearchPage,SlidesPage,SwitchPage,TabbedGroupPickerPage,TablePage,TipWellDesignPage,TipWellDevelopPage,TipWellExamplesPage,ToasterDesignPage,ToasterDevelopPage,ToasterExamplesPage,ToolbarDesignPage,ToolbarDevelopPage,ToolbarExamplesPage,TooltipDesignPage,TooltipDevelopPage,TooltipExamplesPage,ColorsPage,CompositionPage,DesignPage,IconographyPage,SpacingPage,TypographyPage,ChipsDesignPage,ChipsDevelopPage,ChipsExamplesPage,ColorPickerPage,DatePickerDesignPage,DatePickerDevelopPage,DatePickerExamplesPage,DateTimePickerDesignPage,DateTimePickerDevelopPage,DateTimePickerExamplesPage,EditorPage,FormControlsPage,FormGroupsPage,FormPage,MultiPickerPage,PickerPage,RadioButtonsPage,SelectPage,TilesPage,TimePickerDesignPage,TimePickerDevelopPage,TimePickerExamplesPage,ValuePage,HomePage,CardDescriptionPage,CardDesignPage,CardDevelopPage,CardExamplesPage,ExpansionPage,HeaderPage,LayoutsPage,ListPage,SidenavPage,StepperPage,TabsDesignPage,TabsDevelopPage,TabsExamplesPage,PatternsNativeFormsPage,PatternsTestPage,PatternsPage,TemplatesPage,August2022Page,February2022Page,June2022Page,May2022Page,FieldInteractionsPage,PipesPage,SecurityPage
 ];
 
 @NgModule({

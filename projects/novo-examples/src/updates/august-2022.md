@@ -63,14 +63,14 @@ Autocomplete now works with the NovoChipList when used in a NovoFormField.  The 
   <novo-label>Favorite Fruits</novo-label>
   <novo-chip-list #chipList [formControl]="fieldCtrl">
     <novo-chip *ngFor="let fruit of chipList.value" [value]="fruit">
-      <novo-text>{{fruit}}</novo-text>
+      <novo-text>fruit</novo-text>
       <novo-icon novoChipRemove>close</novo-icon>
     </novo-chip>
     <input #chipInput novoChipInput placeholder="New fruit..." autocomplete="off" [formControl]="searchCtrl" />
   </novo-chip-list>
   <novo-autocomplete (optionSelected)="selected($event)" multiple>
     <novo-option *ngFor="let fruit of filteredFruits | async" [value]="fruit">
-      {{fruit}}
+      fruit
     </novo-option>
   </novo-autocomplete>
 </novo-field>
