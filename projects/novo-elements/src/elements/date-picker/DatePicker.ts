@@ -366,14 +366,9 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
   }
 
   modelToSelection(model: modelTypes) {
-    // this.selection = this._strategy.selectionFinished();
     switch (this.mode) {
       case 'multiple':
         this.selection = model as Date[];
-        break;
-      case 'range':
-      case 'week':
-        this.setRangeSelection();
         break;
       case 'single':
       default:
@@ -388,9 +383,6 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
     if (this.mode === 'multiple') {
       this.selection = this.model as Date[];
     }
-    if (this.mode === 'range') {
-      this.setRangeSelection();
-    }
     if (Helpers.isDate(model)) {
       this.updateView(model);
       this.modelToSelection(model);
@@ -400,16 +392,6 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
         this.updateView(date);
         this.modelToSelection(date);
       }
-    }
-  }
-
-  setRangeSelection() {
-    if (this.model?.hasOwnProperty('startDate')) {
-      const range = this.model as RangeModel;
-      this.selection = [range.startDate, range.endDate].filter(Boolean);
-    } else if (this.model?.hasOwnProperty('min')) {
-      const range = this.model as DataTableRangeModel;
-      this.selection = [range.min, range.max].filter(Boolean);
     }
   }
 
