@@ -9,7 +9,7 @@ import { NovoLabelService } from '../../services/novo-label-service';
 import { BooleanInput } from '../../utils';
 // APP
 import { Helpers } from '../../utils/Helpers';
-import { DatePickerSelectModes, modelTypes, rangeSelectModes } from './date-picker.types';
+import { DataTableRangeModel, DatePickerSelectModes, modelTypes, RangeModel, rangeSelectModes } from './date-picker.types';
 
 // Value accessor for the component (supports ngModel)
 const DATE_PICKER_VALUE_ACCESSOR = {
@@ -370,6 +370,15 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
       case 'multiple':
         this.selection = model as Date[];
         break;
+      case 'range':
+      case 'week':
+        if (model?.hasOwnProperty('startDate')) {
+          const range = model as RangeModel;
+          this.selection = [range.startDate, range.endDate].filter(Boolean);
+        } else if (model?.hasOwnProperty('min')) {
+          const range = model as DataTableRangeModel;
+          this.selection = [range.min, range.max].filter(Boolean);
+        }
       case 'single':
       default:
         this.selection = [model as Date];
