@@ -4,7 +4,7 @@ import { ChangeDetectorRef, Component, ElementRef, EventEmitter, forwardRef, Hos
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 // Vendor
-import { isDate, isValid, parse, startOfDay } from 'date-fns';
+import { isDate, isValid, parse, startOfDay, subDays } from 'date-fns';
 import { NovoLabelService } from '../../services/novo-label-service';
 import { BooleanInput } from '../../utils';
 // APP
@@ -372,13 +372,7 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
         break;
       case 'range':
       case 'week':
-        if (model?.hasOwnProperty('startDate')) {
-          const range = model as RangeModel;
-          this.selection = [range.startDate, range.endDate].filter(Boolean);
-        } else if (model?.hasOwnProperty('min')) {
-          const range = model as DataTableRangeModel;
-          this.selection = [range.min, range.max].filter(Boolean);
-        }
+        this.setRangeSelection();
       case 'single':
       default:
         this.selection = [model as Date];
@@ -392,6 +386,9 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
     if (this.mode === 'multiple') {
       this.selection = this.model as Date[];
     }
+    if (this.mode === 'range') {
+      this.setRangeSelection();
+    }
     if (Helpers.isDate(model)) {
       this.updateView(model);
       this.modelToSelection(model);
@@ -401,6 +398,18 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
         this.updateView(date);
         this.modelToSelection(date);
       }
+    }
+  }
+
+  setRangeSelection() {
+    if (this.model?.hasOwnProperty('startDate')) {
+       // coming from standalone date picker
+      const range = this.model as RangeModel;
+      this.selection = [range.startDate, range.endDate].filter(Boolean);
+    } else if (this.model?.hasOwnProperty('min')) {
+       // coming from data table filter where model end date is the beginning of the next day
+      const range = this.model as DataTableRangeModel;
+      this.selection = [range.min, subDays(range.max, 1)].filter(Boolean);
     }
   }
 
