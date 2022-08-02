@@ -9,7 +9,7 @@ import { NovoLabelService } from '../../services/novo-label-service';
 import { BooleanInput } from '../../utils';
 // APP
 import { Helpers } from '../../utils/Helpers';
-import { DataTableRangeModel, DatePickerSelectModes, modelTypes, RangeModel, rangeSelectModes } from './date-picker.types';
+import { DatePickerSelectModes, modelTypes, rangeSelectModes } from './date-picker.types';
 
 // Value accessor for the component (supports ngModel)
 const DATE_PICKER_VALUE_ACCESSOR = {
