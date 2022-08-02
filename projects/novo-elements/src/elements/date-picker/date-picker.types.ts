@@ -17,7 +17,12 @@ export interface RangeModel {
   endDate: Date;
 }
 
-export type modelTypes = Date | Date[] | RangeModel;
+export interface DataTableRangeModel {
+  min: Date;
+  max: Date;
+}
+
+export type modelTypes = Date | Date[] | RangeModel | DataTableRangeModel;
 
 export interface Day {
   date: Date;

@@ -9,7 +9,7 @@ import { NovoLabelService } from '../../services/novo-label-service';
 import { BooleanInput } from '../../utils';
 // APP
 import { Helpers } from '../../utils/Helpers';
-import { DatePickerSelectModes, modelTypes, RangeModel, rangeSelectModes } from './date-picker.types';
+import { DataTableRangeModel, DatePickerSelectModes, modelTypes, RangeModel, rangeSelectModes } from './date-picker.types';
 
 // Value accessor for the component (supports ngModel)
 const DATE_PICKER_VALUE_ACCESSOR = {
@@ -373,8 +373,7 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
         break;
       case 'range':
       case 'week':
-        const range = this.model as RangeModel;
-        this.selection = [range.startDate, range.endDate].filter(Boolean);
+        this.setRangeSelection();
         break;
       case 'single':
       default:
@@ -390,8 +389,7 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
       this.selection = this.model as Date[];
     }
     if (this.mode === 'range') {
-      const range = this.model as RangeModel;
-      this.selection = [range.startDate, range.endDate].filter(Boolean);
+      this.setRangeSelection();
     }
     if (Helpers.isDate(model)) {
       this.updateView(model);
@@ -402,6 +400,16 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
         this.updateView(date);
         this.modelToSelection(date);
       }
+    }
+  }
+
+  setRangeSelection() {
+    if (this.model?.hasOwnProperty('startDate')) {
+      const range = this.model as RangeModel;
+      this.selection = [range.startDate, range.endDate].filter(Boolean);
+    } else if (this.model?.hasOwnProperty('min')) {
+      const range = this.model as DataTableRangeModel;
+      this.selection = [range.min, range.max].filter(Boolean);
     }
   }
 
