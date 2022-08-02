@@ -407,7 +407,7 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
       const range = this.model as RangeModel;
       this.selection = [range.startDate, range.endDate].filter(Boolean);
     } else if (this.model?.hasOwnProperty('min')) {
-       // coming from data table filter where model end date is the beginning of the next day
+       // coming from data-table filter where model end date is the beginning of the next day
       const range = this.model as DataTableRangeModel;
       this.selection = [range.min, subDays(range.max, 1)].filter(Boolean);
     }
