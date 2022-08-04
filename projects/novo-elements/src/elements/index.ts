@@ -36,6 +36,7 @@ export * from './picker';
 export * from './places';
 export * from './popover';
 export * from './progress';
+export * from './query-builder';
 export * from './quick-note';
 export * from './radio';
 export * from './search';

@@ -26,8 +26,8 @@
   }
 
   .novo-expansion-panel-header-description,
-  .novo-expansion-indicator::after {
-    color: $grey;
+  .novo-expansion-indicator {
+    border-color: var(--text-main, $dark);
   }
 
   .novo-expansion-panel-header[aria-disabled="true"] {

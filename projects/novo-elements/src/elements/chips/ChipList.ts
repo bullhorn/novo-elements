@@ -71,6 +71,8 @@ export class NovoChipListChange {
     '[attr.aria-invalid]': 'errorState',
     '[attr.aria-multiselectable]': 'multiple',
     '[attr.role]': 'role',
+    '[class.novo-chip-list-empty]': 'empty',
+    '[class.novo-chip-list-has-value]': '!empty',
     '[class.novo-chip-list-stacked]': 'stacked',
     '[class.novo-chip-list-focused]': 'focused',
     '[class.novo-chip-list-disabled]': 'disabled',
@@ -400,7 +402,6 @@ export class NovoChipList
       }
 
       this._resetChips();
-
       // Check to see if we need to update our tab index
       this._updateTabIndex();
 
@@ -473,7 +474,9 @@ export class NovoChipList
   }
 
   removeValue(value: any): void {
-    this.value = this.value.filter((it) => !this.compareWith(it, value));
+    if (this.value) {
+      this.value = this.value.filter((it) => !this.compareWith(it, value));
+    }
   }
 
   // Implemented as part of ControlValueAccessor.
@@ -516,7 +519,7 @@ export class NovoChipList
     if (this._chipInput && this._chipInput.focused) {
       // do nothing
     } else if (this._chipInput) {
-      this._focusInput(options);
+      Promise.resolve().then(() => this._focusInput(options));
       this.stateChanges.next();
     } else if (this.chips.length > 0) {
       this._keyManager.setFirstItemActive();

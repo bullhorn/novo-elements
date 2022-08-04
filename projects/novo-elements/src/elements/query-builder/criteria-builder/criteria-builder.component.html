@@ -1,0 +1,34 @@
+<form [formGroup]="innerForm">
+  <novo-stack [formArrayName]="controlName" class="criteria-builder-inner">
+    <ng-container
+      *ngFor="let andGroup of root.controls; let andIndex = index; let isFirst = first;let isLastAnd = last;">
+      <novo-label *ngIf="!isFirst" color="ash" size="xs" uppercase padding="sm">{{qbs.getConjunctionLabel('and')}}
+      </novo-label>
+      <novo-condition-group [groupIndex]="andIndex" [formGroupName]="andIndex"></novo-condition-group>
+    </ng-container>
+  </novo-stack>
+</form>
+<novo-id-condition-def name="ID"></novo-id-condition-def>
+<novo-date-condition-def name="TIMESTAMP"></novo-date-condition-def>
+<novo-string-condition-def name="STRING"></novo-string-condition-def>
+<novo-number-condition-def name="FLOAT"></novo-number-condition-def>
+<novo-number-condition-def name="INTEGER"></novo-number-condition-def>
+<novo-number-condition-def name="BIGDECIMAL"></novo-number-condition-def>
+<novo-number-condition-def name="DOUBLE"></novo-number-condition-def>
+<novo-address-condition-def name="ADDRESS"></novo-address-condition-def>
+<novo-boolean-condition-def name="BOOLEAN"></novo-boolean-condition-def>
+<novo-picker-condition-def name="SELECT"></novo-picker-condition-def>
+<novo-string-condition-def name="DEFAULT"></novo-string-condition-def>
+
+<!-- 
+  {
+    $and: [{
+      $or: [{
+        entity: 'JobOrder'
+        field: 'categories',
+        operator: 'doesNotContain',
+        value: 'Healthcare'
+      }]
+    }]
+  }
+ -->

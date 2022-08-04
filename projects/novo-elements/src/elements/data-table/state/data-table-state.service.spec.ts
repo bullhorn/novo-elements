@@ -235,7 +235,7 @@ describe('Service: DataTableState', () => {
   });
 
   describe('Method: onSortFilterChange', () => {
-    it('should call checkRetainment for sort and filter, and sortFilterSource.next', () => {
+    it('should call checkRetainment for sort, filter, and where, and sortFilterSource.next', () => {
       spyOn(service.sortFilterSource, 'next');
       spyOn(service, 'checkRetainment');
       service.filter = { id: 'test', value: 'value' };
@@ -248,7 +248,7 @@ describe('Service: DataTableState', () => {
       };
       service.onSortFilterChange();
       expect(service.sortFilterSource.next).toHaveBeenCalledWith(expected);
-      expect(service.checkRetainment).toHaveBeenCalledTimes(2);
+      expect(service.checkRetainment).toHaveBeenCalledTimes(3);
     });
   });
 });

@@ -4,6 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NovoButtonModule } from '../button';
 import { NovoCheckboxModule } from '../checkbox';
 import { NovoCommonModule } from '../common';
+import { NovoFieldModule } from '../field/field.module';
 import { NovoIconModule } from '../icon';
 import { NovoLoadingModule } from '../loading';
 import { NovoTooltipModule } from '../tooltip';
@@ -22,6 +23,7 @@ import { NovoSelectSearchComponent } from './select-search.component';
     NovoIconModule,
     NovoLoadingModule,
     NovoTooltipModule,
+    NovoFieldModule,
   ],
   declarations: [NovoSelectSearchComponent, NovoSelectSearchClearDirective],
   exports: [NovoSelectSearchComponent, NovoSelectSearchClearDirective],

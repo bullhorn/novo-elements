@@ -50,10 +50,25 @@ export class NovoBaseTextElement {
   @BooleanInput()
   marginAfter: boolean;
 
+  @HostBinding('class.text-capitialize')
+  @Input()
+  @BooleanInput()
+  capitialize: boolean;
+
+  @HostBinding('class.text-uppercase')
+  @Input()
+  @BooleanInput()
+  uppercase: boolean;
+
   @HostBinding('class.text-nowrap')
   @Input()
   @BooleanInput()
   nowrap: boolean;
+
+  @HostBinding('class.text-ellipsis')
+  @Input()
+  @BooleanInput()
+  ellipsis: boolean;
 
   @HostBinding('class.text-size-smaller')
   @Input()

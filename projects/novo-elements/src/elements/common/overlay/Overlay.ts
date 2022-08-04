@@ -68,6 +68,8 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
   public height: number;
   @Input()
   public closeOnSelect: boolean = true;
+  @Input()
+  public hasBackdrop: boolean = false;
 
   @Output()
   public select: EventEmitter<any> = new EventEmitter();
@@ -173,17 +175,16 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
     return merge(fromEvent(this.document, 'mouseup'), fromEvent(this.document, 'touchend')).pipe(
       filter((event: MouseEvent | TouchEvent) => {
         const clickTarget: HTMLElement = event.target as HTMLElement;
-        const clicked: boolean =
+        const clickedOutside: boolean =
           this.panelOpen &&
           clickTarget !== this.getConnectedElement().nativeElement &&
           !this.getConnectedElement().nativeElement.contains(clickTarget) &&
-          !!this.overlayRef &&
-          !this.overlayRef.overlayElement.contains(clickTarget);
-        // &&!Array.from(document.querySelectorAll('.cdk-overlay-container')).some((el) => el.contains(clickTarget));
+          (!!this.overlayRef && !this.overlayRef.overlayElement.contains(clickTarget)) &&
+          !this.elementIsInNestedOverlay(clickTarget);
         if (this.panelOpen && !!this.overlayRef && this.overlayRef.overlayElement.contains(clickTarget) && this.closeOnSelect) {
           this.select.emit(event);
         }
-        return clicked;
+        return clickedOutside;
       }),
     );
   }
@@ -240,7 +241,7 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
     }
 
     config.positionStrategy = this.getPosition();
-    config.hasBackdrop = false;
+    config.hasBackdrop = this.hasBackdrop;
     config.direction = 'ltr';
     config.scrollStrategy = this.getScrollStrategy();
 
@@ -272,7 +273,6 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
       .flexibleConnectedTo(this.getConnectedElement())
       .withFlexibleDimensions(false)
       .withPositions([defaultPosition]);
-    // .setDirection('ltr');
     if (this.position === 'bottom') {
       strategy = strategy.withPositions([defaultPosition, { originX: fallbackX, originY: 'bottom', overlayX: fallbackX, overlayY: 'top' }]);
     } else if (this.position === 'right' || this.position === 'default' || this.position.includes('above-below')) {
@@ -320,6 +320,16 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
 
   protected getConnectedElement(): ElementRef {
     return this.parent;
+  }
+
+  protected elementIsInNestedOverlay(el): boolean {
+    while (el.parentNode) {
+      if (el.id?.includes('novo-overlay-') || el.id?.includes('modal-container-')) {
+        return this.id.split('-')[2] < el.id.split('-')[2];
+      }
+      el = el.parentNode;
+    }
+    return false;
   }
 
   protected getHostWidth(): number {

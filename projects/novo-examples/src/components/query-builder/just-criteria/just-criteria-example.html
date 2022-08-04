@@ -1,0 +1,28 @@
+<form [formGroup]="queryForm" (ngSubmit)="onSubmit()">
+  <novo-criteria-builder
+    #builder
+    controlName="criteria"
+    [allowedGroupings]="mode.value"
+    [config]="config"
+    [editTypeFn]="editTypeFn">
+    <custom-picker-condition-def name="CUSTOM"></custom-picker-condition-def>
+  </novo-criteria-builder>
+
+  <novo-row gap="md" justify="end">
+    <button theme="primary" size="sm" (click)="builder.addConditionGroup()">Add a group</button>
+    <button theme="secondary" size="sm" (click)="builder.clearAllConditions()">Clear All</button>
+  </novo-row>
+</form>
+
+<novo-row align="start" gap="xl" margin="xl">
+  <section>
+    <novo-label>Join Operators</novo-label>
+    <novo-radio-group #mode [value]="and">
+      <novo-radio name="mode" [value]="and">Only And</novo-radio>
+      <novo-radio name="mode" [value]="andOr">And, Or</novo-radio>
+      <novo-radio name="mode" [value]="andOrNot">And, Or, Not</novo-radio>
+    </novo-radio-group>
+  </section>
+</novo-row>
+
+<pre><code>{{queryForm.value | json}}</code></pre>
