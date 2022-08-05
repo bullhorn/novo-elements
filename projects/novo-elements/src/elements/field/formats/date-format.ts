@@ -1,4 +1,4 @@
-import { Directive, ElementRef, EventEmitter, forwardRef, Inject, Input, Optional, PLATFORM_ID, Renderer2 } from '@angular/core';
+import { Directive, ElementRef, EventEmitter, forwardRef, Inject, Input, Optional, Renderer2 } from '@angular/core';
 import { COMPOSITION_BUFFER_MODE, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { IMaskDirective, IMaskFactory } from 'angular-imask';
 import { format, isValid, parse } from 'date-fns';
@@ -28,7 +28,6 @@ export class NovoDateFormatDirective extends IMaskDirective<any> {
     private _element: ElementRef,
     _renderer: Renderer2,
     _factory: IMaskFactory,
-    // @Optional() @Inject(PLATFORM_ID) _platformId: string,
     @Optional() @Inject(COMPOSITION_BUFFER_MODE) _compositionMode: boolean,
     private labels: NovoLabelService,
   ) {

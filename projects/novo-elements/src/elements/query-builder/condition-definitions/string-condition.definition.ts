@@ -4,9 +4,9 @@ import { AbstractControl, FormControl } from '@angular/forms';
 import { AbstractConditionFieldDef } from './abstract-condition.definition';
 
 /**
- * Contruction filters against String fields can be complex. Each "chip" added to the
- * condition can be used to indendantly used to query a database.  Not all systems support
- * quering within a text column, ie sql unless LIKE is enabled. This could result in a
+ * Constructing filters against String fields can be complex. Each "chip" added to the
+ * condition can be independently used to query a database.  Not all systems support
+ * querying within a text column, ie sql unless LIKE is enabled. This could result in a
  * performance penalty.
  */
 @Component({
