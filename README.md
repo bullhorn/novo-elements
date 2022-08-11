@@ -74,7 +74,6 @@ npm install --save novo-elements@6
 ng update novo-elements --migrate-only --from=0.0.0 --to=6.0.0 --force --allow-dirty  
 ```
 
-
 ## Contribute
 
 There are many ways to **[contribute](https://github.com/bullhorn/novo-elements/blob/master/CONTRIBUTING.md)** to our OpenSource projects.
