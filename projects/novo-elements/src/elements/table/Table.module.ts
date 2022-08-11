@@ -2,9 +2,8 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { IMaskDirectiveModule } from 'angular-imask';
 // Vendor
-import { TextMaskModule } from 'angular2-text-mask';
+import { IMaskDirectiveModule } from 'angular-imask';
 // APP
 import { NovoButtonModule } from '../button/Button.module';
 import { NovoCheckboxModule } from '../checkbox';
@@ -35,7 +34,6 @@ import { NovoTableElement } from './Table';
     NovoDatePickerModule,
     NovoFormExtrasModule,
     NovoCheckboxModule,
-    TextMaskModule,
     IMaskDirectiveModule,
     NovoOptionModule,
     NovoCommonModule,

@@ -3,9 +3,8 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { IMaskDirectiveModule } from 'angular-imask';
 // Vendor
-import { TextMaskModule } from 'angular2-text-mask';
+import { IMaskDirectiveModule } from 'angular-imask';
 import { NovoCheckboxModule } from '../checkbox';
 import { NovoCommonModule } from '../common/common.module';
 import { NovoIconModule } from '../icon';
@@ -40,8 +39,7 @@ import { NovoFormElement } from './Form';
 @NgModule({
   imports: [
     CommonModule,
-    OverlayModule,
-    ReactiveFormsModule,
+    IMaskDirectiveModule,
     NovoRadioModule,
     NovoTilesModule,
     NovoSelectModule,
@@ -56,8 +54,6 @@ import { NovoFormElement } from './Form';
     NovoHeaderModule,
     NovoTooltipModule,
     NovoDragulaModule,
-    IMaskDirectiveModule,
-    TextMaskModule,
     NovoTipWellModule,
     NovoModalModule,
     NovoButtonModule,
@@ -67,6 +63,8 @@ import { NovoFormElement } from './Form';
     NovoIconModule,
     NovoRadioModule,
     NovoSwitchModule,
+    OverlayModule,
+    ReactiveFormsModule,
   ],
   declarations: [
     NovoAutoSize,

@@ -32,7 +32,7 @@ export class DateFormatService {
     return mask;
   }
 
-  getDateMask(): Array<RegExp> {
+  getDateMask(): Array<RegExp> { // modify to work with angular-imask instead of angular2-text-mask
     return [/\d/, /\d|\/|\.|\-/, /\/|\.|\-|\d/, /\d|\/|\.|\-/, /\d|\/|\.|\-/, /\d|\/|\.|\-/, /\d|\/|\.|\-/, /\d|\/|\.|\-/, /\d/, /\d/];
   }
 
