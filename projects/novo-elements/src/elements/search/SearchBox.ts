@@ -1,4 +1,5 @@
 // NG2
+import { ENTER, ESCAPE, TAB } from '@angular/cdk/keycodes';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -13,9 +14,9 @@ import {
   ViewChild,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+// APP
 import { NovoLabelService } from '../../services/novo-label-service';
 import { Key } from '../../utils';
-// APP
 import { NovoOverlayTemplateComponent } from '../common/overlay/Overlay';
 
 // Value accessor for the component (supports ngModel)
@@ -50,7 +51,8 @@ const SEARCH_VALUE_ACCESSOR = {
       [parent]="element"
       [closeOnSelect]="closeOnSelect"
       [position]="position"
-      (select)="closePanel()"
+      [hasBackdrop]="hasBackdrop"
+      (select)="onSelect()"
       (closing)="onBlur()"
     >
       <ng-content></ng-content>
@@ -81,8 +83,16 @@ export class NovoSearchBoxElement implements ControlValueAccessor {
   public displayValue: string;
   @Input()
   public hint: string;
+  @Input()
+  public keepOpen: boolean = false;
+  @Input()
+  public hasBackdrop: boolean = false;
+  @Input()
+  public allowPropagation: boolean = false;
   @Output()
   public searchChanged: EventEmitter<string> = new EventEmitter<string>();
+  @Output()
+  public applySearch: EventEmitter<KeyboardEvent> = new EventEmitter<KeyboardEvent>();
   @HostBinding('class.focused')
   focused: boolean = false;
   public value: any;
@@ -132,7 +142,14 @@ export class NovoSearchBoxElement implements ControlValueAccessor {
     });
   }
   onBlur() {
-    this.focused = false;
+    if (!this.keepOpen || !this.panelOpen) {
+      this.focused = false;
+    }
+  }
+  onSelect() {
+    if (!this.keepOpen) {
+      this.closePanel();
+    }
   }
   /** BEGIN: Convenient Panel Methods. */
   openPanel(): void {
@@ -140,6 +157,7 @@ export class NovoSearchBoxElement implements ControlValueAccessor {
   }
   closePanel(): void {
     setTimeout(() => this.overlay.closePanel());
+    this.focused = false;
   }
   get panelOpen(): boolean {
     return this.overlay && this.overlay.panelOpen;
@@ -152,8 +170,13 @@ export class NovoSearchBoxElement implements ControlValueAccessor {
 
   _handleKeydown(event: KeyboardEvent): void {
     if ((event.key === Key.Escape || event.key === Key.Enter || event.key === Key.Tab) && this.panelOpen) {
+      if (event.keyCode === ENTER) {
+        this.applySearch.emit(event);
+      }
       this.closePanel();
-      event.stopPropagation();
+      if (!this.allowPropagation) {
+        event.stopPropagation();
+      }
     }
   }
   _handleInput(event: KeyboardEvent): void {

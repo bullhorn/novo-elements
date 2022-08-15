@@ -10,6 +10,7 @@ import { Component, HostBinding, Input } from '@angular/core';
     <novo-title class="novo-non-ideal-state-title" *ngIf="title" marginBefore>{{ title }}</novo-title>
     <ng-content select="novo-title"></ng-content>
     <novo-text *ngIf="description" block marginBefore marginAfter>{{ description }}</novo-text>
+    <ng-content select="novo-text"></ng-content>
     <ng-content></ng-content>
   `,
 })

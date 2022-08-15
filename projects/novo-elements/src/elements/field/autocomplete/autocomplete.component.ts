@@ -22,8 +22,8 @@ import {
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import { fromEvent, interval, merge, of, Subscription } from 'rxjs';
-import { debounce, take } from 'rxjs/operators';
+import { fromEvent, merge, of, Subscription } from 'rxjs';
+import { take } from 'rxjs/operators';
 import { BooleanInput, Key } from '../../../utils';
 import type { NovoChipList } from '../../chips';
 import {
@@ -195,9 +195,7 @@ export class NovoAutocompleteElement
     const toDisplay = this.displayWith ? this.displayWith(option) : option?.viewValue;
     // Simply falling back to an empty string if the display value is falsy does not work properly.
     // The display value can also be the number zero and shouldn't fall back to an empty string.
-    const displayValue = toDisplay != null ? toDisplay : '';
-    const optionValue = option.value;
-    console.log('optionValue', optionValue);
+    const inputValue = toDisplay != null ? toDisplay : '';
     // If it's used within a `NovoField`, we should set it through the property so it can go
     // through change detection.
     if (this._formField) {
@@ -286,14 +284,10 @@ export class NovoAutocompleteElement
   private _watchStateChanges() {
     const inputStateChanged = this._formField.stateChanges;
     this._stateChanges.unsubscribe();
-    this._stateChanges = merge(inputStateChanged)
-      .pipe(debounce(() => interval(10)))
-      .subscribe(() => {
-        console.log('StateChagn');
-        this.checkSelectedOptions();
-        this.checkPanel();
-        this.cdr.markForCheck();
-      });
+    this._stateChanges = merge(inputStateChanged).subscribe(() => {
+      this.checkPanel();
+      this.cdr.markForCheck();
+    });
   }
 
   /** The currently active option, coerced to MatOption type. */

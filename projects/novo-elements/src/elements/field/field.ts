@@ -9,6 +9,7 @@ import {
   Directive,
   ElementRef,
   EventEmitter,
+  HostListener,
   InjectionToken,
   Input,
   OnDestroy,
@@ -120,6 +121,11 @@ export class NovoFieldElement implements AfterContentInit, OnDestroy {
 
     if (control.controlType) {
       this._elementRef.nativeElement.classList.add(`novo-field-type-${control.controlType}`);
+      this._elementRef.nativeElement.setAttribute('data-control-type', control.controlType);
+    }
+
+    if (control.id) {
+      this._elementRef.nativeElement.setAttribute('data-control-id', control.id);
     }
 
     // Subscribe to changes in the child control state in order to update the form field UI.
@@ -153,6 +159,11 @@ export class NovoFieldElement implements AfterContentInit, OnDestroy {
     if (!this._control) {
       throw new Error('Missing Novo Control');
     }
+  }
+
+  @HostListener('click', ['$event'])
+  _handleContainerClick(evt: MouseEvent) {
+    this._control.onContainerClick(evt);
   }
 
   _isUnderlinedInput(): boolean {

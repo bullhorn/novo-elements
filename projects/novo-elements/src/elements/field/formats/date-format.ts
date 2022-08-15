@@ -1,22 +1,16 @@
-import { Directive, ElementRef, EventEmitter, forwardRef, Inject, Input, Optional, PLATFORM_ID, Renderer2 } from '@angular/core';
+import { Directive, ElementRef, EventEmitter, forwardRef, Inject, Input, Optional, Renderer2 } from '@angular/core';
 import { COMPOSITION_BUFFER_MODE, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { IMaskDirective, IMaskFactory } from 'angular-imask';
 import { format, isValid, parse } from 'date-fns';
 import * as IMask from 'imask';
 import { NovoLabelService } from '../../../services/novo-label-service';
-import { NOVO_INPUT_FORMAT } from './base-format';
+import { DATE_FORMATS, NOVO_INPUT_FORMAT } from './base-format';
 
 export const DATEFORMAT_VALUE_ACCESSOR = {
   provide: NG_VALUE_ACCESSOR,
   useExisting: forwardRef(() => NovoDateFormatDirective),
   multi: true,
 };
-
-export enum DATE_FORMATS {
-  DATE = 'date',
-  ISO8601 = 'iso8601',
-  STRING = 'string',
-}
 
 @Directive({
   selector: 'input[dateFormat]',
@@ -34,11 +28,10 @@ export class NovoDateFormatDirective extends IMaskDirective<any> {
     private _element: ElementRef,
     _renderer: Renderer2,
     _factory: IMaskFactory,
-    @Optional() @Inject(PLATFORM_ID) _platformId: string,
     @Optional() @Inject(COMPOSITION_BUFFER_MODE) _compositionMode: boolean,
     private labels: NovoLabelService,
   ) {
-    super(_element, _renderer, _factory, _platformId, _compositionMode);
+    super(_element, _renderer, _factory, _compositionMode);
     const dateFormat = this.labels.dateFormat.toUpperCase();
 
     this.unmask = 'typed';
@@ -48,7 +41,7 @@ export class NovoDateFormatDirective extends IMaskDirective<any> {
       overwrite: true,
       autofix: true,
       lazy: false,
-      min: new Date(1970, 0, 1),
+      min: new Date(1900, 0, 1),
       max: new Date(2030, 0, 1),
       prepare: (str) => str.toUpperCase(),
       format: (date) => this.formatValue(date),

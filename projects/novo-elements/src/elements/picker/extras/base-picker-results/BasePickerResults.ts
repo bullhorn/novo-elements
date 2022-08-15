@@ -351,7 +351,7 @@ export class BasePickerResults {
   }
 
   /**
-   * @description This function should return a <strong>-tag wrapped HTML string.
+   * @deprecated use highlight pipe
    */
   highlight(match, query) {
     // Replaces the capture string with a the same string inside of a "strong" tag

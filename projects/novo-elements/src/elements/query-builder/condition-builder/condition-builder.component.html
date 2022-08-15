@@ -1,0 +1,52 @@
+<form [formGroup]="parentForm">
+  <novo-grid gap="1rem" [columns]="isFirst ? '20rem 13rem 1fr' : '16rem 13rem 1fr'" align="end">
+    <novo-field class="condition-field">
+      <novo-select
+        [placeholder]="labels.chooseAField"
+        formControlName="field"
+        (onSelect)="onFieldSelect()"
+        overlayWidth="24rem"
+        overlayHeight="20rem"
+        [displayWith]="fieldDisplayWith"
+        [style.minWidth.px]="160"
+        [style.maxWidth.px]="isFirst ? 200 : 160">
+        <novo-optgroup class="filter-search-results">
+          <novo-option>
+            <novo-select-search [formControl]="searchTerm" [clearSearchInput]="false"></novo-select-search>
+          </novo-option>
+          <ng-container *ngIf="results$ | async as results; else loading">
+            <ng-container *ngIf="results.length">
+              <novo-option *ngFor="let field of results" value="{{ field.name }}"
+                [attr.data-automation-id]="field.name">
+                {{ field.label || field.name }}
+              </novo-option>
+            </ng-container>
+          </ng-container>
+        </novo-optgroup>
+      </novo-select>
+    </novo-field>
+
+    <div class="condition-operator">
+      <ng-container conditionOperatorOutlet></ng-container>
+    </div>
+
+    <div class="condition-input">
+      <ng-container conditionInputOutlet></ng-container>
+    </div>
+  </novo-grid>
+  <ng-content></ng-content>
+</form>
+
+<!-- EMPTY STATE TEMPLATE -->
+<!-- <ng-template #empty>
+  <novo-non-ideal-state>
+    <novo-icon size="xl" color="grapefruit">search</novo-icon>
+    <novo-title>No results found.</novo-title>
+    <novo-text>Your search didn't find anything. Try searching for something else.</novo-text>
+  </novo-non-ideal-state>
+</ng-template> -->
+
+<!-- LOADING TEMPLATE -->
+<ng-template #loading>
+  <novo-loading></novo-loading>
+</ng-template>

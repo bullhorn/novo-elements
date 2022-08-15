@@ -84,7 +84,7 @@ export class TooltipDirective implements OnDestroy, OnInit {
     }
   }
 
-  private show(): void {
+  show(): void {
     const overlayState = new OverlayConfig();
     overlayState.positionStrategy = this.getPosition();
 
@@ -112,7 +112,8 @@ export class TooltipDirective implements OnDestroy, OnInit {
     tooltipInstance.bounce = this.bounce;
   }
 
-  private hide(): void {
+  @HostListener('blur')
+  hide(): void {
     if (this.overlayRef) {
       this.overlayRef.detach();
     }

@@ -29,6 +29,9 @@
       font-size: 1.2rem;
       height: 2rem;
     }
+    &[size="medium"] {
+      font-size: 1.6rem;
+    }
     &[size="large"] {
       font-size: 2rem;
       height: 2.8rem;
