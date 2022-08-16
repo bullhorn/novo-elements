@@ -195,7 +195,8 @@ export class NovoAutocompleteElement
     const toDisplay = this.displayWith ? this.displayWith(option) : option?.viewValue;
     // Simply falling back to an empty string if the display value is falsy does not work properly.
     // The display value can also be the number zero and shouldn't fall back to an empty string.
-    const inputValue = toDisplay != null ? toDisplay : '';
+    const displayValue = toDisplay != null ? toDisplay : '';
+    const optionValue = option.value;
     // If it's used within a `NovoField`, we should set it through the property so it can go
     // through change detection.
     if (this._formField) {
