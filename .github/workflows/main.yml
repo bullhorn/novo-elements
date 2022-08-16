@@ -37,9 +37,14 @@ jobs:
       - uses: test-summary/action@v1
         with:
           paths: reports/jest-junit.xml
-          output: results/summary.md
+          output: reports/summary.md
       - name: Test Summary
-        run: cat results/summary.md >> $GITHUB_STEP_SUMMARY
+        run: cat reports/summary.md >> $GITHUB_STEP_SUMMARY
+      - uses: harupy/comment-on-pr@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          filename: temreports/summary.md
       - name: Build
         run: |
           npm run build:ci
