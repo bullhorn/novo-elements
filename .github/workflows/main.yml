@@ -34,6 +34,12 @@ jobs:
           name: JEST Tests
           path: reports/jest-*.xml
           reporter: jest-junit 
+      - uses: test-summary/action@v1
+        with:
+          paths: reports/jest-junit.xml
+          output: results/summary.md
+      - name: Test Summary
+        run: cat results/summary.md >> $GITHUB_STEP_SUMMARY
       - name: Build
         run: |
           npm run build:ci
