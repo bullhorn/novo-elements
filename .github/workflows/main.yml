@@ -40,11 +40,10 @@ jobs:
           output: reports/summary.md
       - name: Test Summary
         run: cat reports/summary.md >> $GITHUB_STEP_SUMMARY
-      - uses: harupy/comment-on-pr@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions-cool/maintain-one-comment@v3
         with:
-          filename: reports/summary.md
+          token: ${{ secrets.GITHUB_TOKEN }}
+          body: $GITHUB_STEP_SUMMARY
       - name: Build
         run: |
           npm run build:ci
