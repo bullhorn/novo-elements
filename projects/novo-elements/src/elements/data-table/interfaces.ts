@@ -68,7 +68,7 @@ export interface IDataTablePaginationOptions {
   page?: number;
   pageSize: number;
   pageSizeOptions: number[] | { value: string; label: string }[];
-  isHidden: boolean;
+  isHidden?: boolean;
 }
 
 export interface IDataTableColumnSortConfig {
