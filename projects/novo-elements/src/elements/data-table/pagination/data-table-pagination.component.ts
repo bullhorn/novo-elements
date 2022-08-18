@@ -76,7 +76,7 @@ const MAX_PAGES_DISPLAYED = 5;
       >
       </novo-select>
       <span class="spacer"></span>
-      <ul class="pager" data-automation-id="pager">
+      <ul *ngIf="!isHidden" class="pager" data-automation-id="pager">
         <li class="page" (click)="selectPage(page - 1)" [ngClass]="{ disabled: page === 0 }">
           <i class="bhi-previous" data-automation-id="pager-previous"></i>
         </li>
@@ -135,6 +135,8 @@ export class NovoDataTablePagination<T> implements OnInit, OnDestroy {
   public canSelectAll: boolean = false;
   @Input()
   public allMatchingSelected: boolean = false;
+  @Input()
+  public isHidden: boolean = false;
 
   @Input()
   get length(): number {
