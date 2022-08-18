@@ -73,6 +73,7 @@ import { DataTableState } from './state/data-table-state.service';
         [dataFeatureId]="paginatorDataFeatureId"
         [canSelectAll]="canSelectAll"
         [allMatchingSelected]="allMatchingSelected"
+        [isHidden]="paginationOptions.isHidden"
       >
       </novo-data-table-pagination>
       <div class="novo-data-table-actions" *ngIf="templates['customActions']">
