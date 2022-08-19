@@ -165,7 +165,7 @@ export class DataTableState<T> {
     }
   }
 
-  public setDataTableState(preferences: IDataTablePreferences, fireUpdate = true, persistUserFilters = true) {
+  public setDataTableState(preferences: IDataTablePreferences, fireUpdate = true, persistUserFilters = false) {
     if (!persistUserFilters) {
       this.where = preferences.where;
       this.sort = preferences.sort;
