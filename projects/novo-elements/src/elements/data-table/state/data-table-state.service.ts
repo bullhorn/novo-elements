@@ -43,7 +43,7 @@ export class DataTableState<T> {
   }
 
   public reset(fireUpdate: boolean = true, persistUserFilters?): void {
-    this.setDataTableState({} as IDataTablePreferences, fireUpdate, persistUserFilters)
+    this.setState({} as IDataTablePreferences, fireUpdate, persistUserFilters)
   }
 
   public clearSort(fireUpdate: boolean = true): void {
@@ -165,7 +165,7 @@ export class DataTableState<T> {
     }
   }
 
-  public setDataTableState(preferences: IDataTablePreferences, fireUpdate = true, persistUserFilters = false) {
+  public setState(preferences: IDataTablePreferences, fireUpdate = true, persistUserFilters = false): void {
     if (!persistUserFilters) {
       this.where = preferences.where;
       this.sort = preferences.sort;

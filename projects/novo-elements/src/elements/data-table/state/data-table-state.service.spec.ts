@@ -41,7 +41,7 @@ describe('Service: DataTableState', () => {
       expect(service.sort).toEqual({ id: 'test', value: 'desc' });
       expect(service.globalSearch).toEqual('testing');
     });
-    it('should emit an update if fiedUpdate is true', () => {
+    it('should emit an update if fireUpdate is true', () => {
       const expected = {
         sort: undefined,
         filter: undefined,
@@ -50,7 +50,7 @@ describe('Service: DataTableState', () => {
       service.reset(true);
       expect(service.updates.emit).toHaveBeenCalledWith(expected);
     });
-    it('should not emit an update if fiedUpdate is false', () => {
+    it('should not emit an update if fireUpdate is false', () => {
       service.reset(false);
       expect(service.updates.emit).not.toHaveBeenCalled();
     });
@@ -77,7 +77,7 @@ describe('Service: DataTableState', () => {
       expect(service.sort).toBeUndefined();
       expect(service.page).toEqual(0);
     });
-    it('should emit an update if fiedUpdate is true', () => {
+    it('should emit an update if fireUpdate is true', () => {
       const expected = {
         sort: undefined,
         filter: { id: 'test', value: 'value' },
@@ -87,7 +87,7 @@ describe('Service: DataTableState', () => {
       expect(service.reset).toHaveBeenCalledWith(true, true);
       expect(service.updates.emit).toHaveBeenCalledWith(expected);
     });
-    it('should not emit an update if fiedUpdate is false', () => {
+    it('should not emit an update if fireUpdate is false', () => {
       service.clearSort(false);
       expect(service.reset).toHaveBeenCalledWith(false, true);
       expect(service.updates.emit).not.toHaveBeenCalled();
@@ -117,7 +117,7 @@ describe('Service: DataTableState', () => {
       expect(service.globalSearch).toBeUndefined();
       expect(service.page).toEqual(0);
     });
-    it('should emit an update if fiedUpdate is true', () => {
+    it('should emit an update if fireUpdate is true', () => {
       const expected = {
         sort: { id: 'test', value: 'desc' },
         filter: undefined,
@@ -127,7 +127,7 @@ describe('Service: DataTableState', () => {
       expect(service.reset).toHaveBeenCalledWith(true, true);
       expect(service.updates.emit).toHaveBeenCalledWith(expected);
     });
-    it('should not emit an update if fiedUpdate is false', () => {
+    it('should not emit an update if fireUpdate is false', () => {
       service.clearFilter(false);
       expect(service.reset).toHaveBeenCalledWith(false, true);
       expect(service.updates.emit).not.toHaveBeenCalled();
@@ -154,7 +154,7 @@ describe('Service: DataTableState', () => {
       expect(service.globalSearch).toBeUndefined();
       expect(service.page).toEqual(0);
     });
-    it('should emit an update if fiedUpdate is true', () => {
+    it('should emit an update if fireUpdate is true', () => {
       service.filter = { id: 'test', value: 'value' };
       service.sort = { id: 'test', value: 'desc' };
       const expected = {
@@ -166,7 +166,7 @@ describe('Service: DataTableState', () => {
       expect(service.reset).toHaveBeenCalledWith(true, true);
       expect(service.updates.emit).toHaveBeenCalledWith(expected);
     });
-    it('should not emit an update if fiedUpdate is false', () => {
+    it('should not emit an update if fireUpdate is false', () => {
       service.clearSelected(false);
       expect(service.reset).toHaveBeenCalledWith(false, true);
       expect(service.updates.emit).not.toHaveBeenCalled();
