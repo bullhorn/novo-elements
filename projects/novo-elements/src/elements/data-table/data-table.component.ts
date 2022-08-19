@@ -25,6 +25,7 @@ import { NovoDataTableCellHeader } from './cell-headers/data-table-header-cell.c
 import { DataTableSource } from './data-table.source';
 import { NOVO_DATA_TABLE_REF } from './data-table.token';
 import {
+  IDataTableChangeEvent,
   IDataTableColumn,
   IDataTableFilter,
   IDataTablePaginationOptions,
@@ -358,7 +359,7 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
       // Re-subscribe
       this.outsideFilterSubscription = outsideFilter.subscribe((filter: any) => {
         this.state.outsideFilter = filter;
-        this.state.updates.next({ globalSearch: this.state.globalSearch, filter: this.state.filter, sort: this.state.sort, where: this.state.where });
+        this.state.updates.next({ globalSearch: this.state.globalSearch, filter: this.state.filter, sort: this.state.sort, where: this.state.where, savedSearchName: this.state.savedSearchName });
         this.ref.markForCheck();
       });
     }
@@ -374,7 +375,7 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
       // Re-subscribe
       this.refreshSubscription = refreshSubject.subscribe((filter: any) => {
         this.state.isForceRefresh = true;
-        this.state.updates.next({ globalSearch: this.state.globalSearch, filter: this.state.filter, sort: this.state.sort, where: this.state.where });
+        this.state.updates.next({ globalSearch: this.state.globalSearch, filter: this.state.filter, sort: this.state.sort, where: this.state.where, savedSearchName: this.state.savedSearchName });
         this.ref.markForCheck();
       });
     }
@@ -466,7 +467,7 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   constructor(public labels: NovoLabelService, private ref: ChangeDetectorRef, public state: DataTableState<T>) {
     this.scrollListenerHandler = this.scrollListener.bind(this);
     this.sortFilterSubscription = this.state.sortFilterSource.subscribe(
-      (event: { sort: IDataTableSort; filter: IDataTableFilter | IDataTableFilter[]; globalSearch: string; where: { query: string; form: any } }) => {
+      (event: IDataTableChangeEvent) => {
         if (this.name !== 'novo-data-table') {
           this.preferencesChanged.emit({
             name: this.name,
@@ -474,6 +475,7 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
             filter: event.filter,
             globalSearch: event.globalSearch,
             where: event.where,
+            savedSearchName: event.savedSearchName,
           });
           this.performInteractions('change');
         } else {
@@ -571,7 +573,7 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   public onSearchChange(term: string): void {
     this.state.globalSearch = term;
     this.state.reset(false, true);
-    this.state.updates.next({ globalSearch: term, filter: this.state.filter, sort: this.state.sort, where: this.state.where });
+    this.state.updates.next({ globalSearch: term, filter: this.state.filter, sort: this.state.sort, where: this.state.where, savedSearchName: this.state.savedSearchName });
   }
 
   public trackColumnsBy(index: number, item: IDataTableColumn<T>) {

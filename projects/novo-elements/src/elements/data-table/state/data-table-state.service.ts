@@ -1,7 +1,7 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Helpers } from '../../../utils/Helpers';
-import { IDataTableChangeEvent, IDataTableFilter, IDataTableSelectionOption, IDataTableSort } from '../interfaces';
+import { IDataTableChangeEvent, IDataTableFilter, IDataTablePreferences, IDataTableSelectionOption, IDataTableSort } from '../interfaces';
 import { NovoDataTableFilterUtils } from '../services/data-table-filter-utils';
 
 @Injectable()
@@ -27,6 +27,8 @@ export class DataTableState<T> {
   selectionOptions: IDataTableSelectionOption[];
   updates: EventEmitter<IDataTableChangeEvent> = new EventEmitter<IDataTableChangeEvent>();
   retainSelected: boolean = false;
+  savedSearchName: string = undefined;
+  displayedColumns: string[] = undefined;
 
   get userFiltered(): boolean {
     return !!(this.filter || this.sort || this.globalSearch || this.outsideFilter || this.where);
@@ -46,6 +48,7 @@ export class DataTableState<T> {
       this.globalSearch = undefined;
       this.filter = undefined;
       this.where = undefined;
+      this.savedSearchName = undefined;
     }
     this.page = 0;
     if (!this.retainSelected) {
@@ -60,6 +63,7 @@ export class DataTableState<T> {
         filter: this.filter,
         globalSearch: this.globalSearch,
         where: this.where,
+        savedSearchName: this.savedSearchName,
       });
     }
   }
@@ -76,6 +80,7 @@ export class DataTableState<T> {
         filter: this.filter,
         globalSearch: this.globalSearch,
         where: this.where,
+        savedSearchName: this.savedSearchName,
       });
     }
   }
@@ -93,6 +98,7 @@ export class DataTableState<T> {
         filter: this.filter,
         globalSearch: this.globalSearch,
         where: this.where,
+        savedSearchName: this.savedSearchName,
       });
     }
   }
@@ -109,6 +115,7 @@ export class DataTableState<T> {
         filter: this.filter,
         globalSearch: this.globalSearch,
         where: this.where,
+        savedSearchName: this.savedSearchName,
       });
     }
   }
@@ -125,6 +132,7 @@ export class DataTableState<T> {
         filter: this.filter,
         globalSearch: this.globalSearch,
         where: this.where,
+        savedSearchName: this.savedSearchName,
       });
     }
   }
@@ -151,6 +159,7 @@ export class DataTableState<T> {
       filter: this.filter,
       globalSearch: this.globalSearch,
       where: this.where,
+      savedSearchName: this.savedSearchName,
     });
   }
 
@@ -165,23 +174,57 @@ export class DataTableState<T> {
       }
 
       if (preferences.filter) {
-        const filters = Helpers.convertToArray(preferences.filter);
-        filters.forEach((filter) => {
-          filter.value =
-            filter.selectedOption && filter.type
-              ? NovoDataTableFilterUtils.constructFilter(filter.selectedOption, filter.type)
-              : filter.value;
-        });
-        this.filter = filters;
+        this.filter = this.transformFilters(preferences.filter);
       }
 
       if (preferences.globalSearch) {
         this.globalSearch = preferences.globalSearch;
       }
+
+      if (preferences.savedSearchName) {
+        this.savedSearchName = preferences.savedSearchName;
+      }
     }
+  }
+
+  public setDataTableState(preferences: IDataTablePreferences) {
+    this.where = preferences.where;
+    this.sort = preferences.sort;
+    this.filter = this.transformFilters(preferences.filter);
+    this.globalSearch = preferences.globalSearch;
+    this.savedSearchName = preferences.savedSearchName;
+
+    if (preferences.displayedColumns?.length) {
+      this.displayedColumns = preferences.displayedColumns;
+    }
+
+    this.selectedRows.clear();
+    this.resetSource.next();
+    this.page = 0;
+
+    this.onSortFilterChange();
+    this.updates.emit({
+      sort: this.sort,
+      filter: this.filter,
+      globalSearch: this.globalSearch,
+      where: this.where,
+      savedSearchName: this.savedSearchName,
+      displayedColumns: this.displayedColumns,
+    });
   }
 
   public checkRetainment(caller: string, allMatchingSelected = false): void {
     this.retainSelected = this.selectionOptions?.some((option) => option.label === caller) || this.retainSelected || allMatchingSelected;
+  }
+
+  private transformFilters(filters) {
+    const filterArray = Helpers.convertToArray(filters);
+    filterArray.forEach((filter) => {
+      filter.value =
+        filter.selectedOption && filter.type
+          ? NovoDataTableFilterUtils.constructFilter(filter.selectedOption, filter.type)
+          : filter.value;
+    });
+    return filterArray;
   }
 }
