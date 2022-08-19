@@ -43,29 +43,7 @@ export class DataTableState<T> {
   }
 
   public reset(fireUpdate: boolean = true, persistUserFilters?): void {
-    if (!persistUserFilters) {
-      this.sort = undefined;
-      this.globalSearch = undefined;
-      this.filter = undefined;
-      this.where = undefined;
-      this.savedSearchName = undefined;
-    }
-    this.page = 0;
-    if (!this.retainSelected) {
-      this.selectedRows.clear();
-      this.resetSource.next();
-    }
-    this.onSortFilterChange();
-    this.retainSelected = false;
-    if (fireUpdate) {
-      this.updates.emit({
-        sort: this.sort,
-        filter: this.filter,
-        globalSearch: this.globalSearch,
-        where: this.where,
-        savedSearchName: this.savedSearchName,
-      });
-    }
+    this.setDataTableState({} as IDataTablePreferences, fireUpdate, persistUserFilters)
   }
 
   public clearSort(fireUpdate: boolean = true): void {
@@ -187,30 +165,37 @@ export class DataTableState<T> {
     }
   }
 
-  public setDataTableState(preferences: IDataTablePreferences) {
-    this.where = preferences.where;
-    this.sort = preferences.sort;
-    this.filter = this.transformFilters(preferences.filter);
-    this.globalSearch = preferences.globalSearch;
-    this.savedSearchName = preferences.savedSearchName;
-
-    if (preferences.displayedColumns?.length) {
-      this.displayedColumns = preferences.displayedColumns;
+  public setDataTableState(preferences: IDataTablePreferences, fireUpdate = true, persistUserFilters = true) {
+    if (!persistUserFilters) {
+      this.where = preferences.where;
+      this.sort = preferences.sort;
+      this.filter = preferences.filter ? this.transformFilters(preferences.filter) : undefined;
+      this.globalSearch = preferences.globalSearch;
+      this.savedSearchName = preferences.savedSearchName;
+      if (preferences.displayedColumns?.length) {
+        this.displayedColumns = preferences.displayedColumns;
+      }
     }
 
-    this.selectedRows.clear();
-    this.resetSource.next();
     this.page = 0;
+    if (!this.retainSelected) {
+      this.selectedRows.clear();
+      this.resetSource.next();
+    }
 
     this.onSortFilterChange();
-    this.updates.emit({
-      sort: this.sort,
-      filter: this.filter,
-      globalSearch: this.globalSearch,
-      where: this.where,
-      savedSearchName: this.savedSearchName,
-      displayedColumns: this.displayedColumns,
-    });
+    this.retainSelected = false;
+
+    if (fireUpdate) {
+      this.updates.emit({
+        sort: this.sort,
+        filter: this.filter,
+        globalSearch: this.globalSearch,
+        where: this.where,
+        savedSearchName: this.savedSearchName,
+        displayedColumns: this.displayedColumns,
+      });
+    }
   }
 
   public checkRetainment(caller: string, allMatchingSelected = false): void {
