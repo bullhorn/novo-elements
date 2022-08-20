@@ -40,7 +40,7 @@
       }
     },
     "demo": {
-      "root": "",
+      "root": "projects/demo",
       "sourceRoot": "projects/demo",
       "projectType": "application",
       "prefix": "novo-demo",
