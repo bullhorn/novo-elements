@@ -10,7 +10,6 @@
     "lib": ["esnext", "dom"],
     "typeRoots": ["node_modules/@types"],
     "downlevelIteration": true,
-    // "incremental": true,
     "sourceMap": true,
     "declaration": false,
     "moduleResolution": "node",
