@@ -504,19 +504,21 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
 
   public modifyCellHeaderMultiSelectFilterOptions(column: string, newOptions: { value: any; label: string }[]): void {
     const header = this.cellHeaders.find((cellHeader) => cellHeader.id === column);
-    if (header && header.config && header.config.filterConfig && header.config.filterConfig.options) {
-      const filterOptions: any[] = header.config.filterConfig.options;
-      const optionsToKeep = filterOptions.filter(
-        (opt) =>
-          header.isSelected(opt, header.multiSelectedOptions) &&
-          !newOptions.find((newOpt) => opt.value && newOpt.value && newOpt.value === opt.value),
-      );
-      header.config.filterConfig.options = [...optionsToKeep, ...newOptions];
-    } else {
-      header.config.filterConfig.options = newOptions;
+    if (header) {
+      if (header.config && header.config.filterConfig && header.config.filterConfig.options) {
+        const filterOptions: any[] = header.config.filterConfig.options;
+        const optionsToKeep = filterOptions.filter(
+          (opt) =>
+            header.isSelected(opt, header.multiSelectedOptions) &&
+            !newOptions.find((newOpt) => opt.value && newOpt.value && newOpt.value === opt.value),
+        );
+        header.config.filterConfig.options = [...optionsToKeep, ...newOptions];
+      } else {
+        header.config.filterConfig.options = newOptions;
+      }
+      header.setupFilterOptions();
+      header.changeDetectorRef.markForCheck();
     }
-    header.setupFilterOptions();
-    header.changeDetectorRef.markForCheck();
   }
 
   public ngOnDestroy(): void {
