@@ -1,14 +1,24 @@
 {
-  "include": ["projects/**/*"],
-  "exclude": ["projects/**/*.spec.ts", "projects/schematics/**/*"],
+  "include": [
+    "projects/**/*"
+  ],
+  "exclude": [
+    "projects/**/*.spec.ts",
+    "projects/schematics/**/*"
+  ],
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",
     "outDir": "./dist",
     "target": "es2015",
     "module": "esnext",
-    "lib": ["esnext", "dom"],
-    "typeRoots": ["node_modules/@types"],
+    "lib": [
+      "esnext",
+      "dom"
+    ],
+    "typeRoots": [
+      "node_modules/@types"
+    ],
     "downlevelIteration": true,
     "sourceMap": true,
     "declaration": false,
@@ -17,12 +27,24 @@
     "experimentalDecorators": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
-    "types": ["jest"],
+    "types": [
+      "jest"
+    ],
     "incremental": true,
     "tsBuildInfoFile": "node_modules/.cache/tsbuildinfo",
     "paths": {
-      "novo-elements": ["projects/novo-elements/src/index"],
-      "novo-examples": ["projects/novo-examples/src/index"]
+      "novo-elements": [
+        "projects/elements/index"
+      ],
+      "novo-examples": [
+        "projects/examples/index"
+      ],
+      "novo-elements/*": [
+        "projects/elements/*"
+      ],
+      "novo-examples/*": [
+        "projects/examples/*"
+      ]
     }
   },
   "angularCompilerOptions": {

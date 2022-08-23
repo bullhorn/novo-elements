@@ -1,7 +1,8 @@
 {
   "extends": "../../tsconfig.json",
   "files": ["main.ts", "polyfills.ts"],
-  "include": ["**/*.d.ts", "project/demo/assets/stackblitz"],
+  "include": ["**/*.d.ts"],
+  "exclude": ["project/demo/assets/stackblitz"],
   "angularCompilerOptions": {
     "enableIvy": true,
     "compilationMode": "full"
