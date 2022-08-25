@@ -3,7 +3,6 @@ import { ChangeDetectorRef, Component, ElementRef, HostBinding } from '@angular/
 import { DomSanitizer } from '@angular/platform-browser';
 import { NovoLabelService } from '../../../../services/novo-label-service';
 // Vendor
-import { BasePickerResults } from '../base-picker-results/BasePickerResults';
 import {PickerResults} from "../picker-results";
 
 @Component({
