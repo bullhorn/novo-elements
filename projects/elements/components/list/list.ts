@@ -3,6 +3,7 @@ import { Component, ContentChild, ElementRef, Input, OnInit } from '@angular/cor
 
 @Component({
   selector: 'novo-list',
+  styleUrls: ['./list.scss'],
   host: {
     class: 'novo-list',
     '[class.vertical-list]': 'direction === "vertical"',
@@ -22,6 +23,7 @@ export class NovoListElement {
 
 @Component({
   selector: 'item-avatar, novo-item-avatar',
+  styleUrls: ['./list-item-header-avatar.scss'],
   template: ` <novo-icon *ngIf="icon" [color]="color || icon">{{ icon }}</novo-icon> `,
   host: {
     class: 'novo-item-avatar',
@@ -36,6 +38,7 @@ export class NovoItemAvatarElement {
 
 @Component({
   selector: 'item-title, novo-item-title',
+  styleUrls: ['./list-item-header-title.scss'],
   template: `<ng-content></ng-content>`,
   host: {
     class: 'novo-item-title',
@@ -45,6 +48,7 @@ export class NovoItemTitleElement {}
 
 @Component({
   selector: 'item-header, novo-item-header',
+  styleUrls: ['./list-item-header.scss'],
   template: `
     <novo-title class="novo-item-header-container" size="md">
       <ng-content select="item-avatar, novo-item-avatar"></ng-content>
@@ -60,7 +64,8 @@ export class NovoItemHeaderElement {}
 
 @Component({
   selector: 'item-header-end, novo-item-header-end',
-  template: ` <ng-content></ng-content> `,
+  styleUrls: ['./list-item-header-end.scss'],
+  template: `<ng-content></ng-content>`,
   host: {
     class: 'novo-item-header-end',
   },
@@ -69,6 +74,7 @@ export class NovoItemDateElement {}
 
 @Component({
   selector: 'item-content, novo-item-content',
+  styleUrls: ['./list-item-content.scss'],
   host: {
     class: 'novo-item-content',
     '[class.vertical-list]': 'direction === "vertical"',
@@ -83,6 +89,7 @@ export class NovoItemContentElement {
 
 @Component({
   selector: 'item-end, novo-item-end',
+  styleUrls: ['./list-item-end.scss'],
   template: ` <ng-content></ng-content> `,
   host: {
     class: 'novo-item-end',
@@ -91,14 +98,15 @@ export class NovoItemContentElement {
 export class NovoItemEndElement {}
 
 @Component({
-  selector: 'novo-list-item, a[list-item], button[list-item]',
+  selector: 'novo-list-item, [list-item]',
+  styleUrls: ['./list-item.scss'],
   template: `
     <div class="list-item" [ngClass]="{ avatar: avatar }" *ngIf="_content || _header">
       <ng-content select="item-header, novo-item-header"></ng-content>
       <ng-content select="item-content, novo-item-content"></ng-content>
     </div>
     <ng-content></ng-content>
-    <ng-content select="item-end, novo-item-end"></ng-content>
+    <ng-content select="item-end, novo-item-end, [novoSuffix]"></ng-content>
   `,
   host: {
     class: 'novo-list-item',

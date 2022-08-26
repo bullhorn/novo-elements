@@ -5,7 +5,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { NovoElementsModule } from 'novo-elements';
-import { NovoExamplesSharedModule } from './_shared';
+import { NovoExamplesSharedModule, CodeExampleConfig, CODE_EXAMPLES } from './_shared';
 
 // Examples
 import { BasicAceExample } from './components/ace-editor/basic-ace/basic-ace-example';
@@ -434,17 +434,7 @@ export { FiValidationExample } from './utils/field-interactions/fi-validation/fi
 export { PluralizeExample } from './utils/pipes/pluralize/pluralize-example';
 export { SecurityExample } from './utils/security/security/security-example';
 
-export interface LiveExample {
-  title: string;
-  component: any;
-  additionalFiles?: string[];
-  selectorName?: string;
-  tsSource?: string;
-  cssSource?: string;
-  htmlSource?: string;
-}
-
-export const EXAMPLE_COMPONENTS: {[key: string]: LiveExample} = {
+export const EXAMPLE_COMPONENTS: CodeExampleConfig = {
   'basic-ace': {
     title: 'Basic Ace Editor Example',
     component: BasicAceExample,
@@ -2167,6 +2157,9 @@ export const EXAMPLE_LIST = [
     CommonModule,
     NovoElementsModule,
     NovoExamplesSharedModule
-  ]
+  ],
+  providers: [{
+    provide: CODE_EXAMPLES, useValue: EXAMPLE_COMPONENTS
+  }]
 })
 export class NovoExamplesModule { }

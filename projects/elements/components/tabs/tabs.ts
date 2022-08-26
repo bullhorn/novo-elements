@@ -19,6 +19,7 @@ import { BooleanInput } from 'novo-elements/utils';
 
 @Component({
   selector: 'novo-nav',
+  styleUrls: ['./tab-nav.scss'],
   template: '<ng-content></ng-content>',
 })
 export class NovoNavElement implements AfterContentChecked {
@@ -119,6 +120,7 @@ export class NovoNavElement implements AfterContentChecked {
 
 @Component({
   selector: 'novo-tab',
+  styleUrls: ['./tab-link.scss'],
   host: {
     '(click)': 'select()',
     '[class.active]': 'active',
@@ -183,6 +185,7 @@ export class NovoTabElement {
 
 @Component({
   selector: 'novo-tab-button',
+  styleUrls: ['./tab-button.scss'],
   host: {
     '(click)': 'select()',
     '[class.active]': 'active',
@@ -214,6 +217,7 @@ export class NovoTabButtonElement {
 
 @Component({
   selector: 'novo-tab-link',
+  styleUrls: ['./tab-link.scss'],
   host: {
     '(click)': 'select()',
     '[class.active]': 'active',
@@ -267,6 +271,7 @@ export class NovoTabLinkElement implements OnInit {
 
 @Component({
   selector: 'novo-nav-outlet',
+  styleUrls: ['./tab-outlet.scss'],
   template: '<ng-content></ng-content>',
 })
 export class NovoNavOutletElement {
@@ -302,6 +307,7 @@ export class NovoNavOutletElement {
 
 @Component({
   selector: 'novo-nav-content',
+  styleUrls: ['./tab-content.scss'],
   host: {
     '[class.active]': 'active',
   },
@@ -318,6 +324,7 @@ export class NovoNavContentElement {
 
 @Component({
   selector: 'novo-nav-header',
+  styleUrls: ['./tab-header.scss'],
   host: {
     '[class.active]': 'active',
     '(click)': 'show($event)',

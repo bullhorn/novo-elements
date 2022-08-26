@@ -3,8 +3,8 @@ import { ChangeDetectorRef, Component, ElementRef, EventEmitter, forwardRef, Inp
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 // Vendor
 import { isDate, parse } from 'date-fns';
-import { Helpers } from 'novo-elements/utils';
 import { NovoLabelService } from 'novo-elements/services';
+import { Helpers } from 'novo-elements/utils';
 
 // Value accessor for the component (supports ngModel)
 const DATE_VALUE_ACCESSOR = {
@@ -15,6 +15,7 @@ const DATE_VALUE_ACCESSOR = {
 
 @Component({
   selector: 'novo-date-time-picker-input',
+  styleUrls: ['./date-time-picker-input.scss'],
   providers: [DATE_VALUE_ACCESSOR],
   template: `
     <novo-date-picker-input

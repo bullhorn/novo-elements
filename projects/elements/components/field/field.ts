@@ -18,12 +18,12 @@ import {
   ViewChild,
 } from '@angular/core';
 import { NgControl } from '@angular/forms';
+import { NovoLabel } from 'novo-elements/common';
 import { fromEvent, Subject, Subscription } from 'rxjs';
 import { startWith, takeUntil } from 'rxjs/operators';
-import { NovoHintElement } from './hint/hint';
-import { NovoFieldControl } from './field-control';
 import { NovoErrorElement } from './error/error';
-import { NovoLabel } from 'novo-elements/common';
+import { NovoFieldControl } from './field-control';
+import { NovoHintElement } from './hint/hint';
 
 @Directive({ selector: '[novoPrefix]' })
 export class NovoFieldPrefixDirective {}
@@ -95,7 +95,7 @@ export class NovoFieldElement implements AfterContentInit, OnDestroy {
   @ContentChild(NovoFieldControl) _control: NovoFieldControl<any>;
 
   @Input() layout: 'horizontal' | 'vertical' = 'vertical';
-  @Input() appearance: 'standard' | 'outline' | 'fill' | 'list' = 'standard';
+  @Input() appearance: 'standard' | 'outline' | 'fill' | 'list' | 'none' = 'standard';
 
   @Input()
   width: string;

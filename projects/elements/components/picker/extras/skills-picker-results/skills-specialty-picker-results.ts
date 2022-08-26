@@ -1,10 +1,11 @@
 // NG2
 import { ChangeDetectorRef, Component, ElementRef, HostBinding } from '@angular/core';
-import { BasePickerResults } from '../base-picker-results/base-picker-results';
 import { NovoLabelService } from 'novo-elements/services';
+import { BasePickerResults } from '../base-picker-results/base-picker-results';
 
 @Component({
   selector: 'skill-specialty-picker-results',
+  styleUrls: ['../picker-results/picker-results.scss'],
   template: `
     <section class="picker-loading" *ngIf="isLoading && !matches?.length"><novo-loading theme="line"></novo-loading></section>
     <novo-list *ngIf="matches.length > 0" direction="vertical">
@@ -16,10 +17,10 @@ import { NovoLabelService } from 'novo-elements/services';
         [class.disabled]="preselected(match)"
       >
         <item-content>
-          <h6><span [innerHtml]="match.label | highlight:term"></span></h6>
+          <h6><span [innerHtml]="match.label | highlight: term"></span></h6>
           <div class="category">
             <i class="bhi-category-tags"></i
-            ><span [innerHtml]="match.data.categories || match.data.parentCategory.name | highlight:term"></span>
+            ><span [innerHtml]="match.data.categories || match.data.parentCategory.name | highlight: term"></span>
           </div>
         </item-content>
       </novo-list-item>

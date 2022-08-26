@@ -19,6 +19,10 @@
       },
       "dependsOn": [
         {
+          "target": "prebuild",
+          "projects": "self"
+        },
+        {
           "target": "build",
           "projects": "dependencies"
         }

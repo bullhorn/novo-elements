@@ -4,6 +4,7 @@ import { NovoModalRef } from './modal-ref';
 
 @Component({
   selector: 'novo-modal',
+  styleUrls: ['./modal.component.scss'],
   template: `
     <ng-content select="header,novo-header,novo-card-header"></ng-content>
     <ng-content select="section,novo-card-content"></ng-content>
@@ -19,6 +20,7 @@ export class NovoModalElement {
 
 @Component({
   selector: 'novo-notification',
+  styleUrls: ['./notification.component.scss'],
   template: `
     <novo-button class="modal-close" theme="icon" icon="x" (click)="close()"></novo-button>
     <header class="novo-notification-header"><ng-content select="label,novo-label"></ng-content></header>

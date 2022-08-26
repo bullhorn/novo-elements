@@ -1,13 +1,16 @@
-novo-toast {
+@import "~novo-design-tokens/scss";
+@import "variables";
+
+:host {
   display: grid;
   grid-template-columns: 5rem 1fr;
   justify-content: flex-start;
   align-content: center;
   align-items: center;
   position: relative;
-  background: $navy;
-  color: $white;
-  padding: $spacing-md;
+  background: var(--color-navy);
+  color: var(--color-white);
+  padding: var(--spacing-md);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
 
   &.show {
@@ -59,7 +62,7 @@ novo-toast {
         input {
           background: transparent !important;
           border: none;
-          border-bottom: 1px solid lighten($dark, 45%);
+          border-bottom: 1px solid var(--border);
           border-radius: 0;
           outline: none;
           height: 2rem;
@@ -69,13 +72,13 @@ novo-toast {
           box-shadow: none;
           box-sizing: content-box;
           transition: all 300ms;
-          color: $white;
+          color: var(--color-white);
           text-overflow: ellipsis;
           &:focus {
-            background-color: $positive;
+            background-color: var(--color-positive);
           }
           &:hover {
-            border-bottom: 1px solid lighten($dark, 15%);
+            border-bottom: 1px solid var(--border);
           }
         }
       }
@@ -86,61 +89,58 @@ novo-toast {
     white-space: pre-line;
   }
 
+  h5 {
+    display: block;
+    font-size: 1.4rem;
+    color: inherit;
+  }
+
+  .toast-content > p {
+    margin: 0;
+    max-width: inherit;
+    font-size: 1.3rem;
+    &.message-only {
+      padding: 0;
+      font-size: 1.4rem;
+    }
+  }
+  &.text {
+    background: var(--text-main);
+  }
+  &.neutral {
+    background: var(--color-neutral);
+  }
+  &.background {
+    background: var(--background-main);
+    .toast-content > h5 {
+      color: var(--text-main) !important;
+    }
+    i,
+    p {
+      color: var(--text-main);
+    }
+  }
+
   @include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
     &.#{$name} {
-      color: getContrastColor($name);
+      color: $contrast;
       background: $color;
     }
     &.novo-accent-#{$name} {
       border: 1px solid $color;
-      background: getPaleColor($name);
-      color: $dark;
+      background: $pale;
+      color: var(--text-main);
     }
   }
 }
 
-novo-toast h5 {
-  display: block;
-  font-size: 1.4rem;
-  color: inherit;
-}
-
-novo-toast .toast-content > p {
-  margin: 0;
-  max-width: inherit;
-  font-size: 1.3rem;
-  &.message-only {
-    padding: 0;
-    font-size: 1.4rem;
-  }
-}
-
-novo-toast {
-  &.text {
-    background: $dark;
-  }
-  &.neutral {
-    background: $neutral;
-  }
-  &.background {
-    background: $off-white;
-    .toast-content > h5 {
-      color: $dark !important;
-    }
-    i,
-    p {
-      color: $dark;
-    }
-  }
-}
-
-novo-toast.fixedBottom,
-novo-toast.fixedTop {
+:host(.fixedBottom),
+:host(.fixedTop) {
   left: 0;
   right: 0;
 }
 
-novo-toast.fixedTop {
+:host(.fixedTop) {
   top: -100%;
   padding-top: 20px;
   @include ease("all", "swift-ease-in-out");
@@ -150,7 +150,7 @@ novo-toast.fixedTop {
   }
 }
 
-novo-toast.fixedBottom {
+:host(.fixedBottom) {
   bottom: -100%;
   padding-bottom: 20px;
   @include ease("all", "swift-ease-in-out");
@@ -160,13 +160,13 @@ novo-toast.fixedBottom {
   }
 }
 
-novo-toast[class*="growl"] {
+:host([class*="growl"]) {
   border-radius: 3px;
   max-width: 350px;
 }
 
-novo-toast.growlBottomLeft,
-novo-toast.growlTopLeft {
+:host(.growlBottomLeft),
+:host(.growlTopLeft) {
   left: -100%;
   right: auto;
   width: calc(100% - 30px);
@@ -176,107 +176,135 @@ novo-toast.growlTopLeft {
   }
 }
 
-novo-toast.growlTopLeft,
-novo-toast.growlTopRight {
-  top: 1rem;
-}
-
-novo-toast.growlBottomLeft,
-novo-toast.growlBottomRight {
-  bottom: 1rem;
-}
-
-novo-toast.growlBottomRight,
-novo-toast.growlTopRight {
-  right: -100%;
-  left: auto;
-  width: calc(100% - 30px);
-  @include ease("all", "swift-ease-in-out");
-  &.animate {
-    right: 1rem;
+:host {
+  &.growlTopLeft,
+  &.growlTopRight {
+    top: 1rem;
   }
-}
 
-novo-toast.fixedTop {
-  @for $i from 2 through 100 {
-    &:nth-last-of-type(#{$i}) {
-      top: (25px * ($i - 1));
-      z-index: 9999 - $i;
-      filter: brightness(1- (1/7));
+  &.growlBottomLeft,
+  &.growlBottomRight {
+    bottom: 1rem;
+  }
+
+  &.growlBottomRight,
+  &.growlTopRight {
+    right: -100%;
+    left: auto;
+    width: calc(100% - 30px);
+    @include ease("all", "swift-ease-in-out");
+    &.animate {
+      right: 1rem;
     }
   }
-}
 
-novo-toast.fixedBottom {
-  @for $i from 2 through 100 {
-    &:nth-last-of-type(#{$i}) {
-      bottom: (25px * ($i - 1));
-      z-index: 9999 - $i;
-      filter: brightness(1- (1/7));
+  &.fixedTop {
+    @for $i from 2 through 100 {
+      &:nth-last-of-type(#{$i}) {
+        top: (25px * ($i - 1));
+        z-index: 9999 - $i;
+        filter: brightness(calc(1 - (1 / 7)));
+      }
     }
   }
-}
 
-novo-toast.growlTopLeft,
-novo-toast.growlTopRight {
-  @for $i from 2 through 100 {
-    &:nth-last-of-type(#{$i}) {
-      top: (25px * $i);
-      transform: scale(1- (1/25));
-      z-index: 9999 - $i;
-      filter: brightness(1- (1/7));
+  &.fixedBottom {
+    @for $i from 2 through 100 {
+      &:nth-last-of-type(#{$i}) {
+        bottom: (25px * ($i - 1));
+        z-index: 9999 - $i;
+        filter: brightness(calc(1 - (1 / 7)));
+      }
     }
   }
-}
 
-novo-toast.growlBottomLeft,
-novo-toast.growlBottomRight {
-  @for $i from 2 through 100 {
-    &:nth-last-of-type(#{$i}) {
-      bottom: (25px * $i);
-      transform: scale(1- (1/25));
-      z-index: 9999 - $i;
-      filter: brightness(1- (1/7));
+  &.growlTopLeft,
+  &.growlTopRight {
+    @for $i from 2 through 100 {
+      &:nth-last-of-type(#{$i}) {
+        top: (25px * $i);
+        transform: scale(calc(1 - (1 / 25)));
+        z-index: 9999 - $i;
+        filter: brightness(calc(1 - (1 / 7)));
+      }
     }
   }
-}
 
-novo-toast.growlBottomLeft,
-novo-toast.growlBottomRight,
-novo-toast.growlTopLeft,
-novo-toast.growlTopRight {
-  &:last-of-type {
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  &.growlBottomLeft,
+  &.growlBottomRight {
+    @for $i from 2 through 100 {
+      &:nth-last-of-type(#{$i}) {
+        bottom: (25px * $i);
+        transform: scale(calc(1 - (1 / 25)));
+        z-index: 9999 - $i;
+        filter: brightness(calc(1 - (1 / 7)));
+      }
+    }
   }
-}
 
-novo-toast.embedded.fixedBottom,
-novo-toast.embedded.fixedTop {
-  top: auto;
-  left: auto;
-  right: auto;
-  width: inherit;
-  margin: -1rem -3rem;
-  &.animate {
+  &.growlBottomLeft,
+  &.growlBottomRight,
+  &.growlTopLeft,
+  &.growlTopRight {
+    &:last-of-type {
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+    }
+  }
+
+  &.embedded.fixedBottom,
+  &.embedded.fixedTop {
     top: auto;
+    left: auto;
+    right: auto;
+    width: inherit;
+    margin: -1rem -3rem;
+    &.animate {
+      top: auto;
+    }
+  }
+
+  &:not(.launched) {
+    animation: embedded-slide-in 200ms ease-in-out;
+  }
+
+  &.dialogue {
+    .toast-content {
+      display: flex;
+      flex-direction: row !important;
+      align-items: center;
+    }
+    p.message-only {
+      flex: 3 0 0;
+    }
+    .dialogue {
+      display: inherit;
+    }
   }
 }
 
-novo-toast:not(.launched) {
-  animation: embedded-slide-in 200ms ease-in-out;
-}
-
-novo-toast.dialogue {
-  .toast-content {
-    display: flex;
-    flex-direction: row !important;
-    align-items: center;
-  }
-  p.message-only {
-    flex: 3 0 0;
-  }
-  .dialogue {
-    display: inherit;
+@media screen and (min-width: 350px) {
+  :host {
+    &[class*="growl"] {
+      min-width: 350px;
+    }
+    &.growlBottomLeft,
+    &.growlTopLeft {
+      left: -100%;
+      right: auto;
+      @include ease("all", "swift-ease-in-out");
+      &.animate {
+        left: 1rem;
+      }
+    }
+    &.growlBottomRight,
+    &.growlTopRight {
+      right: -100%;
+      left: auto;
+      @include ease("all", "swift-ease-in-out");
+      &.animate {
+        right: 1rem;
+      }
+    }
   }
 }
 
@@ -288,29 +316,5 @@ novo-toast.dialogue {
   to {
     transform: translateY(0);
     opacity: 1;
-  }
-}
-
-@media screen and (min-width: 350px) {
-  novo-toast[class*="growl"] {
-    min-width: 350px;
-  }
-  novo-toast.growlBottomLeft,
-  novo-toast.growlTopLeft {
-    left: -100%;
-    right: auto;
-    @include ease("all", "swift-ease-in-out");
-    &.animate {
-      left: 1rem;
-    }
-  }
-  novo-toast.growlBottomRight,
-  novo-toast.growlTopRight {
-    right: -100%;
-    left: auto;
-    @include ease("all", "swift-ease-in-out");
-    &.animate {
-      right: 1rem;
-    }
   }
 }

@@ -1,8 +1,8 @@
 // NG2
 import { Component, EventEmitter, forwardRef, Input, OnInit, Output } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { COUNTRIES, findByCountryId, getStates, Helpers } from 'novo-elements/utils';
 import { NovoLabelService } from 'novo-elements/services';
+import { COUNTRIES, findByCountryId, getStates, Helpers } from 'novo-elements/utils';
 
 // Value accessor for the component (supports ngModel)
 const ADDRESS_VALUE_ACCESSOR = {
@@ -34,6 +34,7 @@ export interface NovoAddressConfig {
 
 @Component({
   selector: 'novo-address',
+  styleUrls: ['./address.scss'],
   providers: [ADDRESS_VALUE_ACCESSOR],
   template: `
     <span

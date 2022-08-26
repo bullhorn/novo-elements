@@ -1,7 +1,6 @@
-@import "../../styles/variables.scss";
-@import "../common/typography/text.mixins.scss";
+@import "../../common/typography/text.mixins.scss";
 
-novo-select {
+:host {
   display: block;
   position: relative;
   width: 100%;
@@ -16,8 +15,8 @@ novo-select {
     align-items: center;
     background-color: transparent;
     border: none;
-    border-bottom: 1px solid lighten($dark, 45%);
-    color: var(--text-main, $dark);
+    border-bottom: 1px solid var(--border);
+    color: var(--text-main);
     height: 2.05rem;
     position: relative;
     text-align: left;
@@ -25,7 +24,7 @@ novo-select {
     z-index: z(default);
     cursor: pointer;
     text-transform: none;
-    padding: 0 $spacing-md 0 $spacing-sm;
+    padding: 0 var(--spacing-md) 0 var(--spacing-sm);
     margin-bottom: -1px;
     -webkit-appearance: none;
 
@@ -37,10 +36,10 @@ novo-select {
       outline: none;
     }
     &:hover {
-      border-bottom: 1px solid lighten($dark, 15%);
+      border-bottom: 1px solid var(--border);
     }
     &:focus {
-      border-bottom: 1px solid $positive;
+      border-bottom: 1px solid var(--selection);
       i {
         color: rgba(0, 0, 0, 0.73);
       }
@@ -60,7 +59,7 @@ novo-select {
   &[disabled] {
     pointer-events: none;
     div[type="button"] {
-      color: $grey;
+      color: var(--text-disabled);
     }
   }
 }
@@ -112,10 +111,10 @@ novo-select {
       font-size: 1rem;
       &:focus,
       &:hover {
-        color: darken($light, 55%);
+        color: var(--text-muted);
       }
       i {
-        color: $positive;
+        color: var(--selection);
         padding-right: 10px;
       }
       span {
@@ -143,9 +142,9 @@ novo-select {
       }
     }
     button.primary {
-      color: $positive;
+      color: var(--color-positive);
       &:hover {
-        color: darken($positive, 15%);
+        color: var(--color-tint-positive);
       }
     }
     input {
@@ -173,7 +172,7 @@ novo-select {
         outline: none;
       }
       &:hover {
-        border-bottom: 1px solid $positive;
+        border-bottom: 1px solid var(--selection);
       }
       &.invalid {
         border-bottom: 1px solid #da4453;

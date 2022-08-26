@@ -1,10 +1,11 @@
 // NG2
 import { ChangeDetectorRef, Component, ElementRef } from '@angular/core';
-import { BasePickerResults } from '../base-picker-results/base-picker-results';
 import { NovoLabelService } from 'novo-elements/services';
+import { BasePickerResults } from '../base-picker-results/base-picker-results';
 
 @Component({
   selector: 'picker-results',
+  styleUrls: ['./picker-results.scss'],
   host: {
     class: 'active',
   },
@@ -18,7 +19,7 @@ import { NovoLabelService } from 'novo-elements/services';
         [class.disabled]="preselected(match)"
         data-automation-id="picker-result-list-item"
       >
-        <item-content> <span [innerHtml]="match.label | highlight:term"></span> </item-content>
+        <item-content> <span [innerHtml]="match.label | highlight: term"></span> </item-content>
       </novo-list-item>
       <novo-loading *ngIf="isLoading && matches.length > 0" theme="line"></novo-loading>
     </novo-list>

@@ -9,6 +9,7 @@ import {
   GooglePlacesService,
   NovoAgendaModule,
   NovoAsideModule,
+  NovoAutoCompleteModule,
   NovoAvatarModule,
   NovoBreadcrumbModule,
   NovoButtonModule,
@@ -77,6 +78,7 @@ import {
   imports: [ReactiveFormsModule],
   exports: [
     NovoAsideModule,
+    NovoAutoCompleteModule,
     NovoAvatarModule,
     NovoPipesModule,
     NovoButtonModule,

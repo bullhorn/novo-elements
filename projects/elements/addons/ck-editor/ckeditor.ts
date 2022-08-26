@@ -25,6 +25,7 @@ declare global {
   selector: 'novo-editor',
   providers: [CKEDITOR_CONTROL_VALUE_ACCESSOR],
   template: '<textarea [name]="name" [id]="name" #host></textarea>',
+  styleUrls: ['./ckeditor.scss'],
 })
 export class NovoCKEditorElement implements OnDestroy, AfterViewInit, ControlValueAccessor {
   @Input()

@@ -17,8 +17,8 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { format, parse } from 'date-fns';
 import * as IMask from 'imask';
 import { NovoOverlayTemplateComponent } from 'novo-elements/common/overlay';
-import { Key, Helpers } from 'novo-elements/utils';
 import { DateFormatService, NovoLabelService } from 'novo-elements/services';
+import { Helpers, Key } from 'novo-elements/utils';
 
 // Value accessor for the component (supports ngModel)
 const DATE_VALUE_ACCESSOR = {
@@ -29,6 +29,7 @@ const DATE_VALUE_ACCESSOR = {
 
 @Component({
   selector: 'novo-time-picker-input',
+  styleUrls: ['./time-picker-input.scss'],
   providers: [DATE_VALUE_ACCESSOR],
   template: `
     <input
@@ -172,8 +173,7 @@ export class NovoTimePickerInputElement implements OnInit, OnChanges, ControlVal
       if (this.value.getTime() !== dt.getTime()) {
         this.dispatchOnChange(dt);
       }
-    }
-    else if (this.value !== dt) {
+    } else if (this.value !== dt) {
       this.dispatchOnChange(dt);
     }
   }

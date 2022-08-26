@@ -3,11 +3,15 @@
     "defaultBase": "main"
   },
   "implicitDependencies": {
+    "angular.json": "*",
     "package.json": {
       "dependencies": "*",
       "devDependencies": "*"
     },
-    ".eslintrc.json": "*"
+    "nx.json": "*",
+    "tsconfig.*.json": "*",
+    "tsconfig.json": "*",
+    "tslint.json": "*"
   },
   "tasksRunnerOptions": {
     "default": {

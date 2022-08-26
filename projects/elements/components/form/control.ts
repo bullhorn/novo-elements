@@ -33,7 +33,7 @@ export class NovoAutoSize implements AfterContentInit {
   constructor(public element: ElementRef) {}
 
   ngAfterContentInit(): void {
-    setTimeout(() => {
+    Promise.resolve(() => {
       this.adjust();
     });
   }
@@ -47,6 +47,7 @@ export class NovoAutoSize implements AfterContentInit {
 // undo all template context references!
 @Component({
   selector: 'novo-control',
+  styleUrls: ['./control.scss'],
   template: `
     <div
       class="novo-control-container"
@@ -374,7 +375,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
   ngAfterViewInit() {
     const DO_NOT_FOCUS_ME: string[] = ['picker', 'time', 'date', 'date-time'];
     if (this.autoFocus && !DO_NOT_FOCUS_ME.includes(this.control.controlType)) {
-      setTimeout(() => {
+      Promise.resolve(() => {
         const input: HTMLElement = this.element.nativeElement.querySelector('input');
         if (input) {
           input.focus();
@@ -383,7 +384,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     }
   }
 
-  ngAfterContentInit() {
+  async ngAfterContentInit() {
     // Subscribe to control interactions
     if (this.control.interactions && !this.form.controls[this.control.key].restrictFieldInteractions) {
       for (const interaction of this.control.interactions) {
@@ -625,7 +626,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
 
   executeInteraction(interaction, isInvokedOnInit = false) {
     if (interaction.script && Helpers.isFunction(interaction.script)) {
-      setTimeout(() => {
+      Promise.resolve(() => {
         this.fieldInteractionApi.form = this.form;
         this.fieldInteractionApi.currentKey = this.control.key;
         this.fieldInteractionApi.isInvokedOnInit = isInvokedOnInit;

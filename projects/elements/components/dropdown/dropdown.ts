@@ -20,11 +20,6 @@ import {
   QueryList,
   ViewChild,
 } from '@angular/core';
-// Vendor
-import { merge, of, Subject, Subscription } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-import { NovoOverlayTemplateComponent } from 'novo-elements/common/overlay';
-
 import {
   CanDisableCtor,
   HasOverlayCtor,
@@ -38,9 +33,12 @@ import {
   _countGroupLabelsBeforeOption,
   _getOptionScrollPosition,
 } from 'novo-elements/common';
-
+import { NovoOverlayTemplateComponent } from 'novo-elements/common/overlay';
 import { NovoButtonElement } from 'novo-elements/components/button';
 import { BooleanInput, Key, notify } from 'novo-elements/utils';
+// Vendor
+import { merge, of, Subject, Subscription } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Directive({
   selector: '[dropdownTrigger]',
@@ -63,6 +61,7 @@ const NovoDropdowMixins: HasOverlayCtor & CanDisableCtor & HasTabIndexCtor & typ
 
 @Component({
   selector: 'novo-dropdown',
+  styleUrls: ['./dropdown.scss'],
   template: `
     <ng-content select="button,novo-button,[dropdownTrigger]" #trigger></ng-content>
     <novo-overlay-template [parent]="element" [width]="width" [position]="side" [scrollStrategy]="scrollStrategy">

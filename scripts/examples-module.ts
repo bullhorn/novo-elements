@@ -100,7 +100,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { NovoElementsModule } from 'novo-elements';
-import { NovoExamplesSharedModule } from './_shared';
+import { NovoExamplesSharedModule, CodeExampleConfig, CODE_EXAMPLES } from './_shared';
 
 // Examples
 ${extractedMetadata
@@ -113,17 +113,7 @@ ${extractedMetadata
   .join('')
   .trim()}
 
-export interface LiveExample {
-  title: string;
-  component: any;
-  additionalFiles?: string[];
-  selectorName?: string;
-  tsSource?: string;
-  cssSource?: string;
-  htmlSource?: string;
-}
-
-export const EXAMPLE_COMPONENTS: {[key: string]: LiveExample} = {
+export const EXAMPLE_COMPONENTS: CodeExampleConfig = {
   ${extractedMetadata
     .map((r) => buildExamplesTemplate(r))
     .join('')
@@ -147,7 +137,10 @@ export const EXAMPLE_LIST = [
     CommonModule,
     NovoElementsModule,
     NovoExamplesSharedModule
-  ]
+  ],
+  providers: [{
+    provide: CODE_EXAMPLES, useValue: EXAMPLE_COMPONENTS
+  }]
 })
 export class NovoExamplesModule { }
 `;

@@ -17,11 +17,11 @@ import {
   TemplateRef,
   ViewChildren,
 } from '@angular/core';
-import { takeUntil } from 'rxjs/operators';
-import { novoStepperAnimations } from './stepper.animations';
-import { NovoStepLabel } from './step-label.component';
-import { NovoStepHeader } from './step-header.component';
 import { NovoIconComponent } from 'novo-elements/components/icon';
+import { takeUntil } from 'rxjs/operators';
+import { NovoStepHeader } from './step-header.component';
+import { NovoStepLabel } from './step-label.component';
+import { novoStepperAnimations } from './stepper.animations';
 
 @Component({
   selector: 'novo-step',

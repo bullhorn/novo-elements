@@ -13,8 +13,8 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { format, isValid, parse } from 'date-fns';
-import { Helpers } from 'novo-elements/utils';
 import { DateFormatService, NovoLabelService } from 'novo-elements/services';
+import { Helpers } from 'novo-elements/utils';
 
 // Value accessor for the component (supports ngModel)
 const TIME_PICKER_VALUE_ACCESSOR = {
@@ -30,6 +30,7 @@ export enum TIME_VALUE_FORMATS {
 
 @Component({
   selector: 'novo-time-picker',
+  styleUrls: ['./time-picker.scss'],
   providers: [TIME_PICKER_VALUE_ACCESSOR],
   template: `
     <!-- <div class="digital" [class.inline]="inline" [class.military]="military" *ngIf="inline">

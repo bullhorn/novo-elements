@@ -1,5 +1,5 @@
 // NG2
-import { ENTER, ESCAPE, TAB } from '@angular/cdk/keycodes';
+import { ENTER } from '@angular/cdk/keycodes';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -15,8 +15,8 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { NovoOverlayTemplateComponent } from 'novo-elements/common/overlay';
-import { Key } from 'novo-elements/utils';
 import { NovoLabelService } from 'novo-elements/services';
+import { Key } from 'novo-elements/utils';
 
 // Value accessor for the component (supports ngModel)
 const SEARCH_VALUE_ACCESSOR = {
@@ -27,6 +27,7 @@ const SEARCH_VALUE_ACCESSOR = {
 
 @Component({
   selector: 'novo-search',
+  styleUrls: ['./search-box.scss'],
   providers: [SEARCH_VALUE_ACCESSOR],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `

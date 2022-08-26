@@ -46,6 +46,7 @@ const NovoFileInputMixins: CanUpdateErrorStateCtor & typeof NovoFileInputBase = 
 
 @Component({
   selector: 'novo-file-input',
+  styleUrls: ['./file-input.scss'],
   providers: [{ provide: NovoFieldControl, useExisting: NovoFileInputElement }],
   template: `
     <div #container></div>

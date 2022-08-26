@@ -25,11 +25,6 @@ import {
   ViewChildren,
 } from '@angular/core';
 import { ControlValueAccessor, FormGroupDirective, NgControl, NgForm } from '@angular/forms';
-// Vendor
-import { merge, Observable, of, Subject, Subscription } from 'rxjs';
-import { filter, map, take, takeUntil } from 'rxjs/operators';
-import { NovoFieldControl } from 'novo-elements/components/field';
-import { NovoOverlayTemplateComponent } from 'novo-elements/common/overlay';
 import {
   CanDisableCtor,
   CanRequireCtor,
@@ -49,8 +44,13 @@ import {
   _countGroupLabelsBeforeOption,
   _getOptionScrollPosition,
 } from 'novo-elements/common';
-import { Helpers, Key } from 'novo-elements/utils';
+import { NovoOverlayTemplateComponent } from 'novo-elements/common/overlay';
+import { NovoFieldControl } from 'novo-elements/components/field';
 import { NovoLabelService } from 'novo-elements/services';
+import { Helpers, Key } from 'novo-elements/utils';
+// Vendor
+import { merge, Observable, of, Subject, Subscription } from 'rxjs';
+import { filter, map, take, takeUntil } from 'rxjs/operators';
 
 // Value accessor for the component (supports ngModel)
 // const SELECT_VALUE_ACCESSOR = {
@@ -91,6 +91,7 @@ let nextId = 0;
 @Component({
   selector: 'novo-select',
   inputs: ['disabled', 'required', 'tabIndex'],
+  styleUrls: ['./select.scss'],
   providers: [
     { provide: NovoFieldControl, useExisting: NovoSelectElement },
     { provide: NOVO_OPTION_PARENT_COMPONENT, useExisting: NovoSelectElement },
@@ -143,7 +144,7 @@ let nextId = 0;
             [tooltip]="option.tooltip"
             [tooltipPosition]="option.tooltipPosition || 'right'"
           >
-            <span [innerHtml]="option.label | highlight:filterTerm"></span> <i *ngIf="option.active" class="bhi-check"></i>
+            <span [innerHtml]="option.label | highlight: filterTerm"></span> <i *ngIf="option.active" class="bhi-check"></i>
           </novo-option>
           <ng-template #divider>
             <novo-divider class="select-item-divider" [class.with-label]="option.label" [class.without-label]="!option.label">

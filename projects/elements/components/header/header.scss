@@ -1,6 +1,9 @@
-.novo-header {
+@import "~novo-design-tokens/scss";
+@import "../../common/typography/text.mixins";
+
+:host {
   display: block;
-  background-color: var(--background-bright, $white);
+  background-color: var(--background-bright);
 
   .spacer {
     flex: 1 1 0%;
@@ -26,8 +29,8 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding: 0 $spacing-lg;
-    gap: $spacing-sm;
+    padding: 0 var(--spacing-lg);
+    gap: var(--spacing-sm);
     box-sizing: border-box;
     // line-height: 4rem;
 
@@ -38,9 +41,9 @@
       display: flex;
       align-items: center;
       max-width: calc(100% - 40px);
-      gap: $spacing-sm;
+      gap: var(--spacing-sm);
 
-      novo-icon {
+      ::ng-deep novo-icon {
         margin-right: 1rem;
       }
     }
@@ -73,7 +76,7 @@
       display: flex;
       align-items: center;
       justify-content: flex-start;
-      gap: $spacing-sm;
+      gap: var(--spacing-sm);
     }
 
     .novo-action {
@@ -82,7 +85,7 @@
   }
 
   @include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
-    &.novo-accent-#{$name} {
+    &.novo-accent-#{$name} ::ng-deep {
       .header-titles,
       .header-title {
         .novo-icon {
@@ -93,7 +96,7 @@
         border-bottom: 2px solid $color;
       }
     }
-    &.novo-theme-#{$name} {
+    &.novo-theme-#{$name} ::ng-deep {
       & > section:first-of-type {
         background: $color;
         color: $contrast;
@@ -120,7 +123,7 @@
       padding-left: 0;
     }
   }
-  &.condensed {
+  &.condensed ::ng-deep {
     .header-title,
     .header-titles {
       line-height: 1.375;
@@ -138,12 +141,4 @@
     display: flex;
     flex-flow: row nowrap;
   }
-}
-
-header-spacer {
-  display: inline-block;
-  height: 1.8em;
-  width: 2px;
-  margin: 0 0.6em;
-  background-color: rgba(0, 0, 0, 0.25);
 }

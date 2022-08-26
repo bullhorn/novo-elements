@@ -5,6 +5,7 @@ import { NovoLabelService } from 'novo-elements/services';
 
 @Component({
   selector: 'novo-tip-well',
+  styleUrls: ['./tip-well.scss'],
   template: `
     <div *ngIf="isActive">
       <div>

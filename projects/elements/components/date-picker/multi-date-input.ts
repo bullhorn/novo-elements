@@ -13,8 +13,8 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { NovoOverlayTemplateComponent } from 'novo-elements/common/overlay';
-import { Key, Helpers } from 'novo-elements/utils';
 import { DateFormatService, NovoLabelService } from 'novo-elements/services';
+import { Helpers, Key } from 'novo-elements/utils';
 
 // Value accessor for the component (supports ngModel)
 const MULTI_DATE_VALUE_ACCESSOR = {
@@ -25,6 +25,7 @@ const MULTI_DATE_VALUE_ACCESSOR = {
 
 @Component({
   selector: 'novo-multi-date-input',
+  styleUrls: ['./multi-date-input.scss'],
   providers: [MULTI_DATE_VALUE_ACCESSOR],
   template: `
     <novo-chip-list>

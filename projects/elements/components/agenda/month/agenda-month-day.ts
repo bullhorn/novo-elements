@@ -1,8 +1,9 @@
-import { Component, EventEmitter, Input, Output, TemplateRef } from '@angular/core';
+import { Component, EventEmitter, Input, Output, TemplateRef, ViewEncapsulation } from '@angular/core';
 import { CalendarEvent, CalendarEventResponse, MonthViewDay } from 'novo-elements/utils';
 
 @Component({
   selector: 'novo-agenda-month-day',
+  encapsulation: ViewEncapsulation.None,
   template: `
     <ng-template #defaultTemplate>
       <div class="agenda-day-top">

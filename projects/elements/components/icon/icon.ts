@@ -4,6 +4,7 @@ import { BooleanInput } from 'novo-elements/utils';
 
 @Component({
   selector: 'novo-icon',
+  styleUrls: ['./icon.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <i [class]="iconName"

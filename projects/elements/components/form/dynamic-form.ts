@@ -10,14 +10,15 @@ import {
   QueryList,
   SimpleChanges,
 } from '@angular/core';
-import { NovoFormGroup } from './novo-form-group';
-import { NovoFieldset } from './form-interfaces';
-import { Helpers } from 'novo-elements/utils';
 import { NovoTemplate } from 'novo-elements/common';
 import { NovoTemplateService } from 'novo-elements/services';
+import { Helpers } from 'novo-elements/utils';
+import { NovoFieldset } from './form-interfaces';
+import { NovoFormGroup } from './novo-form-group';
 
 @Component({
   selector: 'novo-fieldset-header',
+  styleUrls: ['./form-fieldset-header.scss'],
   template: `
     <novo-title smaller>
       <novo-icon>{{ icon?.replace('bhi-', '') }}</novo-icon
@@ -37,6 +38,7 @@ export class NovoFieldsetHeaderElement {
 
 @Component({
   selector: 'novo-fieldset',
+  styleUrls: ['./form-fieldset.scss'],
   template: `
     <div class="novo-fieldset-container">
       <novo-fieldset-header
@@ -79,6 +81,7 @@ export class NovoFieldsetElement {
 
 @Component({
   selector: 'novo-dynamic-form',
+  styleUrls: ['./form.scss'],
   template: `
     <novo-control-templates></novo-control-templates>
     <div class="novo-form-container">

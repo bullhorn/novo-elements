@@ -10,8 +10,8 @@ import {
   OnInit,
   Output,
   TemplateRef,
+  ViewEncapsulation,
 } from '@angular/core';
-import { Subject, Subscription } from 'rxjs';
 import {
   CalendarEvent,
   CalendarEventTimesChangedEvent,
@@ -22,6 +22,7 @@ import {
   WeekDay,
   WeekViewEventRow,
 } from 'novo-elements/utils';
+import { Subject, Subscription } from 'rxjs';
 
 /**
  * @hidden
@@ -44,6 +45,8 @@ const MINUTES_IN_HOUR: number = 60;
  */
 @Component({
   selector: 'novo-agenda-week',
+  encapsulation: ViewEncapsulation.None,
+  styleUrls: ['./agenda-week-view.scss', '../common/agenda-hours-layout.scss'],
   template: `
     <div class="cal-week-view" #weekViewContainer>
       <novo-agenda-week-header [days]="days" [locale]="locale" [customTemplate]="headerTemplate" (dayClicked)="dayClicked.emit($event)">

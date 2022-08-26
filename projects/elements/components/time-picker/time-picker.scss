@@ -1,49 +1,4 @@
-novo-time-picker-input {
-  flex: 1;
-  position: relative;
-  display: block;
-  max-width: 130px;
-
-  &.disabled {
-    pointer-events: none;
-    opacity: 1;
-  }
-
-  input {
-    font-size: 1em;
-    border: none;
-    border-bottom: 1px solid var(--border);
-    background: transparent !important;
-    border-radius: 0;
-    outline: none;
-    height: 2rem;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    box-shadow: none;
-    box-sizing: content-box;
-    transition: all 300ms;
-    color: var(--text-main);
-
-    &:focus {
-      border-bottom: 1px solid var(--selection);
-    }
-  }
-  > i.bhi-clock,
-  > i.bhi-search,
-  > i.bhi-times,
-  > i.bhi-calendar {
-    position: absolute;
-    right: 0;
-    top: 0px;
-    font-size: 1.2rem;
-  }
-  > i.bhi-times {
-    cursor: pointer;
-  }
-}
-
-novo-time-picker {
+:host {
   display: block;
   // width: 250px;
   // min-width: 250px;
@@ -58,8 +13,8 @@ novo-time-picker {
     display: flex;
     justify-content: center;
     &.inline {
-      background: $white;
-      border-bottom: 1px solid #f0f0f0;
+      background: var(--background-bright);
+      border-bottom: 1px solid var(--border);
       &.military {
         border-bottom: none;
       }
@@ -78,7 +33,7 @@ novo-time-picker {
             &.active {
               opacity: 1;
               background-color: var(--selection);
-              color: $white;
+              color: var(--text-selection);
             }
           }
         }
@@ -298,13 +253,13 @@ novo-time-picker {
       transform: rotate(-90deg);
     }
     @for $i from 1 through 9 {
-      $deg: ($i * (30/5) - 90);
+      $deg: calc($i * (30 / 5) - 90);
       &.min-0#{$i} {
         transform: rotate(#{$deg}deg);
       }
     }
     @for $i from 10 through 59 {
-      $deg: ($i * (30/5) - 90);
+      $deg: calc($i * (30 / 5) - 90);
       &.min-#{$i} {
         transform: rotate(#{$deg}deg);
       }
@@ -322,7 +277,7 @@ novo-time-picker {
     margin-left: 1px;
     display: block;
     position: absolute;
-    background-color: $background;
+    background-color: var(--background-bright);
   }
   .analog--hour,
   .analog--minute {
@@ -372,7 +327,7 @@ novo-time-picker {
     $md: 8rem;
     @for $i from 1 through 24 {
       $hour: $i - 1;
-      $deg: ($i * 15 - 105);
+      $deg: calc($i * 15 - 105);
       .analog--hour:nth-child(#{$i}) {
         transform: rotate(#{$deg}deg) translate($md) rotate(#{$deg * -1}deg);
       }

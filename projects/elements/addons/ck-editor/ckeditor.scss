@@ -1,4 +1,4 @@
-novo-editor {
+:host {
   .cke {
     font: inherit !important;
     box-shadow: none;
@@ -17,7 +17,7 @@ novo-editor {
 }
 
 .cke_dialog_background_cover {
-  background-color: $black !important;
+  background-color: var(--color-black) !important;
 }
 
 .cke_dialog {

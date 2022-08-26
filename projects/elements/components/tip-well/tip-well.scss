@@ -1,14 +1,16 @@
-novo-tip-well {
+@import "../../common/typography/text.mixins";
+
+:host {
   &.active {
     display: inline-block;
-    margin-bottom: $spacing-md;
+    margin-bottom: var(--spacing-md);
   }
   > div {
     display: inline-block;
     border-radius: 0.25rem;
-    background-color: var(--background-main, $off-white);
-    color: var(--text-main, $dark);
-    padding: $spacing-lg;
+    background-color: var(--background-main);
+    color: var(--text-main);
+    padding: var(--spacing-lg);
     text-align: right;
     > div {
       display: flex;
@@ -16,16 +18,19 @@ novo-tip-well {
         flex-shrink: 0;
         text-align: center;
         margin-top: 0.3rem;
-        margin-right: $spacing-md;
+        margin-right: var(--spacing-md);
         color: #aaaaaa;
       }
       > p {
         @include novo-body-text();
         width: 100%;
-        max-width: 40rem;
+        // max-width: 40rem;
         padding: 0;
         text-align: left;
         white-space: pre-line;
+      }
+      p:empty {
+        display: none;
       }
     }
   }

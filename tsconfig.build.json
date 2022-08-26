@@ -8,8 +8,10 @@
     "inlineSourceMap": true,
     "inlineSources": true,
     "paths": {
-      "novo-elements": ["dist/novo-elements"],
-      "novo-examples": ["dist/novo-examples"]
+      "novo-elements": ["./dist/novo-elements"],
+      "novo-examples": ["./dist/novo-examples"],
+      "novo-elements/*": ["./dist/novo-elements/*"],
+      "novo-examples/*": ["./dist/novo-examples/*"]
     }
   },
   "angularCompilerOptions": {

@@ -3,7 +3,8 @@
   "dest": "../../dist/novo-elements",
   "lib": {
     "flatModuleFile": "novo-elements",
-    "entryFile": "index.ts"
+    "entryFile": "index.ts",
+    "styleIncludePaths": ["./styles"]
   },
-  "assets": ["styles"]
+  "assets": ["styles", "./novo-elements-dark.scss", "./novo-elements.scss"]
 }

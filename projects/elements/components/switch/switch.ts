@@ -12,6 +12,7 @@ const SWITCH_VALUE_ACCESSOR = {
 
 @Component({
   selector: 'novo-switch',
+  styleUrls: ['./switch.scss'],
   providers: [SWITCH_VALUE_ACCESSOR],
   template: `
     <div (click)="toggle($event)">

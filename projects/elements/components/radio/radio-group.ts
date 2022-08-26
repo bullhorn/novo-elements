@@ -13,10 +13,10 @@ import {
   QueryList,
 } from '@angular/core';
 import { ControlValueAccessor, FormGroupDirective, NgControl, NgForm, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { NOVO_RADIO_GROUP } from './tokens';
-import { NovoRadioElement } from './radio';
-import { NovoFieldControl } from 'novo-elements/components/field';
 import { CanUpdateErrorStateCtor, ErrorStateMatcher, mixinErrorState } from 'novo-elements/common';
+import { NovoFieldControl } from 'novo-elements/components/field';
+import { NovoRadioElement } from './radio';
+import { NOVO_RADIO_GROUP } from './tokens';
 
 // make radio-button-group ids unique
 let nextId = 0;
@@ -45,6 +45,7 @@ const NovoRadioGroupMixins: CanUpdateErrorStateCtor & typeof NovoRadioGroupBase 
     { provide: NOVO_RADIO_GROUP, useExisting: NovoRadioGroup },
     { provide: NovoFieldControl, useExisting: NovoRadioGroup },
   ],
+  styleUrls: ['./radio-group.scss'],
   template: '<ng-content></ng-content>',
   host: {
     class: 'novo-radio-group',

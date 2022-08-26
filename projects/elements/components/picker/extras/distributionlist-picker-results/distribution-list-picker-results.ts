@@ -1,11 +1,12 @@
 // NG2
 import { ChangeDetectorRef, Component, ElementRef, HostBinding } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { BasePickerResults } from '../base-picker-results/base-picker-results';
 import { NovoLabelService } from 'novo-elements/services';
+import { BasePickerResults } from '../base-picker-results/base-picker-results';
 
 @Component({
   selector: 'distribution-list-picker-results',
+  styleUrls: ['../picker-results/picker-results.scss'],
   template: `
     <section class="picker-loading" *ngIf="isLoading && !matches?.length">
       <novo-loading theme="line"></novo-loading>

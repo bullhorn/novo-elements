@@ -14,9 +14,9 @@ import {
   ViewContainerRef,
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
-import { QuickNoteResults } from './extras/quick-note-results/quick-note-results';
 import { ComponentUtils } from 'novo-elements/services';
 import { Key, OutsideClick } from 'novo-elements/utils';
+import { QuickNoteResults } from './extras/quick-note-results/quick-note-results';
 
 // Value accessor for the component (supports ngModel)
 const QUICK_NOTE_VALUE_ACCESSOR = {
@@ -29,6 +29,7 @@ declare var CKEDITOR: any;
 
 @Component({
   selector: 'novo-quick-note',
+  styleUrls: ['./quick-note.scss'],
   providers: [QUICK_NOTE_VALUE_ACCESSOR],
   template: ` <div class="quick-note-wrapper" #wrapper><textarea #host></textarea> <span #results></span></div> `,
 })

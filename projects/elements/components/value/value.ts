@@ -14,6 +14,7 @@ export enum NOVO_VALUE_THEME {
 
 @Component({
   selector: 'novo-value',
+  styleUrls: ['./value.scss'],
   template: `
     <div class="value-outer" [ngClass]="customClass">
       <novo-label>{{ meta.label }}</novo-label>

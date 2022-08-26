@@ -1,4 +1,7 @@
-novo-control-group {
+@import "~novo-design-tokens/scss";
+@import "variables";
+
+:host {
   display: block;
   margin-bottom: 0.5em;
   background: var(--background-bright, $color-white);

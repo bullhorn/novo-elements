@@ -3,6 +3,7 @@ import { BooleanInput } from 'novo-elements/utils';
 
 @Component({
   selector: 'header-spacer',
+  styleUrls: ['./header-spacer.scss'],
   template: `<ng-content></ng-content>`,
 })
 export class NovoHeaderSpacer {}
@@ -37,6 +38,7 @@ export class NovoUtilActionComponent {
 
 @Component({
   selector: 'novo-header,header[theme],header[accent]',
+  styleUrls: ['./header.scss'],
   template: `
     <section>
       <div class="header-title">

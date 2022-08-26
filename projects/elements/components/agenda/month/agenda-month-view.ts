@@ -10,9 +10,9 @@ import {
   OnInit,
   Output,
   TemplateRef,
+  ViewEncapsulation,
 } from '@angular/core';
 import * as dateFns from 'date-fns';
-import { Subject, Subscription } from 'rxjs';
 import {
   CalendarEvent,
   CalendarEventTimesChangedEvent,
@@ -22,6 +22,7 @@ import {
   MonthViewDay,
   WeekDay,
 } from 'novo-elements/utils';
+import { Subject, Subscription } from 'rxjs';
 
 /**
  * Shows all events on a given month. Example usage:
@@ -35,6 +36,8 @@ import {
  */
 @Component({
   selector: 'novo-agenda-month',
+  encapsulation: ViewEncapsulation.None,
+  styleUrls: ['./agenda-month-view.scss'],
   template: `
     <div class="agenda-month-view">
       <novo-agenda-month-header

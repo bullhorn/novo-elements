@@ -1,12 +1,13 @@
 // NG
 import { AfterContentInit, Component, ContentChildren, Input, OnInit, QueryList } from '@angular/core';
-import { NovoFormGroup } from './novo-form-group';
 import { NovoTemplate } from 'novo-elements/common';
-import { Helpers } from 'novo-elements/utils';
 import { NovoTemplateService } from 'novo-elements/services';
+import { Helpers } from 'novo-elements/utils';
+import { NovoFormGroup } from './novo-form-group';
 
 @Component({
   selector: 'novo-form',
+  styleUrls: ['./form.scss'],
   template: `
     <novo-control-templates></novo-control-templates>
     <div class="novo-form-container">

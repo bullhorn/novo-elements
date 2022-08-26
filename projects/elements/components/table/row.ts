@@ -42,7 +42,7 @@ export class NovoHeaderRow extends _NovoHeaderRow {
 }
 
 @Component({
-  selector: 'novo-row',
+  selector: 'novo-table-row',
   template: CDK_ROW_TEMPLATE,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

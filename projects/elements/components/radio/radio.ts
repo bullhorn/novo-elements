@@ -27,6 +27,7 @@ const RADIO_VALUE_ACCESSOR = {
 @Component({
   selector: 'novo-radio',
   providers: [RADIO_VALUE_ACCESSOR],
+  styleUrls: ['./radio.scss'],
   template: `
     <input
       type="radio"

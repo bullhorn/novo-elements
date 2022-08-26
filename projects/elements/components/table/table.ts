@@ -23,7 +23,7 @@ import { NovoActivityTableState } from './state';
 import { ActivityTableDataSource, ActivityTableService } from './table-source';
 
 @Component({
-  selector: 'novo-table',
+  selector: 'novo-table,[novo-table]',
   template: CDK_TABLE_TEMPLATE,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -126,7 +126,7 @@ export class NovoActivityTableNoResultsMessage {}
             <novo-cell *novoCellDef="let row" [column]="column" [row]="row"></novo-cell>
           </ng-container>
           <novo-header-row *novoHeaderRowDef="displayedColumns"></novo-header-row>
-          <novo-row *novoRowDef="let row; columns: displayedColumns"></novo-row>
+          <novo-table-row *novoRowDef="let row; columns: displayedColumns"></novo-table-row>
         </novo-table>
         <div
           class="novo-activity-table-no-results-container"

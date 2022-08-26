@@ -10,16 +10,10 @@ import {
   OnInit,
   Output,
   TemplateRef,
+  ViewEncapsulation,
 } from '@angular/core';
+import { CalendarEvent, CalendarEventTimesChangedEvent, DayView, DayViewHour, getDayView, getDayViewHourGrid } from 'novo-elements/utils';
 import { Subject, Subscription } from 'rxjs';
-import {
-  CalendarEvent,
-  CalendarEventTimesChangedEvent,
-  DayView,
-  DayViewHour,
-  getDayView,
-  getDayViewHourGrid,
-} from 'novo-elements/utils';
 
 /**
  * @hidden
@@ -43,6 +37,8 @@ const MINUTES_IN_HOUR: number = 60;
  */
 @Component({
   selector: 'novo-agenda-day',
+  encapsulation: ViewEncapsulation.None,
+  styleUrls: ['./agenda-day-view.scss', '../common/agenda-hours-layout.scss'],
   template: `
     <div class="cal-day-view" #dayViewContainer>
       <novo-agenda-all-day-event

@@ -4,6 +4,7 @@ import { Helpers } from 'novo-elements/utils';
 
 @Component({
   selector: 'novo-entity-list',
+  styleUrls: ['./entity-list.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div *ngFor="let entity of data.data" class="entity">

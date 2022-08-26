@@ -1,8 +1,9 @@
-import { Component, EventEmitter, Input, Output, TemplateRef } from '@angular/core';
+import { Component, EventEmitter, Input, Output, TemplateRef, ViewEncapsulation } from '@angular/core';
 import { CalendarEvent, WeekDay } from 'novo-elements/utils';
 
 @Component({
   selector: 'novo-agenda-week-header',
+  encapsulation: ViewEncapsulation.None,
   template: `
     <ng-template #defaultTemplate>
       <div class="cal-day-headers">

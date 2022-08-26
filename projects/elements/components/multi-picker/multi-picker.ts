@@ -1,10 +1,10 @@
 // NG2
 import { Component, ElementRef, EventEmitter, forwardRef, Input, OnInit, Output } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import { NovoLabelService } from 'novo-elements/services';
+import { Helpers, Key } from 'novo-elements/utils';
 // Vendor
 import { ReplaySubject } from 'rxjs';
-import { Key, Helpers } from 'novo-elements/utils';
-import { NovoLabelService } from 'novo-elements/services';
 
 // Value accessor for the component (supports ngModel)
 const CHIPS_VALUE_ACCESSOR = {
@@ -22,6 +22,7 @@ interface Item {
 @Component({
   selector: 'multi-picker',
   providers: [CHIPS_VALUE_ACCESSOR],
+  styleUrls: ['./multi-picker.scss'],
   template: `
     <novo-chip
       *ngFor="let item of _items | async | slice: 0:chipsCount"

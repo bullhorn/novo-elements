@@ -1,6 +1,6 @@
-@import "../../common/typography/text.mixins";
+// @import "../../common/typography/text.mixins";
 
-novo-dropdown {
+:host {
   display: inline-block;
   position: relative;
   outline: none;
@@ -22,14 +22,14 @@ novo-dropdown {
 }
 
 .dropdown-container {
-  background-color: var(--background-bright, $color-bright);
+  background-color: var(--background-bright);
   list-style: none;
   margin: 0;
   padding: 0;
   min-width: 180px;
-  margin-top: $spacing-sm;
-  margin-bottom: $spacing-sm;
-  box-shadow: $shadow-3;
+  margin-top: var(--spacing-sm);
+  margin-bottom: var(--spacing-sm);
+  box-shadow: var(--shadow-3);
   &.has-height {
     overflow: auto;
   }
@@ -40,13 +40,13 @@ novo-dropdown {
       flex: 1;
       font-weight: 500;
       text-transform: uppercase;
-      padding: $spacing-sm $spacing-md;
+      padding: var(--spacing-sm) var(--spacing-md);
       display: block;
     }
     hr {
       border: none;
       height: 1px;
-      background: $light;
+      background: var(--border);
     }
   }
 }

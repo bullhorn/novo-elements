@@ -1,13 +1,19 @@
-// NG2
 import { Component, ElementRef, EventEmitter, forwardRef, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-// Vendor
+import { Helpers } from 'novo-elements/utils';
+/**
+ * WARNING !!!!!!!!!!
+ *
+ * Do NOT save this file with formatting enabled, it will reorder the
+ * the imports in the wrong order.
+ *
+ * Use CMD + K then S to save without formatting
+ *  */
 // organize-imports-ignore
 import 'brace/index';
 import 'brace/mode/javascript';
 import 'brace/theme/chrome';
 import 'brace/ext/language_tools.js';
-import { Helpers } from 'novo-elements/utils';
 
 declare var ace: any;
 
@@ -20,6 +26,7 @@ const ACE_VALUE_ACCESSOR = {
 @Component({
   selector: 'novo-ace-editor',
   template: '',
+  styleUrls: ['./ace-editor.scss'],
   providers: [ACE_VALUE_ACCESSOR],
 })
 export class NovoAceEditor implements ControlValueAccessor, OnInit, OnDestroy {

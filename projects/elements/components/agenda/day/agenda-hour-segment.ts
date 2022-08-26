@@ -1,8 +1,9 @@
-import { Component, Input, TemplateRef } from '@angular/core';
+import { Component, Input, TemplateRef, ViewEncapsulation } from '@angular/core';
 import { DayViewHourSegment } from 'novo-elements/utils';
 
 @Component({
   selector: 'novo-agenda-day-hour-segment',
+  encapsulation: ViewEncapsulation.None,
   template: `
     <ng-template #defaultTemplate>
       <div

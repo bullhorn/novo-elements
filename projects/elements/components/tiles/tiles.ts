@@ -25,6 +25,7 @@ const TILES_VALUE_ACCESSOR = {
 @Component({
   selector: 'novo-tiles',
   providers: [TILES_VALUE_ACCESSOR],
+  styleUrls: ['./tiles.scss'],
   template: `
     <div class="tile-container" [class.active]="focused" [class.disabled]="disabled">
       <div

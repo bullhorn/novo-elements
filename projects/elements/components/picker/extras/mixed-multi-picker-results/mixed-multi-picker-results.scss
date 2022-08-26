@@ -1,10 +1,10 @@
-mixed-multi-picker-results {
-  background-color: $white;
+:host {
+  background-color: var(--background-bright);
   max-height: 300px;
   padding: 0;
   margin: 0;
   box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
-  border: 1px solid $positive;
+  border: 1px solid var(--selection);
   transform: translateY(0%);
   transition: all 0.15s cubic-bezier(0.35, 0, 0.25, 1);
   display: flex;
@@ -28,13 +28,13 @@ mixed-multi-picker-results {
     }
     novo-list-item {
       color: #999999;
-      border-left: 3px solid $white;
+      border-left: 3px solid transparent;
       transition: background-color 250ms;
       & > div {
         width: 100%;
       }
       &:hover {
-        background-color: lighten($positive, 39%);
+        background-color: var(--color-pale-positive);
       }
       .list-item {
         justify-content: center;
@@ -43,14 +43,14 @@ mixed-multi-picker-results {
         color: #999999;
       }
       &.active {
-        color: $positive;
-        border-left-color: $positive;
-        background-color: lighten($positive, 35%);
+        color: var(--selection);
+        border-left-color: var(--selection);
+        background-color: var(--color-pale-positive);
         item-end {
-          color: $positive;
+          color: var(--selection);
         }
         .list-item > item-content > * {
-          color: $positive !important;
+          color: var(--selection) !important;
         }
       }
       item-content {
@@ -76,10 +76,10 @@ mixed-multi-picker-results {
           width: 100%;
         }
         &.active {
-          background-color: lighten($positive, 35%);
+          background-color: var(--color-pale-positive);
         }
         &:hover {
-          background-color: lighten($positive, 39%);
+          background-color: var(--color-pale-positive);
         }
         item-content {
           flex-flow: row wrap;
@@ -97,8 +97,8 @@ mixed-multi-picker-results {
         padding: 0.95em;
         background: transparent !important;
         border: none;
-        border-bottom: 1px solid $off-white;
-        border-left: 1px solid $off-white;
+        border-bottom: 1px solid var(--border);
+        border-left: 1px solid var(--border);
         border-radius: 0;
         border-radius: 0;
         outline: none;
@@ -108,11 +108,11 @@ mixed-multi-picker-results {
         transition: all 300ms;
         color: #26282b;
         &:hover {
-          border-bottom: 1px solid $off-white;
+          border-bottom: 1px solid var(--border);
         }
         &:focus {
-          border-bottom: 1px solid $positive;
-          border-left: 1px solid $positive;
+          border-bottom: 1px solid var(--selection);
+          border-left: 1px solid var(--selection);
         }
         &[disabled] {
           pointer-events: none;
@@ -135,7 +135,7 @@ mixed-multi-picker-results {
       }
     }
     .mixed-multi-picker-list-container {
-      border-left: 1px solid $off-white;
+      border-left: 1px solid var(--border);
       flex: 1;
       display: flex;
       flex-direction: column;

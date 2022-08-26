@@ -1,8 +1,8 @@
 // NG2
 import { isPlatformBrowser } from '@angular/common';
 import { Component, ElementRef, EventEmitter, Inject, Input, OnChanges, OnInit, Output, PLATFORM_ID } from '@angular/core';
-import { GooglePlacesService } from './places.service';
 import { GlobalRef } from 'novo-elements/services';
+import { GooglePlacesService } from './places.service';
 
 export interface Settings {
   geoPredictionServerUrl?: string;
@@ -31,6 +31,7 @@ export interface Settings {
 
 @Component({
   selector: 'google-places-list',
+  styleUrls: ['./places.component.scss'],
   template: `
     <novo-list direction="vertical">
       <novo-list-item *ngFor="let data of queryItems; let $index = index" (click)="selectedListNode($event, $index)">

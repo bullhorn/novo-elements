@@ -1,9 +1,10 @@
-import { Component, EventEmitter, Input, Output, TemplateRef } from '@angular/core';
+import { Component, EventEmitter, Input, Output, TemplateRef, ViewEncapsulation } from '@angular/core';
 import * as dateFns from 'date-fns';
 import { WeekDay } from 'novo-elements/utils';
 
 @Component({
   selector: 'novo-agenda-month-header',
+  encapsulation: ViewEncapsulation.None,
   template: `
     <ng-template #defaultTemplate>
       <div class="agenda-header">

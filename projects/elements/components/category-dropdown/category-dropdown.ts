@@ -1,10 +1,11 @@
 // NG2
 import { Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { Key, Helpers, OutsideClick } from 'novo-elements/utils';
 import { NovoLabelService } from 'novo-elements/services';
+import { Helpers, Key, OutsideClick } from 'novo-elements/utils';
 
 @Component({
   selector: 'novo-category-dropdown',
+  styleUrls: ['./category-dropdown.scss'],
   template: `
     <ng-content select="button"></ng-content>
     <div class="dropdown-container" *ngIf="active">

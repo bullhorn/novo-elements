@@ -10,11 +10,11 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
+import { NOVO_OPTION_PARENT_COMPONENT } from 'novo-elements/common';
+import { NovoLabelService } from 'novo-elements/services';
+import { binarySearch, Helpers } from 'novo-elements/utils';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
-import { NOVO_OPTION_PARENT_COMPONENT } from 'novo-elements/common';
-import { binarySearch, Helpers } from 'novo-elements/utils';
-import { NovoLabelService } from 'novo-elements/services';
 
 export type TabbedGroupPickerTab = {
   typeName: string;
@@ -60,6 +60,7 @@ export type TabbedGroupPickerButtonConfig = {
 @Component({
   selector: 'novo-tabbed-group-picker',
   templateUrl: './tabbed-group-picker.html',
+  styleUrls: ['./tabbed-group-picker.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [{ provide: NOVO_OPTION_PARENT_COMPONENT, useExisting: NovoTabbedGroupPickerElement }],
 })

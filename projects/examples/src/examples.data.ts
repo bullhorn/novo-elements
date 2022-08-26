@@ -1,6 +1,7 @@
 // The example-module file will be auto-generated. As soon as the
 // examples are being compiled, the module file will be generated.
-import { EXAMPLE_COMPONENTS, LiveExample } from './examples.module';
+import { EXAMPLE_COMPONENTS } from './examples.module';
+import { LiveExample } from './_shared';
 
 /**
  * Example data

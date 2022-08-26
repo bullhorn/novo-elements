@@ -5,6 +5,7 @@ import { Deferred, DeferredPromise } from 'novo-elements/utils';
 
 @Component({
   selector: 'novo-toast',
+  styleUrls: ['./toast.scss'],
   host: {
     '[class]': 'alertTheme',
     '[class.growl]': 'appearance == "growl"',

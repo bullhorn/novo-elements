@@ -1,13 +1,14 @@
 // NG2
 import { ChangeDetectorRef, Component, ElementRef } from '@angular/core';
+import { PickerResults } from 'novo-elements/components/picker';
+import { NovoLabelService } from 'novo-elements/services';
+import { Helpers } from 'novo-elements/utils';
 // Vendor
 import { from, Observable } from 'rxjs';
-import { PickerResults } from 'novo-elements/components/picker';
-import { Helpers } from 'novo-elements/utils';
-import { NovoLabelService } from 'novo-elements/services';
 
 @Component({
   selector: 'quick-note-results',
+  styleUrls: ['./quick-note-results.scss'],
   host: {
     class: 'active',
   },
@@ -21,7 +22,7 @@ import { NovoLabelService } from 'novo-elements/services';
         (mouseenter)="selectActive(match)"
       >
         <item-content>
-          <p [innerHtml]="match.label | highlight:term"></p>
+          <p [innerHtml]="match.label | highlight: term"></p>
         </item-content>
       </novo-list-item>
     </novo-list>

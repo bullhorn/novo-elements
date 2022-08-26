@@ -1,4 +1,5 @@
-@import "../common/typography/text.mixins.scss";
+@import "~novo-design-tokens/scss";
+@import "../../common/typography/text.mixins.scss";
 
 $small-themed-icon-size: 1.6em;
 $medium-themed-icon-size: 2em;
@@ -8,7 +9,7 @@ $medium-icon-size: 1.8em;
 $large-icon-size: 2.1em;
 $icon-border-radius: 0.3em;
 
-novo-icon {
+:host {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -43,7 +44,7 @@ novo-icon {
         width: 1.6em;
         height: 1.6em;
       }
-      &[shape='circle'] {
+      &[shape="circle"] {
         i {
           border-radius: 50%;
         }
@@ -57,13 +58,13 @@ novo-icon {
       box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.2);
     }
   }
-  &[shape='circle'] {
+  &[shape="circle"] {
     i {
       border-radius: 50%;
     }
   }
   &.icon-size-smaller {
-    font-size: 1.0em;
+    font-size: 1em;
   }
   &.icon-size-larger {
     font-size: 1.4em;

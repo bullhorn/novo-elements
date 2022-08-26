@@ -1,10 +1,11 @@
 // NG2
 import { Component, ElementRef, Input, OnDestroy, OnInit } from '@angular/core';
-import { Key } from 'novo-elements/utils';
 import { NovoLabelService } from 'novo-elements/services';
+import { Key } from 'novo-elements/utils';
 
 @Component({
   selector: 'novo-slider',
+  styleUrls: ['./slider.scss'],
   template: `
     <section class="slides">
       <ng-content select="div[slide]"></ng-content>

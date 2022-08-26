@@ -1,7 +1,7 @@
 // NG2
 import { ComponentPortal } from '@angular/cdk/portal';
-import { Component, Input } from '@angular/core';
-import { EXAMPLE_COMPONENTS, LiveExample } from '../examples.module';
+import { Component, Inject, Input } from '@angular/core';
+import { CodeExampleConfig, CODE_EXAMPLES, LiveExample } from './code-example.tokens';
 
 @Component({
   selector: 'code-example',
@@ -49,7 +49,7 @@ export class CodeExampleComponent {
   /** Whether the source for the example is being displayed. */
   showSource = false;
 
-  constructor() {}
+  constructor(@Inject(CODE_EXAMPLES) private examples: CodeExampleConfig) {}
 
   get example() {
     return this._example;
@@ -57,9 +57,9 @@ export class CodeExampleComponent {
 
   @Input()
   set example(example: string) {
-    if (example && EXAMPLE_COMPONENTS[example]) {
+    if (example && this.examples[example]) {
       this._example = example;
-      this.exampleData = EXAMPLE_COMPONENTS[example];
+      this.exampleData = this.examples[example];
       this.selectedPortal = new ComponentPortal(this.exampleData.component);
     } else {
       console.log('MISSING EXAMPLE: ', example);

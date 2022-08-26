@@ -24,6 +24,7 @@ import { FormUtils } from './utils';
 @Component({
   selector: 'novo-control-group',
   templateUrl: './control-group.html',
+  styleUrls: ['./control-group.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     '[class.novo-control-group-appearance-card]': "appearance=='card'",

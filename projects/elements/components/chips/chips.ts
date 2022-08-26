@@ -2,10 +2,10 @@
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { Component, ElementRef, EventEmitter, forwardRef, Input, OnInit, Output, ViewChild, ViewContainerRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ComponentUtils, NovoLabelService } from 'novo-elements/services';
+import { Helpers, Key } from 'novo-elements/utils';
 // Vendor
 import { ReplaySubject } from 'rxjs';
-import { Key, Helpers } from 'novo-elements/utils';
-import { NovoLabelService, ComponentUtils } from 'novo-elements/services';
 
 // Value accessor for the component (supports ngModel)
 const CHIPS_VALUE_ACCESSOR = {
@@ -16,6 +16,7 @@ const CHIPS_VALUE_ACCESSOR = {
 
 @Component({
   selector: 'chips,novo-chips',
+  styleUrls: ['./chips.scss'],
   providers: [CHIPS_VALUE_ACCESSOR],
   template: `
     <div class="novo-chip-container">
@@ -35,6 +36,7 @@ const CHIPS_VALUE_ACCESSOR = {
     </div>
     <div class="chip-input-container" *ngIf="!maxlength || (maxlength && items.length < maxlength)">
       <novo-picker
+        appearance="none"
         clearValueOnSelect="true"
         [closeOnSelect]="closeOnSelect"
         [config]="source"

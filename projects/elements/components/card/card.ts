@@ -1,7 +1,7 @@
 // NG2
-import { Component, Directive, EventEmitter, HostBinding, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
-import { BooleanInput } from 'novo-elements/utils';
+import { Component, EventEmitter, HostBinding, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { NovoLabelService } from 'novo-elements/services';
+import { BooleanInput } from 'novo-elements/utils';
 
 @Component({
   selector: 'novo-card-actions',
@@ -12,9 +12,11 @@ export class CardActionsElement {}
 /**
  * Content of a card, needed as it's used as a selector in the API.
  */
-@Directive({
+@Component({
   selector: 'novo-card-content, [novo-card-content], [novoCardContent]',
   host: { class: 'novo-card-content', '[class.condensed]': 'condensed' },
+  styleUrls: ['./card-contents.scss'],
+  template: `<ng-content></ng-content>`,
 })
 export class CardContentElement {
   @Input() @BooleanInput() condensed: boolean = false;
@@ -26,6 +28,7 @@ export class CardContentElement {
 @Component({
   selector: 'novo-card-header, [novo-card-header], [novoCardHeader]',
   host: { class: 'novo-card-header' },
+  styleUrls: ['./card-header.scss'],
   template: `
     <ng-content select="novo-avatar, [novo-avatar], novo-icon"></ng-content>
     <div class="novo-card-header-text">
@@ -39,14 +42,17 @@ export class CardContentElement {
 })
 export class CardHeaderElement {}
 
-@Directive({
+@Component({
   selector: 'novo-card-footer, [novo-card-footer], [novoCardFooter]',
+  styleUrls: ['./card-footer.scss'],
   host: { class: 'novo-card-footer' },
+  template: `<ng-content></ng-content>`,
 })
 export class CardFooterElement {}
 
 @Component({
   selector: 'novo-card',
+  styleUrls: ['./card.scss'],
   host: {
     class: 'novo-card',
     '[attr.data-automation-id]': 'cardAutomationId',
@@ -145,10 +151,10 @@ export class CardElement implements OnChanges, OnInit {
   inline: boolean;
 
   @Input()
-  inset: string = 'none';
+  inset: string;
   @HostBinding('class')
   get hbInset() {
-    return `novo-card-inset-${this.inset}`;
+    return this.inset ? `novo-card-inset-${this.inset}` : null;
   }
 
   @Output()

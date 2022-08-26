@@ -1,12 +1,12 @@
-skill-specialty-picker-results {
+:host {
   display: block;
   width: 100%;
   color: black;
   max-width: none;
   z-index: 99;
-  background: $white;
+  background: var(--background-bright);
   &.active {
-    border: 1px solid $positive;
+    border: 1px solid var(--selection);
   }
   novo-list {
     list-style: none;
@@ -37,7 +37,7 @@ skill-specialty-picker-results {
       &.active,
       &:focus,
       &:hover {
-        background-color: lighten($positive, 35%);
+        background-color: var(--color-pale-positive);
       }
       &.disabled {
         opacity: 0.5;
@@ -53,13 +53,13 @@ skill-specialty-picker-results {
     z-index: 9;
     position: absolute;
     width: 100%;
-    background-color: white;
+    background-color: var(--background-bright);
     color: black;
   }
   .picker-error,
   .picker-loading,
   .picker-null {
     text-align: center;
-    color: darken($light, 15%);
+    color: var(--text-muted);
   }
 }

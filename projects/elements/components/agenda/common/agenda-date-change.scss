@@ -1,17 +1,17 @@
-novo-agenda-date-change {
+:host {
   display: inline-block;
 
   .cal-date-change {
     border-radius: 3px;
     border: 1px solid #e1e1e1;
-    background-color: $white;
+    background-color: var(--background-bright);
     position: relative;
     padding: 10px 15px;
     text-align: center;
 
     > span {
       padding: 5px;
-      color: $black;
+      color: var(--text-main);
     }
 
     > i {

@@ -10,7 +10,7 @@
     flex: 1;
     text-align: center;
     padding: 5px;
-    background-color: $off-white;
+    background-color: var(--background-main);
   }
 
   .cal-day-headers .cal-header:not(:last-child) {
@@ -31,7 +31,7 @@
     position: absolute;
 
     &:nth-child(n + 2) {
-      border-left: 1px solid $dark;
+      border-left: 1px solid var(--border);
     }
 
     novo-agenda-week-event {
@@ -43,7 +43,7 @@
         min-height: 30px;
         display: flex;
         flex-flow: column;
-        background-color: $off-white;
+        background-color: var(--background-main);
 
         .cal-event-ribbon {
           min-height: 4px;

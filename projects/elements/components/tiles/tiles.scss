@@ -1,12 +1,13 @@
-novo-tiles {
-  $border-width: 0.2em;
-  $border-radius: 3px;
-  $positive-lighter: lighten($positive, 20%);
-  $disabled-color: lighten($grey, 20%);
+$border-width: 0.2em;
+$border-radius: var(--border-radius-round);
+$positive-lighter: var(--color-pale-positive);
+$disabled-color: var(--text-disabled);
+$border-properties: solid $border-width $positive-lighter;
+
+:host {
   display: inline-block;
   position: relative;
   color: $positive-lighter;
-  $border-properties: solid $border-width $positive-lighter;
 
   input {
     appearance: none !important;
@@ -18,12 +19,12 @@ novo-tiles {
     display: flex;
     text-align: center;
     background-color: var(--background-bright);
-    border: solid thin $ocean;
+    border: solid thin var(--selection);
     border-radius: $border-radius;
     position: relative;
     align-items: center;
     .tile {
-      padding: 0 $spacing-md;
+      padding: 0 var(--spacing-md);
       line-height: 3.2rem;
       height: 100%;
       z-index: 1;
@@ -31,15 +32,15 @@ novo-tiles {
       cursor: pointer;
       letter-spacing: 0.02em;
       &:not(:last-child) {
-        border-right: solid thin $ocean;
+        border-right: solid thin var(--selection);
       }
       &:not(.disabled) {
-        color: $ocean;
+        color: var(--selection);
       }
       &:not(.disabled).active {
         box-shadow: inset 3px 2px 4px 0px rgba(0, 0, 0, 0.3);
-        color: $white;
-        background: $ocean;
+        color: var(--selection-text);
+        background: var(--selection);
       }
       &.active {
         font-weight: 600;
@@ -57,8 +58,8 @@ novo-tiles {
       }
     }
     &.active {
-      color: $positive;
-      border-color: $positive;
+      color: var(--selection);
+      border-color: var(--selection);
       box-shadow: 0px 0px 15px 3px rgba(74, 137, 220, 0.25);
     }
     &.disabled {

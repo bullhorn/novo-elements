@@ -1,10 +1,10 @@
 import { ChangeDetectorRef, Component, ElementRef, OnDestroy, Renderer2, ViewChild } from '@angular/core';
+import { NovoListElement } from 'novo-elements/components/list';
+import { NovoLabelService } from 'novo-elements/services';
+import { Helpers } from 'novo-elements/utils';
 import { fromEvent, Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { BasePickerResults } from '../base-picker-results/base-picker-results';
-import { NovoListElement } from 'novo-elements/components/list';
-import { Helpers } from 'novo-elements/utils';
-import { NovoLabelService } from 'novo-elements/services';
 
 export interface IMixedMultiPickerOption {
   value: string;
@@ -23,6 +23,7 @@ export interface IMixedMultiPickerOption {
 
 @Component({
   selector: 'mixed-multi-picker-results',
+  styleUrls: ['./mixed-multi-picker-results.scss'],
   template: ` <div class="mixed-multi-picker-groups">
       <novo-list direction="vertical">
         <novo-list-item

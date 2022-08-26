@@ -1,13 +1,14 @@
 import { ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { NovoListElement } from 'novo-elements/components/list';
+import { NovoLabelService } from 'novo-elements/services';
+import { Helpers } from 'novo-elements/utils';
 import { fromEvent, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { BasePickerResults } from '../base-picker-results/base-picker-results';
-import { NovoListElement } from 'novo-elements/components/list';
-import { Helpers } from 'novo-elements/utils';
-import { NovoLabelService } from 'novo-elements/services';
 
 @Component({
   selector: 'grouped-multi-picker-results',
+  styleUrls: ['./grouped-multi-picker-results.scss'],
   template: `
     <div class="grouped-multi-picker-groups">
       <novo-list direction="vertical">

@@ -1,4 +1,7 @@
-novo-picker {
+@import "~novo-design-tokens/scss";
+@import "variables";
+
+:host {
   width: 100%;
   display: flex;
   align-items: center;
@@ -10,119 +13,40 @@ novo-picker {
   &.selected,
   &.selected:hover {
     & + i {
-      color: $positive;
+      color: var(--selection);
     }
   }
-  input {
-    font-size: 1em;
-    background: transparent !important;
-    border: none;
-    border-bottom: 1px solid lighten($dark, 45%);
-    border-radius: 0;
-    outline: none;
-    height: 2rem;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    box-shadow: none;
-    box-sizing: content-box;
-    transition: all 300ms;
-    color: #26282b;
-    &:hover {
-      border-bottom: 1px solid lighten($dark, 15%);
-    }
-    &:focus {
-      border-bottom: 1px solid $positive;
-    }
-    &:invalid {
-      border-bottom: 1px solid #da4453;
-    }
-    &.entity-picker {
-      padding-left: 2em;
-    }
-    &.entity-selected {
-      padding-left: 2.5em;
-      background: $off-white !important;
-    }
-    &:disabled {
-      border-bottom: 1px dashed lighten($dark, 45%) !important;
-    }
-  }
-  i.bhi-more {
-    position: absolute;
-    left: 0;
-    top: 2px;
-    background: $off-white;
-    font-size: 1em;
-    border-radius: 3px;
-    padding: 3px;
-  }
-  i.entity-icon {
-    position: absolute;
-    left: 5px;
-    top: 3px;
-    font-size: 1em;
-    border-radius: 3px;
-    padding: 3px;
-    color: $white;
+}
 
-    @include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
-      &.#{$name} {
-        background: $color;
-      }
+:host {
+  padding-bottom: 0;
+  &.ng-touched.ng-invalid:not(.ng-pristine) {
+    > input,
+    > input:hover,
+    > input:focus {
+      border-bottom-color: transparent !important;
     }
-  }
-  i.bhi-search,
-  i.bhi-times {
-    position: absolute;
-    right: 0;
-    color: $dark;
-    &.entity-selected {
-      right: 5px;
-    }
-  }
-  i.bhi-search {
-    top: 0px;
-    font-size: 1.2rem;
-  }
-  i.bhi-times {
-    top: 0px;
-    cursor: pointer;
-    font-size: 1.2rem;
   }
 }
 
 .picker-results,
 .quick-note-results,
-entity-chip-results,
 picker-results,
 quick-note-results {
-  display: block;
-  cursor: pointer;
-}
-
-.picker-results,
-.quick-note-results,
-picker-error,
-picker-loader,
-picker-null-recent-results,
-picker-null-results,
-picker-results,
-quick-note-results {
-  background-color: $white;
+  background-color: var(--background-bright);
   cursor: default;
   line-height: 26px;
   width: 100%;
   novo-list,
   ul {
-    background-color: $white;
+    background-color: var(--background-bright);
     max-height: 200px;
     overflow: auto;
     list-style: none;
     padding: 0;
     margin: 0;
     box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
-    border: 1px solid $positive;
+    border: 1px solid var(--selection);
     transform: translateY(0%);
     transition: all 0.15s cubic-bezier(0.35, 0, 0.25, 1);
     display: block;
@@ -213,10 +137,6 @@ entity-picker-result.active {
   }
 }
 
-picker-error,
-picker-loader,
-picker-null-recent-results,
-picker-null-results,
 .picker-error,
 .picker-loader,
 .picker-null-recent-results,
@@ -239,7 +159,6 @@ p.picker-null-results {
   padding: 5px;
 }
 
-picker-loader,
 .picker-loader {
   background-color: $white;
   display: flex;
@@ -249,17 +168,6 @@ picker-loader,
   border: 1px solid $positive;
   transform: translateY(0%);
   transition: all 0.15s cubic-bezier(0.35, 0, 0.25, 1);
-}
-
-novo-picker {
-  padding-bottom: 0;
-  &.ng-touched.ng-invalid:not(.ng-pristine) {
-    > input,
-    > input:hover,
-    > input:focus {
-      border-bottom-color: transparent !important;
-    }
-  }
 }
 
 entity-picker-results {
@@ -326,7 +234,7 @@ picker-results {
     z-index: 9;
     position: absolute;
     width: 100%;
-    background-color: white;
+    background-color: var(--background-bright);
     color: black;
   }
 }
@@ -339,10 +247,10 @@ distribution-list-picker-results {
   width: 100%;
   max-width: none;
   z-index: 99;
-  background: $white;
+  background: var(--background-bright);
   padding: 1px;
   &.active {
-    border: 1px solid $positive;
+    border: 1px solid var(--selection);
   }
   .novo-list {
     min-height: 100%;

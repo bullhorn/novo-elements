@@ -16,10 +16,10 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 // Vendor
 import * as dateFns from 'date-fns';
-import { createAutoCorrectedDatePipe } from 'text-mask-addons';
 import { NovoOverlayTemplateComponent } from 'novo-elements/common/overlay';
-import { Key, Helpers } from 'novo-elements/utils';
 import { DateFormatService, NovoLabelService } from 'novo-elements/services';
+import { Helpers, Key } from 'novo-elements/utils';
+import { createAutoCorrectedDatePipe } from 'text-mask-addons';
 
 // Value accessor for the component (supports ngModel)
 const DATE_VALUE_ACCESSOR = {
@@ -30,6 +30,7 @@ const DATE_VALUE_ACCESSOR = {
 
 @Component({
   selector: 'novo-date-picker-input',
+  styleUrls: ['./date-picker-input.scss'],
   providers: [DATE_VALUE_ACCESSOR],
   template: `
     <input

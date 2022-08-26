@@ -17,10 +17,13 @@ import {
   ViewChild,
   ViewChildren,
 } from '@angular/core';
+import { NovoTemplate } from 'novo-elements/common';
+import { NovoLabelService } from 'novo-elements/services';
+import { notify } from 'novo-elements/utils';
 import { Subscription } from 'rxjs';
-import { DataTableState } from './state/data-table-state.service';
-import { StaticDataTableService } from './services/static-data-table.service';
-import { ListInteractionDictionary, ListInteractionEvent } from './list-interaction-types';
+import { NovoDataTableCellHeader } from './cell-headers/data-table-header-cell.component';
+import { DataTableSource } from './data-table.source';
+import { NOVO_DATA_TABLE_REF } from './data-table.token';
 import {
   IDataTableColumn,
   IDataTableFilter,
@@ -31,12 +34,9 @@ import {
   IDataTableService,
   IDataTableSort,
 } from './interfaces';
-import { NOVO_DATA_TABLE_REF } from './data-table.token';
-import { DataTableSource } from './data-table.source';
-import { NovoDataTableCellHeader } from './cell-headers/data-table-header-cell.component';
-import { NovoTemplate } from 'novo-elements/common';
-import { notify } from 'novo-elements/utils';
-import { NovoLabelService } from 'novo-elements/services';
+import { ListInteractionDictionary, ListInteractionEvent } from './list-interaction-types';
+import { StaticDataTableService } from './services/static-data-table.service';
+import { DataTableState } from './state/data-table-state.service';
 
 @Component({
   selector: 'novo-data-table',
@@ -47,6 +47,7 @@ import { NovoLabelService } from 'novo-elements/services';
       transition('void <=> *', animate('70ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
     ]),
   ],
+  styleUrls: ['./data-table.component.scss'],
   template: `
     <header
       *ngIf="(!(dataSource?.totallyEmpty && !state.userFiltered) && !loading) || forceShowHeader"
@@ -167,7 +168,14 @@ import { NovoLabelService } from 'novo-elements/services';
         <div
           class="novo-data-table-no-more-results-container"
           [style.left.px]="scrollLeft"
-          *ngIf="!dataSource?.totallyEmpty && dataSource?.currentlyEmpty && !state.userFiltered && !dataSource?.loading && !loading && !dataSource.pristine"
+          *ngIf="
+            !dataSource?.totallyEmpty &&
+            dataSource?.currentlyEmpty &&
+            !state.userFiltered &&
+            !dataSource?.loading &&
+            !loading &&
+            !dataSource.pristine
+          "
         >
           <div class="novo-data-table-empty-message">
             <ng-container *ngTemplateOutlet="templates['noMoreResultsMessage'] || templates['defaultNoMoreResultsMessage']"></ng-container>
@@ -358,7 +366,12 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
       // Re-subscribe
       this.outsideFilterSubscription = outsideFilter.subscribe((filter: any) => {
         this.state.outsideFilter = filter;
-        this.state.updates.next({ globalSearch: this.state.globalSearch, filter: this.state.filter, sort: this.state.sort, where: this.state.where });
+        this.state.updates.next({
+          globalSearch: this.state.globalSearch,
+          filter: this.state.filter,
+          sort: this.state.sort,
+          where: this.state.where,
+        });
         this.ref.markForCheck();
       });
     }
@@ -374,7 +387,12 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
       // Re-subscribe
       this.refreshSubscription = refreshSubject.subscribe((filter: any) => {
         this.state.isForceRefresh = true;
-        this.state.updates.next({ globalSearch: this.state.globalSearch, filter: this.state.filter, sort: this.state.sort, where: this.state.where });
+        this.state.updates.next({
+          globalSearch: this.state.globalSearch,
+          filter: this.state.filter,
+          sort: this.state.sort,
+          where: this.state.where,
+        });
         this.ref.markForCheck();
       });
     }
@@ -466,7 +484,12 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   constructor(public labels: NovoLabelService, private ref: ChangeDetectorRef, public state: DataTableState<T>) {
     this.scrollListenerHandler = this.scrollListener.bind(this);
     this.sortFilterSubscription = this.state.sortFilterSource.subscribe(
-      (event: { sort: IDataTableSort; filter: IDataTableFilter | IDataTableFilter[]; globalSearch: string; where: { query: string; form: any } }) => {
+      (event: {
+        sort: IDataTableSort;
+        filter: IDataTableFilter | IDataTableFilter[];
+        globalSearch: string;
+        where: { query: string; form: any };
+      }) => {
         if (this.name !== 'novo-data-table') {
           this.preferencesChanged.emit({
             name: this.name,

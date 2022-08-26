@@ -1,9 +1,9 @@
 // NG2
 import { Component, ElementRef, forwardRef, Input } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
-import { NovoChipsElement } from './chips';
+import { ComponentUtils, NovoLabelService } from 'novo-elements/services';
 import { NovoChipElement } from './chip';
-import { NovoLabelService, ComponentUtils } from 'novo-elements/services';
+import { NovoChipsElement } from './chips';
 
 // Value accessor for the component (supports ngModel)
 const CHIPS_VALUE_ACCESSOR = {
@@ -44,6 +44,7 @@ export class NovoRowChipElement extends NovoChipElement {
 
 @Component({
   selector: 'novo-row-chips',
+  styleUrls: ['./row-chips.scss'],
   providers: [CHIPS_VALUE_ACCESSOR],
   host: {
     '[class.with-value]': 'items.length > 0',

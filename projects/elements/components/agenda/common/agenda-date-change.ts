@@ -3,6 +3,7 @@ import * as dateFns from 'date-fns';
 
 @Component({
   selector: 'novo-agenda-date-change',
+  styleUrls: ['./agenda-date-change.scss'],
   template: `
     <div class="cal-date-change">
       <i class="bhi-arrow-left" (click)="subtractDate()"></i>

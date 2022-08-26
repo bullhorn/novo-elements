@@ -1,7 +1,7 @@
 // NG2
-import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, Input, OnInit } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { EXAMPLE_COMPONENTS } from '../examples.module';
+import { CodeExampleConfig, CODE_EXAMPLES } from './code-example.tokens';
 import { HighlightJS } from './highlight.service';
 
 @Component({
@@ -33,13 +33,18 @@ export class CodeSnippetComponent implements OnInit {
   highlightTS: SafeHtml;
   highlightCSS: SafeHtml;
 
-  constructor(private sanitizer: DomSanitizer, private hljs: HighlightJS, private cdr: ChangeDetectorRef) {}
+  constructor(
+    private sanitizer: DomSanitizer,
+    private hljs: HighlightJS,
+    private cdr: ChangeDetectorRef,
+    @Inject(CODE_EXAMPLES) private examples: CodeExampleConfig,
+  ) {}
 
   ngOnInit() {
     this.hljs.isReady.subscribe(() => {
-      const code = decodeURIComponent(EXAMPLE_COMPONENTS[this.example].tsSource);
-      const markup = decodeURIComponent(EXAMPLE_COMPONENTS[this.example].htmlSource);
-      const style = decodeURIComponent(EXAMPLE_COMPONENTS[this.example].cssSource);
+      const code = decodeURIComponent(this.examples[this.example].tsSource);
+      const markup = decodeURIComponent(this.examples[this.example].htmlSource);
+      const style = decodeURIComponent(this.examples[this.example].cssSource);
       this.highlightTS = this.sanitizer.bypassSecurityTrustHtml(this.hljs.highlightAuto(code, ['typescript']).value.trim());
       this.highlightHTML = this.sanitizer.bypassSecurityTrustHtml(this.hljs.highlightAuto(markup, ['html']).value.trim());
       this.highlightCSS = this.sanitizer.bypassSecurityTrustHtml(this.hljs.highlightAuto(style, ['css']).value.trim());

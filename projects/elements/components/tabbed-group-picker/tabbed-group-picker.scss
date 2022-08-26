@@ -84,7 +84,7 @@
             &:hover {
               .novo-tab-link {
                 font-weight: 400;
-                color: $positive;
+                color: var(--selection);
               }
             }
           }

@@ -18,6 +18,7 @@ const DATE_PICKER_VALUE_ACCESSOR = {
 
 @Component({
   selector: 'novo-date-picker',
+  styleUrls: ['./date-picker.scss'],
   providers: [DATE_PICKER_VALUE_ACCESSOR],
   animations: [
     trigger('startDateTextState', [

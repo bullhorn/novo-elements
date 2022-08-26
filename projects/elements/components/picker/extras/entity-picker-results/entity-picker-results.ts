@@ -1,30 +1,31 @@
 import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, Output } from '@angular/core';
-import { BasePickerResults } from '../base-picker-results/base-picker-results';
 import { NovoLabelService } from 'novo-elements/services';
+import { BasePickerResults } from '../base-picker-results/base-picker-results';
 
 @Component({
   selector: 'entity-picker-result',
+  styleUrls: ['../picker-results/picker-results.scss'],
   template: `
     <novo-list-item *ngIf="match.data" (click)="select.next(match.data)">
       <novo-item-header>
         <novo-item-avatar [icon]="getIconForResult(match.data)"></novo-item-avatar>
-        <novo-item-title> <span [innerHtml]="getNameForResult(match.data) | highlight:term"></span> </novo-item-title>
+        <novo-item-title> <span [innerHtml]="getNameForResult(match.data) | highlight: term"></span> </novo-item-title>
       </novo-item-header>
       <novo-item-content direction="horizontal">
         <!-- COMPANY 1 -->
         <novo-text smaller class="company" *ngIf="match.data.companyName || match.data?.clientCorporation?.name">
           <i class="bhi-company company"></i>
-          <span [innerHtml]="match.data.companyName || match.data?.clientCorporation?.name | highlight:term"></span>
+          <span [innerHtml]="match.data.companyName || match.data?.clientCorporation?.name | highlight: term"></span>
         </novo-text>
         <!-- CLIENT CONTACT -->
         <novo-text smaller class="contact" *ngIf="match.data?.clientContact?.firstName">
           <i class="bhi-person contact person"></i>
-          <span [innerHtml]="match.data.clientContact.firstName + ' ' + match.data.clientContact.lastName | highlight:term"></span>
+          <span [innerHtml]="match.data.clientContact.firstName + ' ' + match.data.clientContact.lastName | highlight: term"></span>
         </novo-text>
         <!-- CANDIDATE -->
         <novo-text smaller class="candidate" *ngIf="match.data.candidate && match.data.searchEntity === 'Placement'">
           <i class="bhi-candidate candidate"></i>
-          <span [innerHtml]="match.data.candidate.firstName + ' ' + match.data.candidate.lastName | highlight:term"></span>
+          <span [innerHtml]="match.data.candidate.firstName + ' ' + match.data.candidate.lastName | highlight: term"></span>
         </novo-text>
         <!-- START & END DATE -->
         <novo-text smaller class="start-date" *ngIf="match.data.dateBegin && match.data.searchEntity === 'Placement'">
@@ -44,7 +45,7 @@ import { NovoLabelService } from 'novo-elements/services';
         <!-- JOBORDER -->
         <novo-text smaller class="job" *ngIf="match.data.jobOrder && match.data.searchEntity === 'JobShift'">
           <i class="bhi-job job"></i>
-          <span [innerHtml]="match.data.jobOrder.title | highlight:term"></span>
+          <span [innerHtml]="match.data.jobOrder.title | highlight: term"></span>
         </novo-text>
         <!-- OPENINGS -->
         <novo-text smaller class="openings" *ngIf="match.data.openings && match.data.searchEntity === 'JobShift'">
@@ -53,25 +54,25 @@ import { NovoLabelService } from 'novo-elements/services';
         </novo-text>
         <!-- EMAIL -->
         <novo-text smaller class="email" *ngIf="match.data.email">
-          <i class="bhi-email"></i> <span [innerHtml]="match.data.email | highlight:term"></span>
+          <i class="bhi-email"></i> <span [innerHtml]="match.data.email | highlight: term"></span>
         </novo-text>
         <!-- PHONE -->
         <novo-text smaller class="phone" *ngIf="match.data.phone">
-          <i class="bhi-phone"></i> <span [innerHtml]="match.data.phone | highlight:term"></span>
+          <i class="bhi-phone"></i> <span [innerHtml]="match.data.phone | highlight: term"></span>
         </novo-text>
         <!-- ADDRESS -->
         <novo-text smaller class="location" *ngIf="match.data.address && (match.data.address.city || match.data.address.state)">
           <i class="bhi-location"></i> <span *ngIf="match.data.address.city" [innerHtml]="highlight(match.data.address.city, term)"></span>
           <span *ngIf="match.data.address.city && match.data.address.state">, </span>
-          <span *ngIf="match.data.address.state" [innerHtml]="match.data.address.state | highlight:term"></span>
+          <span *ngIf="match.data.address.state" [innerHtml]="match.data.address.state | highlight: term"></span>
         </novo-text>
         <!-- STATUS -->
         <novo-text smaller class="status" *ngIf="match.data.status">
-          <i class="bhi-info"></i> <span [innerHtml]="match.data.status | highlight:term"></span>
+          <i class="bhi-info"></i> <span [innerHtml]="match.data.status | highlight: term"></span>
         </novo-text>
         <!-- OWNER -->
         <novo-text smaller class="owner" *ngIf="match.data.owner && match.data.owner.name && match.data.searchEntity === 'Candidate'">
-          <i class="bhi-person"></i> <span [innerHtml]="match.data.owner.name | highlight:term"></span>
+          <i class="bhi-person"></i> <span [innerHtml]="match.data.owner.name | highlight: term"></span>
         </novo-text>
         <!-- PRIMARY DEPARTMENT -->
         <novo-text
@@ -79,11 +80,11 @@ import { NovoLabelService } from 'novo-elements/services';
           class="primary-department"
           *ngIf="match.data.primaryDepartment && match.data.primaryDepartment.name && match.data.searchEntity === 'CorporateUser'"
         >
-          <i class="bhi-department"></i> <span [innerHtml]="match.data.primaryDepartment.name | highlight:term"></span>
+          <i class="bhi-department"></i> <span [innerHtml]="match.data.primaryDepartment.name | highlight: term"></span>
         </novo-text>
         <!-- OCCUPATION -->
         <novo-text smaller class="occupation" *ngIf="match.data.occupation && match.data.searchEntity === 'CorporateUser'">
-          <i class="bhi-occupation"></i> <span [innerHtml]="match.data.occupation | highlight:term"></span>
+          <i class="bhi-occupation"></i> <span [innerHtml]="match.data.occupation | highlight: term"></span>
         </novo-text>
       </novo-item-content>
     </novo-list-item>

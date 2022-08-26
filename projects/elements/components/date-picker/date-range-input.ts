@@ -31,6 +31,7 @@ const DATE_VALUE_ACCESSOR = {
 
 @Component({
   selector: 'novo-date-range-input',
+  styleUrls: ['./date-range-input.scss'],
   providers: [DATE_VALUE_ACCESSOR],
   template: `
     <div class="date-range-input-container">

@@ -1,4 +1,4 @@
-novo-category-dropdown {
+:host {
   display: block;
   position: relative;
   button {
@@ -40,7 +40,7 @@ novo-category-dropdown {
         font-size: 1em;
         background: transparent !important;
         border: none;
-        border-bottom: 1px solid lighten($dark, 45%);
+        border-bottom: 1px solid var(--border);
         border-radius: 0;
         outline: none;
         height: 2rem;
@@ -53,10 +53,10 @@ novo-category-dropdown {
         color: #26282b;
         margin-left: 10px;
         &:hover {
-          border-bottom: 1px solid lighten($dark, 15%);
+          border-bottom: 1px solid var(--border);
         }
         &:focus {
-          border-bottom: 1px solid $positive;
+          border-bottom: 1px solid var(--selection);
         }
         &::placeholder {
           color: var(--form-placeholder);
@@ -78,7 +78,7 @@ novo-category-dropdown {
     }
     footer {
       padding: 5px 23px;
-      border-top: 1px solid #ccc;
+      border-top: 1px solid var(--border);
       display: flex;
       justify-content: flex-end;
       > a {
@@ -94,10 +94,26 @@ novo-category-dropdown {
         }
       }
     }
+  }
+  &[side="left"] {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  &[side="right"] {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    .dropdown-container {
+      right: 0;
+    }
+  }
+
+  ::ng-deep {
     novo-nav {
       max-height: 140px;
       overflow: auto;
-      border-bottom: 1px solid #ccc;
+      border-bottom: 1px solid var(--border);
       > novo-tab {
         height: 30px;
         min-height: 30px;
@@ -122,15 +138,15 @@ novo-category-dropdown {
       font-size: 0.9em;
       &:focus,
       &:hover {
-        background: lighten($light, 10%);
-        color: darken($light, 55%);
+        // background: var(--pas)
+        // color: darken($light, 55%);
         .novo-category-dropdown-hover {
           display: block;
         }
       }
       .novo-category-dropdown-hover {
         display: none;
-        color: $positive;
+        color: var(--selection);
         font-size: 0.9em;
         > i {
           font-size: 0.9em;
@@ -139,19 +155,6 @@ novo-category-dropdown {
       &.novo-category-dropdown-empty-item {
         pointer-events: none;
       }
-    }
-  }
-  &[side="left"] {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  &[side="right"] {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    .dropdown-container {
-      right: 0;
     }
   }
 }
