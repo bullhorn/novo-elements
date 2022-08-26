@@ -1,4 +1,4 @@
-import { endOfWeek, isWithinRange, startOfWeek } from 'date-fns';
+import { DateUtil } from '../../../utils';
 import type { DateLike, NovoDateSelectionStrategy } from '../../date-picker/date-picker.types';
 
 export class WeekSelectionStrategy implements NovoDateSelectionStrategy<DateLike[]> {
@@ -15,8 +15,8 @@ export class WeekSelectionStrategy implements NovoDateSelectionStrategy<DateLike
   private _createWeekRange(date: DateLike | null): DateLike[] {
     if (date) {
       const { weekStartsOn } = this;
-      const start = startOfWeek(date as DateLike, { weekStartsOn });
-      const end = endOfWeek(date as DateLike, { weekStartsOn });
+      const start = DateUtil.startOfWeek(date as DateLike, { weekStartsOn });
+      const end = DateUtil.endOfWeek(date as DateLike, { weekStartsOn });
       return [start, end];
     }
 
@@ -25,6 +25,6 @@ export class WeekSelectionStrategy implements NovoDateSelectionStrategy<DateLike
 
   isSelected(activeDate: DateLike | null, currentRange: DateLike[]) {
     const [start, end] = currentRange;
-    return isWithinRange(activeDate, start, end);
+    return DateUtil.isWithinRange(activeDate, start, end);
   }
 }

@@ -22,6 +22,7 @@ import {
   WeekDay,
   WeekViewEventRow,
 } from '../../../utils/calendar-utils/CalendarUtils';
+import { WeekDayNumber } from '../../../utils';
 
 /**
  * @hidden
@@ -121,7 +122,7 @@ export class NovoAgendaWeekViewElement implements OnChanges, OnInit, OnDestroy {
    * The start number of the week
    */
   @Input()
-  weekStartsOn: number;
+  weekStartsOn: WeekDayNumber;
 
   /**
    * A custom template to use to replace the header

@@ -22,6 +22,7 @@ import {
   MonthViewDay,
   WeekDay,
 } from '../../../utils/calendar-utils/CalendarUtils';
+import { WeekDayNumber } from '../../../utils'
 
 /**
  * Shows all events on a given month. Example usage:
@@ -111,7 +112,7 @@ export class NovoAgendaMonthViewElement implements OnChanges, OnInit, OnDestroy 
    * The start number of the week
    */
   @Input()
-  weekStartsOn: number;
+  weekStartsOn: WeekDayNumber;
 
   /**
    * A custom template to use to replace the header

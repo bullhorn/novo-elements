@@ -1,6 +1,7 @@
 import * as dateFns from 'date-fns';
+import { WeekDayNumber } from '../'
 
-const WEEKEND_DAY_NUMBERS: number[] = [0, 6];
+const WEEKEND_DAY_NUMBERS: WeekDayNumber[] = [0, 6];
 const DAYS_IN_WEEK: number = 7;
 const HOURS_IN_DAY: number = 24;
 const MINUTES_IN_HOUR: number = 60;
@@ -254,7 +255,7 @@ export function getWeekViewHeader({
   excluded = [],
 }: {
   viewDate: Date;
-  weekStartsOn: number;
+  weekStartsOn: WeekDayNumber;
   excluded?: number[];
 }): WeekDay[] {
   const start: Date = dateFns.startOfWeek(viewDate, { weekStartsOn });
@@ -281,7 +282,7 @@ export function getWeekView({
 }: {
   events?: CalendarEvent[];
   viewDate: Date;
-  weekStartsOn: number;
+  weekStartsOn: WeekDayNumber;
   excluded?: number[];
   hourSegments: number;
   segmentHeight: number;
@@ -404,7 +405,7 @@ export function getMonthView({
 }: {
   events?: CalendarEvent[];
   viewDate: Date;
-  weekStartsOn: number;
+  weekStartsOn: WeekDayNumber;
   excluded?: number[];
 }): MonthView {
   if (!events) {

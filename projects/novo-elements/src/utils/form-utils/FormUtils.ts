@@ -29,6 +29,7 @@ import { NovoFormGroup } from '../../elements/form/NovoFormGroup';
 import { EntityPickerResult, EntityPickerResults } from '../../elements/picker/extras/entity-picker-results/EntityPickerResults';
 import { NovoLabelService } from '../../services/novo-label-service';
 import { Helpers } from '../Helpers';
+import { DateUtil } from '../'
 import { OptionsService } from './../../services/options/OptionsService';
 
 @Injectable()
@@ -790,7 +791,7 @@ export class FormUtils {
       }
 
       if (control.dataType === 'Date' && typeof value === 'string' && control.optionsType !== 'skipConversion') {
-        value = dateFns.startOfDay(value);
+        value = DateUtil.startOfDay(value);
       }
 
       control.value = value;
@@ -860,17 +861,17 @@ export class FormUtils {
 
   private getStartDateFromRange(dateRange: { minDate: string; minOffset: number }): Date {
     if (dateRange.minDate) {
-      return dateFns.parse(dateRange.minDate);
+      return DateUtil.parse(dateRange.minDate);
     } else if (dateRange.minOffset) {
-      return dateFns.addDays(dateFns.startOfToday(), dateRange.minOffset);
+      return DateUtil.addDays(dateFns.startOfToday(), dateRange.minOffset);
     }
   }
 
   private getEndDateFromRange(dateRange: { maxDate: string; minOffset: number }): Date {
     if (dateRange.maxDate) {
-      return dateFns.parse(dateRange.maxDate);
+      return DateUtil.parse(dateRange.maxDate);
     } else if (dateRange.minOffset) {
-      return dateFns.addDays(dateFns.startOfToday(), dateRange.minOffset);
+      return DateUtil.addDays(dateFns.startOfToday(), dateRange.minOffset);
     }
   }
 

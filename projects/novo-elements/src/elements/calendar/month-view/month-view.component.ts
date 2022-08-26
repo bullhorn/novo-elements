@@ -14,7 +14,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 // Vendor
 import { addDays, isAfter, isBefore, isSameDay, isToday, startOfMonth, startOfWeek } from 'date-fns';
 import { NovoLabelService } from '../../../services/novo-label-service';
-import { BooleanInput } from '../../../utils';
+import { BooleanInput, WeekDayNumber } from '../../../utils';
 import type { DateLike, Day, OverlayDate } from '../../date-picker/date-picker.types';
 
 @Component({
@@ -49,10 +49,10 @@ export class NovoMonthViewElement implements OnInit {
   @HostBinding('class.hide-overflow-days')
   public hideOverflowDays: boolean = false;
 
-  _weekStartsOn: number = 0;
+  _weekStartsOn: WeekDayNumber = 0;
 
   @Input()
-  get weekStartsOn(): number {
+  get weekStartsOn(): WeekDayNumber {
     return this._weekStartsOn;
   }
   set weekStartsOn(value) {
