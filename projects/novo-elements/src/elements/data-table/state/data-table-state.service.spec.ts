@@ -67,7 +67,6 @@ describe('Service: DataTableState', () => {
       service.filter = { id: 'test', value: 'value' };
       service.sort = { id: 'test', value: 'desc' };
       service.globalSearch = 'testing';
-      service.savedSearchName = 'saved search';
       service.where = { query: 'mock query', form: 'mock form' };
     });
     afterAll(() => {
@@ -82,13 +81,12 @@ describe('Service: DataTableState', () => {
       expect(service.onSortFilterChange).toHaveBeenCalled();
       expect(service.updates.emit).toHaveBeenCalled();
     });
-    it('should only reset sort, savedSearchName, and page', () => {
+    it('should only reset sort and page', () => {
       service.clearSort();
       expect(service.sort).toBeUndefined();
       expect(service.filter).toEqual({ id: 'test', value: 'value' });
       expect(service.where).toEqual({ query: 'mock query', form: 'mock form' });
       expect(service.globalSearch).toEqual('testing');
-      expect(service.savedSearchName).toBeUndefined();
       expect(service.page).toEqual(0);
     });
     it('should emit an update if fireUpdate is true', () => {
@@ -96,7 +94,6 @@ describe('Service: DataTableState', () => {
         sort: undefined,
         filter: { id: 'test', value: 'value' },
         globalSearch: 'testing',
-        savedSearchName: undefined,
         where: { query: 'mock query', form: 'mock form' },
       };
       service.clearSort(true);
@@ -117,7 +114,6 @@ describe('Service: DataTableState', () => {
       service.filter = { id: 'test', value: 'value' };
       service.sort = { id: 'test', value: 'desc' };
       service.globalSearch = 'testing';
-      service.savedSearchName = 'saved search';
       service.where = { query: 'mock query', form: 'mock form' };
     });
     afterAll(() => {
@@ -132,13 +128,12 @@ describe('Service: DataTableState', () => {
       expect(service.onSortFilterChange).toHaveBeenCalled();
       expect(service.updates.emit).toHaveBeenCalled();
     });
-    it('should only reset page, globalSearch, savedSearchName, and filter', () => {
+    it('should only reset page, globalSearch, and filter', () => {
       service.clearFilter();
       expect(service.sort).toEqual({ id: 'test', value: 'desc' });
       expect(service.filter).toBeUndefined();
       expect(service.where).toEqual({ query: 'mock query', form: 'mock form' });
       expect(service.globalSearch).toBeUndefined();
-      expect(service.savedSearchName).toBeUndefined();
       expect(service.page).toEqual(0);
     });
     it('should emit an update if fireUpdate is true', () => {
@@ -146,7 +141,6 @@ describe('Service: DataTableState', () => {
         sort: { id: 'test', value: 'desc' },
         filter: undefined,
         globalSearch: undefined,
-        savedSearchName: undefined,
         where: { query: 'mock query', form: 'mock form' },
       };
       service.clearFilter(true);
@@ -167,7 +161,6 @@ describe('Service: DataTableState', () => {
       service.filter = { id: 'test', value: 'value' };
       service.sort = { id: 'test', value: 'desc' };
       service.globalSearch = 'testing';
-      service.savedSearchName = 'saved search';
       service.where = { query: 'mock query', form: 'mock form' };
     });
     afterAll(() => {
@@ -182,12 +175,11 @@ describe('Service: DataTableState', () => {
       expect(service.onSortFilterChange).toHaveBeenCalled();
       expect(service.updates.emit).toHaveBeenCalled();
     });
-    it('should only reset page, savedSearchName, and where', () => {
+    it('should only reset page and where', () => {
       service.clearQuery();
       expect(service.sort).toEqual({ id: 'test', value: 'desc' });
       expect(service.filter).toEqual({ id: 'test', value: 'value' });
       expect(service.globalSearch).toEqual('testing');
-      expect(service.savedSearchName).toBeUndefined();
       expect(service.where).toBeUndefined();
       expect(service.page).toEqual(0);
     });
@@ -196,7 +188,6 @@ describe('Service: DataTableState', () => {
         sort: { id: 'test', value: 'desc' },
         filter: { id: 'test', value: 'value' },
         globalSearch: 'testing',
-        savedSearchName: undefined,
         where: undefined,
       };
       service.clearQuery(true);
