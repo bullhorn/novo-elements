@@ -48,7 +48,6 @@ export class DataTableState<T> {
 
   public clearSort(fireUpdate: boolean = true): void {
     this.sort = undefined;
-    this.savedSearchName = undefined;
     this.page = 0;
     this.checkRetainment('sort');
     this.reset(fireUpdate, true);
@@ -59,7 +58,6 @@ export class DataTableState<T> {
         filter: this.filter,
         globalSearch: this.globalSearch,
         where: this.where,
-        savedSearchName: this.savedSearchName,
       });
     }
   }
@@ -67,7 +65,6 @@ export class DataTableState<T> {
   public clearFilter(fireUpdate: boolean = true): void {
     this.filter = undefined;
     this.globalSearch = undefined;
-    this.savedSearchName = undefined;
     this.page = 0;
     this.checkRetainment('filter');
     this.reset(fireUpdate, true);
@@ -78,14 +75,12 @@ export class DataTableState<T> {
         filter: this.filter,
         globalSearch: this.globalSearch,
         where: this.where,
-        savedSearchName: this.savedSearchName,
       });
     }
   }
 
   public clearQuery(fireUpdate: boolean = true): void {
     this.where = undefined;
-    this.savedSearchName = undefined;
     this.page = 0;
     this.checkRetainment('where');
     this.reset(fireUpdate, true);
@@ -96,7 +91,6 @@ export class DataTableState<T> {
         filter: this.filter,
         globalSearch: this.globalSearch,
         where: this.where,
-        savedSearchName: this.savedSearchName,
       });
     }
   }
@@ -113,7 +107,6 @@ export class DataTableState<T> {
         filter: this.filter,
         globalSearch: this.globalSearch,
         where: this.where,
-        savedSearchName: this.savedSearchName,
       });
     }
   }

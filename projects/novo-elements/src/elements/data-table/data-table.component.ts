@@ -359,7 +359,7 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
       // Re-subscribe
       this.outsideFilterSubscription = outsideFilter.subscribe((filter: any) => {
         this.state.outsideFilter = filter;
-        this.state.updates.next({ globalSearch: this.state.globalSearch, filter: this.state.filter, sort: this.state.sort, where: this.state.where, savedSearchName: this.state.savedSearchName });
+        this.state.updates.next({ globalSearch: this.state.globalSearch, filter: this.state.filter, sort: this.state.sort, where: this.state.where });
         this.ref.markForCheck();
       });
     }
@@ -375,7 +375,7 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
       // Re-subscribe
       this.refreshSubscription = refreshSubject.subscribe((filter: any) => {
         this.state.isForceRefresh = true;
-        this.state.updates.next({ globalSearch: this.state.globalSearch, filter: this.state.filter, sort: this.state.sort, where: this.state.where, savedSearchName: this.state.savedSearchName });
+        this.state.updates.next({ globalSearch: this.state.globalSearch, filter: this.state.filter, sort: this.state.sort, where: this.state.where });
         this.ref.markForCheck();
       });
     }
@@ -575,7 +575,7 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   public onSearchChange(term: string): void {
     this.state.globalSearch = term;
     this.state.reset(false, true);
-    this.state.updates.next({ globalSearch: term, filter: this.state.filter, sort: this.state.sort, where: this.state.where, savedSearchName: this.state.savedSearchName });
+    this.state.updates.next({ globalSearch: term, filter: this.state.filter, sort: this.state.sort, where: this.state.where });
   }
 
   public trackColumnsBy(index: number, item: IDataTableColumn<T>) {
