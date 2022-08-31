@@ -329,10 +329,9 @@ export class NovoPickerElement implements OnInit {
     this.typing.emit(event);
     if ((!event || !event.length) && !Helpers.isEmpty(this._value)) {
       this._value = null;
-
       this.onModelChange(this._value);
     }
-      this.ref.markForCheck();
+    this.ref.markForCheck();
   }
 
   // Set touched on blur
