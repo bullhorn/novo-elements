@@ -327,11 +327,12 @@ export class NovoPickerElement implements OnInit {
   // Makes sure to clear the model if the user clears the text box
   checkTerm(event) {
     this.typing.emit(event);
-    if (!event || !event.length) {
+    if ((!event || !event.length) && !Helpers.isEmpty(this._value)) {
       this._value = null;
+
       this.onModelChange(this._value);
     }
-    this.ref.markForCheck();
+      this.ref.markForCheck();
   }
 
   // Set touched on blur
