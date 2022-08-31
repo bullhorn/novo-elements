@@ -9,7 +9,6 @@ import {
   Input,
   OnChanges,
   Optional,
-  PLATFORM_ID,
   Renderer2,
   SimpleChanges,
 } from '@angular/core';
@@ -53,7 +52,6 @@ export class NovoTimeFormatDirective extends IMaskDirective<any> implements Novo
     private _element: ElementRef,
     _renderer: Renderer2,
     _factory: IMaskFactory,
-    // @Optional() @Inject(PLATFORM_ID) _platformId: string,
     @Optional() @Inject(COMPOSITION_BUFFER_MODE) _compositionMode: boolean,
     private labels: NovoLabelService,
     private cdr: ChangeDetectorRef,

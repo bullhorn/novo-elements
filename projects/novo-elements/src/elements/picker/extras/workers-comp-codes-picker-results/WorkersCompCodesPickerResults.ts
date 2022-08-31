@@ -3,10 +3,13 @@ import { ChangeDetectorRef, Component, ElementRef, HostBinding } from '@angular/
 import { DomSanitizer } from '@angular/platform-browser';
 import { NovoLabelService } from '../../../../services/novo-label-service';
 // Vendor
-import { BasePickerResults } from '../base-picker-results/BasePickerResults';
+import {PickerResults} from '../picker-results';
 
 @Component({
   selector: 'workers-comp-codes-picker-results',
+  host: {
+    class: 'active',
+  },
   template: `
     <section class="picker-loading" *ngIf="isLoading && !matches?.length">
       <novo-loading theme="line"></novo-loading>
@@ -45,23 +48,15 @@ import { BasePickerResults } from '../base-picker-results/BasePickerResults';
       </novo-list-item>
       <novo-loading theme="line" *ngIf="isLoading && matches?.length > 0"></novo-loading>
     </novo-list>
+    <div class="picker-loader" *ngIf="isLoading && matches.length === 0"><novo-loading theme="line"></novo-loading></div>
+    <p class="picker-error" *ngIf="hasError">{{ labels.pickerError }}</p>
+    <p class="picker-null-results" *ngIf="hasNonErrorMessage">{{ getEmptyMessage() }}</p>
   `,
 })
-export class WorkersCompCodesPickerResults extends BasePickerResults {
-  @HostBinding('class.active')
-  active: boolean = true;
-  @HostBinding('hidden')
-  get isHidden(): boolean {
-    return this.matches.length === 0;
-  }
+export class WorkersCompCodesPickerResults extends PickerResults {
 
   constructor(element: ElementRef, private sanitizer: DomSanitizer, public labels: NovoLabelService, ref: ChangeDetectorRef) {
-    super(element, ref);
-    this.sanitizer = sanitizer;
-  }
-
-  getListElement() {
-    return this.element.nativeElement.querySelector('novo-list');
+    super(element, labels, ref);
   }
 
   sanitizeHTML(compCode: string, name: string) {

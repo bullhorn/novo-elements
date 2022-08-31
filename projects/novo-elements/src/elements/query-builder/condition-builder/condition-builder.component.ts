@@ -85,7 +85,6 @@ export class ConditionBuilderComponent implements OnInit, AfterContentInit, Afte
     const { fields = [] } = this.qbs.config || {};
     fields.length && this.changeFieldOptions(fields[0]);
     this.searches = this.searchTerm.valueChanges.pipe(debounceTime(300), distinctUntilChanged()).subscribe((term) => {
-      // this.parentForm.get('field').setValue(null);
       this.results$ = Promise.resolve(
         this.fieldConfig.options.filter(
           (f) => f.name.toLowerCase().includes(term.toLowerCase()) || f.label?.toLowerCase().includes(term.toLowerCase()),
@@ -107,8 +106,6 @@ export class ConditionBuilderComponent implements OnInit, AfterContentInit, Afte
     [this._operatorOutlet.viewContainer, this._inputOutlet.viewContainer].forEach((def) => {
       def.clear();
     });
-    // this._contentFieldTypeDefs = [];
-    // this._contentFieldDefs = [];
     this._onDestroy.next();
     this._onDestroy.complete();
   }
@@ -118,7 +115,6 @@ export class ConditionBuilderComponent implements OnInit, AfterContentInit, Afte
    * @param fieldConfig
    */
   changeFieldOptions(fieldConfig: FieldConfig<BaseFieldDef>) {
-    // this.fields = entity.filter(term);
     this.fieldConfig = fieldConfig;
     this.searchTerm.setValue('');
     this.results$ = Promise.resolve(this.fieldConfig.options);

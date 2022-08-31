@@ -404,10 +404,17 @@ distribution-list-picker-results {
       justify-content: center;
     }
   }
+  .picker-loader,
+  .picker-error,
+  .picker-null-results {
+    border: none;
+  }
+
   .picker-null,
   .picker-error,
   .picker-loading,
-  .picker-no-recents {
+  .picker-no-recents,
+  .picker-error{
     text-align: center;
     padding: 1em 0 4em;
     > i {
