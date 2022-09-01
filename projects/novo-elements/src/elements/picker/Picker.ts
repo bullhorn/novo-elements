@@ -227,7 +227,7 @@ export class NovoPickerElement implements OnInit {
         return;
       }
 
-      if ((event.key === Key.Backspace || event.key === Key.Delete) && !Helpers.isEmpty(this._value)) {
+      if ((event.key === Key.Backspace || event.key === Key.Delete) && !Helpers.isEmpty(this._value) && Helpers.isEmpty(this.term)) {
         this.clearValue(false);
         this.closePanel();
       }
