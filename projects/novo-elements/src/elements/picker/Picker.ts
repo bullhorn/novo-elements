@@ -227,7 +227,7 @@ export class NovoPickerElement implements OnInit {
         return;
       }
 
-      if ((event.key === Key.Backspace || event.key === Key.Delete) && !Helpers.isEmpty(this._value) && Helpers.isEmpty(this.term)) {
+      if ((event.key === Key.Backspace || event.key === Key.Delete) && !Helpers.isEmpty(this._value) && (this._value === this.term)) {
         this.clearValue(false);
         this.closePanel();
       }
@@ -318,6 +318,7 @@ export class NovoPickerElement implements OnInit {
         this.popup.instance.selected = this.selected;
       }
     } else {
+      this.term = this.clearValueOnSelect ? '' : selected.label;
       this.changed.emit({ value: selected.value, rawValue: { label: this.term, value: this._value } });
       this.select.emit(selected);
     }
