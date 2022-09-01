@@ -21,15 +21,16 @@ novo-tiles {
     border: solid thin $ocean;
     border-radius: $border-radius;
     position: relative;
-    align-items: center;
+    align-items: stretch;
     .tile {
       padding: 0 $spacing-md;
       line-height: 3.2rem;
-      height: 100%;
       z-index: 1;
       position: relative;
       cursor: pointer;
       letter-spacing: 0.02em;
+      display:flex;
+      align-items:center;
       &:not(:last-child) {
         border-right: solid thin $ocean;
       }
