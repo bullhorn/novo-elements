@@ -227,7 +227,7 @@ export class NovoPickerElement implements OnInit {
         return;
       }
 
-      if ((event.key === Key.Backspace || event.key === Key.Delete) && !Helpers.isBlank(this._value)) {
+      if ((event.key === Key.Backspace || event.key === Key.Delete) && !Helpers.isEmpty(this._value) && (this._value === this.term)) {
         this.clearValue(false);
         this.closePanel();
       }
@@ -318,6 +318,7 @@ export class NovoPickerElement implements OnInit {
         this.popup.instance.selected = this.selected;
       }
     } else {
+      this.term = this.clearValueOnSelect ? '' : selected.label;
       this.changed.emit({ value: selected.value, rawValue: { label: this.term, value: this._value } });
       this.select.emit(selected);
     }
@@ -327,7 +328,7 @@ export class NovoPickerElement implements OnInit {
   // Makes sure to clear the model if the user clears the text box
   checkTerm(event) {
     this.typing.emit(event);
-    if (!event || !event.length) {
+    if ((!event || !event.length) && !Helpers.isEmpty(this._value)) {
       this._value = null;
       this.onModelChange(this._value);
     }
