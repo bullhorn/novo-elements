@@ -15,10 +15,10 @@ import {
 } from '@angular/core';
 import { COMPOSITION_BUFFER_MODE, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { IMaskDirective, IMaskFactory } from 'angular-imask';
-import { format, isValid, parse } from 'date-fns';
+import { isValid } from 'date-fns';
 import * as IMask from 'imask';
 import { NovoLabelService } from '../../../services/novo-label-service';
-import { Key } from '../../../utils';
+import { DateUtil, Key } from '../../../utils';
 import { NovoInputFormat, NOVO_INPUT_FORMAT } from './base-format';
 
 export const TIMEFORMAT_VALUE_ACCESSOR = {
@@ -85,7 +85,7 @@ export class NovoTimeFormatDirective extends IMaskDirective<any> implements Novo
       format: (value) => this.formatValue(value),
       parse: (str) => {
         const time = this.convertTime12to24(str);
-        return parse(`${format(Date.now(), 'YYYY-MM-DD')}T${time}`);
+        return DateUtil.parse(`${DateUtil.format(Date.now(), 'YYYY-MM-DD')}T${time}`);
       },
       blocks: {
         HH: {
@@ -185,17 +185,17 @@ export class NovoTimeFormatDirective extends IMaskDirective<any> implements Novo
   }
 
   formatValue(value: any): string {
-    const date = parse(value);
+    const date = DateUtil.parse(value);
     if (isValid(date)) {
       const pattern = this.military ? 'HH:mm' : 'hh:mm A';
-      return format(date, pattern);
+      return DateUtil.format(date, pattern);
     }
     return this.normalize(value);
   }
 
   formatAsIso(date: Date): string {
     if (date && isValid(date)) {
-      return format(date, 'HH:mm');
+      return DateUtil.format(date, 'HH:mm');
     }
     return null;
   }
@@ -215,8 +215,8 @@ export class NovoTimeFormatDirective extends IMaskDirective<any> implements Novo
 
   convertTime24to12(time24h: string) {
     if (time24h.length === 5) {
-      const date = parse(`2020-01-01T${time24h}`);
-      return format(date, 'hh:mm A');
+      const date = DateUtil.parse(`2020-01-01T${time24h}`);
+      return DateUtil.format(date, 'hh:mm A');
     }
     return time24h;
   }

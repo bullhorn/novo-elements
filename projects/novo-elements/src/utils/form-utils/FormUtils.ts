@@ -1,6 +1,6 @@
 // NG
 import { Injectable } from '@angular/core';
-import * as dateFns from 'date-fns';
+import { startOfToday } from 'date-fns';
 // App
 import {
   AddressControl,
@@ -863,7 +863,7 @@ export class FormUtils {
     if (dateRange.minDate) {
       return DateUtil.parse(dateRange.minDate);
     } else if (dateRange.minOffset) {
-      return DateUtil.addDays(dateFns.startOfToday(), dateRange.minOffset);
+      return DateUtil.addDays(startOfToday(), dateRange.minOffset);
     }
   }
 
@@ -871,7 +871,7 @@ export class FormUtils {
     if (dateRange.maxDate) {
       return DateUtil.parse(dateRange.maxDate);
     } else if (dateRange.minOffset) {
-      return DateUtil.addDays(dateFns.startOfToday(), dateRange.minOffset);
+      return DateUtil.addDays(startOfToday(), dateRange.minOffset);
     }
   }
 

@@ -15,12 +15,11 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 // Vendor
-import * as dateFns from 'date-fns';
+import { isValid } from 'date-fns';
 import { createAutoCorrectedDatePipe } from 'text-mask-addons';
 import { DateFormatService } from '../../services/date-format/DateFormat';
 import { NovoLabelService } from '../../services/novo-label-service';
-import { Key } from '../../utils';
-import { Helpers } from '../../utils/Helpers';
+import { DateUtil, Helpers, Key } from '../../utils';
 // App
 import { NovoOverlayTemplateComponent } from '../common/overlay/Overlay';
 
@@ -330,8 +329,11 @@ export class NovoDatePickerInputElement implements OnInit, OnChanges, ControlVal
       if (!value) {
         return '';
       }
-      if (this.userDefinedFormat && dateFns.isValid(value)) {
-        return dateFns.format(value, this.format);
+      console.log('if 1', this.userDefinedFormat && isValid(value))
+      if (this.userDefinedFormat && isValid(value)) {
+        console.log('if 2 value', value)
+        console.log('if 3 format', this.format)
+        return DateUtil.format(value, this.format);
       }
       if (!(value instanceof Date)) {
         value = new Date(value);
@@ -346,7 +348,7 @@ export class NovoDatePickerInputElement implements OnInit, OnChanges, ControlVal
         return originalValue;
       }
     } catch (err) {
-      return '';
+      return err;
     }
   }
 

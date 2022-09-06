@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output, TemplateRef } from '@angular/core';
-import * as dateFns from 'date-fns';
-import { WeekDay } from '../../../utils/calendar-utils/CalendarUtils';
+import { addMonths, subMonths } from 'date-fns';
+import { WeekDay } from '../../../utils';
 
 @Component({
   selector: 'novo-agenda-month-header',
@@ -53,10 +53,10 @@ export class NovoAgendaMonthHeaderElement {
   viewDateChange: EventEmitter<Date> = new EventEmitter();
 
   prevMonth(event: Event) {
-    this.viewDateChange.emit(dateFns.subMonths(this.viewDate, 1));
+    this.viewDateChange.emit(subMonths(this.viewDate, 1));
   }
 
   nextMonth(event: Event) {
-    this.viewDateChange.emit(dateFns.addMonths(this.viewDate, 1));
+    this.viewDateChange.emit(addMonths(this.viewDate, 1));
   }
 }

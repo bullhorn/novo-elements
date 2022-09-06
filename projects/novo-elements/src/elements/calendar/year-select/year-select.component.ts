@@ -1,7 +1,7 @@
 // NG2
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { getYear } from 'date-fns';
 import { NovoLabelService } from '../../../services/novo-label-service';
+import { DateUtil } from '../../../utils';
 import type { DateLike } from '../../date-picker/date-picker.types';
 
 @Component({
@@ -47,10 +47,10 @@ export class NovoYearSelectElement implements OnInit {
   }
 
   _isActive(year: number) {
-    return this.activeDate && year === getYear(this.activeDate);
+    return this.activeDate && year === DateUtil.getYear(this.activeDate);
   }
 
   _isSelected(year: number) {
-    return this.selected && year === getYear(this.selected[0]);
+    return this.selected && year === DateUtil.getYear(this.selected[0]);
   }
 }

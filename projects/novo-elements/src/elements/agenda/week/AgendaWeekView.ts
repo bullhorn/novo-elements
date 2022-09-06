@@ -11,6 +11,7 @@ import {
   Output,
   TemplateRef,
 } from '@angular/core';
+import { Day } from 'date-fns';
 import { Subject, Subscription } from 'rxjs';
 import {
   CalendarEvent,
@@ -22,7 +23,6 @@ import {
   WeekDay,
   WeekViewEventRow,
 } from '../../../utils/calendar-utils/CalendarUtils';
-import { WeekDayNumber } from '../../../utils';
 
 /**
  * @hidden
@@ -122,7 +122,7 @@ export class NovoAgendaWeekViewElement implements OnChanges, OnInit, OnDestroy {
    * The start number of the week
    */
   @Input()
-  weekStartsOn: WeekDayNumber;
+  weekStartsOn: Day;
 
   /**
    * A custom template to use to replace the header

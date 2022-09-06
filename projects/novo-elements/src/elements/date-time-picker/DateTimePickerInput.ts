@@ -2,9 +2,9 @@
 import { ChangeDetectorRef, Component, ElementRef, EventEmitter, forwardRef, Input, Output } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 // Vendor
-import { isDate, parse } from 'date-fns';
+import { isDate } from 'date-fns';
 import { NovoLabelService } from '../../services/novo-label-service';
-import { Helpers } from '../../utils/Helpers';
+import { DateUtil, Helpers } from '../../utils';
 
 // Value accessor for the component (supports ngModel)
 const DATE_VALUE_ACCESSOR = {
@@ -80,8 +80,8 @@ export class NovoDateTimePickerInputElement implements ControlValueAccessor {
   constructor(public element: ElementRef, public labels: NovoLabelService, private _changeDetectorRef: ChangeDetectorRef) {}
 
   writeValue(value: any): void {
-    this.datePart = isDate(value) ? parse(value) : value;
-    this.timePart = isDate(value) ? parse(value) : value;
+    this.datePart = isDate(value) ? DateUtil.parse(value) : value;
+    this.timePart = isDate(value) ? DateUtil.parse(value) : value;
     Promise.resolve(null).then(() => this._setTriggerValue(value));
   }
   updateDate(event) {

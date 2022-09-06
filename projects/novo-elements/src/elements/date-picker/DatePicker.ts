@@ -4,9 +4,9 @@ import { ChangeDetectorRef, Component, ElementRef, EventEmitter, forwardRef, Hos
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 // Vendor
-import { isDate, isValid, parse, startOfDay, subDays } from 'date-fns';
+import { isDate, isValid, subDays } from 'date-fns';
 import { NovoLabelService } from '../../services/novo-label-service';
-import { BooleanInput } from '../../utils';
+import { BooleanInput, DateUtil } from '../../utils';
 // APP
 import { Helpers } from '../../utils/Helpers';
 import { DataTableRangeModel, DatePickerSelectModes, modelTypes, RangeModel, rangeSelectModes } from './date-picker.types';
@@ -244,7 +244,7 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
     return this._selection;
   }
   set selection(value) {
-    this._selection = value ? value.filter(isDate).map((d) => startOfDay(d)) : [];
+    this._selection = value ? value.filter(isDate).map((d) => DateUtil.startOfDay(d)) : [];
   }
 
   constructor(
@@ -393,7 +393,7 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
       this.updateView(model);
       this.modelToSelection(model);
     } else if (Helpers.isString(model)) {
-      const date = parse(model as any);
+      const date = DateUtil.parse(model as any);
       if (isValid(date)) {
         this.updateView(date);
         this.modelToSelection(date);

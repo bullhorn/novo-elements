@@ -2,15 +2,11 @@
 import { ChangeDetectorRef, Component, DoCheck, ElementRef, EventEmitter, Input, Output, QueryList, ViewChildren } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormGroup } from '@angular/forms';
 // Vendor
-import * as dateFns from 'date-fns';
+import { startOfToday, startOfTomorrow } from 'date-fns';
 import { debounceTime } from 'rxjs/operators';
 // APP
-import { CollectionEvent } from '../../services/data-provider/CollectionEvent';
-import { PagedArrayCollection } from '../../services/data-provider/PagedArrayCollection';
-import { NovoLabelService } from '../../services/novo-label-service';
-import { FormUtils } from '../../utils/form-utils/FormUtils';
-import { Helpers } from '../../utils/Helpers';
-import { notify } from '../../utils/notifier/notifier.util';
+import { CollectionEvent, NovoLabelService, PagedArrayCollection } from '../../services/';
+import { DateUtil, FormUtils, Helpers, notify } from '../../utils';
 import { ControlFactory, ReadOnlyControl } from './../form/FormControls';
 
 export interface NovoTableConfig {
@@ -702,13 +698,13 @@ export class NovoTableElement implements DoCheck {
           } else if (column.type && column.type === 'date') {
             if (column.filter.startDate && column.filter.endDate) {
               query[column.name] = {
-                min: dateFns.startOfDay(column.filter.startDate),
-                max: dateFns.startOfDay(dateFns.addDays(dateFns.startOfDay(column.filter.endDate), 1)),
+                min: DateUtil.startOfDay(column.filter.startDate),
+                max: DateUtil.startOfDay(DateUtil.addDays(DateUtil.startOfDay(column.filter.endDate), 1)),
               };
             } else {
               query[column.name] = {
-                min: column.filter.min ? dateFns.addDays(dateFns.startOfToday(), column.filter.min) : dateFns.startOfToday(),
-                max: column.filter.max ? dateFns.addDays(dateFns.startOfTomorrow(), column.filter.max) : dateFns.startOfTomorrow(),
+                min: column.filter.min ? DateUtil.addDays(startOfToday(), column.filter.min) : startOfToday(),
+                max: column.filter.max ? DateUtil.addDays(startOfTomorrow(), column.filter.max) : startOfTomorrow(),
               };
             }
           } else {
