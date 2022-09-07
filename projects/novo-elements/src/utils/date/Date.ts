@@ -30,7 +30,7 @@ export class DateUtil {
         if (0 <= weekDay && weekDay <= 6) {
             return weekDay as Day;
         } else {
-            console.warn('invalid weekDay value:', weekDay);
+            console.warn('Invalid weekDay value:', weekDay);
             return 0;
         }
     }
@@ -146,7 +146,18 @@ export class DateUtil {
             start: this.getDateFromAnyType(start),
             end: this.getDateFromAnyType(end),
         };
-        return isWithinInterval(date, interval);
+
+        /**
+         * Need extra error handling here to retain backwards compatibility because the new
+         * isWithinInterval replacement function throws an error for Invalid Dates and Invalid
+         * Intervals instead of returning true or false.
+         **/
+        try {
+          return isWithinInterval(date, interval);
+        } catch (e) {
+          console.warn(e.toString());
+          return false;
+        }
     }
 
     static getMonth(date: DateLike): number {
