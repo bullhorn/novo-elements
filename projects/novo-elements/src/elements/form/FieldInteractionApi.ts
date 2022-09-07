@@ -1,7 +1,7 @@
 // NG2
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { FormArray } from '@angular/forms';
+import {FormArray, ValidatorFn} from '@angular/forms';
 // Vendor
 import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -430,6 +430,24 @@ export class FieldInteractionApi {
     const control = this.getControl(key, otherForm);
     if (control && !control.restrictFieldInteractions) {
       control.updateValueAndValidity(options);
+    }
+  }
+
+  addValidators(key: string,
+                validators: ValidatorFn[],
+                otherForm?: NovoFormGroup) {
+    const control = this.getControl(key, otherForm);
+    if (control && validators && validators.length > 0) {
+      control.addValidators(validators);
+    }
+  }
+
+  removeValidator(key: string,
+                  validators: ValidatorFn[],
+                  otherForm?: NovoFormGroup) {
+    const control = this.getControl(key, otherForm);
+    if (control && validators && validators.length > 0) {
+      control.removeValidators(validators);
     }
   }
 
