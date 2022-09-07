@@ -55,7 +55,7 @@ export class NovoMonthViewElement implements OnInit {
   get weekStartsOn(): DateFnsDay {
     return this._weekStartsOn;
   }
-  set weekStartsOn(value) {
+  set weekStartsOn(value: DateFnsDay) {
     this._weekStartsOn = value;
     this.weekdays = this.labels.getWeekdays(value);
     this.updateView(this.activeDate);

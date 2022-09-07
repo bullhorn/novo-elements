@@ -1,4 +1,4 @@
-import { addHours, addMinutes, Day, differenceInMinutes, getDay } from 'date-fns';
+import { addHours, addMinutes, differenceInMinutes, getDay } from 'date-fns';
 import { DateUtil } from '../../utils/date/Date';
 
 const WEEKEND_DAY_NUMBERS: Day[] = [0, 6];

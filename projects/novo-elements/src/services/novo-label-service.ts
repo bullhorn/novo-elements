@@ -213,7 +213,7 @@ export class NovoLabelService {
     return res;
   }
 
-  getWeekdays(weekStartsOn = 0): string[] {
+  getWeekdays(weekStartsOn: Day = 0): string[] {
     function getDay(dayOfWeek) {
       const dt = new Date();
       return dt.setDate(dt.getDate() - dt.getDay() + dayOfWeek);

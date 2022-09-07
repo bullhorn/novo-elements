@@ -124,7 +124,7 @@ export class NovoDatePickerInputElement implements OnInit, OnChanges, ControlVal
    * Day of the week the calendar should display first, Sunday=0...Saturday=6
    **/
   @Input()
-  weekStart: number = 0;
+  weekStart: Day = 0;
   @Output()
   blurEvent: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
   @Output()

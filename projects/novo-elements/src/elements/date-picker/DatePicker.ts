@@ -137,7 +137,7 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
    * Day of the week the calendar should display first, Sunday=0...Saturday=6
    **/
   @Input()
-  weekStart: number = 0;
+  weekStart: Day = 0;
   /**
    * Certain dates that are already selected.
    **/

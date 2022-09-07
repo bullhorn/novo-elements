@@ -11,7 +11,7 @@ import {
   Output,
   TemplateRef,
 } from '@angular/core';
-import { addSeconds, Day, differenceInSeconds, getDate, getMonth, getYear, setDate, setMonth, setYear } from 'date-fns';
+import { addSeconds, differenceInSeconds, getDate, getMonth, getYear, setDate, setMonth, setYear } from 'date-fns';
 import { Subject, Subscription } from 'rxjs';
 import {
   CalendarEvent,

@@ -2,7 +2,7 @@ import { DateUtil } from '../../../utils';
 import type { DateLike, NovoDateSelectionStrategy } from '../../date-picker/date-picker.types';
 
 export class WeekSelectionStrategy implements NovoDateSelectionStrategy<DateLike[]> {
-  constructor(private weekStartsOn: number = 0) {}
+  constructor(private weekStartsOn: Day = 0) {}
 
   selectionFinished(date: DateLike | null): DateLike[] {
     return this._createWeekRange(date);
