@@ -329,10 +329,7 @@ export class NovoDatePickerInputElement implements OnInit, OnChanges, ControlVal
       if (!value) {
         return '';
       }
-      console.log('if 1', this.userDefinedFormat && isValid(value))
       if (this.userDefinedFormat && isValid(value)) {
-        console.log('if 2 value', value)
-        console.log('if 3 format', this.format)
         return DateUtil.format(value, this.format);
       }
       if (!(value instanceof Date)) {

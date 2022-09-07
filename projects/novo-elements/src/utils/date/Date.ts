@@ -23,7 +23,7 @@ export type DateLike = Date | string | number;
  **/
 export class DateUtil {
     static getDateFromAnyType(date: DateLike): Date | number {
-        return Helpers.isString(date) ? parseISO(date.toString()) : date as Date | number;
+        return legacyParse(date);
     }
 
     static getWeekDayFromNumber(weekDay: number | Day): Day {
