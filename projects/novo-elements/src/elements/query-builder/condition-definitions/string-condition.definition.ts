@@ -4,9 +4,9 @@ import { AbstractControl, FormControl } from '@angular/forms';
 import { AbstractConditionFieldDef } from './abstract-condition.definition';
 
 /**
- * Contruction filters against String fields can be complex. Each "chip" added to the
- * condition can be used to indendantly used to query a database.  Not all systems support
- * quering within a text column, ie sql unless LIKE is enabled. This could result in a
+ * Constructing filters against String fields can be complex. Each "chip" added to the
+ * condition can be independently used to query a database.  Not all systems support
+ * querying within a text column, ie sql unless LIKE is enabled. This could result in a
  * performance penalty.
  */
 @Component({
@@ -21,15 +21,14 @@ import { AbstractConditionFieldDef } from './abstract-condition.definition';
           <novo-option value="excludeAny">{{ labels.exclude }}</novo-option>
         </novo-select>
       </novo-field>
-      <novo-field *novoConditionInputDef="let formGroup">
-        <novo-chip-list #chipList aria-label="filter value">
+      <novo-field *novoConditionInputDef="let formGroup" [formGroup]="formGroup">
+        <novo-chip-list #chipList aria-label="filter value" formControlName="value">
           <novo-chip *ngFor="let chip of formGroup.value?.value || []" [value]="chip" (removed)="remove(chip, formGroup)">
             {{ chip }}
             <novo-icon novoChipRemove>close</novo-icon>
           </novo-chip>
           <input
             novoChipInput
-            [(ngModel)]="model"
             [placeholder]="labels.typeToAddChips"
             autocomplete="off"
             (novoChipInputTokenEnd)="add($event, formGroup)"
@@ -51,7 +50,6 @@ import { AbstractConditionFieldDef } from './abstract-condition.definition';
 export class NovoDefaultStringConditionDef extends AbstractConditionFieldDef {
   separatorKeysCodes: number[] = [ENTER, COMMA];
   defaultOperator = 'includeAny';
-  model = '';
 
   getValue(formGroup: AbstractControl): any[] {
     return formGroup.value?.value || [];

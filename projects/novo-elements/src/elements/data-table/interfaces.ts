@@ -109,6 +109,7 @@ export interface IDataTableChangeEvent {
   outsideFilter?: IDataTableFilter | IDataTableFilter[];
   where?: { query: string; form: any };
   savedSearchName?: string;
+  displayedColumns?: string[];
 }
 
 export interface IDataTableSelectionChangeEvent {

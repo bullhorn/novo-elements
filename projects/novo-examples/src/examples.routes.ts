@@ -6225,7 +6225,7 @@ export class February2022Page {
 @Component({
   selector: 'june-2022-page',
   template: `<h1>📢  June 2022 (version 7.2.x)</h1>
-<p><strong>New Feature: Query Builder</strong>: We have added a new component to help with building complex and modern interfaces.  At Bullhorn we have to enable our users to create advanced and dynamic searches against there data.  We have built many iterations of a query builder in the past but we think this one is our best and most re-usable.</p>
+<p><strong>New Feature: Query Builder</strong>: We have added a new component to help with building complex and modern interfaces.  At Bullhorn we have to enable our users to create advanced and dynamic searches against their data.  We have built many iterations of a query builder in the past but we think this one is our best and most re-usable.</p>
 <p>Bullhorn is continually seeking to update and innovate our products, and leverage the latest features in the frameworks we use. In support of that mission, we are updating our Novo UI and its supporting novo-elements library to Angular 13.  This update  allows us to continue offering a streamlined and consistent experience across Bullhorn’s complete product portfolio.  This update includes both an Angular upgrade, as well as supporting the latest Typescript updates.  You can find more details in the Technical Release Notes section below.</p>
 <h2>Release Timeline</h2>
 <p>Bullhorn has released a Release Candidate v7 of Novo-elements. Bullhorn will update Novo to use Novo-Elements v7 in the 2022.6 release</p>

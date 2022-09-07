@@ -43,7 +43,6 @@ export class NovoDateRangeFormatDirective extends IMaskDirective<any> {
     this.unmask = false;
     this.imask = {
       mask: 'm{/}`d{/}`Y - m{/}`d{/}`Y',
-      // pattern: 'm{/}`d{/}`Y - m{/}`d{/}`Y',
       overwrite: true,
       autofix: true,
       lazy: false,
