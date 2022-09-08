@@ -65,7 +65,7 @@ import { DataTableState } from './state/data-table-state.service';
       <novo-data-table-pagination
         *ngIf="paginationOptions"
         [theme]="paginationOptions.theme"
-        [length]="paginationOptions.asyncListCountEnabled? paginationOptions.length : dataSource?.currentTotal"
+        [length]="paginationOptions.asyncListCountEnabled? length : dataSource?.currentTotal"
         [page]="paginationOptions.page"
         [pageSize]="paginationOptions.pageSize"
         [pageSizeOptions]="paginationOptions.pageSizeOptions"
@@ -330,6 +330,7 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   @Input() maxSelected: number = undefined;
   @Input() canSelectAll: boolean = false;
   @Input() allMatchingSelected = false;
+  @Input() length: number;
 
   @Input()
   set dataTableService(service: IDataTableService<T>) {
