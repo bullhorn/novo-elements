@@ -131,8 +131,6 @@ export class NovoTimePickerInputElement implements OnInit, OnChanges, ControlVal
         return str.toUpperCase();
       },
       format(date) {
-        console.log('tpi 1', date, timeFormat)
-        // console.log('tpi 2', DateUtil.format(date, timeFormat))
         return DateUtil.format(date, timeFormat);
       },
       parse: (str) => {
