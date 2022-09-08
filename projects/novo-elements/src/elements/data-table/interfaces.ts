@@ -69,8 +69,6 @@ export interface IDataTablePaginationOptions {
   pageSize: number;
   pageSizeOptions: number[] | { value: string; label: string }[];
   isHidden?: boolean;
-  asyncListCountEnabled?: boolean;
-  length?: number;
 }
 
 export interface IDataTableColumnSortConfig {
