@@ -63,7 +63,7 @@
     "novo-design-tokens": "^0.0.9",
     "post-robot": "9.0.30",
     "resize-observer-polyfill": "^1.5.1",
-    "rxjs": "~6.5.5",
+    "rxjs": "^7.5.4",
     "text-mask-addons": "^3.8.0",
     "timezone-support": "^2.0.2",
     "tslib": "^2.0.0",
