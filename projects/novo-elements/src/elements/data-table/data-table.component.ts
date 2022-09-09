@@ -74,7 +74,7 @@ import { DataTableState } from './state/data-table-state.service';
         [allMatchingSelected]="allMatchingSelected"
         [isHidden]="paginationOptions.isHidden"
         [isLoading]="paginationOptions.isLoading"
-        [overrideTotalSubject] = "overrideTotalSubject"
+        [paginationRefreshSubject] = "paginationRefreshSubject"
       >
       </novo-data-table-pagination>
       <div class="novo-data-table-actions" *ngIf="templates['customActions']">
@@ -333,7 +333,7 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   @Input() canSelectAll: boolean = false;
   @Input() allMatchingSelected = false;
   @Input() overrideTotal: number;
-  @Input() overrideTotalSubject: Subject<any>;
+  @Input() paginationRefreshSubject: Subject<void>;
 
   @Input()
   set dataTableService(service: IDataTableService<T>) {

@@ -93,7 +93,7 @@ const MAX_PAGES_DISPLAYED = 5;
                 theme="primary"
                 color="negative"
                 icon="refresh"
-                (click)="overrideTotalSubject.next()">{{ labels.refreshPagination }}</button>
+                (click)="paginationRefreshSubject.next()">{{ labels.refreshPagination }}</button>
       </div>
     </ng-container>
   `,
@@ -148,7 +148,7 @@ export class NovoDataTablePagination<T> implements OnInit, OnDestroy {
   @Input()
   public isLoading: boolean = false;
   @Input()
-  public overrideTotalSubject: Subject<any> = new Subject<any>();
+  public paginationRefreshSubject = new Subject();
 
   @Input()
   get length(): number {
