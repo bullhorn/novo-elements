@@ -134,6 +134,7 @@ export class NovoLabelService {
   after = 'After';
   between = 'Between';
   within = 'Within';
+  refreshPagination = 'Refresh Pagination';
 
   constructor(
     @Optional()
