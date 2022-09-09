@@ -72,8 +72,8 @@ import { DataTableState } from './state/data-table-state.service';
         [dataFeatureId]="paginatorDataFeatureId"
         [canSelectAll]="canSelectAll"
         [allMatchingSelected]="allMatchingSelected"
-        [isHidden]="paginationOptions.isHidden"
-        [isLoading]="paginationOptions.isLoading"
+        [loading]="paginationOptions.loading"
+        [errorLoading]="paginationOptions.errorLoading"
         [paginationRefreshSubject] = "paginationRefreshSubject"
       >
       </novo-data-table-pagination>
