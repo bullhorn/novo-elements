@@ -66,7 +66,7 @@ import { DataTableState } from './state/data-table-state.service';
       <novo-data-table-pagination
         *ngIf="paginationOptions"
         [theme]="paginationOptions.theme"
-        [length]="null !== overrideTotal ? overrideTotal : dataSource?.currentTotal"
+        [length]="null !== overrideTotal && overrideTotal >= 0 ? overrideTotal : dataSource?.currentTotal"
         [page]="paginationOptions.page"
         [pageSize]="paginationOptions.pageSize"
         [pageSizeOptions]="paginationOptions.pageSizeOptions"
