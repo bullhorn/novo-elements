@@ -76,7 +76,7 @@ const MAX_PAGES_DISPLAYED = 5;
       >
       </novo-select>
       <span class="spacer"></span>
-      <ul *ngIf="!isHidden" class="pager" data-automation-id="pager">
+      <ul *ngIf="!loading && !errorLoading" class="pager" data-automation-id="pager">
         <li class="page" (click)="selectPage(page - 1)" [ngClass]="{ disabled: page === 0 }">
           <i class="bhi-previous" data-automation-id="pager-previous"></i>
         </li>
@@ -87,14 +87,12 @@ const MAX_PAGES_DISPLAYED = 5;
           <i class="bhi-next" data-automation-id="pager-next"></i>
         </li>
       </ul>
-      <div *ngIf="isHidden">
-        <novo-loading *ngIf="isLoading"></novo-loading>
-        <button *ngIf="!isLoading"
-                theme="primary"
-                color="negative"
-                icon="refresh"
-                (click)="paginationRefreshSubject.next()">{{ labels.refreshPagination }}</button>
-      </div>
+      <novo-loading *ngIf="loading"></novo-loading>
+      <button *ngIf="errorLoading"
+              theme="primary"
+              color="negative"
+              icon="refresh"
+              (click)="paginationRefreshSubject.next()">{{ labels.refreshPagination }}</button>
     </ng-container>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -144,9 +142,9 @@ export class NovoDataTablePagination<T> implements OnInit, OnDestroy {
   @Input()
   public allMatchingSelected: boolean = false;
   @Input()
-  public isHidden: boolean = false;
+  public loading: boolean = false;
   @Input()
-  public isLoading: boolean = false;
+  public errorLoading: boolean = false;
   @Input()
   public paginationRefreshSubject = new Subject();
 
