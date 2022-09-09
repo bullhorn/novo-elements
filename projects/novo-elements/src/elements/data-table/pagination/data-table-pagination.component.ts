@@ -9,7 +9,7 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import { Subscription } from 'rxjs';
+import {Subject, Subscription} from 'rxjs';
 import { NovoLabelService } from '../../../services/novo-label-service';
 import { IDataTablePaginationEvent } from '../interfaces';
 import { DataTableState } from '../state/data-table-state.service';
@@ -87,6 +87,14 @@ const MAX_PAGES_DISPLAYED = 5;
           <i class="bhi-next" data-automation-id="pager-next"></i>
         </li>
       </ul>
+      <div *ngIf="isHidden">
+        <novo-loading *ngIf="isLoading"></novo-loading>
+        <button *ngIf="!isLoading"
+                theme="primary"
+                color="negative"
+                icon="refresh"
+                (click)="overrideTotalSubject.next()">{{ labels.refreshPagination }}</button>
+      </div>
     </ng-container>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -137,6 +145,10 @@ export class NovoDataTablePagination<T> implements OnInit, OnDestroy {
   public allMatchingSelected: boolean = false;
   @Input()
   public isHidden: boolean = false;
+  @Input()
+  public isLoading: boolean = false;
+  @Input()
+  public overrideTotalSubject: Subject<any> = new Subject<any>();
 
   @Input()
   get length(): number {
