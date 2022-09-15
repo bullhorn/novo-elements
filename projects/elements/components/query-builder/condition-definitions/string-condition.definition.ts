@@ -21,15 +21,14 @@ import { AbstractConditionFieldDef } from './abstract-condition.definition';
           <novo-option value="excludeAny">{{ labels.exclude }}</novo-option>
         </novo-select>
       </novo-field>
-      <novo-field *novoConditionInputDef="let formGroup">
-        <novo-chip-list #chipList aria-label="filter value">
+      <novo-field *novoConditionInputDef="let formGroup" [formGroup]="formGroup">
+        <novo-chip-list #chipList aria-label="filter value" formControlName="value">
           <novo-chip *ngFor="let chip of formGroup.value?.value || []" [value]="chip" (removed)="remove(chip, formGroup)">
             {{ chip }}
             <novo-icon novoChipRemove>close</novo-icon>
           </novo-chip>
           <input
             novoChipInput
-            [(ngModel)]="model"
             [placeholder]="labels.typeToAddChips"
             autocomplete="off"
             (novoChipInputTokenEnd)="add($event, formGroup)"
@@ -51,7 +50,6 @@ import { AbstractConditionFieldDef } from './abstract-condition.definition';
 export class NovoDefaultStringConditionDef extends AbstractConditionFieldDef {
   separatorKeysCodes: number[] = [ENTER, COMMA];
   defaultOperator = 'includeAny';
-  model = '';
 
   getValue(formGroup: AbstractControl): any[] {
     return formGroup.value?.value || [];

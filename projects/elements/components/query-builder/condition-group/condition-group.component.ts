@@ -82,7 +82,7 @@ export class ConditionGroupComponent implements OnInit, OnDestroy {
     return this.formBuilder.group({
       field: [field, Validators.required],
       operator: [operator, Validators.required],
-      value: [value, Validators.required],
+      value: [value],
     });
   }
 

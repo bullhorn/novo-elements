@@ -140,7 +140,7 @@ export class CriteriaBuilderComponent implements OnInit, OnDestroy, AfterContent
     return this.formBuilder.group({
       field: [field, Validators.required],
       operator: [operator, Validators.required],
-      value: [value, Validators.required],
+      value: [value],
     });
   }
 

@@ -158,7 +158,7 @@ export class NovoChipInput implements NovoChipTextControl, OnChanges {
     this._inputElement.focus(options);
   }
 
-  /** Focuses the input. */
+  /** Clears the input. */
   clearValue(): void {
     this._inputElement.value = '';
     this.ngControl?.control.setValue('');

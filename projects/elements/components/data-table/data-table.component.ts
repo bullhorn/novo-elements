@@ -25,14 +25,13 @@ import { NovoDataTableCellHeader } from './cell-headers/data-table-header-cell.c
 import { DataTableSource } from './data-table.source';
 import { NOVO_DATA_TABLE_REF } from './data-table.token';
 import {
+  IDataTableChangeEvent,
   IDataTableColumn,
-  IDataTableFilter,
   IDataTablePaginationOptions,
   IDataTablePreferences,
   IDataTableSearchOptions,
   IDataTableSelectionOption,
   IDataTableService,
-  IDataTableSort,
 } from './interfaces';
 import { ListInteractionDictionary, ListInteractionEvent } from './list-interaction-types';
 import { StaticDataTableService } from './services/static-data-table.service';
@@ -483,27 +482,21 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
 
   constructor(public labels: NovoLabelService, private ref: ChangeDetectorRef, public state: DataTableState<T>) {
     this.scrollListenerHandler = this.scrollListener.bind(this);
-    this.sortFilterSubscription = this.state.sortFilterSource.subscribe(
-      (event: {
-        sort: IDataTableSort;
-        filter: IDataTableFilter | IDataTableFilter[];
-        globalSearch: string;
-        where: { query: string; form: any };
-      }) => {
-        if (this.name !== 'novo-data-table') {
-          this.preferencesChanged.emit({
-            name: this.name,
-            sort: event.sort,
-            filter: event.filter,
-            globalSearch: event.globalSearch,
-            where: event.where,
-          });
-          this.performInteractions('change');
-        } else {
-          notify('Must have [name] set on data-table to use preferences!');
-        }
-      },
-    );
+    this.sortFilterSubscription = this.state.sortFilterSource.subscribe((event: IDataTableChangeEvent) => {
+      if (this.name !== 'novo-data-table') {
+        this.preferencesChanged.emit({
+          name: this.name,
+          sort: event.sort,
+          filter: event.filter,
+          globalSearch: event.globalSearch,
+          where: event.where,
+          savedSearchName: event.savedSearchName,
+        });
+        this.performInteractions('change');
+      } else {
+        notify('Must have [name] set on data-table to use preferences!');
+      }
+    });
     this.paginationSubscription = this.state.paginationSource.subscribe((event: { isPageSizeChange: boolean; pageSize: number }) => {
       if (this.name !== 'novo-data-table') {
         if (event.isPageSizeChange) {
@@ -525,19 +518,21 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
 
   public modifyCellHeaderMultiSelectFilterOptions(column: string, newOptions: { value: any; label: string }[]): void {
     const header = this.cellHeaders.find((cellHeader) => cellHeader.id === column);
-    if (header && header.config && header.config.filterConfig && header.config.filterConfig.options) {
-      const filterOptions: any[] = header.config.filterConfig.options;
-      const optionsToKeep = filterOptions.filter(
-        (opt) =>
-          header.isSelected(opt, header.multiSelectedOptions) &&
-          !newOptions.find((newOpt) => opt.value && newOpt.value && newOpt.value === opt.value),
-      );
-      header.config.filterConfig.options = [...optionsToKeep, ...newOptions];
-    } else {
-      header.config.filterConfig.options = newOptions;
+    if (header) {
+      if (header.config && header.config.filterConfig && header.config.filterConfig.options) {
+        const filterOptions: any[] = header.config.filterConfig.options;
+        const optionsToKeep = filterOptions.filter(
+          (opt) =>
+            header.isSelected(opt, header.multiSelectedOptions) &&
+            !newOptions.find((newOpt) => opt.value && newOpt.value && newOpt.value === opt.value),
+        );
+        header.config.filterConfig.options = [...optionsToKeep, ...newOptions];
+      } else {
+        header.config.filterConfig.options = newOptions;
+      }
+      header.setupFilterOptions();
+      header.changeDetectorRef.markForCheck();
     }
-    header.setupFilterOptions();
-    header.changeDetectorRef.markForCheck();
   }
 
   public ngOnDestroy(): void {

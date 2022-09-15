@@ -3,10 +3,10 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { ChangeDetectorRef } from '@angular/core';
 import { fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { FormBuilder } from '@angular/forms';
-import { NovoFormModule } from './form.module';
-import { NovoControlGroup } from './control-group';
-import { FormUtils } from './../../utils/form-utils/form-utils';
 import { NovoLabelService, OptionsService } from 'novo-elements/services';
+import { NovoControlGroup } from './control-group';
+import { NovoFormModule } from './form.module';
+import { FormUtils } from './utils/form-utils';
 
 xdescribe('Elements: NovoControlGroup', () => {
   let fixture;
