@@ -63,7 +63,6 @@
     "imask": "^6.2.2",
     "novo-design-tokens": "^1.0.0-beta.6",
     "post-robot": "9.0.30",
-    "resize-observer-polyfill": "^1.5.1",
     "rxjs": "~6.5.5",
     "text-mask-addons": "^3.8.0",
     "timezone-support": "^2.0.2",
