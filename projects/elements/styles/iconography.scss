@@ -1,3 +1,4 @@
+@import "~novo-design-tokens/scss";
 // Iconography
 // --------------------------------------------------
 $icon-height: 1.7rem; // 24px Base background size
@@ -18,15 +19,9 @@ i {
         vertical-align: baseline;
         line-height: 1.8;
       }
-      @each $entity, $color in $entity-colors {
-        &.#{$entity} {
-          color: $white;
-          background: $color;
-        }
-      }
-      @each $key, $color in $analytics-colors {
-        &.#{$key} {
-          color: $white;
+      @include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
+        &.#{$name} {
+          color: $contrast;
           background: $color;
         }
       }
@@ -35,8 +30,8 @@ i {
       }
     }
     &[theme="entity"] {
-      @each $entity, $color in $entity-colors {
-        &.#{$entity} {
+      @include entity-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
+        &.#{$name} {
           color: $color;
           background: transparent;
         }

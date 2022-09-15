@@ -3,12 +3,12 @@
 
 @mixin novo-expansion-panel-theme() {
   .novo-expansion-panel {
-    background: var(--background-bright, $white);
-    color: var(--text-main, $dark);
+    background: var(--color-background);
+    color: var(--color-text);
   }
 
   .novo-action-row {
-    border-top-color: var(--border, $dark);
+    border-top-color: var(--color-border);
   }
 
   .novo-expansion-panel:not(.novo-expanded) .novo-expansion-panel-header {
@@ -22,16 +22,16 @@
   }
 
   .novo-expansion-panel-header-title {
-    color: var(--text-main, $dark);
+    color: var(--color-text);
   }
 
   .novo-expansion-panel-header-description,
   .novo-expansion-indicator {
-    border-color: var(--text-main, $dark);
+    border-color: var(--color-text);
   }
 
   .novo-expansion-panel-header[aria-disabled="true"] {
-    color: $grey;
+    color: var(--color-text-disabled);
     pointer-events: none;
 
     .novo-expansion-panel-header-title,
@@ -43,7 +43,7 @@
   .novo-expansion-panel.novo-expanded {
     @include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
       &[theme="#{$name}"] {
-        border-top: 3px solid $color;
+        border-top: 3px solid var(--color-border);
       }
     }
   }

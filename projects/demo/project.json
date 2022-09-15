@@ -10,7 +10,7 @@
       "outputs": ["dist/demo"],
       "options": {
         "aot": true,
-        "outputPath": "dist/demo/browser",
+        "outputPath": "dist/demo",
         "index": "projects/demo/index.html",
         "main": "projects/demo/main.ts",
         "polyfills": "projects/demo/polyfills.ts",

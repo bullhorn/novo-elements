@@ -12,7 +12,7 @@ input[type="radio"] {
 // input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="submit"]):not([type="reset"]):not([type="button"]),
 // select {
 //   display: block;
-//   border-bottom: 1px solid var(--border);
+//   border-bottom: var(--border-main);
 //   border-radius: 4px 4px 0 0;
 //   caret-color: var(--form-text);
 //   transition: border-bottom 0.2s, background-color 0.2s;
@@ -22,7 +22,7 @@ input[type="radio"] {
 // textarea,
 // select {
 //   color: var(--form-text);
-//   background-color: var(--background-main);
+//   background-color: var(--color-background-secondary);
 //   font-family: inherit;
 //   font-size: inherit;
 //   margin-right: 6px;
@@ -91,7 +91,7 @@ textarea:not([rows]) {
 }
 
 select {
-  background: var(--background-main) var(--select-arrow) calc(100% - 12px) 50% / 12px no-repeat;
+  background: var(--color-background-secondary) var(--select-arrow) calc(100% - 12px) 50% / 12px no-repeat;
   padding-right: 35px;
 }
 
@@ -110,7 +110,7 @@ input[type="submit"],
 input[type="reset"],
 input[type="button"] {
   color: var(--form-text);
-  background-color: var(--background-main);
+  background-color: var(--color-background-secondary);
   font-family: inherit;
   font-size: inherit;
   padding: 0.5em 1em;
@@ -119,12 +119,12 @@ input[type="button"] {
   border-radius: 4px;
 }
 
-button:hover,
-input[type="submit"]:hover,
-input[type="reset"]:hover,
-input[type="button"]:hover {
-  background: var(--button-hover);
-}
+// button:hover,
+// input[type="submit"]:hover,
+// input[type="reset"]:hover,
+// input[type="button"]:hover {
+//   background: var(--button-hover);
+// }
 
 // input[type="checkbox"]:active,
 // input[type="radio"]:active,

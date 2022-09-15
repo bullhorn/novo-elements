@@ -2,11 +2,17 @@
 @import "../typography/text.mixins.scss";
 
 $novo-menu-side-padding: 0.5rem;
+:host {
+  // Variables that change or need to be inherited
+  // --option-height: var(--size-height-md);
+  // --option-spacing: var(--spacing-md);
 
-.novo-option {
+  min-height: var(--option-height);
+  padding: 0 var(--option-spacing);
+  gap: var(--option-spacing);
+
   @include novo-body-text();
   position: relative;
-  cursor: pointer;
   outline: none;
   display: flex;
   flex-direction: row;
@@ -14,39 +20,61 @@ $novo-menu-side-padding: 0.5rem;
   box-sizing: border-box;
   align-items: center;
   margin: 0;
-  padding: 1rem 1rem 1rem 1.6rem;
-  gap: 1rem;
+  cursor: pointer;
   flex: 1;
+  // padding: 1rem 1rem 1rem 1.6rem;
+  // gap: 1rem;
   -webkit-tap-highlight-color: transparent;
 
   &:hover:not(.novo-option-inert) {
-    background: var(--background-main, rgba($ocean, 0.1));
+    background: var(--color-selection-overlay);
   }
 
   &:active:not(.novo-option-inert),
   &.novo-active:not(.novo-option-inert) {
-    background: rgba($ocean, 0.3);
+    background: var(--color-selection-overlay);
   }
 
   &.novo-selected {
-    color: $positive;
+    color: var(--color-selection);
   }
 
   &.disabled,
   &[aria-disabled="true"] {
     cursor: not-allowed;
-    color: $disabled;
+    color: var(--color-disabled);
     &:hover {
-      background: rgba($negative, 10%);
+      background: var(--color-error-overlay);
     }
   }
 
-  .novo-optgroup &:not(.novo-option-multiple) {
-    padding-left: $novo-menu-side-padding * 2;
+  // .novo-optgroup &:not(.novo-option-multiple) {
+  //   padding-left: $novo-menu-side-padding * 2;
+
+  //   [dir="rtl"] & {
+  //     padding-left: $novo-menu-side-padding;
+  //     padding-right: $novo-menu-side-padding * 2;
+  //   }
+  // }
+
+  .novo-option-text {
+    display: inline-block;
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    flex-grow: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    gap: 1rem;
+  }
+
+  .novo-option-pseudo-checkbox {
+    $margin: calc($novo-menu-side-padding / 2);
+    margin-right: $margin;
 
     [dir="rtl"] & {
-      padding-left: $novo-menu-side-padding;
-      padding-right: $novo-menu-side-padding * 2;
+      margin-left: $margin;
+      margin-right: 0;
     }
   }
 
@@ -55,36 +83,15 @@ $novo-menu-side-padding: 0.5rem;
       border-left: 4px solid $color;
     }
     &.novo-fill-#{$name}:not(.novo-option-inert) {
-      color: getContrastColor($name);
+      color: $contrast;
       background: $color;
       &:hover,
       &:focus {
-        background: getTintColor($name);
+        background: $tint;
       }
       &:active {
-        background: getShadeColor($name);
+        background: $shade;
       }
     }
-  }
-}
-
-.novo-option-text {
-  display: inline-block;
-  display: inline-flex;
-  flex-direction: row;
-  align-items: center;
-  flex-grow: 1;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  gap: 1rem;
-}
-
-.novo-option-pseudo-checkbox {
-  $margin: calc($novo-menu-side-padding / 2);
-  margin-right: $margin;
-
-  [dir="rtl"] & {
-    margin-left: $margin;
-    margin-right: 0;
   }
 }

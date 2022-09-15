@@ -1,26 +1,50 @@
-@import "../../../styles/variables.scss";
+@import "~novo-design-tokens/scss";
 
 :host {
+  // Variables that change or need to be inherited
+  // --button-background: var(--button-color-background, transparent);
+  // --button-color: var(--button-color-text, var(--color-text));
+  // --button-overlay: var(--button-overlay, var(--color-gray-alpha));
+  // --button-border-radius: var(--button-border-radius, var(--border-radius));
+  // --button-font-size: var(--button-font-size, var(--font-size-md));
+  // --button-height: var(--button-height, var(--size-height-md));
+  // --button-spacing: var(--button-spacing, var(--spacing-md));
+  // --button-border-color: transparent;
+
+  color: var(--button-color-text);
+  background: var(--button-color-background);
+  border: 1px solid var(--button-color-border);
+  border-radius: var(--button-border-radius);
+  padding: 0 var(--button-spacing);
+  font-size: var(--button-font-size);
+  height: var(--button-height);
+  gap: var(--button-spacing);
+  box-shadow: var(--button-shadow);
+  text-transform: var(--button-text-transform);
+
   display: inline-flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  padding: 0 $spacing-md;
-  font-size: var(--font-size-button);
-  height: 3rem;
-  border: none;
-  color: var(--text-main, $dark);
-  background: transparent;
-  border-radius: 3px;
-  text-transform: uppercase;
   transition: all 200ms ease-in-out;
-  gap: $spacing-md;
   cursor: pointer;
   user-select: none;
   text-overflow: clip;
   white-space: nowrap;
   overflow: hidden;
   flex: 0 0 auto;
+  box-sizing: border-box;
+  position: relative;
+
+  .button-focus-indicator {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    pointer-events: none;
+    border-radius: inherit;
+  }
 
   .button-contents {
     height: var(--font-size-button);
@@ -33,33 +57,8 @@
   }
 
   i {
-    height: var(--font-size-button);
     font-size: inherit;
     line-height: 1;
-  }
-
-  &[size="small"],
-  &[size="sm"] {
-    font-size: 1rem;
-    padding: 0 $spacing-md;
-    height: 2.4rem;
-    gap: $spacing-sm;
-    .button-contents,
-    i {
-      height: 1rem;
-    }
-  }
-
-  &[size="large"],
-  &[size="lg"] {
-    font-size: 1.6rem;
-    padding: 0 $spacing-lg;
-    height: 3.6rem;
-    gap: $spacing-lg;
-    .button-contents,
-    i {
-      height: 1.6rem;
-    }
   }
 
   &:focus {
@@ -97,6 +96,18 @@
           fill: currentColor;
         }
       }
+    }
+  }
+
+  &:hover,
+  &:focus {
+    .button-focus-indicator {
+      background-color: var(--button-color-hover);
+    }
+  }
+  &:active {
+    .button-focus-indicator {
+      background-color: var(--button-color-active);
     }
   }
 }

@@ -1,5 +1,5 @@
 .agenda-month-view {
-  background-color: var(--background-bright);
+  background-color: var(--color-background);
 
   .agenda-header {
     display: flex;
@@ -116,7 +116,7 @@
     text-align: center;
     line-height: 22px;
     font-size: 12px;
-    color: var(--background-bright); // var(--text-main);
+    color: var(--color-background); // var(--color-text);
   }
 
   .agenda-day-cell.agenda-in-month.agenda-has-events {
@@ -137,7 +137,7 @@
   }
 
   .agenda-day-cell.agenda-today .agenda-day-number {
-    color: var(--text-main);
+    color: var(--color-text);
   }
 
   .agenda-day-cell.agenda-drag-over {

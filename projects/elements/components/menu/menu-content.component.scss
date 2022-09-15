@@ -15,15 +15,15 @@
     .menu {
       cursor: default;
       list-style: none;
-      background-color: var(--background-bright);
+      background-color: var(--color-background);
       padding-inline-start: 0px !important;
-      box-shadow: $shadow-multi;
+      box-shadow: var(--shadow-z2);
       :hover {
-        background: rgba($ocean, 0.1);
-        color: $dark;
+        background: var(--color-selection-overlay);
+        color: var(--color-text);
       }
       :active {
-        background: rgba($ocean, 0.4);
+        background: var(--color-selection-overlay);
       }
       .menu-item-container {
         display: flex;
@@ -31,7 +31,7 @@
         position: relative;
         .sub-menu-caret {
           position: absolute;
-          right: $spacing-sm;
+          right: var(--spacing-sm);
         }
       }
 
@@ -39,7 +39,7 @@
         @include novo-body-text();
         cursor: pointer;
         margin: 0;
-        padding: $spacing-md $spacing-md $spacing-md $spacing-lg;
+        padding: var(--spacing-md) var(--spacing-md) var(--spacing-md) var(--spacing-lg);
         box-sizing: border-box;
         display: flex;
         align-items: center;
@@ -49,11 +49,11 @@
       .divider {
         order: none;
         height: 1px;
-        background: $silver;
+        background: var(--color-border);
       }
       a {
         &.disabled {
-          color: $disabled;
+          color: var(--color-disabled);
           cursor: not-allowed;
         }
       }

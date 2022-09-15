@@ -1,7 +1,7 @@
 $border-width: 0.2em;
 $border-radius: var(--border-radius-round);
-$positive-lighter: var(--color-pale-positive);
-$disabled-color: var(--text-disabled);
+$positive-lighter: var(--color-selection-overlay);
+// $disabled-color: var(--color-text-disabled);
 $border-properties: solid $border-width $positive-lighter;
 
 :host {
@@ -18,8 +18,8 @@ $border-properties: solid $border-width $positive-lighter;
   & > .tile-container {
     display: flex;
     text-align: center;
-    background-color: var(--background-bright);
-    border: solid thin var(--selection);
+    background-color: var(--color-background);
+    border: solid thin var(--color-selection);
     border-radius: $border-radius;
     position: relative;
     align-items: center;
@@ -32,15 +32,15 @@ $border-properties: solid $border-width $positive-lighter;
       cursor: pointer;
       letter-spacing: 0.02em;
       &:not(:last-child) {
-        border-right: solid thin var(--selection);
+        border-right: solid thin var(--color-selection);
       }
       &:not(.disabled) {
-        color: var(--selection);
+        color: var(--color-selection);
       }
       &:not(.disabled).active {
         box-shadow: inset 3px 2px 4px 0px rgba(0, 0, 0, 0.3);
-        color: var(--selection-text);
-        background: var(--selection);
+        color: var(--color-selection-contrast);
+        background: var(--color-selection);
       }
       &.active {
         font-weight: 600;
@@ -58,13 +58,13 @@ $border-properties: solid $border-width $positive-lighter;
       }
     }
     &.active {
-      color: var(--selection);
-      border-color: var(--selection);
+      color: var(--color-selection);
+      border-color: var(--color-selection);
       box-shadow: 0px 0px 15px 3px rgba(74, 137, 220, 0.25);
     }
     &.disabled {
-      border-color: $disabled-color;
-      color: $disabled-color;
+      border-color: var(--color-disabled);
+      color: var(--color-disabled);
     }
   }
 }

@@ -7,7 +7,7 @@
   align-items: center;
   flex-wrap: wrap;
   justify-content: flex-start;
-  border-bottom: 1px solid lighten($dark, 45%);
+  border-bottom: 1px solid var(--color-active);
   transition: all 200ms ease-in-out;
   position: relative;
   padding: 0 2rem 2px 0;
@@ -20,13 +20,13 @@
     margin-bottom: 0;
   }
   &:hover {
-    border-bottom: 1px solid lighten($dark, 15%);
+    border-bottom: 1px solid var(--color-hover);
   }
   &.selected,
   &.selected:hover {
-    border-bottom: 1px solid $positive;
+    border-bottom: 1px solid var(--color-selection);
     & + i {
-      color: $positive;
+      color: var(--color-selection);
     }
   }
   &.disabled {
@@ -56,7 +56,7 @@
     right: 0;
     bottom: -20px;
     font-size: 0.9rem;
-    color: $negative;
+    color: var(--color-error);
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -71,7 +71,7 @@
     bottom: 8px;
     right: 0;
     font-size: 1.1em;
-    color: $dark;
+    color: var(--color-text);
     // &.has-value {
     //   bottom: 14px;
     // }

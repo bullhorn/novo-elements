@@ -1,36 +1,39 @@
-@import "../../../styles/variables.scss";
+@import "~novo-design-tokens/scss";
 
 :host {
   // Fab Themed Button
-  &[theme="fab"] {
-    @include theme-backgrounds("color", false);
-    border-radius: 50% !important;
-    padding: 0;
-    font-size: 1.2rem;
-    width: 3.2rem;
-    height: 3.2rem;
+  &.novo-button-fab {
+    --button-color-text: var(--button-fab-color-text);
+    --button-color-background: var(--button-fab-color-background);
+    --button-color-border: var(--button-fab-color-border);
+    --button-border-radius: var(--border-radius-full);
+
+    width: var(--button-height);
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    &[inverse] {
-      color: #fff;
-    }
-    &:focus,
-    &:hover {
-      box-shadow: 0px 1px 2px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+
+    &:hover,
+    &:focus {
+      --button-shadow: var(--button-fab-shadow-hover);
     }
     &:active {
-      box-shadow: 0px 1px 2px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+      --button-shadow: var(--button-fab-shadow-active);
     }
-    .button-contents {
-      display: contents;
-    }
+
+    @include color-variants(
+      button-fab,
+      (
+        color-text: contrast,
+        color-background: default,
+        color-border: transparent,
+      )
+    );
+
+    .button-contents,
     i {
+      display: contents;
       margin: 0;
-      padding: 0;
-      &:before {
-        display: block;
-      }
     }
   }
 }

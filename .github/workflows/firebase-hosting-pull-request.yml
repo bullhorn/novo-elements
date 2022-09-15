@@ -19,7 +19,7 @@ jobs:
         with:
           node-version: 14.19.1
       
-      - run: npm ci && npm run build:ci && npm run build:examples && npm run build:demo
+      - run: npm ci && npm run build:demo
       
       - name: Deploy preview
         uses: FirebaseExtended/action-hosting-deploy@v0

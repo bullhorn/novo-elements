@@ -103,6 +103,7 @@ export class NovoRadioGroup extends NovoRadioGroupMixins implements NovoFieldCon
       this._value = value;
       this._updateSelectedRadioFromValue();
       this.onChangeCallback(this._value);
+      this.change.emit(value);
     }
   }
 

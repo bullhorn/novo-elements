@@ -14,13 +14,12 @@ import {
   Renderer2,
   TemplateRef,
   ViewChild,
+  ViewEncapsulation,
 } from '@angular/core';
+import { NovoDropdownElement } from 'novo-elements/components/dropdown';
+import { NovoLabelService } from 'novo-elements/services';
+import { Helpers, Key } from 'novo-elements/utils';
 import { fromEvent, Subscription } from 'rxjs';
-import { DataTableState } from '../state/data-table-state.service';
-import { NovoDataTableSortFilter } from '../sort-filter/sort-filter.directive';
-import { SortDirection } from '../sort-filter';
-import { NovoDataTableFilterUtils } from '../services/data-table-filter-utils';
-
 import {
   IDataTableChangeEvent,
   IDataTableColumn,
@@ -29,13 +28,14 @@ import {
   IDataTableColumnSortConfig,
   IDataTableSortFilter,
 } from '../interfaces';
-
-import { NovoDropdownElement } from 'novo-elements/components/dropdown';
-import { NovoLabelService } from 'novo-elements/services';
-import { Key, Helpers } from 'novo-elements/utils';
+import { NovoDataTableFilterUtils } from '../services/data-table-filter-utils';
+import { SortDirection } from '../sort-filter';
+import { NovoDataTableSortFilter } from '../sort-filter/sort-filter.directive';
+import { DataTableState } from '../state/data-table-state.service';
 
 @Component({
   selector: '[novo-data-table-cell-config]',
+  encapsulation: ViewEncapsulation.None,
   template: `
     <i class="bhi-{{ labelIcon }} label-icon" *ngIf="labelIcon" data-automation-id="novo-data-table-header-icon"></i>
     <label data-automation-id="novo-data-table-label">{{ label }}</label>

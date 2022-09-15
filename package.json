@@ -62,7 +62,7 @@
     "imask": "^6.2.2",
     "jest-junit": "^13.2.0",
     "jscodeshift": "^0.13.1",
-    "novo-design-tokens": "^0.0.9",
+    "novo-design-tokens": "^1.0.0-beta.6",
     "post-robot": "9.0.30",
     "resize-observer-polyfill": "^1.5.1",
     "rxjs": "~6.5.5",

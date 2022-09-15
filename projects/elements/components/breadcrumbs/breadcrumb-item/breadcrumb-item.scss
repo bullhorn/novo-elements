@@ -23,7 +23,7 @@
 
     ::ng-deep a {
       @extend .novo-breadcrumb-font-style;
-      color: $ocean;
+      color: var(--color-selection);
       cursor: pointer;
       &:focus {
         text-decoration: none;
@@ -43,25 +43,25 @@
 
     &:hover {
       svg g polygon {
-        fill: var(--text-main, $dark);
+        fill: var(--color-text);
       }
     }
   }
 
   .novo-breadcrumb-item-active {
-    color: var(--text-main, $dark);
+    color: var(--color-text);
 
     ::ng-deep a {
-      color: var(--text-main, $dark);
+      color: var(--color-text);
       text-decoration: none;
     }
 
     svg g polygon {
-      fill: var(--text-main, $dark);
+      fill: var(--color-text);
     }
 
     span {
-      color: var(--text-main, $dark);
+      color: var(--color-text);
     }
   }
 
@@ -86,7 +86,7 @@
       cursor: pointer;
 
       a {
-        color: $dark;
+        color: var(--color-text);
         line-height: 36px;
         width: 170px;
         display: inline-block;
@@ -97,7 +97,7 @@
       }
 
       &:hover {
-        background: $light;
+        background: var(--color-background-overlay);
 
         a {
           text-decoration: none;

@@ -33,9 +33,12 @@ import { filter, first, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'novo-overlay-template',
+  styleUrls: ['./overlay.scss'],
   template: `
     <ng-template>
-      <div class="novo-overlay-panel" role="listbox" [id]="id" #panel><ng-content></ng-content></div>
+      <div class="novo-overlay-panel" [attr.role]="role" [id]="id" #panel>
+        <ng-content></ng-content>
+      </div>
     </ng-template>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -62,6 +65,8 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
     | 'top-right' = 'default';
   @Input()
   public scrollStrategy: 'reposition' | 'block' | 'close' = 'reposition';
+  @Input()
+  public role: string;
   @Input()
   public width: number;
   @Input()
@@ -179,7 +184,8 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
           this.panelOpen &&
           clickTarget !== this.getConnectedElement().nativeElement &&
           !this.getConnectedElement().nativeElement.contains(clickTarget) &&
-          (!!this.overlayRef && !this.overlayRef.overlayElement.contains(clickTarget)) &&
+          !!this.overlayRef &&
+          !this.overlayRef.overlayElement.contains(clickTarget) &&
           !this.elementIsInNestedOverlay(clickTarget);
         if (this.panelOpen && !!this.overlayRef && this.overlayRef.overlayElement.contains(clickTarget) && this.closeOnSelect) {
           this.select.emit(event);

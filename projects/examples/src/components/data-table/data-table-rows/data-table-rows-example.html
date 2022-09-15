@@ -38,9 +38,7 @@ Selection retention can be configured to keep records selected across pagination
       <button theme="secondary"
         (click)="refresh()">Refresh</button>
       <novo-dropdown side="right">
-        <button theme="primary"
-          icon="collapse"
-          inverse>
+        <button theme="primary" icon="collapse">
           <span *ngIf="basic.state.selected.length === 0">Actions</span>
           <span *ngIf="basic.state.selected.length !== 0">{{ basic.state.selected.length }}!</span>
         </button>

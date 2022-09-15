@@ -1,5 +1,5 @@
 // NG2
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, HostBinding, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { Deferred, DeferredPromise } from 'novo-elements/utils';
 
@@ -7,12 +7,15 @@ import { Deferred, DeferredPromise } from 'novo-elements/utils';
   selector: 'novo-toast',
   styleUrls: ['./toast.scss'],
   host: {
-    '[class]': 'alertTheme',
+    // '[class]': 'alertTheme',
+    '[class.toast-container]': 'true',
     '[class.growl]': 'appearance == "growl"',
     '[class.banner]': 'appearance == "banner"',
     '[class.show]': 'show',
     '[class.animate]': 'animate',
+    '[class.launched]': 'launched',
     '[class.embedded]': 'embedded',
+    '[class.message-only]': '!title',
     '[attr.theme]': 'theme',
     '(click)': '!isCloseable && clickHandler($event)',
   },
@@ -21,8 +24,8 @@ import { Deferred, DeferredPromise } from 'novo-elements/utils';
       <i [ngClass]="iconClass"></i>
     </div>
     <div class="toast-content">
-      <h5 *ngIf="title">{{ title }}</h5>
-      <p *ngIf="_message" [class.message-only]="!title" [innerHtml]="_message"></p>
+      <h5 class="toast-title" *ngIf="title">{{ title }}</h5>
+      <p class="toast-caption" *ngIf="_message" [innerHtml]="_message"></p>
       <div *ngIf="link" class="link-generated">
         <input type="text" [value]="link" onfocus="this.select();" />
       </div>
@@ -34,7 +37,7 @@ import { Deferred, DeferredPromise } from 'novo-elements/utils';
       </div>
     </div>
     <div class="close-icon" *ngIf="isCloseable" (click)="close($event)">
-      <i class="bhi-times"></i>
+      <i class="bhi-close"></i>
     </div>
   `,
 })
@@ -71,12 +74,19 @@ export class NovoToastElement implements OnInit, OnChanges {
   time: any;
   iconClass: string;
   alertTheme: string;
-  embedded: any;
+  embedded: boolean = true;
   onActionPromise: DeferredPromise = Deferred();
 
   constructor(private sanitizer: DomSanitizer) {}
 
+  @HostBinding('class')
+  get hb_defaultClasses() {
+    const theme = this.theme ? `novo-theme-${this.theme}` : null;
+    return [theme, this.alertTheme].filter(Boolean).join(' ');
+  }
+
   ngOnInit() {
+    this.embedded = !this.launched;
     if (!this.launched) {
       // clear position and time
       this.position = null;
@@ -84,7 +94,7 @@ export class NovoToastElement implements OnInit, OnChanges {
 
       // set icon and styling
       this.iconClass = `bhi-${this.icon}`;
-      this.alertTheme = `${this.theme} toast-container embedded`;
+      // this.alertTheme = `${this.theme}`;
       if (this.hasDialogue) {
         this.alertTheme += ' dialogue';
       }
@@ -94,7 +104,7 @@ export class NovoToastElement implements OnInit, OnChanges {
   ngOnChanges(changes?: SimpleChanges) {
     // set icon and styling
     this.iconClass = `bhi-${this.icon}`;
-    this.alertTheme = `${this.theme} toast-container embedded`;
+    // this.alertTheme = `${this.theme}`;
     if (this.hasDialogue) {
       this.alertTheme += ' dialogue';
     }

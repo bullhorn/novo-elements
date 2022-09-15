@@ -7,8 +7,8 @@
   grid-template-rows: 1fr;
   align-items: center;
   height: 3.2rem;
-  background: $white;
-  border: 1px solid $light;
+  background: var(--color-background);
+  border: 1px solid var(--color-border);
   border-radius: 0.2rem;
   max-width: 400px;
   min-width: 100px;
@@ -38,7 +38,7 @@
     background: transparent;
     position: relative;
     font-size: 1.4rem;
-    color: var(--text-main);
+    color: var(--color-text);
     z-index: z(above);
     border: none;
     transition: all 250ms;
@@ -51,14 +51,14 @@
   }
 
   novo-icon {
-    color: var(--text-main);
+    color: var(--color-text);
   }
 
   &.focused {
-    border: 1px solid var(--selection);
+    border: 1px solid var(--color-selection);
 
     > novo-icon {
-      color: var(--selection) !important;
+      color: var(--color-selection) !important;
     }
 
     @include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
@@ -74,15 +74,15 @@
 :host-context(header) {
   &.always-open:not(.focused) {
     button {
-      background: rgba($white, 0.25) !important;
-      color: rgba($positive, 0.25) !important;
+      background: var(--color-background-overlay) !important;
+      color: var(--color-selection-overlay) !important;
     }
     input {
-      background-color: rgba($white, 0.25) !important;
-      border-color: rgba($white, 0.25) !important;
-      color: rgba($positive, 0.25) !important;
+      background-color: var(--color-background-overlay) !important;
+      border-color: var(--color-background-overlay) !important;
+      color: var(--color-selection-overlay) !important;
       &::placeholder {
-        color: $empty !important;
+        color: var(--color-empty) !important;
       }
     }
   }

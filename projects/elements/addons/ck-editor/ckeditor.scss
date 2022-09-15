@@ -2,11 +2,11 @@
   .cke {
     font: inherit !important;
     box-shadow: none;
-    border-color: var(--background-muted);
+    border-color: var(--color-background-muted);
 
     .cke_top,
     .cke_bottom {
-      background: var(--background-muted) none;
+      background: var(--color-background-muted) none;
       box-shadow: none;
     }
 
@@ -23,14 +23,14 @@
 .cke_dialog {
   .cke_dialog_title {
     text-shadow: none;
-    background: var(--background-muted) none;
+    background: var(--color-background-muted) none;
     box-shadow: none;
     border-bottom: none;
   }
 
   .cke_dialog_footer {
     text-shadow: none;
-    background: var(--background-muted) none;
+    background: var(--color-background-muted) none;
     box-shadow: none;
     border-top: none;
   }
@@ -46,8 +46,8 @@
       &:active,
       &:focus,
       &.cke_combo_on {
-        background: var(--background-main);
-        border: 1px solid var(--border);
+        background: var(--color-background-secondary);
+        border: var(--border-main);
       }
       .cke_combo_text {
         color: white;

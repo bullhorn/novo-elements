@@ -22,7 +22,7 @@ novo-table {
       .novo-button-cell,
       .novo-dropdown-cell,
       .novo-checkbox-cell {
-        background-color: rgba($ocean, 0.15);
+        background-color: var(--color-selection-overlay);
       }
     }
   }
@@ -31,14 +31,14 @@ novo-table {
     .novo-button-cell,
     .novo-dropdown-cell,
     .novo-checkbox-cell {
-      background-color: $white;
+      background-color: var(--color-background);
     }
     &.active {
       .novo-cell,
       .novo-button-cell,
       .novo-dropdown-cell,
       .novo-checkbox-cell {
-        background-color: rgba($ocean, 0.15);
+        background-color: var(--color-selection-overlay);
       }
     }
   }
@@ -52,7 +52,7 @@ novo-table {
   .novo-header-cell,
   novo-empty-header-cell,
   .novo-checkbox-header-cell {
-    border-bottom: 1px solid $off-white;
+    border-bottom: 1px solid var(--color-border);
   }
 }
 
@@ -72,7 +72,7 @@ novo-table {
     display: inline-block;
   }
   button.active {
-    color: $positive;
+    color: var(--color-selection);
   }
   &.clickable {
     cursor: pointer;
@@ -88,7 +88,7 @@ novo-table {
 }
 
 .novo-header-cell {
-  border-left: 1px solid $off-white;
+  border-left: 1px solid var(--color-border);
   white-space: nowrap;
   display: flex;
   align-items: center;
@@ -168,7 +168,7 @@ novo-activity-table {
     display: flex;
     align-items: center;
     flex-shrink: 0;
-    border-bottom: 1px solid $off-white;
+    border-bottom: 1px solid var(--color-border);
     > [novo-activity-table-custom-header] {
       flex: 1;
     }
@@ -239,13 +239,13 @@ novo-activity-table {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: $grey;
+    color: var(--color-text-muted);
   }
   .novo-activity-table-filter-container {
     display: flex;
     flex: 1;
     .novo-activity-table-custom-filter {
-      border-right: 1px solid $off-white;
+      border-right: 1px solid var(--color-border);
       novo-date-picker {
         .calendar {
           box-shadow: none;

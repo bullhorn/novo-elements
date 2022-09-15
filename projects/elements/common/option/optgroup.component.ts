@@ -1,7 +1,7 @@
 import { BooleanInput } from '@angular/cdk/coercion';
-import { ChangeDetectionStrategy, Component, Directive, Inject, InjectionToken, Optional, ViewEncapsulation } from '@angular/core';
-import { NovoOptionParentComponent, NOVO_OPTION_PARENT_COMPONENT } from './option-parent';
+import { ChangeDetectionStrategy, Component, Directive, Inject, InjectionToken, Optional } from '@angular/core';
 import { CanDisable, CanDisableCtor, mixinDisabled } from '../mixins/disabled.mixin';
+import { NovoOptionParentComponent, NOVO_OPTION_PARENT_COMPONENT } from './option-parent';
 
 // Notes on the accessibility pattern used for `novo-optgroup`.
 // The option group has two different "modes": regular and novoInert. The regular mode uses the
@@ -56,7 +56,7 @@ export const NOVO_OPTGROUP = new InjectionToken<NovoOptgroup>('NovoOptgroup');
   selector: 'novo-optgroup',
   exportAs: 'novoOptgroup',
   templateUrl: 'optgroup.component.html',
-  encapsulation: ViewEncapsulation.None,
+  // encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   inputs: ['disabled', 'label'],
   styleUrls: ['optgroup.component.scss'],

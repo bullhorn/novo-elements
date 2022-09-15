@@ -40,7 +40,7 @@
         font-size: 1em;
         background: transparent !important;
         border: none;
-        border-bottom: 1px solid var(--border);
+        border-bottom: var(--border-main);
         border-radius: 0;
         outline: none;
         height: 2rem;
@@ -53,10 +53,10 @@
         color: #26282b;
         margin-left: 10px;
         &:hover {
-          border-bottom: 1px solid var(--border);
+          border-bottom: var(--border-main);
         }
         &:focus {
-          border-bottom: 1px solid var(--selection);
+          border-bottom: 1px solid var(--color-selection);
         }
         &::placeholder {
           color: var(--form-placeholder);
@@ -78,7 +78,7 @@
     }
     footer {
       padding: 5px 23px;
-      border-top: 1px solid var(--border);
+      border-top: var(--border-main);
       display: flex;
       justify-content: flex-end;
       > a {
@@ -113,7 +113,7 @@
     novo-nav {
       max-height: 140px;
       overflow: auto;
-      border-bottom: 1px solid var(--border);
+      border-bottom: var(--border-main);
       > novo-tab {
         height: 30px;
         min-height: 30px;
@@ -139,14 +139,13 @@
       &:focus,
       &:hover {
         // background: var(--pas)
-        // color: darken($light, 55%);
         .novo-category-dropdown-hover {
           display: block;
         }
       }
       .novo-category-dropdown-hover {
         display: none;
-        color: var(--selection);
+        color: var(--color-selection);
         font-size: 0.9em;
         > i {
           font-size: 0.9em;

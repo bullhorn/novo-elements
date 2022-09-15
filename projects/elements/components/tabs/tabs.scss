@@ -12,7 +12,7 @@ novo-nav {
     novo-tab-link {
       font-size: 1rem;
       .novo-tab-link {
-        padding: $spacing-sm;
+        padding: var(--spacing-sm);
       }
     }
   }
@@ -39,10 +39,10 @@ novo-nav {
     .novo-tab-link {
       @include novo-label-text();
       font-size: var(--font-size-tab);
-      padding: $spacing-md;
+      padding: var(--spacing-md);
       display: flex;
       align-items: center;
-      gap: $spacing-xs;
+      gap: var(--spacing-xs);
       cursor: pointer;
       text-transform: uppercase;
       &:focus {
@@ -83,7 +83,7 @@ novo-nav {
     border-radius: 3px;
     border: 2px solid #fff;
     novo-tab-button {
-      padding: $spacing-md;
+      padding: var(--spacing-md);
       cursor: pointer;
       transition: all 120ms ease-in-out;
       &.disabled {
@@ -143,7 +143,7 @@ novo-nav {
     }
   }
   &[theme="white"] {
-    background-color: $white;
+    background-color: var(--color-white);
     &[direction="vertical"] {
       background: transparent;
     }
@@ -164,14 +164,14 @@ novo-nav {
         }
       }
       .novo-tab-link {
-        color: var(--text-main);
+        color: var(--color-text);
         opacity: 0.75;
       }
       &.active,
       &.router-link-active {
-        color: var(--selection);
+        color: var(--color-selection);
         .novo-tab-link {
-          color: var(--selection);
+          color: var(--color-selection);
           opacity: 1;
         }
         .indicator {
@@ -185,12 +185,12 @@ novo-nav {
       }
     }
     &[type="button-bar"] {
-      border: 2px solid $light;
+      border: 2px solid var(--color-border);
       novo-tab-button {
-        color: var(--text-main);
+        color: var(--color-text);
         opacity: 0.75;
         &.active {
-          color: var(--selection);
+          color: var(--color-selection);
           background: rgba(0, 0, 0, 0.05);
           opacity: 1;
         }
@@ -229,7 +229,7 @@ novo-nav {
         width: 100%;
         display: flex;
         flex-flow: row nowrap;
-        gap: $spacing-xs;
+        gap: var(--spacing-xs);
         max-width: 90%;
         white-space: nowrap;
         overflow: hidden;
@@ -285,8 +285,8 @@ novo-nav-outlet {
   display: block;
   novo-nav-header {
     display: block;
-    padding: $spacing-sm;
-    margin: $spacing-sm;
+    padding: var(--spacing-sm);
+    margin: var(--spacing-sm);
     border: 1px solid #333;
   }
   novo-nav-content {

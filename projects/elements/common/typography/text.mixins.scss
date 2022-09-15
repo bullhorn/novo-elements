@@ -2,7 +2,7 @@
 
 @mixin text-disabled($property) {
   pointer-events: none;
-  color: $disabled;
+  color: var(--color-disabled);
 }
 
 @mixin base-text-rules() {
@@ -37,28 +37,28 @@
     font-size: inherit;
   }
   &.text-size-body {
-    font-size: $font-size-body;
+    font-size: var(--font-size-body);
   }
   &.text-size-xs {
-    font-size: $font-size-xs;
+    font-size: var(--font-size-xs);
   }
   &.text-size-sm {
-    font-size: $font-size-sm;
+    font-size: var(--font-size-sm);
   }
   &.text-size-md {
-    font-size: $font-size-md;
+    font-size: var(--font-size-md);
   }
   &.text-size-lg {
-    font-size: $font-size-lg;
+    font-size: var(--font-size-lg);
   }
   &.text-size-xl {
-    font-size: $font-size-xl;
+    font-size: var(--font-size-xl);
   }
   &.text-size-2xl {
-    font-size: $font-size-2xl;
+    font-size: var(--font-size-2xl);
   }
   &.text-size-3xl {
-    font-size: $font-size-3xl;
+    font-size: var(--font-size-3xl);
   }
   &.text-size-smaller {
     font-size: 0.8em;
@@ -146,7 +146,7 @@
 @mixin novo-title-text() {
   font-weight: 500;
   line-height: 1.5;
-  color: var(--text-main, $dark);
+  color: var(--color-text);
   white-space: nowrap;
   text-overflow: ellipsis;
   font-size: var(--font-size-title);
@@ -159,7 +159,7 @@
   word-break: word-break;
   overflow-wrap: break-word;
   line-height: 1.375;
-  color: var(--text-muted);
+  color: var(--color-text-muted);
   font-size: var(--font-size-label);
   @include base-text-rules();
 }
@@ -168,6 +168,6 @@
   font-size: var(--font-size-caption);
   font-weight: 400;
   line-height: 1.375;
-  color: var(--text-muted);
+  color: var(--color-text-muted);
   @include base-text-rules();
 }

@@ -3,6 +3,7 @@
   "dest": "../../dist/novo-examples",
   "lib": {
     "flatModuleFile": "novo-examples",
-    "entryFile": "src/index.ts"
+    "entryFile": "src/index.ts",
+    "styleIncludePaths": ["../elements/styles"]
   }
 }

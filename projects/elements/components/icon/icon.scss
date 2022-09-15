@@ -38,7 +38,7 @@ $icon-border-radius: 0.3em;
   @include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
     &[theme="#{$name}"] {
       i {
-        color: $white;
+        color: $contrast;
         background: $color;
         border-radius: $icon-border-radius;
         width: 1.6em;

@@ -1,17 +1,10 @@
-@import "../../../styles/variables.scss";
+@import "~novo-design-tokens/scss";
 
 :host {
-  // Standard Themed Icon
-  &[theme="standard"] {
-    @include theme-backgrounds("color", false);
-    color: var(--button-text);
-    background: var(--button-background);
-    &:hover,
-    &:focus {
-      box-shadow: $shadow-2, $shadow-1;
-    }
-    &:active {
-      box-shadow: $shadow-1;
-    }
+  // Standard Themed Button
+  &.novo-button-standard {
+    --button-color-text: var(--button-standard-color-text);
+    --button-color-background: var(--button-standard-color-background);
+    --button-color-border: var(--button-standard-color-border);
   }
 }

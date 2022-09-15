@@ -29,7 +29,7 @@ $novo-drawer-over-drawer-z-index: 4;
 }
 
 .novo-sidenav {
-  $high-contrast-border: solid 1px var(--border);
+  $high-contrast-border: solid 1px var(--color-border);
 
   @include theme-backgrounds("theme");
   @include novo-stacking-context($novo-drawer-over-drawer-z-index);

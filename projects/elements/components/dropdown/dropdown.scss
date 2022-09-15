@@ -1,3 +1,4 @@
+@import "~novo-design-tokens/scss";
 // @import "../../common/typography/text.mixins";
 
 :host {
@@ -22,14 +23,16 @@
 }
 
 .dropdown-container {
-  background-color: var(--background-bright);
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  min-width: 180px;
-  margin-top: var(--spacing-sm);
-  margin-bottom: var(--spacing-sm);
-  box-shadow: var(--shadow-3);
+  @include novo-overlay;
+  // Using overlay with role=listbox
+  // background-color: var(--color-background);
+  // list-style: none;
+  // margin: 0;
+  // padding: 0;
+  // min-width: 180px;
+  // margin-top: var(--spacing-sm);
+  // margin-bottom: var(--spacing-sm);
+  // box-shadow: var(--shadow-3);
   &.has-height {
     overflow: auto;
   }
@@ -46,7 +49,7 @@
     hr {
       border: none;
       height: 1px;
-      background: var(--border);
+      background: var(--color-border);
     }
   }
 }

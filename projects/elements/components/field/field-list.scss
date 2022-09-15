@@ -4,7 +4,7 @@
 :host {
   &.novo-field-appearance-list {
     &.novo-field-layout-horizontal {
-      border-bottom: 1px solid $off-white !important;
+      border-bottom: 1px solid var(--color-border) !important;
       padding: 0.5rem 1.2rem;
       min-height: 4.2rem;
 
@@ -20,17 +20,17 @@
       &.novo-field-appearance-underlined {
         &:not(.novo-focused):hover {
           .novo-field-input {
-            background: rgba($positive, 0.15);
+            background: var(--color-selection-overlay);
           }
         }
         &.novo-focused {
           .novo-field-label {
-            color: $positive !important;
+            color: var(--color-selection) !important;
           }
         }
         &.novo-field-invalid {
           .novo-field-label {
-            color: $negative !important;
+            color: var(--color-error) !important;
           }
         }
       }

@@ -1,7 +1,7 @@
 // NG2
-import { Component } from '@angular/core';
+import { Component, ElementRef } from '@angular/core';
 // Vendor
-import { NovoToastService } from 'novo-elements';
+import { NovoToastService, ToastOptions } from 'novo-elements';
 
 /**
  * @title Entity Colors
@@ -12,97 +12,40 @@ import { NovoToastService } from 'novo-elements';
   styleUrls: ['./entity-colors-example.scss'],
 })
 export class EntityColorsExample {
-  entityColors: Array<any> = [
-    {
-      name: 'lead',
-      variables: ['lead'],
-      hex: 'AA6699',
-    },
-    {
-      name: 'contact',
-      variables: ['contact'],
-      hex: 'FFAA44',
-    },
-    {
-      name: 'company',
-      variables: ['company'],
-      hex: '3399DD',
-    },
-    {
-      name: 'candidate',
-      variables: ['candidate'],
-      hex: '44BB77',
-    },
-    {
-      name: 'opportunity',
-      variables: ['opportunity'],
-      hex: '662255',
-    },
-    {
-      name: 'job',
-      variables: ['job'],
-      hex: 'BB5566',
-    },
-    {
-      name: 'job code',
-      variables: ['jobCode'],
-      hex: '696D79',
-    },
-    {
-      name: 'earn code',
-      variables: ['earnCode'],
-      hex: '696D79',
-    },
-    {
-      name: 'submission',
-      variables: ['submission'],
-      hex: 'A9ADBB',
-    },
-    {
-      name: 'placement',
-      variables: ['placement'],
-      hex: '0B344F',
-    },
-    {
-      name: 'sendout',
-      variables: ['sendout'],
-      hex: '747884',
-    },
-    {
-      name: 'note',
-      variables: ['note'],
-      hex: '747884',
-    },
-    {
-      name: 'contract',
-      variables: ['contract'],
-      hex: '454EA0',
-    },
-    {
-      name: 'invoice statement',
-      variables: ['invoiceStatement'],
-      hex: '696D79',
-    },
-    {
-      name: 'billable charge',
-      variables: ['billableCharge'],
-      hex: '696D79',
-    },
-    {
-      name: 'payable charge',
-      variables: ['payableCharge'],
-      hex: '696D79',
-    },
-  ];
+  entityKeys = [
+    'person',
+    'company',
+    'candidate',
+    'lead',
+    'contact',
+    'clientcontact',
+    'opportunity',
+    'job',
+    'joborder',
+    'submission',
+    'sendout',
+    'placement',
+    'note',
+    'task',
+    'distribution-list',
+    'credential',
+    'user',
+    'corporate-user',
+    'contract',
+    'job-code',
+    'earn-code',
+    'billable-charge',
+    'payable-charge',
+    'invoice-statement',
+  ].sort();
 
-  options: any;
+  constructor(private el: ElementRef, private toaster: NovoToastService) {}
 
-  constructor(private toaster: NovoToastService) {}
-
-  copyLink(color) {
+  copyLink(color, swatch?) {
+    const variable = swatch ? `var(--palette-${color}-${swatch})` : `var(--palette-${color})`;
     // Create dom element to copy from
     const copyFrom = document.createElement('textarea');
-    copyFrom.textContent = `#${color.hex}`;
+    copyFrom.textContent = variable;
     const body = document.getElementsByTagName('body')[0];
     body.appendChild(copyFrom);
     copyFrom.select();
@@ -112,19 +55,18 @@ export class EntityColorsExample {
     body.removeChild(copyFrom);
 
     // Set toast options
-    this.options = {
-      title: `#${color.hex}`,
+    const options: ToastOptions = {
+      title: variable,
       message: 'Copied to your clipboard',
-      theme: color.variables[0],
+      theme: color,
       icon: 'clipboard',
       position: 'growlTopRight',
     };
 
-    if (color.name === 'action') {
-      this.options.theme = 'ocean';
-    }
-
     // Fire toast
-    this.toaster.alert(this.options);
+    this.toaster.alert(options);
+  }
+  getHex(color) {
+    return getComputedStyle(this.el.nativeElement).getPropertyValue(`--color-${color}`);
   }
 }

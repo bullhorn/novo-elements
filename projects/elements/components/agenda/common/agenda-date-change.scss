@@ -4,14 +4,14 @@
   .cal-date-change {
     border-radius: 3px;
     border: 1px solid #e1e1e1;
-    background-color: var(--background-bright);
+    background-color: var(--color-background);
     position: relative;
     padding: 10px 15px;
     text-align: center;
 
     > span {
       padding: 5px;
-      color: var(--text-main);
+      color: var(--color-text);
     }
 
     > i {

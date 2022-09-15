@@ -1,7 +1,7 @@
 @import "~novo-design-tokens/scss";
 
 html {
-  scrollbar-color: var(--scrollbar-thumb) var(--background-body);
+  scrollbar-color: var(--scrollbar-thumb) var(--color-background);
   scrollbar-width: none;
   font-family: var(--font-family-base);
   font-size: var(--font-size-base, 10px);
@@ -13,8 +13,8 @@ body {
   font-size: var(--font-size-body, 1.2rem);
   line-height: 1.2;
   word-wrap: break-word;
-  color: var(--text-main);
-  background: var(--background-body);
+  color: var(--color-text);
+  background: var(--color-background);
   text-rendering: optimizeLegibility;
 }
 

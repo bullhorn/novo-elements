@@ -9,6 +9,7 @@ export class ThemeColorDirective {
 
   @HostBinding('class')
   get hb_textColor() {
+    if (!this.theme) return '';
     return `novo-theme-${this.theme}`;
   }
 

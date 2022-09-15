@@ -13,6 +13,7 @@ export class AccentColorDirective {
 
   @HostBinding('class')
   get hb_textColor() {
+    if (!this.accent) return '';
     // Support legacy classic theme... for now
     if (this.theme.themeName === 'classic') {
       return `novo-theme-${this.accent}`;

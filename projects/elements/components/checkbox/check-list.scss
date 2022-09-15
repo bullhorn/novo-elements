@@ -20,14 +20,14 @@
           }
           &.bhi-checkbox-empty,
           &.bhi-radio-empty {
-            color: $color-positive;
+            color: var(--color-selection);
           }
         }
       }
     }
     &.checked {
       label {
-        color: var(--text-main);
+        color: var(--color-text);
         i {
           animation: iconEnter 160ms ease-in-out;
         }
@@ -51,7 +51,7 @@
           }
           &.bhi-checkbox-empty,
           &.bhi-checkbox-filled {
-            color: $color-positive;
+            color: var(--color-selection);
           }
         }
       }
@@ -82,7 +82,7 @@
         }
         &.bhi-checkbox-filled,
         &.bhi-radio-filled {
-          color: $color-positive;
+          color: var(--color-selection);
         }
       }
       span {

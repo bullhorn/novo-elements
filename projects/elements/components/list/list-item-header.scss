@@ -1,0 +1,18 @@
+@import "~novo-design-tokens/scss";
+
+@include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
+  :host-context([theme="#{$name}"]) {
+    color: $contrast;
+    h6,
+    i {
+      color: $contrast;
+    }
+  }
+}
+
+:host {
+  .novo-item-header-container {
+    display: flex;
+    align-items: center;
+  }
+}

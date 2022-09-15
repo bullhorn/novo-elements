@@ -9,16 +9,18 @@ import {
   Input,
   OnDestroy,
   Renderer2,
+  ViewEncapsulation,
 } from '@angular/core';
+import { NovoToastService } from 'novo-elements/components/toast';
 import { Subscription } from 'rxjs';
 import { NovoDataTableRef, NOVO_DATA_TABLE_REF } from '../data-table.token';
-import { NovoToastService } from 'novo-elements/components/toast';
 
 @Component({
   selector: 'novo-data-table-checkbox-header-cell',
+  encapsulation: ViewEncapsulation.None,
   template: `
     <div class="data-table-checkbox" (click)="onClick()">
-      <input type="checkbox" [checked]="checked" />
+      <input type="checkbox" [checked]="checked" hidden />
       <label>
         <i [class.bhi-checkbox-empty]="!checked" [class.bhi-checkbox-filled]="checked"></i>
       </label>

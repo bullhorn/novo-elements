@@ -1,0 +1,157 @@
+/**
+ * Button
+ */
+
+// 1. Change the font styles in all browsers
+// 2. Remove the margin on controls in Safari
+// 3. Show the overflow in Edge
+button {
+  margin: 0; // 2
+  overflow: visible; // 3
+  font-family: inherit; // 1
+  text-transform: none; // 1
+}
+
+// Correct the inability to style buttons in iOS and Safari
+button,
+[type="button"],
+[type="reset"],
+[type="submit"] {
+  -webkit-appearance: button;
+}
+
+// Pico
+// ––––––––––––––––––––
+
+// button {
+//   display: inline-block;
+//   width: 100%;
+// }
+
+button,
+[role="button"] {
+  display: inline-block;
+  text-decoration: none;
+}
+
+button,
+input[type="submit"],
+input[type="button"],
+input[type="reset"],
+[role="button"] {
+  --current-background-color: var(--button-primary-background-color);
+  --current-text-color: var(--button-primary-text-color);
+  --current-border-color: var(--button-primary-background-color);
+  --box-shadow: var(--button-box-shadow, 0 0 0 rgba(0, 0, 0, 0));
+  --border-width: var(--border-width-thin);
+  padding: var(--button-padding) var(--button-padding);
+  border: var(--border-width) solid var(--current-border-color);
+  border-radius: var(--button-border-radius);
+  outline: none;
+  background-color: var(--current-background-color);
+  color: var(--current-text-color) !important;
+  box-shadow: var(--box-shadow);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-md);
+  line-height: var(--font-height-none);
+  text-transform: uppercase;
+  text-align: center;
+  height: var(--button-height);
+  display: inline-flex;
+  flex-flow: row nowrap;
+  gap: 1rem;
+  cursor: pointer;
+
+  &:is([aria-current], :hover, :active, :focus) {
+    --current-background-color: var(--button-primary-hover-color);
+    --current-border-color: var(--button-primary-hover-color);
+    --box-shadow: var(--button-hover-box-shadow, 0 0 0 rgba(0, 0, 0, 0));
+  }
+
+  &:focus {
+    --box-shadow: var(--button-hover-box-shadow, 0 0 0 rgba(0, 0, 0, 0)),
+      0 0 0 var(--outline-width) var(--button-primary-focus-color);
+  }
+}
+
+// Secondary
+:is(button, input[type="submit"], input[type="button"], [role="button"]).secondary,
+input[type="reset"] {
+  --current-background-color: var(--button-secondary-background-color);
+  --current-text-color: var(--button-secondary-text-color);
+  --current-border-color: var(--button-secondary-background-color);
+  cursor: pointer;
+
+  &:is([aria-current], :hover, :active, :focus) {
+    --current-background-color: var(--button-secondary-hover-color);
+    --current-border-color: var(--button-secondary-hover-color);
+  }
+
+  &:focus {
+    --box-shadow: var(--button-hover-box-shadow, 0 0 0 rgba(0, 0, 0, 0)),
+      0 0 0 var(--outline-width) var(--button-secondary-focus-color);
+  }
+}
+
+// Contrast
+// :is(button, input[type="submit"], input[type="button"], [role="button"]).contrast {
+//   --current-background-color: var(--button-secondary-background-color);
+//   --current-text-color: var(--button-secondary-text-color);
+//   --current-border-color: var(--button-secondary-background-color);
+
+//   --background-color: var(--contrast);
+//   --border-color: var(--contrast);
+//   --color: var(--contrast-inverse);
+
+//   &:is([aria-current], :hover, :active, :focus) {
+//     --background-color: var(--contrast-hover);
+//     --border-color: var(--contrast-hover);
+//     --color: var(--contrast-inverse);
+//   }
+
+//   &:focus {
+//     --box-shadow: var(--button-hover-box-shadow, 0 0 0 rgba(0, 0, 0, 0)),
+//       0 0 0 var(--outline-width) var(--contrast-focus);
+//   }
+// }
+
+// Outline (primary)
+:is(button, input[type="submit"], input[type="button"], [role="button"]).outline,
+input[type="reset"].outline {
+  --current-background-color: transparent;
+  --current-text-color: var(--button-primary-background-color);
+
+  &:is([aria-current], :hover, :active, :focus) {
+    --current-background-color: transparent;
+    --current-text-color: var(--button-primary-hover-color);
+  }
+}
+
+// Outline (secondary)
+:is(button, input[type="submit"], input[type="button"], [role="button"]).outline.secondary,
+input[type="reset"].outline {
+  --current-text-color: var(--button-secondary-background-color);
+
+  &:is([aria-current], :hover, :active, :focus) {
+    --current-text-color: var(--button-secondary-hover-color);
+  }
+}
+
+// Outline (contrast)
+// :is(button, input[type="submit"], input[type="button"], [role="button"]).outline.contrast {
+//   --color: var(--contrast);
+
+//   &:is([aria-current], :hover, :active, :focus) {
+//     --color: var(--contrast-hover);
+//   }
+// }
+
+// Button [disabled]
+// Links without href are disabled by default
+:where(button, [type="submit"], [type="button"], [type="reset"], [role="button"])[disabled],
+:where(fieldset[disabled])
+  :is(button, [type="submit"], [type="button"], [type="reset"], [role="button"]),
+a[role="button"]:not([href]) {
+  opacity: 0.5;
+  pointer-events: none;
+}

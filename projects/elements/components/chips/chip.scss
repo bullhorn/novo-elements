@@ -29,11 +29,11 @@ $chip-height: (
   "xl": 3.6rem,
 );
 $chip-spacing: (
-  "xs": $spacing-xs,
-  "sm": $spacing-sm,
-  "md": $spacing-md,
-  "lg": $spacing-lg,
-  "xl": $spacing-xl,
+  "xs": var(--spacing-xs),
+  "sm": var(--spacing-sm),
+  "md": var(--spacing-md),
+  "lg": var(--spacing-lg),
+  "xl": var(--spacing-xl),
 );
 
 .novo-chip {
@@ -48,7 +48,7 @@ $chip-spacing: (
 
 .novo-chip {
   @include novo-body-text();
-  background: var(--background-main);
+  background: var(--color-background-secondary);
   box-sizing: border-box;
   border: 1px solid transparent;
   transition: all 200ms ease-in-out;
@@ -57,12 +57,12 @@ $chip-spacing: (
   cursor: default;
   gap: 1rem;
   border-radius: 0.4rem;
-  padding: $spacing-none $spacing-md;
+  padding: var(--spacing-none) var(--spacing-md);
   min-height: 2.4rem;
   height: 1px;
 
   &.novo-chip-selectable {
-    color: var(--selection);
+    color: var(--color-selection);
     // Overlay used to darken the chip on hover and focus.
     &::after {
       top: 0;
@@ -80,7 +80,7 @@ $chip-spacing: (
 
     &:focus {
       outline: none;
-      border: 1px solid var(--selection);
+      border: 1px solid var(--color-selection);
 
       &::after {
         opacity: 0.16;
@@ -88,12 +88,12 @@ $chip-spacing: (
     }
 
     &:hover {
-      border: 1px solid var(--selection);
+      border: 1px solid var(--color-selection);
     }
   }
 
   &.novo-chip-disabled {
-    color: var(--text-main);
+    color: var(--color-text);
     opacity: 0.7;
     pointer-events: none;
     &::after {
@@ -158,11 +158,11 @@ $chip-spacing: (
   }
 
   .novo-chip-remove {
-    color: $light;
+    color: var(--color-empty);
   }
   &:not(.novo-chip-disabled) {
     .novo-chip-remove:hover {
-      color: darken($light, 30%);
+      color: var(--color-empty-tint);
     }
   }
 
@@ -173,7 +173,7 @@ $chip-spacing: (
     &.novo-size-#{$size} {
       font-size: map-get($chip-fontsize, $size);
       border-radius: 0.4rem;
-      padding: $spacing-none $spacing;
+      padding: var(--spacing-none) $spacing;
       min-height: $height;
       gap: $spacing;
 

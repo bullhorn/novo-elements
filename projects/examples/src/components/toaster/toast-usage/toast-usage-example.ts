@@ -9,8 +9,8 @@ import { Component } from '@angular/core';
   styleUrls: ['toast-usage-example.css'],
 })
 export class ToastUsageExample {
-  public themes: Array<string> = ['default', 'success', 'info', 'warning', 'danger'];
-  public icons: Array<string> = ['add', 'check', 'clock', 'lock', 'caution'];
+  public themes: Array<string> = ['default', 'success', 'info', 'warning', 'error'];
+  public icons: Array<string> = ['check-circle-filled', 'add', 'check', 'clock', 'lock', 'caution'];
   public toast: any = {
     theme: 'danger',
     icon: 'caution',

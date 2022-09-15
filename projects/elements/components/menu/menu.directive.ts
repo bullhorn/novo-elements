@@ -10,12 +10,12 @@ import {
   OnInit,
   Optional,
 } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { PARENT_MENU } from './menu.tokens';
-import { NovoMenuService } from './menu.service';
-import { MenuComponent } from './menu.component';
-import { MenuContentComponent } from './menu-content.component';
 import { BooleanInput } from 'novo-elements/utils';
+import { Subscription } from 'rxjs';
+import { MenuContentComponent } from './menu-content.component';
+import { MenuComponent } from './menu.component';
+import { NovoMenuService } from './menu.service';
+import { PARENT_MENU } from './menu.tokens';
 
 @Directive({
   selector: '[menu]',
@@ -26,7 +26,7 @@ export class MenuDirective implements OnInit, OnDestroy {
   @Input() public menuContent: MenuContentComponent;
   @Input() @BooleanInput() public waitWhenOpen: boolean = false;
   @Input() @BooleanInput() public capture: boolean = false;
-  @Input() @BooleanInput() public anchor: boolean = false;
+  @Input() @BooleanInput() public anchor: boolean = true;
   @Input() public trigger: 'click' | 'contextmenu' | 'mouseenter' = 'click';
 
   isSubMenu: boolean = false;

@@ -1,0 +1,15 @@
+@import "~novo-design-tokens/scss";
+
+:host {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md) var(--spacing-md) 0 var(--spacing-md);
+
+  .novo-card-header-text {
+    flex: 1 1 0px;
+  }
+
+  @include theme-backgrounds();
+}

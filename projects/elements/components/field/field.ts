@@ -64,6 +64,7 @@ export const NOVO_FORM_FIELD = new InjectionToken<NovoFieldElement>('NovoFormFie
     '[class.novo-field-has-label]': '_hasLabel()',
     '[class.novo-field-no-label]': '!_hasLabel()',
     // '[class.novo-field-hide-placeholder]': '_hideControlPlaceholder()',
+    '[class.novo-field-required]': '_control.required',
     '[class.novo-field-disabled]': '_control.disabled',
     '[class.novo-field-autofilled]': '_control.autofilled',
     '[class.novo-focused]': '_control.focused',

@@ -9,11 +9,11 @@
     cursor: pointer;
     border-radius: 0.4rem;
     &.selected {
-      background-color: $positive;
+      background-color: var(--color-selection);
       color: #fff;
     }
     &:hover {
-      background-color: $positive;
+      background-color: var(--color-selection);
       color: #fff;
     }
   }

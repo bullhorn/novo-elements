@@ -253,7 +253,7 @@ import { DataTableState } from './state/data-table-state.service';
     </ng-template>
     <ng-template novoTemplate="dropdownCellTemplate" let-row let-col="col">
       <novo-dropdown parentScrollSelector=".novo-data-table-container" containerClass="novo-data-table-dropdown">
-        <novo-button type="button" theme="dialogue" [icon]="col.action.icon" inverse>{{ col.label }}</novo-button>
+        <novo-button type="button" theme="dialogue" [icon]="col.action.icon">{{ col.label }}</novo-button>
         <novo-optgroup>
           <novo-option
             *ngFor="let option of col?.action?.options"

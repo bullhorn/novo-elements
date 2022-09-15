@@ -1,0 +1,10 @@
+@import "~novo-design-tokens/scss";
+@import "variables";
+
+:host {
+  div.novo-form-row,
+  div.novo-control-group-control,
+  td.novo-form-row {
+    width: 100%;
+  }
+}

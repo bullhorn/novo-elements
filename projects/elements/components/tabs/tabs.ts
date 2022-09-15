@@ -21,6 +21,9 @@ import { BooleanInput } from 'novo-elements/utils';
   selector: 'novo-nav',
   styleUrls: ['./tab-nav.scss'],
   template: '<ng-content></ng-content>',
+  host: {
+    '[attr.role]': 'tablist',
+  },
 })
 export class NovoNavElement implements AfterContentChecked {
   @Input()
@@ -309,6 +312,7 @@ export class NovoNavOutletElement {
   selector: 'novo-nav-content',
   styleUrls: ['./tab-content.scss'],
   host: {
+    '[attr.role]': 'tabpanel',
     '[class.active]': 'active',
   },
   template: '<ng-content></ng-content>',

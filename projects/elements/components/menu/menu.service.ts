@@ -40,7 +40,7 @@ export interface ExecuteMenuEvent {
 }
 export type CloseMenuEvent = ExecuteMenuEvent | CancelMenuEvent;
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class NovoMenuService {
   public isDestroyingLeafMenu = false;
 
@@ -117,7 +117,8 @@ export class NovoMenuService {
         panelClass: 'novo-menu',
         scrollStrategy: this.scrollStrategy.close(),
       });
-      // this.destroySubMenus(parentMenu);
+      this.getLastAttachedOverlay().menu.isLeaf = false;
+      this.destroySubMenus(this.getLastAttachedOverlay().menu);
       this.overlays = this.overlays.concat(newOverlay);
       this.attachMenu(newOverlay, context);
     }
@@ -199,11 +200,12 @@ export class NovoMenuService {
   }
 
   public destroyLeafMenu({ exceptRootMenu, event }: CloseLeafMenuEvent = {}): void {
+    console.log('destroyLeafMenu');
     if (this.isDestroyingLeafMenu) {
       return;
     }
     this.isDestroyingLeafMenu = true;
-
+    console.log('continue');
     setTimeout(() => {
       const overlay = this.getLastAttachedOverlay();
       if (this.overlays.length > 1 && overlay) {

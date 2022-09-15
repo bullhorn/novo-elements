@@ -1,50 +1,41 @@
-@import "../../../styles/variables.scss";
+@import "~novo-design-tokens/scss";
 
 :host {
   // Secondary Themed Button
-  &[theme="secondary"] {
-    @include theme-text-colors("color");
-    @include theme-borders("color");
+  &.novo-button-outlined {
+    --button-color-text: var(--button-outlined-color-text);
+    --button-color-background: var(--button-outlined-color-background);
+    --button-color-border: var(--button-outlined-color-border);
 
-    text-align: left;
-    align-items: center;
-    background: $white;
-    color: $positive;
-    border: 1px solid $positive;
-    padding: 0 calc(#{$spacing-md} - 1px);
+    &:hover,
+    &:focus {
+      --button-shadow: var(--button-outlined-shadow-hover);
+    }
+    &:active {
+      --button-shadow: var(--button-outlined-shadow-active);
+    }
+
+    @include color-variants(
+      button-outlined,
+      (
+        color-text: default,
+        color-border: default,
+        color-hover: overlay,
+        color-active: overlay,
+      )
+    );
+
+    &[inverse] {
+      --button-outlined-color-background: var(--button-color-overlay);
+      --button-outlined-color-text: var(--button-color-contrast);
+      --button-outlined-border-color: var(--color-background);
+    }
 
     i.loading {
       margin-left: 0.8rem;
       svg {
         .spinner {
-          fill: $positive;
-        }
-      }
-    }
-    &:hover,
-    &:focus {
-      box-shadow: $shadow-2, $shadow-1;
-      background: $white;
-    }
-    &:active {
-      box-shadow: $shadow-1;
-    }
-    &[inverse] {
-      background: rgba(0, 0, 0, 0.25);
-      color: #fff;
-      border: 1px solid #fff;
-      &:hover,
-      &:focus {
-        background: rgba(0, 0, 0, 0.35);
-      }
-      &:active {
-        background: rgba(0, 0, 0, 0.45);
-      }
-      i.loading {
-        svg {
-          .spinner {
-            fill: $white;
-          }
+          fill: var(--color-selection);
         }
       }
     }

@@ -87,6 +87,7 @@ export class NovoToastService {
     toast.hideDelay = OPTIONS.hideDelay || this.defaults.hideDelay;
     toast.link = OPTIONS.link || '';
     toast.isCloseable = OPTIONS.isCloseable || false;
+    toast.theme = OPTIONS.theme || this.defaults.theme;
 
     const CUSTOM_CLASS = OPTIONS.customClass || '';
     const ALERT_STYLE = OPTIONS.accent ? `novo-accent-${OPTIONS.accent}` : OPTIONS.theme || this.defaults.theme;
@@ -95,7 +96,8 @@ export class NovoToastService {
 
     toast.iconClass = `bhi-${ALERT_ICON}`;
     toast.launched = true;
-    toast.alertTheme = `${ALERT_STYLE} ${ALERT_POSITION} ${CUSTOM_CLASS} toast-container launched`;
+    toast.appearance = ALERT_POSITION.startsWith('growl') ? 'growl' : 'banner';
+    toast.alertTheme = `${ALERT_STYLE} ${ALERT_POSITION} ${CUSTOM_CLASS}`;
   }
 
   show(toast) {

@@ -1,42 +1,27 @@
-@import "../../../styles/variables.scss";
+@import "~novo-design-tokens/scss";
 
 :host {
   // Primary theme
-  &[theme="primary"] {
-    @include theme-backgrounds("color");
-    background: $positive;
-    color: #fff;
-    text-align: left;
+  &.novo-button-primary {
+    --button-color-text: var(--button-primary-color-text);
+    --button-color-background: var(--button-primary-color-background);
+    --button-color-border: var(--button-primary-color-border);
 
     &:hover,
     &:focus {
-      // background: lighten($positive, 10%);
-      box-shadow: $shadow-2, $shadow-1;
-      filter: brightness(1.15);
+      --button-shadow: var(--button-primary-shadow-hover);
     }
     &:active {
-      filter: brightness(0.85);
-      box-shadow: $shadow-1;
+      --button-shadow: var(--button-primary-shadow-active);
     }
 
-    &[color="white"] {
-      background: $white;
-      color: $ocean;
-      &:hover,
-      &:focus {
-        background: $background;
-      }
-      &:active {
-        background: darken($background, 5%);
-      }
-      i {
-        background: rgba(0, 0, 0, 0.05);
-      }
-    }
-    &[size="large"] {
-      i {
-        margin-left: 3px;
-      }
-    }
+    @include color-variants(
+      button-primary,
+      (
+        color-text: contrast,
+        color-background: default,
+        color-border: transparent,
+      )
+    );
   }
 }

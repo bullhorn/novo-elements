@@ -9,15 +9,16 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { DataTableState } from '../state/data-table-state.service';
-import { IDataTablePaginationEvent } from '../interfaces';
 import { NovoLabelService } from 'novo-elements/services';
+import { Subscription } from 'rxjs';
+import { IDataTablePaginationEvent } from '../interfaces';
+import { DataTableState } from '../state/data-table-state.service';
 
 const MAX_PAGES_DISPLAYED = 5;
 
 @Component({
   selector: 'novo-data-table-pagination',
+  styleUrls: ['./data-table-pagination.component.scss'],
   template: `
     <ng-container *ngIf="theme === 'basic' || theme === 'basic-wide'">
       <div class="novo-data-table-pagination-size">

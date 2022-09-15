@@ -1,5 +1,6 @@
 {
   "lib": {
-    "entryFile": "index.ts"
+    "entryFile": "index.ts",
+    "styleIncludePaths": ["../../styles"]
   }
 }

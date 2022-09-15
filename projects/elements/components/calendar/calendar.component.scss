@@ -9,7 +9,7 @@
 
   .month-view + .month-view {
     border-collapse: unset;
-    border-left: 1px solid $light;
+    border-left: 1px solid var(--color-border);
     margin-left: 0.5rem;
     padding-left: 0.5rem;
   }
@@ -29,8 +29,8 @@
   display: block;
   width: 100%;
   text-align: center;
-  background: var(--background-bright);
-  color: var(--text-main);
+  background: var(--color-background);
+  color: var(--color-text);
   position: relative;
   user-select: none;
 
@@ -54,7 +54,7 @@
     justify-content: space-between;
     align-items: center;
     cursor: default;
-    border-bottom: 1px solid var(--border);
+    border-bottom: var(--border-main);
     .previous {
       width: 30px;
       height: 15px;
@@ -71,7 +71,7 @@
         width: 0;
       }
       &:hover:after {
-        border-right: 4px solid $positive;
+        border-right: 4px solid var(--color-selection);
         cursor: pointer;
       }
     }
@@ -79,13 +79,13 @@
       flex: 1;
       display: inline-block;
       vertical-align: middle;
-      color: $positive;
+      color: var(--color-selection);
       font-weight: 600;
       .month {
         border-radius: 2px;
         padding: 3px 8px;
         &:hover {
-          background: $positive;
+          background: var(--color-selection);
           color: #fff;
           cursor: pointer;
         }
@@ -94,7 +94,7 @@
         border-radius: 2px;
         padding: 3px 8px;
         &:hover {
-          background: $positive;
+          background: var(--color-selection);
           color: #fff;
           cursor: pointer;
         }
@@ -117,7 +117,7 @@
       }
       &:hover:before {
         opacity: 1;
-        border-left: 4px solid $positive;
+        border-left: 4px solid var(--color-selection);
         cursor: pointer;
       }
     }

@@ -18,16 +18,16 @@ $novo-stepper-line-gap: 8px !default;
   align-items: center;
   justify-content: center;
   margin-bottom: 1em;
-  background: $background;
+  background: var(--color-background);
 }
 
 .novo-stepper-horizontal-line {
-  border-bottom: $novo-stepper-line-width solid $light;
+  border-bottom: $novo-stepper-line-width solid var(--color-border);
   flex: auto;
   min-width: 0px;
   height: $novo-horizontal-stepper-header-height;
   &.complete {
-    border-bottom: $novo-stepper-line-width solid $positive;
+    border-bottom: $novo-stepper-line-width solid var(--color-selection);
   }
 }
 
@@ -57,7 +57,7 @@ $novo-stepper-line-gap: 8px !default;
         display: block;
         width: calc(50% - 8px);
         margin-right: 8px;
-        border-bottom: 1px solid $light;
+        border-bottom: 1px solid var(--color-border);
       }
       &:after {
         content: "";
@@ -65,19 +65,19 @@ $novo-stepper-line-gap: 8px !default;
         width: calc(50% - 8px);
         margin-left: calc(50% + 8px);
         margin-top: -1px;
-        border-top: 1px solid $light;
+        border-top: 1px solid var(--color-border);
       }
       &.edit {
         &:before {
-          border-bottom: 1px solid $positive;
+          border-bottom: 1px solid var(--color-selection);
         }
       }
       &.done {
         &:before {
-          border-bottom: 1px solid $positive;
+          border-bottom: 1px solid var(--color-selection);
         }
         &:after {
-          border-top: 1px solid $positive;
+          border-top: 1px solid var(--color-selection);
         }
       }
     }
@@ -86,7 +86,7 @@ $novo-stepper-line-gap: 8px !default;
       &:before {
         content: "";
         display: block;
-        background: $white;
+        background: var(--color-background);
         border-radius: 50%;
         position: absolute;
         z-index: 0;
@@ -154,7 +154,7 @@ $novo-stepper-line-gap: 8px !default;
     z-index: z(below);
     border-left-width: $novo-stepper-line-width;
     border-left-style: solid;
-    border-left-color: $light;
+    border-left-color: var(--color-border);
 
     [dir="rtl"] & {
       left: auto;
@@ -163,15 +163,15 @@ $novo-stepper-line-gap: 8px !default;
   }
   &.edit {
     &:before {
-      border-left-color: 1px solid $positive;
+      border-left-color: 1px solid var(--color-selection);
     }
   }
   &.done {
     &:before {
-      border-left-color: 1px solid $positive;
+      border-left-color: 1px solid var(--color-selection);
     }
     &:after {
-      border-left-color: 1px solid $positive;
+      border-left-color: 1px solid var(--color-selection);
     }
   }
 }

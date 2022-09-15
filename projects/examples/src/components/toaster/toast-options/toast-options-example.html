@@ -6,6 +6,7 @@
     [icon]="icon.value"
     [title]="title.value ? 'Save Failed' : null"
     [margin]="margin.value ? '1rem' : 0"
+    [isCloseable]="closable.value"
     message="Oops! Looks like you're missing some required fields"></novo-toast>
 </div>
 <novo-row gap="3rem" align="flex-start">
@@ -30,14 +31,14 @@
       <novo-radio name="color" value="info">info</novo-radio>
       <novo-radio name="color" value="success">success</novo-radio>
       <novo-radio name="color" value="warning">warning</novo-radio>
-      <novo-radio name="color" value="danger">danger</novo-radio>
+      <novo-radio name="color" value="error">error</novo-radio>
     </novo-radio-group>
   </novo-field>
   <novo-field>
     <novo-label>Icon</novo-label>
     <novo-radio-group #icon appearance="vertical" value="bell">
       <novo-radio name="icon" [value]="null">none</novo-radio>
-      <novo-radio name="icon" value="check">check</novo-radio>
+      <novo-radio name="icon" value="check-circle-filled">check</novo-radio>
       <novo-radio name="icon" value="bell">bell</novo-radio>
       <novo-radio name="icon" value="caution">caution</novo-radio>
     </novo-radio-group>
@@ -47,6 +48,13 @@
     <novo-radio-group #title appearance="vertical" [value]="true">
       <novo-radio name="title" [value]="true">Show</novo-radio>
       <novo-radio name="title" [value]="false">Hide</novo-radio>
+    </novo-radio-group>
+  </novo-field>
+  <novo-field>
+    <novo-label>Closeable</novo-label>
+    <novo-radio-group #closable appearance="vertical" [value]="true">
+      <novo-radio name="closable" [value]="true">Yes</novo-radio>
+      <novo-radio name="closable" [value]="false">No</novo-radio>
     </novo-radio-group>
   </novo-field>
   <novo-field>

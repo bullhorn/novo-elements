@@ -2,7 +2,6 @@
 // Global
 // --------------------------------------------------
 @import "~novo-design-tokens/scss";
-@import "novo-design-tokens/css/variables.min.css";
 @import "./styles/variables";
 
 // --------------------------------------------------
@@ -23,33 +22,33 @@
 
 .bgc-main,
 .novo-background-main {
-  background-color: var(--background-main, $color-bright);
+  background-color: var(--color-background-secondary);
 }
 .bgc-alt,
 .bgc-bright,
 .novo-background-bright {
-  background-color: var(--background-bright, $color-white);
+  background-color: var(--color-background);
 }
 .bgc-dark,
 .novo-background-dark {
-  background-color: var(--background-dark, $color-white);
+  background-color: var(--background-dark);
 }
 .bgc-muted,
 .novo-background-muted {
-  background-color: var(--background-muted, $color-white);
+  background-color: var(--background-muted);
 }
 .bgc-body,
 .novo-background-body {
-  background-color: var(--background-body, $color-silver);
+  background-color: var(--color-background);
 }
 .txc-main {
-  color: var(--text-main, $color-charcoal);
+  color: var(--color-text);
 }
 .txc-muted {
-  color: var(--text-muted, $color-neutral);
+  color: var(--color-text-muted);
 }
 .txc-disabled {
-  color: var(--text-disabled, $color-slate);
+  color: var(--color-text-disabled);
 }
 
 .novo-visibility-hidden {

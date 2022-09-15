@@ -1,12 +1,12 @@
 import { ActiveDescendantKeyManager } from '@angular/cdk/a11y';
 import { OverlayRef } from '@angular/cdk/overlay';
 import { AfterViewInit, Component, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { ILinkConfig } from './menu.types';
-import { CloseLeafMenuEvent, IMenuClickEvent } from './menu.service';
-import { MenuItemDirective } from './menu-item.directive';
 import { NovoOption } from 'novo-elements/common';
 import { Key } from 'novo-elements/utils';
+import { Subscription } from 'rxjs';
+import { MenuItemDirective } from './menu-item.directive';
+import { CloseLeafMenuEvent, IMenuClickEvent } from './menu.service';
+import { ILinkConfig } from './menu.types';
 
 @Component({
   selector: 'menu-content',
@@ -141,6 +141,7 @@ export class MenuContentComponent implements OnInit, OnDestroy, AfterViewInit {
 
   @HostListener('mouseleave', ['$event'])
   public onMouseLeave(event: MouseEvent): void {
+    console.log('left', this.isLeaf);
     if (this.isLeaf) {
       this.closeLeafMenu.emit({ exceptRootMenu: true, event });
     }

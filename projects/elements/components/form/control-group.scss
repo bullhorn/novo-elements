@@ -4,7 +4,7 @@
 :host {
   display: block;
   margin-bottom: 0.5em;
-  background: var(--background-bright, $color-white);
+  background: var(--color-background);
 
   &.novo-control-group-appearance-card {
     border-radius: 0.4rem;
@@ -81,9 +81,9 @@
         }
       }
       .novo-control-group-labels {
-        background: var(--background-main, $color-light);
-        border-top: 1px solid var(--border, $color-grey);
-        border-bottom: 1px solid var(--border, $color-grey);
+        background: var(--color-background-secondary);
+        border-top: var(--border-main);
+        border-bottom: var(--border-main);
         align-items: center;
         padding: 0.4em 0;
         & > .novo-control-group-control-label {
@@ -101,7 +101,7 @@
       .novo-control-group-row {
         display: flex;
         align-items: center;
-        border-bottom: 1px solid lighten($dark, 45%);
+        border-bottom: 1px solid var(--color-active);
         padding: 0.4em;
         &:last-of-type {
           border-bottom: none;
@@ -118,7 +118,7 @@
         box-sizing: border-box;
         flex: 1;
         > span {
-          color: var(--text-muted);
+          color: var(--color-text-muted);
           font-size: 1rem;
           font-weight: 500;
           text-transform: uppercase;
@@ -171,7 +171,7 @@
         min-width: 3rem;
         margin-left: 1rem;
         i.bhi-delete-o {
-          color: $negative;
+          color: var(--color-error);
           font-size: 1.2em;
         }
       }

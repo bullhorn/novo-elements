@@ -5,16 +5,16 @@
   width: min-content;
   overflow: hidden;
   border-radius: 4px;
-  background-color: var(--background-bright);
+  background-color: var(--color-background);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15), 0 2px 7px rgba(0, 0, 0, 0.1);
   z-index: z(overlay);
   .digital {
-    background-color: var(--selection);
+    background-color: var(--color-selection);
     display: flex;
     justify-content: center;
     &.inline {
-      background: var(--background-bright);
-      border-bottom: 1px solid var(--border);
+      background: var(--color-background);
+      border-bottom: var(--border-main);
       &.military {
         border-bottom: none;
       }
@@ -24,7 +24,7 @@
           display: flex;
           flex: 1;
           .digital--period {
-            color: var(--selection);
+            color: var(--color-selection);
             cursor: pointer;
             font-size: 1em;
             opacity: 0.6;
@@ -32,7 +32,7 @@
             flex: 1;
             &.active {
               opacity: 1;
-              background-color: var(--selection);
+              background-color: var(--color-selection);
               color: var(--text-selection);
             }
           }
@@ -100,12 +100,12 @@
       }
       &:focus,
       &:hover {
-        background: var(--selection);
+        background: var(--color-selection);
         color: var(--text-selection);
         filter: brightness(1.25);
       }
       &.active {
-        background: var(--selection);
+        background: var(--color-selection);
         color: var(--text-selection);
         font-weight: 500;
       }
@@ -168,8 +168,8 @@
       margin-top: -1.5rem;
       border-radius: 50%;
       position: absolute;
-      border: 3px solid var(--selection);
-      background: var(--selection);
+      border: 3px solid var(--color-selection);
+      background: var(--color-selection);
     }
     &.hour-12 {
       transform: rotate(-90deg);
@@ -240,8 +240,8 @@
       width: 2.4rem;
       right: 4.2rem;
       margin-top: -1.2rem;
-      border: 2px solid var(--selection);
-      background: var(--selection);
+      border: 2px solid var(--color-selection);
+      background: var(--color-selection);
       transition: all 160ms ease-in-out;
       &.between {
         height: 1px;
@@ -277,7 +277,7 @@
     margin-left: 1px;
     display: block;
     position: absolute;
-    background-color: var(--background-bright);
+    background-color: var(--color-background);
   }
   .analog--hour,
   .analog--minute {

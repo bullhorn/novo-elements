@@ -1,4 +1,87 @@
-<h4>Basic Field Usage</h4>
+<novo-stack>
+  <novo-field [layout]="layout.value" [appearance]="appearance.value">
+    <novo-label>{{label.value}}</novo-label>
+    <input novoInput type="number" class="example-right-align" [disabled]="disabled.value"
+      [required]="required.value" />
+    <span novoPrefix *ngIf="prefix.value?.length">{{prefix.value}}</span>
+    <span novoSuffix *ngIf="suffix.value=='text'">.00</span>
+    <novo-picker-toggle novoSuffix icon="calendar" *ngIf="suffix.value=='date'">
+      <novo-date-picker #daterangepicker mode="range" numberOfMonths="2"></novo-date-picker>
+    </novo-picker-toggle>
+    <novo-hint>Enter some money</novo-hint>
+  </novo-field>
+</novo-stack>
+
+<novo-row align="start" bg="secondary">
+  <novo-fields layout="vertical">
+    <novo-field>
+      <novo-label>Layout</novo-label>
+      <novo-radio-group #layout value="vertical">
+        <novo-radio name="layout" value="vertical">vertical</novo-radio>
+        <novo-radio name="layout" value="horizontal">horizontal</novo-radio>
+      </novo-radio-group>
+    </novo-field>
+
+    <novo-field>
+      <novo-label>Required</novo-label>
+      <novo-radio-group #required [value]="false">
+        <novo-radio name="required" [value]="true">Yes</novo-radio>
+        <novo-radio name="required" [value]="false">No</novo-radio>
+      </novo-radio-group>
+    </novo-field>
+
+    <novo-field>
+      <novo-label>Disabled</novo-label>
+      <novo-radio-group #disabled [value]="false">
+        <novo-radio name="disabled" [value]="true">Yes</novo-radio>
+        <novo-radio name="disabled" [value]="false">No</novo-radio>
+      </novo-radio-group>
+    </novo-field>
+
+    <novo-field>
+      <novo-label>Appearance</novo-label>
+      <novo-radio-group #appearance value="standard" appearance="vertical">
+        <novo-radio value="standard">Standard</novo-radio>
+        <novo-radio value="fill">Filled</novo-radio>
+        <novo-radio value="outline">Outlined</novo-radio>
+        <novo-radio value="list">List</novo-radio>
+      </novo-radio-group>
+    </novo-field>
+  </novo-fields>
+
+  <novo-fields layout="vertical">
+
+
+    <novo-field>
+      <novo-label>Label</novo-label>
+      <input #label novoInput type="text" value="Field Label" />
+    </novo-field>
+
+    <novo-field>
+      <novo-label>Prefix</novo-label>
+      <input #prefix novoInput type="text" value="$&nbsp;" />
+    </novo-field>
+
+    <novo-field>
+      <novo-label>Suffix</novo-label>
+      <novo-radio-group #suffix appearance="vertical" value="none">
+        <novo-radio name="suffix" value="none">none</novo-radio>
+        <novo-radio name="suffix" value="text">text</novo-radio>
+        <novo-radio name="suffix" value="date">picker</novo-radio>
+      </novo-radio-group>
+    </novo-field>
+
+
+  </novo-fields>
+
+</novo-row>
+
+
+
+
+<!-- 
+
+
 
 <novo-field>
   <novo-label>Favorite food</novo-label>
@@ -73,4 +156,4 @@
   </novo-select>
   <novo-icon novoPrefix>previous</novo-icon>
   <novo-icon novoSuffix>next</novo-icon>
-</novo-field>
+</novo-field> -->

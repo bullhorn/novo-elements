@@ -1,5 +1,8 @@
 <div class="novo-field-label">
   <ng-content select="novo-label"></ng-content>
+  <span *ngIf="_control.required"
+    aria-hidden="true"
+    class="novo-field-required-marker">*</span>
 </div>
 <div class="novo-field-input" [style.width]="width" #inputContainer>
   <div class="novo-field-prefix">

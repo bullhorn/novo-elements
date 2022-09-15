@@ -1,5 +1,5 @@
 <novo-layout-container>
-  <novo-sidenav #sidenav class="main-nav" theme="navigation">
+  <novo-sidenav #sidenav class="main-nav" data-theme="novo-dark">
     <novo-stack class="logo" px="1rem" align="center">
       <div class="svg">
         <svg routerLink="Home"
@@ -52,8 +52,22 @@
       <a href="https://github.com/bullhorn/novo-elements"
         target="_blank"
         class="fork-me">Fork Me On Github</a>
+
       <novo-flex>
-        <novo-switch [icons]="['day', 'night']" (onChange)="toggleDarkMode()"></novo-switch>
+        <novo-field>
+          <novo-label>Theme</novo-label>
+          <novo-radio-group [(ngModel)]="currentTheme" (change)="toggleTheme()">
+            <novo-radio value="default">Default</novo-radio>
+            <novo-radio value="novo">Novo</novo-radio>
+            <novo-radio value="talent">Talent</novo-radio>
+          </novo-radio-group>
+        </novo-field>
+      </novo-flex>
+      <novo-flex>
+        <novo-switch [icons]="['day', 'night']" [(ngModel)]="isDarkMode" (onChange)="toggleTheme()">
+          <novo-label novoPrefix>Light</novo-label>
+          <novo-label novoSuffix>Dark</novo-label>
+        </novo-switch>
       </novo-flex>
     </novo-stack>
     <nav>

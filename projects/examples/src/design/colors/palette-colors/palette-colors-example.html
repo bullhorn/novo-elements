@@ -1,0 +1,8 @@
+<div class="palette-grid">
+  <div *ngFor="let color of colors" class="palette-column">
+    <div class="palette-color palette-{{color}}" (click)="copyLink(color)">{{color}}</div>
+    <ng-container *ngFor="let swatch of swatches">
+      <div class="palette-color palette-{{color}}-{{swatch}}" (click)="copyLink(color, swatch)">{{swatch}}</div>
+    </ng-container>
+  </div>
+</div>

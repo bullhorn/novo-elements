@@ -18,7 +18,7 @@ import { NovoDataTableRef, NOVO_DATA_TABLE_REF } from '../data-table.token';
   selector: 'novo-data-table-checkbox-cell',
   template: `
     <div class="data-table-checkbox" (click)="onClick()" [tooltip]="getTooltip()" tooltipPosition="right">
-      <input type="checkbox" [checked]="checked" />
+      <input type="checkbox" [checked]="checked" hidden />
       <label>
         <i [class.bhi-checkbox-disabled]="isAtLimit" [class.bhi-checkbox-empty]="!checked" [class.bhi-checkbox-filled]="checked"></i>
       </label>

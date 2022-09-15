@@ -2,11 +2,16 @@
 @import "../../common/typography/text.mixins";
 
 :host {
+  // --card-background: var( --color-background);
+  // --card-shadow: var(--shadow-low);
+  // --card-border-radius: var(--border-radius);
+
+  background-color: var(--card-color-background);
+  box-shadow: var(--card-shadow);
+  border-radius: var(--card-border-radius);
+  border: 1px solid var(--card-color-border);
   display: flex;
   flex-flow: column;
-  background-color: var(--background-bright);
-  box-shadow: var(--shadow-card);
-  border-radius: 0.4em;
   position: relative;
   overflow-x: hidden;
 
@@ -20,14 +25,14 @@
     left: 0;
     right: 0;
     bottom: 0;
-    border-radius: 0.4em;
-    background-color: var(--background-bright);
+    background-color: var(--card-color-background);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     z-index: z("default");
   }
+
   header {
     display: flex;
     flex-flow: row nowrap;
@@ -40,7 +45,7 @@
       min-width: 0;
       flex: 1;
       i.bhi-move {
-        color: var(--text-muted);
+        color: var(--color-text-muted);
         margin-right: 0.3em;
         cursor: pointer;
       }
@@ -50,7 +55,7 @@
         font-size: var(--font-size-lg);
         font-weight: 500;
         line-height: 1.5;
-        color: var(--text-main, #3d464d);
+        color: var(--color-text);
         width: 100%;
         padding: 0;
         white-space: nowrap;
@@ -59,7 +64,7 @@
         i {
           font-size: 1.2em;
           &.bhi-info {
-            color: var(--text-muted);
+            color: var(--color-text-muted);
           }
         }
       }
@@ -75,12 +80,12 @@
     max-width: inherit;
     text-align: center;
     line-height: 25px;
-    color: var(--text-muted);
+    color: var(--color-text-muted);
     i {
       display: block;
       font-size: 24px;
       margin: 0 0 0.5em;
-      color: var(--text-muted);
+      color: var(--color-text-muted);
     }
   }
 

@@ -4,9 +4,9 @@
   color: black;
   max-width: none;
   z-index: 99;
-  background: var(--background-bright);
+  background: var(--color-background);
   &.active {
-    border: 1px solid var(--selection);
+    border: 1px solid var(--color-selection);
   }
   novo-list {
     list-style: none;
@@ -37,7 +37,7 @@
       &.active,
       &:focus,
       &:hover {
-        background-color: var(--color-pale-positive);
+        background-color: var(--color-selection-overlay);
       }
       &.disabled {
         opacity: 0.5;
@@ -53,13 +53,13 @@
     z-index: 9;
     position: absolute;
     width: 100%;
-    background-color: var(--background-bright);
+    background-color: var(--color-background);
     color: black;
   }
   .picker-error,
   .picker-loading,
   .picker-null {
     text-align: center;
-    color: var(--text-muted);
+    color: var(--color-text-muted);
   }
 }

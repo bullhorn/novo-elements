@@ -1,6 +1,5 @@
 // tslint:disable: directive-selector
 import { Directive, HostBinding, Input } from '@angular/core';
-import * as tokens from 'novo-design-tokens';
 /*
 Prop	CSS Property	Theme Field
 m, margin	margin	space
@@ -40,9 +39,9 @@ const selectors = [...marginAttrs, ...paddingAttrs];
 */
 
 export const getSpacingToken = (value: string) => {
-  if (Object.keys(tokens.spacing).includes(value)) {
-    return tokens.spacing[value];
-  }
+  const cssvar = getComputedStyle(document.documentElement).getPropertyValue(`--spacing-${value}`); // #999999
+  if (cssvar) return cssvar;
+
   // TODO: Maybe Validate Value ie.(rem, px)
   return value;
 };

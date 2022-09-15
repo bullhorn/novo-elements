@@ -1,0 +1,98 @@
+@import "../../common/typography/text.mixins";
+
+:host {
+  // Variables that change or need to be inherited
+  // --tab-color: var(--tab-text-color, var(--color-text)-text);
+  // --tab-height: var(--tab-height, var(--size-height-lg));
+  // --tab-spacing: var(--tab-spacing, var(--spacing-md));
+  // --tab-font-size: var(--tab-font-size, var(--font-size-body));
+
+  color: var(--tab-color-text);
+  background: var(--tab-color-background);
+  padding: 0 var(--tab-spacing);
+  gap: var(--tab-spacing);
+  height: var(--tab-height);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+
+  &.disabled {
+    .novo-tab-link {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    &:hover {
+      .novo-tab-link {
+        opacity: 0.5;
+      }
+    }
+  }
+  .novo-tab-link {
+    // @include novo-label-text();
+    gap: var(--tab-spacing);
+    font-size: var(--tab-font-size);
+    display: flex;
+    align-items: center;
+    text-transform: uppercase;
+    cursor: pointer;
+
+    &:focus {
+      outline: none;
+    }
+  }
+  .indicator {
+    position: absolute;
+    bottom: 0;
+    width: 0;
+    height: 3px;
+    display: block;
+    background: transparent;
+    transition: all 220ms ease-in-out;
+  }
+  &.active,
+  &.router-link-active {
+    color: var(--tab-color-active);
+    .novo-tab-link {
+      opacity: 1;
+      font-weight: 500;
+    }
+    .indicator {
+      background: var(--tab-color-active);
+      width: 100%;
+    }
+  }
+  &:hover {
+    .novo-tab-link {
+      opacity: 1;
+    }
+  }
+  &:focus {
+    outline: none;
+  }
+}
+
+:host-context(novo-nav[direction="vertical"]) {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  min-width: 12rem;
+
+  .indicator {
+    order: 1;
+    height: 100%;
+    width: 4px;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    display: block;
+  }
+  // &.active,
+  // &.router-link-active {
+  //   background: var(--tab-color-active);
+  // }
+}

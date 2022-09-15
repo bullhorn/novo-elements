@@ -15,12 +15,11 @@ import {
   Optional,
   Output,
   QueryList,
-  ViewEncapsulation,
 } from '@angular/core';
-import { fromEvent, Subject, Subscription } from 'rxjs';
-import { NovoOptionParentComponent, NOVO_OPTION_PARENT_COMPONENT } from './option-parent';
-import { NovoOptgroup, NovoOptgroupBase, NOVO_OPTGROUP } from './optgroup.component';
 import { BooleanInput, Key } from 'novo-elements/utils';
+import { fromEvent, Subject, Subscription } from 'rxjs';
+import { NovoOptgroup, NovoOptgroupBase, NOVO_OPTGROUP } from './optgroup.component';
+import { NovoOptionParentComponent, NOVO_OPTION_PARENT_COMPONENT } from './option-parent';
 
 /**
  * Option IDs need to be unique across components, so this counter exists outside of
@@ -307,7 +306,7 @@ export class NovoOptionBase implements FocusableOption, AfterViewChecked, OnDest
   inputs: ['selected', 'keepOpen', 'novoInert', 'value', 'disabled'],
   styleUrls: ['option.component.scss'],
   templateUrl: 'option.component.html',
-  encapsulation: ViewEncapsulation.None,
+  // encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NovoOption extends NovoOptionBase {

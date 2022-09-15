@@ -5,9 +5,9 @@
   &.novo-toolbar-single-row {
     display: flex;
     box-sizing: border-box;
-    background-color: var(--background-bright);
-    color: var(--text-main);
-    padding: 0 $spacing-md;
+    background-color: var(--color-background);
+    color: var(--color-text);
+    padding: 0 var(--spacing-md);
     width: 100%;
     // Flexbox Vertical Alignment
     flex-direction: row;

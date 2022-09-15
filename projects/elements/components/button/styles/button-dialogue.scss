@@ -1,29 +1,15 @@
-@import "../../../styles/variables.scss";
+@import "~novo-design-tokens/scss";
 
 :host {
   // Dialoge Themed Button
-  &[theme="dialogue"] {
-    @include theme-text-colors("color");
-    background: transparent;
-    color: $positive;
-    i {
-      line-height: 1.2;
-    }
-    &:hover,
-    &:focus {
-      background: lighten($light, 7%);
-    }
-    &:active {
-      background: lighten($light, 2%);
-    }
-    &[inverse] {
-      &:hover,
-      &:focus {
-        background: rgba(0, 0, 0, 0.2);
-      }
-      &:active {
-        background: rgba(0, 0, 0, 0.35);
-      }
-    }
+  &.novo-button-text {
+    @include color-variants(
+      button,
+      (
+        color-text: default,
+        color-hover: overlay,
+        color-active: overlay,
+      )
+    );
   }
 }

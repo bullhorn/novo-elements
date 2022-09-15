@@ -19,9 +19,9 @@
   //---
   --font-color-caption: var(--text-secondary);
   --font-color-label:  var(--text-secondary);
-  --font-color-text:  var(--text-main);
-  --font-color-title:  var(--text-main);
-  --font-color-button:  var(--text-main);
+  --font-color-text:  var(--color-text);
+  --font-color-title:  var(--color-text);
+  --font-color-button:  var(--color-text);
 
 // What are our theme colors
 // Entity, Action, Error, Warning, Info, Success,
@@ -34,15 +34,15 @@
 
 
 
-  // --action-selected: var(--selection);
+  // --action-selected: var(--color-selection);
   // --action-active: var(--color-blue-70);
   // --action-focus: var(--color-blue-80);
   // --action-hover: var(--color-blue-80);
   // --action-disabled: var(--color-gray-50);
 
   --overlay-selected: var(--color-blue-70);
-  --text-selected: var(--selection);
-  --border-selected: var(--selection);
+  --text-selected: var(--color-selection);
+  --border-selected: var(--color-selection);
 
 
   // States

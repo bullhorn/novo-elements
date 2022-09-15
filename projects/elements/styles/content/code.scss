@@ -1,9 +1,9 @@
 code,
 samp {
   font-family: var(--font-family-mono);
-  background: var(--background-main);
+  background: var(--color-background-secondary);
   color: var(--code);
-  border: 1px solid var(--border);
+  border: var(--border-main);
   border-radius: 4px;
   padding: 0 0.5ch;
   margin: 0 0.5ch;
@@ -32,9 +32,9 @@ var {
 
 kbd {
   font-family: var(--font-family-mono);
-  background: var(--background-main);
-  border: 1px solid var(--border);
+  background: var(--color-background-secondary);
+  border: var(--border-main);
   border-radius: 2px;
-  color: var(--text-main);
+  color: var(--color-text);
   padding: 2px 4px 2px 4px;
 }

@@ -6,7 +6,7 @@
   display: flex;
   flex: 1 0 auto;
   width: max-content;
-  color: $grey;
+  color: var(--color-text-muted);
   padding-bottom: 0.4rem;
   padding-top: 0.4rem;
   &.novo-field-hint-end {

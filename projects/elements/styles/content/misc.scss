@@ -6,7 +6,7 @@ video {
 
 hr {
   border: none;
-  border-top: 1px solid var(--border);
+  border-top: var(--border-main);
 }
 
 table {
@@ -29,23 +29,23 @@ th {
 }
 
 thead {
-  border-bottom: 1px solid var(--border);
+  border-bottom: var(--border-main);
 }
 
 tfoot {
-  border-top: 1px solid var(--border);
+  border-top: var(--border-main);
 }
 
 tbody tr:nth-child(even) {
-  background-color: var(--background-bright);
+  background-color: var(--color-background);
 }
 
 tbody tr:nth-child(even) button {
-  background-color: var(--background-bright);
+  background-color: var(--color-background);
 }
 
 tbody tr:nth-child(even) button:hover {
-  background-color: var(--background-body);
+  background-color: var(--color-background);
 }
 
 ::-webkit-scrollbar {
@@ -54,13 +54,13 @@ tbody tr:nth-child(even) button:hover {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--background-main);
+  background: var(--color-background-secondary);
   // border-radius: 6px;
 }
 
 ::-webkit-scrollbar-thumb {
   border-radius: 6px;
-  border: 2px solid var(--background-main);
+  border: 2px solid var(--color-background-secondary);
 }
 
 ::-webkit-scrollbar-thumb:not(:hover) {
@@ -72,7 +72,7 @@ tbody tr:nth-child(even) button:hover {
 }
 
 ::selection {
-  background-color: var(--selection);
+  background-color: var(--color-selection);
   color: var(--text-selection);
 }
 
@@ -80,7 +80,7 @@ details {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  background-color: var(--background-bright);
+  background-color: var(--color-background);
   padding: 10px 10px 0;
   margin: 1em 0;
   border-radius: 6px;
@@ -101,7 +101,7 @@ details[open] summary {
 
 summary {
   display: list-item;
-  background-color: var(--background-main);
+  background-color: var(--color-background-secondary);
   padding: 10px;
   margin: -10px -10px 0;
   cursor: pointer;
@@ -118,20 +118,20 @@ details > :not(summary) {
 }
 
 summary::-webkit-details-marker {
-  color: var(--text-main);
+  color: var(--color-text);
 }
 
 dialog {
-  background-color: var(--background-bright);
-  color: var(--text-main);
+  background-color: var(--color-background);
+  color: var(--color-text);
   border: none;
   border-radius: 6px;
-  border-color: var(--border);
+  border-color: var(--color-border);
   padding: 10px 30px;
 }
 
 dialog > header:first-child {
-  background-color: var(--background-main);
+  background-color: var(--color-background-secondary);
   border-radius: 6px 6px 0 0;
   margin: -10px -30px 10px;
   padding: 10px;
@@ -144,9 +144,9 @@ dialog::backdrop {
 }
 
 footer {
-  border-top: 1px solid var(--border);
+  border-top: var(--border-main);
   padding-top: 10px;
-  color: var(--text-muted);
+  color: var(--color-text-muted);
 }
 
 body > footer {

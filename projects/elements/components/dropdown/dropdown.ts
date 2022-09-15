@@ -65,7 +65,7 @@ const NovoDropdowMixins: HasOverlayCtor & CanDisableCtor & HasTabIndexCtor & typ
   template: `
     <ng-content select="button,novo-button,[dropdownTrigger]" #trigger></ng-content>
     <novo-overlay-template [parent]="element" [width]="width" [position]="side" [scrollStrategy]="scrollStrategy">
-      <div #panel class="dropdown-container {{ containerClass }}" [style.height.px]="height" [class.has-height]="!!height">
+      <div #panel role="listbox" class="dropdown-container {{ containerClass }}" [style.height.px]="height" [class.has-height]="!!height">
         <ng-content></ng-content>
       </div>
     </novo-overlay-template>

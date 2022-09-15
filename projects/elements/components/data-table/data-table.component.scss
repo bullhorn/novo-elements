@@ -1,4 +1,4 @@
-$table-bg-accent: var(--background-bright, --color-white);
+$table-bg-accent: var(--color-background);
 $novo-row-horizontal-padding: 20px;
 $table-header-font-weight: 400;
 $breakpoint: 1000px;
@@ -17,7 +17,7 @@ $breakpoint: 1000px;
     display: flex;
     align-items: center;
     flex-shrink: 0;
-    border-bottom: 1px solid var(--border, --color-white);
+    border-bottom: 1px solid var(--color-border);
     &.empty {
       padding: 0;
     }
@@ -121,7 +121,7 @@ $breakpoint: 1000px;
     display: flex;
     flex: 1;
     .novo-data-table-custom-filter {
-      border-right: 1px solid var(--border);
+      border-right: var(--border-main);
       novo-date-picker {
         .calendar {
           box-shadow: none;
@@ -171,7 +171,7 @@ $breakpoint: 1000px;
     align-items: center;
     > div,
     div.novo-data-table-footer-cell {
-      border-top: 1px solid var(--border);
+      border-top: var(--border-main);
       flex: 1;
       min-width: 200px;
       display: flex;
@@ -201,7 +201,7 @@ $breakpoint: 1000px;
       .novo-data-table-dropdown-cell,
       .novo-data-table-expand-cell,
       .novo-data-table-checkbox-cell {
-        background-color: var(--background-muted);
+        background-color: var(--color-background-muted);
       }
       &.active {
         .novo-data-table-cell,
@@ -209,14 +209,14 @@ $breakpoint: 1000px;
         .novo-data-table-dropdown-cell,
         .novo-data-table-expand-cell,
         .novo-data-table-checkbox-cell {
-          background-color: var(--color-pale-positive);
+          background-color: var(--color-selection-overlay);
         }
         + .novo-data-table-detail-row {
-          background-color: var(--color-pale-positive);
+          background-color: var(--color-selection-overlay);
         }
       }
       + .novo-data-table-detail-row {
-        background-color: var(--background-muted);
+        background-color: var(--color-background-muted);
       }
     }
     > .novo-data-table-row:nth-of-type(even) {
@@ -225,7 +225,7 @@ $breakpoint: 1000px;
       .novo-data-table-dropdown-cell,
       .novo-data-table-expand-cell,
       .novo-data-table-checkbox-cell {
-        background-color: var(--background-body);
+        background-color: var(--color-background);
       }
       &.active {
         .novo-data-table-cell,
@@ -233,14 +233,14 @@ $breakpoint: 1000px;
         .novo-data-table-dropdown-cell,
         .novo-data-table-expand-cell,
         .novo-data-table-checkbox-cell {
-          background-color: var(--color-pale-positive);
+          background-color: var(--color-selection-overlay);
         }
         + .novo-data-table-detail-row {
-          background-color: var(--color-pale-positive);
+          background-color: var(--color-selection-overlay);
         }
       }
       + .novo-data-table-detail-row {
-        background-color: var(--background-body);
+        background-color: var(--color-background);
       }
     }
   }
@@ -266,11 +266,11 @@ $breakpoint: 1000px;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
-    background-color: var(--background-body);
+    background-color: var(--color-background);
     .novo-data-table-header-cell,
     .novo-data-table-checkbox-header-cell {
-      // border-bottom: 1px solid var(--border);
-      background-color: var(--background-body);
+      // border-bottom: var(--border-main);
+      background-color: var(--color-background);
     }
     &.expanded {
       i.bhi-next.data-table-icon {
@@ -333,33 +333,33 @@ $breakpoint: 1000px;
       display: inline-block;
     }
     .filter-button {
-      color: var(--text-muted);
+      color: var(--color-text-muted);
       background: transparent;
       pointer-events: all;
       margin-left: 0.5rem;
       line-height: 1em;
       outline: none;
       &:hover {
-        color: var(--text-main);
+        color: var(--color-text);
       }
       &.filter-active {
-        color: var(--selection);
+        color: var(--color-selection);
       }
     }
 
     button.active {
       color: var(--color-white);
-      background: var(--color-positive);
+      background: var(--color-selection);
       &:hover,
       &:active,
       &:focus,
       &:visited {
-        background: var(--color-positive) !important;
+        background: var(--color-selection) !important;
       }
     }
     &.clickable {
       cursor: pointer;
-      color: var(--color-positive);
+      color: var(--color-selection);
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -420,7 +420,7 @@ $breakpoint: 1000px;
   }
 
   .novo-data-table-header-cell {
-    // border-left: 1px solid var(--border);
+    // border-left: var(--border-main);
     white-space: normal;
     overflow-wrap: break-word;
     display: flex;
@@ -501,7 +501,7 @@ $breakpoint: 1000px;
         }
         &.bhi-box-yes,
         &.bhi-checkbox-filled {
-          color: var(--color-positive);
+          color: var(--color-selection);
         }
       }
     }
@@ -509,127 +509,6 @@ $breakpoint: 1000px;
       appearance: none !important;
       height: 0 !important;
       border: none !important;
-    }
-  }
-}
-
-novo-data-table-pagination {
-  &.basic,
-  &.basic-wide {
-    display: flex;
-    align-items: center;
-    flex: 1;
-    novo-tiles > .tile-container .tile {
-      padding: 7px 10px;
-    }
-    > .novo-data-table-pagination-size {
-      padding-right: 10px;
-    }
-    > .novo-data-table-range-label-long,
-    > .novo-data-table-range-label-short {
-      padding-right: 10px;
-      white-space: nowrap;
-    }
-    > .novo-data-table-range-label-long {
-      display: none;
-      @media (min-width: $breakpoint) {
-        display: block;
-      }
-    }
-    > .novo-data-table-spacer {
-      width: 100%;
-    }
-    > .novo-data-table-range-label-short {
-      display: block;
-      @media (min-width: $breakpoint) {
-        display: none;
-      }
-    }
-    > button:first-of-type {
-      margin-right: 5px;
-    }
-    > button {
-      span {
-        display: none;
-        @media (min-width: $breakpoint) {
-          display: block;
-        }
-      }
-    }
-    > button[theme][theme="dialogue"][icon][side="left"] {
-      padding: 5px;
-      @media (min-width: $breakpoint) {
-        padding: 5px 15px 5px 5px;
-      }
-    }
-    > button[theme][theme="dialogue"][icon][side="right"] {
-      padding: 5px;
-      @media (min-width: $breakpoint) {
-        padding: 5px 5px 5px 15px;
-      }
-    }
-  }
-  &.standard {
-    display: flex;
-    flex-flow: row nowrap;
-    flex: 1;
-    > * {
-      margin: auto 5px;
-    }
-    h5.rows {
-      padding: 0;
-      font-size: 12px;
-      opacity: 0.75;
-      letter-spacing: 0.1px;
-    }
-    span.spacer {
-      flex: 1;
-    }
-    novo-select {
-      max-width: 100px;
-      min-width: 100px;
-      div[type="button"] {
-        &:hover {
-          i {
-            opacity: 0.75;
-          }
-        }
-        &:active,
-        &:focus {
-          i {
-            opacity: 1;
-          }
-        }
-        i {
-          opacity: 0.45;
-        }
-      }
-    }
-    .pager {
-      list-style-type: none;
-      user-select: none;
-      display: flex;
-      .page {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 2.4rem;
-        height: 2.4rem;
-        font-size: var(--font-size-text);
-        border-radius: 2px;
-        list-style-type: none;
-        cursor: pointer;
-        color: var(--color-positive);
-        &.disabled {
-          opacity: 0.3;
-          pointer-events: none;
-        }
-      }
-      .page.active {
-        color: var(--color-positive);
-        background-color: rgba(#000, 0.1);
-        opacity: 1;
-      }
     }
   }
 }
@@ -666,7 +545,7 @@ novo-data-table-pagination {
     overflow-x: hidden;
   }
   .footer {
-    border-top: 1px solid var(--border);
+    border-top: var(--border-main);
     padding: 5px 10px;
     display: flex;
     justify-content: flex-end;
@@ -697,7 +576,7 @@ novo-data-table-pagination {
     background: #fff;
     padding: 0 !important;
     .back-link {
-      color: var(--color-positive);
+      color: var(--color-selection);
       line-height: 3em;
       font-size: 0.9em;
       padding-left: 5px;
@@ -722,16 +601,16 @@ novo-data-table-pagination {
   //   top: -25px;
   // }
   span.error-text {
-    color: var(--color-negative);
+    color: var(--color-error);
     position: relative;
     left: 10px;
     top: -17px;
     font-size: x-small;
   }
   .filter-null-results {
-    background-color: var(--background-bright);
+    background-color: var(--color-background);
     text-align: center;
-    color: var(--text-main);
+    color: var(--color-text);
     background: transparent;
     font-weight: 500;
   }

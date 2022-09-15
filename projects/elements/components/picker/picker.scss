@@ -13,7 +13,7 @@
   &.selected,
   &.selected:hover {
     & + i {
-      color: var(--selection);
+      color: var(--color-selection);
     }
   }
 }
@@ -33,20 +33,20 @@
 .quick-note-results,
 picker-results,
 quick-note-results {
-  background-color: var(--background-bright);
+  background-color: var(--color-background);
   cursor: default;
   line-height: 26px;
   width: 100%;
   novo-list,
   ul {
-    background-color: var(--background-bright);
+    background-color: var(--color-background);
     max-height: 200px;
     overflow: auto;
     list-style: none;
     padding: 0;
     margin: 0;
     box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
-    border: 1px solid var(--selection);
+    border: 1px solid var(--color-selection);
     transform: translateY(0%);
     transition: all 0.15s cubic-bezier(0.35, 0, 0.25, 1);
     display: block;
@@ -63,16 +63,16 @@ quick-note-results {
       h6 {
         padding-top: 0;
         font-weight: 400;
-        color: lighten($dark, 35%);
+        color: var(--color-text-muted);
         strong {
           font-weight: 400;
-          color: $dark;
+          color: var(--color-text);
         }
       }
       &.active,
       &:focus,
       &:hover {
-        background-color: lighten($positive, 35%);
+        background-color: var(--color-selection-overlay);
       }
       &.disabled {
         opacity: 0.5;
@@ -111,17 +111,17 @@ entity-picker-result.disabled {
 
 entity-picker-result.active {
   > novo-list-item {
-    background-color: lighten($positive, 35%);
+    background-color: var(--color-selection-overlay);
   }
 }
 
 .novo-entity-picker-results {
-  background: $white;
+  background: var(--color-background);
   width: 100%;
   .novo-list {
-    background: $white;
+    background: var(--color-background);
     .novo-item-content {
-      margin-top: $spacing-sm;
+      margin-top: var(--spacing-sm);
       margin-left: 1.8rem;
       row-gap: 1rem;
       .novo-text {
@@ -141,14 +141,14 @@ entity-picker-result.active {
 .picker-loader,
 .picker-null-recent-results,
 .picker-null-results {
-  background-color: $white;
+  color: var(--color-text-muted);
+  background-color: var(--color-background);
+  border: 1px solid var(--color-selection);
+  box-shadow: var(--shadow-z2);
   text-align: center;
-  color: darken($light, 15%);
-  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
-  border: 1px solid $positive;
   transform: translateY(0%);
   transition: all 0.15s cubic-bezier(0.35, 0, 0.25, 1);
-  padding: $spacing-sm;
+  padding: var(--spacing-sm);
 }
 
 p.picker-error,
@@ -160,12 +160,12 @@ p.picker-null-results {
 }
 
 .picker-loader {
-  background-color: $white;
+  background-color: var(--color-background);
   display: flex;
   align-items: center;
   flex-direction: column;
   box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
-  border: 1px solid $positive;
+  border: 1px solid var(--color-selection);
   transform: translateY(0%);
   transition: all 0.15s cubic-bezier(0.35, 0, 0.25, 1);
 }
@@ -195,10 +195,10 @@ picker-results {
         width: 100%;
       }
       &.active {
-        background-color: lighten($positive, 35%);
+        background-color: var(--color-selection-overlay);
       }
       &:hover {
-        background-color: lighten($positive, 39%);
+        background-color: var(--color-selection-overlay);
       }
       .novo-item-content {
         flex-flow: row wrap;
@@ -234,7 +234,7 @@ picker-results {
     z-index: 9;
     position: absolute;
     width: 100%;
-    background-color: var(--background-bright);
+    background-color: var(--color-background);
     color: black;
   }
 }
@@ -247,21 +247,21 @@ distribution-list-picker-results {
   width: 100%;
   max-width: none;
   z-index: 99;
-  background: var(--background-bright);
+  background: var(--color-background);
   padding: 1px;
   &.active {
-    border: 1px solid var(--selection);
+    border: 1px solid var(--color-selection);
   }
   .novo-list {
     min-height: 100%;
-    background: $white;
+    background: var(--color-background);
     max-height: 330px;
     overflow-y: auto;
     overflow-x: hidden;
     .novo-list-item {
       display: block;
       transition: background-color 250ms;
-      border-bottom: 1px solid $background-dark;
+      border-bottom: 1px solid var(--color-border);
       cursor: pointer;
       &.disabled {
         opacity: 0.5;
@@ -284,10 +284,10 @@ distribution-list-picker-results {
         margin-left: 15px;
       }
       &.active {
-        background-color: lighten($positive, 35%);
+        background-color: var(--color-selection-overlay);
       }
       &:hover {
-        background-color: lighten($positive, 35%);
+        background-color: var(--color-selection-overlay);
       }
       item-content {
         flex-flow: row nowrap;

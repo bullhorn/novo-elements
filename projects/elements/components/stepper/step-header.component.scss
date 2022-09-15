@@ -1,5 +1,3 @@
-@import "../../styles/variables";
-
 $novo-stepper-label-header-height: 24px !default;
 $novo-stepper-label-min-width: 50px !default;
 $novo-stepper-side-gap: 24px !default;
@@ -43,14 +41,14 @@ $novo-step-header-icon-size: 1em !default;
 
 .novo-step-icon {
   .novo-step-number {
-    background: $positive;
-    color: $white;
+    background: var(--color-selection);
+    color: var(--color-selection-contrast);
   }
 }
 .novo-step-icon-not-touched {
   .novo-step-number {
-    background: $submission;
-    color: $white;
+    background: var(--color-empty);
+    color: var(--color-empty-contrast);
   }
 }
 

@@ -1,5 +1,13 @@
-@import "variables";
+@import "~novo-design-tokens/scss";
 @import "global/functions";
+
+$dot-colors: (
+  "ocean": var(--palette-blue-50),
+  "lavender": var(--palette-indigo-50),
+  "grapefruit": var(--palette-red-50),
+  "sunflower": var(--palette-orange-50),
+  "mint": var(--palette-green-50),
+);
 
 :host {
   padding: 20px;
@@ -26,8 +34,8 @@
     @include animationMapDelay($dot-colors, jump, 1600ms, ease-in-out, 70ms, forward, infinite, "", "");
   }
 
-  @each $analytics, $color in $analytics-colors {
-    &.color-#{$analytics} {
+  @include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
+    &.color-#{$name} {
       span.dot {
         background-color: $color;
       }
@@ -37,7 +45,7 @@
   &.white,
   &[inverse] {
     span.dot {
-      background-color: #fff !important;
+      background-color: var(--color-white) !important;
     }
   }
 }

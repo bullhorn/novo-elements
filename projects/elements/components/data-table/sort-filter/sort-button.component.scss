@@ -9,18 +9,18 @@
   novo-icon {
     position: absolute;
     opacity: 0;
-    color: var(--text-muted);
+    color: var(--color-text-muted);
     &:hover {
-      color: var(--selection);
+      color: var(--color-selection);
     }
   }
 
   .novo-sort-asc-icon {
     top: 10px;
-    color: var(--selection);
+    color: var(--color-selection);
   }
   .novo-sort-desc-icon {
     top: -10px;
-    color: var(--selection);
+    color: var(--color-selection);
   }
 }

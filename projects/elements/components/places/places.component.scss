@@ -10,10 +10,10 @@
           width: 100%;
         }
         &.active {
-          background-color: var(--color-pale-positive);
+          background-color: var(--color-selection-overlay);
         }
         &:hover {
-          background-color: var(--color-pale-positive);
+          background-color: var(--color-selection-overlay);
         }
         item-content {
           flex-flow: row wrap;

@@ -4,7 +4,7 @@ $range-slider-shadow: 0 1px 1px #000, 0 0 1px #0d0d0d;
   width: 100%;
   height: 9.5px;
   transition: 0.2s;
-  background: var(--background-main);
+  background: var(--color-background-secondary);
   border-radius: 3px;
 }
 @mixin range-thumb() {
@@ -12,7 +12,7 @@ $range-slider-shadow: 0 1px 1px #000, 0 0 1px #0d0d0d;
   height: 20px;
   width: 20px;
   border-radius: 50%;
-  background: var(--border);
+  background: var(--color-border);
   margin-top: -7px;
 }
 
@@ -57,13 +57,13 @@ input[type="range"]:focus::-ms-thumb {
 }
 
 input[type="range"]:focus::-webkit-slider-runnable-track {
-  background: var(--background-main);
+  background: var(--color-background-secondary);
 }
 input[type="range"]:focus::-ms-fill-lower {
-  background: var(--background-main);
+  background: var(--color-background-secondary);
 }
 input[type="range"]:focus::-ms-fill-upper {
-  background: var(--background-main);
+  background: var(--color-background-secondary);
 }
 
 // Extra MS overrides
@@ -74,13 +74,13 @@ input[type="range"]::-ms-track {
   color: transparent;
 }
 input[type="range"]::-ms-fill-lower {
-  background: var(--background-main);
+  background: var(--color-background-secondary);
   border: 0.2px solid #010101;
   border-radius: 3px;
   box-shadow: 1px 1px 1px #000, 0 0 1px #0d0d0d;
 }
 input[type="range"]::-ms-fill-upper {
-  background: var(--background-main);
+  background: var(--color-background-secondary);
   border: 0.2px solid #010101;
   border-radius: 3px;
   box-shadow: 1px 1px 1px #000, 0 0 1px #0d0d0d;

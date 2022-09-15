@@ -1,10 +1,10 @@
 :host {
-  background-color: var(--background-bright);
+  background-color: var(--color-background);
   max-height: 300px;
   padding: 0;
   margin: 0;
   box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
-  border: 1px solid var(--selection);
+  border: 1px solid var(--color-selection);
   transform: translateY(0%);
   transition: all 0.15s cubic-bezier(0.35, 0, 0.25, 1);
   display: flex;
@@ -34,7 +34,7 @@
         width: 100%;
       }
       &:hover {
-        background-color: var(--color-pale-positive);
+        background-color: var(--color-selection-overlay);
       }
       .list-item {
         justify-content: center;
@@ -43,14 +43,14 @@
         color: #999999;
       }
       &.active {
-        color: var(--selection);
-        border-left-color: var(--selection);
-        background-color: var(--color-pale-positive);
+        color: var(--color-selection);
+        border-left-color: var(--color-selection);
+        background-color: var(--color-selection-overlay);
         item-end {
-          color: var(--selection);
+          color: var(--color-selection);
         }
         .list-item > item-content > * {
-          color: var(--selection) !important;
+          color: var(--color-selection) !important;
         }
       }
       item-content {
@@ -76,10 +76,10 @@
           width: 100%;
         }
         &.active {
-          background-color: var(--color-pale-positive);
+          background-color: var(--color-selection-overlay);
         }
         &:hover {
-          background-color: var(--color-pale-positive);
+          background-color: var(--color-selection-overlay);
         }
         item-content {
           flex-flow: row wrap;
@@ -97,8 +97,8 @@
         padding: 0.95em;
         background: transparent !important;
         border: none;
-        border-bottom: 1px solid var(--border);
-        border-left: 1px solid var(--border);
+        border-bottom: var(--border-main);
+        border-left: var(--border-main);
         border-radius: 0;
         border-radius: 0;
         outline: none;
@@ -108,11 +108,11 @@
         transition: all 300ms;
         color: #26282b;
         &:hover {
-          border-bottom: 1px solid var(--border);
+          border-bottom: var(--border-main);
         }
         &:focus {
-          border-bottom: 1px solid var(--selection);
-          border-left: 1px solid var(--selection);
+          border-bottom: 1px solid var(--color-selection);
+          border-left: 1px solid var(--color-selection);
         }
         &[disabled] {
           pointer-events: none;
@@ -135,7 +135,7 @@
       }
     }
     .mixed-multi-picker-list-container {
-      border-left: 1px solid var(--border);
+      border-left: var(--border-main);
       flex: 1;
       display: flex;
       flex-direction: column;

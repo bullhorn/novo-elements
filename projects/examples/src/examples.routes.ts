@@ -3469,7 +3469,11 @@ export class TooltipExamplesPage {
   template: `<h1>Color</h1>
 <h2>Efficient and expressive</h2>
 <p>Our colors are bold, fresh, and approachable. They are expressive and delightful, but selected with usability and accessibility in mind.</p>
-<h2>Primary Colors</h2>
+<h2>TODO</h2>
+<p>-[ ] Document how to use shade and tint
+-[ ] Document how to use palette
+-[ ] Document how to override color variables</p>
+<h2>Semantic Colors</h2>
 <p>These are the base colors of the application.</p>
 <p><primary-colors-example></primary-colors-example></p>
 <h2>Entity Colors</h2>
@@ -3478,6 +3482,9 @@ export class TooltipExamplesPage {
 <h2>Analyltics Colors</h2>
 <p>This palette features vibrant, bold colors for use in data visualization.</p>
 <p><analytics-colors-example></analytics-colors-example></p>
+<h2>Palette Colors</h2>
+<p>These are the base colors of the application.</p>
+<p><palette-colors-example></palette-colors-example></p>
 `,
   host: { class: 'markdown-page' }
 })
@@ -3741,6 +3748,30 @@ export class IconographyPage {
   host: { class: 'markdown-page' }
 })
 export class SpacingPage {
+  public params: any = {};
+}
+
+
+@Component({
+  selector: 'theming-page',
+  template: `<h1>Theming</h1>
+<p>The Novo Design System has abstracted all component styles to be controlled by overriding the system's design tokens.</p>
+<h2>Table of Contents</h2>
+<ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#themes">Available themes</a></li>
+<li><a href="#resources">Resources</a></li>
+</ul>
+<h2 id="overview">Overview <a href="#overview">#</a></h2>
+<p>TBD</p>
+<h2 id="themes">Available Themes <a href="#themes">#</a></h2>
+<p>TBD</p>
+<h2 id="resources">Resources <a href="#resources">#</a></h2>
+<p>TBD</p>
+`,
+  host: { class: 'markdown-page' }
+})
+export class ThemingPage {
   public params: any = {};
 }
 
@@ -6654,6 +6685,7 @@ const routes: Routes = [
   { path: 'design/composition', component: CompositionPage, data: { title: 'Composition', section: 'design' } },
   { path: 'design/iconography', component: IconographyPage, data: { title: 'Iconography', section: 'design' } },
   { path: 'design/spacing', component: SpacingPage, data: { title: 'Spacing', section: 'design' } },
+  { path: 'design/theming', component: ThemingPage, data: { title: 'Theming', section: 'design' } },
   { path: 'design/typography', component: TypographyPage, data: { title: 'Typography', section: 'design' } },
   {
     path: 'form-controls/chips',
@@ -6755,7 +6787,7 @@ const routes: Routes = [
 ];
 
 export const PAGE_LIST = [
-  AceEditorPage,AgendaDesignPage,AgendaDevelopPage,AgendaExamplesPage,AsideDesignPage,AsideDevelopPage,AsideExamplesPage,AutocompleteDesignPage,AutocompleteDevelopPage,AutocompleteExamplesPage,AvatarDesignPage,AvatarDevelopPage,AvatarExamplesPage,BreadcrumbDesignPage,BreadcrumbDevelopPage,BreadcrumbExamplesPage,ButtonDesignPage,ButtonDevelopPage,ButtonExamplesPage,CalendarDesignPage,CalendarDevelopPage,CalendarExamplesPage,ComponentsPage,DataTablePage,DropdownDesignPage,DropdownDevelopPage,DropdownExamplesPage,FieldDesignPage,FieldDevelopPage,FieldExamplesPage,IconDesignPage,IconDevelopPage,IconExamplesPage,LoadingDesignPage,LoadingDevelopPage,LoadingExamplesPage,MenuDesignPage,MenuDevelopPage,MenuExamplesPage,ModalDesignPage,ModalDevelopPage,ModalExamplesPage,NonIdealStateDesignPage,NonIdealStateDevelopPage,NonIdealStateExamplesPage,PopoverDesignPage,PopoverDevelopPage,PopoverExamplesPage,ProgressDesignPage,ProgressDevelopPage,ProgressExamplesPage,ProgressUsagePage,QueryBuilderDesignPage,QueryBuilderDevelopPage,QueryBuilderExamplesPage,QuickNotePage,SearchPage,SlidesPage,SwitchPage,TabbedGroupPickerPage,TablePage,TipWellDesignPage,TipWellDevelopPage,TipWellExamplesPage,ToasterDesignPage,ToasterDevelopPage,ToasterExamplesPage,ToolbarDesignPage,ToolbarDevelopPage,ToolbarExamplesPage,TooltipDesignPage,TooltipDevelopPage,TooltipExamplesPage,ColorsPage,CompositionPage,DesignPage,IconographyPage,SpacingPage,TypographyPage,ChipsDesignPage,ChipsDevelopPage,ChipsExamplesPage,ColorPickerPage,DatePickerDesignPage,DatePickerDevelopPage,DatePickerExamplesPage,DateTimePickerDesignPage,DateTimePickerDevelopPage,DateTimePickerExamplesPage,EditorPage,FormControlsPage,FormGroupsPage,FormPage,MultiPickerPage,PickerPage,RadioButtonsPage,SelectPage,TilesPage,TimePickerDesignPage,TimePickerDevelopPage,TimePickerExamplesPage,ValuePage,HomePage,CardDescriptionPage,CardDesignPage,CardDevelopPage,CardExamplesPage,ExpansionPage,HeaderPage,LayoutsPage,ListPage,SidenavPage,StepperPage,TabsDesignPage,TabsDevelopPage,TabsExamplesPage,PatternsNativeFormsPage,PatternsTestPage,PatternsPage,TemplatesPage,August2022Page,February2022Page,June2022Page,May2022Page,FieldInteractionsPage,PipesPage,SecurityPage
+  AceEditorPage,AgendaDesignPage,AgendaDevelopPage,AgendaExamplesPage,AsideDesignPage,AsideDevelopPage,AsideExamplesPage,AutocompleteDesignPage,AutocompleteDevelopPage,AutocompleteExamplesPage,AvatarDesignPage,AvatarDevelopPage,AvatarExamplesPage,BreadcrumbDesignPage,BreadcrumbDevelopPage,BreadcrumbExamplesPage,ButtonDesignPage,ButtonDevelopPage,ButtonExamplesPage,CalendarDesignPage,CalendarDevelopPage,CalendarExamplesPage,ComponentsPage,DataTablePage,DropdownDesignPage,DropdownDevelopPage,DropdownExamplesPage,FieldDesignPage,FieldDevelopPage,FieldExamplesPage,IconDesignPage,IconDevelopPage,IconExamplesPage,LoadingDesignPage,LoadingDevelopPage,LoadingExamplesPage,MenuDesignPage,MenuDevelopPage,MenuExamplesPage,ModalDesignPage,ModalDevelopPage,ModalExamplesPage,NonIdealStateDesignPage,NonIdealStateDevelopPage,NonIdealStateExamplesPage,PopoverDesignPage,PopoverDevelopPage,PopoverExamplesPage,ProgressDesignPage,ProgressDevelopPage,ProgressExamplesPage,ProgressUsagePage,QueryBuilderDesignPage,QueryBuilderDevelopPage,QueryBuilderExamplesPage,QuickNotePage,SearchPage,SlidesPage,SwitchPage,TabbedGroupPickerPage,TablePage,TipWellDesignPage,TipWellDevelopPage,TipWellExamplesPage,ToasterDesignPage,ToasterDevelopPage,ToasterExamplesPage,ToolbarDesignPage,ToolbarDevelopPage,ToolbarExamplesPage,TooltipDesignPage,TooltipDevelopPage,TooltipExamplesPage,ColorsPage,CompositionPage,DesignPage,IconographyPage,SpacingPage,ThemingPage,TypographyPage,ChipsDesignPage,ChipsDevelopPage,ChipsExamplesPage,ColorPickerPage,DatePickerDesignPage,DatePickerDevelopPage,DatePickerExamplesPage,DateTimePickerDesignPage,DateTimePickerDevelopPage,DateTimePickerExamplesPage,EditorPage,FormControlsPage,FormGroupsPage,FormPage,MultiPickerPage,PickerPage,RadioButtonsPage,SelectPage,TilesPage,TimePickerDesignPage,TimePickerDevelopPage,TimePickerExamplesPage,ValuePage,HomePage,CardDescriptionPage,CardDesignPage,CardDevelopPage,CardExamplesPage,ExpansionPage,HeaderPage,LayoutsPage,ListPage,SidenavPage,StepperPage,TabsDesignPage,TabsDevelopPage,TabsExamplesPage,PatternsNativeFormsPage,PatternsTestPage,PatternsPage,TemplatesPage,August2022Page,February2022Page,June2022Page,May2022Page,FieldInteractionsPage,PipesPage,SecurityPage
 ];
 
 @NgModule({

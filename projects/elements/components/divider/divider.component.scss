@@ -8,16 +8,16 @@ $novo-divider-inset-margin: 80px;
   margin: 0;
   border-top-width: $novo-divider-width;
   border-top-style: solid;
-  border-top-color: var(--border);
+  border-top-color: var(--color-border);
 
   &.novo-divider-vertical {
     display: inline;
     border-top: 0;
     border-right-width: $novo-divider-width;
     border-right-style: solid;
-    border-right-color: var(--border);
-    margin-left: $spacing-md;
-    margin-right: $spacing-md;
+    border-right-color: var(--color-border);
+    margin-left: var(--spacing-md);
+    margin-right: var(--spacing-md);
   }
 
   &.novo-divider-inset {
