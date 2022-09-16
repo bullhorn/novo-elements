@@ -17,7 +17,7 @@ import {
   ViewChild,
   ViewChildren,
 } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { NovoLabelService } from '../../services/novo-label-service';
 import { notify } from '../../utils/notifier/notifier.util';
 import { NovoTemplate } from '../common/novo-template/novo-template.directive';
@@ -66,13 +66,16 @@ import { DataTableState } from './state/data-table-state.service';
       <novo-data-table-pagination
         *ngIf="paginationOptions"
         [theme]="paginationOptions.theme"
-        [length]="dataSource?.currentTotal"
+        [length]="null !== overrideTotal && overrideTotal !== undefined ? overrideTotal : dataSource?.currentTotal"
         [page]="paginationOptions.page"
         [pageSize]="paginationOptions.pageSize"
         [pageSizeOptions]="paginationOptions.pageSizeOptions"
         [dataFeatureId]="paginatorDataFeatureId"
         [canSelectAll]="canSelectAll"
         [allMatchingSelected]="allMatchingSelected"
+        [loading]="paginationOptions.loading"
+        [errorLoading]="paginationOptions.errorLoading"
+        [paginationRefreshSubject]="paginationRefreshSubject"
       >
       </novo-data-table-pagination>
       <div class="novo-data-table-actions" *ngIf="templates['customActions']">
@@ -330,6 +333,8 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   @Input() maxSelected: number = undefined;
   @Input() canSelectAll: boolean = false;
   @Input() allMatchingSelected = false;
+  @Input() overrideTotal: number;
+  @Input() paginationRefreshSubject: Subject<void>;
 
   @Input()
   set dataTableService(service: IDataTableService<T>) {
