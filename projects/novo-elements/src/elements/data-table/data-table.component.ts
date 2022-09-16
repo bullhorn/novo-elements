@@ -75,7 +75,7 @@ import { DataTableState } from './state/data-table-state.service';
         [allMatchingSelected]="allMatchingSelected"
         [loading]="paginationOptions.loading"
         [errorLoading]="paginationOptions.errorLoading"
-        [paginationRefreshSubject] = "paginationRefreshSubject"
+        [paginationRefreshSubject]="paginationRefreshSubject"
       >
       </novo-data-table-pagination>
       <div class="novo-data-table-actions" *ngIf="templates['customActions']">
