@@ -128,7 +128,7 @@ export class NovoFieldElement implements AfterContentInit, OnDestroy {
     }
 
     if (control.ngControl?.name) {
-      this._elementRef.nativeElement.setAttribute('data-automation-id', control.ngControl.name);
+      this._elementRef.nativeElement.setAttribute('data-control-key', control.ngControl.name);
     }
 
     // Subscribe to changes in the child control state in order to update the form field UI.
