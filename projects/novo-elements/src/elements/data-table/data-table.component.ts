@@ -11,6 +11,7 @@ import {
   HostBinding,
   Input,
   OnDestroy,
+  OnInit,
   Output,
   QueryList,
   TemplateRef,
@@ -282,7 +283,7 @@ import { DataTableState } from './state/data-table-state.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [DataTableState, { provide: NOVO_DATA_TABLE_REF, useExisting: NovoDataTable }],
 })
-export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
+export class NovoDataTable<T> implements AfterContentInit, OnDestroy, OnInit {
   @HostBinding('class.global-search-hidden') globalSearchHiddenClassToggle: boolean = false;
 
   @ContentChildren(NovoTemplate) customTemplates: QueryList<NovoTemplate>;
@@ -335,6 +336,14 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   @Input() allMatchingSelected = false;
   @Input() overrideTotal: number;
   @Input() paginationRefreshSubject: Subject<void>;
+  @Input() alertOnLongRunningQuery = false;
+  @Input() longRunningQueryTimeout = 120000;
+
+  @Output() longRunningQuery: EventEmitter<{ overTime: boolean; finishedLoading: boolean }> = new EventEmitter<{
+    overTime: boolean;
+    finishedLoading: boolean;
+  }>();
+
 
   @Input()
   set dataTableService(service: IDataTableService<T>) {
@@ -452,6 +461,7 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   private resetSubscription: Subscription;
   private paginationSubscription: Subscription;
   private sortFilterSubscription: Subscription;
+  private dataSourceLoadingSubsription: Subscription;
   private allMatchingSelectedSubscription: Subscription;
   private _columns: IDataTableColumn<T>[];
   private scrollListenerHandler: any;
@@ -507,6 +517,32 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
     });
   }
 
+  ngOnInit(): void {
+    if (this.alertOnLongRunningQuery) {
+      this.dataSourceLoadingSubsription = this.state.dataLoadingSource.subscribe(
+        (isLoading) => {
+          if (isLoading) {
+            setTimeout(() => {
+              if (this.dataSource?.loading) {
+                const loadingParams = {
+                  overTime: true,
+                  finishedLoading: false,
+                };
+                this.longRunningQuery.emit(loadingParams);
+              }
+            }, this.longRunningQueryTimeout);
+          } else {
+            const loadingParams = {
+              overTime: false,
+              finishedLoading: true,
+            };
+            this.longRunningQuery.emit(loadingParams);
+          }
+        }
+      );
+    }
+  }
+
   public modifyCellHeaderMultiSelectFilterOptions(column: string, newOptions: { value: any; label: string }[]): void {
     const header = this.cellHeaders.find((cellHeader) => cellHeader.id === column);
     if (header) {
@@ -531,6 +567,7 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
     this.refreshSubscription?.unsubscribe();
     this.resetSubscription?.unsubscribe();
     this.sortFilterSubscription?.unsubscribe();
+    this.dataSourceLoadingSubsription?.unsubscribe();
     this.allMatchingSelectedSubscription?.unsubscribe();
     if (this.novoDataTableContainer) {
       (this.novoDataTableContainer.nativeElement as Element).removeEventListener('scroll', this.scrollListenerHandler);
