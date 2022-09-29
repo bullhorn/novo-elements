@@ -336,7 +336,6 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   @Input() overrideTotal: number;
   @Input() paginationRefreshSubject: Subject<void>;
 
-
   @Input()
   set dataTableService(service: IDataTableService<T>) {
     this.loading = false;
