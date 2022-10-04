@@ -13,6 +13,7 @@ export class DataTableState<T> {
   public expandSource = new Subject();
   public allMatchingSelectedSource = new Subject();
   public dataLoaded = new Subject();
+  public dataLoadingSource = new Subject();
 
   sort: IDataTableSort = undefined;
   filter: IDataTableFilter | IDataTableFilter[] = undefined;
