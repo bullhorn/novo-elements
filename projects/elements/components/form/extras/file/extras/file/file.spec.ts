@@ -1,3 +1,5 @@
+import { NovoFile } from './file';
+
 describe('Class: NovoFile', () => {
   let file;
   beforeEach(() => {

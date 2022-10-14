@@ -1,9 +1,8 @@
-// NG
 import { async, TestBed } from '@angular/core/testing';
-import { NovoSelectModule } from './select.module';
-import { NovoSelectElement } from './select';
-import { Key } from 'novo-elements/utils';
 import { NovoLabelService } from 'novo-elements/services';
+import { Key } from 'novo-elements/utils';
+import { NovoSelectElement } from './select';
+import { NovoSelectModule } from './select.module';
 
 xdescribe('Elements: NovoSelectElement', () => {
   let fixture;
@@ -120,7 +119,7 @@ xdescribe('Elements: NovoSelectElement', () => {
     it('should invoke openPanel', () => {
       comp.overlay = {
         panelOpen: true,
-        openPanel: jasmine.createSpy('openPanel'),
+        openPanel: jest.fn(),
       };
       comp.ngOnChanges();
       expect(comp.overlay.openPanel).toHaveBeenCalled();
@@ -273,14 +272,14 @@ xdescribe('Elements: NovoSelectElement', () => {
         value: 'foo',
         valid: true,
       };
-      comp.headerConfig = { onSave: jasmine.createSpy('onSave') };
+      comp.headerConfig = { onSave: jest.fn() };
       comp._handleKeydown(mockEvent);
       expect(comp.headerConfig.onSave).toHaveBeenCalled();
     });
     it('should move selection up', () => {
       const mockEvent: any = {
         key: Key.ArrowUp,
-        preventDefault: jasmine.createSpy('preventDefault'),
+        preventDefault: jest.fn(),
       };
       comp.selectedIndex = 1;
       comp.header = { open: true };
@@ -292,8 +291,8 @@ xdescribe('Elements: NovoSelectElement', () => {
       comp.overlay = {
         overlayRef: {
           overlayElement: {
-            querySelector: jasmine.createSpy('querySelector').and.returnValue({
-              querySelectorAll: jasmine.createSpy('querySelectorAll').and.returnValue([{ value: 'foo' }]),
+            querySelector: jest.fn().mockReturnValue({
+              querySelectorAll: jest.fn().mockReturnValue([{ value: 'foo' }]),
             }),
           },
         },
@@ -306,7 +305,7 @@ xdescribe('Elements: NovoSelectElement', () => {
     it('should move selection down', () => {
       const mockEvent: any = {
         key: Key.ArrowDown,
-        preventDefault: jasmine.createSpy('preventDefault'),
+        preventDefault: jest.fn(),
       };
       comp.selectedIndex = 1;
       comp.header = { open: true };
@@ -318,8 +317,8 @@ xdescribe('Elements: NovoSelectElement', () => {
       comp.overlay = {
         overlayRef: {
           overlayElement: {
-            querySelector: jasmine.createSpy('querySelector').and.returnValue({
-              querySelectorAll: jasmine.createSpy('querySelectorAll').and.returnValue([{ value: 'foo' }]),
+            querySelector: jest.fn().mockReturnValue({
+              querySelectorAll: jest.fn().mockReturnValue([{ value: 'foo' }]),
             }),
           },
         },

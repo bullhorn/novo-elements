@@ -1,7 +1,8 @@
 // NG2
 import { async, TestBed } from '@angular/core/testing';
-import { NovoValueModule } from './value.module';
 import { NovoValueElement, NOVO_VALUE_THEME, NOVO_VALUE_TYPE } from './value';
+import { NovoValueModule } from './value.module';
+
 // TODO fix specs
 xdescribe('Elements: NovoValueElement', () => {
   let fixture;

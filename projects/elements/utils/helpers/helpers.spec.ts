@@ -1,3 +1,5 @@
+import { binarySearch, Helpers } from './helpers';
+
 describe('Utils: Helpers', () => {
   xdescribe('Method: swallowEvent(event)', () => {
     it('should be defined.', () => {

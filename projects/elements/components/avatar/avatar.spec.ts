@@ -1,7 +1,7 @@
 // NG2
 import { TestBed } from '@angular/core/testing';
+import { setupTestSuite } from '../../../../scripts/testing/test-setup';
 import { NovoAvatarElement } from './avatar';
-import { setupTestSuite } from '../../../../../utils/test-setup';
 
 describe('Elements: NovoAvatarElement', () => {
   let fixture;

@@ -1,5 +1,5 @@
 // NG
-import { TestBed, getTestBed, ComponentFixture } from '@angular/core/testing';
+import { ComponentFixture, getTestBed, TestBed } from '@angular/core/testing';
 
 export const setupTestSuite: Function = () => {
   const testBedApi: any = getTestBed();

@@ -1,3 +1,5 @@
+import { KeyCodes } from './key-codes';
+
 describe('Utils: KeyCodes', () => {
   it('Should have all key codes', () => {
     expect(KeyCodes.BACKSPACE).toEqual(8);

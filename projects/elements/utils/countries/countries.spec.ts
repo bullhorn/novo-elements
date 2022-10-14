@@ -1,3 +1,5 @@
+import { getCountries, getStateObjects, getStates } from './countries';
+
 describe('Utils: Countries', () => {
   describe('Method: getCountries()', () => {
     it('should be defined', () => {

@@ -1,10 +1,10 @@
 // NG2
 import { async, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
-import { NovoPickerModule } from './picker.module';
-import { NovoPickerElement } from './picker';
-import { PickerResults } from './extras/picker-results/picker-results';
 import { ComponentUtils } from 'novo-elements/services';
+import { PickerResults } from './extras/picker-results/picker-results';
+import { NovoPickerElement } from './picker';
+import { NovoPickerModule } from './picker.module';
 
 describe('Elements: NovoPickerElement', () => {
   let fixture;
@@ -78,15 +78,15 @@ describe('Elements: NovoPickerElement', () => {
     });
     it('sets the value to null when the picker input is cleared out', () => {
       component._value = '123';
-      spyOn(component, 'onModelChange');
+      jest.spyOn(component, 'onModelChange');
       component.checkTerm('');
       expect(component._value).toEqual(null);
       expect(component.onModelChange).toHaveBeenCalled();
     });
     it('does not register a change if there is no value set', () => {
       component._value = null;
-      spyOn(component, 'onModelChange');
-      spyOn(component.ref, 'markForCheck');
+      jest.spyOn(component, 'onModelChange');
+      jest.spyOn(component.ref, 'markForCheck');
       component.checkTerm('');
       expect(component.onModelChange).not.toHaveBeenCalled();
       expect(component.ref.markForCheck).toHaveBeenCalled();

@@ -1,3 +1,5 @@
+import { PluralPipe } from './plural';
+
 describe('Pipe: Plural', () => {
   let pipe;
 

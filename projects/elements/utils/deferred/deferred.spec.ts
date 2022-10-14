@@ -1,3 +1,5 @@
+import { Deferred } from './deferred';
+
 describe('Utils: Deferred', () => {
   let deferred;
 

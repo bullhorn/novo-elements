@@ -1,3 +1,6 @@
+import { ComponentUtils } from '../../services';
+import { NovoToastService } from './toast-service';
+
 describe('Elements: NovoToastService', () => {
   describe('Service: ', () => {
     const resolver: any = null;

@@ -1,7 +1,7 @@
 // NG2
 import { async, TestBed } from '@angular/core/testing';
-import { NovoTipWellElement } from './tip-well';
 import { NovoLabelService } from 'novo-elements/services';
+import { NovoTipWellElement } from './tip-well';
 
 describe('Elements: NovoTipWellElement', () => {
   let fixture;
@@ -38,7 +38,7 @@ describe('Elements: NovoTipWellElement', () => {
       component.tip = `<div style="color: red">This text is RED</div>`;
       const actual = component.tipWithStyles;
       expect(actual).toEqual('TRUSTED_HTML');
-      expect(component.sanitizer.bypassSecurityTrustHtml).toBeCalledTimes(1);
+      expect(component.sanitizer.bypassSecurityTrustHtml).toHaveBeenCalledTimes(1);
     });
     it('should cache previous sanitized tip when re-requested', () => {
       component.tip = `<div style="color: red">This text is RED</div>`;
@@ -47,7 +47,7 @@ describe('Elements: NovoTipWellElement', () => {
       component.tipWithStyles;
       const actual = component.tipWithStyles;
       expect(actual).toEqual('TRUSTED_HTML');
-      expect(component.sanitizer.bypassSecurityTrustHtml).toBeCalledTimes(1);
+      expect(component.sanitizer.bypassSecurityTrustHtml).toHaveBeenCalledTimes(1);
     });
     it('should bust the cache when the tip is modified', () => {
       component.tip = `<div style="color: red">This text is RED</div>`;
@@ -57,7 +57,7 @@ describe('Elements: NovoTipWellElement', () => {
       component.tipWithStyles;
       const actual = component.tipWithStyles;
       expect(actual).toEqual('TRUSTED_HTML');
-      expect(component.sanitizer.bypassSecurityTrustHtml).toBeCalledTimes(2);
+      expect(component.sanitizer.bypassSecurityTrustHtml).toHaveBeenCalledTimes(2);
     });
   });
 

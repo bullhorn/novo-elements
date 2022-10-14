@@ -4,7 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const glob = require('glob');
 
-const rootFolder = path.join(__dirname);
+const rootFolder = path.join(__dirname, '..');
 const srcFolder = path.join(rootFolder, 'projects/novo-elements/src');
 const distFolder = path.join(rootFolder, 'dist/novo-elements');
 

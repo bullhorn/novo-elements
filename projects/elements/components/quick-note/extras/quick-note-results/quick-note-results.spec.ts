@@ -1,9 +1,9 @@
 // NG2
 import { async, TestBed } from '@angular/core/testing';
-import { QuickNoteResults } from './quick-note-results';
-import { NovoLoadingElement } from 'novo-elements/components/loading';
 import { NovoItemContentElement, NovoListElement, NovoListItemElement } from 'novo-elements/components/list';
+import { NovoLoadingElement } from 'novo-elements/components/loading';
 import { NovoLabelService } from 'novo-elements/services';
+import { QuickNoteResults } from './quick-note-results';
 
 describe('Elements: QuickNoteResults', () => {
   describe('Extras: ', () => {

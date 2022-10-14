@@ -1,4 +1,3 @@
-// NG
 import {
   ChangeDetectorRef,
   Component,
@@ -14,7 +13,6 @@ import {
   ViewChild,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-// Vendor
 import * as dateFns from 'date-fns';
 import { NovoOverlayTemplateComponent } from 'novo-elements/common/overlay';
 import { DateFormatService, NovoLabelService } from 'novo-elements/services';

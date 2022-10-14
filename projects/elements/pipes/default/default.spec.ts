@@ -1,3 +1,5 @@
+import { DefaultPipe } from './default';
+
 describe('Pipe: Default', () => {
   let pipe;
 

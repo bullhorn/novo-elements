@@ -1,6 +1,6 @@
 // NG2
 import { async, TestBed } from '@angular/core/testing';
-import { PopOverContent } from './pop-over-content';
+import { PopOverContent } from './popover-content';
 
 describe('Elements: PopOverContent', () => {
   let fixture;

@@ -1,10 +1,10 @@
 // NG2
 import { ElementRef } from '@angular/core';
 import { async, TestBed } from '@angular/core/testing';
-import { SkillsSpecialtyPickerResults } from './skills-specialty-picker-results';
-import { NovoLoadingModule } from 'novo-elements/components/loading';
 import { NovoListModule } from 'novo-elements/components/list';
+import { NovoLoadingModule } from 'novo-elements/components/loading';
 import { NovoLabelService } from 'novo-elements/services';
+import { SkillsSpecialtyPickerResults } from './skills-specialty-picker-results';
 
 describe('Components: SkillsSpecialtyPickerResults', () => {
   let fixture: any;

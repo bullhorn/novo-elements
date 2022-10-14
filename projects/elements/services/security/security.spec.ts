@@ -1,3 +1,5 @@
+import { Security } from './security';
+
 describe('Services: Security', () => {
   const service: Security = new Security();
 

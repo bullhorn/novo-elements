@@ -1,7 +1,7 @@
 // NG2
 import { Component, ComponentFactory, ComponentFactoryResolver } from '@angular/core';
 import { async, TestBed } from '@angular/core/testing';
-import { PopOverDirective } from './pop-over';
+import { PopOverDirective } from './popover';
 
 @Component({
   selector: 'test-component',

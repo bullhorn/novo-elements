@@ -1,3 +1,6 @@
+import { NovoLabelService } from '../labels/novo-label-service';
+import { DateFormatService } from './date-format';
+
 describe('Service: DateFormatService', () => {
   let service;
 

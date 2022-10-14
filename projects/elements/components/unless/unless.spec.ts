@@ -1,8 +1,8 @@
 import { TemplateRef, ViewContainerRef } from '@angular/core';
 import { ComponentFixture, inject, TestBed } from '@angular/core/testing';
-import { Unless } from './unless';
-import { TestCmp } from './test-cmp';
 import { Security } from 'novo-elements/services';
+import { TestCmp } from './test-cmp';
+import { Unless } from './unless';
 
 xdescribe('Element: Unless', () => {
   let fixture: ComponentFixture<TestCmp>;
@@ -67,7 +67,7 @@ xdescribe('Element: Unless', () => {
     it('should set isDisplayed to true if both permissions exist', () => {
       service.permissions = 'A&&B';
       service.isDisplayed = false;
-      (service.security as any).has.and.returnValue(true);
+      (service.security as any).has.mockReturnValue(true);
       service.check();
       expect(service.isDisplayed).toEqual(true);
     });

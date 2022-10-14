@@ -1,3 +1,5 @@
+import { BaseControl } from './base-control';
+
 describe('Control: BaseControl', () => {
   let control;
 

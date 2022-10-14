@@ -1,3 +1,5 @@
+import { DecodeURIPipe } from './decode-uri';
+
 describe('Pipe: DecodeURIPipe', () => {
   let pipe;
 

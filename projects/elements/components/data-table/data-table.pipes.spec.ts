@@ -1,3 +1,10 @@
+import {
+  DataTableBigDecimalRendererPipe,
+  DateTableDateRendererPipe,
+  DateTableDateTimeRendererPipe,
+  DateTableTimeRendererPipe,
+} from './data-table.pipes';
+
 class MockNovoLabelService {
   formatDateShort(val) {}
   formatDate(val) {}
@@ -23,7 +30,7 @@ describe('Pipe: DateTableDateTimeRendererPipe', () => {
   describe('When rendering strings', () => {
     it('DateTimePipe should make a call to the novo-label service if the value is not null', () => {
       // Arrange
-      spyOn(dateTimePipe.labels, 'formatDateShort');
+      jest.spyOn(dateTimePipe.labels, 'formatDateShort');
       const testVal = 1234567890;
       const testColumn = {
         label: 'Test',
@@ -38,7 +45,7 @@ describe('Pipe: DateTableDateTimeRendererPipe', () => {
 
     it('DateTimePipe should Not make a call to the novo-label service if a format is provided', () => {
       // Arrange
-      spyOn(dateTimePipe.labels, 'formatDateShort');
+      jest.spyOn(dateTimePipe.labels, 'formatDateShort');
       const testVal = 1234567890;
       const testColumn = {
         label: 'Test',
@@ -54,7 +61,7 @@ describe('Pipe: DateTableDateTimeRendererPipe', () => {
 
     it('DateTimePipe should return an empty string if the value is null', () => {
       // Arrange
-      spyOn(dateTimePipe.labels, 'formatDateShort');
+      jest.spyOn(dateTimePipe.labels, 'formatDateShort');
       const testVal = null;
       const testColumn = {
         label: 'Test',
@@ -69,7 +76,7 @@ describe('Pipe: DateTableDateTimeRendererPipe', () => {
 
     it('DatePipe should make a call to the novo-label service if the value is not null', () => {
       // Arrange
-      spyOn(datePipe.labels, 'formatDate');
+      jest.spyOn(datePipe.labels, 'formatDate');
       const testVal = 1234567890;
       const testColumn = {
         label: 'Test',
@@ -84,7 +91,7 @@ describe('Pipe: DateTableDateTimeRendererPipe', () => {
 
     it('DatePipe should Not make a call to the novo-label service if a format is provided', () => {
       // Arrange
-      spyOn(datePipe.labels, 'formatDate');
+      jest.spyOn(datePipe.labels, 'formatDate');
       const testVal = 1234567890;
       const testColumn = {
         label: 'Test',
@@ -100,7 +107,7 @@ describe('Pipe: DateTableDateTimeRendererPipe', () => {
 
     it('DatePipe should return an empty string if the value is null', () => {
       // Arrange
-      spyOn(datePipe.labels, 'formatDate');
+      jest.spyOn(datePipe.labels, 'formatDate');
       const testVal = null;
       const testColumn = {
         label: 'Test',
@@ -115,7 +122,7 @@ describe('Pipe: DateTableDateTimeRendererPipe', () => {
 
     it('TimePipe should make a call to the novo-label service if the value is not null', () => {
       // Arrange
-      spyOn(timePipe.labels, 'formatTime');
+      jest.spyOn(timePipe.labels, 'formatTime');
       const testVal = 1234567890;
       const testColumn = {
         label: 'Test',
@@ -130,7 +137,7 @@ describe('Pipe: DateTableDateTimeRendererPipe', () => {
 
     it('TimePipe should Not make a call to the novo-label service if a format is provided', () => {
       // Arrange
-      spyOn(timePipe.labels, 'formatTime');
+      jest.spyOn(timePipe.labels, 'formatTime');
       const testVal = 1234567890;
       const testColumn = {
         label: 'Test',
@@ -146,7 +153,7 @@ describe('Pipe: DateTableDateTimeRendererPipe', () => {
 
     it('DataTableBigDecimalRendererPipe should pass on the column configuration to formatBigDecimal', () => {
       // Arrange
-      spyOn(dataTableBigDecimalRendererPipe.labels, 'formatBigDecimal');
+      jest.spyOn(dataTableBigDecimalRendererPipe.labels, 'formatBigDecimal');
       const testVal = '12.52';
       const testColumn = {
         label: 'Total',
@@ -162,7 +169,7 @@ describe('Pipe: DateTableDateTimeRendererPipe', () => {
 
     it('TimePipe should return an empty string if the value is null', () => {
       // Arrange
-      spyOn(timePipe.labels, 'formatTime');
+      jest.spyOn(timePipe.labels, 'formatTime');
       const testVal = null;
       const testColumn = {
         label: 'Test',

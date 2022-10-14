@@ -19,9 +19,11 @@
       ]
     },
     "test": {
-      "builder": "@angular-builders/jest:run",
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage"],
       "options": {
-        "coverage": true
+        "jestConfig": "projects/elements/jest.config.ts",
+        "passWithNoTests": true
       }
     }
   }
