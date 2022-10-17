@@ -20,8 +20,6 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { ANIMATION_MODULE_TYPE } from '@angular/platform-browser/animations';
-import { Subject } from 'rxjs';
-import { take } from 'rxjs/operators';
 import {
   CanColor,
   CanColorCtor,
@@ -33,6 +31,8 @@ import {
   mixinTabIndex,
 } from 'novo-elements/common';
 import { Key } from 'novo-elements/utils';
+import { Subject } from 'rxjs';
+import { take } from 'rxjs/operators';
 
 export interface IRemovable {
   remove: () => void;
@@ -129,7 +129,7 @@ export class NovoChipRemove {
 @Component({
   selector: `novo-chip, [novo-chip]`,
   template: `<ng-content></ng-content>`,
-  styleUrls: ['./Chip.scss'],
+  styleUrls: ['./chip.scss'],
   encapsulation: ViewEncapsulation.None,
   inputs: ['color', 'tabIndex', 'size'],
   providers: [{ provide: REMOVABLE_REF, useExisting: NovoChipElement }],

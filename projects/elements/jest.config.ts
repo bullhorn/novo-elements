@@ -15,7 +15,7 @@ export default {
   testEnvironmentOptions: {
     url: 'http://localhost',
   },
-  // reporters: [ "default", "jest-junit" ],
+  reporters: ['default', 'jest-junit'],
   coverageDirectory: './coverage',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': 'jest-preset-angular',

@@ -36,7 +36,7 @@ let nextId = 0;
 @Component({
   selector: 'novo-checkbox',
   providers: [CHECKBOX_VALUE_ACCESSOR],
-  styleUrls: ['./Checkbox.scss'],
+  styleUrls: ['./checkbox.scss'],
   template: `
     <div class="novo-checkbox-group" [class.checked]="checked" [class.disabled]="disabled">
       <input

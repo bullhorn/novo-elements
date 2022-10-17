@@ -22,11 +22,6 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { ControlValueAccessor, FormGroupDirective, NgControl, NgForm } from '@angular/forms';
-import { merge, Observable, Subject, Subscription } from 'rxjs';
-import { startWith, takeUntil } from 'rxjs/operators';
-import { NovoChipTextControl } from './chip-text-control';
-import { NovoChipElement, NovoChipEvent, NovoChipSelectionChange } from './chip';
-import { NovoFieldControl } from 'novo-elements/components/field';
 import {
   CanUpdateErrorState,
   CanUpdateErrorStateCtor,
@@ -34,7 +29,12 @@ import {
   mixinErrorState,
   NOVO_OPTION_PARENT_COMPONENT,
 } from 'novo-elements/common';
+import { NovoFieldControl } from 'novo-elements/components/field';
 import { Key } from 'novo-elements/utils';
+import { merge, Observable, Subject, Subscription } from 'rxjs';
+import { startWith, takeUntil } from 'rxjs/operators';
+import { NovoChipElement, NovoChipEvent, NovoChipSelectionChange } from './chip';
+import { NovoChipTextControl } from './chip-text-control';
 
 // Boilerplate for applying mixins to NovoChipList.
 /** @docs-private */
@@ -95,7 +95,7 @@ export class NovoChipListChange {
     { provide: NovoFieldControl, useExisting: NovoChipList },
     { provide: NOVO_OPTION_PARENT_COMPONENT, useExisting: NovoChipList },
   ],
-  // styleUrls: ['./ChipList.scss'],
+  styleUrls: ['./chip-list.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
