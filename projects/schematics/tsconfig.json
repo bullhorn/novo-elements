@@ -20,7 +20,7 @@
     "sourceMap": true,
     "declaration": true,
     "target": "es6",
-    "types": ["jasmine", "node"],
+    "types": ["node", "jest"],
     "baseUrl": "."
   },
   "exclude": [

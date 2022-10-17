@@ -1,0 +1,39 @@
+@import "~novo-design-tokens/scss";
+
+:host {
+  // Fab Themed Button
+  &.novo-button-fab {
+    --button-color-text: var(--button-fab-color-text);
+    --button-color-background: var(--button-fab-color-background);
+    --button-color-border: var(--button-fab-color-border);
+    --button-border-radius: var(--border-radius-full);
+
+    width: var(--button-height);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover,
+    &:focus {
+      --button-shadow: var(--button-fab-shadow-hover);
+    }
+    &:active {
+      --button-shadow: var(--button-fab-shadow-active);
+    }
+
+    @include color-variants(
+      button-fab,
+      (
+        color-text: contrast,
+        color-background: default,
+        color-border: transparent,
+      )
+    );
+
+    .button-contents,
+    i {
+      display: contents;
+      margin: 0;
+    }
+  }
+}

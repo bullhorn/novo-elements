@@ -1,0 +1,60 @@
+:host {
+  .cke {
+    font: inherit !important;
+    box-shadow: none;
+    border-color: var(--color-background-muted);
+
+    .cke_top,
+    .cke_bottom {
+      background: var(--color-background-muted) none;
+      box-shadow: none;
+    }
+
+    .cke_bottom {
+      border-top: none;
+    }
+  }
+}
+
+.cke_dialog_background_cover {
+  background-color: var(--color-black) !important;
+}
+
+.cke_dialog {
+  .cke_dialog_title {
+    text-shadow: none;
+    background: var(--color-background-muted) none;
+    box-shadow: none;
+    border-bottom: none;
+  }
+
+  .cke_dialog_footer {
+    text-shadow: none;
+    background: var(--color-background-muted) none;
+    box-shadow: none;
+    border-top: none;
+  }
+}
+
+.theme-dark {
+  .cke_button {
+    filter: invert(1);
+  }
+  .cke_combo {
+    a.cke_combo_button {
+      &:hover,
+      &:active,
+      &:focus,
+      &.cke_combo_on {
+        background: var(--color-background-secondary);
+        border: var(--border-main);
+      }
+      .cke_combo_text {
+        color: white;
+      }
+      .cke_combo_arrow {
+        border-top-color: white;
+      }
+    }
+  }
+}

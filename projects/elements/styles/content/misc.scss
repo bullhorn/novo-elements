@@ -1,0 +1,154 @@
+img,
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+hr {
+  border: none;
+  border-top: var(--border-main);
+}
+
+table {
+  border-collapse: collapse;
+  margin-bottom: 10px;
+  width: 100%;
+  table-layout: auto;
+}
+
+table caption {
+  text-align: left;
+}
+
+td,
+th {
+  padding: 6px;
+  text-align: left;
+  vertical-align: top;
+  word-wrap: break-word;
+}
+
+thead {
+  border-bottom: var(--border-main);
+}
+
+tfoot {
+  border-top: var(--border-main);
+}
+
+tbody tr:nth-child(even) {
+  background-color: var(--color-background);
+}
+
+tbody tr:nth-child(even) button {
+  background-color: var(--color-background);
+}
+
+tbody tr:nth-child(even) button:hover {
+  background-color: var(--color-background);
+}
+
+::-webkit-scrollbar {
+  height: 12px;
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-background-secondary);
+  // border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 6px;
+  border: 2px solid var(--color-background-secondary);
+}
+
+::-webkit-scrollbar-thumb:not(:hover) {
+  background: var(--scrollbar-thumb);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
+}
+
+::selection {
+  background-color: var(--color-selection);
+  color: var(--text-selection);
+}
+
+details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background-color: var(--color-background);
+  padding: 10px 10px 0;
+  margin: 1em 0;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+details[open] {
+  padding: 10px;
+}
+
+details > :last-child {
+  margin-bottom: 0;
+}
+
+details[open] summary {
+  margin-bottom: 10px;
+}
+
+summary {
+  display: list-item;
+  background-color: var(--color-background-secondary);
+  padding: 10px;
+  margin: -10px -10px 0;
+  cursor: pointer;
+  outline: none;
+}
+
+summary:hover,
+summary:focus {
+  text-decoration: underline;
+}
+
+details > :not(summary) {
+  margin-top: 0;
+}
+
+summary::-webkit-details-marker {
+  color: var(--color-text);
+}
+
+dialog {
+  background-color: var(--color-background);
+  color: var(--color-text);
+  border: none;
+  border-radius: 6px;
+  border-color: var(--color-border);
+  padding: 10px 30px;
+}
+
+dialog > header:first-child {
+  background-color: var(--color-background-secondary);
+  border-radius: 6px 6px 0 0;
+  margin: -10px -30px 10px;
+  padding: 10px;
+  text-align: center;
+}
+
+dialog::backdrop {
+  background: #0000009c;
+  backdrop-filter: blur(4px);
+}
+
+footer {
+  border-top: var(--border-main);
+  padding-top: 10px;
+  color: var(--color-text-muted);
+}
+
+body > footer {
+  margin-top: 40px;
+}

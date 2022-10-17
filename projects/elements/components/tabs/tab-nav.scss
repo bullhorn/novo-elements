@@ -1,0 +1,43 @@
+@import "../../common/typography/text.mixins";
+
+:host {
+  background: var(--nav-color-background);
+  color: var(--nav-color-text);
+  padding: 0 var(--nav-spacing);
+  gap: var(--nav-spacing);
+  box-shadow: var(--nav-shadow);
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  list-style: none;
+  margin: 0;
+  z-index: 1;
+
+  &[direction="vertical"] {
+    flex-direction: column;
+    width: auto;
+  }
+
+  &[type="button-bar"] {
+    display: inline-flex;
+    border-radius: 3px;
+    border: 2px solid var(--color-border);
+  }
+  // &[theme="neutral"], // temporarily added back for backwards compatibility
+  // &[theme="color"] {
+  //   background: rgba(0, 0, 0, 0.2);
+  //   &[type="button-bar"] {
+  //     border: 2px solid #fff;
+  //   }
+  // }
+  // &[theme="white"] {
+  //   background-color: $white;
+  //   &[direction="vertical"] {
+  //     background: transparent;
+  //   }
+  //   &[type="button-bar"] {
+  //     border: 2px solid $light;
+  //   }
+  // }
+}

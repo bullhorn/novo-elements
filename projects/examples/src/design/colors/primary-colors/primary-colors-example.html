@@ -1,0 +1,19 @@
+<article class="color-blocks primary-colors">
+  <novo-card class="swatch" *ngFor="let color of colors">
+    <div class="colorbox color-{{color}}"></div>
+    <div class="splitcolorbox">
+      <span class="color-{{color}}-tint">
+        <novo-text>tint</novo-text>
+      </span>
+      <span class="color-{{color}}-shade">shade</span>
+      <span class="color-{{color}}-overlay">overlay</span>
+    </div>
+    <div class="colorname">
+      <novo-title class="name-main">{{color}}</novo-title>
+      <novo-row justify="space-between">
+        <novo-caption>var(--color-{{color}})</novo-caption>
+        <novo-caption>{{getHex(color)}}</novo-caption>
+      </novo-row>
+    </div>
+  </novo-card>
+</article>

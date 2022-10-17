@@ -1,0 +1,107 @@
+@import "~novo-design-tokens/scss";
+
+:root {
+  // Backgrounds
+  --background-base: var(--color-white); // body Color
+  --background-primary: var(--color-white); // default background color for containers
+  --background-secondary: var(--color-bright); // alt background color for containers
+  --background-muted: var(--color-silver); // a muted state for backgrounds, do we need this
+  --background-disabled: var(--color-sand); // Background color for whenever a components is disabled
+  --background-overlay: rgba(0,0,0,.1);
+
+  // Text coloring
+  --text-main: #{$color-charcoal}; // All text that is of primary importance
+  --text-secondary: #{$color-neutral}; // Secondary information like labels
+  --text-muted: #{$color-slate}; // Placeholder & Disabled
+  --text-disabled: #{$color-slate}; // Placeholder & Disabled
+  --text-inverted: #{$color-white}; // All text that is of primary importance
+
+  //---
+  --font-color-caption: var(--text-secondary);
+  --font-color-label:  var(--text-secondary);
+  --font-color-text:  var(--color-text);
+  --font-color-title:  var(--color-text);
+  --font-color-button:  var(--color-text);
+
+// What are our theme colors
+// Entity, Action, Error, Warning, Info, Success,
+
+// For Backgrounds or Text
+  --selection: var(--color-blue-50);
+  --focus: var(--color-blue-70);
+  --selection: var(--color-blue-50);
+
+
+
+
+  // --action-selected: var(--color-selection);
+  // --action-active: var(--color-blue-70);
+  // --action-focus: var(--color-blue-80);
+  // --action-hover: var(--color-blue-80);
+  // --action-disabled: var(--color-gray-50);
+
+  --overlay-selected: var(--color-blue-70);
+  --text-selected: var(--color-selection);
+  --border-selected: var(--color-selection);
+
+
+  // States
+  // Selection, Success, Warning, Error,
+
+  // --selection: var(--color-blue-50);
+  // --selection-hover:  var(--color-red-60);
+  // --selection-focus: var(--color-red-70);
+  // --selection-inverse: #{$white};
+
+  // --selection: var(--color-red-50); // Either Text or BG color
+  // --selection-text: var(--text-primary); // A reference to --text-primary or --text-inverted based on apca lib
+  // --selection-muted: var(--color-blue-10); // For light or hover? or should this be focus color
+
+  //Alternative
+  // --selection: var(--color-blue); // Either Text or BG color
+  // --selection-lightness: 50 // Either Text or BG color
+  // --selection-text: var(--color-blue-50-contrast); // Text color when in selection bg
+  // --selection-text2: hsla(0, 0%, calc(calc(65% - var(--selection-lightness)) * 100), 100%);
+  // --selection-muted: var(--color-blue-10); // For light or hover? or should this be focus color
+
+
+
+
+
+  --focus: var(--color-blue-70); // Either Text or BG color
+
+  // Success
+  --success: var(--color-hsl-green); // Either Text or BG color JUST THE HS(-V) values
+  --success-bg: hsla(var(--success), 50%, 100%);
+  --success-hover: hsla(var(--success), 60%, 100%);
+  --success-focus: hsla(var(--success), 70%, 100%);
+  --success-inverse: var(--color-green-50-contrast); // Text color when in selection bg
+
+  // Warning
+  --warning: var(--color-yellow-50); // Either Text or BG color
+  --warning-inverse: var(--color-yellow-50-contrast); // Text color when in selection bg
+
+  // Error
+  --error: var(--color-red-50); // Either Text or BG color
+  --error-inverse: var(--color-red-50-contrast); // Text color when in selection bg
+
+  // Use an Inteface for customer configuration,
+  // They can choose any color they want
+  // we will break that down into the following
+  --base-selection-color: 185, 75%;
+  --base-selection-lightness: 60%;
+
+  --selection: hsla(var(--selection-color), var(--selection-lightness), 100%) 
+  --selection-muted: hsla(var(--selection-color), 10%, 100%) 
+
+
+
+  // States
+  --focus: #{$color-ocean};
+
+
+
+
+  // Shared
+
+}

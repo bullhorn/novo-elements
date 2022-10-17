@@ -1,0 +1,18 @@
+@import "~novo-design-tokens/scss";
+:host {
+  display: block;
+  @include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
+    i.#{$name} {
+      background: $color;
+    }
+  }
+  .entity {
+    padding-top: 6px;
+    padding-bottom: 6px;
+    font-size: 1.15em;
+  }
+  i {
+    font-size: 1.1em;
+    margin-right: 6px;
+  }
+}

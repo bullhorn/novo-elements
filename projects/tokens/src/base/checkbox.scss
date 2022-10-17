@@ -1,0 +1,143 @@
+/**
+ * Form elements
+ * Checkboxes & Radios
+ */
+
+[type="checkbox"] {
+  --empty-state: var(--icon-box-empty);
+  --selected-state: var(--icon-box-checked);
+  --unknown-state: var(--icon-box-unknown);
+}
+
+[type="radio"] {
+  --empty-state: var(--icon-radio-empty);
+  --selected-state: var(--icon-radio-checked);
+  --unknown-state: none;
+}
+
+[type="checkbox"],
+[type="radio"] {
+  --current-background-color: var(--theme-text-main);
+  appearance: none;
+  width: 1.25em;
+  height: 1.25em;
+  margin-top: -0.125em;
+  margin-right: 0.375em;
+  margin-left: 0;
+  margin-inline-start: 0;
+  margin-inline-end: 0.375em;
+  font-size: inherit;
+  vertical-align: middle;
+  background-color: var(--current-background-color);
+  cursor: pointer;
+
+  &::-ms-check {
+    display: none; // unstyle IE checkboxes
+  }
+}
+
+[type="checkbox"]:not([role="switch"]),
+[type="radio"] {
+  --current-state: var(--empty-state);
+  mask-image: var(--current-state);
+  background-position: center;
+  background-size: 1em auto;
+  background-repeat: no-repeat;
+
+  &:checked,
+  &:checked:active,
+  &:checked:focus {
+    --current-background-color: var(--theme-selection);
+    --current-state: var(--selected-state) !important;
+  }
+
+  & ~ label {
+    display: inline-block;
+    margin-right: 0.375em;
+    margin-bottom: 0;
+    cursor: pointer;
+  }
+}
+
+// Checkboxes
+[type="checkbox"] {
+  &:indeterminate {
+    --current-background-color: var(--theme-selection);
+    --current-state: var(--unknown-state);
+  }
+}
+
+// Radios
+[type="radio"] {
+  &:checked,
+  &:checked:active,
+  &:checked:focus {
+    --current-background-color: var(--theme-selection);
+  }
+}
+
+// Switchs
+[type="checkbox"][role="switch"] {
+  --current-background-color: var(--switch-background-color);
+  --current-border-color: var(--switch-background-color);
+
+  // Config
+  $switch-height: 1.25em;
+  $switch-width: 2.25em;
+  $switch-transition: 0.1s ease-in-out;
+
+  // Styles
+  width: $switch-width;
+  height: $switch-height;
+  border: var(--theme-border-width) solid var(--current-border-color);
+  border-radius: $switch-height;
+  background-color: var(--current-background-color);
+  line-height: $switch-height;
+
+  // This is the toggle circle
+  &:before {
+    display: block;
+    width: calc(#{$switch-height} - (var(--theme-border-width) * 2));
+    height: 100%;
+    border-radius: 50%;
+    background-color: var(--theme-background-main);
+    content: "";
+    transition: margin $switch-transition;
+  }
+
+  &:focus {
+    --current-background-color: var(--switch-background-color);
+    --current-border-color: var(--switch-background-color);
+  }
+
+  &:checked {
+    --current-background-color: var(--theme-selection-light);
+    --current-border-color: var(--theme-selection-dark);
+    --current-text-color: var(--theme-selection);
+    --current-state: none;
+    mask-image: none;
+
+    &::before {
+      margin-left: calc(#{$switch-width * 0.5} - var(--theme-border-width));
+      margin-inline-start: calc(
+        #{$switch-width * 0.5} - var(--theme-border-width)
+      );
+    }
+  }
+}
+
+// Aria-invalid
+[type="checkbox"],
+[type="checkbox"]:checked,
+[type="radio"],
+[type="radio"]:checked,
+[type="checkbox"][role="switch"],
+[type="checkbox"][role="switch"]:checked {
+  &[aria-invalid="false"] {
+    --current-background-color: var(--theme-success);
+  }
+
+  &[aria-invalid="true"] {
+    --current-background-color: var(--theme-error);
+  }
+}

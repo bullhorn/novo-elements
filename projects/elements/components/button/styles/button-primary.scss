@@ -1,0 +1,27 @@
+@import "~novo-design-tokens/scss";
+
+:host {
+  // Primary theme
+  &.novo-button-primary {
+    --button-color-text: var(--button-primary-color-text);
+    --button-color-background: var(--button-primary-color-background);
+    --button-color-border: var(--button-primary-color-border);
+
+    &:hover,
+    &:focus {
+      --button-shadow: var(--button-primary-shadow-hover);
+    }
+    &:active {
+      --button-shadow: var(--button-primary-shadow-active);
+    }
+
+    @include color-variants(
+      button-primary,
+      (
+        color-text: contrast,
+        color-background: default,
+        color-border: transparent,
+      )
+    );
+  }
+}

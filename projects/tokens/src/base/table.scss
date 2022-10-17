@@ -1,0 +1,50 @@
+// 1. Collapse border spacing in all browsers (opinionated)
+// 2. Remove text indentation from table contents in Chrome, Edge, and Safari
+:where(table) {
+  width: 100%;
+  border-collapse: collapse; // 1
+  border-spacing: 0;
+  text-indent: 0; // 2
+  table-layout: auto;
+}
+
+// Cells
+th,
+td {
+  padding: calc(var(--spacing-md) / 2) var(--spacing-md);
+  border-bottom: var(--theme-border-width) solid var(--theme-border-color);
+  color: var(--theme-text-main);
+  // font-weight: var(--font-weight);
+  // font-size: var(--font-size);
+  text-align: left;
+  text-align: start;
+  word-wrap: break-word;
+
+  &.align-end {
+    text-align: right;
+    text-align: end;
+  }
+}
+
+table caption {
+  text-align: left;
+  text-align: start;
+}
+
+// Footer
+tfoot {
+  th,
+  td {
+    border-top: var(--theme-border-width) solid var(--theme-border-color);
+    border-bottom: 0;
+  }
+}
+
+// Striped
+table {
+  &[role="grid"] {
+    tbody tr:nth-child(odd) {
+      background-color: var(--theme-background-main);
+    }
+  }
+}

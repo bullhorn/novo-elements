@@ -1,0 +1,12 @@
+:host {
+  position: relative;
+  display: block;
+  border: var(--border-main);
+  border-radius: var(--border-radius-round);
+  padding: var(--spacing-md);
+  width: 100%;
+
+  .condition-row {
+    width: 100%;
+  }
+}

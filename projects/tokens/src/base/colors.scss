@@ -1,0 +1,45 @@
+$palette-colors: "red", "pink", "orange", "yellow", "green", "teal", "aqua",
+  "blue", "indigo", "violet", "gray";
+$palette-swatches: "10", "20", "30", "40", "50", "60", "70", "80", "90", "95",
+  "98";
+$semantic-colors: "selection", "success", "error", "warning", "info";
+$semantic-accents: "light", "dark";
+
+@each $color in $semantic-colors {
+  .bgc-#{$color} {
+    --current-backgound-color: var(--theme-#{$color});
+    --current-text-color: var(--theme-#{$color}-contrast);
+    background: var(--current-backgound-color);
+    color: var(--current-text-color);
+  }
+
+  @each $accent in $semantic-accents {
+    .bgc-#{$color}-#{$accent} {
+      --current-backgound-color: var(--theme-#{$color}-#{$accent});
+      --current-text-color: var(--theme-#{$color}-contrast);
+      background: var(--current-backgound-color);
+      color: var(--current-text-color);
+    }
+  }
+
+  .txc-#{$color} {
+    --current-text-color: var(--theme-#{$color});
+    color: var(--current-text-color);
+  }
+}
+
+@each $color in $palette-colors {
+  @each $swatch in $palette-swatches {
+    .bgc-#{$color}-#{$swatch} {
+      --current-backgound-color: var(--color-#{$color}-#{$swatch});
+      --current-text-color: var(--color-#{$color}-#{$swatch}-contrast);
+      background: var(--current-backgound-color);
+      color: var(--current-text-color);
+    }
+
+    .txc-#{$color} {
+      --current-text-color: var(--color-#{$color}-#{$swatch});
+      color: var(--current-text-color);
+    }
+  }
+}

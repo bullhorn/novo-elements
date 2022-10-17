@@ -1,0 +1,100 @@
+@import "./chip-list.scss";
+@import "../../common/typography/text.mixins.scss";
+
+:host {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  border-bottom: 1px solid var(--color-active);
+  transition: all 200ms ease-in-out;
+  position: relative;
+  padding: 0 2rem 2px 0;
+  & + i {
+    position: absolute;
+    right: 0;
+    bottom: 7px;
+  }
+  &.with-value {
+    margin-bottom: 0;
+  }
+  &:hover {
+    border-bottom: 1px solid var(--color-hover);
+  }
+  &.selected,
+  &.selected:hover {
+    border-bottom: 1px solid var(--color-selection);
+    & + i {
+      color: var(--color-selection);
+    }
+  }
+  &.disabled {
+    border-bottom-style: dashed !important;
+  }
+  .chip-input-container {
+    flex-grow: 4;
+    input {
+      padding-top: 0;
+      border: none;
+      background: transparent !important;
+      width: 100%;
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+  .novo-chip-container {
+    display: flex;
+    flex-flow: row wrap;
+    gap: 0.4rem;
+  }
+
+  label.clear-all {
+    flex: 1 100%;
+    position: absolute;
+    right: 0;
+    bottom: -20px;
+    font-size: 0.9rem;
+    color: var(--color-error);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    i {
+      font-size: 0.7rem;
+      padding-bottom: 2px;
+      margin-left: 5px;
+    }
+  }
+  i.bhi-search {
+    position: absolute;
+    bottom: 8px;
+    right: 0;
+    font-size: 1.1em;
+    color: var(--color-text);
+    // &.has-value {
+    //   bottom: 14px;
+    // }
+  }
+
+  ::ng-deep {
+    novo-picker {
+      padding-bottom: 0;
+      position: inherit;
+      i,
+      novo-icon {
+        display: none !important;
+      }
+      .novo-field-input {
+        border: none;
+        border-bottom: none !important;
+        .novo-field-infix {
+          align-self: center !important;
+        }
+      }
+      div.picker-results-container {
+        left: 0;
+      }
+    }
+  }
+}

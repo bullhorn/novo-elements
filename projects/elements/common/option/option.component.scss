@@ -1,0 +1,97 @@
+@import "../../styles/variables.scss";
+@import "../typography/text.mixins.scss";
+
+$novo-menu-side-padding: 0.5rem;
+:host {
+  // Variables that change or need to be inherited
+  // --option-height: var(--size-height-md);
+  // --option-spacing: var(--spacing-md);
+
+  min-height: var(--option-height);
+  padding: 0 var(--option-spacing);
+  gap: var(--option-spacing);
+
+  @include novo-body-text();
+  position: relative;
+  outline: none;
+  display: flex;
+  flex-direction: row;
+  max-width: 100%;
+  box-sizing: border-box;
+  align-items: center;
+  margin: 0;
+  cursor: pointer;
+  flex: 1;
+  // padding: 1rem 1rem 1rem 1.6rem;
+  // gap: 1rem;
+  -webkit-tap-highlight-color: transparent;
+
+  &:hover:not(.novo-option-inert) {
+    background: var(--color-selection-overlay);
+  }
+
+  &:active:not(.novo-option-inert),
+  &.novo-active:not(.novo-option-inert) {
+    background: var(--color-selection-overlay);
+  }
+
+  &.novo-selected {
+    color: var(--color-selection);
+  }
+
+  &.disabled,
+  &[aria-disabled="true"] {
+    cursor: not-allowed;
+    color: var(--color-disabled);
+    &:hover {
+      background: var(--color-error-overlay);
+    }
+  }
+
+  // .novo-optgroup &:not(.novo-option-multiple) {
+  //   padding-left: $novo-menu-side-padding * 2;
+
+  //   [dir="rtl"] & {
+  //     padding-left: $novo-menu-side-padding;
+  //     padding-right: $novo-menu-side-padding * 2;
+  //   }
+  // }
+
+  .novo-option-text {
+    display: inline-block;
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    flex-grow: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    gap: 1rem;
+  }
+
+  .novo-option-pseudo-checkbox {
+    $margin: calc($novo-menu-side-padding / 2);
+    margin-right: $margin;
+
+    [dir="rtl"] & {
+      margin-left: $margin;
+      margin-right: 0;
+    }
+  }
+
+  @include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
+    &.novo-accent-#{$name} {
+      border-left: 4px solid $color;
+    }
+    &.novo-fill-#{$name}:not(.novo-option-inert) {
+      color: $contrast;
+      background: $color;
+      &:hover,
+      &:focus {
+        background: $tint;
+      }
+      &:active {
+        background: $shade;
+      }
+    }
+  }
+}
