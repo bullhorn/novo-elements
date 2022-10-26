@@ -9,9 +9,9 @@
     display: none;
     width: 40rem;
     padding: 2rem;
-    background-color: var(--color-background);
-    color: var(--color-text);
     background-clip: padding-box;
+    background-color: var(--color-background-secondary);
+    color: var(--color-text);
     box-shadow: var(--shadow-z2);
 
     &.top {
@@ -76,7 +76,7 @@
         left: 1px;
         bottom: -1rem;
         border-left-width: 0;
-        border-right-color: var(--color-background);
+        border-right-color: var(--color-background-secondary);
       }
       &.center {
         top: 50%;

@@ -2,6 +2,12 @@
 @import "../../styles/global/functions";
 
 @mixin novo-expansion-panel-theme() {
+  [data-theme*="-dark"] {
+    .novo-expansion-panel {
+      background: var(--color-background-secondary);
+    }
+  }
+
   .novo-expansion-panel {
     background: var(--color-background);
     color: var(--color-text);
@@ -43,7 +49,7 @@
   .novo-expansion-panel.novo-expanded {
     @include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
       &[theme="#{$name}"] {
-        border-top: 3px solid var(--color-border);
+        border-top: 3px solid $color;
       }
     }
   }

@@ -1,4 +1,3 @@
-// NG2
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { NovoButtonElement } from './button';

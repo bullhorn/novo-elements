@@ -4,7 +4,7 @@
   // Secondary Themed Button
   &.novo-button-outlined {
     --button-color-text: var(--button-outlined-color-text);
-    --button-color-background: var(--button-outlined-color-background);
+    --button-color-background: var(--color-background); //var(--button-outlined-color-background);
     --button-color-border: var(--button-outlined-color-border);
 
     &:hover,

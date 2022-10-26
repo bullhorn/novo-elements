@@ -6,9 +6,9 @@
     --button-color-text: var(--button-fab-color-text);
     --button-color-background: var(--button-fab-color-background);
     --button-color-border: var(--button-fab-color-border);
-    --button-border-radius: var(--border-radius-full);
+    --button-border-radius: 50%;
 
-    width: var(--button-height);
+    width: var(--button-size-height);
     display: inline-flex;
     align-items: center;
     justify-content: center;

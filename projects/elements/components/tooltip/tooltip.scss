@@ -1,8 +1,7 @@
-$tooltip-background: var(--tooltip-background-color, #383838);
-$tooltip-error-color: var(--color-shade-error, #b34e4d);
-$tooltip-info-color: var(--color-shade-info, #3986ac);
-$tooltip-warning-color: var(--color-shade-warning, #c09854);
-$tooltip-success-color: var(--color-shade-success, #458746);
+$tooltip-error-color: var(--color-error, #b34e4d);
+$tooltip-info-color: var(--color-info, #3986ac);
+$tooltip-warning-color: var(--color-warning, #c09854);
+$tooltip-success-color: var(--color-success, #458746);
 
 @mixin tooltip-pointer($color) {
   &.top-right:before,
@@ -25,34 +24,40 @@ $tooltip-success-color: var(--color-shade-success, #458746);
 
 :host {
   div {
-    background: $tooltip-background;
-    color: var(--color-white, #fff);
-    border-radius: var(--tooltip-border-radius, 4px);
-    padding: 8px 10px;
-    font-size: 12px;
-    line-height: 12px;
+    color: var(--tooltip-color-text);
+    background-color: var(--tooltip-color-background);
+    box-shadow: var(--tooltip-shadow);
+    border-radius: var(--tooltip-border-radius);
+    border: 1px solid var(--tooltip-color-border);
+    padding: var(--spacing-sm) var(--spacing-md);
+
+    font-size: var(font-size-sm);
+    line-height: var(font-size-sm);
     white-space: nowrap;
-    box-shadow: var(--shadow-2);
 
     &.error {
       background-color: $tooltip-error-color;
+      color: var(--color-error-contrast);
       @include tooltip-pointer($tooltip-error-color);
     }
     &.info {
       background-color: $tooltip-info-color;
+      color: var(--color-info-contrast);
       @include tooltip-pointer($tooltip-info-color);
     }
     &.warning {
       background-color: $tooltip-warning-color;
+      color: var(--color-warning-contrast);
       @include tooltip-pointer($tooltip-warning-color);
     }
     &.success {
       background-color: $tooltip-success-color;
+      color: var(--color-success-contrast);
       @include tooltip-pointer($tooltip-success-color);
     }
 
     //Arrow positions
-    @include tooltip-pointer($tooltip-background);
+    @include tooltip-pointer(var(--tooltip-color-background));
 
     &.top:before {
       margin-bottom: -11px;

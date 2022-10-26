@@ -33,15 +33,19 @@ export interface Settings {
   selector: 'google-places-list',
   styleUrls: ['./places.component.scss'],
   template: `
-    <novo-list direction="vertical">
-      <novo-list-item *ngFor="let data of queryItems; let $index = index" (click)="selectedListNode($event, $index)">
-        <item-header>
-          <item-avatar icon="location"></item-avatar>
-          <item-title>{{ data.structured_formatting?.main_text ? data.structured_formatting.main_text : data.description }}</item-title>
-        </item-header>
-        <item-content>{{ data.structured_formatting?.secondary_text }}</item-content>
-      </novo-list-item>
-    </novo-list>
+    <novo-card>
+      <novo-optgroup>
+        <novo-option *ngFor="let data of queryItems; let $index = index" (click)="selectedListNode($event, $index)">
+          <novo-icon novoPrefix>location</novo-icon>
+          <novo-stack>
+            <novo-text bold>{{
+              data.structured_formatting?.main_text ? data.structured_formatting.main_text : data.description
+            }}</novo-text>
+            <novo-text>{{ data.structured_formatting?.secondary_text }}</novo-text>
+          </novo-stack>
+        </novo-option>
+      </novo-optgroup>
+    </novo-card>
   `,
 })
 export class PlacesListComponent implements OnInit, OnChanges {

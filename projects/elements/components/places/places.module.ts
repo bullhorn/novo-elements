@@ -2,13 +2,25 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { GooglePlacesService } from './places.service';
+import { NovoCommonModule, NovoOptionModule } from 'novo-elements/common';
+import { NovoIconModule } from 'novo-elements/components/icon';
+import { NovoCardModule } from '../card';
+import { NovoFlexModule } from '../flex';
 import { PlacesListComponent } from './places.component';
-import { NovoListModule } from 'novo-elements/components/list';
+import { GooglePlacesService } from './places.service';
 
 @NgModule({
   declarations: [PlacesListComponent],
-  imports: [CommonModule, HttpClientModule, FormsModule, NovoListModule],
+  imports: [
+    CommonModule,
+    HttpClientModule,
+    FormsModule,
+    NovoOptionModule,
+    NovoCommonModule,
+    NovoIconModule,
+    NovoFlexModule,
+    NovoCardModule,
+  ],
   exports: [PlacesListComponent],
   providers: [GooglePlacesService],
 })

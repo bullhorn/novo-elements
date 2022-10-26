@@ -1,6 +1,8 @@
 <novo-pseudo-checkbox *ngIf="selectable && multiple" class="novo-option-pseudo-checkbox"
   [state]="selected ? 'checked' : 'unchecked'" [disabled]="disabled"></novo-pseudo-checkbox>
 
+<ng-content select="[novoPrefix]"></ng-content>
+
 <span class="novo-option-text">
   <ng-content></ng-content>
 </span>

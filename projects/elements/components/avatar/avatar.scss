@@ -1,6 +1,10 @@
 @import "../../styles/variables.scss";
 
 :host {
+  background-color: var(--color-background-muted);
+  box-shadow: var(--avatar-shadow);
+  border: 1px solid var(--avatar-color-border);
+
   display: inline-block;
   width: 30px;
   height: 30px;
@@ -8,7 +12,6 @@
   background-position: center;
   overflow: hidden;
   position: relative;
-  background-color: var(--color-background-muted);
 
   img {
     width: inherit;

@@ -51,7 +51,7 @@ export class AppComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     this.observer
-      .observe(['(max-width: 480px)'])
+      .observe(['(max-width: 850px)'])
       .pipe(startWith({ matches: false }), delay(10))
       .subscribe((res) => {
         if (res.matches) {

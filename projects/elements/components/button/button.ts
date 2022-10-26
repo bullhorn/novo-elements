@@ -1,5 +1,16 @@
 // NG2
-import { ChangeDetectionStrategy, Component, ContentChildren, ElementRef, HostBinding, Input, QueryList } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  ContentChildren,
+  ElementRef,
+  HostBinding,
+  Input,
+  QueryList,
+  ViewChild,
+} from '@angular/core';
 import { NovoIconComponent } from 'novo-elements/components/icon';
 import { BooleanInput, notify } from 'novo-elements/utils';
 
@@ -13,7 +24,7 @@ import { BooleanInput, notify } from 'novo-elements/utils';
     '[attr.side]': 'side',
     // '[attr.size]': 'size',
     '[attr.role]': "'button'",
-    '[class.icon-only]': '(icon || _icons.length > 0) && (!fab && !basic && !primary && !outlined)',
+    '[class.icon-only]': '!_hasTextContent && (icon || _icons.length > 0) && (!fab && !basic && !primary && !outlined)',
   },
   styleUrls: [
     './styles/button.scss',
@@ -66,7 +77,7 @@ import { BooleanInput, notify } from 'novo-elements/utils';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NovoButtonElement {
+export class NovoButtonElement implements AfterViewInit {
   /**
    * The text color of the button. Should be used for Icon buttons. see theme.
    */
@@ -129,8 +140,12 @@ export class NovoButtonElement {
     return this._icon;
   }
 
+  public _hasTextContent: boolean = false;
+
   @ContentChildren(NovoIconComponent, { descendants: true })
   _icons: QueryList<NovoIconComponent>;
+
+  @ViewChild('textContent') textContent: ElementRef;
 
   @HostBinding('class')
   get hb_calculatedClasses() {
@@ -181,10 +196,14 @@ export class NovoButtonElement {
 
   private _icon: string;
 
-  constructor(public element: ElementRef) {}
+  constructor(public element: ElementRef, private cdr: ChangeDetectorRef) {}
 
   /** Focuses the input. */
   focus(options?: FocusOptions): void {
     this.element.nativeElement.focus(options);
+  }
+
+  public ngAfterViewInit(): void {
+    this._hasTextContent = this.textContent.nativeElement.textContent.trim();
   }
 }

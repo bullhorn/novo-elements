@@ -42,13 +42,12 @@ $chip-spacing: (
   -webkit-tap-highlight-color: transparent;
   // Chips could be set on buttons so we need to reset the user agent styles.
   border: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
+  appearance: none;
 }
 
 .novo-chip {
   @include novo-body-text();
-  background: var(--color-background-secondary);
+  background: var(--color-background-muted);
   box-sizing: border-box;
   border: 1px solid transparent;
   transition: all 200ms ease-in-out;
@@ -191,7 +190,7 @@ $chip-spacing: (
 
   @include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
     &.novo-color-#{$name} {
-      color: getContrastColor($name);
+      color: $contrast;
       background: $color;
       & > * {
         color: inherit;
@@ -199,7 +198,7 @@ $chip-spacing: (
     }
 
     &.novo-accent-#{$name} {
-      border: 1px solid $color;
+      border: 2px solid $color;
       color: $color;
     }
   }
