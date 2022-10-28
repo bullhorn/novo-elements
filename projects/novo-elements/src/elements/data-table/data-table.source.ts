@@ -34,6 +34,7 @@ export class DataTableSource<T> extends DataSource<T> {
       switchMap(() => {
         this.pristine = false;
         this.loading = true;
+        this.state.dataLoadingSource.next(this.loading);
         return this.tableService.getTableResults(
           this.state.sort,
           this.state.filter,
@@ -66,6 +67,7 @@ export class DataTableSource<T> extends DataSource<T> {
           this.ref.markForCheck();
           setTimeout(() => {
             this.loading = false;
+            this.state.dataLoadingSource.next(this.loading);
             this.state.dataLoaded.next();
             this.ref.markForCheck();
           });
