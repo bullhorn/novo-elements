@@ -1,5 +1,4 @@
-import { ChangeDetectionStrategy, Component, ContentChild, QueryList, ViewChild, ViewChildren, ViewEncapsulation } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, QueryList, ViewChildren, ViewEncapsulation } from '@angular/core';
 import { NovoPickerToggleElement } from './../../field/toggle/picker-toggle.component';
 import { AbstractConditionFieldDef } from './abstract-condition.definition';
 
