@@ -1,4 +1,5 @@
 import { Directive, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { NovoLabelService } from '../../../services';
 import { NovoConditionFieldDef } from '../query-builder.directives';
 
@@ -32,6 +33,10 @@ export abstract class AbstractConditionFieldDef implements OnDestroy, OnInit {
 
   ngOnDestroy() {
     this.fieldDef?.unregister();
+  }
+
+  onOperatorSelect(formGroup: FormGroup): void {
+    formGroup.get('value').setValue(null);
   }
 
   /** Synchronizes the column definition name with the text column name. */
