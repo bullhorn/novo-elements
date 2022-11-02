@@ -14,14 +14,14 @@ import { AbstractConditionFieldDef } from './abstract-condition.definition';
           <novo-option value="greaterThan">{{ labels.greaterThan }}</novo-option>
           <novo-option value="lessThan">{{ labels.lessThan }}</novo-option>
           <novo-option value="equalTo">{{ labels.equalTo }}</novo-option>
-          <novo-option value="isEmpty">{{ labels.isEmpty }}</novo-option>
+          <novo-option value="isNull">{{ labels.isEmpty }}</novo-option>
         </novo-select>
       </novo-field>
       <ng-container *novoConditionInputDef="let formGroup" [ngSwitch]="formGroup.value.operator" [formGroup]="formGroup">
         <novo-field *novoSwitchCases="['greaterThan', 'lessThan', 'equalTo']">
           <input novoInput type="number" formControlName="value" />
         </novo-field>
-        <novo-field *novoSwitchCases="['isEmpty']">
+        <novo-field *novoSwitchCases="['isNull']">
           <novo-radio-group formControlName="value">
             <novo-radio [value]="true">{{ labels.yes }}</novo-radio>
             <novo-radio [value]="false">{{ labels.no }}</novo-radio>

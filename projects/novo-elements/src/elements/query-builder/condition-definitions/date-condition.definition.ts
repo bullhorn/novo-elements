@@ -16,7 +16,7 @@ import { AbstractConditionFieldDef } from './abstract-condition.definition';
           <novo-option value="after">{{ labels.after }}</novo-option>
           <novo-option value="between">{{ labels.between }}</novo-option>
           <novo-option value="within">{{ labels.within }}</novo-option>
-          <novo-option value="isEmpty">{{ labels.isEmpty }}</novo-option>
+          <novo-option value="isNull">{{ labels.isEmpty }}</novo-option>
         </novo-select>
       </novo-field>
       <ng-container *novoConditionInputDef="let formGroup; viewIndex as viewIndex" [ngSwitch]="formGroup.value.operator" [formGroup]="formGroup">
@@ -40,7 +40,7 @@ import { AbstractConditionFieldDef } from './abstract-condition.definition';
             <novo-option value="-90">{{ labels.past90Days }}</novo-option>
           </novo-select>
         </novo-field>
-        <novo-field *novoSwitchCases="['isEmpty']">
+        <novo-field *novoSwitchCases="['isNull']">
           <novo-radio-group formControlName="value">
             <novo-radio [value]="true">{{ labels.yes }}</novo-radio>
             <novo-radio [value]="false">{{ labels.no }}</novo-radio>

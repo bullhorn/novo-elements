@@ -13,7 +13,7 @@ import { AbstractConditionFieldDef } from './abstract-condition.definition';
           <novo-option value="includeAny">{{ labels.includeAny }}</novo-option>
           <novo-option value="includeAll">{{ labels.includeAll }}</novo-option>
           <novo-option value="excludeAny">{{ labels.exclude }}</novo-option>
-          <novo-option value="isEmpty">{{ labels.isEmpty }}</novo-option>
+          <novo-option value="isNull">{{ labels.isEmpty }}</novo-option>
         </novo-select>
       </novo-field>
       <ng-container *novoConditionInputDef="let formGroup; fieldMeta as meta" [ngSwitch]="formGroup.value.operator" [formGroup]="formGroup">
@@ -25,7 +25,7 @@ import { AbstractConditionFieldDef } from './abstract-condition.definition';
             </novo-option>
           </novo-select>
         </novo-field>
-        <novo-field *novoSwitchCases="['isEmpty']">
+        <novo-field *novoSwitchCases="['isNull']">
           <novo-radio-group formControlName="value">
             <novo-radio [value]="true">{{ labels.yes }}</novo-radio>
             <novo-radio [value]="false">{{ labels.no }}</novo-radio>

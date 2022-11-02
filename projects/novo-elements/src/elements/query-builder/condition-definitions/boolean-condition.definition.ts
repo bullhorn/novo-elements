@@ -12,13 +12,13 @@ import { AbstractConditionFieldDef } from './abstract-condition.definition';
         <novo-select [placeholder]="labels.operator" formControlName="operator" (onSelect)="onOperatorSelect(formGroup)">
           <novo-option value="include">{{ labels.equals }}</novo-option>
           <novo-option value="exclude">{{ labels.doesNotEqual }}</novo-option>
-          <novo-option value="isEmpty">{{ labels.isEmpty }}</novo-option>
+          <novo-option value="isNull">{{ labels.isEmpty }}</novo-option>
         </novo-select>
       </novo-field>
       <novo-field *novoConditionInputDef="let formGroup" [style.width.px]="125" [formGroup]="formGroup">
         <novo-radio-group formControlName="value">
-          <novo-radio [value]="true">{{ formGroup.value.operator === 'isEmpty' ? labels.yes : labels.true }}</novo-radio>
-          <novo-radio [value]="false">{{ formGroup.value.operator === 'isEmpty' ? labels.no : labels.false }}</novo-radio>
+          <novo-radio [value]="true">{{ formGroup.value.operator === 'isNull' ? labels.yes : labels.true }}</novo-radio>
+          <novo-radio [value]="false">{{ formGroup.value.operator === 'isNull' ? labels.no : labels.false }}</novo-radio>
         </novo-radio-group>
       </novo-field>
     </ng-container>
