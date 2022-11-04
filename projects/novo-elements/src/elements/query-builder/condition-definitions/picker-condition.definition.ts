@@ -18,7 +18,7 @@ import { AbstractConditionFieldDef } from './abstract-condition.definition';
       <novo-field *novoConditionInputDef="let formGroup; fieldMeta as meta" [formGroup]="formGroup">
         <novo-select formControlName="value" [placeholder]="labels.select" [multiple]="true">
           <!-- WHat about optionUrl/optionType -->
-          <novo-option *ngFor="let option of meta?.options" [value]="option.value">
+          <novo-option *ngFor="let option of meta?.options" [value]="option.value" [attr.data-automation-value]="option.label">
             {{ option.label }}
           </novo-option>
         </novo-select>
