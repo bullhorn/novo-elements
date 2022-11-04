@@ -4,7 +4,7 @@ import { IMaskDirective, IMaskFactory } from 'angular-imask';
 import { format, isValid, parse } from 'date-fns';
 import * as IMask from 'imask';
 import { NovoLabelService } from '../../../services/novo-label-service';
-import { DATE_FORMATS, NOVO_INPUT_FORMAT } from './base-format';
+import { NovoInputFormat, DATE_FORMATS, NOVO_INPUT_FORMAT } from './base-format';
 import { Key } from '../../../utils';
 
 export const DATETIMEFORMAT_VALUE_ACCESSOR = {
@@ -23,7 +23,7 @@ export const DATETIMEFORMAT_VALUE_ACCESSOR = {
   },
   providers: [DATETIMEFORMAT_VALUE_ACCESSOR, { provide: NOVO_INPUT_FORMAT, useExisting: NovoDateTimeFormatDirective }],
 })
-export class NovoDateTimeFormatDirective extends IMaskDirective<any> implements OnChanges {
+export class NovoDateTimeFormatDirective extends IMaskDirective<any> implements NovoInputFormat, OnChanges {
   valueChange: EventEmitter<any> = new EventEmitter();
 
   @Input() military: boolean = false;
@@ -121,6 +121,7 @@ export class NovoDateTimeFormatDirective extends IMaskDirective<any> implements 
       },
     };
   }
+  
   ngOnChanges(changes: SimpleChanges): void {
     if (Object.keys(changes).some((key) => ['military', 'dateFormat'].includes(key))) {
       this.initFormatOptions();
