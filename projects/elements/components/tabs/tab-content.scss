@@ -1,0 +1,16 @@
+:host {
+  display: block;
+  novo-nav-header {
+    display: block;
+    padding: var(--spacing-sm);
+    margin: var(--spacing-sm);
+    border: 1px solid #333;
+  }
+}
+
+:host {
+  display: none;
+  &.active {
+    display: block;
+  }
+}

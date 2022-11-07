@@ -3,6 +3,11 @@ starting at line 82. >>
 =============================================================
 */
 
+.bullhorn-logo-text {
+  width: 104px;
+  display: flex;
+}
+
 // Main content container
 .main-content {
   position: relative;
@@ -20,7 +25,7 @@ starting at line 82. >>
   } // Contains component demos
   .example {
     margin-top: 10px;
-    border: 1px solid var(--border, #e9eaea);
+    border: 1px solid var(--color-border, #e9eaea);
     box-sizing: border-box;
   } // Contains code snippet
   .example-container {
@@ -31,8 +36,8 @@ starting at line 82. >>
     margin: 0 0 35px;
     box-sizing: border-box;
     font-size: 0.9em;
-    background: var(--background, #f8f8f8);
-    border: 1px solid var(--border, #e9eaea);
+    background: var(--color-background, #f8f8f8);
+    border: 1px solid var(--color-border, #e9eaea);
     color: #4c545a;
     code {
       border: none;
@@ -44,7 +49,7 @@ starting at line 82. >>
       line-height: 1.5em;
       padding: 15px 25px;
       &.hljs {
-        background: var(--background) !important;
+        background: var(--color-background) !important;
       }
     }
   } // DESIGN STYLES
@@ -66,21 +71,21 @@ starting at line 82. >>
   }
   section {
     &.design {
-      background: $white;
+      background: var(--color-background);
     }
     > aside {
-      background: $background;
+      background: var(--color-background);
       padding: 10px 20px;
       border-radius: 3px;
       display: inline-block;
-      border: 2px solid darken($background, 2%);
+      border: 2px solid var(--color-border);
       h6 {
-        color: $mint;
+        color: var(--palette-green-50);
         margin-bottom: 5px;
       }
       &.design-principle {
         h6 {
-          border-bottom: 1px solid darken($background, 5%);
+          border-bottom: 1px solid var(--color-border);
           padding-bottom: 8px;
           span {
             font-weight: 300;
@@ -88,13 +93,13 @@ starting at line 82. >>
         }
         .hint {
           display: block;
-          color: darken($background, 50%);
+          color: var(--color-text-muted);
           margin: 5px 0;
           padding: 10px;
           font-size: 0.9em;
           border-radius: 3px;
-          background: darken($background, 5%);
-          border: 1px solid darken($background, 10%);
+          background: var(--color-background);
+          border: 1px solid var(--color-border);
           i {
             margin-right: 10px;
           }
@@ -119,10 +124,10 @@ starting at line 82. >>
     margin-top: 15px;
   }
   .not-accepted {
-    color: $negative;
+    color: var(--color-error);
   }
   .accepted {
-    color: $success;
+    color: var(--color-success);
   } // Custom page element initial display reset
   color,
   home,
@@ -131,7 +136,7 @@ starting at line 82. >>
   typography {
     display: block;
     & > header {
-      background: $off-white;
+      background: var(--color-background-secondary);
     }
     & > section.design.container {
       article {
@@ -151,7 +156,7 @@ starting at line 82. >>
 
 multi-code-snippet {
   background: #f8f8f8;
-  border: 1px solid #e9eaea;
+  border: 1px solid var(--color-border);
   display: block;
   label {
     font-size: 0.8em;

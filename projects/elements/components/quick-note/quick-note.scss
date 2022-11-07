@@ -1,0 +1,24 @@
+:host {
+  .quick-note-wrapper {
+    width: 100%;
+    height: 200px;
+    position: relative; // Remove any unnecessary padding from the CKEditor toolbar
+    .cke_top {
+      padding-top: 4px;
+      padding-bottom: 0;
+      padding-left: 3px;
+      padding-right: 3px;
+      .cke_toolbar {
+        .cke_combo_text {
+          padding-left: 7px;
+        }
+        .cke_combo_open {
+          margin-left: 4px;
+        }
+        .cke_combo__fontsize .cke_combo_text {
+          width: 27px;
+        }
+      }
+    }
+  }
+}

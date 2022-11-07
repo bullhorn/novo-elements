@@ -1,0 +1,19 @@
+<article class="color-blocks entity-colors">
+  <novo-card class="swatch" *ngFor="let entity of entityKeys">
+    <div class="colorbox color-{{entity}}"></div>
+    <div class="splitcolorbox">
+      <span class="color-{{entity}}-tint">
+        <novo-text>tint</novo-text>
+      </span>
+      <span class="color-{{entity}}-shade">shade</span>
+      <span class="color-{{entity}}-overlay">overlay</span>
+    </div>
+    <div class="colorname">
+      <novo-title class="name-main">{{entity}}</novo-title>
+      <novo-row justify="space-between" gap="sm">
+        <novo-caption ellipsis>var(--color-{{entity}})</novo-caption>
+        <novo-caption>{{getHex(entity)}}</novo-caption>
+      </novo-row>
+    </div>
+  </novo-card>
+</article>

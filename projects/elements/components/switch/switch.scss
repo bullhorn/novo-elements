@@ -1,0 +1,140 @@
+@import "~novo-design-tokens/scss";
+
+// $switch-width: 36px !default;
+// $switch-height: 24px !default;
+// $switch-track-height: 14px !default;
+// $switch-thumb-size: 20px !default;
+
+$switch-height: var(--switch-height);
+$switch-width: calc(var(--switch-height) * 1.5);
+$switch-thumb-radius: var(--switch-border-radius);
+$switch-spacing: var(--switch-spacing);
+$switch-border-width: var(--switch-border-width);
+$switch-thumb-size: calc($switch-height - ($switch-border-width) * 2);
+$switch-thumb-color: var(--switch-thumb-color-background);
+$switch-track-height: calc(var(--switch-height) * 0.5);
+$switch-track-color: var(--switch-track-color-background);
+$switch-icon-color: var(--switch-icon-color-text);
+
+:host {
+  gap: $switch-spacing;
+  height: $switch-height;
+
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  cursor: pointer;
+  outline: none;
+  user-select: none;
+  box-sizing: border-box;
+
+  > div {
+    display: flex;
+    align-items: center;
+  }
+  .novo-switch-container {
+    cursor: grab;
+    width: $switch-width;
+    height: $switch-height;
+    position: relative;
+    user-select: none;
+    margin: 0 8px;
+  }
+  &:not(.novo-switch-disabled) {
+    &.novo-switch-dragging .novo-switch-container,
+    .novo-switch-dragging {
+      cursor: grabbing;
+    }
+  }
+  .novo-switch-label {
+    border: 0 transparent;
+  }
+
+  .novo-switch-bar {
+    background-color: $switch-track-color;
+    height: $switch-track-height;
+    width: calc($switch-width - 2px);
+    top: calc($switch-height / 2 - $switch-track-height / 2);
+    left: 1px;
+    border-radius: $switch-thumb-radius;
+    position: absolute;
+  }
+
+  .novo-switch-thumb-container {
+    top: calc($switch-height / 2 - $switch-thumb-size / 2);
+    width: calc($switch-width - $switch-thumb-size);
+    left: 0;
+    position: absolute;
+    transform: translate3d(0, 0, 0);
+    z-index: z(default);
+  }
+
+  .novo-switch-thumb {
+    background-color: $switch-thumb-color;
+    color: $switch-icon-color;
+    box-shadow: var(--shadow-z1);
+    height: $switch-thumb-size;
+    width: $switch-thumb-size;
+    border-radius: $switch-thumb-radius;
+
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    left: 0;
+    top: 0;
+    outline: none;
+
+    .novo-icon {
+      color: inherit;
+    }
+  }
+
+  &:not(.novo-switch-dragging) {
+    .novo-switch-bar,
+    .novo-switch-thumb,
+    .novo-switch-thumb-container {
+      @include ease("all", "swift-ease-in-out");
+      transition-property: transform, background-color, color;
+    }
+    .novo-switch-bar,
+    .novo-switch-thumb {
+      transition-delay: 0.05s;
+    }
+  }
+  &.novo-switch-disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    .novo-switch-container {
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+  }
+
+  &[aria-checked="true"] {
+    --switch-track-color-background: var(--switch-track-color-selected);
+    --switch-thumb-color-background: var(--switch-thumb-color-selected);
+    --switch-icon-color-text: var(--switch-icon-color-selected);
+
+    .novo-switch-thumb-container {
+      transform: translate3d(100%, 0, 0);
+    }
+
+    @include variant-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
+      &.novo-theme-#{$name} {
+        --switch-track-color-background: #{$pale};
+        --switch-thumb-color-background: #{$color};
+        --switch-icon-color-text: #{$contrast};
+      }
+    }
+  }
+
+  &:focus {
+    .novo-switch-label:not(:empty) {
+      border: 1px dotted var();
+    }
+  }
+
+  @include ease("all", "swift-ease-in-out");
+}

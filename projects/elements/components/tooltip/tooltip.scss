@@ -1,0 +1,167 @@
+$tooltip-error-color: var(--color-error, #b34e4d);
+$tooltip-info-color: var(--color-info, #3986ac);
+$tooltip-warning-color: var(--color-warning, #c09854);
+$tooltip-success-color: var(--color-success, #458746);
+
+@mixin tooltip-pointer($color) {
+  &.top-right:before,
+  &.top-left:before,
+  &.top:before {
+    border-top-color: $color;
+  }
+  &.bottom-left::before,
+  &.bottom-right:before,
+  &.bottom:before {
+    border-bottom-color: $color;
+  }
+  &.left:before {
+    border-left-color: $color;
+  }
+  &.right:before {
+    border-right-color: $color;
+  }
+}
+
+:host {
+  div {
+    color: var(--tooltip-color-text);
+    background-color: var(--tooltip-color-background);
+    box-shadow: var(--tooltip-shadow);
+    border-radius: var(--tooltip-border-radius);
+    border: 1px solid var(--tooltip-color-border);
+    padding: var(--spacing-sm) var(--spacing-md);
+
+    font-size: var(font-size-sm);
+    line-height: var(font-size-sm);
+    white-space: nowrap;
+
+    &.error {
+      background-color: $tooltip-error-color;
+      color: var(--color-error-contrast);
+      @include tooltip-pointer($tooltip-error-color);
+    }
+    &.info {
+      background-color: $tooltip-info-color;
+      color: var(--color-info-contrast);
+      @include tooltip-pointer($tooltip-info-color);
+    }
+    &.warning {
+      background-color: $tooltip-warning-color;
+      color: var(--color-warning-contrast);
+      @include tooltip-pointer($tooltip-warning-color);
+    }
+    &.success {
+      background-color: $tooltip-success-color;
+      color: var(--color-success-contrast);
+      @include tooltip-pointer($tooltip-success-color);
+    }
+
+    //Arrow positions
+    @include tooltip-pointer(var(--tooltip-color-background));
+
+    &.top:before {
+      margin-bottom: -11px;
+      left: calc(50% - 6px);
+      bottom: 0;
+    }
+
+    &.top-left:before {
+      margin-right: 0;
+      margin-bottom: -11px;
+      right: 1px;
+      bottom: 0;
+    }
+
+    &.top-right:before {
+      margin-left: 0;
+      margin-bottom: -11px;
+      left: 1px;
+      bottom: 0;
+    }
+
+    &.bottom:before {
+      margin-top: -11px;
+      left: calc(50% - 6px);
+      top: 0;
+    }
+
+    &.bottom-left:before {
+      margin-right: 0;
+      margin-top: -11px;
+      right: 1px;
+      top: 0;
+    }
+
+    &.bottom-right:before {
+      margin-left: 0;
+      margin-top: -11px;
+      left: 1px;
+      top: 0;
+    }
+
+    &.left:before {
+      margin-right: -11px;
+      margin-bottom: -6px;
+      right: 0;
+      bottom: 50%;
+    }
+
+    &.right:before {
+      left: 0;
+      bottom: 50%;
+      margin-left: -11px;
+      margin-bottom: -6px;
+    }
+
+    &:before {
+      content: "";
+      position: absolute;
+      background: 0 0;
+      border: 6px solid transparent;
+      box-sizing: border-box;
+    }
+
+    // Sizing
+    &.extra-large,
+    &.large,
+    &.small,
+    &.medium {
+      white-space: normal;
+      line-height: 1.4em;
+      word-wrap: break-word;
+    }
+    &.extra-large {
+      width: 400px;
+      font-size: 1.2vh;
+    }
+    &.large {
+      width: 300px;
+    }
+    &.medium {
+      width: 150px;
+    }
+    &.small {
+      width: 80px;
+    }
+    &.preline {
+      white-space: pre-line;
+    }
+
+    // Bounce
+    &.bounce {
+      animation: bounce 0.75s ease-in-out infinite;
+    }
+
+    @keyframes bounce {
+      0% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+      100% {
+        transform: translateY(0px);
+      }
+    }
+  }
+}

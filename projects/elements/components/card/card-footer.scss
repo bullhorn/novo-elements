@@ -1,0 +1,10 @@
+@import "~novo-design-tokens/scss";
+
+:host {
+  @include theme-backgrounds();
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: 0 var(--spacing-md) var(--spacing-md) var(--spacing-md);
+}

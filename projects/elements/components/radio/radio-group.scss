@@ -1,0 +1,8 @@
+:host {
+  display: flex;
+
+  &.novo-radio-group-appearance-vertical {
+    flex-flow: column;
+    gap: 0.2rem;
+  }
+}

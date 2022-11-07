@@ -1,0 +1,9 @@
+:host(.disabled) {
+  opacity: 0.5;
+  pointer-events: none;
+}
+:host(.active) {
+  > novo-list-item {
+    background-color: var(--color-selection-overlay);
+  }
+}

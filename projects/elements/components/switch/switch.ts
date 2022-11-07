@@ -1,0 +1,100 @@
+// NG2
+import { ChangeDetectorRef, Component, EventEmitter, forwardRef, HostBinding, Input, NgZone, Output } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { BooleanInput, Key } from 'novo-elements/utils';
+
+// Value accessor for the component (supports ngModel)
+const SWITCH_VALUE_ACCESSOR = {
+  provide: NG_VALUE_ACCESSOR,
+  useExisting: forwardRef(() => NovoSwitchElement),
+  multi: true,
+};
+
+@Component({
+  selector: 'novo-switch',
+  styleUrls: ['./switch.scss'],
+  providers: [SWITCH_VALUE_ACCESSOR],
+  template: `
+    <div (click)="toggle($event)">
+      <div class="novo-switch-label novo-switch-prefix"><ng-content select="[novoPrefix]"></ng-content></div>
+      <div class="novo-switch-container">
+        <div class="novo-switch-bar"></div>
+        <div class="novo-switch-thumb-container">
+          <div class="novo-switch-thumb">
+            <novo-icon *ngIf="!value" smaller>{{ icons[0] }}</novo-icon>
+            <novo-icon *ngIf="value" smaller>{{ icons[1] }}</novo-icon>
+          </div>
+        </div>
+      </div>
+      <div class="novo-switch-label novo-switch-suffix"><ng-content></ng-content></div>
+    </div>
+  `,
+  host: {
+    role: 'switch',
+    class: 'novo-switch',
+    '[attr.aria-checked]': 'value',
+    '[attr.aria-disabled]': 'disabled',
+    '(keydown)': 'onKeydown($event)',
+  },
+})
+export class NovoSwitchElement implements ControlValueAccessor {
+  @Input()
+  icons: [string, string] = ['x', 'check'];
+
+  @Input()
+  @BooleanInput()
+  @HostBinding('class.novo-switch-disabled')
+  disabled: boolean = false;
+
+  @Output()
+  onChange: EventEmitter<any> = new EventEmitter();
+
+  private _value: boolean;
+  public get value(): boolean {
+    return this._value;
+  }
+  public set value(value: boolean) {
+    this._value = value;
+  }
+  onModelChange: Function = () => {};
+  onModelTouched: Function = () => {};
+
+  constructor(private ref: ChangeDetectorRef, private ngZone: NgZone) {}
+
+  onKeydown(event: KeyboardEvent) {
+    if (event.key === Key.Space) {
+      event.preventDefault();
+      this.toggle(event);
+    }
+  }
+
+  toggle(event) {
+    if (event) {
+      event.stopPropagation();
+      event.preventDefault();
+    }
+
+    if (this.disabled) {
+      return;
+    }
+    this.ngZone.run(() => {
+      this.value = !this.value;
+      this.onModelChange(this.value);
+      this.onChange.next(this.value);
+      this.ref.markForCheck();
+    });
+  }
+
+  writeValue(model: boolean): void {
+    this.value = model;
+    this.ref.markForCheck();
+  }
+
+  registerOnChange(fn: Function): void {
+    this.onModelChange = fn;
+  }
+
+  registerOnTouched(fn: Function): void {
+    this.onModelTouched = fn;
+  }
+}

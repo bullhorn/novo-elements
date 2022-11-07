@@ -1,0 +1,23 @@
+:host {
+  display: inline-block;
+
+  .cal-date-change {
+    border-radius: 3px;
+    border: 1px solid #e1e1e1;
+    background-color: var(--color-background);
+    position: relative;
+    padding: 10px 15px;
+    text-align: center;
+
+    > span {
+      padding: 5px;
+      color: var(--color-text);
+    }
+
+    > i {
+      cursor: pointer;
+      padding: 2px;
+      font-size: 0.9em;
+    }
+  }
+}

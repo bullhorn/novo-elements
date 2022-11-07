@@ -1,0 +1,32 @@
+<table novo-table [dataSource]="dataSource" class="novo-elevation-z8">
+
+  <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+
+  <!-- Position Column -->
+  <ng-container novoColumnDef="position">
+    <th novo-header-cell *novoHeaderCellDef> No. </th>
+    <td novo-cell *novoCellDef="let element"> {{element.position}} </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container novoColumnDef="name">
+    <th novo-header-cell *novoHeaderCellDef> Name </th>
+    <td novo-cell *novoCellDef="let element"> {{element.name}} </td>
+  </ng-container>
+
+  <!-- Weight Column -->
+  <ng-container novoColumnDef="weight">
+    <th novo-header-cell *novoHeaderCellDef> Weight </th>
+    <td novo-cell *novoCellDef="let element"> {{element.weight}} </td>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container novoColumnDef="symbol">
+    <th novo-header-cell *novoHeaderCellDef> Symbol </th>
+    <td novo-cell *novoCellDef="let element"> {{element.symbol}} </td>
+  </ng-container>
+
+  <tr novo-header-row *novoHeaderRowDef="displayedColumns"></tr>
+  <tr novo-row *novoRowDef="let row; columns: displayedColumns;"></tr>
+</table>

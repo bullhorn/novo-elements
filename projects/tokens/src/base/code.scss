@@ -1,0 +1,44 @@
+code,
+samp,
+time,
+var,
+kbd {
+  font-family: var(--code-font-family);
+}
+
+code,
+samp {
+  background: var(--color-background-color);
+  color: var(--code-text-color);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0 0.5ch;
+  margin: 0 0.5ch;
+  line-height: inherit;
+  font-size: inherit;
+  white-space: nowrap;
+}
+
+time {
+  font-size: 1em;
+  color: var(--theme-text-main);
+}
+
+pre > code {
+  padding: var(--spacing-md);
+  display: block;
+  overflow-x: auto;
+}
+
+var {
+  color: var(--variable);
+  font-style: normal;
+}
+
+kbd {
+  background: var(--code-kbd-background-color);
+  color: var(--code-kbd-text-color);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  padding: 2px 4px 2px 4px;
+}

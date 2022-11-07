@@ -1,0 +1,37 @@
+@import "../../common/typography/text.mixins";
+
+:host {
+  &.active {
+    display: inline-block;
+    margin-bottom: var(--spacing-md);
+  }
+  > div {
+    display: inline-block;
+    border-radius: 0.25rem;
+    background-color: var(--color-background-muted);
+    color: var(--color-text);
+    padding: var(--spacing-lg);
+    text-align: right;
+    > div {
+      display: flex;
+      > i {
+        flex-shrink: 0;
+        text-align: center;
+        margin-top: 0.3rem;
+        margin-right: var(--spacing-md);
+        color: #aaaaaa;
+      }
+      > p {
+        @include novo-body-text();
+        width: 100%;
+        // max-width: 40rem;
+        padding: 0;
+        text-align: left;
+        white-space: pre-line;
+      }
+      p:empty {
+        display: none;
+      }
+    }
+  }
+}

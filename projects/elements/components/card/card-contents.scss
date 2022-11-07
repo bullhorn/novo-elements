@@ -1,0 +1,8 @@
+@import "~novo-design-tokens/scss";
+
+:host {
+  display: block;
+  &:not(.condensed) {
+    padding: var(--spacing-md) var(--spacing-md);
+  }
+}

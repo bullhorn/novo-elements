@@ -1,0 +1,15 @@
+@import "~novo-design-tokens/scss";
+@import "../typography/text.mixins.scss";
+// @import "../style/menu-common";
+// @import "../style/vendor-prefixes";
+
+:host {
+  .novo-optgroup-label {
+    @include novo-label-text();
+    color: var(--color-text-muted);
+    cursor: default;
+    flex: 1;
+    padding: 5px 10px;
+    display: block;
+  }
+}

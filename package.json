@@ -9,30 +9,29 @@
     "url": "bullhorn/novo-elements"
   },
   "scripts": {
+    "postinstall": "ts-node ./scripts/nx/decorate-angular-cli.ts",
     "build": "ng build novo-elements",
-    "postbuild": "npm run copy:scss && npm run build:examples",
-    "build:ci": "ng build novo-elements --configuration production",
-    "postbuild:ci": "npm run build:schematics && npm run copy:resources",
+    "postbuild": "npm run build:examples",
+    "build:ci": "ng build novo-elements",
+    "postbuild:ci": "npm run build:schematics",
     "build:watch": "ng build novo-elements --watch",
     "build:demo": "ng build demo",
     "build:schematics": "tsc -p ./projects/schematics/tsconfig.json",
+    "postbuild:schematics": "npx copyfiles -f projects/schematics/*.json dist/novo-elements/schematics/",
     "prebuild:examples": "npm run generate:all",
     "build:examples": "ng build novo-examples",
     "build:examples:watch": "ng build novo-examples --watch",
     "watch:examples": "npm-watch generate:all",
-    "generate:examples": "ts-node --project tools/tsconfig.json ./tools/examples-module.ts",
-    "generate:routes": "ts-node --project tools/tsconfig.json ./tools/examples-routes.ts",
-    "generate:contributors": "ts-node --project tools/tsconfig.json ./tools/contributors.ts",
+    "generate:examples": "ts-node --project scripts/tsconfig.json ./scripts/examples-module.ts",
+    "generate:routes": "ts-node --project scripts/tsconfig.json ./scripts/examples-routes.ts",
+    "generate:contributors": "ts-node --project scripts/tsconfig.json ./scripts/contributors.ts",
     "generate:all": "npm run generate:examples && npm run generate:routes",
     "start": "ng serve demo",
-    "copy:resources": "npm run copy:scss && npm run copy:schematics",
-    "copy:schematics": "npx copyfiles -f projects/schematics/*.json dist/novo-elements/schematics/",
-    "copy:scss": "node copy-scss.js",
-    "test": "jest projects/novo-elements --no-coverage --max-workers=4",
-    "test:watch": "jest projects/chomsky projects/novo-elements --watch",
+    "test": "ng test novo-elements",
+    "test:watch": "jest projects/elements --watch",
     "lint": "htmlhint \"projects\" --config .htmlhintrc",
     "lint:scss": "stylelint \"projects/**/*.scss\" --syntax scss",
-    "compat": "ngcc ... --tsconfig './projects/novo-elements/tsconfig.lib.json'",
+    "compat": "ngcc ... --tsconfig './projects/elements/tsconfig.lib.json'",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
     "version:elements": "standard-version",
     "release:elements": "standard-version",
@@ -53,14 +52,13 @@
     "@angular/platform-server": "~13.3.0",
     "@angular/router": "~13.3.0",
     "@bullhorn/dragula": "1.0.1",
-    "@qiwi/mixin": "^1.2.6",
     "ace-builds": "~1.4.12",
     "angular-imask": "6.2.2",
     "angular2-text-mask": "9.0.0",
     "brace": "0.11.1",
     "date-fns": "1.30.1",
     "imask": "^6.2.2",
-    "novo-design-tokens": "^0.0.9",
+    "novo-design-tokens": "^1.0.0-beta.6",
     "post-robot": "9.0.30",
     "resize-observer-polyfill": "^1.5.1",
     "rxjs": "^7.5.4",
@@ -70,6 +68,7 @@
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
+    "@angular-builders/jest": "^14.0.0",
     "@angular-devkit/build-angular": "13.3.0",
     "@angular-devkit/core": "^13.3.0",
     "@angular-devkit/schematics": "^13.3.0",
@@ -78,6 +77,8 @@
     "@angular/language-service": "~13.3.0",
     "@bullhorn/bullhorn-icons": "^2.21.0",
     "@github-docs/frontmatter": "^1.3.1",
+    "@nrwl/cli": "^14.5.8",
+    "@nrwl/workspace": "^14.5.8",
     "@schematics/angular": "^13.3.0",
     "@semantic-release/changelog": "^6.0.1",
     "@semantic-release/commit-analyzer": "^9.0.2",
@@ -86,7 +87,6 @@
     "@semantic-release/release-notes-generator": "^10.0.3",
     "@types/fs-extra": "^9.0.13",
     "@types/glob": "^7.1.3",
-    "@types/jasmine": "~3.6.0",
     "@types/jest": "^27.4.1",
     "@types/node": "^14.0.27",
     "angular-split": "^5.0.0",
@@ -99,10 +99,10 @@
     "highlight.js": "^11.0.1",
     "htmlhint": "^0.16.0",
     "husky": "^5.0.9",
-    "jasmine": "^3.10.0",
-    "jasmine-core": "~3.6.0",
-    "jest": "~27.4.1",
-    "jest-preset-angular": "~11.1.1",
+    "jest": "^27.4.1",
+    "jest-junit": "^13.2.0",
+    "jest-preset-angular": "^11.1.1",
+    "jscodeshift": "^0.13.1",
     "markdown-it": "^12.0.6",
     "markdown-it-attrs": "^4.0.0",
     "markdown-it-container": "^3.0.0",
@@ -114,6 +114,7 @@
     "prettier": "^2.2.1",
     "prettier-plugin-organize-imports": "^1.1.1",
     "pretty-quick": "^2.0.1",
+    "resize-observer-polyfill": "^1.5.1",
     "semantic-release": "^19.0.3",
     "standard-version": "^9.1.0",
     "stylelint": "~13.2.1",
@@ -126,8 +127,7 @@
     "tslint": "~6.1.3",
     "tslint-config-prettier": "^1.14.0",
     "typedoc": "^0.22.13",
-    "typescript": "4.6.2",
-    "xmldom": "^0.6.0"
+    "typescript": "4.6.2"
   },
   "lint-staged": {
     "*.{ts,json,scss,css,html}": [
@@ -143,11 +143,20 @@
   "watch": {
     "generate:all": {
       "patterns": [
-        "projects/novo-examples"
+        "projects/examples"
       ],
       "extensions": "md,ts,html,scss",
-      "ignore": "projects/novo-examples/src/examples.*.ts",
+      "ignore": "projects/examples/src/examples.*.ts",
       "quiet": false
     }
+  },
+  "jest-junit": {
+    "outputDirectory": "reports",
+    "outputName": "jest-junit.xml",
+    "ancestorSeparator": " › ",
+    "uniqueOutputName": "false",
+    "suiteNameTemplate": "{filepath}",
+    "classNameTemplate": "{classname}",
+    "titleTemplate": "{title}"
   }
 }

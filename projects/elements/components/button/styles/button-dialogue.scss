@@ -1,0 +1,15 @@
+@import "~novo-design-tokens/scss";
+
+:host {
+  // Dialoge Themed Button
+  &.novo-button-text {
+    @include color-variants(
+      button,
+      (
+        color-text: default,
+        color-hover: overlay,
+        color-active: overlay,
+      )
+    );
+  }
+}

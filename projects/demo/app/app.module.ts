@@ -1,5 +1,6 @@
 // NG2
 import { ScrollingModule } from '@angular/cdk/scrolling';
+import { APP_BASE_HREF } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -53,6 +54,7 @@ export function provideAppBridgeService(http) {
     NovoExamplesRoutesModule,
   ],
   providers: [
+    { provide: APP_BASE_HREF, useValue: '/' },
     // NovoTemplateService,
     FormUtils,
     NovoLabelService,
