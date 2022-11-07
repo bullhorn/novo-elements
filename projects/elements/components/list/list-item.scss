@@ -1,0 +1,41 @@
+@import "~novo-design-tokens/scss";
+
+@include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
+  :host-context([theme="#{$name}"]) {
+    background: $color;
+    color: $contrast;
+    border: unset;
+    border-bottom: 1px solid var(--color-border);
+    i {
+      color: $contrast;
+    }
+
+    &:hover,
+    &:active {
+      background: $tint;
+    }
+  }
+}
+
+:host {
+  border-bottom: 1px solid var(--color-border);
+  padding: 1rem;
+  display: flex;
+  flex-direction: row;
+  outline: none;
+  &:hover {
+    background: var(--color-selection-overlay);
+  }
+  &.active {
+    background: var(--color-selection-overlay);
+  }
+
+  &:last-child {
+    border-bottom: none;
+  }
+  .list-item {
+    display: flex;
+    flex-direction: column;
+    flex: 1 0 100%;
+  }
+}

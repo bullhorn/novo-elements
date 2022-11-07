@@ -1,0 +1,10 @@
+{
+  "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
+  "dest": "../../dist/novo-design-tokens",
+  "lib": {
+    "flatModuleFile": "novo-design-tokens",
+    "entryFile": "index.ts",
+    "styleIncludePaths": ["./styles"]
+  },
+  "assets": ["styles", "./novo-elements-dark.scss", "./novo-elements.scss"]
+}

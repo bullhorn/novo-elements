@@ -1,0 +1,15 @@
+:host {
+  &.novo-button-small {
+    --button-size-height: var(--button-small-size-height);
+    --button-spacing: var(--button-small-spacing);
+    --button-font-size: var(--button-small-font-size);
+    --button-border-radius: var(--button-small-border-radius);
+  }
+
+  &.novo-button-large {
+    --button-size-height: var(--button-large-size-height);
+    --button-spacing: var(--button-large-spacing);
+    --button-font-size: var(--button-large-font-size);
+    --button-border-radius: var(--button-large-border-radius);
+  }
+}

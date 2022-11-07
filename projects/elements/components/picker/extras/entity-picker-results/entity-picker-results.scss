@@ -1,0 +1,193 @@
+@import "~novo-design-tokens/scss";
+@import "variables";
+
+:host {
+  background: var(--color-background);
+  width: 100%;
+  min-width: 250px;
+
+  .novo-list {
+    max-height: 49vh;
+    overflow: auto;
+    background: var(--color-background);
+    .novo-item-content {
+      margin-top: var(--spacing-sm);
+      margin-left: 1.8rem;
+      row-gap: 1rem;
+      .novo-text {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        padding-right: 1em;
+      }
+    }
+    novo-loading {
+      justify-content: center;
+    }
+  }
+}
+
+entity-picker-results,
+picker-results {
+  color: black;
+  min-width: 100%;
+  max-width: 100%;
+  z-index: 10;
+  top: 100%;
+  .novo-list {
+    border: 1px solid #4a89dc;
+    .novo-list-item {
+      cursor: pointer;
+      flex: 0 0;
+      transition: background-color 250ms;
+      & > div {
+        width: 100%;
+      }
+      &.active {
+        background-color: var(--color-selection-overlay);
+      }
+      &:hover {
+        background-color: var(--color-selection-overlay);
+      }
+      .novo-item-content {
+        flex-flow: row wrap;
+        & > * {
+          flex: 0 0 33%;
+          white-space: nowrap;
+        }
+      }
+    }
+  }
+  .error-results,
+  .no-recents,
+  .null-results {
+    text-align: center;
+    padding: 1em 0 4em;
+    > i {
+      font-size: 3em;
+      margin: 0.5em;
+      color: rgba(0, 0, 0, 0.3);
+    }
+    > h4,
+    > p {
+      margin: 0;
+      max-width: none;
+      padding: 0;
+    }
+    > h4 {
+      font-weight: 500;
+    }
+  }
+  section {
+    box-shadow: 0.1em 0.1em 1em rgba(0, 0, 0, 0.25);
+    z-index: 9;
+    position: absolute;
+    width: 100%;
+    background-color: var(--color-background);
+    color: black;
+  }
+}
+
+// Shared specialty picker styles
+workers-comp-codes-picker-results,
+distribution-list-picker-results {
+  display: block;
+  color: black;
+  width: 100%;
+  max-width: none;
+  z-index: 99;
+  background: var(--color-background);
+  padding: 1px;
+  &.active {
+    border: 1px solid var(--color-selection);
+  }
+  .novo-list {
+    min-height: 100%;
+    background: var(--color-background);
+    max-height: 330px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    .novo-list-item {
+      display: block;
+      transition: background-color 250ms;
+      border-bottom: 1px solid var(--color-border);
+      cursor: pointer;
+      &.disabled {
+        opacity: 0.5;
+        pointer-events: none;
+      }
+      item-title h6 {
+        font-weight: 500;
+        padding: 0.6em 0 0.5em;
+        span {
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          min-width: 100px;
+          width: 80%;
+          display: block;
+        }
+      }
+      & > div {
+        width: 100%;
+        margin-left: 15px;
+      }
+      &.active {
+        background-color: var(--color-selection-overlay);
+      }
+      &:hover {
+        background-color: var(--color-selection-overlay);
+      }
+      item-content {
+        flex-flow: row nowrap;
+        justify-content: space-between;
+        & > * {
+          flex: 0 0 60%;
+          white-space: nowrap;
+        }
+        p {
+          margin-right: 0.5em;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          flex: 1;
+          .label {
+            font-weight: bold;
+          }
+        }
+      }
+    }
+    novo-loading {
+      justify-content: center;
+    }
+  }
+  .picker-null,
+  .picker-error,
+  .picker-loading,
+  .picker-no-recents {
+    text-align: center;
+    padding: 1em 0 4em;
+    > i {
+      font-size: 3em;
+      margin: 0.5em;
+      color: rgba(0, 0, 0, 0.3);
+    }
+    > h4,
+    > p {
+      margin: 0;
+      max-width: none;
+      padding: 0;
+    }
+    > h4 {
+      font-weight: 500;
+    }
+  }
+  section {
+    box-shadow: 0.1em 0.1em 1em rgba(0, 0, 0, 0.25);
+    z-index: 9;
+    position: absolute;
+    width: 100%;
+    background-color: white;
+    color: black;
+  }
+}

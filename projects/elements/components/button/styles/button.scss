@@ -1,0 +1,122 @@
+@import "~novo-design-tokens/scss";
+
+:host {
+  // Variables that change or need to be inherited
+  // --button-background: var(--button-color-background, transparent);
+  // --button-color: var(--button-color-text, var(--color-text));
+  // --button-overlay: var(--button-overlay, var(--color-gray-alpha));
+  // --button-border-radius: var(--button-border-radius, var(--border-radius));
+  // --button-font-size: var(--button-font-size, var(--font-size-md));
+  // --button-height: var(--button-height, var(--size-height-md));
+  // --button-spacing: var(--button-spacing, var(--spacing-md));
+  // --button-border-color: transparent;
+
+  color: var(--button-color-text);
+  background: var(--button-color-background);
+  border: 1px solid var(--button-color-border);
+  border-radius: var(--button-border-radius);
+  padding: 0 var(--button-spacing);
+  font-size: var(--button-font-size);
+  height: var(--button-size-height);
+  gap: var(--button-spacing);
+  box-shadow: var(--button-shadow);
+  text-transform: var(--button-text-transform);
+
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  transition: all 200ms ease-in-out;
+  cursor: pointer;
+  user-select: none;
+  text-overflow: clip;
+  white-space: nowrap;
+  overflow: hidden;
+  flex: 0 0 auto;
+  box-sizing: border-box;
+  position: relative;
+
+  .button-focus-indicator {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    pointer-events: none;
+    border-radius: inherit;
+  }
+
+  .button-contents {
+    height: var(--font-size-button);
+    display: inline-flex;
+    align-items: center;
+    line-height: 1;
+    font-size: inherit;
+    color: inherit;
+    text-transform: uppercase;
+  }
+
+  i {
+    font-size: inherit;
+    line-height: 1;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &[disabled],
+  &.novo-button-disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  &[disabled="false"] {
+    opacity: 1;
+    cursor: pointer;
+    pointer-events: auto;
+  }
+
+  &[loading="true"] {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+    i.loading {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: rotate 1200ms linear infinite;
+      svg {
+        width: 100%;
+        height: 100%;
+        max-width: 15px;
+        max-height: 15px;
+        .spinner {
+          fill: currentColor;
+        }
+      }
+    }
+  }
+
+  &:hover,
+  &:focus {
+    .button-focus-indicator {
+      background-color: var(--button-color-hover);
+    }
+  }
+  &:active {
+    .button-focus-indicator {
+      background-color: var(--button-color-active);
+    }
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

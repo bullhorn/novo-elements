@@ -1,0 +1,159 @@
+:host {
+  display: block;
+  position: relative;
+  button {
+    position: relative;
+    z-index: 0;
+  }
+  &.active {
+    .dropdown-container {
+      overflow: hidden;
+      max-height: inherit;
+      max-width: 400px;
+      min-width: 400px;
+      display: block;
+      z-index: z("max");
+      border-radius: 2px;
+      top: 100%;
+      margin-top: 5px;
+    }
+  }
+  .dropdown-container {
+    background-color: white;
+    list-style: none;
+    line-height: 26px;
+    display: none;
+    margin: 0;
+    max-height: 0;
+    position: absolute;
+    padding: 0;
+    transform: translateY(0);
+    transition: all 0.15s cubic-bezier(0.35, 0, 0.25, 1);
+    min-width: 180px;
+    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    .novo-category-dropdown-search {
+      width: 100%;
+      padding: 5px;
+      border-bottom: 1px solid #ccc;
+      position: relative;
+      input {
+        font-size: 1em;
+        background: transparent !important;
+        border: none;
+        border-bottom: var(--border-main);
+        border-radius: 0;
+        outline: none;
+        height: 2rem;
+        width: 95%;
+        margin: 0;
+        padding: 0;
+        box-shadow: none;
+        box-sizing: content-box;
+        transition: all 300ms;
+        color: #26282b;
+        margin-left: 10px;
+        &:hover {
+          border-bottom: var(--border-main);
+        }
+        &:focus {
+          border-bottom: 1px solid var(--color-selection);
+        }
+        &::placeholder {
+          color: var(--form-placeholder);
+        }
+      }
+      i.bhi-search,
+      i.bhi-times {
+        position: absolute;
+        bottom: 15px;
+        right: 5px;
+        color: #aaaaaa;
+        font-size: 1.2rem;
+        margin-right: 10px;
+      }
+      i.bhi-times {
+        cursor: pointer;
+        font-size: 1.2rem;
+      }
+    }
+    footer {
+      padding: 5px 23px;
+      border-top: var(--border-main);
+      display: flex;
+      justify-content: flex-end;
+      > a {
+        margin-left: 10px;
+        margin-right: 0;
+        font-weight: 500;
+      }
+      &.novo-category-dropdown-footer-align-left {
+        justify-content: flex-start;
+        > a {
+          margin-right: 10px;
+          margin-left: 0;
+        }
+      }
+    }
+  }
+  &[side="left"] {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  &[side="right"] {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    .dropdown-container {
+      right: 0;
+    }
+  }
+
+  ::ng-deep {
+    novo-nav {
+      max-height: 140px;
+      overflow: auto;
+      border-bottom: var(--border-main);
+      > novo-tab {
+        height: 30px;
+        min-height: 30px;
+        > .novo-tab-link {
+          max-width: 100%;
+          height: 100%;
+          font-size: 0.9em;
+          padding: 0.5em;
+          display: flex;
+          align-items: center;
+        }
+      }
+    }
+    novo-list {
+      max-height: 350px;
+      overflow: auto;
+    }
+    novo-list-item {
+      padding: 0.5em;
+      flex-shrink: 0;
+      cursor: pointer;
+      font-size: 0.9em;
+      &:focus,
+      &:hover {
+        // background: var(--pas)
+        .novo-category-dropdown-hover {
+          display: block;
+        }
+      }
+      .novo-category-dropdown-hover {
+        display: none;
+        color: var(--color-selection);
+        font-size: 0.9em;
+        > i {
+          font-size: 0.9em;
+        }
+      }
+      &.novo-category-dropdown-empty-item {
+        pointer-events: none;
+      }
+    }
+  }
+}

@@ -1,0 +1,17 @@
+// Hyperlinks
+// --------------------------------------------------
+a {
+  // color: $font-color-link;
+  color: var(--thlinks);
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 200ms ease-in-out;
+  &:visited {
+    color: var(--links);
+  }
+  &:active,
+  &:hover {
+    color: var(--links);
+  }
+}

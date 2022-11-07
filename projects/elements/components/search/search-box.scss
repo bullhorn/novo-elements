@@ -1,0 +1,89 @@
+@import "variables";
+
+:host {
+  display: grid;
+  grid-template-areas: "icon input";
+  grid-template-columns: 3.2rem 1fr;
+  grid-template-rows: 1fr;
+  align-items: center;
+  height: 3.2rem;
+  background: var(--color-background);
+  border: 1px solid var(--color-border);
+  border-radius: 0.2rem;
+  max-width: 400px;
+  min-width: 100px;
+  transition: all 250ms ease-in-out;
+
+  &[size="small"] {
+    font-size: 1rem;
+    height: 2.4rem;
+    grid-template-columns: 2.4rem 1fr;
+  }
+
+  &[size="large"] {
+    font-size: 1.8rem;
+    height: 4rem;
+    grid-template-columns: 4rem 1fr;
+  }
+
+  > button[theme][theme="fab"] {
+    width: 2.8em;
+    height: 2.8em;
+    min-height: 2.8em;
+  }
+
+  > input {
+    height: 100%;
+    display: block;
+    background: transparent;
+    position: relative;
+    font-size: 1.4rem;
+    color: var(--color-text);
+    z-index: z(above);
+    border: none;
+    transition: all 250ms;
+    backface-visibility: hidden;
+
+    &:focus,
+    &:active {
+      outline: none;
+    }
+  }
+
+  novo-icon {
+    color: var(--color-text);
+  }
+
+  &.focused {
+    border: 1px solid var(--color-selection);
+
+    > novo-icon {
+      color: var(--color-selection) !important;
+    }
+
+    @include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
+      &[color="#{$name}"] {
+        > novo-icon {
+          color: $color !important;
+        }
+      }
+    }
+  }
+}
+
+:host-context(header) {
+  &.always-open:not(.focused) {
+    button {
+      background: var(--color-background-overlay) !important;
+      color: var(--color-selection-overlay) !important;
+    }
+    input {
+      background-color: var(--color-background-overlay) !important;
+      border-color: var(--color-background-overlay) !important;
+      color: var(--color-selection-overlay) !important;
+      &::placeholder {
+        color: var(--color-empty) !important;
+      }
+    }
+  }
+}

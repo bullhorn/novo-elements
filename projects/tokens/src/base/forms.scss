@@ -1,0 +1,143 @@
+select,
+input[type="checkbox"],
+input[type="range"],
+input[type="radio"] {
+  cursor: pointer;
+}
+
+input[type="color"] {
+  min-height: 3.4rem;
+  padding: 4px 8px;
+  cursor: pointer;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+  height: 1em;
+  width: 1em;
+  vertical-align: middle;
+}
+
+input[type="radio"] {
+  border-radius: 100%;
+}
+
+input {
+  vertical-align: top;
+}
+
+label {
+  vertical-align: middle;
+  display: inline-block;
+  // margin-bottom: 4px;
+}
+
+input:not([type="checkbox"]):not([type="radio"]),
+input[type="range"],
+select,
+textarea {
+  -webkit-appearance: none;
+}
+
+textarea {
+  display: block;
+  margin-right: 0;
+  box-sizing: border-box;
+  resize: vertical;
+}
+
+textarea:not([cols]) {
+  width: 100%;
+}
+
+textarea:not([rows]) {
+  min-height: 40px;
+  height: 140px;
+}
+
+select {
+  padding-right: 3.6rem !important;
+  background-image: linear-gradient(
+      45deg,
+      transparent 50%,
+      var(--color-gray-30) 50%
+    ),
+    linear-gradient(135deg, var(--color-gray-30) 50%, transparent 50%);
+  background-position: calc(100% - 2rem) calc(1em + 2px),
+    calc(100% - 1.5rem) calc(1em + 2px);
+  background-size: 0.5rem 0.5rem, 0.5rem 0.5rem;
+  background-repeat: no-repeat;
+}
+
+select::-ms-expand {
+  display: none;
+}
+
+select[multiple] {
+  padding-right: var(--spacing-lg);
+  background-image: none;
+  overflow-y: auto;
+}
+
+input:disabled,
+select:disabled,
+textarea:disabled {
+  cursor: not-allowed;
+}
+
+::placeholder {
+  color: var(--form-placeholder);
+}
+
+fieldset {
+  border: 1px var(--focus) solid;
+  border-radius: 6px;
+  margin: 0;
+  margin-bottom: 12px;
+  padding: 10px;
+}
+
+legend {
+  font-size: 0.9em;
+  font-weight: 600;
+}
+
+input:not([type="button"]):not([type="reset"]):not([type="submit"])
+  :not([type="radio"]):not([type="checkbox"]),
+textarea,
+select {
+  --current-background-color: var(--theme-background-muted);
+  --current-text-color: var(--theme-text-main);
+  --current-border-color: var(--theme-border-color);
+  --current-border-width: var(--theme-border-width);
+
+  background-color: var(--current-background-color);
+  color: var(--current-text-color);
+  padding: var(--spacing-md) var(--spacing-sm) var(--spacing-xs);
+  border-width: 0;
+  border-style: solid;
+  border-color: var(--current-border-color);
+  border-bottom-width: var(--current-border-width);
+  box-shadow: none;
+
+  &:focus {
+    outline: none;
+  }
+
+  &:is([aria-current], :hover, :active, :focus) {
+    --current-border-color: var(--theme-selection-light);
+  }
+
+  &:focus {
+    --current-border-color: var(--theme-selection);
+    outline: none;
+  }
+
+  &[aria-invalid="true"],
+  &.invalid {
+    --current-border-color: var(--theme-error);
+    &:is(:active, :focus) {
+      --current-border-color: var(--theme-error-light);
+    }
+  }
+}

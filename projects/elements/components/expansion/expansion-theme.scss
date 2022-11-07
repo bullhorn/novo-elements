@@ -1,0 +1,56 @@
+@import "../../styles/variables";
+@import "../../styles/global/functions";
+
+@mixin novo-expansion-panel-theme() {
+  [data-theme*="-dark"] {
+    .novo-expansion-panel {
+      background: var(--color-background-secondary);
+    }
+  }
+
+  .novo-expansion-panel {
+    background: var(--color-background);
+    color: var(--color-text);
+  }
+
+  .novo-action-row {
+    border-top-color: var(--color-border);
+  }
+
+  .novo-expansion-panel:not(.novo-expanded) .novo-expansion-panel-header {
+    &:not([aria-disabled="true"]) {
+      &.cdk-keyboard-focused,
+      &.cdk-program-focused,
+      &:hover {
+        background: rgba(black, 0.04);
+      }
+    }
+  }
+
+  .novo-expansion-panel-header-title {
+    color: var(--color-text);
+  }
+
+  .novo-expansion-panel-header-description,
+  .novo-expansion-indicator {
+    border-color: var(--color-text);
+  }
+
+  .novo-expansion-panel-header[aria-disabled="true"] {
+    color: var(--color-text-disabled);
+    pointer-events: none;
+
+    .novo-expansion-panel-header-title,
+    .novo-expansion-panel-header-description {
+      color: inherit;
+    }
+  }
+
+  .novo-expansion-panel.novo-expanded {
+    @include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
+      &[theme="#{$name}"] {
+        border-top: 3px solid $color;
+      }
+    }
+  }
+}

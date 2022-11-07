@@ -19,9 +19,12 @@ export class AppComponent implements AfterViewInit {
   utilRoutes: Array<any>;
   patternRoutes: Array<any>;
   updateRoutes: Array<any>;
+
+  currentTheme: string = 'default';
+  isDarkMode: boolean = false;
+
   @ViewChild(NovoSidenavComponent)
   sidenav!: NovoSidenavComponent;
-
   @ViewChild('scrollContainer')
   scrollContainer!: NovoLayoutContent;
 
@@ -48,7 +51,7 @@ export class AppComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     this.observer
-      .observe(['(max-width: 480px)'])
+      .observe(['(max-width: 850px)'])
       .pipe(startWith({ matches: false }), delay(10))
       .subscribe((res) => {
         if (res.matches) {
@@ -77,6 +80,7 @@ export class AppComponent implements AfterViewInit {
         viewportScroller.scrollToPosition([0, 0]);
       }
     });
+    this.toggleTheme();
   }
 
   sortMenu(a, b) {
@@ -93,7 +97,8 @@ export class AppComponent implements AfterViewInit {
     this.menuOpen = !this.menuOpen;
   }
 
-  toggleDarkMode() {
-    document.documentElement.classList.toggle('theme-dark');
+  toggleTheme() {
+    const mode = this.isDarkMode ? 'dark' : 'light';
+    document.documentElement.dataset.theme = `${this.currentTheme}-${mode}`;
   }
 }

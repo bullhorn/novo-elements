@@ -1,0 +1,198 @@
+// --------------------------------------------------
+// Global
+// --------------------------------------------------
+@import "~novo-design-tokens/scss";
+@import "./styles/variables";
+
+// --------------------------------------------------
+// Content
+// --------------------------------------------------
+@import "./styles/reset";
+@import "./styles/base";
+@import "./styles/typography";
+@import "./styles/iconography";
+
+// CDK
+@import "@angular/cdk/overlay-prebuilt.css";
+
+// --------------------------------------------------
+// ADDONS
+// --------------------------------------------------
+@import "./addons/dragula/dragula";
+
+.bgc-main,
+.novo-background-main {
+  background-color: var(--color-background-secondary);
+}
+.bgc-alt,
+.bgc-bright,
+.novo-background-bright {
+  background-color: var(--color-background);
+}
+.bgc-dark,
+.novo-background-dark {
+  background-color: var(--background-dark);
+}
+.bgc-muted,
+.novo-background-muted {
+  background-color: var(--background-muted);
+}
+.bgc-body,
+.novo-background-body {
+  background-color: var(--color-background);
+}
+.txc-main {
+  color: var(--color-text);
+}
+.txc-muted {
+  color: var(--color-text-muted);
+}
+.txc-disabled {
+  color: var(--color-text-disabled);
+}
+
+.novo-visibility-hidden {
+  visibility: hidden !important;
+}
+
+@include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
+  $excluded: (bright, muted);
+
+  @if index($excluded, $name) == null {
+    .novo-background-#{$name} {
+      background: $color;
+      color: $contrast;
+    }
+    .novo-text-#{$name} {
+      color: $color;
+    }
+
+    .bgc-#{$name} {
+      background: $color;
+      color: $contrast;
+    }
+
+    .bgc-#{$name}-striped {
+      & > *:nth-child(odd) {
+        background: $color;
+      }
+    }
+    .txc-#{$name} {
+      color: $color;
+    }
+  }
+}
+
+@each $key, $value in $spacing-rules {
+  .padding-#{$key} {
+    padding: $value;
+  }
+  .px-#{$key} {
+    padding-left: $value;
+    padding-right: $value;
+  }
+  .py-#{$key} {
+    padding-top: $value;
+    padding-bottom: $value;
+  }
+  .margin-#{$key} {
+    margin: $value;
+  }
+  .ml-#{$key},
+  .mx-#{$key} {
+    margin-left: $value;
+  }
+  .mr-#{$key},
+  .mx-#{$key} {
+    margin-right: $value;
+  }
+  .mt-#{$key},
+  .my-#{$key} {
+    margin-top: $value;
+  }
+  .mb-#{$key},
+  .my-#{$key} {
+    margin-bottom: $value;
+  }
+}
+
+.modal-overlay-backdrop,
+.aside-overlay-backdrop {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.aside-overlay-panel {
+  position: relative;
+  // z-index: 1001;
+}
+
+@keyframes iconEnter {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  90% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+// Animations
+// -------------------------
+@keyframes rotate {
+  0% {
+    transform: rotateZ(0deg);
+  }
+
+  75% {
+    transform: rotateZ(200deg);
+  }
+
+  100% {
+    transform: rotateZ(180deg);
+  }
+}
+
+@keyframes half-rotate {
+  0% {
+    transform: rotateZ(45deg);
+  }
+
+  75% {
+    transform: rotateZ(100deg);
+  }
+
+  100% {
+    transform: rotateZ(90deg);
+  }
+}
+
+@keyframes rotateBack {
+  0% {
+    transform: rotateZ(90deg);
+  }
+
+  100% {
+    transform: rotateZ(0deg);
+  }
+}
+
+@keyframes show {
+  0% {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+
+  75% {
+    transform: translateX(0px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

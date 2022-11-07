@@ -1,0 +1,30 @@
+{
+  "root": "projects/elements",
+  "sourceRoot": "projects/elements",
+  "projectType": "library",
+  "prefix": "novo",
+  "architect": {
+    "build": {
+      "builder": "@angular-devkit/build-angular:ng-packagr",
+      "outputs": ["dist/novo-elements"],
+      "options": {
+        "tsConfig": "tsconfig.build.json",
+        "project": "projects/elements/ng-package.json"
+      },
+      "dependsOn": [
+        {
+          "target": "build",
+          "projects": "dependencies"
+        }
+      ]
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage"],
+      "options": {
+        "jestConfig": "projects/elements/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

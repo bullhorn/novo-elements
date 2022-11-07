@@ -1,0 +1,43 @@
+@import "~novo-design-tokens/scss";
+
+:host {
+  // Secondary Themed Button
+  &.novo-button-outlined {
+    --button-color-text: var(--button-outlined-color-text);
+    --button-color-background: var(--button-outlined-color-background);
+    --button-color-border: var(--button-outlined-color-border);
+
+    &:hover,
+    &:focus {
+      --button-shadow: var(--button-outlined-shadow-hover);
+    }
+    &:active {
+      --button-shadow: var(--button-outlined-shadow-active);
+    }
+
+    @include color-variants(
+      button-outlined,
+      (
+        color-text: default,
+        color-border: default,
+        color-hover: overlay,
+        color-active: overlay,
+      )
+    );
+
+    &[inverse] {
+      --button-outlined-color-background: var(--button-color-overlay);
+      --button-outlined-color-text: var(--button-color-contrast);
+      --button-outlined-border-color: var(--color-background);
+    }
+
+    i.loading {
+      margin-left: 0.8rem;
+      svg {
+        .spinner {
+          fill: var(--color-selection);
+        }
+      }
+    }
+  }
+}

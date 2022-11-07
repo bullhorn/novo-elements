@@ -1,0 +1,5 @@
+@import "~novo-design-tokens/scss";
+
+.novo-autocomplete-options {
+  @include novo-overlay;
+}

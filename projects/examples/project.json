@@ -1,0 +1,32 @@
+{
+  "root": "projects/examples",
+  "sourceRoot": "projects/examples",
+  "projectType": "library",
+  "prefix": "novo",
+  "architect": {
+    "prebuild": {
+      "builder": "@nrwl/workspace:run-commands",
+      "options": {
+        "command": "npm run generate:all"
+      }
+    },
+    "build": {
+      "builder": "@angular-devkit/build-angular:ng-packagr",
+      "outputs": ["dist/novo-examples"],
+      "options": {
+        "tsConfig": "tsconfig.build.json",
+        "project": "projects/examples/ng-package.json"
+      },
+      "dependsOn": [
+        {
+          "target": "prebuild",
+          "projects": "self"
+        },
+        {
+          "target": "build",
+          "projects": "dependencies"
+        }
+      ]
+    }
+  }
+}

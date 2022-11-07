@@ -1,0 +1,77 @@
+@import "~novo-design-tokens/scss";
+@import "global/functions";
+
+$dot-colors: (
+  "ocean": var(--palette-blue-50),
+  "lavender": var(--palette-indigo-50),
+  "grapefruit": var(--palette-red-50),
+  "sunflower": var(--palette-orange-50),
+  "mint": var(--palette-green-50),
+);
+
+:host {
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+  font-size: 13px;
+  gap: 0.3em;
+
+  &.size-small {
+    padding: 8px;
+    font-size: 8px;
+  }
+
+  &.size-large {
+    font-size: 18px;
+  }
+
+  span.dot {
+    display: block;
+    border-radius: 50%;
+    height: 1em;
+    width: 1em;
+    @include enumerate($dot-colors, "background-color", "map-val", "");
+    @include animationMapDelay($dot-colors, jump, 1600ms, ease-in-out, 70ms, forward, infinite, "", "");
+  }
+
+  @include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
+    &.color-#{$name} {
+      span.dot {
+        background-color: $color;
+      }
+    }
+  }
+
+  &.white,
+  &[inverse] {
+    span.dot {
+      background-color: var(--color-white) !important;
+    }
+  }
+}
+
+@keyframes jump {
+  0% {
+    transform: translateY(0px);
+  }
+
+  30% {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+
+  45% {
+    transform: translateY(-1.2em);
+    opacity: 0.5;
+  }
+
+  60% {
+    transform: translateY(0.8em);
+    opacity: 0.95;
+  }
+
+  100% {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}

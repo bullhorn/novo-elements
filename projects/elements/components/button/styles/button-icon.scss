@@ -1,0 +1,28 @@
+@import "~novo-design-tokens/scss";
+
+:host {
+  // Icon Themed Button
+  &.novo-button-icon,
+  &.icon-only {
+    --button-border-radius: var(--border-radius-full);
+    --button-color-text: var(--color-text);
+
+    // font-size: 1.4rem;
+    width: var(--button-size-height);
+
+    .button-contents,
+    i {
+      display: contents;
+      margin: 0 !important;
+    }
+
+    @include color-variants(
+      button,
+      (
+        color-text: default,
+        color-hover: overlay,
+        color-active: overlay,
+      )
+    );
+  }
+}

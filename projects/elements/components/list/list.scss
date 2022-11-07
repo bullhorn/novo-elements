@@ -1,0 +1,9 @@
+:host {
+  display: flex;
+  &.vertical-list {
+    flex-direction: column;
+  }
+  &.horizontal-list {
+    flex-direction: row;
+  }
+}

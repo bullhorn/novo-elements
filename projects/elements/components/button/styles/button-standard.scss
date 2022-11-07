@@ -1,0 +1,10 @@
+@import "~novo-design-tokens/scss";
+
+:host {
+  // Standard Themed Button
+  &.novo-button-standard {
+    --button-color-text: var(--button-standard-color-text);
+    --button-color-background: var(--button-standard-color-background);
+    --button-color-border: var(--button-standard-color-border);
+  }
+}
