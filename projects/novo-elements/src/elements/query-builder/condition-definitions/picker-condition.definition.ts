@@ -9,20 +9,29 @@ import { AbstractConditionFieldDef } from './abstract-condition.definition';
   template: `
     <ng-container novoConditionFieldDef>
       <novo-field *novoConditionOperatorsDef="let formGroup" [formGroup]="formGroup">
-        <novo-select [placeholder]="labels.operator" formControlName="operator">
+        <novo-select [placeholder]="labels.operator" formControlName="operator" (onSelect)="onOperatorSelect(formGroup)">
           <novo-option value="includeAny">{{ labels.includeAny }}</novo-option>
           <novo-option value="includeAll">{{ labels.includeAll }}</novo-option>
           <novo-option value="excludeAny">{{ labels.exclude }}</novo-option>
+          <novo-option value="isNull">{{ labels.isEmpty }}</novo-option>
         </novo-select>
       </novo-field>
-      <novo-field *novoConditionInputDef="let formGroup; fieldMeta as meta" [formGroup]="formGroup">
-        <novo-select formControlName="value" [placeholder]="labels.select" [multiple]="true">
-          <!-- WHat about optionUrl/optionType -->
-          <novo-option *ngFor="let option of meta?.options" [value]="option.value" [attr.data-automation-value]="option.label">
-            {{ option.label }}
-          </novo-option>
-        </novo-select>
-      </novo-field>
+      <ng-container *novoConditionInputDef="let formGroup; fieldMeta as meta" [ngSwitch]="formGroup.value.operator" [formGroup]="formGroup">
+        <novo-field *novoSwitchCases="['includeAny', 'includeAll', 'excludeAny']">
+          <novo-select formControlName="value" [placeholder]="labels.select" [multiple]="true">
+            <!-- WHat about optionUrl/optionType -->
+            <novo-option *ngFor="let option of meta?.options" [value]="option.value" [attr.data-automation-value]="option.label">
+              {{ option.label }}
+            </novo-option>
+          </novo-select>
+        </novo-field>
+        <novo-field *novoSwitchCases="['isNull']">
+          <novo-radio-group formControlName="value">
+            <novo-radio [value]="true">{{ labels.yes }}</novo-radio>
+            <novo-radio [value]="false">{{ labels.no }}</novo-radio>
+          </novo-radio-group>
+        </novo-field>
+      </ng-container>
     </ng-container>
   `,
   encapsulation: ViewEncapsulation.None,

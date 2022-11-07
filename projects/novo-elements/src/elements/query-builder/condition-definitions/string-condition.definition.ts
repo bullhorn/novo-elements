@@ -1,6 +1,6 @@
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { AbstractControl, FormControl } from '@angular/forms';
+import { AbstractControl } from '@angular/forms';
 import { AbstractConditionFieldDef } from './abstract-condition.definition';
 
 /**
@@ -15,27 +15,36 @@ import { AbstractConditionFieldDef } from './abstract-condition.definition';
     <!-- fieldTypes should be UPPERCASE -->
     <ng-container novoConditionFieldDef="STRING">
       <novo-field *novoConditionOperatorsDef="let formGroup" [formGroup]="formGroup">
-        <novo-select [placeholder]="labels.operator" formControlName="operator">
+        <novo-select [placeholder]="labels.operator" formControlName="operator" (onSelect)="onOperatorSelect(formGroup)">
           <novo-option value="includeAny">{{ labels.includeAny }}</novo-option>
           <novo-option value="includeAll">{{ labels.includeAll }}</novo-option>
           <novo-option value="excludeAny">{{ labels.exclude }}</novo-option>
+          <novo-option value="isEmpty">{{ labels.isEmpty }}</novo-option>
         </novo-select>
       </novo-field>
-      <novo-field *novoConditionInputDef="let formGroup" [formGroup]="formGroup">
-        <novo-chip-list #chipList aria-label="filter value" formControlName="value">
-          <novo-chip *ngFor="let chip of formGroup.value?.value || []" [value]="chip" (removed)="remove(chip, formGroup)">
-            {{ chip }}
-            <novo-icon novoChipRemove>close</novo-icon>
-          </novo-chip>
-          <input
-            novoChipInput
-            [placeholder]="labels.typeToAddChips"
-            autocomplete="off"
-            (novoChipInputTokenEnd)="add($event, formGroup)"
-          />
-        </novo-chip-list>
-        <novo-autocomplete></novo-autocomplete>
-      </novo-field>
+      <ng-container *novoConditionInputDef="let formGroup" [ngSwitch]="formGroup.value.operator" [formGroup]="formGroup">
+        <novo-field *novoSwitchCases="['includeAny', 'includeAll', 'excludeAny']">
+          <novo-chip-list #chipList aria-label="filter value" formControlName="value">
+            <novo-chip *ngFor="let chip of formGroup.value?.value || []" [value]="chip" (removed)="remove(chip, formGroup)">
+              {{ chip }}
+              <novo-icon novoChipRemove>close</novo-icon>
+            </novo-chip>
+            <input
+              novoChipInput
+              [placeholder]="labels.typeToAddChips"
+              autocomplete="off"
+              (novoChipInputTokenEnd)="add($event, formGroup)"
+            />
+          </novo-chip-list>
+          <novo-autocomplete></novo-autocomplete>
+        </novo-field>
+        <novo-field *novoSwitchCases="['isEmpty']">
+          <novo-radio-group formControlName="value">
+            <novo-radio [value]="true">{{ labels.yes }}</novo-radio>
+            <novo-radio [value]="false">{{ labels.no }}</novo-radio>
+          </novo-radio-group>
+        </novo-field>
+      </ng-container>
     </ng-container>
   `,
   encapsulation: ViewEncapsulation.None,
