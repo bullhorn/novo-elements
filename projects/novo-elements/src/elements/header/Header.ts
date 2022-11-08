@@ -16,7 +16,7 @@ export class NovoUtilsComponent {}
 @Component({
   selector: 'util-action, novo-action',
   template: `
-    <novo-button theme="icon" [icon]="icon" [attr.inverse]="inverse" [disabled]="disabled">
+    <novo-button theme="icon" [icon]="icon" [size]="size" [attr.inverse]="inverse" [disabled]="disabled">
       <ng-content></ng-content>
     </novo-button>
   `,
@@ -27,6 +27,8 @@ export class NovoUtilsComponent {}
 export class NovoUtilActionComponent {
   @Input()
   public icon: string;
+  @Input()
+  public size: string;
   @Input()
   public inverse: boolean;
   @Input()

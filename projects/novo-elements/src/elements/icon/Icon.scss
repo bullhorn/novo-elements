@@ -24,6 +24,7 @@ novo-icon {
     width: 1em;
     height: 1em;
     color: inherit;
+    outline: none;
     &:before {
       color: inherit;
     }
@@ -42,6 +43,11 @@ novo-icon {
         width: 1.6em;
         height: 1.6em;
       }
+      &[shape='circle'] {
+        i {
+          border-radius: 50%;
+        }
+      }
     }
   }
 
@@ -50,5 +56,16 @@ novo-icon {
       // background-color: rgba(0, 0, 0, .25);
       box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.2);
     }
+  }
+  &[shape='circle'] {
+    i {
+      border-radius: 50%;
+    }
+  }
+  &.icon-size-smaller {
+    font-size: 1.0em;
+  }
+  &.icon-size-larger {
+    font-size: 1.4em;
   }
 }

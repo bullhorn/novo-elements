@@ -1,3 +1,29 @@
+# [7.0.0](https://github.com/bullhorn/novo-elements/compare/v6.2.2...v7.0.0) (2022-06-08)
+
+
+
+## [6.2.2](https://github.com/bullhorn/novo-elements/compare/v6.2.1...v6.2.2) (2022-05-26)
+
+
+### Bug Fixes
+
+* **inert:** fix for chrome update breaking inert elements ([#1310](https://github.com/bullhorn/novo-elements/issues/1310)) ([a8bd11d](https://github.com/bullhorn/novo-elements/commit/a8bd11d86f0fd5902a2466316c52c41618d99c4a))
+
+
+
+## [6.2.1](https://github.com/bullhorn/novo-elements/compare/v6.2.0...v6.2.1) (2022-05-06)
+
+
+
+# [6.2.0](https://github.com/bullhorn/novo-elements/compare/v6.1.3...v6.2.0) (2022-04-19)
+
+
+### Features
+
+* **picker:** Adjusting how picker overlay appears for row chips. ([#1278](https://github.com/bullhorn/novo-elements/issues/1278)) ([9d1c9fa](https://github.com/bullhorn/novo-elements/commit/9d1c9fab55fc49ce8c880fab9d3b01c9df119c7b))
+
+
+
 ## [6.1.3](https://github.com/bullhorn/novo-elements/compare/v6.1.2...v6.1.3) (2022-04-15)
 
 

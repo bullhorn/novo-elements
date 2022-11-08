@@ -14,6 +14,8 @@ export interface BigDecimalFormatOptions extends Intl.NumberFormatOptions {
 
 @Injectable()
 export class NovoLabelService {
+  and = 'and';
+  not = 'not';
   filters = 'Filter';
   clear = 'Clear';
   sort = 'Sort';
@@ -21,6 +23,7 @@ export class NovoLabelService {
   dateAdded = 'Date Added';
   emptyTableMessage = 'No Records to display...';
   noMatchingRecordsMessage = 'No Matching Records';
+  noMoreRecordsMessage = 'No More Records';
   erroredTableMessage = 'Oops! An error occurred.';
   pickerError = 'Oops! An error occurred.';
   pickerTextFieldEmpty = 'Begin typing to see results.';
@@ -34,7 +37,12 @@ export class NovoLabelService {
   cancel = 'Cancel';
   next = 'Next';
   itemsPerPage = 'Items per page:';
+  chooseAField = 'Choose a field...';
+  operator = 'Operator...';
   select = 'Select...';
+  value = 'Value...';
+  selectDateRange = 'Select Date Range...'
+  typeToAddChips = 'Type to add chips...'
   selected = 'Selected';
   selectAllOnPage = 'Select all on page';
   deselectAll = 'Deselect all';
@@ -49,6 +57,7 @@ export class NovoLabelService {
   clearAllNormalCase = 'Clear All';
   clearSort = 'Clear Sort';
   clearFilter = 'Clear Filter';
+  clearSearch = 'Clear Search';
   clearSelected = 'Clear Selected';
   today = 'Today';
   now = 'Now';
@@ -109,6 +118,24 @@ export class NovoLabelService {
   invalidIntegerInput = 'Special characters are not allowed for';
   maxRecordsReached = 'Sorry, you have reached the maximum number of records allowed for this field';
   selectFilterOptions = 'Please select one or more filter options below.';
+  addCondition = 'Add Condition';
+  includeAny = 'Include Any';
+  includeAll = 'Include All';
+  exclude = 'Exclude';
+  radius = 'Radius';
+  equals = 'Equals';
+  equalTo = 'Equal To';
+  greaterThan = 'Greater Than';
+  lessThan = 'Less Than';
+  doesNotEqual = 'Does Not Equal';
+  true = 'True';
+  false = 'False';
+  before = 'Before';
+  after = 'After';
+  between = 'Between';
+  within = 'Within';
+  isEmpty = 'Is Empty?';
+  refreshPagination = 'Refresh Pagination';
 
   constructor(
     @Optional()

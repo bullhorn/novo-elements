@@ -15,7 +15,6 @@
   margin: 0px 16px;
 
   &.novo-expanded {
-    margin: 16px 4px;
     &:first-child {
       margin-top: 0;
     }
@@ -40,6 +39,7 @@
 }
 
 .novo-expansion-panel-spacing {
+  margin: 16px 4px;
   .novo-accordion &:first-child {
     margin-top: 0;
   }

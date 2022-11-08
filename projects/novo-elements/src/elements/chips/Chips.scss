@@ -35,7 +35,7 @@ novo-entity-chips {
     input {
       padding-top: 0;
       border: none;
-      background: transparent;
+      background: transparent !important;
       width: 100%;
       &:focus {
         outline: none;
@@ -275,9 +275,6 @@ novo-row-chips {
   .novo-row-chips-empty-message {
     font-style: italic;
     color: $grey;
-  }
-  novo-picker {
-    max-width: 275px;
   }
   i {
     cursor: pointer;

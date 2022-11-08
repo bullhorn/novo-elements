@@ -22,22 +22,29 @@ export class NovoIconComponent implements AfterViewInit {
   @HostBinding('attr.theme')
   @Input()
   public theme: string;
+
+  @HostBinding('attr.shape')
+  @Input()
+  public shape: string = 'box';
+
   @Input()
   public color: string;
+
   @HostBinding('attr.role')
   public role: string = 'img';
+
   @HostBinding('attr.aria-label')
   public ariaLabel: string;
 
   @Input()
   public size: TypographySize;
 
-  @HostBinding('class.text-size-smaller')
+  @HostBinding('class.icon-size-smaller')
   @Input()
   @BooleanInput()
   public smaller: boolean;
 
-  @HostBinding('class.text-size-larger')
+  @HostBinding('class.icon-size-larger')
   @Input()
   @BooleanInput()
   public larger: boolean;

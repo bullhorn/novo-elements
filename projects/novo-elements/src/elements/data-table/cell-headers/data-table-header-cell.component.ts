@@ -15,7 +15,7 @@ import {
   TemplateRef,
   ViewChild,
 } from '@angular/core';
-import { Key } from 'projects/novo-elements/src/utils';
+import { Key } from '../../../utils';
 import { fromEvent, Subscription } from 'rxjs';
 import { NovoLabelService } from '../../../services/novo-label-service';
 import { Helpers } from '../../../utils/Helpers';
@@ -61,7 +61,7 @@ import { DataTableState } from '../state/data-table-state.service';
           class="filter-button"
           [class.filter-active]="filterActive"
           [tooltip]="labels.filters"
-          [tooltipPosition]="'left'"
+          tooltipPosition="right"
           [attr.data-feature-id]="'novo-data-table-filter-' + this.id"
           (click)="focusInput()"
           >filter</novo-icon
@@ -131,7 +131,7 @@ import { DataTableState } from '../state/data-table-state.service';
             </novo-optgroup>
             <ng-container *ngSwitchCase="'multi-select'">
               <novo-optgroup class="dropdown-list-filter" (keydown)="multiSelectOptionFilterHandleKeydown($event)">
-                <novo-option class="filter-search" inert>
+                <novo-option class="filter-search" novoInert>
                   <novo-field flex>
                     <input
                       novoInput
@@ -139,6 +139,7 @@ import { DataTableState } from '../state/data-table-state.service';
                       (ngModelChange)="multiSelectOptionFilter($event)"
                       #optionFilterInput
                       data-automation-id="novo-data-table-multi-select-option-filter-input"
+                      (keydown.enter)="multiSelectOptionFilterHandleKeydown($event)"
                     />
                     <novo-icon novoSuffix>search</novo-icon>
                     <novo-error class="error-text" [hidden]="!error || !multiSelectHasVisibleOptions()">{{
@@ -163,12 +164,12 @@ import { DataTableState } from '../state/data-table-state.service';
               <novo-option class="filter-null-results" [hidden]="multiSelectHasVisibleOptions()">{{ labels.pickerEmpty }}</novo-option>
             </ng-container>
             <novo-optgroup *ngSwitchCase="'custom'">
-              <novo-option class="filter-search" inert>
+              <novo-option class="filter-search" novoInert>
                 <ng-container *ngTemplateOutlet="filterTemplate; context: { $implicit: config }"></ng-container>
               </novo-option>
             </novo-optgroup>
             <novo-optgroup *ngSwitchDefault (keydown.escape)="handleEscapeKeydown($event)">
-              <novo-option class="filter-search" inert>
+              <novo-option class="filter-search" novoInert>
                 <novo-field flex fullWidth>
                   <input
                     novoInput

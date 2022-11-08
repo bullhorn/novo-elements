@@ -1,0 +1,35 @@
+name: Deploy to Preview Channel
+
+on: pull_request
+
+env:
+  IS_FORK: ${{ github.event.pull_request.head.repo.full_name != github.repository }}
+  IS_DEPENDABOT: ${{ github.actor == 'dependabot[bot]' || github.actor == 'dependabot-preview[bot]' }}
+
+jobs:
+  build_and_preview:
+    if: '${{ github.event.pull_request.head.repo.full_name == github.repository }}'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup NodeJS
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.19.1
+      
+      - run: npm ci && npm run build:ci && npm run build:examples && npm run build:demo
+      
+      - name: Deploy preview
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        if: ${{ env.IS_FORK == 'false' && env.IS_DEPENDABOT == 'false' }}
+        with:
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_NOVO_ELEMENTS }}'
+          projectId: novo-elements
+          expires: 7d
+
+concurrency:
+  group: firebase-${{ github.head_ref }}
+  cancel-in-progress: true

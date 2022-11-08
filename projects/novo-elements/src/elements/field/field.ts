@@ -8,9 +8,12 @@ import {
   ContentChildren,
   Directive,
   ElementRef,
+  EventEmitter,
+  HostListener,
   InjectionToken,
   Input,
   OnDestroy,
+  Output,
   QueryList,
   ViewChild,
 } from '@angular/core';
@@ -99,6 +102,9 @@ export class NovoFieldElement implements AfterContentInit, OnDestroy {
 
   private _destroyed = new Subject<void>();
 
+  @Output() valueChanges: EventEmitter<any> = new EventEmitter();
+  @Output() stateChanges: EventEmitter<any> = new EventEmitter();
+
   constructor(public _elementRef: ElementRef, private _changeDetectorRef: ChangeDetectorRef) {}
   /**
    * Gets an ElementRef for the element that a overlay attached to the form-field should be
@@ -112,20 +118,32 @@ export class NovoFieldElement implements AfterContentInit, OnDestroy {
     this._validateControlChild();
 
     const control = this._control;
-
     if (control.controlType) {
       this._elementRef.nativeElement.classList.add(`novo-field-type-${control.controlType}`);
+      this._elementRef.nativeElement.setAttribute('data-control-type', control.controlType);
+    }
+
+    if (control.id) {
+      this._elementRef.nativeElement.setAttribute('data-control-id', control.id);
+    }
+
+    if (control.ngControl?.name) {
+      this._elementRef.nativeElement.setAttribute('data-control-key', control.ngControl.name);
     }
 
     // Subscribe to changes in the child control state in order to update the form field UI.
     // tslint:disable-next-line:deprecation
     control.stateChanges.pipe(startWith(null)).subscribe(() => {
+      this.stateChanges.next();
       this._changeDetectorRef.markForCheck();
     });
 
     // Run change detection if the value changes.
     if (control.ngControl && control.ngControl.valueChanges) {
-      control.ngControl.valueChanges.pipe(takeUntil(this._destroyed)).subscribe(() => this._changeDetectorRef.markForCheck());
+      control.ngControl.valueChanges.pipe(takeUntil(this._destroyed)).subscribe((v) => {
+        this.valueChanges.next(v);
+        this._changeDetectorRef.markForCheck();
+      });
     }
 
     if (this._hasLabel()) {
@@ -144,6 +162,11 @@ export class NovoFieldElement implements AfterContentInit, OnDestroy {
     if (!this._control) {
       throw new Error('Missing Novo Control');
     }
+  }
+
+  @HostListener('click', ['$event'])
+  _handleContainerClick(evt: MouseEvent) {
+    this._control.onContainerClick(evt);
   }
 
   _isUnderlinedInput(): boolean {

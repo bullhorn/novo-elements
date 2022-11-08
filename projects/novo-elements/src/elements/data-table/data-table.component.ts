@@ -17,7 +17,7 @@ import {
   ViewChild,
   ViewChildren,
 } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { NovoLabelService } from '../../services/novo-label-service';
 import { notify } from '../../utils/notifier/notifier.util';
 import { NovoTemplate } from '../common/novo-template/novo-template.directive';
@@ -25,6 +25,7 @@ import { NovoDataTableCellHeader } from './cell-headers/data-table-header-cell.c
 import { DataTableSource } from './data-table.source';
 import { NOVO_DATA_TABLE_REF } from './data-table.token';
 import {
+  IDataTableChangeEvent,
   IDataTableColumn,
   IDataTableFilter,
   IDataTablePaginationOptions,
@@ -65,13 +66,16 @@ import { DataTableState } from './state/data-table-state.service';
       <novo-data-table-pagination
         *ngIf="paginationOptions"
         [theme]="paginationOptions.theme"
-        [length]="dataSource?.currentTotal"
+        [length]="null !== overrideTotal && overrideTotal !== undefined ? overrideTotal : dataSource?.currentTotal"
         [page]="paginationOptions.page"
         [pageSize]="paginationOptions.pageSize"
         [pageSizeOptions]="paginationOptions.pageSizeOptions"
         [dataFeatureId]="paginatorDataFeatureId"
         [canSelectAll]="canSelectAll"
         [allMatchingSelected]="allMatchingSelected"
+        [loading]="paginationOptions.loading"
+        [errorLoading]="paginationOptions.errorLoading"
+        [paginationRefreshSubject]="paginationRefreshSubject"
       >
       </novo-data-table-pagination>
       <div class="novo-data-table-actions" *ngIf="templates['customActions']">
@@ -164,6 +168,15 @@ import { DataTableState } from './state/data-table-state.service';
             <ng-container *ngTemplateOutlet="templates['noResultsMessage'] || templates['defaultNoResultsMessage']"></ng-container>
           </div>
         </div>
+        <div
+          class="novo-data-table-no-more-results-container"
+          [style.left.px]="scrollLeft"
+          *ngIf="!dataSource?.totallyEmpty && dataSource?.currentlyEmpty && !state.userFiltered && !dataSource?.loading && !loading && !dataSource.pristine"
+        >
+          <div class="novo-data-table-empty-message">
+            <ng-container *ngTemplateOutlet="templates['noMoreResultsMessage'] || templates['defaultNoMoreResultsMessage']"></ng-container>
+          </div>
+        </div>
       </div>
       <div
         class="novo-data-table-empty-container"
@@ -251,6 +264,9 @@ import { DataTableState } from './state/data-table-state.service';
     <ng-template novoTemplate="defaultNoResultsMessage">
       <h4><i class="bhi-search-question"></i> {{ labels.noMatchingRecordsMessage }}</h4>
     </ng-template>
+    <ng-template novoTemplate="defaultNoMoreResultsMessage">
+      <h4><i class="bhi-search-question"></i> {{ labels.noMoreRecordsMessage }}</h4>
+    </ng-template>
     <ng-template novoTemplate="defaultEmptyMessage">
       <h4><i class="bhi-search-question"></i> {{ labels.emptyTableMessage }}</h4>
     </ng-template>
@@ -317,6 +333,8 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   @Input() maxSelected: number = undefined;
   @Input() canSelectAll: boolean = false;
   @Input() allMatchingSelected = false;
+  @Input() overrideTotal: number;
+  @Input() paginationRefreshSubject: Subject<void>;
 
   @Input()
   set dataTableService(service: IDataTableService<T>) {
@@ -346,7 +364,7 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
       // Re-subscribe
       this.outsideFilterSubscription = outsideFilter.subscribe((filter: any) => {
         this.state.outsideFilter = filter;
-        this.state.updates.next({ globalSearch: this.state.globalSearch, filter: this.state.filter, sort: this.state.sort });
+        this.state.updates.next({ globalSearch: this.state.globalSearch, filter: this.state.filter, sort: this.state.sort, where: this.state.where });
         this.ref.markForCheck();
       });
     }
@@ -362,7 +380,7 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
       // Re-subscribe
       this.refreshSubscription = refreshSubject.subscribe((filter: any) => {
         this.state.isForceRefresh = true;
-        this.state.updates.next({ globalSearch: this.state.globalSearch, filter: this.state.filter, sort: this.state.sort });
+        this.state.updates.next({ globalSearch: this.state.globalSearch, filter: this.state.filter, sort: this.state.sort, where: this.state.where });
         this.ref.markForCheck();
       });
     }
@@ -454,9 +472,16 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   constructor(public labels: NovoLabelService, private ref: ChangeDetectorRef, public state: DataTableState<T>) {
     this.scrollListenerHandler = this.scrollListener.bind(this);
     this.sortFilterSubscription = this.state.sortFilterSource.subscribe(
-      (event: { sort: IDataTableSort; filter: IDataTableFilter | IDataTableFilter[]; globalSearch: string }) => {
+      (event: IDataTableChangeEvent) => {
         if (this.name !== 'novo-data-table') {
-          this.preferencesChanged.emit({ name: this.name, sort: event.sort, filter: event.filter, globalSearch: event.globalSearch });
+          this.preferencesChanged.emit({
+            name: this.name,
+            sort: event.sort,
+            filter: event.filter,
+            globalSearch: event.globalSearch,
+            where: event.where,
+            savedSearchName: event.savedSearchName,
+          });
           this.performInteractions('change');
         } else {
           notify('Must have [name] set on data-table to use preferences!');
@@ -484,39 +509,31 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
 
   public modifyCellHeaderMultiSelectFilterOptions(column: string, newOptions: { value: any; label: string }[]): void {
     const header = this.cellHeaders.find((cellHeader) => cellHeader.id === column);
-    if (header && header.config && header.config.filterConfig && header.config.filterConfig.options) {
-      const filterOptions: any[] = header.config.filterConfig.options;
-      const optionsToKeep = filterOptions.filter(
-        (opt) =>
-          header.isSelected(opt, header.multiSelectedOptions) &&
-          !newOptions.find((newOpt) => opt.value && newOpt.value && newOpt.value === opt.value),
-      );
-      header.config.filterConfig.options = [...optionsToKeep, ...newOptions];
-    } else {
-      header.config.filterConfig.options = newOptions;
+    if (header) {
+      if (header.config && header.config.filterConfig && header.config.filterConfig.options) {
+        const filterOptions: any[] = header.config.filterConfig.options;
+        const optionsToKeep = filterOptions.filter(
+          (opt) =>
+            header.isSelected(opt, header.multiSelectedOptions) &&
+            !newOptions.find((newOpt) => opt.value && newOpt.value && newOpt.value === opt.value),
+        );
+        header.config.filterConfig.options = [...optionsToKeep, ...newOptions];
+      } else {
+        header.config.filterConfig.options = newOptions;
+      }
+      header.setupFilterOptions();
+      header.changeDetectorRef.markForCheck();
     }
-    header.setupFilterOptions();
-    header.changeDetectorRef.markForCheck();
   }
 
   public ngOnDestroy(): void {
-    if (this.outsideFilterSubscription) {
-      this.outsideFilterSubscription.unsubscribe();
-    }
+    this.outsideFilterSubscription?.unsubscribe();
+    this.refreshSubscription?.unsubscribe();
+    this.resetSubscription?.unsubscribe();
+    this.sortFilterSubscription?.unsubscribe();
+    this.allMatchingSelectedSubscription?.unsubscribe();
     if (this.novoDataTableContainer) {
       (this.novoDataTableContainer.nativeElement as Element).removeEventListener('scroll', this.scrollListenerHandler);
-    }
-    if (this.refreshSubscription) {
-      this.refreshSubscription.unsubscribe();
-    }
-    if (this.resetSubscription) {
-      this.resetSubscription.unsubscribe();
-    }
-    if (this.sortFilterSubscription) {
-      this.sortFilterSubscription.unsubscribe();
-    }
-    if (this.allMatchingSelectedSubscription) {
-      this.allMatchingSelectedSubscription.unsubscribe();
     }
   }
 
@@ -563,7 +580,7 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   public onSearchChange(term: string): void {
     this.state.globalSearch = term;
     this.state.reset(false, true);
-    this.state.updates.next({ globalSearch: term, filter: this.state.filter, sort: this.state.sort });
+    this.state.updates.next({ globalSearch: term, filter: this.state.filter, sort: this.state.sort, where: this.state.where });
   }
 
   public trackColumnsBy(index: number, item: IDataTableColumn<T>) {

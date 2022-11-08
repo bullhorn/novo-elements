@@ -4,9 +4,11 @@ export interface IDataTablePreferences {
   name: string;
   sort?: IDataTableSort;
   filter?: IDataTableFilter | IDataTableFilter[];
+  where?: { query: string; form: any };
   globalSearch?: any;
   pageSize?: number;
   displayedColumns?: string[];
+  savedSearchName?: string;
 }
 
 export interface IDataTableColumn<T> {
@@ -66,6 +68,8 @@ export interface IDataTablePaginationOptions {
   page?: number;
   pageSize: number;
   pageSizeOptions: number[] | { value: string; label: string }[];
+  loading?: boolean;
+  errorLoading?: boolean;
 }
 
 export interface IDataTableColumnSortConfig {
@@ -104,6 +108,10 @@ export interface IDataTableChangeEvent {
   page?: number;
   pageSize?: number;
   globalSearch?: string;
+  outsideFilter?: IDataTableFilter | IDataTableFilter[];
+  where?: { query: string; form: any };
+  savedSearchName?: string;
+  displayedColumns?: string[];
 }
 
 export interface IDataTableSelectionChangeEvent {
@@ -142,6 +150,7 @@ export interface IDataTableService<T> {
     pageSize: number,
     globalSearch?: string,
     outsideFilter?: any,
+    where?: { query: string; form: any },
   ): Observable<{ results: T[]; total: number }>;
 }
 

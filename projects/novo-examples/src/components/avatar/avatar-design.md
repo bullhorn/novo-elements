@@ -3,7 +3,6 @@ section: Components
 page: Avatar
 title: Design
 order: 2
-tag: new
 ---
 
 ## Usage

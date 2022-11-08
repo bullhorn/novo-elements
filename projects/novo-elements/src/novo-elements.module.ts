@@ -44,6 +44,7 @@ import { GooglePlacesModule } from './elements/places/places.module';
 import { GooglePlacesService } from './elements/places/places.service';
 import { NovoPopOverModule } from './elements/popover/PopOver.module';
 import { NovoProgressModule } from './elements/progress/Progress.module';
+import { NovoQueryBuilderModule } from './elements/query-builder/query-builder.module';
 import { NovoQuickNoteModule } from './elements/quick-note/QuickNote.module';
 import { NovoRadioModule } from './elements/radio/Radio.module';
 import { NovoSearchBoxModule } from './elements/search/SearchBox.module';
@@ -140,6 +141,7 @@ import { FormUtils } from './utils/form-utils/FormUtils';
     NovoColorPickerModule,
     NovoMenuModule,
     NovoSelectSearchModule,
+    NovoQueryBuilderModule,
   ],
   providers: [
     { provide: ComponentUtils, useClass: ComponentUtils },

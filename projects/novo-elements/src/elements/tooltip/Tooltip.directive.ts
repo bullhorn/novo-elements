@@ -35,7 +35,7 @@ export class TooltipDirective implements OnDestroy, OnInit {
   @Input('removeTooltipArrow')
   removeArrow: boolean = false;
   @Input('tooltipAutoPosition')
-  autoPosition: boolean = false;
+  autoPosition: boolean = true;
   @Input('tooltipIsHTML')
   isHTML: boolean;
 
@@ -84,7 +84,7 @@ export class TooltipDirective implements OnDestroy, OnInit {
     }
   }
 
-  private show(): void {
+  show(): void {
     const overlayState = new OverlayConfig();
     overlayState.positionStrategy = this.getPosition();
 
@@ -112,7 +112,8 @@ export class TooltipDirective implements OnDestroy, OnInit {
     tooltipInstance.bounce = this.bounce;
   }
 
-  private hide(): void {
+  @HostListener('blur')
+  hide(): void {
     if (this.overlayRef) {
       this.overlayRef.detach();
     }
@@ -124,60 +125,60 @@ export class TooltipDirective implements OnDestroy, OnInit {
     let offsetX: number;
     let offsetY: number;
     let autoPositions: ConnectedPosition[] = [
-      { originX: 'center', originY: 'bottom', overlayX: 'center', overlayY: 'top', offsetX: 0, offsetY: 8 },
-      { originX: 'end', originY: 'bottom', overlayX: 'end', overlayY: 'top', offsetX: 0, offsetY: 8 },
-      { originX: 'end', originY: 'center', overlayX: 'start', overlayY: 'center', offsetX: 8, offsetY: 0 },
-      { originX: 'start', originY: 'center', overlayX: 'end', overlayY: 'center', offsetX: -8, offsetY: 0 },
-      { originX: 'center', originY: 'top', overlayX: 'center', overlayY: 'bottom', offsetX: 0, offsetY: -8 },
-      { originX: 'start', originY: 'bottom', overlayX: 'start', overlayY: 'top', offsetX: 0, offsetY: 8 },
-      { originX: 'start', originY: 'top', overlayX: 'start', overlayY: 'bottom', offsetX: 0, offsetY: -8 },
-      { originX: 'end', originY: 'top', overlayX: 'end', overlayY: 'bottom', offsetX: 0, offsetY: -8 },
-      { originX: 'start', originY: 'top', overlayX: 'end', overlayY: 'bottom', offsetX: 8, offsetY: -8 },
-      { originX: 'start', originY: 'bottom', overlayX: 'end', overlayY: 'top', offsetX: 8, offsetY: 8 },
-      { originX: 'end', originY: 'top', overlayX: 'start', overlayY: 'bottom', offsetX: -8, offsetY: -8 },
-      { originX: 'end', originY: 'bottom', overlayX: 'start', overlayY: 'top', offsetX: -8, offsetY: 8 },
+      { originX: 'center', originY: 'bottom', overlayX: 'center', overlayY: 'top', offsetX: 0, offsetY: 12 },
+      { originX: 'end', originY: 'bottom', overlayX: 'end', overlayY: 'top', offsetX: 0, offsetY: 12 },
+      { originX: 'end', originY: 'center', overlayX: 'start', overlayY: 'center', offsetX: 12, offsetY: 0 },
+      { originX: 'start', originY: 'center', overlayX: 'end', overlayY: 'center', offsetX: -12, offsetY: 0 },
+      { originX: 'center', originY: 'top', overlayX: 'center', overlayY: 'bottom', offsetX: 0, offsetY: -12 },
+      { originX: 'start', originY: 'bottom', overlayX: 'start', overlayY: 'top', offsetX: 0, offsetY: 12 },
+      { originX: 'start', originY: 'top', overlayX: 'start', overlayY: 'bottom', offsetX: 0, offsetY: -12 },
+      { originX: 'end', originY: 'top', overlayX: 'end', overlayY: 'bottom', offsetX: 0, offsetY: -12 },
+      { originX: 'start', originY: 'top', overlayX: 'end', overlayY: 'bottom', offsetX: 12, offsetY: -12 },
+      { originX: 'start', originY: 'bottom', overlayX: 'end', overlayY: 'top', offsetX: 12, offsetY: 12 },
+      { originX: 'end', originY: 'top', overlayX: 'start', overlayY: 'bottom', offsetX: -12, offsetY: -12 },
+      { originX: 'end', originY: 'bottom', overlayX: 'start', overlayY: 'top', offsetX: -12, offsetY: 12 },
     ];
 
     switch (this.position) {
       case 'right':
         defaultPosition = { originX: 'end', originY: 'center', overlayX: 'start', overlayY: 'center' };
-        offsetX = 8;
+        offsetX = 12;
         offsetY = 0;
         break;
       case 'bottom':
         defaultPosition = { originX: 'center', originY: 'bottom', overlayX: 'center', overlayY: 'top' };
         offsetX = 0;
-        offsetY = 8;
+        offsetY = 12;
         break;
       case 'top':
         defaultPosition = { originX: 'center', originY: 'top', overlayX: 'center', overlayY: 'bottom' };
         offsetX = 0;
-        offsetY = -8;
+        offsetY = -12;
         break;
       case 'left':
         defaultPosition = { originX: 'start', originY: 'center', overlayX: 'end', overlayY: 'center' };
-        offsetX = -8;
+        offsetX = -12;
         offsetY = 0;
         break;
       case 'top-left':
         defaultPosition = { originX: 'start', originY: 'top', overlayX: 'end', overlayY: 'bottom' };
-        offsetX = 8;
-        offsetY = -8;
+        offsetX = 12;
+        offsetY = -12;
         break;
       case 'bottom-left':
         defaultPosition = { originX: 'start', originY: 'bottom', overlayX: 'end', overlayY: 'top' };
-        offsetX = 8;
-        offsetY = 8;
+        offsetX = 12;
+        offsetY = 12;
         break;
       case 'top-right':
         defaultPosition = { originX: 'end', originY: 'top', overlayX: 'start', overlayY: 'bottom' };
-        offsetX = -8;
-        offsetY = -8;
+        offsetX = -12;
+        offsetY = -12;
         break;
       case 'bottom-right':
         defaultPosition = { originX: 'end', originY: 'bottom', overlayX: 'start', overlayY: 'top' };
-        offsetX = -8;
-        offsetY = 8;
+        offsetX = -12;
+        offsetY = 12;
         break;
       default:
         break;
