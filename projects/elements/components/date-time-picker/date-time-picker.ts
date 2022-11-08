@@ -3,7 +3,8 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { Component, ElementRef, EventEmitter, forwardRef, Input, Output } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 // Vendor
-import * as dateFns from 'date-fns';
+import { getHours, getMilliseconds, getMinutes, getSeconds, setHours, setMilliseconds, setMinutes, setSeconds } from 'date-fns';
+// APP
 import { NovoLabelService } from 'novo-elements/services';
 import { Helpers } from 'novo-elements/utils';
 
@@ -211,12 +212,12 @@ export class NovoDateTimePickerElement implements ControlValueAccessor {
   }
 
   createFullDateValue(datePickerValue: Date, timePickerValue: Date) {
-    return dateFns.setMilliseconds(
-      dateFns.setSeconds(
-        dateFns.setMinutes(dateFns.setHours(datePickerValue, dateFns.getHours(timePickerValue)), dateFns.getMinutes(timePickerValue)),
-        dateFns.getSeconds(timePickerValue),
+    return setMilliseconds(
+      setSeconds(
+        setMinutes(setHours(datePickerValue, getHours(timePickerValue)), getMinutes(timePickerValue)),
+        getSeconds(timePickerValue),
       ),
-      dateFns.getMilliseconds(timePickerValue),
+      getMilliseconds(timePickerValue),
     );
   }
 

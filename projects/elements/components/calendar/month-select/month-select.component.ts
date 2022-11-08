@@ -1,8 +1,8 @@
 // NG2
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { getMonth } from 'date-fns';
 import { NovoLabelService } from 'novo-elements/services';
 import { DateLike } from 'novo-elements/types';
+import { DateUtil } from 'novo-elements/utils';
 
 @Component({
   selector: 'novo-month-select',
@@ -33,10 +33,10 @@ export class NovoMonthSelectElement implements OnInit {
   }
 
   _isActive(month: number) {
-    return this.activeDate && month === getMonth(this.activeDate);
+    return this.activeDate && month === DateUtil.getMonth(this.activeDate);
   }
 
   _isSelected(month: number) {
-    return this.selected && month === getMonth(this.selected[0]);
+    return this.selected && month === DateUtil.getMonth(this.selected[0]);
   }
 }

@@ -58,7 +58,7 @@ export class NovoCalendarElement implements OnInit {
   _activeDate: Date = new Date();
   _mode: DatePickerSelectModes = 'single';
   _numberOfMonths: number[] = [0];
-  _weekStartsOn: number = 0;
+  _weekStartsOn: Day = 0;
   _strategy: NovoDateSelectionStrategy<any> = new DefaultDateSelectionStrategy();
 
   months: any;
@@ -76,10 +76,10 @@ export class NovoCalendarElement implements OnInit {
   }
 
   @Input()
-  get weekStartsOn(): number {
+  get weekStartsOn(): Day {
     return this._weekStartsOn;
   }
-  set weekStartsOn(value) {
+  set weekStartsOn(value: Day) {
     this._weekStartsOn = value;
     if (this.mode === 'week') {
       this._strategy = new WeekSelectionStrategy(this.weekStartsOn);

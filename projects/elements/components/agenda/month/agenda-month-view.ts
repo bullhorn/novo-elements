@@ -12,7 +12,7 @@ import {
   TemplateRef,
   ViewEncapsulation,
 } from '@angular/core';
-import * as dateFns from 'date-fns';
+import { addSeconds, differenceInSeconds, getDate, getMonth, getYear, setDate, setMonth, setYear } from 'date-fns';
 import {
   CalendarEvent,
   CalendarEventTimesChangedEvent,
@@ -114,7 +114,7 @@ export class NovoAgendaMonthViewElement implements OnChanges, OnInit, OnDestroy 
    * The start number of the week
    */
   @Input()
-  weekStartsOn: number;
+  weekStartsOn: Day;
 
   /**
    * A custom template to use to replace the header
@@ -208,14 +208,14 @@ export class NovoAgendaMonthViewElement implements OnChanges, OnInit, OnDestroy 
    * @hidden
    */
   eventDropped(day: MonthViewDay, event: CalendarEvent): void {
-    const year: number = dateFns.getYear(day.date);
-    const month: number = dateFns.getMonth(day.date);
-    const date: number = dateFns.getDate(day.date);
-    const newStart: Date = dateFns.setYear(dateFns.setMonth(dateFns.setDate(event.start, date), month), year);
+    const year: number = getYear(day.date);
+    const month: number = getMonth(day.date);
+    const date: number = getDate(day.date);
+    const newStart: Date = setYear(setMonth(setDate(event.start, date), month), year);
     let newEnd: Date;
     if (event.end) {
-      const secondsDiff: number = dateFns.differenceInSeconds(newStart, event.start);
-      newEnd = dateFns.addSeconds(event.end, secondsDiff);
+      const secondsDiff: number = differenceInSeconds(newStart, event.start);
+      newEnd = addSeconds(event.end, secondsDiff);
     }
     this.eventTimesChanged.emit({ event, newStart, newEnd });
   }
