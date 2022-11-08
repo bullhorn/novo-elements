@@ -104,7 +104,7 @@ export class NovoFieldElement implements AfterContentInit, OnDestroy {
   private _destroyed = new Subject<void>();
 
   @Output() valueChanges: EventEmitter<any> = new EventEmitter();
-  @Output() stateChanges: EventEmitter<any> = new EventEmitter();
+  @Output() stateChanges: EventEmitter<void> = new EventEmitter();
 
   constructor(public _elementRef: ElementRef, private _changeDetectorRef: ChangeDetectorRef) {}
   /**

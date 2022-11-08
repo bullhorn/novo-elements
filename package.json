@@ -60,7 +60,7 @@
     "imask": "^6.2.2",
     "novo-design-tokens": "^1.0.0-beta.6",
     "post-robot": "9.0.30",
-    "rxjs": "~6.5.5",
+    "rxjs": "^7.5.4",
     "text-mask-addons": "^3.8.0",
     "timezone-support": "^2.0.2",
     "tslib": "^2.0.0",

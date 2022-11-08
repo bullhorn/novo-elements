@@ -118,7 +118,7 @@ const DATE_TIME_PICKER_VALUE_ACCESSOR = {
           ></novo-date-picker>
         </div>
         <div class="time-picker">
-          <novo-time-picker (onSelect)="onTimeSelected($event)" [(ngModel)]="model" [military]="military" inline="true"></novo-time-picker>
+          <novo-time-picker (onSelect)="onTimeSelected($event)" [(ngModel)]="model" (ngModelChange)="onModelChange($event)" [military]="military" inline="true"></novo-time-picker>
         </div>
       </div>
     </div>
@@ -159,6 +159,10 @@ export class NovoDateTimePickerElement implements ControlValueAccessor {
 
   toggleView(tab: string): void {
     this.componentTabState = tab;
+  }
+
+  onModelChange(event) {
+    this.model = this.createFullDateValue(this.datePickerValue, event);
   }
 
   setDateLabels(value: Date) {
