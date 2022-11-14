@@ -2,8 +2,8 @@ import { DataSource } from '@angular/cdk/table';
 import { ChangeDetectorRef } from '@angular/core';
 import { merge, Observable, of } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
-import { DataTableState } from './state/data-table-state.service';
 import { IDataTableService } from './interfaces';
+import { DataTableState } from './state/data-table-state.service';
 
 export class DataTableSource<T> extends DataSource<T> {
   public total = 0;
@@ -34,6 +34,7 @@ export class DataTableSource<T> extends DataSource<T> {
       switchMap(() => {
         this.pristine = false;
         this.loading = true;
+        this.state.dataLoadingSource.next(this.loading);
         return this.tableService.getTableResults(
           this.state.sort,
           this.state.filter,
@@ -66,6 +67,7 @@ export class DataTableSource<T> extends DataSource<T> {
           this.ref.markForCheck();
           setTimeout(() => {
             this.loading = false;
+            this.state.dataLoadingSource.next(this.loading);
             this.state.dataLoaded.next();
             this.ref.markForCheck();
           });

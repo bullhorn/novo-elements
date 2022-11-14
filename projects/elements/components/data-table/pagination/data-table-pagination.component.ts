@@ -10,7 +10,7 @@ import {
   Output,
 } from '@angular/core';
 import { NovoLabelService } from 'novo-elements/services';
-import { Subscription } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { IDataTablePaginationEvent } from '../interfaces';
 import { DataTableState } from '../state/data-table-state.service';
 
@@ -77,7 +77,7 @@ const MAX_PAGES_DISPLAYED = 5;
       >
       </novo-select>
       <span class="spacer"></span>
-      <ul class="pager" data-automation-id="pager">
+      <ul *ngIf="!loading && !errorLoading" class="pager" data-automation-id="pager">
         <li class="page" (click)="selectPage(page - 1)" [ngClass]="{ disabled: page === 0 }">
           <i class="bhi-previous" data-automation-id="pager-previous"></i>
         </li>
@@ -88,6 +88,10 @@ const MAX_PAGES_DISPLAYED = 5;
           <i class="bhi-next" data-automation-id="pager-next"></i>
         </li>
       </ul>
+      <novo-loading *ngIf="loading"></novo-loading>
+      <button *ngIf="errorLoading" theme="primary" color="negative" icon="refresh" (click)="paginationRefreshSubject.next()">
+        {{ labels.refreshPagination }}
+      </button>
     </ng-container>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -136,6 +140,12 @@ export class NovoDataTablePagination<T> implements OnInit, OnDestroy {
   public canSelectAll: boolean = false;
   @Input()
   public allMatchingSelected: boolean = false;
+  @Input()
+  public loading: boolean = false;
+  @Input()
+  public errorLoading: boolean = false;
+  @Input()
+  public paginationRefreshSubject = new Subject();
 
   @Input()
   get length(): number {

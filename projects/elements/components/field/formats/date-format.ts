@@ -3,8 +3,8 @@ import { COMPOSITION_BUFFER_MODE, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { IMaskDirective, IMaskFactory } from 'angular-imask';
 import { format, isValid, parse } from 'date-fns';
 import * as IMask from 'imask';
-import { DATE_FORMATS, NOVO_INPUT_FORMAT } from './base-format';
 import { NovoLabelService } from 'novo-elements/services';
+import { DATE_FORMATS, NOVO_INPUT_FORMAT } from './base-format';
 
 export const DATEFORMAT_VALUE_ACCESSOR = {
   provide: NG_VALUE_ACCESSOR,

@@ -27,6 +27,7 @@ import {
   ViewChild,
   ViewContainerRef,
 } from '@angular/core';
+import { Helpers } from 'novo-elements/utils';
 // Vendor
 import { fromEvent, merge, Observable, of as observableOf, Subscription } from 'rxjs';
 import { filter, first, switchMap } from 'rxjs/operators';
@@ -330,7 +331,9 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
 
   protected elementIsInNestedOverlay(el): boolean {
     while (el.parentNode) {
-      if (el.id?.includes('novo-overlay-') || el.id?.includes('modal-container-')) {
+      if (Helpers.isString(el.id) && (el.id?.includes('novo-overlay-') || el.id?.includes('modal-container-'))) {
+        // checking to see if the current overlay is newer (in front of the parent overlay)
+        // example text novo-overlay-1666291728835
         return this.id.split('-')[2] < el.id.split('-')[2];
       }
       el = el.parentNode;
