@@ -158,9 +158,9 @@ export class CardElement implements OnChanges, OnInit {
   }
 
   @Output()
-  onClose: EventEmitter<any> = new EventEmitter();
+  onClose: EventEmitter<void> = new EventEmitter();
   @Output()
-  onRefresh: EventEmitter<any> = new EventEmitter();
+  onRefresh: EventEmitter<void> = new EventEmitter();
 
   cardAutomationId: string;
   labels: NovoLabelService;

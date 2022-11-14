@@ -14,12 +14,14 @@ import {
   ViewChild,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import * as dateFns from 'date-fns';
+// Vendor
+import { isValid } from 'date-fns';
+import { createAutoCorrectedDatePipe } from 'text-mask-addons';
+// App
 import { NovoOverlayTemplateComponent } from 'novo-elements/common/overlay';
 import { DateFormatService, NovoLabelService } from 'novo-elements/services';
 import { RangeModel } from 'novo-elements/types';
-import { Helpers, Key } from 'novo-elements/utils';
-import { createAutoCorrectedDatePipe } from 'text-mask-addons';
+import { DateUtil, Helpers, Key } from 'novo-elements/utils';
 
 // Value accessor for the component (supports ngModel)
 const DATE_VALUE_ACCESSOR = {
@@ -315,8 +317,8 @@ export class NovoDateRangeInputElement implements OnInit, OnChanges, ControlValu
       if (!value) {
         return '';
       }
-      if (this.userDefinedFormat && dateFns.isValid(value)) {
-        return dateFns.format(value, this.format);
+      if (this.userDefinedFormat && isValid(value)) {
+        return DateUtil.format(value, this.format);
       }
       if (!(value instanceof Date)) {
         value = new Date(value);

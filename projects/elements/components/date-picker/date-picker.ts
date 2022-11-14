@@ -4,10 +4,11 @@ import { ChangeDetectorRef, Component, ElementRef, EventEmitter, forwardRef, Hos
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 // Vendor
-import { isDate, isValid, parse, startOfDay, subDays } from 'date-fns';
+import { isDate, isValid, subDays } from 'date-fns';
+// APP
 import { NovoLabelService } from 'novo-elements/services';
 import { DataTableRangeModel, DatePickerSelectModes, modelTypes, RangeModel, rangeSelectModes } from 'novo-elements/types';
-import { BooleanInput, Helpers } from 'novo-elements/utils';
+import { BooleanInput, Helpers, DateUtil } from 'novo-elements/utils';
 
 // Value accessor for the component (supports ngModel)
 const DATE_PICKER_VALUE_ACCESSOR = {
@@ -136,7 +137,7 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
    * Day of the week the calendar should display first, Sunday=0...Saturday=6
    **/
   @Input()
-  weekStart: number = 0;
+  weekStart: Day = 0;
   /**
    * Certain dates that are already selected.
    **/
@@ -243,7 +244,7 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
     return this._selection;
   }
   set selection(value) {
-    this._selection = value ? value.filter(isDate).map((d) => startOfDay(d)) : [];
+    this._selection = value ? value.filter(isDate).map((d) => DateUtil.startOfDay(d)) : [];
   }
 
   constructor(
@@ -392,7 +393,7 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
       this.updateView(model);
       this.modelToSelection(model);
     } else if (Helpers.isString(model)) {
-      const date = parse(model as any);
+      const date = DateUtil.parse(model as any);
       if (isValid(date)) {
         this.updateView(date);
         this.modelToSelection(date);

@@ -104,7 +104,7 @@ export class NovoFieldElement implements AfterContentInit, OnDestroy {
   private _destroyed = new Subject<void>();
 
   @Output() valueChanges: EventEmitter<any> = new EventEmitter();
-  @Output() stateChanges: EventEmitter<any> = new EventEmitter();
+  @Output() stateChanges: EventEmitter<void> = new EventEmitter();
 
   constructor(public _elementRef: ElementRef, private _changeDetectorRef: ChangeDetectorRef) {}
   /**
@@ -119,7 +119,6 @@ export class NovoFieldElement implements AfterContentInit, OnDestroy {
     this._validateControlChild();
 
     const control = this._control;
-
     if (control.controlType) {
       this._elementRef.nativeElement.classList.add(`novo-field-type-${control.controlType}`);
       this._elementRef.nativeElement.setAttribute('data-control-type', control.controlType);
@@ -127,6 +126,10 @@ export class NovoFieldElement implements AfterContentInit, OnDestroy {
 
     if (control.id) {
       this._elementRef.nativeElement.setAttribute('data-control-id', control.id);
+    }
+
+    if (control.ngControl?.name) {
+      this._elementRef.nativeElement.setAttribute('data-control-key', control.ngControl.name);
     }
 
     // Subscribe to changes in the child control state in order to update the form field UI.

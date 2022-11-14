@@ -9,6 +9,7 @@ import { NovoFieldElement, NovoFieldPrefixDirective, NovoFieldSuffixDirective } 
 import { NovoFieldsElement } from './fieldset';
 import { NovoDateFormatDirective } from './formats/date-format';
 import { NovoDateRangeFormatDirective } from './formats/date-range-format';
+import { NovoDateTimeFormatDirective } from './formats/date-time-format';
 import { NovoTimeFormatDirective } from './formats/time-format';
 import { NovoHintElement } from './hint/hint';
 import { NovoInput } from './input';
@@ -28,6 +29,7 @@ import { NovoPickerToggleElement } from './toggle/picker-toggle.component';
     NovoFieldsElement,
     NovoTimeFormatDirective,
     NovoDateFormatDirective,
+    NovoDateTimeFormatDirective,
     NovoDateRangeFormatDirective,
     NovoPickerToggleElement,
     NovoPickerDirective,
@@ -44,6 +46,7 @@ import { NovoPickerToggleElement } from './toggle/picker-toggle.component';
     NovoTimeFormatDirective,
     NovoDateFormatDirective,
     NovoDateRangeFormatDirective,
+    NovoDateTimeFormatDirective,
     NovoPickerToggleElement,
     NovoPickerDirective,
   ],

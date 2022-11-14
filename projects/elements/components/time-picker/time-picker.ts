@@ -12,9 +12,9 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { format, isValid, parse } from 'date-fns';
+import { isValid } from 'date-fns';
 import { DateFormatService, NovoLabelService } from 'novo-elements/services';
-import { Helpers } from 'novo-elements/utils';
+import { DateUtil, Helpers } from 'novo-elements/utils';
 
 // Value accessor for the component (supports ngModel)
 const TIME_PICKER_VALUE_ACCESSOR = {
@@ -290,7 +290,7 @@ export class NovoTimePickerElement implements ControlValueAccessor, OnInit, OnCh
     }
     if (Helpers.isString(model)) {
       const time = this.military ? model : this.convertTime12to24(model);
-      const date = parse(`${format(Date.now(), 'YYYY-MM-DD')}T${time}`);
+      const date = DateUtil.parse(`${DateUtil.format(Date.now(), 'YYYY-MM-DD')}T${time}`);
       if (isValid(date)) {
         this.init(date, false);
         // this.dispatchChange();

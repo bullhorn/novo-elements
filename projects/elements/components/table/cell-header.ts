@@ -15,10 +15,10 @@ import {
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import { addDays, startOfDay, startOfToday, startOfTomorrow } from 'date-fns';
+import { startOfToday, startOfTomorrow } from 'date-fns';
 import { NovoDropdownElement } from 'novo-elements/components/dropdown';
 import { NovoLabelService } from 'novo-elements/services';
-import { Helpers } from 'novo-elements/utils';
+import { DateUtil, Helpers } from 'novo-elements/utils';
 import { Subscription } from 'rxjs';
 import { NovoTableChange, TableColumnFilterConfig, TableColumnFilterOption } from './interfaces';
 import { NovoSortFilter } from './sort';
@@ -246,13 +246,13 @@ export class NovoAdvancedHeaderCell implements OnInit, OnDestroy {
       this.activeDateFilter = filter.label || this.labels.customDateRange;
       if (filter.startDate && filter.endDate) {
         actualFilter = {
-          min: startOfDay(filter.startDate.date),
-          max: startOfDay(addDays(startOfDay(filter.endDate.date), 1)),
+          min: DateUtil.startOfDay(filter.startDate.date),
+          max: DateUtil.startOfDay(DateUtil.addDays(DateUtil.startOfDay(filter.endDate.date), 1)),
         };
       } else {
         actualFilter = {
-          min: filter.min ? addDays(startOfToday(), filter.min) : startOfToday(),
-          max: filter.max ? addDays(startOfTomorrow(), filter.max) : startOfTomorrow(),
+          min: filter.min ? DateUtil.addDays(startOfToday(), filter.min) : startOfToday(),
+          max: filter.max ? DateUtil.addDays(startOfTomorrow(), filter.max) : startOfTomorrow(),
         };
       }
     }

@@ -3,7 +3,8 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { Component, ElementRef, EventEmitter, forwardRef, Input, Output } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 // Vendor
-import * as dateFns from 'date-fns';
+import { getHours, getMilliseconds, getMinutes, getSeconds, setHours, setMilliseconds, setMinutes, setSeconds } from 'date-fns';
+// APP
 import { NovoLabelService } from 'novo-elements/services';
 import { Helpers } from 'novo-elements/utils';
 
@@ -117,7 +118,7 @@ const DATE_TIME_PICKER_VALUE_ACCESSOR = {
           ></novo-date-picker>
         </div>
         <div class="time-picker">
-          <novo-time-picker (onSelect)="onTimeSelected($event)" [(ngModel)]="model" [military]="military" inline="true"></novo-time-picker>
+          <novo-time-picker (onSelect)="onTimeSelected($event)" [(ngModel)]="model" (ngModelChange)="onModelChange($event)" [military]="military" inline="true"></novo-time-picker>
         </div>
       </div>
     </div>
@@ -158,6 +159,10 @@ export class NovoDateTimePickerElement implements ControlValueAccessor {
 
   toggleView(tab: string): void {
     this.componentTabState = tab;
+  }
+
+  onModelChange(event) {
+    this.model = this.createFullDateValue(this.datePickerValue, event);
   }
 
   setDateLabels(value: Date) {
@@ -207,12 +212,12 @@ export class NovoDateTimePickerElement implements ControlValueAccessor {
   }
 
   createFullDateValue(datePickerValue: Date, timePickerValue: Date) {
-    return dateFns.setMilliseconds(
-      dateFns.setSeconds(
-        dateFns.setMinutes(dateFns.setHours(datePickerValue, dateFns.getHours(timePickerValue)), dateFns.getMinutes(timePickerValue)),
-        dateFns.getSeconds(timePickerValue),
+    return setMilliseconds(
+      setSeconds(
+        setMinutes(setHours(datePickerValue, getHours(timePickerValue)), getMinutes(timePickerValue)),
+        getSeconds(timePickerValue),
       ),
-      dateFns.getMilliseconds(timePickerValue),
+      getMilliseconds(timePickerValue),
     );
   }
 

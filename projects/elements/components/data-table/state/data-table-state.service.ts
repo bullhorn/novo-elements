@@ -6,13 +6,13 @@ import { NovoDataTableFilterUtils } from '../services/data-table-filter-utils';
 
 @Injectable()
 export class DataTableState<T> {
-  public selectionSource = new Subject();
+  public selectionSource = new Subject<void>();
   public paginationSource = new Subject();
   public sortFilterSource = new Subject();
-  public resetSource = new Subject();
+  public resetSource = new Subject<void>();
   public expandSource = new Subject();
   public allMatchingSelectedSource = new Subject();
-  public dataLoaded = new Subject();
+  public dataLoaded = new Subject<void>();
   public dataLoadingSource = new Subject();
 
   sort: IDataTableSort = undefined;

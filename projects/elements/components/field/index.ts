@@ -7,6 +7,7 @@ export * from './formats/base-format';
 export * from './formats/date-format';
 export * from './formats/date-range-format';
 export * from './formats/time-format';
+export * from './formats/date-time-format';
 export * from './hint';
 export * from './input';
 export * from './picker.directive';

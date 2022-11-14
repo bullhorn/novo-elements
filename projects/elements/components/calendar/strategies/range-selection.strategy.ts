@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { differenceInCalendarDays, isWithinRange } from 'date-fns';
 import { DateLike, NovoDateSelectionStrategy } from 'novo-elements/types';
+import { DateUtil } from 'novo-elements/utils';
 
 @Injectable({
   providedIn: `root`,
@@ -11,7 +11,7 @@ export class RangeSelectionStrategy implements NovoDateSelectionStrategy<DateLik
 
     if (start == null) {
       start = date;
-    } else if (end == null && date && differenceInCalendarDays(date, start) >= 0) {
+    } else if (end == null && date && DateUtil.differenceInCalendarDays(date, start) >= 0) {
       end = date;
     } else {
       start = date;
@@ -36,6 +36,6 @@ export class RangeSelectionStrategy implements NovoDateSelectionStrategy<DateLik
 
   isSelected(activeDate: DateLike | null, currentRange: DateLike[]) {
     const [start, end] = currentRange;
-    return isWithinRange(activeDate, start, end);
+    return DateUtil.isWithinRange(activeDate, start, end);
   }
 }

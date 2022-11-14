@@ -1,6 +1,5 @@
-// NG2
 import { async } from '@angular/core/testing';
-import * as dateFns from 'date-fns';
+import { subDays } from 'date-fns';
 import { StaticDataTableService } from './static-data-table.service';
 
 describe('StaticDataTableService', () => {
@@ -9,7 +8,7 @@ describe('StaticDataTableService', () => {
   beforeEach(async(() => {
     const staticDataSet1 = [];
     for (let i = 0; i < 100; i++) {
-      const day = dateFns.subDays(new Date(), i);
+      const day = subDays(new Date(), i);
       const rando = Math.floor(Math.random() * 5);
       staticDataSet1.push({
         id: i,

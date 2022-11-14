@@ -12,10 +12,10 @@ import {
 } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 // Vendor
-import { addDays, isAfter, isBefore, isSameDay, isToday, startOfMonth, startOfWeek } from 'date-fns';
+import { addDays, Day as DateFnsDay, isToday } from 'date-fns';
 import { NovoLabelService } from 'novo-elements/services';
 import { DateLike, Day, OverlayDate } from 'novo-elements/types';
-import { BooleanInput } from 'novo-elements/utils';
+import { BooleanInput, DateUtil } from 'novo-elements/utils';
 
 @Component({
   selector: 'novo-month-view',
@@ -49,13 +49,13 @@ export class NovoMonthViewElement implements OnInit {
   @HostBinding('class.hide-overflow-days')
   public hideOverflowDays: boolean = false;
 
-  _weekStartsOn: number = 0;
+  _weekStartsOn: DateFnsDay = 0;
 
   @Input()
-  get weekStartsOn(): number {
+  get weekStartsOn(): DateFnsDay {
     return this._weekStartsOn;
   }
-  set weekStartsOn(value) {
+  set weekStartsOn(value: DateFnsDay) {
     this._weekStartsOn = value;
     this.weekdays = this.labels.getWeekdays(value);
     this.updateView(this.activeDate);
@@ -106,11 +106,11 @@ export class NovoMonthViewElement implements OnInit {
   buildMonth(month: Date) {
     // Reset the weeks
     this.weeks = [];
-    const start = startOfMonth(month);
+    const start = DateUtil.startOfMonth(month);
 
     // House keeping variables to know when we are done building the month
     let done = false,
-      date = startOfWeek(start, { weekStartsOn: this.weekStartsOn }),
+      date = DateUtil.startOfWeek(start, { weekStartsOn: this.weekStartsOn }),
       monthIndex = date.getMonth(),
       count = 0;
 
@@ -146,27 +146,27 @@ export class NovoMonthViewElement implements OnInit {
   }
 
   isDisabled(day: DateLike) {
-    return (this.minDate && isBefore(day, this.minDate)) || (this.maxDate && isAfter(day, this.maxDate));
+    return (this.minDate && DateUtil.isBefore(day, this.minDate)) || (this.maxDate && DateUtil.isAfter(day, this.maxDate));
   }
 
   /** Returns whether a cell should be marked as selected. */
   _isSelected(value: DateLike) {
-    return this.selected && this.selected.find((d) => isSameDay(d, value));
+    return this.selected && this.selected.find((d) => DateUtil.isSameDay(d, value));
   }
 
   /** Returns whether a cell should be marked as preview. */
   _isPreview(value: DateLike) {
-    return this.preview && this.preview.find((d) => isSameDay(d, value));
+    return this.preview && this.preview.find((d) => DateUtil.isSameDay(d, value));
   }
 
   /** Returns whether a cell should be marked as an overlay. */
   _isOverlay(value: DateLike) {
-    return this.overlays && this.overlays.find((o) => isSameDay(o.date, value));
+    return this.overlays && this.overlays.find((o) => DateUtil.isSameDay(o.date, value));
   }
 
   /** Returns whether a cell should be marked as an overlay. */
   _hasOverlayType(value: DateLike) {
-    let overlay = this.overlays && this.overlays.find((o) => isSameDay(o.date, value));
+    let overlay = this.overlays && this.overlays.find((o) => DateUtil.isSameDay(o.date, value));
     return overlay ? overlay.type : null;
   }
 
@@ -204,17 +204,17 @@ export class NovoMonthViewElement implements OnInit {
 /** Checks whether a value is the start of a range. */
 function isStart(value: DateLike, range: DateLike[] | null, rangeEnabled: boolean): boolean {
   const [start, end] = range ?? [];
-  return rangeEnabled && end !== null && !isSameDay(start, end) && value < end && isSameDay(value, start);
+  return rangeEnabled && end !== null && !DateUtil.isSameDay(start, end) && value < end && DateUtil.isSameDay(value, start);
 }
 
 /** Checks whether a value is the end of a range. */
 function isEnd(value: DateLike, range: DateLike[] | null, rangeEnabled: boolean): boolean {
   const [start, end] = range ?? [];
-  return rangeEnabled && start !== null && !isSameDay(start, end) && value >= start && isSameDay(value, end);
+  return rangeEnabled && start !== null && !DateUtil.isSameDay(start, end) && value >= start && DateUtil.isSameDay(value, end);
 }
 
 /** Checks whether a value is inside of a range. */
 function isInRange(value: DateLike, range: DateLike[] | null, rangeEnabled: boolean): boolean {
   const [start, end] = range ?? [];
-  return rangeEnabled && start !== null && end !== null && !isSameDay(start, end) && value >= start && value <= end;
+  return rangeEnabled && start !== null && end !== null && !DateUtil.isSameDay(start, end) && value >= start && value <= end;
 }
