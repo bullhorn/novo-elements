@@ -16,7 +16,6 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 // Vendor
 import { isValid } from 'date-fns';
-import { createAutoCorrectedDatePipe } from 'text-mask-addons';
 // App
 import { NovoOverlayTemplateComponent } from 'novo-elements/common/overlay';
 import { DateFormatService, NovoLabelService } from 'novo-elements/services';
@@ -40,7 +39,7 @@ const DATE_VALUE_ACCESSOR = {
         type="text"
         [name]="name"
         [(ngModel)]="formattedStartDate"
-        [textMask]="maskOptions"
+        [imask]="maskOptions"
         [placeholder]="placeholder"
         (keydown)="_onStartInputChange($event)"
         (input)="_onStartInputChange($event)"
@@ -59,7 +58,7 @@ const DATE_VALUE_ACCESSOR = {
         type="text"
         [name]="name"
         [(ngModel)]="formattedEndDate"
-        [textMask]="maskOptions"
+        [imask]="maskOptions"
         [placeholder]="placeholder"
         (keydown)="_onEndInputChange($event)"
         (input)="_onEndInputChange($event)"
@@ -117,6 +116,7 @@ export class NovoDateRangeInputElement implements OnInit, OnChanges, ControlValu
   blurEvent: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
   @Output()
   focusEvent: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
+
   /** Element for the panel containing the autocomplete options. */
   @ViewChild(NovoOverlayTemplateComponent)
   overlay: NovoOverlayTemplateComponent;
@@ -161,6 +161,7 @@ export class NovoDateRangeInputElement implements OnInit, OnChanges, ControlValu
   ngOnInit() {
     this._initFormatOptions();
   }
+
   ngOnChanges(changes: SimpleChanges): void {
     if (Object.keys(changes).some((key) => ['format'].includes(key))) {
       this._initFormatOptions();
@@ -169,13 +170,9 @@ export class NovoDateRangeInputElement implements OnInit, OnChanges, ControlValu
 
   _initFormatOptions() {
     this.userDefinedFormat = this.format ? !this.format.match(/^(DD\/MM\/YYYY|MM\/DD\/YYYY)$/g) : false;
+    console.log('mo', this.format, this.maskOptions)
     if (!this.userDefinedFormat && this.textMaskEnabled && !this.allowInvalidDate) {
-      this.maskOptions = this.maskOptions || {
-        mask: this.dateFormatService.getDateMask(),
-        pipe: createAutoCorrectedDatePipe((this.format || this.labels.dateFormatString()).toLowerCase()),
-        keepCharPositions: false,
-        guide: true,
-      };
+      this.maskOptions = this.maskOptions || this.dateFormatService.getDateMask();
     } else {
       this.maskOptions = { mask: false };
     }
@@ -214,7 +211,7 @@ export class NovoDateRangeInputElement implements OnInit, OnChanges, ControlValu
   protected formatDate(value: string) {
     try {
       const [dateTimeValue] = this.dateFormatService.parseString(value, false, 'date');
-      return new Date(dateTimeValue);
+      return dateTimeValue ? new Date(dateTimeValue) : null;
     } catch (err) {
       return null;
     }

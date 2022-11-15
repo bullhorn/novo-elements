@@ -13,7 +13,7 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { isValid } from 'date-fns';
-import { DateFormatService, NovoLabelService } from 'novo-elements/services';
+import { NovoLabelService } from 'novo-elements/services';
 import { DateUtil, Helpers } from 'novo-elements/utils';
 
 // Value accessor for the component (supports ngModel)
@@ -163,7 +163,6 @@ export class NovoTimePickerElement implements ControlValueAccessor, OnInit, OnCh
   constructor(
     public element: ElementRef,
     public labels: NovoLabelService,
-    public dateFormatService: DateFormatService,
     protected cdr: ChangeDetectorRef,
   ) {}
 

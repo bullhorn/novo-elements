@@ -15,7 +15,6 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 // Vendor
 import { isValid } from 'date-fns';
-import { createAutoCorrectedDatePipe } from 'text-mask-addons';
 // App
 import { NovoOverlayTemplateComponent } from 'novo-elements/common/overlay';
 import { DateFormatService, NovoLabelService } from 'novo-elements/services';
@@ -37,7 +36,7 @@ const DATE_VALUE_ACCESSOR = {
       type="text"
       [name]="name"
       [(ngModel)]="formattedValue"
-      [textMask]="maskOptions"
+      [imask]="maskOptions"
       [placeholder]="placeholder"
       (focus)="_handleFocus($event)"
       (keydown)="_handleKeydown($event)"
@@ -98,7 +97,7 @@ export class NovoDatePickerInputElement implements OnInit, OnChanges, ControlVal
   @Input()
   placeholder: string;
   /**
-   * MaskOptions to pass to the textMaskAddons plugin
+   * MaskOptions to pass to the angular-imask plugin
    **/
   @Input()
   maskOptions: any;
@@ -155,15 +154,11 @@ export class NovoDatePickerInputElement implements OnInit, OnChanges, ControlVal
   _initFormatOptions() {
     this.userDefinedFormat = this.format ? !this.format.match(/^(DD\/MM\/YYYY|MM\/DD\/YYYY)$/g) : false;
     if (!this.userDefinedFormat && this.textMaskEnabled && !this.allowInvalidDate) {
-      this.maskOptions = this.maskOptions || {
-        mask: this.dateFormatService.getDateMask(),
-        pipe: createAutoCorrectedDatePipe((this.format || this.labels.dateFormatString()).toLowerCase()),
-        keepCharPositions: false,
-        guide: true,
-      };
+      this.maskOptions = this.maskOptions || this.dateFormatService.getDateMask();
     } else {
       this.maskOptions = { mask: false };
     }
+    console.log('ifo', this.format, this.maskOptions)
     this.setupInvalidDateErrorMessage();
   }
 

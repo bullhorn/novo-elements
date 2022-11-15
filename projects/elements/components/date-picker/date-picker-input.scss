@@ -5,11 +5,10 @@
   font-size: 14px;
   line-height: 14px;
   color: var(--color-text);
-  width: 140px;
-  display: flex;
+  width: max-content;
+  display: block;
   flex-flow: row nowrap;
   height: min-content;
-  width: max-content;
 
   &.disabled {
     pointer-events: none;
@@ -47,7 +46,7 @@
   > i.bhi-calendar {
     position: absolute;
     right: 0.6rem;
-    top: calc(50% - 0.8rem);
+    top: 1rem;
     font-size: 1.2rem;
   }
 }

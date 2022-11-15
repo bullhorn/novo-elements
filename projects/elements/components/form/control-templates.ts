@@ -22,7 +22,7 @@ import { NovoTemplateService } from 'novo-elements/services';
       >
         <input
           *ngIf="control?.type !== 'number' && control?.textMaskEnabled"
-          [textMask]="control.maskOptions"
+          [imask]="control.maskOptions"
           [formControlName]="control.key"
           [id]="control.key"
           [type]="control?.type"
