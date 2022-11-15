@@ -158,7 +158,6 @@ export class NovoDatePickerInputElement implements OnInit, OnChanges, ControlVal
     } else {
       this.maskOptions = { mask: false };
     }
-    console.log('ifo', this.format, this.maskOptions)
     this.setupInvalidDateErrorMessage();
   }
 

@@ -170,7 +170,6 @@ export class NovoDateRangeInputElement implements OnInit, OnChanges, ControlValu
 
   _initFormatOptions() {
     this.userDefinedFormat = this.format ? !this.format.match(/^(DD\/MM\/YYYY|MM\/DD\/YYYY)$/g) : false;
-    console.log('mo', this.format, this.maskOptions)
     if (!this.userDefinedFormat && this.textMaskEnabled && !this.allowInvalidDate) {
       this.maskOptions = this.maskOptions || this.dateFormatService.getDateMask(this.format);
     } else {
