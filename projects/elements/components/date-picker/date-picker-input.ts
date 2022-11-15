@@ -154,7 +154,7 @@ export class NovoDatePickerInputElement implements OnInit, OnChanges, ControlVal
   _initFormatOptions() {
     this.userDefinedFormat = this.format ? !this.format.match(/^(DD\/MM\/YYYY|MM\/DD\/YYYY)$/g) : false;
     if (!this.userDefinedFormat && this.textMaskEnabled && !this.allowInvalidDate) {
-      this.maskOptions = this.maskOptions || this.dateFormatService.getDateMask();
+      this.maskOptions = this.maskOptions || this.dateFormatService.getDateMask(this.format);
     } else {
       this.maskOptions = { mask: false };
     }
@@ -216,7 +216,7 @@ export class NovoDatePickerInputElement implements OnInit, OnChanges, ControlVal
     try {
       const [dateTimeValue, formatted, isInvalidDate] = this.dateFormatService.parseString(value, false, 'date');
       this.isInvalidDate = isInvalidDate;
-      if (!isNaN(dateTimeValue.getUTCDate())) {
+      if (!isNaN(dateTimeValue?.getUTCDate())) {
         const dt = new Date(dateTimeValue);
         this.dispatchOnChange(dt, blur);
       } else {

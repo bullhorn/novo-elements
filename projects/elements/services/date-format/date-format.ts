@@ -63,7 +63,7 @@ export class DateFormatService {
   return mask;
  }
 
-  getDateMask() {
+  getDateMask(format?: string) {
     const mask = {
       mask: Date,
       pattern: 'm/`d/`Y',
@@ -75,7 +75,7 @@ export class DateFormatService {
         return str.toUpperCase();
       },
       format(date) {
-        return DateUtil.format(date, 'MM/DD/YYYY');
+        return DateUtil.format(date, format || 'MM/DD/YYYY');
       },
       parse: (str) => {
         return DateUtil.parse(str);
