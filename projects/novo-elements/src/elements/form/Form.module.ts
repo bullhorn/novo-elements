@@ -49,6 +49,7 @@ import { NovoFormElement } from './Form';
     NovoChipsModule,
     NovoDatePickerModule,
     NovoTimePickerModule,
+    NovoDateTimePickerModule,
     NovoNovoCKEditorModule,
     NovoFormExtrasModule,
     NovoQuickNoteModule,

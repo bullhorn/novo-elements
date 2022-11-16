@@ -15,6 +15,7 @@ import { NovoFormModule } from '../form';
 import { NovoIconModule } from '../icon';
 import { NovoLoadingModule } from '../loading';
 import { NovoNonIdealStateModule } from '../non-ideal-state';
+import { NovoRadioModule } from '../radio'
 import { NovoSearchBoxModule } from '../search';
 import { NovoSelectModule } from '../select';
 import { NovoSelectSearchModule } from '../select-search';
@@ -52,6 +53,7 @@ import { NovoConditionFieldDef, NovoConditionInputDef, NovoConditionOperatorsDef
     NovoCardModule,
     NovoDatePickerModule,
     NovoIconModule,
+    NovoRadioModule,
     NovoSearchBoxModule,
     NovoSwitchModule,
     NovoChipsModule,
