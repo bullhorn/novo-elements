@@ -215,10 +215,12 @@ export class NovoDatePickerInputElement implements OnInit, OnChanges, ControlVal
     try {
       const [dateTimeValue, formatted, isInvalidDate] = this.dateFormatService.parseString(value, false, 'date');
       this.isInvalidDate = isInvalidDate;
-      if (!isNaN(dateTimeValue?.getUTCDate()) && dateTimeValue.getFullYear()?.toString().length <= 4) {
+      // if we have a full date - set the dateTimeValue
+      if (dateTimeValue?.getFullYear()?.toString().length === 4) {
         const dt = new Date(dateTimeValue);
         this.dispatchOnChange(dt, blur);
-      } else {
+      // if we only have a partial date - set the value to null
+      } else if (isNaN(dateTimeValue?.getUTCDate())) {
         this.dispatchOnChange(null, blur);
       }
     } catch (err) {}
