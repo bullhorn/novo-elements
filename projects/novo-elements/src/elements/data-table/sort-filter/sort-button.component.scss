@@ -13,6 +13,9 @@
     &:hover {
       color: var(--selection);
     }
+    &.sort-hidden {
+      pointer-events: none;
+    }
   }
 
   .novo-sort-asc-icon {
