@@ -1,8 +1,8 @@
 import { animate, AnimationTriggerMetadata, state, style, transition, trigger } from '@angular/animations';
 import { SortDirection } from './sort-direction';
 
-const activeStyle = { opacity: 1, pointerEvents: 'all', top: 0 };
-const inactiveStyle = { opacity: 0, pointerEvents: 'none' };
+const activeStyle = { opacity: 1, top: 0 };
+const inactiveStyle = { opacity: 0 };
 
 /** Animation that moves the sort indicator. */
 export const sortAscAnim: AnimationTriggerMetadata = trigger('sortAsc', [
