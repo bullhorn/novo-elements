@@ -125,6 +125,8 @@ const DATE_TIME_PICKER_VALUE_ACCESSOR = {
 })
 export class NovoDateTimePickerElement implements ControlValueAccessor {
   @Input()
+  defaultTime: string;
+  @Input()
   minYear: any;
   @Input()
   maxYear: any;
@@ -195,6 +197,11 @@ export class NovoDateTimePickerElement implements ControlValueAccessor {
 
   onDateSelected(event: { month?: any; year?: any; day?: any; date?: Date }) {
     this.datePickerValue = event.date;
+    if (this.defaultTime === 'start') {
+      this.timePickerValue = new Date(this.timePickerValue.setHours(0, 0, 0));
+    } else if (this.defaultTime === 'end') {
+      this.timePickerValue = new Date(this.timePickerValue.setHours(23, 59, 59));
+    }
     this.model = this.createFullDateValue(this.datePickerValue, this.timePickerValue);
     this.setDateLabels(this.model);
     this.onSelect.emit({ date: this.model });
@@ -224,15 +231,15 @@ export class NovoDateTimePickerElement implements ControlValueAccessor {
   writeValue(model: any): void {
     this.model = model;
     if (Helpers.isEmpty(model)) {
-      this.model = new Date();
+      this.model = this.createFullDateValue(this.datePickerValue, this.timePickerValue);
     } else if (!isNaN(model)) {
       this.model = new Date(model);
     }
     this.datePickerValue = this.model;
     this.timePickerValue = this.model;
     if (Helpers.isDate(this.model)) {
-      this.setDateLabels(this.model);
-      this.setTimeLabels(this.model);
+      this.setDateLabels(this.datePickerValue);
+      this.setTimeLabels(this.timePickerValue);
     }
   }
 

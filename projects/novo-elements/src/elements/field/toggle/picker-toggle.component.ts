@@ -64,6 +64,9 @@ export class NovoPickerToggleElement<T = any> implements AfterContentInit, After
   /** An id to select the correct overlay.*/
   @Input() overlayId: string;
 
+  /** Width to pass to overlay.*/
+  @Input() width: string;
+
   /** Whether the toggle button is disabled. */
   @Input()
   get disabled(): boolean {
