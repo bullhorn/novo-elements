@@ -1,4 +1,3 @@
-import { NovoDateTimePickerModule } from './../date-time-picker/DateTimePicker.module';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { CdkTableModule } from '@angular/cdk/table';
 import { CommonModule } from '@angular/common';
@@ -9,6 +8,7 @@ import { NovoCardModule } from '../card';
 import { NovoChipsModule } from '../chips';
 import { NovoCommonModule, NovoOptionModule } from '../common';
 import { NovoDatePickerModule } from '../date-picker';
+import { NovoDateTimePickerModule } from './../date-time-picker/DateTimePicker.module';
 import { NovoDropdownModule } from '../dropdown';
 import { NovoFieldModule } from '../field';
 import { NovoFlexModule } from '../flex';
