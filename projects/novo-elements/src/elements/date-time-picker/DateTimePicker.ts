@@ -231,7 +231,7 @@ export class NovoDateTimePickerElement implements ControlValueAccessor {
   writeValue(model: any): void {
     this.model = model;
     if (Helpers.isEmpty(model)) {
-      this.model = this.createFullDateValue(this.datePickerValue, this.timePickerValue);
+      this.model = new Date();
     } else if (!isNaN(model)) {
       this.model = new Date(model);
     }
