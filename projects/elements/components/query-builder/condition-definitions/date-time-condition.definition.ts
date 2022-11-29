@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, QueryList, ViewChildren, ViewEncapsulation } from '@angular/core';
-import { NovoPickerToggleElement } from './../../field/toggle/picker-toggle.component';
+import { NovoPickerToggleElement } from 'novo-elements/components/field';
 import { AbstractConditionFieldDef } from './abstract-condition.definition';
 
 /**
