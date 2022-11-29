@@ -8,6 +8,7 @@ import { NovoCardModule } from '../card';
 import { NovoChipsModule } from '../chips';
 import { NovoCommonModule, NovoOptionModule } from '../common';
 import { NovoDatePickerModule } from '../date-picker';
+import { NovoDateTimePickerModule } from './../date-time-picker/DateTimePicker.module';
 import { NovoDropdownModule } from '../dropdown';
 import { NovoFieldModule } from '../field';
 import { NovoFlexModule } from '../flex';
@@ -15,6 +16,7 @@ import { NovoFormModule } from '../form';
 import { NovoIconModule } from '../icon';
 import { NovoLoadingModule } from '../loading';
 import { NovoNonIdealStateModule } from '../non-ideal-state';
+import { NovoRadioModule } from '../radio'
 import { NovoSearchBoxModule } from '../search';
 import { NovoSelectModule } from '../select';
 import { NovoSelectSearchModule } from '../select-search';
@@ -24,6 +26,7 @@ import { ConditionBuilderComponent, ConditionInputOutlet, ConditionOperatorOutle
 import { NovoDefaultAddressConditionDef } from './condition-definitions/address-condition.definition';
 import { NovoDefaultBooleanConditionDef } from './condition-definitions/boolean-condition.definition';
 import { NovoDefaultDateConditionDef } from './condition-definitions/date-condition.definition';
+import { NovoDefaultDateTimeConditionDef } from './condition-definitions/date-time-condition.definition';
 import { NovoDefaultIdConditionDef } from './condition-definitions/id-condition.definition';
 import { NovoDefaultNumberConditionDef } from './condition-definitions/number-condition.definition';
 import { NovoDefaultPickerConditionDef } from './condition-definitions/picker-condition.definition';
@@ -51,7 +54,9 @@ import { NovoConditionFieldDef, NovoConditionInputDef, NovoConditionOperatorsDef
     NovoLoadingModule,
     NovoCardModule,
     NovoDatePickerModule,
+    NovoDateTimePickerModule,
     NovoIconModule,
+    NovoRadioModule,
     NovoSearchBoxModule,
     NovoSwitchModule,
     NovoChipsModule,
@@ -67,6 +72,7 @@ import { NovoConditionFieldDef, NovoConditionInputDef, NovoConditionOperatorsDef
     NovoDefaultAddressConditionDef,
     NovoDefaultBooleanConditionDef,
     NovoDefaultDateConditionDef,
+    NovoDefaultDateTimeConditionDef,
     NovoConditionOperatorsDef,
     NovoConditionInputDef,
     NovoConditionFieldDef,
@@ -81,6 +87,7 @@ import { NovoConditionFieldDef, NovoConditionInputDef, NovoConditionOperatorsDef
     NovoDefaultAddressConditionDef,
     NovoDefaultBooleanConditionDef,
     NovoDefaultDateConditionDef,
+    NovoDefaultDateTimeConditionDef,
     NovoConditionOperatorsDef,
     NovoConditionInputDef,
     NovoConditionFieldDef,

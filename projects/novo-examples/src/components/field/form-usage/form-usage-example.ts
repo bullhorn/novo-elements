@@ -14,6 +14,7 @@ export class FormUsageExample {
   numberControl = new FormControl(16, Validators.min(10));
   timeControl = new FormControl(new Date());
   dateControl = new FormControl(new Date());
+  dateTimeControl = new FormControl(new Date());
   post: any = '';
 
   constructor(fb: FormBuilder) {
@@ -21,6 +22,7 @@ export class FormUsageExample {
       number: this.numberControl,
       time: this.timeControl,
       date: this.dateControl,
+      dateTime: this.dateTimeControl,
     });
   }
 

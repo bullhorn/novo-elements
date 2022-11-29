@@ -7,29 +7,28 @@ import { AbstractConditionFieldDef } from './abstract-condition.definition';
  * input type depending on the operator selected.
  */
 @Component({
-  selector: 'novo-date-condition-def',
+  selector: 'novo-date-time-condition-def',
   template: `
     <ng-container novoConditionFieldDef="DATE">
       <novo-field *novoConditionOperatorsDef="let formGroup" [formGroup]="formGroup">
         <novo-select [placeholder]="labels.operator" formControlName="operator" (onSelect)="onOperatorSelect(formGroup)">
           <novo-option value="before">{{ labels.before }}</novo-option>
           <novo-option value="after">{{ labels.after }}</novo-option>
-          <novo-option value="between">{{ labels.between }}</novo-option>
           <novo-option value="within">{{ labels.within }}</novo-option>
           <novo-option value="isNull">{{ labels.isEmpty }}</novo-option>
         </novo-select>
       </novo-field>
       <ng-container *novoConditionInputDef="let formGroup; viewIndex as viewIndex" [ngSwitch]="formGroup.value.operator" [formGroup]="formGroup">
-        <novo-field *novoSwitchCases="['before', 'after']">
-          <input novoInput dateFormat="iso8601" [picker]="datepicker" formControlName="value" />
-          <novo-picker-toggle triggerOnFocus [overlayId]="viewIndex" novoSuffix icon="calendar">
-            <novo-date-picker (onSelect)="closePanel($event, viewIndex)" #datepicker></novo-date-picker>
+        <novo-field *novoSwitchCases="['after']">
+          <input novoInput dateTimeFormat="iso8601" [picker]="datetimepicker" formControlName="value" />
+          <novo-picker-toggle triggerOnFocus [width]="-1" [overlayId]="viewIndex" novoSuffix icon="calendar">
+            <novo-date-time-picker defaultTime="end" (onSelect)="closePanel($event, viewIndex)" #datetimepicker></novo-date-time-picker>
           </novo-picker-toggle>
         </novo-field>
-        <novo-field *novoSwitchCases="['between']">
-          <input novoInput dateRangeFormat="date" [picker]="daterangepicker" formControlName="value" />
-          <novo-picker-toggle [for]="daterangepicker" triggerOnFocus [overlayId]="viewIndex" novoSuffix icon="calendar">
-            <novo-date-picker #daterangepicker (onSelect)="closePanel($event, viewIndex)" mode="range" numberOfMonths="2"></novo-date-picker>
+        <novo-field *novoSwitchCases="['before']">
+          <input novoInput dateTimeFormat="iso8601" [picker]="datetimepickerbefore" formControlName="value" />
+          <novo-picker-toggle triggerOnFocus [width]="-1" [overlayId]="viewIndex" novoSuffix icon="calendar">
+            <novo-date-time-picker defaultTime="start" (onSelect)="closePanel($event, viewIndex)" #datetimepickerbefore></novo-date-time-picker>
           </novo-picker-toggle>
         </novo-field>
         <novo-field *novoSwitchCases="['within']">
@@ -52,7 +51,7 @@ import { AbstractConditionFieldDef } from './abstract-condition.definition';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.Default,
 })
-export class NovoDefaultDateConditionDef extends AbstractConditionFieldDef {
+export class NovoDefaultDateTimeConditionDef extends AbstractConditionFieldDef {
   @ViewChildren(NovoPickerToggleElement)
   overlayChildren: QueryList<NovoPickerToggleElement>;
 
@@ -60,6 +59,5 @@ export class NovoDefaultDateConditionDef extends AbstractConditionFieldDef {
 
   closePanel(event, viewIndex): void {
     const overlay = this.overlayChildren.find(item => item.overlayId === viewIndex);
-    overlay.closePanel(event);
   }
 }

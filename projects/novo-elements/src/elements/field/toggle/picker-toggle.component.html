@@ -7,6 +7,6 @@
   [disabled]="disabled"
   (click)="togglePanel($event)"></novo-button>
 
-<novo-overlay-template [parent]="element" position="above-below">
+<novo-overlay-template [width]="width" [parent]="element" position="above-below">
   <ng-content></ng-content>
 </novo-overlay-template>
