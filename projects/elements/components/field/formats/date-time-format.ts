@@ -159,7 +159,7 @@ export class NovoDateTimeFormatDirective extends IMaskDirective<any> implements 
     const dateTime =  text.split(', ');
     const hour: string = dateTime[1].slice(0, 2);
     if (!this.military) {
-      const input = dateTime[1].substr(17, 4).replace(/\-/g, '').trim().slice(0, 2);
+      const input = dateTime[1].substr(5, 4).replace(/\-/g, '').trim().slice(0, 2);
       const timePeriod = this.imask.blocks.aa.enum.find((it) => it[0] === input[0]);
       if (this.hourOneFormatRequired(hour)) {
         (event.target as HTMLInputElement).value = `${dateTime[0]}, 01:${dateTime[1].slice(3, dateTime[1].length)}`;
