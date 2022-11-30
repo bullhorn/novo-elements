@@ -124,6 +124,8 @@ export const MockMeta = {
       dataType: 'String',
       maxLength: 200,
       confidential: false,
+      required: true,
+      hint: 'Placeholder Text',
       label: 'Status',
       options: [
         {
