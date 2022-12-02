@@ -315,7 +315,7 @@ export class NovoSelectElement
 
   /** Implemented as part of NovoFieldControl. */
   get empty(): boolean {
-    return this._value === null;
+    return Helpers.isEmpty(this._value);
   }
 
   /** The currently selected option. */
