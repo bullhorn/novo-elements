@@ -102,7 +102,7 @@ describe('Elements: NovoCKEditorElement', () => {
         entities: false,
         shiftEnterMode: window.CKEDITOR.ENTER_P,
         disableNativeSpellChecker: false,
-        removePlugins: 'liststyle,tabletools,contextmenu',
+        removePlugins: 'liststyle,tabletools,contextmenu,tableselection',
         extraAllowedContent: '*(*){*};table tbody tr td th[*];',
         font_names:
           'Arial/Arial, Helvetica, sans-serif;' +
@@ -153,7 +153,7 @@ describe('Elements: NovoCKEditorElement', () => {
         entities: false,
         shiftEnterMode: window.CKEDITOR.ENTER_P,
         disableNativeSpellChecker: false,
-        removePlugins: 'liststyle,tabletools,contextmenu',
+        removePlugins: 'liststyle,tabletools,contextmenu,tableselection',
         extraAllowedContent: '*(*){*};table tbody tr td th[*];',
         font_names:
           'Arial/Arial, Helvetica, sans-serif;' +
@@ -203,7 +203,7 @@ describe('Elements: NovoCKEditorElement', () => {
         entities: false,
         shiftEnterMode: window.CKEDITOR.ENTER_P,
         disableNativeSpellChecker: false,
-        removePlugins: 'liststyle,tabletools,contextmenu',
+        removePlugins: 'liststyle,tabletools,contextmenu,tableselection',
         extraAllowedContent: '*(*){*};table tbody tr td th[*];',
         font_names:
           'Arial/Arial, Helvetica, sans-serif;' +
