@@ -166,7 +166,7 @@ export class NovoCKEditorElement implements OnDestroy, AfterViewInit, ControlVal
       entities: false,
       shiftEnterMode: CKEDITOR.ENTER_P,
       disableNativeSpellChecker: false,
-      removePlugins: 'liststyle,tabletools,contextmenu', // allows browser based spell checking
+      removePlugins: 'liststyle,tabletools,contextmenu,tableselection', // allows browser based spell checking
       extraAllowedContent: '*(*){*};table tbody tr td th[*];', // allows class names (*) and inline styles {*} for all and attributes [*] on tables
       font_names:
         'Arial/Arial, Helvetica, sans-serif;' +
