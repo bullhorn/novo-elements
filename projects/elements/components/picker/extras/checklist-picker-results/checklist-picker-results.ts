@@ -1,16 +1,17 @@
 // NG2
 import { ChangeDetectorRef, Component, ElementRef } from '@angular/core';
+import { NovoLabelService } from 'novo-elements/services';
+import { Helpers } from 'novo-elements/utils';
 // Vendor
 import { from, Observable } from 'rxjs';
 import { BasePickerResults } from '../base-picker-results/base-picker-results';
-import { Helpers } from 'novo-elements/utils';
-import { NovoLabelService } from 'novo-elements/services';
 
 /**
  * @description This is the actual list of matches that gets injected into the DOM.
  */
 @Component({
   selector: 'checklist-picker-results',
+  styleUrls: ['../picker-results/picker-results.scss'],
   host: {
     class: 'active picker-results',
   },

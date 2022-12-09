@@ -1,6 +1,7 @@
 @import "~novo-design-tokens/scss";
 
 :host {
+  --button-color-text: var(--color-link);
   // Dialoge Themed Button
   &.novo-button-text {
     @include color-variants(

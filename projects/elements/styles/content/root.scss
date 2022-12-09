@@ -16,6 +16,7 @@ body {
   color: var(--color-text);
   background: var(--color-background);
   text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: auto;
 }
 
 button,

@@ -1,4 +1,5 @@
 export * from './common.module';
+export * from './deprecated';
 export * from './directives';
 export * from './error/error-options';
 export * from './layout';

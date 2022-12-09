@@ -41,40 +41,39 @@ const PICKER_VALUE_ACCESSOR = {
   providers: [PICKER_VALUE_ACCESSOR],
   styleUrls: ['./picker.scss'],
   template: `
-    <novo-field [appearance]="appearance">
-      <novo-icon novoPrefix *ngIf="config?.entityIcon && !_value">more</novo-icon>
-      <novo-icon novoPrefix *ngIf="config?.entityIcon && _value">{{ config?.entityIcon }}</novo-icon>
-      <novo-icon novoSuffix *ngIf="(!_value || clearValueOnSelect) && !disablePickerInput">search</novo-icon>
-      <novo-icon
-        novoSuffix
-        *ngIf="_value && !clearValueOnSelect && !disablePickerInput"
-        [class.entity-selected]="config?.entityIcon && _value"
-        (click)="clearValue(true)"
-        >x</novo-icon
-      >
-      <input
-        #input
-        novoInput
-        type="text"
-        class="picker-input"
-        [class.entity-picker]="config?.entityIcon"
-        [class.entity-selected]="config?.entityIcon && _value"
-        [placeholder]="placeholder"
-        [(ngModel)]="term"
-        (ngModelChange)="checkTerm($event)"
-        (keydown)="onKeyDown($event)"
-        (focus)="onFocus($event)"
-        (click)="onFocus($event)"
-        (blur)="onTouched($event)"
-        autocomplete="off"
-        [disabled]="disablePickerInput"
-      />
-    </novo-field>
+    <i class="bhi-more prefix" *ngIf="config?.entityIcon && !_value"></i>
+    <i class="bhi-{{ config?.entityIcon }} entity-icon {{ config?.entityIcon }} prefix" *ngIf="config?.entityIcon && _value"></i>
+    <input
+      type="text"
+      class="picker-input"
+      [(ngModel)]="term"
+      [class.entity-picker]="config?.entityIcon"
+      [class.entity-selected]="config?.entityIcon && _value"
+      (ngModelChange)="checkTerm($event)"
+      [placeholder]="placeholder"
+      (keydown)="onKeyDown($event)"
+      (focus)="onFocus($event)"
+      (click)="onFocus($event)"
+      (blur)="onTouched($event)"
+      autocomplete="off"
+      #input
+      [disabled]="disablePickerInput"
+    />
+    <i class="bhi-search suffix" *ngIf="(!_value || clearValueOnSelect) && !disablePickerInput"></i>
+    <i
+      class="bhi-times suffix"
+      [class.entity-selected]="config?.entityIcon && _value"
+      *ngIf="_value && !clearValueOnSelect && !disablePickerInput"
+      (click)="clearValue(true)"
+    ></i>
     <novo-overlay-template class="picker-results-container" [parent]="element" position="above-below" (closing)="onOverlayClosed()">
       <span #results></span>
       <ng-content></ng-content>
     </novo-overlay-template>
   `,
+  host: {
+    '[class.has-prefix-icon]': 'config?.entityIcon',
+  },
 })
 export class NovoPickerElement implements OnInit {
   // Container for the results
@@ -232,7 +231,7 @@ export class NovoPickerElement implements OnInit {
         return;
       }
 
-      if ((event.key === Key.Backspace || event.key === Key.Delete) && !Helpers.isEmpty(this._value) && (this._value === this.term)) {
+      if ((event.key === Key.Backspace || event.key === Key.Delete) && !Helpers.isEmpty(this._value) && this._value === this.term) {
         this.clearValue(false);
         this.closePanel();
       }

@@ -34,7 +34,7 @@ $dot-colors: (
     @include animationMapDelay($dot-colors, jump, 1600ms, ease-in-out, 70ms, forward, infinite, "", "");
   }
 
-  @include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
+  @include single-colors() using ($name, $color) {
     &.color-#{$name} {
       span.dot {
         background-color: $color;

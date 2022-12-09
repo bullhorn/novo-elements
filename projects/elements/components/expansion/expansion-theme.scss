@@ -4,7 +4,7 @@
 @mixin novo-expansion-panel-theme() {
   [data-theme*="-dark"] {
     .novo-expansion-panel {
-      background: var(--color-background-secondary);
+      background: var(--color-background-subtle);
     }
   }
 

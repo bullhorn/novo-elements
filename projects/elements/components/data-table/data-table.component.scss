@@ -201,7 +201,7 @@ $breakpoint: 1000px;
       .novo-data-table-dropdown-cell,
       .novo-data-table-expand-cell,
       .novo-data-table-checkbox-cell {
-        background-color: var(--color-background-muted);
+        background-color: var(--color-background-subtle);
       }
       &.active {
         .novo-data-table-cell,
@@ -209,14 +209,14 @@ $breakpoint: 1000px;
         .novo-data-table-dropdown-cell,
         .novo-data-table-expand-cell,
         .novo-data-table-checkbox-cell {
-          background-color: var(--color-selection-overlay);
+          background-color: var(--color-primary-overlay);
         }
         + .novo-data-table-detail-row {
-          background-color: var(--color-selection-overlay);
+          background-color: var(--color-primary-overlay);
         }
       }
       + .novo-data-table-detail-row {
-        background-color: var(--color-background-muted);
+        background-color: var(--color-background-subtle);
       }
     }
     > .novo-data-table-row:nth-of-type(even) {
@@ -233,10 +233,10 @@ $breakpoint: 1000px;
         .novo-data-table-dropdown-cell,
         .novo-data-table-expand-cell,
         .novo-data-table-checkbox-cell {
-          background-color: var(--color-selection-overlay);
+          background-color: var(--color-primary-overlay);
         }
         + .novo-data-table-detail-row {
-          background-color: var(--color-selection-overlay);
+          background-color: var(--color-primary-overlay);
         }
       }
       + .novo-data-table-detail-row {
@@ -460,21 +460,6 @@ $breakpoint: 1000px;
       &.empty {
         min-width: 39px;
         max-width: 39px;
-      }
-    }
-  }
-
-  .novo-data-table-expand-header-cell,
-  .novo-data-table-expand-cell {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 30px;
-    i {
-      cursor: pointer;
-      transition: all 0.1s;
-      &.expanded {
-        transform: rotate(90deg);
       }
     }
   }

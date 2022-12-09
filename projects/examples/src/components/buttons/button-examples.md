@@ -11,7 +11,7 @@ Bullhorn button themes were hand crafted to make your life easier. Most buttons 
 
 ## Colors
 
-Acceptable colors include `Primary`, `Success`, `Warning`, `Negative`, and **all analytics colors** which can be found in the color section of the style guide.
+Acceptable colors include `Primary`, `Secondary`, `Success`, `Danger`, `Warning`, and **all analytics colors** which can be found in the color section of the style guide.
 
 <code-example example="button-overview"></code-example>
 

@@ -4,8 +4,6 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NovoCommonModule } from 'novo-elements/common';
 import { NovoOverlayModule } from 'novo-elements/common/overlay';
-import { NovoFieldModule } from 'novo-elements/components/field';
-import { NovoIconModule } from 'novo-elements/components/icon';
 import { NovoListModule } from 'novo-elements/components/list';
 import { NovoLoadingModule } from 'novo-elements/components/loading';
 import { NovoSwitchModule } from 'novo-elements/components/switch';
@@ -30,8 +28,6 @@ import { NovoPickerElement } from './picker';
     NovoListModule,
     NovoOverlayModule,
     NovoSwitchModule,
-    NovoFieldModule,
-    NovoIconModule,
   ],
   declarations: [
     NovoPickerElement,

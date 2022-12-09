@@ -64,6 +64,16 @@ bootstrap(MyApp [..NOVO_ELEMENTS_LABELS_PROVIDERS]);
 
 ## Upgrading NovoElement
 
+### To Version 8
+
+> Note: Ensure your tsconfig.app.json `include` property references all the ts files the migrations should be run against.  You can add a glob then remove it to ensure your build system works the same as before.
+
+```
+npm install --save novo-elements@8
+npm install --save novo-design-tokens@^1.0.0-beta.7
+ng update novo-elements --migrate-only --from=7.0.0 --to=8.0.0 --force --allow-dirty  
+```
+
 ### To Version 6
 
 > Note: Ensure your tsconfig.app.json `include` property references all the ts files the migrations should be run against.  You can add a glob then remove it to ensure your build system works the same as before.

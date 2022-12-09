@@ -20,7 +20,7 @@
     border-radius: 4px;
     width: min-content;
     text-align: center;
-    background: var(--color-background-secondary);
+    background: var(--color-background-subtle);
     color: #3a3a3a;
     user-select: none;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15), 0 2px 7px rgba(0, 0, 0, 0.1);
@@ -69,7 +69,7 @@
       }
     }
     .date-range-tabs {
-      border-bottom: 1px solid var(--color-background-secondary);
+      border-bottom: 1px solid var(--color-background-subtle);
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -117,7 +117,7 @@
       -webkit-user-select: none;
       justify-content: space-between;
       cursor: default;
-      border-bottom: 1px solid var(--color-background-secondary);
+      border-bottom: 1px solid var(--color-background-subtle);
       .previous {
         width: 30px;
         height: 15px;

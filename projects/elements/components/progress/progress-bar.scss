@@ -7,9 +7,13 @@
   height: 100%;
 
   &.linear {
-    @include theme-backgrounds("color");
-    background-color: var(--color-selection);
-
+    // @include theme-backgrounds("color");
+    background-color: var(--color-primary);
+    @include single-colors() using ($name, $color) {
+      &[color="#{$name}"] {
+        background-color: $color;
+      }
+    }
     &:first-child {
       border-radius: 0.2em 0 0 0.2em;
     }
@@ -37,7 +41,7 @@
   }
 
   &.radial {
-    @include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
+    @include single-colors() using ($name, $color) {
       &[color="#{$name}"] {
         svg circle {
           stroke: $color;

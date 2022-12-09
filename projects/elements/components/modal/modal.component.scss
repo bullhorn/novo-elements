@@ -4,7 +4,7 @@
   display: block;
   background-color: var(--color-background);
   border-radius: 4px;
-  box-shadow: 0 1px 7px rgba(0, 0, 0, 0.09), 0 1px 3px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--shadow-z3);
   z-index: z(modal);
   position: relative;
   min-width: 330px;
@@ -16,21 +16,23 @@
     top: var(--spacing-xl);
   }
 
-  > header {
-    border-top-left-radius: 4px;
-    border-top-right-radius: 4px;
-    overflow: hidden;
+  &::ng-deep {
+    > header {
+      border-top-left-radius: 4px;
+      border-top-right-radius: 4px;
+      overflow: hidden;
 
-    h1,
-    h2 {
-      @include novo-title-text();
+      h1,
+      h2 {
+        @include novo-title-text();
+      }
     }
-  }
 
-  > section {
-    padding: var(--spacing-md) var(--spacing-xl);
-    max-height: 500px;
-    overflow: auto;
+    > section {
+      padding: var(--spacing-md) var(--spacing-xl);
+      max-height: 500px;
+      overflow: auto;
+    }
   }
 
   .novo-modal-footer {

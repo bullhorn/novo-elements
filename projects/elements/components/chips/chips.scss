@@ -7,7 +7,7 @@
   align-items: center;
   flex-wrap: wrap;
   justify-content: flex-start;
-  border-bottom: 1px solid var(--color-active);
+  border-bottom: 1px solid var(--color-border);
   transition: all 200ms ease-in-out;
   position: relative;
   padding: 0 2rem 2px 0;
@@ -20,12 +20,12 @@
     margin-bottom: 0;
   }
   &:hover {
-    border-bottom: 1px solid var(--color-hover);
+    border-bottom: 1px solid var(--color-selection);
   }
   &.selected,
   &.selected:hover {
     border-bottom: 1px solid var(--color-selection);
-    & + i {
+    & > i {
       color: var(--color-selection);
     }
   }
@@ -34,15 +34,6 @@
   }
   .chip-input-container {
     flex-grow: 4;
-    input {
-      padding-top: 0;
-      border: none;
-      background: transparent !important;
-      width: 100%;
-      &:focus {
-        outline: none;
-      }
-    }
   }
   .novo-chip-container {
     display: flex;
@@ -85,12 +76,9 @@
       novo-icon {
         display: none !important;
       }
-      .novo-field-input {
+      .picker-input {
         border: none;
         border-bottom: none !important;
-        .novo-field-infix {
-          align-self: center !important;
-        }
       }
       div.picker-results-container {
         left: 0;

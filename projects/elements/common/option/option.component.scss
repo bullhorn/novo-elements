@@ -27,24 +27,24 @@ $novo-menu-side-padding: 0.5rem;
   -webkit-tap-highlight-color: transparent;
 
   &:hover:not(.novo-option-inert) {
-    background: var(--color-selection-overlay);
+    background: var(--color-primary-overlay);
   }
 
   &:active:not(.novo-option-inert),
   &.novo-active:not(.novo-option-inert) {
-    background: var(--color-selection-overlay);
+    background: var(--color-primary-overlay);
   }
 
   &.novo-selected {
-    color: var(--color-selection);
+    color: var(--color-primary);
   }
 
   &.disabled,
   &[aria-disabled="true"] {
     cursor: not-allowed;
-    color: var(--color-disabled);
+    color: var(--color-text-disabled);
     &:hover {
-      background: var(--color-error-overlay);
+      background: var(--color-danger-overlay);
     }
   }
 

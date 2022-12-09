@@ -3,6 +3,8 @@
 // --------------------------------------------------
 @import "~novo-design-tokens/scss";
 @import "./styles/variables";
+@import "./common/typography/text.mixins.scss";
+@import "./styles/global/functions.scss";
 
 // --------------------------------------------------
 // Content
@@ -22,7 +24,7 @@
 
 .bgc-main,
 .novo-background-main {
-  background-color: var(--color-background-secondary);
+  background-color: var(--color-background-subtle);
 }
 .bgc-alt,
 .bgc-bright,

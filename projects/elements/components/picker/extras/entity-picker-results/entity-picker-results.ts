@@ -4,7 +4,7 @@ import { BasePickerResults } from '../base-picker-results/base-picker-results';
 
 @Component({
   selector: 'entity-picker-result',
-  styleUrls: ['../picker-results/picker-results.scss'],
+  styleUrls: ['../picker-results/picker-result.scss'],
   template: `
     <novo-list-item *ngIf="match.data" (click)="select.next(match.data)">
       <novo-item-header>
@@ -212,6 +212,7 @@ export class EntityPickerResult {
 
 @Component({
   selector: 'entity-picker-results',
+  styleUrls: ['../picker-results/picker-results.scss'],
   template: `
     <novo-list *ngIf="matches.length > 0" direction="vertical">
       <entity-picker-result

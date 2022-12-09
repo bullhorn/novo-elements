@@ -96,6 +96,10 @@ $breakpoint: 1000px;
       list-style-type: none;
       user-select: none;
       display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+      margin-top: 0 !important;
+      margin-bottom: 0 !important;
       .page {
         display: flex;
         justify-content: center;
@@ -107,6 +111,9 @@ $breakpoint: 1000px;
         list-style-type: none;
         cursor: pointer;
         color: var(--color-selection);
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+
         &.disabled {
           opacity: 0.3;
           pointer-events: none;

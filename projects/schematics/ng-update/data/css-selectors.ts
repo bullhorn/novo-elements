@@ -1,6 +1,6 @@
 import { TargetVersion, VersionChanges } from '@angular/cdk/schematics';
 
-export interface MaterialCssSelectorData {
+export interface NovoCssSelectorData {
   /** The CSS selector to replace. */
   replace: string;
   /** The new CSS selector. */
@@ -19,7 +19,7 @@ export interface MaterialCssSelectorData {
   };
 }
 
-export const cssSelectors: VersionChanges<MaterialCssSelectorData> = {
+export const cssSelectors: VersionChanges<NovoCssSelectorData> = {
   [TargetVersion.V6]: [
     {
       pr: 'https://github.com/bullhorn/novo-elements/pull/1241',

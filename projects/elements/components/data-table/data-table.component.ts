@@ -242,16 +242,14 @@ import { DataTableState } from './state/data-table-state.service';
     </ng-template>
     <ng-template novoTemplate="buttonCellTemplate" let-row let-col="col">
       <novo-button
-        size="small"
         theme="icon"
+        [icon]="col?.action?.icon"
         [tooltip]="col?.action?.tooltip"
         tooltipPosition="right"
         [attr.data-feature-id]="col?.attributes?.dataFeatureId"
         [disabled]="isDisabled(col, row)"
         (click)="col.handlers?.click({ originalEvent: $event, row: row })"
-      >
-        <novo-icon>{{ col?.action?.icon }}</novo-icon>
-      </novo-button>
+      ></novo-button>
     </ng-template>
     <ng-template novoTemplate="dropdownCellTemplate" let-row let-col="col">
       <novo-dropdown parentScrollSelector=".novo-data-table-container" containerClass="novo-data-table-dropdown">

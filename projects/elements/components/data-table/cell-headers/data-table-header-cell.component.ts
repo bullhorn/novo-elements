@@ -38,7 +38,7 @@ import { DataTableState } from '../state/data-table-state.service';
   encapsulation: ViewEncapsulation.None,
   template: `
     <i class="bhi-{{ labelIcon }} label-icon" *ngIf="labelIcon" data-automation-id="novo-data-table-header-icon"></i>
-    <label data-automation-id="novo-data-table-label">{{ label }}</label>
+    <label data-automation-id="novo-data-table-label" mr="xs">{{ label }}</label>
     <div>
       <novo-sort-button
         *ngIf="config.sortable"
@@ -71,7 +71,7 @@ import { DataTableState } from '../state/data-table-state.service';
           <novo-label>{{ labels.filters }}</novo-label>
           <novo-button
             theme="dialogue"
-            color="negative"
+            color="danger"
             size="small"
             icon="times"
             (click)="clearFilter()"
@@ -92,7 +92,7 @@ import { DataTableState } from '../state/data-table-state.service';
                   [attr.data-automation-id]="'novo-data-table-filter-' + option.label"
                 >
                   <span>{{ option.label }}</span>
-                  <novo-icon novoSuffix color="positive" *ngIf="activeDateFilter === option.label">check</novo-icon>
+                  <novo-icon novoSuffix color="primary" *ngIf="activeDateFilter === option.label">check</novo-icon>
                 </novo-option>
               </ng-container>
               <novo-option
@@ -101,7 +101,7 @@ import { DataTableState } from '../state/data-table-state.service';
                 *ngIf="config.filterConfig.allowCustomRange && !showCustomRange"
               >
                 <span>{{ labels.customDateRange }}</span>
-                <novo-icon novoSuffix color="positive" *ngIf="labels.customDateRange === activeDateFilter">check</novo-icon>
+                <novo-icon novoSuffix color="primary" *ngIf="labels.customDateRange === activeDateFilter">check</novo-icon>
               </novo-option>
               <novo-option class="calendar-container" *ngIf="showCustomRange" keepOpen>
                 <novo-stack>
@@ -125,7 +125,7 @@ import { DataTableState } from '../state/data-table-state.service';
                 [attr.data-automation-id]="'novo-data-table-filter-' + (option?.label || option)"
               >
                 <span>{{ option?.label || option }}</span>
-                <novo-icon novoSuffix color="positive" *ngIf="option.hasOwnProperty('value') ? filter === option.value : filter === option"
+                <novo-icon novoSuffix color="primary" *ngIf="option.hasOwnProperty('value') ? filter === option.value : filter === option"
                   >check</novo-icon
                 >
               </novo-option>
@@ -157,7 +157,7 @@ import { DataTableState } from '../state/data-table-state.service';
                   [attr.data-automation-id]="'novo-data-table-filter-' + (option?.label || option)"
                 >
                   <span>{{ option?.label || option }}</span>
-                  <novo-icon novoSuffix color="positive">{{
+                  <novo-icon novoSuffix color="primary">{{
                     isSelected(option, multiSelectedOptions) ? 'checkbox-filled' : 'checkbox-empty'
                   }}</novo-icon>
                 </novo-option>
@@ -193,7 +193,7 @@ import { DataTableState } from '../state/data-table-state.service';
           </novo-button>
           <novo-button
             theme="dialogue"
-            color="positive"
+            color="primary"
             (click)="filterMultiSelect()"
             data-automation-id="novo-data-table-multi-select-filter"
           >

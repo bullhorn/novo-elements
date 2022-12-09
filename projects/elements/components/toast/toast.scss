@@ -42,8 +42,6 @@
     }
   }
   .close-icon {
-    // border-radius: var(--border-radius-full);
-    // background-color: var(--color-background-overlay);
     color: var(--color-text-muted);
   }
 
@@ -100,7 +98,7 @@
   //   background: var(--color-neutral);
   // }
   // &.background {
-  //   background: var(--color-background-secondary);
+  //   background: var(--color-background-subtle);
   //   .toast-content > h5 {
   //     color: var(--color-text) !important;
   //   }
@@ -114,7 +112,8 @@
     &.novo-theme-#{$name} {
       --toast-color-background: #{$color};
       --toast-color-text: #{$contrast};
-      .toast-icon i {
+      .toast-icon i,
+      .close-icon {
         color: #{$contrast};
       }
     }
@@ -122,6 +121,19 @@
       .toast-icon i {
         color: #{$color};
       }
+    }
+  }
+  &.novo-theme-error {
+    --toast-color-background: var(--color-danger);
+    --toast-color-text: var(--color-danger-contrast);
+    .toast-icon i,
+    .close-icon {
+      color: var(--color-danger-contrast);
+    }
+  }
+  &.novo-accent-error {
+    .toast-icon i {
+      color: var(--color-danger);
     }
   }
 }

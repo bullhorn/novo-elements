@@ -1,6 +1,3 @@
-@import "./variables.scss";
-@import "../elements/common/typography/text.mixins.scss";
-
 // Headers
 // --------------------------------------------------
 h1 {
@@ -135,8 +132,23 @@ h5,
 h6,
 p,
 span {
-  @include base-text-rules();
   vertical-align: baseline;
+  transition: color 0.2s ease-out, opacity 0.2s ease-out;
+
+  &.text-capitalize {
+    text-transform: capitalize;
+  }
+  &.text-uppercase {
+    text-transform: uppercase;
+  }
+  &.text-nowrap {
+    white-space: nowrap;
+  }
+  &.text-ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 }
 
 span > span {

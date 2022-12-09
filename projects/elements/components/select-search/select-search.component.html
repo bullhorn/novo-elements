@@ -36,19 +36,18 @@
     class="novo-select-search-spinner"
     diameter="16"></novo-spinner>
 
-  <novo-button
+
+  <button
+    *ngIf="!clearIcon"
     novoSuffix
-    *ngIf="!hideClearSearchButton && value && !searching"
     aria-label="Clear"
-    (click)="_reset(true)"
-    theme="icon"
-    size="small"
-    class="novo-select-search-clear">
-    <ng-content *ngIf="clearIcon; else defaultIcon" select="[novoSelectSearchClear]"></ng-content>
-    <ng-template #defaultIcon>
-      <novo-icon>close</novo-icon>
-    </ng-template>
-  </novo-button>
+    icon="x"
+    class="novo-select-search-clear"></button>
+
+  <span *ngIf="clearIcon" novoSuffix>
+    <ng-content select="[novoSelectSearchClear]"></ng-content>
+  </span>
+
 
   <ng-content select=".novo-select-search-custom-header-content"></ng-content>
 

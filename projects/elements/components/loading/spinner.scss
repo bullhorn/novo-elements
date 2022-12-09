@@ -41,9 +41,9 @@ $large-spinner-size: 2.1em;
     animation: dotFadeDelay 1.2s infinite ease-in-out both;
   }
 
-  @include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
-    &.#{$name} {
-      .dot:before {
+  @include single-colors() using ($name, $color) {
+    &.color-#{$name} {
+      div.dot:before {
         background-color: $color;
       }
     }

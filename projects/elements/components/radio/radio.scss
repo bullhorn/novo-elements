@@ -3,6 +3,9 @@
 :host {
   margin-right: 10px;
   position: relative;
+  &[button="true"] {
+    margin-right: 0px;
+  }
   &.vertical {
     display: block;
   }
@@ -22,8 +25,10 @@
       }
     }
   }
+
   > label {
     cursor: pointer;
+
     .novo-radio-button-label {
       @include novo-body-text();
       display: inline;
@@ -44,21 +49,29 @@
       i {
         opacity: 0.7;
       }
-      button[theme].has-icon {
+      .novo-button.icon-only {
         opacity: 0.7;
       }
     }
   }
-  novo-button[theme].has-icon {
+  .novo-button {
     transition: all 100ms ease-in-out;
     color: var(--color-selection);
     background: var(--color-background);
     opacity: 1;
+    pointer-events: none;
+    border-radius: 0 !important;
     &.checked {
       color: var(--color-selection-contrast);
       background: var(--color-selection);
     }
-
+    &.unchecked {
+      opacity: 0.5;
+    }
+    &.icon-only {
+      margin-right: 0;
+      border: 1px solid var(--color-selection);
+    }
     @include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
       &.checked[color="#{$name}"] {
         color: $contrast;
@@ -67,33 +80,22 @@
     }
   }
 
-  novo-button {
-    pointer-events: none;
-    border-radius: 0 !important;
-    &.unchecked {
-      opacity: 0.5;
-    }
-    &[theme="icon"] {
-      margin-right: 0;
-      border: 1px solid var(--color-selection);
-    }
-  }
   &:first-child {
-    novo-button {
+    .novo-button {
       border-top-left-radius: 3px !important;
       border-bottom-left-radius: 3px !important;
-      &[theme="icon"] {
+      &.icon-only {
         border-right-width: 0px !important;
       }
     }
   }
   &:last-child {
-    novo-button {
+    .novo-button {
       border-top-right-radius: 3px !important;
       border-bottom-right-radius: 3px !important;
       border-right-width: 1px !important;
       border-right-style: solid !important;
-      &[theme="icon"] {
+      &.icon-only {
         border-left-width: 0px !important;
       }
     }

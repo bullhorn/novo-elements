@@ -2,7 +2,7 @@
   // @extend chips;
   // @extend novo-checkbox;
 
-  ::ng-deep {
+  &::ng-deep {
     .chip-input-container {
       padding-top: 10px;
     }

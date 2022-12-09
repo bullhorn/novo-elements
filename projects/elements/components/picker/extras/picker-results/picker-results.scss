@@ -3,19 +3,22 @@
   color: black;
   width: 100%;
   max-width: none;
-  z-index: 99;
+  z-index: z(overlay);
   background: var(--color-background);
-  padding: 1px;
+  box-shadow: var(--shadow-z3);
+
   &.active {
     border: 1px solid var(--color-selection);
   }
-  .novo-list {
+  .novo-list,
+  ul {
     min-height: 100%;
     background: var(--color-background);
     max-height: 330px;
     overflow-y: auto;
     overflow-x: hidden;
-    .novo-list-item {
+    .novo-list-item,
+    li {
       display: block;
       transition: background-color 250ms;
       border-bottom: var(--border-main);
@@ -70,6 +73,7 @@
     }
   }
   .picker-null,
+  .picker-null-results,
   .picker-error,
   .picker-loading,
   .picker-no-recents {

@@ -1,6 +1,6 @@
 import { Directive, ElementRef, HostBinding, Input } from '@angular/core';
-import { TypographyLength, TypographySize, TypographyWeight } from '../text.types';
 import { BooleanInput } from 'novo-elements/utils';
+import { TypographyLength, TypographySize, TypographyWeight } from '../text.types';
 
 @Directive()
 export class NovoBaseTextElement {
@@ -30,12 +30,17 @@ export class NovoBaseTextElement {
   @BooleanInput()
   disabled: boolean;
 
-  @HostBinding('class.text-color-empty')
+  @HostBinding('class.text-color-muted')
   @Input()
   @BooleanInput()
   muted: boolean;
 
-  @HostBinding('class.text-color-negative')
+  @HostBinding('class.text-color-subtle')
+  @Input()
+  @BooleanInput()
+  subtle: boolean;
+
+  @HostBinding('class.text-color-danger')
   @Input()
   @BooleanInput()
   error: boolean;

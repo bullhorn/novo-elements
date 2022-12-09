@@ -10,7 +10,7 @@
     flex: 1;
     text-align: center;
     padding: 5px;
-    background-color: var(--color-background-secondary);
+    background-color: var(--color-background-subtle);
   }
 
   .cal-day-headers .cal-header:not(:last-child) {
@@ -43,7 +43,7 @@
         min-height: 30px;
         display: flex;
         flex-flow: column;
-        background-color: var(--color-background-secondary);
+        background-color: var(--color-background-subtle);
 
         .cal-event-ribbon {
           min-height: 4px;

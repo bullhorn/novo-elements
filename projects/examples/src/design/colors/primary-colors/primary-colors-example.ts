@@ -12,7 +12,7 @@ import { NovoToastService } from 'novo-elements';
   styleUrls: ['./primary-colors-example.scss'],
 })
 export class PrimaryColorsExample {
-  public colors: string[] = ['selection', 'success', 'warning', 'error', 'info', 'disabled'];
+  public colors: string[] = ['primary', 'secondary', 'positive', 'negative', 'warning', 'info', 'neutral'];
 
   options: any;
 

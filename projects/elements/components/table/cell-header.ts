@@ -62,7 +62,7 @@ export class NovoFilterFocus implements AfterViewInit {
           <span>{{ labels.filters }}</span>
           <novo-button
             theme="dialogue"
-            color="negative"
+            color="danger"
             icon="times"
             (click)="clearFilter()"
             *ngIf="filter"

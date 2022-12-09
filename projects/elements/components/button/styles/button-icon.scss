@@ -6,6 +6,7 @@
   &.icon-only {
     --button-border-radius: var(--border-radius-full);
     --button-color-text: var(--color-text);
+    --button-border-radius: 50%;
 
     // font-size: 1.4rem;
     width: var(--button-size-height);

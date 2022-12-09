@@ -54,13 +54,13 @@ tbody tr:nth-child(even) button:hover {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--color-background-secondary);
+  background: var(--color-background-subtle);
   // border-radius: 6px;
 }
 
 ::-webkit-scrollbar-thumb {
   border-radius: 6px;
-  border: 2px solid var(--color-background-secondary);
+  border: 2px solid var(--color-background-subtle);
 }
 
 ::-webkit-scrollbar-thumb:not(:hover) {
@@ -101,7 +101,7 @@ details[open] summary {
 
 summary {
   display: list-item;
-  background-color: var(--color-background-secondary);
+  background-color: var(--color-background-subtle);
   padding: 10px;
   margin: -10px -10px 0;
   cursor: pointer;
@@ -131,7 +131,7 @@ dialog {
 }
 
 dialog > header:first-child {
-  background-color: var(--color-background-secondary);
+  background-color: var(--color-background-subtle);
   border-radius: 6px 6px 0 0;
   margin: -10px -30px 10px;
   padding: 10px;

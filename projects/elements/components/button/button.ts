@@ -116,9 +116,12 @@ export class NovoButtonElement implements AfterViewInit {
     this._variant = value;
     this.fab = value === 'fab';
     this.basic = ['basic', 'dialogue', 'text'].includes(value);
-    this.primary = ['primary', 'cta'].includes(value);
+    this.primary = ['primary', 'cta', 'filled'].includes(value);
     this.outlined = ['outlined', 'secondary'].includes(value);
-    this.standard = value === 'standard';
+    if (value === 'standard') {
+      this.primary = true;
+      this.color = 'neutral';
+    }
   }
   private _variant: string;
 
@@ -184,7 +187,10 @@ export class NovoButtonElement implements AfterViewInit {
   @Input()
   @BooleanInput()
   @HostBinding('class.novo-button-standard')
-  standard: boolean = false;
+  set standard(value: boolean) {
+    this.primary = true;
+    this.color = 'neutral';
+  }
 
   /**
    * Make the button non-interactive.

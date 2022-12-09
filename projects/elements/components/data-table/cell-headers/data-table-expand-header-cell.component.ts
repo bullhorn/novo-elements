@@ -7,13 +7,14 @@ import {
   HostBinding,
   Inject,
   OnDestroy,
-  Renderer2,
+  Renderer2
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { NovoDataTableRef, NOVO_DATA_TABLE_REF } from '../data-table.token';
 
 @Component({
   selector: 'novo-data-table-expand-header-cell',
+  styleUrls: ['../cells/data-table-expand-cell.component.scss'],
   template: ` <i class="bhi-next data-table-icon" novo-data-table-expander="true" (click)="expandAll()" [class.expanded]="expanded"></i> `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -21,7 +21,7 @@
         </novo-tab>
       </novo-nav>
       <novo-button *ngIf="showClearAll" class="clear-all-button" theme="dialogue" icon="times" side="right"
-        color="grapefruit" (click)="deselectEverything($event)">{{ labelService.clear }}</novo-button>
+        color="danger" (click)="deselectEverything($event)">{{ labelService.clear }}</novo-button>
     </div>
     <div class="tabbed-group-picker-column right">
       <div class="quick-select" *ngIf="quickSelectConfig && !(filterText | async)">

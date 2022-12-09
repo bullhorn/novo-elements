@@ -6,5 +6,11 @@
     "entryFile": "index.ts",
     "styleIncludePaths": ["./styles"]
   },
-  "assets": ["styles", "./novo-elements-dark.scss", "./novo-elements.scss"]
+  "assets": [
+    "styles",
+    "./novo-elements-dark.scss",
+    "./novo-elements.scss",
+    "./addons/dragula/dragula.scss",
+    "./common/typography/text.mixins.scss"
+  ]
 }

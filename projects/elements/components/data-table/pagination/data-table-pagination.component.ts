@@ -89,7 +89,7 @@ const MAX_PAGES_DISPLAYED = 5;
         </li>
       </ul>
       <novo-loading *ngIf="loading"></novo-loading>
-      <button *ngIf="errorLoading" theme="primary" color="negative" icon="refresh" (click)="paginationRefreshSubject.next()">
+      <button *ngIf="errorLoading" theme="primary" color="danger" icon="refresh" (click)="paginationRefreshSubject.next()">
         {{ labels.refreshPagination }}
       </button>
     </ng-container>

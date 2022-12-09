@@ -1,4 +1,4 @@
-@import "../../styles/variables.scss";
+@import "~novo-design-tokens/scss";
 
 @mixin text-disabled($property) {
   pointer-events: none;
@@ -118,6 +118,12 @@
 }
 
 @mixin text-colors() {
+  &.text-color-muted {
+    color: var(--color-text-muted);
+  }
+  &.text-color-subtle {
+    color: var(--color-text-subtle);
+  }
   @include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
     &.text-color-#{$name} {
       color: $color;
@@ -159,7 +165,7 @@
   word-break: word-break;
   overflow-wrap: break-word;
   line-height: 1.375;
-  color: var(--color-text-muted);
+  color: var(--color-text-subtle);
   font-size: var(--font-size-label);
   @include base-text-rules();
 }

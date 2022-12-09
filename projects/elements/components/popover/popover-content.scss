@@ -10,7 +10,7 @@
     width: 40rem;
     padding: 2rem;
     background-clip: padding-box;
-    background-color: var(--color-background-secondary);
+    background-color: var(--color-background-subtle);
     color: var(--color-text);
     box-shadow: var(--shadow-z2);
 
@@ -76,7 +76,7 @@
         left: 1px;
         bottom: -1rem;
         border-left-width: 0;
-        border-right-color: var(--color-background-secondary);
+        border-right-color: var(--color-background-subtle);
       }
       &.center {
         top: 50%;

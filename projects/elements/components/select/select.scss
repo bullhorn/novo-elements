@@ -142,9 +142,9 @@
       }
     }
     button.primary {
-      color: var(--color-selection);
+      color: var(--color-primary);
       &:hover {
-        color: var(--color-tint-positive);
+        color: var(--color-primary-tint);
       }
     }
     input {

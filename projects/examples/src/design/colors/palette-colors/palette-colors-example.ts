@@ -11,7 +11,7 @@ import { NovoToastService } from 'novo-elements';
 })
 export class PaletteColorsExample {
   public colors: string[] = ['red', 'pink', 'orange', 'yellow', 'green', 'teal', 'aqua', 'blue', 'indigo', 'violet', 'gray'];
-  public swatches = ['05', '10', '20', '30', '40', '50', '60', '70', '80', '90', '95', '98'].reverse();
+  public swatches = ['10', '15', '20', '30', '40', '50', '60', '70', '80', '90', '95', '98'].reverse();
 
   options: any;
 

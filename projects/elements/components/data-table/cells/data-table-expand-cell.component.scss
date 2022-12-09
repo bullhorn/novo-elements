@@ -1,0 +1,21 @@
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+
+  i {
+    border-radius: 50%;
+    padding: var(--spacing-xs);
+    cursor: pointer;
+    transition: all 0.1s;
+    &.expanded {
+      transform: rotate(90deg);
+    }
+  }
+  &:hover {
+    i {
+      background-color: var(--color-hover);
+    }
+  }
+}

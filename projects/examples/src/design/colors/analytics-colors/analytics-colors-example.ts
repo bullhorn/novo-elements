@@ -1,5 +1,5 @@
 // NG2
-import { Component } from '@angular/core';
+import { Component, ElementRef } from '@angular/core';
 // Vendor
 import { NovoToastService } from 'novo-elements';
 
@@ -12,67 +12,28 @@ import { NovoToastService } from 'novo-elements';
   styleUrls: ['./analytics-colors-example.scss'],
 })
 export class AnalyticsColorsExample {
-  public analyticsColors: Array<any> = [
-    {
-      name: 'grapefruit',
-      variables: ['grapefruit'],
-      hex: 'DA4453',
-    },
-    {
-      name: 'bittersweet',
-      variables: ['bittersweet'],
-      hex: 'EB6845',
-    },
-    {
-      name: 'sunflower',
-      variables: ['sunflower'],
-      hex: 'F6B042',
-    },
-    {
-      name: 'grass',
-      variables: ['grass'],
-      hex: '8CC152',
-    },
-    {
-      name: 'mint',
-      variables: ['mint'],
-      hex: '37BC9B',
-    },
-    {
-      name: 'aqua',
-      variables: ['aqua'],
-      hex: '3BAFDA',
-    },
-    {
-      name: 'ocean',
-      variables: ['ocean'],
-      hex: '4A89DC',
-    },
-    {
-      name: 'carnation',
-      variables: ['carnation'],
-      hex: 'D770AD',
-    },
-    {
-      name: 'lavender',
-      variables: ['lavender'],
-      hex: '967ADC',
-    },
-    {
-      name: 'mountain',
-      variables: ['mountain'],
-      hex: '9678B6',
-    },
+  public colors: string[] = [
+    'skyblue',
+    'ocean',
+    'mint',
+    'grass',
+    'sunflower',
+    'bittersweet',
+    'grapefruit',
+    'carnation',
+    'lavender',
+    'mountain',
   ];
 
   options: any;
 
-  constructor(private toaster: NovoToastService) {}
+  constructor(private el: ElementRef, private toaster: NovoToastService) {}
 
-  copyLink(color) {
+  copyLink(color, swatch?) {
+    const variable = swatch ? `var(--palette-${color}-${swatch})` : `var(--palette-${color})`;
     // Create dom element to copy from
     const copyFrom = document.createElement('textarea');
-    copyFrom.textContent = `#${color.hex}`;
+    copyFrom.textContent = variable;
     const body = document.getElementsByTagName('body')[0];
     body.appendChild(copyFrom);
     copyFrom.select();
@@ -83,18 +44,17 @@ export class AnalyticsColorsExample {
 
     // Set toast options
     this.options = {
-      title: `#${color.hex}`,
+      title: variable,
       message: 'Copied to your clipboard',
-      theme: color.variables[0],
+      theme: color,
       icon: 'clipboard',
       position: 'growlTopRight',
     };
 
-    if (color.name === 'action') {
-      this.options.theme = 'ocean';
-    }
-
     // Fire toast
     this.toaster.alert(this.options);
+  }
+  getHex(color) {
+    return getComputedStyle(this.el.nativeElement).getPropertyValue(`--color-${color}`);
   }
 }

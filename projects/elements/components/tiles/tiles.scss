@@ -1,6 +1,6 @@
 $border-width: 0.2em;
-$border-radius: var(--border-radius-round);
-$positive-lighter: var(--color-selection-overlay);
+$border-radius: var(--border-radius);
+$positive-lighter: var(--color-primary-tint);
 // $disabled-color: var(--color-text-disabled);
 $border-properties: solid $border-width $positive-lighter;
 
@@ -50,6 +50,7 @@ $border-properties: solid $border-width $positive-lighter;
       }
       &.disabled {
         cursor: not-allowed;
+        color: var(--color-text-disabled);
       }
       label {
         z-index: 1;
@@ -64,7 +65,7 @@ $border-properties: solid $border-width $positive-lighter;
     }
     &.disabled {
       border-color: var(--color-disabled);
-      color: var(--color-disabled);
+      color: var(--color-text-disabled);
     }
   }
 }

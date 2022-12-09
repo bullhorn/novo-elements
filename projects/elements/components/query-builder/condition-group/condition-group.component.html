@@ -15,14 +15,16 @@
             <novo-label *ngIf="!isFirst" color="ash" size="xs" uppercase padding="sm">
               {{qbs.getConjunctionLabel(controlName)}}</novo-label>
           </ng-template>
-          <novo-condition-builder [groupIndex]="groupIndex" [andIndex]="andIndex" [isFirst]="isFirst"></novo-condition-builder>
-          <novo-button theme="icon" icon="delete-o" color="negative" (click)="removeCondition(andIndex)"
+          <novo-condition-builder [groupIndex]="groupIndex" [andIndex]="andIndex" [isFirst]="isFirst">
+          </novo-condition-builder>
+          <novo-button theme="icon" icon="delete-o" color="danger" (click)="removeCondition(andIndex)"
             [disabled]="cantRemoveRow(isFirst)">
           </novo-button>
         </novo-flex>
       </ng-container>
     </ng-container>
-    <button theme="dialogue" data-automation-id="add-advanced-search-condition" icon="add-thin" side="left" size="sm" uppercase padding="sm" (click)="addCondition()">
+    <button theme="dialogue" data-automation-id="add-advanced-search-condition" icon="add-thin" side="left" size="sm"
+      uppercase padding="sm" (click)="addCondition()">
       {{ labels.addCondition }}</button>
   </novo-stack>
   <!-- <button class="and-or-button" theme="secondary" size="sm" (click)="addRootCondition()">{{ addCriteriaLabel }}</button> -->

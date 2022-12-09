@@ -37,7 +37,7 @@ $tooltip-success-color: var(--color-success, #458746);
 
     &.error {
       background-color: $tooltip-error-color;
-      color: var(--color-error-contrast);
+      color: var(--color-danger-contrast);
       @include tooltip-pointer($tooltip-error-color);
     }
     &.info {

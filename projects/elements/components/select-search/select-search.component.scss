@@ -34,7 +34,7 @@ $novo-select-search-toggle-all-checkbox-x: 16px;
 }
 
 .novo-select-search-icon {
-  padding: var(--spacing-md);
+  padding: var(--spacing-sm);
 }
 
 ::ng-deep .novo-select-search-panel {
@@ -55,19 +55,15 @@ $novo-select-search-toggle-all-checkbox-x: 16px;
     height: $novo-option-height;
     line-height: $novo-option-height;
   }
-  .novo-select-search-clear {
-    top: 6px;
-  }
-  .novo-select-search-icon-prefix {
-    left: $clear-button-width - $novo-select-search-clear-x;
-    top: 7px;
-  }
 }
 
 ::ng-deep .novo-option.contains-novo-select-search {
   /* let move novo-select-search at the top of the dropdown. As option is disabled, there will be no-ripple hence safe. */
   padding: 0 !important; // Option group padding was being applied as well.
   border: none;
+  position: sticky;
+  top: 0;
+  z-index: 1;
 
   .novo-icon {
     margin-right: 0px;

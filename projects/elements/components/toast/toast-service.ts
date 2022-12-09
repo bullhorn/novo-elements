@@ -4,7 +4,7 @@ import { ComponentUtils } from 'novo-elements/services';
 import { NovoToastElement } from './toast';
 import { NovoToastModule } from './toast.module';
 
-export type ToastThemes = 'default' | 'success' | 'info' | 'warning' | 'danger' | 'positive' | string;
+export type ToastThemes = 'default' | 'success' | 'info' | 'warning' | 'danger' | 'primary' | 'secondary' | string;
 export type ToastIcons = 'bell' | 'check' | 'info' | 'warning' | 'remove' | 'caution' | 'times' | 'coffee' | 'danger' | string;
 export type ToastPositions = 'fixedTop' | 'fixedBottom' | 'growlTopRight' | 'growlTopLeft' | 'growlBottomRight' | 'growlBottomLeft';
 
