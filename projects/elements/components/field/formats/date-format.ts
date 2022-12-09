@@ -2,7 +2,7 @@ import { Directive, ElementRef, EventEmitter, forwardRef, Inject, Input, Optiona
 import { COMPOSITION_BUFFER_MODE, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { IMaskDirective, IMaskFactory } from 'angular-imask';
 import { isValid } from 'date-fns';
-import * as IMask from 'imask';
+import { MaskedRange } from 'imask';
 import { NovoLabelService } from 'novo-elements/services';
 import { DateUtil } from 'novo-elements/utils';
 import { DATE_FORMATS, NOVO_INPUT_FORMAT } from './base-format';
@@ -51,21 +51,21 @@ export class NovoDateFormatDirective extends IMaskDirective<any> {
       },
       blocks: {
         d: {
-          mask: IMask.MaskedRange,
+          mask: MaskedRange,
           placeholderChar: 'D',
           from: 1,
           to: 31,
           maxLength: 2,
         },
         m: {
-          mask: IMask.MaskedRange,
+          mask: MaskedRange,
           placeholderChar: 'M',
           from: 1,
           to: 12,
           maxLength: 2,
         },
         Y: {
-          mask: IMask.MaskedRange,
+          mask: MaskedRange,
           placeholderChar: 'Y',
           from: 1900,
           to: 9999,

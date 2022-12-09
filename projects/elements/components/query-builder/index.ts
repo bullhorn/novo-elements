@@ -3,6 +3,7 @@ export * from './condition-definitions/abstract-condition.definition';
 export * from './condition-definitions/address-condition.definition';
 export * from './condition-definitions/boolean-condition.definition';
 export * from './condition-definitions/date-condition.definition';
+export * from './condition-definitions/date-time-condition.definition';
 export * from './condition-definitions/id-condition.definition';
 export * from './condition-definitions/number-condition.definition';
 export * from './condition-definitions/picker-condition.definition';

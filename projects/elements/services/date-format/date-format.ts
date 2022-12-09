@@ -1,6 +1,7 @@
 // NG2
 import { Injectable } from '@angular/core';
-import { Helpers } from 'novo-elements/utils';
+import { MaskedEnum, MaskedRange } from 'imask';
+import { DateUtil, Helpers } from 'novo-elements/utils';
 import { NovoLabelService } from '../labels/novo-label-service';
 
 @Injectable({
@@ -9,36 +10,82 @@ import { NovoLabelService } from '../labels/novo-label-service';
 export class DateFormatService {
   constructor(private labels: NovoLabelService) {}
 
-  getTimeMask(militaryTime: boolean): Array<RegExp> {
-    let mask: Array<RegExp> = [/\d/, /\d/, /:/, /\d/, /\d/];
-    let timeFormatArray: Array<string> = [];
-    const timeFormat: string = this.labels.timeFormatPlaceholderAM.toLowerCase();
-    if (militaryTime) {
-      return mask;
-    } else {
-      timeFormatArray = timeFormat.split('hh:mm');
-      if (timeFormatArray && timeFormatArray.length) {
-        mask = [];
-        for (const timeFormatPart of timeFormatArray) {
-          if (timeFormatPart === '') {
-            mask = mask.concat([/\d/, /\d|:/, /:|\d/, /\d|\w|\s/, /\d|\s|\w/]);
-          } else if (timeFormatPart.length) {
-            for (let i = 0; i < timeFormatPart.length; i++) {
-              mask.push(/\s|\w|\d|\./);
-            }
-          }
-        }
-      }
+ getTimeMask(militaryTime: boolean) {
+  const amFormat = this.labels.timeFormatAM.toUpperCase();
+  const pmFormat = this.labels.timeFormatPM.toUpperCase();
+  const mask = {
+    mask: Date,
+    pattern: militaryTime ? 'HH:mm' : 'hh:mm aa',
+    overwrite: true,
+    autofix: true,
+    lazy: false,
+    min: new Date(1970, 0, 1),
+    max: new Date(2030, 0, 1),
+    prepare(str) {
+      return str.toUpperCase();
+    },
+    format(date) {
+      return DateUtil.format(date, militaryTime ? 'HH:mm' : 'hh:mm A');
+    },
+    parse: (str) => {
+      const time = militaryTime ? str : this.convertTime12to24(str);
+      return DateUtil.parse(`${DateUtil.format(Date.now(), 'YYYY-MM-DD')}T${time}`);
+    },
+    blocks: {
+      HH: {
+        mask: MaskedRange,
+        placeholderChar: 'H',
+        maxLength: 2,
+        from: 0,
+        to: 23,
+      },
+      hh: {
+        mask: MaskedRange,
+        placeholderChar: 'h',
+        maxLength: 2,
+        from: 1,
+        to: 12,
+      },
+      mm: {
+        mask: MaskedRange,
+        placeholderChar: 'm',
+        maxLength: 2,
+        from: 0,
+        to: 59,
+      },
+      aa: {
+        mask: MaskedEnum,
+        placeholderChar: 'x',
+        enum: ['AM', 'PM', 'am', 'pm', amFormat, pmFormat],
+      },
+    },
+  };
+  return mask;
+ }
+
+  getDateMask(format?: string) {
+    const mask = {
+      mask: Date,
+      pattern: 'm/`d/`Y',
+      overwrite: true,
+      autofix: 'pad',
+      min: new Date(1970, 0, 1),
+      max: new Date(2030, 0, 1),
+      prepare(str) {
+        return str.toUpperCase();
+      },
+      format(date) {
+        return DateUtil.format(date, format || 'MM/DD/YYYY');
+      },
+      parse: (str) => {
+        return DateUtil.parse(str);
+      },
     }
     return mask;
   }
 
-  getDateMask(): Array<RegExp> {
-    return [/\d/, /\d|\/|\.|\-/, /\/|\.|\-|\d/, /\d|\/|\.|\-/, /\d|\/|\.|\-/, /\d|\/|\.|\-/, /\d|\/|\.|\-/, /\d|\/|\.|\-/, /\d/, /\d/];
-  }
-
-  getDateTimeMask(militaryTime: boolean = false): Array<RegExp> {
-    return [...this.getDateMask(), /\,?/, /\s/, ...this.getTimeMask(militaryTime)];
+  getDateTimeMask(militaryTime: boolean = false): Array<any> {
+    return [this.getDateMask(), /\,?/, /\s/, this.getTimeMask(militaryTime)];
   }
 
   getTimePlaceHolder(militaryTime: boolean): string {
@@ -57,7 +104,7 @@ export class DateFormatService {
     let year: number;
     let month: number;
     let day: number;
-    let date: Date = new Date();
+    let date: Date = null;
     let isInvalidDate = true;
     if (Helpers.isEmpty(dateFormat)) {
       // Default to MM/dd/yyyy
@@ -164,6 +211,20 @@ export class DateFormatService {
       default:
         return;
     }
+  }
+
+  convertTime12to24(time12h: string) {
+    const pmFormat = this.labels.timeFormatPM.toUpperCase();
+
+    const [time, modifier] = time12h.split(' ');
+    let [hours, minutes] = time.split(':');
+    if (hours === '12') {
+      hours = '00';
+    }
+    if (['PM', pmFormat].includes(modifier)) {
+      hours = `${parseInt(hours, 10) + 12}`.padStart(2, '0');
+    }
+    return `${hours}:${minutes}`;
   }
 
   isValidDatePart(value: string, format: string): boolean {
