@@ -60,6 +60,7 @@
     "novo-design-tokens": "^1.0.0-beta.9",
     "post-robot": "9.0.30",
     "rxjs": "^7.5.4",
+    "resize-observer-polyfill": "^1.5.1",
     "timezone-support": "^2.0.2",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.4"
@@ -111,7 +112,6 @@
     "prettier": "^2.2.1",
     "prettier-plugin-organize-imports": "^1.1.1",
     "pretty-quick": "^2.0.1",
-    "resize-observer-polyfill": "^1.5.1",
     "semantic-release": "^19.0.3",
     "standard-version": "^9.1.0",
     "stylelint": "~13.2.1",
