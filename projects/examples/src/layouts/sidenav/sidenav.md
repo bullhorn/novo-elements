@@ -2,7 +2,7 @@
 tag: new
 ---
 
-# SideNav [(source)](https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/layout)
+# SideNav [(source)](https://github.com/bullhorn/novo-elements/blob/master/projects/elements/components/layout)
 
 Components and elements for cards to make sure the loading/empty/layout views are all consistent.
 

@@ -1,4 +1,4 @@
-Radio [(source)](https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/radio)
+Radio [(source)](https://github.com/bullhorn/novo-elements/blob/master/projects/elements/components/radio)
 ==========================================================================================
 
 A radio group

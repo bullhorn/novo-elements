@@ -7,7 +7,7 @@ order: 3
 
 # Technical Details
 
-- **source:** [(github)](https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/breadcrumbs)
+- **source:** [(github)](https://github.com/bullhorn/novo-elements/blob/master/projects/elements/components/breadcrumbs)
 - **module:** `import { NovoBreadcrumbModule } form 'novo-elements';`
 
 **Basic Usage**

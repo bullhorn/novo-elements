@@ -7,7 +7,7 @@ order: 3
 
 # Technical Details
 
-- **source:** [(github)](https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/date-picker)
+- **source:** [(github)](https://github.com/bullhorn/novo-elements/blob/master/projects/elements/components/date-picker)
 - **module:** `import { NovoDatePickerModule } from 'novo-elements';`
 
 **Usage**

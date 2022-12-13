@@ -1,0 +1,57 @@
+:host {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  padding: 10px;
+  user-select: none;
+
+  span.spacer {
+    flex: 1;
+  }
+  novo-select {
+    max-width: 100px;
+    min-width: 100px;
+    div[type="button"] {
+      &:hover {
+        i {
+          opacity: 0.75;
+        }
+      }
+      &:active,
+      &:focus {
+        i {
+          opacity: 1;
+        }
+      }
+      i {
+        opacity: 0.45;
+      }
+    }
+  }
+  .pager {
+    list-style-type: none;
+    .page {
+      display: inline-block;
+      padding: 0 10px;
+      line-height: 2.4rem;
+      font-size: var(--font-size-sm);
+      border-radius: 2px;
+      text-align: center;
+      list-style-type: none;
+      cursor: pointer;
+      color: var(--color-primary);
+      &:last-child {
+        padding-right: 0;
+      }
+      &.disabled {
+        opacity: 0.3;
+        pointer-events: none;
+      }
+    }
+    .page.active {
+      color: var(--color-primary);
+      background-color: var(--color-background-overlay);
+      opacity: 1;
+    }
+  }
+}

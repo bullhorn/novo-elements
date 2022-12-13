@@ -7,7 +7,7 @@ order: 3
 
 # Technical Details
 
-- **source:** [(github)](https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/aside)
+- **source:** [(github)](https://github.com/bullhorn/novo-elements/blob/master/projects/elements/components/aside)
 - **module:** `import { NovoAsideModule } from 'novo-elements';`
 - **service:** `import { NovoAsideService } form 'novo-elements/aside';`
 

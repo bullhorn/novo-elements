@@ -9,7 +9,7 @@ order: 3
 
 Toolbars are used as ephemeral containers of helpful text. The importance of the content is usually short-lived and no longer needed once disseminated.
 
-- **source:** [(github)](https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/toolbar)
+- **source:** [(github)](https://github.com/bullhorn/novo-elements/blob/master/projects/elements/components/toolbar)
 - **module:** `import { NovoToolbarModule } from 'novo-elements';`
 
 **Usage**

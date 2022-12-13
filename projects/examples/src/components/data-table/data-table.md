@@ -1,4 +1,4 @@
-Data Table [(source)](https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/data-table)
+Data Table [(source)](https://github.com/bullhorn/novo-elements/blob/master/projects/elements/components/data-table)
 ====================================================================================================
 
 ##### Working with static data

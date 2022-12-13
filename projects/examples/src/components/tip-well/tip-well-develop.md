@@ -9,7 +9,7 @@ order: 3
 
 Tip Wells are used as ephemeral containers of helpful text. The importance of the content is usually short-lived and no longer needed once disseminated.
 
-- **source:** [(github)](https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/tip-well)
+- **source:** [(github)](https://github.com/bullhorn/novo-elements/blob/master/projects/elements/components/tip-well)
 - **module:** `import { NovoTipWellModule } from 'novo-elements';`
 
 **Usage**

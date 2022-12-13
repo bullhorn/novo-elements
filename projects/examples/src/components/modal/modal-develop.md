@@ -7,7 +7,7 @@ order: 3
 
 # Technical Details
 
-- **source:** [(github)](https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/modal)
+- **source:** [(github)](https://github.com/bullhorn/novo-elements/blob/master/projects/elements/components/modal)
 - **module:** `import { NovoModal } form 'novo-elements/modal';`
 - **service:** `import { NovoModalService } form 'novo-elements/modal';`
 

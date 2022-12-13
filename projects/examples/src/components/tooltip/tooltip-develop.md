@@ -9,7 +9,7 @@ order: 3
 
 Tooltips are used as system notifications. They can contain custom text titles and messages, as well as any icons from bh\-icons and any color from our color palletes.
 
-- **source:** [(github)](https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/tooltip)
+- **source:** [(github)](https://github.com/bullhorn/novo-elements/blob/master/projects/elements/components/tooltip)
 - **module:** `import { NovoTooltipModule } from 'novo-elements';`
 
 **Usage**

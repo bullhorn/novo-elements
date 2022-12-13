@@ -7,7 +7,7 @@ order: 3
 
 # Technical Details
 
-- **source:** [(github)](https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/dropdown)
+- **source:** [(github)](https://github.com/bullhorn/novo-elements/blob/master/projects/elements/components/dropdown)
 - **module:** `import { NovoDropdownModule } from 'novo-elements';`
 
 **Basic Usage**

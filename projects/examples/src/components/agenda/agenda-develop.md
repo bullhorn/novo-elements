@@ -7,7 +7,7 @@ order: 2
 
 # Technical Details
 
-- **source:** [(github)](https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/avatar)
+- **source:** [(github)](https://github.com/bullhorn/novo-elements/blob/master/projects/elements/components/avatar)
 - **module:** `import { NovoAgendaModule } form 'novo-elements';`
 
 **Basic Usage**

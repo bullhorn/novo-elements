@@ -28,6 +28,7 @@ export * from 'novo-elements/components/menu';
 export * from 'novo-elements/components/modal';
 export * from 'novo-elements/components/multi-picker';
 export * from 'novo-elements/components/non-ideal-state';
+export * from 'novo-elements/components/pagination';
 export * from 'novo-elements/components/picker';
 export * from 'novo-elements/components/places';
 export * from 'novo-elements/components/popover';

@@ -9,7 +9,7 @@ import { NovoElementsModule } from 'novo-elements';
 
 @Component({
   selector: 'ace-editor-page',
-  template: `<h1>Ace Editor <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/ace-editor">(source)</a></h1>
+  template: `<h1>Ace Editor <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/elements/components/ace-editor">(source)</a></h1>
 <p>Basic code editor using Ace Editor.</p>
 <h5>Basic Example</h5>
 <p><code-example example="basic-ace"></code-example></p>
@@ -88,7 +88,7 @@ export class AgendaDesignPage {
   selector: 'agenda-develop-page',
   template: `<h1>Technical Details</h1>
 <ul>
-<li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/avatar">(github)</a></li>
+<li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/elements/components/avatar">(github)</a></li>
 <li><strong>module:</strong> <code>import &#123; NovoAgendaModule &#125; form 'novo-elements';</code></li>
 </ul>
 <p><strong>Basic Usage</strong></p>
@@ -197,7 +197,7 @@ export class AsideDesignPage {
   selector: 'aside-develop-page',
   template: `<h1>Technical Details</h1>
 <ul>
-<li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/aside">(github)</a></li>
+<li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/elements/components/aside">(github)</a></li>
 <li><strong>module:</strong> <code>import &#123; NovoAsideModule &#125; from 'novo-elements';</code></li>
 <li><strong>service:</strong> <code>import &#123; NovoAsideService &#125; form 'novo-elements/aside';</code></li>
 </ul>
@@ -372,7 +372,7 @@ export class AutocompleteDesignPage {
   selector: 'autocomplete-develop-page',
   template: `<h1>Technical Details</h1>
 <ul>
-<li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/loading">(github)</a></li>
+<li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/elements/components/loading">(github)</a></li>
 <li><strong>module:</strong> <strong>part of</strong> <code>NovoFieldModule</code></li>
 </ul>
 <p><strong>Usage</strong></p>
@@ -469,7 +469,7 @@ export class AvatarDesignPage {
   selector: 'avatar-develop-page',
   template: `<h1>Technical Details</h1>
 <ul>
-<li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/avatar">(github)</a></li>
+<li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/elements/components/avatar">(github)</a></li>
 <li><strong>module:</strong> <code>import &#123; NovoAvatarModule &#125; form 'novo-elements';</code></li>
 </ul>
 <p><strong>Basic Usage</strong></p>
@@ -612,7 +612,7 @@ export class BreadcrumbDesignPage {
   selector: 'breadcrumb-develop-page',
   template: `<h1>Technical Details</h1>
 <ul>
-<li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/breadcrumbs">(github)</a></li>
+<li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/elements/components/breadcrumbs">(github)</a></li>
 <li><strong>module:</strong> <code>import &#123; NovoBreadcrumbModule &#125; form 'novo-elements';</code></li>
 </ul>
 <p><strong>Basic Usage</strong></p>
@@ -828,7 +828,7 @@ export class ButtonDesignPage {
   selector: 'button-develop-page',
   template: `<h1>Technical Details</h1>
 <ul>
-<li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/button">(github)</a></li>
+<li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/elements/components/button">(github)</a></li>
 <li><strong>module:</strong> <code>import &#123; NovoButtonModule &#125; from 'novo-elements';</code></li>
 </ul>
 <p><strong>Basic Usage</strong></p>
@@ -862,7 +862,7 @@ export class ButtonDevelopPage {
   template: `<h2>Themes</h2>
 <p>Bullhorn button themes were hand crafted to make your life easier. Most buttons used in the Bullhorn platform should utilize a <code>theme</code> attribute. Theme attributes provide access to every variation of Bullhorn UX approved buttons. Depending on the theme, some buttons may also utilize <code>icon</code>, <code>side</code>, and <code>inverse</code> attributes. Button are divided by function into four main categories: Primary, Secondary, Neutralizing, Subtractive. There are also three other button types that are independent of function: Dialogue, Icon, and Header.</p>
 <h2>Colors</h2>
-<p>Acceptable colors include <code>Primary</code>, <code>Success</code>, <code>Warning</code>, <code>Negative</code>, and <strong>all analytics colors</strong> which can be found in the color section of the style guide.</p>
+<p>Acceptable colors include <code>Primary</code>, <code>Secondary</code>, <code>Success</code>, <code>Danger</code>, <code>Warning</code>, and <strong>all analytics colors</strong> which can be found in the color section of the style guide.</p>
 <p><code-example example="button-overview"></code-example></p>
 <h2>Primary</h2>
 <p>Primary buttons are used to as primary calls-to-action. They should <strong>always</strong> get an <code>icon</code> attribute. Primary buttons with a &quot;success&quot; color <code>color=&quot;success&quot;</code> are used for saving and will almost always contain a &quot;check&quot; icon. Negative color primary buttons <code>color=&quot;negative&quot;</code> are used to delete, clear, or otherwise remove an extant element. Primary buttons should never have a <code>side</code> attribute.</p>
@@ -995,7 +995,7 @@ export class CalendarDesignPage {
   selector: 'calendar-develop-page',
   template: `<h1>Technical Details</h1>
 <ul>
-<li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/calendar">(github)</a></li>
+<li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/elements/components/calendar">(github)</a></li>
 <li><strong>module:</strong> <code>import &#123; NovoCalendarModule &#125; form 'novo-elements';</code></li>
 </ul>
 <p><strong>Basic Usage</strong></p>
@@ -1073,7 +1073,7 @@ export class ComponentsPage {
 
 @Component({
   selector: 'data-table-page',
-  template: `<h1>Data Table <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/data-table">(source)</a></h1>
+  template: `<h1>Data Table <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/elements/components/data-table">(source)</a></h1>
 <h5>Working with static data</h5>
 <h6>Change Dataset</h6>
 <h6>Change Pagination Style</h6>
@@ -1205,7 +1205,7 @@ export class DropdownDesignPage {
   selector: 'dropdown-develop-page',
   template: `<h1>Technical Details</h1>
 <ul>
-<li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/dropdown">(github)</a></li>
+<li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/elements/components/dropdown">(github)</a></li>
 <li><strong>module:</strong> <code>import &#123; NovoDropdownModule &#125; from 'novo-elements';</code></li>
 </ul>
 <p><strong>Basic Usage</strong></p>
@@ -1349,7 +1349,7 @@ export class FieldDesignPage {
   selector: 'field-develop-page',
   template: `<h1>Technical Details</h1>
 <ul>
-<li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/field">(github)</a></li>
+<li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/elements/components/field">(github)</a></li>
 <li><strong>module:</strong> <code>import &#123; NovoFieldModule &#125; from 'novo-elements';</code></li>
 </ul>
 <p><strong>Usage</strong></p>
@@ -1477,7 +1477,7 @@ export class IconDesignPage {
   selector: 'icon-develop-page',
   template: `<h1>Technical Details</h1>
 <ul>
-<li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/icon">(github)</a></li>
+<li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/elements/components/icon">(github)</a></li>
 <li><strong>module:</strong> <code>import &#123; NovoIconModule &#125; from 'novo-elements';</code></li>
 </ul>
 <p><strong>Usage</strong></p>
@@ -1624,7 +1624,7 @@ export class LoadingDesignPage {
   selector: 'loading-develop-page',
   template: `<h1>Technical Details</h1>
 <ul>
-<li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/loading">(github)</a></li>
+<li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/elements/components/loading">(github)</a></li>
 <li><strong>module:</strong> <code>import &#123; NovoLoadingModule &#125; from 'novo-elements';</code></li>
 </ul>
 <p><strong>Usage</strong></p>
@@ -1775,7 +1775,7 @@ export class MenuDesignPage {
   selector: 'menu-develop-page',
   template: `<h1>Technical Details</h1>
 <ul>
-<li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/loading">(github)</a></li>
+<li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/elements/components/loading">(github)</a></li>
 <li><strong>module:</strong> <code>import &#123; NovoMenuModule &#125; from 'novo-elements';</code></li>
 </ul>
 <p><strong>Usage</strong></p>
@@ -2023,7 +2023,7 @@ export class ModalDesignPage {
   selector: 'modal-develop-page',
   template: `<h1>Technical Details</h1>
 <ul>
-<li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/modal">(github)</a></li>
+<li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/elements/components/modal">(github)</a></li>
 <li><strong>module:</strong> <code>import &#123; NovoModal &#125; form 'novo-elements/modal';</code></li>
 <li><strong>service:</strong> <code>import &#123; NovoModalService &#125; form 'novo-elements/modal';</code></li>
 </ul>
@@ -2269,7 +2269,7 @@ export class NonIdealStateDesignPage {
   selector: 'non-ideal-state-develop-page',
   template: `<h1>Technical Details</h1>
 <ul>
-<li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/non-ideal-state">(github)</a></li>
+<li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/elements/components/non-ideal-state">(github)</a></li>
 <li><strong>module:</strong> <code>import &#123; NovoNonIdealStateModule &#125; form 'novo-elements/modal';</code></li>
 </ul>
 <p><strong>Basic Usage</strong></p>
@@ -2311,6 +2311,34 @@ export class NonIdealStateDevelopPage {
   host: { class: 'markdown-page' }
 })
 export class NonIdealStateExamplesPage {
+  public params: any = {};
+}
+
+
+@Component({
+  selector: 'pagination-page',
+  template: `<h1>Pagination <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/elements/components/pagination">(source)</a></h1>
+<p>Pagination provides navigation between pages of content, and it highlights which page or items are currently being displayed. Typically the <code>novo-pagination</code> element provides the paged information when display tabular data.</p>
+<h3>Use When</h3>
+<ul class="contains-do-list">
+<li class="bullhorn-do-item"><novo-icon color="success" mr="md" size="md">check</novo-icon><novo-text color="success"> A data table includes enough items to necessitate pagination.</novo-text></li>
+<li class="bullhorn-do-item"><novo-icon color="success" mr="md" size="md">check</novo-icon><novo-text color="success"> A page contains enough content to justify breaking it into smaller sections.</novo-text></li>
+</ul>
+<h3>Don′t Use When</h3>
+<ul class="contains-do-list">
+<li class="bullhorn-do-item"><novo-icon color="error" mr="md" size="md">times</novo-icon><novo-text color="error"> Using lazy loading to load content as the user scrolls.</novo-text></li>
+</ul>
+<h5>Usage</h5>
+<p>Each paginator instance requires:</p>
+<p>The number of items per page (default set to 50)
+The total number of items being paged
+The current page index defaults to 1, but can be explicitly set via pageIndex.</p>
+<p>When the user interacts with the <code>novo-pagination</code> element, a PageChangeEvent will be fired that can be used to update any associated data view.</p>
+<p><code-example example="pagination-usage"></code-example></p>
+`,
+  host: { class: 'markdown-page' }
+})
+export class PaginationPage {
   public params: any = {};
 }
 
@@ -2388,7 +2416,7 @@ export class PopoverDesignPage {
   template: `<h1>Technical Details</h1>
 <p>Tooltips are used as system notifications. They can contain custom text titles and messages, as well as any icons from bh-icons and any color from our color palletes.</p>
 <ul>
-<li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/tooltips">(github)</a></li>
+<li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/elements/components/tooltips">(github)</a></li>
 <li><strong>module:</strong> <code>import &#123; NovoFieldModule &#125; from 'novo-elements';</code></li>
 </ul>
 <p><strong>Usage</strong></p>
@@ -2539,7 +2567,7 @@ export class ProgressDesignPage {
   selector: 'progress-develop-page',
   template: `<h1>Technical Details</h1>
 <ul>
-<li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/loading">(github)</a></li>
+<li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/elements/components/loading">(github)</a></li>
 <li><strong>module:</strong> <code>import &#123; NovoProgressModule &#125; from 'novo-elements';</code></li>
 </ul>
 <p><strong>Usage</strong></p>
@@ -2672,7 +2700,7 @@ export class QueryBuilderDesignPage {
   selector: 'query-builder-develop-page',
   template: `<h1>Technical Details</h1>
 <ul>
-<li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/query-builder">(github)</a></li>
+<li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/elements/components/query-builder">(github)</a></li>
 <li><strong>module:</strong> <code>import &#123; QueryBuilderModule &#125; from 'novo-elements';</code></li>
 </ul>
 <p><strong>Basic Usage</strong></p>
@@ -2775,7 +2803,7 @@ export class QueryBuilderExamplesPage {
 
 @Component({
   selector: 'quick-note-page',
-  template: `<h1>Quick Note <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/quick-note">(source)</a></h1>
+  template: `<h1>Quick Note <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/elements/components/quick-note">(source)</a></h1>
 <h5>Basic Examples</h5>
 <p><code-example example="basic-quick-note"></code-example></p>
 <h5>Custom Triggers</h5>
@@ -2792,7 +2820,7 @@ export class QuickNotePage {
 
 @Component({
   selector: 'search-page',
-  template: `<h1>Search Input <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/switch">(source)</a></h1>
+  template: `<h1>Search Input <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/elements/components/switch">(source)</a></h1>
 <p>Loading animations are used to help indicate to the user that some sort of progress is taking place. These are especially helpful for intensive operations that might take extra time.</p>
 <h2>Types</h2>
 <h5>Searches</h5>
@@ -2809,7 +2837,7 @@ export class SearchPage {
 @Component({
   selector: 'slides-page',
   template: `<h1>slides</h1>
-<h1>Slides <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/slides">(source)</a></h1>
+<h1>Slides <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/elements/components/slides">(source)</a></h1>
 <p>Slide element to toggle some information</p>
 <h5>Basic</h5>
 <p><code-example example="basic-slide"></code-example></p>
@@ -2823,7 +2851,7 @@ export class SlidesPage {
 
 @Component({
   selector: 'switch-page',
-  template: `<h1>Switches &amp; Toggles <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/switch">(source)</a></h1>
+  template: `<h1>Switches &amp; Toggles <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/elements/components/switch">(source)</a></h1>
 <p>Loading animations are used to help indicate to the user that some sort of progress is taking place. These are especially helpful for intensive operations that might take extra time.</p>
 <h2>Types</h2>
 <h5>Tiles</h5>
@@ -2841,7 +2869,7 @@ export class SwitchPage {
 
 @Component({
   selector: 'tabbed-group-picker-page',
-  template: `<h1>Tabbed Group Picker <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/tabbed-group-picker">(source)</a></h1>
+  template: `<h1>Tabbed Group Picker <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/elements/components/tabbed-group-picker">(source)</a></h1>
 <p>Tabbed Group Picker allows for nested selection of groups and members via a tabbed interface.</p>
 <h2>Basic</h2>
 <p>In its most basic usage, Tabbed Group Picker allows for selection of arbitrary sets of data that have no group/member relationship. Each data set appears on its own tab. The values returned must be javascript primitives (typically string or number).</p>
@@ -2937,7 +2965,7 @@ export class TipWellDesignPage {
   template: `<h1>Technical Details</h1>
 <p>Tip Wells are used as ephemeral containers of helpful text. The importance of the content is usually short-lived and no longer needed once disseminated.</p>
 <ul>
-<li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/tip-well">(github)</a></li>
+<li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/elements/components/tip-well">(github)</a></li>
 <li><strong>module:</strong> <code>import &#123; NovoTipWellModule &#125; from 'novo-elements';</code></li>
 </ul>
 <p><strong>Usage</strong></p>
@@ -3111,7 +3139,7 @@ export class ToasterDesignPage {
   template: `<h1>Technical Details</h1>
 <p>Toasts are used as system notifications. They can contain custom text titles and messages, as well as any icons from bh-icons and any color from our color palletes.</p>
 <ul>
-<li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/field">(github)</a></li>
+<li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/elements/components/field">(github)</a></li>
 <li><strong>module:</strong> <code>import &#123; NovoFieldModule &#125; from 'novo-elements';</code></li>
 </ul>
 <p><strong>Usage</strong></p>
@@ -3251,7 +3279,7 @@ export class ToolbarDesignPage {
   template: `<h1>Technical Details</h1>
 <p>Toolbars are used as ephemeral containers of helpful text. The importance of the content is usually short-lived and no longer needed once disseminated.</p>
 <ul>
-<li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/toolbar">(github)</a></li>
+<li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/elements/components/toolbar">(github)</a></li>
 <li><strong>module:</strong> <code>import &#123; NovoToolbarModule &#125; from 'novo-elements';</code></li>
 </ul>
 <p><strong>Usage</strong></p>
@@ -3414,7 +3442,7 @@ export class TooltipDesignPage {
   template: `<h1>Technical Details</h1>
 <p>Tooltips are used as system notifications. They can contain custom text titles and messages, as well as any icons from bh-icons and any color from our color palletes.</p>
 <ul>
-<li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/tooltip">(github)</a></li>
+<li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/elements/components/tooltip">(github)</a></li>
 <li><strong>module:</strong> <code>import &#123; NovoTooltipModule &#125; from 'novo-elements';</code></li>
 </ul>
 <p><strong>Usage</strong></p>
@@ -4035,7 +4063,7 @@ export class ChipsDesignPage {
   selector: 'chips-develop-page',
   template: `<h1>Technical Details</h1>
 <ul>
-<li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/chips">(github)</a></li>
+<li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/elements/components/chips">(github)</a></li>
 <li><strong>module:</strong> <strong>part of</strong> <code>NovoChipsModule</code></li>
 </ul>
 <p><strong>Usage</strong></p>
@@ -4104,7 +4132,7 @@ export class ChipsExamplesPage {
   selector: 'color-picker-page',
   template: `<h1>Color Pickers</h1>
 <p>These allow users to easily select a color swatch. It comes in a handful of varieties based on the content of the field.</p>
-<h2>Color Picker <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/date-picker">(source)</a></h2>
+<h2>Color Picker <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/elements/components/date-picker">(source)</a></h2>
 <p>The color picker is used to select a color. It appears in all date picker fields.</p>
 <h5>Basic Usage</h5>
 <p><code-example example="color-picker"></code-example></p>
@@ -4188,7 +4216,7 @@ export class DatePickerDesignPage {
   selector: 'date-picker-develop-page',
   template: `<h1>Technical Details</h1>
 <ul>
-<li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/date-picker">(github)</a></li>
+<li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/elements/components/date-picker">(github)</a></li>
 <li><strong>module:</strong> <code>import &#123; NovoDatePickerModule &#125; from 'novo-elements';</code></li>
 </ul>
 <p><strong>Usage</strong></p>
@@ -4330,7 +4358,7 @@ export class DateTimePickerDesignPage {
   selector: 'date-time-picker-develop-page',
   template: `<h1>Technical Details</h1>
 <ul>
-<li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/date-time-picker">(github)</a></li>
+<li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/elements/components/date-time-picker">(github)</a></li>
 <li><strong>module:</strong> <code>import &#123; NovoDateTimePickerModule &#125; from 'novo-elements';</code></li>
 </ul>
 <p><strong>Usage</strong></p>
@@ -4395,7 +4423,7 @@ export class DateTimePickerExamplesPage {
 
 @Component({
   selector: 'editor-page',
-  template: `<h1>CK Editor <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/ckeditor">(source)</a></h1>
+  template: `<h1>CK Editor <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/elements/components/ckeditor">(source)</a></h1>
 <p>Basic HTML editor using CK Editor.</p>
 <h5>Basic Example</h5>
 <p><code-example example="basic-editor"></code-example></p>
@@ -4423,7 +4451,7 @@ export class FormControlsPage {
 
 @Component({
   selector: 'form-groups-page',
-  template: `<h1>Grouped Forms / Form Controls <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/form">(source)</a></h1>
+  template: `<h1>Grouped Forms / Form Controls <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/elements/components/form">(source)</a></h1>
 <p>Useful when needing to group smaller sections of forms, can be used in the larger form. Static or Dynamic too!</p>
 <h5>Horizontal</h5>
 <p><code-example example="horizontal"></code-example></p>
@@ -4445,7 +4473,7 @@ export class FormGroupsPage {
 
 @Component({
   selector: 'form-page',
-  template: `<h1>Forms <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/form">(source)</a></h1>
+  template: `<h1>Forms <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/elements/components/form">(source)</a></h1>
 <p>Forms use inputs and labels to submit user content. But you already knew that. What you may not know is that our forms come in two styles 'Static' and 'Dynamic'</p>
 <h2>Static Form</h2>
 <p>Static forms <code>&lt;novo-form /&gt;</code>.</p>
@@ -4485,7 +4513,7 @@ export class FormPage {
 
 @Component({
   selector: 'multi-picker-page',
-  template: `<h1>MultiPicker <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/multi-picker">(source)</a></h1>
+  template: `<h1>MultiPicker <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/elements/components/multi-picker">(source)</a></h1>
 <p>The multipicker element (<code>multipicker</code>) represents a control that presents a menu of options of multiple types. The options within are set by the <code>source</code> attribute. Options can be pre-selected for the user using the <code>ngModel</code> attribute. Multipicker is the multi-category version of <code>chips</code></p>
 <p>.</p>
 <h5>Basic Example</h5>
@@ -4504,7 +4532,7 @@ export class MultiPickerPage {
 
 @Component({
   selector: 'picker-page',
-  template: `<h1>Picker <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/picker">(source)</a></h1>
+  template: `<h1>Picker <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/elements/components/picker">(source)</a></h1>
 <p>The picker element (<code>input[picker]</code>) represents a control that presents a menu of options. The options within are set by the <code>items</code> attribute. Options can be pre-pickered for the user using the <code>value</code> attribute.</p>
 <h5>Basic Examples</h5>
 <p>By clicking on the <code>input</code> element, the options list will be displayed. picker any of the options by clicking on the item in the list. The value pickered will be displayed and the options list will be removed.</p>
@@ -4543,7 +4571,7 @@ export class PickerPage {
 
 @Component({
   selector: 'radio-buttons-page',
-  template: `<h1>Radio <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/radio">(source)</a></h1>
+  template: `<h1>Radio <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/elements/components/radio">(source)</a></h1>
 <p>A radio group</p>
 <h5>Basic</h5>
 <p><code-example example="basic-radio"></code-example></p>
@@ -4563,7 +4591,7 @@ export class RadioButtonsPage {
 
 @Component({
   selector: 'select-page',
-  template: `<h1>Select <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/select">(source)</a></h1>
+  template: `<h1>Select <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/elements/components/select">(source)</a></h1>
 <p>The select element (<code>novo-select</code>) represents a control that presents a menu of options. The options within are set by the <code>items</code> attribute. Options can be pre-selected for the user using the <code>value</code> attribute.</p>
 <h5>Basic Examples</h5>
 <p>By clicking on the <code>novo-select</code> element, the options list will be displayed. Select any of the options by clicking on the item in the list. The value selected will be displayed and the options list will be removed.</p>
@@ -4590,7 +4618,7 @@ export class SelectPage {
 
 @Component({
   selector: 'tiles-page',
-  template: `<h1>Tiles <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/tiles">(source)</a></h1>
+  template: `<h1>Tiles <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/elements/components/tiles">(source)</a></h1>
 <p>This component is intended to behave akin to the radio button component.</p>
 <h4>Demo</h4>
 <p><code-example example="tiles-usage"></code-example></p>
@@ -4703,7 +4731,7 @@ export class TimePickerDesignPage {
   selector: 'time-picker-develop-page',
   template: `<h1>Technical Details</h1>
 <ul>
-<li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/time-picker">(github)</a></li>
+<li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/elements/components/time-picker">(github)</a></li>
 <li><strong>module:</strong> <code>import &#123; NovoTimePickerModule &#125; from 'novo-elements';</code></li>
 </ul>
 <p><strong>Usage</strong></p>
@@ -4767,7 +4795,7 @@ export class TimePickerExamplesPage {
 
 @Component({
   selector: 'value-page',
-  template: `<h1>Value/Details/Summary <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/value">(source)</a></h1>
+  template: `<h1>Value/Details/Summary <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/elements/components/value">(source)</a></h1>
 <p>Used to render data based on its field type provided in meta. It has two themes, DEFAULT - horizontal view and MOBILE - vertical view</p>
 <h2>Mobile Theme</h2>
 <h5>Value/Details/Summary</h5>
@@ -4978,7 +5006,7 @@ export class CardDesignPage {
   selector: 'card-develop-page',
   template: `<h1>Technical Details</h1>
 <ul>
-<li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/card">(github)</a></li>
+<li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/elements/components/card">(github)</a></li>
 <li><strong>module:</strong> <code>import &#123; NovoCardModule &#125; form 'novo-elements';</code></li>
 </ul>
 <p><strong>Basic Usage</strong></p>
@@ -5097,7 +5125,7 @@ export class CardExamplesPage {
 
 @Component({
   selector: 'expansion-page',
-  template: `<h1>Expandable Containers<a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/expansion">(source)</a></h1>
+  template: `<h1>Expandable Containers<a href="https://github.com/bullhorn/novo-elements/blob/master/projects/elements/components/expansion">(source)</a></h1>
 <p>Expansion Panel provides an expandable details-summary view. Each expansion-panel must include a header and may optionally include an action bar.</p>
 <p>By default, the expansion-panel header includes a toggle icon at the end of the header to indicate the expansion state. This icon can be hidden via the hideToggle property.</p>
 <h2>Basic Usage</h2>
@@ -5122,7 +5150,7 @@ export class ExpansionPage {
 
 @Component({
   selector: 'header-page',
-  template: `<h1>Headers <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/header">(source)</a></h1>
+  template: `<h1>Headers <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/elements/components/header">(source)</a></h1>
 <p>Headers are used in Mainframe Record pages and some modals.</p>
 <h2>Types</h2>
 <h5>Record Header</h5>
@@ -5157,7 +5185,7 @@ export class LayoutsPage {
 
 @Component({
   selector: 'list-page',
-  template: `<h1>List / Item <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/list">(source)</a></h1>
+  template: `<h1>List / Item <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/elements/components/list">(source)</a></h1>
 <p>Lists are used to display rows of information like entities or entity data and appear on cards, our mobile app, and several other places across the Bullhorn platform.</p>
 <h2>Basic Usage</h2>
 <h5>Standard List</h5>
@@ -5176,7 +5204,7 @@ export class ListPage {
 
 @Component({
   selector: 'sidenav-page',
-  template: `<h1>SideNav <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/layout">(source)</a></h1>
+  template: `<h1>SideNav <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/elements/components/layout">(source)</a></h1>
 <p>Components and elements for cards to make sure the loading/empty/layout views are all consistent.</p>
 <h5>Examples</h5>
 <h2>Basic SideNav (using attributes)</h2>
@@ -5191,7 +5219,7 @@ export class SidenavPage {
 
 @Component({
   selector: 'stepper-page',
-  template: `<h1>Steppers <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/stepper">(source)</a></h1>
+  template: `<h1>Steppers <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/elements/components/stepper">(source)</a></h1>
 <p>Stepper component provides a wizard-like workflow by dividing content into logical steps.</p>
 <p>Material stepper builds on the foundation of the CDK stepper that is responsible for the logic that drives a stepped workflow. Material stepper extends the CDK stepper and has Material Design styling.</p>
 <h2>Stepper variants</h2>
@@ -5354,7 +5382,7 @@ export class TabsDesignPage {
   selector: 'tabs-develop-page',
   template: `<h1>Technical Details</h1>
 <ul>
-<li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/tabs">(github)</a></li>
+<li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/elements/components/tabs">(github)</a></li>
 <li><strong>module:</strong> <code>import &#123; NovoTabModule &#125; form 'novo-elements/modal';</code></li>
 </ul>
 <p><strong>Basic Usage</strong></p>
@@ -6594,6 +6622,7 @@ const routes: Routes = [
       { path: '', redirectTo: '/components/non ideal state/design', pathMatch: 'full' },
     ]
   },
+  { path: 'components/pagination', component: PaginationPage, data: { title: 'Pagination', section: 'components' } },
   {
     path: 'components/pop over',
     component: TabsLayout,
@@ -6790,7 +6819,7 @@ const routes: Routes = [
 ];
 
 export const PAGE_LIST = [
-  AceEditorPage,AgendaDesignPage,AgendaDevelopPage,AgendaExamplesPage,AsideDesignPage,AsideDevelopPage,AsideExamplesPage,AutocompleteDesignPage,AutocompleteDevelopPage,AutocompleteExamplesPage,AvatarDesignPage,AvatarDevelopPage,AvatarExamplesPage,BreadcrumbDesignPage,BreadcrumbDevelopPage,BreadcrumbExamplesPage,ButtonDesignPage,ButtonDevelopPage,ButtonExamplesPage,CalendarDesignPage,CalendarDevelopPage,CalendarExamplesPage,ComponentsPage,DataTablePage,DropdownDesignPage,DropdownDevelopPage,DropdownExamplesPage,FieldDesignPage,FieldDevelopPage,FieldExamplesPage,IconDesignPage,IconDevelopPage,IconExamplesPage,LoadingDesignPage,LoadingDevelopPage,LoadingExamplesPage,MenuDesignPage,MenuDevelopPage,MenuExamplesPage,ModalDesignPage,ModalDevelopPage,ModalExamplesPage,NonIdealStateDesignPage,NonIdealStateDevelopPage,NonIdealStateExamplesPage,PopoverDesignPage,PopoverDevelopPage,PopoverExamplesPage,ProgressDesignPage,ProgressDevelopPage,ProgressExamplesPage,ProgressUsagePage,QueryBuilderDesignPage,QueryBuilderDevelopPage,QueryBuilderExamplesPage,QuickNotePage,SearchPage,SlidesPage,SwitchPage,TabbedGroupPickerPage,TablePage,TipWellDesignPage,TipWellDevelopPage,TipWellExamplesPage,ToasterDesignPage,ToasterDevelopPage,ToasterExamplesPage,ToolbarDesignPage,ToolbarDevelopPage,ToolbarExamplesPage,TooltipDesignPage,TooltipDevelopPage,TooltipExamplesPage,ColorsPage,CompositionPage,DesignPage,IconographyPage,SpacingPage,ThemingPage,TypographyPage,ChipsDesignPage,ChipsDevelopPage,ChipsExamplesPage,ColorPickerPage,DatePickerDesignPage,DatePickerDevelopPage,DatePickerExamplesPage,DateTimePickerDesignPage,DateTimePickerDevelopPage,DateTimePickerExamplesPage,EditorPage,FormControlsPage,FormGroupsPage,FormPage,MultiPickerPage,PickerPage,RadioButtonsPage,SelectPage,TilesPage,TimePickerDesignPage,TimePickerDevelopPage,TimePickerExamplesPage,ValuePage,HomePage,CardDescriptionPage,CardDesignPage,CardDevelopPage,CardExamplesPage,ExpansionPage,HeaderPage,LayoutsPage,ListPage,SidenavPage,StepperPage,TabsDesignPage,TabsDevelopPage,TabsExamplesPage,PatternsNativeFormsPage,PatternsTestPage,PatternsPage,TemplatesPage,August2022Page,February2022Page,June2022Page,May2022Page,FieldInteractionsPage,PipesPage,SecurityPage
+  AceEditorPage,AgendaDesignPage,AgendaDevelopPage,AgendaExamplesPage,AsideDesignPage,AsideDevelopPage,AsideExamplesPage,AutocompleteDesignPage,AutocompleteDevelopPage,AutocompleteExamplesPage,AvatarDesignPage,AvatarDevelopPage,AvatarExamplesPage,BreadcrumbDesignPage,BreadcrumbDevelopPage,BreadcrumbExamplesPage,ButtonDesignPage,ButtonDevelopPage,ButtonExamplesPage,CalendarDesignPage,CalendarDevelopPage,CalendarExamplesPage,ComponentsPage,DataTablePage,DropdownDesignPage,DropdownDevelopPage,DropdownExamplesPage,FieldDesignPage,FieldDevelopPage,FieldExamplesPage,IconDesignPage,IconDevelopPage,IconExamplesPage,LoadingDesignPage,LoadingDevelopPage,LoadingExamplesPage,MenuDesignPage,MenuDevelopPage,MenuExamplesPage,ModalDesignPage,ModalDevelopPage,ModalExamplesPage,NonIdealStateDesignPage,NonIdealStateDevelopPage,NonIdealStateExamplesPage,PaginationPage,PopoverDesignPage,PopoverDevelopPage,PopoverExamplesPage,ProgressDesignPage,ProgressDevelopPage,ProgressExamplesPage,ProgressUsagePage,QueryBuilderDesignPage,QueryBuilderDevelopPage,QueryBuilderExamplesPage,QuickNotePage,SearchPage,SlidesPage,SwitchPage,TabbedGroupPickerPage,TablePage,TipWellDesignPage,TipWellDevelopPage,TipWellExamplesPage,ToasterDesignPage,ToasterDevelopPage,ToasterExamplesPage,ToolbarDesignPage,ToolbarDevelopPage,ToolbarExamplesPage,TooltipDesignPage,TooltipDevelopPage,TooltipExamplesPage,ColorsPage,CompositionPage,DesignPage,IconographyPage,SpacingPage,ThemingPage,TypographyPage,ChipsDesignPage,ChipsDevelopPage,ChipsExamplesPage,ColorPickerPage,DatePickerDesignPage,DatePickerDevelopPage,DatePickerExamplesPage,DateTimePickerDesignPage,DateTimePickerDevelopPage,DateTimePickerExamplesPage,EditorPage,FormControlsPage,FormGroupsPage,FormPage,MultiPickerPage,PickerPage,RadioButtonsPage,SelectPage,TilesPage,TimePickerDesignPage,TimePickerDevelopPage,TimePickerExamplesPage,ValuePage,HomePage,CardDescriptionPage,CardDesignPage,CardDevelopPage,CardExamplesPage,ExpansionPage,HeaderPage,LayoutsPage,ListPage,SidenavPage,StepperPage,TabsDesignPage,TabsDevelopPage,TabsExamplesPage,PatternsNativeFormsPage,PatternsTestPage,PatternsPage,TemplatesPage,August2022Page,February2022Page,June2022Page,May2022Page,FieldInteractionsPage,PipesPage,SecurityPage
 ];
 
 @NgModule({

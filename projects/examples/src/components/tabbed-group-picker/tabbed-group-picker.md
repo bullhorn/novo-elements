@@ -1,4 +1,4 @@
-# Tabbed Group Picker [(source)](https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/tabbed-group-picker)
+# Tabbed Group Picker [(source)](https://github.com/bullhorn/novo-elements/blob/master/projects/elements/components/tabbed-group-picker)
 
 Tabbed Group Picker allows for nested selection of groups and members via a tabbed interface.
 

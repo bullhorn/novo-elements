@@ -7,7 +7,7 @@ order: 3
 
 # Technical Details
 
-- **source:** [(github)](https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/field)
+- **source:** [(github)](https://github.com/bullhorn/novo-elements/blob/master/projects/elements/components/field)
 - **module:** `import { NovoFieldModule } from 'novo-elements';`
 
 **Usage**
