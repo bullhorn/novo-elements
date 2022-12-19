@@ -2,23 +2,23 @@
 
   <novo-field>
     <novo-label>Length</novo-label>
-    <input novoInput placeholder="Length" type="number" [(ngModel)]="length">
+    <input novoInput placeholder="Length" type="number" [(ngModel)]="length" />
   </novo-field>
 
   <novo-field>
     <novo-label>Page Size</novo-label>
-    <input novoInput placeholder="Page Size" type="number" [(ngModel)]="pageSize">
+    <input novoInput placeholder="Page Size" type="number" [(ngModel)]="pageSize" />
   </novo-field>
 
   <novo-field>
     <novo-label>Page Index</novo-label>
-    <input novoInput placeholder="Page Index" type="number" [(ngModel)]="pageIndex">
+    <input novoInput placeholder="Page Index" type="number" [(ngModel)]="pageIndex" />
   </novo-field>
 
   <novo-field>
     <novo-label>Page Size Options</novo-label>
     <input novoInput [ngModel]="pageSizeOptions" (ngModelChange)="setPageSizeOptions($event)"
-      [ngModelOptions]="{updateOn: 'blur'}" placeholder="Ex. 10,25,50">
+      [ngModelOptions]="{updateOn: 'blur'}" placeholder="Ex. 10,25,50" />
   </novo-field>
 
   <div class="demo-toggles">
