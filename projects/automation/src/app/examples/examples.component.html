@@ -1,0 +1,4 @@
+<ng-template compHost></ng-template>
+<ul *ngIf="showList">
+    <li *ngFor="let example of exampleList" ><a [routerLink]="['/']" [queryParams]="{componentName: example}">{{example}}</a></li>
+</ul>

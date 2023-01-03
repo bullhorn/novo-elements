@@ -1,0 +1,20 @@
+// --------------------------------------------------
+// Plugins (Third-Party-Libraries)
+// --------------------------------------------------
+@import "novo-elements";
+// --------------------------------------------------
+// Global
+// --------------------------------------------------
+@import "../../demo/assets/styles/reset";
+@import "../../demo/assets/styles/general";
+@import "../../demo/assets/styles/main";
+@import "../../demo/assets/styles/sidenav";
+@import "../../demo/assets/styles/highlight";
+@import "../../demo/assets/styles/media";
+@import "../../demo/assets/styles/markdown";
+
+body {
+  font-size: 1.4rem;
+  overflow: scroll !important;
+}
+

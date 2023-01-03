@@ -24,6 +24,7 @@
     "generate:routes": "ts-node --project tools/tsconfig.json ./tools/examples-routes.ts",
     "generate:contributors": "ts-node --project tools/tsconfig.json ./tools/contributors.ts",
     "generate:all": "npm run generate:examples && npm run generate:routes",
+    "start:automation": "ng serve automation",
     "start": "ng serve demo",
     "copy:resources": "npm run copy:scss && npm run copy:schematics",
     "copy:schematics": "npx copyfiles -f projects/schematics/*.json dist/novo-elements/schematics/",

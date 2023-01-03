@@ -1,0 +1,15 @@
+{
+  "name": "automation",
+  "version": "1.0.0",
+  "description": "",
+  "main": "karma.conf.js",
+  "scripts": {
+    "test": "npx playwright test --retries=3"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.21.1"
+  }
+}
