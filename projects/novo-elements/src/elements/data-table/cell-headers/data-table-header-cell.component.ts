@@ -153,7 +153,7 @@ import { DataTableState } from '../state/data-table-state.service';
           </ng-container>
           <ng-container *ngSwitchCase="'custom'">
             <ng-container *ngIf="dropdown">
-              <novo-data-table-cell-filter-header *ngIf="!column.filterable?.useCustomHeader" [filter]="filter" (clearFilter)="clearFilter()"></novo-data-table-cell-filter-header>
+              <novo-data-table-cell-filter-header *ngIf="!config.filterConfig?.useCustomHeader" [filter]="filter" (clearFilter)="clearFilter()"></novo-data-table-cell-filter-header>
               <div class="optgroup-container">
                 <ng-container *ngTemplateOutlet="filterTemplate; context: { $implicit: config, column, dropdown, filter }"></ng-container>
               </div>
