@@ -121,7 +121,7 @@ import { DataTableState } from './state/data-table-state.service';
             <novo-data-table-header-cell
               *cdkHeaderCellDef
               [column]="column"
-              [filterTemplate]="templates['column-filter-' + column.id]"
+              [filterTemplate]="templates['column-filter-' + (column.filterable?.customTemplate || column.id)]"
               [novo-data-table-cell-config]="column"
               [resized]="resized"
               [defaultSort]="defaultSort"
