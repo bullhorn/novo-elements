@@ -1,4 +1,3 @@
-// NG2
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
@@ -7,12 +6,13 @@ import {
   ContentChildren,
   ElementRef,
   HostBinding,
+  HostListener,
   Input,
   QueryList,
   ViewChild,
 } from '@angular/core';
 import { NovoIconComponent } from 'novo-elements/components/icon';
-import { BooleanInput, notify } from 'novo-elements/utils';
+import { BooleanInput, Helpers, Key, notify } from 'novo-elements/utils';
 
 @Component({
   selector: 'novo-button,button[theme],button[basic],button[primary],button[outlined],button[icon],button[fab]',
@@ -203,6 +203,13 @@ export class NovoButtonElement implements AfterViewInit {
   private _icon: string;
 
   constructor(public element: ElementRef, private cdr: ChangeDetectorRef) {}
+
+  @HostListener('keydown', ['$event'])
+  handleKeydown(event: KeyboardEvent) {
+    if ((Key.Enter === event.key || Key.Space === event.key) && (this.disabled || this.loading)) {
+      Helpers.swallowEvent(event);
+    }
+  }
 
   /** Focuses the input. */
   focus(options?: FocusOptions): void {

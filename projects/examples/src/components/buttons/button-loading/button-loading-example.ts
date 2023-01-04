@@ -12,6 +12,7 @@ export class ButtonLoadingExample {
   loading: boolean = false;
   loadingButtonText: string = 'Delete';
   fakeRequest() {
+    console.log('making fake request');
     this.loading = true;
     this.loadingButtonText = this.loading ? 'Removing... ' : 'Delete';
     setTimeout(() => {
