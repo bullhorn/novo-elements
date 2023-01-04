@@ -2,15 +2,15 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { IMaskDirectiveModule } from 'angular-imask';
+import { IMaskModule } from 'angular-imask';
+import { NovoOverlayModule } from 'novo-elements/common/overlay';
+import { NovoListModule } from 'novo-elements/components/list';
+import { NovoTimePickerElement } from './time-picker';
 // Vendor
 import { NovoTimePickerInputElement } from './time-picker-input';
-import { NovoTimePickerElement } from './time-picker';
-import { NovoListModule } from 'novo-elements/components/list';
-import { NovoOverlayModule } from 'novo-elements/common/overlay';
 
 @NgModule({
-  imports: [CommonModule, FormsModule, IMaskDirectiveModule, NovoOverlayModule, NovoListModule],
+  imports: [CommonModule, FormsModule, IMaskModule, NovoOverlayModule, NovoListModule],
   declarations: [NovoTimePickerElement, NovoTimePickerInputElement],
   exports: [NovoTimePickerElement, NovoTimePickerInputElement],
 })

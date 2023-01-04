@@ -2,16 +2,16 @@
 import { EventEmitter } from '@angular/core';
 import { async, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
-import { IMaskDirectiveModule } from 'angular-imask';
-import { NovoDataTableCellHeader } from './data-table-header-cell.component';
-import { DataTableState } from '../state/data-table-state.service';
-import { IDataTableColumnFilterOption } from '../interfaces';
-import { NovoTooltipModule } from 'novo-elements/components/tooltip';
-import { NovoDropdownModule } from 'novo-elements/components/dropdown';
-import { NovoDatePickerModule } from 'novo-elements/components/date-picker';
+import { IMaskModule } from 'angular-imask';
 import { NovoButtonModule } from 'novo-elements/components/button';
-import { Key } from 'novo-elements/utils';
+import { NovoDatePickerModule } from 'novo-elements/components/date-picker';
+import { NovoDropdownModule } from 'novo-elements/components/dropdown';
+import { NovoTooltipModule } from 'novo-elements/components/tooltip';
 import { NovoLabelService } from 'novo-elements/services';
+import { Key } from 'novo-elements/utils';
+import { IDataTableColumnFilterOption } from '../interfaces';
+import { DataTableState } from '../state/data-table-state.service';
+import { NovoDataTableCellHeader } from './data-table-header-cell.component';
 
 // App
 
@@ -22,7 +22,7 @@ xdescribe('Elements: NovoDataTableCellHeader', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [NovoDataTableCellHeader],
-      imports: [FormsModule, NovoTooltipModule, NovoButtonModule, NovoDropdownModule, NovoDatePickerModule, IMaskDirectiveModule],
+      imports: [FormsModule, NovoTooltipModule, NovoButtonModule, NovoDropdownModule, NovoDatePickerModule, IMaskModule],
       providers: [NovoLabelService, DataTableState],
     }).compileComponents();
     fixture = TestBed.createComponent(NovoDataTableCellHeader);
