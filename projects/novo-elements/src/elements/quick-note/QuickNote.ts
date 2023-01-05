@@ -529,7 +529,7 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
       disableNativeSpellChecker: false,
       height: editorHeight,
       startupFocus: this.startupFocus,
-      removePlugins: 'liststyle,tabletools,contextmenu', // allows browser based spell checking
+      removePlugins: 'liststyle,tabletools,contextmenu,tableselection', // allows browser based spell checking
       toolbar: [
         {
           name: 'basicstyles',
