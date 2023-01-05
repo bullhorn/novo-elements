@@ -9,6 +9,7 @@ import {
   Input,
   OnChanges,
   Optional,
+  PLATFORM_ID,
   Renderer2,
   SimpleChanges,
 } from '@angular/core';
@@ -16,9 +17,9 @@ import { COMPOSITION_BUFFER_MODE, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { IMaskDirective, IMaskFactory } from 'angular-imask';
 import { isValid } from 'date-fns';
 import { MaskedEnum, MaskedRange } from 'imask';
-import { NovoInputFormat, NOVO_INPUT_FORMAT } from './base-format';
-import { DateUtil, Key } from 'novo-elements/utils';
 import { NovoLabelService } from 'novo-elements/services';
+import { DateUtil, Key } from 'novo-elements/utils';
+import { NovoInputFormat, NOVO_INPUT_FORMAT } from './base-format';
 
 export const TIMEFORMAT_VALUE_ACCESSOR = {
   provide: NG_VALUE_ACCESSOR,
@@ -52,11 +53,12 @@ export class NovoTimeFormatDirective extends IMaskDirective<any> implements Novo
     private _element: ElementRef,
     _renderer: Renderer2,
     _factory: IMaskFactory,
+    @Inject(PLATFORM_ID) _platformId: string,
     @Optional() @Inject(COMPOSITION_BUFFER_MODE) _compositionMode: boolean,
     private labels: NovoLabelService,
     private cdr: ChangeDetectorRef,
   ) {
-    super(_element, _renderer, _factory, _compositionMode);
+    super(_element, _renderer, _factory, _platformId, _compositionMode);
     this.initFormatOptions();
   }
 

@@ -1,11 +1,23 @@
-import { Directive, ElementRef, EventEmitter, forwardRef, Inject, Input, Optional, Renderer2, SimpleChanges, OnChanges, LOCALE_ID } from '@angular/core';
+import {
+  Directive,
+  ElementRef,
+  EventEmitter,
+  forwardRef,
+  Inject,
+  Input,
+  OnChanges,
+  Optional,
+  PLATFORM_ID,
+  Renderer2,
+  SimpleChanges,
+} from '@angular/core';
 import { COMPOSITION_BUFFER_MODE, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { IMaskDirective, IMaskFactory } from 'angular-imask';
 import { isValid } from 'date-fns';
 import { MaskedEnum, MaskedRange } from 'imask';
 import { NovoLabelService } from 'novo-elements/services';
 import { DateUtil, Key } from 'novo-elements/utils';
-import { NovoInputFormat, DATE_FORMATS, NOVO_INPUT_FORMAT } from './base-format';
+import { DATE_FORMATS, NovoInputFormat, NOVO_INPUT_FORMAT } from './base-format';
 
 export const DATETIMEFORMAT_VALUE_ACCESSOR = {
   provide: NG_VALUE_ACCESSOR,
@@ -33,10 +45,11 @@ export class NovoDateTimeFormatDirective extends IMaskDirective<any> implements 
     private _element: ElementRef,
     _renderer: Renderer2,
     _factory: IMaskFactory,
+    @Inject(PLATFORM_ID) _platformId: string,
     @Optional() @Inject(COMPOSITION_BUFFER_MODE) _compositionMode: boolean,
     private labels: NovoLabelService,
   ) {
-    super(_element, _renderer, _factory, _compositionMode);
+    super(_element, _renderer, _factory, _platformId, _compositionMode);
     this.initFormatOptions();
   }
 
@@ -55,9 +68,9 @@ export class NovoDateTimeFormatDirective extends IMaskDirective<any> implements 
       max: new Date(2030, 0, 1),
       prepare: (str) => str.toUpperCase(),
       format: (date) => {
-        const test1 = this.formatValue(date)
+        const test1 = this.formatValue(date);
         return test1;
-    },
+      },
       parse: (str) => {
         const test = DateUtil.parse(str);
 
@@ -120,7 +133,7 @@ export class NovoDateTimeFormatDirective extends IMaskDirective<any> implements 
       },
     };
   }
-  
+
   ngOnChanges(changes: SimpleChanges): void {
     if (Object.keys(changes).some((key) => ['military', 'dateFormat'].includes(key))) {
       this.initFormatOptions();
@@ -130,7 +143,7 @@ export class NovoDateTimeFormatDirective extends IMaskDirective<any> implements 
   _checkInput(event: InputEvent): void {
     if (document.activeElement === event.target) {
       const text = (event.target as HTMLInputElement).value;
-      const dateTime =  text.split(', ');
+      const dateTime = text.split(', ');
       const hour = dateTime[1].slice(0, 2);
       if ((this.military && Number(dateTime[1][0]) > 2) || (!this.military && Number(dateTime[1][0]) > 1)) {
         event.preventDefault();
@@ -156,7 +169,7 @@ export class NovoDateTimeFormatDirective extends IMaskDirective<any> implements 
 
   _handleBlur(event: FocusEvent): void {
     const text = (event.target as HTMLInputElement).value;
-    const dateTime =  text.split(', ');
+    const dateTime = text.split(', ');
     const hour: string = dateTime[1].slice(0, 2);
     if (!this.military) {
       const input = dateTime[1].substr(5, 4).replace(/\-/g, '').trim().slice(0, 2);
@@ -172,7 +185,7 @@ export class NovoDateTimeFormatDirective extends IMaskDirective<any> implements 
 
   _handleKeydown(event: KeyboardEvent): void {
     const input = event.target as HTMLInputElement;
-    const dateTime =  input.value.split(', ');
+    const dateTime = input.value.split(', ');
     const hour: string = dateTime[1].slice(0, 2);
 
     if (event.key === Key.Backspace && input.selectionStart === dateTime[1].length) {
