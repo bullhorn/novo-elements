@@ -1,6 +1,6 @@
-// NG2
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { IMaskDirectiveModule } from 'angular-imask';
 import { NovoCommonModule, NovoOptionModule } from 'novo-elements/common';
 import { NovoOverlayModule } from 'novo-elements/common/overlay';
 import { NovoButtonModule } from 'novo-elements/components/button';
@@ -17,7 +17,7 @@ import { NovoPickerDirective } from './picker.directive';
 import { NovoPickerToggleElement } from './toggle/picker-toggle.component';
 
 @NgModule({
-  imports: [CommonModule, NovoButtonModule, NovoOverlayModule, NovoOptionModule, NovoCommonModule],
+  imports: [CommonModule, NovoButtonModule, NovoOverlayModule, NovoOptionModule, NovoCommonModule, IMaskDirectiveModule],
   declarations: [
     NovoFieldElement,
     // NovoLabelElement,
