@@ -22,7 +22,7 @@ import { Helpers } from '../../../utils';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NovoDataTableCellFilterHeader {
-  @Input() label: any;
+  @Input() label: string | number;
 
   @Input()
   set filter(filter: any) {
