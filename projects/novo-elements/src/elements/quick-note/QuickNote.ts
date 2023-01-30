@@ -644,7 +644,7 @@ export class QuickNoteElement extends OutsideClick implements OnInit, OnDestroy,
       this._placeholderElement = document.createElement('div');
       this._placeholderElement.className = 'placeholder';
       this._placeholderElement.style.cssText =
-        'margin: 20px; color: #AAAAAA; font-family: sans-serif; font-size: 13px; line-height: 20px; position: absolute; top: 0';
+        'margin: 20px; color: #AAAAAA; font-family: sans-serif; font-size: 13px; line-height: 20px; position: absolute; top: 0; pointer-events: none';
       this._placeholderElement.textContent = this.placeholder;
     }
     return this._placeholderElement;
