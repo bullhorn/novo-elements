@@ -21,6 +21,7 @@ import { NovoDataTableCheckboxHeaderCell } from './cell-headers/data-table-check
 import { NovoDataTableExpandHeaderCell } from './cell-headers/data-table-expand-header-cell.component';
 import { NovoDataTableCellHeader } from './cell-headers/data-table-header-cell.component';
 import { NovoDataTableHeaderCell } from './cell-headers/data-table-header-cell.directive';
+import { NovoDataTableCellFilterHeader } from './cell-headers/data-table-header-cell-filter-header.component';
 import { NovoDataTableCell } from './cells/data-table-cell.component';
 import { NovoDataTableCheckboxCell } from './cells/data-table-checkbox-cell.component';
 import { NovoDataTableExpandCell } from './cells/data-table-expand-cell.component';
@@ -75,6 +76,7 @@ import { DataTableState } from './state/data-table-state.service';
     NovoDataTableCellHeader,
     NovoDataTableSortFilter,
     NovoDataTableHeaderCell,
+    NovoDataTableCellFilterHeader,
     NovoDataTableCell,
     NovoDataTableHeaderRow,
     NovoDataTableRow,
@@ -98,6 +100,7 @@ import { DataTableState } from './state/data-table-state.service';
     DateTableNumberRendererPipe,
     DateTableTimeRendererPipe,
     DataTableBigDecimalRendererPipe,
+    NovoDataTableCellFilterHeader,
     NovoDataTableClearButton,
     NovoDataTableSortButton,
   ],

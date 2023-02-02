@@ -60,7 +60,7 @@ export interface IDataTableColumn<T> {
     width: number;
   };
   rightAlignCellContent?: boolean;
-  configuration?: object; // intended to be implemented by each column type if and as needed
+  configuration?: any; // intended to be implemented by each column type if and as needed
 }
 
 export interface IDataTablePaginationOptions {
@@ -78,6 +78,8 @@ export interface IDataTableColumnSortConfig {
 
 export interface IDataTableColumnFilterConfig {
   type: 'text' | 'number' | 'date' | 'select' | 'multi-select' | 'custom';
+  customTemplate?: string;
+  useCustomHeader?: boolean;
   options?: string[] | IDataTableColumnFilterOption[];
   allowCustomRange?: boolean;
   transform?: Function;
