@@ -220,6 +220,16 @@ import { NovoTemplate } from '../common/novo-template/novo-template.directive';
           [tooltipPreline]="control?.tooltipPreline"
           [removeTooltipArrow]="control?.removeTooltipArrow"
           [tooltipAutoPosition]="control?.tooltipAutoPosition"
+          [tooltipIsHTML]="control?.tooltipIsHTML"
+          [popover]="control.popoverContent"
+          [popoverHtmlContent]="control.popoverHtmlContent"
+          [popoverTitle]="control.popoverTitle"
+          [popoverPlacement]="control.popoverPlacement"
+          [popoverOnHover]="control.popoverOnHover"
+          [popoverAlways]="control.popoverAlways"
+          [popoverDisabled]="control.popoverDisabled"
+          [popoverAnimation]="control.popoverAnimation"
+          [popoverDismissTimeout]="control.popoverDismissTimeout"
         ></novo-picker>
         <novo-chips
           [source]="control.config"

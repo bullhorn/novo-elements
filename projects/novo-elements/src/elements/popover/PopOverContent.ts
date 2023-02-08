@@ -17,7 +17,8 @@ import { PopOverDirective } from './PopOver';
       <div class="popover-title" [hidden]="!title">{{ title }}</div>
       <div class="popover-content">
         <ng-content></ng-content>
-        <div class="popover-content-text">{{ content }}</div>
+        <div *ngIf="htmlContent" class="popover-content-text" [innerHTML]="htmlContent"></div>
+        <div *ngIf="!htmlContent" class="popover-content-text">{{ content }}</div>
       </div>
     </div>
   `,
@@ -25,6 +26,8 @@ import { PopOverDirective } from './PopOver';
 export class PopOverContent implements AfterViewInit {
   @Input()
   content: string;
+  @Input()
+  htmlContent: string;
   @Input()
   placement: string = 'top';
   @Input()
