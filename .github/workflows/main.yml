@@ -42,5 +42,5 @@ jobs:
           path: dist
       - uses: bvkimball/branch-vars@1.0.1
       - env:
-          API_TOKEN_GITHUB: ${{ secrets.BH_GIT_TOKEN }}
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
         run: sh snapshot-publish
