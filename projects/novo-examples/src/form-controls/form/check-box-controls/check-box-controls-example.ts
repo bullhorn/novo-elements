@@ -29,7 +29,7 @@ export class CheckBoxControlsExample {
       label: 'Check List',
       options: ['One', 'Two', 'Three'],
       tooltip: 'CheckList',
-      tooltipPosition: 'Top',
+      tooltipPosition: 'top',
     });
     this.tilesControl = new TilesControl({
       key: 'tiles',
