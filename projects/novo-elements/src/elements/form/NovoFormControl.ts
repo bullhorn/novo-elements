@@ -19,6 +19,16 @@ export class NovoFormControl extends FormControl {
   tooltipPosition: string;
   tooltipSize?: string;
   tooltipPreline?: boolean;
+  tooltipIsHTML?: boolean;
+  popoverContent?: string;
+  popoverHtmlContent?: string;
+  popoverTitle?: string;
+  popoverPlacement?: 'left' | 'right' | 'top' | 'bottom';
+  popoverOnHover?: boolean;
+  popoverAlways?: boolean;
+  popoverDisabled?: boolean;
+  popoverAnimation?: boolean;
+  popoverDismissTimeout?: number;
   removeTooltipArrow?: boolean;
   tooltipAutoPosition?: boolean;
   initialValue: any;

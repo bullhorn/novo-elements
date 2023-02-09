@@ -474,6 +474,32 @@ export class FieldInteractionApi {
     }
   }
 
+  setPopOver(key: string, popover: {
+    title?: string,
+    content?: string,
+    htmlContent?: string,
+    placement?: 'left' | 'right' | 'top' | 'bottom',
+    onHover?: boolean,
+    always?: boolean,
+    disabled?: boolean,
+    animation?: boolean,
+    dismissTimeout?: number,
+  }, otherForm?: NovoFormGroup): void {
+    const control = this.getControl(key, otherForm);
+    if (control && !control.restrictFieldInteractions) {
+      control.popoverTitle = popover.title;
+      control.popoverContent = popover.content;
+      control.popoverHtmlContent = popover.htmlContent;
+      control.popoverPlacement = popover.placement;
+      control.popoverOnHover = popover.onHover;
+      control.popoverAlways = popover.always;
+      control.popoverDisabled = popover.disabled;
+      control.popoverAnimation = popover.animation;
+      control.popoverDismissTimeout = popover.dismissTimeout;
+      this.triggerEvent({ controlKey: key, prop: 'popover', value: popover }, otherForm);
+    }
+  }
+
   confirmChanges(key: string, message?: string): Promise<boolean> {
     const history = this.getProperty(key, 'valueHistory');
     const oldValue = history[history.length - 2];
