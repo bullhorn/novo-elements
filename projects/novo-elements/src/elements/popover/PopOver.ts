@@ -98,7 +98,7 @@ export class PopOverDirective implements OnChanges {
   }
 
   show() {
-    if (this.visible) {
+    if (this.visible || (!this.content && !this.popoverHtmlContent)) {
       return;
     }
 
