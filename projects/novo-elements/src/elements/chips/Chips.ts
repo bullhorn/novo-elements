@@ -4,10 +4,10 @@ import { Component, ElementRef, EventEmitter, forwardRef, Input, OnInit, Output,
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 // Vendor
 import { ReplaySubject } from 'rxjs';
-import { NovoLabelService } from '../../services/novo-label-service';
+import { NovoLabelService } from '../../services';
 import { Key } from '../../utils';
-import { ComponentUtils } from '../../utils/component-utils/ComponentUtils';
-import { Helpers } from '../../utils/Helpers';
+import { ComponentUtils } from '../../utils';
+import { Helpers } from '../../utils';
 
 // Value accessor for the component (supports ngModel)
 const CHIPS_VALUE_ACCESSOR = {
@@ -134,7 +134,7 @@ export class NovoChipsElement implements OnInit, ControlValueAccessor {
     this._propagateChanges();
   }
 
-  setItems() {
+  async setItems() {
     this.items = [];
     if (this.model && Array.isArray(this.model)) {
       const noLabels = [];
@@ -162,7 +162,7 @@ export class NovoChipsElement implements OnInit, ControlValueAccessor {
         }
       }
       if (noLabels.length > 0 && this.source && this.source.getLabels && typeof this.source.getLabels === 'function') {
-        this.source.getLabels(noLabels).then((result) => {
+        await this.source.getLabels(noLabels).then((result) => {
           for (const value of result) {
             if (value.hasOwnProperty('label')) {
               this.items.push({

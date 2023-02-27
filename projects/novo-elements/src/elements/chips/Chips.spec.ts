@@ -1,8 +1,8 @@
 // NG2
 import { async, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
-import { NovoLabelService } from '../../services/novo-label-service';
-import { ComponentUtils } from '../../utils/component-utils/ComponentUtils';
+import { NovoLabelService } from '../../services';
+import { ComponentUtils } from '../../utils';
 // App
 import { NovoChipElement } from './Chip';
 import { NovoChipsElement } from './Chips';
@@ -162,7 +162,9 @@ describe('Elements: NovoChipsElement', () => {
         getLabels: (values) => {
           return new Promise((resolve) => {
             values.map((item) => {
-              item.label = 'one';
+              if (!item.label) {
+                item.label = 'one';
+              }
               return item;
             });
             resolve(values);
@@ -174,10 +176,13 @@ describe('Elements: NovoChipsElement', () => {
       expect(component.setItems).toBeDefined();
     });
     it('should retrieve items with labels', (done) => {
+      let spy = jest.spyOn(component, '_propagateChanges');
       component.setItems();
       setTimeout(() => {
         component._items.subscribe((result) => {
           expect(result[0].label).toEqual('one');
+          expect(result[1].label).toEqual('two');
+          expect(spy).toHaveBeenCalled();
           done();
         });
       }, 1);
@@ -211,10 +216,12 @@ describe('Elements: NovoChipsElement', () => {
           ],
         ]),
       };
+      let spy = jest.spyOn(component, '_propagateChanges');
       component.setItems();
       setTimeout(() => {
         component._items.subscribe((result) => {
           expect(result).toEqual(component.model);
+          expect(spy).toHaveBeenCalled();
           done();
         });
       }, 1);
