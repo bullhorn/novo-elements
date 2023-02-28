@@ -111,7 +111,8 @@ export class NovoChipsElement implements OnInit, ControlValueAccessor {
   onModelChange: Function = () => {};
   onModelTouched: Function = () => {};
 
-  constructor(public element: ElementRef, private componentUtils: ComponentUtils, public labels: NovoLabelService) {}
+  constructor(public element: ElementRef, private componentUtils: ComponentUtils, public labels: NovoLabelService) {
+  }
 
   ngOnInit() {
     this.setItems();
@@ -134,7 +135,7 @@ export class NovoChipsElement implements OnInit, ControlValueAccessor {
     this._propagateChanges();
   }
 
-  async setItems() {
+  setItems() {
     this.items = [];
     if (this.model && Array.isArray(this.model)) {
       const noLabels = [];
@@ -162,7 +163,7 @@ export class NovoChipsElement implements OnInit, ControlValueAccessor {
         }
       }
       if (noLabels.length > 0 && this.source && this.source.getLabels && typeof this.source.getLabels === 'function') {
-        await this.source.getLabels(noLabels).then((result) => {
+        this.source.getLabels(noLabels).then((result) => {
           for (const value of result) {
             if (value.hasOwnProperty('label')) {
               this.items.push({
@@ -176,10 +177,15 @@ export class NovoChipsElement implements OnInit, ControlValueAccessor {
             }
           }
           this._items.next(this.items);
+          this.propagateValueChanges();
         });
       }
     }
     this._items.next(this.items);
+    this.propagateValueChanges();
+  }
+
+  propagateValueChanges() {
     const valueToSet = this.source && this.source.valueFormatter ? this.source.valueFormatter(this.items) : this.items.map((i) => i.value);
     if (Helpers.isBlank(this.value) !== Helpers.isBlank(valueToSet) || JSON.stringify(this.value) !== JSON.stringify(valueToSet)) {
       this.value = valueToSet;
