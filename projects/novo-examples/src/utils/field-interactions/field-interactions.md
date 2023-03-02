@@ -145,6 +145,12 @@ You are able to dynamically change a field's tooltip.
 
 <code-example example="fi-tooltip"></code-example>
 
+##### Add PopOver
+
+You are able to dynamically change a field's PopOver, which is for larger content than fits into a tooltip.
+
+<code-example example="fi-popover"></code-example>
+
 ##### Modify Description
 
 You are able to dynamically change the description of a field, potentially adding in custom HTML.

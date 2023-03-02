@@ -11,4 +11,5 @@ export * from './fi-modify-added-picker';
 export * from './fi-modify-options';
 export * from './fi-required';
 export * from './fi-tooltip';
+export * from './fi-popover';
 export * from './fi-validation';

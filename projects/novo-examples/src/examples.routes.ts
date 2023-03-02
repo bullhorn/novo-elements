@@ -6367,6 +6367,9 @@ export class May2022Page {
 <h5>Add Tooltip</h5>
 <p>You are able to dynamically change a field's tooltip.</p>
 <p><code-example example="fi-tooltip"></code-example></p>
+<h5>Add PopOver</h5>
+<p>You are able to dynamically change a field's PopOver, which is for larger content than fits into a tooltip.</p>
+<p><code-example example="fi-popover"></code-example></p>
 <h5>Modify Description</h5>
 <p>You are able to dynamically change the description of a field, potentially adding in custom HTML.</p>
 <p><code-example example="fi-description"></code-example></p>
