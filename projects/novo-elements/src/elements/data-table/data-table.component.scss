@@ -105,12 +105,17 @@ cdk-table {
 .novo-data-table-header-cell {
   &.resizable {
     padding-right: 0;
+    &:hover {
+      background-color: var(--background-muted, $neutral);
+    }
     .data-table-header-resizable {
       height: 100%;
 
       span {
         cursor: ew-resize;
-        width: 8px;
+        background-color: var(--border, $neutral);
+        width: 1px;
+        margin: 0 4px;
         display: block;
       }
     }
