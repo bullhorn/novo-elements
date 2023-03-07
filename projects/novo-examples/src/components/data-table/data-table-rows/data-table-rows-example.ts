@@ -91,6 +91,7 @@ export class DataTableRowsExample {
         type: 'number',
       },
       sortable: true,
+      resizable: true,
     },
     {
       id: 'telephone',
@@ -146,6 +147,7 @@ export class DataTableRowsExample {
       },
       sortable: true,
       format: '$year-$month-$day $hour:$minute',
+      resizable: true,
     },
     {
       id: 'dateTime',
