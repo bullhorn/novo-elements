@@ -19,7 +19,7 @@ module.exports = {
           { type: 'chore', release: 'patch' },
         ],
       },
-    ]
+    ],
     '@semantic-release/release-notes-generator',
     '@semantic-release/changelog',
     [
