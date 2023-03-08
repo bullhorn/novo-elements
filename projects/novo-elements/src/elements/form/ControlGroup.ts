@@ -143,6 +143,7 @@ export class NovoControlGroup implements AfterContentInit, OnChanges, OnDestroy 
   @Output() onEdit = new EventEmitter<{ value; index }>();
   @Output() onAdd = new EventEmitter<any>();
   @Output() change = new EventEmitter<any>();
+  @Output() postRemove = new EventEmitter<any>();
 
   controlLabels: { value: string; width: number; required: boolean; hidden?: boolean; key: string }[] = [];
   toggled = false;
@@ -279,6 +280,9 @@ export class NovoControlGroup implements AfterContentInit, OnChanges, OnDestroy 
     this.resetAddRemove();
     this.currentIndex--;
     this.assignIndexes();
+    if (emitEvent) {
+      this.postRemove.emit();
+    }
     this.ref.markForCheck();
   }
 
