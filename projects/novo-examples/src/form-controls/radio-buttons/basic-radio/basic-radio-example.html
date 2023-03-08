@@ -4,6 +4,6 @@
 
 <novo-radio-group [(ngModel)]="model" (change)="onChange($event)">
   <novo-radio value="one">Make me anything!</novo-radio>
-  <novo-radio value="two">I get transcluded in!</novo-radio>
+  <novo-radio value="two" [disabled]="true">I'm disabled!</novo-radio>
   <novo-radio value="three">TEST!</novo-radio>
 </novo-radio-group>
