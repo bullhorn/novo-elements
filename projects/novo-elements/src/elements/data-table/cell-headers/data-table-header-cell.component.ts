@@ -514,10 +514,7 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
         width = minimumWidth;
       }
       this._column.width = width;
-      this.renderer.setStyle(this.elementRef.nativeElement, 'min-width', `${this._column.width}px`);
-      this.renderer.setStyle(this.elementRef.nativeElement, 'max-width', `${this._column.width}px`);
-      this.renderer.setStyle(this.elementRef.nativeElement, 'width', `${this._column.width}px`);
-      this.changeDetectorRef.markForCheck();
+      this.setWidth(this._column.width)
       this.resized.next(this._column);
     });
 
@@ -528,6 +525,13 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
     });
     this.subscriptions.push(mouseMoveSubscription);
     this.subscriptions.push(mouseUpSubscription);
+  }
+
+  public setWidth(width: number) {
+    this.renderer.setStyle(this.elementRef.nativeElement, 'min-width', `${width}px`);
+    this.renderer.setStyle(this.elementRef.nativeElement, 'max-width', `${width}px`);
+    this.renderer.setStyle(this.elementRef.nativeElement, 'width', `${width}px`);
+    this.changeDetectorRef.markForCheck();
   }
 
   public toggleCustomRange(event: Event, value: boolean): void {
