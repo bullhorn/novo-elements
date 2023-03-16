@@ -513,8 +513,7 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
       if (width < minimumWidth) {
         width = minimumWidth;
       }
-      this._column.width = width;
-      this.setWidth(this._column.width)
+      this.setWidth(width)
     });
 
     const mouseUpSubscription: Subscription = fromEvent(window.document, 'mouseup').subscribe(() => {
@@ -527,6 +526,7 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
   }
 
   public setWidth(width: number) {
+    this._column.width = width;
     this.renderer.setStyle(this.elementRef.nativeElement, 'min-width', `${width}px`);
     this.renderer.setStyle(this.elementRef.nativeElement, 'max-width', `${width}px`);
     this.renderer.setStyle(this.elementRef.nativeElement, 'width', `${width}px`);
