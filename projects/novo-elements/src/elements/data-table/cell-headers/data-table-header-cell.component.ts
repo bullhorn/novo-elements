@@ -515,7 +515,6 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
       }
       this._column.width = width;
       this.setWidth(this._column.width)
-      this.resized.next(this._column);
     });
 
     const mouseUpSubscription: Subscription = fromEvent(window.document, 'mouseup').subscribe(() => {
@@ -532,6 +531,7 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
     this.renderer.setStyle(this.elementRef.nativeElement, 'max-width', `${width}px`);
     this.renderer.setStyle(this.elementRef.nativeElement, 'width', `${width}px`);
     this.changeDetectorRef.markForCheck();
+    this.resized.next(this._column);
   }
 
   public toggleCustomRange(event: Event, value: boolean): void {
