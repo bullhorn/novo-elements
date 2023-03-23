@@ -99,9 +99,10 @@ describe('Elements: NovoCKEditorElement', () => {
       component.minimal = false;
       expect(component.getBaseConfig()).toEqual({
         enterMode: window.CKEDITOR.ENTER_BR,
+        entities: false,
         shiftEnterMode: window.CKEDITOR.ENTER_P,
         disableNativeSpellChecker: false,
-        removePlugins: 'liststyle,tabletools,contextmenu',
+        removePlugins: 'liststyle,tabletools,contextmenu,tableselection',
         extraAllowedContent: '*(*){*};table tbody tr td th[*];',
         font_names:
           'Arial/Arial, Helvetica, sans-serif;' +
@@ -149,9 +150,10 @@ describe('Elements: NovoCKEditorElement', () => {
       component.fileBrowserImageUploadUrl = '/foo/bar/baz.cfm';
       expect(component.getBaseConfig()).toEqual({
         enterMode: window.CKEDITOR.ENTER_BR,
+        entities: false,
         shiftEnterMode: window.CKEDITOR.ENTER_P,
         disableNativeSpellChecker: false,
-        removePlugins: 'liststyle,tabletools,contextmenu',
+        removePlugins: 'liststyle,tabletools,contextmenu,tableselection',
         extraAllowedContent: '*(*){*};table tbody tr td th[*];',
         font_names:
           'Arial/Arial, Helvetica, sans-serif;' +
@@ -198,9 +200,10 @@ describe('Elements: NovoCKEditorElement', () => {
       component.minimal = true;
       expect(component.getBaseConfig()).toEqual({
         enterMode: window.CKEDITOR.ENTER_BR,
+        entities: false,
         shiftEnterMode: window.CKEDITOR.ENTER_P,
         disableNativeSpellChecker: false,
-        removePlugins: 'liststyle,tabletools,contextmenu',
+        removePlugins: 'liststyle,tabletools,contextmenu,tableselection',
         extraAllowedContent: '*(*){*};table tbody tr td th[*];',
         font_names:
           'Arial/Arial, Helvetica, sans-serif;' +

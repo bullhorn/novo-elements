@@ -25,6 +25,11 @@ export function updateToV6(): Rule {
   return createMigrationSchematicRule(TargetVersion.V6, novoElementMigrations, elementsUpgradeData, onMigrationComplete);
 }
 
+/** Entry point for the migration schematics with target of Novo Elements v7 */
+export function updateToV7(): Rule {
+  return createMigrationSchematicRule(TargetVersion.V7, novoElementMigrations, elementsUpgradeData, onMigrationComplete);
+}
+
 /** Function that will be called when the migration completed. */
 function onMigrationComplete(context: SchematicContext, targetVersion: TargetVersion, hasFailures: boolean) {
   context.logger.info('');

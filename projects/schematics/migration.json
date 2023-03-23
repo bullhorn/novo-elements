@@ -6,6 +6,11 @@
       "description": "Updates Novo Elements to v6",
       "factory": "./ng-update/index#updateToV6"
     },
+    "migration-v7": {
+      "version": "7.0.0",
+      "description": "Updates Novo Elements to v7",
+      "factory": "./ng-update/index#updateToV7"
+    },
     "ng-post-update": {
       "description": "Prints out results after ng-update.",
       "factory": "./ng-update/index#postUpdate",

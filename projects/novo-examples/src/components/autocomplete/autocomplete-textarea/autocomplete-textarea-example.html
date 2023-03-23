@@ -16,7 +16,7 @@
   <novo-field appearance="fill">
     <novo-label>Toppings</novo-label>
     <novo-select [formControl]="myOtherControl" multiple>
-      <novo-option *ngFor="let option of options" [value]="option">{{option}}</novo-option>
+      <novo-option *ngFor="let option of filteredOptions | async" [value]="option">{{option}}</novo-option>
     </novo-select>
   </novo-field>
 </form>

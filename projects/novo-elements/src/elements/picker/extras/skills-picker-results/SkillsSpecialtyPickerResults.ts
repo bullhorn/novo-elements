@@ -17,10 +17,10 @@ import { BasePickerResults } from '../base-picker-results/BasePickerResults';
         [class.disabled]="preselected(match)"
       >
         <item-content>
-          <h6><span [innerHtml]="highlight(match.label, term)"></span></h6>
+          <h6><span [innerHtml]="match.label | highlight:term"></span></h6>
           <div class="category">
             <i class="bhi-category-tags"></i
-            ><span [innerHtml]="highlight(match.data.categories || match.data.parentCategory.name, term)"></span>
+            ><span [innerHtml]="match.data.categories || match.data.parentCategory.name | highlight:term"></span>
           </div>
         </item-content>
       </novo-list-item>

@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 // App
+import { NovoPipesModule } from '../../pipes/Pipes.module';
 import { NovoButtonModule } from '../button';
 import { NovoOptionModule } from '../common';
 import { NovoOverlayModule } from '../common/overlay';
@@ -20,6 +21,7 @@ import { NovoSelectElement } from './Select';
     NovoDividerModule,
     NovoOptionModule,
     NovoOverlayModule,
+    NovoPipesModule,
     NovoTooltipModule,
   ],
   declarations: [NovoSelectElement],

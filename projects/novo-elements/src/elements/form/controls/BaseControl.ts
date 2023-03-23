@@ -58,6 +58,15 @@ class ControlConfig {
   optionsType: string;
   parentScrollSelector: string;
   placeholder: string;
+  popoverAlways?: boolean;
+  popoverAnimation?: boolean;
+  popoverContent?: string;
+  popoverDisabled?: boolean;
+  popoverDismissTimeout?: number;
+  popoverHtmlContent?: string;
+  popoverOnHover?: boolean;
+  popoverPlacement?: 'left' | 'right' | 'top' | 'bottom';
+  popoverTitle?: string;
   readOnly: boolean; // "disabled", so it appears in the model still;
   removeTooltipArrow?: boolean;
   required: boolean;
@@ -184,6 +193,15 @@ export class BaseControl extends ControlConfig {
       this.removeTooltipArrow = config.removeTooltipArrow;
       this.tooltipAutoPosition = config.tooltipAutoPosition;
     }
+    this.popoverAlways = config.popoverAlways;
+    this.popoverAnimation = config.popoverAnimation;
+    this.popoverContent = config.popoverContent;
+    this.popoverDisabled = config.popoverDisabled;
+    this.popoverDismissTimeout = config.popoverDismissTimeout;
+    this.popoverHtmlContent = config.popoverHtmlContent;
+    this.popoverOnHover = config.popoverOnHover;
+    this.popoverPlacement = config.popoverPlacement;
+    this.popoverTitle = config.popoverTitle;
     this.template = config.template;
     this.customControlConfig = config.customControlConfig;
     this.tipWell = config.tipWell;

@@ -33,7 +33,7 @@
             [attr.data-automation-id]="quickSelect.label"
             [selected]="quickSelect.selected"
             (click)="quickSelect.selected = !quickSelect.selected; onItemToggled(quickSelect)"
-            inert>
+            novoInert>
             {{quickSelect.label}}
             <!-- <novo-checkbox
               [label]="quickSelect.label"
@@ -54,7 +54,7 @@
             [attr.data-automation-id]="item[displayTab.labelField]"
             [selected]="item.selected"
             (click)="item.selected = !item.selected; onItemToggled(item)"
-            inert>
+            novoInert>
             {{item[displayTab.labelField]}}
 
             <!-- <novo-checkbox

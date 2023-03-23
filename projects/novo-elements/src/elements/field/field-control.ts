@@ -10,6 +10,7 @@ export abstract class NovoFieldControl<T> {
 
   /** The last key pressed. */
   lastKeyValue: string | null;
+
   /** The last cursor position. */
   lastCaretPosition: number | null;
 

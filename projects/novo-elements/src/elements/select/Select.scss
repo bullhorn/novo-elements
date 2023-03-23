@@ -25,7 +25,7 @@ novo-select {
     z-index: z(default);
     cursor: pointer;
     text-transform: none;
-    padding: 0 $spacing-sm;
+    padding: 0 $spacing-md 0 $spacing-sm;
     margin-bottom: -1px;
     -webkit-appearance: none;
 
@@ -87,6 +87,10 @@ novo-select {
   font-size: 1rem;
   z-index: z(below);
   opacity: 0;
+
+  .select-item {
+    height: 35px;
+  }
 }
 
 .select-header {

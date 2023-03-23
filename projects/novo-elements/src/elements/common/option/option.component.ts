@@ -54,7 +54,7 @@ export class NovoOptionBase implements FocusableOption, AfterViewChecked, OnDest
 
   @BooleanInput()
   @Input()
-  inert: boolean = false;
+  novoInert: boolean = false;
 
   /** If there is no parent then nothing is managing the selection. */
   get selectable() {
@@ -134,7 +134,7 @@ export class NovoOptionBase implements FocusableOption, AfterViewChecked, OnDest
     if (!this._selected) {
       this._selected = true;
       this._changeDetectorRef.markForCheck();
-      this._emitSelectionChangeEvent();
+      // this._emitSelectionChangeEvent();
     }
   }
 
@@ -143,7 +143,7 @@ export class NovoOptionBase implements FocusableOption, AfterViewChecked, OnDest
     if (this._selected) {
       this._selected = false;
       this._changeDetectorRef.markForCheck();
-      this._emitSelectionChangeEvent();
+      // this._emitSelectionChangeEvent();
     }
   }
 
@@ -195,7 +195,7 @@ export class NovoOptionBase implements FocusableOption, AfterViewChecked, OnDest
     }
   }
   _handlePassiveClick(event: MouseEvent) {
-    if (!this.inert) {
+    if (!this.novoInert) {
       this._selectViaInteraction();
     }
   }
@@ -300,11 +300,11 @@ export class NovoOptionBase implements FocusableOption, AfterViewChecked, OnDest
     '[class.novo-selected]': 'selectable && selected',
     '[class.novo-option-multiple]': 'multiple',
     '[class.novo-option-disabled]': 'disabled',
-    '[class.novo-option-inert]': 'inert',
+    '[class.novo-option-inert]': 'novoInert',
     '(keydown)': '_handleKeydown($event)',
     class: 'novo-option novo-focus-indicator',
   },
-  inputs: ['selected', 'keepOpen', 'inert', 'value', 'inert', 'disabled'],
+  inputs: ['selected', 'keepOpen', 'novoInert', 'value', 'disabled'],
   styleUrls: ['option.component.scss'],
   templateUrl: 'option.component.html',
   encapsulation: ViewEncapsulation.None,

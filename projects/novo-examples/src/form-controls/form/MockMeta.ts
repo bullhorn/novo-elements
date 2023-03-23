@@ -64,6 +64,7 @@ export const MockMeta = {
       label: 'Float',
       required: true,
       sortOrder: 50,
+      description: '<span><b>BOLD</b> description with a <a target="_blank" href="https://www.google.com">Google</a> Link</span>'
     },
     {
       name: 'currency',
@@ -123,6 +124,8 @@ export const MockMeta = {
       dataType: 'String',
       maxLength: 200,
       confidential: false,
+      required: true,
+      hint: 'Placeholder Text',
       label: 'Status',
       options: [
         {

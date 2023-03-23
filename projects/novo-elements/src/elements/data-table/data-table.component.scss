@@ -105,12 +105,17 @@ cdk-table {
 .novo-data-table-header-cell {
   &.resizable {
     padding-right: 0;
+    &:hover {
+      background-color: var(--background-muted, $neutral);
+    }
     .data-table-header-resizable {
       height: 100%;
 
       span {
         cursor: ew-resize;
-        width: 8px;
+        background-color: var(--border, $neutral);
+        width: 1px;
+        margin: 0 4px;
         display: block;
       }
     }
@@ -157,7 +162,7 @@ cdk-table {
     pointer-events: all;
     margin-left: 0.5rem;
     line-height: 1em;
-
+    outline: none;
     &:hover {
       color: var(--text-main);
     }
@@ -426,7 +431,8 @@ novo-data-table {
   .novo-data-table-empty-container {
     padding-top: 0;
   }
-  .novo-data-table-no-results-container {
+  .novo-data-table-no-results-container,
+  .novo-data-table-no-more-results-container{
     position: absolute;
     top: 48%;
     left: 0;
@@ -434,7 +440,8 @@ novo-data-table {
     width: 100%;
   }
   .novo-data-table-empty-container,
-  .novo-data-table-no-results-container {
+  .novo-data-table-no-results-container,
+  .novo-data-table-no-more-results-container{
     padding: 2em;
     flex: 1;
     display: flex;
@@ -632,7 +639,7 @@ novo-data-table-pagination {
 
 .dropdown-container.data-table-dropdown {
   min-width: 220px;
-  max-width: 230px;
+  max-width: 280px;
   max-height: 500px;
   overflow-x: hidden;
   overflow-y: hidden;

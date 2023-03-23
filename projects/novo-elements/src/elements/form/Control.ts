@@ -181,9 +181,8 @@ export class NovoAutoSize implements AfterContentInit {
                 </span>
               </span>
               <!--Field Hint-->
-              <span class="description" *ngIf="form.controls[control.key].description">
-                {{ form.controls[control.key].description }}
-              </span>
+              <div class="description" *ngIf="form.controls[control.key].description" [innerHTML]="form.controls[control.key].description">
+              </div>
               <span class="warning-text" *ngIf="form.controls[control.key].warning">{{ form.controls[control.key].warning }}</span>
             </div>
             <span

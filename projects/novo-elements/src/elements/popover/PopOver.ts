@@ -26,6 +26,8 @@ export class PopOverDirective implements OnChanges {
   @Input('popover')
   content: string | PopOverContent;
   @Input()
+  popoverHtmlContent: string;
+  @Input()
   popoverDisabled: boolean;
   @Input()
   popoverAlways: boolean;
@@ -96,12 +98,12 @@ export class PopOverDirective implements OnChanges {
   }
 
   show() {
-    if (this.visible) {
+    if (this.visible || (!this.content && !this.popoverHtmlContent)) {
       return;
     }
 
     this.visible = true;
-    if (typeof this.content === 'string') {
+    if (typeof this.content === 'string' || this.popoverHtmlContent) {
       const factory = this.resolver.resolveComponentFactory(this.PopoverComponent);
       if (!this.visible) {
         return;
@@ -110,7 +112,12 @@ export class PopOverDirective implements OnChanges {
       this.popover = this.viewContainerRef.createComponent(factory);
       const popover = this.popover.instance as PopOverContent;
       popover.popover = this;
-      popover.content = this.content as string;
+      if (this.content) {
+        popover.content = this.content as string;
+      }
+      if (this.popoverHtmlContent) {
+        popover.htmlContent = this.popoverHtmlContent;
+      }
       if (this.popoverPlacement !== undefined) {
         popover.placement = this.popoverPlacement;
       }

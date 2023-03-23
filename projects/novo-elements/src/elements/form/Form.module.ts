@@ -29,6 +29,7 @@ import { NovoTilesModule } from './../tiles/Tiles.module';
 import { NovoTimePickerModule } from './../time-picker/TimePicker.module';
 import { NovoTipWellModule } from './../tip-well/TipWell.module';
 import { NovoTooltipModule } from './../tooltip/Tooltip.module';
+import { NovoPopOverModule } from './../popover/PopOver.module';
 import { NovoAutoSize, NovoControlElement } from './Control';
 import { NovoControlGroup } from './ControlGroup';
 import { NovoControlTemplates } from './ControlTemplates';
@@ -49,12 +50,14 @@ import { NovoFormElement } from './Form';
     NovoChipsModule,
     NovoDatePickerModule,
     NovoTimePickerModule,
+    NovoDateTimePickerModule,
     NovoNovoCKEditorModule,
     NovoFormExtrasModule,
     NovoQuickNoteModule,
     NovoDateTimePickerModule,
     NovoHeaderModule,
     NovoTooltipModule,
+    NovoPopOverModule,
     NovoDragulaModule,
     IMaskDirectiveModule,
     TextMaskModule,

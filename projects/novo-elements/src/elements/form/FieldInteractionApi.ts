@@ -255,6 +255,14 @@ export class FieldInteractionApi {
     }
   }
 
+  setDescription(key: string, description: string, otherForm?: NovoFormGroup): void {
+    const control = this.getControl(key, otherForm);
+    if (control && !control.restrictFieldInteractions) {
+      control.description = description;
+      this.triggerEvent({ controlKey: key, prop: 'description', value: description }, otherForm);
+    }
+  }
+
   highlight(key: string, isHighlighted: boolean, otherForm?: NovoFormGroup): void {
     const control = this.getControl(key, otherForm);
     if (control && !control.restrictFieldInteractions) {
@@ -463,6 +471,32 @@ export class FieldInteractionApi {
         control.tooltipSize = 'extra-large';
       }
       this.triggerEvent({ controlKey: key, prop: 'tooltip', value: tooltip }, otherForm);
+    }
+  }
+
+  setPopOver(key: string, popover: {
+    title?: string,
+    content?: string,
+    htmlContent?: string,
+    placement?: 'left' | 'right' | 'top' | 'bottom',
+    onHover?: boolean,
+    always?: boolean,
+    disabled?: boolean,
+    animation?: boolean,
+    dismissTimeout?: number,
+  }, otherForm?: NovoFormGroup): void {
+    const control = this.getControl(key, otherForm);
+    if (control && !control.restrictFieldInteractions) {
+      control.popoverTitle = popover.title;
+      control.popoverContent = popover.content;
+      control.popoverHtmlContent = popover.htmlContent;
+      control.popoverPlacement = popover.placement;
+      control.popoverOnHover = popover.onHover;
+      control.popoverAlways = popover.always;
+      control.popoverDisabled = popover.disabled;
+      control.popoverAnimation = popover.animation;
+      control.popoverDismissTimeout = popover.dismissTimeout;
+      this.triggerEvent({ controlKey: key, prop: 'popover', value: popover }, otherForm);
     }
   }
 

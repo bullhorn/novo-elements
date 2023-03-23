@@ -4,6 +4,7 @@ import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { SelectionModel } from '@angular/cdk/collections';
 import {
   AfterContentInit,
+  AfterViewInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
@@ -56,7 +57,7 @@ export class NovoChipListChange {
 }
 
 /**
- * A material design chips component (named ChipList for its similarity to the List component).
+ * A chip list component (named ChipList for its similarity to the List component).
  */
 @Component({
   selector: 'novo-chip-list',
@@ -70,6 +71,8 @@ export class NovoChipListChange {
     '[attr.aria-invalid]': 'errorState',
     '[attr.aria-multiselectable]': 'multiple',
     '[attr.role]': 'role',
+    '[class.novo-chip-list-empty]': 'empty',
+    '[class.novo-chip-list-has-value]': '!empty',
     '[class.novo-chip-list-stacked]': 'stacked',
     '[class.novo-chip-list-focused]': 'focused',
     '[class.novo-chip-list-disabled]': 'disabled',
@@ -92,7 +95,7 @@ export class NovoChipListChange {
 })
 export class NovoChipList
   extends _NovoChipListMixinBase
-  implements NovoFieldControl<any>, ControlValueAccessor, AfterContentInit, DoCheck, OnInit, OnDestroy, CanUpdateErrorState
+  implements NovoFieldControl<any>, ControlValueAccessor, AfterViewInit, AfterContentInit, DoCheck, OnInit, OnDestroy, CanUpdateErrorState
 {
   /**
    * Implemented as part of NovoFieldControl.
@@ -212,8 +215,8 @@ export class NovoChipList
     return this._value;
   }
   set value(value: any) {
-    this.writeValue(value);
     this._value = value;
+    this.writeValue(value);
   }
   protected _value: any;
 
@@ -331,7 +334,7 @@ export class NovoChipList
 
   /** Combined stream of all of the child chips' remove change events. */
   get chipRemoveChanges(): Observable<NovoChipEvent> {
-    return merge(...this.chips.map((chip) => chip.destroyed));
+    return merge(...this.chips.map((chip) => chip.removed));
   }
 
   /** Event emitted when the selected chip list value has been changed by the user. */
@@ -399,10 +402,6 @@ export class NovoChipList
       }
 
       this._resetChips();
-
-      // Reset chips selected/deselected status
-      this._initializeSelection();
-
       // Check to see if we need to update our tab index
       this._updateTabIndex();
 
@@ -411,6 +410,11 @@ export class NovoChipList
 
       this.stateChanges.next();
     });
+  }
+
+  ngAfterViewInit() {
+    // Reset chips selected/deselected status
+    this._initializeSelection();
   }
 
   ngOnInit() {
@@ -460,6 +464,18 @@ export class NovoChipList
   writeValue(value: any): void {
     if (this.chips) {
       this._setSelectionByValue(value, false);
+      this.stateChanges.next();
+    }
+  }
+
+  addValue(value: any): void {
+    this.value = [...this.value, value];
+    this._chipInput.clearValue();
+  }
+
+  removeValue(value: any): void {
+    if (this.value) {
+      this.value = this.value.filter((it) => !this.compareWith(it, value));
     }
   }
 
@@ -503,7 +519,7 @@ export class NovoChipList
     if (this._chipInput && this._chipInput.focused) {
       // do nothing
     } else if (this._chipInput) {
-      this._focusInput(options);
+      Promise.resolve().then(() => this._focusInput(options));
       this.stateChanges.next();
     } else if (this.chips.length > 0) {
       this._keyManager.setFirstItemActive();
@@ -620,9 +636,8 @@ export class NovoChipList
     // Defer setting the value in order to avoid the "Expression
     // has changed after it was checked" errors from Angular.
     Promise.resolve().then(() => {
-      if (this.ngControl || this._value) {
-        this._setSelectionByValue(this.ngControl ? this.ngControl.value : this._value, false);
-        this.stateChanges.next();
+      if (this.ngControl) {
+        this.value = this.ngControl.value;
       }
     });
   }
@@ -791,13 +806,14 @@ export class NovoChipList
     this._chipRemoveSubscription = this.chipRemoveChanges.subscribe((event) => {
       const chip = event.chip;
       const chipIndex = this.chips.toArray().indexOf(event.chip);
-
+      this.removeValue(chip.value);
       // In case the chip that will be removed is currently focused, we temporarily store
       // the index in order to be able to determine an appropriate sibling chip that will
       // receive focus.
       if (this._isValidIndex(chipIndex) && chip._hasFocus) {
         this._lastDestroyedChipIndex = chipIndex;
       }
+      this.stateChanges.next();
     });
   }
 

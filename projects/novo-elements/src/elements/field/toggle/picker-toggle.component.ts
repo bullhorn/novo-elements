@@ -1,4 +1,4 @@
-import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import {
   AfterContentInit,
   AfterViewInit,
@@ -16,7 +16,9 @@ import {
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { BooleanInput } from '../../../utils';
 import { NovoButtonElement } from '../../button';
 import { NovoOverlayTemplateComponent } from '../../common/overlay';
 import { NovoFieldElement, NOVO_FORM_FIELD } from '../field';
@@ -41,6 +43,7 @@ import { NovoFieldElement, NOVO_FORM_FIELD } from '../field';
 })
 export class NovoPickerToggleElement<T = any> implements AfterContentInit, AfterViewInit, OnChanges, OnDestroy {
   private _stateChanges = Subscription.EMPTY;
+  private _onDestroy = new Subject<void>();
 
   /** Datepicker instance that the button will toggle. */
   @Input('for') picker: T;
@@ -52,6 +55,17 @@ export class NovoPickerToggleElement<T = any> implements AfterContentInit, After
 
   /** Screenreader label for the button. */
   @Input('aria-label') ariaLabel: string;
+
+  /** Determines whether the overlay is triggered on input focus or solely button click. */
+  @Input()
+  @BooleanInput()
+  triggerOnFocus: boolean = false;
+
+  /** An id to select the correct overlay.*/
+  @Input() overlayId: string;
+
+  /** Width to pass to overlay.*/
+  @Input() width: string;
 
   /** Whether the toggle button is disabled. */
   @Input()
@@ -94,6 +108,8 @@ export class NovoPickerToggleElement<T = any> implements AfterContentInit, After
 
   ngOnDestroy() {
     this._stateChanges.unsubscribe();
+    this._onDestroy.next();
+    this._onDestroy.complete();
   }
 
   ngAfterContentInit() {
@@ -104,8 +120,15 @@ export class NovoPickerToggleElement<T = any> implements AfterContentInit, After
     this.element = this._formField.getConnectedOverlayOrigin() || this._elementRef;
   }
 
+  checkPanel() {
+    if (this.triggerOnFocus && this._formField._control.focused) {
+      this.openPanel();
+    }
+  }
+
   togglePanel(event?: Event) {
     this.cdr.detectChanges();
+    this.overlay.parent = this.element;
     if (!this.overlay.panelOpen) {
       this.openPanel(event);
     } else {
@@ -116,6 +139,7 @@ export class NovoPickerToggleElement<T = any> implements AfterContentInit, After
   /** BEGIN: Convenient Panel Methods. */
   openPanel(event?: Event): void {
     if (!this.overlay.panelOpen) {
+      this.overlay.parent = this.element;
       this.overlay.openPanel();
     }
   }
@@ -129,12 +153,8 @@ export class NovoPickerToggleElement<T = any> implements AfterContentInit, After
   }
 
   private _watchStateChanges() {
-    // const pickerStateChanged = this.picker ? this.picker.stateChanges : observableOf();
-    // const inputStateChanged = this.picker && this.picker.pickerInput ? this.picker.pickerInput.stateChanges : observableOf();
-    // const pickerToggled = this.picker ? merge(this.picker.openedStream, this.picker.closedStream) : observableOf();
-    // this._stateChanges.unsubscribe();
-    // this._stateChanges = merge(pickerStateChanged, inputStateChanged, pickerToggled).subscribe(() => this.cdr.markForCheck());
+    this._formField._control?.stateChanges.pipe(takeUntil(this._onDestroy)).subscribe(() => {
+      this.checkPanel();
+    });
   }
-
-  static ngAcceptInputType_disabled: BooleanInput;
 }

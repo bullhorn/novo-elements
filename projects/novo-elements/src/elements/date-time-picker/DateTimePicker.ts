@@ -117,13 +117,15 @@ const DATE_TIME_PICKER_VALUE_ACCESSOR = {
           ></novo-date-picker>
         </div>
         <div class="time-picker">
-          <novo-time-picker (onSelect)="onTimeSelected($event)" [(ngModel)]="model" [military]="military" inline="true"></novo-time-picker>
+          <novo-time-picker (onSelect)="onTimeSelected($event)" [(ngModel)]="model" (ngModelChange)="onModelChange($event)" [military]="military" inline="true"></novo-time-picker>
         </div>
       </div>
     </div>
   `,
 })
 export class NovoDateTimePickerElement implements ControlValueAccessor {
+  @Input()
+  defaultTime: string;
   @Input()
   minYear: any;
   @Input()
@@ -160,6 +162,10 @@ export class NovoDateTimePickerElement implements ControlValueAccessor {
     this.componentTabState = tab;
   }
 
+  onModelChange(event) {
+    this.model = this.createFullDateValue(this.datePickerValue, event);
+  }
+
   setDateLabels(value: Date) {
     this.selectedLabel = this.labels.formatDateWithFormat(value, {
       month: 'short',
@@ -191,6 +197,11 @@ export class NovoDateTimePickerElement implements ControlValueAccessor {
 
   onDateSelected(event: { month?: any; year?: any; day?: any; date?: Date }) {
     this.datePickerValue = event.date;
+    if (this.defaultTime === 'start') {
+      this.timePickerValue = new Date(this.timePickerValue.setHours(0, 0, 0));
+    } else if (this.defaultTime === 'end') {
+      this.timePickerValue = new Date(this.timePickerValue.setHours(23, 59, 59));
+    }
     this.model = this.createFullDateValue(this.datePickerValue, this.timePickerValue);
     this.setDateLabels(this.model);
     this.onSelect.emit({ date: this.model });
@@ -227,8 +238,8 @@ export class NovoDateTimePickerElement implements ControlValueAccessor {
     this.datePickerValue = this.model;
     this.timePickerValue = this.model;
     if (Helpers.isDate(this.model)) {
-      this.setDateLabels(this.model);
-      this.setTimeLabels(this.model);
+      this.setDateLabels(this.datePickerValue);
+      this.setTimeLabels(this.timePickerValue);
     }
   }
 

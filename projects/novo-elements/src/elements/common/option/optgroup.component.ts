@@ -4,13 +4,13 @@ import { CanDisable, CanDisableCtor, mixinDisabled } from '../mixins/disabled.mi
 import { NovoOptionParentComponent, NOVO_OPTION_PARENT_COMPONENT } from './option-parent';
 
 // Notes on the accessibility pattern used for `novo-optgroup`.
-// The option group has two different "modes": regular and inert. The regular mode uses the
+// The option group has two different "modes": regular and novoInert. The regular mode uses the
 // recommended a11y pattern which has `role="group"` on the group element with `aria-labelledby`
 // pointing to the label. This works for `novo-select`, but it seems to hit a bug for autocomplete
 // under VoiceOver where the group doesn't get read out at all. The bug appears to be that if
 // there's __any__ a11y-related attribute on the group (e.g. `role` or `aria-labelledby`),
 // VoiceOver on Safari won't read it out.
-// We've introduced the `inert` mode as a workaround. Under this mode, all a11y attributes are
+// We've introduced the `novoInert` mode as a workaround. Under this mode, all a11y attributes are
 // removed from the group, and we get the screen reader to read out the group label by mirroring it
 // inside an invisible element in the option. This is sub-optimal, because the screen reader will
 // repeat the group label on each navigation, whereas the default pattern only reads the group when
@@ -34,8 +34,8 @@ export class NovoOptgroupBase implements CanDisable {
   /** Unique id for the underlying label. */
   _labelId: string = `novo-optgroup-label-${_uniqueOptgroupIdCounter++}`;
 
-  /** Whether the group is in inert a11y mode. */
-  _inert: boolean;
+  /** Whether the group is in novoInert a11y mode. */
+  _novoInert: boolean;
 }
 export const NovoOptgroupMixinBase: CanDisableCtor & typeof NovoOptgroupBase = mixinDisabled(NovoOptgroupBase);
 
@@ -62,9 +62,9 @@ export const NOVO_OPTGROUP = new InjectionToken<NovoOptgroup>('NovoOptgroup');
   styleUrls: ['optgroup.component.scss'],
   host: {
     class: 'novo-optgroup',
-    '[attr.role]': '_inert ? null : "group"',
-    '[attr.aria-disabled]': '_inert ? null : disabled.toString()',
-    '[attr.aria-labelledby]': '_inert ? null : _labelId',
+    '[attr.role]': '_novoInert ? null : "group"',
+    '[attr.aria-disabled]': '_novoInert ? null : disabled.toString()',
+    '[attr.aria-labelledby]': '_novoInert ? null : _labelId',
     '[class.novo-optgroup-disabled]': 'disabled',
   },
   providers: [{ provide: NOVO_OPTGROUP, useExisting: NovoOptgroup }],
@@ -72,7 +72,7 @@ export const NOVO_OPTGROUP = new InjectionToken<NovoOptgroup>('NovoOptgroup');
 export class NovoOptgroup extends NovoOptgroupMixinBase {
   constructor(@Inject(NOVO_OPTION_PARENT_COMPONENT) @Optional() parent?: NovoOptionParentComponent) {
     super();
-    this._inert = parent?.inertGroups ?? false;
+    this._novoInert = parent?.inertGroups ?? false;
   }
 
   static ngAcceptInputType_disabled: BooleanInput;

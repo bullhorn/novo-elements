@@ -4,9 +4,11 @@ export interface IDataTablePreferences {
   name: string;
   sort?: IDataTableSort;
   filter?: IDataTableFilter | IDataTableFilter[];
+  where?: { query: string; form: any };
   globalSearch?: any;
   pageSize?: number;
   displayedColumns?: string[];
+  savedSearchName?: string;
 }
 
 export interface IDataTableColumn<T> {
@@ -58,7 +60,7 @@ export interface IDataTableColumn<T> {
     width: number;
   };
   rightAlignCellContent?: boolean;
-  configuration?: object; // intended to be implemented by each column type if and as needed
+  configuration?: any; // intended to be implemented by each column type if and as needed
 }
 
 export interface IDataTablePaginationOptions {
@@ -66,6 +68,8 @@ export interface IDataTablePaginationOptions {
   page?: number;
   pageSize: number;
   pageSizeOptions: number[] | { value: string; label: string }[];
+  loading?: boolean;
+  errorLoading?: boolean;
 }
 
 export interface IDataTableColumnSortConfig {
@@ -74,6 +78,8 @@ export interface IDataTableColumnSortConfig {
 
 export interface IDataTableColumnFilterConfig {
   type: 'text' | 'number' | 'date' | 'select' | 'multi-select' | 'custom';
+  customTemplate?: string;
+  useCustomHeader?: boolean;
   options?: string[] | IDataTableColumnFilterOption[];
   allowCustomRange?: boolean;
   transform?: Function;
@@ -104,6 +110,10 @@ export interface IDataTableChangeEvent {
   page?: number;
   pageSize?: number;
   globalSearch?: string;
+  outsideFilter?: IDataTableFilter | IDataTableFilter[];
+  where?: { query: string; form: any };
+  savedSearchName?: string;
+  displayedColumns?: string[];
 }
 
 export interface IDataTableSelectionChangeEvent {
@@ -142,6 +152,7 @@ export interface IDataTableService<T> {
     pageSize: number,
     globalSearch?: string,
     outsideFilter?: any,
+    where?: { query: string; form: any },
   ): Observable<{ results: T[]; total: number }>;
 }
 

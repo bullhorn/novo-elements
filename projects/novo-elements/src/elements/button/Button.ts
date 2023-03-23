@@ -1,6 +1,6 @@
 // NG2
-import { ChangeDetectionStrategy, Component, ElementRef, HostBinding, Input } from '@angular/core';
-import { BooleanInput } from '../../utils/decorators';
+import { ChangeDetectionStrategy, Component, ElementRef, HostBinding, HostListener, Input } from '@angular/core';
+import { BooleanInput, Helpers, Key } from '../../utils';
 
 @Component({
   selector: 'novo-button,button[theme]',
@@ -110,6 +110,13 @@ export class NovoButtonElement {
   private _icon: string;
 
   constructor(public element: ElementRef) {}
+
+  @HostListener('keydown', ['$event'])
+  handleKeydown(event: KeyboardEvent) {
+    if ((Key.Enter === event.key || Key.Space === event.key) && (this.disabled || this.loading)) {
+      Helpers.swallowEvent(event);
+    }
+  }
 
   /** Focuses the input. */
   focus(options?: FocusOptions): void {
