@@ -9,7 +9,7 @@ import { Component } from '@angular/core';
   styleUrls: ['basic-radio-example.css'],
 })
 export class BasicRadioExample {
-  model: any;
+  model: any = 'two';
   onChange(change: Event): void {
     console.log('Radio Change:', change); // tslint:disable-line
   }

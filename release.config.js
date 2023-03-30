@@ -4,15 +4,22 @@ module.exports = {
     "master",
     {
       "name": "next",
-      "prerelease": true
+      "prerelease": true,
     },
     {
       "name": "beta",
-      "prerelease": true
-    }
+      "prerelease": true,
+    },
   ],
   plugins: [
-    '@semantic-release/commit-analyzer',
+    [
+      '@semantic-release/commit-analyzer',
+      {
+        releaseRules: [
+          { type: 'chore', release: 'patch' },
+        ],
+      },
+    ],
     '@semantic-release/release-notes-generator',
     '@semantic-release/changelog',
     [
