@@ -1,5 +1,8 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, ViewChild, ViewEncapsulation } from '@angular/core';
+import { AbstractControl } from '@angular/forms';
 import { AbstractConditionFieldDef } from './abstract-condition.definition';
+import { NovoOverlayTemplateComponent } from '../../common/overlay/Overlay';
+import { NovoLabelService } from '../../../services';
 
 /**
  * Handle selection of field values when a list of options is provided.
@@ -12,19 +15,26 @@ import { AbstractConditionFieldDef } from './abstract-condition.definition';
         <novo-select [placeholder]="labels.operator" formControlName="operator" (onSelect)="onOperatorSelect(formGroup)">
           <novo-option value="includeAny">{{ labels.includeAny }}</novo-option>
           <novo-option value="excludeAny">{{ labels.exclude }}</novo-option>
-          <novo-option value="radius">{{ labels.radius }}</novo-option>
-          <novo-option value="isNull">{{ labels.isEmpty }}</novo-option>
         </novo-select>
       </novo-field>
       <ng-container *novoConditionInputDef="let formGroup; viewIndex as viewIndex; fieldMeta as meta" [ngSwitch]="formGroup.value.operator" [formGroup]="formGroup">
-        <novo-field *novoSwitchCases="['includeAny', 'excludeAny', 'radius']">
-          <novo-select formControlName="value" [placeholder]="labels.select" [multiple]="true"> </novo-select>
-        </novo-field>
-        <novo-field *novoSwitchCases="['isNull']">
-          <novo-radio-group formControlName="value">
-            <novo-radio [value]="true">{{ labels.yes }}</novo-radio>
-            <novo-radio [value]="false">{{ labels.no }}</novo-radio>
-          </novo-radio-group>
+        <novo-field *novoSwitchCases="['includeAny', 'excludeAny']">
+          <novo-chip-list [(ngModel)]="chipListModel" [ngModelOptions]="{ standalone: true }">
+            <novo-chip *ngFor="let item of formGroup.get('value')?.value" (removed)="remove(item, formGroup)">
+              {{ item.formatted_address }}
+              <novo-icon novoChipRemove>close</novo-icon>
+            </novo-chip>
+            <input
+              novoChipInput
+              [placeholder]="labels.typeToAddChips"
+              (keydown)="onKeyDown($event)"
+              (focus)="openPanel()"
+              (click)="openPanel()"
+              #addressInput />
+          </novo-chip-list>
+          <novo-overlay-template [parent]="addressInputElement" #overlay>
+            <google-places-list [term]="term" (select)="selectPlace($event, formGroup)" formControlName="value"></google-places-list>
+          </novo-overlay-template>
         </novo-field>
       </ng-container>
     </ng-container>
@@ -33,5 +43,52 @@ import { AbstractConditionFieldDef } from './abstract-condition.definition';
   changeDetection: ChangeDetectionStrategy.Default,
 })
 export class NovoDefaultAddressConditionDef extends AbstractConditionFieldDef {
+  @ViewChild('addressInput') addressInputElement: ElementRef;
+  @ViewChild('overlay') overlay: NovoOverlayTemplateComponent;
   defaultOperator = 'includeAny';
+  chipListModel: any = '';
+  term: string = '';
+
+  constructor(public element: ElementRef, public labels: NovoLabelService) {
+    super(labels);
+  }
+
+  onKeyDown(event) {
+    setTimeout(() => {
+      this.term = event.target.value;
+    })
+  }
+
+  openPanel(): void {
+    this.overlay?.openPanel();
+  }
+
+  getValue(formGroup: AbstractControl): any[] {
+    return formGroup.value?.value || [];
+  }
+
+  selectPlace(event: any, formGroup: AbstractControl): void {
+    const valueToAdd = {
+      address_components: event.address_components,
+      formatted_address: event.formatted_address,
+      geometry: event.geometry,
+      place_id: event.place_id,
+    };
+    const current = this.getValue(formGroup);
+    if (!Array.isArray(current)) {
+      formGroup.get('value').setValue([valueToAdd]);
+    } else {
+      formGroup.get('value').setValue([...current, valueToAdd]);
+    }
+  }
+
+  remove(valueToRemove: any, formGroup: AbstractControl): void {
+    const current = this.getValue(formGroup);
+    const index = current.indexOf(valueToRemove);
+    if (index >= 0) {
+      const oldValue = [...current]
+      oldValue.splice(index, 1);
+      formGroup.get('value').setValue(oldValue);
+    }
+  }
 }

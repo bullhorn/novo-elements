@@ -1,6 +1,7 @@
 // NG2
 import { isPlatformBrowser } from '@angular/common';
-import { Component, ElementRef, EventEmitter, Inject, Input, OnChanges, OnInit, Output, PLATFORM_ID } from '@angular/core';
+import { Component, ElementRef, EventEmitter, forwardRef, Inject, Input, OnChanges, OnInit, Output, PLATFORM_ID } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { GlobalRef } from '../../services/global/global.service';
 import { GooglePlacesService } from './places.service';
 
@@ -29,8 +30,16 @@ export interface Settings {
   locationIconUrl?: string;
 }
 
+// Value accessor for the component (supports ngModel)
+const PLACES_VALUE_ACCESSOR = {
+  provide: NG_VALUE_ACCESSOR,
+  useExisting: forwardRef(() => PlacesListComponent),
+  multi: true,
+};
+
 @Component({
   selector: 'google-places-list',
+  providers: [PLACES_VALUE_ACCESSOR],
   template: `
     <novo-list direction="vertical">
       <novo-list-item *ngFor="let data of queryItems; let $index = index" (click)="selectedListNode($event, $index)">
@@ -43,7 +52,7 @@ export interface Settings {
     </novo-list>
   `,
 })
-export class PlacesListComponent implements OnInit, OnChanges {
+export class PlacesListComponent implements OnInit, OnChanges, ControlValueAccessor {
   @Input()
   userSettings: Settings;
   @Input()
@@ -90,6 +99,10 @@ export class PlacesListComponent implements OnInit, OnChanges {
     locationIconUrl: '',
   };
 
+  model: any;
+  onModelChange: Function = () => {};
+  onModelTouched: Function = () => {};
+
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
     private _elmRef: ElementRef,
@@ -107,6 +120,18 @@ export class PlacesListComponent implements OnInit, OnChanges {
     this.moduleinit = true;
     this.moduleInit();
     this.searchinputCallback(null);
+  }
+
+  writeValue(model: any): void {
+    this.model = model;
+  }
+
+  registerOnChange(fn: Function): void {
+    this.onModelChange = fn;
+  }
+
+  registerOnTouched(fn: Function): void {
+    this.onModelTouched = fn;
   }
 
   // function called when click event happens in input box. (Binded with view)
