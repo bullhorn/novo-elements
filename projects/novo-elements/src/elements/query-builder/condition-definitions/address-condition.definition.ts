@@ -26,7 +26,7 @@ import { NovoLabelService } from '../../../services';
             </novo-chip>
             <input
               novoChipInput
-              [placeholder]="labels.typeToAddChips"
+              [placeholder]="labels.location"
               (keydown)="onKeyDown($event)"
               (focus)="openPanel()"
               (click)="openPanel()"
