@@ -32,6 +32,7 @@ novo-dropdown {
   box-shadow: $shadow-3;
   max-height: calc(100vh - 400px);
   overflow-y: scroll;
+  min-height: 225px;
   &.has-height {
     overflow: auto;
   }
