@@ -56,6 +56,7 @@ const PICKER_VALUE_ACCESSOR = {
       (focus)="onFocus($event)"
       (click)="onFocus($event)"
       (blur)="onTouched($event)"
+      [maxlength]="maxlength"
       autocomplete="off"
       #input
       [disabled]="disablePickerInput"
@@ -108,6 +109,8 @@ export class NovoPickerElement implements OnInit {
   autoSelectFirstOption: boolean = true;
   @Input()
   overrideElement: ElementRef;
+  @Input()
+  maxlength: number;
 
   // Disable from typing into the picker (result template does everything)
   @Input()
