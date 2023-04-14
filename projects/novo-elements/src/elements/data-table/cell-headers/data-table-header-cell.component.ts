@@ -16,7 +16,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { Key } from '../../../utils';
-import { fromEvent, Subscription } from 'rxjs';
+import { fromEvent, Subject, Subscription } from 'rxjs';
 import { NovoLabelService } from '../../../services/novo-label-service';
 import { Helpers } from '../../../utils/Helpers';
 import { NovoDropdownElement } from '../../dropdown/Dropdown';
@@ -215,8 +215,13 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
 
   @Input()
   resized: EventEmitter<IDataTableColumn<T>>;
+
   @Input()
   filterTemplate: TemplateRef<any>;
+
+  @Input()
+  paginationRefreshSubject: Subject<void>;
+
   @HostBinding('class.resizable')
   public resizable: boolean;
 
@@ -595,6 +600,7 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
     this.multiSelectedOptions = [];
     this.activeDateFilter = undefined;
     this.filterData(undefined);
+    this.paginationRefreshSubject?.next();
     this.clearOptionFilter();
     this.dropdown.closePanel();
   }

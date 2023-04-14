@@ -126,6 +126,7 @@ import { DataTableState } from './state/data-table-state.service';
               [resized]="resized"
               [defaultSort]="defaultSort"
               [allowMultipleFilters]="allowMultipleFilters"
+              [paginationRefreshSubject]="paginationRefreshSubject"
               [class.empty]="column?.type === 'action' && !column?.label"
               [class.button-header-cell]="column?.type === 'expand' || (column?.type === 'action' && !column?.action?.options)"
               [class.dropdown-header-cell]="column?.type === 'action' && column?.action?.options"
