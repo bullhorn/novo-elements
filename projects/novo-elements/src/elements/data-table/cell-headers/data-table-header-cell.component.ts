@@ -591,6 +591,9 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
         this.allowMultipleFilters,
         selectedOption,
       );
+      if (!actualFilter) {
+        this.paginationRefreshSubject?.next();
+      }
       this.changeDetectorRef.markForCheck();
     }, 300);
   }
@@ -600,7 +603,6 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
     this.multiSelectedOptions = [];
     this.activeDateFilter = undefined;
     this.filterData(undefined);
-    this.paginationRefreshSubject?.next();
     this.clearOptionFilter();
     this.dropdown.closePanel();
   }
