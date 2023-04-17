@@ -1,6 +1,6 @@
 // NG2
 import { isPlatformBrowser } from '@angular/common';
-import { Component, ElementRef, EventEmitter, forwardRef, Inject, Input, OnChanges, OnInit, Output, PLATFORM_ID } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, EventEmitter, forwardRef, Inject, Input, OnChanges, OnInit, Output, PLATFORM_ID } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { GlobalRef } from '../../services/global/global.service';
 import { GooglePlacesService } from './places.service';
@@ -108,6 +108,7 @@ export class PlacesListComponent implements OnInit, OnChanges, ControlValueAcces
     private _elmRef: ElementRef,
     private _global: GlobalRef,
     private _googlePlacesService: GooglePlacesService,
+    private cdr: ChangeDetectorRef,
   ) {}
 
   ngOnInit(): any {
@@ -319,6 +320,7 @@ export class PlacesListComponent implements OnInit, OnChanges, ControlValueAcces
   private updateListItem(listData: any): any {
     this.queryItems = listData ? listData : [];
     this.dropdownOpen = true;
+    this.cdr.detectChanges();
   }
 
   // function to show the recent search result.

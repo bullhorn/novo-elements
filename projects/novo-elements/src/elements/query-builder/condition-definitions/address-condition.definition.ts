@@ -20,14 +20,14 @@ import { NovoLabelService } from '../../../services';
       <ng-container *novoConditionInputDef="let formGroup; viewIndex as viewIndex; fieldMeta as meta" [ngSwitch]="formGroup.value.operator" [formGroup]="formGroup">
         <novo-field *novoSwitchCases="['includeAny', 'excludeAny']">
           <novo-chip-list [(ngModel)]="chipListModel" [ngModelOptions]="{ standalone: true }">
-            <novo-chip *ngFor="let item of formGroup.get('value')?.value" (removed)="remove(item, formGroup)">
+            <novo-chip *ngFor="let item of formGroup.get('value').value" (removed)="remove(item, formGroup)">
               {{ item.formatted_address }}
               <novo-icon novoChipRemove>close</novo-icon>
             </novo-chip>
             <input
               novoChipInput
               [placeholder]="labels.location"
-              (keydown)="onKeyDown($event)"
+              (keyup)="onKeyup($event)"
               (focus)="openPanel()"
               (click)="openPanel()"
               #addressInput />
@@ -53,10 +53,8 @@ export class NovoDefaultAddressConditionDef extends AbstractConditionFieldDef {
     super(labels);
   }
 
-  onKeyDown(event) {
-    setTimeout(() => {
-      this.term = event.target.value;
-    })
+  onKeyup(event) {
+    this.term = event.target.value;
   }
 
   openPanel(): void {
@@ -64,7 +62,7 @@ export class NovoDefaultAddressConditionDef extends AbstractConditionFieldDef {
   }
 
   getValue(formGroup: AbstractControl): any[] {
-    return formGroup.value?.value || [];
+    return formGroup.value.value || [];
   }
 
   selectPlace(event: any, formGroup: AbstractControl): void {
@@ -80,6 +78,7 @@ export class NovoDefaultAddressConditionDef extends AbstractConditionFieldDef {
     } else {
       formGroup.get('value').setValue([...current, valueToAdd]);
     }
+    this.addressInputElement.nativeElement.value = '';
   }
 
   remove(valueToRemove: any, formGroup: AbstractControl): void {
