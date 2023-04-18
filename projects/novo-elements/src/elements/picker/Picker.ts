@@ -139,7 +139,7 @@ export class NovoPickerElement implements OnInit {
   @ViewChild(NovoOverlayTemplateComponent, { static: true })
   public container: NovoOverlayTemplateComponent;
   @ViewChild('input', { static: true })
-  private input: ElementRef;
+  public input: ElementRef;
 
   term: string = '';
   resultsComponent: any;
