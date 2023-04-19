@@ -110,7 +110,7 @@ export class NovoPickerElement implements OnInit {
   @Input()
   overrideElement: ElementRef;
   @Input()
-  maxlength: number = 150;
+  maxlength: number;
 
   // Disable from typing into the picker (result template does everything)
   @Input()
