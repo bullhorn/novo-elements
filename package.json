@@ -11,7 +11,7 @@
   "scripts": {
     "build": "ng build novo-elements",
     "postbuild": "npm run copy:scss && npm run build:examples",
-    "build:ci": "ng build novo-elements --configuration production",
+    "build:ci": "ng build novo-elements",
     "postbuild:ci": "npm run build:schematics && npm run copy:resources",
     "build:watch": "ng build novo-elements --watch",
     "build:demo": "ng build demo",

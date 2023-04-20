@@ -1,23 +1,40 @@
-/*
-  This is a "Solution Style" tsconfig.json file, and is used by editors and TypeScript’s language server to improve development experience.
-  It is not intended to be used to perform a compilation.
-
-  To learn more about this file see: https://angular.io/config/solution-tsconfig.
-*/
 {
-  "files": [],
-  "references": [
-    {
-      "path": "./projects/novo-elements/tsconfig.lib.json"
+  "include": ["projects/**/*"],
+  "exclude": ["projects/**/*.spec.ts", "projects/schematics/**/*"],
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist",
+    "target": "es2015",
+    "module": "esnext",
+    "lib": ["esnext", "dom"],
+    "typeRoots": ["node_modules/@types"],
+    "downlevelIteration": true,
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "types": ["jest"],
+    "incremental": true,
+    "tsBuildInfoFile": "node_modules/.cache/tsbuildinfo",
+    "paths": {
+      "novo-elements": ["projects/novo-elements/src/index"],
+      "novo-examples": ["projects/novo-examples/src/index"],
+      // "novo-elements": ["projects/elements/index"],
+      // "novo-examples": ["projects/examples/index"],
+      // "novo-elements/*": ["projects/elements/*"],
+      // "novo-examples/*": ["projects/examples/*"],
     },
-    {
-      "path": "./projects/novo-examples/tsconfig.lib.json"
-    },
-    {
-      "path": "./projects/novo-examples/tsconfig.spec.json"
-    },
-    {
-      "path": "./projects/demo/tsconfig.app.json"
-    }
-  ]
+  },
+  "angularCompilerOptions": {
+    "compilationMode": "partial",
+    "skipTemplateCodegen": true,
+    "strictMetadataEmit": true,
+    "fullTemplateTypeCheck": true,
+    "strictInjectionParameters": true,
+    "enableResourceInlining": true
+  },
 }

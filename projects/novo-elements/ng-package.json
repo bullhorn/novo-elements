@@ -4,5 +4,6 @@
   "lib": {
     "flatModuleFile": "novo-elements",
     "entryFile": "index.ts"
-  }
+  },
+  "assets": ["styles"],
 }
