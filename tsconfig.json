@@ -19,7 +19,6 @@
     "esModuleInterop": true,
     "types": ["jest"],
     "incremental": true,
-    // "skipLibCheck": true,
     "tsBuildInfoFile": "node_modules/.cache/tsbuildinfo",
     "paths": {
       "novo-elements": ["projects/novo-elements/src/index"],
