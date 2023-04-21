@@ -10,7 +10,7 @@ import {
   Output,
 } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
-import { NovoLabelService } from '../../../services/novo-label-service';
+import { NovoLabelService } from 'novo-elements/services';
 import { IDataTablePaginationEvent } from '../interfaces';
 import { DataTableState } from '../state/data-table-state.service';
 

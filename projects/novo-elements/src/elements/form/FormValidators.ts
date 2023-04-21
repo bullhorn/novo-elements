@@ -1,4 +1,4 @@
-import { Helpers } from './../../utils/Helpers';
+import { Helpers } from 'novo-elements/utils';
 
 const MAX_INTEGER = 2147483647;
 const MIN_YEAR = 1753;

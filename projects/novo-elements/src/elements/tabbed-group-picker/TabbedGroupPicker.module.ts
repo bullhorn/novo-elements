@@ -3,7 +3,7 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { NovoLabelService } from '../../services/novo-label-service';
+import { NovoLabelService } from 'novo-elements/services';
 import { NovoButtonModule } from '../button/Button.module';
 import { NovoCheckboxModule } from '../checkbox';
 import { NovoOptionModule } from '../common';

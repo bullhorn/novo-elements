@@ -1,6 +1,6 @@
 // NG2
 import { Component } from '@angular/core';
-import { NovoLabelService } from '../../services/novo-label-service';
+import { NovoLabelService } from 'novo-elements/services';
 // APP
 import { NovoModalParams, NovoModalRef } from '../modal/modal-ref';
 

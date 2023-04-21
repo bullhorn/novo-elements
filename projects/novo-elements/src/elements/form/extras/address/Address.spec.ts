@@ -1,7 +1,7 @@
 // NG2
 import { async, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
-import { NovoLabelService } from '../../../../services/novo-label-service';
+import { NovoLabelService } from 'novo-elements/services';
 import { NovoPickerModule } from '../../../picker/Picker.module';
 import { NovoSelectModule } from '../../../select/Select.module';
 import { NovoTooltipModule } from './../../../tooltip/Tooltip.module';

@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { can, Helpers } from '../../utils/Helpers';
+import { can, Helpers } from 'novo-elements/utils';
 
 @Pipe({
   name: 'groupBy',

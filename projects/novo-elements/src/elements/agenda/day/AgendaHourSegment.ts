@@ -1,5 +1,5 @@
 import { Component, Input, TemplateRef } from '@angular/core';
-import { DayViewHourSegment } from '../../../utils/calendar-utils/CalendarUtils';
+import { DayViewHourSegment } from 'novo-elements/utils';
 
 @Component({
   selector: 'novo-agenda-day-hour-segment',

@@ -29,8 +29,8 @@ import { ControlValueAccessor, FormGroupDirective, NgControl, NgForm } from '@an
 import { merge, Observable, of, Subject, Subscription } from 'rxjs';
 import { filter, map, take, takeUntil } from 'rxjs/operators';
 // App
-import { NovoLabelService } from '../../services/novo-label-service';
-import { Helpers, Key } from '../../utils';
+import { NovoLabelService } from 'novo-elements/services';
+import { Helpers, Key } from 'novo-elements/utils';
 import {
   CanDisableCtor,
   CanRequireCtor,

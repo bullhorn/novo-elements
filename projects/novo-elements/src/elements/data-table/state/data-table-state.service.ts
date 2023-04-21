@@ -1,6 +1,6 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-import { Helpers } from '../../../utils/Helpers';
+import { Helpers } from 'novo-elements/utils';
 import { IDataTableChangeEvent, IDataTableFilter, IDataTablePreferences, IDataTableSelectionOption, IDataTableSort } from '../interfaces';
 import { NovoDataTableFilterUtils } from '../services/data-table-filter-utils';
 

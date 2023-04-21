@@ -4,7 +4,7 @@ import { ChangeDetectorRef, Directive, ElementRef, Input } from '@angular/core';
 // Vendor
 import { from, Observable } from 'rxjs';
 // APP
-import { Helpers } from '../../../../utils/Helpers';
+import { Helpers } from 'novo-elements/utils';
 import { NovoControlConfig } from '../../../form/controls/BaseControl';
 
 /**

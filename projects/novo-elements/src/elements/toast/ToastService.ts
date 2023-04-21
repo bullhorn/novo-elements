@@ -1,6 +1,6 @@
 // NG2
 import { Injectable } from '@angular/core';
-import { ComponentUtils } from '../../utils/component-utils/ComponentUtils';
+import { ComponentUtils } from 'novo-elements/services';
 // APP
 import { NovoToastElement } from './Toast';
 

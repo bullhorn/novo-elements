@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 // APP
-import { NovoPipesModule } from '../../pipes/Pipes.module';
+import { NovoPipesModule } from 'novo-elements/pipes';
 import { NovoCommonModule } from '../common';
 import { NovoOverlayModule } from '../common/overlay/Overlay.module';
 import { NovoListModule } from '../list/List.module';

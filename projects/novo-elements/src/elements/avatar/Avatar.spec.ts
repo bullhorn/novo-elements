@@ -1,6 +1,6 @@
 // NG2
 import { TestBed } from '@angular/core/testing';
-import { setupTestSuite } from '../../../../../utils/test-setup';
+import { setupTestSuite } from 'novo-elements/utils';
 // APP
 import { NovoAvatarElement } from './Avatar';
 

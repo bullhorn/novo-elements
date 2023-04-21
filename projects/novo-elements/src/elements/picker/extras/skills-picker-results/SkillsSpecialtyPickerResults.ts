@@ -1,6 +1,6 @@
 // NG2
 import { ChangeDetectorRef, Component, ElementRef, HostBinding } from '@angular/core';
-import { NovoLabelService } from '../../../../services/novo-label-service';
+import { NovoLabelService } from 'novo-elements/services';
 // App
 import { BasePickerResults } from '../base-picker-results/BasePickerResults';
 

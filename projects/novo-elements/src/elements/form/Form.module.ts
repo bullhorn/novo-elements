@@ -10,7 +10,7 @@ import { NovoCheckboxModule } from '../checkbox';
 import { NovoCommonModule } from '../common/common.module';
 import { NovoIconModule } from '../icon';
 import { NovoSwitchModule } from '../switch/Switch.module';
-import { NovoTemplateService } from './../../services/template/NovoTemplateService';
+import { NovoTemplateService } from 'novo-elements/services';
 import { NovoAceEditorModule } from './../ace-editor/AceEditor.module';
 import { NovoButtonModule } from './../button/Button.module';
 import { NovoChipsModule } from './../chips/Chips.module';

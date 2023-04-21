@@ -5,10 +5,8 @@ import { async, inject, TestBed } from '@angular/core/testing';
 // Vendor
 import { of } from 'rxjs';
 // App
-import { NovoLabelService } from '../../services/novo-label-service';
-import { OptionsService } from '../../services/options/OptionsService';
-import { ComponentUtils } from '../../utils/component-utils/ComponentUtils';
-import { FormUtils } from '../../utils/form-utils/FormUtils';
+import { ComponentUtils, NovoLabelService, OptionsService } from 'novo-elements/services';
+import { FormUtils } from './utils/FormUtils';
 import { NovoModalService } from '../modal/modal.service';
 import { NovoToastService } from '../toast/ToastService';
 import { FieldInteractionApi } from './FieldInteractionApi';

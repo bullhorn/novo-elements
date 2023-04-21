@@ -1,5 +1,5 @@
 import { Directive } from '@angular/core';
-import { Helpers } from '../../../utils/Helpers';
+import { Helpers } from 'novo-elements/utils';
 import { DataTableState } from '../state/data-table-state.service';
 
 @Directive({

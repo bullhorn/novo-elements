@@ -4,9 +4,8 @@ import { ChangeDetectorRef } from '@angular/core';
 import { fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { FormBuilder } from '@angular/forms';
 // App
-import { NovoLabelService } from '../../services/novo-label-service';
-import { OptionsService } from '../../services/options/OptionsService';
-import { FormUtils } from './../../utils/form-utils/FormUtils';
+import { NovoLabelService, OptionsService } from 'novo-elements/services';
+import { FormUtils } from './utils/FormUtils';
 import { NovoControlGroup } from './ControlGroup';
 import { NovoFormModule } from './Form.module';
 

@@ -1,7 +1,7 @@
 // NG2
 import { Directive, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
 // App
-import { Helpers } from '../../../../utils/Helpers';
+import { Helpers } from 'novo-elements/utils';
 
 @Directive({
   selector: '[novoThOrderable]',

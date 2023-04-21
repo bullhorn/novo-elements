@@ -2,7 +2,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Key } from '../../utils';
+import { Key } from 'novo-elements/utils';
 import { ErrorStateMatcher } from '../common';
 import { NovoFieldModule } from '../field';
 import { NovoIconModule } from '../icon';

@@ -15,8 +15,8 @@ import {
   TemplateRef,
 } from '@angular/core';
 import { FormArray, FormBuilder } from '@angular/forms';
-import { Helpers } from '../../utils/Helpers';
-import { FormUtils } from './../../utils/form-utils/FormUtils';
+import { Helpers } from 'novo-elements/utils';
+import { FormUtils } from './utils/FormUtils';
 import { BaseControl } from './controls/BaseControl';
 import { NovoFormGroup } from './NovoFormGroup';
 

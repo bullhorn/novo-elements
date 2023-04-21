@@ -18,7 +18,7 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, FormGroupDirective, NgControl, NgForm } from '@angular/forms';
 import { NovoDragulaService } from '../../../../elements/dragula/DragulaService';
-import { NovoLabelService } from '../../../../services/novo-label-service';
+import { NovoLabelService } from 'novo-elements/services';
 import { CanUpdateErrorStateCtor, ErrorStateMatcher, mixinErrorState } from '../../../common';
 import { NovoFieldControl } from '../../../field';
 import { NovoFile } from './extras/file/File';

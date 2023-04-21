@@ -4,14 +4,13 @@ import { ChangeDetectorRef } from '@angular/core';
 import { async, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import {
-  ComponentUtils,
   NovoButtonModule,
   NovoDatePickerModule,
   NovoDropdownModule,
-  NovoLabelService,
   NovoToastService,
   NovoTooltipModule,
 } from '../../..';
+import { ComponentUtils, NovoLabelService } from 'novo-elements/services';
 import { NovoDataTable } from '../data-table.component';
 import { NOVO_DATA_TABLE_REF } from '../data-table.token';
 import { DataTableState } from '../state/data-table-state.service';

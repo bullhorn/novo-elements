@@ -13,9 +13,9 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { format, isValid, parse } from 'date-fns';
-import { DateFormatService, NovoLabelService } from '../../services';
+import { DateFormatService, NovoLabelService } from 'novo-elements/services';
 // APP
-import { Helpers } from './../../utils/Helpers';
+import { Helpers } from 'novo-elements/utils';
 
 // Value accessor for the component (supports ngModel)
 const TIME_PICKER_VALUE_ACCESSOR = {

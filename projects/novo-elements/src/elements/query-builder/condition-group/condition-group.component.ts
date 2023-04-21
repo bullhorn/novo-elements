@@ -4,7 +4,7 @@ import { merge, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { QueryBuilderService } from '../query-builder.service';
 import { Condition, Conjunction } from '../query-builder.types';
-import { NovoLabelService } from '../../../services/novo-label-service';
+import { NovoLabelService } from 'novo-elements/services';
 
 const EMPTY_CONDITION: Condition = {
   field: null,

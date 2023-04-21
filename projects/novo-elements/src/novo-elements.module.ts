@@ -66,14 +66,17 @@ import { NovoToolbarModule } from './elements/toolbar/toolbar.module';
 import { NovoTooltipModule } from './elements/tooltip/Tooltip.module';
 import { UnlessModule } from './elements/unless/Unless.module';
 import { NovoValueModule } from './elements/value/Value.module';
-import { NovoPipesModule } from './pipes/Pipes.module';
-import { DateFormatService } from './services/date-format/DateFormat';
-import { BrowserGlobalRef, GlobalRef } from './services/global/global.service';
-import { NovoLabelService } from './services/novo-label-service';
-import { OptionsService } from './services/options/OptionsService';
-import { LocalStorageService } from './services/storage/storage.service';
-import { ComponentUtils } from './utils/component-utils/ComponentUtils';
-import { FormUtils } from './utils/form-utils/FormUtils';
+import { NovoPipesModule } from 'novo-elements/pipes';
+import { FormUtils } from './elements/form/utils/FormUtils';
+import {
+  BrowserGlobalRef,
+  ComponentUtils,
+  DateFormatService,
+  GlobalRef,
+  LocalStorageService,
+  NovoLabelService,
+  OptionsService,
+} from 'novo-elements/services';
 
 @NgModule({
   imports: [ReactiveFormsModule],

@@ -1,7 +1,7 @@
 // NG2
 import { isPlatformBrowser } from '@angular/common';
 import { Component, ElementRef, EventEmitter, Inject, Input, OnChanges, OnInit, Output, PLATFORM_ID } from '@angular/core';
-import { GlobalRef } from '../../services/global/global.service';
+import { GlobalRef } from 'novo-elements/services';
 import { GooglePlacesService } from './places.service';
 
 export interface Settings {

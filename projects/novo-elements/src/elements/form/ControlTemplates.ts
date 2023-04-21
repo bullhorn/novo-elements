@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, QueryList, ViewChildren } from '@angular/core';
-import { NovoTemplateService } from '../../services/template/NovoTemplateService';
+import { NovoTemplateService } from 'novo-elements/services';
 import { NovoTemplate } from '../common/novo-template/novo-template.directive';
 @Component({
   selector: 'novo-control-templates',

@@ -1,6 +1,6 @@
 // NG2
 import { Component, Input } from '@angular/core';
-import { NovoLabelService } from '../../../../services/novo-label-service';
+import { NovoLabelService } from 'novo-elements/services';
 // APP
 import { BaseRenderer } from '../base-renderer/BaseRenderer';
 

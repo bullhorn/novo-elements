@@ -1,5 +1,5 @@
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, HostBinding, Input } from '@angular/core';
-import { BooleanInput } from '../../utils/decorators/BooleanInput';
+import { BooleanInput } from 'novo-elements/utils';
 import { TypographySize } from '../common/typography';
 
 @Component({

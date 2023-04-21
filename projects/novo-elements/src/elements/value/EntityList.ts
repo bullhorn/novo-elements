@@ -1,6 +1,6 @@
 // NG2
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
-import { Helpers } from '../../utils/Helpers';
+import { Helpers } from 'novo-elements/utils';
 
 @Component({
   selector: 'novo-entity-list',

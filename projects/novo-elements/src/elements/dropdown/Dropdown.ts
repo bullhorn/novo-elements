@@ -23,10 +23,8 @@ import {
 // Vendor
 import { merge, of, Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { BooleanInput } from '../../utils';
+import { BooleanInput, Key, notify } from 'novo-elements/utils';
 // App
-import { Key } from '../../utils/key-codes';
-import { notify } from '../../utils/notifier/notifier.util';
 import { NovoButtonElement } from '../button';
 import {
   CanDisableCtor,

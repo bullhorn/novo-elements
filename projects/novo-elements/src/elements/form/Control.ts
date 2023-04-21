@@ -18,13 +18,9 @@ import {
 // Vendor
 import { Observable } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
-import { DateFormatService } from '../../services/date-format/DateFormat';
-import { NovoLabelService } from '../../services/novo-label-service';
-import { NovoTemplateService } from '../../services/template/NovoTemplateService';
-import { Key } from '../../utils';
-import { Helpers } from '../../utils/Helpers';
+import { DateFormatService, NovoLabelService, NovoTemplateService } from 'novo-elements/services';
+import { Helpers, Key, OutsideClick } from 'novo-elements/utils';
 // APP
-import { OutsideClick } from '../../utils/outside-click/OutsideClick';
 import { FieldInteractionApi } from './FieldInteractionApi';
 
 export interface IMaskOptions {

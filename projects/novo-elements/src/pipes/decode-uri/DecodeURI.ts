@@ -1,7 +1,7 @@
 // NG2
 import { Injectable, Pipe, PipeTransform } from '@angular/core';
 // App
-import { Helpers } from '../../utils/Helpers';
+import { Helpers } from 'novo-elements/utils';
 
 @Pipe({ name: 'decodeURI' })
 @Injectable()

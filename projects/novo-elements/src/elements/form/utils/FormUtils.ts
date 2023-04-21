@@ -22,14 +22,13 @@ import {
   TilesControl,
   TimeControl,
   TimezoneControl,
-} from '../../elements/form/FormControls';
-import type { FormField, NovoFieldset } from '../../elements/form/FormInterfaces';
-import { NovoFormControl } from '../../elements/form/NovoFormControl';
-import { NovoFormGroup } from '../../elements/form/NovoFormGroup';
-import { EntityPickerResult, EntityPickerResults } from '../../elements/picker/extras/entity-picker-results/EntityPickerResults';
-import { NovoLabelService } from '../../services/novo-label-service';
-import { Helpers } from '../Helpers';
-import { OptionsService } from './../../services/options/OptionsService';
+} from '../FormControls';
+import type { FormField, NovoFieldset } from '../FormInterfaces';
+import { NovoFormControl } from '../NovoFormControl';
+import { NovoFormGroup } from '../NovoFormGroup';
+import { EntityPickerResult, EntityPickerResults } from '../../picker/extras/entity-picker-results/EntityPickerResults';
+import { NovoLabelService, OptionsService } from 'novo-elements/services';
+import { Helpers } from 'novo-elements/utils';
 
 @Injectable()
 export class FormUtils {

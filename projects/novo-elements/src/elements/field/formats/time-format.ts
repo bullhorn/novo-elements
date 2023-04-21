@@ -16,8 +16,8 @@ import { COMPOSITION_BUFFER_MODE, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { IMaskDirective, IMaskFactory } from 'angular-imask';
 import { format, isValid, parse } from 'date-fns';
 import * as IMask from 'imask';
-import { NovoLabelService } from '../../../services/novo-label-service';
-import { Key } from '../../../utils';
+import { NovoLabelService } from 'novo-elements/services';
+import { Key } from 'novo-elements/utils';
 import { NovoInputFormat, NOVO_INPUT_FORMAT } from './base-format';
 
 export const TIMEFORMAT_VALUE_ACCESSOR = {

@@ -1,7 +1,7 @@
 // NG2
 import { async, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
-import { NovoLabelService } from '../../../../services/novo-label-service';
+import { NovoLabelService } from 'novo-elements/services';
 import { NovoSelectModule } from '../../../select/Select.module';
 // App
 import { Pagination } from './Pagination';

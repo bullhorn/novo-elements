@@ -1,6 +1,6 @@
 // NG2
 import { Component, ComponentRef, ElementRef, Input, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
-import { ComponentUtils } from './../../../../utils/component-utils/ComponentUtils';
+import { ComponentUtils } from 'novo-elements/services';
 // APP
 import { BaseRenderer } from './../base-renderer/BaseRenderer';
 

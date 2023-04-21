@@ -19,7 +19,7 @@ import {
   DayViewHour,
   getDayView,
   getDayViewHourGrid,
-} from '../../../utils/calendar-utils/CalendarUtils';
+} from 'novo-elements/utils';
 
 /**
  * @hidden

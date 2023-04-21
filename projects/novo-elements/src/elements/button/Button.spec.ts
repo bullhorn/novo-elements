@@ -1,7 +1,7 @@
 // NG2
 import { TestBed } from '@angular/core/testing';
 // APP
-import { setupTestSuite } from '../../../../../utils/test-setup';
+import { setupTestSuite } from 'novo-elements/utils';
 import { NovoButtonElement } from './Button';
 
 describe('Elements: NovoButtonElement', () => {

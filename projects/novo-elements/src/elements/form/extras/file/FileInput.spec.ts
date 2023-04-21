@@ -3,8 +3,8 @@ import { async, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { NovoDragulaElement } from '../../../../elements/dragula/Dragula';
 import { NovoDragulaService } from '../../../../elements/dragula/DragulaService';
-import { DecodeURIPipe } from '../../../../pipes/decode-uri/DecodeURI';
-import { NovoLabelService } from '../../../../services/novo-label-service';
+import { DecodeURIPipe } from 'novo-elements/pipes';
+import { NovoLabelService } from 'novo-elements/services';
 import { NovoLoadingElement } from '../../../loading/Loading';
 // App
 import { NovoFileInputElement } from './FileInput';

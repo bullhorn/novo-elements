@@ -3,7 +3,7 @@ import { Component, ElementRef, Input, OnDestroy, OnInit, ViewChild, ViewContain
 import { FormGroup } from '@angular/forms';
 // Vendor
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
-import { ComponentUtils } from './../../../../utils/component-utils/ComponentUtils';
+import { ComponentUtils } from 'novo-elements/services';
 // APP
 import { BaseRenderer } from './../base-renderer/BaseRenderer';
 

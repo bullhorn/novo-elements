@@ -7,19 +7,21 @@
       "root": "projects/novo-elements",
       "sourceRoot": "projects/novo-elements/src",
       "projectType": "library",
-      "prefix": "lib",
+      "prefix": "novo",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
+          "outputs": ["dist/novo-elements"],
           "options": {
             "tsConfig": "tsconfig.build.json",
-            "project": "projects/novo-elements/ng-package.json"
+            "project": "projects/novo-elements/src/ng-package.json"
           },
-          "configurations": {
-            "production": {
-              "tsConfig": "projects/novo-elements/tsconfig.lib.prod.json"
+          "dependsOn": [
+            {
+              "target": "build",
+              "projects": "dependencies"
             }
-          }
+          ]
         },
         "test": {
           "builder": "@angular-builders/jest:run",

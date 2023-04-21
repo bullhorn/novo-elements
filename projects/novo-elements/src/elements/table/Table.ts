@@ -5,12 +5,9 @@ import { AbstractControl, FormArray, FormBuilder, FormGroup } from '@angular/for
 import * as dateFns from 'date-fns';
 import { debounceTime } from 'rxjs/operators';
 // APP
-import { CollectionEvent } from '../../services/data-provider/CollectionEvent';
-import { PagedArrayCollection } from '../../services/data-provider/PagedArrayCollection';
-import { NovoLabelService } from '../../services/novo-label-service';
-import { FormUtils } from '../../utils/form-utils/FormUtils';
-import { Helpers } from '../../utils/Helpers';
-import { notify } from '../../utils/notifier/notifier.util';
+import { CollectionEvent, NovoLabelService, PagedArrayCollection } from 'novo-elements/services';
+import { FormUtils } from '../form/utils';
+import { Helpers, notify } from 'novo-elements/utils';
 import { ControlFactory, ReadOnlyControl } from './../form/FormControls';
 
 export interface NovoTableConfig {

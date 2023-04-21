@@ -21,11 +21,10 @@ import {
   TextBoxControl,
   TilesControl,
   TimeControl,
-} from '../../elements/form/FormControls';
-import { FormField } from '../../elements/form/FormInterfaces';
-import { NovoFormControl } from '../../elements/form/NovoFormControl';
-import { NovoLabelService } from '../../services/novo-label-service';
-import { OptionsService } from '../../services/options/OptionsService';
+} from '../FormControls';
+import { FormField } from '../FormInterfaces';
+import { NovoFormControl } from '../NovoFormControl';
+import { NovoLabelService, OptionsService } from 'novo-elements/services';
 import { FormUtils } from './FormUtils';
 
 /**

@@ -13,8 +13,8 @@ import {
   Renderer2,
 } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { NovoLabelService } from '../../services/novo-label-service';
-import { Helpers } from '../../utils/Helpers';
+import { NovoLabelService } from 'novo-elements/services';
+import { Helpers } from 'novo-elements/utils';
 import { SimpleTableActionColumn, SimpleTableActionColumnOption, SimpleTableColumn } from './interfaces';
 import { NovoSelection } from './sort';
 

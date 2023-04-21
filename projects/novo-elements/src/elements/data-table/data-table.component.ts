@@ -18,8 +18,8 @@ import {
   ViewChildren,
 } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
-import { NovoLabelService } from '../../services/novo-label-service';
-import { notify } from '../../utils/notifier/notifier.util';
+import { NovoLabelService } from 'novo-elements/services';
+import { notify } from 'novo-elements/utils';
 import { NovoTemplate } from '../common/novo-template/novo-template.directive';
 import { NovoDataTableCellHeader } from './cell-headers/data-table-header-cell.component';
 import { DataTableSource } from './data-table.source';

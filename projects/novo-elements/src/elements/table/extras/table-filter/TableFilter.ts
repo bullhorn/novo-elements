@@ -11,8 +11,7 @@ import {
   Renderer2,
   SimpleChanges,
 } from '@angular/core';
-import { Key } from '../../../../utils';
-import { Helpers } from './../../../../utils/Helpers';
+import { Helpers, Key } from 'novo-elements/utils';
 
 @Directive({
   selector: '[novoTableFilter]',

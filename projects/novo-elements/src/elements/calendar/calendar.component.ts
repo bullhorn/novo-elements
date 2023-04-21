@@ -3,9 +3,9 @@ import { ChangeDetectorRef, Component, ElementRef, EventEmitter, HostBinding, In
 import { DomSanitizer } from '@angular/platform-browser';
 // Vendor
 import { addMonths, isDate, isSameDay, setMonth, setYear, startOfDay, startOfMonth, subMonths } from 'date-fns';
-import { NovoLabelService } from '../../services/novo-label-service';
+import { NovoLabelService } from 'novo-elements/services';
 // APP
-import { Helpers } from '../../utils/Helpers';
+import { Helpers } from 'novo-elements/utils';
 import type {
   DatePickerSelectModes,
   NovoDateSelectEvent,

@@ -11,7 +11,7 @@ import {
   Optional,
 } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { BooleanInput } from '../../utils';
+import { BooleanInput } from 'novo-elements/utils';
 import { MenuContentComponent } from './menu-content.component';
 import { MenuComponent } from './menu.component';
 import { NovoMenuService } from './menu.service';

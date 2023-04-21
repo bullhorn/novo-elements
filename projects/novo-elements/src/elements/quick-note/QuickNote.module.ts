@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NovoListModule } from './../list/List.module';
 // APP
-import { NovoPipesModule } from '../../pipes/Pipes.module';
+import { NovoPipesModule } from 'novo-elements/pipes';
 import { NovoLoadingModule } from './../loading/Loading.module';
 import { QuickNoteResults } from './extras/quick-note-results/QuickNoteResults';
 import { QuickNoteElement } from './QuickNote';

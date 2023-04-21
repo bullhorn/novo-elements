@@ -23,8 +23,13 @@
   "dependencies": {
     "tslib": "^2.0.0"
   },
-  "schematics": "./schematics/collection.json",
+  "exports": {
+    "./novo-elements": {
+      "sass": "./novo-elements.scss"
+    }
+  },
+  "schematics": "../../schematics/collection.json",
   "ng-update": {
-    "migrations": "./schematics/migration.json"
+    "migrations": "../../schematics/migration.json"
   }
 }

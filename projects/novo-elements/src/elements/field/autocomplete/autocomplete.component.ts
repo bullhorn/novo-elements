@@ -24,7 +24,7 @@ import {
 } from '@angular/core';
 import { fromEvent, interval, merge, of, Subscription } from 'rxjs';
 import { debounce, take } from 'rxjs/operators';
-import { BooleanInput, Key } from '../../../utils';
+import { BooleanInput, Key } from 'novo-elements/utils';
 import type { NovoChipList } from '../../chips';
 import {
   CanDisable,

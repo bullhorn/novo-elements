@@ -2,9 +2,9 @@
 import { ChangeDetectorRef, Component, ElementRef } from '@angular/core';
 // Vendor
 import { from, Observable } from 'rxjs';
-import { NovoLabelService } from '../../../../services/novo-label-service';
+import { NovoLabelService } from 'novo-elements/services';
 // APP
-import { Helpers } from '../../../../utils/Helpers';
+import { Helpers } from 'novo-elements/utils';
 import { PickerResults } from '../../../picker/extras/picker-results/PickerResults';
 
 @Component({

@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 // Vendor
 import { TextMaskModule } from 'angular2-text-mask';
-import { NovoPipesModule } from '../../pipes/Pipes.module';
+import { NovoPipesModule } from 'novo-elements/pipes';
 // APP
 import { NovoButtonModule } from '../button';
 import { NovoIconModule } from '../icon/Icon.module';

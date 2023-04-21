@@ -4,9 +4,9 @@ import { Component, ElementRef, EventEmitter, forwardRef, Input, Output } from '
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 // Vendor
 import * as dateFns from 'date-fns';
-import { NovoLabelService } from '../../services/novo-label-service';
+import { NovoLabelService } from 'novo-elements/services';
 // APP
-import { Helpers } from '../../utils/Helpers';
+import { Helpers } from 'novo-elements/utils';
 
 // Value accessor for the component (supports ngModel)
 const DATE_TIME_PICKER_VALUE_ACCESSOR = {

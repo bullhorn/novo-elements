@@ -30,7 +30,7 @@ import {
 // Vendor
 import { fromEvent, merge, Observable, of as observableOf, Subscription } from 'rxjs';
 import { filter, first, switchMap } from 'rxjs/operators';
-import {Helpers} from "../../../utils";
+import {Helpers} from "novo-elements/utils";
 
 @Component({
   selector: 'novo-overlay-template',

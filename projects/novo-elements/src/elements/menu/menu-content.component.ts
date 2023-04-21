@@ -2,7 +2,7 @@ import { ActiveDescendantKeyManager } from '@angular/cdk/a11y';
 import { OverlayRef } from '@angular/cdk/overlay';
 import { AfterViewInit, Component, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { Key } from '../../utils';
+import { Key } from 'novo-elements/utils';
 import { NovoOption } from '../common';
 import { MenuItemDirective } from './menu-item.directive';
 // import type { MenuComponent } from './menu.component';

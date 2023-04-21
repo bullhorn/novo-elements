@@ -1,8 +1,7 @@
 import { isPlatformBrowser } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
-import { GlobalRef } from '../../services/global/global.service';
-import { LocalStorageService } from '../../services/storage/storage.service';
+import { GlobalRef, LocalStorageService } from 'novo-elements/services';
 
 @Injectable()
 export class GooglePlacesService {

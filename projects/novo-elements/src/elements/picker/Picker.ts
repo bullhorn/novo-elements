@@ -17,10 +17,8 @@ import {
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { fromEvent } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
-import { Key } from '../../utils';
-import { ComponentUtils } from '../../utils/component-utils/ComponentUtils';
-import { Helpers } from '../../utils/Helpers';
-import { notify } from '../../utils/notifier/notifier.util';
+import { ComponentUtils } from 'novo-elements/services';
+import { Helpers, Key, notify } from 'novo-elements/utils';
 import { NovoOverlayTemplateComponent } from '../common/overlay/Overlay';
 import { NovoControlConfig } from '../form/FormControls';
 import { PickerResults } from './extras/picker-results/PickerResults';

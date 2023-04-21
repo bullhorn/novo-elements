@@ -2,9 +2,9 @@
 import { Component, EventEmitter, forwardRef, Input, OnInit, Output } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 // APP
-import { NovoLabelService } from '../../../../services/novo-label-service';
-import { COUNTRIES, findByCountryId, getStates } from '../../../../utils/countries/Countries';
-import { Helpers } from '../../../../utils/Helpers';
+import { NovoLabelService } from 'novo-elements/services';
+import { COUNTRIES, findByCountryId, getStates } from 'novo-elements/utils';
+import { Helpers } from 'novo-elements/utils';
 
 // Value accessor for the component (supports ngModel)
 const ADDRESS_VALUE_ACCESSOR = {

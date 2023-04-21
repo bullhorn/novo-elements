@@ -1,6 +1,6 @@
 import { Directive, HostListener, Inject, Input, OnDestroy, TemplateRef, ViewContainerRef } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { Helpers } from '../../utils/Helpers';
+import { Helpers } from 'novo-elements/utils';
 import { NovoDataTableRef, NOVO_DATA_TABLE_REF } from './data-table.token';
 import { DataTableState } from './state/data-table-state.service';
 
