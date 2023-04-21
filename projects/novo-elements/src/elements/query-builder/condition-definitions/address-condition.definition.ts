@@ -18,7 +18,7 @@ import { NovoLabelService } from '../../../services';
         </novo-select>
       </novo-field>
       <ng-container *novoConditionInputDef="let formGroup; viewIndex as viewIndex; fieldMeta as meta" [ngSwitch]="formGroup.value.operator" [formGroup]="formGroup">
-        <novo-field *novoSwitchCases="['includeAny', 'excludeAny']">
+        <novo-field *novoSwitchCases="['includeAny', 'excludeAny']" #novoField>
           <novo-chip-list [(ngModel)]="chipListModel" [ngModelOptions]="{ standalone: true }">
             <novo-chip *ngFor="let item of formGroup.get('value').value" (removed)="remove(item, formGroup)">
               {{ item.formatted_address }}
@@ -32,7 +32,7 @@ import { NovoLabelService } from '../../../services';
               (click)="openPanel()"
               #addressInput />
           </novo-chip-list>
-          <novo-overlay-template [parent]="addressInputElement" #overlay>
+          <novo-overlay-template [parent]="novoField._elementRef" #overlay>
             <google-places-list [term]="term" (select)="selectPlace($event, formGroup)" formControlName="value"></google-places-list>
           </novo-overlay-template>
         </novo-field>
