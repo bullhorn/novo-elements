@@ -1,7 +1,8 @@
-import { ChangeDetectionStrategy, Component, ElementRef, ViewChild, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, QueryList, ViewChildren, ViewEncapsulation } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 import { AbstractConditionFieldDef } from './abstract-condition.definition';
 import { NovoOverlayTemplateComponent } from '../../common/overlay/Overlay';
+import { NovoPickerToggleElement } from './../../field/toggle/picker-toggle.component';
 import { NovoLabelService } from '../../../services';
 
 /**
@@ -28,13 +29,12 @@ import { NovoLabelService } from '../../../services';
               novoChipInput
               [placeholder]="labels.location"
               (keyup)="onKeyup($event)"
-              (focus)="openPanel()"
-              (click)="openPanel()"
+              [picker]="placesPicker"
               #addressInput />
           </novo-chip-list>
-          <novo-overlay-template [parent]="novoField._elementRef" #overlay>
-            <google-places-list [term]="term" (select)="selectPlace($event, formGroup)" formControlName="value"></google-places-list>
-          </novo-overlay-template>
+          <novo-picker-toggle triggerOnFocus [overlayId]="viewIndex" icon="location" novoSuffix>
+            <google-places-list [term]="term" (select)="selectPlace($event, formGroup, viewIndex)" formControlName="value" #placesPicker></google-places-list>
+          </novo-picker-toggle>
         </novo-field>
       </ng-container>
     </ng-container>
@@ -43,8 +43,8 @@ import { NovoLabelService } from '../../../services';
   changeDetection: ChangeDetectionStrategy.Default,
 })
 export class NovoDefaultAddressConditionDef extends AbstractConditionFieldDef {
-  @ViewChild('addressInput') addressInputElement: ElementRef;
-  @ViewChild('overlay') overlay: NovoOverlayTemplateComponent;
+  @ViewChildren(NovoPickerToggleElement) overlayChildren: QueryList<NovoPickerToggleElement>;
+  @ViewChildren('addressInput') inputChildren: QueryList<ElementRef>;
   defaultOperator = 'includeAny';
   chipListModel: any = '';
   term: string = '';
@@ -57,15 +57,15 @@ export class NovoDefaultAddressConditionDef extends AbstractConditionFieldDef {
     this.term = event.target.value;
   }
 
-  openPanel(): void {
-    this.overlay?.openPanel();
-  }
-
   getValue(formGroup: AbstractControl): any[] {
     return formGroup.value.value || [];
   }
 
-  selectPlace(event: any, formGroup: AbstractControl): void {
+  getCurrentOverlay(viewIndex: string) {
+    return this.overlayChildren?.find(item => item.overlayId === viewIndex);
+  }
+
+  selectPlace(event: any, formGroup: AbstractControl, viewIndex: string): void {
     const valueToAdd = {
       address_components: event.address_components,
       formatted_address: event.formatted_address,
@@ -78,8 +78,10 @@ export class NovoDefaultAddressConditionDef extends AbstractConditionFieldDef {
     } else {
       formGroup.get('value').setValue([...current, valueToAdd]);
     }
-    this.addressInputElement.nativeElement.value = '';
-    this.addressInputElement.nativeElement.focus();
+    this.inputChildren.forEach(input => {
+      input.nativeElement.value = '';
+    })
+    this.getCurrentOverlay(viewIndex)?.closePanel();
   }
 
   remove(valueToRemove: any, formGroup: AbstractControl): void {

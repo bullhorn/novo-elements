@@ -1,4 +1,3 @@
-import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 import { AbstractConditionFieldDef } from './abstract-condition.definition';
@@ -57,7 +56,6 @@ import { AbstractConditionFieldDef } from './abstract-condition.definition';
   changeDetection: ChangeDetectionStrategy.Default,
 })
 export class NovoDefaultStringConditionDef extends AbstractConditionFieldDef {
-  separatorKeysCodes: number[] = [ENTER, COMMA];
   defaultOperator = 'includeAny';
 
   getValue(formGroup: AbstractControl): any[] {
