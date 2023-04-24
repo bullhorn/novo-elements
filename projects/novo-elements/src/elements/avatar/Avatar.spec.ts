@@ -1,14 +1,11 @@
 // NG2
 import { TestBed } from '@angular/core/testing';
-import { setupTestSuite } from 'novo-elements/utils';
 // APP
 import { NovoAvatarElement } from './Avatar';
 
 describe('Elements: NovoAvatarElement', () => {
   let fixture;
   let component;
-
-  setupTestSuite();
 
   beforeAll(() => {
     TestBed.configureTestingModule({
