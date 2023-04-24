@@ -79,6 +79,7 @@ export class NovoDefaultAddressConditionDef extends AbstractConditionFieldDef {
       formGroup.get('value').setValue([...current, valueToAdd]);
     }
     this.addressInputElement.nativeElement.value = '';
+    this.addressInputElement.nativeElement.focus();
   }
 
   remove(valueToRemove: any, formGroup: AbstractControl): void {
