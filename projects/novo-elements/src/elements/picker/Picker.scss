@@ -196,6 +196,7 @@ entity-picker-result.active {
   width: 100%;
   .novo-list {
     background: $white;
+    min-width: 30rem;
     .novo-item-content {
       margin-top: $spacing-sm;
       margin-left: 1.8rem;
