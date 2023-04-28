@@ -16,6 +16,8 @@ import { NovoFormModule } from '../form';
 import { NovoIconModule } from '../icon';
 import { NovoLoadingModule } from '../loading';
 import { NovoNonIdealStateModule } from '../non-ideal-state';
+import { NovoOverlayModule } from '../common/overlay/Overlay.module';
+import { GooglePlacesModule } from '../places';
 import { NovoRadioModule } from '../radio'
 import { NovoSearchBoxModule } from '../search';
 import { NovoSelectModule } from '../select';
@@ -42,6 +44,7 @@ import { NovoConditionFieldDef, NovoConditionInputDef, NovoConditionOperatorsDef
     ReactiveFormsModule,
     DragDropModule,
     CdkTableModule,
+    GooglePlacesModule,
     NovoButtonModule,
     NovoCommonModule,
     NovoFormModule,
@@ -56,6 +59,7 @@ import { NovoConditionFieldDef, NovoConditionInputDef, NovoConditionOperatorsDef
     NovoDatePickerModule,
     NovoDateTimePickerModule,
     NovoIconModule,
+    NovoOverlayModule,
     NovoRadioModule,
     NovoSearchBoxModule,
     NovoSwitchModule,
