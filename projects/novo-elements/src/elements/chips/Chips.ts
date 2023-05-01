@@ -177,12 +177,9 @@ export class NovoChipsElement implements OnInit, ControlValueAccessor {
           }
           this._finalizeItemValue();
         });
-      } else {
-        this._finalizeItemValue();
       }
-    } else {
-      this._finalizeItemValue();
     }
+    this._finalizeItemValue();
   }
 
   getLabelFromOptions(value) {
