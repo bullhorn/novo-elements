@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ViewChild } from '@angular/core';
 import * as dateFns from 'date-fns';
 import {
   IDataTableColumn,
@@ -21,9 +21,13 @@ import { ConfigureColumnsModal, MockData } from '../extras';
   styleUrls: ['data-table-rows-example.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DataTableRowsExample {
+export class DataTableRowsExample implements AfterViewInit {
   @ViewChild('basic')
   table: NovoDataTable<MockData>;
+
+  ngAfterViewInit() {
+    this.table.cellHeaders.get(2).setWidth(120);
+  }
 
   // Table configuration
   public dataSetOptions: any[] = [

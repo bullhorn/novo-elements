@@ -76,6 +76,9 @@ novo-radio {
   }
   > label {
     cursor: pointer;
+    &.disabled {
+      cursor: not-allowed;
+    }
     .novo-radio-button-label {
       @include novo-body-text();
       display: inline;
@@ -94,10 +97,10 @@ novo-radio {
     }
     &.disabled {
       i {
-        opacity: 0.7;
+        opacity: 0.4;
       }
       button[theme].has-icon {
-        opacity: 0.7;
+        opacity: 0.4;
       }
     }
   }
