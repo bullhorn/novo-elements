@@ -118,6 +118,11 @@ export class JustCriteriaExample implements OnInit {
     const prepopulatedData = [
       {
         scope: 'Candidate',
+        field: 'address',
+        operator: 'includeAny',
+      },
+      {
+        scope: 'Candidate',
         field: 'id',
         operator: 'equalTo',
         value: 123,
@@ -131,11 +136,8 @@ export class JustCriteriaExample implements OnInit {
       {
         scope: 'Candidate',
         field: 'customDate1',
-        operator: 'between',
-        value: {
-          startDate: '1922-01-01',
-          endDate: '1922-01-17',
-        }
+        operator: 'within',
+        value: '-30',
       },
       // where=category IN (1,2,3)
       // where=category.id:[1 2 3]
