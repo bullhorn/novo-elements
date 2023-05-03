@@ -11,7 +11,7 @@ import { Subject } from 'rxjs';
 })
 export class SearchUsageExample {
   public test: string = 'TEST';
-  public geo: string = '';
+  public geo: any = '';
   public entity: string = '';
   public searchResults: Subject<any[]> = new Subject();
   public searchData: any[] = [

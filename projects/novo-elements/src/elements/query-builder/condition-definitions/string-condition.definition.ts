@@ -1,4 +1,3 @@
-import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 import { AbstractConditionFieldDef } from './abstract-condition.definition';
@@ -51,13 +50,12 @@ import { AbstractConditionFieldDef } from './abstract-condition.definition';
   // Change detection is intentionally not set to OnPush. This component's template will be provided
   // to the table to be inserted into its view. This is problematic when change detection runs since
   // the bindings in this template will be evaluated _after_ the table's view is evaluated, which
-  // mean's the template in the table's view will not have the updated value (and in fact will cause
+  // means the template in the table's view will not have the updated value (and in fact will cause
   // an ExpressionChangedAfterItHasBeenCheckedError).
   // tslint:disable-next-line:validate-decorators
   changeDetection: ChangeDetectionStrategy.Default,
 })
 export class NovoDefaultStringConditionDef extends AbstractConditionFieldDef {
-  separatorKeysCodes: number[] = [ENTER, COMMA];
   defaultOperator = 'includeAny';
 
   getValue(formGroup: AbstractControl): any[] {
