@@ -3,7 +3,7 @@ import { AbstractControl } from '@angular/forms';
 import { AbstractConditionFieldDef } from './abstract-condition.definition';
 import { NovoOverlayTemplateComponent } from '../../common/overlay/Overlay';
 import { NovoPickerToggleElement } from './../../field/toggle/picker-toggle.component';
-import { NovoLabelService } from '../../../services';
+import { NovoLabelService } from 'novo-elements/services';
 
 /**
  * Handle selection of field values when a list of options is provided.
