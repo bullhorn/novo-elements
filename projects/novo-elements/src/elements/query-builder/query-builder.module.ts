@@ -3,6 +3,7 @@ import { CdkTableModule } from '@angular/cdk/table';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NovoAutoCompleteModule } from 'novo-elements/elements/autocomplete';
 import { NovoButtonModule } from 'novo-elements/elements/button';
 import { NovoCardModule } from 'novo-elements/elements/card';
 import { NovoChipsModule } from 'novo-elements/elements/chips';
@@ -44,6 +45,7 @@ import { NovoConditionFieldDef, NovoConditionInputDef, NovoConditionOperatorsDef
     DragDropModule,
     CdkTableModule,
     GooglePlacesModule,
+    NovoAutoCompleteModule,
     NovoButtonModule,
     NovoCommonModule,
     NovoFormModule,

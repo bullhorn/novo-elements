@@ -2,10 +2,10 @@
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-// APP
 import { NovoAceEditorModule } from 'novo-elements/elements/ace-editor';
 import { NovoAgendaModule } from 'novo-elements/elements/agenda';
 import { NovoAsideModule } from 'novo-elements/elements/aside';
+import { NovoAutoCompleteModule } from 'novo-elements/elements/autocomplete';
 import { NovoAvatarModule } from 'novo-elements/elements/avatar';
 import { NovoBreadcrumbModule } from 'novo-elements/elements/breadcrumbs';
 import { NovoButtonModule } from 'novo-elements/elements/button';
@@ -76,6 +76,7 @@ import {
   imports: [ReactiveFormsModule],
   exports: [
     NovoAsideModule,
+    NovoAutoCompleteModule,
     NovoAvatarModule,
     NovoPipesModule,
     NovoButtonModule,

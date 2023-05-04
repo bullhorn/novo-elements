@@ -35,6 +35,7 @@ import { AbstractConditionFieldDef } from './abstract-condition.definition';
               (novoChipInputTokenEnd)="add($event, formGroup)"
             />
           </novo-chip-list>
+          <novo-autocomplete></novo-autocomplete>
         </novo-field>
         <novo-field *novoSwitchCases="['isEmpty']">
           <novo-radio-group formControlName="value">
