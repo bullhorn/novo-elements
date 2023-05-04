@@ -1,8 +1,8 @@
 // NG2
 import { async, TestBed } from '@angular/core/testing';
 import { NovoLabelService } from 'novo-elements/services';
-import { NovoItemContentElement, NovoItemEndElement, NovoListElement, NovoListItemElement } from '../list/List';
-import { NovoNavContentElement, NovoNavElement, NovoNavOutletElement, NovoTabElement } from '../tabs/Tabs';
+import { NovoItemContentElement, NovoItemEndElement, NovoListElement, NovoListItemElement } from 'novo-elements/elements/list';
+import { NovoNavContentElement, NovoNavElement, NovoNavOutletElement, NovoTabElement } from 'novo-elements/elements/tabs';
 // App
 import { NovoCategoryDropdownElement } from './CategoryDropdown';
 

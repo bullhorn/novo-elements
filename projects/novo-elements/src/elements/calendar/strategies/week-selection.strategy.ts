@@ -1,5 +1,5 @@
 import { endOfWeek, isWithinRange, startOfWeek } from 'date-fns';
-import type { DateLike, NovoDateSelectionStrategy } from '../../date-picker/date-picker.types';
+import type { DateLike, NovoDateSelectionStrategy } from 'novo-elements/utils';
 
 export class WeekSelectionStrategy implements NovoDateSelectionStrategy<DateLike[]> {
   constructor(private weekStartsOn: number = 0) {}

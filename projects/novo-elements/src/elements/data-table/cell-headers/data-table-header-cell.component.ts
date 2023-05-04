@@ -18,7 +18,7 @@ import {
 import { fromEvent, Subscription } from 'rxjs';
 import { NovoLabelService } from 'novo-elements/services';
 import { Helpers, Key } from 'novo-elements/utils';
-import { NovoDropdownElement } from '../../dropdown/Dropdown';
+import { NovoDropdownElement } from 'novo-elements/elements/dropdown';
 import {
   IDataTableChangeEvent,
   IDataTableColumn,

@@ -26,7 +26,7 @@ import {
 import type { FormField, NovoFieldset } from '../FormInterfaces';
 import { NovoFormControl } from '../NovoFormControl';
 import { NovoFormGroup } from '../NovoFormGroup';
-import { EntityPickerResult, EntityPickerResults } from '../../picker/extras/entity-picker-results/EntityPickerResults';
+import { EntityPickerResult, EntityPickerResults } from 'novo-elements/elements/picker';
 import { NovoLabelService, OptionsService } from 'novo-elements/services';
 import { Helpers } from 'novo-elements/utils';
 

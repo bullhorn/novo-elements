@@ -18,7 +18,7 @@ import * as dateFns from 'date-fns';
 import { Subscription } from 'rxjs';
 import { NovoLabelService } from 'novo-elements/services';
 import { Helpers } from 'novo-elements/utils';
-import { NovoDropdownElement } from '../dropdown/Dropdown';
+import { NovoDropdownElement } from 'novo-elements/elements/dropdown';
 import { NovoSimpleSortFilter, NovoSimpleTableChange, SimpleTableColumnFilterConfig, SimpleTableColumnFilterOption } from './interfaces';
 import { NovoSortFilter } from './sort';
 import { NovoActivityTableState } from './state';

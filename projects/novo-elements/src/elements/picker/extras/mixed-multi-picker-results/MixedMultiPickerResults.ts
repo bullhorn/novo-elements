@@ -3,7 +3,7 @@ import { fromEvent, Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { NovoLabelService } from 'novo-elements/services';
 import { Helpers } from 'novo-elements/utils';
-import { NovoListElement } from '../../../list/List';
+import { NovoListElement } from 'novo-elements/elements/list';
 import { BasePickerResults } from '../base-picker-results/BasePickerResults';
 
 export interface IMixedMultiPickerOption {

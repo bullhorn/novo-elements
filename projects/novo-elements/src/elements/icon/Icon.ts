@@ -1,6 +1,6 @@
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, HostBinding, Input } from '@angular/core';
 import { BooleanInput } from 'novo-elements/utils';
-import { TypographySize } from '../common/typography';
+import { TypographySize } from 'novo-elements/elements/common';
 
 @Component({
   selector: 'novo-icon',

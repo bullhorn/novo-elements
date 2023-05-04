@@ -8,10 +8,13 @@
     "inlineSourceMap": true,
     "inlineSources": true,
     "paths": {
+      // "novo-elements/ace-editor": ["dist/novo-elements/src/elements/ace-editor"],
+      // "novo-elements/button": ["dist/novo-elements/src/elements/button"],
       "novo-elements": ["./dist/novo-elements"],
       "novo-examples": ["./dist/novo-examples"],
-      "novo-elements/*": ["./dist/novo-elements/*"],
+      "novo-elements/*": ["./dist/novo-elements/src/elements/*"],
       "novo-examples/*": ["./dist/novo-examples/*"],
+      "ace-editor": ["elements/ace-editor"],
     }
   },
   "angularCompilerOptions": {

@@ -20,7 +20,7 @@ import {
 import { NgControl } from '@angular/forms';
 import { fromEvent, Subject, Subscription } from 'rxjs';
 import { startWith, takeUntil } from 'rxjs/operators';
-import { NovoLabel } from '../common';
+import { NovoLabel } from 'novo-elements/elements/common';
 import { NovoErrorElement } from './error/error';
 import { NovoFieldControl } from './field-control';
 import { NovoHintElement } from './hint/hint';

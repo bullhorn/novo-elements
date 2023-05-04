@@ -49,9 +49,9 @@ import {
   NOVO_OPTION_PARENT_COMPONENT,
   _countGroupLabelsBeforeOption,
   _getOptionScrollPosition,
-} from '../common';
-import { NovoOverlayTemplateComponent } from '../common/overlay/Overlay';
-import { NovoFieldControl } from '../field';
+} from 'novo-elements/elements/common';
+import { NovoOverlayTemplateComponent } from 'novo-elements/elements/common';
+import { NovoFieldControl } from 'novo-elements/elements/field';
 
 // Value accessor for the component (supports ngModel)
 // const SELECT_VALUE_ACCESSOR = {

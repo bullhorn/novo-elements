@@ -18,7 +18,7 @@ import {
   ViewChildren,
 } from '@angular/core';
 import { takeUntil } from 'rxjs/operators';
-import { NovoIconComponent } from '../icon/Icon';
+import { NovoIconComponent } from 'novo-elements/elements/icon';
 import { NovoStepHeader } from './step-header.component';
 import { NovoStepLabel } from './step-label.component';
 import { novoStepperAnimations } from './stepper.animations';

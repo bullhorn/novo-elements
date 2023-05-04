@@ -5,7 +5,7 @@
   "projects": {
     "novo-elements": {
       "root": "projects/novo-elements",
-      "sourceRoot": "projects/novo-elements/src",
+      "sourceRoot": "projects/novo-elements",
       "projectType": "library",
       "prefix": "novo",
       "architect": {

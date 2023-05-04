@@ -2,8 +2,8 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 // APP
-import { NovoCommonModule } from '../common/common.module';
-import { NovoIconModule } from '../icon/Icon.module';
+import { NovoCommonModule } from 'novo-elements/elements/common';
+import { NovoIconModule } from 'novo-elements/elements/icon';
 import { NonIdealStateElement } from './NonIdealState';
 
 @NgModule({

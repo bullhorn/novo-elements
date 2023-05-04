@@ -1,5 +1,3 @@
-// NG2
-// Vendor
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import {
   ChangeDetectorRef,
@@ -19,8 +17,8 @@ import { fromEvent } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { ComponentUtils } from 'novo-elements/services';
 import { Helpers, Key, notify } from 'novo-elements/utils';
-import { NovoOverlayTemplateComponent } from '../common/overlay/Overlay';
-import { NovoControlConfig } from '../form/FormControls';
+import { NovoOverlayTemplateComponent } from 'novo-elements/elements/common';
+// import { NovoControlConfig } from '../form/FormControls';
 import { PickerResults } from './extras/picker-results/PickerResults';
 
 // Value accessor for the component (supports ngModel)
@@ -78,7 +76,7 @@ export class NovoPickerElement implements OnInit {
   results: ViewContainerRef;
 
   @Input()
-  config: NovoControlConfig['config'];
+  config: any;
   @Input()
   placeholder: string;
   @Input()

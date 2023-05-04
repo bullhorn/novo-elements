@@ -1,6 +1,6 @@
 import { FactoryProvider, Injectable, InjectionToken, Optional, SkipSelf } from '@angular/core';
 import { isSameDay } from 'date-fns';
-import type { DateLike, NovoDateSelectionStrategy } from '../../date-picker/date-picker.types';
+import type { DateLike, NovoDateSelectionStrategy } from 'novo-elements/utils';
 
 /** Injection token used to customize the date range selection behavior. */
 export const NOVO_DATE_SELECTION_STRATEGY = new InjectionToken<NovoDateSelectionStrategy>('NOVO_DATE_SELECTION_STRATEGY');

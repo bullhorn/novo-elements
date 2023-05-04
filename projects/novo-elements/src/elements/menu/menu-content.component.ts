@@ -3,7 +3,7 @@ import { OverlayRef } from '@angular/cdk/overlay';
 import { AfterViewInit, Component, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Key } from 'novo-elements/utils';
-import { NovoOption } from '../common';
+import { NovoOption } from 'novo-elements/elements/common';
 import { MenuItemDirective } from './menu-item.directive';
 // import type { MenuComponent } from './menu.component';
 import { CloseLeafMenuEvent, IMenuClickEvent } from './menu.service';

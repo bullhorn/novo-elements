@@ -8,9 +8,9 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ReplaySubject, Subject } from 'rxjs';
 import { delay, take, takeUntil } from 'rxjs/operators';
 import { NovoLabelService } from 'novo-elements/services';
-import { FormUtils } from '../form/utils';
-import { NovoFieldModule } from '../field';
-import { NovoSelectElement, NovoSelectModule } from '../select';
+import { FormUtils } from 'novo-elements/elements/form';
+import { NovoFieldModule } from 'novo-elements/elements/field';
+import { NovoSelectElement, NovoSelectModule } from 'novo-elements/elements/select';
 import { NovoSelectSearchComponent } from './select-search.component';
 import { NovoSelectSearchModule } from './select-search.module';
 

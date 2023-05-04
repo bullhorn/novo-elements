@@ -25,8 +25,8 @@ import { ControlValueAccessor, FormGroupDirective, NgControl, NgForm } from '@an
 import { merge, Observable, Subject, Subscription } from 'rxjs';
 import { startWith, takeUntil } from 'rxjs/operators';
 import { Key } from 'novo-elements/utils';
-import { CanUpdateErrorState, CanUpdateErrorStateCtor, ErrorStateMatcher, mixinErrorState, NOVO_OPTION_PARENT_COMPONENT } from '../common';
-import { NovoFieldControl } from '../field';
+import { CanUpdateErrorState, CanUpdateErrorStateCtor, ErrorStateMatcher, mixinErrorState, NOVO_OPTION_PARENT_COMPONENT } from 'novo-elements/elements/common';
+import { NovoFieldControl } from 'novo-elements/elements/field';
 import { NovoChipElement, NovoChipEvent, NovoChipSelectionChange } from './Chip';
 import { NovoChipTextControl } from './ChipTextControl';
 

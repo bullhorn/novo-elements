@@ -1,9 +1,9 @@
 // NG2
 import { async, TestBed } from '@angular/core/testing';
-import { NovoLabelService } from 'novo-elements/services';
-import { NovoListModule } from '../../../list/List.module';
-import { NovoLoadingElement } from '../../../loading/Loading';
 // App
+import { NovoListModule } from 'novo-elements/elements/list/List';
+import { NovoLoadingElement } from 'novo-elements/elements/loading';
+import { NovoLabelService } from 'novo-elements/services';
 import { PickerResults } from './PickerResults';
 
 describe('Elements: PickerResults', () => {

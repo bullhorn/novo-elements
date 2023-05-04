@@ -2,11 +2,11 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { NovoButtonModule } from '../../button/Button.module';
-import { NovoCommonModule } from '../../common/common.module';
-import { NovoDropdownModule } from '../../dropdown/Dropdown.module';
 // APP
-import { NovoSelectModule } from '../../select/Select.module';
+import { NovoButtonModule } from 'novo-elements/elements/button';
+import { NovoCommonModule } from 'novo-elements/elements/common';
+import { NovoDropdownModule } from 'novo-elements/elements/dropdown';
+import { NovoSelectModule } from 'novo-elements/elements/select';
 import { DateCell } from './date-cell/DateCell';
 import { NovoDropdownCell } from './dropdown-cell/DropdownCell';
 import { NovoTableKeepFilterFocus } from './keep-filter-focus/KeepFilterFocus';

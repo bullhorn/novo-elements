@@ -11,7 +11,7 @@ import {
   Renderer2,
 } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { NovoToastService } from '../../toast/ToastService';
+import { NovoToastService } from 'novo-elements/elements/toast';
 import { NovoDataTableRef, NOVO_DATA_TABLE_REF } from '../data-table.token';
 
 @Component({

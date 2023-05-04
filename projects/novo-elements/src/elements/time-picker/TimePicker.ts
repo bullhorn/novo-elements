@@ -13,8 +13,8 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { format, isValid, parse } from 'date-fns';
-import { DateFormatService, NovoLabelService } from 'novo-elements/services';
 // APP
+import { DateFormatService, NovoLabelService } from 'novo-elements/services';
 import { Helpers } from 'novo-elements/utils';
 
 // Value accessor for the component (supports ngModel)

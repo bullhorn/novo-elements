@@ -15,7 +15,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { NovoLabelService } from 'novo-elements/services';
 import { Helpers, Key } from 'novo-elements/utils';
 // App
-import { NovoOverlayTemplateComponent } from '../common/overlay/Overlay';
+import { NovoOverlayTemplateComponent } from 'novo-elements/elements/common';
 
 // Value accessor for the component (supports ngModel)
 const COLOR_VALUE_ACCESSOR = {

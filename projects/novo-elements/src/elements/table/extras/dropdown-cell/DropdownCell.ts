@@ -1,7 +1,7 @@
 // NG2
 import { Component, Input, OnInit } from '@angular/core';
 // APP
-import { BaseRenderer } from '../base-renderer/BaseRenderer';
+import { BaseRenderer } from '../base-renderer';
 
 export interface INovoDropdownCellConfig {
   category?: string;

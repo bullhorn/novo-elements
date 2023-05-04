@@ -2,10 +2,10 @@
 import { ChangeDetectorRef, Component, ElementRef } from '@angular/core';
 // Vendor
 import { from, Observable } from 'rxjs';
-import { NovoLabelService } from 'novo-elements/services';
 // APP
+import { NovoLabelService } from 'novo-elements/services';
 import { Helpers } from 'novo-elements/utils';
-import { PickerResults } from '../../../picker/extras/picker-results/PickerResults';
+import { PickerResults } from 'novo-elements/elements/picker';
 
 @Component({
   selector: 'quick-note-results',

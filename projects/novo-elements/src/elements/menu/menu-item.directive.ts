@@ -1,5 +1,5 @@
 import { ContentChild, Directive, ElementRef, Input, TemplateRef } from '@angular/core';
-import { NovoOption } from '../common';
+import { NovoOption } from 'novo-elements/elements/common';
 
 /**
  * This is a structural directive now.  Should only be used on `novo-options`

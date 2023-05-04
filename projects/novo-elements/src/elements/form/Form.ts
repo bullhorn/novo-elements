@@ -3,7 +3,7 @@ import { AfterContentInit, Component, ContentChildren, Input, OnInit, QueryList 
 // App
 import { NovoTemplateService } from 'novo-elements/services';
 import { Helpers } from 'novo-elements/utils';
-import { NovoTemplate } from '../common/novo-template/novo-template.directive';
+import { NovoTemplate } from 'novo-elements/elements/common';
 import { NovoFormGroup } from './NovoFormGroup';
 
 @Component({

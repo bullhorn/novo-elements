@@ -2,9 +2,9 @@
 import { async, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { NovoLabelService } from 'novo-elements/services';
-import { NovoPickerModule } from '../../../picker/Picker.module';
-import { NovoSelectModule } from '../../../select/Select.module';
-import { NovoTooltipModule } from './../../../tooltip/Tooltip.module';
+import { NovoPickerModule } from 'novo-elements/elements/picker';
+import { NovoSelectModule } from 'novo-elements/elements/select';
+import { NovoTooltipModule } from 'novo-elements/elements/tooltip';
 // App
 import { NovoAddressElement } from './Address';
 

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { differenceInCalendarDays, isWithinRange } from 'date-fns';
-import type { DateLike, NovoDateSelectionStrategy } from '../../date-picker/date-picker.types';
+import type { DateLike, NovoDateSelectionStrategy } from 'novo-elements/utils';
 
 @Injectable()
 export class RangeSelectionStrategy implements NovoDateSelectionStrategy<DateLike[]> {

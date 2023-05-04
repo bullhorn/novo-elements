@@ -6,9 +6,8 @@ import * as dateFns from 'date-fns';
 import { debounceTime } from 'rxjs/operators';
 // APP
 import { CollectionEvent, NovoLabelService, PagedArrayCollection } from 'novo-elements/services';
-import { FormUtils } from '../form/utils';
 import { Helpers, notify } from 'novo-elements/utils';
-import { ControlFactory, ReadOnlyControl } from './../form/FormControls';
+import { ControlFactory, FormUtils, ReadOnlyControl } from 'novo-elements/elements/form';
 
 export interface NovoTableConfig {
   // Paging config
@@ -900,7 +899,7 @@ export class NovoTableElement implements DoCheck {
   }
 
   getDefaultOptions(column) {
-    // TODO - needs to come from label service - https://github.com/bullhorn/novo-elements/issues/116
+    // TODO - needs to come from label service - https://github.com/bullhorn/novo-elements/elements/issues/116
     const opts: any[] = [
       { label: this.labels.past1Day, min: -1, max: 0 },
       { label: this.labels.past7Days, min: -7, max: 0 },

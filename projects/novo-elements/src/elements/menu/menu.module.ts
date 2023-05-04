@@ -1,8 +1,8 @@
 import { FullscreenOverlayContainer, OverlayContainer, OverlayModule } from '@angular/cdk/overlay';
 import { CommonModule } from '@angular/common';
 import { ModuleWithProviders, NgModule } from '@angular/core';
-import { NovoCommonModule } from '../common/common.module';
-import { NovoIconModule } from '../icon/Icon.module';
+import { NovoCommonModule } from 'novo-elements/elements/common';
+import { NovoIconModule } from 'novo-elements/elements/icon';
 import { MenuContentComponent } from './menu-content.component';
 import { MenuItemDirective } from './menu-item.directive';
 import { MenuComponent } from './menu.component';

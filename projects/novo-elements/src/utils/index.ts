@@ -2,6 +2,7 @@ export * from './app-bridge';
 export * from './calendar-utils';
 export * from './color-utils';
 export * from './countries';
+export * from './date';
 export * from './decorators';
 export * from './deferred';
 export * from './Helpers';

@@ -17,7 +17,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 // APP
 import { NovoLabelService } from 'novo-elements/services';
 import { Key } from 'novo-elements/utils';
-import { NovoOverlayTemplateComponent } from '../common/overlay/Overlay';
+import { NovoOverlayTemplateComponent } from 'novo-elements/elements/common';
 
 // Value accessor for the component (supports ngModel)
 const SEARCH_VALUE_ACCESSOR = {

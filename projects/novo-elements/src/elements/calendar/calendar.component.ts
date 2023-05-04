@@ -3,8 +3,8 @@ import { ChangeDetectorRef, Component, ElementRef, EventEmitter, HostBinding, In
 import { DomSanitizer } from '@angular/platform-browser';
 // Vendor
 import { addMonths, isDate, isSameDay, setMonth, setYear, startOfDay, startOfMonth, subMonths } from 'date-fns';
-import { NovoLabelService } from 'novo-elements/services';
 // APP
+import { NovoLabelService } from 'novo-elements/services';
 import { Helpers } from 'novo-elements/utils';
 import type {
   DatePickerSelectModes,
@@ -13,7 +13,7 @@ import type {
   NovoMonthSelectEvent,
   NovoYearSelectEvent,
   OverlayDate,
-} from '../date-picker/date-picker.types';
+} from 'novo-elements/utils';
 import { DefaultDateSelectionStrategy, MultiDateSelectionStrategy, RangeSelectionStrategy, WeekSelectionStrategy } from './strategies';
 
 @Component({

@@ -2,12 +2,12 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Key } from 'novo-elements/utils';
-import { ErrorStateMatcher } from '../common';
-import { NovoFieldModule } from '../field';
-import { NovoIconModule } from '../icon';
 // APP
-import { NovoPickerModule } from './../picker/Picker.module';
+import { Key } from 'novo-elements/utils';
+import { ErrorStateMatcher } from 'novo-elements/elements/common';
+import { NovoFieldModule } from 'novo-elements/elements/field';
+import { NovoIconModule } from 'novo-elements/elements/icon';
+import { NovoPickerModule } from 'novo-elements/elements/picker';
 import { NovoChipAvatar, NovoChipElement, NovoChipRemove } from './Chip';
 import { NovoChipsDefaultOptions, NOVO_CHIPS_DEFAULT_OPTIONS } from './ChipDefaults';
 import { NovoChipInput } from './ChipInput';

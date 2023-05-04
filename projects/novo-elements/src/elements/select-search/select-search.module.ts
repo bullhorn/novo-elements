@@ -1,13 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { NovoButtonModule } from '../button';
-import { NovoCheckboxModule } from '../checkbox';
-import { NovoCommonModule } from '../common';
-import { NovoFieldModule } from '../field/field.module';
-import { NovoIconModule } from '../icon';
-import { NovoLoadingModule } from '../loading';
-import { NovoTooltipModule } from '../tooltip';
+import { NovoButtonModule } from 'novo-elements/elements/button';
+import { NovoCheckboxModule } from 'novo-elements/elements/checkbox';
+import { NovoCommonModule } from 'novo-elements/elements/common';
+import { NovoFieldModule } from 'novo-elements/elements/field';
+import { NovoIconModule } from 'novo-elements/elements/icon';
+import { NovoLoadingModule } from 'novo-elements/elements/loading';
+import { NovoTooltipModule } from 'novo-elements/elements/tooltip';
 import { NovoSelectSearchClearDirective } from './select-search-clear.directive';
 import { NovoSelectSearchComponent } from './select-search.component';
 

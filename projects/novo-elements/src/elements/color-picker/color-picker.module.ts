@@ -4,9 +4,9 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 // APP
 import { NovoPipesModule } from 'novo-elements/pipes';
-import { NovoOverlayModule } from '../common/overlay/Overlay.module';
-import { NovoFieldModule } from '../field/field.module';
-import { NovoIconModule } from '../icon/Icon.module';
+import { NovoOverlayModule } from 'novo-elements/elements/common';
+import { NovoFieldModule } from 'novo-elements/elements/field';
+import { NovoIconModule } from 'novo-elements/elements/icon';
 import { NovoColorInputElement } from './color-input.component';
 import { NovoColorPickerComponent } from './color-picker.component';
 import { NovoColorSwatchComponent } from './color-swatch.component';

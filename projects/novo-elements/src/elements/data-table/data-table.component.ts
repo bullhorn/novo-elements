@@ -20,7 +20,7 @@ import {
 import { Subject, Subscription } from 'rxjs';
 import { NovoLabelService } from 'novo-elements/services';
 import { notify } from 'novo-elements/utils';
-import { NovoTemplate } from '../common/novo-template/novo-template.directive';
+import { NovoTemplate } from 'novo-elements/elements/common';
 import { NovoDataTableCellHeader } from './cell-headers/data-table-header-cell.component';
 import { DataTableSource } from './data-table.source';
 import { NOVO_DATA_TABLE_REF } from './data-table.token';

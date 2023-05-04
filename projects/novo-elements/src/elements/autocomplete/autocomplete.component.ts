@@ -25,7 +25,7 @@ import {
 import { fromEvent, interval, merge, of, Subscription } from 'rxjs';
 import { debounce, take } from 'rxjs/operators';
 import { BooleanInput, Key } from 'novo-elements/utils';
-import type { NovoChipList } from '../../chips';
+import type { NovoChipList } from 'novo-elements/elements/chips';
 import {
   CanDisable,
   CanDisableCtor,
@@ -35,11 +35,10 @@ import {
   NovoOptgroup,
   NovoOption,
   NovoOptionSelectionChange,
+  NovoOverlayTemplateComponent,
   NOVO_OPTION_PARENT_COMPONENT,
-} from '../../common';
-import { NovoOverlayTemplateComponent } from '../../common/overlay';
-import { NovoFieldElement, NOVO_FORM_FIELD } from '../field';
-import { NovoFieldControl } from '../field-control';
+} from 'novo-elements/elements/common';
+import { NovoFieldControl, NovoFieldElement, NOVO_FORM_FIELD } from 'novo-elements/elements/field';
 
 /** Event object that is emitted when an autocomplete option is selected. */
 export class NovoOptionSelectedEvent {

@@ -6,8 +6,8 @@ import { FormsModule } from '@angular/forms';
 import { TextMaskModule } from 'angular2-text-mask';
 import { NovoPipesModule } from 'novo-elements/pipes';
 // APP
-import { NovoButtonModule } from '../button';
-import { NovoIconModule } from '../icon/Icon.module';
+import { NovoButtonModule } from 'novo-elements/elements/button';
+import { NovoIconModule } from 'novo-elements/elements/icon';
 import { NovoCalendarElement } from './calendar.component';
 import { NovoMonthSelectElement } from './month-select/month-select.component';
 import { NovoMonthViewElement } from './month-view/month-view.component';

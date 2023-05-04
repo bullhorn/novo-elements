@@ -2,13 +2,13 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { IMaskDirectiveModule } from 'angular-imask';
 // Vendor
+import { IMaskDirectiveModule } from 'angular-imask';
 import { TextMaskModule } from 'angular2-text-mask';
 // APP
-import { NovoOverlayModule } from '../common/overlay/Overlay.module';
-import { NovoDatePickerModule } from '../date-picker/DatePicker.module';
-import { NovoTimePickerModule } from '../time-picker/TimePicker.module';
+import { NovoOverlayModule } from 'novo-elements/elements/common';
+import { NovoDatePickerModule } from 'novo-elements/elements/date-picker';
+import { NovoTimePickerModule } from 'novo-elements/elements/time-picker';
 import { NovoDateTimePickerElement } from './DateTimePicker';
 import { NovoDateTimePickerInputElement } from './DateTimePickerInput';
 

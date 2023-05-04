@@ -1,8 +1,8 @@
 // NG2
 import { Component, ComponentRef, ElementRef, Input, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
-import { ComponentUtils } from 'novo-elements/services';
 // APP
-import { BaseRenderer } from './../base-renderer/BaseRenderer';
+import { ComponentUtils } from 'novo-elements/services';
+import { BaseRenderer } from './../base-renderer';
 
 @Component({
   selector: 'novo-row-details',

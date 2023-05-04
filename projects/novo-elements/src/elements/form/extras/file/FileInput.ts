@@ -17,10 +17,10 @@ import {
   ViewContainerRef,
 } from '@angular/core';
 import { ControlValueAccessor, FormGroupDirective, NgControl, NgForm } from '@angular/forms';
-import { NovoDragulaService } from '../../../../elements/dragula/DragulaService';
+import { NovoDragulaService } from 'novo-elements/elements/dragula';
 import { NovoLabelService } from 'novo-elements/services';
-import { CanUpdateErrorStateCtor, ErrorStateMatcher, mixinErrorState } from '../../../common';
-import { NovoFieldControl } from '../../../field';
+import { CanUpdateErrorStateCtor, ErrorStateMatcher, mixinErrorState } from 'novo-elements/elements/common';
+import { NovoFieldControl } from 'novo-elements/elements/field';
 import { NovoFile } from './extras/file/File';
 
 // Value accessor for the component (supports ngModel)

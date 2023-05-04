@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, ElementRef, QueryList, ViewChildren, ViewEncapsulation } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 import { AbstractConditionFieldDef } from './abstract-condition.definition';
-import { NovoOverlayTemplateComponent } from '../../common/overlay/Overlay';
-import { NovoPickerToggleElement } from './../../field/toggle/picker-toggle.component';
+import { NovoOverlayTemplateComponent } from 'novo-elements/elements/common';
+import { NovoPickerToggleElement } from 'novo-elements/elements/field';
 import { NovoLabelService } from 'novo-elements/services';
 
 /**

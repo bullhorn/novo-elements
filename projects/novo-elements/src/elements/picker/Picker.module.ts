@@ -4,11 +4,10 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 // APP
 import { NovoPipesModule } from 'novo-elements/pipes';
-import { NovoCommonModule } from '../common';
-import { NovoOverlayModule } from '../common/overlay/Overlay.module';
-import { NovoListModule } from '../list/List.module';
-import { NovoLoadingModule } from '../loading/Loading.module';
-import { NovoSwitchModule } from '../switch/Switch.module';
+import { NovoCommonModule, NovoOverlayModule } from 'novo-elements/elements/common';
+import { NovoListModule } from 'novo-elements/elements/list';
+import { NovoLoadingModule } from 'novo-elements/elements/loading';
+import { NovoSwitchModule } from 'novo-elements/elements/switch';
 import { ChecklistPickerResults } from './extras/checklist-picker-results/ChecklistPickerResults';
 import { DistributionListPickerResults } from './extras/distributionlist-picker-results/DistributionListPickerResults';
 import { EntityPickerResult, EntityPickerResults } from './extras/entity-picker-results/EntityPickerResults';
