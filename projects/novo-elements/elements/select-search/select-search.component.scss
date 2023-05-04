@@ -1,0 +1,89 @@
+// @import "../../styles/variables.scss";
+// @import "../common/typography/text.mixins.scss";
+@import "~novo-design-tokens/scss";
+
+$novo-menu-side-padding: 16px !default;
+$clear-button-width: 20px;
+$multiple-check-width: 33px;
+$novo-option-height: 3.6rem;
+$novo-select-search-clear-x: 4px;
+$novo-select-search-spinner-x: 16px;
+$novo-select-search-toggle-all-checkbox-x: 16px;
+
+:host {
+  display: block;
+  width: 100%;
+}
+
+.novo-select-search-hidden {
+  visibility: hidden;
+}
+.novo-select-search-inner {
+  width: 100%;
+  background-color: var(--background-bright);
+  /* Prevent iOS scroll issue */
+  -webkit-transform: translate3d(0, 0, 0);
+
+  &.novo-select-search-inner-multiple {
+    width: 100%;
+    &.novo-select-search-inner-toggle-all {
+      display: flex;
+      align-items: center;
+    }
+  }
+}
+
+.novo-select-search-icon {
+  padding: var(--spacing-md);
+}
+
+::ng-deep .novo-select-search-panel {
+  /* allow absolute positioning relative to outer options container */
+  transform: none !important;
+  overflow-x: hidden;
+}
+
+.novo-select-search-no-entries-found {
+  padding: $novo-menu-side-padding;
+}
+
+/** override styling when inside a novo-option */
+:host.novo-select-search-inside-novo-option {
+  .novo-select-search-input {
+    padding-top: 0px;
+    padding-bottom: 0px;
+    height: $novo-option-height;
+    line-height: $novo-option-height;
+  }
+  .novo-select-search-clear {
+    top: 6px;
+  }
+  .novo-select-search-icon-prefix {
+    left: $clear-button-width - $novo-select-search-clear-x;
+    top: 7px;
+  }
+}
+
+::ng-deep .novo-option.contains-novo-select-search {
+  /* let move novo-select-search at the top of the dropdown. As option is disabled, there will be no-ripple hence safe. */
+  padding: 0 !important; // Option group padding was being applied as well. 
+  border: none;
+
+  .novo-icon {
+    margin-right: 0px;
+    margin-left: 0px;
+  }
+  .novo-option-pseudo-checkbox {
+    display: none;
+  }
+}
+
+.novo-select-search-toggle-all-checkbox {
+  padding-left: $novo-select-search-toggle-all-checkbox-x;
+  padding-bottom: 2px;
+
+  :host-context([dir="rtl"]) & {
+    padding-left: 0px;
+    padding-right: $novo-select-search-toggle-all-checkbox-x;
+  }
+}

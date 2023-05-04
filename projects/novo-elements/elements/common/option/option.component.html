@@ -1,0 +1,14 @@
+<novo-pseudo-checkbox *ngIf="selectable && multiple" class="novo-option-pseudo-checkbox"
+  [state]="selected ? 'checked' : 'unchecked'" [disabled]="disabled"></novo-pseudo-checkbox>
+
+<span class="novo-option-text">
+  <ng-content></ng-content>
+</span>
+
+<novo-pseudo-checkbox *ngIf="selectable && !multiple && selected" class="novo-option-pseudo-checkbox" state="checked"
+  shape="line"
+  [disabled]="disabled"></novo-pseudo-checkbox>
+
+<ng-content select="[novoSuffix]"></ng-content>
+<!-- See a11y notes inside optgroup.ts for context behind this element. -->
+<span class="cdk-visually-hidden" *ngIf="group && group._novoInert">({{ group.label }})</span>

@@ -1,0 +1,16 @@
+:host {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  // gap: 1.2rem;
+  .novo-non-ideal-state-icon {
+    font-size: xx-large;
+  }
+
+  button {
+    display: inline-block;
+  }
+}

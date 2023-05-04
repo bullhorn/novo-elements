@@ -1,0 +1,18 @@
+<novo-icon
+  class="novo-sort-asc-icon"
+  [class.sort-active]="isActive"
+  [class.sort-hidden]="value !== SortDirection.ASC"
+  [@sortAsc]="value"
+  (click)="changeSort(SortDirection.DESC)">arrow-up</novo-icon>
+<novo-icon
+  class="novo-sort-desc-icon"
+  [class.sort-active]="isActive"
+  [class.sort-hidden]="value !== SortDirection.DESC"
+  [@sortDesc]="value"
+  (click)="changeSort(SortDirection.NONE)">arrow-down</novo-icon>
+<novo-icon
+  class="novo-sortable-icon"
+  [class.sort-active]="isActive"
+  [class.sort-hidden]="value !== SortDirection.NONE"
+  [@sortNone]="value"
+  (click)="changeSort(SortDirection.ASC)">sortable</novo-icon>

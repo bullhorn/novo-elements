@@ -1,0 +1,71 @@
+@import "~novo-design-tokens/scss";
+
+:host {
+  position: relative;
+  display: block;
+  width: 100%;
+
+  .condition-field {
+    grid-template-columns: minmax(fit-content, 1fr);
+    width: 100%;
+    width: -webkit-fill-available;
+  }
+
+  .condition-operator {
+    &::ng-deep {
+      .novo-select {
+        min-width: 13rem;
+      }
+    }
+  }
+  .condition-input {
+    &::ng-deep {
+      // Full Width
+      novo-field.novo-field-layout-vertical {
+        grid-template-columns: minmax(fit-content, 1fr);
+        width: -webkit-fill-available;
+        .novo-input-element {
+          width: 100%;
+        }
+      }
+      novo-field {
+        width: fit-content;
+      }
+      .novo-field-infix {
+        white-space: nowrap;
+        overflow: hidden;
+      }
+      novo-chip-list {
+        width: 36rem;
+      }
+      novo-chips {
+        border-bottom: none !important;
+        input {
+          padding-left: 0 !important;
+        }
+      }
+      novo-radio-group {
+        padding: 0 !important;
+      }
+    }
+  }
+
+  .and-or-filter-button {
+    box-sizing: border-box;
+    background: #fff;
+    border: 1px solid #ddd;
+    color: #5691f5;
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    margin: 0.4rem auto;
+    align-items: center;
+    text-align: center;
+    user-select: none;
+    outline: none;
+    white-space: nowrap;
+    text-transform: uppercase;
+    overflow: hidden;
+    transition: box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), background-color 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  }
+}

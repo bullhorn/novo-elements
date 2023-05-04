@@ -124,7 +124,7 @@ md.use(Container, 'dont', {
 });
 
 /** Path to find the elements */
-const elementsPath = path.join('./projects/', 'novo-elements', 'src');
+const elementsPath = path.join('./projects/', 'novo-elements');
 /** Path to find the examples */
 const examplesPath = path.join('./projects/', 'novo-examples', 'src');
 

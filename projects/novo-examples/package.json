@@ -3,7 +3,8 @@
   "version": "7.0.0",
   "peerDependencies": {
     "@angular/common": ">=10",
-    "@angular/core": ">=10"
+    "@angular/core": ">=10",
+    "novo-elements": ">=7"
   },
   "dependencies": {
     "tslib": "^2.0.0"

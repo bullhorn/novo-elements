@@ -1,0 +1,18 @@
+<div class="novo-drawer-backdrop" (click)="_onBackdropClicked()" *ngIf="hasBackdrop"
+  [class.novo-drawer-shown]="_isShowingBackdrop()"></div>
+
+<ng-content select="novo-sidenav"></ng-content>
+
+<div class="novo-layout-content-container"
+  [class.and-has-rail]="_rail"
+  [style.margin-left.px]="_contentMargins.left"
+  [style.margin-right.px]="_contentMargins.right">
+  <ng-content select="novo-rail"></ng-content>
+
+  <ng-content select="novo-layout-content">
+  </ng-content>
+
+  <novo-layout-content *ngIf="!_content" cdkScrollable>
+    <ng-content></ng-content>
+  </novo-layout-content>
+</div>

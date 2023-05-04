@@ -1,0 +1,60 @@
+<novo-field
+  #innerSelectSearch
+  class="novo-select-search-inner"
+  [ngClass]="{'novo-select-search-inner-multiple': novoSelect.multiple, 'novo-select-search-inner-toggle-all': _isToggleAllCheckboxVisible() }">
+
+  <novo-checkbox *ngIf="_isToggleAllCheckboxVisible()"
+    novoPrefix
+    [color]="'primary'"
+    class="novo-select-search-toggle-all-checkbox"
+    [checked]="toggleAllCheckboxChecked"
+    [indeterminate]="toggleAllCheckboxIndeterminate"
+    [tooltip]="toggleAllCheckboxTooltipMessage"
+    tooltipClass="ngx-novo-select-search-toggle-all-tooltip"
+    [tooltipPosition]="toogleAllCheckboxTooltipPosition"
+    (change)="_emitSelectAllBooleanToParent($event.checked)"></novo-checkbox>
+
+  <novo-icon
+    novoPrefix
+    class="novo-select-search-icon">search</novo-icon>
+
+  <input class="novo-select-search-input"
+    #searchSelectInput
+    novoInput
+    [name]="name"
+    autocomplete="off"
+    [type]="type"
+    [formControl]="_formControl"
+    (keydown)="_handleKeydown($event)"
+    (keyup)="_handleKeyup($event)"
+    (blur)="onBlur()"
+    [placeholder]="placeholderLabel"
+    [attr.aria-label]="ariaLabel" />
+
+  <novo-spinner *ngIf="searching"
+    novoSuffix
+    class="novo-select-search-spinner"
+    diameter="16"></novo-spinner>
+
+  <novo-button
+    novoSuffix
+    *ngIf="!hideClearSearchButton && value && !searching"
+    aria-label="Clear"
+    (click)="_reset(true)"
+    theme="icon"
+    size="small"
+    class="novo-select-search-clear">
+    <ng-content *ngIf="clearIcon; else defaultIcon" select="[novoSelectSearchClear]"></ng-content>
+    <ng-template #defaultIcon>
+      <novo-icon>close</novo-icon>
+    </ng-template>
+  </novo-button>
+
+  <ng-content select=".novo-select-search-custom-header-content"></ng-content>
+
+</novo-field>
+
+<div *ngIf="_showNoEntriesFound$ | async"
+  class="novo-select-search-no-entries-found">
+  {{noEntriesFoundLabel}}
+</div>

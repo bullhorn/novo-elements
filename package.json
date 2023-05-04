@@ -25,6 +25,7 @@
     "generate:contributors": "ts-node --project tools/tsconfig.json ./tools/contributors.ts",
     "generate:all": "npm run generate:examples && npm run generate:routes",
     "start": "ng serve demo",
+    "pack": "ng build novo-elements && npm run copy:scss && npm run generate:routes",
     "copy:resources": "npm run copy:scss && npm run copy:schematics",
     "copy:schematics": "npx copyfiles -f projects/schematics/*.json dist/novo-elements/schematics/",
     "copy:scss": "node copy-scss.js",

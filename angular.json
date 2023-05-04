@@ -14,7 +14,7 @@
           "outputs": ["dist/novo-elements"],
           "options": {
             "tsConfig": "tsconfig.build.json",
-            "project": "projects/novo-elements/src/ng-package.json"
+            "project": "projects/novo-elements/ng-package.json"
           },
           "dependsOn": [
             {
@@ -33,12 +33,13 @@
     },
     "novo-examples": {
       "root": "projects/novo-examples",
-      "sourceRoot": "projects/novo-examples/src",
+      "sourceRoot": "projects/novo-examples",
       "projectType": "library",
       "prefix": "lib",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
+          "outputs": ["dist/novo-examples"],
           "options": {
             "tsConfig": "tsconfig.build.json",
             "project": "projects/novo-examples/ng-package.json"
@@ -77,7 +78,7 @@
             "assets": ["projects/demo/favicon.ico", "projects/demo/assets"],
             "styles": ["projects/demo/styles.scss"],
             "stylePreprocessorOptions": {
-              "includePaths": ["projects/novo-elements/src"]
+              "includePaths": ["projects/novo-elements"]
             },
             "scripts": [],
             "vendorChunk": true,

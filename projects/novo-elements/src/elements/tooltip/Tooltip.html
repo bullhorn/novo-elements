@@ -1,5 +1,0 @@
-<div *ngIf="this.isHTML" [@state]="noAnimate ? 'no-animation' : 'visible'"
-     [ngClass]="[tooltipType, rounded ? 'rounded' : '', size ? size : '', preline? 'preline' : '', bounce ? 'bounce' : '', position]"
-     [innerHTML]="message"></div>
-<div *ngIf="!this.isHTML" [@state]="noAnimate ? 'no-animation' : 'visible'"
-     [ngClass]="[tooltipType, rounded ? 'rounded' : '', size ? size : '', preline? 'preline' : '', bounce ? 'bounce' : '', position]">{{message}}</div>

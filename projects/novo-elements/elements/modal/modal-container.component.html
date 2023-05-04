@@ -1,0 +1,6 @@
+<div class="modal-container"
+     [@zoomInOut]="animationState"
+     (@zoomInOut.start)="onAnimationStart($event)"
+     (@zoomInOut.done)="onAnimationDone($event)">
+  <ng-template [cdkPortalOutlet]="component"></ng-template>
+</div>
