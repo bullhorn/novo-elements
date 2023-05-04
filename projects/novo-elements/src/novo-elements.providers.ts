@@ -1,11 +1,13 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
-import { NovoAsideService } from 'novo-elements/elements/aside';
-import { NovoDragulaService } from 'novo-elements/elements/dragula';
-import { FieldInteractionApi } from 'novo-elements/elements/form';
-import { IMenuOptions, MENU_OPTIONS } from 'novo-elements/elements/menu';
-import { NovoModalService } from 'novo-elements/elements/modal';
-import { GooglePlacesService } from 'novo-elements/elements/places';
-import { NovoToastService } from 'novo-elements/elements/toast';
+import {
+  NovoAsideService,
+  NovoDragulaService,
+  FieldInteractionApi,
+  IMenuOptions, MENU_OPTIONS,
+  NovoModalService,
+  GooglePlacesService,
+  NovoToastService,
+} from 'novo-elements/elements';
 import {
   BrowserGlobalRef,
   ComponentUtils,
