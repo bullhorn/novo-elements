@@ -175,16 +175,11 @@ export class NovoChipsElement implements OnInit, ControlValueAccessor {
               this.items.push(value);
             }
           }
-          this._items.next(this.items);
+          this._finalizeItemValue();
         });
       }
     }
-    this._items.next(this.items);
-    const valueToSet = this.source && this.source.valueFormatter ? this.source.valueFormatter(this.items) : this.items.map((i) => i.value);
-    if (Helpers.isBlank(this.value) !== Helpers.isBlank(valueToSet) || JSON.stringify(this.value) !== JSON.stringify(valueToSet)) {
-      this.value = valueToSet;
-      this._propagateChanges();
-    }
+    this._finalizeItemValue();
   }
 
   getLabelFromOptions(value) {
@@ -291,6 +286,15 @@ export class NovoChipsElement implements OnInit, ControlValueAccessor {
 
   setDisabledState(disabled: boolean): void {
     this._disablePickerInput = disabled;
+  }
+
+  private _finalizeItemValue(): void {
+    this._items.next(this.items);
+    const valueToSet = this.source && this.source.valueFormatter ? this.source.valueFormatter(this.items) : this.items.map((i) => i.value);
+    if (Helpers.isBlank(this.value) !== Helpers.isBlank(valueToSet) || JSON.stringify(this.value) !== JSON.stringify(valueToSet)) {
+      this.value = valueToSet;
+      this._propagateChanges();
+    }
   }
 
   /** Emits change event to set the model value. */

@@ -1,6 +1,8 @@
 google-places-list {
+  display: grid;
   novo-list {
     border: 1px solid #4a89dc;
+    background-color: $white;
     novo-list-item {
       cursor: pointer;
       flex: 0 0;

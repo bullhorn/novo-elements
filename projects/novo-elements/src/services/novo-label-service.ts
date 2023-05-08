@@ -136,6 +136,7 @@ export class NovoLabelService {
   within = 'Within';
   isEmpty = 'Is Empty?';
   refreshPagination = 'Refresh Pagination';
+  location = 'Location';
 
   constructor(
     @Optional()
