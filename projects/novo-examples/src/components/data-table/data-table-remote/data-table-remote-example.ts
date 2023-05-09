@@ -249,7 +249,7 @@ export class DataTableRemoteExample {
     value: 'asc',
   };
   public globalSearchEnabled: boolean = false;
-  public refreshSubject: Subject<boolean> = new Subject();
+  public refreshSubject: Subject<void> = new Subject();
 
   // Remote configuration
   public remoteService: RemoteDataTableService<MockData>;
