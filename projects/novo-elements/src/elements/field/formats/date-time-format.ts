@@ -1,11 +1,11 @@
 import { Directive, ElementRef, EventEmitter, forwardRef, Inject, Input, Optional, Renderer2, SimpleChanges, OnChanges, LOCALE_ID } from '@angular/core';
 import { COMPOSITION_BUFFER_MODE, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { IMaskDirective, IMaskFactory } from 'angular-imask';
-import { format, isValid, parse } from 'date-fns';
+import { isValid } from 'date-fns';
 import * as IMask from 'imask';
 import { NovoLabelService } from 'novo-elements/services';
 import { NovoInputFormat, DATE_FORMATS, NOVO_INPUT_FORMAT } from './base-format';
-import { Key } from 'novo-elements/utils';
+import { DateUtil, Key } from 'novo-elements/utils';
 
 export const DATETIMEFORMAT_VALUE_ACCESSOR = {
   provide: NG_VALUE_ACCESSOR,
@@ -55,15 +55,8 @@ export class NovoDateTimeFormatDirective extends IMaskDirective<any> implements 
       min: new Date(1900, 0, 1),
       max: new Date(2030, 0, 1),
       prepare: (str) => str.toUpperCase(),
-      format: (date) => {
-        const test1 = this.formatValue(date)
-        return test1;
-    },
-      parse: (str) => {
-        const test = parse(str);
-
-        return test;
-      },
+      format: (date) => this.formatValue(date),
+      parse: (str) => DateUtil.parse(str),
       blocks: {
         d: {
           mask: IMask.MaskedRange,
@@ -192,7 +185,7 @@ export class NovoDateTimeFormatDirective extends IMaskDirective<any> implements 
 
   normalize(value: string) {
     const pattern = this.labels.dateFormat.toUpperCase();
-    return format(parse(value), pattern);
+    return DateUtil.format(DateUtil.parse(value), pattern);
   }
 
   formatAsIso(date: Date): string {
@@ -217,8 +210,8 @@ export class NovoDateTimeFormatDirective extends IMaskDirective<any> implements 
 
   convertTime24to12(time24h: string) {
     if (time24h.length === 5) {
-      const date = parse(`2020-01-01T${time24h}`);
-      return format(date, 'hh:mm A');
+      const date = DateUtil.parse(`2020-01-01T${time24h}`);
+      return DateUtil.format(date, 'hh:mm A');
     }
     return time24h;
   }
@@ -226,10 +219,10 @@ export class NovoDateTimeFormatDirective extends IMaskDirective<any> implements 
   formatValue(value: any): string {
     if (value == null) return '';
     // Use `parse` because it keeps dates in locale
-    const date = parse(value);
+    const date = DateUtil.parse(value);
     if (isValid(date)) {
       const dateFormat = `${this.labels.dateFormat.toUpperCase()}, ${this.military ? 'HH:mm' : 'hh:mm A'}`;
-      return format(date, dateFormat);
+      return DateUtil.format(date, dateFormat);
     }
     return this.normalize(value);
   }
