@@ -1,4 +1,4 @@
-import { addDays, addHours, addMonths, addWeeks, differenceInCalendarDays, differenceInDays,
+import { addDays, addHours, addMonths, addWeeks, Day, differenceInCalendarDays, differenceInDays,
     differenceInSeconds, endOfDay, endOfMonth, endOfWeek, format, getMonth, getYear, Interval,
     isAfter, isBefore, isDate, isSameDay, isSameMonth, isSameSecond, isWithinInterval, parse,
     parseISO, setHours, setMinutes, startOfDay, startOfMinute, startOfMonth, startOfWeek, toDate } from 'date-fns';
