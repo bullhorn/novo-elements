@@ -3,8 +3,17 @@ import { Directive, ElementRef, Input, OnChanges, OnInit } from '@angular/core';
 // Vendor
 import dragula from '@bullhorn/dragula';
 // APP
+import { notify } from 'novo-elements/utils';
 import { NovoDragulaService } from './DragulaService';
 
+/**
+* @deprecated since v8.0.0 - slated for deletion.
+*
+* Moving away from all CommonJS dependencies to improve tree-shaking.
+*
+* Please look at built-in ng or third party drag-drop libraries like
+* angular-draggable-droppable, ngx-drag-drop, ngx-sortablejs, ng2-dragula.
+*/
 @Directive({
   selector: '[dragula]',
 })
@@ -17,6 +26,7 @@ export class NovoDragulaElement implements OnInit, OnChanges {
   container: any;
 
   constructor(element: ElementRef, private dragulaService: NovoDragulaService) {
+    notify('[dragula] has been deprecated - please look at built-in ng or third party drag-drop libraries instead');
     this.container = element.nativeElement;
   }
 
