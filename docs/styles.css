@@ -1627,10 +1627,29 @@ h5,
 h6,
 p,
 span {
-  transition-property: color, opacity;
-  transition: 0.2s ease-out;
+  transition: color 0.2s ease-out, opacity 0.2s ease-out;
   vertical-align: middle;
   vertical-align: baseline;
+}
+h1.text-capitalize,
+h2.text-capitalize,
+h3.text-capitalize,
+h4.text-capitalize,
+h5.text-capitalize,
+h6.text-capitalize,
+p.text-capitalize,
+span.text-capitalize {
+  text-transform: capitalize;
+}
+h1.text-uppercase,
+h2.text-uppercase,
+h3.text-uppercase,
+h4.text-uppercase,
+h5.text-uppercase,
+h6.text-uppercase,
+p.text-uppercase,
+span.text-uppercase {
+  text-transform: uppercase;
 }
 h1.text-nowrap,
 h2.text-nowrap,
@@ -3154,12 +3173,19 @@ cdk-table > .novo-data-table-row:nth-of-type(even) + .novo-data-table-detail-row
 .novo-data-table-header-cell.resizable {
   padding-right: 0;
 }
+.novo-data-table-header-cell.resizable:hover {
+  background-color: #f4f4f4;
+  background-color: var(--background-muted, #4f5361);
+}
 .novo-data-table-header-cell.resizable .data-table-header-resizable {
   height: 100%;
 }
 .novo-data-table-header-cell.resizable .data-table-header-resizable span {
   cursor: ew-resize;
-  width: 8px;
+  background-color: #dbdbdb;
+  background-color: var(--border, #4f5361);
+  width: 1px;
+  margin: 0 4px;
   display: block;
 }
 .novo-data-table-header-cell > div > button {
@@ -3478,7 +3504,8 @@ novo-data-table .novo-data-table-detail-row {
 novo-data-table .novo-data-table-empty-container {
   padding-top: 0;
 }
-novo-data-table .novo-data-table-no-results-container {
+novo-data-table .novo-data-table-no-results-container,
+novo-data-table .novo-data-table-no-more-results-container {
   position: absolute;
   top: 48%;
   left: 0;
@@ -3486,7 +3513,8 @@ novo-data-table .novo-data-table-no-results-container {
   width: 100%;
 }
 novo-data-table .novo-data-table-empty-container,
-novo-data-table .novo-data-table-no-results-container {
+novo-data-table .novo-data-table-no-results-container,
+novo-data-table .novo-data-table-no-more-results-container {
   padding: 2em;
   flex: 1;
   display: flex;
@@ -3706,7 +3734,7 @@ novo-data-table-pagination.standard .pager .page.active {
 }
 .dropdown-container.data-table-dropdown {
   min-width: 220px;
-  max-width: 230px;
+  max-width: 280px;
   max-height: 500px;
   overflow-x: hidden;
   overflow-y: hidden;
@@ -3856,8 +3884,7 @@ novo-nav novo-tab-link .novo-tab-link {
   color: var(--text-muted);
   font-size: 1.2rem;
   font-size: var(--font-size-label);
-  transition-property: color, opacity;
-  transition: 0.2s ease-out;
+  transition: color 0.2s ease-out, opacity 0.2s ease-out;
   vertical-align: middle;
   font-size: 1.1rem;
   font-size: var(--font-size-tab);
@@ -3866,6 +3893,14 @@ novo-nav novo-tab-link .novo-tab-link {
   align-items: center;
   gap: 0.25rem;
   cursor: pointer;
+  text-transform: uppercase;
+}
+novo-nav novo-tab .novo-tab-link.text-capitalize,
+novo-nav novo-tab-link .novo-tab-link.text-capitalize {
+  text-transform: capitalize;
+}
+novo-nav novo-tab .novo-tab-link.text-uppercase,
+novo-nav novo-tab-link .novo-tab-link.text-uppercase {
   text-transform: uppercase;
 }
 novo-nav novo-tab .novo-tab-link.text-nowrap,
@@ -5046,16 +5081,24 @@ novo-radio > input:focus + label i.bhi-radio-empty, novo-radio > input:focus + l
 novo-radio > label {
   cursor: pointer;
 }
+novo-radio > label.disabled {
+  cursor: not-allowed;
+}
 novo-radio > label .novo-radio-button-label {
   display: inline;
   font-weight: normal;
   color: inherit;
   font-size: 1.3rem;
   font-size: var(--font-size-text);
-  transition-property: color, opacity;
-  transition: 0.2s ease-out;
+  transition: color 0.2s ease-out, opacity 0.2s ease-out;
   vertical-align: middle;
   display: inline;
+}
+novo-radio > label .novo-radio-button-label.text-capitalize {
+  text-transform: capitalize;
+}
+novo-radio > label .novo-radio-button-label.text-uppercase {
+  text-transform: uppercase;
 }
 novo-radio > label .novo-radio-button-label.text-nowrap {
   white-space: nowrap;
@@ -5373,10 +5416,10 @@ novo-radio > label i.bhi-checkbox-filled, novo-radio > label i.bhi-radio-filled 
   color: #4a89dc;
 }
 novo-radio > label.disabled i {
-  opacity: 0.7;
+  opacity: 0.4;
 }
 novo-radio > label.disabled button[theme].has-icon {
-  opacity: 0.7;
+  opacity: 0.4;
 }
 novo-radio novo-button[theme].has-icon {
   transition: all 100ms ease-in-out;
@@ -8981,9 +9024,16 @@ novo-toast.growlTopRight.animate {
   text-overflow: ellipsis;
   font-size: 2rem;
   font-size: var(--font-size-title);
-  transition-property: color, opacity;
-  transition: 0.2s ease-out;
+  transition: color 0.2s ease-out, opacity 0.2s ease-out;
   vertical-align: middle;
+}
+.novo-modal > header h1.text-capitalize,
+.novo-modal > header h2.text-capitalize {
+  text-transform: capitalize;
+}
+.novo-modal > header h1.text-uppercase,
+.novo-modal > header h2.text-uppercase {
+  text-transform: uppercase;
 }
 .novo-modal > header h1.text-nowrap,
 .novo-modal > header h2.text-nowrap {
@@ -10797,8 +10847,7 @@ novo-select .novo-select-trigger {
   color: inherit;
   font-size: 1.3rem;
   font-size: var(--font-size-text);
-  transition-property: color, opacity;
-  transition: 0.2s ease-out;
+  transition: color 0.2s ease-out, opacity 0.2s ease-out;
   vertical-align: middle;
   display: flex;
   justify-content: space-between;
@@ -10815,9 +10864,15 @@ novo-select .novo-select-trigger {
   z-index: 1;
   cursor: pointer;
   text-transform: none;
-  padding: 0 0.5rem;
+  padding: 0 1rem 0 0.5rem;
   margin-bottom: -1px;
   -webkit-appearance: none;
+}
+novo-select .novo-select-trigger.text-capitalize {
+  text-transform: capitalize;
+}
+novo-select .novo-select-trigger.text-uppercase {
+  text-transform: uppercase;
 }
 novo-select .novo-select-trigger.text-nowrap {
   white-space: nowrap;
@@ -11178,6 +11233,9 @@ novo-select[disabled] div[type=button] {
   width: inherit;
   overflow: auto;
   opacity: 1;
+}
+.novo-select-list .select-item {
+  height: 35px;
 }
 .select-header button {
   text-transform: uppercase;
@@ -11988,6 +12046,7 @@ entity-picker-result.active > novo-list-item {
 }
 .novo-entity-picker-results .novo-list {
   background: #ffffff;
+  min-width: 30rem;
 }
 .novo-entity-picker-results .novo-list .novo-item-content {
   margin-top: 0.5rem;
@@ -12231,14 +12290,24 @@ workers-comp-codes-picker-results .novo-list novo-loading,
 distribution-list-picker-results .novo-list novo-loading {
   justify-content: center;
 }
+workers-comp-codes-picker-results .picker-loader,
+workers-comp-codes-picker-results .picker-error,
+workers-comp-codes-picker-results .picker-null-results,
+distribution-list-picker-results .picker-loader,
+distribution-list-picker-results .picker-error,
+distribution-list-picker-results .picker-null-results {
+  border: none;
+}
 workers-comp-codes-picker-results .picker-null,
 workers-comp-codes-picker-results .picker-error,
 workers-comp-codes-picker-results .picker-loading,
 workers-comp-codes-picker-results .picker-no-recents,
+workers-comp-codes-picker-results .picker-error,
 distribution-list-picker-results .picker-null,
 distribution-list-picker-results .picker-error,
 distribution-list-picker-results .picker-loading,
-distribution-list-picker-results .picker-no-recents {
+distribution-list-picker-results .picker-no-recents,
+distribution-list-picker-results .picker-error {
   text-align: center;
   padding: 1em 0 4em;
 }
@@ -12246,10 +12315,12 @@ workers-comp-codes-picker-results .picker-null > i,
 workers-comp-codes-picker-results .picker-error > i,
 workers-comp-codes-picker-results .picker-loading > i,
 workers-comp-codes-picker-results .picker-no-recents > i,
+workers-comp-codes-picker-results .picker-error > i,
 distribution-list-picker-results .picker-null > i,
 distribution-list-picker-results .picker-error > i,
 distribution-list-picker-results .picker-loading > i,
-distribution-list-picker-results .picker-no-recents > i {
+distribution-list-picker-results .picker-no-recents > i,
+distribution-list-picker-results .picker-error > i {
   font-size: 3em;
   margin: 0.5em;
   color: rgba(0, 0, 0, 0.3);
@@ -12262,6 +12333,8 @@ workers-comp-codes-picker-results .picker-loading > h4,
 workers-comp-codes-picker-results .picker-loading > p,
 workers-comp-codes-picker-results .picker-no-recents > h4,
 workers-comp-codes-picker-results .picker-no-recents > p,
+workers-comp-codes-picker-results .picker-error > h4,
+workers-comp-codes-picker-results .picker-error > p,
 distribution-list-picker-results .picker-null > h4,
 distribution-list-picker-results .picker-null > p,
 distribution-list-picker-results .picker-error > h4,
@@ -12269,7 +12342,9 @@ distribution-list-picker-results .picker-error > p,
 distribution-list-picker-results .picker-loading > h4,
 distribution-list-picker-results .picker-loading > p,
 distribution-list-picker-results .picker-no-recents > h4,
-distribution-list-picker-results .picker-no-recents > p {
+distribution-list-picker-results .picker-no-recents > p,
+distribution-list-picker-results .picker-error > h4,
+distribution-list-picker-results .picker-error > p {
   margin: 0;
   max-width: none;
   padding: 0;
@@ -12278,10 +12353,12 @@ workers-comp-codes-picker-results .picker-null > h4,
 workers-comp-codes-picker-results .picker-error > h4,
 workers-comp-codes-picker-results .picker-loading > h4,
 workers-comp-codes-picker-results .picker-no-recents > h4,
+workers-comp-codes-picker-results .picker-error > h4,
 distribution-list-picker-results .picker-null > h4,
 distribution-list-picker-results .picker-error > h4,
 distribution-list-picker-results .picker-loading > h4,
-distribution-list-picker-results .picker-no-recents > h4 {
+distribution-list-picker-results .picker-no-recents > h4,
+distribution-list-picker-results .picker-error > h4 {
   font-weight: 500;
 }
 workers-comp-codes-picker-results section,
@@ -12724,9 +12801,18 @@ skill-specialty-picker-results .picker-null {
   flex: 1 0 auto;
 }
 novo-field.novo-focused input.novo-chip-input {
+  opacity: 1;
   width: 100px;
   margin: 4px;
   flex: 1 0 100px;
+}
+novo-field:not(.novo-focused) .novo-field-input .novo-chip-list-has-value {
+  margin-right: 2rem;
+}
+novo-field:not(.novo-focused) .novo-field-input .novo-chip-list-has-value input.novo-chip-input {
+  opacity: 0;
+  width: 0px !important;
+  max-width: 0px !important;
 }
 input.novo-chip-input {
   width: 20px;
@@ -12817,7 +12903,7 @@ entity-chips .chip-input-container input,
 novo-entity-chips .chip-input-container input {
   padding-top: 0;
   border: none;
-  background: transparent;
+  background: transparent !important;
   width: 100%;
 }
 chips .chip-input-container input:focus, multi-picker .chip-input-container input:focus, novo-multi-date-input .chip-input-container input:focus,
@@ -13155,12 +13241,17 @@ novo-row-chips .novo-row-chips-columns .column-label {
   color: var(--text-muted);
   font-size: 1.2rem;
   font-size: var(--font-size-label);
-  transition-property: color, opacity;
-  transition: 0.2s ease-out;
+  transition: color 0.2s ease-out, opacity 0.2s ease-out;
   vertical-align: middle;
   display: flex;
   flex: 1;
   margin-right: 1em;
+}
+novo-row-chips .novo-row-chips-columns .column-label.text-capitalize {
+  text-transform: capitalize;
+}
+novo-row-chips .novo-row-chips-columns .column-label.text-uppercase {
+  text-transform: uppercase;
 }
 novo-row-chips .novo-row-chips-columns .column-label.text-nowrap {
   white-space: nowrap;
@@ -15758,8 +15849,7 @@ novo-date-time-picker novo-time-picker .analog {
   text-overflow: ellipsis;
   font-size: 2rem;
   font-size: var(--font-size-title);
-  transition-property: color, opacity;
-  transition: 0.2s ease-out;
+  transition: color 0.2s ease-out, opacity 0.2s ease-out;
   vertical-align: middle;
   margin: 0;
   padding: 0;
@@ -15768,6 +15858,12 @@ novo-date-time-picker novo-time-picker .analog {
   white-space: nowrap;
   text-overflow: ellipsis;
   padding-right: 20px;
+}
+.novo-header > section .header-titles h1.text-capitalize {
+  text-transform: capitalize;
+}
+.novo-header > section .header-titles h1.text-uppercase {
+  text-transform: uppercase;
 }
 .novo-header > section .header-titles h1.text-nowrap {
   white-space: nowrap;
@@ -28944,14 +29040,19 @@ novo-tip-well > div > div > p {
   color: inherit;
   font-size: 1.3rem;
   font-size: var(--font-size-text);
-  transition-property: color, opacity;
-  transition: 0.2s ease-out;
+  transition: color 0.2s ease-out, opacity 0.2s ease-out;
   vertical-align: middle;
   width: 100%;
   max-width: 40rem;
   padding: 0;
   text-align: left;
   white-space: pre-line;
+}
+novo-tip-well > div > div > p.text-capitalize {
+  text-transform: capitalize;
+}
+novo-tip-well > div > div > p.text-uppercase {
+  text-transform: uppercase;
 }
 novo-tip-well > div > div > p.text-nowrap {
   white-space: nowrap;
@@ -29693,10 +29794,15 @@ popover-content .popover-title {
   text-overflow: ellipsis;
   font-size: 2rem;
   font-size: var(--font-size-title);
-  transition-property: color, opacity;
-  transition: 0.2s ease-out;
+  transition: color 0.2s ease-out, opacity 0.2s ease-out;
   vertical-align: middle;
   margin-bottom: 1rem;
+}
+popover-content .popover-title.text-capitalize {
+  text-transform: capitalize;
+}
+popover-content .popover-title.text-uppercase {
+  text-transform: uppercase;
 }
 popover-content .popover-title.text-nowrap {
   white-space: nowrap;
@@ -30009,9 +30115,14 @@ popover-content .popover-content {
   color: inherit;
   font-size: 1.3rem;
   font-size: var(--font-size-text);
-  transition-property: color, opacity;
-  transition: 0.2s ease-out;
+  transition: color 0.2s ease-out, opacity 0.2s ease-out;
   vertical-align: middle;
+}
+popover-content .popover-content.text-capitalize {
+  text-transform: capitalize;
+}
+popover-content .popover-content.text-uppercase {
+  text-transform: uppercase;
 }
 popover-content .popover-content.text-nowrap {
   white-space: nowrap;
@@ -30432,13 +30543,17 @@ novo-search[size=large] {
   height: 4rem;
   grid-template-columns: 4rem 1fr;
 }
+novo-search > button[theme][theme=fab] {
+  width: 2.8em;
+  height: 2.8em;
+  min-height: 2.8em;
+}
 novo-search > input {
   height: 100%;
-  max-width: 400px;
   display: block;
   background: transparent;
   position: relative;
-  font-size: 1.4em;
+  font-size: 1.4rem;
   color: #282828;
   color: var(--text-main);
   z-index: 10;
@@ -30677,6 +30792,21 @@ novo-search.focused[color=credential] > novo-icon {
 }
 novo-search.focused[color=person] > novo-icon {
   color: #696d79 !important;
+}
+header novo-search.always-open:not(.focused) button {
+  background: rgba(255, 255, 255, 0.25) !important;
+  color: rgba(74, 137, 220, 0.25) !important;
+}
+header novo-search.always-open:not(.focused) input {
+  background-color: rgba(255, 255, 255, 0.25) !important;
+  border-color: rgba(255, 255, 255, 0.25) !important;
+  color: rgba(74, 137, 220, 0.25) !important;
+}
+header novo-search.always-open:not(.focused) input::-moz-placeholder {
+  color: #cccdcc !important;
+}
+header novo-search.always-open:not(.focused) input::placeholder {
+  color: #cccdcc !important;
 }
 google-places-list novo-list {
   border: 1px solid #4a89dc;
@@ -30932,8 +31062,7 @@ novo-icon {
   font-size: 1.2em;
   line-height: inherit;
   vertical-align: middle;
-  transition-property: color, opacity;
-  transition: 0.2s ease-out;
+  transition: color 0.2s ease-out, opacity 0.2s ease-out;
   vertical-align: middle;
 }
 novo-icon i {
@@ -30952,6 +31081,12 @@ novo-icon i:before {
 }
 novo-icon i * {
   display: none !important;
+}
+novo-icon.text-capitalize {
+  text-transform: capitalize;
+}
+novo-icon.text-uppercase {
+  text-transform: uppercase;
 }
 novo-icon.text-nowrap {
   white-space: nowrap;
@@ -31265,12 +31400,18 @@ novo-icon[theme=black] i {
   width: 1.6em;
   height: 1.6em;
 }
+novo-icon[theme=black][shape=circle] i {
+  border-radius: 50%;
+}
 novo-icon[theme=white] i {
   color: #ffffff;
   background: #ffffff;
   border-radius: 0.3em;
   width: 1.6em;
   height: 1.6em;
+}
+novo-icon[theme=white][shape=circle] i {
+  border-radius: 50%;
 }
 novo-icon[theme=gray] i {
   color: #ffffff;
@@ -31279,12 +31420,18 @@ novo-icon[theme=gray] i {
   width: 1.6em;
   height: 1.6em;
 }
+novo-icon[theme=gray][shape=circle] i {
+  border-radius: 50%;
+}
 novo-icon[theme=grey] i {
   color: #ffffff;
   background: #9e9e9e;
   border-radius: 0.3em;
   width: 1.6em;
   height: 1.6em;
+}
+novo-icon[theme=grey][shape=circle] i {
+  border-radius: 50%;
 }
 novo-icon[theme=offWhite] i {
   color: #ffffff;
@@ -31293,12 +31440,18 @@ novo-icon[theme=offWhite] i {
   width: 1.6em;
   height: 1.6em;
 }
+novo-icon[theme=offWhite][shape=circle] i {
+  border-radius: 50%;
+}
 novo-icon[theme=bright] i {
   color: #ffffff;
   background: #f7f7f7;
   border-radius: 0.3em;
   width: 1.6em;
   height: 1.6em;
+}
+novo-icon[theme=bright][shape=circle] i {
+  border-radius: 50%;
 }
 novo-icon[theme=light] i {
   color: #ffffff;
@@ -31307,12 +31460,18 @@ novo-icon[theme=light] i {
   width: 1.6em;
   height: 1.6em;
 }
+novo-icon[theme=light][shape=circle] i {
+  border-radius: 50%;
+}
 novo-icon[theme=neutral] i {
   color: #ffffff;
   background: #4f5361;
   border-radius: 0.3em;
   width: 1.6em;
   height: 1.6em;
+}
+novo-icon[theme=neutral][shape=circle] i {
+  border-radius: 50%;
 }
 novo-icon[theme=dark] i {
   color: #ffffff;
@@ -31321,12 +31480,18 @@ novo-icon[theme=dark] i {
   width: 1.6em;
   height: 1.6em;
 }
+novo-icon[theme=dark][shape=circle] i {
+  border-radius: 50%;
+}
 novo-icon[theme=orange] i {
   color: #ffffff;
   background: #ff6900;
   border-radius: 0.3em;
   width: 1.6em;
   height: 1.6em;
+}
+novo-icon[theme=orange][shape=circle] i {
+  border-radius: 50%;
 }
 novo-icon[theme=navigation] i {
   color: #ffffff;
@@ -31335,12 +31500,18 @@ novo-icon[theme=navigation] i {
   width: 1.6em;
   height: 1.6em;
 }
+novo-icon[theme=navigation][shape=circle] i {
+  border-radius: 50%;
+}
 novo-icon[theme=skyBlue] i {
   color: #ffffff;
   background: #009bdf;
   border-radius: 0.3em;
   width: 1.6em;
   height: 1.6em;
+}
+novo-icon[theme=skyBlue][shape=circle] i {
+  border-radius: 50%;
 }
 novo-icon[theme=steel] i {
   color: #ffffff;
@@ -31349,12 +31520,18 @@ novo-icon[theme=steel] i {
   width: 1.6em;
   height: 1.6em;
 }
+novo-icon[theme=steel][shape=circle] i {
+  border-radius: 50%;
+}
 novo-icon[theme=metal] i {
   color: #ffffff;
   background: #637893;
   border-radius: 0.3em;
   width: 1.6em;
   height: 1.6em;
+}
+novo-icon[theme=metal][shape=circle] i {
+  border-radius: 50%;
 }
 novo-icon[theme=sand] i {
   color: #ffffff;
@@ -31363,12 +31540,18 @@ novo-icon[theme=sand] i {
   width: 1.6em;
   height: 1.6em;
 }
+novo-icon[theme=sand][shape=circle] i {
+  border-radius: 50%;
+}
 novo-icon[theme=silver] i {
   color: #ffffff;
   background: #e2e2e2;
   border-radius: 0.3em;
   width: 1.6em;
   height: 1.6em;
+}
+novo-icon[theme=silver][shape=circle] i {
+  border-radius: 50%;
 }
 novo-icon[theme=stone] i {
   color: #ffffff;
@@ -31377,12 +31560,18 @@ novo-icon[theme=stone] i {
   width: 1.6em;
   height: 1.6em;
 }
+novo-icon[theme=stone][shape=circle] i {
+  border-radius: 50%;
+}
 novo-icon[theme=ash] i {
   color: #ffffff;
   background: #a0a0a0;
   border-radius: 0.3em;
   width: 1.6em;
   height: 1.6em;
+}
+novo-icon[theme=ash][shape=circle] i {
+  border-radius: 50%;
 }
 novo-icon[theme=slate] i {
   color: #ffffff;
@@ -31391,12 +31580,18 @@ novo-icon[theme=slate] i {
   width: 1.6em;
   height: 1.6em;
 }
+novo-icon[theme=slate][shape=circle] i {
+  border-radius: 50%;
+}
 novo-icon[theme=onyx] i {
   color: #ffffff;
   background: #526980;
   border-radius: 0.3em;
   width: 1.6em;
   height: 1.6em;
+}
+novo-icon[theme=onyx][shape=circle] i {
+  border-radius: 50%;
 }
 novo-icon[theme=charcoal] i {
   color: #ffffff;
@@ -31405,12 +31600,18 @@ novo-icon[theme=charcoal] i {
   width: 1.6em;
   height: 1.6em;
 }
+novo-icon[theme=charcoal][shape=circle] i {
+  border-radius: 50%;
+}
 novo-icon[theme=moonlight] i {
   color: #ffffff;
   background: #1a242f;
   border-radius: 0.3em;
   width: 1.6em;
   height: 1.6em;
+}
+novo-icon[theme=moonlight][shape=circle] i {
+  border-radius: 50%;
 }
 novo-icon[theme=midnight] i {
   color: #ffffff;
@@ -31419,12 +31620,18 @@ novo-icon[theme=midnight] i {
   width: 1.6em;
   height: 1.6em;
 }
+novo-icon[theme=midnight][shape=circle] i {
+  border-radius: 50%;
+}
 novo-icon[theme=darkness] i {
   color: #ffffff;
   background: #161f27;
   border-radius: 0.3em;
   width: 1.6em;
   height: 1.6em;
+}
+novo-icon[theme=darkness][shape=circle] i {
+  border-radius: 50%;
 }
 novo-icon[theme=navy] i {
   color: #ffffff;
@@ -31433,12 +31640,18 @@ novo-icon[theme=navy] i {
   width: 1.6em;
   height: 1.6em;
 }
+novo-icon[theme=navy][shape=circle] i {
+  border-radius: 50%;
+}
 novo-icon[theme=aqua] i {
   color: #ffffff;
   background: #3bafda;
   border-radius: 0.3em;
   width: 1.6em;
   height: 1.6em;
+}
+novo-icon[theme=aqua][shape=circle] i {
+  border-radius: 50%;
 }
 novo-icon[theme=ocean] i {
   color: #ffffff;
@@ -31447,12 +31660,18 @@ novo-icon[theme=ocean] i {
   width: 1.6em;
   height: 1.6em;
 }
+novo-icon[theme=ocean][shape=circle] i {
+  border-radius: 50%;
+}
 novo-icon[theme=mint] i {
   color: #ffffff;
   background: #37bc9b;
   border-radius: 0.3em;
   width: 1.6em;
   height: 1.6em;
+}
+novo-icon[theme=mint][shape=circle] i {
+  border-radius: 50%;
 }
 novo-icon[theme=grass] i {
   color: #ffffff;
@@ -31461,12 +31680,18 @@ novo-icon[theme=grass] i {
   width: 1.6em;
   height: 1.6em;
 }
+novo-icon[theme=grass][shape=circle] i {
+  border-radius: 50%;
+}
 novo-icon[theme=sunflower] i {
   color: #ffffff;
   background: #f6b042;
   border-radius: 0.3em;
   width: 1.6em;
   height: 1.6em;
+}
+novo-icon[theme=sunflower][shape=circle] i {
+  border-radius: 50%;
 }
 novo-icon[theme=bittersweet] i {
   color: #ffffff;
@@ -31475,12 +31700,18 @@ novo-icon[theme=bittersweet] i {
   width: 1.6em;
   height: 1.6em;
 }
+novo-icon[theme=bittersweet][shape=circle] i {
+  border-radius: 50%;
+}
 novo-icon[theme=grapefruit] i {
   color: #ffffff;
   background: #da4453;
   border-radius: 0.3em;
   width: 1.6em;
   height: 1.6em;
+}
+novo-icon[theme=grapefruit][shape=circle] i {
+  border-radius: 50%;
 }
 novo-icon[theme=carnation] i {
   color: #ffffff;
@@ -31489,12 +31720,18 @@ novo-icon[theme=carnation] i {
   width: 1.6em;
   height: 1.6em;
 }
+novo-icon[theme=carnation][shape=circle] i {
+  border-radius: 50%;
+}
 novo-icon[theme=lavender] i {
   color: #ffffff;
   background: #967adc;
   border-radius: 0.3em;
   width: 1.6em;
   height: 1.6em;
+}
+novo-icon[theme=lavender][shape=circle] i {
+  border-radius: 50%;
 }
 novo-icon[theme=mountain] i {
   color: #ffffff;
@@ -31503,12 +31740,18 @@ novo-icon[theme=mountain] i {
   width: 1.6em;
   height: 1.6em;
 }
+novo-icon[theme=mountain][shape=circle] i {
+  border-radius: 50%;
+}
 novo-icon[theme=info] i {
   color: #ffffff;
   background: #4a89dc;
   border-radius: 0.3em;
   width: 1.6em;
   height: 1.6em;
+}
+novo-icon[theme=info][shape=circle] i {
+  border-radius: 50%;
 }
 novo-icon[theme=positive] i {
   color: #ffffff;
@@ -31517,12 +31760,18 @@ novo-icon[theme=positive] i {
   width: 1.6em;
   height: 1.6em;
 }
+novo-icon[theme=positive][shape=circle] i {
+  border-radius: 50%;
+}
 novo-icon[theme=success] i {
   color: #ffffff;
   background: #8cc152;
   border-radius: 0.3em;
   width: 1.6em;
   height: 1.6em;
+}
+novo-icon[theme=success][shape=circle] i {
+  border-radius: 50%;
 }
 novo-icon[theme=negative] i {
   color: #ffffff;
@@ -31531,12 +31780,18 @@ novo-icon[theme=negative] i {
   width: 1.6em;
   height: 1.6em;
 }
+novo-icon[theme=negative][shape=circle] i {
+  border-radius: 50%;
+}
 novo-icon[theme=danger] i {
   color: #ffffff;
   background: #da4453;
   border-radius: 0.3em;
   width: 1.6em;
   height: 1.6em;
+}
+novo-icon[theme=danger][shape=circle] i {
+  border-radius: 50%;
 }
 novo-icon[theme=error] i {
   color: #ffffff;
@@ -31545,12 +31800,18 @@ novo-icon[theme=error] i {
   width: 1.6em;
   height: 1.6em;
 }
+novo-icon[theme=error][shape=circle] i {
+  border-radius: 50%;
+}
 novo-icon[theme=warning] i {
   color: #ffffff;
   background: #f6b042;
   border-radius: 0.3em;
   width: 1.6em;
   height: 1.6em;
+}
+novo-icon[theme=warning][shape=circle] i {
+  border-radius: 50%;
 }
 novo-icon[theme=empty] i {
   color: #ffffff;
@@ -31559,12 +31820,18 @@ novo-icon[theme=empty] i {
   width: 1.6em;
   height: 1.6em;
 }
+novo-icon[theme=empty][shape=circle] i {
+  border-radius: 50%;
+}
 novo-icon[theme=disabled] i {
   color: #ffffff;
   background: #bebebe;
   border-radius: 0.3em;
   width: 1.6em;
   height: 1.6em;
+}
+novo-icon[theme=disabled][shape=circle] i {
+  border-radius: 50%;
 }
 novo-icon[theme=background] i {
   color: #ffffff;
@@ -31573,12 +31840,18 @@ novo-icon[theme=background] i {
   width: 1.6em;
   height: 1.6em;
 }
+novo-icon[theme=background][shape=circle] i {
+  border-radius: 50%;
+}
 novo-icon[theme=backgroundDark] i {
   color: #ffffff;
   background: #e2e2e2;
   border-radius: 0.3em;
   width: 1.6em;
   height: 1.6em;
+}
+novo-icon[theme=backgroundDark][shape=circle] i {
+  border-radius: 50%;
 }
 novo-icon[theme=presentation] i {
   color: #ffffff;
@@ -31587,12 +31860,18 @@ novo-icon[theme=presentation] i {
   width: 1.6em;
   height: 1.6em;
 }
+novo-icon[theme=presentation][shape=circle] i {
+  border-radius: 50%;
+}
 novo-icon[theme=bullhorn] i {
   color: #ffffff;
   background: #ff6900;
   border-radius: 0.3em;
   width: 1.6em;
   height: 1.6em;
+}
+novo-icon[theme=bullhorn][shape=circle] i {
+  border-radius: 50%;
 }
 novo-icon[theme=pulse] i {
   color: #ffffff;
@@ -31601,12 +31880,18 @@ novo-icon[theme=pulse] i {
   width: 1.6em;
   height: 1.6em;
 }
+novo-icon[theme=pulse][shape=circle] i {
+  border-radius: 50%;
+}
 novo-icon[theme=company] i {
   color: #ffffff;
   background: #3399dd;
   border-radius: 0.3em;
   width: 1.6em;
   height: 1.6em;
+}
+novo-icon[theme=company][shape=circle] i {
+  border-radius: 50%;
 }
 novo-icon[theme=candidate] i {
   color: #ffffff;
@@ -31615,12 +31900,18 @@ novo-icon[theme=candidate] i {
   width: 1.6em;
   height: 1.6em;
 }
+novo-icon[theme=candidate][shape=circle] i {
+  border-radius: 50%;
+}
 novo-icon[theme=lead] i {
   color: #ffffff;
   background: #aa6699;
   border-radius: 0.3em;
   width: 1.6em;
   height: 1.6em;
+}
+novo-icon[theme=lead][shape=circle] i {
+  border-radius: 50%;
 }
 novo-icon[theme=contact] i {
   color: #ffffff;
@@ -31629,12 +31920,18 @@ novo-icon[theme=contact] i {
   width: 1.6em;
   height: 1.6em;
 }
+novo-icon[theme=contact][shape=circle] i {
+  border-radius: 50%;
+}
 novo-icon[theme=clientcontact] i {
   color: #ffffff;
   background: #ffaa44;
   border-radius: 0.3em;
   width: 1.6em;
   height: 1.6em;
+}
+novo-icon[theme=clientcontact][shape=circle] i {
+  border-radius: 50%;
 }
 novo-icon[theme=opportunity] i {
   color: #ffffff;
@@ -31643,12 +31940,18 @@ novo-icon[theme=opportunity] i {
   width: 1.6em;
   height: 1.6em;
 }
+novo-icon[theme=opportunity][shape=circle] i {
+  border-radius: 50%;
+}
 novo-icon[theme=job] i {
   color: #ffffff;
   background: #bb5566;
   border-radius: 0.3em;
   width: 1.6em;
   height: 1.6em;
+}
+novo-icon[theme=job][shape=circle] i {
+  border-radius: 50%;
 }
 novo-icon[theme=joborder] i {
   color: #ffffff;
@@ -31657,12 +31960,18 @@ novo-icon[theme=joborder] i {
   width: 1.6em;
   height: 1.6em;
 }
+novo-icon[theme=joborder][shape=circle] i {
+  border-radius: 50%;
+}
 novo-icon[theme=submission] i {
   color: #ffffff;
   background: #a9adbb;
   border-radius: 0.3em;
   width: 1.6em;
   height: 1.6em;
+}
+novo-icon[theme=submission][shape=circle] i {
+  border-radius: 50%;
 }
 novo-icon[theme=sendout] i {
   color: #ffffff;
@@ -31671,12 +31980,18 @@ novo-icon[theme=sendout] i {
   width: 1.6em;
   height: 1.6em;
 }
+novo-icon[theme=sendout][shape=circle] i {
+  border-radius: 50%;
+}
 novo-icon[theme=placement] i {
   color: #ffffff;
   background: #0b344f;
   border-radius: 0.3em;
   width: 1.6em;
   height: 1.6em;
+}
+novo-icon[theme=placement][shape=circle] i {
+  border-radius: 50%;
 }
 novo-icon[theme=note] i {
   color: #ffffff;
@@ -31685,12 +32000,18 @@ novo-icon[theme=note] i {
   width: 1.6em;
   height: 1.6em;
 }
+novo-icon[theme=note][shape=circle] i {
+  border-radius: 50%;
+}
 novo-icon[theme=contract] i {
   color: #ffffff;
   background: #454ea0;
   border-radius: 0.3em;
   width: 1.6em;
   height: 1.6em;
+}
+novo-icon[theme=contract][shape=circle] i {
+  border-radius: 50%;
 }
 novo-icon[theme=jobCode] i {
   color: #ffffff;
@@ -31699,12 +32020,18 @@ novo-icon[theme=jobCode] i {
   width: 1.6em;
   height: 1.6em;
 }
+novo-icon[theme=jobCode][shape=circle] i {
+  border-radius: 50%;
+}
 novo-icon[theme=earnCode] i {
   color: #ffffff;
   background: #696d79;
   border-radius: 0.3em;
   width: 1.6em;
   height: 1.6em;
+}
+novo-icon[theme=earnCode][shape=circle] i {
+  border-radius: 50%;
 }
 novo-icon[theme=invoiceStatement] i {
   color: #ffffff;
@@ -31713,12 +32040,18 @@ novo-icon[theme=invoiceStatement] i {
   width: 1.6em;
   height: 1.6em;
 }
+novo-icon[theme=invoiceStatement][shape=circle] i {
+  border-radius: 50%;
+}
 novo-icon[theme=billableCharge] i {
   color: #ffffff;
   background: #696d79;
   border-radius: 0.3em;
   width: 1.6em;
   height: 1.6em;
+}
+novo-icon[theme=billableCharge][shape=circle] i {
+  border-radius: 50%;
 }
 novo-icon[theme=payableCharge] i {
   color: #ffffff;
@@ -31727,12 +32060,18 @@ novo-icon[theme=payableCharge] i {
   width: 1.6em;
   height: 1.6em;
 }
+novo-icon[theme=payableCharge][shape=circle] i {
+  border-radius: 50%;
+}
 novo-icon[theme=user] i {
   color: #ffffff;
   background: #696d79;
   border-radius: 0.3em;
   width: 1.6em;
   height: 1.6em;
+}
+novo-icon[theme=user][shape=circle] i {
+  border-radius: 50%;
 }
 novo-icon[theme=corporateUser] i {
   color: #ffffff;
@@ -31741,12 +32080,18 @@ novo-icon[theme=corporateUser] i {
   width: 1.6em;
   height: 1.6em;
 }
+novo-icon[theme=corporateUser][shape=circle] i {
+  border-radius: 50%;
+}
 novo-icon[theme=distributionList] i {
   color: #ffffff;
   background: #696d79;
   border-radius: 0.3em;
   width: 1.6em;
   height: 1.6em;
+}
+novo-icon[theme=distributionList][shape=circle] i {
+  border-radius: 50%;
 }
 novo-icon[theme=credential] i {
   color: #ffffff;
@@ -31755,6 +32100,9 @@ novo-icon[theme=credential] i {
   width: 1.6em;
   height: 1.6em;
 }
+novo-icon[theme=credential][shape=circle] i {
+  border-radius: 50%;
+}
 novo-icon[theme=person] i {
   color: #ffffff;
   background: #696d79;
@@ -31762,8 +32110,20 @@ novo-icon[theme=person] i {
   width: 1.6em;
   height: 1.6em;
 }
+novo-icon[theme=person][shape=circle] i {
+  border-radius: 50%;
+}
 novo-icon.novo-icon-raised i {
   box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.2);
+}
+novo-icon[shape=circle] i {
+  border-radius: 50%;
+}
+novo-icon.icon-size-smaller {
+  font-size: 1em;
+}
+novo-icon.icon-size-larger {
+  font-size: 1.4em;
 }
 /**
  * Do not edit directly
@@ -32575,6 +32935,9 @@ novo-simple-table-pagination > button[theme][theme=dialogue][icon][side=right] {
 .txc-disabled {
   color: #707070;
   color: var(--text-disabled, #707070);
+}
+.novo-visibility-hidden {
+  visibility: hidden !important;
 }
 .novo-background-black {
   background: #000000;
