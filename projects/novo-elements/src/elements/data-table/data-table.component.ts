@@ -27,17 +27,16 @@ import { NOVO_DATA_TABLE_REF } from './data-table.token';
 import {
   IDataTableChangeEvent,
   IDataTableColumn,
-  IDataTableFilter,
   IDataTablePaginationOptions,
   IDataTablePreferences,
   IDataTableSearchOptions,
   IDataTableSelectionOption,
   IDataTableService,
-  IDataTableSort,
 } from './interfaces';
 import { ListInteractionDictionary, ListInteractionEvent } from './ListInteractionTypes';
 import { StaticDataTableService } from './services/static-data-table.service';
 import { DataTableState } from './state/data-table-state.service';
+import { Helpers } from "../../utils";
 
 @Component({
   selector: 'novo-data-table',
@@ -50,7 +49,7 @@ import { DataTableState } from './state/data-table-state.service';
   ],
   template: `
     <header
-      *ngIf="(!(dataSource?.totallyEmpty && !state.userFiltered) && !loading) || forceShowHeader"
+      *ngIf="(!(empty && !state.userFiltered) && !loading) || forceShowHeader"
       [class.empty]="hideGlobalSearch && !paginationOptions && !templates['customActions']"
     >
       <ng-container *ngTemplateOutlet="templates['customHeader']"></ng-container>
@@ -66,7 +65,7 @@ import { DataTableState } from './state/data-table-state.service';
       <novo-data-table-pagination
         *ngIf="paginationOptions"
         [theme]="paginationOptions.theme"
-        [length]="null !== overrideTotal && overrideTotal !== undefined ? overrideTotal : dataSource?.currentTotal"
+        [length]="useOverrideTotal ? overrideTotal : dataSource?.currentTotal"
         [page]="paginationOptions.page"
         [pageSize]="paginationOptions.pageSize"
         [pageSizeOptions]="paginationOptions.pageSizeOptions"
@@ -94,7 +93,7 @@ import { DataTableState } from './state/data-table-state.service';
         class="novo-data-table-container"
         [ngClass]="{ 'novo-data-table-container-fixed': fixedHeader }"
         [class.empty-user-filtered]="dataSource?.currentlyEmpty && state.userFiltered"
-        [class.empty]="dataSource?.totallyEmpty && !dataSource?.loading && !loading && !state.userFiltered && !dataSource.pristine"
+        [class.empty]="empty && !dataSource?.loading && !loading && !state.userFiltered && !dataSource.pristine"
       >
         <cdk-table
           *ngIf="columns?.length > 0 && columnsLoaded && dataSource"
@@ -103,7 +102,7 @@ import { DataTableState } from './state/data-table-state.service';
           novoDataTableSortFilter
           [class.expandable]="expandable"
           [class.empty]="dataSource?.currentlyEmpty && state.userFiltered"
-          [hidden]="dataSource?.totallyEmpty && !state.userFiltered"
+          [hidden]="empty && !state.userFiltered"
         >
           <ng-container cdkColumnDef="selection">
             <novo-data-table-checkbox-header-cell *cdkHeaderCellDef [maxSelected]="maxSelected"></novo-data-table-checkbox-header-cell>
@@ -171,7 +170,7 @@ import { DataTableState } from './state/data-table-state.service';
         <div
           class="novo-data-table-no-more-results-container"
           [style.left.px]="scrollLeft"
-          *ngIf="!dataSource?.totallyEmpty && dataSource?.currentlyEmpty && !state.userFiltered && !dataSource?.loading && !loading && !dataSource.pristine"
+          *ngIf="!empty && dataSource?.currentlyEmpty && !state.userFiltered && !dataSource?.loading && !loading && !dataSource.pristine"
         >
           <div class="novo-data-table-empty-message">
             <ng-container *ngTemplateOutlet="templates['noMoreResultsMessage'] || templates['defaultNoMoreResultsMessage']"></ng-container>
@@ -180,7 +179,7 @@ import { DataTableState } from './state/data-table-state.service';
       </div>
       <div
         class="novo-data-table-empty-container"
-        *ngIf="dataSource?.totallyEmpty && !dataSource?.loading && !loading && !state.userFiltered && !dataSource.pristine"
+        *ngIf="empty && !dataSource?.loading && !loading && !state.userFiltered && !dataSource.pristine"
       >
         <div class="novo-data-table-empty-message">
           <ng-container *ngTemplateOutlet="templates['emptyMessage'] || templates['defaultNoResultsMessage']"></ng-container>
@@ -459,12 +458,20 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
 
   @HostBinding('class.empty')
   get empty() {
-    return this.dataSource && this.dataSource.totallyEmpty;
+    if (this.useOverrideTotal) {
+      return this.overrideTotal === 0;
+    } else {
+      return this.dataSource && this.dataSource.totallyEmpty;
+    }
   }
 
   @HostBinding('class.loading')
   get loadingClass() {
     return this.loading || (this.dataSource && this.dataSource.loading);
+  }
+
+  get useOverrideTotal(): boolean {
+    return !Helpers.isBlank(this.overrideTotal)
   }
 
   @Input() listInteractions: ListInteractionDictionary;
