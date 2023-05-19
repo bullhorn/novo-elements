@@ -36,7 +36,7 @@ import {
 import { ListInteractionDictionary, ListInteractionEvent } from './ListInteractionTypes';
 import { StaticDataTableService } from './services/static-data-table.service';
 import { DataTableState } from './state/data-table-state.service';
-import { Helpers } from "../../utils";
+import { Helpers } from '../../utils/Helpers';
 
 @Component({
   selector: 'novo-data-table',
@@ -458,11 +458,7 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
 
   @HostBinding('class.empty')
   get empty() {
-    if (this.useOverrideTotal) {
-      return this.overrideTotal === 0;
-    } else {
-      return this.dataSource && this.dataSource.totallyEmpty;
-    }
+    return this.useOverrideTotal ? this.overrideTotal === 0 : this.dataSource?.totallyEmpty;
   }
 
   @HostBinding('class.loading')
