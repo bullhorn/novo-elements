@@ -20,19 +20,20 @@ import { NovoLabelService } from '../../../services';
       </novo-field>
       <ng-container *novoConditionInputDef="let formGroup; viewIndex as viewIndex; fieldMeta as meta" [ngSwitch]="formGroup.value.operator" [formGroup]="formGroup">
         <novo-field *novoSwitchCases="['includeAny', 'excludeAny']" #novoField>
-          <novo-chip-list [(ngModel)]="chipListModel" [ngModelOptions]="{ standalone: true }">
-            <novo-chip *ngFor="let item of formGroup.get('value').value" (removed)="remove(item, formGroup)">
+          <novo-chip-list [(ngModel)]="chipListModel" [ngModelOptions]="{ standalone: true }" (click)="openPlacesList(viewIndex)">
+            <novo-chip *ngFor="let item of formGroup.get('value').value" (removed)="remove(item, formGroup, viewIndex)">
               {{ item.formatted_address }}
               <novo-icon novoChipRemove>close</novo-icon>
             </novo-chip>
             <input
               novoChipInput
+              [id]="viewIndex"
               [placeholder]="labels.location"
-              (keyup)="onKeyup($event)"
+              (keyup)="onKeyup($event, viewIndex)"
               [picker]="placesPicker"
               #addressInput />
           </novo-chip-list>
-          <novo-picker-toggle triggerOnFocus [overlayId]="viewIndex" icon="location" novoSuffix>
+          <novo-picker-toggle [overlayId]="viewIndex" icon="location" novoSuffix>
             <google-places-list [term]="term" (select)="selectPlace($event, formGroup, viewIndex)" formControlName="value" #placesPicker></google-places-list>
           </novo-picker-toggle>
         </novo-field>
@@ -53,7 +54,8 @@ export class NovoDefaultAddressConditionDef extends AbstractConditionFieldDef {
     super(labels);
   }
 
-  onKeyup(event) {
+  onKeyup(event, viewIndex) {
+    this.openPlacesList(viewIndex);
     this.term = event.target.value;
   }
 
@@ -61,8 +63,20 @@ export class NovoDefaultAddressConditionDef extends AbstractConditionFieldDef {
     return formGroup.value.value || [];
   }
 
-  getCurrentOverlay(viewIndex: string) {
+  getCurrentOverlay(viewIndex: string): NovoPickerToggleElement {
     return this.overlayChildren?.find(item => item.overlayId === viewIndex);
+  }
+
+  getCurrentInput(viewIndex: string): ElementRef {
+    return this.inputChildren?.find(item => (item as any).nativeElement.id === viewIndex);
+  }
+
+  openPlacesList(viewIndex) {
+    this.getCurrentOverlay(viewIndex)?.openPanel();
+  }
+
+  closePlacesList(viewIndex) {
+    this.getCurrentOverlay(viewIndex)?.closePanel();
   }
 
   selectPlace(event: any, formGroup: AbstractControl, viewIndex: string): void {
@@ -81,10 +95,11 @@ export class NovoDefaultAddressConditionDef extends AbstractConditionFieldDef {
     this.inputChildren.forEach(input => {
       input.nativeElement.value = '';
     })
-    this.getCurrentOverlay(viewIndex)?.closePanel();
+    this.getCurrentInput(viewIndex)?.nativeElement.focus();
+    this.closePlacesList(viewIndex);
   }
 
-  remove(valueToRemove: any, formGroup: AbstractControl): void {
+  remove(valueToRemove: any, formGroup: AbstractControl, viewIndex: string): void {
     const current = this.getValue(formGroup);
     const index = current.indexOf(valueToRemove);
     if (index >= 0) {
@@ -92,5 +107,6 @@ export class NovoDefaultAddressConditionDef extends AbstractConditionFieldDef {
       oldValue.splice(index, 1);
       formGroup.get('value').setValue(oldValue);
     }
+    this.closePlacesList(viewIndex);
   }
 }
