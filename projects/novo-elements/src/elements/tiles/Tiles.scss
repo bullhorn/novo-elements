@@ -64,9 +64,10 @@ novo-tiles {
     &.disabled {
       border-color: $disabled-color;
       opacity: 0.4;
+      pointer-events: auto;
+      cursor: not-allowed;
       .tile {
-        pointer-events: auto;
-        cursor: not-allowed;
+        pointer-events: none;
         opacity: 1;
         &:hover {
           box-shadow: none;

@@ -5,4 +5,8 @@
   </novo-radio>
   <novo-radio button="true" [checked]="false" name="button" value="three" (change)="onChange($event)" label="Three">
   </novo-radio>
+  <novo-radio button="true" [checked]="false" name="button" value="disabled" (change)="onChange($event)" label="Disabled" [disabled]="true">
+  </novo-radio>
+  <novo-radio button="true" [checked]="true" name="button" value="alsoDisabled" (change)="onChange($event)" label="Also Disabled" [disabled]="true">
+  </novo-radio>
 </novo-radio-group>
