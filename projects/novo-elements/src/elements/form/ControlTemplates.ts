@@ -394,7 +394,7 @@ import { NovoTemplate } from '../common/novo-template/novo-template.directive';
     <!--Radio-->
     <ng-template novoTemplate="radio" let-control let-form="form" let-errors="errors" let-methods="methods">
       <div [formGroup]="form" class="novo-control-input-container">
-        <novo-radio-group [name]="control.key" [formControlName]="control.key">
+        <novo-radio-group [name]="control.key" [formControlName]="control.key" [disabled]="control.disabled">
           <novo-radio
             *ngFor="let option of control.options"
             [value]="option.value"
