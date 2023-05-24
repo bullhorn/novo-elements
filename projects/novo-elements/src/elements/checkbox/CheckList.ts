@@ -40,14 +40,10 @@ const CHECKLIST_VALUE_ACCESSOR = {
   `,
 })
 export class NovoCheckListElement implements ControlValueAccessor, OnInit {
-  @Input()
-  name: string;
-  @Input()
-  options: Array<any>;
-  @Input()
-  disabled: boolean;
-  @Output()
-  onSelect: EventEmitter<any> = new EventEmitter();
+  @Input() name: string;
+  @Input() options: Array<any>;
+  @Input() disabled: boolean;
+  @Output() onSelect: EventEmitter<any> = new EventEmitter();
 
   _options: Array<any>;
   model: any;
