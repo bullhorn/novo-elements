@@ -45,7 +45,7 @@ let nextId = 0;
         #input
         type="checkbox"
         [required]="_required"
-        [checked]="_checked"
+        [checked]="checked"
         [id]="id"
         [attr.name]="name"
         [attr.value]="value"
@@ -60,12 +60,12 @@ let nextId = 0;
       />
       <label [attr.for]="name" (click)="select($event)" [class.disabled]="disabled">
         <i
-          [class.bhi-checkbox-empty]="!_checked && !_indeterminate && boxIcon"
-          [class.bhi-checkbox-filled]="_checked && !_indeterminate && boxIcon"
-          [class.bhi-checkbox-indeterminate]="_indeterminate && boxIcon"
-          [class.bhi-circle-o]="!_checked && !_indeterminate && !boxIcon"
-          [class.bhi-check]="_checked && !_indeterminate && !boxIcon"
-          [class.bhi-circle]="_indeterminate && !boxIcon"
+          [class.bhi-checkbox-empty]="!checked && !indeterminate && boxIcon"
+          [class.bhi-checkbox-filled]="checked && !indeterminate && boxIcon"
+          [class.bhi-checkbox-indeterminate]="indeterminate && boxIcon"
+          [class.bhi-circle-o]="!checked && !indeterminate && !boxIcon"
+          [class.bhi-check]="checked && !indeterminate && !boxIcon"
+          [class.bhi-circle]="indeterminate && !boxIcon"
         ></i>
         <span *ngIf="label">{{ label }}</span>
         <span *ngIf="!label" class="novo-checkbox-text"><ng-content></ng-content></span>
