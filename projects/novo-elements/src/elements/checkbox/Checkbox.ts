@@ -42,8 +42,8 @@ let nextId = 0;
       <input
         #input
         type="checkbox"
-        [required]="required"
-        [checked]="checked"
+        [required]="_required"
+        [checked]="_checked"
         [id]="id"
         [attr.name]="name"
         [attr.value]="value"
@@ -58,12 +58,12 @@ let nextId = 0;
       />
       <label [attr.for]="name" (click)="select($event)" [class.disabled]="disabled">
         <i
-          [class.bhi-checkbox-empty]="!checked && !indeterminate && boxIcon"
-          [class.bhi-checkbox-filled]="checked && !indeterminate && boxIcon"
-          [class.bhi-checkbox-indeterminate]="indeterminate && boxIcon"
-          [class.bhi-circle-o]="!checked && !indeterminate && !boxIcon"
-          [class.bhi-check]="checked && !indeterminate && !boxIcon"
-          [class.bhi-circle]="indeterminate && !boxIcon"
+          [class.bhi-checkbox-empty]="!_checked && !_indeterminate && boxIcon"
+          [class.bhi-checkbox-filled]="_checked && !_indeterminate && boxIcon"
+          [class.bhi-checkbox-indeterminate]="_indeterminate && boxIcon"
+          [class.bhi-circle-o]="!_checked && !_indeterminate && !boxIcon"
+          [class.bhi-check]="_checked && !_indeterminate && !boxIcon"
+          [class.bhi-circle]="_indeterminate && !boxIcon"
         ></i>
         <span *ngIf="label">{{ label }}</span>
         <span *ngIf="!label" class="novo-checkbox-text"><ng-content></ng-content></span>
@@ -91,19 +91,14 @@ export class NovoCheckboxElement implements ControlValueAccessor, OnInit {
   @Input('aria-describedby') ariaDescribedby: string;
 
   private _uniqueId: string = `novo-checkbox-${++nextId}`;
+  boxIcon: boolean = true;
 
-  @Input()
-  id: string = this._uniqueId;
-  @Input()
-  name: string = this._uniqueId;
-  @Input()
-  label: string;
-  @Input()
-  disabled: boolean = false;
-  @Input()
-  layoutOptions: { iconStyle?: string }; // TODO - avoid configs like this
-  @Input()
-  color: string;
+  @Input() id: string = this._uniqueId;
+  @Input() name: string = this._uniqueId;
+  @Input() label: string;
+  @Input() disabled: boolean = false;
+  @Input() layoutOptions: { iconStyle?: string }; // TODO - avoid configs like this
+  @Input() color: string;
   /** The value attribute of the native input element */
   @Input() value: string;
   @Input() tabIndex: number;
@@ -116,7 +111,7 @@ export class NovoCheckboxElement implements ControlValueAccessor, OnInit {
   set required(value: boolean) {
     this._required = coerceBooleanProperty(value);
   }
-  private _required: boolean;
+  _required: boolean;
 
   /** Whether the checkbox is checked. */
   @BooleanInput()
@@ -130,7 +125,7 @@ export class NovoCheckboxElement implements ControlValueAccessor, OnInit {
       this._cdr.markForCheck();
     }
   }
-  private _checked: boolean = false;
+  _checked: boolean = false;
 
   @BooleanInput()
   @Input()
@@ -145,7 +140,7 @@ export class NovoCheckboxElement implements ControlValueAccessor, OnInit {
     }
     this._syncIndeterminate(this._indeterminate);
   }
-  private _indeterminate: boolean = false;
+  _indeterminate: boolean = false;
 
   /** The native `<input type="checkbox">` element */
   @ViewChild('input') _inputElement: ElementRef<HTMLInputElement>;
@@ -156,10 +151,8 @@ export class NovoCheckboxElement implements ControlValueAccessor, OnInit {
   /** Event emitted when the checkbox's `indeterminate` value changes. */
   @Output() readonly indeterminateChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  @Output()
-  onSelect: EventEmitter<any> = new EventEmitter();
+  @Output() onSelect: EventEmitter<any> = new EventEmitter();
 
-  boxIcon: boolean = true;
 
   onModelChange: Function = () => {};
   onModelTouched: Function = () => {};

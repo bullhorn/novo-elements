@@ -168,14 +168,7 @@ export class NovoTimePickerInputElement implements OnInit, OnChanges, ControlVal
   }
 
   onComplete(dt) {
-    if (this.value instanceof Date && dt instanceof Date) {
-      if (this.value.getTime() !== dt.getTime()) {
-        this.dispatchOnChange(dt);
-      }
-    }
-    else if (this.value !== dt) {
-      this.dispatchOnChange(dt);
-    }
+    this.dispatchOnChange(dt);
   }
 
   /** BEGIN: Convenient Panel Methods. */
