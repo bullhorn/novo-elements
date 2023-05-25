@@ -4,7 +4,6 @@ import {
   Component,
   EventEmitter,
   forwardRef,
-  HostBinding,
   Inject,
   Input,
   OnInit,
@@ -32,7 +31,7 @@ const RADIO_VALUE_ACCESSOR = {
       type="radio"
       [id]="id"
       [name]="name"
-      [checked]="checked"
+      [checked]="_checked"
       [tabIndex]="tabindex"
       [disabled]="disabled"
       (focus)="focus.emit($event)"
@@ -42,16 +41,16 @@ const RADIO_VALUE_ACCESSOR = {
     <label [attr.for]="id" [class.disabled]="disabled">
       <novo-button
         *ngIf="button"
-        [ngClass]="{ unchecked: !checked, checked: checked, 'has-icon': !!icon }"
+        [ngClass]="{ unchecked: !_checked, checked: _checked, 'has-icon': !!icon }"
         [theme]="theme"
-        [color]="checked ? color : null"
+        [color]="_checked ? color : null"
         [icon]="icon"
         [size]="size"
       >
         {{ label }}
       </novo-button>
       <div *ngIf="!button" class="novo-radio-button-label">
-        <i [ngClass]="{ 'bhi-radio-empty': !checked, 'bhi-radio-filled': checked }"></i>
+        <i [ngClass]="{ 'bhi-radio-empty': !_checked, 'bhi-radio-filled': _checked }"></i>
         {{ label }}
         <ng-content></ng-content>
       </div>
@@ -63,37 +62,29 @@ const RADIO_VALUE_ACCESSOR = {
 })
 export class NovoRadioElement implements ControlValueAccessor, OnInit {
   private _uniqueId: string = `novo-radio-${++nextId}`;
+  private _value: boolean = false;
+  _checked: boolean = false;
+
   @Input() id: string = this._uniqueId;
   @Input() name: string = this._uniqueId;
   @Input() tabindex: number = 0;
-
-  @Input()
-  vertical: boolean = false;
-  @Input()
-  label: string;
-  @Input()
-  button: boolean = false;
-  @Input()
-  theme: string = 'secondary';
-  @Input()
-  size: string;
-  @Input()
-  icon: string;
-  @Input()
-  color: string;
+  @Input() vertical: boolean = false;
+  @Input() label: string;
+  @Input() button: boolean = false;
+  @Input() theme: string = 'secondary';
+  @Input() size: string;
+  @Input() icon: string;
+  @Input() color: string;
+  @Input() disabled: boolean;
 
   @Output() change = new EventEmitter();
   @Output() blur = new EventEmitter();
   @Output() focus = new EventEmitter();
 
-  private _checked: boolean = false;
-  private _value: boolean = false;
-  private _disabled: boolean = false;
-
-  @Input() get checked(): boolean {
+  @Input()
+  get checked(): boolean {
     return this._checked;
   }
-
   set checked(value: boolean) {
     value = !!value;
     if (this._checked !== value) {
@@ -105,7 +96,8 @@ export class NovoRadioElement implements ControlValueAccessor, OnInit {
     }
   }
 
-  @Input() get value(): boolean {
+  @Input()
+  get value(): boolean {
     return this._value;
   }
   set value(value) {
@@ -117,15 +109,6 @@ export class NovoRadioElement implements ControlValueAccessor, OnInit {
       this.onChangeCallback(this._value);
     }
   }
-  // Disabled State
-  @Input()
-  @HostBinding('class.disabled')
-  get disabled(): boolean {
-    return this._disabled || (this.radioGroup != null && this.radioGroup.disabled);
-  }
-  set disabled(value: boolean) {
-    this._disabled = !!value;
-  }
 
   constructor(@Inject(NOVO_RADIO_GROUP) @Optional() public radioGroup: RadioGroup, private ref: ChangeDetectorRef) {
     this.radioGroup = radioGroup;
@@ -136,6 +119,7 @@ export class NovoRadioElement implements ControlValueAccessor, OnInit {
       this.checked = this.radioGroup.value === this._value;
       this.vertical = this.radioGroup.appearance === 'vertical';
       this.name = this.radioGroup.name;
+      this.disabled = this.disabled || this.radioGroup.disabled;
     }
   }
 

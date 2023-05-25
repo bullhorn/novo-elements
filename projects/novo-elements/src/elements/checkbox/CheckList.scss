@@ -13,14 +13,13 @@
     cursor: pointer;
     position: relative;
     &:hover {
-      label {
-        i {
-          &:before {
-            box-shadow: 0px 0px 15px 3px rgba(74, 137, 220, 0.25);
-          }
-          &.bhi-checkbox-empty,
-          &.bhi-radio-empty {
-            color: $color-positive;
+      &:not(.disabled) {
+        label {
+          i {
+            &.bhi-checkbox-empty,
+            &.bhi-radio-empty {
+              color: $color-positive;
+            }
           }
         }
       }
@@ -34,10 +33,11 @@
       }
     }
     &.disabled {
-      label > i {
-        opacity: 0.7;
+      pointer-events: auto;
+      label {
+        cursor: not-allowed;
+        opacity: 0.4;
       }
-      pointer-events: none;
     }
     input[type="checkbox"] {
       appearance: none !important;
@@ -46,9 +46,6 @@
       position: absolute;
       &:focus + label {
         i {
-          &:before {
-            text-shadow: 0px 0px 20px rgba(74, 137, 220, 0.5);
-          }
           &.bhi-checkbox-empty,
           &.bhi-checkbox-filled {
             color: $color-positive;
