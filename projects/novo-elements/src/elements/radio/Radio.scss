@@ -22,7 +22,7 @@ novo-radio-group {
       pointer-events: none;
       border-radius: 0 !important;
       &.unchecked {
-        opacity: 0.5;
+        opacity: 0.6;
       }
       &[theme="icon"] {
         margin-right: 0;
@@ -64,9 +64,6 @@ novo-radio {
     opacity: 0;
     &:focus + label {
       i {
-        &:before {
-          text-shadow: 0px 0px 20px rgba(74, 137, 220, 0.5);
-        }
         &.bhi-radio-empty,
         &.bhi-radio-filled {
           color: $positive;
@@ -76,9 +73,6 @@ novo-radio {
   }
   > label {
     cursor: pointer;
-    &.disabled {
-      cursor: not-allowed;
-    }
     .novo-radio-button-label {
       @include novo-body-text();
       display: inline;
@@ -96,9 +90,9 @@ novo-radio {
       }
     }
     &.disabled {
-      i {
-        opacity: 0.4;
-      }
+      pointer-events: auto;
+      cursor: not-allowed;
+      opacity: 0.4;
       button[theme].has-icon {
         opacity: 0.4;
       }
