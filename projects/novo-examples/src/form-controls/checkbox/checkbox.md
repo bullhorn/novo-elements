@@ -1,8 +1,6 @@
 Checkbox [(source)](https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/checkbox)
 ==========================================================================================
 
-A radio group
-
 ##### Basic
 
 <code-example example="basic-checkbox"></code-example>
