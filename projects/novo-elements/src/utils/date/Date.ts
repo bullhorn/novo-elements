@@ -1,7 +1,7 @@
-import { addDays, addHours, addMonths, addWeeks, Day, differenceInCalendarDays, differenceInDays,
-    differenceInSeconds, endOfDay, endOfMonth, endOfWeek, format, getMonth, getYear, Interval,
-    isAfter, isBefore, isDate, isSameDay, isSameMonth, isSameSecond, isWithinInterval, parse,
-    parseISO, setHours, setMinutes, startOfDay, startOfMinute, startOfMonth, startOfWeek, toDate } from 'date-fns';
+import { addDays, addMonths, addWeeks, Day, differenceInCalendarDays, differenceInDays,
+    differenceInSeconds, endOfDay, endOfMonth, endOfWeek, format, getMonth, getYear,
+    isAfter, isBefore, isSameDay, isSameMonth, isSameSecond, isWithinInterval, parse,
+    setHours, setMinutes, startOfDay, startOfMinute, startOfMonth, startOfWeek } from 'date-fns';
 import { Helpers } from '../Helpers';
 import { convertTokens } from './convert-tokens';
 import { legacyParse, LegacyParseOptions } from './legacy-parse';
