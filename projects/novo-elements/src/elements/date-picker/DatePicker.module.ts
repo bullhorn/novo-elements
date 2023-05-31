@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 // Vendor
-import { TextMaskModule } from 'angular2-text-mask';
+import { IMaskDirectiveModule } from 'angular-imask';
 import { NovoPipesModule } from 'novo-elements/pipes';
 // APP
 import { NovoButtonModule } from 'novo-elements/elements/button';
@@ -22,7 +22,7 @@ import { NovoMultiDateInputElement } from './MultiDateInput';
     NovoButtonModule,
     NovoPipesModule,
     NovoOverlayModule,
-    TextMaskModule,
+    IMaskDirectiveModule,
     NovoIconModule,
     NovoChipsModule,
     NovoCalendarModule,

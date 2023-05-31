@@ -14,7 +14,6 @@ import {
   ViewChild,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import * as IMask from 'imask';
 // App
 import { NovoOverlayTemplateComponent } from 'novo-elements/elements/common';
 import { DateFormatService, NovoLabelService } from 'novo-elements/services';
@@ -115,56 +114,7 @@ export class NovoTimePickerInputElement implements OnInit, OnChanges, ControlVal
 
   initFormatOptions() {
     this.placeholder = this.military ? this.labels.timeFormatPlaceholder24Hour : this.labels.timeFormatPlaceholderAM;
-    const timeFormat = this.military ? 'HH:mm' : 'hh:mm A';
-    const amFormat = this.labels.timeFormatAM.toUpperCase();
-    const pmFormat = this.labels.timeFormatPM.toUpperCase();
-    this.maskOptions = {
-      mask: Date,
-      pattern: this.military ? 'HH:mm' : 'hh:mm aa',
-      overwrite: true,
-      autofix: true,
-      lazy: false,
-      min: new Date(1970, 0, 1),
-      max: new Date(2030, 0, 1),
-      prepare(str) {
-        return str.toUpperCase();
-      },
-      format(date) {
-        return DateUtil.format(date, timeFormat);
-      },
-      parse: (str) => {
-        const time = this.military ? str : this.convertTime12to24(str);
-        return DateUtil.parse(`${DateUtil.format(Date.now(), 'YYYY-MM-DD')}T${time}`);
-      },
-      blocks: {
-        HH: {
-          mask: IMask.MaskedRange,
-          placeholderChar: 'H',
-          maxLength: 2,
-          from: 0,
-          to: 23,
-        },
-        hh: {
-          mask: IMask.MaskedRange,
-          placeholderChar: 'h',
-          maxLength: 2,
-          from: 1,
-          to: 12,
-        },
-        mm: {
-          mask: IMask.MaskedRange,
-          placeholderChar: 'm',
-          maxLength: 2,
-          from: 0,
-          to: 59,
-        },
-        aa: {
-          mask: IMask.MaskedEnum,
-          placeholderChar: 'x',
-          enum: ['AM', 'PM', 'am', 'pm', amFormat, pmFormat],
-        },
-      },
-    };
+    this.maskOptions = this.dateFormatService.getTimeMask(this.military);
   }
 
   onComplete(dt) {
@@ -324,20 +274,6 @@ export class NovoTimePickerInputElement implements OnInit, OnChanges, ControlVal
     if (item) {
       list.scrollTop = (item as HTMLElement).offsetTop;
     }
-  }
-
-  convertTime12to24(time12h: string) {
-    const pmFormat = this.labels.timeFormatPM.toUpperCase();
-
-    const [time, modifier] = time12h.split(' ');
-    let [hours, minutes] = time.split(':');
-    if (hours === '12') {
-      hours = '00';
-    }
-    if (['PM', pmFormat].includes(modifier)) {
-      hours = `${parseInt(hours, 10) + 12}`.padStart(2, '0');
-    }
-    return `${hours}:${minutes}`;
   }
 
   hourOneFormatRequired(hourInput: string): boolean {

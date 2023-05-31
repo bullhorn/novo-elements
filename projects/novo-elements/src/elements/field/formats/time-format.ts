@@ -15,7 +15,7 @@ import {
 import { COMPOSITION_BUFFER_MODE, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { IMaskDirective, IMaskFactory } from 'angular-imask';
 import { isValid } from 'date-fns';
-import * as IMask from 'imask';
+import { MaskedEnum, MaskedRange } from 'imask';
 import { NovoLabelService } from 'novo-elements/services';
 import { DateUtil, Key } from 'novo-elements/utils';
 import { NovoInputFormat, NOVO_INPUT_FORMAT } from './base-format';
@@ -87,28 +87,28 @@ export class NovoTimeFormatDirective extends IMaskDirective<any> implements Novo
       },
       blocks: {
         HH: {
-          mask: IMask.MaskedRange,
+          mask: MaskedRange,
           placeholderChar: '-',
           maxLength: 2,
           from: 0,
           to: 23,
         },
         hh: {
-          mask: IMask.MaskedRange,
+          mask: MaskedRange,
           placeholderChar: '-',
           maxLength: 2,
           from: 1,
           to: 12,
         },
         mm: {
-          mask: IMask.MaskedRange,
+          mask: MaskedRange,
           placeholderChar: '-',
           maxLength: 2,
           from: 0,
           to: 59,
         },
         aa: {
-          mask: IMask.MaskedEnum,
+          mask: MaskedEnum,
           placeholderChar: '-',
           enum: ['AM', 'PM', 'am', 'pm', amFormat, pmFormat],
         },

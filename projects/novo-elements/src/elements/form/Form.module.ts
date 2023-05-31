@@ -4,8 +4,6 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { IMaskDirectiveModule } from 'angular-imask';
-// Vendor
-import { TextMaskModule } from 'angular2-text-mask';
 // APP
 import { NovoCheckboxModule } from 'novo-elements/elements/checkbox';
 import { NovoCommonModule } from 'novo-elements/elements/common';
@@ -60,7 +58,6 @@ import { NovoFormElement } from './Form';
     NovoPopOverModule,
     NovoDragulaModule,
     IMaskDirectiveModule,
-    TextMaskModule,
     NovoTipWellModule,
     NovoModalModule,
     NovoButtonModule,

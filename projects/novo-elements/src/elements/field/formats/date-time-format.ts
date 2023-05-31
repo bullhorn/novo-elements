@@ -2,7 +2,7 @@ import { Directive, ElementRef, EventEmitter, forwardRef, Inject, Input, Optiona
 import { COMPOSITION_BUFFER_MODE, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { IMaskDirective, IMaskFactory } from 'angular-imask';
 import { isValid } from 'date-fns';
-import * as IMask from 'imask';
+import { MaskedEnum, MaskedRange } from 'imask';
 import { NovoLabelService } from 'novo-elements/services';
 import { NovoInputFormat, DATE_FORMATS, NOVO_INPUT_FORMAT } from './base-format';
 import { DateUtil, Key } from 'novo-elements/utils';
@@ -59,58 +59,58 @@ export class NovoDateTimeFormatDirective extends IMaskDirective<any> implements 
       parse: (str) => DateUtil.parse(str),
       blocks: {
         d: {
-          mask: IMask.MaskedRange,
+          mask: MaskedRange,
           placeholderChar: 'D',
           from: 1,
           to: 31,
           maxLength: 2,
         },
         m: {
-          mask: IMask.MaskedRange,
+          mask: MaskedRange,
           placeholderChar: 'M',
           from: 1,
           to: 12,
           maxLength: 2,
         },
         Y: {
-          mask: IMask.MaskedRange,
+          mask: MaskedRange,
           placeholderChar: 'Y',
           from: 1900,
           to: 9999,
         },
         HH: {
-            mask: IMask.MaskedRange,
-            placeholderChar: '-',
-            maxLength: 2,
-            from: 0,
-            to: 23,
-          },
-          hh: {
-            mask: IMask.MaskedRange,
-            placeholderChar: '-',
-            maxLength: 2,
-            from: 1,
-            to: 12,
-          },
-          mm: {
-            mask: IMask.MaskedRange,
-            placeholderChar: '-',
-            maxLength: 2,
-            from: 0,
-            to: 59,
-          },
-          ss: {
-            mask: IMask.MaskedRange,
-            placeholderChar: '-',
-            maxLength: 2,
-            from: 0,
-            to: 59,
-          },
-          aa: {
-            mask: IMask.MaskedEnum,
-            placeholderChar: '-',
-            enum: ['AM', 'PM', 'am', 'pm', amFormat, pmFormat],
-          },
+          mask: MaskedRange,
+          placeholderChar: '-',
+          maxLength: 2,
+          from: 0,
+          to: 23,
+        },
+        hh: {
+          mask: MaskedRange,
+          placeholderChar: '-',
+          maxLength: 2,
+          from: 1,
+          to: 12,
+        },
+        mm: {
+          mask: MaskedRange,
+          placeholderChar: '-',
+          maxLength: 2,
+          from: 0,
+          to: 59,
+        },
+        ss: {
+          mask: MaskedRange,
+          placeholderChar: '-',
+          maxLength: 2,
+          from: 0,
+          to: 59,
+        },
+        aa: {
+          mask: MaskedEnum,
+          placeholderChar: '-',
+          enum: ['AM', 'PM', 'am', 'pm', amFormat, pmFormat],
+        },
       },
     };
   }
