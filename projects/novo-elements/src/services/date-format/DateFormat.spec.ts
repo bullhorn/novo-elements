@@ -27,8 +27,7 @@ describe('Service: DateFormatService', () => {
     it('should return a mask that supports dd.MM.yyyy', () => {
       const value = '11.02.2017';
       const dateMask = service.getDateMask(value);
-      expect(value.match(dateMask[0])).toBeTruthy();}
-      }
+      expect(value.match(dateMask[0])).toBeTruthy();
     });
     it('should return a mask that supports d/M/yyyy', () => {
       const value = '1/2/2017';
