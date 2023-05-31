@@ -1,3 +1,4 @@
+export * from './checkbox';
 export * from './chips';
 export * from './date-picker';
 export * from './date-time-picker';
