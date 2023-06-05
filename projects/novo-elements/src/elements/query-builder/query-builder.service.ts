@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-import { NovoLabelService } from '../../services';
+import { NovoLabelService } from 'novo-elements/services';
 import { BaseConditionFieldDef } from './query-builder.directives';
 import { BaseFieldDef, Conjunction, FieldConfig } from './query-builder.types';
 

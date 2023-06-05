@@ -1,8 +1,8 @@
 // NG2
 import { Component, Input } from '@angular/core';
-import { NovoLabelService } from '../../../../services/novo-label-service';
 // APP
-import { BaseRenderer } from '../base-renderer/BaseRenderer';
+import { NovoLabelService } from 'novo-elements/services';
+import { BaseRenderer } from '../base-renderer';
 
 @Component({
   selector: 'date-cell',

@@ -1,10 +1,10 @@
 // NG2
 import { async, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
-import { NovoLabelService } from '../../services/novo-label-service';
-import { NovoDatePickerModule } from '../date-picker/DatePicker.module';
-import { NovoTimePickerModule } from '../time-picker/TimePicker.module';
 // APP
+import { NovoLabelService } from 'novo-elements/services';
+import { NovoDatePickerModule } from 'novo-elements/elements/date-picker';
+import { NovoTimePickerModule } from 'novo-elements/elements/time-picker';
 import { NovoDateTimePickerElement } from './DateTimePicker';
 
 xdescribe('Elements: NovoDateTimePickerElement', () => {

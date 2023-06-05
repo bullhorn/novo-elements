@@ -14,10 +14,9 @@ import {
   ViewContainerRef,
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
-import { Key } from '../../utils';
-import { ComponentUtils } from './../../utils/component-utils/ComponentUtils';
+import { ComponentUtils } from 'novo-elements/services';
+import { Key, OutsideClick } from 'novo-elements/utils';
 // APP
-import { OutsideClick } from './../../utils/outside-click/OutsideClick';
 import { QuickNoteResults } from './extras/quick-note-results/QuickNoteResults';
 
 // Value accessor for the component (supports ngModel)

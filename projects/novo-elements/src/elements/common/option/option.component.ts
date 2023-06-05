@@ -18,7 +18,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { fromEvent, Subject, Subscription } from 'rxjs';
-import { BooleanInput, Key } from '../../../utils';
+import { BooleanInput, Key } from 'novo-elements/utils';
 import { NovoOptgroup, NovoOptgroupBase, NOVO_OPTGROUP } from './optgroup.component';
 import { NovoOptionParentComponent, NOVO_OPTION_PARENT_COMPONENT } from './option-parent';
 

@@ -2,10 +2,11 @@
 import { ChangeDetectorRef } from '@angular/core';
 import { async, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
-import {DataTableSource, NovoDataTable, NovoLabelService, NovoSelectModule, NovoTilesModule} from '../../..';
+import { NovoDataTable } from './data-table.component';
+import { NovoSelectModule } from 'novo-elements/elements/select';
+import { NovoTilesModule } from 'novo-elements/elements/tiles';
+import { NovoLabelService } from 'novo-elements/services';
 import { DataTableState } from './state/data-table-state.service';
-
-// App
 
 describe('Elements: NovoDataTable', () => {
   let fixture;

@@ -17,13 +17,10 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 // Vendor
 import * as dateFns from 'date-fns';
 import { createAutoCorrectedDatePipe } from 'text-mask-addons';
-import { DateFormatService } from '../../services/date-format/DateFormat';
-import { NovoLabelService } from '../../services/novo-label-service';
-import { Key } from '../../utils';
-import { Helpers } from '../../utils/Helpers';
 // App
-import { NovoOverlayTemplateComponent } from '../common/overlay/Overlay';
-import { RangeModel } from './date-picker.types';
+import { NovoOverlayTemplateComponent } from 'novo-elements/elements/common';
+import { DateFormatService, NovoLabelService } from 'novo-elements/services';
+import { Helpers, Key, RangeModel } from 'novo-elements/utils';
 
 // Value accessor for the component (supports ngModel)
 const DATE_VALUE_ACCESSOR = {

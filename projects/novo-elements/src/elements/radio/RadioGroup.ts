@@ -13,8 +13,8 @@ import {
   QueryList,
 } from '@angular/core';
 import { ControlValueAccessor, FormGroupDirective, NgControl, NgForm, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { CanUpdateErrorStateCtor, ErrorStateMatcher, mixinErrorState } from '../common';
-import { NovoFieldControl } from '../field';
+import { CanUpdateErrorStateCtor, ErrorStateMatcher, mixinErrorState } from 'novo-elements/elements/common';
+import { NovoFieldControl } from 'novo-elements/elements/field';
 import { NovoRadioElement } from './Radio';
 import { NOVO_RADIO_GROUP } from './tokens';
 

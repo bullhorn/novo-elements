@@ -15,7 +15,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
-import { BooleanInput } from '../../utils';
+import { BooleanInput } from 'novo-elements/utils';
 
 @Component({
   selector: 'novo-nav',

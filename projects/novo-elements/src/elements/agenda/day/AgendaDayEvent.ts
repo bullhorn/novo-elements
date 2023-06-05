@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output, TemplateRef } from '@angular/core';
-import { DayViewEvent } from '../../../utils/calendar-utils/CalendarUtils';
+import { DayViewEvent } from 'novo-elements/utils';
 
 @Component({
   selector: 'novo-agenda-day-event',

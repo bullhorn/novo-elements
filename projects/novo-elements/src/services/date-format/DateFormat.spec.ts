@@ -1,5 +1,5 @@
 // APP
-import { NovoLabelService } from '../../services/novo-label-service';
+import { NovoLabelService } from '../novo-label-service';
 import { DateFormatService } from './DateFormat';
 
 describe('Service: DateFormatService', () => {

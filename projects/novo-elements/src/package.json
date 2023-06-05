@@ -1,0 +1,35 @@
+{
+  "name": "novo-elements",
+  "version": "7.0.0",
+  "sideEffects": true,
+  "peerDependencies": {
+    "@angular/animations": ">=10",
+    "@angular/cdk": ">=10",
+    "@angular/common": ">=10",
+    "@angular/core": ">=10",
+    "@angular/forms": ">=10",
+    "@bullhorn/dragula": ">=1",
+    "angular-imask": "^6.0.5",
+    "angular2-text-mask": "^9.0.0",
+    "brace": "^0.11.0",
+    "classlist.js": "^1.1.20150312",
+    "date-fns": ">=1",
+    "novo-design-tokens": "^0.0.9",
+    "post-robot": "^8.0.0",
+    "rxjs": ">=6",
+    "text-mask-addons": "^3.7.0",
+    "timezone-support": "^2.0.2"
+  },
+  "dependencies": {
+    "tslib": "^2.0.0"
+  },
+  "exports": {
+    "./novo-elements": {
+      "sass": "./novo-elements.scss"
+    }
+  },
+  "schematics": "../../schematics/collection.json",
+  "ng-update": {
+    "migrations": "../../schematics/migration.json"
+  }
+}

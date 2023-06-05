@@ -16,8 +16,8 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { NovoLabelService } from '../../services/novo-label-service';
-import { notify } from '../../utils/notifier/notifier.util';
+import { NovoLabelService } from 'novo-elements/services';
+import { notify } from 'novo-elements/utils';
 import { SimpleTableActionColumn, SimpleTableColumn, SimpleTablePaginationOptions, SimpleTableSearchOptions } from './interfaces';
 import { NovoActivityTableState } from './state';
 import { ActivityTableDataSource, ActivityTableService } from './table-source';

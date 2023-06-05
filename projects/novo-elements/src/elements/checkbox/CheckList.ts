@@ -2,7 +2,7 @@
 import { Component, EventEmitter, forwardRef, Input, OnInit, Output } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 // APP
-import { Helpers } from '../../utils/Helpers';
+import { Helpers } from 'novo-elements/utils';
 
 // Value accessor for the component (supports ngModel)
 const CHECKLIST_VALUE_ACCESSOR = {

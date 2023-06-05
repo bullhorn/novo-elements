@@ -2,7 +2,7 @@ import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { hasModifierKey } from '@angular/cdk/keycodes';
 import { Directive, ElementRef, EventEmitter, forwardRef, Inject, Input, OnChanges, Output } from '@angular/core';
 import { NgControl } from '@angular/forms';
-import { Key } from '../../utils';
+import { Key } from 'novo-elements/utils';
 import { NovoChipsDefaultOptions, NOVO_CHIPS_DEFAULT_OPTIONS } from './ChipDefaults';
 import { NovoChipList } from './ChipList';
 import { NovoChipTextControl } from './ChipTextControl';

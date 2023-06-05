@@ -3,11 +3,9 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, TestBed } from '@angular/core/testing';
 import { FormBuilder, FormsModule, NgControl } from '@angular/forms';
-import { DateFormatService } from '../../services/date-format/DateFormat';
-import { NovoLabelService } from '../../services/novo-label-service';
-import { OptionsService } from '../../services/options/OptionsService';
-import { FormUtils } from '../../utils/form-utils/FormUtils';
-import { NovoOverlayModule } from '../common/overlay/Overlay.module';
+import { DateFormatService, OptionsService, NovoLabelService } from 'novo-elements/services';
+import { FormUtils } from 'novo-elements/elements/form';
+import { NovoOverlayModule } from 'novo-elements/elements/common';
 import { NovoTableElement } from './Table';
 import { NovoTableModule } from './Table.module';
 

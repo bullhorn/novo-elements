@@ -15,11 +15,10 @@ import {
   TemplateRef,
   ViewChild,
 } from '@angular/core';
-import { Key } from '../../../utils';
 import { fromEvent, Subscription } from 'rxjs';
-import { NovoLabelService } from '../../../services/novo-label-service';
-import { Helpers } from '../../../utils/Helpers';
-import { NovoDropdownElement } from '../../dropdown/Dropdown';
+import { NovoLabelService } from 'novo-elements/services';
+import { Helpers, Key } from 'novo-elements/utils';
+import { NovoDropdownElement } from 'novo-elements/elements/dropdown';
 import {
   IDataTableChangeEvent,
   IDataTableColumn,

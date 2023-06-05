@@ -2,8 +2,7 @@
 import { EventEmitter } from '@angular/core';
 import { Validators } from '@angular/forms';
 // APP
-import { Helpers } from '../../../utils/Helpers';
-import { notify } from '../../../utils/notifier/notifier.util';
+import { Helpers, notify } from 'novo-elements/utils';
 import type { IMaskOptions } from '../Control';
 import type { NovoControlGroupAddConfig } from '../ControlGroup';
 

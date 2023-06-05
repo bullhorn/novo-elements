@@ -1,8 +1,8 @@
 // NG2
 import { Component, Directive, EventEmitter, HostBinding, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 // APP
-import { NovoLabelService } from '../../services/novo-label-service';
-import { BooleanInput } from '../../utils';
+import { NovoLabelService } from 'novo-elements/services';
+import { BooleanInput } from 'novo-elements/utils';
 
 @Component({
   selector: 'novo-card-actions',

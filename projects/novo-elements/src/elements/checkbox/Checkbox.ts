@@ -14,9 +14,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { BooleanInput } from '../../utils';
-// APP
-import { Helpers } from '../../utils/Helpers';
+import { BooleanInput, Helpers } from 'novo-elements/utils';
 
 // Value accessor for the component (supports ngModel)
 const CHECKBOX_VALUE_ACCESSOR = {

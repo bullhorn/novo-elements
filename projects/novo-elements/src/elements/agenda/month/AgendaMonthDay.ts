@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output, TemplateRef } from '@angular/core';
-import { CalendarEvent, CalendarEventResponse, MonthViewDay } from '../../../utils/calendar-utils/CalendarUtils';
+import { CalendarEvent, CalendarEventResponse, MonthViewDay } from 'novo-elements/utils';
 
 @Component({
   selector: 'novo-agenda-month-day',

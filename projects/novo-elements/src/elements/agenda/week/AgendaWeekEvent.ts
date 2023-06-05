@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output, TemplateRef } from '@angular/core';
-import { WeekViewEvent } from '../../../utils/calendar-utils/CalendarUtils';
+import { WeekViewEvent } from 'novo-elements/utils';
 
 @Component({
   selector: 'novo-agenda-week-event',

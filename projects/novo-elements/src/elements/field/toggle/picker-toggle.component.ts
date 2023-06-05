@@ -18,9 +18,9 @@ import {
 } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { BooleanInput } from '../../../utils';
-import { NovoButtonElement } from '../../button';
-import { NovoOverlayTemplateComponent } from '../../common/overlay';
+import { BooleanInput } from 'novo-elements/utils';
+import { NovoButtonElement } from 'novo-elements/elements/button';
+import { NovoOverlayTemplateComponent } from 'novo-elements/elements/common';
 import { NovoFieldElement, NOVO_FORM_FIELD } from '../field';
 
 @Component({

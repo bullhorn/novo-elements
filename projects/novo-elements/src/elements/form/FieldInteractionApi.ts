@@ -5,14 +5,13 @@ import { FormArray } from '@angular/forms';
 // Vendor
 import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { NovoLabelService } from '../../services/novo-label-service';
-import { AppBridge } from '../../utils/app-bridge/AppBridge';
-import { FormUtils } from '../../utils/form-utils/FormUtils';
 // APP
-import { Helpers } from '../../utils/Helpers';
-import { NovoModalService } from '../modal/modal.service';
-import { EntityPickerResults } from '../picker/extras/entity-picker-results/EntityPickerResults';
-import { NovoToastService, ToastOptions } from '../toast/ToastService';
+import { NovoModalService } from 'novo-elements/elements/modal';
+import { EntityPickerResults } from 'novo-elements/elements/picker';
+import { NovoToastService, ToastOptions } from 'novo-elements/elements/toast';
+import { NovoLabelService } from 'novo-elements/services';
+import { AppBridge, Helpers } from 'novo-elements/utils';
+import { FormUtils } from './utils/FormUtils';
 import { CustomHttp, ModifyPickerConfigArgs, OptionsFunction } from './FieldInteractionApiTypes';
 import { ControlConfirmModal, ControlPromptModal } from './FieldInteractionModals';
 import { NovoControlConfig } from './FormControls';

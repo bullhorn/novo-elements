@@ -1,6 +1,6 @@
 import { TemplateRef, ViewContainerRef } from '@angular/core';
 import { ComponentFixture, inject, TestBed } from '@angular/core/testing';
-import { Security } from './../../services/security/Security';
+import { Security } from 'novo-elements/services';
 import { TestCmp } from './TestCmp';
 import { Unless } from './Unless';
 

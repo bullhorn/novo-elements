@@ -1,7 +1,7 @@
 // NG2
 import { Component } from '@angular/core';
 // APP
-import { BaseRenderer } from '../base-renderer/BaseRenderer';
+import { BaseRenderer } from '../base-renderer';
 
 @Component({
   selector: 'percentage-cell',

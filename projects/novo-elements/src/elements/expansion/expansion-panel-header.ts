@@ -11,7 +11,7 @@ import {
 } from '@angular/core';
 import { merge, Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
-import { Key } from '../../utils';
+import { Key } from 'novo-elements/utils';
 import { novoExpansionAnimations } from './expansion-animations';
 import { NovoExpansionPanel } from './expansion-panel';
 

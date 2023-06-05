@@ -1,8 +1,8 @@
 // NG
 import { async, TestBed } from '@angular/core/testing';
 // App
-import { NovoLabelService } from '../../services/novo-label-service';
-import { Key } from '../../utils';
+import { NovoLabelService } from 'novo-elements/services';
+import { Key } from 'novo-elements/utils';
 import { NovoSelectElement } from './Select';
 import { NovoSelectModule } from './Select.module';
 

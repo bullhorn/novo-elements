@@ -5,11 +5,9 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 // Vendor
 import { isDate, isValid, parse, startOfDay, subDays } from 'date-fns';
-import { NovoLabelService } from '../../services/novo-label-service';
-import { BooleanInput } from '../../utils';
 // APP
-import { Helpers } from '../../utils/Helpers';
-import { DataTableRangeModel, DatePickerSelectModes, modelTypes, RangeModel, rangeSelectModes } from './date-picker.types';
+import { NovoLabelService } from 'novo-elements/services';
+import { BooleanInput, DataTableRangeModel, DatePickerSelectModes, Helpers, modelTypes, RangeModel, rangeSelectModes } from 'novo-elements/utils';
 
 // Value accessor for the component (supports ngModel)
 const DATE_PICKER_VALUE_ACCESSOR = {

@@ -1,8 +1,8 @@
 // NG2
 import { Injectable } from '@angular/core';
-import { NovoLabelService } from '../../services/novo-label-service';
+import { NovoLabelService } from '../novo-label-service';
 // APP
-import { Helpers } from '../../utils/Helpers';
+import { Helpers } from 'novo-elements/utils';
 
 @Injectable()
 export class DateFormatService {

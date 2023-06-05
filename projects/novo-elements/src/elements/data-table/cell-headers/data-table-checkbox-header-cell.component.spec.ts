@@ -3,15 +3,12 @@ import { CdkColumnDef } from '@angular/cdk/table';
 import { ChangeDetectorRef } from '@angular/core';
 import { async, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
-import {
-  ComponentUtils,
-  NovoButtonModule,
-  NovoDatePickerModule,
-  NovoDropdownModule,
-  NovoLabelService,
-  NovoToastService,
-  NovoTooltipModule,
-} from '../../..';
+import { NovoButtonModule } from 'novo-elements/elements/button';
+import { NovoDatePickerModule } from 'novo-elements/elements/date-picker';
+import { NovoDropdownModule } from 'novo-elements/elements/dropdown';
+import { NovoToastService } from 'novo-elements/elements/toast';
+import { NovoTooltipModule } from 'novo-elements/elements/tooltip';
+import { ComponentUtils, NovoLabelService } from 'novo-elements/services';
 import { NovoDataTable } from '../data-table.component';
 import { NOVO_DATA_TABLE_REF } from '../data-table.token';
 import { DataTableState } from '../state/data-table-state.service';

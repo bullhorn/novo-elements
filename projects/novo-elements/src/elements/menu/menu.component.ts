@@ -15,7 +15,7 @@ import {
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { first } from 'rxjs/operators';
-import { NovoOption } from '../common';
+import { NovoOption } from 'novo-elements/elements/common';
 import { MenuItemDirective } from './menu-item.directive';
 import { CloseMenuEvent, IMenuClickEvent, NovoMenuService } from './menu.service';
 import { MENU_OPTIONS, PARENT_MENU } from './menu.tokens';

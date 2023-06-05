@@ -1,8 +1,8 @@
 // NG2
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { NovoCommonModule } from '../common/common.module';
-import { NovoIconModule } from '../icon/Icon.module';
+import { NovoCommonModule } from 'novo-elements/elements/common';
+import { NovoIconModule } from 'novo-elements/elements/icon';
 import { EntityList } from './EntityList';
 import { RenderPipe } from './Render';
 import { NovoValueElement } from './Value';

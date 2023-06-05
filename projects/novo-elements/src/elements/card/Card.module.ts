@@ -1,11 +1,11 @@
 // NG2
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { NovoButtonModule } from '../button/Button.module';
-import { NovoIconModule } from '../icon';
 // APP
-import { NovoLoadingModule } from '../loading/Loading.module';
-import { NovoTooltipModule } from '../tooltip/Tooltip.module';
+import { NovoButtonModule } from 'novo-elements/elements/button';
+import { NovoIconModule } from 'novo-elements/elements/icon';
+import { NovoLoadingModule } from 'novo-elements/elements/loading';
+import { NovoTooltipModule } from 'novo-elements/elements/tooltip';
 import { CardActionsElement, CardContentElement, CardElement, CardFooterElement, CardHeaderElement } from './Card';
 
 @NgModule({

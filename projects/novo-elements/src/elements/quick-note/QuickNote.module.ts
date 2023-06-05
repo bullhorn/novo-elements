@@ -2,10 +2,10 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { NovoListModule } from './../list/List.module';
 // APP
-import { NovoPipesModule } from '../../pipes/Pipes.module';
-import { NovoLoadingModule } from './../loading/Loading.module';
+import { NovoListModule } from 'novo-elements/elements/list';
+import { NovoPipesModule } from 'novo-elements/pipes';
+import { NovoLoadingModule } from 'novo-elements/elements/loading';
 import { QuickNoteResults } from './extras/quick-note-results/QuickNoteResults';
 import { QuickNoteElement } from './QuickNote';
 

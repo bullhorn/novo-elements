@@ -1,7 +1,7 @@
 // NG2
 import { ChangeDetectorRef, Component, ElementRef, HostBinding } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { NovoLabelService } from '../../../../services/novo-label-service';
+import { NovoLabelService } from 'novo-elements/services';
 // Vendor
 import { BasePickerResults } from '../base-picker-results/BasePickerResults';
 

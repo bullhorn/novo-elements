@@ -2,8 +2,7 @@
 import { Component, ElementRef, forwardRef, Input } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 // APP
-import { NovoLabelService } from '../../services/novo-label-service';
-import { ComponentUtils } from '../../utils/component-utils/ComponentUtils';
+import { ComponentUtils, NovoLabelService } from 'novo-elements/services';
 import { NovoChipElement } from './Chip';
 import { NovoChipsElement } from './Chips';
 

@@ -5,14 +5,12 @@ import { async, inject, TestBed } from '@angular/core/testing';
 // Vendor
 import { of } from 'rxjs';
 // App
-import { NovoLabelService } from '../../services/novo-label-service';
-import { OptionsService } from '../../services/options/OptionsService';
-import { ComponentUtils } from '../../utils/component-utils/ComponentUtils';
-import { FormUtils } from '../../utils/form-utils/FormUtils';
-import { NovoModalService } from '../modal/modal.service';
-import { NovoToastService } from '../toast/ToastService';
+import { NovoModalService } from 'novo-elements/elements/modal';
+import { NovoToastService } from 'novo-elements/elements/toast';
+import { ComponentUtils, NovoLabelService, OptionsService } from 'novo-elements/services';
 import { FieldInteractionApi } from './FieldInteractionApi';
 import { ModifyPickerConfigArgs, OptionsFunction } from './FieldInteractionApiTypes';
+import { FormUtils } from './utils/FormUtils';
 
 describe('FieldInteractionApi', () => {
   let service: FieldInteractionApi;

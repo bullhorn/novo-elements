@@ -21,7 +21,7 @@ import {
   MonthView,
   MonthViewDay,
   WeekDay,
-} from '../../../utils/calendar-utils/CalendarUtils';
+} from 'novo-elements/utils';
 
 /**
  * Shows all events on a given month. Example usage:

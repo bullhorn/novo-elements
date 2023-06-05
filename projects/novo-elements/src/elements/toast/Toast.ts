@@ -1,7 +1,7 @@
 // NG2
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { Deferred, DeferredPromise } from '../../utils';
+import { Deferred, DeferredPromise } from 'novo-elements/utils';
 
 @Component({
   selector: 'novo-toast',

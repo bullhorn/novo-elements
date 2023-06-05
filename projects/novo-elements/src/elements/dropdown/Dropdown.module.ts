@@ -1,7 +1,6 @@
 // NG2
 import { NgModule } from '@angular/core';
-import { NovoOptionModule } from '../common';
-import { NovoOverlayModule } from '../common/overlay/Overlay.module';
+import { NovoOptionModule, NovoOverlayModule } from 'novo-elements/elements/common';
 // APP
 import {
   NovoDropdownElement,

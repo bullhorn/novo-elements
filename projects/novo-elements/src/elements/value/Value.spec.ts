@@ -2,7 +2,6 @@
 import { async, TestBed } from '@angular/core/testing';
 // App
 import { NovoValueElement, NOVO_VALUE_THEME, NOVO_VALUE_TYPE } from './Value';
-// import { NovoLabelService } from '../../services/novo-label-service';
 import { NovoValueModule } from './Value.module';
 // TODO fix specs
 xdescribe('Elements: NovoValueElement', () => {

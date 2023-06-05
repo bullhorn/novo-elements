@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output, TemplateRef } from '@angular/core';
 import * as dateFns from 'date-fns';
-import { WeekDay } from '../../../utils/calendar-utils/CalendarUtils';
+import { WeekDay } from 'novo-elements/utils';
 
 @Component({
   selector: 'novo-agenda-month-header',

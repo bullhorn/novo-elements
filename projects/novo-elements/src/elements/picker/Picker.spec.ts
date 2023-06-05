@@ -1,7 +1,7 @@
 // NG2
 import { async, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
-import { ComponentUtils } from '../../utils/component-utils/ComponentUtils';
+import { ComponentUtils } from 'novo-elements/services';
 import { PickerResults } from './extras/picker-results/PickerResults';
 // App
 import { NovoPickerElement } from './Picker';

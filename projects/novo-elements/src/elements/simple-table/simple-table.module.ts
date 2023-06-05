@@ -2,15 +2,15 @@ import { CdkTableModule } from '@angular/cdk/table';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { NovoButtonModule } from '../button/Button.module';
-import { NovoCheckboxModule } from '../checkbox';
-import { NovoCommonModule, NovoOptionModule } from '../common';
-import { NovoDatePickerModule } from '../date-picker/DatePicker.module';
-import { NovoDropdownModule } from '../dropdown/Dropdown.module';
-import { NovoFormExtrasModule } from '../form/extras/FormExtras.module';
-import { NovoLoadingModule } from '../loading/Loading.module';
-import { NovoSearchBoxModule } from '../search/SearchBox.module';
-import { NovoTilesModule } from '../tiles/Tiles.module';
+import { NovoButtonModule } from 'novo-elements/elements/button';
+import { NovoCheckboxModule } from 'novo-elements/elements/checkbox';
+import { NovoCommonModule, NovoOptionModule } from 'novo-elements/elements/common';
+import { NovoDatePickerModule } from 'novo-elements/elements/date-picker';
+import { NovoDropdownModule } from 'novo-elements/elements/dropdown';
+import { NovoFormExtrasModule } from 'novo-elements/elements/form';
+import { NovoLoadingModule } from 'novo-elements/elements/loading';
+import { NovoSearchBoxModule } from 'novo-elements/elements/search';
+import { NovoTilesModule } from 'novo-elements/elements/tiles';
 import {
   NovoSimpleActionCell,
   NovoSimpleCell,

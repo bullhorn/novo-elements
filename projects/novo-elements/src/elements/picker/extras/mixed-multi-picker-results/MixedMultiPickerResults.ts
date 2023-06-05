@@ -1,9 +1,9 @@
 import { ChangeDetectorRef, Component, ElementRef, OnDestroy, Renderer2, ViewChild } from '@angular/core';
 import { fromEvent, Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
-import { NovoLabelService } from '../../../../services/novo-label-service';
-import { Helpers } from '../../../../utils/Helpers';
-import { NovoListElement } from '../../../list/List';
+import { NovoLabelService } from 'novo-elements/services';
+import { Helpers } from 'novo-elements/utils';
+import { NovoListElement } from 'novo-elements/elements/list';
 import { BasePickerResults } from '../base-picker-results/BasePickerResults';
 
 export interface IMixedMultiPickerOption {

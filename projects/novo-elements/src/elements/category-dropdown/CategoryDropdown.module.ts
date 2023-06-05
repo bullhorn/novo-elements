@@ -1,8 +1,8 @@
 // NG2
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { NovoListModule } from './../list/List.module';
-import { NovoTabModule } from './../tabs/Tabs.module';
+import { NovoListModule } from 'novo-elements/elements/list';
+import { NovoTabModule } from 'novo-elements/elements/tabs';
 // APP
 import { NovoCategoryDropdownElement } from './CategoryDropdown';
 

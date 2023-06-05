@@ -4,10 +4,8 @@ import { Component, ElementRef, EventEmitter, forwardRef, Input, OnInit, Output,
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 // Vendor
 import { ReplaySubject } from 'rxjs';
-import { NovoLabelService } from '../../services/novo-label-service';
-import { Key } from '../../utils';
-import { ComponentUtils } from '../../utils/component-utils/ComponentUtils';
-import { Helpers } from '../../utils/Helpers';
+import { ComponentUtils, NovoLabelService } from 'novo-elements/services';
+import { Helpers, Key } from 'novo-elements/utils';
 
 // Value accessor for the component (supports ngModel)
 const CHIPS_VALUE_ACCESSOR = {

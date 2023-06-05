@@ -2,7 +2,7 @@
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 // APP
-import { NovoLabelService } from '../../../../services/novo-label-service';
+import { NovoLabelService } from 'novo-elements/services';
 
 interface Page {
   num: number;

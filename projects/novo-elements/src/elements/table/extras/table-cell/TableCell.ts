@@ -3,9 +3,9 @@ import { Component, ElementRef, Input, OnDestroy, OnInit, ViewChild, ViewContain
 import { FormGroup } from '@angular/forms';
 // Vendor
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
-import { ComponentUtils } from './../../../../utils/component-utils/ComponentUtils';
 // APP
-import { BaseRenderer } from './../base-renderer/BaseRenderer';
+import { ComponentUtils } from 'novo-elements/services';
+import { BaseRenderer } from './../base-renderer';
 
 @Component({
   selector: 'novo-table-cell',

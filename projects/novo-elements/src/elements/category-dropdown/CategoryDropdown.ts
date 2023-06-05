@@ -1,10 +1,7 @@
 // NG2
 import { Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { NovoLabelService } from '../../services/novo-label-service';
-import { Key } from '../../utils';
-import { Helpers } from '../../utils/Helpers';
-// APP
-import { OutsideClick } from '../../utils/outside-click/OutsideClick';
+import { NovoLabelService } from 'novo-elements/services';
+import { Helpers, Key, OutsideClick } from 'novo-elements/utils';
 
 @Component({
   selector: 'novo-category-dropdown',
