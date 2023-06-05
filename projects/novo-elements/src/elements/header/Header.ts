@@ -1,5 +1,5 @@
 import { Component, HostBinding, Input } from '@angular/core';
-import { BooleanInput } from '../../utils';
+import { BooleanInput } from 'novo-elements/utils';
 
 @Component({
   selector: 'header-spacer',

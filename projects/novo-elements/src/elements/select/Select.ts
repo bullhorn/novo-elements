@@ -29,8 +29,8 @@ import { ControlValueAccessor, FormGroupDirective, NgControl, NgForm } from '@an
 import { merge, Observable, of, Subject, Subscription } from 'rxjs';
 import { filter, map, take, takeUntil } from 'rxjs/operators';
 // App
-import { NovoLabelService } from '../../services/novo-label-service';
-import { Helpers, Key } from '../../utils';
+import { NovoLabelService } from 'novo-elements/services';
+import { Helpers, Key } from 'novo-elements/utils';
 import {
   CanDisableCtor,
   CanRequireCtor,
@@ -49,9 +49,9 @@ import {
   NOVO_OPTION_PARENT_COMPONENT,
   _countGroupLabelsBeforeOption,
   _getOptionScrollPosition,
-} from '../common';
-import { NovoOverlayTemplateComponent } from '../common/overlay/Overlay';
-import { NovoFieldControl } from '../field';
+} from 'novo-elements/elements/common';
+import { NovoOverlayTemplateComponent } from 'novo-elements/elements/common';
+import { NovoFieldControl } from 'novo-elements/elements/field';
 
 // Value accessor for the component (supports ngModel)
 // const SELECT_VALUE_ACCESSOR = {

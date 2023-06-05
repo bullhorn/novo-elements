@@ -6,18 +6,18 @@ import { IMaskDirectiveModule } from 'angular-imask';
 // Vendor
 import { TextMaskModule } from 'angular2-text-mask';
 // APP
-import { NovoButtonModule } from '../button/Button.module';
-import { NovoCheckboxModule } from '../checkbox';
-import { NovoCommonModule, NovoOptionModule } from '../common';
-import { NovoDatePickerModule } from '../date-picker/DatePicker.module';
-import { NovoDropdownModule } from '../dropdown/Dropdown.module';
-import { NovoFlexModule } from '../flex/Flex.module';
-import { NovoFormExtrasModule } from '../form/extras/FormExtras.module';
-import { NovoFormModule } from '../form/Form.module';
-import { NovoIconModule } from '../icon/Icon.module';
-import { NovoLoadingModule } from '../loading/Loading.module';
-import { NovoToastModule } from '../toast/Toast.module';
-import { NovoTooltipModule } from '../tooltip/Tooltip.module';
+import { NovoButtonModule } from 'novo-elements/elements/button';
+import { NovoCheckboxModule } from 'novo-elements/elements/checkbox';
+import { NovoCommonModule, NovoOptionModule } from 'novo-elements/elements/common';
+import { NovoDatePickerModule } from 'novo-elements/elements/date-picker';
+import { NovoDropdownModule } from 'novo-elements/elements/dropdown';
+import { NovoFlexModule } from 'novo-elements/elements/flex';
+import { NovoFormExtrasModule } from 'novo-elements/elements/form';
+import { NovoFormModule } from 'novo-elements/elements/form';
+import { NovoIconModule } from 'novo-elements/elements/icon';
+import { NovoLoadingModule } from 'novo-elements/elements/loading';
+import { NovoToastModule } from 'novo-elements/elements/toast';
+import { NovoTooltipModule } from 'novo-elements/elements/tooltip';
 import { NovoTableExtrasModule } from './extras/TableExtras.module';
 import { NovoTableElement } from './Table';
 

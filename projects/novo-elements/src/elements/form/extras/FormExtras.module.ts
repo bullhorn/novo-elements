@@ -2,14 +2,14 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { NovoPipesModule } from './../../../pipes/Pipes.module';
-import { NovoButtonModule } from './../../button/Button.module';
-import { NovoCheckboxModule } from './../../checkbox';
-import { NovoDragulaModule } from './../../dragula/Dragula.module';
-import { NovoLoadingModule } from './../../loading/Loading.module';
-import { NovoPickerModule } from './../../picker/Picker.module';
-import { NovoSelectModule } from './../../select/Select.module';
-import { NovoTooltipModule } from './../../tooltip/Tooltip.module';
+import { NovoPipesModule } from 'novo-elements/pipes';
+import { NovoButtonModule } from 'novo-elements/elements/button';
+import { NovoCheckboxModule } from 'novo-elements/elements/checkbox';
+import { NovoDragulaModule } from 'novo-elements/elements/dragula';
+import { NovoLoadingModule } from 'novo-elements/elements/loading';
+import { NovoPickerModule } from 'novo-elements/elements/picker';
+import { NovoSelectModule } from 'novo-elements/elements/select';
+import { NovoTooltipModule } from 'novo-elements/elements/tooltip';
 import { NovoAddressElement } from './address/Address';
 import { NovoFileInputElement } from './file/FileInput';
 

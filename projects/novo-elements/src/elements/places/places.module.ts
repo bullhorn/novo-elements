@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { NovoListModule } from '../list/List.module';
+import { NovoListModule } from 'novo-elements/elements/list';
 import { PlacesListComponent } from './places.component';
 import { GooglePlacesService } from './places.service';
 

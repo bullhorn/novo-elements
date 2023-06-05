@@ -1,6 +1,6 @@
 // NG2
 import { ChangeDetectionStrategy, Component, ElementRef, HostBinding, HostListener, Input } from '@angular/core';
-import { BooleanInput, Helpers, Key } from '../../utils';
+import { BooleanInput, Helpers, Key } from 'novo-elements/utils';
 
 @Component({
   selector: 'novo-button,button[theme]',

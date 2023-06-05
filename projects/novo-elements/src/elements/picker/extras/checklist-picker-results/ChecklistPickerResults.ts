@@ -2,8 +2,8 @@
 import { ChangeDetectorRef, Component, ElementRef } from '@angular/core';
 // Vendor
 import { from, Observable } from 'rxjs';
-import { NovoLabelService } from '../../../../services/novo-label-service';
-import { Helpers } from '../../../../utils/Helpers';
+import { NovoLabelService } from 'novo-elements/services';
+import { Helpers } from 'novo-elements/utils';
 // APP
 import { BasePickerResults } from '../base-picker-results/BasePickerResults';
 

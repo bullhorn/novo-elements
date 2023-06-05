@@ -1,5 +1,5 @@
 import { Directive, EventEmitter, OnDestroy, Output } from '@angular/core';
-import { Helpers } from '../../utils/Helpers';
+import { Helpers } from 'novo-elements/utils';
 import { NovoActivityTableState } from './state';
 
 @Directive({

@@ -2,7 +2,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 // APP
-import { NovoLabelService } from '../../services/novo-label-service';
+import { NovoLabelService } from 'novo-elements/services';
 
 @Component({
   selector: 'novo-tip-well',

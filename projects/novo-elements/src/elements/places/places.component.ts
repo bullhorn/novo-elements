@@ -2,7 +2,7 @@
 import { isPlatformBrowser } from '@angular/common';
 import { ChangeDetectorRef, Component, ElementRef, EventEmitter, forwardRef, Inject, Input, OnChanges, OnInit, Output, PLATFORM_ID } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { GlobalRef } from '../../services/global/global.service';
+import { GlobalRef } from 'novo-elements/services';
 import { GooglePlacesService } from './places.service';
 
 export interface Settings {

@@ -1,9 +1,9 @@
 // NG
 import { AfterContentInit, Component, ContentChildren, Input, OnInit, QueryList } from '@angular/core';
 // App
-import { NovoTemplateService } from '../../services/template/NovoTemplateService';
-import { Helpers } from '../../utils/Helpers';
-import { NovoTemplate } from '../common/novo-template/novo-template.directive';
+import { NovoTemplateService } from 'novo-elements/services';
+import { Helpers } from 'novo-elements/utils';
+import { NovoTemplate } from 'novo-elements/elements/common';
 import { NovoFormGroup } from './NovoFormGroup';
 
 @Component({

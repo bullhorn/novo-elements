@@ -14,3 +14,4 @@ export * from './FormInterfaces';
 export * from './FormValidators';
 export * from './NovoFormControl';
 export * from './NovoFormGroup';
+export * from './utils';

@@ -1,6 +1,6 @@
 // NG2
 import { AfterContentInit, ChangeDetectionStrategy, Component, ContentChildren, HostBinding, Input, QueryList } from '@angular/core';
-import { BooleanInput } from '../../utils';
+import { BooleanInput } from 'novo-elements/utils';
 import { NovoFieldElement } from './field';
 
 @Component({

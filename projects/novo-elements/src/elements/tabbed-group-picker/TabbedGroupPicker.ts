@@ -12,9 +12,9 @@ import {
 } from '@angular/core';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
-import { NovoLabelService } from '../../services/novo-label-service';
-import { binarySearch, Helpers } from '../../utils/Helpers';
-import { NOVO_OPTION_PARENT_COMPONENT } from '../common';
+import { NovoLabelService } from 'novo-elements/services';
+import { binarySearch, Helpers } from 'novo-elements/utils';
+import { NOVO_OPTION_PARENT_COMPONENT } from 'novo-elements/elements/common';
 
 export type TabbedGroupPickerTab = {
   typeName: string;

@@ -3,8 +3,8 @@ import { ChangeDetectorRef, Component, ElementRef, EventEmitter, forwardRef, Inp
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 // Vendor
 import { isDate, parse } from 'date-fns';
-import { NovoLabelService } from '../../services/novo-label-service';
-import { Helpers } from '../../utils/Helpers';
+import { NovoLabelService } from 'novo-elements/services';
+import { Helpers } from 'novo-elements/utils';
 
 // Value accessor for the component (supports ngModel)
 const DATE_VALUE_ACCESSOR = {

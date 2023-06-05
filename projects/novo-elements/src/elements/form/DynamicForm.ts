@@ -10,10 +10,10 @@ import {
   QueryList,
   SimpleChanges,
 } from '@angular/core';
-import { NovoTemplateService } from '../../services/template/NovoTemplateService';
-import { NovoTemplate } from '../common/novo-template/novo-template.directive';
+import { NovoTemplateService } from 'novo-elements/services';
+import { NovoTemplate } from 'novo-elements/elements/common';
 // App
-import { Helpers } from './../../utils/Helpers';
+import { Helpers } from 'novo-elements/utils';
 import { NovoFieldset } from './FormInterfaces';
 import { NovoFormGroup } from './NovoFormGroup';
 

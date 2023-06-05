@@ -1,13 +1,9 @@
 {
-  "extends": "../../tsconfig.base.json",
-  "compilerOptions": {
-    "outDir": "../../out-tsc/app",
-    "types": ["node"],
-    "paths": {
-      "novo-elements": ["projects/novo-elements/src/index"],
-      "novo-examples": ["projects/novo-examples/src/index"]
-    }
-  },
+  "extends": "../../tsconfig.json",
   "files": ["main.ts", "polyfills.ts"],
-  "include": ["projects/demo/**/*.d.ts"]
+  "include": ["projects/demo/**/*.d.ts", "**/*.d.ts"],
+  "angularCompilerOptions": {
+    "enableIvy": true,
+    "compilationMode": "full"
+  },
 }

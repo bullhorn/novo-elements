@@ -2,7 +2,9 @@
 import { ChangeDetectorRef } from '@angular/core';
 import { async, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
-import { NovoLabelService, NovoSelectModule, NovoTilesModule } from '../../..';
+import { NovoSelectModule } from 'novo-elements/elements/select';
+import { NovoTilesModule } from 'novo-elements/elements/tiles';
+import { NovoLabelService } from 'novo-elements/services';
 import { DataTableState } from '../state/data-table-state.service';
 import { NovoDataTablePagination } from './data-table-pagination.component';
 

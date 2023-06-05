@@ -4,7 +4,7 @@ import { TestBed, waitForAsync } from '@angular/core/testing';
 // Vendor
 import { BehaviorSubject } from 'rxjs';
 // APP
-import { NovoLabelService } from '../../../../services/novo-label-service';
+import { NovoLabelService } from 'novo-elements/services';
 import { BasePickerResults } from '../base-picker-results/BasePickerResults';
 import { MixedMultiPickerResults } from './MixedMultiPickerResults';
 

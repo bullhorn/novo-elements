@@ -1,11 +1,9 @@
 // NG2
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { NovoButtonModule } from '../button/Button.module';
-import { NovoCommonModule, NovoOptionModule } from '../common';
 // APP
-import { NovoOverlayModule } from '../common/overlay/Overlay.module';
-import { NovoAutocompleteElement } from './autocomplete/autocomplete.component';
+import { NovoButtonModule } from 'novo-elements/elements/button';
+import { NovoCommonModule, NovoOptionModule, NovoOverlayModule } from 'novo-elements/elements/common';
 import { NovoErrorElement } from './error/error';
 import { NovoFieldElement, NovoFieldPrefixDirective, NovoFieldSuffixDirective } from './field';
 import { NovoFieldsElement } from './fieldset';
@@ -22,7 +20,6 @@ import { NovoPickerToggleElement } from './toggle/picker-toggle.component';
   imports: [CommonModule, NovoButtonModule, NovoOverlayModule, NovoOptionModule, NovoCommonModule],
   declarations: [
     NovoFieldElement,
-    // NovoLabelElement,
     NovoHintElement,
     NovoErrorElement,
     NovoInput,
@@ -35,11 +32,9 @@ import { NovoPickerToggleElement } from './toggle/picker-toggle.component';
     NovoDateRangeFormatDirective,
     NovoPickerToggleElement,
     NovoPickerDirective,
-    NovoAutocompleteElement,
   ],
   exports: [
     NovoFieldElement,
-    // NovoLabelElement,
     NovoHintElement,
     NovoErrorElement,
     NovoInput,
@@ -52,7 +47,6 @@ import { NovoPickerToggleElement } from './toggle/picker-toggle.component';
     NovoDateTimeFormatDirective,
     NovoPickerToggleElement,
     NovoPickerDirective,
-    NovoAutocompleteElement,
   ],
 })
 export class NovoFieldModule {}

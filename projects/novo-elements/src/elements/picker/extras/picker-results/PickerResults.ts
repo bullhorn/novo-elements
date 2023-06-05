@@ -1,7 +1,7 @@
 // NG2
 import { ChangeDetectorRef, Component, ElementRef } from '@angular/core';
 // APP
-import { NovoLabelService } from '../../../../services/novo-label-service';
+import { NovoLabelService } from 'novo-elements/services';
 import { BasePickerResults } from '../base-picker-results/BasePickerResults';
 
 @Component({

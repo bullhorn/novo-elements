@@ -12,6 +12,7 @@ module.exports = {
   collectCoverage: true,
   coverageReporters: ['json', 'lcov', 'text', 'text-summary', 'html'],
   coveragePathIgnorePatterns: ['/node_modules/', 'novo-elements/jest.setup.ts'],
+  modulePathIgnorePatterns: ['/dist/', '/novo-elements/package.json'],
   testEnvironmentOptions: {
     url: 'http://localhost',
   },

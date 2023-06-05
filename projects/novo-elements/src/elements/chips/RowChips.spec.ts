@@ -1,8 +1,7 @@
 // NG2
 import { async, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
-import { NovoLabelService } from '../../services/novo-label-service';
-import { ComponentUtils } from '../../utils/component-utils/ComponentUtils';
+import { ComponentUtils, NovoLabelService } from 'novo-elements/services';
 import { NovoChipsModule } from './Chips.module';
 // App
 import { NovoRowChipsElement } from './RowChips';

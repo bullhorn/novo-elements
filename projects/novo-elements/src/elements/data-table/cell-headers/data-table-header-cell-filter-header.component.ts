@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, Output } from '@angular/core';
-import { NovoLabelService } from '../../../services/novo-label-service';
-import { Helpers } from '../../../utils';
+import { NovoLabelService } from 'novo-elements/services';
+import { Helpers } from 'novo-elements/utils';
 
 @Component({
   selector: 'novo-data-table-cell-filter-header',

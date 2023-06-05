@@ -12,13 +12,10 @@ import {
   ViewChild,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { DateFormatService } from '../../services/date-format/DateFormat';
-import { NovoLabelService } from '../../services/novo-label-service';
-import { Key } from '../../utils';
-import { Helpers } from '../../utils/Helpers';
-// Vendor
 // App
-import { NovoOverlayTemplateComponent } from '../common/overlay/Overlay';
+import { NovoOverlayTemplateComponent } from 'novo-elements/elements/common';
+import { DateFormatService, NovoLabelService } from 'novo-elements/services';
+import { Helpers, Key } from 'novo-elements/utils';
 
 // Value accessor for the component (supports ngModel)
 const MULTI_DATE_VALUE_ACCESSOR = {

@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, ContentChildren, Directive, ElementRef, QueryList, ViewEncapsulation } from '@angular/core';
-import { CanColor, mixinColor } from '../common/mixins';
+import { CanColor, mixinColor } from 'novo-elements/elements/common';
 
 // Boilerplate for applying mixins to NovoToolbar.
 /** @docs-private */

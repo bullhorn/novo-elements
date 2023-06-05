@@ -1,9 +1,8 @@
 // NG2
 import { fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
-import { Key } from '../../utils';
-import { ComponentUtils } from '../../utils/component-utils/ComponentUtils';
-import { KeyCodes } from '../../utils/key-codes/KeyCodes';
+import { ComponentUtils } from 'novo-elements/services';
+import { Key, KeyCodes } from 'novo-elements/utils';
 // App
 import { QuickNoteElement } from './QuickNote';
 

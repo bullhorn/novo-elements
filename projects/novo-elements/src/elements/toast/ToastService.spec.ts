@@ -1,5 +1,5 @@
 // App
-import { ComponentUtils } from '../../utils/component-utils/ComponentUtils';
+import { ComponentUtils } from 'novo-elements/services';
 import { NovoToastService } from './ToastService';
 
 describe('Elements: NovoToastService', () => {

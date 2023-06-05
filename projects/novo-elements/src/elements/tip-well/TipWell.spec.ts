@@ -1,6 +1,6 @@
 // NG2
 import { async, TestBed } from '@angular/core/testing';
-import { NovoLabelService } from '../../services/novo-label-service';
+import { NovoLabelService } from 'novo-elements/services';
 // App
 import { NovoTipWellElement } from './TipWell';
 

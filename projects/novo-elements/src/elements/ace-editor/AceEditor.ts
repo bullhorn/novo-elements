@@ -8,7 +8,7 @@ import 'brace/mode/javascript';
 import 'brace/theme/chrome';
 import 'brace/ext/language_tools.js';
 // APP
-import { Helpers } from '../../utils/Helpers';
+import { Helpers } from 'novo-elements/utils';
 
 declare var ace: any;
 

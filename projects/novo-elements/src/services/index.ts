@@ -1,3 +1,4 @@
+export * from './component-utils';
 export * from './data-provider';
 export * from './date-format';
 export * from './global';

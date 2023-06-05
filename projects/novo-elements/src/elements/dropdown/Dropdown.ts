@@ -23,11 +23,8 @@ import {
 // Vendor
 import { merge, of, Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { BooleanInput } from '../../utils';
 // App
-import { Key } from '../../utils/key-codes';
-import { notify } from '../../utils/notifier/notifier.util';
-import { NovoButtonElement } from '../button';
+import { NovoButtonElement } from 'novo-elements/elements/button';
 import {
   CanDisableCtor,
   HasOverlayCtor,
@@ -38,10 +35,11 @@ import {
   NovoOptgroup,
   NovoOption,
   NovoOptionSelectionChange,
+  NovoOverlayTemplateComponent,
   _countGroupLabelsBeforeOption,
   _getOptionScrollPosition,
-} from '../common';
-import { NovoOverlayTemplateComponent } from '../common/overlay/Overlay';
+} from 'novo-elements/elements/common';
+import { BooleanInput, Key, notify } from 'novo-elements/utils';
 
 @Directive({
   selector: '[dropdownTrigger]',

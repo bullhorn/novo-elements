@@ -1,6 +1,6 @@
 // Ng
 import { EventEmitter } from '@angular/core';
-import { Helpers } from '../../utils/Helpers';
+import { Helpers } from 'novo-elements/utils';
 // App
 import { Collection } from './Collection';
 import { CollectionEvent } from './CollectionEvent';

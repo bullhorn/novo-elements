@@ -11,7 +11,7 @@
   "scripts": {
     "build": "ng build novo-elements",
     "postbuild": "npm run copy:scss && npm run build:examples",
-    "build:ci": "ng build novo-elements --configuration production",
+    "build:ci": "ng build novo-elements",
     "postbuild:ci": "npm run build:schematics && npm run copy:resources",
     "build:watch": "ng build novo-elements --watch",
     "build:demo": "ng build demo",
@@ -29,7 +29,7 @@
     "copy:schematics": "npx copyfiles -f projects/schematics/*.json dist/novo-elements/schematics/",
     "copy:scss": "node copy-scss.js",
     "test": "jest projects/novo-elements --no-coverage --max-workers=4",
-    "test:watch": "jest projects/chomsky projects/novo-elements --watch",
+    "test:watch": "jest projects/novo-elements --watch",
     "lint": "htmlhint \"projects\" --config .htmlhintrc",
     "lint:scss": "stylelint \"projects/**/*.scss\" --syntax scss",
     "compat": "ngcc ... --tsconfig './projects/novo-elements/tsconfig.lib.json'",

@@ -1,7 +1,7 @@
 // NG2
 import { OverlayModule } from '@angular/cdk/overlay';
 import { async, TestBed } from '@angular/core/testing';
-import { NovoLabelService } from '../../services/novo-label-service';
+import { NovoLabelService } from 'novo-elements/services';
 import { CardElement } from './Card';
 import { NovoCardModule } from './Card.module';
 

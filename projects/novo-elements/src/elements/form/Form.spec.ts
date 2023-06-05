@@ -1,7 +1,7 @@
 // NG2
 import { OverlayModule } from '@angular/cdk/overlay';
 import { async, TestBed } from '@angular/core/testing';
-import { NovoTemplateService } from '../../services/template/NovoTemplateService';
+import { NovoTemplateService } from 'novo-elements/services';
 // App
 import { NovoFormElement } from './Form';
 import { NovoFormModule } from './Form.module';

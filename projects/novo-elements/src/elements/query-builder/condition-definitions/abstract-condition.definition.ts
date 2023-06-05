@@ -1,6 +1,6 @@
 import { Directive, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { NovoLabelService } from '../../../services';
+import { NovoLabelService } from 'novo-elements/services';
 import { NovoConditionFieldDef } from '../query-builder.directives';
 
 @Directive()

@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Output } from '@angular/core';
-import { NovoLabelService } from '../../services/novo-label-service';
+import { NovoLabelService } from 'novo-elements/services';
 import { DataTableState } from './state/data-table-state.service';
 
 @Component({

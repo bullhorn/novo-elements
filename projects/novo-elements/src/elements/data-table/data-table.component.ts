@@ -18,9 +18,9 @@ import {
   ViewChildren,
 } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
-import { NovoLabelService } from '../../services/novo-label-service';
-import { notify } from '../../utils/notifier/notifier.util';
-import { NovoTemplate } from '../common/novo-template/novo-template.directive';
+import { NovoLabelService } from 'novo-elements/services';
+import { Helpers, notify } from 'novo-elements/utils';
+import { NovoTemplate } from 'novo-elements/elements/common';
 import { NovoDataTableCellHeader } from './cell-headers/data-table-header-cell.component';
 import { DataTableSource } from './data-table.source';
 import { NOVO_DATA_TABLE_REF } from './data-table.token';
@@ -36,7 +36,6 @@ import {
 import { ListInteractionDictionary, ListInteractionEvent } from './ListInteractionTypes';
 import { StaticDataTableService } from './services/static-data-table.service';
 import { DataTableState } from './state/data-table-state.service';
-import { Helpers } from '../../utils/Helpers';
 
 @Component({
   selector: 'novo-data-table',

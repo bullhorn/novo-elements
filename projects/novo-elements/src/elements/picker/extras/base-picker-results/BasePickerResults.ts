@@ -4,8 +4,8 @@ import { ChangeDetectorRef, Directive, ElementRef, Input } from '@angular/core';
 // Vendor
 import { from, Observable } from 'rxjs';
 // APP
-import { Helpers } from '../../../../utils/Helpers';
-import { NovoControlConfig } from '../../../form/controls/BaseControl';
+import { Helpers } from 'novo-elements/utils';
+// import { NovoControlConfig } from 'novo-elements/elements/form'; // actual type of the config property on this is any
 
 /**
  * @description This is the actual list of matches that gets injected into the DOM. It's also the piece that can be
@@ -18,7 +18,7 @@ export class BasePickerResults {
   hasError: boolean = false;
   isLoading: boolean = false;
   isStatic: boolean = true;
-  _config: NovoControlConfig['config'];
+  _config: any;
   activeMatch: any;
   parent: any;
   element: ElementRef;
@@ -85,14 +85,14 @@ export class BasePickerResults {
     }
   }
 
-  set config(value: NovoControlConfig['config']) {
+  set config(value: any) {
     if (this.config && this.config.options !== value.options) {
       this.optionsFunctionHasChanged = true; // reset page so that new options call is used to search
     }
     this._config = value;
   }
 
-  get config(): NovoControlConfig['config'] {
+  get config(): any {
     return this._config;
   }
 

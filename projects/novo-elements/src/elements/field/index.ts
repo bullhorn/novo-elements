@@ -1,4 +1,3 @@
-export * from './autocomplete/autocomplete.component';
 export * from './error';
 export * from './field';
 export * from './field-control';

@@ -4,7 +4,7 @@ import { PortalModule } from '@angular/cdk/portal';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 // APP
-import { NovoButtonModule } from '../button/Button.module';
+import { NovoButtonModule } from 'novo-elements/elements/button';
 import { NovoModalContainerComponent } from './modal-container.component';
 import { NovoModalElement, NovoModalNotificationElement } from './modal.component';
 import { NovoModalService } from './modal.service';

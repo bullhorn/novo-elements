@@ -1,7 +1,7 @@
 // NG2
 import { EventEmitter } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { notify } from '../../utils/notifier/notifier.util';
+import { notify } from 'novo-elements/utils';
 import type { IMaskOptions } from './Control';
 // APP
 import { NovoControlConfig } from './FormControls';

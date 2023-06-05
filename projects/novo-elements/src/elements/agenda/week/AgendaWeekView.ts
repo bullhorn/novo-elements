@@ -21,7 +21,7 @@ import {
   getWeekViewHeader,
   WeekDay,
   WeekViewEventRow,
-} from '../../../utils/calendar-utils/CalendarUtils';
+} from 'novo-elements/utils';
 
 /**
  * @hidden

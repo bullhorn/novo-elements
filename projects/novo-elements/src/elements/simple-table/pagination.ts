@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { NovoLabelService } from '../../services/novo-label-service';
+import { NovoLabelService } from 'novo-elements/services';
 import { NovoSimplePaginationEvent } from './interfaces';
 import { NovoActivityTableState } from './state';
 

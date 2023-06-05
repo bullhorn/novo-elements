@@ -1,8 +1,8 @@
 // NG2
 import { async, TestBed } from '@angular/core/testing';
-import { NovoLabelService } from '../../../../services/novo-label-service';
-import { NovoPickerModule } from '../../Picker.module';
 // APP
+import { NovoLabelService } from 'novo-elements/services';
+import { NovoPickerModule } from '../../Picker.module';
 import { EntityPickerResult } from './EntityPickerResults';
 
 describe('Elements: EntityPickerResult', () => {

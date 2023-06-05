@@ -1,7 +1,7 @@
 // NG2
 import { Directive, Input, TemplateRef, ViewContainerRef } from '@angular/core';
 // App
-import { Security } from './../../services/security/Security';
+import { Security } from 'novo-elements/services';
 
 @Directive({
   selector: '[bhUnless]',

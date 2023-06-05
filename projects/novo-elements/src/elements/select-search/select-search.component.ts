@@ -21,10 +21,10 @@ import {
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { BehaviorSubject, combineLatest, Observable, of, Subject } from 'rxjs';
 import { delay, filter, map, startWith, switchMap, take, takeUntil, tap } from 'rxjs/operators';
-import { isAlphaNumeric, Key } from '../../utils';
-import { NovoOption, _countGroupLabelsBeforeOption } from '../common';
-import { NovoFieldElement } from '../field';
-import { NovoSelectElement } from '../select';
+import { isAlphaNumeric, Key } from 'novo-elements/utils';
+import { NovoOption, _countGroupLabelsBeforeOption } from 'novo-elements/elements/common';
+import { NovoFieldElement } from 'novo-elements/elements/field';
+import { NovoSelectElement } from 'novo-elements/elements/select';
 import { NovoSelectSearchClearDirective } from './select-search-clear.directive';
 
 /** The max height of the select's overlay panel. */

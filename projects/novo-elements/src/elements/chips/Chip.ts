@@ -22,8 +22,8 @@ import {
 import { ANIMATION_MODULE_TYPE } from '@angular/platform-browser/animations';
 import { Subject } from 'rxjs';
 import { take } from 'rxjs/operators';
-import { Key } from '../../utils';
-import { CanColor, CanColorCtor, CanSizeCtor, HasTabIndex, HasTabIndexCtor, mixinColor, mixinSize, mixinTabIndex } from '../common';
+import { Key } from 'novo-elements/utils';
+import { CanColor, CanColorCtor, CanSizeCtor, HasTabIndex, HasTabIndexCtor, mixinColor, mixinSize, mixinTabIndex } from 'novo-elements/elements/common';
 
 export interface IRemovable {
   remove: () => void;

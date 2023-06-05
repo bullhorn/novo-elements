@@ -1,5 +1,5 @@
 import { Observable, of } from 'rxjs';
-import { Helpers } from '../../../utils/Helpers';
+import { Helpers } from 'novo-elements/utils';
 import { IDataTableFilter, IDataTableService, IDataTableSort } from '../interfaces';
 
 export class StaticDataTableService<T> implements IDataTableService<T> {
