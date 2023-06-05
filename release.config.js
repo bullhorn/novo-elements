@@ -17,6 +17,7 @@ module.exports = {
       {
         releaseRules: [
           { type: 'chore', release: 'patch' },
+          { type: 'breaking', release: 'major' },
         ],
       },
     ],
