@@ -62,7 +62,7 @@ import {NOVO_ELEMENTS_LABELS_PROVIDERS} from 'novo-elements';
 bootstrap(MyApp [..NOVO_ELEMENTS_LABELS_PROVIDERS]);
 ```
 
-## Upgrading NovoElement
+## Upgrading Novo Elements
 
 ### To Version 6
 
