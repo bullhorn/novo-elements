@@ -3939,7 +3939,6 @@ export class TypographyPage {
 @Component({
   selector: 'checkbox-page',
   template: `<h1>Checkbox <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/checkbox">(source)</a></h1>
-<p>A radio group</p>
 <h5>Basic</h5>
 <p><code-example example="basic-checkbox"></code-example></p>
 <h5>List</h5>

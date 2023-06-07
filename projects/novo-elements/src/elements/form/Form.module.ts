@@ -7,18 +7,18 @@ import { IMaskDirectiveModule } from 'angular-imask';
 // Vendor
 import { TextMaskModule } from 'angular2-text-mask';
 // APP
+import { NovoAceEditorModule } from 'novo-elements/addons/ace-editor';
+import { NovoNovoCKEditorModule } from 'novo-elements/addons/ckeditor';
+import { NovoDragulaModule } from 'novo-elements/addons/dragula';
 import { NovoCheckboxModule } from 'novo-elements/elements/checkbox';
 import { NovoCommonModule } from 'novo-elements/elements/common';
 import { NovoIconModule } from 'novo-elements/elements/icon';
 import { NovoSwitchModule } from 'novo-elements/elements/switch';
 import { NovoTemplateService } from 'novo-elements/services';
-import { NovoAceEditorModule } from 'novo-elements/elements/ace-editor';
 import { NovoButtonModule } from 'novo-elements/elements/button';
 import { NovoChipsModule } from 'novo-elements/elements/chips';
-import { NovoNovoCKEditorModule } from 'novo-elements/elements/ckeditor';
 import { NovoDatePickerModule } from 'novo-elements/elements/date-picker';
 import { NovoDateTimePickerModule } from 'novo-elements/elements/date-time-picker';
-import { NovoDragulaModule } from 'novo-elements/elements/dragula';
 import { NovoHeaderModule } from 'novo-elements/elements/header';
 import { NovoModalModule } from 'novo-elements/elements/modal';
 import { NovoPickerModule } from 'novo-elements/elements/picker';
