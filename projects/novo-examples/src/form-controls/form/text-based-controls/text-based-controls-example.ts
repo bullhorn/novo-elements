@@ -1,8 +1,5 @@
 import { Component } from '@angular/core';
-// Vendor
 import { AceEditorControl, FormUtils, QuickNoteControl, TextAreaControl, TextBoxControl } from 'novo-elements';
-
-// import { MockMeta, MockMetaHeaders } from './MockMeta';
 
 /**
  * @title Text Based Controls Example
