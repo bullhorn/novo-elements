@@ -1,9 +1,10 @@
 import { Directive, ElementRef, EventEmitter, forwardRef, Inject, Input, Optional, Renderer2 } from '@angular/core';
 import { COMPOSITION_BUFFER_MODE, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { IMaskDirective, IMaskFactory } from 'angular-imask';
-import { format, isValid, parse } from 'date-fns';
+import { isValid } from 'date-fns';
 import * as IMask from 'imask';
 import { NovoLabelService } from 'novo-elements/services';
+import { DateUtil } from 'novo-elements/utils';
 import { DATE_FORMATS, NOVO_INPUT_FORMAT } from './base-format';
 
 export const DATEFORMAT_VALUE_ACCESSOR = {
@@ -45,9 +46,7 @@ export class NovoDateFormatDirective extends IMaskDirective<any> {
       max: new Date(2030, 0, 1),
       prepare: (str) => str.toUpperCase(),
       format: (date) => this.formatValue(date),
-      parse: (str) => {
-        return parse(str);
-      },
+      parse: (str) => DateUtil.parse(str),
       blocks: {
         d: {
           mask: IMask.MaskedRange,
@@ -75,7 +74,7 @@ export class NovoDateFormatDirective extends IMaskDirective<any> {
 
   normalize(value: string) {
     const pattern = this.labels.dateFormat.toUpperCase();
-    return format(parse(value), pattern);
+    return DateUtil.format(DateUtil.parse(value), pattern);
   }
 
   formatAsIso(date: Date): string {
@@ -88,10 +87,10 @@ export class NovoDateFormatDirective extends IMaskDirective<any> {
   formatValue(value: any): string {
     if (value == null) return '';
     // Use `parse` because it keeps dates in locale
-    const date = parse(value);
+    const date = DateUtil.parse(value);
     if (isValid(date)) {
       const dateFormat = this.labels.dateFormat.toUpperCase();
-      return format(date, dateFormat);
+      return DateUtil.format(date, dateFormat);
     }
     return this.normalize(value);
   }
