@@ -1,6 +1,7 @@
 // NG
 import { Injectable } from '@angular/core';
-import * as dateFns from 'date-fns';
+// Vendor
+import { startOfToday } from 'date-fns';
 // App
 import {
   AddressControl,
@@ -28,7 +29,7 @@ import { NovoFormControl } from '../NovoFormControl';
 import { NovoFormGroup } from '../NovoFormGroup';
 import { EntityPickerResult, EntityPickerResults } from 'novo-elements/elements/picker';
 import { NovoLabelService, OptionsService } from 'novo-elements/services';
-import { Helpers } from 'novo-elements/utils';
+import { DateUtil, Helpers } from 'novo-elements/utils';
 
 @Injectable()
 export class FormUtils {
@@ -789,7 +790,7 @@ export class FormUtils {
       }
 
       if (control.dataType === 'Date' && typeof value === 'string' && control.optionsType !== 'skipConversion') {
-        value = dateFns.startOfDay(value);
+        value = DateUtil.startOfDay(value);
       }
 
       control.value = value;
@@ -859,17 +860,17 @@ export class FormUtils {
 
   private getStartDateFromRange(dateRange: { minDate: string; minOffset: number }): Date {
     if (dateRange.minDate) {
-      return dateFns.parse(dateRange.minDate);
+      return DateUtil.parse(dateRange.minDate);
     } else if (dateRange.minOffset) {
-      return dateFns.addDays(dateFns.startOfToday(), dateRange.minOffset);
+      return DateUtil.addDays(startOfToday(), dateRange.minOffset);
     }
   }
 
   private getEndDateFromRange(dateRange: { maxDate: string; minOffset: number }): Date {
     if (dateRange.maxDate) {
-      return dateFns.parse(dateRange.maxDate);
+      return DateUtil.parse(dateRange.maxDate);
     } else if (dateRange.minOffset) {
-      return dateFns.addDays(dateFns.startOfToday(), dateRange.minOffset);
+      return DateUtil.addDays(startOfToday(), dateRange.minOffset);
     }
   }
 

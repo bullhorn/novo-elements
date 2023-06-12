@@ -15,12 +15,12 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 // Vendor
-import * as dateFns from 'date-fns';
+import { isValid } from 'date-fns';
 import { createAutoCorrectedDatePipe } from 'text-mask-addons';
 // App
 import { NovoOverlayTemplateComponent } from 'novo-elements/elements/common';
 import { DateFormatService, NovoLabelService } from 'novo-elements/services';
-import { Helpers, Key } from 'novo-elements/utils';
+import { DateUtil, Helpers, Key } from 'novo-elements/utils';
 
 // Value accessor for the component (supports ngModel)
 const DATE_VALUE_ACCESSOR = {
@@ -123,7 +123,7 @@ export class NovoDatePickerInputElement implements OnInit, OnChanges, ControlVal
    * Day of the week the calendar should display first, Sunday=0...Saturday=6
    **/
   @Input()
-  weekStart: number = 0;
+  weekStart: Day = 0;
   @Output()
   blurEvent: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
   @Output()
@@ -328,8 +328,8 @@ export class NovoDatePickerInputElement implements OnInit, OnChanges, ControlVal
       if (!value) {
         return '';
       }
-      if (this.userDefinedFormat && dateFns.isValid(value)) {
-        return dateFns.format(value, this.format);
+      if (this.userDefinedFormat && isValid(value)) {
+        return DateUtil.format(value, this.format);
       }
       if (!(value instanceof Date)) {
         value = new Date(value);
@@ -344,7 +344,7 @@ export class NovoDatePickerInputElement implements OnInit, OnChanges, ControlVal
         return originalValue;
       }
     } catch (err) {
-      return '';
+      return err;
     }
   }
 
