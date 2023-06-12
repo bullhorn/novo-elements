@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Inject, Input, LOCALE_ID, Output } from '@angular/core';
-import * as dateFns from 'date-fns';
+import { DateUtil } from 'novo-elements/utils';
 
 @Component({
   selector: 'novo-agenda-date-change',
@@ -58,19 +58,19 @@ export class NovoAgendaDateChangeElement {
 
   changeDate(unit: number): void {
     const addFn: any = {
-      day: dateFns.addDays,
-      week: dateFns.addWeeks,
-      month: dateFns.addMonths,
+      day: DateUtil.addDays,
+      week: DateUtil.addWeeks,
+      month: DateUtil.addMonths,
     }[this.view];
 
     this.viewDateChange.emit(addFn(this.viewDate, unit));
   }
 
   get startOfWeek() {
-    return dateFns.startOfWeek(this.viewDate);
+    return DateUtil.startOfWeek(this.viewDate);
   }
 
   get endOfWeek() {
-    return dateFns.endOfWeek(this.viewDate);
+    return DateUtil.endOfWeek(this.viewDate);
   }
 }

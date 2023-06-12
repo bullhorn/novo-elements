@@ -14,12 +14,11 @@ import {
   ViewChild,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { format, parse } from 'date-fns';
 import * as IMask from 'imask';
 // App
 import { NovoOverlayTemplateComponent } from 'novo-elements/elements/common';
 import { DateFormatService, NovoLabelService } from 'novo-elements/services';
-import { Helpers, Key } from 'novo-elements/utils';
+import { DateUtil, Helpers, Key } from 'novo-elements/utils';
 
 // Value accessor for the component (supports ngModel)
 const DATE_VALUE_ACCESSOR = {
@@ -131,11 +130,11 @@ export class NovoTimePickerInputElement implements OnInit, OnChanges, ControlVal
         return str.toUpperCase();
       },
       format(date) {
-        return format(date, timeFormat);
+        return DateUtil.format(date, timeFormat);
       },
       parse: (str) => {
         const time = this.military ? str : this.convertTime12to24(str);
-        return parse(`${format(Date.now(), 'YYYY-MM-DD')}T${time}`);
+        return DateUtil.parse(`${DateUtil.format(Date.now(), 'YYYY-MM-DD')}T${time}`);
       },
       blocks: {
         HH: {
