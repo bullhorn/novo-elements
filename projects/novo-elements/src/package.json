@@ -16,7 +16,7 @@
     "date-fns": ">=2",
     "novo-design-tokens": "^0.0.9",
     "post-robot": "^8.0.0",
-    "rxjs": ">=6",
+    "rxjs": ">=7",
     "text-mask-addons": "^3.7.0",
     "timezone-support": "^2.0.2"
   },
