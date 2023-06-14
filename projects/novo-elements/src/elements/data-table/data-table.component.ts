@@ -89,6 +89,7 @@ import { DataTableState } from './state/data-table-state.service';
       </div>
       <div
         #novoDataTableContainer
+        cdkScrollable
         class="novo-data-table-container"
         [ngClass]="{ 'novo-data-table-container-fixed': fixedHeader }"
         [class.empty-user-filtered]="dataSource?.currentlyEmpty && state.userFiltered"
