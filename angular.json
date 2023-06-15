@@ -14,7 +14,7 @@
           "outputs": ["dist/novo-elements"],
           "options": {
             "tsConfig": "tsconfig.build.json",
-            "project": "projects/novo-elements/src/ng-package.json"
+            "project": "projects/novo-elements/src/ng-package.json",
           },
           "dependsOn": [
             {
@@ -41,7 +41,7 @@
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
             "tsConfig": "tsconfig.build.json",
-            "project": "projects/novo-examples/ng-package.json"
+            "project": "projects/novo-examples/ng-package.json",
           },
         },
         "test": {
