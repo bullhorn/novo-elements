@@ -18,5 +18,5 @@ module.exports = {
     url: 'http://localhost',
   },
   transformIgnorePatterns: ['node_modules/(?!.*\\.mjs$)'],
-  testRunner: '<rootDir>/node_modules/jest-circus/runner.js',
+  testRunner: 'jest-jasmine2',
 };
