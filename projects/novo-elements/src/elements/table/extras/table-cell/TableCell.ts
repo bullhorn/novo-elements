@@ -1,6 +1,6 @@
 // NG2
 import { Component, ElementRef, Input, OnDestroy, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 // Vendor
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 // APP
@@ -26,7 +26,7 @@ export class TableCell implements OnInit, OnDestroy {
   @Input()
   row: any;
   @Input()
-  form: FormGroup;
+  form: UntypedFormGroup;
   @Input()
   hasEditor: boolean;
 

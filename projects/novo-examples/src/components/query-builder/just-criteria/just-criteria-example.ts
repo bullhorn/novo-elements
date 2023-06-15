@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl } from '@angular/forms';
+import { AbstractControl, UntypedFormBuilder, UntypedFormControl } from '@angular/forms';
 import { AbstractConditionFieldDef, Conjunction, CriteriaBuilderComponent, NovoLabelService } from 'novo-elements';
 import { ReplaySubject, Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
@@ -34,7 +34,7 @@ import { MockMeta } from './MockMeta';
 })
 export class CustomPickerConditionDef extends AbstractConditionFieldDef implements OnInit {
   defaultOperator = 'includeAny';
-  searchCtrl: FormControl = new FormControl();
+  searchCtrl: UntypedFormControl = new UntypedFormControl();
   /** list of results filtered by search keyword */
   remoteResults: ReplaySubject<any[]> = new ReplaySubject<any[]>(1);
   /** Subject that emits when the component has been destroyed. */
@@ -88,7 +88,7 @@ export class JustCriteriaExample implements OnInit {
     return (field.inputType || field.dataType || field.type).toLowerCase();
   };
 
-  constructor(private formBuilder: FormBuilder, private cdr: ChangeDetectorRef) {}
+  constructor(private formBuilder: UntypedFormBuilder, private cdr: ChangeDetectorRef) {}
 
   ngOnInit() {
     this.queryForm = this.formBuilder.group({ criteria: [] });

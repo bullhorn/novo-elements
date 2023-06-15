@@ -12,7 +12,7 @@ import {
   ViewChild,
   ViewContainerRef,
 } from '@angular/core';
-import { AbstractControl, ControlContainer, FormControl } from '@angular/forms';
+import { AbstractControl, ControlContainer, UntypedFormControl } from '@angular/forms';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { BaseConditionFieldDef } from '../query-builder.directives';
@@ -59,7 +59,7 @@ export class ConditionBuilderComponent implements OnInit, AfterContentInit, Afte
   public fieldConfig: FieldConfig<BaseFieldDef>;
   public searches!: Subscription;
   public results$: Promise<any[]>;
-  public searchTerm: FormControl = new FormControl();
+  public searchTerm: UntypedFormControl = new UntypedFormControl();
   public fieldDisplayWith;
 
   private _lastContext: any = {};

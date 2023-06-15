@@ -12,9 +12,11 @@ module.exports = {
   collectCoverage: true,
   coverageReporters: ['json', 'lcov', 'text', 'text-summary', 'html'],
   coveragePathIgnorePatterns: ['/node_modules/', 'novo-elements/jest.setup.ts'],
+  moduleFileExtensions: ['ts', 'html', 'js', 'json', 'mjs'],
   modulePathIgnorePatterns: ['/dist/', '/novo-elements/package.json'],
   testEnvironmentOptions: {
     url: 'http://localhost',
   },
-  testRunner: 'jest-jasmine2',
+  transformIgnorePatterns: ['node_modules/(?!.*\\.mjs$)'],
+  testRunner: '<rootDir>/node_modules/jest-circus/runner.js',
 };

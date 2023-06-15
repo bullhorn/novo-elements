@@ -1,5 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { NovoOptionSelectedEvent } from 'novo-elements';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
@@ -19,7 +19,7 @@ interface Recipient {
   styleUrls: ['card-form-example.css'],
 })
 export class CardFormExample {
-  recipientCtrl = new FormControl();
+  recipientCtrl = new UntypedFormControl();
   filteredPeople: Observable<Recipient[]>;
   recipients: Recipient[] = [];
   allPeople: Recipient[] = [

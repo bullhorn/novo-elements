@@ -1,6 +1,6 @@
 // NG2
 import { ChangeDetectorRef, Component, DoCheck, ElementRef, EventEmitter, Input, Output, QueryList, ViewChildren } from '@angular/core';
-import { AbstractControl, FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { AbstractControl, UntypedFormArray, UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 // Vendor
 import { startOfToday, startOfTomorrow } from 'date-fns';
 import { debounceTime } from 'rxjs/operators';
@@ -427,7 +427,7 @@ export class NovoTableElement implements DoCheck {
   // will properly fire the ngAfterViewInit event
   toggledDropdownMap: any = {};
   public NovoTableMode = NovoTableMode;
-  public tableForm: FormGroup = new FormGroup({});
+  public tableForm: UntypedFormGroup = new UntypedFormGroup({});
   public toast: { theme: string; icon: string; message: string };
   public footers = [];
   public grossFlagToAvoidTheTableFromBeingUglyWhenHidingTheToast: boolean = false;
@@ -477,7 +477,7 @@ export class NovoTableElement implements DoCheck {
             columnsToSum = columnsToSum.filter((item, index, array) => array.indexOf(item) === index);
           }
           // Make a form for each row
-          const tableFormRows = this.tableForm.controls.rows as FormArray;
+          const tableFormRows = this.tableForm.controls.rows as UntypedFormArray;
           this._rows.forEach((row, index) => {
             const rowControls = [];
             row.controls = {};
@@ -554,7 +554,7 @@ export class NovoTableElement implements DoCheck {
     return this.tableForm.getRawValue();
   }
 
-  constructor(public labels: NovoLabelService, private formUtils: FormUtils, private builder: FormBuilder, private cdr: ChangeDetectorRef) {
+  constructor(public labels: NovoLabelService, private formUtils: FormUtils, private builder: UntypedFormBuilder, private cdr: ChangeDetectorRef) {
     notify('[Deprecated]: The table is deprecated. Please migrate to novo-data-tables!');
   }
 
@@ -618,7 +618,7 @@ export class NovoTableElement implements DoCheck {
   }
 
   getRowControlForm(i): AbstractControl {
-    const tableFormRows = this.tableForm.controls.rows as FormArray;
+    const tableFormRows = this.tableForm.controls.rows as UntypedFormArray;
     return tableFormRows.controls[i];
   }
 
@@ -1013,7 +1013,7 @@ export class NovoTableElement implements DoCheck {
    * @memberOf NovoTableElement
    */
   addEditableRow(defaultValue: any = {}): void {
-    const tableFormRows = this.tableForm.controls.rows as FormArray;
+    const tableFormRows = this.tableForm.controls.rows as UntypedFormArray;
     const row: any = {};
     const rowControls = [];
     row.controls = {};
@@ -1046,7 +1046,7 @@ export class NovoTableElement implements DoCheck {
       const changedRows = [];
       const errors = [];
       // Go over the FormArray's controls
-      (this.tableForm.controls.rows as FormArray).controls.forEach((formGroup: FormGroup, index: number) => {
+      (this.tableForm.controls.rows as UntypedFormArray).controls.forEach((formGroup: UntypedFormGroup, index: number) => {
         let changedRow = null;
         let error = null;
         // Go over the form group controls
