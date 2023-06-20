@@ -24,7 +24,7 @@ import { Key } from 'novo-elements/utils';
         <novo-field *novoSwitchCases="['includeAny', 'excludeAny']" #novoField>
           <novo-chip-list [(ngModel)]="chipListModel" [ngModelOptions]="{ standalone: true }" (click)="openPlacesList(viewIndex)">
             <novo-chip *ngFor="let item of formGroup.get('value').value" (removed)="remove(item, formGroup, viewIndex)">
-              {{ item.formatted_address }}
+              <novo-text ellipsis>{{ item.formatted_address }}</novo-text>
               <novo-icon novoChipRemove>close</novo-icon>
             </novo-chip>
             <input
