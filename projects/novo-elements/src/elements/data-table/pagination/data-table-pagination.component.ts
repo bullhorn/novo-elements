@@ -146,7 +146,7 @@ export class NovoDataTablePagination<T> implements OnInit, OnDestroy {
   @Input()
   public errorLoading: boolean = false;
   @Input()
-  public paginationRefreshSubject = new Subject();
+  public paginationRefreshSubject = new Subject<void>();
 
   @Input()
   get length(): number {
