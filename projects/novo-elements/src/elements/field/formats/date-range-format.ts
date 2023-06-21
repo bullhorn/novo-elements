@@ -1,9 +1,10 @@
 import { Directive, ElementRef, EventEmitter, forwardRef, Inject, Input, Optional, Renderer2 } from '@angular/core';
 import { COMPOSITION_BUFFER_MODE, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { IMaskDirective, IMaskFactory } from 'angular-imask';
-import { format, isValid, parse } from 'date-fns';
+import { isValid } from 'date-fns';
 import * as IMask from 'imask';
 import { NovoLabelService } from 'novo-elements/services';
+import { DateUtil } from 'novo-elements/utils';
 import { DATE_FORMATS, NOVO_INPUT_FORMAT } from './base-format';
 
 export const DATERANGEFORMAT_VALUE_ACCESSOR = {
@@ -72,7 +73,7 @@ export class NovoDateRangeFormatDirective extends IMaskDirective<any> {
 
   normalize(value: string | Date) {
     const pattern = this.labels.dateFormat.toUpperCase();
-    return format(parse(value), pattern);
+    return DateUtil.format(DateUtil.parse(value), pattern);
   }
 
   formatAsIso(value: DateRange): string {
@@ -93,10 +94,10 @@ export class NovoDateRangeFormatDirective extends IMaskDirective<any> {
   }
 
   formatDate(source: Date | string) {
-    const date = parse(source);
+    const date = DateUtil.parse(source);
     if (isValid(date)) {
       const dateRangeFormat = this.labels.dateFormat.toUpperCase();
-      return format(date, dateRangeFormat);
+      return DateUtil.format(date, dateRangeFormat);
     }
     return this.normalize(source);
   }
@@ -133,8 +134,8 @@ export class NovoDateRangeFormatDirective extends IMaskDirective<any> {
 
   extractDatesFromInput(value) {
     const [startStr, endStr] = value.split(' - ');
-    const startDate = parse(startStr);
-    const endDate = parse(endStr);
+    const startDate = DateUtil.parse(startStr);
+    const endDate = DateUtil.parse(endStr);
     return { startDate, endDate };
   }
 
