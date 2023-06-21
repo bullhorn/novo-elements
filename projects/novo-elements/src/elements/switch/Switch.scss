@@ -1,3 +1,5 @@
+@import "../common/typography/text.mixins.scss";
+
 $switch-width: 36px !default;
 $switch-height: 24px !default;
 $switch-bar-height: 14px !default;
@@ -14,7 +16,7 @@ $switch-thumb-size: 20px !default;
   }
 }
 
-.novo-switch {
+:host {
   display: flex;
   align-items: center;
   // margin: 15px;
@@ -105,9 +107,7 @@ $switch-thumb-size: 20px !default;
       pointer-events: none;
     }
   }
-}
 
-.novo-switch {
   // Base color: $ocean
   // @include novo-switch-style($ocean, lighten($ocean, 18%));
   // Loop through analytics colors and make a switch color class for each

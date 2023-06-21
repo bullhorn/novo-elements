@@ -33,6 +33,7 @@ export enum NOVO_VALUE_THEME {
       <i *ngFor="let icon of meta.icons" [class]="iconClass(icon)" (click)="onValueClick(icon)"></i>
     </div>
   `,
+  styleUrls: ['./Value.scss'],
 })
 export class NovoValueElement implements OnInit, OnChanges {
   @Input()

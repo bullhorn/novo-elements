@@ -56,6 +56,7 @@ const RADIO_VALUE_ACCESSOR = {
       </div>
     </label>
   `,
+  styleUrls: ['./radio.scss'],
   host: {
     '[class.vertical]': 'vertical',
   },
