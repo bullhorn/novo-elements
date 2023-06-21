@@ -140,7 +140,7 @@
       &:nth-last-of-type(#{$i}) {
         bottom: (25px * ($i - 1));
         z-index: 9999 - $i;
-        filter: brightness(1- (1/7));
+        filter: brightness(1- (calc(1 / 7)));
       }
     }
   }
@@ -157,7 +157,7 @@
       &:nth-last-of-type(#{$i}) {
         top: (25px * ($i - 1));
         z-index: 9999 - $i;
-        filter: brightness(1- (1/7));
+        filter: brightness(1- (calc(1 / 7)));
       }
     }
   }
@@ -196,9 +196,9 @@
     @for $i from 2 through 100 {
       &:nth-last-of-type(#{$i}) {
         top: (25px * $i);
-        transform: scale(1- (1/25));
+        transform: scale(1- (calc(1 / 25)));
         z-index: 9999 - $i;
-        filter: brightness(1- (1/7));
+        filter: brightness(1- (calc(1 / 7)));
       }
     }
   }
@@ -209,9 +209,9 @@
     @for $i from 2 through 100 {
       &:nth-last-of-type(#{$i}) {
         bottom: (25px * $i);
-        transform: scale(1- (1/25));
+        transform: scale(1- (calc(1 / 25)));
         z-index: 9999 - $i;
-        filter: brightness(1- (1/7));
+        filter: brightness(1- (calc(1 / 7)));
       }
     }
   }
