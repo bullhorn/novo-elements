@@ -4,7 +4,7 @@ import { BooleanInput } from 'novo-elements/utils';
 @Component({
   selector: 'header-spacer',
   template: `<ng-content></ng-content>`,
-  styleUrls: ['./header-spacer.scss'],
+  styleUrls: ['./HeaderSpacer.scss'],
 })
 export class NovoHeaderSpacer {}
 
@@ -66,7 +66,7 @@ export class NovoUtilActionComponent {
     </section>
     <ng-content></ng-content>
   `,
-  styleUrls: ['./header.scss'],
+  styleUrls: ['./Header.scss'],
 })
 export class NovoHeaderComponent {
   @HostBinding('attr.role')
