@@ -1,0 +1,14 @@
+@import "../common/typography/text.mixins";
+
+:host {
+  @include theme-backgrounds();
+  padding: $spacing-md $spacing-md 0 $spacing-md;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: $spacing-md;
+
+  .novo-card-header-text {
+    flex: 1 1 0px;
+  }
+}

@@ -34,7 +34,6 @@
 // --------------------------------------------------
 @import "./elements/data-table/data-table.component";
 @import "./elements/modal/modal.component";
-@import "./elements/card/Card";
 @import "./elements/agenda/month/AgendaMonthView";
 @import "./elements/agenda/week/AgendaWeekView";
 @import "./elements/agenda/day/AgendaDayView";
@@ -54,7 +53,6 @@
 @import "./elements/table/extras/pagination/Pagination";
 @import "./elements/form/Form";
 @import "./elements/quick-note/QuickNote";
-@import "./elements/slider/Slider";
 @import "./elements/category-dropdown/CategoryDropdown";
 @import "./elements/multi-picker/MultiPicker";
 @import "./elements/popover/PopOver";
@@ -62,8 +60,6 @@
 @import "./elements/search/SearchBox";
 @import "./elements/places/places.component";
 @import "./elements/icon/Icon";
-// @import "./elements/expansion/expansion-panel";
-// @import "./elements/expansion/expansion-panel-header";
 @import "./elements/stepper/stepper.component";
 @import "./elements/stepper/step-header.component";
 @import "./elements/simple-table/table";
@@ -134,34 +130,34 @@
 
 @each $key, $value in $spacing-rules {
   .padding-#{$key} {
-    padding: $value;
+    padding: $value !important;
   }
   .px-#{$key} {
-    padding-left: $value;
-    padding-right: $value;
+    padding-left: $value !important;
+    padding-right: $value !important;
   }
   .py-#{$key} {
-    padding-top: $value;
-    padding-bottom: $value;
+    padding-top: $value !important;
+    padding-bottom: $value !important;
   }
   .margin-#{$key} {
-    margin: $value;
+    margin: $value !important;
   }
   .ml-#{$key},
   .mx-#{$key} {
-    margin-left: $value;
+    margin-left: $value !important;
   }
   .mr-#{$key},
   .mx-#{$key} {
-    margin-right: $value;
+    margin-right: $value !important;
   }
   .mt-#{$key},
   .my-#{$key} {
-    margin-top: $value;
+    margin-top: $value !important;
   }
   .mb-#{$key},
   .my-#{$key} {
-    margin-bottom: $value;
+    margin-bottom: $value !important;
   }
 }
 
