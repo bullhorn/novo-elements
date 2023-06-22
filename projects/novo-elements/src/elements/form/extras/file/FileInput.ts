@@ -17,7 +17,7 @@ import {
   ViewContainerRef,
 } from '@angular/core';
 import { ControlValueAccessor, FormGroupDirective, NgControl, NgForm } from '@angular/forms';
-import { NovoDragulaService } from 'novo-elements/elements/dragula';
+import { NovoDragulaService } from 'novo-elements/addons/dragula';
 import { NovoLabelService } from 'novo-elements/services';
 import { CanUpdateErrorStateCtor, ErrorStateMatcher, mixinErrorState } from 'novo-elements/elements/common';
 import { NovoFieldControl } from 'novo-elements/elements/field';
