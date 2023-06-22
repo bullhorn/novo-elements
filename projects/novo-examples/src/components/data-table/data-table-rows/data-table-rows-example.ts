@@ -281,7 +281,7 @@ export class DataTableRowsExample implements AfterViewInit {
     value: 'asc',
   };
   public globalSearchEnabled: boolean = false;
-  public refreshSubject: Subject<boolean> = new Subject();
+  public refreshSubject: Subject<void> = new Subject();
 
   // Basic configuration
   public basicRows: MockData[];
