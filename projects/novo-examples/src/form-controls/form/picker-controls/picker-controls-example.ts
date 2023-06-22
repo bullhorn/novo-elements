@@ -1,8 +1,5 @@
 import { Component } from '@angular/core';
-// Vendor
 import { EntityPickerResult, EntityPickerResults, FormUtils, PickerControl } from 'novo-elements';
-
-// import { MockMeta, MockMetaHeaders } from './MockMeta';
 
 /**
  * @title Picker Controls Example

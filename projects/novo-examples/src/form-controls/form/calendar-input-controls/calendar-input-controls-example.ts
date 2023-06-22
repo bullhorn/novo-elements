@@ -1,8 +1,5 @@
 import { Component } from '@angular/core';
-// Vendor
 import { DateControl, DateTimeControl, FormUtils, TimeControl, TimezoneControl } from 'novo-elements';
-
-// import { MockMeta, MockMetaHeaders } from './MockMeta';
 
 /**
  * @title Calendar Input Controls Example
