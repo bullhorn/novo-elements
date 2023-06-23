@@ -370,14 +370,14 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   }
 
   @Input()
-  set refreshSubject(refreshSubject: EventEmitter<any>) {
+  set refreshSubject(refreshSubject: EventEmitter<void>) {
     // Unsubscribe
     if (this.refreshSubscription) {
       this.refreshSubscription.unsubscribe();
     }
     if (refreshSubject) {
       // Re-subscribe
-      this.refreshSubscription = refreshSubject.subscribe((filter: any) => {
+      this.refreshSubscription = refreshSubject.subscribe(() => {
         this.state.isForceRefresh = true;
         this.state.updates.next({ globalSearch: this.state.globalSearch, filter: this.state.filter, sort: this.state.sort, where: this.state.where });
         this.ref.markForCheck();

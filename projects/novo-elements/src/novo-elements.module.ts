@@ -2,8 +2,8 @@
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NovoAceEditorModule, NovoNovoCKEditorModule, NovoDragulaModule, NovoDragulaService } from 'novo-elements/addons';
 import {
-    NovoAceEditorModule,
     NovoAgendaModule,
     NovoAsideModule,
     NovoAutoCompleteModule,
@@ -15,14 +15,12 @@ import {
     NovoCategoryDropdownModule,
     NovoCheckboxModule,
     NovoChipsModule,
-    NovoNovoCKEditorModule,
     NovoColorPickerModule,
     NovoCommonModule, NovoOptionModule, NovoOverlayModule,
     NovoDataTableModule,
     NovoDatePickerModule,
     NovoDateTimePickerModule,
     NovoDividerModule,
-    NovoDragulaModule, NovoDragulaService,
     NovoDropdownModule,
     NovoExpansionModule,
     NovoFieldModule,
