@@ -33,12 +33,10 @@
 // Elements
 // --------------------------------------------------
 @import "./elements/data-table/data-table.component";
-@import "./elements/modal/modal.component";
 @import "./elements/agenda/month/AgendaMonthView";
 @import "./elements/agenda/week/AgendaWeekView";
 @import "./elements/agenda/day/AgendaDayView";
 @import "./elements/agenda/common/AgendaDateChange";
-@import "./elements/select/Select";
 @import "./elements/picker/Picker";
 @import "./elements/picker/extras/grouped-multi-picker-results/GroupedMultiPickerResults";
 @import "./elements/picker/extras/mixed-multi-picker-results/MixedMultiPickerResults";
@@ -59,7 +57,6 @@
 @import "./elements/table/extras/dropdown-cell/DropdownCell";
 @import "./elements/search/SearchBox";
 @import "./elements/places/places.component";
-@import "./elements/icon/Icon";
 @import "./elements/stepper/stepper.component";
 @import "./elements/stepper/step-header.component";
 @import "./elements/simple-table/table";

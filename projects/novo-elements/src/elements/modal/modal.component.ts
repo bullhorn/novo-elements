@@ -9,6 +9,7 @@ import { NovoModalRef } from './modal-ref';
     <ng-content select="section,novo-card-content"></ng-content>
     <footer class="novo-modal-footer"><ng-content select="button,novo-button"></ng-content></footer>
   `,
+  styleUrls: ['./modal.component.scss'],
   host: {
     class: 'novo-modal',
   },
@@ -30,6 +31,7 @@ export class NovoModalElement {
     </section>
     <footer class="novo-notification-footer"><ng-content select="button,novo-button"></ng-content></footer>
   `,
+  styleUrls: ['./notification.component.scss'],
   host: {
     class: 'novo-notification',
   },
