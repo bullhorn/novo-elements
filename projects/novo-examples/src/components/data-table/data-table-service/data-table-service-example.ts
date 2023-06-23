@@ -247,7 +247,7 @@ export class DataTableServiceExample {
     value: 'asc',
   };
   public globalSearchEnabled: boolean = false;
-  public refreshSubject: Subject<boolean> = new Subject();
+  public refreshSubject: Subject<void> = new Subject();
 
   // Basic configuration
   public basicService: IDataTableService<MockData>;
