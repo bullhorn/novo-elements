@@ -474,7 +474,7 @@ export class NovoChipList
   }
 
   removeValue(value: any): void {
-    if (this.value) {
+    if (this.value && Array.isArray(this.value)) {
       this.value = this.value.filter((it) => !this.compareWith(it, value));
     }
   }
