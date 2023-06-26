@@ -1,4 +1,3 @@
-export * from './ace-editor';
 export * from './agenda';
 export * from './aside';
 export * from './autocomplete';
@@ -17,7 +16,6 @@ export * from './non-ideal-state';
 export * from './pop-over';
 export * from './progress';
 export * from './query-builder';
-export * from './quick-note';
 export * from './search';
 export * from './slides';
 export * from './switch';

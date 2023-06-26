@@ -8,20 +8,6 @@ import { NovoExamplesSharedModule, TabsLayout, DefaultLayout } from './_shared';
 import { NovoElementsModule } from 'novo-elements';
 
 @Component({
-  selector: 'ace-editor-page',
-  template: `<h1>Ace Editor <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/ace-editor">(source)</a></h1>
-<p>Basic code editor using Ace Editor.</p>
-<h5>Basic Example</h5>
-<p><code-example example="basic-ace"></code-example></p>
-`,
-  host: { class: 'markdown-page' }
-})
-export class AceEditorPage {
-  public params: any = {};
-}
-
-
-@Component({
   selector: 'agenda-design-page',
   template: `<h2>Usage</h2>
 <novo-grid columns="2" align="start" gap="2rem">
@@ -2774,23 +2760,6 @@ export class QueryBuilderExamplesPage {
 
 
 @Component({
-  selector: 'quick-note-page',
-  template: `<h1>Quick Note <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/quick-note">(source)</a></h1>
-<h5>Basic Examples</h5>
-<p><code-example example="basic-quick-note"></code-example></p>
-<h5>Custom Triggers</h5>
-<p><code-example example="custom-quick-note"></code-example></p>
-<h5>Custom Results Template</h5>
-<p><code-example example="custom-quick-note-results"></code-example></p>
-`,
-  host: { class: 'markdown-page' }
-})
-export class QuickNotePage {
-  public params: any = {};
-}
-
-
-@Component({
   selector: 'search-page',
   template: `<h1>Search Input <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/switch">(source)</a></h1>
 <p>Loading animations are used to help indicate to the user that some sort of progress is taking place. These are especially helpful for intensive operations that might take extra time.</p>
@@ -4094,6 +4063,22 @@ export class ChipsExamplesPage {
 
 
 @Component({
+  selector: 'ck-editor-page',
+  template: `<h1>CK Editor <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/addons/ckeditor">(source)</a></h1>
+<p>Basic HTML editor using CK Editor.</p>
+<h5>Basic Example</h5>
+<p><code-example example="basic-editor"></code-example></p>
+<h5>Minimal Example</h5>
+<p><code-example example="minimal-editor"></code-example></p>
+`,
+  host: { class: 'markdown-page' }
+})
+export class CkEditorPage {
+  public params: any = {};
+}
+
+
+@Component({
   selector: 'color-picker-page',
   template: `<h1>Color Pickers</h1>
 <p>These allow users to easily select a color swatch. It comes in a handful of varieties based on the content of the field.</p>
@@ -4387,17 +4372,28 @@ export class DateTimePickerExamplesPage {
 
 
 @Component({
-  selector: 'editor-page',
-  template: `<h1>CK Editor <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/ckeditor">(source)</a></h1>
-<p>Basic HTML editor using CK Editor.</p>
-<h5>Basic Example</h5>
-<p><code-example example="basic-editor"></code-example></p>
-<h5>Minimal Example</h5>
-<p><code-example example="minimal-editor"></code-example></p>
+  selector: 'dynamic-form-page',
+  template: `<h1>Dynamic Forms <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/form">(source)</a></h1>
+<p>Forms use inputs and labels to submit user content. But you already knew that. What you may not know is that our forms come in two styles 'Static' and 'Dynamic'.
+This is the Dynamic Form demo.</p>
+<h2>Dynamic Form</h2>
+<p>Dynamic forms are composed of one element, <code>&lt;novo-dynamic-form [controls]=&quot;controls&quot;/&gt;</code> and allow you to pass in the controls and form and it will create the form for you.</p>
+<h5>Basic</h5>
+<p><code-example example="dynamic-form"></code-example></p>
+<h5>Vertical</h5>
+<p><code-example example="vertical-dynamic-form"></code-example></p>
+<h5>Fieldsets</h5>
+<p><code-example example="dynamic-form-field-sets"></code-example></p>
+<h5>Updating Fields/Status</h5>
+<p><code-example example="updating-form"></code-example></p>
+<h5>Disabled Field States</h5>
+<p><code-example example="disabled-form"></code-example></p>
+<h5>Enable/Disable All Fields in Form</h5>
+<p><code-example example="enable-disable-all-fields-in-form"></code-example></p>
 `,
   host: { class: 'markdown-page' }
 })
-export class EditorPage {
+export class DynamicFormPage {
   public params: any = {};
 }
 
@@ -4439,7 +4435,8 @@ export class FormGroupsPage {
 @Component({
   selector: 'form-page',
   template: `<h1>Forms <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/form">(source)</a></h1>
-<p>Forms use inputs and labels to submit user content. But you already knew that. What you may not know is that our forms come in two styles 'Static' and 'Dynamic'</p>
+<p>Forms use inputs and labels to submit user content. But you already knew that. What you may not know is that our forms come in two styles 'Static' and 'Dynamic'.
+This is the Static Form demo.</p>
 <h2>Static Form</h2>
 <p>Static forms <code>&lt;novo-form /&gt;</code>.</p>
 <h5>Textbox Based Controls</h5>
@@ -4454,20 +4451,6 @@ export class FormGroupsPage {
 <p><code-example example="picker-controls"></code-example></p>
 <h5>Address Controls</h5>
 <p><code-example example="address-control"></code-example></p>
-<h2>Dynamic Form</h2>
-<p>Dynamic forms are composed of one element, <code>&lt;novo-dynamic-form [controls]=&quot;controls&quot;/&gt;</code> and allow you to pass in the controls and form and it will create the form for you.</p>
-<h5>Basic</h5>
-<p><code-example example="dynamic-form"></code-example></p>
-<h5>Vertical</h5>
-<p><code-example example="vertical-dynamic-form"></code-example></p>
-<h5>Fieldsets</h5>
-<p><code-example example="dynamic-form-field-sets"></code-example></p>
-<h5>Updating Fields/Status</h5>
-<p><code-example example="updating-form"></code-example></p>
-<h5>Disabled Field States</h5>
-<p><code-example example="disabled-form"></code-example></p>
-<h5>Enable/Disable All Fields in Form</h5>
-<p><code-example example="enable-disable-all-fields-in-form"></code-example></p>
 `,
   host: { class: 'markdown-page' }
 })
@@ -6309,6 +6292,20 @@ export class May2022Page {
 
 
 @Component({
+  selector: 'ace-editor-page',
+  template: `<h1>Ace Editor <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/addons/ace-editor">(source)</a></h1>
+<p>Basic code editor using Ace Editor.</p>
+<h5>Basic Example</h5>
+<p><code-example example="basic-ace"></code-example></p>
+`,
+  host: { class: 'markdown-page' }
+})
+export class AceEditorPage {
+  public params: any = {};
+}
+
+
+@Component({
   selector: 'field-interactions-page',
   template: `<h1>Field Interactions</h1>
 <p>Field Interactions is a simple API that allows you to modify NovoForms based on field changes.</p>
@@ -6415,6 +6412,23 @@ export class PipesPage {
 
 
 @Component({
+  selector: 'quick-note-page',
+  template: `<h1>Quick Note <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/quick-note">(source)</a></h1>
+<h5>Basic Examples</h5>
+<p><code-example example="basic-quick-note"></code-example></p>
+<h5>Custom Triggers</h5>
+<p><code-example example="custom-quick-note"></code-example></p>
+<h5>Custom Results Template</h5>
+<p><code-example example="custom-quick-note-results"></code-example></p>
+`,
+  host: { class: 'markdown-page' }
+})
+export class QuickNotePage {
+  public params: any = {};
+}
+
+
+@Component({
   selector: 'security-page',
   template: `<h1>Security</h1>
 <p>The security component for this library a simple wrapper to implement ngIf functionality with a Security service.</p>
@@ -6430,11 +6444,6 @@ export class SecurityPage {
 
 const routes: Routes = [
   //{ path: '', component: Home, data: {} },
-  { path: 'utils/ace editor', component: AceEditorPage, data: { title: 'Ace Editor', section: 'utils' } },
-  { path: 'utils/quick note', component: QuickNotePage, data: { title: 'Quick Note', section: 'utils' } },
-  { path: 'utils/field-interactions', component: FieldInteractionsPage, data: { title: 'Field Interactions', section: 'utils' } },
-  { path: 'utils/pipes', component: PipesPage, data: { title: 'Pipes', section: 'utils' } },
-  { path: 'utils/security', component: SecurityPage, data: { title: 'Security', section: 'utils' } },
   {
     path: 'components/agenda',
     component: TabsLayout,
@@ -6686,8 +6695,9 @@ const routes: Routes = [
   { path: 'design/spacing', component: SpacingPage, data: { title: 'Spacing', section: 'design' } },
   { path: 'design/typography', component: TypographyPage, data: { title: 'Typography', section: 'design' } },
   { path: 'form-controls/checkbox', component: CheckboxPage, data: { title: 'Checkbox', section: 'form-controls' } },
+  { path: 'form-controls/ck-editor', component: CkEditorPage, data: { title: 'Ck Editor', section: 'form-controls' } },
   { path: 'form-controls/color-picker', component: ColorPickerPage, data: { title: 'Color Picker', section: 'form-controls' } },
-  { path: 'form-controls/editor', component: EditorPage, data: { title: 'Editor', section: 'form-controls' } },
+  { path: 'form-controls/dynamic-form', component: DynamicFormPage, data: { title: 'Dynamic Form', section: 'form-controls' } },
   { path: 'form-controls/form-groups', component: FormGroupsPage, data: { title: 'Form Groups', section: 'form-controls' } },
   { path: 'form-controls/form', component: FormPage, data: { title: 'Form', section: 'form-controls' } },
   { path: 'form-controls/multi-picker', component: MultiPickerPage, data: { title: 'Multi Picker', section: 'form-controls' } },
@@ -6781,12 +6791,17 @@ const routes: Routes = [
   { path: 'updates/v6', component: February2022Page, data: { title: 'February 2022', section: 'updates' } },
   { path: 'updates/v7-query-builder', component: June2022Page, data: { title: 'June 2022', section: 'updates', tag: 'new' } },
   { path: 'updates/v7-announce', component: May2022Page, data: { title: 'May 2022', section: 'updates' } },
+  { path: 'utils/ace editor', component: AceEditorPage, data: { title: 'Ace Editor', section: 'utils' } },
+  { path: 'utils/field-interactions', component: FieldInteractionsPage, data: { title: 'Field Interactions', section: 'utils' } },
+  { path: 'utils/pipes', component: PipesPage, data: { title: 'Pipes', section: 'utils' } },
+  { path: 'utils/quick note', component: QuickNotePage, data: { title: 'Quick Note', section: 'utils' } },
+  { path: 'utils/security', component: SecurityPage, data: { title: 'Security', section: 'utils' } },
   // Catch All
   { path: '**', redirectTo: '/home', data: {} },
 ];
 
 export const PAGE_LIST = [
-  AceEditorPage,AgendaDesignPage,AgendaDevelopPage,AgendaExamplesPage,AsideDesignPage,AsideDevelopPage,AsideExamplesPage,AutocompleteDesignPage,AutocompleteDevelopPage,AutocompleteExamplesPage,AvatarDesignPage,AvatarDevelopPage,AvatarExamplesPage,BreadcrumbDesignPage,BreadcrumbDevelopPage,BreadcrumbExamplesPage,ButtonDesignPage,ButtonDevelopPage,ButtonExamplesPage,CalendarDesignPage,CalendarDevelopPage,CalendarExamplesPage,ComponentsPage,DataTablePage,DropdownDesignPage,DropdownDevelopPage,DropdownExamplesPage,FieldDesignPage,FieldDevelopPage,FieldExamplesPage,IconDesignPage,IconDevelopPage,IconExamplesPage,LoadingDesignPage,LoadingDevelopPage,LoadingExamplesPage,MenuDesignPage,MenuDevelopPage,MenuExamplesPage,ModalDesignPage,ModalDevelopPage,ModalExamplesPage,NonIdealStateDesignPage,NonIdealStateDevelopPage,NonIdealStateExamplesPage,PopoverDesignPage,PopoverDevelopPage,PopoverExamplesPage,ProgressDesignPage,ProgressDevelopPage,ProgressExamplesPage,ProgressUsagePage,QueryBuilderDesignPage,QueryBuilderDevelopPage,QueryBuilderExamplesPage,QuickNotePage,SearchPage,SlidesPage,SwitchPage,TabbedGroupPickerPage,TablePage,TipWellDesignPage,TipWellDevelopPage,TipWellExamplesPage,ToasterDesignPage,ToasterDevelopPage,ToasterExamplesPage,ToolbarDesignPage,ToolbarDevelopPage,ToolbarExamplesPage,TooltipDesignPage,TooltipDevelopPage,TooltipExamplesPage,ColorsPage,CompositionPage,DesignPage,IconographyPage,SpacingPage,TypographyPage,CheckboxPage,ChipsDesignPage,ChipsDevelopPage,ChipsExamplesPage,ColorPickerPage,DatePickerDesignPage,DatePickerDevelopPage,DatePickerExamplesPage,DateTimePickerDesignPage,DateTimePickerDevelopPage,DateTimePickerExamplesPage,EditorPage,FormControlsPage,FormGroupsPage,FormPage,MultiPickerPage,PickerPage,RadioButtonsPage,SelectPage,TilesPage,TimePickerDesignPage,TimePickerDevelopPage,TimePickerExamplesPage,ValuePage,HomePage,CardDescriptionPage,CardDesignPage,CardDevelopPage,CardExamplesPage,ExpansionPage,HeaderPage,LayoutsPage,ListPage,SidenavPage,StepperPage,TabsDesignPage,TabsDevelopPage,TabsExamplesPage,PatternsNativeFormsPage,PatternsTestPage,PatternsPage,TemplatesPage,August2022Page,February2022Page,June2022Page,May2022Page,FieldInteractionsPage,PipesPage,SecurityPage
+  AgendaDesignPage,AgendaDevelopPage,AgendaExamplesPage,AsideDesignPage,AsideDevelopPage,AsideExamplesPage,AutocompleteDesignPage,AutocompleteDevelopPage,AutocompleteExamplesPage,AvatarDesignPage,AvatarDevelopPage,AvatarExamplesPage,BreadcrumbDesignPage,BreadcrumbDevelopPage,BreadcrumbExamplesPage,ButtonDesignPage,ButtonDevelopPage,ButtonExamplesPage,CalendarDesignPage,CalendarDevelopPage,CalendarExamplesPage,ComponentsPage,DataTablePage,DropdownDesignPage,DropdownDevelopPage,DropdownExamplesPage,FieldDesignPage,FieldDevelopPage,FieldExamplesPage,IconDesignPage,IconDevelopPage,IconExamplesPage,LoadingDesignPage,LoadingDevelopPage,LoadingExamplesPage,MenuDesignPage,MenuDevelopPage,MenuExamplesPage,ModalDesignPage,ModalDevelopPage,ModalExamplesPage,NonIdealStateDesignPage,NonIdealStateDevelopPage,NonIdealStateExamplesPage,PopoverDesignPage,PopoverDevelopPage,PopoverExamplesPage,ProgressDesignPage,ProgressDevelopPage,ProgressExamplesPage,ProgressUsagePage,QueryBuilderDesignPage,QueryBuilderDevelopPage,QueryBuilderExamplesPage,SearchPage,SlidesPage,SwitchPage,TabbedGroupPickerPage,TablePage,TipWellDesignPage,TipWellDevelopPage,TipWellExamplesPage,ToasterDesignPage,ToasterDevelopPage,ToasterExamplesPage,ToolbarDesignPage,ToolbarDevelopPage,ToolbarExamplesPage,TooltipDesignPage,TooltipDevelopPage,TooltipExamplesPage,ColorsPage,CompositionPage,DesignPage,IconographyPage,SpacingPage,TypographyPage,CheckboxPage,ChipsDesignPage,ChipsDevelopPage,ChipsExamplesPage,CkEditorPage,ColorPickerPage,DatePickerDesignPage,DatePickerDevelopPage,DatePickerExamplesPage,DateTimePickerDesignPage,DateTimePickerDevelopPage,DateTimePickerExamplesPage,DynamicFormPage,FormControlsPage,FormGroupsPage,FormPage,MultiPickerPage,PickerPage,RadioButtonsPage,SelectPage,TilesPage,TimePickerDesignPage,TimePickerDevelopPage,TimePickerExamplesPage,ValuePage,HomePage,CardDescriptionPage,CardDesignPage,CardDevelopPage,CardExamplesPage,ExpansionPage,HeaderPage,LayoutsPage,ListPage,SidenavPage,StepperPage,TabsDesignPage,TabsDevelopPage,TabsExamplesPage,PatternsNativeFormsPage,PatternsTestPage,PatternsPage,TemplatesPage,August2022Page,February2022Page,June2022Page,May2022Page,AceEditorPage,FieldInteractionsPage,PipesPage,QuickNotePage,SecurityPage
 ];
 
 @NgModule({
