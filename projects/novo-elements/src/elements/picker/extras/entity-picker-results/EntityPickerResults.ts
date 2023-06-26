@@ -217,7 +217,7 @@ export class EntityPickerResult {
         *ngFor="let match of matches"
         [match]="match"
         [term]="term"
-        [ngClass]="{ active: isActive(match) }"
+        [ngClass]="{ active: match === activeMatch }"
         (click)="selectMatch($event, match)"
         (mouseenter)="selectActive(match)"
         [class.disabled]="preselected(match)"
