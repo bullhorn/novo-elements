@@ -1,3 +1,4 @@
+import { ScrollingModule } from '@angular/cdk/scrolling';
 import { CdkTableModule } from '@angular/cdk/table';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
@@ -63,6 +64,7 @@ import { DataTableState } from './state/data-table-state.service';
     NovoCheckboxModule,
     NovoFlexModule,
     NovoFieldModule,
+    ScrollingModule,
   ],
   declarations: [
     DataTableInterpolatePipe,

@@ -2,7 +2,9 @@
 import { isPlatformBrowser } from '@angular/common';
 import { ChangeDetectorRef, Component, ElementRef, EventEmitter, forwardRef, Inject, Input, OnChanges, OnInit, Output, PLATFORM_ID } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { BasePickerResults } from 'novo-elements/elements/picker';
 import { GlobalRef } from 'novo-elements/services';
+import { Key } from 'novo-elements/utils';
 import { GooglePlacesService } from './places.service';
 
 export interface Settings {
@@ -42,7 +44,7 @@ const PLACES_VALUE_ACCESSOR = {
   providers: [PLACES_VALUE_ACCESSOR],
   template: `
     <novo-list direction="vertical">
-      <novo-list-item *ngFor="let data of queryItems; let $index = index" (click)="selectedListNode($event, $index)">
+      <novo-list-item *ngFor="let data of matches; let $index = index" (click)="selectedListNode($event, $index)" [ngClass]="{ active: data === activeMatch }">
         <item-header>
           <item-avatar icon="location"></item-avatar>
           <item-title>{{ data.structured_formatting?.main_text ? data.structured_formatting.main_text : data.description }}</item-title>
@@ -52,11 +54,9 @@ const PLACES_VALUE_ACCESSOR = {
     </novo-list>
   `,
 })
-export class PlacesListComponent implements OnInit, OnChanges, ControlValueAccessor {
+export class PlacesListComponent extends BasePickerResults implements OnInit, OnChanges, ControlValueAccessor {
   @Input()
   userSettings: Settings;
-  @Input()
-  term: string = '';
   @Output()
   termChange: EventEmitter<any> = new EventEmitter<any>();
   @Output()
@@ -66,7 +66,6 @@ export class PlacesListComponent implements OnInit, OnChanges, ControlValueAcces
   public gettingCurrentLocationFlag: boolean = false;
   public dropdownOpen: boolean = false;
   public recentDropdownOpen: boolean = false;
-  public queryItems: any = [];
   public isSettingsError: boolean = false;
   public settingsErrorMsg: string = '';
   public settings: Settings = {};
@@ -109,7 +108,10 @@ export class PlacesListComponent implements OnInit, OnChanges, ControlValueAcces
     private _global: GlobalRef,
     private _googlePlacesService: GooglePlacesService,
     private cdr: ChangeDetectorRef,
-  ) {}
+  ) {
+    super(_elmRef, cdr);
+    this.config = {};
+  }
 
   ngOnInit(): any {
     if (!this.moduleinit) {
@@ -147,7 +149,7 @@ export class PlacesListComponent implements OnInit, OnChanges, ControlValueAcces
     if (inputVal) {
       this.getListQuery(inputVal);
     } else {
-      this.queryItems = [];
+      this.matches = [];
       if (this.userSelectedOption) {
         this.userQuerySubmit('false');
       }
@@ -160,25 +162,30 @@ export class PlacesListComponent implements OnInit, OnChanges, ControlValueAcces
     }
   }
 
-  // function to execute when user hover over autocomplete list.(binded with view)
+  // function to execute when user hover over autocomplete list. (binded with view)
   activeListNode(index: number): any {
-    for (let i: number = 0; i < this.queryItems.length; i++) {
+    for (let i: number = 0; i < this.matches.length; i++) {
       if (index === i) {
-        this.queryItems[i].active = true;
+        this.matches[i].active = true;
         this.selectedDataIndex = index;
       } else {
-        this.queryItems[i].active = false;
+        this.matches[i].active = false;
       }
     }
   }
 
-  // function to execute when user select the autocomplete list.(binded with view)
+  // function to execute when user selects a match from the autocomplete list. (binded with view)
   selectedListNode(event: MouseEvent, index: number): any {
+    this.selectMatch(this.matches[index]);
+  }
+
+  // function to execute when user selects a match.
+  selectMatch(match: any): any {
     this.dropdownOpen = false;
     if (this.recentDropdownOpen) {
-      this.setRecentLocation(this.queryItems[index]);
+      this.setRecentLocation(match);
     } else {
-      this.getPlaceLocationInfo(this.queryItems[index]);
+      this.getPlaceLocationInfo(match);
     }
   }
 
@@ -256,7 +263,7 @@ export class PlacesListComponent implements OnInit, OnChanges, ControlValueAcces
 
   // function to process the search query when pressed enter.
   private processSearchQuery(): any {
-    if (this.queryItems.length) {
+    if (this.matches.length) {
       if (this.selectedDataIndex > -1) {
         this.selectedListNode(null, this.selectedDataIndex);
       } else {
@@ -318,7 +325,7 @@ export class PlacesListComponent implements OnInit, OnChanges, ControlValueAcces
 
   // function to update the predicted list.
   private updateListItem(listData: any): any {
-    this.queryItems = listData ? listData : [];
+    this.matches = listData ? listData : [];
     this.dropdownOpen = true;
     this.cdr.detectChanges();
   }
@@ -329,9 +336,9 @@ export class PlacesListComponent implements OnInit, OnChanges, ControlValueAcces
     this.dropdownOpen = true;
     this._googlePlacesService.getRecentList(this.settings.recentStorageName).then((result: any) => {
       if (result) {
-        this.queryItems = result;
+        this.matches = result;
       } else {
-        this.queryItems = [];
+        this.matches = [];
       }
     });
   }
@@ -398,5 +405,22 @@ export class PlacesListComponent implements OnInit, OnChanges, ControlValueAcces
     this._googlePlacesService.getRecentList(this.settings.recentStorageName).then((data: any) => {
       this.recentSearchData = data && data.length ? data : [];
     });
+  }
+
+  onKeyDown(event: KeyboardEvent) {
+    if (this.dropdownOpen) {
+      if (event.key === Key.ArrowUp) {
+        this.prevActiveMatch();
+        return;
+      }
+      if (event.key === Key.ArrowDown) {
+        this.nextActiveMatch();
+        return;
+      }
+      if (event.key === Key.Enter) {
+        this.selectMatch(this.activeMatch);
+        return;
+      }
+    }
   }
 }

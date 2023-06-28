@@ -69,10 +69,7 @@ export class BasePickerResults {
     }
   }
 
-  get term() {
-    return this._term;
-  }
-
+  @Input()
   set term(value) {
     if (this.shouldSearch(value)) {
       this._term = value;
@@ -83,6 +80,10 @@ export class BasePickerResults {
     } else {
       this.addScrollListener();
     }
+  }
+
+  get term() {
+    return this._term;
   }
 
   set config(value: any) {

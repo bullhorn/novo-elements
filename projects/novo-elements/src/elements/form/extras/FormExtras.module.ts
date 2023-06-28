@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NovoPipesModule } from 'novo-elements/pipes';
-import { NovoDragulaModule } from 'novo-elements/addons/dragula';
+import { NovoDragulaModule, NovoDragulaService } from 'novo-elements/addons/dragula';
 import { NovoButtonModule } from 'novo-elements/elements/button';
 import { NovoCheckboxModule } from 'novo-elements/elements/checkbox';
 import { NovoLoadingModule } from 'novo-elements/elements/loading';
@@ -28,5 +28,6 @@ import { NovoFileInputElement } from './file/FileInput';
   ],
   declarations: [NovoAddressElement, NovoFileInputElement],
   exports: [NovoAddressElement, NovoFileInputElement],
+  providers: [NovoDragulaService],
 })
 export class NovoFormExtrasModule {}
