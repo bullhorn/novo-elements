@@ -2782,6 +2782,10 @@ i[theme][theme=contained].payableCharge {
   color: #ffffff;
   background: #696d79;
 }
+i[theme][theme=contained].complianceManager {
+  color: #ffffff;
+  background: #4a89dc;
+}
 i[theme][theme=contained].invoiceStatement {
   color: #ffffff;
   background: #696d79;
@@ -2929,6 +2933,10 @@ i[theme][theme=entity].payableCharge {
   color: #696d79;
   background: transparent;
 }
+i[theme][theme=entity].complianceManager {
+  color: #4a89dc;
+  background: transparent;
+}
 i[theme][theme=entity].invoiceStatement {
   color: #696d79;
   background: transparent;
@@ -3073,6 +3081,75 @@ span > i[theme][theme=contained]:before,
   position: fixed;
   width: 100%;
   overflow-y: hidden;
+}
+novo-ace-editor {
+  display: block;
+  width: 100%;
+  min-height: 200px;
+}
+novo-editor .cke {
+  font: inherit !important;
+  box-shadow: none;
+  border-color: #f4f4f4;
+  border-color: var(--background-muted);
+}
+novo-editor .cke .cke_top,
+novo-editor .cke .cke_bottom {
+  background: #f4f4f4 none;
+  background: var(--background-muted) none;
+  box-shadow: none;
+}
+novo-editor .cke .cke_bottom {
+  border-top: none;
+}
+.cke_dialog_background_cover {
+  background-color: #000000 !important;
+}
+.cke_dialog .cke_dialog_title {
+  text-shadow: none;
+  background: #f4f4f4 none;
+  background: var(--background-muted) none;
+  box-shadow: none;
+  border-bottom: none;
+}
+.cke_dialog .cke_dialog_footer {
+  text-shadow: none;
+  background: #f4f4f4 none;
+  background: var(--background-muted) none;
+  box-shadow: none;
+  border-top: none;
+}
+.theme-dark .cke_button {
+  filter: invert(1);
+}
+.theme-dark .cke_combo a.cke_combo_button:hover, .theme-dark .cke_combo novo-activity-table .cke_combo_button.clickable:hover, novo-activity-table .theme-dark .cke_combo .cke_combo_button.clickable:hover, .theme-dark .cke_combo novo-data-table .cke_combo_button.clickable:hover, novo-data-table .theme-dark .cke_combo .cke_combo_button.clickable:hover, .theme-dark .cke_combo a.cke_combo_button:active, .theme-dark .cke_combo novo-activity-table .cke_combo_button.clickable:active, novo-activity-table .theme-dark .cke_combo .cke_combo_button.clickable:active, .theme-dark .cke_combo novo-data-table .cke_combo_button.clickable:active, novo-data-table .theme-dark .cke_combo .cke_combo_button.clickable:active, .theme-dark .cke_combo a.cke_combo_button:focus, .theme-dark .cke_combo novo-activity-table .cke_combo_button.clickable:focus, novo-activity-table .theme-dark .cke_combo .cke_combo_button.clickable:focus, .theme-dark .cke_combo novo-data-table .cke_combo_button.clickable:focus, novo-data-table .theme-dark .cke_combo .cke_combo_button.clickable:focus, .theme-dark .cke_combo a.cke_combo_button.cke_combo_on, .theme-dark .cke_combo novo-activity-table .cke_combo_button.cke_combo_on.clickable, novo-activity-table .theme-dark .cke_combo .cke_combo_button.cke_combo_on.clickable, .theme-dark .cke_combo novo-data-table .cke_combo_button.cke_combo_on.clickable, novo-data-table .theme-dark .cke_combo .cke_combo_button.cke_combo_on.clickable {
+  background: #f7f7f7;
+  background: var(--background-main);
+  border: 1px solid #dbdbdb;
+  border: 1px solid var(--border);
+}
+.theme-dark .cke_combo a.cke_combo_button .cke_combo_text, .theme-dark .cke_combo novo-activity-table .cke_combo_button.clickable .cke_combo_text, novo-activity-table .theme-dark .cke_combo .cke_combo_button.clickable .cke_combo_text, .theme-dark .cke_combo novo-data-table .cke_combo_button.clickable .cke_combo_text, novo-data-table .theme-dark .cke_combo .cke_combo_button.clickable .cke_combo_text {
+  color: white;
+}
+.theme-dark .cke_combo a.cke_combo_button .cke_combo_arrow, .theme-dark .cke_combo novo-activity-table .cke_combo_button.clickable .cke_combo_arrow, novo-activity-table .theme-dark .cke_combo .cke_combo_button.clickable .cke_combo_arrow, .theme-dark .cke_combo novo-data-table .cke_combo_button.clickable .cke_combo_arrow, novo-data-table .theme-dark .cke_combo .cke_combo_button.clickable .cke_combo_arrow {
+  border-top-color: white;
+}
+.gu-mirror {
+  position: fixed !important;
+  margin: 0 !important;
+  z-index: 9001 !important;
+  opacity: 0.8;
+}
+.gu-hide {
+  display: none !important;
+}
+.gu-unselectable {
+  -webkit-user-select: none !important;
+     -moz-user-select: none !important;
+          user-select: none !important;
+}
+.gu-transit {
+  opacity: 0.2;
 }
 cdk-table {
   display: block;
@@ -4993,11 +5070,6 @@ novo-nav-outlet novo-nav-content {
 novo-nav-outlet novo-nav-content.active {
   display: block;
 }
-novo-ace-editor {
-  display: block;
-  width: 100%;
-  min-height: 200px;
-}
 /**
  * Do not edit directly
  * Generated on Wed, 02 Mar 2022 14:57:41 GMT
@@ -5038,7 +5110,7 @@ novo-radio-group > novo-radio novo-button {
   border-radius: 0 !important;
 }
 novo-radio-group > novo-radio novo-button.unchecked {
-  opacity: 0.5;
+  opacity: 0.6;
 }
 novo-radio-group > novo-radio novo-button[theme=icon] {
   margin-right: 0;
@@ -5072,17 +5144,11 @@ novo-radio > input {
   z-index: -1;
   opacity: 0;
 }
-novo-radio > input:focus + label i:before {
-  text-shadow: 0px 0px 20px rgba(74, 137, 220, 0.5);
-}
 novo-radio > input:focus + label i.bhi-radio-empty, novo-radio > input:focus + label i.bhi-radio-filled {
   color: #4a89dc;
 }
 novo-radio > label {
   cursor: pointer;
-}
-novo-radio > label.disabled {
-  cursor: not-allowed;
 }
 novo-radio > label .novo-radio-button-label {
   display: inline;
@@ -5415,7 +5481,9 @@ novo-radio > label i.bhi-checkbox-empty, novo-radio > label i.bhi-radio-empty {
 novo-radio > label i.bhi-checkbox-filled, novo-radio > label i.bhi-radio-filled {
   color: #4a89dc;
 }
-novo-radio > label.disabled i {
+novo-radio > label.disabled {
+  pointer-events: auto;
+  cursor: not-allowed;
   opacity: 0.4;
 }
 novo-radio > label.disabled button[theme].has-icon {
@@ -13764,7 +13832,7 @@ novo-dropdown novo-button .novo-button-icon {
   transition-delay: 0.05s;
 }
 .novo-switch.novo-switch-disabled {
-  opacity: 0.5;
+  opacity: 0.4;
   cursor: not-allowed;
 }
 .novo-switch.novo-switch-disabled .novo-switch-container {
@@ -24225,23 +24293,6 @@ novo-pagination .pager .page.active {
   background-color: #f7f7f7;
   opacity: 1;
 }
-.gu-mirror {
-  position: fixed !important;
-  margin: 0 !important;
-  z-index: 9001 !important;
-  opacity: 0.8;
-}
-.gu-hide {
-  display: none !important;
-}
-.gu-unselectable {
-  -webkit-user-select: none !important;
-     -moz-user-select: none !important;
-          user-select: none !important;
-}
-.gu-transit {
-  opacity: 0.2;
-}
 novo-address {
   display: flex;
   flex-flow: row wrap;
@@ -25636,34 +25687,6 @@ novo-form .novo-form-container form td.novo-form-row novo-custom-control-contain
 novo-form .novo-form-container form td.novo-form-row novo-custom-control-container.disabled multi-picker chip .bhi-close,
 novo-form .novo-form-container form td.novo-form-row novo-custom-control-container.disabled novo-multi-date-input chip .bhi-close {
   display: none;
-}
-novo-dynamic-form .novo-form-container form div.novo-form-row novo-control.disabled novo-tiles,
-novo-dynamic-form .novo-form-container form div.novo-form-row novo-custom-control-container.disabled novo-tiles,
-novo-dynamic-form .novo-form-container form div.novo-control-group-control novo-control.disabled novo-tiles,
-novo-dynamic-form .novo-form-container form div.novo-control-group-control novo-custom-control-container.disabled novo-tiles,
-novo-dynamic-form .novo-form-container form td.novo-form-row novo-control.disabled novo-tiles,
-novo-dynamic-form .novo-form-container form td.novo-form-row novo-custom-control-container.disabled novo-tiles,
-novo-form .novo-form-container form div.novo-form-row novo-control.disabled novo-tiles,
-novo-form .novo-form-container form div.novo-form-row novo-custom-control-container.disabled novo-tiles,
-novo-form .novo-form-container form div.novo-control-group-control novo-control.disabled novo-tiles,
-novo-form .novo-form-container form div.novo-control-group-control novo-custom-control-container.disabled novo-tiles,
-novo-form .novo-form-container form td.novo-form-row novo-control.disabled novo-tiles,
-novo-form .novo-form-container form td.novo-form-row novo-custom-control-container.disabled novo-tiles {
-  opacity: 0.7 !important;
-}
-novo-dynamic-form .novo-form-container form div.novo-form-row novo-control.disabled novo-tiles label,
-novo-dynamic-form .novo-form-container form div.novo-form-row novo-custom-control-container.disabled novo-tiles label,
-novo-dynamic-form .novo-form-container form div.novo-control-group-control novo-control.disabled novo-tiles label,
-novo-dynamic-form .novo-form-container form div.novo-control-group-control novo-custom-control-container.disabled novo-tiles label,
-novo-dynamic-form .novo-form-container form td.novo-form-row novo-control.disabled novo-tiles label,
-novo-dynamic-form .novo-form-container form td.novo-form-row novo-custom-control-container.disabled novo-tiles label,
-novo-form .novo-form-container form div.novo-form-row novo-control.disabled novo-tiles label,
-novo-form .novo-form-container form div.novo-form-row novo-custom-control-container.disabled novo-tiles label,
-novo-form .novo-form-container form div.novo-control-group-control novo-control.disabled novo-tiles label,
-novo-form .novo-form-container form div.novo-control-group-control novo-custom-control-container.disabled novo-tiles label,
-novo-form .novo-form-container form td.novo-form-row novo-control.disabled novo-tiles label,
-novo-form .novo-form-container form td.novo-form-row novo-custom-control-container.disabled novo-tiles label {
-  color: inherit !important;
 }
 novo-dynamic-form .novo-form-container form div.novo-form-row novo-control.disabled .bhi-search,
 novo-dynamic-form .novo-form-container form div.novo-form-row novo-control.disabled .bhi-times,
@@ -28067,7 +28090,7 @@ quick-note-results novo-list,
 novo-tiles {
   display: inline-block;
   position: relative;
-  color: #9fc1ed;
+  color: #4a89dc;
 }
 novo-tiles input {
   -webkit-appearance: none !important;
@@ -28099,22 +28122,20 @@ novo-tiles > .tile-container .tile {
 novo-tiles > .tile-container .tile:not(:last-child) {
   border-right: solid thin #4a89dc;
 }
-novo-tiles > .tile-container .tile:not(.disabled) {
-  color: #4a89dc;
-}
 novo-tiles > .tile-container .tile:not(.disabled).active {
   box-shadow: inset 3px 2px 4px 0px rgba(0, 0, 0, 0.3);
   color: #ffffff;
   background: #4a89dc;
 }
+novo-tiles > .tile-container .tile:not(.disabled):hover {
+  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.15);
+}
 novo-tiles > .tile-container .tile.active {
   font-weight: 600;
 }
-novo-tiles > .tile-container .tile:hover {
-  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.15);
-}
 novo-tiles > .tile-container .tile.disabled {
   cursor: not-allowed;
+  opacity: 0.4;
 }
 novo-tiles > .tile-container .tile label {
   z-index: 1;
@@ -28128,7 +28149,19 @@ novo-tiles > .tile-container.active {
 }
 novo-tiles > .tile-container.disabled {
   border-color: #d1d1d1;
-  color: #d1d1d1;
+  opacity: 0.4;
+  pointer-events: auto;
+  cursor: not-allowed;
+}
+novo-tiles > .tile-container.disabled .tile {
+  pointer-events: none;
+  opacity: 1;
+}
+novo-tiles > .tile-container.disabled .tile:hover {
+  box-shadow: none;
+}
+novo-tiles > .tile-container.disabled .tile.active {
+  box-shadow: inset 3px 2px 4px 0px rgba(0, 0, 0, 0.3);
 }
 novo-tooltip div {
   background: #333333;
@@ -29358,53 +29391,6 @@ novo-tip-well > div > div > p.text-weight-lighter {
 }
 novo-tip-well > div > div > p.text-weight-bolder {
   font-weight: bolder;
-}
-novo-editor .cke {
-  font: inherit !important;
-  box-shadow: none;
-  border-color: #f4f4f4;
-  border-color: var(--background-muted);
-}
-novo-editor .cke .cke_top,
-novo-editor .cke .cke_bottom {
-  background: #f4f4f4 none;
-  background: var(--background-muted) none;
-  box-shadow: none;
-}
-novo-editor .cke .cke_bottom {
-  border-top: none;
-}
-.cke_dialog_background_cover {
-  background-color: #000000 !important;
-}
-.cke_dialog .cke_dialog_title {
-  text-shadow: none;
-  background: #f4f4f4 none;
-  background: var(--background-muted) none;
-  box-shadow: none;
-  border-bottom: none;
-}
-.cke_dialog .cke_dialog_footer {
-  text-shadow: none;
-  background: #f4f4f4 none;
-  background: var(--background-muted) none;
-  box-shadow: none;
-  border-top: none;
-}
-.theme-dark .cke_button {
-  filter: invert(1);
-}
-.theme-dark .cke_combo a.cke_combo_button:hover, .theme-dark .cke_combo novo-activity-table .cke_combo_button.clickable:hover, novo-activity-table .theme-dark .cke_combo .cke_combo_button.clickable:hover, .theme-dark .cke_combo novo-data-table .cke_combo_button.clickable:hover, novo-data-table .theme-dark .cke_combo .cke_combo_button.clickable:hover, .theme-dark .cke_combo a.cke_combo_button:active, .theme-dark .cke_combo novo-activity-table .cke_combo_button.clickable:active, novo-activity-table .theme-dark .cke_combo .cke_combo_button.clickable:active, .theme-dark .cke_combo novo-data-table .cke_combo_button.clickable:active, novo-data-table .theme-dark .cke_combo .cke_combo_button.clickable:active, .theme-dark .cke_combo a.cke_combo_button:focus, .theme-dark .cke_combo novo-activity-table .cke_combo_button.clickable:focus, novo-activity-table .theme-dark .cke_combo .cke_combo_button.clickable:focus, .theme-dark .cke_combo novo-data-table .cke_combo_button.clickable:focus, novo-data-table .theme-dark .cke_combo .cke_combo_button.clickable:focus, .theme-dark .cke_combo a.cke_combo_button.cke_combo_on, .theme-dark .cke_combo novo-activity-table .cke_combo_button.cke_combo_on.clickable, novo-activity-table .theme-dark .cke_combo .cke_combo_button.cke_combo_on.clickable, .theme-dark .cke_combo novo-data-table .cke_combo_button.cke_combo_on.clickable, novo-data-table .theme-dark .cke_combo .cke_combo_button.cke_combo_on.clickable {
-  background: #f7f7f7;
-  background: var(--background-main);
-  border: 1px solid #dbdbdb;
-  border: 1px solid var(--border);
-}
-.theme-dark .cke_combo a.cke_combo_button .cke_combo_text, .theme-dark .cke_combo novo-activity-table .cke_combo_button.clickable .cke_combo_text, novo-activity-table .theme-dark .cke_combo .cke_combo_button.clickable .cke_combo_text, .theme-dark .cke_combo novo-data-table .cke_combo_button.clickable .cke_combo_text, novo-data-table .theme-dark .cke_combo .cke_combo_button.clickable .cke_combo_text {
-  color: white;
-}
-.theme-dark .cke_combo a.cke_combo_button .cke_combo_arrow, .theme-dark .cke_combo novo-activity-table .cke_combo_button.clickable .cke_combo_arrow, novo-activity-table .theme-dark .cke_combo .cke_combo_button.clickable .cke_combo_arrow, .theme-dark .cke_combo novo-data-table .cke_combo_button.clickable .cke_combo_arrow, novo-data-table .theme-dark .cke_combo .cke_combo_button.clickable .cke_combo_arrow {
-  border-top-color: white;
 }
 novo-category-dropdown {
   display: block;
@@ -30808,8 +30794,12 @@ header novo-search.always-open:not(.focused) input::-moz-placeholder {
 header novo-search.always-open:not(.focused) input::placeholder {
   color: #cccdcc !important;
 }
+google-places-list {
+  display: grid;
+}
 google-places-list novo-list {
   border: 1px solid #4a89dc;
+  background-color: #ffffff;
 }
 google-places-list novo-list novo-list-item {
   cursor: pointer;
