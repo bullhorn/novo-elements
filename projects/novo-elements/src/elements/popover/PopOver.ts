@@ -14,6 +14,10 @@ import {
 import { PopOverContent } from './PopOverContent';
 
 @Directive({
+  /**
+   *  [popover] selector retained for backwards compatability, but should be avoived as
+   *  it interferes with the newly added (2023) HTML standard spec popover attribute.
+   */
   selector: '[popover], [novoPopover]',
 })
 export class PopOverDirective implements OnChanges {
