@@ -14,7 +14,7 @@ import {
 import { PopOverContent } from './PopOverContent';
 
 @Directive({
-  selector: '[novoPopover]',
+  selector: '[popover], [novoPopover]',
 })
 export class PopOverDirective implements OnChanges {
   protected PopoverComponent = PopOverContent;
@@ -23,8 +23,12 @@ export class PopOverDirective implements OnChanges {
 
   constructor(protected viewContainerRef: ViewContainerRef, protected resolver: ComponentFactoryResolver) {}
 
-  @Input('novoPopover')
+  @Input('popover')
   content: string | PopOverContent;
+  @Input('novoPopover')
+  set novoPopover(content: string | PopOverContent) {
+    this.content = content;
+  }
   @Input()
   popoverHtmlContent: string;
   @Input()
