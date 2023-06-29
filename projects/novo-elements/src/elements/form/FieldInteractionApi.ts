@@ -495,7 +495,7 @@ export class FieldInteractionApi {
       control.popoverDisabled = popover.disabled;
       control.popoverAnimation = popover.animation;
       control.popoverDismissTimeout = popover.dismissTimeout;
-      this.triggerEvent({ controlKey: key, prop: 'popover', value: popover }, otherForm);
+      this.triggerEvent({ controlKey: key, prop: 'novoPopover', value: popover }, otherForm);
     }
   }
 
