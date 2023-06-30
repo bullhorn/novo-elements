@@ -1,4 +1,6 @@
-novo-agenda-date-change {
+@import "../../../styles/variables.scss";
+
+:host {
   display: inline-block;
 
   .cal-date-change {

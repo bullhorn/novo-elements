@@ -1,49 +1,6 @@
-novo-time-picker-input {
-  flex: 1;
-  position: relative;
-  display: block;
-  max-width: 130px;
+@import "../../styles/variables.scss";
 
-  &.disabled {
-    pointer-events: none;
-    opacity: 1;
-  }
-
-  input {
-    font-size: 1em;
-    border: none;
-    border-bottom: 1px solid var(--border);
-    background: transparent !important;
-    border-radius: 0;
-    outline: none;
-    height: 2rem;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    box-shadow: none;
-    box-sizing: content-box;
-    transition: all 300ms;
-    color: var(--text-main);
-
-    &:focus {
-      border-bottom: 1px solid var(--selection);
-    }
-  }
-  > i.bhi-clock,
-  > i.bhi-search,
-  > i.bhi-times,
-  > i.bhi-calendar {
-    position: absolute;
-    right: 0;
-    top: 0px;
-    font-size: 1.2rem;
-  }
-  > i.bhi-times {
-    cursor: pointer;
-  }
-}
-
-novo-time-picker {
+:host {
   display: block;
   // width: 250px;
   // min-width: 250px;
@@ -140,7 +97,7 @@ novo-time-picker {
       width: 50px;
       scroll-snap-align: start;
 
-      .list-item {
+      ::ng-deep .list-item {
         line-height: 19px;
       }
       &:focus,

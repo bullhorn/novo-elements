@@ -1,0 +1,14 @@
+:host {
+  flex: 1;
+  position: relative;
+  display: flex;
+  flex-flow: row nowrap;
+  max-width: 340px;
+
+  novo-date-picker-input {
+    margin-right: 20px;
+  }
+  novo-time-picker-input {
+    max-width: 130px;
+  }
+}
