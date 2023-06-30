@@ -1,4 +1,6 @@
-google-places-list {
+@import "../../styles/variables.scss";
+
+:host {
   display: grid;
   novo-list {
     border: 1px solid #4a89dc;
