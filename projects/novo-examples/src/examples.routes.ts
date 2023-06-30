@@ -5775,81 +5775,7 @@ export class TemplatesPage {
 
 
 @Component({
-  selector: 'august-2022-page',
-  template: `<h1>📢  August 2022 (version 7.3.x)</h1>
-<p><strong>Announcement</strong>: New features and improvements!</p>
-<p>Bullhorn is continually seeking to update and innovate our products, and leverage the latest features in the frameworks we use. In support of that mission, we are updating our Novo UI and its supporting novo-elements library to Angular 13.  This update  allows us to continue offering a streamlined and consistent experience across Bullhorn’s complete product portfolio.  This update includes both an Angular upgrade, as well as supporting the latest Typescript updates.  You can find more details in the Technical Release Notes section below.</p>
-<h2>Release Timeline</h2>
-<p>Bullhorn has released a Release Candidate v7.3.x of Novo-elements. Bullhorn will update Novo to use Novo-Elements v7.3.x in the 2022.8 release</p>
-<pre><code class="language-sh">npm install novo-elements@next
-<span class="hljs-comment"># or</span>
-npm install novo-elements@7.3.x
-</code></pre>
-<h2 id="notable-changes">Notable changes <a href="https://bullhorn.github.io/novo-elements/docs/#/updates/v7dot3#notable-changes">#</a></h2>
-<ul>
-<li><a href="https://github.com/bullhorn/novo-elements/pull/1331">#1331</a> - Chips: updated disabled chip styles for better readability</li>
-<li><a href="https://github.com/bullhorn/novo-elements/pull/1326">#1326</a> - Autocomplete: Autocomplete now works with ChipList</li>
-<li><a href="https://github.com/bullhorn/novo-elements/pull/1334">#1334</a> - NonIdealState: New loading pattern for Non Ideal State</li>
-<li><a href="https://github.com/bullhorn/novo-elements/pull/1333">#1333</a> - Forms: field hints now support html text w/ FieldInteractionApi support</li>
-</ul>
-<h2 id="new-features">New Features<a href="https://bullhorn.github.io/novo-elements/docs/#/updates/v7dot3#new-features">#</a></h2>
-<h3 id="better-chips">Chips: updated disabled chip styles for better <a href="https://bullhorn.github.io/novo-elements/docs/#/updates/v7dot3#better-chips">#</a></h3>
-<ul>
-<li>darken the opacity to improve readability</li>
-<li>update text color of disabled chips to look non-selectable</li>
-<li>remove the X icon to further confer that this chip is read-only</li>
-</ul>
-<p>previous state was 40% opacity:
-<img src="https://user-images.githubusercontent.com/21197268/180056798-84c36888-96bb-4d72-99fd-ebd80a157f1a.png" alt="chips-before"></p>
-<p>After updates:</p>
-<p><img src="https://user-images.githubusercontent.com/21197268/180057064-f549895c-82f2-4092-bf05-00172f0dcb09.png" alt="chips-after"></p>
-<p>example with disabled and non disabled chips</p>
-<p><img src="https://user-images.githubusercontent.com/21197268/180057201-ab8717aa-17be-49c3-a18d-97bf1a8889dd.png" alt="after-example-both"></p>
-<hr>
-<h3 id="autocomplete">Autocomplete <a href="https://bullhorn.github.io/novo-elements/docs/#/updates/v7dot3#autocomplete">#</a></h3>
-<p>Autocomplete now works with the NovoChipList when used in a NovoFormField.  The manual events are no longer necessary to utilize the autocomplete functionality.  Now basic functionality can be supported with a limited specification.</p>
-<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">novo-field</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">novo-label</span>&gt;</span>Favorite Fruits<span class="hljs-tag">&lt;/<span class="hljs-name">novo-label</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">novo-chip-list</span> #<span class="hljs-attr">chipList</span> [<span class="hljs-attr">formControl</span>]=<span class="hljs-string">&quot;fieldCtrl&quot;</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">novo-chip</span> *<span class="hljs-attr">ngFor</span>=<span class="hljs-string">&quot;let fruit of chipList.value&quot;</span> [<span class="hljs-attr">value</span>]=<span class="hljs-string">&quot;fruit&quot;</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">novo-text</span>&gt;</span>fruit<span class="hljs-tag">&lt;/<span class="hljs-name">novo-text</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">novo-icon</span> <span class="hljs-attr">novoChipRemove</span>&gt;</span>close<span class="hljs-tag">&lt;/<span class="hljs-name">novo-icon</span>&gt;</span>
-    <span class="hljs-tag">&lt;/<span class="hljs-name">novo-chip</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">input</span> #<span class="hljs-attr">chipInput</span> <span class="hljs-attr">novoChipInput</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">&quot;New fruit...&quot;</span> <span class="hljs-attr">autocomplete</span>=<span class="hljs-string">&quot;off&quot;</span> [<span class="hljs-attr">formControl</span>]=<span class="hljs-string">&quot;searchCtrl&quot;</span> /&gt;</span>
-  <span class="hljs-tag">&lt;/<span class="hljs-name">novo-chip-list</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">novo-autocomplete</span> (<span class="hljs-attr">optionSelected</span>)=<span class="hljs-string">&quot;selected($event)&quot;</span> <span class="hljs-attr">multiple</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">novo-option</span> *<span class="hljs-attr">ngFor</span>=<span class="hljs-string">&quot;let fruit of filteredFruits | async&quot;</span> [<span class="hljs-attr">value</span>]=<span class="hljs-string">&quot;fruit&quot;</span>&gt;</span>
-      fruit
-    <span class="hljs-tag">&lt;/<span class="hljs-name">novo-option</span>&gt;</span>
-  <span class="hljs-tag">&lt;/<span class="hljs-name">novo-autocomplete</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">novo-field</span>&gt;</span>
-</code></pre>
-<p><img src="https://user-images.githubusercontent.com/1056055/175618421-05e8898a-caaf-488d-b384-acdc922b6647.gif" alt="doqFeEqHOa"></p>
-<hr>
-<h3 id="loading-pattern">Loading Pattern for Non Ideal State <a href="https://bullhorn.github.io/novo-elements/docs/#/updates/v7dot3#loading-pattern">#</a></h3>
-<p>Adding a message next to the novo-loading component is not a known pattern. This could be used to display a message while loading with the flag controlled at implementation. This can be used for a loading message displaying all the time for a loading screen, or having a timer flipping the flag to show a message during a long long loading screen.</p>
-<h5><strong>Screenshots</strong></h5>
-<p><img src="https://user-images.githubusercontent.com/73492464/181272237-66468bd6-7b3c-443a-b5df-ae87a8cdae54.png" alt="image">
-<img src="https://user-images.githubusercontent.com/73492464/181272305-689554f1-2cb5-434d-af7c-8fbe10724728.png" alt="image"></p>
-<hr>
-<h3 id="html-hints">New HTML Form Field Hints <a href="https://bullhorn.github.io/novo-elements/docs/#/updates/v7dot3#html-hints">#</a></h3>
-<p>Added the ability to set the <code>description</code> (aka hint text) on form controls to display HTML</p>
-<p><img src="https://user-images.githubusercontent.com/1056055/181560747-1d77a522-bc0c-40c2-b117-330ec901aa29.png" alt="image"></p>
-<p>Also added the ability for the FieldInteractionAPI to update the description of a field (potentially adding in HTML):</p>
-<pre><code class="language-typescript"><span class="hljs-variable constant_">API</span>.<span class="hljs-title function_">setDescription</span>(<span class="hljs-string">&#x27;description&#x27;</span>, <span class="hljs-string">&#x27;&lt;span&gt;&lt;b&gt;BOLD&lt;/b&gt; description with a &lt;a target=&quot;_blank&quot; href=&quot;https://www.google.com&quot;&gt;Google&lt;/a&gt; Link&lt;/span&gt;&#x27;</span>);
-</code></pre>
-<p><img src="https://user-images.githubusercontent.com/5430919/181575015-bb30bcb2-c8a1-4ae0-b99c-1250d5784fd6.gif" alt="field-interaction-description"></p>
-<p><a href="https://bullhorn.github.io/novo-elements/docs/#/updates/v7dot3#html-hints">Check out the demo!</a></p>
-`,
-  host: { class: 'markdown-page' }
-})
-export class August2022Page {
-  public params: any = {};
-}
-
-
-@Component({
-  selector: 'february-2022-page',
+  selector: 'v6-page',
   template: `<h1>🚀 February 2022 (version 6 - Golden)</h1>
 <p><strong>Release v6.0.0</strong>: This release contains several component updates and additional new components. Initial refactoring of component architecture to support future efforts to improve the design systems consistency along with improvements to the developer experience.</p>
 <p>Note: This update is a major release which includes changes that require updates to your code. When updating to Novo Elements V6 from prior versions, the following commands are required:</p>
@@ -6215,39 +6141,13 @@ export class August2022Page {
 `,
   host: { class: 'markdown-page' }
 })
-export class February2022Page {
+export class v6Page {
   public params: any = {};
 }
 
 
 @Component({
-  selector: 'june-2022-page',
-  template: `<h1>📢  June 2022 (version 7.2.x)</h1>
-<p><strong>New Feature: Query Builder</strong>: We have added a new component to help with building complex and modern interfaces.  At Bullhorn we have to enable our users to create advanced and dynamic searches against their data.  We have built many iterations of a query builder in the past but we think this one is our best and most re-usable.</p>
-<p>Bullhorn is continually seeking to update and innovate our products, and leverage the latest features in the frameworks we use. In support of that mission, we are updating our Novo UI and its supporting novo-elements library to Angular 13.  This update  allows us to continue offering a streamlined and consistent experience across Bullhorn’s complete product portfolio.  This update includes both an Angular upgrade, as well as supporting the latest Typescript updates.  You can find more details in the Technical Release Notes section below.</p>
-<h2>Release Timeline</h2>
-<p>Bullhorn has released a Release Candidate v7 of Novo-elements. Bullhorn will update Novo to use Novo-Elements v7 in the 2022.6 release</p>
-<pre><code class="language-sh">npm install novo-elements@next
-<span class="hljs-comment"># or</span>
-npm install novo-elements@7.2.0-next.0
-</code></pre>
-<h2>How to get it!</h2>
-<blockquote>
-<div class="p">Note: First follow the steps to update your angular app to <a href="https://update.angular.io/?v=10.0-13.0">Version 13</a> if you haven't already.</div>
-</blockquote>
-<pre><code><span class="hljs-attribute">npm</span> install --save novo-elements@<span class="hljs-number">7</span>.x.x
-<span class="hljs-attribute">ng</span> update novo-elements --migrate-only --from=<span class="hljs-number">0</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span> --to=<span class="hljs-number">7</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span> --force --<span class="hljs-literal">allow</span>-dirty  
-</code></pre>
-`,
-  host: { class: 'markdown-page' }
-})
-export class June2022Page {
-  public params: any = {};
-}
-
-
-@Component({
-  selector: 'may-2022-page',
+  selector: 'v7-page',
   template: `<h1>📢  May 2022 (version 7)</h1>
 <p><strong>Announcement</strong>: Novo Elements is being updated to Angular 13</p>
 <p>Bullhorn is continually seeking to update and innovate our products, and leverage the latest features in the frameworks we use. In support of that mission, we are updating our Novo UI and its supporting novo-elements library to Angular 13.  This update  allows us to continue offering a streamlined and consistent experience across Bullhorn’s complete product portfolio.  This update includes both an Angular upgrade, as well as supporting the latest Typescript updates.  You can find more details in the Technical Release Notes section below.</p>
@@ -6283,10 +6183,189 @@ npm install novo-elements@7.2.0-next.0
 </ul>
 <p><strong>Support Removed</strong></p>
 <p>Support for Internet Explorer 9, 10 and Internet Explorer mobile has been removed</p>
+<h1>📢  June 2022 (version 7.2.x)</h1>
+<p><strong>New Feature: Query Builder</strong>: We have added a new component to help with building complex and modern interfaces.  At Bullhorn we have to enable our users to create advanced and dynamic searches against their data.  We have built many iterations of a query builder in the past but we think this one is our best and most re-usable.</p>
+<p>Bullhorn is continually seeking to update and innovate our products, and leverage the latest features in the frameworks we use. In support of that mission, we are updating our Novo UI and its supporting novo-elements library to Angular 13.  This update  allows us to continue offering a streamlined and consistent experience across Bullhorn’s complete product portfolio.  This update includes both an Angular upgrade, as well as supporting the latest Typescript updates.  You can find more details in the Technical Release Notes section below.</p>
+<h2>Release Timeline</h2>
+<p>Bullhorn has released a Release Candidate v7 of Novo-elements. Bullhorn will update Novo to use Novo-Elements v7 in the 2022.6 release</p>
+<pre><code class="language-sh">npm install novo-elements@next
+<span class="hljs-comment"># or</span>
+npm install novo-elements@7.2.0-next.0
+</code></pre>
+<h2>How to get it!</h2>
+<blockquote>
+<div class="p">Note: First follow the steps to update your angular app to <a href="https://update.angular.io/?v=10.0-13.0">Version 13</a> if you haven't already.</div>
+</blockquote>
+<pre><code><span class="hljs-attribute">npm</span> install --save novo-elements@<span class="hljs-number">7</span>.x.x
+<span class="hljs-attribute">ng</span> update novo-elements --migrate-only --from=<span class="hljs-number">0</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span> --to=<span class="hljs-number">7</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span> --force --<span class="hljs-literal">allow</span>-dirty  
+</code></pre>
+<h1>📢  August 2022 (version 7.3.x)</h1>
+<p><strong>Announcement</strong>: New features and improvements!</p>
+<p>Bullhorn is continually seeking to update and innovate our products, and leverage the latest features in the frameworks we use. In support of that mission, we are updating our Novo UI and its supporting novo-elements library to Angular 13.  This update  allows us to continue offering a streamlined and consistent experience across Bullhorn’s complete product portfolio.  This update includes both an Angular upgrade, as well as supporting the latest Typescript updates.  You can find more details in the Technical Release Notes section below.</p>
+<h2>Release Timeline</h2>
+<p>Bullhorn has released a Release Candidate v7.3.x of Novo-elements. Bullhorn will update Novo to use Novo-Elements v7.3.x in the 2022.8 release</p>
+<pre><code class="language-sh">npm install novo-elements@next
+<span class="hljs-comment"># or</span>
+npm install novo-elements@7.3.x
+</code></pre>
+<h2 id="notable-changes">Notable changes <a href="https://bullhorn.github.io/novo-elements/docs/#/updates/v7dot3#notable-changes">#</a></h2>
+<ul>
+<li><a href="https://github.com/bullhorn/novo-elements/pull/1331">#1331</a> - Chips: updated disabled chip styles for better readability</li>
+<li><a href="https://github.com/bullhorn/novo-elements/pull/1326">#1326</a> - Autocomplete: Autocomplete now works with ChipList</li>
+<li><a href="https://github.com/bullhorn/novo-elements/pull/1334">#1334</a> - NonIdealState: New loading pattern for Non Ideal State</li>
+<li><a href="https://github.com/bullhorn/novo-elements/pull/1333">#1333</a> - Forms: field hints now support html text w/ FieldInteractionApi support</li>
+</ul>
+<h2 id="new-features">New Features<a href="https://bullhorn.github.io/novo-elements/docs/#/updates/v7dot3#new-features">#</a></h2>
+<h3 id="better-chips">Chips: updated disabled chip styles for better <a href="https://bullhorn.github.io/novo-elements/docs/#/updates/v7dot3#better-chips">#</a></h3>
+<ul>
+<li>darken the opacity to improve readability</li>
+<li>update text color of disabled chips to look non-selectable</li>
+<li>remove the X icon to further confer that this chip is read-only</li>
+</ul>
+<p>previous state was 40% opacity:
+<img src="https://user-images.githubusercontent.com/21197268/180056798-84c36888-96bb-4d72-99fd-ebd80a157f1a.png" alt="chips-before"></p>
+<p>After updates:</p>
+<p><img src="https://user-images.githubusercontent.com/21197268/180057064-f549895c-82f2-4092-bf05-00172f0dcb09.png" alt="chips-after"></p>
+<p>example with disabled and non disabled chips</p>
+<p><img src="https://user-images.githubusercontent.com/21197268/180057201-ab8717aa-17be-49c3-a18d-97bf1a8889dd.png" alt="after-example-both"></p>
+<hr>
+<h3 id="autocomplete">Autocomplete <a href="https://bullhorn.github.io/novo-elements/docs/#/updates/v7dot3#autocomplete">#</a></h3>
+<p>Autocomplete now works with the NovoChipList when used in a NovoFormField.  The manual events are no longer necessary to utilize the autocomplete functionality.  Now basic functionality can be supported with a limited specification.</p>
+<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">novo-field</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">novo-label</span>&gt;</span>Favorite Fruits<span class="hljs-tag">&lt;/<span class="hljs-name">novo-label</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">novo-chip-list</span> #<span class="hljs-attr">chipList</span> [<span class="hljs-attr">formControl</span>]=<span class="hljs-string">&quot;fieldCtrl&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">novo-chip</span> *<span class="hljs-attr">ngFor</span>=<span class="hljs-string">&quot;let fruit of chipList.value&quot;</span> [<span class="hljs-attr">value</span>]=<span class="hljs-string">&quot;fruit&quot;</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">novo-text</span>&gt;</span>fruit<span class="hljs-tag">&lt;/<span class="hljs-name">novo-text</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">novo-icon</span> <span class="hljs-attr">novoChipRemove</span>&gt;</span>close<span class="hljs-tag">&lt;/<span class="hljs-name">novo-icon</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">novo-chip</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">input</span> #<span class="hljs-attr">chipInput</span> <span class="hljs-attr">novoChipInput</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">&quot;New fruit...&quot;</span> <span class="hljs-attr">autocomplete</span>=<span class="hljs-string">&quot;off&quot;</span> [<span class="hljs-attr">formControl</span>]=<span class="hljs-string">&quot;searchCtrl&quot;</span> /&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">novo-chip-list</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">novo-autocomplete</span> (<span class="hljs-attr">optionSelected</span>)=<span class="hljs-string">&quot;selected($event)&quot;</span> <span class="hljs-attr">multiple</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">novo-option</span> *<span class="hljs-attr">ngFor</span>=<span class="hljs-string">&quot;let fruit of filteredFruits | async&quot;</span> [<span class="hljs-attr">value</span>]=<span class="hljs-string">&quot;fruit&quot;</span>&gt;</span>
+      fruit
+    <span class="hljs-tag">&lt;/<span class="hljs-name">novo-option</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">novo-autocomplete</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">novo-field</span>&gt;</span>
+</code></pre>
+<p><img src="https://user-images.githubusercontent.com/1056055/175618421-05e8898a-caaf-488d-b384-acdc922b6647.gif" alt="doqFeEqHOa"></p>
+<hr>
+<h3 id="loading-pattern">Loading Pattern for Non Ideal State <a href="https://bullhorn.github.io/novo-elements/docs/#/updates/v7dot3#loading-pattern">#</a></h3>
+<p>Adding a message next to the novo-loading component is not a known pattern. This could be used to display a message while loading with the flag controlled at implementation. This can be used for a loading message displaying all the time for a loading screen, or having a timer flipping the flag to show a message during a long long loading screen.</p>
+<h5><strong>Screenshots</strong></h5>
+<p><img src="https://user-images.githubusercontent.com/73492464/181272237-66468bd6-7b3c-443a-b5df-ae87a8cdae54.png" alt="image">
+<img src="https://user-images.githubusercontent.com/73492464/181272305-689554f1-2cb5-434d-af7c-8fbe10724728.png" alt="image"></p>
+<hr>
+<h3 id="html-hints">New HTML Form Field Hints <a href="https://bullhorn.github.io/novo-elements/docs/#/updates/v7dot3#html-hints">#</a></h3>
+<p>Added the ability to set the <code>description</code> (aka hint text) on form controls to display HTML</p>
+<p><img src="https://user-images.githubusercontent.com/1056055/181560747-1d77a522-bc0c-40c2-b117-330ec901aa29.png" alt="image"></p>
+<p>Also added the ability for the FieldInteractionAPI to update the description of a field (potentially adding in HTML):</p>
+<pre><code class="language-typescript"><span class="hljs-variable constant_">API</span>.<span class="hljs-title function_">setDescription</span>(<span class="hljs-string">&#x27;description&#x27;</span>, <span class="hljs-string">&#x27;&lt;span&gt;&lt;b&gt;BOLD&lt;/b&gt; description with a &lt;a target=&quot;_blank&quot; href=&quot;https://www.google.com&quot;&gt;Google&lt;/a&gt; Link&lt;/span&gt;&#x27;</span>);
+</code></pre>
+<p><img src="https://user-images.githubusercontent.com/5430919/181575015-bb30bcb2-c8a1-4ae0-b99c-1250d5784fd6.gif" alt="field-interaction-description"></p>
+<p><a href="https://bullhorn.github.io/novo-elements/docs/#/updates/v7dot3#html-hints">Check out the demo!</a></p>
 `,
   host: { class: 'markdown-page' }
 })
-export class May2022Page {
+export class v7Page {
+  public params: any = {};
+}
+
+
+@Component({
+  selector: 'v8-page',
+  template: `<h1>📢  July 2023 (version 8)</h1>
+<p><strong>Release v8.0.0: Tree-shakable imports!</strong>: Along with a number of bug fixes, styling improvements, and feature additions, this v8 release includes new entry points for each component, as well as high level entry points for our elements, pipes, services, utils, and addons.</p>
+<p><strong>What this means for you</strong>: If you use a number of novo-elements components and features then you can continue importing the root novo-elements module as normal with no changes to your application. If however, you are only using one or a handful of novo-elements features, you now have the option to import them individually, trimming all of the unused novo-elements code from your builds, reducing your app's bundle size and build time, and improving performance.</p>
+<p><strong>How to use these new entry points</strong>: In your module file(s), instead of importing the root novo-elements module like so:</p>
+<pre><code><span class="hljs-keyword">import</span> &#123; NovoElementsModule &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;novo-elements&#x27;</span>;
+</code></pre>
+<p>If you wish you can now only import the components you need, like this:</p>
+<pre><code><span class="hljs-keyword">import</span> &#123; NovoAceEditorModule &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;novo-elements/addons/ace-editor&#x27;</span>;
+</code></pre>
+<p>New top-level entry points include:</p>
+<pre><code><span class="hljs-symbol">&#x27;novo-elements/addons</span>&#x27;
+<span class="hljs-symbol">&#x27;novo-elements/elements</span>&#x27;
+<span class="hljs-symbol">&#x27;novo-elements/pipes</span>&#x27;
+<span class="hljs-symbol">&#x27;novo-elements/services</span>&#x27;
+<span class="hljs-symbol">&#x27;novo-elements/utils</span>&#x27;
+</code></pre>
+<p>And each component in the addons and elements libraries have their own entry points as well. For example:</p>
+<pre><code><span class="hljs-symbol">&#x27;novo-elements/addons/ckeditor</span>&#x27;
+<span class="hljs-symbol">&#x27;novo-elements/elements/tooltip</span>&#x27;
+</code></pre>
+<p>If you're unsure if a component or library has its own importable entry point, you can verify this by looking for the presence of an <code>ng-package.json</code> file in its folder. If it has one, you can import it!</p>
+<p><strong>Beginning of CommonJS library removal</strong>: To further our efforts into making novo-elements as tree-shakable as possible, we've begun the process of removing all of our dependencies on CommonJS libraries. Unfortunately this isn't possible without some breaking changes but we've tried to minimize their impact as much as possible.</p>
+<ul>
+<li>
+<p><strong>Dragula</strong>: With this v8 update we have deprecated Dragula and slated it for future removal, with the recommendation that existing users switch over to use the built-in ng <code>drag-drop</code> cdk, or a third party solution such as <code>angular-draggable-droppable</code>, <code>ngx-drag-drop</code>, <code>ngx-sortablejs</code>, or <code>ng2-dragula</code>.</p>
+</li>
+<li>
+<p><strong>Date-fns</strong>: We have also updated our date-fns dependency from v1 to v2. This will likely require some updates in your application if you're utilizing any of the date-fns calls, most notably <code>format()</code> and <code>parse()</code>, as the new v2 functions have stricter date typing than we've built into many of our novo-elements date and time components, which generally accept a <code>DateLike</code> object which can be a Date object, a string, or a number.</p>
+</li>
+</ul>
+<p>For this we have included a handy new <code>DateUtil</code> which effectively wraps these new date-fns v2 functions, while accepting the original DateLike objects and then doing their own type checking or parsing before calling the new date-fns v2 function with the appropriately-typed object. This should make for a fairly straightforward update. For example, if you were utilizing the original v1 date-fns <code>format()</code> function, this is what your update would look like:</p>
+<pre><code>// <span class="hljs-keyword">before</span>
+<span class="hljs-keyword">import</span> &#123; <span class="hljs-keyword">format</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;date-fns&#x27;</span>;
+
+yourFunction(dateLikeProperty: DateLike): string &#123;
+  <span class="hljs-keyword">return</span> format(dateLikeProperty);
+&#125;
+</code></pre>
+<pre><code>// <span class="hljs-keyword">after</span>
+<span class="hljs-keyword">import</span> &#123; DateUtil &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;novo-elements/utils&#x27;</span>;
+
+yourFunction(dateLikeProperty: DateLike): string &#123;
+  <span class="hljs-keyword">return</span> DateUtil.format(dateLikeProperty);
+&#125;
+</code></pre>
+<p>Here is the official <a href="https://date-fns.org/v2.29.2/docs/Upgrade-Guide">Upgrade Guide</a> and <a href="https://date-fns.org/v2.29.2/docs/Change-Log">Change Log</a> from the date-fns docs.</p>
+<p>Be sure to see the full list of breaking changes below.</p>
+<h2>Upgrading to v8</h2>
+<pre><code><span class="hljs-attribute">npm</span> install --save novo-elements@<span class="hljs-number">8</span>.x.x
+<span class="hljs-attribute">npm</span> install --save date-fns@<span class="hljs-number">2</span>.<span class="hljs-number">30</span>.<span class="hljs-number">0</span>
+<span class="hljs-attribute">npm</span> install --save rxjs@<span class="hljs-number">7</span>.<span class="hljs-number">8</span>.<span class="hljs-number">1</span>
+</code></pre>
+<h2 id="notable-changes">Notable changes <a href="https://bullhorn.github.io/novo-elements/docs/#/updates/v8-announce#notable-changes">#</a></h2>
+<ul>
+<li>tree shakable imports <a href="https://github.com/bullhorn/novo-elements/pull/1413">#1413</a></li>
+<li>updating rxjs to 7.8.1 <a href="https://github.com/bullhorn/novo-elements/pull/1419">#1419</a></li>
+<li>deprecating dragula directive and service <a href="https://github.com/bullhorn/novo-elements/pull/1420">#1420</a></li>
+<li>updating date-fns to v2 <a href="https://github.com/bullhorn/novo-elements/pull/1421">#1421</a></li>
+<li>updating checkbox, checklist, radio, tiles to have consistent disabled styling <a href="https://github.com/bullhorn/novo-elements/pull/1425">#1425</a></li>
+<li>fixing checkbox display bug and adding demo <a href="https://github.com/bullhorn/novo-elements/pull/1427">#1427</a></li>
+<li>moving some extended third party libs out to addons folder <a href="https://github.com/bullhorn/novo-elements/pull/1430">#1430</a></li>
+<li>making data tables emit scroll events through the cdk <a href="https://github.com/bullhorn/novo-elements/pull/1431">#1431</a></li>
+<li>adding keyboard support to places component <a href="https://github.com/bullhorn/novo-elements/pull/1433">#1433</a></li>
+</ul>
+<h2 id="breaking-changes">Breaking changes <a href="https://bullhorn.github.io/novo-elements/docs/#/updates/v8-announce#breaking-changes">#</a></h2>
+<ul>
+<li>Imports using absolute paths to class files should be changed to import from an entry point instead.</li>
+<li>Most date-fns calls that are not accepting pure Date objects will need to be updated to instead call its respective new DateUtil function.</li>
+<li>Due to stricter subject typing, it will now throw a build error if you are passing in a parameter to a subject which does not match the type you have set. We have had to modify some of our subject types because of this.</li>
+<li>The <code>queryItems</code> property on the PlacesListComponent has been renamed to <code>matches</code> in order to piggyback on functionality from the newly-extended BasePickerResults component.</li>
+</ul>
+<p><strong>Deprecated</strong></p>
+<ul>
+<li>Dragula directive and service have been deprecated</li>
+</ul>
+`,
+  host: { class: 'markdown-page' }
+})
+export class v8Page {
+  public params: any = {};
+}
+
+
+@Component({
+  selector: 'ace-editor-page',
+  template: `<h1>Ace Editor <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/addons/ace-editor">(source)</a></h1>
+<p>Basic code editor using Ace Editor.</p>
+<h5>Basic Example</h5>
+<p><code-example example="basic-ace"></code-example></p>
+`,
+  host: { class: 'markdown-page' }
+})
+export class AceEditorPage {
   public params: any = {};
 }
 
@@ -6787,10 +6866,9 @@ const routes: Routes = [
       { path: '', redirectTo: '/patterns/patterns/test', pathMatch: 'full' },
     ]
   },
-  { path: 'updates/v7dot3', component: August2022Page, data: { title: 'August 2022', section: 'updates', tag: 'new' } },
-  { path: 'updates/v6', component: February2022Page, data: { title: 'February 2022', section: 'updates' } },
-  { path: 'updates/v7-query-builder', component: June2022Page, data: { title: 'June 2022', section: 'updates', tag: 'new' } },
-  { path: 'updates/v7-announce', component: May2022Page, data: { title: 'May 2022', section: 'updates' } },
+  { path: 'updates/v6', component: v6Page, data: { title: 'v6', section: 'updates' } },
+  { path: 'updates/v7-announce', component: v7Page, data: { title: 'v7', section: 'updates' } },
+  { path: 'updates/v8-announce', component: v8Page, data: { title: 'v8', section: 'updates', tag: 'new' } },
   { path: 'utils/ace editor', component: AceEditorPage, data: { title: 'Ace Editor', section: 'utils' } },
   { path: 'utils/field-interactions', component: FieldInteractionsPage, data: { title: 'Field Interactions', section: 'utils' } },
   { path: 'utils/pipes', component: PipesPage, data: { title: 'Pipes', section: 'utils' } },
@@ -6801,7 +6879,7 @@ const routes: Routes = [
 ];
 
 export const PAGE_LIST = [
-  AgendaDesignPage,AgendaDevelopPage,AgendaExamplesPage,AsideDesignPage,AsideDevelopPage,AsideExamplesPage,AutocompleteDesignPage,AutocompleteDevelopPage,AutocompleteExamplesPage,AvatarDesignPage,AvatarDevelopPage,AvatarExamplesPage,BreadcrumbDesignPage,BreadcrumbDevelopPage,BreadcrumbExamplesPage,ButtonDesignPage,ButtonDevelopPage,ButtonExamplesPage,CalendarDesignPage,CalendarDevelopPage,CalendarExamplesPage,ComponentsPage,DataTablePage,DropdownDesignPage,DropdownDevelopPage,DropdownExamplesPage,FieldDesignPage,FieldDevelopPage,FieldExamplesPage,IconDesignPage,IconDevelopPage,IconExamplesPage,LoadingDesignPage,LoadingDevelopPage,LoadingExamplesPage,MenuDesignPage,MenuDevelopPage,MenuExamplesPage,ModalDesignPage,ModalDevelopPage,ModalExamplesPage,NonIdealStateDesignPage,NonIdealStateDevelopPage,NonIdealStateExamplesPage,PopoverDesignPage,PopoverDevelopPage,PopoverExamplesPage,ProgressDesignPage,ProgressDevelopPage,ProgressExamplesPage,ProgressUsagePage,QueryBuilderDesignPage,QueryBuilderDevelopPage,QueryBuilderExamplesPage,SearchPage,SlidesPage,SwitchPage,TabbedGroupPickerPage,TablePage,TipWellDesignPage,TipWellDevelopPage,TipWellExamplesPage,ToasterDesignPage,ToasterDevelopPage,ToasterExamplesPage,ToolbarDesignPage,ToolbarDevelopPage,ToolbarExamplesPage,TooltipDesignPage,TooltipDevelopPage,TooltipExamplesPage,ColorsPage,CompositionPage,DesignPage,IconographyPage,SpacingPage,TypographyPage,CheckboxPage,ChipsDesignPage,ChipsDevelopPage,ChipsExamplesPage,CkEditorPage,ColorPickerPage,DatePickerDesignPage,DatePickerDevelopPage,DatePickerExamplesPage,DateTimePickerDesignPage,DateTimePickerDevelopPage,DateTimePickerExamplesPage,DynamicFormPage,FormControlsPage,FormGroupsPage,FormPage,MultiPickerPage,PickerPage,RadioButtonsPage,SelectPage,TilesPage,TimePickerDesignPage,TimePickerDevelopPage,TimePickerExamplesPage,ValuePage,HomePage,CardDescriptionPage,CardDesignPage,CardDevelopPage,CardExamplesPage,ExpansionPage,HeaderPage,LayoutsPage,ListPage,SidenavPage,StepperPage,TabsDesignPage,TabsDevelopPage,TabsExamplesPage,PatternsNativeFormsPage,PatternsTestPage,PatternsPage,TemplatesPage,August2022Page,February2022Page,June2022Page,May2022Page,AceEditorPage,FieldInteractionsPage,PipesPage,QuickNotePage,SecurityPage
+  AgendaDesignPage,AgendaDevelopPage,AgendaExamplesPage,AsideDesignPage,AsideDevelopPage,AsideExamplesPage,AutocompleteDesignPage,AutocompleteDevelopPage,AutocompleteExamplesPage,AvatarDesignPage,AvatarDevelopPage,AvatarExamplesPage,BreadcrumbDesignPage,BreadcrumbDevelopPage,BreadcrumbExamplesPage,ButtonDesignPage,ButtonDevelopPage,ButtonExamplesPage,CalendarDesignPage,CalendarDevelopPage,CalendarExamplesPage,ComponentsPage,DataTablePage,DropdownDesignPage,DropdownDevelopPage,DropdownExamplesPage,FieldDesignPage,FieldDevelopPage,FieldExamplesPage,IconDesignPage,IconDevelopPage,IconExamplesPage,LoadingDesignPage,LoadingDevelopPage,LoadingExamplesPage,MenuDesignPage,MenuDevelopPage,MenuExamplesPage,ModalDesignPage,ModalDevelopPage,ModalExamplesPage,NonIdealStateDesignPage,NonIdealStateDevelopPage,NonIdealStateExamplesPage,PopoverDesignPage,PopoverDevelopPage,PopoverExamplesPage,ProgressDesignPage,ProgressDevelopPage,ProgressExamplesPage,ProgressUsagePage,QueryBuilderDesignPage,QueryBuilderDevelopPage,QueryBuilderExamplesPage,SearchPage,SlidesPage,SwitchPage,TabbedGroupPickerPage,TablePage,TipWellDesignPage,TipWellDevelopPage,TipWellExamplesPage,ToasterDesignPage,ToasterDevelopPage,ToasterExamplesPage,ToolbarDesignPage,ToolbarDevelopPage,ToolbarExamplesPage,TooltipDesignPage,TooltipDevelopPage,TooltipExamplesPage,ColorsPage,CompositionPage,DesignPage,IconographyPage,SpacingPage,TypographyPage,CheckboxPage,ChipsDesignPage,ChipsDevelopPage,ChipsExamplesPage,CkEditorPage,ColorPickerPage,DatePickerDesignPage,DatePickerDevelopPage,DatePickerExamplesPage,DateTimePickerDesignPage,DateTimePickerDevelopPage,DateTimePickerExamplesPage,DynamicFormPage,FormControlsPage,FormGroupsPage,FormPage,MultiPickerPage,PickerPage,RadioButtonsPage,SelectPage,TilesPage,TimePickerDesignPage,TimePickerDevelopPage,TimePickerExamplesPage,ValuePage,HomePage,CardDescriptionPage,CardDesignPage,CardDevelopPage,CardExamplesPage,ExpansionPage,HeaderPage,LayoutsPage,ListPage,SidenavPage,StepperPage,TabsDesignPage,TabsDevelopPage,TabsExamplesPage,PatternsNativeFormsPage,PatternsTestPage,PatternsPage,TemplatesPage,v6Page,v7Page,v8Page,AceEditorPage,FieldInteractionsPage,PipesPage,QuickNotePage,SecurityPage
 ];
 
 @NgModule({
