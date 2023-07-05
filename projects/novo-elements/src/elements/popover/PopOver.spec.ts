@@ -6,7 +6,7 @@ import { PopOverDirective } from './PopOver';
 
 @Component({
   selector: 'test-component',
-  template: ` <div popover=""></div> `,
+  template: ` <div novoPopover=""></div> `,
 })
 class TestComponent {}
 
