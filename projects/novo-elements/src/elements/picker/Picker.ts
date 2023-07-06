@@ -69,6 +69,7 @@ const PICKER_VALUE_ACCESSOR = {
       <ng-content></ng-content>
     </novo-overlay-template>
   `,
+  styleUrls: ['./Picker.scss'],
 })
 export class NovoPickerElement implements OnInit {
   // Container for the results

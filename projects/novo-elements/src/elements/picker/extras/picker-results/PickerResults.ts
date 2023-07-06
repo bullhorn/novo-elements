@@ -27,6 +27,7 @@ import { BasePickerResults } from '../base-picker-results/BasePickerResults';
     <p class="picker-error" *ngIf="hasError">{{ labels.pickerError }}</p>
     <p class="picker-null-results" *ngIf="hasNonErrorMessage">{{ getEmptyMessage() }}</p>
   `,
+  styleUrls: ['./PickerResults.scss'],
 })
 export class PickerResults extends BasePickerResults {
   constructor(element: ElementRef, public labels: NovoLabelService, ref: ChangeDetectorRef) {
