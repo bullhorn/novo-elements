@@ -21,6 +21,7 @@ const ACE_VALUE_ACCESSOR = {
 @Component({
   selector: 'novo-ace-editor',
   template: '',
+  styleUrls: ['./AceEditor.scss'],
   providers: [ACE_VALUE_ACCESSOR],
 })
 export class NovoAceEditor implements ControlValueAccessor, OnInit, OnDestroy {
