@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
 import { NovoLabelService } from 'novo-elements/services';
 import { BasePickerResults } from '../base-picker-results/BasePickerResults';
 
@@ -231,6 +231,7 @@ export class EntityPickerResult {
     <div class="picker-null-results" *ngIf="hasNonErrorMessage && term === ''">{{ labels.pickerTextFieldEmpty }}</div>
   `,
   styleUrls: ['../picker-results/PickerResults.scss'],
+  encapsulation: ViewEncapsulation.None,
   host: {
     class: 'novo-entity-picker-results',
   },

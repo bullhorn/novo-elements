@@ -27,17 +27,6 @@
 // --------------------------------------------------
 @import "./addons/dragula/Dragula";
 
-// --------------------------------------------------
-// Elements
-// --------------------------------------------------
-@import "./elements/data-table/data-table.component";
-@import "./elements/table/Table";
-@import "./elements/table/extras/pagination/Pagination";
-@import "./elements/form/Form";
-@import "./elements/category-dropdown/CategoryDropdown";
-@import "./elements/table/extras/dropdown-cell/DropdownCell";
-@import "./elements/simple-table/table";
-
 .bgc-main,
 .novo-background-main {
   background-color: var(--background-main, $color-bright);

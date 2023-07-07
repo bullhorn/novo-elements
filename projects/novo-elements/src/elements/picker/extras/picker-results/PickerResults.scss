@@ -1,6 +1,7 @@
 @import "../../../../styles/variables.scss";
 
-:host {
+picker-results,
+entity-picker-results {
   background: $white;
   color: black;
   min-width: 100%;
@@ -9,11 +10,11 @@
   top: 100%;
   .novo-list {
     border: 1px solid #4a89dc;
-    ::ng-deep .novo-list-item {
+    .novo-list-item {
       cursor: pointer;
       flex: 0 0;
       transition: background-color 250ms;
-      & > ::ng-deep div {
+      & > div {
         width: 100%;
       }
       &.active {
@@ -87,8 +88,10 @@
   }
 }
 
-:host-context(picker-results),
-:host-context(quick-note-results) {
+picker-results,
+.picker-results,
+quick-note-results,
+.quick-note-results {
   background-color: $white;
   cursor: default;
   line-height: 26px;
@@ -110,6 +113,7 @@
     novo-list-item,
     li {
       font-size: 0.9em;
+      padding: 5px 16px;
       span {
         display: inline-block;
         min-width: 100px;
@@ -159,6 +163,7 @@
 }
 
 
+entity-picker-results,
 :host-context(entity-picker-results) {
   background: $white;
   width: 100%;
@@ -168,7 +173,7 @@
     min-width: 30rem;
     max-height: 49vh;
     overflow: auto;
-    ::ng-deep .novo-item-content {
+    .novo-item-content {
       margin-top: $spacing-sm;
       margin-left: 1.8rem;
       row-gap: 1rem;
@@ -179,15 +184,15 @@
         padding-right: 1em;
       }
     }
-    ::ng-deep novo-loading {
+    novo-loading {
       justify-content: center;
     }
   }
 }
 
 // Shared specialty picker styles
-:host-context(workers-comp-codes-picker-results),
-:host-context(distribution-list-picker-results) {
+workers-comp-codes-picker-results,
+distribution-list-picker-results {
   display: block;
   color: black;
   width: 100%;

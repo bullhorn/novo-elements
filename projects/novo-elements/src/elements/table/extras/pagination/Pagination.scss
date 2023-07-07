@@ -1,3 +1,5 @@
+@import "../../../../styles/variables.scss";
+
 novo-pagination {
   display: flex;
   flex-flow: row nowrap;
@@ -14,7 +16,7 @@ novo-pagination {
   span.spacer {
     flex: 1;
   }
-  novo-select {
+  novo-select.table-pagination-select {
     max-width: 100px;
     min-width: 100px;
     div[type="button"] {

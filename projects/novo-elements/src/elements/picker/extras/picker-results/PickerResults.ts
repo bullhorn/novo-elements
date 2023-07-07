@@ -1,5 +1,5 @@
 // NG2
-import { ChangeDetectorRef, Component, ElementRef } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, ViewEncapsulation } from '@angular/core';
 // APP
 import { NovoLabelService } from 'novo-elements/services';
 import { BasePickerResults } from '../base-picker-results/BasePickerResults';
@@ -28,6 +28,7 @@ import { BasePickerResults } from '../base-picker-results/BasePickerResults';
     <p class="picker-null-results" *ngIf="hasNonErrorMessage">{{ getEmptyMessage() }}</p>
   `,
   styleUrls: ['./PickerResults.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class PickerResults extends BasePickerResults {
   constructor(element: ElementRef, public labels: NovoLabelService, ref: ChangeDetectorRef) {
