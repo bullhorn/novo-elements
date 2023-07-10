@@ -19,6 +19,7 @@ import { Key } from 'novo-elements/utils';
       <ng-content select="button" *ngIf="end"></ng-content>
     </div>
   `,
+  styleUrls: ['./Slider.scss'],
   host: {
     '[class]': 'currentClass',
   },

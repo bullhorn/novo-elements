@@ -36,6 +36,7 @@ import { Deferred, DeferredPromise } from 'novo-elements/utils';
       <i class="bhi-times"></i>
     </div>
   `,
+  styleUrls: ['./Toast.scss'],
 })
 export class NovoToastElement implements OnInit, OnChanges {
   @Input()

@@ -6274,7 +6274,7 @@ export class v7Page {
 @Component({
   selector: 'v8-page',
   template: `<h1>📢  July 2023 (version 8)</h1>
-<p><strong>Release v8.0.0: Tree-shakable imports!</strong>: Along with a number of bug fixes, styling improvements, and feature additions, this v8 release includes new entry points for each component, as well as high level entry points for our elements, pipes, services, utils, and addons.</p>
+<p><strong>Release v8.0.0</strong>: Along with a number of bug fixes, styling improvements, and feature additions, this v8 release includes new entry points for each component, as well as high level entry points for our elements, pipes, services, utils, and addons.</p>
 <p><strong>What this means for you</strong>: If you use a number of novo-elements components and features then you can continue importing the root novo-elements module as normal with no changes to your application. If however, you are only using one or a handful of novo-elements features, you now have the option to import them individually, trimming all of the unused novo-elements code from your builds, reducing your app's bundle size and build time, and improving performance.</p>
 <p><strong>How to use these new entry points</strong>: In your module file(s), instead of importing the root novo-elements module like so:</p>
 <pre><code><span class="hljs-keyword">import</span> &#123; NovoElementsModule &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;novo-elements&#x27;</span>;

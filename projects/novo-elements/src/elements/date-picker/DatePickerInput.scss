@@ -1,0 +1,45 @@
+@import "../../styles/variables.scss";
+
+:host {
+  flex: 1;
+  position: relative;
+  display: block !important;
+  &.disabled {
+    pointer-events: none;
+    opacity: 1;
+  }
+  input {
+    font-size: 1em;
+    border: none;
+    border-bottom: 1px solid $light;
+    background: transparent !important;
+    border-radius: 0;
+    outline: none;
+    height: 2rem;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    box-shadow: none;
+    box-sizing: content-box;
+    transition: all 300ms;
+    color: $dark;
+    &:focus {
+      border-bottom: 1px solid $ocean;
+    }
+  }
+  span.error-text {
+    color: $negative;
+    padding-top: 10px;
+    flex: 1;
+    display: flex;
+  }
+  > i.bhi-clock,
+  > i.bhi-search,
+  > i.bhi-times,
+  > i.bhi-calendar {
+    position: absolute;
+    right: 0;
+    top: 0px;
+    font-size: 1.2rem;
+  }
+}

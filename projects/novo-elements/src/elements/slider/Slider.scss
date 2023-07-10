@@ -1,4 +1,4 @@
-novo-slider {
+:host {
   display: block;
   width: 100%;
   max-width: 1000px;
@@ -28,7 +28,7 @@ novo-slider {
     display: flex;
     flex: 1 0 100%;
 
-    & > [slide] {
+    & > ::ng-deep [slide] {
       display: flex;
       flex: 1 0 100%;
       justify-content: center;
