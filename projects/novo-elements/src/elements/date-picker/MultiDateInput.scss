@@ -2,6 +2,7 @@
 @import "../chips/Chips";
 
 :host {
+  @extend chips;
   .chip-input-container {
     padding-top: 10px;
     .placeholder {
