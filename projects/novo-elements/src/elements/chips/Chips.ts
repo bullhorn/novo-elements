@@ -48,6 +48,7 @@ const CHIPS_VALUE_ACCESSOR = {
         (blur)="onTouched($event)"
         [selected]="items"
         [overrideElement]="element"
+        [allowCustomValues]="allowCustomValues"
       >
       </novo-picker>
     </div>
@@ -75,6 +76,8 @@ export class NovoChipsElement implements OnInit, ControlValueAccessor {
   maxlength: any;
   @Input()
   type: any;
+  @Input()
+  allowCustomValues = false;
   @Input()
   set disablePickerInput(v: boolean) {
     this._disablePickerInput = coerceBooleanProperty(v);

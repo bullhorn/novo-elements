@@ -281,6 +281,7 @@ import { NovoTemplate } from 'novo-elements/elements/common';
           [formControlName]="control.key"
           [placeholder]="control.placeholder"
           [maxlength]="control?.maxlength"
+          [allowCustomValues]="control.config.allowCustomValues"
           *ngIf="control.multiple && !control.config.columns"
           [closeOnSelect]="control.closeOnSelect"
           (changed)="methods.modelChangeWithRaw($event)"

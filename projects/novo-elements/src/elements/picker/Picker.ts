@@ -107,6 +107,8 @@ export class NovoPickerElement implements OnInit {
   overrideElement: ElementRef;
   @Input()
   maxlength: number;
+  @Input()
+  allowCustomValues = false;
 
   // Disable from typing into the picker (result template does everything)
   @Input()
@@ -218,10 +220,15 @@ export class NovoPickerElement implements OnInit {
       }
 
       if (event.key === Key.Enter) {
-        const activeMatch = this.popup.instance.activeMatch;
-        if (!this.selected.find((selected) => activeMatch && activeMatch.value && selected.value === activeMatch.value)) {
-          this.popup.instance.selectActiveMatch();
+        if (this.allowCustomValues) {
+          this.value = { value: this.term, label: this.term };
           this.ref.markForCheck();
+        } else {
+          const activeMatch = this.popup.instance.activeMatch;
+          if (!this.selected.find((selected) => activeMatch && activeMatch.value && selected.value === activeMatch.value)) {
+            this.popup.instance.selectActiveMatch();
+            this.ref.markForCheck();
+          }
         }
         return;
       }

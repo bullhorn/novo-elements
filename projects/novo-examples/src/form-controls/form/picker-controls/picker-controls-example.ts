@@ -12,6 +12,7 @@ import { EntityPickerResult, EntityPickerResults, FormUtils, PickerControl } fro
 export class PickerControlsExample {
   public singlePickerControl: any;
   public multiPickerControl: any;
+  public multiPickerWithCustomTextControl: any;
   public multiPickerControlWithMaxlength: any;
   public multiPickerControlWithMaxlengthAndPreselects: any;
   public entityMultiPickerControl: any;
@@ -96,6 +97,13 @@ export class PickerControlsExample {
       label: 'Multiple',
       multiple: true,
       config: { options: ['One', 'Two', 'Three'], type: 'candidate' },
+    });
+    this.multiPickerWithCustomTextControl = new PickerControl({
+      key:'multiPickerWithCustomText',
+      tooltip: 'Multiple With Custom Text',
+      label: 'Multiple With Custom Text',
+      multiple: true,
+      config: { options: ['One', 'Two', 'Three'], type: 'candidate', allowCustomValues: true },
     });
     this.multiPickerControlWithMaxlength = new PickerControl({
       key: 'multiPickerWithMaxlength',
@@ -272,6 +280,7 @@ export class PickerControlsExample {
     const controls = [
       this.singlePickerControl,
       this.multiPickerControl,
+      this.multiPickerWithCustomTextControl,
       this.entityMultiPickerControl,
       this.multiPickerControlWithMaxlength,
       this.multiPickerControlWithMaxlengthAndPreselects,
