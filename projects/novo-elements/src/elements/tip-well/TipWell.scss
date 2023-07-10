@@ -1,4 +1,7 @@
-novo-tip-well {
+@import "../../styles/variables.scss";
+@import "../common/typography/text.mixins.scss";
+
+:host {
   &.active {
     display: inline-block;
     margin-bottom: $spacing-md;

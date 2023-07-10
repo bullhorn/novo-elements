@@ -1,21 +1,8 @@
+@import "../../styles/variables.scss";
+
 $time-select-height: 45px;
 
-novo-date-time-picker-input {
-  flex: 1;
-  position: relative;
-  display: flex;
-  flex-flow: row nowrap;
-  max-width: 340px;
-
-  novo-date-picker-input {
-    margin-right: 20px;
-  }
-  novo-time-picker-input {
-    max-width: 130px;
-  }
-}
-
-novo-date-time-picker {
+:host {
   display: block;
   width: min-content;
   overflow: hidden;
@@ -28,7 +15,7 @@ novo-date-time-picker {
     .view-container {
       position: relative;
     }
-    .time-picker {
+    ::ng-deep .time-picker {
       position: absolute;
       height: 100%;
       width: 100%;
