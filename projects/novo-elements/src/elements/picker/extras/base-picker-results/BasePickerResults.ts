@@ -31,6 +31,7 @@ export class BasePickerResults {
   private selectingMatches: boolean = false;
   private scrollHandler: any;
   _matches: Array<any> = [];
+  customTextValue: any = null;
 
   @Input()
   set matches(m: Array<any>) {
@@ -38,7 +39,7 @@ export class BasePickerResults {
   }
 
   get matches() {
-    return this._matches;
+    return this.customTextValue ? [...this._matches, this.customTextValue] : this._matches;
   }
 
   constructor(element: ElementRef, ref: ChangeDetectorRef) {

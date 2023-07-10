@@ -220,15 +220,10 @@ export class NovoPickerElement implements OnInit {
       }
 
       if (event.key === Key.Enter) {
-        if (this.allowCustomValues) {
-          this.value = { value: this.term, label: this.term };
+        const activeMatch = this.popup.instance.activeMatch;
+        if (!this.selected.find((selected) => activeMatch && activeMatch.value && selected.value === activeMatch.value)) {
+          this.popup.instance.selectActiveMatch();
           this.ref.markForCheck();
-        } else {
-          const activeMatch = this.popup.instance.activeMatch;
-          if (!this.selected.find((selected) => activeMatch && activeMatch.value && selected.value === activeMatch.value)) {
-            this.popup.instance.selectActiveMatch();
-            this.ref.markForCheck();
-          }
         }
         return;
       }
@@ -251,9 +246,20 @@ export class NovoPickerElement implements OnInit {
 
     if (wipeTerm) {
       this.term = '';
+      this.popup.instance.customTextValue = null;
       this.hideResults();
     }
     this.ref.markForCheck();
+  }
+
+  clearCustomValue() {
+    if (this.allowCustomValues) {
+      if (this.term) {
+        this.popup.instance.customTextValue = { label: this.term, value: this.term }
+      } else {
+        this.popup.instance.customTextValue = null;
+      }
+    }
   }
 
   /**
@@ -334,6 +340,13 @@ export class NovoPickerElement implements OnInit {
   // Makes sure to clear the model if the user clears the text box
   checkTerm(event) {
     this.typing.emit(event);
+    if (this.allowCustomValues) {
+      if (this.term) {
+        this.popup.instance.customTextValue = { label: this.term, value: this.term }
+      } else {
+        this.popup.instance.customTextValue = null;
+      }
+    }
     if ((!event || !event.length) && !Helpers.isEmpty(this._value)) {
       this._value = null;
       this.onModelChange(this._value);

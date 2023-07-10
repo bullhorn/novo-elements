@@ -253,6 +253,7 @@ import { NovoTemplate } from 'novo-elements/elements/common';
           [formControlName]="control.key"
           [placeholder]="control.placeholder"
           [parentScrollSelector]="control.parentScrollSelector"
+          [allowCustomValues]="control.config.allowCustomValues"
           *ngIf="!control.multiple"
           (select)="methods.modelChange($event)"
           (changed)="methods.modelChangeWithRaw($event)"
