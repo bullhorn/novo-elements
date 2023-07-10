@@ -173,7 +173,7 @@ export class NovoChipsElement implements OnInit, ControlValueAccessor {
               this.items.push(value);
             }
           }
-          this._finalizeItemValue();
+          this._items.next(this.items);
         });
       }
     }
