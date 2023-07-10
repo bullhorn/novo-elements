@@ -1,3 +1,5 @@
+@import "../common/typography/text.mixins.scss";
+
 $switch-width: 36px !default;
 $switch-height: 24px !default;
 $switch-bar-height: 14px !default;
@@ -14,7 +16,7 @@ $switch-thumb-size: 20px !default;
   }
 }
 
-.novo-switch {
+:host {
   display: flex;
   align-items: center;
   // margin: 15px;
@@ -50,13 +52,13 @@ $switch-thumb-size: 20px !default;
   .novo-switch-bar {
     left: 1px;
     width: $switch-width - 2px;
-    top: $switch-height / 2 - $switch-bar-height / 2;
+    top: calc($switch-height / 2) - calc($switch-bar-height / 2);
     height: $switch-bar-height;
     border-radius: 8px;
     position: absolute;
   }
   .novo-switch-thumb-container {
-    top: $switch-height / 2 - $switch-thumb-size / 2;
+    top: calc($switch-height / 2) - calc($switch-thumb-size / 2);
     left: 0;
     width: $switch-width - $switch-thumb-size;
     position: absolute;
@@ -105,9 +107,7 @@ $switch-thumb-size: 20px !default;
       pointer-events: none;
     }
   }
-}
 
-.novo-switch {
   // Base color: $ocean
   // @include novo-switch-style($ocean, lighten($ocean, 18%));
   // Loop through analytics colors and make a switch color class for each

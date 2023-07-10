@@ -1,4 +1,7 @@
-novo-toast {
+@import "../../styles/variables.scss";
+@import "../common/typography/text.mixins.scss";
+
+:host {
   display: grid;
   grid-template-columns: 5rem 1fr;
   justify-content: flex-start;
@@ -86,36 +89,22 @@ novo-toast {
     white-space: pre-line;
   }
 
-  @include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
-    &.#{$name} {
-      color: getContrastColor($name);
-      background: $color;
-    }
-    &.novo-accent-#{$name} {
-      border: 1px solid $color;
-      background: getPaleColor($name);
-      color: $dark;
-    }
-  }
-}
-
-novo-toast h5 {
-  display: block;
-  font-size: 1.4rem;
-  color: inherit;
-}
-
-novo-toast .toast-content > p {
-  margin: 0;
-  max-width: inherit;
-  font-size: 1.3rem;
-  &.message-only {
-    padding: 0;
+  h5 {
+    display: block;
     font-size: 1.4rem;
+    color: inherit;
   }
-}
 
-novo-toast {
+  .toast-content > p {
+    margin: 0;
+    max-width: inherit;
+    font-size: 1.3rem;
+    &.message-only {
+      padding: 0;
+      font-size: 1.4rem;
+    }
+  }
+
   &.text {
     background: $dark;
   }
@@ -132,151 +121,149 @@ novo-toast {
       color: $dark;
     }
   }
-}
 
-novo-toast.fixedBottom,
-novo-toast.fixedTop {
-  left: 0;
-  right: 0;
-}
-
-novo-toast.fixedTop {
-  top: -100%;
-  padding-top: 20px;
-  @include ease("all", "swift-ease-in-out");
-  &.animate {
-    padding-top: 20px;
-    top: -6px;
+  &.fixedBottom,
+  &.fixedTop {
+    left: 0;
+    right: 0;
   }
-}
 
-novo-toast.fixedBottom {
-  bottom: -100%;
-  padding-bottom: 20px;
-  @include ease("all", "swift-ease-in-out");
-  &.animate {
+  &.fixedBottom {
+    bottom: -100%;
     padding-bottom: 20px;
-    bottom: -6px;
-  }
-}
-
-novo-toast[class*="growl"] {
-  border-radius: 3px;
-  max-width: 350px;
-}
-
-novo-toast.growlBottomLeft,
-novo-toast.growlTopLeft {
-  left: -100%;
-  right: auto;
-  width: calc(100% - 30px);
-  @include ease("all", "swift-ease-in-out");
-  &.animate {
-    left: 15px;
-  }
-}
-
-novo-toast.growlTopLeft,
-novo-toast.growlTopRight {
-  top: 1rem;
-}
-
-novo-toast.growlBottomLeft,
-novo-toast.growlBottomRight {
-  bottom: 1rem;
-}
-
-novo-toast.growlBottomRight,
-novo-toast.growlTopRight {
-  right: -100%;
-  left: auto;
-  width: calc(100% - 30px);
-  @include ease("all", "swift-ease-in-out");
-  &.animate {
-    right: 1rem;
-  }
-}
-
-novo-toast.fixedTop {
-  @for $i from 2 through 100 {
-    &:nth-last-of-type(#{$i}) {
-      top: (25px * ($i - 1));
-      z-index: 9999 - $i;
-      filter: brightness(1- (1/7));
+    @include ease("all", "swift-ease-in-out");
+    &.animate {
+      padding-bottom: 20px;
+      bottom: -6px;
+    }
+    @for $i from 2 through 100 {
+      &:nth-last-of-type(#{$i}) {
+        bottom: (25px * ($i - 1));
+        z-index: 9999 - $i;
+        filter: brightness(1- (calc(1 / 7)));
+      }
     }
   }
-}
 
-novo-toast.fixedBottom {
-  @for $i from 2 through 100 {
-    &:nth-last-of-type(#{$i}) {
-      bottom: (25px * ($i - 1));
-      z-index: 9999 - $i;
-      filter: brightness(1- (1/7));
+  &.fixedTop {
+    top: -100%;
+    padding-top: 20px;
+    @include ease("all", "swift-ease-in-out");
+    &.animate {
+      padding-top: 20px;
+      top: -6px;
+    }
+    @for $i from 2 through 100 {
+      &:nth-last-of-type(#{$i}) {
+        top: (25px * ($i - 1));
+        z-index: 9999 - $i;
+        filter: brightness(1- (calc(1 / 7)));
+      }
     }
   }
-}
 
-novo-toast.growlTopLeft,
-novo-toast.growlTopRight {
-  @for $i from 2 through 100 {
-    &:nth-last-of-type(#{$i}) {
-      top: (25px * $i);
-      transform: scale(1- (1/25));
-      z-index: 9999 - $i;
-      filter: brightness(1- (1/7));
-    }
-  }
-}
-
-novo-toast.growlBottomLeft,
-novo-toast.growlBottomRight {
-  @for $i from 2 through 100 {
-    &:nth-last-of-type(#{$i}) {
-      bottom: (25px * $i);
-      transform: scale(1- (1/25));
-      z-index: 9999 - $i;
-      filter: brightness(1- (1/7));
-    }
-  }
-}
-
-novo-toast.growlBottomLeft,
-novo-toast.growlBottomRight,
-novo-toast.growlTopLeft,
-novo-toast.growlTopRight {
-  &:last-of-type {
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-  }
-}
-
-novo-toast.embedded.fixedBottom,
-novo-toast.embedded.fixedTop {
-  top: auto;
-  left: auto;
-  right: auto;
-  width: inherit;
-  margin: -1rem -3rem;
-  &.animate {
+  &.embedded.fixedBottom,
+  &.embedded.fixedTop {
     top: auto;
+    left: auto;
+    right: auto;
+    width: inherit;
+    margin: -1rem -3rem;
+    &.animate {
+      top: auto;
+    }
   }
-}
 
-novo-toast:not(.launched) {
-  animation: embedded-slide-in 200ms ease-in-out;
-}
+  &[class*="growl"] {
+    border-radius: 3px;
+    max-width: 350px;
+  }
 
-novo-toast.dialogue {
-  .toast-content {
-    display: flex;
-    flex-direction: row !important;
-    align-items: center;
+  &.growlBottomLeft,
+  &.growlTopLeft {
+    left: -100%;
+    right: auto;
+    width: calc(100% - 30px);
+    @include ease("all", "swift-ease-in-out");
+    &.animate {
+      left: 15px;
+    }
   }
-  p.message-only {
-    flex: 3 0 0;
+
+  &.growlTopLeft,
+  &.growlTopRight {
+    top: 1rem;
+    @for $i from 2 through 100 {
+      &:nth-last-of-type(#{$i}) {
+        top: (25px * $i);
+        transform: scale(1- (calc(1 / 25)));
+        z-index: 9999 - $i;
+        filter: brightness(1- (calc(1 / 7)));
+      }
+    }
   }
-  .dialogue {
-    display: inherit;
+
+  &.growlBottomLeft,
+  &.growlBottomRight {
+    bottom: 1rem;
+    @for $i from 2 through 100 {
+      &:nth-last-of-type(#{$i}) {
+        bottom: (25px * $i);
+        transform: scale(1- (calc(1 / 25)));
+        z-index: 9999 - $i;
+        filter: brightness(1- (calc(1 / 7)));
+      }
+    }
+  }
+
+  &.growlBottomLeft,
+  &.growlBottomRight,
+  &.growlTopLeft,
+  &.growlTopRight {
+    &:last-of-type {
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+    }
+  }
+
+  &.growlBottomRight,
+  &.growlTopRight {
+    right: -100%;
+    left: auto;
+    width: calc(100% - 30px);
+    @include ease("all", "swift-ease-in-out");
+    &.animate {
+      right: 1rem;
+    }
+  }
+
+  &:not(.launched) {
+    animation: embedded-slide-in 200ms ease-in-out;
+  }
+
+  &.dialogue {
+    .toast-content {
+      display: flex;
+      flex-direction: row !important;
+      align-items: center;
+    }
+    p.message-only {
+      flex: 3 0 0;
+    }
+    .dialogue {
+      display: inherit;
+    }
+  }
+
+  @include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
+    &.#{$name} {
+      color: getContrastColor($name);
+      background: $color;
+    }
+    &.novo-accent-#{$name} {
+      border: 1px solid $color;
+      background: getPaleColor($name);
+      color: $dark;
+    }
   }
 }
 
@@ -292,25 +279,27 @@ novo-toast.dialogue {
 }
 
 @media screen and (min-width: 350px) {
-  novo-toast[class*="growl"] {
-    min-width: 350px;
-  }
-  novo-toast.growlBottomLeft,
-  novo-toast.growlTopLeft {
-    left: -100%;
-    right: auto;
-    @include ease("all", "swift-ease-in-out");
-    &.animate {
-      left: 1rem;
+  :host {
+    &[class*="growl"] {
+      min-width: 350px;
     }
-  }
-  novo-toast.growlBottomRight,
-  novo-toast.growlTopRight {
-    right: -100%;
-    left: auto;
-    @include ease("all", "swift-ease-in-out");
-    &.animate {
-      right: 1rem;
+    &.growlBottomLeft,
+    &.growlTopLeft {
+      left: -100%;
+      right: auto;
+      @include ease("all", "swift-ease-in-out");
+      &.animate {
+        left: 1rem;
+      }
+    }
+    &.growlBottomRight,
+    &.growlTopRight {
+      right: -100%;
+      left: auto;
+      @include ease("all", "swift-ease-in-out");
+      &.animate {
+        right: 1rem;
+      }
     }
   }
 }

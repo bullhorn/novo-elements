@@ -14,6 +14,7 @@ import {
 
 @Component({
   selector: 'novo-loading',
+  styleUrls: ['./Loading.scss'],
   template: `
     <span class="dot"></span>
     <span class="dot"></span>
@@ -50,6 +51,7 @@ export class NovoLoadingElement {
 
 @Component({
   selector: 'novo-spinner',
+  styleUrls: ['./NovoSpinner.scss'],
   template: `
     <div class="dot1 dot"></div>
     <div class="dot2 dot"></div>
