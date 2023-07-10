@@ -1,6 +1,6 @@
 @import "../../styles/variables.scss";
 
-novo-search {
+:host {
   display: grid;
   grid-template-areas: "icon input";
   grid-template-columns: 3.2rem 1fr;
@@ -8,6 +8,7 @@ novo-search {
   align-items: center;
   height: 3.2rem;
   background: $white;
+  font-size: 1.4rem;
   border: 1px solid $light;
   border-radius: 0.2rem;
   max-width: 400px;
@@ -37,7 +38,6 @@ novo-search {
     display: block;
     background: transparent;
     position: relative;
-    font-size: 1.4rem;
     color: var(--text-main);
     z-index: z(above);
     border: none;

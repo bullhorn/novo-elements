@@ -1,8 +1,10 @@
+@import "../../styles/variables";
+
 $small-spinner-size: 1.2em;
 $medium-spinner-size: 1.8em;
 $large-spinner-size: 2.1em;
 
-novo-spinner {
+:host {
   display: inline-block;
   width: $medium-spinner-size;
   height: $medium-spinner-size;

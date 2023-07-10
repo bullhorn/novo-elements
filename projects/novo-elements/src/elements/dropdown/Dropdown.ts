@@ -70,7 +70,7 @@ const NovoDropdowMixins: HasOverlayCtor & CanDisableCtor & HasTabIndexCtor & typ
       </div>
     </novo-overlay-template>
   `,
-  // providers: [{ provide: NOVO_OPTION_PARENT_COMPONENT, useExisting: NovoDropdownElement }],
+  styleUrls: ['./Dropdown.scss'],
   host: {
     '[attr.tabIndex]': 'disabled ? -1 : 0',
   },

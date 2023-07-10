@@ -1,4 +1,6 @@
-.novo-list {
+@import "../../styles/variables.scss";
+
+:host {
   display: flex;
   &.vertical-list {
     flex-direction: column;
@@ -6,122 +8,14 @@
   &.horizontal-list {
     flex-direction: row;
   }
-
-  a[list-item],
-  button[list-item],
-  .novo-list-item {
-    outline: none;
-    &:hover {
-      background: rgba($positive, 0.2);
-    }
-    &.active {
-      background: rgba($positive, 0.3);
-    }
-  }
-  @include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
-    $contrast: getContrastColor($name);
-    &[theme="#{$name}"] {
-      .novo-list-item,
-      a[list-item],
-      button[list-item] {
-        background: $color;
-        color: $contrast;
-        border: unset;
-        border-bottom: 1px solid rgba(#fff, 0.1);
-        item-title h6,
-        i {
-          color: $contrast;
-        }
-        item-content {
-          > * {
-            color: rgba(#fff, 0.65);
-          }
-        }
-      }
-      a[list-item],
-      button[list-item] {
-        outline: none;
-        &:hover,
-        &:active {
-          background: lighten($color, 20%);
-        }
-      }
-    }
-  }
 }
+
 
 .novo-list-item,
 a[list-item],
 button[list-item] {
-  border-bottom: 1px solid var(--border, #f4f4f4);
-  padding: 1rem;
-  display: flex;
-  flex-direction: row;
-  &:last-child {
-    border-bottom: none;
-  }
-  .list-item {
-    display: flex;
-    flex-direction: column;
-    flex: 1 0 100%;
-  }
-  .novo-item-header {
-    .novo-item-header-container {
-      display: flex;
-      align-items: center;
-    }
-    .novo-item-avatar {
-      margin-right: 0.5em;
-      i {
-        @include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
-          &.#{$name} {
-            color: $color;
-          }
-        }
-      }
-    }
-    .novo-item-title {
-      flex: 2 0 0;
-      h6 {
-        margin: 0;
-        color: #434343;
-        padding: 0;
-      }
-    }
-    .novo-item-header-end {
-      flex: 1 0 0;
-      text-align: right;
-    }
-  }
+
   .avatar .novo-item-content {
     margin-left: 2.7em;
-  }
-  .novo-item-content {
-    display: flex;
-    margin-left: 0.2em;
-    > * {
-      color: rgba(#434343, 0.85);
-    }
-    i {
-      @include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
-        &.#{$name} {
-          color: $color;
-        }
-      }
-    }
-    &.vertical-list {
-      flex-direction: column;
-    }
-    &.horizontal-list {
-      flex-direction: row;
-    }
-  }
-  .novo-item-end {
-    align-self: center;
-    flex: 1;
-    text-align: right;
-    i {
-      line-height: 1.4em;
-    }
   }
 }
