@@ -37,7 +37,6 @@ const DATE_VALUE_ACCESSOR = {
       [(ngModel)]="value"
       [imask]="maskOptions"
       [unmask]="'typed'"
-      (complete)="onComplete($event)"
       [placeholder]="placeholder"
       (focus)="_handleFocus($event)"
       (keydown)="_handleKeydown($event)"
@@ -89,6 +88,7 @@ export class NovoTimePickerInputElement implements OnInit, OnChanges, ControlVal
   blurEvent: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
   @Output()
   focusEvent: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
+
   /** Element for the panel containing the autocomplete options. */
   @ViewChild(NovoOverlayTemplateComponent)
   overlay: NovoOverlayTemplateComponent;
@@ -165,17 +165,6 @@ export class NovoTimePickerInputElement implements OnInit, OnChanges, ControlVal
         },
       },
     };
-  }
-
-  onComplete(dt) {
-    if (this.value instanceof Date && dt instanceof Date) {
-      if (this.value.getTime() !== dt.getTime()) {
-        this.dispatchOnChange(dt);
-      }
-    }
-    else if (this.value !== dt) {
-      this.dispatchOnChange(dt);
-    }
   }
 
   /** BEGIN: Convenient Panel Methods. */
@@ -262,6 +251,13 @@ export class NovoTimePickerInputElement implements OnInit, OnChanges, ControlVal
       if (!timePeriod) {
         (event.target as HTMLInputElement).value = `${(event.target as HTMLInputElement).value.slice(0, 5)} xx`;
       }
+    }
+    const textAfterUpdates: any = (event.target as HTMLInputElement).value;
+    const time12hrRegex: RegExp = new RegExp('^(1[0-2]|0?[1-9]):([0-5]?[0-9])( ?[AaPp][Mm])$');
+    const time24hrRegex: RegExp = new RegExp('^(2[0-3]|[01]?[0-9]):([0-5]?[0-9])$');
+
+    if (time12hrRegex.test(textAfterUpdates) || time24hrRegex.test(textAfterUpdates)) {
+      this.dispatchOnChange(textAfterUpdates);
     }
   }
 
