@@ -252,16 +252,6 @@ export class NovoPickerElement implements OnInit {
     this.ref.markForCheck();
   }
 
-  clearCustomValue() {
-    if (this.allowCustomValues) {
-      if (this.term) {
-        this.popup.instance.customTextValue = { label: this.term, value: this.term }
-      } else {
-        this.popup.instance.customTextValue = null;
-      }
-    }
-  }
-
   /**
    * @description When the input's focus event is called this method calls the debounced function that displays the
    * results.
