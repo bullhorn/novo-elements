@@ -27,6 +27,7 @@ const SWITCH_VALUE_ACCESSOR = {
       <div class="novo-switch-label"><ng-content></ng-content></div>
     </div>
   `,
+  styleUrls: ['./Switch.scss'],
   host: {
     role: 'checkbox',
     class: 'novo-switch',

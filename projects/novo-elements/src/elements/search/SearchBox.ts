@@ -58,6 +58,7 @@ const SEARCH_VALUE_ACCESSOR = {
       <ng-content></ng-content>
     </novo-overlay-template>
   `,
+  styleUrls: ['./SearchBox.scss'],
 })
 export class NovoSearchBoxElement implements ControlValueAccessor {
   @Input()

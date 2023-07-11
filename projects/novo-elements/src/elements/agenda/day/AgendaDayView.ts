@@ -85,6 +85,7 @@ const MINUTES_IN_HOUR: number = 60;
       </div>
     </div>
   `,
+  styleUrls: ['./AgendaDayView.scss', '../common/AgendaHoursLayout.scss'],
 })
 export class NovoAgendaDayViewElement implements OnChanges, OnInit, OnDestroy {
   /**

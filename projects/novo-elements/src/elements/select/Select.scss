@@ -1,7 +1,7 @@
 @import "../../styles/variables.scss";
 @import "../common/typography/text.mixins.scss";
 
-novo-select {
+:host {
   display: block;
   position: relative;
   width: 100%;

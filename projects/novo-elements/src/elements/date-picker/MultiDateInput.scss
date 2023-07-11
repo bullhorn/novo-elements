@@ -1,0 +1,50 @@
+@import "../../styles/variables.scss";
+@import "../chips/Chips";
+
+:host {
+  @extend chips;
+
+  .chip-input-container {
+    padding-top: 10px;
+    .placeholder {
+      color: var(--form-placeholder);
+    }
+  }
+
+  .panel-toggle {
+    padding: 0.2em;
+    i {
+      margin: 0px;
+    }
+    &.selected {
+      background: $light;
+      border-radius: 50%;
+    }
+  }
+
+  ul.summary {
+    display: inline;
+    list-style: none;
+    color: darken(#d2d2d2, 30%);
+    padding: 0 10px 0;
+
+    li {
+      display: inline;
+      padding: 0 3px;
+    }
+
+    li:after {
+      content: ", ";
+    }
+
+    li:last-child:after {
+      content: " ";
+    }
+  }
+
+  chip {
+    span {
+      text-transform: capitalize;
+    }
+  }
+}
