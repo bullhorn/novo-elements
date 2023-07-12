@@ -15,10 +15,10 @@
 :host {
   display: flex;
   margin-left: 0.2em;
-  > ::ng-deep * {
+  &.novo-item-content > ::ng-deep * {
     color: rgba(#434343, 0.85);
   }
-  ::ng-deep i {
+  &.novo-item-content ::ng-deep i {
     @include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
       &.#{$name} {
         color: $color;

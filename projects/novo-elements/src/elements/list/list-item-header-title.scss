@@ -10,7 +10,8 @@
 }
 
 :host {
-  display: contents;
+  display: block;
   color: inherit;
   font-size: inherit;
+  flex: 2 0 0;
 }

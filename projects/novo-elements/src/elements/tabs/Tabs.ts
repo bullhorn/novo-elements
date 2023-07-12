@@ -13,6 +13,7 @@ import {
   Optional,
   Output,
   ViewChild,
+  ViewEncapsulation,
 } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { BooleanInput } from 'novo-elements/utils';
@@ -273,6 +274,7 @@ export class NovoTabLinkElement implements OnInit {
   selector: 'novo-nav-outlet',
   template: '<ng-content></ng-content>',
   styleUrls: ['./tab-outlet.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class NovoNavOutletElement {
   items: Array<any> = [];
@@ -312,6 +314,7 @@ export class NovoNavOutletElement {
   },
   template: '<ng-content></ng-content>',
   styleUrls: ['./tab-content.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class NovoNavContentElement {
   @Input()
