@@ -2,7 +2,7 @@
 
 :host {
   margin-right: 0.5em;
-  i {
+  ::ng-deep i {
     @include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
       &.#{$name} {
         color: $color;
