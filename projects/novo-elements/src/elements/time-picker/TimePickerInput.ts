@@ -243,7 +243,7 @@ export class NovoTimePickerInputElement implements OnInit, OnChanges, ControlVal
   }
 
   _handleChange(event: Event): void {
-    const text = (event.target as HTMLInputElement).value;
+    const text = (event?.target as HTMLInputElement)?.value;
     this.formatTime(text);
     this.changeEvent.emit();
   }
