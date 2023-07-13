@@ -300,11 +300,6 @@ export class NovoChipsElement implements OnInit, ControlValueAccessor {
     this.onModelChange(this.value);
   }
 
-  public setValueAndClose(event: any | null): void {
-    this.setValue(event);
-    this.closePanel();
-  }
-
   /**
    * @name showPreview
    *
