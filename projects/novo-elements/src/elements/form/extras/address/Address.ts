@@ -1,5 +1,5 @@
 // NG2
-import { Component, EventEmitter, forwardRef, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, forwardRef, Input, OnInit, Output } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 // APP
 import { NovoLabelService } from 'novo-elements/services';
@@ -186,7 +186,6 @@ export interface NovoAddressConfig {
     </span>
   `,
   styleUrls: ['./Address.scss'],
-  encapsulation: ViewEncapsulation.None,
 })
 export class NovoAddressElement implements ControlValueAccessor, OnInit {
   @Input()

@@ -25,6 +25,7 @@ import { NovoFormGroup } from './NovoFormGroup';
       >{{ title }}
     </novo-title>
   `,
+  styleUrls: ['./fieldset-header.scss'],
   host: {
     class: 'novo-fieldset-header',
   },
@@ -105,6 +106,7 @@ export class NovoFieldsetElement {
       </form>
     </div>
   `,
+  styleUrls: ['./Form.scss'],
   providers: [NovoTemplateService],
 })
 export class NovoDynamicFormElement implements OnChanges, OnInit, AfterContentInit {
