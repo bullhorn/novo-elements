@@ -300,6 +300,11 @@ export class NovoTimePickerInputElement implements OnInit, OnChanges, ControlVal
     this._changeDetectorRef.markForCheck();
   }
 
+  public setValueAndClose(event: any | null): void {
+    this.setValue(event);
+    this.closePanel();
+  }
+
   public setValue(event: any | null): void {
     if (event && event.date) {
       this.dispatchOnChange(event.date);
