@@ -292,7 +292,6 @@ export class NovoChipsElement implements OnInit, ControlValueAccessor {
     const valueToSet = this.source && this.source.valueFormatter ? this.source.valueFormatter(this.items) : this.items.map((i) => i.value);
     if (Helpers.isBlank(this.value) !== Helpers.isBlank(valueToSet) || JSON.stringify(this.value) !== JSON.stringify(valueToSet)) {
       this.value = valueToSet;
-      this._propagateChanges();
     }
   }
 
