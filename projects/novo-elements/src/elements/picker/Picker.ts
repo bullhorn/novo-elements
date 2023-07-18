@@ -11,6 +11,7 @@ import {
   Output,
   ViewChild,
   ViewContainerRef,
+  ViewEncapsulation,
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { fromEvent } from 'rxjs';
@@ -70,6 +71,7 @@ const PICKER_VALUE_ACCESSOR = {
     </novo-overlay-template>
   `,
   styleUrls: ['./Picker.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class NovoPickerElement implements OnInit {
   // Container for the results
