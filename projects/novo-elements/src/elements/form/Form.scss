@@ -1,12 +1,13 @@
 @import "../../styles/variables.scss";
 
-:host {
+novo-form,
+novo-dynamic-form {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
   max-width: 64rem;
-  ::ng-deep .novo-form-container {
+  .novo-form-container {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -515,7 +516,7 @@
     }
   }
   &[dark] {
-    ::ng-deep .novo-form-container {
+    .novo-form-container {
       form {
         form-field {
           form-label {
@@ -583,7 +584,7 @@
     }
   }
   &[layout="vertical"] {
-    ::ng-deep .novo-form-container {
+    .novo-form-container {
       form {
         div.novo-form-row,
         div.novo-control-group-control {
@@ -774,7 +775,7 @@
 }
 
 novo-dynamic-form {
-  ::ng-deep .novo-form-container form div.novo-form-row novo-control.address .field-message {
+  .novo-form-container form div.novo-form-row novo-control.address .field-message {
     margin-left: 0px;
   }
 }
