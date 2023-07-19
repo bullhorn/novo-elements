@@ -23,9 +23,10 @@
 @include cdk-overlay();
 
 // --------------------------------------------------
-// Addons
+// Directives
 // --------------------------------------------------
 @import "./addons/dragula/Dragula";
+@import "./elements/picker/extras/picker-results/PickerResults";
 
 .bgc-main,
 .novo-background-main {
