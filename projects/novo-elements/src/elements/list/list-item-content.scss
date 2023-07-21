@@ -2,7 +2,7 @@
 
 @include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
   :host-context([theme="#{$name}"]) {
-    > ::ng-deep * {
+    &.novo-item-content > ::ng-deep * {
       color: rgba(#fff, 0.65);
     }
   }

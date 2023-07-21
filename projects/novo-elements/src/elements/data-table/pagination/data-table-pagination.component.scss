@@ -1,0 +1,124 @@
+@import "../../../styles/variables.scss";
+
+$breakpoint: 1000px;
+
+:host {
+  &.basic,
+  &.basic-wide {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    ::ng-deep novo-tiles.pagination-tiles > .tile-container .tile {
+      padding: 7px 10px;
+    }
+    > .novo-data-table-pagination-size {
+      padding-right: 10px;
+    }
+    > .novo-data-table-range-label-long,
+    > .novo-data-table-range-label-short {
+      padding-right: 10px;
+      white-space: nowrap;
+    }
+    > .novo-data-table-range-label-long {
+      display: none;
+      @media (min-width: $breakpoint) {
+        display: block;
+      }
+    }
+    > .novo-data-table-spacer {
+      width: 100%;
+    }
+    > .novo-data-table-range-label-short {
+      display: block;
+      @media (min-width: $breakpoint) {
+        display: none;
+      }
+    }
+    > button:first-of-type {
+      margin-right: 5px;
+    }
+    > button {
+      span {
+        display: none;
+        @media (min-width: $breakpoint) {
+          display: block;
+        }
+      }
+    }
+    > button[theme][theme="dialogue"][icon][side="left"] {
+      padding: 5px;
+      @media (min-width: $breakpoint) {
+        padding: 5px 15px 5px 5px;
+      }
+    }
+    > button[theme][theme="dialogue"][icon][side="right"] {
+      padding: 5px;
+      @media (min-width: $breakpoint) {
+        padding: 5px 5px 5px 15px;
+      }
+    }
+  }
+  &.standard {
+    display: flex;
+    flex-flow: row nowrap;
+    flex: 1;
+    > * {
+      margin: auto 5px;
+    }
+    h5.rows {
+      padding: 0;
+      font-size: 12px;
+      opacity: 0.75;
+      letter-spacing: 0.1px;
+    }
+    span.spacer {
+      flex: 1;
+    }
+    novo-select {
+      max-width: 100px;
+      min-width: 100px;
+      div[type="button"] {
+        &:hover {
+          i {
+            opacity: 0.75;
+          }
+        }
+        &:active,
+        &:focus {
+          i {
+            opacity: 1;
+          }
+        }
+        i {
+          opacity: 0.45;
+        }
+      }
+    }
+    .pager {
+      list-style-type: none;
+      user-select: none;
+      display: flex;
+      .page {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 2.4rem;
+        height: 2.4rem;
+        font-size: var(--font-size-text);
+        border-radius: 2px;
+        list-style-type: none;
+        cursor: pointer;
+        color: $company;
+        &.disabled {
+          opacity: 0.3;
+          pointer-events: none;
+        }
+      }
+      .page.active {
+        color: $company;
+        background-color: rgba($black, 0.1);
+        opacity: 1;
+      }
+    }
+  }
+}
