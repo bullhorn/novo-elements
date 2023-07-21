@@ -1,6 +1,6 @@
 @import "../common/typography/text.mixins";
 
-.novo-card {
+:host {
   display: flex;
   flex-flow: column;
   background-color: var(--background-bright, $color-white);
@@ -38,7 +38,7 @@
       align-items: center;
       min-width: 0;
       flex: 1;
-      i.bhi-move {
+      ::ng-deep i.bhi-move {
         color: $light;
         margin-right: 0.3em;
         cursor: pointer;
@@ -87,60 +87,32 @@
     display: flex;
     justify-content: center;
   }
-}
 
-.novo-card-header,
-.novo-card-footer {
-  @include theme-backgrounds();
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: $spacing-md;
-}
+  &.novo-card-inline {
+    display: inline-flex;
+    justify-self: start;
+    align-self: start;
+  }
+  &.novo-card-inset-none {
+    padding: 0;
+  }
+  &.novo-card-inset-small {
+    padding: $spacing-sm;
+  }
+  &.novo-card-inset-medium {
+    padding: $spacing-md;
+  }
+  &.novo-card-inset-large {
+    padding: $spacing-lg;
+  }
 
-.novo-card-header-text {
-  flex: 1 1 0px;
-}
+  ::ng-deep .novo-card-header + .novo-card-content.condensed,
+  ::ng-deep .novo-card-header + :not(.novo-card-content) {
+    margin-top: $spacing-sm;
+  }
 
-.novo-card-content {
-  display: block;
-}
-
-.novo-card-header {
-  padding: $spacing-md $spacing-md 0 $spacing-md;
-}
-.novo-card-footer {
-  padding: 0 $spacing-md $spacing-md $spacing-md;
-}
-.novo-card-content:not(.condensed) {
-  padding: $spacing-md $spacing-md;
-}
-
-.novo-card-header + .novo-card-content.condensed,
-.novo-card-header + :not(.novo-card-content) {
-  margin-top: $spacing-sm;
-}
-
-.novo-card-inline {
-  display: inline-flex;
-  justify-self: start;
-  align-self: start;
-}
-
-.novo-card-inset-none {
-  padding: 0;
-}
-.novo-card-inset-small {
-  padding: $spacing-sm;
-}
-.novo-card-inset-medium {
-  padding: $spacing-md;
-}
-.novo-card-inset-large {
-  padding: $spacing-lg;
-}
-
-[novo-card-image] {
-  width: calc(100%);
-  margin: $spacing-md 0;
+  ::ng-deep [novo-card-image] {
+    width: calc(100%);
+    margin: $spacing-md 0;
+  }
 }

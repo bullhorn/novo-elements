@@ -16,6 +16,7 @@ import {
   TemplateRef,
   ViewChild,
   ViewChildren,
+  ViewEncapsulation,
 } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 import { NovoLabelService } from 'novo-elements/services';
@@ -278,6 +279,8 @@ import { DataTableState } from './state/data-table-state.service';
     <!-- CUSTOM CELLS PASSED IN -->
     <ng-content></ng-content>
   `,
+  styleUrls: ['./data-table.component.scss'],
+  encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [DataTableState, { provide: NOVO_DATA_TABLE_REF, useExisting: NovoDataTable }],
 })

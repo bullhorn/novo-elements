@@ -1,0 +1,34 @@
+@import "../../styles/variables.scss";
+
+@include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
+  :host-context([theme="#{$name}"]) {
+    &.novo-item-content > ::ng-deep * {
+      color: rgba(#fff, 0.65);
+    }
+  }
+}
+
+:host-context(.novo-list.avatar) {
+  margin-left: 2.7em;
+}
+
+:host {
+  display: flex;
+  margin-left: 0.2em;
+  &.novo-item-content > ::ng-deep * {
+    color: rgba(#434343, 0.85);
+  }
+  &.novo-item-content ::ng-deep i {
+    @include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
+      &.#{$name} {
+        color: $color;
+      }
+    }
+  }
+  &.vertical-list {
+    flex-direction: column;
+  }
+  &.horizontal-list {
+    flex-direction: row;
+  }
+}

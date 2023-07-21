@@ -1,4 +1,6 @@
-novo-category-dropdown {
+@import "../../styles/variables.scss";
+
+:host {
   display: block;
   position: relative;
   button {

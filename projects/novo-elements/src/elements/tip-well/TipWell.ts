@@ -20,6 +20,7 @@ import { NovoLabelService } from 'novo-elements/services';
       </button>
     </div>
   `,
+  styleUrls: ['./TipWell.scss'],
   host: {
     '[class.active]': 'isActive',
   },

@@ -53,6 +53,7 @@ const PLACES_VALUE_ACCESSOR = {
       </novo-list-item>
     </novo-list>
   `,
+  styleUrls: ['./places.component.scss'],
 })
 export class PlacesListComponent extends BasePickerResults implements OnInit, OnChanges, ControlValueAccessor {
   @Input()

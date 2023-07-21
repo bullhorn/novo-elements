@@ -59,6 +59,7 @@ const CHIPS_VALUE_ACCESSOR = {
       >{{ labels.clearAll }} <i class="bhi-times"></i
     ></label>
   `,
+  styleUrls: ['./Chips.scss'],
   host: {
     '[class.with-value]': 'items.length > 0',
     '[class.disabled]': 'disablePickerInput',

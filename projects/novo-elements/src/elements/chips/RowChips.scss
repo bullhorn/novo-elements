@@ -1,0 +1,70 @@
+@import "../../styles/variables.scss";
+@import "../common/typography/text.mixins.scss";
+
+:host {
+  display: flex;
+  flex-flow: column;
+  gap: 0.8rem;
+
+  ::ng-deep .novo-row-chips-columns {
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 1em;
+    .column-label {
+      @include novo-label-text();
+      display: flex;
+      flex: 1;
+      margin-right: 1em;
+      &:first-of-type {
+        flex: 0 0 275px;
+      }
+    }
+    .column-data {
+      display: flex;
+      align-items: center;
+      background: transparent !important;
+      border: none;
+      border-bottom: 1px dashed lighten($dark, 30%);
+      border-radius: 0;
+      outline: none;
+      height: 2em;
+      width: 100%;
+      margin: 0 1em 0 0;
+      &.editable {
+        border-bottom: none;
+        input {
+          background: none;
+          border: none;
+        }
+      }
+      &:first-of-type {
+        flex: 0 0 275px;
+      }
+      span {
+        color: inherit;
+        align-items: flex-start;
+        display: flex;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+        line-height: 1em;
+        max-height: 2em;
+        min-height: 1em;
+      }
+    }
+    i.bhi-delete-o {
+      color: $negative;
+    }
+  }
+  .novo-chip.novo-row-chip {
+    padding: 0;
+  }
+  .novo-row-chips-empty-message {
+    font-style: italic;
+    color: $grey;
+  }
+  i {
+    cursor: pointer;
+  }
+}
