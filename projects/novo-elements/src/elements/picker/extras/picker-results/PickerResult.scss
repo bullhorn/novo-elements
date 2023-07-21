@@ -1,0 +1,12 @@
+@import "../../../../styles/variables.scss";
+
+:host(.disabled) {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+:host(.active) {
+  > novo-list-item {
+    background-color: lighten($positive, 35%);
+  }
+}

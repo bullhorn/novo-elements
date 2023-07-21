@@ -49,6 +49,7 @@ import { Helpers, Key, OutsideClick } from 'novo-elements/utils';
       </footer>
     </div>
   `,
+  styleUrls: ['./CategoryDropdown.scss'],
   host: {
     '(keydown)': 'onKeyDown($event)',
     '[class.active]': 'active',

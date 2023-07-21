@@ -9,6 +9,7 @@ import {
   OnInit,
   QueryList,
   SimpleChanges,
+  ViewEncapsulation,
 } from '@angular/core';
 import { NovoTemplateService } from 'novo-elements/services';
 import { NovoTemplate } from 'novo-elements/elements/common';
@@ -25,6 +26,7 @@ import { NovoFormGroup } from './NovoFormGroup';
       >{{ title }}
     </novo-title>
   `,
+  styleUrls: ['./fieldset-header.scss'],
   host: {
     class: 'novo-fieldset-header',
   },
@@ -105,6 +107,8 @@ export class NovoFieldsetElement {
       </form>
     </div>
   `,
+  styleUrls: ['./Form.scss'],
+  encapsulation: ViewEncapsulation.None,
   providers: [NovoTemplateService],
 })
 export class NovoDynamicFormElement implements OnChanges, OnInit, AfterContentInit {

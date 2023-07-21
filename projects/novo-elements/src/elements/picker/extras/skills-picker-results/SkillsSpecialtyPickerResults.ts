@@ -32,6 +32,7 @@ import { BasePickerResults } from '../base-picker-results/BasePickerResults';
     <p class="picker-error" *ngIf="hasError">{{ labels.pickerError }}</p>
     <p class="picker-null" *ngIf="!isLoading && !matches.length && !hasError">{{ labels.pickerEmpty }}</p>
   `,
+  styleUrls: ['./SkillsSpecialtyPickerResults.scss'],
 })
 export class SkillsSpecialtyPickerResults extends BasePickerResults {
   @HostBinding('class.active')

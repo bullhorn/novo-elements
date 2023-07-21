@@ -1,7 +1,7 @@
-multi-picker {
-  @extend chips;
-  @extend novo-checkbox;
+@import "../../styles/variables.scss";
+@import "../chips/Chips";
 
+:host {
   .chip-input-container {
     padding-top: 10px;
   }
