@@ -255,13 +255,13 @@
       transform: rotate(-90deg);
     }
     @for $i from 1 through 9 {
-      $deg: ($i * (30/5) - 90);
+      $deg: ($i * (calc(30 / 5)) - 90);
       &.min-0#{$i} {
         transform: rotate(#{$deg}deg);
       }
     }
     @for $i from 10 through 59 {
-      $deg: ($i * (30/5) - 90);
+      $deg: ($i * (calc(30 / 5)) - 90);
       &.min-#{$i} {
         transform: rotate(#{$deg}deg);
       }

@@ -1,5 +1,5 @@
 // NG2
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 // APP
 import { BaseRenderer } from '../base-renderer';
 
@@ -32,6 +32,8 @@ export interface INovoDropdownCellConfig {
       </list>
     </novo-dropdown>
   `,
+  styleUrls: ['./DropdownCell.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class NovoDropdownCell extends BaseRenderer implements OnInit {
   @Input()

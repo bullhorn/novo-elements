@@ -185,6 +185,7 @@ export interface NovoAddressConfig {
       ></novo-picker>
     </span>
   `,
+  styleUrls: ['./Address.scss'],
 })
 export class NovoAddressElement implements ControlValueAccessor, OnInit {
   @Input()

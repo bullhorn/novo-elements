@@ -1,4 +1,6 @@
-grouped-multi-picker-results {
+@import "../../../../styles/variables.scss";
+
+:host {
   background-color: $white;
   max-height: 300px;
   padding: 0;
@@ -11,14 +13,12 @@ grouped-multi-picker-results {
   flex-direction: row;
   novo-list-item {
     cursor: pointer;
-    padding: 10px;
-    border-bottom: none;
     flex-shrink: 0;
     &.disabled {
       pointer-events: none;
       opacity: 0.75;
     }
-    div.list-item {
+    ::ng-deep div.list-item {
       flex: 1 !important;
     }
   }
@@ -48,7 +48,7 @@ grouped-multi-picker-results {
       font-weight: 500;
       color: #999999;
       border-left: 3px solid $white;
-      .list-item {
+      ::ng-deep .list-item {
         justify-content: center;
       }
       item-end {
@@ -61,7 +61,7 @@ grouped-multi-picker-results {
         item-end {
           color: $positive;
         }
-        .list-item > item-content > * {
+        ::ng-deep .list-item > item-content > * {
           color: $positive !important;
         }
       }

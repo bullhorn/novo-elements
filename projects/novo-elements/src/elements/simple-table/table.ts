@@ -25,6 +25,7 @@ import { ActivityTableDataSource, ActivityTableService } from './table-source';
 @Component({
   selector: 'novo-simple-table',
   template: CDK_TABLE_TEMPLATE,
+  styleUrls: ['./table.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -153,6 +154,8 @@ export class NovoActivityTableNoResultsMessage {}
       </div>
     </div>
   `,
+  styleUrls: ['./table.scss'],
+  encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     NovoActivityTableState,

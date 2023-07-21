@@ -1,5 +1,5 @@
 // NG
-import { AfterContentInit, Component, ContentChildren, Input, OnInit, QueryList } from '@angular/core';
+import { AfterContentInit, Component, ContentChildren, Input, OnInit, QueryList, ViewEncapsulation } from '@angular/core';
 // App
 import { NovoTemplateService } from 'novo-elements/services';
 import { Helpers } from 'novo-elements/utils';
@@ -20,6 +20,8 @@ import { NovoFormGroup } from './NovoFormGroup';
       </form>
     </div>
   `,
+  styleUrls: ['./Form.scss'],
+  encapsulation: ViewEncapsulation.None,
   providers: [NovoTemplateService],
 })
 export class NovoFormElement implements AfterContentInit, OnInit {

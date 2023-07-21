@@ -53,6 +53,7 @@ interface Item {
     <i class="bhi-search" [class.has-value]="items.length"></i>
     <label class="clear-all" *ngIf="items.length" (click)="clearValue()">{{ labels.clearAll }} <i class="bhi-times"></i></label>
   `,
+  styleUrls: ['./_MultiPicker.scss'],
   host: {
     '[class.with-value]': 'items.length > 0',
   },

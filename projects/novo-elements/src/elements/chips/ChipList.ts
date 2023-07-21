@@ -62,6 +62,7 @@ export class NovoChipListChange {
 @Component({
   selector: 'novo-chip-list',
   template: `<div class="novo-chip-list-wrapper"><ng-content></ng-content></div>`,
+  styleUrls: ['./ChipList.scss'],
   exportAs: 'novoChipList',
   host: {
     '[attr.tabindex]': 'disabled ? null : _tabIndex',
