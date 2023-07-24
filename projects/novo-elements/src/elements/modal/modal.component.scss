@@ -33,7 +33,7 @@
     overflow: auto;
   }
 
-  .novo-modal-footer {
+  ::ng-deep .novo-modal-footer {
     display: flex;
     align-items: center;
     justify-content: flex-end;
