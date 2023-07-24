@@ -17,6 +17,12 @@ By clicking on the `chips` element, the options list will be displayed. Select a
 
 <code-example example="basic-chips"></code-example>
 
+## Allow Custom Values
+
+With the `allowCustomValues` input property set to true, the user is allowed to set custom values by simply typing into the input and pressing enter.
+
+<code-example example="custom-values"></code-example>
+
 ## Async Examples
 
 By clicking on the `chips` element, the options list will be displayed. Select any of the options by clicking on the item in the list. The value selected will be added to the list of selected values.

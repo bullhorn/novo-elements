@@ -4039,6 +4039,9 @@ export class ChipsDevelopPage {
 <h2>Basic Examples</h2>
 <p>By clicking on the <code>chips</code> element, the options list will be displayed. Select any of the options by clicking on the item in the list. The value selected will be added to the list of selected values.</p>
 <p><code-example example="basic-chips"></code-example></p>
+<h2>Allow Custom Values</h2>
+<p>With the <code>allowCustomValues</code> input property set to true, the user is allowed to set custom values by simply typing into the input and pressing enter.</p>
+<p><code-example example="custom-values"></code-example></p>
 <h2>Async Examples</h2>
 <p>By clicking on the <code>chips</code> element, the options list will be displayed. Select any of the options by clicking on the item in the list. The value selected will be added to the list of selected values.</p>
 <p><code-example example="async-chips"></code-example></p>
