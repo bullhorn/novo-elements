@@ -10,6 +10,7 @@ import { TypographySize } from 'novo-elements/elements/common';
       ><span (cdkObserveContent)="projectContentChanged($event)"><ng-content></ng-content></span
     ></i>
   `,
+  styleUrls: ['./Icon.scss'],
   host: {
     class: 'novo-icon',
   },

@@ -1,5 +1,8 @@
-novo-editor {
-  .cke {
+@import "../../styles/variables.scss";
+
+// novo-editor {
+:host {
+  ::ng-deep .cke {
     font: inherit !important;
     box-shadow: none;
     border-color: var(--background-muted);
@@ -36,11 +39,11 @@ novo-editor {
   }
 }
 
-.theme-dark {
-  .cke_button {
+:host-context(.theme-dark) {
+  ::ng-deep .cke_button {
     filter: invert(1);
   }
-  .cke_combo {
+  ::ng-deep .cke_combo {
     a.cke_combo_button {
       &:hover,
       &:active,

@@ -23,7 +23,7 @@ $tooltip-success-color: var(--color-shade-success, #458746);
   }
 }
 
-novo-tooltip {
+:host {
   div {
     background: $tooltip-background;
     color: var(--color-white, #fff);

@@ -1,4 +1,6 @@
-mixed-multi-picker-results {
+@import "../../../../styles/variables.scss";
+
+:host {
   background-color: $white;
   max-height: 300px;
   padding: 0;
@@ -11,8 +13,6 @@ mixed-multi-picker-results {
   flex-direction: row;
   novo-list-item {
     cursor: pointer;
-    padding: 10px;
-    border-bottom: none;
     flex-shrink: 0;
     &.disabled {
       pointer-events: none;

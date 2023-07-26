@@ -62,6 +62,7 @@ import {
       </div>
     </div>
   `,
+  styleUrls: ['./AgendaMonthView.scss'],
 })
 export class NovoAgendaMonthViewElement implements OnChanges, OnInit, OnDestroy {
   /**

@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
 import { NovoLabelService } from 'novo-elements/services';
 import { BasePickerResults } from '../base-picker-results/BasePickerResults';
 
@@ -88,6 +88,7 @@ import { BasePickerResults } from '../base-picker-results/BasePickerResults';
       </novo-item-content>
     </novo-list-item>
   `,
+  styleUrls: ['../picker-results/PickerResult.scss'],
 })
 export class EntityPickerResult {
   @Input() match: any;
@@ -229,6 +230,8 @@ export class EntityPickerResult {
     <div class="picker-null-results" *ngIf="hasNonErrorMessage && term !== ''">{{ labels.pickerEmpty }}</div>
     <div class="picker-null-results" *ngIf="hasNonErrorMessage && term === ''">{{ labels.pickerTextFieldEmpty }}</div>
   `,
+  styleUrls: ['../picker-results/PickerResults.scss'],
+  encapsulation: ViewEncapsulation.None,
   host: {
     class: 'novo-entity-picker-results',
   },

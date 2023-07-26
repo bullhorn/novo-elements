@@ -26,6 +26,7 @@ import { novoStepperAnimations } from './stepper.animations';
 @Component({
   selector: 'novo-step',
   templateUrl: 'step.component.html',
+  styleUrls: ['stepper.component.scss'],
   preserveWhitespaces: false,
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [{ provide: CdkStep, useExisting: NovoStep }],

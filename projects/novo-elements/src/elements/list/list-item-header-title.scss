@@ -1,0 +1,17 @@
+@import "../../styles/variables.scss";
+
+@include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
+  :host-context([theme="#{$name}"]) {
+    color: $contrast;
+    i {
+      color: $contrast;
+    }
+  }
+}
+
+:host {
+  display: block;
+  color: inherit;
+  font-size: inherit;
+  flex: 2 0 0;
+}

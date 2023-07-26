@@ -1,7 +1,22 @@
 @import "../common/typography/text.mixins.scss";
 
-.novo-modal {
-  & > header {
+:host {
+  display: block;
+  background-color: var(--background-bright);
+  border-radius: 4px;
+  box-shadow: 0 1px 7px rgba(0, 0, 0, 0.09), 0 1px 3px rgba(0, 0, 0, 0.2);
+  z-index: z(modal);
+  position: relative;
+  min-width: 330px;
+  max-width: 600px;
+
+  > .novo-button.modal-close {
+    position: absolute;
+    right: $spacing-xl;
+    top: $spacing-xl;
+  }
+
+  > ::ng-deep header {
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
     overflow: hidden;
@@ -12,131 +27,20 @@
     }
   }
 
-  & > section {
+  > ::ng-deep section {
     padding: $spacing-md $spacing-xl;
     max-height: 500px;
     overflow: auto;
   }
 
-  .novo-modal-footer {
+  ::ng-deep .novo-modal-footer {
     display: flex;
     align-items: center;
     justify-content: flex-end;
     padding: $spacing-md;
     gap: $spacing-md;
-    button {
+    ::ng-deep button {
       min-width: 10rem;
     }
-  }
-}
-
-.novo-notification {
-  text-align: center;
-
-  .novo-notification-body {
-    display: flex;
-    flex-direction: column;
-    padding: 0 $spacing-xl;
-    margin: $spacing-lg 0 55px;
-
-    & > img {
-      width: 100%;
-    }
-
-    h1 {
-      font-size: $font-size-2xl;
-      margin: 10px auto 0;
-    }
-    h2 {
-      font-size: $font-size-xl;
-      color: var(--text-muted);
-      margin: 0 auto;
-      padding: 0;
-    }
-    h3 {
-      font-size: $font-size-lg;
-      margin: 0 auto;
-    }
-    h4 {
-      font-size: $font-size-lg;
-      color: var(--text-muted);
-      margin: 0 auto;
-      padding: 0;
-    }
-    h5 {
-      font-size: $font-size-md;
-      margin: 0 auto;
-    }
-    h6 {
-      font-size: $font-size-md;
-      margin: 0 auto;
-    }
-
-    i.indicator {
-      color: var(--text-muted);
-      border: 1px solid var(--text-muted);
-      font-size: $font-size-2xl;
-      border-radius: 50%;
-      padding: $spacing-md;
-      margin: 2rem auto;
-      align-self: center;
-    }
-  }
-
-  &[type="success"] {
-    .novo-notification-body {
-      i.indicator {
-        color: $success;
-        border-color: $success;
-      }
-    }
-  }
-
-  &[type="warning"] {
-    .novo-notification-body {
-      i.indicator {
-        color: $warning;
-        border-color: $warning;
-      }
-    }
-  }
-
-  &[type="error"] {
-    .novo-notification-body {
-      i.indicator {
-        color: $negative;
-        border-color: $negative;
-      }
-    }
-  }
-
-  .novo-notification-footer {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    padding: $spacing-md;
-    gap: $spacing-md;
-
-    button {
-      min-width: 10rem;
-    }
-  }
-}
-
-.novo-modal,
-.novo-notification {
-  display: block;
-  background-color: var(--background-bright);
-  border-radius: 4px;
-  box-shadow: 0 1px 7px rgba(0, 0, 0, 0.09), 0 1px 3px rgba(0, 0, 0, 0.2);
-  z-index: z(modal);
-  position: relative;
-  min-width: 330px;
-  max-width: 600px;
-
-  & > .novo-button.modal-close {
-    position: absolute;
-    right: $spacing-xl;
-    top: $spacing-xl;
   }
 }

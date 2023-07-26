@@ -101,6 +101,7 @@ export class NovoRowChipElement extends NovoChipElement {
       <span #preview></span>
     </div>
   `,
+  styleUrls: ['./RowChips.scss'],
 })
 export class NovoRowChipsElement extends NovoChipsElement {
   @Input()

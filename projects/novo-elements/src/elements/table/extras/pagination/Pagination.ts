@@ -1,6 +1,6 @@
 // NG2
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewEncapsulation } from '@angular/core';
 // APP
 import { NovoLabelService } from 'novo-elements/services';
 
@@ -15,6 +15,7 @@ interface Page {
     <ng-container *ngIf="rowOptions.length > 1">
       <h5 class="rows">{{ label }}</h5>
       <novo-select
+        class="table-pagination-select"
         [options]="rowOptions"
         [placeholder]="labels.select"
         [(ngModel)]="itemsPerPage"
@@ -41,6 +42,8 @@ interface Page {
       </li>
     </ul>
   `,
+  styleUrls: ['./Pagination.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class Pagination implements OnInit, OnChanges {
   @Input()

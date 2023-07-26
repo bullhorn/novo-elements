@@ -13,6 +13,7 @@ import {
   Optional,
   Output,
   ViewChild,
+  ViewEncapsulation,
 } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { BooleanInput } from 'novo-elements/utils';
@@ -20,6 +21,7 @@ import { BooleanInput } from 'novo-elements/utils';
 @Component({
   selector: 'novo-nav',
   template: '<ng-content></ng-content>',
+  styleUrls: ['./tab-nav.scss'],
 })
 export class NovoNavElement implements AfterContentChecked {
   @Input()
@@ -131,6 +133,7 @@ export class NovoNavElement implements AfterContentChecked {
     </div>
     <span class="indicator"></span>
   `,
+  styleUrls: ['./tab.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NovoTabElement {
@@ -189,6 +192,7 @@ export class NovoTabElement {
     '[class.disabled]': 'disabled',
   },
   template: '<ng-content></ng-content>',
+  styleUrls: ['./tab-button.scss'],
 })
 export class NovoTabButtonElement {
   @HostBinding('attr.role')
@@ -225,6 +229,7 @@ export class NovoTabButtonElement {
     </div>
     <span class="indicator"></span>
   `,
+  styleUrls: ['./tab.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NovoTabLinkElement implements OnInit {
@@ -268,6 +273,8 @@ export class NovoTabLinkElement implements OnInit {
 @Component({
   selector: 'novo-nav-outlet',
   template: '<ng-content></ng-content>',
+  styleUrls: ['./tab-outlet.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class NovoNavOutletElement {
   items: Array<any> = [];
@@ -306,6 +313,8 @@ export class NovoNavOutletElement {
     '[class.active]': 'active',
   },
   template: '<ng-content></ng-content>',
+  styleUrls: ['./tab-content.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class NovoNavContentElement {
   @Input()
@@ -323,6 +332,7 @@ export class NovoNavContentElement {
     '(click)': 'show($event)',
   },
   template: '<ng-content></ng-content>',
+  styleUrls: ['./tab-header.scss'],
 })
 export class NovoNavHeaderElement {
   @HostBinding('attr.role')

@@ -1,5 +1,5 @@
 // NG2
-import { Component, Directive, EventEmitter, HostBinding, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, HostBinding, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 // APP
 import { NovoLabelService } from 'novo-elements/services';
 import { BooleanInput } from 'novo-elements/utils';
@@ -13,9 +13,11 @@ export class CardActionsElement {}
 /**
  * Content of a card, needed as it's used as a selector in the API.
  */
-@Directive({
+@Component({
   selector: 'novo-card-content, [novo-card-content], [novoCardContent]',
   host: { class: 'novo-card-content', '[class.condensed]': 'condensed' },
+  template: '<ng-content></ng-content>',
+  styleUrls: ['./CardContent.scss'],
 })
 export class CardContentElement {
   @Input() @BooleanInput() condensed: boolean = false;
@@ -37,12 +39,15 @@ export class CardContentElement {
       <ng-content select="novo-action"></ng-content>
     </div>
   `,
+  styleUrls: ['./CardHeader.scss'],
 })
 export class CardHeaderElement {}
 
-@Directive({
+@Component({
   selector: 'novo-card-footer, [novo-card-footer], [novoCardFooter]',
   host: { class: 'novo-card-footer' },
+  template: '<ng-content></ng-content>',
+  styleUrls: ['./CardFooter.scss'],
 })
 export class CardFooterElement {}
 
@@ -115,6 +120,7 @@ export class CardFooterElement {}
       select="footer,novo-card-footer,[novo-card-footer],[novoCardFooter]"
     ></ng-content>
   `,
+  styleUrls: ['./Card.scss'],
 })
 export class CardElement implements OnChanges, OnInit {
   @Input()
