@@ -336,8 +336,8 @@ export class BasePickerResults {
       this.selectingMatches = true;
       if (this.parent.closeOnSelect) {
         this.parent.hideResults();
-        this.selectingMatches = false;
       }
+      this.selectingMatches = false;
     }
     this.ref.markForCheck();
     return false;
