@@ -3,14 +3,12 @@ import { Component, ElementRef, EventEmitter, forwardRef, Input, OnDestroy, OnIn
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 // Vendor
 // organize-imports-ignore
-import 'brace/index';
+import * as ace from 'brace';
+import 'brace/ext/language_tools.js';
 import 'brace/mode/javascript';
 import 'brace/theme/chrome';
-import 'brace/ext/language_tools.js';
 // APP
 import { Helpers } from 'novo-elements/utils';
-
-declare var ace: any;
 
 const ACE_VALUE_ACCESSOR = {
   provide: NG_VALUE_ACCESSOR,
