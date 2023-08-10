@@ -4445,14 +4445,14 @@ export class FormGroupsPage {
 This is the Static Form demo.</p>
 <h2>Static Form</h2>
 <p>Static forms <code>&lt;novo-form /&gt;</code>.</p>
+<h5>Calendar Controls</h5>
+<p><code-example example="calendar-input-controls"></code-example></p>
 <h5>Textbox Based Controls</h5>
 <p><code-example example="text-based-controls"></code-example></p>
 <h5>Checkbox Controls</h5>
 <p><code-example example="check-box-controls"></code-example></p>
 <h5>File Input Controls</h5>
 <p><code-example example="file-input-controls"></code-example></p>
-<h5>Calendar Controls</h5>
-<p><code-example example="calendar-input-controls"></code-example></p>
 <h5>Picker Controls</h5>
 <p><code-example example="picker-controls"></code-example></p>
 <h5>Address Controls</h5>
