@@ -1,0 +1,63 @@
+@import "../../styles/variables.scss";
+
+// novo-editor {
+:host {
+  ::ng-deep .cke {
+    font: inherit !important;
+    box-shadow: none;
+    border-color: var(--background-muted);
+
+    .cke_top,
+    .cke_bottom {
+      background: var(--background-muted) none;
+      box-shadow: none;
+    }
+
+    .cke_bottom {
+      border-top: none;
+    }
+  }
+}
+
+.cke_dialog_background_cover {
+  background-color: $black !important;
+}
+
+.cke_dialog {
+  .cke_dialog_title {
+    text-shadow: none;
+    background: var(--background-muted) none;
+    box-shadow: none;
+    border-bottom: none;
+  }
+
+  .cke_dialog_footer {
+    text-shadow: none;
+    background: var(--background-muted) none;
+    box-shadow: none;
+    border-top: none;
+  }
+}
+
+:host-context(.theme-dark) {
+  ::ng-deep .cke_button {
+    filter: invert(1);
+  }
+  ::ng-deep .cke_combo {
+    a.cke_combo_button {
+      &:hover,
+      &:active,
+      &:focus,
+      &.cke_combo_on {
+        background: var(--background-main);
+        border: 1px solid var(--border);
+      }
+      .cke_combo_text {
+        color: white;
+      }
+      .cke_combo_arrow {
+        border-top-color: white;
+      }
+    }
+  }
+}

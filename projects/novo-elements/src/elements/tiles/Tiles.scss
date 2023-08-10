@@ -1,4 +1,6 @@
-novo-tiles {
+@import "../../styles/variables.scss";
+
+:host {
   $border-width: 0.2em;
   $border-radius: 3px;
   $positive-lighter: lighten($positive, 20%);

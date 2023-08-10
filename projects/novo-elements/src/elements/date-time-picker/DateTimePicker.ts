@@ -122,6 +122,7 @@ const DATE_TIME_PICKER_VALUE_ACCESSOR = {
       </div>
     </div>
   `,
+  styleUrls: ['./_DateTimePicker.scss'],
 })
 export class NovoDateTimePickerElement implements ControlValueAccessor {
   @Input()

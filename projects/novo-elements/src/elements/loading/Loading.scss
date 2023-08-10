@@ -1,4 +1,7 @@
-novo-loading {
+@import "../../styles/variables";
+@import "../../styles/global/functions";
+
+:host {
   padding: 20px;
   display: flex;
   flex-direction: row;

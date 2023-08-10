@@ -1,8 +1,5 @@
 import { Component } from '@angular/core';
-// Vendor
 import { CheckboxControl, CheckListControl, FormUtils, SwitchControl, TilesControl } from 'novo-elements';
-
-// import { MockMeta, MockMetaHeaders } from './MockMeta';
 
 /**
  * @title Check Box Controls Example

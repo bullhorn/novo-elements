@@ -37,6 +37,9 @@
       }
       novo-chip-list {
         width: 36rem;
+        novo-chip {
+          max-width: 33rem;
+        }
       }
       novo-chips {
         border-bottom: none !important;

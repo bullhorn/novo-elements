@@ -8,7 +8,7 @@ $medium-icon-size: 1.8em;
 $large-icon-size: 2.1em;
 $icon-border-radius: 0.3em;
 
-novo-icon {
+:host {
   display: inline-flex;
   align-items: center;
   justify-content: center;

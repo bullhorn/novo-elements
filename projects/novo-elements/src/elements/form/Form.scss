@@ -1,29 +1,7 @@
-@import "./extras/address/Address";
-@import "./extras/file/FileInput";
-@import "./ControlGroup";
-.novo-form-control-label {
-  font-weight: 500;
-  word-break: word-break;
-  overflow-wrap: break-word;
-  line-height: 1.375;
-  color: var(--text-muted);
-  font-size: var(--font-size-label);
-  // original
-  flex: 1;
-  max-width: 130px;
-  min-width: 130px;
-  transition: 200ms ease-out;
-  margin-right: 35px;
-  padding-top: 8px;
+@import "../../styles/variables.scss";
 
-  &.encrypted {
-    max-width: 110px;
-    min-width: 110px;
-  }
-}
-
-novo-dynamic-form,
-novo-form {
+novo-form,
+novo-dynamic-form {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -796,8 +774,10 @@ novo-form {
   }
 }
 
-novo-dynamic-form .novo-form-container form div.novo-form-row novo-control.address .field-message {
-  margin-left: 0px;
+novo-dynamic-form {
+  .novo-form-container form div.novo-form-row novo-control.address .field-message {
+    margin-left: 0px;
+  }
 }
 
 control-confirm-modal,
@@ -819,21 +799,23 @@ control-prompt-modal {
   }
 }
 
-// Isolate styles
-.novo-fieldset-header {
-  background: var(--background-muted);
-  box-sizing: content-box;
-  padding: 1rem 1rem 1rem 0.5rem;
-  margin-bottom: 2rem;
-  display: flex;
-  margin-left: -1.5rem;
-  margin-right: -1.5rem;
-  font-size: 1.8rem;
-  i,
-  novo-icon {
-    margin: 1px 10px 1px 6px;
-  }
-  &.hidden {
-    display: none;
+.novo-form-control-label {
+  font-weight: 500;
+  word-break: word-break;
+  overflow-wrap: break-word;
+  line-height: 1.375;
+  color: var(--text-muted);
+  font-size: var(--font-size-label);
+  // original
+  flex: 1;
+  max-width: 130px;
+  min-width: 130px;
+  transition: 200ms ease-out;
+  margin-right: 35px;
+  padding-top: 8px;
+
+  &.encrypted {
+    max-width: 110px;
+    min-width: 110px;
   }
 }

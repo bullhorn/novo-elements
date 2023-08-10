@@ -1,6 +1,6 @@
 @import "../common/typography/text.mixins";
 
-popover-content {
+:host {
   .popover {
     position: absolute;
     top: 0;

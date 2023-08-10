@@ -155,6 +155,7 @@ let nextId = 0;
       </div>
     </novo-overlay-template>
   `,
+  styleUrls: ['./Select.scss'],
   host: {
     class: 'novo-select',
     role: 'combobox',

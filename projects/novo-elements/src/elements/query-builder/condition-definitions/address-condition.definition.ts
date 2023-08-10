@@ -1,9 +1,11 @@
-import { ChangeDetectionStrategy, Component, ElementRef, QueryList, ViewChildren, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, QueryList, ViewChild, ViewChildren, ViewEncapsulation } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 import { AbstractConditionFieldDef } from './abstract-condition.definition';
 import { NovoOverlayTemplateComponent } from 'novo-elements/elements/common';
 import { NovoPickerToggleElement } from 'novo-elements/elements/field';
+import { PlacesListComponent } from 'novo-elements/elements/places';
 import { NovoLabelService } from 'novo-elements/services';
+import { Key } from 'novo-elements/utils';
 
 /**
  * Handle selection of field values when a list of options is provided.
@@ -22,7 +24,7 @@ import { NovoLabelService } from 'novo-elements/services';
         <novo-field *novoSwitchCases="['includeAny', 'excludeAny']" #novoField>
           <novo-chip-list [(ngModel)]="chipListModel" [ngModelOptions]="{ standalone: true }" (click)="openPlacesList(viewIndex)">
             <novo-chip *ngFor="let item of formGroup.get('value').value" (removed)="remove(item, formGroup, viewIndex)">
-              {{ item.formatted_address }}
+              <novo-text ellipsis>{{ item.formatted_address }}</novo-text>
               <novo-icon novoChipRemove>close</novo-icon>
             </novo-chip>
             <input
@@ -30,6 +32,7 @@ import { NovoLabelService } from 'novo-elements/services';
               [id]="viewIndex"
               [placeholder]="labels.location"
               (keyup)="onKeyup($event, viewIndex)"
+              (keydown)="onKeydown($event, viewIndex)"
               [picker]="placesPicker"
               #addressInput />
           </novo-chip-list>
@@ -46,6 +49,8 @@ import { NovoLabelService } from 'novo-elements/services';
 export class NovoDefaultAddressConditionDef extends AbstractConditionFieldDef {
   @ViewChildren(NovoPickerToggleElement) overlayChildren: QueryList<NovoPickerToggleElement>;
   @ViewChildren('addressInput') inputChildren: QueryList<ElementRef>;
+  @ViewChild('placesPicker') placesPicker: PlacesListComponent;
+
   defaultOperator = 'includeAny';
   chipListModel: any = '';
   term: string = '';
@@ -55,8 +60,22 @@ export class NovoDefaultAddressConditionDef extends AbstractConditionFieldDef {
   }
 
   onKeyup(event, viewIndex) {
-    this.openPlacesList(viewIndex);
+    if (![Key.Escape, Key.Enter].includes(event.key)) {
+      this.openPlacesList(viewIndex);
+    }
     this.term = event.target.value;
+  }
+
+  onKeydown(event, viewIndex) {
+    if (!this.placesPicker.dropdownOpen) {
+      this.openPlacesList(viewIndex);
+      this.placesPicker.dropdownOpen = true;
+    }
+    if ([Key.Escape, Key.Tab].includes(event.key)) {
+      this.closePlacesList(viewIndex);
+    } else {
+      this.placesPicker.onKeyDown(event);
+    }
   }
 
   getValue(formGroup: AbstractControl): any[] {

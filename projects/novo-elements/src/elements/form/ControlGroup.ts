@@ -13,6 +13,7 @@ import {
   SimpleChange,
   SimpleChanges,
   TemplateRef,
+  ViewEncapsulation,
 } from '@angular/core';
 import { UntypedFormArray, UntypedFormBuilder } from '@angular/forms';
 import { Helpers } from 'novo-elements/utils';
@@ -38,6 +39,8 @@ export interface NovoControlGroupRowConfig {
 @Component({
   selector: 'novo-control-group',
   templateUrl: './ControlGroup.html',
+  styleUrls: ['./ControlGroup.scss'],
+  encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     '[class.novo-control-group-appearance-card]': "appearance=='card'",

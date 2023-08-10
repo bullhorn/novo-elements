@@ -1,6 +1,10 @@
+@import "../../styles/variables.scss";
+@import "../../styles/reset";
+
 $table-bg-accent: #f4f4f4;
 $novo-row-horizontal-padding: 20px;
 $breakpoint: 1000px;
+
 novo-simple-table {
   display: block;
   min-height: 300px;
@@ -324,7 +328,7 @@ novo-simple-table-pagination {
 }
 
 .simple-table-dropdown {
-  @extend .table-dropdown;
+  @extend .table-dropdown !optional; // fix
   .header {
     padding: 5px 10px 0px 10px;
     display: flex;
