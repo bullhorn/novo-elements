@@ -18,7 +18,7 @@
     "post-robot": "^8.0.0",
     "rxjs": ">=7",
     "text-mask-addons": "^3.7.0",
-    "timezone-support": "^3.1.0"
+    "timezone-support": "^2.0.2"
   },
   "dependencies": {
     "tslib": "^2.0.0"

@@ -4,8 +4,8 @@
  **/
 
 const formattingToken = /(\[[^[]*\])|([-:/.()\s]+)|(A|a|YYYY|YY?|MM?|DD?|d|hh?|HH?|mm?|ss?|S{1,3}|z|ZZ?)/g;
-const formatTokenFunctions = {}
-const formatters = {}
+const formatTokenFunctions = {};
+const formatters = {};
 
 export function formatZonedTime(time, format) {
   let formatter = formatters[format];
@@ -50,21 +50,21 @@ const addFormatToken = function (token, padded, property) {
   }
 }
 
-addFormatToken('A', 0, function () { return this.hours < 12 ? 'AM' : 'PM' })
-addFormatToken('a', 0, function () { return this.hours < 12 ? 'am' : 'pm' })
-addFormatToken('S', 0, function () { return Math.floor(this.milliseconds / 100) })
-addFormatToken(0, ['SS', 2], function () { return Math.floor(this.milliseconds / 10) })
-addFormatToken(0, ['SSS', 3], 'milliseconds')
-addFormatToken('s', ['ss', 2], 'seconds')
-addFormatToken('m', ['mm', 2], 'minutes')
-addFormatToken('h', ['hh', 2], function () { return (this.hours % 12) || 12 })
-addFormatToken('H', ['HH', 2], 'hours')
-addFormatToken('d', 0, 'dayOfWeek')
-addFormatToken('D', ['DD', 2], 'day')
-addFormatToken('M', ['MM', 2], 'month')
-addFormatToken(0, ['YY', 2], function () { return this.year % 100 })
-addFormatToken('Y', ['YYYY', 4], 'year')
-addFormatToken('z', 0, function () { return this.zone.abbreviation })
+addFormatToken('A', 0, function () { return this.hours < 12 ? 'AM' : 'PM' });
+addFormatToken('a', 0, function () { return this.hours < 12 ? 'am' : 'pm' });
+addFormatToken('S', 0, function () { return Math.floor(this.milliseconds / 100) });
+addFormatToken(0, ['SS', 2], function () { return Math.floor(this.milliseconds / 10) });
+addFormatToken(0, ['SSS', 3], 'milliseconds');
+addFormatToken('s', ['ss', 2], 'seconds');
+addFormatToken('m', ['mm', 2], 'minutes');
+addFormatToken('h', ['hh', 2], function () { return (this.hours % 12) || 12 });
+addFormatToken('H', ['HH', 2], 'hours');
+addFormatToken('d', 0, 'dayOfWeek');
+addFormatToken('D', ['DD', 2], 'day');
+addFormatToken('M', ['MM', 2], 'month');
+addFormatToken(0, ['YY', 2], function () { return this.year % 100 });
+addFormatToken('Y', ['YYYY', 4], 'year');
+addFormatToken('z', 0, function () { return this.zone.abbreviation });
 
 function addTimeZoneFormatToken (token, separator) {
   addFormatToken(token, 0, function () {
