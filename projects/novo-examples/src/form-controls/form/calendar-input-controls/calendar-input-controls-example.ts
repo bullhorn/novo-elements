@@ -35,7 +35,6 @@ export class CalendarInputControlsExample {
     this.timeControl = new TimeControl({ key: 'time', label: 'Time', tooltip: 'Time' });
     this.dateTimeControl = new DateTimeControl({ key: 'dateTime', tooltip: 'Date Time', label: 'Date Time', military: true });
     this.timezoneControl = new TimezoneControl({ key: 'timezone', tooltip: 'Timezone', label: 'Timezone' });
-    console.log('TZ', this.timezoneControl)
     this.calendarForm = formUtils.toFormGroup([
       this.dateControl,
       this.userDefinedDateControl,
