@@ -9,6 +9,10 @@ Static Form
 
 Static forms `<novo-form />`.
 
+##### Calendar Controls
+
+<code-example example="calendar-input-controls"></code-example>
+
 ##### Textbox Based Controls
 
 <code-example example="text-based-controls"></code-example>
@@ -20,10 +24,6 @@ Static forms `<novo-form />`.
 ##### File Input Controls
 
 <code-example example="file-input-controls"></code-example>
-
-##### Calendar Controls
-
-<code-example example="calendar-input-controls"></code-example>
 
 ##### Picker Controls
 
