@@ -72,17 +72,17 @@ function addTimeZoneFormatToken (token, separator) {
     const sign = offset < 0 ? '-' : '+';
     offset = Math.abs(offset);
     return sign + padWithZeros(Math.floor(offset / 60), 2) + separator + padWithZeros(offset % 60, 2);
-  })
+  });
 }
 
-addTimeZoneFormatToken('Z', ':')
-addTimeZoneFormatToken('ZZ', '')
+addTimeZoneFormatToken('Z', ':');
+addTimeZoneFormatToken('ZZ', '');
+
+const padToN = [ undefined, undefined, padToTwo, padToThree, padToFour ];
 
 function padWithZeros (number, length) {
   return padToN[length](number);
 }
-
-const padToN = [ undefined, undefined, padToTwo, padToThree, padToFour ]
 
 function padToTwo (number) {
   return number > 9 ? number : '0' + number;
