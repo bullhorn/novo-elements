@@ -49,4 +49,29 @@
       background: $light;
     }
   }
+  &.novo-table-dropdown-cell {
+    ::ng-deep list {
+      max-height: 400px;
+      display: block;
+      overflow: auto;
+      padding: 5px 0;
+    }
+    ::ng-deep item {
+      height: 30px !important;
+      padding: 0 16px !important;
+      span {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        display: inline-block;
+        max-width: 80%;
+      }
+      &.active {
+        font-weight: 500;
+      }
+    }
+    ::ng-deep dropdown-item-header {
+      padding: 0 10px !important;
+    }
+  }
 }
