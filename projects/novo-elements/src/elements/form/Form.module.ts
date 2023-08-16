@@ -7,36 +7,35 @@ import { IMaskDirectiveModule } from 'angular-imask';
 // Vendor
 import { TextMaskModule } from 'angular2-text-mask';
 // APP
-import { NovoAceEditorModule } from 'novo-elements/addons/ace-editor';
 import { NovoNovoCKEditorModule } from 'novo-elements/addons/ckeditor';
 import { NovoDragulaModule } from 'novo-elements/addons/dragula';
-import { NovoCheckboxModule } from 'novo-elements/elements/checkbox';
-import { NovoCommonModule } from 'novo-elements/elements/common';
-import { NovoIconModule } from 'novo-elements/elements/icon';
-import { NovoSwitchModule } from 'novo-elements/elements/switch';
-import { NovoTemplateService } from 'novo-elements/services';
 import { NovoButtonModule } from 'novo-elements/elements/button';
+import { NovoCheckboxModule } from 'novo-elements/elements/checkbox';
 import { NovoChipsModule } from 'novo-elements/elements/chips';
+import { NovoCommonModule } from 'novo-elements/elements/common';
 import { NovoDatePickerModule } from 'novo-elements/elements/date-picker';
 import { NovoDateTimePickerModule } from 'novo-elements/elements/date-time-picker';
 import { NovoHeaderModule } from 'novo-elements/elements/header';
+import { NovoIconModule } from 'novo-elements/elements/icon';
 import { NovoModalModule } from 'novo-elements/elements/modal';
 import { NovoPickerModule } from 'novo-elements/elements/picker';
+import { NovoPopOverModule } from 'novo-elements/elements/popover';
 import { NovoQuickNoteModule } from 'novo-elements/elements/quick-note';
 import { NovoRadioModule } from 'novo-elements/elements/radio';
 import { NovoSelectModule } from 'novo-elements/elements/select';
+import { NovoSwitchModule } from 'novo-elements/elements/switch';
 import { NovoTilesModule } from 'novo-elements/elements/tiles';
 import { NovoTimePickerModule } from 'novo-elements/elements/time-picker';
 import { NovoTipWellModule } from 'novo-elements/elements/tip-well';
 import { NovoTooltipModule } from 'novo-elements/elements/tooltip';
-import { NovoPopOverModule } from 'novo-elements/elements/popover';
+import { NovoTemplateService } from 'novo-elements/services';
 import { NovoAutoSize, NovoControlElement } from './Control';
 import { NovoControlGroup } from './ControlGroup';
 import { NovoControlTemplates } from './ControlTemplates';
 import { NovoDynamicFormElement, NovoFieldsetElement, NovoFieldsetHeaderElement } from './DynamicForm';
-import { NovoFormExtrasModule } from './extras';
 import { ControlConfirmModal, ControlPromptModal } from './FieldInteractionModals';
 import { NovoFormElement } from './Form';
+import { NovoFormExtrasModule } from './extras';
 
 @NgModule({
   imports: [
@@ -64,7 +63,6 @@ import { NovoFormElement } from './Form';
     NovoTipWellModule,
     NovoModalModule,
     NovoButtonModule,
-    NovoAceEditorModule,
     NovoCommonModule,
     NovoCheckboxModule,
     NovoIconModule,

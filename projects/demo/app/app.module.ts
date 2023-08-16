@@ -17,6 +17,7 @@ import {
   NovoModalService,
   NovoToastService,
 } from 'novo-elements';
+import { NovoAceEditorModule } from 'novo-elements/addons/ace-editor';
 import { NovoExamplesRoutesModule } from 'novo-examples';
 import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
@@ -49,6 +50,7 @@ export function provideAppBridgeService(http) {
     // Vendor
     NovoElementsModule,
     NovoElementProviders.forRoot(),
+    NovoAceEditorModule,
     // APP
     NovoExamplesRoutesModule,
   ],

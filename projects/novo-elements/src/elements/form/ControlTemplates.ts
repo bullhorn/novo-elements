@@ -1,6 +1,7 @@
-import { AfterViewInit, Component, QueryList, ViewChildren } from '@angular/core';
-import { NovoTemplateService } from 'novo-elements/services';
+import { AfterViewInit, Component, ComponentRef, Inject, Optional, QueryList, ViewChildren, ViewContainerRef } from '@angular/core';
 import { NovoTemplate } from 'novo-elements/elements/common';
+import { NovoTemplateService } from 'novo-elements/services';
+import { DYNAMIC_FORM_TEMPLATE, DynamicFormTemplateArgs, TemplateHost } from 'novo-elements/utils';
 @Component({
   selector: 'novo-control-templates',
   template: `
@@ -141,18 +142,6 @@ import { NovoTemplate } from 'novo-elements/elements/common';
           (blur)="methods.handleBlur($event)"
           [config]="control.config"
         ></novo-editor>
-      </div>
-    </ng-template>
-
-    <!--AceEditor-->
-    <ng-template novoTemplate="ace-editor" let-control let-form="form" let-errors="errors" let-methods="methods">
-      <div [formGroup]="form">
-        <novo-ace-editor
-          [name]="control.key"
-          [formControlName]="control.key"
-          (focus)="methods.handleFocus($event)"
-          (blur)="methods.handleBlur($event)"
-        ></novo-ace-editor>
       </div>
     </ng-template>
 
@@ -696,13 +685,34 @@ import { NovoTemplate } from 'novo-elements/elements/common';
 export class NovoControlTemplates implements AfterViewInit {
   @ViewChildren(NovoTemplate)
   defaultTemplates: QueryList<NovoTemplate>;
-  constructor(private templates: NovoTemplateService) {}
+
+  dynamicComponents: ComponentRef<TemplateHost>[];
+  // dynamic templates arrive from imported modules
+  constructor(private templates: NovoTemplateService,
+    private viewContainerRef: ViewContainerRef,
+    @Optional() @Inject(DYNAMIC_FORM_TEMPLATE) private dynamicTemplates: DynamicFormTemplateArgs[]) {}
+
+  ngOnInit(): void {
+    if (this.dynamicTemplates) {
+      this.dynamicComponents = this.dynamicTemplates.map(dynamicTemplateArgs => {
+        return this.viewContainerRef.createComponent(dynamicTemplateArgs.type, {
+          ngModuleRef: dynamicTemplateArgs.ngModuleRef
+        });
+      });
+    }
+  }
 
   ngAfterViewInit(): void {
     if (this.defaultTemplates && this.defaultTemplates.length) {
-      this.defaultTemplates.forEach((template: any) => {
+      this.defaultTemplates.forEach(template => {
         this.templates.addDefault(template.name, template.template);
       });
+    }
+    if (this.dynamicComponents) {
+      for (let component of this.dynamicComponents) {
+        const { template } = component.instance;
+        this.templates.addDefault(template.name, template.template);
+      }
     }
   }
 }

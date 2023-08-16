@@ -6363,6 +6363,19 @@ export class v8Page {
   selector: 'ace-editor-page',
   template: `<h1>Ace Editor <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/addons/ace-editor">(source)</a></h1>
 <p>Basic code editor using Ace Editor.</p>
+<h2>Importing the code editor.</h2>
+<p>Ace Editor is not included by default in NovoElementsModule. To use it, you will need to import the <code>NovoAceEditorModule</code> for the component to display. Add the following lines to your <code>app.module.ts</code> file.</p>
+<pre><code class="language-ts"><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">NovoElementsModule</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;novo-elements&#x27;</span>;
+<span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">NovoAceEditorModule</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;novo-elements/addons/ace-editor&#x27;</span>;
+
+<span class="hljs-meta">@NgModule</span> (&#123;
+  <span class="hljs-attr">imports</span>: [
+    <span class="hljs-title class_">NovoElementsModule</span>,
+    <span class="hljs-title class_">NovoAceEditorModule</span>
+  ]
+&#125;)
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">AppModule</span> &#123;&#125;
+</code></pre>
 <h5>Basic Example</h5>
 <p><code-example example="basic-ace"></code-example></p>
 `,
