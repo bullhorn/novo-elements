@@ -40,8 +40,12 @@
     div.header-title {
       display: flex;
       align-items: center;
-      max-width: calc(100% - 40px);
       gap: $spacing-sm;
+      // making room for ellipsis
+      padding-inline-end: 3em;
+      // prevent pushing other flex content
+      min-width: 0;
+      flex-shrink: 1;
 
       ::ng-deep novo-icon {
         margin-right: 1rem;
