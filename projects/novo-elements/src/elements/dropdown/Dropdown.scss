@@ -4,7 +4,7 @@
   display: inline-block;
   position: relative;
   outline: none;
-  .novo-dropdown-trigger {
+  ::ng-deep .novo-dropdown-trigger {
     cursor: pointer;
     -webkit-appearance: none;
   }
