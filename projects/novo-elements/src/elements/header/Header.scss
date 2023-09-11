@@ -42,11 +42,10 @@
       align-items: center;
       gap: $spacing-sm;
       // making room for ellipsis
-      padding-inline-end: 3em;
+      padding-inline-end: 2em;
       // prevent pushing other flex content
       min-width: 0;
       flex-shrink: 1;
-      overflow: inherit;
 
       ::ng-deep novo-icon {
         margin-right: 1rem;
