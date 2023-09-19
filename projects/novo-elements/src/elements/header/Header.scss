@@ -46,6 +46,9 @@
       // prevent pushing other flex content
       min-width: 0;
       flex-shrink: 1;
+      .novo-title {
+        overflow: hidden;
+      }
 
       ::ng-deep novo-icon {
         margin-right: 1rem;
@@ -108,6 +111,8 @@
       }
       ::ng-deep .novo-title {
         color: inherit;
+        overflow: hidden;
+        padding-right: 0.5rem;
       }
       ::ng-deep .novo-action {
         button,
