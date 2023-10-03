@@ -137,6 +137,9 @@
           [routerLinkActiveOptions]="{exact: true}">
           <a [routerLink]="route.path"
             class="menu-link">{{route.data.title}}</a>
+          <novo-chip color="success" size="sm" *ngIf="route.data.tag==='new'">new</novo-chip>
+          <novo-chip color="positive" size="sm" *ngIf="route.data.tag==='experiment'">experiment</novo-chip>
+          <novo-chip color="danger" size="sm" *ngIf="route.data.tag==='deprecated'">deprecated</novo-chip>
         </li>
         <li class="menu-line"></li>
         <li class="menu-section-header"
@@ -151,6 +154,9 @@
           [routerLinkActiveOptions]="{exact: true}">
           <a [routerLink]="route.path"
             class="menu-link">{{route.data.title}}</a>
+          <novo-chip color="success" size="sm" *ngIf="route.data.tag==='new'">new</novo-chip>
+          <novo-chip color="positive" size="sm" *ngIf="route.data.tag==='experiment'">experiment</novo-chip>
+          <novo-chip color="danger" size="sm" *ngIf="route.data.tag==='deprecated'">deprecated</novo-chip>
         </li>
         <li class="menu-section-header"
           routerLinkActive="current"
