@@ -1,0 +1,12 @@
+<p>Click and drag these buttons to place them in a new position. When rearranged, they emit an event to demonstrate the new order.</p>
+<div novoDragDrop class="drag-box">
+    <button *ngFor="let item of objects" [novoDragDropItem]="item" (novoDragDropFinish)="dragFinished($event)" [style.backgroundColor]="item.bgColor">{{item.btnText}}</button>
+</div>
+<p *ngIf="objectMoved">{{objectMoved.name}} moved.</p>
+<p *ngIf="objectMoved">Current object order is: {{objectsAsString}}</p>
+<p>These buttons below have no object associated</p>
+<div novoDragDrop class="drag-box">
+    <button novoDragDropItem (novoDragDropFinish)="dragFinished($event)">Button 1</button>
+    <button novoDragDropItem (novoDragDropFinish)="dragFinished($event)">Button 2</button>
+    <button novoDragDropItem (novoDragDropFinish)="dragFinished($event)">Button 3</button>
+</div>

@@ -1,0 +1,8 @@
+.drag-box {
+    width: 500px;
+    display: block;
+}
+.drag-box button {
+    width: 20%;
+    margin: 10px;
+}
