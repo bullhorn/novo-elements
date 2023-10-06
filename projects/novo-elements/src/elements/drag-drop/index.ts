@@ -1,2 +1,3 @@
-export * from './dragDropMenuItem';
+export * from './dragDropBox';
 export * from './dragdrop.module';
+

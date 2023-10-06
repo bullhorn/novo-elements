@@ -2,7 +2,20 @@
     width: 500px;
     display: block;
 }
-.drag-box button {
-    width: 20%;
+.demo-drag-item {
+    display: inline-block;
+    text-align: center;
+    width: 25%;
+    border: 1px dotted rgba(0,0,0,0.3);
+    position: relative;
+}
+button {
     margin: 10px;
+}
+button.remove-btn {
+    padding: 4px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
 }

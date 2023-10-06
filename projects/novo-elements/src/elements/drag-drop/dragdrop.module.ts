@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
-import { NovoDragBoxParent, NovoDragDropItem } from './dragDropMenuItem';
+import { NovoDragBoxParent as NovoDragBox } from 'novo-elements/elements/drag-drop/dragDropBox';
 
 @NgModule({
-    declarations: [NovoDragBoxParent, NovoDragDropItem],
-    exports: [NovoDragBoxParent, NovoDragDropItem]
+    declarations: [NovoDragBox],
+    exports: [NovoDragBox]
 })
 export class NovoDragDropModule {}

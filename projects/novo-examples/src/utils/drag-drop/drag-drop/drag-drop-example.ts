@@ -21,7 +21,9 @@ export class DragDropExample {
     { name: 'Object 2', btnText: 'Button 2', bgColor: 'blue' },
     { name: 'Object 3', btnText: 'Button 3', bgColor: 'green' },
     { name: 'Object 4', btnText: 'Button 4', bgColor: 'yellow' },
-    { name: 'Object 5', btnText: 'Button 5', bgColor: 'wheat' }
+    { name: 'Object 5', btnText: 'Button 5', bgColor: 'wheat' },
+    { name: 'Object 6', btnText: 'Button 6', bgColor: 'purple' },
+    { name: 'Object 7', btnText: 'Button 7', bgColor: 'teal' }
   ];
 
   objectMoved?: DemoButtonObject;
@@ -29,6 +31,14 @@ export class DragDropExample {
   dragFinished(event: NovoDragFinishEvent<DemoButtonObject>) {
     this.objectMoved = event.draggedItem;
     this.objects = event.allItems;
+  }
+
+  addObject(): void {
+    this.objects.push({ name: `Object ${this.objects.length}`, btnText: `Button ${this.objects.length}`, bgColor: 'maroon'})
+  }
+
+  removeObject(item: DemoButtonObject): void {
+    this.objects.splice(this.objects.findIndex(a => a === item), 1);
   }
 
   get objectsAsString(): string {
