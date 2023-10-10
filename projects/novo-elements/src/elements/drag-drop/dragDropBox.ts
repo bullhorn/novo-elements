@@ -8,6 +8,8 @@ export interface NovoDragFinishEvent<T> {
     event: DragEvent;
 }
 
+// TODO: Design an input to specify allowed recipients of drag targets (so that, for instance, you cannot drag an item of type 1 to a box of type 2 - very uncommon in a single page)
+// TODO: Let users enable/disable dragging for an individual item (should not affect drop events)
 @Directive({
     selector: '[novoDragDrop]'
 })
@@ -66,6 +68,13 @@ export class NovoDragBoxParent<T> implements AfterViewInit, OnDestroy {
         
     }
 
+    // Detect removed/added elements - could happen at any time depending on the design of the component.
+    // When an element is dragged between two containers, the following occurs:
+    // 1. The element itself is moved first through a drag preview event
+    // 2. When the dragfinish event occurs, the tracker for the drag item is moved. Then, an event is emitted to the parent component.
+    // 3. After the parent component updates its stored data with the updated array, Angular will re-render it using the updated information. This
+    //    will destroy the previous element, and create a new similar one in its place.
+    // 4. This mutation observer detects the changes, removes event listeners from the old element, and recreates the tracker using the changed input array data.
     mutationDetected(mutations: MutationRecord[]) {
         if (this.controller.pickedUp) {
             // don't process events while drag is occurring.
@@ -92,6 +101,7 @@ export class NovoDragBoxParent<T> implements AfterViewInit, OnDestroy {
         if (removedNodes.size > 0) {
             for (let i = this.trackedItems.length - 1; i >= 0; i --) {
                 if (removedNodes.has(this.trackedItems[i].element)) {
+                    this.trackedItems[i].eventRemovers.forEach(r => r());
                     this.trackedItems.splice(i, 1);
                 }
             }
@@ -134,26 +144,19 @@ export class NovoDragBoxParent<T> implements AfterViewInit, OnDestroy {
             throw new Error('DragDrop: Two elements are in the same position');
         }
         inPlaceOfY.insertAdjacentElement(insertPosition, showXElement);
-        /*if (diff > 0) {
-            inPlaceOfY = inPlaceOfY.nextElementSibling;
-
-        }
-        
-        if (inPlaceOfY) {
-            this.renderer.insertBefore(this.element, showXElement, inPlaceOfY, true);
-        } else {
-            this.renderer.appendChild(this.element, showXElement);
-        }*/
     }
 
     resetSorting(savedOrder: NovoDragItemTracker<any>[]): void {
         // return to the order of elements from the last time we called onDragPickup
-        for (let i = 0; i < this.element.children.length; i++) {
+        for (let i = 0; i < this.element.children.length || i < savedOrder.length; i++) {
             // iterate through children, and for the first element that doesn't match the saved order, insert the missing element.
             const item = this.element.children[i];
-            if (savedOrder[i].element !== item && i > 0) {
-                this.renderer.insertBefore(this.element, savedOrder[i].element, item, true);
-                // savedOrder[i - 1].element.insertAdjacentElement('afterend', savedOrder[i].element);
+            if (savedOrder[i] && savedOrder[i].element !== item) {
+                if (i > 0) {
+                    savedOrder[i - 1].element.insertAdjacentElement('afterend', savedOrder[i].element);
+                } else {
+                    this.element.insertBefore(savedOrder[i].element, this.element.firstElementChild);
+                }
             }
         }
     }
