@@ -52,18 +52,6 @@ export class NovoDragDropController {
         
     }
 
-    generateRandomString() {
-        const charRangeA = 65;
-        const charRangeB = 122;
-        const diff = charRangeB - charRangeA;
-        let str = '';
-        for (let i = 0; i < 5; i++) {
-            let chr = charRangeA + Math.floor(Math.random() * diff);
-            str += String.fromCharCode(chr);
-        }
-        return str;
-    }
-
     private addChildListeners(element: HTMLElement, tracker: NovoDragItemTracker<any>): (()=>void)[] {
         return [
             this.renderer.listen(element, 'dragstart', this.onDragPickup.bind(this, tracker)),
@@ -88,7 +76,7 @@ export class NovoDragDropController {
      * @param element 
      * @param parent The drag parent to either use when newly creating the drag box, or to assign to change it.
      */
-    registerOrMoveChild<T>(element: HTMLElement, parent: NovoDragBoxParent<T>) {
+    registerOrMoveChild<T>(element: HTMLElement, parent: NovoDragBoxParent<T>): NovoDragItemTracker<T> {
         
         let tracker: NovoDragItemTracker<T>;
         for (let parent of this.dragDropBoxes) {
@@ -100,11 +88,14 @@ export class NovoDragDropController {
         if (tracker) {
             // remove the tracker from the old parent's list, add it to the new one in the correct index based on the element position
             this.moveTrackerToNewParent<T>(tracker, parent);
+            return tracker;
         } else {
             const elementIndex: number = this.indexOfElement(element);
             // New element, likely created from external @Input array addition. Take its value from that array
             const dataItem = parent.items[elementIndex];
-            this.registerChild(element, parent, dataItem);
+            const tracker = this.registerChild(element, parent, dataItem);
+            parent.trackedItems.splice(elementIndex, 0, tracker);
+            return tracker;
         }
     }
 
@@ -158,7 +149,9 @@ export class NovoDragDropController {
 
     // User released drag without targetting a valid drop target
     onDragStop(tracker: NovoDragItemTracker<any>, event: DragEvent): void {
-        // this.onDragFinish(tracker, event);
+        if (this.savedOrder) {
+            tracker.parent.resetSorting(this.savedOrder);
+        }
         this.pickedUp = null;
         this.savedOrder = null;
         event.preventDefault();
