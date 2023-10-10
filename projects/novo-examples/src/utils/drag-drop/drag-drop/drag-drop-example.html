@@ -1,15 +1,24 @@
 <p>Click and drag these buttons to place them in a new position. When rearranged, they emit an event to demonstrate the new order.</p>
-<div [novoDragDrop]="objects" (novoDragDropFinish)="dragFinished($event)" class="drag-box">
+<div [novoDragDrop]="objects" (novoDragDropFinish)="dragFinished($event)" (novoDragDropRemoved)="dragFinished($event)" class="drag-box">
     <div *ngFor="let item of objects"
         class="demo-drag-item">
-        <button class="novo-drag-target" [style.backgroundColor]="item.bgColor">{{item.btnText}}</button> <button class="remove-btn" (click)="removeObject(item)">X</button>
+        <button class="novo-drag-target" [style.backgroundColor]="item?.bgColor">{{item.btnText}}</button> <button class="remove-btn" (click)="removeObject(item)">X</button>
         <div>{{item.name}} (Non-draggable area)</div>
     </div>
 </div>
 <p *ngIf="objectMoved">{{objectMoved.name}} moved.</p>
 <p *ngIf="objectMoved">Current object order is: {{objectsAsString}}</p>
 <button (click)="addObject()">Add another object to list</button>
-<p>These buttons below have no object associated</p>
+
+<div [novoDragDrop]="objects2" (novoDragDropFinish)="drag2Finished($event)" (novoDragDropRemoved)="drag2Finished($event)" class="drag-box">
+    <div *ngFor="let item of objects2"
+        class="demo-drag-item">
+        <button class="novo-drag-target" [style.backgroundColor]="item?.bgColor">{{item.btnText}}</button> <button class="remove-btn" (click)="removeObject(item)">X</button>
+        <div>{{item.name}} (Non-draggable area)</div>
+    </div>
+</div>
+
+<p>These buttons below have no object associated (cross-box drag/drop operations will not work with these)</p>
 <div novoDragDrop class="drag-box">
     <div><button>Button 1</button></div>
     <div><button>Button 2</button></div>

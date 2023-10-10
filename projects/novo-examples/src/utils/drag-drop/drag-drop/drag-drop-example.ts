@@ -26,11 +26,26 @@ export class DragDropExample {
     { name: 'Object 7', btnText: 'Button 7', bgColor: 'teal' }
   ];
 
+  objects2: DemoButtonObject[] = [
+    { name: 'Object 11', btnText: 'Button 11', bgColor: 'red' },
+    { name: 'Object 12', btnText: 'Button 12', bgColor: 'blue' },
+    { name: 'Object 13', btnText: 'Button 13', bgColor: 'green' },
+    { name: 'Object 14', btnText: 'Button 14', bgColor: 'yellow' },
+    { name: 'Object 15', btnText: 'Button 15', bgColor: 'wheat' },
+    { name: 'Object 16', btnText: 'Button 16', bgColor: 'purple' },
+    { name: 'Object 17', btnText: 'Button 17', bgColor: 'teal' }
+  ];
+
   objectMoved?: DemoButtonObject;
 
   dragFinished(event: NovoDragFinishEvent<DemoButtonObject>) {
     this.objectMoved = event.draggedItem;
     this.objects = event.allItems;
+  }
+
+  drag2Finished(event: NovoDragFinishEvent<DemoButtonObject>) {
+    this.objectMoved = event.draggedItem;
+    this.objects2 = event.allItems;
   }
 
   addObject(): void {
