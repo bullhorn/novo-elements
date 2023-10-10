@@ -3,7 +3,7 @@
     <div *ngFor="let item of objects"
         class="demo-drag-item">
         <button class="novo-drag-target" [style.backgroundColor]="item.bgColor">{{item.btnText}}</button> <button class="remove-btn" (click)="removeObject(item)">X</button>
-        <div novoPreventDrag>{{item.name}} (Non-draggable area)</div>
+        <div>{{item.name}} (Non-draggable area)</div>
     </div>
 </div>
 <p *ngIf="objectMoved">{{objectMoved.name}} moved.</p>

@@ -64,7 +64,7 @@ export class CardFooterElement {}
       <novo-loading theme="line" [attr.data-automation-id]="cardAutomationId + '-loading'"></novo-loading>
     </div>
     <!--Card Header-->
-    <header *ngIf="title || config.title">
+    <header *ngIf="title || config.title" [class.novo-drag-target]="move || config.move">
       <div class="title">
         <!--Grabber Icon-->
         <novo-icon

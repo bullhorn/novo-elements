@@ -10,6 +10,7 @@ export interface NovoDragFinishEvent<T> {
 interface NovoDragItem<T> {
     item: T;
     element: HTMLElement;
+    eventRemovers: (() => void)[];
 }
 
 @Directive({
@@ -17,7 +18,11 @@ interface NovoDragItem<T> {
 })
 export class NovoDragBoxParent<T> implements AfterViewInit, OnDestroy {
 
-    pickedUp?: HTMLElement;
+    private static pickedUp?: {
+        element: HTMLElement;
+        parent: NovoDragBoxParent<any>;
+        newParent?: NovoDragBoxParent<any>;
+    }
     savedOrder?: NovoDragItem<T>[];
 
     $destroy = new ReplaySubject<void>(1);
@@ -26,6 +31,7 @@ export class NovoDragBoxParent<T> implements AfterViewInit, OnDestroy {
 
     @Output() novoDragDropFinish = new EventEmitter<NovoDragFinishEvent<T>>();
 
+    // Array of objects that associate an HTML element to an unspecified "data type"
     private trackedItems: NovoDragItem<T>[];
 
     get trackedElements(): HTMLElement[] {
@@ -40,44 +46,70 @@ export class NovoDragBoxParent<T> implements AfterViewInit, OnDestroy {
 
     constructor(private elementRef: ElementRef, private renderer: Renderer2) { }
     
+    get element(): HTMLElement {
+        return this.elementRef.nativeElement;
+    }
+
     ngAfterViewInit(): void {
         this.registerChildren();
-        this.mutationObserver.observe(this.elementRef.nativeElement, { childList: true });
+        this.mutationObserver.observe(this.element, { childList: true });
     }
 
     ngOnDestroy(): void {
         this.$destroy.next();
         this.$destroy.complete();
+        this.mutationObserver.disconnect();
     }
 
     private registerChildren(): void {
-        if (this.items && this.items.length !== this.elementRef.nativeElement.children.length) {
-            throw new Error('Could not match item list to children list');
+        if (this.items && this.items.length !== this.element.children.length) {
+            throw new Error('DragDrop: Could not match item list to children list');
         }
         this.trackedItems = [];
-        for (let i = 0; i < this.elementRef.nativeElement.children.length; i++) {
-            this.registerChild(this.elementRef.nativeElement.children[i], i);
+        for (let i = 0; i < this.element.children.length; i++) {
+            this.registerChild(this.element.children[i] as HTMLElement, this.items[i]);
         }
         
     }
 
-    private registerChild(element: HTMLElement, index: number) {
+    // Create event listeners for a child element, and add its associated data to the trackedItems list
+    private registerChild(element: HTMLElement, dataItem?: T) {
         console.log('Registering child', element);
-        const listeners = [
+        const insertionIdx = Array.prototype.indexOf.call(this.elementRef.nativeElement.children, element);
+        if (!dataItem) {
+            if (this.items) {
+                // Figure out in what position the element was inserted, and presume that the @Input() items array
+                // has adjusted to include the associated value.
+                dataItem = this.items[insertionIdx];
+            }
+        }
+        const eventRemovers = this.addChildListeners(element);
+        element.draggable = true;
+        const trackItem = {
+            item: dataItem,
+            element,
+            eventRemovers
+        };
+        this.trackedItems.splice(insertionIdx, 0, trackItem);
+        
+    }
+
+    private addChildListeners(element: HTMLElement) {
+        const eventRemovers = [
             this.renderer.listen(element, 'dragstart', this.onDragPickup.bind(this)),
             this.renderer.listen(element, 'drop', this.onDragFinish.bind(this)),
             this.renderer.listen(element, 'dragover', this.onDragOver.bind(this)),
             this.renderer.listen(element, 'dragend', this.onDragStop.bind(this))
         ];
-        element.draggable = true;
-        this.$destroy.subscribe(() => listeners.forEach(cb => cb()));
-        this.trackedItems.push({
-            item: this.items[index],
-            element
-        });
+        this.$destroy.subscribe(() => eventRemovers.forEach(cb => cb()));
+        return eventRemovers;
     }
 
     mutationDetected(mutations: MutationRecord[]) {
+        // Do not check for mutations during a drag event
+        if (NovoDragBoxParent.pickedUp) {
+            return;
+        }
         const addedNodes = new Set<HTMLElement>();
         const removedNodes = new Set<HTMLElement>();
         for (let mutation of mutations) {
@@ -93,21 +125,27 @@ export class NovoDragBoxParent<T> implements AfterViewInit, OnDestroy {
             });
         }
         addedNodes.forEach(node => {
-            const idx = Array.prototype.indexOf.call(this.elementRef.nativeElement.children, node);
-            this.registerChild(node, idx);
+            // registerChild could have already been called manually, with a defined data item - in which case, don't do anything
+            if (this.elementRef.nativeElement.children.length !== this.trackedItems.length) {
+                this.registerChild(node);
+            }
         });
         if (removedNodes.size > 0) {
-            this.trackedItems = this.trackedItems.filter(
-                item => !removedNodes.has(item.element));
+            for (let i = this.trackedItems.length - 1; i >= 0; i --) {
+                if (removedNodes.has(this.trackedItems[i].element)) {
+                    console.log('removing event listeners', this.trackedItems[i].element);
+                    this.trackedItems[i].eventRemovers.forEach(r => r());
+                    this.trackedItems.splice(i, 1);
+                }
+            }
         }
     }
 
 
-    debugDragEvents: any[] = [];
     /** Per-item listeners */
 
     onDragPickup(event: DragEvent) {
-        console.log('drag start');
+        console.log('drag start, target', event.currentTarget);
         if (this.shouldBlockDragStart(event)) {
             event.preventDefault();
             return;
@@ -115,31 +153,57 @@ export class NovoDragBoxParent<T> implements AfterViewInit, OnDestroy {
         const dataTransfer = event.dataTransfer;
         // Present a native 'move item' effect
         dataTransfer.effectAllowed = 'move';
-        this.pickedUp = event.currentTarget as HTMLElement;
+        NovoDragBoxParent.pickedUp = {
+            element: event.currentTarget as HTMLElement,
+            parent: this
+        };
         this.savedOrder = [...this.trackedItems];
-        this.debugDragEvents = [];
     }
 
     onDragOver(event: DragEvent) {
-        if (!this.pickedUp) {
-            throw new Error('DragDrop: Received dragover event when no object was picked up');
+        if (!NovoDragBoxParent.pickedUp) {
+            console.warn('Received dragover event when no object was picked up');
+            return;
         }
-        this.applyTempSort(this.pickedUp, event.currentTarget as HTMLElement);
+        if (NovoDragBoxParent.pickedUp.parent === this) {
+            delete NovoDragBoxParent.pickedUp.newParent;
+            this.applyTempSort(NovoDragBoxParent.pickedUp.element, event.currentTarget as HTMLElement);
+        } else {
+            NovoDragBoxParent.pickedUp.newParent = this;
+            (event.currentTarget as HTMLElement).insertAdjacentElement('beforebegin', NovoDragBoxParent.pickedUp.element);
+            // this.moveChildToNewParent(NovoDragBoxParent.pickedUp.parent, NovoDragBoxParent.pickedUp.element, event.currentTarget as HTMLElement);
+        }
         event.preventDefault();
     }
 
-    // Equivalent of "finally" - this runs whether or not the drag finished on a valid ending location
-    onDragStop(event: DragEvent): void {
-        this.pickedUp = null;
+    private moveChildToNewParent(oldParent: NovoDragBoxParent<T>, newChild: HTMLElement): void {
+
+        // if the user dragged this item from one spot to another inside this new parent, it may already be in the tracking list of the new parent.
+        const trackItem = oldParent.trackedItems.find(item => item.element === newChild) || this.trackedItems.find(item => item.element === newChild);
+        console.log('removing event listeners', trackItem.element);
+        trackItem.eventRemovers.forEach(r => r());
+        this.registerChild(newChild, trackItem.item);
+    }
+
+    onDragStop(): void {
+        console.log('Drag stopped', NovoDragBoxParent.pickedUp?.newParent);
+        if (NovoDragBoxParent.pickedUp?.newParent && !this.element.contains(NovoDragBoxParent.pickedUp.element)) {
+            // This element is no longer in the same parent, meaning the user has completed a move from one drag box to another
+            NovoDragBoxParent.pickedUp.newParent.moveChildToNewParent(NovoDragBoxParent.pickedUp.parent, NovoDragBoxParent.pickedUp.element);
+        }
+        NovoDragBoxParent.pickedUp = null;
         this.savedOrder = null;
     }
 
     onDragFinish(event: DragEvent): void {
-        const draggedItem = this.trackedItems.find(item => item.element === this.pickedUp)?.item;
+        console.log('Drag finished', event.target);
+        // TODO: Emit this to other drag drop boxes?
+        const draggedItem = this.trackedItems.find(item => item.element === NovoDragBoxParent.pickedUp.element)?.item;
         this.trackedItems = Array.prototype.map.call(this.elementRef.nativeElement.children, child => {
             const item = this.trackedItems.find(item => item.element === child);
             if (!item) {
-                throw new Error('DragDrop: Error - could not reassociate an item post-drag');
+                // TODO: This simply means an item was moved out of our container? Remove our event listeners
+                throw new Error('DragDrop: Could not reassociate an item post-drag');
             }
             return item;
         });
@@ -148,20 +212,22 @@ export class NovoDragBoxParent<T> implements AfterViewInit, OnDestroy {
             allItems: this.itemsReordered,
             event
         });
-        event.preventDefault();
+        this.onDragStop();
+        // event.preventDefault();
     }
     
     /** - end per-item listeners */
 
-    @HostListener('window:mouseup', ['$event'])
-    onMouseUp() {
-        console.log('mouseup');
-        this.pickedUp = null;
-    }
-
     @HostListener('drag', ['$event'])
     onDragContinuous(event: DragEvent) {
-        const bounds = (this.elementRef.nativeElement as HTMLElement).getBoundingClientRect();
+        if (!NovoDragBoxParent.pickedUp) {
+            console.warn('Receiving continuous drag event with no drag object');
+        }
+        else if (NovoDragBoxParent.pickedUp.parent !== this || NovoDragBoxParent.pickedUp.newParent) {
+            // ignore
+            return;
+        }
+        const bounds = this.element.getBoundingClientRect();
         if (event.clientX > bounds.right || event.clientX < bounds.left ||
                 event.clientY > bounds.bottom || event.clientY < bounds.top) {
             // The user's mouse has exited the bounds of the draggable container - reset to the last saved state
@@ -175,8 +241,9 @@ export class NovoDragBoxParent<T> implements AfterViewInit, OnDestroy {
             return;
         }
         // Apply the "preview" effect from dragging one item to another
-        const aIndex = Array.prototype.indexOf.call(this.elementRef.nativeElement.children, showXElement);
-        const bIndex = Array.prototype.indexOf.call(this.elementRef.nativeElement.children, inPlaceOfY);
+        // TODO: If the element is coming from another drag box, then it is always "prepended".
+        const aIndex = Array.prototype.indexOf.call(this.element.children, showXElement);
+        const bIndex = Array.prototype.indexOf.call(this.element.children, inPlaceOfY);
         const diff = bIndex - aIndex;
         let insertPosition: InsertPosition;
         if (diff > 0) {
@@ -190,13 +257,14 @@ export class NovoDragBoxParent<T> implements AfterViewInit, OnDestroy {
     }
 
     private resetSorting(): void {
+        console.log(`Resetting sorting from directive with ${this.trackedItems.length} items`);
         // return to the order of elements from the last time we called onDragPickup
         if (!this.savedOrder) {
             throw new Error('DragDrop: Cannot reset sorting with no saved order');
         }
-        const boxElem = this.elementRef.nativeElement as HTMLElement;
-        for (let i = 0; i < boxElem.children.length; i++) {
-            const item = boxElem.children[i];
+        for (let i = 0; i < this.element.children.length; i++) {
+            // iterate through children, and for the first element that doesn't match the saved order, insert the missing element.
+            const item = this.element.children[i];
             if (this.savedOrder[i].element !== item && i > 0) {
                 this.savedOrder[i - 1].element.insertAdjacentElement('afterend', this.savedOrder[i].element);
             }
@@ -217,21 +285,3 @@ export class NovoDragBoxParent<T> implements AfterViewInit, OnDestroy {
         }
     }
 }
-
-/*
-@Directive({
-    selector: '[novoPreventDrag]'
-})
-export class NovoPreventDrag {
-    // Assign draggable so we can catch the dragstart event
-    @HostBinding('attr.draggable') draggable = 'true';
-
-    // Aria indicator: Not grabbable
-    @HostBinding('attr.grab') ariaGrab = 'false';
-
-    @HostListener('dragstart', ['$event'])
-    blockDrag(event: DragEvent) {
-        event.preventDefault();
-        event.stopPropagation();
-    }
-}*/
