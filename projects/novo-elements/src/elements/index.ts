@@ -15,6 +15,7 @@ export * from 'novo-elements/elements/data-table';
 export * from 'novo-elements/elements/date-picker';
 export * from 'novo-elements/elements/date-time-picker';
 export * from 'novo-elements/elements/divider';
+export * from 'novo-elements/elements/drag-drop';
 export * from 'novo-elements/elements/dropdown';
 export * from 'novo-elements/elements/expansion';
 export * from 'novo-elements/elements/field';
@@ -54,3 +55,4 @@ export * from 'novo-elements/elements/toolbar';
 export * from 'novo-elements/elements/tooltip';
 export * from 'novo-elements/elements/unless';
 export * from 'novo-elements/elements/value';
+
