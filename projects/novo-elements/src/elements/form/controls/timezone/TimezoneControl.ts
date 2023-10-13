@@ -1,6 +1,6 @@
 // APP
 import { findTimeZone, getZonedTime, listTimeZones } from 'timezone-support';
-import { formatZonedTime } from 'timezone-support/dist/parse-format';
+import { formatZonedTime } from 'novo-elements/utils';
 import { BaseControl, NovoControlConfig } from '../BaseControl';
 
 export class TimezoneControl extends BaseControl {
