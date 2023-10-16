@@ -3,14 +3,12 @@ import { Component, ElementRef, EventEmitter, forwardRef, Input, OnDestroy, OnIn
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 // Vendor
 // organize-imports-ignore
-import 'brace/index';
+import * as ace from 'brace';
+import 'brace/ext/language_tools.js';
 import 'brace/mode/javascript';
 import 'brace/theme/chrome';
-import 'brace/ext/language_tools.js';
 // APP
-import { Helpers } from 'novo-elements/utils';
-
-declare var ace: any;
+import { Helpers, notify } from 'novo-elements/utils';
 
 const ACE_VALUE_ACCESSOR = {
   provide: NG_VALUE_ACCESSOR,
@@ -18,6 +16,9 @@ const ACE_VALUE_ACCESSOR = {
   multi: true,
 };
 
+/**
+ * @deprecated Use NovoCodeEditor instead
+ */
 @Component({
   selector: 'novo-ace-editor',
   template: '',
@@ -61,7 +62,9 @@ export class NovoAceEditor implements ControlValueAccessor, OnInit, OnDestroy {
   private onChange = (_: any) => {};
   private onTouched = () => {};
 
-  constructor(private elementRef: ElementRef) {}
+  constructor(private elementRef: ElementRef) {
+    notify('[Deprecated]: The ace editor component is deprecated. Please migrate to novo-code-editor!');
+  }
 
   ngOnDestroy() {
     if (this.editor) {

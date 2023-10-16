@@ -8,6 +8,7 @@ module.exports = {
       diagnostics: true,
       stringifyContentPathRegex: '\\.html$',
     },
+    CKEDITOR: {}
   },
   collectCoverage: true,
   coverageReporters: ['json', 'lcov', 'text', 'text-summary', 'html'],

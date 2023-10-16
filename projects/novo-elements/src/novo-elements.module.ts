@@ -2,7 +2,7 @@
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { NovoAceEditorModule, NovoDragulaModule, NovoDragulaService, NovoNovoCKEditorModule } from 'novo-elements/addons';
+import { NovoAceEditorModule, NovoCodeEditorModule, NovoDragulaModule, NovoDragulaService, NovoNovoCKEditorModule } from 'novo-elements/addons';
 import {
   FormUtils,
   GooglePlacesModule, GooglePlacesService,
@@ -128,6 +128,7 @@ import {
     GooglePlacesModule,
     NovoValueModule,
     NovoAceEditorModule,
+    NovoCodeEditorModule,
     NovoIconModule,
     NovoExpansionModule,
     UnlessModule,
