@@ -13,7 +13,7 @@ describe('Control: TimezoneControl', () => {
   });
 
   it('should set the options', () => {
-    expect(control.options.length).toBe(387);
+    expect(control.options.length).toBe(351);
   });
 
   it('should set the placeholder', () => {

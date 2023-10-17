@@ -8,9 +8,9 @@ import { NovoPipesModule } from 'novo-elements/pipes';
 // APP
 import { NovoButtonModule } from 'novo-elements/elements/button';
 import { NovoCalendarModule } from 'novo-elements/elements/calendar';
+import { NovoChipsModule } from 'novo-elements/elements/chips';
 import { NovoOverlayModule } from 'novo-elements/elements/common';
 import { NovoIconModule } from 'novo-elements/elements/icon';
-import { NovoChipsModule } from 'novo-elements/elements/chips';
 import { NovoDatePickerElement } from './DatePicker';
 import { NovoDatePickerInputElement } from './DatePickerInput';
 import { NovoDateRangeInputElement } from './DateRangeInput';

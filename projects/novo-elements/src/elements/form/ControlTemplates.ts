@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, QueryList, ViewChildren } from '@angular/core';
-import { NovoTemplateService } from 'novo-elements/services';
 import { NovoTemplate } from 'novo-elements/elements/common';
+import { NovoTemplateService } from 'novo-elements/services';
 @Component({
   selector: 'novo-control-templates',
   template: `
@@ -19,7 +19,7 @@ import { NovoTemplate } from 'novo-elements/elements/common';
         [tooltipPreline]="control?.tooltipPreline"
         [removeTooltipArrow]="control?.removeTooltipArrow"
         [tooltipAutoPosition]="control?.tooltipAutoPosition"
-        [popover]="control.popoverContent"
+        [novoPopover]="control.popoverContent"
         [popoverHtmlContent]="control.popoverHtmlContent"
         [popoverTitle]="control.popoverTitle"
         [popoverPlacement]="control.popoverPlacement"
@@ -103,7 +103,7 @@ import { NovoTemplate } from 'novo-elements/elements/common';
         [tooltipPreline]="control?.tooltipPreline"
         [removeTooltipArrow]="control?.removeTooltipArrow"
         [tooltipAutoPosition]="control?.tooltipAutoPosition"
-        [popover]="control.popoverContent"
+        [novoPopover]="control.popoverContent"
         [popoverHtmlContent]="control.popoverHtmlContent"
         [popoverTitle]="control.popoverTitle"
         [popoverPlacement]="control.popoverPlacement"
@@ -156,6 +156,18 @@ import { NovoTemplate } from 'novo-elements/elements/common';
       </div>
     </ng-template>
 
+    <!--CodeEditor-->
+    <ng-template novoTemplate="code-editor" let-control let-form="form" let-errors="errors" let-methods="methods">
+      <div [formGroup]="form">
+        <novo-code-editor
+          [name]="control.key"
+          [formControlName]="control.key"
+          (focus)="methods.handleFocus($event)"
+          (blur)="methods.handleBlur($event)"
+        ></novo-code-editor>
+      </div>
+    </ng-template>
+
     <!--HTML5 Select-->
     <ng-template novoTemplate="native-select" let-control let-form="form" let-errors="errors" let-methods="methods">
       <div [formGroup]="form">
@@ -168,7 +180,7 @@ import { NovoTemplate } from 'novo-elements/elements/common';
           [tooltipPreline]="control?.tooltipPreline"
           [removeTooltipArrow]="control?.removeTooltipArrow"
           [tooltipAutoPosition]="control?.tooltipAutoPosition"
-          [popover]="control.popoverContent"
+          [novoPopover]="control.popoverContent"
           [popoverHtmlContent]="control.popoverHtmlContent"
           [popoverTitle]="control.popoverTitle"
           [popoverPlacement]="control.popoverPlacement"
@@ -201,7 +213,7 @@ import { NovoTemplate } from 'novo-elements/elements/common';
           [tooltipPreline]="control?.tooltipPreline"
           [removeTooltipArrow]="control?.removeTooltipArrow"
           [tooltipAutoPosition]="control?.tooltipAutoPosition"
-          [popover]="control.popoverContent"
+          [novoPopover]="control.popoverContent"
           [popoverHtmlContent]="control.popoverHtmlContent"
           [popoverTitle]="control.popoverTitle"
           [popoverPlacement]="control.popoverPlacement"
@@ -231,7 +243,7 @@ import { NovoTemplate } from 'novo-elements/elements/common';
           [tooltipPreline]="control?.tooltipPreline"
           [removeTooltipArrow]="control?.removeTooltipArrow"
           [tooltipAutoPosition]="control?.tooltipAutoPosition"
-          [popover]="control.popoverContent"
+          [novoPopover]="control.popoverContent"
           [popoverHtmlContent]="control.popoverHtmlContent"
           [popoverTitle]="control.popoverTitle"
           [popoverPlacement]="control.popoverPlacement"
@@ -253,6 +265,7 @@ import { NovoTemplate } from 'novo-elements/elements/common';
           [formControlName]="control.key"
           [placeholder]="control.placeholder"
           [parentScrollSelector]="control.parentScrollSelector"
+          [allowCustomValues]="control.config.allowCustomValues"
           *ngIf="!control.multiple"
           (select)="methods.modelChange($event)"
           (changed)="methods.modelChangeWithRaw($event)"
@@ -265,7 +278,7 @@ import { NovoTemplate } from 'novo-elements/elements/common';
           [tooltipPreline]="control?.tooltipPreline"
           [removeTooltipArrow]="control?.removeTooltipArrow"
           [tooltipAutoPosition]="control?.tooltipAutoPosition"
-          [popover]="control.popoverContent"
+          [novoPopover]="control.popoverContent"
           [popoverHtmlContent]="control.popoverHtmlContent"
           [popoverTitle]="control.popoverTitle"
           [popoverPlacement]="control.popoverPlacement"
@@ -281,6 +294,7 @@ import { NovoTemplate } from 'novo-elements/elements/common';
           [formControlName]="control.key"
           [placeholder]="control.placeholder"
           [maxlength]="control?.maxlength"
+          [allowCustomValues]="control.config.allowCustomValues"
           *ngIf="control.multiple && !control.config.columns"
           [closeOnSelect]="control.closeOnSelect"
           (changed)="methods.modelChangeWithRaw($event)"
@@ -293,7 +307,7 @@ import { NovoTemplate } from 'novo-elements/elements/common';
           [tooltipPreline]="control?.tooltipPreline"
           [removeTooltipArrow]="control?.removeTooltipArrow"
           [tooltipAutoPosition]="control?.tooltipAutoPosition"
-          [popover]="control.popoverContent"
+          [novoPopover]="control.popoverContent"
           [popoverHtmlContent]="control.popoverHtmlContent"
           [popoverTitle]="control.popoverTitle"
           [popoverPlacement]="control.popoverPlacement"
@@ -321,7 +335,7 @@ import { NovoTemplate } from 'novo-elements/elements/common';
           [tooltipPreline]="control?.tooltipPreline"
           [removeTooltipArrow]="control?.removeTooltipArrow"
           [tooltipAutoPosition]="control?.tooltipAutoPosition"
-          [popover]="control.popoverContent"
+          [novoPopover]="control.popoverContent"
           [popoverHtmlContent]="control.popoverHtmlContent"
           [popoverTitle]="control.popoverTitle"
           [popoverPlacement]="control.popoverPlacement"
@@ -348,7 +362,7 @@ import { NovoTemplate } from 'novo-elements/elements/common';
           [tooltipPreline]="control?.tooltipPreline"
           [removeTooltipArrow]="control?.removeTooltipArrow"
           [tooltipAutoPosition]="control?.tooltipAutoPosition"
-          [popover]="control.popoverContent"
+          [novoPopover]="control.popoverContent"
           [popoverHtmlContent]="control.popoverHtmlContent"
           [popoverTitle]="control.popoverTitle"
           [popoverPlacement]="control.popoverPlacement"
@@ -376,7 +390,7 @@ import { NovoTemplate } from 'novo-elements/elements/common';
           [tooltipPreline]="control?.tooltipPreline"
           [removeTooltipArrow]="control?.removeTooltipArrow"
           [tooltipAutoPosition]="control?.tooltipAutoPosition"
-          [popover]="control.popoverContent"
+          [novoPopover]="control.popoverContent"
           [popoverHtmlContent]="control.popoverHtmlContent"
           [popoverTitle]="control.popoverTitle"
           [popoverPlacement]="control.popoverPlacement"
@@ -409,7 +423,7 @@ import { NovoTemplate } from 'novo-elements/elements/common';
             [tooltipPreline]="control?.tooltipPreline"
             [removeTooltipArrow]="control?.removeTooltipArrow"
             [tooltipAutoPosition]="control?.tooltipAutoPosition"
-            [popover]="control.popoverContent"
+            [novoPopover]="control.popoverContent"
             [popoverHtmlContent]="control.popoverHtmlContent"
             [popoverTitle]="control.popoverTitle"
             [popoverPlacement]="control.popoverPlacement"
@@ -439,7 +453,7 @@ import { NovoTemplate } from 'novo-elements/elements/common';
         [tooltipPreline]="control?.tooltipPreline"
         [removeTooltipArrow]="control?.removeTooltipArrow"
         [tooltipAutoPosition]="control?.tooltipAutoPosition"
-        [popover]="control.popoverContent"
+        [novoPopover]="control.popoverContent"
         [popoverHtmlContent]="control.popoverHtmlContent"
         [popoverTitle]="control.popoverTitle"
         [popoverPlacement]="control.popoverPlacement"
@@ -470,7 +484,7 @@ import { NovoTemplate } from 'novo-elements/elements/common';
         [tooltipPreline]="control?.tooltipPreline"
         [removeTooltipArrow]="control?.removeTooltipArrow"
         [tooltipAutoPosition]="control?.tooltipAutoPosition"
-        [popover]="control.popoverContent"
+        [novoPopover]="control.popoverContent"
         [popoverHtmlContent]="control.popoverHtmlContent"
         [popoverTitle]="control.popoverTitle"
         [popoverPlacement]="control.popoverPlacement"
@@ -503,7 +517,7 @@ import { NovoTemplate } from 'novo-elements/elements/common';
         [tooltipPreline]="control?.tooltipPreline"
         [removeTooltipArrow]="control?.removeTooltipArrow"
         [tooltipAutoPosition]="control?.tooltipAutoPosition"
-        [popover]="control.popoverContent"
+        [novoPopover]="control.popoverContent"
         [popoverHtmlContent]="control.popoverHtmlContent"
         [popoverTitle]="control.popoverTitle"
         [popoverPlacement]="control.popoverPlacement"
@@ -543,7 +557,7 @@ import { NovoTemplate } from 'novo-elements/elements/common';
         [tooltipPreline]="control?.tooltipPreline"
         [removeTooltipArrow]="control?.removeTooltipArrow"
         [tooltipAutoPosition]="control?.tooltipAutoPosition"
-        [popover]="control.popoverContent"
+        [novoPopover]="control.popoverContent"
         [popoverHtmlContent]="control.popoverHtmlContent"
         [popoverTitle]="control.popoverTitle"
         [popoverPlacement]="control.popoverPlacement"
@@ -597,7 +611,7 @@ import { NovoTemplate } from 'novo-elements/elements/common';
           [tooltipPreline]="control?.tooltipPreline"
           [removeTooltipArrow]="control?.removeTooltipArrow"
           [tooltipAutoPosition]="control?.tooltipAutoPosition"
-          [popover]="control.popoverContent"
+          [novoPopover]="control.popoverContent"
           [popoverHtmlContent]="control.popoverHtmlContent"
           [popoverTitle]="control.popoverTitle"
           [popoverPlacement]="control.popoverPlacement"
@@ -622,7 +636,7 @@ import { NovoTemplate } from 'novo-elements/elements/common';
           [tooltipPreline]="control?.tooltipPreline"
           [removeTooltipArrow]="control?.removeTooltipArrow"
           [tooltipAutoPosition]="control?.tooltipAutoPosition"
-          [popover]="control.popoverContent"
+          [novoPopover]="control.popoverContent"
           [popoverHtmlContent]="control.popoverHtmlContent"
           [popoverTitle]="control.popoverTitle"
           [popoverPlacement]="control.popoverPlacement"
@@ -648,7 +662,7 @@ import { NovoTemplate } from 'novo-elements/elements/common';
           [tooltipPreline]="control?.tooltipPreline"
           [removeTooltipArrow]="control?.removeTooltipArrow"
           [tooltipAutoPosition]="control?.tooltipAutoPosition"
-          [popover]="control.popoverContent"
+          [novoPopover]="control.popoverContent"
           [popoverHtmlContent]="control.popoverHtmlContent"
           [popoverTitle]="control.popoverTitle"
           [popoverPlacement]="control.popoverPlacement"
@@ -677,7 +691,7 @@ import { NovoTemplate } from 'novo-elements/elements/common';
           [tooltipPreline]="control?.tooltipPreline"
           [removeTooltipArrow]="control?.removeTooltipArrow"
           [tooltipAutoPosition]="control?.tooltipAutoPosition"
-          [popover]="control.popoverContent"
+          [novoPopover]="control.popoverContent"
           [popoverHtmlContent]="control.popoverHtmlContent"
           [popoverTitle]="control.popoverTitle"
           [popoverPlacement]="control.popoverPlacement"

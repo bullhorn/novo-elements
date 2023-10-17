@@ -18,6 +18,7 @@ import { DateUtil } from 'novo-elements/utils';
       <i class="bhi-arrow-right" (click)="addDate()"></i>
     </div>
   `,
+  styleUrls: ['./AgendaDateChange.scss'],
 })
 export class NovoAgendaDateChangeElement {
   /**

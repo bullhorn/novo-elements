@@ -1,58 +1,49 @@
 @import "../common/typography/text.mixins";
 
-novo-radio-group {
-  display: flex;
-
-  &.novo-radio-group-appearance-horizontal {
-    novo-radio:not(:last-child) {
-      .novo-radio-button-label {
-        margin-right: 1rem;
-      }
+:host-context(novo-radio-group) {
+  margin: 0;
+  novo-button {
+    pointer-events: none;
+    border-radius: 0 !important;
+    &.unchecked {
+      opacity: 0.6;
+    }
+    &[theme="icon"] {
+      margin-right: 0;
+      border: 1px solid $positive;
     }
   }
-
-  &.novo-radio-group-appearance-vertical {
-    flex-flow: column;
-    gap: 0.2rem;
-  }
-
-  > novo-radio {
-    margin: 0;
+  &:first-child {
     novo-button {
-      pointer-events: none;
-      border-radius: 0 !important;
-      &.unchecked {
-        opacity: 0.6;
-      }
+      border-top-left-radius: 3px !important;
+      border-bottom-left-radius: 3px !important;
       &[theme="icon"] {
-        margin-right: 0;
-        border: 1px solid $positive;
+        border-right-width: 0px !important;
       }
     }
-    &:first-child {
-      novo-button {
-        border-top-left-radius: 3px !important;
-        border-bottom-left-radius: 3px !important;
-        &[theme="icon"] {
-          border-right-width: 0px !important;
-        }
-      }
-    }
-    &:last-child {
-      novo-button {
-        border-top-right-radius: 3px !important;
-        border-bottom-right-radius: 3px !important;
-        border-right-width: 1px !important;
-        border-right-style: solid !important;
-        &[theme="icon"] {
-          border-left-width: 0px !important;
-        }
+  }
+  &:last-child {
+    novo-button {
+      border-top-right-radius: 3px !important;
+      border-bottom-right-radius: 3px !important;
+      border-right-width: 1px !important;
+      border-right-style: solid !important;
+      &[theme="icon"] {
+        border-left-width: 0px !important;
       }
     }
   }
 }
 
-novo-radio {
+:host-context(novo-radio-group.novo-radio-group-appearance-horizontal) {
+  :host:not(:last-child) {
+    .novo-radio-button-label {
+      margin-right: 1rem;
+    }
+  }
+}
+
+:host {
   margin-right: 10px;
   position: relative;
   &.vertical {
@@ -77,7 +68,7 @@ novo-radio {
       @include novo-body-text();
       display: inline;
     }
-    i {
+    ::ng-deep i {
       margin-right: 5px;
       transition: all 200ms ease-in-out;
       &.bhi-checkbox-empty,

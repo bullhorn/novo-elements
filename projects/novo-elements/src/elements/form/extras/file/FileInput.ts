@@ -15,12 +15,13 @@ import {
   TemplateRef,
   ViewChild,
   ViewContainerRef,
+  ViewEncapsulation,
 } from '@angular/core';
 import { ControlValueAccessor, FormGroupDirective, NgControl, NgForm } from '@angular/forms';
-import { NovoDragulaService } from 'novo-elements/elements/dragula';
-import { NovoLabelService } from 'novo-elements/services';
+import { NovoDragulaService } from 'novo-elements/addons/dragula';
 import { CanUpdateErrorStateCtor, ErrorStateMatcher, mixinErrorState } from 'novo-elements/elements/common';
 import { NovoFieldControl } from 'novo-elements/elements/field';
+import { NovoLabelService } from 'novo-elements/services';
 import { NovoFile } from './extras/file/File';
 
 // Value accessor for the component (supports ngModel)
@@ -154,7 +155,9 @@ const NovoFileInputMixins: CanUpdateErrorStateCtor & typeof NovoFileInputBase = 
         </div>
       </div>
     </ng-template>
-`,
+  `,
+  styleUrls: ['./FileInput.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class NovoFileInputElement extends NovoFileInputMixins implements NovoFieldControl<any>, ControlValueAccessor, OnInit, OnDestroy {
   private _uniqueId: string = `novo-file-input-${++nextId}`;

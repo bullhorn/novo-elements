@@ -18,7 +18,7 @@ import { isValid } from 'date-fns';
 import { MaskedEnum, MaskedRange } from 'imask';
 import { NovoLabelService } from 'novo-elements/services';
 import { DateUtil, Key } from 'novo-elements/utils';
-import { NovoInputFormat, NOVO_INPUT_FORMAT } from './base-format';
+import { NOVO_INPUT_FORMAT, NovoInputFormat } from './base-format';
 
 export const TIMEFORMAT_VALUE_ACCESSOR = {
   provide: NG_VALUE_ACCESSOR,

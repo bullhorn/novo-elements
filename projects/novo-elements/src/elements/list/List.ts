@@ -10,6 +10,7 @@ import { Component, ContentChild, ElementRef, Input, OnInit } from '@angular/cor
     '[attr.theme]': 'theme',
   },
   template: ` <ng-content></ng-content> `,
+  styleUrls: ['./List.scss'],
 })
 export class NovoListElement {
   @Input()
@@ -23,6 +24,7 @@ export class NovoListElement {
 @Component({
   selector: 'item-avatar, novo-item-avatar',
   template: ` <novo-icon *ngIf="icon" [color]="color || icon">{{ icon }}</novo-icon> `,
+  styleUrls: ['./list-item-header-avatar.scss'],
   host: {
     class: 'novo-item-avatar',
   },
@@ -37,6 +39,7 @@ export class NovoItemAvatarElement {
 @Component({
   selector: 'item-title, novo-item-title',
   template: `<ng-content></ng-content>`,
+  styleUrls: ['./list-item-header-title.scss'],
   host: {
     class: 'novo-item-title',
   },
@@ -52,6 +55,7 @@ export class NovoItemTitleElement {}
       <ng-content select="item-header-end, novo-item-header-end"></ng-content>
     </novo-title>
   `,
+  styleUrls: ['./list-item-header.scss'],
   host: {
     class: 'novo-item-header',
   },
@@ -61,6 +65,7 @@ export class NovoItemHeaderElement {}
 @Component({
   selector: 'item-header-end, novo-item-header-end',
   template: ` <ng-content></ng-content> `,
+  styleUrls: ['./list-item-header-end.scss'],
   host: {
     class: 'novo-item-header-end',
   },
@@ -75,6 +80,7 @@ export class NovoItemDateElement {}
     '[class.horizontal-list]': 'direction === "horizontal"',
   },
   template: ` <ng-content></ng-content> `,
+  styleUrls: ['./list-item-content.scss'],
 })
 export class NovoItemContentElement {
   @Input()
@@ -84,6 +90,7 @@ export class NovoItemContentElement {
 @Component({
   selector: 'item-end, novo-item-end',
   template: ` <ng-content></ng-content> `,
+  styleUrls: ['./list-item-end.scss'],
   host: {
     class: 'novo-item-end',
   },
@@ -100,6 +107,7 @@ export class NovoItemEndElement {}
     <ng-content></ng-content>
     <ng-content select="item-end, novo-item-end"></ng-content>
   `,
+  styleUrls: ['./list-item.scss'],
   host: {
     class: 'novo-list-item',
   },

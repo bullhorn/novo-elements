@@ -8,10 +8,17 @@ module.exports = {
       diagnostics: true,
       stringifyContentPathRegex: '\\.html$',
     },
+    CKEDITOR: {}
   },
   collectCoverage: true,
   coverageReporters: ['json', 'lcov', 'text', 'text-summary', 'html'],
-  coveragePathIgnorePatterns: ['/node_modules/', 'novo-elements/jest.setup.ts'],
+  coveragePathIgnorePatterns: [
+    '/node_modules/',
+    'novo-elements/jest.setup.ts',
+    '.spec.ts',
+    'projects/novo-examples',
+    'index.ts'
+  ],
   modulePathIgnorePatterns: ['/dist/', '/novo-elements/package.json'],
   testEnvironmentOptions: {
     url: 'http://localhost',

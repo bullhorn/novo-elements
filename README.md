@@ -49,7 +49,7 @@ If using SCSS/SASS you will need to include the following includes: `node_module
 
 With Novo Elements there are a few hard coded labels throughout the library. To override these labels with your own, you will simply extend the `NovoLabelService` and override any labels that you wish.
 
-To make Angular2 use this new class over the default one you can provide in the bootstrapping of your application as a provider.
+To make Angular use this new class over the default one you can provide in the bootstrapping of your application as a provider.
 
 ```ts
 { provide: NovoLabelService, useClass: MyLabelService }
@@ -62,7 +62,7 @@ import {NOVO_ELEMENTS_LABELS_PROVIDERS} from 'novo-elements';
 bootstrap(MyApp [..NOVO_ELEMENTS_LABELS_PROVIDERS]);
 ```
 
-## Upgrading NovoElement
+## Upgrading Novo Elements
 
 ### To Version 6
 

@@ -1,5 +1,5 @@
 // NG2
-import { ChangeDetectorRef, Component, DoCheck, ElementRef, EventEmitter, Input, Output, QueryList, ViewChildren } from '@angular/core';
+import { ChangeDetectorRef, Component, DoCheck, ElementRef, EventEmitter, Input, Output, QueryList, ViewChildren, ViewEncapsulation } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormGroup } from '@angular/forms';
 // Vendor
 import { startOfToday, startOfTomorrow } from 'date-fns';
@@ -380,6 +380,8 @@ export enum NovoTableMode {
       </novo-form>
     </div>
   `,
+  styleUrls: ['./Table.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class NovoTableElement implements DoCheck {
   @ViewChildren('filterInput', { read: ElementRef })

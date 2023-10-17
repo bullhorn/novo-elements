@@ -1,10 +1,6 @@
-@import "./ChipList.scss";
 @import "../common/typography/text.mixins.scss";
 
-chips,
-novo-chips,
-entity-chips,
-novo-entity-chips {
+:host {
   width: 100%;
   display: flex;
   align-items: center;
@@ -13,7 +9,7 @@ novo-entity-chips {
   border-bottom: 1px solid lighten($dark, 45%);
   transition: all 200ms ease-in-out;
   position: relative;
-  padding: 5px 20px 5px 0;
+  padding: 2px 0;
   &.with-value {
     margin-bottom: 20px;
   }
@@ -47,15 +43,6 @@ novo-entity-chips {
     flex-flow: row wrap;
     gap: 0.4rem;
   }
-  novo-picker {
-    position: inherit;
-    > i {
-      display: none;
-    }
-    div.picker-results-container {
-      left: 0;
-    }
-  }
   label.clear-all {
     flex: 1 100%;
     position: absolute;
@@ -82,37 +69,34 @@ novo-entity-chips {
     //   bottom: 14px;
     // }
   }
-}
 
-chips,
-novo-chips,
-entity-chips,
-novo-entity-chips {
   & + i {
     position: absolute;
     right: 0;
     bottom: 7px;
   }
-  padding: 2px 0;
+  &.with-value {
+    margin-bottom: 0;
+  }
+
   novo-picker {
+    position: inherit;
     padding-bottom: 0;
-    > input {
+    > ::ng-deep input {
       border: none;
       border-bottom: none !important;
       &:disabled {
         border-bottom: none !important;
       }
     }
+    > ::ng-deep i {
+      display: none;
+    }
+    div.picker-results-container {
+      left: 0;
+    }
   }
-  &.with-value {
-    margin-bottom: 0;
-  }
-}
 
-chips,
-novo-chips,
-entity-chips,
-novo-entity-chips {
   picker-results {
     position: absolute;
     color: black;
@@ -211,72 +195,4 @@ novo-entity-chips {
 
 entity-chip-results {
   max-width: none !important;
-}
-
-novo-row-chips {
-  display: flex;
-  flex-flow: column;
-  gap: 0.8rem;
-
-  .novo-row-chips-columns {
-    display: flex;
-    align-items: flex-end;
-    margin-bottom: 1em;
-    .column-label {
-      @include novo-label-text();
-      display: flex;
-      flex: 1;
-      margin-right: 1em;
-      &:first-of-type {
-        flex: 0 0 275px;
-      }
-    }
-    .column-data {
-      display: flex;
-      align-items: center;
-      background: transparent !important;
-      border: none;
-      border-bottom: 1px dashed lighten($dark, 30%);
-      border-radius: 0;
-      outline: none;
-      height: 2em;
-      width: 100%;
-      margin: 0 1em 0 0;
-      &.editable {
-        border-bottom: none;
-        input {
-          background: none;
-          border: none;
-        }
-      }
-      &:first-of-type {
-        flex: 0 0 275px;
-      }
-      span {
-        color: inherit;
-        align-items: flex-start;
-        display: flex;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        -webkit-line-clamp: 2;
-        line-clamp: 2;
-        line-height: 1em;
-        max-height: 2em;
-        min-height: 1em;
-      }
-    }
-    i.bhi-delete-o {
-      color: $negative;
-    }
-  }
-  .novo-chip.novo-row-chip {
-    padding: 0;
-  }
-  .novo-row-chips-empty-message {
-    font-style: italic;
-    color: $grey;
-  }
-  i {
-    cursor: pointer;
-  }
 }

@@ -11,6 +11,7 @@ import {
   Output,
   ViewChild,
   ViewContainerRef,
+  ViewEncapsulation,
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { fromEvent } from 'rxjs';
@@ -69,6 +70,8 @@ const PICKER_VALUE_ACCESSOR = {
       <ng-content></ng-content>
     </novo-overlay-template>
   `,
+  styleUrls: ['./Picker.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class NovoPickerElement implements OnInit {
   // Container for the results
@@ -107,6 +110,8 @@ export class NovoPickerElement implements OnInit {
   overrideElement: ElementRef;
   @Input()
   maxlength: number;
+  @Input()
+  allowCustomValues = false;
 
   // Disable from typing into the picker (result template does everything)
   @Input()
@@ -244,6 +249,7 @@ export class NovoPickerElement implements OnInit {
 
     if (wipeTerm) {
       this.term = '';
+      this.popup.instance.customTextValue = null;
       this.hideResults();
     }
     this.ref.markForCheck();
@@ -327,6 +333,13 @@ export class NovoPickerElement implements OnInit {
   // Makes sure to clear the model if the user clears the text box
   checkTerm(event) {
     this.typing.emit(event);
+    if (this.allowCustomValues) {
+      if (this.term) {
+        this.popup.instance.customTextValue = { label: this.term, value: this.term }
+      } else {
+        this.popup.instance.customTextValue = null;
+      }
+    }
     if ((!event || !event.length) && !Helpers.isEmpty(this._value)) {
       this._value = null;
       this.onModelChange(this._value);

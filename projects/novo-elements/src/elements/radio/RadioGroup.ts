@@ -46,6 +46,7 @@ const NovoRadioGroupMixins: CanUpdateErrorStateCtor & typeof NovoRadioGroupBase 
     { provide: NovoFieldControl, useExisting: NovoRadioGroup },
   ],
   template: '<ng-content></ng-content>',
+  styleUrls: ['./radio-group.scss'],
   host: {
     class: 'novo-radio-group',
     '[class.novo-radio-group-appearance-horizontal]': 'appearance=="horizontal"',

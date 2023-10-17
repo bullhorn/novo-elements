@@ -22,6 +22,7 @@ const MAX_PAGES_DISPLAYED = 5;
     <ng-container *ngIf="theme === 'basic' || theme === 'basic-wide'">
       <div class="novo-data-table-pagination-size">
         <novo-tiles
+          class="pagination-tiles"
           *ngIf="displayedPageSizeOptions.length > 1"
           [(ngModel)]="pageSize"
           [options]="displayedPageSizeOptions"
@@ -95,6 +96,7 @@ const MAX_PAGES_DISPLAYED = 5;
               (click)="paginationRefreshSubject.next()">{{ labels.refreshPagination }}</button>
     </ng-container>
   `,
+  styleUrls: ['./data-table-pagination.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NovoDataTablePagination<T> implements OnInit, OnDestroy {
@@ -146,7 +148,7 @@ export class NovoDataTablePagination<T> implements OnInit, OnDestroy {
   @Input()
   public errorLoading: boolean = false;
   @Input()
-  public paginationRefreshSubject = new Subject();
+  public paginationRefreshSubject = new Subject<void>();
 
   @Input()
   get length(): number {

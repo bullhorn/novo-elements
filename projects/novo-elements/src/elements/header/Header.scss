@@ -1,4 +1,7 @@
-.novo-header {
+@import "../../styles/variables.scss";
+@import "../common/typography/text.mixins.scss";
+
+:host {
   display: block;
   background-color: var(--background-bright, $white);
 
@@ -37,10 +40,17 @@
     div.header-title {
       display: flex;
       align-items: center;
-      max-width: calc(100% - 40px);
       gap: $spacing-sm;
+      // making room for ellipsis
+      padding-inline-end: 2em;
+      // prevent pushing other flex content
+      min-width: 0;
+      flex-shrink: 1;
+      .novo-title {
+        overflow: hidden;
+      }
 
-      novo-icon {
+      ::ng-deep novo-icon {
         margin-right: 1rem;
       }
     }
@@ -64,19 +74,19 @@
         padding-right: 20px;
       }
     }
-    > section {
+    > ::ng-deep section {
       flex: 2 2 250px;
       min-width: 100px;
     }
-    utils,
-    novo-utils {
+    ::ng-deep utils,
+    ::ng-deep novo-utils {
       display: flex;
       align-items: center;
       justify-content: flex-start;
       gap: $spacing-sm;
     }
 
-    .novo-action {
+    ::ng-deep .novo-action {
       display: flex;
     }
   }
@@ -85,7 +95,7 @@
     &.novo-accent-#{$name} {
       .header-titles,
       .header-title {
-        .novo-icon {
+        ::ng-deep .novo-icon {
           color: $color;
         }
       }
@@ -99,10 +109,12 @@
         color: $contrast;
         border-bottom: none;
       }
-      .novo-title {
+      ::ng-deep .novo-title {
         color: inherit;
+        overflow: hidden;
+        padding-right: 0.5rem;
       }
-      .novo-action {
+      ::ng-deep .novo-action {
         button,
         .novo-button {
           color: inherit;
@@ -114,7 +126,7 @@
   & > main {
     padding: 4px 16px 4px 32px;
   }
-  & > novo-nav {
+  & > ::ng-deep novo-nav {
     padding-left: 16px;
     &.block {
       padding-left: 0;
@@ -128,7 +140,7 @@
     > section {
       height: 3.6rem;
     }
-    .novo-icon {
+    ::ng-deep .novo-icon {
       margin-right: 0.5rem !important;
       font-size: 1.8rem;
     }
@@ -138,12 +150,4 @@
     display: flex;
     flex-flow: row nowrap;
   }
-}
-
-header-spacer {
-  display: inline-block;
-  height: 1.8em;
-  width: 2px;
-  margin: 0 0.6em;
-  background-color: rgba(0, 0, 0, 0.25);
 }

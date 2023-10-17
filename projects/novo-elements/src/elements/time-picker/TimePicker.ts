@@ -120,6 +120,7 @@ export enum TIME_VALUE_FORMATS {
       </div>
     </div>
   `,
+  styleUrls: ['./TimePicker.scss'],
   host: {
     class: 'novo-time-picker',
     '[class.military]': 'military',

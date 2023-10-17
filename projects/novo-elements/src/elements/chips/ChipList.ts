@@ -62,6 +62,7 @@ export class NovoChipListChange {
 @Component({
   selector: 'novo-chip-list',
   template: `<div class="novo-chip-list-wrapper"><ng-content></ng-content></div>`,
+  styleUrls: ['./ChipList.scss'],
   exportAs: 'novoChipList',
   host: {
     '[attr.tabindex]': 'disabled ? null : _tabIndex',
@@ -474,7 +475,7 @@ export class NovoChipList
   }
 
   removeValue(value: any): void {
-    if (this.value) {
+    if (this.value && Array.isArray(this.value)) {
       this.value = this.value.filter((it) => !this.compareWith(it, value));
     }
   }

@@ -1,10 +1,10 @@
 // NG
 import { async, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { NovoDragulaElement, NovoDragulaService } from 'novo-elements/elements/dragula';
+import { NovoDragulaElement, NovoDragulaService } from 'novo-elements/addons/dragula';
+import { NovoLoadingElement } from 'novo-elements/elements/loading';
 import { DecodeURIPipe } from 'novo-elements/pipes';
 import { NovoLabelService } from 'novo-elements/services';
-import { NovoLoadingElement } from 'novo-elements/elements/loading';
 // App
 import { NovoFileInputElement } from './FileInput';
 

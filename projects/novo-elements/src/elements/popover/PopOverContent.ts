@@ -22,6 +22,7 @@ import { PopOverDirective } from './PopOver';
       </div>
     </div>
   `,
+  styleUrls: ['./PopOver.scss'],
 })
 export class PopOverContent implements AfterViewInit {
   @Input()

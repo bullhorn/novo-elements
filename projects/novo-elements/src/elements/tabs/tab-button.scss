@@ -1,0 +1,54 @@
+@import "../common/typography/text.mixins";
+
+:host {
+  padding: var(--spacing-md);
+  cursor: pointer;
+  transition: all 120ms ease-in-out;
+  &.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    &:hover {
+      opacity: 0.5;
+    }
+  }
+}
+
+// inside color
+:host-context(novo-nav[theme="neutral"]),
+:host-context(novo-nav[theme="color"]) {
+  color: rgba(255, 255, 255, 0.75);
+  &.active {
+    color: #fff;
+    background: rgba(0, 0, 0, 0.2);
+  }
+  &:hover {
+    background: rgba(0, 0, 0, 0.1);
+  }
+  &.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    &:hover {
+      opacity: 0.5;
+    }
+  }
+}
+
+:host-context(novo-nav[theme="white"]) {
+  color: var(--color-text);
+  opacity: 0.75;
+  &.active {
+    color: var(--color-selection);
+    background: rgba(0, 0, 0, 0.05);
+    opacity: 1;
+  }
+  &:hover {
+    opacity: 1;
+  }
+  &.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    &:hover {
+      opacity: 0.5;
+    }
+  }
+}
