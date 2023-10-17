@@ -27,6 +27,7 @@ class FakeEvent {
         }
     }
     preventDefault() {}
+    stopPropagation() {}
 
     dataTransfer = {
       effectAllowed: 'none',
