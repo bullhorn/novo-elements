@@ -63,7 +63,7 @@ export class NovoDragBoxParent<T> implements AfterViewInit, OnDestroy {
 
     private registerChild(element: HTMLElement, index: number) {
         const listeners = [
-            this.renderer.listen(element, 'dragstart', this.onDragPickup.bind(this)),
+            this.renderer.listen(element, 'dragstart', this.onDragStart.bind(this)),
             this.renderer.listen(element, 'drop', this.onDragFinish.bind(this)),
             this.renderer.listen(element, 'dragover', this.onDragOver.bind(this)),
             this.renderer.listen(element, 'dragend', this.onDragStop.bind(this))
@@ -106,7 +106,7 @@ export class NovoDragBoxParent<T> implements AfterViewInit, OnDestroy {
 
     /** Per-item listeners */
 
-    onDragPickup(event: DragEvent) {
+    onDragStart(event: DragEvent) {
         if (this.shouldBlockDragStart(event)) {
             event.preventDefault();
             return;
@@ -115,29 +115,38 @@ export class NovoDragBoxParent<T> implements AfterViewInit, OnDestroy {
         // Present a native 'move item' effect
         dataTransfer.effectAllowed = 'move';
         this.pickedUp = event.target as HTMLElement;
+        event.stopPropagation();
         this.savedOrder = [...this.trackedItems];
     }
 
     onDragOver(event: DragEvent) {
+        const currentTarget = event.currentTarget as HTMLElement;
         // If this element doesn't containt the target, then this is for a different drag region - ignore
+        if (currentTarget.parentElement !== this.element) {
+            return;
+        }
         event.preventDefault();
+        
         if (!this.pickedUp) {
             event.dataTransfer.dropEffect = 'none';
-            // Received dragover event when no object was picked up. This may be targeting another region
+            // Received dragover event when no object was picked up, or on a different parent. This may be targeting another region
             return;
         }
         event.dataTransfer.dropEffect = 'move';
-        this.applyTempSort(this.pickedUp, event.currentTarget as HTMLElement);
+        event.stopPropagation();
+        this.applyTempSort(this.pickedUp, currentTarget);
     }
 
     // Equivalent of "finally" - this runs whether or not the drag finished on a valid ending location
     onDragStop(event: DragEvent): void {
         this.pickedUp = null;
         this.savedOrder = null;
+        event.stopPropagation();
     }
 
     onDragFinish(event: DragEvent): void {
         event.preventDefault();
+        event.stopPropagation();
         if (!this.element.contains(event.currentTarget as HTMLElement)) {
             // this is for a different drag region - ignore
             return;
