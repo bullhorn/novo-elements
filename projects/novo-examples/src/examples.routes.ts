@@ -1,11 +1,11 @@
 
 /* tslint:disable */
 /** DO NOT MANUALLY EDIT THIS FILE, IT IS GENERATED 'build-examples-module' */
-import { Component, NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { NovoElementsModule } from 'novo-elements';
-import { NovoExamplesSharedModule, TabsLayout } from './_shared';
+import {NgModule, Component} from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
 import { NovoExamplesModule } from './examples.module';
+import { NovoExamplesSharedModule, TabsLayout, DefaultLayout } from './_shared';
+import { NovoElementsModule } from 'novo-elements';
 
 @Component({
   selector: 'agenda-design-page',
@@ -6803,6 +6803,7 @@ const routes: Routes = [
   { path: 'design/spacing', component: SpacingPage, data: { title: 'Spacing', section: 'design' } },
   { path: 'design/typography', component: TypographyPage, data: { title: 'Typography', section: 'design' } },
   { path: 'form-controls/checkbox', component: CheckboxPage, data: { title: 'Checkbox', section: 'form-controls' } },
+  { path: 'form-controls/ck-editor', component: CkEditorPage, data: { title: 'Ck Editor', section: 'form-controls' } },
   { path: 'form-controls/color-picker', component: ColorPickerPage, data: { title: 'Color Picker', section: 'form-controls' } },
   { path: 'form-controls/dynamic-form', component: DynamicFormPage, data: { title: 'Dynamic Form', section: 'form-controls' } },
   { path: 'form-controls/form-groups', component: FormGroupsPage, data: { title: 'Form Groups', section: 'form-controls' } },

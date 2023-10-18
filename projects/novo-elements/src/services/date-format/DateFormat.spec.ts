@@ -331,13 +331,19 @@ describe('Service: DateFormatService', () => {
     });
     it('should call parseDateString for dates', () => {
       jest.spyOn(service, 'parseDateString');
-      service.parseString('', false, 'date');
+      service.parseString('a', false, 'date');
       expect(service.parseDateString).toHaveBeenCalled();
     });
     it('should call parseTimeString for time', () => {
       jest.spyOn(service, 'parseTimeString');
-      service.parseString('', false, 'time');
-      expect(service.parseTimeString).toHaveBeenCalledWith('', false);
+      service.parseString('a', false, 'time');
+      expect(service.parseTimeString).toHaveBeenCalledWith('a', false);
+    });
+    it('should immediately return null for blank values', () => {
+      jest.spyOn(service, 'parseTimeString');
+      const retval = service.parseString('', false, 'time');
+      expect(service.parseTimeString).not.toHaveBeenCalled();
+      expect(retval).toBeNull();
     });
   });
 

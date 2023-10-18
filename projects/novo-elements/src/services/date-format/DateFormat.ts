@@ -2,8 +2,9 @@
 import { Injectable } from '@angular/core';
 import { NovoLabelService } from '../novo-label-service';
 // APP
+import { format, parse } from 'date-fns';
 import { MaskedEnum, MaskedRange } from 'imask';
-import { DateUtil, Helpers } from 'novo-elements/utils';
+import { DateUtil, Helpers, convertTokens } from 'novo-elements/utils';
 
 @Injectable()
 export class DateFormatService {
@@ -94,6 +95,58 @@ export class DateFormatService {
     return this.labels.timeFormatPlaceholderAM;
   }
 
+  parseCustomDateString(dateString: string, customFormat?: string): [Date, string, boolean] {
+    let isInvalidDate = true;
+    let date: Date = null;
+    if (!customFormat) {
+      customFormat = this.labels.dateFormatString();
+    }
+    customFormat = convertTokens(customFormat);
+    const [cleanDateString, cleanFormat] = this.removeNonstandardFormatCharacters(dateString, customFormat);
+    try {
+      date = parse(cleanDateString, cleanFormat, new Date(), {
+        useAdditionalWeekYearTokens: false
+      });
+      if (isNaN(date.getTime())) {
+        date = null;
+      } else if (cleanDateString !== dateString) {
+        // Verify that this parse matches the original dateString through this format. If not, then something may have mismatched -
+        // in which case we consider the date to be invalid.
+        // For instance, if we parsed "Fri Oct 18, 2023" as " Oct 18 2023" (removing the duplicative day-of-week) then it
+        // would re-format as "Wed Oct 18 2023" and is an invalid date.
+        const reformattedDate = format(date, customFormat);
+        if (reformattedDate !== dateString) {
+          date = null;
+        } else {
+          isInvalidDate = false;
+        }
+      } else {
+        isInvalidDate = false;
+      }
+    } catch(err) {
+      // ignore error - keep isInvalidDate true and date null
+    }
+    return [date, dateString, isInvalidDate];
+  }
+
+  /**
+   * Certain date format characters are considered nonstandard. We can still use them, but remove them for date parsing to avoid errors
+   * @param dateString 
+   * @param format 
+   * @returns date string and format in array, both having had their 
+   */
+  private removeNonstandardFormatCharacters(dateString: string, format: string): [string, string] {
+    const bannedChars = /[iIRoPp]+/;
+    // remove quotes
+    format = format.replace(/['"]/g, '');
+    let match: RegExpExecArray = null;
+    while ((match = bannedChars.exec(format)) != null) {
+      format = format.substring(0, match.index) + format.substring(match.index + match[0].length);
+      dateString = dateString.substring(0, match.index) + dateString.substring(match.index + match[0].length);
+    }
+    return [dateString, format];
+  }
+
   parseDateString(dateString: string): [Date, string, boolean] {
     let dateFormat: string = this.labels.dateFormatString();
     const dateFormatRegex = /(\w+)[\/|\.|\-](\w+)[\/|\.|\-](\w+)/gi;
@@ -132,9 +185,8 @@ export class DateFormatService {
       const oneToken = /^(\d{1,4})$/.exec(dateString);
       const delimiter = /\w+(\/|\.|\-)\w+[\/|\.|\-]\w+/gi.exec(dateFormat);
       const dateStringWithDelimiter = dateString[dateString.length - 1].match(/\/|\.|\-/);
-      if (twoTokens && twoTokens.length === 3 && this.isValidDatePart(twoTokens[2], dateFormatTokens[2]) && !dateStringWithDelimiter) {
-        dateString = `${dateString}${delimiter[1]}`;
-      } else if (oneToken && oneToken.length === 2 && this.isValidDatePart(oneToken[1], dateFormatTokens[1]) && !dateStringWithDelimiter) {
+      if ((twoTokens && twoTokens.length === 3 && this.isValidDatePart(twoTokens[2], dateFormatTokens[2]) && !dateStringWithDelimiter) ||
+        (oneToken && oneToken.length === 2 && this.isValidDatePart(oneToken[1], dateFormatTokens[1]) && !dateStringWithDelimiter)) {
         dateString = `${dateString}${delimiter[1]}`;
       }
     }
@@ -146,7 +198,7 @@ export class DateFormatService {
     let timeStringParts: Array<string>;
     let amFormat = this.labels.timeFormatAM;
     let pmFormat = this.labels.timeFormatPM;
-    if (!(timeString && timeString.includes(':'))) {
+    if (!(timeString?.includes(':'))) {
       return [value, timeString];
     }
     if (!militaryTime && amFormat && pmFormat) {
@@ -161,14 +213,14 @@ export class DateFormatService {
         splits = timeString.split(pmFormat);
         pm = true;
       }
-      if (splits && splits.length) {
+      if (splits?.length) {
         for (const item of splits) {
-          if (item && item.trim().includes(':')) {
+          if (item?.trim().includes(':')) {
             timeStringParts = item.trim().split(':');
           }
         }
       }
-      if (timeStringParts && timeStringParts.length && timeStringParts.length === 2) {
+      if (timeStringParts?.length && timeStringParts.length === 2) {
         let hours: number = parseInt(timeStringParts[0], 10);
         if (hours === 12 && pm) {
           hours = 12;
@@ -183,7 +235,7 @@ export class DateFormatService {
       }
     } else {
       timeStringParts = /(\d{1,2}):(\d{2})/.exec(timeString);
-      if (timeStringParts && timeStringParts.length && timeStringParts.length === 3) {
+      if (timeStringParts?.length && timeStringParts.length === 3) {
         value.setHours(parseInt(timeStringParts[1], 10));
         value.setMinutes(parseInt(timeStringParts[2], 10));
         value.setSeconds(0);
@@ -193,6 +245,9 @@ export class DateFormatService {
   }
 
   parseString(dateTimeString: string, militaryTime: boolean, type: string): [Date, string, boolean?] {
+    if (!(dateTimeString?.length)) {
+      return null;
+    }
     switch (type) {
       case 'datetime':
         const str = dateTimeString.replace(/-/g, '/');
@@ -228,13 +283,8 @@ export class DateFormatService {
 
   isValidDatePart(value: string, format: string): boolean {
     const datePart = parseInt(value, 10);
-    if (format.includes('m') && (datePart >= 2 || value.length === 2)) {
-      return true;
-    } else if (format.includes('d') && (datePart >= 4 || value.length === 2)) {
-      return true;
-    } else if (format.includes('y') && datePart >= 1000) {
-      return true;
-    }
-    return false;
+    return ((format.includes('m') && (datePart >= 2 || value.length === 2)) ||
+      (format.includes('d') && (datePart >= 4 || value.length === 2)) ||
+      (format.includes('y') && datePart >= 1000));
   }
 }

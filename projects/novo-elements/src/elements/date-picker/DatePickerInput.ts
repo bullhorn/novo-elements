@@ -1,10 +1,10 @@
 // NG
 import {
+  AfterViewInit,
   ChangeDetectorRef,
   Component,
   ElementRef,
   EventEmitter,
-  forwardRef,
   HostBinding,
   Input,
   OnChanges,
@@ -12,6 +12,7 @@ import {
   Output,
   SimpleChanges,
   ViewChild,
+  forwardRef
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 // Vendor
@@ -42,6 +43,7 @@ const DATE_VALUE_ACCESSOR = {
       (keydown)="_handleKeydown($event)"
       (input)="_handleInput($event)"
       (blur)="_handleBlur($event)"
+      (accept)="handleMaskAccept($event)"
       #input
       data-automation-id="date-input"
       [disabled]="disabled"
@@ -63,7 +65,7 @@ const DATE_VALUE_ACCESSOR = {
   `,
   styleUrls: ['./DatePickerInput.scss'],
 })
-export class NovoDatePickerInputElement implements OnInit, OnChanges, ControlValueAccessor {
+export class NovoDatePickerInputElement implements OnInit, OnChanges, AfterViewInit, ControlValueAccessor {
   public value: any;
   public formattedValue: string = '';
   public showInvalidDateError: boolean;
@@ -152,6 +154,10 @@ export class NovoDatePickerInputElement implements OnInit, OnChanges, ControlVal
     }
   }
 
+  ngAfterViewInit(): void {
+    this.overlay.panelClosingActions.subscribe(this._handleOverlayClickout.bind(this));
+  }
+
   _initFormatOptions() {
     this.userDefinedFormat = this.format ? !this.format.match(/^(DD\/MM\/YYYY|MM\/DD\/YYYY)$/g) : false;
     if (!this.userDefinedFormat && this.textMaskEnabled && !this.allowInvalidDate) {
@@ -172,27 +178,36 @@ export class NovoDatePickerInputElement implements OnInit, OnChanges, ControlVal
     this.overlay.closePanel();
   }
   get panelOpen(): boolean {
-    return this.overlay && this.overlay.panelOpen;
+    return this.overlay?.panelOpen;
   }
   /** END: Convenient Panel Methods. */
 
   _handleKeydown(event: KeyboardEvent): void {
     if ((event.key === Key.Escape || event.key === Key.Enter || event.key === Key.Tab) && this.panelOpen) {
-      this._handleEvent(event, true);
+      this._handleValueUpdate((event.target as HTMLInputElement).value, true);
       this.closePanel();
       event.stopPropagation();
     }
   }
 
   _handleInput(event: KeyboardEvent): void {
-    if (document.activeElement === event.target) {
-      this._handleEvent(event, false);
+    // if maskOptions is enabled, then we do not want to process inputs until the mask has accepted them - so those events will be
+    // handled by the (accept) event.
+    if (document.activeElement === event.target && !this.maskOptions) {
+      this._handleValueUpdate((event.target as HTMLInputElement).value, false);
     }
   }
 
   _handleBlur(event: FocusEvent): void {
-    this.handleInvalidDate();
-    this.blurEvent.emit(event);
+    if (!this.overlay.isBlurRecipient(event)) {
+      this.handleInvalidDate();
+      this.blurEvent.emit(event);
+    }
+  }
+
+  _handleOverlayClickout(): void {
+    this.handleInvalidDate(/*fromPanelClose:*/true);
+    this.blurEvent.emit();
   }
 
   _handleFocus(event: FocusEvent): void {
@@ -201,8 +216,7 @@ export class NovoDatePickerInputElement implements OnInit, OnChanges, ControlVal
     this.focusEvent.emit(event);
   }
 
-  _handleEvent(event: Event, blur: boolean): void {
-    const value = (event.target as HTMLInputElement).value;
+  _handleValueUpdate(value: string, blur: boolean): void {
     if (value === '') {
       this.clearValue();
       this.closePanel();
@@ -212,9 +226,19 @@ export class NovoDatePickerInputElement implements OnInit, OnChanges, ControlVal
     }
   }
 
+  handleMaskAccept(maskValue: string): void {
+    this._handleValueUpdate(maskValue, false);
+  }
+
   protected formatDate(value: string, blur: boolean) {
     try {
-      const [dateTimeValue, formatted, isInvalidDate] = this.dateFormatService.parseString(value, false, 'date');
+      let dateTimeValue: Date;
+      let isInvalidDate: boolean;
+      if (this.format) {
+        [dateTimeValue, , isInvalidDate] = this.dateFormatService.parseCustomDateString(value, this.format);
+      } else {
+        [dateTimeValue, , isInvalidDate] = this.dateFormatService.parseString(value, false, 'date');
+      }
       this.isInvalidDate = isInvalidDate;
       // if we have a full date - set the dateTimeValue
       if (dateTimeValue?.getFullYear()?.toString().length === 4) {
@@ -243,11 +267,13 @@ export class NovoDatePickerInputElement implements OnInit, OnChanges, ControlVal
     this.disabled = disabled;
   }
 
-  handleInvalidDate(): void {
-    if (this.isInvalidDate && this.value) {
+  handleInvalidDate(fromPanelClose = false): void {
+    if (this.isInvalidDate) { //} && this.value) {
       this.showInvalidDateError = true;
       this.clearValue();
-      this.closePanel();
+      if (!fromPanelClose) {
+        this.closePanel();
+      }
     }
   }
 
@@ -305,7 +331,8 @@ export class NovoDatePickerInputElement implements OnInit, OnChanges, ControlVal
    * stemmed from the user.
    */
   public setValueAndClose(event: any | null): void {
-    if (event && event.date) {
+    if (event?.date) {
+      this.showInvalidDateError = false;
       this.dispatchOnChange(event.date, true);
     }
     this.closePanel();
