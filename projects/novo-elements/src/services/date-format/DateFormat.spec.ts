@@ -16,39 +16,28 @@ describe('Service: DateFormatService', () => {
     it('should return a default mask', () => {
       service.labels.dateFormat = '';
       const actual = service.getDateMask();
-      expect(actual.length).toBeGreaterThan(0);
+      expect(actual.mask).toBeDefined();
+      expect(actual.pattern).toBeDefined();
     });
     it('should return a mask that supports a date with format dd-MM-yyyy', () => {
       const value = '11-02-2017';
-      const dateMask = service.getDateMask();
-      for (const i in dateMask) {
-        if (dateMask[i]) {
-          expect(value[i].match(dateMask[i])).toBeTruthy();
-        }
-      }
+      const dateMask = service.getDateMask(value);
+      expect(value.match(dateMask[0])).toBeTruthy();
     });
     it('should return a mask that supports dd.MM.yyyy', () => {
       const value = '11.02.2017';
-      const dateMask = service.getDateMask();
-      for (const i in dateMask) {
-        if (dateMask[i]) {
-          expect(value[i].match(dateMask[i])).toBeTruthy();
-        }
-      }
+      const dateMask = service.getDateMask(value);
+      expect(value.match(dateMask[0])).toBeTruthy();
     });
     it('should return a mask that supports d/M/yyyy', () => {
-      const value: Array<string> = '1/2/2017'.split('');
-      const dateMask = service.getDateMask();
-      value.forEach((v, i) => {
-        expect(v.match(dateMask[i])).toBeTruthy();
-      });
+      const value = '1/2/2017';
+      const dateMask = service.getDateMask(value);
+      expect(value.match(dateMask[0])).toBeTruthy();
     });
     it('should return a mask that supports M/d/yyyy', () => {
-      const value: Array<string> = '11/2/2017'.split('');
-      const dateMask = service.getDateMask();
-      value.forEach((v, i) => {
-        expect(v.match(dateMask[i])).toBeTruthy();
-      });
+      const value = '11/2/2017';
+      const dateMask = service.getDateMask(value);
+      expect(value.match(dateMask[0])).toBeTruthy();
     });
   });
 
@@ -167,11 +156,8 @@ describe('Service: DateFormatService', () => {
       it('should default to current date when dateString in an unsupported format ', () => {
         let dateString = '22-22-2017';
         let dateValue;
-        const expectedDateValue = new Date();
         [dateValue, dateString] = service.parseDateString(dateString);
-        expect(dateValue.getMonth()).toEqual(expectedDateValue.getMonth());
-        expect(dateValue.getDate()).toEqual(expectedDateValue.getDate());
-        expect(dateValue.getFullYear()).toEqual(expectedDateValue.getFullYear());
+        expect(dateValue).toEqual(null);
       });
     });
     describe('when dateFormat is defined', () => {
@@ -345,13 +331,19 @@ describe('Service: DateFormatService', () => {
     });
     it('should call parseDateString for dates', () => {
       jest.spyOn(service, 'parseDateString');
-      service.parseString('', false, 'date');
+      service.parseString('a', false, 'date');
       expect(service.parseDateString).toHaveBeenCalled();
     });
     it('should call parseTimeString for time', () => {
       jest.spyOn(service, 'parseTimeString');
-      service.parseString('', false, 'time');
-      expect(service.parseTimeString).toHaveBeenCalledWith('', false);
+      service.parseString('a', false, 'time');
+      expect(service.parseTimeString).toHaveBeenCalledWith('a', false);
+    });
+    it('should immediately return null for blank values', () => {
+      jest.spyOn(service, 'parseTimeString');
+      const retval = service.parseString('', false, 'time');
+      expect(service.parseTimeString).not.toHaveBeenCalled();
+      expect(retval).toBeNull();
     });
   });
 
