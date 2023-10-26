@@ -1,27 +1,27 @@
 <div class="calendar-header">
   <novo-button theme="icon" icon="previous" size="small" (click)="prevMonth($event)"
-    data-automation-id="calendar-previous"></novo-button>
+    data-automation-id="calendar-previous" tabindex="0"></novo-button>
   <ng-container *ngFor="let month of months; let i = index;">
     <span class="heading" [class.secondary]="i > 0">
       <span class="month" (click)="openView($event, 'months')"
-        data-automation-id="header-month">{{ month.label }}</span>
+        data-automation-id="header-month" tabindex="0">{{ month.label }}</span>
       <span class="year" (click)="openView($event, 'years')"
-        data-automation-id="header-year">{{ month.date?.getFullYear() }}</span>
+        data-automation-id="header-year" tabindex="0">{{ month.date?.getFullYear() }}</span>
     </span>
   </ng-container>
-  <novo-button theme="icon" icon="next" size="small" (click)="nextMonth($event)" data-automation-id="calendar-next">
+  <novo-button theme="icon" icon="next" size="small" (click)="nextMonth($event)" data-automation-id="calendar-next" tabindex="0">
   </novo-button>
 </div>
 <section class="calendar-content" [ngSwitch]="activeView">
   <ng-container *ngSwitchCase="'days'">
     <ng-container *ngFor="let month of months; let i = index">
       <div class="calendar-header" *ngIf="layout==='vertical' && i > 0">
-        <span class="previous" (click)="prevMonth($event)" data-automation-id="calendar-previous"></span>
+        <span class="previous" (click)="prevMonth($event)" data-automation-id="calendar-previous" tabindex="0"></span>
         <span class="heading">
           <span class="month" (click)="openView($event, 'months')"
-            data-automation-id="header-month">{{ month.label }}</span>
+            data-automation-id="header-month" tabindex="0">{{ month.label }}</span>
           <span class="year" (click)="openView($event, 'years')"
-            data-automation-id="header-year">{{ month.date?.getFullYear() }}</span>
+            data-automation-id="header-year" tabindex="0">{{ month.date?.getFullYear() }}</span>
         </span>
         <span class="next" (click)="nextMonth($event)" data-automation-id="calendar-next"></span>
       </div>
