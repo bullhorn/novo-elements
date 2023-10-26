@@ -1,25 +1,29 @@
 // NG
-import { async, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { NovoDragulaElement, NovoDragulaService } from 'novo-elements/addons/dragula';
 import { NovoLoadingElement } from 'novo-elements/elements/loading';
 import { DecodeURIPipe } from 'novo-elements/pipes';
-import { NovoLabelService } from 'novo-elements/services';
+import { GlobalRef, NovoLabelService } from 'novo-elements/services';
 // App
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { NovoFileInputElement } from './FileInput';
 
 describe('Elements: NovoFileInputElement', () => {
-  let fixture;
-  let component;
-
-  const FakeEvent = () => {};
+  let fixture: ComponentFixture<NovoFileInputElement>;
+  let component: NovoFileInputElement;
+  let mockGlobal: {
+    nativeWindow: {
+      open: (url, target) => {}
+    }
+  };
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [NovoFileInputElement, NovoLoadingElement, NovoDragulaElement, DecodeURIPipe],
+      imports: [DragDropModule],
+      declarations: [NovoFileInputElement, NovoLoadingElement, DecodeURIPipe],
       providers: [
         { provide: NovoLabelService, useClass: NovoLabelService },
-        { provide: NovoDragulaService, useClass: NovoDragulaService },
+        { provide: GlobalRef, useValue: mockGlobal }
       ],
     }).compileComponents();
     fixture = TestBed.createComponent(NovoFileInputElement);
@@ -30,12 +34,6 @@ describe('Elements: NovoFileInputElement', () => {
   });
 
   describe('Method: ngOnInit()', () => {
-    it('should setup drag events', () => {
-      expect(component.ngOnInit).toBeDefined();
-      jest.spyOn(component.element.nativeElement, 'addEventListener');
-      component.ngOnInit();
-      expect(component.element.nativeElement.addEventListener).toHaveBeenCalled();
-    });
     it('should update layout', () => {
       expect(component.ngOnInit).toBeDefined();
       jest.spyOn(component, 'updateLayout');
@@ -43,16 +41,9 @@ describe('Elements: NovoFileInputElement', () => {
       expect(component.updateLayout).toHaveBeenCalled();
     });
     it('should setup initial files list', () => {
-      expect(component.ngOnInit).toBeDefined();
-      jest.spyOn(component, 'setInitialFileList');
+      component.value = [{name: 'TestFile1'}];
       component.ngOnInit();
-      expect(component.setInitialFileList).toHaveBeenCalled();
-    });
-    it('should initialize dragula', () => {
-      expect(component.ngOnInit).toBeDefined();
-      jest.spyOn(component, 'initializeDragula');
-      component.ngOnInit();
-      expect(component.initializeDragula).toHaveBeenCalled();
+      expect(component.files[0].name).toBe('TestFile1');
     });
   });
   describe('Method: updateLayout()', () => {
@@ -70,21 +61,6 @@ describe('Elements: NovoFileInputElement', () => {
         draggable: false,
       });
       expect(component.insertTemplatesBasedOnLayout).toHaveBeenCalled();
-    });
-  });
-  describe('Method: initializeDragula()', () => {
-    it('should correctly initialize dragula', () => {
-      const expectedBag = 'file-output-1';
-      component.dragula = {
-        bags: [{ name: 'TEST', drake: {} }],
-        setOptions: () => {},
-      };
-      expect(component.initializeDragula).toBeDefined();
-      expect(component.fileOutputBag).not.toBeDefined();
-      jest.spyOn(component.dragula, 'setOptions');
-      component.initializeDragula();
-      expect(component.fileOutputBag).toBe(expectedBag);
-      expect(component.dragula.setOptions).toHaveBeenCalled();
     });
   });
   describe('Method: insertTemplatesBasedOnLayout()', () => {
@@ -107,15 +83,6 @@ describe('Elements: NovoFileInputElement', () => {
       const insertedOrder = component.insertTemplatesBasedOnLayout();
       expect(component.container.createEmbeddedView).toHaveBeenCalled();
       expect(insertedOrder).toEqual(expected);
-    });
-  });
-
-  describe('Method: ngOnDestroy()', () => {
-    it('should destroy events.', () => {
-      expect(component.ngOnDestroy).toBeDefined();
-      jest.spyOn(component.element.nativeElement, 'removeEventListener');
-      component.ngOnDestroy();
-      expect(component.element.nativeElement.removeEventListener).toHaveBeenCalled();
     });
   });
 
@@ -170,7 +137,7 @@ describe('Elements: NovoFileInputElement', () => {
     it('should return true if null custom validation', () => {
       component.layoutOptions = {
         customValidation: null,
-      };
+      } as any;
       const result = component.validate([]);
       expect(result).toBeTruthy();
     });
@@ -196,35 +163,15 @@ describe('Elements: NovoFileInputElement', () => {
       expect(result).toBeFalsy();
     });
   });
-  //
-  // describe('Method: dragEnterHandler(event)', () => {
-  //     it('should set active to true.', () => {
-  //         expect(component.dragEnterHandler).toBeDefined();
-  //         let evt = new FakeEvent();
-  //         component.dragEnterHandler(evt);
-  //         expect(evt.dataTransfer.dropEffect).toBe('copy');
-  //         expect(component.active).toBe(true);
-  //     });
-  // });
-  //
-  // describe('Method: dragLeaveHandler(event)', () => {
-  //     it('should set active to false.', () => {
-  //         expect(component.dragLeaveHandler).toBeDefined();
-  //         let evt = new FakeEvent();
-  //         component.dragLeaveHandler(evt);
-  //         expect(component.active).toBe(false);
-  //     });
-  // });
-  //
-  // describe('Method: dropHandler(event)', () => {
-  //     it('should set active to false.', () => {
-  //         expect(component.dropHandler).toBeDefined();
-  //         let evt = new FakeEvent();
-  //         component.dropHandler(evt);
-  //         expect(component.active).toBe(false);
-  //     });
-  // });
-  //
+
+  describe('Drag events', () => {
+    it('should rearrange items when dragged across', () => {
+      component.value = [{name: 'TestFile1'}, {name: 'TestFile2'}] as any;
+      fixture.detectChanges();
+      fixture.debugElement.query(By.css('.file-output-group')).triggerEventHandler('cdkDropListDropped', {previousIndex: 1, currentIndex: 0});
+      expect(component.files[0].name).toBe('TestFile2');
+    });
+  });
   describe('Method: writeValue()', () => {
       it('should change the value', () => {
         component.writeValue(10);
@@ -252,16 +199,4 @@ describe('Elements: NovoFileInputElement', () => {
       });
     });
 });
-  //
-  // describe('Method: registerOnChange()', () => {
-  //     it('should be defined.', () => {
-  //         expect(component.registerOnChange).toBeDefined();
-  //     });
-  // });
-  //
-  // describe('Method: registerOnTouched()', () => {
-  //     it('should be defined.', () => {
-  //         expect(component.registerOnTouched).toBeDefined();
-  //     });
-  // });
 });

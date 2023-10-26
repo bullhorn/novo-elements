@@ -1,8 +1,8 @@
 // NG2
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { NovoDragulaModule, NovoDragulaService } from 'novo-elements/addons/dragula';
 import { NovoButtonModule } from 'novo-elements/elements/button';
 import { NovoCheckboxModule } from 'novo-elements/elements/checkbox';
 import { NovoLoadingModule } from 'novo-elements/elements/loading';
@@ -22,12 +22,11 @@ import { NovoFileInputElement } from './file/FileInput';
     NovoSelectModule,
     NovoPickerModule,
     NovoLoadingModule,
-    NovoDragulaModule,
     NovoTooltipModule,
     NovoCheckboxModule,
+    DragDropModule
   ],
   declarations: [NovoAddressElement, NovoFileInputElement],
   exports: [NovoAddressElement, NovoFileInputElement],
-  providers: [NovoDragulaService],
 })
 export class NovoFormExtrasModule {}

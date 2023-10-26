@@ -1,13 +1,14 @@
 // NG2
 import { FocusKeyManager } from '@angular/cdk/a11y';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import {
   Component,
   ElementRef,
   EventEmitter,
   HostBinding,
+  HostListener,
   Input,
-  OnDestroy,
   OnInit,
   Optional,
   Output,
@@ -15,13 +16,12 @@ import {
   TemplateRef,
   ViewChild,
   ViewContainerRef,
-  ViewEncapsulation,
+  ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, FormGroupDirective, NgControl, NgForm } from '@angular/forms';
-import { NovoDragulaService } from 'novo-elements/addons/dragula';
 import { CanUpdateErrorStateCtor, ErrorStateMatcher, mixinErrorState } from 'novo-elements/elements/common';
 import { NovoFieldControl } from 'novo-elements/elements/field';
-import { NovoLabelService } from 'novo-elements/services';
+import { GlobalRef, NovoLabelService } from 'novo-elements/services';
 import { NovoFile } from './extras/file/File';
 
 // Value accessor for the component (supports ngModel)
@@ -48,118 +48,11 @@ const NovoFileInputMixins: CanUpdateErrorStateCtor & typeof NovoFileInputBase = 
 @Component({
   selector: 'novo-file-input',
   providers: [{ provide: NovoFieldControl, useExisting: NovoFileInputElement }],
-  template: `
-    <div #container></div>
-    <ng-template #fileInput>
-      <div class="file-input-group" [class.disabled]="disabled" [class.active]="active">
-        <input
-          #inputElement
-          *ngIf="!layoutOptions.customActions"
-          type="file"
-          [name]="name"
-          [attr.id]="name"
-          (change)="check($event)"
-          [attr.multiple]="multiple"
-          tabindex="-1"
-          [attr.data-feature-id]="dataFeatureId"
-        />
-        <input
-          #inputElement
-          *ngIf="layoutOptions.customActions"
-          type="file"
-          [name]="name"
-          [attr.id]="name"
-          (change)="customCheck($event)"
-          [attr.multiple]="multiple"
-          tabindex="-1"
-          [attr.data-feature-id]="dataFeatureId"
-        />
-        <section [ngSwitch]="layoutOptions.labelStyle">
-          <label *ngSwitchCase="'no-box'" [attr.for]="name" class="no-box">
-            <div>
-              <i class="bhi-dropzone"></i>{{ placeholder || labels.chooseAFile }} {{ labels.or }}
-              <strong class="link">{{ labels.clickToBrowse }}</strong>
-            </div>
-          </label>
-          <label *ngSwitchDefault [attr.for]="name" class="boxed">
-            <span>{{ placeholder || labels.chooseAFile }}</span>
-            <small
-              >{{ labels.or }} <strong class="link">{{ labels.clickToBrowse }}</strong></small
-            >
-          </label>
-        </section>
-      </div>
-    </ng-template>
-    <ng-template #fileOutput>
-      <div class="file-output-group" [dragula]="fileOutputBag" [dragulaModel]="files">
-        <div class="file-item" *ngFor="let file of files" [class.disabled]="disabled">
-          <i *ngIf="layoutOptions.draggable" class="bhi-move"></i>
-          <label *ngIf="file.link"
-            ><span
-              ><a href="{{ file.link }}" target="_blank">{{ file.name | decodeURI }}</a></span
-            ><span *ngIf="file.description">||</span><span>{{ file.description }}</span></label
-          >
-          <label *ngIf="!file.link">{{ file.name | decodeURI }}</label>
-          <div class="actions" [attr.data-automation-id]="'file-actions'" *ngIf="file.loaded">
-            <div *ngIf="!layoutOptions.customActions">
-              <button
-                *ngIf="layoutOptions.download"
-                type="button"
-                theme="icon"
-                icon="save"
-                (click)="download(file)"
-                [attr.data-automation-id]="'file-download'"
-                tabindex="-1"
-              ></button>
-              <button
-                *ngIf="!disabled && (layoutOptions.removable || (!layoutOptions.removable && layoutOptions.removableWhenNew && !file.link))"
-                type="button"
-                theme="icon"
-                icon="close"
-                (click)="remove(file)"
-                [attr.data-automation-id]="'file-remove'"
-                tabindex="-1"
-              ></button>
-            </div>
-            <div *ngIf="layoutOptions.customActions">
-              <button
-                *ngIf="layoutOptions.edit && !disabled"
-                type="button"
-                theme="icon"
-                icon="edit"
-                (click)="customEdit(file)"
-                [attr.data-automation-id]="'file-edit'"
-                tabindex="-1"
-              ></button>
-              <button
-                *ngIf="layoutOptions.download"
-                type="button"
-                theme="icon"
-                icon="save"
-                (click)="customSave(file)"
-                [attr.data-automation-id]="'file-download'"
-                tabindex="-1"
-              ></button>
-              <button
-                *ngIf="!disabled"
-                type="button"
-                theme="icon"
-                icon="close"
-                (click)="customDelete(file)"
-                [attr.data-automation-id]="'file-remove'"
-                tabindex="-1"
-              ></button>
-            </div>
-          </div>
-          <novo-loading *ngIf="!file.loaded"></novo-loading>
-        </div>
-      </div>
-    </ng-template>
-  `,
+  templateUrl: './FileInput.html',
   styleUrls: ['./FileInput.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class NovoFileInputElement extends NovoFileInputMixins implements NovoFieldControl<any>, ControlValueAccessor, OnInit, OnDestroy {
+export class NovoFileInputElement extends NovoFileInputMixins implements NovoFieldControl<any>, ControlValueAccessor, OnInit {
   private _uniqueId: string = `novo-file-input-${++nextId}`;
   /** The aria-describedby attribute on the chip list for improved a11y. */
   _ariaDescribedby: string;
@@ -200,7 +93,7 @@ export class NovoFileInputElement extends NovoFileInputMixins implements NovoFie
     edit?: boolean;
     labelStyle?: string;
     draggable?: boolean;
-    customActions: boolean;
+    customActions?: boolean;
     removable?: boolean;
     customValidation?: { action: string; fn: Function }[];
     removableWhenNew?: boolean;
@@ -219,8 +112,7 @@ export class NovoFileInputElement extends NovoFileInputMixins implements NovoFie
   @Output()
   upload: EventEmitter<any> = new EventEmitter();
 
-  elements: Array<any> = [];
-  files: Array<any> = [];
+  files: NovoFile[] = [];
   model: any;
   active: boolean = false;
   commands: any;
@@ -278,9 +170,8 @@ export class NovoFileInputElement extends NovoFileInputMixins implements NovoFie
   protected _placeholder: string;
 
   constructor(
-    private element: ElementRef,
     public labels: NovoLabelService,
-    private dragula: NovoDragulaService,
+    private globalRef: GlobalRef,
     _defaultErrorStateMatcher: ErrorStateMatcher,
     @Optional() _parentForm: NgForm,
     @Optional() _parentFormGroup: FormGroupDirective,
@@ -290,33 +181,12 @@ export class NovoFileInputElement extends NovoFileInputMixins implements NovoFie
     if (_ngControl) {
       _ngControl.valueAccessor = this;
     }
-    this.commands = {
-      dragenter: this.dragEnterHandler.bind(this),
-      dragleave: this.dragLeaveHandler.bind(this),
-      dragover: this.dragOverHandler.bind(this),
-      drop: this.dropHandler.bind(this),
-    };
   }
 
   ngOnInit() {
-    ['dragenter', 'dragleave', 'dragover', 'drop'].forEach((type) => {
-      this.element.nativeElement.addEventListener(type, this.commands[type]);
-    });
     this.updateLayout();
-    this.initializeDragula();
     this.setInitialFileList();
     this.dataFeatureId = this.dataFeatureId ? this.dataFeatureId : this.name;
-  }
-
-  ngOnDestroy() {
-    ['dragenter', 'dragleave', 'dragover', 'drop'].forEach((type) => {
-      this.element.nativeElement.removeEventListener(type, this.commands[type]);
-    });
-    const dragulaHasFileOutputBag =
-      this.dragula.bags.length > 0 && this.dragula.bags.filter((x) => x.name === this.fileOutputBag).length > 0;
-    if (dragulaHasFileOutputBag) {
-      this.dragula.destroy(this.fileOutputBag);
-    }
   }
 
   updateLayout() {
@@ -339,21 +209,18 @@ export class NovoFileInputElement extends NovoFileInputMixins implements NovoFie
     return order;
   }
 
-  initializeDragula() {
-    this.fileOutputBag = `file-output-${this.dragula.bags.length}`;
-    this.dragula.setOptions(this.fileOutputBag, {
-      moves: (el, container, handle) => {
-        return this.layoutOptions.draggable;
-      },
-    });
+  get outputFileDraggingDisabled(): boolean {
+    const draggable = this.layoutOptions?.draggable;
+    return draggable != null && !draggable;
   }
 
-  setInitialFileList() {
+  private setInitialFileList() {
     if (this.value) {
       this.files = this.value;
     }
   }
 
+  @HostListener('dragenter', ['$event'])
   dragEnterHandler(event) {
     event.preventDefault();
     event.dataTransfer.dropEffect = 'copy';
@@ -361,6 +228,7 @@ export class NovoFileInputElement extends NovoFileInputMixins implements NovoFie
     this.active = true;
   }
 
+  @HostListener('dragleave', ['$event'])
   dragLeaveHandler(event) {
     event.preventDefault();
     if (this.target === event.target) {
@@ -368,11 +236,13 @@ export class NovoFileInputElement extends NovoFileInputMixins implements NovoFie
     }
   }
 
+  @HostListener('dragover', ['$event'])
   dragOverHandler(event) {
     event.preventDefault();
     // no-op
   }
 
+  @HostListener('drop', ['$event'])
   dropHandler(event) {
     event.preventDefault();
     this.visible = false;
@@ -387,6 +257,10 @@ export class NovoFileInputElement extends NovoFileInputMixins implements NovoFie
       this.process(this.multiple ? filelist : [filelist[0]]);
     }
     this.active = false;
+  }
+
+  dropOutputItem(event: CdkDragDrop<NovoFile[]>) {
+    moveItemInArray(this.files, event.previousIndex, event.currentIndex);
   }
 
   writeValue(model: any): void {
@@ -421,7 +295,7 @@ export class NovoFileInputElement extends NovoFileInputMixins implements NovoFie
     return passedValidation;
   }
 
-  process(filelist) {
+  private process(filelist) {
     if (this.validate(filelist)) {
       Promise.all(filelist.map((file) => this.readFile(file))).then((files) => {
         if (this.multiple) {
@@ -436,7 +310,8 @@ export class NovoFileInputElement extends NovoFileInputMixins implements NovoFie
   }
 
   download(file) {
-    window.open(file.dataURL, '_blank');
+    // Using an injected instance of window to make sure that unit tests do not open a new window, even accidentally
+    this.globalRef.nativeWindow.open(file.dataURL, '_blank');
   }
 
   remove(file) {
@@ -448,7 +323,7 @@ export class NovoFileInputElement extends NovoFileInputMixins implements NovoFie
     this.onModelChange(this.model);
   }
 
-  readFile(file) {
+  private readFile(file) {
     return new NovoFile(file).read();
   }
 
