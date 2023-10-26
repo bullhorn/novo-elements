@@ -25,9 +25,19 @@ describe('Elements: NovoDatePickerInputElement', () => {
     it('should call parseString from the dateFormatService and then dispatchOnChange.', () => {
       jest.spyOn(component.dateFormatService, 'parseString');
       jest.spyOn(component, 'dispatchOnChange');
-      const mockValue: String = '01/01/2020';
+      const mockValue = '01/01/2020';
       component.formatDate(mockValue, true);
       expect(component.dateFormatService.parseString).toHaveBeenCalled();
+      expect(component.dispatchOnChange).toHaveBeenCalled();
+    });
+
+    it('should call parseCustomDateString from the dateFormatService when a dateFormat is added, and then dispatchOnChange.', () => {
+      component.format = 'MMM DD dddd, YYYY';
+      jest.spyOn(component.dateFormatService, 'parseCustomDateString');
+      jest.spyOn(component, 'dispatchOnChange');
+      const mockValue = 'Jan 1 Wed, 2020';
+      component.formatDate(mockValue, true);
+      expect(component.dateFormatService.parseCustomDateString).toHaveBeenCalled();
       expect(component.dispatchOnChange).toHaveBeenCalled();
     });
   });

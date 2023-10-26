@@ -14,7 +14,6 @@
     "@codemirror/state": "^6.2.1",
     "@codemirror/view": "^6.16.0",
     "angular-imask": "^6.0.5",
-    "angular2-text-mask": "^9.0.0",
     "brace": "^0.11.0",
     "classlist.js": "^1.1.20150312",
     "codemirror": "6.0.1",
@@ -22,7 +21,6 @@
     "novo-design-tokens": "^0.0.9",
     "post-robot": "^8.0.0",
     "rxjs": ">=7",
-    "text-mask-addons": "^3.7.0",
     "timezone-support": "^3.1.0"
   },
   "dependencies": {

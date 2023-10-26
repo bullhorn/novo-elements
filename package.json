@@ -60,7 +60,6 @@
     "@qiwi/mixin": "^1.2.6",
     "ace-builds": "~1.4.12",
     "angular-imask": "6.2.2",
-    "angular2-text-mask": "9.0.0",
     "brace": "0.11.1",
     "codemirror": "6.0.1",
     "date-fns": "2.30.0",
@@ -69,7 +68,6 @@
     "post-robot": "9.0.30",
     "resize-observer-polyfill": "^1.5.1",
     "rxjs": "~7.8.1",
-    "text-mask-addons": "^3.8.0",
     "timezone-support": "^3.1.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.4"
