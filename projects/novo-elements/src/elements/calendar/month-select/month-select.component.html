@@ -1,4 +1,4 @@
-<div *ngFor="let month of monthNames; let i = index" (click)="onSelect($event, i)">
+<div *ngFor="let month of monthNames; let i = index" (click)="onSelect($event, i)" tabindex="0">
   <div class="month" [class.selected]="_isSelected(i)" [attr.data-automation-id]="month">
     {{ month }}</div>
 </div>

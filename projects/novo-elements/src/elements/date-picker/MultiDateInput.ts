@@ -83,6 +83,7 @@ export class NovoMultiDateInputElement implements OnInit, ControlValueAccessor {
   blurEvent: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
   @Output()
   focusEvent: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
+
   /** Element for the panel containing the autocomplete options. */
   @ViewChild(NovoOverlayTemplateComponent)
   overlay: NovoOverlayTemplateComponent;
@@ -101,7 +102,6 @@ export class NovoMultiDateInputElement implements OnInit, ControlValueAccessor {
   set value(value) {
     if (this.value !== value) {
       this._value = value;
-      this._setFormValue(value);
       this.onChangeCallback(this._value);
     }
   }
@@ -127,16 +127,6 @@ export class NovoMultiDateInputElement implements OnInit, ControlValueAccessor {
 
   ngOnInit() {
     this.userDefinedFormat = this.format ? !this.format.match(/^(DD\/MM\/YYYY|MM\/DD\/YYYY)$/g) : false;
-    // if (!this.userDefinedFormat && this.textMaskEnabled && !this.allowInvalidDate) {
-    //   this.maskOptions = this.maskOptions || {
-    //     mask: this.dateFormatService.getDateMask(),
-    //     pipe: createAutoCorrectedDatePipe(this.format || this.labels.dateFormatString().toLowerCase()),
-    //     keepCharPositions: false,
-    //     guide: true,
-    //   };
-    // } else {
-    //   this.maskOptions = { mask: false };
-    // }
   }
 
   formatter(value) {
@@ -150,9 +140,11 @@ export class NovoMultiDateInputElement implements OnInit, ControlValueAccessor {
       this.panelOpen ? this.overlay.closePanel() : this.overlay.openPanel();
     }
   }
+
   closePanel(): void {
     this.overlay && this.overlay.closePanel();
   }
+
   get panelOpen(): boolean {
     return this.overlay && this.overlay.panelOpen;
   }
@@ -206,12 +198,6 @@ export class NovoMultiDateInputElement implements OnInit, ControlValueAccessor {
   private onTouchedCallback = () => {
     // placeholder
   };
-
-  private _setFormValue(value: Date[]): void {
-    if (this.value) {
-      // this.formattedStartDate = this.formatDateValue(this.value.startDate);
-    }
-  }
 
   /**
    * This method closes the panel, and if a value is specified, also sets the associated
