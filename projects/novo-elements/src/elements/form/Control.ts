@@ -16,10 +16,10 @@ import {
   Output,
 } from '@angular/core';
 // Vendor
-import { Observable } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
 import { DateFormatService, NovoLabelService, NovoTemplateService } from 'novo-elements/services';
 import { Helpers, Key, OutsideClick } from 'novo-elements/utils';
+import { Observable } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 // APP
 import { FieldInteractionApi } from './FieldInteractionApi';
 
@@ -608,6 +608,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
         'file',
         'editor',
         'ace-editor',
+        'code-editor',
         'radio',
         'text-area',
         'quick-note',

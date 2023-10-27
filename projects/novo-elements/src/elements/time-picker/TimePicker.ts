@@ -164,7 +164,6 @@ export class NovoTimePickerElement implements ControlValueAccessor, OnInit, OnCh
   constructor(
     public element: ElementRef,
     public labels: NovoLabelService,
-    public dateFormatService: DateFormatService,
     protected cdr: ChangeDetectorRef,
   ) {}
 

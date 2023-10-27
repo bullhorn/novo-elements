@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, QueryList, ViewChildren } from '@angular/core';
-import { NovoTemplateService } from 'novo-elements/services';
 import { NovoTemplate } from 'novo-elements/elements/common';
+import { NovoTemplateService } from 'novo-elements/services';
 @Component({
   selector: 'novo-control-templates',
   template: `
@@ -31,7 +31,7 @@ import { NovoTemplate } from 'novo-elements/elements/common';
       >
         <input
           *ngIf="control?.type !== 'number' && control?.textMaskEnabled"
-          [textMask]="control.maskOptions"
+          [imask]="control.maskOptions"
           [formControlName]="control.key"
           [id]="control.key"
           [type]="control?.type"
@@ -153,6 +153,18 @@ import { NovoTemplate } from 'novo-elements/elements/common';
           (focus)="methods.handleFocus($event)"
           (blur)="methods.handleBlur($event)"
         ></novo-ace-editor>
+      </div>
+    </ng-template>
+
+    <!--CodeEditor-->
+    <ng-template novoTemplate="code-editor" let-control let-form="form" let-errors="errors" let-methods="methods">
+      <div [formGroup]="form">
+        <novo-code-editor
+          [name]="control.key"
+          [formControlName]="control.key"
+          (focus)="methods.handleFocus($event)"
+          (blur)="methods.handleBlur($event)"
+        ></novo-code-editor>
       </div>
     </ng-template>
 
