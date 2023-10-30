@@ -65,7 +65,7 @@ const NovoDropdowMixins: HasOverlayCtor & CanDisableCtor & HasTabIndexCtor & typ
   template: `
     <ng-content select="button,novo-button,[dropdownTrigger]" #trigger></ng-content>
     <novo-overlay-template [parent]="element" [width]="width" [position]="side" [scrollStrategy]="scrollStrategy">
-      <div #panel class="dropdown-container {{ containerClass }}" [style.height.px]="height" [class.has-height]="!!height">
+      <div #panel class="dropdown-container {{ containerClass }}" [style.max-height.px]="height" [class.has-height]="!!height">
         <ng-content></ng-content>
       </div>
     </novo-overlay-template>
@@ -192,6 +192,11 @@ export class NovoDropdownElement extends NovoDropdowMixins implements OnInit, Af
     if (!this.disabled) {
       this.element.nativeElement.focus(options);
     }
+  }
+
+  openPanel(): void {
+    super.openPanel()
+    this._scrollOptionIntoView(this._keyManager.activeItemIndex || 0)
   }
 
   public set items(items: QueryList<NovoItemElement>) {
