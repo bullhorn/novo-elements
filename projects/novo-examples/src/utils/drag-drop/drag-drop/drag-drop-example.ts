@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnChanges, SimpleChanges } from '@angular/core';
 import { NovoDragFinishEvent } from 'novo-elements/elements/drag-drop';
 
 interface DemoButtonObject {
@@ -15,7 +15,7 @@ interface DemoButtonObject {
   templateUrl: 'drag-drop-example.html',
   styleUrls: ['drag-drop-example.css'],
 })
-export class DragDropExample {
+export class DragDropExample implements OnChanges {
   objects: DemoButtonObject[] = [
     { name: 'Object 1', btnText: 'Button 1', bgColor: 'red' },
     { name: 'Object 2', btnText: 'Button 2', bgColor: 'blue' },
@@ -35,6 +35,10 @@ export class DragDropExample {
     { name: 'Object 16', btnText: 'Button 16', bgColor: 'purple' },
     { name: 'Object 17', btnText: 'Button 17', bgColor: 'teal' }
   ];
+
+  ngOnChanges(changes: SimpleChanges): void {
+      console.log('box processed changes', changes);
+  }
 
   objectMoved?: DemoButtonObject;
 
