@@ -65,7 +65,6 @@ export class NovoDragBoxParent<T> implements AfterViewInit, OnDestroy {
         const listeners = [
             this.renderer.listen(element, 'dragstart', this.onDragStart.bind(this)),
             this.renderer.listen(element, 'drop', this.onDragFinish.bind(this)),
-            this.renderer.listen(element, 'dragover', this.onDragOver.bind(this)),
             this.renderer.listen(element, 'dragend', this.onDragStop.bind(this))
         ];
         element.draggable = true;
@@ -119,24 +118,6 @@ export class NovoDragBoxParent<T> implements AfterViewInit, OnDestroy {
         this.savedOrder = [...this.trackedItems];
     }
 
-    onDragOver(event: DragEvent) {
-        const currentTarget = event.currentTarget as HTMLElement;
-        // If this element doesn't containt the target, then this is for a different drag region - ignore
-        if (currentTarget.parentElement !== this.element) {
-            return;
-        }
-        event.preventDefault();
-        
-        if (!this.pickedUp) {
-            event.dataTransfer.dropEffect = 'none';
-            // Received dragover event when no object was picked up, or on a different parent. This may be targeting another region
-            return;
-        }
-        event.dataTransfer.dropEffect = 'move';
-        event.stopPropagation();
-        this.applyTempSort(this.pickedUp, currentTarget);
-    }
-
     // Equivalent of "finally" - this runs whether or not the drag finished on a valid ending location
     onDragStop(event: DragEvent): void {
         this.pickedUp = null;
@@ -169,12 +150,45 @@ export class NovoDragBoxParent<T> implements AfterViewInit, OnDestroy {
     
     /** - end per-item listeners */
 
-    @HostListener('drag', ['$event'])
-    onDragContinuous(event: DragEvent) {
-        if (!this.isElementWithinEventBounds(this.element, event)) {
-            // The user's mouse has exited the bounds of the draggable container - reset to the last saved state
-            event.dataTransfer.dropEffect = 'none';
+    @HostListener('window:dragover', ['$event'])
+    onDragOver(event: DragEvent): void {
+        if (!this.pickedUp) {
+            return;
+        }
+        let target = event.target as HTMLElement;
+        if (!this.element.contains(target)) {
+            target = null;
+        }
+        // In some cases (maybe browser-specific) we may have this event reported from a sub-element of a drag destination.
+        // We need to go upwards in the tree to find the actual target
+        if (target && !target.draggable) {
+            target = this.findDraggableParentOfElement(target);
+        }
+        // Check if this drag event is within this drag box
+        if (target && target.parentElement === this.element) {
+            event.stopPropagation();
+            event.preventDefault();
+            if (event.dataTransfer) {
+                event.dataTransfer.dropEffect = 'move';
+            }
+            this.applyTempSort(this.pickedUp, target);
+        } else {
+            // if not within this drag box, then move this item back to its original position and show a diabled drag effect
+            if (event.dataTransfer) {
+                event.dataTransfer.dropEffect = 'none';
+            }
             this.resetSorting();
+        }
+    }
+
+    private findDraggableParentOfElement(target: HTMLElement): HTMLElement | null {
+        const parentElement = target.parentElement;
+        if (!parentElement) {
+            return null;
+        } else if (parentElement.draggable) {
+            return parentElement;
+        } else {
+            return this.findDraggableParentOfElement(parentElement);
         }
     }
 
