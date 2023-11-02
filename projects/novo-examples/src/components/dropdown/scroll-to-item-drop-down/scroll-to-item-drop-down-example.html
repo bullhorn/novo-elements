@@ -1,9 +1,6 @@
-<novo-dropdown side="default" height="300"
-               containerClass="effective-date-dropdown">
+<novo-dropdown side="default" height="300">
   <novo-stack dropdownTrigger [style.width.px]="160" align="stretch" gap="sm">
-    <novo-row class="button-row"
-              justify="space-between"
-              data-automation-id="effective-on-label">
+    <novo-row class="button-row" justify="space-between">
       <novo-label>{{ 'Selected Word:' }}</novo-label>
     </novo-row>
     <novo-row class="button-row" justify="space-between">
@@ -11,7 +8,7 @@
       <novo-icon size="sm">collapse</novo-icon>
     </novo-row>
   </novo-stack>
-  <novo-optgroup data-automation-id="version-list">
+  <novo-optgroup>
     <novo-option *ngFor="let word of MOCK_WORDS; index as i"
                  (click)="clickMe(word)">
       <span class="value">{{ word }}</span>
