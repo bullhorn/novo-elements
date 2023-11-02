@@ -1247,7 +1247,7 @@ export class DropdownDevelopPage {
 <p>You can set the &quot;keepOpen&quot; property on the &quot;item&quot; in order to keep it from closing the dropdown automatically.</p>
 <p><code-example example="multi-drop-down"></code-example></p>
 <h2>Scroll to Selected Item</h2>
-<p>Dropdown with many many items and one pre-selected item to show scrolling to the selected item</p>
+<p>Dropdown with a large number of items. Selecting an item far down the list and reopening the dropdown will automatically scroll down to the selected item.</p>
 <p><code-example example="scroll-to-item-drop-down"></code-example></p>
 `,
   host: { class: 'markdown-page' }
