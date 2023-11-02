@@ -196,8 +196,15 @@ export class NovoDropdownElement extends NovoDropdowMixins implements OnInit, Af
 
   openPanel(): void {
     super.openPanel()
-    this._scrollOptionIntoView(this._keyManager.activeItemIndex || 0)
+    this._scrollOptionIntoView(this.findFirstSelectedOptionIndex(this.options) || 0)
   }
+
+  private findFirstSelectedOptionIndex(options: QueryList<NovoOption>): number | null {
+    return options.toArray().findIndex((option: NovoOption) => {
+      return option.selected === true;
+    });
+  }
+
 
   public set items(items: QueryList<NovoItemElement>) {
     // this._items = items;
@@ -276,6 +283,7 @@ export class NovoDropdownElement extends NovoDropdowMixins implements OnInit, Af
       // this.handleSelection(event.source, event.isUserInput);
       if (event.isUserInput && !this.multiple) {
         this._clearPreviousSelectedOption(this._keyManager.activeItem);
+        event.source.select();
         if (!this.keepOpen && this.panelOpen) {
           this.closePanel();
           this.focus();
