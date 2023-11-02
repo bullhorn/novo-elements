@@ -1,0 +1,24 @@
+<novo-dropdown side="default" height="300"
+               containerClass="effective-date-dropdown">
+  <novo-stack dropdownTrigger [style.width.px]="160" align="stretch" gap="sm">
+    <novo-row class="button-row"
+              justify="space-between"
+              data-automation-id="effective-on-label">
+      <novo-label>{{ 'Selected Word:' }}</novo-label>
+    </novo-row>
+    <novo-row class="button-row" justify="space-between">
+      <novo-text>{{ selectedWord }}</novo-text>
+      <novo-icon size="sm">collapse</novo-icon>
+    </novo-row>
+  </novo-stack>
+  <novo-optgroup data-automation-id="version-list">
+    <novo-option *ngFor="let word of MOCK_WORDS; index as i"
+                 (click)="clickMe(word)">
+      <span class="value">{{ word }}</span>
+      <span class="value-active">
+        <i class="bhi-check ng-star-inserted"
+           [style.visibility]="word !== selectedWord ? 'hidden' : 'visible'"></i>
+      </span>
+    </novo-option>
+  </novo-optgroup>
+</novo-dropdown>

@@ -40,3 +40,9 @@ You can have custom classes on the dropdown container that opens up by using the
 You can set the "keepOpen" property on the "item" in order to keep it from closing the dropdown automatically.
 
 <code-example example="multi-drop-down"></code-example>
+
+## Scroll to Selected Item
+
+Dropdown with a large number of items. Selecting an item far down the list and reopening the dropdown will automatically scroll down to the selected item.
+
+<code-example example="scroll-to-item-drop-down"></code-example>
