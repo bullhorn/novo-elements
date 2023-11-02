@@ -146,6 +146,16 @@ export class NovoDropdownElement extends NovoDropdowMixins implements OnInit, Af
   }
   private _multiple: boolean = false;
 
+  /** Whether the dropdown should scroll to the active item whenever it is opened. */
+  @Input()
+  get scrollToActiveItemOnOpen(): boolean {
+    return this._scrollToActiveItemOnOpen;
+  }
+  set scrollToActiveItemOnOpen(value: boolean) {
+    this._scrollToActiveItemOnOpen = coerceBooleanProperty(value);
+  }
+  private _scrollToActiveItemOnOpen: boolean = false;
+
   get button() {
     return this._trigger || this._button;
   }
@@ -196,7 +206,9 @@ export class NovoDropdownElement extends NovoDropdowMixins implements OnInit, Af
 
   openPanel(): void {
     super.openPanel()
-    this._scrollOptionIntoView(this.findFirstSelectedOptionIndex(this.options) || 0)
+    if (this.scrollToActiveItemOnOpen) {
+      this._scrollOptionIntoView(this.findFirstSelectedOptionIndex(this.options) || 0)
+    }
   }
 
   private findFirstSelectedOptionIndex(options: QueryList<NovoOption>): number | null {
@@ -288,6 +300,8 @@ export class NovoDropdownElement extends NovoDropdowMixins implements OnInit, Af
           this.closePanel();
           this.focus();
         }
+      } else {
+        event.source.select();
       }
     });
   }
