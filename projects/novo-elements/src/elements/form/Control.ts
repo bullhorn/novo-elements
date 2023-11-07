@@ -21,10 +21,11 @@ import { Helpers, Key, OutsideClick } from 'novo-elements/utils';
 import { Observable } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 // APP
+import { AnyMaskedOptions } from 'imask';
 import { FieldInteractionApi } from './FieldInteractionApi';
 
 export interface IMaskOptions {
-  mask: any;
+  mask: AnyMaskedOptions['mask'];
   keepCharPositions: boolean;
   guide: boolean;
 }
@@ -463,6 +464,8 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
       methods: {
         restrictKeys: this.restrictKeys.bind(this),
         emitChange: this.emitChange.bind(this),
+        handleSimpleTextInput: this.handleSimpleTextInput.bind(this),
+        handleAccept: this.handleAccept.bind(this),
         handleFocus: this.handleFocus.bind(this),
         handlePercentChange: this.handlePercentChange.bind(this),
         handleBlur: this.handleBlur.bind(this),
@@ -650,6 +653,11 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     this._enteredText = event;
   }
 
+  // imask has accepted a change in value
+  handleAccept(value: string) {
+    this.emitChange(value);
+  }
+
   handleFocus(event: FocusEvent, field?: any) {
     this._focused = true;
     this.focusedField = field;
@@ -678,15 +686,15 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     this.formattedValue = null;
   }
 
-  handleTextAreaInput(event) {
-    this.emitChange(event);
+  handleTextAreaInput(event: KeyboardEvent) {
+    this.emitChange((event.target as HTMLTextAreaElement).value);
     this.restrictKeys(event);
   }
 
-  checkMaxLength(event) {
+  checkMaxLength(value: string) {
     if (this.control && this.form.controls[this.control.key].maxlength) {
-      this.itemCount = event.target.value.length;
-      this.maxLengthMet = event.target.value.length >= this.form.controls[this.control.key].maxlength;
+      this.itemCount = value.length;
+      this.maxLengthMet = value.length >= this.form.controls[this.control.key].maxlength;
     }
   }
 
@@ -730,7 +738,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     }
   }
 
-  restrictKeys(event) {
+  restrictKeys(event: KeyboardEvent) {
     const NUMBERS_ONLY = /[0-9\-]/;
     const NUMBERS_WITH_DECIMAL_DOT = /[0-9\.\-]/;
     const NUMBERS_WITH_DECIMAL_DOT_AND_COMMA = /[0-9\.\,\-]/;
@@ -751,7 +759,7 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
       event.preventDefault();
     }
     // Max Length
-    if (this.form.controls[this.control.key].maxlength && event.target.value.length >= this.form.controls[this.control.key].maxlength) {
+    if (this.form.controls[this.control.key].maxlength && (event.target as HTMLInputElement).value.length >= this.form.controls[this.control.key].maxlength) {
       event.preventDefault();
     }
   }
@@ -776,9 +784,16 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     }
   }
 
-  emitChange(value) {
+  emitChange(value: string) {
     this.change.emit(value);
     this.checkMaxLength(value);
+  }
+
+  handleSimpleTextInput(event: Event) {
+    if (!this.control.textMaskEnabled) {
+      this.emitChange((event.target as HTMLInputElement).value);
+    }
+    // if we have maskOptions, inputs will be absorbed in handleAccept()
   }
 
   handleEdit(value) {
