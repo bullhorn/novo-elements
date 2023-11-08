@@ -12,6 +12,7 @@ import { AceEditorControl, FormUtils, QuickNoteControl, TextAreaControl, TextBox
 export class TextBasedControlsExample {
   public quickNoteConfig: any;
   public textControl: any;
+  public textMaskControl: any;
   public emailControl: any;
   public numberControl: any;
   public currencyControl: any;
@@ -56,6 +57,18 @@ export class TextBasedControlsExample {
       value: 'HI',
       required: true,
     });
+    this.textMaskControl = new TextBoxControl({
+      key: 'textmask',
+      maxlength: 10,
+      label: 'Text Control with Mask (hexadecimal)',
+      textMaskEnabled: true,
+      maskOptions: {
+        mask: /^[\da-fA-F]{0,10}$/,
+        keepCharPositions: false,
+        guide: false
+      },
+      value: '9F'
+    })
     this.textAreaControl = new TextAreaControl({
       key: 'textarea',
       label: 'Text Area',
@@ -90,6 +103,7 @@ export class TextBasedControlsExample {
     this.aceEditorControl = new AceEditorControl({ key: 'ace', label: 'CODE', tooltip: 'CODE', value: 'var i = 0;' });
     this.textForm = formUtils.toFormGroup([
       this.textControl,
+      this.textMaskControl,
       this.emailControl,
       this.textAreaControl,
       this.numberControl,
