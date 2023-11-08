@@ -1,6 +1,8 @@
 // APP
 import { BaseControl } from './BaseControl';
 
+const testTextMaskOptions = /^TEST_MASK_OPTIONS$/;
+
 describe('Control: BaseControl', () => {
   let control;
 
@@ -85,7 +87,7 @@ describe('Control: BaseControl', () => {
         layoutOptions: { removable: false },
         fileBrowserImageUploadUrl: '/foo/bar/baz',
         textMaskEnabled: true,
-        maskOptions: { mask: ['TEST_MASK_OPTIONS'], keepCharPositions: false, guide: true },
+        maskOptions: { mask: testTextMaskOptions, keepCharPositions: false, guide: true },
       });
     });
 
@@ -150,7 +152,7 @@ describe('Control: BaseControl', () => {
       expect(control.textMaskEnabled).toEqual(true);
     });
     it('should set maskOptions', () => {
-      expect(control.maskOptions).toEqual({ mask: ['TEST_MASK_OPTIONS'], keepCharPositions: false, guide: true });
+      expect(control.maskOptions).toEqual({ mask: testTextMaskOptions, keepCharPositions: false, guide: true });
     });
   });
 
