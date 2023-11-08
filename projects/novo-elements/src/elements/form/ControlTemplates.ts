@@ -36,7 +36,8 @@ import { NovoTemplateService } from 'novo-elements/services';
           [id]="control.key"
           [type]="control?.type"
           [placeholder]="control?.placeholder"
-          (input)="methods.emitChange($event)"
+          (input)="methods.handleSimpleTextInput($event)"
+          (accept)="methods.handleAccept($event)"
           (focus)="methods.handleFocus($event)"
           (blur)="methods.handleBlur($event)"
           autocomplete
