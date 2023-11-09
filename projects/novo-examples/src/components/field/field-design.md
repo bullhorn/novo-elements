@@ -3,7 +3,6 @@ section: Components
 page: Field
 title: Design
 order: 2
-tag: experiment
 ---
 
 <novo-grid columns="2" align="start" gap="2rem">
