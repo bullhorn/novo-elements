@@ -6364,9 +6364,36 @@ export class v8Page {
 
 @Component({
   selector: 'v9-page',
-  template: `<h1>📢  --Release month TBD-- (version 9)</h1>
-<p><strong>CommonJS library removal</strong>: Version 9 continues to remove some of the dependence on CommonJS libraries. The previous release deprecated Dragula, as well as some of our date-fns. This release has a new target.</p>
-<p><strong>Ace Editor removal / Code Editor</strong>: In V9, we have deprecated the <code>novo-ace-editor</code> component, and its reliance on the Ace Editor. It is being replaced with <code>novo-code-editor</code>, implemented using the <a href="https://codemirror.net/">CodeMirror</a> library.</p>
+  template: `<h1>📢  December 2023 (version 9)</h1>
+<h1>Continuing CommonJS library removal</h1>
+<p>The previous release of novo-elements, version 8, started to deprecate some modules that relied on CommonJS libraries. In version 9, we are introducing some new options to replace the tools that we've removed.</p>
+<h2>NovoDragDrop</h2>
+<p>While there are several third-party options to replace Dragula (deprecated in v8), our drag-and-drop utility, such as <a href="https://v7.material.angular.io/cdk/drag-drop/overview">cdkDrag</a> and <a href="https://www.npmjs.com/package/ngx-drag-drop">ngx-drag-drop</a>, we are also adding the <a href="https://bullhorn.github.io/novo-elements/docs/#/utils/drag%20and%20drop"><code>NovoDragDropModule</code></a>, which provides drag and drop capability with support for grid layouts. We have also added an example page to demonstrate its usage.</p>
+<p>We recommend that users switch from the dragula directive to novoDragDrop, cdkDrag, or a third-party solution in anticipation of future optimization strategies.</p>
+<h2>Code Editor</h2>
+<p>In version 8, we deprecated Ace Editor. This module has not been removed yet, but there is now a recommended option to replace it: <a href="https://bullhorn.github.io/novo-elements/docs/#/utils/code%20editor">The Novo Code Editor</a>, backed by <a href="https://codemirror.net/">Codemirror</a>. This supports basic syntax highlighting for JavaScript.</p>
+<h2>Text masks</h2>
+<p><code>angular2-text-mask</code>, a CommonJS dependency used for text masking support, has been exchanged for <code>imask</code>. This may affect the arguments provided to <code>maskOptions.mask</code> in the <code>TextBoxControl</code> type. The <a href="https://bullhorn.github.io/novo-elements/docs/#/form-controls/form">Form example</a> has been updated with a &quot;hexadecimal&quot; field to showcase its use. Further examples can be found on <a href="https://imask.js.org/guide.html#masked-base">imask's documentation page</a>.</p>
+<h1>Peer Dependencies</h1>
+<p>The following peer dependencies have been <em>removed</em> from novo-elements. If your core project does not use them, they can be safely removed.</p>
+<ul>
+<li>text-mask-addons</li>
+<li>angular2-text-mask</li>
+</ul>
+<p>The following peer dependencies have been <em>added</em> to support the novo-code-editor.</p>
+<ul>
+<li>@codemirror/commands</li>
+<li>@codemirror/state</li>
+<li>@codemirror/view</li>
+<li>@codemirror/lang-javascript</li>
+<li>codemirror</li>
+</ul>
+<p>Lastly, the <code>timezone-support</code> module has been upgraded from 2.0.2 to 3.1.0.</p>
+<h1>Upgrading to V9</h1>
+<p>The following commands will upgrade novo-elements, as well as its dependencies.</p>
+<pre><code><span class="hljs-attribute">npm</span> install --save  novo-elements@^<span class="hljs-number">9</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span> @codemirror/commands@^<span class="hljs-number">6</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span> @codemirror/state@^<span class="hljs-number">6</span>.<span class="hljs-number">2</span>.<span class="hljs-number">1</span> @codemirror/view@<span class="hljs-number">6</span>.<span class="hljs-number">16</span>.<span class="hljs-number">0</span> codemirror@<span class="hljs-number">6</span>.<span class="hljs-number">0</span>.<span class="hljs-number">1</span> timezone-support@^<span class="hljs-number">3</span>.<span class="hljs-number">1</span>.<span class="hljs-number">0</span>
+<span class="hljs-attribute">npm</span> uninstall --save text-mask-addons angular2-text-mask
+</code></pre>
 `,
   host: { class: 'markdown-page' }
 })
@@ -6378,7 +6405,7 @@ export class v9Page {
 @Component({
   selector: 'ace-editor-page',
   template: `<h1>Ace Editor <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/addons/ace-editor">(source)</a></h1>
-<p>Basic code editor using Ace Editor.</p>
+<p>Basic code editor using <a href="https://ace.c9.io/">Ace Editor</a>.</p>
 <h5>Basic Example</h5>
 <p><code-example example="basic-ace"></code-example></p>
 `,
@@ -6647,7 +6674,7 @@ const routes: Routes = [
   {
     path: 'components/field',
     component: TabsLayout,
-    data: { title: 'Field', section: 'components', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}], description: null, tag: 'experiment' },
+    data: { title: 'Field', section: 'components', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}], description: null },
     children: [
       { path: 'design', component: FieldDesignPage },
       { path: 'develop', component: FieldDevelopPage },
@@ -6736,7 +6763,7 @@ const routes: Routes = [
   {
     path: 'components/query builder',
     component: TabsLayout,
-    data: { title: 'Query Builder', section: 'components', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}], description: null, tag: 'experiment' },
+    data: { title: 'Query Builder', section: 'components', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}], description: null },
     children: [
       { path: 'design', component: QueryBuilderDesignPage },
       { path: 'develop', component: QueryBuilderDevelopPage },
@@ -6875,7 +6902,7 @@ const routes: Routes = [
   { path: 'layouts/expansion', component: ExpansionPage, data: { title: 'Expansion', section: 'layouts' } },
   { path: 'layouts/header', component: HeaderPage, data: { title: 'Header', section: 'layouts' } },
   { path: 'layouts/list', component: ListPage, data: { title: 'List', section: 'layouts' } },
-  { path: 'layouts/sidenav', component: SidenavPage, data: { title: 'Sidenav', section: 'layouts', tag: 'new' } },
+  { path: 'layouts/sidenav', component: SidenavPage, data: { title: 'Sidenav', section: 'layouts' } },
   { path: 'layouts/stepper', component: StepperPage, data: { title: 'Stepper', section: 'layouts' } },
   {
     path: 'layouts/tabs',
