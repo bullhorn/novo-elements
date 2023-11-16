@@ -6433,7 +6433,9 @@ export class CodeEditorPage {
 @Component({
   selector: 'drag-drop-page',
   template: `<h1>Drag and Drop <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/drag-drop">(source)</a></h1>
-<h5>Basic Examples</h5>
+<p>A draggable container, using <code>[novoDragDrop]</code>, allows the user to click and drag controls within that container to rearrange them. There is no hard requirement on what types of controls are placed inside, but <a href="https://bullhorn.github.io/novo-elements/docs/#/layouts/card/design">cards</a> are recommended.</p>
+<p>This utility was built to replace Dragula, which was deprecated in Novo Elements in V8. Novo Elements allows for the use of other drag-and-drop libraries such as <a href="https://material.angular.io/cdk/drag-drop/overview">cdkDragDrop</a> and <a href="https://sortablejs.github.io/ngx-sortablejs/sortable-array">Sortable.js</a>, but several of them exhibit problems when rearranging items in a two-dimensional grid. This implementation uses simple HTML behavior and events for reordering to maximize compatibility. Users may consider using another drag and drop library if they require support dragging items between multiple containers, or prefer more detailed animation behaviors.</p>
+<h5>Basic Example</h5>
 <p><code-example example="drag-drop"></code-example></p>
 `,
   host: { class: 'markdown-page' }
@@ -6930,8 +6932,8 @@ const routes: Routes = [
   { path: 'updates/v8-announce', component: v8Page, data: { title: 'v8', section: 'updates' } },
   { path: 'updates/v9-announce', component: v9Page, data: { title: 'v9', section: 'updates', tag: 'new' } },
   { path: 'utils/ace editor', component: AceEditorPage, data: { title: 'Ace Editor', section: 'utils', tag: 'deprecated' } },
-  { path: 'utils/code editor', component: CodeEditorPage, data: { title: 'Code Editor', section: 'utils' } },
-  { path: 'utils/drag and drop', component: DragDropPage, data: { title: 'Drag and Drop', section: 'utils' } },
+  { path: 'utils/code editor', component: CodeEditorPage, data: { title: 'Code Editor', section: 'utils', tag: 'new' } },
+  { path: 'utils/drag and drop', component: DragDropPage, data: { title: 'Drag and Drop', section: 'utils', tag: 'new' } },
   { path: 'utils/field-interactions', component: FieldInteractionsPage, data: { title: 'Field Interactions', section: 'utils' } },
   { path: 'utils/pipes', component: PipesPage, data: { title: 'Pipes', section: 'utils' } },
   { path: 'utils/quick note', component: QuickNotePage, data: { title: 'Quick Note', section: 'utils' } },
