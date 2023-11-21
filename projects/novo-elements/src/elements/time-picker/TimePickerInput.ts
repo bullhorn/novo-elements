@@ -49,6 +49,8 @@ const DATE_VALUE_ACCESSOR = {
     <i *ngIf="!hasValue" (click)="openPanel()" class="bhi-clock"></i> <i *ngIf="hasValue" (click)="clearValue()" class="bhi-times"></i>
     <novo-overlay-template [parent]="element" position="above-below">
       <novo-time-picker
+        [ngClass]="{ 'hasButtons': hasButtons }"
+        [hasButtons]="hasButtons"
         inline="true"
         [analog]="analog"
         (onSelect)="setValue($event)"
@@ -78,6 +80,10 @@ export class NovoTimePickerInputElement implements OnInit, OnChanges, ControlVal
   @HostBinding('class.disabled')
   @Input()
   disabled: boolean = false;
+  @Input()
+  hasButtons: boolean = false;
+  @Input()
+  saveDisabled: boolean = false;
 
   /**
    * @deprecated don't use
