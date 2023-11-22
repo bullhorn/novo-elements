@@ -56,6 +56,9 @@ const DATE_VALUE_ACCESSOR = {
         (onSelect)="setValue($event)"
         [ngModel]="value"
         [military]="military"
+        [saveDisabled]="saveDisabled"
+        (onCancel)="cancel()"
+        (onSave)="save()"
       ></novo-time-picker>
     </novo-overlay-template>
   `,
@@ -97,6 +100,10 @@ export class NovoTimePickerInputElement implements OnInit, OnChanges, ControlVal
   focusEvent: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
   @Output()
   changeEvent: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
+  @Output()
+  onSave: EventEmitter<any> = new EventEmitter();
+  @Output()
+  onCancel: EventEmitter<any> = new EventEmitter();
 
   /** Element for the panel containing the autocomplete options. */
   @ViewChild(NovoOverlayTemplateComponent)
@@ -303,5 +310,13 @@ export class NovoTimePickerInputElement implements OnInit, OnChanges, ControlVal
         this.dispatchOnChange(null);
       }
     } catch (err) {}
+  }
+
+  save(): void {
+    this.onSave.emit();
+  }
+
+  cancel(): void {
+    this.onCancel.emit();
   }
 }
