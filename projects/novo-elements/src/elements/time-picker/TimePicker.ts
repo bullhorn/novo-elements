@@ -14,7 +14,7 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { isValid } from 'date-fns';
 // APP
-import { DateFormatService, NovoLabelService } from 'novo-elements/services';
+import { NovoLabelService } from 'novo-elements/services';
 import { DateUtil, Helpers } from 'novo-elements/utils';
 
 // Value accessor for the component (supports ngModel)
@@ -119,6 +119,20 @@ export enum TIME_VALUE_FORMATS {
         </div>
       </div>
     </div>
+    <div class="save-cancel-buttons" *ngIf="hasButtons">
+      <novo-button
+          class="cancel-button"
+          theme="dialogue"
+          size="small"
+          (click)="cancel()">{{ labels.cancel }}</novo-button>
+      <novo-button
+          class="save-button"
+          theme="primary"
+          color="primary"
+          size="small"
+          [disabled]="saveDisabled"
+          (click)="save()">{{ labels.save }}</novo-button>
+    </div>
   `,
   styleUrls: ['./TimePicker.scss'],
   host: {
@@ -135,9 +149,17 @@ export class NovoTimePickerElement implements ControlValueAccessor, OnInit, OnCh
   inline: boolean = false;
   @Input()
   step: number = 1;
+  @Input()
+  hasButtons: boolean = false;
+  @Input()
+  saveDisabled: boolean = false;
 
   @Output()
   onSelect: EventEmitter<any> = new EventEmitter();
+  @Output()
+  onSave: EventEmitter<any> = new EventEmitter();
+  @Output()
+  onCancel: EventEmitter<any> = new EventEmitter();
 
   hours: number = 12;
   minutes: number = 0;
@@ -318,5 +340,13 @@ export class NovoTimePickerElement implements ControlValueAccessor, OnInit, OnCh
       hours = `${parseInt(hours, 10) + 12}`.padStart(2, '0');
     }
     return `${hours}:${minutes}`;
+  }
+
+  save(): void {
+    this.onSave.emit();
+  }
+
+  cancel(): void {
+    this.onCancel.emit();
   }
 }
