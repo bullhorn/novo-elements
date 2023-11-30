@@ -4,6 +4,7 @@
       [military]="display.value"
       [disabled]="disabled.value"
       [analog]="appearance.value"
+      [hasButtons]="hasButtons.value"
       [(ngModel)]="time1"></novo-time-picker-input>
     <novo-hint>value: {{time1}}</novo-hint>
   </div>
@@ -49,6 +50,13 @@
     <novo-radio-group #disabled appearance="vertical" [value]="false">
       <novo-radio name="disabled" [value]="false">Enabled</novo-radio>
       <novo-radio name="disabled" [value]="true">Disabled</novo-radio>
+    </novo-radio-group>
+  </novo-field>
+  <novo-field>
+    <novo-label>Save/Cancel Buttons?</novo-label>
+    <novo-radio-group #hasButtons appearance="vertical" [value]="false">
+      <novo-radio name="disabled" [value]="true">Enabled</novo-radio>
+      <novo-radio name="disabled" [value]="false">Disabled</novo-radio>
     </novo-radio-group>
   </novo-field>
 </novo-row>
