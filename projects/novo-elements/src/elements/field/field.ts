@@ -96,6 +96,10 @@ export class NovoFieldElement implements AfterContentInit, OnDestroy {
 
   @Input() layout: 'horizontal' | 'vertical' = 'vertical';
   @Input() appearance: 'standard' | 'outline' | 'fill' | 'list' = 'standard';
+  /**
+   * When this field has a picker element, express which element it should be parented to
+   */
+  @Input() customOverlayOrigin: ElementRef;
 
   @Input()
   width: string;
@@ -111,7 +115,7 @@ export class NovoFieldElement implements AfterContentInit, OnDestroy {
    * positioned relative to.
    */
   getConnectedOverlayOrigin(): ElementRef {
-    return this._inputContainerRef || this._elementRef;
+    return this.customOverlayOrigin || this._inputContainerRef || this._elementRef;
   }
 
   ngAfterContentInit(): any {
