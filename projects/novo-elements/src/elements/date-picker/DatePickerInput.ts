@@ -51,7 +51,7 @@ const DATE_VALUE_ACCESSOR = {
     <span class="error-text" *ngIf="showInvalidDateError">{{ invalidDateErrorMessage }}</span>
     <i *ngIf="!hasValue" (click)="openPanel()" class="bhi-calendar"></i>
     <i *ngIf="hasValue" (click)="clearValue()" class="bhi-times"></i>
-    <novo-overlay-template [parent]="element" position="above-below">
+    <novo-overlay-template [parent]="overlayElement" position="above-below">
       <novo-date-picker
         [start]="start"
         [end]="end"
@@ -109,16 +109,31 @@ export class NovoDatePickerInputElement implements OnInit, OnChanges, AfterViewI
    **/
   @Input()
   format: string;
+  /**
+   * Whether to apply a text mask to the date (see `maskOptions`). Only enabled if allowInvalidDate is false.
+   */
   @Input()
   textMaskEnabled: boolean = true;
+  /**
+   * Whether the input should emit values when the field does not yet constitute a valid date
+   */
   @Input()
   allowInvalidDate: boolean = false;
+  /**
+   * The element to use as the parent for the date picker's overlay (to determine bounds sizing). By default,
+   * this refers to the input element itself, but may be a container if it has a padded border.
+   */
+  @Input()
+  overlayOnElement: ElementRef;
   /**
    * Sets the field as to appear disabled, users will not be able to interact with the text field.
    **/
   @HostBinding('class.disabled')
   @Input()
   disabled: boolean = false;
+  /**
+   * A message to display in the picker overlay when a given date is disabled through minimum/maximum
+   */
   @Input()
   disabledDateMessage: string;
   /**
@@ -179,6 +194,10 @@ export class NovoDatePickerInputElement implements OnInit, OnChanges, AfterViewI
   }
   get panelOpen(): boolean {
     return this.overlay?.panelOpen;
+  }
+
+  get overlayElement(): ElementRef {
+    return this.overlayOnElement || this.element;
   }
   /** END: Convenient Panel Methods. */
 
