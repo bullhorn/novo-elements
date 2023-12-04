@@ -47,7 +47,7 @@ const DATE_VALUE_ACCESSOR = {
       [disabled]="disabled"
     />
     <i *ngIf="!hasValue" (click)="openPanel()" class="bhi-clock"></i> <i *ngIf="hasValue" (click)="clearValue()" class="bhi-times"></i>
-    <novo-overlay-template [parent]="element" position="above-below">
+    <novo-overlay-template [parent]="overlayElement" position="above-below">
       <novo-time-picker
         [ngClass]="{ 'hasButtons': hasButtons }"
         [hasButtons]="hasButtons"
@@ -87,6 +87,8 @@ export class NovoTimePickerInputElement implements OnInit, OnChanges, ControlVal
   hasButtons: boolean = false;
   @Input()
   saveDisabled: boolean = false;
+  @Input()
+  overlayOnElement: ElementRef;
 
   /**
    * @deprecated don't use
@@ -149,6 +151,10 @@ export class NovoTimePickerInputElement implements OnInit, OnChanges, ControlVal
 
   get panelOpen(): boolean {
     return this.overlay && this.overlay.panelOpen;
+  }
+
+  get overlayElement(): ElementRef {
+    return this.overlayOnElement || this.element;
   }
 
   /** END: Convenient Panel Methods. */
