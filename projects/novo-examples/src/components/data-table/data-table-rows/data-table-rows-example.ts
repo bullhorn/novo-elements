@@ -113,6 +113,7 @@ export class DataTableRowsExample implements AfterViewInit {
       attributes: {
         target: '_blank',
       },
+      resizable: true,
     },
     {
       id: 'address',
@@ -130,6 +131,7 @@ export class DataTableRowsExample implements AfterViewInit {
         click: this.log.bind(this),
       },
       filterable: true,
+      resizable: true,
     },
     {
       id: 'simpleEmbeddedObj',
@@ -139,6 +141,7 @@ export class DataTableRowsExample implements AfterViewInit {
       type: 'text',
       filterable: true,
       sortable: true,
+      resizable: true,
     },
     {
       id: 'date',
@@ -172,6 +175,8 @@ export class DataTableRowsExample implements AfterViewInit {
       type: 'currency',
       filterable: true,
       sortable: true,
+      resizable: true,
+      rightAlignCellContent: true,
     },
     {
       id: 'percent',
@@ -180,6 +185,7 @@ export class DataTableRowsExample implements AfterViewInit {
       type: 'percent',
       filterable: true,
       sortable: true,
+      resizable: true,
     },
     {
       id: 'bigdecimal',
@@ -188,6 +194,7 @@ export class DataTableRowsExample implements AfterViewInit {
       type: 'bigdecimal',
       filterable: true,
       sortable: true,
+      resizable: true,
     },
     {
       id: 'name',
@@ -196,6 +203,7 @@ export class DataTableRowsExample implements AfterViewInit {
       enabled: true,
       type: 'text',
       template: 'custom',
+      resizable: true,
     },
     {
       id: 'status',
@@ -204,6 +212,7 @@ export class DataTableRowsExample implements AfterViewInit {
       type: 'text',
       filterable: { type: 'custom' },
       sortable: true,
+      resizable: true,
     },
     {
       id: 'priority',
@@ -215,6 +224,7 @@ export class DataTableRowsExample implements AfterViewInit {
         options: this.getPriorityOptions(),
       },
       sortable: true,
+      resizable: true,
     },
     {
       id: 'enabled',
@@ -222,6 +232,7 @@ export class DataTableRowsExample implements AfterViewInit {
       enabled: true,
       type: 'text',
       sortable: true,
+      resizable: true,
       filterable: {
         type: 'select',
         options: [
@@ -306,7 +317,7 @@ export class DataTableRowsExample implements AfterViewInit {
         date: day,
         dateTime: day,
         time: day,
-        money: i + 10,
+        money: i + 10000000000000000,
         percent: i / 100,
         telephone: '555-555-5555',
         email: 'test@google.com',
