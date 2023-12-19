@@ -317,7 +317,7 @@ export class DataTableRowsExample implements AfterViewInit {
         date: day,
         dateTime: day,
         time: day,
-        money: i + 100000000000000,
+        money: i + 10,
         percent: i / 100,
         telephone: '555-555-5555',
         email: 'test@google.com',
