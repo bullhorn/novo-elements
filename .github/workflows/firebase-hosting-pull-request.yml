@@ -29,6 +29,7 @@ jobs:
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_NOVO_ELEMENTS }}'
           projectId: novo-elements
           expires: 7d
+          node-version: 20
 
 concurrency:
   group: firebase-${{ github.head_ref }}
