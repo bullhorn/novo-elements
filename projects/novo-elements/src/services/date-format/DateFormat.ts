@@ -20,7 +20,7 @@ export class DateFormatService {
       autofix: true,
       lazy: false,
       min: new Date(1970, 0, 1),
-      max: new Date(2030, 0, 1),
+      max: new Date(2100, 0, 1),
       prepare(str) {
         return str.toUpperCase();
       },
@@ -70,7 +70,7 @@ export class DateFormatService {
       overwrite: true,
       autofix: 'pad',
       min: new Date(1970, 0, 1),
-      max: new Date(2030, 0, 1),
+      max: new Date(2100, 0, 1),
       prepare(str) {
         return str.toUpperCase();
       },
