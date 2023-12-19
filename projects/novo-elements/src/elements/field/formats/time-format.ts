@@ -78,7 +78,7 @@ export class NovoTimeFormatDirective extends IMaskDirective<any> implements Novo
       autofix: true,
       lazy: false,
       min: new Date(1970, 0, 1),
-      max: new Date(2030, 0, 1),
+      max: new Date(2100, 0, 1),
       prepare: (str) => str.toUpperCase(),
       format: (value) => this.formatValue(value),
       parse: (str) => {

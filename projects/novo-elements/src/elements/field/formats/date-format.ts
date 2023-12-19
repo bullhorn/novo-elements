@@ -43,7 +43,7 @@ export class NovoDateFormatDirective extends IMaskDirective<any> {
       autofix: true,
       lazy: false,
       min: new Date(1900, 0, 1),
-      max: new Date(2030, 0, 1),
+      max: new Date(2100, 0, 1),
       prepare: (str) => str.toUpperCase(),
       format: (date) => this.formatValue(date),
       parse: (str) => DateUtil.parse(str),
