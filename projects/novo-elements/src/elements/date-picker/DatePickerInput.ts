@@ -43,7 +43,6 @@ const DATE_VALUE_ACCESSOR = {
       (keydown)="_handleKeydown($event)"
       (input)="_handleInput($event)"
       (blur)="_handleBlur($event)"
-      (accept)="handleMaskAccept($event)"
       #input
       data-automation-id="date-input"
       [disabled]="disabled"
@@ -191,8 +190,7 @@ export class NovoDatePickerInputElement implements OnInit, OnChanges, AfterViewI
   }
 
   _handleInput(event: KeyboardEvent): void {
-    // if maskOptions is enabled, then we do not want to process inputs until the mask has accepted them - so those events will be
-    // handled by the (accept) event.
+    // if maskOptions is enabled, then we do not want to process inputs until the mask has accepted them
     if (document.activeElement === event.target && !this.maskOptions) {
       this._handleValueUpdate((event.target as HTMLInputElement).value, false);
     }
@@ -224,10 +222,6 @@ export class NovoDatePickerInputElement implements OnInit, OnChanges, AfterViewI
       this.formatDate(value, blur);
       this.openPanel();
     }
-  }
-
-  handleMaskAccept(maskValue: string): void {
-    this._handleValueUpdate(maskValue, false);
   }
 
   protected formatDate(value: string, blur: boolean) {
