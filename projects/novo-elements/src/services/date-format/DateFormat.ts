@@ -3,14 +3,14 @@ import { Injectable } from '@angular/core';
 import { NovoLabelService } from '../novo-label-service';
 // APP
 import { format, parse } from 'date-fns';
-import { MaskedEnum, MaskedRange } from 'imask';
+import { AnyMaskedOptions, MaskedEnum, MaskedRange } from 'imask';
 import { DateUtil, Helpers, convertTokens } from 'novo-elements/utils';
 
 @Injectable()
 export class DateFormatService {
   constructor(private labels: NovoLabelService) {}
 
-  getTimeMask(militaryTime: boolean) {
+  getTimeMask(militaryTime: boolean): AnyMaskedOptions {
     const amFormat = this.labels.timeFormatAM.toUpperCase();
     const pmFormat = this.labels.timeFormatPM.toUpperCase();
     const mask = {
@@ -63,25 +63,10 @@ export class DateFormatService {
     return mask;
   }
 
-  getDateMask(format?: string) {
-    const mask = {
-      mask: Date,
-      pattern: 'm/`d/`Y',
-      overwrite: true,
-      autofix: 'pad',
-      min: new Date(1970, 0, 1),
-      max: new Date(2030, 0, 1),
-      prepare(str) {
-        return str.toUpperCase();
-      },
-      format(date) {
-        return DateUtil.format(date, format || 'MM/DD/YYYY');
-      },
-      parse: (str) => {
-        return DateUtil.parse(str);
-      },
-    }
-    return mask;
+  getDateMask(): AnyMaskedOptions {
+    return {
+      mask: /^((\d)(\d|\/|\.|\-){0,7})?(\d){0,2}$/
+    };
   }
 
   getDateTimeMask(militaryTime: boolean = false): Array<any> {

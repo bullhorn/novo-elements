@@ -161,7 +161,7 @@ export class NovoDatePickerInputElement implements OnInit, OnChanges, AfterViewI
   _initFormatOptions() {
     this.userDefinedFormat = this.format ? !this.format.match(/^(DD\/MM\/YYYY|MM\/DD\/YYYY)$/g) : false;
     if (!this.userDefinedFormat && this.textMaskEnabled && !this.allowInvalidDate) {
-      this.maskOptions = this.maskOptions || this.dateFormatService.getDateMask(this.format);
+      this.maskOptions = this.maskOptions || this.dateFormatService.getDateMask();
     } else {
       this.maskOptions = undefined;
     }
