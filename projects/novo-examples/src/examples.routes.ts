@@ -1246,6 +1246,9 @@ export class DropdownDevelopPage {
 <h2>Keep Open</h2>
 <p>You can set the &quot;keepOpen&quot; property on the &quot;item&quot; in order to keep it from closing the dropdown automatically.</p>
 <p><code-example example="multi-drop-down"></code-example></p>
+<h2>Scroll to Selected Item</h2>
+<p>Dropdown with a large number of items. Selecting an item far down the list and reopening the dropdown will automatically scroll down to the selected item.</p>
+<p><code-example example="scroll-to-item-drop-down"></code-example></p>
 `,
   host: { class: 'markdown-page' }
 })
@@ -6360,15 +6363,84 @@ export class v8Page {
 
 
 @Component({
+  selector: 'v9-page',
+  template: `<h1>📢  December 2023 (version 9)</h1>
+<h1>Continuing CommonJS library removal</h1>
+<p>The previous release of novo-elements, version 8, started to deprecate some modules that relied on CommonJS libraries. In version 9, we are introducing some new options to replace the tools that we've removed.</p>
+<h2>NovoDragDrop</h2>
+<p>While there are several third-party options to replace Dragula (deprecated in v8), our drag-and-drop utility, such as <a href="https://v7.material.angular.io/cdk/drag-drop/overview">cdkDrag</a> and <a href="https://www.npmjs.com/package/ngx-drag-drop">ngx-drag-drop</a>, we are also adding the <a href="https://bullhorn.github.io/novo-elements/docs/#/utils/drag%20and%20drop"><code>NovoDragDropModule</code></a>, which provides drag and drop capability with support for grid layouts. We have also added an example page to demonstrate its usage.</p>
+<p>We recommend that users switch from the dragula directive to novoDragDrop, cdkDrag, or a third-party solution in anticipation of future optimization strategies.</p>
+<h2>Code Editor</h2>
+<p>In version 8, we deprecated Ace Editor. This module has not been removed yet, but there is now a recommended option to replace it: <a href="https://bullhorn.github.io/novo-elements/docs/#/utils/code%20editor">The Novo Code Editor</a>, backed by <a href="https://codemirror.net/">Codemirror</a>. This supports basic syntax highlighting for JavaScript.</p>
+<h2>Text masks</h2>
+<p><code>angular2-text-mask</code>, a CommonJS dependency used for text masking support, has been exchanged for <code>imask</code>. This may affect the arguments provided to <code>maskOptions.mask</code> in the <code>TextBoxControl</code> type. The <a href="https://bullhorn.github.io/novo-elements/docs/#/form-controls/form">Form example</a> has been updated with a &quot;hexadecimal&quot; field to showcase its use. Further examples can be found on <a href="https://imask.js.org/guide.html#masked-base">imask's documentation page</a>.</p>
+<h1>Peer Dependencies</h1>
+<p>The following peer dependencies have been <em>removed</em> from novo-elements. If your core project does not use them, they can be safely removed.</p>
+<ul>
+<li>text-mask-addons</li>
+<li>angular2-text-mask</li>
+</ul>
+<p>The following peer dependencies have been <em>added</em> to support the novo-code-editor.</p>
+<ul>
+<li>@codemirror/commands</li>
+<li>@codemirror/state</li>
+<li>@codemirror/view</li>
+<li>@codemirror/lang-javascript</li>
+<li>codemirror</li>
+</ul>
+<p>Lastly, the <code>timezone-support</code> module has been upgraded from 2.0.2 to 3.1.0.</p>
+<h1>Upgrading to V9</h1>
+<p>The following commands will upgrade novo-elements, as well as its dependencies.</p>
+<pre><code><span class="hljs-attribute">npm</span> install --save  novo-elements@^<span class="hljs-number">9</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span> @codemirror/commands@^<span class="hljs-number">6</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span> @codemirror/state@^<span class="hljs-number">6</span>.<span class="hljs-number">2</span>.<span class="hljs-number">1</span> @codemirror/view@<span class="hljs-number">6</span>.<span class="hljs-number">16</span>.<span class="hljs-number">0</span> codemirror@<span class="hljs-number">6</span>.<span class="hljs-number">0</span>.<span class="hljs-number">1</span> timezone-support@^<span class="hljs-number">3</span>.<span class="hljs-number">1</span>.<span class="hljs-number">0</span>
+<span class="hljs-attribute">npm</span> uninstall --save text-mask-addons angular2-text-mask
+</code></pre>
+`,
+  host: { class: 'markdown-page' }
+})
+export class v9Page {
+  public params: any = {};
+}
+
+
+@Component({
   selector: 'ace-editor-page',
   template: `<h1>Ace Editor <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/addons/ace-editor">(source)</a></h1>
-<p>Basic code editor using Ace Editor.</p>
+<p>Basic code editor using <a href="https://ace.c9.io/">Ace Editor</a>.</p>
 <h5>Basic Example</h5>
 <p><code-example example="basic-ace"></code-example></p>
 `,
   host: { class: 'markdown-page' }
 })
 export class AceEditorPage {
+  public params: any = {};
+}
+
+
+@Component({
+  selector: 'code-editor-page',
+  template: `<h1>Code Editor <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/addons/code-editor">(source)</a></h1>
+<p>Basic code editor using <a href="https://codemirror.net/5/">CodeMirror</a> Editor.</p>
+<h5>Basic Example</h5>
+<p><code-example example="basic-code"></code-example></p>
+`,
+  host: { class: 'markdown-page' }
+})
+export class CodeEditorPage {
+  public params: any = {};
+}
+
+
+@Component({
+  selector: 'drag-drop-page',
+  template: `<h1>Drag and Drop <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/drag-drop">(source)</a></h1>
+<p>A draggable container, using <code>[novoDragDrop]</code>, allows the user to click and drag controls within that container to rearrange them. There is no hard requirement on what types of controls are placed inside, but <a href="https://bullhorn.github.io/novo-elements/docs/#/layouts/card/design">cards</a> are recommended.</p>
+<p>This utility was built to replace Dragula, which was deprecated in Novo Elements in V8. Novo Elements allows for the use of other drag-and-drop libraries such as <a href="https://material.angular.io/cdk/drag-drop/overview">cdkDragDrop</a> and <a href="https://sortablejs.github.io/ngx-sortablejs/sortable-array">Sortable.js</a>, but several of them exhibit problems when rearranging items in a two-dimensional grid. This implementation uses simple HTML behavior and events for reordering to maximize compatibility. Users may consider using another drag and drop library if they require support dragging items between multiple containers, or prefer more detailed animation behaviors.</p>
+<h5>Basic Example</h5>
+<p><code-example example="drag-drop"></code-example></p>
+`,
+  host: { class: 'markdown-page' }
+})
+export class DragDropPage {
   public params: any = {};
 }
 
@@ -6604,7 +6676,7 @@ const routes: Routes = [
   {
     path: 'components/field',
     component: TabsLayout,
-    data: { title: 'Field', section: 'components', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}], description: null, tag: 'experiment' },
+    data: { title: 'Field', section: 'components', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}], description: null },
     children: [
       { path: 'design', component: FieldDesignPage },
       { path: 'develop', component: FieldDevelopPage },
@@ -6693,7 +6765,7 @@ const routes: Routes = [
   {
     path: 'components/query builder',
     component: TabsLayout,
-    data: { title: 'Query Builder', section: 'components', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}], description: null, tag: 'experiment' },
+    data: { title: 'Query Builder', section: 'components', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}], description: null },
     children: [
       { path: 'design', component: QueryBuilderDesignPage },
       { path: 'develop', component: QueryBuilderDevelopPage },
@@ -6832,7 +6904,7 @@ const routes: Routes = [
   { path: 'layouts/expansion', component: ExpansionPage, data: { title: 'Expansion', section: 'layouts' } },
   { path: 'layouts/header', component: HeaderPage, data: { title: 'Header', section: 'layouts' } },
   { path: 'layouts/list', component: ListPage, data: { title: 'List', section: 'layouts' } },
-  { path: 'layouts/sidenav', component: SidenavPage, data: { title: 'Sidenav', section: 'layouts', tag: 'new' } },
+  { path: 'layouts/sidenav', component: SidenavPage, data: { title: 'Sidenav', section: 'layouts' } },
   { path: 'layouts/stepper', component: StepperPage, data: { title: 'Stepper', section: 'layouts' } },
   {
     path: 'layouts/tabs',
@@ -6857,8 +6929,11 @@ const routes: Routes = [
   },
   { path: 'updates/v6', component: v6Page, data: { title: 'v6', section: 'updates' } },
   { path: 'updates/v7-announce', component: v7Page, data: { title: 'v7', section: 'updates' } },
-  { path: 'updates/v8-announce', component: v8Page, data: { title: 'v8', section: 'updates', tag: 'new' } },
-  { path: 'utils/ace editor', component: AceEditorPage, data: { title: 'Ace Editor', section: 'utils' } },
+  { path: 'updates/v8-announce', component: v8Page, data: { title: 'v8', section: 'updates' } },
+  { path: 'updates/v9-announce', component: v9Page, data: { title: 'v9', section: 'updates', tag: 'new' } },
+  { path: 'utils/ace editor', component: AceEditorPage, data: { title: 'Ace Editor', section: 'utils', tag: 'deprecated' } },
+  { path: 'utils/code editor', component: CodeEditorPage, data: { title: 'Code Editor', section: 'utils', tag: 'new' } },
+  { path: 'utils/drag and drop', component: DragDropPage, data: { title: 'Drag and Drop', section: 'utils', tag: 'new' } },
   { path: 'utils/field-interactions', component: FieldInteractionsPage, data: { title: 'Field Interactions', section: 'utils' } },
   { path: 'utils/pipes', component: PipesPage, data: { title: 'Pipes', section: 'utils' } },
   { path: 'utils/quick note', component: QuickNotePage, data: { title: 'Quick Note', section: 'utils' } },
@@ -6868,7 +6943,7 @@ const routes: Routes = [
 ];
 
 export const PAGE_LIST = [
-  AgendaDesignPage,AgendaDevelopPage,AgendaExamplesPage,AsideDesignPage,AsideDevelopPage,AsideExamplesPage,AutocompleteDesignPage,AutocompleteDevelopPage,AutocompleteExamplesPage,AvatarDesignPage,AvatarDevelopPage,AvatarExamplesPage,BreadcrumbDesignPage,BreadcrumbDevelopPage,BreadcrumbExamplesPage,ButtonDesignPage,ButtonDevelopPage,ButtonExamplesPage,CalendarDesignPage,CalendarDevelopPage,CalendarExamplesPage,ComponentsPage,DataTablePage,DropdownDesignPage,DropdownDevelopPage,DropdownExamplesPage,FieldDesignPage,FieldDevelopPage,FieldExamplesPage,IconDesignPage,IconDevelopPage,IconExamplesPage,LoadingDesignPage,LoadingDevelopPage,LoadingExamplesPage,MenuDesignPage,MenuDevelopPage,MenuExamplesPage,ModalDesignPage,ModalDevelopPage,ModalExamplesPage,NonIdealStateDesignPage,NonIdealStateDevelopPage,NonIdealStateExamplesPage,PopoverDesignPage,PopoverDevelopPage,PopoverExamplesPage,ProgressDesignPage,ProgressDevelopPage,ProgressExamplesPage,ProgressUsagePage,QueryBuilderDesignPage,QueryBuilderDevelopPage,QueryBuilderExamplesPage,SearchPage,SlidesPage,SwitchPage,TabbedGroupPickerPage,TablePage,TipWellDesignPage,TipWellDevelopPage,TipWellExamplesPage,ToasterDesignPage,ToasterDevelopPage,ToasterExamplesPage,ToolbarDesignPage,ToolbarDevelopPage,ToolbarExamplesPage,TooltipDesignPage,TooltipDevelopPage,TooltipExamplesPage,ColorsPage,CompositionPage,DesignPage,IconographyPage,SpacingPage,TypographyPage,CheckboxPage,ChipsDesignPage,ChipsDevelopPage,ChipsExamplesPage,CkEditorPage,ColorPickerPage,DatePickerDesignPage,DatePickerDevelopPage,DatePickerExamplesPage,DateTimePickerDesignPage,DateTimePickerDevelopPage,DateTimePickerExamplesPage,DynamicFormPage,FormControlsPage,FormGroupsPage,FormPage,MultiPickerPage,PickerPage,RadioButtonsPage,SelectPage,TilesPage,TimePickerDesignPage,TimePickerDevelopPage,TimePickerExamplesPage,ValuePage,HomePage,CardDescriptionPage,CardDesignPage,CardDevelopPage,CardExamplesPage,ExpansionPage,HeaderPage,LayoutsPage,ListPage,SidenavPage,StepperPage,TabsDesignPage,TabsDevelopPage,TabsExamplesPage,PatternsNativeFormsPage,PatternsTestPage,PatternsPage,TemplatesPage,v6Page,v7Page,v8Page,AceEditorPage,FieldInteractionsPage,PipesPage,QuickNotePage,SecurityPage
+  AgendaDesignPage,AgendaDevelopPage,AgendaExamplesPage,AsideDesignPage,AsideDevelopPage,AsideExamplesPage,AutocompleteDesignPage,AutocompleteDevelopPage,AutocompleteExamplesPage,AvatarDesignPage,AvatarDevelopPage,AvatarExamplesPage,BreadcrumbDesignPage,BreadcrumbDevelopPage,BreadcrumbExamplesPage,ButtonDesignPage,ButtonDevelopPage,ButtonExamplesPage,CalendarDesignPage,CalendarDevelopPage,CalendarExamplesPage,ComponentsPage,DataTablePage,DropdownDesignPage,DropdownDevelopPage,DropdownExamplesPage,FieldDesignPage,FieldDevelopPage,FieldExamplesPage,IconDesignPage,IconDevelopPage,IconExamplesPage,LoadingDesignPage,LoadingDevelopPage,LoadingExamplesPage,MenuDesignPage,MenuDevelopPage,MenuExamplesPage,ModalDesignPage,ModalDevelopPage,ModalExamplesPage,NonIdealStateDesignPage,NonIdealStateDevelopPage,NonIdealStateExamplesPage,PopoverDesignPage,PopoverDevelopPage,PopoverExamplesPage,ProgressDesignPage,ProgressDevelopPage,ProgressExamplesPage,ProgressUsagePage,QueryBuilderDesignPage,QueryBuilderDevelopPage,QueryBuilderExamplesPage,SearchPage,SlidesPage,SwitchPage,TabbedGroupPickerPage,TablePage,TipWellDesignPage,TipWellDevelopPage,TipWellExamplesPage,ToasterDesignPage,ToasterDevelopPage,ToasterExamplesPage,ToolbarDesignPage,ToolbarDevelopPage,ToolbarExamplesPage,TooltipDesignPage,TooltipDevelopPage,TooltipExamplesPage,ColorsPage,CompositionPage,DesignPage,IconographyPage,SpacingPage,TypographyPage,CheckboxPage,ChipsDesignPage,ChipsDevelopPage,ChipsExamplesPage,CkEditorPage,ColorPickerPage,DatePickerDesignPage,DatePickerDevelopPage,DatePickerExamplesPage,DateTimePickerDesignPage,DateTimePickerDevelopPage,DateTimePickerExamplesPage,DynamicFormPage,FormControlsPage,FormGroupsPage,FormPage,MultiPickerPage,PickerPage,RadioButtonsPage,SelectPage,TilesPage,TimePickerDesignPage,TimePickerDevelopPage,TimePickerExamplesPage,ValuePage,HomePage,CardDescriptionPage,CardDesignPage,CardDevelopPage,CardExamplesPage,ExpansionPage,HeaderPage,LayoutsPage,ListPage,SidenavPage,StepperPage,TabsDesignPage,TabsDevelopPage,TabsExamplesPage,PatternsNativeFormsPage,PatternsTestPage,PatternsPage,TemplatesPage,v6Page,v7Page,v8Page,v9Page,AceEditorPage,CodeEditorPage,DragDropPage,FieldInteractionsPage,PipesPage,QuickNotePage,SecurityPage
 ];
 
 @NgModule({
