@@ -172,7 +172,7 @@ export class ArrayCollection<T> implements Collection<T> {
    *
    * @memberOf ArrayCollection
    */
-  getItemIndex(item: T): number { // here
+  getItemIndex(item: T): number {
     return this.isEditing ? this.editData.indexOf(item) : this.source.indexOf(item);
   }
 
