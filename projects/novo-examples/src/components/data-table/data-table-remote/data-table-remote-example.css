@@ -1,1 +1,4 @@
-/** No CSS for this example */
+:host {
+    min-height: 460px;
+    display: flex;
+}

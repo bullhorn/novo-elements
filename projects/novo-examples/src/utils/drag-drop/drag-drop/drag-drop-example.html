@@ -1,0 +1,32 @@
+
+<p>Click and drag these buttons to place them in a new position. When rearranged, they emit an event to demonstrate the new order.</p>
+<div [novoDragDrop]="objects" (novoDragDropFinish)="dragFinished($event)" class="drag-box">
+    <novo-card *ngFor="let item of objects"
+        class="demo-drag-item">
+        <novo-card-header class="novo-drag-target {{item.bgClass}}">
+            <novo-title>{{item.headerText}}</novo-title>
+            <novo-action (click)="removeObject(item)" icon="close" tooltip="Close Item"></novo-action>
+        </novo-card-header>
+        <novo-card-content>
+            <novo-caption novoPreventDrag>{{item.name}} (Non-draggable area)</novo-caption>
+        </novo-card-content>
+    </novo-card>
+</div>
+
+<p *ngIf="objectMoved">{{objectMoved.name}} moved.</p>
+<p>Current object order is: {{objectsAsString}}</p>
+
+<h2>Dynamic list</h2>
+<novo-button (click)="addObject2()">Add another object to list</novo-button>
+<div [novoDragDrop]="objects2" (novoDragDropFinish)="dragFinished2($event)" class="drag-box">
+    <novo-card *ngFor="let item of objects2"
+        class="demo-drag-item">
+        <novo-card-header class="novo-drag-target {{item.bgClass}}">
+            <novo-title>{{item.headerText}}</novo-title>
+            <novo-action (click)="removeObject2(item)" icon="close" tooltip="Close Item"></novo-action>
+        </novo-card-header>
+        <novo-card-content>
+            <novo-caption novoPreventDrag>{{item.name}} (Non-draggable area)</novo-caption>
+        </novo-card-content>
+    </novo-card>
+</div>

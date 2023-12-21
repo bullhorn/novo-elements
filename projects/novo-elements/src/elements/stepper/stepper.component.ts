@@ -26,6 +26,7 @@ import { novoStepperAnimations } from './stepper.animations';
 @Component({
   selector: 'novo-step',
   templateUrl: 'step.component.html',
+  styleUrls: ['stepper.component.scss'],
   preserveWhitespaces: false,
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [{ provide: CdkStep, useExisting: NovoStep }],
@@ -152,7 +153,7 @@ export class NovoHorizontalStepper extends NovoStepper {}
 })
 export class NovoVerticalStepper extends NovoStepper {
   constructor(@Optional() dir: Directionality, changeDetectorRef: ChangeDetectorRef, elementRef: ElementRef) {
-    super(dir, changeDetectorRef, elementRef, '');
-    this._orientation = 'vertical';
+    super(dir, changeDetectorRef, elementRef);
+    this.orientation = 'vertical';
   }
 }

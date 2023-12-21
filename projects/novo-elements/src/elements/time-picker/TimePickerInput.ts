@@ -14,11 +14,10 @@ import {
   ViewChild,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import * as IMask from 'imask';
 // App
 import { NovoOverlayTemplateComponent } from 'novo-elements/elements/common';
 import { DateFormatService, NovoLabelService } from 'novo-elements/services';
-import { DateUtil, Helpers, Key } from 'novo-elements/utils';
+import { Helpers, Key } from 'novo-elements/utils';
 
 // Value accessor for the component (supports ngModel)
 const DATE_VALUE_ACCESSOR = {
@@ -37,8 +36,8 @@ const DATE_VALUE_ACCESSOR = {
       [(ngModel)]="value"
       [imask]="maskOptions"
       [unmask]="'typed'"
-      (complete)="onComplete($event)"
       [placeholder]="placeholder"
+      (change)="_handleChange($event)"
       (focus)="_handleFocus($event)"
       (keydown)="_handleKeydown($event)"
       (input)="_handleInput($event)"
@@ -48,16 +47,22 @@ const DATE_VALUE_ACCESSOR = {
       [disabled]="disabled"
     />
     <i *ngIf="!hasValue" (click)="openPanel()" class="bhi-clock"></i> <i *ngIf="hasValue" (click)="clearValue()" class="bhi-times"></i>
-    <novo-overlay-template [parent]="element" position="above-below">
+    <novo-overlay-template [parent]="overlayElement" position="above-below">
       <novo-time-picker
+        [ngClass]="{ 'hasButtons': hasButtons }"
+        [hasButtons]="hasButtons"
         inline="true"
         [analog]="analog"
         (onSelect)="setValue($event)"
         [ngModel]="value"
         [military]="military"
+        [saveDisabled]="saveDisabled"
+        (onCancel)="cancel()"
+        (onSave)="save()"
       ></novo-time-picker>
     </novo-overlay-template>
   `,
+  styleUrls: ['./TimePickerInput.scss'],
 })
 export class NovoTimePickerInputElement implements OnInit, OnChanges, ControlValueAccessor {
   public value: any;
@@ -78,6 +83,12 @@ export class NovoTimePickerInputElement implements OnInit, OnChanges, ControlVal
   @HostBinding('class.disabled')
   @Input()
   disabled: boolean = false;
+  @Input()
+  hasButtons: boolean = false;
+  @Input()
+  saveDisabled: boolean = false;
+  @Input()
+  overlayOnElement: ElementRef;
 
   /**
    * @deprecated don't use
@@ -89,6 +100,13 @@ export class NovoTimePickerInputElement implements OnInit, OnChanges, ControlVal
   blurEvent: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
   @Output()
   focusEvent: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
+  @Output()
+  changeEvent: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
+  @Output()
+  onSave: EventEmitter<any> = new EventEmitter();
+  @Output()
+  onCancel: EventEmitter<any> = new EventEmitter();
+
   /** Element for the panel containing the autocomplete options. */
   @ViewChild(NovoOverlayTemplateComponent)
   overlay: NovoOverlayTemplateComponent;
@@ -115,60 +133,7 @@ export class NovoTimePickerInputElement implements OnInit, OnChanges, ControlVal
 
   initFormatOptions() {
     this.placeholder = this.military ? this.labels.timeFormatPlaceholder24Hour : this.labels.timeFormatPlaceholderAM;
-    const timeFormat = this.military ? 'HH:mm' : 'hh:mm A';
-    const amFormat = this.labels.timeFormatAM.toUpperCase();
-    const pmFormat = this.labels.timeFormatPM.toUpperCase();
-    this.maskOptions = {
-      mask: Date,
-      pattern: this.military ? 'HH:mm' : 'hh:mm aa',
-      overwrite: true,
-      autofix: true,
-      lazy: false,
-      min: new Date(1970, 0, 1),
-      max: new Date(2030, 0, 1),
-      prepare(str) {
-        return str.toUpperCase();
-      },
-      format(date) {
-        return DateUtil.format(date, timeFormat);
-      },
-      parse: (str) => {
-        const time = this.military ? str : this.convertTime12to24(str);
-        return DateUtil.parse(`${DateUtil.format(Date.now(), 'YYYY-MM-DD')}T${time}`);
-      },
-      blocks: {
-        HH: {
-          mask: IMask.MaskedRange,
-          placeholderChar: 'H',
-          maxLength: 2,
-          from: 0,
-          to: 23,
-        },
-        hh: {
-          mask: IMask.MaskedRange,
-          placeholderChar: 'h',
-          maxLength: 2,
-          from: 1,
-          to: 12,
-        },
-        mm: {
-          mask: IMask.MaskedRange,
-          placeholderChar: 'm',
-          maxLength: 2,
-          from: 0,
-          to: 59,
-        },
-        aa: {
-          mask: IMask.MaskedEnum,
-          placeholderChar: 'x',
-          enum: ['AM', 'PM', 'am', 'pm', amFormat, pmFormat],
-        },
-      },
-    };
-  }
-
-  onComplete(dt) {
-    this.dispatchOnChange(dt);
+    this.maskOptions = this.dateFormatService.getTimeMask(this.military);
   }
 
   /** BEGIN: Convenient Panel Methods. */
@@ -186,6 +151,10 @@ export class NovoTimePickerInputElement implements OnInit, OnChanges, ControlVal
 
   get panelOpen(): boolean {
     return this.overlay && this.overlay.panelOpen;
+  }
+
+  get overlayElement(): ElementRef {
+    return this.overlayOnElement || this.element;
   }
 
   /** END: Convenient Panel Methods. */
@@ -243,6 +212,12 @@ export class NovoTimePickerInputElement implements OnInit, OnChanges, ControlVal
     }
   }
 
+  _handleChange(event: Event): void {
+    const text = (event?.target as HTMLInputElement)?.value;
+    this.formatTime(text);
+    this.changeEvent.emit();
+  }
+
   _handleBlur(event: FocusEvent): void {
     const text = (event.target as HTMLInputElement).value;
     const hour: string = text.slice(0, 2);
@@ -282,6 +257,7 @@ export class NovoTimePickerInputElement implements OnInit, OnChanges, ControlVal
   public dispatchOnChange(newValue?: any, skip: boolean = false) {
     if (newValue !== this.value) {
       this._onChange(newValue);
+      this.changeEvent.emit(newValue);
       !skip && this.writeValue(newValue);
     }
   }
@@ -294,15 +270,15 @@ export class NovoTimePickerInputElement implements OnInit, OnChanges, ControlVal
     this._changeDetectorRef.markForCheck();
   }
 
+  public setValueAndClose(event: any | null): void {
+    this.setValue(event);
+    this.closePanel();
+  }
+
   public setValue(event: any | null): void {
     if (event && event.date) {
       this.dispatchOnChange(event.date);
     }
-  }
-
-  public setValueAndClose(event: any | null): void {
-    this.setValue(event);
-    this.closePanel();
   }
 
   /**
@@ -326,21 +302,27 @@ export class NovoTimePickerInputElement implements OnInit, OnChanges, ControlVal
     }
   }
 
-  convertTime12to24(time12h: string) {
-    const pmFormat = this.labels.timeFormatPM.toUpperCase();
-
-    const [time, modifier] = time12h.split(' ');
-    let [hours, minutes] = time.split(':');
-    if (hours === '12') {
-      hours = '00';
-    }
-    if (['PM', pmFormat].includes(modifier)) {
-      hours = `${parseInt(hours, 10) + 12}`.padStart(2, '0');
-    }
-    return `${hours}:${minutes}`;
-  }
-
   hourOneFormatRequired(hourInput: string): boolean {
     return hourInput === 'h1' || hourInput === '1h';
+  }
+
+  protected formatTime(value: string) {
+    try {
+      const [dateTimeValue, formatted] = this.dateFormatService.parseString(value, this.military, 'time');
+      if (!isNaN(dateTimeValue.getUTCDate())) {
+        const dt = new Date(dateTimeValue);
+        this.dispatchOnChange(dt);
+      } else {
+        this.dispatchOnChange(null);
+      }
+    } catch (err) {}
+  }
+
+  save(): void {
+    this.onSave.emit();
+  }
+
+  cancel(): void {
+    this.onCancel.emit();
   }
 }

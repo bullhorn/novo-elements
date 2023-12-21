@@ -1,0 +1,12 @@
+@import "../../styles/variables.scss";
+
+:host {
+  margin-right: 0.5em;
+  ::ng-deep i {
+    @include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
+      &.#{$name} {
+        color: $color;
+      }
+    }
+  }
+}

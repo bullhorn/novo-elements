@@ -1,384 +1,217 @@
-input[type="calendar"] {
-  padding: 6px;
-  font-size: 14px;
-  line-height: 14px;
-  color: #333;
-  width: 140px;
-  display: inline-block;
-  border: 2px solid #ddd;
-  border-radius: 4px;
-}
+@import "../../styles/variables.scss";
 
-.hide-overflow-days {
-  .notinmonth {
-    visibility: hidden;
-  }
-}
-
-novo-date-picker {
+:host {
   display: block;
-}
-
-novo-date-picker-input {
-  flex: 1;
-  position: relative;
-  display: block !important;
-  &.disabled {
-    pointer-events: none;
-    opacity: 1;
-  }
-  input {
-    font-size: 1em;
-    border: none;
-    border-bottom: 1px solid $light;
-    background: transparent !important;
-    border-radius: 0;
-    outline: none;
-    height: 2rem;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    box-shadow: none;
-    box-sizing: content-box;
-    transition: all 300ms;
-    color: $dark;
-    &:focus {
-      border-bottom: 1px solid $ocean;
-    }
-  }
-  span.error-text {
-    color: $negative;
-    padding-top: 10px;
-    flex: 1;
-    display: flex;
-  }
-  > i.bhi-clock,
-  > i.bhi-search,
-  > i.bhi-times,
-  > i.bhi-calendar {
-    position: absolute;
-    right: 0;
-    top: 0px;
-    font-size: 1.2rem;
-  }
-}
-
-.calendar.popup {
-  display: none;
-  position: absolute;
-  z-index: z(max);
-}
-
-.calendar.popup.open {
-  display: block;
-}
-
-.date-picker-container {
-  border-radius: 4px;
-  width: min-content;
-  text-align: center;
-  background: var(--background-main);
-  color: #3a3a3a;
-  user-select: none;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15), 0 2px 7px rgba(0, 0, 0, 0.1);
-  z-index: z(max);
-  position: relative;
-
-  .month-view + .month-view {
-    border-collapse: unset;
-    border-left: 1px solid $light;
-    margin-left: 0.5rem;
-    padding-left: 0.5rem;
-  }
-
-  .calendar-top {
-    display: flex;
-    flex-flow: column;
-    background: $positive;
-    color: #fff;
-    font-size: 14px;
-    border-top-right-radius: 4px;
-    border-top-left-radius: 4px;
-    h1 {
-      font-weight: 600;
-      font-size: 4.2em;
-      color: #fff;
-      margin: 0;
-      padding: 0;
-    }
-    h2 {
-      font-weight: 300;
-      opacity: 1;
-      margin: 10px auto;
-      padding: 0;
-    }
-    h3 {
-      font-weight: 400;
-      opacity: 0.4;
-      margin: 15px auto;
-      padding: 0;
-    }
-    h4 {
-      background: rgba(0, 0, 0, 0.15);
-      font-size: 1em;
-      font-weight: 300;
-      padding: 10px;
-    }
-  }
-  .date-range-tabs {
-    border-bottom: 1px solid $off-white;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  .date-picker-container {
+    border-radius: 4px;
+    width: min-content;
+    text-align: center;
+    background: var(--background-main);
+    color: #3a3a3a;
+    user-select: none;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15), 0 2px 7px rgba(0, 0, 0, 0.1);
+    z-index: z(max);
     position: relative;
-    height: 45px;
-    &.week-select-mode {
+
+    .month-view + .month-view {
+      border-collapse: unset;
+      border-left: 1px solid $light;
+      margin-left: 0.5rem;
+      padding-left: 0.5rem;
+    }
+
+    .calendar-top {
+      display: flex;
+      flex-flow: column;
+      background: $positive;
+      color: #fff;
+      font-size: 14px;
+      border-top-right-radius: 4px;
+      border-top-left-radius: 4px;
+      h1 {
+        font-weight: 600;
+        font-size: 4.2em;
+        color: #fff;
+        margin: 0;
+        padding: 0;
+      }
+      h2 {
+        font-weight: 300;
+        opacity: 1;
+        margin: 10px auto;
+        padding: 0;
+      }
+      h3 {
+        font-weight: 400;
+        opacity: 0.4;
+        margin: 15px auto;
+        padding: 0;
+      }
+      h4 {
+        background: rgba(0, 0, 0, 0.15);
+        font-size: 1em;
+        font-weight: 300;
+        padding: 10px;
+      }
+    }
+    .date-range-tabs {
+      border-bottom: 1px solid $off-white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      height: 45px;
+      &.week-select-mode {
+        & > span {
+          cursor: default;
+          color: $font-color-base;
+          pointer-events: none;
+          opacity: 1 !important;
+        }
+        .indicator {
+          display: none;
+        }
+      }
       & > span {
-        cursor: default;
-        color: $font-color-base;
-        pointer-events: none;
-        opacity: 1 !important;
+        color: $positive;
+        text-align: center;
+        flex: 1;
+        cursor: pointer;
+        font-weight: 500;
+        transition: opacity 200ms ease-in-out;
+        opacity: 0.6;
+        &:hover {
+          opacity: 1 !important;
+        }
       }
       .indicator {
-        display: none;
+        position: absolute;
+        width: 50%;
+        height: 2px;
+        bottom: 0;
+        left: 0;
+        background: $positive;
+        transition: transform 200ms ease-in-out;
       }
     }
-    & > span {
-      color: $positive;
-      text-align: center;
-      flex: 1;
-      cursor: pointer;
-      font-weight: 500;
-      transition: opacity 200ms ease-in-out;
-      opacity: 0.6;
-      &:hover {
-        opacity: 1 !important;
-      }
-    }
-    .indicator {
-      position: absolute;
-      width: 50%;
-      height: 2px;
-      bottom: 0;
-      left: 0;
-      background: $positive;
-      transition: transform 200ms ease-in-out;
-    }
-  }
-  .calendar-header {
-    width: 100%;
-    display: flex;
-    flex-flow: row nowrap;
-    border-collapse: collapse;
-    padding: 14px 0;
-    -webkit-user-select: none;
-    justify-content: space-between;
-    cursor: default;
-    border-bottom: 1px solid $off-white;
-    .previous {
-      width: 30px;
-      height: 15px;
-      display: inline-block;
-      cursor: pointer;
-      &:after {
-        content: "";
-        border-bottom: 4px solid transparent;
-        border-top: 4px solid transparent;
-        border-right: 4px solid #aaa;
-        display: inline-block;
-        height: 0;
-        vertical-align: middle;
-        width: 0;
-      }
-      &:hover:after {
-        border-right: 4px solid $positive;
-        cursor: pointer;
-      }
-    }
-    .heading {
-      flex: 1;
-      display: inline-block;
-      vertical-align: middle;
-      color: $positive;
-      font-weight: 600;
-      .month {
-        border-radius: 2px;
-        padding: 3px 8px;
-        &:hover {
-          background: $positive;
-          color: #fff;
-          cursor: pointer;
-        }
-      }
-      .year {
-        border-radius: 2px;
-        padding: 3px 8px;
-        &:hover {
-          background: $positive;
-          color: #fff;
-          cursor: pointer;
-        }
-      }
-    }
-    .next {
-      width: 30px;
-      height: 15px;
-      display: inline-block;
-      cursor: pointer;
-      &:before {
-        content: "";
-        border-bottom: 4px solid transparent;
-        border-top: 4px solid transparent;
-        border-left: 4px solid #aaa;
-        display: inline-block;
-        height: 0;
-        vertical-align: middle;
-        width: 0;
-      }
-      &:hover:before {
-        opacity: 1;
-        border-left: 4px solid $positive;
-        cursor: pointer;
-      }
-    }
-  }
-  section.calendar-content {
-    display: flex;
-    flex-flow: column;
-    span {
-      display: block;
-    }
-    &.days {
+    .calendar-header {
+      width: 100%;
+      display: flex;
       flex-flow: row nowrap;
-      height: min-content;
+      border-collapse: collapse;
+      padding: 14px 0;
+      -webkit-user-select: none;
+      justify-content: space-between;
+      cursor: default;
+      border-bottom: 1px solid $off-white;
+      .previous {
+        width: 30px;
+        height: 15px;
+        display: inline-block;
+        cursor: pointer;
+        &:after {
+          content: "";
+          border-bottom: 4px solid transparent;
+          border-top: 4px solid transparent;
+          border-right: 4px solid #aaa;
+          display: inline-block;
+          height: 0;
+          vertical-align: middle;
+          width: 0;
+        }
+        &:hover:after {
+          border-right: 4px solid $positive;
+          cursor: pointer;
+        }
+      }
+      .heading {
+        flex: 1;
+        display: inline-block;
+        vertical-align: middle;
+        color: $positive;
+        font-weight: 600;
+        .month {
+          border-radius: 2px;
+          padding: 3px 8px;
+          &:hover {
+            background: $positive;
+            color: #fff;
+            cursor: pointer;
+          }
+        }
+        .year {
+          border-radius: 2px;
+          padding: 3px 8px;
+          &:hover {
+            background: $positive;
+            color: #fff;
+            cursor: pointer;
+          }
+        }
+      }
+      .next {
+        width: 30px;
+        height: 15px;
+        display: inline-block;
+        cursor: pointer;
+        &:before {
+          content: "";
+          border-bottom: 4px solid transparent;
+          border-top: 4px solid transparent;
+          border-left: 4px solid #aaa;
+          display: inline-block;
+          height: 0;
+          vertical-align: middle;
+          width: 0;
+        }
+        &:hover:before {
+          opacity: 1;
+          border-left: 4px solid $positive;
+          cursor: pointer;
+        }
+      }
+    }
+    section.calendar-content {
+      display: flex;
+      flex-flow: column;
+      span {
+        display: block;
+      }
+      &.days {
+        flex-flow: row nowrap;
+        height: min-content;
+      }
+    }
+    .calendar-content {
+      width: 100%;
+      height: 230px;
+      overflow-y: scroll;
+      position: static;
+      top: 0;
+      left: 0;
+      transform-origin: 209px 26px;
+      transform: scale(1);
+    }
+    .calendar-footer {
+      width: 100%;
+      padding: 1rem 0.8rem;
+      text-align: left;
     }
   }
-  .calendar-content {
-    width: 100%;
-    height: 230px;
-    overflow-y: scroll;
-    position: static;
-    top: 0;
-    left: 0;
-    transform-origin: 209px 26px;
-    transform: scale(1);
-  }
-  .calendar-footer {
-    width: 100%;
-    padding: 1rem 0.8rem;
-    text-align: left;
-  }
-}
 
-novo-date-range-input {
-  flex: 1;
-  position: relative;
-  // display: block;
-  display: flex;
-  flex-flow: row nowrap;
-  height: min-content;
-
-  &.disabled {
-    pointer-events: none;
-    opacity: 1;
-  }
-  .date-range-input-container {
-    position: relative;
-    height: min-content;
-  }
-  .date-range-input-divider {
-    font-weight: 800;
-    margin: 0 0.5em;
-    align-self: center;
-    height: min-content;
-  }
-
-  input {
-    font-size: 1em;
-    border: none;
-    border-bottom: 1px solid var(--border);
-    background: transparent !important;
-    border-radius: 0;
-    outline: none;
-    height: 2rem;
-    width: 9em;
-    margin: 0;
-    padding: 0;
-    box-shadow: none;
-    box-sizing: content-box;
-    transition: all 300ms;
-    color: var(--text-main);
-    &:focus {
-      border-bottom: 1px solid $ocean;
+  ::ng-deep .hide-overflow-days {
+    .notinmonth {
+      visibility: hidden;
     }
   }
-  novo-icon {
+
+  .calendar.popup {
+    display: none;
     position: absolute;
-    right: 0;
-    top: 0;
-    font-size: 1em;
-  }
-  novo-icon[size="small"] {
-    top: calc(50% - 0.75em);
-    font-size: 0.5em;
-  }
-}
-
-@keyframes select {
-  from {
-    opacity: 0.8;
-    transform: scale(1);
-  }
-  to {
-    opacity: 0;
-    transform: scale(1.6);
-  }
-}
-
-novo-multi-date-input {
-  @extend chips;
-
-  .chip-input-container {
-    padding-top: 10px;
-    .placeholder {
-      color: var(--form-placeholder);
-    }
+    z-index: z(max);
   }
 
-  .panel-toggle {
-    padding: 0.2em;
-    i {
-      margin: 0px;
-    }
-    &.selected {
-      background: $light;
-      border-radius: 50%;
-    }
-  }
-
-  ul.summary {
-    display: inline;
-    list-style: none;
-    color: darken(#d2d2d2, 30%);
-    padding: 0 10px 0;
-
-    li {
-      display: inline;
-      padding: 0 3px;
-    }
-
-    li:after {
-      content: ", ";
-    }
-
-    li:last-child:after {
-      content: " ";
-    }
-  }
-
-  chip {
-    span {
-      text-transform: capitalize;
-    }
+  .calendar.popup.open {
+    display: block;
   }
 }

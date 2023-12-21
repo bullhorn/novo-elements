@@ -1,0 +1,302 @@
+@import "../../../../styles/variables.scss";
+
+picker-results,
+entity-picker-results {
+  background: $white;
+  color: black;
+  min-width: 100%;
+  max-width: 100%;
+  z-index: 10;
+  top: 100%;
+  .novo-list {
+    border: 1px solid #4a89dc;
+    .novo-list-item {
+      cursor: pointer;
+      flex: 0 0;
+      transition: background-color 250ms;
+      & > div {
+        width: 100%;
+      }
+      &.active {
+        background-color: lighten($positive, 35%);
+      }
+      &:hover {
+        background-color: lighten($positive, 39%);
+      }
+      .novo-item-content {
+        flex-flow: row wrap;
+        & > * {
+          flex: 0 0 33%;
+          white-space: nowrap;
+        }
+      }
+    }
+  }
+  section {
+    box-shadow: 0.1em 0.1em 1em rgba(0, 0, 0, 0.25);
+    z-index: 9;
+    position: absolute;
+    width: 100%;
+    background-color: white;
+    color: black;
+  }
+
+  picker-error,
+  picker-loader,
+  picker-null-recent-results,
+  picker-null-results,
+  .picker-error,
+  .picker-loader,
+  .picker-null-recent-results,
+  .picker-null-results {
+    background-color: $white;
+    text-align: center;
+    color: darken($light, 15%);
+    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    border: 1px solid $positive;
+    transform: translateY(0%);
+    transition: all 0.15s cubic-bezier(0.35, 0, 0.25, 1);
+    padding: $spacing-sm;
+  }
+
+  p.picker-error,
+  p.picker-loader,
+  p.picker-null-recent-results,
+  p.picker-null-results {
+    max-width: inherit;
+    padding: 5px;
+  }
+
+  picker-loader,
+  .picker-loader {
+    background-color: $white;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    border: 1px solid $positive;
+    transform: translateY(0%);
+    transition: all 0.15s cubic-bezier(0.35, 0, 0.25, 1);
+  }
+  section {
+    box-shadow: 0.1em 0.1em 1em rgba(0, 0, 0, 0.25);
+    z-index: 9;
+    position: absolute;
+    width: 100%;
+    background-color: white;
+    color: black;
+  }
+}
+
+picker-results,
+.picker-results,
+quick-note-results,
+.quick-note-results {
+  background-color: $white;
+  cursor: default;
+  line-height: 26px;
+  width: 100%;
+  display: block;
+  novo-list,
+  ul {
+    background-color: $white;
+    max-height: 200px;
+    overflow: auto;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    border: 1px solid $positive;
+    transform: translateY(0%);
+    transition: all 0.15s cubic-bezier(0.35, 0, 0.25, 1);
+    display: block;
+    novo-list-item,
+    li {
+      font-size: 0.9em;
+      padding: 5px 16px;
+      span {
+        display: inline-block;
+        min-width: 100px;
+        margin: 2px 0;
+      }
+      h6 {
+        padding-top: 0;
+        font-weight: 400;
+        color: lighten($dark, 35%);
+        strong {
+          font-weight: 400;
+          color: $dark;
+        }
+      }
+      &.active,
+      &:focus,
+      &:hover {
+        background-color: lighten($positive, 35%);
+      }
+      &.disabled {
+        opacity: 0.5;
+        pointer-events: none;
+      }
+      item-content {
+        // display: block;
+      }
+    }
+    novo-loading {
+      justify-content: center;
+    }
+  }
+  ul {
+    li {
+      padding: 10px 16px;
+      box-sizing: border-box;
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: column;
+    }
+  }
+  &.active {
+    z-index: z(overlay);
+  }
+  &:focus {
+    outline: none;
+  }
+}
+
+
+entity-picker-results,
+:host-context(entity-picker-results) {
+  background: $white;
+  width: 100%;
+  min-width: 250px;
+  novo-list {
+    background: $white;
+    min-width: 30rem;
+    max-height: 49vh;
+    overflow: auto;
+    .novo-item-content {
+      margin-top: $spacing-sm;
+      margin-left: 1.8rem;
+      row-gap: 1rem;
+      .novo-text {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        padding-right: 1em;
+      }
+    }
+    novo-loading {
+      justify-content: center;
+    }
+  }
+}
+
+// Shared specialty picker styles
+workers-comp-codes-picker-results,
+distribution-list-picker-results {
+  display: block;
+  color: black;
+  width: 100%;
+  max-width: none;
+  z-index: 99;
+  background: $white;
+  padding: 1px;
+  &.active {
+    border: 1px solid $positive;
+  }
+  .novo-list {
+    min-height: 100%;
+    background: $white;
+    max-height: 330px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    .novo-list-item {
+      display: block;
+      transition: background-color 250ms;
+      border-bottom: 1px solid $background-dark;
+      cursor: pointer;
+      &.disabled {
+        opacity: 0.5;
+        pointer-events: none;
+      }
+      item-title h6 {
+        font-weight: 500;
+        padding: 0.6em 0 0.5em;
+        span {
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          min-width: 100px;
+          width: 80%;
+          display: block;
+        }
+      }
+      & > div {
+        width: 100%;
+        margin-left: 15px;
+      }
+      &.active {
+        background-color: lighten($positive, 35%);
+      }
+      &:hover {
+        background-color: lighten($positive, 35%);
+      }
+      item-content {
+        flex-flow: row nowrap;
+        justify-content: space-between;
+        & > * {
+          flex: 0 0 60%;
+          white-space: nowrap;
+        }
+        p {
+          margin-right: 0.5em;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          flex: 1;
+          .label {
+            font-weight: bold;
+          }
+        }
+      }
+    }
+    novo-loading {
+      justify-content: center;
+    }
+  }
+  .picker-loader,
+  .picker-error,
+  .picker-null-results {
+    border: none;
+  }
+
+  .picker-null,
+  .picker-error,
+  .picker-loading,
+  .picker-no-recents,
+  .picker-error{
+    text-align: center;
+    padding: 1em 0 4em;
+    > i {
+      font-size: 3em;
+      margin: 0.5em;
+      color: rgba(0, 0, 0, 0.3);
+    }
+    > h4,
+    > p {
+      margin: 0;
+      max-width: none;
+      padding: 0;
+    }
+    > h4 {
+      font-weight: 500;
+    }
+  }
+  section {
+    box-shadow: 0.1em 0.1em 1em rgba(0, 0, 0, 0.25);
+    z-index: 9;
+    position: absolute;
+    width: 100%;
+    background-color: white;
+    color: black;
+  }
+}

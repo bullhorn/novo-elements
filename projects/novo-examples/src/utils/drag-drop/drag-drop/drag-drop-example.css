@@ -1,0 +1,11 @@
+.drag-box {
+    width: 500px;
+    display: block;
+}
+.demo-drag-item {
+    display: inline-flex;
+    text-align: center;
+    margin: 10px;
+    width: 122px;
+    position: relative;
+}

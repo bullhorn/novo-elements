@@ -1,11 +1,11 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
+import { NovoDragulaService } from 'novo-elements/addons';
 import {
-  NovoAsideService,
-  NovoDragulaService,
   FieldInteractionApi,
-  IMenuOptions, MENU_OPTIONS,
-  NovoModalService,
   GooglePlacesService,
+  IMenuOptions, MENU_OPTIONS,
+  NovoAsideService,
+  NovoModalService,
   NovoToastService,
 } from 'novo-elements/elements';
 import {
