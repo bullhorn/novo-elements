@@ -60,7 +60,7 @@ export interface Collection<T> {
    *  @param item The item to find.
    *  @return The index of the item, or -1 if the item is not in the list.
    */
-  getItemIndex(item: Object): number;
+  getItemIndex(item: T): number; // here
 
   /**
    *  Notifies the view that an item has been updated.
