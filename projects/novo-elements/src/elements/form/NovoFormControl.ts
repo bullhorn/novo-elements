@@ -118,7 +118,6 @@ export class NovoFormControl extends UntypedFormControl {
     this.endDate = control.endDate;
     this.weekStart = control.weekStart;
     this.textMaskEnabled = control.textMaskEnabled;
-    this.textMaskEnabled = control.textMaskEnabled;
     this.maskOptions = control.maskOptions;
     this.allowInvalidDate = control.allowInvalidDate;
     this.maxlength = control.maxlength;

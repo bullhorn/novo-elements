@@ -25,12 +25,12 @@ import {
   Output,
   TemplateRef,
   ViewChild,
-  ViewContainerRef,
+  ViewContainerRef
 } from '@angular/core';
 // Vendor
+import { Helpers } from "novo-elements/utils";
 import { fromEvent, merge, Observable, of as observableOf, Subscription } from 'rxjs';
 import { filter, first, switchMap } from 'rxjs/operators';
-import {Helpers} from "novo-elements/utils";
 
 @Component({
   selector: 'novo-overlay-template',
@@ -101,7 +101,7 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
   }
 
   get panelOpen(): boolean {
-    return this.overlayRef && this.overlayRef.hasAttached();
+    return this.overlayRef?.hasAttached();
   }
 
   @Input()
@@ -141,7 +141,7 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
 
   public closePanel(): void {
     this.zone.run(() => {
-      if (this.overlayRef && this.overlayRef.hasAttached()) {
+      if (this.overlayRef?.hasAttached()) {
         this.overlayRef.detach();
         this.closingActionsSubscription.unsubscribe();
       }
@@ -338,5 +338,12 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
 
   protected getHostWidth(): number {
     return this.getConnectedElement().nativeElement.getBoundingClientRect().width;
+  }
+
+  public isBlurRecipient(event: FocusEvent): boolean {
+    if (!this.overlayRef || !event.relatedTarget) {
+      return false;
+    }
+    return this.overlayRef.overlayElement.contains(event.relatedTarget as HTMLElement);
   }
 }

@@ -28,6 +28,7 @@ novo-elements.iml
 
 # misc
 /.angular/cache
+/.scannerwork
 /.sass-cache
 /connect.lock
 /coverage

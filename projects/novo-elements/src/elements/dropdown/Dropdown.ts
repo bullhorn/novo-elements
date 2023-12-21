@@ -65,7 +65,7 @@ const NovoDropdowMixins: HasOverlayCtor & CanDisableCtor & HasTabIndexCtor & typ
   template: `
     <ng-content select="button,novo-button,[dropdownTrigger]" #trigger></ng-content>
     <novo-overlay-template [parent]="element" [width]="width" [position]="side" [scrollStrategy]="scrollStrategy">
-      <div #panel class="dropdown-container {{ containerClass }}" [style.height.px]="height" [class.has-height]="!!height">
+      <div #panel class="dropdown-container {{ containerClass }}" [style.max-height.px]="height" [class.has-height]="!!height">
         <ng-content></ng-content>
       </div>
     </novo-overlay-template>
@@ -146,6 +146,16 @@ export class NovoDropdownElement extends NovoDropdowMixins implements OnInit, Af
   }
   private _multiple: boolean = false;
 
+  /** Whether the dropdown should scroll to the active item whenever it is opened. */
+  @Input()
+  get scrollToActiveItemOnOpen(): boolean {
+    return this._scrollToActiveItemOnOpen;
+  }
+  set scrollToActiveItemOnOpen(value: boolean) {
+    this._scrollToActiveItemOnOpen = coerceBooleanProperty(value);
+  }
+  private _scrollToActiveItemOnOpen: boolean = false;
+
   get button() {
     return this._trigger || this._button;
   }
@@ -193,6 +203,20 @@ export class NovoDropdownElement extends NovoDropdowMixins implements OnInit, Af
       this.element.nativeElement.focus(options);
     }
   }
+
+  openPanel(): void {
+    super.openPanel()
+    if (this.scrollToActiveItemOnOpen) {
+      this._scrollOptionIntoView(this.findFirstSelectedOptionIndex(this.options) || 0)
+    }
+  }
+
+  private findFirstSelectedOptionIndex(options: QueryList<NovoOption>): number | null {
+    return options.toArray().findIndex((option: NovoOption) => {
+      return option.selected === true;
+    });
+  }
+
 
   public set items(items: QueryList<NovoItemElement>) {
     // this._items = items;
@@ -271,10 +295,13 @@ export class NovoDropdownElement extends NovoDropdowMixins implements OnInit, Af
       // this.handleSelection(event.source, event.isUserInput);
       if (event.isUserInput && !this.multiple) {
         this._clearPreviousSelectedOption(this._keyManager.activeItem);
+        event.source.select();
         if (!this.keepOpen && this.panelOpen) {
           this.closePanel();
           this.focus();
         }
+      } else {
+        event.source.select();
       }
     });
   }

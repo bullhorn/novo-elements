@@ -29,6 +29,7 @@
         (mouseover)="onHover($event, day)">
         <novo-button
           class="day"
+          tabindex="0"
           [attr.data-automation-id]="day.number"
           [disabled]="isDisabled(day.date)"
           (click)="onSelect($event, day)">
