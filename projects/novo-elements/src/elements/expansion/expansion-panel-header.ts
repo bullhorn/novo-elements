@@ -69,11 +69,11 @@ export class NovoExpansionPanelHeader implements OnDestroy {
 
   /** Height of the header while the panel is expanded. */
   @Input()
-  expandedHeight: string;
+  expandedHeight: string = '56px';
 
   /** Height of the header while the panel is collapsed. */
   @Input()
-  collapsedHeight: string;
+  collapsedHeight: string = '48px';
 
   /** Toggles the expanded state of the panel. */
   _toggle(): void {
