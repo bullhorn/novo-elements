@@ -70,6 +70,10 @@ export class NovoProgressBarElement implements ControlValueAccessor, OnInit {
   @Input()
   animated: boolean = false;
 
+  @HostBinding('class.flash')
+  @Input()
+  flash: boolean = false;
+
   @HostBinding('style.width')
   get width() {
     if (this.isRadial()) {
@@ -120,6 +124,8 @@ export class NovoProgressBarElement implements ControlValueAccessor, OnInit {
     if (this.indeterminate) {
       this.striped = true;
       this.animated = true;
+    }
+    if (this.indeterminate || this.flash) {
       this._value = this.progress?.total || 100;
     }
     if (this.progress) {
