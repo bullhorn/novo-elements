@@ -36,14 +36,15 @@
     }
 
     &.flash {
-      padding: 0 800px;
+      padding: 0 600px;
       background-image: linear-gradient(
         135deg,
-        $silver 40%,
-        $sand 50%,
-        $silver 60%
+        $silver 48%,
+        $sand 49%,
+        $sand 51%,
+        $silver 52%
       );
-      animation: progress-bar-flash 2s linear infinite;
+      animation: progress-bar-flash 3s linear infinite;
     }
   }
 
@@ -95,7 +96,7 @@
 
 @-webkit-keyframes progress-bar-flash {
   from {
-    transform: translateX(-1400px);
+    transform: translateX(-1000px);
   }
   to {
     transform: translateX(0px);
@@ -103,7 +104,7 @@
 }
 @keyframes progress-bar-flash {
   from {
-    transform: translateX(-1400px);
+    transform: translateX(-1000px);
   }
   to {
     transform: translateX(0px);
