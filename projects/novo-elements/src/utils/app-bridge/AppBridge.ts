@@ -80,32 +80,45 @@ export interface IAppBridgeRequestDataEvent {
   type: NovoDataType;
 }
 
-const HTTP_VERBS = {
-  GET: 'get',
-  POST: 'post',
-  PUT: 'put',
-  DELETE: 'delete',
+namespace HTTP_VERBS {
+  export const GET = 'get';
+  export const POST = 'post';
+  export const PUT = 'put';
+  export const DELETE = 'delete';
 };
 
-const MESSAGE_TYPES = {
-  REGISTER: 'register',
-  OPEN: 'open',
-  OPEN_LIST: 'openList',
-  CLOSE: 'close',
-  REFRESH: 'refresh',
-  PIN: 'pin',
-  PING: 'ping',
-  UPDATE: 'update',
-  HTTP_GET: 'httpGET',
-  HTTP_POST: 'httpPOST',
-  HTTP_PUT: 'httpPUT',
-  HTTP_DELETE: 'httpDELETE',
-  CUSTOM_EVENT: 'customEvent',
-  REQUEST_DATA: 'requestData',
-  CALLBACK: 'callback',
+namespace MESSAGE_TYPES {
+  export const REGISTER = 'register';
+  export const OPEN = 'open';
+  export const OPEN_LIST = 'openList';
+  export const CLOSE = 'close';
+  export const REFRESH = 'refresh';
+  export const PIN = 'pin';
+  export const PING = 'ping';
+  export const UPDATE = 'update';
+  export const HTTP_GET = 'httpGET';
+  export const HTTP_POST = 'httpPOST';
+  export const HTTP_PUT = 'httpPUT';
+  export const HTTP_DELETE = 'httpDELETE';
+  export const CUSTOM_EVENT = 'customEvent';
+  export const REQUEST_DATA = 'requestData';
+  export const CALLBACK = 'callback';
 };
+
+type ValueOf<T> = T[keyof T];
+
+type MessageType = ValueOf<typeof MESSAGE_TYPES>;
+type HttpVerb = ValueOf<typeof HTTP_VERBS>;
 
 declare const postRobot: any;
+
+export interface PostRobotEvent<T> {
+  data: T;
+  // the URL of the origin window
+  origin: string;
+  // the Window object this event was sent from (be warned, you may not be able to access its properties)
+  source: Window;
+}
 
 export class AppBridgeService {
   create(name: string) {
@@ -158,122 +171,155 @@ export class AppBridge {
   }
 
   protected _setupHandlers(): void {
-    // Register
-    postRobot.on(MESSAGE_TYPES.REGISTER, (event) => {
-      this._trace(MESSAGE_TYPES.REGISTER, event);
-      this._registeredFrames.push(event);
-      return this.register(event.data).then((windowName) => {
-        return { windowName };
-      });
-    });
-    // Update
-    postRobot.on(MESSAGE_TYPES.UPDATE, (event) => {
-      this._trace(MESSAGE_TYPES.UPDATE, event);
-      return this.update(event.data).then((success) => {
-        return { success };
-      });
-    });
-    // Open
-    postRobot.on(MESSAGE_TYPES.OPEN, (event) => {
-      this._trace(MESSAGE_TYPES.OPEN, event);
-      return this.open(event.data).then((success) => {
-        return { success };
-      });
-    });
-    postRobot.on(MESSAGE_TYPES.OPEN_LIST, (event) => {
-      this._trace(MESSAGE_TYPES.OPEN_LIST, event);
-      return this.openList(event.data).then((success) => {
-        return { success };
-      });
-    });
-    // Close
-    postRobot.on(MESSAGE_TYPES.CLOSE, (event) => {
-      this._trace(MESSAGE_TYPES.CLOSE, event);
-      const index = this._registeredFrames.findIndex((frame) => frame.data.id === event.data.id);
-      if (index !== -1) {
-        this._registeredFrames.splice(index, 1);
-      }
-      return this.close(event.data).then((success) => {
-        return { success };
-      });
-    });
-    // Refresh
-    postRobot.on(MESSAGE_TYPES.REFRESH, (event) => {
-      this._trace(MESSAGE_TYPES.REFRESH, event);
-      return this.refresh(event.data).then((success) => {
-        return { success };
-      });
-    });
-    // PIN
-    postRobot.on(MESSAGE_TYPES.PIN, (event) => {
-      this._trace(MESSAGE_TYPES.PIN, event);
-      return this.pin(event.data).then((success) => {
-        return { success };
-      });
-    });
-    // PING
-    postRobot.on(MESSAGE_TYPES.PING, (event) => {
-      this._trace(MESSAGE_TYPES.PING, event);
-      return this.httpGET('ping').then((result) => {
-        return { data: result.data, error: result.error };
-      });
-    });
-    // REQUEST_DATA
-    postRobot.on(MESSAGE_TYPES.REQUEST_DATA, (event) => {
-      this._trace(MESSAGE_TYPES.REQUEST_DATA, event);
-      return this.requestData(event.data).then((result) => {
-        return { data: result.data, error: result.error };
-      });
-    });
-    // CALLBACKS
-    postRobot.on(MESSAGE_TYPES.CALLBACK, (event) => {
-      this._trace(MESSAGE_TYPES.CALLBACK, event);
-      return this.callback(event.data).then((success) => {
-        return { success };
-      });
-    });
-    // HTTP-GET
-    postRobot.on(MESSAGE_TYPES.HTTP_GET, (event) => {
-      this._trace(MESSAGE_TYPES.HTTP_GET, event);
-      return this.httpGET(event.data.relativeURL).then((result) => {
-        return { data: result.data, error: result.error };
-      });
-    });
-    // HTTP-POST
-    postRobot.on(MESSAGE_TYPES.HTTP_POST, (event) => {
-      this._trace(MESSAGE_TYPES.HTTP_POST, event);
-      return this.httpPOST(event.data.relativeURL, event.data.data).then((result) => {
-        return { data: result.data, error: result.error };
-      });
-    });
-    // HTTP-PUT
-    postRobot.on(MESSAGE_TYPES.HTTP_PUT, (event) => {
-      this._trace(MESSAGE_TYPES.HTTP_PUT, event);
-      return this.httpPUT(event.data.relativeURL, event.data.data).then((result) => {
-        return { data: result.data, error: result.error };
-      });
-    });
-    // HTTP-DELETE
-    postRobot.on(MESSAGE_TYPES.HTTP_DELETE, (event) => {
-      this._trace(MESSAGE_TYPES.HTTP_DELETE, event);
-      return this.httpDELETE(event.data.relativeURL).then((result) => {
-        return { data: result.data, error: result.error };
-      });
-    });
-    // Custom Events
-    postRobot.on(MESSAGE_TYPES.CUSTOM_EVENT, (event) => {
-      this._trace(MESSAGE_TYPES.CUSTOM_EVENT, event);
-      if (this._eventListeners[event.data.event]) {
-        this._eventListeners[event.data.event].forEach((listener) => {
-          listener(event.data.data);
+
+    // map an object for all handlers, so that we can run some other actions before each of them
+    const defaultMsgHandlers: { [msgType in MessageType]?: (evt: PostRobotEvent<any>) => Promise<unknown> } = {
+      // Register
+      [MESSAGE_TYPES.REGISTER]: async (event) => {
+        this._registeredFrames.push(event);
+        const windowName = await this.register(event.data);
+        return {windowName};
+      },
+
+      // Update
+      [MESSAGE_TYPES.UPDATE]: (event: PostRobotEvent<any>) => {
+        return this.update(event.data).then((success) => {
+          return { success };
         });
-      }
-      if (this._registeredFrames.length > 0) {
-        this._registeredFrames.forEach((frame) => {
-          postRobot.send(frame.source, MESSAGE_TYPES.CUSTOM_EVENT, event.data);
+      },
+      // Open
+      [MESSAGE_TYPES.OPEN]: (event: PostRobotEvent<any>) => {
+        return this.open(event.data).then((success) => {
+          return { success };
         });
+      },
+      [MESSAGE_TYPES.OPEN_LIST]: (event: PostRobotEvent<any>) => {
+        return this.openList(event.data).then((success) => {
+          return { success };
+        });
+      },
+      // Close
+      [MESSAGE_TYPES.CLOSE]: (event: PostRobotEvent<any>) => {
+        const index = this._registeredFrames.findIndex((frame) => frame.data.id === event.data.id);
+        if (index !== -1) {
+          this._registeredFrames.splice(index, 1);
+        }
+        return this.close(event.data).then(success => ({ success }));
+      },
+      // Refresh
+      [MESSAGE_TYPES.REFRESH]: (event: PostRobotEvent<any>) => {
+        return this.refresh(event.data).then((success) => {
+          return { success };
+        });
+      },
+      // PIN
+      [MESSAGE_TYPES.PIN]: (event: PostRobotEvent<any>) => {
+        return this.pin(event.data).then((success) => {
+          return { success };
+        });
+      },
+      // PING
+      [MESSAGE_TYPES.PING]: (event: PostRobotEvent<any>) => {
+        return this.httpGET('ping', undefined, event.data.origin).then((result) => {
+          return { data: result.data, error: result.error };
+        });
+      },
+      // REQUEST_DATA
+      [MESSAGE_TYPES.REQUEST_DATA]: (event: PostRobotEvent<any>) => {
+        return this.requestData(event.data).then((result) => {
+          return { data: result.data, error: result.error };
+        });
+      },
+      // CALLBACKS
+      [MESSAGE_TYPES.CALLBACK]: (event: PostRobotEvent<any>) => {
+        return this.callback(event.data).then((success) => {
+          return { success };
+        });
+      },
+      // HTTP-GET
+      [MESSAGE_TYPES.HTTP_GET]: (event: PostRobotEvent<any>) => {
+        return this.httpGET(event.data.relativeURL, undefined, event.data.origin).then((result) => {
+          return { data: result.data, error: result.error };
+        });
+      },
+      // HTTP-POST
+      [MESSAGE_TYPES.HTTP_POST]: (event: PostRobotEvent<any>) => {
+        return this.httpPOST(event.data.relativeURL, event.data.data, undefined, event.data.origin).then((result) => {
+          return { data: result.data, error: result.error };
+        });
+      },
+      // HTTP-PUT
+      [MESSAGE_TYPES.HTTP_PUT]: (event: PostRobotEvent<any>) => {
+        return this.httpPUT(event.data.relativeURL, event.data.data, undefined, event.data.origin).then((result) => {
+          return { data: result.data, error: result.error };
+        });
+      },
+      // HTTP-DELETE
+      [MESSAGE_TYPES.HTTP_DELETE]: (event: PostRobotEvent<any>) => {
+        return this.httpDELETE(event.data.relativeURL, undefined, event.data.origin).then((result) => {
+          return { data: result.data, error: result.error };
+        });
+      },
+      // Custom Events
+      [MESSAGE_TYPES.CUSTOM_EVENT]: async (event: PostRobotEvent<any>) => {
+        if (this._eventListeners[event.data.event]) {
+          this._eventListeners[event.data.event].forEach((listener) => {
+            listener(event.data.data);
+          });
+        }
+        if (this._registeredFrames.length > 0) {
+          this._registeredFrames.forEach((frame) => {
+            // TODO: Should this make sure it doesn't echo the custom event back to the author?
+            postRobot.send(frame.source, MESSAGE_TYPES.CUSTOM_EVENT, event.data);
+          });
+        }
       }
+    };
+
+    Object.keys(defaultMsgHandlers).forEach(msgType => {
+      postRobot.on(msgType, event => {
+        this._trace(msgType, event);
+        const origin: string[] = Array.isArray(event.data.origin) ? event.data.origin : [];
+        if (event.origin !== window.location.origin) {
+        origin.push(event.origin);
+        }
+        event.data.origin = origin;
+        event.data.source = event.source;
+        return defaultMsgHandlers[msgType](event);
+      })
     });
+  }
+
+  handleMessage<T>({ msgType, handler, packet, echoPacket, resolveEventData }: {
+    msgType: MessageType,
+    handler: AppBridgeHandler,
+    packet: T,
+    echoPacket: any,
+    resolveEventData: (any) => boolean,
+  }): Promise<boolean> {
+    let returnPromise: Promise<any>;
+    if (this._handlers[handler]) {
+      // Should be directly returning a promise. However, as a fallback, provide callback arguments
+      let callbackSuccess, callbackFail;
+      returnPromise = new Promise((s, f) => {
+        callbackSuccess = s;
+        callbackFail = f;
+      });
+      const handlerResult = this._handlers[handler](packet, callbackArg => {
+        if (callbackArg) {
+          callbackSuccess(true);
+        } else {
+          callbackFail(false);
+        }
+      });
+      if (handlerResult && 'then' in handlerResult) {
+        returnPromise = handlerResult;
+      }
+      return returnPromise.then(result => true, () => false);
+    } else {
+      return postRobot.sendToParent(msgType, echoPacket || packet);
+    }
+    
   }
 
   /**
@@ -606,16 +652,18 @@ export class AppBridge {
   /**
    * Fires or responds to an HTTP_GET event
    * @param packet any - packet of data to send with the event
+   * @param timeout - how long to attempt the request before reporting an error
+   * @param origin - the domain of the frame the request originated from
    */
-  public httpGET(relativeURL: string, timeout: number = 10000): Promise<any> {
+  public httpGET(relativeURL: string, timeout: number = 10000, origin: string = this.traceName): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       if (this._handlers[AppBridgeHandler.HTTP]) {
-        this._handlers[AppBridgeHandler.HTTP]({ verb: HTTP_VERBS.GET, relativeURL }, (data: any, error: any) => {
+        this._handlers[AppBridgeHandler.HTTP]({ verb: HTTP_VERBS.GET, relativeURL, origin }, (data: any, error: any) => {
           resolve({ data, error });
         });
       } else {
         postRobot
-          .sendToParent(MESSAGE_TYPES.HTTP_GET, { relativeURL }, { timeout })
+          .sendToParent(MESSAGE_TYPES.HTTP_GET, { relativeURL, origin: [origin] })
           .then((event: any) => {
             resolve({ data: event.data.data, error: event.data.error });
           })
@@ -630,15 +678,15 @@ export class AppBridge {
    * Fires or responds to an HTTP_POST event
    * @param packet any - packet of data to send with the event
    */
-  public httpPOST(relativeURL: string, postData: any, timeout: number = 10000): Promise<any> {
+  public httpPOST(relativeURL: string, postData: any, timeout: number = 10000, origin: string = this.traceName): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       if (this._handlers[AppBridgeHandler.HTTP]) {
-        this._handlers[AppBridgeHandler.HTTP]({ verb: HTTP_VERBS.POST, relativeURL, data: postData }, (data: any, error: any) => {
+        this._handlers[AppBridgeHandler.HTTP]({ verb: HTTP_VERBS.POST, relativeURL, data: postData, origin }, (data: any, error: any) => {
           resolve({ data, error });
         });
       } else {
         postRobot
-          .sendToParent(MESSAGE_TYPES.HTTP_POST, { relativeURL, data: postData }, { timeout })
+          .sendToParent(MESSAGE_TYPES.HTTP_POST, { relativeURL, data: postData, origin: [ origin ] }, { timeout })
           .then((event: any) => {
             resolve({ data: event.data.data, error: event.data.error });
           })
@@ -653,15 +701,15 @@ export class AppBridge {
    * Fires or responds to an HTTP_PUT event
    * @param packet any - packet of data to send with the event
    */
-  public httpPUT(relativeURL: string, putData: any, timeout: number = 10000): Promise<any> {
+  public httpPUT(relativeURL: string, putData: any, timeout: number = 10000, origin: string = this.traceName): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       if (this._handlers[AppBridgeHandler.HTTP]) {
-        this._handlers[AppBridgeHandler.HTTP]({ verb: HTTP_VERBS.PUT, relativeURL, data: putData }, (data: any, error: any) => {
+        this._handlers[AppBridgeHandler.HTTP]({ verb: HTTP_VERBS.PUT, relativeURL, data: putData, origin }, (data: any, error: any) => {
           resolve({ data, error });
         });
       } else {
         postRobot
-          .sendToParent(MESSAGE_TYPES.HTTP_PUT, { relativeURL, data: putData }, { timeout })
+          .sendToParent(MESSAGE_TYPES.HTTP_PUT, { relativeURL, data: putData, origin: [ origin ] }, { timeout })
           .then((event: any) => {
             resolve({ data: event.data.data, error: event.data.error });
           })
@@ -676,15 +724,15 @@ export class AppBridge {
    * Fires or responds to an HTTP_DELETE event
    * @param packet any - packet of data to send with the event
    */
-  public httpDELETE(relativeURL: string, timeout: number = 10000): Promise<any> {
+  public httpDELETE(relativeURL: string, timeout: number = 10000, origin: string = this.traceName): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       if (this._handlers[AppBridgeHandler.HTTP]) {
-        this._handlers[AppBridgeHandler.HTTP]({ verb: HTTP_VERBS.DELETE, relativeURL }, (data: any, error: any) => {
+        this._handlers[AppBridgeHandler.HTTP]({ verb: HTTP_VERBS.DELETE, relativeURL, origin }, (data: any, error: any) => {
           resolve({ data, error });
         });
       } else {
         postRobot
-          .sendToParent(MESSAGE_TYPES.HTTP_DELETE, { relativeURL }, { timeout })
+          .sendToParent(MESSAGE_TYPES.HTTP_DELETE, { relativeURL, origin: [ origin ] }, { timeout })
           .then((event: any) => {
             resolve({ data: event.data.data, error: event.data.error });
           })
