@@ -30,8 +30,8 @@ const PROGRESS_BAR_VALUE_ACCESSOR = {
   styleUrls: ['./ProgressBar.scss'],
   providers: [PROGRESS_BAR_VALUE_ACCESSOR],
   template: `
-    <div *ngIf="isLinear()" class="progress-bar"></div>
-    <svg *ngIf="isRadial()" width="120" height="120">
+    <div *ngIf="appearance === progressAppearance.LINEAR" class="progress-bar"></div>
+    <svg *ngIf="appearance === progressAppearance.RADIAL" width="120" height="120">
       <circle
         [style.strokeDasharray]="circumference"
         [style.strokeDashoffset]="dashoffset"
@@ -42,7 +42,6 @@ const PROGRESS_BAR_VALUE_ACCESSOR = {
         fill="transparent"
         class="progress__value"
       />
-      <!-- <text x="18" y="20.35" class="percentage">30%</text> -->
     </svg>
   `,
 })
@@ -61,6 +60,7 @@ export class NovoProgressBarElement implements ControlValueAccessor, OnInit {
   public radius = 54;
   public circumference = 2 * Math.PI * this.radius;
   public dashoffset: number;
+  public progressAppearance = ProgressAppearance;
 
   @HostBinding('class.striped')
   @Input()
@@ -76,7 +76,7 @@ export class NovoProgressBarElement implements ControlValueAccessor, OnInit {
 
   @HostBinding('style.width')
   get width() {
-    if (this.isRadial()) {
+    if (this.appearance === ProgressAppearance.RADIAL) {
       return `100%`;
     }
     return `${this._percent * 100}%`;
@@ -128,6 +128,9 @@ export class NovoProgressBarElement implements ControlValueAccessor, OnInit {
     if (this.indeterminate || this.flash) {
       this._value = this.progress?.total || 100;
     }
+    if (this.flash) {
+      this.progress.fitContainer = true;
+    }
     if (this.progress) {
       this._percent = this._value / this.progress.total;
       this.appearance = this.progress.appearance;
@@ -157,13 +160,5 @@ export class NovoProgressBarElement implements ControlValueAccessor, OnInit {
 
   setDisabledState(disabled: boolean): void {
     this.disabled = disabled;
-  }
-
-  isLinear() {
-    return this.appearance === ProgressAppearance.LINEAR;
-  }
-
-  isRadial() {
-    return this.appearance === ProgressAppearance.RADIAL;
   }
 }
