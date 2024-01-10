@@ -21,6 +21,9 @@ export class NovoProgressElement implements AfterContentInit {
   @Input() total: number = 100;
   @Input() radius: number = 54;
 
+  @HostBinding('class.fit-container')
+  fitContainer: boolean = false;
+
   @HostBinding('class.striped')
   @Input()
   striped: boolean = false;
