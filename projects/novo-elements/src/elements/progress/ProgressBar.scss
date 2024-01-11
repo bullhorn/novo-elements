@@ -1,7 +1,6 @@
 @import "../../styles/variables";
 @import "../../styles/global/functions";
 
-/* default styling for progress bar */
 :host {
   display: flex;
   height: 100%;
@@ -33,6 +32,18 @@
 
     &.animated {
       animation: progress-bar-stripes 2s linear infinite;
+    }
+
+    &.flash {
+      padding: 0 calc(100% + 100px);
+      background-image: linear-gradient(
+        135deg,
+        $silver 46%,
+        $sand 48%,
+        $sand 52%,
+        $silver 54%
+      );
+      animation: progress-bar-flash 3s linear infinite;
     }
   }
 
@@ -80,4 +91,17 @@
   to {
     background-position: 40px 0;
   }
+}
+
+@-webkit-keyframes progress-bar-flash {
+  0% { transform: translateX(calc(-50% - 100px)) }
+  30% { transform: translateX(calc(-50% - 100px)) }
+  60% { transform: translateX(0%) }
+  100% { transform: translateX(0%) }
+}
+@keyframes progress-bar-flash {
+  0% { transform: translateX(calc(-50% - 100px)) }
+  30% { transform: translateX(calc(-50% - 100px)) }
+  60% { transform: translateX(0%) }
+  100% { transform: translateX(0%) }
 }

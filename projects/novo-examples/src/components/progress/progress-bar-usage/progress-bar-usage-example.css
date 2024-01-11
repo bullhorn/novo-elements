@@ -1,3 +1,9 @@
-span[tooltip]{
+span[tooltip] {
   margin-left: 10px;
+}
+
+.resizable {
+  resize: horizontal;
+  overflow: auto;
+  width: 200px;
 }

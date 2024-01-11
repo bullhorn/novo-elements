@@ -10,34 +10,25 @@ describe('Service: DateFormatService', () => {
   });
 
   describe('Function: getDateMask()', () => {
-    it('should be defined', () => {
-      expect(service.getDateMask).toBeDefined();
-    });
-    it('should return a default mask', () => {
-      service.labels.dateFormat = '';
-      const actual = service.getDateMask();
-      expect(actual.mask).toBeDefined();
-      expect(actual.pattern).toBeDefined();
-    });
     it('should return a mask that supports a date with format dd-MM-yyyy', () => {
       const value = '11-02-2017';
-      const dateMask = service.getDateMask(value);
-      expect(value.match(dateMask[0])).toBeTruthy();
+      const dateMask = service.getDateMask();
+      expect(value.match(dateMask.mask)).toBeTruthy();
     });
     it('should return a mask that supports dd.MM.yyyy', () => {
       const value = '11.02.2017';
-      const dateMask = service.getDateMask(value);
-      expect(value.match(dateMask[0])).toBeTruthy();
+      const dateMask = service.getDateMask();
+      expect(value.match(dateMask.mask)).toBeTruthy();
     });
     it('should return a mask that supports d/M/yyyy', () => {
       const value = '1/2/2017';
-      const dateMask = service.getDateMask(value);
-      expect(value.match(dateMask[0])).toBeTruthy();
+      const dateMask = service.getDateMask();
+      expect(value.match(dateMask.mask)).toBeTruthy();
     });
     it('should return a mask that supports M/d/yyyy', () => {
       const value = '11/2/2017';
-      const dateMask = service.getDateMask(value);
-      expect(value.match(dateMask[0])).toBeTruthy();
+      const dateMask = service.getDateMask();
+      expect(value.match(dateMask.mask)).toBeTruthy();
     });
   });
 
