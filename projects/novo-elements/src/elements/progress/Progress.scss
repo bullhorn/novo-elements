@@ -24,10 +24,15 @@
     height: 1.2em;
     background-color: $background;
     border: 1px solid $empty;
+    overflow: hidden;
   }
 
   &.radial {
     width: 9.2em;
     height: 9.2em;
+  }
+
+  &.fit-container {
+    width: 100%;
   }
 }
