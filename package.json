@@ -12,7 +12,7 @@
     "build": "ng build novo-elements",
     "postbuild": "npm run copy:scss && npm run build:examples",
     "build:ci": "ng build novo-elements",
-    "postbuild:ci": "&& npm run copy:resources",
+    "postbuild:ci": "npm run copy:resources",
     "build:watch": "ng build novo-elements --watch",
     "build:demo": "ng build demo",
     "build:schematics": "tsc -p ./projects/schematics/tsconfig.json",
