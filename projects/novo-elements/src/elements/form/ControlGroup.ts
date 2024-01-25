@@ -15,7 +15,7 @@ import {
   TemplateRef,
   ViewEncapsulation,
 } from '@angular/core';
-import { UntypedFormArray, UntypedFormBuilder } from '@angular/forms';
+import { FormArray, FormBuilder } from '@angular/forms';
 import { Helpers } from 'novo-elements/utils';
 import { FormUtils } from './utils/FormUtils';
 import { BaseControl } from './controls/BaseControl';
@@ -153,7 +153,7 @@ export class NovoControlGroup implements AfterContentInit, OnChanges, OnDestroy 
   editState: EditState = EditState.NOT_EDITING;
   currentIndex = 0;
 
-  constructor(private formUtils: FormUtils, private fb: UntypedFormBuilder, private ref: ChangeDetectorRef) {}
+  constructor(private formUtils: FormUtils, private fb: FormBuilder, private ref: ChangeDetectorRef) {}
 
   ngAfterContentInit() {
     if (!this.key) {
@@ -212,7 +212,7 @@ export class NovoControlGroup implements AfterContentInit, OnChanges, OnDestroy 
   onClickSave() {
     this.disabledArray[this.currentIndex - 1].state = EditState.NOT_EDITING;
     this.editState = EditState.NOT_EDITING;
-    const control: UntypedFormArray = this.form.controls[this.key] as UntypedFormArray;
+    const control: FormArray = this.form.controls[this.key] as FormArray;
     if (control) {
       const fg: NovoFormGroup = control.at(this.currentIndex - 1) as NovoFormGroup;
       fg.disableAllControls();
@@ -231,7 +231,7 @@ export class NovoControlGroup implements AfterContentInit, OnChanges, OnDestroy 
   }
 
   addNewControl(value?: {}) {
-    const controlsArray: UntypedFormArray = this.form.controls[this.key] as UntypedFormArray;
+    const controlsArray: FormArray = this.form.controls[this.key] as FormArray;
     const nestedFormGroup: NovoFormGroup = this.buildNestedFormGroup(value);
     if (controlsArray) {
       controlsArray.push(nestedFormGroup);
@@ -271,7 +271,7 @@ export class NovoControlGroup implements AfterContentInit, OnChanges, OnDestroy 
   }
 
   private doRemoveControl(index: number, emitEvent: boolean) {
-    const controlsArray: UntypedFormArray = this.form.controls[this.key] as UntypedFormArray;
+    const controlsArray: FormArray = this.form.controls[this.key] as FormArray;
     const nestedFormGroup = controlsArray.at(index) as NovoFormGroup;
     nestedFormGroup.fieldInteractionEvents.unsubscribe();
     if (emitEvent) {
@@ -286,7 +286,7 @@ export class NovoControlGroup implements AfterContentInit, OnChanges, OnDestroy 
   }
 
   editControl(index: number) {
-    const controlsArray: UntypedFormArray = this.form.controls[this.key] as UntypedFormArray;
+    const controlsArray: FormArray = this.form.controls[this.key] as FormArray;
     const fg = controlsArray.at(index) as NovoFormGroup;
     fg.enableAllControls();
     this.onEdit.emit({ value: controlsArray.at(index).value, index });
@@ -309,7 +309,7 @@ export class NovoControlGroup implements AfterContentInit, OnChanges, OnDestroy 
   }
 
   private clearControls() {
-    const controlsArray: UntypedFormArray = this.form.controls[this.key] as UntypedFormArray;
+    const controlsArray: FormArray = this.form.controls[this.key] as FormArray;
     if (controlsArray) {
       for (let i: number = controlsArray.length - 1; i >= 0; i--) {
         this.removeControl(i, false);
@@ -320,7 +320,7 @@ export class NovoControlGroup implements AfterContentInit, OnChanges, OnDestroy 
 
   private checkCanEdit(index: number): boolean {
     if (this.canEdit) {
-      const controlsArray: UntypedFormArray = this.form.controls[this.key] as UntypedFormArray;
+      const controlsArray: FormArray = this.form.controls[this.key] as FormArray;
       return this.canEdit(controlsArray.at(index).value, index);
     }
     return true;
@@ -328,7 +328,7 @@ export class NovoControlGroup implements AfterContentInit, OnChanges, OnDestroy 
 
   private checkCanRemove(index: number): boolean {
     if (this.canRemove) {
-      const controlsArray: UntypedFormArray = this.form.controls[this.key] as UntypedFormArray;
+      const controlsArray: FormArray = this.form.controls[this.key] as FormArray;
       if (controlsArray.at(index)) {
         return this.canRemove(controlsArray.at(index).value, index);
       }
@@ -346,7 +346,7 @@ export class NovoControlGroup implements AfterContentInit, OnChanges, OnDestroy 
   }
 
   private assignIndexes() {
-    const controlsArray: UntypedFormArray = this.form.controls[this.key] as UntypedFormArray;
+    const controlsArray: FormArray = this.form.controls[this.key] as FormArray;
     if (controlsArray) {
       for (let i: number = 0; i < controlsArray.length; i++) {
         const form = controlsArray.at(i) as NovoFormGroup;
