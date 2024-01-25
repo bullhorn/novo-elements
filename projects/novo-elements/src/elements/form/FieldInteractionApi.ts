@@ -1,7 +1,7 @@
 // NG2
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { UntypedFormArray } from '@angular/forms';
+import { FormArray } from '@angular/forms';
 // Vendor
 import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -169,7 +169,7 @@ export class FieldInteractionApi {
     }
 
     const form = otherForm || this.form;
-    const formArray = form.controls[key] as UntypedFormArray;
+    const formArray = form.controls[key] as FormArray;
     if (!formArray || !formArray.controls) {
       console.error('[FieldInteractionAPI] - could not find a form array in the form by the key --', key); // tslint:disable-line
       return null;

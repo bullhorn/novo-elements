@@ -18,7 +18,7 @@ import {
   QueryList,
   ViewChild,
 } from '@angular/core';
-import { ControlValueAccessor, UntypedFormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { BehaviorSubject, combineLatest, Observable, of, Subject } from 'rxjs';
 import { delay, filter, map, startWith, switchMap, take, takeUntil, tap } from 'rxjs/operators';
 import { isAlphaNumeric, Key } from 'novo-elements/utils';
@@ -241,7 +241,7 @@ export class NovoSelectSearchComponent implements OnInit, OnDestroy, ControlValu
   /** Previously selected values when using <novo-select [multiple]="true">*/
   private previousSelectedValues: any[];
 
-  public _formControl: UntypedFormControl = new UntypedFormControl('');
+  public _formControl: FormControl = new FormControl('');
 
   /** whether to show the no entries found message */
   public _showNoEntriesFound$: Observable<boolean> = combineLatest([this._formControl.valueChanges, this.optionsLength$]).pipe(

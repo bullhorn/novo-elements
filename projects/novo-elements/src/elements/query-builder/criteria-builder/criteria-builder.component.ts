@@ -11,7 +11,7 @@ import {
   OnInit,
   QueryList,
 } from '@angular/core';
-import { ControlContainer, UntypedFormArray, UntypedFormBuilder, UntypedFormGroup, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
+import { ControlContainer, FormArray, FormBuilder, UntypedFormGroup, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
 import { interval, Subject } from 'rxjs';
 import { debounce, takeUntil } from 'rxjs/operators';
 import { NovoConditionFieldDef } from '../query-builder.directives';
@@ -53,7 +53,7 @@ export class CriteriaBuilderComponent implements OnInit, OnDestroy, AfterContent
 
   constructor(
     private controlContainer: ControlContainer,
-    private formBuilder: UntypedFormBuilder,
+    private formBuilder: FormBuilder,
     private cdr: ChangeDetectorRef,
     public qbs: QueryBuilderService,
   ) {}
@@ -117,8 +117,8 @@ export class CriteriaBuilderComponent implements OnInit, OnDestroy, AfterContent
     }
   }
 
-  get root(): UntypedFormArray {
-    return this.innerForm.get('criteria') as UntypedFormArray;
+  get root(): FormArray {
+    return this.innerForm.get('criteria') as FormArray;
   }
 
   addConditionGroup(data: any = { $and: [EMPTY_CONDITION] }) {

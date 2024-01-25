@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, forwardRef, Input, OnDestroy, OnInit } from '@angular/core';
-import { ControlContainer, UntypedFormArray, UntypedFormBuilder, UntypedFormGroup, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
+import { ControlContainer, FormArray, FormBuilder, UntypedFormGroup, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
 import { merge, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { QueryBuilderService } from '../query-builder.service';
@@ -34,7 +34,7 @@ export class ConditionGroupComponent implements OnInit, OnDestroy {
     public qbs: QueryBuilderService,
     public labels: NovoLabelService,
     private controlContainer: ControlContainer,
-    private formBuilder: UntypedFormBuilder,
+    private formBuilder: FormBuilder,
     private cdr: ChangeDetectorRef,
   ) {}
 
@@ -63,8 +63,8 @@ export class ConditionGroupComponent implements OnInit, OnDestroy {
     }
   }
 
-  get root(): UntypedFormArray {
-    return this.parentForm.get(this.controlName) as UntypedFormArray;
+  get root(): FormArray {
+    return this.parentForm.get(this.controlName) as FormArray;
   }
 
   addCondition(data?: any) {
@@ -87,7 +87,7 @@ export class ConditionGroupComponent implements OnInit, OnDestroy {
   }
 
   cantRemoveRow(isFirst: boolean) {
-    if ((this.parentForm.parent as UntypedFormArray).length > 1) return false;
+    if ((this.parentForm.parent as FormArray).length > 1) return false;
     return this.root.length <= 1;
   }
 }
