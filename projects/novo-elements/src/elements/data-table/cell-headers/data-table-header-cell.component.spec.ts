@@ -2,7 +2,7 @@
 import { EventEmitter } from '@angular/core';
 import { async, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
-import { IMaskDirectiveModule } from 'angular-imask';
+import { IMaskModule } from 'angular-imask';
 import { NovoLabelService } from 'novo-elements/services';
 import { Key } from 'novo-elements/utils';
 import { NovoButtonModule } from 'novo-elements/elements/button';
@@ -22,7 +22,7 @@ xdescribe('Elements: NovoDataTableCellHeader', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [NovoDataTableCellHeader],
-      imports: [FormsModule, NovoTooltipModule, NovoButtonModule, NovoDropdownModule, NovoDatePickerModule, IMaskDirectiveModule],
+      imports: [FormsModule, NovoTooltipModule, NovoButtonModule, NovoDropdownModule, NovoDatePickerModule, IMaskModule],
       providers: [NovoLabelService, DataTableState],
     }).compileComponents();
     fixture = TestBed.createComponent(NovoDataTableCellHeader);

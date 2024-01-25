@@ -25,17 +25,10 @@ export class NovoDateFormatDirective extends IMaskDirective<any> {
 
   @Input() dateFormat: DATE_FORMATS = DATE_FORMATS.DATE;
 
-  constructor(
-    private _element: ElementRef,
-    _renderer: Renderer2,
-    _factory: IMaskFactory,
-    @Optional() @Inject(COMPOSITION_BUFFER_MODE) _compositionMode: boolean,
-    private labels: NovoLabelService,
-  ) {
-    super(_element, _renderer, _factory, _compositionMode);
+  constructor(private labels: NovoLabelService) {
+    super();
     const dateFormat = this.labels.dateFormat.toUpperCase();
-
-    this.unmask = 'typed';
+    this.unmask = 'typed' as unknown as false; // typing is to work around angular-imask bug
     this.imask = {
       mask: Date,
       pattern: 'm{/}`d{/}`Y',

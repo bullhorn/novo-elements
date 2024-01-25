@@ -29,23 +29,15 @@ export class NovoDateTimeFormatDirective extends IMaskDirective<any> implements 
   @Input() military: boolean = false;
   @Input() dateTimeFormat: DATE_FORMATS = DATE_FORMATS.DATE;
 
-  constructor(
-    private _element: ElementRef,
-    _renderer: Renderer2,
-    _factory: IMaskFactory,
-    @Optional() @Inject(COMPOSITION_BUFFER_MODE) _compositionMode: boolean,
-    private labels: NovoLabelService,
-  ) {
-    super(_element, _renderer, _factory, _compositionMode);
+  constructor(private labels: NovoLabelService) {
+    super();
     this.initFormatOptions();
-    
   }
 
   initFormatOptions() {
     const amFormat = this.labels.timeFormatAM.toUpperCase();
     const pmFormat = this.labels.timeFormatPM.toUpperCase();
-
-    this.unmask = 'typed';
+    this.unmask = 'typed' as unknown as false; // typing is to work around angular-imask bug
     this.imask = {
       mask: Date,
       pattern: this.military ? 'm{/}`d{/}`Y, HH:mm' : 'm{/}`d{/}`Y, HH:mm aa',

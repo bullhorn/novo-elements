@@ -138,7 +138,6 @@ export const EXAMPLE_LIST = [
 
 @NgModule({
   declarations: EXAMPLE_LIST,
-  entryComponents: EXAMPLE_LIST,
   exports: EXAMPLE_LIST,
   imports: [
     FormsModule,

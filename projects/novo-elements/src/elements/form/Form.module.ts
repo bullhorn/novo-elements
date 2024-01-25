@@ -3,7 +3,7 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { IMaskDirectiveModule } from 'angular-imask';
+import { IMaskModule } from 'angular-imask';
 // APP
 import { NovoAceEditorModule } from 'novo-elements/addons/ace-editor';
 import { NovoNovoCKEditorModule } from 'novo-elements/addons/ckeditor';
@@ -58,7 +58,7 @@ import { NovoFormExtrasModule } from './extras';
     NovoTooltipModule,
     NovoPopOverModule,
     NovoDragulaModule,
-    IMaskDirectiveModule,
+    IMaskModule,
     NovoTipWellModule,
     NovoModalModule,
     NovoButtonModule,
