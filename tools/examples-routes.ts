@@ -309,7 +309,7 @@ function parsePageMetadata(filePath: string, sourceContent: string): PageMetadat
     title: title,
     section: section.toLowerCase(),
     page: page.toLowerCase(),
-    template: markup.replace(/\{/g, '&#123;').replace(/\}/g, '&#125;'),
+    template: markup.replace(/\{/g, '&#123;').replace(/\}/g, '&#125;').replace(/\@/g, '&#64;'),
     route: convertToDashCase(title).replace('src/', ''),
     order: order,
     tag: tag,
