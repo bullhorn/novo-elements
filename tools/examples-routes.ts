@@ -317,27 +317,34 @@ function parsePageMetadata(filePath: string, sourceContent: string): PageMetadat
 }
 
 async function generateApiDocs() {
-  const app = new Application();
+  // const app = new Application();
 
-  // If you want TypeDoc to load tsconfig.json / typedoc.json files
-  app.options.addReader(new TSConfigReader());
-  // app.options.addReader(new TypeDoc.TypeDocReader());
+  // // If you want TypeDoc to load tsconfig.json / typedoc.json files
+  // app.options.addReader(new TSConfigReader());
+  // // app.options.addReader(new TypeDoc.TypeDocReader());
 
-  app.bootstrap({
+  // app.bootstrap({
+  //   // typedoc options here
+  //   entryPoints: [`${elementsPath}/index.ts`],
+  //   excludeExternals: true,
+  //   excludePrivate: true,
+  // });
+
+  const app = await Application.bootstrap({
     // typedoc options here
     entryPoints: [`${elementsPath}/index.ts`],
     excludeExternals: true,
     excludePrivate: true,
-  });
+  }, [new TSConfigReader()]);
 
-  const project = app.convert();
+  const project = await app.convert();
 
   if (project) {
     // Project may not have converted correctly
     const outputDir = 'projects/demo/assets';
 
     // Alternatively generate JSON output
-    await app.generateJson(project, outputDir + '/documentation.json');
+    await app.generateJson(project, outputDir + '/documentation.json'); // this is broken with new typedoc update
   }
 }
 

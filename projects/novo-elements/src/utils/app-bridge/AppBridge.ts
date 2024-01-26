@@ -605,7 +605,6 @@ export class AppBridge {
 
   /**
    * Fires or responds to an HTTP_GET event
-   * @param packet any - packet of data to send with the event
    */
   public httpGET(relativeURL: string, timeout: number = 10000): Promise<any> {
     return new Promise<any>((resolve, reject) => {
@@ -628,7 +627,6 @@ export class AppBridge {
 
   /**
    * Fires or responds to an HTTP_POST event
-   * @param packet any - packet of data to send with the event
    */
   public httpPOST(relativeURL: string, postData: any, timeout: number = 10000): Promise<any> {
     return new Promise<any>((resolve, reject) => {
@@ -651,7 +649,6 @@ export class AppBridge {
 
   /**
    * Fires or responds to an HTTP_PUT event
-   * @param packet any - packet of data to send with the event
    */
   public httpPUT(relativeURL: string, putData: any, timeout: number = 10000): Promise<any> {
     return new Promise<any>((resolve, reject) => {
@@ -674,7 +671,6 @@ export class AppBridge {
 
   /**
    * Fires or responds to an HTTP_DELETE event
-   * @param packet any - packet of data to send with the event
    */
   public httpDELETE(relativeURL: string, timeout: number = 10000): Promise<any> {
     return new Promise<any>((resolve, reject) => {
@@ -775,7 +771,6 @@ export class DevAppBridge extends AppBridge {
 
   /**
    * Fires or responds to an HTTP_GET event
-   * @param packet any - packet of data to send with the event
    */
   public httpGET(relativeURL: string): Promise<any> {
     return this.http.get(`${this.baseURL}/${relativeURL}`, { withCredentials: true }).toPromise();
@@ -783,7 +778,6 @@ export class DevAppBridge extends AppBridge {
 
   /**
    * Fires or responds to an HTTP_POST event
-   * @param packet any - packet of data to send with the event
    */
   public httpPOST(relativeURL: string, postData: any): Promise<any> {
     return this.http.post(`${this.baseURL}/${relativeURL}`, postData, { withCredentials: true }).toPromise();
@@ -791,7 +785,6 @@ export class DevAppBridge extends AppBridge {
 
   /**
    * Fires or responds to an HTTP_PUT event
-   * @param packet any - packet of data to send with the event
    */
   public httpPUT(relativeURL: string, putData: any): Promise<any> {
     return this.http.put(`${this.baseURL}/${relativeURL}`, putData, { withCredentials: true }).toPromise();
@@ -799,7 +792,6 @@ export class DevAppBridge extends AppBridge {
 
   /**
    * Fires or responds to an HTTP_DELETE event
-   * @param packet any - packet of data to send with the event
    */
   public httpDELETE(relativeURL: string): Promise<any> {
     return this.http.delete(`${this.baseURL}/${relativeURL}`, { withCredentials: true }).toPromise();
