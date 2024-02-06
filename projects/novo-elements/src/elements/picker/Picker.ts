@@ -113,7 +113,7 @@ export class NovoPickerElement implements OnInit {
   @Input()
   allowCustomValues = false;
   @Input()
-  debounceTimeInMillis: number = 250;
+  debounceTimeInMilliSeconds: number = 250;
 
   // Disable from typing into the picker (result template does everything)
   @Input()
@@ -164,12 +164,12 @@ export class NovoPickerElement implements OnInit {
     this.resultsComponent = this.config.resultsTemplate || PickerResults;
     // Get all distinct key up events from the input and only fire if long enough and distinct
     // let input = this.element.nativeElement.querySelector('input');
-    const pasteObserver = fromEvent(this.input.nativeElement, 'paste').pipe(debounceTime(this.debounceTimeInMillis), distinctUntilChanged());
+    const pasteObserver = fromEvent(this.input.nativeElement, 'paste').pipe(debounceTime(this.debounceTimeInMilliSeconds), distinctUntilChanged());
     pasteObserver.subscribe(
       (event: ClipboardEvent) => this.onDebouncedKeyup(event),
       (err) => this.hideResults(err),
     );
-    const keyboardObserver = fromEvent(this.input.nativeElement, 'keyup').pipe(debounceTime(this.debounceTimeInMillis), distinctUntilChanged());
+    const keyboardObserver = fromEvent(this.input.nativeElement, 'keyup').pipe(debounceTime(this.debounceTimeInMilliSeconds), distinctUntilChanged());
     keyboardObserver.subscribe(
       (event: KeyboardEvent) => this.onDebouncedKeyup(event),
       (err) => this.hideResults(err),
