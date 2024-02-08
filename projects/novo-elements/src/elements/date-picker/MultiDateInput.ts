@@ -76,7 +76,7 @@ export class NovoMultiDateInputElement implements OnInit, ControlValueAccessor {
   @Input()
   allowInvalidDate: boolean = false;
   @Input()
-  weekStart: number = 0;
+  weekStart: Day = 0;
   @Input()
   chipsCount: number = 5;
   @Output()

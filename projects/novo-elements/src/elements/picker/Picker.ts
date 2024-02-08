@@ -14,12 +14,11 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import { NovoOverlayTemplateComponent } from 'novo-elements/elements/common';
+import { ComponentUtils } from 'novo-elements/services';
+import { BooleanInput, BooleanInputAccept, Helpers, Key, notify } from 'novo-elements/utils';
 import { fromEvent } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
-import { ComponentUtils } from 'novo-elements/services';
-import { Helpers, Key, notify } from 'novo-elements/utils';
-import { NovoOverlayTemplateComponent } from 'novo-elements/elements/common';
-// import { NovoControlConfig } from '../form/FormControls';
 import { PickerResults } from './extras/picker-results/PickerResults';
 
 // Value accessor for the component (supports ngModel)
@@ -83,14 +82,18 @@ export class NovoPickerElement implements OnInit {
   @Input()
   placeholder: string;
   @Input()
+  @BooleanInput()
   clearValueOnSelect: boolean;
+  static readonly ngAcceptInputType_clearValueOnSelect: BooleanInputAccept;
   @Input()
   closeOnSelect: boolean = true;
   @Input()
   selected: Array<any> = [];
   // Deprecated
   @Input()
+  @BooleanInput()
   appendToBody: boolean = false;
+  static readonly ngAcceptInputType_appendToBody: BooleanInputAccept;
   // Deprecated
   @Input()
   parentScrollSelector: string;
@@ -105,7 +108,9 @@ export class NovoPickerElement implements OnInit {
   side: string = 'left';
   // Autoselects the first option in the results
   @Input()
+  @BooleanInput()
   autoSelectFirstOption: boolean = true;
+  static readonly ngAcceptInputType_autoSelectFirstOption: BooleanInputAccept;
   @Input()
   overrideElement: ElementRef;
   @Input()
@@ -124,6 +129,7 @@ export class NovoPickerElement implements OnInit {
   }
 
   private _disablePickerInput: boolean = false;
+  static readonly ngAcceptInputType_disablePickerInput: BooleanInputAccept;
 
   // Emitter for selects
   @Output()

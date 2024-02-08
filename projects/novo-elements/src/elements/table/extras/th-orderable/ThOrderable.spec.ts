@@ -113,14 +113,14 @@ describe('Elements: ThOrderable', () => {
     describe('Method: onDragOver()', () => {
       it('should be defined', () => {
         expect(subject.onDragOver).toBeDefined();
-        subject.onDragOver({ dataTransfer: { dropEffect: '' }, preventDefault: () => {}, stopPropagation: () => {} });
+        subject.onDragOver({ dataTransfer: { dropEffect: 'move' }, preventDefault: () => {}, stopPropagation: () => {} } as any);
       });
     });
 
     describe('Method: onDragEnter()', () => {
       it('should be defined', () => {
         expect(subject.onDragEnter).toBeDefined();
-        subject.onDragEnter({ target: 'test' });
+        subject.onDragEnter({ target: 'test' } as any);
       });
     });
 

@@ -1,23 +1,23 @@
 // NG2
-import { ENTER, ESCAPE, TAB } from '@angular/cdk/keycodes';
+import { ENTER } from '@angular/cdk/keycodes';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   ElementRef,
   EventEmitter,
-  forwardRef,
   HostBinding,
   Input,
   NgZone,
   Output,
   ViewChild,
+  forwardRef,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 // APP
-import { NovoLabelService } from 'novo-elements/services';
-import { Key } from 'novo-elements/utils';
 import { NovoOverlayTemplateComponent } from 'novo-elements/elements/common';
+import { NovoLabelService } from 'novo-elements/services';
+import { BooleanInput, BooleanInputAccept, Key } from 'novo-elements/utils';
 
 // Value accessor for the component (supports ngModel)
 const SEARCH_VALUE_ACCESSOR = {
@@ -66,18 +66,22 @@ export class NovoSearchBoxElement implements ControlValueAccessor {
   @Input()
   public icon: string = 'search';
   @Input()
-  public position: string = 'bottom-left';
+  public position: NovoOverlayTemplateComponent['position'] = 'bottom-left';
   @Input()
   public placeholder: string = 'Search...';
   @Input()
   @HostBinding('class.always-open')
+  @BooleanInput()
   public alwaysOpen: boolean = false;
+  static readonly ngAcceptInputType_alwaysOpen: BooleanInputAccept;
   @Input()
   public theme: string;
   @Input()
   public color: string = 'positive';
   @Input()
+  @BooleanInput()
   public closeOnSelect: boolean = true;
+  static readonly ngAcceptInputType_closeOnSelect: BooleanInputAccept;
   @Input()
   public displayField: string;
   @Input()
@@ -85,17 +89,25 @@ export class NovoSearchBoxElement implements ControlValueAccessor {
   @Input()
   public hint: string;
   @Input()
+  @BooleanInput()
   public keepOpen: boolean = false;
+  static readonly ngAcceptInputType_keepOpen: BooleanInputAccept;
   @Input()
+  @BooleanInput()
   public hasBackdrop: boolean = false;
+  static readonly ngAcceptInputType_hasBackdrop: BooleanInputAccept;
   @Input()
+  @BooleanInput()
   public allowPropagation: boolean = false;
+  static readonly ngAcceptInputType_allowPropagation: BooleanInputAccept;
   @Output()
   public searchChanged: EventEmitter<string> = new EventEmitter<string>();
   @Output()
   public applySearch: EventEmitter<KeyboardEvent> = new EventEmitter<KeyboardEvent>();
   @HostBinding('class.focused')
+  @BooleanInput()
   focused: boolean = false;
+  static readonly ngAcceptInputType_focused: BooleanInputAccept;
   public value: any;
 
   /** View -> model callback called when value changes */
@@ -180,7 +192,7 @@ export class NovoSearchBoxElement implements ControlValueAccessor {
       }
     }
   }
-  _handleInput(event: KeyboardEvent): void {
+  _handleInput(event: Event): void {
     if (document.activeElement === event.target) {
       this.value = (event.target as HTMLInputElement).value;
       this._onChange((event.target as HTMLInputElement).value);

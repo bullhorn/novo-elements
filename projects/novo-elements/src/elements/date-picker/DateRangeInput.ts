@@ -15,11 +15,11 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 // Vendor
-import { isValid } from 'date-fns';
+import { Day, isValid } from 'date-fns';
 // App
 import { NovoOverlayTemplateComponent } from 'novo-elements/elements/common';
 import { DateFormatService, NovoLabelService } from 'novo-elements/services';
-import { DateUtil, Helpers, Key, RangeModel } from 'novo-elements/utils';
+import { DatePickerSelectModes, DateUtil, Helpers, Key, RangeModel } from 'novo-elements/utils';
 
 // Value accessor for the component (supports ngModel)
 const DATE_VALUE_ACCESSOR = {
@@ -39,7 +39,7 @@ const DATE_VALUE_ACCESSOR = {
         [(ngModel)]="formattedStartDate"
         [imask]="maskOptions"
         [placeholder]="placeholder"
-        (keydown)="_onStartInputChange($event)"
+        (keydown)="_onStartInputKey($event)"
         (input)="_onStartInputChange($event)"
         (focus)="_handleFocus($event)"
         (blur)="_handleBlur($event)"
@@ -58,7 +58,7 @@ const DATE_VALUE_ACCESSOR = {
         [(ngModel)]="formattedEndDate"
         [imask]="maskOptions"
         [placeholder]="placeholder"
-        (keydown)="_onEndInputChange($event)"
+        (keydown)="_onEndInputKey($event)"
         (input)="_onEndInputChange($event)"
         (focus)="_handleFocus($event)"
         (blur)="_handleBlur($event)"
@@ -74,8 +74,8 @@ const DATE_VALUE_ACCESSOR = {
         [start]="start"
         [end]="end"
         [mode]="mode"
-        range="true"
-        inline="true"
+        [range]="true"
+        [inline]="true"
         (onSelect)="setValueAndClose($event)"
         [ngModel]="value"
         [weekStart]="weekStart"
@@ -98,7 +98,7 @@ export class NovoDateRangeInputElement implements OnInit, OnChanges, ControlValu
   @Input()
   weekRangeSelect: boolean = false;
   @Input()
-  mode: string = 'range';
+  mode: DatePickerSelectModes = 'range';
   @Input()
   placeholder: string;
   @Input()
@@ -110,7 +110,7 @@ export class NovoDateRangeInputElement implements OnInit, OnChanges, ControlValu
   @Input()
   allowInvalidDate: boolean = false;
   @Input()
-  weekStart: number = 0;
+  weekStart: Day = 0;
   @Output()
   blurEvent: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
   @Output()
@@ -242,8 +242,12 @@ export class NovoDateRangeInputElement implements OnInit, OnChanges, ControlValu
     // placeholder
   };
 
-  _onStartInputChange(event: KeyboardEvent) {
+  _onStartInputKey(event: KeyboardEvent) {
     this._handleKeydown(event);
+    this._onStartInputChange(event);
+  }
+
+  _onStartInputChange(event: Event) {
     if (document.activeElement === event.target) {
       event.stopPropagation();
       const startDate = this.formatDate((event.target as HTMLInputElement).value);
@@ -257,8 +261,12 @@ export class NovoDateRangeInputElement implements OnInit, OnChanges, ControlValu
     }
   }
 
-  _onEndInputChange(event: KeyboardEvent) {
+  _onEndInputKey(event: KeyboardEvent) {
     this._handleKeydown(event);
+    this._onEndInputChange(event);
+  }
+
+  _onEndInputChange(event: Event) {
     if (document.activeElement === event.target) {
       event.stopPropagation();
       const endDate = this.formatDate((event.target as HTMLInputElement).value);

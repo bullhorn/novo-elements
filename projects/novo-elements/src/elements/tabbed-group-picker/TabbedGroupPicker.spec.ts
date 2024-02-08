@@ -400,7 +400,7 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
       component.onItemToggled(chicken);
 
       const selectedItem = component.tabs[0].data[0];
-      const displayReference = component.displayTabs.find(({ typeName }) => typeName === 'chickens').data[0];
+      const displayReference = component.displayTabs.find(({ typeName }) => typeName === 'chickens')!.data[0];
 
       expect(selectedItem.selected).toEqual(true);
       expect(displayReference.selected).toEqual(true);

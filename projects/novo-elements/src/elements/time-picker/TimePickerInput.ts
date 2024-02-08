@@ -187,7 +187,7 @@ export class NovoTimePickerInputElement implements OnInit, OnChanges, ControlVal
     }
   }
 
-  _handleInput(event: KeyboardEvent): void {
+  _handleInput(event: Event): void {
     if (document.activeElement === event.target) {
       const text = (event.target as HTMLInputElement).value;
       const hour = text.slice(0, 2);

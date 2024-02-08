@@ -29,9 +29,9 @@ import { ControlValueAccessor, FormGroupDirective, NgControl, NgForm } from '@an
 import { merge, Observable, of, Subject, Subscription } from 'rxjs';
 import { filter, map, take, takeUntil } from 'rxjs/operators';
 // App
-import { NovoLabelService } from 'novo-elements/services';
-import { Helpers, Key } from 'novo-elements/utils';
 import {
+  _countGroupLabelsBeforeOption,
+  _getOptionScrollPosition,
   CanDisableCtor,
   CanRequireCtor,
   CanUpdateErrorStateCtor,
@@ -43,15 +43,15 @@ import {
   mixinOverlay,
   mixinRequired,
   mixinTabIndex,
+  NOVO_OPTION_PARENT_COMPONENT,
   NovoOptgroup,
   NovoOption,
   NovoOptionSelectionChange,
-  NOVO_OPTION_PARENT_COMPONENT,
-  _countGroupLabelsBeforeOption,
-  _getOptionScrollPosition,
+  NovoOverlayTemplateComponent,
 } from 'novo-elements/elements/common';
-import { NovoOverlayTemplateComponent } from 'novo-elements/elements/common';
 import { NovoFieldControl } from 'novo-elements/elements/field';
+import { NovoLabelService } from 'novo-elements/services';
+import { Helpers, Key } from 'novo-elements/utils';
 
 // Value accessor for the component (supports ngModel)
 // const SELECT_VALUE_ACCESSOR = {
@@ -217,11 +217,11 @@ export class NovoSelectElement
   @Input()
   headerConfig: any;
   @Input()
-  position: string = 'above-below';
+  position: NovoOverlayTemplateComponent['position'] = 'above-below';
   @Input()
-  overlayWidth: number;
+  overlayWidth: number | string;
   @Input()
-  overlayHeight: number;
+  overlayHeight: number | string;
   @Output()
   onSelect: EventEmitter<any> = new EventEmitter();
   /** Event emitted when the selected value has been changed by the user. */

@@ -1,6 +1,6 @@
 import { Component, Input, TemplateRef } from '@angular/core';
 import { BreadcrumbService } from './Breadcrumb.service';
-import { NOVO_BREADCRUMB_REF } from './Breadcrumb.tokens';
+import { NOVO_BREADCRUMB_REF, NovoBreadcrumbRef } from './Breadcrumb.tokens';
 import { SourceConfig } from './Breadcrumb.types';
 
 @Component({
@@ -9,7 +9,7 @@ import { SourceConfig } from './Breadcrumb.types';
   styleUrls: ['./Breadcrumb.scss'],
   providers: [{ provide: NOVO_BREADCRUMB_REF, useExisting: BreadcrumbElement }],
 })
-export class BreadcrumbElement {
+export class BreadcrumbElement implements NovoBreadcrumbRef {
   @Input() separatorIcon: TemplateRef<any>;
   @Input() source: Array<SourceConfig> = [];
 

@@ -81,7 +81,7 @@ export interface IDataTableColumnFilterConfig {
   type: 'text' | 'number' | 'date' | 'select' | 'multi-select' | 'custom';
   customTemplate?: string;
   useCustomHeader?: boolean;
-  options?: string[] | IDataTableColumnFilterOption[];
+  options?: (string | IDataTableColumnFilterOption)[];
   allowCustomRange?: boolean;
   transform?: Function;
 }

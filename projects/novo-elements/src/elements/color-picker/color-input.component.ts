@@ -16,6 +16,7 @@ import { NovoLabelService } from 'novo-elements/services';
 import { Helpers, Key } from 'novo-elements/utils';
 // App
 import { NovoOverlayTemplateComponent } from 'novo-elements/elements/common';
+import { NovoColorPickerChangeEvent } from './color-picker.component';
 
 // Value accessor for the component (supports ngModel)
 const COLOR_VALUE_ACCESSOR = {
@@ -47,7 +48,7 @@ const COLOR_VALUE_ACCESSOR = {
       <novo-icon *ngIf="hasValue" smaller (click)="clearValue()">x</novo-icon>
     </novo-field>
     <novo-overlay-template [parent]="element" position="above-below">
-      <novo-color-picker [(color)]="value" (onChange)="setValueAndClose($event)"></novo-color-picker>
+      <novo-color-picker [color]="value" (onChange)="setValueAndClose($event)"></novo-color-picker>
     </novo-overlay-template>
   `,
 })
@@ -64,7 +65,7 @@ export class NovoColorInputElement implements OnInit, ControlValueAccessor {
   @ViewChild(NovoOverlayTemplateComponent)
   overlay: NovoOverlayTemplateComponent;
 
-  @Output() change = new EventEmitter();
+  @Output() change = new EventEmitter<string>();
   @Output() blur = new EventEmitter();
   @Output() focus = new EventEmitter();
 
@@ -118,7 +119,7 @@ export class NovoColorInputElement implements OnInit, ControlValueAccessor {
     }
   }
 
-  _handleInput(event: KeyboardEvent): void {
+  _handleInput(event: Event): void {
     if (document.activeElement === event.target) {
       // this._handleEvent(event, false);
     }
@@ -169,7 +170,7 @@ export class NovoColorInputElement implements OnInit, ControlValueAccessor {
    * control to that value. It will also mark the control as dirty if this interaction
    * stemmed from the user.
    */
-  public setValueAndClose(event: any): void {
+  public setValueAndClose(event: NovoColorPickerChangeEvent): void {
     if (event) {
       this.value = event.color.hex;
       this.change.emit(this.value);

@@ -14,8 +14,8 @@ import { DomSanitizer } from '@angular/platform-browser';
 // Vendor
 import { addDays, Day as DateFnsDay, isToday } from 'date-fns';
 import { NovoLabelService } from 'novo-elements/services';
-import { BooleanInput, DateUtil } from 'novo-elements/utils';
 import type { DateLike, Day, OverlayDate } from 'novo-elements/utils';
+import { BooleanInput, DateUtil } from 'novo-elements/utils';
 
 @Component({
   selector: 'novo-month-view',
@@ -25,9 +25,9 @@ import type { DateLike, Day, OverlayDate } from 'novo-elements/utils';
 })
 export class NovoMonthViewElement implements OnInit {
   @Input()
-  minDate: Date;
+  minDate: Date | number;
   @Input()
-  maxDate: Date;
+  maxDate: Date | number;
   @Input()
   activeDate: Date = new Date();
   // Weekstart must be 0-6 (Sunday - Saturday)

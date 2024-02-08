@@ -16,10 +16,10 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { FormArray, FormBuilder } from '@angular/forms';
-import { Helpers } from 'novo-elements/utils';
-import { FormUtils } from './utils/FormUtils';
-import { BaseControl } from './controls/BaseControl';
+import { BooleanInputAccept, Helpers } from 'novo-elements/utils';
 import { NovoFormGroup } from './NovoFormGroup';
+import { BaseControl } from './controls/BaseControl';
+import { FormUtils } from './utils/FormUtils';
 
 export interface NovoControlGroupAddConfig {
   label: string;
@@ -86,6 +86,7 @@ export class NovoControlGroup implements AfterContentInit, OnChanges, OnDestroy 
     return this._remove;
   }
   private _remove = false;
+  static readonly ngAcceptInputType_remove: BooleanInputAccept;
   // Hide/shows the edit button for editing a control
   @Input()
   set edit(v: boolean) {
@@ -95,6 +96,7 @@ export class NovoControlGroup implements AfterContentInit, OnChanges, OnDestroy 
     return this._edit;
   }
   private _edit = false;
+  static readonly ngAcceptInputType_edit: BooleanInputAccept;
   // Allows the control to collapse or not
   @Input()
   set collapsible(v: boolean) {
@@ -362,4 +364,5 @@ export class NovoControlGroup implements AfterContentInit, OnChanges, OnDestroy 
   static ngAcceptInputType_disabled: BooleanInput;
   static ngAcceptInputType_stacked: BooleanInput;
   static ngAcceptInputType_vertical: BooleanInput;
+  static ngAcceptInputType_collapsible: BooleanInput;
 }

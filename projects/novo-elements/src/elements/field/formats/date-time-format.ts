@@ -5,7 +5,7 @@ import { isValid } from 'date-fns';
 import { MaskedEnum, MaskedRange } from 'imask';
 import { NovoLabelService } from 'novo-elements/services';
 import { DateUtil, Key } from 'novo-elements/utils';
-import { DATE_FORMATS, NOVO_INPUT_FORMAT, NovoInputFormat } from './base-format';
+import { DATE_FORMATS, DATE_FORMAT_STRINGS, NOVO_INPUT_FORMAT, NovoInputFormat } from './base-format';
 
 export const DATETIMEFORMAT_VALUE_ACCESSOR = {
   provide: NG_VALUE_ACCESSOR,
@@ -27,7 +27,7 @@ export class NovoDateTimeFormatDirective extends IMaskDirective<any> implements 
   valueChange: EventEmitter<any> = new EventEmitter();
 
   @Input() military: boolean = false;
-  @Input() dateTimeFormat: DATE_FORMATS = DATE_FORMATS.DATE;
+  @Input() dateTimeFormat: DATE_FORMAT_STRINGS = DATE_FORMATS.DATE;
 
   constructor(
     private _element: ElementRef,

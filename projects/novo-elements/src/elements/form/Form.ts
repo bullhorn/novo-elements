@@ -2,7 +2,7 @@
 import { AfterContentInit, Component, ContentChildren, Input, OnInit, QueryList, ViewEncapsulation } from '@angular/core';
 // App
 import { NovoTemplateService } from 'novo-elements/services';
-import { Helpers } from 'novo-elements/utils';
+import { BooleanInput, BooleanInputAccept, Helpers } from 'novo-elements/utils';
 import { NovoTemplate } from 'novo-elements/elements/common';
 import { NovoFormGroup } from './NovoFormGroup';
 
@@ -30,7 +30,9 @@ export class NovoFormElement implements AfterContentInit, OnInit {
   @Input()
   layout: string;
   @Input()
+  @BooleanInput()
   hideHeader: boolean = false;
+  static readonly ngAcceptInputType_hideHeader: BooleanInputAccept;
 
   @ContentChildren(NovoTemplate)
   customTemplates: QueryList<NovoTemplate>;

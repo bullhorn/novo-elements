@@ -9,7 +9,7 @@ export class Helpers {
   /**
    * Swallows an event to stop further execution
    */
-  static swallowEvent(event) {
+  static swallowEvent(event: Event) {
     if (event) {
       event.stopPropagation();
       event.preventDefault();
@@ -440,3 +440,5 @@ export function binarySearch<T>(item: T, array: T[], compare: (a: T, b: T) => 1 
     }
   }
 }
+
+export type BooleanInputAccept = boolean | '' | 'true';

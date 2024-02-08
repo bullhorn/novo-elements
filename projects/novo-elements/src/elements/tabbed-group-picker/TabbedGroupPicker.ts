@@ -226,9 +226,9 @@ export class NovoTabbedGroupPickerElement implements OnDestroy, OnInit {
     }
   }
 
-  onItemToggled(item: { selected?: boolean; children?: Array<{ selected?: boolean; children?: Array<{ selected?: boolean }> }> }) {
+  onItemToggled(item: { selected?: boolean; children?: Array<{ selected?: boolean; children?: Array<{ selected?: boolean }> } | number> }) {
     if (Array.isArray(item.children)) {
-      this.updateDescendants(item.selected, item.children);
+      this.updateDescendants(item.selected, item.children as ({selected?: boolean}[]));
     }
     this.updateParentsAndQuickSelect();
     this.updateClearAll(item.selected);
@@ -343,8 +343,8 @@ export class NovoTabbedGroupPickerElement implements OnDestroy, OnInit {
     this.filterText.next('');
   }
 
-  onFilter(event: { target: { value: string } }) {
-    this.filterText.next(event.target.value);
+  onFilter(event: Event) {
+    this.filterText.next((event.target as HTMLInputElement).value);
   }
 
   filter = (searchTerm: string) => {

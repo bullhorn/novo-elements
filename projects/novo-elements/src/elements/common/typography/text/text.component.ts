@@ -1,6 +1,6 @@
 // NG2
 import { Component, HostBinding, Input, ViewEncapsulation } from '@angular/core';
-import { BooleanInput } from 'novo-elements/utils';
+import { BooleanInput, BooleanInputAccept } from 'novo-elements/utils';
 import { NovoBaseTextElement } from '../base/base-text.component';
 
 /**
@@ -28,4 +28,5 @@ export class NovoText extends NovoBaseTextElement {
   @Input()
   @BooleanInput()
   block: boolean;
+  static readonly ngAcceptInputType_block: BooleanInputAccept;
 }

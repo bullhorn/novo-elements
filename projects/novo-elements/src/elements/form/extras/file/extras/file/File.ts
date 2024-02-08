@@ -10,6 +10,9 @@ export class NovoFile {
   dataURL: string;
   reader: FileReader = new FileReader();
   readPromise: Function;
+  // Are these in use? Don't see any way they're initialized
+  link?: string;
+  description?: string;
 
   constructor(file) {
     this.name = `${encodeURIComponent(file.name || '')}`;

@@ -3,6 +3,11 @@ import { Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { Color, HSL, HSLA, HSV, HSVA, RGB, RGBA } from 'novo-elements/utils';
 
+export interface NovoColorPickerChangeEvent {
+  $event: Event;
+  color: Color;
+}
+
 @Component({
   selector: 'novo-color-picker',
   template: `
@@ -36,7 +41,7 @@ export class NovoColorPickerComponent implements OnInit, OnChanges, OnDestroy {
     l: 0.2,
     a: 1,
   };
-  @Output() onChange = new EventEmitter<any>();
+  @Output() onChange = new EventEmitter<NovoColorPickerChangeEvent>();
   @Output() onChangeComplete = new EventEmitter<any>();
   @Output() onSwatchHover = new EventEmitter<any>();
   hsl!: HSL;

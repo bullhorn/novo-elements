@@ -1,6 +1,10 @@
 import { Component, EventEmitter, Input, Output, TemplateRef } from '@angular/core';
 import { CalendarEvent, WeekDay } from 'novo-elements/utils';
 
+
+// TODO: This component contains references to the angular-draggable-droppable library, which we're not currently importing.
+// This includes properties on the drag-drop event that can never be there. Should it be cleaned up?
+// https://mattlewis-github.com/angular-draggable-droppable/docs/directives/DroppableDirective.html#source
 @Component({
   selector: 'novo-agenda-week-header',
   template: `
@@ -18,7 +22,7 @@ import { CalendarEvent, WeekDay } from 'novo-elements/utils';
           mwlDroppable
           (dragEnter)="day.dragOver = true"
           (dragLeave)="day.dragOver = false"
-          (drop)="day.dragOver = false; eventDropped.emit({ event: $event.dropData.event, newStart: day.date })"
+          (drop)="day.dragOver = false; eventDropped.emit({ event: $any($event).dropData.event, newStart: day.date })"
         >
           <b>{{ day.date | weekday: locale:'long' }}</b
           ><br />
@@ -44,7 +48,7 @@ export class NovoAgendaWeekHeaderElement {
   customTemplate: TemplateRef<any>;
 
   @Output()
-  dayClicked: EventEmitter<{ date: Date }> = new EventEmitter<{ date: Date }>();
+  dayClicked = new EventEmitter<{ date: Date, event?: CalendarEvent }>();
 
   @Output()
   eventDropped: EventEmitter<{ event: CalendarEvent; newStart: Date }> = new EventEmitter<{ event: CalendarEvent; newStart: Date }>();
