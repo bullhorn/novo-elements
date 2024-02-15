@@ -60,22 +60,22 @@
       "schematics": {},
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/demo",
+            "outputPath": {
+              "base": "dist/demo",
+              "browser": "",
+            },
             "index": "projects/demo/index.html",
-            "main": "projects/demo/main.ts",
-            "polyfills": "projects/demo/polyfills.ts",
+            "browser": "projects/demo/main.ts",
+            "polyfills": ["projects/demo/polyfills.ts"],
             "tsConfig": "projects/demo/tsconfig.app.json",
             "assets": ["projects/demo/favicon.ico", "projects/demo/assets"],
             "styles": ["projects/demo/styles.scss"],
             "stylePreprocessorOptions": {
               "includePaths": ["projects/novo-elements/src"]
             },
-            "scripts": [],
-            "vendorChunk": true,
             "extractLicenses": false,
-            "buildOptimizer": false,
             "sourceMap": true,
             "optimization": false,
             "namedChunks": true
@@ -99,8 +99,7 @@
               "sourceMap": false,
               "namedChunks": false,
               "aot": false,
-              "extractLicenses": true,
-              "vendorChunk": false
+              "extractLicenses": true
             }
           },
           "defaultConfiguration": ""
