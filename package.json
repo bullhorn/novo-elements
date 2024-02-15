@@ -114,7 +114,7 @@
     "markdown-it-container": "^3.0.0",
     "markdown-it-task-lists": "^2.1.1",
     "micromatch": "^4.0.4",
-    "ng-packagr": "^17.2.0",
+    "ng-packagr": "17.1.2",
     "node-fetch": "^2.6.6",
     "npm-watch": "^0.9.0",
     "prettier": "^2.2.1",
