@@ -1,12 +1,18 @@
 // NG2
 import { OverlayModule } from '@angular/cdk/overlay';
-import { ChangeDetectorRef, Component, ElementRef, NO_ERRORS_SCHEMA } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ChangeDetectorRef, Component, DebugElement, ElementRef, EventEmitter, NO_ERRORS_SCHEMA, OnInit } from '@angular/core';
+import { async, ComponentFixture, fakeAsync, flush, inject, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { DateFormatService, NovoLabelService, NovoTemplateService } from 'novo-elements/services';
+import { DateFormatService, NovoLabelService, NovoTemplateService, OptionsService } from 'novo-elements/services';
+import { NovoTemplate } from '../common/novo-template/novo-template.directive';
 // App
 import { NovoAutoSize, NovoControlElement } from './Control';
 import { FieldInteractionApi } from './FieldInteractionApi';
+import { NovoControlTemplates } from './ControlTemplates';
+import { NovoFormGroup } from './NovoFormGroup';
+import { FormUtils } from './utils/FormUtils';
+import { BaseControl, TextBoxControl } from './controls';
+import { last, lastValueFrom } from 'rxjs';
 
 @Component({
   selector: 'novo-auto-size-test-component',
@@ -197,5 +203,100 @@ describe('NovoControlElement', () => {
 
     // Assert
     expect(testBoolean).toEqual(false);
+  });
+});
+
+@Component({
+  selector: 'novo-control-templates-test',
+  template: `
+  <novo-control-templates></novo-control-templates>
+  <div *ngIf="templatesReady">
+    <novo-control (change)="change.emit($event)" (focus)="focus.emit($event)" (blur)="blur.emit($event)" [form]="form" [control]="textControl"></novo-control>
+  </div>
+  `
+})
+class TestComponent2 implements OnInit {
+  templatesReady = false;
+  form: NovoFormGroup;
+
+  change = new EventEmitter<string>();
+  focus = new EventEmitter<FocusEvent>();
+  blur = new EventEmitter<Event>();
+
+  control: BaseControl;
+  textControl = new TextBoxControl({ key: 'text', label: 'Text Box' });
+  
+  constructor(private formUtils: FormUtils) { }
+
+  ngOnInit() {
+    this.form = this.formUtils.toFormGroup([this.textControl]);
+  }
+}
+
+describe('Novo Control with Templates', () => {
+  let fixture: ComponentFixture<TestComponent2>;
+  let testComponent: TestComponent2;
+  let component: NovoControlElement;
+
+  const fieldInteractionApiStub = { form: {}, currentKey: {} };
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [OverlayModule],
+      declarations: [TestComponent2, NovoControlElement, NovoControlTemplates, NovoTemplate],
+      providers: [NovoTemplateService, FormUtils, NovoLabelService, OptionsService, DateFormatService,
+        {
+          provide: FieldInteractionApi,
+          useValue: fieldInteractionApiStub
+        }
+      ]
+    }).compileComponents();
+    fixture = TestBed.createComponent(TestComponent2);
+    testComponent = fixture.debugElement.componentInstance;
+  });
+
+  describe('Text template', () => {
+    let inputDebug: DebugElement;
+    beforeEach(fakeAsync(() => {
+      testComponent.control = new TextBoxControl({ key: 'text', label: 'Text Box' });
+      fixture.detectChanges();
+      testComponent.templatesReady = true;
+      fixture.detectChanges();
+      flush();
+      fixture.detectChanges();
+      component = fixture.debugElement.query(By.directive(NovoControlElement)).componentInstance;
+      inputDebug = fixture.debugElement.query(By.css('input'));
+    }));
+  
+
+    it('should finish readying templates', inject([NovoTemplateService], (templateService: NovoTemplateService) => {
+      expect(Object.keys(templateService.getAll()).length).toBeGreaterThan(20);
+      expect(component.loading).toBeFalsy();
+    }));
+
+    it('should receive change event', () => {
+      let lastChange: string | undefined;
+      testComponent.change.subscribe(c => lastChange = c);
+      expect(lastChange).toBeFalsy();
+      inputDebug.nativeElement.value = 'text';
+      inputDebug.triggerEventHandler('input', { target: inputDebug.nativeElement });
+      expect(lastChange).toBe('text');
+    });
+
+    it('should receive focus event', () => {
+      const focusEvt = { };
+      let lastEvt: any;
+      testComponent.focus.subscribe(e => lastEvt = e);
+      inputDebug.triggerEventHandler('focus', focusEvt);
+      expect(lastEvt).toBe(focusEvt);
+    });
+
+    it('should receive blur event', () => {
+      const blurEvt = { };
+      let lastEvt: any;
+      testComponent.blur.subscribe(e => lastEvt = e);
+      inputDebug.triggerEventHandler('blur', blurEvt);
+      expect(lastEvt).toBe(blurEvt);
+    });
   });
 });
