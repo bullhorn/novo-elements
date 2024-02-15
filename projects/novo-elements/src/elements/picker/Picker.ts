@@ -29,6 +29,8 @@ const PICKER_VALUE_ACCESSOR = {
   multi: true,
 };
 
+const DEFAULT_DEBOUNCE_TIME = 250;
+
 /**
  * @description This class is the directive definition of the Picker. If you add an attribute of `picker` to an input,
  * it will create an instance of the picker which wraps the input in all of the picker HTML elements and functionality.
@@ -158,7 +160,7 @@ export class NovoPickerElement implements OnInit {
     if (this.appendToBody) {
       notify(`'appendToBody' has been deprecated. Please remove this attribute.`);
     }
-    let debounceTimeInMilliSeconds = this.config?.debounceTimeInMilliSeconds ? Number(this.config.debounceTimeInMilliSeconds) : 250;
+    let debounceTimeInMilliSeconds = Number.isNaN(this.config?.debounceTimeInMilliSeconds) ? DEFAULT_DEBOUNCE_TIME : Number(this.config.debounceTimeInMilliSeconds);
     // Custom results template
     this.resultsComponent = this.config.resultsTemplate || PickerResults;
     // Get all distinct key up events from the input and only fire if long enough and distinct
