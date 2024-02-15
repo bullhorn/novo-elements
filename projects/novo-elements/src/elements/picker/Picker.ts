@@ -160,7 +160,7 @@ export class NovoPickerElement implements OnInit {
     if (this.appendToBody) {
       notify(`'appendToBody' has been deprecated. Please remove this attribute.`);
     }
-    let debounceTimeInMilliSeconds = Number.isNaN(this.config?.debounceTimeInMilliSeconds) ? DEFAULT_DEBOUNCE_TIME : Number(this.config.debounceTimeInMilliSeconds);
+    let debounceTimeInMilliSeconds = Number.isNaN(Number(this.config?.debounceTimeInMilliSeconds)) ? DEFAULT_DEBOUNCE_TIME : Number(this.config?.debounceTimeInMilliSeconds);
     // Custom results template
     this.resultsComponent = this.config.resultsTemplate || PickerResults;
     // Get all distinct key up events from the input and only fire if long enough and distinct
