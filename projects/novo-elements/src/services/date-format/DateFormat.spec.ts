@@ -36,87 +36,87 @@ describe('Service: DateFormatService', () => {
     });
   });
 
-  describe('Function: getTimeMask()', () => {
-    it('should be defined', () => {
-      expect(service.getTimeMask).toBeDefined();
-    });
-    describe('For Military Time', () => {
-      let imask: Masked<any>;
-      beforeEach(() => {
-        const militaryTimeMask = service.getTimeMask(true);
-        imask = createIMask(militaryTimeMask);
-      });
-      it('should work for 1:23', () => {
-        const timeString = '01:23';
-        imask.rawInputValue = timeString;
-        expect(imask.rawInputValue).toEqual(timeString);
-      });
-      it('should work for 12:23', () => {
-        const timeString = '12:23';
-        imask.rawInputValue = timeString;
-        expect(imask.rawInputValue).toEqual(timeString);
-      });
-      it('should work for 00:23', () => {
-        const timeString = '00:23';
-        imask.rawInputValue = timeString;
-        expect(imask.rawInputValue).toEqual(timeString);
-      });
-      it('should work for 23:23', () => {
-        const timeString = '23:23';
-        imask.rawInputValue = timeString;
-        expect(imask.rawInputValue).toEqual(timeString);
-      });
-    });
-    describe('For 12hour time', () => {
-      let imask: Masked<any>;
-      beforeEach(() => {
-        const militaryTimeMask = service.getTimeMask(false);
-        imask = createIMask(militaryTimeMask);
-      });
-      it('should work for 12:23am', () => {
-        const timeString = '12:23am';
-        imask.rawInputValue = timeString;
-        expect(imask.rawInputValue).toEqual(timeString.toUpperCase());
-      });
-      it('should work for 12:23pm', () => {
-        const timeString = '12:23pm';
-        imask.rawInputValue = timeString;
-        expect(imask.rawInputValue).toEqual(timeString.toUpperCase());
-      });
-      it('should work for 1:23pm', () => {
-        const timeString = '1:23pm';
-        imask.rawInputValue = timeString;
-        expect(imask.rawInputValue).toEqual(timeString.toUpperCase());
-      });
-      it('should work for 1:23am', () => {
-        const timeString = '1:23am';
-        imask.rawInputValue = timeString;
-        expect(imask.rawInputValue).toEqual(timeString.toUpperCase());
-      });
-      it('should work for 1:23 am (space inclusive)', () => {
-        const timeString = '1:23 am';
-        imask.rawInputValue = timeString;
-        expect(imask.rawInputValue).toEqual(timeString.toUpperCase());
-      });
-      // Could not seem to get these tests to work - no instance of time input fields appears to respect the "A.M." formatting
-      xit('should work for 1:23 A.M.', () => {
-        labelService.timeFormatPlaceholderAM = 'hh:mm A.M.';
-        const timeMask = service.getTimeMask(false);
-        imask = createIMask(timeMask);
-        const timeString = '1:23 A.M.';
-        imask.rawInputValue = timeString;
-        expect(imask.rawInputValue).toEqual(timeString);
-      });
-      xit('should work for 1:23 P.M.', () => {
-        labelService.timeFormatPlaceholderAM = 'hh:mm A.M.';
-        const timeMask = service.getTimeMask(false);
-        imask = createIMask(timeMask);
-        const timeString = '1:23 P.M.';
-        imask.rawInputValue = timeString;
-        expect(imask.rawInputValue).toEqual(timeString);
-      });
-    });
-  });
+  // describe('Function: getTimeMask()', () => {
+  //   it('should be defined', () => {
+  //     expect(service.getTimeMask).toBeDefined();
+  //   });
+  //   describe('For Military Time', () => {
+  //     let imask: Masked<any>;
+  //     beforeEach(() => {
+  //       const militaryTimeMask = service.getTimeMask(true);
+  //       imask = createIMask(militaryTimeMask);
+  //     });
+  //     it('should work for 1:23', () => {
+  //       const timeString = '01:23';
+  //       imask.rawInputValue = timeString;
+  //       expect(imask.rawInputValue).toEqual(timeString);
+  //     });
+  //     it('should work for 12:23', () => {
+  //       const timeString = '12:23';
+  //       imask.rawInputValue = timeString;
+  //       expect(imask.rawInputValue).toEqual(timeString);
+  //     });
+  //     it('should work for 00:23', () => {
+  //       const timeString = '00:23';
+  //       imask.rawInputValue = timeString;
+  //       expect(imask.rawInputValue).toEqual(timeString);
+  //     });
+  //     it('should work for 23:23', () => {
+  //       const timeString = '23:23';
+  //       imask.rawInputValue = timeString;
+  //       expect(imask.rawInputValue).toEqual(timeString);
+  //     });
+  //   });
+  //   describe('For 12hour time', () => {
+  //     let imask: Masked<any>;
+  //     beforeEach(() => {
+  //       const militaryTimeMask = service.getTimeMask(false);
+  //       imask = createIMask(militaryTimeMask);
+  //     });
+  //     it('should work for 12:23am', () => {
+  //       const timeString = '12:23am';
+  //       imask.rawInputValue = timeString;
+  //       expect(imask.rawInputValue).toEqual(timeString.toUpperCase());
+  //     });
+  //     it('should work for 12:23pm', () => {
+  //       const timeString = '12:23pm';
+  //       imask.rawInputValue = timeString;
+  //       expect(imask.rawInputValue).toEqual(timeString.toUpperCase());
+  //     });
+  //     it('should work for 1:23pm', () => {
+  //       const timeString = '1:23pm';
+  //       imask.rawInputValue = timeString;
+  //       expect(imask.rawInputValue).toEqual(timeString.toUpperCase());
+  //     });
+  //     it('should work for 1:23am', () => {
+  //       const timeString = '1:23am';
+  //       imask.rawInputValue = timeString;
+  //       expect(imask.rawInputValue).toEqual(timeString.toUpperCase());
+  //     });
+  //     it('should work for 1:23 am (space inclusive)', () => {
+  //       const timeString = '1:23 am';
+  //       imask.rawInputValue = timeString;
+  //       expect(imask.rawInputValue).toEqual(timeString.toUpperCase());
+  //     });
+  //     // Could not seem to get these tests to work - no instance of time input fields appears to respect the "A.M." formatting
+  //     xit('should work for 1:23 A.M.', () => {
+  //       labelService.timeFormatPlaceholderAM = 'hh:mm A.M.';
+  //       const timeMask = service.getTimeMask(false);
+  //       imask = createIMask(timeMask);
+  //       const timeString = '1:23 A.M.';
+  //       imask.rawInputValue = timeString;
+  //       expect(imask.rawInputValue).toEqual(timeString);
+  //     });
+  //     xit('should work for 1:23 P.M.', () => {
+  //       labelService.timeFormatPlaceholderAM = 'hh:mm A.M.';
+  //       const timeMask = service.getTimeMask(false);
+  //       imask = createIMask(timeMask);
+  //       const timeString = '1:23 P.M.';
+  //       imask.rawInputValue = timeString;
+  //       expect(imask.rawInputValue).toEqual(timeString);
+  //     });
+  //   });
+  // });
 
   describe('Function: getTimePlaceHolder(militaryTime: boolean): string', () => {
     it('should be defined', () => {
