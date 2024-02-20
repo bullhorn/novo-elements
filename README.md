@@ -88,7 +88,6 @@ There are many ways to **[contribute](https://github.com/bullhorn/novo-elements/
 ### Contributors
 
 <object type="image/svg+xml" data="contributors.svg">
-  <!-- Your fall back here -->
   <img src="contributors.svg" />
 </object>
 
