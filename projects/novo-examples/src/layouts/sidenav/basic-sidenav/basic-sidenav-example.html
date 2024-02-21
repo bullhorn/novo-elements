@@ -76,7 +76,7 @@
         </novo-stack>
       </novo-toolbar>
       <novo-toolbar gap="md">
-        <novo-nav outlet="pages">
+        <novo-nav [outlet]="pages">
           <novo-tab>Overview</novo-tab>
           <novo-tab>Activity</novo-tab>
           <novo-tab>Files</novo-tab>
@@ -92,6 +92,9 @@
         </novo-nav-content>
         <novo-nav-content>
           <h1>Tab 2 Content</h1>
+        </novo-nav-content>
+        <novo-nav-content>
+          <h1>Tab 3 Content</h1>
         </novo-nav-content>
       </novo-nav-outlet>
 
