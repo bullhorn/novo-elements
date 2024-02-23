@@ -29,8 +29,10 @@ const PICKER_VALUE_ACCESSOR = {
   multi: true,
 };
 
+const DEFAULT_DEBOUNCE_TIME = 250;
+
 /**
- * @description This class is the directive definition of the Picker. If you add and attribute of `picker` to an input,
+ * @description This class is the directive definition of the Picker. If you add an attribute of `picker` to an input,
  * it will create an instance of the picker which wraps the input in all of the picker HTML elements and functionality.
  * Picker should be added as a two-way bound ngModel instance `[(picker)]=""` in order to have the picker options
  * dynamically populate.
@@ -158,16 +160,17 @@ export class NovoPickerElement implements OnInit {
     if (this.appendToBody) {
       notify(`'appendToBody' has been deprecated. Please remove this attribute.`);
     }
+    let debounceTimeInMilliSeconds = Number.isNaN(Number(this.config?.debounceTimeInMilliSeconds)) ? DEFAULT_DEBOUNCE_TIME : Number(this.config?.debounceTimeInMilliSeconds);
     // Custom results template
     this.resultsComponent = this.config.resultsTemplate || PickerResults;
     // Get all distinct key up events from the input and only fire if long enough and distinct
     // let input = this.element.nativeElement.querySelector('input');
-    const pasteObserver = fromEvent(this.input.nativeElement, 'paste').pipe(debounceTime(250), distinctUntilChanged());
+    const pasteObserver = fromEvent(this.input.nativeElement, 'paste').pipe(debounceTime(debounceTimeInMilliSeconds), distinctUntilChanged());
     pasteObserver.subscribe(
       (event: ClipboardEvent) => this.onDebouncedKeyup(event),
       (err) => this.hideResults(err),
     );
-    const keyboardObserver = fromEvent(this.input.nativeElement, 'keyup').pipe(debounceTime(250), distinctUntilChanged());
+    const keyboardObserver = fromEvent(this.input.nativeElement, 'keyup').pipe(debounceTime(debounceTimeInMilliSeconds), distinctUntilChanged());
     keyboardObserver.subscribe(
       (event: KeyboardEvent) => this.onDebouncedKeyup(event),
       (err) => this.hideResults(err),

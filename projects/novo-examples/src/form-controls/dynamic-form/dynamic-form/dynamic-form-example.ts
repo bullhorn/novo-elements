@@ -40,7 +40,7 @@ export class DynamicFormExample {
   }
 
   clear() {
-    this.dynamic.forEach((control) => {
+    this.dynamic[0].controls.forEach((control) => {
       control.forceClear.emit();
     });
   }
