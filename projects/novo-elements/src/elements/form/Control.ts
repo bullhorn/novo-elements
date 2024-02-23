@@ -464,7 +464,6 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
       methods: {
         restrictKeys: this.restrictKeys.bind(this),
         emitChange: this.emitChange.bind(this),
-        handleSimpleTextInput: this.handleSimpleTextInput.bind(this),
         handleAccept: this.handleAccept.bind(this),
         handleFocus: this.handleFocus.bind(this),
         handlePercentChange: this.handlePercentChange.bind(this),
@@ -686,8 +685,8 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     this.formattedValue = null;
   }
 
-  handleTextAreaInput(event: KeyboardEvent) {
-    this.emitChange((event.target as HTMLTextAreaElement).value);
+  handleTextAreaInput(event: KeyboardEvent & { target: HTMLInputElement }) {
+    this.emitChange(event);
     this.restrictKeys(event);
   }
 
@@ -784,16 +783,10 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     }
   }
 
-  emitChange(value: string) {
-    this.change.emit(value);
+  emitChange(event: (Event & { target: HTMLInputElement }) | string) {
+    this.change.emit(event);
+    const value = typeof event === 'object' ? event.target.value : event;
     this.checkMaxLength(value);
-  }
-
-  handleSimpleTextInput(event: Event) {
-    if (!this.control.textMaskEnabled) {
-      this.emitChange((event.target as HTMLInputElement).value);
-    }
-    // if we have maskOptions, inputs will be absorbed in handleAccept()
   }
 
   handleEdit(value) {
