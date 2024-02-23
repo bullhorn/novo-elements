@@ -191,7 +191,7 @@ export class NovoDynamicFormElement implements OnChanges, OnInit, AfterContentIn
     this.form.fieldsets.forEach((fieldset) => {
       fieldset.controls.forEach((control) => {
         const ctl = this.form.controls[control.key];
-        if (!this.fieldsAlreadyHidden.includes(control.key)) {
+        if (!this.fieldsAlreadyHidden?.includes(control.key)) {
           ctl.hidden = false;
         }
       });

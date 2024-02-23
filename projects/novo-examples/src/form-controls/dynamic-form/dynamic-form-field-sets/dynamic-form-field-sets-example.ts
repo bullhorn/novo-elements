@@ -11,27 +11,10 @@ import { MockMeta, MockMetaHeaders } from '../MockMeta';
   styleUrls: ['dynamic-form-field-sets-example.css'],
 })
 export class DynamicFormFieldSetsExample {
-  public dynamic: any;
-  public dynamicForm: any;
   public fieldsets: Array<any>;
   public fieldsetsForm: any;
 
   constructor(private formUtils: FormUtils) {
-    // Dynamic
-    this.dynamic = formUtils.toFieldSets(
-      MockMeta,
-      '$ USD',
-      {},
-      { token: 'TOKEN', military: true },
-      {
-        customfield: {
-          template: 'custom-demo-component',
-        },
-      },
-    );
-    formUtils.setInitialValuesFieldsets(this.dynamic, { firstName: 'Initial F Name', number: 12 });
-    this.dynamicForm = formUtils.toFormGroupFromFieldset(this.dynamic);
-
     // Dynamic + Fieldsets
     this.fieldsets = formUtils.toFieldSets(
       MockMetaHeaders,
@@ -57,8 +40,10 @@ export class DynamicFormFieldSetsExample {
   }
 
   clear() {
-    this.dynamic.forEach((control) => {
-      control.forceClear.emit();
+    this.fieldsets.forEach((fieldset) => {
+      fieldset.controls.forEach((control) => {
+        control.forceClear.emit();
+      });
     });
   }
 
