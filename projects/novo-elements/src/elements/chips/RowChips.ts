@@ -66,6 +66,7 @@ export class NovoRowChipElement extends NovoChipElement {
     >
       <div
         class="column-data"
+        [class.show-overflow]="column.showOverflow"
         [class.editable]="column.editable"
         [style.flexBasis.px]="column.width || 200"
         *ngFor="let column of source.columns"
