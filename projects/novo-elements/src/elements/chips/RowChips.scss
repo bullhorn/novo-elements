@@ -37,6 +37,14 @@
           border: none;
         }
       }
+      &.show-overflow {
+        height: unset;
+        span {
+          overflow: visible;
+          text-overflow: unset;
+          max-height: unset;
+        }
+       }
       &:first-of-type {
         flex: 0 0 275px;
       }
