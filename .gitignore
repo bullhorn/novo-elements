@@ -17,6 +17,8 @@ novo-elements.iml
 *.launch
 .settings/
 *.sublime-workspace
+*.ipr
+*.iws
 
 # IDE - VSCode
 .vscode
