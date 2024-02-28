@@ -735,11 +735,6 @@ dialog > header:first-child {
   padding: 10px;
   text-align: center;
 }
-dialog::-webkit-backdrop {
-  background: #0000009c;
-  -webkit-backdrop-filter: blur(4px);
-          backdrop-filter: blur(4px);
-}
 dialog::backdrop {
   background: #0000009c;
   -webkit-backdrop-filter: blur(4px);
@@ -3434,34 +3429,29 @@ quick-note-results:focus,
 .quick-note-results:focus {
   outline: none;
 }
-entity-picker-results,
-:host-context(entity-picker-results) {
+entity-picker-results {
   background: #ffffff;
   width: 100%;
   min-width: 250px;
 }
-entity-picker-results novo-list,
-:host-context(entity-picker-results) novo-list {
+entity-picker-results novo-list {
   background: #ffffff;
   min-width: 30rem;
   max-height: 49vh;
   overflow: auto;
 }
-entity-picker-results novo-list .novo-item-content,
-:host-context(entity-picker-results) novo-list .novo-item-content {
+entity-picker-results novo-list .novo-item-content {
   margin-top: 0.5rem;
   margin-left: 1.8rem;
   row-gap: 1rem;
 }
-entity-picker-results novo-list .novo-item-content .novo-text,
-:host-context(entity-picker-results) novo-list .novo-item-content .novo-text {
+entity-picker-results novo-list .novo-item-content .novo-text {
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
   padding-right: 1em;
 }
-entity-picker-results novo-list novo-loading,
-:host-context(entity-picker-results) novo-list novo-loading {
+entity-picker-results novo-list novo-loading {
   justify-content: center;
 }
 workers-comp-codes-picker-results,
@@ -5096,20 +5086,6 @@ distribution-list-picker-results section {
 .aside-overlay-panel {
   position: relative;
 }
-@-webkit-keyframes iconEnter {
-  0% {
-    opacity: 0;
-    transform: scale(0.8);
-  }
-  90% {
-    opacity: 1;
-    transform: scale(1.1);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
 @keyframes iconEnter {
   0% {
     opacity: 0;
@@ -5135,17 +5111,6 @@ distribution-list-picker-results section {
     transform: rotateZ(180deg);
   }
 }
-@-webkit-keyframes half-rotate {
-  0% {
-    transform: rotateZ(45deg);
-  }
-  75% {
-    transform: rotateZ(100deg);
-  }
-  100% {
-    transform: rotateZ(90deg);
-  }
-}
 @keyframes half-rotate {
   0% {
     transform: rotateZ(45deg);
@@ -5157,33 +5122,12 @@ distribution-list-picker-results section {
     transform: rotateZ(90deg);
   }
 }
-@-webkit-keyframes rotateBack {
-  0% {
-    transform: rotateZ(90deg);
-  }
-  100% {
-    transform: rotateZ(0deg);
-  }
-}
 @keyframes rotateBack {
   0% {
     transform: rotateZ(90deg);
   }
   100% {
     transform: rotateZ(0deg);
-  }
-}
-@-webkit-keyframes show {
-  0% {
-    opacity: 0;
-    transform: translateX(-100%);
-  }
-  75% {
-    transform: translateX(0px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
   }
 }
 @keyframes show {
@@ -5487,26 +5431,18 @@ multi-code-snippet pre code.hljs {
 .main-nav [data-name=novo-logo] .outer-ring {
   fill: #eb6845;
   transform-origin: 50% 50%;
-  -webkit-animation-duration: 20000ms;
-          animation-duration: 20000ms;
-  -webkit-animation-iteration-count: infinite;
-          animation-iteration-count: infinite;
-  -webkit-animation-timing-function: linear;
-          animation-timing-function: linear;
-  -webkit-animation-name: rotate-back;
-          animation-name: rotate-back;
+  animation-duration: 20000ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  animation-name: rotate-back;
 }
 .main-nav [data-name=novo-logo] .inner-ring {
   fill: #eb6845;
   transform-origin: 50% 50%;
-  -webkit-animation-duration: 20000ms;
-          animation-duration: 20000ms;
-  -webkit-animation-iteration-count: infinite;
-          animation-iteration-count: infinite;
-  -webkit-animation-timing-function: linear;
-          animation-timing-function: linear;
-  -webkit-animation-name: rotate;
-          animation-name: rotate;
+  animation-duration: 20000ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  animation-name: rotate;
 }
 .main-nav [data-name=bullhorn-text] {
   width: 100%;
@@ -5721,22 +5657,6 @@ multi-code-snippet pre code.hljs {
 }
 .main-nav .menu-item:nth-child(45).current ~ .menu-line {
   transform: translate3d(0, 4400%, 0);
-}
-@-webkit-keyframes rotate {
-  from {
-    -webkit-transform: rotate(0deg);
-  }
-  to {
-    -webkit-transform: rotate(360deg);
-  }
-}
-@-webkit-keyframes rotate-back {
-  from {
-    -webkit-transform: rotate(360deg);
-  }
-  to {
-    -webkit-transform: rotate(0deg);
-  }
 }
 .hljs-comment,
 .hljs-quote {
