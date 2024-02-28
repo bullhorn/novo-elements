@@ -99,6 +99,9 @@ export class NovoButtonElement {
     return this._icon;
   }
 
+  @HostBinding('attr.tabindex')
+  tabIndex = 0;
+
   /**
    * Make the button non-interactive.
    */

@@ -1,6 +1,6 @@
 // NG2
 import { OverlayModule } from '@angular/cdk/overlay';
-import { ChangeDetectorRef, Component, DebugElement, ElementRef, EventEmitter, NO_ERRORS_SCHEMA, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, DebugElement, ElementRef, ErrorHandler, EventEmitter, Inject, NO_ERRORS_SCHEMA, OnInit } from '@angular/core';
 import { async, ComponentFixture, fakeAsync, flush, inject, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DateFormatService, NovoLabelService, NovoTemplateService, OptionsService } from 'novo-elements/services';
@@ -11,7 +11,7 @@ import { FieldInteractionApi } from './FieldInteractionApi';
 import { NovoControlTemplates } from './ControlTemplates';
 import { NovoFormGroup } from './NovoFormGroup';
 import { FormUtils } from './utils/FormUtils';
-import { BaseControl, PickerControl, TextBoxControl } from './controls';
+import { BaseControl, DateControl, DateTimeControl, PickerControl, TextBoxControl } from './controls';
 import { last, lastValueFrom } from 'rxjs';
 
 @Component({
@@ -206,6 +206,15 @@ describe('NovoControlElement', () => {
   });
 });
 
+// While this is a laborious thing to set up individually on tests, it could be worthwhile to find a way to automatically apply this to other fixtures
+class ErrorNet extends ErrorHandler {
+
+  handleError(error: any): void {
+    super.handleError(error);
+    fail(`Hit error handler: ${error.stack}`);
+  }
+}
+
 @Component({
   selector: 'novo-control-templates-test',
   template: `
@@ -213,7 +222,11 @@ describe('NovoControlElement', () => {
   <div *ngIf="templatesReady">
     <novo-control (change)="change.emit($event)" (focus)="focus.emit($event)" (blur)="blur.emit($event)" [form]="form" [control]="control"></novo-control>
   </div>
-  `
+  `,
+  providers: [{
+    provide: ErrorHandler,
+    useClass: ErrorNet
+  }]
 })
 class TestComponent2 implements OnInit {
   templatesReady = false;
@@ -225,7 +238,7 @@ class TestComponent2 implements OnInit {
 
   control: BaseControl;
   
-  constructor(private formUtils: FormUtils) { }
+  constructor(private formUtils: FormUtils, @Inject(ErrorHandler) private net: ErrorNet) { }
 
   ngOnInit() {
     this.form = this.formUtils.toFormGroup([this.control]);
@@ -247,6 +260,10 @@ describe('Novo Control with Templates', () => {
         {
           provide: FieldInteractionApi,
           useValue: fieldInteractionApiStub
+        },
+        {
+          provide: ErrorHandler,
+          useClass: ErrorNet
         }
       ]
     }).compileComponents();
@@ -368,6 +385,7 @@ describe('Novo Control with Templates', () => {
       fixture.detectChanges();
       flush();
       fixture.detectChanges();
+      component = fixture.debugElement.query(By.directive(NovoControlElement)).componentInstance;
       chipsDebug = fixture.debugElement.query(By.css('novo-chips'));
     }));
 
@@ -377,8 +395,35 @@ describe('Novo Control with Templates', () => {
       expect(lastChange).toBeFalsy();
       // add 'b' to chips
       const changeEvent: any = { value: ['b'], rawValue: ['a'] };
+
       chipsDebug.triggerEventHandler('changed', changeEvent);
       expect(lastChange).toEqual(['b']);
+    });
+  });
+
+  describe('DatePicker Control', () => {
+    let datePickerDebug: DebugElement;
+    beforeEach(fakeAsync(() => {
+      testComponent.control = new DateControl({
+        key: 'datetime',
+        label: 'Date picker',
+      });
+      fixture.detectChanges();
+      testComponent.templatesReady = true;
+      fixture.detectChanges();
+      flush();
+      fixture.detectChanges();
+      component = fixture.debugElement.query(By.directive(NovoControlElement)).componentInstance;
+      datePickerDebug = fixture.debugElement.query(By.css('novo-date-picker-input'));
+    }));
+    
+    it('should receive change event', () => {
+      let lastChange: any;
+      testComponent.change.subscribe(c => lastChange = c);
+      expect(lastChange).toBeFalsy();
+      const changeEvent: any = new Date();
+      datePickerDebug.triggerEventHandler('changeEvent', changeEvent)
+      expect(lastChange).toEqual(changeEvent);
     });
   });
 });
