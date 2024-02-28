@@ -146,7 +146,7 @@ export class NovoDatePickerInputElement implements OnInit, OnChanges, AfterViewI
   @Output()
   focusEvent: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
   @Output()
-  changeEvent: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
+  changeEvent = new EventEmitter<Date>();
   /** Element for the panel containing the autocomplete options. */
   @ViewChild(NovoOverlayTemplateComponent)
   overlay: NovoOverlayTemplateComponent;
@@ -307,7 +307,7 @@ export class NovoDatePickerInputElement implements OnInit, OnChanges, AfterViewI
     this.invalidDateErrorMessage = `Invalid date field entered. Date format of ${dateFormat} is required.`;
   }
 
-  public dispatchOnChange(newValue?: any, blur: boolean = false, skip: boolean = false) {
+  public dispatchOnChange(newValue?: Date, blur: boolean = false, skip: boolean = false) {
     if (newValue !== this.value) {
       this._onChange(newValue);
       this.changeEvent.emit(newValue);

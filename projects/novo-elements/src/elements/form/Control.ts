@@ -783,10 +783,12 @@ export class NovoControlElement extends OutsideClick implements OnInit, OnDestro
     }
   }
 
-  emitChange(event: (Event & { target: HTMLInputElement }) | string) {
+  emitChange(event: (Event & { target: HTMLInputElement }) | string | Date) {
     this.change.emit(event);
-    const value = typeof event === 'object' ? event.target.value : event;
-    this.checkMaxLength(value);
+    const stringValue = (typeof event === 'object' && 'target' in event) ? event?.target?.value : event;
+    if (typeof stringValue === 'string') {
+      this.checkMaxLength(stringValue);
+    }
   }
 
   handleEdit(value) {
