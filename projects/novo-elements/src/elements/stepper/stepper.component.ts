@@ -12,6 +12,7 @@ import {
   forwardRef,
   Inject,
   Input,
+  OnDestroy,
   Optional,
   QueryList,
   TemplateRef,
@@ -55,7 +56,7 @@ export class NovoStep extends CdkStep {
     { provide: CdkStepper, useExisting: NovoStepper },
   ],
 })
-export class NovoStepper extends CdkStepper implements AfterContentInit {
+export class NovoStepper extends CdkStepper implements AfterContentInit, OnDestroy {
   /** The list of step headers of the steps in the stepper. */
   @ViewChildren(NovoStepHeader)
   _stepHeader: QueryList<CdkStepHeader>;
@@ -85,6 +86,8 @@ export class NovoStepper extends CdkStepper implements AfterContentInit {
     // Mark the component for change detection whenever the content children query changes
     this.steps.changes.pipe(takeUntil(this._destroyed)).subscribe(() => this._stateChanged());
   }
+
+  ngOnDestroy() {}
 
   complete() {
     try {
