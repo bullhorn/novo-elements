@@ -1,4 +1,4 @@
-<novo-expansion-panel theme="contact" padding="false">
+<novo-expansion-panel theme="contact">
   <novo-expansion-panel-header>
     <novo-panel-title>
       <novo-icon>person</novo-icon>
@@ -6,12 +6,7 @@
     </novo-panel-title>
   </novo-expansion-panel-header>
 
-  <novo-table class="table-condensed"
-    [rows]="details.rows"
-    [columns]="details.columns"
-    [config]="details.config"
-    rowIdentifier="name"></novo-table>
-
+  <p>This is the primary content of the panel.</p>
 
 </novo-expansion-panel>
 <novo-expansion-panel theme="job" [hideToggle]="jp.expanded" #jp>
