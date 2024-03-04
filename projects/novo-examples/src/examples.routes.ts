@@ -200,7 +200,7 @@ export class AsideDesignPage {
 <h1>Services</h1>
 <h2>NovoAsideService</h2>
 <p>Asides (a.k.a. Slideout) should be invoked via <code>NovoAsideService</code> and therefore all properties should be private or internal. Any values that need to be passed to the your <code>aside</code> instance should be passed by the service and will be available in your slideout via <code>NovoAsideRef.params</code>.</p>
-<pre><code class="language-typescript"><span class="hljs-meta">@Component</span>(&#123;...&#125;)
+<pre><code class="language-typescript"><span class="hljs-meta">&#64;Component</span>(&#123;...&#125;)
 <span class="hljs-keyword">class</span> <span class="hljs-title class_">RandomComponent</span> &#123;
   <span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> aside:NovoAsideService</span>) &#123;&#125;
   <span class="hljs-title function_">handleAction</span>(<span class="hljs-params"></span>) &#123;
@@ -244,7 +244,7 @@ export class AsideDesignPage {
 <pre><code class="language-typescript"><span class="hljs-keyword">interface</span> <span class="hljs-title class_">AddFormParams</span> &#123;
   <span class="hljs-attr">record</span>: <span class="hljs-built_in">number</span>;
 &#125;
-<span class="hljs-meta">@Component</span>(&#123;&#125;)
+<span class="hljs-meta">&#64;Component</span>(&#123;&#125;)
 <span class="hljs-keyword">class</span> <span class="hljs-title class_">AddFormSlideout</span> &#123;
   <span class="hljs-title function_">constructor</span>(<span class="hljs-params">ref:NovoAsideRef&lt;AddFormParams&gt;</span>) &#123;
     <span class="hljs-comment">/**
@@ -2044,7 +2044,7 @@ export class ModalDesignPage {
 <h1>Services</h1>
 <h2>NovoModalService</h2>
 <p>Modals should be invoked via <code>NovoModalService</code> and therefore all properties should be private or internal. Any values that need to be passed to the your <code>Modal</code> instance should be passed by the service and available in your modal.</p>
-<pre><code class="language-typescript"><span class="hljs-meta">@Component</span>(&#123;...&#125;)
+<pre><code class="language-typescript"><span class="hljs-meta">&#64;Component</span>(&#123;...&#125;)
 <span class="hljs-keyword">class</span> <span class="hljs-title class_">RandomComponent</span> &#123;
   <span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> modal:NovoModalService</span>) &#123;&#125;
   <span class="hljs-title function_">handleAction</span>(<span class="hljs-params"></span>) &#123;
@@ -2088,7 +2088,7 @@ export class ModalDesignPage {
 <pre><code class="language-typescript"><span class="hljs-keyword">interface</span> <span class="hljs-title class_">DeleteModalParams</span> &#123;
   <span class="hljs-attr">record</span>: <span class="hljs-built_in">number</span>;
 &#125;
-<span class="hljs-meta">@Component</span>(&#123;&#125;)
+<span class="hljs-meta">&#64;Component</span>(&#123;&#125;)
 <span class="hljs-keyword">class</span> <span class="hljs-title class_">ConfirmDeleteModal</span> &#123;
   <span class="hljs-title function_">constructor</span>(<span class="hljs-params">ref:NovoModalRef&lt;DeleteModalParams&gt;</span>) &#123;
     <span class="hljs-comment">/**
@@ -2688,7 +2688,7 @@ export class QueryBuilderDesignPage {
 <p>Your implementation might require a custom input type to specifically define how you want to query against your data. Since your implementation will have to convert the query builder form to the query syntax of your system, you can add custom field definitions to override the defaults or provide new implementations.</p>
 <p>First you need to create your custom condition</p>
 <pre><code class="language-typescript"><span class="hljs-comment">// custom-condition-field-def.html</span>
-<span class="hljs-meta">@Component</span>(&#123;
+<span class="hljs-meta">&#64;Component</span>(&#123;
   <span class="hljs-attr">selector</span>: <span class="hljs-string">&#x27;custom-condition-field-def&#x27;</span>,
   <span class="hljs-attr">template</span>: <span class="hljs-string">&#x27;custom-condition-field-def.html,
   encapsulation: ViewEncapsulation.None,
@@ -3694,7 +3694,7 @@ export class IconographyPage {
   </typedef-snippet>
   <typedef-snippet>
     <novo-label>scss</novo-label>
-    <pre><code>.box &#123;\n  @include novo-padding-medium(); // use mixin \n  margin: $spacing-xs; // or use scss variables\n  padding: $spacing-xl;\n&#125; &#125;&#125;</code></pre>
+    <pre><code>.box &#123;\n  &#64;include novo-padding-medium(); // use mixin \n  margin: $spacing-xs; // or use scss variables\n  padding: $spacing-xl;\n&#125; &#125;&#125;</code></pre>
   </typedef-snippet>
 </typedef-example>
 <!-- 
@@ -3718,7 +3718,7 @@ export class IconographyPage {
     </dl>
   </typedef-specs>
   <typedef-snippet>
-    <code class="tc-positive">&lt;novo-box margin="sm"&gt;...&lt;/novo-box&gt;</code> or <code class="tc-negative">@include novo-margin-medium()</code>
+    <code class="tc-positive">&lt;novo-box margin="sm"&gt;...&lt;/novo-box&gt;</code> or <code class="tc-negative">&#64;include novo-margin-medium()</code>
   </typedef-snippet>
 </typedef-example> -->
 `,
@@ -3782,7 +3782,7 @@ export class SpacingPage {
     </novo-radio-group>
   </typedef-specs>
   <typedef-snippet>
-    <code class="tc-positive">&lt;novo-text&gt;...&lt;/novo-text&gt;</code> or <code class="tc-negative">@include novo-body-text()</code>
+    <code class="tc-positive">&lt;novo-text&gt;...&lt;/novo-text&gt;</code> or <code class="tc-negative">&#64;include novo-body-text()</code>
   </typedef-snippet>
 </typedef-example>
 <h5>How does this work with responsive design?</h5>
@@ -3808,7 +3808,7 @@ export class SpacingPage {
     </dl>
   </typedef-specs>
   <typedef-snippet>
-    <code class="tc-positive">&lt;novo-text&gt;...&lt;/novo-text&gt;</code> or <code class="tc-negative">@include novo-body-text-medium()</code>
+    <code class="tc-positive">&lt;novo-text&gt;...&lt;/novo-text&gt;</code> or <code class="tc-negative">&#64;include novo-body-text-medium()</code>
   </typedef-snippet>
 </typedef-example>
 <typedef-example>
@@ -3867,7 +3867,7 @@ export class SpacingPage {
     </dl>
   </typedef-specs>
   <typedef-snippet>
-    <code class="tc-positive">&lt;novo-title&gt;...&lt;/novo-title&gt;</code> or <code class="tc-negative">@include novo-title-text()</code>
+    <code class="tc-positive">&lt;novo-title&gt;...&lt;/novo-title&gt;</code> or <code class="tc-negative">&#64;include novo-title-text()</code>
   </typedef-snippet>
 </typedef-example>
 <typedef-example>
@@ -3888,7 +3888,7 @@ export class SpacingPage {
     </novo-radio-group>
   </typedef-specs>
   <typedef-snippet>
-    <code class="tc-positive">&lt;novo-title&gt;...&lt;/novo-title&gt;</code> or <code class="tc-negative">@include novo-title-text()</code>
+    <code class="tc-positive">&lt;novo-title&gt;...&lt;/novo-title&gt;</code> or <code class="tc-negative">&#64;include novo-title-text()</code>
   </typedef-snippet>
 </typedef-example>
 <h2>Label Text</h2>
@@ -4748,6 +4748,19 @@ export class TimePickerExamplesPage {
 
 
 @Component({
+  selector: 'timezone-page',
+  template: `<h1>Checkbox <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/form/controls/timezone/TimezoneControl">(source)</a></h1>
+<h5>Basic</h5>
+<p><code-example example="timezone"></code-example></p>
+`,
+  host: { class: 'markdown-page' }
+})
+export class TimezonePage {
+  public params: any = {};
+}
+
+
+@Component({
   selector: 'value-page',
   template: `<h1>Value/Details/Summary <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/value">(source)</a></h1>
 <p>Used to render data based on its field type provided in meta. It has two themes, DEFAULT - horizontal view and MOBILE - vertical view</p>
@@ -4836,7 +4849,7 @@ ng add novo-elements
 <p>You need to import the <code>NovoButtonModule</code> for the component to display, add the following lines to your <code>app.module.ts</code> file.</p>
 <pre><code class="language-ts"><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">NovoButtonModule</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;novo-elements&#x27;</span>;
 
-<span class="hljs-meta">@NgModule</span> (&#123;
+<span class="hljs-meta">&#64;NgModule</span> (&#123;
   <span class="hljs-attr">imports</span>: [
     <span class="hljs-title class_">NovoButtonModule</span>,
   ]
@@ -5532,7 +5545,7 @@ export class TabsExamplesPage {
     <br>
     <br>
     <label for="address">Email address:</label>
-    <input id="address" type="email" name="email" placeholder="YourEmail@example.com" required>
+    <input id="address" type="email" name="email" placeholder="YourEmail&#64;example.com" required>
     <label for="tel">Tel.:</label>
     <input id="tel" type="tel" placeholder="123-456-7890" pattern="[0-9]&#123;3&#125;-[0-9]&#123;3&#125;-[0-9]&#123;4&#125;">
     <br>
@@ -5598,7 +5611,7 @@ export class PatternsNativeFormsPage {
 <h3 id="form-elements">Form elements</h3>
 <form>
   <label for="email">Email</label>
-  <input type="email" name="email" id="email" placeholder="john.doe@gmail.com" />
+  <input type="email" name="email" id="email" placeholder="john.doe&#64;gmail.com" />
 <p><label for="id">User id (read only)</label>
 <input readonly name="id" id="id" value="04D6H89Z" /></p>
 <p><label for="disabled">Random disabled input</label>
@@ -5720,7 +5733,7 @@ export class PatternsNativeFormsPage {
 </ol>
 <p>Addresses are also styled to be <strong>awesome</strong>!</p>
 <address>
-  <a href="mailto:john.doe@example.com">john.doe@example.com</a><br />
+  <a href="mailto:john.doe&#64;example.com">john.doe&#64;example.com</a><br />
   <a href="tel:778-330-2389">778-330-2389</a><br />
   <a href="sms:666-666-6666">666-666-6666</a><br />
 </address>
@@ -5786,8 +5799,8 @@ export class TemplatesPage {
 <p><strong>Release v6.0.0</strong>: This release contains several component updates and additional new components. Initial refactoring of component architecture to support future efforts to improve the design systems consistency along with improvements to the developer experience.</p>
 <p>Note: This update is a major release which includes changes that require updates to your code. When updating to Novo Elements V6 from prior versions, the following commands are required:</p>
 <p>First follow the steps to update your angular app to <a href="https://update.angular.io/?v=9.0-10.0">Version 10</a></p>
-<pre><code><span class="hljs-attribute">npm</span> install --save timezone-support@<span class="hljs-number">2</span> novo-design-tokens@<span class="hljs-number">0</span> angular-imask@<span class="hljs-number">6</span> imask@<span class="hljs-number">6</span>
-<span class="hljs-attribute">npm</span> install --save novo-elements@<span class="hljs-number">6</span>
+<pre><code><span class="hljs-attribute">npm</span> install --save timezone-support&#64;<span class="hljs-number">2</span> novo-design-tokens&#64;<span class="hljs-number">0</span> angular-imask&#64;<span class="hljs-number">6</span> imask&#64;<span class="hljs-number">6</span>
+<span class="hljs-attribute">npm</span> install --save novo-elements&#64;<span class="hljs-number">6</span>
 <span class="hljs-attribute">ng</span> update novo-elements --migrate-only --from=<span class="hljs-number">0</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span> --to=<span class="hljs-number">6</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span> --force --<span class="hljs-literal">allow</span>-dirty  
 </code></pre>
 <p>For any issues that are not corrected with the above command, please ask questions in the <a href="https://github.com/bullhorn/novo-elements/discussions/categories/q-a">Q&amp;A Page</a> in github.</p>
@@ -6159,13 +6172,13 @@ export class v6Page {
 <p>Bullhorn is continually seeking to update and innovate our products, and leverage the latest features in the frameworks we use. In support of that mission, we are updating our Novo UI and its supporting novo-elements library to Angular 13.  This update  allows us to continue offering a streamlined and consistent experience across Bullhorn’s complete product portfolio.  This update includes both an Angular upgrade, as well as supporting the latest Typescript updates.  You can find more details in the Technical Release Notes section below.</p>
 <h2>Release Timeline</h2>
 <p>Bullhorn has released a Release Candidate v7 of Novo-elements. Bullhorn will update Novo to use Novo-Elements v7 in the 2022.6 release</p>
-<pre><code class="language-sh">npm install novo-elements@next
+<pre><code class="language-sh">npm install novo-elements&#64;next
 <span class="hljs-comment"># or</span>
-npm install novo-elements@7.2.0-next.0
+npm install novo-elements&#64;7.2.0-next.0
 </code></pre>
 <h2>Upgrading to V7</h2>
 <p>First follow the steps to update your angular app to <a href="https://update.angular.io/?v=10.0-13.0">Version 13</a></p>
-<pre><code><span class="hljs-attribute">npm</span> install --save novo-elements@<span class="hljs-number">7</span>.x.x
+<pre><code><span class="hljs-attribute">npm</span> install --save novo-elements&#64;<span class="hljs-number">7</span>.x.x
 <span class="hljs-attribute">ng</span> update novo-elements --migrate-only --from=<span class="hljs-number">0</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span> --to=<span class="hljs-number">7</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span> --force --<span class="hljs-literal">allow</span>-dirty  
 </code></pre>
 <h2 id="notable-changes">Notable changes <a href="https://bullhorn.github.io/novo-elements/docs/#/updates/v7-announce#notable-changes">#</a></h2>
@@ -6194,15 +6207,15 @@ npm install novo-elements@7.2.0-next.0
 <p>Bullhorn is continually seeking to update and innovate our products, and leverage the latest features in the frameworks we use. In support of that mission, we are updating our Novo UI and its supporting novo-elements library to Angular 13.  This update  allows us to continue offering a streamlined and consistent experience across Bullhorn’s complete product portfolio.  This update includes both an Angular upgrade, as well as supporting the latest Typescript updates.  You can find more details in the Technical Release Notes section below.</p>
 <h2>Release Timeline</h2>
 <p>Bullhorn has released a Release Candidate v7 of Novo-elements. Bullhorn will update Novo to use Novo-Elements v7 in the 2022.6 release</p>
-<pre><code class="language-sh">npm install novo-elements@next
+<pre><code class="language-sh">npm install novo-elements&#64;next
 <span class="hljs-comment"># or</span>
-npm install novo-elements@7.2.0-next.0
+npm install novo-elements&#64;7.2.0-next.0
 </code></pre>
 <h2>How to get it!</h2>
 <blockquote>
 <div class="p">Note: First follow the steps to update your angular app to <a href="https://update.angular.io/?v=10.0-13.0">Version 13</a> if you haven't already.</div>
 </blockquote>
-<pre><code><span class="hljs-attribute">npm</span> install --save novo-elements@<span class="hljs-number">7</span>.x.x
+<pre><code><span class="hljs-attribute">npm</span> install --save novo-elements&#64;<span class="hljs-number">7</span>.x.x
 <span class="hljs-attribute">ng</span> update novo-elements --migrate-only --from=<span class="hljs-number">0</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span> --to=<span class="hljs-number">7</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span> --force --<span class="hljs-literal">allow</span>-dirty  
 </code></pre>
 <h1>📢  August 2022 (version 7.3.x)</h1>
@@ -6210,9 +6223,9 @@ npm install novo-elements@7.2.0-next.0
 <p>Bullhorn is continually seeking to update and innovate our products, and leverage the latest features in the frameworks we use. In support of that mission, we are updating our Novo UI and its supporting novo-elements library to Angular 13.  This update  allows us to continue offering a streamlined and consistent experience across Bullhorn’s complete product portfolio.  This update includes both an Angular upgrade, as well as supporting the latest Typescript updates.  You can find more details in the Technical Release Notes section below.</p>
 <h2>Release Timeline</h2>
 <p>Bullhorn has released a Release Candidate v7.3.x of Novo-elements. Bullhorn will update Novo to use Novo-Elements v7.3.x in the 2022.8 release</p>
-<pre><code class="language-sh">npm install novo-elements@next
+<pre><code class="language-sh">npm install novo-elements&#64;next
 <span class="hljs-comment"># or</span>
-npm install novo-elements@7.3.x
+npm install novo-elements&#64;7.3.x
 </code></pre>
 <h2 id="notable-changes">Notable changes <a href="https://bullhorn.github.io/novo-elements/docs/#/updates/v7dot3#notable-changes">#</a></h2>
 <ul>
@@ -6327,9 +6340,9 @@ yourFunction(dateLikeProperty: DateLike): string &#123;
 <p>Here is the official <a href="https://date-fns.org/v2.29.2/docs/Upgrade-Guide">Upgrade Guide</a> and <a href="https://date-fns.org/v2.29.2/docs/Change-Log">Change Log</a> from the date-fns docs.</p>
 <p>Be sure to see the full list of breaking changes below.</p>
 <h2>Upgrading to v8</h2>
-<pre><code><span class="hljs-attribute">npm</span> install --save novo-elements@<span class="hljs-number">8</span>.x.x
-<span class="hljs-attribute">npm</span> install --save date-fns@<span class="hljs-number">2</span>.<span class="hljs-number">30</span>.<span class="hljs-number">0</span>
-<span class="hljs-attribute">npm</span> install --save rxjs@<span class="hljs-number">7</span>.<span class="hljs-number">8</span>.<span class="hljs-number">1</span>
+<pre><code><span class="hljs-attribute">npm</span> install --save novo-elements&#64;<span class="hljs-number">8</span>.x.x
+<span class="hljs-attribute">npm</span> install --save date-fns&#64;<span class="hljs-number">2</span>.<span class="hljs-number">30</span>.<span class="hljs-number">0</span>
+<span class="hljs-attribute">npm</span> install --save rxjs&#64;<span class="hljs-number">7</span>.<span class="hljs-number">8</span>.<span class="hljs-number">1</span>
 </code></pre>
 <h2 id="notable-changes">Notable changes <a href="https://bullhorn.github.io/novo-elements/docs/#/updates/v8-announce#notable-changes">#</a></h2>
 <ul>
@@ -6382,16 +6395,16 @@ export class v8Page {
 </ul>
 <p>The following peer dependencies have been <em>added</em> to support the novo-code-editor.</p>
 <ul>
-<li>@codemirror/commands</li>
-<li>@codemirror/state</li>
-<li>@codemirror/view</li>
-<li>@codemirror/lang-javascript</li>
+<li>&#64;codemirror/commands</li>
+<li>&#64;codemirror/state</li>
+<li>&#64;codemirror/view</li>
+<li>&#64;codemirror/lang-javascript</li>
 <li>codemirror</li>
 </ul>
 <p>Lastly, the <code>timezone-support</code> module has been upgraded from 2.0.2 to 3.1.0.</p>
 <h1>Upgrading to V9</h1>
 <p>The following commands will upgrade novo-elements, as well as its dependencies.</p>
-<pre><code><span class="hljs-attribute">npm</span> install --save  novo-elements@^<span class="hljs-number">9</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span> @codemirror/commands@^<span class="hljs-number">6</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span> @codemirror/state@^<span class="hljs-number">6</span>.<span class="hljs-number">2</span>.<span class="hljs-number">1</span> @codemirror/view@<span class="hljs-number">6</span>.<span class="hljs-number">16</span>.<span class="hljs-number">0</span> codemirror@<span class="hljs-number">6</span>.<span class="hljs-number">0</span>.<span class="hljs-number">1</span> timezone-support@^<span class="hljs-number">3</span>.<span class="hljs-number">1</span>.<span class="hljs-number">0</span>
+<pre><code><span class="hljs-attribute">npm</span> install --save  novo-elements&#64;^<span class="hljs-number">9</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span> &#64;codemirror/commands&#64;^<span class="hljs-number">6</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span> &#64;codemirror/state&#64;^<span class="hljs-number">6</span>.<span class="hljs-number">2</span>.<span class="hljs-number">1</span> &#64;codemirror/view&#64;<span class="hljs-number">6</span>.<span class="hljs-number">16</span>.<span class="hljs-number">0</span> codemirror&#64;<span class="hljs-number">6</span>.<span class="hljs-number">0</span>.<span class="hljs-number">1</span> timezone-support&#64;^<span class="hljs-number">3</span>.<span class="hljs-number">1</span>.<span class="hljs-number">0</span>
 <span class="hljs-attribute">npm</span> uninstall --save text-mask-addons angular2-text-mask
 </code></pre>
 `,
@@ -6845,6 +6858,7 @@ const routes: Routes = [
   { path: 'form-controls/radio-buttons', component: RadioButtonsPage, data: { title: 'Radio Buttons', section: 'form-controls' } },
   { path: 'form-controls/select', component: SelectPage, data: { title: 'Select', section: 'form-controls' } },
   { path: 'form-controls/tiles', component: TilesPage, data: { title: 'Tiles', section: 'form-controls' } },
+  { path: 'form-controls/timezone', component: TimezonePage, data: { title: 'Timezone', section: 'form-controls' } },
   { path: 'form-controls/value', component: ValuePage, data: { title: 'Value', section: 'form-controls' } },
   {
     path: 'form-controls/chips',
@@ -6943,12 +6957,11 @@ const routes: Routes = [
 ];
 
 export const PAGE_LIST = [
-  AgendaDesignPage,AgendaDevelopPage,AgendaExamplesPage,AsideDesignPage,AsideDevelopPage,AsideExamplesPage,AutocompleteDesignPage,AutocompleteDevelopPage,AutocompleteExamplesPage,AvatarDesignPage,AvatarDevelopPage,AvatarExamplesPage,BreadcrumbDesignPage,BreadcrumbDevelopPage,BreadcrumbExamplesPage,ButtonDesignPage,ButtonDevelopPage,ButtonExamplesPage,CalendarDesignPage,CalendarDevelopPage,CalendarExamplesPage,ComponentsPage,DataTablePage,DropdownDesignPage,DropdownDevelopPage,DropdownExamplesPage,FieldDesignPage,FieldDevelopPage,FieldExamplesPage,IconDesignPage,IconDevelopPage,IconExamplesPage,LoadingDesignPage,LoadingDevelopPage,LoadingExamplesPage,MenuDesignPage,MenuDevelopPage,MenuExamplesPage,ModalDesignPage,ModalDevelopPage,ModalExamplesPage,NonIdealStateDesignPage,NonIdealStateDevelopPage,NonIdealStateExamplesPage,PopoverDesignPage,PopoverDevelopPage,PopoverExamplesPage,ProgressDesignPage,ProgressDevelopPage,ProgressExamplesPage,ProgressUsagePage,QueryBuilderDesignPage,QueryBuilderDevelopPage,QueryBuilderExamplesPage,SearchPage,SlidesPage,SwitchPage,TabbedGroupPickerPage,TablePage,TipWellDesignPage,TipWellDevelopPage,TipWellExamplesPage,ToasterDesignPage,ToasterDevelopPage,ToasterExamplesPage,ToolbarDesignPage,ToolbarDevelopPage,ToolbarExamplesPage,TooltipDesignPage,TooltipDevelopPage,TooltipExamplesPage,ColorsPage,CompositionPage,DesignPage,IconographyPage,SpacingPage,TypographyPage,CheckboxPage,ChipsDesignPage,ChipsDevelopPage,ChipsExamplesPage,CkEditorPage,ColorPickerPage,DatePickerDesignPage,DatePickerDevelopPage,DatePickerExamplesPage,DateTimePickerDesignPage,DateTimePickerDevelopPage,DateTimePickerExamplesPage,DynamicFormPage,FormControlsPage,FormGroupsPage,FormPage,MultiPickerPage,PickerPage,RadioButtonsPage,SelectPage,TilesPage,TimePickerDesignPage,TimePickerDevelopPage,TimePickerExamplesPage,ValuePage,HomePage,CardDescriptionPage,CardDesignPage,CardDevelopPage,CardExamplesPage,ExpansionPage,HeaderPage,LayoutsPage,ListPage,SidenavPage,StepperPage,TabsDesignPage,TabsDevelopPage,TabsExamplesPage,PatternsNativeFormsPage,PatternsTestPage,PatternsPage,TemplatesPage,v6Page,v7Page,v8Page,v9Page,AceEditorPage,CodeEditorPage,DragDropPage,FieldInteractionsPage,PipesPage,QuickNotePage,SecurityPage
+  AgendaDesignPage,AgendaDevelopPage,AgendaExamplesPage,AsideDesignPage,AsideDevelopPage,AsideExamplesPage,AutocompleteDesignPage,AutocompleteDevelopPage,AutocompleteExamplesPage,AvatarDesignPage,AvatarDevelopPage,AvatarExamplesPage,BreadcrumbDesignPage,BreadcrumbDevelopPage,BreadcrumbExamplesPage,ButtonDesignPage,ButtonDevelopPage,ButtonExamplesPage,CalendarDesignPage,CalendarDevelopPage,CalendarExamplesPage,ComponentsPage,DataTablePage,DropdownDesignPage,DropdownDevelopPage,DropdownExamplesPage,FieldDesignPage,FieldDevelopPage,FieldExamplesPage,IconDesignPage,IconDevelopPage,IconExamplesPage,LoadingDesignPage,LoadingDevelopPage,LoadingExamplesPage,MenuDesignPage,MenuDevelopPage,MenuExamplesPage,ModalDesignPage,ModalDevelopPage,ModalExamplesPage,NonIdealStateDesignPage,NonIdealStateDevelopPage,NonIdealStateExamplesPage,PopoverDesignPage,PopoverDevelopPage,PopoverExamplesPage,ProgressDesignPage,ProgressDevelopPage,ProgressExamplesPage,ProgressUsagePage,QueryBuilderDesignPage,QueryBuilderDevelopPage,QueryBuilderExamplesPage,SearchPage,SlidesPage,SwitchPage,TabbedGroupPickerPage,TablePage,TipWellDesignPage,TipWellDevelopPage,TipWellExamplesPage,ToasterDesignPage,ToasterDevelopPage,ToasterExamplesPage,ToolbarDesignPage,ToolbarDevelopPage,ToolbarExamplesPage,TooltipDesignPage,TooltipDevelopPage,TooltipExamplesPage,ColorsPage,CompositionPage,DesignPage,IconographyPage,SpacingPage,TypographyPage,CheckboxPage,ChipsDesignPage,ChipsDevelopPage,ChipsExamplesPage,CkEditorPage,ColorPickerPage,DatePickerDesignPage,DatePickerDevelopPage,DatePickerExamplesPage,DateTimePickerDesignPage,DateTimePickerDevelopPage,DateTimePickerExamplesPage,DynamicFormPage,FormControlsPage,FormGroupsPage,FormPage,MultiPickerPage,PickerPage,RadioButtonsPage,SelectPage,TilesPage,TimePickerDesignPage,TimePickerDevelopPage,TimePickerExamplesPage,TimezonePage,ValuePage,HomePage,CardDescriptionPage,CardDesignPage,CardDevelopPage,CardExamplesPage,ExpansionPage,HeaderPage,LayoutsPage,ListPage,SidenavPage,StepperPage,TabsDesignPage,TabsDevelopPage,TabsExamplesPage,PatternsNativeFormsPage,PatternsTestPage,PatternsPage,TemplatesPage,v6Page,v7Page,v8Page,v9Page,AceEditorPage,CodeEditorPage,DragDropPage,FieldInteractionsPage,PipesPage,QuickNotePage,SecurityPage
 ];
 
 @NgModule({
   declarations: PAGE_LIST,
-  entryComponents: PAGE_LIST,
   imports: [RouterModule.forRoot(routes, { useHash: true, anchorScrolling: 'enabled' }), NovoElementsModule, NovoExamplesModule, NovoExamplesSharedModule],
   exports: [RouterModule],
 })

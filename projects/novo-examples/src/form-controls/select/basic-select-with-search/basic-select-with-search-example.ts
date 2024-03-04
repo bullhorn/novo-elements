@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { NovoSelectElement } from 'novo-elements';
 import { ReplaySubject, Subject } from 'rxjs';
 import { take, takeUntil } from 'rxjs/operators';
@@ -17,10 +17,10 @@ export class BasicSelectWithSearchExample implements OnInit, AfterViewInit, OnDe
   protected states: State[] = STATES;
 
   /** control for the selected state */
-  public stateCtrl: FormControl = new FormControl();
+  public stateCtrl: UntypedFormControl = new UntypedFormControl();
 
   /** control for the MatSelect filter keyword */
-  public stateFilterCtrl: FormControl = new FormControl();
+  public stateFilterCtrl: UntypedFormControl = new UntypedFormControl();
 
   /** list of states filtered by search keyword */
   public filteredStates: ReplaySubject<State[]> = new ReplaySubject<State[]>(1);

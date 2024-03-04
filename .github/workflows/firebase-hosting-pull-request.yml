@@ -17,7 +17,8 @@ jobs:
       - name: Setup NodeJS
         uses: actions/setup-node@v1
         with:
-          node-version: 16.13.0
+          node-version: 20.10.0
+
       - run: npm ci && npm run build:ci && npm run build:examples && npm run build:demo
       - name: Deploy preview
         uses: FirebaseExtended/action-hosting-deploy@v0

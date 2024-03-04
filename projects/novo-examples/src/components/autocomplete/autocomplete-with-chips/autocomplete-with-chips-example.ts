@@ -1,6 +1,6 @@
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { NovoOptionSelectedEvent } from 'novo-elements';
 // import { NovoChipInputEvent } from 'novo-elements';
 import { Observable } from 'rxjs';
@@ -19,8 +19,8 @@ export class AutocompleteWithChipsExample {
   selectable = true;
   removable = true;
   separatorKeysCodes: number[] = [ENTER, COMMA];
-  searchCtrl = new FormControl();
-  fieldCtrl = new FormControl(['Lemon']);
+  searchCtrl = new UntypedFormControl();
+  fieldCtrl = new UntypedFormControl(['Lemon']);
   filteredFruits: Observable<string[]>;
   allFruits: string[] = ['Apple', 'Lemon', 'Lime', 'Orange', 'Strawberry'];
 

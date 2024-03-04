@@ -1,6 +1,6 @@
 // NG2
 import { ChangeDetectorRef, Component, DoCheck, ElementRef, EventEmitter, Input, Output, QueryList, ViewChildren, ViewEncapsulation } from '@angular/core';
-import { AbstractControl, FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, UntypedFormGroup } from '@angular/forms';
 // Vendor
 import { startOfToday, startOfTomorrow } from 'date-fns';
 import { debounceTime } from 'rxjs/operators';
@@ -429,7 +429,7 @@ export class NovoTableElement implements DoCheck {
   // will properly fire the ngAfterViewInit event
   toggledDropdownMap: any = {};
   public NovoTableMode = NovoTableMode;
-  public tableForm: FormGroup = new FormGroup({});
+  public tableForm: UntypedFormGroup = new UntypedFormGroup({});
   public toast: { theme: string; icon: string; message: string };
   public footers = [];
   public grossFlagToAvoidTheTableFromBeingUglyWhenHidingTheToast: boolean = false;
@@ -1048,7 +1048,7 @@ export class NovoTableElement implements DoCheck {
       const changedRows = [];
       const errors = [];
       // Go over the FormArray's controls
-      (this.tableForm.controls.rows as FormArray).controls.forEach((formGroup: FormGroup, index: number) => {
+      (this.tableForm.controls.rows as FormArray).controls.forEach((formGroup: UntypedFormGroup, index: number) => {
         let changedRow = null;
         let error = null;
         // Go over the form group controls

@@ -156,7 +156,7 @@ export class NovoHorizontalStepper extends NovoStepper {}
 })
 export class NovoVerticalStepper extends NovoStepper {
   constructor(@Optional() dir: Directionality, changeDetectorRef: ChangeDetectorRef, elementRef: ElementRef) {
-    super(dir, changeDetectorRef, elementRef, '');
-    this._orientation = 'vertical';
+    super(dir, changeDetectorRef, elementRef);
+    this.orientation = 'vertical';
   }
 }

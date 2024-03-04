@@ -138,7 +138,6 @@ export const EXAMPLE_LIST = [
 
 @NgModule({
   declarations: EXAMPLE_LIST,
-  entryComponents: EXAMPLE_LIST,
   exports: EXAMPLE_LIST,
   imports: [
     FormsModule,
@@ -175,9 +174,9 @@ function parseExampleMetadata(fileName: string, sourceContent: string): ParsedMe
         component: node.name.text,
       };
 
-      if (node.jsDoc && node.jsDoc.length) {
+      if (node.jsDoc?.length) {
         for (const doc of node.jsDoc) {
-          if (doc.tags && doc.tags.length) {
+          if (doc.tags?.length) {
             for (const tag of doc.tags) {
               const tagValue = tag.comment;
               const tagName = tag.tagName.text;
@@ -190,10 +189,10 @@ function parseExampleMetadata(fileName: string, sourceContent: string): ParsedMe
         }
       }
 
-      if (node.decorators && node.decorators.length) {
-        for (const decorator of node.decorators) {
-          if (decorator.expression.expression.text === 'Component') {
-            for (const arg of decorator.expression.arguments) {
+      if (node.modifiers?.length) {
+        for (const modifier of node.modifiers) {
+          if (modifier.expression?.expression.text === 'Component') {
+            for (const arg of modifier.expression.arguments) {
               for (const prop of arg.properties) {
                 const name = prop.name.text;
                 const value = prop.initializer.text;

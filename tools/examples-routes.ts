@@ -233,7 +233,6 @@ export const PAGE_LIST = [
 
 @NgModule({
   declarations: PAGE_LIST,
-  entryComponents: PAGE_LIST,
   imports: [RouterModule.forRoot(routes, { useHash: true, anchorScrolling: 'enabled' }), NovoElementsModule, NovoExamplesModule, NovoExamplesSharedModule],
   exports: [RouterModule],
 })
@@ -310,7 +309,7 @@ function parsePageMetadata(filePath: string, sourceContent: string): PageMetadat
     title: title,
     section: section.toLowerCase(),
     page: page.toLowerCase(),
-    template: markup.replace(/\{/g, '&#123;').replace(/\}/g, '&#125;'),
+    template: markup.replace(/\{/g, '&#123;').replace(/\}/g, '&#125;').replace(/\@/g, '&#64;'),
     route: convertToDashCase(title).replace('src/', ''),
     order: order,
     tag: tag,
@@ -318,27 +317,34 @@ function parsePageMetadata(filePath: string, sourceContent: string): PageMetadat
 }
 
 async function generateApiDocs() {
-  const app = new Application();
+  // const app = new Application();
 
-  // If you want TypeDoc to load tsconfig.json / typedoc.json files
-  app.options.addReader(new TSConfigReader());
-  // app.options.addReader(new TypeDoc.TypeDocReader());
+  // // If you want TypeDoc to load tsconfig.json / typedoc.json files
+  // app.options.addReader(new TSConfigReader());
+  // // app.options.addReader(new TypeDoc.TypeDocReader());
 
-  app.bootstrap({
+  // app.bootstrap({
+  //   // typedoc options here
+  //   entryPoints: [`${elementsPath}/index.ts`],
+  //   excludeExternals: true,
+  //   excludePrivate: true,
+  // });
+
+  const app = await Application.bootstrap({
     // typedoc options here
     entryPoints: [`${elementsPath}/index.ts`],
     excludeExternals: true,
     excludePrivate: true,
-  });
+  }, [new TSConfigReader()]);
 
-  const project = app.convert();
+  const project = await app.convert();
 
   if (project) {
     // Project may not have converted correctly
     const outputDir = 'projects/demo/assets';
 
     // Alternatively generate JSON output
-    await app.generateJson(project, outputDir + '/documentation.json');
+    await app.generateJson(project, outputDir + '/documentation.json'); // this is broken with new typedoc update
   }
 }
 

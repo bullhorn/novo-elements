@@ -70,12 +70,6 @@ export interface Collection<T> {
    *  Otherwise it may choose to simply refresh the whole view.
    *
    *  @param item The item within the view that was updated.
-   *  @param property The name of the property that was updated.
-   *  @param oldValue The old value of that property. (If property was null,
-   *  this can be the old value of the item.)
-   *  @param newValue The new value of that property. (If property was null,
-   *  there's no need to specify this as the item is assumed to be
-   *  the new value.)
    */
   // itemUpdated(item: Object, property?: Object, oldValue?: Object, newValue?: Object): void;
 
