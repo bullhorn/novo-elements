@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 
 /**
  * @title Form Usage Example
@@ -10,14 +10,14 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
   styleUrls: ['form-usage-example.css'],
 })
 export class FormUsageExample {
-  options: FormGroup;
-  numberControl = new FormControl(16, Validators.min(10));
-  timeControl = new FormControl(new Date());
-  dateControl = new FormControl(new Date());
-  dateTimeControl = new FormControl(new Date());
+  options: UntypedFormGroup;
+  numberControl = new UntypedFormControl(16, Validators.min(10));
+  timeControl = new UntypedFormControl(new Date());
+  dateControl = new UntypedFormControl(new Date());
+  dateTimeControl = new UntypedFormControl(new Date());
   post: any = '';
 
-  constructor(fb: FormBuilder) {
+  constructor(fb: UntypedFormBuilder) {
     this.options = fb.group({
       number: this.numberControl,
       time: this.timeControl,

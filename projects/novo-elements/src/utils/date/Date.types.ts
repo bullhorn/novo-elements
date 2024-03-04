@@ -58,7 +58,7 @@ export interface NovoDateSelectionStrategy<D = DateLike> {
   /**
    * Called when the user has finished selecting a value.
    * @param date Date that was selected. Will be null if the user cleared the selection.
-   * @param currentValue Current value that is currently show in the calendar.
+   * @param currentValue Value that is currently shown in the calendar.
    * @param event DOM event that triggered the selection. Currently only corresponds to a `click`
    *    event, but it may get expanded in the future.
    */
@@ -70,7 +70,7 @@ export interface NovoDateSelectionStrategy<D = DateLike> {
    *
    * @param activeDate Date that the user has activated. Will be null if the user moved
    *    focus to an element that's no a calendar cell.
-   * @param currentRange Range that is currently shown in the calendar.
+   * @param currentValue Value that is currently shown in the calendar.
    * @param event DOM event that caused the preview to be changed. Will be either a
    *    `mouseenter`/`mouseleave` or `focus`/`blur` depending on how the user is navigating.
    */

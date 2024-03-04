@@ -19,9 +19,11 @@ module.exports = {
     'projects/novo-examples',
     'index.ts'
   ],
+  moduleFileExtensions: ['ts', 'html', 'js', 'json', 'mjs'],
   modulePathIgnorePatterns: ['/dist/', '/novo-elements/package.json'],
   testEnvironmentOptions: {
     url: 'http://localhost',
   },
+  transformIgnorePatterns: ['node_modules/(?!.*\\.mjs$)'],
   testRunner: 'jest-jasmine2',
 };

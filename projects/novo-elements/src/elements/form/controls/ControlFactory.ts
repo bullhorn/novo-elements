@@ -29,8 +29,6 @@ export class ControlFactory {
         return new CheckboxControl(config);
       case 'CheckListControl':
         return new CheckListControl(config);
-      case 'CheckListControl':
-        return new CheckListControl(config);
       case 'DateTimeControl':
         return new DateTimeControl(config);
       case 'EditorControl':

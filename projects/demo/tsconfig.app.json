@@ -3,7 +3,6 @@
   "files": ["main.ts", "polyfills.ts"],
   "include": ["projects/demo/**/*.d.ts", "**/*.d.ts"],
   "angularCompilerOptions": {
-    "enableIvy": true,
     "compilationMode": "full"
   },
 }

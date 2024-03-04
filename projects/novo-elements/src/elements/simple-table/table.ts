@@ -1,6 +1,6 @@
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { _VIEW_REPEATER_STRATEGY, _DisposeViewRepeaterStrategy } from '@angular/cdk/collections';
-import { CdkTable, CDK_TABLE_TEMPLATE, _COALESCED_STYLE_SCHEDULER, _CoalescedStyleScheduler } from '@angular/cdk/table';
+import { CdkTable, CDK_TABLE, CDK_TABLE_TEMPLATE, _COALESCED_STYLE_SCHEDULER, _CoalescedStyleScheduler } from '@angular/cdk/table';
 import {
   AfterContentInit,
   ChangeDetectionStrategy,
@@ -28,6 +28,7 @@ import { ActivityTableDataSource, ActivityTableService } from './table-source';
   styleUrls: ['./table.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [{ provide: CDK_TABLE, useExisting: NovoTable }],
 })
 export class NovoTable<T> extends CdkTable<T> {
   // TODO: add explicit constructor

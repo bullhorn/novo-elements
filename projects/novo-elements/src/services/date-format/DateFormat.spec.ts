@@ -1,5 +1,4 @@
 // APP
-import { Masked, createMask as createIMask } from 'imask';
 import { NovoLabelService } from '../novo-label-service';
 import { DateFormatService } from './DateFormat';
 
@@ -41,10 +40,9 @@ describe('Service: DateFormatService', () => {
       expect(service.getTimeMask).toBeDefined();
     });
     describe('For Military Time', () => {
-      let imask: Masked<any>;
+      let imask;
       beforeEach(() => {
-        const militaryTimeMask = service.getTimeMask(true);
-        imask = createIMask(militaryTimeMask);
+        imask = service.getTimeMask(true);
       });
       it('should work for 1:23', () => {
         const timeString = '01:23';
@@ -68,49 +66,46 @@ describe('Service: DateFormatService', () => {
       });
     });
     describe('For 12hour time', () => {
-      let imask: Masked<any>;
+      let imask;
       beforeEach(() => {
-        const militaryTimeMask = service.getTimeMask(false);
-        imask = createIMask(militaryTimeMask);
+        imask = service.getTimeMask(false);
       });
       it('should work for 12:23am', () => {
         const timeString = '12:23am';
         imask.rawInputValue = timeString;
-        expect(imask.rawInputValue).toEqual(timeString.toUpperCase());
+        expect(imask.rawInputValue).toEqual(timeString);
       });
       it('should work for 12:23pm', () => {
         const timeString = '12:23pm';
         imask.rawInputValue = timeString;
-        expect(imask.rawInputValue).toEqual(timeString.toUpperCase());
+        expect(imask.rawInputValue).toEqual(timeString);
       });
       it('should work for 1:23pm', () => {
         const timeString = '1:23pm';
         imask.rawInputValue = timeString;
-        expect(imask.rawInputValue).toEqual(timeString.toUpperCase());
+        expect(imask.rawInputValue).toEqual(timeString);
       });
       it('should work for 1:23am', () => {
         const timeString = '1:23am';
         imask.rawInputValue = timeString;
-        expect(imask.rawInputValue).toEqual(timeString.toUpperCase());
+        expect(imask.rawInputValue).toEqual(timeString);
       });
       it('should work for 1:23 am (space inclusive)', () => {
         const timeString = '1:23 am';
         imask.rawInputValue = timeString;
-        expect(imask.rawInputValue).toEqual(timeString.toUpperCase());
+        expect(imask.rawInputValue).toEqual(timeString);
       });
       // Could not seem to get these tests to work - no instance of time input fields appears to respect the "A.M." formatting
       xit('should work for 1:23 A.M.', () => {
         labelService.timeFormatPlaceholderAM = 'hh:mm A.M.';
-        const timeMask = service.getTimeMask(false);
-        imask = createIMask(timeMask);
+        imask = service.getTimeMask(false);
         const timeString = '1:23 A.M.';
         imask.rawInputValue = timeString;
         expect(imask.rawInputValue).toEqual(timeString);
       });
       xit('should work for 1:23 P.M.', () => {
         labelService.timeFormatPlaceholderAM = 'hh:mm A.M.';
-        const timeMask = service.getTimeMask(false);
-        imask = createIMask(timeMask);
+        imask = service.getTimeMask(false);
         const timeString = '1:23 P.M.';
         imask.rawInputValue = timeString;
         expect(imask.rawInputValue).toEqual(timeString);
