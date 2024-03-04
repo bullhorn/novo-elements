@@ -45,7 +45,6 @@ export * from 'novo-elements/elements/slider';
 export * from 'novo-elements/elements/stepper';
 export * from 'novo-elements/elements/switch';
 export * from 'novo-elements/elements/tabbed-group-picker';
-export * from 'novo-elements/elements/table';
 export * from 'novo-elements/elements/tabs';
 export * from 'novo-elements/elements/tiles';
 export * from 'novo-elements/elements/time-picker';
