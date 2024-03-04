@@ -20,7 +20,6 @@ export * from './search';
 export * from './slides';
 export * from './switch';
 export * from './tabbed-group-picker';
-export * from './table';
 export * from './tip-well';
 export * from './toaster';
 export * from './toolbar';
