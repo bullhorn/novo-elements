@@ -10,6 +10,7 @@ import { NovoDropdownModule } from 'novo-elements/elements/dropdown';
 import { NovoFormExtrasModule } from 'novo-elements/elements/form';
 import { NovoLoadingModule } from 'novo-elements/elements/loading';
 import { NovoSearchBoxModule } from 'novo-elements/elements/search';
+import { NovoSelectModule } from 'novo-elements/elements/select';
 import { NovoTilesModule } from 'novo-elements/elements/tiles';
 import {
   NovoSimpleActionCell,
@@ -24,6 +25,7 @@ import {
 } from './cell';
 import { NovoSimpleCellHeader, NovoSimpleFilterFocus } from './cell-header';
 import { NovoSimpleTablePagination } from './pagination';
+import { Pagination } from './PaginationOld';
 import { NovoSimpleHeaderRow, NovoSimpleHeaderRowDef, NovoSimpleRow, NovoSimpleRowDef } from './row';
 import { NovoSelection, NovoSortFilter } from './sort';
 import { NovoActivityTableState } from './state';
@@ -50,6 +52,7 @@ import {
     NovoLoadingModule,
     NovoTilesModule,
     NovoSearchBoxModule,
+    NovoSelectModule,
     NovoCheckboxModule,
     NovoOptionModule,
   ],
@@ -79,6 +82,7 @@ import {
     NovoActivityTable,
     NovoActivityTableActions,
     NovoActivityTableCustomFilter,
+    Pagination,
   ],
   declarations: [
     NovoTable,
@@ -106,6 +110,7 @@ import {
     NovoActivityTable,
     NovoActivityTableActions,
     NovoActivityTableCustomFilter,
+    Pagination,
   ],
   providers: [NovoActivityTableState],
 })
