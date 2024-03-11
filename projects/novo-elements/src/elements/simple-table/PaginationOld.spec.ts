@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 // App
 import { NovoLabelService } from 'novo-elements/services';
 import { NovoSelectModule } from 'novo-elements/elements/select';
-import { Pagination } from './Pagination';
+import { Pagination } from './PaginationOld';
 
 describe('Elements: NovoTable', () => {
   let fixture;
