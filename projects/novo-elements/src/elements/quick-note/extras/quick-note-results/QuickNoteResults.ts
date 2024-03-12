@@ -3,9 +3,9 @@ import { ChangeDetectorRef, Component, ElementRef } from '@angular/core';
 // Vendor
 import { from, Observable } from 'rxjs';
 // APP
+import { PickerResults } from 'novo-elements/elements/picker';
 import { NovoLabelService } from 'novo-elements/services';
 import { Helpers } from 'novo-elements/utils';
-import { PickerResults } from 'novo-elements/elements/picker';
 
 @Component({
   selector: 'quick-note-results',
@@ -124,7 +124,7 @@ export class QuickNoteResults extends PickerResults {
    *
    * @description
    */
-  selectMatch(event: KeyboardEvent) {
+  selectMatch(event: MouseEvent) {
     if (event) {
       event.stopPropagation();
       event.preventDefault();

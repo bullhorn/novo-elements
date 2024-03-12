@@ -22,23 +22,23 @@ import {
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import { fromEvent, interval, merge, of, Subscription } from 'rxjs';
-import { debounce, take } from 'rxjs/operators';
-import { BooleanInput, Key } from 'novo-elements/utils';
 import type { NovoChipList } from 'novo-elements/elements/chips';
 import {
   CanDisable,
   CanDisableCtor,
   HasOverlayCtor,
-  mixinDisabled,
-  mixinOverlay,
+  NOVO_OPTION_PARENT_COMPONENT,
   NovoOptgroup,
   NovoOption,
   NovoOptionSelectionChange,
   NovoOverlayTemplateComponent,
-  NOVO_OPTION_PARENT_COMPONENT,
+  mixinDisabled,
+  mixinOverlay,
 } from 'novo-elements/elements/common';
-import { NovoFieldControl, NovoFieldElement, NOVO_FORM_FIELD } from 'novo-elements/elements/field';
+import { NOVO_FORM_FIELD, NovoFieldControl, NovoFieldElement } from 'novo-elements/elements/field';
+import { BooleanInput, BooleanInputAccept, Key } from 'novo-elements/utils';
+import { Subscription, fromEvent, interval, merge, of } from 'rxjs';
+import { debounce, take } from 'rxjs/operators';
 
 /** Event object that is emitted when an autocomplete option is selected. */
 export class NovoOptionSelectedEvent {
@@ -131,6 +131,7 @@ export class NovoAutocompleteElement
     this._disabled = coerceBooleanProperty(value);
   }
   private _disabled: boolean;
+  static readonly ngAcceptInputType_disabled: BooleanInputAccept;
 
   /** Element for the panel containing the autocomplete options. */
   @ViewChild(NovoOverlayTemplateComponent)

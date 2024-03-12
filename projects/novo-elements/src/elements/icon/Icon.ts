@@ -1,6 +1,6 @@
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, HostBinding, Input } from '@angular/core';
-import { BooleanInput } from 'novo-elements/utils';
 import { TypographySize } from 'novo-elements/elements/common';
+import { BooleanInput, BooleanInputAccept } from 'novo-elements/utils';
 
 @Component({
   selector: 'novo-icon',
@@ -18,7 +18,9 @@ import { TypographySize } from 'novo-elements/elements/common';
 export class NovoIconComponent implements AfterViewInit {
   @HostBinding('class.novo-icon-raised')
   @Input()
+  @BooleanInput()
   public raised: boolean;
+  static readonly ngAcceptInputType_raised: BooleanInputAccept;
 
   @HostBinding('attr.theme')
   @Input()
@@ -44,11 +46,13 @@ export class NovoIconComponent implements AfterViewInit {
   @Input()
   @BooleanInput()
   public smaller: boolean;
+  static readonly ngAcceptInputType_smaller: BooleanInputAccept;
 
   @HostBinding('class.icon-size-larger')
   @Input()
   @BooleanInput()
   public larger: boolean;
+  static readonly ngAcceptInputType_larger: BooleanInputAccept;
 
   @Input()
   set alt(value: string) {
@@ -86,7 +90,7 @@ export class NovoIconComponent implements AfterViewInit {
     }
   }
 
-  public projectContentChanged(record: MutationRecord) {
+  public projectContentChanged(record: MutationRecord[]) {
     this.name = this.element.nativeElement.textContent.trim();
     this.cdr.detectChanges();
   }

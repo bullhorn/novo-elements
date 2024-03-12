@@ -5,7 +5,6 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { addMonths, isDate, isSameDay, setMonth, setYear, startOfDay, startOfMonth, subMonths } from 'date-fns';
 // APP
 import { NovoLabelService } from 'novo-elements/services';
-import { Helpers } from 'novo-elements/utils';
 import type {
   DatePickerSelectModes,
   NovoDateSelectEvent,
@@ -14,6 +13,7 @@ import type {
   NovoYearSelectEvent,
   OverlayDate,
 } from 'novo-elements/utils';
+import { Helpers } from 'novo-elements/utils';
 import { DefaultDateSelectionStrategy, MultiDateSelectionStrategy, RangeSelectionStrategy, WeekSelectionStrategy } from './strategies';
 
 @Component({
@@ -27,9 +27,9 @@ export class NovoCalendarElement implements OnInit {
   @Input()
   maxYear: string | number;
   @Input()
-  minDate: string | number;
+  minDate: Date | number;
   @Input()
-  maxDate: string | number;
+  maxDate: Date | number;
   // Default view mode (select days)
   @Input()
   activeView: string = 'days';

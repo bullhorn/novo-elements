@@ -7,14 +7,14 @@ import {
   Component,
   ElementRef,
   EventEmitter,
-  forwardRef,
   Input,
   OnInit,
   Output,
   ViewChild,
+  forwardRef,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { BooleanInput, Helpers } from 'novo-elements/utils';
+import { BooleanInput, BooleanInputAccept, Helpers } from 'novo-elements/utils';
 
 // Value accessor for the component (supports ngModel)
 const CHECKBOX_VALUE_ACCESSOR = {
@@ -112,6 +112,7 @@ export class NovoCheckboxElement implements ControlValueAccessor, OnInit {
     this._required = coerceBooleanProperty(value);
   }
   _required: boolean;
+  static readonly ngAcceptInputType_required: BooleanInputAccept;
 
   /** Whether the checkbox is checked. */
   @BooleanInput()
@@ -126,6 +127,7 @@ export class NovoCheckboxElement implements ControlValueAccessor, OnInit {
     }
   }
   _checked: boolean = false;
+  static readonly ngAcceptInputType_checked: BooleanInputAccept;
 
   @BooleanInput()
   @Input()
@@ -141,6 +143,7 @@ export class NovoCheckboxElement implements ControlValueAccessor, OnInit {
     this._syncIndeterminate(this._indeterminate);
   }
   _indeterminate: boolean = false;
+  static readonly ngAcceptInputType_indeterminate: BooleanInputAccept;
 
   /** The native `<input type="checkbox">` element */
   @ViewChild('input') _inputElement: ElementRef<HTMLInputElement>;

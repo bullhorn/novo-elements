@@ -2,7 +2,7 @@
 import { ChangeDetectorRef, Component, ElementRef, EventEmitter, forwardRef, Input, Output } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 // Vendor
-import { isDate } from 'date-fns';
+import { Day, isDate } from 'date-fns';
 import { NovoLabelService } from 'novo-elements/services';
 import { DateUtil, Helpers } from 'novo-elements/utils';
 
@@ -68,7 +68,7 @@ export class NovoDateTimePickerInputElement implements ControlValueAccessor {
   @Input()
   format: string;
   @Input()
-  weekStart: number = 0;
+  weekStart: Day = 0;
   @Input()
   disabledDateMessage: string;
   @Output()

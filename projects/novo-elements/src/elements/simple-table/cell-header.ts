@@ -74,12 +74,12 @@ export class NovoSimpleFilterFocus implements AfterViewInit {
           <novo-optgroup *ngSwitchCase="'date'">
             <ng-container *ngIf="!showCustomRange">
               <novo-option
-                [class.active]="activeDateFilter === option.label"
+                [class.active]="activeDateFilter === $any(option).label"
                 *ngFor="let option of config.filterConfig.options"
                 (click)="filterData(option)"
-                [attr.data-automation-id]="'novo-activity-table-filter-' + option.label"
+                [attr.data-automation-id]="'novo-activity-table-filter-' + $any(option).label"
               >
-                {{ option.label }} <i class="bhi-check" *ngIf="activeDateFilter === option.label"></i>
+                {{ $any(option).label }} <i class="bhi-check" *ngIf="activeDateFilter === $any(option).label"></i>
               </novo-option>
             </ng-container>
             <novo-option
@@ -92,7 +92,7 @@ export class NovoSimpleFilterFocus implements AfterViewInit {
             </novo-option>
             <div class="calendar-container" *ngIf="showCustomRange">
               <div (click)="toggleCustomRange($event, false)"><i class="bhi-previous"></i>{{ labels.backToPresetFilters }}</div>
-              <novo-date-picker (onSelect)="filterData($event)" [(ngModel)]="filter" range="true"></novo-date-picker>
+              <novo-date-picker (onSelect)="filterData($event)" [(ngModel)]="filter" [range]="true"></novo-date-picker>
             </div>
           </novo-optgroup>
           <novo-optgroup *ngSwitchCase="'select'">
@@ -100,10 +100,10 @@ export class NovoSimpleFilterFocus implements AfterViewInit {
               [class.active]="filter === option"
               *ngFor="let option of config.filterConfig.options"
               (click)="filterData(option)"
-              [attr.data-automation-id]="'novo-activity-table-filter-' + (option?.label || option)"
+              [attr.data-automation-id]="'novo-activity-table-filter-' + ($any(option)?.label || option)"
             >
-              <span>{{ option?.label || option }}</span>
-              <i class="bhi-check" *ngIf="option.hasOwnProperty('value') ? filter === option.value : filter === option"></i>
+              <span>{{ $any(option)?.label || option }}</span>
+              <i class="bhi-check" *ngIf="$any(option).hasOwnProperty('value') ? filter === $any(option).value : filter === option"></i>
             </novo-option>
           </novo-optgroup>
           <novo-optgroup *ngSwitchDefault>
@@ -162,10 +162,10 @@ export class NovoSimpleCellHeader implements NovoSimpleSortFilter, OnInit, OnDes
   }
 
   private _config: {
-    sortable: boolean;
-    filterable: boolean;
+    sortable?: boolean;
+    filterable?: boolean;
     transforms?: { filter?: Function; sort?: Function };
-    filterConfig: SimpleTableColumnFilterConfig;
+    filterConfig?: SimpleTableColumnFilterConfig;
   };
 
   private _rerenderSubscription: Subscription;

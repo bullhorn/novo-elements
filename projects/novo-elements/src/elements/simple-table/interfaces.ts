@@ -26,7 +26,7 @@ export interface SimpleTablePaginationOptions {
 
 export interface SimpleTableColumnFilterConfig {
   type: 'text' | 'date' | 'select';
-  options?: string[] | SimpleTableColumnFilterOption[];
+  options?: (string | SimpleTableColumnFilterOption)[];
   allowCustomRange?: boolean;
 }
 

@@ -40,9 +40,9 @@
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "tsConfig": "tsconfig.build.json",
+            "tsConfig": "tsconfig.build.example.json",
             "project": "projects/novo-examples/ng-package.json"
-          },
+          }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",

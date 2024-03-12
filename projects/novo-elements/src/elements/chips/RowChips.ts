@@ -57,7 +57,7 @@ export class NovoRowChipElement extends NovoChipElement {
       {{ source.emptyReadOnlyMessage }}
     </div>
     <novo-row-chip
-      *ngFor="let item of _items | async"
+      *ngFor="let item of (_items | async)"
       [type]="type || item?.value?.searchEntity"
       [class.selected]="item == selected"
       [disabled]="disablePickerInput"

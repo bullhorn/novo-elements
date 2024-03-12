@@ -7,7 +7,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { isDate, isValid, subDays } from 'date-fns';
 // APP
 import { NovoLabelService } from 'novo-elements/services';
-import { BooleanInput, DataTableRangeModel, DatePickerSelectModes, DateUtil, Helpers, modelTypes, RangeModel, rangeSelectModes } from 'novo-elements/utils';
+import { BooleanInput, BooleanInputAccept, DataTableRangeModel, DatePickerSelectModes, DateUtil, Helpers, modelTypes, RangeModel, rangeSelectModes } from 'novo-elements/utils';
 
 // Value accessor for the component (supports ngModel)
 const DATE_PICKER_VALUE_ACCESSOR = {
@@ -132,6 +132,7 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
   @Input()
   @BooleanInput()
   inline: boolean;
+  static readonly ngAcceptInputType_inline: BooleanInputAccept;
   /**
    * Day of the week the calendar should display first, Sunday=0...Saturday=6
    **/
@@ -149,12 +150,14 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
   @BooleanInput()
   @HostBinding('class.hide-overflow-days')
   public hideOverflowDays: boolean = false;
+  static readonly ngAcceptInputType_hideOverflowDays: BooleanInputAccept;
   /**
    * Whether the footer which contains `today` button should be hidden.
    **/
   @Input()
   @BooleanInput()
   public hideFooter: boolean = false;
+  static readonly ngAcceptInputType_hideFooter: BooleanInputAccept;
 
   @Input()
   disabledDateMessage: string;
@@ -176,9 +179,10 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
   get numberOfMonths(): number {
     return this._numberOfMonths.length;
   }
-  set numberOfMonths(value) {
+  set numberOfMonths(value: string | number) {
     this._numberOfMonths = Array.from(Array(Number(value)).keys());
   }
+  static ngAcceptInputType_numberOfMonths: number | string;
 
   /**
    * How the date selection should work.
@@ -197,6 +201,7 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
    * **deprecated** please use `mode="range"`.
    **/
   @Input()
+  @BooleanInput()
   get range(): boolean {
     return ['range', 'week'].includes(this.mode) || this._range;
   }
@@ -207,6 +212,7 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
       this.mode = 'range';
     }
   }
+  static readonly ngAcceptInputType_range: BooleanInputAccept;
   /**
    * **deprecated** please use `mode="week"`.
    **/

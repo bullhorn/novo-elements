@@ -47,6 +47,8 @@ export class NovoNavElement implements AfterContentChecked {
   set selectedIndex(value: number | null) {
     this._indexToSelect = coerceNumberProperty(value, null);
   }
+  static ngAcceptInputType_selectedIndex: number|string|null;
+
   private _selectedIndex: number | null = null;
   /** The tab index that should be selected after the content has been checked. */
   private _indexToSelect: number | null = 0;

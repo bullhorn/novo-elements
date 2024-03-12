@@ -3,6 +3,23 @@ import { Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output }
 import { NovoLabelService } from 'novo-elements/services';
 import { Helpers, Key, OutsideClick } from 'novo-elements/utils';
 
+export interface NovoDropdownSearchConfig {
+  placeholder: string;
+  emptyMessage: string;
+  debounce: number;
+  compare: (query: string, item: any) => boolean;
+}
+
+export interface NovoDropdownFooterConfig {
+  align?: 'left' | 'right';
+  links?: NovoDropdownFooterLink[];
+}
+
+export interface NovoDropdownFooterLink {
+  label: string;
+  callback: (event: MouseEvent) => void;
+}
+
 @Component({
   selector: 'novo-category-dropdown',
   template: `
@@ -13,7 +30,7 @@ import { Helpers, Key, OutsideClick } from 'novo-elements/utils';
           type="text"
           [placeholder]="search.placeholder || labels.search"
           [value]="_query"
-          (input)="queryCategories($event.target.value)"
+          (input)="queryCategories($any($event.target).value)"
         />
         <i class="bhi-search" *ngIf="!_query"></i>
         <i class="bhi-times" *ngIf="_query" (click)="clearQuery($event)"></i>
@@ -61,7 +78,7 @@ export class NovoCategoryDropdownElement extends OutsideClick implements OnInit,
   _categories: string[] = [];
   clickHandler: Function;
   _masterCategoryMap: any;
-  _queryTimeout: any;
+  _queryTimeout: ReturnType<typeof setTimeout>;
   // Boolean to keep the selection persist when closing the dropdown
   @Input()
   persistSelection: boolean = false;
@@ -89,7 +106,7 @@ export class NovoCategoryDropdownElement extends OutsideClick implements OnInit,
   _select: EventEmitter<any> = new EventEmitter();
   // Event that is emitted whenever a category is selected
   @Output()
-  categorySelected: EventEmitter<any> = new EventEmitter<any>();
+  categorySelected = new EventEmitter<any>();
 
   @Input()
   set categories(categories: any) {
@@ -115,7 +132,7 @@ export class NovoCategoryDropdownElement extends OutsideClick implements OnInit,
     }
   }
 
-  onKeyDown(event) {
+  onKeyDown(event: KeyboardEvent) {
     if (this.active && (event.key === Key.Escape || event.key === Key.Enter)) {
       this.toggleActive();
     }
@@ -129,7 +146,7 @@ export class NovoCategoryDropdownElement extends OutsideClick implements OnInit,
     });
   }
 
-  select(event, item) {
+  select(event: MouseEvent, item) {
     Helpers.swallowEvent(event);
     // If we persist the selection, clear and show a check
     if (this.persistSelection) {
@@ -144,11 +161,11 @@ export class NovoCategoryDropdownElement extends OutsideClick implements OnInit,
     }
   }
 
-  onCategorySelected(category) {
+  onCategorySelected(category: string) {
     this.categorySelected.emit(category);
   }
 
-  clearQuery(event) {
+  clearQuery(event: Event) {
     Helpers.swallowEvent(event);
     this._query = '';
     // Reset the categories
@@ -157,7 +174,7 @@ export class NovoCategoryDropdownElement extends OutsideClick implements OnInit,
     });
   }
 
-  queryCategories(query) {
+  queryCategories(query: string) {
     // Save the query
     this._query = query;
     // Check timeout
@@ -178,7 +195,7 @@ export class NovoCategoryDropdownElement extends OutsideClick implements OnInit,
     }, this.search.debounce || 300);
   }
 
-  executeClickCallback(event, link) {
+  executeClickCallback(event: MouseEvent, link: NovoDropdownFooterLink) {
     link.callback(event);
     // Close, if input is set
     if (this.closeOnSelect) {

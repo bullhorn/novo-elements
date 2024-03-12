@@ -75,7 +75,7 @@ export enum NovoTableMode {
     </div>
     <novo-toast *ngIf="toast" [theme]="toast?.theme" [icon]="toast?.icon" [message]="toast?.message"></novo-toast>
     <div class="table-container" *ngIf="!grossFlagToAvoidTheTableFromBeingUglyWhenHidingTheToast">
-      <novo-form hideHeader="true" [form]="tableForm">
+      <novo-form hideHeader="true" [form]="$any(tableForm)">
         <table class="table table-striped dataTable" [class.table-details]="config.hasDetails" role="grid">
           <!-- skipSortAndFilterClear is a hack right now, will be removed once Canvas is refactored -->
           <thead *ngIf="columns.length && (!dataProvider.isEmpty() || dataProvider.isFiltered() || skipSortAndFilterClear || editing)">
@@ -302,11 +302,11 @@ export enum NovoTableMode {
                     [hasEditor]="editable"
                     [column]="column"
                     [row]="row"
-                    [form]="getRowControlForm(i)"
+                    [form]="$any(getRowControlForm(i))"
                   ></novo-table-cell>
                   <novo-control
                     *ngIf="row._editing && row._editing[column.name]"
-                    condensed="true"
+                    [condensed]="true"
                     [form]="getRowControlForm(i)"
                     [control]="row.controls[column.name]"
                   ></novo-control>

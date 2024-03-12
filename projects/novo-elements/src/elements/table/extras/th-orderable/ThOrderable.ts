@@ -7,7 +7,7 @@ import { Helpers } from 'novo-elements/utils';
   selector: '[novoThOrderable]',
   host: {
     '(dragstart)': 'onDragStart($event)',
-    '(dragover)': 'onDragOver($event)',
+    '(dragover)': 'onDragOver($any($event))',
     '(dragenter)': 'onDragEnter($event)',
     '(dragleave)': 'onDragLeave($event)',
     '(dragend)': 'onDragEnd($event)',
@@ -118,18 +118,18 @@ export class ThOrderable implements OnInit {
     return false;
   }
 
-  onDragOver(event: { preventDefault: Function; dataTransfer: { dropEffect: string }; stopPropagation: Function }): boolean {
+  onDragOver(event: DragEvent): boolean {
     Helpers.swallowEvent(event);
     event.dataTransfer.dropEffect = 'move';
     return false;
   }
 
-  onDragEnter(event: any) {
+  onDragEnter(event: Event) {
     this.element.nativeElement.classList.add('over');
     this.target = event.target;
   }
 
-  onDragLeave(event?: any) {
+  onDragLeave(event?: Event) {
     this.element.nativeElement.classList.remove('over');
   }
 }

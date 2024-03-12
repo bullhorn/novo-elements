@@ -12,14 +12,14 @@ import {
   ViewChild,
   ViewContainerRef,
 } from '@angular/core';
-import { AbstractControl, ControlContainer, FormControl } from '@angular/forms';
+import { ControlContainer, FormControl, FormGroup } from '@angular/forms';
+import { NovoLabelService } from 'novo-elements/services';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { BaseConditionFieldDef } from '../query-builder.directives';
 import { QueryBuilderService } from '../query-builder.service';
 import { NOVO_CONDITION_BUILDER } from '../query-builder.tokens';
 import { BaseFieldDef, FieldConfig, QueryFilterOutlet } from '../query-builder.types';
-import { NovoLabelService } from 'novo-elements/services';
 
 /**
  * Provides a handle for the table to grab the view container's ng-container to insert data rows.
@@ -55,7 +55,7 @@ export class ConditionBuilderComponent implements OnInit, AfterContentInit, Afte
   @Input() andIndex: number;
   @Input() groupIndex: number;
 
-  public parentForm: AbstractControl;
+  public parentForm: FormGroup;
   public fieldConfig: FieldConfig<BaseFieldDef>;
   public searches!: Subscription;
   public results$: Promise<any[]>;
@@ -75,7 +75,7 @@ export class ConditionBuilderComponent implements OnInit, AfterContentInit, Afte
   ) {}
 
   ngOnInit() {
-    this.parentForm = this.controlContainer.control;
+    this.parentForm = this.controlContainer.control as FormGroup;
     this.parentForm.valueChanges.subscribe((value) => {
       Promise.resolve().then(() => this.onFieldSelect());
     });

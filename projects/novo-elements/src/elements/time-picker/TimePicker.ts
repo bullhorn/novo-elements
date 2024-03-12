@@ -15,7 +15,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { isValid } from 'date-fns';
 // APP
 import { NovoLabelService } from 'novo-elements/services';
-import { DateUtil, Helpers } from 'novo-elements/utils';
+import { BooleanInput, BooleanInputAccept, DateUtil, Helpers } from 'novo-elements/utils';
 
 // Value accessor for the component (supports ngModel)
 const TIME_PICKER_VALUE_ACCESSOR = {
@@ -142,11 +142,18 @@ export enum TIME_VALUE_FORMATS {
 })
 export class NovoTimePickerElement implements ControlValueAccessor, OnInit, OnChanges {
   @Input()
+  @BooleanInput()
   military: boolean = false;
+  static readonly ngAcceptInputType_military: BooleanInputAccept;
   @Input()
+  @BooleanInput()
   analog: boolean = false;
+  static readonly ngAcceptInputType_analog: BooleanInputAccept;
   @Input()
+  @BooleanInput()
   inline: boolean = false;
+  static readonly ngAcceptInputType_inline: BooleanInputAccept;
+  
   @Input()
   step: number = 1;
   @Input()

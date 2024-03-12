@@ -64,9 +64,9 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
   @Input()
   public scrollStrategy: 'reposition' | 'block' | 'close' = 'reposition';
   @Input()
-  public width: number;
+  public width: number | string;
   @Input()
-  public height: number;
+  public height: number | string;
   @Input()
   public closeOnSelect: boolean = true;
   @Input()

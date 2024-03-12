@@ -209,7 +209,7 @@ export class NovoDatePickerInputElement implements OnInit, OnChanges, AfterViewI
     }
   }
 
-  _handleInput(event: KeyboardEvent): void {
+  _handleInput(event: Event): void {
     // if maskOptions is enabled, then we do not want to process inputs until the mask has accepted them - so those events will be
     // handled by the (accept) event.
     if (document.activeElement === event.target && !this.maskOptions) {

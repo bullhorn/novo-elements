@@ -65,6 +65,9 @@ export class NovoStepper extends CdkStepper implements AfterContentInit, OnDestr
   @ContentChildren(NovoStep, { descendants: true })
   steps: QueryList<NovoStep>;
 
+  // redefine _steps type for template
+  _steps: QueryList<NovoStep>;
+
   /** Custom icon overrides passed in by the consumer. */
   @ContentChildren(NovoIconComponent)
   _icons: QueryList<NovoIconComponent>;

@@ -121,7 +121,7 @@ import { DataTableState } from './state/data-table-state.service';
             <novo-data-table-header-cell
               *cdkHeaderCellDef
               [column]="column"
-              [filterTemplate]="templates['column-filter-' + (column.filterable?.customTemplate || column.id)]"
+              [filterTemplate]="templates['column-filter-' + ($any(column).filterable?.customTemplate || $any(column).id)]"
               [novo-data-table-cell-config]="column"
               [resized]="resized"
               [defaultSort]="defaultSort"
@@ -253,7 +253,7 @@ import { DataTableState } from './state/data-table-state.service';
         <novo-optgroup>
           <novo-option
             *ngFor="let option of col?.action?.options"
-            (click)="option.handlers.click({ originalEvent: $event?.originalEvent, row: row })"
+            (click)="option.handlers.click({ originalEvent: $any($event)?.originalEvent, row: row })"
             [disabled]="isDisabled(option, row)"
           >
             <span [attr.data-automation-id]="option.label">{{ option.label }}</span>

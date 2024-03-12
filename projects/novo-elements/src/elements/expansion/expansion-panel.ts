@@ -26,6 +26,7 @@ import { filter, startWith, take } from 'rxjs/operators';
 import { NovoAccordion } from './accordion';
 import { novoExpansionAnimations } from './expansion-animations';
 import { NovoExpansionPanelContent } from './expansion-panel-content';
+import { BooleanInputAccept } from 'novo-elements/utils';
 
 /** NovoExpansionPanel's states. */
 export type NovoExpansionPanelState = 'expanded' | 'collapsed';
@@ -64,6 +65,7 @@ export class NovoExpansionPanel extends CdkAccordionItem implements AfterContent
     this._hideToggle = coerceBooleanProperty(value);
   }
   private _hideToggle = false;
+  static readonly ngAcceptInputType_hideToggle: BooleanInputAccept;
 
   @Input()
   get padding(): boolean {
@@ -73,6 +75,7 @@ export class NovoExpansionPanel extends CdkAccordionItem implements AfterContent
     this._padding = coerceBooleanProperty(value);
   }
   private _padding = true;
+  static readonly ngAcceptInputType_padding: BooleanInputAccept;
 
   @Output()
   opened: EventEmitter<void> = new EventEmitter();

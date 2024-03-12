@@ -3,9 +3,9 @@ import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { Component, ElementRef, EventEmitter, forwardRef, Input, OnInit, Output, ViewChild, ViewContainerRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 // Vendor
-import { ReplaySubject } from 'rxjs';
 import { ComponentUtils, NovoLabelService } from 'novo-elements/services';
 import { Helpers, Key } from 'novo-elements/utils';
+import { ReplaySubject } from 'rxjs';
 
 // Value accessor for the component (supports ngModel)
 const CHIPS_VALUE_ACCESSOR = {
@@ -35,7 +35,7 @@ const CHIPS_VALUE_ACCESSOR = {
     </div>
     <div class="chip-input-container" *ngIf="!maxlength || (maxlength && items.length < maxlength)">
       <novo-picker
-        clearValueOnSelect="true"
+        clearValueOnSelect
         [closeOnSelect]="closeOnSelect"
         [config]="source"
         [disablePickerInput]="disablePickerInput"
@@ -108,7 +108,7 @@ export class NovoChipsElement implements OnInit, ControlValueAccessor {
   popup: any;
   // private data model
   _value: any = '';
-  _items = new ReplaySubject(1);
+  _items = new ReplaySubject<any>(1);
   // Placeholders for the callbacks
   onModelChange: Function = () => {};
   onModelTouched: Function = () => {};

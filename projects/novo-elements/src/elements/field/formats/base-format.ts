@@ -13,3 +13,5 @@ export enum DATE_FORMATS {
   ISO8601 = 'iso8601',
   STRING = 'string',
 }
+export type FF = DATE_FORMATS[keyof DATE_FORMATS];
+export type DATE_FORMAT_STRINGS = 'date' | 'iso8601' | 'string';

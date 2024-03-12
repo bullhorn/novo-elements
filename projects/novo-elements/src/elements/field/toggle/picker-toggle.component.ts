@@ -16,12 +16,12 @@ import {
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import { Subject, Subscription } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-import { BooleanInput } from 'novo-elements/utils';
 import { NovoButtonElement } from 'novo-elements/elements/button';
 import { NovoOverlayTemplateComponent } from 'novo-elements/elements/common';
-import { NovoFieldElement, NOVO_FORM_FIELD } from '../field';
+import { BooleanInput } from 'novo-elements/utils';
+import { Subject, Subscription } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { NOVO_FORM_FIELD, NovoFieldElement } from '../field';
 
 @Component({
   selector: 'novo-picker-toggle',
@@ -60,12 +60,13 @@ export class NovoPickerToggleElement<T = any> implements AfterContentInit, After
   @Input()
   @BooleanInput()
   triggerOnFocus: boolean = false;
+  static ngAcceptInputType_triggerOnFocus: boolean | '';
 
   /** An id to select the correct overlay.*/
   @Input() overlayId: string;
 
   /** Width to pass to overlay.*/
-  @Input() width: string;
+  @Input() width: number | string;
 
   /** Whether the toggle button is disabled. */
   @Input()
@@ -80,6 +81,7 @@ export class NovoPickerToggleElement<T = any> implements AfterContentInit, After
     this._disabled = coerceBooleanProperty(value);
   }
   private _disabled: boolean;
+  static ngAcceptInputType_disabled: boolean | '';
 
   /** Underlying button element. */
   @ViewChild('button') _button: NovoButtonElement;

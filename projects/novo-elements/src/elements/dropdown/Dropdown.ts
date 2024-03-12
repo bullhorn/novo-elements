@@ -39,7 +39,7 @@ import {
   _countGroupLabelsBeforeOption,
   _getOptionScrollPosition,
 } from 'novo-elements/elements/common';
-import { BooleanInput, Key, notify } from 'novo-elements/utils';
+import { BooleanInput, BooleanInputAccept, Key, notify } from 'novo-elements/utils';
 
 @Directive({
   selector: '[dropdownTrigger]',
@@ -103,6 +103,7 @@ export class NovoDropdownElement extends NovoDropdowMixins implements OnInit, Af
   @Input()
   @BooleanInput()
   keepOpen: boolean = false;
+  static readonly ngAcceptInputType_keepOpen: BooleanInputAccept;
 
   @Input()
   height: number;
@@ -138,6 +139,7 @@ export class NovoDropdownElement extends NovoDropdowMixins implements OnInit, Af
 
   /** Whether the user should be allowed to select multiple options. */
   @Input()
+  @BooleanInput()
   get multiple(): boolean {
     return this._multiple;
   }
@@ -145,6 +147,7 @@ export class NovoDropdownElement extends NovoDropdowMixins implements OnInit, Af
     this._multiple = coerceBooleanProperty(value);
   }
   private _multiple: boolean = false;
+  static readonly ngAcceptInputType_multiple: BooleanInputAccept;
 
   /** Whether the dropdown should scroll to the active item whenever it is opened. */
   @Input()

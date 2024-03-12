@@ -24,6 +24,7 @@ export interface WeekDay {
   isToday: boolean;
   isFuture: boolean;
   isWeekend: boolean;
+  dragOver?: boolean;
 }
 
 export interface EventColor {
