@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { NovoFieldControl } from 'novo-elements';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
@@ -13,8 +13,8 @@ import { map, startWith } from 'rxjs/operators';
   styleUrls: ['autocomplete-textarea-example.css'],
 })
 export class AutocompleteTextareaExample implements OnInit {
-  myControl = new FormControl();
-  myOtherControl = new FormControl();
+  myControl = new UntypedFormControl();
+  myOtherControl = new UntypedFormControl();
 
   options: string[] = ['One', 'Two', 'Three'];
   filteredOptions: Observable<string[]>;

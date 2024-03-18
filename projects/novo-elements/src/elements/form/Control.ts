@@ -21,11 +21,11 @@ import { Helpers, Key, OutsideClick } from 'novo-elements/utils';
 import { Observable } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 // APP
-import { AnyMaskedOptions } from 'imask';
+import { MaskedOptions } from 'imask';
 import { FieldInteractionApi } from './FieldInteractionApi';
 
 export interface IMaskOptions {
-  mask: AnyMaskedOptions['mask'];
+  mask: MaskedOptions['mask'];
   keepCharPositions: boolean;
   guide: boolean;
 }

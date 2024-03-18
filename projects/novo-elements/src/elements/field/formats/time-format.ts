@@ -48,15 +48,8 @@ export class NovoTimeFormatDirective extends IMaskDirective<any> implements Novo
   @Input() military: boolean = false;
   @Input() timeFormat: TIME_FORMATS = TIME_FORMATS.DATE;
 
-  constructor(
-    private _element: ElementRef,
-    _renderer: Renderer2,
-    _factory: IMaskFactory,
-    @Optional() @Inject(COMPOSITION_BUFFER_MODE) _compositionMode: boolean,
-    private labels: NovoLabelService,
-    private cdr: ChangeDetectorRef,
-  ) {
-    super(_element, _renderer, _factory, _compositionMode);
+  constructor(private labels: NovoLabelService, private cdr: ChangeDetectorRef) {
+    super();
     this.initFormatOptions();
   }
 
@@ -70,7 +63,7 @@ export class NovoTimeFormatDirective extends IMaskDirective<any> implements Novo
     // const pattern = this.military ? 'HH:mm' : 'hh:mm A';
     const amFormat = this.labels.timeFormatAM.toUpperCase();
     const pmFormat = this.labels.timeFormatPM.toUpperCase();
-    this.unmask = 'typed';
+    this.unmask = 'typed' as unknown as false; // typing is to work around angular-imask bug
     this.imask = {
       mask: Date,
       pattern: this.military ? 'HH:mm' : 'hh:mm aa',

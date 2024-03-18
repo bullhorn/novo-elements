@@ -18,6 +18,35 @@ type DateRange = {
   endDate: Date;
 };
 
+export const imaskHaha = {
+  mask: 'm{/}`d{/}`Y - m{/}`d{/}`Y',
+  overwrite: true,
+  autofix: true,
+  lazy: false,
+  blocks: {
+    d: {
+      mask: MaskedRange,
+      placeholderChar: 'D',
+      from: 1,
+      to: 31,
+      maxLength: 2,
+    },
+    m: {
+      mask: MaskedRange,
+      placeholderChar: 'M',
+      from: 1,
+      to: 12,
+      maxLength: 2,
+    },
+    Y: {
+      mask: MaskedRange,
+      placeholderChar: 'Y',
+      from: 1900,
+      to: 9999,
+    },
+  },
+};
+
 @Directive({
   selector: 'input[dateRangeFormat]',
   host: {
@@ -30,16 +59,9 @@ export class NovoDateRangeFormatDirective extends IMaskDirective<any> {
 
   @Input() dateRangeFormat: DATE_FORMATS = DATE_FORMATS.DATE;
 
-  constructor(
-    private _element: ElementRef,
-    _renderer: Renderer2,
-    _factory: IMaskFactory,
-    @Optional() @Inject(COMPOSITION_BUFFER_MODE) _compositionMode: boolean,
-    private labels: NovoLabelService,
-  ) {
-    super(_element, _renderer, _factory, _compositionMode);
+  constructor(private labels: NovoLabelService) {
+    super();
     const dateRangeFormat = this.labels.dateFormat.toUpperCase();
-
     this.unmask = false;
     this.imask = {
       mask: 'm{/}`d{/}`Y - m{/}`d{/}`Y',

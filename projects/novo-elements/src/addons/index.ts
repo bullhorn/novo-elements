@@ -1,5 +1,5 @@
-export * from './ace-editor';
-export * from './ckeditor';
-export * from './code-editor';
-export * from './dragula';
+export * from 'novo-elements/addons/ace-editor';
+export * from 'novo-elements/addons/ckeditor';
+export * from 'novo-elements/addons/code-editor';
+export * from 'novo-elements/addons/dragula';
 

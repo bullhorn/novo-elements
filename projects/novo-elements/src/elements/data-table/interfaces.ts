@@ -37,7 +37,7 @@ export interface IDataTableColumn<T> {
   cellClass?: (row: T) => string;
   disabledFunc?: (row: T) => boolean;
   handlers?: {
-    click?({ originalEvent: MouseEvent, row: T }): void;
+    click?(event?: any): any;
   };
   width?: number;
   sortable?: boolean | IDataTableColumnSortConfig;
@@ -49,7 +49,7 @@ export interface IDataTableColumn<T> {
     options?: {
       label: string;
       handlers: {
-        click({ originalEvent: MouseEvent, row: T }): void;
+        click?(event?: any): any;
       };
       disabled?: boolean;
       disabledFunc?: (row: T) => boolean;

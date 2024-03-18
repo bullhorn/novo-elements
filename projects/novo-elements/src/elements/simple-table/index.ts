@@ -3,6 +3,7 @@ export * from './cell';
 export * from './cell-header';
 export * from './interfaces';
 export * from './pagination';
+export * from './PaginationOld';
 export * from './row';
 export * from './simple-table.module';
 export * from './sort';

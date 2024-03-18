@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { NovoOptionSelectedEvent } from 'novo-elements';
 // import { NovoChipInputEvent } from 'novo-elements';
 import { Observable } from 'rxjs';
@@ -24,8 +24,8 @@ interface ShiftData {
 export class AutocompleteStackedChipsExample {
   filteredShifts: Observable<ShiftData[]>;
   allShifts: ShiftData[] = ALL_SHIFTS;
-  searchCtrl = new FormControl();
-  shiftCtrl = new FormControl(ALL_SHIFTS.slice(0, 3));
+  searchCtrl = new UntypedFormControl();
+  shiftCtrl = new UntypedFormControl(ALL_SHIFTS.slice(0, 3));
 
   constructor() {
     this.filteredShifts = this.searchCtrl.valueChanges.pipe(

@@ -11,7 +11,7 @@ import {
   OnInit,
   QueryList,
 } from '@angular/core';
-import { ControlContainer, FormArray, FormBuilder, FormGroup, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
+import { ControlContainer, FormArray, FormBuilder, UntypedFormGroup, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
 import { interval, Subject } from 'rxjs';
 import { debounce, takeUntil } from 'rxjs/operators';
 import { NovoConditionFieldDef } from '../query-builder.directives';
@@ -46,8 +46,8 @@ export class CriteriaBuilderComponent implements OnInit, OnDestroy, AfterContent
 
   @ContentChildren(NovoConditionFieldDef, { descendants: true }) _contentFieldDefs: QueryList<NovoConditionFieldDef>;
 
-  public parentForm: FormGroup;
-  public innerForm: FormGroup;
+  public parentForm: UntypedFormGroup;
+  public innerForm: UntypedFormGroup;
   /** Subject that emits when the component has been destroyed. */
   private readonly _onDestroy = new Subject<void>();
 
@@ -59,7 +59,7 @@ export class CriteriaBuilderComponent implements OnInit, OnDestroy, AfterContent
   ) {}
 
   ngOnInit() {
-    this.parentForm = this.controlContainer.control as FormGroup;
+    this.parentForm = this.controlContainer.control as UntypedFormGroup;
     this.innerForm = this.formBuilder.group({
       criteria: this.formBuilder.array([]),
     });
@@ -126,7 +126,7 @@ export class CriteriaBuilderComponent implements OnInit, OnDestroy, AfterContent
     this.cdr.markForCheck();
   }
 
-  newConditionGroup(data: ConditionGroup): FormGroup {
+  newConditionGroup(data: ConditionGroup): UntypedFormGroup {
     const controls = Object.entries(data).reduce((obj, [key, val]) => {
       return {
         ...obj,
@@ -136,7 +136,7 @@ export class CriteriaBuilderComponent implements OnInit, OnDestroy, AfterContent
     return this.formBuilder.group(controls);
   }
 
-  newCondition({ field, operator, value }: Condition = EMPTY_CONDITION): FormGroup {
+  newCondition({ field, operator, value }: Condition = EMPTY_CONDITION): UntypedFormGroup {
     return this.formBuilder.group({
       field: [field, Validators.required],
       operator: [operator, Validators.required],

@@ -1,11 +1,11 @@
 // NG
 import { EventEmitter } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 // App
 import { IFieldInteractionEvent } from './FormInterfaces';
 import { NovoFormControl } from './NovoFormControl';
 
-export class NovoFormGroup extends FormGroup {
+export class NovoFormGroup extends UntypedFormGroup {
   public fieldInteractionEvents: EventEmitter<IFieldInteractionEvent> = new EventEmitter();
   public layout: string;
   public edit: boolean;

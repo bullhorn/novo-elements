@@ -1,4 +1,5 @@
 export * from './app-bridge';
+export * from './base-renderer';
 export * from './calendar-utils';
 export * from './color-utils';
 export * from './countries';

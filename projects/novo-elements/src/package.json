@@ -1,6 +1,6 @@
 {
   "name": "novo-elements",
-  "version": "7.0.0",
+  "version": "10.0.0",
   "sideEffects": true,
   "peerDependencies": {
     "@angular/animations": ">=10",
@@ -13,7 +13,7 @@
     "@codemirror/lang-javascript": "^6.1.9",
     "@codemirror/state": "^6.2.1",
     "@codemirror/view": "^6.16.0",
-    "angular-imask": "^6.0.5",
+    "angular-imask": "^7.3.0",
     "brace": "^0.11.0",
     "classlist.js": "^1.1.20150312",
     "codemirror": "6.0.1",

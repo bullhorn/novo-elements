@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormArray } from '@angular/forms';
+import { UntypedFormArray } from '@angular/forms';
 import {
   BaseControl,
   CheckboxControl,
@@ -71,7 +71,7 @@ export class HorizontalOptionsExample {
 
   public customDelete(form: NovoFormGroup, key: string, index: number) {
     console.log('DELETE', form, key, index); // tslint:disable-line
-    const control: FormArray = form.controls[key] as FormArray;
+    const control: UntypedFormArray = form.controls[key] as UntypedFormArray;
     control.removeAt(index);
   }
 

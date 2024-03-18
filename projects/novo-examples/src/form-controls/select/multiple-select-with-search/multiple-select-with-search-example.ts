@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { NovoSelectElement } from 'novo-elements';
 import { ReplaySubject, Subject } from 'rxjs';
 import { take, takeUntil } from 'rxjs/operators';
@@ -18,10 +18,10 @@ export class MultipleSelectWithSearchExample implements OnInit, AfterViewInit, O
   protected states: State[] = STATES;
 
   /** control for the selected state for multi-selection */
-  public stateMultiCtrl: FormControl = new FormControl();
+  public stateMultiCtrl: UntypedFormControl = new UntypedFormControl();
 
   /** control for the NovoSelect filter keyword multi-selection */
-  public stateMultiFilterCtrl: FormControl = new FormControl();
+  public stateMultiFilterCtrl: UntypedFormControl = new UntypedFormControl();
 
   /** list of states filtered by search keyword */
   public filteredStatesMulti: ReplaySubject<State[]> = new ReplaySubject<State[]>(1);

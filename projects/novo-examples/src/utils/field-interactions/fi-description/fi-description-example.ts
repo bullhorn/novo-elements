@@ -6,7 +6,7 @@ import { CheckboxControl, FieldInteractionApi, FormUtils, TextBoxControl } from 
  * @title Fi Required Example
  */
 @Component({
-  selector: 'fi-required-example',
+  selector: 'fi-description-example',
   templateUrl: 'fi-description-example.html',
   styleUrls: ['fi-description-example.css'],
 })
