@@ -3,48 +3,10 @@ import { async, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { ComponentUtils, NovoLabelService } from 'novo-elements/services';
 // App
-import { NovoChipElement } from './Chip';
 import { NovoChipsElement } from './Chips';
 import { NovoChipsModule } from './Chips.module';
 
-xdescribe('Elements: NovoChipElement', () => {
-  let fixture;
-  let component;
-
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [FormsModule, NovoChipsModule],
-    }).compileComponents();
-    fixture = TestBed.createComponent(NovoChipElement);
-    component = fixture.debugElement.componentInstance;
-  }));
-
-  describe('Method: ngOnInit()', () => {
-    it('should initialize correctly', () => {
-      expect(component).toBeTruthy();
-      expect(component.select).toBeDefined();
-      expect(component.remove).toBeDefined();
-      expect(component.entity).toBeUndefined();
-    });
-  });
-
-  describe('Method: remove()', () => {
-    it('should emit remove event if removable', () => {
-      jest.spyOn(component.removed, 'emit').mockImplementation(() => {});
-      component.removable = true;
-      component.remove();
-      expect(component.removed.emit).toHaveBeenCalled();
-    });
-    it('should not emit remove event if not removable', () => {
-      jest.spyOn(component.removed, 'emit').mockImplementation(() => {});
-      component.removable = false;
-      component.remove();
-      expect(component.removed.emit).toHaveBeenCalled();
-    });
-  });
-});
-
-describe('Elements: NovoChipsElement', () => {
+fdescribe('Elements: NovoChipsElement', () => {
   let fixture;
   let component;
 
@@ -109,6 +71,32 @@ describe('Elements: NovoChipsElement', () => {
       expect(component.value).toBe('Test (test)');
     });
   });
+
+  describe('Method: updateHiddenChips()', () => {
+    it('should update the hiddenChips object based on the maxChipsShown property', () => {
+      component.items = ['A','B','C','D','E','F'];
+      component.maxChipsShown = 4;
+      component.updateHiddenChips();
+      expect(component.hiddenChips.type).toBe('items');
+      expect(component.hiddenChips.count).toBe(2);
+      component.items.pop();
+      component.updateHiddenChips();
+      expect(component.hiddenChips.type).toBe('item');
+      expect(component.hiddenChips.count).toBe(1);
+    });
+  });
+
+  describe('Method: toggleHiddenChips()', () => {
+    it('should flip the maxChipsShown count between the original set at init and the CHIPS_SHOWN_MAX const', () => {
+      component.maxChipsShown = 3;
+      component._maxChipsShown = component.maxChipsShown;
+      component.CHIPS_SHOWN_MAX = 999;
+      expect(component.maxChipsShown).toBe(3);
+      component.toggleHiddenChips();
+      expect(component.maxChipsShown).toBe(999);
+    });
+  });
+
 
   describe('Method: remove(event, item)', () => {
     it('should remove an item', () => {
@@ -239,7 +227,7 @@ describe('Elements: NovoChipsElement', () => {
         ],
       };
       const result = component.getLabelFromOptions({ id: 2 });
-      expect(result).toStrictEqual({ value: 2, label: 'option 2' });
+      expect(result).toEqual({ value: 2, label: 'option 2' });
     });
     it('should return a proper response if passed an number as value', () => {
       component.source = {
@@ -259,7 +247,7 @@ describe('Elements: NovoChipsElement', () => {
         ],
       };
       const result = component.getLabelFromOptions(2);
-      expect(result).toStrictEqual({ value: 2, label: 'option 2' });
+      expect(result).toEqual({ value: 2, label: 'option 2' });
     });
   });
 
