@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { NovoChipElement } from './Chip';
 import { NovoChipsModule } from './Chips.module';
 
-fdescribe('Elements: NovoChipElement', () => {
+describe('Elements: NovoChipElement', () => {
   let fixture;
   let component;
 

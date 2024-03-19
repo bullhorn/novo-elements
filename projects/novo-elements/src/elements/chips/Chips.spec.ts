@@ -6,7 +6,7 @@ import { ComponentUtils, NovoLabelService } from 'novo-elements/services';
 import { NovoChipsElement } from './Chips';
 import { NovoChipsModule } from './Chips.module';
 
-fdescribe('Elements: NovoChipsElement', () => {
+describe('Elements: NovoChipsElement', () => {
   let fixture;
   let component;
 
