@@ -96,6 +96,9 @@ export class NovoLabelService {
   yes = 'Yes';
   search = 'SEARCH';
   noItems = 'There are no items';
+  items = 'items';
+  item = 'item';
+  showLess = 'show less';
   dateFormat = 'MM/dd/yyyy';
   dateFormatPlaceholder = 'MM/DD/YYYY';
   localDatePlaceholder = 'mm/dd/yyyy';
