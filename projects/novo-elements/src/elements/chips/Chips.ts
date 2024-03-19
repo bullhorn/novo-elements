@@ -32,7 +32,7 @@ const CHIPS_VALUE_ACCESSOR = {
         {{ item.label }}
         <novo-icon *ngIf="!disablePickerInput" novoChipRemove>x</novo-icon>
       </novo-chip>
-      <div *ngIf="items.length > maxChipsShown || items.length > _maxChipsShown && maxChipsShown === CHIPS_SHOWN_MAX" class="hidden-chips-toggle" (click)="toggleHiddenChips()">
+      <div *ngIf="items.length > _maxChipsShown" class="hidden-chips-toggle" (click)="toggleHiddenChips()">
         <novo-label *ngIf="maxChipsShown !== CHIPS_SHOWN_MAX" color="positive">+ {{ hiddenChips.count }} {{ labels.more }} {{ hiddenChips.type }}</novo-label>
         <novo-label *ngIf="maxChipsShown === CHIPS_SHOWN_MAX" color="positive"> {{labels.showLess}}</novo-label>
       </div>
@@ -250,17 +250,17 @@ export class NovoChipsElement implements OnInit, ControlValueAccessor {
   }
 
   updateHiddenChips() {
-    this.hiddenChips = <{ type, count }>{};
-    const chipsToHide = this.items.slice(this.maxChipsShown);
-    const numChipsToHide = chipsToHide.length;
-    if (numChipsToHide > 0) {
+    const numChipsToHide = this.items.length - this._maxChipsShown;
+    if (numChipsToHide) {
       this.hiddenChips = { count: numChipsToHide, type: numChipsToHide > 1 ? this.labels.items : this.labels.item };
+    } else {
+      this.hiddenChips = <{ type, count }>{};
+      if (this.maxChipsShown === this.CHIPS_SHOWN_MAX) this.maxChipsShown = this._maxChipsShown; // reset maxChipsShown to original count
     }
   }
 
   toggleHiddenChips() {
-    this.maxChipsShown = this.maxChipsShown == this.CHIPS_SHOWN_MAX ? this._maxChipsShown : this.CHIPS_SHOWN_MAX;
-    this.updateHiddenChips();
+    this.maxChipsShown = this.maxChipsShown === this.CHIPS_SHOWN_MAX ? this._maxChipsShown : this.CHIPS_SHOWN_MAX;
   }
 
   remove(event, item) {

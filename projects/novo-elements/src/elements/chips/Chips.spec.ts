@@ -76,6 +76,7 @@ describe('Elements: NovoChipsElement', () => {
     it('should update the hiddenChips object based on the maxChipsShown property', () => {
       component.items = ['A','B','C','D','E','F'];
       component.maxChipsShown = 4;
+      component._maxChipsShown = component.maxChipsShown;
       component.updateHiddenChips();
       expect(component.hiddenChips.type).toBe('items');
       expect(component.hiddenChips.count).toBe(2);
