@@ -13,7 +13,7 @@
 
   .hidden-chips-toggle {
     cursor: pointer;
-    padding: 0 1rem 0 .5rem;
+    padding-left: .5rem;
     line-height: 2.7rem;
   }
 
@@ -35,6 +35,7 @@
   }
   .chip-input-container {
     flex-grow: 4;
+    padding-left: 1rem;
     input {
       padding-top: 0;
       border: none;
