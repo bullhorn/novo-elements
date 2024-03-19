@@ -28,7 +28,7 @@ const CHIPS_VALUE_ACCESSOR = {
         (selectionChange)="select($event, item)"
         (deselect)="deselect($event, item)"
       >
-        <novo-icon *ngIf="getAvatarType(item)" class="txc-{{ getAvatarType(item) }}" novoChipAvatar>circle</novo-icon>
+        <novo-icon *ngIf="item | avatarType:type as avatarType" class="txc-{{ avatarType }}" novoChipAvatar>circle</novo-icon>
         {{ item.label }}
         <novo-icon *ngIf="!disablePickerInput" novoChipRemove>x</novo-icon>
       </novo-chip>
@@ -195,10 +195,6 @@ export class NovoChipsElement implements OnInit, ControlValueAccessor {
       value: id,
       label: optLabel ? optLabel.label : value,
     };
-  }
-
-  getAvatarType(item: any) {
-    return (this.type || item?.value?.searchEntity || '').toLowerCase();
   }
 
   deselectAll(event?) {

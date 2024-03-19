@@ -14,6 +14,7 @@ import { NovoChipInput } from './ChipInput';
 import { NovoChipList } from './ChipList';
 import { NovoChipsElement } from './Chips';
 import { NovoRowChipElement, NovoRowChipsElement } from './RowChips';
+import { AvatarTypePipe } from './pipe/AvatarType.pipe';
 @NgModule({
   imports: [CommonModule, FormsModule, NovoPickerModule, NovoIconModule, NovoFieldModule],
   declarations: [
@@ -25,6 +26,7 @@ import { NovoRowChipElement, NovoRowChipsElement } from './RowChips';
     NovoChipsElement,
     NovoRowChipElement,
     NovoRowChipsElement,
+    AvatarTypePipe
   ],
   exports: [
     NovoChipElement,
@@ -35,6 +37,7 @@ import { NovoRowChipElement, NovoRowChipsElement } from './RowChips';
     NovoChipsElement,
     NovoRowChipElement,
     NovoRowChipsElement,
+    AvatarTypePipe
   ],
   providers: [
     ErrorStateMatcher,
