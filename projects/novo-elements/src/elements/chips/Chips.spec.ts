@@ -73,17 +73,25 @@ describe('Elements: NovoChipsElement', () => {
   });
 
   describe('Method: updateHiddenChips()', () => {
-    it('should update the hiddenChips object based on the hideChipsLimit property', () => {
+    it('should update hiddenChipsCount based on the items length and the hideChipsLimit property', () => {
       component.items = ['A','B','C','D','E','F'];
       component.hideChipsLimit = 4;
       component._hideChipsLimit = component.hideChipsLimit;
       component.updateHiddenChips();
-      expect(component.hiddenChips.type).toBe('items');
-      expect(component.hiddenChips.count).toBe(2);
+      expect(component.hiddenChipsCount).toBe(2);
       component.items.pop();
       component.updateHiddenChips();
-      expect(component.hiddenChips.type).toBe('item');
-      expect(component.hiddenChips.count).toBe(1);
+      expect(component.hiddenChipsCount).toBe(1);
+    });
+
+    it('should reset the hideChipsLimit to the original limit if: currently showing all chips BUT there are no longer any extra chips to hide', () => {
+      component.items = ['A','B','C','D'];
+      component._hideChipsLimit = 3;
+      component.hideChipsLimit = component.CHIPS_SHOWN_MAX; // currently showing all chips
+      component.items.pop(); // ['A', 'B', 'C']
+      component.updateHiddenChips();
+      expect(component.hideChipsLimit).toBe(component._hideChipsLimit);
+
     });
   });
 
@@ -91,7 +99,6 @@ describe('Elements: NovoChipsElement', () => {
     it('should flip the hideChipsLimit count between the original set at init and the CHIPS_SHOWN_MAX const', () => {
       component.hideChipsLimit = 3;
       component._hideChipsLimit = component.hideChipsLimit;
-      component.CHIPS_SHOWN_MAX = 999;
       expect(component.hideChipsLimit).toBe(3);
       component.toggleHiddenChips();
       expect(component.hideChipsLimit).toBe(999);

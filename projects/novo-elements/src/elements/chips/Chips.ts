@@ -32,9 +32,9 @@ const CHIPS_VALUE_ACCESSOR = {
         {{ item.label }}
         <novo-icon *ngIf="!disablePickerInput" novoChipRemove>x</novo-icon>
       </novo-chip>
-      <div *ngIf="items.length > _hideChipsLimit" class="hidden-chips-toggle" (click)="toggleHiddenChips()">
-        <novo-label *ngIf="hideChipsLimit !== CHIPS_SHOWN_MAX" color="positive">+ {{ hiddenChips.count }} {{ labels.more }} {{ hiddenChips.type }}</novo-label>
-        <novo-label *ngIf="hideChipsLimit === CHIPS_SHOWN_MAX" color="positive"> {{labels.showLess}}</novo-label>
+      <div *ngIf="hiddenChipsCount" class="hidden-chips-toggle" (click)="toggleHiddenChips()">
+        <novo-label *ngIf="hideChipsLimit !== CHIPS_SHOWN_MAX" color="positive">+ {{ hiddenChipsCount }} {{ labels.more | lowercase }} </novo-label>
+        <novo-label *ngIf="hideChipsLimit === CHIPS_SHOWN_MAX" color="positive"> {{labels.showLess | lowercase}}</novo-label>
       </div>
     </div>
     <div class="chip-input-container" *ngIf="!maxlength || (maxlength && items.length < maxlength)">
@@ -112,7 +112,7 @@ export class NovoChipsElement implements OnInit, ControlValueAccessor {
   itemToAdd: any;
   popup: any;
   hideChipsLimit: number;
-  hiddenChips: { type, count };
+  hiddenChipsCount: number;
   // private data model
   _value: any = '';
   _items = new ReplaySubject<any[]>(1);
@@ -250,13 +250,9 @@ export class NovoChipsElement implements OnInit, ControlValueAccessor {
   }
 
   updateHiddenChips() {
-    const numChipsToHide = this.items.length - this._hideChipsLimit;
-    if (numChipsToHide) {
-      this.hiddenChips = { count: numChipsToHide, type: numChipsToHide > 1 ? this.labels.items : this.labels.item };
-    } else {
-      this.hiddenChips = <{ type, count }>{};
-      if (this.hideChipsLimit === this.CHIPS_SHOWN_MAX) this.hideChipsLimit = this._hideChipsLimit; // reset hideChipsLimit to original count
-    }
+    this.hiddenChipsCount = Math.max(0, this.items.length - this._hideChipsLimit);
+    if (!this.hiddenChipsCount && this.hideChipsLimit === this.CHIPS_SHOWN_MAX)
+      this.hideChipsLimit = this._hideChipsLimit; // reset hideChipsLimit to original count
   }
 
   toggleHiddenChips() {
