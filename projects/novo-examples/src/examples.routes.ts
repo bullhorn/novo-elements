@@ -3669,7 +3669,7 @@ export class IconographyPage {
     <pre><code>.box &#123;\n  &#64;include novo-padding-medium(); // use mixin \n  margin: $spacing-xs; // or use scss variables\n  padding: $spacing-xl;\n&#125; &#125;&#125;</code></pre>
   </typedef-snippet>
 </typedef-example>
-<!-- 
+<!--
 <typedef-example>
   <typedef-content>
     <novo-flex gap="1rem">
@@ -4032,6 +4032,9 @@ export class ChipsDevelopPage {
 <h2>Row Chips Example</h2>
 <p>By clicking on the <code>row-chips</code> element, the options list will be displayed.  Select any of the options by clicking on the item in the list.  The value selected will be added to the list of selected values as a new row. By clicking the delete icon at the end of the row, the row will be removed from the list of selected values.</p>
 <p><code-example example="row-chips"></code-example></p>
+<h2>Hide Chips Example</h2>
+<p>Setting the <code>maxChipsShown</code> property via the <code>source</code> Input will limit the number of chips shown to the <code>maxChipsShown</code> set. A clickable suffix label will toggle the visibility of the hidden chips.</p>
+<p><code-example example="hide-chips"></code-example></p>
 `,
   host: { class: 'markdown-page' }
 })
@@ -5773,7 +5776,7 @@ export class TemplatesPage {
 <p>First follow the steps to update your angular app to <a href="https://update.angular.io/?v=9.0-10.0">Version 10</a></p>
 <pre><code><span class="hljs-attribute">npm</span> install --save timezone-support&#64;<span class="hljs-number">2</span> novo-design-tokens&#64;<span class="hljs-number">0</span> angular-imask&#64;<span class="hljs-number">6</span> imask&#64;<span class="hljs-number">6</span>
 <span class="hljs-attribute">npm</span> install --save novo-elements&#64;<span class="hljs-number">6</span>
-<span class="hljs-attribute">ng</span> update novo-elements --migrate-only --from=<span class="hljs-number">0</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span> --to=<span class="hljs-number">6</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span> --force --<span class="hljs-literal">allow</span>-dirty  
+<span class="hljs-attribute">ng</span> update novo-elements --migrate-only --from=<span class="hljs-number">0</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span> --to=<span class="hljs-number">6</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span> --force --<span class="hljs-literal">allow</span>-dirty
 </code></pre>
 <p>For any issues that are not corrected with the above command, please ask questions in the <a href="https://github.com/bullhorn/novo-elements/discussions/categories/q-a">Q&amp;A Page</a> in github.</p>
 <p>Welcome to the February 2022 release of Novo Elements. There are many updates in this version that we hope you will like, some of the key highlights include:</p>
@@ -6151,7 +6154,7 @@ npm install novo-elements&#64;7.2.0-next.0
 <h2>Upgrading to V7</h2>
 <p>First follow the steps to update your angular app to <a href="https://update.angular.io/?v=10.0-13.0">Version 13</a></p>
 <pre><code><span class="hljs-attribute">npm</span> install --save novo-elements&#64;<span class="hljs-number">7</span>.x.x
-<span class="hljs-attribute">ng</span> update novo-elements --migrate-only --from=<span class="hljs-number">0</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span> --to=<span class="hljs-number">7</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span> --force --<span class="hljs-literal">allow</span>-dirty  
+<span class="hljs-attribute">ng</span> update novo-elements --migrate-only --from=<span class="hljs-number">0</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span> --to=<span class="hljs-number">7</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span> --force --<span class="hljs-literal">allow</span>-dirty
 </code></pre>
 <h2 id="notable-changes">Notable changes <a href="https://bullhorn.github.io/novo-elements/docs/#/updates/v7-announce#notable-changes">#</a></h2>
 <ul>
@@ -6188,7 +6191,7 @@ npm install novo-elements&#64;7.2.0-next.0
 <div class="p">Note: First follow the steps to update your angular app to <a href="https://update.angular.io/?v=10.0-13.0">Version 13</a> if you haven't already.</div>
 </blockquote>
 <pre><code><span class="hljs-attribute">npm</span> install --save novo-elements&#64;<span class="hljs-number">7</span>.x.x
-<span class="hljs-attribute">ng</span> update novo-elements --migrate-only --from=<span class="hljs-number">0</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span> --to=<span class="hljs-number">7</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span> --force --<span class="hljs-literal">allow</span>-dirty  
+<span class="hljs-attribute">ng</span> update novo-elements --migrate-only --from=<span class="hljs-number">0</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span> --to=<span class="hljs-number">7</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span> --force --<span class="hljs-literal">allow</span>-dirty
 </code></pre>
 <h1>📢  August 2022 (version 7.3.x)</h1>
 <p><strong>Announcement</strong>: New features and improvements!</p>
