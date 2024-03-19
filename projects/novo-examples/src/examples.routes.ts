@@ -4033,7 +4033,7 @@ export class ChipsDevelopPage {
 <p>By clicking on the <code>row-chips</code> element, the options list will be displayed.  Select any of the options by clicking on the item in the list.  The value selected will be added to the list of selected values as a new row. By clicking the delete icon at the end of the row, the row will be removed from the list of selected values.</p>
 <p><code-example example="row-chips"></code-example></p>
 <h2>Hide Chips Example</h2>
-<p>Setting the <code>maxChipsShown</code> property via the <code>source</code> Input will limit the number of chips shown to the <code>maxChipsShown</code> set. A clickable suffix label will toggle the visibility of the hidden chips.</p>
+<p>Setting the <code>hideChipsLimit</code> property via the <code>source</code> Input will limit the number of chips shown to the <code>hideChipsLimit</code> set. A clickable suffix label will toggle the visibility of the hidden chips.</p>
 <p><code-example example="hide-chips"></code-example></p>
 `,
   host: { class: 'markdown-page' }
