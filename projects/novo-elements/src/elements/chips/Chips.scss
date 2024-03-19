@@ -10,6 +10,13 @@
   transition: all 200ms ease-in-out;
   position: relative;
   padding: 2px 0;
+
+  .hidden-chips-toggle {
+    cursor: pointer;
+    padding: 0 1rem 0 .5rem;
+    line-height: 2.7rem;
+  }
+
   &.with-value {
     margin-bottom: 20px;
   }

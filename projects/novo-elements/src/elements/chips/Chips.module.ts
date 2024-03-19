@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 // APP
 import { Key } from 'novo-elements/utils';
-import { ErrorStateMatcher } from 'novo-elements/elements/common';
+import { ErrorStateMatcher, NovoCommonModule } from 'novo-elements/elements/common';
 import { NovoFieldModule } from 'novo-elements/elements/field';
 import { NovoIconModule } from 'novo-elements/elements/icon';
 import { NovoPickerModule } from 'novo-elements/elements/picker';
@@ -16,7 +16,7 @@ import { NovoChipsElement } from './Chips';
 import { NovoRowChipElement, NovoRowChipsElement } from './RowChips';
 import { AvatarTypePipe } from './pipe/AvatarType.pipe';
 @NgModule({
-  imports: [CommonModule, FormsModule, NovoPickerModule, NovoIconModule, NovoFieldModule],
+  imports: [CommonModule, FormsModule, NovoPickerModule, NovoIconModule, NovoFieldModule, NovoCommonModule],
   declarations: [
     NovoChipElement,
     NovoChipAvatar,

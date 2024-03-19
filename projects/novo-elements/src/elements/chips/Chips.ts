@@ -20,7 +20,7 @@ const CHIPS_VALUE_ACCESSOR = {
   template: `
     <div class="novo-chip-container">
       <novo-chip
-        *ngFor="let item of _items | async"
+        *ngFor="let item of _items | async | slice: 0:maxChipsShown"
         [class.selected]="item == selected"
         [selectable]="true"
         [disabled]="disablePickerInput"
@@ -32,6 +32,10 @@ const CHIPS_VALUE_ACCESSOR = {
         {{ item.label }}
         <novo-icon *ngIf="!disablePickerInput" novoChipRemove>x</novo-icon>
       </novo-chip>
+      <div *ngIf="items.length > maxChipsShown || items.length > _maxChipsShown && maxChipsShown === CHIPS_SHOWN_MAX" class="hidden-chips-toggle" (click)="toggleHiddenChips()">
+        <novo-label *ngIf="maxChipsShown !== CHIPS_SHOWN_MAX" color="positive">+ {{ hiddenChips.count }} {{ labels.more }} {{ hiddenChips.type }}</novo-label>
+        <novo-label *ngIf="maxChipsShown === CHIPS_SHOWN_MAX" color="positive"> {{labels.showLess}}</novo-label>
+      </div>
     </div>
     <div class="chip-input-container" *ngIf="!maxlength || (maxlength && items.length < maxlength)">
       <novo-picker
@@ -67,6 +71,7 @@ const CHIPS_VALUE_ACCESSOR = {
   },
 })
 export class NovoChipsElement implements OnInit, ControlValueAccessor {
+  readonly CHIPS_SHOWN_MAX = 999;
   @Input()
   closeOnSelect: boolean = false;
   @Input()
@@ -100,15 +105,18 @@ export class NovoChipsElement implements OnInit, ControlValueAccessor {
   @ViewChild('preview', { read: ViewContainerRef })
   preview: ViewContainerRef;
 
-  items: Array<any> = [];
+  items: any[] = [];
   selected: any = null;
   config: any = {};
   model: any;
   itemToAdd: any;
   popup: any;
+  maxChipsShown: number;
+  hiddenChips: { type, count };
   // private data model
   _value: any = '';
-  _items = new ReplaySubject(1);
+  _items = new ReplaySubject<any[]>(1);
+  _maxChipsShown: number;
   // Placeholders for the callbacks
   onModelChange: Function = () => {};
   onModelTouched: Function = () => {};
@@ -116,6 +124,8 @@ export class NovoChipsElement implements OnInit, ControlValueAccessor {
   constructor(public element: ElementRef, private componentUtils: ComponentUtils, public labels: NovoLabelService) {}
 
   ngOnInit() {
+    this.maxChipsShown = this.source.maxChipsShown;
+    this._maxChipsShown = this.maxChipsShown; // copy of original max count
     this.setItems();
   }
 
@@ -227,6 +237,7 @@ export class NovoChipsElement implements OnInit, ControlValueAccessor {
   add(event) {
     if (event && !(event instanceof Event)) {
       this.items.push(event);
+      this.updateHiddenChips();
       this.value = this.source && this.source.valueFormatter ? this.source.valueFormatter(this.items) : this.items.map((i) => i.value);
       // Set focus on the picker
       const input = this.element.nativeElement.querySelector('novo-picker > input');
@@ -238,8 +249,23 @@ export class NovoChipsElement implements OnInit, ControlValueAccessor {
     this._propagateChanges();
   }
 
+  updateHiddenChips() {
+    this.hiddenChips = <{ type, count }>{};
+    const chipsToHide = this.items.slice(this.maxChipsShown);
+    const numChipsToHide = chipsToHide.length;
+    if (numChipsToHide > 0) {
+      this.hiddenChips = { count: numChipsToHide, type: numChipsToHide > 1 ? this.labels.items : this.labels.item };
+    }
+  }
+
+  toggleHiddenChips() {
+    this.maxChipsShown = this.maxChipsShown == this.CHIPS_SHOWN_MAX ? this._maxChipsShown : this.CHIPS_SHOWN_MAX;
+    this.updateHiddenChips();
+  }
+
   remove(event, item) {
     this.items.splice(this.items.indexOf(item), 1);
+    this.updateHiddenChips();
     this.deselectAll();
     this.value = this.source && this.source.valueFormatter ? this.source.valueFormatter(this.items) : this.items.map((i) => i.value);
     this._items.next(this.items);
