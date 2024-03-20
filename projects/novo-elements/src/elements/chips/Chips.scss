@@ -34,7 +34,7 @@
     border-bottom-style: dashed !important;
   }
   .chip-input-container {
-    flex-grow: 4;
+    flex: 1 15rem;
     padding-left: 1rem;
     input {
       padding-top: 0;
@@ -50,6 +50,7 @@
     display: flex;
     flex-flow: row wrap;
     gap: 0.4rem;
+    align-items: center;
   }
   label.clear-all {
     flex: 1 100%;

@@ -33,28 +33,28 @@ const CHIPS_VALUE_ACCESSOR = {
         <novo-icon *ngIf="!disablePickerInput" novoChipRemove>x</novo-icon>
       </novo-chip>
       <div *ngIf="hiddenChipsCount" class="hidden-chips-toggle" (click)="toggleHiddenChips()">
-        <novo-label *ngIf="hideChipsLimit !== CHIPS_SHOWN_MAX" color="positive">+ {{ hiddenChipsCount }} {{ labels.more | lowercase }} </novo-label>
-        <novo-label *ngIf="hideChipsLimit === CHIPS_SHOWN_MAX" color="positive"> {{labels.showLess | lowercase}}</novo-label>
+        <novo-label *ngIf="hideChipsLimit !== CHIPS_SHOWN_MAX" color="positive">+ {{ hiddenChipsCount }} {{ labels.more }} </novo-label>
+        <novo-label *ngIf="hideChipsLimit === CHIPS_SHOWN_MAX" color="positive"><novo-icon>sort-asc</novo-icon> {{labels.showLess}}</novo-label>
       </div>
-    </div>
-    <div class="chip-input-container" *ngIf="!maxlength || (maxlength && items.length < maxlength)">
-      <novo-picker
-        clearValueOnSelect="true"
-        [closeOnSelect]="closeOnSelect"
-        [config]="source"
-        [disablePickerInput]="disablePickerInput"
-        [placeholder]="placeholder"
-        [(ngModel)]="itemToAdd"
-        (select)="add($event)"
-        (keydown)="onKeyDown($event)"
-        (focus)="onFocus($event)"
-        (typing)="onTyping($event)"
-        (blur)="onTouched($event)"
-        [selected]="items"
-        [overrideElement]="element"
-        [allowCustomValues]="allowCustomValues"
-      >
-      </novo-picker>
+      <div class="chip-input-container" *ngIf="!maxlength || (maxlength && items.length < maxlength)">
+        <novo-picker
+          clearValueOnSelect="true"
+          [closeOnSelect]="closeOnSelect"
+          [config]="source"
+          [disablePickerInput]="disablePickerInput"
+          [placeholder]="placeholder"
+          [(ngModel)]="itemToAdd"
+          (select)="add($event)"
+          (keydown)="onKeyDown($event)"
+          (focus)="onFocus($event)"
+          (typing)="onTyping($event)"
+          (blur)="onTouched($event)"
+          [selected]="items"
+          [overrideElement]="element"
+          [allowCustomValues]="allowCustomValues"
+        >
+        </novo-picker>
+      </div>
     </div>
     <div class="preview-container">
       <span #preview></span>
