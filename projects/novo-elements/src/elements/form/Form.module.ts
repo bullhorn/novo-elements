@@ -8,7 +8,6 @@ import { IMaskModule } from 'angular-imask';
 import { NovoAceEditorModule } from 'novo-elements/addons/ace-editor';
 import { NovoNovoCKEditorModule } from 'novo-elements/addons/ckeditor';
 import { NovoCodeEditorModule } from 'novo-elements/addons/code-editor';
-import { NovoDragulaModule } from 'novo-elements/addons/dragula';
 import { NovoButtonModule } from 'novo-elements/elements/button';
 import { NovoCheckboxModule } from 'novo-elements/elements/checkbox';
 import { NovoChipsModule } from 'novo-elements/elements/chips';
@@ -57,7 +56,6 @@ import { NovoFormExtrasModule } from './extras';
     NovoHeaderModule,
     NovoTooltipModule,
     NovoPopOverModule,
-    NovoDragulaModule,
     IMaskModule,
     NovoTipWellModule,
     NovoModalModule,

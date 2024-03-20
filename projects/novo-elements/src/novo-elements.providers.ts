@@ -1,5 +1,4 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
-import { NovoDragulaService } from 'novo-elements/addons';
 import {
   FieldInteractionApi,
   GooglePlacesService,
@@ -19,7 +18,6 @@ import {
 } from 'novo-elements/services';
 
 const NOVO_ELEMENTS_PROVIDERS = [
-  { provide: NovoDragulaService, useClass: NovoDragulaService },
   { provide: NovoAsideService, useClass: NovoAsideService },
   { provide: NovoModalService, useClass: NovoModalService },
   { provide: GooglePlacesService, useClass: GooglePlacesService },
