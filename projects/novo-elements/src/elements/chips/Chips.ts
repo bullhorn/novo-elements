@@ -6,6 +6,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ReplaySubject } from 'rxjs';
 import { ComponentUtils, NovoLabelService } from 'novo-elements/services';
 import { Helpers, Key } from 'novo-elements/utils';
+import { NovoPickerElement } from 'novo-elements/elements/picker';
 
 // Value accessor for the component (supports ngModel)
 const CHIPS_VALUE_ACCESSOR = {
@@ -35,6 +36,7 @@ const CHIPS_VALUE_ACCESSOR = {
     </div>
     <div class="chip-input-container" *ngIf="!maxlength || (maxlength && items.length < maxlength)">
       <novo-picker
+        #picker
         clearValueOnSelect="true"
         [closeOnSelect]="closeOnSelect"
         [config]="source"
@@ -47,9 +49,10 @@ const CHIPS_VALUE_ACCESSOR = {
         (typing)="onTyping($event)"
         (blur)="onTouched($event)"
         [selected]="items"
-        [overrideElement]="element"
+        [overrideElement]="overrideElement || element"
         [allowCustomValues]="allowCustomValues"
       >
+        <ng-content/>
       </novo-picker>
     </div>
     <div class="preview-container">
@@ -87,6 +90,8 @@ export class NovoChipsElement implements OnInit, ControlValueAccessor {
     return this._disablePickerInput;
   }
   private _disablePickerInput: boolean = false;
+  @Input()
+  overrideElement: ElementRef;
 
   @Output()
   changed: EventEmitter<any> = new EventEmitter();
@@ -99,6 +104,9 @@ export class NovoChipsElement implements OnInit, ControlValueAccessor {
 
   @ViewChild('preview', { read: ViewContainerRef })
   preview: ViewContainerRef;
+
+  @ViewChild('picker', { static: false })
+  picker: NovoPickerElement;
 
   items: Array<any> = [];
   selected: any = null;
