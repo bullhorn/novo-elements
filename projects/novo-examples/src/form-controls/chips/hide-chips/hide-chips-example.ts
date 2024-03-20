@@ -116,7 +116,7 @@ export class HideChipsExample {
     this.hideDemo = {
       format: '$firstName $lastName',
       options: collaborators,
-      hideChipsLimit: 3
+      hiddenChipsLimit: 3
     };
 
     this.model = [];

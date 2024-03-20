@@ -55,6 +55,6 @@ By clicking on the <code>row-chips</code> element, the options list will be disp
 
 ## Hide Chips Example
 
-Setting the `hideChipsLimit` property via the `source` Input will limit the number of chips shown to the `hideChipsLimit` set. A clickable suffix label will toggle the visibility of the hidden chips.
+Setting the `hiddenChipsLimit` property via the `source` Input will limit the number of chips shown to the `hiddenChipsLimit` set. A clickable suffix label will toggle the visibility of the hidden chips.
 
 <code-example example="hide-chips"></code-example>

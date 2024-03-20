@@ -137,7 +137,7 @@ export class NovoLabelService {
   isEmpty = 'Is Empty?';
   refreshPagination = 'Refresh Pagination';
   location = 'Location';
-  showLess = 'show less';
+  showLess = 'Show Less';
 
   constructor(
     @Optional()

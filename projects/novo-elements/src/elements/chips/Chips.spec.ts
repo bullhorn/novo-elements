@@ -73,10 +73,10 @@ describe('Elements: NovoChipsElement', () => {
   });
 
   describe('Method: updateHiddenChips()', () => {
-    it('should update hiddenChipsCount based on the items length and the hideChipsLimit property', () => {
+    it('should update hiddenChipsCount based on the items length and the hiddenChipsLimit property', () => {
       component.items = ['A','B','C','D','E','F'];
-      component.hideChipsLimit = 4;
-      component._hideChipsLimit = component.hideChipsLimit;
+      component.hiddenChipsLimit = 4;
+      component._hiddenChipsLimit = component.hiddenChipsLimit;
       component.updateHiddenChips();
       expect(component.hiddenChipsCount).toBe(2);
       component.items.pop();
@@ -84,24 +84,24 @@ describe('Elements: NovoChipsElement', () => {
       expect(component.hiddenChipsCount).toBe(1);
     });
 
-    it('should reset the hideChipsLimit to the original limit if: currently showing all chips BUT there are no longer any extra chips to hide', () => {
+    it('should reset the hiddenChipsLimit to the original limit if: currently showing all chips BUT there are no longer any extra chips to hide', () => {
       component.items = ['A','B','C','D'];
-      component._hideChipsLimit = 3;
-      component.hideChipsLimit = component.CHIPS_SHOWN_MAX; // currently showing all chips
+      component._hiddenChipsLimit = 3;
+      component.hiddenChipsLimit = component.CHIPS_SHOWN_MAX; // currently showing all chips
       component.items.pop(); // ['A', 'B', 'C']
       component.updateHiddenChips();
-      expect(component.hideChipsLimit).toBe(component._hideChipsLimit);
+      expect(component.hiddenChipsLimit).toBe(component._hiddenChipsLimit);
 
     });
   });
 
   describe('Method: toggleHiddenChips()', () => {
-    it('should flip the hideChipsLimit count between the original set at init and the CHIPS_SHOWN_MAX const', () => {
-      component.hideChipsLimit = 3;
-      component._hideChipsLimit = component.hideChipsLimit;
-      expect(component.hideChipsLimit).toBe(3);
+    it('should flip the hiddenChipsLimit count between the original set at init and the CHIPS_SHOWN_MAX const', () => {
+      component.hiddenChipsLimit = 3;
+      component._hiddenChipsLimit = component.hiddenChipsLimit;
+      expect(component.hiddenChipsLimit).toBe(3);
       component.toggleHiddenChips();
-      expect(component.hideChipsLimit).toBe(999);
+      expect(component.hiddenChipsLimit).toBe(999);
     });
   });
 
