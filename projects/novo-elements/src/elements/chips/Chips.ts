@@ -125,7 +125,7 @@ export class NovoChipsElement implements OnInit, ControlValueAccessor {
 
   ngOnInit() {
     this.hiddenChipsLimit = this.source.hiddenChipsLimit;
-    this._hiddenChipsLimit = this.hiddenChipsLimit; // copy of original max count
+    this._hiddenChipsLimit = this.hiddenChipsLimit; // copy of original chip limit
     this.setItems();
   }
 
@@ -252,7 +252,7 @@ export class NovoChipsElement implements OnInit, ControlValueAccessor {
   updateHiddenChips() {
     this.hiddenChipsCount = Math.max(0, this.items.length - this._hiddenChipsLimit);
     if (!this.hiddenChipsCount && this.hiddenChipsLimit === this.CHIPS_SHOWN_MAX)
-      this.hiddenChipsLimit = this._hiddenChipsLimit; // reset hiddenChipsLimit to original count
+      this.hiddenChipsLimit = this._hiddenChipsLimit; // reset hiddenChipsLimit to original #
   }
 
   toggleHiddenChips() {
