@@ -8,7 +8,6 @@
     "@angular/common": ">=10",
     "@angular/core": ">=10",
     "@angular/forms": ">=10",
-    "@bullhorn/dragula": ">=1",
     "@codemirror/commands": "^6.2.4",
     "@codemirror/lang-javascript": "^6.1.9",
     "@codemirror/state": "^6.2.1",
