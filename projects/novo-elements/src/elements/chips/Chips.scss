@@ -33,6 +33,13 @@
   &.disabled {
     border-bottom-style: dashed !important;
   }
+  .novo-chip-container {
+    flex: 1;
+    display: flex;
+    flex-flow: row wrap;
+    gap: 0.4rem;
+    align-items: center;
+  }
   .chip-input-container {
     flex: 1 15rem;
     padding-left: 1rem;
@@ -45,12 +52,6 @@
         outline: none;
       }
     }
-  }
-  .novo-chip-container {
-    display: flex;
-    flex-flow: row wrap;
-    gap: 0.4rem;
-    align-items: center;
   }
   label.clear-all {
     flex: 1 100%;
