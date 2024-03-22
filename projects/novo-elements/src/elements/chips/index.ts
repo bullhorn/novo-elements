@@ -6,3 +6,4 @@ export * from './Chips';
 export * from './Chips.module';
 export * from './ChipTextControl';
 export * from './RowChips';
+export * from './pipe';
