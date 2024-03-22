@@ -141,6 +141,7 @@ export class NovoChipsElement implements OnInit, ControlValueAccessor {
 
   clearValue() {
     this.items = [];
+    this.updateHiddenChips();
     this._items.next(this.items);
     this.value = null;
     this._propagateChanges();
