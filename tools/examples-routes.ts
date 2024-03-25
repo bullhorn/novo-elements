@@ -178,12 +178,10 @@ function generatePageRoute(metadata: PageMetadata[]): string {
     path: '${route}',
     component: TabsLayout,
     data: { title: '${convertToSentence(page)}', section: '${pathRoot}', pages: ${subs}, description: ${desc}${tag} },
-    children: [
-${tabs.map((comp) => `      { path: '${comp.route}', component: ${comp.name}Page }`).join(',\n')},
+    children: [ ${tabs.map((comp) => `      { path: '${comp.route}', component: ${comp.name}Page }`).join(',\n')},
       { path: '', redirectTo: '/${pathRoot}/${page}/${tabs[0].route}', pathMatch: 'full' },
-    ]
-  }`
-      : `  { path: '${route}', component: ${tabs[0].name}Page, data: { title: '${tabs[0].title}', section: '${tabs[0].section}'${tag} } }`;
+    ]}`
+      : `  { path: '${route}', component: ${tabs[0].name}Page, data: { order: '${tabs[0].order}', title: '${tabs[0].title}', section: '${tabs[0].section}'${tag} } }`;
   };
 
   return Object.entries(sections)
@@ -195,8 +193,6 @@ ${tabs.map((comp) => `      { path: '${comp.route}', component: ${comp.name}Page
         .join(',\n');
     })
     .join(',\n');
-
-  // return `  { path: '${metadata.route}', component: ${metadata.name}Page, data: { title: '${metadata.title}', section: '${metadata.section}' } },`
 }
 
 /**
@@ -280,26 +276,7 @@ function convertToSentence(name: string): string {
 function parsePageMetadata(filePath: string, sourceContent: string): PageMetadata {
   const { data, content } = frontmatter(sourceContent);
   const markup = md.render(content).replace(/<pre[^<>]*>(.*?)<\/pre>/gs, '<pre>$1</pre>'.replace(/\n/g, '\\n'));
-  // .replace(/\n/g, '');
   const fileName = path.basename(filePath, '.md');
-
-  // let template = markup;
-
-  // if (data.layout === 'usage') {
-  //   const parser = new DOMParser();
-  //   const serializer = new XMLSerializer();
-  //   const htmlDoc = parser.parseFromString(markup, 'text/html');
-  //   const sections = Array.from(htmlDoc.getElementsByTagName('h2')).map((it: any) => it.textContent);
-  //   Array.from(htmlDoc.getElementsByTagName('h2')).forEach((it: any) => it.setAttribute('id', convertToDashCase(it.textContent)));
-
-  //   template = [
-  //     `<header><novo-flex><h1>${convertToSentence(fileName)}</h1><novo-nav theme="white">`,
-  //     ...sections.map((it) => `<novo-tab-link spy="${convertToDashCase(it)}">${it}</novo-tab-link>`),
-  //     `</novo-nav></novo-flex></header>`,
-  //     serializer.serializeToString(htmlDoc),
-  //   ].join('');
-  // }
-
   const [root = 'root', parent = 'parent'] = path.dirname(filePath).split('/').slice(-2);
   const { section = root, page = parent, title = convertToSentence(fileName), order = ++_pageOrder, tag = null } = data;
 
@@ -317,19 +294,6 @@ function parsePageMetadata(filePath: string, sourceContent: string): PageMetadat
 }
 
 async function generateApiDocs() {
-  // const app = new Application();
-
-  // // If you want TypeDoc to load tsconfig.json / typedoc.json files
-  // app.options.addReader(new TSConfigReader());
-  // // app.options.addReader(new TypeDoc.TypeDocReader());
-
-  // app.bootstrap({
-  //   // typedoc options here
-  //   entryPoints: [`${elementsPath}/index.ts`],
-  //   excludeExternals: true,
-  //   excludePrivate: true,
-  // });
-
   const app = await Application.bootstrap({
     // typedoc options here
     entryPoints: [`${elementsPath}/index.ts`],
