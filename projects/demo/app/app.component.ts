@@ -33,17 +33,16 @@ export class AppComponent implements AfterViewInit {
     private observer: BreakpointObserver,
   ) {
     toaster.parentViewContainer = viewContainerRef;
-    // modalService.parentViewContainer = viewContainerRef;
 
     this.menuOpen = false;
     this.sectionRoutes = ['Home', 'Design', 'Components', 'Patterns', 'Resources'];
-    this.designRoutes = router.config.filter((r: any) => r.data.section === 'design').sort(this.sortMenu);
-    this.componentRoutes = router.config.filter((r: any) => r.data.section === 'components').sort(this.sortMenu);
-    this.formRoutes = router.config.filter((r: any) => r.data.section === 'form-controls').sort(this.sortMenu);
-    this.layoutRoutes = router.config.filter((r: any) => r.data.section === 'layouts').sort(this.sortMenu);
-    this.utilRoutes = router.config.filter((r: any) => r.data.section === 'utils').sort(this.sortMenu);
-    this.patternRoutes = router.config.filter((r: any) => r.data.section === 'patterns').sort(this.sortMenu);
-    this.updateRoutes = router.config.filter((r: any) => r.data.section === 'updates').sort(this.sortMenu);
+    this.designRoutes = router.config.filter((r: any) => r.data.section === 'design').sort(this.sortAlphabetically);
+    this.componentRoutes = router.config.filter((r: any) => r.data.section === 'components').sort(this.sortAlphabetically);
+    this.formRoutes = router.config.filter((r: any) => r.data.section === 'form-controls').sort(this.sortAlphabetically);
+    this.layoutRoutes = router.config.filter((r: any) => r.data.section === 'layouts').sort(this.sortAlphabetically);
+    this.utilRoutes = router.config.filter((r: any) => r.data.section === 'utils').sort(this.sortAlphabetically);
+    this.patternRoutes = router.config.filter((r: any) => r.data.section === 'patterns').sort(this.sortAlphabetically);
+    this.updateRoutes = router.config.filter((r: any) => r.data.section === 'updates').sort(this.sortByOrder);
   }
 
   ngAfterViewInit() {
@@ -79,11 +78,21 @@ export class AppComponent implements AfterViewInit {
     });
   }
 
-  sortMenu(a, b) {
+  sortAlphabetically(a, b) {
     if (a.data.title < b.data.title) {
       return -1;
     }
     if (a.data.title > b.data.title) {
+      return 1;
+    }
+    return 0;
+  }
+
+  sortByOrder(a, b) {
+    if (a.data.order < b.data.order) {
+      return -1;
+    }
+    if (a.data.order > b.data.order) {
       return 1;
     }
     return 0;
