@@ -5772,17 +5772,22 @@ export class TemplatesPage {
   selector: 'v10-page',
   template: `<h1>🎉 April 2024 (version 10)</h1>
 <p><strong>Announcement</strong>: Novo Elements is now on Angular 17!</p>
-<p>This brings Novo Elements up to the latest versions of both Angular and Typescript. We have also removed the long-since deprecated Table component and Dragula add-on.</p>
+<p>This brings Novo Elements up to the latest versions of both Angular and Typescript.<br>
+Some key highlights include:</p>
+<ul>
+<li>Removing the long-since deprecated Table component.</li>
+<li>Removing the Dragula add-on.</li>
+</ul>
 <h2>Upgrading to v10</h2>
 <ul>
-<li>You may need to update your node version as Angular 17 requires at least <code>^18.13.0</code> or <code>^20.9.0</code>.</li>
+<li>Ensure your node version is compatible with Angular 17 which requires <code>^18.13.0</code> or <code>^20.9.0</code>.</li>
 <li>If your application is using the Novo Elements <code>dragula</code> add-on, you will need to refactor it using the guide below.</li>
 <li>If your application is still using the Novo Elements <code>table</code> component, you will need to refactor it to use the <code>novo-data-table</code> component.</li>
 </ul>
 <h2>Dragula</h2>
 <p>There are a few options for Novo Elements users who wish to use drag and drop functionality on our components.</p>
 <p>For basic new implementations we recommend our new lightweight <a href="https://bullhorn.github.io/novo-elements/docs/#/utils/drag%20and%20drop">drag-drop component</a> which should handle most simple use cases going forward.</p>
-<p>If you have more advanced needs or are refactoring a component that is currently using the previous Novo Elements dragula add-on directive and service, we recommend switching over to use the <a href="https://github.com/valor-software/ng2-dragula">ng2-dragula</a> library. This was forked from the same library we originally forked &#64;bullhorn/dragula from, but has been receiving consistent updates for the past 6 years (while ours hasn't), and has its own directive and service which function almost identically to our Novo Elements add-on directive and service which were just removed. Some key differences if you're going this route:</p>
+<p>If you have more advanced needs or are refactoring a component that is currently using the previous Novo Elements dragula add-on directive and service, we recommend switching over to use the <a href="https://github.com/valor-software/ng2-dragula">ng2-dragula</a> library as it is better maintained than our &#64;bullhorn/dragula library and has a very similar API which greatly reduces the refactor effort. If you are choosing to leverage this library here are some key differences to keep in mind:</p>
 <ul>
 <li>NovoDragulaModule, NovoDragulaService imports from 'novo-elements' will now be DragulaModule, DragulaService imports from 'ng2-dragula'</li>
 <li>add DragulaModule.forRoot() to your app module imports</li>
@@ -6437,6 +6442,7 @@ export class v9Page {
 @Component({
   selector: 'ace-editor-page',
   template: `<h1>Ace Editor <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/addons/ace-editor">(source)</a></h1>
+<p>🛑 <strong>This add-on has been deprecated. Please use the replacement <a href="http://bullhorn.github.io/novo-elements/docs/#/utils/code%20editor">Code Editor</a> add-on instead.</strong></p>
 <p>Basic code editor using <a href="https://ace.c9.io/">Ace Editor</a>.</p>
 <h5>Basic Example</h5>
 <p><code-example example="basic-ace"></code-example></p>
@@ -6903,11 +6909,11 @@ const routes: Routes = [
       { path: 'native-forms', component: PatternsNativeFormsPage },
       { path: '', redirectTo: '/patterns/patterns/test', pathMatch: 'full' },
     ]},
-  { path: 'updates/v10-announce', component: v10Page, data: { order: '5', title: 'v10', section: 'updates', tag: 'new' } },
-  { path: 'updates/v6', component: v6Page, data: { order: '1', title: 'v6', section: 'updates' } },
-  { path: 'updates/v7-announce', component: v7Page, data: { order: '2', title: 'v7', section: 'updates' } },
+  { path: 'updates/v10-announce', component: v10Page, data: { order: '1', title: 'v10', section: 'updates', tag: 'new' } },
+  { path: 'updates/v6', component: v6Page, data: { order: '5', title: 'v6', section: 'updates' } },
+  { path: 'updates/v7-announce', component: v7Page, data: { order: '4', title: 'v7', section: 'updates' } },
   { path: 'updates/v8-announce', component: v8Page, data: { order: '3', title: 'v8', section: 'updates' } },
-  { path: 'updates/v9-announce', component: v9Page, data: { order: '4', title: 'v9', section: 'updates' } },
+  { path: 'updates/v9-announce', component: v9Page, data: { order: '2', title: 'v9', section: 'updates' } },
   { path: 'utils/ace editor', component: AceEditorPage, data: { order: '1', title: 'Ace Editor', section: 'utils', tag: 'deprecated' } },
   { path: 'utils/code editor', component: CodeEditorPage, data: { order: '1', title: 'Code Editor', section: 'utils', tag: 'new' } },
   { path: 'utils/drag and drop', component: DragDropPage, data: { order: '1', title: 'Drag and Drop', section: 'utils', tag: 'new' } },
