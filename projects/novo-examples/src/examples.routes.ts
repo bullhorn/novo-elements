@@ -4032,6 +4032,9 @@ export class ChipsDevelopPage {
 <h2>Row Chips Example</h2>
 <p>By clicking on the <code>row-chips</code> element, the options list will be displayed.  Select any of the options by clicking on the item in the list.  The value selected will be added to the list of selected values as a new row. By clicking the delete icon at the end of the row, the row will be removed from the list of selected values.</p>
 <p><code-example example="row-chips"></code-example></p>
+<h2>Hide Chips Example</h2>
+<p>Setting the <code>hiddenChipsLimit</code> property via the <code>source</code> Input will limit the number of chips shown to the <code>hiddenChipsLimit</code> set. A clickable suffix label will toggle the visibility of the hidden chips.</p>
+<p><code-example example="hide-chips"></code-example></p>
 `,
   host: { class: 'markdown-page' }
 })
@@ -5766,6 +5769,55 @@ export class TemplatesPage {
 
 
 @Component({
+  selector: 'v10-page',
+  template: `<h1>🎉 April 2024 (version 10)</h1>
+<p><strong>Announcement</strong>: Novo Elements is now on Angular 17!</p>
+<p>This brings Novo Elements up to the latest versions of both Angular and Typescript.<br>
+Some key highlights include:</p>
+<ul>
+<li>Removing the long-since deprecated Table component.</li>
+<li>Removing the Dragula add-on.</li>
+</ul>
+<h2>Upgrading to v10</h2>
+<ul>
+<li>Ensure your node version is compatible with Angular 17 which requires <code>^18.13.0</code> or <code>^20.9.0</code>.</li>
+<li>If your application is using the Novo Elements <code>dragula</code> add-on, you will need to refactor it using the guide below.</li>
+<li>If your application is still using the Novo Elements <code>table</code> component, you will need to refactor it to use the <code>novo-data-table</code> component.</li>
+</ul>
+<h2>Dragula</h2>
+<p>There are a few options for Novo Elements users who wish to use drag and drop functionality on our components.</p>
+<p>For basic new implementations we recommend our new lightweight <a href="https://bullhorn.github.io/novo-elements/docs/#/utils/drag%20and%20drop">drag-drop component</a> which should handle most simple use cases going forward.</p>
+<p>If you have more advanced needs or are refactoring a component that is currently using the previous Novo Elements dragula add-on directive and service, we recommend switching over to use the <a href="https://github.com/valor-software/ng2-dragula">ng2-dragula</a> library as it is better maintained than our &#64;bullhorn/dragula library and has a very similar API which greatly reduces the refactor effort. If you are choosing to leverage this library here are some key differences to keep in mind:</p>
+<ul>
+<li>NovoDragulaModule, NovoDragulaService imports from 'novo-elements' will now be DragulaModule, DragulaService imports from 'ng2-dragula'</li>
+<li>add DragulaModule.forRoot() to your app module imports</li>
+<li>NovoDragulaService.setOptions() calls will now be DragulaService.createGroup()</li>
+<li>NovoDragulaService events will now be function calls - ie NovoDragulaService.drop.subscribe() is now DragulaService.drop().subscribe()</li>
+<li>the return values from these events are no longer arrays with specific properties at certain indexes, but are now objects with defined properties</li>
+<li>some CSS additions may be necessary, either by importing an ng2-dragula stylesheet or adding the styles manually (see readme link below)</li>
+<li>the dragulaModel input will no longer mutate the array you pass in, but return a new array with the changes, so you will want to use two-way data binding in your templates for this</li>
+<li>as of 4/24 there is a bug in the current ng2-dragula npm 5.0.1-5.0.2 releases around the required peer dependency angular versions, so you may need to override these in your package.json until it's fixed</li>
+</ul>
+<p>Other changes which may be relevant (such as the css changes) may be listed in the <a href="https://github.com/valor-software/ng2-dragula/tree/master">ng2-dragula readme</a>. Event return values and other changes can be discerned from the <a href="https://github.com/valor-software/ng2-dragula/blob/master/libs/ng2-dragula/src/components/dragula.service.ts">ng2-dragula DragulaService file</a>.</p>
+<h2 id="notable-changes">Notable changes <a href="https://bullhorn.github.io/novo-elements/docs/#/updates/v10-announce#notable-changes">#</a></h2>
+<ul>
+<li>update to ng17 <a href="https://github.com/bullhorn/novo-elements/pull/1501">#1501</a></li>
+<li>deleting the table component <a href="https://github.com/bullhorn/novo-elements/pull/1513">#1513</a></li>
+<li>bump follow-redirects from 1.15.4 to 1.15.6 <a href="https://github.com/bullhorn/novo-elements/pull/1520">#1520</a></li>
+<li>deleting dragula add-on <a href="https://github.com/bullhorn/novo-elements/pull/1517">#1517</a></li>
+<li>When handling AppBridge events, pass origin to handler <a href="https://github.com/bullhorn/novo-elements/pull/1509">#1509</a></li>
+<li>added new hidden chips feature to Chips picker <a href="https://github.com/bullhorn/novo-elements/pull/1521">#1521</a></li>
+<li>Fixes to an error in Control affecting maxlength fields <a href="https://github.com/bullhorn/novo-elements/pull/1518">#1518</a></li>
+</ul>
+`,
+  host: { class: 'markdown-page' }
+})
+export class v10Page {
+  public params: any = {};
+}
+
+
+@Component({
   selector: 'v6-page',
   template: `<h1>🚀 February 2022 (version 6 - Golden)</h1>
 <p><strong>Release v6.0.0</strong>: This release contains several component updates and additional new components. Initial refactoring of component architecture to support future efforts to improve the design systems consistency along with improvements to the developer experience.</p>
@@ -6390,6 +6442,7 @@ export class v9Page {
 @Component({
   selector: 'ace-editor-page',
   template: `<h1>Ace Editor <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/addons/ace-editor">(source)</a></h1>
+<p>🛑 <strong>This add-on has been deprecated. Please use the replacement <a href="http://bullhorn.github.io/novo-elements/docs/#/utils/code%20editor">Code Editor</a> add-on instead.</strong></p>
 <p>Basic code editor using <a href="https://ace.c9.io/">Ace Editor</a>.</p>
 <h5>Basic Example</h5>
 <p><code-example example="basic-ace"></code-example></p>
@@ -6573,362 +6626,307 @@ const routes: Routes = [
     path: 'components/agenda',
     component: TabsLayout,
     data: { title: 'Agenda', section: 'components', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}], description: null },
-    children: [
-      { path: 'design', component: AgendaDesignPage },
+    children: [       { path: 'design', component: AgendaDesignPage },
       { path: 'develop', component: AgendaDevelopPage },
       { path: 'examples', component: AgendaExamplesPage },
       { path: '', redirectTo: '/components/agenda/design', pathMatch: 'full' },
-    ]
-  },
+    ]},
   {
     path: 'components/aside',
     component: TabsLayout,
     data: { title: 'Aside', section: 'components', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}], description: null },
-    children: [
-      { path: 'design', component: AsideDesignPage },
+    children: [       { path: 'design', component: AsideDesignPage },
       { path: 'develop', component: AsideDevelopPage },
       { path: 'examples', component: AsideExamplesPage },
       { path: '', redirectTo: '/components/aside/design', pathMatch: 'full' },
-    ]
-  },
+    ]},
   {
     path: 'components/autocomplete',
     component: TabsLayout,
     data: { title: 'Autocomplete', section: 'components', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}], description: null },
-    children: [
-      { path: 'design', component: AutocompleteDesignPage },
+    children: [       { path: 'design', component: AutocompleteDesignPage },
       { path: 'develop', component: AutocompleteDevelopPage },
       { path: 'examples', component: AutocompleteExamplesPage },
       { path: '', redirectTo: '/components/autocomplete/design', pathMatch: 'full' },
-    ]
-  },
+    ]},
   {
     path: 'components/avatar',
     component: TabsLayout,
     data: { title: 'Avatar', section: 'components', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}], description: null },
-    children: [
-      { path: 'design', component: AvatarDesignPage },
+    children: [       { path: 'design', component: AvatarDesignPage },
       { path: 'develop', component: AvatarDevelopPage },
       { path: 'examples', component: AvatarExamplesPage },
       { path: '', redirectTo: '/components/avatar/design', pathMatch: 'full' },
-    ]
-  },
+    ]},
   {
     path: 'components/breadcrumbs',
     component: TabsLayout,
     data: { title: 'Breadcrumbs', section: 'components', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}], description: null },
-    children: [
-      { path: 'design', component: BreadcrumbDesignPage },
+    children: [       { path: 'design', component: BreadcrumbDesignPage },
       { path: 'develop', component: BreadcrumbDevelopPage },
       { path: 'examples', component: BreadcrumbExamplesPage },
       { path: '', redirectTo: '/components/breadcrumbs/design', pathMatch: 'full' },
-    ]
-  },
+    ]},
   {
     path: 'components/button',
     component: TabsLayout,
     data: { title: 'Button', section: 'components', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}], description: null },
-    children: [
-      { path: 'design', component: ButtonDesignPage },
+    children: [       { path: 'design', component: ButtonDesignPage },
       { path: 'develop', component: ButtonDevelopPage },
       { path: 'examples', component: ButtonExamplesPage },
       { path: '', redirectTo: '/components/button/design', pathMatch: 'full' },
-    ]
-  },
+    ]},
   {
     path: 'components/calendar',
     component: TabsLayout,
     data: { title: 'Calendar', section: 'components', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}], description: null },
-    children: [
-      { path: 'design', component: CalendarDesignPage },
+    children: [       { path: 'design', component: CalendarDesignPage },
       { path: 'develop', component: CalendarDevelopPage },
       { path: 'examples', component: CalendarExamplesPage },
       { path: '', redirectTo: '/components/calendar/design', pathMatch: 'full' },
-    ]
-  },
-  { path: 'components/data-table', component: DataTablePage, data: { title: 'Data Table', section: 'components' } },
+    ]},
+  { path: 'components/data-table', component: DataTablePage, data: { order: '2', title: 'Data Table', section: 'components' } },
   {
     path: 'components/dropdown',
     component: TabsLayout,
     data: { title: 'Dropdown', section: 'components', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}], description: null },
-    children: [
-      { path: 'design', component: DropdownDesignPage },
+    children: [       { path: 'design', component: DropdownDesignPage },
       { path: 'develop', component: DropdownDevelopPage },
       { path: 'examples', component: DropdownExamplesPage },
       { path: '', redirectTo: '/components/dropdown/design', pathMatch: 'full' },
-    ]
-  },
+    ]},
   {
     path: 'components/field',
     component: TabsLayout,
     data: { title: 'Field', section: 'components', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}], description: null },
-    children: [
-      { path: 'design', component: FieldDesignPage },
+    children: [       { path: 'design', component: FieldDesignPage },
       { path: 'develop', component: FieldDevelopPage },
       { path: 'examples', component: FieldExamplesPage },
       { path: '', redirectTo: '/components/field/design', pathMatch: 'full' },
-    ]
-  },
+    ]},
   {
     path: 'components/icon',
     component: TabsLayout,
     data: { title: 'Icon', section: 'components', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}], description: null },
-    children: [
-      { path: 'design', component: IconDesignPage },
+    children: [       { path: 'design', component: IconDesignPage },
       { path: 'develop', component: IconDevelopPage },
       { path: 'examples', component: IconExamplesPage },
       { path: '', redirectTo: '/components/icon/design', pathMatch: 'full' },
-    ]
-  },
+    ]},
   {
     path: 'components/loading',
     component: TabsLayout,
     data: { title: 'Loading', section: 'components', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}], description: null },
-    children: [
-      { path: 'design', component: LoadingDesignPage },
+    children: [       { path: 'design', component: LoadingDesignPage },
       { path: 'develop', component: LoadingDevelopPage },
       { path: 'examples', component: LoadingExamplesPage },
       { path: '', redirectTo: '/components/loading/design', pathMatch: 'full' },
-    ]
-  },
+    ]},
   {
     path: 'components/menu',
     component: TabsLayout,
     data: { title: 'Menu', section: 'components', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}], description: null },
-    children: [
-      { path: 'design', component: MenuDesignPage },
+    children: [       { path: 'design', component: MenuDesignPage },
       { path: 'develop', component: MenuDevelopPage },
       { path: 'examples', component: MenuExamplesPage },
       { path: '', redirectTo: '/components/menu/design', pathMatch: 'full' },
-    ]
-  },
+    ]},
   {
     path: 'components/modals',
     component: TabsLayout,
     data: { title: 'Modals', section: 'components', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}], description: null },
-    children: [
-      { path: 'design', component: ModalDesignPage },
+    children: [       { path: 'design', component: ModalDesignPage },
       { path: 'develop', component: ModalDevelopPage },
       { path: 'examples', component: ModalExamplesPage },
       { path: '', redirectTo: '/components/modals/design', pathMatch: 'full' },
-    ]
-  },
+    ]},
   {
     path: 'components/non ideal state',
     component: TabsLayout,
     data: { title: 'Non Ideal State', section: 'components', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}], description: null },
-    children: [
-      { path: 'design', component: NonIdealStateDesignPage },
+    children: [       { path: 'design', component: NonIdealStateDesignPage },
       { path: 'develop', component: NonIdealStateDevelopPage },
       { path: 'examples', component: NonIdealStateExamplesPage },
       { path: '', redirectTo: '/components/non ideal state/design', pathMatch: 'full' },
-    ]
-  },
+    ]},
   {
     path: 'components/pop over',
     component: TabsLayout,
     data: { title: 'Pop Over', section: 'components', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}], description: null },
-    children: [
-      { path: 'design', component: PopoverDesignPage },
+    children: [       { path: 'design', component: PopoverDesignPage },
       { path: 'develop', component: PopoverDevelopPage },
       { path: 'examples', component: PopoverExamplesPage },
       { path: '', redirectTo: '/components/pop over/design', pathMatch: 'full' },
-    ]
-  },
+    ]},
   {
     path: 'components/progress',
     component: TabsLayout,
     data: { title: 'Progress', section: 'components', pages: [{ title: 'Usage', route: './usage'},{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}], description: null },
-    children: [
-      { path: 'usage', component: ProgressUsagePage },
+    children: [       { path: 'usage', component: ProgressUsagePage },
       { path: 'design', component: ProgressDesignPage },
       { path: 'develop', component: ProgressDevelopPage },
       { path: 'examples', component: ProgressExamplesPage },
       { path: '', redirectTo: '/components/progress/usage', pathMatch: 'full' },
-    ]
-  },
+    ]},
   {
     path: 'components/query builder',
     component: TabsLayout,
     data: { title: 'Query Builder', section: 'components', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}], description: null },
-    children: [
-      { path: 'design', component: QueryBuilderDesignPage },
+    children: [       { path: 'design', component: QueryBuilderDesignPage },
       { path: 'develop', component: QueryBuilderDevelopPage },
       { path: 'examples', component: QueryBuilderExamplesPage },
       { path: '', redirectTo: '/components/query builder/design', pathMatch: 'full' },
-    ]
-  },
-  { path: 'components/search', component: SearchPage, data: { title: 'Search', section: 'components' } },
-  { path: 'components/slides', component: SlidesPage, data: { title: 'Slides', section: 'components' } },
-  { path: 'components/switch', component: SwitchPage, data: { title: 'Switch', section: 'components' } },
-  { path: 'components/tabbed-group-picker', component: TabbedGroupPickerPage, data: { title: 'Tabbed Group Picker', section: 'components' } },
+    ]},
+  { path: 'components/search', component: SearchPage, data: { order: '3', title: 'Search', section: 'components' } },
+  { path: 'components/slides', component: SlidesPage, data: { order: '4', title: 'Slides', section: 'components' } },
+  { path: 'components/switch', component: SwitchPage, data: { order: '5', title: 'Switch', section: 'components' } },
+  { path: 'components/tabbed-group-picker', component: TabbedGroupPickerPage, data: { order: '6', title: 'Tabbed Group Picker', section: 'components' } },
   {
     path: 'components/tip well',
     component: TabsLayout,
     data: { title: 'Tip Well', section: 'components', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}], description: null },
-    children: [
-      { path: 'design', component: TipWellDesignPage },
+    children: [       { path: 'design', component: TipWellDesignPage },
       { path: 'develop', component: TipWellDevelopPage },
       { path: 'examples', component: TipWellExamplesPage },
       { path: '', redirectTo: '/components/tip well/design', pathMatch: 'full' },
-    ]
-  },
+    ]},
   {
     path: 'components/toaster',
     component: TabsLayout,
     data: { title: 'Toaster', section: 'components', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}], description: null },
-    children: [
-      { path: 'design', component: ToasterDesignPage },
+    children: [       { path: 'design', component: ToasterDesignPage },
       { path: 'develop', component: ToasterDevelopPage },
       { path: 'examples', component: ToasterExamplesPage },
       { path: '', redirectTo: '/components/toaster/design', pathMatch: 'full' },
-    ]
-  },
+    ]},
   {
     path: 'components/toolbar',
     component: TabsLayout,
     data: { title: 'Toolbar', section: 'components', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}], description: null },
-    children: [
-      { path: 'design', component: ToolbarDesignPage },
+    children: [       { path: 'design', component: ToolbarDesignPage },
       { path: 'develop', component: ToolbarDevelopPage },
       { path: 'examples', component: ToolbarExamplesPage },
       { path: '', redirectTo: '/components/toolbar/design', pathMatch: 'full' },
-    ]
-  },
+    ]},
   {
     path: 'components/tooltip',
     component: TabsLayout,
     data: { title: 'Tooltip', section: 'components', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}], description: null },
-    children: [
-      { path: 'design', component: TooltipDesignPage },
+    children: [       { path: 'design', component: TooltipDesignPage },
       { path: 'develop', component: TooltipDevelopPage },
       { path: 'examples', component: TooltipExamplesPage },
       { path: '', redirectTo: '/components/tooltip/design', pathMatch: 'full' },
-    ]
-  },
-  { path: 'components', component: ComponentsPage, data: { title: 'Components', section: 'src' } },
-  { path: 'design', component: DesignPage, data: { title: 'Design', section: 'src' } },
-  { path: 'form-controls', component: FormControlsPage, data: { title: 'Form Controls', section: 'src' } },
-  { path: 'home', component: HomePage, data: { title: 'Introduction', section: 'src' } },
-  { path: 'layouts', component: LayoutsPage, data: { title: 'Layouts', section: 'src' } },
-  { path: 'patterns', component: PatternsPage, data: { title: 'Patterns', section: 'src' } },
-  { path: 'templates', component: TemplatesPage, data: { title: 'Templates', section: 'src' } },
-  { path: 'design/colors', component: ColorsPage, data: { title: 'Colors', section: 'design' } },
-  { path: 'design/composition', component: CompositionPage, data: { title: 'Composition', section: 'design' } },
-  { path: 'design/iconography', component: IconographyPage, data: { title: 'Iconography', section: 'design' } },
-  { path: 'design/spacing', component: SpacingPage, data: { title: 'Spacing', section: 'design' } },
-  { path: 'design/typography', component: TypographyPage, data: { title: 'Typography', section: 'design' } },
-  { path: 'form-controls/checkbox', component: CheckboxPage, data: { title: 'Checkbox', section: 'form-controls' } },
-  { path: 'form-controls/ck-editor', component: CkEditorPage, data: { title: 'Ck Editor', section: 'form-controls' } },
-  { path: 'form-controls/color-picker', component: ColorPickerPage, data: { title: 'Color Picker', section: 'form-controls' } },
-  { path: 'form-controls/dynamic-form', component: DynamicFormPage, data: { title: 'Dynamic Form', section: 'form-controls' } },
-  { path: 'form-controls/form-groups', component: FormGroupsPage, data: { title: 'Form Groups', section: 'form-controls' } },
-  { path: 'form-controls/form', component: FormPage, data: { title: 'Form', section: 'form-controls' } },
-  { path: 'form-controls/multi-picker', component: MultiPickerPage, data: { title: 'Multi Picker', section: 'form-controls' } },
-  { path: 'form-controls/picker', component: PickerPage, data: { title: 'Picker', section: 'form-controls' } },
-  { path: 'form-controls/radio-buttons', component: RadioButtonsPage, data: { title: 'Radio Buttons', section: 'form-controls' } },
-  { path: 'form-controls/select', component: SelectPage, data: { title: 'Select', section: 'form-controls' } },
-  { path: 'form-controls/tiles', component: TilesPage, data: { title: 'Tiles', section: 'form-controls' } },
-  { path: 'form-controls/timezone', component: TimezonePage, data: { title: 'Timezone', section: 'form-controls' } },
-  { path: 'form-controls/value', component: ValuePage, data: { title: 'Value', section: 'form-controls' } },
+    ]},
+  { path: 'components', component: ComponentsPage, data: { order: '1', title: 'Components', section: 'src' } },
+  { path: 'design', component: DesignPage, data: { order: '9', title: 'Design', section: 'src' } },
+  { path: 'form-controls', component: FormControlsPage, data: { order: '17', title: 'Form Controls', section: 'src' } },
+  { path: 'home', component: HomePage, data: { order: '1', title: 'Introduction', section: 'src' } },
+  { path: 'layouts', component: LayoutsPage, data: { order: '29', title: 'Layouts', section: 'src' } },
+  { path: 'patterns', component: PatternsPage, data: { order: '33', title: 'Patterns', section: 'src' } },
+  { path: 'templates', component: TemplatesPage, data: { order: '34', title: 'Templates', section: 'src' } },
+  { path: 'design/colors', component: ColorsPage, data: { order: '7', title: 'Colors', section: 'design' } },
+  { path: 'design/composition', component: CompositionPage, data: { order: '8', title: 'Composition', section: 'design' } },
+  { path: 'design/iconography', component: IconographyPage, data: { order: '10', title: 'Iconography', section: 'design' } },
+  { path: 'design/spacing', component: SpacingPage, data: { order: '11', title: 'Spacing', section: 'design' } },
+  { path: 'design/typography', component: TypographyPage, data: { order: '12', title: 'Typography', section: 'design' } },
+  { path: 'form-controls/checkbox', component: CheckboxPage, data: { order: '13', title: 'Checkbox', section: 'form-controls' } },
+  { path: 'form-controls/ck-editor', component: CkEditorPage, data: { order: '14', title: 'Ck Editor', section: 'form-controls' } },
+  { path: 'form-controls/color-picker', component: ColorPickerPage, data: { order: '15', title: 'Color Picker', section: 'form-controls' } },
+  { path: 'form-controls/dynamic-form', component: DynamicFormPage, data: { order: '16', title: 'Dynamic Form', section: 'form-controls' } },
+  { path: 'form-controls/form-groups', component: FormGroupsPage, data: { order: '18', title: 'Form Groups', section: 'form-controls' } },
+  { path: 'form-controls/form', component: FormPage, data: { order: '19', title: 'Form', section: 'form-controls' } },
+  { path: 'form-controls/multi-picker', component: MultiPickerPage, data: { order: '20', title: 'Multi Picker', section: 'form-controls' } },
+  { path: 'form-controls/picker', component: PickerPage, data: { order: '21', title: 'Picker', section: 'form-controls' } },
+  { path: 'form-controls/radio-buttons', component: RadioButtonsPage, data: { order: '22', title: 'Radio Buttons', section: 'form-controls' } },
+  { path: 'form-controls/select', component: SelectPage, data: { order: '23', title: 'Select', section: 'form-controls' } },
+  { path: 'form-controls/tiles', component: TilesPage, data: { order: '24', title: 'Tiles', section: 'form-controls' } },
+  { path: 'form-controls/timezone', component: TimezonePage, data: { order: '25', title: 'Timezone', section: 'form-controls' } },
+  { path: 'form-controls/value', component: ValuePage, data: { order: '26', title: 'Value', section: 'form-controls' } },
   {
     path: 'form-controls/chips',
     component: TabsLayout,
     data: { title: 'Chips', section: 'form-controls', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}], description: null },
-    children: [
-      { path: 'design', component: ChipsDesignPage },
+    children: [       { path: 'design', component: ChipsDesignPage },
       { path: 'develop', component: ChipsDevelopPage },
       { path: 'examples', component: ChipsExamplesPage },
       { path: '', redirectTo: '/form-controls/chips/design', pathMatch: 'full' },
-    ]
-  },
+    ]},
   {
     path: 'form-controls/date picker',
     component: TabsLayout,
     data: { title: 'Date Picker', section: 'form-controls', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}], description: null },
-    children: [
-      { path: 'design', component: DatePickerDesignPage },
+    children: [       { path: 'design', component: DatePickerDesignPage },
       { path: 'develop', component: DatePickerDevelopPage },
       { path: 'examples', component: DatePickerExamplesPage },
       { path: '', redirectTo: '/form-controls/date picker/design', pathMatch: 'full' },
-    ]
-  },
+    ]},
   {
     path: 'form-controls/date time picker',
     component: TabsLayout,
     data: { title: 'Date Time Picker', section: 'form-controls', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}], description: null },
-    children: [
-      { path: 'design', component: DateTimePickerDesignPage },
+    children: [       { path: 'design', component: DateTimePickerDesignPage },
       { path: 'develop', component: DateTimePickerDevelopPage },
       { path: 'examples', component: DateTimePickerExamplesPage },
       { path: '', redirectTo: '/form-controls/date time picker/design', pathMatch: 'full' },
-    ]
-  },
+    ]},
   {
     path: 'form-controls/time picker',
     component: TabsLayout,
     data: { title: 'Time Picker', section: 'form-controls', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}], description: null },
-    children: [
-      { path: 'design', component: TimePickerDesignPage },
+    children: [       { path: 'design', component: TimePickerDesignPage },
       { path: 'develop', component: TimePickerDevelopPage },
       { path: 'examples', component: TimePickerExamplesPage },
       { path: '', redirectTo: '/form-controls/time picker/design', pathMatch: 'full' },
-    ]
-  },
+    ]},
   {
     path: 'layouts/card',
     component: TabsLayout,
     data: { title: 'Card', section: 'layouts', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}], description: CardDescriptionPage },
-    children: [
-      { path: 'design', component: CardDesignPage },
+    children: [       { path: 'design', component: CardDesignPage },
       { path: 'develop', component: CardDevelopPage },
       { path: 'examples', component: CardExamplesPage },
       { path: '', redirectTo: '/layouts/card/design', pathMatch: 'full' },
-    ]
-  },
-  { path: 'layouts/expansion', component: ExpansionPage, data: { title: 'Expansion', section: 'layouts' } },
-  { path: 'layouts/header', component: HeaderPage, data: { title: 'Header', section: 'layouts' } },
-  { path: 'layouts/list', component: ListPage, data: { title: 'List', section: 'layouts' } },
-  { path: 'layouts/sidenav', component: SidenavPage, data: { title: 'Sidenav', section: 'layouts' } },
-  { path: 'layouts/stepper', component: StepperPage, data: { title: 'Stepper', section: 'layouts' } },
+    ]},
+  { path: 'layouts/expansion', component: ExpansionPage, data: { order: '27', title: 'Expansion', section: 'layouts' } },
+  { path: 'layouts/header', component: HeaderPage, data: { order: '28', title: 'Header', section: 'layouts' } },
+  { path: 'layouts/list', component: ListPage, data: { order: '30', title: 'List', section: 'layouts' } },
+  { path: 'layouts/sidenav', component: SidenavPage, data: { order: '31', title: 'Sidenav', section: 'layouts' } },
+  { path: 'layouts/stepper', component: StepperPage, data: { order: '32', title: 'Stepper', section: 'layouts' } },
   {
     path: 'layouts/tabs',
     component: TabsLayout,
     data: { title: 'Tabs', section: 'layouts', pages: [{ title: 'Design', route: './design'},{ title: 'Develop', route: './develop'},{ title: 'Examples', route: './examples'}], description: null },
-    children: [
-      { path: 'design', component: TabsDesignPage },
+    children: [       { path: 'design', component: TabsDesignPage },
       { path: 'develop', component: TabsDevelopPage },
       { path: 'examples', component: TabsExamplesPage },
       { path: '', redirectTo: '/layouts/tabs/design', pathMatch: 'full' },
-    ]
-  },
+    ]},
   {
     path: 'patterns/patterns',
     component: TabsLayout,
     data: { title: 'Patterns', section: 'patterns', pages: [{ title: 'Test', route: './test'},{ title: 'Native Forms', route: './native-forms'}], description: null },
-    children: [
-      { path: 'test', component: PatternsTestPage },
+    children: [       { path: 'test', component: PatternsTestPage },
       { path: 'native-forms', component: PatternsNativeFormsPage },
       { path: '', redirectTo: '/patterns/patterns/test', pathMatch: 'full' },
-    ]
-  },
-  { path: 'updates/v6', component: v6Page, data: { title: 'v6', section: 'updates' } },
-  { path: 'updates/v7-announce', component: v7Page, data: { title: 'v7', section: 'updates' } },
-  { path: 'updates/v8-announce', component: v8Page, data: { title: 'v8', section: 'updates' } },
-  { path: 'updates/v9-announce', component: v9Page, data: { title: 'v9', section: 'updates', tag: 'new' } },
-  { path: 'utils/ace editor', component: AceEditorPage, data: { title: 'Ace Editor', section: 'utils', tag: 'deprecated' } },
-  { path: 'utils/code editor', component: CodeEditorPage, data: { title: 'Code Editor', section: 'utils', tag: 'new' } },
-  { path: 'utils/drag and drop', component: DragDropPage, data: { title: 'Drag and Drop', section: 'utils', tag: 'new' } },
-  { path: 'utils/field-interactions', component: FieldInteractionsPage, data: { title: 'Field Interactions', section: 'utils' } },
-  { path: 'utils/pipes', component: PipesPage, data: { title: 'Pipes', section: 'utils' } },
-  { path: 'utils/quick note', component: QuickNotePage, data: { title: 'Quick Note', section: 'utils' } },
-  { path: 'utils/security', component: SecurityPage, data: { title: 'Security', section: 'utils' } },
+    ]},
+  { path: 'updates/v10-announce', component: v10Page, data: { order: '1', title: 'v10', section: 'updates', tag: 'new' } },
+  { path: 'updates/v6', component: v6Page, data: { order: '5', title: 'v6', section: 'updates' } },
+  { path: 'updates/v7-announce', component: v7Page, data: { order: '4', title: 'v7', section: 'updates' } },
+  { path: 'updates/v8-announce', component: v8Page, data: { order: '3', title: 'v8', section: 'updates' } },
+  { path: 'updates/v9-announce', component: v9Page, data: { order: '2', title: 'v9', section: 'updates' } },
+  { path: 'utils/ace editor', component: AceEditorPage, data: { order: '1', title: 'Ace Editor', section: 'utils', tag: 'deprecated' } },
+  { path: 'utils/code editor', component: CodeEditorPage, data: { order: '1', title: 'Code Editor', section: 'utils', tag: 'new' } },
+  { path: 'utils/drag and drop', component: DragDropPage, data: { order: '1', title: 'Drag and Drop', section: 'utils', tag: 'new' } },
+  { path: 'utils/field-interactions', component: FieldInteractionsPage, data: { order: '35', title: 'Field Interactions', section: 'utils' } },
+  { path: 'utils/pipes', component: PipesPage, data: { order: '36', title: 'Pipes', section: 'utils' } },
+  { path: 'utils/quick note', component: QuickNotePage, data: { order: '1', title: 'Quick Note', section: 'utils' } },
+  { path: 'utils/security', component: SecurityPage, data: { order: '37', title: 'Security', section: 'utils' } },
   // Catch All
   { path: '**', redirectTo: '/home', data: {} },
 ];
 
 export const PAGE_LIST = [
-  AgendaDesignPage,AgendaDevelopPage,AgendaExamplesPage,AsideDesignPage,AsideDevelopPage,AsideExamplesPage,AutocompleteDesignPage,AutocompleteDevelopPage,AutocompleteExamplesPage,AvatarDesignPage,AvatarDevelopPage,AvatarExamplesPage,BreadcrumbDesignPage,BreadcrumbDevelopPage,BreadcrumbExamplesPage,ButtonDesignPage,ButtonDevelopPage,ButtonExamplesPage,CalendarDesignPage,CalendarDevelopPage,CalendarExamplesPage,ComponentsPage,DataTablePage,DropdownDesignPage,DropdownDevelopPage,DropdownExamplesPage,FieldDesignPage,FieldDevelopPage,FieldExamplesPage,IconDesignPage,IconDevelopPage,IconExamplesPage,LoadingDesignPage,LoadingDevelopPage,LoadingExamplesPage,MenuDesignPage,MenuDevelopPage,MenuExamplesPage,ModalDesignPage,ModalDevelopPage,ModalExamplesPage,NonIdealStateDesignPage,NonIdealStateDevelopPage,NonIdealStateExamplesPage,PopoverDesignPage,PopoverDevelopPage,PopoverExamplesPage,ProgressDesignPage,ProgressDevelopPage,ProgressExamplesPage,ProgressUsagePage,QueryBuilderDesignPage,QueryBuilderDevelopPage,QueryBuilderExamplesPage,SearchPage,SlidesPage,SwitchPage,TabbedGroupPickerPage,TipWellDesignPage,TipWellDevelopPage,TipWellExamplesPage,ToasterDesignPage,ToasterDevelopPage,ToasterExamplesPage,ToolbarDesignPage,ToolbarDevelopPage,ToolbarExamplesPage,TooltipDesignPage,TooltipDevelopPage,TooltipExamplesPage,ColorsPage,CompositionPage,DesignPage,IconographyPage,SpacingPage,TypographyPage,CheckboxPage,ChipsDesignPage,ChipsDevelopPage,ChipsExamplesPage,CkEditorPage,ColorPickerPage,DatePickerDesignPage,DatePickerDevelopPage,DatePickerExamplesPage,DateTimePickerDesignPage,DateTimePickerDevelopPage,DateTimePickerExamplesPage,DynamicFormPage,FormControlsPage,FormGroupsPage,FormPage,MultiPickerPage,PickerPage,RadioButtonsPage,SelectPage,TilesPage,TimePickerDesignPage,TimePickerDevelopPage,TimePickerExamplesPage,TimezonePage,ValuePage,HomePage,CardDescriptionPage,CardDesignPage,CardDevelopPage,CardExamplesPage,ExpansionPage,HeaderPage,LayoutsPage,ListPage,SidenavPage,StepperPage,TabsDesignPage,TabsDevelopPage,TabsExamplesPage,PatternsNativeFormsPage,PatternsTestPage,PatternsPage,TemplatesPage,v6Page,v7Page,v8Page,v9Page,AceEditorPage,CodeEditorPage,DragDropPage,FieldInteractionsPage,PipesPage,QuickNotePage,SecurityPage
+  AgendaDesignPage,AgendaDevelopPage,AgendaExamplesPage,AsideDesignPage,AsideDevelopPage,AsideExamplesPage,AutocompleteDesignPage,AutocompleteDevelopPage,AutocompleteExamplesPage,AvatarDesignPage,AvatarDevelopPage,AvatarExamplesPage,BreadcrumbDesignPage,BreadcrumbDevelopPage,BreadcrumbExamplesPage,ButtonDesignPage,ButtonDevelopPage,ButtonExamplesPage,CalendarDesignPage,CalendarDevelopPage,CalendarExamplesPage,ComponentsPage,DataTablePage,DropdownDesignPage,DropdownDevelopPage,DropdownExamplesPage,FieldDesignPage,FieldDevelopPage,FieldExamplesPage,IconDesignPage,IconDevelopPage,IconExamplesPage,LoadingDesignPage,LoadingDevelopPage,LoadingExamplesPage,MenuDesignPage,MenuDevelopPage,MenuExamplesPage,ModalDesignPage,ModalDevelopPage,ModalExamplesPage,NonIdealStateDesignPage,NonIdealStateDevelopPage,NonIdealStateExamplesPage,PopoverDesignPage,PopoverDevelopPage,PopoverExamplesPage,ProgressDesignPage,ProgressDevelopPage,ProgressExamplesPage,ProgressUsagePage,QueryBuilderDesignPage,QueryBuilderDevelopPage,QueryBuilderExamplesPage,SearchPage,SlidesPage,SwitchPage,TabbedGroupPickerPage,TipWellDesignPage,TipWellDevelopPage,TipWellExamplesPage,ToasterDesignPage,ToasterDevelopPage,ToasterExamplesPage,ToolbarDesignPage,ToolbarDevelopPage,ToolbarExamplesPage,TooltipDesignPage,TooltipDevelopPage,TooltipExamplesPage,ColorsPage,CompositionPage,DesignPage,IconographyPage,SpacingPage,TypographyPage,CheckboxPage,ChipsDesignPage,ChipsDevelopPage,ChipsExamplesPage,CkEditorPage,ColorPickerPage,DatePickerDesignPage,DatePickerDevelopPage,DatePickerExamplesPage,DateTimePickerDesignPage,DateTimePickerDevelopPage,DateTimePickerExamplesPage,DynamicFormPage,FormControlsPage,FormGroupsPage,FormPage,MultiPickerPage,PickerPage,RadioButtonsPage,SelectPage,TilesPage,TimePickerDesignPage,TimePickerDevelopPage,TimePickerExamplesPage,TimezonePage,ValuePage,HomePage,CardDescriptionPage,CardDesignPage,CardDevelopPage,CardExamplesPage,ExpansionPage,HeaderPage,LayoutsPage,ListPage,SidenavPage,StepperPage,TabsDesignPage,TabsDevelopPage,TabsExamplesPage,PatternsNativeFormsPage,PatternsTestPage,PatternsPage,TemplatesPage,v10Page,v6Page,v7Page,v8Page,v9Page,AceEditorPage,CodeEditorPage,DragDropPage,FieldInteractionsPage,PipesPage,QuickNotePage,SecurityPage
 ];
 
 @NgModule({

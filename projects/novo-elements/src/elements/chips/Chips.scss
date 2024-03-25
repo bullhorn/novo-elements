@@ -10,6 +10,13 @@
   transition: all 200ms ease-in-out;
   position: relative;
   padding: 2px 0;
+
+  .hidden-chips-toggle {
+    cursor: pointer;
+    padding-left: .5rem;
+    line-height: 2.7rem;
+  }
+
   &.with-value {
     margin-bottom: 20px;
   }
@@ -26,8 +33,16 @@
   &.disabled {
     border-bottom-style: dashed !important;
   }
+  .novo-chip-container {
+    flex: 1;
+    display: flex;
+    flex-flow: row wrap;
+    gap: 0.4rem;
+    align-items: center;
+  }
   .chip-input-container {
-    flex-grow: 4;
+    flex: 1 15rem;
+    padding-left: 1rem;
     input {
       padding-top: 0;
       border: none;
@@ -37,11 +52,6 @@
         outline: none;
       }
     }
-  }
-  .novo-chip-container {
-    display: flex;
-    flex-flow: row wrap;
-    gap: 0.4rem;
   }
   label.clear-all {
     flex: 1 100%;
