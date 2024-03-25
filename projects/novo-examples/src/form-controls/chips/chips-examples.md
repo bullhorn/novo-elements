@@ -52,3 +52,9 @@ Having custom templates makes it easy to customize the functionality of the pick
 By clicking on the <code>row-chips</code> element, the options list will be displayed.  Select any of the options by clicking on the item in the list.  The value selected will be added to the list of selected values as a new row. By clicking the delete icon at the end of the row, the row will be removed from the list of selected values.
     
 <code-example example="row-chips"></code-example>
+
+## Hide Chips Example
+
+Setting the `hiddenChipsLimit` property via the `source` Input will limit the number of chips shown to the `hiddenChipsLimit` set. A clickable suffix label will toggle the visibility of the hidden chips.
+
+<code-example example="hide-chips"></code-example>
