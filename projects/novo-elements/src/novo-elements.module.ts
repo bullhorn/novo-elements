@@ -2,7 +2,7 @@
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { NovoAceEditorModule, NovoCodeEditorModule, NovoDragulaModule, NovoDragulaService, NovoNovoCKEditorModule } from 'novo-elements/addons';
+import { NovoAceEditorModule, NovoCodeEditorModule, NovoNovoCKEditorModule } from 'novo-elements/addons';
 import {
   FormUtils,
   GooglePlacesModule, GooglePlacesService,
@@ -102,7 +102,6 @@ import {
     NovoSelectModule,
     NovoListModule,
     NovoSwitchModule,
-    NovoDragulaModule,
     NovoSliderModule,
     NovoPickerModule,
     NovoChipsModule,
@@ -147,7 +146,6 @@ import {
     { provide: ComponentUtils, useClass: ComponentUtils },
     { provide: DateFormatService, useClass: DateFormatService },
     { provide: NovoLabelService, useClass: NovoLabelService },
-    { provide: NovoDragulaService, useClass: NovoDragulaService },
     { provide: GooglePlacesService, useClass: GooglePlacesService },
     { provide: GlobalRef, useClass: BrowserGlobalRef },
     { provide: LocalStorageService, useClass: LocalStorageService },

@@ -29,7 +29,6 @@ const dependencies = {
   'novo-elements': '5.1.2',
   'core-js': '3.16.4',
   rxjs: '6.5.5',
-  '@bullhorn/dragula': '1.0.1',
   'ace-builds': '1.4.12',
   brace: '0.11.1',
   'classlist.js': '^1.1.20150312',
