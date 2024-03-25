@@ -5791,6 +5791,16 @@ export class TemplatesPage {
 <li>as of 4/24 there is a bug in the current ng2-dragula npm 5.0.1-5.0.2 releases around the required peer dependency angular versions, so you may need to override these in your package.json until it's fixed</li>
 </ul>
 <p>Other changes which may be relevant (such as the css changes) may be listed in the <a href="https://github.com/valor-software/ng2-dragula/tree/master">ng2-dragula readme</a>. Event return values and other changes can be discerned from the <a href="https://github.com/valor-software/ng2-dragula/blob/master/libs/ng2-dragula/src/components/dragula.service.ts">ng2-dragula DragulaService file</a>.</p>
+<h2 id="notable-changes">Notable changes <a href="https://bullhorn.github.io/novo-elements/docs/#/updates/v10-announce#notable-changes">#</a></h2>
+<ul>
+<li>update to ng17 <a href="https://github.com/bullhorn/novo-elements/pull/1501">#1501</a></li>
+<li>deleting the table component <a href="https://github.com/bullhorn/novo-elements/pull/1513">#1513</a></li>
+<li>bump follow-redirects from 1.15.4 to 1.15.6 <a href="https://github.com/bullhorn/novo-elements/pull/1520">#1520</a></li>
+<li>deleting dragula add-on <a href="https://github.com/bullhorn/novo-elements/pull/1517">#1517</a></li>
+<li>When handling AppBridge events, pass origin to handler <a href="https://github.com/bullhorn/novo-elements/pull/1509">#1509</a></li>
+<li>added new hidden chips feature to Chips picker <a href="https://github.com/bullhorn/novo-elements/pull/1521">#1521</a></li>
+<li>Fixes to an error in Control affecting maxlength fields <a href="https://github.com/bullhorn/novo-elements/pull/1518">#1518</a></li>
+</ul>
 `,
   host: { class: 'markdown-page' }
 })
