@@ -1,6 +1,6 @@
 // NG2
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
-import { Component, ElementRef, EventEmitter, forwardRef, Input, OnInit, Output, ViewChild, ViewContainerRef } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, EventEmitter, forwardRef, inject, Input, OnInit, Output, ViewChild, ViewContainerRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 // Vendor
 import { ReplaySubject } from 'rxjs';
@@ -121,6 +121,8 @@ export class NovoChipsElement implements OnInit, ControlValueAccessor {
   onModelChange: Function = () => {};
   onModelTouched: Function = () => {};
 
+  changeRef = inject(ChangeDetectorRef);
+
   constructor(public element: ElementRef, private componentUtils: ComponentUtils, public labels: NovoLabelService) {}
 
   ngOnInit() {
@@ -186,6 +188,7 @@ export class NovoChipsElement implements OnInit, ControlValueAccessor {
             }
           }
           this._finalizeItemValue();
+          this._updateOverlay();
         });
       }
     }
@@ -310,6 +313,18 @@ export class NovoChipsElement implements OnInit, ControlValueAccessor {
   private _propagateChanges(fallbackValue?: any): void {
     this.changed.emit({ value: this.value?.length ? this.value : '', rawValue: this.items });
     this.onModelChange(this.value);
+    // If we have an overlay showing, update its position and selection information
+    this._updateOverlay();    
+  }
+
+  private _updateOverlay() {
+    if (this.picker?.container?.overlayRef) {
+      setTimeout(() => {
+        this.picker.container.overlayRef.updatePosition();
+        this.picker.popup.instance.selected = this.picker.selected;
+        this.changeRef.detectChanges();
+      });
+    }
   }
 
   /**
