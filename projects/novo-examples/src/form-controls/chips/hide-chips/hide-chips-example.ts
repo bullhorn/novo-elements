@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { map } from 'rxjs/operators';
 
 /**
  * @title Hide Chips Example
@@ -119,7 +120,36 @@ export class HideChipsExample {
       hiddenChipsLimit: 3
     };
 
-    this.model = [];
+    this.model = [{
+      id: 12,
+      firstName: 'Alexander',
+      lastName: 'Wilson',
+      searchEntity: 'contact',
+    },
+    {
+      id: 13,
+      firstName: 'Charlotte',
+      lastName: 'Taylor',
+      searchEntity: 'candidate',
+    },
+    {
+      id: 14,
+      firstName: 'William',
+      lastName: 'Anderson',
+      searchEntity: 'contact',
+    },
+    {
+      id: 15,
+      firstName: 'Amelia',
+      lastName: 'Martinez',
+      searchEntity: 'candidate',
+    },
+    {
+      id: 16,
+      firstName: 'Daniel',
+      lastName: 'Jackson',
+      searchEntity: 'contact',
+    }];
   }
 
   onChanged(event) {
