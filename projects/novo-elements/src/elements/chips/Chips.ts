@@ -188,10 +188,12 @@ export class NovoChipsElement implements OnInit, ControlValueAccessor {
               this.items.push(value);
             }
           }
+          this.updateHiddenChips();
           this._finalizeItemValue();
         });
       }
     }
+    this.updateHiddenChips();
     this._finalizeItemValue();
   }
 
@@ -270,6 +272,7 @@ export class NovoChipsElement implements OnInit, ControlValueAccessor {
   }
 
   onKeyDown(event) {
+    console.debug({ event });
     if (event.key === Key.Backspace) {
       if (event.target && event.target.value.length === 0 && this.items.length) {
         if (event) {
