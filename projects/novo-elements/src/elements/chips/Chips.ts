@@ -30,7 +30,7 @@ const CHIPS_VALUE_ACCESSOR = {
         (deselect)="deselect($event, item)"
       >
         <novo-icon *ngIf="item | avatarType:type as avatarType" class="txc-{{ avatarType }}" novoChipAvatar>circle</novo-icon>
-        {{ item.label }}
+        <span class="chip-label">{{ item.label }}</span>
         <novo-icon *ngIf="!disablePickerInput" novoChipRemove>x</novo-icon>
       </novo-chip>
       <div *ngIf="hiddenChipsCount" class="hidden-chips-toggle" (click)="toggleHiddenChips()">
