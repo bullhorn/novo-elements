@@ -1,14 +1,15 @@
 // NG2
-import { async, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { ComponentUtils, NovoLabelService } from 'novo-elements/services';
 // App
 import { NovoChipsElement } from './Chips';
 import { NovoChipsModule } from './Chips.module';
+import { By } from '@angular/platform-browser';
 
 describe('Elements: NovoChipsElement', () => {
-  let fixture;
-  let component;
+  let fixture: ComponentFixture<NovoChipsElement>;
+  let component: NovoChipsElement;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -70,6 +71,21 @@ describe('Elements: NovoChipsElement', () => {
       component.add({ label: 'Test', value: 'test' });
       expect(component.value).toBe('Test (test)');
     });
+    it('should tell the picker overlay to update its position, if available', fakeAsync(() => {
+      component.source = {};
+      fixture.detectChanges();
+      fixture.debugElement.query(By.css('novo-picker > input')).nativeElement.focus();
+      fixture.detectChanges();
+      spyOn(component.picker.container.overlayRef, 'updatePosition');
+      expect(component.picker.popup.instance.selected).toEqual([]);
+
+      const newVal = { label: 'Test', value: 'test' };
+      fixture.debugElement.query(By.css('novo-picker')).triggerEventHandler('select', newVal);
+      tick();
+      expect(component.picker.container.overlayRef.updatePosition).toHaveBeenCalled();
+      // overlay selection has been updated
+      expect(component.picker.popup.instance.selected).toEqual([newVal]);
+    }));
   });
 
   describe('Method: updateHiddenChips()', () => {
