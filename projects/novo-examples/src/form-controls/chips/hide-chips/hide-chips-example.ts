@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { map } from 'rxjs/operators';
 
 /**
  * @title Hide Chips Example
