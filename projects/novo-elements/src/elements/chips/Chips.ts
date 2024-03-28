@@ -198,11 +198,13 @@ export class NovoChipsElement implements OnInit, ControlValueAccessor {
               this.items.push(value);
             }
           }
+          this.updateHiddenChips();
           this._finalizeItemValue();
           this._updateOverlay();
         });
       }
     }
+    this.updateHiddenChips();
     this._finalizeItemValue();
   }
 
