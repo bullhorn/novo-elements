@@ -16,6 +16,7 @@ export interface IDataTablePreferences {
 export enum APPLIED_SEARCH_TYPE {
   SAVED = 'saved',
   RECENT = 'recent',
+  NONE = 'none',
 }
 
 export interface IDataTableColumn<T> {
