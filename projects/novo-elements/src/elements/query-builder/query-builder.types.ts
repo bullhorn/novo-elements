@@ -5,13 +5,19 @@ export enum Conjunction {
   OR = 'or',
   NOT = 'not',
 }
+
 export type ConditionGroup = {
-  [key: string]: Condition[];
+  [K in Conjunction as `$${K}`]?: Condition[]
 };
+
 export interface Condition {
   field: string;
   operator: string;
   value: any;
+}
+
+export interface Criteria {
+  criteria: ConditionGroup[];
 }
 
 export interface BaseFieldDef {
