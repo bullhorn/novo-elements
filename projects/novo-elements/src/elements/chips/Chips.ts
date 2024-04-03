@@ -334,7 +334,6 @@ export class NovoChipsElement implements OnInit, ControlValueAccessor {
   private _propagateChanges(fallbackValue?: any): void {
     this.changed.emit({ value: this.value?.length ? this.value : '', rawValue: this.items });
     this.onModelChange(this.value);
-    // If we have an overlay showing, update its position and selection information
     this._updateOverlay();    
   }
 
