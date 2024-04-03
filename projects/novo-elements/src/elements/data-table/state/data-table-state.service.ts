@@ -2,7 +2,7 @@ import { EventEmitter, Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Helpers } from 'novo-elements/utils';
 import {
-  APPLIED_SEARCH_TYPE,
+  AppliedSearchType,
   IDataTableChangeEvent,
   IDataTableFilter,
   IDataTablePreferences,
@@ -36,7 +36,7 @@ export class DataTableState<T> {
   updates: EventEmitter<IDataTableChangeEvent> = new EventEmitter<IDataTableChangeEvent>();
   retainSelected: boolean = false;
   savedSearchName: string = undefined;
-  appliedSearchType: APPLIED_SEARCH_TYPE;
+  appliedSearchType: AppliedSearchType;
   displayedColumns: string[] = undefined;
 
   get userFiltered(): boolean {
