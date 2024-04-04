@@ -7,7 +7,7 @@ import {
   IDataTableFilter,
   IDataTablePreferences,
   IDataTableSelectionOption,
-  IDataTableSort
+  IDataTableSort,
 } from '../interfaces';
 import { NovoDataTableFilterUtils } from '../services/data-table-filter-utils';
 
@@ -168,6 +168,7 @@ export class DataTableState<T> {
       if (preferences.savedSearchName) {
         this.savedSearchName = preferences.savedSearchName;
       }
+
       if (preferences.appliedSearchType) {
         this.appliedSearchType = preferences.appliedSearchType;
       }
