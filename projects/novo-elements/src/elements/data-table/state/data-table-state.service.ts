@@ -1,7 +1,14 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Helpers } from 'novo-elements/utils';
-import { IDataTableChangeEvent, IDataTableFilter, IDataTablePreferences, IDataTableSelectionOption, IDataTableSort } from '../interfaces';
+import {
+  AppliedSearchType,
+  IDataTableChangeEvent,
+  IDataTableFilter,
+  IDataTablePreferences,
+  IDataTableSelectionOption,
+  IDataTableSort,
+} from '../interfaces';
 import { NovoDataTableFilterUtils } from '../services/data-table-filter-utils';
 
 @Injectable()
@@ -29,6 +36,7 @@ export class DataTableState<T> {
   updates: EventEmitter<IDataTableChangeEvent> = new EventEmitter<IDataTableChangeEvent>();
   retainSelected: boolean = false;
   savedSearchName: string = undefined;
+  appliedSearchType: AppliedSearchType;
   displayedColumns: string[] = undefined;
 
   get userFiltered(): boolean {
@@ -135,6 +143,7 @@ export class DataTableState<T> {
       globalSearch: this.globalSearch,
       where: this.where,
       savedSearchName: this.savedSearchName,
+      appliedSearchType: this.appliedSearchType,
     });
   }
 
@@ -159,6 +168,10 @@ export class DataTableState<T> {
       if (preferences.savedSearchName) {
         this.savedSearchName = preferences.savedSearchName;
       }
+
+      if (preferences.appliedSearchType) {
+        this.appliedSearchType = preferences.appliedSearchType;
+      }
     }
   }
 
@@ -172,6 +185,7 @@ export class DataTableState<T> {
       if (preferences.displayedColumns?.length) {
         this.displayedColumns = preferences.displayedColumns;
       }
+      this.appliedSearchType = preferences.appliedSearchType;
     }
 
     this.page = 0;
@@ -191,6 +205,7 @@ export class DataTableState<T> {
         where: this.where,
         savedSearchName: this.savedSearchName,
         displayedColumns: this.displayedColumns,
+        appliedSearchType: this.appliedSearchType,
       });
     }
   }

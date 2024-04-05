@@ -1,4 +1,5 @@
 // APP
+import { AppliedSearchType } from '../interfaces';
 import { DataTableState } from './data-table-state.service';
 
 describe('Service: DataTableState', () => {
@@ -425,6 +426,7 @@ describe('Service: DataTableState', () => {
       where: { query: 'updated', form: 'query' },
       savedSearchName: 'new saved search',
       displayedColumns: ['column 3', 'column 4'],
+      appliedSearchType: AppliedSearchType.Saved,
     };
     beforeEach(() => {
       spyOn(service.selectedRows, 'clear');
@@ -436,6 +438,7 @@ describe('Service: DataTableState', () => {
       service.where = { query: 'mock query', form: 'mock form' };
       service.savedSearchName = 'old saved search';
       service.displayedColumns = ['column 1', 'column 2'];
+      service.appliedSearchType = AppliedSearchType.None;
     });
     it('should call selectedRows.clear, resetSource.next and onSortFilterChange if retainSelected is true', () => {
       service.retainSelected = false;
@@ -459,6 +462,7 @@ describe('Service: DataTableState', () => {
       expect(service.where).toEqual({ query: 'updated', form: 'query' });
       expect(service.savedSearchName).toEqual('new saved search');
       expect(service.displayedColumns).toEqual(['column 3', 'column 4']);
+      expect(service.appliedSearchType).toEqual(AppliedSearchType.Saved);
       expect(service.page).toEqual(0);
       expect(service.retainSelected).toBeFalsy();
     });
@@ -470,6 +474,7 @@ describe('Service: DataTableState', () => {
       expect(service.where).toEqual({ query: 'mock query', form: 'mock form' });
       expect(service.savedSearchName).toEqual('old saved search');
       expect(service.displayedColumns).toEqual(['column 1', 'column 2']);
+      expect(service.appliedSearchType).toEqual(AppliedSearchType.None);
     });
     it('should not set displayedColumns if displayedColumns property is undefined', () => {
       service.setState({ name: 'undefined columns', displayedColumns: undefined });
