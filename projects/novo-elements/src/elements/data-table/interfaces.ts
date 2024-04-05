@@ -10,6 +10,13 @@ export interface IDataTablePreferences {
   displayedColumns?: string[];
   columnWidths?: { id: string; width: number }[];
   savedSearchName?: string;
+  appliedSearchType?: AppliedSearchType;
+}
+
+export enum AppliedSearchType {
+  Saved = 'saved',
+  Recent = 'recent',
+  None = 'none',
 }
 
 export interface IDataTableColumn<T> {
@@ -115,6 +122,7 @@ export interface IDataTableChangeEvent {
   where?: { query: string; form: any };
   savedSearchName?: string;
   displayedColumns?: string[];
+  appliedSearchType?: AppliedSearchType;
 }
 
 export interface IDataTableSelectionChangeEvent {
