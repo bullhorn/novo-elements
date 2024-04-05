@@ -53,6 +53,7 @@ const CHIPS_VALUE_ACCESSOR = {
           (blur)="onTouched($event)"
           [selected]="items"
           [width]="width"
+          [minWidth]="minWidth"
           [overrideElement]="overrideElement || element"
           [allowCustomValues]="allowCustomValues"
         >
@@ -100,6 +101,8 @@ export class NovoChipsElement implements OnInit, ControlValueAccessor {
   overrideElement: ElementRef;
   @Input()
   width: string;
+  @Input()
+  minWidth: string;
 
   @Output()
   changed: EventEmitter<any> = new EventEmitter();
