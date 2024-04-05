@@ -67,7 +67,7 @@ const DEFAULT_DEBOUNCE_TIME = 250;
       *ngIf="_value && !clearValueOnSelect && !disablePickerInput"
       (click)="clearValue(true)"
     ></i>
-    <novo-overlay-template class="picker-results-container" [parent]="element" position="above-below" (closing)="onOverlayClosed()">
+    <novo-overlay-template class="picker-results-container" [parent]="element" [width]="width" position="above-below" (closing)="onOverlayClosed()">
       <span #results></span>
       <ng-content></ng-content>
     </novo-overlay-template>
@@ -114,6 +114,8 @@ export class NovoPickerElement implements OnInit {
   maxlength: number;
   @Input()
   allowCustomValues = false;
+  @Input()
+  width: string;
 
   // Disable from typing into the picker (result template does everything)
   @Input()

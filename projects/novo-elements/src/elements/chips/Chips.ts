@@ -52,6 +52,7 @@ const CHIPS_VALUE_ACCESSOR = {
           (typing)="onTyping($event)"
           (blur)="onTouched($event)"
           [selected]="items"
+          [width]="width"
           [overrideElement]="overrideElement || element"
           [allowCustomValues]="allowCustomValues"
         >
@@ -97,6 +98,8 @@ export class NovoChipsElement implements OnInit, ControlValueAccessor {
   private _disablePickerInput: boolean = false;
   @Input()
   overrideElement: ElementRef;
+  @Input()
+  width: string;
 
   @Output()
   changed: EventEmitter<any> = new EventEmitter();
