@@ -487,6 +487,7 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
             globalSearch: event.globalSearch,
             where: event.where,
             savedSearchName: event.savedSearchName,
+            appliedSearchType: event.appliedSearchType,
           });
           this.performInteractions('change');
         } else {
