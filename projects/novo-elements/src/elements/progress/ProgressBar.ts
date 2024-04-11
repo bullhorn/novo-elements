@@ -79,7 +79,7 @@ export class NovoProgressBarElement implements ControlValueAccessor, OnInit {
     if (this.appearance === ProgressAppearance.RADIAL) {
       return `100%`;
     }
-    return isNaN(this._percent) ? `0%` : `${this._percent * 100}%`;
+    return `${this._percent * 100}%`;
   }
 
   @Output() change = new EventEmitter();
@@ -137,7 +137,11 @@ export class NovoProgressBarElement implements ControlValueAccessor, OnInit {
       this.progress.fitContainer = true;
     }
     if (this.progress) {
-      this._percent = this._value / this.progress.total;
+      if (this.progress.total > 0) {
+        this._percent = this._value / this.progress.total;
+      } else {
+        this._percent = 0;
+      }
       this.appearance = this.progress.appearance;
     }
   }
