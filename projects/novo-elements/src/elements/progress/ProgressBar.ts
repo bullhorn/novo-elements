@@ -97,7 +97,12 @@ export class NovoProgressBarElement implements ControlValueAccessor, OnInit {
     if (this.value !== value) {
       this._value = value;
       if (this.progress) {
-        this._percent = this.value / this.progress.total;
+        if (this.progress.total > 0) {
+          this._percent = this.value / this.progress.total;
+        } else {
+          this._percent = 0;
+        }
+
       } else {
         this._percent = value;
       }
