@@ -34,6 +34,11 @@ Selection retention can be configured to keep records selected across pagination
     [activeRowIdentifier]="selectedRecordId"
     [fixedHeader]="true"
     #basic>
+    <!-- Custom Header -->
+    <ng-template novoTemplate="customHeader">
+      <button theme="secondary"
+        (click)="configureColumns()">Configure</button>
+    </ng-template>
     <!-- Custom Actions -->
     <ng-template novoTemplate="customActions">
       <span>Total: {{ basic.dataSource.currentTotal }}</span>
