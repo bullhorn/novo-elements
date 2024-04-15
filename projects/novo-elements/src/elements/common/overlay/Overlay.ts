@@ -66,6 +66,8 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
   @Input()
   public width: number;
   @Input()
+  public minWidth: number;
+  @Input()
   public height: number;
   @Input()
   public closeOnSelect: boolean = true;
@@ -237,6 +239,10 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
       config.width = this.width;
     }
 
+    if (this.minWidth) {
+      config.minWidth = this.minWidth;
+    }
+
     if (this.height) {
       config.height = this.height;
     }
@@ -309,6 +315,9 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
     if (this.overlayRef) {
       if (!this.width) {
         this.overlayRef.getConfig().width = this.getHostWidth();
+      }
+      if (this.minWidth) {
+        this.overlayRef.getConfig().minWidth = this.minWidth;
       }
       if (this.height) {
         this.overlayRef.getConfig().height = this.height;
