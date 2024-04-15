@@ -281,7 +281,6 @@ import { DataTableState } from './state/data-table-state.service';
     *ngIf="paginationOptions?.onFooter && ((!(empty && !state.userFiltered) && !loading) || forceShowHeader)"
     [class.empty]="hideGlobalSearch && !paginationOptions && !templates['customActions']"
   >
-    <ng-container *ngTemplateOutlet="templates['customHeader']"></ng-container>
     <novo-data-table-pagination
       *ngIf="paginationOptions?.onFooter"
       [theme]="paginationOptions.theme"
