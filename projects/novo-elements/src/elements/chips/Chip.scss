@@ -55,6 +55,7 @@ $chip-spacing: (
   padding: $spacing-none $spacing-md;
   min-height: 2.4rem;
   height: 1px;
+  max-width: 100%;
 
   &.novo-chip-selectable {
     color: var(--selection);
