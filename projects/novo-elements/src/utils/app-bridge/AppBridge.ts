@@ -170,7 +170,8 @@ export class AppBridge {
         if (this._registeredFrames.length > 0) {
           this._registeredFrames.forEach((frame) => {
             // TODO: Should this make sure it doesn't echo the custom event back to the author?
-            this.postRobot.send(frame.source, MESSAGE_TYPES.CUSTOM_EVENT, event.data);
+            const data = { data: event.data.data, event: event.data.event };
+            this.postRobot.send(frame.source, MESSAGE_TYPES.CUSTOM_EVENT, data);
           });
         }
       }
