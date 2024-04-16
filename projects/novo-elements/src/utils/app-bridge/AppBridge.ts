@@ -73,8 +73,7 @@ export class AppBridge {
   protected _setupHandlers(): void {
 
     // map an object for all handlers, so that we can run some other actions before each of them
-    // @ts-ignore
-    const defaultMsgHandlers: { [msgType in MessageType]?: (evt: PostRobotEvent<any>) => Promise<unknown> } = {
+    const defaultMsgHandlers: { [msgType in MessageType]?: (evt: PostRobotEvent<any>) => Promise<unknown> } = ({
       // Register
       [MESSAGE_TYPES.REGISTER]: async (event) => {
         this._registeredFrames.push(event);
@@ -174,7 +173,7 @@ export class AppBridge {
           });
         }
       }
-    };
+    }) as any;
 
     Object.keys(defaultMsgHandlers).forEach(msgType => {
       this.postRobot.on(msgType, event => {
