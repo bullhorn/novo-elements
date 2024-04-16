@@ -6,3 +6,12 @@
 novo-data-table {
   height: 100%;
 }
+
+.custom-header-buttons {
+  display: flex;
+}
+
+.custom-header-buttons > * {
+  margin-right: .2rem;
+}
+
