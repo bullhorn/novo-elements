@@ -161,7 +161,7 @@ export class AppBridge {
         });
       },
       // Custom Events
-      [MESSAGE_TYPES.CUSTOM_EVENT]: async (event: PostRobotEvent<any>) => {
+      [MESSAGE_TYPES.CUSTOM_EVENT]: (event: PostRobotEvent<any>) => {
         if (this._eventListeners[event.data.event]) {
           this._eventListeners[event.data.event].forEach((listener) => {
             listener(event.data.data);
@@ -169,7 +169,6 @@ export class AppBridge {
         }
         if (this._registeredFrames.length > 0) {
           this._registeredFrames.forEach((frame) => {
-            // TODO: Should this make sure it doesn't echo the custom event back to the author?
             this.postRobot.send(frame.source, MESSAGE_TYPES.CUSTOM_EVENT, event.data);
           });
         }
@@ -225,7 +224,7 @@ export class AppBridge {
     } else {
       return this.postRobot.sendToParent(msgType, echoPacket || packet);
     }
-    
+
   }
 
   /**
