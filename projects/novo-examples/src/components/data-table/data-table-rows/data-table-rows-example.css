@@ -9,6 +9,7 @@ novo-data-table {
 
 .custom-header-buttons {
   display: flex;
+  align-items: center;
 }
 
 .custom-header-buttons > * {
