@@ -1,21 +1,111 @@
 // NG2
 import { HttpClient } from '@angular/common/http';
-import { AppBridgeHandler, AlleyLinkColors, IAppBridgeOpenEvent, IAppBridgeOpenListEvent, MESSAGE_TYPES, HTTP_VERBS } from './interfaces';
 
-type ValueOf<T> = T[keyof T];
+export enum AppBridgeHandler {
+  HTTP,
+  OPEN,
+  OPEN_LIST,
+  CLOSE,
+  REFRESH,
+  PIN,
+  REGISTER,
+  UPDATE,
+  REQUEST_DATA,
+  CALLBACK,
+  PING,
+}
 
-type MessageType = ValueOf<typeof MESSAGE_TYPES>;
-type HttpVerb = ValueOf<typeof HTTP_VERBS>;
+// record       - an individual entity record
+// add/fast-add - the add page for a new record
+// custom       - custom action that opens the url provided in data.url
+// preview      - the preview slideout available only in Novo
+export type NovoApps = 'record' | 'add' | 'fast-add' | 'slide-out-add' | 'custom' | 'preview';
+
+export type AlleyLinkColors =
+  | 'purple'
+  | 'green'
+  | 'blue'
+  | 'lead'
+  | 'candidate'
+  | 'contact'
+  | 'company'
+  | 'opportunity'
+  | 'job'
+  | 'billable-charge'
+  | 'earn-code'
+  | 'invoice-statement'
+  | 'job-code'
+  | 'payable-charge'
+  | 'sales-tax-rate'
+  | 'tax-rules'
+  | 'submission'
+  | 'placement'
+  | 'navigation'
+  | 'canvas'
+  | 'neutral'
+  | 'neutral-italic'
+  | 'initial'
+  | 'distributionList'
+  | 'contract';
+
+export interface IAppBridgeOpenEvent {
+  type: NovoApps;
+  entityType: string;
+  entityId?: string;
+  tab?: string;
+  data?: any;
+  passthrough?: string;
+}
+
+export type MosaicLists =
+  | 'Candidate'
+  | 'ClientContact'
+  | 'ClientCorporation'
+  | 'JobOrder'
+  | 'JobSubmission'
+  | 'JobPosting'
+  | 'Placement'
+  | 'Lead'
+  | 'Opportunity';
+
+export interface IAppBridgeOpenListEvent {
+  type: MosaicLists;
+  keywords: Array<string>;
+  criteria: any;
+}
+
+export type NovoDataType = 'entitlements' | 'settings' | 'user';
+
+export interface IAppBridgeRequestDataEvent {
+  type: NovoDataType;
+}
+
+const HTTP_VERBS = {
+  GET: 'get',
+  POST: 'post',
+  PUT: 'put',
+  DELETE: 'delete',
+};
+
+const MESSAGE_TYPES = {
+  REGISTER: 'register',
+  OPEN: 'open',
+  OPEN_LIST: 'openList',
+  CLOSE: 'close',
+  REFRESH: 'refresh',
+  PIN: 'pin',
+  PING: 'ping',
+  UPDATE: 'update',
+  HTTP_GET: 'httpGET',
+  HTTP_POST: 'httpPOST',
+  HTTP_PUT: 'httpPUT',
+  HTTP_DELETE: 'httpDELETE',
+  CUSTOM_EVENT: 'customEvent',
+  REQUEST_DATA: 'requestData',
+  CALLBACK: 'callback',
+};
 
 declare const postRobot: any;
-
-export interface PostRobotEvent<T> {
-  data: T;
-  // the URL of the origin window
-  origin: string;
-  // the Window object this event was sent from (be warned, you may not be able to access its properties)
-  source: Window;
-}
 
 export class AppBridgeService {
   create(name: string) {
@@ -40,14 +130,11 @@ export class AppBridge {
   private _tracing: boolean = false;
   private _eventListeners: any = {};
 
-  private postRobot: any;
-
   // Type?
-  constructor(traceName: string = 'AppBridge', postRobotRef?: any) {
+  constructor(traceName: string = 'AppBridge') {
     this.traceName = traceName;
-    this.postRobot = postRobotRef || /* global */ postRobot;
-    if (this.postRobot) {
-      this.postRobot.CONFIG.LOG_LEVEL = 'error';
+    if (postRobot) {
+      postRobot.CONFIG.LOG_LEVEL = 'error';
       try {
         this._setupHandlers();
       } catch (error) {
@@ -71,161 +158,122 @@ export class AppBridge {
   }
 
   protected _setupHandlers(): void {
-
-    // map an object for all handlers, so that we can run some other actions before each of them
-    const defaultMsgHandlers: { [msgType in MessageType]?: (evt: PostRobotEvent<any>) => Promise<unknown> } = {
-      // Register
-      [MESSAGE_TYPES.REGISTER]: async (event) => {
-        this._registeredFrames.push(event);
-        const windowName = await this.register(event.data);
-        return {windowName};
-      },
-
-      // Update
-      [MESSAGE_TYPES.UPDATE]: (event: PostRobotEvent<any>) => {
-        return this.update(event.data).then((success) => {
-          return { success };
-        });
-      },
-      // Open
-      [MESSAGE_TYPES.OPEN]: (event: PostRobotEvent<any>) => {
-        return this.open(event.data).then((success) => {
-          return { success };
-        });
-      },
-      [MESSAGE_TYPES.OPEN_LIST]: (event: PostRobotEvent<any>) => {
-        return this.openList(event.data).then((success) => {
-          return { success };
-        });
-      },
-      // Close
-      [MESSAGE_TYPES.CLOSE]: (event: PostRobotEvent<any>) => {
-        const index = this._registeredFrames.findIndex((frame) => frame.data.id === event.data.id);
-        if (index !== -1) {
-          this._registeredFrames.splice(index, 1);
-        }
-        return this.close(event.data).then(success => ({ success }));
-      },
-      // Refresh
-      [MESSAGE_TYPES.REFRESH]: (event: PostRobotEvent<any>) => {
-        return this.refresh(event.data).then((success) => {
-          return { success };
-        });
-      },
-      // PIN
-      [MESSAGE_TYPES.PIN]: (event: PostRobotEvent<any>) => {
-        return this.pin(event.data).then((success) => {
-          return { success };
-        });
-      },
-      // PING
-      [MESSAGE_TYPES.PING]: (event: PostRobotEvent<any>) => {
-        return this.httpGET('ping', undefined, event.data.origin).then((result) => {
-          return { data: result.data, error: result.error };
-        });
-      },
-      // REQUEST_DATA
-      [MESSAGE_TYPES.REQUEST_DATA]: (event: PostRobotEvent<any>) => {
-        return this.requestData(event.data).then((result) => {
-          return { data: result.data, error: result.error };
-        });
-      },
-      // CALLBACKS
-      [MESSAGE_TYPES.CALLBACK]: (event: PostRobotEvent<any>) => {
-        return this.callback(event.data).then((success) => {
-          return { success };
-        });
-      },
-      // HTTP-GET
-      [MESSAGE_TYPES.HTTP_GET]: (event: PostRobotEvent<any>) => {
-        return this.httpGET(event.data.relativeURL, undefined, event.data.origin).then((result) => {
-          return { data: result.data, error: result.error };
-        });
-      },
-      // HTTP-POST
-      [MESSAGE_TYPES.HTTP_POST]: (event: PostRobotEvent<any>) => {
-        return this.httpPOST(event.data.relativeURL, event.data.data, undefined, event.data.origin).then((result) => {
-          return { data: result.data, error: result.error };
-        });
-      },
-      // HTTP-PUT
-      [MESSAGE_TYPES.HTTP_PUT]: (event: PostRobotEvent<any>) => {
-        return this.httpPUT(event.data.relativeURL, event.data.data, undefined, event.data.origin).then((result) => {
-          return { data: result.data, error: result.error };
-        });
-      },
-      // HTTP-DELETE
-      [MESSAGE_TYPES.HTTP_DELETE]: (event: PostRobotEvent<any>) => {
-        return this.httpDELETE(event.data.relativeURL, undefined, event.data.origin).then((result) => {
-          return { data: result.data, error: result.error };
-        });
-      },
-      // Custom Events
-      [MESSAGE_TYPES.CUSTOM_EVENT]: async (event: PostRobotEvent<any>) => {
-        if (this._eventListeners[event.data.event]) {
-          this._eventListeners[event.data.event].forEach((listener) => {
-            listener(event.data.data);
-          });
-        }
-        if (this._registeredFrames.length > 0) {
-          this._registeredFrames.forEach((frame) => {
-            // TODO: Should this make sure it doesn't echo the custom event back to the author?
-            this.postRobot.send(frame.source, MESSAGE_TYPES.CUSTOM_EVENT, event.data);
-          });
-        }
-      }
-    };
-
-    Object.keys(defaultMsgHandlers).forEach(msgType => {
-      this.postRobot.on(msgType, event => {
-        this._trace(msgType, event);
-        const origin: string[] = Array.isArray(event.data.origin) ? event.data.origin : [];
-        if (event.origin !== this.windowOrigin()) {
-          origin.unshift(event.origin);
-        } else if (origin.indexOf(event.data.originTraceName) === -1)  {
-          origin.unshift(event.data.originTraceName);
-        }
-        event.data.origin = origin;
-        event.data.source = event.source;
-        return defaultMsgHandlers[msgType](event);
-      })
+    // Register
+    postRobot.on(MESSAGE_TYPES.REGISTER, (event) => {
+      this._trace(MESSAGE_TYPES.REGISTER, event);
+      this._registeredFrames.push(event);
+      return this.register(event.data).then((windowName) => {
+        return { windowName };
+      });
     });
-  }
-
-  protected windowOrigin() {
-    return window.location.origin;
-  }
-
-  handleMessage<T>({ msgType, handler, packet, echoPacket, resolveEventData }: {
-    msgType: MessageType,
-    handler: AppBridgeHandler,
-    packet: T,
-    echoPacket: any,
-    resolveEventData: (any) => boolean,
-  }): Promise<boolean> {
-    let returnPromise: Promise<any>;
-    if (this._handlers[handler]) {
-      // Should be directly returning a promise. However, as a fallback, provide callback arguments
-      let callbackSuccess, callbackFail;
-      returnPromise = new Promise((s, f) => {
-        callbackSuccess = s;
-        callbackFail = f;
+    // Update
+    postRobot.on(MESSAGE_TYPES.UPDATE, (event) => {
+      this._trace(MESSAGE_TYPES.UPDATE, event);
+      return this.update(event.data).then((success) => {
+        return { success };
       });
-      const handlerResult = this._handlers[handler](packet, callbackArg => {
-        if (callbackArg) {
-          callbackSuccess(true);
-        } else {
-          callbackFail(false);
-        }
+    });
+    // Open
+    postRobot.on(MESSAGE_TYPES.OPEN, (event) => {
+      this._trace(MESSAGE_TYPES.OPEN, event);
+      return this.open(event.data).then((success) => {
+        return { success };
       });
-      if (handlerResult && 'then' in handlerResult) {
-        returnPromise = handlerResult;
+    });
+    postRobot.on(MESSAGE_TYPES.OPEN_LIST, (event) => {
+      this._trace(MESSAGE_TYPES.OPEN_LIST, event);
+      return this.openList(event.data).then((success) => {
+        return { success };
+      });
+    });
+    // Close
+    postRobot.on(MESSAGE_TYPES.CLOSE, (event) => {
+      this._trace(MESSAGE_TYPES.CLOSE, event);
+      const index = this._registeredFrames.findIndex((frame) => frame.data.id === event.data.id);
+      if (index !== -1) {
+        this._registeredFrames.splice(index, 1);
       }
-      return returnPromise.then(result => true, () => false);
-    } else {
-      return this.postRobot.sendToParent(msgType, echoPacket || packet);
-    }
-    
+      return this.close(event.data).then((success) => {
+        return { success };
+      });
+    });
+    // Refresh
+    postRobot.on(MESSAGE_TYPES.REFRESH, (event) => {
+      this._trace(MESSAGE_TYPES.REFRESH, event);
+      return this.refresh(event.data).then((success) => {
+        return { success };
+      });
+    });
+    // PIN
+    postRobot.on(MESSAGE_TYPES.PIN, (event) => {
+      this._trace(MESSAGE_TYPES.PIN, event);
+      return this.pin(event.data).then((success) => {
+        return { success };
+      });
+    });
+    // PING
+    postRobot.on(MESSAGE_TYPES.PING, (event) => {
+      this._trace(MESSAGE_TYPES.PING, event);
+      return this.httpGET('ping').then((result) => {
+        return { data: result.data, error: result.error };
+      });
+    });
+    // REQUEST_DATA
+    postRobot.on(MESSAGE_TYPES.REQUEST_DATA, (event) => {
+      this._trace(MESSAGE_TYPES.REQUEST_DATA, event);
+      return this.requestData(event.data).then((result) => {
+        return { data: result.data, error: result.error };
+      });
+    });
+    // CALLBACKS
+    postRobot.on(MESSAGE_TYPES.CALLBACK, (event) => {
+      this._trace(MESSAGE_TYPES.CALLBACK, event);
+      return this.callback(event.data).then((success) => {
+        return { success };
+      });
+    });
+    // HTTP-GET
+    postRobot.on(MESSAGE_TYPES.HTTP_GET, (event) => {
+      this._trace(MESSAGE_TYPES.HTTP_GET, event);
+      return this.httpGET(event.data.relativeURL).then((result) => {
+        return { data: result.data, error: result.error };
+      });
+    });
+    // HTTP-POST
+    postRobot.on(MESSAGE_TYPES.HTTP_POST, (event) => {
+      this._trace(MESSAGE_TYPES.HTTP_POST, event);
+      return this.httpPOST(event.data.relativeURL, event.data.data).then((result) => {
+        return { data: result.data, error: result.error };
+      });
+    });
+    // HTTP-PUT
+    postRobot.on(MESSAGE_TYPES.HTTP_PUT, (event) => {
+      this._trace(MESSAGE_TYPES.HTTP_PUT, event);
+      return this.httpPUT(event.data.relativeURL, event.data.data).then((result) => {
+        return { data: result.data, error: result.error };
+      });
+    });
+    // HTTP-DELETE
+    postRobot.on(MESSAGE_TYPES.HTTP_DELETE, (event) => {
+      this._trace(MESSAGE_TYPES.HTTP_DELETE, event);
+      return this.httpDELETE(event.data.relativeURL).then((result) => {
+        return { data: result.data, error: result.error };
+      });
+    });
+    // Custom Events
+    postRobot.on(MESSAGE_TYPES.CUSTOM_EVENT, (event) => {
+      this._trace(MESSAGE_TYPES.CUSTOM_EVENT, event);
+      if (this._eventListeners[event.data.event]) {
+        this._eventListeners[event.data.event].forEach((listener) => {
+          listener(event.data.data);
+        });
+      }
+      if (this._registeredFrames.length > 0) {
+        this._registeredFrames.forEach((frame) => {
+          postRobot.send(frame.source, MESSAGE_TYPES.CUSTOM_EVENT, event.data);
+        });
+      }
+    });
   }
 
   /**
@@ -244,7 +292,7 @@ export class AppBridge {
         });
       } else {
         Object.assign(packet, { id: this.id, windowName: this.windowName });
-        this.postRobot
+        postRobot
           .sendToParent(MESSAGE_TYPES.OPEN, packet)
           .then((event) => {
             this._trace(`${MESSAGE_TYPES.OPEN} (callback)`, event);
@@ -278,7 +326,7 @@ export class AppBridge {
       } else {
         const openListPacket = {};
         Object.assign(openListPacket, { type: 'List', entityType: packet.type, keywords: packet.keywords, criteria: packet.criteria });
-        this.postRobot
+        postRobot
           .sendToParent(MESSAGE_TYPES.OPEN_LIST, packet)
           .then((event) => {
             this._trace(`${MESSAGE_TYPES.OPEN_LIST} (callback)`, event);
@@ -313,7 +361,7 @@ export class AppBridge {
         });
       } else {
         Object.assign(packet, { id: this.id, windowName: this.windowName });
-        this.postRobot
+        postRobot
           .sendToParent(MESSAGE_TYPES.UPDATE, packet)
           .then((event) => {
             this._trace(`${MESSAGE_TYPES.UPDATE} (callback)`, event);
@@ -348,7 +396,7 @@ export class AppBridge {
           console.info('[AppBridge] - close(packet) is deprecated! Please just use close()!'); // tslint:disable-line
         }
         const realPacket = { id: this.id, windowName: this.windowName };
-        this.postRobot
+        postRobot
           .sendToParent(MESSAGE_TYPES.CLOSE, realPacket)
           .then((event) => {
             this._trace(`${MESSAGE_TYPES.CLOSE} (callback)`, event);
@@ -383,7 +431,7 @@ export class AppBridge {
           console.info('[AppBridge] - refresh(packet) is deprecated! Please just use refresh()!'); // tslint:disable-line
         }
         const realPacket = { id: this.id, windowName: this.windowName };
-        this.postRobot
+        postRobot
           .sendToParent(MESSAGE_TYPES.REFRESH, realPacket)
           .then((event) => {
             this._trace(`${MESSAGE_TYPES.REFRESH} (callback)`, event);
@@ -407,7 +455,7 @@ export class AppBridge {
           resolve({ data, error });
         });
       } else {
-        this.postRobot
+        postRobot
           .sendToParent(MESSAGE_TYPES.PING, {})
           .then((event: any) => {
             resolve({ data: event.data.data, error: event.data.error });
@@ -437,7 +485,7 @@ export class AppBridge {
           console.info('[AppBridge] - pin(packet) is deprecated! Please just use pin()!'); // tslint:disable-line
         }
         const realPacket = { id: this.id, windowName: this.windowName };
-        this.postRobot
+        postRobot
           .sendToParent(MESSAGE_TYPES.PIN, realPacket)
           .then((event) => {
             this._trace(`${MESSAGE_TYPES.PIN} (callback)`, event);
@@ -470,7 +518,7 @@ export class AppBridge {
         });
       } else {
         Object.assign(packet, { id: this.id, windowName: this.windowName });
-        this.postRobot
+        postRobot
           .sendToParent(MESSAGE_TYPES.REQUEST_DATA, packet)
           .then((event) => {
             this._trace(`${MESSAGE_TYPES.REQUEST_DATA} (callback)`, event);
@@ -503,7 +551,7 @@ export class AppBridge {
         });
       } else {
         Object.assign(packet, { id: this.id, windowName: this.windowName });
-        this.postRobot
+        postRobot
           .sendToParent(MESSAGE_TYPES.CALLBACK, packet)
           .then((event) => {
             this._trace(`${MESSAGE_TYPES.CALLBACK} (callback)`, event);
@@ -536,7 +584,7 @@ export class AppBridge {
         });
       } else {
         Object.assign(packet, { id: this.id });
-        this.postRobot
+        postRobot
           .sendToParent(MESSAGE_TYPES.REGISTER, packet)
           .then((event) => {
             this._trace(`${MESSAGE_TYPES.REGISTER} (callback)`, event);
@@ -557,19 +605,16 @@ export class AppBridge {
 
   /**
    * Fires or responds to an HTTP_GET event
-   * @param relativeURL string - URL to fetch, relative to the mainframe URL
-   * @param timeout - how long to attempt the request before reporting an error
-   * @param originStack - the domain of the previous frame(s) the request originated from
    */
-  public httpGET(relativeURL: string, timeout: number = 10000, originStack?: string[]): Promise<any> {
+  public httpGET(relativeURL: string, timeout: number = 10000): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       if (this._handlers[AppBridgeHandler.HTTP]) {
-        this._handlers[AppBridgeHandler.HTTP]({ verb: HTTP_VERBS.GET, relativeURL, origin: originStack || [this.traceName] }, (data: any, error: any) => {
+        this._handlers[AppBridgeHandler.HTTP]({ verb: HTTP_VERBS.GET, relativeURL }, (data: any, error: any) => {
           resolve({ data, error });
         });
       } else {
-        this.postRobot
-          .sendToParent(MESSAGE_TYPES.HTTP_GET, { relativeURL, origin: originStack, originTraceName: this.traceName }, { timeout })
+        postRobot
+          .sendToParent(MESSAGE_TYPES.HTTP_GET, { relativeURL }, { timeout })
           .then((event: any) => {
             resolve({ data: event.data.data, error: event.data.error });
           })
@@ -582,20 +627,16 @@ export class AppBridge {
 
   /**
    * Fires or responds to an HTTP_POST event
-   * @param relativeURL string - URL to fetch, relative to the mainframe URL
-   * @param postData any - packet of data to send with the event
-   * @param timeout - how long to attempt the request before reporting an error
-   * @param originStack - the domain of the previous frame(s) the request originated from
    */
-  public httpPOST(relativeURL: string, postData: any, timeout: number = 10000, originStack?: string[]): Promise<any> {
+  public httpPOST(relativeURL: string, postData: any, timeout: number = 10000): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       if (this._handlers[AppBridgeHandler.HTTP]) {
-        this._handlers[AppBridgeHandler.HTTP]({ verb: HTTP_VERBS.POST, relativeURL, data: postData, origin: originStack || [this.traceName] }, (data: any, error: any) => {
+        this._handlers[AppBridgeHandler.HTTP]({ verb: HTTP_VERBS.POST, relativeURL, data: postData }, (data: any, error: any) => {
           resolve({ data, error });
         });
       } else {
-        this.postRobot
-          .sendToParent(MESSAGE_TYPES.HTTP_POST, { relativeURL, data: postData, origin: originStack, originTraceName: this.traceName }, { timeout })
+        postRobot
+          .sendToParent(MESSAGE_TYPES.HTTP_POST, { relativeURL, data: postData }, { timeout })
           .then((event: any) => {
             resolve({ data: event.data.data, error: event.data.error });
           })
@@ -608,20 +649,16 @@ export class AppBridge {
 
   /**
    * Fires or responds to an HTTP_PUT event
-   * @param relativeURL string - URL to fetch, relative to the mainframe URL
-   * @param packet any - packet of data to send with the event
-   * @param timeout - how long to attempt the request before reporting an error
-   * @param originStack - the domain of the previous frame(s) the request originated from
    */
-  public httpPUT(relativeURL: string, putData: any, timeout: number = 10000, originStack?: string[]): Promise<any> {
+  public httpPUT(relativeURL: string, putData: any, timeout: number = 10000): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       if (this._handlers[AppBridgeHandler.HTTP]) {
-        this._handlers[AppBridgeHandler.HTTP]({ verb: HTTP_VERBS.PUT, relativeURL, data: putData, origin: originStack || [this.traceName] }, (data: any, error: any) => {
+        this._handlers[AppBridgeHandler.HTTP]({ verb: HTTP_VERBS.PUT, relativeURL, data: putData }, (data: any, error: any) => {
           resolve({ data, error });
         });
       } else {
-        this.postRobot
-          .sendToParent(MESSAGE_TYPES.HTTP_PUT, { relativeURL, data: putData, origin: originStack, originTraceName: this.traceName }, { timeout })
+        postRobot
+          .sendToParent(MESSAGE_TYPES.HTTP_PUT, { relativeURL, data: putData }, { timeout })
           .then((event: any) => {
             resolve({ data: event.data.data, error: event.data.error });
           })
@@ -634,19 +671,16 @@ export class AppBridge {
 
   /**
    * Fires or responds to an HTTP_DELETE event
-   * @param relativeURL string - URL to fetch, relative to the mainframe URL
-   * @param timeout - how long to attempt the request before reporting an error
-   * @param originStack - the domain of the previous frame(s) the request originated from
    */
-  public httpDELETE(relativeURL: string, timeout: number = 10000, originStack?: string[]): Promise<any> {
+  public httpDELETE(relativeURL: string, timeout: number = 10000): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       if (this._handlers[AppBridgeHandler.HTTP]) {
-        this._handlers[AppBridgeHandler.HTTP]({ verb: HTTP_VERBS.DELETE, relativeURL, origin: originStack || [this.traceName] }, (data: any, error: any) => {
+        this._handlers[AppBridgeHandler.HTTP]({ verb: HTTP_VERBS.DELETE, relativeURL }, (data: any, error: any) => {
           resolve({ data, error });
         });
       } else {
-        this.postRobot
-          .sendToParent(MESSAGE_TYPES.HTTP_DELETE, { relativeURL, origin: originStack, originTraceName: this.traceName }, { timeout })
+        postRobot
+          .sendToParent(MESSAGE_TYPES.HTTP_DELETE, { relativeURL }, { timeout })
           .then((event: any) => {
             resolve({ data: event.data.data, error: event.data.error });
           })
@@ -664,7 +698,7 @@ export class AppBridge {
    */
   public fireEvent(event: string, data: any): Promise<any> {
     return new Promise<any>((resolve, reject) => {
-      this.postRobot
+      postRobot
         .sendToParent(MESSAGE_TYPES.CUSTOM_EVENT, { event, data })
         .then((e: any) => {
           resolve(e);
@@ -683,7 +717,7 @@ export class AppBridge {
   public fireEventToChildren(event: string, data: any): void {
     if (this._registeredFrames.length > 0) {
       this._registeredFrames.forEach((frame) => {
-        this.postRobot.send(frame.source, MESSAGE_TYPES.CUSTOM_EVENT, {
+        postRobot.send(frame.source, MESSAGE_TYPES.CUSTOM_EVENT, {
           event,
           eventType: event,
           data,
@@ -702,7 +736,7 @@ export class AppBridge {
     if (source instanceof HTMLIFrameElement) {
       source = source.contentWindow;
     }
-    this.postRobot.send(source, MESSAGE_TYPES.CUSTOM_EVENT, { event, data });
+    postRobot.send(source, MESSAGE_TYPES.CUSTOM_EVENT, { event, data });
   }
 
   /**
