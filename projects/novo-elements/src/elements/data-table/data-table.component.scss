@@ -357,7 +357,9 @@ novo-data-table {
     align-items: center;
     flex-shrink: 0;
     border-bottom: 1px solid var(--border, $off-white);
-    justify-content: space-between;
+    &.pagination-footer {
+      justify-content: space-between;
+    }
     &.empty {
       padding: 0;
     }
