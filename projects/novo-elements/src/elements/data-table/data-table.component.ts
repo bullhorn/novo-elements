@@ -279,7 +279,7 @@ import { DataTableState } from './state/data-table-state.service';
     <!-- CUSTOM CELLS PASSED IN -->
     <footer
       *ngIf="paginationOptions?.onFooter && ((!(empty && !state.userFiltered) && !loading) || forceShowHeader)"
-      [class.empty]="hideGlobalSearch && !paginationOptions && !templates['customActions']"
+      [class.empty]="!paginationOptions"
     >
       <novo-data-table-pagination
         *ngIf="paginationOptions?.onFooter"
