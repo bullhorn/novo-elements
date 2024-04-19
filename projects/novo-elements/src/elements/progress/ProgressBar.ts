@@ -97,7 +97,7 @@ export class NovoProgressBarElement implements ControlValueAccessor, OnInit {
     if (this.value !== value) {
       this._value = value;
       if (this.progress) {
-        this._percent = this.value / this.progress.total;
+        this._percent = this.progress.total > 0 ? this._value / this.progress.total : 0;
       } else {
         this._percent = value;
       }
@@ -132,7 +132,7 @@ export class NovoProgressBarElement implements ControlValueAccessor, OnInit {
       this.progress.fitContainer = true;
     }
     if (this.progress) {
-      this._percent = this._value / this.progress.total;
+      this._percent = this.progress.total > 0 ? this._value / this.progress.total : 0;
       this.appearance = this.progress.appearance;
     }
   }
