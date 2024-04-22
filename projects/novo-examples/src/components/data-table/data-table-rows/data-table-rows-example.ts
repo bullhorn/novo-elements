@@ -40,6 +40,11 @@ export class DataTableRowsExample implements AfterViewInit {
     { label: 'Standard', value: 'standard' },
     { label: 'Basic', value: 'basic' },
   ];
+  public paginationPlacementOptions: any[] = [
+    { label: 'Top', value: false },
+    { label: 'Bottom', value: true },
+  ];
+  public loadedPaginationPlacement: boolean = false;
   public selectionOptions: IDataTableSelectionOption[] = [];
   public loadedPaginationType: string = 'standard';
   public globalSearchOptions: any[] = [
@@ -362,6 +367,11 @@ export class DataTableRowsExample implements AfterViewInit {
 
   public switchPaginationType(type: 'basic' | 'standard') {
     this.sharedPaginationOptions = Object.assign({}, this.sharedPaginationOptions, { theme: type });
+    this.ref.detectChanges();
+  }
+
+  public switchPaginationPlacement(onFooter: boolean) {
+    this.sharedPaginationOptions = Object.assign({}, this.sharedPaginationOptions, { onFooter });
     this.ref.detectChanges();
   }
 
