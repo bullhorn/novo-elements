@@ -34,6 +34,11 @@ export class DataTableServiceExample {
     { label: 'Basic', value: 'basic' },
   ];
   public loadedPaginationType: string = 'standard';
+  public paginationPlacementOptions: any[] = [
+    { label: 'Top', value: false },
+    { label: 'Bottom', value: true },
+  ];
+  public loadedPaginationPlacement: boolean = false;
   public globalSearchOptions: any[] = [
     { label: 'Show', value: true },
     { label: 'Hide', value: false },
@@ -312,6 +317,11 @@ export class DataTableServiceExample {
   }
   public switchPaginationType(type: 'basic' | 'standard') {
     this.sharedPaginationOptions = Object.assign({}, this.sharedPaginationOptions, { theme: type });
+    this.ref.detectChanges();
+  }
+
+  public switchPaginationPlacement(onFooter: boolean) {
+    this.sharedPaginationOptions = Object.assign({}, this.sharedPaginationOptions, { onFooter });
     this.ref.detectChanges();
   }
 
