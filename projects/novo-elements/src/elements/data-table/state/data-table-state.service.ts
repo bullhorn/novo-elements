@@ -24,7 +24,7 @@ export class DataTableState<T> {
 
   sort: IDataTableSort = undefined;
   filter: IDataTableFilter | IDataTableFilter[] = undefined;
-  where: { query: string; form: any } = undefined;
+  where: { query: string; criteria?: any; form: any } = undefined; // TODO: Adaptive syntax
   page: number = 0;
   pageSize: number = undefined;
   globalSearch: string = undefined;

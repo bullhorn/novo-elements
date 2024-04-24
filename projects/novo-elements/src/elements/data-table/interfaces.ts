@@ -4,8 +4,7 @@ export interface IDataTablePreferences {
   name: string;
   sort?: IDataTableSort;
   filter?: IDataTableFilter | IDataTableFilter[];
-  where?: { query: string; form: any };
-  criteria?: any; // TODO: Add adaptive query criteria syntax here, coming from the Bullhorn Types repo
+  where?: { query: string; criteria?: any; form: any }; // TODO: Add adaptive query criteria syntax here, coming from the Bullhorn Types repo
   globalSearch?: any;
   pageSize?: number;
   displayedColumns?: string[];
