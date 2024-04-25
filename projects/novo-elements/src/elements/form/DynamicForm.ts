@@ -188,10 +188,11 @@ export class NovoDynamicFormElement implements OnChanges, OnInit, AfterContentIn
   }
 
   public showAllFields(): void {
+    debugger;
     this.form.fieldsets.forEach((fieldset) => {
       fieldset.controls.forEach((control) => {
         const ctl = this.form.controls[control.key];
-        if (!this.fieldsAlreadyHidden?.includes(control.key)) {
+        if (this.fieldsAlreadyHidden && !this.fieldsAlreadyHidden?.includes(control.key)) {
           ctl.hidden = false;
         }
       });
@@ -201,6 +202,7 @@ export class NovoDynamicFormElement implements OnChanges, OnInit, AfterContentIn
   }
 
   public showOnlyRequired(hideRequiredWithValue): void {
+    debugger;
     this.fieldsAlreadyHidden = [];
     this.form.fieldsets.forEach((fieldset) => {
       fieldset.controls.forEach((control) => {
