@@ -25,7 +25,6 @@
     </div>
     <div class="tabbed-group-picker-column right">
       <div class="quick-select" *ngIf="quickSelectConfig && !(filterText | async)">
-        <!-- <div class="quick-select-label">{{ quickSelectConfig.label }}</div> -->
         <novo-optgroup class="quick-select-list" [label]="quickSelectConfig.label">
           <novo-option
             class="quick-select-item"
@@ -35,11 +34,6 @@
             (click)="quickSelect.selected = !quickSelect.selected; onItemToggled(quickSelect)"
             novoInert>
             {{quickSelect.label}}
-            <!-- <novo-checkbox
-              [label]="quickSelect.label"
-              [name]="'selected'"
-              [(ngModel)]="quickSelect.selected"
-              (ngModelChange)="onItemToggled(quickSelect)"></novo-checkbox> -->
           </novo-option>
         </novo-optgroup>
       </div>
@@ -56,14 +50,6 @@
             (click)="item.selected = !item.selected; onItemToggled(item)"
             novoInert>
             {{item[displayTab.labelField]}}
-
-            <!-- <novo-checkbox
-              [label]="item[displayTab.labelField]"
-              [name]="'selected'"
-              [indeterminate]="item.indeterminate"
-              [(ngModel)]="item.selected"
-              (ngModelChange)="onItemToggled(item)">
-            </novo-checkbox> -->
           </novo-option>
         </cdk-virtual-scroll-viewport>
       </novo-optgroup>
