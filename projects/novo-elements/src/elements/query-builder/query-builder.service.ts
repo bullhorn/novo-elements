@@ -78,11 +78,11 @@ export class QueryBuilderService {
 
   getConjunctionLabel(conjunction: string) {
     switch (conjunction.replace('$', '').toLowerCase()) {
-      case Conjunction.OR:
+      case Conjunction.Or:
         return this.labels.or;
-      case Conjunction.NOT:
+      case Conjunction.Not:
         return this.labels.not;
-      case Conjunction.AND:
+      case Conjunction.And:
       default:
         return this.labels.and;
     }

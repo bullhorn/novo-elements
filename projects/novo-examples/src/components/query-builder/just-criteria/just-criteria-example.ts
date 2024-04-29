@@ -51,7 +51,7 @@ export class CustomPickerConditionDef extends AbstractConditionFieldDef implemen
         // filter((res) => res.length > 2),
         // Time in milliseconds between key events
         debounceTime(500),
-        // If previous query is diffent from current
+        // If previous query is different from current
         distinctUntilChanged(),
         takeUntil(this._onDestroy),
       )
@@ -79,9 +79,9 @@ export class JustCriteriaExample implements OnInit {
   queryForm: AbstractControl;
   config: any = null;
 
-  and = [Conjunction.AND];
-  andOr = [Conjunction.AND, Conjunction.OR];
-  andOrNot = [Conjunction.AND, Conjunction.OR, Conjunction.NOT];
+  and = [Conjunction.And];
+  andOr = [Conjunction.And, Conjunction.Or];
+  andOrNot = [Conjunction.And, Conjunction.Or, Conjunction.Not];
 
   editTypeFn = (field: any) => {
     if (field.optionsType === 'Brewery') return 'custom';
