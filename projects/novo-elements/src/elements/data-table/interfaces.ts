@@ -4,7 +4,7 @@ export interface IDataTablePreferences {
   name: string;
   sort?: IDataTableSort;
   filter?: IDataTableFilter | IDataTableFilter[];
-  where?: { query: string; criteria?: any; form: any }; // TODO: Add adaptive query criteria syntax here, coming from the Bullhorn Types repo
+  where?: { query: string; criteria?: AdaptiveCriteria; form: any[] };
   globalSearch?: any;
   pageSize?: number;
   displayedColumns?: string[];
@@ -167,3 +167,65 @@ export interface IDataTableService<T> {
 }
 
 export interface IDataTableCell<T> {}
+
+/**
+ * Adaptive criteria syntax is a json representation of a search or query string that supports all current and future search formats.
+ */
+export interface AdaptiveQuery {
+  criteria: AdaptiveCriteria;
+}
+
+export type AdaptiveCriteria = AdaptiveCondition | AdaptiveConjunction;
+
+/**
+ * Only a single field is valid.
+ * Combine multiple fields with conjunctions, not sibling properties.
+ * If multiple sibling properties are used in a condition, errors may occur in translation.
+ */
+export interface AdaptiveCondition {
+  [fieldName: string]: AdaptiveConditionOperatorObject;
+}
+
+/**
+ * Only a single operator for a condition is valid.
+ * Combine multiple operators with conjunctions, not sibling properties.
+ * If multiple sibling operators are used in a condition, only the first will be used.
+ */
+export type AdaptiveConditionOperatorObject = {
+  [K in AdaptiveOperator as `${K}`]?: AdaptiveValue;
+};
+
+export type AdaptiveValue = string | string[] | boolean | boolean[] | number | number[];
+
+export type AdaptiveConjunction = AdaptiveAnd | AdaptiveOr | AdaptiveNot;
+
+export interface AdaptiveAnd {
+  and: Array<AdaptiveCriteria>;
+}
+
+export interface AdaptiveOr {
+  or: Array<AdaptiveCriteria>;
+}
+
+export interface AdaptiveNot {
+  not: AdaptiveCriteria;
+}
+
+export enum AdaptiveConjunctionNames {
+  And = 'and',
+  Or = 'or',
+  Not = 'not',
+}
+
+export enum AdaptiveOperator {
+  EqualTo = 'equalTo',
+  In = 'in',
+  Is = 'is',
+  LessThan = 'lt',
+  LessThanEquals = 'lte',
+  GreaterThan = 'gt',
+  GreaterThanEquals = 'gte',
+  Like = 'like',
+  StartsWith = 'startsWith',
+  EndsWith = 'endsWith',
+}
