@@ -193,8 +193,11 @@ export class AppBridge {
         } else if (origin.indexOf(event.data.originTraceName) === -1)  {
           origin.unshift(event.data.originTraceName);
         }
-        event.data.origin = origin;
-        event.data.source = event.source;
+        if (event.data) {
+          // known gap - simple commands will not forward origin/source from subchild frames to parent
+          event.data.origin = origin;
+          event.data.source = event.source;
+        }
         return defaultMsgHandlers[msgType](event);
       })
     });
