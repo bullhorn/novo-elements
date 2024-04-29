@@ -25,8 +25,15 @@ export class AppBridgeService {
 
 export class DevAppBridgeService {
   constructor(private http: HttpClient) {}
-  create(name: string) {
-    return new DevAppBridge(name, this.http);
+  create(name: string, postRobotRef?: any) {
+    return new DevAppBridge(name, this.http, postRobotRef);
+  }
+}
+
+// remove attributes unsafe for postrobot.send()
+function cleanPacket(packet: any) {
+  if (packet && typeof packet === 'object' && 'source' in packet) {
+    delete packet.source;
   }
 }
 
@@ -244,6 +251,7 @@ export class AppBridge {
           }
         });
       } else {
+        cleanPacket(packet);
         Object.assign(packet, { id: this.id, windowName: this.windowName });
         this.postRobot
           .sendToParent(MESSAGE_TYPES.OPEN, packet)
@@ -313,6 +321,7 @@ export class AppBridge {
           }
         });
       } else {
+        cleanPacket(packet);
         Object.assign(packet, { id: this.id, windowName: this.windowName });
         this.postRobot
           .sendToParent(MESSAGE_TYPES.UPDATE, packet)
@@ -470,6 +479,7 @@ export class AppBridge {
           }
         });
       } else {
+        cleanPacket(packet);
         Object.assign(packet, { id: this.id, windowName: this.windowName });
         this.postRobot
           .sendToParent(MESSAGE_TYPES.REQUEST_DATA, packet)
@@ -503,6 +513,7 @@ export class AppBridge {
           }
         });
       } else {
+        cleanPacket(packet);
         Object.assign(packet, { id: this.id, windowName: this.windowName });
         this.postRobot
           .sendToParent(MESSAGE_TYPES.CALLBACK, packet)
@@ -536,6 +547,7 @@ export class AppBridge {
           }
         });
       } else {
+        cleanPacket(packet);
         Object.assign(packet, { id: this.id });
         this.postRobot
           .sendToParent(MESSAGE_TYPES.REGISTER, packet)
@@ -722,8 +734,8 @@ export class AppBridge {
 export class DevAppBridge extends AppBridge {
   private baseURL: string;
 
-  constructor(traceName: string = 'DevAppBridge', private http: HttpClient) {
-    super(traceName);
+  constructor(traceName: string = 'DevAppBridge', private http: HttpClient, postRobotRef?: any) {
+    super(traceName, postRobotRef);
     const cookie = this.getCookie('UlEncodedIdentity');
     if (cookie && cookie.length) {
       const identity = JSON.parse(decodeURIComponent(cookie));
