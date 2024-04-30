@@ -41,7 +41,7 @@ const EMPTY_CONDITION: Condition = {
 export class CriteriaBuilderComponent implements OnInit, OnDestroy, AfterContentChecked, AfterViewInit {
   @Input() config: any;
   @Input() controlName: string;
-  @Input() allowedGroupings = [Conjunction.AND, Conjunction.OR, Conjunction.NOT];
+  @Input() allowedGroupings = [Conjunction.And, Conjunction.Or, Conjunction.Not];
   @Input() editTypeFn: (field: BaseFieldDef) => string;
 
   @ContentChildren(NovoConditionFieldDef, { descendants: true }) _contentFieldDefs: QueryList<NovoConditionFieldDef>;
@@ -66,7 +66,7 @@ export class CriteriaBuilderComponent implements OnInit, OnDestroy, AfterContent
 
     this.parentForm.valueChanges.pipe(takeUntil(this._onDestroy)).subscribe((value) => {
       Promise.resolve().then(() => {
-        this.setInitalValue(value[this.controlName]);
+        this.setInitialValue(value[this.controlName]);
         this.cdr.markForCheck();
       });
     });
@@ -109,7 +109,7 @@ export class CriteriaBuilderComponent implements OnInit, OnDestroy, AfterContent
     return Object.keys(group).every((key) => ['$and', '$or', '$not'].includes(key));
   }
 
-  private setInitalValue(value: ConditionGroup[] | Condition[]) {
+  private setInitialValue(value: ConditionGroup[] | Condition[]) {
     if (value.length && this.isConditionGroup(value[0])) {
       value.forEach((it) => this.addConditionGroup(it));
     } else {

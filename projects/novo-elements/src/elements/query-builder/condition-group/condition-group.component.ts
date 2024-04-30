@@ -22,11 +22,10 @@ const EMPTY_CONDITION: Condition = {
   },
 })
 export class ConditionGroupComponent implements OnInit, OnDestroy {
-  @Input() controlName: string = '$' + Conjunction.AND;
+  @Input() controlName: string = '$' + Conjunction.And;
   @Input() groupIndex: number;
 
   public parentForm: UntypedFormGroup;
-  public innerForm: UntypedFormGroup;
   /** Subject that emits when the component has been destroyed. */
   private readonly _onDestroy = new Subject<void>();
 
@@ -68,8 +67,8 @@ export class ConditionGroupComponent implements OnInit, OnDestroy {
   }
 
   addCondition(data?: any) {
-    const conditon = this.newCondition(data);
-    this.root.push(conditon);
+    const condition = this.newCondition(data);
+    this.root.push(condition);
     this.cdr.markForCheck();
   }
 
@@ -86,8 +85,10 @@ export class ConditionGroupComponent implements OnInit, OnDestroy {
     });
   }
 
-  cantRemoveRow(isFirst: boolean) {
-    if ((this.parentForm.parent as FormArray).length > 1) return false;
+  cantRemoveRow() {
+    if ((this.parentForm.parent as FormArray).length > 1) {
+      return false;
+    }
     return this.root.length <= 1;
   }
 }

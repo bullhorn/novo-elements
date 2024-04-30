@@ -1,17 +1,23 @@
 import { ViewContainerRef } from '@angular/core';
 
 export enum Conjunction {
-  AND = 'and',
-  OR = 'or',
-  NOT = 'not',
+  And = 'and',
+  Or = 'or',
+  Not = 'not',
 }
+
 export type ConditionGroup = {
-  [key: string]: Condition[];
+  [K in Conjunction as `$${K}`]?: Condition[]
 };
+
 export interface Condition {
   field: string;
   operator: string;
   value: any;
+}
+
+export interface Criteria {
+  criteria: ConditionGroup[];
 }
 
 export interface BaseFieldDef {
