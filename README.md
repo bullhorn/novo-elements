@@ -6,7 +6,7 @@
 
 ## Dependencies
 
-- [NodeJS v14.0+](https://nodejs.org/en/)
+- [NodeJS v18.3+](https://nodejs.org/en/)
 
 ## Quick Start
 
