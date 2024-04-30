@@ -4,7 +4,7 @@ export interface IDataTablePreferences {
   name: string;
   sort?: IDataTableSort;
   filter?: IDataTableFilter | IDataTableFilter[];
-  where?: { query: string; criteria?: AdaptiveCriteria; form: any[] };
+  where?: { query: string; criteria?: AdaptiveCriteria; form: any };
   globalSearch?: any;
   pageSize?: number;
   displayedColumns?: string[];
