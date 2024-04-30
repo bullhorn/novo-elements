@@ -10,7 +10,7 @@ import {
   IDataTableSelectionOption,
   IDataTableSort,
 } from '../interfaces';
-import { NovoDataTableFilterUtils } from 'novo-elements/elements';
+import { NovoDataTableFilterUtils } from '../services/data-table-filter-utils';
 
 @Injectable()
 export class DataTableState<T> {
