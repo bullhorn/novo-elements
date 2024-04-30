@@ -173,7 +173,13 @@ export interface IDataTableCell<T> {}
  */
 export interface AdaptiveQuery {
   criteria: AdaptiveCriteria;
-  orderBy?: string | string[]; // a comma separated string, or a string array with the same data
+
+  // a comma separated list of fields to requests
+  fields?: string;
+
+  // a comma separated string, or a string array with the same data
+  orderBy?: string | string[];
+
   pagination?: PaginationObject;
 }
 
