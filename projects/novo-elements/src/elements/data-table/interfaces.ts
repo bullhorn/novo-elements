@@ -173,6 +173,13 @@ export interface IDataTableCell<T> {}
  */
 export interface AdaptiveQuery {
   criteria: AdaptiveCriteria;
+  orderBy?: string | string[]; // a comma separated string, or a string array with the same data
+  pagination?: PaginationObject;
+}
+
+export interface PaginationObject {
+  page: number;
+  pageSize: number;
 }
 
 export type AdaptiveCriteria = AdaptiveCondition | AdaptiveConjunction;
