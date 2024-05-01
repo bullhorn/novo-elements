@@ -1,4 +1,4 @@
-<novo-dropdown (toggled)="onDropdownToggle($event)" multiple>
+<novo-dropdown (toggled)="onDropdownToggle($event)" multiple #dropdown>
   <novo-button
     class="tabbed-group-picker-button"
     [theme]="buttonConfig.theme"
@@ -12,7 +12,7 @@
     <i class="bhi-search" *ngIf="!(filterText | async)"></i>
     <i class="bhi-times" *ngIf="(filterText | async)" (click)="onClearFilter($event)"></i>
   </div>
-  <div class="tabbed-group-picker-column-container">
+  <div class="tabbed-group-picker-column-container" (keydown)="dropdown._handleKeydown($event)">
     <div class="tabbed-group-picker-column left">
       <novo-nav theme="white" direction="vertical">
         <novo-tab *ngFor="let tab of displayTabs" [attr.data-automation-id]="tab.typeName"

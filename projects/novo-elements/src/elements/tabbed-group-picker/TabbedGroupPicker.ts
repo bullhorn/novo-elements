@@ -218,6 +218,7 @@ export class NovoTabbedGroupPickerElement implements OnDestroy, OnInit {
   }
 
   onDropdownToggle(event) {
+    this.filterText.next('');
     if (event) {
       this.scrollViewportHeight = this.getPixelHeight(this.scrollableInstance.getElementRef().nativeElement);
       this.virtualScrollItemSize = this.getPixelHeight(this.scrollableInstance.getElementRef().nativeElement.querySelector('novo-option'));
