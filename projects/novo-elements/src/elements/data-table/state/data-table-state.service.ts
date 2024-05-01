@@ -1,7 +1,8 @@
 import { EventEmitter, Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
 import { Helpers } from 'novo-elements/utils';
+import { Subject } from 'rxjs';
 import {
+  AdaptiveCriteria,
   AppliedSearchType,
   IDataTableChangeEvent,
   IDataTableFilter,
@@ -24,7 +25,7 @@ export class DataTableState<T> {
 
   sort: IDataTableSort = undefined;
   filter: IDataTableFilter | IDataTableFilter[] = undefined;
-  where: { query: string; form: any } = undefined;
+  where: { query: string; criteria?: AdaptiveCriteria; form: any } = undefined;
   page: number = 0;
   pageSize: number = undefined;
   globalSearch: string = undefined;
