@@ -79,9 +79,9 @@ export class JustCriteriaExample implements OnInit {
   queryForm: AbstractControl;
   config: any = null;
 
-  and = [Conjunction.And];
-  andOr = [Conjunction.And, Conjunction.Or];
-  andOrNot = [Conjunction.And, Conjunction.Or, Conjunction.Not];
+  and = [Conjunction.AND];
+  andOr = [Conjunction.AND, Conjunction.OR];
+  andOrNot = [Conjunction.AND, Conjunction.OR, Conjunction.NOT];
 
   editTypeFn = (field: any) => {
     if (field.optionsType === 'Brewery') return 'custom';
