@@ -225,9 +225,9 @@ export interface AdaptiveNot {
 }
 
 export enum AdaptiveConjunctionNames {
-  And = 'and',
-  Or = 'or',
-  Not = 'not',
+  AND = 'and',
+  OR = 'or',
+  NOT = 'not',
 }
 
 export enum AdaptiveOperator {

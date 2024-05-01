@@ -22,7 +22,7 @@ const EMPTY_CONDITION: Condition = {
   },
 })
 export class ConditionGroupComponent implements OnInit, OnDestroy {
-  @Input() controlName: string = '$' + Conjunction.And;
+  @Input() controlName: string = '$' + Conjunction.AND;
   @Input() groupIndex: number;
 
   public parentForm: UntypedFormGroup;

@@ -41,7 +41,7 @@ const EMPTY_CONDITION: Condition = {
 export class CriteriaBuilderComponent implements OnInit, OnDestroy, AfterContentChecked, AfterViewInit {
   @Input() config: any;
   @Input() controlName: string;
-  @Input() allowedGroupings = [Conjunction.And, Conjunction.Or, Conjunction.Not];
+  @Input() allowedGroupings = [Conjunction.AND, Conjunction.OR, Conjunction.NOT];
   @Input() editTypeFn: (field: BaseFieldDef) => string;
 
   @ContentChildren(NovoConditionFieldDef, { descendants: true }) _contentFieldDefs: QueryList<NovoConditionFieldDef>;
