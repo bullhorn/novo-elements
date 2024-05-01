@@ -1,9 +1,9 @@
 import { ViewContainerRef } from '@angular/core';
 
 export enum Conjunction {
-  And = 'and',
-  Or = 'or',
-  Not = 'not',
+  AND = 'and',
+  OR = 'or',
+  NOT = 'not',
 }
 
 export type ConditionGroup = {
