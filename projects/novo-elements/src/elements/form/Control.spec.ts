@@ -1018,6 +1018,138 @@ describe('NovoControlElement', () => {
     });
   });
 
+  describe('Getter: showMaxLengthMetMessage', () => {
+    beforeEach(() => {
+      component.form = {
+        controls: {
+          hasErrorsField: {
+            errors: {
+              maxlengthFields: ['textField'],
+              maxlength: true,
+            },
+          },
+          emptyField: {
+            errors: null,
+          },
+          emptyMaxLengthMetField: {
+            errors: {
+              maxlengthFields: [],
+            },
+          },
+        },
+      };
+    });
+    it('should return true if control is dirty, maxLength met, focused but no errors', () => {
+      component.control = {
+        key: 'emptyField',
+        dirty: true,
+      };
+      component.maxLengthMet = true;
+      (component as any)._focused = true;
+      expect(component.showMaxLengthMetMessage).toBeTruthy();
+    });
+    it('should return true if control is dirty, maxLength met, focused but no maxLength errors', () => {
+      component.control = {
+        key: 'emptyMaxLengthMetField',
+        dirty: true,
+      };
+      component.maxLengthMet = true;
+      (component as any)._focused = true;
+      expect(component.showMaxLengthMetMessage).toBeTruthy();
+    });
+    it('should return true if control is dirty, maxLength met, focused but no maxLength errors', () => {
+      component.control = {
+        key: 'hasErrorsField',
+        dirty: true,
+      };
+      (component as any).maxLengthMetErrorfields = ['hasErrorsField'];
+      (component as any)._focused = true;
+      component.focusedField = 'hasErrorsField';
+      expect(component.showMaxLengthMetMessage).toBeTruthy();
+    });
+    it('should return false if not dirty', () => {
+      component.control = {
+        key: 'emptyField',
+        dirty: false,
+      };
+      component.maxLengthMet = true;
+      (component as any)._focused = true;
+      expect(component.showMaxLengthMetMessage).toBeFalsy();
+    });
+    it('should return false if not focused', () => {
+      component.control = {
+        key: 'emptyField',
+        dirty: true,
+      };
+      component.maxLengthMet = true;
+      (component as any)._focused = false;
+      expect(component.showMaxLengthMetMessage).toBeFalsy();
+    });
+    it('should return false if maxLength not met', () => {
+      component.control = {
+        key: 'emptyField',
+        dirty: true,
+      };
+      component.maxLengthMet = false;
+      (component as any)._focused = true;
+      expect(component.showMaxLengthMetMessage).toBeFalsy();
+    });
+  });
+
+  describe('Getter: showErrorState', () => {
+    beforeEach(() => {
+      component.form = {
+        controls: {
+          hasErrorsField: {
+            errors: {
+              maxlengthFields: ['textField'],
+              maxlength: true,
+            },
+          },
+          emptyField: {
+            errors: null,
+          },
+          emptyMaxLengthMetField: {
+            errors: {
+              maxlengthFields: [],
+            },
+          },
+        },
+      };
+    });
+    it('should return true if control is dirty and has errors', () => {
+      component.control = {
+        key: 'hasErrorsField',
+        dirty: true,
+      };
+      expect(component.showErrorState).toBeTruthy();
+    });
+    it('should return true if control is focused and has max length errors', () => {
+      component.control = {
+        key: 'hasErrorsField',
+        dirty: false,
+      };
+      (component as any)._focused = true;
+      component.focusedField = 'textField';
+      expect(component.showErrorState).toBeTruthy();
+    });
+    it('should return false if not dirty', () => {
+      component.control = {
+        key: 'emptyField',
+        dirty: false,
+      };
+      expect(component.showErrorState).toBeFalsy();
+    });
+    it('should return false if not focused', () => {
+      component.control = {
+        key: 'emptyField',
+        dirty: true,
+      };
+      (component as any)._focused = false;
+      expect(component.showErrorState).toBeFalsy();
+    });
+  });
+
 });
 
 // While this is a laborious thing to set up individually on tests, it could be worthwhile to find a way to automatically apply this to other fixtures
