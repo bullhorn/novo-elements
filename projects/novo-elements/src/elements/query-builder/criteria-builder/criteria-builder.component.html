@@ -2,8 +2,6 @@
   <novo-stack [formArrayName]="controlName" class="criteria-builder-inner">
     <ng-container
       *ngFor="let andGroup of root.controls; let andIndex = index; let isFirst = first;let isLastAnd = last;">
-      <novo-label *ngIf="!isFirst" color="ash" size="xs" uppercase padding="sm">{{qbs.getConjunctionLabel('and')}}
-      </novo-label>
       <novo-condition-group [groupIndex]="andIndex" [formGroupName]="andIndex"></novo-condition-group>
     </ng-container>
   </novo-stack>
@@ -21,7 +19,7 @@
 <novo-picker-condition-def name="SELECT"></novo-picker-condition-def>
 <novo-string-condition-def name="DEFAULT"></novo-string-condition-def>
 
-<!-- 
+<!--
   {
     $and: [{
       $or: [{
@@ -32,4 +30,4 @@
       }]
     }]
   }
- -->
+  -->
