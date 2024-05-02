@@ -267,6 +267,29 @@ describe('NovoControlElement', () => {
     });
   });
 
+  describe('Function: executeInteraction()', () => {
+    it('should setup fieldInteraction api with form and current key', fakeAsync(() => {
+      component.control = {
+        key: 'newField',
+      };
+      component.form = {
+        controls: {
+          newField: {
+            updateValueAndValidity: () => {},
+          },
+        },
+      };
+      const interaction = {
+        script: () => {},
+      };
+      component.executeInteraction(interaction);
+      tick();
+      expect((component as any).fieldInteractionApi.form).toEqual(component.form);
+      expect((component as any).fieldInteractionApi.currentKey).toEqual('newField');
+      expect((component as any).fieldInteractionApi.invokeOnInit).toBeFalsy();
+    }));
+  });
+
   describe('Function: updateValidity', () => {
     beforeEach(() => {
       component.control = {
