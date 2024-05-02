@@ -1,6 +1,25 @@
 // APP
-import { AppliedSearchType } from '../interfaces';
+import { AdaptiveQuery, AppliedSearchType } from '../interfaces';
 import { DataTableState } from './data-table-state.service';
+
+const mockAdaptiveQuery: AdaptiveQuery = {
+  criteria: {
+    and: [{
+      status: {
+        equalTo: 'New Lead'
+      }
+    }, {
+      isDeleted: {
+        equalTo: 0
+      }
+    }]
+  },
+  orderBy: ['-id', 'name'],
+  pagination: {
+    page: 2,
+    pageSize: 100
+  },
+};
 
 describe('Service: DataTableState', () => {
   let service = new DataTableState();
@@ -13,7 +32,7 @@ describe('Service: DataTableState', () => {
       service.filter = { id: 'test', value: 'value' };
       service.sort = { id: 'test', value: 'desc' };
       service.globalSearch = 'testing';
-      service.where = { query: 'mock query', form: 'mock form' };
+      service.where = { query: 'mock query', criteria: mockAdaptiveQuery.criteria, form: 'mock form' };
     });
     it('should call selectedRows.clear, resetSource.next and onSortFilterChange if retainSelected is true', () => {
       service.retainSelected = false;
@@ -43,7 +62,7 @@ describe('Service: DataTableState', () => {
       expect(service.filter).toEqual({ id: 'test', value: 'value' });
       expect(service.sort).toEqual({ id: 'test', value: 'desc' });
       expect(service.globalSearch).toEqual('testing');
-      expect(service.where).toEqual({ query: 'mock query', form: 'mock form' });
+      expect(service.where).toEqual({ query: 'mock query', criteria: mockAdaptiveQuery.criteria, form: 'mock form' });
     });
     it('should emit an update if fireUpdate is true', () => {
       const expected = {
@@ -68,7 +87,7 @@ describe('Service: DataTableState', () => {
       service.filter = { id: 'test', value: 'value' };
       service.sort = { id: 'test', value: 'desc' };
       service.globalSearch = 'testing';
-      service.where = { query: 'mock query', form: 'mock form' };
+      service.where = { query: 'mock query', criteria: mockAdaptiveQuery.criteria, form: 'mock form' };
     });
     afterAll(() => {
       service.reset();
@@ -86,7 +105,7 @@ describe('Service: DataTableState', () => {
       service.clearSort();
       expect(service.sort).toBeUndefined();
       expect(service.filter).toEqual({ id: 'test', value: 'value' });
-      expect(service.where).toEqual({ query: 'mock query', form: 'mock form' });
+      expect(service.where).toEqual({ query: 'mock query', criteria: mockAdaptiveQuery.criteria, form: 'mock form' });
       expect(service.globalSearch).toEqual('testing');
       expect(service.page).toEqual(0);
     });
@@ -95,7 +114,7 @@ describe('Service: DataTableState', () => {
         sort: undefined,
         filter: { id: 'test', value: 'value' },
         globalSearch: 'testing',
-        where: { query: 'mock query', form: 'mock form' },
+        where: { query: 'mock query', criteria: mockAdaptiveQuery.criteria, form: 'mock form' },
       };
       service.clearSort(true);
       expect(service.reset).toHaveBeenCalledWith(true, true);
@@ -115,7 +134,7 @@ describe('Service: DataTableState', () => {
       service.filter = { id: 'test', value: 'value' };
       service.sort = { id: 'test', value: 'desc' };
       service.globalSearch = 'testing';
-      service.where = { query: 'mock query', form: 'mock form' };
+      service.where = { query: 'mock query', criteria: mockAdaptiveQuery.criteria, form: 'mock form' };
     });
     afterAll(() => {
       service.reset();
@@ -133,7 +152,7 @@ describe('Service: DataTableState', () => {
       service.clearFilter();
       expect(service.sort).toEqual({ id: 'test', value: 'desc' });
       expect(service.filter).toBeUndefined();
-      expect(service.where).toEqual({ query: 'mock query', form: 'mock form' });
+      expect(service.where).toEqual({ query: 'mock query', criteria: mockAdaptiveQuery.criteria, form: 'mock form' });
       expect(service.globalSearch).toBeUndefined();
       expect(service.page).toEqual(0);
     });
@@ -142,7 +161,7 @@ describe('Service: DataTableState', () => {
         sort: { id: 'test', value: 'desc' },
         filter: undefined,
         globalSearch: undefined,
-        where: { query: 'mock query', form: 'mock form' },
+        where: { query: 'mock query', criteria: mockAdaptiveQuery.criteria, form: 'mock form' },
       };
       service.clearFilter(true);
       expect(service.reset).toHaveBeenCalledWith(true, true);
@@ -162,7 +181,7 @@ describe('Service: DataTableState', () => {
       service.filter = { id: 'test', value: 'value' };
       service.sort = { id: 'test', value: 'desc' };
       service.globalSearch = 'testing';
-      service.where = { query: 'mock query', form: 'mock form' };
+      service.where = { query: 'mock query', criteria: mockAdaptiveQuery.criteria, form: 'mock form' };
     });
     afterAll(() => {
       service.reset();
@@ -481,7 +500,7 @@ describe('Service: DataTableState', () => {
       expect(service.displayedColumns).toEqual(['column 1', 'column 2']);
     });
     it('should not set displayedColumns if displayedColumns array is empty', () => {
-      service.setState({  name: 'empty columns', displayedColumns: [] });
+      service.setState({ name: 'empty columns', displayedColumns: [] });
       expect(service.displayedColumns).toEqual(['column 1', 'column 2']);
     });
     it('should emit an update if fireUpdate is true', () => {

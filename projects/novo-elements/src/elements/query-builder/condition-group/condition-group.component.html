@@ -17,7 +17,7 @@
           </ng-template>
           <novo-condition-builder [groupIndex]="groupIndex" [andIndex]="andIndex" [isFirst]="isFirst"></novo-condition-builder>
           <novo-button theme="icon" icon="delete-o" color="negative" (click)="removeCondition(andIndex)"
-            [disabled]="cantRemoveRow(isFirst)">
+            [disabled]="cantRemoveRow()">
           </novo-button>
         </novo-flex>
       </ng-container>
