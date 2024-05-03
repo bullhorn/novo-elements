@@ -56,7 +56,7 @@ export class NovoDropDownTrigger {
 class NovoDropdownBase {
   constructor() {}
 }
-const NovoDropdowMixins: HasOverlayCtor & CanDisableCtor & HasTabIndexCtor & typeof NovoDropdownBase = mixinOverlay(
+const NovoDropdownMixins: HasOverlayCtor & CanDisableCtor & HasTabIndexCtor & typeof NovoDropdownBase = mixinOverlay(
   mixinTabIndex(mixinDisabled(NovoDropdownBase), 1),
 );
 
@@ -75,7 +75,7 @@ const NovoDropdowMixins: HasOverlayCtor & CanDisableCtor & HasTabIndexCtor & typ
     '[attr.tabIndex]': 'disabled ? -1 : 0',
   },
 })
-export class NovoDropdownElement extends NovoDropdowMixins implements OnInit, AfterContentInit, AfterViewInit, OnDestroy {
+export class NovoDropdownElement extends NovoDropdownMixins implements OnInit, AfterContentInit, AfterViewInit, OnDestroy {
   @Input()
   parentScrollSelector: string;
   @Input()
@@ -227,7 +227,7 @@ export class NovoDropdownElement extends NovoDropdowMixins implements OnInit, Af
     // });
   }
 
-  /** Handles all keydown events on the select. */
+  /** Handles all keydown events on the dropdown. */
   @HostListener('keydown', ['$event'])
   _handleKeydown(event: KeyboardEvent): void {
     if (!this.disabled) {
@@ -235,7 +235,7 @@ export class NovoDropdownElement extends NovoDropdowMixins implements OnInit, Af
     }
   }
 
-  /** Handles keyboard events while the select is closed. */
+  /** Handles keyboard events while the dropdown is closed. */
   private _handleClosedKeydown(event: KeyboardEvent): void {
     const key = event.key;
     const isArrowKey = key === Key.ArrowDown || key === Key.ArrowUp || key === Key.ArrowLeft || key === Key.ArrowRight;
@@ -248,7 +248,7 @@ export class NovoDropdownElement extends NovoDropdowMixins implements OnInit, Af
     }
   }
 
-  /** Handles keyboard events when the selected is open. */
+  /** Handles keyboard events when the dropdown is open. */
   private _handleOpenKeydown(event: KeyboardEvent): void {
     const manager = this._keyManager;
     const key = event.key;
@@ -256,7 +256,7 @@ export class NovoDropdownElement extends NovoDropdowMixins implements OnInit, Af
     const isTyping = manager.isTyping();
     const isInputField = event.target;
     if (isArrowKey && event.altKey) {
-      // Close the select on ALT + arrow key to match the native <select>
+      // Close the dropdown on ALT + arrow key to match the native <select>
       event.preventDefault();
       this.closePanel();
       // Don't do anything in this case if the user is typing,
