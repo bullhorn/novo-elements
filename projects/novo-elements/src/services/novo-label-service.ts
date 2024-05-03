@@ -119,6 +119,7 @@ export class NovoLabelService {
   maxRecordsReached = 'Sorry, you have reached the maximum number of records allowed for this field';
   selectFilterOptions = 'Please select one or more filter options below.';
   addCondition = 'Add Condition';
+  addFilter = 'Add Filter';
   includeAny = 'Include Any';
   includeAll = 'Include All';
   exclude = 'Exclude';
