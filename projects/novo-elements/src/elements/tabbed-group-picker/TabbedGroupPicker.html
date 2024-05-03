@@ -1,4 +1,4 @@
-<novo-dropdown (toggled)="onDropdownToggle($event)" multiple>
+<novo-dropdown (toggled)="onDropdownToggle($event)" multiple #dropdown>
   <novo-button
     class="tabbed-group-picker-button"
     [theme]="buttonConfig.theme"
@@ -7,12 +7,12 @@
     [loading]="loading">
     <div class="tabbed-group-picker-button-label">{{ buttonConfig.label }}</div>
   </novo-button>
-  <div class="tabbed-group-picker-search" data-automation-id="tabbed-group-picker-search">
+  <div class="tabbed-group-picker-search" data-automation-id="tabbed-group-picker-search" (keydown)="dropdown._handleKeydown($event)">
     <input type="text" [placeholder]="labelService.search" [value]="filterText | async" (input)="onFilter($event)" />
     <i class="bhi-search" *ngIf="!(filterText | async)"></i>
     <i class="bhi-times" *ngIf="(filterText | async)" (click)="onClearFilter($event)"></i>
   </div>
-  <div class="tabbed-group-picker-column-container">
+  <div class="tabbed-group-picker-column-container" (keydown)="dropdown._handleKeydown($event)">
     <div class="tabbed-group-picker-column left">
       <novo-nav theme="white" direction="vertical">
         <novo-tab *ngFor="let tab of displayTabs" [attr.data-automation-id]="tab.typeName"
@@ -25,7 +25,6 @@
     </div>
     <div class="tabbed-group-picker-column right">
       <div class="quick-select" *ngIf="quickSelectConfig && !(filterText | async)">
-        <!-- <div class="quick-select-label">{{ quickSelectConfig.label }}</div> -->
         <novo-optgroup class="quick-select-list" [label]="quickSelectConfig.label">
           <novo-option
             class="quick-select-item"
@@ -35,11 +34,6 @@
             (click)="quickSelect.selected = !quickSelect.selected; onItemToggled(quickSelect)"
             novoInert>
             {{quickSelect.label}}
-            <!-- <novo-checkbox
-              [label]="quickSelect.label"
-              [name]="'selected'"
-              [(ngModel)]="quickSelect.selected"
-              (ngModelChange)="onItemToggled(quickSelect)"></novo-checkbox> -->
           </novo-option>
         </novo-optgroup>
       </div>
@@ -56,14 +50,6 @@
             (click)="item.selected = !item.selected; onItemToggled(item)"
             novoInert>
             {{item[displayTab.labelField]}}
-
-            <!-- <novo-checkbox
-              [label]="item[displayTab.labelField]"
-              [name]="'selected'"
-              [indeterminate]="item.indeterminate"
-              [(ngModel)]="item.selected"
-              (ngModelChange)="onItemToggled(item)">
-            </novo-checkbox> -->
           </novo-option>
         </cdk-virtual-scroll-viewport>
       </novo-optgroup>
