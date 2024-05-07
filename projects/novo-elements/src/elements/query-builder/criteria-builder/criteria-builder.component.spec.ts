@@ -16,7 +16,7 @@ const condition1: Condition = {
 
 const condition2: Condition = {
   field: 'Candidate.status',
-  operator: 'equalTo',
+  operator: 'includeAll',
   value: 'New Lead',
 };
 

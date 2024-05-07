@@ -10,9 +10,25 @@ export type ConditionGroup = {
   [K in Conjunction as `$${K}`]?: Condition[]
 };
 
+export enum Operator {
+  after = 'after',
+  before = 'before',
+  between = 'between',
+  exclude = 'exclude',
+  excludeAny = 'excludeAny',
+  include = 'include',
+  includeAll = 'includeAll',
+  includeAny = 'includeAny',
+  isEmpty = 'isEmpty',
+  isNull = 'isNull',
+  within = 'within',
+}
+
+export type OperatorName = keyof typeof Operator;
+
 export interface Condition {
   field: string;
-  operator: string;
+  operator: OperatorName;
   value: any;
 }
 
