@@ -14,13 +14,16 @@ export enum Operator {
   after = 'after',
   before = 'before',
   between = 'between',
+  equalTo = 'equalTo',
   exclude = 'exclude',
   excludeAny = 'excludeAny',
+  greaterThan = 'greaterThan',
   include = 'include',
   includeAll = 'includeAll',
   includeAny = 'includeAny',
   isEmpty = 'isEmpty',
   isNull = 'isNull',
+  lessThan = 'lessThan',
   within = 'within',
 }
 
