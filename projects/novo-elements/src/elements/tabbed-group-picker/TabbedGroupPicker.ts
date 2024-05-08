@@ -3,6 +3,7 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  ElementRef,
   EventEmitter,
   Input,
   OnDestroy,
@@ -67,6 +68,8 @@ export type TabbedGroupPickerButtonConfig = {
 export class NovoTabbedGroupPickerElement implements OnDestroy, OnInit {
   @ViewChild('tabbedGroupPickerVirtualScrollViewport')
   private scrollableInstance: CdkScrollable;
+  @ViewChild('inputElement')
+  private inputElement: ElementRef<HTMLInputElement>;
 
   multiple = true;
 
@@ -219,6 +222,7 @@ export class NovoTabbedGroupPickerElement implements OnDestroy, OnInit {
 
   onDropdownToggle(event) {
     this.filterText.next('');
+    this.inputElement.nativeElement?.focus();
     if (event) {
       this.scrollViewportHeight = this.getPixelHeight(this.scrollableInstance.getElementRef().nativeElement);
       this.virtualScrollItemSize = this.getPixelHeight(this.scrollableInstance.getElementRef().nativeElement.querySelector('novo-option'));
