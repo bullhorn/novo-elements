@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { AbstractControl, UntypedFormBuilder, UntypedFormControl } from '@angular/forms';
-import { AbstractConditionFieldDef, Conjunction, CriteriaBuilderComponent, NovoLabelService } from 'novo-elements';
+import { AbstractConditionFieldDef, Conjunction, CriteriaBuilderComponent, NovoLabelService, Operator } from 'novo-elements';
 import { ReplaySubject, Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
 import { MockMeta } from './MockMeta';
@@ -33,7 +33,7 @@ import { MockMeta } from './MockMeta';
   changeDetection: ChangeDetectionStrategy.Default,
 })
 export class CustomPickerConditionDef extends AbstractConditionFieldDef implements OnInit {
-  defaultOperator = 'includeAny';
+  defaultOperator = Operator.includeAny;
   searchCtrl: UntypedFormControl = new UntypedFormControl();
   /** list of results filtered by search keyword */
   remoteResults: ReplaySubject<any[]> = new ReplaySubject<any[]>(1);
