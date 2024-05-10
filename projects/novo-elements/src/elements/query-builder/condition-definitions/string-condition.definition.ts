@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
-import { Operator } from 'novo-elements/elements';
 import { AbstractConditionFieldDef } from './abstract-condition.definition';
+import { Operator } from '../query-builder.types';
 
 /**
  * Constructing filters against String fields can be complex. Each "chip" added to the

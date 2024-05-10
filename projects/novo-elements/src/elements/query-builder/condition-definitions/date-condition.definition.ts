@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, QueryList, ViewChildren, ViewEncapsulation } from '@angular/core';
-import { Operator } from 'novo-elements/elements';
 import { NovoPickerToggleElement } from 'novo-elements/elements/field';
 import { AbstractConditionFieldDef } from './abstract-condition.definition';
+import { Operator } from '../query-builder.types';
 
 /**
  * Most complicated of the default conditions defs, a date needs to provide a different

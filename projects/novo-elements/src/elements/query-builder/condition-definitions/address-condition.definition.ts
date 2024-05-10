@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, Component, ElementRef, QueryList, ViewChild, ViewChildren, ViewEncapsulation } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
-import { Operator } from 'novo-elements/elements';
 import { NovoPickerToggleElement } from 'novo-elements/elements/field';
 import { PlacesListComponent } from 'novo-elements/elements/places';
 import { NovoLabelService } from 'novo-elements/services';
 import { Key } from 'novo-elements/utils';
 import { AbstractConditionFieldDef } from './abstract-condition.definition';
+import { Operator } from '../query-builder.types';
 
 /**
  * Handle selection of field values when a list of options is provided.
