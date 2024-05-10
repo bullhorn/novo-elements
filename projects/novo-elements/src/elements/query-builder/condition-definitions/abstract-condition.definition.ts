@@ -1,5 +1,6 @@
 import { Directive, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { UntypedFormGroup } from '@angular/forms';
+import { Operator } from 'novo-elements/elements';
 import { NovoLabelService } from 'novo-elements/services';
 import { NovoConditionFieldDef } from '../query-builder.directives';
 
@@ -18,7 +19,7 @@ export abstract class AbstractConditionFieldDef implements OnDestroy, OnInit {
   }
   _name: string;
 
-  defaultOperator: string;
+  defaultOperator: Operator;
 
   @ViewChild(NovoConditionFieldDef, { static: true }) fieldDef: NovoConditionFieldDef;
 

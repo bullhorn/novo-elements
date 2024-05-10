@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
+import { Operator } from 'novo-elements/elements';
 import { AbstractConditionFieldDef } from './abstract-condition.definition';
 
 /**
@@ -56,7 +57,7 @@ import { AbstractConditionFieldDef } from './abstract-condition.definition';
   changeDetection: ChangeDetectionStrategy.Default,
 })
 export class NovoDefaultStringConditionDef extends AbstractConditionFieldDef {
-  defaultOperator = 'includeAny';
+  defaultOperator = Operator.includeAny;
 
   getValue(formGroup: AbstractControl): any[] {
     return formGroup.value?.value || [];
