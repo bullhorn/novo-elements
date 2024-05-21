@@ -31,7 +31,7 @@ export type OperatorName = keyof typeof Operator;
 
 export interface Condition {
   field: string;
-  operator: OperatorName;
+  operator: OperatorName | string;
   value: any;
 }
 

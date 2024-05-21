@@ -19,7 +19,7 @@ export abstract class AbstractConditionFieldDef implements OnDestroy, OnInit {
   }
   _name: string;
 
-  defaultOperator: Operator;
+  defaultOperator: Operator | string;
 
   @ViewChild(NovoConditionFieldDef, { static: true }) fieldDef: NovoConditionFieldDef;
 
