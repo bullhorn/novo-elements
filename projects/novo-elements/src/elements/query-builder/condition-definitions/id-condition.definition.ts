@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { AbstractConditionFieldDef } from './abstract-condition.definition';
+import { Operator } from '../query-builder.types';
 
 /**
  * Any condition that has a type of ID usually only is queried by ID.
@@ -23,5 +24,5 @@ import { AbstractConditionFieldDef } from './abstract-condition.definition';
   changeDetection: ChangeDetectionStrategy.Default,
 })
 export class NovoDefaultIdConditionDef extends AbstractConditionFieldDef {
-  defaultOperator = 'equalTo';
+  defaultOperator = Operator.equalTo;
 }
