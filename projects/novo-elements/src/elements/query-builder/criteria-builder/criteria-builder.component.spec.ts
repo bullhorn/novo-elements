@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ControlContainer, UntypedFormBuilder } from '@angular/forms';
 import { NovoLabelService } from '../../../services';
-import { Condition, Criteria, NovoFlexModule, NovoQueryBuilderModule } from '../../index';
+import { Condition, Criteria, NovoFlexModule, NovoQueryBuilderModule, Operator } from '../../index';
 import { QueryBuilderService } from '../query-builder.service';
 import { CriteriaBuilderComponent } from './criteria-builder.component';
 
@@ -16,13 +16,13 @@ const condition1: Condition = {
 
 const condition2: Condition = {
   field: 'Candidate.status',
-  operator: 'equalTo',
+  operator: Operator.equalTo,
   value: 'New Lead',
 };
 
 const condition3: Condition = {
   field: 'Candidate.email',
-  operator: 'includeAny',
+  operator: Operator.includeAny,
   value: [
     'abc',
     'def',

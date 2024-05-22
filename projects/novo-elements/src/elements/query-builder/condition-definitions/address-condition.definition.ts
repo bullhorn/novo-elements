@@ -5,6 +5,7 @@ import { PlacesListComponent } from 'novo-elements/elements/places';
 import { NovoLabelService } from 'novo-elements/services';
 import { Key } from 'novo-elements/utils';
 import { AbstractConditionFieldDef } from './abstract-condition.definition';
+import { Operator } from '../query-builder.types';
 
 /**
  * Handle selection of field values when a list of options is provided.
@@ -50,7 +51,7 @@ export class NovoDefaultAddressConditionDef extends AbstractConditionFieldDef {
   @ViewChildren('addressInput') inputChildren: QueryList<ElementRef>;
   @ViewChild('placesPicker') placesPicker: PlacesListComponent;
 
-  defaultOperator = 'includeAny';
+  defaultOperator = Operator.includeAny;
   chipListModel: any = '';
   term: string = '';
 
