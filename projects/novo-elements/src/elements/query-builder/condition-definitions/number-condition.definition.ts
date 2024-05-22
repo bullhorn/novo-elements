@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { AbstractConditionFieldDef } from './abstract-condition.definition';
+import { Operator } from '../query-builder.types';
 
 /**
  * When constructing a query using a field that is an Int, Double, Number ...etc.
@@ -34,5 +35,5 @@ import { AbstractConditionFieldDef } from './abstract-condition.definition';
   changeDetection: ChangeDetectionStrategy.Default,
 })
 export class NovoDefaultNumberConditionDef extends AbstractConditionFieldDef {
-  defaultOperator = 'equalTo';
+  defaultOperator = Operator.equalTo;
 }

@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { AbstractConditionFieldDef } from './abstract-condition.definition';
+import { Operator } from '../query-builder.types';
 
 /**
  * Handle selection of field values when a list of options is provided.
@@ -38,5 +39,5 @@ import { AbstractConditionFieldDef } from './abstract-condition.definition';
   changeDetection: ChangeDetectionStrategy.Default,
 })
 export class NovoDefaultPickerConditionDef extends AbstractConditionFieldDef {
-  defaultOperator = 'includeAny';
+  defaultOperator = Operator.includeAny;
 }

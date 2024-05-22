@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 import { AbstractConditionFieldDef } from './abstract-condition.definition';
+import { Operator } from '../query-builder.types';
 
 /**
  * Constructing filters against String fields can be complex. Each "chip" added to the
@@ -56,7 +57,7 @@ import { AbstractConditionFieldDef } from './abstract-condition.definition';
   changeDetection: ChangeDetectionStrategy.Default,
 })
 export class NovoDefaultStringConditionDef extends AbstractConditionFieldDef {
-  defaultOperator = 'includeAny';
+  defaultOperator = Operator.includeAny;
 
   getValue(formGroup: AbstractControl): any[] {
     return formGroup.value?.value || [];
