@@ -76,6 +76,7 @@ export class NovoTabbedGroupPickerElement implements OnDestroy, OnInit {
   @Input() buttonConfig: TabbedGroupPickerButtonConfig;
   @Input() tabs: TabbedGroupPickerTab[];
   @Input() quickSelectConfig: QuickSelectConfig;
+  @Input() hideTabs = false;
 
   @Output() selectionChange: EventEmitter<any> = new EventEmitter<any>();
 
