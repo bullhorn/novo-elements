@@ -10,7 +10,6 @@ import { ChildTab, TabbedGroupPickerTab } from 'novo-elements';
   styleUrls: ['../tabbed-group-picker-example.scss'],
 })
 export class TabbedGroupPickerQuickSelectExample {
-  hideTabs = false;
   getAnimals = (): { animalId: number; name: string }[] =>
     ['Dog', 'Cat', 'Mouse', 'Horse', 'Cow', 'Chicken', 'Pig', 'Sheep', 'Goat', 'Goose'].map((name, index) => ({
       name,

@@ -3,10 +3,8 @@
     [tabs]="example_tab"
     [quickSelectConfig]="example_quickSelectConfig"
     [buttonConfig]="example_buttonConfig"
-    [hideTabs]="hideTabs"
     (selectionChange)="onSelectionChange($event)"
   ></novo-tabbed-group-picker>
-  <novo-checkbox label="Hide Tabs" [(ngModel)]="hideTabs"></novo-checkbox>
   <div class="selected-data-wrapper">
     <h6>Selected Animal IDs:</h6>
     <div>{{ selectedAnimals.join(', ') }}</div>
