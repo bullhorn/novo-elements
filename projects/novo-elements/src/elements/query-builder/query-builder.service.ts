@@ -8,6 +8,11 @@ export const defaultEditTypeFn = (field: BaseFieldDef) => {
   return field.inputType || field.dataType || field.type;
 };
 
+export interface QueryBuilderConfig {
+  fields: FieldConfig<BaseFieldDef>[];
+  staticFieldSelection?: string;
+}
+
 @Injectable()
 export class QueryBuilderService {
   private _customFieldDefs = new Set<BaseConditionFieldDef>();
@@ -35,14 +40,17 @@ export class QueryBuilderService {
    * The field configuration to control which types of fields are available to select
    * within the Condition Builder.
    */
-  public get config(): { fields: FieldConfig<BaseFieldDef>[] } {
+  public get config(): QueryBuilderConfig {
     return this._config;
   }
-  public set config(value: { fields: FieldConfig<BaseFieldDef>[] }) {
+  public set config(value: QueryBuilderConfig) {
     this._config = value;
     this.stateChanges.next();
   }
-  private _config: { fields: FieldConfig<BaseFieldDef>[] } = { fields: [] };
+  private _config: QueryBuilderConfig = {
+    fields: [],
+    staticFieldSelection: null
+  };
 
   /**
    * The configuration to control which types of conjuntions can be used in the query builder.
@@ -57,6 +65,8 @@ export class QueryBuilderService {
     this.stateChanges.next();
   }
   private _allowedGroupings: Conjunction[];
+
+  public componentHost: any;
 
   constructor(private labels: NovoLabelService) {}
 

@@ -11,9 +11,9 @@ import {
   OnInit,
   QueryList,
 } from '@angular/core';
-import { ControlContainer, FormArray, FormBuilder, UntypedFormGroup, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
+import { ControlContainer, FormArray, FormBuilder, NG_VALUE_ACCESSOR, UntypedFormGroup, Validators } from '@angular/forms';
 import { interval, Subject } from 'rxjs';
-import { debounce, takeUntil } from 'rxjs/operators';
+import { debounce, filter, startWith, takeUntil } from 'rxjs/operators';
 import { NovoConditionFieldDef } from '../query-builder.directives';
 import { QueryBuilderService } from '../query-builder.service';
 import { NOVO_CRITERIA_BUILDER } from '../query-builder.tokens';
@@ -56,7 +56,11 @@ export class CriteriaBuilderComponent implements OnInit, OnDestroy, AfterContent
     private formBuilder: FormBuilder,
     private cdr: ChangeDetectorRef,
     public qbs: QueryBuilderService,
-  ) {}
+  ) {
+    if (!qbs.componentHost) {
+      qbs.componentHost = this;
+    }
+  }
 
   ngOnInit() {
     this.parentForm = this.controlContainer.control as UntypedFormGroup;
@@ -64,7 +68,11 @@ export class CriteriaBuilderComponent implements OnInit, OnDestroy, AfterContent
       criteria: this.formBuilder.array([]),
     });
 
-    this.parentForm.valueChanges.pipe(takeUntil(this._onDestroy)).subscribe((value) => {
+    this.parentForm.valueChanges.pipe(
+      startWith(this.parentForm.value),
+      filter(v => v?.criteria),
+      takeUntil(this._onDestroy)
+    ).subscribe((value) => {
       Promise.resolve().then(() => {
         this.setInitialValue(value[this.controlName]);
         this.cdr.markForCheck();
