@@ -9,6 +9,7 @@ export interface IDataTablePreferences {
   pageSize?: number;
   displayedColumns?: string[];
   columnWidths?: { id: string; width: number }[];
+  savedSearchId?: number;
   savedSearchName?: string;
   appliedSearchType?: AppliedSearchType;
 }
