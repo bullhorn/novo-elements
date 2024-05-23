@@ -6,6 +6,7 @@
     [icon]="buttonConfig.icon"
     [loading]="loading">
     <div class="tabbed-group-picker-button-label">{{ buttonConfig.label }}</div>
+    <ng-content></ng-content>
   </novo-button>
   <div class="tabbed-group-picker-search" data-automation-id="tabbed-group-picker-search" (keydown)="dropdown._handleKeydown($event)">
     <input #inputElement type="text" [placeholder]="labelService.search" [value]="filterText | async" (input)="onFilter($event)" />
@@ -20,7 +21,7 @@
           <span>{{ tab.typeLabel }} ({{ tab.data.length }})</span><i class="bhi-next"></i>
         </novo-tab>
       </novo-nav>
-      <novo-button *ngIf="showClearAll" class="clear-all-button" theme="dialogue" icon="times" side="right"
+      <novo-button *ngIf="showClearAll && !showFooter" class="clear-all-button" theme="dialogue" icon="times" side="right"
         color="grapefruit" (click)="deselectEverything($event)">{{ labelService.clear }}</novo-button>
     </div>
     <div class="tabbed-group-picker-column right">
@@ -59,6 +60,30 @@
         <div class="empty-item-sub-message">{{ labelService.tabbedGroupClearSuggestion(displayTab.typeLabel) }}
         </div>
       </div>
+    </div>
+  </div>
+  <div class="footer" *ngIf="showFooter">
+    <div class="save-cancel-button-container">
+      <novo-button
+        class="clear-all-button"
+        *ngIf="showClearAll"
+        theme="dialogue"
+        icon="times"
+        side="right"
+        color="grapefruit"
+        (click)="deselectEverything($event)">{{ labelService.clear }}</novo-button>
+    </div>
+    <div class="save-cancel-button-container">
+      <novo-button
+        class="cancel-button"
+        marginRight="1rem"
+        theme="dialogue"
+        (click)="cancel()">{{ labelService.cancel }}</novo-button>
+      <novo-button
+        class="save-button"
+        theme="primary"
+        color="primary"
+        (click)="apply()">{{ labelService.apply }}</novo-button>
     </div>
   </div>
 </novo-dropdown>

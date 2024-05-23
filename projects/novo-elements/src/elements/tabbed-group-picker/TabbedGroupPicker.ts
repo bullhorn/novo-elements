@@ -16,6 +16,7 @@ import { debounceTime } from 'rxjs/operators';
 import { NovoLabelService } from 'novo-elements/services';
 import { binarySearch, Helpers } from 'novo-elements/utils';
 import { NOVO_OPTION_PARENT_COMPONENT } from 'novo-elements/elements/common';
+import { NovoDropdownElement } from 'novo-elements/elements/dropdown'; 
 
 export type TabbedGroupPickerTab = {
   typeName: string;
@@ -70,14 +71,18 @@ export class NovoTabbedGroupPickerElement implements OnDestroy, OnInit {
   private scrollableInstance: CdkScrollable;
   @ViewChild('inputElement')
   private inputElement: ElementRef<HTMLInputElement>;
+  @ViewChild('dropdown')
+  private dropdown: NovoDropdownElement;
 
   multiple = true;
 
   @Input() buttonConfig: TabbedGroupPickerButtonConfig;
   @Input() tabs: TabbedGroupPickerTab[];
   @Input() quickSelectConfig: QuickSelectConfig;
+  @Input() showFooter = false;
 
   @Output() selectionChange: EventEmitter<any> = new EventEmitter<any>();
+  @Output() applyChange: EventEmitter<any> = new EventEmitter<any>();
 
   displayTabs: TabbedGroupPickerTab[];
   displayTabIndex: number = 0;
@@ -87,6 +92,8 @@ export class NovoTabbedGroupPickerElement implements OnDestroy, OnInit {
 
   loading = true;
   showClearAll: boolean = false;
+
+  appliedState: TabbedGroupPickerTab[];
 
   // Initial height based on 13 px font rendered in chrome. Actual height retrieved onDropdownToggled.
   scrollViewportHeight: number = 351;
@@ -110,12 +117,7 @@ export class NovoTabbedGroupPickerElement implements OnDestroy, OnInit {
   }
 
   ngOnInit(): void {
-    this.setupDisplayData();
-    this.createChildrenReferences();
-    this.initializeDescendantSelection();
-    this.updateParentsAndQuickSelect();
-    this.updateClearAll();
-
+    this.loadValues();
     this.loading = false;
     this.filterTextSubscription = this.filterText.pipe(debounceTime(300)).subscribe({
       next: this.filter,
@@ -126,6 +128,14 @@ export class NovoTabbedGroupPickerElement implements OnDestroy, OnInit {
     if (this.filterTextSubscription) {
       this.filterTextSubscription.unsubscribe();
     }
+  }
+
+  loadValues() {
+    this.setupDisplayData();
+    this.createChildrenReferences();
+    this.initializeDescendantSelection();
+    this.updateParentsAndQuickSelect();
+    this.updateClearAll();
   }
 
   changeTab(tab: TabbedGroupPickerTab) {
@@ -144,6 +154,7 @@ export class NovoTabbedGroupPickerElement implements OnDestroy, OnInit {
     // but both data values point to the same items
     this.displayTabs = this.tabs.map((tab) => ({ ...tab }));
     this.displayTab = this.tabs[0];
+    this.updateAppliedState();
   }
 
   // Replace each parent's child object with a reference to the child to avoid
@@ -310,12 +321,36 @@ export class NovoTabbedGroupPickerElement implements OnDestroy, OnInit {
     return numberOfSelectedItems === childArray.length ? 'selected' : 'indeterminate';
   };
 
-  emitSelectedValues() {
-    const selectedValues: TabbedGroupPickerTab[] = this.tabs.map((tab) => ({
+  getSelectedValues(): TabbedGroupPickerTab[] {
+    return this.tabs.map((tab) => ({
       ...tab,
       data: tab.data.filter(({ selected }) => selected),
     }));
-    this.selectionChange.emit(selectedValues);
+  }
+
+  emitSelectedValues() {
+    this.selectionChange.emit(this.getSelectedValues());
+  }
+
+  updateAppliedState() {
+    this.appliedState = Helpers.deepClone(this.displayTabs);
+  }
+
+  apply() {
+    this.updateAppliedState();
+    this.applyChange.emit(this.getSelectedValues());
+    this.dropdown.closePanel();
+  }
+
+  cancel() {
+    this.revertState();
+    this.ref.markForCheck();
+    this.dropdown.closePanel();
+  }
+
+  revertState() {
+    this.tabs = Helpers.deepClone(this.appliedState);
+    this.loadValues();
   }
 
   deselectEverything(event) {
