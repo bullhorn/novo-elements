@@ -234,6 +234,8 @@ export enum AdaptiveConjunctionNames {
 export enum AdaptiveOperator {
   EqualTo = 'equalTo',
   In = 'in',
+  IncludeAny = 'includeAny',
+  IncludeAll = 'includeAll',
   Is = 'is',
   LessThan = 'lt',
   LessThanEquals = 'lte',
