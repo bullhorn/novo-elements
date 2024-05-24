@@ -5,8 +5,8 @@
     [side]="buttonConfig.side"
     [icon]="buttonConfig.icon"
     [loading]="loading">
-    <div class="tabbed-group-picker-button-label">{{ buttonConfig.label }}</div>
     <ng-content></ng-content>
+    <div class="tabbed-group-picker-button-label">{{ buttonConfig.label }}</div>
   </novo-button>
   <div class="tabbed-group-picker-search" data-automation-id="tabbed-group-picker-search" (keydown)="dropdown._handleKeydown($event)">
     <input #inputElement type="text" [placeholder]="labelService.search" [value]="filterText | async" (input)="onFilter($event)" />
