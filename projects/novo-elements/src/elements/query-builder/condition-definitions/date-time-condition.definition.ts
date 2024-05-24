@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, QueryList, ViewChildren, ViewEncapsulation } from '@angular/core';
 import { NovoPickerToggleElement } from 'novo-elements/elements/field';
 import { AbstractConditionFieldDef } from './abstract-condition.definition';
+import { Operator } from '../query-builder.types';
 
 /**
  * Most complicated of the default conditions defs, a date needs to provide a different
@@ -55,7 +56,7 @@ export class NovoDefaultDateTimeConditionDef extends AbstractConditionFieldDef {
   @ViewChildren(NovoPickerToggleElement)
   overlayChildren: QueryList<NovoPickerToggleElement>;
 
-  defaultOperator = 'within';
+  defaultOperator = Operator.within;
 
   closePanel(event, viewIndex): void {
     const overlay = this.overlayChildren.find(item => item.overlayId === viewIndex);
