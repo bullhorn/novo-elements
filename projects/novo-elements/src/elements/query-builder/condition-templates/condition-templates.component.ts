@@ -5,5 +5,4 @@ import { Component } from '@angular/core';
     templateUrl: './condition-templates.component.html'
 })
 export class NovoConditionTemplatesComponent {
-
 }
