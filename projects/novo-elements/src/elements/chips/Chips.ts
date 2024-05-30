@@ -7,7 +7,7 @@ import { ReplaySubject } from 'rxjs';
 import { ComponentUtils, NovoLabelService } from 'novo-elements/services';
 import { Helpers, Key } from 'novo-elements/utils';
 import { NovoPickerElement } from 'novo-elements/elements/picker';
-import { ElementSize } from 'novo-elements/elements';
+import { ElementSize } from 'novo-elements/elements/common';
 
 // Value accessor for the component (supports ngModel)
 const CHIPS_VALUE_ACCESSOR = {
