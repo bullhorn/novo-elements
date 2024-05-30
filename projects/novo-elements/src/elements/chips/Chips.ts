@@ -7,6 +7,7 @@ import { ReplaySubject } from 'rxjs';
 import { ComponentUtils, NovoLabelService } from 'novo-elements/services';
 import { Helpers, Key } from 'novo-elements/utils';
 import { NovoPickerElement } from 'novo-elements/elements/picker';
+import { ElementSize } from 'novo-elements/elements';
 
 // Value accessor for the component (supports ngModel)
 const CHIPS_VALUE_ACCESSOR = {
@@ -25,6 +26,7 @@ const CHIPS_VALUE_ACCESSOR = {
         [class.selected]="item == selected"
         [selectable]="true"
         [disabled]="disablePickerInput"
+        [size]="size"
         (removed)="remove($event, item)"
         (selectionChange)="select($event, item)"
         (deselect)="deselect($event, item)"
@@ -103,6 +105,8 @@ export class NovoChipsElement implements OnInit, ControlValueAccessor {
   width: string;
   @Input()
   minWidth: string;
+  @Input()
+  size: ElementSize = 'md';
 
   @Output()
   changed: EventEmitter<any> = new EventEmitter();
@@ -340,7 +344,7 @@ export class NovoChipsElement implements OnInit, ControlValueAccessor {
   private _propagateChanges(fallbackValue?: any): void {
     this.changed.emit({ value: this.value?.length ? this.value : '', rawValue: this.items });
     this.onModelChange(this.value);
-    this._updateOverlay();    
+    this._updateOverlay();
   }
 
   private _updateOverlay() {
