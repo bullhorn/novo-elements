@@ -48,6 +48,14 @@
     }
   }
 
+  .footer {
+    background: var(--background-main);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+  }
+
   .tabbed-group-picker-column-container {
     display: flex;
     flex-direction: row;

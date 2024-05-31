@@ -33,6 +33,7 @@ export class NovoLabelService {
   quickNoteEmpty = 'No results to display...';
   required = 'Required';
   numberTooLarge = 'Number is too large';
+  apply = 'Apply';
   save = 'Save';
   cancel = 'Cancel';
   next = 'Next';
