@@ -248,6 +248,8 @@ export class NovoTabbedGroupPickerElement implements OnDestroy, OnInit {
     if (event) {
       this.scrollViewportHeight = this.getPixelHeight(this.scrollableInstance.getElementRef().nativeElement);
       this.virtualScrollItemSize = this.getPixelHeight(this.scrollableInstance.getElementRef().nativeElement.querySelector('novo-option'));
+      // Emit a fake scroll event so the rendered items update
+      this.scrollableInstance.getElementRef().nativeElement.dispatchEvent(new Event('scroll'));
     }
   }
 
