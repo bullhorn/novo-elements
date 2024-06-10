@@ -2751,6 +2751,9 @@ export class QueryBuilderDevelopPage {
   template: `<h2>Just a basic Criteria Builder</h2>
 <p>A common use case is to just collect a list of criteria to build as a query.  A Criteria can contain multiple conditions which will need to be joined by a conjunctions (and/or).</p>
 <p><code-example example="just-criteria"></code-example></p>
+<h1>Single Field Criteria Builder</h1>
+<p>While the Criteria Builder can support multiple fields at once, its UI can also be configured to express a condition on a single field specified in via configuration input. This mode is more suitable for compact scenarios.</p>
+<p><code-example example="single-field-criteria"></code-example></p>
 <h2>Full Query Builder</h2>
 <p>The difference between the Query and Criteria Builder is that it allow for the user to define multiple criteria and join them as either inclusion or exclusion criteria.  ie. Find <code>where fruit.seeds &gt;= 1 and not fruit.name='Avacodo'</code></p>
 <p>TBW</p>
