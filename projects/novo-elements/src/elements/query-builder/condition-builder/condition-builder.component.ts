@@ -54,11 +54,11 @@ export class ConditionOperatorOutlet implements QueryFilterOutlet {
     {
       provide: QueryBuilderService,
       deps: [NovoLabelService, [new SkipSelf(), new Optional(), QueryBuilderService]],
-      useFactory: (labelService: NovoLabelService, qbs?: QueryBuilderService) => {
-        if (!qbs) {
-          qbs = new QueryBuilderService(labelService);
+      useFactory: (labelService: NovoLabelService, queryBuilderService?: QueryBuilderService) => {
+        if (!queryBuilderService) {
+          queryBuilderService = new QueryBuilderService(labelService);
         }
-        return qbs;
+        return queryBuilderService;
       }
     }
   ],
