@@ -80,15 +80,15 @@ export class ConditionBuilderComponent implements OnInit, OnChanges, AfterConten
   inputEditTypeFn = input<(field: BaseFieldDef) => string>(null, { alias: 'editTypeFn'});
   private config = computed<QueryBuilderConfig>(() => {
     if (this.isConditionHost) {
-      this.qbs.config = this.inputConfig();
+      this.queryBuilderService.config = this.inputConfig();
     }
-    return this.qbs.config;
+    return this.queryBuilderService.config;
   });
   private editTypeFn = computed<(field: BaseFieldDef) => string>(() => {
     if (this.isConditionHost) {
-      this.qbs.editTypeFn = this.inputEditTypeFn();
+      this.queryBuilderService.editTypeFn = this.inputEditTypeFn();
     }
-    return this.qbs.editTypeFn;
+    return this.queryBuilderService.editTypeFn;
   });
 
   public parentForm: FormGroup;
@@ -118,11 +118,11 @@ export class ConditionBuilderComponent implements OnInit, OnChanges, AfterConten
   constructor(
     public labels: NovoLabelService,
     private cdr: ChangeDetectorRef,
-    private qbs: QueryBuilderService,
+    private queryBuilderService: QueryBuilderService,
     private controlContainer: ControlContainer,
   ) {
-    if (!qbs.componentHost) {
-      qbs.componentHost = this;
+    if (!queryBuilderService.componentHost) {
+      queryBuilderService.componentHost = this;
       this.isConditionHost = true;
       this.groupIndex = 0;
       this.andIndex = 0;
@@ -224,7 +224,7 @@ export class ConditionBuilderComponent implements OnInit, OnChanges, AfterConten
     const editType = this.editTypeFn()(field);
     // Don't look at dataSpecialization it is no good, this misses currency, and percent
     const { name } = field;
-    const fieldDefsByName = this.qbs.getFieldDefsByName();
+    const fieldDefsByName = this.queryBuilderService.getFieldDefsByName();
     // Check Fields by priority for match Field Definition
     const key = [name, editType?.toUpperCase(), 'DEFAULT'].find((it) => fieldDefsByName.has(it));
     return fieldDefsByName.get(key);

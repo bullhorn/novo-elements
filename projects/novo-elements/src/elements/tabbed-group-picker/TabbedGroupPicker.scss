@@ -59,6 +59,7 @@
   .tabbed-group-picker-column-container {
     display: flex;
     flex-direction: row;
+    user-select: none;
 
     .tabbed-group-picker-column {
       display: flex;
