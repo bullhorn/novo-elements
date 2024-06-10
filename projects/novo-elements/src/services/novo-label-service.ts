@@ -123,6 +123,7 @@ export class NovoLabelService {
   includeAny = 'Include Any';
   includeAll = 'Include All';
   exclude = 'Exclude';
+  excludeAny = 'Exclude Any';
   radius = 'Radius';
   equals = 'Equals';
   equalTo = 'Equal To';

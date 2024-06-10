@@ -1,0 +1,12 @@
+<div class="tabbed-group-picker-example">
+  <novo-tabbed-group-picker
+    [tabs]="example_tab"
+    [selectionEnabled]="false"
+    [buttonConfig]="example_buttonConfig"
+    (activation)="onActivation($event)"
+  ></novo-tabbed-group-picker>
+  <div class="selected-data-wrapper">
+    <h6>Last selection:</h6>
+    <div>{{ lastSelection }}</div>
+  </div>
+</div>

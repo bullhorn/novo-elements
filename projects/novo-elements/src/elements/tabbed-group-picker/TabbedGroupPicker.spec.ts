@@ -400,7 +400,7 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
       component.onItemToggled(chicken);
 
       const selectedItem = component.tabs[0].data[0];
-      const displayReference = component.displayTabs.find(({ typeName }) => typeName === 'chickens').data[0];
+      const displayReference = component.displayTabs.find((tab) => tab.typeName === 'chickens')!.data[0];
 
       expect(selectedItem.selected).toEqual(true);
       expect(displayReference.selected).toEqual(true);
@@ -429,10 +429,9 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
         },
       ];
       const chicken = component.tabs[0].data[0];
-      chicken.selected = true;
 
       component.createChildrenReferences();
-      component.onItemToggled(chicken);
+      component.activateItem(chicken);
 
       const selectedItem = component.tabs[0].data[0];
       expect(selectedItem.selected).toEqual(true);
@@ -456,11 +455,31 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
         },
       ];
       const chicken = component.tabs[0].data[0];
-      chicken.selected = true;
       const tRex = component.tabs[1].data[0];
 
-      component.onItemToggled(chicken);
+      component.activateItem(chicken);
       expect(tRex.selected).toEqual(true);
     });
   });
+
+  describe('Activation mode', () => {
+    it('should emit an activation, not selectionChange event when activation mode is enabled', () => {
+      let activation: any;
+      let selection: any;
+      component.activation.subscribe(item => {
+        activation = item;
+      });
+      component.selectionChange.subscribe(newSelection => {
+        selection = newSelection;
+      });
+      const chickenTab = getChickenTab();
+      component.selectionEnabled = false;
+      component.tabs = [chickenTab];
+      const chicken = component.tabs[0].data[0];
+
+      component.activateItem(chicken);
+      expect(selection).toBeUndefined();
+      expect(activation).toBe(chicken);
+    });
+  })
 });
