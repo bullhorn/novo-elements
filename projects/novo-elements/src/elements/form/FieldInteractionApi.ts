@@ -813,49 +813,53 @@ export class FieldInteractionApi {
     let fieldsetIndex: number;
     let controlIndex: number;
     if (control) {
-      fieldsetIndex = -1;
-      controlIndex = -1;
+      if (!form.fieldsets) {
+        this.addControlForFormGroup(key, metaForNewField, position, initialValue, form);
+      } else {
+        fieldsetIndex = -1;
+        controlIndex = -1;
 
-      form.fieldsets.forEach((fieldset, fi) => {
-        fieldset.controls.forEach((fieldsetControl, ci) => {
-          if (fieldsetControl.key === key) {
-            fieldsetIndex = fi;
-            controlIndex = ci;
-          }
+        form.fieldsets.forEach((fieldset, fi) => {
+          fieldset.controls.forEach((fieldsetControl, ci) => {
+            if (fieldsetControl.key === key) {
+              fieldsetIndex = fi;
+              controlIndex = ci;
+            }
+          });
         });
-      });
 
-      // Change the position of the newly added field
-      switch (position) {
-        case FieldInteractionApi.FIELD_POSITIONS.ABOVE_FIELD:
-          // Adding field above active field
-          // index can stay the same
-          break;
-        case FieldInteractionApi.FIELD_POSITIONS.BELOW_FIELD:
-          // Adding field below active field
-          controlIndex += 1;
-          break;
-        case FieldInteractionApi.FIELD_POSITIONS.TOP_OF_FORM:
-          // Adding field to the top of the form
-          controlIndex = 0;
-          fieldsetIndex = 0;
-          break;
-        case FieldInteractionApi.FIELD_POSITIONS.BOTTOM_OF_FORM:
-          // Adding field to the bottom of the form
-          fieldsetIndex = form.fieldsets.length - 1;
-          controlIndex = form.fieldsets[fieldsetIndex].controls.length;
-          break;
-        default:
-          break;
-      }
+        // Change the position of the newly added field
+        switch (position) {
+          case FieldInteractionApi.FIELD_POSITIONS.ABOVE_FIELD:
+            // Adding field above active field
+            // index can stay the same
+            break;
+          case FieldInteractionApi.FIELD_POSITIONS.BELOW_FIELD:
+            // Adding field below active field
+            controlIndex += 1;
+            break;
+          case FieldInteractionApi.FIELD_POSITIONS.TOP_OF_FORM:
+            // Adding field to the top of the form
+            controlIndex = 0;
+            fieldsetIndex = 0;
+            break;
+          case FieldInteractionApi.FIELD_POSITIONS.BOTTOM_OF_FORM:
+            // Adding field to the bottom of the form
+            fieldsetIndex = form.fieldsets.length - 1;
+            controlIndex = form.fieldsets[fieldsetIndex].controls.length;
+            break;
+          default:
+            break;
+        }
 
-      if (fieldsetIndex !== -1 && controlIndex !== -1) {
-        const novoControl = this.formUtils.getControlForField(metaForNewField, this.http, {});
-        novoControl.hidden = false;
-        const formControl = new NovoFormControl(initialValue, novoControl);
-        form.addControl(novoControl.key, formControl);
-        form.fieldsets[fieldsetIndex].controls.splice(controlIndex, 0, novoControl);
-        this.triggerEvent({ controlKey: key, prop: 'addControl', value: formControl }, otherForm);
+        if (fieldsetIndex !== -1 && controlIndex !== -1) {
+          const novoControl = this.formUtils.getControlForField(metaForNewField, this.http, {});
+          novoControl.hidden = false;
+          const formControl = new NovoFormControl(initialValue, novoControl);
+          form.addControl(novoControl.key, formControl);
+          form.fieldsets[fieldsetIndex].controls.splice(controlIndex, 0, novoControl);
+          this.triggerEvent({ controlKey: key, prop: 'addControl', value: formControl }, otherForm);
+        }
       }
     }
   }
@@ -920,6 +924,58 @@ export class FieldInteractionApi {
     const form = otherForm || this.form;
     if (form && form.fieldInteractionEvents) {
       form.fieldInteractionEvents.emit(event);
+    }
+  }
+
+  private addControlForFormGroup(
+    key: string,
+    metaForNewField: {
+      key?: string;
+      type?: string;
+      name?: string;
+      label?: string;
+      interactions?: Array<{ event?: string; invokeOnInit?: boolean; script? }>;
+    },
+    position: string = FieldInteractionApi.FIELD_POSITIONS.ABOVE_FIELD,
+    initialValue,
+    form: NovoFormGroup,
+  ): void {
+      let controlIndex = -1;
+      form.controls.forEach((fieldsetControl, ci) => {
+        if (fieldsetControl.key === key) {
+          controlIndex = ci;
+        }
+      });
+
+    // Change the position of the newly added field
+    switch (position) {
+      case FieldInteractionApi.FIELD_POSITIONS.ABOVE_FIELD:
+        // Adding field above active field
+        // index can stay the same
+        break;
+      case FieldInteractionApi.FIELD_POSITIONS.BELOW_FIELD:
+        // Adding field below active field
+        controlIndex += 1;
+        break;
+      case FieldInteractionApi.FIELD_POSITIONS.TOP_OF_FORM:
+        // Adding field to the top of the form
+        controlIndex = 0;
+        break;
+      case FieldInteractionApi.FIELD_POSITIONS.BOTTOM_OF_FORM:
+        // Adding field to the bottom of the form
+        controlIndex = form.controls.length;
+        break;
+      default:
+        break;
+    }
+
+    if (controlIndex !== -1) {
+      const novoControl = this.formUtils.getControlForField(metaForNewField, this.http, {});
+      novoControl.hidden = false;
+      const formControl = new NovoFormControl(initialValue, novoControl);
+      form.addControl(novoControl.key, formControl);
+      form.controls.splice(controlIndex, 0, novoControl);
+      this.triggerEvent({ controlKey: key, prop: 'addControl', value: formControl }, form);
     }
   }
 }
