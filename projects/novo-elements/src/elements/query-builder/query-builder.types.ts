@@ -7,8 +7,10 @@ export enum Conjunction {
 }
 
 export type ConditionGroup = {
-  [K in Conjunction as `$${K}`]?: Condition[]
+  [K in Conjunction as `$${K}`]?: ConditionOrConjunctionGroup[];
 };
+
+export type ConditionOrConjunctionGroup = Condition | ConditionGroup;
 
 export enum Operator {
   after = 'after',

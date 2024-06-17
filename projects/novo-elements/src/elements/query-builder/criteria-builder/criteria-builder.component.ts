@@ -138,7 +138,7 @@ export class CriteriaBuilderComponent implements OnInit, OnDestroy, AfterContent
     const controls = Object.entries(data).reduce((obj, [key, val]) => {
       return {
         ...obj,
-        [key]: this.formBuilder.array(val.map((it) => this.newCondition(it))),
+        [key]: this.formBuilder.array(val.map((it: Condition) => this.newCondition(it))),
       };
     }, {});
     return this.formBuilder.group(controls);
