@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { AbstractControl } from '@angular/forms';
+import { AbstractControl, UntypedFormGroup } from '@angular/forms';
 import { AbstractConditionFieldDef } from './abstract-condition.definition';
 import { Operator } from '../query-builder.types';
 
@@ -58,6 +58,11 @@ import { Operator } from '../query-builder.types';
 })
 export class NovoDefaultStringConditionDef extends AbstractConditionFieldDef {
   defaultOperator = Operator.includeAny;
+
+  constructor() {
+    super();
+    this.defineOperatorEditGroup(Operator.includeAny, Operator.includeAll, Operator.excludeAny);
+  }
 
   getValue(formGroup: AbstractControl): any[] {
     return formGroup.value?.value || [];

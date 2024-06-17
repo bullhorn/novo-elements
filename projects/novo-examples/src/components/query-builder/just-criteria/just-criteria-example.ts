@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { AbstractControl, UntypedFormBuilder, UntypedFormControl } from '@angular/forms';
 import {
   AbstractConditionFieldDef,
@@ -49,9 +49,7 @@ export class CustomPickerConditionDef extends AbstractConditionFieldDef implemen
   /** Subject that emits when the component has been destroyed. */
   protected _onDestroy = new Subject<void>();
 
-  constructor(public http: HttpClient, labels: NovoLabelService) {
-    super(labels);
-  }
+  http = inject(HttpClient);
 
   ngOnInit() {
     super.ngOnInit();

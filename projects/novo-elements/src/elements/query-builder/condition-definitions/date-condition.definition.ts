@@ -59,6 +59,11 @@ export class NovoDefaultDateConditionDef extends AbstractConditionFieldDef {
 
   defaultOperator = Operator.within;
 
+  constructor() {
+    super();
+    this.defineOperatorEditGroup(Operator.before, Operator.after);
+  }
+
   closePanel(event, viewIndex): void {
     const overlay = this.overlayChildren.find(item => item.overlayId === viewIndex);
     overlay.closePanel(event);

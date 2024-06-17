@@ -29,4 +29,9 @@ import { Operator } from '../query-builder.types';
 })
 export class NovoDefaultBooleanConditionDef extends AbstractConditionFieldDef {
   defaultOperator = Operator.include;
+
+  constructor() {
+    super();
+    this.defineOperatorEditGroup(Operator.include, Operator.exclude, Operator.isNull);
+  }
 }

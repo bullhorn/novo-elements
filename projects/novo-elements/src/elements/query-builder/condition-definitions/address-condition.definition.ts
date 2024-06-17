@@ -4,6 +4,7 @@ import {
   Component,
   computed,
   ElementRef,
+  inject,
   input,
   InputSignal,
   OnDestroy,
@@ -115,9 +116,7 @@ export class NovoDefaultAddressConditionDef extends AbstractConditionFieldDef im
 
   private _addressChangesSubscription: Subscription = Subscription.EMPTY;
 
-  constructor(public element: ElementRef, public labels: NovoLabelService) {
-    super(labels);
-  }
+  public element = inject(ElementRef);
 
   ngAfterViewInit() {
     setTimeout(() => {

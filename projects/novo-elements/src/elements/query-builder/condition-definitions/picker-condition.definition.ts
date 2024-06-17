@@ -41,4 +41,9 @@ import { NovoSelectElement } from 'novo-elements/elements/select';
 })
 export class NovoDefaultPickerConditionDef extends AbstractConditionFieldDef {
   defaultOperator = Operator.includeAny;
+
+  constructor() {
+    super();
+    this.defineOperatorEditGroup(Operator.includeAny, Operator.includeAll, Operator.excludeAny);
+  }
 }

@@ -36,4 +36,9 @@ import { Operator } from '../query-builder.types';
 })
 export class NovoDefaultNumberConditionDef extends AbstractConditionFieldDef {
   defaultOperator = Operator.equalTo;
+
+  constructor() {
+    super();
+    this.defineOperatorEditGroup(Operator.greaterThan, Operator.lessThan, Operator.equalTo);
+  }
 }
