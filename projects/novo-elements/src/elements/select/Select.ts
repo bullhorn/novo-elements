@@ -647,6 +647,19 @@ export class NovoSelectElement
 
   writeValue(value: any): void {
     this.value = value;
+    if (value) {
+      if (!(Array.isArray(value))) {
+        value = [value];
+      }
+    } else {
+      value = [];
+    }
+    const options = this._getOptions();
+    if (options) {
+      options.forEach(option => {
+        option.toggleSelection(value.indexOf(option.value) !== -1);
+      });
+    }
   }
 
   registerOnChange(fn: Function): void {

@@ -138,7 +138,7 @@ export class NovoOptionBase implements FocusableOption, AfterViewChecked, OnDest
     if (!this._selected) {
       this._selected = true;
       this._changeDetectorRef.markForCheck();
-      // this._emitSelectionChangeEvent();
+      this._emitSelectionChangeEvent();
     }
   }
 
@@ -147,7 +147,18 @@ export class NovoOptionBase implements FocusableOption, AfterViewChecked, OnDest
     if (this._selected) {
       this._selected = false;
       this._changeDetectorRef.markForCheck();
-      // this._emitSelectionChangeEvent();
+      this._emitSelectionChangeEvent();
+    }
+  }
+
+  toggleSelection(val?: boolean): void {
+    if (typeof val === 'undefined') {
+      val = !this._selected;
+    }
+    if (val && !this._selected) {
+      this.select();
+    } else if (!val && this._selected) {
+      this.deselect();
     }
   }
 
