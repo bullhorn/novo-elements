@@ -98,6 +98,7 @@ describe('Elements: NovoCKEditorElement', () => {
     it('should return extended config object #1', () => {
       component.minimal = false;
       expect(component.getBaseConfig()).toEqual({
+        versionCheck: false,
         enterMode: window.CKEDITOR.ENTER_BR,
         entities: false,
         shiftEnterMode: window.CKEDITOR.ENTER_P,
@@ -149,6 +150,7 @@ describe('Elements: NovoCKEditorElement', () => {
       component.minimal = false;
       component.fileBrowserImageUploadUrl = '/foo/bar/baz.cfm';
       expect(component.getBaseConfig()).toEqual({
+        versionCheck: false,
         enterMode: window.CKEDITOR.ENTER_BR,
         entities: false,
         shiftEnterMode: window.CKEDITOR.ENTER_P,
@@ -199,6 +201,7 @@ describe('Elements: NovoCKEditorElement', () => {
     it('should return minimal config object', () => {
       component.minimal = true;
       expect(component.getBaseConfig()).toEqual({
+        versionCheck: false,
         enterMode: window.CKEDITOR.ENTER_BR,
         entities: false,
         shiftEnterMode: window.CKEDITOR.ENTER_P,
