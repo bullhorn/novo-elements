@@ -169,6 +169,7 @@ export class NovoCKEditorElement implements OnDestroy, AfterViewInit, ControlVal
 
   getBaseConfig(): { [key: string]: any } {
     const baseConfig = {
+      versionCheck: false,
       enterMode: CKEDITOR.ENTER_BR,
       entities: false,
       shiftEnterMode: CKEDITOR.ENTER_P,
