@@ -47,4 +47,10 @@ describe('Directive: NovoSelectExtUpdateFix', () => {
     comp.form.controls.value.setValue(['1']);
     expect(comp.select.contentOptions.map(opt => opt.selected)).toEqual([true, false, false]);
   });
+
+  // This case may arise if, for instance, a dynamic form is about to transform this
+  // control from a novo-select to something else.
+  it('should not trigger errors from negative use-case variables', () => {
+    (comp.form.controls.value as FormControl).setValue('candy');
+  })
 });

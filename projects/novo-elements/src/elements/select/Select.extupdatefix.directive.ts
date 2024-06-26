@@ -1,4 +1,4 @@
-import { Directive, OnInit, Signal, inject } from '@angular/core';
+import { Directive, OnInit, inject } from '@angular/core';
 import { FormControl, NgControl } from '@angular/forms';
 import { NovoSelectElement } from './Select';
 
@@ -17,7 +17,9 @@ export class NovoSelectExtUpdateFix implements OnInit {
   ngOnInit() {
     if (this.control?.control && 'registerOnChange' in this.control.control) {
       (this.control.control as FormControl).registerOnChange((rawValue, viewToModelUpdate) => {
-        this.afterExternalUpdate(rawValue);
+        if (this.selectElement.multiple === Array.isArray(rawValue)) {
+          this.afterExternalUpdate(rawValue);
+        }
       });
     }
   }
