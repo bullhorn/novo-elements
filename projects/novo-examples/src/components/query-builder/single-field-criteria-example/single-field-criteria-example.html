@@ -1,0 +1,17 @@
+<form [formGroup]="queryForm" (ngSubmit)="onSubmit()">
+  <novo-condition-builder
+    #builder
+    [config]="config"
+    [editTypeFn]="editTypeFn">
+  </novo-condition-builder>
+</form>
+
+<novo-field mb="lg">
+  <novo-label>Choose single field to auto-select for criteria</novo-label>
+  <novo-select placeholder="Single field" [ngModel]="config.staticFieldSelection" (ngModelChange)="updateConfig({ staticFieldSelection: $event })">
+    <novo-option value="">Show All Fields</novo-option>
+    <novo-option *ngFor="let field of mockMetaFields" [value]="field.name">{{ field.label || field.name }}</novo-option>
+  </novo-select>
+</novo-field>
+
+<pre><code>{{queryForm.value | json}}</code></pre>

@@ -6,20 +6,27 @@ import {
   Component,
   Directive,
   ElementRef,
+  HostBinding,
   Input,
+  OnChanges,
   OnDestroy,
   OnInit,
+  Optional,
+  SimpleChanges,
+  SkipSelf,
   ViewChild,
   ViewContainerRef,
+  computed,
+  input
 } from '@angular/core';
-import { AbstractControl, ControlContainer, FormControl } from '@angular/forms';
+import { ControlContainer, FormControl, FormGroup } from '@angular/forms';
+import { NovoLabelService } from 'novo-elements/services';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { BaseConditionFieldDef } from '../query-builder.directives';
-import { QueryBuilderService } from '../query-builder.service';
+import { QueryBuilderConfig, QueryBuilderService } from '../query-builder.service';
 import { NOVO_CONDITION_BUILDER } from '../query-builder.tokens';
 import { BaseFieldDef, FieldConfig, QueryFilterOutlet } from '../query-builder.types';
-import { NovoLabelService } from 'novo-elements/services';
 
 /**
  * Provides a handle for the table to grab the view container's ng-container to insert data rows.
@@ -43,26 +50,67 @@ export class ConditionOperatorOutlet implements QueryFilterOutlet {
   selector: 'novo-condition-builder',
   templateUrl: './condition-builder.component.html',
   styleUrls: ['./condition-builder.component.scss'],
-  providers: [{ provide: NOVO_CONDITION_BUILDER, useExisting: ConditionBuilderComponent }],
+  providers: [{ provide: NOVO_CONDITION_BUILDER, useExisting: ConditionBuilderComponent },
+    {
+      provide: QueryBuilderService,
+      deps: [NovoLabelService, [new SkipSelf(), new Optional(), QueryBuilderService]],
+      useFactory: (labelService: NovoLabelService, queryBuilderService?: QueryBuilderService) => {
+        if (!queryBuilderService) {
+          queryBuilderService = new QueryBuilderService(labelService);
+        }
+        return queryBuilderService;
+      }
+    }
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ConditionBuilderComponent implements OnInit, AfterContentInit, AfterViewInit, OnDestroy {
+export class ConditionBuilderComponent implements OnInit, OnChanges, AfterContentInit, AfterViewInit, OnDestroy {
   @ViewChild(ConditionOperatorOutlet, { static: true }) _operatorOutlet: ConditionOperatorOutlet;
   @ViewChild(ConditionInputOutlet, { static: true }) _inputOutlet: ConditionInputOutlet;
 
   @Input() label: any;
-  @Input() isFirst: boolean;
+  isFirst = input(false);
   @Input() andIndex: number;
   @Input() groupIndex: number;
+  
+  // This component can either be directly hosted as a host to a condition, or it can be part of a condition group within a criteria builder.
+  // In the former case, config will come from inputs, and we will instantiate our own QueryBuilderService. In the latter, it comes from
+  // the QueryBuilderService.
+  inputConfig = input<QueryBuilderConfig>(null, { alias: 'config'});
+  inputEditTypeFn = input<(field: BaseFieldDef) => string>(null, { alias: 'editTypeFn'});
+  private config = computed<QueryBuilderConfig>(() => {
+    if (this.isConditionHost) {
+      this.queryBuilderService.config = this.inputConfig();
+    }
+    return this.queryBuilderService.config;
+  });
+  private editTypeFn = computed<(field: BaseFieldDef) => string>(() => {
+    if (this.isConditionHost) {
+      this.queryBuilderService.editTypeFn = this.inputEditTypeFn();
+    }
+    return this.queryBuilderService.editTypeFn;
+  });
 
-  public parentForm: AbstractControl;
+  public parentForm: FormGroup;
   public fieldConfig: FieldConfig<BaseFieldDef>;
   public searches!: Subscription;
   public results$: Promise<any[]>;
   public searchTerm: FormControl = new FormControl();
   public fieldDisplayWith;
 
+  public staticFieldSelection = computed(() => this.config().staticFieldSelection);
   private _lastContext: any = {};
+  @HostBinding('class.condition-host')
+  public isConditionHost = false;
+
+  public gridColumns = computed(() => {
+    if (this.staticFieldSelection()) {
+      return '13rem 1fr';
+    } else {
+      const firstColumnWidth = this.isFirst() ? '20rem' : '16rem';
+      return `${firstColumnWidth} 13rem 1fr`;
+    }
+  });
 
   /** Subject that emits when the component has been destroyed. */
   private readonly _onDestroy = new Subject<void>();
@@ -70,19 +118,33 @@ export class ConditionBuilderComponent implements OnInit, AfterContentInit, Afte
   constructor(
     public labels: NovoLabelService,
     private cdr: ChangeDetectorRef,
-    private qbs: QueryBuilderService,
+    private queryBuilderService: QueryBuilderService,
     private controlContainer: ControlContainer,
-  ) {}
+  ) {
+    if (!queryBuilderService.componentHost) {
+      queryBuilderService.componentHost = this;
+      this.isConditionHost = true;
+      this.groupIndex = 0;
+      this.andIndex = 0;
+    }
+  }
 
   ngOnInit() {
-    this.parentForm = this.controlContainer.control;
-    this.parentForm.valueChanges.subscribe((value) => {
-      Promise.resolve().then(() => this.onFieldSelect());
+    this.parentForm = this.controlContainer.control as FormGroup;
+    this.parentForm.controls.field.valueChanges.subscribe((value) => {
+      Promise.resolve().then(() => this.updateFieldSelection());
     });
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.inputConfig?.previousValue?.staticFieldSelection &&
+      changes.inputConfig.previousValue.staticFieldSelection !== changes.inputConfig.currentValue.staticFieldSelection) {
+        this.parentForm.controls.field.setValue(changes.inputConfig.currentValue.staticFieldSelection);
+    }
+  }
+
   ngAfterContentInit() {
-    const { fields = [] } = this.qbs.config || {};
+    const fields = this.config()?.fields || [];
     fields.length && this.changeFieldOptions(fields[0]);
     this.searches = this.searchTerm.valueChanges.pipe(debounceTime(300), distinctUntilChanged()).subscribe((term) => {
       this.results$ = Promise.resolve(
@@ -96,7 +158,7 @@ export class ConditionBuilderComponent implements OnInit, AfterContentInit, Afte
 
   ngAfterViewInit() {
     if (this.parentForm.value?.field !== null) {
-      Promise.resolve().then(() => this.onFieldSelect());
+      Promise.resolve().then(() => this.updateFieldSelection());
     }
   }
 
@@ -121,20 +183,20 @@ export class ConditionBuilderComponent implements OnInit, AfterContentInit, Afte
   }
 
   getField() {
-    const { field } = this.parentForm?.value;
+    const field = this.parentForm?.value?.field;
     if (!field) return null;
     return this.fieldConfig.find(field);
   }
 
   getDefaultField() {
     const fields = this.fieldConfig.options;
-    if (fields && fields.length) {
+    if (fields?.length) {
       return fields[0].name;
     }
     return null;
   }
 
-  onFieldSelect() {
+  updateFieldSelection() {
     const fieldConf = this.getField();
     if (!fieldConf) {
       this.parentForm.get('field').setValue(this.getDefaultField());
@@ -142,11 +204,11 @@ export class ConditionBuilderComponent implements OnInit, AfterContentInit, Afte
     } else {
       this.fieldDisplayWith = () => fieldConf.label || fieldConf.name;
     }
-    const { field, operator } = this.parentForm.value;
+    const { field } = this.parentForm.value;
 
     if (this._lastContext.field !== field) {
-      if (!!this._lastContext.field) {
-        // only clearing operator/value is field was previously defined so we can preload values onto the form
+      if (this._lastContext.field) {
+        // only clearing operator/value if field was previously defined so we can preload values onto the form
         this.parentForm.get('value').setValue(null);
         this.parentForm.get('operator').setValue(null);
       }
@@ -159,10 +221,10 @@ export class ConditionBuilderComponent implements OnInit, AfterContentInit, Afte
 
   private findDefinitionForField(field) {
     if (!field) return;
-    const editType = this.qbs.editTypeFn(field);
+    const editType = this.editTypeFn()(field);
     // Don't look at dataSpecialization it is no good, this misses currency, and percent
-    const { name, inputType, dataType, type } = field;
-    const fieldDefsByName = this.qbs.getFieldDefsByName();
+    const { name } = field;
+    const fieldDefsByName = this.queryBuilderService.getFieldDefsByName();
     // Check Fields by priority for match Field Definition
     const key = [name, editType?.toUpperCase(), 'DEFAULT'].find((it) => fieldDefsByName.has(it));
     return fieldDefsByName.get(key);

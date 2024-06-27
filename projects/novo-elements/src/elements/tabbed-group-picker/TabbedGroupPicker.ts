@@ -3,18 +3,21 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  ElementRef,
   EventEmitter,
   Input,
   OnDestroy,
   OnInit,
   Output,
   ViewChild,
+  viewChild,
 } from '@angular/core';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { NovoLabelService } from 'novo-elements/services';
-import { binarySearch, Helpers } from 'novo-elements/utils';
+import { binarySearch, BooleanInput, Helpers } from 'novo-elements/utils';
 import { NOVO_OPTION_PARENT_COMPONENT } from 'novo-elements/elements/common';
+import { NovoDropdownElement } from 'novo-elements/elements/dropdown';
 
 export type TabbedGroupPickerTab = {
   typeName: string;
@@ -30,11 +33,16 @@ export type ParentTab = {
   data: Array<ParentOption>;
 };
 
-type ParentOption = {
+type BaseOption = {
   selected?: boolean;
   indeterminate?: boolean;
-  children: Array<{ selected?: boolean }>;
 } & { [key: string]: any };
+
+type ParentOption = BaseOption & {
+  children: Option[];
+};
+
+type Option = BaseOption | ParentOption;
 
 export type ChildTab = {
   data: Array<{ selected?: boolean } & { [key: string]: any }>;
@@ -67,14 +75,25 @@ export type TabbedGroupPickerButtonConfig = {
 export class NovoTabbedGroupPickerElement implements OnDestroy, OnInit {
   @ViewChild('tabbedGroupPickerVirtualScrollViewport')
   private scrollableInstance: CdkScrollable;
+  @ViewChild('inputElement')
+  private inputElement: ElementRef<HTMLInputElement>;
+  @ViewChild('dropdown')
+  public dropdown: NovoDropdownElement;
 
   multiple = true;
 
   @Input() buttonConfig: TabbedGroupPickerButtonConfig;
   @Input() tabs: TabbedGroupPickerTab[];
   @Input() quickSelectConfig: QuickSelectConfig;
+  @Input() showFooter = false;
 
-  @Output() selectionChange: EventEmitter<any> = new EventEmitter<any>();
+  // In activation mode, no checkboxes are displayed, and only the selectionActivated event occurs.
+  @BooleanInput()
+  @Input() selectionEnabled = true;
+
+  @Output() activation = new EventEmitter<any>();
+  @Output() selectionChange = new EventEmitter<TabbedGroupPickerTab[]>();
+  @Output() applyChange: EventEmitter<any> = new EventEmitter<any>();
 
   displayTabs: TabbedGroupPickerTab[];
   displayTabIndex: number = 0;
@@ -84,6 +103,8 @@ export class NovoTabbedGroupPickerElement implements OnDestroy, OnInit {
 
   loading = true;
   showClearAll: boolean = false;
+
+  appliedState: TabbedGroupPickerTab[];
 
   // Initial height based on 13 px font rendered in chrome. Actual height retrieved onDropdownToggled.
   scrollViewportHeight: number = 351;
@@ -107,12 +128,7 @@ export class NovoTabbedGroupPickerElement implements OnDestroy, OnInit {
   }
 
   ngOnInit(): void {
-    this.setupDisplayData();
-    this.createChildrenReferences();
-    this.initializeDescendantSelection();
-    this.updateParentsAndQuickSelect();
-    this.updateClearAll();
-
+    this.loadValues();
     this.loading = false;
     this.filterTextSubscription = this.filterText.pipe(debounceTime(300)).subscribe({
       next: this.filter,
@@ -123,6 +139,14 @@ export class NovoTabbedGroupPickerElement implements OnDestroy, OnInit {
     if (this.filterTextSubscription) {
       this.filterTextSubscription.unsubscribe();
     }
+  }
+
+  loadValues() {
+    this.setupDisplayData();
+    this.createChildrenReferences();
+    this.initializeDescendantSelection();
+    this.updateParentsAndQuickSelect();
+    this.updateClearAll();
   }
 
   changeTab(tab: TabbedGroupPickerTab) {
@@ -141,6 +165,7 @@ export class NovoTabbedGroupPickerElement implements OnDestroy, OnInit {
     // but both data values point to the same items
     this.displayTabs = this.tabs.map((tab) => ({ ...tab }));
     this.displayTab = this.tabs[0];
+    this.updateAppliedState();
   }
 
   // Replace each parent's child object with a reference to the child to avoid
@@ -156,7 +181,7 @@ export class NovoTabbedGroupPickerElement implements OnDestroy, OnInit {
         const sortedChildren = childTab.data.slice().sort(compareFunction);
 
         tab.data
-          .filter(({ children }) => children && children.length)
+          .filter(({ children }) => children?.length)
           .forEach((parent: { children?: any[] }) =>
             this.replaceChildrenWithReferences(parent as ParentOption, sortedChildren, compareFunction, warnFunction),
           );
@@ -219,13 +244,22 @@ export class NovoTabbedGroupPickerElement implements OnDestroy, OnInit {
 
   onDropdownToggle(event) {
     this.filterText.next('');
+    this.inputElement.nativeElement?.focus();
     if (event) {
       this.scrollViewportHeight = this.getPixelHeight(this.scrollableInstance.getElementRef().nativeElement);
       this.virtualScrollItemSize = this.getPixelHeight(this.scrollableInstance.getElementRef().nativeElement.querySelector('novo-option'));
     }
   }
 
-  onItemToggled(item: { selected?: boolean; children?: Array<{ selected?: boolean; children?: Array<{ selected?: boolean }> }> }) {
+  activateItem(item: any): void {
+    if (this.selectionEnabled) {
+      item.selected = !item.selected;
+      this.onItemToggled(item);
+    }
+    this.activation.emit(item);
+  }
+
+  onItemToggled(item: Option) {
     if (Array.isArray(item.children)) {
       this.updateDescendants(item.selected, item.children);
     }
@@ -237,9 +271,9 @@ export class NovoTabbedGroupPickerElement implements OnDestroy, OnInit {
 
   initializeDescendantSelection() {
     this.tabs.forEach((tab) => {
-      if ('childTypeName' in tab && tab.data && tab.data.length) {
+      if ('childTypeName' in tab && tab.data?.length) {
         tab.data.forEach((parent) => {
-          if (parent.selected && parent.children && parent.children.length) {
+          if (parent.selected && parent.children?.length) {
             parent.children.forEach((child) => {
               child.selected = true;
             });
@@ -249,9 +283,13 @@ export class NovoTabbedGroupPickerElement implements OnDestroy, OnInit {
     });
   }
 
-  updateDescendants(parentIsSelected: boolean, children: Array<{ selected?: boolean; children?: Array<{ selected?: boolean }> }>): void {
+  updateDescendants(parentIsSelected: boolean, children: Option[]): void {
     children.forEach((item) => {
-      parentIsSelected ? (item.selected = true) : delete item.selected;
+      if (parentIsSelected) {
+        item.selected = true;
+      } else {
+        delete item.selected;
+      }
       if (Array.isArray(item.children)) {
         this.updateDescendants(item.selected, item.children);
       }
@@ -259,6 +297,9 @@ export class NovoTabbedGroupPickerElement implements OnDestroy, OnInit {
   }
 
   updateClearAll(itemWasJustSelected?: boolean) {
+    if (!this.selectionEnabled) {
+      this.showClearAll = false;
+    } else {
     this.showClearAll = itemWasJustSelected
       ? true
       : this.tabs.some((tab) => {
@@ -268,6 +309,7 @@ export class NovoTabbedGroupPickerElement implements OnDestroy, OnInit {
             return tab.data.some(({ selected }) => selected);
           }
         });
+    }
   }
 
   updateParentsAndQuickSelect(): void {
@@ -275,9 +317,9 @@ export class NovoTabbedGroupPickerElement implements OnDestroy, OnInit {
     this.tabs
       .filter((tab) => 'childTypeName' in tab && !!tab.childTypeName)
       .forEach((tab) => {
-        const parents = tab.data.filter(({ children }: { children?: any[] }) => children && children.length);
+        const parents = tab.data.filter(({ children }: { children?: any[] }) => children?.length);
 
-        parents.forEach((parent: { children?: { selected?: boolean }[] }) => {
+        parents.forEach((parent: ParentOption) => {
           ['indeterminate', 'selected'].forEach((selectedStateOption) => delete parent[selectedStateOption]);
 
           const selectedState = this.getSelectedState(parent.children);
@@ -290,7 +332,7 @@ export class NovoTabbedGroupPickerElement implements OnDestroy, OnInit {
     if (this.quickSelectConfig) {
       this.quickSelectConfig.items.forEach((quickSelect) => {
         delete quickSelect.selected;
-        const selectedState = this.getSelectedState(quickSelect.children as ({ selected?: boolean } & { [key: string]: any })[]);
+        const selectedState = this.getSelectedState(quickSelect.children as (Option)[]);
         if (selectedState) {
           quickSelect[selectedState] = true;
         }
@@ -298,7 +340,7 @@ export class NovoTabbedGroupPickerElement implements OnDestroy, OnInit {
     }
   }
 
-  getSelectedState = (childArray: { selected?: boolean; indeterminate?: boolean }[]): 'selected' | 'indeterminate' | undefined => {
+  getSelectedState = (childArray: Option[]): 'selected' | 'indeterminate' | undefined => {
     const numberOfSelectedItems = childArray.filter(({ selected }) => selected).length;
     if (!numberOfSelectedItems) {
       return undefined;
@@ -306,12 +348,36 @@ export class NovoTabbedGroupPickerElement implements OnDestroy, OnInit {
     return numberOfSelectedItems === childArray.length ? 'selected' : 'indeterminate';
   };
 
-  emitSelectedValues() {
-    const selectedValues: TabbedGroupPickerTab[] = this.tabs.map((tab) => ({
+  getSelectedValues(): TabbedGroupPickerTab[] {
+    return this.tabs.map((tab) => ({
       ...tab,
       data: tab.data.filter(({ selected }) => selected),
     }));
-    this.selectionChange.emit(selectedValues);
+  }
+
+  emitSelectedValues() {
+    this.selectionChange.emit(this.getSelectedValues());
+  }
+
+  updateAppliedState() {
+    this.appliedState = Helpers.deepClone(this.displayTabs);
+  }
+
+  apply() {
+    this.updateAppliedState();
+    this.applyChange.emit(this.getSelectedValues());
+    this.dropdown.closePanel();
+  }
+
+  cancel() {
+    this.revertState();
+    this.ref.markForCheck();
+    this.dropdown.closePanel();
+  }
+
+  revertState() {
+    this.tabs = Helpers.deepClone(this.appliedState);
+    this.loadValues();
   }
 
   deselectEverything(event) {

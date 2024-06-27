@@ -33,6 +33,7 @@ export class NovoLabelService {
   quickNoteEmpty = 'No results to display...';
   required = 'Required';
   numberTooLarge = 'Number is too large';
+  apply = 'Apply';
   save = 'Save';
   cancel = 'Cancel';
   next = 'Next';
@@ -122,6 +123,7 @@ export class NovoLabelService {
   includeAny = 'Include Any';
   includeAll = 'Include All';
   exclude = 'Exclude';
+  excludeAny = 'Exclude Any';
   radius = 'Radius';
   equals = 'Equals';
   equalTo = 'Equal To';
