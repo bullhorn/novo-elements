@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Output } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, Output } from '@angular/core';
 import { NovoLabelService } from 'novo-elements/services';
 import { DataTableState } from './state/data-table-state.service';
 
@@ -44,6 +44,8 @@ export class NovoDataTableClearButton<T> {
   queryClear: EventEmitter<boolean> = new EventEmitter();
   @Output()
   allClear: EventEmitter<boolean> = new EventEmitter();
+  @Input()
+  skipUpdate: boolean;
 
   constructor(public state: DataTableState<T>, private ref: ChangeDetectorRef, public labels: NovoLabelService) {}
 
@@ -58,8 +60,13 @@ export class NovoDataTableClearButton<T> {
   }
 
   clearSearch(): void {
-    this.state.clearQuery();
-    this.queryClear.emit(true);
+    if (this.skipUpdate) {
+      this.queryClear.emit(true);
+      this.state.clearQuery(false);
+    } else {
+      this.state.clearQuery();
+      this.queryClear.emit(true);
+    }
   }
 
   clearSelected(): void {
