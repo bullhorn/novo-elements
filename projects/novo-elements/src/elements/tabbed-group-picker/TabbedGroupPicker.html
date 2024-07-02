@@ -48,7 +48,7 @@
           #tabbedGroupPickerVirtualScrollViewport>
           <novo-option
             *cdkVirtualFor="let item of displayTab.data"
-            [attr.data-automation-id]="item[displayTab.labelField]"
+            [attr.data-automation-id]="item[displayTab.valueField]"
             [allowSelection]="selectionEnabled"
             [selected]="item.selected"
             (click)="activateItem(item)"
