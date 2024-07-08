@@ -62,7 +62,6 @@ export class NovoDataTableClearButton<T> {
   clearSearch(): void {
     if (this.skipUpdate) {
       this.queryClear.emit(true);
-      this.state.clearQuery(false);
     } else {
       this.state.clearQuery();
       this.queryClear.emit(true);
