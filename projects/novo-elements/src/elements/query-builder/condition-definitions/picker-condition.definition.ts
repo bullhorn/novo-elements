@@ -1,6 +1,7 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewChild, ViewEncapsulation } from '@angular/core';
 import { AbstractConditionFieldDef } from './abstract-condition.definition';
 import { Operator } from '../query-builder.types';
+import { NovoSelectElement } from 'novo-elements/elements/select';
 
 /**
  * Handle selection of field values when a list of options is provided.
@@ -19,7 +20,7 @@ import { Operator } from '../query-builder.types';
       </novo-field>
       <ng-container *novoConditionInputDef="let formGroup; fieldMeta as meta" [ngSwitch]="formGroup.value.operator" [formGroup]="formGroup">
         <novo-field *novoSwitchCases="['includeAny', 'includeAll', 'excludeAny']">
-          <novo-select formControlName="value" [placeholder]="labels.select" [multiple]="true">
+          <novo-select extupdatefix formControlName="value" [placeholder]="labels.select" [multiple]="true">
             <!-- WHat about optionUrl/optionType -->
             <novo-option *ngFor="let option of meta?.options" [value]="option.value" [attr.data-automation-value]="option.label">
               {{ option.label }}

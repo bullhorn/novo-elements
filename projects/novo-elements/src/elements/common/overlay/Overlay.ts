@@ -159,7 +159,7 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
   }
 
   /**
-   * A stream of actions that should close the autocomplete panel, including
+   * A stream of actions that should close the panel, including
    * when an option is selected, on blur, and when TAB is pressed.
    */
   public get panelClosingActions(): Observable<any> {
@@ -169,7 +169,7 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
     );
   }
 
-  /** Stream of clicks outside of the autocomplete panel. */
+  /** Stream of clicks outside of the panel. */
   protected get outsideClickStream(): Observable<any> {
     if (!this.document) {
       return observableOf();

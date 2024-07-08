@@ -115,7 +115,7 @@ export class NovoBaseTextElement {
   @BooleanInput()
   extrabold: boolean;
 
-  constructor(protected element: ElementRef) {}
+  constructor(public element: ElementRef) {}
 
   get nativeElement() {
     return this.element.nativeElement;
