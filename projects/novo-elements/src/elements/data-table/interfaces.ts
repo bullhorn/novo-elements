@@ -4,7 +4,7 @@ export interface IDataTablePreferences {
   name: string;
   sort?: IDataTableSort;
   filter?: IDataTableFilter | IDataTableFilter[];
-  where?: { query: string; criteria?: AdaptiveCriteria; form: any };
+  where?: DataTableWhere;
   globalSearch?: any;
   pageSize?: number;
   displayedColumns?: string[];
@@ -12,6 +12,13 @@ export interface IDataTablePreferences {
   savedSearchId?: number;
   savedSearchName?: string;
   appliedSearchType?: AppliedSearchType;
+}
+
+export interface DataTableWhere {
+  query: string;
+  criteria?: AdaptiveCriteria;
+  keywords?: string[];
+  form: any;
 }
 
 export enum AppliedSearchType {
