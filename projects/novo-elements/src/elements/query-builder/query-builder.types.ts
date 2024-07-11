@@ -45,6 +45,10 @@ export interface Criteria {
   criteria: ConditionGroup[];
 }
 
+export interface NestedCriteria {
+  criteria: NestedConditionGroup[];
+}
+
 export interface BaseFieldDef {
   name: string;
   label?: string;
