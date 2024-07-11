@@ -45,36 +45,42 @@ export class NovoDataTableClearButton<T> {
   @Output()
   allClear: EventEmitter<boolean> = new EventEmitter();
   @Input()
-  skipUpdate: boolean;
+  emitOnly: boolean = false;
 
-  constructor(public state: DataTableState<T>, private ref: ChangeDetectorRef, public labels: NovoLabelService) {}
+  constructor(public state: DataTableState<T>, private ref: ChangeDetectorRef, public labels: NovoLabelService) { }
 
   clearSort(): void {
-    this.state.clearSort();
+    if (!this.emitOnly) {
+      this.state.clearSort();
+    }
     this.sortClear.emit(true);
   }
 
   clearFilter(): void {
-    this.state.clearFilter();
+    if (!this.emitOnly) {
+      this.state.clearFilter();
+    }
     this.filterClear.emit(true);
   }
 
   clearSearch(): void {
-    if (this.skipUpdate) {
-      this.queryClear.emit(true);
-    } else {
+    if (!this.emitOnly) {
       this.state.clearQuery();
-      this.queryClear.emit(true);
     }
+    this.queryClear.emit(true);
   }
 
   clearSelected(): void {
-    this.state.clearSelected();
+    if (!this.emitOnly) {
+      this.state.clearSelected();
+    }
     this.selectedClear.emit(true);
   }
 
   clearAll(): void {
-    this.state.reset();
+    if (!this.emitOnly) {
+      this.state.reset();
+    }
     this.allClear.emit(true);
     this.selectedClear.emit(true);
     this.sortClear.emit(true);
