@@ -7,6 +7,10 @@ export enum Conjunction {
 }
 
 export type ConditionGroup = {
+  [K in Conjunction as `$${K}`]?: Condition[];
+};
+
+export type NestedConditionGroup = {
   [K in Conjunction as `$${K}`]?: ConditionOrConjunctionGroup[];
 };
 
