@@ -14,7 +14,7 @@ export type NestedConditionGroup = {
   [K in Conjunction as `$${K}`]?: ConditionOrConditionGroup[];
 };
 
-export type ConditionOrConditionGroup = Condition | ConditionGroup;
+export type ConditionOrConditionGroup = Condition | NestedConditionGroup;
 
 export enum Operator {
   after = 'after',
