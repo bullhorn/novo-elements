@@ -12,6 +12,8 @@ export interface IDataTablePreferences {
   savedSearchId?: number;
   savedSearchName?: string;
   appliedSearchType?: AppliedSearchType;
+  hasUnsavedChanges?: boolean;
+  unsavedChanges?: any;
 }
 
 export interface DataTableWhere {
