@@ -11,10 +11,10 @@ export type ConditionGroup = {
 };
 
 export type NestedConditionGroup = {
-  [K in Conjunction as `$${K}`]?: ConditionOrConjunctionGroup[];
+  [K in Conjunction as `$${K}`]?: ConditionOrConditionGroup[];
 };
 
-export type ConditionOrConjunctionGroup = Condition | ConditionGroup;
+export type ConditionOrConditionGroup = Condition | ConditionGroup;
 
 export enum Operator {
   after = 'after',
