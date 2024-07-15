@@ -133,8 +133,8 @@
     padding-bottom: 20px;
     @include ease("all", "swift-ease-in-out");
     &.animate {
-      padding-bottom: 20px;
-      bottom: -6px;
+      padding-bottom: 10px;
+      bottom: 0;
     }
     @for $i from 2 through 100 {
       &:nth-last-of-type(#{$i}) {
@@ -150,8 +150,8 @@
     padding-top: 20px;
     @include ease("all", "swift-ease-in-out");
     &.animate {
-      padding-top: 20px;
-      top: -6px;
+      padding-top: 10px;
+      top: 0;
     }
     @for $i from 2 through 100 {
       &:nth-last-of-type(#{$i}) {
@@ -260,7 +260,7 @@
       background: $color;
     }
     &.novo-accent-#{$name} {
-      border: 1px solid $color;
+      border: 5px solid $color;
       background: getPaleColor($name);
       color: $dark;
     }
