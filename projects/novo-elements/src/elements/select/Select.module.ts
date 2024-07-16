@@ -11,6 +11,7 @@ import { NovoDividerModule } from 'novo-elements/elements/divider';
 import { NovoTooltipModule } from 'novo-elements/elements/tooltip';
 import { NovoSelectElement } from './Select';
 import { NovoSelectExtUpdateFix } from './Select.extupdatefix.directive';
+import { NovoIconModule } from 'novo-elements/elements/icon';
 
 @NgModule({
   imports: [
@@ -23,6 +24,7 @@ import { NovoSelectExtUpdateFix } from './Select.extupdatefix.directive';
     NovoOverlayModule,
     NovoPipesModule,
     NovoTooltipModule,
+    NovoIconModule,
   ],
   declarations: [NovoSelectElement, NovoSelectExtUpdateFix],
   exports: [NovoSelectElement, NovoSelectExtUpdateFix],
