@@ -3,7 +3,7 @@
 
 :host {
   display: grid;
-  grid-template-columns: 5rem 1fr;
+  grid-template-columns: 5rem 1fr 15px;
   justify-content: flex-start;
   align-content: center;
   align-items: center;
@@ -41,9 +41,7 @@
     align-items: center;
     align-self: flex-start;
     cursor: pointer;
-    position: absolute;
-    top: 8px;
-    right: 8px;
+    height: 100%;
   }
 
   .toast-icon i,
@@ -150,8 +148,8 @@
     padding-top: 20px;
     @include ease("all", "swift-ease-in-out");
     &.animate {
-      padding-top: 10px;
-      top: 0;
+        padding-top: 10px;
+        top: 0;
     }
     @for $i from 2 through 100 {
       &:nth-last-of-type(#{$i}) {
@@ -260,7 +258,7 @@
       background: $color;
     }
     &.novo-accent-#{$name} {
-      border: 5px solid $color;
+      border: 1px solid $color;
       background: getPaleColor($name);
       color: $dark;
     }
