@@ -7,8 +7,14 @@ export enum Conjunction {
 }
 
 export type ConditionGroup = {
-  [K in Conjunction as `$${K}`]?: Condition[]
+  [K in Conjunction as `$${K}`]?: Condition[];
 };
+
+export type NestedConditionGroup = {
+  [K in Conjunction as `$${K}`]?: ConditionOrConditionGroup[];
+};
+
+export type ConditionOrConditionGroup = Condition | NestedConditionGroup;
 
 export enum Operator {
   after = 'after',
@@ -37,6 +43,10 @@ export interface Condition {
 
 export interface Criteria {
   criteria: ConditionGroup[];
+}
+
+export interface NestedCriteria {
+  criteria: NestedConditionGroup[];
 }
 
 export interface BaseFieldDef {
