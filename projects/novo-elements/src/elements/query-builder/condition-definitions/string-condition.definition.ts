@@ -85,7 +85,7 @@ export class NovoDefaultStringConditionDef extends AbstractConditionFieldDef {
   }
 
   private setFormValue(formGroup: AbstractControl, newValue: any[]) {
-    formGroup.get('value').setValue([newValue]);
+    formGroup.get('value').setValue(newValue);
     formGroup.markAsDirty();
   }
 }
