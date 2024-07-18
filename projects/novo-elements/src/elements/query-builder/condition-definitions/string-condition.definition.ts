@@ -68,12 +68,9 @@ export class NovoDefaultStringConditionDef extends AbstractConditionFieldDef {
     input.value = '';
     const valueToAdd = event.value;
     if (valueToAdd !== '') {
-      const current = this.getValue(formGroup);
-      if (!Array.isArray(current)) {
-        formGroup.get('value').setValue([valueToAdd]);
-      } else {
-        formGroup.get('value').setValue([...current, valueToAdd]);
-      }
+      const current: any[] = this.getValue(formGroup);
+      const newValue: any[] = Array.isArray(current) ? [...current, valueToAdd] : [valueToAdd];
+      this.setFormValue(formGroup, newValue);
     }
   }
 
@@ -81,9 +78,14 @@ export class NovoDefaultStringConditionDef extends AbstractConditionFieldDef {
     const current = this.getValue(formGroup);
     const index = current.indexOf(valueToRemove);
     if (index >= 0) {
-      const oldValue = [...current]
-      oldValue.splice(index, 1);
-      formGroup.get('value').setValue(oldValue);
+      const value = [...current]
+      value.splice(index, 1);
+      this.setFormValue(formGroup, value);
     }
+  }
+
+  private setFormValue(formGroup: AbstractControl, newValue: any[]) {
+    formGroup.get('value').setValue([newValue]);
+    formGroup.markAsDirty();
   }
 }
