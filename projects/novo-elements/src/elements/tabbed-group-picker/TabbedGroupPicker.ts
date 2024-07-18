@@ -416,7 +416,8 @@ export class NovoTabbedGroupPickerElement implements OnDestroy, OnInit {
     this.displayTabs.forEach(
       (displayTab, i) =>
         (displayTab.data = this.tabs[i].data.filter((item) =>
-          item[displayTab.labelField].toLowerCase().includes(searchTerm.toLowerCase()),
+          item[displayTab.labelField].toLowerCase().includes(searchTerm.toLowerCase()) ||
+          item[displayTab.valueField]?.toString().toLowerCase().includes(searchTerm.toLowerCase()),
         )),
     );
     this.ref.markForCheck();
