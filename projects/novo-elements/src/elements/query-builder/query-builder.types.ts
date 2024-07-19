@@ -61,6 +61,7 @@ export interface BaseFieldDef {
   optionsUrl?: string;
   optionsType?: string;
   dataType?: string;
+  icon?: string;
 }
 
 export interface FieldConfig<T extends BaseFieldDef> {

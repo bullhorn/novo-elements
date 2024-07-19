@@ -72,7 +72,7 @@ export class ConditionBuilderComponent implements OnInit, OnChanges, AfterConten
   isFirst = input(false);
   @Input() andIndex: number;
   @Input() groupIndex: number;
-  
+
   // This component can either be directly hosted as a host to a condition, or it can be part of a condition group within a criteria builder.
   // In the former case, config will come from inputs, and we will instantiate our own QueryBuilderService. In the latter, it comes from
   // the QueryBuilderService.
@@ -97,6 +97,7 @@ export class ConditionBuilderComponent implements OnInit, OnChanges, AfterConten
   public results$: Promise<any[]>;
   public searchTerm: FormControl = new FormControl();
   public fieldDisplayWith;
+  public displayIcon: string;
 
   public staticFieldSelection = computed(() => this.config().staticFieldSelection);
   private _lastContext: any = {};
@@ -203,6 +204,7 @@ export class ConditionBuilderComponent implements OnInit, OnChanges, AfterConten
       return;
     } else {
       this.fieldDisplayWith = () => fieldConf.label || fieldConf.name;
+      this.displayIcon = fieldConf.icon || null;
     }
     const { field } = this.parentForm.value;
 
