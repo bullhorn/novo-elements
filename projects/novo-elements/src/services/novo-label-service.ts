@@ -136,6 +136,7 @@ export class NovoLabelService {
   after = 'After';
   between = 'Between';
   within = 'Within';
+  isNull = 'Is Empty';
   isEmpty = 'Is Empty?';
   refreshPagination = 'Refresh Pagination';
   location = 'Location';
