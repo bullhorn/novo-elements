@@ -1,7 +1,17 @@
 import { HttpClient } from '@angular/common/http';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { AbstractControl, UntypedFormBuilder, UntypedFormControl } from '@angular/forms';
-import { AbstractConditionFieldDef, Conjunction, CriteriaBuilderComponent, NovoLabelService, Operator } from 'novo-elements';
+import {
+  AbstractConditionFieldDef,
+  AddressCriteriaConfig,
+  AddressData,
+  AddressRadiusUnitsName,
+  Condition,
+  Conjunction,
+  CriteriaBuilderComponent,
+  NovoLabelService,
+  Operator,
+} from 'novo-elements';
 import { ReplaySubject, Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
 import { MockMeta } from './MockMeta';
@@ -83,6 +93,13 @@ export class JustCriteriaExample implements OnInit {
   andOr = [Conjunction.AND, Conjunction.OR];
   andOrNot = [Conjunction.AND, Conjunction.OR, Conjunction.NOT];
 
+  addressConfig: AddressCriteriaConfig = {};
+  addressRadiusEnabled: boolean = false;
+  addressRadiusEnabledOptions: { label: string, value: boolean }[] = [
+    { label: 'Yes', value: true },
+    { label: 'No', value: false },
+  ];
+
   editTypeFn = (field: any) => {
     if (field.optionsType === 'Brewery') return 'custom';
     return (field.inputType || field.dataType || field.type).toLowerCase();
@@ -155,5 +172,15 @@ export class JustCriteriaExample implements OnInit {
 
   onSubmit() {
     console.log('Your form data : ', this.queryForm.value);
+  }
+
+  addressRadiusEnabledChanged(enabled: boolean) {
+    console.log(`enabled:`, enabled);
+    this.addressConfig = Object.assign({}, this.addressConfig, { radiusEnabled: enabled });
+  }
+
+  addressRadiusUnitsSelected(units: AddressRadiusUnitsName) {
+    console.log(`units:`, units);
+    this.addressConfig = Object.assign({}, this.addressConfig, { radiusUnits: units });
   }
 }

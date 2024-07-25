@@ -34,6 +34,16 @@
       }
       novo-field {
         width: fit-content;
+
+        &.address-radius {
+          width: 130px;
+          margin-right: 1rem;
+          novo-select {
+            min-width: 90px;
+            max-width: 90px;
+            width: 90px;
+          }
+        }
       }
       .novo-field-infix {
         white-space: nowrap;

@@ -260,4 +260,5 @@ export enum AdaptiveOperator {
   Like = 'like',
   StartsWith = 'startsWith',
   EndsWith = 'endsWith',
+  Radius = 'radius',
 }

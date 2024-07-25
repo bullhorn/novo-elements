@@ -4,7 +4,8 @@
     controlName="criteria"
     [allowedGroupings]="mode.value"
     [config]="config"
-    [editTypeFn]="editTypeFn">
+    [editTypeFn]="editTypeFn"
+    [addressConfig]="addressConfig">
     <custom-picker-condition-def name="CUSTOM"></custom-picker-condition-def>
   </novo-criteria-builder>
 
@@ -25,4 +26,20 @@
   </section>
 </novo-row>
 
-<pre><code>{{queryForm.value | json}}</code></pre>
+<novo-row align="start" gap="xl" margin="xl">
+  <section>
+    <novo-label marginRight="md">Address Radius Enabled</novo-label>
+    <novo-tiles [options]="addressRadiusEnabledOptions" (onChange)="addressRadiusEnabledChanged($event)"
+                [(ngModel)]="addressRadiusEnabled"/>
+  </section>
+</novo-row>
+
+<novo-row align="start" gap="xl" margin="xl">
+  <novo-label>Address Radius Units</novo-label>
+  <novo-select value="miles" (onSelect)="addressRadiusUnitsSelected($event.selected)">
+    <novo-option value="miles">Miles</novo-option>
+    <novo-option value="km">Km</novo-option>
+  </novo-select>
+</novo-row>
+
+<pre><code>{{ queryForm.value | json }}</code></pre>
