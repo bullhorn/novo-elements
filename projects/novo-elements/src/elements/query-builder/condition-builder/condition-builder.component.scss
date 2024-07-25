@@ -4,6 +4,10 @@
   position: relative;
   display: block;
   width: 100%;
+  &.condition-host {
+    padding: var(--spacing-md);
+    margin-bottom: 1rem;
+  }
 
   .condition-field {
     grid-template-columns: minmax(fit-content, 1fr);

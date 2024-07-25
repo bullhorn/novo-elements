@@ -885,7 +885,20 @@ export const MockMeta = {
       multiValue: true,
       inputType: 'SELECT',
       optionsType: 'BusinessSector',
-      optionsUrl: '/options/BusinessSector',
+      options: [
+        {
+          value: 'Agriculture',
+          label: 'Agriculture',
+        },
+        {
+          value: 'Nursing',
+          label: 'Nursing',
+        },
+        {
+          value: 'Finance',
+          label: 'Finance',
+        },
+      ],
       hideFromSearch: false,
       sortOrder: 760,
       hint: '',

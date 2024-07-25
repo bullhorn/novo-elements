@@ -1,15 +1,16 @@
 <form [formGroup]="parentForm">
-  <novo-grid gap="1rem" [columns]="isFirst ? '20rem 13rem 1fr' : '16rem 13rem 1fr'" align="end">
-    <novo-field class="condition-field">
+  <novo-grid gap="1rem" [columns]="gridColumns()" align="end">
+    <novo-field class="condition-field" *ngIf="!staticFieldSelection()">
       <novo-select
         [placeholder]="labels.chooseAField"
         formControlName="field"
-        (onSelect)="onFieldSelect()"
+        (onSelect)="updateFieldSelection()"
         overlayWidth="24rem"
         overlayHeight="20rem"
         [displayWith]="fieldDisplayWith"
         [style.minWidth.px]="160"
-        [style.maxWidth.px]="isFirst ? 200 : 160">
+        [style.maxWidth.px]="(isFirst() || isConditionHost) ? 200 : 160"
+        [displayIcon]="displayIcon">
         <novo-optgroup class="filter-search-results">
           <novo-option>
             <novo-select-search [formControl]="searchTerm" [clearSearchInput]="false"></novo-select-search>
@@ -36,6 +37,8 @@
   </novo-grid>
   <ng-content></ng-content>
 </form>
+
+<novo-condition-templates *ngIf="isConditionHost"></novo-condition-templates>
 
 <!-- EMPTY STATE TEMPLATE -->
 <!-- <ng-template #empty>
