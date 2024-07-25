@@ -80,17 +80,19 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
         .map((e, i) => String(Math.pow(1000 + i, 5))); // make a bunch of ~16 character strings
       const tabNames = names.slice(0, 100);
       const labelFieldNames = names.splice(0, 100);
-      const tabs = tabNames.map((typeName, i) => ({
+      const tabs: any[] = tabNames.map((typeName, i) => ({
         typeName,
         labelField: labelFieldNames[i], // search/filter only looks at labelField
+        valueField: 'value',
         data: null,
       }));
       tabs.forEach((tab) => {
-        const { labelField } = tab;
+        const { labelField, valueField } = tab;
         tab.data = Array(1000)
           .fill(0)
           .map((n, i) => ({
             [labelField]: turnNumbersIntoLetters(`${labelField}${i}`),
+            [valueField]: i,
           }));
       });
       return tabs;
