@@ -6,6 +6,7 @@
     [icon]="icon.value"
     [title]="title.value ? 'Save Failed' : null"
     [margin]="margin.value ? '1rem' : 0"
+    [isCloseable]="closeable.value"
     message="Oops! Looks like you're missing some required fields"></novo-toast>
 </div>
 <novo-row gap="3rem" align="flex-start">
@@ -54,6 +55,13 @@
     <novo-radio-group #margin appearance="vertical" [value]="false">
       <novo-radio name="margin" [value]="false">none</novo-radio>
       <novo-radio name="margin" [value]="true">inset</novo-radio>
+    </novo-radio-group>
+  </novo-field>
+  <novo-field>
+    <novo-label>Closeable</novo-label>
+    <novo-radio-group #closeable appearance="vertical" [value]="false">
+      <novo-radio name="margin" [value]="false">false</novo-radio>
+      <novo-radio name="margin" [value]="true">true</novo-radio>
     </novo-radio-group>
   </novo-field>
 </novo-row>
