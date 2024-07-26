@@ -132,6 +132,10 @@ export class NovoAutocompleteElement
   }
   private _disabled: boolean;
 
+  @Input()
+  @BooleanInput()
+  makeFirstItemActive: boolean;
+
   /** Element for the panel containing the autocomplete options. */
   @ViewChild(NovoOverlayTemplateComponent)
   overlay: NovoOverlayTemplateComponent;
@@ -173,6 +177,9 @@ export class NovoAutocompleteElement
       this._watchSelectionEvents();
       Promise.resolve().then(() => {
         this.checkSelectedOptions();
+        if (this.makeFirstItemActive && this.options.length > 0) {
+          this._keyManager.setFirstItemActive();
+        }
       });
     });
   }

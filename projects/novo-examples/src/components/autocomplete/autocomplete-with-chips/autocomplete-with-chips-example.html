@@ -17,7 +17,7 @@
       [novoChipInputSeparatorKeyCodes]="separatorKeysCodes"
       (novoChipInputTokenEnd)="add($event)" />
   </novo-chip-list>
-  <novo-autocomplete (optionSelected)="selected($event)" multiple>
+  <novo-autocomplete makeFirstItemActive (optionSelected)="selected($event)" multiple>
     <novo-option *ngFor="let fruit of filteredFruits | async" [value]="fruit">
       {{fruit}}
     </novo-option>
