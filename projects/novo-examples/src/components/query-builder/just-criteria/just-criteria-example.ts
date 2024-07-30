@@ -132,33 +132,23 @@ export class JustCriteriaExample implements OnInit {
   }
 
   prepopulateForm() {
-    const prepopulatedData = [
-      {
-        scope: 'Candidate',
-        field: 'address',
-        operator: 'includeAny',
-      },
-      {
-        scope: 'Candidate',
-        field: 'id',
-        operator: 'equalTo',
-        value: 123,
-      },
-      {
-        scope: 'Candidate',
-        field: 'availability',
-        operator: 'includeAny',
-        value: ['test'],
-      },
-      {
-        scope: 'Candidate',
-        field: 'customDate1',
-        operator: 'within',
-        value: '-30',
-      },
-      // where=category IN (1,2,3)
-      // where=category.id:[1 2 3]
-    ];
+    const prepopulatedData: Condition[] = [{
+      field: 'id',
+      operator: 'equalTo',
+      value: 123,
+    }, {
+      field: 'availability',
+      operator: 'includeAny',
+      value: ['test'],
+    }, {
+      field: 'customDate1',
+      operator: 'within',
+      value: '-30',
+    }, {
+      field: 'address',
+      operator: 'includeAny',
+      value: null,
+    }];
     this.setQueryForm(prepopulatedData);
   }
 
