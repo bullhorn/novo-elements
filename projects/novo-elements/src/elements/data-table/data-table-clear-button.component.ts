@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Output } from '@angular/core';
 import { NovoLabelService } from 'novo-elements/services';
 import { DataTableState } from './state/data-table-state.service';
+import { BooleanInput } from 'novo-elements/utils';
 
 @Component({
   selector: 'novo-data-table-clear-button',
@@ -44,31 +45,43 @@ export class NovoDataTableClearButton<T> {
   queryClear: EventEmitter<boolean> = new EventEmitter();
   @Output()
   allClear: EventEmitter<boolean> = new EventEmitter();
+  @BooleanInput()
+  emitOnly: boolean = false;
 
-  constructor(public state: DataTableState<T>, private ref: ChangeDetectorRef, public labels: NovoLabelService) {}
+  constructor(public state: DataTableState<T>, private ref: ChangeDetectorRef, public labels: NovoLabelService) { }
 
   clearSort(): void {
-    this.state.clearSort();
+    if (!this.emitOnly) {
+      this.state.clearSort();
+    }
     this.sortClear.emit(true);
   }
 
   clearFilter(): void {
-    this.state.clearFilter();
+    if (!this.emitOnly) {
+      this.state.clearFilter();
+    }
     this.filterClear.emit(true);
   }
 
   clearSearch(): void {
-    this.state.clearQuery();
+    if (!this.emitOnly) {
+      this.state.clearQuery();
+    }
     this.queryClear.emit(true);
   }
 
   clearSelected(): void {
-    this.state.clearSelected();
+    if (!this.emitOnly) {
+      this.state.clearSelected();
+    }
     this.selectedClear.emit(true);
   }
 
   clearAll(): void {
-    this.state.reset();
+    if (!this.emitOnly) {
+      this.state.reset();
+    }
     this.allClear.emit(true);
     this.selectedClear.emit(true);
     this.sortClear.emit(true);
