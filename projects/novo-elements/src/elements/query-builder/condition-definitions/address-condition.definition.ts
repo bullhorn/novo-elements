@@ -176,8 +176,7 @@ export class NovoDefaultAddressConditionDef extends AbstractConditionFieldDef im
     };
     const current: AddressData | AddressData[] = this.getValue(formGroup);
     const updated: AddressData[] = Array.isArray(current) ? [...current, valueToAdd] : [valueToAdd];
-    formGroup.get('value').setValue(updated);
-    this.updateRadiusInValues(formGroup);
+    formGroup.get('value').setValue(this.updateRadiusInValues(formGroup, updated));
 
     this.inputChildren.forEach(input => {
       input.nativeElement.value = '';
@@ -199,18 +198,16 @@ export class NovoDefaultAddressConditionDef extends AbstractConditionFieldDef im
 
   onRadiusSelect(formGroup: AbstractControl, radius: number): void {
     this.radius.set(radius);
-    this.updateRadiusInValues(formGroup);
     // We must dirty the form explicitly to show up as a user modification when it was done programmatically
+    formGroup.get('value').setValue(this.updateRadiusInValues(formGroup, this.getValue(formGroup)));
     formGroup.markAsDirty();
   }
 
-  private updateRadiusInValues(formGroup: AbstractControl) {
-    const value = this.getValue(formGroup);
-    if (Array.isArray(value)) {
-      value.forEach(val => {
-        val.radius = this.isRadiusOperatorSelected(formGroup) ? this.getRadiusData(formGroup) : undefined;
-      });
-    }
+  private updateRadiusInValues(formGroup: AbstractControl, values: AddressData[]): AddressData[] {
+    return values.map(val => ({
+      ...val,
+      radius: this.isRadiusOperatorSelected(formGroup) ? this.getRadiusData(formGroup) : undefined,
+    }));
   }
 
   private getRadiusData(formGroup: AbstractControl): AddressRadius {
