@@ -200,6 +200,8 @@ export class NovoDefaultAddressConditionDef extends AbstractConditionFieldDef im
   onRadiusSelect(formGroup: AbstractControl, radius: number): void {
     this.radius.set(radius);
     this.updateRadiusInValues(formGroup);
+    // We must dirty the form explicitly to show up as a user modification when it was done programmatically
+    formGroup.markAsDirty();
   }
 
   private updateRadiusInValues(formGroup: AbstractControl) {
