@@ -36,12 +36,12 @@
         width: fit-content;
 
         &.address-radius {
-          width: 130px;
+          width: 100px;
+          min-width: 100px;
+          max-width: 100px;
           margin-right: 1rem;
           novo-select {
-            min-width: 90px;
-            max-width: 90px;
-            width: 90px;
+            min-width: 70px;
           }
         }
       }

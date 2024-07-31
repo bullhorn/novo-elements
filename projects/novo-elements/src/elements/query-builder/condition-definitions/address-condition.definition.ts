@@ -117,15 +117,7 @@ export class NovoDefaultAddressConditionDef extends AbstractConditionFieldDef im
 
   ngAfterViewInit() {
     // Allow for initialization of the radius value to an existing enriched value in the form
-    setTimeout(() => {
-      if (this.placesPicker?.model?.length) {
-        const addressData: AddressData = this.placesPicker.model[0];
-        const initialRadius = addressData.radius?.value;
-        if (initialRadius && Helpers.isNumber(initialRadius)) {
-          this.radius.set(initialRadius);
-        }
-      }
-    });
+    setTimeout(() => this.assignRadiusFromValue());
   }
 
   onKeyup(event, viewIndex) {
@@ -201,6 +193,16 @@ export class NovoDefaultAddressConditionDef extends AbstractConditionFieldDef im
     // We must dirty the form explicitly to show up as a user modification when it was done programmatically
     formGroup.get('value').setValue(this.updateRadiusInValues(formGroup, this.getValue(formGroup)));
     formGroup.markAsDirty();
+  }
+
+  private assignRadiusFromValue() {
+    if (this.placesPicker?.model?.length) {
+      const addressData: AddressData = this.placesPicker.model[0];
+      const initialRadius = addressData.radius?.value;
+      if (initialRadius && Helpers.isNumber(initialRadius)) {
+        this.radius.set(initialRadius);
+      }
+    }
   }
 
   private updateRadiusInValues(formGroup: AbstractControl, values: AddressData[]): AddressData[] {
