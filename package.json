@@ -55,7 +55,7 @@
     "@angular/router": "^17.2.0",
     "@codemirror/commands": "^6.2.4",
     "@codemirror/state": "^6.2.1",
-    "@codemirror/view": "^6.16.0",
+    "@codemirror/view": "^6.28.4",
     "@qiwi/mixin": "^1.2.6",
     "ace-builds": "~1.4.12",
     "angular-imask": "^7.3.0",
