@@ -181,6 +181,7 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
         const clickedOutside: boolean =
           this.panelOpen &&
           clickTarget !== this.getConnectedElement().nativeElement &&
+          this.isInDocument(clickTarget) &&
           !this.getConnectedElement().nativeElement.contains(clickTarget) &&
           (!!this.overlayRef && !this.overlayRef.overlayElement.contains(clickTarget)) &&
           !this.elementIsInNestedOverlay(clickTarget);
@@ -190,6 +191,10 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
         return clickedOutside;
       }),
     );
+  }
+
+  private isInDocument(node: Node): boolean {
+    return node.getRootNode().nodeType === Node.DOCUMENT_NODE;
   }
 
   /**
