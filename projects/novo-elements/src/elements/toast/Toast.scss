@@ -3,7 +3,7 @@
 
 :host {
   display: grid;
-  grid-template-columns: 5rem 1fr;
+  grid-template-columns: 5rem 1fr 15px;
   justify-content: flex-start;
   align-content: center;
   align-items: center;
@@ -41,9 +41,7 @@
     align-items: center;
     align-self: flex-start;
     cursor: pointer;
-    position: absolute;
-    top: 8px;
-    right: 8px;
+    height: 100%;
   }
 
   .toast-icon i,
@@ -133,8 +131,8 @@
     padding-bottom: 20px;
     @include ease("all", "swift-ease-in-out");
     &.animate {
-      padding-bottom: 20px;
-      bottom: -6px;
+      padding-bottom: 10px;
+      bottom: 0;
     }
     @for $i from 2 through 100 {
       &:nth-last-of-type(#{$i}) {
@@ -150,8 +148,8 @@
     padding-top: 20px;
     @include ease("all", "swift-ease-in-out");
     &.animate {
-      padding-top: 20px;
-      top: -6px;
+        padding-top: 10px;
+        top: 0;
     }
     @for $i from 2 through 100 {
       &:nth-last-of-type(#{$i}) {
