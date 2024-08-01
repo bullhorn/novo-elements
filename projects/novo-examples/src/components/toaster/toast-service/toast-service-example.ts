@@ -26,6 +26,17 @@ export class ToastServiceExample {
         theme: 'success',
         position: 'fixedTop',
       };
+    } else if (arg === 'topAccent') {
+      this.options = {
+        title: 'Top',
+        message: 'This positioning is fixedTop with accent style and is closeable',
+        icon: 'coffee',
+        theme: '',
+        accent: 'success',
+        position: 'fixedTop',
+        isCloseable: true,
+        hideDelay: -1
+      };
     } else if (arg === 'bottom') {
       this.options = {
         title: 'Bottom',
