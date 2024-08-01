@@ -6,6 +6,7 @@ import {
   ElementRef,
   input,
   InputSignal,
+  OnDestroy,
   QueryList,
   Signal,
   signal,
@@ -19,6 +20,7 @@ import { NovoPickerToggleElement } from 'novo-elements/elements/field';
 import { PlacesListComponent } from 'novo-elements/elements/places';
 import { NovoLabelService } from 'novo-elements/services';
 import { Helpers, Key } from 'novo-elements/utils';
+import { Subscription } from 'rxjs';
 import { AddressCriteriaConfig, AddressData, AddressRadius, AddressRadiusUnitsName, Operator, RadiusUnits } from '../query-builder.types';
 import { AbstractConditionFieldDef } from './abstract-condition.definition';
 
@@ -76,7 +78,7 @@ import { AbstractConditionFieldDef } from './abstract-condition.definition';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.Default,
 })
-export class NovoDefaultAddressConditionDef extends AbstractConditionFieldDef implements AfterViewInit {
+export class NovoDefaultAddressConditionDef extends AbstractConditionFieldDef implements AfterViewInit, OnDestroy {
   @ViewChildren(NovoPickerToggleElement) overlayChildren: QueryList<NovoPickerToggleElement>;
   @ViewChildren('addressInput') inputChildren: QueryList<ElementRef>;
   @ViewChild('placesPicker') placesPicker: PlacesListComponent;
@@ -111,13 +113,26 @@ export class NovoDefaultAddressConditionDef extends AbstractConditionFieldDef im
   chipListModel: any = '';
   term: string = '';
 
+  private _addressChangesSubscription: Subscription = Subscription.EMPTY;
+
   constructor(public element: ElementRef, public labels: NovoLabelService) {
     super(labels);
   }
 
   ngAfterViewInit() {
-    // Allow for initialization of the radius value to an existing enriched value in the form
-    setTimeout(() => this.assignRadiusFromValue());
+    setTimeout(() => {
+      // Initialize the radius value from existing data
+      this.assignRadiusFromValue();
+
+      // Update the radius on address value changes
+      this._addressChangesSubscription = this.inputChildren.changes.subscribe(() => {
+        this.assignRadiusFromValue();
+      })
+    });
+  }
+
+  ngOnDestroy() {
+    this._addressChangesSubscription.unsubscribe();
   }
 
   onKeyup(event, viewIndex) {
