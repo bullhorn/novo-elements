@@ -4,7 +4,6 @@ import { AbstractControl, UntypedFormBuilder, UntypedFormControl } from '@angula
 import {
   AbstractConditionFieldDef,
   AddressCriteriaConfig,
-  AddressData,
   AddressRadiusUnitsName,
   Condition,
   Conjunction,
@@ -165,12 +164,10 @@ export class JustCriteriaExample implements OnInit {
   }
 
   addressRadiusEnabledChanged(enabled: boolean) {
-    console.log(`enabled:`, enabled);
     this.addressConfig = Object.assign({}, this.addressConfig, { radiusEnabled: enabled });
   }
 
   addressRadiusUnitsSelected(units: AddressRadiusUnitsName) {
-    console.log(`units:`, units);
     this.addressConfig = Object.assign({}, this.addressConfig, { radiusUnits: units });
   }
 }
