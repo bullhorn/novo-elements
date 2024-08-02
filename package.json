@@ -62,7 +62,7 @@
     "brace": "0.11.1",
     "codemirror": "6.0.1",
     "date-fns": "2.30.0",
-    "imask": "^7.3.0",
+    "imask": "^7.6.1",
     "novo-design-tokens": "^0.0.9",
     "post-robot": "9.0.30",
     "resize-observer-polyfill": "^1.5.1",
