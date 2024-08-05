@@ -80,6 +80,8 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
   public opening: EventEmitter<any> = new EventEmitter();
   @Output()
   public closing: EventEmitter<any> = new EventEmitter();
+  @Output()
+  public backDropClicked: EventEmitter<any> = new EventEmitter();
 
   public overlayRef: OverlayRef | null;
   public portal: TemplatePortal<any>;
@@ -219,7 +221,10 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
   protected createOverlay(template: TemplateRef<any>): void {
     this.portal = new TemplatePortal(template, this.viewContainerRef);
     this.overlayRef = this.overlay.create(this.getOverlayConfig());
-    this.overlayRef.backdropClick().subscribe(() => this.closePanel());
+    this.overlayRef.backdropClick().subscribe(() => {
+      this.backDropClicked.emit(true);
+      this.closePanel();
+    });
   }
 
   protected destroyOverlay(): void {

@@ -38,7 +38,7 @@
   <ng-content></ng-content>
 </form>
 
-<novo-condition-templates *ngIf="isConditionHost"></novo-condition-templates>
+<novo-condition-templates *ngIf="isConditionHost" [addressConfig]="addressConfig"/>
 
 <!-- EMPTY STATE TEMPLATE -->
 <!-- <ng-template #empty>
