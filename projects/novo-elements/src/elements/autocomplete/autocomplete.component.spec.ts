@@ -1,0 +1,106 @@
+import { async, ComponentFixture, discardPeriodicTasks, fakeAsync, flush, flushMicrotasks, TestBed } from '@angular/core/testing';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NovoAutoCompleteModule } from './autocomplete.module';
+import { NovoAutocompleteElement } from './autocomplete.component';
+import { Component } from '@angular/core';
+import { NovoChipsModule } from '../chips/Chips.module';
+import { NovoFieldModule } from '../field/field.module';
+import { NovoCommonModule } from '../common/common.module';
+import { By } from '@angular/platform-browser';
+import { firstValueFrom, ReplaySubject, Subject } from 'rxjs';
+import { NovoOption, NovoOptionModule, NovoOptionSelectionChange } from '../common/option';
+import { NovoChipList } from '../chips/ChipList';
+
+interface MockOption {
+  label: string;
+  id: string;
+}
+
+@Component({
+  selector: 'test-autocomplete',
+  template: `
+  <novo-field>
+    <novo-label>Favorite fruits</novo-label>
+    <novo-chip-list #chipList [formControl]="chipsControl">
+      <novo-chip
+        *ngFor="let chip of chipList.value"
+        [value]="chip">
+        {{chip.label}}
+      </novo-chip>
+      <input
+        #chipInput
+        novoChipInput
+        [formControl]="textCtrl"/>
+    </novo-chip-list>
+    <novo-autocomplete [makeFirstItemActive]="makeFirstItemActive" (optionSelected)="selected($event)" [multiple]="multiple">
+      <novo-option *ngFor="let option of options$ | async" [value]="option">
+        {{option.label}}
+      </novo-option>
+    </novo-autocomplete>
+  </novo-field>
+`
+})
+class TestAutocompleteComponent {
+  chipsControl = new FormControl<MockOption[]>([]);
+  textCtrl = new FormControl('');
+  makeFirstItemActive = false;
+  multiple = false;
+  options$ = new ReplaySubject<MockOption[]>(1);
+}
+
+describe('Elements: NovoAutocompleteElement', () => {
+  let fixture: ComponentFixture<TestAutocompleteComponent>;
+  let testComponent: TestAutocompleteComponent;
+  let component: NovoAutocompleteElement;
+  let chipList: NovoChipList;
+
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      imports: [FormsModule, ReactiveFormsModule, NovoChipsModule, NovoFieldModule,
+        NovoCommonModule, NovoAutoCompleteModule, NovoOptionModule],
+      declarations: [TestAutocompleteComponent]
+    }).compileComponents();
+    fixture = TestBed.createComponent(TestAutocompleteComponent);
+    testComponent = fixture.componentInstance;
+    component = fixture.debugElement.query(By.directive(NovoAutocompleteElement)).componentInstance;
+    chipList = fixture.debugElement.query(By.directive(NovoChipList)).componentInstance;
+  }));
+
+  beforeEach(fakeAsync(() => {
+    flush();
+    fixture.detectChanges();
+    flush();
+    discardPeriodicTasks();
+  }));
+
+  it('should initialize correctly', () => {
+    expect(component).toBeTruthy();
+  });
+
+  describe('Option expansion', () => {
+
+    let options = [
+      {id: '1', label: 'One'},
+      {id: '2', label: 'Two'}
+    ];
+
+    it('should add a chip to the list when an option is selected', () => {
+      testComponent.options$.next(options);
+      fixture.detectChanges();
+
+      const option = component.options.get(0);
+      option.onSelectionChange.emit(new NovoOptionSelectionChange(option));
+      fixture.detectChanges();
+      expect(chipList.value).toContain(options[0]);
+    });
+
+    it('should activate the first option if the makeFirstItemActive option is set', fakeAsync(() => {
+      component.makeFirstItemActive = true;
+      testComponent.options$.next(options);
+      fixture.detectChanges();
+      flush();
+      const option: NovoOption = component.options.get(0);
+      expect(option.active).toBeTruthy();
+    }));
+  });
+});

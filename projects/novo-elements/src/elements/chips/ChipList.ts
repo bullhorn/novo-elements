@@ -683,9 +683,7 @@ export class NovoChipList
     } else {
       valueToEmit = this.selected ? this.selected.value : fallbackValue;
     }
-    this._value = valueToEmit;
     this.change.emit(new NovoChipListChange(this, valueToEmit));
-    this.valueChange.emit(valueToEmit);
     this._onChange(valueToEmit);
     this._changeDetectorRef.markForCheck();
   }
