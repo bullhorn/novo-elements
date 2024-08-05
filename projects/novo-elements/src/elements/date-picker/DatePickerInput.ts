@@ -20,7 +20,7 @@ import { isValid } from 'date-fns';
 // App
 import { NovoOverlayTemplateComponent } from 'novo-elements/elements/common';
 import { DateFormatService, NovoLabelService } from 'novo-elements/services';
-import { DateUtil, Helpers, Key } from 'novo-elements/utils';
+import { BooleanInput, DateUtil, Helpers, Key } from 'novo-elements/utils';
 
 // Value accessor for the component (supports ngModel)
 const DATE_VALUE_ACCESSOR = {
@@ -60,6 +60,7 @@ const DATE_VALUE_ACCESSOR = {
         [disabledDateMessage]="disabledDateMessage"
         [ngModel]="value"
         [weekStart]="weekStart"
+        [hideFooter]="hideFooter"
       ></novo-date-picker>
     </novo-overlay-template>
   `,
@@ -125,6 +126,12 @@ export class NovoDatePickerInputElement implements OnInit, OnChanges, AfterViewI
    */
   @Input()
   overlayOnElement: ElementRef;
+  /**
+   * Whether the footer in the date picker which contains `today` button should be hidden.
+   **/
+  @Input()
+  @BooleanInput()
+  public hideFooter: boolean = false;
   /**
    * Sets the field as to appear disabled, users will not be able to interact with the text field.
    **/
