@@ -30,6 +30,7 @@ export enum Operator {
   isEmpty = 'isEmpty',
   isNull = 'isNull',
   lessThan = 'lessThan',
+  radius = 'radius',
   within = 'within',
 }
 
@@ -70,6 +71,55 @@ export interface FieldConfig<T extends BaseFieldDef> {
   options: T[];
   search: (term: string) => T[];
   find: (name: string) => T;
+}
+
+export interface AddressData {
+  address_components: AddressComponent[];
+  formatted_address: string;
+  geometry: AddressGeometry;
+  place_id: string;
+  radius?: AddressRadius;
+}
+
+export interface AddressRadius {
+  value: number;
+  units: AddressRadiusUnitsName;
+}
+
+export interface AddressComponent {
+  long_name: string;
+  short_name: string;
+  types: string[];
+}
+
+export interface AddressGeometry {
+  location: AddressGeometryLocation;
+  viewport: AddressGeometryViewport;
+}
+
+export interface AddressGeometryLocation {
+  lat: number;
+  lng: number;
+}
+
+export interface AddressGeometryViewport {
+  north: number;
+  south: number;
+  east: number;
+  west: number;
+}
+
+export enum RadiusUnits {
+  miles = 'miles',
+  km = 'km',
+}
+
+export type AddressRadiusUnitsName = keyof typeof RadiusUnits;
+
+/** All options that can be used to override the defaults for the address criteria */
+export type AddressCriteriaConfig = {
+  radiusEnabled?: boolean;
+  radiusUnits?: AddressRadiusUnitsName;
 }
 
 /** Interface used to provide an outlet for rows to be inserted into. */

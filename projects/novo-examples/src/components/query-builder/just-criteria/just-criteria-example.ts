@@ -1,7 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { AbstractControl, UntypedFormBuilder, UntypedFormControl } from '@angular/forms';
-import { AbstractConditionFieldDef, Conjunction, CriteriaBuilderComponent, NovoLabelService, Operator } from 'novo-elements';
+import {
+  AbstractConditionFieldDef,
+  AddressCriteriaConfig,
+  AddressRadiusUnitsName,
+  Condition,
+  Conjunction,
+  CriteriaBuilderComponent,
+  NovoLabelService,
+  Operator,
+} from 'novo-elements';
 import { ReplaySubject, Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
 import { MockMeta } from './MockMeta';
@@ -83,6 +92,13 @@ export class JustCriteriaExample implements OnInit {
   andOr = [Conjunction.AND, Conjunction.OR];
   andOrNot = [Conjunction.AND, Conjunction.OR, Conjunction.NOT];
 
+  addressConfig: AddressCriteriaConfig = {};
+  addressRadiusEnabled: boolean = false;
+  addressRadiusEnabledOptions: { label: string, value: boolean }[] = [
+    { label: 'Yes', value: true },
+    { label: 'No', value: false },
+  ];
+
   editTypeFn = (field: any) => {
     if (field.optionsType === 'Brewery') return 'custom';
     return (field.inputType || field.dataType || field.type).toLowerCase();
@@ -115,33 +131,23 @@ export class JustCriteriaExample implements OnInit {
   }
 
   prepopulateForm() {
-    const prepopulatedData = [
-      {
-        scope: 'Candidate',
-        field: 'address',
-        operator: 'includeAny',
-      },
-      {
-        scope: 'Candidate',
-        field: 'id',
-        operator: 'equalTo',
-        value: 123,
-      },
-      {
-        scope: 'Candidate',
-        field: 'availability',
-        operator: 'includeAny',
-        value: ['test'],
-      },
-      {
-        scope: 'Candidate',
-        field: 'customDate1',
-        operator: 'within',
-        value: '-30',
-      },
-      // where=category IN (1,2,3)
-      // where=category.id:[1 2 3]
-    ];
+    const prepopulatedData: Condition[] = [{
+      field: 'id',
+      operator: 'equalTo',
+      value: 123,
+    }, {
+      field: 'availability',
+      operator: 'includeAny',
+      value: ['test'],
+    }, {
+      field: 'customDate1',
+      operator: 'within',
+      value: '-30',
+    }, {
+      field: 'address',
+      operator: 'includeAny',
+      value: null,
+    }];
     this.setQueryForm(prepopulatedData);
   }
 
@@ -155,5 +161,13 @@ export class JustCriteriaExample implements OnInit {
 
   onSubmit() {
     console.log('Your form data : ', this.queryForm.value);
+  }
+
+  addressRadiusEnabledChanged(enabled: boolean) {
+    this.addressConfig = Object.assign({}, this.addressConfig, { radiusEnabled: enabled });
+  }
+
+  addressRadiusUnitsSelected(units: AddressRadiusUnitsName) {
+    this.addressConfig = Object.assign({}, this.addressConfig, { radiusUnits: units });
   }
 }
