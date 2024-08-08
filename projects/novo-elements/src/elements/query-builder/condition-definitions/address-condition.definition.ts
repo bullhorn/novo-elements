@@ -1,11 +1,28 @@
-import { ChangeDetectionStrategy, Component, ElementRef, QueryList, ViewChild, ViewChildren, ViewEncapsulation } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  ElementRef,
+  input,
+  InputSignal,
+  OnDestroy,
+  QueryList,
+  Signal,
+  signal,
+  ViewChild,
+  ViewChildren,
+  ViewEncapsulation,
+  WritableSignal
+} from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 import { NovoPickerToggleElement } from 'novo-elements/elements/field';
 import { PlacesListComponent } from 'novo-elements/elements/places';
 import { NovoLabelService } from 'novo-elements/services';
-import { Key } from 'novo-elements/utils';
+import { Helpers, Key } from 'novo-elements/utils';
+import { Subscription } from 'rxjs';
+import { AddressCriteriaConfig, AddressData, AddressRadius, AddressRadiusUnitsName, Operator, RadiusUnits } from '../query-builder.types';
 import { AbstractConditionFieldDef } from './abstract-condition.definition';
-import { Operator } from '../query-builder.types';
 
 /**
  * Handle selection of field values when a list of options is provided.
@@ -18,45 +35,104 @@ import { Operator } from '../query-builder.types';
         <novo-select [placeholder]="labels.operator" formControlName="operator" (onSelect)="onOperatorSelect(formGroup)">
           <novo-option value="includeAny">{{ labels.includeAny }}</novo-option>
           <novo-option value="excludeAny">{{ labels.exclude }}</novo-option>
+          <novo-option value="radius" *ngIf="radiusEnabled()">{{ labels.radius }}</novo-option>
         </novo-select>
       </novo-field>
-      <ng-container *novoConditionInputDef="let formGroup; viewIndex as viewIndex; fieldMeta as meta" [ngSwitch]="formGroup.value.operator" [formGroup]="formGroup">
-        <novo-field *novoSwitchCases="['includeAny', 'excludeAny']" #novoField>
-          <novo-chip-list [(ngModel)]="chipListModel" [ngModelOptions]="{ standalone: true }" (click)="openPlacesList(viewIndex)">
-            <novo-chip *ngFor="let item of formGroup.get('value').value" (removed)="remove(item, formGroup, viewIndex)">
-              <novo-text ellipsis>{{ item.formatted_address }}</novo-text>
-              <novo-icon novoChipRemove>close</novo-icon>
-            </novo-chip>
-            <input
-              novoChipInput
-              [id]="viewIndex"
-              [placeholder]="labels.location"
-              (keyup)="onKeyup($event, viewIndex)"
-              (keydown)="onKeydown($event, viewIndex)"
-              [picker]="placesPicker"
-              #addressInput />
-          </novo-chip-list>
-          <novo-picker-toggle [overlayId]="viewIndex" icon="location" novoSuffix>
-            <google-places-list [term]="term" (select)="selectPlace($event, formGroup, viewIndex)" formControlName="value" #placesPicker></google-places-list>
-          </novo-picker-toggle>
-        </novo-field>
+      <ng-container *novoConditionInputDef="let formGroup; viewIndex as viewIndex; fieldMeta as meta" [formGroup]="formGroup">
+        <novo-flex justify="space-between" align="end">
+          <novo-field #novoRadiusField *ngIf="formGroup.value.operator === 'radius'" class="address-radius">
+            <novo-select
+              #radiusSelect [placeholder]="labels.radius"
+              (onSelect)="onRadiusSelect(formGroup, $event.selected)"
+              [value]="radius()"
+              [options]="radiusOptions()">
+            </novo-select>
+          </novo-field>
+          <novo-field #novoField class="address-location">
+            <novo-chip-list [(ngModel)]="chipListModel" [ngModelOptions]="{ standalone: true }" (click)="openPlacesList(viewIndex)">
+              <novo-chip *ngFor="let item of formGroup.get('value').value" (removed)="remove(item, formGroup, viewIndex)">
+                <novo-text ellipsis>{{ item.formatted_address }}</novo-text>
+                <novo-icon novoChipRemove>close</novo-icon>
+              </novo-chip>
+              <input
+                novoChipInput
+                [id]="viewIndex"
+                [placeholder]="labels.location"
+                (keyup)="onKeyup($event, viewIndex)"
+                (keydown)="onKeydown($event, viewIndex)"
+                [picker]="placesPicker"
+                #addressInput/>
+            </novo-chip-list>
+            <novo-picker-toggle [overlayId]="viewIndex" icon="location" novoSuffix>
+              <google-places-list
+                [term]="term"
+                (select)="selectPlace($event, formGroup, viewIndex)"
+                formControlName="value"
+                #placesPicker/>
+            </novo-picker-toggle>
+          </novo-field>
+        </novo-flex>
       </ng-container>
     </ng-container>
   `,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.Default,
 })
-export class NovoDefaultAddressConditionDef extends AbstractConditionFieldDef {
+export class NovoDefaultAddressConditionDef extends AbstractConditionFieldDef implements AfterViewInit, OnDestroy {
   @ViewChildren(NovoPickerToggleElement) overlayChildren: QueryList<NovoPickerToggleElement>;
   @ViewChildren('addressInput') inputChildren: QueryList<ElementRef>;
   @ViewChild('placesPicker') placesPicker: PlacesListComponent;
+
+  // Static defaults
+  radiusValues: number[] = [5, 10, 20, 30, 40, 50, 100];
+  defaultRadius: number = 30;
+
+  // Overridable defaults
+  defaults: AddressCriteriaConfig = {
+    radiusEnabled: false,
+    radiusUnits: 'miles',
+  };
+  config: InputSignal<AddressCriteriaConfig> = input();
+  radiusUnits: Signal<AddressRadiusUnitsName> = computed(() =>
+    this.config()?.radiusUnits || this.defaults.radiusUnits
+  );
+  radiusEnabled: Signal<boolean> = computed(() =>
+    this.config()?.radiusEnabled || this.defaults.radiusEnabled
+  );
+
+  radius: WritableSignal<number> = signal(this.defaultRadius);
+  radiusOptions: Signal<{ label: string; value: number; }[]> = computed(() => {
+    const unitsLabel = this.radiusUnits() === RadiusUnits.miles ? this.labels.miles : this.labels.km;
+    return this.radiusValues.map(value => ({
+      label: `${value.toString()} ${unitsLabel}`,
+      value,
+    }));
+  });
 
   defaultOperator = Operator.includeAny;
   chipListModel: any = '';
   term: string = '';
 
+  private _addressChangesSubscription: Subscription = Subscription.EMPTY;
+
   constructor(public element: ElementRef, public labels: NovoLabelService) {
     super(labels);
+  }
+
+  ngAfterViewInit() {
+    setTimeout(() => {
+      // Initialize the radius value from existing data
+      this.assignRadiusFromValue();
+
+      // Update the radius on address value changes
+      this._addressChangesSubscription = this.inputChildren.changes.subscribe(() => {
+        this.assignRadiusFromValue();
+      })
+    });
+  }
+
+  ngOnDestroy() {
+    this._addressChangesSubscription.unsubscribe();
   }
 
   onKeyup(event, viewIndex) {
@@ -78,7 +154,7 @@ export class NovoDefaultAddressConditionDef extends AbstractConditionFieldDef {
     }
   }
 
-  getValue(formGroup: AbstractControl): any[] {
+  getValue(formGroup: AbstractControl): AddressData[] {
     return formGroup.value.value || [];
   }
 
@@ -99,18 +175,16 @@ export class NovoDefaultAddressConditionDef extends AbstractConditionFieldDef {
   }
 
   selectPlace(event: any, formGroup: AbstractControl, viewIndex: string): void {
-    const valueToAdd = {
+    const valueToAdd: AddressData = {
       address_components: event.address_components,
       formatted_address: event.formatted_address,
       geometry: event.geometry,
       place_id: event.place_id,
     };
-    const current = this.getValue(formGroup);
-    if (!Array.isArray(current)) {
-      formGroup.get('value').setValue([valueToAdd]);
-    } else {
-      formGroup.get('value').setValue([...current, valueToAdd]);
-    }
+    const current: AddressData | AddressData[] = this.getValue(formGroup);
+    const updated: AddressData[] = Array.isArray(current) ? [...current, valueToAdd] : [valueToAdd];
+    formGroup.get('value').setValue(this.updateRadiusInValues(formGroup, updated));
+
     this.inputChildren.forEach(input => {
       input.nativeElement.value = '';
     })
@@ -118,7 +192,7 @@ export class NovoDefaultAddressConditionDef extends AbstractConditionFieldDef {
     this.closePlacesList(viewIndex);
   }
 
-  remove(valueToRemove: any, formGroup: AbstractControl, viewIndex: string): void {
+  remove(valueToRemove: AddressData, formGroup: AbstractControl, viewIndex: string): void {
     const current = this.getValue(formGroup);
     const index = current.indexOf(valueToRemove);
     if (index >= 0) {
@@ -127,5 +201,44 @@ export class NovoDefaultAddressConditionDef extends AbstractConditionFieldDef {
       formGroup.get('value').setValue(oldValue);
     }
     this.closePlacesList(viewIndex);
+  }
+
+  onRadiusSelect(formGroup: AbstractControl, radius: number): void {
+    this.radius.set(radius);
+    // We must dirty the form explicitly to show up as a user modification when it was done programmatically
+    formGroup.get('value').setValue(this.updateRadiusInValues(formGroup, this.getValue(formGroup)));
+    formGroup.markAsDirty();
+  }
+
+  private assignRadiusFromValue() {
+    if (this.placesPicker?.model?.length) {
+      const addressData: AddressData = this.placesPicker.model[0];
+      const initialRadius = addressData.radius?.value;
+      if (initialRadius && Helpers.isNumber(initialRadius)) {
+        this.radius.set(initialRadius);
+      }
+    }
+  }
+
+  private updateRadiusInValues(formGroup: AbstractControl, values: AddressData[]): AddressData[] {
+    return values.map(val => ({
+      ...val,
+      radius: this.isRadiusOperatorSelected(formGroup) ? this.getRadiusData(formGroup) : undefined,
+    }));
+  }
+
+  private getRadiusData(formGroup: AbstractControl): AddressRadius {
+    return {
+      value: this.getRadius(formGroup),
+      units: this.radiusUnits(),
+    };
+  }
+
+  private getRadius(formGroup: AbstractControl): number | undefined {
+    return this.isRadiusOperatorSelected(formGroup) ? this.radius() : undefined;
+  }
+
+  private isRadiusOperatorSelected(formGroup: AbstractControl): boolean {
+    return formGroup.get('operator').value === 'radius';
   }
 }

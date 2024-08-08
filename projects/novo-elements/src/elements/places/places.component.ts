@@ -5,6 +5,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { BasePickerResults } from 'novo-elements/elements/picker';
 import { GlobalRef } from 'novo-elements/services';
 import { Key } from 'novo-elements/utils';
+import { Observable } from 'rxjs';
 import { GooglePlacesService } from './places.service';
 
 export interface Settings {
@@ -423,5 +424,10 @@ export class PlacesListComponent extends BasePickerResults implements OnInit, On
         return;
       }
     }
+  }
+
+  search(term, mode?): Observable<any> {
+    // Disable the base search term functionality here since it is handled by the places picker separately
+    return new Observable();
   }
 }

@@ -141,6 +141,8 @@ export class NovoLabelService {
   refreshPagination = 'Refresh Pagination';
   location = 'Location';
   showLess = 'Show Less';
+  miles = 'Miles';
+  km = 'Km';
 
   constructor(
     @Optional()

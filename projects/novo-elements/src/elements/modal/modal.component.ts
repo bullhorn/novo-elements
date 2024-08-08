@@ -29,7 +29,7 @@ export class NovoModalElement {
       <ng-content select="h2"></ng-content>
       <ng-content select="p"></ng-content>
     </section>
-    <footer class="novo-notification-footer"><ng-content select="button,novo-button"></ng-content></footer>
+    <footer class="novo-notification-footer"><ng-content select="button,novo-button,novo-dropdown"></ng-content></footer>
   `,
   styleUrls: ['./notification.component.scss'],
   host: {

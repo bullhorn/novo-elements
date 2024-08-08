@@ -17,7 +17,7 @@ import { debounce, filter, startWith, takeUntil } from 'rxjs/operators';
 import { NovoConditionFieldDef } from '../query-builder.directives';
 import { QueryBuilderService } from '../query-builder.service';
 import { NOVO_CRITERIA_BUILDER } from '../query-builder.tokens';
-import { BaseFieldDef, Condition, ConditionGroup, Conjunction } from '../query-builder.types';
+import { BaseFieldDef, Condition, ConditionGroup, Conjunction, AddressCriteriaConfig } from '../query-builder.types';
 
 const EMPTY_CONDITION: Condition = {
   field: null,
@@ -43,6 +43,7 @@ export class CriteriaBuilderComponent implements OnInit, OnDestroy, AfterContent
   @Input() controlName: string;
   @Input() allowedGroupings = [Conjunction.AND, Conjunction.OR, Conjunction.NOT];
   @Input() editTypeFn: (field: BaseFieldDef) => string;
+  @Input() addressConfig: AddressCriteriaConfig;
 
   @ContentChildren(NovoConditionFieldDef, { descendants: true }) _contentFieldDefs: QueryList<NovoConditionFieldDef>;
 

@@ -26,7 +26,7 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { BaseConditionFieldDef } from '../query-builder.directives';
 import { QueryBuilderConfig, QueryBuilderService } from '../query-builder.service';
 import { NOVO_CONDITION_BUILDER } from '../query-builder.tokens';
-import { BaseFieldDef, FieldConfig, QueryFilterOutlet } from '../query-builder.types';
+import { AddressCriteriaConfig, BaseFieldDef, FieldConfig, QueryFilterOutlet } from '../query-builder.types';
 
 /**
  * Provides a handle for the table to grab the view container's ng-container to insert data rows.
@@ -72,6 +72,7 @@ export class ConditionBuilderComponent implements OnInit, OnChanges, AfterConten
   isFirst = input(false);
   @Input() andIndex: number;
   @Input() groupIndex: number;
+  @Input() addressConfig: AddressCriteriaConfig;
 
   // This component can either be directly hosted as a host to a condition, or it can be part of a condition group within a criteria builder.
   // In the former case, config will come from inputs, and we will instantiate our own QueryBuilderService. In the latter, it comes from
