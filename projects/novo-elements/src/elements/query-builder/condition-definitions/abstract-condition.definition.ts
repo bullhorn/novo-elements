@@ -26,7 +26,7 @@ export abstract class AbstractConditionFieldDef implements OnDestroy, OnInit {
 
   @ViewChild(NovoConditionFieldDef, { static: true }) fieldDef: NovoConditionFieldDef;
 
-  labels = inject(NovoLabelService);
+  constructor(public labels: NovoLabelService) {}
 
   ngOnInit() {
     this._syncFieldDefName();

@@ -1,7 +1,8 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { AbstractControl, UntypedFormGroup } from '@angular/forms';
-import { AbstractConditionFieldDef } from './abstract-condition.definition';
+import { AbstractControl } from '@angular/forms';
+import { NovoLabelService } from 'novo-elements/services';
 import { Operator } from '../query-builder.types';
+import { AbstractConditionFieldDef } from './abstract-condition.definition';
 
 /**
  * Constructing filters against String fields can be complex. Each "chip" added to the
@@ -59,8 +60,8 @@ import { Operator } from '../query-builder.types';
 export class NovoDefaultStringConditionDef extends AbstractConditionFieldDef {
   defaultOperator = Operator.includeAny;
 
-  constructor() {
-    super();
+  constructor(labelService: NovoLabelService) {
+    super(labelService);
     this.defineOperatorEditGroup(Operator.includeAny, Operator.includeAll, Operator.excludeAny);
   }
 

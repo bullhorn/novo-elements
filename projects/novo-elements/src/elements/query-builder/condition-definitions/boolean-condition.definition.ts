@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { AbstractConditionFieldDef } from './abstract-condition.definition';
 import { Operator } from '../query-builder.types';
+import { NovoLabelService } from 'novo-elements/services';
 
 /**
  * When constructing a query using a field that is a boolean with only true/false as possible values.
@@ -30,8 +31,8 @@ import { Operator } from '../query-builder.types';
 export class NovoDefaultBooleanConditionDef extends AbstractConditionFieldDef {
   defaultOperator = Operator.include;
 
-  constructor() {
-    super();
+  constructor(labelService: NovoLabelService) {
+    super(labelService);
     this.defineOperatorEditGroup(Operator.include, Operator.exclude, Operator.isNull);
   }
 }

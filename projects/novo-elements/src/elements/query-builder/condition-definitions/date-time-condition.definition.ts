@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, QueryList, ViewChildren, ViewEncaps
 import { NovoPickerToggleElement } from 'novo-elements/elements/field';
 import { AbstractConditionFieldDef } from './abstract-condition.definition';
 import { Operator } from '../query-builder.types';
+import { NovoLabelService } from 'novo-elements/services';
 
 /**
  * Most complicated of the default conditions defs, a date needs to provide a different
@@ -58,8 +59,8 @@ export class NovoDefaultDateTimeConditionDef extends AbstractConditionFieldDef {
 
   defaultOperator = Operator.within;
 
-  constructor() {
-    super();
+  constructor(labelService: NovoLabelService) {
+    super(labelService);
     this.defineOperatorEditGroup(Operator.before, Operator.after);
   }
 

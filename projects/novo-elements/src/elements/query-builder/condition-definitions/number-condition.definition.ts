@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { AbstractConditionFieldDef } from './abstract-condition.definition';
 import { Operator } from '../query-builder.types';
+import { NovoLabelService } from 'novo-elements/services';
 
 /**
  * When constructing a query using a field that is an Int, Double, Number ...etc.
@@ -37,8 +38,8 @@ import { Operator } from '../query-builder.types';
 export class NovoDefaultNumberConditionDef extends AbstractConditionFieldDef {
   defaultOperator = Operator.equalTo;
 
-  constructor() {
-    super();
+  constructor(labelService: NovoLabelService) {
+    super(labelService);
     this.defineOperatorEditGroup(Operator.greaterThan, Operator.lessThan, Operator.equalTo);
   }
 }
