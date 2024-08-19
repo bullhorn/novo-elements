@@ -1,11 +1,11 @@
-import { Directive, inject, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { UntypedFormGroup } from '@angular/forms';
+import { AfterViewInit, Directive, Input, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { FormControlDirective, FormControlName, UntypedFormGroup } from '@angular/forms';
 import { NovoLabelService } from 'novo-elements/services';
-import { NovoConditionFieldDef } from '../query-builder.directives';
+import { NovoConditionFieldDef, NovoConditionOperatorsDef } from '../query-builder.directives';
 import { Operator } from '../query-builder.types';
 
 @Directive()
-export abstract class AbstractConditionFieldDef implements OnDestroy, OnInit {
+export abstract class AbstractConditionFieldDef implements OnDestroy, OnInit, AfterViewInit {
   /** Column name that should be used to reference this column. */
   @Input()
   get name(): string {
@@ -25,6 +25,7 @@ export abstract class AbstractConditionFieldDef implements OnDestroy, OnInit {
   protected operatorEditGroups: Set<Operator>[] = [];
 
   @ViewChild(NovoConditionFieldDef, { static: true }) fieldDef: NovoConditionFieldDef;
+  @ViewChildren(FormControlName) formControlsByName: QueryList<FormControlName>;
 
   constructor(public labels: NovoLabelService) {}
 
@@ -34,6 +35,19 @@ export abstract class AbstractConditionFieldDef implements OnDestroy, OnInit {
     this._previousOperatorValue = this.defaultOperator as Operator;
     // Need to add self to FilterBuilder because "ContentChildren won't find it"
     this.fieldDef?.register();
+  }
+
+  ngAfterViewInit() {
+    setTimeout(() => {
+      this.frameAfterViewInit();
+    });
+  }
+
+  frameAfterViewInit() {
+    const operatorField = this.formControlsByName.find(formControlDirective => formControlDirective.name === 'operator').control;
+    if (operatorField) {
+      this._previousOperatorValue = operatorField.value;
+    }
   }
 
   ngOnDestroy() {
@@ -59,8 +73,8 @@ export abstract class AbstractConditionFieldDef implements OnDestroy, OnInit {
         clearVal = false;
       }
     }
+    this._previousOperatorValue = formGroup.get('operator').value;
     if (clearVal) {
-      this._previousOperatorValue = formGroup.get('operator').value;
       formGroup.get('value').setValue(null);
     }
   }

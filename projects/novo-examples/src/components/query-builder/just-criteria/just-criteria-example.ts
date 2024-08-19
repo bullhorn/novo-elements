@@ -90,7 +90,10 @@ export class JustCriteriaExample implements OnInit {
   andOr = [Conjunction.AND, Conjunction.OR];
   andOrNot = [Conjunction.AND, Conjunction.OR, Conjunction.NOT];
 
-  addressConfig: AddressCriteriaConfig = {};
+  addressConfig: AddressCriteriaConfig = {
+    radiusEnabled: true,
+    radiusUnits: 'miles'
+  };
   addressRadiusEnabled: boolean = false;
   addressRadiusEnabledOptions: { label: string, value: boolean }[] = [
     { label: 'Yes', value: true },

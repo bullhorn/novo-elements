@@ -16,7 +16,7 @@ import {
   ViewEncapsulation,
   WritableSignal
 } from '@angular/core';
-import { AbstractControl } from '@angular/forms';
+import { AbstractControl, UntypedFormGroup } from '@angular/forms';
 import { NovoPickerToggleElement } from 'novo-elements/elements/field';
 import { PlacesListComponent } from 'novo-elements/elements/places';
 import { NovoLabelService } from 'novo-elements/services';
@@ -24,6 +24,7 @@ import { Helpers, Key } from 'novo-elements/utils';
 import { Subscription } from 'rxjs';
 import { AddressCriteriaConfig, AddressData, AddressRadius, AddressRadiusUnitsName, Operator, RadiusUnits } from '../query-builder.types';
 import { AbstractConditionFieldDef } from './abstract-condition.definition';
+import { NovoSelectElement } from 'novo-elements/elements/select';
 
 /**
  * Handle selection of field values when a list of options is provided.
@@ -79,10 +80,11 @@ import { AbstractConditionFieldDef } from './abstract-condition.definition';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.Default,
 })
-export class NovoDefaultAddressConditionDef extends AbstractConditionFieldDef implements AfterViewInit, OnDestroy {
+export class NovoDefaultAddressConditionDef extends AbstractConditionFieldDef implements OnDestroy {
   @ViewChildren(NovoPickerToggleElement) overlayChildren: QueryList<NovoPickerToggleElement>;
   @ViewChildren('addressInput') inputChildren: QueryList<ElementRef>;
   @ViewChild('placesPicker') placesPicker: PlacesListComponent;
+  @ViewChildren(NovoSelectElement) addressSideTest: any;
 
   // Static defaults
   radiusValues: number[] = [5, 10, 20, 30, 40, 50, 100];
@@ -118,15 +120,19 @@ export class NovoDefaultAddressConditionDef extends AbstractConditionFieldDef im
 
   public element = inject(ElementRef);
 
-  ngAfterViewInit() {
-    setTimeout(() => {
-      // Initialize the radius value from existing data
-      this.assignRadiusFromValue();
+  constructor(labelService: NovoLabelService) {
+    super(labelService);
+    this.defineOperatorEditGroup(Operator.includeAny, Operator.excludeAny, Operator.radius);
+  }
 
-      // Update the radius on address value changes
-      this._addressChangesSubscription = this.inputChildren.changes.subscribe(() => {
-        this.assignRadiusFromValue();
-      })
+  frameAfterViewInit(): void {
+    super.frameAfterViewInit();
+    // Initialize the radius value from existing data
+    this.assignRadiusFromValue();
+
+    // Update the radius on address value changes
+    this._addressChangesSubscription = this.inputChildren.changes.subscribe(() => {
+      this.assignRadiusFromValue();
     });
   }
 
@@ -200,6 +206,17 @@ export class NovoDefaultAddressConditionDef extends AbstractConditionFieldDef im
       formGroup.get('value').setValue(oldValue);
     }
     this.closePlacesList(viewIndex);
+  }
+
+  // Override abstract behavior - allow moving location from includeAny to radius, but when moving the opposite direction,
+  // trim out radius information from the value
+  onOperatorSelect(formGroup: UntypedFormGroup): void {
+    const previousOperator = this._previousOperatorValue;
+    super.onOperatorSelect(formGroup);
+    if ([previousOperator, formGroup.get('operator').getRawValue()].indexOf(Operator.radius) !== -1 &&
+        formGroup.get('value').getRawValue() != null) {
+      formGroup.get('value').setValue(this.updateRadiusInValues(formGroup, this.getValue(formGroup)));
+    }
   }
 
   onRadiusSelect(formGroup: AbstractControl, radius: number): void {
