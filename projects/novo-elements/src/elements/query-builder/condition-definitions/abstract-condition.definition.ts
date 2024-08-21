@@ -44,7 +44,7 @@ export abstract class AbstractConditionFieldDef implements OnDestroy, OnInit, Af
   }
 
   frameAfterViewInit() {
-    const operatorField = this.formControlsByName.find(formControlDirective => formControlDirective.name === 'operator').control;
+    const operatorField = this.formControlsByName.find(formControlDirective => formControlDirective.name === 'operator')?.control;
     if (operatorField) {
       this._previousOperatorValue = operatorField.value;
     }
