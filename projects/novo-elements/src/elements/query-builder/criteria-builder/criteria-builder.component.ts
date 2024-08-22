@@ -14,6 +14,7 @@ import {
 import { ControlContainer, FormArray, FormBuilder, NG_VALUE_ACCESSOR, UntypedFormGroup, Validators } from '@angular/forms';
 import { interval, Subject } from 'rxjs';
 import { debounce, filter, startWith, takeUntil } from 'rxjs/operators';
+import { Helpers } from 'novo-elements/utils';
 import { NovoConditionFieldDef } from '../query-builder.directives';
 import { QueryBuilderService } from '../query-builder.service';
 import { NOVO_CRITERIA_BUILDER } from '../query-builder.tokens';
@@ -45,10 +46,21 @@ export class CriteriaBuilderComponent implements OnInit, OnDestroy, AfterContent
   @Input() editTypeFn: (field: BaseFieldDef) => string;
   @Input() addressConfig: AddressCriteriaConfig;
 
+  @Input('hideFirstOperator')
+  set HideFirstOperator(hide: boolean) {
+      if (!Helpers.isEmpty(hide)) {
+        this._hideFirstOperator = hide;
+      }
+  }
+  get hideFirstOperator() {
+    return this._hideFirstOperator;
+  }
+
   @ContentChildren(NovoConditionFieldDef, { descendants: true }) _contentFieldDefs: QueryList<NovoConditionFieldDef>;
 
   public parentForm: UntypedFormGroup;
   public innerForm: UntypedFormGroup;
+  private _hideFirstOperator: boolean = true;
   /** Subject that emits when the component has been destroyed. */
   private readonly _onDestroy = new Subject<void>();
 

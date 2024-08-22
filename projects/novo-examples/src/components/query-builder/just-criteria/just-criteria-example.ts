@@ -99,6 +99,12 @@ export class JustCriteriaExample implements OnInit {
     { label: 'No', value: false },
   ];
 
+  hideFirstOperator: boolean = undefined;
+  hideFirstOperatorOptions = [
+    { label: 'True', value: true },
+    { label: 'False', value: false }
+  ];
+
   editTypeFn = (field: any) => {
     if (field.optionsType === 'Brewery') return 'custom';
     return (field.inputType || field.dataType || field.type).toLowerCase();

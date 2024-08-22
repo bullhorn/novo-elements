@@ -24,6 +24,7 @@ const EMPTY_CONDITION: Condition = {
 export class ConditionGroupComponent implements OnInit, OnDestroy {
   @Input() controlName: string = '$' + Conjunction.AND;
   @Input() groupIndex: number;
+  @Input() hideFirstOperator: boolean = true;
 
   public parentForm: UntypedFormGroup;
   /** Subject that emits when the component has been destroyed. */

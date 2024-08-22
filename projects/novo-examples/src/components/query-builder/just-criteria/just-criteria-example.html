@@ -5,6 +5,7 @@
     [allowedGroupings]="mode.value"
     [config]="config"
     [editTypeFn]="editTypeFn"
+    [hideFirstOperator]="hideFirstOperator"
     [addressConfig]="addressConfig">
     <custom-picker-condition-def name="CUSTOM"></custom-picker-condition-def>
   </novo-criteria-builder>
@@ -23,6 +24,13 @@
       <novo-radio name="mode" [value]="andOr">And, Or</novo-radio>
       <novo-radio name="mode" [value]="andOrNot">And, Or, Not</novo-radio>
     </novo-radio-group>
+  </section>
+</novo-row>
+
+<novo-row align="start" gap="xl" margin="xl">
+  <section>
+    <novo-label marginRight="md">Hide First Operator</novo-label>
+    <novo-tiles [options]="hideFirstOperatorOptions" [(ngModel)]="hideFirstOperator"/>
   </section>
 </novo-row>
 

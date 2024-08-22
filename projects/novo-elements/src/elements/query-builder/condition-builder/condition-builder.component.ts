@@ -69,10 +69,10 @@ export class ConditionBuilderComponent implements OnInit, OnChanges, AfterConten
   @ViewChild(ConditionInputOutlet, { static: true }) _inputOutlet: ConditionInputOutlet;
 
   @Input() label: any;
-  isFirst = input(false);
   @Input() andIndex: number;
   @Input() groupIndex: number;
   @Input() addressConfig: AddressCriteriaConfig;
+  hideOperator = input(true);
 
   // This component can either be directly hosted as a host to a condition, or it can be part of a condition group within a criteria builder.
   // In the former case, config will come from inputs, and we will instantiate our own QueryBuilderService. In the latter, it comes from
@@ -109,7 +109,7 @@ export class ConditionBuilderComponent implements OnInit, OnChanges, AfterConten
     if (this.staticFieldSelection()) {
       return '13rem 1fr';
     } else {
-      const firstColumnWidth = this.isFirst() ? '20rem' : '16rem';
+      const firstColumnWidth = this.hideOperator() ? '20rem' : '16rem';
       return `${firstColumnWidth} 13rem 1fr`;
     }
   });

@@ -9,7 +9,7 @@
         overlayHeight="20rem"
         [displayWith]="fieldDisplayWith"
         [style.minWidth.px]="160"
-        [style.maxWidth.px]="(isFirst() || isConditionHost) ? 200 : 160"
+        [style.maxWidth.px]="(hideOperator() || isConditionHost) ? 200 : 160"
         [displayIcon]="displayIcon">
         <novo-optgroup class="filter-search-results">
           <novo-option>
