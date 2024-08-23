@@ -1,7 +1,7 @@
-import { ChangeDetectionStrategy, Component, ViewChild, ViewEncapsulation } from '@angular/core';
-import { AbstractConditionFieldDef } from './abstract-condition.definition';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { NovoLabelService } from 'novo-elements/services';
 import { Operator } from '../query-builder.types';
-import { NovoSelectElement } from 'novo-elements/elements/select';
+import { AbstractConditionFieldDef } from './abstract-condition.definition';
 
 /**
  * Handle selection of field values when a list of options is provided.
@@ -41,4 +41,9 @@ import { NovoSelectElement } from 'novo-elements/elements/select';
 })
 export class NovoDefaultPickerConditionDef extends AbstractConditionFieldDef {
   defaultOperator = Operator.includeAny;
+
+  constructor(labelService: NovoLabelService) {
+    super(labelService);
+    this.defineOperatorEditGroup(Operator.includeAny, Operator.includeAll, Operator.excludeAny);
+  }
 }
