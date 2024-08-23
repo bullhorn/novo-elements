@@ -99,13 +99,13 @@ export class JustCriteriaExample implements OnInit {
     { label: 'No', value: false },
   ];
 
-  hideFirstOperator: boolean = undefined;
+  hideFirstOperator: boolean = true;
   hideFirstOperatorOptions = [
     { label: 'True', value: true },
     { label: 'False', value: false }
   ];
 
-  canBeEmpty: boolean = undefined;
+  canBeEmpty: boolean = false;
   canBeEmptyOptions = [
     { label: 'True', value: true },
     { label: 'False', value: false }
