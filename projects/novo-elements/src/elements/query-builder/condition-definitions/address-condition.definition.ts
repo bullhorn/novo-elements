@@ -80,7 +80,7 @@ import { NovoSelectElement } from 'novo-elements/elements/select';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.Default,
 })
-export class NovoDefaultAddressConditionDef extends AbstractConditionFieldDef implements AfterViewInit, OnDestroy {
+export class NovoDefaultAddressConditionDef extends AbstractConditionFieldDef implements OnDestroy {
   @ViewChildren(NovoPickerToggleElement) overlayChildren: QueryList<NovoPickerToggleElement>;
   @ViewChildren('addressInput') inputChildren: QueryList<ElementRef>;
   @ViewChild('placesPicker') placesPicker: PlacesListComponent;
