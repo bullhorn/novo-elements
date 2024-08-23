@@ -645,6 +645,7 @@ import { NovoTemplateService } from 'novo-elements/services';
           [popoverDisabled]="control.popoverDisabled"
           [popoverAnimation]="control.popoverAnimation"
           [popoverDismissTimeout]="control.popoverDismissTimeout"
+          (onChange)="methods.modelChange($event)"
         ></novo-switch>
       </div>
     </ng-template>
