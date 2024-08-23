@@ -6,6 +6,7 @@
     [config]="config"
     [editTypeFn]="editTypeFn"
     [hideFirstOperator]="hideFirstOperator"
+    [canBeEmpty]="canBeEmpty"
     [addressConfig]="addressConfig">
     <custom-picker-condition-def name="CUSTOM"></custom-picker-condition-def>
   </novo-criteria-builder>
@@ -29,8 +30,21 @@
 
 <novo-row align="start" gap="xl" margin="xl">
   <section>
-    <novo-label marginRight="md">Hide First Operator</novo-label>
+    <novo-label marginRight="md">Hide First Operator
+      <span tooltip="Disabling will display the AND/OR/NOT operator in the first row. Enabling (default) will hide it">
+        <novo-icon>info</novo-icon>
+      </span></novo-label>
     <novo-tiles [options]="hideFirstOperatorOptions" [(ngModel)]="hideFirstOperator"/>
+  </section>
+</novo-row>
+
+<novo-row align="start" gap="xl" margin="xl">
+  <section>
+    <novo-label marginRight="md">Can Be Empty
+      <span tooltip="Enabling will allow you to delete a row if it is the only row in the criteria builder. Disabling (default) will keep the final row, and will instead clear it out">
+        <novo-icon>info</novo-icon>
+      </span></novo-label>
+    <novo-tiles [options]="canBeEmptyOptions" [(ngModel)]="canBeEmpty"/>
   </section>
 </novo-row>
 

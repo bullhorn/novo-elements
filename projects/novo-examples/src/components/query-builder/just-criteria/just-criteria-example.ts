@@ -105,6 +105,12 @@ export class JustCriteriaExample implements OnInit {
     { label: 'False', value: false }
   ];
 
+  canBeEmpty: boolean = undefined;
+  canBeEmptyOptions = [
+    { label: 'True', value: true },
+    { label: 'False', value: false }
+  ];
+
   editTypeFn = (field: any) => {
     if (field.optionsType === 'Brewery') return 'custom';
     return (field.inputType || field.dataType || field.type).toLowerCase();

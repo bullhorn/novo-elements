@@ -45,6 +45,7 @@ export class CriteriaBuilderComponent implements OnInit, OnDestroy, AfterContent
   @Input() allowedGroupings = [Conjunction.AND, Conjunction.OR, Conjunction.NOT];
   @Input() editTypeFn: (field: BaseFieldDef) => string;
   @Input() addressConfig: AddressCriteriaConfig;
+  @Input() canBeEmpty: boolean = false;
 
   @Input('hideFirstOperator')
   set HideFirstOperator(hide: boolean) {

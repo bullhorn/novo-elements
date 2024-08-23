@@ -25,6 +25,7 @@ export class ConditionGroupComponent implements OnInit, OnDestroy {
   @Input() controlName: string = '$' + Conjunction.AND;
   @Input() groupIndex: number;
   @Input() hideFirstOperator: boolean = true;
+  @Input() canBeEmpty: boolean = false;
 
   public parentForm: UntypedFormGroup;
   /** Subject that emits when the component has been destroyed. */
@@ -74,7 +75,11 @@ export class ConditionGroupComponent implements OnInit, OnDestroy {
   }
 
   removeCondition(index: number) {
+    const lastRemainingRow = this.cantRemoveRow();
     this.root.removeAt(index);
+    if (lastRemainingRow && !this.canBeEmpty) {
+      this.addCondition();
+    }
     this.cdr.markForCheck();
   }
 

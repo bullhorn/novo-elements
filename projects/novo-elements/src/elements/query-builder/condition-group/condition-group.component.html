@@ -3,7 +3,7 @@
     <ng-container
       *ngFor="let andGroup of root.controls; let andIndex = index; let isFirst = first;let isLast = last;">
       <ng-container [formGroupName]="andIndex">
-        <novo-flex class="condition-row" align="end" gap="sm" #flex>
+        <novo-flex class="condition-row" [ngClass]="{ isFirst: andIndex === 0 }" align="end" gap="sm" #flex>
           <novo-dropdown *ngIf="(!isFirst || !hideFirstOperator) && qbs.allowedGroupings.length > 1; else labeledGroup">
             <button theme="dialogue" icon="collapse" size="sm">{{qbs.getConjunctionLabel(controlName)}}</button>
             <novo-optgroup>
@@ -16,8 +16,7 @@
               {{qbs.getConjunctionLabel(controlName)}}</novo-label>
           </ng-template>
           <novo-condition-builder [groupIndex]="groupIndex" [andIndex]="andIndex" [hideOperator]="isFirst && hideFirstOperator"></novo-condition-builder>
-          <novo-button theme="icon" icon="delete-o" color="negative" (click)="removeCondition(andIndex)"
-            [disabled]="cantRemoveRow()">
+          <novo-button theme="icon" icon="delete-o" color="negative" (click)="removeCondition(andIndex)">
           </novo-button>
         </novo-flex>
       </ng-container>

@@ -4,7 +4,7 @@
       *ngFor="let andGroup of root.controls; let andIndex = index; let isFirst = first;let isLastAnd = last;">
       <novo-label *ngIf="!isFirst" color="ash" size="xs" uppercase padding="sm">{{ qbs.getConjunctionLabel('and') }}
       </novo-label>
-      <novo-condition-group [hideFirstOperator]="hideFirstOperator" [groupIndex]="andIndex" [formGroupName]="andIndex"></novo-condition-group>
+      <novo-condition-group [hideFirstOperator]="hideFirstOperator" [canBeEmpty]="canBeEmpty" [groupIndex]="andIndex" [formGroupName]="andIndex"></novo-condition-group>
     </ng-container>
   </novo-stack>
 </form>
