@@ -2,6 +2,8 @@
 import { Component } from '@angular/core';
 // Vendor
 import { NovoToastService } from 'novo-elements';
+// App
+import { analyticsColors as colors } from '../colors';
 
 /**
  * @title Analytics Colors
@@ -12,59 +14,7 @@ import { NovoToastService } from 'novo-elements';
   styleUrls: ['./analytics-colors-example.scss'],
 })
 export class AnalyticsColorsExample {
-  public analyticsColors: Array<any> = [
-    {
-      name: 'grapefruit',
-      variables: ['grapefruit'],
-      hex: 'DA4453',
-    },
-    {
-      name: 'bittersweet',
-      variables: ['bittersweet'],
-      hex: 'EB6845',
-    },
-    {
-      name: 'sunflower',
-      variables: ['sunflower'],
-      hex: 'F6B042',
-    },
-    {
-      name: 'grass',
-      variables: ['grass'],
-      hex: '8CC152',
-    },
-    {
-      name: 'mint',
-      variables: ['mint'],
-      hex: '37BC9B',
-    },
-    {
-      name: 'aqua',
-      variables: ['aqua'],
-      hex: '3BAFDA',
-    },
-    {
-      name: 'ocean',
-      variables: ['ocean'],
-      hex: '4A89DC',
-    },
-    {
-      name: 'carnation',
-      variables: ['carnation'],
-      hex: 'D770AD',
-    },
-    {
-      name: 'lavender',
-      variables: ['lavender'],
-      hex: '967ADC',
-    },
-    {
-      name: 'mountain',
-      variables: ['mountain'],
-      hex: '9678B6',
-    },
-  ];
-
+  analyticsColors = colors;
   options: any;
 
   constructor(private toaster: NovoToastService) {}
