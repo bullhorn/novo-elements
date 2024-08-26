@@ -2,6 +2,8 @@
 import { Component } from '@angular/core';
 // Vendor
 import { NovoToastService } from 'novo-elements';
+// App
+import { primaryColors as colors } from '../colors';
 
 /**
  * @title Primary Colors
@@ -12,88 +14,7 @@ import { NovoToastService } from 'novo-elements';
   styleUrls: ['./primary-colors-example.scss'],
 })
 export class PrimaryColorsExample {
-  primaryColors: Array<any> = [
-    {
-      name: 'navigation',
-      variables: ['navigation'],
-      hex: '202945',
-    },
-    {
-      name: 'positive',
-      variables: ['positive'],
-      hex: '4A89DC',
-    },
-    {
-      name: 'dark',
-      variables: ['dark'],
-      hex: '3D464D',
-    },
-    {
-      name: 'background',
-      variables: ['background'],
-      hex: 'F4F4F4',
-    },
-    {
-      name: 'background dark',
-      variables: ['background-dark'],
-      hex: 'E2E2E2',
-    },
-    {
-      name: 'neutral',
-      variables: ['neutral'],
-      hex: '4F5361',
-    },
-    {
-      name: 'success',
-      variables: ['success'],
-      hex: '8CC152',
-    },
-    {
-      name: 'negative',
-      variables: ['negative'],
-      hex: 'DA4453',
-    },
-    {
-      name: 'warning',
-      variables: ['warning'],
-      hex: 'F6B042',
-    },
-    {
-      name: 'empty',
-      variables: ['empty'],
-      hex: 'CCCDCC',
-    },
-    {
-      name: 'sand',
-      variables: ['sand'],
-      hex: 'F4F4F4',
-    },
-    {
-      name: 'silver',
-      variables: ['silver'],
-      hex: 'E2E2E2',
-    },
-    {
-      name: 'stone',
-      variables: ['stone'],
-      hex: 'BEBEBE',
-    },
-    {
-      name: 'ash',
-      variables: ['ash'],
-      hex: 'A0A0A0',
-    },
-    {
-      name: 'slate',
-      variables: ['slate'],
-      hex: '707070',
-    },
-    {
-      name: 'charcoal',
-      variables: ['charcoal'],
-      hex: '282828',
-    },
-  ];
+  primaryColors = colors;
   options: any;
 
   constructor(private toaster: NovoToastService) {}
