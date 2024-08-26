@@ -20,7 +20,7 @@ export interface IDataTablePreferences {
 export interface DataTableWhere {
   query: string;
   criteria?: AdaptiveCriteria;
-  keywords?: string[];
+  keywords?: SearchKeywords;
   form: any;
 }
 
@@ -262,3 +262,34 @@ export enum AdaptiveOperator {
   EndsWith = 'endsWith',
   Radius = 'radius',
 }
+
+export interface IKeywordSearchResponse {
+  items: IKeywordGroup[];
+  meta: {
+    currentPage: number;
+    itemCount: number;
+    itemsPerPage: number;
+    totalItems: number;
+    totalPages: number;
+  };
+}
+
+export interface IKeyword {
+  id: number;
+  name: string;
+}
+
+export interface IKeywordGroup {
+  id: number;
+  name: string;
+  keywords: IKeyword[];
+}
+
+export interface IKeywordBlock {
+  exclude: boolean;
+  keywordGroups: IKeywordGroup[];
+}
+
+export type NestedKeywordGroups = IKeywordBlock[];
+
+export type SearchKeywords = string[] | NestedKeywordGroups;
