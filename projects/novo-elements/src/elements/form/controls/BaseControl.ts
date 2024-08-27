@@ -151,7 +151,6 @@ export class BaseControl extends ControlConfig {
     this.enabled = true;
     this.layoutOptions = config.layoutOptions || {};
     this.military = !!config.military;
-    this.minimal = !!config.minimal;
     this.dateFormat = config.dateFormat;
     this.textMaskEnabled = config.textMaskEnabled;
     this.maskOptions = config.maskOptions;
