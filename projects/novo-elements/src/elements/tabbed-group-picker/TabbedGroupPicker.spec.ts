@@ -481,7 +481,7 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
 
       component.activateItem(chicken);
       expect(selection).toBeUndefined();
-      expect(activation).toBe(chicken);
+      expect(activation).toEqual({ ...chicken, scope: 'quickselect' });
     });
   })
 });
