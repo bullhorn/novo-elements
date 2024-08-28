@@ -39,6 +39,7 @@ export type OperatorName = keyof typeof Operator;
 export interface Condition {
   field: string;
   operator: OperatorName | string;
+  scope?: string;
   value: any;
 }
 

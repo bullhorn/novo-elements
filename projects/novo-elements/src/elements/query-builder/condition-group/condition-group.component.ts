@@ -26,6 +26,7 @@ export class ConditionGroupComponent implements OnInit, OnDestroy {
   @Input() groupIndex: number;
   @Input() hideFirstOperator: boolean = true;
   @Input() canBeEmpty: boolean = false;
+  @Input() scope: string;
 
   public parentForm: UntypedFormGroup;
   /** Subject that emits when the component has been destroyed. */

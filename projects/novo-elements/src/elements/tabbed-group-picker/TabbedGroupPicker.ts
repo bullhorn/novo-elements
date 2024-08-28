@@ -63,6 +63,7 @@ export type TabbedGroupPickerButtonConfig = {
   side: string;
   icon: string;
   label: string;
+  size?: string;
 };
 
 @Component({
@@ -253,12 +254,12 @@ export class NovoTabbedGroupPickerElement implements OnDestroy, OnInit {
     }
   }
 
-  activateItem(item: any): void {
+  activateItem(item: any, tab?: TabbedGroupPickerTab): void {
     if (this.selectionEnabled) {
       item.selected = !item.selected;
       this.onItemToggled(item);
     }
-    this.activation.emit(item);
+    this.activation.emit({ ...item, scope: tab?.typeName || 'quickselect' });
   }
 
   onItemToggled(item: Option) {

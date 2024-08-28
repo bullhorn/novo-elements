@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { computed, Injectable, signal } from '@angular/core';
 import { Subject } from 'rxjs';
 import { NovoLabelService } from 'novo-elements/services';
 import { BaseConditionFieldDef } from './query-builder.directives';
@@ -17,6 +17,8 @@ export interface QueryBuilderConfig {
 export class QueryBuilderService {
   private _customFieldDefs = new Set<BaseConditionFieldDef>();
   private _fieldDefsByName = new Map<string, BaseConditionFieldDef>();
+  public scopes = signal([]);
+  public hasMultipleScopes = computed(() => this.scopes()?.length > 1);
   /**
    * Will dispatch when properties changes, subscribe to this if component should
    * re-render when props are updated

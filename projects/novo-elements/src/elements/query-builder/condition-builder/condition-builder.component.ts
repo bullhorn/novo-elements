@@ -69,6 +69,7 @@ export class ConditionBuilderComponent implements OnInit, OnChanges, AfterConten
   @ViewChild(ConditionInputOutlet, { static: true }) _inputOutlet: ConditionInputOutlet;
 
   @Input() label: any;
+  @Input() scope: string;
   @Input() andIndex: number;
   @Input() groupIndex: number;
   @Input() addressConfig: AddressCriteriaConfig;
@@ -146,8 +147,9 @@ export class ConditionBuilderComponent implements OnInit, OnChanges, AfterConten
   }
 
   ngAfterContentInit() {
-    const fields = this.config()?.fields || [];
-    fields.length && this.changeFieldOptions(fields[0]);
+    const allFields = this.config()?.fields || [];
+    const scopedFields = this.scope ? allFields.find((field) => field.value === this.scope) : allFields[0];
+    allFields.length && this.changeFieldOptions(scopedFields);
     this.searches = this.searchTerm.valueChanges.pipe(debounceTime(300), distinctUntilChanged()).subscribe((term) => {
       this.results$ = Promise.resolve(
         this.fieldConfig.options.filter(

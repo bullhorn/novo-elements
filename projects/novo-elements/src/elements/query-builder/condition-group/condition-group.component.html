@@ -3,7 +3,7 @@
     <ng-container
       *ngFor="let andGroup of root.controls; let andIndex = index; let isFirst = first;let isLast = last;">
       <ng-container [formGroupName]="andIndex">
-        <novo-flex class="condition-row" [ngClass]="{ isFirst: andIndex === 0 }" align="end" gap="sm" #flex>
+        <novo-flex class="condition-row" [ngClass]="{ isFirst: andIndex === 0 }" [class]="scope" align="end" gap="sm" #flex>
           <novo-dropdown *ngIf="(!isFirst || !hideFirstOperator) && qbs.allowedGroupings.length > 1; else labeledGroup">
             <button theme="dialogue" icon="collapse" size="sm">{{qbs.getConjunctionLabel(controlName)}}</button>
             <novo-optgroup>
@@ -15,20 +15,21 @@
             <novo-label *ngIf="!isFirst || !hideFirstOperator" color="ash" size="xs" uppercase padding="sm">
               {{qbs.getConjunctionLabel(controlName)}}</novo-label>
           </ng-template>
-          <novo-condition-builder [groupIndex]="groupIndex" [andIndex]="andIndex" [hideOperator]="isFirst && hideFirstOperator"></novo-condition-builder>
+          <novo-condition-builder [groupIndex]="groupIndex" [andIndex]="andIndex" [hideOperator]="isFirst && hideFirstOperator" [scope]="scope"></novo-condition-builder>
           <novo-button theme="icon" icon="delete-o" color="negative" (click)="removeCondition(andIndex)">
           </novo-button>
         </novo-flex>
       </ng-container>
     </ng-container>
     <button
+      *ngIf="!qbs.hasMultipleScopes()"
       theme="dialogue"
       data-automation-id="add-advanced-search-condition"
       icon="add-thin"
       side="left"
       size="sm"
-      uppercase (click)="addCondition()">
+      uppercase
+      (click)="addCondition()">
       {{ labels.addCondition }}</button>
   </novo-stack>
-  <!-- <button class="and-or-button" theme="secondary" size="sm" (click)="addRootCondition()">{{ addCriteriaLabel }}</button> -->
 </div>

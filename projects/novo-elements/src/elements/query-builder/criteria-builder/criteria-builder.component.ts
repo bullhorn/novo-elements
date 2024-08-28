@@ -4,17 +4,23 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  computed,
   ContentChildren,
   forwardRef,
   Input,
   OnDestroy,
   OnInit,
   QueryList,
+  viewChild,
+  viewChildren,
 } from '@angular/core';
 import { ControlContainer, FormArray, FormBuilder, NG_VALUE_ACCESSOR, UntypedFormGroup, Validators } from '@angular/forms';
 import { interval, Subject } from 'rxjs';
 import { debounce, filter, startWith, takeUntil } from 'rxjs/operators';
+import { NovoTabbedGroupPickerElement, TabbedGroupPickerButtonConfig, TabbedGroupPickerTab } from 'novo-elements/elements';
+import { NovoLabelService } from 'novo-elements/services';
 import { Helpers } from 'novo-elements/utils';
+import { ConditionGroupComponent } from '../condition-group/condition-group.component';
 import { NovoConditionFieldDef } from '../query-builder.directives';
 import { QueryBuilderService } from '../query-builder.service';
 import { NOVO_CRITERIA_BUILDER } from '../query-builder.tokens';
@@ -56,12 +62,34 @@ export class CriteriaBuilderComponent implements OnInit, OnDestroy, AfterContent
   get hideFirstOperator() {
     return this._hideFirstOperator;
   }
+  private _hideFirstOperator: boolean = true;
 
   @ContentChildren(NovoConditionFieldDef, { descendants: true }) _contentFieldDefs: QueryList<NovoConditionFieldDef>;
+  scopedFieldPicker = viewChild(NovoTabbedGroupPickerElement);
+  conditionGroup = viewChildren(ConditionGroupComponent);
 
   public parentForm: UntypedFormGroup;
   public innerForm: UntypedFormGroup;
-  private _hideFirstOperator: boolean = true;
+  public tabbedGroupPickerTabs = computed<TabbedGroupPickerTab[]>(() => {
+    const tabs = [];
+    this.qbs.scopes()?.forEach((scope) => {
+      tabs.push({
+        typeName: scope,
+        typeLabel: scope,
+        valueField: 'name',
+        labelField: 'label',
+        data: this.qbs.config.fields.find((field) => field.value === scope)?.options || [],
+      });
+    });
+    return tabs;
+  });
+  public addButtonConfig: TabbedGroupPickerButtonConfig = {
+    theme: 'dialogue',
+    side: 'left',
+    size: 'sm',
+    icon: 'add-thin',
+    label: this.labels.addCondition,
+  };
   /** Subject that emits when the component has been destroyed. */
   private readonly _onDestroy = new Subject<void>();
 
@@ -70,6 +98,7 @@ export class CriteriaBuilderComponent implements OnInit, OnDestroy, AfterContent
     private formBuilder: FormBuilder,
     private cdr: ChangeDetectorRef,
     public qbs: QueryBuilderService,
+    public labels: NovoLabelService,
   ) {
     if (!qbs.componentHost) {
       qbs.componentHost = this;
@@ -176,7 +205,19 @@ export class CriteriaBuilderComponent implements OnInit, OnDestroy, AfterContent
     }
   }
 
+  onFieldSelect(field) {
+    this.scopedFieldPicker().dropdown.closePanel();
+    const condition = { field: field.name, operator: null, value: null };
+    const group = this.conditionGroup().find((group) => group.scope === field.scope);
+    if (group) {
+      group.addCondition(condition);
+    } else {
+      this.addConditionGroup({ $and: [condition] })
+    }
+  }
+
   private _configureQueryBuilderService() {
+    this.qbs.scopes.set(this.config?.fields.map((f) => f.value));
     this.qbs.config = this.config;
     this.qbs.editTypeFn = this.editTypeFn;
     this.qbs.allowedGroupings = this.allowedGroupings as Conjunction[];

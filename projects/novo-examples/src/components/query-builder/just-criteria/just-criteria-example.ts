@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnInit, viewChild, ViewEncapsulation } from '@angular/core';
 import { AbstractControl, UntypedFormBuilder, UntypedFormControl } from '@angular/forms';
 import {
   AbstractConditionFieldDef,
@@ -13,7 +13,7 @@ import {
 } from 'novo-elements';
 import { ReplaySubject, Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
-import { MockMeta } from './MockMeta';
+import { MockCandidateMeta, MockNoteMeta } from './MockMeta';
 
 @Component({
   selector: 'custom-picker-condition-def',
@@ -81,7 +81,7 @@ export class CustomPickerConditionDef extends AbstractConditionFieldDef implemen
   styleUrls: ['just-criteria-example.css'],
 })
 export class JustCriteriaExample implements OnInit {
-  @ViewChild('criteriaBuilder', { static: true }) criteriaBuilder: CriteriaBuilderComponent;
+  criteriaBuilder = viewChild(CriteriaBuilderComponent);
 
   queryForm: AbstractControl;
   config: any = null;
@@ -98,6 +98,12 @@ export class JustCriteriaExample implements OnInit {
   addressRadiusEnabledOptions: { label: string, value: boolean }[] = [
     { label: 'Yes', value: true },
     { label: 'No', value: false },
+  ];
+
+  useNoteMeta: boolean = false;
+  useNoteMetaOptions = [
+    { label: 'True', value: true },
+    { label: 'False', value: false }
   ];
 
   hideFirstOperator: boolean = true;
@@ -121,16 +127,16 @@ export class JustCriteriaExample implements OnInit {
 
   ngOnInit() {
     this.queryForm = this.formBuilder.group({ criteria: [] });
-    this.getFieldConfig().then((fields) => {
+    this.getFieldConfig(this.useNoteMeta).then((fields) => {
       this.prepopulateForm();
       this.config = { fields };
       this.cdr.detectChanges();
     });
-    // this.setQueryForm([]);
   }
 
-  getFieldConfig() {
-    return Promise.all([MockMeta]).then((metas) => {
+  getFieldConfig(useNoteMeta: boolean) {
+    const allMetas = useNoteMeta ? [MockCandidateMeta, MockNoteMeta] : [MockCandidateMeta];
+    return Promise.all(allMetas).then((metas) => {
       return metas.map((it) => ({
         value: it.entity,
         label: it.label,
@@ -143,22 +149,33 @@ export class JustCriteriaExample implements OnInit {
     });
   }
 
+  setFieldConfig(useNoteMeta: boolean) {
+    this.getFieldConfig(useNoteMeta).then((fields) => {
+      this.config = { fields };
+      this.cdr.detectChanges();
+    });
+  }
+
   prepopulateForm() {
     const prepopulatedData: Condition[] = [{
       field: 'id',
       operator: 'equalTo',
+      scope: 'Candidate',
       value: 123,
     }, {
       field: 'availability',
       operator: 'includeAny',
+      scope: 'Candidate',
       value: ['test'],
     }, {
       field: 'customDate1',
       operator: 'within',
+      scope: 'Candidate',
       value: '-30',
     }, {
       field: 'address',
       operator: 'includeAny',
+      scope: 'Candidate',
       value: null,
     }];
     this.setQueryForm(prepopulatedData);
@@ -174,6 +191,11 @@ export class JustCriteriaExample implements OnInit {
 
   onSubmit() {
     console.log('Your form data : ', this.queryForm.value);
+  }
+
+  resetGroups() {
+    this.criteriaBuilder().clearAllConditions();
+    this.criteriaBuilder().addConditionGroup();
   }
 
   addressRadiusEnabledChanged(enabled: boolean) {

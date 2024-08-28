@@ -17,6 +17,7 @@ export class NovoLabelService {
   and = 'and';
   not = 'not';
   filters = 'Filter';
+  filterss = 'Filters';
   clear = 'Clear';
   sort = 'Sort';
   distributionListOwner = 'Owner';
