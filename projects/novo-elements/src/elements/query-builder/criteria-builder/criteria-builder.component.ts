@@ -17,7 +17,7 @@ import {
 import { ControlContainer, FormArray, FormBuilder, NG_VALUE_ACCESSOR, UntypedFormGroup, Validators } from '@angular/forms';
 import { interval, Subject } from 'rxjs';
 import { debounce, filter, startWith, takeUntil } from 'rxjs/operators';
-import { NovoTabbedGroupPickerElement, TabbedGroupPickerButtonConfig, TabbedGroupPickerTab } from 'novo-elements/elements';
+import { NovoTabbedGroupPickerElement, TabbedGroupPickerButtonConfig, TabbedGroupPickerTab } from 'novo-elements/elements/tabbed-group-picker';
 import { NovoLabelService } from 'novo-elements/services';
 import { Helpers } from 'novo-elements/utils';
 import { ConditionGroupComponent } from '../condition-group/condition-group.component';
