@@ -150,13 +150,14 @@ export class JustCriteriaExample implements OnInit {
   }
 
   setFieldConfig(useNoteMeta: boolean) {
+    this.resetQueryForm();
     this.getFieldConfig(useNoteMeta).then((fields) => {
       this.config = { fields };
       this.cdr.detectChanges();
     });
   }
 
-  prepopulateForm() {
+  prepopulateForm(addAdditionalScope = false) {
     const prepopulatedData: Condition[] = [{
       field: 'id',
       operator: 'equalTo',
@@ -178,11 +179,21 @@ export class JustCriteriaExample implements OnInit {
       scope: 'Candidate',
       value: null,
     }];
+    const prepopulatedNoteCondition: Condition = {
+      field: 'notes.action',
+      operator: 'includeAny',
+      scope: 'Note',
+      value: ['Left Message'],
+    };
+    if (addAdditionalScope) {
+      prepopulatedData.push(prepopulatedNoteCondition);
+    }
     this.setQueryForm(prepopulatedData);
   }
 
-  resetQueryForm() {
-    this.setQueryForm({ criteria: [] });
+  resetQueryForm(addAdditionalScope = false) {
+    this.criteriaBuilder().clearAllConditions();
+    this.prepopulateForm(addAdditionalScope);
   }
 
   setQueryForm(criteria?) {

@@ -29,6 +29,7 @@ import { BaseFieldDef, Condition, ConditionGroup, Conjunction, AddressCriteriaCo
 const EMPTY_CONDITION: Condition = {
   field: null,
   operator: null,
+  scope: null,
   value: null,
 };
 @Component({
@@ -66,7 +67,7 @@ export class CriteriaBuilderComponent implements OnInit, OnDestroy, AfterContent
 
   @ContentChildren(NovoConditionFieldDef, { descendants: true }) _contentFieldDefs: QueryList<NovoConditionFieldDef>;
   scopedFieldPicker = viewChild(NovoTabbedGroupPickerElement);
-  conditionGroup = viewChildren(ConditionGroupComponent);
+  conditionGroups = viewChildren(ConditionGroupComponent);
 
   public parentForm: UntypedFormGroup;
   public innerForm: UntypedFormGroup;
@@ -156,13 +157,34 @@ export class CriteriaBuilderComponent implements OnInit, OnDestroy, AfterContent
     this._onDestroy.complete();
   }
 
-  private isConditionGroup(group: unknown) {
+  private isConditionGroup(group: unknown): group is ConditionGroup {
     return Object.keys(group).every((key) => ['$and', '$or', '$not'].includes(key));
   }
 
+  private isConditionArray(objArr: unknown): objArr is Condition[] {
+    return Object.keys(objArr[0]).every((key) => ['field', 'operator', 'scope', 'value'].includes(key));
+  }
+
   private setInitialValue(value: ConditionGroup[] | Condition[]) {
-    if (value.length && this.isConditionGroup(value[0])) {
-      value.forEach((it) => this.addConditionGroup(it));
+    if (value.length) {
+      if (this.isConditionGroup(value[0])) {
+        value.forEach((it) => this.addConditionGroup(it));
+      } else {
+        const conditions: Condition[] = [...value] as Condition[];
+        if (this.qbs.hasMultipleScopes()) {
+          // divide up by scope into separate groups
+          const scopedConditions: { [key: string]: Condition[] } = {};
+          conditions.forEach((condition) => {
+            scopedConditions[condition.scope] = scopedConditions[condition.scope] || [];
+            scopedConditions[condition.scope].push(condition);
+          })
+          for (const scope in scopedConditions) {
+            this.addConditionGroup({ $and: scopedConditions[scope] });
+          }
+        } else {
+          this.addConditionGroup({ $and: conditions });
+        }
+      }
     } else {
       this.addConditionGroup({ $and: value });
     }
@@ -187,10 +209,11 @@ export class CriteriaBuilderComponent implements OnInit, OnDestroy, AfterContent
     return this.formBuilder.group(controls);
   }
 
-  newCondition({ field, operator, value }: Condition = EMPTY_CONDITION): UntypedFormGroup {
+  newCondition({ field, operator, scope, value }: Condition = EMPTY_CONDITION): UntypedFormGroup {
     return this.formBuilder.group({
       field: [field, Validators.required],
       operator: [operator, Validators.required],
+      scope: [scope],
       value: [value],
     });
   }
@@ -207,8 +230,8 @@ export class CriteriaBuilderComponent implements OnInit, OnDestroy, AfterContent
 
   onFieldSelect(field) {
     this.scopedFieldPicker().dropdown.closePanel();
-    const condition = { field: field.name, operator: null, value: null };
-    const group = this.conditionGroup().find((group) => group.scope === field.scope);
+    const condition = { field: field.name, operator: null, scope: field.scope, value: null };
+    const group = this.conditionGroups().find((group) => group.scope === field.scope);
     if (group) {
       group.addCondition(condition);
     } else {

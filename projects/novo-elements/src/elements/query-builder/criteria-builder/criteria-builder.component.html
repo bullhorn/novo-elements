@@ -2,8 +2,8 @@
   <novo-stack [formArrayName]="controlName" class="criteria-builder-inner">
     <ng-container
       *ngFor="let andGroup of root.controls; let andIndex = index; let isFirst = first;let isLastAnd = last;">
-      <novo-label *ngIf="!isFirst" color="ash" size="xs" uppercase padding="sm">{{ qbs.scopes()[andIndex] + ' ' + labels.filterss || qbs.getConjunctionLabel('and') }}</novo-label>
-      <novo-condition-group [hideFirstOperator]="hideFirstOperator" [canBeEmpty]="canBeEmpty" [groupIndex]="andIndex" [formGroupName]="andIndex" [scope]="qbs.scopes()[andIndex]"></novo-condition-group>
+      <novo-label *ngIf="!isFirst" color="ash" size="xs" uppercase padding="sm">{{ qbs.hasMultipleScopes() ? conditionGroup.scope + ' ' + labels.filterss : qbs.getConjunctionLabel('and') }}</novo-label>
+      <novo-condition-group [hideFirstOperator]="hideFirstOperator" [canBeEmpty]="canBeEmpty" [groupIndex]="andIndex" [formGroupName]="andIndex" #conditionGroup></novo-condition-group>
     </ng-container>
   </novo-stack>
   <novo-tabbed-group-picker

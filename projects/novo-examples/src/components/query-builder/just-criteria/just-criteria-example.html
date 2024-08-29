@@ -14,6 +14,7 @@
   <novo-row gap="md" justify="end">
     <button theme="primary" size="sm" *ngIf="!useNoteMeta" (click)="builder.addConditionGroup()">Add a group</button>
     <button theme="secondary" size="sm" (click)="resetGroups()">Reset</button>
+    <button theme="secondary" size="sm" (click)="resetQueryForm(useNoteMeta)">Repopulate</button>
   </novo-row>
 </form>
 
