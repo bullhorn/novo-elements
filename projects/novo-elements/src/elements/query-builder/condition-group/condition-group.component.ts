@@ -74,7 +74,9 @@ export class ConditionGroupComponent implements OnInit, OnDestroy {
       this.parentForm.controls[name] = this.parentForm.controls[this.controlName];
       delete this.parentForm.controls[this.controlName];
       this.controlName = name;
-      this.parentForm.get(this.controlName).setValue(current);
+      // scrub properties not on control
+      const currentStrict = current.map((item) => (({ conditionType, field, operator, scope, value, ...rest }) => ({ conditionType, field, operator, scope, value }))(item));
+      this.parentForm.get(this.controlName)?.setValue(currentStrict);
       this.cdr.markForCheck();
     }
   }
