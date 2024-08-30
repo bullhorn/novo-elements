@@ -13,8 +13,8 @@ export interface IDataTablePreferences {
   savedSearchName?: string;
   savedSearchOwner?: DataTableSavedSearchOwner;
   appliedSearchType?: AppliedSearchType;
-  autoBuildEntityId?: number;
-  autoBuildEntityData?: any;
+  autobuildEntityId?: number;
+  autobuildEntityData?: any;
   hasUnsavedChanges?: boolean;
   unsavedChanges?: any;
 }
