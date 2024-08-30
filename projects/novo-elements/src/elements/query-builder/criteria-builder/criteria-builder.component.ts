@@ -27,6 +27,7 @@ import { NOVO_CRITERIA_BUILDER } from '../query-builder.tokens';
 import { BaseFieldDef, Condition, ConditionGroup, Conjunction, AddressCriteriaConfig } from '../query-builder.types';
 
 const EMPTY_CONDITION: Condition = {
+  conditionType: null,
   field: null,
   operator: null,
   scope: null,
@@ -211,6 +212,7 @@ export class CriteriaBuilderComponent implements OnInit, OnDestroy, AfterContent
 
   newCondition({ field, operator, scope, value }: Condition = EMPTY_CONDITION): UntypedFormGroup {
     return this.formBuilder.group({
+      conditionType: '$and',
       field: [field, Validators.required],
       operator: [operator, Validators.required],
       scope: [scope],

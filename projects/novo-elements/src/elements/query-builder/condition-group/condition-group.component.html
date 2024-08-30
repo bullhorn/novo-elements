@@ -15,7 +15,7 @@
             <novo-label *ngIf="!isFirst || !hideFirstOperator" color="ash" size="xs" uppercase padding="sm">
               {{qbs.getConjunctionLabel(controlName)}}</novo-label>
           </ng-template>
-          <novo-condition-builder [groupIndex]="groupIndex" [andIndex]="andIndex" [hideOperator]="isFirst && hideFirstOperator" [scope]="scope"></novo-condition-builder>
+          <novo-condition-builder [groupIndex]="groupIndex" [andIndex]="andIndex" [hideOperator]="isFirst && hideFirstOperator" [scope]="scope" [conditionType]="controlName"></novo-condition-builder>
           <novo-button theme="icon" icon="delete-o" color="negative" (click)="removeCondition(andIndex)">
           </novo-button>
         </novo-flex>

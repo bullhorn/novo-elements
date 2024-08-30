@@ -6,6 +6,8 @@ export enum Conjunction {
   NOT = 'not',
 }
 
+export type ConditionType = '$and' | '$or' | '$not';
+
 export type ConditionGroup = {
   [K in Conjunction as `$${K}`]?: Condition[];
 };
@@ -37,6 +39,7 @@ export enum Operator {
 export type OperatorName = keyof typeof Operator;
 
 export interface Condition {
+  conditionType?: ConditionType;
   field: string;
   operator: OperatorName | string;
   scope?: string;

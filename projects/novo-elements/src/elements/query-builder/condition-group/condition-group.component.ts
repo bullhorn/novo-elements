@@ -7,6 +7,7 @@ import { Condition, Conjunction } from '../query-builder.types';
 import { NovoLabelService } from 'novo-elements/services';
 
 const EMPTY_CONDITION: Condition = {
+  conditionType: null,
   field: null,
   operator: null,
   scope: null,
@@ -103,6 +104,7 @@ export class ConditionGroupComponent implements OnInit, OnDestroy {
 
   newCondition({ field, operator, scope, value }: Condition = EMPTY_CONDITION): UntypedFormGroup {
     return this.formBuilder.group({
+      conditionType: '$and',
       field: [field, Validators.required],
       operator: [operator, Validators.required],
       scope: [scope],

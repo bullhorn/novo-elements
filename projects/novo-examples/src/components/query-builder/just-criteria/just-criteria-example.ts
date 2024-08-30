@@ -161,27 +161,28 @@ export class JustCriteriaExample implements OnInit {
     const prepopulatedData: any = [
       {
         $and: [
-        {
-          field: 'id',
-          operator: 'equalTo',
-          scope: 'Candidate',
-          value: 123,
-        }, {
-          field: 'availability',
-          operator: 'includeAny',
-          scope: 'Candidate',
-          value: ['test'],
-        }, {
-          field: 'customDate1',
-          operator: 'within',
-          scope: 'Candidate',
-          value: '-30',
-        }, {
-          field: 'address',
-          operator: 'includeAny',
-          scope: 'Candidate',
-          value: null,
-        }],
+          {
+            field: 'id',
+            operator: 'equalTo',
+            scope: 'Candidate',
+            value: 123,
+          }, {
+            field: 'availability',
+            operator: 'includeAny',
+            scope: 'Candidate',
+            value: ['test'],
+          }, {
+            field: 'customDate1',
+            operator: 'within',
+            scope: 'Candidate',
+            value: '-30',
+          }, {
+            field: 'address',
+            operator: 'includeAny',
+            scope: 'Candidate',
+            value: null,
+          },
+        ],
       },
     ];
     const prepopulatedNoteConditions: any = {

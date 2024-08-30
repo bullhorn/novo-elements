@@ -74,6 +74,7 @@ export class ConditionBuilderComponent implements OnInit, OnChanges, AfterConten
   @Input() groupIndex: number;
   @Input() addressConfig: AddressCriteriaConfig;
   hideOperator = input(true);
+  conditionType = input();
 
   // This component can either be directly hosted as a host to a condition, or it can be part of a condition group within a criteria builder.
   // In the former case, config will come from inputs, and we will instantiate our own QueryBuilderService. In the latter, it comes from
@@ -219,9 +220,14 @@ export class ConditionBuilderComponent implements OnInit, OnChanges, AfterConten
       }
       this.createFieldTemplates();
     }
+    setTimeout(() => this.updateConditionType());
 
     this._lastContext = { ...this.parentForm.value };
     this.cdr.markForCheck();
+  }
+
+  updateConditionType() {
+    this.parentForm.get('conditionType')?.setValue(this.conditionType());
   }
 
   private findDefinitionForField(field) {
