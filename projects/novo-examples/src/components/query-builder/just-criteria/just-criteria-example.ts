@@ -158,35 +158,49 @@ export class JustCriteriaExample implements OnInit {
   }
 
   prepopulateForm(addAdditionalScope = false) {
-    const prepopulatedData: Condition[] = [{
-      field: 'id',
-      operator: 'equalTo',
-      scope: 'Candidate',
-      value: 123,
-    }, {
-      field: 'availability',
-      operator: 'includeAny',
-      scope: 'Candidate',
-      value: ['test'],
-    }, {
-      field: 'customDate1',
-      operator: 'within',
-      scope: 'Candidate',
-      value: '-30',
-    }, {
-      field: 'address',
-      operator: 'includeAny',
-      scope: 'Candidate',
-      value: null,
-    }];
-    const prepopulatedNoteCondition: Condition = {
-      field: 'notes.action',
-      operator: 'includeAny',
-      scope: 'Note',
-      value: ['Left Message'],
+    const prepopulatedData: any = [
+      {
+        $and: [
+        {
+          field: 'id',
+          operator: 'equalTo',
+          scope: 'Candidate',
+          value: 123,
+        }, {
+          field: 'availability',
+          operator: 'includeAny',
+          scope: 'Candidate',
+          value: ['test'],
+        }, {
+          field: 'customDate1',
+          operator: 'within',
+          scope: 'Candidate',
+          value: '-30',
+        }, {
+          field: 'address',
+          operator: 'includeAny',
+          scope: 'Candidate',
+          value: null,
+        }],
+      },
+    ];
+    const prepopulatedNoteConditions: any = {
+      $not: [
+        {
+          field: 'notes.action',
+          operator: 'includeAny',
+          scope: 'Note',
+          value: ['Left Message'],
+        }, {
+          field: 'notes.dateAdded',
+          operator: 'within',
+          scope: 'Note',
+          value: '-7',
+        },
+      ],
     };
     if (addAdditionalScope) {
-      prepopulatedData.push(prepopulatedNoteCondition);
+      prepopulatedData.push(prepopulatedNoteConditions);
     }
     this.setQueryForm(prepopulatedData);
   }
