@@ -9,11 +9,12 @@ export interface IDataTablePreferences {
   pageSize?: number;
   displayedColumns?: string[];
   columnWidths?: { id: string; width: number }[];
-  autoBuildEntityId?: number;
   savedSearchId?: number;
   savedSearchName?: string;
   savedSearchOwner?: DataTableSavedSearchOwner;
   appliedSearchType?: AppliedSearchType;
+  autoBuildEntityId?: number;
+  autoBuildEntityData?: any;
   hasUnsavedChanges?: boolean;
   unsavedChanges?: any;
 }
