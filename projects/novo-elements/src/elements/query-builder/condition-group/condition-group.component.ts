@@ -7,7 +7,7 @@ import { Condition, Conjunction } from '../query-builder.types';
 import { NovoLabelService } from 'novo-elements/services';
 
 const EMPTY_CONDITION: Condition = {
-  conditionType: null,
+  conditionType: '$and',
   field: null,
   operator: null,
   scope: null,

@@ -27,7 +27,7 @@ import { NOVO_CRITERIA_BUILDER } from '../query-builder.tokens';
 import { BaseFieldDef, Condition, ConditionGroup, Conjunction, AddressCriteriaConfig } from '../query-builder.types';
 
 const EMPTY_CONDITION: Condition = {
-  conditionType: null,
+  conditionType: '$and',
   field: null,
   operator: null,
   scope: null,
