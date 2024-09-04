@@ -162,10 +162,6 @@ export class CriteriaBuilderComponent implements OnInit, OnDestroy, AfterContent
     return Object.keys(group).every((key) => ['$and', '$or', '$not'].includes(key));
   }
 
-  private isConditionArray(objArr: unknown): objArr is Condition[] {
-    return Object.keys(objArr[0]).every((key) => ['field', 'operator', 'scope', 'value'].includes(key));
-  }
-
   private setInitialValue(value: ConditionGroup[] | Condition[]) {
     if (value.length) {
       if (this.isConditionGroup(value[0])) {
