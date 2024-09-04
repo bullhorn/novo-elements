@@ -13,6 +13,8 @@ export interface IDataTablePreferences {
   savedSearchName?: string;
   savedSearchOwner?: DataTableSavedSearchOwner;
   appliedSearchType?: AppliedSearchType;
+  autobuildEntityId?: number;
+  autobuildEntityData?: any;
   hasUnsavedChanges?: boolean;
   unsavedChanges?: any;
 }
@@ -282,11 +284,12 @@ export interface IKeyword {
 export interface IKeywordGroup {
   id: number;
   name: string;
+  uniqueName?: string;
   keywords: IKeyword[];
 }
 
 export interface IKeywordBlock {
-  exclude: boolean;
+  exclude?: boolean;
   keywordGroups: IKeywordGroup[];
 }
 
