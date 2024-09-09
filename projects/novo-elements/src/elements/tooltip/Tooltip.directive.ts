@@ -39,7 +39,7 @@ export class TooltipDirective implements OnDestroy, OnInit {
   @Input('tooltipIsHTML')
   isHTML: boolean;
   @Input('tooltipCloseOnClick')
-  closeOnClick: boolean;
+  closeOnClick: boolean = false;
 
   private tooltipInstance: NovoTooltip | null;
   private portal: ComponentPortal<NovoTooltip>;
