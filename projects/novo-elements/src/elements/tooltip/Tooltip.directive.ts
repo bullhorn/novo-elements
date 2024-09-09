@@ -38,6 +38,8 @@ export class TooltipDirective implements OnDestroy, OnInit {
   autoPosition: boolean = true;
   @Input('tooltipIsHTML')
   isHTML: boolean;
+  @Input('tooltipCloseOnClick')
+  closeOnClick: boolean;
 
   private tooltipInstance: NovoTooltip | null;
   private portal: ComponentPortal<NovoTooltip>;
@@ -66,6 +68,14 @@ export class TooltipDirective implements OnDestroy, OnInit {
   @HostListener('mouseleave')
   onMouseLeave(): void {
     if (this.overlayRef && !this.always) {
+      this.hide();
+      this.overlayRef.dispose();
+    }
+  }
+
+  @HostListener('click')
+  onclick(): void {
+    if (this.overlayRef && !this.always && this.closeOnClick) {
       this.hide();
       this.overlayRef.dispose();
     }
