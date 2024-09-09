@@ -9,7 +9,7 @@
         overlayHeight="20rem"
         [displayWith]="fieldDisplayWith"
         [style.minWidth.px]="160"
-        [style.maxWidth.px]="(isFirst() || isConditionHost) ? 200 : 160"
+        [style.maxWidth.px]="(hideOperator() || isConditionHost) ? 200 : 160"
         [displayIcon]="displayIcon">
         <novo-optgroup class="filter-search-results">
           <novo-option>
@@ -39,15 +39,6 @@
 </form>
 
 <novo-condition-templates *ngIf="isConditionHost" [addressConfig]="addressConfig"/>
-
-<!-- EMPTY STATE TEMPLATE -->
-<!-- <ng-template #empty>
-  <novo-non-ideal-state>
-    <novo-icon size="xl" color="grapefruit">search</novo-icon>
-    <novo-title>No results found.</novo-title>
-    <novo-text>Your search didn't find anything. Try searching for something else.</novo-text>
-  </novo-non-ideal-state>
-</ng-template> -->
 
 <!-- LOADING TEMPLATE -->
 <ng-template #loading>
