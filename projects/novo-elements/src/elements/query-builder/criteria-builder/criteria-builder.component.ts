@@ -24,7 +24,15 @@ import { ConditionGroupComponent } from '../condition-group/condition-group.comp
 import { NovoConditionFieldDef } from '../query-builder.directives';
 import { QueryBuilderService } from '../query-builder.service';
 import { NOVO_CRITERIA_BUILDER } from '../query-builder.tokens';
-import { BaseFieldDef, Condition, ConditionGroup, Conjunction, AddressCriteriaConfig } from '../query-builder.types';
+import {
+  BaseFieldDef,
+  Condition,
+  ConditionGroup,
+  Conjunction,
+  AddressCriteriaConfig,
+  ConditionOrConditionGroup,
+  NestedConditionGroup
+} from '../query-builder.types';
 
 const EMPTY_CONDITION: Condition = {
   conditionType: '$and',
@@ -234,6 +242,34 @@ export class CriteriaBuilderComponent implements OnInit, OnDestroy, AfterContent
       group.addCondition(condition);
     } else {
       this.addConditionGroup({ $and: [condition] })
+    }
+  }
+
+  resetValues() {
+    for (const conditionOrGroup of this.root?.value as ConditionOrConditionGroup[]) {
+      this.resetValuesRecursively(conditionOrGroup);
+    }
+  }
+
+  private resetValuesRecursively(conditionOrGroup: ConditionOrConditionGroup) {
+    if (this.isConditionGroup(conditionOrGroup)) {
+      if (conditionOrGroup.$and?.length) {
+        for (const condition of conditionOrGroup.$and) {
+          this.resetValuesRecursively(condition);
+        }
+      }
+      if (conditionOrGroup.$or?.length) {
+        for (const condition of conditionOrGroup.$or) {
+          this.resetValuesRecursively(condition);
+        }
+      }
+      if (conditionOrGroup.$not?.length) {
+        for (const condition of conditionOrGroup.$not) {
+          this.resetValuesRecursively(condition);
+        }
+      }
+    } else if (conditionOrGroup.hasOwnProperty('value')) {
+      (conditionOrGroup as Condition).value = null;
     }
   }
 

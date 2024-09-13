@@ -211,6 +211,10 @@ export class JustCriteriaExample implements OnInit {
     this.prepopulateForm(addAdditionalScope);
   }
 
+  resetValues() {
+    this.criteriaBuilder().resetValues();
+  }
+
   setQueryForm(criteria?) {
     this.queryForm.setValue({ criteria });
   }
