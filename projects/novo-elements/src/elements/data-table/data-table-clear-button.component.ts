@@ -1,7 +1,6 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Output } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Output, Input } from '@angular/core';
 import { NovoLabelService } from 'novo-elements/services';
 import { DataTableState } from './state/data-table-state.service';
-import { BooleanInput } from 'novo-elements/utils';
 
 @Component({
   selector: 'novo-data-table-clear-button',
@@ -45,7 +44,7 @@ export class NovoDataTableClearButton<T> {
   queryClear: EventEmitter<boolean> = new EventEmitter();
   @Output()
   allClear: EventEmitter<boolean> = new EventEmitter();
-  @BooleanInput()
+  @Input()
   emitOnly: boolean = false;
 
   constructor(public state: DataTableState<T>, private ref: ChangeDetectorRef, public labels: NovoLabelService) { }
