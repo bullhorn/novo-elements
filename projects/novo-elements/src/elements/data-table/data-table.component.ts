@@ -614,7 +614,7 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   }
 
   public trackColumnsBy(index: number, item: IDataTableColumn<T>) {
-    return item.id;
+    return { id: item.id, label: item.label };
   }
 
   public isDisabled(check: any, row: T): boolean {
