@@ -119,7 +119,7 @@ import { DataTableState } from './state/data-table-state.service';
             <novo-data-table-expand-header-cell *cdkHeaderCellDef></novo-data-table-expand-header-cell>
             <novo-data-table-expand-cell *cdkCellDef="let row; let i = index" [row]="row"></novo-data-table-expand-cell>
           </ng-container>
-          <ng-container *ngFor="let column of columns; trackBy: trackColumnsBy" [cdkColumnDef]="column.id">
+          <ng-container *ngFor="let column of columns; trackBy: trackColumnsByFn" [cdkColumnDef]="column.id">
             <novo-data-table-header-cell
               *cdkHeaderCellDef
               [column]="column"
@@ -352,6 +352,8 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   @Input() activeRowIdentifier = '';
   // prettier-ignore
   @Input() trackByFn = (index, item) => item.id;
+  // prettier-ignore
+  @Input() trackColumnsByFn = (index, item) => item.id;
   @Input() templates: { [key: string]: TemplateRef<any> } = {};
   @Input() fixedHeader = false;
   @Input() paginatorDataFeatureId: string;
@@ -611,10 +613,6 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
     this.state.globalSearch = term;
     this.state.reset(false, true);
     this.state.updates.next({ globalSearch: term, filter: this.state.filter, sort: this.state.sort, where: this.state.where });
-  }
-
-  public trackColumnsBy(index: number, item: IDataTableColumn<T>) {
-    return { id: item.id, label: item.label };
   }
 
   public isDisabled(check: any, row: T): boolean {
