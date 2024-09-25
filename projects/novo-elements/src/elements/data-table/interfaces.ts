@@ -28,6 +28,7 @@ export interface DataTableWhere {
   query: string;
   criteria?: AdaptiveCriteria;
   keywords?: SearchKeywords;
+  scoreByEntityId?: number;
   form: any;
 }
 
