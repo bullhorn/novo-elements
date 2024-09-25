@@ -6,6 +6,8 @@ export enum Conjunction {
   NOT = 'not',
 }
 
+export type ConditionType = '$and' | '$or' | '$not';
+
 export type ConditionGroup = {
   [K in Conjunction as `$${K}`]?: Condition[];
 };
@@ -37,8 +39,10 @@ export enum Operator {
 export type OperatorName = keyof typeof Operator;
 
 export interface Condition {
+  conditionType?: ConditionType;
   field: string;
   operator: OperatorName | string;
+  scope?: string;
   value: any;
 }
 
@@ -77,8 +81,10 @@ export interface AddressData {
   address_components: AddressComponent[];
   formatted_address: string;
   geometry: AddressGeometry;
+  name?: string;
   place_id: string;
   radius?: AddressRadius;
+  types?: string[];
 }
 
 export interface AddressRadius {

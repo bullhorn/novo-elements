@@ -23,6 +23,7 @@ import { NovoSearchBoxModule } from 'novo-elements/elements/search';
 import { NovoSelectModule } from 'novo-elements/elements/select';
 import { NovoSelectSearchModule } from 'novo-elements/elements/select-search';
 import { NovoSwitchModule } from 'novo-elements/elements/switch';
+import { NovoTabbedGroupPickerModule } from 'novo-elements/elements/tabbed-group-picker';
 import { NovoTabModule } from 'novo-elements/elements/tabs';
 import { ConditionBuilderComponent, ConditionInputOutlet, ConditionOperatorOutlet } from './condition-builder/condition-builder.component';
 import { NovoDefaultAddressConditionDef } from './condition-definitions/address-condition.definition';
@@ -56,6 +57,7 @@ import { NovoConditionTemplatesComponent } from './condition-templates/condition
     NovoOptionModule,
     NovoFlexModule,
     NovoTabModule,
+    NovoTabbedGroupPickerModule,
     NovoLoadingModule,
     NovoCardModule,
     NovoDatePickerModule,

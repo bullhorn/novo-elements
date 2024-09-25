@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ControlContainer, UntypedFormBuilder } from '@angular/forms';
+import { ControlContainer, UntypedFormBuilder, Validators } from '@angular/forms';
 import { NovoLabelService } from '../../../services';
 import { AddressData, Condition, Criteria, NovoFlexModule, NovoQueryBuilderModule, Operator } from '../../index';
 import { QueryBuilderService } from '../query-builder.service';
@@ -173,11 +173,79 @@ describe('CriteriaBuilderComponent', () => {
       value: 'value',
       label: 'label',
     }];
+    const mockPicker = {
+        dropdown: {
+            closePanel() {},
+        },
+    };
+    component.innerForm = formBuilder.group({ criteria: formBuilder.array([]) });
+    component.scopedFieldPicker = (() => mockPicker) as any;
   });
 
   it('should subscribe to changes in the parent form', () => {
     expect(parentForm.value).toEqual({ criteria: null });
     parentForm.setValue(testCriteria);
     expect(parentForm.value).toEqual(testCriteria);
+  });
+
+  describe('Function: isConditionGroup(group)', () => {
+    it('should return true if all keys in group are $conjunctions', () => {
+      const result = (component as any).isConditionGroup({ $and: [], $or: [], $not: [] });
+      expect(result).toEqual(true);
+    });
+    it('should return true if group is empty', () => {
+      const result = (component as any).isConditionGroup({});
+      expect(result).toEqual(true);
+    });
+    it('should return false if any key in the group is not a $conjunction', () => {
+      const result = (component as any).isConditionGroup({ $and: [], $or: [], $bad: [] });
+      expect(result).toEqual(false);
+    });
+  });
+
+  describe('Function: newCondition(condition)', () => {
+    it('should set empty condition if no condition passed in', () => {
+      const result = component.newCondition();
+      const expected = formBuilder.group({
+        conditionType: '$and',
+        field: [null, Validators.required],
+        operator: [null, Validators.required],
+        scope: [null],
+        value: [null],
+      });
+      expect(result.toString()).toEqual(expected.toString());
+    });
+  });
+
+  describe('Function: onFieldSelect(field)', () => {
+    const MOCK_FIELD = {
+      name: 'mock field',
+      scope: 'mockScope',
+    };
+    const MOCK_CONDITION_GROUP_1 = {
+      addCondition: () => {},
+      scope: 'mockScope',
+    };
+    const MOCK_CONDITION_GROUP_2 = {
+      addCondition: () => {},
+      scope: 'differentScope',
+    };
+    it('should close the dropdown', () => {
+      spyOn(component.scopedFieldPicker().dropdown, 'closePanel');
+      component.onFieldSelect(MOCK_FIELD);
+      expect(component.scopedFieldPicker().dropdown.closePanel).toHaveBeenCalled();
+    });
+    it('if a scoped group already exists for the field, add the condition to that group', () => {
+      spyOn(MOCK_CONDITION_GROUP_1, 'addCondition');
+      spyOn(component, 'conditionGroups').and.returnValue([MOCK_CONDITION_GROUP_1, MOCK_CONDITION_GROUP_2]);
+      component.onFieldSelect(MOCK_FIELD);
+      expect(MOCK_CONDITION_GROUP_1.addCondition).toHaveBeenCalled();
+    });
+    it('if a scoped group does not already exist for the field, add a new group with the condition', () => {
+      spyOn(component, 'addConditionGroup');
+      spyOn(component, 'conditionGroups').and.returnValue([MOCK_CONDITION_GROUP_2]);
+      component.onFieldSelect(MOCK_FIELD);
+      expect(component.addConditionGroup).toHaveBeenCalled();
+    });
   });
 });

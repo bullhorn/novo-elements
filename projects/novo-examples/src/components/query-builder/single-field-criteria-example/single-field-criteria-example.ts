@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit, ViewChild, computed } from '@angular/core';
 import { AbstractControl, UntypedFormBuilder } from '@angular/forms';
 import { BaseFieldDef, CriteriaBuilderComponent, FieldConfig, QueryBuilderConfig } from 'novo-elements';
-import { MockMeta } from '../just-criteria/MockMeta';
+import { MockCandidateMeta as MockMeta } from '../just-criteria/MockMeta';
 
 /**
  * @title Single Field Criteria Example

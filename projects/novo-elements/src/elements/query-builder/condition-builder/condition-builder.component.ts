@@ -69,10 +69,12 @@ export class ConditionBuilderComponent implements OnInit, OnChanges, AfterConten
   @ViewChild(ConditionInputOutlet, { static: true }) _inputOutlet: ConditionInputOutlet;
 
   @Input() label: any;
-  isFirst = input(false);
+  @Input() scope: string;
   @Input() andIndex: number;
   @Input() groupIndex: number;
   @Input() addressConfig: AddressCriteriaConfig;
+  hideOperator = input(true);
+  conditionType = input();
 
   // This component can either be directly hosted as a host to a condition, or it can be part of a condition group within a criteria builder.
   // In the former case, config will come from inputs, and we will instantiate our own QueryBuilderService. In the latter, it comes from
@@ -109,7 +111,7 @@ export class ConditionBuilderComponent implements OnInit, OnChanges, AfterConten
     if (this.staticFieldSelection()) {
       return '13rem 1fr';
     } else {
-      const firstColumnWidth = this.isFirst() ? '20rem' : '16rem';
+      const firstColumnWidth = this.hideOperator() ? '20rem' : '16rem';
       return `${firstColumnWidth} 13rem 1fr`;
     }
   });
@@ -146,8 +148,9 @@ export class ConditionBuilderComponent implements OnInit, OnChanges, AfterConten
   }
 
   ngAfterContentInit() {
-    const fields = this.config()?.fields || [];
-    fields.length && this.changeFieldOptions(fields[0]);
+    const allFields = this.config()?.fields || [];
+    const scopedFields = this.scope ? allFields.find((field) => field.value === this.scope) : allFields[0];
+    allFields.length && this.changeFieldOptions(scopedFields);
     this.searches = this.searchTerm.valueChanges.pipe(debounceTime(300), distinctUntilChanged()).subscribe((term) => {
       this.results$ = Promise.resolve(
         this.fieldConfig.options.filter(
@@ -217,9 +220,14 @@ export class ConditionBuilderComponent implements OnInit, OnChanges, AfterConten
       }
       this.createFieldTemplates();
     }
+    setTimeout(() => this.updateConditionType());
 
     this._lastContext = { ...this.parentForm.value };
     this.cdr.markForCheck();
+  }
+
+  updateConditionType() {
+    this.parentForm.get('conditionType')?.setValue(this.conditionType());
   }
 
   private findDefinitionForField(field) {

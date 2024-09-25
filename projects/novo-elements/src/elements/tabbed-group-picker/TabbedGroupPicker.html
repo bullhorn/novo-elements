@@ -3,6 +3,7 @@
     class="tabbed-group-picker-button"
     [theme]="buttonConfig.theme"
     [side]="buttonConfig.side"
+    [size]="buttonConfig.size"
     [icon]="buttonConfig.icon"
     [loading]="loading">
     <ng-content></ng-content>
@@ -52,8 +53,8 @@
             [attr.data-automation-value]="item[displayTab.valueField]"
             [allowSelection]="selectionEnabled"
             [selected]="item.selected"
-            (click)="activateItem(item)"
-            (keydown.space)="activateItem(item)"
+            (click)="activateItem(item, displayTab)"
+            (keydown.space)="activateItem(item, displayTab)"
             novoInert>
             {{item[displayTab.labelField]}}
           </novo-option>
