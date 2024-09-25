@@ -81,8 +81,10 @@ export interface AddressData {
   address_components: AddressComponent[];
   formatted_address: string;
   geometry: AddressGeometry;
+  name?: string;
   place_id: string;
   radius?: AddressRadius;
+  types?: string[];
 }
 
 export interface AddressRadius {

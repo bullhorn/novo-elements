@@ -13,16 +13,22 @@ export interface IDataTablePreferences {
   savedSearchName?: string;
   savedSearchOwner?: DataTableSavedSearchOwner;
   appliedSearchType?: AppliedSearchType;
-  autobuildEntityId?: number;
-  autobuildEntityData?: any;
+  autobuildEntity?: AutobuildEntityData;
   hasUnsavedChanges?: boolean;
   unsavedChanges?: any;
+}
+
+export interface AutobuildEntityData {
+  id: number;
+  searchEntity: string;
+  [key: string]: any;
 }
 
 export interface DataTableWhere {
   query: string;
   criteria?: AdaptiveCriteria;
   keywords?: SearchKeywords;
+  scoreByEntityId?: number;
   form: any;
 }
 
