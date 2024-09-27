@@ -221,11 +221,6 @@ export class NovoPickerElement implements OnInit {
         return;
       }
 
-      if (this.allowTabNavigation && event.key === Key.Tab) {
-        this.tab.emit();
-        return;
-      }
-
       if (event.key === Key.ArrowUp) {
         this.popup.instance.prevActiveMatch();
         this.ref.markForCheck();
@@ -254,6 +249,11 @@ export class NovoPickerElement implements OnInit {
       if (event.key === Key.Delete && Helpers.isBlank(this._value)) {
         this.clearValue(true);
       }
+    }
+
+    if (this.allowTabNavigation && event.key === Key.Tab) {
+      this.tab.emit();
+      return;
     }
   }
 
