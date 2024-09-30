@@ -252,8 +252,8 @@ export class NovoPickerElement implements OnInit {
     }
 
     if (this.allowTabNavigation && event.key === Key.Tab) {
+      this.closePanel();
       this.tab.emit();
-      return;
     }
   }
 
