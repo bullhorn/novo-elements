@@ -24,7 +24,7 @@ describe('Elements: NovoDataTablePagination', () => {
     component = fixture.debugElement.componentInstance;
   }));
 
-  fdescribe('Setter: set page()', () => {
+  describe('Setter: set page()', () => {
     beforeEach(() => {
       component.pageSize = 25;
       component.length = 500;
