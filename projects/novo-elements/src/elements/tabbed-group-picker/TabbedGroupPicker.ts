@@ -10,7 +10,6 @@ import {
   OnInit,
   Output,
   ViewChild,
-  viewChild,
 } from '@angular/core';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
