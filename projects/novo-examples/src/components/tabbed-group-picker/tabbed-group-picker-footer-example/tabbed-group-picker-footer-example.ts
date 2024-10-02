@@ -91,8 +91,10 @@ export class TabbedGroupPickerFooterExample {
     this.example_buttonConfig.label = this.buildButtonLabel();
   }
 
-  onCancelChange(selectedData: TabbedGroupPickerTab[]) {
-    this.onSelectionChange(selectedData);
+  onCancelChange([animalsTab, animalCategoriesTab]: TabbedGroupPickerTab[]) {
+    this.selectedAnimals = animalsTab.data.filter((animal) => animal.selected).map(({ animalId }) => animalId);
+    this.selectedAnimalCategories = animalCategoriesTab.data.filter((group) => group.selected).map(({ groupId }) => groupId);
+    this.example_buttonConfig.label = this.buildButtonLabel();
   }
 
   buildButtonLabel(): string {

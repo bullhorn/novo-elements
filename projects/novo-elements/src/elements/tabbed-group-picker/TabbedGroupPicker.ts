@@ -374,7 +374,7 @@ export class NovoTabbedGroupPickerElement implements OnDestroy, OnInit {
 
   cancel() {
     this.revertState();
-    this.cancelChange.emit(this.getSelectedValues());
+    this.cancelChange.emit(this.tabs);
     this.ref.markForCheck();
     this.dropdown.closePanel();
   }
