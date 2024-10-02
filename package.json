@@ -134,6 +134,9 @@
     "typedoc": "^0.25.7",
     "typescript": "^5.3.3"
   },
+  "overrides": {
+    "rollup": "4.11.0"
+  },
   "lint-staged": {
     "*.{ts,json,scss,css,html}": [
       "prettier --write",
