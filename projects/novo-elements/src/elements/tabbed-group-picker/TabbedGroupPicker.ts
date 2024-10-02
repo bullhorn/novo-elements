@@ -94,6 +94,7 @@ export class NovoTabbedGroupPickerElement implements OnDestroy, OnInit {
   @Output() activation = new EventEmitter<any>();
   @Output() selectionChange = new EventEmitter<TabbedGroupPickerTab[]>();
   @Output() applyChange: EventEmitter<any> = new EventEmitter<any>();
+  @Output() cancelChange: EventEmitter<any> = new EventEmitter<any>();
 
   displayTabs: TabbedGroupPickerTab[];
   displayTabIndex: number = 0;
@@ -373,7 +374,7 @@ export class NovoTabbedGroupPickerElement implements OnDestroy, OnInit {
 
   cancel() {
     this.revertState();
-    this.emitSelectedValues();
+    this.cancelChange.emit(this.getSelectedValues());
     this.ref.markForCheck();
     this.dropdown.closePanel();
   }

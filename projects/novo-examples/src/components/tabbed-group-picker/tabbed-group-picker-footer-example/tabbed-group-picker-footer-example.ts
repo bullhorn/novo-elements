@@ -91,6 +91,10 @@ export class TabbedGroupPickerFooterExample {
     this.example_buttonConfig.label = this.buildButtonLabel();
   }
 
+  onCancelChange(selectedData: TabbedGroupPickerTab[]) {
+    this.onSelectionChange(selectedData);
+  }
+
   buildButtonLabel(): string {
     return this.selectedAnimals.length ? `Animals (${this.selectedAnimals.length})` : 'Nothing Selected';
   }
