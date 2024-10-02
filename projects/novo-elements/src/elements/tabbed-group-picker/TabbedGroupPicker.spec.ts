@@ -65,6 +65,7 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
       expect(component.loading).toEqual(false);
     });
   });
+
   describe('function: filter', () => {
     const getLetter = (n: number) => String.fromCharCode((n % 26) + 65);
 
@@ -110,6 +111,7 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
       expect(timeItTakesToSearchAMillionItems).toBeLessThan(amountOfTimeInMillisecondsThatIndicatesAGrosslyInefficientAlgorithm);
     });
   });
+
   describe('function: createChildrenReferences', () => {
     it('should make it so that children of data list items are references to other data list items', () => {
       const dinosaurs = [
@@ -233,6 +235,7 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
       expect(parent.indeterminate).toEqual(true);
     });
   });
+
   describe('function: getSelectedValue', () => {
     it('should return indeterminate if one value is selected', () => {
       const childArray = [
@@ -259,6 +262,7 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
       expect(result).toEqual(undefined);
     });
   });
+
   describe('function: updateParentsAndQuickSelect', () => {
     it('should select each item in the quick select group', () => {
       const data = [
@@ -288,6 +292,7 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
       expect(quickSelectItem.selected).toEqual(true);
     });
   });
+
   describe('function: onItemToggled', () => {
     it('should use an algorithm more efficient than O(MxN^2)', () => {
       // this dataset takes about 3 orders of magnitude longer for MxN^2 vs MxN
@@ -483,5 +488,23 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
       expect(selection).toBeUndefined();
       expect(activation).toEqual({ ...chicken, scope: 'quickselect' });
     });
-  })
+  });
+
+  describe('function: cancel', () => {
+    it('should revert to original state and emit cancel event with current tabs', () => {
+      spyOn(component, 'revertState');
+      spyOn(component.cancelChange, 'emit');
+      component.dropdown = {
+        closePanel: () => {},
+      } as any;
+      const chickenTab = getChickenTab();
+      component.tabs = [
+        chickenTab,
+      ];
+
+      component.cancel();
+      expect(component.revertState).toHaveBeenCalled();
+      expect(component.cancelChange.emit).toHaveBeenCalledWith([chickenTab]);
+    });
+  });
 });
