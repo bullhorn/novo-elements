@@ -25,8 +25,8 @@ import { NovoLabelService } from 'novo-elements/services';
         </novo-field>
         <novo-field *novoSwitchCases="['isNull']">
           <novo-radio-group formControlName="value">
-            <novo-radio [value]="true">{{ labels.yes }}</novo-radio>
-            <novo-radio [value]="false">{{ labels.no }}</novo-radio>
+            <novo-radio data-automation-value="true" [value]="true">{{ labels.yes }}</novo-radio>
+            <novo-radio data-automation-value="false" [value]="false">{{ labels.no }}</novo-radio>
           </novo-radio-group>
         </novo-field>
       </ng-container>

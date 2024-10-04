@@ -19,8 +19,8 @@ import { NovoLabelService } from 'novo-elements/services';
       </novo-field>
       <novo-field *novoConditionInputDef="let formGroup" [style.width.px]="125" [formGroup]="formGroup">
         <novo-radio-group formControlName="value">
-          <novo-radio [value]="true">{{ formGroup.value.operator === 'isNull' ? labels.yes : labels.true }}</novo-radio>
-          <novo-radio [value]="false">{{ formGroup.value.operator === 'isNull' ? labels.no : labels.false }}</novo-radio>
+          <novo-radio data-automation-value="true" [value]="true">{{ formGroup.value.operator === 'isNull' ? labels.yes : labels.true }}</novo-radio>
+          <novo-radio data-automation-value="false" [value]="false">{{ formGroup.value.operator === 'isNull' ? labels.no : labels.false }}</novo-radio>
         </novo-radio-group>
       </novo-field>
     </ng-container>

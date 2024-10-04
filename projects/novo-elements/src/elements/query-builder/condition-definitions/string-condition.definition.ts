@@ -41,8 +41,8 @@ import { AbstractConditionFieldDef } from './abstract-condition.definition';
         </novo-field>
         <novo-field *novoSwitchCases="['isEmpty']">
           <novo-radio-group formControlName="value">
-            <novo-radio [value]="true">{{ labels.yes }}</novo-radio>
-            <novo-radio [value]="false">{{ labels.no }}</novo-radio>
+            <novo-radio data-automation-value="true" [value]="true">{{ labels.yes }}</novo-radio>
+            <novo-radio data-automation-value="false" [value]="false">{{ labels.no }}</novo-radio>
           </novo-radio-group>
         </novo-field>
       </ng-container>
