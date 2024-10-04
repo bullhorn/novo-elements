@@ -72,7 +72,8 @@ export class NovoRowChipElement extends NovoChipElement {
         *ngFor="let column of source.columns"
       >
         <ng-container *ngIf="column.editable">
-          <novo-field>
+          <novo-checkbox *ngIf="column.type === 'checkbox'" [(ngModel)]="item.value[column.name]" [disabled]="!column.editable"></novo-checkbox>
+          <novo-field *ngIf="column.type !== 'checkbox'">
             <input novoInput [type]="column.type || 'text'" [(ngModel)]="item.value[column.name]" />
           </novo-field>
         </ng-container>

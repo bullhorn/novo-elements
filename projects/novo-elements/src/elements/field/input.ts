@@ -38,7 +38,7 @@ import { NovoFieldControl } from './field-control';
 export const NOVO_INPUT_VALUE_ACCESSOR = new InjectionToken<{ value: any }>('NOVO_INPUT_VALUE_ACCESSOR');
 
 // Invalid input type. Using one of these will throw an NovoInputUnsupportedTypeError.
-const NOVO_INPUT_INVALID_TYPES = ['button', 'checkbox', 'file', 'hidden', 'image', 'radio', 'reset', 'submit'];
+const NOVO_INPUT_INVALID_TYPES = ['button', 'file', 'hidden', 'image', 'radio', 'reset', 'submit'];
 
 let nextUniqueId = 0;
 
