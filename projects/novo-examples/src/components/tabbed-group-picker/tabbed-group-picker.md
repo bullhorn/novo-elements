@@ -27,3 +27,7 @@ Tabbed Group Picker provides a configurable quick select interface. For each qui
 When checkboxes are disabled in the activation picker, we can still listen for "activation" events when an item has been clicked.
 
 <code-example example="tabbed-group-picker-no-selection"></code-example>
+
+## Footer
+
+<code-example example="tabbed-group-picker-footer"></code-example>
