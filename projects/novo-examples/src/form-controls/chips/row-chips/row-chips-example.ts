@@ -69,7 +69,7 @@ export class RowChipsExample {
           width: 260,
           name: 'closing',
           data: (item: any): string => {
-            return item.value.openings;
+            return item.value.closing;
           },
         },
       ],
