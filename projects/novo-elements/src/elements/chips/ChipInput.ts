@@ -120,6 +120,8 @@ export class NovoChipInput implements NovoChipTextControl, OnChanges {
   _blur() {
     if (this.addOnBlur) {
       this._emitChipEnd();
+    } else {
+      this.clearValue();
     }
     this.focused = false;
     // Blur the chip list if it is not focused
@@ -161,7 +163,7 @@ export class NovoChipInput implements NovoChipTextControl, OnChanges {
   /** Clears the input. */
   clearValue(): void {
     this._inputElement.value = '';
-    this.ngControl?.control.setValue('');
+    this.ngControl?.control?.setValue('');
   }
 
   /** Checks whether a keycode is one of the configured separators. */
