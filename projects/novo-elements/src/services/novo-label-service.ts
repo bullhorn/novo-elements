@@ -135,10 +135,10 @@ export class NovoLabelService {
   false = 'False';
   before = 'Before';
   after = 'After';
-  between = 'Between';
   within = 'Within';
   isNull = 'Is Empty';
   isEmpty = 'Is Empty?';
+  between = 'Is Between';
   refreshPagination = 'Refresh Pagination';
   location = 'Location';
   showLess = 'Show Less';
