@@ -37,6 +37,7 @@ import {
   NovoOptionSelectionChange,
   NovoOverlayTemplateComponent,
   NOVO_OPTION_PARENT_COMPONENT,
+  NOVO_OVERLAY_CONTAINER,
 } from 'novo-elements/elements/common';
 import { NovoFieldControl, NovoFieldElement, NOVO_FORM_FIELD } from 'novo-elements/elements/field';
 
@@ -68,7 +69,10 @@ const NovoAutocompleteMixins: HasOverlayCtor & CanDisableCtor & typeof NovoAutoc
     // consumer may have provided, while still being able to receive focus.
     '[attr.tabindex]': 'disabled ? null : -1',
   },
-  providers: [{ provide: NOVO_OPTION_PARENT_COMPONENT, useExisting: NovoAutocompleteElement }],
+  providers: [
+    { provide: NOVO_OPTION_PARENT_COMPONENT, useExisting: NovoAutocompleteElement },
+    { provide: NOVO_OVERLAY_CONTAINER, useExisting: NovoAutocompleteElement }
+  ],
   exportAs: 'novoAutocomplete',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
