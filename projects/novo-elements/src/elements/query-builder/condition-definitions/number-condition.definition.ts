@@ -6,7 +6,7 @@ import { AbstractConditionFieldDef } from './abstract-condition.definition';
 
 /**
  * When constructing a query using a field that is an Int, Double, Number ...etc.
- * TODO: Do we implment currency formation here potentially>.?
+ * TODO: Do we implement currency formation here potentially?
  */
 @Component({
   selector: 'novo-number-condition-def',
@@ -56,17 +56,17 @@ export class NovoDefaultNumberConditionDef extends AbstractConditionFieldDef {
     this.defineOperatorEditGroup(Operator.greaterThan, Operator.lessThan, Operator.equalTo);
   }
 
-  onChangeMin(formGroup: AbstractControl, value: number) {
-    this.min.set(value);
+  onChangeMin(formGroup: AbstractControl, value: number | string) {
+    this.min.set(Number(value));
     // We must dirty the form explicitly to show up as a user modification when it was done programmatically
-    formGroup.get('value').setValue({ min: this.min, max: this.max });
+    formGroup.get('value').setValue({ min: this.min(), max: this.max() });
     formGroup.markAsDirty();
   }
 
-  onChangeMax(formGroup: AbstractControl, value: number) {
-    this.max.set(value);
+  onChangeMax(formGroup: AbstractControl, value: number | string) {
+    this.max.set(Number(value));
     // We must dirty the form explicitly to show up as a user modification when it was done programmatically
-    formGroup.get('value').setValue({ min: this.min, max: this.max });
+    formGroup.get('value').setValue({ min: this.min(), max: this.max() });
     formGroup.markAsDirty();
   }
 }
