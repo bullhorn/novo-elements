@@ -88,7 +88,7 @@ const MAX_PAGES_DISPLAYED = 5;
           <i class="bhi-next" data-automation-id="pager-next"></i>
         </li>
       </ul>
-      <novo-spinner *ngIf="loading size="small"></novo-spinner>
+      <novo-spinner *ngIf="loading" size="small"></novo-spinner>
       <button *ngIf="errorLoading"
               theme="primary"
               color="negative"
