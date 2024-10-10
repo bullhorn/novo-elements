@@ -45,8 +45,8 @@ export class NumberRangeComponent implements OnInit, OnDestroy, ControlValueAcce
 
   ngOnInit() {
     this.rangeForm = this.fb.group({
-      min: [0, [Validators.required]],
-      max: [100, [Validators.required]],
+      min: [null, [Validators.required]],
+      max: [null, [Validators.required]],
     }, {
       validators: this.minLessThanMaxValidator
     });
