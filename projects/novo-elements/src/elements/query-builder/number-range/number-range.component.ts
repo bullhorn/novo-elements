@@ -9,13 +9,13 @@ import { takeUntil } from 'rxjs/operators';
   template: `
     <form [formGroup]="rangeForm">
       <novo-flex justify='space-between' align='end'>
-        <novo-field>
+        <novo-field mr="sm">
           <input formControlName="min" novoInput type='number' [placeholder]="labels.minimumPlaceholder"/>
           <novo-error [hidden]="rangeForm.get('min').invalid && rangeForm.get('min').touched">
             {{ labels.minimumIsRequired }}
           </novo-error>
         </novo-field>
-        <novo-field>
+        <novo-field ml="sm">
           <input formControlName="max" novoInput type='number' [placeholder]="labels.maximumPlaceholder"/>
           <novo-error [hidden]="rangeForm.get('max').invalid && rangeForm.get('max').touched">
             {{ labels.maximumIsRequired }}
