@@ -38,6 +38,7 @@ import { ConditionGroupComponent } from './condition-group/condition-group.compo
 import { CriteriaBuilderComponent } from './criteria-builder/criteria-builder.component';
 import { NovoConditionFieldDef, NovoConditionInputDef, NovoConditionOperatorsDef } from './query-builder.directives';
 import { NovoConditionTemplatesComponent } from './condition-templates/condition-templates.component';
+import { NumberRangeComponent } from './number-range/number-range.component';
 
 @NgModule({
   imports: [
@@ -89,6 +90,7 @@ import { NovoConditionTemplatesComponent } from './condition-templates/condition
     NovoDefaultIdConditionDef,
     NovoDefaultPickerConditionDef,
     NovoConditionTemplatesComponent,
+    NumberRangeComponent,
   ],
   exports: [
     CriteriaBuilderComponent,
@@ -105,6 +107,7 @@ import { NovoConditionTemplatesComponent } from './condition-templates/condition
     NovoDefaultIdConditionDef,
     NovoDefaultPickerConditionDef,
     NovoConditionTemplatesComponent,
+    NumberRangeComponent,
   ],
 })
 export class NovoQueryBuilderModule {}

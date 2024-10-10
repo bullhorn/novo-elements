@@ -10,6 +10,7 @@ export * from './condition-definitions/picker-condition.definition';
 export * from './condition-definitions/string-condition.definition';
 export * from './condition-templates/condition-templates.component';
 export * from './criteria-builder/criteria-builder.component';
+export * from './number-range/number-range.component';
 export * from './query-builder.directives';
 export * from './query-builder.module';
 export { QueryBuilderConfig } from './query-builder.service';

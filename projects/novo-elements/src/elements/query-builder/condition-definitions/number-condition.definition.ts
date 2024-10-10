@@ -1,8 +1,7 @@
-import { ChangeDetectionStrategy, Component, signal, ViewEncapsulation, WritableSignal } from '@angular/core';
-import { AbstractControl } from '@angular/forms';
-import { NovoLabelService } from 'novo-elements/services';
-import { Operator } from '../query-builder.types';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { AbstractConditionFieldDef } from './abstract-condition.definition';
+import { Operator } from '../query-builder.types';
+import { NovoLabelService } from 'novo-elements/services';
 
 /**
  * When constructing a query using a field that is an Int, Double, Number ...etc.
@@ -31,14 +30,9 @@ import { AbstractConditionFieldDef } from './abstract-condition.definition';
             <novo-radio [value]="false">{{ labels.no }}</novo-radio>
           </novo-radio-group>
         </novo-field>
-        <novo-flex *novoSwitchCases="['between']" justify='space-between' align='end'>
-          <novo-field>
-            <input novoInput type='number' [value]='min()' (change)='onChangeMin(formGroup, $any($event).target.value)'/>
-          </novo-field>
-          <novo-field>
-            <input novoInput type='number' [value]='max()' (change)='onChangeMax(formGroup, $any($event).target.value)'/>
-          </novo-field>
-        </novo-flex>
+        <ng-container *novoSwitchCases="['between']">
+          <novo-number-range formControlName="value"/>
+        </ng-container>
       </ng-container>
     </ng-container>
   `,
@@ -48,25 +42,8 @@ import { AbstractConditionFieldDef } from './abstract-condition.definition';
 export class NovoDefaultNumberConditionDef extends AbstractConditionFieldDef {
   defaultOperator = Operator.equalTo;
 
-  min: WritableSignal<number> = signal(0);
-  max: WritableSignal<number> = signal(0);
-
   constructor(labelService: NovoLabelService) {
     super(labelService);
     this.defineOperatorEditGroup(Operator.greaterThan, Operator.lessThan, Operator.equalTo);
-  }
-
-  onChangeMin(formGroup: AbstractControl, value: number | string) {
-    this.min.set(Number(value));
-    // We must dirty the form explicitly to show up as a user modification when it was done programmatically
-    formGroup.get('value').setValue({ min: this.min(), max: this.max() });
-    formGroup.markAsDirty();
-  }
-
-  onChangeMax(formGroup: AbstractControl, value: number | string) {
-    this.max.set(Number(value));
-    // We must dirty the form explicitly to show up as a user modification when it was done programmatically
-    formGroup.get('value').setValue({ min: this.min(), max: this.max() });
-    formGroup.markAsDirty();
   }
 }

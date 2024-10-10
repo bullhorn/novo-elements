@@ -144,6 +144,11 @@ export class NovoLabelService {
   showLess = 'Show Less';
   miles = 'Miles';
   km = 'Km';
+  minimumIsRequired = 'Minimum is required';
+  maximumIsRequired = 'Maximum is required';
+  minimumPlaceholder = 'Enter minimum';
+  maximumPlaceholder = 'Enter maximum';
+  minGreaterThanMax = 'The minimum is greater than the maximum value';
 
   constructor(
     @Optional()
