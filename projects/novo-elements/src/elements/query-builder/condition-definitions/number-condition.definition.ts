@@ -5,7 +5,7 @@ import { NovoLabelService } from 'novo-elements/services';
 
 /**
  * When constructing a query using a field that is an Int, Double, Number ...etc.
- * TODO: Do we implment currency formation here potentially>.?
+ * TODO: Do we implement currency formation here potentially?
  */
 @Component({
   selector: 'novo-number-condition-def',
@@ -16,12 +16,13 @@ import { NovoLabelService } from 'novo-elements/services';
           <novo-option value="greaterThan">{{ labels.greaterThan }}</novo-option>
           <novo-option value="lessThan">{{ labels.lessThan }}</novo-option>
           <novo-option value="equalTo">{{ labels.equalTo }}</novo-option>
+          <novo-option value="between">{{ labels.between }}</novo-option>
           <novo-option value="isNull">{{ labels.isEmpty }}</novo-option>
         </novo-select>
       </novo-field>
       <ng-container *novoConditionInputDef="let formGroup" [ngSwitch]="formGroup.value.operator" [formGroup]="formGroup">
         <novo-field *novoSwitchCases="['greaterThan', 'lessThan', 'equalTo']">
-          <input novoInput type="number" formControlName="value" />
+          <input novoInput type="number" formControlName="value"/>
         </novo-field>
         <novo-field *novoSwitchCases="['isNull']">
           <novo-radio-group formControlName="value">
@@ -29,6 +30,9 @@ import { NovoLabelService } from 'novo-elements/services';
             <novo-radio [value]="false">{{ labels.no }}</novo-radio>
           </novo-radio-group>
         </novo-field>
+        <ng-container *novoSwitchCases="['between']">
+          <novo-number-range formControlName="value"/>
+        </ng-container>
       </ng-container>
     </ng-container>
   `,
