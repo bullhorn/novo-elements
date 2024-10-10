@@ -1,6 +1,7 @@
 import { Component, forwardRef, OnDestroy, OnInit } from '@angular/core';
 import { ControlValueAccessor, FormBuilder, FormGroup, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
 import { NovoLabelService } from 'novo-elements/services';
+import { Helpers } from 'novo-elements/utils';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
@@ -67,7 +68,10 @@ export class NumberRangeComponent implements OnInit, OnDestroy, ControlValueAcce
   minLessThanMaxValidator(group: FormGroup): { [key: string]: boolean } | null {
     const min = group.get('min').value;
     const max = group.get('max').value;
-    return min <= max ? null : { minGreaterThanMax: true };
+    if (!Helpers.isBlank(min) && !Helpers.isBlank(max) && min > max) {
+      return { minGreaterThanMax: true };
+    }
+    return null;
   }
 
   writeValue(value: { min: number, max: number }): void {
