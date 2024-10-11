@@ -1,5 +1,5 @@
 import { Component, forwardRef, OnDestroy, OnInit } from '@angular/core';
-import { ControlValueAccessor, FormBuilder, FormGroup, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
+import { ControlValueAccessor, FormBuilder, FormGroup, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { NovoLabelService } from 'novo-elements/services';
 import { Helpers } from 'novo-elements/utils';
 import { Subject } from 'rxjs';
@@ -12,18 +12,12 @@ import { takeUntil } from 'rxjs/operators';
       <novo-flex justify='space-between' align='end'>
         <novo-field mr="sm">
           <input formControlName="min" novoInput type='number' [placeholder]="labels.minimumPlaceholder"/>
-          <novo-error [hidden]="rangeForm.get('min').invalid && rangeForm.get('min').touched">
-            {{ labels.minimumIsRequired }}
-          </novo-error>
         </novo-field>
         <novo-field ml="sm">
           <input formControlName="max" novoInput type='number' [placeholder]="labels.maximumPlaceholder"/>
-          <novo-error [hidden]="rangeForm.get('max').invalid && rangeForm.get('max').touched">
-            {{ labels.maximumIsRequired }}
-          </novo-error>
         </novo-field>
       </novo-flex>
-      <novo-error *ngIf="rangeForm.hasError('minGreaterThanMax')">
+      <novo-error *ngIf="rangeForm.hasError('minGreaterThanMax')" style="position: absolute">
         {{ labels.minGreaterThanMax }}
       </novo-error>
     </form>
@@ -45,12 +39,7 @@ export class NumberRangeComponent implements OnInit, OnDestroy, ControlValueAcce
   constructor(public labels: NovoLabelService, private fb: FormBuilder) { }
 
   ngOnInit() {
-    this.rangeForm = this.fb.group({
-      min: [null, [Validators.required]],
-      max: [null, [Validators.required]],
-    }, {
-      validators: this.minLessThanMaxValidator
-    });
+    this.rangeForm = this.fb.group({ min: null, max: null }, { validators: this.minLessThanMaxValidator });
 
     // Notify parent form when the value changes (and it's valid)
     this.rangeForm.valueChanges.pipe(takeUntil(this._destroyed)).subscribe(value => {
@@ -68,10 +57,11 @@ export class NumberRangeComponent implements OnInit, OnDestroy, ControlValueAcce
   minLessThanMaxValidator(group: FormGroup): { [key: string]: boolean } | null {
     const min = group.get('min').value;
     const max = group.get('max').value;
-    if (!Helpers.isBlank(min) && !Helpers.isBlank(max) && min > max) {
-      return { minGreaterThanMax: true };
-    }
-    return null;
+    const hasError = !Helpers.isBlank(min) && !Helpers.isBlank(max) && min > max;
+    const error = hasError ? { minGreaterThanMax: true } : null;
+    group.get('min').setErrors(error);
+    group.get('max').setErrors(error);
+    return error;
   }
 
   writeValue(value: { min: number, max: number }): void {
