@@ -1,6 +1,6 @@
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { hasModifierKey } from '@angular/cdk/keycodes';
-import { AfterViewInit, Directive, ElementRef, EventEmitter, forwardRef, Inject, Input, OnChanges, OnDestroy, Optional, Output } from '@angular/core';
+import { AfterViewInit, Directive, ElementRef, EventEmitter, forwardRef, Inject, Input, OnChanges, OnDestroy, Optional, Output, Self } from '@angular/core';
 import { NgControl } from '@angular/forms';
 import { Key, KeyCodes } from 'novo-elements/utils';
 import { NovoChipsDefaultOptions, NOVO_CHIPS_DEFAULT_OPTIONS } from './ChipDefaults';
@@ -100,7 +100,7 @@ export class NovoChipInput implements NovoChipTextControl, OnChanges, OnDestroy 
     @Inject(NOVO_CHIPS_DEFAULT_OPTIONS) private readonly _defaultOptions: NovoChipsDefaultOptions,
     @Optional() @Inject(NovoFieldElement) private readonly _field: NovoFieldElement,
     @Inject(forwardRef(() => NovoChipList)) private readonly _chipList: NovoChipList,
-    protected ngControl: NgControl,
+    @Optional() @Self() protected ngControl: NgControl,
   ) {
     this._inputElement = this._elementRef.nativeElement;
     this._chipList.registerInput(this);
