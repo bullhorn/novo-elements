@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NovoLabelService } from '../../../services';
-import { NovoFlexModule, NovoQueryBuilderModule, NumberRangeComponent } from '../../index';
+import { NovoLabelService } from '../../../../services';
+import { NumberRangeComponent } from './number-range.component';
+import { NovoFlexModule } from '../../../flex/Flex.module';
+import { NovoQueryBuilderModule } from '../../../query-builder/query-builder.module';
 
 describe('NumberRangeComponent', () => {
   let fixture: ComponentFixture<NumberRangeComponent>;

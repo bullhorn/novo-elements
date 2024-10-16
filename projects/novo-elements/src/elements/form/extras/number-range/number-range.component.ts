@@ -3,7 +3,7 @@ import { ControlValueAccessor, FormBuilder, FormGroup, NG_VALUE_ACCESSOR } from 
 import { NovoLabelService } from 'novo-elements/services';
 import { Helpers } from 'novo-elements/utils';
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { filter, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'novo-number-range',
@@ -32,8 +32,8 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class NumberRangeComponent implements OnInit, OnDestroy, ControlValueAccessor {
   rangeForm: FormGroup;
-  _onChange: (value: any) => void = () => {};
-  _onTouched = () => {};
+  _onChange: (value: any) => void = () => { };
+  _onTouched = () => { };
   private _destroyed = new Subject<void>();
 
   constructor(public labels: NovoLabelService, private fb: FormBuilder) { }
@@ -42,11 +42,10 @@ export class NumberRangeComponent implements OnInit, OnDestroy, ControlValueAcce
     this.rangeForm = this.fb.group({ min: null, max: null }, { validators: this.minLessThanMaxValidator });
 
     // Notify parent form when the value changes (and it's valid)
-    this.rangeForm.valueChanges.pipe(takeUntil(this._destroyed)).subscribe(value => {
-      if (this.rangeForm.valid) {
-        this._onChange(value);
-      }
-    });
+    this.rangeForm.valueChanges.pipe(
+      takeUntil(this._destroyed),
+      filter(() => this.rangeForm.valid)
+    ).subscribe(value => this._onChange(value));
   }
 
   ngOnDestroy() {
@@ -55,13 +54,12 @@ export class NumberRangeComponent implements OnInit, OnDestroy, ControlValueAcce
   }
 
   minLessThanMaxValidator(group: FormGroup): { [key: string]: boolean } | null {
-    const min = group.get('min').value;
-    const max = group.get('max').value;
-    const hasError = !Helpers.isBlank(min) && !Helpers.isBlank(max) && min > max;
-    const error = hasError ? { minGreaterThanMax: true } : null;
-    group.get('min').setErrors(error);
-    group.get('max').setErrors(error);
-    return error;
+    const min = group.get('min')?.value;
+    const max = group.get('max')?.value;
+    if (Helpers.isBlank(min) || Helpers.isBlank(max)) {
+      return null;
+    }
+    return  min > max ? { minGreaterThanMax: true } : null;
   }
 
   writeValue(value: { min: number, max: number }): void {
