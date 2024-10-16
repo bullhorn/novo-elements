@@ -1,3 +1,4 @@
+import { InjectionToken } from '@angular/core';
 import { NovoOverlayTemplateComponent } from '../overlay';
 import { AbstractConstructor, Constructor } from './constructor';
 import { CanDisable } from './disabled.mixin';
@@ -11,6 +12,8 @@ export interface HasOverlay {
   closePanel(): void;
   togglePanel(): void;
 }
+
+export const NOVO_OVERLAY_CONTAINER = new InjectionToken<HasOverlay>('NovoOverlayContainer');
 
 /** @docs-private */
 export type HasOverlayCtor = Constructor<HasOverlay>;
