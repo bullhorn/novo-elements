@@ -54,12 +54,13 @@ export class NumberRangeComponent implements OnInit, OnDestroy, ControlValueAcce
   }
 
   minLessThanMaxValidator(group: FormGroup): { [key: string]: boolean } | null {
-    const min = group.get('min')?.value;
-    const max = group.get('max')?.value;
-    if (Helpers.isBlank(min) || Helpers.isBlank(max)) {
-      return null;
-    }
-    return  min > max ? { minGreaterThanMax: true } : null;
+    const min = group.get('min').value;
+    const max = group.get('max').value;
+    const hasError = !Helpers.isBlank(min) && !Helpers.isBlank(max) && min > max;
+    const error = hasError ? { minGreaterThanMax: true } : null;
+    group.get('min').setErrors(error); // sets error styling
+    group.get('max').setErrors(error);
+    return error;
   }
 
   writeValue(value: { min: number, max: number }): void {
