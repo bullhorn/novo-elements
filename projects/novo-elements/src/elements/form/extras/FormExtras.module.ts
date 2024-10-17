@@ -2,7 +2,7 @@
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NovoButtonModule } from 'novo-elements/elements/button';
 import { NovoCheckboxModule } from 'novo-elements/elements/checkbox';
 import { NovoLoadingModule } from 'novo-elements/elements/loading';
@@ -12,6 +12,9 @@ import { NovoTooltipModule } from 'novo-elements/elements/tooltip';
 import { NovoPipesModule } from 'novo-elements/pipes';
 import { NovoAddressElement } from './address/Address';
 import { NovoFileInputElement } from './file/FileInput';
+import { NumberRangeComponent } from './number-range/number-range.component';
+import { NovoFlexModule } from 'novo-elements/elements/flex';
+import { NovoFieldModule } from 'novo-elements/elements/field';
 
 @NgModule({
   imports: [
@@ -24,9 +27,13 @@ import { NovoFileInputElement } from './file/FileInput';
     NovoLoadingModule,
     NovoTooltipModule,
     NovoCheckboxModule,
-    DragDropModule
+    DragDropModule,
+    NovoFlexModule,
+    NovoFieldModule,
+    ReactiveFormsModule
   ],
-  declarations: [NovoAddressElement, NovoFileInputElement],
-  exports: [NovoAddressElement, NovoFileInputElement],
+  declarations: [NovoAddressElement, NovoFileInputElement, NumberRangeComponent],
+  exports: [NovoAddressElement, NovoFileInputElement, NumberRangeComponent],
 })
 export class NovoFormExtrasModule {}
+

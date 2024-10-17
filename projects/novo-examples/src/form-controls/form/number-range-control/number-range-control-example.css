@@ -1,0 +1,15 @@
+.row-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin: 2rem;
+}
+
+.example-row {
+  display: flex;
+  gap: 2rem;
+}
+
+novo-label {
+  align-content: flex-end;
+}

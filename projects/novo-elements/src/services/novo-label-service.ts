@@ -135,15 +135,18 @@ export class NovoLabelService {
   false = 'False';
   before = 'Before';
   after = 'After';
-  between = 'Between';
   within = 'Within';
   isNull = 'Is Empty';
   isEmpty = 'Is Empty?';
+  between = 'Is Between';
   refreshPagination = 'Refresh Pagination';
   location = 'Location';
   showLess = 'Show Less';
   miles = 'Miles';
   km = 'Km';
+  minimumPlaceholder = 'Minimum';
+  maximumPlaceholder = 'Maximum';
+  minGreaterThanMax = 'The minimum is greater than the maximum value';
 
   constructor(
     @Optional()
