@@ -9,7 +9,7 @@ import { filter, takeUntil } from 'rxjs/operators';
   selector: 'novo-number-range',
   template: `
     <form [formGroup]="rangeForm">
-      <novo-flex justify='space-between' align='end'>
+      <novo-flex justify='space-between' align='end' gap="1rem">
         <novo-field mr="sm">
           <input formControlName="min" novoInput type='number' [placeholder]="labels.minimumPlaceholder"/>
         </novo-field>
