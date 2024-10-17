@@ -32,3 +32,7 @@ Static forms `<novo-form />`.
 ##### Address Controls
 
 <code-example example="address-control"></code-example>
+
+##### Number Range Controls
+
+<code-example example="number-range-control"></code-example>
