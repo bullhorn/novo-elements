@@ -4440,6 +4440,8 @@ This is the Static Form demo.</p>
 <p><code-example example="picker-controls"></code-example></p>
 <h5>Address Controls</h5>
 <p><code-example example="address-control"></code-example></p>
+<h5>Number Range Controls</h5>
+<p><code-example example="number-range-control"></code-example></p>
 `,
   host: { class: 'markdown-page' }
 })
