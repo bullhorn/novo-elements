@@ -99,7 +99,7 @@ function generateExampleNgModule(extractedMetadata: ExampleMetadata[]): string {
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { NovoElementsModule } from 'novo-elements';
+import { NovoElementsModule, NovoFormExtrasModule, NovoPipesModule } from 'novo-elements';
 
 // Examples
 ${extractedMetadata
@@ -143,6 +143,8 @@ export const EXAMPLE_LIST = [
     FormsModule,
     ReactiveFormsModule,
     CommonModule,
+    NovoFormExtrasModule,
+    NovoPipesModule,
     NovoElementsModule
   ]
 })

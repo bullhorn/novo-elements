@@ -16,20 +16,20 @@ import { NovoLabelService } from 'novo-elements/services';
         <novo-select [placeholder]="labels.operator" formControlName="operator" (onSelect)="onOperatorSelect(formGroup)">
           <novo-option value="before">{{ labels.before }}</novo-option>
           <novo-option value="after">{{ labels.after }}</novo-option>
-          <novo-option value="between">{{ labels.between }}</novo-option>
           <novo-option value="within">{{ labels.within }}</novo-option>
+          <novo-option value="between">{{ labels.between }}</novo-option>
           <novo-option value="isNull">{{ labels.isEmpty }}</novo-option>
         </novo-select>
       </novo-field>
       <ng-container *novoConditionInputDef="let formGroup; viewIndex as viewIndex" [ngSwitch]="formGroup.value.operator" [formGroup]="formGroup">
         <novo-field *novoSwitchCases="['before', 'after']">
-          <input novoInput dateFormat="iso8601" [picker]="datepicker" formControlName="value" />
+          <input novoInput dateFormat="iso8601" [picker]="datepicker" formControlName="value"/>
           <novo-picker-toggle triggerOnFocus [overlayId]="viewIndex" novoSuffix icon="calendar">
             <novo-date-picker (onSelect)="closePanel($event, viewIndex)" #datepicker></novo-date-picker>
           </novo-picker-toggle>
         </novo-field>
         <novo-field *novoSwitchCases="['between']">
-          <input novoInput dateRangeFormat="date" [picker]="daterangepicker" formControlName="value" />
+          <input novoInput dateRangeFormat="date" [picker]="daterangepicker" formControlName="value"/>
           <novo-picker-toggle [for]="daterangepicker" triggerOnFocus [overlayId]="viewIndex" novoSuffix icon="calendar">
             <novo-date-picker #daterangepicker (onSelect)="closePanel($event, viewIndex)" mode="range" numberOfMonths="2"></novo-date-picker>
           </novo-picker-toggle>
