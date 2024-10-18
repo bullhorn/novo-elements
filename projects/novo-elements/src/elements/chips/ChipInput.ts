@@ -1,11 +1,13 @@
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { hasModifierKey } from '@angular/cdk/keycodes';
-import { Directive, ElementRef, EventEmitter, forwardRef, Inject, Input, OnChanges, Output } from '@angular/core';
+import { AfterViewInit, Directive, ElementRef, EventEmitter, forwardRef, Inject, Input, OnChanges, OnDestroy, Optional, Output, Self } from '@angular/core';
 import { NgControl } from '@angular/forms';
 import { Key, KeyCodes } from 'novo-elements/utils';
 import { NovoChipsDefaultOptions, NOVO_CHIPS_DEFAULT_OPTIONS } from './ChipDefaults';
 import { NovoChipList } from './ChipList';
 import { NovoChipTextControl } from './ChipTextControl';
+import { NovoFieldElement } from 'novo-elements/elements/field';
+import { expand, first, firstValueFrom, fromEvent, merge, mergeMap, Subject, takeUntil } from 'rxjs';
 
 /** Represents an input event on a `novoChipInput`. */
 export interface NovoChipInputEvent {
@@ -29,7 +31,7 @@ let nextUniqueId = 0;
   host: {
     class: 'novo-chip-input novo-input-element',
     '(keydown)': '_keydown($event)',
-    '(blur)': '_blur()',
+    '(blur)': '_blur($event)',
     '(focus)': '_focus()',
     '(input)': '_onInput()',
     '[id]': 'id',
@@ -39,7 +41,7 @@ let nextUniqueId = 0;
     '[attr.aria-required]': '_chipList && _chipList.required || null',
   },
 })
-export class NovoChipInput implements NovoChipTextControl, OnChanges {
+export class NovoChipInput implements NovoChipTextControl, OnChanges, OnDestroy {
   /** Whether the control is focused. */
   focused: boolean = false;
 
@@ -91,18 +93,26 @@ export class NovoChipInput implements NovoChipTextControl, OnChanges {
   /** The native input element to which this directive is attached. */
   protected _inputElement: HTMLInputElement;
 
+  destroy$ = new Subject<void>();
+
   constructor(
     protected _elementRef: ElementRef<HTMLInputElement>,
-    @Inject(NOVO_CHIPS_DEFAULT_OPTIONS) private _defaultOptions: NovoChipsDefaultOptions,
-    @Inject(forwardRef(() => NovoChipList)) private _chipList: NovoChipList,
-    protected ngControl: NgControl,
+    @Inject(NOVO_CHIPS_DEFAULT_OPTIONS) private readonly _defaultOptions: NovoChipsDefaultOptions,
+    @Optional() @Inject(NovoFieldElement) private readonly _field: NovoFieldElement,
+    @Inject(forwardRef(() => NovoChipList)) private readonly _chipList: NovoChipList,
+    @Optional() @Self() protected ngControl: NgControl,
   ) {
-    this._inputElement = this._elementRef.nativeElement as HTMLInputElement;
+    this._inputElement = this._elementRef.nativeElement;
     this._chipList.registerInput(this);
   }
 
   ngOnChanges() {
     this._chipList.stateChanges.next();
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   /** Utility method to make host definition/tests more clear. */
@@ -117,9 +127,11 @@ export class NovoChipInput implements NovoChipTextControl, OnChanges {
   }
 
   /** Checks to see if the blur should emit the (chipEnd) event. */
-  _blur() {
+  _blur(blurEvent: FocusEvent) {
     if (this.addOnBlur) {
       this._emitChipEnd();
+    } else if (!this._field.blurEventIsInField(blurEvent)) {
+      this.clearValue();
     }
     this.focused = false;
     // Blur the chip list if it is not focused
@@ -161,7 +173,7 @@ export class NovoChipInput implements NovoChipTextControl, OnChanges {
   /** Clears the input. */
   clearValue(): void {
     this._inputElement.value = '';
-    this.ngControl?.control.setValue('');
+    this.ngControl?.control?.setValue('');
   }
 
   /** Checks whether a keycode is one of the configured separators. */
@@ -169,6 +181,6 @@ export class NovoChipInput implements NovoChipTextControl, OnChanges {
     return !hasModifierKey(event) && new Set(this.separatorKeyCodes).has(event.key);
   }
 
-  static ngAcceptInputType_addOnBlur: BooleanInput;
-  static ngAcceptInputType_disabled: BooleanInput;
+  static readonly ngAcceptInputType_addOnBlur: BooleanInput;
+  static readonly ngAcceptInputType_disabled: BooleanInput;
 }
