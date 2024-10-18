@@ -36,10 +36,10 @@ export class NumberRangeComponent implements OnInit, OnDestroy, ControlValueAcce
   _onTouched = () => { };
   private _destroyed = new Subject<void>();
 
-  constructor(public labels: NovoLabelService, private fb: FormBuilder) { }
+  constructor(public labels: NovoLabelService, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
-    this.rangeForm = this.fb.group({ min: null, max: null }, { validators: this.minLessThanMaxValidator });
+    this.rangeForm = this.formBuilder.group({ min: null, max: null }, { validators: this.minLessThanMaxValidator });
 
     // Notify parent form when the value changes (and it's valid)
     this.rangeForm.valueChanges.pipe(

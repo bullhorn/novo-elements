@@ -12,13 +12,11 @@ import { FormControl, FormGroup } from '@angular/forms';
 export class NumberRangeControlExample {
   public exampleForm: FormGroup;
 
-
   constructor() {
     this.exampleForm = new FormGroup({
       numberRangeControl1: new FormControl(),
       numberRangeControl2: new FormControl()
     })
-
   }
 
 }
