@@ -1,5 +1,5 @@
 // NG2
-import { ChangeDetectionStrategy, Component, ElementRef, HostBinding, HostListener, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, HostBinding, HostListener, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { BooleanInput, Helpers, Key } from 'novo-elements/utils';
 
 @Component({
@@ -63,7 +63,7 @@ import { BooleanInput, Helpers, Key } from 'novo-elements/utils';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NovoButtonElement {
+export class NovoButtonElement implements OnChanges {
   /**
    * The text color of the button. Should be used for Icon buttons. see theme.
    */
@@ -107,9 +107,18 @@ export class NovoButtonElement {
   @HostBinding('class.novo-button-disabled')
   disabled: boolean = false;
 
+  @HostBinding('attr.disabled')
+  disabledAttr: undefined | '' = undefined;
+
   private _icon: string;
 
   constructor(public element: ElementRef) {}
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.disabled && this.element.nativeElement.tagName === 'BUTTON') {
+      this.disabledAttr = changes.disabled.currentValue ? '' : undefined;
+    }
+  }
 
   @HostListener('keydown', ['$event'])
   handleKeydown(event: KeyboardEvent) {

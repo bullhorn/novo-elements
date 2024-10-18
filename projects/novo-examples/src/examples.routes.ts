@@ -2831,6 +2831,8 @@ export class SwitchPage {
 <h2>Selection Disabled</h2>
 <p>When checkboxes are disabled in the activation picker, we can still listen for &quot;activation&quot; events when an item has been clicked.</p>
 <p><code-example example="tabbed-group-picker-no-selection"></code-example></p>
+<h2>Footer</h2>
+<p><code-example example="tabbed-group-picker-footer"></code-example></p>
 `,
   host: { class: 'markdown-page' }
 })
@@ -4438,6 +4440,8 @@ This is the Static Form demo.</p>
 <p><code-example example="picker-controls"></code-example></p>
 <h5>Address Controls</h5>
 <p><code-example example="address-control"></code-example></p>
+<h5>Number Range Controls</h5>
+<p><code-example example="number-range-control"></code-example></p>
 `,
   host: { class: 'markdown-page' }
 })
