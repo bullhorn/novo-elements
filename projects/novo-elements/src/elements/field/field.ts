@@ -20,7 +20,7 @@ import {
 import { NgControl } from '@angular/forms';
 import { fromEvent, Subject, Subscription } from 'rxjs';
 import { startWith, takeUntil } from 'rxjs/operators';
-import { NovoLabel } from 'novo-elements/elements/common';
+import { NovoLabel, HasOverlay, NOVO_OVERLAY_CONTAINER } from 'novo-elements/elements/common';
 import { NovoErrorElement } from './error/error';
 import { NovoFieldControl } from './field-control';
 import { NovoHintElement } from './hint/hint';
@@ -91,6 +91,7 @@ export class NovoFieldElement implements AfterContentInit, OnDestroy {
   @ContentChildren(NovoErrorElement) _errorElements: QueryList<NovoErrorElement>;
   @ContentChildren(NovoFieldPrefixDirective) _prefixElements: QueryList<NovoFieldPrefixDirective>;
   @ContentChildren(NovoFieldSuffixDirective) _suffixElements: QueryList<NovoFieldSuffixDirective>;
+  @ContentChildren(NOVO_OVERLAY_CONTAINER) _overlayElements: QueryList<HasOverlay>;
 
   @ContentChild(NovoFieldControl) _control: NovoFieldControl<any>;
 
@@ -166,6 +167,10 @@ export class NovoFieldElement implements AfterContentInit, OnDestroy {
     if (!this._control) {
       throw new Error('Missing Novo Control');
     }
+  }
+
+  public blurEventIsInField(blurEvt: FocusEvent): boolean {
+    return this._elementRef.nativeElement.contains(blurEvt.relatedTarget) || this._overlayElements.some(hasOverlay => hasOverlay.overlay?.isBlurRecipient(blurEvt));
   }
 
   @HostListener('click', ['$event'])
