@@ -8,6 +8,7 @@ import { ErrorStateMatcher, NovoCommonModule } from 'novo-elements/elements/comm
 import { NovoFieldModule } from 'novo-elements/elements/field';
 import { NovoIconModule } from 'novo-elements/elements/icon';
 import { NovoPickerModule } from 'novo-elements/elements/picker';
+import { NovoCheckboxModule } from 'novo-elements/elements/checkbox';
 import { NovoChipAvatar, NovoChipElement, NovoChipRemove } from './Chip';
 import { NovoChipsDefaultOptions, NOVO_CHIPS_DEFAULT_OPTIONS } from './ChipDefaults';
 import { NovoChipInput } from './ChipInput';
@@ -16,7 +17,7 @@ import { NovoChipsElement } from './Chips';
 import { NovoRowChipElement, NovoRowChipsElement } from './RowChips';
 import { AvatarTypePipe } from './pipe/AvatarType.pipe';
 @NgModule({
-  imports: [CommonModule, FormsModule, NovoPickerModule, NovoIconModule, NovoFieldModule, NovoCommonModule],
+  imports: [CommonModule, FormsModule, NovoCheckboxModule, NovoPickerModule, NovoIconModule, NovoFieldModule, NovoCommonModule],
   declarations: [
     NovoChipElement,
     NovoChipAvatar,

@@ -20,21 +20,25 @@ export class RowChipsExample {
         id: 1,
         shiftDate: '2021-04-03',
         openings: 1,
+        closing: true,
       },
       {
         id: 2,
         shiftDate: '2021-04-06',
         openings: 1,
+        closing: true,
       },
       {
         id: 3,
         shiftDate: '2021-04-10',
         openings: 1,
+        closing: false,
       },
       {
         id: 4,
         shiftDate: '2021-04-12',
         openings: 1,
+        closing: false,
       },
     ];
     this.rowValue = [];
@@ -56,6 +60,16 @@ export class RowChipsExample {
           name: 'openings',
           data: (item: any): string => {
             return item.value.openings;
+          },
+        },
+        {
+          label: 'Closing shift?',
+          editable: false,
+          type: 'checkbox',
+          width: 260,
+          name: 'closing',
+          data: (item: any): string => {
+            return item.value.closing;
           },
         },
       ],
