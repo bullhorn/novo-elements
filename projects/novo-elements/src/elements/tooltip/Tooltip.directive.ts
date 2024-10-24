@@ -1,7 +1,7 @@
 // NG
 import { ConnectedPosition, FlexibleConnectedPositionStrategy, Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
-import { Directive, ElementRef, HostListener, Input, OnDestroy, OnInit, ViewContainerRef } from '@angular/core';
+import { AfterViewInit, Directive, ElementRef, HostListener, Input, OnDestroy, OnInit, ViewContainerRef } from '@angular/core';
 // APP
 import { NovoTooltip } from './Tooltip.component';
 
@@ -11,7 +11,7 @@ import { NovoTooltip } from './Tooltip.component';
     '[attr.data-hint]': 'tooltip',
   },
 })
-export class TooltipDirective implements OnDestroy, OnInit {
+export class TooltipDirective implements OnDestroy, OnInit, AfterViewInit {
   @Input()
   tooltip: string;
   @Input('tooltipPosition')
@@ -40,10 +40,13 @@ export class TooltipDirective implements OnDestroy, OnInit {
   isHTML: boolean;
   @Input('tooltipCloseOnClick')
   closeOnClick: boolean = false;
+  @Input('tooltipOnOverflow')
+  overflow: boolean = false;
 
   private tooltipInstance: NovoTooltip | null;
   private portal: ComponentPortal<NovoTooltip>;
   private overlayRef: OverlayRef;
+  private _resizeObserver: ResizeObserver;
 
   constructor(protected overlay: Overlay, private viewContainerRef: ViewContainerRef, private elementRef: ElementRef) {}
   isPosition(position: string): boolean {
@@ -87,7 +90,18 @@ export class TooltipDirective implements OnDestroy, OnInit {
     }
   }
 
+  ngAfterViewInit(): void {
+    if (this.overflow && this.elementRef?.nativeElement) {
+      this._resizeObserver = new ResizeObserver(() => {
+        const isOverflowing = this.elementRef.nativeElement.scrollWidth > this.elementRef.nativeElement.clientWidth;
+        this.active = isOverflowing;
+      });
+      this._resizeObserver.observe(this.elementRef.nativeElement);
+    }
+  }
+
   ngOnDestroy(): void {
+    this._resizeObserver?.disconnect();
     if (this.overlayRef && !this.always) {
       this.hide();
       this.overlayRef.dispose();
