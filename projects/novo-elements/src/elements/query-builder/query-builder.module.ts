@@ -13,7 +13,7 @@ import { NovoDateTimePickerModule } from 'novo-elements/elements/date-time-picke
 import { NovoDropdownModule } from 'novo-elements/elements/dropdown';
 import { NovoFieldModule } from 'novo-elements/elements/field';
 import { NovoFlexModule } from 'novo-elements/elements/flex';
-import { NovoFormModule } from 'novo-elements/elements/form';
+import { NovoFormExtrasModule, NovoFormModule } from 'novo-elements/elements/form';
 import { NovoIconModule } from 'novo-elements/elements/icon';
 import { NovoLoadingModule } from 'novo-elements/elements/loading';
 import { NovoNonIdealStateModule } from 'novo-elements/elements/non-ideal-state';
@@ -70,6 +70,7 @@ import { NovoConditionTemplatesComponent } from './condition-templates/condition
     NovoChipsModule,
     NovoSelectSearchModule,
     NovoDropdownModule,
+    NovoFormExtrasModule
   ],
   declarations: [
     CriteriaBuilderComponent,

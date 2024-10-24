@@ -118,6 +118,8 @@ export class NovoPickerElement implements OnInit {
   width: string;
   @Input()
   minWidth: string;
+  @Input()
+  allowTabNavigation: boolean = false;
 
   // Disable from typing into the picker (result template does everything)
   @Input()
@@ -142,6 +144,8 @@ export class NovoPickerElement implements OnInit {
   blur: EventEmitter<any> = new EventEmitter();
   @Output()
   typing: EventEmitter<any> = new EventEmitter();
+  @Output()
+  tab: EventEmitter<any> = new EventEmitter();
 
   @ViewChild(NovoOverlayTemplateComponent, { static: true })
   public container: NovoOverlayTemplateComponent;
@@ -212,7 +216,7 @@ export class NovoPickerElement implements OnInit {
       return;
     }
     if (this.panelOpen && !this.disablePickerInput) {
-      if (event.key === Key.Escape || event.key === Key.Tab) {
+      if (event.key === Key.Escape || (event.key === Key.Tab && !this.allowTabNavigation)) {
         this.hideResults();
         return;
       }
@@ -245,6 +249,11 @@ export class NovoPickerElement implements OnInit {
       if (event.key === Key.Delete && Helpers.isBlank(this._value)) {
         this.clearValue(true);
       }
+    }
+
+    if (this.allowTabNavigation && event.key === Key.Tab) {
+      this.closePanel();
+      this.tab.emit();
     }
   }
 

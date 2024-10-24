@@ -24,6 +24,26 @@ describe('Elements: NovoDataTablePagination', () => {
     component = fixture.debugElement.componentInstance;
   }));
 
+  describe('Setter: set page()', () => {
+    beforeEach(() => {
+      component.pageSize = 25;
+      component.length = 500;
+      component.ngOnInit();
+      spyOn(component, 'updateDisplayedPageSizeOptions').and.callThrough();
+    });
+    it('should set displayed pages via updateDisplayedPageSizeOptions function', () => {
+      component.selectPage(10);
+      expect(component.page).toEqual(10);
+      const actualDisplayedPageNumbers1 = component.pages.map((page) => page.number);
+      expect(actualDisplayedPageNumbers1).toEqual([8, 9, 10, 11, 12]);
+      component.page = 1;
+      expect(component.page).toEqual(1);
+      const actualDisplayedPageNumbers2 = component.pages.map((page) => page.number);
+      expect(component.updateDisplayedPageSizeOptions).toHaveBeenCalled();
+      expect(actualDisplayedPageNumbers2).toEqual([1, 2, 3, 4, 5]);
+    });
+  });
+
   describe('Method: selectPage()', () => {
     beforeEach(() => {
       spyOn(component.state, 'checkRetainment');

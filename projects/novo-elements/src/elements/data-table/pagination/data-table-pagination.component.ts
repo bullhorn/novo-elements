@@ -88,7 +88,7 @@ const MAX_PAGES_DISPLAYED = 5;
           <i class="bhi-next" data-automation-id="pager-next"></i>
         </li>
       </ul>
-      <novo-loading *ngIf="loading"></novo-loading>
+      <novo-spinner *ngIf="loading"></novo-spinner>
       <button *ngIf="errorLoading"
               theme="primary"
               color="negative"
@@ -114,6 +114,7 @@ export class NovoDataTablePagination<T> implements OnInit, OnDestroy {
     this.longRangeLabel = this.labels.getRangeText(this.page, this.pageSize, this.length, false);
     this.shortRangeLabel = this.labels.getRangeText(this.page, this.pageSize, this.length, true);
     this.state.page = this._page;
+    this.updateDisplayedPageSizeOptions();
   }
   _page: number = 0;
 
