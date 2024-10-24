@@ -1,0 +1,55 @@
+/** CSS for this example */
+:host {
+  margin: auto;
+  padding: 20px 30px;
+  position: relative;
+  display: flex;
+}
+
+:host > span {
+  cursor: pointer;
+  margin: auto;
+}
+
+.resizable-box {
+  width: 200px;
+  height: 150px;
+  border: 1px solid black;
+  position: relative;
+  overflow: hidden;
+}
+
+.resize-handle {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: red;
+}
+
+.resize-handle.top {
+  top: -5px;
+  left: 50%;
+  cursor: n-resize;
+  transform: translateX(-50%);
+}
+
+.resize-handle.right {
+  top: 50%;
+  right: -5px;
+  cursor: e-resize;
+  transform: translateY(-50%);
+}
+
+.resize-handle.bottom {
+  bottom: -5px;
+  left: 50%;
+  cursor: s-resize;
+  transform: translateX(-50%);
+}
+
+.resize-handle.left {
+  top: 50%;
+  left: -5px;
+  cursor: w-resize;
+  transform: translateY(-50%);
+}

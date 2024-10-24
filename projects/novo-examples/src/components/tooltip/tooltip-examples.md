@@ -28,3 +28,7 @@ order: 4
 ## Toggle Trigger
 
 <code-example example="tooltip-toggle"></code-example>
+
+## Overflow
+
+<code-example example="tooltip-overflow"></code-example>
