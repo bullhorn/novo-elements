@@ -95,7 +95,7 @@ export class NovoDateRangeFormatDirective extends IMaskDirective<any> {
 
   normalize(value: string | Date) {
     const pattern = this.labels.dateFormat.toUpperCase();
-    return DateUtil.format(DateUtil.parse(value), pattern);
+    return DateUtil.format(value ? DateUtil.parse(value) : null, pattern);
   }
 
   formatAsIso(value: DateRange): string {
@@ -125,6 +125,13 @@ export class NovoDateRangeFormatDirective extends IMaskDirective<any> {
   }
 
   writeValue(value: any) {
+    if (this['_initialValue'] && value === this['_initialValue']) {
+      // if this call is coming from the super class, skip through.
+      // If we ever wanted to reduce the need for this hack/workaround, we could refactor
+      // IMaskDirective to exist as a child portion of DateRangeFormatDirective.
+      super.writeValue(value);
+      return;
+    }
     const formattedValue = this.formatValue(value);
     if (formattedValue !== this.maskValue) {
       super.writeValue(this.formatValue(value));
