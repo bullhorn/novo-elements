@@ -3420,6 +3420,8 @@ export class TooltipDevelopPage {
 <p><code-example example="tooltip-options"></code-example></p>
 <h2>Toggle Trigger</h2>
 <p><code-example example="tooltip-toggle"></code-example></p>
+<h2>Overflow</h2>
+<p><code-example example="tooltip-overflow"></code-example></p>
 `,
   host: { class: 'markdown-page' }
 })
