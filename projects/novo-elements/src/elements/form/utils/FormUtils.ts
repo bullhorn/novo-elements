@@ -390,6 +390,7 @@ export class FormUtils {
         break;
       case 'editor':
         control = new EditorControl(controlConfig);
+        if (controlConfig.template) { control.controlType = controlConfig.template }
         break;
       case 'editor-minimal':
         control = new EditorControl(controlConfig);
