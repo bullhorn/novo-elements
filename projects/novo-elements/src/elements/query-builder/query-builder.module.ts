@@ -38,6 +38,7 @@ import { ConditionGroupComponent } from './condition-group/condition-group.compo
 import { CriteriaBuilderComponent } from './criteria-builder/criteria-builder.component';
 import { NovoConditionFieldDef, NovoConditionInputDef, NovoConditionOperatorsDef } from './query-builder.directives';
 import { NovoConditionTemplatesComponent } from './condition-templates/condition-templates.component';
+import { NovoTooltipModule } from 'novo-elements/elements/tooltip';
 
 @NgModule({
   imports: [
@@ -70,7 +71,8 @@ import { NovoConditionTemplatesComponent } from './condition-templates/condition
     NovoChipsModule,
     NovoSelectSearchModule,
     NovoDropdownModule,
-    NovoFormExtrasModule
+    NovoFormExtrasModule,
+    NovoTooltipModule
   ],
   declarations: [
     CriteriaBuilderComponent,

@@ -28,3 +28,7 @@ order: 4
 ## Toggle Trigger
 
 <code-example example="tooltip-toggle"></code-example>
+
+## Tooltip w/ Ellipses
+
+<code-example example="tooltip-ellipses"></code-example>

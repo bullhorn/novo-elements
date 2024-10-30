@@ -4,6 +4,7 @@ import { ComponentPortal } from '@angular/cdk/portal';
 import { Directive, ElementRef, HostListener, Input, OnDestroy, OnInit, ViewContainerRef } from '@angular/core';
 // APP
 import { NovoTooltip } from './Tooltip.component';
+import { BooleanInput } from 'novo-elements/utils';
 
 @Directive({
   selector: '[tooltip]',
@@ -40,6 +41,13 @@ export class TooltipDirective implements OnDestroy, OnInit {
   isHTML: boolean;
   @Input('tooltipCloseOnClick')
   closeOnClick: boolean = false;
+  /**
+   * Only activate the tooltip directive if this text is shrunken from its full height
+   * (eg, it is a <novo-text ellipsis> and the "..." is showing)
+   */
+  @BooleanInput()
+  @Input('tooltipIfShrunk')
+  onlyOnShrunk: boolean = false;
 
   private tooltipInstance: NovoTooltip | null;
   private portal: ComponentPortal<NovoTooltip>;
@@ -58,9 +66,15 @@ export class TooltipDirective implements OnDestroy, OnInit {
     return size.toLowerCase() === (this.size || '').toLowerCase();
   }
 
+  isActive(): boolean {
+    const isShrunken = this.elementRef.nativeElement.offsetWidth < this.elementRef.nativeElement.scrollWidth;
+    const isShrunkenActive = isShrunken || !this.onlyOnShrunk;
+    return this.active && isShrunkenActive;
+  }
+
   @HostListener('mouseenter')
   onMouseEnter(): void {
-    if (this.tooltip && this.active && !this.always) {
+    if (this.tooltip && this.isActive() && !this.always) {
       this.show();
     }
   }
