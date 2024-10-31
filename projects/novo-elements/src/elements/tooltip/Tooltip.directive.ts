@@ -72,7 +72,7 @@ export class TooltipDirective implements OnDestroy, OnInit, AfterViewInit {
 
   @HostListener('mouseenter')
   onMouseEnter(): void {
-    if (this.tooltip && this.active && !this.always) {
+    if (this.tooltip && this._active() && !this.always) {
       this.show();
     }
   }
