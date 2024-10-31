@@ -1,7 +1,7 @@
 // NG
 import { ConnectedPosition, FlexibleConnectedPositionStrategy, Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
-import { AfterViewInit, Directive, ElementRef, HostListener, Input, OnDestroy, OnInit, ViewContainerRef } from '@angular/core';
+import { AfterViewInit, Directive, ElementRef, HostListener, Input, OnDestroy, OnInit, ViewContainerRef, signal } from '@angular/core';
 // APP
 import { NovoTooltip } from './Tooltip.component';
 import { BooleanInput } from 'novo-elements/utils';
@@ -29,8 +29,6 @@ export class TooltipDirective implements OnDestroy, OnInit, AfterViewInit {
   rounded: boolean;
   @Input('tooltipAlways')
   always: boolean;
-  @Input('tooltipActive')
-  active: boolean = true;
   @Input('tooltipPreline')
   preline: boolean;
   @Input('removeTooltipArrow')
@@ -44,6 +42,15 @@ export class TooltipDirective implements OnDestroy, OnInit, AfterViewInit {
   @BooleanInput()
   @Input('tooltipOnOverflow')
   onOverflow: boolean = false;
+
+  private _active = signal<boolean>(true);
+  @Input('tooltipActive')
+  set active(value: boolean) {
+    this._active.set(value);
+  }
+  get active(): boolean {
+    return this._active();
+  }
 
   private tooltipInstance: NovoTooltip | null;
   private portal: ComponentPortal<NovoTooltip>;
@@ -96,7 +103,7 @@ export class TooltipDirective implements OnDestroy, OnInit, AfterViewInit {
     if (this.onOverflow && this.elementRef?.nativeElement) {
       this._resizeObserver = new ResizeObserver(() => {
         const isOverflowing = this.elementRef.nativeElement.scrollWidth > this.elementRef.nativeElement.clientWidth;
-        this.active = isOverflowing;
+        this._active.set(isOverflowing);
       });
       this._resizeObserver.observe(this.elementRef.nativeElement);
     }
