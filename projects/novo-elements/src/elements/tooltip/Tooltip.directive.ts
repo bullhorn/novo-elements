@@ -4,6 +4,7 @@ import { ComponentPortal } from '@angular/cdk/portal';
 import { AfterViewInit, Directive, ElementRef, HostListener, Input, OnDestroy, OnInit, ViewContainerRef } from '@angular/core';
 // APP
 import { NovoTooltip } from './Tooltip.component';
+import { BooleanInput } from 'novo-elements/utils';
 
 @Directive({
   selector: '[tooltip]',
@@ -40,8 +41,9 @@ export class TooltipDirective implements OnDestroy, OnInit, AfterViewInit {
   isHTML: boolean;
   @Input('tooltipCloseOnClick')
   closeOnClick: boolean = false;
+  @BooleanInput()
   @Input('tooltipOnOverflow')
-  overflow: boolean = false;
+  onOverflow: boolean = false;
 
   private tooltipInstance: NovoTooltip | null;
   private portal: ComponentPortal<NovoTooltip>;
@@ -91,7 +93,7 @@ export class TooltipDirective implements OnDestroy, OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    if (this.overflow && this.elementRef?.nativeElement) {
+    if (this.onOverflow && this.elementRef?.nativeElement) {
       this._resizeObserver = new ResizeObserver(() => {
         const isOverflowing = this.elementRef.nativeElement.scrollWidth > this.elementRef.nativeElement.clientWidth;
         this.active = isOverflowing;
