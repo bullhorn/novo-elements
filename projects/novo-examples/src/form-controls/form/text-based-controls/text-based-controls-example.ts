@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AceEditorControl, FormUtils, QuickNoteControl, TextAreaControl, TextBoxControl } from 'novo-elements';
+import { AceEditorControl, FormUtils, QuickNoteControl, TextAreaControl, TextBoxControl, TilesControl } from 'novo-elements';
 
 /**
  * @title Text Based Controls Example
@@ -22,6 +22,7 @@ export class TextBasedControlsExample {
   public quickNoteControl: any;
   public textAreaControl: any;
   public textForm: any;
+  public tilesControl: any;
 
   constructor(private formUtils: FormUtils) {
     // Quick note config;
@@ -100,7 +101,18 @@ export class TextBasedControlsExample {
       required: true,
       tooltip: 'Quicknote',
     });
+
+
     this.aceEditorControl = new AceEditorControl({ key: 'ace', label: 'CODE', tooltip: 'CODE', value: 'var i = 0;' });
+
+    this.tilesControl = new TilesControl({
+      key: 'tilesType',
+      label: 'Tiles Type',
+      value: 'Two',
+      options: ['One', 'Two'],
+      required: true,
+    });
+
     this.textForm = formUtils.toFormGroup([
       this.textControl,
       this.textMaskControl,
@@ -112,6 +124,7 @@ export class TextBasedControlsExample {
       this.percentageControl,
       this.quickNoteControl,
       this.aceEditorControl,
+      this.tilesControl,
     ]);
   }
 }
