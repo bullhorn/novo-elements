@@ -105,7 +105,7 @@ export class TooltipDirective implements OnDestroy, OnInit, AfterViewInit {
         const isOverflowing = this.elementRef.nativeElement.scrollWidth > this.elementRef.nativeElement.clientWidth;
         this._active.set(isOverflowing);
       });
-      this._resizeObserver.observe(this.elementRef.nativeElement);
+      this._resizeObserver?.observe(this.elementRef.nativeElement);
     }
   }
 

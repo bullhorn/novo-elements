@@ -11,6 +11,7 @@ import { Component } from '@angular/core';
 export class TooltipOverflowExample {
   public tooltipActive: boolean = true;
   longText = 'Lorem Ipsum pariatur laborum tempor voluptate non adipisicing reprehenderit.';
+  shortText = 'Lorem Ipsum!';
 
   public toggleTooltip() {
     this.tooltipActive = !this.tooltipActive;
