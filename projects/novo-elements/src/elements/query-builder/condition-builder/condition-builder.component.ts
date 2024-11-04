@@ -187,6 +187,17 @@ export class ConditionBuilderComponent implements OnInit, OnChanges, AfterConten
     this.results$ = Promise.resolve(this.fieldConfig.options);
   }
 
+  reset(values: Record<string, any>): void {
+    // Reset form controls based on the values provided.
+    Object.entries(values).forEach(([key, value]) => {
+      this.parentForm.get(key).setValue(value, { emitEvent: false, onlySelf: true });
+    });
+    // Reinitialize the field and operator template.
+    this.createFieldTemplates();
+    // Make the form untouched.
+    this.parentForm.markAsPristine();
+  }
+
   getField() {
     const field = this.parentForm?.value?.field;
     if (!field) return null;
