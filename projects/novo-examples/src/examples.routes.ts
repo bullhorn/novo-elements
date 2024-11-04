@@ -202,7 +202,7 @@ export class AsideDesignPage {
 <p>Asides (a.k.a. Slideout) should be invoked via <code>NovoAsideService</code> and therefore all properties should be private or internal. Any values that need to be passed to the your <code>aside</code> instance should be passed by the service and will be available in your slideout via <code>NovoAsideRef.params</code>.</p>
 <pre><code class="language-typescript"><span class="hljs-meta">&#64;Component</span>(&#123;...&#125;)
 <span class="hljs-keyword">class</span> <span class="hljs-title class_">RandomComponent</span> &#123;
-  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> aside:NovoAsideService</span>) &#123;&#125;
+  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> <span class="hljs-attr">aside</span>:<span class="hljs-title class_">NovoAsideService</span></span>) &#123;&#125;
   <span class="hljs-title function_">handleAction</span>(<span class="hljs-params"></span>) &#123;
     <span class="hljs-keyword">const</span> ref = <span class="hljs-variable language_">this</span>.<span class="hljs-property">aside</span>.<span class="hljs-title function_">open</span>(<span class="hljs-title class_">AddFormSlideout</span>, &#123; <span class="hljs-attr">record</span>: <span class="hljs-number">123</span> &#125;);
     <span class="hljs-comment">/* you can listen to the close event */</span>
@@ -246,7 +246,7 @@ export class AsideDesignPage {
 &#125;
 <span class="hljs-meta">&#64;Component</span>(&#123;&#125;)
 <span class="hljs-keyword">class</span> <span class="hljs-title class_">AddFormSlideout</span> &#123;
-  <span class="hljs-title function_">constructor</span>(<span class="hljs-params">ref:NovoAsideRef&lt;AddFormParams&gt;</span>) &#123;
+  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-attr">ref</span>:<span class="hljs-title class_">NovoAsideRef</span>&lt;<span class="hljs-title class_">AddFormParams</span>&gt;</span>) &#123;
     <span class="hljs-comment">/**
      * All passed values are available
      * via ref.params
@@ -2031,7 +2031,7 @@ export class ModalDesignPage {
   <span class="hljs-attr">isDefault</span>: <span class="hljs-built_in">boolean</span>;
 &#125;
 ...
-<span class="hljs-title function_">constructor</span>(<span class="hljs-params">ref:NovoModalRef&lt;MyParams&gt;</span>) &#123;
+<span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-attr">ref</span>:<span class="hljs-title class_">NovoModalRef</span>&lt;<span class="hljs-title class_">MyParams</span>&gt;</span>) &#123;
   <span class="hljs-keyword">if</span>(ref.<span class="hljs-property">params</span>.<span class="hljs-property">isDefault</span>) &#123;
     <span class="hljs-comment">/* ^ Will not need to by type cast */</span>
   &#125;
@@ -2046,7 +2046,7 @@ export class ModalDesignPage {
 <p>Modals should be invoked via <code>NovoModalService</code> and therefore all properties should be private or internal. Any values that need to be passed to the your <code>Modal</code> instance should be passed by the service and available in your modal.</p>
 <pre><code class="language-typescript"><span class="hljs-meta">&#64;Component</span>(&#123;...&#125;)
 <span class="hljs-keyword">class</span> <span class="hljs-title class_">RandomComponent</span> &#123;
-  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> modal:NovoModalService</span>) &#123;&#125;
+  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> <span class="hljs-attr">modal</span>:<span class="hljs-title class_">NovoModalService</span></span>) &#123;&#125;
   <span class="hljs-title function_">handleAction</span>(<span class="hljs-params"></span>) &#123;
     <span class="hljs-keyword">const</span> ref = <span class="hljs-variable language_">this</span>.<span class="hljs-property">modal</span>.<span class="hljs-title function_">open</span>(<span class="hljs-title class_">ConfirmDeleteModal</span>, &#123; <span class="hljs-attr">record</span>: <span class="hljs-number">123</span> &#125;);
     <span class="hljs-comment">/* you can listen to the close event */</span>
@@ -2090,7 +2090,7 @@ export class ModalDesignPage {
 &#125;
 <span class="hljs-meta">&#64;Component</span>(&#123;&#125;)
 <span class="hljs-keyword">class</span> <span class="hljs-title class_">ConfirmDeleteModal</span> &#123;
-  <span class="hljs-title function_">constructor</span>(<span class="hljs-params">ref:NovoModalRef&lt;DeleteModalParams&gt;</span>) &#123;
+  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-attr">ref</span>:<span class="hljs-title class_">NovoModalRef</span>&lt;<span class="hljs-title class_">DeleteModalParams</span>&gt;</span>) &#123;
     <span class="hljs-comment">/**
      * All passed values are available
      * via ref.params

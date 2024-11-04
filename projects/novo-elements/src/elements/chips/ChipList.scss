@@ -5,6 +5,11 @@ $novo-chip-list-margin: 4px;
 $novo-chip-input-width: 100px;
 $novo-chip-input-margin: 4px;
 
+.novo-chip-list {
+  overflow: hidden;
+  flex-grow: 1;
+}
+
 .novo-chip-list-wrapper {
   display: flex;
   flex-direction: row;
