@@ -1,0 +1,9 @@
+/** CSS for this example */
+:host {
+  margin: auto;
+  padding: 20px 30px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
