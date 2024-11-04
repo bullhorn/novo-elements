@@ -241,7 +241,7 @@ export class AsideDesignPage {
 <p><em>Note:</em> All modal components should be declared as <code>entryComponents</code> in the module.</p>
 <h2>NovoAsideRef&lt;T&gt;</h2>
 <p><code>NovoAsideRef</code> should be injected into your modal component and all pass params can be accessed in the <code>params</code> property.</p>
-<pre><code class="language-typescript"><span class="hljs-keyword">interface</span> <span class="hljs-title class_">AddFormParams</span> &#123;
+<pre><code class="language-typescript"><span class="hljs-keyword">interface</span> AddFormParams &#123;
   <span class="hljs-attr">record</span>: <span class="hljs-built_in">number</span>;
 &#125;
 <span class="hljs-meta">&#64;Component</span>(&#123;&#125;)
@@ -2027,7 +2027,7 @@ export class ModalDesignPage {
 <ul>
 <li>
 <p><code>NovoModalParams</code> should no longer be used, instead use <code>NovoModalRef.params</code>. This is because <code>NovoModalRef</code> accepts a generic for the params property.</p>
-<pre><code class="language-typescript"><span class="hljs-keyword">interface</span> <span class="hljs-title class_">MyParams</span> &#123;
+<pre><code class="language-typescript"><span class="hljs-keyword">interface</span> MyParams &#123;
   <span class="hljs-attr">isDefault</span>: <span class="hljs-built_in">boolean</span>;
 &#125;
 ...
@@ -2085,7 +2085,7 @@ export class ModalDesignPage {
 <p><em>Note:</em> All modal components should be declared as <code>entryComponents</code> in the module.</p>
 <h2>NovoModalRef&lt;T&gt;</h2>
 <p><code>NovoModalRef</code> should be injected into your modal component and all pass params can be accessed in the <code>params</code> property.</p>
-<pre><code class="language-typescript"><span class="hljs-keyword">interface</span> <span class="hljs-title class_">DeleteModalParams</span> &#123;
+<pre><code class="language-typescript"><span class="hljs-keyword">interface</span> DeleteModalParams &#123;
   <span class="hljs-attr">record</span>: <span class="hljs-built_in">number</span>;
 &#125;
 <span class="hljs-meta">&#64;Component</span>(&#123;&#125;)
@@ -5603,8 +5603,8 @@ export class PatternsNativeFormsPage {
 <input readonly name="id" id="id" value="04D6H89Z" /></p>
 <p><label for="disabled">Random disabled input</label>
 <input disabled name="disabled" id="disabled" placeholder="Because why not?" /></p>
-<p><label for="about">About me</label></p>
-<textarea name="about" id="about" placeholder="I am a textarea..."></textarea>
+<p><label for="about">About me</label>
+<textarea name="about" id="about" placeholder="I am a textarea..."></textarea></p>
 <p><label>Choose a Doe:</label></p>
   <div>
     <input type="radio" id="john" name="drone" value="john" checked />

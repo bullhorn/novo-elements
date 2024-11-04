@@ -171,26 +171,26 @@ export class NovoChipsElement implements OnInit, ControlValueAccessor {
     this.items = [];
     if (this.model && Array.isArray(this.model)) {
       const noLabels = [];
-      for (const value of this.model) {
+      for (const item of this.model) {
         let label;
-        if (this.source && this.source.format && Helpers.validateInterpolationProps(this.source.format, value)) {
-          label = Helpers.interpolate(this.source.format, value);
+        if (this.source && this.source.format && Helpers.validateInterpolationProps(this.source.format, item)) {
+          label = Helpers.interpolate(this.source.format, item);
         }
         if (this.source && label && label !== this.source.format) {
           this.items.push({
-            value,
+            value: item.value || item,
             label,
           });
         } else if (this.source.getLabels && typeof this.source.getLabels === 'function') {
-          noLabels.push(value);
+          noLabels.push(item);
         } else if (this.source.options && Array.isArray(this.source.options)) {
-          this.items.push(this.getLabelFromOptions(value));
+          this.items.push(this.getLabelFromOptions(item));
         } else if (this.source.categoryMap && this.source.categoryMap.size) {
-          this.items.push(value);
+          this.items.push(item);
         } else {
           this.items.push({
-            value,
-            label: value,
+            value: item,
+            label: item,
           });
         }
       }
