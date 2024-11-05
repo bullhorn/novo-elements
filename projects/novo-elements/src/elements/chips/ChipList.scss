@@ -15,12 +15,7 @@ $novo-chip-input-margin: 4px;
   flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
-  margin: -$novo-chip-list-margin;
-
-  input.novo-input-element,
-  .novo-chip {
-    margin: $novo-chip-list-margin;
-  }
+  gap: $novo-chip-list-margin;
 }
 
 .novo-chip-list-stacked {
