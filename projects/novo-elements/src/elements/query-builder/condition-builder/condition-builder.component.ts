@@ -187,15 +187,20 @@ export class ConditionBuilderComponent implements OnInit, OnChanges, AfterConten
     this.results$ = Promise.resolve(this.fieldConfig.options);
   }
 
-  reset(values: Record<string, any>): void {
-    // Reset form controls based on the values provided.
-    Object.entries(values).forEach(([key, value]) => {
-      this.parentForm.get(key).setValue(value, { emitEvent: false, onlySelf: true });
-    });
-    // Reinitialize the field and operator template.
+  /**
+   * Resets the input and operator view containers, regenerates the field templates,
+   * and marks the component for change detection.
+   *
+   * Use this method after updating form controls to reinitialize the input and
+   * operator fields so that the view reflects the latest form control changes.
+   *
+   * @returns void
+   */
+  resetInputAndOperator(): void {
+    this._inputOutlet.viewContainer.clear();
+    this._operatorOutlet.viewContainer.clear();
     this.createFieldTemplates();
-    // Make the form untouched.
-    this.parentForm.markAsPristine();
+    this.cdr.markForCheck();
   }
 
   getField() {
