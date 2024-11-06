@@ -53,7 +53,7 @@ import { NovoSelectElement } from 'novo-elements/elements/select';
           <novo-field #novoField class="address-location">
             <novo-chip-list [(ngModel)]="chipListModel" [ngModelOptions]="{ standalone: true }" (click)="openPlacesList(viewIndex)">
               <novo-chip *ngFor="let item of formGroup.get('value').value" (removed)="remove(item, formGroup, viewIndex)">
-                <novo-text ellipsis>{{ item.formatted_address }}</novo-text>
+                <novo-text ellipsis [tooltip]="item.formatted_address" tooltipOnOverflow>{{ item.formatted_address }}</novo-text>
                 <novo-icon novoChipRemove>close</novo-icon>
               </novo-chip>
               <input
