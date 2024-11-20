@@ -144,6 +144,11 @@ export class NovoDatePickerInputElement implements OnInit, OnChanges, AfterViewI
   @Input()
   disabledDateMessage: string;
   /**
+   * An optional date/month to show in the DatePicker initially besides the current date/month
+   */
+  @Input()
+  dateForInitialView?: Date;
+  /**
    * Day of the week the calendar should display first, Sunday=0...Saturday=6
    **/
   @Input()
