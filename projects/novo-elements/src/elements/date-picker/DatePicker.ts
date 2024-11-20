@@ -260,7 +260,9 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
     if (this.model) {
       this.modelToSelection(this.model);
     }
-    if (this.selection && this.selection.length) {
+    if (1) {
+      this.updateView(DateUtil.addDays(new Date(), -45));
+    } else if (this.selection && this.selection.length) {
       this.updateView(this.selection[0]);
     }
   }
