@@ -61,6 +61,7 @@ const DATE_VALUE_ACCESSOR = {
         [ngModel]="value"
         [weekStart]="weekStart"
         [hideFooter]="hideFooter"
+        [dateForInitialView]="dateForInitialView"
       ></novo-date-picker>
     </novo-overlay-template>
   `,
