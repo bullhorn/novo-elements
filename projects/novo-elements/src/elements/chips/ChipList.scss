@@ -1,21 +1,20 @@
 @import "../../styles/variables.scss";
 @import "../common/typography/text.mixins";
 
-$novo-chip-list-margin: 4px;
+$novo-chip-list-margin: 8px;
 $novo-chip-input-width: 100px;
 $novo-chip-input-margin: 4px;
+
+.novo-chip-list {
+  overflow: hidden;
+}
 
 .novo-chip-list-wrapper {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
-  margin: -$novo-chip-list-margin;
-
-  input.novo-input-element,
-  .novo-chip {
-    margin: $novo-chip-list-margin;
-  }
+  gap: $novo-chip-list-margin;
 }
 
 .novo-chip-list-stacked {
@@ -46,6 +45,7 @@ novo-field.novo-focused {
 
 input.novo-chip-input {
   width: 20px;
-  margin: $novo-chip-input-margin;
+  margin: 0 $novo-chip-input-margin;
   flex: 1 0 20px;
+  line-height: 1.5;
 }

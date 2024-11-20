@@ -177,7 +177,7 @@ export class NovoDateTimeFormatDirective extends IMaskDirective<any> implements 
 
   normalize(value: string) {
     const pattern = this.labels.dateFormat.toUpperCase();
-    return DateUtil.format(DateUtil.parse(value), pattern);
+    return DateUtil.format(value ? DateUtil.parse(value) : null, pattern);
   }
 
   formatAsIso(date: Date): string {

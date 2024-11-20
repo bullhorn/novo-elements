@@ -50,9 +50,9 @@
         overflow: hidden;
       }
       novo-chip-list {
-        width: 36rem;
+        flex-grow: 1;
         novo-chip {
-          max-width: 33rem;
+          max-width: min(33rem, 100% - 9px);
         }
       }
       novo-chips {
