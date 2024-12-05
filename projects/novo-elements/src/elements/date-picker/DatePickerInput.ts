@@ -61,6 +61,7 @@ const DATE_VALUE_ACCESSOR = {
         [ngModel]="value"
         [weekStart]="weekStart"
         [hideFooter]="hideFooter"
+        [dateForInitialView]="dateForInitialView"
       ></novo-date-picker>
     </novo-overlay-template>
   `,
@@ -143,6 +144,11 @@ export class NovoDatePickerInputElement implements OnInit, OnChanges, AfterViewI
    */
   @Input()
   disabledDateMessage: string;
+  /**
+   * An optional date/month to show in the DatePicker initially besides the current date/month
+   */
+  @Input()
+  dateForInitialView?: Date;
   /**
    * Day of the week the calendar should display first, Sunday=0...Saturday=6
    **/

@@ -159,6 +159,9 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
   @Input()
   disabledDateMessage: string;
 
+  @Input()
+  dateForInitialView?: Date;
+
   // Select callback for output
   @Output()
   onSelect: EventEmitter<any> = new EventEmitter(false);
@@ -260,7 +263,9 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
     if (this.model) {
       this.modelToSelection(this.model);
     }
-    if (this.selection && this.selection.length) {
+    if (this.dateForInitialView) {
+      this.updateView(this.dateForInitialView);
+    } else if (this.selection && this.selection.length) {
       this.updateView(this.selection[0]);
     }
   }
