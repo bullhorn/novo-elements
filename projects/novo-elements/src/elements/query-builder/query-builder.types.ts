@@ -32,8 +32,7 @@ export enum Operator {
   isEmpty = 'isEmpty',
   isNull = 'isNull',
   lessThan = 'lessThan',
-  insideRadius = 'insideRadius',
-  outsideRadius = 'outsideRadius',
+  radius = 'radius',
   within = 'within',
 }
 
@@ -91,7 +90,6 @@ export interface AddressData {
 export interface AddressRadius {
   value: number;
   units: AddressRadiusUnitsName;
-  operator?: string;
 }
 
 export interface AddressComponent {

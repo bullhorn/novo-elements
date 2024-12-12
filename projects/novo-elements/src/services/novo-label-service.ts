@@ -125,8 +125,7 @@ export class NovoLabelService {
   includeAll = 'Include All';
   exclude = 'Exclude';
   excludeAny = 'Exclude Any';
-  insideRadius = 'Radius (Inside)';
-  outsideRadius = 'Radius (Outside)';
+  radius = 'Radius';
   equals = 'Equals';
   equalTo = 'Equal To';
   greaterThan = 'Greater Than';
