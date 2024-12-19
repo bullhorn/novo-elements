@@ -148,12 +148,11 @@ export class NovoButtonElement implements OnChanges {
     this.element.nativeElement.focus(options);
   }
 
-  getIconClass(side?) {
-    if (this.icon && side === this.side) {
+  getIconClass(side) {
+    if (side === this.side) {
       return this.icon;
-    } else if (this.secondIcon && side !== this.secondSide) {
+    } else if (side === this.secondSide) {
       return this.secondSide;
     }
-    return this.icon;
   }
 }
