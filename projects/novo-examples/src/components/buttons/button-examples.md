@@ -68,3 +68,9 @@ Button parameters can be dynamically set and change at runtime. The styles shoul
 Buttons can display a loading state when given the "loading" parameter. When loading is true the button will be disabled and get a loading spinner.
 
 <code-example example="button-loading"></code-example>
+
+## Two Icons
+
+A second icon can be specified, and it will take the opposite side of the primary icon.
+
+<code-example example="button-two-icon"></code-example>
