@@ -173,7 +173,7 @@ export interface IDataTableSort {
 
 export interface IDataTableFilter {
   id: string;
-  value: string | string[];
+  value: any;
   transform?: Function;
   type?: string;
   selectedOption?: Object;
