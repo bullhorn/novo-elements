@@ -152,7 +152,7 @@ export class NovoButtonElement implements OnChanges {
     if (side === this.side) {
       return this.icon;
     } else if (side === this.secondSide) {
-      return this.secondSide;
+      return this.secondIcon;
     }
   }
 }
