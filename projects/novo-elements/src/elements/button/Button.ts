@@ -27,11 +27,11 @@ import { BooleanInput, Helpers, Key } from 'novo-elements/utils';
 
   template: `
     <!--Left Icon-->
-    <i *ngIf="icon && side === 'left' && !loading" [ngClass]="icon" class="novo-button-icon novo-button-icon-left"></i>
+    <i *ngIf="((icon && side === 'left') || (secondIcon && secondSide === 'left')) && !loading" [ngClass]="getIconClass('left')" class="novo-button-icon novo-button-icon-left"></i>
     <!--Transcluded Content-->
     <span #textContent class="button-contents"><ng-content></ng-content></span>
     <!--Right Icon-->
-    <i *ngIf="icon && side === 'right' && !loading" [ngClass]="icon" class="novo-button-icon novo-button-icon-right"></i>
+    <i *ngIf="((icon && side === 'right') || (secondIcon && secondSide === 'right')) && !loading" [ngClass]="getIconClass('right')" class="novo-button-icon novo-button-icon-right"></i>
     <!--Loading-->
     <i *ngIf="loading" class="loading novo-button-loading">
       <svg
@@ -74,6 +74,10 @@ export class NovoButtonElement implements OnChanges {
    */
   @Input() side: string = 'right';
   /**
+   * The side of the button to display the icon.
+   */
+  @Input() secondSide: string = this.side === 'right' ? 'left' : 'right';
+  /**
    * 	Sets the size of the button. One of: sm, lg
    */
   @Input() size: string;
@@ -99,6 +103,16 @@ export class NovoButtonElement implements OnChanges {
     return this._icon;
   }
 
+  @Input()
+  set secondIcon(secondIcon: string) {
+    if (secondIcon) {
+      this._secondIcon = `bhi-${secondIcon}`;
+    }
+  }
+  get secondIcon(): string {
+    return this._secondIcon;
+  }
+
   /**
    * Make the button non-interactive.
    */
@@ -111,6 +125,8 @@ export class NovoButtonElement implements OnChanges {
   disabledAttr: undefined | '' = undefined;
 
   private _icon: string;
+
+  private _secondIcon: string;
 
   constructor(public element: ElementRef) {}
 
@@ -130,5 +146,13 @@ export class NovoButtonElement implements OnChanges {
   /** Focuses the input. */
   focus(options?: FocusOptions): void {
     this.element.nativeElement.focus(options);
+  }
+
+  getIconClass(side) {
+    if (side === this.side) {
+      return this.icon;
+    } else if (side === this.secondSide) {
+      return this.secondIcon;
+    }
   }
 }
