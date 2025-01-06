@@ -69,6 +69,11 @@
     .novo-select-trigger {
       color: $grey !important;
       border-bottom: 1px dashed $grey !important;
+
+      &:hover {
+        color: $grey !important;
+        border-bottom: 1px dashed $grey !important;
+      }
     }
   }
 }

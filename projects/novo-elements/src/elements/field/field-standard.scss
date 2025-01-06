@@ -27,6 +27,12 @@
           color: $grey !important;
           border-bottom: 1px dashed $grey !important;
         }
+        &:not(.novo-focused):hover {
+          .novo-field-input {
+            color: $grey !important;
+            border-bottom: 1px dashed $grey !important;
+          }
+        }
       }
       .novo-field-input:disabled {
         color: $grey !important;
