@@ -62,6 +62,13 @@
     div[type="button"] {
       color: $grey;
     }
+    i {
+      color: $grey !important;
+    }
+    .novo-select-trigger {
+      color: $grey !important;
+      border-bottom: 1px dashed $grey !important;
+    }
   }
 }
 

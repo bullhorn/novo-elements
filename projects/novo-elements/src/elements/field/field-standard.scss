@@ -22,6 +22,16 @@
           border-bottom: 1px solid $negative !important;
         }
       }
+      &.novo-field-disabled {
+        .novo-field-input {
+          color: $grey !important;
+          border-bottom: 1px dashed $grey !important;
+        }
+      }
+      .novo-field-input:disabled {
+        color: $grey !important;
+        border-bottom: 1px dashed $grey !important;
+      }
     }
   }
 }
