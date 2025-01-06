@@ -57,7 +57,8 @@
       right: 0px;
     }
   }
-  &[disabled] {
+  &[disabled],
+  &.novo-select-disabled {
     pointer-events: none;
     div[type="button"] {
       color: $grey;
