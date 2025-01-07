@@ -74,7 +74,7 @@ export class NovoButtonElement implements OnChanges {
    */
   @Input() side: string = 'right';
   /**
-   * The side of the button to display the icon.
+   * If a second icon is specified it will default to the opposite side as the primary icon.
    */
   @Input() secondSide: string = this.side === 'right' ? 'left' : 'right';
   /**
@@ -103,6 +103,9 @@ export class NovoButtonElement implements OnChanges {
     return this._icon;
   }
 
+  /**
+   * A second icon can be specified, and it will take the opposite side of the primary icon.
+   */
   @Input()
   set secondIcon(secondIcon: string) {
     if (secondIcon) {
