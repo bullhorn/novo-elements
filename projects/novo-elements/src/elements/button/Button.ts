@@ -1,5 +1,15 @@
 // NG2
-import { ChangeDetectionStrategy, Component, ElementRef, HostBinding, HostListener, Input, OnChanges, SimpleChanges } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component, computed,
+  ElementRef,
+  HostBinding,
+  HostListener, input,
+  Input,
+  InputSignal,
+  OnChanges, signal, Signal,
+  SimpleChanges, WritableSignal,
+} from '@angular/core';
 import { BooleanInput, Helpers, Key } from 'novo-elements/utils';
 
 @Component({
@@ -27,11 +37,11 @@ import { BooleanInput, Helpers, Key } from 'novo-elements/utils';
 
   template: `
     <!--Left Icon-->
-    <i *ngIf="((icon && side === 'left') || (secondIcon && secondSide === 'left')) && !loading" [ngClass]="getIconClass('left')" class="novo-button-icon novo-button-icon-left"></i>
+    <i *ngIf="((icon && side === 'left') || (secondIcon && secondSide() === 'left')) && !loading" [ngClass]="leftSideIconClass()" class="novo-button-icon novo-button-icon-left"></i>
     <!--Transcluded Content-->
     <span #textContent class="button-contents"><ng-content></ng-content></span>
     <!--Right Icon-->
-    <i *ngIf="((icon && side === 'right') || (secondIcon && secondSide === 'right')) && !loading" [ngClass]="getIconClass('right')" class="novo-button-icon novo-button-icon-right"></i>
+    <i *ngIf="((icon && side === 'right') || (secondIcon && secondSide() === 'right')) && !loading" [ngClass]="rightSideIconClass()" class="novo-button-icon novo-button-icon-right"></i>
     <!--Loading-->
     <i *ngIf="loading" class="loading novo-button-loading">
       <svg
@@ -70,13 +80,12 @@ export class NovoButtonElement implements OnChanges {
   @Input() color: string;
   /**
    * The side of the button to display the icon.
-   * @deprecated
    */
   @Input() side: string = 'right';
   /**
    * If a second icon is specified it will default to the opposite side as the primary icon.
    */
-  @Input() secondSide: string = this.side === 'right' ? 'left' : 'right';
+  secondSide: Signal<string> = computed(() => this.side === 'right' ? 'left' : 'right')
   /**
    * 	Sets the size of the button. One of: sm, lg
    */
@@ -91,31 +100,42 @@ export class NovoButtonElement implements OnChanges {
   @Input() loading: boolean;
   /**
    * Optionally display `bullhorn-icon` with the button along with the text.
-   * @deprecated
    */
   @Input()
   set icon(icon: string) {
     if (icon) {
-      this._icon = `bhi-${icon}`;
+      this._icon.set(`bhi-${icon}`);
     }
   }
   get icon(): string {
-    return this._icon;
+    return this._icon();
   }
 
   /**
    * A second icon can be specified, and it will take the opposite side of the primary icon.
    */
   @Input()
-  set secondIcon(secondIcon: string) {
-    if (secondIcon) {
-      this._secondIcon = `bhi-${secondIcon}`;
+  set secondIcon(icon: string) {
+    if (icon) {
+      this._secondIcon.set(`bhi-${icon}`);
     }
   }
   get secondIcon(): string {
-    return this._secondIcon;
+    return this._secondIcon();
   }
 
+  leftSideIconClass: Signal<string> = computed(() => this.getIconClass('left'));
+
+  rightSideIconClass: Signal<string> = computed(() => this.getIconClass('right'));
+
+
+  getIconClass(side) {
+    if (side === this.side) {
+      return this._icon();
+    } else if (side === this.secondSide()) {
+      return this._secondIcon();
+    }
+  }
   /**
    * Make the button non-interactive.
    */
@@ -127,9 +147,9 @@ export class NovoButtonElement implements OnChanges {
   @HostBinding('attr.disabled')
   disabledAttr: undefined | '' = undefined;
 
-  private _icon: string;
+  private _icon: WritableSignal<string> = signal(undefined);
 
-  private _secondIcon: string;
+  private _secondIcon: WritableSignal<string> = signal(undefined);
 
   constructor(public element: ElementRef) {}
 
@@ -149,13 +169,5 @@ export class NovoButtonElement implements OnChanges {
   /** Focuses the input. */
   focus(options?: FocusOptions): void {
     this.element.nativeElement.focus(options);
-  }
-
-  getIconClass(side) {
-    if (side === this.side) {
-      return this.icon;
-    } else if (side === this.secondSide) {
-      return this.secondIcon;
-    }
   }
 }
