@@ -124,18 +124,10 @@ export class NovoButtonElement implements OnChanges {
     return this._secondIcon();
   }
 
-  leftSideIconClass: Signal<string> = computed(() => this.getIconClass('left'));
+  leftSideIconClass: Signal<string> = computed(() => this.side === 'left' ? this._icon() : this._secondIcon());
 
-  rightSideIconClass: Signal<string> = computed(() => this.getIconClass('right'));
+  rightSideIconClass: Signal<string> = computed(() => this.side === 'right' ? this._icon() : this._secondIcon());
 
-
-  getIconClass(side) {
-    if (side === this.side) {
-      return this._icon();
-    } else if (side === this.secondSide()) {
-      return this._secondIcon();
-    }
-  }
   /**
    * Make the button non-interactive.
    */
