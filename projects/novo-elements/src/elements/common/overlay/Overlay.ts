@@ -5,6 +5,7 @@ import {
   HorizontalConnectionPos,
   Overlay,
   OverlayConfig,
+  OverlayContainer,
   OverlayRef,
   ScrollStrategy,
   VerticalConnectionPos,
@@ -17,6 +18,7 @@ import {
   Component,
   ElementRef,
   EventEmitter,
+  inject,
   Inject,
   Input,
   NgZone,
@@ -89,6 +91,8 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
   // The subscription for closing actions (some are bound to document)
   protected closingActionsSubscription: Subscription;
   private _parent: ElementRef;
+  private overlayContainer: OverlayContainer = inject(OverlayContainer);
+  private overlayContext: string;
 
   constructor(
     protected overlay: Overlay,
@@ -131,6 +135,9 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
     this.changeDetectorRef.markForCheck();
     setTimeout(() => {
       if (this.overlayRef) {
+        if (this.overlayContainer.getContainerElement()?.attributes.getNamedItem('novoContext')) {
+            this.overlayContext = this.overlayContainer.getContainerElement().attributes.getNamedItem('novoContext').value;
+        }
         this.overlayRef.updatePosition();
         this.opening.emit(true);
         setTimeout(() => {
@@ -186,6 +193,7 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
           this.isInDocument(clickTarget) &&
           !this.getConnectedElement().nativeElement.contains(clickTarget) &&
           (!!this.overlayRef && !this.overlayRef.overlayElement.contains(clickTarget)) &&
+          this.elementIsInContext(clickTarget) &&
           !this.elementIsInNestedOverlay(clickTarget);
         if (this.panelOpen && !!this.overlayRef && this.overlayRef.overlayElement.contains(clickTarget) && this.closeOnSelect) {
           this.select.emit(event);
@@ -340,6 +348,20 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
 
   protected getConnectedElement(): ElementRef {
     return this.parent;
+  }
+
+  private elementIsInContext(el) {
+    // this is to support multiple overlay contexts
+    if (this.overlayContext) {
+      while (el.parentNode) {
+        if (el.localName === this.overlayContext) {
+          return true;
+        }
+        el = el.parentNode;
+      }
+      return false;
+    }
+    return true;
   }
 
   protected elementIsInNestedOverlay(el): boolean {
