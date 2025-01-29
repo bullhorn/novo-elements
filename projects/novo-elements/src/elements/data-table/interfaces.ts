@@ -104,6 +104,7 @@ export interface IDataTablePaginationOptions {
   loading?: boolean;
   errorLoading?: boolean;
   onFooter?: boolean;
+  showPaginationTotalRecordCount?: boolean;
 }
 
 export interface IDataTableColumnSortConfig {

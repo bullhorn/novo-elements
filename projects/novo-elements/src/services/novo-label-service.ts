@@ -182,6 +182,10 @@ export class NovoLabelService {
     return `Showing ${shown} of ${total} Results.`;
   }
 
+  ofXAmount(amount: number) {
+    return `of ${amount}`;
+  }
+
   totalRecords(total: number, select = false) {
     return select ? `Select all ${total} records.` : `De-select remaining ${total} records.`;
   }

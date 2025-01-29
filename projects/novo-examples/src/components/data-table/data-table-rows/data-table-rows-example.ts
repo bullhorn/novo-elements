@@ -45,6 +45,11 @@ export class DataTableRowsExample implements AfterViewInit {
     { label: 'Bottom', value: true },
   ];
   public loadedPaginationPlacement: boolean = false;
+  public showPaginationTotalCountOptions: any[] = [
+    { label: 'Disabled', value: false },
+    { label: 'Enabled', value: true },
+  ];
+  public loadedPaginationTotalCountOptions: boolean = false;
   public selectionOptions: IDataTableSelectionOption[] = [];
   public loadedPaginationType: string = 'standard';
   public globalSearchOptions: any[] = [
@@ -372,6 +377,11 @@ export class DataTableRowsExample implements AfterViewInit {
 
   public switchPaginationPlacement(onFooter: boolean) {
     this.sharedPaginationOptions = Object.assign({}, this.sharedPaginationOptions, { onFooter });
+    this.ref.detectChanges();
+  }
+
+  public switchShowPaginationTotalCount(enabled: boolean) {
+    this.sharedPaginationOptions = Object.assign({}, this.sharedPaginationOptions, { showPaginationTotalRecordCount: enabled });
     this.ref.detectChanges();
   }
 
