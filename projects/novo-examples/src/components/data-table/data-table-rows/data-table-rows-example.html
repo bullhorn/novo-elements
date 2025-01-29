@@ -6,9 +6,6 @@
 <h6>Change Pagination Placement</h6>
 <novo-tiles [options]="paginationPlacementOptions" (onChange)="switchPaginationPlacement($event)"
   [(ngModel)]="loadedPaginationPlacement"></novo-tiles>
-<h6>Show Total Count with Pagination</h6>
-  <novo-tiles [options]="showPaginationTotalCountOptions" (onChange)="switchShowPaginationTotalCount($event)"
-    [(ngModel)]="loadedPaginationTotalCountOptions"></novo-tiles>
 <h6>Toggle Global Search</h6>
 <novo-tiles [options]="globalSearchOptions" (onChange)="toggleGlobalSearch($event)" [(ngModel)]="loadedGlobalSearch">
 </novo-tiles>
