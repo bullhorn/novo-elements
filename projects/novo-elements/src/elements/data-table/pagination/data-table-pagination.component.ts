@@ -76,7 +76,7 @@ const MAX_PAGES_DISPLAYED = 5;
         [attr.data-feature-id]="dataFeatureId"
       >
       </novo-select>
-      <div *ngIf="showPaginationTotalRecordCount" class="novo-data-table-of-total-amount" data-automation-id="novo-data-table-of-total-amount">
+      <div *ngIf="showPaginationTotalRecordCount && (length !== undefined || length !== null)" class="novo-data-table-of-total-amount" data-automation-id="novo-data-table-of-total-amount">
         {{ labels.ofXAmount(length) }}
       </div>
       <span class="spacer"></span>
