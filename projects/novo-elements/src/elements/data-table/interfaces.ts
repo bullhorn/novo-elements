@@ -301,4 +301,4 @@ export interface IKeywordBlock {
 
 export type NestedKeywordGroups = IKeywordBlock[];
 
-export type SearchKeywords = string[] | NestedKeywordGroups;
+export type SearchKeywords = string[] | NestedKeywordGroups | string;
