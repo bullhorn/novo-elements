@@ -34,7 +34,7 @@ import { filter, first, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'novo-overlay-template',
-  styleUrls: ['./Overlay.scss'],
+  styleUrls: ['Overlay.scss'],
   template: `
     <ng-template>
       <div class="novo-overlay-panel" role="listbox" [id]="id" #panel><ng-content></ng-content></div>
