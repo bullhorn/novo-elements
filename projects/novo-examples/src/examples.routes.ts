@@ -877,6 +877,9 @@ export class ButtonDevelopPage {
 <h2>Loading</h2>
 <p>Buttons can display a loading state when given the &quot;loading&quot; parameter. When loading is true the button will be disabled and get a loading spinner.</p>
 <p><code-example example="button-loading"></code-example></p>
+<h2>Two Icons</h2>
+<p>A second icon can be specified, and it will take the opposite side of the primary icon.</p>
+<p><code-example example="button-two-icon"></code-example></p>
 `,
   host: { class: 'markdown-page' }
 })
