@@ -15,10 +15,10 @@ import { AbstractConditionFieldDef } from './abstract-condition.definition';
   template: `
     <!-- fieldTypes should be UPPERCASE -->
     <ng-container novoConditionFieldDef="STRING">
-      <novo-field *novoConditionOperatorsDef="let formGroup" [formGroup]="formGroup">
+      <novo-field *novoConditionOperatorsDef="let formGroup; fieldMeta as meta" [formGroup]="formGroup">
         <novo-select [placeholder]="labels.operator" formControlName="operator" (onSelect)="onOperatorSelect(formGroup)">
           <novo-option value="includeAny">{{ labels.includeAny }}</novo-option>
-          <novo-option value="includeAll">{{ labels.includeAll }}</novo-option>
+          <novo-option value="includeAll" *ngIf="!meta?.removeIncludeAll">{{ labels.includeAll }}</novo-option>
           <novo-option value="excludeAny">{{ labels.exclude }}</novo-option>
           <novo-option value="isEmpty">{{ labels.isEmpty }}</novo-option>
         </novo-select>

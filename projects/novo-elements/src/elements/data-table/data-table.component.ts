@@ -297,6 +297,7 @@ import { DataTableState } from './state/data-table-state.service';
         [loading]="paginationOptions.loading"
         [errorLoading]="paginationOptions.errorLoading"
         [paginationRefreshSubject]="paginationRefreshSubject"
+        [showPaginationTotalRecordCount]="true"
       >
       </novo-data-table-pagination>
     </footer>
