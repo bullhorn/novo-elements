@@ -48,7 +48,7 @@ import { DataTableState } from '../state/data-table-state.service';
         [value]="sortValue"></novo-sort-button>
       <novo-dropdown
         *ngIf="config.filterable"
-        side="right"
+        side="left"
         parentScrollSelector=".novo-data-table-container"
         containerClass="data-table-dropdown"
         data-automation-id="novo-data-table-filter"
