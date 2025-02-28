@@ -16,6 +16,7 @@ export interface IDataTablePreferences {
   autobuildEntity?: AutobuildEntityData;
   hasUnsavedChanges?: boolean;
   unsavedChanges?: any;
+  useBooleanKeywords?: boolean;
 }
 
 export interface AutobuildEntityData {
@@ -28,6 +29,7 @@ export interface DataTableWhere {
   query: string;
   criteria?: AdaptiveCriteria;
   keywords?: SearchKeywords;
+  booleanKeywords?: string;
   scoreByEntityId?: number;
   form: any;
 }
@@ -173,7 +175,7 @@ export interface IDataTableSort {
 
 export interface IDataTableFilter {
   id: string;
-  value: string | string[];
+  value: any;
   transform?: Function;
   type?: string;
   selectedOption?: Object;
@@ -295,6 +297,7 @@ export interface IKeywordGroup {
 }
 
 export interface IKeywordBlock {
+  operator?: 'and' | 'or';
   exclude?: boolean;
   keywordGroups: IKeywordGroup[];
 }

@@ -265,7 +265,9 @@ export class NovoPickerElement implements OnInit {
 
     if (wipeTerm) {
       this.term = '';
-      this.popup.instance.customTextValue = null;
+      if (this.popup?.instance) {
+        this.popup.instance.customTextValue = null;
+      }
       this.hideResults();
     }
     this.ref.markForCheck();
