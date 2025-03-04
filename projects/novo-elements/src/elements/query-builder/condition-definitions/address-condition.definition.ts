@@ -55,12 +55,12 @@ import { NovoSelectElement } from 'novo-elements/elements/select';
               type="number"
               min="1"
               step="1"
-              placeholder="{{ labels.miles }}"
+              placeholder="{{ unitsLabel() }}"
               [value]="radius()"
               #distanceInput
               (input)="onRadiusSelect(formGroup, $event)"
             />
-            <span *ngIf="!!this.radius()" style="margin-left: 8px;">{{ labels.miles }}</span>
+            <span *ngIf="!!this.radius()" style="margin-left: 8px;">{{ unitsLabel() }}</span>
           </novo-field>
           <novo-field #novoField class="address-location">
             <novo-chip-list [(ngModel)]="chipListModel" [ngModelOptions]="{ standalone: true }" (click)="openPlacesList(viewIndex)">
@@ -113,6 +113,9 @@ export class NovoDefaultAddressConditionDef extends AbstractConditionFieldDef im
   );
   radiusEnabled: Signal<boolean> = computed(() =>
     this.config()?.radiusEnabled || this.defaults.radiusEnabled
+  );
+  unitsLabel: Signal<string> = computed(() =>
+    this.radiusUnits() === RadiusUnits.miles ? this.labels.miles : this.labels.km
   );
 
   radius: WritableSignal<number> = signal(null);
