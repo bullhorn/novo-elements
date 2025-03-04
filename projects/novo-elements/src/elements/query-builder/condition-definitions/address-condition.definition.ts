@@ -55,11 +55,12 @@ import { NovoSelectElement } from 'novo-elements/elements/select';
               type="number"
               min="1"
               step="1"
-              placeholder="Miles"
+              placeholder="{{ labels.miles }}"
+              [value]="radius()"
               #distanceInput
               (input)="onRadiusSelect(formGroup, $event)"
             />
-            <span *ngIf="!!this.radius()" style="margin-left: 8px;">Miles</span>
+            <span *ngIf="!!this.radius()" style="margin-left: 8px;">{{ labels.miles }}</span>
           </novo-field>
           <novo-field #novoField class="address-location">
             <novo-chip-list [(ngModel)]="chipListModel" [ngModelOptions]="{ standalone: true }" (click)="openPlacesList(viewIndex)">
