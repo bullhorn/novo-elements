@@ -181,6 +181,7 @@ export class JustCriteriaExample implements OnInit {
             operator: 'includeAny',
             scope: 'Candidate',
             value: null,
+            supportingValue: 5,
           },
         ],
       },

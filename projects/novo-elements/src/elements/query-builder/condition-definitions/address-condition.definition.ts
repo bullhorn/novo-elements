@@ -9,11 +9,9 @@ import {
   OnDestroy,
   QueryList,
   Signal,
-  signal,
   ViewChild,
   ViewChildren,
   ViewEncapsulation,
-  WritableSignal,
 } from '@angular/core';
 import { AbstractControl, UntypedFormGroup } from '@angular/forms';
 import { NovoPickerToggleElement } from 'novo-elements/elements/field';
@@ -55,12 +53,11 @@ import { NovoSelectElement } from 'novo-elements/elements/select';
               type="number"
               min="1"
               step="1"
-              placeholder="{{ unitsLabel() }}"
-              [value]="radius()"
+              formControlName="supportingValue"
               #distanceInput
               (input)="onRadiusSelect(formGroup, $event)"
             />
-            <span *ngIf="!!this.radius()" style="margin-left: 8px;">{{ unitsLabel() }}</span>
+            <span style="margin-left: 8px;">{{ unitsLabel() }}</span>
           </novo-field>
           <novo-field #novoField class="address-location">
             <novo-chip-list [(ngModel)]="chipListModel" [ngModelOptions]="{ standalone: true }" (click)="openPlacesList(viewIndex)">
@@ -118,7 +115,6 @@ export class NovoDefaultAddressConditionDef extends AbstractConditionFieldDef im
     this.radiusUnits() === RadiusUnits.miles ? this.labels.miles : this.labels.km
   );
 
-  radius: WritableSignal<number> = signal(null);
   radiusOptions: Signal<{ label: string; value: number; }[]> = computed(() => {
     const unitsLabel = this.radiusUnits() === RadiusUnits.miles ? this.labels.miles : this.labels.km;
     return this.radiusValues.map(value => ({
@@ -138,17 +134,6 @@ export class NovoDefaultAddressConditionDef extends AbstractConditionFieldDef im
   constructor(labelService: NovoLabelService) {
     super(labelService);
     this.defineOperatorEditGroup(Operator.includeAny, Operator.excludeAny, Operator.insideRadius, Operator.outsideRadius);
-  }
-
-  frameAfterViewInit(): void {
-    super.frameAfterViewInit();
-    // Initialize the radius value from existing data
-    this.assignRadiusFromValue();
-
-    // Update the radius on address value changes
-    this._addressChangesSubscription = this.inputChildren.changes.subscribe(() => {
-      this.assignRadiusFromValue();
-    });
   }
 
   ngOnDestroy() {
@@ -237,20 +222,9 @@ export class NovoDefaultAddressConditionDef extends AbstractConditionFieldDef im
   }
 
   onRadiusSelect(formGroup: AbstractControl, event): void {
-    this.radius.set(event.target.value);
     // We must dirty the form explicitly to show up as a user modification when it was done programmatically
     formGroup.get('value').setValue(this.updateRadiusInValues(formGroup, this.getValue(formGroup)));
     formGroup.markAsDirty();
-  }
-
-  private assignRadiusFromValue() {
-    if (this.placesPicker?.model?.length) {
-      const addressData: AddressData = this.placesPicker.model[0];
-      const initialRadius = addressData.radius?.value;
-      if (initialRadius && Helpers.isNumber(initialRadius)) {
-        this.radius.set(initialRadius);
-      }
-    }
   }
 
   private updateRadiusInValues(formGroup: AbstractControl, values: AddressData[]): AddressData[] {
@@ -262,17 +236,13 @@ export class NovoDefaultAddressConditionDef extends AbstractConditionFieldDef im
 
   private getRadiusData(formGroup: AbstractControl): AddressRadius {
     return {
-      value: this.radius(),
+      value: formGroup.value.supportingValue,
       units: this.radiusUnits(),
       operator: formGroup.value.operator,
     };
   }
 
-  private getRadius(formGroup: AbstractControl): number | undefined {
-    return this.isRadiusOperatorSelected(formGroup) ? this.radius() : undefined;
-  }
-
   private isRadiusOperatorSelected(formGroup: AbstractControl): boolean {
-    return ['insideRadius', 'outsideRadius'].includes(formGroup.get('operator')?.value) && this.radius !== null;
+    return ['insideRadius', 'outsideRadius'].includes(formGroup.get('operator')?.value) && formGroup.value?.supportingValue !== null;
   }
 }

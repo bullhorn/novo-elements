@@ -45,6 +45,7 @@ export interface Condition {
   operator: OperatorName | string;
   scope?: string;
   value: any;
+  supportingValue?: any;
 }
 
 export interface Criteria {
