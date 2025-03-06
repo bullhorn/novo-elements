@@ -215,7 +215,7 @@ export class NovoDefaultAddressConditionDef extends AbstractConditionFieldDef im
   onOperatorSelect(formGroup: UntypedFormGroup): void {
     const previousOperator = this._previousOperatorValue;
     super.onOperatorSelect(formGroup);
-    if ([previousOperator, formGroup.get('operator').getRawValue()].indexOf(Operator.insideRadius) !== -1 && //
+    if ([previousOperator, formGroup.get('operator').getRawValue()].indexOf(Operator.insideRadius) !== -1 &&
         formGroup.get('value').getRawValue() != null) {
       formGroup.get('value').setValue(this.updateRadiusInValues(formGroup, this.getValue(formGroup)));
     }
