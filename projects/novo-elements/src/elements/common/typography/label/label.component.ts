@@ -1,5 +1,5 @@
 // NG2
-import { Component } from '@angular/core';
+import { Component, HostBinding, input } from '@angular/core';
 import { NovoBaseTextElement } from '../base/base-text.component';
 
 /**
@@ -13,6 +13,8 @@ import { NovoBaseTextElement } from '../base/base-text.component';
  * <novo-label color="grapefruit">Label</novo-label>
  */
 
+let nextId = 0;
+
 @Component({
   selector: 'novo-label,[novo-label]',
   template: ` <ng-content></ng-content> `,
@@ -21,4 +23,13 @@ import { NovoBaseTextElement } from '../base/base-text.component';
     class: 'novo-label',
   },
 })
-export class NovoLabel extends NovoBaseTextElement {}
+export class NovoLabel extends NovoBaseTextElement {
+  @HostBinding('attr.id')
+  public id: string;
+
+  inputId = input(null, { alias: 'id' });
+
+  ngOnInit() {
+    this.id = this.inputId() || `novo-label-${++nextId}`;
+  }
+}
