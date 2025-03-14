@@ -47,7 +47,7 @@ import { NovoSelectElement } from 'novo-elements/elements/select';
       </novo-field>
       <ng-container *novoConditionInputDef="let formGroup; viewIndex as viewIndex; fieldMeta as meta" [formGroup]="formGroup">
         <novo-flex justify="space-between" align="end">
-          <novo-field #input *ngIf="['insideRadius', 'outsideRadius'].includes(formGroup.value.operator)" class="address-radius">
+          <novo-field #input *ngIf="['radius', 'insideRadius', 'outsideRadius'].includes(formGroup.value.operator)" class="address-radius">
             <input
               novoInput
               type="number"
