@@ -1,6 +1,7 @@
+import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 import { DataSource } from '@angular/cdk/table';
-import { ChangeDetectorRef } from '@angular/core';
-import { merge, Observable, of } from 'rxjs';
+import { ChangeDetectorRef, ElementRef } from '@angular/core';
+import { BehaviorSubject, merge, Observable, of } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 import { IDataTableService } from './interfaces';
 import { DataTableState } from './state/data-table-state.service';
@@ -11,9 +12,26 @@ export class DataTableSource<T> extends DataSource<T> {
   public current = 0;
   public loading = false;
   public pristine = true;
-  public data: T[];
+  public headerRow: ElementRef;
 
   private totalSet: boolean = false;
+
+  itemsLoadedAtOnce = 20; // set dynamically based on row height and viewport?
+  itemSize = 33;
+  rowHeight = 33;
+  offset = 0;
+  private readonly visibleData: BehaviorSubject<any[]> = new BehaviorSubject([]);
+
+  private _data: any[];
+  get data(): any[] {
+    return this._data.slice();
+  }
+  set data(data: any[]) {
+    this._data = data;
+    this.viewport.scrollToOffset(0);
+    this.viewport.setTotalContentSize(this.itemSize * data.length);
+    this.visibleData.next(this._data.slice(0, this.itemsLoadedAtOnce));
+  }
 
   get totallyEmpty(): boolean {
     return this.total === 0;
@@ -23,13 +41,35 @@ export class DataTableSource<T> extends DataSource<T> {
     return this.current === 0;
   }
 
-  constructor(private tableService: IDataTableService<T>, private state: DataTableState<T>, private ref: ChangeDetectorRef) {
+  constructor(
+    private tableService: IDataTableService<T>,
+    private state: DataTableState<T>,
+    private ref: ChangeDetectorRef,
+    private viewport: CdkVirtualScrollViewport,
+  ) {
     super();
+
+    this.viewport.elementScrolled().subscribe((event: any) => {
+      const start = Math.floor(event.currentTarget.scrollTop / this.rowHeight);
+      const prevExtraData = start > (this.itemsLoadedAtOnce / 2) ? (this.itemsLoadedAtOnce / 2) : start;
+      const slicedData = this._data.slice(start - prevExtraData, start + (this.itemsLoadedAtOnce - prevExtraData));
+      this.offset = this.rowHeight * (start - prevExtraData);
+      this.viewport.setRenderedContentOffset(this.offset);
+      console.log('offset', this.offset, start, this.rowHeight)
+      console.log('viewport', this.viewport.getViewportSize(), this.viewport)
+      let haha = start * this.rowHeight * 1.02;
+      let magicNumber = haha * .005;
+      console.log('headerOffset', haha, this.viewport.getViewportSize(), magicNumber)
+      let headerOffset = haha < this.viewport.getViewportSize() - 35 ? 0 : this.viewport.getViewportSize() - 35 + magicNumber;
+      this.headerRow.nativeElement.style.transform = `translateY(${headerOffset}px)`;
+      console.log('UPDATE scroll', this.headerRow.nativeElement.style.transform)
+      this.visibleData.next(slicedData);
+    });
   }
 
   public connect(): Observable<any> {
     const displayDataChanges: any = [this.state.updates];
-    return merge(...displayDataChanges).pipe(
+    const initialData = merge(...displayDataChanges).pipe(
       startWith(null),
       switchMap(() => {
         this.pristine = false;
@@ -80,6 +120,7 @@ export class DataTableSource<T> extends DataSource<T> {
         return of(null);
       }),
     );
+    return merge(initialData, this.visibleData);
   }
 
   public disconnect(): void {}

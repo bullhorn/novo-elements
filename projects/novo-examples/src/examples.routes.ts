@@ -1073,14 +1073,19 @@ export class ComponentsPage {
 <p>Show Row Details (first table) Hide Row Details (first table)</p>
 <h5>Passing an array of rows</h5>
 <p><code-example example="data-table-rows"></code-example></p>
-<h5>Using the static data service</h5>
-<p><code-example example="data-table-service"></code-example></p>
-<h5>Working with remote data</h5>
-<h5>Using the remote data service</h5>
-<p>Data won't actually change, the URL will update with the proper request it will make!</p>
-<h6>URL</h6>
-<p><code-example example="data-table-remote"></code-example></p>
-`,
+<!-- ##### Using the static data service
+
+<code-example example="data-table-service"></code-example>
+
+##### Working with remote data
+
+##### Using the remote data service
+
+Data won't actually change, the URL will update with the proper request it will make!
+
+###### URL
+
+<code-example example="data-table-remote"></code-example> -->`,
   host: { class: 'markdown-page' }
 })
 export class DataTablePage {

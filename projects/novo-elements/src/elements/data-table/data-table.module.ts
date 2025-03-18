@@ -3,6 +3,7 @@ import { CdkTableModule } from '@angular/cdk/table';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { MatTableModule } from '@angular/material/table';
 import { NovoButtonModule } from 'novo-elements/elements/button';
 import { NovoCheckboxModule } from 'novo-elements/elements/checkbox';
 import { NovoCommonModule, NovoOptionModule } from 'novo-elements/elements/common';
@@ -50,6 +51,7 @@ import { DataTableState } from './state/data-table-state.service';
     CdkTableModule,
     CommonModule,
     FormsModule,
+    MatTableModule,
     NovoIconModule,
     NovoButtonModule,
     NovoDropdownModule,

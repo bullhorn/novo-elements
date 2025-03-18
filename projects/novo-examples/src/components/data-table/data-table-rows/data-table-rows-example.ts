@@ -280,7 +280,7 @@ export class DataTableRowsExample implements AfterViewInit {
   ];
   public sharedPaginationOptions: IDataTablePaginationOptions = {
     theme: 'standard',
-    pageSize: 10,
+    pageSize: 100,
     pageSizeOptions: [10, 50, 100, 250, 500],
   };
   public widePaginationOptions: IDataTablePaginationOptions = {
@@ -309,7 +309,7 @@ export class DataTableRowsExample implements AfterViewInit {
   public selectedRecordId: string = '';
 
   constructor(private ref: ChangeDetectorRef, private modalService: NovoModalService) {
-    for (let i = 0; i < 1000; i++) {
+    for (let i = 1; i <= 1000; i++) {
       const day = i < 500 ? dateFns.subDays(new Date(), i) : dateFns.addDays(new Date(), i - 500);
       this.staticDataSet1.push({
         id: i,
@@ -426,7 +426,7 @@ export class DataTableRowsExample implements AfterViewInit {
   }
 
   public resized(event): void {
-    console.log('Column Width changed (persist manually): ', event); // tslint:disable-line
+    // console.log('Column Width changed (persist manually): ', event); // tslint:disable-line
   }
 
   public refresh(): void {

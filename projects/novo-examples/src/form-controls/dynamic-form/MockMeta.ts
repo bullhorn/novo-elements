@@ -86,8 +86,8 @@ export const MockMeta = {
       label: 'Date',
       required: true,
       sortOrder: 90,
-      dateFormat: 'ddd MMM DD, YYYY', // Add this to your MetaData to override the dateFormat
-      defaultValue: new Date(2016, 1, 1),
+      // dateFormat: 'ddd MMM DD, YYYY', // Add this to your MetaData to override the dateFormat
+      defaultValue: new Date(2016, 0, 30),
     },
     {
       name: 'time',

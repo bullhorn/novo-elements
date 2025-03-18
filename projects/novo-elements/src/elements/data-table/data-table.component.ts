@@ -1,7 +1,9 @@
 import { animate, state as animState, style, transition, trigger } from '@angular/animations';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import { CdkVirtualScrollViewport, VIRTUAL_SCROLL_STRATEGY } from '@angular/cdk/scrolling';
 import {
   AfterContentInit,
+  AfterViewInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
@@ -9,8 +11,10 @@ import {
   ElementRef,
   EventEmitter,
   HostBinding,
+  Inject,
   Input,
   OnDestroy,
+  OnInit,
   Output,
   QueryList,
   TemplateRef,
@@ -36,6 +40,7 @@ import {
 } from './interfaces';
 import { ListInteractionDictionary, ListInteractionEvent } from './ListInteractionTypes';
 import { StaticDataTableService } from './services/static-data-table.service';
+import { NovoDataTableVirtualScrollStrategy } from './services/data-table-virtual-scroll-strategy.service';
 import { DataTableState } from './state/data-table-state.service';
 
 @Component({
@@ -96,68 +101,61 @@ import { DataTableState } from './state/data-table-state.service';
         class="novo-data-table-container"
         [ngClass]="{ 'novo-data-table-container-fixed': fixedHeader }"
         [class.empty-user-filtered]="dataSource?.currentlyEmpty && state.userFiltered"
-        [class.empty]="empty && !dataSource?.loading && !loading && !state.userFiltered && !dataSource.pristine"
-      >
-        <cdk-table
-          *ngIf="columns?.length > 0 && columnsLoaded && dataSource"
-          [dataSource]="dataSource"
-          [trackBy]="trackByFn"
-          novoDataTableSortFilter
-          [class.expandable]="expandable"
-          [class.empty]="dataSource?.currentlyEmpty && state.userFiltered"
-          [hidden]="empty && !state.userFiltered"
-        >
-          <ng-container cdkColumnDef="selection">
-            <novo-data-table-checkbox-header-cell *cdkHeaderCellDef [maxSelected]="maxSelected"></novo-data-table-checkbox-header-cell>
-            <novo-data-table-checkbox-cell
-              *cdkCellDef="let row; let i = index"
+        [class.empty]="empty && !dataSource?.loading && !loading && !state.userFiltered && !dataSource.pristine">
+        <cdk-virtual-scroll-viewport [style.height.px]="tableHeight">
+          <cdk-table
+            *ngIf="columns?.length > 0 && columnsLoaded && dataSource"
+            [dataSource]="dataSource"
+            [trackBy]="trackByFn"
+            novoDataTableSortFilter
+            [class.expandable]="expandable"
+            [class.empty]="dataSource?.currentlyEmpty && state.userFiltered"
+            [hidden]="empty && !state.userFiltered">
+            <ng-container cdkColumnDef="selection">
+              <novo-data-table-checkbox-header-cell *cdkHeaderCellDef [maxSelected]="maxSelected" />
+              <novo-data-table-checkbox-cell *cdkCellDef="let row; let i = index" [row]="row" [maxSelected]="maxSelected" />
+            </ng-container>
+            <ng-container cdkColumnDef="expand">
+              <novo-data-table-expand-header-cell *cdkHeaderCellDef />
+              <novo-data-table-expand-cell *cdkCellDef="let row; let i = index" [row]="row" />
+            </ng-container>
+            <ng-container *ngFor="let column of columns; trackBy: trackColumnsBy" [cdkColumnDef]="column.id">
+              <novo-data-table-header-cell
+                *cdkHeaderCellDef
+                [column]="column"
+                [filterTemplate]="templates['column-filter-' + (column.filterable?.customTemplate || column.id)]"
+                [novo-data-table-cell-config]="column"
+                [resized]="resized"
+                [defaultSort]="defaultSort"
+                [allowMultipleFilters]="allowMultipleFilters"
+                [class.empty]="column?.type === 'action' && !column?.label"
+                [class.button-header-cell]="column?.type === 'expand' || (column?.type === 'action' && !column?.action?.options)"
+                [class.dropdown-header-cell]="column?.type === 'action' && column?.action?.options"
+                [class.fixed-header]="fixedHeader" />
+              <novo-data-table-cell
+                *cdkCellDef="let row"
+                [resized]="resized"
+                [column]="column"
+                [row]="row"
+                [template]="columnToTemplate[column.id]"
+                [class.empty]="column?.type === 'action' && !column?.label"
+                [class.button-cell]="column?.type === 'expand' || (column?.type === 'action' && !column?.action?.options)"
+                [class.dropdown-cell]="column?.type === 'action' && column?.action?.options" />
+            </ng-container>
+            <novo-data-table-header-row
+              #headerRow
+              *cdkHeaderRowDef="displayedColumns"
+              [fixedHeader]="fixedHeader"
+              data-automation-id="novo-data-table-header-row" />
+            <novo-data-table-row
+              *cdkRowDef="let row; columns: displayedColumns"
+              [ngClass]="{ active: row[rowIdentifier] == activeRowIdentifier }"
+              [novoDataTableExpand]="detailRowTemplate"
               [row]="row"
-              [maxSelected]="maxSelected"
-            ></novo-data-table-checkbox-cell>
-          </ng-container>
-          <ng-container cdkColumnDef="expand">
-            <novo-data-table-expand-header-cell *cdkHeaderCellDef></novo-data-table-expand-header-cell>
-            <novo-data-table-expand-cell *cdkCellDef="let row; let i = index" [row]="row"></novo-data-table-expand-cell>
-          </ng-container>
-          <ng-container *ngFor="let column of columns; trackBy: trackColumnsBy" [cdkColumnDef]="column.id">
-            <novo-data-table-header-cell
-              *cdkHeaderCellDef
-              [column]="column"
-              [filterTemplate]="templates['column-filter-' + (column.filterable?.customTemplate || column.id)]"
-              [novo-data-table-cell-config]="column"
-              [resized]="resized"
-              [defaultSort]="defaultSort"
-              [allowMultipleFilters]="allowMultipleFilters"
-              [class.empty]="column?.type === 'action' && !column?.label"
-              [class.button-header-cell]="column?.type === 'expand' || (column?.type === 'action' && !column?.action?.options)"
-              [class.dropdown-header-cell]="column?.type === 'action' && column?.action?.options"
-              [class.fixed-header]="fixedHeader"
-            ></novo-data-table-header-cell>
-            <novo-data-table-cell
-              *cdkCellDef="let row"
-              [resized]="resized"
-              [column]="column"
-              [row]="row"
-              [template]="columnToTemplate[column.id]"
-              [class.empty]="column?.type === 'action' && !column?.label"
-              [class.button-cell]="column?.type === 'expand' || (column?.type === 'action' && !column?.action?.options)"
-              [class.dropdown-cell]="column?.type === 'action' && column?.action?.options"
-            ></novo-data-table-cell>
-          </ng-container>
-          <novo-data-table-header-row
-            *cdkHeaderRowDef="displayedColumns"
-            [fixedHeader]="fixedHeader"
-            data-automation-id="novo-data-table-header-row"
-          ></novo-data-table-header-row>
-          <novo-data-table-row
-            *cdkRowDef="let row; columns: displayedColumns"
-            [ngClass]="{ active: row[rowIdentifier] == activeRowIdentifier }"
-            [novoDataTableExpand]="detailRowTemplate"
-            [row]="row"
-            [id]="name + '-' + row[rowIdentifier]"
-            [dataAutomationId]="row[rowIdentifier]"
-          ></novo-data-table-row>
-        </cdk-table>
+              [id]="name + '-' + row[rowIdentifier]"
+              [dataAutomationId]="row[rowIdentifier]" />
+          </cdk-table>
+        </cdk-virtual-scroll-viewport>
         <div class="novo-data-table-footer" *ngIf="templates['footer']">
           <ng-container *ngTemplateOutlet="templates['footer']; context: { $implicit: columns, data: dataSource.data }"></ng-container>
         </div>
@@ -306,15 +304,21 @@ import { DataTableState } from './state/data-table-state.service';
   styleUrls: ['./data-table.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [DataTableState, { provide: NOVO_DATA_TABLE_REF, useExisting: NovoDataTable }],
+  providers: [
+    DataTableState,
+    { provide: NOVO_DATA_TABLE_REF, useExisting: NovoDataTable },
+    { provide: VIRTUAL_SCROLL_STRATEGY, useClass: NovoDataTableVirtualScrollStrategy },
+  ],
 })
-export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
+export class NovoDataTable<T> implements AfterContentInit, AfterViewInit, OnDestroy, OnInit {
   @HostBinding('class.global-search-hidden') globalSearchHiddenClassToggle: boolean = false;
 
   @ContentChildren(NovoTemplate) customTemplates: QueryList<NovoTemplate>;
   @ViewChildren(NovoTemplate) defaultTemplates: QueryList<NovoTemplate>;
   @ViewChildren(NovoDataTableCellHeader) cellHeaders: QueryList<NovoDataTableCellHeader<T>>;
   @ViewChild('novoDataTableContainer') novoDataTableContainer: ElementRef;
+  @ViewChild('headerRow', { read: ElementRef }) headerRow: ElementRef;
+  @ViewChild(CdkVirtualScrollViewport) viewport: CdkVirtualScrollViewport;
   @Output() resized: EventEmitter<IDataTableColumn<T>> = new EventEmitter();
 
   @Input()
@@ -362,13 +366,17 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   @Input() overrideTotal: number;
   @Input() paginationRefreshSubject: Subject<void>;
 
+
+  private _service: IDataTableService<T>; // use signal
+
   @Input()
   set dataTableService(service: IDataTableService<T>) {
     this.loading = false;
     if (!service) {
       service = new StaticDataTableService([]);
+      this._service = service;
     }
-    this.dataSource = new DataTableSource<T>(service, this.state, this.ref);
+    // this.dataSource = new DataTableSource<T>(service, this.state, this.ref, this.viewport);
     this.ref.detectChanges();
   }
 
@@ -376,7 +384,8 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   set rows(rows: T[]) {
     this.loading = false;
     const service = new StaticDataTableService(rows);
-    this.dataSource = new DataTableSource<T>(service, this.state, this.ref);
+    this._service = service;
+    // this.dataSource = new DataTableSource<T>(service, this.state, this.ref, this.viewport);
     this.ref.detectChanges();
   }
 
@@ -499,7 +508,14 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
 
   @Input() listInteractions: ListInteractionDictionary;
 
-  constructor(public labels: NovoLabelService, private ref: ChangeDetectorRef, public state: DataTableState<T>) {
+  tableHeight = 380;
+
+  constructor(
+    public labels: NovoLabelService,
+    private ref: ChangeDetectorRef,
+    public state: DataTableState<T>,
+    @Inject(VIRTUAL_SCROLL_STRATEGY) private readonly scrollStrategy: NovoDataTableVirtualScrollStrategy
+  ) {
     this.scrollListenerHandler = this.scrollListener.bind(this);
     this.sortFilterSubscription = this.state.sortFilterSource.subscribe(
       (event: IDataTableChangeEvent) => {
@@ -557,6 +573,9 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
     }
   }
 
+  public ngOnInit(): void {
+  }
+
   public ngOnDestroy(): void {
     this.outsideFilterSubscription?.unsubscribe();
     this.refreshSubscription?.unsubscribe();
@@ -569,6 +588,8 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   }
 
   public ngAfterContentInit(): void {
+    this.dataSource = new DataTableSource<T>(this._service, this.state, this.ref, this.viewport);
+
     if (this.displayedColumns && this.displayedColumns.length) {
       this.expandable = this.displayedColumns.includes('expand');
     }
@@ -606,6 +627,10 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
     (this.novoDataTableContainer.nativeElement as Element).addEventListener('scroll', this.scrollListenerHandler);
     this.initialized = true;
     this.ref.markForCheck();
+  }
+
+  ngAfterViewInit() {
+    this.dataSource.headerRow = this.headerRow;
   }
 
   public onSearchChange(term: string): void {
