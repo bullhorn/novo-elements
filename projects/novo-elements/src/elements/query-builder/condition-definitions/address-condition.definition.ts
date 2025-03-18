@@ -52,12 +52,13 @@ import { NovoSelectElement } from 'novo-elements/elements/select';
               novoInput
               type="number"
               min="1"
+              max="9999"
               step="1"
               formControlName="supportingValue"
               #distanceInput
               (input)="onRadiusSelect(formGroup, $event)"
             />
-            <span style="margin-left: 8px;">{{ unitsLabel() }}</span>
+            <span style="margin-left: 8px; margin-right: 5px;">{{ unitsLabel() }}</span>
           </novo-field>
           <novo-field #novoField class="address-location">
             <novo-chip-list [(ngModel)]="chipListModel" [ngModelOptions]="{ standalone: true }" (click)="openPlacesList(viewIndex)">
@@ -95,10 +96,6 @@ export class NovoDefaultAddressConditionDef extends AbstractConditionFieldDef im
   @ViewChild('placesPicker') placesPicker: PlacesListComponent;
   @ViewChildren(NovoSelectElement) addressSideTest: any;
 
-  // Static defaults
-  radiusValues: number[] = [5, 10, 20, 30, 40, 50, 100];
-  defaultRadius: number = 30;
-
   // Overridable defaults
   defaults: AddressCriteriaConfig = {
     radiusEnabled: false,
@@ -114,14 +111,6 @@ export class NovoDefaultAddressConditionDef extends AbstractConditionFieldDef im
   unitsLabel: Signal<string> = computed(() =>
     this.radiusUnits() === RadiusUnits.miles ? this.labels.miles : this.labels.km
   );
-
-  radiusOptions: Signal<{ label: string; value: number; }[]> = computed(() => {
-    const unitsLabel = this.radiusUnits() === RadiusUnits.miles ? this.labels.miles : this.labels.km;
-    return this.radiusValues.map(value => ({
-      label: `${value.toString()} ${unitsLabel}`,
-      value,
-    }));
-  });
 
   defaultOperator = Operator.includeAny;
   chipListModel: any = '';
