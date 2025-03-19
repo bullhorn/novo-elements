@@ -50,6 +50,7 @@ import { NovoSelectElement } from 'novo-elements/elements/select';
           <novo-field #input *ngIf="['radius', 'insideRadius', 'outsideRadius'].includes(formGroup.value.operator)" class="address-radius">
             <input
               novoInput
+              paddingLeft="3px"
               type="number"
               min="1"
               max="9999"
@@ -58,7 +59,7 @@ import { NovoSelectElement } from 'novo-elements/elements/select';
               #distanceInput
               (input)="onRadiusSelect(formGroup, $event)"
             />
-            <span style="margin-left: 8px; margin-right: 5px;">{{ unitsLabel() }}</span>
+            <span marginLeft="2px" marginRight="4px" paddingTop="3px">{{ unitsLabel() }}</span>
           </novo-field>
           <novo-field #novoField class="address-location">
             <novo-chip-list [(ngModel)]="chipListModel" [ngModelOptions]="{ standalone: true }" (click)="openPlacesList(viewIndex)">
@@ -211,6 +212,9 @@ export class NovoDefaultAddressConditionDef extends AbstractConditionFieldDef im
   }
 
   onRadiusSelect(formGroup: AbstractControl, event): void {
+    const maxLengthRadius = event.target.value.slice(0, 4);
+    event.target.value = maxLengthRadius;
+    formGroup.get('supportingValue').setValue(maxLengthRadius);
     // We must dirty the form explicitly to show up as a user modification when it was done programmatically
     formGroup.get('value').setValue(this.updateRadiusInValues(formGroup, this.getValue(formGroup)));
     formGroup.markAsDirty();
