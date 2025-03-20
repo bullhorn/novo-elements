@@ -29,9 +29,11 @@ export enum Operator {
   include = 'include',
   includeAll = 'includeAll',
   includeAny = 'includeAny',
+  insideRadius = 'insideRadius',
   isEmpty = 'isEmpty',
   isNull = 'isNull',
   lessThan = 'lessThan',
+  outsideRadius = 'outsideRadius',
   radius = 'radius',
   within = 'within',
 }
@@ -44,6 +46,7 @@ export interface Condition {
   operator: OperatorName | string;
   scope?: string;
   value: any;
+  supportingValue?: any;
 }
 
 export interface Criteria {
@@ -90,6 +93,7 @@ export interface AddressData {
 export interface AddressRadius {
   value: number;
   units: AddressRadiusUnitsName;
+  operator?: string;
 }
 
 export interface AddressComponent {
