@@ -29,11 +29,12 @@ export enum Operator {
   include = 'include',
   includeAll = 'includeAll',
   includeAny = 'includeAny',
+  insideRadius = 'insideRadius',
   isEmpty = 'isEmpty',
   isNull = 'isNull',
   lessThan = 'lessThan',
-  insideRadius = 'insideRadius',
   outsideRadius = 'outsideRadius',
+  radius = 'radius',
   within = 'within',
 }
 
