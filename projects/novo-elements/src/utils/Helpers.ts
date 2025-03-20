@@ -124,14 +124,21 @@ export class Helpers {
   }
 
   /**
-   * Checks to see if the object is a undefined or null
+   * Checks to see if the object is undefined or null
    */
   static isBlank(obj: any): boolean {
     return obj === undefined || obj === null;
   }
 
   /**
-   * Checks to see if the object is a undefined or null
+   * Checks to see if the object is null or undefined
+   */
+  static isNullOrUndefined(obj: any): boolean {
+    return obj === undefined || obj === null;
+  }
+
+  /**
+   * Checks to see if the object is undefined, null, an empty string, or an empty array
    */
   static isEmpty(obj: any): boolean {
     return Helpers.isBlank(obj) || obj === '' || (Array.isArray(obj) && obj.length === 0);
