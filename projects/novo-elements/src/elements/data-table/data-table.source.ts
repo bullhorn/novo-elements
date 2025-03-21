@@ -1,6 +1,6 @@
 import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 import { DataSource } from '@angular/cdk/table';
-import { ChangeDetectorRef, ElementRef } from '@angular/core';
+import { ChangeDetectorRef } from '@angular/core';
 import { BehaviorSubject, merge, Observable, of } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 import { IDataTableService } from './interfaces';
@@ -12,19 +12,17 @@ export class DataTableSource<T> extends DataSource<T> {
   public current = 0;
   public loading = false;
   public pristine = true;
-  public headerRow: ElementRef;
 
   private totalSet: boolean = false;
 
   itemsLoadedAtOnce = 20; // set dynamically based on row height and viewport?
   itemSize = 33;
   rowHeight = 33;
-  offset = 0;
   private readonly visibleData: BehaviorSubject<any[]> = new BehaviorSubject([]);
 
   private _data: any[];
   get data(): any[] {
-    return this._data.slice();
+    return this._data;
   }
   set data(data: any[]) {
     this._data = data;
@@ -52,17 +50,10 @@ export class DataTableSource<T> extends DataSource<T> {
     this.viewport.elementScrolled().subscribe((event: any) => {
       const start = Math.floor(event.currentTarget.scrollTop / this.rowHeight);
       const prevExtraData = start > (this.itemsLoadedAtOnce / 2) ? (this.itemsLoadedAtOnce / 2) : start;
+      // we want to have a buffer of items in front of the scroll as well, this current code does not do that
       const slicedData = this._data.slice(start - prevExtraData, start + (this.itemsLoadedAtOnce - prevExtraData));
-      this.offset = this.rowHeight * (start - prevExtraData);
-      this.viewport.setRenderedContentOffset(this.offset);
-      console.log('offset', this.offset, start, this.rowHeight)
-      console.log('viewport', this.viewport.getViewportSize(), this.viewport)
-      let haha = start * this.rowHeight * 1.02;
-      let magicNumber = haha * .005;
-      console.log('headerOffset', haha, this.viewport.getViewportSize(), magicNumber)
-      let headerOffset = haha < this.viewport.getViewportSize() - 35 ? 0 : this.viewport.getViewportSize() - 35 + magicNumber;
-      this.headerRow.nativeElement.style.transform = `translateY(${headerOffset}px)`;
-      console.log('UPDATE scroll', this.headerRow.nativeElement.style.transform)
+      const offset = this.rowHeight * (start - prevExtraData);
+      this.viewport.setRenderedContentOffset(offset);
       this.visibleData.next(slicedData);
     });
   }
@@ -75,7 +66,10 @@ export class DataTableSource<T> extends DataSource<T> {
         this.pristine = false;
         this.loading = true;
         this.state.dataLoadingSource.next(this.loading);
-        return this.tableService.getTableResults(
+        if (!this.tableService) { // can't ship this, need this to be defined
+          return of({ results: [], total: 0 });
+        };
+        return this.tableService?.getTableResults(
           this.state.sort,
           this.state.filter,
           this.state.page,

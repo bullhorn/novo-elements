@@ -426,7 +426,7 @@ export class DataTableRowsExample implements AfterViewInit {
   }
 
   public resized(event): void {
-    // console.log('Column Width changed (persist manually): ', event); // tslint:disable-line
+    console.log('Column Width changed (persist manually): ', event); // tslint:disable-line
   }
 
   public refresh(): void {

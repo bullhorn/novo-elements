@@ -22,7 +22,7 @@ Show Row Details (first table) Hide Row Details (first table)
 
 <code-example example="data-table-rows"></code-example>
 
-<!-- ##### Using the static data service
+##### Using the static data service
 
 <code-example example="data-table-service"></code-example>
 
@@ -34,4 +34,4 @@ Data won't actually change, the URL will update with the proper request it will 
 
 ###### URL
 
-<code-example example="data-table-remote"></code-example> -->
+<code-example example="data-table-remote"></code-example>

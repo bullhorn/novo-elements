@@ -3,7 +3,6 @@ import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { CdkVirtualScrollViewport, VIRTUAL_SCROLL_STRATEGY } from '@angular/cdk/scrolling';
 import {
   AfterContentInit,
-  AfterViewInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
@@ -14,7 +13,6 @@ import {
   Inject,
   Input,
   OnDestroy,
-  OnInit,
   Output,
   QueryList,
   TemplateRef,
@@ -143,7 +141,7 @@ import { DataTableState } from './state/data-table-state.service';
                 [class.dropdown-cell]="column?.type === 'action' && column?.action?.options" />
             </ng-container>
             <novo-data-table-header-row
-              #headerRow
+              [style.top]="inverseOfTranslation"
               *cdkHeaderRowDef="displayedColumns"
               [fixedHeader]="fixedHeader"
               data-automation-id="novo-data-table-header-row" />
@@ -310,14 +308,13 @@ import { DataTableState } from './state/data-table-state.service';
     { provide: VIRTUAL_SCROLL_STRATEGY, useClass: NovoDataTableVirtualScrollStrategy },
   ],
 })
-export class NovoDataTable<T> implements AfterContentInit, AfterViewInit, OnDestroy, OnInit {
+export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   @HostBinding('class.global-search-hidden') globalSearchHiddenClassToggle: boolean = false;
 
   @ContentChildren(NovoTemplate) customTemplates: QueryList<NovoTemplate>;
   @ViewChildren(NovoTemplate) defaultTemplates: QueryList<NovoTemplate>;
   @ViewChildren(NovoDataTableCellHeader) cellHeaders: QueryList<NovoDataTableCellHeader<T>>;
   @ViewChild('novoDataTableContainer') novoDataTableContainer: ElementRef;
-  @ViewChild('headerRow', { read: ElementRef }) headerRow: ElementRef;
   @ViewChild(CdkVirtualScrollViewport) viewport: CdkVirtualScrollViewport;
   @Output() resized: EventEmitter<IDataTableColumn<T>> = new EventEmitter();
 
@@ -367,7 +364,7 @@ export class NovoDataTable<T> implements AfterContentInit, AfterViewInit, OnDest
   @Input() paginationRefreshSubject: Subject<void>;
 
 
-  private _service: IDataTableService<T>; // use signal
+  private _service: IDataTableService<T>;
 
   @Input()
   set dataTableService(service: IDataTableService<T>) {
@@ -376,7 +373,6 @@ export class NovoDataTable<T> implements AfterContentInit, AfterViewInit, OnDest
       service = new StaticDataTableService([]);
       this._service = service;
     }
-    // this.dataSource = new DataTableSource<T>(service, this.state, this.ref, this.viewport);
     this.ref.detectChanges();
   }
 
@@ -385,7 +381,6 @@ export class NovoDataTable<T> implements AfterContentInit, AfterViewInit, OnDest
     this.loading = false;
     const service = new StaticDataTableService(rows);
     this._service = service;
-    // this.dataSource = new DataTableSource<T>(service, this.state, this.ref, this.viewport);
     this.ref.detectChanges();
   }
 
@@ -508,7 +503,7 @@ export class NovoDataTable<T> implements AfterContentInit, AfterViewInit, OnDest
 
   @Input() listInteractions: ListInteractionDictionary;
 
-  tableHeight = 380;
+  tableHeight = 380; // we need to get the actual table height
 
   constructor(
     public labels: NovoLabelService,
@@ -573,9 +568,6 @@ export class NovoDataTable<T> implements AfterContentInit, AfterViewInit, OnDest
     }
   }
 
-  public ngOnInit(): void {
-  }
-
   public ngOnDestroy(): void {
     this.outsideFilterSubscription?.unsubscribe();
     this.refreshSubscription?.unsubscribe();
@@ -629,8 +621,12 @@ export class NovoDataTable<T> implements AfterContentInit, AfterViewInit, OnDest
     this.ref.markForCheck();
   }
 
-  ngAfterViewInit() {
-    this.dataSource.headerRow = this.headerRow;
+  public get inverseOfTranslation(): string {
+    if (!this.viewport || !this.viewport["_renderedContentOffset"]) {
+      return "0px";
+    }
+    let offset = this.viewport["_renderedContentOffset"];
+    return `-${offset}px`;
   }
 
   public onSearchChange(term: string): void {
