@@ -26,7 +26,9 @@ export class DataTableRowsExample implements AfterViewInit {
   table: NovoDataTable<MockData>;
 
   ngAfterViewInit() {
-    this.table.cellHeaders.get(2).setWidth(120);
+    setTimeout(() => {
+      this.table.cellHeaders.get(2).setWidth(120);
+    });
   }
 
   // Table configuration

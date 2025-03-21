@@ -7,6 +7,7 @@ import {
   ChangeDetectorRef,
   Component,
   ContentChildren,
+  effect,
   ElementRef,
   EventEmitter,
   HostBinding,
@@ -15,10 +16,12 @@ import {
   OnDestroy,
   Output,
   QueryList,
+  signal,
   TemplateRef,
   ViewChild,
   ViewChildren,
   ViewEncapsulation,
+  WritableSignal,
 } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 import { NovoLabelService } from 'novo-elements/services';
@@ -155,7 +158,7 @@ import { DataTableState } from './state/data-table-state.service';
           </cdk-table>
         </cdk-virtual-scroll-viewport>
         <div class="novo-data-table-footer" *ngIf="templates['footer']">
-          <ng-container *ngTemplateOutlet="templates['footer']; context: { $implicit: columns, data: dataSource.data }"></ng-container>
+          <ng-container *ngTemplateOutlet="templates['footer']; context: { $implicit: columns, data: dataSource?.data }"></ng-container>
         </div>
         <div
           class="novo-data-table-no-results-container"
@@ -364,15 +367,16 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   @Input() paginationRefreshSubject: Subject<void>;
 
 
-  private _service: IDataTableService<T>;
+  private _service: WritableSignal<IDataTableService<T>> = signal(null);
 
   @Input()
   set dataTableService(service: IDataTableService<T>) {
     this.loading = false;
     if (!service) {
       service = new StaticDataTableService([]);
+    } else {
+      this._service.set(service);
     }
-    this._service = service;
     this.ref.detectChanges();
   }
 
@@ -380,7 +384,7 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   set rows(rows: T[]) {
     this.loading = false;
     const service = new StaticDataTableService(rows);
-    this._service = service;
+    this._service.set(service);
     this.ref.detectChanges();
   }
 
@@ -547,6 +551,11 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
     this.allMatchingSelectedSubscription = this.state.allMatchingSelectedSource.subscribe((event: boolean) => {
       this.allMatchingSelected = event;
     });
+    effect(() => {
+      if (!!this.viewport && this._service()) {
+        this.dataSource = new DataTableSource(this._service(), this.state, this.ref, this.viewport);
+      }
+    });
   }
 
   public modifyCellHeaderMultiSelectFilterOptions(column: string, newOptions: { value: any; label: string }[]): void {
@@ -580,8 +589,6 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   }
 
   public ngAfterContentInit(): void {
-    this.dataSource = new DataTableSource<T>(this._service, this.state, this.ref, this.viewport);
-
     if (this.displayedColumns && this.displayedColumns.length) {
       this.expandable = this.displayedColumns.includes('expand');
     }
