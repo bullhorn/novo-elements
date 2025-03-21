@@ -1,23 +1,6 @@
 Data Table [(source)](https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/data-table)
 ====================================================================================================
 
-##### Working with static data
-
-###### Change Dataset
-
-###### Change Pagination Style
-
-###### Toggle Global Search
-
-###### Configure Columns
-
-Configure Columns
-
-###### Configure Columns
-
-Show Row Details (first table) Hide Row Details (first table)  
-  
-
 ##### Passing an array of rows
 
 <code-example example="data-table-rows"></code-example>

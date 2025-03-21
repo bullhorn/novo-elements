@@ -1063,14 +1063,6 @@ export class ComponentsPage {
 @Component({
   selector: 'data-table-page',
   template: `<h1>Data Table <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/data-table">(source)</a></h1>
-<h5>Working with static data</h5>
-<h6>Change Dataset</h6>
-<h6>Change Pagination Style</h6>
-<h6>Toggle Global Search</h6>
-<h6>Configure Columns</h6>
-<p>Configure Columns</p>
-<h6>Configure Columns</h6>
-<p>Show Row Details (first table) Hide Row Details (first table)</p>
 <h5>Passing an array of rows</h5>
 <p><code-example example="data-table-rows"></code-example></p>
 <h5>Using the static data service</h5>

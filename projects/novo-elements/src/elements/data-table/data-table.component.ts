@@ -371,8 +371,8 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
     this.loading = false;
     if (!service) {
       service = new StaticDataTableService([]);
-      this._service = service;
     }
+    this._service = service;
     this.ref.detectChanges();
   }
 

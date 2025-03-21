@@ -66,9 +66,6 @@ export class DataTableSource<T> extends DataSource<T> {
         this.pristine = false;
         this.loading = true;
         this.state.dataLoadingSource.next(this.loading);
-        if (!this.tableService) { // can't ship this, need this to be defined
-          return of({ results: [], total: 0 });
-        };
         return this.tableService?.getTableResults(
           this.state.sort,
           this.state.filter,
