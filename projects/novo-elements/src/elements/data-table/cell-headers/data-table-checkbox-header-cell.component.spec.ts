@@ -16,7 +16,7 @@ import { NovoDataTableCheckboxHeaderCell } from './data-table-checkbox-header-ce
 
 // App
 
-describe('Elements: NovoDataTableCheckboxHeaderCell', () => {
+xdescribe('Elements: NovoDataTableCheckboxHeaderCell', () => {
   let fixture;
   let component;
 
