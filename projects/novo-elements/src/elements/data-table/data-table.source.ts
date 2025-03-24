@@ -15,7 +15,7 @@ export class DataTableSource<T> extends DataSource<T> {
 
   private totalSet: boolean = false;
 
-  itemsLoadedAtOnce = 20; // set dynamically based on row height and viewport?
+  itemsLoadedAtOnce = 30; // set dynamically based on row height and viewport?
   itemSize = 33;
   rowHeight = 33;
   private readonly visibleData: BehaviorSubject<any[]> = new BehaviorSubject([]);
@@ -50,8 +50,10 @@ export class DataTableSource<T> extends DataSource<T> {
     this.viewport.elementScrolled().subscribe((event: any) => {
       const start = Math.floor(event.currentTarget.scrollTop / this.rowHeight);
       const prevExtraData = start > (this.itemsLoadedAtOnce / 2) ? (this.itemsLoadedAtOnce / 2) : start;
-      // we want to have a buffer of items in front of the scroll as well, this current code does not do that
-      const slicedData = this._data.slice(start - prevExtraData, start + (this.itemsLoadedAtOnce - prevExtraData));
+      // we want to have a buffer of items in front of the scroll as well, the multipliers below hack that in
+      const startSlice = start - prevExtraData * 1.5 >= 0 ? start - prevExtraData * 1.5 : 0;
+      const endSlice = start + (this.itemsLoadedAtOnce - prevExtraData) * 2
+      const slicedData = this._data.slice(startSlice, endSlice);
       const offset = this.rowHeight * (start - prevExtraData);
       this.viewport.setRenderedContentOffset(offset);
       this.visibleData.next(slicedData);

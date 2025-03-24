@@ -18,6 +18,7 @@ import {
   QueryList,
   signal,
   TemplateRef,
+  viewChild,
   ViewChild,
   ViewChildren,
   ViewEncapsulation,
@@ -103,7 +104,7 @@ import { DataTableState } from './state/data-table-state.service';
         [ngClass]="{ 'novo-data-table-container-fixed': fixedHeader }"
         [class.empty-user-filtered]="dataSource?.currentlyEmpty && state.userFiltered"
         [class.empty]="empty && !dataSource?.loading && !loading && !state.userFiltered && !dataSource.pristine">
-        <cdk-virtual-scroll-viewport [style.height.px]="tableHeight">
+        <cdk-virtual-scroll-viewport [style.height.px]="novoDataTableContainerSignal()?.nativeElement?.clientHeight">
           <cdk-table
             *ngIf="columns?.length > 0 && columnsLoaded && dataSource"
             [dataSource]="dataSource"
@@ -318,6 +319,7 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   @ViewChildren(NovoTemplate) defaultTemplates: QueryList<NovoTemplate>;
   @ViewChildren(NovoDataTableCellHeader) cellHeaders: QueryList<NovoDataTableCellHeader<T>>;
   @ViewChild('novoDataTableContainer') novoDataTableContainer: ElementRef;
+  novoDataTableContainerSignal = viewChild<ElementRef>('novoDataTableContainer');
   @ViewChild(CdkVirtualScrollViewport) viewport: CdkVirtualScrollViewport;
   @Output() resized: EventEmitter<IDataTableColumn<T>> = new EventEmitter();
 
@@ -506,8 +508,6 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   }
 
   @Input() listInteractions: ListInteractionDictionary;
-
-  tableHeight = 380; // we need to get the actual table height
 
   constructor(
     public labels: NovoLabelService,
