@@ -105,7 +105,7 @@ export class DataTableSource<T> extends DataSource<T> {
             this.ref.markForCheck();
           });
         });
-        return data.results;
+        return data.results.slice(0, this.itemsLoadedAtOnce);
       }),
       catchError((err, caught) => {
         console.error(err, caught); // tslint: disable-line
