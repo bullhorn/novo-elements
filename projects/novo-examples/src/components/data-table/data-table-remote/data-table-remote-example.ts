@@ -237,12 +237,12 @@ export class DataTableRemoteExample {
   ];
   public sharedPaginationOptions: IDataTablePaginationOptions = {
     theme: 'standard',
-    pageSize: 10,
+    pageSize: 100,
     pageSizeOptions: [10, 50, 100, 250, 500],
   };
   public widePaginationOptions: IDataTablePaginationOptions = {
     theme: 'basic-wide',
-    pageSize: 10,
+    pageSize: 100,
     pageSizeOptions: [10, 50, 100, 250, 500],
   };
   public sharedSearchOptions: IDataTableSearchOptions = {
@@ -282,7 +282,7 @@ export class DataTableRemoteExample {
         address: { city: 'City', state: null },
       });
     }
-    this.remoteService = new RemoteMockDataService([...this.staticDataSet1.slice(0, 10)]);
+    this.remoteService = new RemoteMockDataService([...this.staticDataSet1.slice(0, 100)]);
   }
 
   public getPriority(): string {
@@ -361,7 +361,7 @@ class RemoteMockDataService extends RemoteDataTableService<MockData> {
     const sortQuery: string = this.buildSortColumn(sort);
     const pageQuery: number = this.buildStart(page, pageSize);
     this.url = `http://mock-api.com?where=${whereQuery}&sort=${sortQuery}&pageSize=${pageSize}&page=${pageQuery}`;
-    return of({ results: this.data, total: this.data.length }).pipe(delay(5000));
+    return of({ results: this.data, total: this.data.length }).pipe(delay(1000));
   }
 
   private buildWhereClause(filter: IDataTableFilter | IDataTableFilter[]): string {

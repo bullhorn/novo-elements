@@ -1,6 +1,7 @@
+import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 import { DataSource } from '@angular/cdk/table';
 import { ChangeDetectorRef } from '@angular/core';
-import { merge, Observable, of } from 'rxjs';
+import { BehaviorSubject, merge, Observable, of } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 import { IDataTableService } from './interfaces';
 import { DataTableState } from './state/data-table-state.service';
@@ -11,9 +12,24 @@ export class DataTableSource<T> extends DataSource<T> {
   public current = 0;
   public loading = false;
   public pristine = true;
-  public data: T[];
 
   private totalSet: boolean = false;
+
+  itemsLoadedAtOnce = 30; // set dynamically based on row height and viewport?
+  itemSize = 33;
+  rowHeight = 33;
+  private readonly visibleData: BehaviorSubject<any[]> = new BehaviorSubject([]);
+
+  private _data: any[];
+  get data(): any[] {
+    return this._data;
+  }
+  set data(data: any[]) {
+    this._data = data;
+    this.viewport.scrollToOffset(0);
+    this.viewport.setTotalContentSize(this.itemSize * data.length);
+    this.visibleData.next(this._data.slice(0, this.itemsLoadedAtOnce));
+  }
 
   get totallyEmpty(): boolean {
     return this.total === 0;
@@ -23,19 +39,36 @@ export class DataTableSource<T> extends DataSource<T> {
     return this.current === 0;
   }
 
-  constructor(private tableService: IDataTableService<T>, private state: DataTableState<T>, private ref: ChangeDetectorRef) {
+  constructor(
+    private tableService: IDataTableService<T>,
+    private state: DataTableState<T>,
+    private ref: ChangeDetectorRef,
+    private viewport: CdkVirtualScrollViewport,
+  ) {
     super();
+
+    this.viewport.elementScrolled().subscribe((event: any) => {
+      const start = Math.floor(event.currentTarget.scrollTop / this.rowHeight);
+      const prevExtraData = start > (this.itemsLoadedAtOnce / 2) ? (this.itemsLoadedAtOnce / 2) : start;
+      // we want to have a buffer of items in front of the scroll as well, the multipliers below hack that in
+      const startSlice = start - prevExtraData * 1.5 >= 0 ? start - prevExtraData * 1.5 : 0;
+      const endSlice = start + (this.itemsLoadedAtOnce - prevExtraData) * 2
+      const slicedData = this._data.slice(startSlice, endSlice);
+      const offset = this.rowHeight * (start - prevExtraData);
+      this.viewport.setRenderedContentOffset(offset);
+      this.visibleData.next(slicedData);
+    });
   }
 
   public connect(): Observable<any> {
     const displayDataChanges: any = [this.state.updates];
-    return merge(...displayDataChanges).pipe(
+    const initialData = merge(...displayDataChanges).pipe(
       startWith(null),
       switchMap(() => {
         this.pristine = false;
         this.loading = true;
         this.state.dataLoadingSource.next(this.loading);
-        return this.tableService.getTableResults(
+        return this.tableService?.getTableResults(
           this.state.sort,
           this.state.filter,
           this.state.page,
@@ -72,7 +105,7 @@ export class DataTableSource<T> extends DataSource<T> {
             this.ref.markForCheck();
           });
         });
-        return data.results;
+        return data.results.slice(0, this.itemsLoadedAtOnce);
       }),
       catchError((err, caught) => {
         console.error(err, caught); // tslint: disable-line
@@ -80,6 +113,7 @@ export class DataTableSource<T> extends DataSource<T> {
         return of(null);
       }),
     );
+    return merge(initialData, this.visibleData);
   }
 
   public disconnect(): void {}

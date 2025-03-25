@@ -26,7 +26,9 @@ export class DataTableRowsExample implements AfterViewInit {
   table: NovoDataTable<MockData>;
 
   ngAfterViewInit() {
-    this.table.cellHeaders.get(2).setWidth(120);
+    setTimeout(() => {
+      this.table.cellHeaders.get(2).setWidth(120);
+    });
   }
 
   // Table configuration
@@ -280,7 +282,7 @@ export class DataTableRowsExample implements AfterViewInit {
   ];
   public sharedPaginationOptions: IDataTablePaginationOptions = {
     theme: 'standard',
-    pageSize: 10,
+    pageSize: 100,
     pageSizeOptions: [10, 50, 100, 250, 500],
   };
   public widePaginationOptions: IDataTablePaginationOptions = {
@@ -309,7 +311,7 @@ export class DataTableRowsExample implements AfterViewInit {
   public selectedRecordId: string = '';
 
   constructor(private ref: ChangeDetectorRef, private modalService: NovoModalService) {
-    for (let i = 0; i < 1000; i++) {
+    for (let i = 1; i <= 1000; i++) {
       const day = i < 500 ? dateFns.subDays(new Date(), i) : dateFns.addDays(new Date(), i - 500);
       this.staticDataSet1.push({
         id: i,
