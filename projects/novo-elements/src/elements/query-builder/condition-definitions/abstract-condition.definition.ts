@@ -1,7 +1,7 @@
 import { AfterViewInit, Directive, Input, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
-import { FormControlDirective, FormControlName, UntypedFormGroup } from '@angular/forms';
+import { FormControlName, UntypedFormGroup } from '@angular/forms';
 import { NovoLabelService } from 'novo-elements/services';
-import { NovoConditionFieldDef, NovoConditionOperatorsDef } from '../query-builder.directives';
+import { NovoConditionFieldDef } from '../query-builder.directives';
 import { Operator } from '../query-builder.types';
 
 @Directive()

@@ -14,6 +14,7 @@ import {
   Directive,
   DoCheck,
   ElementRef,
+  EventEmitter,
   HostBinding,
   HostListener,
   Inject,
@@ -23,6 +24,7 @@ import {
   OnChanges,
   OnDestroy,
   Optional,
+  Output,
   Self,
 } from '@angular/core';
 import { FormGroupDirective, NgControl, NgForm } from '@angular/forms';
@@ -426,4 +428,5 @@ export class NovoInput extends NovoInputBase implements NovoFieldControl<any>, O
   // Accept `any` to avoid conflicts with other directives on `<input>` that may
   // accept different types.
   static ngAcceptInputType_value: any;
+  @Output() onSelect = new EventEmitter<unknown>();
 }

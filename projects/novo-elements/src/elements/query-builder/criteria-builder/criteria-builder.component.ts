@@ -32,6 +32,7 @@ const EMPTY_CONDITION: Condition = {
   operator: null,
   scope: null,
   value: null,
+  supportingValue: null,
 };
 @Component({
   selector: 'novo-criteria-builder',
@@ -206,13 +207,14 @@ export class CriteriaBuilderComponent implements OnInit, OnDestroy, AfterContent
     return this.formBuilder.group(controls);
   }
 
-  newCondition({ field, operator, scope, value }: Condition = EMPTY_CONDITION): UntypedFormGroup {
+  newCondition({ field, operator, scope, value, supportingValue }: Condition = EMPTY_CONDITION): UntypedFormGroup {
     return this.formBuilder.group({
       conditionType: '$and',
       field: [field, Validators.required],
       operator: [operator, Validators.required],
       scope: [scope],
       value: [value],
+      supportingValue: [supportingValue],
     });
   }
 
