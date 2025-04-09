@@ -10,6 +10,7 @@ export class NovoAsideRef<T = any, R = any> {
   private _afterClosed = new Subject<R>();
   isClosed: boolean = false;
   componentInstance: AsideComponent;
+  draggable = false;
 
   // Gets a promise that is resolved when the dialog is closed.
   get onClosed(): Promise<R> {
