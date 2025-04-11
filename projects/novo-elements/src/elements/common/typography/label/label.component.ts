@@ -1,5 +1,5 @@
 // NG2
-import { Component, computed, HostBinding, input } from '@angular/core';
+import { Component, computed, input } from '@angular/core';
 import { NovoBaseTextElement } from '../base/base-text.component';
 
 /**
@@ -21,15 +21,12 @@ let nextId = 0;
   styleUrls: ['./label.scss'],
   host: {
     class: 'novo-label',
+    '[attr.id]': 'computedId()',
   },
 })
 export class NovoLabel extends NovoBaseTextElement {
-  inputId = input<string | null>(null, { alias: 'id' });
+  inputId = input(null, { alias: 'id' });
 
-  computedId = computed(() => this.inputId() ?? `novo-label-${++nextId}`);
-
-  @HostBinding('attr.id')
-  get id(): string {
-    return this.computedId();
-  }
+  computedId = computed(() => this.inputId() || `novo-label-${++nextId}`);
 }
+
