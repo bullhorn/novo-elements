@@ -66,7 +66,7 @@ export class AsideWidgetDemo {
 export class AsideWidgetExample {
   constructor(private aside: NovoAsideService) {}
   showAside() {
-    const ref = this.aside.open<string>(AsideWidgetDemo, { id: 100, name: 'Ferdinand del Toro' }, {}, true);
+    const ref = this.aside.open<string>(AsideWidgetDemo, { id: 100, name: 'Ferdinand del Toro' }, { hasBackdrop: false }, true);
     ref.onClosed.then((result) => {
       console.log('Aside has been closed, with result:', result);
     });
