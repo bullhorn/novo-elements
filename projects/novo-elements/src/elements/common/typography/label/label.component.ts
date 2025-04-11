@@ -1,5 +1,5 @@
 // NG2
-import { Component, computed, input } from '@angular/core';
+import { Component, HostBinding, input, OnInit } from '@angular/core';
 import { NovoBaseTextElement } from '../base/base-text.component';
 
 /**
@@ -17,16 +17,20 @@ let nextId = 0;
 
 @Component({
   selector: 'novo-label,[novo-label]',
-  template: `<ng-content></ng-content>`,
+  template: ` <ng-content></ng-content> `,
   styleUrls: ['./label.scss'],
   host: {
     class: 'novo-label',
-    '[attr.id]': 'computedId()',
   },
 })
-export class NovoLabel extends NovoBaseTextElement {
+export class NovoLabel extends NovoBaseTextElement implements OnInit{
+  @HostBinding('attr.id')
+  public id: string;
+
   inputId = input(null, { alias: 'id' });
 
-  computedId = computed(() => this.inputId() || `novo-label-${++nextId}`);
+  ngOnInit() {
+    this.id = this.inputId() || `novo-label-${++nextId}`;
+  }
 }
 
