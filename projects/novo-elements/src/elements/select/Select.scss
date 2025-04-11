@@ -15,8 +15,7 @@
       color: rgba(0, 0, 0, 0.73);
     }
   }
-  /* cdk-mouse-focused will only apply this state when the user focuses with the mouse.
-  &.cdk-mouse-focused {*/
+
   &:focus {
     outline: none;
   }

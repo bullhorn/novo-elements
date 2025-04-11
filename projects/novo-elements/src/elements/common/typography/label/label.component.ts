@@ -1,5 +1,6 @@
 // NG2
-import { Component, HostBinding, input } from '@angular/core';
+import { Component, HostBinding, input, OnInit } from '@angular/core';
+
 import { NovoBaseTextElement } from '../base/base-text.component';
 
 /**
@@ -23,7 +24,7 @@ let nextId = 0;
     class: 'novo-label',
   },
 })
-export class NovoLabel extends NovoBaseTextElement {
+export class NovoLabel extends NovoBaseTextElement implements OnInit {
   @HostBinding('attr.id')
   public id: string;
 
