@@ -21,6 +21,7 @@ const DEFAULT_CONFIG: ModalConfig = {
 @Injectable({ providedIn: 'root' })
 export class NovoModalService {
   _parentViewContainer: ViewContainerRef;
+  overlayRef: OverlayRef;
 
   set parentViewContainer(view: ViewContainerRef) {
     console.warn('parentViewContainer is deprecated');
@@ -35,6 +36,7 @@ export class NovoModalService {
 
     // Returns an OverlayRef which is a PortalHost
     const overlayRef = this.createOverlay(modalConfig);
+    this.overlayRef = overlayRef;
 
     // Instantiate remote control
     const modalRef = new NovoModalRef<typeof params>(component, params, overlayRef);
