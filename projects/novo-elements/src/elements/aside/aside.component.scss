@@ -9,10 +9,24 @@
     max-width: 540px;
     position: absolute;
     top: 0;
-    right: 0px;
+    right: 0;
     padding: 0;
     display: flex;
     justify-content: stretch;
     align-items: stretch;
+
+    &.draggable {
+      position: relative;
+      max-width: none;
+      height: auto;
+      width: 540px;
+      left: calc(100vw - 540px);
+      overflow: hidden;
+      resize: both;
+      .drag-handle {
+        width: 100%;
+        height: calc(100% - 1rem);
+      }
+    }
   }
 }

@@ -2,7 +2,9 @@
   (@slideInOut.done)="onAnimationDone($event)">
   <ng-template [cdkPortalOutlet]="component"></ng-template>
 </div>
-<div *ngIf="draggable" class="aside-panel" [@slideInOut]="animationState" (@slideInOut.start)="onAnimationStart($event)"
+<div *ngIf="draggable" class="aside-panel draggable" [@slideInOut]="animationState" (@slideInOut.start)="onAnimationStart($event)"
   (@slideInOut.done)="onAnimationDone($event)" cdkDrag>
-  <ng-template [cdkPortalOutlet]="component"></ng-template>
+  <div class="drag-handle" cdkDragHandle>
+    <ng-template [cdkPortalOutlet]="component"></ng-template>
+  </div>
 </div>

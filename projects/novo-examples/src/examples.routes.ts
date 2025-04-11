@@ -293,6 +293,9 @@ export class AsideDevelopPage {
 <h2>Add</h2>
 <p>Add modals have a colored title bar based on the record type being created. Additionally, due to a greater than average amount of content, they have fixed footers.</p>
 <p><code-example example="aside-form"></code-example></p>
+<h2>Widget</h2>
+<p>A new experimental aside configuration making it behave as a pop-out widget. This component is both resizable and draggable around the screen.</p>
+<p><code-example example="aside-widget"></code-example></p>
 `,
   host: { class: 'markdown-page' }
 })
