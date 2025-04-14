@@ -16,7 +16,7 @@
     align-items: stretch;
 
     &.draggable {
-      position: relative;
+      position: absolute;
       max-width: none;
       height: auto;
       width: 540px;
