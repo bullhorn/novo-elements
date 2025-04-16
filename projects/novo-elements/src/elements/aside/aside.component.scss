@@ -3,10 +3,11 @@
 :host {
   .aside-panel {
     background-color: var(--background-bright, $color-white);
+    box-shadow: -3px 3px 15px 4px rgba(61, 70, 77, 0.2);
     height: 100vh;
     width: 50%;
     min-width: min-content;
-    max-width: 540px;
+    max-width: 560px;
     position: absolute;
     top: 0;
     right: 0;
@@ -20,7 +21,7 @@
       max-width: none;
       height: auto;
       width: 540px;
-      left: calc(100vw - 540px);
+      left: calc(100vw - 560px);
       overflow: hidden;
       resize: both;
       .drag-handle {

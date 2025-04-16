@@ -64,11 +64,17 @@ export class AsideWidgetDemo {
   styleUrls: ['aside-widget-example.css'],
 })
 export class AsideWidgetExample {
+  asideRef;
   constructor(private aside: NovoAsideService) {}
-  showAside() {
-    const ref = this.aside.open<string>(AsideWidgetDemo, { id: 100, name: 'Ferdinand del Toro' }, { hasBackdrop: false }, true);
-    ref.onClosed.then((result) => {
-      console.log('Aside has been closed, with result:', result);
-    });
+  toggleAside() {
+    const asideConfig = { hasBackdrop: false };
+    if (!this.asideRef) {
+        this.asideRef = this.aside.open<string>(AsideWidgetDemo, { id: 100, name: 'Ferdinand del Toro' }, { hasBackdrop: false }, true);
+        this.asideRef.onClosed.then((result) => {
+          this.asideRef = undefined;
+        });
+    } else {
+        this.asideRef.close();
+    }
   }
 }
