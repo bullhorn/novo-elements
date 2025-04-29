@@ -11,6 +11,7 @@ import {
   ElementRef,
   EventEmitter,
   HostListener,
+  Inject,
   Input,
   NgZone,
   OnChanges,
@@ -51,7 +52,7 @@ import {
   _getOptionScrollPosition,
 } from 'novo-elements/elements/common';
 import { NovoOverlayTemplateComponent } from 'novo-elements/elements/common';
-import { NovoFieldControl } from 'novo-elements/elements/field';
+import { NOVO_FORM_FIELD, NovoFieldControl, NovoFieldElement } from 'novo-elements/elements/field';
 
 // Value accessor for the component (supports ngModel)
 // const SELECT_VALUE_ACCESSOR = {
@@ -97,7 +98,7 @@ let nextId = 0;
     { provide: NOVO_OPTION_PARENT_COMPONENT, useExisting: NovoSelectElement },
   ],
   template: `
-    <div class="novo-select-trigger" #dropdownElement (click)="togglePanel(); (false)" tabIndex="{{ disabled ? -1 : 0 }}" type="button">
+    <div class="novo-select-trigger">
       <span class="novo-select-placeholder" *ngIf="empty">{{ placeholder }}</span>
       <span class="text-ellipsis" *ngIf="!empty"><novo-icon size="sm" style="margin: 0 0 .25rem .1rem" *ngIf="displayIcon">{{ displayIcon }}</novo-icon> {{ displayValue }}</span>
       <i class="bhi-collapse"></i>
@@ -107,7 +108,7 @@ let nextId = 0;
       [position]="position"
       [width]="overlayWidth"
       [height]="overlayHeight"
-      (closing)="dropdown.nativeElement.focus()"
+      (closing)="elementRef.nativeElement.focus()"
     >
       <div #panel class="novo-select-list" tabIndex="-1" [class.has-header]="headerConfig" [class.active]="panelOpen">
         <novo-option *ngIf="headerConfig" class="select-header" [class.open]="header.open">
@@ -167,6 +168,7 @@ let nextId = 0;
     '[attr.aria-required]': 'required.toString()',
     '[attr.aria-disabled]': 'disabled.toString()',
     '[attr.aria-invalid]': 'errorState',
+    '[attr.aria-labelledby]': '_ariaLabelledBy || null',
     '[attr.aria-describedby]': '_ariaDescribedby || null',
     '[attr.aria-activedescendant]': '_getAriaActiveDescendant()',
     '[class.novo-select-disabled]': 'disabled',
@@ -174,6 +176,7 @@ let nextId = 0;
     '[class.novo-select-required]': 'required',
     '[class.novo-select-empty]': 'empty',
     '[class.novo-select-multiple]': 'multiple',
+    '[tabindex]': 'disabled ? -1 : 0'
   },
 })
 export class NovoSelectElement
@@ -195,10 +198,10 @@ export class NovoSelectElement
 
   _selectionModel: SelectionModel<NovoOption>;
 
+  /** The aria-labelledby attribute */
+  _ariaLabelledBy: string;
   /** The aria-describedby attribute on the chip list for improved a11y. */
   _ariaDescribedby: string;
-  /** Tab index for the chip list. */
-  _tabIndex = 0;
   /** User defined tab index. */
   _userTabIndex: number | null = null;
   /** The FocusKeyManager which handles focus. */
@@ -267,8 +270,6 @@ export class NovoSelectElement
   /** Element for the panel containing the autocomplete options. */
   @ViewChild(NovoOverlayTemplateComponent, { static: true })
   overlay: NovoOverlayTemplateComponent;
-  @ViewChild('dropdownElement', { static: true })
-  dropdown: ElementRef;
 
   @ContentChildren(NovoOptgroup, { descendants: true })
   optionGroups: QueryList<NovoOptgroup>;
@@ -348,6 +349,7 @@ export class NovoSelectElement
     @Optional() @Self() ngControl: NgControl,
     @Optional() _parentForm: NgForm,
     @Optional() _parentFormGroup: FormGroupDirective,
+    @Optional() @Inject(NOVO_FORM_FIELD) private _fieldElement: NovoFieldElement,
   ) {
     super(defaultErrorStateMatcher, _parentForm, _parentFormGroup, ngControl);
     if (ngControl) {
@@ -359,11 +361,8 @@ export class NovoSelectElement
   ngOnInit() {
     this.stateChanges.next();
     this._initLegacyOptions();
-    this.focusMonitor.monitor(this.dropdown.nativeElement).subscribe((origin) =>
+    this.focusMonitor.monitor(this.elementRef.nativeElement).subscribe((origin) =>
       this.ngZone.run(() => {
-        if (origin === 'keyboard' && !this.disabled) {
-          this.openPanel();
-        }
         this._focused = !!origin;
         this.stateChanges.next();
       }),
@@ -416,6 +415,11 @@ export class NovoSelectElement
       .subscribe(() => {
         this.openedChange.emit(this.panelOpen);
       });
+    setTimeout(() => {
+      if (this._fieldElement?._labelElement) {
+        this._ariaLabelledBy = this._fieldElement._labelElement.id;
+      }
+      });
   }
 
   ngOnDestroy() {
@@ -424,8 +428,16 @@ export class NovoSelectElement
     this._stateChanges.unsubscribe();
     this._activeOptionChanges.unsubscribe();
     this._selectedOptionChanges.unsubscribe();
-    this.focusMonitor.stopMonitoring(this.dropdown.nativeElement);
+    this.focusMonitor.stopMonitoring(this.elementRef.nativeElement);
   }
+
+  @HostListener('click', ['$event'])
+  onClick() {
+    this.togglePanel();
+    return false;
+  }
+
+  
 
   openPanel() {
     super.openPanel();
@@ -679,7 +691,7 @@ export class NovoSelectElement
    */
   focus(options?: FocusOptions): void {
     if (!this.disabled) {
-      this.dropdown.nativeElement.focus(options);
+      this.elementRef.nativeElement.focus(options);
     }
   }
 
@@ -766,7 +778,9 @@ export class NovoSelectElement
       if (this.empty) {
         this._keyManager.setFirstItemActive();
       } else {
-        this._keyManager.setActiveItem(this._value);
+        const options = this._getOptions();
+        const index = options.findIndex(option => option.value == this._value)
+        this._keyManager.setActiveItem(index);
       }
     }
   }
