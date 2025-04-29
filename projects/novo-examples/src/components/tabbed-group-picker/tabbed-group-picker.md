@@ -31,3 +31,9 @@ When checkboxes are disabled in the activation picker, we can still listen for "
 ## Footer
 
 <code-example example="tabbed-group-picker-footer"></code-example>
+
+## Chips
+
+Use the chips picker instead of a dropdown
+
+<code-example example="tabbed-group-picker-chips"></code-example>

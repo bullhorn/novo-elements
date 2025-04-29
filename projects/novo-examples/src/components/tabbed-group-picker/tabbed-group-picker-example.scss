@@ -4,6 +4,10 @@
 
   novo-tabbed-group-picker {
     max-width: 40%;
+    &.use-chips {
+        max-width: 100%;
+        width: 55%;
+    }
   }
   .selected-data-wrapper {
     width: 40%;

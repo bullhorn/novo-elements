@@ -10,6 +10,20 @@
       width: 100%;
     }
   }
+  &.use-chips {
+    novo-dropdown {
+      width: 100%;
+      ::ng-deep novo-chip-list {
+        .novo-chip-list-wrapper {
+          border-bottom: 1px solid var(--border);
+        }
+        input {
+          border: none;
+          outline: none;
+        }
+      }
+    }
+  }
 }
 
 ::ng-deep .dropdown-container {

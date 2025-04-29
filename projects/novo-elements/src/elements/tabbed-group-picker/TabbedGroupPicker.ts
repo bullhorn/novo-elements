@@ -3,12 +3,15 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  computed,
   ElementRef,
   EventEmitter,
+  input,
   Input,
   OnDestroy,
   OnInit,
   Output,
+  signal,
   ViewChild,
 } from '@angular/core';
 import { BehaviorSubject, Subscription } from 'rxjs';
@@ -71,6 +74,9 @@ export type TabbedGroupPickerButtonConfig = {
   styleUrls: ['./TabbedGroupPicker.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [{ provide: NOVO_OPTION_PARENT_COMPONENT, useExisting: NovoTabbedGroupPickerElement }],
+  host: {
+    '[class.use-chips]': 'useChips()',
+  }
 })
 export class NovoTabbedGroupPickerElement implements OnDestroy, OnInit {
   @ViewChild('tabbedGroupPickerVirtualScrollViewport')
@@ -86,6 +92,9 @@ export class NovoTabbedGroupPickerElement implements OnDestroy, OnInit {
   @Input() tabs: TabbedGroupPickerTab[];
   @Input() quickSelectConfig: QuickSelectConfig;
   @Input() showFooter = false;
+  useChips = input(false);
+  maxChips = input(3);
+  chipInputIcon = input(null);
 
   // In activation mode, no checkboxes are displayed, and only the selectionActivated event occurs.
   @BooleanInput()
@@ -110,6 +119,12 @@ export class NovoTabbedGroupPickerElement implements OnDestroy, OnInit {
   // Initial height based on 13 px font rendered in chrome. Actual height retrieved onDropdownToggled.
   scrollViewportHeight: number = 351;
   virtualScrollItemSize: number = 39;
+
+  selectedChips = signal([]);
+  showAllChips = signal(false);
+  displayedChips = computed(() => this.showAllChips() ? this.selectedChips() : this.selectedChips().slice(0, this.maxChips()));
+  hiddenChips = computed(() => this.showAllChips() ? [] : this.selectedChips().slice(this.maxChips()));
+  chipsInputPlaceholder = computed(() => this.displayedChips().length ? '' : this.buttonConfig.label);
 
   constructor(public labelService: NovoLabelService, private ref: ChangeDetectorRef) {}
 
@@ -142,6 +157,11 @@ export class NovoTabbedGroupPickerElement implements OnDestroy, OnInit {
     }
   }
 
+  showAllChipsToggle(event) {
+    this.showAllChips.update((show) => !show)
+    Helpers.swallowEvent(event);
+  }
+
   loadValues() {
     this.setupDisplayData();
     this.createChildrenReferences();
@@ -162,6 +182,13 @@ export class NovoTabbedGroupPickerElement implements OnDestroy, OnInit {
   }
 
   setupDisplayData(): void {
+    if (this.useChips()) {
+      this.tabs.forEach((tab) => {
+        tab.data.forEach((item) => {
+          item.icon = tab.icon;
+        });
+      });
+    }
     // shallow copy here so that reassigning displayTabs[i].data doesn't mutate tabs[i].data
     // but both data values point to the same items
     this.displayTabs = this.tabs.map((tab) => ({ ...tab }));
@@ -269,7 +296,24 @@ export class NovoTabbedGroupPickerElement implements OnDestroy, OnInit {
     this.updateParentsAndQuickSelect();
     this.updateClearAll(item.selected);
     this.emitSelectedValues();
+    this.toggleChip(item);
     this.ref.markForCheck();
+  }
+
+  toggleChip(item: Option) {
+    if (this.useChips()) {
+      let newChips = [];
+      const oldChips = [...this.selectedChips()];
+      if (oldChips.includes(item)) {
+        if (oldChips.length > 1) {
+          oldChips.splice(oldChips.indexOf(item), 1);
+          newChips = oldChips;
+        }
+      } else {
+        newChips = [...oldChips, item];
+      }
+      this.selectedChips.set(newChips);
+    }
   }
 
   initializeDescendantSelection() {
@@ -403,6 +447,7 @@ export class NovoTabbedGroupPickerElement implements OnDestroy, OnInit {
         (tab as ChildTab).data.forEach((item) => delete item.selected);
       }
     });
+    this.selectedChips.set([]);
     this.emitSelectedValues();
     this.ref.markForCheck();
   }

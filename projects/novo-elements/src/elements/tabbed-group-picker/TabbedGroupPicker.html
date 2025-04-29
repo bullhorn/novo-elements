@@ -1,5 +1,18 @@
 <novo-dropdown (toggled)="onDropdownToggle($event)" multiple #dropdown>
-  <novo-button
+  <novo-chip-list *ngIf="useChips()" dropdownTrigger>
+    <novo-chip *ngFor="let chip of displayedChips()" [value]="chip">
+      <novo-icon *ngIf="chip.icon?.entityColor" class="txc-{{ chip.icon.entityColor }}" novoChipAvatar>circle</novo-icon>
+      <novo-icon *ngIf="!chip.icon?.entityColor && chip.icon">{{ chip.icon }}</novo-icon>
+      <novo-text ellipsis tooltipOnOverflow>{{ chip.label || chip.name || chip.title || chip.value }}</novo-text>
+    </novo-chip>
+    <div *ngIf="selectedChips().length" class="hidden-chips-toggle" (click)="showAllChipsToggle($event)">
+      <novo-label *ngIf="hiddenChips().length && !showAllChips()" color="positive">+ {{ hiddenChips().length }} {{ labelService.more }} </novo-label>
+      <novo-label *ngIf="showAllChips()" color="positive"><novo-icon>sort-asc</novo-icon> {{ labelService.showLess }}</novo-label>
+    </div>
+    <input novoChipInput [placeholder]="chipsInputPlaceholder()" autocomplete="off" />
+    <novo-icon *ngIf="chipInputIcon()" size="sm">{{ chipInputIcon() }}</novo-icon>
+  </novo-chip-list>
+  <novo-button *ngIf="!useChips()"
     class="tabbed-group-picker-button"
     [theme]="buttonConfig.theme"
     [side]="buttonConfig.side"
