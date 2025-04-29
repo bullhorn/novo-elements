@@ -1,6 +1,6 @@
 <novo-dropdown (toggled)="onDropdownToggle($event)" multiple #dropdown>
   <novo-chip-list *ngIf="useChips()" dropdownTrigger>
-    <novo-chip *ngFor="let chip of displayedChips()" [value]="chip">
+    <novo-chip *ngFor="let chip of displayedChips()" [value]="chip" [size]="chipSize()">
       <novo-icon *ngIf="chip.icon?.entityColor" class="txc-{{ chip.icon.entityColor }}" novoChipAvatar>circle</novo-icon>
       <novo-icon *ngIf="!chip.icon?.entityColor && chip.icon">{{ chip.icon }}</novo-icon>
       <novo-text ellipsis tooltipOnOverflow>{{ chip.label || chip.name || chip.title || chip.value }}</novo-text>

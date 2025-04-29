@@ -94,6 +94,7 @@ export class NovoTabbedGroupPickerElement implements OnDestroy, OnInit {
   @Input() showFooter = false;
   useChips = input(false);
   maxChips = input(3);
+  chipSize = input('md');
   chipInputIcon = input(null);
 
   // In activation mode, no checkboxes are displayed, and only the selectionActivated event occurs.
