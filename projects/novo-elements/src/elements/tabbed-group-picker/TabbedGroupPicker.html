@@ -10,7 +10,7 @@
       <novo-label *ngIf="showAllChips()" color="positive"><novo-icon>sort-asc</novo-icon> {{ labelService.showLess }}</novo-label>
     </div>
     <input novoChipInput [placeholder]="chipsInputPlaceholder()" autocomplete="off" />
-    <novo-icon *ngIf="chipInputIcon() && !showAllChips()" size="sm" paddingRight=".5rem">{{ chipInputIcon() }}</novo-icon>
+    <novo-icon *ngIf="chipInputIcon() && !showAllChips()" size="sm" paddingRight=".5rem" color="neutral">{{ chipInputIcon() }}</novo-icon>
   </novo-chip-list>
   <novo-button *ngIf="!useChips()"
     class="tabbed-group-picker-button"
