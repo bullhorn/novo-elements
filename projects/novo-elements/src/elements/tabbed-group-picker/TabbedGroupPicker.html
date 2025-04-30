@@ -19,13 +19,14 @@
           <novo-icon *ngIf="chip.icon?.entityColor" class="txc-{{ chip.icon.entityColor }}" novoChipAvatar>circle</novo-icon>
           <novo-icon *ngIf="!chip.icon?.entityColor && chip.icon">{{ chip.icon }}</novo-icon>
           <novo-text ellipsis tooltipOnOverflow>{{ chip.label || chip.name || chip.title || chip.value }}</novo-text>
+          <novo-icon novoChipRemove (click)="activateItem(chip)">x</novo-icon>
         </novo-chip>
         <div *ngIf="selectedChips().length" class="hidden-chips-toggle" (click)="showAllChipsToggle($event)">
           <novo-label *ngIf="hiddenChips().length && !showAllChips()" color="positive">+ {{ hiddenChips().length }} {{ labelService.more }} </novo-label>
           <novo-label *ngIf="showAllChips()" color="positive"><novo-icon>sort-asc</novo-icon> {{ labelService.showLess }}</novo-label>
         </div>
-        <input #inputElement class="chip-list-input" type="text" [placeholder]="labelService.search" [value]="filterText | async" (input)="onFilter($event)" />
-        <i class="bhi-search" *ngIf="!(filterText | async) && !showAllChips()"></i>
+        <input #inputElement class="chip-list-input" type="text" [value]="filterText | async" (input)="onFilter($event)" />
+        <i class="bhi-search" *ngIf="!(filterText | async) && !showAllChips()" (click)="inputElement.focus()"></i>
         <i class="bhi-times" *ngIf="(filterText | async)" (click)="onClearFilter($event)" (keydown.space)="onClearFilter($event)"></i>
       </novo-chip-list>
     } @else {
