@@ -425,6 +425,7 @@ export class NovoTabbedGroupPickerElement implements OnDestroy, OnInit {
 
   revertState() {
     this.tabs = Helpers.deepClone(this.appliedState);
+    this.selectedChips.set([]);
     this.loadValues();
   }
 

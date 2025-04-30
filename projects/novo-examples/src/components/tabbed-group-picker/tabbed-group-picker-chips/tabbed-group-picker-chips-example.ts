@@ -72,6 +72,13 @@ export class TabbedGroupPickerChipsExample {
     this.example_buttonConfig.label = this.buildButtonLabel();
   }
 
+  onCancelChange([animalsTab, placesTab, colorsTab]: TabbedGroupPickerTab[]) {
+    this.selectedAnimals = animalsTab.data.filter((animal) => animal.selected).map(({ animalId }) => animalId);
+    this.selectedPlaces = placesTab.data.filter((place) => place.selected).map(({ label }) => label);
+    this.selectedColors = colorsTab.data.filter((color) => color.selected).map(({ label }) => label);
+    this.example_buttonConfig.label = this.buildButtonLabel();
+  }
+
   buildButtonLabel(): string {
     const labelParts: string[] = [];
     this.selectedAnimals.length ? labelParts.push(`Animals (${this.selectedAnimals.length})`) : '';
