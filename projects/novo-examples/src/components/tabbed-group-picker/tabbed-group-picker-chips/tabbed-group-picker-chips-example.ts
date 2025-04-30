@@ -69,5 +69,14 @@ export class TabbedGroupPickerChipsExample {
     this.selectedAnimals = (selectedData.find(({ typeName }) => typeName === 'animals') as ChildTab).data.map(({ animalId }) => animalId);
     this.selectedPlaces = (selectedData.find(({ typeName }) => typeName === 'places') as ChildTab).data.map(({ label }) => label);
     this.selectedColors = (selectedData.find(({ typeName }) => typeName === 'colors') as ChildTab).data.map(({ label }) => label);
+    this.example_buttonConfig.label = this.buildButtonLabel();
+  }
+
+  buildButtonLabel(): string {
+    const labelParts: string[] = [];
+    this.selectedAnimals.length ? labelParts.push(`Animals (${this.selectedAnimals.length})`) : '';
+    this.selectedPlaces.length ? labelParts.push(`Places (${this.selectedPlaces.length})`) : '';
+    this.selectedColors.length ? labelParts.push(`Colors (${this.selectedColors.length})`) : '';
+    return labelParts.join(', ') || 'Nothing Selected';
   }
 }
