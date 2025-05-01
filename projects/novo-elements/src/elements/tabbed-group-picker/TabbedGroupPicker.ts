@@ -186,6 +186,9 @@ export class NovoTabbedGroupPickerElement implements OnDestroy, OnInit {
       this.tabs.forEach((tab) => {
         tab.data.forEach((item) => {
           item.icon = tab.icon;
+          if (item.selected) {
+            this.selectedChips.set([...this.selectedChips(), item])
+          }
         });
       });
     }
