@@ -437,7 +437,7 @@ export class NovoSelectElement
     return false;
   }
 
-  
+
 
   openPanel() {
     super.openPanel();
@@ -500,7 +500,7 @@ export class NovoSelectElement
       this._selectionModel.select(correspondingOption);
     } else if (value && !correspondingOption) {
       // Double Check option not already added.
-      const legacyOption = this.filteredOptions.find((it) => it.value === value);
+      const legacyOption = this.filteredOptions?.find((it) => it.value === value);
       if (!legacyOption) {
         // Add a disabled option to the list and select it
         this.filteredOptions.push({
