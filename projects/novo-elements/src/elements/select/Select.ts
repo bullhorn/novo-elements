@@ -212,8 +212,6 @@ export class NovoSelectElement
   @Input()
   name: string = this._uniqueId;
   @Input()
-  options: Array<any>;
-  @Input()
   placeholder: string = 'Select...';
   @Input()
   readonly: boolean;
@@ -311,6 +309,17 @@ export class NovoSelectElement
   }
   private _multiple: boolean = false;
 
+  /** Array of options to display in the select dropdown */
+  @Input()
+  set options(options: Array<any>) {
+    this._options = options;
+    this._initLegacyOptions();
+  }
+  get options(): Array<any> {
+    return this._options;
+  }
+  private _options: Array<any>;
+
   /** Whether the select is focused. */
   get focused(): boolean {
     return this._focused || this.panelOpen;
@@ -360,7 +369,6 @@ export class NovoSelectElement
 
   ngOnInit() {
     this.stateChanges.next();
-    this._initLegacyOptions();
     this.focusMonitor.monitor(this.elementRef.nativeElement).subscribe((origin) =>
       this.ngZone.run(() => {
         this._focused = !!origin;
