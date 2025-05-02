@@ -445,8 +445,6 @@ export class NovoSelectElement
     return false;
   }
 
-
-
   openPanel() {
     super.openPanel();
     this._highlightCorrectOption();
