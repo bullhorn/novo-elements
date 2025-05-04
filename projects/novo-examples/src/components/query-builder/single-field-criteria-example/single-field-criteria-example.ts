@@ -68,4 +68,12 @@ export class SingleFieldCriteriaExample implements OnInit {
   onSubmit() {
     console.log('Your form data : ', this.queryForm.value);
   }
+  
+  sampleSubmitClick() {
+    console.log('Received submit click');
+  }
+
+  sampleSubmitClick2() {
+    console.log('Received submit2 click');
+  }
 }

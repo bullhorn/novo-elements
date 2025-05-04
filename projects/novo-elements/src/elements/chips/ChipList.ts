@@ -12,6 +12,7 @@ import {
   DoCheck,
   ElementRef,
   EventEmitter,
+  HostBinding,
   Input,
   OnDestroy,
   OnInit,
@@ -29,6 +30,7 @@ import { CanUpdateErrorState, CanUpdateErrorStateCtor, ErrorStateMatcher, mixinE
 import { NovoFieldControl } from 'novo-elements/elements/field';
 import { NovoChipElement, NovoChipEvent, NovoChipSelectionChange } from './Chip';
 import { NovoChipTextControl } from './ChipTextControl';
+import { trigger, transition, style, animate } from '@angular/animations';
 
 // Boilerplate for applying mixins to NovoChipList.
 /** @docs-private */
@@ -89,6 +91,15 @@ export class NovoChipListChange {
   providers: [
     { provide: NovoFieldControl, useExisting: NovoChipList },
     { provide: NOVO_OPTION_PARENT_COMPONENT, useExisting: NovoChipList },
+  ],
+  animations: [
+    trigger('grow', [
+        transition('void <=> *', []),
+        transition('* <=> *', [
+            style({ height: '{{transitionStartHeight}}px'}),
+            animate('1s ease')
+        ], { params: { transitionStartHeight: 0 }})
+    ])
   ],
   // styleUrls: ['./ChipList.scss'],
   encapsulation: ViewEncapsulation.None,
@@ -154,6 +165,12 @@ export class NovoChipList
   _onChange: (value: any) => void = () => {};
 
   _selectionModel: SelectionModel<NovoChipElement>;
+
+  transitionStartHeight: number;
+
+  heightTriggerValue = 0;
+
+  @HostBinding('@grow') grow: any;
 
   /** The array of selected chips inside chip list. */
   get selected(): NovoChipElement[] | NovoChipElement {
@@ -526,6 +543,7 @@ export class NovoChipList
       this._keyManager.setFirstItemActive();
       this.stateChanges.next();
     }
+    this._beginHeightTransition();
   }
 
   /** Attempt to focus an input if we have one. */
@@ -643,6 +661,14 @@ export class NovoChipList
     });
   }
 
+  private _beginHeightTransition(): void {
+    this.grow = {
+      value: this.heightTriggerValue++,
+      params: { transitionStartHeight: this._elementRef.nativeElement.clientHeight }
+    };
+    // console.log('Grow', this.grow);
+  }
+
   /**
    * Deselects every chip in the list.
    * @param skip Chip that should not be deselected.
@@ -655,6 +681,7 @@ export class NovoChipList
       }
     });
     this.stateChanges.next();
+    this._beginHeightTransition();
   }
 
   /**
@@ -710,6 +737,7 @@ export class NovoChipList
         this._markAsTouched();
       }
     }
+    this._beginHeightTransition();
   }
 
   /** Mark the field as touched */
@@ -813,6 +841,7 @@ export class NovoChipList
         this._lastDestroyedChipIndex = chipIndex;
       }
       this.stateChanges.next();
+      this._beginHeightTransition();
     });
   }
 
