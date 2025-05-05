@@ -27,7 +27,7 @@ export type TabbedGroupPickerTab = {
   valueField: string;
   labelField: string;
   scrollOffset?: number;
-  icon?: string;
+  icon?: any;
 } & (ParentTab | ChildTab);
 
 export type ParentTab = {
@@ -104,6 +104,7 @@ export class NovoTabbedGroupPickerElement implements OnDestroy, OnInit {
   @Output() selectionChange = new EventEmitter<TabbedGroupPickerTab[]>();
   @Output() applyChange: EventEmitter<any> = new EventEmitter<any>();
   @Output() cancelChange: EventEmitter<any> = new EventEmitter<any>();
+  @Output() tabSelect: EventEmitter<any> = new EventEmitter<any>();
 
   displayTabs: TabbedGroupPickerTab[];
   displayTabIndex: number = 0;
@@ -172,6 +173,7 @@ export class NovoTabbedGroupPickerElement implements OnDestroy, OnInit {
 
   changeTab(tab: TabbedGroupPickerTab) {
     this.displayTab = tab;
+    this.tabSelect.emit(tab);
     if (this.scrollableInstance) {
       this.scrollableInstance.scrollTo({ behavior: 'auto', top: 0 });
     }

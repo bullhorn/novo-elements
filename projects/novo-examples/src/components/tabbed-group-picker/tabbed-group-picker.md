@@ -34,6 +34,6 @@ When checkboxes are disabled in the activation picker, we can still listen for "
 
 ## Chips
 
-Use the chips picker instead of a dropdown
+Use a Chip List display inside of the Tabbed Group Picker to show selected options.
 
 <code-example example="tabbed-group-picker-chips"></code-example>

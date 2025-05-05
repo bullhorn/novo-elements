@@ -2840,7 +2840,7 @@ export class SwitchPage {
 <h2>Footer</h2>
 <p><code-example example="tabbed-group-picker-footer"></code-example></p>
 <h2>Chips</h2>
-<p>Use the chips picker instead of a dropdown</p>
+<p>Use a Chip List display inside of the Tabbed Group Picker to show selected options.</p>
 <p><code-example example="tabbed-group-picker-chips"></code-example></p>
 `,
   host: { class: 'markdown-page' }

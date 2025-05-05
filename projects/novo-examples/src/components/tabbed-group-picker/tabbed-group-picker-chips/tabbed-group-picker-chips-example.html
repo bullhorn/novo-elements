@@ -4,7 +4,7 @@
     [tabs]="example_tab"
     [buttonConfig]="example_buttonConfig"
     [showFooter]="true"
-    (cancelChange)="onCancelChange($event)"
+    (cancelChange)="resetState($event)"
     (selectionChange)="onSelectionChange($event)"
   ></novo-tabbed-group-picker>
   <div class="selected-data-wrapper">
