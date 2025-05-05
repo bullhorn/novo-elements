@@ -172,8 +172,8 @@ export class NovoTabbedGroupPickerElement implements OnDestroy, OnInit {
   }
 
   changeTab(tab: TabbedGroupPickerTab) {
+    this.tabSelect.emit({ newTab: tab, oldTab: { ...this.displayTab }});
     this.displayTab = tab;
-    this.tabSelect.emit(tab);
     if (this.scrollableInstance) {
       this.scrollableInstance.scrollTo({ behavior: 'auto', top: 0 });
     }
