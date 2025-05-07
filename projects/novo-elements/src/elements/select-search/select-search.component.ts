@@ -258,7 +258,9 @@ export class NovoSelectSearchComponent implements OnInit, OnDestroy, ControlValu
     @Optional() @Inject(NovoOption) public novoOption: NovoOption = null,
     private liveAnnouncer: LiveAnnouncer,
     @Optional() @Inject(NovoFieldElement) public matFormField: NovoFieldElement = null,
-  ) {}
+  ) {
+    this.novoSelect.hideLegacyOptionsForSearch.set(true);
+  }
 
   ngOnInit() {
     // set custom panel class
