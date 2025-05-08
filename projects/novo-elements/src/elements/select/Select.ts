@@ -286,6 +286,7 @@ export class NovoSelectElement
   @ViewChildren(NovoOption)
   viewOptions: QueryList<NovoOption>;
 
+  // This signal may be set programmatically by a SelectSearchComponent.
   hideLegacyOptionsForSearch = signal(false);
 
   hideLegacyOptions = input(false, { transform: booleanAttribute });
@@ -842,7 +843,7 @@ export class NovoSelectElement
         .map((item) => {
           return {
             ...item,
-            disabled: item.readOnly || item.disabled,
+            disabled: Boolean(item.readOnly || item.disabled),
           };
         })
         .map((item) => {
