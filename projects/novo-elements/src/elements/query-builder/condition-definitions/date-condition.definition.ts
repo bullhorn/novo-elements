@@ -12,7 +12,7 @@ import { NovoLabelService } from 'novo-elements/services';
   selector: 'novo-date-condition-def',
   template: `
     <ng-container novoConditionFieldDef="DATE">
-      <novo-field *novoConditionOperatorsDef="let formGroup" [formGroup]="formGroup">
+      <novo-field *novoConditionOperatorsDef="let formGroup; fieldMeta as meta" [formGroup]="formGroup">
         <novo-select [placeholder]="labels.operator" formControlName="operator" (onSelect)="onOperatorSelect(formGroup)">
           <novo-option value="before">{{ labels.before }}</novo-option>
           <novo-option value="after">{{ labels.after }}</novo-option>
