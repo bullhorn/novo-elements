@@ -293,7 +293,7 @@ export interface IKeywordGroup {
   id: number;
   name: string;
   uniqueName?: string;
-  keywords: IKeyword[];
+  keywords?: IKeyword[];
 }
 
 export interface IKeywordBlock {
