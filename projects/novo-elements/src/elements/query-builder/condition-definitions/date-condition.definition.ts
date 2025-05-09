@@ -18,7 +18,7 @@ import { NovoLabelService } from 'novo-elements/services';
           <novo-option value="after">{{ labels.after }}</novo-option>
           <novo-option value="within">{{ labels.within }}</novo-option>
           <novo-option value="between">{{ labels.between }}</novo-option>
-          <novo-option value="isNull">{{ labels.isEmpty }}</novo-option>
+          <novo-option value="isNull" *ngIf="!meta?.removeIsEmpty">{{ labels.isEmpty }}</novo-option>
         </novo-select>
       </novo-field>
       <ng-container *novoConditionInputDef="let formGroup; viewIndex as viewIndex" [ngSwitch]="formGroup.value.operator" [formGroup]="formGroup">
