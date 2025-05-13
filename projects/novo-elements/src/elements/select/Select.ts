@@ -654,7 +654,7 @@ export class NovoSelectElement
           hasDeselectedOptions ? option.select() : option.deselect();
         }
       });
-    } else if (Key.Escape === key) {
+    } else if (Key.Escape === key || Key.Tab === key) {
       this.closePanel();
     } else {
       const previouslyFocusedIndex = manager.activeItemIndex;
