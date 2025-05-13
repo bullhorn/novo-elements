@@ -261,6 +261,8 @@ const task = () => {
       }
 
       results.push(example);
+    } else {
+      console.warn(`No primary component located for example file "${sourcePath}". It may be missing a title comment.`)
     }
   }
 

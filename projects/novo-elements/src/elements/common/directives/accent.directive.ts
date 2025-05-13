@@ -1,12 +1,12 @@
 // tslint:disable: directive-selector
-import { ChangeDetectorRef, Directive, ElementRef, HostBinding, Input } from '@angular/core';
+import { ChangeDetectorRef, Directive, HostBinding, Input, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { NovoTheme, ThemeChangeEvent } from '../theme/theme-options';
 
 @Directive({
   selector: '[accent]',
 })
-export class AccentColorDirective {
+export class AccentColorDirective implements OnDestroy {
   private subscription: Subscription;
 
   @Input() accent: string;
@@ -20,13 +20,13 @@ export class AccentColorDirective {
     return `novo-accent-${this.accent}`;
   }
 
-  constructor(private el: ElementRef, private theme: NovoTheme, protected cdr: ChangeDetectorRef) {
+  constructor(private theme: NovoTheme, protected cdr: ChangeDetectorRef) {
     this.subscription = this.theme.onThemeChange.subscribe((event: ThemeChangeEvent) => {
       this.cdr.markForCheck();
     });
   }
 
-  onDestroy(): void {
+  ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
 }

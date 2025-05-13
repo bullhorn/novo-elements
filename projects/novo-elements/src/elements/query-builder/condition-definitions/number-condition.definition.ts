@@ -17,7 +17,6 @@ import { NovoLabelService } from 'novo-elements/services';
           <novo-option value="lessThan">{{ labels.lessThan }}</novo-option>
           <novo-option value="equalTo">{{ labels.equalTo }}</novo-option>
           <novo-option value="between">{{ labels.between }}</novo-option>
-          <novo-option value="isNull">{{ labels.isEmpty }}</novo-option>
         </novo-select>
       </novo-field>
       <ng-container *novoConditionInputDef="let formGroup" [ngSwitch]="formGroup.value.operator" [formGroup]="formGroup">
