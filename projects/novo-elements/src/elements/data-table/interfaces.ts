@@ -9,20 +9,8 @@ export interface IDataTablePreferences {
   pageSize?: number;
   displayedColumns?: string[];
   columnWidths?: { id: string; width: number }[];
-  savedSearchId?: number;
   savedSearchName?: string;
-  savedSearchOwner?: DataTableSavedSearchOwner;
   appliedSearchType?: AppliedSearchType;
-  autobuildEntity?: AutobuildEntityData;
-  hasUnsavedChanges?: boolean;
-  unsavedChanges?: any;
-  useBooleanKeywords?: boolean;
-}
-
-export interface AutobuildEntityData {
-  id: number;
-  searchEntity: string;
-  [key: string]: any;
 }
 
 export interface DataTableWhere {
@@ -32,12 +20,6 @@ export interface DataTableWhere {
   booleanKeywords?: string;
   scoreByEntityId?: number;
   form: any;
-}
-
-export interface DataTableSavedSearchOwner {
-  id: number;
-  firstName: string;
-  lastName: string;
 }
 
 export enum AppliedSearchType {
