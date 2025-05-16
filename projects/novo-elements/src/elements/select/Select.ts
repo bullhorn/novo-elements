@@ -5,13 +5,16 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { hasModifierKey } from '@angular/cdk/keycodes';
 import {
   AfterViewInit,
+  booleanAttribute,
   ChangeDetectorRef,
   Component,
+  computed,
   ContentChildren,
   ElementRef,
   EventEmitter,
   HostListener,
   Inject,
+  input,
   Input,
   NgZone,
   OnChanges,
@@ -21,6 +24,7 @@ import {
   Output,
   QueryList,
   Self,
+  signal,
   SimpleChanges,
   ViewChild,
   ViewChildren,
@@ -206,6 +210,12 @@ export class NovoSelectElement
   _userTabIndex: number | null = null;
   /** The FocusKeyManager which handles focus. */
   _keyManager: ActiveDescendantKeyManager<NovoOption>;
+  /** 
+   * The display string for the current value, kept from when the associated <novo-option> has stopped rendering
+   * due to filtration
+   */
+  private _lingeringDisplayValue: string = null;
+  private _legacyOption: any;
 
   @Input()
   id: string = this._uniqueId;
@@ -276,6 +286,15 @@ export class NovoSelectElement
   @ViewChildren(NovoOption)
   viewOptions: QueryList<NovoOption>;
 
+  // This signal may be set programmatically by a SelectSearchComponent.
+  hideLegacyOptionsForSearch = signal(false);
+
+  hideLegacyOptions = input(false, { transform: booleanAttribute });
+
+  private displayLegacyOptions = computed(() => {
+    return !(this.hideLegacyOptionsForSearch() || this.hideLegacyOptions());
+  })
+
   @ViewChild('panel')
   panel: ElementRef;
 
@@ -294,6 +313,7 @@ export class NovoSelectElement
         this._setSelectionByValue(newValue);
       }
       this._value = newValue;
+      this._lingeringDisplayValue = null;
     }
   }
   private _value: any = null;
@@ -504,17 +524,20 @@ export class NovoSelectElement
     });
     if (correspondingOption) {
       this._selectionModel.select(correspondingOption);
-    } else if (value && !correspondingOption) {
+    } else if (value && !correspondingOption && this.displayLegacyOptions()) {
+      // If searchComponent is present, we are using a text input filter; so if there is an
+      // option not in the list, it is just filtered out
       // Double Check option not already added.
       const legacyOption = this.filteredOptions.find((it) => it.value === value);
       if (!legacyOption) {
         // Add a disabled option to the list and select it
-        this.filteredOptions.push({
+        this._legacyOption = {
           disabled: true,
           tooltip: 'Value is not provided in list of valid options.',
           label: value?.label || value,
           value,
-        });
+        }
+        this.filteredOptions.push(this._legacyOption);
         this.ref.detectChanges();
       }
     }
@@ -556,6 +579,10 @@ export class NovoSelectElement
         }
       }
     }
+    const legacyOptionIndex = this.filteredOptions.lastIndexOf(this._legacyOption);
+    if (legacyOptionIndex !== -1) {
+      this.filteredOptions.splice(legacyOptionIndex, 1);
+    }
 
     if (wasSelected !== this._selectionModel.isSelected(option)) {
       this._propagateChanges();
@@ -566,7 +593,7 @@ export class NovoSelectElement
 
   private _getDisplayValue(option: NovoOption & { value?: any; label?: string }): string {
     if (!option) {
-      return '';
+      return this._lingeringDisplayValue ?? '';
     }
     let toDisplay = option.viewValue;
     if (this.displayWith) {
@@ -574,7 +601,12 @@ export class NovoSelectElement
     }
     // Simply falling back to an empty string if the display value is falsy does not work properly.
     // The display value can also be the number zero and shouldn't fall back to an empty string.
-    const displayValue = toDisplay != null ? toDisplay : '';
+    let displayValue = toDisplay != null ? toDisplay : '';
+    if (displayValue != '') {
+      this._lingeringDisplayValue = displayValue;
+    } else if (this._lingeringDisplayValue) {
+      displayValue = this._lingeringDisplayValue;
+    }
     return displayValue;
   }
 
@@ -811,7 +843,7 @@ export class NovoSelectElement
         .map((item) => {
           return {
             ...item,
-            disabled: item.readOnly || item.disabled,
+            disabled: Boolean(item.readOnly || item.disabled),
           };
         })
         .map((item) => {
