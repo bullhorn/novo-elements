@@ -12,13 +12,13 @@ import { NovoLabelService } from 'novo-elements/services';
   selector: 'novo-date-time-condition-def',
   template: `
     <ng-container novoConditionFieldDef="DATE">
-      <novo-field *novoConditionOperatorsDef="let formGroup" [formGroup]="formGroup">
+      <novo-field *novoConditionOperatorsDef="let formGroup; fieldMeta as meta" [formGroup]="formGroup">
         <novo-select [placeholder]="labels.operator" formControlName="operator" (onSelect)="onOperatorSelect(formGroup)">
           <novo-option value="before">{{ labels.before }}</novo-option>
           <novo-option value="after">{{ labels.after }}</novo-option>
           <novo-option value="within">{{ labels.within }}</novo-option>
           <novo-option value="between">{{ labels.between }}</novo-option>
-          <novo-option value="isNull">{{ labels.isEmpty }}</novo-option>
+          <novo-option value="isNull" *ngIf="!meta?.removeIsEmpty">{{ labels.isEmpty }}</novo-option>
         </novo-select>
       </novo-field>
       <ng-container *novoConditionInputDef="let formGroup; viewIndex as viewIndex" [ngSwitch]="formGroup.value.operator" [formGroup]="formGroup">
