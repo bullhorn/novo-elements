@@ -210,7 +210,7 @@ export class NovoSelectElement
   _userTabIndex: number | null = null;
   /** The FocusKeyManager which handles focus. */
   _keyManager: ActiveDescendantKeyManager<NovoOption>;
-  /** 
+  /**
    * The display string for the current value, kept from when the associated <novo-option> has stopped rendering
    * due to filtration
    */
@@ -389,6 +389,7 @@ export class NovoSelectElement
 
   ngOnInit() {
     this.stateChanges.next();
+    this._initLegacyOptions();
     this.focusMonitor.monitor(this.elementRef.nativeElement).subscribe((origin) =>
       this.ngZone.run(() => {
         this._focused = !!origin;
