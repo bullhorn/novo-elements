@@ -615,7 +615,7 @@ export class NovoSelectElement
   private _handleClosedKeydown(event: KeyboardEvent): void {
     const key = event.key;
     const isArrowKey = key === Key.ArrowDown || key === Key.ArrowUp || key === Key.ArrowLeft || key === Key.ArrowRight;
-    const isOpenKey = key === Key.Enter || key === Key.Space;
+    const isOpenKey = key === Key.Enter || key === Key.Space || key === Key.Tab;
     const manager = this._keyManager;
     // Open the select on ALT + arrow key to match the native <select>
     if ((!manager.isTyping() && isOpenKey && !hasModifierKey(event)) || ((this.multiple || event.altKey) && isArrowKey)) {
