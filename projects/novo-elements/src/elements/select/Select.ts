@@ -447,6 +447,7 @@ export class NovoSelectElement
 
   openPanel() {
     super.openPanel();
+    this._highlightCorrectOption();
   }
 
   private _initializeSelection(): void {
