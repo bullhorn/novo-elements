@@ -781,14 +781,10 @@ export class NovoSelectElement
    */
   private _highlightCorrectOption(): void {
     if (this._keyManager) {
-      if (this.empty) {
-        this._keyManager.setFirstItemActive();
-      } else {
         const options = this._getOptions();
-        const index = options.findIndex(option => option.value == this._value)
+        const index = options.findIndex(option => option.value === this._value)
         this._keyManager.setActiveItem(index);
       }
-    }
   }
 
   /** Calculates the height of the select's options. */
