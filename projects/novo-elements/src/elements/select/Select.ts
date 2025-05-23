@@ -615,10 +615,12 @@ export class NovoSelectElement
   private _handleClosedKeydown(event: KeyboardEvent): void {
     const key = event.key;
     const isArrowKey = key === Key.ArrowDown || key === Key.ArrowUp || key === Key.ArrowLeft || key === Key.ArrowRight;
-    const isOpenKey = key === Key.Enter || key === Key.Space || key === Key.Tab;
+    const isOpenKey = key === Key.Enter || key === Key.Space;
     const manager = this._keyManager;
     // Open the select on ALT + arrow key to match the native <select>
-    if ((!manager.isTyping() && isOpenKey && !hasModifierKey(event)) || ((this.multiple || event.altKey) && isArrowKey)) {
+    if (key === Key.Tab) {
+      this.closePanel();
+    } else if ((!manager.isTyping() && isOpenKey && !hasModifierKey(event)) || ((this.multiple || event.altKey) && isArrowKey)) {
       event.preventDefault(); // prevents the page from scrolling down when pressing space
       this.openPanel();
     }
@@ -781,10 +783,14 @@ export class NovoSelectElement
    */
   private _highlightCorrectOption(): void {
     if (this._keyManager) {
+      if (this.empty) {
+        this._keyManager.setFirstItemActive();
+      } else {
         const options = this._getOptions();
         const index = options.findIndex(option => option.value === this._value)
         this._keyManager.setActiveItem(index);
       }
+    }
   }
 
   /** Calculates the height of the select's options. */
