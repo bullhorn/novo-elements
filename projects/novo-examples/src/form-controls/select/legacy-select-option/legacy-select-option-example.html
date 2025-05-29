@@ -1,0 +1,10 @@
+<novo-field>
+  <novo-label>
+    <span class="caption">Selected Value:</span> {{value}}
+  </novo-label>
+  <novo-select [placeholder]="placeholder" [(ngModel)]="value">
+    <novo-option *ngFor="let option of options" [value]="option">
+      {{option}}
+    </novo-option>
+  </novo-select>
+</novo-field>
