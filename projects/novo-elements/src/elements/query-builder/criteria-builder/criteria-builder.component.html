@@ -2,26 +2,21 @@
   <novo-stack [formArrayName]="controlName" class="criteria-builder-inner">
     <ng-container
       *ngFor="let andGroup of root.controls; let andIndex = index; let isFirst = first;let isLastAnd = last;">
-      <novo-label *ngIf="!isFirst" color="ash" size="xs" uppercase padding="sm">{{qbs.getConjunctionLabel('and')}}
-      </novo-label>
-      <novo-condition-group [groupIndex]="andIndex" [formGroupName]="andIndex"></novo-condition-group>
+      <novo-label *ngIf="!isFirst" color="ash" size="xs" uppercase padding="sm">{{ qbs.hasMultipleScopes() ? conditionGroup.scope + ' ' + labels.filterss : qbs.getConjunctionLabel('and') }}</novo-label>
+      <novo-condition-group [hideFirstOperator]="hideFirstOperator" [canBeEmpty]="canBeEmpty" [groupIndex]="andIndex" [formGroupName]="andIndex" #conditionGroup></novo-condition-group>
     </ng-container>
   </novo-stack>
+  <novo-tabbed-group-picker
+    *ngIf="qbs.hasMultipleScopes()"
+    [tabs]="tabbedGroupPickerTabs()"
+    [selectionEnabled]="false"
+    [buttonConfig]="addButtonConfig"
+    (activation)="onFieldSelect($event)">
+  </novo-tabbed-group-picker>
 </form>
-<novo-id-condition-def name="ID"></novo-id-condition-def>
-<novo-date-condition-def name="DATE"></novo-date-condition-def>
-<novo-date-time-condition-def name="TIMESTAMP"></novo-date-time-condition-def>
-<novo-string-condition-def name="STRING"></novo-string-condition-def>
-<novo-number-condition-def name="FLOAT"></novo-number-condition-def>
-<novo-number-condition-def name="INTEGER"></novo-number-condition-def>
-<novo-number-condition-def name="BIGDECIMAL"></novo-number-condition-def>
-<novo-number-condition-def name="DOUBLE"></novo-number-condition-def>
-<novo-address-condition-def name="ADDRESS"></novo-address-condition-def>
-<novo-boolean-condition-def name="BOOLEAN"></novo-boolean-condition-def>
-<novo-picker-condition-def name="SELECT"></novo-picker-condition-def>
-<novo-string-condition-def name="DEFAULT"></novo-string-condition-def>
+<novo-condition-templates [addressConfig]="addressConfig"/>
 
-<!-- 
+<!--
   {
     $and: [{
       $or: [{

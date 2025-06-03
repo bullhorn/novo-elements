@@ -2,7 +2,8 @@
 
 ## Automatic
 
-    # On the Github Actions Tab, run the Workflow for "Release Novo Elements" 
+    # On the Github Actions Tab, run the Workflow for "Release Novo Elements"
+    # The release version number will be decided based on commits tagged with "feat()", "fix()", "chore()", "breaking()", "refactor()" messages. Others may not trigger a release.
 
 
 ### Manual (if automatic fails)

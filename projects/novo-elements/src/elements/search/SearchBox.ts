@@ -10,6 +10,7 @@ import {
   HostBinding,
   Input,
   NgZone,
+  OnInit,
   Output,
   ViewChild,
 } from '@angular/core';
@@ -60,7 +61,7 @@ const SEARCH_VALUE_ACCESSOR = {
   `,
   styleUrls: ['./SearchBox.scss'],
 })
-export class NovoSearchBoxElement implements ControlValueAccessor {
+export class NovoSearchBoxElement implements ControlValueAccessor, OnInit {
   @Input()
   public name: string;
   @Input()
@@ -90,6 +91,8 @@ export class NovoSearchBoxElement implements ControlValueAccessor {
   public hasBackdrop: boolean = false;
   @Input()
   public allowPropagation: boolean = false;
+  @Input()
+  public overrideElement: ElementRef;
   @Output()
   public searchChanged: EventEmitter<string> = new EventEmitter<string>();
   @Output()
@@ -117,6 +120,12 @@ export class NovoSearchBoxElement implements ControlValueAccessor {
     private _changeDetectorRef: ChangeDetectorRef,
     private _zone: NgZone,
   ) {}
+
+  ngOnInit() {
+    if (this.overrideElement) {
+      this.element = this.overrideElement;
+    }
+  }
 
   /**
    * @name showFasterFind

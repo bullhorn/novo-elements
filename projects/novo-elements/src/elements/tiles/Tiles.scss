@@ -1,15 +1,7 @@
 @import "../../styles/variables.scss";
 
 :host {
-  $border-width: 0.2em;
-  $border-radius: 3px;
-  $positive-lighter: lighten($positive, 20%);
-  $disabled-color: lighten($grey, 20%);
   display: inline-block;
-  position: relative;
-  color: $positive;
-  $border-properties: solid $border-width $positive-lighter;
-
   input {
     appearance: none !important;
     height: 0 !important;
@@ -17,66 +9,38 @@
     position: absolute;
   }
   & > .tile-container {
+    background: $white;
     display: flex;
-    text-align: center;
-    background-color: var(--background-bright);
-    border: solid thin $ocean;
-    border-radius: $border-radius;
-    position: relative;
-    align-items: center;
+    border: solid thin $slate;
+    border-radius: 3px;
     .tile {
-      padding: 0 $spacing-md;
-      line-height: 3.2rem;
-      height: 100%;
-      z-index: 1;
-      position: relative;
-      cursor: pointer;
-      letter-spacing: 0.02em;
+      margin: 2px;
+      gap: .5rem;
       &:not(:last-child) {
-        border-right: solid thin $ocean;
+        margin-right: 3px;
       }
-      &:not(.disabled) {
-        &.active {
-          box-shadow: inset 3px 2px 4px 0px rgba(0, 0, 0, 0.3);
-          color: $white;
-          background: $ocean;
-        }
-        &:hover {
-          box-shadow: 0 3px 7px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.15);
-        }
-      }
-      &.active {
-        font-weight: 600;
+      &.defaultColor.active {
+          background: darken($ocean, 20%);
       }
       &.disabled {
         cursor: not-allowed;
         opacity: 0.4;
       }
-      label {
-        z-index: 1;
-        position: relative;
-        cursor: inherit;
+      ::ng-deep span {
+        text-transform: none;
+        label {
+          cursor: inherit;
+        }
       }
     }
-    &.active {
-      color: $positive;
-      border-color: $positive;
-      box-shadow: 0px 0px 15px 3px rgba(74, 137, 220, 0.25);
-    }
     &.disabled {
-      border-color: $disabled-color;
+      border-color: lighten($grey, 20%);
       opacity: 0.4;
       pointer-events: auto;
       cursor: not-allowed;
       .tile {
         pointer-events: none;
         opacity: 1;
-        &:hover {
-          box-shadow: none;
-        }
-        &.active {
-          box-shadow: inset 3px 2px 4px 0px rgba(0, 0, 0, 0.3);
-        }
       }
     }
   }

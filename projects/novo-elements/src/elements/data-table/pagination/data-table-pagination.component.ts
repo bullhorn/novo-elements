@@ -76,6 +76,9 @@ const MAX_PAGES_DISPLAYED = 5;
         [attr.data-feature-id]="dataFeatureId"
       >
       </novo-select>
+      <div *ngIf="showPaginationTotalRecordCount && !loading && !errorLoading" class="novo-data-table-of-total-amount" data-automation-id="novo-data-table-of-total-amount">
+        {{ labels.ofXAmount(length) }}
+      </div>
       <span class="spacer"></span>
       <ul *ngIf="!loading && !errorLoading" class="pager" data-automation-id="pager">
         <li class="page" (click)="selectPage(page - 1)" [ngClass]="{ disabled: page === 0 }">
@@ -88,7 +91,7 @@ const MAX_PAGES_DISPLAYED = 5;
           <i class="bhi-next" data-automation-id="pager-next"></i>
         </li>
       </ul>
-      <novo-loading *ngIf="loading"></novo-loading>
+      <novo-spinner *ngIf="loading"></novo-spinner>
       <button *ngIf="errorLoading"
               theme="primary"
               color="negative"
@@ -114,6 +117,7 @@ export class NovoDataTablePagination<T> implements OnInit, OnDestroy {
     this.longRangeLabel = this.labels.getRangeText(this.page, this.pageSize, this.length, false);
     this.shortRangeLabel = this.labels.getRangeText(this.page, this.pageSize, this.length, true);
     this.state.page = this._page;
+    this.updateDisplayedPageSizeOptions();
   }
   _page: number = 0;
 
@@ -149,6 +153,8 @@ export class NovoDataTablePagination<T> implements OnInit, OnDestroy {
   public errorLoading: boolean = false;
   @Input()
   public paginationRefreshSubject = new Subject<void>();
+  @Input()
+  public showPaginationTotalRecordCount: boolean = false;
 
   @Input()
   get length(): number {

@@ -4,25 +4,35 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  computed,
   ContentChildren,
   forwardRef,
   Input,
   OnDestroy,
   OnInit,
   QueryList,
+  viewChild,
+  viewChildren,
 } from '@angular/core';
-import { ControlContainer, FormArray, FormBuilder, UntypedFormGroup, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
+import { ControlContainer, FormArray, FormBuilder, NG_VALUE_ACCESSOR, UntypedFormGroup, Validators } from '@angular/forms';
 import { interval, Subject } from 'rxjs';
-import { debounce, takeUntil } from 'rxjs/operators';
+import { debounce, filter, startWith, takeUntil } from 'rxjs/operators';
+import { NovoTabbedGroupPickerElement, TabbedGroupPickerButtonConfig, TabbedGroupPickerTab } from 'novo-elements/elements/tabbed-group-picker';
+import { NovoLabelService } from 'novo-elements/services';
+import { Helpers } from 'novo-elements/utils';
+import { ConditionGroupComponent } from '../condition-group/condition-group.component';
 import { NovoConditionFieldDef } from '../query-builder.directives';
 import { QueryBuilderService } from '../query-builder.service';
 import { NOVO_CRITERIA_BUILDER } from '../query-builder.tokens';
-import { BaseFieldDef, Condition, ConditionGroup, Conjunction } from '../query-builder.types';
+import { BaseFieldDef, Condition, ConditionGroup, Conjunction, AddressCriteriaConfig } from '../query-builder.types';
 
 const EMPTY_CONDITION: Condition = {
+  conditionType: '$and',
   field: null,
   operator: null,
+  scope: null,
   value: null,
+  supportingValue: null,
 };
 @Component({
   selector: 'novo-criteria-builder',
@@ -43,11 +53,46 @@ export class CriteriaBuilderComponent implements OnInit, OnDestroy, AfterContent
   @Input() controlName: string;
   @Input() allowedGroupings = [Conjunction.AND, Conjunction.OR, Conjunction.NOT];
   @Input() editTypeFn: (field: BaseFieldDef) => string;
+  @Input() addressConfig: AddressCriteriaConfig;
+  @Input() canBeEmpty: boolean = false;
+
+  @Input('hideFirstOperator')
+  set HideFirstOperator(hide: boolean) {
+      if (!Helpers.isEmpty(hide)) {
+        this._hideFirstOperator = hide;
+      }
+  }
+  get hideFirstOperator() {
+    return this._hideFirstOperator;
+  }
+  private _hideFirstOperator: boolean = true;
 
   @ContentChildren(NovoConditionFieldDef, { descendants: true }) _contentFieldDefs: QueryList<NovoConditionFieldDef>;
+  scopedFieldPicker = viewChild(NovoTabbedGroupPickerElement);
+  conditionGroups = viewChildren(ConditionGroupComponent);
 
   public parentForm: UntypedFormGroup;
   public innerForm: UntypedFormGroup;
+  public tabbedGroupPickerTabs = computed<TabbedGroupPickerTab[]>(() => {
+    const tabs = [];
+    this.qbs.scopes()?.forEach((scope) => {
+      tabs.push({
+        typeName: scope,
+        typeLabel: scope,
+        valueField: 'name',
+        labelField: 'label',
+        data: this.qbs.config.fields.find((field) => field.value === scope)?.options || [],
+      });
+    });
+    return tabs;
+  });
+  public addButtonConfig: TabbedGroupPickerButtonConfig = {
+    theme: 'dialogue',
+    side: 'left',
+    size: 'sm',
+    icon: 'add-thin',
+    label: this.labels.addCondition,
+  };
   /** Subject that emits when the component has been destroyed. */
   private readonly _onDestroy = new Subject<void>();
 
@@ -56,7 +101,12 @@ export class CriteriaBuilderComponent implements OnInit, OnDestroy, AfterContent
     private formBuilder: FormBuilder,
     private cdr: ChangeDetectorRef,
     public qbs: QueryBuilderService,
-  ) {}
+    public labels: NovoLabelService,
+  ) {
+    if (!qbs.componentHost) {
+      qbs.componentHost = this;
+    }
+  }
 
   ngOnInit() {
     this.parentForm = this.controlContainer.control as UntypedFormGroup;
@@ -64,9 +114,13 @@ export class CriteriaBuilderComponent implements OnInit, OnDestroy, AfterContent
       criteria: this.formBuilder.array([]),
     });
 
-    this.parentForm.valueChanges.pipe(takeUntil(this._onDestroy)).subscribe((value) => {
+    this.parentForm.valueChanges.pipe(
+      startWith(this.parentForm.value),
+      filter(v => v?.criteria),
+      takeUntil(this._onDestroy)
+    ).subscribe((value) => {
       Promise.resolve().then(() => {
-        this.setInitalValue(value[this.controlName]);
+        this.setInitialValue(value[this.controlName]);
         this.cdr.markForCheck();
       });
     });
@@ -105,13 +159,30 @@ export class CriteriaBuilderComponent implements OnInit, OnDestroy, AfterContent
     this._onDestroy.complete();
   }
 
-  private isConditionGroup(group: unknown) {
+  private isConditionGroup(group: unknown): group is ConditionGroup {
     return Object.keys(group).every((key) => ['$and', '$or', '$not'].includes(key));
   }
 
-  private setInitalValue(value: ConditionGroup[] | Condition[]) {
-    if (value.length && this.isConditionGroup(value[0])) {
-      value.forEach((it) => this.addConditionGroup(it));
+  private setInitialValue(value: ConditionGroup[] | Condition[]) {
+    if (value.length) {
+      if (this.isConditionGroup(value[0])) {
+        value.forEach((it) => this.addConditionGroup(it));
+      } else {
+        const conditions: Condition[] = [...value] as Condition[];
+        if (this.qbs.hasMultipleScopes()) {
+          // divide up by scope into separate groups
+          const scopedConditions: { [key: string]: Condition[] } = {};
+          conditions.forEach((condition) => {
+            scopedConditions[condition.scope] = scopedConditions[condition.scope] || [];
+            scopedConditions[condition.scope].push(condition);
+          })
+          for (const scope in scopedConditions) {
+            this.addConditionGroup({ $and: scopedConditions[scope] });
+          }
+        } else {
+          this.addConditionGroup({ $and: conditions });
+        }
+      }
     } else {
       this.addConditionGroup({ $and: value });
     }
@@ -136,11 +207,14 @@ export class CriteriaBuilderComponent implements OnInit, OnDestroy, AfterContent
     return this.formBuilder.group(controls);
   }
 
-  newCondition({ field, operator, value }: Condition = EMPTY_CONDITION): UntypedFormGroup {
+  newCondition({ field, operator, scope, value, supportingValue }: Condition = EMPTY_CONDITION): UntypedFormGroup {
     return this.formBuilder.group({
+      conditionType: '$and',
       field: [field, Validators.required],
       operator: [operator, Validators.required],
+      scope: [scope],
       value: [value],
+      supportingValue: [supportingValue],
     });
   }
 
@@ -154,7 +228,19 @@ export class CriteriaBuilderComponent implements OnInit, OnDestroy, AfterContent
     }
   }
 
+  onFieldSelect(field) {
+    this.scopedFieldPicker().dropdown.closePanel();
+    const condition = { field: field.name, operator: null, scope: field.scope, value: null };
+    const group = this.conditionGroups().find((group) => group.scope === field.scope);
+    if (group) {
+      group.addCondition(condition);
+    } else {
+      this.addConditionGroup({ $and: [condition] })
+    }
+  }
+
   private _configureQueryBuilderService() {
+    this.qbs.scopes.set(this.config?.fields.map((f) => f.value));
     this.qbs.config = this.config;
     this.qbs.editTypeFn = this.editTypeFn;
     this.qbs.allowedGroupings = this.allowedGroupings as Conjunction[];

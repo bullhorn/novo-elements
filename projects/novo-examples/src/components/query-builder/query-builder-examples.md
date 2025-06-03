@@ -11,6 +11,11 @@ A common use case is to just collect a list of criteria to build as a query.  A 
 
 <code-example example="just-criteria"></code-example>
 
+# Single Field Criteria Builder
+
+While the Criteria Builder can support multiple fields at once, its UI can also be configured to express a condition on a single field specified in via configuration input. This mode is more suitable for compact scenarios.
+
+<code-example example="single-field-criteria"></code-example>
 
 ## Full Query Builder
 

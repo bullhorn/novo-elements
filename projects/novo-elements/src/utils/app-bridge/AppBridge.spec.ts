@@ -1,5 +1,17 @@
-import { AppBridge } from './AppBridge';
-import { AppBridgeHandler, MessageType } from './interfaces';
+import { HttpClient } from '@angular/common/http';
+import { AppBridge, DevAppBridge, DevAppBridgeService } from './AppBridge';
+import { AppBridgeHandler, MESSAGE_TYPES, MessageType } from './interfaces';
+import { HttpClientTestingModule } from '@angular/common/http/testing'
+import { TestBed} from '@angular/core/testing';
+
+// the object coming back from this function references itself.
+// Crucially, this is similar to the extensive functionality/references of the Window object,
+// which we never want to send through PostRobot.
+function makeSelfReferentialObject() {
+    let circularObject: any = {};
+    circularObject.selfRef = circularObject;
+    return circularObject;
+}
 
 class MockPostrobot {
 
@@ -11,9 +23,16 @@ class MockPostrobot {
 
     // In actual code these will be Window objects, but with cross-origin access blocked, all we
     // can do is compare their equality.
-    mockSource = Symbol();
+    mockSource = makeSelfReferentialObject();
 
-    static allPostRobots: MockPostrobot[] = [];
+    static readonly allPostRobots: MockPostrobot[] = [];
+
+    // turn on to block all sending, and pretend an unexpected error occurred sending through PostRobot
+    public enableGenericSendError = false;
+
+    static clearStaticRecords() {
+        MockPostrobot.allPostRobots.splice(0, MockPostrobot.allPostRobots.length);
+    }
 
     constructor(public mockOrigin: string, public parent?: MockPostrobot) {
         MockPostrobot.allPostRobots.push(this);
@@ -26,13 +45,13 @@ class MockPostrobot {
     sendToParent(msg: MessageType, packet: any, robotOpts: any) {
         this.lastRobotOpts = robotOpts;
         if (!this.parent) {
-            debugger;
             throw new Error(`Tried to send message "${msg}" to parent from host`);
         }
         return this.parent.mockSendToMe(msg, packet, this);
     }
 
     protected mockSendToMe(msg: MessageType, data: any, from: MockPostrobot): Promise<any> {
+        verifySimpleObject(data);
         if (!(this.responders[msg])) {
             throw new Error(`No responder for "${msg}".`);
         }
@@ -45,9 +64,13 @@ class MockPostrobot {
             .then(replyData => ({ data: {...replyData } }));
     }
 
-    send(frameSource: Symbol, eventType: MessageType, data: any): Promise<any> {
+    send(frameSource: object, eventType: MessageType, data: any): Promise<any> {
+        verifySimpleObject(data);
         if (!frameSource) {
             throw new Error('Null frameSource on send()');
+        }
+        if (this.enableGenericSendError) {
+            throw new Error('Could not send to parent!');
         }
         const recipient = MockPostrobot.allPostRobots.find(c => c.mockSource === frameSource);
         if (recipient) {
@@ -57,6 +80,53 @@ class MockPostrobot {
         }
     }
 }
+
+function verifySimpleObject(obj) {
+    try {
+        JSON.stringify(obj);
+    } catch(err) {
+        throw new Error('Object is not simple enough to use JSON.stringify');
+    }
+}
+
+describe('MockPostrobot', () => {
+
+    let complexObject: any;
+    let mockPostRobot1: MockPostrobot;
+    let mockPostRobot2: MockPostrobot;
+    let putReceive: any;
+    
+    beforeEach(() => {
+        complexObject = makeSelfReferentialObject();
+        mockPostRobot1 = new MockPostrobot('localhost:1');
+        mockPostRobot2 = new MockPostrobot('localhost:2', mockPostRobot1);
+        mockPostRobot1.on('httpPUT', obj => putReceive = obj);
+    });
+    
+    it('accepts normal json-like messages', async () => {
+        const testObj = { a: [ 1, 2, 3], str: 'test' };
+        await mockPostRobot2.send(mockPostRobot1.mockSource, 'httpPUT', testObj);
+        expect(putReceive).toEqual({ data: testObj, origin: mockPostRobot2.mockOrigin, source: mockPostRobot2.mockSource });
+    });
+
+    it('rejects sent messages when they contain abnormal objects', async () => {
+        try {
+            await mockPostRobot2.send(mockPostRobot1.mockSource, 'httpPUT', complexObject);
+            fail('should not have succeeded');
+        } catch(err) {
+            expect(err.message).toBe('Object is not simple enough to use JSON.stringify');
+        }
+    });
+
+    it('rejects a message if it includes the source (window) object', async () => {
+        try {
+            await mockPostRobot2.send(mockPostRobot1.mockSource, 'httpPUT', { sendToWindow: mockPostRobot1.mockSource });
+            fail('should not have succeeded');
+        } catch(err) {
+            expect(err.message).toBe('Object is not simple enough to use JSON.stringify');
+        }
+    })
+})
 
 describe('AppBridge', () => {
 
@@ -108,31 +178,103 @@ describe('AppBridge', () => {
     });
 
     it('opens a window', async () => {
-        // TODO
+        handleFn.mockReturnValue(true);
     });
 
     it('opens a list', async () => {
-        // TODO
+        handleFn.mockReturnValue(true);
+        frame1Bridge.openList({
+            criteria: 'small'
+        });
+        expect(handleFn).toHaveBeenCalledWith(AppBridgeHandler.OPEN_LIST, jasmine.objectContaining({ criteria: 'small' }));
     });
 
-    it('closes a window', async () => {
-        // TODO
+    // This would seem to be the correct, expected outcome of openList but it isn't happening right now.
+    xit('opens a list - using type: List', () => {
+        handleFn.mockReturnValue(true);
+        frame1Bridge.openList({
+            criteria: 'small',
+            type: 'Candidate'
+        });
+        expect(handleFn).toHaveBeenCalledWith(AppBridgeHandler.OPEN_LIST, jasmine.objectContaining({ criteria: 'small', type: 'List', entityType: 'Candidate' }));
     });
 
-    it('refreshes a window', async () => {
-        // TODO
+    describe('Registration-dependent actions', () => {
+        beforeEach(async () => {
+            handleFn.mockReturnValue('terry');
+            await frame1Bridge.register();
+            expect(frame1Bridge.windowName).toBe('terry');
+        });
+
+        it('refreshes a window', async () => {
+            handleFn.mockReturnValue(true);
+            await frame1Bridge.refresh();
+            expect(handleFn).toHaveBeenCalledWith(AppBridgeHandler.REFRESH, jasmine.anything());
+        });
+    
+        it('pins a window', async () => {
+            handleFn.mockReturnValue(true);
+            await frame1Bridge.pin();
+            expect(handleFn).toHaveBeenCalledWith(AppBridgeHandler.PIN, jasmine.objectContaining({ id: frame1Bridge.id, windowName: 'terry' }));
+        });
+
+        it('closes a window', async () => {
+            handleFn.mockReturnValue(true);
+            await frame1Bridge.close();
+            expect(handleFn).toHaveBeenCalledWith(AppBridgeHandler.CLOSE, jasmine.objectContaining({ id: frame1Bridge.id, windowName: 'terry' }));
+        });
+    
+        it('updates app title', async () => {
+            handleFn.mockReturnValue(true);
+            await frame1Bridge.update({
+                title: 'x'
+            });
+            expect(handleFn).toHaveBeenCalledWith(AppBridgeHandler.UPDATE, jasmine.objectContaining({title: 'x', id: frame1Bridge.id, windowName: 'terry' }));
+        });
     });
 
-    it('pins a window', async () => {
-        // TODO
+    it('pings the server', async () => {
+        handleFn.mockReturnValue('pong');
+        await frame1Bridge.ping();
+        expect(handleFn).toHaveBeenCalledWith(AppBridgeHandler.HTTP, { verb: 'get', relativeURL: 'ping', origin: ['localhost:222'] });
     });
 
-    it('pings a window', async () => {
-        // TODO
-    });
+    describe('Failure expectations', () => {
+        const cmdFunctionsWithArgs: Partial<Record<keyof AppBridge, any[]>> = {
+            open: [{}],
+            openList: [{}],
+            close: [],
+            refresh: [],
+            pin: [],
+            update: [{}]
+        };
+        function expectFalseOnAllCalls(failureImplementation: (() => any) | 'enableGenericSendError', failTerm: string) {
+            for (let cmd of Object.keys(cmdFunctionsWithArgs)) {
+                it(`should return false when ${cmd}() receives ${failTerm}`, async () => {
+                    if (failureImplementation === 'enableGenericSendError') {
+                        frame1Robot.enableGenericSendError = true;
+                    } else if (typeof failureImplementation === 'function') {
+                        handleFn.mockImplementation(failureImplementation);
+                    }
+                    try {
+                        const response = await frame1Bridge[cmd].apply(frame1Bridge, cmdFunctionsWithArgs[cmd]);
+                        fail(`Function passed unexpectedly when receiving ${failTerm}. Response: ${response}`);
+                    } catch(result) {
+                        expect(result).toBeFalsy();
+                    }
+                });
+            }
+        }
+        expectFalseOnAllCalls(() => false, 'boolean false');
+        expectFalseOnAllCalls(() => { throw new Error('fail'); }, 'thrown error');
+        expectFalseOnAllCalls('enableGenericSendError', 'an error sending through postrobot');
 
-    it('updates app title', async () => {
-        // TODO
+        it('should return object with error when ping() receives thrown error', async () => {
+            handleFn.mockImplementation(() => { throw new Error('fail'); });
+            const response = await frame1Bridge.ping() as any;
+            expect(response.data).toBeFalsy();
+            expect(response.error.message).toBe('fail');
+        });
     });
 
     it('should perform an httpGET from a sub-child to the parent', async () => {
@@ -321,6 +463,20 @@ describe('AppBridge', () => {
         expect(receivedData2).toEqual(data);
     });
 
+    it('should send an event to a single child by passing in iframe reference', async () => {
+        //spyOn(hostRobot, 'send');
+        frame1Bridge.register();
+        let receivedData: any;
+        frame1Bridge.addEventListener('test', eventData => {
+            receivedData = eventData;
+        });
+        const data = { dataContent: 1000 };
+        const mockIframe: any = { contentWindow: frame1Robot.mockSource };
+        Object.setPrototypeOf(mockIframe, HTMLIFrameElement.prototype);
+        hostBridge.fireEventToChild(mockIframe, 'test', data);
+        expect(receivedData).toEqual(data);
+    });
+
     it('should fire custom events to parents', async () => {
         let receivedEvent = false;
         frame1Bridge.addEventListener('custom', () => {
@@ -330,6 +486,19 @@ describe('AppBridge', () => {
         expect(receivedEvent).toBeTruthy();
     });
 
+    it('should fire custom events to registered neighbor frames', async () => {
+        let extraNeighborRobot = new MockPostrobot('localhost:888', hostRobot);
+        let extraNeighborBridge = new AppBridge('Jest neighbor frame', extraNeighborRobot);
+        let receivedObj: any;
+        extraNeighborBridge.addEventListener('custom', obj => {
+            receivedObj = obj;
+        });
+        await extraNeighborBridge.register();
+        const testObj = { dataContent: 12345 };
+        await frame1Bridge.fireEvent('custom', testObj);
+        expect(receivedObj).toEqual(testObj);
+    })
+
     // This behavior theoretically should be expected, but is not working yet.
     xit('should fire custom events to parents of parents', async () => {
         let receivedEvent = false;
@@ -338,5 +507,28 @@ describe('AppBridge', () => {
         });
         await frame2Bridge.fireEvent('custom', { dataContent: 1000 });
         expect(receivedEvent).toBeTruthy();
+    });
+
+    afterEach(() => {
+        MockPostrobot.clearStaticRecords();
+    });
+});
+
+describe('DevAppBridge', () => {
+    let devAppBridgeService: DevAppBridgeService;
+    let devAppBridge: DevAppBridge;
+    let mockPostRobot: MockPostrobot;
+
+    beforeEach(() => {
+        TestBed.configureTestingModule({
+            imports: [ HttpClientTestingModule ],
+        });
+        const httpClient = TestBed.inject(HttpClient);
+        devAppBridgeService = new DevAppBridgeService(httpClient);
+        mockPostRobot = new MockPostrobot('localhost:1');
+        devAppBridge = devAppBridgeService.create('test', mockPostRobot);
+    })
+    it('should construct', () => {
+        expect(devAppBridge).toBeTruthy();
     });
 });

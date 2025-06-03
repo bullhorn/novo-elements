@@ -25,8 +25,15 @@ export class AppBridgeService {
 
 export class DevAppBridgeService {
   constructor(private http: HttpClient) {}
-  create(name: string) {
-    return new DevAppBridge(name, this.http);
+  create(name: string, postRobotRef?: any) {
+    return new DevAppBridge(name, this.http, postRobotRef);
+  }
+}
+
+// remove attributes unsafe for postrobot.send()
+function cleanPacket(packet: any) {
+  if (packet && typeof packet === 'object' && 'source' in packet) {
+    delete packet.source;
   }
 }
 
@@ -168,6 +175,7 @@ export class AppBridge {
           });
         }
         if (this._registeredFrames.length > 0) {
+          cleanPacket(event.data);
           this._registeredFrames.forEach((frame) => {
             // TODO: Should this make sure it doesn't echo the custom event back to the author?
             this.postRobot.send(frame.source, MESSAGE_TYPES.CUSTOM_EVENT, event.data);
@@ -185,8 +193,11 @@ export class AppBridge {
         } else if (origin.indexOf(event.data.originTraceName) === -1)  {
           origin.unshift(event.data.originTraceName);
         }
-        event.data.origin = origin;
-        event.data.source = event.source;
+        if (event.data) {
+          // known gap - simple commands will not forward origin/source from subchild frames to parent
+          event.data.origin = origin;
+          event.data.source = event.source;
+        }
         return defaultMsgHandlers[msgType](event);
       })
     });
@@ -243,6 +254,7 @@ export class AppBridge {
           }
         });
       } else {
+        cleanPacket(packet);
         Object.assign(packet, { id: this.id, windowName: this.windowName });
         this.postRobot
           .sendToParent(MESSAGE_TYPES.OPEN, packet)
@@ -312,6 +324,7 @@ export class AppBridge {
           }
         });
       } else {
+        cleanPacket(packet);
         Object.assign(packet, { id: this.id, windowName: this.windowName });
         this.postRobot
           .sendToParent(MESSAGE_TYPES.UPDATE, packet)
@@ -469,6 +482,7 @@ export class AppBridge {
           }
         });
       } else {
+        cleanPacket(packet);
         Object.assign(packet, { id: this.id, windowName: this.windowName });
         this.postRobot
           .sendToParent(MESSAGE_TYPES.REQUEST_DATA, packet)
@@ -502,6 +516,7 @@ export class AppBridge {
           }
         });
       } else {
+        cleanPacket(packet);
         Object.assign(packet, { id: this.id, windowName: this.windowName });
         this.postRobot
           .sendToParent(MESSAGE_TYPES.CALLBACK, packet)
@@ -535,6 +550,7 @@ export class AppBridge {
           }
         });
       } else {
+        cleanPacket(packet);
         Object.assign(packet, { id: this.id });
         this.postRobot
           .sendToParent(MESSAGE_TYPES.REGISTER, packet)
@@ -721,8 +737,8 @@ export class AppBridge {
 export class DevAppBridge extends AppBridge {
   private baseURL: string;
 
-  constructor(traceName: string = 'DevAppBridge', private http: HttpClient) {
-    super(traceName);
+  constructor(traceName: string = 'DevAppBridge', private http: HttpClient, postRobotRef?: any) {
+    super(traceName, postRobotRef);
     const cookie = this.getCookie('UlEncodedIdentity');
     if (cookie && cookie.length) {
       const identity = JSON.parse(decodeURIComponent(cookie));

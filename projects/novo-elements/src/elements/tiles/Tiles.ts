@@ -28,13 +28,15 @@ const TILES_VALUE_ACCESSOR = {
   providers: [TILES_VALUE_ACCESSOR],
   template: `
     <div class="tile-container" [class.active]="focused" [class.disabled]="disabled">
-      <div
-        class="tile"
+      <button class="tile" type="button"
         *ngFor="let option of _options; let i = index"
-        [ngClass]="{ active: option.checked, disabled: option.disabled }"
+        [ngClass]="{ defaultColor: !option.color, active: option.checked, disabled: option.disabled }"
+        [theme]="option.checked ? 'primary' : 'dialogue'"
+        [color]="option.checked ? option.color || 'darken($ocean, 20%)' : 'dark'"
+        [icon]="option.icon"
+        [side]="option.iconSide || 'left'"
         (click)="select($event, option)"
-        [attr.data-automation-id]="option.label || option"
-      >
+        [attr.data-automation-id]="option.label || option">
         <input
           class="tiles-input"
           [name]="name"
@@ -49,7 +51,7 @@ const TILES_VALUE_ACCESSOR = {
         <label [attr.for]="name + i" [attr.data-automation-id]="option.label || option">
           {{ option.label || option }}
         </label>
-      </div>
+      </button>
     </div>
   `,
   styleUrls: ['./Tiles.scss'],

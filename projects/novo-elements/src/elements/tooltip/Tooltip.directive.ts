@@ -1,9 +1,10 @@
 // NG
 import { ConnectedPosition, FlexibleConnectedPositionStrategy, Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
-import { Directive, ElementRef, HostListener, Input, OnDestroy, OnInit, ViewContainerRef } from '@angular/core';
+import { AfterViewInit, Directive, ElementRef, HostListener, Input, OnDestroy, OnInit, ViewContainerRef, signal } from '@angular/core';
 // APP
 import { NovoTooltip } from './Tooltip.component';
+import { BooleanInput } from 'novo-elements/utils';
 
 @Directive({
   selector: '[tooltip]',
@@ -11,7 +12,7 @@ import { NovoTooltip } from './Tooltip.component';
     '[attr.data-hint]': 'tooltip',
   },
 })
-export class TooltipDirective implements OnDestroy, OnInit {
+export class TooltipDirective implements OnDestroy, OnInit, AfterViewInit {
   @Input()
   tooltip: string;
   @Input('tooltipPosition')
@@ -28,8 +29,6 @@ export class TooltipDirective implements OnDestroy, OnInit {
   rounded: boolean;
   @Input('tooltipAlways')
   always: boolean;
-  @Input('tooltipActive')
-  active: boolean = true;
   @Input('tooltipPreline')
   preline: boolean;
   @Input('removeTooltipArrow')
@@ -38,10 +37,25 @@ export class TooltipDirective implements OnDestroy, OnInit {
   autoPosition: boolean = true;
   @Input('tooltipIsHTML')
   isHTML: boolean;
+  @Input('tooltipCloseOnClick')
+  closeOnClick: boolean = false;
+  @BooleanInput()
+  @Input('tooltipOnOverflow')
+  onOverflow: boolean = false;
+
+  private _active = signal<boolean>(true);
+  @Input('tooltipActive')
+  set active(value: boolean) {
+    this._active.set(value);
+  }
+  get active(): boolean {
+    return this._active();
+  }
 
   private tooltipInstance: NovoTooltip | null;
   private portal: ComponentPortal<NovoTooltip>;
   private overlayRef: OverlayRef;
+  private _resizeObserver: ResizeObserver;
 
   constructor(protected overlay: Overlay, private viewContainerRef: ViewContainerRef, private elementRef: ElementRef) {}
   isPosition(position: string): boolean {
@@ -58,7 +72,7 @@ export class TooltipDirective implements OnDestroy, OnInit {
 
   @HostListener('mouseenter')
   onMouseEnter(): void {
-    if (this.tooltip && this.active && !this.always) {
+    if (this.tooltip && this._active() && !this.always) {
       this.show();
     }
   }
@@ -71,13 +85,32 @@ export class TooltipDirective implements OnDestroy, OnInit {
     }
   }
 
+  @HostListener('click')
+  onclick(): void {
+    if (this.overlayRef && !this.always && this.closeOnClick) {
+      this.hide();
+      this.overlayRef.dispose();
+    }
+  }
+
   ngOnInit(): void {
     if (this.tooltip && this.always && this.active) {
       this.show();
     }
   }
 
+  ngAfterViewInit(): void {
+    if (this.onOverflow && this.elementRef?.nativeElement) {
+      this._resizeObserver = new ResizeObserver(() => {
+        const isOverflowing = this.elementRef.nativeElement.scrollWidth > this.elementRef.nativeElement.clientWidth;
+        this._active.set(isOverflowing);
+      });
+      this._resizeObserver?.observe(this.elementRef.nativeElement);
+    }
+  }
+
   ngOnDestroy(): void {
+    this._resizeObserver?.disconnect();
     if (this.overlayRef && !this.always) {
       this.hide();
       this.overlayRef.dispose();

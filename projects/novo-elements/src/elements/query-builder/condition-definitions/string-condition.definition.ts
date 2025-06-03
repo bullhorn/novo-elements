@@ -1,5 +1,7 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
+import { NovoLabelService } from 'novo-elements/services';
+import { Operator } from '../query-builder.types';
 import { AbstractConditionFieldDef } from './abstract-condition.definition';
 
 /**
@@ -13,19 +15,19 @@ import { AbstractConditionFieldDef } from './abstract-condition.definition';
   template: `
     <!-- fieldTypes should be UPPERCASE -->
     <ng-container novoConditionFieldDef="STRING">
-      <novo-field *novoConditionOperatorsDef="let formGroup" [formGroup]="formGroup">
+      <novo-field *novoConditionOperatorsDef="let formGroup; fieldMeta as meta" [formGroup]="formGroup">
         <novo-select [placeholder]="labels.operator" formControlName="operator" (onSelect)="onOperatorSelect(formGroup)">
           <novo-option value="includeAny">{{ labels.includeAny }}</novo-option>
-          <novo-option value="includeAll">{{ labels.includeAll }}</novo-option>
+          <novo-option value="includeAll" *ngIf="!meta?.removeIncludeAll">{{ labels.includeAll }}</novo-option>
           <novo-option value="excludeAny">{{ labels.exclude }}</novo-option>
-          <novo-option value="isEmpty">{{ labels.isEmpty }}</novo-option>
+          <novo-option value="isEmpty" *ngIf="!meta?.removeIsEmpty">{{ labels.isEmpty }}</novo-option>
         </novo-select>
       </novo-field>
       <ng-container *novoConditionInputDef="let formGroup" [ngSwitch]="formGroup.value.operator" [formGroup]="formGroup">
         <novo-field *novoSwitchCases="['includeAny', 'includeAll', 'excludeAny']">
           <novo-chip-list #chipList aria-label="filter value" formControlName="value">
             <novo-chip *ngFor="let chip of formGroup.value?.value || []" [value]="chip" (removed)="remove(chip, formGroup)">
-              <novo-text ellipsis>{{ chip }}</novo-text>
+              <novo-text ellipsis [tooltip]="chip" tooltipOnOverflow>{{ chip }}</novo-text>
               <novo-icon novoChipRemove>close</novo-icon>
             </novo-chip>
             <input
@@ -56,7 +58,12 @@ import { AbstractConditionFieldDef } from './abstract-condition.definition';
   changeDetection: ChangeDetectionStrategy.Default,
 })
 export class NovoDefaultStringConditionDef extends AbstractConditionFieldDef {
-  defaultOperator = 'includeAny';
+  defaultOperator = Operator.includeAny;
+
+  constructor(labelService: NovoLabelService) {
+    super(labelService);
+    this.defineOperatorEditGroup(Operator.includeAny, Operator.includeAll, Operator.excludeAny);
+  }
 
   getValue(formGroup: AbstractControl): any[] {
     return formGroup.value?.value || [];
@@ -67,12 +74,9 @@ export class NovoDefaultStringConditionDef extends AbstractConditionFieldDef {
     input.value = '';
     const valueToAdd = event.value;
     if (valueToAdd !== '') {
-      const current = this.getValue(formGroup);
-      if (!Array.isArray(current)) {
-        formGroup.get('value').setValue([valueToAdd]);
-      } else {
-        formGroup.get('value').setValue([...current, valueToAdd]);
-      }
+      const current: any[] = this.getValue(formGroup);
+      const newValue: any[] = Array.isArray(current) ? [...current, valueToAdd] : [valueToAdd];
+      this.setFormValue(formGroup, newValue);
     }
   }
 
@@ -80,9 +84,14 @@ export class NovoDefaultStringConditionDef extends AbstractConditionFieldDef {
     const current = this.getValue(formGroup);
     const index = current.indexOf(valueToRemove);
     if (index >= 0) {
-      const oldValue = [...current]
-      oldValue.splice(index, 1);
-      formGroup.get('value').setValue(oldValue);
+      const value = [...current]
+      value.splice(index, 1);
+      this.setFormValue(formGroup, value);
     }
+  }
+
+  private setFormValue(formGroup: AbstractControl, newValue: any[]) {
+    formGroup.get('value').setValue(newValue);
+    formGroup.markAsDirty();
   }
 }

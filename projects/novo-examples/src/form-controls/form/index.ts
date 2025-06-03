@@ -5,3 +5,4 @@ export * from './custom-demo-control';
 export * from './file-input-controls';
 export * from './picker-controls';
 export * from './text-based-controls';
+export * from './number-range-control';

@@ -17,6 +17,7 @@ export class NovoLabelService {
   and = 'and';
   not = 'not';
   filters = 'Filter';
+  filterss = 'Filters';
   clear = 'Clear';
   sort = 'Sort';
   distributionListOwner = 'Owner';
@@ -33,6 +34,7 @@ export class NovoLabelService {
   quickNoteEmpty = 'No results to display...';
   required = 'Required';
   numberTooLarge = 'Number is too large';
+  apply = 'Apply';
   save = 'Save';
   cancel = 'Cancel';
   next = 'Next';
@@ -122,7 +124,10 @@ export class NovoLabelService {
   includeAny = 'Include Any';
   includeAll = 'Include All';
   exclude = 'Exclude';
+  excludeAny = 'Exclude Any';
   radius = 'Radius';
+  insideRadius = 'Radius (Inside)';
+  outsideRadius = 'Radius (Outside)';
   equals = 'Equals';
   equalTo = 'Equal To';
   greaterThan = 'Greater Than';
@@ -132,12 +137,18 @@ export class NovoLabelService {
   false = 'False';
   before = 'Before';
   after = 'After';
-  between = 'Between';
   within = 'Within';
+  isNull = 'Is Empty';
   isEmpty = 'Is Empty?';
+  between = 'Is Between';
   refreshPagination = 'Refresh Pagination';
   location = 'Location';
   showLess = 'Show Less';
+  miles = 'Miles';
+  km = 'Km';
+  minimumPlaceholder = 'Minimum';
+  maximumPlaceholder = 'Maximum';
+  minGreaterThanMax = 'The minimum is greater than the maximum value';
 
   constructor(
     @Optional()
@@ -171,6 +182,10 @@ export class NovoLabelService {
 
   showingXofXResults(shown: number, total: number) {
     return `Showing ${shown} of ${total} Results.`;
+  }
+
+  ofXAmount(amount: number) {
+    return `of ${amount}`;
   }
 
   totalRecords(total: number, select = false) {

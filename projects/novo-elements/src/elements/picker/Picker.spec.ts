@@ -316,6 +316,62 @@ describe('Elements: NovoPickerElement', () => {
     }));
   });
 
+  describe('clearValue', () => {
+    beforeEach(() => {
+      component._value = 'initialValue';
+      component.term = 'initialTerm';
+      component.popup = {
+        instance: {
+          customTextValue: 'popupValue',
+        },
+      };
+      component.select = {
+        emit: jest.fn()
+      } as unknown;
+      component.changed = {
+        emit: jest.fn()
+      } as unknown;
+      spyOn(component, 'onModelChange');
+      spyOn(component, 'hideResults');
+    });
+
+    it('should clear the value, emit the new value, and optionally clear the term', () => {
+      component.clearValue(true);
+
+      expect(component._value).toBeNull();
+      expect(component.select.emit).toHaveBeenCalledWith(null);
+      expect(component.changed.emit).toHaveBeenCalledWith({ value: null, rawValue: { label: '', value: null } });
+      expect(component.onModelChange).toHaveBeenCalledWith(null);
+      expect(component.term).toBe('');
+      expect(component.popup.instance.customTextValue).toBeNull();
+      expect(component.hideResults).toHaveBeenCalled();
+    });
+    it('should clear the value and emit the new value without clearing the term', () => {
+      component.clearValue(false);
+
+      expect(component._value).toBeNull();
+      expect(component.select.emit).toHaveBeenCalledWith(null);
+      expect(component.changed.emit).toHaveBeenCalledWith({ value: null, rawValue: { label: '', value: null } });
+      expect(component.onModelChange).toHaveBeenCalledWith(null);
+      expect(component.term).toBe('initialTerm');
+      expect(component.popup.instance.customTextValue).toBe('popupValue');
+      expect(component.hideResults).not.toHaveBeenCalled();
+    });
+    it('should not try to clear out customTextValue if popup and popup.instance are undefined', () => {
+      component.popup = undefined;
+      component.clearValue(true);
+
+      expect(component.popup).toBeUndefined();
+
+      component.popup = {
+        instance: undefined,
+      };
+      component.clearValue(true);
+
+      expect(component.popup.instance).toBeUndefined();
+    });
+  });
+
   describe('Method: registerOnChange()', () => {
     it('should be defined.', () => {
       expect(component.registerOnChange).toBeDefined();

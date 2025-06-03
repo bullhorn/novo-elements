@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { allColors } from '../../../design';
 
 /**
  * @title Tiles Usage Example
@@ -9,46 +10,73 @@ import { Component } from '@angular/core';
   styleUrls: ['tiles-usage-example.css'],
 })
 export class TilesUsageExample {
-  public shown: boolean = false;
-  public demoTiles: Array<any> = [
+  public demoTilesDefault: Array<any> = [
     {
-      label: 'Red',
-      value: 'red',
+      label: 'Yes',
+      value: 'yes',
     },
     {
-      label: 'Green',
-      value: 'green',
+      label: 'No',
+      value: 'no',
     },
     {
-      label: 'Disabled',
-      value: 'disabled',
+      label: 'Maybe',
+      value: 'maybe',
       disabled: true,
     },
   ];
-  public currentColor: string;
-  public value: string = 'red';
+  public valueDefault: string = 'yes';
 
-  colorSelect(newColorValue) {
-    this.currentColor = newColorValue;
-  }
+  public demoTilesIcons: Array<any> = [
+    {
+      label: 'Include',
+      value: 'include',
+      icon: 'check',
+    },
+    {
+      label: 'Exclude',
+      value: 'exclude',
+      icon: 'exclude',
+    },
+  ];
+  public valueIcons: string = 'exclude';
 
-  disabledClicked(tile) {
-    console.log('Disabled tile clicked: ', tile); // tslint:disable-line
-  }
+  public demoTilesDisabled: Array<any> = [...this.demoTilesDefault];
+  public valueDisabled: string = 'yes';
 
-  selectedClicked(tile) {
-    console.log('Selected tile clicked: ', tile); // tslint:disable-line
-  }
+  public demoTilesColor: Array<any> = [
+    {
+      label: 'Good',
+      value: 'good',
+      color: 'success',
+    },
+    {
+      label: 'Bad',
+      value: 'bad',
+      color: 'negative',
+    },
+  ];
+  public valueColor: string = 'good';
 
-  toggleShown() {
-    this.shown = !this.shown;
+  addedTiles = 0;
+
+  select(demo: string, newValue) {
+    this[`current${demo}`] = newValue;
   }
 
   addTile() {
-    this.demoTiles.push({
-      label: 'Blue',
-      value: 'blue',
+    const randomColor = allColors[allColors.length * Math.random() | 0];
+    this.demoTilesColor.push({
+      label: randomColor.name.charAt(0).toUpperCase() + randomColor.name.slice(1),
+      value: randomColor.variables[0] + this.addedTiles,
+      color: randomColor.variables[0],
     });
-    this.demoTiles = [...this.demoTiles];
+    this.addedTiles++;
+    this.demoTilesColor = [...this.demoTilesColor];
+  }
+
+  resetTiles() {
+    this.demoTilesColor.length = 2;
+    this.demoTilesColor = [...this.demoTilesColor];
   }
 }

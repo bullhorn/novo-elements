@@ -1,4 +1,4 @@
-export const MockMeta = {
+export const MockCandidateMeta = {
   entity: 'Candidate',
   entityMetaUrl: '/meta/Candidate?fields=*',
   label: 'Candidate',
@@ -8,6 +8,7 @@ export const MockMeta = {
       name: 'id',
       type: 'ID',
       dataType: 'id',
+      label: 'ID',
       optional: false,
     },
     {
@@ -885,7 +886,20 @@ export const MockMeta = {
       multiValue: true,
       inputType: 'SELECT',
       optionsType: 'BusinessSector',
-      optionsUrl: '/options/BusinessSector',
+      options: [
+        {
+          value: 'Agriculture',
+          label: 'Agriculture',
+        },
+        {
+          value: 'Nursing',
+          label: 'Nursing',
+        },
+        {
+          value: 'Finance',
+          label: 'Finance',
+        },
+      ],
       hideFromSearch: false,
       sortOrder: 760,
       hint: '',
@@ -9252,5 +9266,154 @@ export const MockMeta = {
         label: 'Brewery',
       },
     },
+  ],
+};
+
+export const MockNoteMeta = {
+  entity: 'Note',
+  entityMetaUrl: '/meta/Note?fields=*',
+  label: 'Note',
+  dateLastModified: '1651869983247',
+  fields: [
+    {
+      name: 'notes.action',
+      type: 'SCALAR',
+      dataType: 'String',
+      maxLength: 30,
+      confidential: false,
+      optional: true,
+      label: 'Action',
+      required: true,
+      readOnly: false,
+      multiValue: false,
+      inputType: 'SELECT',
+      options: [
+        {
+          value: 'Outbound Call',
+          label: 'Outbound Call'
+        },
+        {
+          value: 'Inbound Call',
+          label: 'Inbound Call'
+        },
+        {
+          value: 'Left Message',
+          label: 'Left Message'
+        },
+        {
+          value: 'Email',
+          label: 'Email'
+        },
+        {
+          value: 'Appointment',
+          label: 'Appointment'
+        },
+        {
+          value: 'Recruiter Interview',
+          label: 'Recruiter Interview'
+        },
+        {
+          value: 'Technical Interview',
+          label: 'Technical Interview'
+        },
+        {
+          value: 'Manager Interview',
+          label: 'Manager Interview'
+        },
+        {
+          value: 'Reference Check',
+          label: 'Reference Check'
+        },
+      ],
+      defaultValue: 'Outbound Call',
+      hideFromSearch: false,
+      sortOrder: 40,
+      hint: 0,
+      description: 0,
+      systemRequired: false,
+      shouldAddCustomEntityLabel: false
+    },
+    {
+      name: 'notes.commentingPerson',
+      type: 'TO_ONE',
+      confidential: false,
+      optional: false,
+      label: 'Author',
+      required: false,
+      readOnly: false,
+      multiValue: false,
+      inputType: 'SELECT',
+      optionsType: 'CorporateUser',
+      optionsUrl: 'options/CorporateUser',
+      hideFromSearch: false,
+      sortOrder: 20,
+      hint: 0,
+      description: 0,
+      systemRequired: false,
+      shouldAddCustomEntityLabel: false,
+      associatedEntity: {
+        entity: 'Person',
+        entityMetaUrl: 'meta/Person?fields=*',
+        label: 'Person',
+        dateLastModified: 1724848513984,
+        fields: [
+          {
+            name: 'id',
+            type: 'ID',
+            dataType: 'Integer',
+            optional: false,
+            label: 'ID'
+          },
+          {
+            name: 'firstName',
+            type: 'SCALAR',
+            dataType: 'String',
+            maxLength: 50,
+            confidential: false,
+            optional: true,
+            label: 'First Name',
+            required: false,
+            readOnly: false,
+            multiValue: false,
+            hideFromSearch: false,
+            systemRequired: false,
+            shouldAddCustomEntityLabel: false
+          },
+          {
+            name: 'lastName',
+            type: 'SCALAR',
+            dataType: 'String',
+            maxLength: 50,
+            confidential: false,
+            optional: true,
+            label: 'Last Name',
+            required: false,
+            readOnly: false,
+            multiValue: false,
+            hideFromSearch: false,
+            systemRequired: false,
+            shouldAddCustomEntityLabel: false
+          }
+        ]
+      }
+    },
+    {
+      name: 'notes.dateAdded',
+      type: 'SCALAR',
+      dataType: 'Timestamp',
+      dataSpecialization: 'DATETIME',
+      confidential: false,
+      optional: false,
+      label: 'Date Added',
+      required: false,
+      readOnly: false,
+      multiValue: false,
+      hideFromSearch: false,
+      sortOrder: 10,
+      hint: 0,
+      description: 0,
+      systemRequired: false,
+      shouldAddCustomEntityLabel: false
+    }
   ],
 };

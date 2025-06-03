@@ -1,4 +1,6 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { NovoLabelService } from 'novo-elements/services';
+import { Operator } from '../query-builder.types';
 import { AbstractConditionFieldDef } from './abstract-condition.definition';
 
 /**
@@ -8,17 +10,17 @@ import { AbstractConditionFieldDef } from './abstract-condition.definition';
   selector: 'novo-picker-condition-def',
   template: `
     <ng-container novoConditionFieldDef>
-      <novo-field *novoConditionOperatorsDef="let formGroup" [formGroup]="formGroup">
+      <novo-field *novoConditionOperatorsDef="let formGroup; fieldMeta as meta" [formGroup]="formGroup">
         <novo-select [placeholder]="labels.operator" formControlName="operator" (onSelect)="onOperatorSelect(formGroup)">
           <novo-option value="includeAny">{{ labels.includeAny }}</novo-option>
-          <novo-option value="includeAll">{{ labels.includeAll }}</novo-option>
+          <novo-option value="includeAll" *ngIf="!meta?.removeIncludeAll">{{ labels.includeAll }}</novo-option>
           <novo-option value="excludeAny">{{ labels.exclude }}</novo-option>
-          <novo-option value="isNull">{{ labels.isEmpty }}</novo-option>
+          <novo-option value="isNull" *ngIf="!meta?.removeIsEmpty">{{ labels.isEmpty }}</novo-option>
         </novo-select>
       </novo-field>
       <ng-container *novoConditionInputDef="let formGroup; fieldMeta as meta" [ngSwitch]="formGroup.value.operator" [formGroup]="formGroup">
         <novo-field *novoSwitchCases="['includeAny', 'includeAll', 'excludeAny']">
-          <novo-select formControlName="value" [placeholder]="labels.select" [multiple]="true">
+          <novo-select extupdatefix formControlName="value" [placeholder]="labels.select" [multiple]="true">
             <!-- WHat about optionUrl/optionType -->
             <novo-option *ngFor="let option of meta?.options" [value]="option.value" [attr.data-automation-value]="option.label">
               {{ option.label }}
@@ -38,5 +40,10 @@ import { AbstractConditionFieldDef } from './abstract-condition.definition';
   changeDetection: ChangeDetectionStrategy.Default,
 })
 export class NovoDefaultPickerConditionDef extends AbstractConditionFieldDef {
-  defaultOperator = 'includeAny';
+  defaultOperator = Operator.includeAny;
+
+  constructor(labelService: NovoLabelService) {
+    super(labelService);
+    this.defineOperatorEditGroup(Operator.includeAny, Operator.includeAll, Operator.excludeAny);
+  }
 }

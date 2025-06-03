@@ -1,11 +1,13 @@
 // NG2
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
-import { Component, ElementRef, EventEmitter, forwardRef, Input, OnInit, Output, ViewChild, ViewContainerRef } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, EventEmitter, forwardRef, inject, Input, OnInit, Output, ViewChild, ViewContainerRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 // Vendor
 import { ReplaySubject } from 'rxjs';
 import { ComponentUtils, NovoLabelService } from 'novo-elements/services';
 import { Helpers, Key } from 'novo-elements/utils';
+import { NovoPickerElement } from 'novo-elements/elements/picker';
+import { ElementSize } from 'novo-elements/elements/common';
 
 // Value accessor for the component (supports ngModel)
 const CHIPS_VALUE_ACCESSOR = {
@@ -24,12 +26,13 @@ const CHIPS_VALUE_ACCESSOR = {
         [class.selected]="item == selected"
         [selectable]="true"
         [disabled]="disablePickerInput"
+        [size]="size"
         (removed)="remove($event, item)"
         (selectionChange)="select($event, item)"
         (deselect)="deselect($event, item)"
       >
         <novo-icon *ngIf="item | avatarType:type as avatarType" class="txc-{{ avatarType }}" novoChipAvatar>circle</novo-icon>
-        {{ item.label }}
+        <span class="chip-label">{{ item.label }}</span>
         <novo-icon *ngIf="!disablePickerInput" novoChipRemove>x</novo-icon>
       </novo-chip>
       <div *ngIf="hiddenChipsCount" class="hidden-chips-toggle" (click)="toggleHiddenChips()">
@@ -38,6 +41,7 @@ const CHIPS_VALUE_ACCESSOR = {
       </div>
       <div class="chip-input-container" *ngIf="!maxlength || (maxlength && items.length < maxlength)">
         <novo-picker
+          #picker
           clearValueOnSelect="true"
           [closeOnSelect]="closeOnSelect"
           [config]="source"
@@ -50,9 +54,12 @@ const CHIPS_VALUE_ACCESSOR = {
           (typing)="onTyping($event)"
           (blur)="onTouched($event)"
           [selected]="items"
-          [overrideElement]="element"
+          [width]="width"
+          [minWidth]="minWidth"
+          [overrideElement]="overrideElement || element"
           [allowCustomValues]="allowCustomValues"
         >
+          <ng-content/>
         </novo-picker>
       </div>
     </div>
@@ -92,6 +99,14 @@ export class NovoChipsElement implements OnInit, ControlValueAccessor {
     return this._disablePickerInput;
   }
   private _disablePickerInput: boolean = false;
+  @Input()
+  overrideElement: ElementRef;
+  @Input()
+  width: string;
+  @Input()
+  minWidth: string;
+  @Input()
+  size: ElementSize = 'md';
 
   @Output()
   changed: EventEmitter<any> = new EventEmitter();
@@ -104,6 +119,9 @@ export class NovoChipsElement implements OnInit, ControlValueAccessor {
 
   @ViewChild('preview', { read: ViewContainerRef })
   preview: ViewContainerRef;
+
+  @ViewChild('picker', { static: false })
+  picker: NovoPickerElement;
 
   items: any[] = [];
   selected: any = null;
@@ -120,6 +138,8 @@ export class NovoChipsElement implements OnInit, ControlValueAccessor {
   // Placeholders for the callbacks
   onModelChange: Function = () => {};
   onModelTouched: Function = () => {};
+
+  changeRef = inject(ChangeDetectorRef);
 
   constructor(public element: ElementRef, private componentUtils: ComponentUtils, public labels: NovoLabelService) {}
 
@@ -151,26 +171,26 @@ export class NovoChipsElement implements OnInit, ControlValueAccessor {
     this.items = [];
     if (this.model && Array.isArray(this.model)) {
       const noLabels = [];
-      for (const value of this.model) {
+      for (const item of this.model) {
         let label;
-        if (this.source && this.source.format && Helpers.validateInterpolationProps(this.source.format, value)) {
-          label = Helpers.interpolate(this.source.format, value);
+        if (this.source && this.source.format && Helpers.validateInterpolationProps(this.source.format, item)) {
+          label = Helpers.interpolate(this.source.format, item);
         }
         if (this.source && label && label !== this.source.format) {
           this.items.push({
-            value,
+            value: item.value || item,
             label,
           });
         } else if (this.source.getLabels && typeof this.source.getLabels === 'function') {
-          noLabels.push(value);
+          noLabels.push(item);
         } else if (this.source.options && Array.isArray(this.source.options)) {
-          this.items.push(this.getLabelFromOptions(value));
+          this.items.push(this.getLabelFromOptions(item));
         } else if (this.source.categoryMap && this.source.categoryMap.size) {
-          this.items.push(value);
+          this.items.push(item);
         } else {
           this.items.push({
-            value,
-            label: value,
+            value: item,
+            label: item,
           });
         }
       }
@@ -190,6 +210,7 @@ export class NovoChipsElement implements OnInit, ControlValueAccessor {
           }
           this.updateHiddenChips();
           this._finalizeItemValue();
+          this._updateOverlay();
         });
       }
     }
@@ -323,6 +344,17 @@ export class NovoChipsElement implements OnInit, ControlValueAccessor {
   private _propagateChanges(fallbackValue?: any): void {
     this.changed.emit({ value: this.value?.length ? this.value : '', rawValue: this.items });
     this.onModelChange(this.value);
+    this._updateOverlay();
+  }
+
+  private _updateOverlay() {
+    if (this.picker?.container?.overlayRef) {
+      setTimeout(() => {
+        this.picker.container.overlayRef.updatePosition();
+        this.picker.popup.instance.selected = this.picker.selected;
+        this.changeRef.detectChanges();
+      });
+    }
   }
 
   /**

@@ -1,5 +1,7 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { AbstractConditionFieldDef } from './abstract-condition.definition';
+import { Operator } from '../query-builder.types';
+import { NovoLabelService } from 'novo-elements/services';
 
 /**
  * When constructing a query using a field that is a boolean with only true/false as possible values.
@@ -8,11 +10,11 @@ import { AbstractConditionFieldDef } from './abstract-condition.definition';
   selector: 'novo-boolean-condition-def',
   template: `
     <ng-container novoConditionFieldDef>
-      <novo-field *novoConditionOperatorsDef="let formGroup" [formGroup]="formGroup">
+      <novo-field *novoConditionOperatorsDef="let formGroup; fieldMeta as meta" [formGroup]="formGroup">
         <novo-select [placeholder]="labels.operator" formControlName="operator" (onSelect)="onOperatorSelect(formGroup)">
           <novo-option value="include">{{ labels.equals }}</novo-option>
           <novo-option value="exclude">{{ labels.doesNotEqual }}</novo-option>
-          <novo-option value="isNull">{{ labels.isEmpty }}</novo-option>
+          <novo-option value="isNull" *ngIf="!meta?.removeIsEmpty">{{ labels.isEmpty }}</novo-option>
         </novo-select>
       </novo-field>
       <novo-field *novoConditionInputDef="let formGroup" [style.width.px]="125" [formGroup]="formGroup">
@@ -27,5 +29,10 @@ import { AbstractConditionFieldDef } from './abstract-condition.definition';
   changeDetection: ChangeDetectionStrategy.Default,
 })
 export class NovoDefaultBooleanConditionDef extends AbstractConditionFieldDef {
-  defaultOperator = 'include';
+  defaultOperator = Operator.include;
+
+  constructor(labelService: NovoLabelService) {
+    super(labelService);
+    this.defineOperatorEditGroup(Operator.include, Operator.exclude, Operator.isNull);
+  }
 }

@@ -202,7 +202,7 @@ export class AsideDesignPage {
 <p>Asides (a.k.a. Slideout) should be invoked via <code>NovoAsideService</code> and therefore all properties should be private or internal. Any values that need to be passed to the your <code>aside</code> instance should be passed by the service and will be available in your slideout via <code>NovoAsideRef.params</code>.</p>
 <pre><code class="language-typescript"><span class="hljs-meta">&#64;Component</span>(&#123;...&#125;)
 <span class="hljs-keyword">class</span> <span class="hljs-title class_">RandomComponent</span> &#123;
-  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> aside:NovoAsideService</span>) &#123;&#125;
+  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> <span class="hljs-attr">aside</span>:<span class="hljs-title class_">NovoAsideService</span></span>) &#123;&#125;
   <span class="hljs-title function_">handleAction</span>(<span class="hljs-params"></span>) &#123;
     <span class="hljs-keyword">const</span> ref = <span class="hljs-variable language_">this</span>.<span class="hljs-property">aside</span>.<span class="hljs-title function_">open</span>(<span class="hljs-title class_">AddFormSlideout</span>, &#123; <span class="hljs-attr">record</span>: <span class="hljs-number">123</span> &#125;);
     <span class="hljs-comment">/* you can listen to the close event */</span>
@@ -246,7 +246,7 @@ export class AsideDesignPage {
 &#125;
 <span class="hljs-meta">&#64;Component</span>(&#123;&#125;)
 <span class="hljs-keyword">class</span> <span class="hljs-title class_">AddFormSlideout</span> &#123;
-  <span class="hljs-title function_">constructor</span>(<span class="hljs-params">ref:NovoAsideRef&lt;AddFormParams&gt;</span>) &#123;
+  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-attr">ref</span>:<span class="hljs-title class_">NovoAsideRef</span>&lt;<span class="hljs-title class_">AddFormParams</span>&gt;</span>) &#123;
     <span class="hljs-comment">/**
      * All passed values are available
      * via ref.params
@@ -877,6 +877,9 @@ export class ButtonDevelopPage {
 <h2>Loading</h2>
 <p>Buttons can display a loading state when given the &quot;loading&quot; parameter. When loading is true the button will be disabled and get a loading spinner.</p>
 <p><code-example example="button-loading"></code-example></p>
+<h2>Two Icons</h2>
+<p>A second icon can be specified, and it will take the opposite side of the primary icon.</p>
+<p><code-example example="button-two-icon"></code-example></p>
 `,
   host: { class: 'markdown-page' }
 })
@@ -2031,7 +2034,7 @@ export class ModalDesignPage {
   <span class="hljs-attr">isDefault</span>: <span class="hljs-built_in">boolean</span>;
 &#125;
 ...
-<span class="hljs-title function_">constructor</span>(<span class="hljs-params">ref:NovoModalRef&lt;MyParams&gt;</span>) &#123;
+<span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-attr">ref</span>:<span class="hljs-title class_">NovoModalRef</span>&lt;<span class="hljs-title class_">MyParams</span>&gt;</span>) &#123;
   <span class="hljs-keyword">if</span>(ref.<span class="hljs-property">params</span>.<span class="hljs-property">isDefault</span>) &#123;
     <span class="hljs-comment">/* ^ Will not need to by type cast */</span>
   &#125;
@@ -2046,7 +2049,7 @@ export class ModalDesignPage {
 <p>Modals should be invoked via <code>NovoModalService</code> and therefore all properties should be private or internal. Any values that need to be passed to the your <code>Modal</code> instance should be passed by the service and available in your modal.</p>
 <pre><code class="language-typescript"><span class="hljs-meta">&#64;Component</span>(&#123;...&#125;)
 <span class="hljs-keyword">class</span> <span class="hljs-title class_">RandomComponent</span> &#123;
-  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> modal:NovoModalService</span>) &#123;&#125;
+  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> <span class="hljs-attr">modal</span>:<span class="hljs-title class_">NovoModalService</span></span>) &#123;&#125;
   <span class="hljs-title function_">handleAction</span>(<span class="hljs-params"></span>) &#123;
     <span class="hljs-keyword">const</span> ref = <span class="hljs-variable language_">this</span>.<span class="hljs-property">modal</span>.<span class="hljs-title function_">open</span>(<span class="hljs-title class_">ConfirmDeleteModal</span>, &#123; <span class="hljs-attr">record</span>: <span class="hljs-number">123</span> &#125;);
     <span class="hljs-comment">/* you can listen to the close event */</span>
@@ -2090,7 +2093,7 @@ export class ModalDesignPage {
 &#125;
 <span class="hljs-meta">&#64;Component</span>(&#123;&#125;)
 <span class="hljs-keyword">class</span> <span class="hljs-title class_">ConfirmDeleteModal</span> &#123;
-  <span class="hljs-title function_">constructor</span>(<span class="hljs-params">ref:NovoModalRef&lt;DeleteModalParams&gt;</span>) &#123;
+  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"><span class="hljs-attr">ref</span>:<span class="hljs-title class_">NovoModalRef</span>&lt;<span class="hljs-title class_">DeleteModalParams</span>&gt;</span>) &#123;
     <span class="hljs-comment">/**
      * All passed values are available
      * via ref.params
@@ -2751,6 +2754,9 @@ export class QueryBuilderDevelopPage {
   template: `<h2>Just a basic Criteria Builder</h2>
 <p>A common use case is to just collect a list of criteria to build as a query.  A Criteria can contain multiple conditions which will need to be joined by a conjunctions (and/or).</p>
 <p><code-example example="just-criteria"></code-example></p>
+<h1>Single Field Criteria Builder</h1>
+<p>While the Criteria Builder can support multiple fields at once, its UI can also be configured to express a condition on a single field specified in via configuration input. This mode is more suitable for compact scenarios.</p>
+<p><code-example example="single-field-criteria"></code-example></p>
 <h2>Full Query Builder</h2>
 <p>The difference between the Query and Criteria Builder is that it allow for the user to define multiple criteria and join them as either inclusion or exclusion criteria.  ie. Find <code>where fruit.seeds &gt;= 1 and not fruit.name='Avacodo'</code></p>
 <p>TBW</p>
@@ -2825,6 +2831,11 @@ export class SwitchPage {
 <p><code-example example="tabbed-group-picker-groups"></code-example></p>
 <h2>Big Groups</h2>
 <p><code-example example="tabbed-group-picker-big-groups"></code-example></p>
+<h2>Selection Disabled</h2>
+<p>When checkboxes are disabled in the activation picker, we can still listen for &quot;activation&quot; events when an item has been clicked.</p>
+<p><code-example example="tabbed-group-picker-no-selection"></code-example></p>
+<h2>Footer</h2>
+<p><code-example example="tabbed-group-picker-footer"></code-example></p>
 `,
   host: { class: 'markdown-page' }
 })
@@ -3412,6 +3423,8 @@ export class TooltipDevelopPage {
 <p><code-example example="tooltip-options"></code-example></p>
 <h2>Toggle Trigger</h2>
 <p><code-example example="tooltip-toggle"></code-example></p>
+<h2>Overflow</h2>
+<p><code-example example="tooltip-overflow"></code-example></p>
 `,
   host: { class: 'markdown-page' }
 })
@@ -4432,6 +4445,8 @@ This is the Static Form demo.</p>
 <p><code-example example="picker-controls"></code-example></p>
 <h5>Address Controls</h5>
 <p><code-example example="address-control"></code-example></p>
+<h5>Number Range Controls</h5>
+<p><code-example example="number-range-control"></code-example></p>
 `,
   host: { class: 'markdown-page' }
 })
@@ -4537,6 +4552,9 @@ export class RadioButtonsPage {
 <h5>Multiple Selections With Search</h5>
 <p>The <code>novo-select-search</code> is compatible with the <code>multiple</code> option as well.</p>
 <p><code-example example="multiple-select-with-search"></code-example></p>
+<h5>Legacy Options</h5>
+<p>When a value is set manually on a <code>novo-select</code> that is not reflected in its options, it will be displayed as a disabled option. The value can be removed, but will not appear subsequently. This behavior can be disabled with the <code>hideLegacyOptions</code> input.</p>
+<p><code-example example="legacy-select-option"></code-example></p>
 `,
   host: { class: 'markdown-page' }
 })

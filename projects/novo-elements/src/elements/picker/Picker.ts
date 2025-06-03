@@ -67,7 +67,7 @@ const DEFAULT_DEBOUNCE_TIME = 250;
       *ngIf="_value && !clearValueOnSelect && !disablePickerInput"
       (click)="clearValue(true)"
     ></i>
-    <novo-overlay-template class="picker-results-container" [parent]="element" position="above-below" (closing)="onOverlayClosed()">
+    <novo-overlay-template class="picker-results-container" [parent]="element" [width]="width" [minWidth]="minWidth" position="above-below" (closing)="onOverlayClosed()">
       <span #results></span>
       <ng-content></ng-content>
     </novo-overlay-template>
@@ -114,6 +114,12 @@ export class NovoPickerElement implements OnInit {
   maxlength: number;
   @Input()
   allowCustomValues = false;
+  @Input()
+  width: string;
+  @Input()
+  minWidth: string;
+  @Input()
+  allowTabNavigation: boolean = false;
 
   // Disable from typing into the picker (result template does everything)
   @Input()
@@ -138,6 +144,8 @@ export class NovoPickerElement implements OnInit {
   blur: EventEmitter<any> = new EventEmitter();
   @Output()
   typing: EventEmitter<any> = new EventEmitter();
+  @Output()
+  tab: EventEmitter<any> = new EventEmitter();
 
   @ViewChild(NovoOverlayTemplateComponent, { static: true })
   public container: NovoOverlayTemplateComponent;
@@ -208,7 +216,7 @@ export class NovoPickerElement implements OnInit {
       return;
     }
     if (this.panelOpen && !this.disablePickerInput) {
-      if (event.key === Key.Escape || event.key === Key.Tab) {
+      if (event.key === Key.Escape || (event.key === Key.Tab && !this.allowTabNavigation)) {
         this.hideResults();
         return;
       }
@@ -242,6 +250,11 @@ export class NovoPickerElement implements OnInit {
         this.clearValue(true);
       }
     }
+
+    if (this.allowTabNavigation && event.key === Key.Tab) {
+      this.closePanel();
+      this.tab.emit();
+    }
   }
 
   clearValue(wipeTerm) {
@@ -252,7 +265,9 @@ export class NovoPickerElement implements OnInit {
 
     if (wipeTerm) {
       this.term = '';
-      this.popup.instance.customTextValue = null;
+      if (this.popup?.instance) {
+        this.popup.instance.customTextValue = null;
+      }
       this.hideResults();
     }
     this.ref.markForCheck();

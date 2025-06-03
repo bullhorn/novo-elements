@@ -1,4 +1,4 @@
-import { Component, HostBinding, Input } from '@angular/core';
+import { Component, ElementRef, HostBinding, Input } from '@angular/core';
 import { BooleanInput } from 'novo-elements/utils';
 
 @Component({
@@ -116,4 +116,6 @@ export class NovoHeaderComponent {
   }
 
   private _theme: string;
+
+  constructor(public element: ElementRef) {}
 }

@@ -1,10 +1,19 @@
 import { HttpClient } from '@angular/common/http';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnInit, viewChild, ViewEncapsulation } from '@angular/core';
 import { AbstractControl, UntypedFormBuilder, UntypedFormControl } from '@angular/forms';
-import { AbstractConditionFieldDef, Conjunction, CriteriaBuilderComponent, NovoLabelService } from 'novo-elements';
+import {
+  AbstractConditionFieldDef,
+  AddressCriteriaConfig,
+  AddressRadiusUnitsName,
+  Condition,
+  Conjunction,
+  CriteriaBuilderComponent,
+  NovoLabelService,
+  Operator,
+} from 'novo-elements';
 import { ReplaySubject, Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
-import { MockMeta } from './MockMeta';
+import { MockCandidateMeta, MockNoteMeta } from './MockMeta';
 
 @Component({
   selector: 'custom-picker-condition-def',
@@ -33,16 +42,14 @@ import { MockMeta } from './MockMeta';
   changeDetection: ChangeDetectionStrategy.Default,
 })
 export class CustomPickerConditionDef extends AbstractConditionFieldDef implements OnInit {
-  defaultOperator = 'includeAny';
+  defaultOperator = Operator.includeAny;
   searchCtrl: UntypedFormControl = new UntypedFormControl();
   /** list of results filtered by search keyword */
   remoteResults: ReplaySubject<any[]> = new ReplaySubject<any[]>(1);
   /** Subject that emits when the component has been destroyed. */
   protected _onDestroy = new Subject<void>();
 
-  constructor(public http: HttpClient, labels: NovoLabelService) {
-    super(labels);
-  }
+  http = inject(HttpClient);
 
   ngOnInit() {
     super.ngOnInit();
@@ -51,7 +58,7 @@ export class CustomPickerConditionDef extends AbstractConditionFieldDef implemen
         // filter((res) => res.length > 2),
         // Time in milliseconds between key events
         debounceTime(500),
-        // If previous query is diffent from current
+        // If previous query is different from current
         distinctUntilChanged(),
         takeUntil(this._onDestroy),
       )
@@ -74,7 +81,7 @@ export class CustomPickerConditionDef extends AbstractConditionFieldDef implemen
   styleUrls: ['just-criteria-example.css'],
 })
 export class JustCriteriaExample implements OnInit {
-  @ViewChild('criteriaBuilder', { static: true }) criteriaBuilder: CriteriaBuilderComponent;
+  criteriaBuilder = viewChild(CriteriaBuilderComponent);
 
   queryForm: AbstractControl;
   config: any = null;
@@ -82,6 +89,34 @@ export class JustCriteriaExample implements OnInit {
   and = [Conjunction.AND];
   andOr = [Conjunction.AND, Conjunction.OR];
   andOrNot = [Conjunction.AND, Conjunction.OR, Conjunction.NOT];
+
+  addressConfig: AddressCriteriaConfig = {
+    radiusEnabled: true,
+    radiusUnits: 'miles'
+  };
+  addressRadiusEnabled: boolean = false;
+  addressRadiusEnabledOptions: { label: string, value: boolean }[] = [
+    { label: 'Yes', value: true },
+    { label: 'No', value: false },
+  ];
+
+  useNoteMeta: boolean = false;
+  useNoteMetaOptions = [
+    { label: 'True', value: true },
+    { label: 'False', value: false }
+  ];
+
+  hideFirstOperator: boolean = true;
+  hideFirstOperatorOptions = [
+    { label: 'True', value: true },
+    { label: 'False', value: false }
+  ];
+
+  canBeEmpty: boolean = false;
+  canBeEmptyOptions = [
+    { label: 'True', value: true },
+    { label: 'False', value: false }
+  ];
 
   editTypeFn = (field: any) => {
     if (field.optionsType === 'Brewery') return 'custom';
@@ -92,16 +127,16 @@ export class JustCriteriaExample implements OnInit {
 
   ngOnInit() {
     this.queryForm = this.formBuilder.group({ criteria: [] });
-    this.getFieldConfig().then((fields) => {
+    this.getFieldConfig(this.useNoteMeta).then((fields) => {
       this.prepopulateForm();
       this.config = { fields };
       this.cdr.detectChanges();
     });
-    // this.setQueryForm([]);
   }
 
-  getFieldConfig() {
-    return Promise.all([MockMeta]).then((metas) => {
+  getFieldConfig(useNoteMeta: boolean) {
+    const allMetas = useNoteMeta ? [MockCandidateMeta, MockNoteMeta] : [MockCandidateMeta];
+    return Promise.all(allMetas).then((metas) => {
       return metas.map((it) => ({
         value: it.entity,
         label: it.label,
@@ -114,39 +149,67 @@ export class JustCriteriaExample implements OnInit {
     });
   }
 
-  prepopulateForm() {
-    const prepopulatedData = [
+  setFieldConfig(useNoteMeta: boolean) {
+    this.resetQueryForm();
+    this.getFieldConfig(useNoteMeta).then((fields) => {
+      this.config = { fields };
+      this.cdr.detectChanges();
+    });
+  }
+
+  prepopulateForm(addAdditionalScope = false) {
+    const prepopulatedData: any = [
       {
-        scope: 'Candidate',
-        field: 'address',
-        operator: 'includeAny',
+        $and: [
+          {
+            field: 'id',
+            operator: 'equalTo',
+            scope: 'Candidate',
+            value: 123,
+          }, {
+            field: 'availability',
+            operator: 'includeAny',
+            scope: 'Candidate',
+            value: ['test'],
+          }, {
+            field: 'customDate1',
+            operator: 'within',
+            scope: 'Candidate',
+            value: '-30',
+          }, {
+            field: 'address',
+            operator: 'includeAny',
+            scope: 'Candidate',
+            value: null,
+            supportingValue: 5,
+          },
+        ],
       },
-      {
-        scope: 'Candidate',
-        field: 'id',
-        operator: 'equalTo',
-        value: 123,
-      },
-      {
-        scope: 'Candidate',
-        field: 'availability',
-        operator: 'includeAny',
-        value: ['test'],
-      },
-      {
-        scope: 'Candidate',
-        field: 'customDate1',
-        operator: 'within',
-        value: '-30',
-      },
-      // where=category IN (1,2,3)
-      // where=category.id:[1 2 3]
     ];
+    const prepopulatedNoteConditions: any = {
+      $not: [
+        {
+          field: 'notes.action',
+          operator: 'includeAny',
+          scope: 'Note',
+          value: ['Left Message'],
+        }, {
+          field: 'notes.dateAdded',
+          operator: 'within',
+          scope: 'Note',
+          value: '-7',
+        },
+      ],
+    };
+    if (addAdditionalScope) {
+      prepopulatedData.push(prepopulatedNoteConditions);
+    }
     this.setQueryForm(prepopulatedData);
   }
 
-  resetQueryForm() {
-    this.setQueryForm({ criteria: [] });
+  resetQueryForm(addAdditionalScope = false) {
+    this.criteriaBuilder().clearAllConditions();
+    this.prepopulateForm(addAdditionalScope);
   }
 
   setQueryForm(criteria?) {
@@ -155,5 +218,18 @@ export class JustCriteriaExample implements OnInit {
 
   onSubmit() {
     console.log('Your form data : ', this.queryForm.value);
+  }
+
+  resetGroups() {
+    this.criteriaBuilder().clearAllConditions();
+    this.criteriaBuilder().addConditionGroup();
+  }
+
+  addressRadiusEnabledChanged(enabled: boolean) {
+    this.addressConfig = Object.assign({}, this.addressConfig, { radiusEnabled: enabled });
+  }
+
+  addressRadiusUnitsSelected(units: AddressRadiusUnitsName) {
+    this.addressConfig = Object.assign({}, this.addressConfig, { radiusUnits: units });
   }
 }

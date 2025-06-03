@@ -5,6 +5,7 @@ import {
   HorizontalConnectionPos,
   Overlay,
   OverlayConfig,
+  OverlayContainer,
   OverlayRef,
   ScrollStrategy,
   VerticalConnectionPos,
@@ -17,6 +18,7 @@ import {
   Component,
   ElementRef,
   EventEmitter,
+  inject,
   Inject,
   Input,
   NgZone,
@@ -34,6 +36,7 @@ import { filter, first, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'novo-overlay-template',
+  styleUrls: ['Overlay.scss'],
   template: `
     <ng-template>
       <div class="novo-overlay-panel" role="listbox" [id]="id" #panel><ng-content></ng-content></div>
@@ -66,6 +69,8 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
   @Input()
   public width: number;
   @Input()
+  public minWidth: number;
+  @Input()
   public height: number;
   @Input()
   public closeOnSelect: boolean = true;
@@ -78,6 +83,8 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
   public opening: EventEmitter<any> = new EventEmitter();
   @Output()
   public closing: EventEmitter<any> = new EventEmitter();
+  @Output()
+  public backDropClicked: EventEmitter<any> = new EventEmitter();
 
   public overlayRef: OverlayRef | null;
   public portal: TemplatePortal<any>;
@@ -85,6 +92,8 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
   // The subscription for closing actions (some are bound to document)
   protected closingActionsSubscription: Subscription;
   private _parent: ElementRef;
+  private overlayContainer: OverlayContainer = inject(OverlayContainer);
+  private overlayContext: string;
 
   constructor(
     protected overlay: Overlay,
@@ -127,6 +136,9 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
     this.changeDetectorRef.markForCheck();
     setTimeout(() => {
       if (this.overlayRef) {
+        if (this.overlayContainer.getContainerElement()?.attributes.getNamedItem('novoContext')) {
+            this.overlayContext = this.overlayContainer.getContainerElement().attributes.getNamedItem('novoContext').value;
+        }
         this.overlayRef.updatePosition();
         this.opening.emit(true);
         setTimeout(() => {
@@ -157,7 +169,7 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
   }
 
   /**
-   * A stream of actions that should close the autocomplete panel, including
+   * A stream of actions that should close the panel, including
    * when an option is selected, on blur, and when TAB is pressed.
    */
   public get panelClosingActions(): Observable<any> {
@@ -167,7 +179,7 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
     );
   }
 
-  /** Stream of clicks outside of the autocomplete panel. */
+  /** Stream of clicks outside of the panel. */
   protected get outsideClickStream(): Observable<any> {
     if (!this.document) {
       return observableOf();
@@ -179,8 +191,10 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
         const clickedOutside: boolean =
           this.panelOpen &&
           clickTarget !== this.getConnectedElement().nativeElement &&
+          this.isInDocument(clickTarget) &&
           !this.getConnectedElement().nativeElement.contains(clickTarget) &&
           (!!this.overlayRef && !this.overlayRef.overlayElement.contains(clickTarget)) &&
+          this.elementIsInContext(clickTarget) &&
           !this.elementIsInNestedOverlay(clickTarget);
         if (this.panelOpen && !!this.overlayRef && this.overlayRef.overlayElement.contains(clickTarget) && this.closeOnSelect) {
           this.select.emit(event);
@@ -188,6 +202,10 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
         return clickedOutside;
       }),
     );
+  }
+
+  private isInDocument(node: Node): boolean {
+    return node.getRootNode().nodeType === Node.DOCUMENT_NODE;
   }
 
   /**
@@ -217,7 +235,10 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
   protected createOverlay(template: TemplateRef<any>): void {
     this.portal = new TemplatePortal(template, this.viewContainerRef);
     this.overlayRef = this.overlay.create(this.getOverlayConfig());
-    this.overlayRef.backdropClick().subscribe(() => this.closePanel());
+    this.overlayRef.backdropClick().subscribe(() => {
+      this.backDropClicked.emit(true);
+      this.closePanel();
+    });
   }
 
   protected destroyOverlay(): void {
@@ -235,6 +256,10 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
       config.width = this.getHostWidth();
     } else {
       config.width = this.width;
+    }
+
+    if (this.minWidth) {
+      config.minWidth = this.minWidth;
     }
 
     if (this.height) {
@@ -310,6 +335,9 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
       if (!this.width) {
         this.overlayRef.getConfig().width = this.getHostWidth();
       }
+      if (this.minWidth) {
+        this.overlayRef.getConfig().minWidth = this.minWidth;
+      }
       if (this.height) {
         this.overlayRef.getConfig().height = this.height;
       }
@@ -321,6 +349,20 @@ export class NovoOverlayTemplateComponent implements OnDestroy {
 
   protected getConnectedElement(): ElementRef {
     return this.parent;
+  }
+
+  private elementIsInContext(el) {
+    // this is to support multiple overlay contexts
+    if (this.overlayContext) {
+      while (el.parentNode) {
+        if (el.localName === this.overlayContext) {
+          return true;
+        }
+        el = el.parentNode;
+      }
+      return false;
+    }
+    return true;
   }
 
   protected elementIsInNestedOverlay(el): boolean {

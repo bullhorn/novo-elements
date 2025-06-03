@@ -5,12 +5,16 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { hasModifierKey } from '@angular/cdk/keycodes';
 import {
   AfterViewInit,
+  booleanAttribute,
   ChangeDetectorRef,
   Component,
+  computed,
   ContentChildren,
   ElementRef,
   EventEmitter,
   HostListener,
+  Inject,
+  input,
   Input,
   NgZone,
   OnChanges,
@@ -20,6 +24,7 @@ import {
   Output,
   QueryList,
   Self,
+  signal,
   SimpleChanges,
   ViewChild,
   ViewChildren,
@@ -51,7 +56,7 @@ import {
   _getOptionScrollPosition,
 } from 'novo-elements/elements/common';
 import { NovoOverlayTemplateComponent } from 'novo-elements/elements/common';
-import { NovoFieldControl } from 'novo-elements/elements/field';
+import { NOVO_FORM_FIELD, NovoFieldControl, NovoFieldElement } from 'novo-elements/elements/field';
 
 // Value accessor for the component (supports ngModel)
 // const SELECT_VALUE_ACCESSOR = {
@@ -97,9 +102,9 @@ let nextId = 0;
     { provide: NOVO_OPTION_PARENT_COMPONENT, useExisting: NovoSelectElement },
   ],
   template: `
-    <div class="novo-select-trigger" #dropdownElement (click)="togglePanel(); (false)" tabIndex="{{ disabled ? -1 : 0 }}" type="button">
+    <div class="novo-select-trigger">
       <span class="novo-select-placeholder" *ngIf="empty">{{ placeholder }}</span>
-      <span class="text-ellipsis" *ngIf="!empty">{{ displayValue }}</span>
+      <span class="text-ellipsis" *ngIf="!empty"><novo-icon size="sm" style="margin: 0 0 .25rem .1rem" *ngIf="displayIcon">{{ displayIcon }}</novo-icon> {{ displayValue }}</span>
       <i class="bhi-collapse"></i>
     </div>
     <novo-overlay-template
@@ -107,7 +112,7 @@ let nextId = 0;
       [position]="position"
       [width]="overlayWidth"
       [height]="overlayHeight"
-      (closing)="dropdown.nativeElement.focus()"
+      (closing)="elementRef.nativeElement.focus()"
     >
       <div #panel class="novo-select-list" tabIndex="-1" [class.has-header]="headerConfig" [class.active]="panelOpen">
         <novo-option *ngIf="headerConfig" class="select-header" [class.open]="header.open">
@@ -167,6 +172,7 @@ let nextId = 0;
     '[attr.aria-required]': 'required.toString()',
     '[attr.aria-disabled]': 'disabled.toString()',
     '[attr.aria-invalid]': 'errorState',
+    '[attr.aria-labelledby]': '_ariaLabelledBy || null',
     '[attr.aria-describedby]': '_ariaDescribedby || null',
     '[attr.aria-activedescendant]': '_getAriaActiveDescendant()',
     '[class.novo-select-disabled]': 'disabled',
@@ -174,6 +180,7 @@ let nextId = 0;
     '[class.novo-select-required]': 'required',
     '[class.novo-select-empty]': 'empty',
     '[class.novo-select-multiple]': 'multiple',
+    '[tabindex]': 'disabled ? -1 : 0'
   },
 })
 export class NovoSelectElement
@@ -195,21 +202,25 @@ export class NovoSelectElement
 
   _selectionModel: SelectionModel<NovoOption>;
 
+  /** The aria-labelledby attribute */
+  _ariaLabelledBy: string;
   /** The aria-describedby attribute on the chip list for improved a11y. */
   _ariaDescribedby: string;
-  /** Tab index for the chip list. */
-  _tabIndex = 0;
   /** User defined tab index. */
   _userTabIndex: number | null = null;
   /** The FocusKeyManager which handles focus. */
   _keyManager: ActiveDescendantKeyManager<NovoOption>;
+  /**
+   * The display string for the current value, kept from when the associated <novo-option> has stopped rendering
+   * due to filtration
+   */
+  private _lingeringDisplayValue: string = null;
+  private _legacyOption: any;
 
   @Input()
   id: string = this._uniqueId;
   @Input()
   name: string = this._uniqueId;
-  @Input()
-  options: Array<any>;
   @Input()
   placeholder: string = 'Select...';
   @Input()
@@ -222,6 +233,8 @@ export class NovoSelectElement
   overlayWidth: number;
   @Input()
   overlayHeight: number;
+  @Input()
+  displayIcon: string = null;
   @Output()
   onSelect: EventEmitter<any> = new EventEmitter();
   /** Event emitted when the selected value has been changed by the user. */
@@ -265,8 +278,6 @@ export class NovoSelectElement
   /** Element for the panel containing the autocomplete options. */
   @ViewChild(NovoOverlayTemplateComponent, { static: true })
   overlay: NovoOverlayTemplateComponent;
-  @ViewChild('dropdownElement', { static: true })
-  dropdown: ElementRef;
 
   @ContentChildren(NovoOptgroup, { descendants: true })
   optionGroups: QueryList<NovoOptgroup>;
@@ -274,6 +285,15 @@ export class NovoSelectElement
   contentOptions: QueryList<NovoOption>;
   @ViewChildren(NovoOption)
   viewOptions: QueryList<NovoOption>;
+
+  // This signal may be set programmatically by a SelectSearchComponent.
+  hideLegacyOptionsForSearch = signal(false);
+
+  hideLegacyOptions = input(false, { transform: booleanAttribute });
+
+  private displayLegacyOptions = computed(() => {
+    return !(this.hideLegacyOptionsForSearch() || this.hideLegacyOptions());
+  })
 
   @ViewChild('panel')
   panel: ElementRef;
@@ -293,6 +313,7 @@ export class NovoSelectElement
         this._setSelectionByValue(newValue);
       }
       this._value = newValue;
+      this._lingeringDisplayValue = null;
     }
   }
   private _value: any = null;
@@ -307,6 +328,17 @@ export class NovoSelectElement
     this.position = 'above-below';
   }
   private _multiple: boolean = false;
+
+  /** Array of options to display in the select dropdown */
+  @Input()
+  set options(options: Array<any>) {
+    this._options = options;
+    this._initLegacyOptions();
+  }
+  get options(): Array<any> {
+    return this._options;
+  }
+  private _options: Array<any>;
 
   /** Whether the select is focused. */
   get focused(): boolean {
@@ -346,6 +378,7 @@ export class NovoSelectElement
     @Optional() @Self() ngControl: NgControl,
     @Optional() _parentForm: NgForm,
     @Optional() _parentFormGroup: FormGroupDirective,
+    @Optional() @Inject(NOVO_FORM_FIELD) private _fieldElement: NovoFieldElement,
   ) {
     super(defaultErrorStateMatcher, _parentForm, _parentFormGroup, ngControl);
     if (ngControl) {
@@ -357,11 +390,8 @@ export class NovoSelectElement
   ngOnInit() {
     this.stateChanges.next();
     this._initLegacyOptions();
-    this.focusMonitor.monitor(this.dropdown.nativeElement).subscribe((origin) =>
+    this.focusMonitor.monitor(this.elementRef.nativeElement).subscribe((origin) =>
       this.ngZone.run(() => {
-        if (origin === 'keyboard' && !this.disabled) {
-          this.openPanel();
-        }
         this._focused = !!origin;
         this.stateChanges.next();
       }),
@@ -414,6 +444,11 @@ export class NovoSelectElement
       .subscribe(() => {
         this.openedChange.emit(this.panelOpen);
       });
+    setTimeout(() => {
+      if (this._fieldElement?._labelElement) {
+        this._ariaLabelledBy = this._fieldElement._labelElement.id;
+      }
+      });
   }
 
   ngOnDestroy() {
@@ -422,7 +457,13 @@ export class NovoSelectElement
     this._stateChanges.unsubscribe();
     this._activeOptionChanges.unsubscribe();
     this._selectedOptionChanges.unsubscribe();
-    this.focusMonitor.stopMonitoring(this.dropdown.nativeElement);
+    this.focusMonitor.stopMonitoring(this.elementRef.nativeElement);
+  }
+
+  @HostListener('click', ['$event'])
+  onClick() {
+    this.togglePanel();
+    return false;
   }
 
   openPanel() {
@@ -484,17 +525,20 @@ export class NovoSelectElement
     });
     if (correspondingOption) {
       this._selectionModel.select(correspondingOption);
-    } else if (value && !correspondingOption) {
+    } else if (value && !correspondingOption && this.displayLegacyOptions()) {
+      // If searchComponent is present, we are using a text input filter; so if there is an
+      // option not in the list, it is just filtered out
       // Double Check option not already added.
       const legacyOption = this.filteredOptions.find((it) => it.value === value);
       if (!legacyOption) {
         // Add a disabled option to the list and select it
-        this.filteredOptions.push({
+        this._legacyOption = {
           disabled: true,
           tooltip: 'Value is not provided in list of valid options.',
           label: value?.label || value,
           value,
-        });
+        }
+        this.filteredOptions.push(this._legacyOption);
         this.ref.detectChanges();
       }
     }
@@ -536,6 +580,10 @@ export class NovoSelectElement
         }
       }
     }
+    const legacyOptionIndex = this.filteredOptions.lastIndexOf(this._legacyOption);
+    if (legacyOptionIndex !== -1) {
+      this.filteredOptions.splice(legacyOptionIndex, 1);
+    }
 
     if (wasSelected !== this._selectionModel.isSelected(option)) {
       this._propagateChanges();
@@ -546,7 +594,7 @@ export class NovoSelectElement
 
   private _getDisplayValue(option: NovoOption & { value?: any; label?: string }): string {
     if (!option) {
-      return '';
+      return this._lingeringDisplayValue ?? '';
     }
     let toDisplay = option.viewValue;
     if (this.displayWith) {
@@ -554,7 +602,12 @@ export class NovoSelectElement
     }
     // Simply falling back to an empty string if the display value is falsy does not work properly.
     // The display value can also be the number zero and shouldn't fall back to an empty string.
-    const displayValue = toDisplay != null ? toDisplay : '';
+    let displayValue = toDisplay != null ? toDisplay : '';
+    if (displayValue != '') {
+      this._lingeringDisplayValue = displayValue;
+    } else if (this._lingeringDisplayValue) {
+      displayValue = this._lingeringDisplayValue;
+    }
     return displayValue;
   }
 
@@ -677,7 +730,7 @@ export class NovoSelectElement
    */
   focus(options?: FocusOptions): void {
     if (!this.disabled) {
-      this.dropdown.nativeElement.focus(options);
+      this.elementRef.nativeElement.focus(options);
     }
   }
 
@@ -764,7 +817,9 @@ export class NovoSelectElement
       if (this.empty) {
         this._keyManager.setFirstItemActive();
       } else {
-        this._keyManager.setActiveItem(this._value);
+        const options = this._getOptions();
+        const index = options.findIndex(option => option.value == this._value)
+        this._keyManager.setActiveItem(index);
       }
     }
   }
@@ -789,7 +844,7 @@ export class NovoSelectElement
         .map((item) => {
           return {
             ...item,
-            disabled: item.readOnly || item.disabled,
+            disabled: Boolean(item.readOnly || item.disabled),
           };
         })
         .map((item) => {

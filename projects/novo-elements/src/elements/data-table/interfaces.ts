@@ -4,13 +4,40 @@ export interface IDataTablePreferences {
   name: string;
   sort?: IDataTableSort;
   filter?: IDataTableFilter | IDataTableFilter[];
-  where?: { query: string; form: any };
+  where?: DataTableWhere;
   globalSearch?: any;
   pageSize?: number;
   displayedColumns?: string[];
   columnWidths?: { id: string; width: number }[];
+  savedSearchId?: number;
   savedSearchName?: string;
+  savedSearchOwner?: DataTableSavedSearchOwner;
   appliedSearchType?: AppliedSearchType;
+  autobuildEntity?: AutobuildEntityData;
+  hasUnsavedChanges?: boolean;
+  unsavedChanges?: any;
+  useBooleanKeywords?: boolean;
+}
+
+export interface AutobuildEntityData {
+  id: number;
+  searchEntity: string;
+  [key: string]: any;
+}
+
+export interface DataTableWhere {
+  query: string;
+  criteria?: AdaptiveCriteria;
+  keywords?: SearchKeywords;
+  booleanKeywords?: string;
+  scoreByEntityId?: number;
+  form: any;
+}
+
+export interface DataTableSavedSearchOwner {
+  id: number;
+  firstName: string;
+  lastName: string;
 }
 
 export enum AppliedSearchType {
@@ -78,6 +105,7 @@ export interface IDataTablePaginationOptions {
   pageSizeOptions: number[] | { value: string; label: string }[];
   loading?: boolean;
   errorLoading?: boolean;
+  onFooter?: boolean;
 }
 
 export interface IDataTableColumnSortConfig {
@@ -147,7 +175,7 @@ export interface IDataTableSort {
 
 export interface IDataTableFilter {
   id: string;
-  value: string | string[];
+  value: any;
   transform?: Function;
   type?: string;
   selectedOption?: Object;
@@ -166,3 +194,114 @@ export interface IDataTableService<T> {
 }
 
 export interface IDataTableCell<T> {}
+
+/**
+ * Adaptive criteria syntax is a json representation of a search or query string that supports all current and future search formats.
+ */
+export interface AdaptiveQuery {
+  criteria: AdaptiveCriteria;
+
+  // a comma separated list of fields to requests
+  fields?: string;
+
+  // a comma separated string, or a string array with the same data
+  orderBy?: string | string[];
+
+  pagination?: PaginationObject;
+}
+
+export interface PaginationObject {
+  page: number;
+  pageSize: number;
+}
+
+export type AdaptiveCriteria = AdaptiveCondition | AdaptiveConjunction;
+
+/**
+ * Only a single field is valid.
+ * Combine multiple fields with conjunctions, not sibling properties.
+ * If multiple sibling properties are used in a condition, errors may occur in translation.
+ */
+export interface AdaptiveCondition {
+  [fieldName: string]: AdaptiveConditionOperatorObject;
+}
+
+/**
+ * Only a single operator for a condition is valid.
+ * Combine multiple operators with conjunctions, not sibling properties.
+ * If multiple sibling operators are used in a condition, only the first will be used.
+ */
+export type AdaptiveConditionOperatorObject = {
+  [K in AdaptiveOperator as `${K}`]?: AdaptiveValue;
+};
+
+export type AdaptiveValue = string | string[] | boolean | boolean[] | number | number[];
+
+export type AdaptiveConjunction = AdaptiveAnd | AdaptiveOr | AdaptiveNot;
+
+export interface AdaptiveAnd {
+  and: Array<AdaptiveCriteria>;
+}
+
+export interface AdaptiveOr {
+  or: Array<AdaptiveCriteria>;
+}
+
+export interface AdaptiveNot {
+  not: AdaptiveCriteria;
+}
+
+export enum AdaptiveConjunctionNames {
+  AND = 'and',
+  OR = 'or',
+  NOT = 'not',
+}
+
+export enum AdaptiveOperator {
+  EqualTo = 'equalTo',
+  In = 'in',
+  IncludeAny = 'includeAny',
+  IncludeAll = 'includeAll',
+  Is = 'is',
+  LessThan = 'lt',
+  LessThanEquals = 'lte',
+  GreaterThan = 'gt',
+  GreaterThanEquals = 'gte',
+  Like = 'like',
+  StartsWith = 'startsWith',
+  EndsWith = 'endsWith',
+  Radius = 'radius',
+}
+
+export interface IKeywordSearchResponse {
+  items: IKeywordGroup[];
+  meta: {
+    currentPage: number;
+    itemCount: number;
+    itemsPerPage: number;
+    totalItems: number;
+    totalPages: number;
+  };
+}
+
+export interface IKeyword {
+  id: number;
+  name: string;
+}
+
+export interface IKeywordGroup {
+  id: number;
+  name: string;
+  uniqueName?: string;
+  keywords?: IKeyword[];
+}
+
+export interface IKeywordBlock {
+  operator?: 'and' | 'or';
+  exclude?: boolean;
+  keywordGroups: IKeywordGroup[];
+}
+
+export type NestedKeywordGroups = IKeywordBlock[];
+
+export type SearchKeywords = string[] | NestedKeywordGroups;

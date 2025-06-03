@@ -1,0 +1,15 @@
+<div [formGroup]="exampleForm">
+  <h3>Example Number Range Controls</h3>
+  <div class="row-wrapper">
+    <div class="example-row">
+      <novo-label>Between: </novo-label>
+      <novo-number-range formControlName="numberRangeControl1"></novo-number-range>
+    </div>
+    <div class="example-row">
+      <novo-label>Between: </novo-label>
+      <novo-number-range formControlName="numberRangeControl2"></novo-number-range>
+    </div>
+  </div>
+</div>
+
+<pre class="final-value">Value: {{exampleForm?.value | json}}</pre>

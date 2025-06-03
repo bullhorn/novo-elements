@@ -53,6 +53,11 @@
       }
     }
   }
+  .chip-label {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
   label.clear-all {
     flex: 1 100%;
     position: absolute;

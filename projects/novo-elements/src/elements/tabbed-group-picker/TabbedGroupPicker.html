@@ -1,18 +1,20 @@
-<novo-dropdown (toggled)="onDropdownToggle($event)" multiple>
+<novo-dropdown (toggled)="onDropdownToggle($event)" multiple #dropdown>
   <novo-button
     class="tabbed-group-picker-button"
     [theme]="buttonConfig.theme"
     [side]="buttonConfig.side"
+    [size]="buttonConfig.size"
     [icon]="buttonConfig.icon"
     [loading]="loading">
+    <ng-content></ng-content>
     <div class="tabbed-group-picker-button-label">{{ buttonConfig.label }}</div>
   </novo-button>
-  <div class="tabbed-group-picker-search" data-automation-id="tabbed-group-picker-search">
-    <input type="text" [placeholder]="labelService.search" [value]="filterText | async" (input)="onFilter($event)" />
+  <div class="tabbed-group-picker-search" data-automation-id="tabbed-group-picker-search" (keydown)="dropdown._handleKeydown($event)">
+    <input #inputElement type="text" [placeholder]="labelService.search" [value]="filterText | async" (input)="onFilter($event)" />
     <i class="bhi-search" *ngIf="!(filterText | async)"></i>
-    <i class="bhi-times" *ngIf="(filterText | async)" (click)="onClearFilter($event)"></i>
+    <i class="bhi-times" *ngIf="(filterText | async)" (click)="onClearFilter($event)" (keydown.space)="onClearFilter($event)"></i>
   </div>
-  <div class="tabbed-group-picker-column-container">
+  <div class="tabbed-group-picker-column-container" (keydown)="dropdown._handleKeydown($event)">
     <div class="tabbed-group-picker-column left">
       <novo-nav theme="white" direction="vertical">
         <novo-tab *ngFor="let tab of displayTabs" [attr.data-automation-id]="tab.typeName"
@@ -20,26 +22,22 @@
           <span>{{ tab.typeLabel }} ({{ tab.data.length }})</span><i class="bhi-next"></i>
         </novo-tab>
       </novo-nav>
-      <novo-button *ngIf="showClearAll" class="clear-all-button" theme="dialogue" icon="times" side="right"
-        color="grapefruit" (click)="deselectEverything($event)">{{ labelService.clear }}</novo-button>
+      <novo-button *ngIf="showClearAll && !showFooter" class="clear-all-button" theme="dialogue" icon="times" side="right"
+        color="grapefruit" (click)="deselectEverything($event)" (keydown.space)="deselectEverything($event)">{{ labelService.clear }}</novo-button>
     </div>
     <div class="tabbed-group-picker-column right">
       <div class="quick-select" *ngIf="quickSelectConfig && !(filterText | async)">
-        <!-- <div class="quick-select-label">{{ quickSelectConfig.label }}</div> -->
         <novo-optgroup class="quick-select-list" [label]="quickSelectConfig.label">
           <novo-option
             class="quick-select-item"
             *ngFor="let quickSelect of quickSelectConfig.items"
             [attr.data-automation-id]="quickSelect.label"
+            [allowSelection]="selectionEnabled"
             [selected]="quickSelect.selected"
-            (click)="quickSelect.selected = !quickSelect.selected; onItemToggled(quickSelect)"
+            (click)="activateItem(quickSelect)"
+            (keydown.space)="activateItem(quickSelect)"
             novoInert>
             {{quickSelect.label}}
-            <!-- <novo-checkbox
-              [label]="quickSelect.label"
-              [name]="'selected'"
-              [(ngModel)]="quickSelect.selected"
-              (ngModelChange)="onItemToggled(quickSelect)"></novo-checkbox> -->
           </novo-option>
         </novo-optgroup>
       </div>
@@ -52,18 +50,13 @@
           <novo-option
             *cdkVirtualFor="let item of displayTab.data"
             [attr.data-automation-id]="item[displayTab.labelField]"
+            [attr.data-automation-value]="item[displayTab.valueField]"
+            [allowSelection]="selectionEnabled"
             [selected]="item.selected"
-            (click)="item.selected = !item.selected; onItemToggled(item)"
+            (click)="activateItem(item, displayTab)"
+            (keydown.space)="activateItem(item, displayTab)"
             novoInert>
             {{item[displayTab.labelField]}}
-
-            <!-- <novo-checkbox
-              [label]="item[displayTab.labelField]"
-              [name]="'selected'"
-              [indeterminate]="item.indeterminate"
-              [(ngModel)]="item.selected"
-              (ngModelChange)="onItemToggled(item)">
-            </novo-checkbox> -->
           </novo-option>
         </cdk-virtual-scroll-viewport>
       </novo-optgroup>
@@ -73,6 +66,30 @@
         <div class="empty-item-sub-message">{{ labelService.tabbedGroupClearSuggestion(displayTab.typeLabel) }}
         </div>
       </div>
+    </div>
+  </div>
+  <div class="footer" *ngIf="showFooter">
+    <div class="save-cancel-button-container">
+      <novo-button
+        class="clear-all-button"
+        *ngIf="showClearAll"
+        theme="dialogue"
+        icon="times"
+        side="right"
+        color="grapefruit"
+        (click)="deselectEverything($event)">{{ labelService.clear }}</novo-button>
+    </div>
+    <div class="save-cancel-button-container">
+      <novo-button
+        class="cancel-button"
+        marginRight="1rem"
+        theme="dialogue"
+        (click)="cancel()">{{ labelService.cancel }}</novo-button>
+      <novo-button
+        class="save-button"
+        theme="primary"
+        color="primary"
+        (click)="apply()">{{ labelService.apply }}</novo-button>
     </div>
   </div>
 </novo-dropdown>

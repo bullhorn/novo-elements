@@ -65,6 +65,7 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
       expect(component.loading).toEqual(false);
     });
   });
+
   describe('function: filter', () => {
     const getLetter = (n: number) => String.fromCharCode((n % 26) + 65);
 
@@ -80,17 +81,19 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
         .map((e, i) => String(Math.pow(1000 + i, 5))); // make a bunch of ~16 character strings
       const tabNames = names.slice(0, 100);
       const labelFieldNames = names.splice(0, 100);
-      const tabs = tabNames.map((typeName, i) => ({
+      const tabs: any[] = tabNames.map((typeName, i) => ({
         typeName,
         labelField: labelFieldNames[i], // search/filter only looks at labelField
+        valueField: 'value',
         data: null,
       }));
       tabs.forEach((tab) => {
-        const { labelField } = tab;
+        const { labelField, valueField } = tab;
         tab.data = Array(1000)
           .fill(0)
           .map((n, i) => ({
             [labelField]: turnNumbersIntoLetters(`${labelField}${i}`),
+            [valueField]: i,
           }));
       });
       return tabs;
@@ -108,6 +111,7 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
       expect(timeItTakesToSearchAMillionItems).toBeLessThan(amountOfTimeInMillisecondsThatIndicatesAGrosslyInefficientAlgorithm);
     });
   });
+
   describe('function: createChildrenReferences', () => {
     it('should make it so that children of data list items are references to other data list items', () => {
       const dinosaurs = [
@@ -231,6 +235,7 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
       expect(parent.indeterminate).toEqual(true);
     });
   });
+
   describe('function: getSelectedValue', () => {
     it('should return indeterminate if one value is selected', () => {
       const childArray = [
@@ -257,6 +262,7 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
       expect(result).toEqual(undefined);
     });
   });
+
   describe('function: updateParentsAndQuickSelect', () => {
     it('should select each item in the quick select group', () => {
       const data = [
@@ -286,6 +292,7 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
       expect(quickSelectItem.selected).toEqual(true);
     });
   });
+
   describe('function: onItemToggled', () => {
     it('should use an algorithm more efficient than O(MxN^2)', () => {
       // this dataset takes about 3 orders of magnitude longer for MxN^2 vs MxN
@@ -400,7 +407,7 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
       component.onItemToggled(chicken);
 
       const selectedItem = component.tabs[0].data[0];
-      const displayReference = component.displayTabs.find(({ typeName }) => typeName === 'chickens').data[0];
+      const displayReference = component.displayTabs.find((tab) => tab.typeName === 'chickens')!.data[0];
 
       expect(selectedItem.selected).toEqual(true);
       expect(displayReference.selected).toEqual(true);
@@ -429,10 +436,9 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
         },
       ];
       const chicken = component.tabs[0].data[0];
-      chicken.selected = true;
 
       component.createChildrenReferences();
-      component.onItemToggled(chicken);
+      component.activateItem(chicken);
 
       const selectedItem = component.tabs[0].data[0];
       expect(selectedItem.selected).toEqual(true);
@@ -456,11 +462,49 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
         },
       ];
       const chicken = component.tabs[0].data[0];
-      chicken.selected = true;
       const tRex = component.tabs[1].data[0];
 
-      component.onItemToggled(chicken);
+      component.activateItem(chicken);
       expect(tRex.selected).toEqual(true);
+    });
+  });
+
+  describe('Activation mode', () => {
+    it('should emit an activation, not selectionChange event when activation mode is enabled', () => {
+      let activation: any;
+      let selection: any;
+      component.activation.subscribe(item => {
+        activation = item;
+      });
+      component.selectionChange.subscribe(newSelection => {
+        selection = newSelection;
+      });
+      const chickenTab = getChickenTab();
+      component.selectionEnabled = false;
+      component.tabs = [chickenTab];
+      const chicken = component.tabs[0].data[0];
+
+      component.activateItem(chicken);
+      expect(selection).toBeUndefined();
+      expect(activation).toEqual({ ...chicken, scope: 'quickselect' });
+    });
+  });
+
+  describe('function: cancel', () => {
+    it('should revert to original state and emit cancel event with current tabs', () => {
+      spyOn(component, 'revertState');
+      spyOn(component.cancelChange, 'emit');
+      component.dropdown = {
+        closePanel: () => {},
+      } as any;
+      const chickenTab = getChickenTab();
+      component.tabs = [
+        chickenTab,
+      ];
+
+      component.cancel();
+      expect(component.revertState).toHaveBeenCalled();
+      expect(component.cancelChange.emit).toHaveBeenCalledWith([chickenTab]);
     });
   });
 });

@@ -2,11 +2,11 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-// APP
+import { NovoButtonModule } from 'novo-elements/elements/button';
 import { NovoTilesElement } from './Tiles';
 
 @NgModule({
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, NovoButtonModule, ReactiveFormsModule],
   declarations: [NovoTilesElement],
   exports: [NovoTilesElement],
 })

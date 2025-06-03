@@ -51,6 +51,7 @@ import { DataTableState } from './state/data-table-state.service';
     <header
       *ngIf="(!(empty && !state.userFiltered) && !loading) || forceShowHeader"
       [class.empty]="hideGlobalSearch && !paginationOptions && !templates['customActions']"
+      [ngClass]="{ 'pagination-footer': paginationOptions?.onFooter }"
     >
       <ng-container *ngTemplateOutlet="templates['customHeader']"></ng-container>
       <novo-search
@@ -62,8 +63,9 @@ import { DataTableState } from './state/data-table-state.service';
         [hint]="searchOptions?.tooltip"
       >
       </novo-search>
+      <!-- Updates to novo-data-table-pagination here need to be applied to the footer as well -->
       <novo-data-table-pagination
-        *ngIf="paginationOptions"
+        *ngIf="paginationOptions && !paginationOptions.onFooter"
         [theme]="paginationOptions.theme"
         [length]="useOverrideTotal ? overrideTotal : dataSource?.currentTotal"
         [page]="paginationOptions.page"
@@ -277,6 +279,28 @@ import { DataTableState } from './state/data-table-state.service';
       </div>
     </ng-template>
     <!-- CUSTOM CELLS PASSED IN -->
+    <footer
+      *ngIf="paginationOptions?.onFooter && ((!(empty && !state.userFiltered) && !loading) || forceShowHeader)"
+      [class.empty]="!paginationOptions"
+    >
+      <!-- Updates to novo-data-table-pagination here need to be applied to the header as well -->
+      <novo-data-table-pagination
+        *ngIf="paginationOptions?.onFooter"
+        [theme]="paginationOptions.theme"
+        [length]="useOverrideTotal ? overrideTotal : dataSource?.currentTotal"
+        [page]="paginationOptions.page"
+        [pageSize]="paginationOptions.pageSize"
+        [pageSizeOptions]="paginationOptions.pageSizeOptions"
+        [dataFeatureId]="paginatorDataFeatureId"
+        [canSelectAll]="canSelectAll"
+        [allMatchingSelected]="allMatchingSelected"
+        [loading]="paginationOptions.loading"
+        [errorLoading]="paginationOptions.errorLoading"
+        [paginationRefreshSubject]="paginationRefreshSubject"
+        [showPaginationTotalRecordCount]="true"
+      >
+      </novo-data-table-pagination>
+    </footer>
     <ng-content></ng-content>
   `,
   styleUrls: ['./data-table.component.scss'],

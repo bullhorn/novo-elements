@@ -4,6 +4,10 @@
   position: relative;
   display: block;
   width: 100%;
+  &.condition-host {
+    padding: var(--spacing-md);
+    margin-bottom: 1rem;
+  }
 
   .condition-field {
     grid-template-columns: minmax(fit-content, 1fr);
@@ -30,15 +34,25 @@
       }
       novo-field {
         width: fit-content;
+
+        &.address-radius {
+          width: 100px;
+          min-width: 100px;
+          max-width: 100px;
+          margin-right: 1rem;
+          novo-select {
+            min-width: 70px;
+          }
+        }
       }
       .novo-field-infix {
         white-space: nowrap;
         overflow: hidden;
       }
       novo-chip-list {
-        width: 36rem;
+        flex-grow: 1;
         novo-chip {
-          max-width: 33rem;
+          max-width: min(33rem, 100% - 9px);
         }
       }
       novo-chips {

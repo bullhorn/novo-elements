@@ -9,6 +9,17 @@
   min-width: 180px;
   cursor: pointer;
 
+  &:focus .novo-select-trigger {
+    border-bottom: 1px solid $positive;
+    i {
+      color: rgba(0, 0, 0, 0.73);
+    }
+  }
+
+  &:focus {
+    outline: none;
+  }
+
   .novo-select-trigger {
     @include novo-body-text();
     display: flex;
@@ -32,18 +43,8 @@
     &.empty {
       color: #a9a9a9;
     }
-    &:focus,
-    &:hover {
-      outline: none;
-    }
     &:hover {
       border-bottom: 1px solid lighten($dark, 15%);
-    }
-    &:focus {
-      border-bottom: 1px solid $positive;
-      i {
-        color: rgba(0, 0, 0, 0.73);
-      }
     }
 
     .novo-select-placeholder {
@@ -57,10 +58,23 @@
       right: 0px;
     }
   }
-  &[disabled] {
+  &[disabled],
+  &.novo-select-disabled {
     pointer-events: none;
     div[type="button"] {
       color: $grey;
+    }
+    i {
+      color: $grey !important;
+    }
+    .novo-select-trigger {
+      color: $grey !important;
+      border-bottom: 1px dashed $grey !important;
+
+      &:hover {
+        color: $grey !important;
+        border-bottom: 1px dashed $grey !important;
+      }
     }
   }
 }

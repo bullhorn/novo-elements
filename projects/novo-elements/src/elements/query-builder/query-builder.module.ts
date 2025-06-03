@@ -13,7 +13,7 @@ import { NovoDateTimePickerModule } from 'novo-elements/elements/date-time-picke
 import { NovoDropdownModule } from 'novo-elements/elements/dropdown';
 import { NovoFieldModule } from 'novo-elements/elements/field';
 import { NovoFlexModule } from 'novo-elements/elements/flex';
-import { NovoFormModule } from 'novo-elements/elements/form';
+import { NovoFormExtrasModule, NovoFormModule } from 'novo-elements/elements/form';
 import { NovoIconModule } from 'novo-elements/elements/icon';
 import { NovoLoadingModule } from 'novo-elements/elements/loading';
 import { NovoNonIdealStateModule } from 'novo-elements/elements/non-ideal-state';
@@ -23,6 +23,7 @@ import { NovoSearchBoxModule } from 'novo-elements/elements/search';
 import { NovoSelectModule } from 'novo-elements/elements/select';
 import { NovoSelectSearchModule } from 'novo-elements/elements/select-search';
 import { NovoSwitchModule } from 'novo-elements/elements/switch';
+import { NovoTabbedGroupPickerModule } from 'novo-elements/elements/tabbed-group-picker';
 import { NovoTabModule } from 'novo-elements/elements/tabs';
 import { ConditionBuilderComponent, ConditionInputOutlet, ConditionOperatorOutlet } from './condition-builder/condition-builder.component';
 import { NovoDefaultAddressConditionDef } from './condition-definitions/address-condition.definition';
@@ -36,6 +37,8 @@ import { NovoDefaultStringConditionDef } from './condition-definitions/string-co
 import { ConditionGroupComponent } from './condition-group/condition-group.component';
 import { CriteriaBuilderComponent } from './criteria-builder/criteria-builder.component';
 import { NovoConditionFieldDef, NovoConditionInputDef, NovoConditionOperatorsDef } from './query-builder.directives';
+import { NovoConditionTemplatesComponent } from './condition-templates/condition-templates.component';
+import { NovoTooltipModule } from 'novo-elements/elements/tooltip';
 
 @NgModule({
   imports: [
@@ -55,6 +58,7 @@ import { NovoConditionFieldDef, NovoConditionInputDef, NovoConditionOperatorsDef
     NovoOptionModule,
     NovoFlexModule,
     NovoTabModule,
+    NovoTabbedGroupPickerModule,
     NovoLoadingModule,
     NovoCardModule,
     NovoDatePickerModule,
@@ -67,6 +71,8 @@ import { NovoConditionFieldDef, NovoConditionInputDef, NovoConditionOperatorsDef
     NovoChipsModule,
     NovoSelectSearchModule,
     NovoDropdownModule,
+    NovoFormExtrasModule,
+    NovoTooltipModule,
   ],
   declarations: [
     CriteriaBuilderComponent,
@@ -85,6 +91,7 @@ import { NovoConditionFieldDef, NovoConditionInputDef, NovoConditionOperatorsDef
     NovoDefaultNumberConditionDef,
     NovoDefaultIdConditionDef,
     NovoDefaultPickerConditionDef,
+    NovoConditionTemplatesComponent,
   ],
   exports: [
     CriteriaBuilderComponent,
@@ -100,6 +107,7 @@ import { NovoConditionFieldDef, NovoConditionInputDef, NovoConditionOperatorsDef
     NovoDefaultNumberConditionDef,
     NovoDefaultIdConditionDef,
     NovoDefaultPickerConditionDef,
+    NovoConditionTemplatesComponent,
   ],
 })
 export class NovoQueryBuilderModule {}
