@@ -2,7 +2,7 @@ import { Component, DebugElement, ElementRef, inject, Renderer2 } from '@angular
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { NovoDateTimeFormatDirective } from './date-time-format';
-import { NovoLabelService } from 'novo-elements/services';
+import { NovoLabelService, DateFormatService } from 'novo-elements/services';
 import { DateLike } from 'novo-elements/utils';
 import { ControlValueAccessor, FormControl, FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -40,7 +40,7 @@ describe('NovoDateTimeFormatDirective', () => {
         TestBed.configureTestingModule({
             declarations: [NovoDateTimeFormatDirective, DateFormatTestComponent],
             imports: [ FormsModule, ReactiveFormsModule ],
-            providers: [ NovoLabelService ]
+            providers: [ NovoLabelService, DateFormatService ]
         }).compileComponents();
         fixture = TestBed.createComponent(DateFormatTestComponent);
         

@@ -113,7 +113,7 @@ type DateStrings = {
   timezone: string | undefined
 }
 
-function splitDateString(dateString: string): DateStrings {
+export function splitDateString(dateString: string): DateStrings {
   const array = dateString.split(parseTokenDateTimeDelimeter)
   let timeString, date, time, timezone
 
