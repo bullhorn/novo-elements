@@ -7,9 +7,13 @@ import {
     setHours, setMinutes, startOfDay, startOfMinute, startOfMonth, startOfWeek
 } from 'date-fns';
 import { convertTokens } from './convert-tokens';
-import { LegacyParseOptions, legacyParse } from './legacy-parse';
+import { LegacyParseOptions, legacyParse, splitDateString } from './legacy-parse';
 
 type DateLike = Date | string | number;
+
+export interface DateParseOptions extends LegacyParseOptions {
+    userDateFormat?: string;
+}
 
 /**
  * This DateUtil is a wrapper for calling new date-fns v2 functions with existing legacy
@@ -38,7 +42,11 @@ export class DateUtil {
         }
     }
 
-    static parse(date: any, options?: LegacyParseOptions): Date {
+    static parse(date: any, options?: DateParseOptions): Date {
+        if (options?.userDateFormat && typeof date === 'string' && date.trim()) {
+            date = this.rewireDatePositionsToMDY(date, options.userDateFormat);
+            delete options.userDateFormat;
+        }
         return legacyParse(date, options);
     }
 
@@ -191,5 +199,32 @@ export class DateUtil {
     static isAfter(date: DateLike, maxDate: Date | number): boolean {
         date = this.getDateFromAnyType(date);
         return isAfter(date, maxDate);
+    }
+
+    static rewireDatePositionsToMDY(dateStr: string, userDateFormat: string) {
+        userDateFormat = userDateFormat.toUpperCase()
+        if (userDateFormat === 'MM/DD/YYYY') {
+            return dateStr;
+        }
+        const separatorPattern = /[.\\/-]/;
+        // Creates an order, eg ['D', 'M', 'Y']
+        const separatorChar = separatorPattern.exec(userDateFormat)[0];
+        const tokenOrder = userDateFormat.split(separatorPattern).map(chars => chars[0]);
+        if (tokenOrder.length < 3) {
+            // Could not determine date token order from localized date format
+            return dateStr;
+        }
+        const tokenSourceOrder = ['M', 'D', 'Y'].map(token => tokenOrder.indexOf(token));
+        const dateTimeSplit = dateStr.split(', ');
+        const datePortions = dateTimeSplit[0].split(separatorPattern);
+        if (datePortions.length < 3) {
+            // Could not retrieve M/D/Y from localized date format
+            return dateStr;
+        }
+        let convertedDateStr = tokenSourceOrder.map(index => datePortions[index]).join(separatorChar);
+        if (dateTimeSplit.length > 1) {
+            convertedDateStr += ', ' + dateTimeSplit.slice(1).join(', ');
+        }
+        return convertedDateStr;
     }
 }

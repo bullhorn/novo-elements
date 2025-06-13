@@ -3,8 +3,8 @@ import { COMPOSITION_BUFFER_MODE, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { IMaskDirective, IMaskFactory } from 'angular-imask';
 import { isValid } from 'date-fns';
 import { MaskedRange } from 'imask';
-import { NovoLabelService } from 'novo-elements/services';
-import { DateUtil } from 'novo-elements/utils';
+import { DateFormatService, NovoLabelService } from 'novo-elements/services';
+import { DateParseOptions, DateUtil } from 'novo-elements/utils';
 import { DATE_FORMATS, NOVO_INPUT_FORMAT } from './base-format';
 
 export const DATERANGEFORMAT_VALUE_ACCESSOR = {
@@ -16,35 +16,6 @@ export const DATERANGEFORMAT_VALUE_ACCESSOR = {
 type DateRange = {
   startDate: Date;
   endDate: Date;
-};
-
-export const imaskHaha = {
-  mask: 'm{/}`d{/}`Y - m{/}`d{/}`Y',
-  overwrite: true,
-  autofix: true,
-  lazy: false,
-  blocks: {
-    d: {
-      mask: MaskedRange,
-      placeholderChar: 'D',
-      from: 1,
-      to: 31,
-      maxLength: 2,
-    },
-    m: {
-      mask: MaskedRange,
-      placeholderChar: 'M',
-      from: 1,
-      to: 12,
-      maxLength: 2,
-    },
-    Y: {
-      mask: MaskedRange,
-      placeholderChar: 'Y',
-      from: 1900,
-      to: 9999,
-    },
-  },
 };
 
 @Directive({
@@ -59,12 +30,11 @@ export class NovoDateRangeFormatDirective extends IMaskDirective<any> {
 
   @Input() dateRangeFormat: DATE_FORMATS = DATE_FORMATS.DATE;
 
-  constructor(private labels: NovoLabelService) {
+  constructor(private labels: NovoLabelService, private dateFormat: DateFormatService) {
     super();
-    const dateRangeFormat = this.labels.dateFormat.toUpperCase();
     this.unmask = false;
     this.imask = {
-      mask: 'm{/}`d{/}`Y - m{/}`d{/}`Y',
+      mask: `${this.dateFormat.dateFormatAsImaskPattern} - ${this.dateFormat.dateFormatAsImaskPattern}`,
       overwrite: true,
       autofix: true,
       lazy: false,
@@ -93,9 +63,9 @@ export class NovoDateRangeFormatDirective extends IMaskDirective<any> {
     };
   }
 
-  normalize(value: string | Date) {
+  normalize(value: string | Date, options?: DateParseOptions) {
     const pattern = this.labels.dateFormat.toUpperCase();
-    return DateUtil.format(value ? DateUtil.parse(value) : null, pattern);
+    return DateUtil.format(value ? DateUtil.parse(value, options) : null, pattern);
   }
 
   formatAsIso(value: DateRange): string {
@@ -116,9 +86,9 @@ export class NovoDateRangeFormatDirective extends IMaskDirective<any> {
   }
 
   formatDate(source: Date | string) {
+    const dateRangeFormat = this.labels.dateFormat.toUpperCase();
     const date = DateUtil.parse(source);
     if (isValid(date)) {
-      const dateRangeFormat = this.labels.dateFormat.toUpperCase();
       return DateUtil.format(date, dateRangeFormat);
     }
     return this.normalize(source);
@@ -163,8 +133,8 @@ export class NovoDateRangeFormatDirective extends IMaskDirective<any> {
 
   extractDatesFromInput(value) {
     const [startStr, endStr] = value.split(' - ');
-    const startDate = DateUtil.parse(startStr);
-    const endDate = DateUtil.parse(endStr);
+    const startDate = DateUtil.parse(startStr, { userDateFormat: this.labels.dateFormat});
+    const endDate = DateUtil.parse(endStr, { userDateFormat: this.labels.dateFormat});
     return { startDate, endDate };
   }
 
