@@ -50,7 +50,7 @@ export class DateUtil {
         return legacyParse(date, options);
     }
 
-    static format(date, formatString): string {
+    static format(date, formatString: string): string {
         if (!date) {
             return '';
         }

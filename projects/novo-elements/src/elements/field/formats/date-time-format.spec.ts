@@ -33,6 +33,7 @@ describe('NovoDateTimeFormatDirective', () => {
     let fixture: ComponentFixture<DateFormatTestComponent>;
     let dbgDirective: DebugElement;
     let directive: NovoDateTimeFormatDirective;
+    let labelService: NovoLabelService;
     let input: HTMLInputElement;
 
 
@@ -43,6 +44,7 @@ describe('NovoDateTimeFormatDirective', () => {
             providers: [ NovoLabelService, DateFormatService ]
         }).compileComponents();
         fixture = TestBed.createComponent(DateFormatTestComponent);
+        labelService = TestBed.inject(NovoLabelService);
         
     }));
 
@@ -63,5 +65,11 @@ describe('NovoDateTimeFormatDirective', () => {
         fixture.componentInstance.testControl.setValue('');
         fixture.detectChanges();
         expect(input.value).toEqual('');
+    });
+
+    it('should format an international value correctly', () => {
+        labelService.dateFormat = 'dd/MM/YYYY';
+        const dt = directive.imask.parse('19/06/2025');
+        expect(dt.getDate()).toBe(19);
     });
 });
