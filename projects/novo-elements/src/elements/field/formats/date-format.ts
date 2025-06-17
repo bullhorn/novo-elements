@@ -27,7 +27,6 @@ export class NovoDateFormatDirective extends IMaskDirective<any> {
 
   constructor(private labels: NovoLabelService, private dateFormatService: DateFormatService) {
     super();
-    const dateFormat = this.labels.dateFormat.toUpperCase();
     this.unmask = 'typed' as unknown as false; // typing is to work around angular-imask bug
     this.imask = {
       mask: Date,
@@ -39,7 +38,7 @@ export class NovoDateFormatDirective extends IMaskDirective<any> {
       max: new Date(2100, 0, 1),
       prepare: (str) => str.toUpperCase(),
       format: (date) => this.formatValue(date, { userDateFormat: this.labels.dateFormat}),
-      parse: (str) => DateUtil.parse(str, { userDateFormat: dateFormat }),
+      parse: (str) => DateUtil.parse(str, { userDateFormat: this.labels.dateFormat.toUpperCase() }),
       blocks: {
         d: {
           mask: MaskedRange,
@@ -91,7 +90,13 @@ export class NovoDateFormatDirective extends IMaskDirective<any> {
   }
 
   writeValue(value: any) {
-    super.writeValue(this.formatValue(value));
+    const initialValue = this['_initialValue'];
+    if (initialValue != null && value === initialValue) {
+      // This value has already been formatted from the first call to writeValue, simply use it.
+      super.writeValue(initialValue);
+    } else {
+      super.writeValue(this.formatValue(value));
+    }
   }
 
   registerOnChange(fn: (_: any) => void): void {

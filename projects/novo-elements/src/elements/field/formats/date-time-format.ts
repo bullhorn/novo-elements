@@ -224,7 +224,13 @@ export class NovoDateTimeFormatDirective extends IMaskDirective<any> implements 
   }
 
   writeValue(value: any) {
-    super.writeValue(this['_initialValue'] || this.formatValue(value));
+    const initialValue = this['_initialValue'];
+    if (initialValue != null && value === initialValue) {
+      // This value has already been formatted from the first call to writeValue, simply use it.
+      super.writeValue(initialValue);
+    } else {
+      super.writeValue(this.formatValue(value));
+    }
   }
 
   registerOnChange(fn: (_: any) => void): void {

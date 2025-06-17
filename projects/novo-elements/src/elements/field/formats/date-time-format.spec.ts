@@ -1,4 +1,4 @@
-import { Component, DebugElement, ElementRef, inject, Renderer2 } from '@angular/core';
+import { AfterViewInit, Component, DebugElement, Directive, ElementRef, inject, Renderer2 } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { NovoDateTimeFormatDirective } from './date-time-format';
@@ -9,11 +9,23 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 jest.mock('angular-imask', () => {
     return {
-        IMaskDirective: class implements ControlValueAccessor {
+        IMaskDirective: class implements ControlValueAccessor, AfterViewInit {
             renderer = inject(Renderer2);
             element = inject(ElementRef);
+            _initialValue: any;
+            maskRefInitialized = false;
+            ngAfterViewInit(): void {
+                this.maskRefInitialized = true;
+                if (this._initialValue) {
+                    this.writeValue(this._initialValue);
+                }
+            }
             writeValue(val) {
-                this.renderer.setProperty(this.element.nativeElement, 'value', val || '');
+                if (!this.maskRefInitialized) {
+                    this._initialValue = val;
+                } else {
+                    this.renderer.setProperty(this.element.nativeElement, 'value', val || '');
+                }
             }
             registerOnChange(fn: any): void {}
             registerOnTouched(fn: any): void {}
@@ -71,5 +83,14 @@ describe('NovoDateTimeFormatDirective', () => {
         labelService.dateFormat = 'dd/MM/YYYY';
         const dt = directive.imask.parse('19/06/2025');
         expect(dt.getDate()).toBe(19);
+    });
+
+    it('should correctly initialize if writeValue is called before ready', () => {
+        labelService.dateFormat = 'dd/MM/YYYY';
+        fixture = TestBed.createComponent(DateFormatTestComponent);
+        directive = dbgDirective.injector.get(NovoDateTimeFormatDirective);
+        fixture.componentInstance.testControl.setValue('January 4, 2022 11:30:00');
+        fixture.detectChanges();
+        expect(fixture.debugElement.query(By.css('input')).nativeElement.value).toBe('04/01/2022, 11:30 AM');
     });
 });
