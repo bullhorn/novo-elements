@@ -198,6 +198,7 @@ export class NovoOptionBase implements FocusableOption, AfterViewChecked, OnDest
       event.stopImmediatePropagation();
     }
   }
+
   _handlePassiveClick(event: MouseEvent) {
     if (!this.novoInert) {
       this._selectViaInteraction();

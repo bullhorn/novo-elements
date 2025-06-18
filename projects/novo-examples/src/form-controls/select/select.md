@@ -31,3 +31,9 @@ When many option can be selected, use the `multiple` attribute which allows for 
 The `novo-select-search` is compatible with the `multiple` option as well.
 
 <code-example example="multiple-select-with-search"></code-example>
+
+##### Legacy Options
+
+When a value is set manually on a `novo-select` that is not reflected in its options, it will be displayed as a disabled option. The value can be removed, but will not appear subsequently. This behavior can be disabled with the `hideLegacyOptions` input.
+
+<code-example example="legacy-select-option"></code-example>

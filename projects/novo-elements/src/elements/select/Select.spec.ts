@@ -1,18 +1,51 @@
 // NG
-import { async, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 // App
 import { NovoLabelService } from 'novo-elements/services';
+import { NovoOption, HasOverlay, NovoOverlayModule, NovoOptionModule } from 'novo-elements/elements/common';
 import { Key } from 'novo-elements/utils';
 import { NovoSelectElement } from './Select';
 import { NovoSelectModule } from './Select.module';
+import { SelectionModel } from '@angular/cdk/collections';
+import { ActiveDescendantKeyManager } from '@angular/cdk/a11y';
+import { TAB } from '@angular/cdk/keycodes';
+import { Component, viewChild } from '@angular/core';
 
-xdescribe('Elements: NovoSelectElement', () => {
-  let fixture;
-  let comp;
+@Component({
+  selector: 'test-select-component',
+  template: `
+  <novo-select [value]="value">
+    <novo-option *ngFor="let option of options" [value]="option.value">
+      {{ option.label }}
+    </novo-option>
+  </novo-select>`
+})
+class TestSelectComponent {
+  select = viewChild(NovoSelectElement);
+  options = [{
+    label: 'Option 1',
+    value: '111'
+  }, {
+    label: 'Option 2',
+    value: '222'
+  }, {
+    label: 'Option 3',
+    value: '333'
+  }];
+  value: any;
+}
+
+describe('Elements: NovoSelectElement', () => {
+  let fixture: ComponentFixture<NovoSelectElement>;
+  let comp: NovoSelectElement;
+  let selectionModel: SelectionModel<NovoOption>;
+  let keyManager: ActiveDescendantKeyManager<NovoOption>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [NovoSelectModule],
+      imports: [NovoSelectModule, NovoOptionModule, NovoOverlayModule],
+      declarations: [TestSelectComponent],
       providers: [
         {
           provide: NovoLabelService,
@@ -22,11 +55,18 @@ xdescribe('Elements: NovoSelectElement', () => {
     }).compileComponents();
     fixture = TestBed.createComponent(NovoSelectElement);
     comp = fixture.debugElement.componentInstance;
+    selectionModel = comp._selectionModel;
   }));
+
+  beforeEach(() => {
+    fixture.detectChanges();
+    keyManager = comp._keyManager;
+  });
 
   describe('Function: ngOnInit', () => {
     it('should invoke ngOnChanges', () => {
-      comp.options = ['1', '2', '3'];
+      fixture.componentRef.setInput('options', ['1', '2', '3']);
+      fixture.detectChanges();
       comp.ngOnInit();
       expect(comp.filteredOptions).toBeDefined();
       expect(comp.filteredOptions[0].value).toEqual('1');
@@ -35,14 +75,15 @@ xdescribe('Elements: NovoSelectElement', () => {
   });
 
   describe('Function: ngOnChanges', () => {
-    it('should convert readOnly from a non-boolean to a boolean', () => {
-      comp.readonly = 'true';
-      comp.ngOnChanges();
+    // Currently broken
+    xit('should convert readOnly from a non-boolean to a boolean', () => {
+      fixture.componentRef.setInput('readonly', 'true');
+      fixture.detectChanges();
       expect(comp.readonly).toEqual(false);
     });
     it('should set filteredOptions to an array of objects from an array of strings', () => {
-      comp.options = ['foo', 'bar', 'baz'];
-      comp.ngOnChanges();
+      fixture.componentRef.setInput('options', ['foo', 'bar', 'baz']);
+      fixture.detectChanges();
       expect(comp.filteredOptions).toEqual([
         { value: 'foo', label: 'foo' },
         { value: 'bar', label: 'bar' },
@@ -50,306 +91,225 @@ xdescribe('Elements: NovoSelectElement', () => {
       ]);
     });
     it('should set filteredOptions to an array of objects', () => {
-      comp.options = [{ readOnly: false }, { readOnly: true }, {}];
-      comp.ngOnChanges();
-      expect(comp.filteredOptions).toEqual([{ readOnly: false, active: false }, { active: false }]);
+      fixture.componentRef.setInput('options', [{ readOnly: false }, { readOnly: true }, {}]);
+      fixture.detectChanges();
+      expect(comp.filteredOptions).toEqual([
+        { readOnly: false, disabled: false, active: false },
+        { active: false, disabled: true, readOnly: true },
+        { active: false, disabled: false },
+      ]);
     });
     it('should clone each option in filteredOptions so its object reference changes', () => {
-      const option = { value: 'clone', label: 'me' };
-      comp.options = [option];
-      comp.ngOnChanges();
+      const option = { value: 'clone', label: 'text1' };
+      fixture.componentRef.setInput('options', [option]);
+      fixture.detectChanges();
+      option.label = 'text2';
+      fixture.componentRef.setInput('options', [option]);
+      fixture.detectChanges();
       expect(comp.filteredOptions[0]).not.toBe(option);
-      expect(comp.filteredOptions[0]).toEqual({ value: 'clone', label: 'me', active: false });
+      expect(comp.filteredOptions[0]).toEqual(jasmine.objectContaining({ value: 'clone', label: 'text2', active: false }));
     });
     it('should invoke clear', () => {
-      const mockPlaceholder = { test: true };
-      comp.model = false;
-      comp.createdItem = false;
-      comp.placeholder = mockPlaceholder;
-      comp.ngOnChanges();
-      expect(comp.selected).toEqual({
-        label: mockPlaceholder,
-        value: null,
-        active: false,
-      });
-      expect(comp.header).toEqual({
-        open: false,
-        valid: true,
-        value: '',
-      });
-      expect(comp.selectedIndex).toEqual(-1);
+      spyOn(selectionModel, 'clear');
+      const mockPlaceholder = 'Test placeholder';
+      fixture.componentRef.setInput('options', ['foo', 'bar', 'baz']);
+      fixture.componentRef.setInput('value', 'baz');
+      fixture.componentRef.setInput('placeholder', mockPlaceholder);
+      fixture.detectChanges();
+      fixture.componentRef.setInput('value', null);
+      fixture.detectChanges();
+      const placeholderText = fixture.debugElement.query(By.css('.novo-select-placeholder'));
+      expect(placeholderText).not.toBeNull();
+      expect(placeholderText.nativeElement.textContent).toBe(mockPlaceholder);
       expect(comp.empty).toEqual(true);
+      expect(selectionModel.clear).toHaveBeenCalled();
     });
     it('should invoke select', () => {
-      jest.spyOn(comp.onSelect, 'emit');
+      const selectAction = spyOn(selectionModel, 'select').and.callThrough();
       comp.createdItem = 'baz';
-      comp.options = [
+      const options = [
         { label: 'foo', value: 'foo' },
         { label: 'bar', value: 'bar' },
         { label: 'baz', value: 'baz' },
       ];
-      comp.ngOnChanges();
-      expect(comp.selectedIndex).toEqual(2);
-      expect(comp.selected).toEqual({ label: 'baz', value: 'baz', active: true });
-      expect(comp.empty).toEqual(false);
-      expect(comp.onSelect.emit).toHaveBeenCalledWith({ selected: 'baz' });
-    });
-    it('should invoke writeValue', () => {
-      jest.spyOn(comp, 'select');
-      comp.model = 'bar';
-      comp.options = [
-        { label: 'foo', value: 'foo', readOnly: false },
-        { label: 'bar', value: 'bar', readOnly: false },
-        { label: 'baz', value: 'baz', readOnly: true },
-      ];
-      comp.ngOnChanges();
-      expect(comp.select).toHaveBeenCalledWith({ label: 'bar', value: 'bar', readOnly: false, active: false }, 1, false);
-      expect(comp.empty).toEqual(false);
-    });
-    it('should invoke writeValue with readOnly option', () => {
-      jest.spyOn(comp, 'select');
-      comp.model = 'baz';
-      comp.options = [
-        { label: 'foo', value: 'foo', readOnly: false },
-        { label: 'bar', value: 'bar', readOnly: false },
-        { label: 'baz', value: 'baz', readOnly: true },
-      ];
-      comp.ngOnChanges();
-      expect(comp.select).toHaveBeenCalledWith({ label: 'baz', value: 'baz', readOnly: true }, -1, false);
+      fixture.componentRef.setInput('options', options);
+      fixture.detectChanges();
+      comp.writeValue('baz');
+      fixture.detectChanges();
+
+      expect(selectAction.calls.argsFor(0)[0]).toBeInstanceOf(NovoOption);
+      expect(selectAction.calls.argsFor(0)[0].value).toEqual('baz');
+      // onSelect should not fire because this selection is incoming from parent
       expect(comp.empty).toEqual(false);
     });
     it('should invoke openPanel', () => {
-      comp.overlay = {
-        panelOpen: true,
-        openPanel: jasmine.createSpy('openPanel'),
-      };
-      comp.ngOnChanges();
-      expect(comp.overlay.openPanel).toHaveBeenCalled();
-    });
-  });
-
-  describe('Function: openPanel', () => {
-    it('should call overlay.openPanel', () => {
-      jest.spyOn(comp.overlay, 'openPanel');
+      const options = [
+        { label: 'foo', value: 'foo' },
+        { label: 'bar', value: 'bar' },
+        { label: 'baz', value: 'baz' },
+      ];
+      comp.writeValue('baz');
+      fixture.componentRef.setInput('options', options);
+      fixture.detectChanges();
+      spyOn(comp.overlay, 'openPanel');
+      spyOn(keyManager, 'setActiveItem');
       comp.openPanel();
       expect(comp.overlay.openPanel).toHaveBeenCalled();
+      expect(keyManager.setActiveItem).toHaveBeenCalledWith(2);
     });
   });
 
-  describe('Function: closePanel', () => {
-    it('should call overlay.closePanel', () => {
-      jest.spyOn(comp.overlay, 'closePanel');
-      comp.closePanel();
-      expect(comp.overlay.closePanel).toHaveBeenCalled();
-    });
-  });
-
-  describe('Function: panelOpen', () => {
-    it('should return true', () => {
-      comp.overlay = { panelOpen: true };
-      expect(comp.panelOpen).toEqual(true);
-    });
-    it('should return false', () => {
-      comp.overlay = { panelOpen: false };
-      expect(comp.panelOpen).toEqual(false);
-    });
-  });
-
-  describe('Function: setValueAndClose(event)', () => {
-    it('should invoke select', () => {
-      const mockEvent: any = {
-        value: { test: true },
-        index: 1,
-      };
-      comp.setValueAndClose(mockEvent);
-      expect(comp.selectedIndex).toEqual(1);
-      expect(comp.selected).toEqual({ test: true, active: true });
-      expect(comp.empty).toEqual(false);
-    });
-    it('should invoke closePanel', () => {
-      jest.spyOn(comp.overlay, 'closePanel');
-      comp.setValueAndClose({});
-      expect(comp.overlay.closePanel).toHaveBeenCalled();
-    });
-    it('should not invoke select or close panel for a disabled item', () => {
-      const mockEvent: any = {
-        value: { id: 1, label: 'one', disabled: true },
-        index: 1,
-      };
-      jest.spyOn(comp.overlay, 'closePanel');
-      comp.setValueAndClose(mockEvent);
-      expect(comp.selectedIndex).toEqual(-1);
-      expect(comp.selected).toBeUndefined();
-      expect(comp.empty).toEqual(true);
-      expect(comp.overlay.closePanel).not.toHaveBeenCalled();
-    });
-  });
-
-  describe('Function: select(option, i, fireEvents)', () => {
-    it('should set selectedIndex', () => {
-      comp.select({}, 1);
-      expect(comp.selectedIndex).toEqual(1);
-    });
-    it('should set selected', () => {
-      comp.select({ test: true });
-      expect(comp.selected).toEqual({ test: true, active: true });
-    });
-    it('should set empty', () => {
-      comp.select({});
-      expect(comp.empty).toEqual(false);
-    });
-    it('should invoke onModelChange', () => {
-      jest.spyOn(comp, 'onModelChange');
-      comp.select({ value: 'foo' }, 1);
-      expect(comp.onModelChange).toHaveBeenCalledWith('foo');
-    });
-    it('should emit onSelect', () => {
-      jest.spyOn(comp.onSelect, 'emit');
-      comp.select({ value: 'foo' });
-      expect(comp.onSelect.emit).toHaveBeenCalledWith({ selected: 'foo' });
-    });
-    it('should not invoke onModelChange', () => {
-      jest.spyOn(comp, 'onModelChange');
-      comp.select({ value: 'foo' }, 1, false);
-      expect(comp.onModelChange).not.toHaveBeenCalled();
-    });
-    it('should not emit onSelect', () => {
-      jest.spyOn(comp.onSelect, 'emit');
-      comp.select({ value: 'foo' }, 1, false);
-      expect(comp.onSelect.emit).not.toHaveBeenCalled();
-    });
-  });
-
-  describe('Function: clear', () => {
-    it('should set selected', () => {
-      comp.placeholder = 'bar';
-      comp.selected = {
-        label: 'foo',
-        value: 'bar',
-        active: true,
-      };
-      comp.clear();
-      expect(comp.selected).toEqual({
-        label: 'bar',
-        value: null,
-        active: false,
-      });
-    });
-    it('should set active to false on previously selected object', () => {
-      const prevSelected = (comp.selected = {
-        label: 'foo',
-        value: 'bar',
-        active: true,
-      });
-      comp.clear();
-      expect(prevSelected.active).toEqual(false);
-    });
-    it('should set selectedIndex', () => {
-      comp.selectedIndex = 0;
-      comp.clear();
-      expect(comp.selectedIndex).toEqual(-1);
-    });
-    it('should set empty', () => {
-      comp.empty = false;
-      comp.clear();
-      expect(comp.empty).toEqual(true);
-    });
-  });
+  it('should propagate changes from NovoOption elements', fakeAsync(() => {
+    let selected;
+    comp.onSelect.subscribe(val => selected = val);
+    spyOn(comp, 'closePanel');
+    spyOn(comp, 'focus');
+    const options = [
+      { label: 'foo', value: 'foo' },
+      { label: 'bar', value: 'bar' },
+      { label: 'baz', value: 'baz' },
+    ];
+    fixture.componentRef.setInput('options', options);
+    fixture.detectChanges();
+    comp.writeValue('baz');
+    fixture.detectChanges();
+    expect(comp.viewOptions.length).toBe(3);
+    comp.openPanel();
+    const newNovoOption = comp.viewOptions.find(option => option.value === 'foo');
+    newNovoOption._selectViaInteraction();
+    tick();
+    expect(selected).toEqual({ selected: 'foo' });
+    expect((comp as HasOverlay).closePanel).toHaveBeenCalled();
+    expect(comp.focus).toHaveBeenCalled();
+  }));
 
   describe('Function: _handleKeydown(event)', () => {
-    xit('should not scroll', () => {});
     it('should close panel', () => {
       jest.spyOn(comp.overlay, 'closePanel');
       const mockEvent: any = { key: Key.Escape };
-      comp.header.open = true;
+      comp.openPanel();
       comp._handleKeydown(mockEvent);
       mockEvent.key = Key.Tab;
+      mockEvent.keyCode = TAB;
+      comp.openPanel();
       comp._handleKeydown(mockEvent);
       expect(comp.overlay.closePanel).toHaveBeenCalledTimes(2);
     });
-    it('should save header', () => {
-      const mockEvent: any = { key: Key.Enter };
+    // Possibly broken?
+    xit('should save header', () => {
+      const mockEvent: any = {
+        key: Key.Enter,
+        preventDefault: jest.fn(),
+      };
       comp.header = {
         open: true,
         value: 'foo',
         valid: true,
       };
-      comp.headerConfig = { onSave: jasmine.createSpy('onSave') };
+      fixture.componentRef.setInput('headerConfig', { onSave: jasmine.createSpy('onSave') });
       comp._handleKeydown(mockEvent);
       expect(comp.headerConfig.onSave).toHaveBeenCalled();
     });
-    it('should move selection up', () => {
+    it('should open panel when key is sent to open it', () => {
+      spyOn(comp, 'openPanel');
+      const mockEvent: any = {
+        key: Key.Space,
+        preventDefault: jasmine.createSpy('preventDefault'),
+      };
+      comp._handleKeydown(mockEvent);
+      expect(comp.openPanel).toHaveBeenCalled();
+      expect(mockEvent.preventDefault).toHaveBeenCalled();
+    });
+    it('should forward up/down events to keyManager', () => {
       const mockEvent: any = {
         key: Key.ArrowUp,
-        preventDefault: jasmine.createSpy('preventDefault'),
+        preventDefault: jest.fn(),
       };
-      comp.selectedIndex = 1;
-      comp.header = { open: true };
-      comp.filteredOptions = [
-        { value: 'foo', label: 'foo' },
-        { value: 'bar', label: 'bar' },
-        { value: 'baz', label: 'baz' },
-      ];
-      comp.overlay = {
-        overlayRef: {
-          overlayElement: {
-            querySelector: jasmine.createSpy('querySelector').and.returnValue({
-              querySelectorAll: jasmine.createSpy('querySelectorAll').and.returnValue([{ value: 'foo' }]),
-            }),
-          },
-        },
-        panelOpen: true,
-      };
-      comp.overlay.panelOpen = true;
+      spyOn(keyManager, 'onKeydown');
+      comp.openPanel();
       comp._handleKeydown(mockEvent);
-      expect(comp.selectedIndex).toEqual(0);
+      expect(keyManager.onKeydown).toHaveBeenCalledWith(mockEvent);
     });
-    it('should move selection down', () => {
-      const mockEvent: any = {
-        key: Key.ArrowDown,
-        preventDefault: jasmine.createSpy('preventDefault'),
-      };
-      comp.selectedIndex = 1;
-      comp.header = { open: true };
-      comp.filteredOptions = [
-        { value: 'foo', label: 'foo' },
-        { value: 'bar', label: 'bar' },
-        { value: 'baz', label: 'baz' },
-      ];
-      comp.overlay = {
-        overlayRef: {
-          overlayElement: {
-            querySelector: jasmine.createSpy('querySelector').and.returnValue({
-              querySelectorAll: jasmine.createSpy('querySelectorAll').and.returnValue([{ value: 'foo' }]),
-            }),
-          },
-        },
-        panelOpen: true,
-      };
-      comp._handleKeydown(mockEvent);
-      expect(comp.selectedIndex).toEqual(2);
-    });
-    xit('should toggle header open', () => {});
-    xit('should toggle header closed', () => {});
-    xit('should enter filter term', () => {});
-    xit('should remove part of the filter term', () => {});
   });
 
-  xdescribe('Function: scrollToSelected', () => {});
+  describe('Legacy options', () => {
+    it('should present a disabled "legacy option" when selecting a value that does not exist in the option list', () => {
+      const options = [
+        { label: 'foo', value: 'foo' },
+        { label: 'bar', value: 'bar' },
+        { label: 'baz', value: 'baz' },
+      ];
+      fixture.componentRef.setInput('options', options);
+      fixture.detectChanges();
+      comp.writeValue('bif');
+      fixture.detectChanges();
+      comp.openPanel();
+      expect(comp.viewOptions.length).toBe(4);
+      const legacyOption: NovoOption = comp.viewOptions.get(3);
+      expect(legacyOption.disabled).toBeTruthy();
+      expect(legacyOption.viewValue).toBe('bif');
+    });
 
-  xdescribe('Function: scrollToIndex(index)', () => {});
+    it('should present a disabled "legacy option" when updating the list of options (via content children) to remove a previously valid value', fakeAsync(() => {
+      const fixture2 = TestBed.createComponent(TestSelectComponent);
+      fixture2.detectChanges();
+      const select = fixture2.componentInstance.select() as NovoSelectElement;
+      fixture2.componentInstance.value = '333';
+      fixture2.detectChanges();
+      select.openPanel();
+      fixture2.detectChanges();
+      expect(select.contentOptions.length).toBe(3);
+      expect(select.contentOptions.get(2).disabled).toBeFalsy();
+      fixture2.componentInstance.options.splice(2, 1);
+      fixture2.detectChanges();
+      tick();
+      expect(select.contentOptions.length).toBe(2);
+      expect(select.viewOptions.length).toBe(1);
+      const legacyOption: NovoOption = select.viewOptions.get(0);
+      expect(legacyOption.disabled).toBeTruthy();
+      expect(legacyOption.viewValue).toBe('333');
+    }));
 
-  xdescribe('Function: toggleHeader(event, forceValue)', () => {});
+    // Expected, but currently broken (may be a niche situation)
+    xit('should present a disabled "legacy option" when updating the list of options (via input) to remove a previously valid value', () => {
+      const options = [
+        { label: 'foo', value: 'foo' },
+        { label: 'bar', value: 'bar' },
+        { label: 'baz', value: 'baz' },
+      ];
+      const options2 = [
+        { label: 'foo', value: 'foo' },
+        { label: 'bar', value: 'bar' },
+      ];
+      fixture.componentRef.setInput('options', options);
+      fixture.detectChanges();
+      comp.writeValue('baz');
+      fixture.detectChanges();
+      comp.openPanel();
+      expect(comp.viewOptions.length).toBe(3);
+      fixture.componentRef.setInput('options', options2);
+      fixture.detectChanges();
+      comp.openPanel();
+      fixture.detectChanges();
+      expect(comp.viewOptions.length).toBe(3);
+      const legacyOption: NovoOption = comp.viewOptions.get(2);
+      expect(legacyOption.disabled).toBeTruthy();
+      expect(legacyOption.viewValue).toBe('bif');
+    });
 
-  xdescribe('Function: highlight(match, query)', () => {});
-
-  xdescribe('Function: escapeRegexp(queryToEscape)', () => {});
-
-  xdescribe('Function: saveHeader', () => {});
-
-  xdescribe('Function: writeValue(model)', () => {});
-
-  xdescribe('Function: registerOnChange(fn)', () => {});
-
-  xdescribe('Function: registerOnTouched(fn)', () => {});
+    it('should hide legacy options when input or signal is configured to hide them', () => {
+      const options = [
+        { label: 'foo', value: 'foo' },
+        { label: 'bar', value: 'bar' },
+        { label: 'baz', value: 'baz' },
+      ];
+      fixture.componentRef.setInput('options', options);
+      fixture.componentRef.setInput('hideLegacyOptions', true);
+      fixture.detectChanges();
+      comp.writeValue('bif');
+      fixture.detectChanges();
+      comp.openPanel();
+      expect(comp.viewOptions.length).toBe(3);
+    });
+  });
 });

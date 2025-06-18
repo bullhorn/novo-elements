@@ -4558,6 +4558,9 @@ export class RadioButtonsPage {
 <h5>Multiple Selections With Search</h5>
 <p>The <code>novo-select-search</code> is compatible with the <code>multiple</code> option as well.</p>
 <p><code-example example="multiple-select-with-search"></code-example></p>
+<h5>Legacy Options</h5>
+<p>When a value is set manually on a <code>novo-select</code> that is not reflected in its options, it will be displayed as a disabled option. The value can be removed, but will not appear subsequently. This behavior can be disabled with the <code>hideLegacyOptions</code> input.</p>
+<p><code-example example="legacy-select-option"></code-example></p>
 `,
   host: { class: 'markdown-page' }
 })
