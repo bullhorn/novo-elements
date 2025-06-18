@@ -16,3 +16,9 @@ In the case where "Success", "Warning", and "Error" notifications aren't enough,
 Add modals have a colored title bar based on the record type being created. Additionally, due to a greater than average amount of content, they have fixed footers.
 
 <code-example example="aside-form"></code-example>
+
+## Widget
+
+A new experimental aside configuration making it behave as a pop-out widget. This component is both resizable and draggable around the screen.
+
+<code-example example="aside-widget"></code-example>
