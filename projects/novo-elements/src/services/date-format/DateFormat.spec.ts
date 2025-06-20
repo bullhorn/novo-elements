@@ -396,5 +396,19 @@ describe('Service: DateFormatService', () => {
       const [, , isInvalidDate] = service.parseCustomDateString(value, format);
       expect(isInvalidDate).toBeTruthy();
     });
-  })
+  });
+
+  describe('Function: dateFormatToImaskPattern', () => {
+    it('Should convert a series of international formats into the correct imask pattern', () => {
+      let dfs: DateFormatService;
+      dfs = new DateFormatService({ dateFormatString: () => 'MM/dd/YYYY' } as any);
+      expect(dfs.dateFormatAsImaskPattern).toBe('m{/}`d{/}`Y');
+      dfs = new DateFormatService({ dateFormatString: () => 'dd/MM/YYYY' } as any);
+      expect(dfs.dateFormatAsImaskPattern).toBe('d{/}`m{/}`Y');
+      dfs = new DateFormatService({ dateFormatString: () => 'dd.MM.YYYY' } as any);
+      expect(dfs.dateFormatAsImaskPattern).toBe('d{.}`m{.}`Y');
+      dfs = new DateFormatService({ dateFormatString: () => 'YYYY/MM/dd' } as any);
+      expect(dfs.dateFormatAsImaskPattern).toBe('Y{/}`m{/}`d');
+    });
+  });
 });

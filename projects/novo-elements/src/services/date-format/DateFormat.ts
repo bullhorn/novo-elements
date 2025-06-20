@@ -8,7 +8,12 @@ import { DateUtil, Helpers, convertTokens } from 'novo-elements/utils';
 
 @Injectable()
 export class DateFormatService {
-  constructor(private labels: NovoLabelService) {}
+
+  public readonly dateFormatAsImaskPattern: string;
+
+  constructor(private labels: NovoLabelService) {
+    this.dateFormatAsImaskPattern = this.dateFormatToImaskPattern(this.labels.dateFormatString());
+  }
 
   getTimeMask(militaryTime: boolean): MaskedOptions {
     const amFormat = this.labels.timeFormatAM.toUpperCase();
@@ -112,6 +117,25 @@ export class DateFormatService {
       // ignore error - keep isInvalidDate true and date null
     }
     return [date, dateString, isInvalidDate];
+  }
+
+  private dateFormatToImaskPattern(format: string): string {
+    const partsReg = /(\w)\1+|([\.\\/-])/g;
+    let output: string = '';
+    let match: RegExpExecArray;
+    while ((match = partsReg.exec(format)) != null) {
+      if (match[1]) {
+        const matchLow = match[1].toLowerCase();
+        if (matchLow === 'y') {
+          output += 'Y';
+        } else {
+          output += matchLow;
+        }
+      } else {
+        output += `{${match[2]}}\``;
+      }
+    }
+    return output;
   }
 
   /**
