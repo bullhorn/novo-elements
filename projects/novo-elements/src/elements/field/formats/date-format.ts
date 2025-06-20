@@ -37,8 +37,8 @@ export class NovoDateFormatDirective extends IMaskDirective<any> {
       min: new Date(1900, 0, 1),
       max: new Date(2100, 0, 1),
       prepare: (str) => str.toUpperCase(),
-      format: (date) => this.formatValue(date, { userDateFormat: this.labels.dateFormat}),
-      parse: (str) => DateUtil.parse(str, { userDateFormat: this.labels.dateFormat.toUpperCase() }),
+      format: (date) => this.formatValue(date, { userDateFormat: this.labels.dateFormatString()}),
+      parse: (str) => DateUtil.parse(str, { userDateFormat: this.labels.dateFormatString().toUpperCase() }),
       blocks: {
         d: {
           mask: MaskedRange,
@@ -65,11 +65,11 @@ export class NovoDateFormatDirective extends IMaskDirective<any> {
   }
 
   normalize(value: string) {
-    const pattern = this.labels.dateFormat.toUpperCase();
+    const pattern = this.labels.dateFormatString().toUpperCase();
     if (!value) {
       return "";
     }
-    return DateUtil.format(DateUtil.parse(value, { userDateFormat: this.labels.dateFormat}), pattern);
+    return DateUtil.format(DateUtil.parse(value, { userDateFormat: this.labels.dateFormatString()}), pattern);
   }
 
   formatAsIso(date: Date): string {
@@ -81,7 +81,7 @@ export class NovoDateFormatDirective extends IMaskDirective<any> {
 
   formatValue(value: any, options?: DateParseOptions): string {
     if (value == null) return '';
-    const dateFormat = this.labels.dateFormat.toUpperCase();
+    const dateFormat = this.labels.dateFormatString().toUpperCase();
     const date = DateUtil.parse(value, options);
     if (isValid(date)) {
       return DateUtil.format(date, dateFormat);

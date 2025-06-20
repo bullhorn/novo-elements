@@ -64,7 +64,7 @@ export class NovoDateRangeFormatDirective extends IMaskDirective<any> {
   }
 
   normalize(value: string | Date, options?: DateParseOptions) {
-    const pattern = this.labels.dateFormat.toUpperCase();
+    const pattern = this.labels.dateFormatString().toUpperCase();
     return DateUtil.format(value ? DateUtil.parse(value, options) : null, pattern);
   }
 
@@ -86,7 +86,7 @@ export class NovoDateRangeFormatDirective extends IMaskDirective<any> {
   }
 
   formatDate(source: Date | string) {
-    const dateRangeFormat = this.labels.dateFormat.toUpperCase();
+    const dateRangeFormat = this.labels.dateFormatString().toUpperCase();
     const date = DateUtil.parse(source);
     if (isValid(date)) {
       return DateUtil.format(date, dateRangeFormat);
@@ -133,8 +133,8 @@ export class NovoDateRangeFormatDirective extends IMaskDirective<any> {
 
   extractDatesFromInput(value) {
     const [startStr, endStr] = value.split(' - ');
-    const startDate = DateUtil.parse(startStr, { userDateFormat: this.labels.dateFormat});
-    const endDate = DateUtil.parse(endStr, { userDateFormat: this.labels.dateFormat});
+    const startDate = DateUtil.parse(startStr, { userDateFormat: this.labels.dateFormatString()});
+    const endDate = DateUtil.parse(endStr, { userDateFormat: this.labels.dateFormatString()});
     return { startDate, endDate };
   }
 

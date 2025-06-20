@@ -400,16 +400,15 @@ describe('Service: DateFormatService', () => {
 
   describe('Function: dateFormatToImaskPattern', () => {
     it('Should convert a series of international formats into the correct imask pattern', () => {
-      let dfs = new DateFormatService({ dateFormat: 'MM/dd/YYYY' } as any);
+      let dfs: DateFormatService;
+      dfs = new DateFormatService({ dateFormatString: () => 'MM/dd/YYYY' } as any);
       expect(dfs.dateFormatAsImaskPattern).toBe('m{/}`d{/}`Y');
-      dfs = new DateFormatService({ dateFormat: 'dd/MM/YYYY' } as any);
+      dfs = new DateFormatService({ dateFormatString: () => 'dd/MM/YYYY' } as any);
       expect(dfs.dateFormatAsImaskPattern).toBe('d{/}`m{/}`Y');
-      dfs = new DateFormatService({ dateFormat: 'dd.MM.YYYY' } as any);
+      dfs = new DateFormatService({ dateFormatString: () => 'dd.MM.YYYY' } as any);
       expect(dfs.dateFormatAsImaskPattern).toBe('d{.}`m{.}`Y');
-      dfs = new DateFormatService({ dateFormat: 'YYYY/MM/dd' } as any);
+      dfs = new DateFormatService({ dateFormatString: () => 'YYYY/MM/dd' } as any);
       expect(dfs.dateFormatAsImaskPattern).toBe('Y{/}`m{/}`d');
-      dfs = new DateFormatService({ dateFormat: 'dd.MM.YYYY' } as any);
-      expect(dfs.dateFormatAsImaskPattern).toBe('d{.}`m{.}`Y');
     });
   });
 });

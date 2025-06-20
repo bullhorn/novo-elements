@@ -12,7 +12,7 @@ export class DateFormatService {
   public readonly dateFormatAsImaskPattern: string;
 
   constructor(private labels: NovoLabelService) {
-    this.dateFormatAsImaskPattern = this.dateFormatToImaskPattern(this.labels.dateFormat);
+    this.dateFormatAsImaskPattern = this.dateFormatToImaskPattern(this.labels.dateFormatString());
   }
 
   getTimeMask(militaryTime: boolean): MaskedOptions {
