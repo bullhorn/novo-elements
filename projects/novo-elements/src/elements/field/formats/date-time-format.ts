@@ -3,8 +3,8 @@ import { COMPOSITION_BUFFER_MODE, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { IMaskDirective, IMaskFactory } from 'angular-imask';
 import { isValid } from 'date-fns';
 import { MaskedEnum, MaskedRange } from 'imask';
-import { NovoLabelService } from 'novo-elements/services';
-import { DateUtil, Key } from 'novo-elements/utils';
+import { DateFormatService, NovoLabelService } from 'novo-elements/services';
+import { DateParseOptions, DateUtil, Key } from 'novo-elements/utils';
 import { DATE_FORMATS, NOVO_INPUT_FORMAT, NovoInputFormat } from './base-format';
 
 export const DATETIMEFORMAT_VALUE_ACCESSOR = {
@@ -29,7 +29,7 @@ export class NovoDateTimeFormatDirective extends IMaskDirective<any> implements 
   @Input() military: boolean = false;
   @Input() dateTimeFormat: DATE_FORMATS = DATE_FORMATS.DATE;
 
-  constructor(private labels: NovoLabelService) {
+  constructor(private labels: NovoLabelService, private dateFormat: DateFormatService) {
     super();
     this.initFormatOptions();
   }
@@ -38,17 +38,21 @@ export class NovoDateTimeFormatDirective extends IMaskDirective<any> implements 
     const amFormat = this.labels.timeFormatAM.toUpperCase();
     const pmFormat = this.labels.timeFormatPM.toUpperCase();
     this.unmask = 'typed' as unknown as false; // typing is to work around angular-imask bug
+    let pattern = `${this.dateFormat.dateFormatAsImaskPattern}, HH:mm`;
+    if (!this.military) {
+      pattern += ' aa';
+    }
     this.imask = {
       mask: Date,
-      pattern: this.military ? 'm{/}`d{/}`Y, HH:mm' : 'm{/}`d{/}`Y, HH:mm aa',
+      pattern,
       overwrite: true,
       autofix: true,
       lazy: false,
       min: new Date(1900, 0, 1),
       max: new Date(2100, 0, 1),
       prepare: (str) => str.toUpperCase(),
-      format: (date) => this.formatValue(date),
-      parse: (str) => DateUtil.parse(str),
+      format: (date) => this.formatValue(date, { userDateFormat: this.labels.dateFormatString() }),
+      parse: (str) => DateUtil.parse(str, { userDateFormat: this.labels.dateFormatString().toUpperCase() }),
       blocks: {
         d: {
           mask: MaskedRange,
@@ -175,9 +179,9 @@ export class NovoDateTimeFormatDirective extends IMaskDirective<any> implements 
     }
   }
 
-  normalize(value: string) {
-    const pattern = this.labels.dateFormat.toUpperCase();
-    return DateUtil.format(value ? DateUtil.parse(value) : null, pattern);
+  normalize(value: string, options?: DateParseOptions) {
+    const pattern = this.labels.dateFormatString().toUpperCase();
+    return DateUtil.format(value ? DateUtil.parse(value, options) : null, pattern);
   }
 
   formatAsIso(date: Date): string {
@@ -208,24 +212,30 @@ export class NovoDateTimeFormatDirective extends IMaskDirective<any> implements 
     return time24h;
   }
 
-  formatValue(value: any): string {
+  formatValue(value: Date | string, options?: DateParseOptions): string {
     if (value == null) return '';
     // Use `parse` because it keeps dates in locale
-    const date = DateUtil.parse(value);
+    const date = DateUtil.parse(value, options);
     if (isValid(date)) {
-      const dateFormat = `${this.labels.dateFormat.toUpperCase()}, ${this.military ? 'HH:mm' : 'hh:mm A'}`;
+      const dateFormat = `${this.labels.dateFormatString().toUpperCase()}, ${this.military ? 'HH:mm' : 'hh:mm A'}`;
       return DateUtil.format(date, dateFormat);
     }
-    return this.normalize(value);
+    return this.normalize(value as string, options);
   }
 
   writeValue(value: any) {
-    super.writeValue(this.formatValue(value));
+    const initialValue = this['_initialValue'];
+    if (initialValue != null && value === initialValue) {
+      // This value has already been formatted from the first call to writeValue, simply use it.
+      super.writeValue(initialValue);
+    } else {
+      super.writeValue(this.formatValue(value));
+    }
   }
 
   registerOnChange(fn: (_: any) => void): void {
-    this.onChange = (date: any) => {
-      let formatted = date;
+    this.onChange = (date: Date) => {
+      let formatted: Date | string;
       switch (this.dateTimeFormat) {
         case DATE_FORMATS.ISO8601:
           formatted = this.formatAsIso(date);
