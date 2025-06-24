@@ -42,10 +42,10 @@ import { NovoLabelService } from 'novo-elements/services';
         </novo-field>
         <novo-field *novoSwitchCases="['within']">
           <novo-select [placeholder]="labels.selectDateRange" formControlName="value">
-            <novo-option value="7">{{ labels.next7Days }}</novo-option>
-            <novo-option value="-7">{{ labels.past7Days }}</novo-option>
-            <novo-option value="-30">{{ labels.past30Days }}</novo-option>
-            <novo-option value="-90">{{ labels.past90Days }}</novo-option>
+            <novo-option value="7" [attr.data-automation-value]="labels.next7Days">{{ labels.next7Days }}</novo-option>
+            <novo-option value="-7" [attr.data-automation-value]="labels.past7Days">{{ labels.past7Days }}</novo-option>
+            <novo-option value="-30" [attr.data-automation-value]="labels.past30Days">{{ labels.past30Days }}</novo-option>
+            <novo-option value="-90" [attr.data-automation-value]="labels.past90Days">{{ labels.past90Days }}</novo-option>
           </novo-select>
         </novo-field>
         <novo-field *novoSwitchCases="['isNull']">
