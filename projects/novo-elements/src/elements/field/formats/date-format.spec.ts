@@ -93,4 +93,24 @@ describe('NovoDateFormatDirective', () => {
         fixture.detectChanges();
         expect(fixture.debugElement.query(By.css('input')).nativeElement.value).toBe('04/01/2022');
     });
+
+    describe('Function: formatYearMonthDay', () => {
+        it('should format date in yyyy-mm-dd format', () => {
+            const expected = '2025-10-22';
+            const date = new Date('10/22/2025');
+            const actual = directive.formatYearMonthDay(date);
+            expect(actual).toEqual(expected);
+        });
+        it('should return null if called with an invalid date', () => {
+            const date: any = 'not a date';
+            let actual = directive.formatYearMonthDay(date);
+            expect(actual).toBeNull();
+
+            actual = directive.formatYearMonthDay(undefined as any);
+            expect(actual).toBeNull();
+
+            actual = directive.formatYearMonthDay(null as any);
+            expect(actual).toBeNull();
+        });
+    });
 });

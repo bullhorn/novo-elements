@@ -24,7 +24,7 @@ import { NovoLabelService } from 'novo-elements/services';
       </novo-field>
       <ng-container *novoConditionInputDef="let formGroup; viewIndex as viewIndex" [ngSwitch]="formGroup.value.operator" [formGroup]="formGroup">
         <novo-field *novoSwitchCases="['before', 'after', 'equalTo']">
-          <input novoInput dateFormat="iso8601" [picker]="datepicker" formControlName="value"/>
+          <input novoInput dateFormat="yyyy-mm-dd" [picker]="datepicker" formControlName="value"/>
           <novo-picker-toggle triggerOnFocus [overlayId]="viewIndex" novoSuffix icon="calendar">
             <novo-date-picker (onSelect)="closePanel($event, viewIndex)" #datepicker></novo-date-picker>
           </novo-picker-toggle>

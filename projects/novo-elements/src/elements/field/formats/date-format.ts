@@ -79,6 +79,13 @@ export class NovoDateFormatDirective extends IMaskDirective<any> {
     return null;
   }
 
+  formatYearMonthDay(date: Date): string {
+    if (date && isValid(date)) {
+       return DateUtil.format(date, 'YYYY-MM-DD');
+    }
+    return null;
+  }
+
   formatValue(value: any, options?: DateParseOptions): string {
     if (value == null) return '';
     const dateFormat = this.labels.dateFormatString().toUpperCase();
@@ -108,6 +115,9 @@ export class NovoDateFormatDirective extends IMaskDirective<any> {
           break;
         case DATE_FORMATS.STRING:
           formatted = this.formatValue(date);
+          break;
+        case DATE_FORMATS.YEAR_MONTH_DAY:
+          formatted = this.formatYearMonthDay(date);
           break;
         default:
           formatted = date;
