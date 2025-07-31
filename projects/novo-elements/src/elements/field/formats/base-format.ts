@@ -12,4 +12,5 @@ export enum DATE_FORMATS {
   DATE = 'date',
   ISO8601 = 'iso8601',
   STRING = 'string',
+  YEAR_MONTH_DAY = 'yyyy-mm-dd',
 }
