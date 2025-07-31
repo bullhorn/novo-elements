@@ -45,6 +45,11 @@
           }
         }
       }
+      novo-field.address-location {
+        .novo-field-suffix {
+          align-self: flex-end;
+        }
+      }
       .novo-field-infix {
         white-space: nowrap;
         overflow: hidden;
