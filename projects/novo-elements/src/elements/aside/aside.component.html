@@ -3,8 +3,6 @@
   <ng-template [cdkPortalOutlet]="component"></ng-template>
 </div>
 <div *ngIf="draggable" class="aside-panel draggable" [@slideInOut]="animationState" (@slideInOut.start)="onAnimationStart($event)"
-  (@slideInOut.done)="onAnimationDone($event)" cdkDrag cdkDragBoundary=".cdk-overlay-container">
-  <div class="drag-handle" cdkDragHandle>
+  (@slideInOut.done)="onAnimationDone($event)" cdkDrag [cdkDragDisabled]="disableDrag()" cdkDragBoundary=".cdk-overlay-container">
     <ng-template [cdkPortalOutlet]="component"></ng-template>
-  </div>
 </div>

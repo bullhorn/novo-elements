@@ -9,8 +9,8 @@ interface CustomParams {
 @Component({
   selector: 'aside-widget-demo',
   template: `
-    <novo-toolbar cdkDragHandle>
-      <novo-toolbar-row accent="candidate" gap="md" cdkDragHandle>
+    <novo-toolbar>
+      <novo-toolbar-row accent="candidate" gap="md" (mouseenter)="enableDrag()" (mouseleave)="preventDrag()">
         <novo-icon>candidate</novo-icon>
         <novo-title>{{ ref.params.name }}</novo-title>
         <span class="example-spacer" flex="1"></span>
@@ -52,6 +52,14 @@ export class AsideWidgetDemo {
   constructor(public ref: NovoAsideRef<CustomParams, string>) {}
   close() {
     this.ref.close(`successfully closed: ${this.ref.params.name}`);
+  }
+
+  preventDrag() {
+    this.ref.disableDrag.set(true);
+  }
+
+  enableDrag() {
+    this.ref.disableDrag.set(false);
   }
 }
 
