@@ -16,14 +16,15 @@ import { NovoLabelService } from 'novo-elements/services';
         <novo-select [placeholder]="labels.operator" formControlName="operator" (onSelect)="onOperatorSelect(formGroup)">
           <novo-option value="before">{{ labels.before }}</novo-option>
           <novo-option value="after">{{ labels.after }}</novo-option>
+          <novo-option value="equalTo">{{ labels.equals }}</novo-option>
           <novo-option value="within">{{ labels.within }}</novo-option>
           <novo-option value="between">{{ labels.between }}</novo-option>
           <novo-option value="isNull" *ngIf="!meta?.removeIsEmpty">{{ labels.isEmpty }}</novo-option>
         </novo-select>
       </novo-field>
       <ng-container *novoConditionInputDef="let formGroup; viewIndex as viewIndex" [ngSwitch]="formGroup.value.operator" [formGroup]="formGroup">
-        <novo-field *novoSwitchCases="['before', 'after']">
-          <input novoInput dateFormat="iso8601" [picker]="datepicker" formControlName="value"/>
+        <novo-field *novoSwitchCases="['before', 'after', 'equalTo']">
+          <input novoInput dateFormat="yyyy-mm-dd" [picker]="datepicker" formControlName="value"/>
           <novo-picker-toggle triggerOnFocus [overlayId]="viewIndex" novoSuffix icon="calendar">
             <novo-date-picker (onSelect)="closePanel($event, viewIndex)" #datepicker></novo-date-picker>
           </novo-picker-toggle>
@@ -62,7 +63,7 @@ export class NovoDefaultDateConditionDef extends AbstractConditionFieldDef {
 
   constructor(labelService: NovoLabelService) {
     super(labelService);
-    this.defineOperatorEditGroup(Operator.before, Operator.after);
+    this.defineOperatorEditGroup(Operator.before, Operator.after, Operator.equalTo);
   }
 
   closePanel(event, viewIndex): void {
