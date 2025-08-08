@@ -3,8 +3,8 @@ import { COMPOSITION_BUFFER_MODE, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { IMaskDirective, IMaskFactory } from 'angular-imask';
 import { isValid } from 'date-fns';
 import { MaskedRange } from 'imask';
-import { NovoLabelService } from 'novo-elements/services';
-import { DateUtil } from 'novo-elements/utils';
+import { DateFormatService, NovoLabelService } from 'novo-elements/services';
+import { DateParseOptions, DateUtil } from 'novo-elements/utils';
 import { DATE_FORMATS, NOVO_INPUT_FORMAT } from './base-format';
 
 export const DATEFORMAT_VALUE_ACCESSOR = {
@@ -25,21 +25,20 @@ export class NovoDateFormatDirective extends IMaskDirective<any> {
 
   @Input() dateFormat: DATE_FORMATS = DATE_FORMATS.DATE;
 
-  constructor(private labels: NovoLabelService) {
+  constructor(private labels: NovoLabelService, private dateFormatService: DateFormatService) {
     super();
-    const dateFormat = this.labels.dateFormat.toUpperCase();
     this.unmask = 'typed' as unknown as false; // typing is to work around angular-imask bug
     this.imask = {
       mask: Date,
-      pattern: 'm{/}`d{/}`Y',
+      pattern: this.dateFormatService.dateFormatAsImaskPattern,
       overwrite: true,
       autofix: true,
       lazy: false,
       min: new Date(1900, 0, 1),
       max: new Date(2100, 0, 1),
       prepare: (str) => str.toUpperCase(),
-      format: (date) => this.formatValue(date),
-      parse: (str) => DateUtil.parse(str),
+      format: (date) => this.formatValue(date, { userDateFormat: this.labels.dateFormatString()}),
+      parse: (str) => DateUtil.parse(str, { userDateFormat: this.labels.dateFormatString().toUpperCase() }),
       blocks: {
         d: {
           mask: MaskedRange,
@@ -66,11 +65,11 @@ export class NovoDateFormatDirective extends IMaskDirective<any> {
   }
 
   normalize(value: string) {
-    const pattern = this.labels.dateFormat.toUpperCase();
+    const pattern = this.labels.dateFormatString().toUpperCase();
     if (!value) {
       return "";
     }
-    return DateUtil.format(DateUtil.parse(value), pattern);
+    return DateUtil.format(DateUtil.parse(value, { userDateFormat: this.labels.dateFormatString()}), pattern);
   }
 
   formatAsIso(date: Date): string {
@@ -80,19 +79,31 @@ export class NovoDateFormatDirective extends IMaskDirective<any> {
     return null;
   }
 
-  formatValue(value: any): string {
+  formatYearMonthDay(date: Date): string {
+    if (date && isValid(date)) {
+       return DateUtil.format(date, 'YYYY-MM-DD');
+    }
+    return null;
+  }
+
+  formatValue(value: any, options?: DateParseOptions): string {
     if (value == null) return '';
-    // Use `parse` because it keeps dates in locale
-    const date = DateUtil.parse(value);
+    const dateFormat = this.labels.dateFormatString().toUpperCase();
+    const date = DateUtil.parse(value, options);
     if (isValid(date)) {
-      const dateFormat = this.labels.dateFormat.toUpperCase();
       return DateUtil.format(date, dateFormat);
     }
     return this.normalize(value);
   }
 
   writeValue(value: any) {
-    super.writeValue(this.formatValue(value));
+    const initialValue = this['_initialValue'];
+    if (initialValue != null && value === initialValue) {
+      // This value has already been formatted from the first call to writeValue, simply use it.
+      super.writeValue(initialValue);
+    } else {
+      super.writeValue(this.formatValue(value));
+    }
   }
 
   registerOnChange(fn: (_: any) => void): void {
@@ -104,6 +115,9 @@ export class NovoDateFormatDirective extends IMaskDirective<any> {
           break;
         case DATE_FORMATS.STRING:
           formatted = this.formatValue(date);
+          break;
+        case DATE_FORMATS.YEAR_MONTH_DAY:
+          formatted = this.formatYearMonthDay(date);
           break;
         default:
           formatted = date;
