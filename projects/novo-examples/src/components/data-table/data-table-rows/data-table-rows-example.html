@@ -31,6 +31,7 @@ Selection retention can be configured to keep records selected across pagination
     [refreshSubject]="refreshSubject"
     (preferencesChanged)="onPreferencesChanged($event)"
     (resized)="resized($event)"
+    (toggledFilter)="processCustomFilter($event)"
     [activeRowIdentifier]="selectedRecordId"
     [fixedHeader]="true"
     #basic>

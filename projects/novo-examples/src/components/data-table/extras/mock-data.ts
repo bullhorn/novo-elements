@@ -15,4 +15,5 @@ export interface MockData {
   email: string;
   address: { city?: string; state?: string };
   bigdecimal?: number;
+  favoriteColor?: string;
 }
