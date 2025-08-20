@@ -550,6 +550,7 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
       clickEvt.stopImmediatePropagation();
       return;
     }
+    this.focusInput();
     if (this.multiSelect && this.dropdown) {
       this.dropdown._handleKeydown = (event: KeyboardEvent) => {
         this.multiSelectOptionFilterHandleKeydown(event);
