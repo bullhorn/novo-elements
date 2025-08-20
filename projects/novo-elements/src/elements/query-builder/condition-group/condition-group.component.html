@@ -16,7 +16,7 @@
               {{qbs.getConjunctionLabel(controlName)}}</novo-label>
           </ng-template>
           <novo-condition-builder [groupIndex]="groupIndex" [andIndex]="andIndex" [hideOperator]="isFirst && hideFirstOperator" [scope]="scope" [conditionType]="controlName"></novo-condition-builder>
-          <novo-button theme="icon" icon="delete-o" color="negative" (click)="removeCondition(andIndex)">
+          <novo-button class="delete-btn" theme="icon" icon="delete-o" color="negative" (click)="removeCondition(andIndex)">
           </novo-button>
         </novo-flex>
       </ng-container>

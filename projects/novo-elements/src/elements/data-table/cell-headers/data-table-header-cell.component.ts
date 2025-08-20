@@ -11,6 +11,7 @@ import {
   OnDestroy,
   OnInit,
   Optional,
+  Output,
   Renderer2,
   TemplateRef,
   ViewChild,
@@ -60,7 +61,7 @@ import { DataTableState } from '../state/data-table-state.service';
           [tooltip]="labels.filters"
           tooltipPosition="right"
           [attr.data-feature-id]="'novo-data-table-filter-' + this.id"
-          (click)="focusInput()">filter</novo-icon>
+          (click)="clickedFilter($event)">filter</novo-icon>
         <ng-container [ngSwitch]="config.filterConfig.type">
           <ng-container *ngSwitchCase="'date'" (keydown.escape)="handleEscapeKeydown($event)">
             <novo-data-table-cell-filter-header [filter]="filter" (clearFilter)="clearFilter()"></novo-data-table-cell-filter-header>
@@ -216,6 +217,9 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
   resized: EventEmitter<IDataTableColumn<T>>;
   @Input()
   filterTemplate: TemplateRef<any>;
+
+  @Output()
+  toggledFilter = new EventEmitter<string>();
   @HostBinding('class.resizable')
   public resizable: boolean;
 
@@ -540,16 +544,24 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
     this.dropdown.openPanel(); // Ensures that the panel correctly updates to the dynamic size of the dropdown
   }
 
-  public focusInput(): void {
-    if (this.filterInput && this.filterInput.nativeElement) {
-      setTimeout(() => this.filterInput.nativeElement.focus(), 0);
+  public clickedFilter(clickEvt: MouseEvent): void {
+    if ((typeof this.config.filterConfig === 'object') && this.config.filterConfig.type === 'custom' && !this.filterTemplate) {
+      this.toggledFilter.next(this.id);
+      clickEvt.stopImmediatePropagation();
+      return;
     }
+    this.focusInput();
     if (this.multiSelect && this.dropdown) {
       this.dropdown._handleKeydown = (event: KeyboardEvent) => {
         this.multiSelectOptionFilterHandleKeydown(event);
       };
-      // setTimeout(() => this.optionFilterInput.nativeElement.focus(), 0);
       this.changeDetectorRef.markForCheck();
+    }
+  }
+
+  public focusInput(): void {
+    if (this.filterInput?.nativeElement) {
+      setTimeout(() => this.filterInput.nativeElement.focus());
     }
   }
 
