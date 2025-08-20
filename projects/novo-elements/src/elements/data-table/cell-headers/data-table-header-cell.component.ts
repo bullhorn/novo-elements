@@ -550,15 +550,18 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
       clickEvt.stopImmediatePropagation();
       return;
     }
-    if (this.filterInput && this.filterInput.nativeElement) {
-      setTimeout(() => this.filterInput.nativeElement.focus(), 0);
-    }
+    this.focusInput();
     if (this.multiSelect && this.dropdown) {
       this.dropdown._handleKeydown = (event: KeyboardEvent) => {
         this.multiSelectOptionFilterHandleKeydown(event);
       };
-      // setTimeout(() => this.optionFilterInput.nativeElement.focus(), 0);
       this.changeDetectorRef.markForCheck();
+    }
+  }
+
+  public focusInput(): void {
+    if (this.filterInput?.nativeElement) {
+      setTimeout(() => this.filterInput.nativeElement.focus());
     }
   }
 
