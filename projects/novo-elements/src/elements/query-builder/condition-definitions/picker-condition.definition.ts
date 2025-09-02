@@ -86,7 +86,8 @@ export class NovoDefaultPickerConditionDef extends AbstractConditionFieldDef {
     //const returnOptions = filterValue ? options.filter(opt => {
       baseOptionSet.add(opt.value);
       if (!filterValue || (opt.value.indexOf(filterValue) !== -1 ||
-        opt.label.toLowerCase().includes(filterValue.toLowerCase()))) {
+        opt.label.toLowerCase().includes(filterValue.toLowerCase()) ||
+        (select.value && select.value.indexOf(opt.value) !== -1))) {
           returnOptions.push(opt);
       }
     }
