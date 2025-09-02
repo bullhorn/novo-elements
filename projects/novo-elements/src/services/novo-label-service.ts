@@ -133,6 +133,7 @@ export class NovoLabelService {
   greaterThan = 'Greater Than';
   lessThan = 'Less Than';
   doesNotEqual = 'Does Not Equal';
+  beginsWith = 'Begins With';
   true = 'True';
   false = 'False';
   before = 'Before';
