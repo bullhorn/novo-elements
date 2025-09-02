@@ -78,6 +78,12 @@ export class DateFormatService {
     return [this.getDateMask(), /\,?/, /\s/, this.getTimeMask(militaryTime)];
   }
 
+  // Return a universal date-and-time input mask that can be used for any locale,
+  // and allows partial values (so that imask does not reject while typing)
+  getPermissiveDateTimeMask(): RegExp {
+    return /^((\d)(\d|\/|\.|\-){0,7})?(\d){0,2}\,?(\s[\d\:]{0,5})?(\s([AaPp][Mm]?))?$/;
+  }
+
   getTimePlaceHolder(militaryTime: boolean): string {
     if (militaryTime) {
       return this.labels.timeFormatPlaceholder24Hour;
