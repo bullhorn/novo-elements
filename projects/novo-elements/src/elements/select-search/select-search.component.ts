@@ -20,7 +20,7 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { BehaviorSubject, combineLatest, Observable, of, Subject } from 'rxjs';
-import { delay, filter, map, startWith, switchMap, take, takeUntil, tap } from 'rxjs/operators';
+import { debounceTime, delay, distinctUntilChanged, filter, map, startWith, switchMap, take, takeUntil, tap } from 'rxjs/operators';
 import { BooleanInput, isAlphaNumeric, Key } from 'novo-elements/utils';
 import { NovoOption, _countGroupLabelsBeforeOption } from 'novo-elements/elements/common';
 import { NovoFieldElement } from 'novo-elements/elements/field';
@@ -219,6 +219,8 @@ export class NovoSelectSearchComponent implements OnInit, OnDestroy, ControlValu
 
   onTouched: Function = (_: any) => {};
 
+  public _formControl: FormControl = new FormControl('');
+
   /** Reference to the NovoSelectElement options */
   public set _options(_options: QueryList<NovoOption>) {
     this._options$.next(_options);
@@ -228,12 +230,15 @@ export class NovoSelectSearchComponent implements OnInit, OnDestroy, ControlValu
   }
   public _options$: BehaviorSubject<QueryList<NovoOption>> = new BehaviorSubject<QueryList<NovoOption>>(null);
 
+  private _filterFinishedRerender = this._formControl.valueChanges.pipe(debounceTime(1));
+
   private optionsList$: Observable<NovoOption[]> = this._options$.pipe(
-    switchMap((_options) =>
+    switchMap((_options) => 
       _options
-        ? _options.changes.pipe(
-            map((options) => options.toArray().filter(option => !(option._getHostElement()?.classList.contains('add-option')))),
+        ? combineLatest([_options.changes, this._filterFinishedRerender]).pipe(
+            map(([options,]) => options.toArray().filter(option => !(option._getHostElement()?.classList.contains('add-option') || option._getHostElement().hidden))),
             startWith<NovoOption[]>(_options.toArray()),
+            distinctUntilChanged((optsA, optsB) => optsA.map(opt => opt.value).join(',') === optsB.map(opt => opt.value).join(','))
           )
         : of(null),
     ),
@@ -243,8 +248,6 @@ export class NovoSelectSearchComponent implements OnInit, OnDestroy, ControlValu
 
   /** Previously selected values when using <novo-select [multiple]="true">*/
   private previousSelectedValues: any[];
-
-  public _formControl: FormControl = new FormControl('');
 
   /** whether to show the no entries found message */
   public _showNoEntriesFound$: Observable<boolean> = combineLatest([this._formControl.valueChanges, this.optionsLength$]).pipe(

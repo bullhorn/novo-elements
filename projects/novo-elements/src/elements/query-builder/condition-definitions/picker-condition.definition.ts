@@ -1,9 +1,12 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { NovoLabelService } from 'novo-elements/services';
-import { Operator } from '../query-builder.types';
+import { BaseFieldDef, Operator } from '../query-builder.types';
 import { AbstractConditionFieldDef } from './abstract-condition.definition';
 import { NovoSelectSearchComponent } from 'novo-elements/elements/select-search';
+import { NovoSelectElement } from 'novo-elements/elements/select';
+import { NovoOption } from 'novo-elements/elements/common';
 
+type FieldOption = BaseFieldDef['options'][number];
 /**
  * Handle selection of field values when a list of options is provided.
  */
@@ -26,9 +29,16 @@ import { NovoSelectSearchComponent } from 'novo-elements/elements/select-search'
               <novo-select-search #filterInput allowDeselectDuringFilter></novo-select-search>
             </novo-option>
             <!-- WHat about optionUrl/optionType -->
-            <novo-option *ngFor="let option of filteredOptions(meta?.options, select, filterInput?.value); trackBy: optionTracker" [value]="option.value" [attr.data-automation-value]="option.label">
-              {{ option.label }}
-            </novo-option>
+            @for (option of meta?.options; track optionTracker) {
+              <novo-option [hidden]="hideOption(option, filterInput?.value)" [value]="option.value" [attr.data-automation-value]="option.label">
+                {{ option.label}}
+              </novo-option>
+            }
+            @for (option of customOptions(meta?.options, select); track optionTracker) {
+              <novo-option [hidden]="hideOption(option, filterInput?.value)" [value]="option.value" [attr.data-automation-value]="option.label">
+                {{ option.label}}
+              </novo-option>
+            }
             <novo-option class="add-option" *ngIf="showAddOption(meta, select, filterInput?.value)" [value]="filterInput?.value" [allowSelection]="false">
               {{filterInput.value}}
               <novo-icon class="add-icon" novoSuffix>add-thin</novo-icon>
@@ -72,33 +82,22 @@ export class NovoDefaultPickerConditionDef extends AbstractConditionFieldDef {
     }) == null;
   }
 
-  optionTracker(option) {
+  optionTracker(option: FieldOption) {
     return `${option.value}~~~${option.label}`;
   }
 
-  filteredOptions(options, select, filterValue: string) {
-    if (!options) {
-      return [];
-    }
-    const baseOptionSet = new Set();
-    let returnOptions = [];
-    for (let opt of options) {
-    //const returnOptions = filterValue ? options.filter(opt => {
-      baseOptionSet.add(opt.value);
-      if (!filterValue || (opt.value.indexOf(filterValue) !== -1 ||
-        opt.label.toLowerCase().includes(filterValue.toLowerCase()) ||
-        (select.value && select.value.indexOf(opt.value) !== -1))) {
-          returnOptions.push(opt);
-      }
-    }
-    const customOptions = select.value?.filter(value => !baseOptionSet.has(value)).map(value => ({
+  hideOption(option: FieldOption, filterValue: string): boolean {
+    return filterValue && (option.value.toString().indexOf(filterValue) === -1 &&
+        !option.label.toLowerCase().includes(filterValue.toLowerCase()));
+  }
+
+  customOptions(options: FieldOption[], select: NovoSelectElement): FieldOption[] {
+    return select.value?.filter((selectedOption: string) => {
+      return (!options || !(options.find(option => option.value === selectedOption)));
+    }).map(value => ({
       value,
       label: value
     }));
-    if (customOptions) {
-      returnOptions.push(...customOptions);
-    }
-    return returnOptions;
   }
 
   applyCustomItem() {
