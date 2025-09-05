@@ -124,6 +124,7 @@ import { DataTableState } from './state/data-table-state.service';
               *cdkHeaderCellDef
               [column]="column"
               [filterTemplate]="templates['column-filter-' + (column.filterable?.customTemplate || column.id)]"
+              (toggledFilter)="toggledFilter.next($event)"
               [novo-data-table-cell-config]="column"
               [resized]="resized"
               [defaultSort]="defaultSort"
@@ -464,6 +465,7 @@ export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
     allSelected: boolean;
     selectedCount: number;
   }>();
+  @Output() toggledFilter = new EventEmitter<string>();
 
   public dataSource: DataTableSource<T>;
   public loading: boolean = true;

@@ -220,6 +220,15 @@ export class DataTableRowsExample implements AfterViewInit {
       resizable: true,
     },
     {
+      id: 'favoriteColor',
+      label: 'Favorite Color',
+      enabled: true,
+      type: 'text',
+      filterable: { type: 'custom' },
+      sortable: true,
+      resizable: true,
+    },
+    {
       id: 'priority',
       label: 'Priority',
       enabled: true,
@@ -271,6 +280,7 @@ export class DataTableRowsExample implements AfterViewInit {
     'email',
     'simpleEmbeddedObj',
     'status',
+    'favoriteColor',
     'priority',
     'percent',
     'bigdecimal',
@@ -328,6 +338,7 @@ export class DataTableRowsExample implements AfterViewInit {
         email: 'test@google.com',
         address: { city: 'City', state: null },
         bigdecimal: 3.25 * (i + 1) * (i % 5 === 1 ? -1 : 1),
+        favoriteColor: 'blue',
       });
       this.staticDataSet2.push({
         id: i + 1001,
@@ -346,6 +357,7 @@ export class DataTableRowsExample implements AfterViewInit {
         email: 'test@google.com',
         address: { city: 'City', state: 'State' },
         bigdecimal: -75,
+        favoriteColor: 'white',
       });
     }
     this.basicRows = [...this.staticDataSet1];
@@ -438,14 +450,21 @@ export class DataTableRowsExample implements AfterViewInit {
     this.table.expandRows(expand);
   }
 
-  public filterList(value: any): void {
-    this.table.state.filter = { id: 'status', type: 'text', value };
+  public filterList(value: any, field = 'status'): void {
+    this.table.state.filter = { id: field, type: 'text', value };
     this.table.state.updates.next({
       globalSearch: this.table.state.globalSearch,
       filter: this.table.state.filter,
       sort: this.table.state.sort,
     });
     this.ref.markForCheck();
+  }
+
+  public processCustomFilter(columnName: string) {
+    if (columnName === 'favoriteColor') {
+      const colorFilter = prompt('Favorite Color has been configured with a custom filter but no template. The table emitted a (toggledFilter) event which lets this function handle it as desired.\nEnter a favorite color:');
+      this.filterList(colorFilter, 'favoriteColor');
+    }
   }
 
   public toggle(event) {
