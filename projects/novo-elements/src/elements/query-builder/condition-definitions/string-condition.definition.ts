@@ -26,7 +26,7 @@ import { AbstractConditionFieldDef } from './abstract-condition.definition';
       </novo-field>
       <ng-container *novoConditionInputDef="let formGroup" [ngSwitch]="formGroup.value.operator" [formGroup]="formGroup">
         <novo-field *novoSwitchCases="['includeAny', 'includeAll', 'excludeAny', 'beginsWith']">
-          <novo-chip-list #chipList aria-label="filter value" formControlName="value">
+          <novo-chip-list #chipList aria-label="filter value" multiple="true">
             <novo-chip *ngFor="let chip of formGroup.value?.value || []" [value]="chip" (removed)="remove(chip, formGroup)">
               <novo-text ellipsis [tooltip]="chip" tooltipOnOverflow>{{ chip }}</novo-text>
               <novo-icon novoChipRemove>close</novo-icon>
