@@ -63,7 +63,7 @@ export class NovoDefaultStringConditionDef extends AbstractConditionFieldDef {
 
   constructor(labelService: NovoLabelService) {
     super(labelService);
-    this.defineOperatorEditGroup(Operator.includeAny, Operator.includeAll, Operator.excludeAny);
+    this.defineOperatorEditGroup(Operator.includeAny, Operator.includeAll, Operator.excludeAny, Operator.beginsWith);
   }
 
   getValue(formGroup: AbstractControl): any[] {
