@@ -21,6 +21,7 @@ export type ConditionOrConditionGroup = Condition | NestedConditionGroup;
 export enum Operator {
   after = 'after',
   before = 'before',
+  beginsWith = 'beginsWith',
   between = 'between',
   equalTo = 'equalTo',
   exclude = 'exclude',
