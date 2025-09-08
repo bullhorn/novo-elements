@@ -1,8 +1,12 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { NovoLabelService } from 'novo-elements/services';
-import { Operator } from '../query-builder.types';
+import { BaseFieldDef, Operator } from '../query-builder.types';
 import { AbstractConditionFieldDef } from './abstract-condition.definition';
+import { NovoSelectSearchComponent } from 'novo-elements/elements/select-search';
+import { NovoSelectElement } from 'novo-elements/elements/select';
+import { NovoOption } from 'novo-elements/elements/common';
 
+type FieldOption = BaseFieldDef['options'][number];
 /**
  * Handle selection of field values when a list of options is provided.
  */
@@ -20,10 +24,24 @@ import { AbstractConditionFieldDef } from './abstract-condition.definition';
       </novo-field>
       <ng-container *novoConditionInputDef="let formGroup; fieldMeta as meta" [ngSwitch]="formGroup.value.operator" [formGroup]="formGroup">
         <novo-field *novoSwitchCases="['includeAny', 'includeAll', 'excludeAny']">
-          <novo-select extupdatefix formControlName="value" [placeholder]="labels.select" [multiple]="true">
+          <novo-select #select extupdatefix formControlName="value" [placeholder]="labels.select" [multiple]="true">
+            <novo-option [disabled]="!meta?.allowCustomFilterValues" [hidden]="!meta?.allowCustomFilterValues">
+              <novo-select-search #filterInput allowDeselectDuringFilter></novo-select-search>
+            </novo-option>
             <!-- WHat about optionUrl/optionType -->
-            <novo-option *ngFor="let option of meta?.options" [value]="option.value" [attr.data-automation-value]="option.label">
-              {{ option.label }}
+            @for (option of meta?.options; track optionTracker) {
+              <novo-option [hidden]="hideOption(option, filterInput?.value)" [value]="option.value" [attr.data-automation-value]="option.label">
+                {{ option.label}}
+              </novo-option>
+            }
+            @for (option of customOptions(meta?.options, select); track optionTracker) {
+              <novo-option [hidden]="hideOption(option, filterInput?.value)" [value]="option.value" [attr.data-automation-value]="option.label">
+                {{ option.label}}
+              </novo-option>
+            }
+            <novo-option class="add-option" *ngIf="showAddOption(meta, select, filterInput?.value)" [value]="filterInput?.value" [allowSelection]="false">
+              {{filterInput.value}}
+              <novo-icon class="add-icon" novoSuffix>add-thin</novo-icon>
             </novo-option>
           </novo-select>
         </novo-field>
@@ -45,5 +63,48 @@ export class NovoDefaultPickerConditionDef extends AbstractConditionFieldDef {
   constructor(labelService: NovoLabelService) {
     super(labelService);
     this.defineOperatorEditGroup(Operator.includeAny, Operator.includeAll, Operator.excludeAny);
+  }
+
+  showAddOption(meta, select, filterValue: string): boolean {
+    if (!(meta?.allowCustomFilterValues)) {
+      return false;
+    }
+    filterValue = filterValue?.trim().toLowerCase();
+    if (!filterValue) {
+      return false;
+    }
+    if (select.value && select.value.find(selectValue => selectValue.trim().toLowerCase() === filterValue)) {
+      return false;
+    }
+    return meta?.options && meta.options.find(opt => {
+      const optionLabel = opt.label.trim().toLowerCase();
+      return optionLabel === filterValue;
+    }) == null;
+  }
+
+  optionTracker(option: FieldOption) {
+    return `${option.value}~~~${option.label}`;
+  }
+
+  hideOption(option: FieldOption, filterValue: string): boolean {
+    return filterValue && (option.value.toString().indexOf(filterValue) === -1 &&
+        !option.label.toLowerCase().includes(filterValue.toLowerCase()));
+  }
+
+  customOptions(options: FieldOption[], select: NovoSelectElement): FieldOption[] {
+    return select.value?.filter((selectedOption: string) => {
+      return (!options || !(options.find(option => option.value === selectedOption)));
+    }).map(value => ({
+      value,
+      label: value
+    }));
+  }
+
+  applyCustomItem() {
+    // Method to handle adding a new item when "Add Item" is selected
+    // This is a placeholder for potential custom logic to add new items
+    // Could be implemented to open a modal, trigger a service call, etc.
+    console.warn('Custom item addition not implemented');
+
   }
 }

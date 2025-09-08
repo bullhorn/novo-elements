@@ -28,7 +28,7 @@ $novo-menu-side-padding: 0.5rem;
     background: rgba($ocean, 0.3);
   }
 
-  &.novo-selected {
+  &.novo-selected, .add-icon {
     color: $positive;
   }
 

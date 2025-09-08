@@ -20,8 +20,8 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { BehaviorSubject, combineLatest, Observable, of, Subject } from 'rxjs';
-import { delay, filter, map, startWith, switchMap, take, takeUntil, tap } from 'rxjs/operators';
-import { isAlphaNumeric, Key } from 'novo-elements/utils';
+import { debounceTime, delay, distinctUntilChanged, filter, map, startWith, switchMap, take, takeUntil, tap } from 'rxjs/operators';
+import { BooleanInput, isAlphaNumeric, Key } from 'novo-elements/utils';
 import { NovoOption, _countGroupLabelsBeforeOption } from 'novo-elements/elements/common';
 import { NovoFieldElement } from 'novo-elements/elements/field';
 import { NovoSelectElement } from 'novo-elements/elements/select';
@@ -155,6 +155,9 @@ export class NovoSelectSearchComponent implements OnInit, OnDestroy, ControlValu
   /** Enable clear input on escape pressed */
   @Input() enableClearOnEscapePressed = false;
 
+  /** Allow user to uncheck a value while filtering. */
+  @Input() @BooleanInput() allowDeselectDuringFilter = false;
+
   /**
    * Prevents home / end key being propagated to novo-select,
    * allowing to move the cursor within the search input instead of navigating the options
@@ -216,6 +219,8 @@ export class NovoSelectSearchComponent implements OnInit, OnDestroy, ControlValu
 
   onTouched: Function = (_: any) => {};
 
+  public _formControl: FormControl = new FormControl('');
+
   /** Reference to the NovoSelectElement options */
   public set _options(_options: QueryList<NovoOption>) {
     this._options$.next(_options);
@@ -225,12 +230,15 @@ export class NovoSelectSearchComponent implements OnInit, OnDestroy, ControlValu
   }
   public _options$: BehaviorSubject<QueryList<NovoOption>> = new BehaviorSubject<QueryList<NovoOption>>(null);
 
+  private _filterFinishedRerender = this._formControl.valueChanges.pipe(debounceTime(1));
+
   private optionsList$: Observable<NovoOption[]> = this._options$.pipe(
-    switchMap((_options) =>
+    switchMap((_options) => 
       _options
-        ? _options.changes.pipe(
-            map((options) => options.toArray()),
+        ? combineLatest([_options.changes, this._filterFinishedRerender]).pipe(
+            map(([options,]) => options.toArray().filter(option => !(option._getHostElement()?.classList.contains('add-option') || option._getHostElement().hidden))),
             startWith<NovoOption[]>(_options.toArray()),
+            distinctUntilChanged((optsA, optsB) => optsA.map(opt => opt.value).join(',') === optsB.map(opt => opt.value).join(','))
           )
         : of(null),
     ),
@@ -240,8 +248,6 @@ export class NovoSelectSearchComponent implements OnInit, OnDestroy, ControlValu
 
   /** Previously selected values when using <novo-select [multiple]="true">*/
   private previousSelectedValues: any[];
-
-  public _formControl: FormControl = new FormControl('');
 
   /** whether to show the no entries found message */
   public _showNoEntriesFound$: Observable<boolean> = combineLatest([this._formControl.valueChanges, this.optionsLength$]).pipe(
@@ -393,7 +399,9 @@ export class NovoSelectSearchComponent implements OnInit, OnDestroy, ControlValu
         }
       });
 
-    this.initMultipleHandling();
+    if (!this.allowDeselectDuringFilter) {
+      this.initMultipleHandling();
+    }
 
     this.optionsList$.pipe(takeUntil(this._onDestroy)).subscribe(() => {
       // update view when available options change
@@ -564,7 +572,7 @@ export class NovoSelectSearchComponent implements OnInit, OnDestroy, ControlValu
           if (!values || !Array.isArray(values)) {
             values = [];
           }
-          const optionValues = this.novoSelect.options.map((option) => option.value);
+          const optionValues = (this.novoSelect.options || []).map((option) => option.value);
           this.previousSelectedValues.forEach((previousValue) => {
             if (
               !values.some((v) => this.novoSelect.compareWith(v, previousValue)) &&
