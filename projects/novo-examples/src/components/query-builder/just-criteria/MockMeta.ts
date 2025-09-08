@@ -8596,6 +8596,7 @@ export const MockCandidateMeta = {
       description: '',
       systemRequired: false,
       shouldAddCustomEntityLabel: false,
+      allowCustomFilterValues: true,
     },
     {
       name: 'submissions',
