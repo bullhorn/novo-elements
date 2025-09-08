@@ -827,6 +827,7 @@ export const MockCandidateMeta = {
       description: '',
       systemRequired: false,
       shouldAddCustomEntityLabel: false,
+      hasBeginsWith: true,
       associatedEntity: {
         entity: 'CandidateAvailability',
         entityMetaUrl: '/meta/CandidateAvailability?fields=*',
