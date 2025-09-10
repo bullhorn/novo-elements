@@ -110,7 +110,7 @@ export class ConditionGroupComponent implements OnInit, OnDestroy {
     this.cdr.markForCheck();
   }
 
-  newCondition({ field, operator, scope, value, supportingValue }: Condition = EMPTY_CONDITION): UntypedFormGroup {
+  newCondition({ field, operator, scope, value, supportingValue, entity }: Condition = EMPTY_CONDITION): UntypedFormGroup {
     return this.formBuilder.group({
       conditionType: '$and',
       field: [field, Validators.required],
@@ -118,6 +118,7 @@ export class ConditionGroupComponent implements OnInit, OnDestroy {
       scope: [scope],
       value: [value],
       supportingValue: [supportingValue],
+      entity: [entity],
     });
   }
 
