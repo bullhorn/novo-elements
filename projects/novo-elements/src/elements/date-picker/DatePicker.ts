@@ -99,7 +99,9 @@ const DATE_PICKER_VALUE_ACCESSOR = {
       ></novo-calendar>
 
       <div class="calendar-footer" [hidden]="hideFooter">
-        <novo-button (click)="setToday()" class="today" size="small" data-automation-id="calendar-today">{{ labels.today }}</novo-button>
+      
+        <novo-button [hidden]="hideToday" (click)="setToday()" class="today" size="small" data-automation-id="calendar-today">{{ labels.today }}</novo-button>
+        <ng-content select=".footer-content"></ng-content>
       </div>
     </div>
   `,
@@ -150,11 +152,18 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
   @HostBinding('class.hide-overflow-days')
   public hideOverflowDays: boolean = false;
   /**
-   * Whether the footer which contains `today` button should be hidden.
+   * Whether the footer should be hidden - contains `today`/`cancel`/`save` buttons
    **/
   @Input()
   @BooleanInput()
   public hideFooter: boolean = false;
+
+  /**
+   * Whether to hide the `today` button.
+   **/
+  @Input()
+  @BooleanInput()
+  public hideToday: boolean = true;
 
   @Input()
   disabledDateMessage: string;
