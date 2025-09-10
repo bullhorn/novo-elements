@@ -33,6 +33,7 @@ export class ConditionGroupComponent implements OnInit, OnDestroy {
   @Input() formGroupName: any;
 
   public scope: string;
+  public entity: string;
   public parentForm: UntypedFormGroup;
   /** Subject that emits when the component has been destroyed. */
   private readonly _onDestroy = new Subject<void>();
@@ -48,14 +49,14 @@ export class ConditionGroupComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.parentForm = this.controlContainer.control as UntypedFormGroup;
     this.controlName = Object.keys(this.parentForm.controls)[0];
-    this.updateGroupScope();
+    this.updateGroupScopeAndEntity();
     merge(this.parentForm.parent.valueChanges, this.qbs.stateChanges)
       .pipe(takeUntil(this._onDestroy))
       .subscribe(() => this.cdr.markForCheck());
   }
 
   ngOnChanges() {
-    this.updateGroupScope();
+    this.updateGroupScopeAndEntity();
   }
 
   ngOnDestroy() {
@@ -63,9 +64,13 @@ export class ConditionGroupComponent implements OnInit, OnDestroy {
     this._onDestroy.complete();
   }
 
-  updateGroupScope() {
+  updateGroupScopeAndEntity() {
     if (this.parentForm && this.controlName) {
       this.scope = this.parentForm.value[this.controlName][0]?.scope || this.qbs.scopes()[0];
+      const entity = this.parentForm.value[this.controlName][0]?.entity;
+      if (entity) {
+        this.entity = entity;
+      }
     }
   }
 
