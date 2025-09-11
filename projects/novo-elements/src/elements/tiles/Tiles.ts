@@ -28,7 +28,7 @@ const TILES_VALUE_ACCESSOR = {
   providers: [TILES_VALUE_ACCESSOR],
   template: `
     <div class="tile-container" [class.active]="focused" [class.disabled]="disabled">
-      <button class="tile" type="button"
+      <button class="tile"
         *ngFor="let option of _options; let i = index"
         [ngClass]="{ defaultColor: !option.color, active: option.checked, disabled: option.disabled }"
         [theme]="option.checked ? 'primary' : 'dialogue'"
