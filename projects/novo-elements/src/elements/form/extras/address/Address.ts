@@ -1,5 +1,5 @@
 // NG2
-import { Component, EventEmitter, forwardRef, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, forwardRef, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 // APP
 import { NovoLabelService } from 'novo-elements/services';
@@ -187,7 +187,7 @@ export interface NovoAddressConfig {
   `,
   styleUrls: ['./Address.scss'],
 })
-export class NovoAddressElement implements ControlValueAccessor, OnInit {
+export class NovoAddressElement implements ControlValueAccessor, OnInit, OnChanges {
   @Input()
   config: NovoAddressConfig;
   private _readOnly = false;
@@ -279,6 +279,23 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
         this.config[field].pickerConfig.defaultOptions = this.stateOptions;
       }
     });
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.config && !changes.config.firstChange) {
+      const previousConfig = changes.config.previousValue;
+      const currentConfig = changes.config.currentValue;
+
+      this.fieldList.forEach((field: string) => {
+        const prevRequired = previousConfig?.[field]?.required;
+        const currRequired = currentConfig?.[field]?.required;
+
+        if (prevRequired !== currRequired) {
+          this.isValid(field);
+          this.isInvalid(field);
+        }
+      });
+    }
   }
 
   isValid(field: string): void {
