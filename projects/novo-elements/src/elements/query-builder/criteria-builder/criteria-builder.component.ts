@@ -33,6 +33,7 @@ const EMPTY_CONDITION: Condition = {
   scope: null,
   value: null,
   supportingValue: null,
+  entity: null,
 };
 @Component({
     selector: 'novo-criteria-builder',
@@ -208,7 +209,8 @@ export class CriteriaBuilderComponent implements OnInit, OnDestroy, AfterContent
     return this.formBuilder.group(controls);
   }
 
-  newCondition({ field, operator, scope, value, supportingValue, entity }: Condition = EMPTY_CONDITION): UntypedFormGroup {
+  newCondition({ field, operator, scope, value, supportingValue }: Condition = EMPTY_CONDITION): UntypedFormGroup {
+    const entity = this.getFieldEntity(this.config, scope);
     return this.formBuilder.group({
       conditionType: '$and',
       field: [field, Validators.required],
@@ -218,6 +220,17 @@ export class CriteriaBuilderComponent implements OnInit, OnDestroy, AfterContent
       supportingValue: [supportingValue],
       entity: [entity],
     });
+  }
+
+  private getFieldEntity(fieldConfigs, scope) {
+    if (Array.isArray(fieldConfigs?.fields)) {
+      for (const field of fieldConfigs.fields) {
+        if (field.value === scope) {
+          return field.entity;
+        }
+      }
+    }
+    return null;
   }
 
   removeConditionGroupAt(index: number) {
@@ -232,7 +245,7 @@ export class CriteriaBuilderComponent implements OnInit, OnDestroy, AfterContent
 
   onFieldSelect(field) {
     this.scopedFieldPicker().dropdown.closePanel();
-    const condition = { field: field.name, operator: null, scope: field.scope, value: null };
+    const condition = { field: field.name, operator: null, scope: field.scope, value: null, entity: field.entity };
     const group = this.conditionGroups().find((group) => group.scope === field.scope);
     if (group) {
       group.addCondition(condition);
