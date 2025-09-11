@@ -14,6 +14,7 @@ import {
   EventEmitter,
   HostListener,
   Inject,
+  Injector,
   input,
   Input,
   NgZone,
@@ -32,7 +33,7 @@ import {
 import { ControlValueAccessor, FormGroupDirective, NgControl, NgForm } from '@angular/forms';
 // Vendor
 import { merge, Observable, of, Subject, Subscription } from 'rxjs';
-import { filter, map, take, takeUntil } from 'rxjs/operators';
+import { filter, map, startWith, take, takeUntil } from 'rxjs/operators';
 // App
 import { NovoLabelService } from 'novo-elements/services';
 import { Helpers, Key } from 'novo-elements/utils';
@@ -286,6 +287,9 @@ export class NovoSelectElement
   @ViewChildren(NovoOption)
   viewOptions: QueryList<NovoOption>;
 
+  viewOptionsSignal = signal<NovoOption[]>(null);
+  contentOptionsSignal = signal<NovoOption[]>(null);
+
   // This signal may be set programmatically by a SelectSearchComponent.
   hideLegacyOptionsForSearch = signal(false);
 
@@ -374,6 +378,7 @@ export class NovoSelectElement
     public ref: ChangeDetectorRef,
     private focusMonitor: FocusMonitor,
     private ngZone: NgZone,
+    private injector: Injector,
     defaultErrorStateMatcher: ErrorStateMatcher,
     @Optional() @Self() ngControl: NgControl,
     @Optional() _parentForm: NgForm,
@@ -385,6 +390,8 @@ export class NovoSelectElement
       ngControl.valueAccessor = this;
     }
     this._selectionModel = new SelectionModel<NovoOption>(this.multiple);
+    // Initialize KeyManager to manage keyboard events
+    this._initKeyManager();
   }
 
   ngOnInit() {
@@ -412,8 +419,6 @@ export class NovoSelectElement
   }
 
   ngAfterViewInit() {
-    // Initialize KeyManager to manage keyboard events
-    this._initKeyManager();
     // Subscribe to NovoOption selections
     this._watchSelectionEvents();
     // Set initial value
@@ -437,6 +442,16 @@ export class NovoSelectElement
       .subscribe(() => {
         this._watchSelectionEvents();
         this._initializeSelection();
+      });
+
+    this.contentOptions.changes.pipe(takeUntil(this._destroy), startWith(this.contentOptions))
+      .subscribe(contentOptions => {
+        this.contentOptionsSignal.set(contentOptions.toArray());
+      });
+
+    this.viewOptions.changes.pipe(takeUntil(this._destroy))
+      .subscribe(viewOptions => {
+        this.viewOptionsSignal.set(viewOptions.toArray());
       });
 
     merge(this.overlay.opening, this.overlay.closing)
@@ -738,6 +753,10 @@ export class NovoSelectElement
     return [...(this.viewOptions || []), ...(this.contentOptions || [])];
   }
 
+  protected _optionsComputed = computed(() => {
+    return [...(this.viewOptionsSignal() || []), ...(this.contentOptionsSignal() || [])]
+  });
+
   /** Sorts the selected values in the selected based on their order in the panel. */
   private _sortValues() {
     if (this.multiple) {
@@ -782,7 +801,7 @@ export class NovoSelectElement
 
   /** Sets up a key manager to listen to keyboard events on the overlay panel. */
   private _initKeyManager() {
-    this._keyManager = new ActiveDescendantKeyManager<NovoOption>(this._getOptions()).withTypeAhead(250).withHomeAndEnd();
+    this._keyManager = new ActiveDescendantKeyManager<NovoOption>(this._optionsComputed, this.injector).withTypeAhead(250).withHomeAndEnd();
     // .withAllowedModifierKeys(['shiftKey']);
 
     this._keyManager.tabOut.pipe(takeUntil(this._destroy)).subscribe(() => {
