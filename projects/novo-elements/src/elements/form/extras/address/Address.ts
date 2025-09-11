@@ -204,6 +204,7 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit, OnChang
   get readOnly(): boolean {
     return this._readOnly;
   }
+  private previousRequiredState: Record<string, boolean> = {};
   states: Array<any> = [];
   fieldList: Array<string> = ['address1', 'address2', 'city', 'state', 'zip', 'countryID'];
   model: any;
@@ -279,20 +280,24 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit, OnChang
         this.config[field].pickerConfig.defaultOptions = this.stateOptions;
       }
     });
+
+    this.fieldList.forEach((field: string) => {
+      this.previousRequiredState[field] = this.config?.[field]?.required;
+    });
+
+    this.initComplete = true;
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes.config && !changes.config.firstChange) {
-      const previousConfig = changes.config.previousValue;
-      const currentConfig = changes.config.currentValue;
-
+  ngDoCheck(): void {
+    if (this.initComplete && this.config) {
       this.fieldList.forEach((field: string) => {
-        const prevRequired = previousConfig?.[field]?.required;
-        const currRequired = currentConfig?.[field]?.required;
+        const prevRequired = this.previousRequiredState[field];
+        const currRequired = this.config?.[field]?.required;
 
         if (prevRequired !== currRequired) {
           this.isValid(field);
           this.isInvalid(field);
+          this.previousRequiredState[field] = currRequired;
         }
       });
     }
