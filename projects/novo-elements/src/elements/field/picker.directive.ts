@@ -1,6 +1,7 @@
 import { Directive, ElementRef, Inject, Input, Optional, Self } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
 import { NovoInputFormat, NOVO_INPUT_FORMAT } from './formats/base-format';
+import { startWith } from 'rxjs';
 
 /** Directive used to connect an input to a MatDatepicker. */
 @Directive({
