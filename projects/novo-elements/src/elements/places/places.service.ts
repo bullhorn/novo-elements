@@ -142,18 +142,18 @@ export class GooglePlacesService {
     });
   }
 
-  getGeoPlaceDetail(placeId: string): Promise<any> {
-    return new Promise((resolve) => {
+  async getGeoPlaceDetail(placeId: string): Promise<any> {
+    const placeDetail: any = await new Promise((resolve) => {
       if (isPlatformBrowser(this.platformId)) {
         const _window: any = this._global.nativeGlobal;
         const placesService: any = new _window.google.maps.places.PlacesService(document.createElement('div'));
-        placesService.getDetails({ placeId }, (result: any, status: any) => {
+        placesService.getDetails({ placeId }, (result: any) => {
           if (result === null || result.length === 0) {
-            this.getGeoPaceDetailByReferance(result.referance).then((referanceData: any) => {
-              if (!referanceData) {
+            this.getGeoPaceDetailByReferance(result?.referance).then((referenceData: any) => {
+              if (!referenceData) {
                 resolve(false);
               } else {
-                resolve(referanceData);
+                resolve(referenceData);
               }
             });
           } else {
@@ -164,6 +164,12 @@ export class GooglePlacesService {
         resolve(false);
       }
     });
+
+    if (placeDetail?.types?.includes('locality')) {
+      placeDetail.postal_code = await this.findCentralPostalCode(placeDetail);
+    }
+
+    return placeDetail;
   }
 
   getGeoPaceDetailByReferance(referance: string): Promise<any> {
@@ -211,6 +217,27 @@ export class GooglePlacesService {
         value = [];
       }
       resolve(value);
+    });
+  }
+
+  findCentralPostalCode(placeDetail: any): Promise<string> {
+    const _window: any = this._global.nativeGlobal;
+    const geocoder: any = new _window.google.maps.Geocoder();
+    return new Promise((resolve) => {
+      geocoder.geocode({ location: placeDetail.geometry.location }, (results, status) => {
+        if (status === 'OK' && results[0]) {
+          const postalCodeComponent = results[0].address_components.find(item => item.types.includes('postal_code'));
+          const centralPostalCode = postalCodeComponent ? postalCodeComponent.long_name : null;
+
+          if (centralPostalCode) {
+            resolve(centralPostalCode);
+          } else {
+            resolve(null);
+          }
+        } else {
+          resolve(null);
+        }
+      });
     });
   }
 
