@@ -88,6 +88,7 @@ export interface AddressData {
   name?: string;
   place_id: string;
   radius?: AddressRadius;
+  postal_code?: string;
   types?: string[];
 }
 
