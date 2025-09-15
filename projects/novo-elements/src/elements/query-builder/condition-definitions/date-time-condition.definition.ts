@@ -16,6 +16,7 @@ import { NovoLabelService } from 'novo-elements/services';
         <novo-select [placeholder]="labels.operator" formControlName="operator" (onSelect)="onOperatorSelect(formGroup)">
           <novo-option value="before">{{ labels.before }}</novo-option>
           <novo-option value="after">{{ labels.after }}</novo-option>
+          <novo-option value="equalTo">{{ labels.equals }}</novo-option>
           <novo-option value="within">{{ labels.within }}</novo-option>
           <novo-option value="between">{{ labels.between }}</novo-option>
           <novo-option value="isNull" *ngIf="!meta?.removeIsEmpty">{{ labels.isEmpty }}</novo-option>
@@ -32,6 +33,12 @@ import { NovoLabelService } from 'novo-elements/services';
           <input novoInput dateTimeFormat="iso8601" [picker]="datetimepickerbefore" formControlName="value"/>
           <novo-picker-toggle triggerOnFocus [width]="-1" [overlayId]="viewIndex" novoSuffix icon="calendar">
             <novo-date-time-picker defaultTime="start" (onSelect)="closePanel($event, viewIndex)" #datetimepickerbefore></novo-date-time-picker>
+          </novo-picker-toggle>
+        </novo-field>
+        <novo-field *novoSwitchCases="['equalTo']">
+          <input novoInput dateFormat="yyyy-mm-dd" [picker]="datepicker" formControlName="value"/>
+          <novo-picker-toggle triggerOnFocus [overlayId]="viewIndex" novoSuffix icon="calendar">
+            <novo-date-picker (onSelect)="closePanel($event, viewIndex)" #datepicker></novo-date-picker>
           </novo-picker-toggle>
         </novo-field>
         <novo-field *novoSwitchCases="['between']">
