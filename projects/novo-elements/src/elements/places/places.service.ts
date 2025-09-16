@@ -166,7 +166,7 @@ export class GooglePlacesService {
     });
 
     if (placeDetail?.types?.includes('locality')) {
-      placeDetail.postal_code = await this.findCentralPostalCode(placeDetail);
+      placeDetail.postal_code = await this.getPostalCode(placeDetail);
     }
 
     return placeDetail;
@@ -220,20 +220,14 @@ export class GooglePlacesService {
     });
   }
 
-  findCentralPostalCode(placeDetail: any): Promise<string> {
+  getPostalCode(placeDetail: any): Promise<string> {
     const _window: any = this._global.nativeGlobal;
     const geocoder: any = new _window.google.maps.Geocoder();
     return new Promise((resolve) => {
       geocoder.geocode({ location: placeDetail.geometry.location }, (results, status) => {
         if (status === 'OK' && results[0]) {
           const postalCodeComponent = results[0].address_components.find(item => item.types.includes('postal_code'));
-          const centralPostalCode = postalCodeComponent ? postalCodeComponent.long_name : null;
-
-          if (centralPostalCode) {
-            resolve(centralPostalCode);
-          } else {
-            resolve(null);
-          }
+          resolve(postalCodeComponent ? postalCodeComponent.long_name : null);
         } else {
           resolve(null);
         }
