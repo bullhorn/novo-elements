@@ -66,11 +66,13 @@ const DATE_VALUE_ACCESSOR = {
         <div *ngIf="hasButtons" class="footer-content">
           <novo-button
             class="cancel-button"
+            data-automation-id="date-picker-cancel"
             theme="dialogue"
             size="small"
             (click)="cancel()">{{ labels.cancel }}</novo-button>
           <novo-button
             class="save-button"
+            data-automation-id="date-picker-save"
             theme="primary"
             color="primary"
             size="small"
