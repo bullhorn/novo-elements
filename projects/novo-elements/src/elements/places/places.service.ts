@@ -230,7 +230,7 @@ export class GooglePlacesService {
             results.reduce(
               (postalCodes: string[], result: any) => {
                 const postalCodeComponent = result.address_components.find(item => item.types.includes('postal_code'));
-                if (postalCodeComponent) {
+                if (postalCodeComponent && !postalCodes.includes(postalCodeComponent.long_name)) {
                   postalCodes.push(postalCodeComponent.long_name);
                 }
                 return postalCodes;
