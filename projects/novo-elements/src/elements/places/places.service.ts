@@ -166,7 +166,7 @@ export class GooglePlacesService {
     });
 
     if (placeDetail?.types?.includes('locality')) {
-      placeDetail.postal_code = await this.getPostalCode(placeDetail);
+      placeDetail.postal_codes = await this.getPostalCodes(placeDetail);
     }
 
     return placeDetail;
@@ -220,14 +220,24 @@ export class GooglePlacesService {
     });
   }
 
-  getPostalCode(placeDetail: any): Promise<string> {
+  getPostalCodes(placeDetail: any): Promise<string> {
     const _window: any = this._global.nativeGlobal;
     const geocoder: any = new _window.google.maps.Geocoder();
     return new Promise((resolve) => {
       geocoder.geocode({ location: placeDetail.geometry.location }, (results, status) => {
-        if (status === 'OK' && results[0]) {
-          const postalCodeComponent = results[0].address_components.find(item => item.types.includes('postal_code'));
-          resolve(postalCodeComponent ? postalCodeComponent.long_name : null);
+        if (status === 'OK' && results.length) {
+          resolve(
+            results.reduce(
+              (postalCodes: string[], result: any) => {
+                const postalCodeComponent = result.address_components.find(item => item.types.includes('postal_code'));
+                if (postalCodeComponent) {
+                  postalCodes.push(postalCodeComponent.long_name);
+                }
+                return postalCodes;
+              },
+              [],
+            ),
+          );
         } else {
           resolve(null);
         }
