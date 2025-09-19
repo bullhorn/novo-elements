@@ -175,7 +175,7 @@ export class NovoDefaultAddressConditionDef extends AbstractConditionFieldDef im
       formatted_address: event.formatted_address,
       geometry: event.geometry,
       name: event.name,
-      postal_code: event?.postal_code,
+      postal_code: event.postal_code,
       place_id: event.place_id,
       types: event.types,
     };

@@ -149,11 +149,11 @@ export class GooglePlacesService {
         const placesService: any = new _window.google.maps.places.PlacesService(document.createElement('div'));
         placesService.getDetails({ placeId }, (result: any) => {
           if (result === null || result.length === 0) {
-            this.getGeoPaceDetailByReferance(result?.referance).then((referenceData: any) => {
-              if (!referenceData) {
+            this.getGeoPaceDetailByReferance(result.referance).then((referanceData: any) => {
+              if (!referanceData) {
                 resolve(false);
               } else {
-                resolve(referenceData);
+                resolve(referanceData);
               }
             });
           } else {
