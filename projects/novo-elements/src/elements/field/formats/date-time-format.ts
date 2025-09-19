@@ -230,6 +230,7 @@ export class NovoDateTimeFormatDirective extends IMaskDirective<any> implements 
       super.writeValue(initialValue);
     } else {
       super.writeValue(this.formatValue(value));
+      this.valueChange.emit(value);
     }
   }
 
@@ -254,5 +255,9 @@ export class NovoDateTimeFormatDirective extends IMaskDirective<any> implements 
 
   hourOneFormatRequired(hourInput: string): boolean {
     return hourInput === '-1' || hourInput === '1-';
+  }
+
+  get initialValue(): any {
+    return this.maskValue;
   }
 }
