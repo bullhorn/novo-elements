@@ -229,7 +229,8 @@ export class NovoDateTimePickerElement implements ControlValueAccessor {
   }
 
   // ValueAccessor Functions
-  writeValue(model: DateLike): void {
+  writeValue(modelArg: any): void {
+    const model: DateLike = modelArg;
     if (Helpers.isEmpty(model)) {
       this.model = new Date();
     } else if (Helpers.isString(model) || !isNaN(<number>model)) {

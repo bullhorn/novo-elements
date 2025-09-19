@@ -144,8 +144,7 @@ export class NovoDatePickerInputElement implements OnInit, OnChanges, AfterViewI
   @Input()
   overlayOnElement: ElementRef;
   /**
-   * Whether the footer in the date picker which contains `today` button should be hidden.
-   * This will automatically be enabled if enabling either the today button or submit buttons.
+   * Whether the footer in the date picker which contains `today` button and cancel/save buttons should be hidden.
    **/
   @Input()
   @BooleanInput()

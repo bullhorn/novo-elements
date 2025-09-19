@@ -163,7 +163,7 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
    **/
   @Input()
   @BooleanInput()
-  public hideToday: boolean = true;
+  public hideToday: boolean = false;
 
   @Input()
   disabledDateMessage: string;
