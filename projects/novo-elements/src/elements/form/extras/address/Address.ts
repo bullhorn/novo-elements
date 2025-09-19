@@ -1,10 +1,9 @@
 // NG2
-import { Component, EventEmitter, forwardRef, Input, OnInit, Output } from '@angular/core';
+import { Component, DoCheck, EventEmitter, forwardRef, Input, OnInit, Output } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 // APP
 import { NovoLabelService } from 'novo-elements/services';
-import { COUNTRIES, findByCountryId, getStates } from 'novo-elements/utils';
-import { Helpers } from 'novo-elements/utils';
+import { COUNTRIES, findByCountryId, getStates, Helpers } from 'novo-elements/utils';
 
 // Value accessor for the component (supports ngModel)
 const ADDRESS_VALUE_ACCESSOR = {
@@ -187,7 +186,7 @@ export interface NovoAddressConfig {
   `,
   styleUrls: ['./Address.scss'],
 })
-export class NovoAddressElement implements ControlValueAccessor, OnInit {
+export class NovoAddressElement implements ControlValueAccessor, OnInit, DoCheck {
   @Input()
   config: NovoAddressConfig;
   private _readOnly = false;
@@ -204,6 +203,7 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
   get readOnly(): boolean {
     return this._readOnly;
   }
+  private previousRequiredState: Record<string, boolean> = {};
   states: Array<any> = [];
   fieldList: Array<string> = ['address1', 'address2', 'city', 'state', 'zip', 'countryID'];
   model: any;
@@ -279,6 +279,27 @@ export class NovoAddressElement implements ControlValueAccessor, OnInit {
         this.config[field].pickerConfig.defaultOptions = this.stateOptions;
       }
     });
+
+    this.fieldList.forEach((field: string) => {
+      this.previousRequiredState[field] = this.config?.[field]?.required;
+    });
+
+    this.initComplete = true;
+  }
+
+  ngDoCheck(): void {
+    if (this.initComplete && this.config) {
+      this.fieldList.forEach((field: string) => {
+        const prevRequired = this.previousRequiredState[field];
+        const currRequired = this.config?.[field]?.required;
+
+        if (prevRequired !== currRequired) {
+          this.isValid(field);
+          this.isInvalid(field);
+          this.previousRequiredState[field] = currRequired;
+        }
+      });
+    }
   }
 
   isValid(field: string): void {
