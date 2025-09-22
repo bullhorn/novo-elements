@@ -403,12 +403,6 @@ export class NovoChipList
       this._allowFocusEscape();
     });
 
-    this._selectionModel.changed.subscribe({
-      next: (value) => {
-        console.log(value);
-      },
-    });
-
     // When the list changes, re-subscribe
     this.chips.changes.pipe(startWith(null), takeUntil(this._destroyed)).subscribe(() => {
       Promise.resolve().then(() => {
