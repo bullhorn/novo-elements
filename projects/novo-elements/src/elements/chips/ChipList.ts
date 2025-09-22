@@ -11,8 +11,8 @@ import {
   ContentChildren,
   DoCheck,
   ElementRef,
-  EventEmitter, input,
-  Input, InputSignal,
+  EventEmitter,
+  Input,
   OnDestroy,
   OnInit,
   Optional,
@@ -164,8 +164,6 @@ export class NovoChipList
   get role(): string | null {
     return this.empty ? null : 'listbox';
   }
-
-  ignoreValueUpdates: InputSignal<boolean> = input(false);
 
   /** An object used to control when error messages are shown. */
   @Input() errorStateMatcher: ErrorStateMatcher;
