@@ -61,7 +61,7 @@ export class NovoChipListChange {
  */
 @Component({
   selector: 'novo-chip-list',
-  template: `<button (click)="debug()"></button><div class="novo-chip-list-wrapper"><ng-content></ng-content></div>`,
+  template: `<div class="novo-chip-list-wrapper"><ng-content></ng-content></div>`,
   styleUrls: ['./ChipList.scss'],
   exportAs: 'novoChipList',
   host: {
