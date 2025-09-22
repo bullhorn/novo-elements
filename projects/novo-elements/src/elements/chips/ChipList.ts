@@ -11,8 +11,8 @@ import {
   ContentChildren,
   DoCheck,
   ElementRef,
-  EventEmitter,
-  Input,
+  EventEmitter, input,
+  Input, InputSignal,
   OnDestroy,
   OnInit,
   Optional,
@@ -61,7 +61,7 @@ export class NovoChipListChange {
  */
 @Component({
   selector: 'novo-chip-list',
-  template: `<div class="novo-chip-list-wrapper"><ng-content></ng-content></div>`,
+  template: `<button (click)="debug()"></button><div class="novo-chip-list-wrapper"><ng-content></ng-content></div>`,
   styleUrls: ['./ChipList.scss'],
   exportAs: 'novoChipList',
   host: {
@@ -165,6 +165,8 @@ export class NovoChipList
     return this.empty ? null : 'listbox';
   }
 
+  ignoreValueUpdates: InputSignal<boolean> = input(false);
+
   /** An object used to control when error messages are shown. */
   @Input() errorStateMatcher: ErrorStateMatcher;
 
@@ -178,6 +180,17 @@ export class NovoChipList
     this._syncChipsState();
   }
   private _multiple: boolean = false;
+
+  /** Whether chips in this list can be toggled by user interaction */
+  @Input()
+  get chipsToggleable(): boolean {
+    return this._chipsToggleable;
+  }
+  set chipsToggleable(value: boolean) {
+    this._chipsToggleable = coerceBooleanProperty(value);
+    this._syncChipsState();
+  }
+  private _chipsToggleable: boolean = true;
 
   /** Whether the chips should appear stacked instead of a row. */
   @Input()
@@ -392,17 +405,26 @@ export class NovoChipList
       this._allowFocusEscape();
     });
 
+    this._selectionModel.changed.subscribe({
+      next: (value) => {
+        console.log(value);
+      },
+    });
+
     // When the list changes, re-subscribe
     this.chips.changes.pipe(startWith(null), takeUntil(this._destroyed)).subscribe(() => {
-      if (this.disabled) {
-        // Since this happens after the content has been
-        // checked, we need to defer it to the next tick.
+      Promise.resolve().then(() => {
+        this._syncChipsState();
+      });
+
+      this._resetChips();
+
+      if (this._value !== undefined) {
         Promise.resolve().then(() => {
-          this._syncChipsState();
+          this._setSelectionByValue(this._value, false);
         });
       }
 
-      this._resetChips();
       // Check to see if we need to update our tab index
       this._updateTabIndex();
 
@@ -463,10 +485,11 @@ export class NovoChipList
 
   // Implemented as part of ControlValueAccessor.
   writeValue(value: any): void {
-    if (this.chips) {
+    this._value = value;
+    if (this.chips && this.chips.length > 0) {
       this._setSelectionByValue(value, false);
-      this.stateChanges.next();
     }
+    this.stateChanges.next();
   }
 
   addValue(value: any): void {
@@ -843,6 +866,7 @@ export class NovoChipList
         chip._chipListDisabled = this._disabled;
         chip._chipListMultiple = this.multiple;
         chip._chipListSelectable = this.selectable;
+        chip._chipListToggleable = this.chipsToggleable;
       });
     }
   }
