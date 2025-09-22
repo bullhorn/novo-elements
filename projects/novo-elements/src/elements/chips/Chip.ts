@@ -155,6 +155,9 @@ export class NovoChipElement extends NovoChipMixinBase implements FocusableOptio
   /** Whether the chip list is selectable */
   _chipListSelectable: boolean = true;
 
+  /** Whether the chip list allows toggling */
+  _chipListToggleable: boolean = true;
+
   /** Whether the chip list is in multi-selection mode. */
   _chipListMultiple: boolean = false;
 
@@ -334,7 +337,9 @@ export class NovoChipElement extends NovoChipMixinBase implements FocusableOptio
     } else {
       event.stopPropagation();
     }
-    this.toggleSelected(true);
+    if (this._chipListToggleable) {
+      this.toggleSelected(true);
+    }
   }
 
   /** Handle custom key presses. */
