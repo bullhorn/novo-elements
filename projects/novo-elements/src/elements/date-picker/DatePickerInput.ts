@@ -50,19 +50,35 @@ const DATE_VALUE_ACCESSOR = {
     />
     <span class="error-text" *ngIf="showInvalidDateError">{{ invalidDateErrorMessage }}</span>
     <i *ngIf="!hasValue" (click)="openPanel()" class="bhi-calendar"></i>
-    <i *ngIf="hasValue" (click)="clearValue()" class="bhi-times"></i>
+    <i *ngIf="hasValue" (click)="clearAction()" class="bhi-times"></i>
     <novo-overlay-template [parent]="overlayElement" position="above-below">
       <novo-date-picker
         [start]="start"
         [end]="end"
         inline="true"
-        (onSelect)="setValueAndClose($event)"
+        (onSelect)="onSelected($event)"
         [disabledDateMessage]="disabledDateMessage"
         [ngModel]="value"
         [weekStart]="weekStart"
         [hideFooter]="hideFooter"
-        [dateForInitialView]="dateForInitialView"
-      ></novo-date-picker>
+        [hideToday]="hideToday"
+        [dateForInitialView]="dateForInitialView">
+        <div *ngIf="hasButtons" class="footer-content">
+          <novo-button
+            class="cancel-button"
+            data-automation-id="date-picker-cancel"
+            theme="dialogue"
+            size="small"
+            (click)="cancel()">{{ labels.cancel }}</novo-button>
+          <novo-button
+            class="save-button"
+            data-automation-id="date-picker-save"
+            theme="primary"
+            color="primary"
+            size="small"
+            (click)="save()">{{ labels.save }}</novo-button>
+        </div>
+      </novo-date-picker>
     </novo-overlay-template>
   `,
   styleUrls: ['./DatePickerInput.scss'],
@@ -128,11 +144,23 @@ export class NovoDatePickerInputElement implements OnInit, OnChanges, AfterViewI
   @Input()
   overlayOnElement: ElementRef;
   /**
-   * Whether the footer in the date picker which contains `today` button should be hidden.
+   * Whether the footer in the date picker which contains `today` button and cancel/save buttons should be hidden.
    **/
   @Input()
   @BooleanInput()
   public hideFooter: boolean = false;
+  /**
+   * Whether to hide the 'today' button
+   */
+  @Input()
+  @BooleanInput()
+  public hideToday: boolean = false;
+  /**
+   * Whether to display the picker together with 'cancel'/'save' buttons
+   */
+  @Input()
+  @BooleanInput()
+  public hasButtons: boolean = false;
   /**
    * Sets the field as to appear disabled, users will not be able to interact with the text field.
    **/
@@ -160,6 +188,12 @@ export class NovoDatePickerInputElement implements OnInit, OnChanges, AfterViewI
   focusEvent: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
   @Output()
   changeEvent: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
+  @Output()
+  onSave: EventEmitter<any> = new EventEmitter();
+  @Output()
+  onCancel: EventEmitter<any> = new EventEmitter();
+  @Output()
+  valueCleared: EventEmitter<any> = new EventEmitter();
   /** Element for the panel containing the autocomplete options. */
   @ViewChild(NovoOverlayTemplateComponent)
   overlay: NovoOverlayTemplateComponent;
@@ -251,7 +285,9 @@ export class NovoDatePickerInputElement implements OnInit, OnChanges, AfterViewI
   _handleValueUpdate(value: string, blur: boolean): void {
     if (value === '') {
       this.clearValue();
-      this.closePanel();
+      if (!this.hasButtons) {
+        this.closePanel();
+      }
     } else {
       this.formatDate(value, blur);
       this.openPanel();
@@ -357,24 +393,43 @@ export class NovoDatePickerInputElement implements OnInit, OnChanges, AfterViewI
     }
   }
 
+  public onSelected(event: any): void {
+    this.setValue(event);
+    if (!this.hasButtons) {
+      this.closePanel();
+    }
+  }
+
+  private setValue(event: any | null): void {
+    if (event?.date) {
+      this.showInvalidDateError = false;
+      this.dispatchOnChange(event.date, true);
+    }
+  }
+
   /**
    * This method closes the panel, and if a value is specified, also sets the associated
    * control to that value. It will also mark the control as dirty if this interaction
    * stemmed from the user.
    */
   public setValueAndClose(event: any | null): void {
-    if (event?.date) {
-      this.showInvalidDateError = false;
-      this.dispatchOnChange(event.date, true);
-    }
+    this.setValue(event);
     this.closePanel();
+  }
+
+  /**
+   * Respond to clicking the X button within the input
+   */
+  public clearAction() {
+    this.clearValue();
+    this.valueCleared.emit();
   }
 
   /**
    * Clear any previous selected option and emit a selection change event for this option
    */
   public clearValue() {
-    this.formattedValue = '';
+    this._setFormValue(null);
     this.dispatchOnChange(null);
   }
 
@@ -406,5 +461,13 @@ export class NovoDatePickerInputElement implements OnInit, OnChanges, AfterViewI
 
   public get hasValue() {
     return !Helpers.isEmpty(this.value);
+  }
+
+  save(): void {
+    this.onSave.emit();
+  }
+
+  cancel(): void {
+    this.onCancel.emit();
   }
 }

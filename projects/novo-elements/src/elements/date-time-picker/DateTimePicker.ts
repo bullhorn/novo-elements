@@ -6,7 +6,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { getHours, getMilliseconds, getMinutes, getSeconds, setHours, setMilliseconds, setMinutes, setSeconds } from 'date-fns';
 // APP
 import { NovoLabelService } from 'novo-elements/services';
-import { Helpers } from 'novo-elements/utils';
+import { DateLike, DateUtil, Helpers } from 'novo-elements/utils';
 
 // Value accessor for the component (supports ngModel)
 const DATE_TIME_PICKER_VALUE_ACCESSOR = {
@@ -229,12 +229,14 @@ export class NovoDateTimePickerElement implements ControlValueAccessor {
   }
 
   // ValueAccessor Functions
-  writeValue(model: any): void {
-    this.model = model;
+  writeValue(modelArg: any): void {
+    const model: DateLike = modelArg;
     if (Helpers.isEmpty(model)) {
       this.model = new Date();
-    } else if (!isNaN(model)) {
-      this.model = new Date(model);
+    } else if (Helpers.isString(model) || !isNaN(<number>model)) {
+      this.model = DateUtil.parse(model);
+    } else {
+      this.model = model;
     }
     this.datePickerValue = this.model;
     this.timePickerValue = this.model;

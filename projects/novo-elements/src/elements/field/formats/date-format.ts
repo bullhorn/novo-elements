@@ -103,6 +103,7 @@ export class NovoDateFormatDirective extends IMaskDirective<any> {
       super.writeValue(initialValue);
     } else {
       super.writeValue(this.formatValue(value));
+      this.valueChange.emit(value);
     }
   }
 

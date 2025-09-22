@@ -11,6 +11,7 @@ import { Component } from '@angular/core';
 export class FieldUsageExample {
   time = '14:00';
   date = new Date();
+  datetime = new Date();
   date2;
   daterange;
 }
