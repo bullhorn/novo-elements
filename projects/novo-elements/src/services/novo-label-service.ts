@@ -296,7 +296,7 @@ export class NovoLabelService {
   }
 
   formatCurrency(value: number): string {
-    const options = { style: 'currency', currency: 'USD' };
+    const options: Intl.NumberFormatOptions = { style: 'currency', currency: 'USD' };
     return new Intl.NumberFormat(this.userLocale, options).format(value);
   }
 
