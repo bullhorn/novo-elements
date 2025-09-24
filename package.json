@@ -32,7 +32,7 @@
     "test:coverage": "jest projects/novo-elements --max-workers=4",
     "test:watch": "jest projects/novo-elements --watch",
     "lint": "htmlhint \"projects\" --config .htmlhintrc",
-    "lint:scss": "stylelint \"projects/**/*.scss\" --syntax scss",
+    "lint:scss": "stylelint \"projects/**/*.scss\"",
     "compat": "ngcc ... --tsconfig './projects/novo-elements/tsconfig.lib.json'",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
     "version:elements": "standard-version",
