@@ -132,7 +132,7 @@
     "tslint-config-prettier": "^1.14.0",
     "tsx": "^4.7.0",
     "typedoc": "^0.25.7",
-    "typescript": "5.4.5"
+    "typescript": "~5.8.3"
   },
   "lint-staged": {
     "*.{ts,json,scss,css,html}": [
