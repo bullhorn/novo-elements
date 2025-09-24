@@ -1,15 +1,17 @@
 // NG2
 import { OverlayModule } from '@angular/cdk/overlay';
 import { Component } from '@angular/core';
-import { waitForAsync, TestBed } from '@angular/core/testing';
+import { TestBed, waitForAsync } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 // App
 import { TooltipDirective } from './Tooltip.directive';
-import { By } from '@angular/platform-browser';
 
 @Component({
   selector: 'test-component',
-  template: `<div tooltip="test" tooltipPosition="right"></div>
-             <div tooltip="test" [tooltipCloseOnClick]="true" tooltipPosition="right"></div>`,
+  template: `
+    <div tooltip="test" tooltipPosition="right"></div>
+    <div tooltip="test" [tooltipCloseOnClick]="true" tooltipPosition="right"></div>`,
+  standalone: false
 })
 class TestComponent {}
 
