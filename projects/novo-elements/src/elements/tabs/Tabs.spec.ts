@@ -1,5 +1,5 @@
 // NG2
-import { async, TestBed } from '@angular/core/testing';
+import { waitForAsync, TestBed } from '@angular/core/testing';
 // App
 import {
   NovoNavContentElement,
@@ -15,7 +15,7 @@ describe('Elements: NovoNavElement', () => {
   let fixture;
   let component;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [NovoNavElement],
     }).compileComponents();
@@ -32,7 +32,7 @@ describe('Elements: NovoTabElement', () => {
   let fixture;
   let component;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [NovoNavElement, NovoTabElement],
       providers: [{ provide: NovoNavElement, useValue: { add: () => {}, select: () => {} } }],
@@ -50,7 +50,7 @@ describe('Elements: NovoTabButtonElement', () => {
   let fixture;
   let component;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [NovoNavElement, NovoTabButtonElement],
       providers: [{ provide: NovoNavElement, useValue: { add: () => {}, select: () => {} } }],
@@ -68,7 +68,7 @@ xdescribe('Elements: NovoTabLinkElement', () => {
   let fixture;
   let component;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [NovoNavElement, NovoTabLinkElement],
       providers: [{ provide: NovoNavElement, useValue: { add: () => {}, select: () => {} } }],
@@ -86,7 +86,7 @@ describe('Elements: NovoNavOutletElement', () => {
   let fixture;
   let component;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [NovoNavElement, NovoNavOutletElement],
       providers: [{ provide: NovoNavElement, useValue: { add: () => {}, select: () => {} } }],
@@ -104,7 +104,7 @@ describe('Elements: NovoNavContentElement', () => {
   let fixture;
   let component;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [NovoNavContentElement],
       providers: [{ provide: NovoNavOutletElement, useValue: { add: () => {} } }],
@@ -122,7 +122,7 @@ describe('Elements: NovoNavHeaderElement', () => {
   let fixture;
   let component;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [NovoNavHeaderElement],
       providers: [{ provide: NovoNavOutletElement, useValue: { items: [] } }],

@@ -1,5 +1,5 @@
 // NG
-import { async, ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 // App
 import { NovoLabelService } from 'novo-elements/services';
@@ -42,7 +42,7 @@ describe('Elements: NovoSelectElement', () => {
   let selectionModel: SelectionModel<NovoOption>;
   let keyManager: ActiveDescendantKeyManager<NovoOption>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [NovoSelectModule, NovoOptionModule, NovoOverlayModule],
       declarations: [TestSelectComponent],

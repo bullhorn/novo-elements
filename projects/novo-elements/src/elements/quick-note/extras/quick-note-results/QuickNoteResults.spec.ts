@@ -1,5 +1,5 @@
 // NG2
-import { async, TestBed } from '@angular/core/testing';
+import { waitForAsync, TestBed } from '@angular/core/testing';
 // App
 import { NovoItemContentElement, NovoListElement, NovoListItemElement } from 'novo-elements/elements/list';
 import { NovoLoadingElement } from 'novo-elements/elements/loading';
@@ -11,7 +11,7 @@ describe('Elements: QuickNoteResults', () => {
     let fixture;
     let component;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
         declarations: [QuickNoteResults, NovoLoadingElement, NovoListElement, NovoListItemElement, NovoItemContentElement],
         providers: [{ provide: NovoLabelService, useClass: NovoLabelService }],

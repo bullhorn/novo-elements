@@ -6,7 +6,7 @@ import { ComponentUtils } from './ComponentUtils';
 describe('Utils: ComponentUtils', () => {
   let service: ComponentUtils;
 
-  beforeAll(async(() => {
+  beforeAll(waitForAsync(() => {
     const resolve = { resolveComponentFactory: ({}) => {} };
     service = new ComponentUtils(resolve as ComponentFactoryResolver);
   }));
