@@ -6,11 +6,11 @@ import { NovoLabelService } from 'novo-elements/services';
 import {PickerResults} from '../picker-results';
 
 @Component({
-  selector: 'workers-comp-codes-picker-results',
-  host: {
-    class: 'active',
-  },
-  template: `
+    selector: 'workers-comp-codes-picker-results',
+    host: {
+        class: 'active',
+    },
+    template: `
     <section class="picker-loading" *ngIf="isLoading && !matches?.length">
       <novo-loading theme="line"></novo-loading>
     </section>
@@ -52,6 +52,7 @@ import {PickerResults} from '../picker-results';
     <p class="picker-error" *ngIf="hasError">{{ labels.pickerError }}</p>
     <p class="picker-null-results" *ngIf="hasNonErrorMessage">{{ getEmptyMessage() }}</p>
   `,
+    standalone: false
 })
 export class WorkersCompCodesPickerResults extends PickerResults {
 

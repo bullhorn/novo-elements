@@ -4,9 +4,10 @@ import { Component } from '@angular/core';
  * @title Multiple Select Example
  */
 @Component({
-  selector: 'multiple-select-example',
-  templateUrl: 'multiple-select-example.html',
-  styleUrls: ['multiple-select-example.css'],
+    selector: 'multiple-select-example',
+    templateUrl: 'multiple-select-example.html',
+    styleUrls: ['multiple-select-example.css'],
+    standalone: false
 })
 export class MultipleSelectExample {
   public placeholder: string = 'Select...';

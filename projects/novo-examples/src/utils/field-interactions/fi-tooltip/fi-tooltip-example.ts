@@ -6,9 +6,10 @@ import { FieldInteractionApi, FormUtils, TextBoxControl, TilesControl } from 'no
  * @title Fi Tooltip Example
  */
 @Component({
-  selector: 'fi-tooltip-example',
-  templateUrl: 'fi-tooltip-example.html',
-  styleUrls: ['fi-tooltip-example.css'],
+    selector: 'fi-tooltip-example',
+    templateUrl: 'fi-tooltip-example.html',
+    styleUrls: ['fi-tooltip-example.css'],
+    standalone: false
 })
 export class FiTooltipExample {
   public form: any = {};

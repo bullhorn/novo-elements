@@ -35,14 +35,15 @@ import { fromEvent, merge, Observable, of as observableOf, Subscription } from '
 import { filter, first, switchMap } from 'rxjs/operators';
 
 @Component({
-  selector: 'novo-overlay-template',
-  styleUrls: ['Overlay.scss'],
-  template: `
+    selector: 'novo-overlay-template',
+    styleUrls: ['Overlay.scss'],
+    template: `
     <ng-template>
       <div class="novo-overlay-panel" role="listbox" [id]="id" #panel><ng-content></ng-content></div>
     </ng-template>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NovoOverlayTemplateComponent implements OnDestroy {
   public id: string = `novo-overlay-${Date.now()}`;

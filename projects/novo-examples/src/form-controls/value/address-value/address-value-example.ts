@@ -5,9 +5,10 @@ import { NOVO_VALUE_THEME } from 'novo-elements';
  * @title Address Value Example
  */
 @Component({
-  selector: 'address-value-example',
-  templateUrl: 'address-value-example.html',
-  styleUrls: ['address-value-example.css'],
+    selector: 'address-value-example',
+    templateUrl: 'address-value-example.html',
+    styleUrls: ['address-value-example.css'],
+    standalone: false
 })
 export class AddressValueExample {
   public theme = NOVO_VALUE_THEME.DEFAULT;

@@ -20,9 +20,9 @@ interface Item {
 }
 
 @Component({
-  selector: 'multi-picker',
-  providers: [CHIPS_VALUE_ACCESSOR],
-  template: `
+    selector: 'multi-picker',
+    providers: [CHIPS_VALUE_ACCESSOR],
+    template: `
     <novo-chip
       *ngFor="let item of _items | async | slice: 0:chipsCount"
       [type]="item.type"
@@ -53,10 +53,11 @@ interface Item {
     <i class="bhi-search" [class.has-value]="items.length"></i>
     <label class="clear-all" *ngIf="items.length" (click)="clearValue()">{{ labels.clearAll }} <i class="bhi-times"></i></label>
   `,
-  styleUrls: ['./_MultiPicker.scss'],
-  host: {
-    '[class.with-value]': 'items.length > 0',
-  },
+    styleUrls: ['./_MultiPicker.scss'],
+    host: {
+        '[class.with-value]': 'items.length > 0',
+    },
+    standalone: false
 })
 export class NovoMultiPickerElement implements OnInit {
   @Input()

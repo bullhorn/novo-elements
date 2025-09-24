@@ -24,22 +24,23 @@ import { NovoOverlayTemplateComponent } from 'novo-elements/elements/common';
 import { NovoFieldElement, NOVO_FORM_FIELD } from '../field';
 
 @Component({
-  selector: 'novo-picker-toggle',
-  templateUrl: 'picker-toggle.component.html',
-  styleUrls: ['picker-toggle.component.scss'],
-  host: {
-    class: 'novo-picker-toggle',
-    // Always set the tabindex to -1 so that it doesn't overlap with any custom tabindex the
-    // consumer may have provided, while still being able to receive focus.
-    '[attr.tabindex]': 'disabled ? null : -1',
-    '[class.novo-toggle-active]': 'picker && picker.opened',
-    '[class.novo-accent]': 'picker && picker.color === "accent"',
-    '[class.novo-warn]': 'picker && picker.color === "warn"',
-    '(focus)': '_button.focus()',
-  },
-  exportAs: 'novoPickerToggle',
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'novo-picker-toggle',
+    templateUrl: 'picker-toggle.component.html',
+    styleUrls: ['picker-toggle.component.scss'],
+    host: {
+        class: 'novo-picker-toggle',
+        // Always set the tabindex to -1 so that it doesn't overlap with any custom tabindex the
+        // consumer may have provided, while still being able to receive focus.
+        '[attr.tabindex]': 'disabled ? null : -1',
+        '[class.novo-toggle-active]': 'picker && picker.opened',
+        '[class.novo-accent]': 'picker && picker.color === "accent"',
+        '[class.novo-warn]': 'picker && picker.color === "warn"',
+        '(focus)': '_button.focus()',
+    },
+    exportAs: 'novoPickerToggle',
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NovoPickerToggleElement<T = any> implements AfterContentInit, AfterViewInit, OnChanges, OnDestroy {
   private _stateChanges = Subscription.EMPTY;

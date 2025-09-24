@@ -4,12 +4,13 @@ import { ExampleData } from '../../examples.data';
 import { StackblitzWriter } from './stackblitz-writer';
 
 @Component({
-  selector: 'stackblitz-button',
-  templateUrl: './stackblitz-button.html',
-  providers: [StackblitzWriter],
-  host: {
-    '(mouseover)': 'isDisabled = !stackblitzForm',
-  },
+    selector: 'stackblitz-button',
+    templateUrl: './stackblitz-button.html',
+    providers: [StackblitzWriter],
+    host: {
+        '(mouseover)': 'isDisabled = !stackblitzForm',
+    },
+    standalone: false
 })
 export class StackblitzButton {
   /**

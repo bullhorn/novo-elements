@@ -5,9 +5,10 @@ import { ChildTab, TabbedGroupPickerTab } from 'novo-elements';
  * @title Tabbed Group Picker - Quick Select Example
  */
 @Component({
-  selector: 'tabbed-group-picker-quick-select-example',
-  templateUrl: 'tabbed-group-picker-quick-select-example.html',
-  styleUrls: ['../tabbed-group-picker-example.scss'],
+    selector: 'tabbed-group-picker-quick-select-example',
+    templateUrl: 'tabbed-group-picker-quick-select-example.html',
+    styleUrls: ['../tabbed-group-picker-example.scss'],
+    standalone: false
 })
 export class TabbedGroupPickerQuickSelectExample {
   getAnimals = (): { animalId: number; name: string }[] =>

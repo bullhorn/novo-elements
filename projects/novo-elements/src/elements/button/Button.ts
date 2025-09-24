@@ -13,29 +13,28 @@ import {
 import { BooleanInput, Helpers, Key } from 'novo-elements/utils';
 
 @Component({
-  selector: 'novo-button,button[theme]',
-  host: {
-    class: 'novo-button',
-    '[attr.theme]': 'theme',
-    '[attr.color]': 'color',
-    '[attr.icon]': 'icon',
-    '[attr.loading]': 'loading',
-    '[attr.side]': 'side',
-    '[attr.size]': 'size',
-    '[attr.role]': "'button'",
-  },
-  styleUrls: [
-    './styles/button.scss',
-    './styles/button-standard.scss',
-    './styles/button-primary.scss',
-    './styles/button-secondary.scss',
-    './styles/button-fab.scss',
-    './styles/button-icon.scss',
-    './styles/button-dialogue.scss',
-    './styles/button-other.scss',
-  ],
-
-  template: `
+    selector: 'novo-button,button[theme]',
+    host: {
+        class: 'novo-button',
+        '[attr.theme]': 'theme',
+        '[attr.color]': 'color',
+        '[attr.icon]': 'icon',
+        '[attr.loading]': 'loading',
+        '[attr.side]': 'side',
+        '[attr.size]': 'size',
+        '[attr.role]': "'button'",
+    },
+    styleUrls: [
+        './styles/button.scss',
+        './styles/button-standard.scss',
+        './styles/button-primary.scss',
+        './styles/button-secondary.scss',
+        './styles/button-fab.scss',
+        './styles/button-icon.scss',
+        './styles/button-dialogue.scss',
+        './styles/button-other.scss',
+    ],
+    template: `
     <!--Left Icon-->
     <i *ngIf="((icon && side === 'left') || (secondIcon && secondSide() === 'left')) && !loading" [ngClass]="leftSideIconClass()" class="novo-button-icon novo-button-icon-left"></i>
     <!--Transcluded Content-->
@@ -71,7 +70,8 @@ import { BooleanInput, Helpers, Key } from 'novo-elements/utils';
       </svg>
     </i>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NovoButtonElement implements OnChanges {
   /**

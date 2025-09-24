@@ -4,9 +4,10 @@ import { Component } from '@angular/core';
  * @title Basic Tabs
  */
 @Component({
-  selector: 'tabs-basic-example',
-  templateUrl: 'tabs-basic-example.html',
-  styleUrls: ['tabs-basic-example.css'],
+    selector: 'tabs-basic-example',
+    templateUrl: 'tabs-basic-example.html',
+    styleUrls: ['tabs-basic-example.css'],
+    standalone: false
 })
 export class TabsBasicExample {
   tabSelected() {

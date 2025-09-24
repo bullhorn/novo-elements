@@ -4,9 +4,10 @@ import { Component } from '@angular/core';
  * @title Basic Chips Example
  */
 @Component({
-  selector: 'basic-chips-example',
-  templateUrl: 'basic-chips-example.html',
-  styleUrls: ['basic-chips-example.css'],
+    selector: 'basic-chips-example',
+    templateUrl: 'basic-chips-example.html',
+    styleUrls: ['basic-chips-example.css'],
+    standalone: false
 })
 export class BasicChipsExample {
   staticDemo = {

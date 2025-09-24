@@ -2,8 +2,8 @@ import { Component, EventEmitter, Input, Output, TemplateRef } from '@angular/co
 import { CalendarEvent } from 'novo-elements/utils';
 
 @Component({
-  selector: 'novo-agenda-all-day-event',
-  template: `
+    selector: 'novo-agenda-all-day-event',
+    template: `
     <ng-template #defaultTemplate>
       <div class="cal-all-day-event" [style.backgroundColor]="event.color.secondary" [style.borderColor]="event.color.primary">
         {{ event.title }}
@@ -24,6 +24,7 @@ import { CalendarEvent } from 'novo-elements/utils';
     >
     </ng-template>
   `,
+    standalone: false
 })
 export class NovoAgendaAllDayEventElement {
   @Input()

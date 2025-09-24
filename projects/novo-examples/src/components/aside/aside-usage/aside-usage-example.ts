@@ -7,8 +7,8 @@ interface CustomParams {
 }
 
 @Component({
-  selector: 'aside-custom-demo',
-  template: `
+    selector: 'aside-custom-demo',
+    template: `
     <novo-toolbar>
       <novo-toolbar-row accent="candidate" gap="md">
         <novo-icon>candidate</novo-icon>
@@ -47,10 +47,11 @@ interface CustomParams {
       </novo-nav-outlet>
     </section>
   `,
-  host: {
-    '[style.display]': "'block'",
-    '[style.width.%]': "'100'",
-  },
+    host: {
+        '[style.display]': "'block'",
+        '[style.width.%]': "'100'",
+    },
+    standalone: false
 })
 export class AsideCustomDemo {
   public values = [
@@ -68,9 +69,10 @@ export class AsideCustomDemo {
  * @title Aside Usage Example
  */
 @Component({
-  selector: 'aside-usage-example',
-  templateUrl: 'aside-usage-example.html',
-  styleUrls: ['aside-usage-example.css'],
+    selector: 'aside-usage-example',
+    templateUrl: 'aside-usage-example.html',
+    styleUrls: ['aside-usage-example.css'],
+    standalone: false
 })
 export class AsideUsageExample {
   constructor(private aside: NovoAsideService) {}

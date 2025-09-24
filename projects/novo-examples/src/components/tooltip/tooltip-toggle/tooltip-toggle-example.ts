@@ -4,9 +4,10 @@ import { Component } from '@angular/core';
  * @title Tooltip Toggle Example
  */
 @Component({
-  selector: 'tooltip-toggle-example',
-  templateUrl: 'tooltip-toggle-example.html',
-  styleUrls: ['tooltip-toggle-example.css'],
+    selector: 'tooltip-toggle-example',
+    templateUrl: 'tooltip-toggle-example.html',
+    styleUrls: ['tooltip-toggle-example.css'],
+    standalone: false
 })
 export class TooltipToggleExample {
   public tooltipActive: boolean;

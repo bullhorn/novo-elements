@@ -60,22 +60,23 @@ const NovoAutocompleteMixins: HasOverlayCtor & CanDisableCtor & typeof NovoAutoc
 );
 
 @Component({
-  selector: 'novo-autocomplete',
-  templateUrl: 'autocomplete.component.html',
-  styleUrls: ['autocomplete.component.scss'],
-  host: {
-    class: 'novo-autocomplete',
-    // Always set the tabindex to -1 so that it doesn't overlap with any custom tabindex the
-    // consumer may have provided, while still being able to receive focus.
-    '[attr.tabindex]': 'disabled ? null : -1',
-  },
-  providers: [
-    { provide: NOVO_OPTION_PARENT_COMPONENT, useExisting: NovoAutocompleteElement },
-    { provide: NOVO_OVERLAY_CONTAINER, useExisting: NovoAutocompleteElement }
-  ],
-  exportAs: 'novoAutocomplete',
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'novo-autocomplete',
+    templateUrl: 'autocomplete.component.html',
+    styleUrls: ['autocomplete.component.scss'],
+    host: {
+        class: 'novo-autocomplete',
+        // Always set the tabindex to -1 so that it doesn't overlap with any custom tabindex the
+        // consumer may have provided, while still being able to receive focus.
+        '[attr.tabindex]': 'disabled ? null : -1',
+    },
+    providers: [
+        { provide: NOVO_OPTION_PARENT_COMPONENT, useExisting: NovoAutocompleteElement },
+        { provide: NOVO_OVERLAY_CONTAINER, useExisting: NovoAutocompleteElement }
+    ],
+    exportAs: 'novoAutocomplete',
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NovoAutocompleteElement
   extends NovoAutocompleteMixins

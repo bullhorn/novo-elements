@@ -19,17 +19,18 @@ import { NovoFieldset } from './FormInterfaces';
 import { NovoFormGroup } from './NovoFormGroup';
 
 @Component({
-  selector: 'novo-fieldset-header',
-  template: `
+    selector: 'novo-fieldset-header',
+    template: `
     <novo-title smaller>
       <novo-icon>{{ icon?.replace('bhi-', '') }}</novo-icon
       >{{ title }}
     </novo-title>
   `,
-  styleUrls: ['./fieldset-header.scss'],
-  host: {
-    class: 'novo-fieldset-header',
-  },
+    styleUrls: ['./fieldset-header.scss'],
+    host: {
+        class: 'novo-fieldset-header',
+    },
+    standalone: false
 })
 export class NovoFieldsetHeaderElement {
   @Input()
@@ -39,8 +40,8 @@ export class NovoFieldsetHeaderElement {
 }
 
 @Component({
-  selector: 'novo-fieldset',
-  template: `
+    selector: 'novo-fieldset',
+    template: `
     <div class="novo-fieldset-container">
       <novo-fieldset-header
         [icon]="icon"
@@ -58,6 +59,7 @@ export class NovoFieldsetHeaderElement {
       </ng-container>
     </div>
   `,
+    standalone: false
 })
 export class NovoFieldsetElement {
   @Input()
@@ -81,8 +83,8 @@ export class NovoFieldsetElement {
 }
 
 @Component({
-  selector: 'novo-dynamic-form',
-  template: `
+    selector: 'novo-dynamic-form',
+    template: `
     <novo-control-templates></novo-control-templates>
     <div class="novo-form-container">
       <header>
@@ -107,9 +109,10 @@ export class NovoFieldsetElement {
       </form>
     </div>
   `,
-  styleUrls: ['./Form.scss'],
-  encapsulation: ViewEncapsulation.None,
-  providers: [NovoTemplateService],
+    styleUrls: ['./Form.scss'],
+    encapsulation: ViewEncapsulation.None,
+    providers: [NovoTemplateService],
+    standalone: false
 })
 export class NovoDynamicFormElement implements OnChanges, OnInit, AfterContentInit {
   @Input()

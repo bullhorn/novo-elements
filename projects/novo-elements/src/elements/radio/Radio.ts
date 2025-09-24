@@ -24,9 +24,9 @@ const RADIO_VALUE_ACCESSOR = {
 };
 
 @Component({
-  selector: 'novo-radio',
-  providers: [RADIO_VALUE_ACCESSOR],
-  template: `
+    selector: 'novo-radio',
+    providers: [RADIO_VALUE_ACCESSOR],
+    template: `
     <input
       type="radio"
       [id]="id"
@@ -56,10 +56,11 @@ const RADIO_VALUE_ACCESSOR = {
       </div>
     </label>
   `,
-  styleUrls: ['./Radio.scss'],
-  host: {
-    '[class.vertical]': 'vertical',
-  },
+    styleUrls: ['./Radio.scss'],
+    host: {
+        '[class.vertical]': 'vertical',
+    },
+    standalone: false
 })
 export class NovoRadioElement implements ControlValueAccessor, OnInit {
   private _uniqueId: string = `novo-radio-${++nextId}`;

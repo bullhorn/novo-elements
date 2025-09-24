@@ -3,9 +3,10 @@ import { Component, HostBinding, Input, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
-  selector: 'novo-avatar',
-  styleUrls: ['./Avatar.scss'],
-  template: '<img *ngIf="src" [src]="src"/>',
+    selector: 'novo-avatar',
+    styleUrls: ['./Avatar.scss'],
+    template: '<img *ngIf="src" [src]="src"/>',
+    standalone: false
 })
 export class NovoAvatarElement implements OnInit {
   @Input() source: any;

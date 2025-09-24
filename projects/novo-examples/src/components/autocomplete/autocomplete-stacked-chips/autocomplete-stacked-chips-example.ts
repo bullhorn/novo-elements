@@ -17,9 +17,10 @@ interface ShiftData {
  * @title Autocomplete Stacked Chips
  */
 @Component({
-  selector: 'autocomplete-stacked-chips-example',
-  templateUrl: 'autocomplete-stacked-chips-example.html',
-  styleUrls: ['autocomplete-stacked-chips-example.css'],
+    selector: 'autocomplete-stacked-chips-example',
+    templateUrl: 'autocomplete-stacked-chips-example.html',
+    styleUrls: ['autocomplete-stacked-chips-example.css'],
+    standalone: false
 })
 export class AutocompleteStackedChipsExample {
   filteredShifts: Observable<ShiftData[]>;

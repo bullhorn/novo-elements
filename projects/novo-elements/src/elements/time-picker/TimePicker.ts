@@ -30,9 +30,9 @@ export enum TIME_VALUE_FORMATS {
 }
 
 @Component({
-  selector: 'novo-time-picker',
-  providers: [TIME_PICKER_VALUE_ACCESSOR],
-  template: `
+    selector: 'novo-time-picker',
+    providers: [TIME_PICKER_VALUE_ACCESSOR],
+    template: `
     <!-- <div class="digital" [class.inline]="inline" [class.military]="military" *ngIf="inline">
       <div class="digital--inner">
         <span class="digital--clock" *ngIf="analog">
@@ -134,11 +134,12 @@ export enum TIME_VALUE_FORMATS {
           (click)="save()">{{ labels.save }}</novo-button>
     </div>
   `,
-  styleUrls: ['./TimePicker.scss'],
-  host: {
-    class: 'novo-time-picker',
-    '[class.military]': 'military',
-  },
+    styleUrls: ['./TimePicker.scss'],
+    host: {
+        class: 'novo-time-picker',
+        '[class.military]': 'military',
+    },
+    standalone: false
 })
 export class NovoTimePickerElement implements ControlValueAccessor, OnInit, OnChanges {
   @Input()

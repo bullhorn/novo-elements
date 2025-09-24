@@ -10,9 +10,10 @@ import { map, startWith } from 'rxjs/operators';
  * @title Autocomplete With Chips
  */
 @Component({
-  selector: 'autocomplete-with-chips-example',
-  templateUrl: 'autocomplete-with-chips-example.html',
-  styleUrls: ['autocomplete-with-chips-example.css'],
+    selector: 'autocomplete-with-chips-example',
+    templateUrl: 'autocomplete-with-chips-example.html',
+    styleUrls: ['autocomplete-with-chips-example.css'],
+    standalone: false
 })
 export class AutocompleteWithChipsExample {
   visible = true;

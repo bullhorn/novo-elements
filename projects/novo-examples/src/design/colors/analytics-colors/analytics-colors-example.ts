@@ -9,9 +9,10 @@ import { analyticsColors as colors } from '../colors';
  * @title Analytics Colors
  */
 @Component({
-  selector: 'analytics-colors-example',
-  templateUrl: './analytics-colors-example.html',
-  styleUrls: ['./analytics-colors-example.scss'],
+    selector: 'analytics-colors-example',
+    templateUrl: './analytics-colors-example.html',
+    styleUrls: ['./analytics-colors-example.scss'],
+    standalone: false
 })
 export class AnalyticsColorsExample {
   analyticsColors = colors;

@@ -8,8 +8,8 @@ import { NovoExamplesSharedModule, TabsLayout, DefaultLayout } from './_shared';
 import { NovoElementsModule } from 'novo-elements';
 
 @Component({
-  selector: 'agenda-design-page',
-  template: `<h2>Usage</h2>
+    selector: 'agenda-design-page',
+    template: `<h2>Usage</h2>
 <novo-grid columns="2" align="start" gap="2rem">
 <div>
 Used to help display scheduled events for the day/week/month. The agenda component allow you to display events for any range grouped by days.  You can provide custom templates to each view to modify how the event is displayed and to add additional content.
@@ -63,7 +63,8 @@ Used to help display scheduled events for the day/week/month. The agenda compone
 <li>If using an illustrative image for the supplement content, it’s generally safe to use an empty or null alternative text for example alt=&quot;&quot;</li>
 </ul>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class AgendaDesignPage {
   public params: any = {};
@@ -71,8 +72,8 @@ export class AgendaDesignPage {
 
 
 @Component({
-  selector: 'agenda-develop-page',
-  template: `<h1>Technical Details</h1>
+    selector: 'agenda-develop-page',
+    template: `<h1>Technical Details</h1>
 <ul>
 <li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/avatar">(github)</a></li>
 <li><strong>module:</strong> <code>import &#123; NovoAgendaModule &#125; form 'novo-elements';</code></li>
@@ -105,7 +106,8 @@ export class AgendaDesignPage {
 <h3>Properties</h3>
 <p><props-table component="NovoAgendaDayViewElement"></props-table></p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class AgendaDevelopPage {
   public params: any = {};
@@ -113,11 +115,12 @@ export class AgendaDevelopPage {
 
 
 @Component({
-  selector: 'agenda-examples-page',
-  template: `<h2>Agenda Example</h2>
+    selector: 'agenda-examples-page',
+    template: `<h2>Agenda Example</h2>
 <p><code-example example="agenda"></code-example></p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class AgendaExamplesPage {
   public params: any = {};
@@ -125,8 +128,8 @@ export class AgendaExamplesPage {
 
 
 @Component({
-  selector: 'aside-design-page',
-  template: `<h2>Usage</h2>
+    selector: 'aside-design-page',
+    template: `<h2>Usage</h2>
 <novo-grid columns="2" align="start" gap="2rem">
 <div>
 <p>Asides are slideouts designed to provide a view into related content within the page without navigating away.  Asides work similar to Modal but the content is meant to be correlated and the workflow should be non-blocking.</p>
@@ -172,7 +175,8 @@ export class AgendaExamplesPage {
 <p><strong>Implementation</strong></p>
 <p>Always include an <code>alt</code> attribute describing the information that is visually displayed in the image.</p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class AsideDesignPage {
   public params: any = {};
@@ -180,8 +184,8 @@ export class AsideDesignPage {
 
 
 @Component({
-  selector: 'aside-develop-page',
-  template: `<h1>Technical Details</h1>
+    selector: 'aside-develop-page',
+    template: `<h1>Technical Details</h1>
 <ul>
 <li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/aside">(github)</a></li>
 <li><strong>module:</strong> <code>import &#123; NovoAsideModule &#125; from 'novo-elements';</code></li>
@@ -278,7 +282,8 @@ export class AsideDesignPage {
 </tbody>
 </table>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class AsideDevelopPage {
   public params: any = {};
@@ -286,15 +291,16 @@ export class AsideDevelopPage {
 
 
 @Component({
-  selector: 'aside-examples-page',
-  template: `<h2>Custom</h2>
+    selector: 'aside-examples-page',
+    template: `<h2>Custom</h2>
 <p>In the case where &quot;Success&quot;, &quot;Warning&quot;, and &quot;Error&quot; notifications aren't enough, use the custom notification. Custom notifications allow any of the Bullhorn Icons to be used in the notification.</p>
 <p><code-example example="aside-usage"></code-example></p>
 <h2>Add</h2>
 <p>Add modals have a colored title bar based on the record type being created. Additionally, due to a greater than average amount of content, they have fixed footers.</p>
 <p><code-example example="aside-form"></code-example></p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class AsideExamplesPage {
   public params: any = {};
@@ -302,8 +308,8 @@ export class AsideExamplesPage {
 
 
 @Component({
-  selector: 'autocomplete-design-page',
-  template: `<h2>Usage</h2>
+    selector: 'autocomplete-design-page',
+    template: `<h2>Usage</h2>
 <novo-grid columns="2" align="start" gap="2rem">
 <div>
 <p>The autocomplete component is designed to provide a list of options as the user types that can be used to set the field value.  The component can be used to set more complex data to the form. Usually the input does not require a valid option to be selected.</p>
@@ -347,7 +353,8 @@ export class AsideExamplesPage {
 <p><strong>Implementation</strong></p>
 <p>The component should follow the <a href="https://www.w3.org/TR/wai-aria-practices/examples/combobox/aria1.1pattern/listbox-combo.html">ARIA combobox interaction</a> pattern and have a role of <code>combobox</code>.</p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class AutocompleteDesignPage {
   public params: any = {};
@@ -355,8 +362,8 @@ export class AutocompleteDesignPage {
 
 
 @Component({
-  selector: 'autocomplete-develop-page',
-  template: `<h1>Technical Details</h1>
+    selector: 'autocomplete-develop-page',
+    template: `<h1>Technical Details</h1>
 <ul>
 <li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/loading">(github)</a></li>
 <li><strong>module:</strong> <strong>part of</strong> <code>NovoFieldModule</code></li>
@@ -383,7 +390,8 @@ export class AutocompleteDesignPage {
 <h3>Properties</h3>
 <p><props-table component="NovoAutocompleteElement"></props-table></p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class AutocompleteDevelopPage {
   public params: any = {};
@@ -391,8 +399,8 @@ export class AutocompleteDevelopPage {
 
 
 @Component({
-  selector: 'autocomplete-examples-page',
-  template: `<h2>Autocomplete</h2>
+    selector: 'autocomplete-examples-page',
+    template: `<h2>Autocomplete</h2>
 <p>tbw...</p>
 <p><code-example example="autocomplete-usage"></code-example></p>
 <h2>Autocomplete with Chips</h2>
@@ -405,7 +413,8 @@ export class AutocompleteDevelopPage {
 <p>tbw...</p>
 <p><code-example example="autocomplete-textarea"></code-example></p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class AutocompleteExamplesPage {
   public params: any = {};
@@ -413,8 +422,8 @@ export class AutocompleteExamplesPage {
 
 
 @Component({
-  selector: 'avatar-design-page',
-  template: `<h2>Usage</h2>
+    selector: 'avatar-design-page',
+    template: `<h2>Usage</h2>
 <novo-grid columns="2" align="start" gap="2rem">
 <div>
 <p>Avatars are images used to represent users and organizations. They typically are squares with rounded edges.</p>
@@ -444,7 +453,8 @@ export class AutocompleteExamplesPage {
 <p><strong>ARIA Implementation</strong></p>
 <p>Always include an <code>alt</code> attribute describing the information that is visually displayed in the image.</p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class AvatarDesignPage {
   public params: any = {};
@@ -452,8 +462,8 @@ export class AvatarDesignPage {
 
 
 @Component({
-  selector: 'avatar-develop-page',
-  template: `<h1>Technical Details</h1>
+    selector: 'avatar-develop-page',
+    template: `<h1>Technical Details</h1>
 <ul>
 <li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/avatar">(github)</a></li>
 <li><strong>module:</strong> <code>import &#123; NovoAvatarModule &#125; form 'novo-elements';</code></li>
@@ -538,7 +548,8 @@ export class AvatarDesignPage {
 </tbody>
 </table>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class AvatarDevelopPage {
   public params: any = {};
@@ -546,8 +557,8 @@ export class AvatarDevelopPage {
 
 
 @Component({
-  selector: 'avatar-examples-page',
-  template: `<h2>Types</h2>
+    selector: 'avatar-examples-page',
+    template: `<h2>Types</h2>
 <h3>Avatar</h3>
 <p>Avatars are images used to represent users and organizations. They typically are squares with rounded edges.</p>
 <p><code-example example="avatar-usage"></code-example></p>
@@ -555,7 +566,8 @@ export class AvatarDevelopPage {
 <p>AvatarStack is used to display more than one Avatar in an inline stack.</p>
 <p><code-example example="avatar-stack-usage"></code-example></p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class AvatarExamplesPage {
   public params: any = {};
@@ -563,8 +575,8 @@ export class AvatarExamplesPage {
 
 
 @Component({
-  selector: 'breadcrumb-design-page',
-  template: `<h2>Usage</h2>
+    selector: 'breadcrumb-design-page',
+    template: `<h2>Usage</h2>
 <novo-grid columns="2" align="start" gap="2rem">
 <div>
 <p>A breadcrumb displays the current location within a hierarchy. It allows going back to states higher up in the hierarchy.</p>
@@ -587,7 +599,8 @@ export class AvatarExamplesPage {
 <p><strong>Implementation</strong></p>
 <p>This component is intended to follow the <a href="https://www.w3.org/TR/wai-aria-practices/#breadcrumb">Aria Breadcrumb Design Pattern</a>.</p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class BreadcrumbDesignPage {
   public params: any = {};
@@ -595,8 +608,8 @@ export class BreadcrumbDesignPage {
 
 
 @Component({
-  selector: 'breadcrumb-develop-page',
-  template: `<h1>Technical Details</h1>
+    selector: 'breadcrumb-develop-page',
+    template: `<h1>Technical Details</h1>
 <ul>
 <li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/breadcrumbs">(github)</a></li>
 <li><strong>module:</strong> <code>import &#123; NovoBreadcrumbModule &#125; form 'novo-elements';</code></li>
@@ -688,7 +701,8 @@ export class BreadcrumbDesignPage {
 </tbody>
 </table>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class BreadcrumbDevelopPage {
   public params: any = {};
@@ -696,15 +710,16 @@ export class BreadcrumbDevelopPage {
 
 
 @Component({
-  selector: 'breadcrumb-examples-page',
-  template: `<h2>Static</h2>
+    selector: 'breadcrumb-examples-page',
+    template: `<h2>Static</h2>
 <p>Breadcrumbs can be use statical with the <code>novo-breadcrumb</code> and <code>novo-breadcrumb-item</code> elements. You can also set the breadcrumb item to have a menu too.</p>
 <p><code-example example="breadcrumb-usage"></code-example></p>
 <h2>Dynamic</h2>
 <p>If you need to build the breadcrumbs dynamically based on data within the app you can use the <code>source</code> attribute pass the values of the breadcrumb.</p>
 <p><code-example example="breadcrumb-source-usage"></code-example></p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class BreadcrumbExamplesPage {
   public params: any = {};
@@ -712,8 +727,8 @@ export class BreadcrumbExamplesPage {
 
 
 @Component({
-  selector: 'button-design-page',
-  template: `<h2>Usage</h2>
+    selector: 'button-design-page',
+    template: `<h2>Usage</h2>
 <novo-grid columns="2" align="start" gap="2rem">
 <div>
 <p>A button clearly indicates a point of action for the user. Bullhorn buttons come in a variety of themes, custom tailored to fit your use-case.</p>
@@ -803,7 +818,8 @@ Used to provide a equally weighted option that is optional when displayed next t
 <p><strong>Implementation</strong></p>
 <p>Always include an <code>aria-label</code> or <code>aria-labelledby</code> attribute when using icon buttons. When the button is disabled <code>aria-disabled=&quot;true&quot;</code> and <code>tabindex=&quot;-1&quot;</code> should be set automatically by the component.</p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class ButtonDesignPage {
   public params: any = {};
@@ -811,8 +827,8 @@ export class ButtonDesignPage {
 
 
 @Component({
-  selector: 'button-develop-page',
-  template: `<h1>Technical Details</h1>
+    selector: 'button-develop-page',
+    template: `<h1>Technical Details</h1>
 <ul>
 <li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/button">(github)</a></li>
 <li><strong>module:</strong> <code>import &#123; NovoButtonModule &#125; from 'novo-elements';</code></li>
@@ -836,7 +852,8 @@ export class ButtonDesignPage {
 <h3>Properties</h3>
 <p><props-table component="NovoButtonElement"></props-table></p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class ButtonDevelopPage {
   public params: any = {};
@@ -844,8 +861,8 @@ export class ButtonDevelopPage {
 
 
 @Component({
-  selector: 'button-examples-page',
-  template: `<h2>Themes</h2>
+    selector: 'button-examples-page',
+    template: `<h2>Themes</h2>
 <p>Bullhorn button themes were hand crafted to make your life easier. Most buttons used in the Bullhorn platform should utilize a <code>theme</code> attribute. Theme attributes provide access to every variation of Bullhorn UX approved buttons. Depending on the theme, some buttons may also utilize <code>icon</code>, <code>side</code>, and <code>inverse</code> attributes. Button are divided by function into four main categories: Primary, Secondary, Neutralizing, Subtractive. There are also three other button types that are independent of function: Dialogue, Icon, and Header.</p>
 <h2>Colors</h2>
 <p>Acceptable colors include <code>Primary</code>, <code>Success</code>, <code>Warning</code>, <code>Negative</code>, and <strong>all analytics colors</strong> which can be found in the color section of the style guide.</p>
@@ -881,7 +898,8 @@ export class ButtonDevelopPage {
 <p>A second icon can be specified, and it will take the opposite side of the primary icon.</p>
 <p><code-example example="button-two-icon"></code-example></p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class ButtonExamplesPage {
   public params: any = {};
@@ -889,8 +907,8 @@ export class ButtonExamplesPage {
 
 
 @Component({
-  selector: 'calendar-design-page',
-  template: `<h2>Usage</h2>
+    selector: 'calendar-design-page',
+    template: `<h2>Usage</h2>
 <novo-grid columns="2" align="start" gap="2rem">
 <div>
 <p>Calendars allow users to easily select dates. It comes in a handful of varieties based on the data the user is trying to enter, ie. A Single Date, Date Ranges, or Multiple Dates.</p>
@@ -973,7 +991,8 @@ list just set a fixed width on the container.</div>
 <li>If using an illustrative image for the supplement content, it’s generally safe to use an empty or null alternative text for example alt=&quot;&quot;</li>
 </ul>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class CalendarDesignPage {
   public params: any = {};
@@ -981,8 +1000,8 @@ export class CalendarDesignPage {
 
 
 @Component({
-  selector: 'calendar-develop-page',
-  template: `<h1>Technical Details</h1>
+    selector: 'calendar-develop-page',
+    template: `<h1>Technical Details</h1>
 <ul>
 <li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/calendar">(github)</a></li>
 <li><strong>module:</strong> <code>import &#123; NovoCalendarModule &#125; form 'novo-elements';</code></li>
@@ -1029,7 +1048,8 @@ export class CalendarDesignPage {
 <h3>Properties</h3>
 <p><props-table component="NovoCalendarElement"></props-table></p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class CalendarDevelopPage {
   public params: any = {};
@@ -1037,11 +1057,12 @@ export class CalendarDevelopPage {
 
 
 @Component({
-  selector: 'calendar-examples-page',
-  template: `<h2>Basic Usage</h2>
+    selector: 'calendar-examples-page',
+    template: `<h2>Basic Usage</h2>
 <p><code-example example="calendar"></code-example></p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class CalendarExamplesPage {
   public params: any = {};
@@ -1049,11 +1070,12 @@ export class CalendarExamplesPage {
 
 
 @Component({
-  selector: 'components-page',
-  template: `<h1>Components</h1>
+    selector: 'components-page',
+    template: `<h1>Components</h1>
 <p>This is a landing page</p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class ComponentsPage {
   public params: any = {};
@@ -1061,8 +1083,8 @@ export class ComponentsPage {
 
 
 @Component({
-  selector: 'data-table-page',
-  template: `<h1>Data Table <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/data-table">(source)</a></h1>
+    selector: 'data-table-page',
+    template: `<h1>Data Table <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/data-table">(source)</a></h1>
 <h5>Working with static data</h5>
 <h6>Change Dataset</h6>
 <h6>Change Pagination Style</h6>
@@ -1081,7 +1103,8 @@ export class ComponentsPage {
 <h6>URL</h6>
 <p><code-example example="data-table-remote"></code-example></p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class DataTablePage {
   public params: any = {};
@@ -1089,8 +1112,8 @@ export class DataTablePage {
 
 
 @Component({
-  selector: 'dropdown-design-page',
-  template: `<novo-grid columns="2" align="start" gap="2rem">
+    selector: 'dropdown-design-page',
+    template: `<novo-grid columns="2" align="start" gap="2rem">
 <div>
 <h3>Why?</h3>
 <p>Dropdown allow users to take an action by selecting from a list of choices revealed upon opening a temporary menu.</p>
@@ -1183,7 +1206,8 @@ The action items displayed within the list.</p>
 <p><strong>Implementation</strong></p>
 <p>Always include an <code>alt</code> attribute describing the information that is visually displayed in the image.</p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class DropdownDesignPage {
   public params: any = {};
@@ -1191,8 +1215,8 @@ export class DropdownDesignPage {
 
 
 @Component({
-  selector: 'dropdown-develop-page',
-  template: `<h1>Technical Details</h1>
+    selector: 'dropdown-develop-page',
+    template: `<h1>Technical Details</h1>
 <ul>
 <li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/dropdown">(github)</a></li>
 <li><strong>module:</strong> <code>import &#123; NovoDropdownModule &#125; from 'novo-elements';</code></li>
@@ -1222,7 +1246,8 @@ export class DropdownDesignPage {
 <h3>Properties</h3>
 <p><props-table component="NovoDropdownElement"></props-table></p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class DropdownDevelopPage {
   public params: any = {};
@@ -1230,8 +1255,8 @@ export class DropdownDevelopPage {
 
 
 @Component({
-  selector: 'dropdown-examples-page',
-  template: `<h2>Dropdown Menu</h2>
+    selector: 'dropdown-examples-page',
+    template: `<h2>Dropdown Menu</h2>
 <p>This is a simple dropdown menu.</p>
 <p><code-example example="basic-drop-down"></code-example></p>
 <h2>Dropdown Position Options</h2>
@@ -1253,7 +1278,8 @@ export class DropdownDevelopPage {
 <p>Dropdown with a large number of items. Selecting an item far down the list and reopening the dropdown will automatically scroll down to the selected item.</p>
 <p><code-example example="scroll-to-item-drop-down"></code-example></p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class DropdownExamplesPage {
   public params: any = {};
@@ -1261,8 +1287,8 @@ export class DropdownExamplesPage {
 
 
 @Component({
-  selector: 'field-design-page',
-  template: `<novo-grid columns="2" align="start" gap="2rem">
+    selector: 'field-design-page',
+    template: `<novo-grid columns="2" align="start" gap="2rem">
 <div>
 <h3>Why?</h3>
 <p>A Field is a component used to wrap several Angular Material components and apply common Text field styles such as the underline, label and hint messages.</p>
@@ -1330,7 +1356,8 @@ Caption text to display helpful information, warnings, or errors.</p>
 <p><strong>Implementation</strong></p>
 <p>Always include an <code>alt</code> attribute describing the information that is visually displayed in the image.</p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class FieldDesignPage {
   public params: any = {};
@@ -1338,8 +1365,8 @@ export class FieldDesignPage {
 
 
 @Component({
-  selector: 'field-develop-page',
-  template: `<h1>Technical Details</h1>
+    selector: 'field-develop-page',
+    template: `<h1>Technical Details</h1>
 <ul>
 <li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/field">(github)</a></li>
 <li><strong>module:</strong> <code>import &#123; NovoFieldModule &#125; from 'novo-elements';</code></li>
@@ -1376,7 +1403,8 @@ export class FieldDesignPage {
 <h3>Properties</h3>
 <p><props-table component="NovoInput"></props-table></p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class FieldDevelopPage {
   public params: any = {};
@@ -1384,8 +1412,8 @@ export class FieldDevelopPage {
 
 
 @Component({
-  selector: 'field-examples-page',
-  template: `<h2>Basic Usage</h2>
+    selector: 'field-examples-page',
+    template: `<h2>Basic Usage</h2>
 <p>tbw...</p>
 <p><code-example example="field-usage"></code-example></p>
 <h2>Anatomy</h2>
@@ -1412,7 +1440,8 @@ export class FieldDevelopPage {
 <p>How to use form fields tied to a form with FormControls and validation</p>
 <p><code-example example="form-usage"></code-example></p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class FieldExamplesPage {
   public params: any = {};
@@ -1420,8 +1449,8 @@ export class FieldExamplesPage {
 
 
 @Component({
-  selector: 'icon-design-page',
-  template: `<h2>Usage</h2>
+    selector: 'icon-design-page',
+    template: `<h2>Usage</h2>
 <novo-grid columns="2" align="start" gap="2rem">
 <div>
 <p>If you want to use bullhorn icons, it is easier to use the <code>novo-icon</code> element to style them. You can always style them within the <code>i</code> tag too.</p>
@@ -1458,7 +1487,8 @@ export class FieldExamplesPage {
 <p><strong>Implementation</strong></p>
 <p>Always include an <code>alt</code> attribute describing the information that is visually displayed in the image.</p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class IconDesignPage {
   public params: any = {};
@@ -1466,8 +1496,8 @@ export class IconDesignPage {
 
 
 @Component({
-  selector: 'icon-develop-page',
-  template: `<h1>Technical Details</h1>
+    selector: 'icon-develop-page',
+    template: `<h1>Technical Details</h1>
 <ul>
 <li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/icon">(github)</a></li>
 <li><strong>module:</strong> <code>import &#123; NovoIconModule &#125; from 'novo-elements';</code></li>
@@ -1486,7 +1516,8 @@ export class IconDesignPage {
 <h3>Properties</h3>
 <p><props-table component="NovoIconComponent"></props-table></p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class IconDevelopPage {
   public params: any = {};
@@ -1494,15 +1525,16 @@ export class IconDevelopPage {
 
 
 @Component({
-  selector: 'icon-examples-page',
-  template: `<h2>Basic Usage</h2>
+    selector: 'icon-examples-page',
+    template: `<h2>Basic Usage</h2>
 <p><code-example example="basic-icons"></code-example></p>
 <h2>Themes &amp; Colors</h2>
 <p><code-example example="themed-icons"></code-example></p>
 <h2>Raised Icons</h2>
 <p><code-example example="raised-icons"></code-example></p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class IconExamplesPage {
   public params: any = {};
@@ -1510,8 +1542,8 @@ export class IconExamplesPage {
 
 
 @Component({
-  selector: 'loading-design-page',
-  template: `<h2>Usage</h2>
+    selector: 'loading-design-page',
+    template: `<h2>Usage</h2>
 <novo-grid columns="2" align="start" gap="2rem">
 <div>
 <p>Loading animations are used to help indicate to the user that some sort of progress is taking place. These are especially helpful for intensive operations that might take extra time.</p>
@@ -1605,7 +1637,8 @@ Caption text to display helpful information, warnings, or errors.</p>
 <p><strong>Implementation</strong></p>
 <p>Always include an <code>alt</code> attribute describing the information that is visually displayed in the image.</p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class LoadingDesignPage {
   public params: any = {};
@@ -1613,8 +1646,8 @@ export class LoadingDesignPage {
 
 
 @Component({
-  selector: 'loading-develop-page',
-  template: `<h1>Technical Details</h1>
+    selector: 'loading-develop-page',
+    template: `<h1>Technical Details</h1>
 <ul>
 <li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/loading">(github)</a></li>
 <li><strong>module:</strong> <code>import &#123; NovoLoadingModule &#125; from 'novo-elements';</code></li>
@@ -1637,7 +1670,8 @@ export class LoadingDesignPage {
 <h3>Properties</h3>
 <p><props-table component="NovoSpinnerElement"></props-table></p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class LoadingDevelopPage {
   public params: any = {};
@@ -1645,15 +1679,16 @@ export class LoadingDevelopPage {
 
 
 @Component({
-  selector: 'loading-examples-page',
-  template: `<h2>Line</h2>
+    selector: 'loading-examples-page',
+    template: `<h2>Line</h2>
 <p>The Dot Line animation is indeterminate.</p>
 <p><code-example example="loading-line"></code-example></p>
 <h2>Spinner</h2>
 <p>The Dot Spinner animation is used as an alternate to the loading line animation.</p>
 <p><code-example example="loading-circle"></code-example></p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class LoadingExamplesPage {
   public params: any = {};
@@ -1661,8 +1696,8 @@ export class LoadingExamplesPage {
 
 
 @Component({
-  selector: 'menu-design-page',
-  template: `<h2>Usage</h2>
+    selector: 'menu-design-page',
+    template: `<h2>Usage</h2>
 <novo-grid columns="2" align="start" gap="2rem">
 <div>
 <p>Menu allow users to take an action by selecting from a list of choices revealed upon opening a temporary menu.</p>
@@ -1756,7 +1791,8 @@ the right or left of parent list items, depending on available space.</div>
 <p><strong>Implementation</strong></p>
 <p>Always include an <code>alt</code> attribute describing the information that is visually displayed in the image.</p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class MenuDesignPage {
   public params: any = {};
@@ -1764,8 +1800,8 @@ export class MenuDesignPage {
 
 
 @Component({
-  selector: 'menu-develop-page',
-  template: `<h1>Technical Details</h1>
+    selector: 'menu-develop-page',
+    template: `<h1>Technical Details</h1>
 <ul>
 <li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/loading">(github)</a></li>
 <li><strong>module:</strong> <code>import &#123; NovoMenuModule &#125; from 'novo-elements';</code></li>
@@ -1813,7 +1849,8 @@ export class MenuDesignPage {
 <h3>Properties</h3>
 <p><props-table component="MenuItemDirective"></props-table></p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class MenuDevelopPage {
   public params: any = {};
@@ -1821,8 +1858,8 @@ export class MenuDevelopPage {
 
 
 @Component({
-  selector: 'menu-examples-page',
-  template: `<h2>Basic Menu</h2>
+    selector: 'menu-examples-page',
+    template: `<h2>Basic Menu</h2>
 <p>This is a simple menu.</p>
 <p><code-example example="basic-menu"></code-example></p>
 <h2>Nested Menu</h2>
@@ -1832,7 +1869,8 @@ export class MenuDevelopPage {
 <p>TBW of an example when you can define a context to pass to the context menu to control visibility or to use on the callback action.</p>
 <p><code-example example="menu-context"></code-example></p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class MenuExamplesPage {
   public params: any = {};
@@ -1840,8 +1878,8 @@ export class MenuExamplesPage {
 
 
 @Component({
-  selector: 'modal-design-page',
-  template: `<h2>Usage</h2>
+    selector: 'modal-design-page',
+    template: `<h2>Usage</h2>
 <novo-grid columns="2" align="start" gap="2rem">
 <div>
 <p>A modal is a pop-up dialog that appears on top of the main content, requiring the user to focus only on the content that the modal presents.</p>
@@ -2004,7 +2042,8 @@ Description and purpose of this element</p>
 <p><img src="https://via.placeholder.com/350x250" alt="placeholder"></p>
 </novo-grid>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class ModalDesignPage {
   public params: any = {};
@@ -2012,8 +2051,8 @@ export class ModalDesignPage {
 
 
 @Component({
-  selector: 'modal-develop-page',
-  template: `<h1>Technical Details</h1>
+    selector: 'modal-develop-page',
+    template: `<h1>Technical Details</h1>
 <ul>
 <li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/modal">(github)</a></li>
 <li><strong>module:</strong> <code>import &#123; NovoModal &#125; form 'novo-elements/modal';</code></li>
@@ -2125,7 +2164,8 @@ export class ModalDesignPage {
 </tbody>
 </table>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class ModalDevelopPage {
   public params: any = {};
@@ -2133,8 +2173,8 @@ export class ModalDevelopPage {
 
 
 @Component({
-  selector: 'modal-examples-page',
-  template: `<h2>Notification Modals</h2>
+    selector: 'modal-examples-page',
+    template: `<h2>Notification Modals</h2>
 <h3>Success</h3>
 <p>This modal uses only a primary action button. It is a confirmation that an action has been completed when the result is not immediately apparent. A workflow modal often transitions into a success modal.</p>
 <p><code-example example="success-modal"></code-example></p>
@@ -2155,7 +2195,8 @@ export class ModalDevelopPage {
 <p>Edit, Send, and non-Add workflow modals possess a plain header to remind the user of the action they are taking. They generally have a neutralizing button, and a primary button.</p>
 <p><code-example example="modal-edit-form"></code-example></p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class ModalExamplesPage {
   public params: any = {};
@@ -2163,8 +2204,8 @@ export class ModalExamplesPage {
 
 
 @Component({
-  selector: 'non-ideal-state-design-page',
-  template: `<h2>Usage</h2>
+    selector: 'non-ideal-state-design-page',
+    template: `<h2>Usage</h2>
 <novo-grid columns="2" align="start" gap="2rem">
 <div>
 <p>Non-ideal UI states inform the user that some content is unavailable. There are several types of non-ideal states, including:</p>
@@ -2250,7 +2291,8 @@ Displays interactive content (eg. Button) that allow a user to take an action as
 <li>Add role=&quot;presentation&quot; to purely decorational empty state icons to ensure they are ignored by screen readers.</li>
 </ul>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class NonIdealStateDesignPage {
   public params: any = {};
@@ -2258,8 +2300,8 @@ export class NonIdealStateDesignPage {
 
 
 @Component({
-  selector: 'non-ideal-state-develop-page',
-  template: `<h1>Technical Details</h1>
+    selector: 'non-ideal-state-develop-page',
+    template: `<h1>Technical Details</h1>
 <ul>
 <li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/non-ideal-state">(github)</a></li>
 <li><strong>module:</strong> <code>import &#123; NovoNonIdealStateModule &#125; form 'novo-elements/modal';</code></li>
@@ -2284,7 +2326,8 @@ export class NonIdealStateDesignPage {
 <h3>Properties</h3>
 <p><props-table component="NonIdealStateElement"></props-table></p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class NonIdealStateDevelopPage {
   public params: any = {};
@@ -2292,15 +2335,16 @@ export class NonIdealStateDevelopPage {
 
 
 @Component({
-  selector: 'non-ideal-state-examples-page',
-  template: `<h2>Basic Usage</h2>
+    selector: 'non-ideal-state-examples-page',
+    template: `<h2>Basic Usage</h2>
 <p>Basic use-case is to display an icon, message, and reason for this state to occur. And provide a call to action for the user.</p>
 <p><code-example example="non-ideal-state-usage"></code-example></p>
 <p>The call to action doesn't necessarily need to be a button, for example:</p>
 <p><code-example example="non-ideal-state-search-usage"></code-example>
 <code-example example="non-ideal-state-loading-usage"></code-example></p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class NonIdealStateExamplesPage {
   public params: any = {};
@@ -2308,8 +2352,8 @@ export class NonIdealStateExamplesPage {
 
 
 @Component({
-  selector: 'popover-design-page',
-  template: `<h2>Usage</h2>
+    selector: 'popover-design-page',
+    template: `<h2>Usage</h2>
 <novo-grid columns="2" align="start" gap="2rem">
 <div>
 <p>Popovers are layered containers that hold additional information or controls. Popovers are containers used to display transient content such as menus, options, additional actions, and more. They visually stand out through stroke and drop shadow and float on top of the interface.</p>
@@ -2368,7 +2412,8 @@ The popover container will be positioned based on the alignment to the trigger e
 <p><strong>Implementation</strong></p>
 <p>the popover should follow the Aria <code>complementary</code> role <a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/complementary_role">guidelines</a>.</p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class PopoverDesignPage {
   public params: any = {};
@@ -2376,8 +2421,8 @@ export class PopoverDesignPage {
 
 
 @Component({
-  selector: 'popover-develop-page',
-  template: `<h1>Technical Details</h1>
+    selector: 'popover-develop-page',
+    template: `<h1>Technical Details</h1>
 <p>Tooltips are used as system notifications. They can contain custom text titles and messages, as well as any icons from bh-icons and any color from our color palletes.</p>
 <ul>
 <li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/tooltips">(github)</a></li>
@@ -2415,7 +2460,8 @@ export class PopoverDesignPage {
 <h3>Properties</h3>
 <p><props-table component="NovoInput"></props-table></p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class PopoverDevelopPage {
   public params: any = {};
@@ -2423,8 +2469,8 @@ export class PopoverDevelopPage {
 
 
 @Component({
-  selector: 'popover-examples-page',
-  template: `<h2>Placement</h2>
+    selector: 'popover-examples-page',
+    template: `<h2>Placement</h2>
 <p><code-example example="pop-over-placement"></code-example></p>
 <h2>Horizontal Alignment</h2>
 <p><code-example example="pop-over-horizontal"></code-example></p>
@@ -2437,7 +2483,8 @@ export class PopoverDevelopPage {
 <h2>Automatic Placement of PopOver</h2>
 <p><code-example example="pop-over-auto-placement"></code-example></p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class PopoverExamplesPage {
   public params: any = {};
@@ -2445,8 +2492,8 @@ export class PopoverExamplesPage {
 
 
 @Component({
-  selector: 'progress-design-page',
-  template: `<h2>Anatomy</h2>
+    selector: 'progress-design-page',
+    template: `<h2>Anatomy</h2>
 <novo-grid columns="2" align="start" gap="2rem">
 <img src="assets/images/ModalAnatomy.png" width="450">
 <div>
@@ -2520,7 +2567,8 @@ Caption text to display helpful information, warnings, or errors.</p>
 <p><strong>Implementation</strong></p>
 <p>Always include an <code>alt</code> attribute describing the information that is visually displayed in the image.</p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class ProgressDesignPage {
   public params: any = {};
@@ -2528,8 +2576,8 @@ export class ProgressDesignPage {
 
 
 @Component({
-  selector: 'progress-develop-page',
-  template: `<h1>Technical Details</h1>
+    selector: 'progress-develop-page',
+    template: `<h1>Technical Details</h1>
 <ul>
 <li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/loading">(github)</a></li>
 <li><strong>module:</strong> <code>import &#123; NovoProgressModule &#125; from 'novo-elements';</code></li>
@@ -2551,7 +2599,8 @@ export class ProgressDesignPage {
 <h3>Properties</h3>
 <p><props-table component="NovoProgressElement"></props-table></p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class ProgressDevelopPage {
   public params: any = {};
@@ -2559,15 +2608,16 @@ export class ProgressDevelopPage {
 
 
 @Component({
-  selector: 'progress-examples-page',
-  template: `<h2>Progress Bar</h2>
+    selector: 'progress-examples-page',
+    template: `<h2>Progress Bar</h2>
 <p>Progress bars are generally linear and can show the percent complete of a task. Progress can also be indeterminate.</p>
 <p><code-example example="progress-bar-usage"></code-example></p>
 <h2>Radial Progress Bars</h2>
 <p>Radial Progress can be used to show a percent complete or multiple statuses in a circle.</p>
 <p><code-example example="progress-bar-radial-usage"></code-example></p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class ProgressExamplesPage {
   public params: any = {};
@@ -2575,8 +2625,8 @@ export class ProgressExamplesPage {
 
 
 @Component({
-  selector: 'progress-usage-page',
-  template: `<novo-grid columns="2" align="start" gap="2rem">
+    selector: 'progress-usage-page',
+    template: `<novo-grid columns="2" align="start" gap="2rem">
 <div>
 <h3>Why?</h3>
 <p>Progress bars are used to show how much of a task is complete, like loading data.</p>
@@ -2598,7 +2648,8 @@ export class ProgressExamplesPage {
 </div>
 </novo-grid>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class ProgressUsagePage {
   public params: any = {};
@@ -2606,8 +2657,8 @@ export class ProgressUsagePage {
 
 
 @Component({
-  selector: 'query-builder-design-page',
-  template: `<h2>Usage</h2>
+    selector: 'query-builder-design-page',
+    template: `<h2>Usage</h2>
 <novo-grid columns="2" align="start" gap="2rem">
 <div>
 <p>Asides are slideouts designed to provide a view into related content within the page without navigating away.  Asides work similar to Modal but the content is meant to be correlated and the workflow should be non-blocking.</p>
@@ -2653,7 +2704,8 @@ export class ProgressUsagePage {
 <p><strong>Implementation</strong></p>
 <p>Always include an <code>alt</code> attribute describing the information that is visually displayed in the image.</p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class QueryBuilderDesignPage {
   public params: any = {};
@@ -2661,8 +2713,8 @@ export class QueryBuilderDesignPage {
 
 
 @Component({
-  selector: 'query-builder-develop-page',
-  template: `<h1>Technical Details</h1>
+    selector: 'query-builder-develop-page',
+    template: `<h1>Technical Details</h1>
 <ul>
 <li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/query-builder">(github)</a></li>
 <li><strong>module:</strong> <code>import &#123; QueryBuilderModule &#125; from 'novo-elements';</code></li>
@@ -2742,7 +2794,8 @@ export class CustomConditionFieldDef extends DefaultFilterFieldDef implements On
 </table>
 <p><em>Note:</em> All modal components should be declared as <code>entryComponents</code> in the module.</p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class QueryBuilderDevelopPage {
   public params: any = {};
@@ -2750,8 +2803,8 @@ export class QueryBuilderDevelopPage {
 
 
 @Component({
-  selector: 'query-builder-examples-page',
-  template: `<h2>Just a basic Criteria Builder</h2>
+    selector: 'query-builder-examples-page',
+    template: `<h2>Just a basic Criteria Builder</h2>
 <p>A common use case is to just collect a list of criteria to build as a query.  A Criteria can contain multiple conditions which will need to be joined by a conjunctions (and/or).</p>
 <p><code-example example="just-criteria"></code-example></p>
 <h1>Single Field Criteria Builder</h1>
@@ -2761,7 +2814,8 @@ export class QueryBuilderDevelopPage {
 <p>The difference between the Query and Criteria Builder is that it allow for the user to define multiple criteria and join them as either inclusion or exclusion criteria.  ie. Find <code>where fruit.seeds &gt;= 1 and not fruit.name='Avacodo'</code></p>
 <p>TBW</p>
 <!-- <code-example example="just-criteria"></code-example> -->`,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class QueryBuilderExamplesPage {
   public params: any = {};
@@ -2769,15 +2823,16 @@ export class QueryBuilderExamplesPage {
 
 
 @Component({
-  selector: 'search-page',
-  template: `<h1>Search Input <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/switch">(source)</a></h1>
+    selector: 'search-page',
+    template: `<h1>Search Input <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/switch">(source)</a></h1>
 <p>Loading animations are used to help indicate to the user that some sort of progress is taking place. These are especially helpful for intensive operations that might take extra time.</p>
 <h2>Types</h2>
 <h5>Searches</h5>
 <p>Searches are a binary toggle that allow the user to select one of two options. They are most frequently used for an on-off model.</p>
 <p><code-example example="search-usage"></code-example></p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class SearchPage {
   public params: any = {};
@@ -2785,14 +2840,15 @@ export class SearchPage {
 
 
 @Component({
-  selector: 'slides-page',
-  template: `<h1>slides</h1>
+    selector: 'slides-page',
+    template: `<h1>slides</h1>
 <h1>Slides <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/slides">(source)</a></h1>
 <p>Slide element to toggle some information</p>
 <h5>Basic</h5>
 <p><code-example example="basic-slide"></code-example></p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class SlidesPage {
   public params: any = {};
@@ -2800,8 +2856,8 @@ export class SlidesPage {
 
 
 @Component({
-  selector: 'switch-page',
-  template: `<h1>Switches &amp; Toggles <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/switch">(source)</a></h1>
+    selector: 'switch-page',
+    template: `<h1>Switches &amp; Toggles <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/switch">(source)</a></h1>
 <p>Loading animations are used to help indicate to the user that some sort of progress is taking place. These are especially helpful for intensive operations that might take extra time.</p>
 <h2>Types</h2>
 <h5>Tiles</h5>
@@ -2810,7 +2866,8 @@ export class SlidesPage {
 <p>Switches are a binary toggle that allow the user to select one of two options. They are most frequently used for an on-off model.</p>
 <p><code-example example="switch-usage"></code-example></p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class SwitchPage {
   public params: any = {};
@@ -2818,8 +2875,8 @@ export class SwitchPage {
 
 
 @Component({
-  selector: 'tabbed-group-picker-page',
-  template: `<h1>Tabbed Group Picker <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/tabbed-group-picker">(source)</a></h1>
+    selector: 'tabbed-group-picker-page',
+    template: `<h1>Tabbed Group Picker <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/tabbed-group-picker">(source)</a></h1>
 <p>Tabbed Group Picker allows for nested selection of groups and members via a tabbed interface.</p>
 <h2>Basic</h2>
 <p>In its most basic usage, Tabbed Group Picker allows for selection of arbitrary sets of data that have no group/member relationship. Each data set appears on its own tab. The values returned must be javascript primitives (typically string or number).</p>
@@ -2837,7 +2894,8 @@ export class SwitchPage {
 <h2>Footer</h2>
 <p><code-example example="tabbed-group-picker-footer"></code-example></p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class TabbedGroupPickerPage {
   public params: any = {};
@@ -2845,8 +2903,8 @@ export class TabbedGroupPickerPage {
 
 
 @Component({
-  selector: 'tip-well-design-page',
-  template: `<h2>Usage</h2>
+    selector: 'tip-well-design-page',
+    template: `<h2>Usage</h2>
 <novo-grid columns="2" align="start" gap="2rem">
 <div>
 <p>The TipWell is a small container for displaying help text.  It is meant to be shown only once and dismissable to the user.  Typical usage is to provide additional detail on data being displayed or explain how a feature works to the user for their first time using it.</p>
@@ -2892,7 +2950,8 @@ A longer description of the outcome of the related action.</p>
 <p><strong>Implementation</strong></p>
 <p>Always include an <code>alt</code> attribute describing the information that is visually displayed in the image.</p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class TipWellDesignPage {
   public params: any = {};
@@ -2900,8 +2959,8 @@ export class TipWellDesignPage {
 
 
 @Component({
-  selector: 'tip-well-develop-page',
-  template: `<h1>Technical Details</h1>
+    selector: 'tip-well-develop-page',
+    template: `<h1>Technical Details</h1>
 <p>Tip Wells are used as ephemeral containers of helpful text. The importance of the content is usually short-lived and no longer needed once disseminated.</p>
 <ul>
 <li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/tip-well">(github)</a></li>
@@ -2930,7 +2989,8 @@ export class TipWellDesignPage {
 <h3>Properties</h3>
 <p><props-table component="NovoTipWellElement"></props-table></p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class TipWellDevelopPage {
   public params: any = {};
@@ -2938,8 +2998,8 @@ export class TipWellDevelopPage {
 
 
 @Component({
-  selector: 'tip-well-examples-page',
-  template: `<h2>Basic Usage</h2>
+    selector: 'tip-well-examples-page',
+    template: `<h2>Basic Usage</h2>
 <p><code-example example="basic-tip-well"></code-example></p>
 <h2>No Button Demo</h2>
 <p><code-example example="buttonless-tip-well"></code-example></p>
@@ -2948,7 +3008,8 @@ export class TipWellDevelopPage {
 <h2>HTML Demo</h2>
 <p><code-example example="html-tip-well"></code-example></p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class TipWellExamplesPage {
   public params: any = {};
@@ -2956,8 +3017,8 @@ export class TipWellExamplesPage {
 
 
 @Component({
-  selector: 'toaster-design-page',
-  template: `<h2>Usage</h2>
+    selector: 'toaster-design-page',
+    template: `<h2>Usage</h2>
 <novo-grid columns="2" align="start" gap="2rem">
 <div>
 <p>A toast provides feedback about an operation while maintaining visibility and interaction with the current activity. It conveys information to the user that is not critical and does not require specific attention. A toast does not prevent the user from continuing their activity.</p>
@@ -3066,7 +3127,8 @@ By default the a toast will always have a dismiss action, but can also have a fo
 <p><strong>Implementation</strong></p>
 <p>Always include an <code>alt</code> attribute describing the information that is visually displayed in the image.</p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class ToasterDesignPage {
   public params: any = {};
@@ -3074,8 +3136,8 @@ export class ToasterDesignPage {
 
 
 @Component({
-  selector: 'toaster-develop-page',
-  template: `<h1>Technical Details</h1>
+    selector: 'toaster-develop-page',
+    template: `<h1>Technical Details</h1>
 <p>Toasts are used as system notifications. They can contain custom text titles and messages, as well as any icons from bh-icons and any color from our color palletes.</p>
 <ul>
 <li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/field">(github)</a></li>
@@ -3113,7 +3175,8 @@ export class ToasterDesignPage {
 <h3>Properties</h3>
 <p><props-table component="NovoInput"></props-table></p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class ToasterDevelopPage {
   public params: any = {};
@@ -3121,8 +3184,8 @@ export class ToasterDevelopPage {
 
 
 @Component({
-  selector: 'toaster-examples-page',
-  template: `<h2>Alert</h2>
+    selector: 'toaster-examples-page',
+    template: `<h2>Alert</h2>
 <p>This type of toast notification takes a template, a style, and a location.</p>
 <h2>Toast Options</h2>
 <p><code-example example="toast-options"></code-example></p>
@@ -3133,7 +3196,8 @@ export class ToasterDevelopPage {
 <h2>Toaster Actions</h2>
 <p><code-example example="toast-actions"></code-example></p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class ToasterExamplesPage {
   public params: any = {};
@@ -3141,8 +3205,8 @@ export class ToasterExamplesPage {
 
 
 @Component({
-  selector: 'toolbar-design-page',
-  template: `<h2>Usage</h2>
+    selector: 'toolbar-design-page',
+    template: `<h2>Usage</h2>
 <novo-grid columns="2" align="start" gap="2rem">
 <div>
 <p>Toolbars are containers attached to the top or bottom of a page that contain actions and/or navigation.  Toolbars can stack on-top of each providing varying levels of content.  Toolbars usually act as headers or footers of the page.</p>
@@ -3206,7 +3270,8 @@ export class ToasterExamplesPage {
 <p><strong>Implementation</strong></p>
 <p>Always include an <code>alt</code> attribute describing the information that is visually displayed in the image.</p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class ToolbarDesignPage {
   public params: any = {};
@@ -3214,8 +3279,8 @@ export class ToolbarDesignPage {
 
 
 @Component({
-  selector: 'toolbar-develop-page',
-  template: `<h1>Technical Details</h1>
+    selector: 'toolbar-develop-page',
+    template: `<h1>Technical Details</h1>
 <p>Toolbars are used as ephemeral containers of helpful text. The importance of the content is usually short-lived and no longer needed once disseminated.</p>
 <ul>
 <li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/toolbar">(github)</a></li>
@@ -3251,7 +3316,8 @@ export class ToolbarDesignPage {
 <h3>Properties</h3>
 <p><props-table component="NovoToolbarRow"></props-table></p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class ToolbarDevelopPage {
   public params: any = {};
@@ -3259,13 +3325,14 @@ export class ToolbarDevelopPage {
 
 
 @Component({
-  selector: 'toolbar-examples-page',
-  template: `<h2>Basic Usage</h2>
+    selector: 'toolbar-examples-page',
+    template: `<h2>Basic Usage</h2>
 <p><code-example example="basic-toolbar"></code-example></p>
 <h2>MultiRow Demo</h2>
 <p><code-example example="multi-row-toolbar"></code-example></p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class ToolbarExamplesPage {
   public params: any = {};
@@ -3273,8 +3340,8 @@ export class ToolbarExamplesPage {
 
 
 @Component({
-  selector: 'tooltip-design-page',
-  template: `<h2>Usage</h2>
+    selector: 'tooltip-design-page',
+    template: `<h2>Usage</h2>
 <novo-grid columns="2" align="start" gap="2rem">
 <div>
 <p>Tooltips are layered containers that provide basic identifying information about an elment.  The are usually triggered by hovering over the buttons and icons. Tooltips are meant to stand out visually through their contrasting container color to draw immediate attention to their contents.</p>
@@ -3366,7 +3433,8 @@ The tooltip contents are defined based upon the application needs and business u
 <p><img src="assets/images/TooltipPosition.png" alt="Tooltip Placement"></p>
 </novo-grid>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class TooltipDesignPage {
   public params: any = {};
@@ -3374,8 +3442,8 @@ export class TooltipDesignPage {
 
 
 @Component({
-  selector: 'tooltip-develop-page',
-  template: `<h1>Technical Details</h1>
+    selector: 'tooltip-develop-page',
+    template: `<h1>Technical Details</h1>
 <p>Tooltips are used as system notifications. They can contain custom text titles and messages, as well as any icons from bh-icons and any color from our color palletes.</p>
 <ul>
 <li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/tooltip">(github)</a></li>
@@ -3402,7 +3470,8 @@ export class TooltipDesignPage {
 <h3>Properties</h3>
 <p><props-table component="TooltipDirective"></props-table></p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class TooltipDevelopPage {
   public params: any = {};
@@ -3410,8 +3479,8 @@ export class TooltipDevelopPage {
 
 
 @Component({
-  selector: 'tooltip-examples-page',
-  template: `<h2>Placement</h2>
+    selector: 'tooltip-examples-page',
+    template: `<h2>Placement</h2>
 <p><code-example example="tooltip-placement"></code-example></p>
 <h2>Alignment</h2>
 <p><code-example example="tooltip-align"></code-example></p>
@@ -3426,7 +3495,8 @@ export class TooltipDevelopPage {
 <h2>Overflow</h2>
 <p><code-example example="tooltip-overflow"></code-example></p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class TooltipExamplesPage {
   public params: any = {};
@@ -3434,8 +3504,8 @@ export class TooltipExamplesPage {
 
 
 @Component({
-  selector: 'colors-page',
-  template: `<h1>Color</h1>
+    selector: 'colors-page',
+    template: `<h1>Color</h1>
 <h2>Efficient and expressive</h2>
 <p>Our colors are bold, fresh, and approachable. They are expressive and delightful, but selected with usability and accessibility in mind.</p>
 <h2>Primary Colors</h2>
@@ -3448,7 +3518,8 @@ export class TooltipExamplesPage {
 <p>This palette features vibrant, bold colors for use in data visualization.</p>
 <p><analytics-colors-example></analytics-colors-example></p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class ColorsPage {
   public params: any = {};
@@ -3456,8 +3527,8 @@ export class ColorsPage {
 
 
 @Component({
-  selector: 'composition-page',
-  template: `<h1>Composition</h1>
+    selector: 'composition-page',
+    template: `<h1>Composition</h1>
 <h2>A universal language</h2>
 <p>Comprehensive design principles and language helps maintain usability and a sense of harmony across a large family of products. Consistency and common elements greatly reduce the user effort requred to learn a new interface.</p>
 <h2>Mainframe</h2>
@@ -3530,7 +3601,8 @@ export class ColorsPage {
 </blockquote>
 <p class="markdown-img"><img src="assets/images/LayoutMobileCard.svg" alt="mobile cards"></p>
 </novo-grid>`,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class CompositionPage {
   public params: any = {};
@@ -3538,11 +3610,12 @@ export class CompositionPage {
 
 
 @Component({
-  selector: 'design-page',
-  template: `<h1>Design</h1>
+    selector: 'design-page',
+    template: `<h1>Design</h1>
 <p>This is a landing page</p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class DesignPage {
   public params: any = {};
@@ -3550,8 +3623,8 @@ export class DesignPage {
 
 
 @Component({
-  selector: 'iconography-page',
-  template: `<h1>Iconography</h1>
+    selector: 'iconography-page',
+    template: `<h1>Iconography</h1>
 <h2>Certified Pixel-Perfect</h2>
 <novo-grid columns="1fr 200px" gap="2rem">
   <novo-text>Icons are used to represent an action or concept through the most simplistic imagery possible. Icons give additional context to written material, allowing the user to quickly comprehend any given concept. The icons are designed on a highly specific grid to ensure maximum clarity even at a small size. Their design is friendly, human, and bold.</novo-text>
@@ -3605,7 +3678,8 @@ export class DesignPage {
   </figure-example>
 </novo-grid>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class IconographyPage {
   public params: any = {};
@@ -3613,8 +3687,8 @@ export class IconographyPage {
 
 
 @Component({
-  selector: 'spacing-page',
-  template: `<h1>Spacing</h1>
+    selector: 'spacing-page',
+    template: `<h1>Spacing</h1>
 <h2>Consistency at Scale</h2>
 <p>Novo Elements makes use of spacing variables to create consistency across all of the components in our system. This consistency contributes to a subconscious feeling of order and harmony, while also eliminating guesswork for designers and developers.</p>
 <p>We use a base-10px grid for consistent and easy to use sizing. Since units use ten pixels as the base, 1(rem) equals 10px, 2 equals 20px, .5 equals 5px (and so on).</p>
@@ -3682,7 +3756,7 @@ export class IconographyPage {
     <pre><code>.box &#123;\n  &#64;include novo-padding-medium(); // use mixin \n  margin: $spacing-xs; // or use scss variables\n  padding: $spacing-xl;\n&#125; &#125;&#125;</code></pre>
   </typedef-snippet>
 </typedef-example>
-<!-- 
+<!--
 <typedef-example>
   <typedef-content>
     <novo-flex gap="1rem">
@@ -3707,7 +3781,8 @@ export class IconographyPage {
   </typedef-snippet>
 </typedef-example> -->
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class SpacingPage {
   public params: any = {};
@@ -3715,8 +3790,8 @@ export class SpacingPage {
 
 
 @Component({
-  selector: 'typography-page',
-  template: `<h1>Typography</h1>
+    selector: 'typography-page',
+    template: `<h1>Typography</h1>
 <novo-grid columns="200px 1fr" align="start" gap="2rem">
 <p><img src="assets/images/TypographyPageIcon.svg" alt=""></p>
 <blockquote>
@@ -3886,7 +3961,8 @@ export class SpacingPage {
 <p>These are the base colors of the application.</p>
 <p><code-example example="link"></code-example></p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class TypographyPage {
   public params: any = {};
@@ -3894,14 +3970,15 @@ export class TypographyPage {
 
 
 @Component({
-  selector: 'checkbox-page',
-  template: `<h1>Checkbox <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/checkbox">(source)</a></h1>
+    selector: 'checkbox-page',
+    template: `<h1>Checkbox <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/checkbox">(source)</a></h1>
 <h5>Basic</h5>
 <p><code-example example="basic-checkbox"></code-example></p>
 <h5>List</h5>
 <p><code-example example="checkbox-list"></code-example></p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class CheckboxPage {
   public params: any = {};
@@ -3909,8 +3986,8 @@ export class CheckboxPage {
 
 
 @Component({
-  selector: 'chips-design-page',
-  template: `<h2>Usage</h2>
+    selector: 'chips-design-page',
+    template: `<h2>Usage</h2>
 <novo-grid columns="2" align="start" gap="2rem">
 <div>
 <p>Chips show the user that a view or component represents data from multiple contexts. They can present as keywords, people or selected values, whether as an form input or filter criteria.</p>
@@ -3974,7 +4051,8 @@ Additional details can be displayed in a Chip Preview PopOver, see [New Componen
 <p><strong>Implementation</strong></p>
 <p>The component should follow the <a href="https://www.w3.org/TR/wai-aria-practices/examples/combobox/aria1.1pattern/listbox-combo.html">ARIA combobox interaction</a> pattern and have a role of <code>combobox</code>.</p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class ChipsDesignPage {
   public params: any = {};
@@ -3982,8 +4060,8 @@ export class ChipsDesignPage {
 
 
 @Component({
-  selector: 'chips-develop-page',
-  template: `<h1>Technical Details</h1>
+    selector: 'chips-develop-page',
+    template: `<h1>Technical Details</h1>
 <ul>
 <li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/chips">(github)</a></li>
 <li><strong>module:</strong> <strong>part of</strong> <code>NovoChipsModule</code></li>
@@ -4012,7 +4090,8 @@ export class ChipsDesignPage {
 <h3>Properties</h3>
 <p><props-table component="NovoChipListElement"></props-table></p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class ChipsDevelopPage {
   public params: any = {};
@@ -4020,8 +4099,8 @@ export class ChipsDevelopPage {
 
 
 @Component({
-  selector: 'chips-examples-page',
-  template: `<h2>Chip Usage</h2>
+    selector: 'chips-examples-page',
+    template: `<h2>Chip Usage</h2>
 <p>The <code>chip</code> element can be used for several purposes, such as tags, badges, filters, or declare multi-inputs.</p>
 <p><code-example example="chip-usage"></code-example></p>
 <h2>Basic Examples</h2>
@@ -4049,7 +4128,8 @@ export class ChipsDevelopPage {
 <p>Setting the <code>hiddenChipsLimit</code> property via the <code>source</code> Input will limit the number of chips shown to the <code>hiddenChipsLimit</code> set. A clickable suffix label will toggle the visibility of the hidden chips.</p>
 <p><code-example example="hide-chips"></code-example></p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class ChipsExamplesPage {
   public params: any = {};
@@ -4057,15 +4137,16 @@ export class ChipsExamplesPage {
 
 
 @Component({
-  selector: 'ck-editor-page',
-  template: `<h1>CK Editor <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/addons/ckeditor">(source)</a></h1>
+    selector: 'ck-editor-page',
+    template: `<h1>CK Editor <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/addons/ckeditor">(source)</a></h1>
 <p>Basic HTML editor using CK Editor.</p>
 <h5>Basic Example</h5>
 <p><code-example example="basic-editor"></code-example></p>
 <h5>Minimal Example</h5>
 <p><code-example example="minimal-editor"></code-example></p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class CkEditorPage {
   public params: any = {};
@@ -4073,8 +4154,8 @@ export class CkEditorPage {
 
 
 @Component({
-  selector: 'color-picker-page',
-  template: `<h1>Color Pickers</h1>
+    selector: 'color-picker-page',
+    template: `<h1>Color Pickers</h1>
 <p>These allow users to easily select a color swatch. It comes in a handful of varieties based on the content of the field.</p>
 <h2>Color Picker <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/date-picker">(source)</a></h2>
 <p>The color picker is used to select a color. It appears in all date picker fields.</p>
@@ -4083,7 +4164,8 @@ export class CkEditorPage {
 <h5>Color Input Example</h5>
 <p><code-example example="color-input"></code-example></p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class ColorPickerPage {
   public params: any = {};
@@ -4091,8 +4173,8 @@ export class ColorPickerPage {
 
 
 @Component({
-  selector: 'date-picker-design-page',
-  template: `<h2>Usage</h2>
+    selector: 'date-picker-design-page',
+    template: `<h2>Usage</h2>
 <novo-grid columns="2" align="start" gap="2rem">
 <div>
 <p>Date Pickers allow users to easily select a date. It comes in a handful of varieties based on the content of the field.</p>
@@ -4149,7 +4231,8 @@ Caption text to display helpful information, warnings, or errors.</p>
 <p><strong>Implementation</strong></p>
 <p>Always include an <code>alt</code> attribute describing the information that is visually displayed in the image.</p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class DatePickerDesignPage {
   public params: any = {};
@@ -4157,8 +4240,8 @@ export class DatePickerDesignPage {
 
 
 @Component({
-  selector: 'date-picker-develop-page',
-  template: `<h1>Technical Details</h1>
+    selector: 'date-picker-develop-page',
+    template: `<h1>Technical Details</h1>
 <ul>
 <li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/date-picker">(github)</a></li>
 <li><strong>module:</strong> <code>import &#123; NovoDatePickerModule &#125; from 'novo-elements';</code></li>
@@ -4203,7 +4286,8 @@ export class DatePickerDesignPage {
 <h3>Properties</h3>
 <p><props-table component="NovoDatePickerElement"></props-table></p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class DatePickerDevelopPage {
   public params: any = {};
@@ -4211,8 +4295,8 @@ export class DatePickerDevelopPage {
 
 
 @Component({
-  selector: 'date-picker-examples-page',
-  template: `<h2>Date Picker Standalone</h2>
+    selector: 'date-picker-examples-page',
+    template: `<h2>Date Picker Standalone</h2>
 <p><code-example example="date-picker"></code-example></p>
 <h2>Date Picker Input</h2>
 <p><code-example example="date-picker-input"></code-example></p>
@@ -4225,7 +4309,8 @@ export class DatePickerDevelopPage {
 <h2>Different Locale</h2>
 <p>TBD</p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class DatePickerExamplesPage {
   public params: any = {};
@@ -4233,8 +4318,8 @@ export class DatePickerExamplesPage {
 
 
 @Component({
-  selector: 'date-time-picker-design-page',
-  template: `<h2>Usage</h2>
+    selector: 'date-time-picker-design-page',
+    template: `<h2>Usage</h2>
 <novo-grid columns="2" align="start" gap="2rem">
 <div>
 <p>Date Time Pickers allow users to easily select a time and date. It comes in a handful of varieties based on the content of the field.</p>
@@ -4291,7 +4376,8 @@ Caption text to display helpful information, warnings, or errors.</p>
 <p><strong>Implementation</strong></p>
 <p>Always include an <code>alt</code> attribute describing the information that is visually displayed in the image.</p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class DateTimePickerDesignPage {
   public params: any = {};
@@ -4299,8 +4385,8 @@ export class DateTimePickerDesignPage {
 
 
 @Component({
-  selector: 'date-time-picker-develop-page',
-  template: `<h1>Technical Details</h1>
+    selector: 'date-time-picker-develop-page',
+    template: `<h1>Technical Details</h1>
 <ul>
 <li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/date-time-picker">(github)</a></li>
 <li><strong>module:</strong> <code>import &#123; NovoDateTimePickerModule &#125; from 'novo-elements';</code></li>
@@ -4344,7 +4430,8 @@ export class DateTimePickerDesignPage {
 <h3>Properties</h3>
 <p><props-table component="NovoDatePickerElement"></props-table></p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class DateTimePickerDevelopPage {
   public params: any = {};
@@ -4352,13 +4439,14 @@ export class DateTimePickerDevelopPage {
 
 
 @Component({
-  selector: 'date-time-picker-examples-page',
-  template: `<h2>Date Time Picker</h2>
+    selector: 'date-time-picker-examples-page',
+    template: `<h2>Date Time Picker</h2>
 <p><code-example example="date-time"></code-example></p>
 <h2>Date Time Input Picker</h2>
 <p><code-example example="date-time-input"></code-example></p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class DateTimePickerExamplesPage {
   public params: any = {};
@@ -4366,8 +4454,8 @@ export class DateTimePickerExamplesPage {
 
 
 @Component({
-  selector: 'dynamic-form-page',
-  template: `<h1>Dynamic Forms <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/form">(source)</a></h1>
+    selector: 'dynamic-form-page',
+    template: `<h1>Dynamic Forms <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/form">(source)</a></h1>
 <p>Forms use inputs and labels to submit user content. But you already knew that. What you may not know is that our forms come in two styles 'Static' and 'Dynamic'.
 This is the Dynamic Form demo.</p>
 <h2>Dynamic Form</h2>
@@ -4385,7 +4473,8 @@ This is the Dynamic Form demo.</p>
 <h5>Enable/Disable All Fields in Form</h5>
 <p><code-example example="enable-disable-all-fields-in-form"></code-example></p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class DynamicFormPage {
   public params: any = {};
@@ -4393,11 +4482,12 @@ export class DynamicFormPage {
 
 
 @Component({
-  selector: 'form-controls-page',
-  template: `<h1>Form Controls</h1>
+    selector: 'form-controls-page',
+    template: `<h1>Form Controls</h1>
 <p>This is a landing page</p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class FormControlsPage {
   public params: any = {};
@@ -4405,8 +4495,8 @@ export class FormControlsPage {
 
 
 @Component({
-  selector: 'form-groups-page',
-  template: `<h1>Grouped Forms / Form Controls <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/form">(source)</a></h1>
+    selector: 'form-groups-page',
+    template: `<h1>Grouped Forms / Form Controls <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/form">(source)</a></h1>
 <p>Useful when needing to group smaller sections of forms, can be used in the larger form. Static or Dynamic too!</p>
 <h5>Horizontal</h5>
 <p><code-example example="horizontal"></code-example></p>
@@ -4419,7 +4509,8 @@ export class FormControlsPage {
 <h5>Custom Template (you control everything!)</h5>
 <p><code-example example="custom-template"></code-example></p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class FormGroupsPage {
   public params: any = {};
@@ -4427,8 +4518,8 @@ export class FormGroupsPage {
 
 
 @Component({
-  selector: 'form-page',
-  template: `<h1>Forms <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/form">(source)</a></h1>
+    selector: 'form-page',
+    template: `<h1>Forms <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/form">(source)</a></h1>
 <p>Forms use inputs and labels to submit user content. But you already knew that. What you may not know is that our forms come in two styles 'Static' and 'Dynamic'.
 This is the Static Form demo.</p>
 <h2>Static Form</h2>
@@ -4448,7 +4539,8 @@ This is the Static Form demo.</p>
 <h5>Number Range Controls</h5>
 <p><code-example example="number-range-control"></code-example></p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class FormPage {
   public params: any = {};
@@ -4456,8 +4548,8 @@ export class FormPage {
 
 
 @Component({
-  selector: 'multi-picker-page',
-  template: `<h1>MultiPicker <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/multi-picker">(source)</a></h1>
+    selector: 'multi-picker-page',
+    template: `<h1>MultiPicker <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/multi-picker">(source)</a></h1>
 <p>The multipicker element (<code>multipicker</code>) represents a control that presents a menu of options of multiple types. The options within are set by the <code>source</code> attribute. Options can be pre-selected for the user using the <code>ngModel</code> attribute. Multipicker is the multi-category version of <code>chips</code></p>
 <p>.</p>
 <h5>Basic Example</h5>
@@ -4467,7 +4559,8 @@ export class FormPage {
 <p>The multipicker can also support a parent-child relationship between the types, such as the relationship between a state with many cities or a department with users.</p>
 <p><code-example example="nested-multi-picker"></code-example></p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class MultiPickerPage {
   public params: any = {};
@@ -4475,8 +4568,8 @@ export class MultiPickerPage {
 
 
 @Component({
-  selector: 'picker-page',
-  template: `<h1>Picker <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/picker">(source)</a></h1>
+    selector: 'picker-page',
+    template: `<h1>Picker <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/picker">(source)</a></h1>
 <p>The picker element (<code>input[picker]</code>) represents a control that presents a menu of options. The options within are set by the <code>items</code> attribute. Options can be pre-pickered for the user using the <code>value</code> attribute.</p>
 <h5>Basic Examples</h5>
 <p>By clicking on the <code>input</code> element, the options list will be displayed. picker any of the options by clicking on the item in the list. The value pickered will be displayed and the options list will be removed.</p>
@@ -4506,7 +4599,8 @@ export class MultiPickerPage {
 <p>It is possible to mix regular options with options with static or dynamic nested options</p>
 <p><code-example example="mixed-picker"></code-example></p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class PickerPage {
   public params: any = {};
@@ -4514,8 +4608,8 @@ export class PickerPage {
 
 
 @Component({
-  selector: 'radio-buttons-page',
-  template: `<h1>Radio <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/radio">(source)</a></h1>
+    selector: 'radio-buttons-page',
+    template: `<h1>Radio <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/radio">(source)</a></h1>
 <p>A radio group</p>
 <h5>Basic</h5>
 <p><code-example example="basic-radio"></code-example></p>
@@ -4526,7 +4620,8 @@ export class PickerPage {
 <h5>Icon Radio</h5>
 <p><code-example example="icon-radio"></code-example></p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class RadioButtonsPage {
   public params: any = {};
@@ -4534,8 +4629,8 @@ export class RadioButtonsPage {
 
 
 @Component({
-  selector: 'select-page',
-  template: `<h1>Select <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/select">(source)</a></h1>
+    selector: 'select-page',
+    template: `<h1>Select <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/select">(source)</a></h1>
 <p>The select element (<code>novo-select</code>) represents a control that presents a menu of options. The options within are set by the <code>items</code> attribute. Options can be pre-selected for the user using the <code>value</code> attribute.</p>
 <h5>Basic Examples</h5>
 <p>By clicking on the <code>novo-select</code> element, the options list will be displayed. Select any of the options by clicking on the item in the list. The value selected will be displayed and the options list will be removed.</p>
@@ -4556,7 +4651,8 @@ export class RadioButtonsPage {
 <p>When a value is set manually on a <code>novo-select</code> that is not reflected in its options, it will be displayed as a disabled option. The value can be removed, but will not appear subsequently. This behavior can be disabled with the <code>hideLegacyOptions</code> input.</p>
 <p><code-example example="legacy-select-option"></code-example></p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class SelectPage {
   public params: any = {};
@@ -4564,14 +4660,15 @@ export class SelectPage {
 
 
 @Component({
-  selector: 'tiles-page',
-  template: `<h1>Tiles <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/tiles">(source)</a></h1>
+    selector: 'tiles-page',
+    template: `<h1>Tiles <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/tiles">(source)</a></h1>
 <p>This component is intended to behave akin to the radio button component.</p>
 <h4>Demo</h4>
 <p><code-example example="tiles-usage"></code-example></p>
 <h4>Code</h4>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class TilesPage {
   public params: any = {};
@@ -4579,8 +4676,8 @@ export class TilesPage {
 
 
 @Component({
-  selector: 'time-picker-design-page',
-  template: `<h2>Usage</h2>
+    selector: 'time-picker-design-page',
+    template: `<h2>Usage</h2>
 <novo-grid columns="2" align="start" gap="2rem">
 <div>
 <p>Time Pickers allow users to easily select a time. It comes in a handful of varieties based on the content of the field.</p>
@@ -4667,7 +4764,8 @@ Caption text to display helpful information, warnings, or errors.</p>
 <p><strong>Implementation</strong></p>
 <p>Always include an <code>alt</code> attribute describing the information that is visually displayed in the image.</p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class TimePickerDesignPage {
   public params: any = {};
@@ -4675,8 +4773,8 @@ export class TimePickerDesignPage {
 
 
 @Component({
-  selector: 'time-picker-develop-page',
-  template: `<h1>Technical Details</h1>
+    selector: 'time-picker-develop-page',
+    template: `<h1>Technical Details</h1>
 <ul>
 <li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/time-picker">(github)</a></li>
 <li><strong>module:</strong> <code>import &#123; NovoTimePickerModule &#125; from 'novo-elements';</code></li>
@@ -4720,7 +4818,8 @@ export class TimePickerDesignPage {
 <h3>Properties</h3>
 <p><props-table component="NovoTimePickerElement"></props-table></p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class TimePickerDevelopPage {
   public params: any = {};
@@ -4728,12 +4827,13 @@ export class TimePickerDevelopPage {
 
 
 @Component({
-  selector: 'time-picker-examples-page',
-  template: `<h2>Standalone Time Picker</h2>
+    selector: 'time-picker-examples-page',
+    template: `<h2>Standalone Time Picker</h2>
 <p>Time pickers come in 12 hour or 24 hour style.</p>
 <p><code-example example="time-picker"></code-example></p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class TimePickerExamplesPage {
   public params: any = {};
@@ -4741,12 +4841,13 @@ export class TimePickerExamplesPage {
 
 
 @Component({
-  selector: 'timezone-page',
-  template: `<h1>Checkbox <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/form/controls/timezone/TimezoneControl">(source)</a></h1>
+    selector: 'timezone-page',
+    template: `<h1>Checkbox <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/form/controls/timezone/TimezoneControl">(source)</a></h1>
 <h5>Basic</h5>
 <p><code-example example="timezone"></code-example></p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class TimezonePage {
   public params: any = {};
@@ -4754,8 +4855,8 @@ export class TimezonePage {
 
 
 @Component({
-  selector: 'value-page',
-  template: `<h1>Value/Details/Summary <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/value">(source)</a></h1>
+    selector: 'value-page',
+    template: `<h1>Value/Details/Summary <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/value">(source)</a></h1>
 <p>Used to render data based on its field type provided in meta. It has two themes, DEFAULT - horizontal view and MOBILE - vertical view</p>
 <h2>Mobile Theme</h2>
 <h5>Value/Details/Summary</h5>
@@ -4792,7 +4893,8 @@ export class TimezonePage {
 <p>Render multi option fields (Checkbox, radio, etc.)</p>
 <p><code-example example="multi-option-value"></code-example></p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class ValuePage {
   public params: any = {};
@@ -4800,8 +4902,8 @@ export class ValuePage {
 
 
 @Component({
-  selector: 'home-page',
-  template: `<h1>Novo Elements, Bullhorn's design system</h1>
+    selector: 'home-page',
+    template: `<h1>Novo Elements, Bullhorn's design system</h1>
 <blockquote>
 <div class="p">Version 6.0 is now available! Read about the new features and fixes <a href="#/updates/v6">here</a>.</div>
 </blockquote>
@@ -4860,7 +4962,8 @@ ng add novo-elements
 <p>Looking for the Bullhorn corporate brand guidelines?<br>
 <a href="https://brandfolder.com/bullhorn">Bullhorn Brand Folder</a></p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class HomePage {
   public params: any = {};
@@ -4868,15 +4971,16 @@ export class HomePage {
 
 
 @Component({
-  selector: 'card-description-page',
-  template: `<novo-grid columns="2" align="start" gap="2rem">
+    selector: 'card-description-page',
+    template: `<novo-grid columns="2" align="start" gap="2rem">
 <div>
 <p>A card is a container that organizes a related grouping of information. Cards can sometimes be configured and reordered on a page allowing for optimal user customization. A card is content container for the presentation information with a shared singular context, usually related in some way to the main content.</p>
 </div>
 <img src="https://via.placeholder.com/350x250"/>
 <div>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class CardDescriptionPage {
   public params: any = {};
@@ -4884,8 +4988,8 @@ export class CardDescriptionPage {
 
 
 @Component({
-  selector: 'card-design-page',
-  template: `<h2>Usage Guidelines</h2>
+    selector: 'card-design-page',
+    template: `<h2>Usage Guidelines</h2>
 <novo-grid columns="2" align="start" gap="2rem">
 <div>
 <h3>Use When</h3>
@@ -4955,7 +5059,8 @@ Any theme color can be applied to tabs with the <code>color</code> attribute to 
 <li>If using an illustrative image for the supplement content, it’s generally safe to use an empty or null alternative text for example alt=&quot;&quot;</li>
 </ul>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class CardDesignPage {
   public params: any = {};
@@ -4963,8 +5068,8 @@ export class CardDesignPage {
 
 
 @Component({
-  selector: 'card-develop-page',
-  template: `<h1>Technical Details</h1>
+    selector: 'card-develop-page',
+    template: `<h1>Technical Details</h1>
 <ul>
 <li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/card">(github)</a></li>
 <li><strong>module:</strong> <code>import &#123; NovoCardModule &#125; form 'novo-elements';</code></li>
@@ -5060,7 +5165,8 @@ export class CardDesignPage {
 <h2>NovoCardFooter <code>novo-card-footer</code></h2>
 <p>Container row for the card footer</p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class CardDevelopPage {
   public params: any = {};
@@ -5068,15 +5174,16 @@ export class CardDevelopPage {
 
 
 @Component({
-  selector: 'card-examples-page',
-  template: `<h2>Basic Card (using attributes)</h2>
+    selector: 'card-examples-page',
+    template: `<h2>Basic Card (using attributes)</h2>
 <p><code-example example="basic-card"></code-example></p>
 <h2>Card (using config object and card-actions)</h2>
 <p><code-example example="card-config"></code-example></p>
 <h2>Card with Image</h2>
 <p><code-example example="card-with-image"></code-example></p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class CardExamplesPage {
   public params: any = {};
@@ -5084,8 +5191,8 @@ export class CardExamplesPage {
 
 
 @Component({
-  selector: 'expansion-page',
-  template: `<h1>Expandable Containers<a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/expansion">(source)</a></h1>
+    selector: 'expansion-page',
+    template: `<h1>Expandable Containers<a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/expansion">(source)</a></h1>
 <p>Expansion Panel provides an expandable details-summary view. Each expansion-panel must include a header and may optionally include an action bar.</p>
 <p>By default, the expansion-panel header includes a toggle icon at the end of the header to indicate the expansion state. This icon can be hidden via the hideToggle property.</p>
 <h2>Basic Usage</h2>
@@ -5101,7 +5208,8 @@ export class CardExamplesPage {
 <h5>Patterns</h5>
 <p>Check out the <a routerLink="/patterns">Activity Section</a> pattern</p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class ExpansionPage {
   public params: any = {};
@@ -5109,8 +5217,8 @@ export class ExpansionPage {
 
 
 @Component({
-  selector: 'header-page',
-  template: `<h1>Headers <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/header">(source)</a></h1>
+    selector: 'header-page',
+    template: `<h1>Headers <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/header">(source)</a></h1>
 <p>Headers are used in Mainframe Record pages and some modals.</p>
 <h2>Types</h2>
 <h5>Record Header</h5>
@@ -5124,7 +5232,8 @@ export class ExpansionPage {
 <h5>With Search</h5>
 <p><code-example example="header-searchbar"></code-example></p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class HeaderPage {
   public params: any = {};
@@ -5132,11 +5241,12 @@ export class HeaderPage {
 
 
 @Component({
-  selector: 'layouts-page',
-  template: `<h1>Layouts</h1>
+    selector: 'layouts-page',
+    template: `<h1>Layouts</h1>
 <p>This is a landing page</p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class LayoutsPage {
   public params: any = {};
@@ -5144,8 +5254,8 @@ export class LayoutsPage {
 
 
 @Component({
-  selector: 'list-page',
-  template: `<h1>List / Item <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/list">(source)</a></h1>
+    selector: 'list-page',
+    template: `<h1>List / Item <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/list">(source)</a></h1>
 <p>Lists are used to display rows of information like entities or entity data and appear on cards, our mobile app, and several other places across the Bullhorn platform.</p>
 <h2>Basic Usage</h2>
 <h5>Standard List</h5>
@@ -5155,7 +5265,8 @@ export class LayoutsPage {
 <p>This is an example of a themed list.</p>
 <p><code-example example="themed-list"></code-example></p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class ListPage {
   public params: any = {};
@@ -5163,14 +5274,15 @@ export class ListPage {
 
 
 @Component({
-  selector: 'sidenav-page',
-  template: `<h1>SideNav <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/layout">(source)</a></h1>
+    selector: 'sidenav-page',
+    template: `<h1>SideNav <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/layout">(source)</a></h1>
 <p>Components and elements for cards to make sure the loading/empty/layout views are all consistent.</p>
 <h5>Examples</h5>
 <h2>Basic SideNav (using attributes)</h2>
 <p><code-example example="basic-sidenav"></code-example></p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class SidenavPage {
   public params: any = {};
@@ -5178,8 +5290,8 @@ export class SidenavPage {
 
 
 @Component({
-  selector: 'stepper-page',
-  template: `<h1>Steppers <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/stepper">(source)</a></h1>
+    selector: 'stepper-page',
+    template: `<h1>Steppers <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/stepper">(source)</a></h1>
 <p>Stepper component provides a wizard-like workflow by dividing content into logical steps.</p>
 <p>Material stepper builds on the foundation of the CDK stepper that is responsible for the logic that drives a stepped workflow. Material stepper extends the CDK stepper and has Material Design styling.</p>
 <h2>Stepper variants</h2>
@@ -5195,7 +5307,8 @@ export class SidenavPage {
 <p>This is an alternative stepper great for many other reasons.</p>
 <p><code-example example="stepper-vertical"></code-example></p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class StepperPage {
   public params: any = {};
@@ -5203,8 +5316,8 @@ export class StepperPage {
 
 
 @Component({
-  selector: 'tabs-design-page',
-  template: `<h2>Usage</h2>
+    selector: 'tabs-design-page',
+    template: `<h2>Usage</h2>
 <novo-grid columns="2" align="start" gap="2rem">
 <div>
 <p>Tabs make it easy to explore and switch between different views or functional aspects of an app or to browse categorized data sets. Tabs are used to section information over multiple pages within the same context. Only a single tab can be open at a time, allowing the user to focus on the information that the tab contains.</p>
@@ -5331,7 +5444,8 @@ Any theme color can be applied to tabs with the <code>color</code> attribute to 
 <li>If used for page navigation then novo-tabs should include the aria <code>nav</code> role</li>
 </ul>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class TabsDesignPage {
   public params: any = {};
@@ -5339,8 +5453,8 @@ export class TabsDesignPage {
 
 
 @Component({
-  selector: 'tabs-develop-page',
-  template: `<h1>Technical Details</h1>
+    selector: 'tabs-develop-page',
+    template: `<h1>Technical Details</h1>
 <ul>
 <li><strong>source:</strong> <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/tabs">(github)</a></li>
 <li><strong>module:</strong> <code>import &#123; NovoTabModule &#125; form 'novo-elements/modal';</code></li>
@@ -5482,7 +5596,8 @@ export class TabsDesignPage {
 <h2>NovoNavContentElement <code>novo-nav-content</code></h2>
 <p>Used to incapsulate the navigation content. This wrapper will ensure on the active content is displayed.</p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class TabsDevelopPage {
   public params: any = {};
@@ -5490,8 +5605,8 @@ export class TabsDevelopPage {
 
 
 @Component({
-  selector: 'tabs-examples-page',
-  template: `<h2>Themes</h2>
+    selector: 'tabs-examples-page',
+    template: `<h2>Themes</h2>
 <h3>Color</h3>
 <p>Colored background tab navigation gets the theme <code>theme=&quot;color&quot;</code></p>
 <p><code-example example="tabs-color"></code-example></p>
@@ -5512,7 +5627,8 @@ export class TabsDevelopPage {
 <p>Follows the same color/white theme as above, but doesn't use the &quot;novo-tabs&quot; tag and you have to add the classes and html accordingly. The header will now control and route your application and put the content in the &quot;router-outlet&quot; and look/feel like our tabs component.</p>
 <p><code-example example="tabs-router"></code-example></p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class TabsExamplesPage {
   public params: any = {};
@@ -5520,8 +5636,8 @@ export class TabsExamplesPage {
 
 
 @Component({
-  selector: 'patterns-native-forms-page',
-  template: `<h1>Native Form Styles</h1>
+    selector: 'patterns-native-forms-page',
+    template: `<h1>Native Form Styles</h1>
 <form action="/form/submit" method="post">
   <fieldset>
     <legend>Personal information</legend>
@@ -5590,7 +5706,8 @@ export class TabsExamplesPage {
   </fieldset>
 </form>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class PatternsNativeFormsPage {
   public params: any = {};
@@ -5598,8 +5715,8 @@ export class PatternsNativeFormsPage {
 
 
 @Component({
-  selector: 'patterns-test-page',
-  template: `<h2 id="demo">Element demos</h2>
+    selector: 'patterns-test-page',
+    template: `<h2 id="demo">Element demos</h2>
 <p>This is supposed to be a demo page so we need more elements!</p>
 <h3 id="form-elements">Form elements</h3>
 <form>
@@ -5741,7 +5858,8 @@ export class PatternsNativeFormsPage {
   <a href="#">Back to top ⬆</a>
 </footer>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class PatternsTestPage {
   public params: any = {};
@@ -5749,8 +5867,8 @@ export class PatternsTestPage {
 
 
 @Component({
-  selector: 'patterns-page',
-  template: `<h1>Design Patterns</h1>
+    selector: 'patterns-page',
+    template: `<h1>Design Patterns</h1>
 <p>The following are examples of know composition patterns to create a common user experience. The component library is design to be used in these patterns.</p>
 <h2>Activity Sections</h2>
 <p>Displaying a series of lists in expandable sections, like in the activity tab.</p>
@@ -5765,7 +5883,8 @@ export class PatternsTestPage {
 <p>Displaying a form inside a cards, used for email &amp; sms messages</p>
 <p><code-example example="card-form"></code-example></p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class PatternsPage {
   public params: any = {};
@@ -5773,13 +5892,14 @@ export class PatternsPage {
 
 
 @Component({
-  selector: 'templates-page',
-  template: `<h2>Bullhorn Application Templates</h2>
+    selector: 'templates-page',
+    template: `<h2>Bullhorn Application Templates</h2>
 <p>Bullhorn provides customization of the user experience with custom tabs, custom cards, custom actions and more.</p>
 <p>The <a href="https://github.com/bullhorn/extension-samples">Bullhorn Extension Samples</a> repo
 provides several examples for getting started building custom apps using Novo Elements.</p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class TemplatesPage {
   public params: any = {};
@@ -5787,8 +5907,8 @@ export class TemplatesPage {
 
 
 @Component({
-  selector: 'v10-page',
-  template: `<h1>🎉 April 2024 (version 10)</h1>
+    selector: 'v10-page',
+    template: `<h1>🎉 April 2024 (version 10)</h1>
 <p><strong>Announcement</strong>: Novo Elements is now on Angular 17!</p>
 <p>This brings Novo Elements up to the latest versions of both Angular and Typescript.<br>
 Some key highlights include:</p>
@@ -5828,7 +5948,8 @@ Some key highlights include:</p>
 <li>Fixes to an error in Control affecting maxlength fields <a href="https://github.com/bullhorn/novo-elements/pull/1518">#1518</a></li>
 </ul>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class v10Page {
   public params: any = {};
@@ -5836,14 +5957,14 @@ export class v10Page {
 
 
 @Component({
-  selector: 'v6-page',
-  template: `<h1>🚀 February 2022 (version 6 - Golden)</h1>
+    selector: 'v6-page',
+    template: `<h1>🚀 February 2022 (version 6 - Golden)</h1>
 <p><strong>Release v6.0.0</strong>: This release contains several component updates and additional new components. Initial refactoring of component architecture to support future efforts to improve the design systems consistency along with improvements to the developer experience.</p>
 <p>Note: This update is a major release which includes changes that require updates to your code. When updating to Novo Elements V6 from prior versions, the following commands are required:</p>
 <p>First follow the steps to update your angular app to <a href="https://update.angular.io/?v=9.0-10.0">Version 10</a></p>
 <pre><code><span class="hljs-attribute">npm</span> install --save timezone-support&#64;<span class="hljs-number">2</span> novo-design-tokens&#64;<span class="hljs-number">0</span> angular-imask&#64;<span class="hljs-number">6</span> imask&#64;<span class="hljs-number">6</span>
 <span class="hljs-attribute">npm</span> install --save novo-elements&#64;<span class="hljs-number">6</span>
-<span class="hljs-attribute">ng</span> update novo-elements --migrate-only --from=<span class="hljs-number">0</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span> --to=<span class="hljs-number">6</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span> --force --<span class="hljs-literal">allow</span>-dirty  
+<span class="hljs-attribute">ng</span> update novo-elements --migrate-only --from=<span class="hljs-number">0</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span> --to=<span class="hljs-number">6</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span> --force --<span class="hljs-literal">allow</span>-dirty
 </code></pre>
 <p>For any issues that are not corrected with the above command, please ask questions in the <a href="https://github.com/bullhorn/novo-elements/discussions/categories/q-a">Q&amp;A Page</a> in github.</p>
 <p>Welcome to the February 2022 release of Novo Elements. There are many updates in this version that we hope you will like, some of the key highlights include:</p>
@@ -6200,7 +6321,8 @@ export class v10Page {
 <h2 id="thanks">Thank you <a href="https://bullhorn.github.io/novo-elements/docs/#/updates/v6#thanks">#</a></h2>
 <p>Last but certainly not least, a big <em>Thank You</em> to the contributors of Novo Elements throughout the years. For this release a special shout out to our developers Dan Voegelin and Charles Barnes, the automation team for helping us test the changes: Jon Eman, Tiffany Bertolozzi, Tony Phu and Ashley Schroeder, and our UX Team include but not limited to: Jon Braun, Madeliene Valcour, Katie Todd, Daniel Long, Angela Wang and Gloria Nam.</p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class v6Page {
   public params: any = {};
@@ -6208,8 +6330,8 @@ export class v6Page {
 
 
 @Component({
-  selector: 'v7-page',
-  template: `<h1>📢  May 2022 (version 7)</h1>
+    selector: 'v7-page',
+    template: `<h1>📢  May 2022 (version 7)</h1>
 <p><strong>Announcement</strong>: Novo Elements is being updated to Angular 13</p>
 <p>Bullhorn is continually seeking to update and innovate our products, and leverage the latest features in the frameworks we use. In support of that mission, we are updating our Novo UI and its supporting novo-elements library to Angular 13.  This update  allows us to continue offering a streamlined and consistent experience across Bullhorn’s complete product portfolio.  This update includes both an Angular upgrade, as well as supporting the latest Typescript updates.  You can find more details in the Technical Release Notes section below.</p>
 <h2>Release Timeline</h2>
@@ -6221,7 +6343,7 @@ npm install novo-elements&#64;7.2.0-next.0
 <h2>Upgrading to V7</h2>
 <p>First follow the steps to update your angular app to <a href="https://update.angular.io/?v=10.0-13.0">Version 13</a></p>
 <pre><code><span class="hljs-attribute">npm</span> install --save novo-elements&#64;<span class="hljs-number">7</span>.x.x
-<span class="hljs-attribute">ng</span> update novo-elements --migrate-only --from=<span class="hljs-number">0</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span> --to=<span class="hljs-number">7</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span> --force --<span class="hljs-literal">allow</span>-dirty  
+<span class="hljs-attribute">ng</span> update novo-elements --migrate-only --from=<span class="hljs-number">0</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span> --to=<span class="hljs-number">7</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span> --force --<span class="hljs-literal">allow</span>-dirty
 </code></pre>
 <h2 id="notable-changes">Notable changes <a href="https://bullhorn.github.io/novo-elements/docs/#/updates/v7-announce#notable-changes">#</a></h2>
 <ul>
@@ -6258,7 +6380,7 @@ npm install novo-elements&#64;7.2.0-next.0
 <div class="p">Note: First follow the steps to update your angular app to <a href="https://update.angular.io/?v=10.0-13.0">Version 13</a> if you haven't already.</div>
 </blockquote>
 <pre><code><span class="hljs-attribute">npm</span> install --save novo-elements&#64;<span class="hljs-number">7</span>.x.x
-<span class="hljs-attribute">ng</span> update novo-elements --migrate-only --from=<span class="hljs-number">0</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span> --to=<span class="hljs-number">7</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span> --force --<span class="hljs-literal">allow</span>-dirty  
+<span class="hljs-attribute">ng</span> update novo-elements --migrate-only --from=<span class="hljs-number">0</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span> --to=<span class="hljs-number">7</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span> --force --<span class="hljs-literal">allow</span>-dirty
 </code></pre>
 <h1>📢  August 2022 (version 7.3.x)</h1>
 <p><strong>Announcement</strong>: New features and improvements!</p>
@@ -6325,7 +6447,8 @@ npm install novo-elements&#64;7.3.x
 <p><img src="https://user-images.githubusercontent.com/5430919/181575015-bb30bcb2-c8a1-4ae0-b99c-1250d5784fd6.gif" alt="field-interaction-description"></p>
 <p><a href="https://bullhorn.github.io/novo-elements/docs/#/updates/v7dot3#html-hints">Check out the demo!</a></p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class v7Page {
   public params: any = {};
@@ -6333,8 +6456,8 @@ export class v7Page {
 
 
 @Component({
-  selector: 'v8-page',
-  template: `<h1>📢  July 2023 (version 8)</h1>
+    selector: 'v8-page',
+    template: `<h1>📢  July 2023 (version 8)</h1>
 <p><strong>Release v8.0.0</strong>: Along with a number of bug fixes, styling improvements, and feature additions, this v8 release includes new entry points for each component, as well as high level entry points for our elements, pipes, services, utils, and addons.</p>
 <p><strong>What this means for you</strong>: If you use a number of novo-elements components and features then you can continue importing the root novo-elements module as normal with no changes to your application. If however, you are only using one or a handful of novo-elements features, you now have the option to import them individually, trimming all of the unused novo-elements code from your builds, reducing your app's bundle size and build time, and improving performance.</p>
 <p><strong>How to use these new entry points</strong>: In your module file(s), instead of importing the root novo-elements module like so:</p>
@@ -6410,7 +6533,8 @@ yourFunction(dateLikeProperty: DateLike): string &#123;
 <li>Dragula directive and service have been deprecated</li>
 </ul>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class v8Page {
   public params: any = {};
@@ -6418,8 +6542,8 @@ export class v8Page {
 
 
 @Component({
-  selector: 'v9-page',
-  template: `<h1>📢  December 2023 (version 9)</h1>
+    selector: 'v9-page',
+    template: `<h1>📢  December 2023 (version 9)</h1>
 <h1>Continuing CommonJS library removal</h1>
 <p>The previous release of novo-elements, version 8, started to deprecate some modules that relied on CommonJS libraries. In version 9, we are introducing some new options to replace the tools that we've removed.</p>
 <h2>NovoDragDrop</h2>
@@ -6450,7 +6574,8 @@ export class v8Page {
 <span class="hljs-attribute">npm</span> uninstall --save text-mask-addons angular2-text-mask
 </code></pre>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class v9Page {
   public params: any = {};
@@ -6458,14 +6583,15 @@ export class v9Page {
 
 
 @Component({
-  selector: 'ace-editor-page',
-  template: `<h1>Ace Editor <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/addons/ace-editor">(source)</a></h1>
+    selector: 'ace-editor-page',
+    template: `<h1>Ace Editor <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/addons/ace-editor">(source)</a></h1>
 <p>🛑 <strong>This add-on has been deprecated. Please use the replacement <a href="http://bullhorn.github.io/novo-elements/docs/#/utils/code%20editor">Code Editor</a> add-on instead.</strong></p>
 <p>Basic code editor using <a href="https://ace.c9.io/">Ace Editor</a>.</p>
 <h5>Basic Example</h5>
 <p><code-example example="basic-ace"></code-example></p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class AceEditorPage {
   public params: any = {};
@@ -6473,13 +6599,14 @@ export class AceEditorPage {
 
 
 @Component({
-  selector: 'code-editor-page',
-  template: `<h1>Code Editor <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/addons/code-editor">(source)</a></h1>
+    selector: 'code-editor-page',
+    template: `<h1>Code Editor <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/addons/code-editor">(source)</a></h1>
 <p>Basic code editor using <a href="https://codemirror.net/5/">CodeMirror</a> Editor.</p>
 <h5>Basic Example</h5>
 <p><code-example example="basic-code"></code-example></p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class CodeEditorPage {
   public params: any = {};
@@ -6487,14 +6614,15 @@ export class CodeEditorPage {
 
 
 @Component({
-  selector: 'drag-drop-page',
-  template: `<h1>Drag and Drop <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/drag-drop">(source)</a></h1>
+    selector: 'drag-drop-page',
+    template: `<h1>Drag and Drop <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/drag-drop">(source)</a></h1>
 <p>A draggable container, using <code>[novoDragDrop]</code>, allows the user to click and drag controls within that container to rearrange them. There is no hard requirement on what types of controls are placed inside, but <a href="https://bullhorn.github.io/novo-elements/docs/#/layouts/card/design">cards</a> are recommended.</p>
 <p>This utility was built to replace Dragula, which was deprecated in Novo Elements in V8. Novo Elements allows for the use of other drag-and-drop libraries such as <a href="https://material.angular.io/cdk/drag-drop/overview">cdkDragDrop</a> and <a href="https://sortablejs.github.io/ngx-sortablejs/sortable-array">Sortable.js</a>, but several of them exhibit problems when rearranging items in a two-dimensional grid. This implementation uses simple HTML behavior and events for reordering to maximize compatibility. Users may consider using another drag and drop library if they require support dragging items between multiple containers, or prefer more detailed animation behaviors.</p>
 <h5>Basic Example</h5>
 <p><code-example example="drag-drop"></code-example></p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class DragDropPage {
   public params: any = {};
@@ -6502,8 +6630,8 @@ export class DragDropPage {
 
 
 @Component({
-  selector: 'field-interactions-page',
-  template: `<h1>Field Interactions</h1>
+    selector: 'field-interactions-page',
+    template: `<h1>Field Interactions</h1>
 <p>Field Interactions is a simple API that allows you to modify NovoForms based on field changes.</p>
 <p>The Field Interaction API gives you a simple to use API object when writing your field interaction functions.</p>
 <p>Look below for samples of what you can do with this API...</p>
@@ -6585,7 +6713,8 @@ export class DragDropPage {
 <p>Field Interactions can navigate nested forms to interact with parent and child forms. This example uses the Form Group component which contains an array of nested forms that are kept in sync by field interactions.</p>
 <p><code-example example="fi-nested"></code-example></p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class FieldInteractionsPage {
   public params: any = {};
@@ -6593,14 +6722,15 @@ export class FieldInteractionsPage {
 
 
 @Component({
-  selector: 'pipes-page',
-  template: `<h1>Pipes</h1>
+    selector: 'pipes-page',
+    template: `<h1>Pipes</h1>
 <p>Utility and helpful pipes.</p>
 <h5>Pluralize <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/pipes/plural">(source)</a></h5>
 <p>Makes works plural or vice-versa</p>
 <p><code-example example="pluralize"></code-example></p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class PipesPage {
   public params: any = {};
@@ -6608,8 +6738,8 @@ export class PipesPage {
 
 
 @Component({
-  selector: 'quick-note-page',
-  template: `<h1>Quick Note <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/quick-note">(source)</a></h1>
+    selector: 'quick-note-page',
+    template: `<h1>Quick Note <a href="https://github.com/bullhorn/novo-elements/blob/master/projects/novo-elements/src/elements/quick-note">(source)</a></h1>
 <h5>Basic Examples</h5>
 <p><code-example example="basic-quick-note"></code-example></p>
 <h5>Custom Triggers</h5>
@@ -6617,7 +6747,8 @@ export class PipesPage {
 <h5>Custom Results Template</h5>
 <p><code-example example="custom-quick-note-results"></code-example></p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class QuickNotePage {
   public params: any = {};
@@ -6625,14 +6756,15 @@ export class QuickNotePage {
 
 
 @Component({
-  selector: 'security-page',
-  template: `<h1>Security</h1>
+    selector: 'security-page',
+    template: `<h1>Security</h1>
 <p>The security component for this library a simple wrapper to implement ngIf functionality with a Security service.</p>
 <h4>Configuration</h4>
 <p>blah blah blah</p>
 <p><code-example example="security"></code-example></p>
 `,
-  host: { class: 'markdown-page' }
+    host: { class: 'markdown-page' },
+    standalone: false
 })
 export class SecurityPage {
   public params: any = {};

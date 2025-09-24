@@ -2,28 +2,31 @@ import { Component, ElementRef, HostBinding, Input } from '@angular/core';
 import { BooleanInput } from 'novo-elements/utils';
 
 @Component({
-  selector: 'header-spacer',
-  template: `<ng-content></ng-content>`,
-  styleUrls: ['./HeaderSpacer.scss'],
+    selector: 'header-spacer',
+    template: `<ng-content></ng-content>`,
+    styleUrls: ['./HeaderSpacer.scss'],
+    standalone: false
 })
 export class NovoHeaderSpacer {}
 
 @Component({
-  selector: 'utils',
-  template: `<ng-content></ng-content>`,
+    selector: 'utils',
+    template: `<ng-content></ng-content>`,
+    standalone: false
 })
 export class NovoUtilsComponent {}
 
 @Component({
-  selector: 'util-action, novo-action',
-  template: `
+    selector: 'util-action, novo-action',
+    template: `
     <novo-button theme="icon" [icon]="icon" [size]="size" [attr.inverse]="inverse" [disabled]="disabled">
       <ng-content></ng-content>
     </novo-button>
   `,
-  host: {
-    class: 'novo-action',
-  },
+    host: {
+        class: 'novo-action',
+    },
+    standalone: false
 })
 export class NovoUtilActionComponent {
   @Input()
@@ -37,8 +40,8 @@ export class NovoUtilActionComponent {
 }
 
 @Component({
-  selector: 'novo-header,header[theme],header[accent]',
-  template: `
+    selector: 'novo-header,header[theme],header[accent]',
+    template: `
     <section>
       <div class="header-title">
         <ng-content select="[prefix]"></ng-content>
@@ -66,7 +69,8 @@ export class NovoUtilActionComponent {
     </section>
     <ng-content></ng-content>
   `,
-  styleUrls: ['./Header.scss'],
+    styleUrls: ['./Header.scss'],
+    standalone: false
 })
 export class NovoHeaderComponent {
   @HostBinding('attr.role')

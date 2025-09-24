@@ -11,8 +11,9 @@ export function interpolateCell<T>(value: any, col: IDataTableColumn<T>): string
 }
 
 @Pipe({
-  name: 'dataTableInterpolate',
-  pure: true,
+    name: 'dataTableInterpolate',
+    pure: true,
+    standalone: false
 })
 export class DataTableInterpolatePipe<T> implements PipeTransform {
   transform(value: any, column: IDataTableColumn<T>): string {
@@ -24,8 +25,9 @@ export class DataTableInterpolatePipe<T> implements PipeTransform {
 }
 
 @Pipe({
-  name: 'dataTableDateRenderer',
-  pure: true,
+    name: 'dataTableDateRenderer',
+    pure: true,
+    standalone: false
 })
 export class DateTableDateRendererPipe<T> implements PipeTransform {
   constructor(private labels: NovoLabelService) {}
@@ -38,8 +40,9 @@ export class DateTableDateRendererPipe<T> implements PipeTransform {
 }
 
 @Pipe({
-  name: 'dataTableDateTimeRenderer',
-  pure: true,
+    name: 'dataTableDateTimeRenderer',
+    pure: true,
+    standalone: false
 })
 export class DateTableDateTimeRendererPipe<T> implements PipeTransform {
   constructor(private labels: NovoLabelService) {}
@@ -52,8 +55,9 @@ export class DateTableDateTimeRendererPipe<T> implements PipeTransform {
 }
 
 @Pipe({
-  name: 'dataTableTimeRenderer',
-  pure: true,
+    name: 'dataTableTimeRenderer',
+    pure: true,
+    standalone: false
 })
 export class DateTableTimeRendererPipe<T> implements PipeTransform {
   constructor(private labels: NovoLabelService) {}
@@ -66,8 +70,9 @@ export class DateTableTimeRendererPipe<T> implements PipeTransform {
 }
 
 @Pipe({
-  name: 'dataTableNumberRenderer',
-  pure: true,
+    name: 'dataTableNumberRenderer',
+    pure: true,
+    standalone: false
 })
 export class DateTableNumberRendererPipe<T> implements PipeTransform {
   constructor(private labels: NovoLabelService) {}
@@ -84,8 +89,9 @@ export class DateTableNumberRendererPipe<T> implements PipeTransform {
 }
 
 @Pipe({
-  name: 'dataTableBigDecimalRenderer',
-  pure: true,
+    name: 'dataTableBigDecimalRenderer',
+    pure: true,
+    standalone: false
 })
 export class DataTableBigDecimalRendererPipe<T> implements PipeTransform {
   constructor(private labels: NovoLabelService) {}
@@ -99,8 +105,9 @@ export class DataTableBigDecimalRendererPipe<T> implements PipeTransform {
 }
 
 @Pipe({
-  name: 'dataTableCurrencyRenderer',
-  pure: true,
+    name: 'dataTableCurrencyRenderer',
+    pure: true,
+    standalone: false
 })
 export class DateTableCurrencyRendererPipe<T> implements PipeTransform {
   constructor(private labels: NovoLabelService) {}

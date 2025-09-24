@@ -29,27 +29,28 @@ import { NovoSidenavMode, NovoSidenavToggleResult, NOVO_LAYOUT_CONTAINER } from 
 import { novoSidenavAnimations } from './sidenav.animations';
 
 @Component({
-  selector: 'novo-sidenav',
-  exportAs: 'novoSidenav',
-  templateUrl: './sidenav.component.html',
-  styleUrls: ['./sidenav.component.scss'],
-  animations: [novoSidenavAnimations.transformDrawer],
-  host: {
-    class: 'novo-sidenav',
-    tabIndex: '-1',
-    // must prevent the browser from aligning text based on value
-    '[attr.align]': 'null',
-    '[class.novo-sidenav-end]': 'position === "end"',
-    '[class.novo-sidenav-over]': 'mode === "over"',
-    '[class.novo-sidenav-push]': 'mode === "push"',
-    '[class.novo-sidenav-side]': 'mode === "side"',
-    '[class.novo-sidenav-opened]': 'opened',
-    '[class.novo-sidenav-fixed]': 'fixedInViewport',
-    '[style.top.px]': 'fixedInViewport ? fixedTopGap : null',
-    '[style.bottom.px]': 'fixedInViewport ? fixedBottomGap : null',
-  },
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None,
+    selector: 'novo-sidenav',
+    exportAs: 'novoSidenav',
+    templateUrl: './sidenav.component.html',
+    styleUrls: ['./sidenav.component.scss'],
+    animations: [novoSidenavAnimations.transformDrawer],
+    host: {
+        class: 'novo-sidenav',
+        tabIndex: '-1',
+        // must prevent the browser from aligning text based on value
+        '[attr.align]': 'null',
+        '[class.novo-sidenav-end]': 'position === "end"',
+        '[class.novo-sidenav-over]': 'mode === "over"',
+        '[class.novo-sidenav-push]': 'mode === "push"',
+        '[class.novo-sidenav-side]': 'mode === "side"',
+        '[class.novo-sidenav-opened]': 'opened',
+        '[class.novo-sidenav-fixed]': 'fixedInViewport',
+        '[style.top.px]': 'fixedInViewport ? fixedTopGap : null',
+        '[style.bottom.px]': 'fixedInViewport ? fixedBottomGap : null',
+    },
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
+    standalone: false
 })
 export class NovoSidenavComponent implements AfterContentInit, AfterContentChecked, OnDestroy {
   /** Whether the sidenav is fixed in the viewport. */

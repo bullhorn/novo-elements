@@ -28,10 +28,11 @@ try {
  *  <novo-editor [(ngModel)]="data" [config]="{...}" debounce="500"></novo-editor>
  */
 @Component({
-  selector: 'novo-editor',
-  providers: [CKEDITOR_CONTROL_VALUE_ACCESSOR],
-  template: '<textarea [name]="name" [id]="name" #host></textarea>',
-  styleUrls: ['./CKEditor.scss'],
+    selector: 'novo-editor',
+    providers: [CKEDITOR_CONTROL_VALUE_ACCESSOR],
+    template: '<textarea [name]="name" [id]="name" #host></textarea>',
+    styleUrls: ['./CKEditor.scss'],
+    standalone: false
 })
 export class NovoCKEditorElement implements OnDestroy, AfterViewInit, ControlValueAccessor {
   @Input()

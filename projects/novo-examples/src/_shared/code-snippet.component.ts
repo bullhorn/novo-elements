@@ -5,8 +5,8 @@ import { EXAMPLE_COMPONENTS } from '../examples.module';
 import { HighlightJS } from './highlight.service';
 
 @Component({
-  selector: 'code-snippet',
-  template: `
+    selector: 'code-snippet',
+    template: `
     <novo-nav theme="white" [outlet]="snippets">
       <novo-tab><span>HTML</span></novo-tab>
       <novo-tab><span>TS</span></novo-tab>
@@ -24,7 +24,7 @@ import { HighlightJS } from './highlight.service';
       </novo-nav-content>
     </novo-nav-outlet>
   `,
-  // changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class CodeSnippetComponent implements OnInit {
   @Input()

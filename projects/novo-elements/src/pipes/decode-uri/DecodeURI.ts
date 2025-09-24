@@ -3,7 +3,10 @@ import { Injectable, Pipe, PipeTransform } from '@angular/core';
 // App
 import { Helpers } from 'novo-elements/utils';
 
-@Pipe({ name: 'decodeURI' })
+@Pipe({
+    name: 'decodeURI',
+    standalone: false
+})
 @Injectable()
 export class DecodeURIPipe implements PipeTransform {
   transform(encodedString: string): string {

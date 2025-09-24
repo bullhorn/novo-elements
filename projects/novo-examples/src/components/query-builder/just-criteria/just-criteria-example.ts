@@ -16,8 +16,8 @@ import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
 import { MockCandidateMeta, MockNoteMeta } from './MockMeta';
 
 @Component({
-  selector: 'custom-picker-condition-def',
-  template: `
+    selector: 'custom-picker-condition-def',
+    template: `
     <ng-container novoConditionFieldDef>
       <novo-field *novoConditionOperatorsDef="let formGroup" [formGroup]="formGroup">
         <novo-select placeholder="Operator..." formControlName="operator">
@@ -38,8 +38,9 @@ import { MockCandidateMeta, MockNoteMeta } from './MockMeta';
       </novo-field>
     </ng-container>
   `,
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.Default,
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.Default,
+    standalone: false
 })
 export class CustomPickerConditionDef extends AbstractConditionFieldDef implements OnInit {
   defaultOperator = Operator.includeAny;
@@ -76,9 +77,10 @@ export class CustomPickerConditionDef extends AbstractConditionFieldDef implemen
  * @title Just Criteria Example
  */
 @Component({
-  selector: 'just-criteria-example',
-  templateUrl: 'just-criteria-example.html',
-  styleUrls: ['just-criteria-example.css'],
+    selector: 'just-criteria-example',
+    templateUrl: 'just-criteria-example.html',
+    styleUrls: ['just-criteria-example.css'],
+    standalone: false
 })
 export class JustCriteriaExample implements OnInit {
   criteriaBuilder = viewChild(CriteriaBuilderComponent);

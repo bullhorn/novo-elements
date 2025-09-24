@@ -4,11 +4,12 @@ import { DataTableState } from '../state/data-table-state.service';
 import { sortAscAnim, sortDescAnim, sortNoneAnim } from './sort-button.animations';
 import { SortDirection } from './sort-direction';
 @Component({
-  selector: 'novo-sort-button',
-  styleUrls: ['./sort-button.component.scss'],
-  templateUrl: './sort-button.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [sortAscAnim, sortDescAnim, sortNoneAnim],
+    selector: 'novo-sort-button',
+    styleUrls: ['./sort-button.component.scss'],
+    templateUrl: './sort-button.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    animations: [sortAscAnim, sortDescAnim, sortNoneAnim],
+    standalone: false
 })
 export class NovoDataTableSortButton<T> {
   @Output() sortChange: EventEmitter<SortDirection> = new EventEmitter();

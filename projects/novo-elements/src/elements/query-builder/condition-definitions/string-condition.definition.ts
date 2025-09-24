@@ -11,8 +11,8 @@ import { AbstractConditionFieldDef } from './abstract-condition.definition';
  * performance penalty.
  */
 @Component({
-  selector: 'novo-string-condition-def',
-  template: `
+    selector: 'novo-string-condition-def',
+    template: `
     <!-- fieldTypes should be UPPERCASE -->
     <ng-container novoConditionFieldDef="STRING">
       <novo-field *novoConditionOperatorsDef="let formGroup; fieldMeta as meta" [formGroup]="formGroup">
@@ -49,14 +49,15 @@ import { AbstractConditionFieldDef } from './abstract-condition.definition';
       </ng-container>
     </ng-container>
   `,
-  encapsulation: ViewEncapsulation.None,
-  // Change detection is intentionally not set to OnPush. This component's template will be provided
-  // to the table to be inserted into its view. This is problematic when change detection runs since
-  // the bindings in this template will be evaluated _after_ the table's view is evaluated, which
-  // means the template in the table's view will not have the updated value (and in fact will cause
-  // an ExpressionChangedAfterItHasBeenCheckedError).
-  // tslint:disable-next-line:validate-decorators
-  changeDetection: ChangeDetectionStrategy.Default,
+    encapsulation: ViewEncapsulation.None,
+    // Change detection is intentionally not set to OnPush. This component's template will be provided
+    // to the table to be inserted into its view. This is problematic when change detection runs since
+    // the bindings in this template will be evaluated _after_ the table's view is evaluated, which
+    // means the template in the table's view will not have the updated value (and in fact will cause
+    // an ExpressionChangedAfterItHasBeenCheckedError).
+    // tslint:disable-next-line:validate-decorators
+    changeDetection: ChangeDetectionStrategy.Default,
+    standalone: false
 })
 export class NovoDefaultStringConditionDef extends AbstractConditionFieldDef {
   defaultOperator = Operator.includeAny;

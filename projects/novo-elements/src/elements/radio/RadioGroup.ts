@@ -39,19 +39,20 @@ class NovoRadioGroupBase {
 const NovoRadioGroupMixins: CanUpdateErrorStateCtor & typeof NovoRadioGroupBase = mixinErrorState(NovoRadioGroupBase);
 
 @Component({
-  selector: 'novo-radio-group',
-  providers: [
-    RADIOGROUP_VALUE_ACCESSOR,
-    { provide: NOVO_RADIO_GROUP, useExisting: NovoRadioGroup },
-    { provide: NovoFieldControl, useExisting: NovoRadioGroup },
-  ],
-  template: '<ng-content></ng-content>',
-  styleUrls: ['./radio-group.scss'],
-  host: {
-    class: 'novo-radio-group',
-    '[class.novo-radio-group-appearance-horizontal]': 'appearance=="horizontal"',
-    '[class.novo-radio-group-appearance-vertical]': 'appearance=="vertical"',
-  },
+    selector: 'novo-radio-group',
+    providers: [
+        RADIOGROUP_VALUE_ACCESSOR,
+        { provide: NOVO_RADIO_GROUP, useExisting: NovoRadioGroup },
+        { provide: NovoFieldControl, useExisting: NovoRadioGroup },
+    ],
+    template: '<ng-content></ng-content>',
+    styleUrls: ['./radio-group.scss'],
+    host: {
+        class: 'novo-radio-group',
+        '[class.novo-radio-group-appearance-horizontal]': 'appearance=="horizontal"',
+        '[class.novo-radio-group-appearance-vertical]': 'appearance=="vertical"',
+    },
+    standalone: false
 })
 export class NovoRadioGroup extends NovoRadioGroupMixins implements NovoFieldControl<any>, ControlValueAccessor, AfterContentInit {
   private _uniqueId: string = `novo-radio-group-${++nextId}`;

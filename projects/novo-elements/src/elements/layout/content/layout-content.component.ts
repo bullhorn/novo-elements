@@ -13,16 +13,17 @@ import {
 import { NOVO_LAYOUT_CONTAINER } from '../layout.constants';
 
 @Component({
-  selector: 'novo-layout-content',
-  exportAs: 'novoLayoutContent',
-  template: '<ng-content></ng-content>',
-  host: {
-    class: 'novo-layout-content',
-    // '[style.margin-left.px]': '_container._contentMargins.left',
-    // '[style.margin-right.px]': '_container._contentMargins.right',
-  },
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None,
+    selector: 'novo-layout-content',
+    exportAs: 'novoLayoutContent',
+    template: '<ng-content></ng-content>',
+    host: {
+        class: 'novo-layout-content',
+        // '[style.margin-left.px]': '_container._contentMargins.left',
+        // '[style.margin-right.px]': '_container._contentMargins.right',
+    },
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
+    standalone: false
 })
 export class NovoLayoutContent extends CdkScrollable implements AfterContentInit {
   constructor(

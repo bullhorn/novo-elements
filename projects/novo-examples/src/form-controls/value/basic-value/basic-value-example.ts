@@ -5,9 +5,10 @@ import { NOVO_VALUE_THEME } from 'novo-elements';
  * @title Basic Value Example
  */
 @Component({
-  selector: 'basic-value-example',
-  templateUrl: 'basic-value-example.html',
-  styleUrls: ['basic-value-example.css'],
+    selector: 'basic-value-example',
+    templateUrl: 'basic-value-example.html',
+    styleUrls: ['basic-value-example.css'],
+    standalone: false
 })
 export class BasicValueExample {
   public theme = NOVO_VALUE_THEME.MOBILE;

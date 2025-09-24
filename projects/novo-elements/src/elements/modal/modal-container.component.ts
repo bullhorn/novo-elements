@@ -5,10 +5,11 @@ import { NovoModalRef } from './modal-ref';
 import { zoomInOut } from './modal.animation';
 
 @Component({
-  selector: 'novo-modal-container',
-  templateUrl: './modal-container.component.html',
-  styleUrls: ['./modal-container.component.scss'],
-  animations: [zoomInOut],
+    selector: 'novo-modal-container',
+    templateUrl: './modal-container.component.html',
+    styleUrls: ['./modal-container.component.scss'],
+    animations: [zoomInOut],
+    standalone: false
 })
 export class NovoModalContainerComponent {
   @Output() animationStateChanged = new EventEmitter<AnimationEvent>();

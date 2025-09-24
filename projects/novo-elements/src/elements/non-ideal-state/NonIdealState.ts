@@ -2,9 +2,9 @@
 import { Component, HostBinding, Input } from '@angular/core';
 
 @Component({
-  selector: 'novo-non-ideal-state',
-  styleUrls: ['./NonIdealState.scss'],
-  template: `
+    selector: 'novo-non-ideal-state',
+    styleUrls: ['./NonIdealState.scss'],
+    template: `
     <novo-icon class="novo-non-ideal-state-icon" *ngIf="icon" [color]="theme">{{ icon }}</novo-icon>
     <ng-content select="novo-icon"></ng-content>
     <ng-content select="novo-icon,novo-loading,novo-avatar"></ng-content>
@@ -14,6 +14,7 @@ import { Component, HostBinding, Input } from '@angular/core';
     <ng-content select="novo-text"></ng-content>
     <ng-content></ng-content>
   `,
+    standalone: false
 })
 export class NonIdealStateElement {
   @HostBinding('class')

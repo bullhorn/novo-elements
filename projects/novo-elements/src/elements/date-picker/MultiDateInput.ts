@@ -25,9 +25,9 @@ const MULTI_DATE_VALUE_ACCESSOR = {
 };
 
 @Component({
-  selector: 'novo-multi-date-input',
-  providers: [MULTI_DATE_VALUE_ACCESSOR],
-  template: `
+    selector: 'novo-multi-date-input',
+    providers: [MULTI_DATE_VALUE_ACCESSOR],
+    template: `
     <novo-chip-list>
       <novo-chip *ngFor="let date of value | default: []" (removed)="remove($event, date)">
         {{ date | date: format }}
@@ -56,7 +56,8 @@ const MULTI_DATE_VALUE_ACCESSOR = {
       ></novo-date-picker>
     </novo-overlay-template>
   `,
-  styleUrls: ['./MultiDateInput.scss'],
+    styleUrls: ['./MultiDateInput.scss'],
+    standalone: false
 })
 export class NovoMultiDateInputElement implements OnInit, ControlValueAccessor {
   public formattedStartDate: string = '';

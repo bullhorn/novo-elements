@@ -5,8 +5,8 @@ import { NovoLabelService } from 'novo-elements/services';
 import { Key } from 'novo-elements/utils';
 
 @Component({
-  selector: 'novo-slider',
-  template: `
+    selector: 'novo-slider',
+    template: `
     <section class="slides">
       <ng-content select="div[slide]"></ng-content>
     </section>
@@ -19,10 +19,11 @@ import { Key } from 'novo-elements/utils';
       <ng-content select="button" *ngIf="end"></ng-content>
     </div>
   `,
-  styleUrls: ['./Slider.scss'],
-  host: {
-    '[class]': 'currentClass',
-  },
+    styleUrls: ['./Slider.scss'],
+    host: {
+        '[class]': 'currentClass',
+    },
+    standalone: false
 })
 export class NovoSliderElement implements OnInit, OnDestroy {
   @Input()

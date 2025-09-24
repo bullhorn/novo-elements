@@ -2,7 +2,8 @@
 import { Directive, ElementRef, HostBinding, Input } from '@angular/core';
 
 @Directive({
-  selector: '[fill]',
+    selector: '[fill]',
+    standalone: false
 })
 export class FillColorDirective {
   @Input() fill: string;

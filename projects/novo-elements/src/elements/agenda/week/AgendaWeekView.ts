@@ -43,8 +43,8 @@ const MINUTES_IN_HOUR: number = 60;
  * ```
  */
 @Component({
-  selector: 'novo-agenda-week',
-  template: `
+    selector: 'novo-agenda-week',
+    template: `
     <div class="cal-week-view" #weekViewContainer>
       <novo-agenda-week-header [days]="days" [locale]="locale" [customTemplate]="headerTemplate" (dayClicked)="dayClicked.emit($event)">
       </novo-agenda-week-header>
@@ -79,7 +79,8 @@ const MINUTES_IN_HOUR: number = 60;
       </div>
     </div>
   `,
-  styleUrls: ['./AgendaWeekView.scss', '../common/AgendaHoursLayout.scss'],
+    styleUrls: ['./AgendaWeekView.scss', '../common/AgendaHoursLayout.scss'],
+    standalone: false
 })
 export class NovoAgendaWeekViewElement implements OnChanges, OnInit, OnDestroy {
   /**

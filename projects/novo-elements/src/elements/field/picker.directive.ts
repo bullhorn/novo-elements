@@ -4,11 +4,12 @@ import { NovoInputFormat, NOVO_INPUT_FORMAT } from './formats/base-format';
 
 /** Directive used to connect an input to a MatDatepicker. */
 @Directive({
-  selector: 'input[picker]',
-  host: {
-    class: 'novo-has-picker',
-    '[attr.autocomplete]': 'autocompleteAttribute',
-  },
+    selector: 'input[picker]',
+    host: {
+        class: 'novo-has-picker',
+        '[attr.autocomplete]': 'autocompleteAttribute',
+    },
+    standalone: false
 })
 export class NovoPickerDirective {
   /** The datepicker that this input is associated with. */

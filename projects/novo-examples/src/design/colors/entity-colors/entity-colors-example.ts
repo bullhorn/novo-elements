@@ -9,9 +9,10 @@ import { entityColors as colors } from '../colors';
  * @title Entity Colors
  */
 @Component({
-  selector: 'entity-colors-example',
-  templateUrl: './entity-colors-example.html',
-  styleUrls: ['./entity-colors-example.scss'],
+    selector: 'entity-colors-example',
+    templateUrl: './entity-colors-example.html',
+    styleUrls: ['./entity-colors-example.scss'],
+    standalone: false
 })
 export class EntityColorsExample {
   entityColors = colors;

@@ -4,9 +4,10 @@ import { Component } from '@angular/core';
  * @title Tip Well with Icon Example
  */
 @Component({
-  selector: 'icon-tip-well-example',
-  templateUrl: 'icon-tip-well-example.html',
-  styleUrls: ['icon-tip-well-example.css'],
+    selector: 'icon-tip-well-example',
+    templateUrl: 'icon-tip-well-example.html',
+    styleUrls: ['icon-tip-well-example.css'],
+    standalone: false
 })
 export class IconTipWellExample {
   public demoTip: string =

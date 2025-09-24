@@ -4,9 +4,10 @@ import { Component } from '@angular/core';
  * @title Scrollable Drop Down
  */
 @Component({
-  selector: 'scroll-to-item-drop-down-example',
-  templateUrl: 'scroll-to-item-drop-down-example.html',
-  styleUrls: ['scroll-to-item-drop-down-example.css'],
+    selector: 'scroll-to-item-drop-down-example',
+    templateUrl: 'scroll-to-item-drop-down-example.html',
+    styleUrls: ['scroll-to-item-drop-down-example.css'],
+    standalone: false
 })
 export class ScrollToItemDropDownExample {
   public selectedWord: string = '';

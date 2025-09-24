@@ -13,11 +13,11 @@ const DATA = {
 };
 
 @Component({
-  selector: 'custom-quick-note-results',
-  host: {
-    class: 'active quick-note-results',
-  },
-  template: `
+    selector: 'custom-quick-note-results',
+    host: {
+        class: 'active quick-note-results',
+    },
+    template: `
     <novo-loading theme="line" *ngIf="isLoading && !matches.length"></novo-loading>
     <novo-list *ngIf="matches.length > 0">
       <novo-list-item
@@ -32,6 +32,7 @@ const DATA = {
     <p class="picker-error" *ngIf="hasError">Oops! An error occured.</p>
     <p class="picker-null" *ngIf="!isLoading && !matches.length && !hasError">No results to display...</p>
   `,
+    standalone: false
 })
 export class CustomQuickNoteResults extends QuickNoteResults {}
 
@@ -39,9 +40,10 @@ export class CustomQuickNoteResults extends QuickNoteResults {}
  * @title Custom Quick Note Results Example
  */
 @Component({
-  selector: 'custom-quick-note-results-example',
-  templateUrl: 'custom-quick-note-results-example.html',
-  styleUrls: ['custom-quick-note-results-example.css'],
+    selector: 'custom-quick-note-results-example',
+    templateUrl: 'custom-quick-note-results-example.html',
+    styleUrls: ['custom-quick-note-results-example.css'],
+    standalone: false
 })
 export class CustomQuickNoteResultsExample {
   public note: any;

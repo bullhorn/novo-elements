@@ -4,9 +4,10 @@ import { Component } from '@angular/core';
  * @title Checkbox List Usage
  */
 @Component({
-  selector: 'checkbox-list-example',
-  templateUrl: 'checkbox-list-example.html',
-  styleUrls: ['checkbox-list-example.css'],
+    selector: 'checkbox-list-example',
+    templateUrl: 'checkbox-list-example.html',
+    styleUrls: ['checkbox-list-example.css'],
+    standalone: false
 })
 export class CheckboxListExample {
   options1: any[] = [

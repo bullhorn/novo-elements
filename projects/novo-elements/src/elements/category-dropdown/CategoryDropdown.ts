@@ -4,8 +4,8 @@ import { NovoLabelService } from 'novo-elements/services';
 import { Helpers, Key, OutsideClick } from 'novo-elements/utils';
 
 @Component({
-  selector: 'novo-category-dropdown',
-  template: `
+    selector: 'novo-category-dropdown',
+    template: `
     <ng-content select="button"></ng-content>
     <div class="dropdown-container" *ngIf="active">
       <div class="novo-category-dropdown-search" *ngIf="search" data-automation-id="novo-category-dropdown-search">
@@ -49,11 +49,12 @@ import { Helpers, Key, OutsideClick } from 'novo-elements/utils';
       </footer>
     </div>
   `,
-  styleUrls: ['./CategoryDropdown.scss'],
-  host: {
-    '(keydown)': 'onKeyDown($event)',
-    '[class.active]': 'active',
-  },
+    styleUrls: ['./CategoryDropdown.scss'],
+    host: {
+        '(keydown)': 'onKeyDown($event)',
+        '[class.active]': 'active',
+    },
+    standalone: false
 })
 export class NovoCategoryDropdownElement extends OutsideClick implements OnInit, OnDestroy {
   _query: string = '';

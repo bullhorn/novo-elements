@@ -4,9 +4,10 @@ import { Component } from '@angular/core';
  * @title Formatted Chips Example
  */
 @Component({
-  selector: 'formatted-chips-example',
-  templateUrl: 'formatted-chips-example.html',
-  styleUrls: ['formatted-chips-example.css'],
+    selector: 'formatted-chips-example',
+    templateUrl: 'formatted-chips-example.html',
+    styleUrls: ['formatted-chips-example.css'],
+    standalone: false
 })
 export class FormattedChipsExample {
   public formatted: any;
