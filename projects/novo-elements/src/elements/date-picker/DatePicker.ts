@@ -17,56 +17,38 @@ const DATE_PICKER_VALUE_ACCESSOR = {
 };
 
 @Component({
-  selector: 'novo-date-picker',
-  providers: [DATE_PICKER_VALUE_ACCESSOR],
-  animations: [
-    trigger('startDateTextState', [
-      state(
-        'startDate',
-        style({
-          opacity: '1.0',
-        }),
-      ),
-      state(
-        'endDate',
-        style({
-          opacity: '0.6',
-        }),
-      ),
-      transition('startDate <=> endDate', animate('200ms ease-in')),
-    ]),
-    trigger('endDateTextState', [
-      state(
-        'startDate',
-        style({
-          opacity: '0.6',
-        }),
-      ),
-      state(
-        'endDate',
-        style({
-          opacity: '1.0',
-        }),
-      ),
-      transition('startDate <=> endDate', animate('200ms ease-in')),
-    ]),
-    trigger('indicatorState', [
-      state(
-        'startDate',
-        style({
-          transform: 'translateX(0%)',
-        }),
-      ),
-      state(
-        'endDate',
-        style({
-          transform: 'translateX(100%)',
-        }),
-      ),
-      transition('startDate <=> endDate', animate('200ms ease-in')),
-    ]),
-  ],
-  template: `
+    selector: 'novo-date-picker',
+    providers: [DATE_PICKER_VALUE_ACCESSOR],
+    animations: [
+        trigger('startDateTextState', [
+            state('startDate', style({
+                opacity: '1.0',
+            })),
+            state('endDate', style({
+                opacity: '0.6',
+            })),
+            transition('startDate <=> endDate', animate('200ms ease-in')),
+        ]),
+        trigger('endDateTextState', [
+            state('startDate', style({
+                opacity: '0.6',
+            })),
+            state('endDate', style({
+                opacity: '1.0',
+            })),
+            transition('startDate <=> endDate', animate('200ms ease-in')),
+        ]),
+        trigger('indicatorState', [
+            state('startDate', style({
+                transform: 'translateX(0%)',
+            })),
+            state('endDate', style({
+                transform: 'translateX(100%)',
+            })),
+            transition('startDate <=> endDate', animate('200ms ease-in')),
+        ]),
+    ],
+    template: `
     <div class="date-picker-container">
       <div class="date-range-tabs" *ngIf="range" [class.week-select-mode]="weekRangeSelect">
         <span
@@ -99,13 +81,14 @@ const DATE_PICKER_VALUE_ACCESSOR = {
       ></novo-calendar>
 
       <div class="calendar-footer" [hidden]="hideFooter">
-      
+
         <novo-button [hidden]="hideToday" (click)="setToday()" class="today" size="small" data-automation-id="calendar-today">{{ labels.today }}</novo-button>
         <ng-content select=".footer-content"></ng-content>
       </div>
     </div>
   `,
-  styleUrls: ['./DatePicker.scss'],
+    styleUrls: ['./DatePicker.scss'],
+    standalone: false
 })
 export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
   /**

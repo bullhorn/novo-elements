@@ -1,7 +1,10 @@
 // NG2
 import { Injectable, Pipe, PipeTransform } from '@angular/core';
 
-@Pipe({ name: 'highlight', pure: true })
+@Pipe({
+    name: 'highlight', pure: true,
+    standalone: false
+})
 @Injectable()
 export class HighlightPipe implements PipeTransform {
   transform(value: any, term: any): any {

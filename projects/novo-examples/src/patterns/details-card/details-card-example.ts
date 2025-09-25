@@ -8,9 +8,10 @@ const HEADER_ICONS = ['company', 'job', 'candidate', 'person', 'opportunity', 'l
  * @title Details Card Example
  */
 @Component({
-  selector: 'details-card-example',
-  templateUrl: 'details-card-example.html',
-  styleUrls: ['details-card-example.css'],
+    selector: 'details-card-example',
+    templateUrl: 'details-card-example.html',
+    styleUrls: ['details-card-example.css'],
+    standalone: false
 })
 export class DetailsCardExample {
   public theme: string = 'company';

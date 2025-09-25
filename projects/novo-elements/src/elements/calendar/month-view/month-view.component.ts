@@ -18,10 +18,11 @@ import { BooleanInput, DateUtil } from 'novo-elements/utils';
 import type { DateLike, Day, OverlayDate } from 'novo-elements/utils';
 
 @Component({
-  selector: 'novo-month-view',
-  templateUrl: './month-view.component.html',
-  styleUrls: ['./month-view.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'novo-month-view',
+    templateUrl: './month-view.component.html',
+    styleUrls: ['./month-view.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NovoMonthViewElement implements OnInit {
   @Input()

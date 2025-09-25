@@ -57,19 +57,20 @@ class NovoInputBase {
 /** Directive that allows a native input to work inside a `NovoField`. */
 // tslint:disable: no-conflicting-lifecycle member-ordering
 @Directive({
-  selector: `input[novoInput], textarea[novoInput], select[novoInput]`,
-  host: {
-    class: 'novo-input-element',
-    '[attr.id]': 'id',
-    '[attr.placeholder]': 'placeholder',
-    '[disabled]': 'disabled',
-    '[required]': 'required',
-    '[attr.readonly]': 'readonly && !_isNativeSelect || null',
-    '[attr.aria-invalid]': 'errorState',
-    '[attr.aria-required]': 'required.toString()',
-    '[attr.autocomplete]': "'off'",
-  },
-  providers: [{ provide: NovoFieldControl, useExisting: NovoInput }],
+    selector: `input[novoInput], textarea[novoInput], select[novoInput]`,
+    host: {
+        class: 'novo-input-element',
+        '[attr.id]': 'id',
+        '[attr.placeholder]': 'placeholder',
+        '[disabled]': 'disabled',
+        '[required]': 'required',
+        '[attr.readonly]': 'readonly && !_isNativeSelect || null',
+        '[attr.aria-invalid]': 'errorState',
+        '[attr.aria-required]': 'required.toString()',
+        '[attr.autocomplete]': "'off'",
+    },
+    providers: [{ provide: NovoFieldControl, useExisting: NovoInput }],
+    standalone: false
 })
 export class NovoInput extends NovoInputBase implements NovoFieldControl<any>, OnChanges, OnDestroy, AfterViewInit, DoCheck {
   protected _uid = `novo-input-${nextUniqueId++}`;

@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormUtils, NovoModalRef, NovoModalService, PickerControl, PickerResults, TextBoxControl } from 'novo-elements';
 
 @Component({
-  selector: 'modal-edit-form-demo',
-  template: `
+    selector: 'modal-edit-form-demo',
+    template: `
     <novo-modal>
       <header theme="contact">
         <novo-icon>person</novo-icon>
@@ -30,6 +30,7 @@ import { FormUtils, NovoModalRef, NovoModalService, PickerControl, PickerResults
       <button theme="primary" icon="check" (click)="close()">Save</button>
     </novo-modal>
   `,
+    standalone: false
 })
 export class ModalAddFormDemo implements OnInit {
   public textControl: any;
@@ -67,9 +68,10 @@ export class ModalAddFormDemo implements OnInit {
  * @title Modal Add Form Example
  */
 @Component({
-  selector: 'modal-add-form-example',
-  templateUrl: 'modal-add-form-example.html',
-  styleUrls: ['modal-add-form-example.css'],
+    selector: 'modal-add-form-example',
+    templateUrl: 'modal-add-form-example.html',
+    styleUrls: ['modal-add-form-example.css'],
+    standalone: false
 })
 export class ModalAddFormExample {
   constructor(private modalService: NovoModalService) {}

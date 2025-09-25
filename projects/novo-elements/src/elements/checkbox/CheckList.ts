@@ -12,10 +12,10 @@ const CHECKLIST_VALUE_ACCESSOR = {
 };
 
 @Component({
-  selector: 'novo-check-list',
-  styleUrls: ['./CheckList.scss'],
-  providers: [CHECKLIST_VALUE_ACCESSOR],
-  template: `
+    selector: 'novo-check-list',
+    styleUrls: ['./CheckList.scss'],
+    providers: [CHECKLIST_VALUE_ACCESSOR],
+    template: `
     <div
       class="novo-checkbox-group"
       *ngFor="let option of _options; let i = index"
@@ -38,6 +38,7 @@ const CHECKLIST_VALUE_ACCESSOR = {
       </label>
     </div>
   `,
+    standalone: false
 })
 export class NovoCheckListElement implements ControlValueAccessor, OnInit {
   @Input() name: string;

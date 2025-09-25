@@ -25,9 +25,15 @@ import { NovoErrorElement } from './error/error';
 import { NovoFieldControl } from './field-control';
 import { NovoHintElement } from './hint/hint';
 
-@Directive({ selector: '[novoPrefix]' })
+@Directive({
+    selector: '[novoPrefix]',
+    standalone: false
+})
 export class NovoFieldPrefixDirective {}
-@Directive({ selector: '[novoSuffix]' })
+@Directive({
+    selector: '[novoSuffix]',
+    standalone: false
+})
 export class NovoFieldSuffixDirective {}
 
 const NOVO_INPUT_UNDERLINED_TYPES = [
@@ -47,37 +53,38 @@ const NOVO_INPUT_UNDERLINED_TYPES = [
 export const NOVO_FORM_FIELD = new InjectionToken<NovoFieldElement>('NovoFormField');
 
 @Component({
-  selector: 'novo-field',
-  templateUrl: './field.html',
-  styleUrls: ['./field.scss', './field-standard.scss', './field-fill.scss', './field-outline.scss', './field-list.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  host: {
-    class: 'novo-field',
-    '[class.novo-field-layout-horizontal]': 'layout=="horizontal"',
-    '[class.novo-field-layout-vertical]': 'layout=="vertical"',
-    '[class.novo-field-appearance-standard]': 'appearance == "standard"',
-    '[class.novo-field-appearance-fill]': 'appearance == "fill"',
-    '[class.novo-field-appearance-outline]': 'appearance == "outline"',
-    '[class.novo-field-appearance-list]': 'appearance == "list"',
-    '[class.novo-field-appearance-underlined]': '_isUnderlinedInput()',
-    '[class.novo-field-invalid]': '_control.errorState',
-    '[class.novo-field-has-label]': '_hasLabel()',
-    '[class.novo-field-no-label]': '!_hasLabel()',
-    // '[class.novo-field-hide-placeholder]': '_hideControlPlaceholder()',
-    '[class.novo-field-disabled]': '_control.disabled',
-    '[class.novo-field-autofilled]': '_control.autofilled',
-    '[class.novo-focused]': '_control.focused',
-    // '[class.novo-accent]': 'color == "accent"',
-    // '[class.novo-warn]': 'color == "warn"',
-    '[class.ng-untouched]': '_shouldForward("untouched")',
-    '[class.ng-touched]': '_shouldForward("touched")',
-    '[class.ng-pristine]': '_shouldForward("pristine")',
-    '[class.ng-dirty]': '_shouldForward("dirty")',
-    '[class.ng-valid]': '_shouldForward("valid")',
-    '[class.ng-invalid]': '_shouldForward("invalid")',
-    '[class.ng-pending]': '_shouldForward("pending")',
-  },
-  providers: [{ provide: NOVO_FORM_FIELD, useExisting: NovoFieldElement }],
+    selector: 'novo-field',
+    templateUrl: './field.html',
+    styleUrls: ['./field.scss', './field-standard.scss', './field-fill.scss', './field-outline.scss', './field-list.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    host: {
+        class: 'novo-field',
+        '[class.novo-field-layout-horizontal]': 'layout=="horizontal"',
+        '[class.novo-field-layout-vertical]': 'layout=="vertical"',
+        '[class.novo-field-appearance-standard]': 'appearance == "standard"',
+        '[class.novo-field-appearance-fill]': 'appearance == "fill"',
+        '[class.novo-field-appearance-outline]': 'appearance == "outline"',
+        '[class.novo-field-appearance-list]': 'appearance == "list"',
+        '[class.novo-field-appearance-underlined]': '_isUnderlinedInput()',
+        '[class.novo-field-invalid]': '_control.errorState',
+        '[class.novo-field-has-label]': '_hasLabel()',
+        '[class.novo-field-no-label]': '!_hasLabel()',
+        // '[class.novo-field-hide-placeholder]': '_hideControlPlaceholder()',
+        '[class.novo-field-disabled]': '_control.disabled',
+        '[class.novo-field-autofilled]': '_control.autofilled',
+        '[class.novo-focused]': '_control.focused',
+        // '[class.novo-accent]': 'color == "accent"',
+        // '[class.novo-warn]': 'color == "warn"',
+        '[class.ng-untouched]': '_shouldForward("untouched")',
+        '[class.ng-touched]': '_shouldForward("touched")',
+        '[class.ng-pristine]': '_shouldForward("pristine")',
+        '[class.ng-dirty]': '_shouldForward("dirty")',
+        '[class.ng-valid]': '_shouldForward("valid")',
+        '[class.ng-invalid]': '_shouldForward("invalid")',
+        '[class.ng-pending]': '_shouldForward("pending")',
+    },
+    providers: [{ provide: NOVO_FORM_FIELD, useExisting: NovoFieldElement }],
+    standalone: false
 })
 export class NovoFieldElement implements AfterContentInit, OnDestroy {
   private _labelClicks = Subscription.EMPTY;

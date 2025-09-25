@@ -6,9 +6,10 @@ import { NovoToastService } from 'novo-elements';
  * @title Iconset
  */
 @Component({
-  selector: 'iconset-example',
-  templateUrl: './iconset-example.html',
-  styleUrls: ['./iconset-example.scss'],
+    selector: 'iconset-example',
+    templateUrl: './iconset-example.html',
+    styleUrls: ['./iconset-example.scss'],
+    standalone: false
 })
 export class IconsetExample {
   icons = Object.values(Icons);

@@ -6,8 +6,8 @@ import { NovoLabelService } from 'novo-elements/services';
 import { BasePickerResults } from '../base-picker-results/BasePickerResults';
 
 @Component({
-  selector: 'distribution-list-picker-results',
-  template: `
+    selector: 'distribution-list-picker-results',
+    template: `
     <section class="picker-loading" *ngIf="isLoading && !matches?.length">
       <novo-loading theme="line"></novo-loading>
     </section>
@@ -37,6 +37,7 @@ import { BasePickerResults } from '../base-picker-results/BasePickerResults';
       <novo-loading theme="line" *ngIf="isLoading && matches?.length > 0"></novo-loading>
     </novo-list>
   `,
+    standalone: false
 })
 export class DistributionListPickerResults extends BasePickerResults {
   @HostBinding('class.active')

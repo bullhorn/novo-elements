@@ -6,9 +6,10 @@ import { CheckboxControl, FieldInteractionApi, FormUtils, TextBoxControl } from 
  * @title Fi Hide Show Example
  */
 @Component({
-  selector: 'fi-hide-show-example',
-  templateUrl: 'fi-hide-show-example.html',
-  styleUrls: ['fi-hide-show-example.css'],
+    selector: 'fi-hide-show-example',
+    templateUrl: 'fi-hide-show-example.html',
+    styleUrls: ['fi-hide-show-example.css'],
+    standalone: false
 })
 export class FiHideShowExample {
   public form: any = {};

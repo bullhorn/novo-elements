@@ -14,14 +14,15 @@ export const DATETIMEFORMAT_VALUE_ACCESSOR = {
 };
 
 @Directive({
-  selector: 'input[dateTimeFormat]',
-  host: {
-    class: 'novo-date-time-format',
-    '(input)': '_checkInput($event)',
-    '(blur)': '_handleBlur($event)',
-    '(keydown)': '_handleKeydown($event)',
-  },
-  providers: [DATETIMEFORMAT_VALUE_ACCESSOR, { provide: NOVO_INPUT_FORMAT, useExisting: NovoDateTimeFormatDirective }],
+    selector: 'input[dateTimeFormat]',
+    host: {
+        class: 'novo-date-time-format',
+        '(input)': '_checkInput($event)',
+        '(blur)': '_handleBlur($event)',
+        '(keydown)': '_handleKeydown($event)',
+    },
+    providers: [DATETIMEFORMAT_VALUE_ACCESSOR, { provide: NOVO_INPUT_FORMAT, useExisting: NovoDateTimeFormatDirective }],
+    standalone: false
 })
 export class NovoDateTimeFormatDirective extends IMaskDirective<any> implements NovoInputFormat, OnChanges {
   valueChange: EventEmitter<any> = new EventEmitter();
@@ -110,7 +111,7 @@ export class NovoDateTimeFormatDirective extends IMaskDirective<any> implements 
       },
     };
   }
-  
+
   ngOnChanges(changes: SimpleChanges): void {
     if (Object.keys(changes).some((key) => ['military', 'dateFormat'].includes(key))) {
       this.initFormatOptions();

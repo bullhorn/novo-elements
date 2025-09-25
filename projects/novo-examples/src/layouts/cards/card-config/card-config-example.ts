@@ -7,9 +7,10 @@ import { NovoToastService } from 'novo-elements';
  * @title Full Configuration Cards
  */
 @Component({
-  selector: 'card-config-example',
-  templateUrl: 'card-config-example.html',
-  styleUrls: ['card-config-example.css'],
+    selector: 'card-config-example',
+    templateUrl: 'card-config-example.html',
+    styleUrls: ['card-config-example.css'],
+    standalone: false
 })
 export class CardConfigExample {
   // Config for demos

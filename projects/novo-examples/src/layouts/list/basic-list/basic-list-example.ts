@@ -4,9 +4,10 @@ import { Component } from '@angular/core';
  * @title Basic List Layout
  */
 @Component({
-  selector: 'basic-list-example',
-  templateUrl: 'basic-list-example.html',
-  styleUrls: ['basic-list-example.css'],
+    selector: 'basic-list-example',
+    templateUrl: 'basic-list-example.html',
+    styleUrls: ['basic-list-example.css'],
+    standalone: false
 })
 export class BasicListExample {
   public pulseItems: any;

@@ -5,8 +5,9 @@ import { NovoLayoutContent, NovoModalService, NovoSidenavComponent, NovoToastSer
 import { delay, filter, startWith } from 'rxjs/operators';
 import { AnchorViewportScroller } from './anchor-scroller';
 @Component({
-  selector: 'novo-demo-app',
-  templateUrl: './app.component.html',
+    selector: 'novo-demo-app',
+    templateUrl: './app.component.html',
+    standalone: false
 })
 export class AppComponent implements AfterViewInit {
   menuOpen: boolean = false;

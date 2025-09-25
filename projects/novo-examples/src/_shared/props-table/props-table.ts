@@ -28,11 +28,12 @@ interface PropertyDeclartion {
 }
 
 @Component({
-  selector: 'props-table',
-  templateUrl: './props-table.html',
-  styleUrls: ['./props-table.scss'],
-  host: { class: 'props-table' },
-  encapsulation: ViewEncapsulation.None,
+    selector: 'props-table',
+    templateUrl: './props-table.html',
+    styleUrls: ['./props-table.scss'],
+    host: { class: 'props-table' },
+    encapsulation: ViewEncapsulation.None,
+    standalone: false
 })
 export class PropsTableComponent implements OnInit {
   @Input()

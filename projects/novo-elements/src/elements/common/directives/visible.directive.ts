@@ -3,7 +3,8 @@ import { Directive, ElementRef, HostBinding, Input } from '@angular/core';
 import { BooleanInput } from 'novo-elements/utils';
 
 @Directive({
-  selector: '[visible]',
+    selector: '[visible]',
+    standalone: false
 })
 export class VisibleDirective {
   @BooleanInput()

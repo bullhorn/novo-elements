@@ -4,9 +4,10 @@ import { Component } from '@angular/core';
  * @title Date Range Input Example
  */
 @Component({
-  selector: 'date-range-input-example',
-  templateUrl: 'date-range-input-example.html',
-  styleUrls: ['date-range-input-example.css'],
+    selector: 'date-range-input-example',
+    templateUrl: 'date-range-input-example.html',
+    styleUrls: ['date-range-input-example.css'],
+    standalone: false
 })
 export class DateRangeInputExample {
   selected: any = {

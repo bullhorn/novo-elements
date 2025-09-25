@@ -4,9 +4,10 @@ import { Component } from '@angular/core';
  * @title Close On Select Chips Example
  */
 @Component({
-  selector: 'close-on-select-chips-example',
-  templateUrl: 'close-on-select-chips-example.html',
-  styleUrls: ['close-on-select-chips-example.css'],
+    selector: 'close-on-select-chips-example',
+    templateUrl: 'close-on-select-chips-example.html',
+    styleUrls: ['close-on-select-chips-example.css'],
+    standalone: false
 })
 export class CloseOnSelectChipsExample {
   public formatted: any;

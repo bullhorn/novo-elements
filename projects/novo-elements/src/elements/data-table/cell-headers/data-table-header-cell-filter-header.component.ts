@@ -3,8 +3,8 @@ import { NovoLabelService } from 'novo-elements/services';
 import { Helpers } from 'novo-elements/utils';
 
 @Component({
-  selector: 'novo-data-table-cell-filter-header',
-  template: `
+    selector: 'novo-data-table-cell-filter-header',
+    template: `
     <div class="header">
       <novo-label>{{ label || labels.filters }}</novo-label>
       <novo-button
@@ -19,7 +19,8 @@ import { Helpers } from 'novo-elements/utils';
       </novo-button>
     </div>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NovoDataTableCellFilterHeader {
   @Input() label: string | number;

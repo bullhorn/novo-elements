@@ -37,10 +37,7 @@ export class ExampleData {
 
     const exampleConfig = EXAMPLE_COMPONENTS[example];
     this.source = exampleConfig;
-
-    // TODO(tinayuangao): Do not hard-code extensions
     this.exampleFiles = ['html', 'ts', 'css'].map((extension) => `${example}-example.${extension}`);
-    this.examplePath = `/assets/stackblitz/examples/${example}/`;
     this.selectorName = this.indexFilename = `${example}-example`;
 
     if (exampleConfig.additionalFiles) {

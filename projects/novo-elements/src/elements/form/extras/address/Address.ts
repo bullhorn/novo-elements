@@ -34,9 +34,9 @@ export interface NovoAddressConfig {
 }
 
 @Component({
-  selector: 'novo-address',
-  providers: [ADDRESS_VALUE_ACCESSOR],
-  template: `
+    selector: 'novo-address',
+    providers: [ADDRESS_VALUE_ACCESSOR],
+    template: `
     <span
       *ngIf="!config?.address1?.hidden"
       class="street-address"
@@ -184,7 +184,8 @@ export interface NovoAddressConfig {
       ></novo-picker>
     </span>
   `,
-  styleUrls: ['./Address.scss'],
+    styleUrls: ['./Address.scss'],
+    standalone: false
 })
 export class NovoAddressElement implements ControlValueAccessor, OnInit, DoCheck {
   @Input()

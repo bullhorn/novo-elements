@@ -4,8 +4,8 @@ import { Component, Input } from '@angular/core';
 import { EXAMPLE_COMPONENTS, LiveExample } from '../examples.module';
 
 @Component({
-  selector: 'code-example',
-  template: `
+    selector: 'code-example',
+    template: `
     <div class="example">
       <div class="example-container">
         <ng-template [cdkPortalOutlet]="selectedPortal"></ng-template>
@@ -16,8 +16,8 @@ import { EXAMPLE_COMPONENTS, LiveExample } from '../examples.module';
       <code-snippet [example]="example" *ngIf="showSource"></code-snippet>
     </div>
   `,
-  styles: [
-    `
+    styles: [
+        `
       .example {
         position: relative;
       }
@@ -34,8 +34,8 @@ import { EXAMPLE_COMPONENTS, LiveExample } from '../examples.module';
         right: 0;
       }
     `,
-  ],
-  // changeDetection: ChangeDetectionStrategy.OnPush,
+    ],
+    standalone: false
 })
 export class CodeExampleComponent {
   /** Component portal for the currently displayed example. */

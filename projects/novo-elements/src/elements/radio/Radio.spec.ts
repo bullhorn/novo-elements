@@ -1,5 +1,5 @@
 // NG2
-import { async, TestBed } from '@angular/core/testing';
+import { waitForAsync, TestBed } from '@angular/core/testing';
 import { NovoButtonModule } from 'novo-elements/elements/button';
 // App
 import { NovoRadioElement } from './Radio';
@@ -8,7 +8,7 @@ describe('Elements: NovoRadioElement', () => {
   let fixture;
   let component;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [NovoRadioElement],
       imports: [NovoButtonModule],

@@ -1,5 +1,5 @@
 // NG2
-import { async, TestBed } from '@angular/core/testing';
+import { waitForAsync, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { NovoLabelService } from 'novo-elements/services';
 import { NovoPickerModule } from 'novo-elements/elements/picker';
@@ -12,7 +12,7 @@ xdescribe('Elements: NovoAddressElement', () => {
   let fixture;
   let component;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [NovoAddressElement],
       imports: [FormsModule, NovoSelectModule, NovoPickerModule, NovoTooltipModule],

@@ -5,8 +5,9 @@ import { NovoLabelService } from 'novo-elements/services';
 import { BooleanInput } from 'novo-elements/utils';
 
 @Component({
-  selector: 'novo-card-actions',
-  template: '<ng-content></ng-content>',
+    selector: 'novo-card-actions',
+    template: '<ng-content></ng-content>',
+    standalone: false
 })
 export class CardActionsElement {}
 
@@ -14,10 +15,11 @@ export class CardActionsElement {}
  * Content of a card, needed as it's used as a selector in the API.
  */
 @Component({
-  selector: 'novo-card-content, [novo-card-content], [novoCardContent]',
-  host: { class: 'novo-card-content', '[class.condensed]': 'condensed' },
-  template: '<ng-content></ng-content>',
-  styleUrls: ['./CardContent.scss'],
+    selector: 'novo-card-content, [novo-card-content], [novoCardContent]',
+    host: { class: 'novo-card-content', '[class.condensed]': 'condensed' },
+    template: '<ng-content></ng-content>',
+    styleUrls: ['./CardContent.scss'],
+    standalone: false
 })
 export class CardContentElement {
   @Input() @BooleanInput() condensed: boolean = false;
@@ -27,9 +29,9 @@ export class CardContentElement {
  * Content of a card, needed as it's used as a selector in the API.
  */
 @Component({
-  selector: 'novo-card-header, [novo-card-header], [novoCardHeader]',
-  host: { class: 'novo-card-header' },
-  template: `
+    selector: 'novo-card-header, [novo-card-header], [novoCardHeader]',
+    host: { class: 'novo-card-header' },
+    template: `
     <ng-content select="novo-avatar, [novo-avatar], novo-icon"></ng-content>
     <div class="novo-card-header-text">
       <ng-content select="novo-title, [novo-title], novo-text, novo-label, novo-caption"></ng-content>
@@ -39,26 +41,28 @@ export class CardContentElement {
       <ng-content select="novo-action"></ng-content>
     </div>
   `,
-  styleUrls: ['./CardHeader.scss'],
+    styleUrls: ['./CardHeader.scss'],
+    standalone: false
 })
 export class CardHeaderElement {}
 
 @Component({
-  selector: 'novo-card-footer, [novo-card-footer], [novoCardFooter]',
-  host: { class: 'novo-card-footer' },
-  template: '<ng-content></ng-content>',
-  styleUrls: ['./CardFooter.scss'],
+    selector: 'novo-card-footer, [novo-card-footer], [novoCardFooter]',
+    host: { class: 'novo-card-footer' },
+    template: '<ng-content></ng-content>',
+    styleUrls: ['./CardFooter.scss'],
+    standalone: false
 })
 export class CardFooterElement {}
 
 @Component({
-  selector: 'novo-card',
-  host: {
-    class: 'novo-card',
-    '[attr.data-automation-id]': 'cardAutomationId',
-    '[class.loading]': 'loading || config.loading',
-  },
-  template: `
+    selector: 'novo-card',
+    host: {
+        class: 'novo-card',
+        '[attr.data-automation-id]': 'cardAutomationId',
+        '[class.loading]': 'loading || config.loading',
+    },
+    template: `
     <!--Loading-->
     <div class="card-loading-container" *ngIf="loading || config.loading">
       <novo-loading theme="line" [attr.data-automation-id]="cardAutomationId + '-loading'"></novo-loading>
@@ -120,7 +124,8 @@ export class CardFooterElement {}
       select="footer,novo-card-footer,[novo-card-footer],[novoCardFooter]"
     ></ng-content>
   `,
-  styleUrls: ['./Card.scss'],
+    styleUrls: ['./Card.scss'],
+    standalone: false
 })
 export class CardElement implements OnChanges, OnInit {
   @Input()

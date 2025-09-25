@@ -7,9 +7,10 @@ import { map, startWith } from 'rxjs/operators';
  * @title Autocomplete Usage
  */
 @Component({
-  selector: 'autocomplete-usage-example',
-  templateUrl: 'autocomplete-usage-example.html',
-  styleUrls: ['autocomplete-usage-example.css'],
+    selector: 'autocomplete-usage-example',
+    templateUrl: 'autocomplete-usage-example.html',
+    styleUrls: ['autocomplete-usage-example.css'],
+    standalone: false
 })
 export class AutocompleteUsageExample implements OnInit {
   myControl = new UntypedFormControl();

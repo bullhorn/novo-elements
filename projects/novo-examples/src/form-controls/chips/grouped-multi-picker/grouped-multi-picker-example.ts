@@ -5,9 +5,10 @@ import { GroupedMultiPickerResults } from 'novo-elements';
  * @title Grouped Multi Picker Example
  */
 @Component({
-  selector: 'grouped-multi-picker-example',
-  templateUrl: 'grouped-multi-picker-example.html',
-  styleUrls: ['grouped-multi-picker-example.css'],
+    selector: 'grouped-multi-picker-example',
+    templateUrl: 'grouped-multi-picker-example.html',
+    styleUrls: ['grouped-multi-picker-example.css'],
+    standalone: false
 })
 export class GroupedMultiPickerExample {
   public placeholder: string = 'Select...';

@@ -15,9 +15,10 @@ import {
  * @title Vertical Example
  */
 @Component({
-  selector: 'vertical-example',
-  templateUrl: 'vertical-example.html',
-  styleUrls: ['vertical-example.css'],
+    selector: 'vertical-example',
+    templateUrl: 'vertical-example.html',
+    styleUrls: ['vertical-example.css'],
+    standalone: false
 })
 export class VerticalExample {
   public formGroup: NovoFormGroup;

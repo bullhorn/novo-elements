@@ -13,7 +13,6 @@ import { DefaultLayout } from './default-layout';
 import { FigureExample } from './figure';
 import { HighlightJS } from './highlight.service';
 import { PropsTableComponent } from './props-table';
-import { StackblitzButtonModule } from './stackblitz';
 import { TabsLayout } from './tabs-layout';
 import { TypedefContent, TypedefExample, TypedefSnippet, TypedefSpec } from './typedef';
 @NgModule({
@@ -48,7 +47,6 @@ import { TypedefContent, TypedefExample, TypedefSnippet, TypedefSpec } from './t
     CommonModule,
     AngularSplitModule,
     NovoElementsModule,
-    StackblitzButtonModule,
     PortalModule,
   ],
   providers: [HighlightJS],

@@ -20,10 +20,11 @@ const ACE_VALUE_ACCESSOR = {
  * @deprecated Use NovoCodeEditor instead
  */
 @Component({
-  selector: 'novo-ace-editor',
-  template: '',
-  styleUrls: ['./AceEditor.scss'],
-  providers: [ACE_VALUE_ACCESSOR],
+    selector: 'novo-ace-editor',
+    template: '',
+    styleUrls: ['./AceEditor.scss'],
+    providers: [ACE_VALUE_ACCESSOR],
+    standalone: false
 })
 export class NovoAceEditor implements ControlValueAccessor, OnInit, OnDestroy {
   @Input()

@@ -2,19 +2,20 @@ import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 
 @Component({
-  selector: 'novo-divider',
-  host: {
-    role: 'separator',
-    '[attr.aria-orientation]': 'vertical ? "vertical" : "horizontal"',
-    '[class.novo-divider-vertical]': 'vertical',
-    '[class.novo-divider-horizontal]': '!vertical',
-    '[class.novo-divider-inset]': 'inset',
-    class: 'novo-divider',
-  },
-  template: '',
-  styleUrls: ['./divider.component.scss'],
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'novo-divider',
+    host: {
+        role: 'separator',
+        '[attr.aria-orientation]': 'vertical ? "vertical" : "horizontal"',
+        '[class.novo-divider-vertical]': 'vertical',
+        '[class.novo-divider-horizontal]': '!vertical',
+        '[class.novo-divider-inset]': 'inset',
+        class: 'novo-divider',
+    },
+    template: '',
+    styleUrls: ['./divider.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NovoDividerComponent {
   /** Whether the divider is vertically aligned. */

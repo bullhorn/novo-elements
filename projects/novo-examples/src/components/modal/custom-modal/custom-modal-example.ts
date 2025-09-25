@@ -2,14 +2,15 @@ import { Component } from '@angular/core';
 import { NovoModalRef, NovoModalService } from 'novo-elements';
 
 @Component({
-  selector: 'modal-custom-demo',
-  template: `
+    selector: 'modal-custom-demo',
+    template: `
     <novo-notification type="custom" icon="trending-up">
       <h1>I have a trending icon!</h1>
       <h2>This notification type allows for any Bullhorn Icon</h2>
       <button theme="primary" icon="check" (click)="close()">Sweet.</button>
     </novo-notification>
   `,
+    standalone: false
 })
 export class ModalCustomDemo {
   constructor(private modalRef: NovoModalRef) {}
@@ -22,9 +23,10 @@ export class ModalCustomDemo {
  * @title Custom Modal Example
  */
 @Component({
-  selector: 'custom-modal-example',
-  templateUrl: 'custom-modal-example.html',
-  styleUrls: ['custom-modal-example.css'],
+    selector: 'custom-modal-example',
+    templateUrl: 'custom-modal-example.html',
+    styleUrls: ['custom-modal-example.css'],
+    standalone: false
 })
 export class CustomModalExample {
   constructor(private modalService: NovoModalService) {}

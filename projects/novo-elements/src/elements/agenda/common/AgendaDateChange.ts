@@ -2,8 +2,8 @@ import { Component, EventEmitter, Inject, Input, LOCALE_ID, Output } from '@angu
 import { DateUtil } from 'novo-elements/utils';
 
 @Component({
-  selector: 'novo-agenda-date-change',
-  template: `
+    selector: 'novo-agenda-date-change',
+    template: `
     <div class="cal-date-change">
       <i class="bhi-arrow-left" (click)="subtractDate()"></i>
       <span [ngSwitch]="view">
@@ -18,7 +18,8 @@ import { DateUtil } from 'novo-elements/utils';
       <i class="bhi-arrow-right" (click)="addDate()"></i>
     </div>
   `,
-  styleUrls: ['./AgendaDateChange.scss'],
+    styleUrls: ['./AgendaDateChange.scss'],
+    standalone: false
 })
 export class NovoAgendaDateChangeElement {
   /**

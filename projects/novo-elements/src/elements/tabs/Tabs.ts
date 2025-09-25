@@ -19,9 +19,10 @@ import { Router, RouterLink } from '@angular/router';
 import { BooleanInput } from 'novo-elements/utils';
 
 @Component({
-  selector: 'novo-nav',
-  template: '<ng-content></ng-content>',
-  styleUrls: ['./tab-nav.scss'],
+    selector: 'novo-nav',
+    template: '<ng-content></ng-content>',
+    styleUrls: ['./tab-nav.scss'],
+    standalone: false
 })
 export class NovoNavElement implements AfterContentChecked {
   @Input()
@@ -120,21 +121,22 @@ export class NovoNavElement implements AfterContentChecked {
 }
 
 @Component({
-  selector: 'novo-tab',
-  host: {
-    '(click)': 'select()',
-    '[class.active]': 'active',
-    '[class.disabled]': 'disabled',
-    '[attr.role]': 'tab',
-  },
-  template: `
+    selector: 'novo-tab',
+    host: {
+        '(click)': 'select()',
+        '[class.active]': 'active',
+        '[class.disabled]': 'disabled',
+        '[attr.role]': 'tab',
+    },
+    template: `
     <div #tablink class="novo-tab-link">
       <ng-content></ng-content>
     </div>
     <span class="indicator"></span>
   `,
-  styleUrls: ['./tab.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    styleUrls: ['./tab.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NovoTabElement {
   @HostBinding('attr.role')
@@ -185,14 +187,15 @@ export class NovoTabElement {
 }
 
 @Component({
-  selector: 'novo-tab-button',
-  host: {
-    '(click)': 'select()',
-    '[class.active]': 'active',
-    '[class.disabled]': 'disabled',
-  },
-  template: '<ng-content></ng-content>',
-  styleUrls: ['./tab-button.scss'],
+    selector: 'novo-tab-button',
+    host: {
+        '(click)': 'select()',
+        '[class.active]': 'active',
+        '[class.disabled]': 'disabled',
+    },
+    template: '<ng-content></ng-content>',
+    styleUrls: ['./tab-button.scss'],
+    standalone: false
 })
 export class NovoTabButtonElement {
   @HostBinding('attr.role')
@@ -217,20 +220,21 @@ export class NovoTabButtonElement {
 }
 
 @Component({
-  selector: 'novo-tab-link',
-  host: {
-    '(click)': 'select()',
-    '[class.active]': 'active',
-    '[class.disabled]': 'disabled',
-  },
-  template: `
+    selector: 'novo-tab-link',
+    host: {
+        '(click)': 'select()',
+        '[class.active]': 'active',
+        '[class.disabled]': 'disabled',
+    },
+    template: `
     <div class="novo-tab-link">
       <ng-content></ng-content>
     </div>
     <span class="indicator"></span>
   `,
-  styleUrls: ['./tab.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    styleUrls: ['./tab.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NovoTabLinkElement implements OnInit {
   @HostBinding('attr.role')
@@ -271,10 +275,11 @@ export class NovoTabLinkElement implements OnInit {
 }
 
 @Component({
-  selector: 'novo-nav-outlet',
-  template: '<ng-content></ng-content>',
-  styleUrls: ['./tab-outlet.scss'],
-  encapsulation: ViewEncapsulation.None,
+    selector: 'novo-nav-outlet',
+    template: '<ng-content></ng-content>',
+    styleUrls: ['./tab-outlet.scss'],
+    encapsulation: ViewEncapsulation.None,
+    standalone: false
 })
 export class NovoNavOutletElement {
   items: Array<any> = [];
@@ -308,13 +313,14 @@ export class NovoNavOutletElement {
 }
 
 @Component({
-  selector: 'novo-nav-content',
-  host: {
-    '[class.active]': 'active',
-  },
-  template: '<ng-content></ng-content>',
-  styleUrls: ['./tab-content.scss'],
-  encapsulation: ViewEncapsulation.None,
+    selector: 'novo-nav-content',
+    host: {
+        '[class.active]': 'active',
+    },
+    template: '<ng-content></ng-content>',
+    styleUrls: ['./tab-content.scss'],
+    encapsulation: ViewEncapsulation.None,
+    standalone: false
 })
 export class NovoNavContentElement {
   @Input()
@@ -326,13 +332,14 @@ export class NovoNavContentElement {
 }
 
 @Component({
-  selector: 'novo-nav-header',
-  host: {
-    '[class.active]': 'active',
-    '(click)': 'show($event)',
-  },
-  template: '<ng-content></ng-content>',
-  styleUrls: ['./tab-header.scss'],
+    selector: 'novo-nav-header',
+    host: {
+        '[class.active]': 'active',
+        '(click)': 'show($event)',
+    },
+    template: '<ng-content></ng-content>',
+    styleUrls: ['./tab-header.scss'],
+    standalone: false
 })
 export class NovoNavHeaderElement {
   @HostBinding('attr.role')

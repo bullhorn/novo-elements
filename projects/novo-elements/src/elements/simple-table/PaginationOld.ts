@@ -10,8 +10,8 @@ interface Page {
   active: boolean;
 }
 @Component({
-  selector: 'novo-pagination',
-  template: `
+    selector: 'novo-pagination',
+    template: `
     <ng-container *ngIf="rowOptions.length > 1">
       <h5 class="rows">{{ label }}</h5>
       <novo-select
@@ -42,8 +42,9 @@ interface Page {
       </li>
     </ul>
   `,
-  styleUrls: ['./PaginationOld.scss'],
-  encapsulation: ViewEncapsulation.None,
+    styleUrls: ['./PaginationOld.scss'],
+    encapsulation: ViewEncapsulation.None,
+    standalone: false
 })
 export class Pagination implements OnInit, OnChanges {
   @Input()

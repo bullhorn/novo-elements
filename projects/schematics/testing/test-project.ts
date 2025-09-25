@@ -8,18 +8,7 @@ export async function createTestProject(
   appOptions = {},
   tree?: Tree,
 ): Promise<UnitTestTree> {
-  const workspaceTree = await runner
-    .runExternalSchematicAsync(
-      '@schematics/angular',
-      'workspace',
-      {
-        name: 'workspace',
-        version: '6.0.0',
-        newProjectRoot: 'projects',
-      },
-      tree,
-    )
-    .toPromise();
-
-  return runner.runExternalSchematicAsync('@schematics/angular', projectType, { name: 'novo', ...appOptions }, workspaceTree).toPromise();
+  const opts = { name: 'workspace', version: '6.0.0', newProjectRoot: 'projects', };
+  const workspaceTree = await runner.runExternalSchematic('@schematics/angular', 'workspace', opts, tree);
+  return runner.runExternalSchematic('@schematics/angular', projectType, { name: 'novo', ...appOptions }, workspaceTree);
 }

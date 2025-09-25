@@ -5,9 +5,10 @@ import { EntityPickerResult, EntityPickerResults, FormUtils, PickerControl } fro
  * @title Picker Controls Example
  */
 @Component({
-  selector: 'picker-controls-example',
-  templateUrl: 'picker-controls-example.html',
-  styleUrls: ['picker-controls-example.css'],
+    selector: 'picker-controls-example',
+    templateUrl: 'picker-controls-example.html',
+    styleUrls: ['picker-controls-example.css'],
+    standalone: false
 })
 export class PickerControlsExample {
   public singlePickerControl: any;

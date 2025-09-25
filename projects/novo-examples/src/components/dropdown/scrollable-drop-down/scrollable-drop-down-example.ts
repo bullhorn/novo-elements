@@ -4,9 +4,10 @@ import { Component } from '@angular/core';
  * @title Scrollable Drop Down
  */
 @Component({
-  selector: 'scrollable-drop-down-example',
-  templateUrl: 'scrollable-drop-down-example.html',
-  styleUrls: ['scrollable-drop-down-example.css'],
+    selector: 'scrollable-drop-down-example',
+    templateUrl: 'scrollable-drop-down-example.html',
+    styleUrls: ['scrollable-drop-down-example.css'],
+    standalone: false
 })
 export class ScrollableDropDownExample {
   public clickMe(event?: string) {

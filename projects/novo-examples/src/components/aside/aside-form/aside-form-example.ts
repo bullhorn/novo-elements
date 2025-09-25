@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormUtils, NovoAsideRef, NovoAsideService, PickerControl, PickerResults, TextBoxControl } from 'novo-elements';
 
 @Component({
-  selector: 'aside-form-demo',
-  template: `
+    selector: 'aside-form-demo',
+    template: `
     <header title="Add Contact" icon="person" theme="contact">
       <utils>
         <util-action icon="times" (click)="close()"></util-action>
@@ -28,12 +28,13 @@ import { FormUtils, NovoAsideRef, NovoAsideService, PickerControl, PickerResults
     <button theme="standard" (click)="close()">Cancel</button>
     <button theme="primary" color="success" icon="check" (click)="close()">Save</button>
   `,
-  host: {
-    // tslint:disable-next-line: quotemark
-    '[style.display]': "'block'",
-    // tslint:disable-next-line: quotemark
-    '[style.width.%]': "'100'",
-  },
+    host: {
+        // tslint:disable-next-line: quotemark
+        '[style.display]': "'block'",
+        // tslint:disable-next-line: quotemark
+        '[style.width.%]': "'100'",
+    },
+    standalone: false
 })
 export class AsideFormDemo implements OnInit {
   public textControl: any;
@@ -71,9 +72,10 @@ export class AsideFormDemo implements OnInit {
  * @title Aside Form Example
  */
 @Component({
-  selector: 'aside-form-example',
-  templateUrl: 'aside-form-example.html',
-  styleUrls: ['aside-form-example.css'],
+    selector: 'aside-form-example',
+    templateUrl: 'aside-form-example.html',
+    styleUrls: ['aside-form-example.css'],
+    standalone: false
 })
 export class AsideFormExample {
   constructor(private aside: NovoAsideService) {}

@@ -14,9 +14,10 @@ interface Recipient {
  * @title Card Form Example
  */
 @Component({
-  selector: 'card-form-example',
-  templateUrl: 'card-form-example.html',
-  styleUrls: ['card-form-example.css'],
+    selector: 'card-form-example',
+    templateUrl: 'card-form-example.html',
+    styleUrls: ['card-form-example.css'],
+    standalone: false
 })
 export class CardFormExample {
   recipientCtrl = new UntypedFormControl();

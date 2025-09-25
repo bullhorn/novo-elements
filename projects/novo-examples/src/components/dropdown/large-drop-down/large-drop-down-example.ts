@@ -4,9 +4,10 @@ import { Component } from '@angular/core';
  * @title Large Drop Down
  */
 @Component({
-  selector: 'large-drop-down-example',
-  templateUrl: 'large-drop-down-example.html',
-  styleUrls: ['large-drop-down-example.css'],
+    selector: 'large-drop-down-example',
+    templateUrl: 'large-drop-down-example.html',
+    styleUrls: ['large-drop-down-example.css'],
+    standalone: false
 })
 export class LargeDropDownExample {
   public MOCK_WORDS: string[] = [

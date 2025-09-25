@@ -10,12 +10,8 @@ xdescribe('constructor checks', () => {
 
     const { logOutput } = await runFixers();
 
-    expect(logOutput)
-      .withContext('Expected the constructor checks to report if an argument is not assignable.')
-      .toMatch(/@22:13 - Found "NativeDateAdapter"/);
-    expect(logOutput)
-      .not.withContext('Expected the constructor to not report if an argument is assignable.')
-      .toMatch(/@24.*Found "NativeDateAdapter".*/);
+    expect(logOutput).toMatch(/@22:13 - Found "NativeDateAdapter"/);
+    expect(logOutput).not.toMatch(/@24.*Found "NativeDateAdapter".*/);
 
     expect(logOutput).not.toMatch(/Found "NonMaterialClass".*: new NonMaterialClass\(\)/);
 

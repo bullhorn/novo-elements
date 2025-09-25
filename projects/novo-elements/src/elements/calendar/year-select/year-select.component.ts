@@ -4,10 +4,11 @@ import type { DateLike } from 'novo-elements/utils';
 import { DateUtil } from 'novo-elements/utils';
 
 @Component({
-  selector: 'novo-year-select',
-  templateUrl: './year-select.component.html',
-  styleUrls: ['./year-select.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'novo-year-select',
+    templateUrl: './year-select.component.html',
+    styleUrls: ['./year-select.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NovoYearSelectElement implements OnInit {
   @Input()

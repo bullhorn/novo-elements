@@ -8,8 +8,8 @@ import { NovoLabelService } from 'novo-elements/services';
  * TODO: Do we implement currency formation here potentially?
  */
 @Component({
-  selector: 'novo-number-condition-def',
-  template: `
+    selector: 'novo-number-condition-def',
+    template: `
     <ng-container novoConditionFieldDef>
       <novo-field *novoConditionOperatorsDef="let formGroup" [formGroup]="formGroup">
         <novo-select [placeholder]="labels.operator" formControlName="operator" (onSelect)="onOperatorSelect(formGroup)">
@@ -35,8 +35,9 @@ import { NovoLabelService } from 'novo-elements/services';
       </ng-container>
     </ng-container>
   `,
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.Default,
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.Default,
+    standalone: false
 })
 export class NovoDefaultNumberConditionDef extends AbstractConditionFieldDef {
   defaultOperator = Operator.equalTo;

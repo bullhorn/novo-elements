@@ -25,9 +25,9 @@ const COLOR_VALUE_ACCESSOR = {
 };
 
 @Component({
-  selector: 'novo-color-input',
-  providers: [COLOR_VALUE_ACCESSOR],
-  template: `
+    selector: 'novo-color-input',
+    providers: [COLOR_VALUE_ACCESSOR],
+    template: `
     <novo-field>
       <input
         novoInput
@@ -50,6 +50,7 @@ const COLOR_VALUE_ACCESSOR = {
       <novo-color-picker [(color)]="value" (onChange)="setValueAndClose($event)"></novo-color-picker>
     </novo-overlay-template>
   `,
+    standalone: false
 })
 export class NovoColorInputElement implements OnInit, ControlValueAccessor {
   @Input()

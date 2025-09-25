@@ -5,9 +5,10 @@ import { ChildTab, TabbedGroupPickerTab } from 'novo-elements';
  * @title Tabbed Group Picker - Basic Example
  */
 @Component({
-  selector: 'tabbed-group-picker-basic-example',
-  templateUrl: 'tabbed-group-picker-basic-example.html',
-  styleUrls: ['../tabbed-group-picker-example.scss'],
+    selector: 'tabbed-group-picker-basic-example',
+    templateUrl: 'tabbed-group-picker-basic-example.html',
+    styleUrls: ['../tabbed-group-picker-example.scss'],
+    standalone: false
 })
 export class TabbedGroupPickerBasicExample {
   getAnimals = (): { animalId: number; name: string }[] =>

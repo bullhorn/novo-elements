@@ -3,8 +3,8 @@ import { addMonths, subMonths } from 'date-fns';
 import { WeekDay } from 'novo-elements/utils';
 
 @Component({
-  selector: 'novo-agenda-month-header',
-  template: `
+    selector: 'novo-agenda-month-header',
+    template: `
     <ng-template #defaultTemplate>
       <div class="agenda-header">
         <div class="agenda-header-top">
@@ -32,6 +32,7 @@ import { WeekDay } from 'novo-elements/utils';
     >
     </ng-template>
   `,
+    standalone: false
 })
 export class NovoAgendaMonthHeaderElement {
   @Input()

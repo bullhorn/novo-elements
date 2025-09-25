@@ -5,10 +5,11 @@ import type { DateLike } from 'novo-elements/utils';
 import { DateUtil } from 'novo-elements/utils';
 
 @Component({
-  selector: 'novo-month-select',
-  templateUrl: './month-select.component.html',
-  styleUrls: ['./month-select.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'novo-month-select',
+    templateUrl: './month-select.component.html',
+    styleUrls: ['./month-select.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NovoMonthSelectElement implements OnInit {
   @Input()

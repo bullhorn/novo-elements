@@ -42,10 +42,11 @@ import {
 import { BooleanInput, Key, notify } from 'novo-elements/utils';
 
 @Directive({
-  selector: '[dropdownTrigger]',
-  host: {
-    class: 'novo-dropdown-trigger',
-  },
+    selector: '[dropdownTrigger]',
+    host: {
+        class: 'novo-dropdown-trigger',
+    },
+    standalone: false
 })
 export class NovoDropDownTrigger {
   constructor(public element: ElementRef) {}
@@ -61,8 +62,8 @@ const NovoDropdownMixins: HasOverlayCtor & CanDisableCtor & HasTabIndexCtor & ty
 );
 
 @Component({
-  selector: 'novo-dropdown',
-  template: `
+    selector: 'novo-dropdown',
+    template: `
     <ng-content select="button,novo-button,[dropdownTrigger]" #trigger></ng-content>
     <novo-overlay-template [parent]="element" [width]="width" [position]="side" [scrollStrategy]="scrollStrategy">
       <div #panel class="dropdown-container {{ containerClass }}" [style.max-height.px]="height" [class.has-height]="!!height">
@@ -70,10 +71,11 @@ const NovoDropdownMixins: HasOverlayCtor & CanDisableCtor & HasTabIndexCtor & ty
       </div>
     </novo-overlay-template>
   `,
-  styleUrls: ['./Dropdown.scss'],
-  host: {
-    '[attr.tabIndex]': 'disabled ? -1 : 0',
-  },
+    styleUrls: ['./Dropdown.scss'],
+    host: {
+        '[attr.tabIndex]': 'disabled ? -1 : 0',
+    },
+    standalone: false
 })
 export class NovoDropdownElement extends NovoDropdownMixins implements OnInit, AfterContentInit, AfterViewInit, OnDestroy {
   @Input()
@@ -362,12 +364,13 @@ export class NovoDropdownElement extends NovoDropdownMixins implements OnInit, A
 // Deprecated below here ---------------------------
 
 @Component({
-  selector: 'item',
-  template: '<novo-option><ng-content></ng-content></novo-option>',
-  host: {
-    '[class.disabled]': 'disabled',
-    '[class.active]': 'active',
-  },
+    selector: 'item',
+    template: '<novo-option><ng-content></ng-content></novo-option>',
+    host: {
+        '[class.disabled]': 'disabled',
+        '[class.active]': 'active',
+    },
+    standalone: false
 })
 export class NovoItemElement {
   @Input()
@@ -398,8 +401,9 @@ export class NovoItemElement {
 }
 
 @Component({
-  selector: 'list',
-  template: '<ng-content></ng-content>',
+    selector: 'list',
+    template: '<ng-content></ng-content>',
+    standalone: false
 })
 export class NovoDropdownListElement implements AfterContentInit {
   @ContentChildren(NovoItemElement)
@@ -418,8 +422,9 @@ export class NovoDropdownListElement implements AfterContentInit {
 }
 
 @Component({
-  selector: 'dropdown-item-header',
-  template: '<ng-content></ng-content>',
+    selector: 'dropdown-item-header',
+    template: '<ng-content></ng-content>',
+    standalone: false
 })
 export class NovoDropDownItemHeaderElement {
   constructor() {

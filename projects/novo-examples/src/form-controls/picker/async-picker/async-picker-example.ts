@@ -4,9 +4,10 @@ import { Component } from '@angular/core';
  * @title Async Picker Example
  */
 @Component({
-  selector: 'async-picker-example',
-  templateUrl: 'async-picker-example.html',
-  styleUrls: ['async-picker-example.css'],
+    selector: 'async-picker-example',
+    templateUrl: 'async-picker-example.html',
+    styleUrls: ['async-picker-example.css'],
+    standalone: false
 })
 export class AsyncPickerExample {
   public placeholder: string = 'Select...';

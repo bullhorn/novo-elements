@@ -34,10 +34,10 @@ export class NovoCheckboxChange {
 const LAYOUT_DEFAULTS = { iconStyle: 'box' };
 let nextId = 0;
 @Component({
-  selector: 'novo-checkbox',
-  providers: [CHECKBOX_VALUE_ACCESSOR],
-  styleUrls: ['./Checkbox.scss'],
-  template: `
+    selector: 'novo-checkbox',
+    providers: [CHECKBOX_VALUE_ACCESSOR],
+    styleUrls: ['./Checkbox.scss'],
+    template: `
     <div class="novo-checkbox-group" [class.checked]="checked" [class.disabled]="disabled">
       <input
         #input
@@ -70,10 +70,11 @@ let nextId = 0;
       </label>
     </div>
   `,
-  host: {
-    class: 'novo-checkbox',
-    '[class.has-label]': 'label',
-  },
+    host: {
+        class: 'novo-checkbox',
+        '[class.has-label]': 'label',
+    },
+    standalone: false
 })
 export class NovoCheckboxElement implements ControlValueAccessor, OnInit {
   /**

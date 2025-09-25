@@ -4,9 +4,10 @@ import { Component } from '@angular/core';
  * @title Legacy Select Option Example
  */
 @Component({
-  selector: 'legacy-select-option-example',
-  templateUrl: './legacy-select-option-example.html',
-  styleUrls: ['./legacy-select-option-example.css'],
+    selector: 'legacy-select-option-example',
+    templateUrl: './legacy-select-option-example.html',
+    styleUrls: ['./legacy-select-option-example.css'],
+    standalone: false
 })
 export class LegacySelectOptionExample {
   public placeholder: string = 'Select...';

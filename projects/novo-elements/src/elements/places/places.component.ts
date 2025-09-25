@@ -41,9 +41,9 @@ const PLACES_VALUE_ACCESSOR = {
 };
 
 @Component({
-  selector: 'google-places-list',
-  providers: [PLACES_VALUE_ACCESSOR],
-  template: `
+    selector: 'google-places-list',
+    providers: [PLACES_VALUE_ACCESSOR],
+    template: `
     <novo-list direction="vertical">
       <novo-list-item *ngFor="let data of matches; let $index = index" (click)="selectedListNode($event, $index)" [ngClass]="{ active: data === activeMatch }">
         <item-header>
@@ -54,7 +54,8 @@ const PLACES_VALUE_ACCESSOR = {
       </novo-list-item>
     </novo-list>
   `,
-  styleUrls: ['./places.component.scss'],
+    styleUrls: ['./places.component.scss'],
+    standalone: false
 })
 export class PlacesListComponent extends BasePickerResults implements OnInit, OnChanges, ControlValueAccessor {
   @Input()

@@ -34,8 +34,8 @@ import { NovoSelectElement } from 'novo-elements/elements/select';
  * Handle selection of field values when a list of options is provided.
  */
 @Component({
-  selector: 'novo-address-condition-def',
-  template: `
+    selector: 'novo-address-condition-def',
+    template: `
     <ng-container novoConditionFieldDef>
       <novo-field *novoConditionOperatorsDef="let formGroup" [formGroup]="formGroup">
         <novo-select [placeholder]="labels.operator" formControlName="operator" (onSelect)="onOperatorSelect(formGroup)">
@@ -88,8 +88,9 @@ import { NovoSelectElement } from 'novo-elements/elements/select';
       </ng-container>
     </ng-container>
   `,
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.Default,
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.Default,
+    standalone: false
 })
 export class NovoDefaultAddressConditionDef extends AbstractConditionFieldDef implements OnDestroy {
   @ViewChildren(NovoPickerToggleElement) overlayChildren: QueryList<NovoPickerToggleElement>;

@@ -2,14 +2,15 @@ import { Component } from '@angular/core';
 import { NovoModalRef, NovoModalService } from 'novo-elements';
 
 @Component({
-  selector: 'modal-error-demo',
-  template: `
+    selector: 'modal-error-demo',
+    template: `
     <novo-notification type="error">
       <h1>Sorry, something went wrong.</h1>
       <h2>You did not have 1.21 gigawatts of power.</h2>
       <button theme="primary" icon="refresh-o" (click)="close()">Refresh this page</button>
     </novo-notification>
   `,
+    standalone: false
 })
 export class ModalErrorDemo {
   constructor(private modalRef: NovoModalRef) {}
@@ -22,9 +23,10 @@ export class ModalErrorDemo {
  * @title Error Modal Example
  */
 @Component({
-  selector: 'error-modal-example',
-  templateUrl: 'error-modal-example.html',
-  styleUrls: ['error-modal-example.css'],
+    selector: 'error-modal-example',
+    templateUrl: 'error-modal-example.html',
+    styleUrls: ['error-modal-example.css'],
+    standalone: false
 })
 export class ErrorModalExample {
   constructor(private modalService: NovoModalService) {}

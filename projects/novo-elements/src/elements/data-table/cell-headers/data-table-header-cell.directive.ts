@@ -3,7 +3,8 @@ import { Directive, ElementRef, HostBinding, Input, OnInit, Renderer2 } from '@a
 import { IDataTableColumn } from '../interfaces';
 
 @Directive({
-  selector: 'novo-data-table-header-cell',
+    selector: 'novo-data-table-header-cell',
+    standalone: false
 })
 export class NovoDataTableHeaderCell<T> extends CdkHeaderCell implements OnInit {
   @HostBinding('attr.role')

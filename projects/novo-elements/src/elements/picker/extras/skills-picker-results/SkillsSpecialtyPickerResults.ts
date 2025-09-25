@@ -5,8 +5,8 @@ import { NovoLabelService } from 'novo-elements/services';
 import { BasePickerResults } from '../base-picker-results/BasePickerResults';
 
 @Component({
-  selector: 'skill-specialty-picker-results',
-  template: `
+    selector: 'skill-specialty-picker-results',
+    template: `
     <section class="picker-loading" *ngIf="isLoading && !matches?.length"><novo-loading theme="line"></novo-loading></section>
     <novo-list *ngIf="matches.length > 0" direction="vertical">
       <novo-list-item
@@ -32,7 +32,8 @@ import { BasePickerResults } from '../base-picker-results/BasePickerResults';
     <p class="picker-error" *ngIf="hasError">{{ labels.pickerError }}</p>
     <p class="picker-null" *ngIf="!isLoading && !matches.length && !hasError">{{ labels.pickerEmpty }}</p>
   `,
-  styleUrls: ['./SkillsSpecialtyPickerResults.scss'],
+    styleUrls: ['./SkillsSpecialtyPickerResults.scss'],
+    standalone: false
 })
 export class SkillsSpecialtyPickerResults extends BasePickerResults {
   @HostBinding('class.active')

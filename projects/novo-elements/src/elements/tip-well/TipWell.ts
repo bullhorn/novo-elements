@@ -5,8 +5,8 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { NovoLabelService } from 'novo-elements/services';
 
 @Component({
-  selector: 'novo-tip-well',
-  template: `
+    selector: 'novo-tip-well',
+    template: `
     <div *ngIf="isActive">
       <div>
         <i class="bhi-{{ icon }}" *ngIf="icon" [attr.data-automation-id]="'novo-tip-well-icon-' + name"></i>
@@ -20,10 +20,11 @@ import { NovoLabelService } from 'novo-elements/services';
       </button>
     </div>
   `,
-  styleUrls: ['./TipWell.scss'],
-  host: {
-    '[class.active]': 'isActive',
-  },
+    styleUrls: ['./TipWell.scss'],
+    host: {
+        '[class.active]': 'isActive',
+    },
+    standalone: false
 })
 export class NovoTipWellElement implements OnInit {
   @Input()

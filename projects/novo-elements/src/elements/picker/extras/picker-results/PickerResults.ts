@@ -5,11 +5,11 @@ import { NovoLabelService } from 'novo-elements/services';
 import { BasePickerResults } from '../base-picker-results/BasePickerResults';
 
 @Component({
-  selector: 'picker-results',
-  host: {
-    class: 'active',
-  },
-  template: `
+    selector: 'picker-results',
+    host: {
+        class: 'active',
+    },
+    template: `
     <novo-list *ngIf="matches.length > 0" direction="vertical">
       <novo-list-item
         *ngFor="let match of matches"
@@ -27,8 +27,9 @@ import { BasePickerResults } from '../base-picker-results/BasePickerResults';
     <p class="picker-error" *ngIf="hasError">{{ labels.pickerError }}</p>
     <p class="picker-null-results" *ngIf="hasNonErrorMessage">{{ getEmptyMessage() }}</p>
   `,
-  styleUrls: ['./PickerResults.scss'],
-  encapsulation: ViewEncapsulation.None,
+    styleUrls: ['./PickerResults.scss'],
+    encapsulation: ViewEncapsulation.None,
+    standalone: false
 })
 export class PickerResults extends BasePickerResults {
   constructor(element: ElementRef, public labels: NovoLabelService, ref: ChangeDetectorRef) {

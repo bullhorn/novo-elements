@@ -26,10 +26,10 @@ const PROGRESS_BAR_VALUE_ACCESSOR = {
 };
 
 @Component({
-  selector: 'novo-progress-bar',
-  styleUrls: ['./ProgressBar.scss'],
-  providers: [PROGRESS_BAR_VALUE_ACCESSOR],
-  template: `
+    selector: 'novo-progress-bar',
+    styleUrls: ['./ProgressBar.scss'],
+    providers: [PROGRESS_BAR_VALUE_ACCESSOR],
+    template: `
     <div *ngIf="appearance === progressAppearance.LINEAR" class="progress-bar"></div>
     <svg *ngIf="appearance === progressAppearance.RADIAL" width="120" height="120">
       <circle
@@ -44,6 +44,7 @@ const PROGRESS_BAR_VALUE_ACCESSOR = {
       />
     </svg>
   `,
+    standalone: false
 })
 export class NovoProgressBarElement implements ControlValueAccessor, OnInit {
   private _uniqueId: string = `novo-progress-${++nextId}`;

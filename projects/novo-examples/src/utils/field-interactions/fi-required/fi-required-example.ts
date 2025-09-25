@@ -6,9 +6,10 @@ import { CheckboxControl, FieldInteractionApi, FormUtils, TextBoxControl } from 
  * @title Fi Required Example
  */
 @Component({
-  selector: 'fi-required-example',
-  templateUrl: 'fi-required-example.html',
-  styleUrls: ['fi-required-example.css'],
+    selector: 'fi-required-example',
+    templateUrl: 'fi-required-example.html',
+    styleUrls: ['fi-required-example.css'],
+    standalone: false
 })
 export class FiRequiredExample {
   public form: any = {};

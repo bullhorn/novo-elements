@@ -22,11 +22,11 @@ export type NovoPseudoCheckboxShape = 'box' | 'circle' | 'line';
  * @docs-private
  */
 @Component({
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'novo-pseudo-checkbox',
-  styleUrls: ['pseudo-checkbox.component.scss'],
-  template: ` <i
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'novo-pseudo-checkbox',
+    styleUrls: ['pseudo-checkbox.component.scss'],
+    template: ` <i
     [class.bhi-checkbox-empty]="state === 'unchecked' && shape === 'box'"
     [class.bhi-checkbox-filled]="state === 'checked' && shape === 'box'"
     [class.bhi-checkbox-indeterminate]="state === 'indeterminate' && shape === 'box'"
@@ -37,13 +37,14 @@ export type NovoPseudoCheckboxShape = 'box' | 'circle' | 'line';
     [class.bhi-check]="state === 'checked' && shape === 'line'"
     [class.bhi-box-minus-o]="state === 'indeterminate' && shape === 'line'"
   ></i>`,
-  host: {
-    class: 'novo-pseudo-checkbox',
-    '[class.novo-pseudo-checkbox-indeterminate]': 'state === "indeterminate"',
-    '[class.novo-pseudo-checkbox-checked]': 'state === "checked"',
-    '[class.novo-pseudo-checkbox-disabled]': 'disabled',
-    '[class._novo-animation-noopable]': '_animationMode === "NoopAnimations"',
-  },
+    host: {
+        class: 'novo-pseudo-checkbox',
+        '[class.novo-pseudo-checkbox-indeterminate]': 'state === "indeterminate"',
+        '[class.novo-pseudo-checkbox-checked]': 'state === "checked"',
+        '[class.novo-pseudo-checkbox-disabled]': 'disabled',
+        '[class._novo-animation-noopable]': '_animationMode === "NoopAnimations"',
+    },
+    standalone: false
 })
 export class NovoPseudoCheckbox {
   /** Display state of the checkbox. */

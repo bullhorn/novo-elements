@@ -5,9 +5,10 @@ import { NovoToastService } from 'novo-elements';
  * @title Basic Cards
  */
 @Component({
-  selector: 'basic-card-example',
-  templateUrl: 'basic-card-example.html',
-  styleUrls: ['basic-card-example.css'],
+    selector: 'basic-card-example',
+    templateUrl: 'basic-card-example.html',
+    styleUrls: ['basic-card-example.css'],
+    standalone: false
 })
 export class BasicCardExample {
   // Config for demos

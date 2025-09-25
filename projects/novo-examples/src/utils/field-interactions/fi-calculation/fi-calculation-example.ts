@@ -6,9 +6,10 @@ import { DateTimeControl, FieldInteractionApi, FormUtils, TextBoxControl } from 
  * @title Fi Calculation Example
  */
 @Component({
-  selector: 'fi-calculation-example',
-  templateUrl: 'fi-calculation-example.html',
-  styleUrls: ['fi-calculation-example.css'],
+    selector: 'fi-calculation-example',
+    templateUrl: 'fi-calculation-example.html',
+    styleUrls: ['fi-calculation-example.css'],
+    standalone: false
 })
 export class FiCalculationExample {
   public form: any;

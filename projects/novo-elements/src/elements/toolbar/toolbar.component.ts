@@ -10,9 +10,10 @@ const _NovoToolbarBase = mixinColor(
 );
 
 @Directive({
-  selector: 'novo-toolbar-row',
-  host: { class: 'novo-toolbar-row' },
-  inputs: ['color', 'gap'],
+    selector: 'novo-toolbar-row',
+    host: { class: 'novo-toolbar-row' },
+    inputs: ['color', 'gap'],
+    standalone: false
 })
 export class NovoToolbarRow extends _NovoToolbarBase implements CanColor {
   constructor(elementRef: ElementRef) {
@@ -21,17 +22,18 @@ export class NovoToolbarRow extends _NovoToolbarBase implements CanColor {
 }
 
 @Component({
-  selector: 'novo-toolbar',
-  templateUrl: './toolbar.component.html',
-  styleUrls: ['./toolbar.component.scss'],
-  inputs: ['color', 'gap'],
-  host: {
-    class: 'novo-toolbar',
-    '[class.novo-toolbar-multiple-rows]': '_toolbarRows.length > 0',
-    '[class.novo-toolbar-single-row]': '_toolbarRows.length === 0',
-  },
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None,
+    selector: 'novo-toolbar',
+    templateUrl: './toolbar.component.html',
+    styleUrls: ['./toolbar.component.scss'],
+    inputs: ['color', 'gap'],
+    host: {
+        class: 'novo-toolbar',
+        '[class.novo-toolbar-multiple-rows]': '_toolbarRows.length > 0',
+        '[class.novo-toolbar-single-row]': '_toolbarRows.length === 0',
+    },
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
+    standalone: false
 })
 export class NovoToolbar extends _NovoToolbarBase implements CanColor {
   /** Reference to all toolbar row elements that have been projected. */

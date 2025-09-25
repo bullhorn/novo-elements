@@ -15,14 +15,15 @@ const EMPTY_CONDITION: Condition = {
   supportingValue: null,
 };
 @Component({
-  selector: 'novo-condition-group',
-  templateUrl: './condition-group.component.html',
-  styleUrls: ['./condition-group.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => ConditionGroupComponent), multi: true }],
-  host: {
-    class: 'novo-condition-group',
-  },
+    selector: 'novo-condition-group',
+    templateUrl: './condition-group.component.html',
+    styleUrls: ['./condition-group.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => ConditionGroupComponent), multi: true }],
+    host: {
+        class: 'novo-condition-group',
+    },
+    standalone: false
 })
 export class ConditionGroupComponent implements OnInit, OnDestroy {
   @Input() controlName: string = '$' + Conjunction.AND;

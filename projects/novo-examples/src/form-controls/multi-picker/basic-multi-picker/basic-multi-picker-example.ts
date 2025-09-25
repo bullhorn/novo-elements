@@ -5,9 +5,10 @@ import { ChecklistPickerResults } from 'novo-elements';
  * @title Basic Multi Picker Example
  */
 @Component({
-  selector: 'basic-multi-picker-example',
-  templateUrl: 'basic-multi-picker-example.html',
-  styleUrls: ['basic-multi-picker-example.css'],
+    selector: 'basic-multi-picker-example',
+    templateUrl: 'basic-multi-picker-example.html',
+    styleUrls: ['basic-multi-picker-example.css'],
+    standalone: false
 })
 export class BasicMultiPickerExample {
   placeholder: string = 'Select...';

@@ -5,9 +5,10 @@ import { NOVO_VALUE_THEME } from 'novo-elements';
  * @title Icon Value Example
  */
 @Component({
-  selector: 'icon-value-example',
-  templateUrl: 'icon-value-example.html',
-  styleUrls: ['icon-value-example.css'],
+    selector: 'icon-value-example',
+    templateUrl: 'icon-value-example.html',
+    styleUrls: ['icon-value-example.css'],
+    standalone: false
 })
 export class IconValueExample {
   public theme = NOVO_VALUE_THEME.DEFAULT;

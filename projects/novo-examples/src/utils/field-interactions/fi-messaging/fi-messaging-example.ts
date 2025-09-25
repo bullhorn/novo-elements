@@ -6,9 +6,10 @@ import { CheckboxControl, FieldInteractionApi, FormUtils, TextBoxControl } from 
  * @title Fi Messaging Example
  */
 @Component({
-  selector: 'fi-messaging-example',
-  templateUrl: 'fi-messaging-example.html',
-  styleUrls: ['fi-messaging-example.css'],
+    selector: 'fi-messaging-example',
+    templateUrl: 'fi-messaging-example.html',
+    styleUrls: ['fi-messaging-example.css'],
+    standalone: false
 })
 export class FiMessagingExample {
   public form: any = {};

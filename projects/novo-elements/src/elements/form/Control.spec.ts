@@ -1,7 +1,7 @@
 // NG2
 import { OverlayModule } from '@angular/cdk/overlay';
 import { ChangeDetectorRef, Component, DebugElement, ElementRef, ErrorHandler, EventEmitter, Inject, NO_ERRORS_SCHEMA, OnInit } from '@angular/core';
-import { ComponentFixture, TestBed, async, fakeAsync, inject, tick } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync, fakeAsync, inject, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { IMaskModule } from 'angular-imask';
 import { NovoElementsModule } from 'novo-elements';
@@ -34,6 +34,7 @@ jest.mock('angular-imask');
       }
     `,
   ],
+  standalone: false,
 })
 class NovoAutoSizeTestComponent {}
 
@@ -43,7 +44,7 @@ describe('Elements: NovoAutoSize', () => {
     let component;
     let textarea: HTMLTextAreaElement;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
         imports: [OverlayModule],
         declarations: [NovoAutoSize, NovoAutoSizeTestComponent],
@@ -87,6 +88,7 @@ describe('Test Localization', () => {
 
 @Component({
   template: ` <div></div> `,
+  standalone: false,
 })
 class TestComponent {}
 describe('NovoControlElement', () => {
@@ -183,7 +185,7 @@ describe('NovoControlElement', () => {
     expect(testBoolean).toEqual(false);
   });
 
-  describe('Function: handleEdit(value)', () => {   
+  describe('Function: handleEdit(value)', () => {
     it('should emit edit event with passed in value', () => {
       spyOn(component.edit, 'emit');
       component.handleEdit('test');
@@ -191,7 +193,7 @@ describe('NovoControlElement', () => {
     });
   });
 
-  describe('Function: handleSave(value)', () => {   
+  describe('Function: handleSave(value)', () => {
     it('should emit save event with passed in value', () => {
       spyOn(component.save, 'emit');
       component.handleSave('test');
@@ -199,7 +201,7 @@ describe('NovoControlElement', () => {
     });
   });
 
-  describe('Function: handleDelete(value)', () => {   
+  describe('Function: handleDelete(value)', () => {
     it('should emit delete event with passed in value', () => {
       spyOn(component.delete, 'emit');
       component.handleDelete('test');
@@ -207,7 +209,7 @@ describe('NovoControlElement', () => {
     });
   });
 
-  describe('Function: handleUpload(value)', () => {   
+  describe('Function: handleUpload(value)', () => {
     it('should emit upload event with passed in value', () => {
       spyOn(component.upload, 'emit');
       component.handleUpload('test');
@@ -215,7 +217,7 @@ describe('NovoControlElement', () => {
     });
   });
 
-  describe('Function: handleTyping(event)', () => {   
+  describe('Function: handleTyping(event)', () => {
     it('should set focused and enteredText based on typing event', () => {
       component.handleTyping('entered text');
       expect(component.focused).toBeTruthy();
@@ -237,7 +239,7 @@ describe('NovoControlElement', () => {
     });
   });
 
-  describe('Function: clearValue()', () => {   
+  describe('Function: clearValue()', () => {
     it('should set control value and formattedValue to null', () => {
       component.control = {
         key: 'newField',
@@ -255,8 +257,8 @@ describe('NovoControlElement', () => {
       expect(component.formattedValue).toBeNull();
     });
   });
- 
-  describe('Function: handleTextAreaInput', () => {   
+
+  describe('Function: handleTextAreaInput', () => {
     it('should call emitChange and restrictKeys with passed in value', () => {
       spyOn(component, 'emitChange');
       spyOn(component, 'restrictKeys');
@@ -410,7 +412,7 @@ describe('NovoControlElement', () => {
   });
 
   describe('Function: handlePercentChange()', () => {
-    
+
     beforeEach(() => {
       component.control = {
         key: 'newField',
@@ -482,7 +484,7 @@ describe('NovoControlElement', () => {
   });
 
   describe('Function: restrictKeys()', () => {
-    const event: any = { 
+    const event: any = {
       preventDefault: jasmine.any(Function),
     };
 
@@ -654,7 +656,7 @@ describe('NovoControlElement', () => {
     });
   });
 
-  describe('Function: modelChange(value)', () => {   
+  describe('Function: modelChange(value)', () => {
     it('should emit change event with passed in value', () => {
       spyOn(component.change, 'emit');
       component.modelChange('test');
@@ -1195,7 +1197,8 @@ class ErrorNet extends ErrorHandler {
   providers: [{
     provide: ErrorHandler,
     useClass: ErrorNet
-  }]
+  }],
+  standalone: false,
 })
 class TestComponent2 implements OnInit {
   templatesReady = false;
@@ -1206,7 +1209,7 @@ class TestComponent2 implements OnInit {
   blur = new EventEmitter<Event>();
 
   control: BaseControl;
-  
+
   constructor(private formUtils: FormUtils, @Inject(ErrorHandler) private net: ErrorNet) { }
 
   ngOnInit() {
@@ -1269,7 +1272,7 @@ describe('Novo Control with Templates', () => {
       makeControl(new TextBoxControl({ key: 'text', label: 'Text Box'}));
       inputDebug = fixture.debugElement.query(By.css('input'));
     }));
-  
+
 
     it('should finish readying templates', inject([NovoTemplateService], (templateService: NovoTemplateService) => {
       expect(Object.keys(templateService.getAll()).length).toBeGreaterThan(20);
@@ -1338,7 +1341,7 @@ describe('Novo Control with Templates', () => {
       }));
       inputDebug = fixture.debugElement.query(By.css('input'));
     }));
-  
+
 
     it('should finish readying templates', inject([NovoTemplateService], (templateService: NovoTemplateService) => {
       expect(Object.keys(templateService.getAll()).length).toBeGreaterThan(20);
@@ -1402,7 +1405,7 @@ describe('Novo Control with Templates', () => {
       }));
       datePickerDebug = fixture.debugElement.query(By.css('novo-date-picker-input'));
     }));
-    
+
     it('should receive change event', () => {
       let lastChange: any;
       testComponent.change.subscribe(c => lastChange = c);
@@ -1423,7 +1426,7 @@ describe('Novo Control with Templates', () => {
       }));
       addressDebug = fixture.debugElement.query(By.css('novo-address'));
     }));
-    
+
     it('should receive change event?', () => {
       let lastChange: any;
       testComponent.change.subscribe(c => lastChange = c);
@@ -1444,7 +1447,7 @@ describe('Novo Control with Templates', () => {
       }));
       checkboxDebug = fixture.debugElement.query(By.css('novo-checkbox'));
     }));
-    
+
     it('should receive change event', () => {
       let lastChange: any;
       testComponent.change.subscribe(c => lastChange = c);
@@ -1464,7 +1467,7 @@ describe('Novo Control with Templates', () => {
       }));
       checklistDebug = fixture.debugElement.query(By.css('novo-check-list'));
     }));
-    
+
     it('should receive change event', () => {
       let lastChange: any;
       testComponent.change.subscribe(c => lastChange = c);
@@ -1486,7 +1489,7 @@ describe('Novo Control with Templates', () => {
       }));
       nativeInputDebug = fixture.debugElement.query(By.css('input'));
     }));
-    
+
     it('should receive change event', () => {
       let lastChange: any;
       testComponent.change.subscribe(c => lastChange = c);

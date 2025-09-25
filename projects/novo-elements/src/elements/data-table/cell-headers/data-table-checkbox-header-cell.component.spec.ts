@@ -1,7 +1,7 @@
 // NG2
 import { CdkColumnDef } from '@angular/cdk/table';
 import { ChangeDetectorRef } from '@angular/core';
-import { async, TestBed } from '@angular/core/testing';
+import { waitForAsync, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { NovoButtonModule } from 'novo-elements/elements/button';
 import { NovoDatePickerModule } from 'novo-elements/elements/date-picker';
@@ -20,7 +20,7 @@ describe('Elements: NovoDataTableCheckboxHeaderCell', () => {
   let fixture;
   let component;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [NovoDataTableCheckboxHeaderCell],
       imports: [FormsModule, NovoTooltipModule, NovoButtonModule, NovoDropdownModule, NovoDatePickerModule],

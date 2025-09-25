@@ -4,9 +4,10 @@ import { Component } from '@angular/core';
  * @title Menu Context
  */
 @Component({
-  selector: 'menu-context-example',
-  templateUrl: 'menu-context-example.html',
-  styleUrls: ['menu-context-example.css'],
+    selector: 'menu-context-example',
+    templateUrl: 'menu-context-example.html',
+    styleUrls: ['menu-context-example.css'],
+    standalone: false
 })
 export class MenuContextExample {
   public apple = 'Context is Apples';

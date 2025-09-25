@@ -13,7 +13,8 @@ interface NovoDragItem<T> {
 }
 
 @Directive({
-    selector: '[novoDragDrop]'
+    selector: '[novoDragDrop]',
+    standalone: false
 })
 export class NovoDragBoxParent<T> implements AfterViewInit, OnDestroy {
 
@@ -39,7 +40,7 @@ export class NovoDragBoxParent<T> implements AfterViewInit, OnDestroy {
     get element(): HTMLElement {
         return this.elementRef.nativeElement;
     }
-    
+
     ngAfterViewInit(): void {
         this.registerChildren();
         this.mutationObserver.observe(this.element, { childList: true });
@@ -58,7 +59,7 @@ export class NovoDragBoxParent<T> implements AfterViewInit, OnDestroy {
         for (let i = 0; i < this.element.children.length; i++) {
             this.registerChild(this.element.children[i] as HTMLElement, i);
         }
-        
+
     }
 
     private registerChild(element: HTMLElement, index: number) {
@@ -145,9 +146,9 @@ export class NovoDragBoxParent<T> implements AfterViewInit, OnDestroy {
             allItems: this.itemsReordered,
             event
         });
-        
+
     }
-    
+
     /** - end per-item listeners */
 
     @HostListener('window:dragover', ['$event'])

@@ -4,9 +4,10 @@ import { Component } from '@angular/core';
  * @title Default Options Picker Example
  */
 @Component({
-  selector: 'default-options-picker-example',
-  templateUrl: 'default-options-picker-example.html',
-  styleUrls: ['default-options-picker-example.css'],
+    selector: 'default-options-picker-example',
+    templateUrl: 'default-options-picker-example.html',
+    styleUrls: ['default-options-picker-example.css'],
+    standalone: false
 })
 export class DefaultOptionsPickerExample {
   public placeholder: string = 'Select...';

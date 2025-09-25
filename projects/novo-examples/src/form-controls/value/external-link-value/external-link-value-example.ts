@@ -5,9 +5,10 @@ import { NOVO_VALUE_THEME } from 'novo-elements';
  * @title Value with Extenal Links Example
  */
 @Component({
-  selector: 'external-link-value-example',
-  templateUrl: 'external-link-value-example.html',
-  styleUrls: ['external-link-value-example.css'],
+    selector: 'external-link-value-example',
+    templateUrl: 'external-link-value-example.html',
+    styleUrls: ['external-link-value-example.css'],
+    standalone: false
 })
 export class ExternalLinkValueExample {
   public theme = NOVO_VALUE_THEME.MOBILE;

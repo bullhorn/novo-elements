@@ -24,9 +24,9 @@ const RADIO_VALUE_ACCESSOR = {
 };
 
 @Component({
-  selector: 'novo-radio',
-  providers: [RADIO_VALUE_ACCESSOR],
-  template: `
+    selector: 'novo-radio',
+    providers: [RADIO_VALUE_ACCESSOR],
+    template: `
     <input
       type="radio"
       [id]="id"
@@ -56,14 +56,15 @@ const RADIO_VALUE_ACCESSOR = {
       </div>
     </label>
   `,
-  styleUrls: ['./Radio.scss'],
-  host: {
-    '[class.vertical]': 'vertical',
-  },
+    styleUrls: ['./Radio.scss'],
+    host: {
+        '[class.vertical]': 'vertical',
+    },
+    standalone: false
 })
 export class NovoRadioElement implements ControlValueAccessor, OnInit {
   private _uniqueId: string = `novo-radio-${++nextId}`;
-  private _value: boolean = false;
+  private _value: boolean | string = false;
   _checked: boolean = false;
 
   @Input() id: string = this._uniqueId;
@@ -98,7 +99,7 @@ export class NovoRadioElement implements ControlValueAccessor, OnInit {
   }
 
   @Input()
-  get value(): boolean {
+  get value(): boolean | string {
     return this._value;
   }
   set value(value) {
