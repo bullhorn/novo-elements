@@ -206,7 +206,7 @@ function generatePageModule(extractedMetadata: PageMetadata[]): string {
 import {NgModule, Component} from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { NovoExamplesModule } from './examples.module';
-import { NovoExamplesSharedModule, TabsLayout, DefaultLayout } from './_shared';
+import { NovoExamplesSharedModule, TabsLayout } from './_shared';
 import { NovoElementsModule } from 'novo-elements';
 
 ${extractedMetadata
