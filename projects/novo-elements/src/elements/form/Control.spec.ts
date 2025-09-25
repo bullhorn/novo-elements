@@ -1197,7 +1197,8 @@ class ErrorNet extends ErrorHandler {
   providers: [{
     provide: ErrorHandler,
     useClass: ErrorNet
-  }]
+  }],
+  standalone: false,
 })
 class TestComponent2 implements OnInit {
   templatesReady = false;
