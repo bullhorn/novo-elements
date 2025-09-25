@@ -258,6 +258,7 @@ export enum AdaptiveConjunctionNames {
 }
 
 export enum AdaptiveOperator {
+  BeginsWith = 'beginsWith',
   EqualTo = 'equalTo',
   In = 'in',
   IncludeAny = 'includeAny',

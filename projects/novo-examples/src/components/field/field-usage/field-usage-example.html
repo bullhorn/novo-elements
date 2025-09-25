@@ -30,6 +30,16 @@
 </novo-field>
 
 <novo-field>
+  <novo-label>Datetime</novo-label>
+  <input novoInput dateFormat="iso8601" [picker]="datetimepicker" [(ngModel)]="datetime" />
+  <novo-picker-toggle novoSuffix icon="calendar">
+    <novo-date-time-picker #datetimepicker></novo-date-time-picker>
+  </novo-picker-toggle>
+  <novo-hint>value is: {{datetime}}</novo-hint>
+
+</novo-field>
+
+<novo-field>
   <novo-label>Need a Vacation?</novo-label>
   <input novoInput dateRangeFormat="iso8601" [picker]="daterangepicker" [(ngModel)]="daterange" />
   <novo-picker-toggle novoSuffix icon="calendar">

@@ -60,6 +60,10 @@ export class NovoOptionBase implements FocusableOption, AfterViewChecked, OnDest
   @Input()
   allowSelection = true;
 
+  // When selected, use a particular string for display instead of what was used to select it
+  @Input()
+  customViewValue: string = '';
+
   /** If there is no parent then nothing is managing the selection. */
   get selectable() {
     return this.allowSelection && this._parent;
@@ -130,7 +134,7 @@ export class NovoOptionBase implements FocusableOption, AfterViewChecked, OnDest
    * select's trigger.
    */
   get viewValue(): string {
-    return (this._getHostElement().textContent || '').trim();
+    return this.customViewValue || (this._getHostElement().textContent || '').trim();
   }
 
   /** Selects the option. */

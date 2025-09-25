@@ -21,6 +21,7 @@ export type ConditionOrConditionGroup = Condition | NestedConditionGroup;
 export enum Operator {
   after = 'after',
   before = 'before',
+  beginsWith = 'beginsWith',
   between = 'between',
   equalTo = 'equalTo',
   exclude = 'exclude',
@@ -87,6 +88,7 @@ export interface AddressData {
   name?: string;
   place_id: string;
   radius?: AddressRadius;
+  postal_codes?: string[];
   types?: string[];
 }
 

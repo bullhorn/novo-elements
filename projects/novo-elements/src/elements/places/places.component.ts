@@ -365,7 +365,7 @@ export class PlacesListComponent extends BasePickerResults implements OnInit, On
     }
   }
 
-  // function to retrive the location info based on goovle place id.
+  // function to retrieve the location info based on google place id.
   private getPlaceLocationInfo(selectedData: any): any {
     if (this.settings.useGoogleGeoApi) {
       this._googlePlacesService.getGeoPlaceDetail(selectedData.place_id).then((data: any) => {

@@ -214,6 +214,7 @@ export class NovoTimeFormatDirective extends IMaskDirective<any> implements Novo
 
   writeValue(value: any) {
     super.writeValue(this.formatValue(value));
+    this.valueChange.emit(value);
   }
 
   registerOnChange(fn: (date: any) => void): void {
