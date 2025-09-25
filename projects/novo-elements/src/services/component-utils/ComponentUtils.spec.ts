@@ -1,6 +1,6 @@
 // APP
 import { ComponentFactoryResolver } from '@angular/core';
-import { async } from '@angular/core/testing';
+import { waitForAsync } from '@angular/core/testing';
 import { ComponentUtils } from './ComponentUtils';
 
 describe('Utils: ComponentUtils', () => {
