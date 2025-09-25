@@ -38,7 +38,8 @@ interface MockOption {
         </novo-option>
       </novo-autocomplete>
     </novo-field>
-  `
+  `,
+  standalone: false,
 })
 class TestAutocompleteComponent {
   chipsControl = new FormControl<MockOption[]>([]);

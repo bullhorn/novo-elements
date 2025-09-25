@@ -34,6 +34,7 @@ jest.mock('angular-imask');
       }
     `,
   ],
+  standalone: false,
 })
 class NovoAutoSizeTestComponent {}
 
@@ -87,6 +88,7 @@ describe('Test Localization', () => {
 
 @Component({
   template: ` <div></div> `,
+  standalone: false,
 })
 class TestComponent {}
 describe('NovoControlElement', () => {

@@ -16,7 +16,8 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angul
       <novo-option value="2">Two</novo-option>
       <novo-option value="3">Three</novo-option>
     </novo-select>
-  </form>`
+  </form>`,
+  standalone: false,
 })
 class FixedSelectComponent {
   @ViewChild('select')
