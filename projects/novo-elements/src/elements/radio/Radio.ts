@@ -64,7 +64,7 @@ const RADIO_VALUE_ACCESSOR = {
 })
 export class NovoRadioElement implements ControlValueAccessor, OnInit {
   private _uniqueId: string = `novo-radio-${++nextId}`;
-  private _value: boolean = false;
+  private _value: boolean | string = false;
   _checked: boolean = false;
 
   @Input() id: string = this._uniqueId;
@@ -99,7 +99,7 @@ export class NovoRadioElement implements ControlValueAccessor, OnInit {
   }
 
   @Input()
-  get value(): boolean {
+  get value(): boolean | string {
     return this._value;
   }
   set value(value) {
