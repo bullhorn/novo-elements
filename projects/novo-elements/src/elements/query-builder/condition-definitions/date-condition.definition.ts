@@ -39,6 +39,7 @@ import { NovoLabelService } from 'novo-elements/services';
           <novo-select [placeholder]="labels.selectDateRange" formControlName="value">
             <novo-option value="future">{{ labels.future }}</novo-option>
             <novo-option value="-1">{{ labels.past1Day }}</novo-option>
+            <novo-option value="-7">{{ labels.past7Days }}</novo-option>
             <novo-option value="-14">{{ labels.past14Days }}</novo-option>
             <novo-option value="-21">{{ labels.past21Days }}</novo-option>
             <novo-option value="-30">{{ labels.past30Days }}</novo-option>
@@ -48,6 +49,7 @@ import { NovoLabelService } from 'novo-elements/services';
             <novo-option value="-270">{{ labels.past270Days }}</novo-option>
             <novo-option value="-365">{{ labels.past1Year }}</novo-option>
             <novo-option value="1">{{ labels.next1Day }}</novo-option>
+            <novo-option value="7">{{ labels.next7Days }}</novo-option>
             <novo-option value="14">{{ labels.next14Days }}</novo-option>
             <novo-option value="21">{{ labels.next21Days }}</novo-option>
             <novo-option value="30">{{ labels.next30Days }}</novo-option>
