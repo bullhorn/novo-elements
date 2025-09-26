@@ -48,6 +48,7 @@ export interface Condition {
   scope?: string;
   value: any;
   supportingValue?: any;
+  entity?: string,
 }
 
 export interface Criteria {
