@@ -82,10 +82,22 @@ export class ConditionGroupComponent implements OnInit, OnDestroy {
       delete this.parentForm.controls[this.controlName];
       this.controlName = name;
       // scrub properties not on control
-      const currentStrict = current.map((item) => (({ conditionType, field, operator, scope, value, ...rest }) => ({ conditionType, field, operator, scope, value }))(item));
+      const currentStrict = current.map(item => this.sanitizeCondition(item));
       this.parentForm.get(this.controlName)?.setValue(currentStrict);
       this.cdr.markForCheck();
     }
+  }
+
+  private sanitizeCondition(condition: any): Condition {
+    return {
+      conditionType: condition.conditionType,
+      field: condition.field,
+      operator: condition.operator,
+      scope: condition.scope,
+      value: condition.value,
+      supportingValue: condition.supportingValue,
+      entity: condition.entity
+    };
   }
 
   get root(): FormArray {
