@@ -1,0 +1,42 @@
+name: Test Self-Hosted Runner
+
+on:
+  workflow_dispatch:  # Manual trigger
+  push:
+    branches: [main, master]
+
+jobs:
+  test-runner:
+    runs-on: self-hosted  # This targets YOUR runner!
+    
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v3
+    
+    - name: Runner Information
+      run: |
+        echo "🎉 Job running on self-hosted runner!"
+        echo "Runner name: ${{ runner.name }}"
+        echo "Runner OS: ${{ runner.os }}"
+        echo "Runner Architecture: ${{ runner.arch }}"
+        
+    - name: System Information
+      run: |
+        echo "System info:"
+        uname -a
+        echo "Current directory:"
+        pwd
+        echo "Available disk space:"
+        df -h
+        
+    - name: Test Basic Commands
+      run: |
+        echo "Testing git:"
+        git --version
+        echo "Testing curl:"
+        curl --version | head -1
+        echo "Current user:"
+        whoami
+        
+    - name: Success Message
+      run: echo "✅ Self-hosted runner is working perfectly!"
