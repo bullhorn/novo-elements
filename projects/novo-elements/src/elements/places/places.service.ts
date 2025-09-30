@@ -142,12 +142,12 @@ export class GooglePlacesService {
     });
   }
 
-  getGeoPlaceDetail(placeId: string): Promise<any> {
-    return new Promise((resolve) => {
+  async getGeoPlaceDetail(placeId: string): Promise<any> {
+    const placeDetail: any = await new Promise((resolve) => {
       if (isPlatformBrowser(this.platformId)) {
         const _window: any = this._global.nativeGlobal;
         const placesService: any = new _window.google.maps.places.PlacesService(document.createElement('div'));
-        placesService.getDetails({ placeId }, (result: any, status: any) => {
+        placesService.getDetails({ placeId }, (result: any) => {
           if (result === null || result.length === 0) {
             this.getGeoPaceDetailByReferance(result.referance).then((referanceData: any) => {
               if (!referanceData) {
@@ -164,6 +164,12 @@ export class GooglePlacesService {
         resolve(false);
       }
     });
+
+    if (placeDetail?.types?.includes('locality')) {
+      placeDetail.postal_codes = await this.getPostalCodes(placeDetail);
+    }
+
+    return placeDetail;
   }
 
   getGeoPaceDetailByReferance(referance: string): Promise<any> {
@@ -211,6 +217,31 @@ export class GooglePlacesService {
         value = [];
       }
       resolve(value);
+    });
+  }
+
+  getPostalCodes(placeDetail: any): Promise<string> {
+    const _window: any = this._global.nativeGlobal;
+    const geocoder: any = new _window.google.maps.Geocoder();
+    return new Promise((resolve) => {
+      geocoder.geocode({ location: placeDetail.geometry.location }, (results, status) => {
+        if (status === 'OK' && results.length) {
+          resolve(
+            results.reduce(
+              (postalCodes: string[], result: any) => {
+                const postalCodeComponent = result.address_components.find(item => item.types.includes('postal_code'));
+                if (postalCodeComponent && !postalCodes.includes(postalCodeComponent.long_name)) {
+                  postalCodes.push(postalCodeComponent.long_name);
+                }
+                return postalCodes;
+              },
+              [],
+            ),
+          );
+        } else {
+          resolve(null);
+        }
+      });
     });
   }
 
