@@ -3,7 +3,7 @@ name: Test Self-Hosted Runner
 on:
   workflow_dispatch:  # Manual trigger
   push:
-    branches: [main, master]
+    branches: [testing-runners]
 
 jobs:
   test-runner:
