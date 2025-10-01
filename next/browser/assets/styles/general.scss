@@ -1,0 +1,39 @@
+// App general body styles
+html {
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+
+  body {
+    margin: 0;
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+    novo-demo-app {
+      height: 100%;
+      width: 100%;
+      box-sizing: border-box;
+      display: block;
+    }
+  }
+
+  .markdown-page > h2 {
+    margin-top: 5rem;
+    margin-bottom: 2rem;
+    &:not(:first-child) {
+      border-top: 2px solid #ccc;
+    }
+  }
+}
+
+code-snippet,
+multi-code-snippet {
+  margin-bottom: 20px;
+}
+
+.cover-img {
+  background: #aaa;
+  width: 100%;
+  max-height: 340px;
+  object-fit: contain;
+}

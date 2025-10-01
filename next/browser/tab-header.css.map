@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["projects/novo-elements/src/elements/tabs/tab-header.scss"],
+  "sourcesContent": [":host {\n  display: block;\n  padding: var(--spacing-sm);\n  margin: var(--spacing-sm);\n  border: 1px solid #333;\n}\n"],
+  "mappings": ";AAAA;AACE,WAAA;AACA,WAAA,IAAA;AACA,UAAA,IAAA;AACA,UAAA,IAAA,MAAA;;",
+  "names": []
+}

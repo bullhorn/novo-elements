@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["projects/novo-elements/src/elements/quick-note/QuickNote.scss"],
+  "sourcesContent": [":host,\n.quick-note-wrapper {\n  width: 100%;\n  height: 200px;\n  position: relative; // Remove any unnecessary padding from the CKEditor toolbar\n  ::ng-deep .cke_top {\n    padding-top: 4px;\n    padding-bottom: 0;\n    padding-left: 3px;\n    padding-right: 3px;\n    .cke_toolbar {\n      .cke_combo_text {\n        padding-left: 7px;\n      }\n      .cke_combo_open {\n        margin-left: 4px;\n      }\n      .cke_combo__fontsize .cke_combo_text {\n        width: 27px;\n      }\n    }\n  }\n}\n"],
+  "mappings": ";AAAA;AAAA,CAAA;AAEE,SAAA;AACA,UAAA;AACA,YAAA;;AACA,MAAA,UAAA,CAAA;AAAA,CALF,mBAKE,UAAA,CAAA;AACE,eAAA;AACA,kBAAA;AACA,gBAAA;AACA,iBAAA;;AAEE,MAAA,UAAA,CANJ,QAMI,CAAA,YAAA,CAAA;AAAA,CAXN,mBAWM,UAAA,CANJ,QAMI,CAAA,YAAA,CAAA;AACE,gBAAA;;AAEF,MAAA,UAAA,CATJ,QASI,CAHA,YAGA,CAAA;AAAA,CAdN,mBAcM,UAAA,CATJ,QASI,CAHA,YAGA,CAAA;AACE,eAAA;;AAEF,MAAA,UAAA,CAZJ,QAYI,CANA,YAMA,CAAA,oBAAA,CANA;AAMA,CAjBN,mBAiBM,UAAA,CAZJ,QAYI,CANA,YAMA,CAAA,oBAAA,CANA;AAOE,SAAA;;",
+  "names": []
+}

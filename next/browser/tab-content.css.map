@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["projects/novo-elements/src/elements/tabs/tab-content.scss"],
+  "sourcesContent": ["novo-nav-content {\n  display: none;\n  &.active {\n    display: block;\n  }\n}\n"],
+  "mappings": ";AAAA;AACE,WAAA;;AACA,gBAAA,CAAA;AACE,WAAA;;",
+  "names": []
+}

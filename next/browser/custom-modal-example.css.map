@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["projects/novo-examples/src/components/modal/custom-modal/custom-modal-example.css"],
+  "sourcesContent": ["/** CSS for this example */\n:host {\n  display: block;\n  background: rgba(0, 0, 0, 0.55);\n  padding: 35px 0;\n  position: relative;\n  text-align: center;\n}\n"],
+  "mappings": ";AACA;AACE,WAAS;AACT,cAAY,KAAK,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE;AAC1B,WAAS,KAAK;AACd,YAAU;AACV,cAAY;AACd;",
+  "names": []
+}

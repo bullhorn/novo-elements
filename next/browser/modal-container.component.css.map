@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["projects/novo-elements/src/elements/modal/modal-container.component.scss"],
+  "sourcesContent": [":host {\n  background: rgba(0, 0, 0, 0.25);\n\n  .modal-container {\n    z-index: z(modal);\n    position: fixed;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    top: 0;\n    bottom: 0;\n    left: 0;\n    right: 0;\n  }\n}\n"],
+  "mappings": ";AAAA;AACE,cAAA,KAAA,CAAA,EAAA,CAAA,EAAA,CAAA,EAAA;;AAEA,MAAA,CAAA;AACE,WAAA,EAAA;AACA,YAAA;AACA,WAAA;AACA,eAAA;AACA,mBAAA;AACA,OAAA;AACA,UAAA;AACA,QAAA;AACA,SAAA;;",
+  "names": []
+}
