@@ -8,9 +8,10 @@ import { State, STATES } from '../states.data';
  * @title Basic Select With Search Example
  */
 @Component({
-  selector: 'basic-select-with-search-example',
-  templateUrl: 'basic-select-with-search-example.html',
-  styleUrls: ['basic-select-with-search-example.css'],
+    selector: 'basic-select-with-search-example',
+    templateUrl: 'basic-select-with-search-example.html',
+    styleUrls: ['basic-select-with-search-example.css'],
+    standalone: false
 })
 export class BasicSelectWithSearchExample implements OnInit, AfterViewInit, OnDestroy {
   /** list of states */

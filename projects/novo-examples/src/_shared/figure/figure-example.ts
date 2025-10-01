@@ -3,11 +3,12 @@ import { AfterViewInit, Component, ElementRef, HostBinding, Input, ViewEncapsula
 import { HighlightJS } from '../highlight.service';
 
 @Component({
-  selector: 'figure-example',
-  templateUrl: './figure-example.html',
-  styleUrls: ['./figure-example.scss'],
-  host: { class: 'figure-example' },
-  encapsulation: ViewEncapsulation.None,
+    selector: 'figure-example',
+    templateUrl: './figure-example.html',
+    styleUrls: ['./figure-example.scss'],
+    host: { class: 'figure-example' },
+    encapsulation: ViewEncapsulation.None,
+    standalone: false
 })
 export class FigureExample implements AfterViewInit {
   @Input()

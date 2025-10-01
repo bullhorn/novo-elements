@@ -9,9 +9,10 @@ import { primaryColors as colors } from '../colors';
  * @title Primary Colors
  */
 @Component({
-  selector: 'primary-colors-example',
-  templateUrl: './primary-colors-example.html',
-  styleUrls: ['./primary-colors-example.scss'],
+    selector: 'primary-colors-example',
+    templateUrl: './primary-colors-example.html',
+    styleUrls: ['./primary-colors-example.scss'],
+    standalone: false
 })
 export class PrimaryColorsExample {
   primaryColors = colors;

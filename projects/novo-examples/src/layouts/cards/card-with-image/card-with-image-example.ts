@@ -5,9 +5,10 @@ import { NovoToastService } from 'novo-elements';
  * @title Card With Image
  */
 @Component({
-  selector: 'card-with-image-example',
-  templateUrl: 'card-with-image-example.html',
-  styleUrls: ['card-with-image-example.css'],
+    selector: 'card-with-image-example',
+    templateUrl: 'card-with-image-example.html',
+    styleUrls: ['card-with-image-example.css'],
+    standalone: false
 })
 export class CardWithImageExample {
   // Config for demos

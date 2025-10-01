@@ -4,15 +4,16 @@ import { NovoProgressBarElement } from './ProgressBar';
 import { NOVO_PROGRESS_CONTAINER, ProgressAppearance } from './ProgressConstants';
 
 @Component({
-  selector: 'novo-progress',
-  styleUrls: ['./Progress.scss'],
-  template: ` <ng-content></ng-content> `,
-  providers: [
-    {
-      provide: NOVO_PROGRESS_CONTAINER,
-      useExisting: NovoProgressElement,
-    },
-  ],
+    selector: 'novo-progress',
+    styleUrls: ['./Progress.scss'],
+    template: ` <ng-content></ng-content> `,
+    providers: [
+        {
+            provide: NOVO_PROGRESS_CONTAINER,
+            useExisting: NovoProgressElement,
+        },
+    ],
+    standalone: false
 })
 export class NovoProgressElement implements AfterContentInit {
   @Input()

@@ -2,7 +2,8 @@
 import { Directive, ElementRef, HostBinding, Input } from '@angular/core';
 
 @Directive({
-  selector: '[bg]',
+    selector: '[bg]',
+    standalone: false
 })
 export class BackgroundColorDirective {
   @Input() bg: string;

@@ -5,9 +5,10 @@ import { CheckboxControl, CheckListControl, FormUtils, SwitchControl, TilesContr
  * @title Check Box Controls Example
  */
 @Component({
-  selector: 'check-box-controls-example',
-  templateUrl: 'check-box-controls-example.html',
-  styleUrls: ['check-box-controls-example.css'],
+    selector: 'check-box-controls-example',
+    templateUrl: 'check-box-controls-example.html',
+    styleUrls: ['check-box-controls-example.css'],
+    standalone: false
 })
 export class CheckBoxControlsExample {
   public checkControl: any;

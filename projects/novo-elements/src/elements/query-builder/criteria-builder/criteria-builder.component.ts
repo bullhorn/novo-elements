@@ -35,18 +35,19 @@ const EMPTY_CONDITION: Condition = {
   supportingValue: null,
 };
 @Component({
-  selector: 'novo-criteria-builder',
-  templateUrl: './criteria-builder.component.html',
-  styleUrls: ['./criteria-builder.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => CriteriaBuilderComponent), multi: true },
-    { provide: NOVO_CRITERIA_BUILDER, useExisting: CriteriaBuilderComponent },
-    { provide: QueryBuilderService, useClass: QueryBuilderService },
-  ],
-  host: {
-    class: 'novo-criteria-builder',
-  },
+    selector: 'novo-criteria-builder',
+    templateUrl: './criteria-builder.component.html',
+    styleUrls: ['./criteria-builder.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => CriteriaBuilderComponent), multi: true },
+        { provide: NOVO_CRITERIA_BUILDER, useExisting: CriteriaBuilderComponent },
+        { provide: QueryBuilderService, useClass: QueryBuilderService },
+    ],
+    host: {
+        class: 'novo-criteria-builder',
+    },
+    standalone: false
 })
 export class CriteriaBuilderComponent implements OnInit, OnDestroy, AfterContentChecked, AfterViewInit {
   @Input() config: any;

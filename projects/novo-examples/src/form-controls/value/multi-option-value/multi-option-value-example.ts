@@ -5,9 +5,10 @@ import { NOVO_VALUE_THEME } from 'novo-elements';
  * @title Multi Option Value Example
  */
 @Component({
-  selector: 'multi-option-value-example',
-  templateUrl: 'multi-option-value-example.html',
-  styleUrls: ['multi-option-value-example.css'],
+    selector: 'multi-option-value-example',
+    templateUrl: 'multi-option-value-example.html',
+    styleUrls: ['multi-option-value-example.css'],
+    standalone: false
 })
 export class MultiOptionValueExample {
   public theme = NOVO_VALUE_THEME.DEFAULT;

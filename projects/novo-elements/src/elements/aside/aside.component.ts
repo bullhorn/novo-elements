@@ -5,10 +5,11 @@ import { NovoAsideRef } from './aside-ref';
 import { slideInOut } from './aside.animation';
 
 @Component({
-  selector: 'novo-aside',
-  templateUrl: './aside.component.html',
-  styleUrls: ['./aside.component.scss'],
-  animations: [slideInOut],
+    selector: 'novo-aside',
+    templateUrl: './aside.component.html',
+    styleUrls: ['./aside.component.scss'],
+    animations: [slideInOut],
+    standalone: false
 })
 export class AsideComponent {
   @Output() animationStateChanged = new EventEmitter<AnimationEvent>();

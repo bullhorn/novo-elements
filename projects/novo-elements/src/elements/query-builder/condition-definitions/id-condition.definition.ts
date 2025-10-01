@@ -6,8 +6,8 @@ import { Operator } from '../query-builder.types';
  * Any condition that has a type of ID usually only is queried by ID.
  */
 @Component({
-  selector: 'novo-id-condition-def',
-  template: `
+    selector: 'novo-id-condition-def',
+    template: `
     <ng-container novoConditionFieldDef>
       <novo-field *novoConditionOperatorsDef="let formGroup" [formGroup]="formGroup">
         <novo-select [placeholder]="labels.operator" formControlName="operator">
@@ -20,8 +20,9 @@ import { Operator } from '../query-builder.types';
       </novo-field>
     </ng-container>
   `,
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.Default,
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.Default,
+    standalone: false
 })
 export class NovoDefaultIdConditionDef extends AbstractConditionFieldDef {
   defaultOperator = Operator.equalTo;

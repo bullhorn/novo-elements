@@ -2,8 +2,8 @@ import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, EventEmitter, 
 import { PopOverDirective } from './PopOver';
 
 @Component({
-  selector: 'popover-content',
-  template: `
+    selector: 'popover-content',
+    template: `
     <div
       #popoverDiv
       class="popover {{ effectivePlacement }}"
@@ -22,7 +22,8 @@ import { PopOverDirective } from './PopOver';
       </div>
     </div>
   `,
-  styleUrls: ['./PopOver.scss'],
+    styleUrls: ['./PopOver.scss'],
+    standalone: false
 })
 export class PopOverContent implements AfterViewInit {
   @Input()

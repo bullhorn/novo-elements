@@ -1,5 +1,5 @@
 // NG
-import { async, ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 // App
 import { NovoLabelService } from 'novo-elements/services';
@@ -19,7 +19,8 @@ import { Component, viewChild } from '@angular/core';
     <novo-option *ngFor="let option of options" [value]="option.value">
       {{ option.label }}
     </novo-option>
-  </novo-select>`
+  </novo-select>`,
+  standalone: false,
 })
 class TestSelectComponent {
   select = viewChild(NovoSelectElement);
@@ -42,7 +43,7 @@ describe('Elements: NovoSelectElement', () => {
   let selectionModel: SelectionModel<NovoOption>;
   let keyManager: ActiveDescendantKeyManager<NovoOption>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [NovoSelectModule, NovoOptionModule, NovoOverlayModule],
       declarations: [TestSelectComponent],

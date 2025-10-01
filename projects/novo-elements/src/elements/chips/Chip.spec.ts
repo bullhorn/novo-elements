@@ -1,4 +1,4 @@
-import { async, TestBed } from '@angular/core/testing';
+import { waitForAsync, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { NovoChipElement } from './Chip';
 import { NovoChipsModule } from './Chips.module';
@@ -7,7 +7,7 @@ describe('Elements: NovoChipElement', () => {
   let fixture;
   let component;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [FormsModule, NovoChipsModule],
     }).compileComponents();

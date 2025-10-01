@@ -16,10 +16,11 @@ import { ConfigureColumnsModal, MockData } from '../extras';
  * @title Data Table Service Example
  */
 @Component({
-  selector: 'data-table-service-example',
-  templateUrl: 'data-table-service-example.html',
-  styleUrls: ['data-table-service-example.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'data-table-service-example',
+    templateUrl: 'data-table-service-example.html',
+    styleUrls: ['data-table-service-example.css'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class DataTableServiceExample {
   // Table configuration

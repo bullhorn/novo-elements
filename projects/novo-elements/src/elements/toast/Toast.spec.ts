@@ -1,5 +1,5 @@
 // NG2
-import { async, TestBed } from '@angular/core/testing';
+import { waitForAsync, TestBed } from '@angular/core/testing';
 import { NovoLabelService } from 'novo-elements/services';
 // App
 import { NovoToastElement } from './Toast';
@@ -8,7 +8,7 @@ describe('Elements: NovoToastElement', () => {
   let fixture;
   let component;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [NovoToastElement],
       providers: [{ provide: NovoLabelService, useClass: NovoLabelService }],

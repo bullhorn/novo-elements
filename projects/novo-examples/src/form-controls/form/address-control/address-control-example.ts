@@ -6,9 +6,10 @@ import { AddressControl, findByCountryId, FormUtils } from 'novo-elements';
  * @title Address Control Example
  */
 @Component({
-  selector: 'address-control-example',
-  templateUrl: 'address-control-example.html',
-  styleUrls: ['address-control-example.css'],
+    selector: 'address-control-example',
+    templateUrl: 'address-control-example.html',
+    styleUrls: ['address-control-example.css'],
+    standalone: false
 })
 export class AddressControlExample {
   public addressControl: any;

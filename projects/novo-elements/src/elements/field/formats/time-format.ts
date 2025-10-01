@@ -33,14 +33,15 @@ export enum TIME_FORMATS {
 }
 
 @Directive({
-  selector: 'input[timeFormat]',
-  host: {
-    class: 'novo-time-format',
-    '(input)': '_checkInput($event)',
-    '(blur)': '_handleBlur($event)',
-    '(keydown)': '_handleKeydown($event)',
-  },
-  providers: [TIMEFORMAT_VALUE_ACCESSOR, { provide: NOVO_INPUT_FORMAT, useExisting: NovoTimeFormatDirective }],
+    selector: 'input[timeFormat]',
+    host: {
+        class: 'novo-time-format',
+        '(input)': '_checkInput($event)',
+        '(blur)': '_handleBlur($event)',
+        '(keydown)': '_handleKeydown($event)',
+    },
+    providers: [TIMEFORMAT_VALUE_ACCESSOR, { provide: NOVO_INPUT_FORMAT, useExisting: NovoTimeFormatDirective }],
+    standalone: false
 })
 export class NovoTimeFormatDirective extends IMaskDirective<any> implements NovoInputFormat, AfterViewInit, OnChanges {
   valueChange: EventEmitter<any> = new EventEmitter();

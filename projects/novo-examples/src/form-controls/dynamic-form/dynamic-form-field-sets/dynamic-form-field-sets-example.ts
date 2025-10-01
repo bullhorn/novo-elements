@@ -6,9 +6,10 @@ import { MockMeta, MockMetaHeaders } from '../MockMeta';
  * @title Dynamic Form Field Sets Example
  */
 @Component({
-  selector: 'dynamic-form-field-sets-example',
-  templateUrl: 'dynamic-form-field-sets-example.html',
-  styleUrls: ['dynamic-form-field-sets-example.css'],
+    selector: 'dynamic-form-field-sets-example',
+    templateUrl: 'dynamic-form-field-sets-example.html',
+    styleUrls: ['dynamic-form-field-sets-example.css'],
+    standalone: false
 })
 export class DynamicFormFieldSetsExample {
   public fieldsets: Array<any>;

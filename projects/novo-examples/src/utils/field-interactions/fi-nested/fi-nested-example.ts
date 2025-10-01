@@ -6,9 +6,10 @@ import { FieldInteractionApi, FormUtils, NovoControlConfig, NovoFormGroup, Radio
  * @title Fi Nested Form Example
  */
 @Component({
-  selector: 'fi-nested-example',
-  templateUrl: 'fi-nested-example.html',
-  styleUrls: ['fi-nested-example.css'],
+    selector: 'fi-nested-example',
+    templateUrl: 'fi-nested-example.html',
+    styleUrls: ['fi-nested-example.css'],
+    standalone: false
 })
 export class FiNestedExample {
   public form: NovoFormGroup;

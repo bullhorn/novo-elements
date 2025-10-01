@@ -1,6 +1,9 @@
 import { Inject, LOCALE_ID, Pipe, PipeTransform } from '@angular/core';
 
-@Pipe({ name: 'weekday' })
+@Pipe({
+    name: 'weekday',
+    standalone: false
+})
 export class WeekdayPipe implements PipeTransform {
   constructor(@Inject(LOCALE_ID) private locale: string = 'en-US') {}
   transform(date: Date, locale: string = this.locale, method: 'long' | 'short' | 'narrow' = 'short'): string {

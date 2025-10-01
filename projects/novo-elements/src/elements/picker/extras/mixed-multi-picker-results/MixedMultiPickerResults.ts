@@ -22,8 +22,8 @@ export interface IMixedMultiPickerOption {
 }
 
 @Component({
-  selector: 'mixed-multi-picker-results',
-  template: ` <div class="mixed-multi-picker-groups">
+    selector: 'mixed-multi-picker-results',
+    template: ` <div class="mixed-multi-picker-groups">
       <novo-list direction="vertical">
         <novo-list-item
           *ngFor="let option of options"
@@ -85,7 +85,8 @@ export interface IMixedMultiPickerOption {
         </div>
       </div>
     </div>`,
-  styleUrls: ['./MixedMultiPickerResults.scss'],
+    styleUrls: ['./MixedMultiPickerResults.scss'],
+    standalone: false
 })
 export class MixedMultiPickerResults extends BasePickerResults implements OnDestroy {
   @ViewChild('input', { static: true })

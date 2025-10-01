@@ -5,15 +5,16 @@ import { ChangeDetectionStrategy, Component, ElementRef, Input, OnDestroy, Templ
 import { NovoStepLabel } from './step-label.component';
 
 @Component({
-  selector: 'novo-step-header',
-  templateUrl: 'step-header.component.html',
-  styleUrls: ['step-header.component.scss'],
-  host: {
-    class: 'novo-step-header',
-    role: 'tab',
-  },
-  preserveWhitespaces: false,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'novo-step-header',
+    templateUrl: 'step-header.component.html',
+    styleUrls: ['step-header.component.scss'],
+    host: {
+        class: 'novo-step-header',
+        role: 'tab',
+    },
+    preserveWhitespaces: false,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NovoStepHeader extends CdkStepHeader implements OnDestroy {
   @Input()

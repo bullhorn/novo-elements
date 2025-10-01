@@ -15,8 +15,8 @@ import { NovoToastService } from 'novo-elements/elements/toast';
 import { NovoDataTableRef, NOVO_DATA_TABLE_REF } from '../data-table.token';
 
 @Component({
-  selector: 'novo-data-table-checkbox-header-cell',
-  template: `
+    selector: 'novo-data-table-checkbox-header-cell',
+    template: `
     <div class="data-table-checkbox" (click)="onClick()">
       <input type="checkbox" [checked]="checked" />
       <label>
@@ -24,7 +24,8 @@ import { NovoDataTableRef, NOVO_DATA_TABLE_REF } from '../data-table.token';
       </label>
     </div>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NovoDataTableCheckboxHeaderCell<T> extends CdkHeaderCell implements OnDestroy {
   @HostBinding('attr.role')

@@ -19,11 +19,12 @@ type DateRange = {
 };
 
 @Directive({
-  selector: 'input[dateRangeFormat]',
-  host: {
-    class: 'novo-date-range-format',
-  },
-  providers: [DATERANGEFORMAT_VALUE_ACCESSOR, { provide: NOVO_INPUT_FORMAT, useExisting: NovoDateRangeFormatDirective }],
+    selector: 'input[dateRangeFormat]',
+    host: {
+        class: 'novo-date-range-format',
+    },
+    providers: [DATERANGEFORMAT_VALUE_ACCESSOR, { provide: NOVO_INPUT_FORMAT, useExisting: NovoDateRangeFormatDirective }],
+    standalone: false
 })
 export class NovoDateRangeFormatDirective extends IMaskDirective<any> {
   valueChange: EventEmitter<any> = new EventEmitter();

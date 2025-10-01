@@ -95,7 +95,7 @@ export async function createTestCaseSetup(migrationName: string, collectionPath:
     // TODO(devversion): RxJS version conflicts between angular-devkit and our dev deps.
     runner.engine.executePostTasks = () => EMPTY as any;
 
-    await runner.runSchematicAsync(migrationName, {}, appTree).toPromise();
+    await runner.runSchematic(migrationName, {}, appTree);
 
     return { logOutput };
   };

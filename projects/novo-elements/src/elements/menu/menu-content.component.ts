@@ -10,9 +10,9 @@ import { CloseLeafMenuEvent, IMenuClickEvent } from './menu.service';
 import { ILinkConfig } from './menu.types';
 
 @Component({
-  selector: 'menu-content',
-  styleUrls: ['./menu-content.component.scss'],
-  template: `<div class="menu-container novo-menu" [ngClass]="menuClass" tabindex="0">
+    selector: 'menu-content',
+    styleUrls: ['./menu-content.component.scss'],
+    template: `<div class="menu-container novo-menu" [ngClass]="menuClass" tabindex="0">
     <ul #menu class="menu" style="position: static; float: none;" tabindex="0">
       <ng-container *ngFor="let menuItem of menuItems; let i = index">
         <ng-template [ngTemplateOutlet]="menuItem.template" [ngTemplateOutletContext]="{ $implicit: item }"></ng-template>
@@ -20,6 +20,7 @@ import { ILinkConfig } from './menu.types';
       </ng-container>
     </ul>
   </div> `,
+    standalone: false
 })
 export class MenuContentComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input() public menuItems: MenuItemDirective[] = [];

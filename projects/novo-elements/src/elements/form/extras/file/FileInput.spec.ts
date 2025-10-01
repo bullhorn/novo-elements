@@ -1,5 +1,5 @@
 // NG
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { NovoLoadingElement } from 'novo-elements/elements/loading';
 import { DecodeURIPipe } from 'novo-elements/pipes';
@@ -17,7 +17,7 @@ describe('Elements: NovoFileInputElement', () => {
     }
   };
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [DragDropModule],
       declarations: [NovoFileInputElement, NovoLoadingElement, DecodeURIPipe],
@@ -177,7 +177,7 @@ describe('Elements: NovoFileInputElement', () => {
         component.writeValue(10);
         expect(component.model).toBe(10);
       });
-  
+
       it('should empty the file list if a falsey value is programmatically set', () => {
           component.writeValue(undefined);
           expect(component.files).toEqual([]);

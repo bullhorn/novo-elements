@@ -2,11 +2,12 @@
 import { AfterViewInit, Component, ComponentFactoryResolver, ViewChild, ViewContainerRef, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 @Component({
-  selector: 'tabs-layout',
-  templateUrl: './tabs-layout.html',
-  styleUrls: ['./tabs-layout.scss'],
-  host: { class: 'tabs-layout' },
-  encapsulation: ViewEncapsulation.None,
+    selector: 'tabs-layout',
+    templateUrl: './tabs-layout.html',
+    styleUrls: ['./tabs-layout.scss'],
+    host: { class: 'tabs-layout' },
+    encapsulation: ViewEncapsulation.None,
+    standalone: false
 })
 export class TabsLayout implements AfterViewInit {
   title: string = 'Unknown';

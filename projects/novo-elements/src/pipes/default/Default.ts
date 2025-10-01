@@ -1,7 +1,10 @@
 // NG2
 import { Injectable, Pipe, PipeTransform } from '@angular/core';
 
-@Pipe({ name: 'default', pure: true })
+@Pipe({
+    name: 'default', pure: true,
+    standalone: false
+})
 @Injectable()
 export class DefaultPipe implements PipeTransform {
   transform(value: any, defaultValue: any): any {

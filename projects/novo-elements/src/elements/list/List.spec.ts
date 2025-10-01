@@ -1,5 +1,5 @@
 // NG2
-import { async, TestBed } from '@angular/core/testing';
+import { waitForAsync, TestBed } from '@angular/core/testing';
 // App
 import {
   NovoItemAvatarElement,
@@ -17,7 +17,7 @@ describe('Elements: NovoListElement', () => {
   let fixture;
   let component;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [NovoListElement],
     }).compileComponents();
@@ -34,7 +34,7 @@ describe('Elements: NovoListItemElement', () => {
   let fixture;
   let component;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [NovoListItemElement],
     }).compileComponents();
@@ -51,7 +51,7 @@ describe('Elements: NovoItemAvatarElement', () => {
   let fixture;
   let component;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [NovoListModule],
     }).compileComponents();
@@ -68,7 +68,7 @@ describe('Elements: NovoItemTitleElement', () => {
   let fixture;
   let component;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [NovoItemTitleElement],
     }).compileComponents();
@@ -85,7 +85,7 @@ describe('Elements: NovoItemHeaderElement', () => {
   let fixture;
   let component;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [NovoListModule],
     }).compileComponents();
@@ -102,7 +102,7 @@ describe('Elements: NovoItemDateElement', () => {
   let fixture;
   let component;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [NovoItemDateElement],
     }).compileComponents();
@@ -119,7 +119,7 @@ describe('Elements: NovoItemContentElement', () => {
   let fixture;
   let component;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [NovoItemContentElement],
     }).compileComponents();
@@ -136,7 +136,7 @@ describe('Elements: NovoItemEndElement', () => {
   let fixture;
   let component;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [NovoItemEndElement],
     }).compileComponents();

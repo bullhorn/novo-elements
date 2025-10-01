@@ -7,9 +7,10 @@ import { MockMetaHeaders } from '../MockMeta';
  * @title Fi Adding Removing Example
  */
 @Component({
-  selector: 'fi-adding-removing-example',
-  templateUrl: 'fi-adding-removing-example.html',
-  styleUrls: ['fi-adding-removing-example.css'],
+    selector: 'fi-adding-removing-example',
+    templateUrl: 'fi-adding-removing-example.html',
+    styleUrls: ['fi-adding-removing-example.css'],
+    standalone: false
 })
 export class FiAddingRemovingExample {
   public form: any;

@@ -1,6 +1,6 @@
 // NG2
 import { ChangeDetectorRef } from '@angular/core';
-import { async, TestBed } from '@angular/core/testing';
+import { waitForAsync, TestBed } from '@angular/core/testing';
 import { DomSanitizer } from '@angular/platform-browser';
 import { NovoLabelService } from 'novo-elements/services';
 // APP
@@ -10,7 +10,7 @@ xdescribe('Render', () => {
   let fixture: any;
   let pipe;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [RenderPipe],
       providers: [{ provide: NovoLabelService, useClass: NovoLabelService }, ChangeDetectorRef, DomSanitizer],

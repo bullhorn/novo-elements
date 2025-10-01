@@ -38,9 +38,9 @@ const DEFAULT_DEBOUNCE_TIME = 250;
  * dynamically populate.
  */
 @Component({
-  selector: 'novo-picker',
-  providers: [PICKER_VALUE_ACCESSOR],
-  template: `
+    selector: 'novo-picker',
+    providers: [PICKER_VALUE_ACCESSOR],
+    template: `
     <i class="bhi-more" *ngIf="config?.entityIcon && !_value"></i>
     <i class="bhi-{{ config?.entityIcon }} entity-icon {{ config?.entityIcon }}" *ngIf="config?.entityIcon && _value"></i>
     <input
@@ -72,8 +72,9 @@ const DEFAULT_DEBOUNCE_TIME = 250;
       <ng-content></ng-content>
     </novo-overlay-template>
   `,
-  styleUrls: ['./Picker.scss'],
-  encapsulation: ViewEncapsulation.None,
+    styleUrls: ['./Picker.scss'],
+    encapsulation: ViewEncapsulation.None,
+    standalone: false
 })
 export class NovoPickerElement implements OnInit {
   // Container for the results

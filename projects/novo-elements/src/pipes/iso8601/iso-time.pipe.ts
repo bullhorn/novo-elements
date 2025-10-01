@@ -1,6 +1,9 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-@Pipe({ name: 'isoTime' })
+@Pipe({
+    name: 'isoTime',
+    standalone: false
+})
 export class IsoTimePipe implements PipeTransform {
   constructor() {}
   transform(date: string | Date): string {

@@ -9,8 +9,8 @@ import { NovoLabelService } from 'novo-elements/services';
  * input type depending on the operator selected.
  */
 @Component({
-  selector: 'novo-date-condition-def',
-  template: `
+    selector: 'novo-date-condition-def',
+    template: `
     <ng-container novoConditionFieldDef="DATE">
       <novo-field *novoConditionOperatorsDef="let formGroup; fieldMeta as meta" [formGroup]="formGroup">
         <novo-select [placeholder]="labels.operator" formControlName="operator" (onSelect)="onOperatorSelect(formGroup)">
@@ -52,8 +52,9 @@ import { NovoLabelService } from 'novo-elements/services';
       </ng-container>
     </ng-container>
   `,
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.Default,
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.Default,
+    standalone: false
 })
 export class NovoDefaultDateConditionDef extends AbstractConditionFieldDef {
   @ViewChildren(NovoPickerToggleElement)

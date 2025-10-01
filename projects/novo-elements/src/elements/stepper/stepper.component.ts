@@ -25,12 +25,13 @@ import { NovoStepLabel } from './step-label.component';
 import { novoStepperAnimations } from './stepper.animations';
 
 @Component({
-  selector: 'novo-step',
-  templateUrl: 'step.component.html',
-  styleUrls: ['stepper.component.scss'],
-  preserveWhitespaces: false,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [{ provide: CdkStep, useExisting: NovoStep }],
+    selector: 'novo-step',
+    templateUrl: 'step.component.html',
+    styleUrls: ['stepper.component.scss'],
+    preserveWhitespaces: false,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [{ provide: CdkStep, useExisting: NovoStep }],
+    standalone: false
 })
 export class NovoStep extends CdkStep {
   /** Content for step label given by `<ng-template novoStepLabel>`. */
@@ -50,11 +51,12 @@ export class NovoStep extends CdkStep {
 }
 
 @Directive({
-  selector: '[novoStepper]',
-  providers: [
-    { provide: CdkStep, useExisting: NovoStep },
-    { provide: CdkStepper, useExisting: NovoStepper },
-  ],
+    selector: '[novoStepper]',
+    providers: [
+        { provide: CdkStep, useExisting: NovoStep },
+        { provide: CdkStepper, useExisting: NovoStepper },
+    ],
+    standalone: false
 })
 export class NovoStepper extends CdkStepper implements AfterContentInit, OnDestroy {
   /** The list of step headers of the steps in the stepper. */
@@ -116,43 +118,45 @@ export class NovoStepper extends CdkStepper implements AfterContentInit, OnDestr
 }
 
 @Component({
-  selector: 'novo-horizontal-stepper',
-  exportAs: 'novoHorizontalStepper',
-  templateUrl: 'stepper-horizontal.html',
-  styleUrls: ['stepper.component.scss'],
-  host: {
-    class: 'novo-stepper-horizontal',
-    'aria-orientation': 'horizontal',
-    role: 'tablist',
-  },
-  animations: [novoStepperAnimations.horizontalStepTransition],
-  providers: [
-    { provide: NovoStepper, useExisting: NovoHorizontalStepper },
-    { provide: CdkStepper, useExisting: NovoHorizontalStepper },
-  ],
-  // encapsulation: ViewEncapsulation.None,
-  preserveWhitespaces: false,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'novo-horizontal-stepper',
+    exportAs: 'novoHorizontalStepper',
+    templateUrl: 'stepper-horizontal.html',
+    styleUrls: ['stepper.component.scss'],
+    host: {
+        class: 'novo-stepper-horizontal',
+        'aria-orientation': 'horizontal',
+        role: 'tablist',
+    },
+    animations: [novoStepperAnimations.horizontalStepTransition],
+    providers: [
+        { provide: NovoStepper, useExisting: NovoHorizontalStepper },
+        { provide: CdkStepper, useExisting: NovoHorizontalStepper },
+    ],
+    // encapsulation: ViewEncapsulation.None,
+    preserveWhitespaces: false,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NovoHorizontalStepper extends NovoStepper {}
 
 @Component({
-  selector: 'novo-vertical-stepper',
-  exportAs: 'novoVerticalStepper',
-  templateUrl: 'stepper-vertical.html',
-  styleUrls: ['stepper.component.scss'],
-  host: {
-    class: 'novo-stepper-vertical',
-    'aria-orientation': 'vertical',
-    role: 'tablist',
-  },
-  animations: [novoStepperAnimations.verticalStepTransition],
-  providers: [
-    { provide: NovoStepper, useExisting: NovoVerticalStepper },
-    { provide: CdkStepper, useExisting: NovoVerticalStepper },
-  ],
-  preserveWhitespaces: false,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'novo-vertical-stepper',
+    exportAs: 'novoVerticalStepper',
+    templateUrl: 'stepper-vertical.html',
+    styleUrls: ['stepper.component.scss'],
+    host: {
+        class: 'novo-stepper-vertical',
+        'aria-orientation': 'vertical',
+        role: 'tablist',
+    },
+    animations: [novoStepperAnimations.verticalStepTransition],
+    providers: [
+        { provide: NovoStepper, useExisting: NovoVerticalStepper },
+        { provide: CdkStepper, useExisting: NovoVerticalStepper },
+    ],
+    preserveWhitespaces: false,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NovoVerticalStepper extends NovoStepper {
   constructor(@Optional() dir: Directionality, changeDetectorRef: ChangeDetectorRef, elementRef: ElementRef) {

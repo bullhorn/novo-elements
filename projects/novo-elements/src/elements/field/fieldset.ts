@@ -4,19 +4,20 @@ import { BooleanInput } from 'novo-elements/utils';
 import { NovoFieldElement } from './field';
 
 @Component({
-  selector: 'novo-fields',
-  templateUrl: './fieldset.html',
-  styleUrls: ['./fieldset.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  host: {
-    class: 'novo-field',
-    '[class.novo-fieldset-appearance-standard]': 'appearance == "standard"',
-    '[class.novo-fieldset-appearance-fill]': 'appearance == "fill"',
-    '[class.novo-fieldset-appearance-outline]': 'appearance == "outline"',
-    '[class.novo-fieldset-appearance-list]': 'appearance == "list"',
-    // '[class.novo-field-layout-horizontal]': 'layout=="horizontal"',
-    // '[class.novo-field-layout-vertical]': 'layout=="vertical"',
-  },
+    selector: 'novo-fields',
+    templateUrl: './fieldset.html',
+    styleUrls: ['./fieldset.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    host: {
+        class: 'novo-field',
+        '[class.novo-fieldset-appearance-standard]': 'appearance == "standard"',
+        '[class.novo-fieldset-appearance-fill]': 'appearance == "fill"',
+        '[class.novo-fieldset-appearance-outline]': 'appearance == "outline"',
+        '[class.novo-fieldset-appearance-list]': 'appearance == "list"',
+        // '[class.novo-field-layout-horizontal]': 'layout=="horizontal"',
+        // '[class.novo-field-layout-vertical]': 'layout=="vertical"',
+    },
+    standalone: false
 })
 export class NovoFieldsElement implements AfterContentInit {
   @ContentChildren(NovoFieldElement)

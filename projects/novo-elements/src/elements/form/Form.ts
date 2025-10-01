@@ -7,8 +7,8 @@ import { NovoTemplate } from 'novo-elements/elements/common';
 import { NovoFormGroup } from './NovoFormGroup';
 
 @Component({
-  selector: 'novo-form',
-  template: `
+    selector: 'novo-form',
+    template: `
     <novo-control-templates></novo-control-templates>
     <div class="novo-form-container">
       <header *ngIf="!hideHeader">
@@ -20,9 +20,10 @@ import { NovoFormGroup } from './NovoFormGroup';
       </form>
     </div>
   `,
-  styleUrls: ['./Form.scss'],
-  encapsulation: ViewEncapsulation.None,
-  providers: [NovoTemplateService],
+    styleUrls: ['./Form.scss'],
+    encapsulation: ViewEncapsulation.None,
+    providers: [NovoTemplateService],
+    standalone: false
 })
 export class NovoFormElement implements AfterContentInit, OnInit {
   @Input()

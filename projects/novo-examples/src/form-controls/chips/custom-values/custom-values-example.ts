@@ -4,9 +4,10 @@ import { Component } from '@angular/core';
  * @title Basic Chips Example
  */
 @Component({
-  selector: 'custom-values-example',
-  templateUrl: 'custom-values-example.html',
-  styleUrls: ['custom-values-example.css'],
+    selector: 'custom-values-example',
+    templateUrl: 'custom-values-example.html',
+    styleUrls: ['custom-values-example.css'],
+    standalone: false
 })
 export class CustomValuesExample {
   staticDemo = {

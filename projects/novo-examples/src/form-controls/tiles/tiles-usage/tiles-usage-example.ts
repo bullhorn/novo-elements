@@ -5,9 +5,10 @@ import { allColors } from '../../../design';
  * @title Tiles Usage Example
  */
 @Component({
-  selector: 'tiles-usage-example',
-  templateUrl: 'tiles-usage-example.html',
-  styleUrls: ['tiles-usage-example.css'],
+    selector: 'tiles-usage-example',
+    templateUrl: 'tiles-usage-example.html',
+    styleUrls: ['tiles-usage-example.css'],
+    standalone: false
 })
 export class TilesUsageExample {
   public demoTilesDefault: Array<any> = [

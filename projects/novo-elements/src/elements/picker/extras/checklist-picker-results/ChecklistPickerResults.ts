@@ -11,11 +11,11 @@ import { BasePickerResults } from '../base-picker-results/BasePickerResults';
  * @description This is the actual list of matches that gets injected into the DOM.
  */
 @Component({
-  selector: 'checklist-picker-results',
-  host: {
-    class: 'active picker-results',
-  },
-  template: `
+    selector: 'checklist-picker-results',
+    host: {
+        class: 'active picker-results',
+    },
+    template: `
     <novo-loading theme="line" *ngIf="isLoading && !matches.length"></novo-loading>
     <ul *ngIf="matches.length > 0">
       <span *ngFor="let section of matches; let i = index">
@@ -43,6 +43,7 @@ import { BasePickerResults } from '../base-picker-results/BasePickerResults';
     <p class="picker-error" *ngIf="hasError">{{ labels.pickerError }}</p>
     <p class="picker-null-results" *ngIf="!isLoading && !matches.length && !hasError && term !== ''">{{ labels.pickerEmpty }}</p>
   `,
+    standalone: false
 })
 export class ChecklistPickerResults extends BasePickerResults {
   filteredMatches: any;

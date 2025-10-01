@@ -4,10 +4,11 @@ import { NOVO_BREADCRUMB_REF } from './Breadcrumb.tokens';
 import { SourceConfig } from './Breadcrumb.types';
 
 @Component({
-  selector: 'novo-breadcrumb',
-  templateUrl: './Breadcrumb.html',
-  styleUrls: ['./Breadcrumb.scss'],
-  providers: [{ provide: NOVO_BREADCRUMB_REF, useExisting: BreadcrumbElement }],
+    selector: 'novo-breadcrumb',
+    templateUrl: './Breadcrumb.html',
+    styleUrls: ['./Breadcrumb.scss'],
+    providers: [{ provide: NOVO_BREADCRUMB_REF, useExisting: BreadcrumbElement }],
+    standalone: false
 })
 export class BreadcrumbElement {
   @Input() separatorIcon: TemplateRef<any>;
