@@ -1,9 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ControlContainer, UntypedFormBuilder } from '@angular/forms';
+import { ControlContainer, FormArray, UntypedFormBuilder } from '@angular/forms';
 import { ConditionGroupComponent } from './condition-group.component';
 import { QueryBuilderService } from '../query-builder.service';
 import { NovoLabelService } from '../../../services';
 import { NovoFlexModule } from '../../../elements/flex';
+import { of } from 'rxjs';
 
 /**
  * Test suite for the ConditionGroupComponent
@@ -44,6 +45,17 @@ describe('ConditionGroupComponent', () => {
   it('should initialize correctly', () => {
     expect(component).toBeDefined();
   });
+
+  describe('ngOnChanges', () => {
+    it('should call updateGroupScopeAndEntity', () => {
+      const updateSpy = jest.spyOn(component, 'updateGroupScopeAndEntity').mockImplementation();
+
+      component.ngOnChanges();
+
+      expect(updateSpy).toHaveBeenCalled();
+      expect(updateSpy).toHaveBeenCalledTimes(1);
+    });
+});
 
   describe('updateGroupScopeAndEntity', () => {
     beforeEach(() => {
@@ -265,6 +277,23 @@ describe('ConditionGroupComponent', () => {
         parent: [],
       };
       expect(component.cantRemoveRow()).toBeTruthy();
+    });
+  });
+
+  describe('root getter', () => {
+    it('should return FormArray from parentForm using controlName', () => {
+      const mockFormArray = new FormArray([]);
+      const mockParentForm = {
+        get: jest.fn().mockReturnValue(mockFormArray)
+      };
+      
+      component.parentForm = mockParentForm as any;
+      component.controlName = '$and';
+
+      const result = component.root;
+
+      expect(mockParentForm.get).toHaveBeenCalledWith('$and');
+      expect(result).toBe(mockFormArray);
     });
   });
 });
