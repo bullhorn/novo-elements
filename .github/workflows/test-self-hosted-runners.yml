@@ -5,14 +5,15 @@ on:
   push:
     branches: [testing-runners]
 
+
 jobs:
-  test-runner:
-    runs-on: self-hosted  # This targets YOUR runner!
+  deploy:
+    runs-on: self-hosted
     
     steps:
-    - name: Check out code
+    - name: Checkout
       uses: actions/checkout@v3
-    
+
     - name: Runner Information
       run: |
         echo "🎉 Job running on self-hosted runner!"
@@ -28,15 +29,7 @@ jobs:
         pwd
         echo "Available disk space:"
         df -h
-        
-    - name: Test Basic Commands
-      run: |
-        echo "Testing git:"
-        git --version
-        echo "Testing curl:"
-        curl --version | head -1
-        echo "Current user:"
-        whoami
-        
-    - name: Success Message
-      run: echo "✅ Self-hosted runner is working perfectly!"
+
+    - name: Update Version
+      - run: |
+          update-version "github:bullhorn/novo-elements-snapshot#angular19" "development" "testing-runner"
