@@ -5,7 +5,6 @@ on:
   push:
     branches: [testing-runners]
 
-
 jobs:
   deploy:
     runs-on: self-hosted
@@ -29,7 +28,8 @@ jobs:
         pwd
         echo "Available disk space:"
         df -h
-        
+
     - name: Update Version
-      - run: |
-          update-version "github:bullhorn/novo-elements-snapshot#angular19" "development" "testing-runner"
+      run: |
+        # Update novo-elements to use the angular19 branch from novo-elements-snapshot repo
+        update-version "github:bullhorn/novo-elements-snapshot#angular19" "development" "testing-runner"
