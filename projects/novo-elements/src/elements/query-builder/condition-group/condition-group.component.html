@@ -5,7 +5,7 @@
       <ng-container [formGroupName]="andIndex">
         <novo-flex class="condition-row" [ngClass]="{ isFirst: andIndex === 0 }" [class]="entity || scope" align="end" gap="sm" #flex>
           <novo-dropdown *ngIf="(!isFirst || !hideFirstOperator) && qbs.allowedGroupings.length > 1; else labeledGroup">
-            <button theme="dialogue" icon="collapse" size="sm">{{qbs.getConjunctionLabel(controlName)}}</button>
+            <button theme="dialogue" icon="collapse" size="sm" [attr.data-automation-id]="controlName">{{qbs.getConjunctionLabel(controlName)}}</button>
             <novo-optgroup>
               <novo-option *ngFor="let c of qbs.allowedGroupings" (click)="updateControlName(c)">
                 {{qbs.getConjunctionLabel(c)}}</novo-option>
