@@ -4,18 +4,7 @@ import { ConditionGroupComponent } from './condition-group.component';
 import { QueryBuilderService } from '../query-builder.service';
 import { NovoLabelService } from '../../../services';
 import { NovoFlexModule } from '../../../elements/flex';
-import { of } from 'rxjs';
 
-/**
- * Test suite for the ConditionGroupComponent
- * 
- * This test suite covers the initialization and behavior of the ConditionGroupComponent,
- * specifically testing the cantRemoveRow method under various conditions.
- * 
- * It includes tests to verify:
- * - Component initialization
- * - Conditions for removing rows based on the number of groups in the parent form
- */
 describe('ConditionGroupComponent', () => {
   let fixture: ComponentFixture<ConditionGroupComponent>;
   let component: ConditionGroupComponent;
