@@ -44,7 +44,7 @@ export class NovoLabelService {
   select = 'Select...';
   value = 'Value...';
   selectDateRange = 'Select Date Range...'
-  typeToAddChips = 'Type to add chips...'
+  typeToAddChips = 'Type and press Enter to add...'
   selected = 'Selected';
   selectAllOnPage = 'Select all on page';
   deselectAll = 'Deselect all';
