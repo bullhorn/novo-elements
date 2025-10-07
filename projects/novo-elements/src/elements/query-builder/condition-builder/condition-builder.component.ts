@@ -26,7 +26,7 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { BaseConditionFieldDef } from '../query-builder.directives';
 import { QueryBuilderConfig, QueryBuilderService } from '../query-builder.service';
 import { NOVO_CONDITION_BUILDER } from '../query-builder.tokens';
-import { AddressCriteriaConfig, BaseFieldDef, FieldConfig, QueryFilterOutlet } from '../query-builder.types';
+import { AddressCriteriaConfig, BaseFieldDef, DateCriteriaConfig, FieldConfig, QueryFilterOutlet } from '../query-builder.types';
 
 /**
  * Provides a handle for the table to grab the view container's ng-container to insert data rows.
@@ -80,6 +80,7 @@ export class ConditionBuilderComponent implements OnInit, OnChanges, AfterConten
   @Input() andIndex: number;
   @Input() groupIndex: number;
   @Input() addressConfig: AddressCriteriaConfig;
+  @Input() dateConfig: DateCriteriaConfig;
   hideOperator = input(true);
   conditionType = input();
 

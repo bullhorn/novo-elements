@@ -24,7 +24,7 @@ import { ConditionGroupComponent } from '../condition-group/condition-group.comp
 import { NovoConditionFieldDef } from '../query-builder.directives';
 import { QueryBuilderService } from '../query-builder.service';
 import { NOVO_CRITERIA_BUILDER } from '../query-builder.tokens';
-import { BaseFieldDef, Condition, ConditionGroup, Conjunction, AddressCriteriaConfig } from '../query-builder.types';
+import { BaseFieldDef, Condition, ConditionGroup, Conjunction, AddressCriteriaConfig, DateCriteriaConfig } from '../query-builder.types';
 
 const EMPTY_CONDITION: Condition = {
   conditionType: '$and',
@@ -56,6 +56,7 @@ export class CriteriaBuilderComponent implements OnInit, OnDestroy, AfterContent
   @Input() allowedGroupings = [Conjunction.AND, Conjunction.OR, Conjunction.NOT];
   @Input() editTypeFn: (field: BaseFieldDef) => string;
   @Input() addressConfig: AddressCriteriaConfig;
+  @Input() dateConfig: DateCriteriaConfig;
   @Input() canBeEmpty: boolean = false;
 
   @Input('hideFirstOperator')
