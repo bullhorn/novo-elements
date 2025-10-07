@@ -249,7 +249,7 @@ describe('CriteriaBuilderComponent', () => {
     });
   });
 
-  describe('getFieldEntity', () => {
+  describe('Function: getFieldEntity', () => {
     it('should return the entity when field with matching scope is found', () => {
       const fieldConfigs = {
         fields: [
@@ -264,7 +264,7 @@ describe('CriteriaBuilderComponent', () => {
 
       expect(result).toBe('Company');
     });
-    it('should return null when no field with matching scope is found', () => {
+    it('should return undefined when no field with matching scope is found', () => {
       const fieldConfigs = {
         fields: [
           { value: 'user', entity: 'User' },
@@ -275,7 +275,7 @@ describe('CriteriaBuilderComponent', () => {
 
       const result = component.getFieldEntity(fieldConfigs, scope);
 
-      expect(result).toBeNull();
+      expect(result).toBeUndefined();
     });
     it('should return null when fieldConfigs is null', () => {
       const fieldConfigs = null;
@@ -313,7 +313,7 @@ describe('CriteriaBuilderComponent', () => {
 
       expect(result).toBeNull();
     });
-    it('should return null when fieldConfigs.fields is an empty array', () => {
+    it('should return undefined when fieldConfigs.fields is an empty array', () => {
       const fieldConfigs = {
         fields: []
       };
@@ -321,7 +321,7 @@ describe('CriteriaBuilderComponent', () => {
 
       const result = component.getFieldEntity(fieldConfigs, scope);
 
-      expect(result).toBeNull();
+      expect(result).toBeUndefined();
     });
     it('should return the first matching entity when multiple fields have the same scope', () => {
       const fieldConfigs = {

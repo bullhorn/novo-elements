@@ -224,11 +224,7 @@ export class CriteriaBuilderComponent implements OnInit, OnDestroy, AfterContent
 
   getFieldEntity(fieldConfigs, scope) {
     if (Array.isArray(fieldConfigs?.fields)) {
-      for (const field of fieldConfigs.fields) {
-        if (field.value === scope) {
-          return field.entity;
-        }
-      }
+      return fieldConfigs.fields.find(field => field.value === scope)?.entity
     }
     return null;
   }

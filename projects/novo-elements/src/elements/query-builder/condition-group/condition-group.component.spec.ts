@@ -19,9 +19,9 @@ describe('ConditionGroupComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ConditionGroupComponent],
       providers: [
-        { provide: QueryBuilderService, useClass: QueryBuilderService },
+        QueryBuilderService,
+        NovoLabelService,
         { provide: ControlContainer, useClass: MockControlContainer },
-        { provide: NovoLabelService, useClass: NovoLabelService },
       ],
       imports: [
         NovoFlexModule,
