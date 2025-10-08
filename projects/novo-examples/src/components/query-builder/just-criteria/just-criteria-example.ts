@@ -144,6 +144,7 @@ export class JustCriteriaExample implements OnInit {
     return Promise.all(allMetas).then((metas) => {
       return metas.map((it) => ({
         value: it.entity,
+        entity: 'Person',
         label: it.label,
         options: it.fields,
         find: (name: string) => it.fields.find((f) => f.name === name),
@@ -170,27 +171,32 @@ export class JustCriteriaExample implements OnInit {
             field: 'id',
             operator: 'equalTo',
             scope: 'Candidate',
+            entity: 'Person',
             value: 123,
           }, {
             field: 'availability',
             operator: 'includeAny',
             scope: 'Candidate',
+            entity: 'Person',
             value: ['test'],
           }, {
             field: 'customDate1',
             operator: 'within',
             scope: 'Candidate',
+            entity: 'Person',
             value: '-30',
           }, {
             field: 'address',
             operator: 'includeAny',
             scope: 'Candidate',
+            entity: 'Person',
             value: null,
             supportingValue: 5,
           }, {
             field: 'status',
             operator: 'includeAny',
             scope: 'Candidate',
+            entity: 'Person',
             value: null,
           }
         ],

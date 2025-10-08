@@ -33,6 +33,7 @@ export class ConditionGroupComponent implements OnInit, OnDestroy {
   @Input() formGroupName: any;
 
   public scope: string;
+  public entity: string;
   public parentForm: UntypedFormGroup;
   /** Subject that emits when the component has been destroyed. */
   private readonly _onDestroy = new Subject<void>();
@@ -48,14 +49,14 @@ export class ConditionGroupComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.parentForm = this.controlContainer.control as UntypedFormGroup;
     this.controlName = Object.keys(this.parentForm.controls)[0];
-    this.updateGroupScope();
+    this.updateGroupScopeAndEntity();
     merge(this.parentForm.parent.valueChanges, this.qbs.stateChanges)
       .pipe(takeUntil(this._onDestroy))
       .subscribe(() => this.cdr.markForCheck());
   }
 
   ngOnChanges() {
-    this.updateGroupScope();
+    this.updateGroupScopeAndEntity();
   }
 
   ngOnDestroy() {
@@ -63,9 +64,13 @@ export class ConditionGroupComponent implements OnInit, OnDestroy {
     this._onDestroy.complete();
   }
 
-  updateGroupScope() {
+  updateGroupScopeAndEntity() {
     if (this.parentForm && this.controlName) {
       this.scope = this.parentForm.value[this.controlName][0]?.scope || this.qbs.scopes()[0];
+      const entity = this.parentForm.value[this.controlName][0]?.entity;
+      if (entity) {
+        this.entity = entity;
+      }
     }
   }
 
@@ -77,10 +82,22 @@ export class ConditionGroupComponent implements OnInit, OnDestroy {
       delete this.parentForm.controls[this.controlName];
       this.controlName = name;
       // scrub properties not on control
-      const currentStrict = current.map((item) => (({ conditionType, field, operator, scope, value, ...rest }) => ({ conditionType, field, operator, scope, value }))(item));
+      const currentStrict = current.map(item => this.sanitizeCondition(item));
       this.parentForm.get(this.controlName)?.setValue(currentStrict);
       this.cdr.markForCheck();
     }
+  }
+
+  private sanitizeCondition(condition: any): Condition {
+    return {
+      conditionType: condition.conditionType,
+      field: condition.field,
+      operator: condition.operator,
+      scope: condition.scope,
+      value: condition.value,
+      supportingValue: condition.supportingValue,
+      entity: condition.entity
+    };
   }
 
   get root(): FormArray {
@@ -106,7 +123,7 @@ export class ConditionGroupComponent implements OnInit, OnDestroy {
     this.cdr.markForCheck();
   }
 
-  newCondition({ field, operator, scope, value, supportingValue }: Condition = EMPTY_CONDITION): UntypedFormGroup {
+  newCondition({ field, operator, scope, value, supportingValue, entity }: Condition = EMPTY_CONDITION): UntypedFormGroup {
     return this.formBuilder.group({
       conditionType: '$and',
       field: [field, Validators.required],
@@ -114,6 +131,7 @@ export class ConditionGroupComponent implements OnInit, OnDestroy {
       scope: [scope],
       value: [value],
       supportingValue: [supportingValue],
+      entity: [entity],
     });
   }
 
