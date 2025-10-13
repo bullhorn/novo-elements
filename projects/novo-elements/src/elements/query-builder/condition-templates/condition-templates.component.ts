@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { AddressCriteriaConfig } from '../query-builder.types';
+import { AddressCriteriaConfig, DateCriteriaConfig } from '../query-builder.types';
 
 @Component({
     selector: 'novo-condition-templates',
@@ -8,4 +8,5 @@ import { AddressCriteriaConfig } from '../query-builder.types';
 })
 export class NovoConditionTemplatesComponent {
   @Input() addressConfig: AddressCriteriaConfig;
+  @Input() dateConfig: DateCriteriaConfig;
 }

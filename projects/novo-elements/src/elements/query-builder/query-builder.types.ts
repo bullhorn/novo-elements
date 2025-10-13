@@ -135,6 +135,11 @@ export type AddressCriteriaConfig = {
   radiusUnits?: AddressRadiusUnitsName;
 }
 
+/** All options that can be used to configure date pickers */
+export type DateCriteriaConfig = {
+  weekStart?: Day;
+}
+
 /** Interface used to provide an outlet for rows to be inserted into. */
 export interface QueryFilterOutlet {
   viewContainer: ViewContainerRef;

@@ -1,16 +1,16 @@
-import { ChangeDetectionStrategy, Component, QueryList, ViewChildren, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, InputSignal, QueryList, ViewChildren, ViewEncapsulation } from '@angular/core';
 import { NovoPickerToggleElement } from 'novo-elements/elements/field';
-import { AbstractConditionFieldDef } from './abstract-condition.definition';
-import { Operator } from '../query-builder.types';
 import { NovoLabelService } from 'novo-elements/services';
+import { DateCriteriaConfig, Operator } from '../query-builder.types';
+import { AbstractConditionFieldDef } from './abstract-condition.definition';
 
 /**
  * Most complicated of the default conditions defs, a date needs to provide a different
  * input type depending on the operator selected.
  */
 @Component({
-    selector: 'novo-date-condition-def',
-    template: `
+  selector: 'novo-date-condition-def',
+  template: `
     <ng-container novoConditionFieldDef="DATE">
       <novo-field *novoConditionOperatorsDef="let formGroup; fieldMeta as meta" [formGroup]="formGroup">
         <novo-select [placeholder]="labels.operator" formControlName="operator" (onSelect)="onOperatorSelect(formGroup)">
@@ -26,13 +26,14 @@ import { NovoLabelService } from 'novo-elements/services';
         <novo-field *novoSwitchCases="['before', 'after', 'equalTo']">
           <input novoInput dateFormat="yyyy-mm-dd" [picker]="datepicker" formControlName="value"/>
           <novo-picker-toggle triggerOnFocus [overlayId]="viewIndex" novoSuffix icon="calendar">
-            <novo-date-picker (onSelect)="closePanel($event, viewIndex)" #datepicker></novo-date-picker>
+            <novo-date-picker #datepicker (onSelect)="closePanel($event, viewIndex)" [weekStart]="config()?.weekStart"></novo-date-picker>
           </novo-picker-toggle>
         </novo-field>
         <novo-field *novoSwitchCases="['between']">
           <input novoInput dateRangeFormat="date" [picker]="daterangepicker" formControlName="value"/>
           <novo-picker-toggle [for]="daterangepicker" triggerOnFocus [overlayId]="viewIndex" novoSuffix icon="calendar">
-            <novo-date-picker #daterangepicker (onSelect)="closePanel($event, viewIndex)" mode="range" numberOfMonths="2"></novo-date-picker>
+            <novo-date-picker #daterangepicker (onSelect)="closePanel($event, viewIndex)" [weekStart]="config()?.weekStart" mode="range"
+                              numberOfMonths="2"></novo-date-picker>
           </novo-picker-toggle>
         </novo-field>
         <novo-field *novoSwitchCases="['within']">
@@ -69,15 +70,17 @@ import { NovoLabelService } from 'novo-elements/services';
       </ng-container>
     </ng-container>
   `,
-    encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.Default,
-    standalone: false
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.Default,
+  standalone: false
 })
 export class NovoDefaultDateConditionDef extends AbstractConditionFieldDef {
   @ViewChildren(NovoPickerToggleElement)
   overlayChildren: QueryList<NovoPickerToggleElement>;
 
   defaultOperator = Operator.within;
+
+  config: InputSignal<DateCriteriaConfig> = input();
 
   constructor(labelService: NovoLabelService) {
     super(labelService);
