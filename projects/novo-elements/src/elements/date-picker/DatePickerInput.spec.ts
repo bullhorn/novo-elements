@@ -59,4 +59,20 @@ describe('Elements: NovoDatePickerInputElement', () => {
       expect(component.formattedValue).toEqual('');
     });
   });
+
+  describe('Method: handleMaskAccept', () => {
+    it('should call clearValue when the mask has been reduced to empty', () => {
+      spyOn(component, 'clearValue');
+      spyOn(component, 'closePanel');
+      component.handleMaskAccept('');
+      expect(component.clearValue).toHaveBeenCalled();
+      expect(component.closePanel).toHaveBeenCalled();
+
+      component.hasButtons = true;
+      component.closePanel.calls.reset();
+
+      component.handleMaskAccept('');
+      expect(component.closePanel).not.toHaveBeenCalled();
+    })
+  });
 });

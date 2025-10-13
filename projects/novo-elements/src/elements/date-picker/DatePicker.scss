@@ -193,9 +193,13 @@
       transform: scale(1);
     }
     .calendar-footer {
+      display: flex;
       width: 100%;
       padding: 1rem 0.8rem;
       text-align: left;
+      .novo-button.today {
+        margin-inline-end: auto;
+      }
     }
   }
 

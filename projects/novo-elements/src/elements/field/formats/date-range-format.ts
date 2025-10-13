@@ -106,6 +106,7 @@ export class NovoDateRangeFormatDirective extends IMaskDirective<any> {
     if (formattedValue !== this.maskValue) {
       super.writeValue(this.formatValue(value));
       this.onChange(this.formatValue(value));
+      this.valueChange.emit(value);
     }
   }
 
