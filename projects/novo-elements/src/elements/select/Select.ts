@@ -449,7 +449,7 @@ export class NovoSelectElement
         this.contentOptionsSignal.set(contentOptions.toArray());
       });
 
-    this.viewOptions.changes.pipe(takeUntil(this._destroy))
+    this.viewOptions.changes.pipe(takeUntil(this._destroy), startWith(this.viewOptions))
       .subscribe(viewOptions => {
         this.viewOptionsSignal.set(viewOptions.toArray());
       });
