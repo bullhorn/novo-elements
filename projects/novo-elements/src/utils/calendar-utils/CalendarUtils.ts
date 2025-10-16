@@ -304,7 +304,7 @@ export function getWeekView({
   )
     .map((event) => {
       const offset: number = getWeekViewEventOffset({ event, startOfWeek: startOfViewWeek, excluded });
-      const span: number = 1; // getWeekViewEventSpan({ event, offset, startOfWeek: startOfViewWeek, excluded });
+      const span: number = 1;
       return { event, offset, span };
     })
     .filter((e) => e.offset < maxRange)

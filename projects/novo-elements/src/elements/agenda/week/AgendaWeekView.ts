@@ -283,74 +283,6 @@ export class NovoAgendaWeekViewElement implements OnChanges, OnInit, OnDestroy {
     }
   }
 
-  /*
-    resizeStarted(weekViewContainer: HTMLElement, weekEvent: WeekViewEvent, resizeEvent: ResizeEvent): void {
-      this.currentResize = {
-        originalOffset: weekEvent.offset,
-        originalSpan: weekEvent.span,
-        edge: typeof resizeEvent.edges.left !== 'undefined' ? 'left' : 'right'
-      };
-      const resizeHelper: CalendarResizeHelper = new CalendarResizeHelper(weekViewContainer, this.getDayColumnWidth(weekViewContainer));
-      this.validateResize = ({rectangle}) => resizeHelper.validateResize({rectangle});
-      this.cdr.detectChanges();
-    }
-
-    resizing(weekEvent: WeekViewEvent, resizeEvent: ResizeEvent, dayWidth: number): void {
-      if (resizeEvent.edges.left) {
-        const diff: number = Math.round(+resizeEvent.edges.left / dayWidth);
-        weekEvent.offset = this.currentResize.originalOffset + diff;
-        weekEvent.span = this.currentResize.originalSpan - diff;
-      } else if (resizeEvent.edges.right) {
-        const diff: number = Math.round(+resizeEvent.edges.right / dayWidth);
-        weekEvent.span = this.currentResize.originalSpan + diff;
-      }
-    }
-
-    resizeEnded(weekEvent: WeekViewEvent): void {
-
-      let daysDiff: number;
-      if (this.currentResize.edge === 'left') {
-        daysDiff = weekEvent.offset - this.currentResize.originalOffset;
-      } else {
-        daysDiff = weekEvent.span - this.currentResize.originalSpan;
-      }
-
-      weekEvent.offset = this.currentResize.originalOffset;
-      weekEvent.span = this.currentResize.originalSpan;
-
-      let newStart: Date = weekEvent.event.start;
-      let newEnd: Date = weekEvent.event.end;
-      if (this.currentResize.edge === 'left') {
-        newStart = addDays(newStart, daysDiff);
-      } else if (newEnd) {
-        newEnd = addDays(newEnd, daysDiff);
-      }
-
-      this.eventTimesChanged.emit({newStart, newEnd, event: weekEvent.event});
-      this.currentResize = null;
-
-    }
-
-    eventDragged(weekEvent: WeekViewEvent, draggedByPx: number, dayWidth: number): void {
-
-      const daysDragged: number = draggedByPx / dayWidth;
-      const newStart: Date = addDays(weekEvent.event.start, daysDragged);
-      let newEnd: Date;
-      if (weekEvent.event.end) {
-        newEnd = addDays(weekEvent.event.end, daysDragged);
-      }
-
-      this.eventTimesChanged.emit({newStart, newEnd, event: weekEvent.event});
-
-    }
-
-    dragStart(weekViewContainer: HTMLElement, event: HTMLElement): void {
-      const dragHelper: CalendarDragHelper = new CalendarDragHelper(weekViewContainer, event);
-      this.validateDrag = ({x, y}) => !this.currentResize && dragHelper.validateDrag({x, y});
-      this.cdr.detectChanges();
-    }
-    */
-
   getDayColumnWidth(eventRowContainer: HTMLElement): number {
     return Math.floor(eventRowContainer.offsetWidth / this.days.length);
   }
@@ -379,7 +311,6 @@ export class NovoAgendaWeekViewElement implements OnChanges, OnInit, OnDestroy {
         hour: this.dayEndHour,
         minute: this.dayEndMinute,
       },
-      // precision: this.precision
     });
   }
 
@@ -396,11 +327,6 @@ export class NovoAgendaWeekViewElement implements OnChanges, OnInit, OnDestroy {
         minute: this.dayEndMinute,
       },
     });
-    // if (this.hourSegmentModifier) {
-    //   this.hours.forEach(hour => {
-    //     hour.segments.forEach(segment => this.hourSegmentModifier(segment));
-    //   });
-    // }
   }
 
   private refreshAll(): void {

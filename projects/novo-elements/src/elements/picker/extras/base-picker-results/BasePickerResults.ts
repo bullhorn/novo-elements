@@ -5,7 +5,6 @@ import { ChangeDetectorRef, Directive, ElementRef, Input } from '@angular/core';
 import { from, Observable } from 'rxjs';
 // APP
 import { Helpers } from 'novo-elements/utils';
-// import { NovoControlConfig } from 'novo-elements/elements/form'; // actual type of the config property on this is any
 
 /**
  * @description This is the actual list of matches that gets injected into the DOM. It's also the piece that can be
@@ -138,7 +137,7 @@ export class BasePickerResults {
         setTimeout(() => {
           this.overlay.updatePosition();
           this.addScrollListener();
-        }); // @bkimball: This was added for Dylan Schulte, 9.18.2017 4:14PM EST, you're welcome!
+        });
       },
       (err) => {
         this.hasError = this.term && this.term.length !== 0;

@@ -24,13 +24,6 @@ import { NovoFieldControl } from 'novo-elements/elements/field';
 import { GlobalRef, NovoLabelService } from 'novo-elements/services';
 import { NovoFile } from './extras/file/File';
 
-// Value accessor for the component (supports ngModel)
-// const FILE_VALUE_ACCESSOR = {
-//   provide: NG_VALUE_ACCESSOR,
-//   useExisting: forwardRef(() => NovoFileInputElement),
-//   multi: true,
-// };
-
 const LAYOUT_DEFAULTS = { order: 'default', download: true, removable: true, labelStyle: 'default', draggable: false };
 // make file-input ids unique
 let nextId = 0;
