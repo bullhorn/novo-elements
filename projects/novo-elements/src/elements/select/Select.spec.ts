@@ -313,4 +313,64 @@ describe('Elements: NovoSelectElement', () => {
       expect(comp.viewOptions.length).toBe(3);
     });
   });
+  describe('Function: _handleKeydown(event) - typeahead', () => {
+    it('should set active item when typing a letter that matches an option', fakeAsync(() => {
+      const options = [
+        { label: 'Apple', value: 'apple' },
+        { label: 'Banana', value: 'banana' },
+        { label: 'Cherry', value: 'cherry' },
+      ];
+      fixture.componentRef.setInput('options', options);
+      fixture.detectChanges();
+      tick();
+      
+      comp.openPanel();
+      fixture.detectChanges();
+      
+      const mockEvent: any = {
+        key: 'b',
+        preventDefault: jest.fn(),
+      };
+      
+      comp._handleKeydown(mockEvent);
+      tick(250); // Wait for typeahead delay
+      fixture.detectChanges();
+      
+      expect(keyManager.activeItem).toBeDefined();
+      expect(keyManager.activeItem.value).toBe('banana');
+    }));
+
+    it('should cycle through options starting with the same letter on repeated key presses', fakeAsync(() => {
+      const options = [
+        { label: 'Apple', value: 'apple' },
+        { label: 'Banana', value: 'banana' },
+        { label: 'Cantelope', value: 'cantelope' },
+        { label: 'Coconut', value: 'coconut'},
+      ];
+      fixture.componentRef.setInput('options', options);
+      fixture.detectChanges();
+      tick();
+      
+      comp.openPanel();
+      comp.writeValue(null);
+      fixture.detectChanges();
+      
+      const mockEvent: any = {
+        key: 'c',
+        preventDefault: jest.fn(),
+      };
+      
+      comp._handleKeydown(mockEvent);
+      tick(250);
+      fixture.detectChanges();
+      
+      expect(keyManager.activeItem.value).toBe('cantelope');
+      
+      comp._handleKeydown(mockEvent);
+      tick(250);
+      fixture.detectChanges();
+      
+      expect(keyManager.activeItem.value).toBe('coconut');
+    }));
+  });
 });
