@@ -8,9 +8,10 @@ const HEADER_ICONS = ['company', 'job', 'candidate', 'person', 'opportunity', 'l
  * @title Basic Header Example
  */
 @Component({
-  selector: 'basic-header-example',
-  templateUrl: 'basic-header-example.html',
-  styleUrls: ['basic-header-example.css'],
+    selector: 'basic-header-example',
+    templateUrl: 'basic-header-example.html',
+    styleUrls: ['basic-header-example.css'],
+    standalone: false
 })
 export class BasicHeaderExample {
   public theme: string = 'company';

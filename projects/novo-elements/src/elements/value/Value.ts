@@ -14,8 +14,8 @@ export enum NOVO_VALUE_THEME {
 }
 
 @Component({
-  selector: 'novo-value',
-  template: `
+    selector: 'novo-value',
+    template: `
     <div class="value-outer" [ngClass]="customClass">
       <novo-label>{{ meta.label }}</novo-label>
       <span class="value">
@@ -33,7 +33,8 @@ export enum NOVO_VALUE_THEME {
       <i *ngFor="let icon of meta.icons" [class]="iconClass(icon)" (click)="onValueClick(icon)"></i>
     </div>
   `,
-  styleUrls: ['./Value.scss'],
+    styleUrls: ['./Value.scss'],
+    standalone: false
 })
 export class NovoValueElement implements OnInit, OnChanges {
   @Input()

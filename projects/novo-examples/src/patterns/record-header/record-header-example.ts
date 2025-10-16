@@ -8,9 +8,10 @@ const HEADER_ICONS = ['company', 'job', 'candidate', 'person', 'opportunity', 'l
  * @title Basic Header Example
  */
 @Component({
-  selector: 'record-header-example',
-  templateUrl: 'record-header-example.html',
-  styleUrls: ['record-header-example.css'],
+    selector: 'record-header-example',
+    templateUrl: 'record-header-example.html',
+    styleUrls: ['record-header-example.css'],
+    standalone: false
 })
 export class RecordHeaderExample {
   public theme: string = 'company';

@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import { PickerResults } from 'novo-elements';
 
 @Component({
-  selector: 'custom-picker-results',
-  host: {
-    class: 'active picker-results',
-  },
-  template: `
+    selector: 'custom-picker-results',
+    host: {
+        class: 'active picker-results',
+    },
+    template: `
     <novo-loading theme="line" *ngIf="isLoading && !matches.length"></novo-loading>
     <novo-list *ngIf="matches.length > 0" direction="vertical">
       <novo-list-item
@@ -21,6 +21,7 @@ import { PickerResults } from 'novo-elements';
     <p class="picker-error" *ngIf="hasError">Oops! An error occured.</p>
     <p class="picker-null" *ngIf="!isLoading && !matches.length && !hasError">No results to display...</p>
   `,
+    standalone: false
 })
 export class CustomPickerResults extends PickerResults {}
 
@@ -28,9 +29,10 @@ export class CustomPickerResults extends PickerResults {}
  * @title Custom Picker Results Example
  */
 @Component({
-  selector: 'custom-picker-results-example',
-  templateUrl: 'custom-picker-results-example.html',
-  styleUrls: ['custom-picker-results-example.css'],
+    selector: 'custom-picker-results-example',
+    templateUrl: 'custom-picker-results-example.html',
+    styleUrls: ['custom-picker-results-example.css'],
+    standalone: false
 })
 export class CustomPickerResultsExample {
   public placeholder: string = 'Select...';

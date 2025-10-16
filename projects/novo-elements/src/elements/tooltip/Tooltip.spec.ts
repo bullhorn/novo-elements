@@ -1,15 +1,17 @@
 // NG2
 import { OverlayModule } from '@angular/cdk/overlay';
 import { Component } from '@angular/core';
-import { async, TestBed } from '@angular/core/testing';
+import { TestBed, waitForAsync } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 // App
 import { TooltipDirective } from './Tooltip.directive';
-import { By } from '@angular/platform-browser';
 
 @Component({
   selector: 'test-component',
-  template: `<div tooltip="test" tooltipPosition="right"></div>
-             <div tooltip="test" [tooltipCloseOnClick]="true" tooltipPosition="right"></div>`,
+  template: `
+    <div tooltip="test" tooltipPosition="right"></div>
+    <div tooltip="test" [tooltipCloseOnClick]="true" tooltipPosition="right"></div>`,
+  standalone: false
 })
 class TestComponent {}
 
@@ -18,7 +20,7 @@ describe('Elements: TooltipDirective', () => {
   let component;
   let tooltipHost;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [TooltipDirective, TestComponent],
       imports: [OverlayModule],
@@ -33,7 +35,7 @@ describe('Elements: TooltipDirective', () => {
   });
 
   describe('function: onclick', () => {
-    it('should not close tooltip on click', async() => {
+    it('should not close tooltip on click', async () => {
       tooltipHost[0].triggerEventHandler('mouseenter');
       fixture.detectChanges();
       expect(fixture.debugElement.query(By.css('novo-tooltip'))).toBeTruthy();
@@ -42,7 +44,7 @@ describe('Elements: TooltipDirective', () => {
       expect(fixture.debugElement.query(By.css('novo-tooltip'))).toBeTruthy();
     });
 
-    it('should close tooltip on click', async() => {
+    it('should close tooltip on click', async () => {
       tooltipHost[1].triggerEventHandler('mouseenter');
       fixture.detectChanges();
       expect(fixture.debugElement.query(By.css('novo-tooltip'))).toBeTruthy();

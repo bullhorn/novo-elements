@@ -4,9 +4,10 @@ import { Component } from '@angular/core';
  * @title Row Chips Example
  */
 @Component({
-  selector: 'row-chips-example',
-  templateUrl: 'row-chips-example.html',
-  styleUrls: ['row-chips-example.css'],
+    selector: 'row-chips-example',
+    templateUrl: 'row-chips-example.html',
+    styleUrls: ['row-chips-example.css'],
+    standalone: false
 })
 export class RowChipsExample {
   public placeholder: string = 'Select...';

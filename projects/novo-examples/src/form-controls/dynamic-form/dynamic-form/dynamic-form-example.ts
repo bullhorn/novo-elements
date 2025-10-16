@@ -6,9 +6,10 @@ import { MockMeta } from '../MockMeta';
  * @title Dynamic Form Example
  */
 @Component({
-  selector: 'dynamic-form-example',
-  templateUrl: 'dynamic-form-example.html',
-  styleUrls: ['dynamic-form-example.css'],
+    selector: 'dynamic-form-example',
+    templateUrl: 'dynamic-form-example.html',
+    styleUrls: ['dynamic-form-example.css'],
+    standalone: false
 })
 export class DynamicFormExample {
   public dynamic: any;

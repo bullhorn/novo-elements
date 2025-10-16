@@ -3,8 +3,8 @@ import { NovoLabelService } from 'novo-elements/services';
 import { BasePickerResults } from '../base-picker-results/BasePickerResults';
 
 @Component({
-  selector: 'entity-picker-result',
-  template: `
+    selector: 'entity-picker-result',
+    template: `
     <novo-list-item *ngIf="match.data" (click)="select.next(match.data)">
       <novo-item-header>
         <novo-item-avatar [icon]="getIconForResult(match.data)"></novo-item-avatar>
@@ -88,7 +88,8 @@ import { BasePickerResults } from '../base-picker-results/BasePickerResults';
       </novo-item-content>
     </novo-list-item>
   `,
-  styleUrls: ['../picker-results/PickerResult.scss'],
+    styleUrls: ['../picker-results/PickerResult.scss'],
+    standalone: false
 })
 export class EntityPickerResult {
   @Input() match: any;
@@ -211,8 +212,8 @@ export class EntityPickerResult {
 }
 
 @Component({
-  selector: 'entity-picker-results',
-  template: `
+    selector: 'entity-picker-results',
+    template: `
     <novo-list *ngIf="matches.length > 0" direction="vertical">
       <entity-picker-result
         *ngFor="let match of matches"
@@ -230,11 +231,12 @@ export class EntityPickerResult {
     <div class="picker-null-results" *ngIf="hasNonErrorMessage && term !== ''">{{ labels.pickerEmpty }}</div>
     <div class="picker-null-results" *ngIf="hasNonErrorMessage && term === ''">{{ labels.pickerTextFieldEmpty }}</div>
   `,
-  styleUrls: ['../picker-results/PickerResults.scss'],
-  encapsulation: ViewEncapsulation.None,
-  host: {
-    class: 'novo-entity-picker-results',
-  },
+    styleUrls: ['../picker-results/PickerResults.scss'],
+    encapsulation: ViewEncapsulation.None,
+    host: {
+        class: 'novo-entity-picker-results',
+    },
+    standalone: false
 })
 export class EntityPickerResults extends BasePickerResults {
   @Output() select: EventEmitter<any> = new EventEmitter();

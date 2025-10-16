@@ -16,10 +16,11 @@ import { ConfigureColumnsModal, MockData } from '../extras';
  * @title Rows Data Table Example
  */
 @Component({
-  selector: 'data-table-rows-example',
-  templateUrl: 'data-table-rows-example.html',
-  styleUrls: ['data-table-rows-example.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'data-table-rows-example',
+    templateUrl: 'data-table-rows-example.html',
+    styleUrls: ['data-table-rows-example.css'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class DataTableRowsExample implements AfterViewInit {
   @ViewChild('basic')

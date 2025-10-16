@@ -60,39 +60,40 @@ export class NovoChipListChange {
  * A chip list component (named ChipList for its similarity to the List component).
  */
 @Component({
-  selector: 'novo-chip-list',
-  template: `<div class="novo-chip-list-wrapper"><ng-content></ng-content></div>`,
-  styleUrls: ['./ChipList.scss'],
-  exportAs: 'novoChipList',
-  host: {
-    '[attr.tabindex]': 'disabled ? null : _tabIndex',
-    '[attr.aria-describedby]': '_ariaDescribedby || null',
-    '[attr.aria-required]': 'role ? required : null',
-    '[attr.aria-disabled]': 'disabled.toString()',
-    '[attr.aria-invalid]': 'errorState',
-    '[attr.aria-multiselectable]': 'multiple',
-    '[attr.role]': 'role',
-    '[class.novo-chip-list-empty]': 'empty',
-    '[class.novo-chip-list-has-value]': '!empty',
-    '[class.novo-chip-list-stacked]': 'stacked',
-    '[class.novo-chip-list-focused]': 'focused',
-    '[class.novo-chip-list-disabled]': 'disabled',
-    '[class.novo-chip-list-invalid]': 'errorState',
-    '[class.novo-chip-list-required]': 'required',
-    '[attr.aria-orientation]': 'ariaOrientation',
-    class: 'novo-chip-list',
-    '(focus)': 'focus()',
-    '(blur)': '_blur()',
-    '(keydown)': '_keydown($event)',
-    '[id]': '_uid',
-  },
-  providers: [
-    { provide: NovoFieldControl, useExisting: NovoChipList },
-    { provide: NOVO_OPTION_PARENT_COMPONENT, useExisting: NovoChipList },
-  ],
-  // styleUrls: ['./ChipList.scss'],
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'novo-chip-list',
+    template: `<div class="novo-chip-list-wrapper"><ng-content></ng-content></div>`,
+    styleUrls: ['./ChipList.scss'],
+    exportAs: 'novoChipList',
+    host: {
+        '[attr.tabindex]': 'disabled ? null : _tabIndex',
+        '[attr.aria-describedby]': '_ariaDescribedby || null',
+        '[attr.aria-required]': 'role ? required : null',
+        '[attr.aria-disabled]': 'disabled.toString()',
+        '[attr.aria-invalid]': 'errorState',
+        '[attr.aria-multiselectable]': 'multiple',
+        '[attr.role]': 'role',
+        '[class.novo-chip-list-empty]': 'empty',
+        '[class.novo-chip-list-has-value]': '!empty',
+        '[class.novo-chip-list-stacked]': 'stacked',
+        '[class.novo-chip-list-focused]': 'focused',
+        '[class.novo-chip-list-disabled]': 'disabled',
+        '[class.novo-chip-list-invalid]': 'errorState',
+        '[class.novo-chip-list-required]': 'required',
+        '[attr.aria-orientation]': 'ariaOrientation',
+        class: 'novo-chip-list',
+        '(focus)': 'focus()',
+        '(blur)': '_blur()',
+        '(keydown)': '_keydown($event)',
+        '[id]': '_uid',
+    },
+    providers: [
+        { provide: NovoFieldControl, useExisting: NovoChipList },
+        { provide: NOVO_OPTION_PARENT_COMPONENT, useExisting: NovoChipList },
+    ],
+    // styleUrls: ['./ChipList.scss'],
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NovoChipList
   extends _NovoChipListMixinBase
@@ -178,6 +179,17 @@ export class NovoChipList
     this._syncChipsState();
   }
   private _multiple: boolean = false;
+
+  /** Whether chips in this list can be toggled by user interaction */
+  @Input()
+  get chipsToggleable(): boolean {
+    return this._chipsToggleable;
+  }
+  set chipsToggleable(value: boolean) {
+    this._chipsToggleable = coerceBooleanProperty(value);
+    this._syncChipsState();
+  }
+  private _chipsToggleable: boolean = true;
 
   /** Whether the chips should appear stacked instead of a row. */
   @Input()
@@ -394,15 +406,18 @@ export class NovoChipList
 
     // When the list changes, re-subscribe
     this.chips.changes.pipe(startWith(null), takeUntil(this._destroyed)).subscribe(() => {
-      if (this.disabled) {
-        // Since this happens after the content has been
-        // checked, we need to defer it to the next tick.
+      Promise.resolve().then(() => {
+        this._syncChipsState();
+      });
+
+      this._resetChips();
+
+      if (this._value !== undefined) {
         Promise.resolve().then(() => {
-          this._syncChipsState();
+          this._setSelectionByValue(this._value, false);
         });
       }
 
-      this._resetChips();
       // Check to see if we need to update our tab index
       this._updateTabIndex();
 
@@ -463,10 +478,11 @@ export class NovoChipList
 
   // Implemented as part of ControlValueAccessor.
   writeValue(value: any): void {
-    if (this.chips) {
+    this._value = value;
+    if (this.chips && this.chips.length > 0) {
       this._setSelectionByValue(value, false);
-      this.stateChanges.next();
     }
+    this.stateChanges.next();
   }
 
   addValue(value: any): void {
@@ -843,6 +859,7 @@ export class NovoChipList
         chip._chipListDisabled = this._disabled;
         chip._chipListMultiple = this.multiple;
         chip._chipListSelectable = this.selectable;
+        chip._chipListToggleable = this.chipsToggleable;
       });
     }
   }

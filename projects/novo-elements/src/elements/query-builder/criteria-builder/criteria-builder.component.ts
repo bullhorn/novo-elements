@@ -24,7 +24,7 @@ import { ConditionGroupComponent } from '../condition-group/condition-group.comp
 import { NovoConditionFieldDef } from '../query-builder.directives';
 import { QueryBuilderService } from '../query-builder.service';
 import { NOVO_CRITERIA_BUILDER } from '../query-builder.tokens';
-import { BaseFieldDef, Condition, ConditionGroup, Conjunction, AddressCriteriaConfig } from '../query-builder.types';
+import { BaseFieldDef, Condition, ConditionGroup, Conjunction, AddressCriteriaConfig, DateCriteriaConfig } from '../query-builder.types';
 
 const EMPTY_CONDITION: Condition = {
   conditionType: '$and',
@@ -33,20 +33,22 @@ const EMPTY_CONDITION: Condition = {
   scope: null,
   value: null,
   supportingValue: null,
+  entity: null,
 };
 @Component({
-  selector: 'novo-criteria-builder',
-  templateUrl: './criteria-builder.component.html',
-  styleUrls: ['./criteria-builder.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => CriteriaBuilderComponent), multi: true },
-    { provide: NOVO_CRITERIA_BUILDER, useExisting: CriteriaBuilderComponent },
-    { provide: QueryBuilderService, useClass: QueryBuilderService },
-  ],
-  host: {
-    class: 'novo-criteria-builder',
-  },
+    selector: 'novo-criteria-builder',
+    templateUrl: './criteria-builder.component.html',
+    styleUrls: ['./criteria-builder.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => CriteriaBuilderComponent), multi: true },
+        { provide: NOVO_CRITERIA_BUILDER, useExisting: CriteriaBuilderComponent },
+        { provide: QueryBuilderService, useClass: QueryBuilderService },
+    ],
+    host: {
+        class: 'novo-criteria-builder',
+    },
+    standalone: false
 })
 export class CriteriaBuilderComponent implements OnInit, OnDestroy, AfterContentChecked, AfterViewInit {
   @Input() config: any;
@@ -54,6 +56,7 @@ export class CriteriaBuilderComponent implements OnInit, OnDestroy, AfterContent
   @Input() allowedGroupings = [Conjunction.AND, Conjunction.OR, Conjunction.NOT];
   @Input() editTypeFn: (field: BaseFieldDef) => string;
   @Input() addressConfig: AddressCriteriaConfig;
+  @Input() dateConfig: DateCriteriaConfig;
   @Input() canBeEmpty: boolean = false;
 
   @Input('hideFirstOperator')
@@ -208,6 +211,7 @@ export class CriteriaBuilderComponent implements OnInit, OnDestroy, AfterContent
   }
 
   newCondition({ field, operator, scope, value, supportingValue }: Condition = EMPTY_CONDITION): UntypedFormGroup {
+    const entity = this.getFieldEntity(this.config, scope);
     return this.formBuilder.group({
       conditionType: '$and',
       field: [field, Validators.required],
@@ -215,7 +219,15 @@ export class CriteriaBuilderComponent implements OnInit, OnDestroy, AfterContent
       scope: [scope],
       value: [value],
       supportingValue: [supportingValue],
+      entity: [entity],
     });
+  }
+
+  getFieldEntity(fieldConfigs, scope) {
+    if (Array.isArray(fieldConfigs?.fields)) {
+      return fieldConfigs.fields.find(field => field.value === scope)?.entity
+    }
+    return null;
   }
 
   removeConditionGroupAt(index: number) {
@@ -230,7 +242,7 @@ export class CriteriaBuilderComponent implements OnInit, OnDestroy, AfterContent
 
   onFieldSelect(field) {
     this.scopedFieldPicker().dropdown.closePanel();
-    const condition = { field: field.name, operator: null, scope: field.scope, value: null };
+    const condition = { field: field.name, operator: null, scope: field.scope, value: null, entity: field.entity };
     const group = this.conditionGroups().find((group) => group.scope === field.scope);
     if (group) {
       group.addCondition(condition);

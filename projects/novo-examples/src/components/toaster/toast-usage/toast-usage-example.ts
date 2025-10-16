@@ -4,9 +4,10 @@ import { Component } from '@angular/core';
  * @title Static Toast Usage
  */
 @Component({
-  selector: 'toast-usage-example',
-  templateUrl: 'toast-usage-example.html',
-  styleUrls: ['toast-usage-example.css'],
+    selector: 'toast-usage-example',
+    templateUrl: 'toast-usage-example.html',
+    styleUrls: ['toast-usage-example.css'],
+    standalone: false
 })
 export class ToastUsageExample {
   public themes: Array<string> = ['default', 'success', 'info', 'warning', 'danger'];

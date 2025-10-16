@@ -7,8 +7,8 @@ import { NovoListElement } from 'novo-elements/elements/list';
 import { BasePickerResults } from '../base-picker-results/BasePickerResults';
 
 @Component({
-  selector: 'grouped-multi-picker-results',
-  template: `
+    selector: 'grouped-multi-picker-results',
+    template: `
     <div class="grouped-multi-picker-groups">
       <novo-list direction="vertical">
         <novo-list-item
@@ -98,7 +98,8 @@ import { BasePickerResults } from '../base-picker-results/BasePickerResults';
       </div>
     </div>
   `,
-  styleUrls: ['./GroupedMultiPickerResults.scss'],
+    styleUrls: ['./GroupedMultiPickerResults.scss'],
+    standalone: false
 })
 export class GroupedMultiPickerResults extends BasePickerResults implements OnInit, OnDestroy {
   @ViewChild('input', { static: true })

@@ -2,7 +2,7 @@ import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { DOWN_ARROW } from '@angular/cdk/keycodes';
 import { CommonModule } from '@angular/common';
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ReplaySubject, Subject } from 'rxjs';
@@ -222,7 +222,7 @@ xdescribe('NovoSelectSearchComponent', () => {
   let component: NovoSelectSearchTestComponent;
   let fixture: ComponentFixture<NovoSelectSearchTestComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [CommonModule, NoopAnimationsModule, ReactiveFormsModule, NovoFieldModule, NovoSelectModule, NovoSelectSearchModule],
       declarations: [NovoSelectSearchTestComponent],
@@ -440,7 +440,7 @@ xdescribe('NovoSelectSearchComponent', () => {
   });
 
   describe('with initial selection', () => {
-    it('should set the initial selection of NovoSelectElement', async((done) => {
+    it('should set the initial selection of NovoSelectElement', waitForAsync((done) => {
       component.initialSingleSelection = component.banks[3];
       fixture.detectChanges();
 
@@ -467,7 +467,7 @@ xdescribe('NovoSelectSearchComponent', () => {
       });
     }));
 
-    it('set the initial selection with multi=true and filter the options available, filter the options by input "c" and select an option', async((
+    it('set the initial selection with multi=true and filter the options available, filter the options by input "c" and select an option', waitForAsync((
       done,
     ) => {
       component.initialMultiSelection = [component.banks[1]];

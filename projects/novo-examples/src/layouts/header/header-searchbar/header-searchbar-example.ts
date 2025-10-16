@@ -8,9 +8,10 @@ const HEADER_ICONS = ['company', 'job', 'candidate', 'person', 'opportunity', 'l
  * @title Header with SearchBar Example
  */
 @Component({
-  selector: 'header-searchbar-example',
-  templateUrl: 'header-searchbar-example.html',
-  styleUrls: ['header-searchbar-example.css'],
+    selector: 'header-searchbar-example',
+    templateUrl: 'header-searchbar-example.html',
+    styleUrls: ['header-searchbar-example.css'],
+    standalone: false
 })
 export class HeaderSearchbarExample {
   public theme: string = 'company';

@@ -4,8 +4,9 @@ import { Component } from '@angular/core';
  * @title Breadcrumb Usage Example
  */
 @Component({
-  selector: 'breadcrumb-usage-example',
-  templateUrl: 'breadcrumb-usage-example.html',
-  styleUrls: ['breadcrumb-usage-example.css'],
+    selector: 'breadcrumb-usage-example',
+    templateUrl: 'breadcrumb-usage-example.html',
+    styleUrls: ['breadcrumb-usage-example.css'],
+    standalone: false
 })
 export class BreadcrumbUsageExample {}

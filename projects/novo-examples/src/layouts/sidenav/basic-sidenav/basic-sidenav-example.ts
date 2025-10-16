@@ -4,9 +4,10 @@ import { Component } from '@angular/core';
  * @title Basic Sidenav
  */
 @Component({
-  selector: 'basic-sidenav-example',
-  templateUrl: 'basic-sidenav-example.html',
-  styleUrls: ['basic-sidenav-example.css'],
+    selector: 'basic-sidenav-example',
+    templateUrl: 'basic-sidenav-example.html',
+    styleUrls: ['basic-sidenav-example.css'],
+    standalone: false
 })
 export class BasicSidenavExample {
   isMobile = false;

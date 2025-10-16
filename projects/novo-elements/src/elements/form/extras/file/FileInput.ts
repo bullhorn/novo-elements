@@ -46,11 +46,12 @@ class NovoFileInputBase {
 const NovoFileInputMixins: CanUpdateErrorStateCtor & typeof NovoFileInputBase = mixinErrorState(NovoFileInputBase);
 
 @Component({
-  selector: 'novo-file-input',
-  providers: [{ provide: NovoFieldControl, useExisting: NovoFileInputElement }],
-  templateUrl: './FileInput.html',
-  styleUrls: ['./FileInput.scss'],
-  encapsulation: ViewEncapsulation.None,
+    selector: 'novo-file-input',
+    providers: [{ provide: NovoFieldControl, useExisting: NovoFileInputElement }],
+    templateUrl: './FileInput.html',
+    styleUrls: ['./FileInput.scss'],
+    encapsulation: ViewEncapsulation.None,
+    standalone: false
 })
 export class NovoFileInputElement extends NovoFileInputMixins implements NovoFieldControl<any>, ControlValueAccessor, OnInit {
   private _uniqueId: string = `novo-file-input-${++nextId}`;

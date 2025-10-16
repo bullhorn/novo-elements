@@ -4,9 +4,10 @@ import { Component } from '@angular/core';
  * @title Field Components Example
  */
 @Component({
-  selector: 'field-components-example',
-  templateUrl: 'field-components-example.html',
-  styleUrls: ['field-components-example.css'],
+    selector: 'field-components-example',
+    templateUrl: 'field-components-example.html',
+    styleUrls: ['field-components-example.css'],
+    standalone: false
 })
 export class FieldComponentsExample {
   direction = 'horizontal';

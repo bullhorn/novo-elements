@@ -1,5 +1,5 @@
 // NG2
-import { async, TestBed } from '@angular/core/testing';
+import { waitForAsync, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { ComponentUtils, NovoLabelService } from 'novo-elements/services';
 import { NovoChipsModule } from './Chips.module';
@@ -10,7 +10,7 @@ import { NovoRowChipsElement } from './RowChips';
 //   let fixture;
 //   let component;
 
-//   beforeEach(async(() => {
+//   beforeEach(waitForAsync(() => {
 //     TestBed.configureTestingModule({
 //       imports: [FormsModule, NovoChipsModule],
 //     }).compileComponents();
@@ -23,7 +23,7 @@ describe('Elements: NovoRowChipsElement', () => {
   let fixture;
   let component;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [FormsModule, NovoChipsModule],
       providers: [

@@ -4,10 +4,11 @@ import { NovoBreadcrumbRef, NOVO_BREADCRUMB_REF } from '../Breadcrumb.tokens';
 import { MenuConfig } from '../Breadcrumb.types';
 
 @Component({
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'novo-breadcrumb-item',
-  templateUrl: './BreadcrumbItem.html',
-  styleUrls: ['./BreadcrumbItem.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'novo-breadcrumb-item',
+    templateUrl: './BreadcrumbItem.html',
+    styleUrls: ['./BreadcrumbItem.scss'],
+    standalone: false
 })
 export class BreadcrumbItemElement implements OnInit {
   @Input() showMenu = false;

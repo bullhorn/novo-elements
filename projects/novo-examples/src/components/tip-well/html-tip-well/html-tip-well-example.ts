@@ -4,9 +4,10 @@ import { Component } from '@angular/core';
  * @title Tip Well with HTML Example
  */
 @Component({
-  selector: 'html-tip-well-example',
-  templateUrl: 'html-tip-well-example.html',
-  styleUrls: ['html-tip-well-example.css'],
+    selector: 'html-tip-well-example',
+    templateUrl: 'html-tip-well-example.html',
+    styleUrls: ['html-tip-well-example.css'],
+    standalone: false
 })
 export class HtmlTipWellExample {
   public demoHtmlTip: string = `

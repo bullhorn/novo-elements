@@ -1,6 +1,6 @@
 // NG2
 import { ScrollingModule } from '@angular/cdk/scrolling';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -36,37 +36,32 @@ export function provideAppBridgeService(http) {
   return new AppBridgeService();
 }
 
-@NgModule({
-  declarations: [AppComponent],
-  imports: [
-    // NG2
-    BrowserAnimationsModule,
-    BrowserModule,
-    FormsModule,
-    HttpClientModule,
-    ReactiveFormsModule,
-    ScrollingModule,
-    // Vendor
-    NovoElementsModule,
-    NovoElementProviders.forRoot(),
-    // APP
-    NovoExamplesRoutesModule,
-  ],
-  providers: [
-    // NovoTemplateService,
-    FormUtils,
-    NovoLabelService,
-    {
-      provide: FieldInteractionApi,
-      useFactory: provideFieldInteractionAPI,
-      deps: [NovoToastService, NovoModalService, FormUtils, HttpClient, NovoLabelService],
-    },
-    {
-      provide: AppBridgeService,
-      useFactory: provideAppBridgeService,
-      deps: [HttpClient],
-    },
-  ],
-  bootstrap: [AppComponent],
-})
+@NgModule({ declarations: [AppComponent],
+    bootstrap: [AppComponent], imports: [
+        // NG2
+        BrowserAnimationsModule,
+        BrowserModule,
+        FormsModule,
+        ReactiveFormsModule,
+        ScrollingModule,
+        // Vendor
+        NovoElementsModule,
+        NovoElementProviders.forRoot(),
+        // APP
+        NovoExamplesRoutesModule], providers: [
+        // NovoTemplateService,
+        FormUtils,
+        NovoLabelService,
+        {
+            provide: FieldInteractionApi,
+            useFactory: provideFieldInteractionAPI,
+            deps: [NovoToastService, NovoModalService, FormUtils, HttpClient, NovoLabelService],
+        },
+        {
+            provide: AppBridgeService,
+            useFactory: provideAppBridgeService,
+            deps: [HttpClient],
+        },
+        provideHttpClient(withInterceptorsFromDi()),
+    ] })
 export class AppModule {}

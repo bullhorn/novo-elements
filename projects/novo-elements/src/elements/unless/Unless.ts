@@ -4,7 +4,8 @@ import { Directive, Input, TemplateRef, ViewContainerRef } from '@angular/core';
 import { Security } from 'novo-elements/services';
 
 @Directive({
-  selector: '[bhUnless]',
+    selector: '[bhUnless]',
+    standalone: false
 })
 export class Unless {
   permissions: string = '';

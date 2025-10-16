@@ -5,9 +5,10 @@ import { MixedMultiPickerResults } from 'novo-elements';
  * @title Mixed Picker Example
  */
 @Component({
-  selector: 'mixed-picker-example',
-  templateUrl: 'mixed-picker-example.html',
-  styleUrls: ['mixed-picker-example.css'],
+    selector: 'mixed-picker-example',
+    templateUrl: 'mixed-picker-example.html',
+    styleUrls: ['mixed-picker-example.css'],
+    standalone: false
 })
 export class MixedPickerExample {
   public placeholder: string = 'Select...';

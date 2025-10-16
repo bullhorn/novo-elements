@@ -8,9 +8,10 @@ import { map, startWith } from 'rxjs/operators';
  * @title Autocomplete TextArea
  */
 @Component({
-  selector: 'autocomplete-textarea-example',
-  templateUrl: 'autocomplete-textarea-example.html',
-  styleUrls: ['autocomplete-textarea-example.css'],
+    selector: 'autocomplete-textarea-example',
+    templateUrl: 'autocomplete-textarea-example.html',
+    styleUrls: ['autocomplete-textarea-example.css'],
+    standalone: false
 })
 export class AutocompleteTextareaExample implements OnInit {
   myControl = new UntypedFormControl();

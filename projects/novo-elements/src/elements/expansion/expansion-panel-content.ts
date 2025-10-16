@@ -5,7 +5,8 @@ import { Directive, TemplateRef } from '@angular/core';
  * after the panel is opened for the first time.
  */
 @Directive({
-  selector: 'ng-template[matExpansionPanelContent]',
+    selector: 'ng-template[matExpansionPanelContent]',
+    standalone: false
 })
 export class NovoExpansionPanelContent {
   constructor(public _template: TemplateRef<any>) {}

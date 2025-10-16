@@ -6,9 +6,10 @@ import { FileControl, FormUtils, NovoFormGroup } from 'novo-elements';
  * @title File Input Controls Example
  */
 @Component({
-  selector: 'file-input-controls-example',
-  templateUrl: 'file-input-controls-example.html',
-  styleUrls: ['file-input-controls-example.css'],
+    selector: 'file-input-controls-example',
+    templateUrl: 'file-input-controls-example.html',
+    styleUrls: ['file-input-controls-example.css'],
+    standalone: false
 })
 export class FileInputControlsExample {
   public fileControl: any;

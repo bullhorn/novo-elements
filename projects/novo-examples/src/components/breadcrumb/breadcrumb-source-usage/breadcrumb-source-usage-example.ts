@@ -4,9 +4,10 @@ import { Component } from '@angular/core';
  * @title Breadcrumb Dynamic Usage Example
  */
 @Component({
-  selector: 'breadcrumb-source-usage-example',
-  templateUrl: 'breadcrumb-source-usage-example.html',
-  styleUrls: ['breadcrumb-source-usage-example.css'],
+    selector: 'breadcrumb-source-usage-example',
+    templateUrl: 'breadcrumb-source-usage-example.html',
+    styleUrls: ['breadcrumb-source-usage-example.css'],
+    standalone: false
 })
 export class BreadcrumbSourceUsageExample {
   source = [

@@ -1,5 +1,5 @@
 // NG2
-import { async, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { waitForAsync, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { ComponentUtils } from 'novo-elements/services';
 import { PickerResults } from './extras/picker-results/PickerResults';
@@ -11,7 +11,7 @@ describe('Elements: NovoPickerElement', () => {
   let fixture;
   let component;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       providers: [{ provide: ComponentUtils, useClass: ComponentUtils }],
       imports: [FormsModule, NovoPickerModule],

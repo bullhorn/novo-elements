@@ -7,8 +7,8 @@ import { NovoLabelService } from 'novo-elements/services';
  * When constructing a query using a field that is a boolean with only true/false as possible values.
  */
 @Component({
-  selector: 'novo-boolean-condition-def',
-  template: `
+    selector: 'novo-boolean-condition-def',
+    template: `
     <ng-container novoConditionFieldDef>
       <novo-field *novoConditionOperatorsDef="let formGroup; fieldMeta as meta" [formGroup]="formGroup">
         <novo-select [placeholder]="labels.operator" formControlName="operator" (onSelect)="onOperatorSelect(formGroup)">
@@ -25,8 +25,9 @@ import { NovoLabelService } from 'novo-elements/services';
       </novo-field>
     </ng-container>
   `,
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.Default,
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.Default,
+    standalone: false
 })
 export class NovoDefaultBooleanConditionDef extends AbstractConditionFieldDef {
   defaultOperator = Operator.include;

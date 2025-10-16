@@ -297,27 +297,28 @@ export class NovoOptionBase implements FocusableOption, AfterViewChecked, OnDest
  * Single option inside of a `<novo-select>` element.
  */
 @Component({
-  selector: 'novo-option',
-  exportAs: 'novoOption',
-  host: {
-    role: 'option',
-    '[id]': 'id',
-    '[attr.tabindex]': '_getTabIndex()',
-    '[attr.aria-selected]': '_getAriaSelected()',
-    '[attr.aria-disabled]': 'disabled.toString()',
-    '[class.novo-active]': 'active',
-    '[class.novo-selected]': 'selectable && selected',
-    '[class.novo-option-multiple]': 'multiple',
-    '[class.novo-option-disabled]': 'disabled',
-    '[class.novo-option-inert]': 'novoInert',
-    '(keydown)': '_handleKeydown($event)',
-    class: 'novo-option novo-focus-indicator',
-  },
-  inputs: ['selected', 'keepOpen', 'novoInert', 'value', 'disabled'],
-  styleUrls: ['option.component.scss'],
-  templateUrl: 'option.component.html',
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'novo-option',
+    exportAs: 'novoOption',
+    host: {
+        role: 'option',
+        '[id]': 'id',
+        '[attr.tabindex]': '_getTabIndex()',
+        '[attr.aria-selected]': '_getAriaSelected()',
+        '[attr.aria-disabled]': 'disabled.toString()',
+        '[class.novo-active]': 'active',
+        '[class.novo-selected]': 'selectable && selected',
+        '[class.novo-option-multiple]': 'multiple',
+        '[class.novo-option-disabled]': 'disabled',
+        '[class.novo-option-inert]': 'novoInert',
+        '(keydown)': '_handleKeydown($event)',
+        class: 'novo-option novo-focus-indicator',
+    },
+    inputs: ['selected', 'keepOpen', 'novoInert', 'value', 'disabled'],
+    styleUrls: ['option.component.scss'],
+    templateUrl: 'option.component.html',
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NovoOption extends NovoOptionBase {
   constructor(

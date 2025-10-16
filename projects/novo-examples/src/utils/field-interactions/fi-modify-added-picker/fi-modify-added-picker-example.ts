@@ -6,9 +6,10 @@ import { FieldInteractionApi, FormUtils, PickerControl } from 'novo-elements';
  * @title Fi Modify Added Picker Example
  */
 @Component({
-  selector: 'fi-modify-added-picker-example',
-  templateUrl: 'fi-modify-added-picker-example.html',
-  styleUrls: ['fi-modify-added-picker-example.css'],
+    selector: 'fi-modify-added-picker-example',
+    templateUrl: 'fi-modify-added-picker-example.html',
+    styleUrls: ['fi-modify-added-picker-example.css'],
+    standalone: false
 })
 export class FiModifyAddedPickerExample {
   public form: any;

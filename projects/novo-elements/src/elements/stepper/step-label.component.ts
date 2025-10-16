@@ -2,7 +2,8 @@ import { CdkStepLabel } from '@angular/cdk/stepper';
 import { Directive, TemplateRef } from '@angular/core';
 
 @Directive({
-  selector: '[novoStepLabel]',
+    selector: '[novoStepLabel]',
+    standalone: false
 })
 export class NovoStepLabel extends CdkStepLabel {
   constructor(template: TemplateRef<any>) {

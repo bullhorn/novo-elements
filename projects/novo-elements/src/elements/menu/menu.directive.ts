@@ -18,7 +18,8 @@ import { NovoMenuService } from './menu.service';
 import { PARENT_MENU } from './menu.tokens';
 
 @Directive({
-  selector: '[menu]',
+    selector: '[menu]',
+    standalone: false
 })
 export class MenuDirective implements OnInit, OnDestroy {
   @Input() public menuContext: any;

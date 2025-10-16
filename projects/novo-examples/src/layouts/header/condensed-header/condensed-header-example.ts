@@ -8,9 +8,10 @@ const HEADER_ICONS = ['company', 'job', 'candidate', 'person', 'opportunity', 'l
  * @title Condensed Header Example
  */
 @Component({
-  selector: 'condensed-header-example',
-  templateUrl: 'condensed-header-example.html',
-  styleUrls: ['condensed-header-example.css'],
+    selector: 'condensed-header-example',
+    templateUrl: 'condensed-header-example.html',
+    styleUrls: ['condensed-header-example.css'],
+    standalone: false
 })
 export class CondensedHeaderExample {
   public theme: string = 'company';

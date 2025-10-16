@@ -248,4 +248,133 @@ describe('CriteriaBuilderComponent', () => {
       expect(component.addConditionGroup).toHaveBeenCalled();
     });
   });
+
+  describe('Function: getFieldEntity', () => {
+    it('should return the entity when field with matching scope is found', () => {
+      const fieldConfigs = {
+        fields: [
+          { value: 'user', entity: 'User' },
+          { value: 'company', entity: 'Company' },
+          { value: 'contact', entity: 'Contact' }
+        ]
+      };
+      const scope = 'company';
+
+      const result = component.getFieldEntity(fieldConfigs, scope);
+
+      expect(result).toBe('Company');
+    });
+    it('should return undefined when no field with matching scope is found', () => {
+      const fieldConfigs = {
+        fields: [
+          { value: 'user', entity: 'User' },
+          { value: 'company', entity: 'Company' }
+        ]
+      };
+      const scope = 'nonexistent';
+
+      const result = component.getFieldEntity(fieldConfigs, scope);
+
+      expect(result).toBeUndefined();
+    });
+    it('should return null when fieldConfigs is null', () => {
+      const fieldConfigs = null;
+      const scope = 'user';
+
+      const result = component.getFieldEntity(fieldConfigs, scope);
+
+      expect(result).toBeNull();
+    });
+    it('should return null when fieldConfigs is undefined', () => {
+      const fieldConfigs = undefined;
+      const scope = 'user';
+
+      const result = component.getFieldEntity(fieldConfigs, scope);
+
+      expect(result).toBeNull();
+    });
+    it('should return null when fieldConfigs.fields is not an array', () => {
+      const fieldConfigs = {
+        fields: 'not an array'
+      };
+      const scope = 'user';
+
+      const result = component.getFieldEntity(fieldConfigs, scope);
+
+      expect(result).toBeNull();
+    });
+    it('should return null when fieldConfigs.fields is null', () => {
+      const fieldConfigs = {
+        fields: null
+      };
+      const scope = 'user';
+
+      const result = component.getFieldEntity(fieldConfigs, scope);
+
+      expect(result).toBeNull();
+    });
+    it('should return undefined when fieldConfigs.fields is an empty array', () => {
+      const fieldConfigs = {
+        fields: []
+      };
+      const scope = 'user';
+
+      const result = component.getFieldEntity(fieldConfigs, scope);
+
+      expect(result).toBeUndefined();
+    });
+    it('should return the first matching entity when multiple fields have the same scope', () => {
+      const fieldConfigs = {
+        fields: [
+          { value: 'user', entity: 'User' },
+          { value: 'user', entity: 'UserProfile' },
+          { value: 'company', entity: 'Company' }
+        ]
+      };
+      const scope = 'user';
+
+      const result = component.getFieldEntity(fieldConfigs, scope);
+
+      expect(result).toBe('User');
+    });
+    it('should handle fields without entity property gracefully', () => {
+      const fieldConfigs = {
+        fields: [
+          { value: 'user' },
+          { value: 'company', entity: 'Company' }
+        ]
+      };
+      const scope = 'user';
+
+      const result = component.getFieldEntity(fieldConfigs, scope);
+
+      expect(result).toBeUndefined();
+    });
+    it('should handle scope parameter being null', () => {
+      const fieldConfigs = {
+        fields: [
+          { value: 'user', entity: 'User' },
+          { value: null, entity: 'NullScope' }
+        ]
+      };
+      const scope = null;
+
+      const result = component.getFieldEntity(fieldConfigs, scope);
+
+      expect(result).toBe('NullScope');
+    });
+    it('should handle scope parameter being undefined', () => {
+      const fieldConfigs = {
+        fields: [
+          { value: 'user', entity: 'User' },
+          { value: undefined, entity: 'UndefinedScope' }
+        ]
+      };
+      const scope = undefined;
+
+      const result = component.getFieldEntity(fieldConfigs, scope);
+
+      expect(result).toBe('UndefinedScope');
+    });
+  });
 });

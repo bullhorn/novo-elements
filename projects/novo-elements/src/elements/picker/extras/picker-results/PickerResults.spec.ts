@@ -1,5 +1,5 @@
 // NG2
-import { async, TestBed } from '@angular/core/testing';
+import { waitForAsync, TestBed } from '@angular/core/testing';
 // App
 import { NovoListModule } from 'novo-elements/elements/list';
 import { NovoLoadingElement } from 'novo-elements/elements/loading';
@@ -10,7 +10,7 @@ describe('Elements: PickerResults', () => {
   let fixture;
   let component: PickerResults;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [NovoListModule],
       declarations: [PickerResults, NovoLoadingElement],

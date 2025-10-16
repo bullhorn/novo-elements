@@ -24,7 +24,8 @@ import { NovoSortFilter } from './sort';
 import { NovoActivityTableState } from './state';
 
 @Directive({
-  selector: '[novoSimpleFilterFocus]',
+    selector: '[novoSimpleFilterFocus]',
+    standalone: false
 })
 export class NovoSimpleFilterFocus implements AfterViewInit {
   constructor(private element: ElementRef) {}
@@ -35,8 +36,8 @@ export class NovoSimpleFilterFocus implements AfterViewInit {
 }
 
 @Component({
-  selector: '[novo-simple-cell-config]',
-  template: `
+    selector: '[novo-simple-cell-config]',
+    template: `
     <label (click)="sort()" data-automation-id="novo-activity-table-label" [class.sort-disabled]="!config.sortable">
       <ng-content></ng-content>
     </label>
@@ -121,8 +122,9 @@ export class NovoSimpleFilterFocus implements AfterViewInit {
       </novo-dropdown>
     </div>
   `,
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NovoSimpleCellHeader implements NovoSimpleSortFilter, OnInit, OnDestroy {
   @ViewChild(NovoDropdownElement)

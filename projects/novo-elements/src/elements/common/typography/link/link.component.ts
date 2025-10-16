@@ -14,13 +14,14 @@ import { NovoBaseTextElement } from '../base/base-text.component';
  */
 
 @Component({
-  selector: 'novo-link',
-  template: `<a [attr.href]="href"><ng-content></ng-content></a>`,
-  styleUrls: ['./link.scss'],
-  encapsulation: ViewEncapsulation.None,
-  host: {
-    class: 'novo-link',
-  },
+    selector: 'novo-link',
+    template: `<a [attr.href]="href"><ng-content></ng-content></a>`,
+    styleUrls: ['./link.scss'],
+    encapsulation: ViewEncapsulation.None,
+    host: {
+        class: 'novo-link',
+    },
+    standalone: false
 })
 export class NovoLink extends NovoBaseTextElement {
   @Input()

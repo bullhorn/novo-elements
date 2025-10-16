@@ -14,11 +14,12 @@ export const DATEFORMAT_VALUE_ACCESSOR = {
 };
 
 @Directive({
-  selector: 'input[dateFormat]',
-  host: {
-    class: 'novo-date-format',
-  },
-  providers: [DATEFORMAT_VALUE_ACCESSOR, { provide: NOVO_INPUT_FORMAT, useExisting: NovoDateFormatDirective }],
+    selector: 'input[dateFormat]',
+    host: {
+        class: 'novo-date-format',
+    },
+    providers: [DATEFORMAT_VALUE_ACCESSOR, { provide: NOVO_INPUT_FORMAT, useExisting: NovoDateFormatDirective }],
+    standalone: false
 })
 export class NovoDateFormatDirective extends IMaskDirective<any> {
   valueChange: EventEmitter<any> = new EventEmitter();

@@ -5,9 +5,10 @@ import { NOVO_VALUE_THEME } from 'novo-elements';
  * @title Corporate User Value Example
  */
 @Component({
-  selector: 'corporate-user-value-example',
-  templateUrl: 'corporate-user-value-example.html',
-  styleUrls: ['corporate-user-value-example.css'],
+    selector: 'corporate-user-value-example',
+    templateUrl: 'corporate-user-value-example.html',
+    styleUrls: ['corporate-user-value-example.css'],
+    standalone: false
 })
 export class CorporateUserValueExample {
   public theme = NOVO_VALUE_THEME.DEFAULT;

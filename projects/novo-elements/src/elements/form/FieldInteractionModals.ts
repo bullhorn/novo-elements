@@ -5,8 +5,8 @@ import { NovoModalParams, NovoModalRef } from 'novo-elements/elements/modal';
 import { NovoLabelService } from 'novo-elements/services';
 
 @Component({
-  selector: 'control-confirm-modal',
-  template: `
+    selector: 'control-confirm-modal',
+    template: `
     <novo-notification type="warning" [attr.data-automation-id]="'field-interaction-modal-' + params['key']">
       <h1>{{ labels.confirmChangesModalMessage }}</h1>
       <h2 *ngIf="!params['message']">
@@ -27,6 +27,7 @@ import { NovoLabelService } from 'novo-elements/services';
       </novo-button>
     </novo-notification>
   `,
+    standalone: false
 })
 export class ControlConfirmModal {
   constructor(private modalRef: NovoModalRef, public params: NovoModalParams, public labels: NovoLabelService) {}
@@ -37,8 +38,8 @@ export class ControlConfirmModal {
 }
 
 @Component({
-  selector: 'control-prompt-modal',
-  template: `
+    selector: 'control-prompt-modal',
+    template: `
     <novo-notification type="warning" [attr.data-automation-id]="'field-interaction-modal-' + params['key']">
       <h1>{{ labels.promptModalMessage }}</h1>
       <p *ngFor="let change of params['changes']">{{ change }}</p>
@@ -56,6 +57,7 @@ export class ControlConfirmModal {
       </novo-button>
     </novo-notification>
   `,
+    standalone: false
 })
 export class ControlPromptModal {
   constructor(private modalRef: NovoModalRef, public params: NovoModalParams, public labels: NovoLabelService) {}

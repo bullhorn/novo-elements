@@ -5,9 +5,10 @@ import { Security } from 'novo-elements';
  * @title Security Example
  */
 @Component({
-  selector: 'security-example',
-  templateUrl: 'security-example.html',
-  styleUrls: ['security-example.css'],
+    selector: 'security-example',
+    templateUrl: 'security-example.html',
+    styleUrls: ['security-example.css'],
+    standalone: false
 })
 export class SecurityExample {
   perms = [];

@@ -2,7 +2,8 @@ import { NgSwitch } from '@angular/common';
 import { Directive, DoCheck, Host, Input, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
 
 @Directive({
-  selector: '[novoSwitchCases]',
+    selector: '[novoSwitchCases]',
+    standalone: false
 })
 export class SwitchCasesDirective implements OnInit, DoCheck {
   private ngSwitch: any;

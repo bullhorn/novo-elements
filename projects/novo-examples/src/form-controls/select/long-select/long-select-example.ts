@@ -4,9 +4,10 @@ import { Component } from '@angular/core';
  * @title Long Select Example
  */
 @Component({
-  selector: 'long-select-example',
-  templateUrl: 'long-select-example.html',
-  styleUrls: ['long-select-example.css'],
+    selector: 'long-select-example',
+    templateUrl: 'long-select-example.html',
+    styleUrls: ['long-select-example.css'],
+    standalone: false
 })
 export class LongSelectExample {
   public placeholder: string = 'Select...';

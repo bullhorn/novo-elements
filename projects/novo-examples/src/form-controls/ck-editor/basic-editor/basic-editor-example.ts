@@ -4,9 +4,10 @@ import { Component } from '@angular/core';
  * @title Basic Editor Example
  */
 @Component({
-  selector: 'basic-editor-example',
-  templateUrl: 'basic-editor-example.html',
-  styleUrls: ['basic-editor-example.css'],
+    selector: 'basic-editor-example',
+    templateUrl: 'basic-editor-example.html',
+    styleUrls: ['basic-editor-example.css'],
+    standalone: false
 })
 export class BasicEditorExample {
   public editorValue: string = '<p>I AM A PRE-RENDERED VALUE</p><h1>TEST</h1>';

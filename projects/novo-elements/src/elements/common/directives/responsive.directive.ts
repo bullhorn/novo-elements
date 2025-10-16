@@ -13,7 +13,10 @@ const ro = new ResizeObserver((entries: any[]) => {
   }
 });
 
-@Directive({ selector: '[responsive]' })
+@Directive({
+    selector: '[responsive]',
+    standalone: false
+})
 export class ResizeObserverDirective implements OnDestroy {
   @Input() responsive: number[];
   @Input() sizes: string[] = ['size-s', 'size-m', 'size-l', 'size-xl', 'size-xxl'];

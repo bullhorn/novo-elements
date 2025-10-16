@@ -1,7 +1,8 @@
 import { Directive, Input, TemplateRef } from '@angular/core';
 
 @Directive({
-  selector: '[novoTemplate]',
+    selector: '[novoTemplate]',
+    standalone: false
 })
 export class NovoTemplate {
   @Input() type: string;

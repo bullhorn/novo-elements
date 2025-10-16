@@ -1,5 +1,5 @@
 // NG2
-import { async, TestBed } from '@angular/core/testing';
+import { waitForAsync, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 // App
 import { NovoLabelService } from 'novo-elements/services';
@@ -10,7 +10,7 @@ describe('Elements: NovoTable', () => {
   let fixture;
   let component;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [Pagination],
       imports: [FormsModule, NovoSelectModule],

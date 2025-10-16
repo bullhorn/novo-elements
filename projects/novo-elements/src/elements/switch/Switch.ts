@@ -11,9 +11,9 @@ const SWITCH_VALUE_ACCESSOR = {
 };
 
 @Component({
-  selector: 'novo-switch',
-  providers: [SWITCH_VALUE_ACCESSOR],
-  template: `
+    selector: 'novo-switch',
+    providers: [SWITCH_VALUE_ACCESSOR],
+    template: `
     <div (click)="toggle($event)">
       <div class="novo-switch-container">
         <div class="novo-switch-bar"></div>
@@ -27,15 +27,16 @@ const SWITCH_VALUE_ACCESSOR = {
       <div class="novo-switch-label"><ng-content></ng-content></div>
     </div>
   `,
-  styleUrls: ['./Switch.scss'],
-  host: {
-    role: 'checkbox',
-    class: 'novo-switch',
-    '[attr.aria-checked]': 'value',
-    '[attr.aria-disabled]': 'disabled',
-    '(keydown)': 'onKeydown($event)',
-    '[class]': 'theme',
-  },
+    styleUrls: ['./Switch.scss'],
+    host: {
+        role: 'checkbox',
+        class: 'novo-switch',
+        '[attr.aria-checked]': 'value',
+        '[attr.aria-disabled]': 'disabled',
+        '(keydown)': 'onKeydown($event)',
+        '[class]': 'theme',
+    },
+    standalone: false
 })
 export class NovoSwitchElement implements ControlValueAccessor {
   @Input()

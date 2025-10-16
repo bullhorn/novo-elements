@@ -3,16 +3,17 @@ import { Component, Input, OnInit } from '@angular/core';
 
 let nextUniqueId = 0;
 @Component({
-  selector: 'novo-hint',
-  templateUrl: './hint.html',
-  styleUrls: ['./hint.scss'],
-  host: {
-    class: 'novo-hint',
-    '[class.novo-field-hint-end]': 'align === "end"',
-    '[attr.id]': 'id',
-    // Remove align attribute to prevent it from interfering with layout.
-    '[attr.align]': 'null',
-  },
+    selector: 'novo-hint',
+    templateUrl: './hint.html',
+    styleUrls: ['./hint.scss'],
+    host: {
+        class: 'novo-hint',
+        '[class.novo-field-hint-end]': 'align === "end"',
+        '[attr.id]': 'id',
+        // Remove align attribute to prevent it from interfering with layout.
+        '[attr.align]': 'null',
+    },
+    standalone: false
 })
 export class NovoHintElement implements OnInit {
   /** Whether to align the hint label at the start or end of the line. */

@@ -4,9 +4,10 @@ import { Component } from '@angular/core';
  * @title Basic Checkbox Usage
  */
 @Component({
-  selector: 'basic-timezone-example',
-  templateUrl: 'basic-timezone-example.html',
-  styleUrls: ['basic-timezone-example.css'],
+    selector: 'basic-timezone-example',
+    templateUrl: 'basic-timezone-example.html',
+    styleUrls: ['basic-timezone-example.css'],
+    standalone: false
 })
 export class BasicTimezoneExample {
   items: any[] = [

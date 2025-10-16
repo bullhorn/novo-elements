@@ -16,8 +16,8 @@ import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
 import { MockCandidateMeta, MockNoteMeta } from './MockMeta';
 
 @Component({
-  selector: 'custom-picker-condition-def',
-  template: `
+    selector: 'custom-picker-condition-def',
+    template: `
     <ng-container novoConditionFieldDef>
       <novo-field *novoConditionOperatorsDef="let formGroup" [formGroup]="formGroup">
         <novo-select placeholder="Operator..." formControlName="operator">
@@ -38,8 +38,9 @@ import { MockCandidateMeta, MockNoteMeta } from './MockMeta';
       </novo-field>
     </ng-container>
   `,
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.Default,
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.Default,
+    standalone: false
 })
 export class CustomPickerConditionDef extends AbstractConditionFieldDef implements OnInit {
   defaultOperator = Operator.includeAny;
@@ -76,9 +77,10 @@ export class CustomPickerConditionDef extends AbstractConditionFieldDef implemen
  * @title Just Criteria Example
  */
 @Component({
-  selector: 'just-criteria-example',
-  templateUrl: 'just-criteria-example.html',
-  styleUrls: ['just-criteria-example.css'],
+    selector: 'just-criteria-example',
+    templateUrl: 'just-criteria-example.html',
+    styleUrls: ['just-criteria-example.css'],
+    standalone: false
 })
 export class JustCriteriaExample implements OnInit {
   criteriaBuilder = viewChild(CriteriaBuilderComponent);
@@ -142,6 +144,7 @@ export class JustCriteriaExample implements OnInit {
     return Promise.all(allMetas).then((metas) => {
       return metas.map((it) => ({
         value: it.entity,
+        entity: 'Person',
         label: it.label,
         options: it.fields,
         find: (name: string) => it.fields.find((f) => f.name === name),
@@ -168,27 +171,32 @@ export class JustCriteriaExample implements OnInit {
             field: 'id',
             operator: 'equalTo',
             scope: 'Candidate',
+            entity: 'Person',
             value: 123,
           }, {
             field: 'availability',
             operator: 'includeAny',
             scope: 'Candidate',
+            entity: 'Person',
             value: ['test'],
           }, {
             field: 'customDate1',
             operator: 'within',
             scope: 'Candidate',
+            entity: 'Person',
             value: '-30',
           }, {
             field: 'address',
             operator: 'includeAny',
             scope: 'Candidate',
+            entity: 'Person',
             value: null,
             supportingValue: 5,
           }, {
             field: 'status',
             operator: 'includeAny',
             scope: 'Candidate',
+            entity: 'Person',
             value: null,
           }
         ],

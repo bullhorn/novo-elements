@@ -3,7 +3,8 @@ import { Helpers } from 'novo-elements/utils';
 import { DataTableState } from '../state/data-table-state.service';
 
 @Directive({
-  selector: '[novoDataTableSortFilter]',
+    selector: '[novoDataTableSortFilter]',
+    standalone: false
 })
 export class NovoDataTableSortFilter<T> {
   constructor(private state: DataTableState<T>) {}

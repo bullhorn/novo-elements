@@ -14,28 +14,29 @@ const CHIPS_VALUE_ACCESSOR = {
 };
 
 @Component({
-  selector: 'novo-row-chip',
-  template: `
+    selector: 'novo-row-chip',
+    template: `
     <div class="novo-row-chips-columns">
       <ng-content></ng-content>
       <i class="bhi-delete-o" *ngIf="!disabled" (click)="remove()"></i>
     </div>
   `,
-  host: {
-    class: 'novo-row-chip novo-focus-indicator',
-    '[attr.tabindex]': 'disabled ? null : tabIndex',
-    role: 'option',
-    '[class.novo-row-chip-selected]': 'selected',
-    '[class.novo-row-chip-with-trailing-icon]': 'removeIcon',
-    '[class.novo-row-chip-disabled]': 'disabled',
-    '[attr.disabled]': 'disabled || null',
-    '[attr.aria-disabled]': 'disabled.toString()',
-    '[attr.aria-selected]': 'ariaSelected',
-    '(click)': '_handleClick($event)',
-    '(keydown)': '_handleKeydown($event)',
-    '(focus)': 'focus()',
-    '(blur)': '_blur()',
-  },
+    host: {
+        class: 'novo-row-chip novo-focus-indicator',
+        '[attr.tabindex]': 'disabled ? null : tabIndex',
+        role: 'option',
+        '[class.novo-row-chip-selected]': 'selected',
+        '[class.novo-row-chip-with-trailing-icon]': 'removeIcon',
+        '[class.novo-row-chip-disabled]': 'disabled',
+        '[attr.disabled]': 'disabled || null',
+        '[attr.aria-disabled]': 'disabled.toString()',
+        '[attr.aria-selected]': 'ariaSelected',
+        '(click)': '_handleClick($event)',
+        '(keydown)': '_handleKeydown($event)',
+        '(focus)': 'focus()',
+        '(blur)': '_blur()',
+    },
+    standalone: false
 })
 export class NovoRowChipElement extends NovoChipElement {
   onSelect(e) {
@@ -44,12 +45,12 @@ export class NovoRowChipElement extends NovoChipElement {
 }
 
 @Component({
-  selector: 'novo-row-chips',
-  providers: [CHIPS_VALUE_ACCESSOR],
-  host: {
-    '[class.with-value]': 'items.length > 0',
-  },
-  template: `
+    selector: 'novo-row-chips',
+    providers: [CHIPS_VALUE_ACCESSOR],
+    host: {
+        '[class.with-value]': 'items.length > 0',
+    },
+    template: `
     <div class="novo-row-chips-columns" *ngIf="items.length > 0">
       <div class="column-label" [style.flexBasis.px]="column.width || 200" *ngFor="let column of source.columns">{{ column.label }}</div>
     </div>
@@ -103,7 +104,8 @@ export class NovoRowChipElement extends NovoChipElement {
       <span #preview></span>
     </div>
   `,
-  styleUrls: ['./RowChips.scss'],
+    styleUrls: ['./RowChips.scss'],
+    standalone: false
 })
 export class NovoRowChipsElement extends NovoChipsElement {
   @Input()

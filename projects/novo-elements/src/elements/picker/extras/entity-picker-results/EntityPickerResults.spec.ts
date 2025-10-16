@@ -1,5 +1,5 @@
 // NG2
-import { async, TestBed } from '@angular/core/testing';
+import { waitForAsync, TestBed } from '@angular/core/testing';
 // APP
 import { NovoLabelService } from 'novo-elements/services';
 import { NovoPickerModule } from '../../Picker.module';
@@ -9,7 +9,7 @@ describe('Elements: EntityPickerResult', () => {
   let fixture;
   let component;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [NovoPickerModule],
       providers: [{ provide: NovoLabelService, useClass: NovoLabelService }],

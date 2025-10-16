@@ -1,7 +1,7 @@
 // NG
 import { OverlayModule } from '@angular/cdk/overlay';
 import { HttpClient, HttpHandler } from '@angular/common/http';
-import { async, inject, TestBed } from '@angular/core/testing';
+import { waitForAsync, inject, TestBed } from '@angular/core/testing';
 // Vendor
 import { of } from 'rxjs';
 // App
@@ -14,7 +14,7 @@ import { FormUtils } from './utils/FormUtils';
 
 describe('FieldInteractionApi', () => {
   let service: FieldInteractionApi;
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [OverlayModule],
       providers: [

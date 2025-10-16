@@ -18,10 +18,11 @@ import { ConfigureColumnsModal, MockData } from '../extras';
  * @title Remote Data Table Example
  */
 @Component({
-  selector: 'data-table-remote-example',
-  templateUrl: 'data-table-remote-example.html',
-  styleUrls: ['data-table-remote-example.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'data-table-remote-example',
+    templateUrl: 'data-table-remote-example.html',
+    styleUrls: ['data-table-remote-example.css'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class DataTableRemoteExample {
   // Table configuration

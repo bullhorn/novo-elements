@@ -1,5 +1,5 @@
 // NG2
-import { async, TestBed } from '@angular/core/testing';
+import { waitForAsync, TestBed } from '@angular/core/testing';
 import { ComponentUtils, NovoLabelService } from 'novo-elements/services';
 // App
 import { NovoTabbedGroupPickerElement, TabbedGroupPickerQuickSelect, TabbedGroupPickerTab } from './TabbedGroupPicker';
@@ -20,7 +20,7 @@ describe('Elements: NovoTabbedGroupPickerElement', () => {
     ],
   });
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       providers: [{ provide: ComponentUtils, useClass: ComponentUtils }, NovoLabelService],
       imports: [NovoTabbedGroupPickerModule],

@@ -4,8 +4,9 @@ import { Component, HostBinding, Input } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
-  selector: 'novo-grid',
-  template: ` <ng-content></ng-content> `,
+    selector: 'novo-grid',
+    template: ` <ng-content></ng-content> `,
+    standalone: false
 })
 export class NovoGridElement {
   @HostBinding('style.display')

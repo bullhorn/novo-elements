@@ -42,8 +42,8 @@ const MINUTES_IN_HOUR: number = 60;
  * ```
  */
 @Component({
-  selector: 'novo-agenda-day',
-  template: `
+    selector: 'novo-agenda-day',
+    template: `
     <div class="cal-day-view" #dayViewContainer>
       <novo-agenda-all-day-event
         *ngFor="let event of view.allDayEvents"
@@ -85,7 +85,8 @@ const MINUTES_IN_HOUR: number = 60;
       </div>
     </div>
   `,
-  styleUrls: ['./AgendaDayView.scss', '../common/AgendaHoursLayout.scss'],
+    styleUrls: ['./AgendaDayView.scss', '../common/AgendaHoursLayout.scss'],
+    standalone: false
 })
 export class NovoAgendaDayViewElement implements OnChanges, OnInit, OnDestroy {
   /**

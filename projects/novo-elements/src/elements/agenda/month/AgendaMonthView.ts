@@ -34,8 +34,8 @@ import {
  * ```
  */
 @Component({
-  selector: 'novo-agenda-month',
-  template: `
+    selector: 'novo-agenda-month',
+    template: `
     <div class="agenda-month-view">
       <novo-agenda-month-header
         [(viewDate)]="viewDate"
@@ -62,7 +62,8 @@ import {
       </div>
     </div>
   `,
-  styleUrls: ['./AgendaMonthView.scss'],
+    styleUrls: ['./AgendaMonthView.scss'],
+    standalone: false
 })
 export class NovoAgendaMonthViewElement implements OnChanges, OnInit, OnDestroy {
   /**

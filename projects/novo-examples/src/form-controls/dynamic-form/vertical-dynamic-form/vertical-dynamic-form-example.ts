@@ -6,9 +6,10 @@ import { MockMeta } from '../MockMeta';
  * @title Vertical Dynamic Form Example
  */
 @Component({
-  selector: 'vertical-dynamic-form-example',
-  templateUrl: 'vertical-dynamic-form-example.html',
-  styleUrls: ['vertical-dynamic-form-example.css'],
+    selector: 'vertical-dynamic-form-example',
+    templateUrl: 'vertical-dynamic-form-example.html',
+    styleUrls: ['vertical-dynamic-form-example.css'],
+    standalone: false
 })
 export class VerticalDynamicFormExample {
   public dynamicVertical: any;

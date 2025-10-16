@@ -1,5 +1,5 @@
 // NG2
-import { async, TestBed } from '@angular/core/testing';
+import { waitForAsync, TestBed } from '@angular/core/testing';
 // APP
 import { PopOverContent } from './PopOverContent';
 
@@ -7,7 +7,7 @@ describe('Elements: PopOverContent', () => {
   let fixture;
   let component;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [PopOverContent],
     }).compileComponents();

@@ -26,20 +26,21 @@ let nextUniqueId = 0;
  * May be placed inside or outside of an `<novo-chip-list>`.
  */
 @Directive({
-  selector: 'input[novoChipInput]',
-  exportAs: 'novoChipInput, novoChipInputFor',
-  host: {
-    class: 'novo-chip-input novo-input-element',
-    '(keydown)': '_keydown($event)',
-    '(blur)': '_blur($event)',
-    '(focus)': '_focus()',
-    '(input)': '_onInput()',
-    '[id]': 'id',
-    '[attr.disabled]': 'disabled || null',
-    '[attr.placeholder]': 'placeholder || null',
-    '[attr.aria-invalid]': '_chipList && _chipList.ngControl ? _chipList.ngControl.invalid : null',
-    '[attr.aria-required]': '_chipList && _chipList.required || null',
-  },
+    selector: 'input[novoChipInput]',
+    exportAs: 'novoChipInput, novoChipInputFor',
+    host: {
+        class: 'novo-chip-input novo-input-element',
+        '(keydown)': '_keydown($event)',
+        '(blur)': '_blur($event)',
+        '(focus)': '_focus()',
+        '(input)': '_onInput()',
+        '[id]': 'id',
+        '[attr.disabled]': 'disabled || null',
+        '[attr.placeholder]': 'placeholder || null',
+        '[attr.aria-invalid]': '_chipList && _chipList.ngControl ? _chipList.ngControl.invalid : null',
+        '[attr.aria-required]': '_chipList && _chipList.required || null',
+    },
+    standalone: false
 })
 export class NovoChipInput implements NovoChipTextControl, OnChanges, OnDestroy {
   /** Whether the control is focused. */

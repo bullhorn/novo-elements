@@ -2,8 +2,8 @@ import { Component, EventEmitter, Input, Output, TemplateRef } from '@angular/co
 import { CalendarEvent } from 'novo-elements/utils';
 
 @Component({
-  selector: 'novo-event-type-legend',
-  template: `
+    selector: 'novo-event-type-legend',
+    template: `
     <ng-template #defaultTemplate>
       <div class="cal-event-legend">
         <div
@@ -22,6 +22,7 @@ import { CalendarEvent } from 'novo-elements/utils';
     >
     </ng-template>
   `,
+    standalone: false
 })
 export class NovoEventTypeLegendElement {
   @Input()

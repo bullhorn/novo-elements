@@ -4,8 +4,8 @@ import { DataTableState } from './state/data-table-state.service';
 import { BooleanInput } from 'novo-elements/utils';
 
 @Component({
-  selector: 'novo-data-table-clear-button',
-  template: `
+    selector: 'novo-data-table-clear-button',
+    template: `
     <novo-dropdown side="bottom-right" class="novo-data-table-clear-button" data-automation-id="novo-data-table-clear-dropdown">
       <novo-button type="button" theme="primary" color="negative" icon="collapse" data-automation-id="novo-data-table-clear-dropdown-btn">
         {{ labels.clear }}
@@ -32,7 +32,8 @@ import { BooleanInput } from 'novo-elements/utils';
       </list>
     </novo-dropdown>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NovoDataTableClearButton<T> {
   @Output()

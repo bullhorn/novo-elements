@@ -4,9 +4,10 @@ import { Component } from '@angular/core';
  * @title Themed List Example
  */
 @Component({
-  selector: 'themed-list-example',
-  templateUrl: 'themed-list-example.html',
-  styleUrls: ['themed-list-example.css'],
+    selector: 'themed-list-example',
+    templateUrl: 'themed-list-example.html',
+    styleUrls: ['themed-list-example.css'],
+    standalone: false
 })
 export class ThemedListExample {
   public pulseItems: any;

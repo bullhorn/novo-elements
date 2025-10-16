@@ -48,8 +48,9 @@ export const getSpacingToken = (value: string) => {
 };
 
 @Directive({
-  // tslint:disable-next-line: max-line-length
-  selector: '[m],[margin],[marginTop],[marginRight],[marginBottom],[marginLeft],[marginX],[marginY],[mt],[mr],[mb],[ml],[mx],[my]',
+    // tslint:disable-next-line: max-line-length
+    selector: '[m],[margin],[marginTop],[marginRight],[marginBottom],[marginLeft],[marginX],[marginY],[mt],[mr],[mb],[ml],[mx],[my]',
+    standalone: false
 })
 export class MarginDirective {
   // Margin
@@ -90,8 +91,9 @@ export class MarginDirective {
 }
 
 @Directive({
-  // tslint:disable-next-line: max-line-length
-  selector: '[p],[padding],[paddingTop],[paddingRight],[paddingBottom],[paddingLeft],[paddingX],[paddingY],[pt],[pr],[pb],[pl],[px],[py]',
+    // tslint:disable-next-line: max-line-length
+    selector: '[p],[padding],[paddingTop],[paddingRight],[paddingBottom],[paddingLeft],[paddingX],[paddingY],[pt],[pr],[pb],[pl],[px],[py]',
+    standalone: false
 })
 export class PaddingDirective {
   // Padding
@@ -132,7 +134,8 @@ export class PaddingDirective {
 }
 
 @Directive({
-  selector: '[gap]',
+    selector: '[gap]',
+    standalone: false
 })
 export class GapDirective {
   @Input() gap: string;

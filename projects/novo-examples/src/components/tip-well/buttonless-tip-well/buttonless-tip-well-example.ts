@@ -4,9 +4,10 @@ import { Component } from '@angular/core';
  * @title Tip Well with No Button Example
  */
 @Component({
-  selector: 'buttonless-tip-well-example',
-  templateUrl: 'buttonless-tip-well-example.html',
-  styleUrls: ['buttonless-tip-well-example.css'],
+    selector: 'buttonless-tip-well-example',
+    templateUrl: 'buttonless-tip-well-example.html',
+    styleUrls: ['buttonless-tip-well-example.css'],
+    standalone: false
 })
 export class ButtonlessTipWellExample {
   public demoTip: string =

@@ -364,7 +364,10 @@ class Pluralize {
   /[^aeiou]ese$/i, // "chinese", "japanese"
 ].forEach(Pluralize.addUncountableRule);
 
-@Pipe({ name: 'plural' })
+@Pipe({
+    name: 'plural',
+    standalone: false
+})
 @Injectable()
 export class PluralPipe implements PipeTransform {
   transform(value) {

@@ -4,9 +4,10 @@ import { Component } from '@angular/core';
  * @title Basic Code Editor Example
  */
 @Component({
-  selector: 'basic-code-example',
-  templateUrl: 'basic-code-example.html',
-  styleUrls: ['basic-code-example.css'],
+    selector: 'basic-code-example',
+    templateUrl: 'basic-code-example.html',
+    styleUrls: ['basic-code-example.css'],
+    standalone: false
 })
 export class BasicCodeExample {
 

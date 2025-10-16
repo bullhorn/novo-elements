@@ -5,9 +5,10 @@ import { Component } from '@angular/core';
  * @title Title Example
  */
 @Component({
-  selector: 'title-example',
-  templateUrl: './title-example.html',
-  styleUrls: ['./title-example.scss'],
+    selector: 'title-example',
+    templateUrl: './title-example.html',
+    styleUrls: ['./title-example.scss'],
+    standalone: false
 })
 export class TitleExample {
   icons: string[] = ['email', 'bell', 'person', 'caution', 'chart-pie', 'bot', 'certification', 'calendar', 'send', 'coffee'];

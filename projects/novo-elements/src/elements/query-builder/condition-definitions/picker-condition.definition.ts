@@ -11,8 +11,8 @@ type FieldOption = BaseFieldDef['options'][number];
  * Handle selection of field values when a list of options is provided.
  */
 @Component({
-  selector: 'novo-picker-condition-def',
-  template: `
+    selector: 'novo-picker-condition-def',
+    template: `
     <ng-container novoConditionFieldDef>
       <novo-field *novoConditionOperatorsDef="let formGroup; fieldMeta as meta" [formGroup]="formGroup">
         <novo-select [placeholder]="labels.operator" formControlName="operator" (onSelect)="onOperatorSelect(formGroup)">
@@ -54,8 +54,9 @@ type FieldOption = BaseFieldDef['options'][number];
       </ng-container>
     </ng-container>
   `,
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.Default,
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.Default,
+    standalone: false
 })
 export class NovoDefaultPickerConditionDef extends AbstractConditionFieldDef {
   defaultOperator = Operator.includeAny;

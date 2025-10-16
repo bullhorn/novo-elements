@@ -1,6 +1,6 @@
 // NG2
 import { OverlayModule } from '@angular/cdk/overlay';
-import { async, TestBed } from '@angular/core/testing';
+import { waitForAsync, TestBed } from '@angular/core/testing';
 import { NovoTemplateService } from 'novo-elements/services';
 // App
 import { NovoFormElement } from './Form';
@@ -9,7 +9,7 @@ xdescribe('Elements: NovoFormElement', () => {
   let fixture;
   let component;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({ imports: [NovoFormModule, OverlayModule], providers: [NovoTemplateService] }).compileComponents();
     fixture = TestBed.createComponent(NovoFormElement);
     component = fixture.debugElement.componentInstance;

@@ -4,9 +4,10 @@ import { Component } from '@angular/core';
  * @title Avatar Stack Usage
  */
 @Component({
-  selector: 'avatar-stack-usage-example',
-  templateUrl: 'avatar-stack-usage-example.html',
-  styleUrls: ['avatar-stack-usage-example.css'],
+    selector: 'avatar-stack-usage-example',
+    templateUrl: 'avatar-stack-usage-example.html',
+    styleUrls: ['avatar-stack-usage-example.css'],
+    standalone: false
 })
 export class AvatarStackUsageExample {
   public profiles: any[] = [

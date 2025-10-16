@@ -40,19 +40,20 @@ let uniqueId = 0;
  * multiple children of an element with the NovoAccordion directive attached.
  */
 @Component({
-  styleUrls: ['./expansion-panel.scss'],
-  selector: 'novo-expansion-panel',
-  exportAs: 'novoExpansionPanel',
-  templateUrl: './expansion-panel.html',
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [novoExpansionAnimations.bodyExpansion],
-  host: {
-    class: 'novo-expansion-panel',
-    '[class.novo-expanded]': 'expanded',
-    '[class.novo-expansion-panel-spacing]': '_hasSpacing()',
-    '[class.novo-expansion-panel-padding]': 'padding',
-  },
+    styleUrls: ['./expansion-panel.scss'],
+    selector: 'novo-expansion-panel',
+    exportAs: 'novoExpansionPanel',
+    templateUrl: './expansion-panel.html',
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    animations: [novoExpansionAnimations.bodyExpansion],
+    host: {
+        class: 'novo-expansion-panel',
+        '[class.novo-expanded]': 'expanded',
+        '[class.novo-expansion-panel-spacing]': '_hasSpacing()',
+        '[class.novo-expansion-panel-padding]': 'padding',
+    },
+    standalone: false
 })
 export class NovoExpansionPanel extends CdkAccordionItem implements AfterContentInit, OnChanges, OnDestroy {
   /** Whether the toggle indicator should be hidden. */
@@ -172,9 +173,10 @@ export class NovoExpansionPanel extends CdkAccordionItem implements AfterContent
 }
 
 @Directive({
-  selector: 'novo-action-row',
-  host: {
-    class: 'novo-action-row',
-  },
+    selector: 'novo-action-row',
+    host: {
+        class: 'novo-action-row',
+    },
+    standalone: false
 })
 export class NovoExpansionPanelActionRow {}

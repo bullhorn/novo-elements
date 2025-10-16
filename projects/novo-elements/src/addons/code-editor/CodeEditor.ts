@@ -23,10 +23,11 @@ const FormControlCodeWriter = Annotation.define();
 // (This is a replacement for the "novo-ace-editor". Notably, we are no longer naming it based on the underlying component. It is possible, in the future,
 // we decide there is another code editing component that better fits our use case - in which situation we should replace the implementation here, but keep its name)
 @Component({
-  selector: 'novo-code-editor',
-  template: '',
-  styleUrls: ['./CodeEditor.scss'],
-  providers: [CODE_EDITOR_VALUE_ACCESSOR]
+    selector: 'novo-code-editor',
+    template: '',
+    styleUrls: ['./CodeEditor.scss'],
+    providers: [CODE_EDITOR_VALUE_ACCESSOR],
+    standalone: false
 })
 export class NovoCodeEditor implements ControlValueAccessor, OnInit, OnDestroy, AfterViewInit {
   @Input()
@@ -62,7 +63,7 @@ export class NovoCodeEditor implements ControlValueAccessor, OnInit, OnDestroy, 
   }
 
   ngOnDestroy(): void {
-    
+
   }
 
   ngAfterViewInit(): void {

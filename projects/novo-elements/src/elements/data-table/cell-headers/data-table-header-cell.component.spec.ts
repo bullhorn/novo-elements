@@ -1,6 +1,6 @@
 // NG2
 import { EventEmitter } from '@angular/core';
-import { async, TestBed } from '@angular/core/testing';
+import { waitForAsync, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { IMaskModule } from 'angular-imask';
 import { NovoLabelService } from 'novo-elements/services';
@@ -19,7 +19,7 @@ xdescribe('Elements: NovoDataTableCellHeader', () => {
   let fixture;
   let component;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [NovoDataTableCellHeader],
       imports: [FormsModule, NovoTooltipModule, NovoButtonModule, NovoDropdownModule, NovoDatePickerModule, IMaskModule],

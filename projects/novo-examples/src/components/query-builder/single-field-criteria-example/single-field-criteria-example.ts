@@ -7,9 +7,10 @@ import { MockCandidateMeta as MockMeta } from '../just-criteria/MockMeta';
  * @title Single Field Criteria Example
  */
 @Component({
-  selector: 'single-field-criteria-example',
-  templateUrl: 'single-field-criteria-example.html',
-  styleUrls: ['single-field-criteria-example.css'],
+    selector: 'single-field-criteria-example',
+    templateUrl: 'single-field-criteria-example.html',
+    styleUrls: ['single-field-criteria-example.css'],
+    standalone: false
 })
 export class SingleFieldCriteriaExample implements OnInit {
   @ViewChild('criteriaBuilder', { static: true }) criteriaBuilder: CriteriaBuilderComponent;

@@ -3,7 +3,8 @@ import { Helpers } from 'novo-elements/utils';
 import { NovoActivityTableState } from './state';
 
 @Directive({
-  selector: '[novoSortFilter]',
+    selector: '[novoSortFilter]',
+    standalone: false
 })
 export class NovoSortFilter {
   constructor(private state: NovoActivityTableState) {}
@@ -29,7 +30,8 @@ export class NovoSortFilter {
 }
 
 @Directive({
-  selector: '[novoSelection]',
+    selector: '[novoSelection]',
+    standalone: false
 })
 export class NovoSelection implements OnDestroy {
   @Output()

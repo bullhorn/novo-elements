@@ -1,5 +1,5 @@
 // NG2
-import { async, TestBed } from '@angular/core/testing';
+import { waitForAsync, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { ComponentUtils, NovoLabelService } from 'novo-elements/services';
 import { Key } from 'novo-elements/utils';
@@ -11,7 +11,7 @@ describe('Element: NovoMultiPickerElement', () => {
   let fixture;
   let component;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       providers: [
         { provide: NovoLabelService, useClass: NovoLabelService },

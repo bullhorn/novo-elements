@@ -4,7 +4,8 @@ import { NovoFormGroup } from 'novo-elements/elements/form/FormInterfaces';
 import { ToastPositions } from 'novo-elements/elements/toast/ToastService';
 
 @Component({
-  template: ` <div></div> `,
+    template: ` <div></div> `,
+    standalone: false
 })
 class A {
   position: ToastPositions = 'fixedTop';

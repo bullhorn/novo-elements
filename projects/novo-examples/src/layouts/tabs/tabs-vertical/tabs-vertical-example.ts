@@ -4,9 +4,10 @@ import { Component } from '@angular/core';
  * @title Vertical Tabs
  */
 @Component({
-  selector: 'tabs-vertical-example',
-  templateUrl: 'tabs-vertical-example.html',
-  styleUrls: ['tabs-vertical-example.css'],
+    selector: 'tabs-vertical-example',
+    templateUrl: 'tabs-vertical-example.html',
+    styleUrls: ['tabs-vertical-example.css'],
+    standalone: false
 })
 export class TabsVerticalExample {
   tabSelected() {

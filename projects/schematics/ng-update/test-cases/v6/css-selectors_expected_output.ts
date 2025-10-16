@@ -4,7 +4,7 @@ import { By } from '@angular/platform-browser';
 const a = By.css('.button-contents');
 
 @Component({
-  template: `
+    template: `
     <ng-content select=".button-contents"></ng-content>
 
     <style>
@@ -13,5 +13,6 @@ const a = By.css('.button-contents');
       }
     </style>
   `,
+    standalone: false
 })
 class F {}

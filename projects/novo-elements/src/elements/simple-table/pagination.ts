@@ -7,8 +7,8 @@ import { NovoActivityTableState } from './state';
 const DEFAULT_PAGE_SIZE = 50;
 
 @Component({
-  selector: 'novo-simple-table-pagination',
-  template: `
+    selector: 'novo-simple-table-pagination',
+    template: `
     <div class="novo-simple-table-pagination-size">
       <novo-tiles
         *ngIf="displayedPageSizeOptions.length > 1"
@@ -53,7 +53,8 @@ const DEFAULT_PAGE_SIZE = 50;
       <span>{{ labels.next }}</span>
     </novo-button>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NovoSimpleTablePagination implements OnInit, OnDestroy {
   private _initialized: boolean;

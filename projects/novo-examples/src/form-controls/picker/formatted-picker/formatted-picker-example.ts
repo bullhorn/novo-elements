@@ -4,9 +4,10 @@ import { Component } from '@angular/core';
  * @title Formatted Picker Example
  */
 @Component({
-  selector: 'formatted-picker-example',
-  templateUrl: 'formatted-picker-example.html',
-  styleUrls: ['formatted-picker-example.css'],
+    selector: 'formatted-picker-example',
+    templateUrl: 'formatted-picker-example.html',
+    styleUrls: ['formatted-picker-example.css'],
+    standalone: false
 })
 export class FormattedPickerExample {
   public placeholder: string = 'Select...';

@@ -1,5 +1,5 @@
 // NG2
-import { async, inject, TestBed } from '@angular/core/testing';
+import { waitForAsync, inject, TestBed } from '@angular/core/testing';
 import { FormGroup } from '@angular/forms';
 // Vendor
 import { from } from 'rxjs';
@@ -48,7 +48,7 @@ function createAddress(address1, city, state, zip, countryName) {
 describe('Utils: FormUtils', () => {
   let formUtils;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     const optionsService = {
       getOptionEntity: () => {
         return '';
@@ -64,7 +64,7 @@ describe('Utils: FormUtils', () => {
     };
   }));
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       providers: [
         {

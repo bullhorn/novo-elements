@@ -1,9 +1,10 @@
 import { Directive, ElementRef, HostBinding, Input, Renderer2 } from '@angular/core';
 
 @Directive({
-  selector:
+    selector:
     // tslint:disable-next-line: directive-selector
     '[fontWeight],[lineHeight],[textAlign],[textAlign],[fontStyle],[textTransform]',
+    standalone: false
 })
 export class TypographyDirective {
   @HostBinding('style.fontWeight')

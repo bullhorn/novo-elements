@@ -2,7 +2,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { can, Helpers } from 'novo-elements/utils';
 
 @Pipe({
-  name: 'groupBy',
+    name: 'groupBy',
+    standalone: false
 })
 export class GroupByPipe implements PipeTransform {
   transform(input: any, prop: string): Array<any> {

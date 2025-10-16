@@ -4,9 +4,10 @@ import { AfterContentInit, Component } from '@angular/core';
  * @title Basic Drop Down
  */
 @Component({
-  selector: 'basic-drop-down-example',
-  templateUrl: 'basic-drop-down-example.html',
-  styleUrls: ['basic-drop-down-example.css'],
+    selector: 'basic-drop-down-example',
+    templateUrl: 'basic-drop-down-example.html',
+    styleUrls: ['basic-drop-down-example.css'],
+    standalone: false
 })
 export class BasicDropDownExample implements AfterContentInit {
   asyncItems: any[] = [];

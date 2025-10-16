@@ -3,12 +3,13 @@ import { AfterViewInit, Component, Input, QueryList, ViewChildren } from '@angul
 import { NovoAvatarElement } from './Avatar';
 
 @Component({
-  selector: 'novo-avatar-stack',
-  styleUrls: ['./AvatarStack.scss'],
-  template: `
+    selector: 'novo-avatar-stack',
+    styleUrls: ['./AvatarStack.scss'],
+    template: `
     <ng-content></ng-content>
     <novo-avatar *ngIf="showTotal" label="+5"></novo-avatar>
   `,
+    standalone: false
 })
 export class NovoAvatarStackElement implements AfterViewInit {
   @Input()

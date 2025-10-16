@@ -1,8 +1,8 @@
-import { ChangeDetectionStrategy, Component, QueryList, ViewChildren, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, InputSignal, QueryList, ViewChildren, ViewEncapsulation } from '@angular/core';
 import { NovoPickerToggleElement } from 'novo-elements/elements/field';
-import { AbstractConditionFieldDef } from './abstract-condition.definition';
-import { Operator } from '../query-builder.types';
 import { NovoLabelService } from 'novo-elements/services';
+import { DateCriteriaConfig, Operator } from '../query-builder.types';
+import { AbstractConditionFieldDef } from './abstract-condition.definition';
 
 /**
  * Most complicated of the default conditions defs, a date needs to provide a different
@@ -26,21 +26,39 @@ import { NovoLabelService } from 'novo-elements/services';
         <novo-field *novoSwitchCases="['before', 'after', 'equalTo']">
           <input novoInput dateFormat="yyyy-mm-dd" [picker]="datepicker" formControlName="value"/>
           <novo-picker-toggle triggerOnFocus [overlayId]="viewIndex" novoSuffix icon="calendar">
-            <novo-date-picker (onSelect)="closePanel($event, viewIndex)" #datepicker></novo-date-picker>
+            <novo-date-picker #datepicker (onSelect)="closePanel($event, viewIndex)" [weekStart]="config()?.weekStart"></novo-date-picker>
           </novo-picker-toggle>
         </novo-field>
         <novo-field *novoSwitchCases="['between']">
           <input novoInput dateRangeFormat="date" [picker]="daterangepicker" formControlName="value"/>
           <novo-picker-toggle [for]="daterangepicker" triggerOnFocus [overlayId]="viewIndex" novoSuffix icon="calendar">
-            <novo-date-picker #daterangepicker (onSelect)="closePanel($event, viewIndex)" mode="range" numberOfMonths="2"></novo-date-picker>
+            <novo-date-picker #daterangepicker (onSelect)="closePanel($event, viewIndex)" [weekStart]="config()?.weekStart" mode="range"
+                              numberOfMonths="2"></novo-date-picker>
           </novo-picker-toggle>
         </novo-field>
         <novo-field *novoSwitchCases="['within']">
           <novo-select [placeholder]="labels.selectDateRange" formControlName="value">
-            <novo-option value="7">{{ labels.next7Days }}</novo-option>
+            <novo-option value="future">{{ labels.future }}</novo-option>
+            <novo-option value="-1">{{ labels.past1Day }}</novo-option>
             <novo-option value="-7">{{ labels.past7Days }}</novo-option>
+            <novo-option value="-14">{{ labels.past14Days }}</novo-option>
+            <novo-option value="-21">{{ labels.past21Days }}</novo-option>
             <novo-option value="-30">{{ labels.past30Days }}</novo-option>
+            <novo-option value="-60">{{ labels.past60Days }}</novo-option>
             <novo-option value="-90">{{ labels.past90Days }}</novo-option>
+            <novo-option value="-180">{{ labels.past180Days }}</novo-option>
+            <novo-option value="-270">{{ labels.past270Days }}</novo-option>
+            <novo-option value="-365">{{ labels.past1Year }}</novo-option>
+            <novo-option value="1">{{ labels.next1Day }}</novo-option>
+            <novo-option value="7">{{ labels.next7Days }}</novo-option>
+            <novo-option value="14">{{ labels.next14Days }}</novo-option>
+            <novo-option value="21">{{ labels.next21Days }}</novo-option>
+            <novo-option value="30">{{ labels.next30Days }}</novo-option>
+            <novo-option value="60">{{ labels.next60Days }}</novo-option>
+            <novo-option value="90">{{ labels.next90Days }}</novo-option>
+            <novo-option value="180">{{ labels.next180Days }}</novo-option>
+            <novo-option value="270">{{ labels.next270Days }}</novo-option>
+            <novo-option value="365">{{ labels.next1Year }}</novo-option>
           </novo-select>
         </novo-field>
         <novo-field *novoSwitchCases="['isNull']">
@@ -54,12 +72,15 @@ import { NovoLabelService } from 'novo-elements/services';
   `,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.Default,
+  standalone: false
 })
 export class NovoDefaultDateConditionDef extends AbstractConditionFieldDef {
   @ViewChildren(NovoPickerToggleElement)
   overlayChildren: QueryList<NovoPickerToggleElement>;
 
   defaultOperator = Operator.within;
+
+  config: InputSignal<DateCriteriaConfig> = input();
 
   constructor(labelService: NovoLabelService) {
     super(labelService);

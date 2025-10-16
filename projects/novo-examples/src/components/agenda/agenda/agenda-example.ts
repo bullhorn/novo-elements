@@ -24,9 +24,10 @@ const colors: any = {
  * @title Agenda Example
  */
 @Component({
-  selector: 'agenda-example',
-  templateUrl: 'agenda-example.html',
-  styleUrls: ['agenda-example.css'],
+    selector: 'agenda-example',
+    templateUrl: 'agenda-example.html',
+    styleUrls: ['agenda-example.css'],
+    standalone: false
 })
 export class AgendaExample {
   public views: Array<any> = [

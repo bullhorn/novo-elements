@@ -13,15 +13,16 @@ import {
 } from '@angular/core';
 
 @Component({
-  selector: 'novo-loading',
-  styleUrls: ['./Loading.scss'],
-  template: `
+    selector: 'novo-loading',
+    styleUrls: ['./Loading.scss'],
+    template: `
     <span class="dot"></span>
     <span class="dot"></span>
     <span class="dot"></span>
     <span class="dot"></span>
     <span class="dot"></span>
   `,
+    standalone: false
 })
 export class NovoLoadingElement {
   /**
@@ -50,9 +51,9 @@ export class NovoLoadingElement {
 }
 
 @Component({
-  selector: 'novo-spinner',
-  styleUrls: ['./NovoSpinner.scss'],
-  template: `
+    selector: 'novo-spinner',
+    styleUrls: ['./NovoSpinner.scss'],
+    template: `
     <div class="dot1 dot"></div>
     <div class="dot2 dot"></div>
     <div class="dot3 dot"></div>
@@ -66,6 +67,7 @@ export class NovoLoadingElement {
     <div class="dot11 dot"></div>
     <div class="dot12 dot"></div>
   `,
+    standalone: false
 })
 export class NovoSpinnerElement {
   /**
@@ -103,19 +105,22 @@ export class NovoSpinnerElement {
 }
 
 @Directive({
-  selector: '[skeleton]',
+    selector: '[skeleton]',
+    standalone: false
 })
 export class NovoSkeletonDirective {
   @HostBinding('class.skeleton')
   skeleton: boolean = true;
 }
 @Directive({
-  selector: '[loaded]',
+    selector: '[loaded]',
+    standalone: false
 })
 export class NovoLoadedDirective {}
 
 @Directive({
-  selector: '[isLoading]',
+    selector: '[isLoading]',
+    standalone: false
 })
 export class NovoIsLoadingDirective {
   @ContentChildren(NovoSkeletonDirective, { read: TemplateRef })

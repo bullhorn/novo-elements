@@ -4,9 +4,10 @@ import { Component } from '@angular/core';
  * @title Async Chips Example
  */
 @Component({
-  selector: 'async-chips-example',
-  templateUrl: 'async-chips-example.html',
-  styleUrls: ['async-chips-example.css'],
+    selector: 'async-chips-example',
+    templateUrl: 'async-chips-example.html',
+    styleUrls: ['async-chips-example.css'],
+    standalone: false
 })
 export class AsyncChipsExample {
   public async: any;

@@ -5,9 +5,10 @@ import { NOVO_VALUE_THEME } from 'novo-elements';
  * @title Associated Value Example
  */
 @Component({
-  selector: 'associated-value-example',
-  templateUrl: 'associated-value-example.html',
-  styleUrls: ['associated-value-example.css'],
+    selector: 'associated-value-example',
+    templateUrl: 'associated-value-example.html',
+    styleUrls: ['associated-value-example.css'],
+    standalone: false
 })
 export class AssociatedValueExample {
   public theme = NOVO_VALUE_THEME.DEFAULT;

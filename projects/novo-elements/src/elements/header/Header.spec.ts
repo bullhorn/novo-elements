@@ -1,5 +1,5 @@
 // NG2
-import { async, TestBed } from '@angular/core/testing';
+import { waitForAsync, TestBed } from '@angular/core/testing';
 import { NovoHeaderComponent } from './Header';
 // App
 import { NovoHeaderModule } from './Header.module';
@@ -8,7 +8,7 @@ describe('Elements: NovoHeaderElement', () => {
   let fixture;
   let component;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [NovoHeaderModule],
     }).compileComponents();

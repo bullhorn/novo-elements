@@ -17,9 +17,9 @@ const CHIPS_VALUE_ACCESSOR = {
 };
 
 @Component({
-  selector: 'chips,novo-chips',
-  providers: [CHIPS_VALUE_ACCESSOR],
-  template: `
+    selector: 'chips,novo-chips',
+    providers: [CHIPS_VALUE_ACCESSOR],
+    template: `
     <div class="novo-chip-container">
       <novo-chip
         *ngFor="let item of _items | async | slice: 0:hiddenChipsLimit"
@@ -71,11 +71,12 @@ const CHIPS_VALUE_ACCESSOR = {
       >{{ labels.clearAll }} <i class="bhi-times"></i
     ></label>
   `,
-  styleUrls: ['./Chips.scss'],
-  host: {
-    '[class.with-value]': 'items.length > 0',
-    '[class.disabled]': 'disablePickerInput',
-  },
+    styleUrls: ['./Chips.scss'],
+    host: {
+        '[class.with-value]': 'items.length > 0',
+        '[class.disabled]': 'disablePickerInput',
+    },
+    standalone: false
 })
 export class NovoChipsElement implements OnInit, ControlValueAccessor {
   readonly CHIPS_SHOWN_MAX = 999;

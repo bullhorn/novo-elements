@@ -8,6 +8,7 @@ import { Directive } from '@angular/core';
  * </novo-select-search>
  */
 @Directive({
-  selector: '[novoSelectSearchClear]',
+    selector: '[novoSelectSearchClear]',
+    standalone: false
 })
 export class NovoSelectSearchClearDirective {}

@@ -7,8 +7,8 @@ import { MockData } from './mock-data';
  */
 
 @Component({
-  selector: 'configure-columns-modal-example',
-  template: `
+    selector: 'configure-columns-modal-example',
+    template: `
     <novo-modal>
       <header title="Configure Columns" theme="contact">
         <utils>
@@ -31,6 +31,7 @@ import { MockData } from './mock-data';
       <button theme="primary" color="success" icon="check" (click)="save()">Save</button>
     </novo-modal>
   `,
+    standalone: false
 })
 export class ConfigureColumnsModal {
   public columns: IDataTableColumn<MockData>;

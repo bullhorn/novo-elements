@@ -5,9 +5,10 @@ import { DateControl, DateTimeControl, FormUtils, TimeControl, TimezoneControl }
  * @title Calendar Input Controls Example
  */
 @Component({
-  selector: 'calendar-input-controls-example',
-  templateUrl: 'calendar-input-controls-example.html',
-  styleUrls: ['calendar-input-controls-example.css'],
+    selector: 'calendar-input-controls-example',
+    templateUrl: 'calendar-input-controls-example.html',
+    styleUrls: ['calendar-input-controls-example.css'],
+    standalone: false
 })
 export class CalendarInputControlsExample {
   public dateControl: any;
