@@ -205,7 +205,6 @@ export class NovoControlGroup implements AfterContentInit, OnChanges, OnDestroy 
 
   onClickAdd() {
     this.addNewControl();
-    // this.editState = EditState.EDITING;
   }
   onClickCancel() {
     this.editState = EditState.NOT_EDITING;

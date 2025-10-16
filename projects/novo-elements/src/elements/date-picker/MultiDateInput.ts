@@ -34,11 +34,6 @@ const MULTI_DATE_VALUE_ACCESSOR = {
         <novo-icon novoChipRemove>close</novo-icon>
       </novo-chip>
     </novo-chip-list>
-    <!-- <div *ngIf="value.length > chipsCount">
-      <ul class="summary">
-        <li *ngFor="let type of notShown">+ {{ type.count }} {{ labels.more }} {{ type.type }}</li>
-      </ul>
-    </div> -->
     <div class="chip-input-container" (click)="_handleFocus($event)">
       <span class="placeholder" *ngIf="!value.length" data-automation-id="multi-date-input">{{ placeholder }}</span>
     </div>
@@ -210,7 +205,6 @@ export class NovoMultiDateInputElement implements OnInit, ControlValueAccessor {
       this.value = event;
       this.change.emit(this.value);
     }
-    // this.closePanel();
   }
 
   /**

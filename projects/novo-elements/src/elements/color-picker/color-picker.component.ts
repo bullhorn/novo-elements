@@ -74,7 +74,6 @@ export class NovoColorPickerComponent implements OnInit, OnChanges, OnDestroy {
 
   handleBlockChange({ hex, $event }: any) {
     if (Color.isValidHex(hex)) {
-      // this.hex = hex;
       this.handleChange({ hex, source: 'hex' }, $event);
     }
   }
