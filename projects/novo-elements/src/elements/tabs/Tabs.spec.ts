@@ -64,7 +64,7 @@ describe('Elements: NovoTabButtonElement', () => {
   });
 });
 
-xdescribe('Elements: NovoTabLinkElement', () => {
+describe('Elements: NovoTabLinkElement', () => {
   let fixture;
   let component;
 
