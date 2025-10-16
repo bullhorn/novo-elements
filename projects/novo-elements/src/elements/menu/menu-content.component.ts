@@ -15,7 +15,6 @@ import { ILinkConfig } from './menu.types';
     <ul #menu class="menu" style="position: static; float: none;" tabindex="0">
       <ng-container *ngFor="let menuItem of menuItems; let i = index">
         <ng-template [ngTemplateOutlet]="menuItem.template" [ngTemplateOutletContext]="{ $implicit: item }"></ng-template>
-        <!-- <novo-icon class="sub-menu-caret" suffix *ngIf="!!menuItem.subMenu" size="small" color="ash">expand</novo-icon> -->
       </ng-container>
     </ul>
   </div> `,

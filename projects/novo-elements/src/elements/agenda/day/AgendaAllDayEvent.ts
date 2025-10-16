@@ -7,12 +7,6 @@ import { CalendarEvent } from 'novo-elements/utils';
     <ng-template #defaultTemplate>
       <div class="cal-all-day-event" [style.backgroundColor]="event.color.secondary" [style.borderColor]="event.color.primary">
         {{ event.title }}
-        <!--<novo-agenda-event-title
-          [event]="event"
-          view="day"
-          (click)="eventClicked.emit()">
-        </novo-agenda-event-title>
-        <novo-agenda-event-actions [event]="event"></novo-agenda-event-actions>-->
       </div>
     </ng-template>
     <ng-template
