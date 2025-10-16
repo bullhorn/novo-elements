@@ -94,7 +94,6 @@ cdk-table {
   background-color: var(--background-body, $white);
   .novo-data-table-header-cell,
   .novo-data-table-checkbox-header-cell {
-    // border-bottom: 1px solid var(--border, $off-white);
     background-color: var(--background-body, $white);
   }
   &.expanded {
@@ -250,7 +249,6 @@ cdk-table {
 }
 
 .novo-data-table-header-cell {
-  // border-left: 1px solid var(--border, $off-white);
   white-space: normal;
   overflow-wrap: break-word;
   display: flex;
@@ -539,12 +537,6 @@ novo-data-table {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    // button {
-    //   padding: 3px;
-    //   icon {
-    //     font-size: 0.8em;
-    //   }
-    // }
   }
   .optgroup-container {
     max-height: 346px;
@@ -606,12 +598,6 @@ novo-data-table {
       }
     }
   }
-  // i.bhi-search {
-  //   color: inherit;
-  //   position: relative;
-  //   left: 196px;
-  //   top: -25px;
-  // }
   span.error-text {
     color: $negative;
     position: relative;

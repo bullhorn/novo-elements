@@ -10,7 +10,6 @@
 
     &:hover,
     &:focus {
-      // background: lighten($positive, 10%);
       box-shadow: $shadow-2, $shadow-1;
       filter: brightness(1.15);
     }
