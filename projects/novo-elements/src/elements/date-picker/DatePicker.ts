@@ -217,11 +217,6 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
     }
   }
 
-  // @HostBinding('style.width')
-  // get hb_width() {
-  //   return this._sanitizer.bypassSecurityTrustStyle(`${this.numberOfMonths * 228}px`);
-  // }
-
   model: modelTypes;
   activeDate: Date;
 
@@ -268,7 +263,6 @@ export class NovoDatePickerElement implements ControlValueAccessor, OnInit {
   }
 
   updateSelection(selected: Date[], fireEvents = true) {
-    // Helpers.swallowEvent(event);
     this.selection = selected;
 
     this.startDateLabel = this.labels.formatDateWithFormat(this.selection[0], {

@@ -2,18 +2,14 @@ import {
   AfterViewInit,
   ChangeDetectorRef,
   Directive,
-  ElementRef,
   EventEmitter,
   forwardRef,
-  Inject,
   Input,
   OnChanges,
-  Optional,
-  Renderer2,
   SimpleChanges,
 } from '@angular/core';
-import { COMPOSITION_BUFFER_MODE, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { IMaskDirective, IMaskFactory } from 'angular-imask';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import { IMaskDirective } from 'angular-imask';
 import { isValid } from 'date-fns';
 import { MaskedEnum, MaskedRange } from 'imask';
 import { NovoLabelService } from 'novo-elements/services';
@@ -61,7 +57,6 @@ export class NovoTimeFormatDirective extends IMaskDirective<any> implements Novo
   }
 
   initFormatOptions() {
-    // const pattern = this.military ? 'HH:mm' : 'hh:mm A';
     const amFormat = this.labels.timeFormatAM.toUpperCase();
     const pmFormat = this.labels.timeFormatPM.toUpperCase();
     this.unmask = 'typed' as unknown as false; // typing is to work around angular-imask bug
@@ -118,7 +113,6 @@ export class NovoTimeFormatDirective extends IMaskDirective<any> implements Novo
         event.preventDefault();
         const value = `0${text}`;
         (event.target as HTMLInputElement).value = value;
-        // this.onChange(value);
       }
       if (!this.military) {
         const input = text.substr(5, 4).replace(/\-/g, '').trim().slice(0, 2);

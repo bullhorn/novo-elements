@@ -270,20 +270,6 @@ export class NovoSelectSearchComponent implements OnInit, OnDestroy, ControlValu
   }
 
   ngOnInit() {
-    // set custom panel class
-    // const panelClass = 'novo-select-search-panel';
-    // if (this.novoSelect.panelClass) {
-    //   if (Array.isArray(this.novoSelect.panelClass)) {
-    //     (<string[]>this.novoSelect.panelClass).push(panelClass);
-    //   } else if (typeof this.novoSelect.panelClass === 'string') {
-    //     this.novoSelect.panelClass = [this.novoSelect.panelClass, panelClass];
-    //   } else if (typeof this.novoSelect.panelClass === 'object') {
-    //     this.novoSelect.panelClass[panelClass] = true;
-    //   }
-    // } else {
-    //   this.novoSelect.panelClass = panelClass;
-    // }
-
     // set custom novo-option class if the component was placed inside a novo-option
     if (this.novoOption) {
       this.novoOption.novoInert = true;
