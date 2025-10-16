@@ -86,27 +86,3 @@ Apply spacing constants to components to set element's padding and margins.
     <pre><code>.box {\n  @include novo-padding-medium(); // use mixin \n  margin: $spacing-xs; // or use scss variables\n  padding: $spacing-xl;\n} }}</code></pre>
   </typedef-snippet>
 </typedef-example>
-<!-- 
-<typedef-example>
-  <typedef-content>
-    <novo-flex gap="1rem">
-      <novo-box bg="ocean"><novo-box margin="xs" padding="xl" bg="white">xs</novo-box></novo-box>
-      <novo-box bg="ocean"><novo-box margin="sm" padding="lg" bg="white">sm</novo-box></novo-box>
-      <novo-box bg="ocean"><novo-box margin="md" padding="md" bg="white">md</novo-box></novo-box>
-      <novo-box bg="ocean"><novo-box margin="lg" padding="sm" bg="white">lg</novo-box></novo-box>
-      <novo-box bg="ocean"><novo-box margin="xl" padding="xs" bg="white">xl</novo-box></novo-box>
-    </novo-flex>
-  </typedef-content>
-  <typedef-specs>
-    <novo-label>Margin</novo-label>
-    <dl>
-      <dt>Font Size       </dt><dd>1.2rem</dd>
-      <dt>Line Height     </dt><dd>1.375 (28px)</dd>
-      <dt>Font Weight     </dt><dd>300</dd>
-      <dt>Max Line Length </dt><dd>550px</dd>
-    </dl>
-  </typedef-specs>
-  <typedef-snippet>
-    <code class="tc-positive">&lt;novo-box margin="sm"&gt;...&lt;/novo-box&gt;</code> or <code class="tc-negative">@include novo-margin-medium()</code>
-  </typedef-snippet>
-</typedef-example> -->

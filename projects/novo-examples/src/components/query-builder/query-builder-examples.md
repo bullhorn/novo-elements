@@ -20,6 +20,3 @@ While the Criteria Builder can support multiple fields at once, its UI can also 
 ## Full Query Builder
 
 The difference between the Query and Criteria Builder is that it allow for the user to define multiple criteria and join them as either inclusion or exclusion criteria.  ie. Find `where fruit.seeds >= 1 and not fruit.name='Avacodo'`
-
-TBW
-<!-- <code-example example="just-criteria"></code-example> -->
