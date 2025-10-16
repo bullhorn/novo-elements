@@ -45,7 +45,7 @@ novo-file-input {
     .file-item {
       @include file-item-style;
       margin-bottom: 15px;
-      position: relative; //border-radius: 3px;
+      position: relative;
       width: 100%;
       button:hover,
       button:focus,
