@@ -309,14 +309,12 @@ export class NovoTimePickerElement implements ControlValueAccessor, OnInit, OnCh
     this.model = model;
     if (Helpers.isDate(model)) {
       this.init(model, false);
-      // this.dispatchChange();
     }
     if (Helpers.isString(model)) {
       const time = this.military ? model : this.convertTime12to24(model);
       const date = DateUtil.parse(`${DateUtil.format(Date.now(), 'YYYY-MM-DD')}T${time}`);
       if (isValid(date)) {
         this.init(date, false);
-        // this.dispatchChange();
       }
     }
   }

@@ -117,7 +117,6 @@ export class NovoMenuService {
         panelClass: 'novo-menu',
         scrollStrategy: this.scrollStrategy.close(),
       });
-      // this.destroySubMenus(parentMenu);
       this.overlays = this.overlays.concat(newOverlay);
       this.attachMenu(newOverlay, context);
     }
@@ -141,11 +140,6 @@ export class NovoMenuService {
     }
 
     const subscriptions: Subscription = new Subscription();
-    // subscriptions.add(
-    //   menuContent.instance.execute
-    //     .asObservable()
-    //     .subscribe((executeEvent) => this.closeAllMenus({ eventType: 'execute', ...executeEvent })),
-    // );
     subscriptions.add(
       menuContent.instance.closeAllMenus
         .asObservable()
@@ -166,7 +160,6 @@ export class NovoMenuService {
       }),
     );
     menuContent.onDestroy(() => {
-      // menuItems.forEach((menuItem) => (menuItem.isActive = false));
       subscriptions.unsubscribe();
     });
     menuContent.changeDetectorRef.detectChanges();
