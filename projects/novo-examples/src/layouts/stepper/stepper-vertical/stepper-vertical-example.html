@@ -4,7 +4,6 @@
       <ng-template novoStepLabel>Fill out your name</ng-template>
       <input placeholder="Last name, First name" formControlName="firstCtrl" required />
       <div>
-        <!-- <button novo-button novoStepperNext>Next</button> -->
         <button (click)="next(stepper, step1)" [disabled]="!firstFormGroup?.valid">Next</button>
       </div>
     </form>
@@ -14,8 +13,6 @@
       <ng-template novoStepLabel>Fill out your address</ng-template>
       <input placeholder="Address" formControlName="secondCtrl" required />
       <div>
-        <!-- <button novo-button novoStepperPrevious>Back</button>
-        <button novo-button novoStepperNext>Next</button> -->
         <button (click)="stepper.previous()">Back</button>
         <button (click)="stepper.next()">Next</button>
       </div>

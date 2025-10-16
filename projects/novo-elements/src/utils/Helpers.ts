@@ -23,15 +23,6 @@ export class Helpers {
     if (this.isDate(props)) {
       props = this.dateToObject(props);
     }
-    // else {
-    //   props = Object.entries(props).reduce((obj, [key, value]) => {
-    //     const res = { ...obj, [key]: value };
-    //     if (this.isIsoDate(value as string)) {
-    //       res[`${key}Parts`] = this.dateToObject(new Date(value as string));
-    //     }
-    //     return res;
-    //   }, {});
-    // }
 
     return str.replace(/\$([\w\.]+)/g, (original: string, key: string) => {
       const keys: string[] = key.split('.');

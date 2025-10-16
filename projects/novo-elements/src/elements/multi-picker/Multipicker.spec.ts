@@ -458,23 +458,6 @@ describe('Element: NovoMultiPickerElement', () => {
     });
   });
 
-  // xdescribe('Method: handleRemoveItemIfAllSelected(item)', () => {
-  //     it('should correctly update value and items when removing an item AND ALL is currently selected', () => {
-  //         component.types = [{ value: 'cats' }];
-  //         let kitty = { value: 'Kitty', checked: false, type: 'cats' };
-  //         let allItem = { value: 'ALL', checked: true, type: 'cats' };
-  //         let tiger = { value: 'Tiger', checked: true, type: 'cats' };
-  //         let cat = { value: 'Cat', checked: true, type: 'cats' };
-  //         component._options = [{ type: 'cats', data: [allItem, kitty, tiger, cat], originalData: [allItem, kitty, tiger, cat] }];
-  //         component.value = { cats: [kitty, tiger, cat] };
-  //         component.items = [allItem];
-  //         component.handleRemoveItemIfAllSelected({ type: 'cats' });
-  //         expect(allItem.indeterminate).toBeTruthy();
-  //         expect(component.value.cats.length).toBe(2);
-  //         expect(component.items.length).toBe(2);
-  //     });
-  // });
-
   xdescribe('Method: setInitialValue(model)', () => {
     it('should correctly set intial value and items if a model is passed in to start', () => {
       const model = { cats: ['Kitty'] };

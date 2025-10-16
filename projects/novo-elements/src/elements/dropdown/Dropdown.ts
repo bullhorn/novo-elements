@@ -220,14 +220,7 @@ export class NovoDropdownElement extends NovoDropdownMixins implements OnInit, A
   }
 
 
-  public set items(items: QueryList<NovoItemElement>) {
-    // this._items = items;
-    // this.activeIndex = -1;
-    // // Get the innerText of all the items to allow for searching
-    // this._textItems = items.map((item: NovoItemElement) => {
-    //   return item.element.nativeElement.innerText;
-    // });
-  }
+  public set items(items: QueryList<NovoItemElement>) {}
 
   /** Handles all keydown events on the dropdown. */
   @HostListener('keydown', ['$event'])
@@ -294,7 +287,6 @@ export class NovoDropdownElement extends NovoDropdownMixins implements OnInit, A
     const selectionEvents = this.options ? merge(...this.options.map((option) => option.onSelectionChange)) : of();
     this._selectedOptionChanges.unsubscribe();
     this._selectedOptionChanges = selectionEvents.pipe(takeUntil(this._onDestroy)).subscribe((event: NovoOptionSelectionChange) => {
-      // this.handleSelection(event.source, event.isUserInput);
       if (event.isUserInput && !this.multiple) {
         this._clearPreviousSelectedOption(this._keyManager.activeItem);
         event.source.select();
@@ -321,7 +313,6 @@ export class NovoDropdownElement extends NovoDropdownMixins implements OnInit, A
   /** Sets up a key manager to listen to keyboard events on the overlay panel. */
   private _initKeyManager() {
     this._keyManager = new ActiveDescendantKeyManager<NovoOption>(this.options).withTypeAhead(250).withHomeAndEnd();
-    // .withAllowedModifierKeys(['shiftKey']);
 
     this._keyManager.tabOut.pipe(takeUntil(this._onDestroy)).subscribe(() => {
       if (this.panelOpen) {

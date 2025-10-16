@@ -29,7 +29,6 @@ export class TabsLayout implements AfterViewInit {
     if (this.componentToCreate) {
       const factory = this.resolver.resolveComponentFactory(this.componentToCreate);
       const component = this.viewContainerRef.createComponent(factory);
-      // this.viewContainerRef.insert(component.hostView);
     }
   }
 }

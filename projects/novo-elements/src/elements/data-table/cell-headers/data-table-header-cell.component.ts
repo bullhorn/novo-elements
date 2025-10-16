@@ -472,7 +472,7 @@ export class NovoDataTableCellHeader<T> implements IDataTableSortFilter, OnInit,
     if (this.multiSelect) {
       this.error = false;
       if (this.dropdown.panelOpen && event.key === Key.Escape) {
-        // escape = clear text box and close
+        // escape should clear text box and close
         Helpers.swallowEvent(event);
         this.clearOptionFilter();
         this.dropdown.closePanel();

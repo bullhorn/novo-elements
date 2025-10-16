@@ -1,6 +1,6 @@
-import { Directive, ElementRef, EventEmitter, Inject, Input, OnChanges, Optional, Renderer2, SimpleChanges, forwardRef } from '@angular/core';
-import { COMPOSITION_BUFFER_MODE, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { IMaskDirective, IMaskFactory } from 'angular-imask';
+import { Directive, EventEmitter, Input, OnChanges, SimpleChanges, forwardRef } from '@angular/core';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import { IMaskDirective } from 'angular-imask';
 import { isValid } from 'date-fns';
 import { MaskedEnum, MaskedRange } from 'imask';
 import { DateFormatService, NovoLabelService } from 'novo-elements/services';
@@ -127,7 +127,6 @@ export class NovoDateTimeFormatDirective extends IMaskDirective<any> implements 
         event.preventDefault();
         const value = `0${dateTime[1]}`;
         (event.target as HTMLInputElement).value = value;
-        // this.onChange(value);
       }
       if (!this.military) {
         const input = dateTime[1].substr(5, 4).replace(/\-/g, '').trim().slice(0, 2);

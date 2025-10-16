@@ -14,8 +14,6 @@ import { NovoFieldElement } from './field';
         '[class.novo-fieldset-appearance-fill]': 'appearance == "fill"',
         '[class.novo-fieldset-appearance-outline]': 'appearance == "outline"',
         '[class.novo-fieldset-appearance-list]': 'appearance == "list"',
-        // '[class.novo-field-layout-horizontal]': 'layout=="horizontal"',
-        // '[class.novo-field-layout-vertical]': 'layout=="vertical"',
     },
     standalone: false
 })

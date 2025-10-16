@@ -337,7 +337,7 @@ export class NovoDatePickerInputElement implements OnInit, OnChanges, AfterViewI
   }
 
   handleInvalidDate(fromPanelClose = false): void {
-    if (this.isInvalidDate) { //} && this.value) {
+    if (this.isInvalidDate) {
       this.showInvalidDateError = true;
       this.clearValue();
       if (!fromPanelClose) {

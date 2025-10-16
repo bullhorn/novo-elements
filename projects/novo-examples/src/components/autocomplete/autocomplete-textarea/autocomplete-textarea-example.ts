@@ -36,7 +36,5 @@ export class AutocompleteTextareaExample implements OnInit {
 
   private _filter(value: string): string[] {
     return this.options;
-    // const filterValue = value.toLowerCase();
-    // return this.options.filter((option) => option.toLowerCase().includes(filterValue));
   }
 }

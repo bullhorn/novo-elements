@@ -2,14 +2,14 @@
 import { binarySearch, Helpers } from './Helpers';
 
 describe('Utils: Helpers', () => {
-  xdescribe('Method: swallowEvent(event)', () => {
+  describe('Method: swallowEvent(event)', () => {
     it('should be defined.', () => {
       const event = new Event('open');
       expect(Helpers.swallowEvent(event));
     });
   });
 
-  xdescribe('Method: interpolate(str, props)', () => {
+  describe('Method: interpolate(str, props)', () => {
     it('should interpolate using the right properties', () => {
       const format: string = '$name';
       const data: { name: string } = {
