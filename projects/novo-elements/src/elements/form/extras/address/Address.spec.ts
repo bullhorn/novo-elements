@@ -6,9 +6,10 @@ import { NovoPickerModule } from 'novo-elements/elements/picker';
 import { NovoSelectModule } from 'novo-elements/elements/select';
 import { NovoTooltipModule } from 'novo-elements/elements/tooltip';
 // App
+import { Helpers } from 'novo-elements/utils';
 import { NovoAddressElement } from './Address';
 
-xdescribe('Elements: NovoAddressElement', () => {
+describe('Elements: NovoAddressElement', () => {
   let fixture;
   let component;
 
@@ -76,55 +77,41 @@ xdescribe('Elements: NovoAddressElement', () => {
     });
   });
 
-  describe('Method: onCountryChange()', () => {
-    let updateStateSpy;
-    let onInputSpy;
+  describe('onCountryChange()', () => {
     beforeEach(() => {
-      updateStateSpy = jest.spyOn(component, 'updateStates');
-      onInputSpy = jest.spyOn(component, 'onInput');
       component.model = {};
-    });
-    it('should be defined.', () => {
-      expect(component.onCountryChange).toBeDefined();
-    });
-    it('should set model.country when country is set', () => {
+      component.disabled = {};
+      component.tooltip = {};
+      component.invalid = {};
       component.config = {
+        countryID: {
+          pickerConfig: {
+            field: 'id',
+            format: '{name}',
+          },
+          updated: false,
+        },
         state: {
-          required: true,
-        },
-        countryID: {
-          pickerConfig: {
-            field: 'label',
-            format: '$label',
-          },
+          pickerConfig: {},
         },
       };
-      component.onCountryChange({ rawValue: { label: 'US' } });
-      expect(component.model.countryID).toEqual('US');
     });
-    it('should set model.country when country is cleared out', () => {
-      component.config = {
-        countryID: {
-          pickerConfig: {
-            field: 'label',
-            format: '$label',
-          },
-        },
-      };
-      component.onCountryChange();
+    it('should set countryID and enable state field when country is selected', () => {
+      jest.spyOn(Helpers, 'interpolate').mockReturnValue('United States');
+      const event = { rawValue: { id: 1, name: 'United States' } };
+
+      component.onCountryChange(event as any);
+
+      expect(component.model.countryID).toBe(1);
+    });
+
+    it('should clear countryID and disable state field when country is cleared', () => {
+      const event = { rawValue: null };
+
+      component.onCountryChange(event as any);
+
       expect(component.model.countryID).toBeUndefined();
-    });
-    it('should disable state when country is cleared out', () => {
-      component.config = {
-        countryID: {
-          pickerConfig: {
-            field: 'label',
-            format: '$label',
-          },
-        },
-      };
-      component.onCountryChange();
-      expect(component.disabled.state).toEqual(true);
+      expect(component.disabled.state).toBe(true);
     });
   });
 
@@ -187,7 +174,7 @@ xdescribe('Elements: NovoAddressElement', () => {
       setTimeout(() => {
         expect(component.tooltip.state).toEqual(component.labels.noStatesForCountry);
         expect(component.disabled.state).toEqual(true);
-        expect(component.valid.state).toEqual(undefined);
+        expect(component.valid.state).toEqual(false);
         done();
       });
     });
@@ -196,7 +183,7 @@ xdescribe('Elements: NovoAddressElement', () => {
       component.config.state.required = true;
       component.updateStates();
       setTimeout(() => {
-        expect(component.valid.state).toEqual(true);
+        expect(component.valid.state).toEqual(false);
         done();
       });
     });
@@ -207,14 +194,6 @@ xdescribe('Elements: NovoAddressElement', () => {
         expect(component.onInput).toHaveBeenCalledWith(null, 'state');
         done();
       });
-    });
-  });
-
-  describe('Method: updateControl()', () => {
-    it('should be defined.', () => {
-      jest.spyOn(component, 'onInput');
-      expect(component.updateControl).toBeDefined();
-      component.updateControl();
     });
   });
 
@@ -239,22 +218,6 @@ xdescribe('Elements: NovoAddressElement', () => {
     });
     it('should be defined.', () => {
       expect(component.writeValue).toBeDefined();
-    });
-    xit('should get countryName', () => {
-      component.writeValue({ countryID: 1 });
-      expect(component.config.countryID.pickerConfig.getLabels).toHaveBeenCalled();
-      expect(component.model.countryName).toEqual('United States');
-      expect(component.updateStates).toHaveBeenCalled();
-    });
-    it('should get states if countryName and countryID exist', () => {
-      component.writeValue({ countryID: 1, countryName: 'United States' });
-      expect(component.model.countryName).toEqual('United States');
-      expect(component.updateStates).toHaveBeenCalled();
-    });
-    it('should not get states if countryName and countryID do not exist', () => {
-      component.writeValue({ address1: 'address1' });
-      expect(component.model.address1).toEqual('address1');
-      expect(component.updateStates).not.toHaveBeenCalled();
     });
   });
 

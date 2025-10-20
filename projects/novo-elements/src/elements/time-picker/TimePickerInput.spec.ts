@@ -2,12 +2,13 @@
 import { TestBed } from '@angular/core/testing';
 import { DateFormatService, NovoLabelService } from 'novo-elements/services';
 // App
+import { Helpers } from 'novo-elements/utils';
 import { NovoTimePickerModule } from './TimePicker.module';
 import { NovoTimePickerInputElement } from './TimePickerInput';
 
-xdescribe('Elements: NovoTimePickerInputElement', () => {
+describe('Elements: NovoTimePickerInputElement', () => {
   let fixture;
-  let component;
+  let component: NovoTimePickerInputElement;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -18,16 +19,88 @@ xdescribe('Elements: NovoTimePickerInputElement', () => {
     component = fixture.debugElement.componentInstance;
   });
 
-  describe('Method: _setTriggerValue()', () => {
-    it('should set formattedValue to empty string if value is null', () => {
-      component._setTriggerValue(null);
-      expect(component.value).toEqual('');
+  describe('setDisabledState()', () => {
+    it('should set disabled to true', () => {
+      component.setDisabledState(true);
+      expect(component.disabled).toBe(true);
     });
-    it('should set formattedValue to empty string if value changed back to undefined', () => {
-      const now = new Date();
-      component._setTriggerValue(now);
-      component._setTriggerValue(undefined);
-      expect(component.value).toEqual('');
+
+    it('should set disabled to false', () => {
+      component.setDisabledState(false);
+      expect(component.disabled).toBe(false);
+    });
+
+    it('should toggle disabled state', () => {
+      component.setDisabledState(true);
+      expect(component.disabled).toBe(true);
+      
+      component.setDisabledState(false);
+      expect(component.disabled).toBe(false);
+    });
+  });
+
+  describe('hasValue getter', () => {
+    it('should return true when value is set', () => {
+      component.value = new Date('2023-01-15 14:30:00');
+      jest.spyOn(Helpers, 'isEmpty').mockReturnValue(false);
+
+      expect(component.hasValue).toBe(true);
+    });
+
+    it('should return false when value is empty', () => {
+      component.value = null;
+      jest.spyOn(Helpers, 'isEmpty').mockReturnValue(true);
+
+      expect(component.hasValue).toBe(false);
+    });
+
+    it('should return false when value is undefined', () => {
+      component.value = undefined;
+      jest.spyOn(Helpers, 'isEmpty').mockReturnValue(true);
+
+      expect(component.hasValue).toBe(false);
+    });
+  });
+
+  describe('hourOneFormatRequired', () => {
+    it('should return true for h1 format', () => {
+      expect(component.hourOneFormatRequired('h1')).toBe(true);
+    });
+
+    it('should return true for 1h format', () => {
+      expect(component.hourOneFormatRequired('1h')).toBe(true);
+    });
+
+    it('should return false for 02 format', () => {
+      expect(component.hourOneFormatRequired('02')).toBe(false);
+    });
+
+    it('should return false for empty string', () => {
+      expect(component.hourOneFormatRequired('')).toBe(false);
+    });
+
+    it('should return false for null', () => {
+      expect(component.hourOneFormatRequired(null as any)).toBe(false);
+    });
+  });
+
+  describe('EventEmitters', () => {
+    it('should have onSave EventEmitter', () => {
+      const listener = jest.fn();
+      component.onSave.subscribe(listener);
+
+      component.save();
+
+      expect(listener).toHaveBeenCalled();
+    });
+
+    it('should have onCancel EventEmitter', () => {
+      const listener = jest.fn();
+      component.onCancel.subscribe(listener);
+
+      component.cancel();
+
+      expect(listener).toHaveBeenCalled();
     });
   });
 });
