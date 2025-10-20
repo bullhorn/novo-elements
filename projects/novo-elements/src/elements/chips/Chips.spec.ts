@@ -53,11 +53,13 @@ describe('Elements: NovoChipsElement', () => {
     });
   });
 
-  xdescribe('Method: onFocus(event)', () => {
+  describe('Method: onFocus(event)', () => {
     it('should remove selection', () => {
+      jest.spyOn(component, 'deselectAll');
       jest.spyOn(component.focus, 'emit').mockImplementation(() => {});
       component.onFocus();
       expect(component.focus.emit).toHaveBeenCalled();
+      expect(component.deselectAll).toHaveBeenCalled();
     });
   });
 
