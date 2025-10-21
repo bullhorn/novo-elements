@@ -1,6 +1,6 @@
 // NG2
 import { OverlayModule } from '@angular/cdk/overlay';
-import { ChangeDetectorRef, Component, DebugElement, ElementRef, ErrorHandler, EventEmitter, NO_ERRORS_SCHEMA, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, DebugElement, ElementRef, ErrorHandler, EventEmitter, Inject, NO_ERRORS_SCHEMA, OnInit } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync, fakeAsync, inject, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { IMaskModule } from 'angular-imask';
