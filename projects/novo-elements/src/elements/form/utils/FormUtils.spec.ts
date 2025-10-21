@@ -254,21 +254,15 @@ describe('Utils: FormUtils', () => {
         });
       });
     });
-    xit('should throw an error when a type does not exist for the field.', () => {
-      expect(formUtils.determineInputType).toBeDefined();
-      expect(() => {
-        formUtils.determineInputType({});
-      }).toThrowError('This field type is unsupported.');
-    });
   });
 
   describe('Method: getControlForField(field, http, config)', () => {
-    xit('should return the right component for entitychips', () => {
+    it('should return the right component for entitychips', () => {
       expect(formUtils.getControlForField).toBeDefined();
       const result = formUtils.getControlForField({ type: 'entitychips' });
       expect(result instanceof PickerControl).toBe(true);
     });
-    xit('should return the right component for entitypicker', () => {
+    it('should return the right component for entitypicker', () => {
       expect(formUtils.getControlForField).toBeDefined();
       const result = formUtils.getControlForField({ type: 'entitypicker' });
       expect(result instanceof PickerControl).toBe(true);
