@@ -118,7 +118,6 @@ describe('Elements: NovoAddressElement', () => {
   describe('Method: onStateChange()', () => {
     it('should be defined.', () => {
       expect(component.onStateChange).toBeDefined();
-      // component.onStateChange();
     });
   });
 

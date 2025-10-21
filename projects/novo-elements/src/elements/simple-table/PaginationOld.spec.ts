@@ -48,7 +48,6 @@ describe('Elements: NovoTable', () => {
   describe('Method: onPageSizeChanged()', () => {
     it('should be defined.', () => {
       expect(component.onPageSizeChanged).toBeDefined();
-      // component.onPageSizeChanged();
     });
   });
 

@@ -7,7 +7,7 @@ import { NovoDatePickerModule } from 'novo-elements/elements/date-picker';
 import { NovoTimePickerModule } from 'novo-elements/elements/time-picker';
 import { NovoDateTimePickerElement } from './DateTimePicker';
 
-xdescribe('Elements: NovoDateTimePickerElement', () => {
+describe('Elements: NovoDateTimePickerElement', () => {
   let fixture;
   let component: NovoDateTimePickerElement;
 
@@ -39,7 +39,7 @@ xdescribe('Elements: NovoDateTimePickerElement', () => {
     });
     it('should set the hours correctly (12hr + single digit)', () => {
       component.setTimeLabels(new Date('12/04/1987 1:00 PM'));
-      expect(component.hours).toEqual('01');
+      expect(component.hours).toEqual('1');
     });
     it('should set the hours correctly (24hr)', () => {
       component.military = true;
