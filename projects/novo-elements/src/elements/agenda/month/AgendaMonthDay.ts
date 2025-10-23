@@ -2,8 +2,8 @@ import { Component, EventEmitter, Input, Output, TemplateRef } from '@angular/co
 import { CalendarEvent, CalendarEventResponse, MonthViewDay } from 'novo-elements/utils';
 
 @Component({
-  selector: 'novo-agenda-month-day',
-  template: `
+    selector: 'novo-agenda-month-day',
+    template: `
     <ng-template #defaultTemplate>
       <div class="agenda-day-top">
         <span class="agenda-day-badge" *ngIf="day.badgeTotal > 0">{{ day.badgeTotal }}</span>
@@ -35,19 +35,20 @@ import { CalendarEvent, CalendarEventResponse, MonthViewDay } from 'novo-element
     >
     </ng-template>
   `,
-  host: {
-    '[class]': '"agenda-cell agenda-day-cell " + day?.cssClass',
-    '[class.agenda-day-accepted]': 'accepted.length',
-    '[class.agenda-day-rejected]': 'rejected.length',
-    '[class.agenda-past]': 'day.isPast',
-    '[class.agenda-today]': 'day.isToday',
-    '[class.agenda-future]': 'day.isFuture',
-    '[class.agenda-weekend]': 'day.isWeekend',
-    '[class.agenda-in-month]': 'day.inMonth',
-    '[class.agenda-out-month]': '!day.inMonth',
-    '[class.agenda-has-events]': 'day.events.length > 0',
-    '[style.backgroundColor]': 'day.backgroundColor',
-  },
+    host: {
+        '[class]': '"agenda-cell agenda-day-cell " + day?.cssClass',
+        '[class.agenda-day-accepted]': 'accepted.length',
+        '[class.agenda-day-rejected]': 'rejected.length',
+        '[class.agenda-past]': 'day.isPast',
+        '[class.agenda-today]': 'day.isToday',
+        '[class.agenda-future]': 'day.isFuture',
+        '[class.agenda-weekend]': 'day.isWeekend',
+        '[class.agenda-in-month]': 'day.inMonth',
+        '[class.agenda-out-month]': '!day.inMonth',
+        '[class.agenda-has-events]': 'day.events.length > 0',
+        '[style.backgroundColor]': 'day.backgroundColor',
+    },
+    standalone: false
 })
 export class NovoAgendaMonthDayElement {
   @Input()

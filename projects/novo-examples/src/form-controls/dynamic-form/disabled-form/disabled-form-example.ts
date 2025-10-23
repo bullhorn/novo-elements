@@ -7,9 +7,10 @@ import { MockMetaForDisabledForm } from '../MockMeta';
  * @title Disabled Form Example
  */
 @Component({
-  selector: 'disabled-form-example',
-  templateUrl: 'disabled-form-example.html',
-  styleUrls: ['disabled-form-example.css'],
+    selector: 'disabled-form-example',
+    templateUrl: 'disabled-form-example.html',
+    styleUrls: ['disabled-form-example.css'],
+    standalone: false
 })
 export class DisabledFormExample {
   public disabledControls: any;

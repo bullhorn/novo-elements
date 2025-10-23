@@ -6,9 +6,10 @@ import { FieldInteractionApi, FormUtils, TextBoxControl, TilesControl } from 'no
  * @title Fi Popover Example
  */
 @Component({
-  selector: 'fi-popover-example',
-  templateUrl: 'fi-popover-example.html',
-  styleUrls: ['fi-popover-example.css'],
+    selector: 'fi-popover-example',
+    templateUrl: 'fi-popover-example.html',
+    styleUrls: ['fi-popover-example.css'],
+    standalone: false
 })
 export class FiPopoverExample {
   public form: any = {};

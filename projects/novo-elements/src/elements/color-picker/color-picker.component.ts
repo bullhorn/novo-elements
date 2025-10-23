@@ -4,8 +4,8 @@ import { debounceTime } from 'rxjs/operators';
 import { Color, HSL, HSLA, HSV, HSVA, RGB, RGBA } from 'novo-elements/utils';
 
 @Component({
-  selector: 'novo-color-picker',
-  template: `
+    selector: 'novo-color-picker',
+    template: `
     <div class="novo-color-preview" [style.backgroundColor]="currentColor.hex">
       <div class="novo-color-preview-text">{{ hex }}</div>
     </div>
@@ -21,9 +21,10 @@ import { Color, HSL, HSLA, HSV, HSVA, RGB, RGBA } from 'novo-elements/utils';
       <input [value]="hex.replace('#', '')" (onChange)="handleValueChange($event)" />
     </div>
   `,
-  styleUrls: ['./color-picker.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  preserveWhitespaces: false,
+    styleUrls: ['./color-picker.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    preserveWhitespaces: false,
+    standalone: false
 })
 export class NovoColorPickerComponent implements OnInit, OnChanges, OnDestroy {
   /** Pixel value for picker width */

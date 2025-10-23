@@ -5,9 +5,10 @@ import { AceEditorControl, FormUtils, QuickNoteControl, TextAreaControl, TextBox
  * @title Text Based Controls Example
  */
 @Component({
-  selector: 'text-based-controls-example',
-  templateUrl: 'text-based-controls-example.html',
-  styleUrls: ['text-based-controls-example.css'],
+    selector: 'text-based-controls-example',
+    templateUrl: 'text-based-controls-example.html',
+    styleUrls: ['text-based-controls-example.css'],
+    standalone: false
 })
 export class TextBasedControlsExample {
   public quickNoteConfig: any;

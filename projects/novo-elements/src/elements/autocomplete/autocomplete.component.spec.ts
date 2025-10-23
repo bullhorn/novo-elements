@@ -1,15 +1,15 @@
-import { async, ComponentFixture, discardPeriodicTasks, fakeAsync, flush, flushMicrotasks, TestBed } from '@angular/core/testing';
-import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NovoAutoCompleteModule } from './autocomplete.module';
-import { NovoAutocompleteElement } from './autocomplete.component';
 import { Component } from '@angular/core';
-import { NovoChipsModule } from '../chips/Chips.module';
-import { NovoFieldModule } from '../field/field.module';
-import { NovoCommonModule } from '../common/common.module';
+import { ComponentFixture, discardPeriodicTasks, fakeAsync, flush, TestBed, waitForAsync } from '@angular/core/testing';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
-import { firstValueFrom, ReplaySubject, Subject } from 'rxjs';
-import { NovoOption, NovoOptionModule, NovoOptionSelectionChange } from '../common/option';
+import { ReplaySubject } from 'rxjs';
 import { NovoChipList } from '../chips/ChipList';
+import { NovoChipsModule } from '../chips/Chips.module';
+import { NovoCommonModule } from '../common/common.module';
+import { NovoOption, NovoOptionModule, NovoOptionSelectionChange } from '../common/option';
+import { NovoFieldModule } from '../field/field.module';
+import { NovoAutocompleteElement } from './autocomplete.component';
+import { NovoAutoCompleteModule } from './autocomplete.module';
 
 interface MockOption {
   label: string;
@@ -19,26 +19,27 @@ interface MockOption {
 @Component({
   selector: 'test-autocomplete',
   template: `
-  <novo-field>
-    <novo-label>Favorite fruits</novo-label>
-    <novo-chip-list #chipList [formControl]="chipsControl">
-      <novo-chip
-        *ngFor="let chip of chipList.value"
-        [value]="chip">
-        {{chip.label}}
-      </novo-chip>
-      <input
-        #chipInput
-        novoChipInput
-        [formControl]="textCtrl"/>
-    </novo-chip-list>
-    <novo-autocomplete [makeFirstItemActive]="makeFirstItemActive" (optionSelected)="selected($event)" [multiple]="multiple">
-      <novo-option *ngFor="let option of options$ | async" [value]="option">
-        {{option.label}}
-      </novo-option>
-    </novo-autocomplete>
-  </novo-field>
-`
+    <novo-field>
+      <novo-label>Favorite fruits</novo-label>
+      <novo-chip-list #chipList [formControl]="chipsControl">
+        <novo-chip
+          *ngFor="let chip of chipList.value"
+          [value]="chip">
+          {{ chip.label }}
+        </novo-chip>
+        <input
+          #chipInput
+          novoChipInput
+          [formControl]="textCtrl"/>
+      </novo-chip-list>
+      <novo-autocomplete [makeFirstItemActive]="makeFirstItemActive" (optionSelected)="selected($event)" [multiple]="multiple">
+        <novo-option *ngFor="let option of options$ | async" [value]="option">
+          {{ option.label }}
+        </novo-option>
+      </novo-autocomplete>
+    </novo-field>
+  `,
+  standalone: false,
 })
 class TestAutocompleteComponent {
   chipsControl = new FormControl<MockOption[]>([]);
@@ -54,7 +55,7 @@ describe('Elements: NovoAutocompleteElement', () => {
   let component: NovoAutocompleteElement;
   let chipList: NovoChipList;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [FormsModule, ReactiveFormsModule, NovoChipsModule, NovoFieldModule,
         NovoCommonModule, NovoAutoCompleteModule, NovoOptionModule],
@@ -80,8 +81,8 @@ describe('Elements: NovoAutocompleteElement', () => {
   describe('Option expansion', () => {
 
     let options = [
-      {id: '1', label: 'One'},
-      {id: '2', label: 'Two'}
+      { id: '1', label: 'One' },
+      { id: '2', label: 'Two' }
     ];
 
     it('should add a chip to the list when an option is selected', () => {

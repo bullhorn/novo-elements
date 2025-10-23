@@ -9,9 +9,10 @@ import { MockMetaForForm } from '../MockMeta';
  * @title Enable/Disable all Fields in Form Example
  */
 @Component({
-  selector: 'enable-disable-all-fields-in-form-example',
-  templateUrl: 'enable-disable-all-fields-in-form-example.html',
-  styleUrls: ['enable-disable-all-fields-in-form-example.css'],
+    selector: 'enable-disable-all-fields-in-form-example',
+    templateUrl: 'enable-disable-all-fields-in-form-example.html',
+    styleUrls: ['enable-disable-all-fields-in-form-example.css'],
+    standalone: false
 })
 export class EnableDisableAllFieldsInFormExample {
   public controls: any;

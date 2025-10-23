@@ -5,9 +5,10 @@ import { NovoToastService } from 'novo-elements';
  * @title Toaster Service Usage
  */
 @Component({
-  selector: 'toast-service-example',
-  templateUrl: 'toast-service-example.html',
-  styleUrls: ['toast-service-example.css'],
+    selector: 'toast-service-example',
+    templateUrl: 'toast-service-example.html',
+    styleUrls: ['toast-service-example.css'],
+    standalone: false
 })
 export class ToastServiceExample {
   public options: any = {

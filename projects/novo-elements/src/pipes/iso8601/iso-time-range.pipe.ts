@@ -2,7 +2,10 @@ import { Pipe, PipeTransform } from '@angular/core';
 
 type IsoTimeRangeArgs = (string | Date)[];
 
-@Pipe({ name: 'isoTimeRange' })
+@Pipe({
+    name: 'isoTimeRange',
+    standalone: false
+})
 export class IsoTimeRangePipe implements PipeTransform {
   constructor() {}
   transform(dates: IsoTimeRangeArgs): string {

@@ -6,9 +6,10 @@ import { FieldInteractionApi, FormUtils, TextBoxControl } from 'novo-elements';
  * @title Fi Validation Example
  */
 @Component({
-  selector: 'fi-validation-example',
-  templateUrl: 'fi-validation-example.html',
-  styleUrls: ['fi-validation-example.css'],
+    selector: 'fi-validation-example',
+    templateUrl: 'fi-validation-example.html',
+    styleUrls: ['fi-validation-example.css'],
+    standalone: false
 })
 export class FiValidationExample {
   public form: any = {};

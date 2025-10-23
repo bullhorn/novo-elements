@@ -1,12 +1,13 @@
 // NG2
 import { Component, ComponentFactory, ComponentFactoryResolver } from '@angular/core';
-import { async, TestBed } from '@angular/core/testing';
+import { waitForAsync, TestBed } from '@angular/core/testing';
 // App
 import { PopOverDirective } from './PopOver';
 
 @Component({
   selector: 'test-component',
   template: ` <div novoPopover=""></div> `,
+  standalone: false,
 })
 class TestComponent {}
 
@@ -15,7 +16,7 @@ describe('Elements: PopOverDirective', () => {
     let fixture;
     let directive;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
         declarations: [PopOverDirective, TestComponent],
       }).compileComponents();

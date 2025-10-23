@@ -4,7 +4,7 @@ import { By } from '@angular/platform-browser';
 const a = By.css('.flex-wrapper');
 
 @Component({
-  template: `
+    template: `
     <ng-content select=".flex-wrapper"></ng-content>
 
     <style>
@@ -13,5 +13,6 @@ const a = By.css('.flex-wrapper');
       }
     </style>
   `,
+    standalone: false
 })
 class F {}

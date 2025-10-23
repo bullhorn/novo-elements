@@ -29,10 +29,10 @@ export interface MouseLocation {
 }
 
 @Component({
-  encapsulation: ViewEncapsulation.None,
-  selector: 'novo-menu',
-  styles: [
-    `
+    encapsulation: ViewEncapsulation.None,
+    selector: 'novo-menu',
+    styles: [
+        `
       .cdk-overlay-container {
         position: fixed;
         z-index: z(overlay);
@@ -48,9 +48,10 @@ export interface MouseLocation {
         box-sizing: border-box;
       }
     `,
-  ],
-  template: ``,
-  providers: [{ provide: PARENT_MENU, useExisting: MenuComponent }],
+    ],
+    template: ``,
+    providers: [{ provide: PARENT_MENU, useExisting: MenuComponent }],
+    standalone: false
 })
 export class MenuComponent implements OnDestroy {
   @Input() public menuClass = '';

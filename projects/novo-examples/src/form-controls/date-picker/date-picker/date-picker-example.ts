@@ -12,9 +12,10 @@ export class ExtendedLabelService extends NovoLabelService {
  * @title Date Example
  */
 @Component({
-  selector: 'date-picker-example',
-  templateUrl: 'date-picker-example.html',
-  styleUrls: ['date-picker-example.css'],
+    selector: 'date-picker-example',
+    templateUrl: 'date-picker-example.html',
+    styleUrls: ['date-picker-example.css'],
+    standalone: false
 })
 export class DatePickerExample {
   selectedDates: Date = new Date();

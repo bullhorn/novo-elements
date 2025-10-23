@@ -11,9 +11,10 @@ interface DemoButtonObject {
  * @title Drag and Drop Example
  */
 @Component({
-  selector: 'drag-drop-example',
-  templateUrl: 'drag-drop-example.html',
-  styleUrls: ['drag-drop-example.css'],
+    selector: 'drag-drop-example',
+    templateUrl: 'drag-drop-example.html',
+    styleUrls: ['drag-drop-example.css'],
+    standalone: false
 })
 export class DragDropExample implements OnChanges {
   objects: DemoButtonObject[] = [

@@ -6,8 +6,8 @@ import { Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
 
 @Component({
-  selector: 'novo-number-range',
-  template: `
+    selector: 'novo-number-range',
+    template: `
     <form [formGroup]="rangeForm">
       <novo-flex justify='space-between' align='end' gap="1rem">
         <novo-field mr="sm">
@@ -22,13 +22,14 @@ import { filter, takeUntil } from 'rxjs/operators';
       </novo-error>
     </form>
   `,
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => NumberRangeComponent),
-      multi: true
-    }
-  ]
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => NumberRangeComponent),
+            multi: true
+        }
+    ],
+    standalone: false
 })
 export class NumberRangeComponent implements OnInit, OnDestroy, ControlValueAccessor {
   rangeForm: FormGroup;

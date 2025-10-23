@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
-  selector: 'novo-color-swatch',
-  template: `
+    selector: 'novo-color-swatch',
+    template: `
     <div
       class="swatch"
       [ngStyle]="currentStyles()"
@@ -17,14 +17,15 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output
       <ng-content></ng-content>
     </div>
   `,
-  styles: [
-    `
+    styles: [
+        `
       .swatch {
         border-radius: 0.4rem;
       }
     `,
-  ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    ],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NovoColorSwatchComponent implements OnInit {
   @Input() color!: string;

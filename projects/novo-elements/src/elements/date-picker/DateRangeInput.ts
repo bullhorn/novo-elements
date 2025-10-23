@@ -29,9 +29,9 @@ const DATE_VALUE_ACCESSOR = {
 };
 
 @Component({
-  selector: 'novo-date-range-input',
-  providers: [DATE_VALUE_ACCESSOR],
-  template: `
+    selector: 'novo-date-range-input',
+    providers: [DATE_VALUE_ACCESSOR],
+    template: `
     <div class="date-range-input-container">
       <input
         type="text"
@@ -82,7 +82,8 @@ const DATE_VALUE_ACCESSOR = {
       ></novo-date-picker>
     </novo-overlay-template>
   `,
-  styleUrls: ['./DateRangeInput.scss'],
+    styleUrls: ['./DateRangeInput.scss'],
+    standalone: false
 })
 export class NovoDateRangeInputElement implements OnInit, OnChanges, ControlValueAccessor {
   public formattedStartDate: string = '';

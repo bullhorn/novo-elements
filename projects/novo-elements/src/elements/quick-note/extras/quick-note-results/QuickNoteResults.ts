@@ -8,11 +8,11 @@ import { Helpers } from 'novo-elements/utils';
 import { PickerResults } from 'novo-elements/elements/picker';
 
 @Component({
-  selector: 'quick-note-results',
-  host: {
-    class: 'active',
-  },
-  template: `
+    selector: 'quick-note-results',
+    host: {
+        class: 'active',
+    },
+    template: `
     <novo-loading theme="line" *ngIf="isLoading && !matches.length"></novo-loading>
     <novo-list *ngIf="matches.length > 0">
       <novo-list-item
@@ -29,7 +29,8 @@ import { PickerResults } from 'novo-elements/elements/picker';
     <p class="picker-error" *ngIf="hasError">{{ labels.quickNoteError }}</p>
     <p class="picker-null" *ngIf="!isLoading && !matches.length && !hasError">{{ labels.quickNoteEmpty }}</p>
   `,
-  styleUrls: ['./QuickNoteResults.scss'],
+    styleUrls: ['./QuickNoteResults.scss'],
+    standalone: false
 })
 export class QuickNoteResults extends PickerResults {
   // Mode that the quick note is in for tagging

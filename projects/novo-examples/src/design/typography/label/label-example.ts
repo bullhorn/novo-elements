@@ -5,8 +5,9 @@ import { Component } from '@angular/core';
  * @title Label Example
  */
 @Component({
-  selector: 'label-example',
-  templateUrl: './label-example.html',
-  styleUrls: ['./label-example.scss'],
+    selector: 'label-example',
+    templateUrl: './label-example.html',
+    styleUrls: ['./label-example.scss'],
+    standalone: false
 })
 export class LabelExample {}

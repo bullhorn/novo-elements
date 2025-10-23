@@ -15,9 +15,10 @@ import {
  * @title Horizontal Example
  */
 @Component({
-  selector: 'horizontal-example',
-  templateUrl: 'horizontal-example.html',
-  styleUrls: ['horizontal-example.css'],
+    selector: 'horizontal-example',
+    templateUrl: 'horizontal-example.html',
+    styleUrls: ['horizontal-example.css'],
+    standalone: false
 })
 export class HorizontalExample {
   public formGroup: NovoFormGroup;

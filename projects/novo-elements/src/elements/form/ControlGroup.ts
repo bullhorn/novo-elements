@@ -37,15 +37,16 @@ export interface NovoControlGroupRowConfig {
 }
 
 @Component({
-  selector: 'novo-control-group',
-  templateUrl: './ControlGroup.html',
-  styleUrls: ['./ControlGroup.scss'],
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  host: {
-    '[class.novo-control-group-appearance-card]': "appearance=='card'",
-    '[class.novo-control-group-appearance-none]': "appearance=='none'",
-  },
+    selector: 'novo-control-group',
+    templateUrl: './ControlGroup.html',
+    styleUrls: ['./ControlGroup.scss'],
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    host: {
+        '[class.novo-control-group-appearance-card]': "appearance=='card'",
+        '[class.novo-control-group-appearance-none]': "appearance=='none'",
+    },
+    standalone: false
 })
 export class NovoControlGroup implements AfterContentInit, OnChanges, OnDestroy {
   @Input()

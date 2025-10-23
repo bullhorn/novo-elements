@@ -1,6 +1,6 @@
 // NG2
 import { ElementRef } from '@angular/core';
-import { async, TestBed } from '@angular/core/testing';
+import { waitForAsync, TestBed } from '@angular/core/testing';
 import { DomSanitizer } from '@angular/platform-browser';
 // App
 import { NovoListModule } from 'novo-elements/elements/list';
@@ -12,7 +12,7 @@ describe('Components: DistributionListPickerResults', () => {
   let fixture: any;
   let component: any;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [DistributionListPickerResults],
       providers: [

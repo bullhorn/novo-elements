@@ -148,7 +148,8 @@ function generatePageComponent(metadata: PageMetadata): string {
 @Component({
   selector: '${metadata.id}-page',
   template: \`${metadata.template}\`,
-  host: { class: 'markdown-page' }
+  host: { class: 'markdown-page' },
+  standalone: false,
 })
 export class ${metadata.name}Page {
   public params: any = {};
@@ -205,13 +206,13 @@ function generatePageModule(extractedMetadata: PageMetadata[]): string {
 import {NgModule, Component} from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { NovoExamplesModule } from './examples.module';
-import { NovoExamplesSharedModule, TabsLayout, DefaultLayout } from './_shared';
+import { NovoExamplesSharedModule, TabsLayout } from './_shared';
 import { NovoElementsModule } from 'novo-elements';
 
 ${extractedMetadata
-  .map((r) => generatePageComponent(r))
-  .join('\n')
-  .trim()}
+    .map((r) => generatePageComponent(r))
+    .join('\n')
+    .trim()}
 
 const routes: Routes = [
   //{ path: '', component: Home, data: {} },
@@ -283,13 +284,13 @@ function parsePageMetadata(filePath: string, sourceContent: string): PageMetadat
   return {
     id: fileName,
     name: convertToCamelCase(fileName),
-    title: title,
+    title,
     section: section.toLowerCase(),
     page: page.toLowerCase(),
     template: markup.replace(/\{/g, '&#123;').replace(/\}/g, '&#125;').replace(/\@/g, '&#64;'),
     route: convertToDashCase(title).replace('src/', ''),
-    order: order,
-    tag: tag,
+    order,
+    tag,
   };
 }
 
@@ -297,8 +298,8 @@ async function generateApiDocs() {
   const app = await Application.bootstrap({
     // typedoc options here
     entryPoints: [`${elementsPath}/index.ts`],
-    excludeExternals: true,
-    excludePrivate: true,
+    excludeExternals: 'true',
+    excludePrivate: 'true',
   }, [new TSConfigReader()]);
 
   const project = await app.convert();

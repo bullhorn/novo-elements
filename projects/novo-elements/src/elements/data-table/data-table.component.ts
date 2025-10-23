@@ -39,15 +39,15 @@ import { StaticDataTableService } from './services/static-data-table.service';
 import { DataTableState } from './state/data-table-state.service';
 
 @Component({
-  selector: 'novo-data-table',
-  animations: [
-    trigger('expand', [
-      animState('void', style({ height: '0px', minHeight: '0', visibility: 'hidden' })),
-      animState('*', style({ height: '*', visibility: 'visible' })),
-      transition('void <=> *', animate('70ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
-    ]),
-  ],
-  template: `
+    selector: 'novo-data-table',
+    animations: [
+        trigger('expand', [
+            animState('void', style({ height: '0px', minHeight: '0', visibility: 'hidden' })),
+            animState('*', style({ height: '*', visibility: 'visible' })),
+            transition('void <=> *', animate('70ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+        ]),
+    ],
+    template: `
     <header
       *ngIf="(!(empty && !state.userFiltered) && !loading) || forceShowHeader"
       [class.empty]="hideGlobalSearch && !paginationOptions && !templates['customActions']"
@@ -304,10 +304,11 @@ import { DataTableState } from './state/data-table-state.service';
     </footer>
     <ng-content></ng-content>
   `,
-  styleUrls: ['./data-table.component.scss'],
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [DataTableState, { provide: NOVO_DATA_TABLE_REF, useExisting: NovoDataTable }],
+    styleUrls: ['./data-table.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [DataTableState, { provide: NOVO_DATA_TABLE_REF, useExisting: NovoDataTable }],
+    standalone: false
 })
 export class NovoDataTable<T> implements AfterContentInit, OnDestroy {
   @HostBinding('class.global-search-hidden') globalSearchHiddenClassToggle: boolean = false;

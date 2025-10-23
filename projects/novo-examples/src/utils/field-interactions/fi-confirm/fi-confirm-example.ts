@@ -6,9 +6,10 @@ import { FieldInteractionApi, FormUtils, TextBoxControl } from 'novo-elements';
  * @title Fi Confirm Example
  */
 @Component({
-  selector: 'fi-confirm-example',
-  templateUrl: 'fi-confirm-example.html',
-  styleUrls: ['fi-confirm-example.css'],
+    selector: 'fi-confirm-example',
+    templateUrl: 'fi-confirm-example.html',
+    styleUrls: ['fi-confirm-example.css'],
+    standalone: false
 })
 export class FiConfirmExample {
   public form: any;

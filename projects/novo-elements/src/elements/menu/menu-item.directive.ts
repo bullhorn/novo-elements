@@ -5,7 +5,8 @@ import { NovoOption } from 'novo-elements/elements/common';
  * This is a structural directive now.  Should only be used on `novo-options`
  */
 @Directive({
-  selector: '[menuItem]',
+    selector: '[menuItem]',
+    standalone: false
 })
 export class MenuItemDirective {
   @Input() public menuItemEnabled: boolean | ((item: any) => boolean) = true;

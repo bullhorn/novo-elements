@@ -1,5 +1,5 @@
 // NG2
-import { async, TestBed } from '@angular/core/testing';
+import { waitForAsync, TestBed } from '@angular/core/testing';
 // App
 import { NovoSwitchElement } from './Switch';
 
@@ -7,7 +7,7 @@ describe('Elements: NovoSwitchElement', () => {
   let fixture;
   let component;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [NovoSwitchElement],
     }).compileComponents();

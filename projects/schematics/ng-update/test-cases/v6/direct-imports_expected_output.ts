@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { ModifyPickerConfigArgs, NovoFormGroup, ToastPositions } from 'novo-elements';
 
 @Component({
-  template: ` <div></div> `,
+    template: ` <div></div> `,
+    standalone: false
 })
 class A {
   position: ToastPositions = 'fixedTop';

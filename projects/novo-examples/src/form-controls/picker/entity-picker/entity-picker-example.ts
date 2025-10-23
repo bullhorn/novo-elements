@@ -5,9 +5,10 @@ import { EntityPickerResults } from 'novo-elements';
  * @title Entity Picker Example
  */
 @Component({
-  selector: 'entity-picker-example',
-  templateUrl: 'entity-picker-example.html',
-  styleUrls: ['entity-picker-example.css'],
+    selector: 'entity-picker-example',
+    templateUrl: 'entity-picker-example.html',
+    styleUrls: ['entity-picker-example.css'],
+    standalone: false
 })
 export class EntityPickerExample {
   public placeholder: string = 'Select...';

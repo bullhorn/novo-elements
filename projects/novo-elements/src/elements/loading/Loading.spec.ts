@@ -1,5 +1,5 @@
 // NG2
-import { async, TestBed } from '@angular/core/testing';
+import { waitForAsync, TestBed } from '@angular/core/testing';
 // App
 import { NovoLoadingElement, NovoSpinnerElement } from './Loading';
 
@@ -7,7 +7,7 @@ describe('Elements: NovoLoadingElement', () => {
   let fixture;
   let component;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [NovoLoadingElement],
     }).compileComponents();
@@ -24,7 +24,7 @@ describe('Elements: NovoSpinnerElement', () => {
   let fixture;
   let component;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [NovoSpinnerElement],
     }).compileComponents();

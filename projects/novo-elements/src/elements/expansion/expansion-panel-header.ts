@@ -21,31 +21,32 @@ import { NovoExpansionPanel } from './expansion-panel';
  * This component corresponds to the header element of an `<novo-expansion-panel>`.
  */
 @Component({
-  selector: 'novo-expansion-panel-header',
-  styleUrls: ['./expansion-panel-header.scss'],
-  templateUrl: './expansion-panel-header.html',
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [novoExpansionAnimations.indicatorRotate, novoExpansionAnimations.expansionHeaderHeight],
-  host: {
-    class: 'novo-expansion-panel-header',
-    role: 'button',
-    '[attr.id]': 'panel._headerId',
-    '[attr.tabindex]': 'panel.disabled ? -1 : 0',
-    '[attr.aria-controls]': '_getPanelId()',
-    '[attr.aria-expanded]': '_isExpanded()',
-    '[attr.aria-disabled]': 'panel.disabled',
-    '[class.novo-expanded]': '_isExpanded()',
-    '(click)': '_toggle()',
-    '(keydown)': '_keydown($event)',
-    '[@expansionHeight]': `{
+    selector: 'novo-expansion-panel-header',
+    styleUrls: ['./expansion-panel-header.scss'],
+    templateUrl: './expansion-panel-header.html',
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    animations: [novoExpansionAnimations.indicatorRotate, novoExpansionAnimations.expansionHeaderHeight],
+    host: {
+        class: 'novo-expansion-panel-header',
+        role: 'button',
+        '[attr.id]': 'panel._headerId',
+        '[attr.tabindex]': 'panel.disabled ? -1 : 0',
+        '[attr.aria-controls]': '_getPanelId()',
+        '[attr.aria-expanded]': '_isExpanded()',
+        '[attr.aria-disabled]': 'panel.disabled',
+        '[class.novo-expanded]': '_isExpanded()',
+        '(click)': '_toggle()',
+        '(keydown)': '_keydown($event)',
+        '[@expansionHeight]': `{
         value: _getExpandedState(),
         params: {
           collapsedHeight: collapsedHeight,
           expandedHeight: expandedHeight
         }
     }`,
-  },
+    },
+    standalone: false
 })
 export class NovoExpansionPanelHeader implements OnDestroy {
   private _parentChangeSubscription = Subscription.EMPTY;
@@ -126,10 +127,11 @@ export class NovoExpansionPanelHeader implements OnDestroy {
  * This direction is to be used inside of the NovoExpansionPanelHeader component.
  */
 @Directive({
-  selector: 'novo-panel-description',
-  host: {
-    class: 'novo-expansion-panel-header-description',
-  },
+    selector: 'novo-panel-description',
+    host: {
+        class: 'novo-expansion-panel-header-description',
+    },
+    standalone: false
 })
 export class NovoExpansionPanelDescription {}
 
@@ -139,9 +141,10 @@ export class NovoExpansionPanelDescription {}
  * This direction is to be used inside of the NovoExpansionPanelHeader component.
  */
 @Directive({
-  selector: 'novo-panel-title',
-  host: {
-    class: 'novo-expansion-panel-header-title',
-  },
+    selector: 'novo-panel-title',
+    host: {
+        class: 'novo-expansion-panel-header-title',
+    },
+    standalone: false
 })
 export class NovoExpansionPanelTitle {}

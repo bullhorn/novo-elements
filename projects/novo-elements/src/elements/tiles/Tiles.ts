@@ -24,9 +24,9 @@ const TILES_VALUE_ACCESSOR = {
 };
 
 @Component({
-  selector: 'novo-tiles',
-  providers: [TILES_VALUE_ACCESSOR],
-  template: `
+    selector: 'novo-tiles',
+    providers: [TILES_VALUE_ACCESSOR],
+    template: `
     <div class="tile-container" [class.active]="focused" [class.disabled]="disabled">
       <button class="tile" type="button"
         *ngFor="let option of _options; let i = index"
@@ -54,8 +54,9 @@ const TILES_VALUE_ACCESSOR = {
       </button>
     </div>
   `,
-  styleUrls: ['./Tiles.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    styleUrls: ['./Tiles.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NovoTilesElement implements ControlValueAccessor, AfterContentInit, OnChanges {
   @Input()

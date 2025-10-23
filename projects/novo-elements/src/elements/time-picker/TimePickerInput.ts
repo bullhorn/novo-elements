@@ -27,9 +27,9 @@ const DATE_VALUE_ACCESSOR = {
 };
 
 @Component({
-  selector: 'novo-time-picker-input',
-  providers: [DATE_VALUE_ACCESSOR],
-  template: `
+    selector: 'novo-time-picker-input',
+    providers: [DATE_VALUE_ACCESSOR],
+    template: `
     <input
       type="text"
       [name]="name"
@@ -62,7 +62,8 @@ const DATE_VALUE_ACCESSOR = {
       ></novo-time-picker>
     </novo-overlay-template>
   `,
-  styleUrls: ['./TimePickerInput.scss'],
+    styleUrls: ['./TimePickerInput.scss'],
+    standalone: false
 })
 export class NovoTimePickerInputElement implements OnInit, OnChanges, ControlValueAccessor {
   public value: any;

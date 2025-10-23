@@ -4,9 +4,10 @@ import { Component } from '@angular/core';
  * @title Override Template Example
  */
 @Component({
-  selector: 'override-template-example',
-  templateUrl: 'override-template-example.html',
-  styleUrls: ['override-template-example.css'],
+    selector: 'override-template-example',
+    templateUrl: 'override-template-example.html',
+    styleUrls: ['override-template-example.css'],
+    standalone: false
 })
 export class OverrideTemplateExample {
   public placeholder: string = 'Select...';

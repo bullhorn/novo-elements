@@ -26,24 +26,27 @@ export const _NovoHeaderCell = CdkHeaderCell;
 export const _NovoCell = CdkCell;
 
 @Directive({
-  selector: '[novoSimpleCellDef]',
-  providers: [{ provide: CdkCellDef, useExisting: NovoSimpleCellDef }],
+    selector: '[novoSimpleCellDef]',
+    providers: [{ provide: CdkCellDef, useExisting: NovoSimpleCellDef }],
+    standalone: false
 })
 export class NovoSimpleCellDef extends _NovoCellDef {
   // TODO: add explicit constructor
 }
 
 @Directive({
-  selector: '[novoSimpleHeaderCellDef]',
-  providers: [{ provide: CdkHeaderCellDef, useExisting: NovoSimpleHeaderCellDef }],
+    selector: '[novoSimpleHeaderCellDef]',
+    providers: [{ provide: CdkHeaderCellDef, useExisting: NovoSimpleHeaderCellDef }],
+    standalone: false
 })
 export class NovoSimpleHeaderCellDef extends _NovoHeaderCellDef {
   // TODO: add explicit constructor
 }
 
 @Directive({
-  selector: '[novoSimpleColumnDef]',
-  providers: [{ provide: CdkColumnDef, useExisting: NovoSimpleColumnDef }],
+    selector: '[novoSimpleColumnDef]',
+    providers: [{ provide: CdkColumnDef, useExisting: NovoSimpleColumnDef }],
+    standalone: false
 })
 export class NovoSimpleColumnDef extends _NovoColumnDef {
   @Input('novoSimpleColumnDef')
@@ -71,7 +74,8 @@ export class NovoSimpleColumnDef extends _NovoColumnDef {
 }
 
 @Directive({
-  selector: 'novo-simple-header-cell',
+    selector: 'novo-simple-header-cell',
+    standalone: false
 })
 export class NovoSimpleHeaderCell<T> extends _NovoHeaderCell implements OnInit {
   @HostBinding('attr.role')
@@ -97,7 +101,8 @@ export class NovoSimpleHeaderCell<T> extends _NovoHeaderCell implements OnInit {
 }
 
 @Directive({
-  selector: 'novo-simple-empty-header-cell',
+    selector: 'novo-simple-empty-header-cell',
+    standalone: false
 })
 export class NovoSimpleEmptyHeaderCell extends _NovoHeaderCell {
   @HostBinding('attr.role')
@@ -112,8 +117,9 @@ export class NovoSimpleEmptyHeaderCell extends _NovoHeaderCell {
 }
 
 @Component({
-  selector: 'novo-simple-checkbox-header-cell',
-  template: `<novo-checkbox [(ngModel)]="selectAll" (ngModelChange)="toggle($event)"></novo-checkbox>`,
+    selector: 'novo-simple-checkbox-header-cell',
+    template: `<novo-checkbox [(ngModel)]="selectAll" (ngModelChange)="toggle($event)"></novo-checkbox>`,
+    standalone: false
 })
 export class NovoSimpleCheckboxHeaderCell extends _NovoHeaderCell implements OnDestroy {
   @HostBinding('attr.role')
@@ -150,9 +156,10 @@ export class NovoSimpleCheckboxHeaderCell extends _NovoHeaderCell implements OnD
 }
 
 @Component({
-  selector: 'novo-simple-cell',
-  template: ` <span [class.clickable]="!!column.onClick" (click)="onClick($event)" #span>{{ column.renderer(row) }}</span> `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'novo-simple-cell',
+    template: ` <span [class.clickable]="!!column.onClick" (click)="onClick($event)" #span>{{ column.renderer(row) }}</span> `,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NovoSimpleCell<T> extends _NovoCell implements OnInit {
   @HostBinding('attr.role')
@@ -201,8 +208,9 @@ export class NovoSimpleCell<T> extends _NovoCell implements OnInit {
 }
 
 @Component({
-  selector: 'novo-simple-checkbox-cell',
-  template: ` <novo-checkbox [ngModel]="selected" (ngModelChange)="toggle($event)"></novo-checkbox> `,
+    selector: 'novo-simple-checkbox-cell',
+    template: ` <novo-checkbox [ngModel]="selected" (ngModelChange)="toggle($event)"></novo-checkbox> `,
+    standalone: false
 })
 export class NovoSimpleCheckboxCell extends _NovoCell implements OnDestroy, OnInit {
   @HostBinding('attr.role')
@@ -243,8 +251,8 @@ export class NovoSimpleCheckboxCell extends _NovoCell implements OnDestroy, OnIn
 }
 
 @Component({
-  selector: 'novo-simple-action-cell',
-  template: `
+    selector: 'novo-simple-action-cell',
+    template: `
     <ng-container *ngIf="!column.options">
       <novo-button theme="icon" [icon]="column.icon" (click)="column.onClick(row)" [disabled]="isDisabled(column, row)"></novo-button>
     </ng-container>
@@ -259,7 +267,8 @@ export class NovoSimpleCheckboxCell extends _NovoCell implements OnDestroy, OnIn
       </novo-dropdown>
     </ng-container>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NovoSimpleActionCell<T> extends _NovoCell implements OnInit {
   @HostBinding('attr.role')

@@ -1,5 +1,5 @@
 // NG2
-import { async, TestBed } from '@angular/core/testing';
+import { waitForAsync, TestBed } from '@angular/core/testing';
 import { NovoTimePickerElement } from './TimePicker';
 // App
 import { NovoTimePickerModule } from './TimePicker.module';
@@ -8,7 +8,7 @@ xdescribe('Elements: NovoTimePickerElement', () => {
   let fixture;
   let component;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [NovoTimePickerModule],
     }).compileComponents();

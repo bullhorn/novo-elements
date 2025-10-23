@@ -15,7 +15,8 @@ import { NovoChipsModule } from './Chips.module';
               [formControl]="textCtrl">
         </novo-chip-list>
     </novo-field>
-    <div class="mock-overlay"></div>`
+    <div class="mock-overlay"></div>`,
+  standalone: false,
 })
 class TestChipInputComponent {
   textCtrl = new FormControl('');
