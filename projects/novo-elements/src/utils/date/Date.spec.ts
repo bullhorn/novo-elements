@@ -21,18 +21,8 @@ describe('DateUtil', () => {
         assertMDYHM(parsed, 12, 25, 2025, 8, 30);
     });
 
-    xit('should parse fr-FR format correctly', () => {
-        const parsed = DateUtil.parse('25/12/2025 à 08:30 AM', { userDateFormat: 'dd/MM/YYYY'});
-        assertMDYHM(parsed, 12, 25, 2025, 8, 30);
-    });
-
     it('should parse nl-NL format correctly', () => {
         const parsed = DateUtil.parse('25-12-2025 08:30 AM', { userDateFormat: 'dd-MM-YYYY'});
-        assertMDYHM(parsed, 12, 25, 2025, 8, 30);
-    });
-
-    xit('should parse es-ES format correctly', () => {
-        const parsed = DateUtil.parse('25/12/2025 08:30 A.M.', { userDateFormat: 'dd/MM/YYYY'});
         assertMDYHM(parsed, 12, 25, 2025, 8, 30);
     });
 });

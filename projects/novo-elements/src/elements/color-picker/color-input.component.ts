@@ -120,9 +120,6 @@ export class NovoColorInputElement implements OnInit, ControlValueAccessor {
   }
 
   _handleInput(event: KeyboardEvent): void {
-    if (document.activeElement === event.target) {
-      // this._handleEvent(event, false);
-    }
   }
 
   _handleBlur(event: FocusEvent): void {

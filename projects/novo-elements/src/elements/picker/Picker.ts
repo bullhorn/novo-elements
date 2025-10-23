@@ -19,7 +19,6 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { ComponentUtils } from 'novo-elements/services';
 import { Helpers, Key, notify } from 'novo-elements/utils';
 import { NovoOverlayTemplateComponent } from 'novo-elements/elements/common';
-// import { NovoControlConfig } from '../form/FormControls';
 import { PickerResults } from './extras/picker-results/PickerResults';
 
 // Value accessor for the component (supports ngModel)
@@ -172,8 +171,7 @@ export class NovoPickerElement implements OnInit {
     let debounceTimeInMilliSeconds = Number.isNaN(Number(this.config?.debounceTimeInMilliSeconds)) ? DEFAULT_DEBOUNCE_TIME : Number(this.config?.debounceTimeInMilliSeconds);
     // Custom results template
     this.resultsComponent = this.config.resultsTemplate || PickerResults;
-    // Get all distinct key up events from the input and only fire if long enough and distinct
-    // let input = this.element.nativeElement.querySelector('input');
+
     const pasteObserver = fromEvent(this.input.nativeElement, 'paste').pipe(debounceTime(debounceTimeInMilliSeconds), distinctUntilChanged());
     pasteObserver.subscribe(
       (event: ClipboardEvent) => this.onDebouncedKeyup(event),

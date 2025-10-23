@@ -123,6 +123,7 @@ export class NovoValueElement implements OnInit, OnChanges {
       icon.onIconClick(this.data, this.meta);
     }
   }
+
   openLink(): void {
     if (this.meta && this.meta.openLink && typeof this.meta.openLink === 'function') {
       this.meta.openLink(this.data, this.meta);

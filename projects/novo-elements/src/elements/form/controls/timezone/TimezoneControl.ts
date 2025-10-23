@@ -28,9 +28,6 @@ export class TimezoneControl extends BaseControl {
           label: formatted,
           offset: zonedTime.zone.offset,
         };
-        // if (this.props.mapLabels) {
-        //   option.label = this.props.mapLabels(option);
-        // }
         return option;
       })
       // Formats 'noisy' timezones without a letter acronym.

@@ -2,7 +2,6 @@ import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { UntypedFormControl } from '@angular/forms';
 import { NovoOptionSelectedEvent } from 'novo-elements';
-// import { NovoChipInputEvent } from 'novo-elements';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 

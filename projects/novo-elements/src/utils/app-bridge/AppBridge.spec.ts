@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { AppBridge, DevAppBridge, DevAppBridgeService } from './AppBridge';
-import { AppBridgeHandler, MESSAGE_TYPES, MessageType } from './interfaces';
+import { AppBridgeHandler, MessageType } from './interfaces';
 import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { TestBed} from '@angular/core/testing';
 
@@ -464,7 +464,6 @@ describe('AppBridge', () => {
     });
 
     it('should send an event to a single child by passing in iframe reference', async () => {
-        //spyOn(hostRobot, 'send');
         frame1Bridge.register();
         let receivedData: any;
         frame1Bridge.addEventListener('test', eventData => {

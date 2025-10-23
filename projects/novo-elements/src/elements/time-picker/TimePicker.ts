@@ -33,24 +33,6 @@ export enum TIME_VALUE_FORMATS {
     selector: 'novo-time-picker',
     providers: [TIME_PICKER_VALUE_ACCESSOR],
     template: `
-    <!-- <div class="digital" [class.inline]="inline" [class.military]="military" *ngIf="inline">
-      <div class="digital--inner">
-        <span class="digital--clock" *ngIf="analog">
-          <span class="hours" data-automation-id="novo-time-picker-hours">{{ hours }}</span
-          >:<span class="minutes" data-automation-id="novo-time-picker-minutes">{{ minutes }}</span>
-        </span>
-        <div class="control-block" *ngIf="!military && analog">
-          <span
-            *ngFor="let period of MERIDIANS"
-            class="digital--period"
-            [class.active]="meridian == period"
-            (click)="setPeriod($event, period, true)"
-            [attr.data-automation-id]="period"
-            >{{ period }}</span
-          >
-        </div>
-      </div>
-    </div> -->
     <div class="increments" *ngIf="!analog">
       <novo-list class="increments--hours" direction="vertical" data-automation-id="novo-time-picker-hours">
         <novo-list-item
@@ -309,14 +291,12 @@ export class NovoTimePickerElement implements ControlValueAccessor, OnInit, OnCh
     this.model = model;
     if (Helpers.isDate(model)) {
       this.init(model, false);
-      // this.dispatchChange();
     }
     if (Helpers.isString(model)) {
       const time = this.military ? model : this.convertTime12to24(model);
       const date = DateUtil.parse(`${DateUtil.format(Date.now(), 'YYYY-MM-DD')}T${time}`);
       if (isValid(date)) {
         this.init(date, false);
-        // this.dispatchChange();
       }
     }
   }

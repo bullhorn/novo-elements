@@ -299,13 +299,6 @@ export class NovoInput extends NovoInputBase implements NovoFieldControl<any>, O
   }
 
   ngDoCheck() {
-    if (this.ngControl) {
-      // We need to re-evaluate this on every change detection cycle, because there are some
-      // error triggers that we can't subscribe to (e.g. parent form submissions). This means
-      // that whatever logic is in here has to be super lean or we risk destroying the performance.
-      // this.updateErrorState();
-    }
-
     // We need to dirty-check the native element's value, because there are some cases where
     // we won't be notified when it changes (e.g. the consumer isn't using forms or they're
     // updating the value using `emitEvent: false`).

@@ -35,7 +35,6 @@ export class Color {
 
   constructor(value: HSLA | HSVA | RGBA | string) {
     if (Color.isHSL(value)) {
-      // let { h, s, l, a = 1 } = value as HSLA;
       this.source = rgbToHex(hslToRgb(value as HSL));
     } else if (Color.isHSV(value)) {
       this.source = rgbToHex(hsvToRgb(value as HSV));
