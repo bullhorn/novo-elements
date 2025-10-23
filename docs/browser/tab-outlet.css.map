@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["projects/novo-elements/src/elements/tabs/tab-outlet.scss"],
+  "sourcesContent": ["novo-nav-outlet {\n  display: block;\n}\n"],
+  "mappings": ";AAAA;AACE,WAAA;;",
+  "names": []
+}

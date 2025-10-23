@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="74px" height="76px" viewBox="0 0 74 76" version="1.1" xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.4.4 (17249) - http://www.bohemiancoding.com/sketch -->
+    <title>Iconography - Padding - Dont</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Images" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="Iconography---Padding---Dont" sketch:type="MSArtboardGroup">
+            <g id="Rectangle-138-Copy-5-+-Imported-Layers" sketch:type="MSLayerGroup"
+               transform="translate(7.000000, 8.000000)">
+                <rect id="Rectangle-138-Copy-5" fill="#F6B042" sketch:type="MSShapeGroup" x="0" y="0" width="60"
+                      height="60.4878049" rx="15"></rect>
+                <g id="Imported-Layers" transform="translate(5.000000, 7.000000)" fill="#FFFFFF"
+                   sketch:type="MSShapeGroup">
+                    <path
+                        d="M18.5033519,26.5795555 L3.97438979,33.7247727 C0.964284806,35.7138576 -0.543800027,39.9284352 0.602425309,43.1423563 L1.19474281,44.7910958 L19.807259,44.8257418 L18.5033519,26.5795555"
+                        id="Fill-1"></path>
+                    <path
+                        d="M30.1050929,26.5795555 L44.6320334,33.7247727 C47.64416,35.7138576 49.1502233,39.9284352 48.0039979,43.1423563 L47.4116804,44.7910958 L28.7991643,44.8257418 L30.1050929,26.5795555"
+                        id="Fill-2"></path>
+                    <path
+                        d="M25.7829946,26.3166539 L25.7829946,46.011856 L24.2789529,47.5281257 L22.7749112,46.011856 L22.7749112,26.3166539 L25.7829946,26.3166539"
+                        id="Fill-3"></path>
+                    <path
+                        d="M24.5316481,23.0762389 C30.4224781,23.0762389 35.2439021,18.2176543 35.2439021,12.2789313 C35.2439021,6.34020835 30.4224781,1.47958575 24.5316481,1.47958575 C18.640818,1.47958575 13.8214156,6.34020835 13.8214156,12.2789313 C13.8214156,18.2176543 18.640818,23.0762389 24.5316481,23.0762389"
+                        id="Fill-4"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

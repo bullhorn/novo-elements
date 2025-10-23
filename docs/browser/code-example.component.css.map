@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["angular:styles/component:css;3d7e076bf02e1dd94f7e243a84f56864f48321379a27a068482f4ed7cc2c0001;/home/runner/work/novo-elements/novo-elements/projects/novo-examples/src/_shared/code-example.component.ts"],
+  "sourcesContent": ["\n      .example {\n        position: relative;\n      }\n      .example-container {\n        /* background-image: linear-gradient(45deg, rgb(249, 249, 250) 25%, transparent 25%),\n          linear-gradient(135deg, rgb(249, 249, 250) 25%, transparent 25%), linear-gradient(45deg, transparent 75%, rgb(249, 249, 250) 75%),\n          linear-gradient(135deg, transparent 75%, rgb(249, 249, 250) 75%); */\n        background-size: 20px 20px;\n        background-position: 0px 0px, 10px 0px, 10px -10px, 0px 10px;\n      }\n      .example-actions {\n        position: absolute;\n        bottom: 0;\n        right: 0;\n      }\n    "],
+  "mappings": ";AACM,CAAC;AACC,YAAU;AACZ;AACA,CAAC;AAIC,mBAAiB,KAAK;AACtB;AAAA,IAAqB,IAAI,GAAG;AAAA,IAAE,KAAK,GAAG;AAAA,IAAE,KAAK,KAAK;AAAA,IAAE,IAAI;AAC1D;AACA,CAAC;AACC,YAAU;AACV,UAAQ;AACR,SAAO;AACT;",
+  "names": []
+}

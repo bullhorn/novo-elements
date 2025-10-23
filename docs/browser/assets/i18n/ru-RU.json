@@ -1,0 +1,37 @@
+{
+  "greeting": "Привет!",
+  "farewell": "Прощай, {name}.",
+  "today": "Сегодня {today:date}.",
+  "formatToday": "Сегодня {today:date}.",
+  "long": "Сегодня {today:date:long}.",
+  "timeLong": "Сегодня {today:date:timeLong}.",
+  "militaryFormat": "Для тестирования военного времени: {today:date:short}.",
+  "alert": "У вас есть {count:number} сообщение.",
+  "debt": "Вы должны: {balance:currency}",
+  "html": "<b>I am HTML!</b>",
+  "messages": {
+    "other": {
+      "zero": "У вас нет сообщений.",
+      "1": "У вас есть {quantity:number} сообщение.",
+      "20": "У вас есть {quantity:number} сообщений.",
+      "many": "У вас есть {quantity:number} сообщений."
+    }
+  },
+  "candidate": {
+    "male": {
+      "zero": "{host} не имеет {candidate} и ему грустно",
+      "1": "{host} имеет один {candidate} и он очень рад",
+      "many": "{host} имеет некоторые {candidate} и он в экстазе"
+    },
+    "female": {
+      "zero": "{host} не имеет {candidate} и она печальна",
+      "1": "{host} имеет один {candidate} и она возбуждается",
+      "many": "{host} имеет некоторые {candidate} и она в экстазе"
+    },
+    "other": {
+      "zero": "{host} не имеют {candidate} и они печальны.",
+      "1": "{host} есть один {candidate}, и они очень рады.",
+      "many": "{host} есть некоторые {candidate} и они в восторге."
+    }
+  }
+}

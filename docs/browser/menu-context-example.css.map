@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["projects/novo-examples/src/components/menu/menu-context/menu-context-example.css"],
+  "sourcesContent": ["span[tooltip]{\n  margin-left: 10px;\n}\n"],
+  "mappings": ";AAAA,IAAI,CAAC;AACH,eAAa;AACf;",
+  "names": []
+}
