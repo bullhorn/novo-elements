@@ -37,6 +37,8 @@ export class DragDropExample implements OnChanges {
     { name: 'Object 17', headerText: 'Item 17', bgClass: 'bgc-ocean' }
   ];
 
+  objects3: DemoButtonObject[] = [...this.objects];
+
   ngOnChanges(changes: SimpleChanges): void {
       console.log('box processed changes', changes);
   }
@@ -51,6 +53,11 @@ export class DragDropExample implements OnChanges {
   dragFinished2(event: NovoDragFinishEvent<DemoButtonObject>) {
     this.objectMoved = event.draggedItem;
     this.objects2 = event.allItems;
+  }
+
+  dragFinished3(event: NovoDragFinishEvent<DemoButtonObject>) {
+    this.objectMoved = event.draggedItem;
+    this.objects3 = event.allItems;
   }
 
   addObject2(): void {

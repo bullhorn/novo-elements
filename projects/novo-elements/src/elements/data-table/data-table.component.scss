@@ -133,6 +133,10 @@ cdk-table {
       flex-grow: 100;
     }
   }
+  &[draggable=true] label {
+    cursor: grab;
+    user-select: none;
+  }
 }
 
 .novo-data-table-clear-button {
