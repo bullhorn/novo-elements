@@ -1,6 +1,6 @@
 import { AnimationEvent } from '@angular/animations';
 import { ComponentPortal, Portal } from '@angular/cdk/portal';
-import { Component, EventEmitter, Injector, Output } from '@angular/core';
+import { Component, EventEmitter, Injector, Output, signal } from '@angular/core';
 import { NovoAsideRef } from './aside-ref';
 import { slideInOut } from './aside.animation';
 
@@ -14,10 +14,13 @@ export class AsideComponent {
   @Output() animationStateChanged = new EventEmitter<AnimationEvent>();
 
   animationState: 'void' | 'enter' | 'leave' = 'enter';
-
+  draggable = false;
+  disableDrag = signal(true);
   component: Portal<any>;
 
   constructor(private injector: Injector, private asideRef: NovoAsideRef) {
+    this.draggable = asideRef.draggable;
+    this.disableDrag = asideRef.disableDrag;
     this.component = new ComponentPortal(asideRef.component, null, injector);
   }
 
@@ -30,6 +33,9 @@ export class AsideComponent {
   }
 
   startExitAnimation() {
+    if (this.draggable) {
+      this.onAnimationDone({ phaseName: 'done', toState: 'leave' } as any);
+    }
     this.animationState = 'leave';
   }
 }
