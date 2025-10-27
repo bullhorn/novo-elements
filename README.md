@@ -23,7 +23,7 @@
     npm run build (builds the library, alternatively you can use npm run build:watch for live-reload)
     npm start (starts the demo)
 
-    # Access the Demo in your browser at
+    # Access the Demo in your browser at:
     http://localhost:4200/
 
 ## Integrating into a project
