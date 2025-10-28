@@ -831,6 +831,12 @@ export class v6Page {
 <ul>
 <li>Ensure your node version is compatible with Angular 19 which requires <code>^18.19.0</code> or <code>^20.9.0</code> or <code>22.x</code>.</li>
 </ul>
+<h2 id="notable-changes">Notable changes <a href="https://bullhorn.github.io/novo-elements/docs/#/updates/v11-announce#notable-changes">#</a></h2>
+<ul>
+<li>Update to Angular 19 <a href="https://github.com/bullhorn/novo-elements/pull/1706">#1706</a></li>
+<li>Date Picker: Optional Cancel/Save buttons <a href="https://github.com/bullhorn/novo-elements/pull/1698">#1698</a></li>
+<li>Select: Fixed keyboard navigation <a href="https://github.com/bullhorn/novo-elements/pull/1715">#1715</a></li>
+</ul>
 `,
   host: { class: 'markdown-page' },
   standalone: false,
