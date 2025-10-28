@@ -832,10 +832,41 @@ export class v6Page {
 <li>Ensure your node version is compatible with Angular 19 which requires <code>^18.19.0</code> or <code>^20.9.0</code> or <code>22.x</code>.</li>
 </ul>
 <h2 id="notable-changes">Notable changes <a href="https://bullhorn.github.io/novo-elements/docs/#/updates/v11-announce#notable-changes">#</a></h2>
+<h3>Angular Upgrade</h3>
 <ul>
 <li>Update to Angular 19 <a href="https://github.com/bullhorn/novo-elements/pull/1706">#1706</a></li>
-<li>Date Picker: Optional Cancel/Save buttons <a href="https://github.com/bullhorn/novo-elements/pull/1698">#1698</a></li>
+</ul>
+<h3>Date Picker</h3>
+<ul>
+<li>Add optional Cancel/Save buttons to Date Picker <a href="https://github.com/bullhorn/novo-elements/pull/1698">#1698</a></li>
+<li>Add optional dateForInitialView input <a href="https://github.com/bullhorn/novo-elements/pull/1635">#1635</a></li>
+</ul>
+<h3>Data Table</h3>
+<ul>
+<li>DragDrop improvements: fixed stuttering, improved state handling, and fixed dragging onto tooltips/overlays</li>
+<li>Emit external column filter events</li>
+<li>Update some data table types <a href="https://github.com/bullhorn/novo-elements/pull/1647">#1647</a></li>
+</ul>
+<h3>Data Table Pagination</h3>
+<ul>
+<li>Add option to show the total number of records <a href="https://github.com/bullhorn/novo-elements/pull/1648">#1648</a></li>
+</ul>
+<h3>Components</h3>
+<ul>
 <li>Select: Fixed keyboard navigation <a href="https://github.com/bullhorn/novo-elements/pull/1715">#1715</a></li>
+<li>Button: Add support for two icon buttons</li>
+<li>Aside: Making the Aside component draggable</li>
+<li>novo-field: Added disabled state styling <a href="https://github.com/bullhorn/novo-elements/pull/1644">#1644</a></li>
+<li>NovoOverlay: Contextual custom overlay containers <a href="https://github.com/bullhorn/novo-elements/pull/1639">#1639</a></li>
+<li>SwitchControl: Add change propagation to Switch Control Template <a href="https://github.com/bullhorn/novo-elements/pull/1593">#1593</a></li>
+<li>Autocomplete: Introduce makeFirstItemActive option <a href="https://github.com/bullhorn/novo-elements/pull/1574">#1574</a></li>
+<li>Select: Add icon option to select <a href="https://github.com/bullhorn/novo-elements/pull/1570">#1570</a></li>
+<li>Novo Notification: Added novo-dropdown to ng-content <a href="https://github.com/bullhorn/novo-elements/pull/1568">#1568</a></li>
+<li>Tiles: Restyling the novo-tiles component to be more legible <a href="https://github.com/bullhorn/novo-elements/pull/1590">#1590</a></li>
+</ul>
+<h3>Google Places</h3>
+<ul>
+<li>Add postal_codes to AddressData for better locality support <a href="https://github.com/bullhorn/novo-elements/pull/1703">#1703</a></li>
 </ul>
 `,
   host: { class: 'markdown-page' },
