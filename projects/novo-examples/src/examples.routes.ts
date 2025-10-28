@@ -823,6 +823,55 @@ export class v6Page {
 
 
 @Component({
+  selector: 'v11-page',
+  template: `<h1>🎉 October 2025 (version 11)</h1>
+<p><strong>Announcement</strong>: Novo Elements is now on Angular 19!</p>
+<p>This brings Novo Elements up to the latest versions of both Angular and Typescript.</p>
+<h2>Upgrading to v11</h2>
+<ul>
+<li>Ensure your node version is compatible with Angular 19 which requires <code>^18.19.0</code> or <code>^20.9.0</code> or <code>22.x</code>.</li>
+</ul>
+<h2 id="notable-changes">Notable changes <a href="https://bullhorn.github.io/novo-elements/docs/#/updates/v11-announce#notable-changes">#</a></h2>
+<h3>Angular Upgrade</h3>
+<ul>
+<li>Update to Angular 19 <a href="https://github.com/bullhorn/novo-elements/pull/1706">#1706</a></li>
+</ul>
+<h3>Date Picker</h3>
+<ul>
+<li>Add optional Cancel/Save buttons to Date Picker <a href="https://github.com/bullhorn/novo-elements/pull/1698">#1698</a></li>
+<li>Add optional dateForInitialView input <a href="https://github.com/bullhorn/novo-elements/pull/1635">#1635</a></li>
+</ul>
+<h3>Data Table</h3>
+<ul>
+<li>Add option to show the total number of records <a href="https://github.com/bullhorn/novo-elements/pull/1648">#1648</a></li>
+</ul>
+<h3>Components</h3>
+<ul>
+<li>Select: Fixed keyboard navigation <a href="https://github.com/bullhorn/novo-elements/pull/1715">#1715</a></li>
+<li>Button: Add support for two icon buttons <a href="https://github.com/bullhorn/novo-elements/pull/1643">#1643</a></li>
+<li>Aside: Making the Aside component draggable <a href="https://github.com/bullhorn/novo-elements/pull/1660">#1660</a></li>
+<li>novo-field: Added disabled state styling <a href="https://github.com/bullhorn/novo-elements/pull/1644">#1644</a></li>
+<li>NovoOverlay: Contextual custom overlay containers <a href="https://github.com/bullhorn/novo-elements/pull/1639">#1639</a></li>
+<li>SwitchControl: Add change propagation to Switch Control Template <a href="https://github.com/bullhorn/novo-elements/pull/1593">#1593</a></li>
+<li>Autocomplete: Introduce makeFirstItemActive option <a href="https://github.com/bullhorn/novo-elements/pull/1574">#1574</a></li>
+<li>Select: Add icon option to select <a href="https://github.com/bullhorn/novo-elements/pull/1570">#1570</a></li>
+<li>Novo Notification: Added novo-dropdown to ng-content <a href="https://github.com/bullhorn/novo-elements/pull/1568">#1568</a></li>
+<li>Tiles: Restyling the novo-tiles component to be more legible <a href="https://github.com/bullhorn/novo-elements/pull/1590">#1590</a></li>
+</ul>
+<h3>Google Places</h3>
+<ul>
+<li>Add postal_codes to AddressData for better locality support <a href="https://github.com/bullhorn/novo-elements/pull/1703">#1703</a></li>
+</ul>
+`,
+  host: { class: 'markdown-page' },
+  standalone: false,
+})
+export class v11Page {
+  public params: any = {};
+}
+
+
+@Component({
   selector: 'v10-page',
   template: `<h1>🎉 April 2024 (version 10)</h1>
 <p><strong>Announcement</strong>: Novo Elements is now on Angular 17!</p>
@@ -1174,7 +1223,6 @@ export class LayoutsPage {
 <p><code-example example="tabs-vertical"></code-example></p>
 <h3>Button Tab Bars</h3>
 <p>Tabbed Button Bars get a similar style treatment to the <code>&quot;header&quot;</code> theme button.</p>
-<!-- <code-example example="tabs-condensed"></code-example> -->
 <h2>As Application Routing Mechanism</h2>
 <p>Follows the same color/white theme as above, but doesn't use the &quot;novo-tabs&quot; tag and you have to add the classes and html accordingly. The header will now control and route your application and put the content in the &quot;router-outlet&quot; and look/feel like our tabs component.</p>
 <p><code-example example="tabs-router"></code-example></p>
@@ -3072,30 +3120,6 @@ export class TypographyPage {
     <pre><code>.box &#123;\n  &#64;include novo-padding-medium(); // use mixin \n  margin: $spacing-xs; // or use scss variables\n  padding: $spacing-xl;\n&#125; &#125;&#125;</code></pre>
   </typedef-snippet>
 </typedef-example>
-<!-- 
-<typedef-example>
-  <typedef-content>
-    <novo-flex gap="1rem">
-      <novo-box bg="ocean"><novo-box margin="xs" padding="xl" bg="white">xs</novo-box></novo-box>
-      <novo-box bg="ocean"><novo-box margin="sm" padding="lg" bg="white">sm</novo-box></novo-box>
-      <novo-box bg="ocean"><novo-box margin="md" padding="md" bg="white">md</novo-box></novo-box>
-      <novo-box bg="ocean"><novo-box margin="lg" padding="sm" bg="white">lg</novo-box></novo-box>
-      <novo-box bg="ocean"><novo-box margin="xl" padding="xs" bg="white">xl</novo-box></novo-box>
-    </novo-flex>
-  </typedef-content>
-  <typedef-specs>
-    <novo-label>Margin</novo-label>
-    <dl>
-      <dt>Font Size       </dt><dd>1.2rem</dd>
-      <dt>Line Height     </dt><dd>1.375 (28px)</dd>
-      <dt>Font Weight     </dt><dd>300</dd>
-      <dt>Max Line Length </dt><dd>550px</dd>
-    </dl>
-  </typedef-specs>
-  <typedef-snippet>
-    <code class="tc-positive">&lt;novo-box margin="sm"&gt;...&lt;/novo-box&gt;</code> or <code class="tc-negative">&#64;include novo-margin-medium()</code>
-  </typedef-snippet>
-</typedef-example> -->
 `,
   host: { class: 'markdown-page' },
   standalone: false,
@@ -3979,8 +4003,7 @@ export class SearchPage {
 <p><code-example example="single-field-criteria"></code-example></p>
 <h2>Full Query Builder</h2>
 <p>The difference between the Query and Criteria Builder is that it allow for the user to define multiple criteria and join them as either inclusion or exclusion criteria.  ie. Find <code>where fruit.seeds &gt;= 1 and not fruit.name='Avacodo'</code></p>
-<p>TBW</p>
-<!-- <code-example example="just-criteria"></code-example> -->`,
+`,
   host: { class: 'markdown-page' },
   standalone: false,
 })
@@ -6779,11 +6802,12 @@ const routes: Routes = [
   { path: 'utils/drag and drop', component: DragDropPage, data: { order: '1', title: 'Drag and Drop', section: 'utils', tag: 'new' } },
   { path: 'utils/code editor', component: CodeEditorPage, data: { order: '1', title: 'Code Editor', section: 'utils', tag: 'new' } },
   { path: 'utils/ace editor', component: AceEditorPage, data: { order: '1', title: 'Ace Editor', section: 'utils', tag: 'deprecated' } },
-  { path: 'updates/v9-announce', component: v9Page, data: { order: '2', title: 'v9', section: 'updates' } },
-  { path: 'updates/v8-announce', component: v8Page, data: { order: '3', title: 'v8', section: 'updates' } },
-  { path: 'updates/v7-announce', component: v7Page, data: { order: '4', title: 'v7', section: 'updates' } },
-  { path: 'updates/v6', component: v6Page, data: { order: '5', title: 'v6', section: 'updates' } },
-  { path: 'updates/v10-announce', component: v10Page, data: { order: '1', title: 'v10', section: 'updates', tag: 'new' } },
+  { path: 'updates/v9-announce', component: v9Page, data: { order: '3', title: 'v9', section: 'updates' } },
+  { path: 'updates/v8-announce', component: v8Page, data: { order: '4', title: 'v8', section: 'updates' } },
+  { path: 'updates/v7-announce', component: v7Page, data: { order: '5', title: 'v7', section: 'updates' } },
+  { path: 'updates/v6', component: v6Page, data: { order: '6', title: 'v6', section: 'updates' } },
+  { path: 'updates/v11-announce', component: v11Page, data: { order: '1', title: 'v11', section: 'updates', tag: 'new' } },
+  { path: 'updates/v10-announce', component: v10Page, data: { order: '2', title: 'v10', section: 'updates' } },
   { path: 'templates', component: TemplatesPage, data: { order: '4', title: 'Templates', section: 'src' } },
   { path: 'patterns', component: PatternsPage, data: { order: '5', title: 'Patterns', section: 'src' } },
   { path: 'layouts', component: LayoutsPage, data: { order: '6', title: 'Layouts', section: 'src' } },
@@ -7076,7 +7100,7 @@ const routes: Routes = [
 ];
 
 export const PAGE_LIST = [
-  SecurityPage,QuickNotePage,PipesPage,FieldInteractionsPage,DragDropPage,CodeEditorPage,AceEditorPage,v9Page,v8Page,v7Page,v6Page,v10Page,TemplatesPage,PatternsPage,PatternsTestPage,PatternsNativeFormsPage,LayoutsPage,TabsExamplesPage,TabsDevelopPage,TabsDesignPage,StepperPage,SidenavPage,ListPage,HeaderPage,ExpansionPage,CardExamplesPage,CardDevelopPage,CardDesignPage,CardDescriptionPage,HomePage,FormControlsPage,ValuePage,TimezonePage,TimePickerExamplesPage,TimePickerDevelopPage,TimePickerDesignPage,TilesPage,SelectPage,RadioButtonsPage,PickerPage,MultiPickerPage,FormGroupsPage,FormPage,DynamicFormPage,DateTimePickerExamplesPage,DateTimePickerDevelopPage,DateTimePickerDesignPage,DatePickerExamplesPage,DatePickerDevelopPage,DatePickerDesignPage,ColorPickerPage,CkEditorPage,ChipsExamplesPage,ChipsDevelopPage,ChipsDesignPage,CheckboxPage,DesignPage,TypographyPage,SpacingPage,IconographyPage,CompositionPage,ColorsPage,ComponentsPage,TooltipExamplesPage,TooltipDevelopPage,TooltipDesignPage,ToolbarExamplesPage,ToolbarDevelopPage,ToolbarDesignPage,ToasterExamplesPage,ToasterDevelopPage,ToasterDesignPage,TipWellExamplesPage,TipWellDevelopPage,TipWellDesignPage,TabbedGroupPickerPage,SwitchPage,SlidesPage,SearchPage,QueryBuilderExamplesPage,QueryBuilderDevelopPage,QueryBuilderDesignPage,ProgressUsagePage,ProgressExamplesPage,ProgressDevelopPage,ProgressDesignPage,PopoverExamplesPage,PopoverDevelopPage,PopoverDesignPage,NonIdealStateExamplesPage,NonIdealStateDevelopPage,NonIdealStateDesignPage,ModalExamplesPage,ModalDevelopPage,ModalDesignPage,MenuExamplesPage,MenuDevelopPage,MenuDesignPage,LoadingExamplesPage,LoadingDevelopPage,LoadingDesignPage,IconExamplesPage,IconDevelopPage,IconDesignPage,FieldExamplesPage,FieldDevelopPage,FieldDesignPage,DropdownExamplesPage,DropdownDevelopPage,DropdownDesignPage,DataTablePage,CalendarExamplesPage,CalendarDevelopPage,CalendarDesignPage,ButtonExamplesPage,ButtonDevelopPage,ButtonDesignPage,BreadcrumbExamplesPage,BreadcrumbDevelopPage,BreadcrumbDesignPage,AvatarExamplesPage,AvatarDevelopPage,AvatarDesignPage,AutocompleteExamplesPage,AutocompleteDevelopPage,AutocompleteDesignPage,AsideExamplesPage,AsideDevelopPage,AsideDesignPage,AgendaExamplesPage,AgendaDevelopPage,AgendaDesignPage
+  SecurityPage,QuickNotePage,PipesPage,FieldInteractionsPage,DragDropPage,CodeEditorPage,AceEditorPage,v9Page,v8Page,v7Page,v6Page,v11Page,v10Page,TemplatesPage,PatternsPage,PatternsTestPage,PatternsNativeFormsPage,LayoutsPage,TabsExamplesPage,TabsDevelopPage,TabsDesignPage,StepperPage,SidenavPage,ListPage,HeaderPage,ExpansionPage,CardExamplesPage,CardDevelopPage,CardDesignPage,CardDescriptionPage,HomePage,FormControlsPage,ValuePage,TimezonePage,TimePickerExamplesPage,TimePickerDevelopPage,TimePickerDesignPage,TilesPage,SelectPage,RadioButtonsPage,PickerPage,MultiPickerPage,FormGroupsPage,FormPage,DynamicFormPage,DateTimePickerExamplesPage,DateTimePickerDevelopPage,DateTimePickerDesignPage,DatePickerExamplesPage,DatePickerDevelopPage,DatePickerDesignPage,ColorPickerPage,CkEditorPage,ChipsExamplesPage,ChipsDevelopPage,ChipsDesignPage,CheckboxPage,DesignPage,TypographyPage,SpacingPage,IconographyPage,CompositionPage,ColorsPage,ComponentsPage,TooltipExamplesPage,TooltipDevelopPage,TooltipDesignPage,ToolbarExamplesPage,ToolbarDevelopPage,ToolbarDesignPage,ToasterExamplesPage,ToasterDevelopPage,ToasterDesignPage,TipWellExamplesPage,TipWellDevelopPage,TipWellDesignPage,TabbedGroupPickerPage,SwitchPage,SlidesPage,SearchPage,QueryBuilderExamplesPage,QueryBuilderDevelopPage,QueryBuilderDesignPage,ProgressUsagePage,ProgressExamplesPage,ProgressDevelopPage,ProgressDesignPage,PopoverExamplesPage,PopoverDevelopPage,PopoverDesignPage,NonIdealStateExamplesPage,NonIdealStateDevelopPage,NonIdealStateDesignPage,ModalExamplesPage,ModalDevelopPage,ModalDesignPage,MenuExamplesPage,MenuDevelopPage,MenuDesignPage,LoadingExamplesPage,LoadingDevelopPage,LoadingDesignPage,IconExamplesPage,IconDevelopPage,IconDesignPage,FieldExamplesPage,FieldDevelopPage,FieldDesignPage,DropdownExamplesPage,DropdownDevelopPage,DropdownDesignPage,DataTablePage,CalendarExamplesPage,CalendarDevelopPage,CalendarDesignPage,ButtonExamplesPage,ButtonDevelopPage,ButtonDesignPage,BreadcrumbExamplesPage,BreadcrumbDevelopPage,BreadcrumbDesignPage,AvatarExamplesPage,AvatarDevelopPage,AvatarDesignPage,AutocompleteExamplesPage,AutocompleteDevelopPage,AutocompleteDesignPage,AsideExamplesPage,AsideDevelopPage,AsideDesignPage,AgendaExamplesPage,AgendaDevelopPage,AgendaDesignPage
 ];
 
 @NgModule({
