@@ -843,19 +843,13 @@ export class v6Page {
 </ul>
 <h3>Data Table</h3>
 <ul>
-<li>DragDrop improvements: fixed stuttering, improved state handling, and fixed dragging onto tooltips/overlays</li>
-<li>Emit external column filter events</li>
-<li>Update some data table types <a href="https://github.com/bullhorn/novo-elements/pull/1647">#1647</a></li>
-</ul>
-<h3>Data Table Pagination</h3>
-<ul>
 <li>Add option to show the total number of records <a href="https://github.com/bullhorn/novo-elements/pull/1648">#1648</a></li>
 </ul>
 <h3>Components</h3>
 <ul>
 <li>Select: Fixed keyboard navigation <a href="https://github.com/bullhorn/novo-elements/pull/1715">#1715</a></li>
-<li>Button: Add support for two icon buttons</li>
-<li>Aside: Making the Aside component draggable</li>
+<li>Button: Add support for two icon buttons <a href="https://github.com/bullhorn/novo-elements/pull/1643">#1643</a></li>
+<li>Aside: Making the Aside component draggable <a href="https://github.com/bullhorn/novo-elements/pull/1660">#1660</a></li>
 <li>novo-field: Added disabled state styling <a href="https://github.com/bullhorn/novo-elements/pull/1644">#1644</a></li>
 <li>NovoOverlay: Contextual custom overlay containers <a href="https://github.com/bullhorn/novo-elements/pull/1639">#1639</a></li>
 <li>SwitchControl: Add change propagation to Switch Control Template <a href="https://github.com/bullhorn/novo-elements/pull/1593">#1593</a></li>
