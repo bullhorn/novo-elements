@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["projects/novo-examples/src/components/tabbed-group-picker/tabbed-group-picker-example.scss"],
+  "sourcesContent": [".tabbed-group-picker-example {\n  display: flex;\n  justify-content: space-between;\n\n  novo-tabbed-group-picker {\n    max-width: 40%;\n  }\n  .selected-data-wrapper {\n    width: 40%;\n  }\n}\n"],
+  "mappings": ";AAAA,CAAA;AACE,WAAA;AACA,mBAAA;;AAEA,CAJF,4BAIE;AACE,aAAA;;AAEF,CAPF,4BAOE,CAAA;AACE,SAAA;;",
+  "names": []
+}

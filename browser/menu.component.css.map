@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["angular:styles/component:css;0886a6b10976eeb902e10ee5cf071d94ecf97b6c94e508e2965b801c52bdd018;/home/runner/work/novo-elements/novo-elements/projects/novo-elements/src/elements/menu/menu.component.ts"],
-  "sourcesContent": ["\n      .cdk-overlay-container {\n        position: fixed;\n        z-index: z(overlay);\n        pointer-events: none;\n        top: 0;\n        left: 0;\n        width: 100%;\n        height: 100%;\n      }\n      .novo-menu.cdk-overlay-pane {\n        position: absolute;\n        pointer-events: auto;\n        box-sizing: border-box;\n      }\n    "],
-  "mappings": ";AACM,CAAC;AACC,YAAU;AACV,WAAS,EAAE;AACX,kBAAgB;AAChB,OAAK;AACL,QAAM;AACN,SAAO;AACP,UAAQ;AACV;AACA,CAAC,SAAS,CAAC;AACT,YAAU;AACV,kBAAgB;AAChB,cAAY;AACd;",
-  "names": []
-}

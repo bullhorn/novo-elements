@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["projects/novo-examples/src/form-controls/form/number-range-control/number-range-control-example.css"],
-  "sourcesContent": [".row-wrapper {\n  display: flex;\n  flex-direction: column;\n  gap: 2rem;\n  margin: 2rem;\n}\n\n.example-row {\n  display: flex;\n  gap: 2rem;\n}\n\nnovo-label {\n  align-content: flex-end;\n}\n"],
-  "mappings": ";AAAA,CAAC;AACC,WAAS;AACT,kBAAgB;AAChB,OAAK;AACL,UAAQ;AACV;AAEA,CAAC;AACC,WAAS;AACT,OAAK;AACP;AAEA;AACE,iBAAe;AACjB;",
-  "names": []
-}

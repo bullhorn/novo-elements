@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["projects/novo-examples/src/components/pop-over/pop-over-horizontal/pop-over-horizontal-example.css"],
+  "sourcesContent": ["/** CSS for this example */\n:host {\n  margin: auto;\n  padding: 20px 30px;\n  position: relative;\n  display: flex;\n}\n\n:host > span {\n  cursor: pointer;\n  margin: auto;\n}\n"],
+  "mappings": ";AACA;AACE,UAAQ;AACR,WAAS,KAAK;AACd,YAAU;AACV,WAAS;AACX;AAEA,MAAM,EAAE;AACN,UAAQ;AACR,UAAQ;AACV;",
+  "names": []
+}

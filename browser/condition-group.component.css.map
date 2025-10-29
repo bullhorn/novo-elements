@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["projects/novo-elements/src/elements/query-builder/condition-group/condition-group.component.scss"],
-  "sourcesContent": [":host {\n  position: relative;\n  display: block;\n  border: 1px solid var(--border);\n  border-radius: var(--border-radius-round);\n  padding: var(--spacing-md);\n  width: 100%;\n\n  .condition-row {\n    width: 100%;\n  }\n  .delete-btn {\n    margin-bottom: 1px;\n  }\n}\n"],
-  "mappings": ";AAAA;AACE,YAAA;AACA,WAAA;AACA,UAAA,IAAA,MAAA,IAAA;AACA,iBAAA,IAAA;AACA,WAAA,IAAA;AACA,SAAA;;AAEA,MAAA,CAAA;AACE,SAAA;;AAEF,MAAA,CAAA;AACE,iBAAA;;",
-  "names": []
-}

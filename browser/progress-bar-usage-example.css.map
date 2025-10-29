@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["projects/novo-examples/src/components/progress/progress-bar-usage/progress-bar-usage-example.css"],
-  "sourcesContent": ["span[tooltip] {\n  margin-left: 10px;\n}\n\n.resizable {\n  resize: horizontal;\n  overflow: auto;\n  width: 200px;\n}\n"],
-  "mappings": ";AAAA,IAAI,CAAC;AACH,eAAa;AACf;AAEA,CAAC;AACC,UAAQ;AACR,YAAU;AACV,SAAO;AACT;",
-  "names": []
-}

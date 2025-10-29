@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["projects/novo-examples/src/components/avatar/avatar-usage/avatar-usage-example.css"],
-  "sourcesContent": ["/** No CSS for this example */\n:host {\n  display: flex;\n  gap: 1rem;\n}\n"],
-  "mappings": ";AACA;AACE,WAAS;AACT,OAAK;AACP;",
-  "names": []
-}

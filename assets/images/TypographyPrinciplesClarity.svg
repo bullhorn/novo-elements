@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="166px" height="164px" viewBox="0 0 166 164" version="1.1" xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.4.4 (17249) - http://www.bohemiancoding.com/sketch -->
+    <title>Typography - Principles - Clarity</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Images" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="Typography---Principles---Clarity" sketch:type="MSArtboardGroup">
+            <g id="Shape-+-Oval-4" sketch:type="MSLayerGroup" transform="translate(8.000000, 7.000000)">
+                <path
+                    d="M92.2608242,85.7584327 L88.7869438,85.7584327 L87.4805273,84.4520161 C91.8154549,79.6717192 94.4282881,73.1693277 94.4282881,66.2215668 C94.4282881,50.589105 81.839183,38 66.2215668,38 C50.6039507,38 38,50.589105 38,66.2215668 C38,81.8540287 50.589105,94.4431337 66.2215668,94.4431337 C73.1693277,94.4431337 79.6865648,91.8303006 84.4520161,87.4953729 L85.7584327,88.8017895 L85.7584327,92.2756699 L107.462762,113.98 L113.98,107.462762 L92.2608242,85.7584327 L92.2608242,85.7584327 Z M66.2215668,85.7584327 C55.369402,85.7584327 46.684701,77.0737317 46.684701,66.2215668 C46.684701,55.369402 55.369402,46.684701 66.2215668,46.684701 C77.0737317,46.684701 85.7584327,55.369402 85.7584327,66.2215668 C85.7584327,77.0737317 77.0737317,85.7584327 66.2215668,85.7584327 L66.2215668,85.7584327 Z"
+                    id="Shape" opacity="0.653101679" fill="#C63889" sketch:type="MSShapeGroup"></path>
+                <circle id="Oval-4" stroke="#D5D5D5" stroke-width="2" sketch:type="MSShapeGroup" cx="75.5" cy="75.5"
+                        r="75.5"></circle>
+            </g>
+        </g>
+    </g>
+</svg>

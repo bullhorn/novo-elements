@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["projects/novo-elements/src/elements/query-builder/criteria-builder/criteria-builder.component.scss"],
+  "sourcesContent": [":host {\n  position: relative;\n  display: block;\n  width: 76rem;\n\n  .criteria-builder-inner {\n    padding-bottom: 1rem;\n  }\n}\n"],
+  "mappings": ";AAAA;AACE,YAAA;AACA,WAAA;AACA,SAAA;;AAEA,MAAA,CAAA;AACE,kBAAA;;",
+  "names": []
+}

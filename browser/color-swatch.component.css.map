@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["angular:styles/component:css;5893ec8476e90bcba36e4d8b706107a9eb517724e7cce32632df50291ba85670;/home/runner/work/novo-elements/novo-elements/projects/novo-elements/src/elements/color-picker/color-swatch.component.ts"],
-  "sourcesContent": ["\n      .swatch {\n        border-radius: 0.4rem;\n      }\n    "],
-  "mappings": ";AACM,CAAC;AACC,iBAAe;AACjB;",
-  "names": []
-}

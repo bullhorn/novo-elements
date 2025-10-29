@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["projects/novo-examples/src/components/field/field-native/field-native-example.css"],
-  "sourcesContent": ["/** No CSS for this example */\n\n.example-right-align {\n  text-align: right;\n}\n"],
-  "mappings": ";AAEA,CAAC;AACC,cAAY;AACd;",
-  "names": []
-}

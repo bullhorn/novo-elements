@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["projects/novo-examples/src/layouts/sidenav/basic-sidenav/basic-sidenav-example.css"],
-  "sourcesContent": ["/** No CSS for this example */\n.sidenav-example {\n  height: 640px;\n  width: 640px;\n  display: grid;\n  grid-template-rows: auto 1fr;\n}\n\n.novo-rail {\n  border-right: 1px solid var(--border);\n}\n.novo-rail .novo-text {\n  flex: 1;\n}\n.novo-rail:not(.expanded) .novo-text,\n.novo-rail:not(.expanded) .novo-action {\n  display: none;\n}\n"],
-  "mappings": ";AACA,CAAC;AACC,UAAQ;AACR,SAAO;AACP,WAAS;AACT,sBAAoB,KAAK;AAC3B;AAEA,CAAC;AACC,gBAAc,IAAI,MAAM,IAAI;AAC9B;AACA,CAHC,UAGU,CAAC;AACV,QAAM;AACR;AACA,CANC,SAMS,KAAK,CAAC,UAAU,CAHd;AAIZ,CAPC,SAOS,KAAK,CADC,UACU,CAAC;AACzB,WAAS;AACX;",
-  "names": []
-}

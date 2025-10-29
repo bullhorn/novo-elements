@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["projects/novo-examples/src/components/dropdown/scrollable-drop-down/scrollable-drop-down-example.css"],
+  "sourcesContent": ["/** CSS for this example */\n:host {\n  background: #4a89dc;\n  display: block;\n  justify-content: space-between;\n  align-items: center;\n  padding: 0.5rem;\n}\n:host .scrollable-container {\n  max-height: 10rem;\n  overflow: scroll;\n}\n:host .scrollable-container .scrollable-content {\n  height: 30em;\n}\n:host novo-dropdown {\n  margin: 5rem;\n}\n"],
+  "mappings": ";AACA;AACE,cAAY;AACZ,WAAS;AACT,mBAAiB;AACjB,eAAa;AACb,WAAS;AACX;AACA,MAAM,CAAC;AACL,cAAY;AACZ,YAAU;AACZ;AACA,MAAM,CAJC,qBAIqB,CAAC;AAC3B,UAAQ;AACV;AACA,MAAM;AACJ,UAAQ;AACV;",
+  "names": []
+}

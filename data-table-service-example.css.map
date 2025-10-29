@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["projects/novo-examples/src/components/data-table/data-table-service/data-table-service-example.css"],
+  "sourcesContent": [":host {\n  min-height: 400px;\n}\n"],
+  "mappings": ";AAAA;AACE,cAAY;AACd;",
+  "names": []
+}

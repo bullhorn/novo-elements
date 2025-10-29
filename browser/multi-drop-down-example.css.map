@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["projects/novo-examples/src/components/dropdown/multi-drop-down/multi-drop-down-example.css"],
-  "sourcesContent": ["/** No CSS for this example */\n:host {\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: space-between;\n}\n\n.dropdown-search {\n  padding: 1rem;\n}\n.dropdown-footer {\n  padding: 0.5rem;\n}\n"],
-  "mappings": ";AACA;AACE,WAAS;AACT,aAAW,IAAI;AACf,mBAAiB;AACnB;AAEA,CAAC;AACC,WAAS;AACX;AACA,CAAC;AACC,WAAS;AACX;",
-  "names": []
-}

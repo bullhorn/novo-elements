@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["projects/novo-elements/src/addons/ace-editor/AceEditor.scss"],
-  "sourcesContent": [":host {\n  display: block;\n  width: 100%;\n  min-height: 200px;\n}\n"],
-  "mappings": ";AAAA;AACE,WAAA;AACA,SAAA;AACA,cAAA;;",
-  "names": []
-}
