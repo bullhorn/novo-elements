@@ -1,5 +1,5 @@
 name: Release Novo Elements (new)
-on: 
+on:
   workflow_dispatch:
     inputs:
       dry-run:
@@ -35,5 +35,3 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           npx semantic-release --dry-run ${{ github.event.inputs.dry-run }}
-        
-
