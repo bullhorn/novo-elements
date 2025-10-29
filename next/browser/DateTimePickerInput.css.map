@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["projects/novo-elements/src/elements/date-time-picker/DateTimePickerInput.scss"],
-  "sourcesContent": [":host {\n  flex: 1;\n  position: relative;\n  display: flex;\n  flex-flow: row nowrap;\n  max-width: 340px;\n\n  novo-date-picker-input {\n    margin-right: 20px;\n  }\n  novo-time-picker-input {\n    max-width: 130px;\n  }\n}\n"],
-  "mappings": ";AAAA;AACE,QAAA;AACA,YAAA;AACA,WAAA;AACA,aAAA,IAAA;AACA,aAAA;;AAEA,MAAA;AACE,gBAAA;;AAEF,MAAA;AACE,aAAA;;",
-  "names": []
-}

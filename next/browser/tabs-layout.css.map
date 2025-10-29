@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["projects/novo-examples/src/_shared/tabs-layout/tabs-layout.scss"],
-  "sourcesContent": [".tabs-layout {\n  .docs-page-nav {\n    position: sticky;\n    top: -1px;\n    background: var(--background-body);\n  }\n}\n"],
-  "mappings": ";AACE,CAAA,YAAA,CAAA;AACE,YAAA;AACA,OAAA;AACA,cAAA,IAAA;;",
-  "names": []
-}

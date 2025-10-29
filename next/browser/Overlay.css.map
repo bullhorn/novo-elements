@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["projects/novo-elements/src/elements/common/overlay/Overlay.scss"],
-  "sourcesContent": ["div.novo-overlay-panel {\n    width: 100%;\n}\n"],
-  "mappings": ";AAAA,GAAA,CAAA;AACI,SAAA;;",
-  "names": []
-}

@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["projects/novo-examples/src/components/toolbar/multi-row-toolbar/multi-row-toolbar-example.css"],
-  "sourcesContent": [".example-spacer {\n  flex: 1 1 auto;\n}\n"],
-  "mappings": ";AAAA,CAAC;AACC,QAAM,EAAE,EAAE;AACZ;",
-  "names": []
-}

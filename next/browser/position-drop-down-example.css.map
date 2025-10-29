@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["projects/novo-examples/src/components/dropdown/position-drop-down/position-drop-down-example.css"],
-  "sourcesContent": ["/** CSS for this example */\n:host {\n  background: #4a89dc;\n  padding: 1rem;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  flex-wrap: wrap;\n  padding: 0.5rem;\n}\n\n:host novo-dropdown {\n  margin: 0.5rem;\n}\n"],
-  "mappings": ";AACA;AACE,cAAY;AACZ,WAAS;AACT,WAAS;AACT,mBAAiB;AACjB,eAAa;AACb,aAAW;AACX,WAAS;AACX;AAEA,MAAM;AACJ,UAAQ;AACV;",
-  "names": []
-}

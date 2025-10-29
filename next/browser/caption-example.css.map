@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["projects/novo-examples/src/design/typography/caption/caption-example.scss"],
-  "sourcesContent": [":host {\n  display: grid;\n  grid-template-columns: 1fr 1fr 1fr;\n}\n"],
-  "mappings": ";AAAA;AACE,WAAA;AACA,yBAAA,IAAA,IAAA;;",
-  "names": []
-}
