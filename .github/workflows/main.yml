@@ -40,7 +40,7 @@ jobs:
         with:
           name: build-artifact
           path: dist
-      - uses: bvkimball/branch-vars@1.0.1
       - env:
           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+          CURRENT_BRANCH: ${{ github.ref_name }}
         run: sh snapshot-publish
