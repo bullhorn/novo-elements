@@ -73,7 +73,10 @@
             "assets": ["projects/demo/favicon.ico", "projects/demo/assets"],
             "styles": ["projects/demo/styles.scss"],
             "stylePreprocessorOptions": {
-              "includePaths": ["projects/novo-elements/src"]
+              "includePaths": ["projects/novo-elements/src"],
+              "sass": {
+                "silenceDeprecations": ["color-functions", "global-builtin", "import", "mixed-decls"]
+              }
             },
             "scripts": [],
             "extractLicenses": false,
