@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["projects/novo-examples/src/components/dropdown/scroll-to-item-drop-down/scroll-to-item-drop-down-example.css"],
+  "sourcesContent": ["/** CSS for this example */\n:host {\n  display: flex;\n  align-items: center;\n  white-space: normal;\n}\n\n.value {\n  flex-basis: 0;\n  flex-grow: 1;\n  max-width: 100%;\n}\n.value-active {\n  flex: 0 0 auto;\n  width: auto;\n  max-width: none;\n  margin-left: 1rem;\n}\n"],
+  "mappings": ";AACA;AACE,WAAS;AACT,eAAa;AACb,eAAa;AACf;AAEA,CAAC;AACC,cAAY;AACZ,aAAW;AACX,aAAW;AACb;AACA,CAAC;AACC,QAAM,EAAE,EAAE;AACV,SAAO;AACP,aAAW;AACX,eAAa;AACf;",
+  "names": []
+}

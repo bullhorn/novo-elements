@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["projects/novo-examples/src/patterns/card-form/card-form-example.css"],
-  "sourcesContent": ["/** No CSS for this example */\n.card-form-example {\n  max-width: 48rem;\n}\n"],
-  "mappings": ";AACA,CAAC;AACC,aAAW;AACb;",
-  "names": []
-}

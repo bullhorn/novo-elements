@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["projects/novo-elements/src/elements/list/list-item-end.scss"],
-  "sourcesContent": [":host {\n  align-self: center;\n  flex: 1;\n  text-align: right;\n  i {\n    line-height: 1.4em;\n  }\n}\n"],
-  "mappings": ";AAAA;AACE,cAAA;AACA,QAAA;AACA,cAAA;;AACA,MAAA;AACE,eAAA;;",
-  "names": []
-}

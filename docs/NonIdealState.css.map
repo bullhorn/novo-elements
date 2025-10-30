@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["projects/novo-elements/src/elements/non-ideal-state/NonIdealState.scss"],
+  "sourcesContent": [":host {\n  padding: 2rem;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n  text-align: center;\n  // gap: 1.2rem;\n  .novo-non-ideal-state-icon {\n    font-size: xx-large;\n  }\n\n  button {\n    display: inline-block;\n  }\n}\n"],
+  "mappings": ";AAAA;AACE,WAAA;AACA,WAAA;AACA,kBAAA;AACA,mBAAA;AACA,eAAA;AACA,cAAA;;AAEA,MAAA,CAAA;AACE,aAAA;;AAGF,MAAA;AACE,WAAA;;",
+  "names": []
+}

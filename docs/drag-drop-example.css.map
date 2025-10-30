@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["projects/novo-examples/src/utils/drag-drop/drag-drop/drag-drop-example.css"],
+  "sourcesContent": [".drag-box {\n    width: 500px;\n    display: block;\n}\n.demo-drag-item {\n    display: inline-flex;\n    text-align: center;\n    margin: 10px;\n    width: 122px;\n    position: relative;\n}"],
+  "mappings": ";AAAA,CAAC;AACG,SAAO;AACP,WAAS;AACb;AACA,CAAC;AACG,WAAS;AACT,cAAY;AACZ,UAAQ;AACR,SAAO;AACP,YAAU;AACd;",
+  "names": []
+}

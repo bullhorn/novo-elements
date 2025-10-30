@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["projects/novo-elements/src/addons/code-editor/CodeEditor.scss"],
-  "sourcesContent": [":host {\n    height: 200px;\n    display: block;\n    overflow: auto;\n}"],
-  "mappings": ";AAAA;AACI,UAAA;AACA,WAAA;AACA,YAAA;;",
-  "names": []
-}

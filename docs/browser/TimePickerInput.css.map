@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["projects/novo-elements/src/elements/time-picker/TimePickerInput.scss"],
-  "sourcesContent": [":host {\n  flex: 1;\n  position: relative;\n  display: block;\n  max-width: 130px;\n\n  &.disabled {\n    pointer-events: none;\n    opacity: 1;\n  }\n\n  input {\n    font-size: 1em;\n    border: none;\n    border-bottom: 1px solid var(--border);\n    background: transparent !important;\n    border-radius: 0;\n    outline: none;\n    height: 2rem;\n    width: 100%;\n    margin: 0;\n    padding: 0;\n    box-shadow: none;\n    box-sizing: content-box;\n    transition: all 300ms;\n    color: var(--text-main);\n\n    &:focus {\n      border-bottom: 1px solid var(--selection);\n    }\n  }\n  > i.bhi-clock,\n  > i.bhi-search,\n  > i.bhi-times,\n  > i.bhi-calendar {\n    position: absolute;\n    right: 0;\n    top: 0px;\n    font-size: 1.2rem;\n  }\n  > i.bhi-times {\n    cursor: pointer;\n  }\n}"],
-  "mappings": ";AAAA;AACE,QAAA;AACA,YAAA;AACA,WAAA;AACA,aAAA;;AAEA,KAAA,CAAA;AACE,kBAAA;AACA,WAAA;;AAGF,MAAA;AACE,aAAA;AACA,UAAA;AACA,iBAAA,IAAA,MAAA,IAAA;AACA,cAAA;AACA,iBAAA;AACA,WAAA;AACA,UAAA;AACA,SAAA;AACA,UAAA;AACA,WAAA;AACA,cAAA;AACA,cAAA;AACA,cAAA,IAAA;AACA,SAAA,IAAA;;AAEA,MAAA,KAAA;AACE,iBAAA,IAAA,MAAA,IAAA;;AAGJ,MAAA,EAAA,CAAA,CAAA;AAAA,MAAA,EAAA,CAAA,CAAA;AAAA,MAAA,EAAA,CAAA,CAAA;AAAA,MAAA,EAAA,CAAA,CAAA;AAIE,YAAA;AACA,SAAA;AACA,OAAA;AACA,aAAA;;AAEF,MAAA,EAAA,CAAA,CATA;AAUE,UAAA;;",
-  "names": []
-}

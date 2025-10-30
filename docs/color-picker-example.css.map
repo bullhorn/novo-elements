@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["projects/novo-examples/src/form-controls/color-picker/color-picker/color-picker-example.css"],
+  "sourcesContent": ["/** No CSS for this example */\n.demo-side-by-side {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n}\n"],
+  "mappings": ";AACA,CAAC;AACC,WAAS;AACT,yBAAuB,IAAI;AAC7B;",
+  "names": []
+}

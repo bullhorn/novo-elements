@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["projects/novo-examples/src/components/non-ideal-state/non-ideal-state-usage/non-ideal-state-usage-example.css"],
+  "sourcesContent": ["span[ng-reflect-tooltip]{\n  margin-left: 10px;\n}\n"],
+  "mappings": ";AAAA,IAAI,CAAC;AACH,eAAa;AACf;",
+  "names": []
+}

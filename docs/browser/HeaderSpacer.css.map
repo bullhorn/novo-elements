@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["projects/novo-elements/src/elements/header/HeaderSpacer.scss"],
-  "sourcesContent": [":host {\n  display: inline-block;\n  height: 1.8em;\n  width: 2px;\n  margin: 0 0.6em;\n  background-color: rgba(0, 0, 0, 0.25);\n}\n"],
-  "mappings": ";AAAA;AACE,WAAA;AACA,UAAA;AACA,SAAA;AACA,UAAA,EAAA;AACA,oBAAA,KAAA,CAAA,EAAA,CAAA,EAAA,CAAA,EAAA;;",
-  "names": []
-}

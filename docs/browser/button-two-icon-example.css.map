@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["projects/novo-examples/src/components/buttons/button-two-icon/button-two-icon-example.css"],
-  "sourcesContent": ["/** No CSS for this example */\n\nbutton {\n  margin: 1rem;\n}\n"],
-  "mappings": ";AAEA;AACE,UAAQ;AACV;",
-  "names": []
-}

@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["projects/novo-elements/src/elements/breadcrumbs/Breadcrumb.scss"],
+  "sourcesContent": [":host {\n  display: flex;\n  align-items: center;\n\n  ::ng-deep novo-breadcrumb-item:last-child {\n    .novo-breadcrumb-separator {\n      display: none;\n    }\n  }\n}\n"],
+  "mappings": ";AAAA;AACE,WAAA;AACA,eAAA;;AAGE,MAAA,UAAA,oBAAA,YAAA,CAAA;AACE,WAAA;;",
+  "names": []
+}

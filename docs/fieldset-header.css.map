@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["projects/novo-elements/src/elements/form/fieldset-header.scss"],
+  "sourcesContent": [":host {\n  background: var(--background-muted);\n  box-sizing: content-box;\n  padding: 1rem 1rem 1rem 0.5rem;\n  margin-bottom: 2rem;\n  display: flex;\n  margin-left: -1.5rem;\n  margin-right: -1.5rem;\n  font-size: 1.8rem;\n  ::ng-deep i,\n  ::ng-deep novo-icon {\n    margin: 1px 10px 1px 6px;\n  }\n  &.hidden {\n    display: none;\n  }\n}\n"],
+  "mappings": ";AAAA;AACE,cAAA,IAAA;AACA,cAAA;AACA,WAAA,KAAA,KAAA,KAAA;AACA,iBAAA;AACA,WAAA;AACA,eAAA;AACA,gBAAA;AACA,aAAA;;AACA,MAAA,UAAA;AAAA,MAAA,UAAA;AAEE,UAAA,IAAA,KAAA,IAAA;;AAEF,KAAA,CAAA;AACE,WAAA;;",
+  "names": []
+}

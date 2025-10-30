@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["projects/novo-examples/src/components/data-table/data-table-remote/data-table-remote-example.css"],
-  "sourcesContent": [":host {\n    min-height: 460px;\n    display: flex;\n}\n"],
-  "mappings": ";AAAA;AACI,cAAY;AACZ,WAAS;AACb;",
-  "names": []
-}

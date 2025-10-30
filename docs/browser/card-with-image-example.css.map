@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["projects/novo-examples/src/layouts/cards/card-with-image/card-with-image-example.css"],
-  "sourcesContent": ["/** No CSS for this example */\n.example-card {\n  max-width: 400px;\n}\n\n.example-header-image {\n  background-image: url('https://upload.wikimedia.org/wikipedia/commons/4/43/Cow_on_Pupers.jpg');\n  background-size: cover;\n}\n"],
-  "mappings": ";AACA,CAAC;AACC,aAAW;AACb;AAEA,CAAC;AACC,oBAAkB;AAClB,mBAAiB;AACnB;",
-  "names": []
-}

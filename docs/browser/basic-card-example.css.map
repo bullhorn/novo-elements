@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["projects/novo-examples/src/layouts/cards/basic-card/basic-card-example.css"],
-  "sourcesContent": ["/** No CSS for this example */\n:host {\n  display: flex;\n  flex-direction: column;\n  gap: 2rem;\n}\n"],
-  "mappings": ";AACA;AACE,WAAS;AACT,kBAAgB;AAChB,OAAK;AACP;",
-  "names": []
-}

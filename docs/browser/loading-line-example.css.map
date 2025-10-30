@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["projects/novo-examples/src/components/loading/loading-line/loading-line-example.css"],
-  "sourcesContent": [":host {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  gap: 2rem;\n}\n"],
-  "mappings": ";AAAA;AACE,WAAS;AACT,yBAAuB,IAAI;AAC3B,OAAK;AACP;",
-  "names": []
-}
