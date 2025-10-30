@@ -26,9 +26,22 @@ jobs:
         run: |
           npm run build
           npm run build:demo
-      - name: Deploy to GitHub Pages
+      - name: Create root redirect
+        if: github.ref == 'refs/heads/master'
+        run: |
+          mkdir -p dist
+          echo '<!DOCTYPE html><html><head><meta http-equiv="refresh" content="0; url=/novo-elements/docs/"></head></html>' > dist/index.html
+      - name: Deploy to GitHub Pages (docs)
         if: github.ref == 'refs/heads/master'
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist/demo/browser
+          publish_dir: ./docs
+          destination_dir: docs
+      - name: Deploy root redirect
+        if: github.ref == 'refs/heads/master'
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: dist
+          keep_files: true
