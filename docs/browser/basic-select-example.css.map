@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["projects/novo-examples/src/form-controls/select/basic-select/basic-select-example.css"],
+  "sourcesContent": [":host {\n  padding: 20px 30px;\n  border-top-right-radius: 3px;\n  border-top-left-radius: 3px;\n  display: flex;\n  flex-direction: row;\n  flex-shrink: 0;\n  flex-grow: 0;\n  align-items: flex-start;\n  flex-wrap: wrap;\n  transition: background 460ms ease-in-out;\n}\n\n:host label {\n  margin-bottom: 10px;\n  display: block;\n}\n\n:host .caption {\n  font-size: 0.9em;\n  margin-right: 5px;\n}\n\n.select-example-container {\n  margin: 1em;\n}\n"],
+  "mappings": ";AAAA;AACE,WAAS,KAAK;AACd,2BAAyB;AACzB,0BAAwB;AACxB,WAAS;AACT,kBAAgB;AAChB,eAAa;AACb,aAAW;AACX,eAAa;AACb,aAAW;AACX,cAAY,WAAW,MAAM;AAC/B;AAEA,MAAM;AACJ,iBAAe;AACf,WAAS;AACX;AAEA,MAAM,CAAC;AACL,aAAW;AACX,gBAAc;AAChB;AAEA,CAAC;AACC,UAAQ;AACV;",
+  "names": []
+}

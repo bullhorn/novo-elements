@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="292px" height="192px" viewBox="0 0 292 192" version="1.1" xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.4.4 (17249) - http://www.bohemiancoding.com/sketch -->
+    <title>Tables - Page Icon</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0.470764007" y="0.659063137" width="28.4517291" height="139.467854" rx="3"></rect>
+    </defs>
+    <g id="--Images" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="Tables---Page-Icon-" sketch:type="MSArtboardGroup">
+            <g id="Group" sketch:type="MSLayerGroup" transform="translate(52.000000, 17.000000)">
+                <rect id="Rectangle-290" stroke="#EB6845" sketch:type="MSShapeGroup" x="0.962092087" y="15.9007725"
+                      width="29.4528359" height="140.2516"></rect>
+                <rect id="Rectangle-290-Copy" stroke="#6D6D6D" stroke-dasharray="4" sketch:type="MSShapeGroup"
+                      x="40.6406941" y="15.9007725" width="29.4528359" height="140.2516"></rect>
+                <rect id="Rectangle-290-Copy-2" stroke="#EB6845" sketch:type="MSShapeGroup" x="80.3192961"
+                      y="15.9007725" width="89.2186446" height="140.2516"></rect>
+                <path d="M54.7151612,89.2609879 C113.719448,103.438178 134.877716,91.048374 151.454524,86.6312704"
+                      id="Path-142" stroke="#979797" sketch:type="MSShapeGroup"></path>
+                <path d="M147.503358,82.3875252 L153.992094,85.2764964 L151.103123,91.7652319 L147.503358,82.3875252 Z"
+                      id="Rectangle-250" fill="#979797" sketch:type="MSShapeGroup"></path>
+                <g transform="translate(172.298592, 72.087399) rotate(-5.000000) translate(-172.298592, -72.087399) translate(157.559275, 1.847628)">
+                    <mask id="mask-2" sketch:name="Mask" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <use id="Mask" stroke="#3399DD" fill="#FFFFFF" sketch:type="MSShapeGroup"
+                         xlink:href="#path-1"></use>
+                    <g mask="url(#mask-2)" stroke-linecap="square" stroke="#3399DD" sketch:type="MSShapeGroup">
+                        <g transform="translate(-176.004776, -3.870640)">
+                            <path d="M0.456301429,0.748622209 L180.363177,192.050731" id="Line"></path>
+                            <path d="M11.7420058,0.748622209 L191.648882,192.050731" id="Line-Copy-8"></path>
+                            <path d="M23.0132477,0.748622209 L202.920124,192.050731" id="Line-Copy-9"></path>
+                            <path d="M34.2844895,0.748622209 L214.191365,192.050731" id="Line-Copy-10"></path>
+                            <path d="M45.5557313,0.748622209 L225.462607,192.050731" id="Line-Copy-11"></path>
+                            <path d="M56.8269731,0.748622209 L236.733849,192.050731" id="Line-Copy-12"></path>
+                            <path d="M68.098215,0.748622209 L248.005091,192.050731" id="Line-Copy-13"></path>
+                            <path d="M79.3694568,0.748622209 L259.276333,192.050731" id="Line-Copy-14"></path>
+                            <path d="M90.6406986,0.748622209 L270.547574,192.050731" id="Line-Copy-15"></path>
+                            <path d="M101.91194,0.748622209 L281.818816,192.050731" id="Line-Copy-16"></path>
+                            <path d="M113.183182,0.748622209 L293.090058,192.050731" id="Line-Copy-18"></path>
+                            <path d="M124.454424,0.748622209 L304.3613,192.050731" id="Line-Copy-19"></path>
+                            <path d="M135.725666,0.748622209 L315.632542,192.050731" id="Line-Copy-20"></path>
+                            <path d="M146.996908,0.748622209 L326.903784,192.050731" id="Line-Copy-21"></path>
+                            <path d="M158.26815,0.748622209 L338.175025,192.050731" id="Line-Copy-22"></path>
+                            <path d="M169.539391,0.748622209 L349.446267,192.050731" id="Line-Copy-23"></path>
+                            <path d="M180.810633,0.748622209 L360.717509,192.050731" id="Line-Copy-24"></path>
+                            <path d="M192.081875,0.748622209 L371.988751,192.050731" id="Line-Copy-25"></path>
+                            <path d="M203.353117,0.748622209 L383.259993,192.050731" id="Line-Copy-26"></path>
+                            <path d="M214.624359,0.748622209 L394.531235,192.050731" id="Line-Copy-27"></path>
+                            <path d="M225.895601,0.748622209 L405.802476,192.050731" id="Line-Copy-28"></path>
+                            <path d="M237.166842,0.748622209 L417.073718,192.050731" id="Line-Copy-29"></path>
+                            <path d="M248.438084,0.748622209 L428.34496,192.050731" id="Line-Copy-30"></path>
+                            <path d="M259.709326,0.748622209 L439.616202,192.050731" id="Line-Copy-31"></path>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

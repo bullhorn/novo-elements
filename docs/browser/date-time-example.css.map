@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["projects/novo-examples/src/form-controls/date-picker/date-time/date-time-example.css"],
+  "sourcesContent": ["/** No CSS for this example */\n.date-picker-demo-side-by-side {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n}\n"],
+  "mappings": ";AACA,CAAC;AACC,WAAS;AACT,yBAAuB,IAAI;AAC7B;",
+  "names": []
+}

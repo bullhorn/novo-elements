@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="227px" height="109px" viewBox="0 0 227 109" version="1.1" xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.4.4 (17249) - http://www.bohemiancoding.com/sketch -->
+    <title>Typography - Balance</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="--Images" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="Typography---Balance" sketch:type="MSArtboardGroup">
+            <path
+                d="M115.305901,79.239086 C116.088353,78.4566335 117.351814,78.4514881 118.139412,79.239086 L132.98357,94.0832445 C133.766023,94.865697 133.508686,95.5 132.398169,95.5 L101.047143,95.5 C99.9413827,95.5 99.6741443,94.8708424 100.461742,94.0832445 L115.305901,79.239086 Z"
+                id="Rectangle-81" fill="#CCCCCC" sketch:type="MSShapeGroup"></path>
+            <path d="M29.7226562,66 L203.371735,66" id="Line" stroke="#CCCCCC" stroke-width="6" stroke-linecap="round"
+                  sketch:type="MSShapeGroup"></path>
+            <rect id="Rectangle-82" opacity="0.653101679" fill="#C63889" sketch:type="MSShapeGroup" x="32.2226562"
+                  y="29" width="26" height="26"></rect>
+            <circle id="Oval-3" opacity="0.653101679" fill="#C63889" sketch:type="MSShapeGroup" cx="187.222656" cy="42"
+                    r="15"></circle>
+        </g>
+    </g>
+</svg>

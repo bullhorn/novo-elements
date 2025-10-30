@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["projects/novo-examples/src/components/field/field-usage/field-usage-example.css"],
+  "sourcesContent": [":host {\n  display: flex;\n  flex-flow: column;\n  gap: 1rem;\n}\n"],
+  "mappings": ";AAAA;AACE,WAAS;AACT,aAAW;AACX,OAAK;AACP;",
+  "names": []
+}
