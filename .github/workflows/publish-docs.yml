@@ -38,6 +38,9 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./docs
           destination_dir: docs
+          clean: true
+          clean_exclude: |
+            .nojekyll
       - name: Deploy root redirect
         if: github.ref == 'refs/heads/master'
         uses: peaceiris/actions-gh-pages@v3
