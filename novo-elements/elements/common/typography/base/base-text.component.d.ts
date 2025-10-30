@@ -1,0 +1,33 @@
+import { ElementRef } from '@angular/core';
+import { TypographyLength, TypographySize, TypographyWeight } from '../text.types';
+import * as i0 from "@angular/core";
+export declare class NovoBaseTextElement {
+    element: ElementRef;
+    size: TypographySize;
+    weight: TypographyWeight;
+    lineLength: TypographyLength;
+    color: string;
+    get hb_classBinding(): string;
+    disabled: boolean;
+    muted: boolean;
+    error: boolean;
+    marginBefore: boolean;
+    marginAfter: boolean;
+    capitialize: boolean;
+    uppercase: boolean;
+    nowrap: boolean;
+    ellipsis: boolean;
+    smaller: boolean;
+    larger: boolean;
+    thin: boolean;
+    lighter: boolean;
+    light: boolean;
+    medium: boolean;
+    bold: boolean;
+    bolder: boolean;
+    extrabold: boolean;
+    constructor(element: ElementRef);
+    get nativeElement(): any;
+    static ɵfac: i0.ɵɵFactoryDeclaration<NovoBaseTextElement, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<NovoBaseTextElement, never, never, { "size": { "alias": "size"; "required": false; }; "weight": { "alias": "weight"; "required": false; }; "lineLength": { "alias": "lineLength"; "required": false; }; "color": { "alias": "color"; "required": false; }; "disabled": { "alias": "disabled"; "required": false; }; "muted": { "alias": "muted"; "required": false; }; "error": { "alias": "error"; "required": false; }; "marginBefore": { "alias": "marginBefore"; "required": false; }; "marginAfter": { "alias": "marginAfter"; "required": false; }; "capitialize": { "alias": "capitialize"; "required": false; }; "uppercase": { "alias": "uppercase"; "required": false; }; "nowrap": { "alias": "nowrap"; "required": false; }; "ellipsis": { "alias": "ellipsis"; "required": false; }; "smaller": { "alias": "smaller"; "required": false; }; "larger": { "alias": "larger"; "required": false; }; "thin": { "alias": "thin"; "required": false; }; "lighter": { "alias": "lighter"; "required": false; }; "light": { "alias": "light"; "required": false; }; "medium": { "alias": "medium"; "required": false; }; "bold": { "alias": "bold"; "required": false; }; "bolder": { "alias": "bolder"; "required": false; }; "extrabold": { "alias": "extrabold"; "required": false; }; }, {}, never, never, true, never>;
+}

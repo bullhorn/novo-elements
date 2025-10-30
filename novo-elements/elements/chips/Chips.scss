@@ -1,0 +1,213 @@
+@import "../common/typography/text.mixins.scss";
+
+:host {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  border-bottom: 1px solid lighten($dark, 45%);
+  transition: all 200ms ease-in-out;
+  position: relative;
+  padding: 2px 0;
+
+  .hidden-chips-toggle {
+    cursor: pointer;
+    padding-left: .5rem;
+    line-height: 2.7rem;
+  }
+
+  &.with-value {
+    margin-bottom: 20px;
+  }
+  &:hover {
+    border-bottom: 1px solid lighten($dark, 15%);
+  }
+  &.selected,
+  &.selected:hover {
+    border-bottom: 1px solid $positive;
+    & + i {
+      color: $positive;
+    }
+  }
+  &.disabled {
+    border-bottom-style: dashed !important;
+  }
+  .novo-chip-container {
+    flex: 1;
+    display: flex;
+    flex-flow: row wrap;
+    gap: 0.4rem;
+    align-items: center;
+  }
+  .chip-input-container {
+    flex: 1 15rem;
+    padding-left: 1rem;
+    input {
+      padding-top: 0;
+      border: none;
+      background: transparent !important;
+      width: 100%;
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+  .chip-label {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  label.clear-all {
+    flex: 1 100%;
+    position: absolute;
+    right: 0;
+    bottom: -20px;
+    font-size: 0.9rem;
+    color: $negative;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    i {
+      font-size: 0.7rem;
+      padding-bottom: 2px;
+      margin-left: 5px;
+    }
+  }
+  i.bhi-search {
+    position: absolute;
+    bottom: 8px;
+    right: 0;
+    font-size: 1.1em;
+    color: $dark;
+    // &.has-value {
+    //   bottom: 14px;
+    // }
+  }
+
+  & + i {
+    position: absolute;
+    right: 0;
+    bottom: 7px;
+  }
+  &.with-value {
+    margin-bottom: 0;
+  }
+
+  novo-picker {
+    position: inherit;
+    padding-bottom: 0;
+    > ::ng-deep input {
+      border: none;
+      border-bottom: none !important;
+      &:disabled {
+        border-bottom: none !important;
+      }
+    }
+    > ::ng-deep i {
+      display: none;
+    }
+    div.picker-results-container {
+      left: 0;
+    }
+  }
+
+  picker-results {
+    position: absolute;
+    color: black;
+    novo-list {
+      max-height: 49vh;
+      overflow: auto;
+      novo-list-item {
+        flex: 0 0;
+        transition: background-color 250ms;
+        & > div {
+          width: 100%;
+        }
+        &.active {
+          background-color: lighten($positive, 35%);
+        }
+        &:hover {
+          background-color: lighten($positive, 35%);
+        }
+        item-content {
+          flex-flow: row wrap;
+          & > * {
+            flex: 0 0 33%;
+            white-space: nowrap;
+          }
+        }
+      }
+    }
+    .error-results,
+    .no-recents,
+    .null-results {
+      text-align: center;
+      padding: 1em 0 4em;
+      > i {
+        font-size: 3em;
+        margin: 0.5em;
+        color: rgba(0, 0, 0, 0.3);
+      }
+      > h4,
+      > p {
+        margin: 0;
+        max-width: none;
+        padding: 0;
+      }
+      > h4 {
+        font-weight: 500;
+      }
+      > p {
+      }
+    }
+    section {
+      box-shadow: 0.1em 0.1em 1em rgba(0, 0, 0, 0.25);
+      z-index: 9;
+      position: absolute;
+      width: 100%;
+      background-color: white;
+      color: black;
+    }
+  }
+  .preview-container {
+    entity-picker-result {
+      background: $white;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      min-width: 180px;
+      max-height: 49vh;
+      overflow: auto;
+      z-index: z("max");
+      border: 1px solid #4a89dc;
+      transition: all 200ms ease-in-out;
+      .novo-list-item {
+        flex: 0 0;
+        & > div {
+          width: 100%;
+        }
+        .novo-item-content {
+          flex-flow: row wrap;
+          & > * {
+            flex: 0 0 33%;
+            white-space: nowrap;
+          }
+          > p {
+            min-width: 15em;
+            font-size: 0.9em;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            padding-right: 1em;
+          }
+        }
+      }
+    }
+  }
+}
+
+entity-chip-results {
+  max-width: none !important;
+}

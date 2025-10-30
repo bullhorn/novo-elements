@@ -1,0 +1,37 @@
+import { EventEmitter, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { DeferredPromise } from 'novo-elements/utils';
+import * as i0 from "@angular/core";
+export declare class NovoToastElement implements OnInit, OnChanges {
+    private sanitizer;
+    appearance: 'growl' | 'banner';
+    theme: string;
+    icon: string;
+    title: string;
+    action: string;
+    hasDialogue: boolean;
+    link: string;
+    isCloseable: boolean;
+    set message(m: string);
+    closed: EventEmitter<any>;
+    _message: SafeHtml;
+    show: boolean;
+    animate: boolean;
+    parent: any;
+    launched: boolean;
+    position: any;
+    time: any;
+    iconClass: string;
+    alertTheme: string;
+    embedded: any;
+    onActionPromise: DeferredPromise;
+    constructor(sanitizer: DomSanitizer);
+    ngOnInit(): void;
+    ngOnChanges(changes?: SimpleChanges): void;
+    clickHandler(event: any): void;
+    close(event: any): void;
+    actionHandler(event: any): void;
+    onAction(fn: () => void): Promise<void>;
+    static ɵfac: i0.ɵɵFactoryDeclaration<NovoToastElement, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<NovoToastElement, "novo-toast", never, { "appearance": { "alias": "appearance"; "required": false; }; "theme": { "alias": "theme"; "required": false; }; "icon": { "alias": "icon"; "required": false; }; "title": { "alias": "title"; "required": false; }; "action": { "alias": "action"; "required": false; }; "hasDialogue": { "alias": "hasDialogue"; "required": false; }; "link": { "alias": "link"; "required": false; }; "isCloseable": { "alias": "isCloseable"; "required": false; }; "message": { "alias": "message"; "required": false; }; }, { "closed": "closed"; }, never, ["*"], false, never>;
+}

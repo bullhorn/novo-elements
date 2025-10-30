@@ -1,0 +1,100 @@
+@import "../../styles/variables";
+
+$novo-horizontal-stepper-header-height: 80px !default;
+$novo-stepper-label-header-height: 24px !default;
+$novo-stepper-side-gap: 24px !default;
+$novo-vertical-stepper-content-margin: 36px !default;
+$novo-stepper-line-width: 1px !default;
+$novo-stepper-line-gap: 8px !default;
+
+:host {
+  &.novo-stepper-vertical,
+  &.novo-stepper-horizontal {
+    display: block;
+  }
+
+  .novo-horizontal-stepper-header-container {
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1em;
+    background: $background;
+    .novo-stepper-horizontal-line {
+      border-bottom: $novo-stepper-line-width solid $light;
+      flex: auto;
+      min-width: 0px;
+      height: $novo-horizontal-stepper-header-height;
+      &.complete {
+        border-bottom: $novo-stepper-line-width solid $positive;
+      }
+    }
+  }
+  .novo-horizontal-content-container {
+    overflow: hidden;
+    padding: 0 $novo-stepper-side-gap $novo-stepper-side-gap $novo-stepper-side-gap;
+    .novo-horizontal-stepper-content {
+      overflow: hidden;
+
+      &[aria-expanded="false"] {
+        height: 0;
+      }
+    }
+  }
+
+  .novo-vertical-content-container {
+    margin-left: $novo-vertical-stepper-content-margin;
+    border: 0;
+    position: relative;
+
+    [dir="rtl"] & {
+      margin-left: 0;
+      margin-right: $novo-vertical-stepper-content-margin;
+    }
+    .novo-vertical-stepper-content {
+      overflow: hidden;
+    }
+  }
+
+  .novo-stepper-vertical-line {
+    &:before {
+      content: "";
+      position: absolute;
+      top: $novo-stepper-line-gap - $novo-stepper-side-gap;
+      bottom: $novo-stepper-line-gap - $novo-stepper-side-gap;
+      left: 0;
+      z-index: z(below);
+      border-left-width: $novo-stepper-line-width;
+      border-left-style: solid;
+      border-left-color: $light;
+
+      [dir="rtl"] & {
+        left: auto;
+        right: 0;
+      }
+    }
+    &.edit {
+      &:before {
+        border-left-color: 1px solid $positive;
+      }
+    }
+    &.done {
+      &:before {
+        border-left-color: 1px solid $positive;
+      }
+      &:after {
+        border-left-color: 1px solid $positive;
+      }
+    }
+  }
+
+  .novo-vertical-content {
+    padding: 0 $novo-stepper-side-gap $novo-stepper-side-gap $novo-stepper-side-gap;
+  }
+
+  .novo-step:last-child {
+    .novo-vertical-content-container {
+      border: none;
+    }
+  }
+}

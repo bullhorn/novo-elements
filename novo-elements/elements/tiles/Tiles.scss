@@ -1,0 +1,47 @@
+@import "../../styles/variables.scss";
+
+:host {
+  display: inline-block;
+  input {
+    appearance: none !important;
+    height: 0 !important;
+    border: none !important;
+    position: absolute;
+  }
+  & > .tile-container {
+    background: $white;
+    display: flex;
+    border: solid thin $slate;
+    border-radius: 3px;
+    .tile {
+      margin: 2px;
+      gap: .5rem;
+      &:not(:last-child) {
+        margin-right: 3px;
+      }
+      &.defaultColor.active {
+          background: darken($ocean, 20%);
+      }
+      &.disabled {
+        cursor: not-allowed;
+        opacity: 0.4;
+      }
+      ::ng-deep span {
+        text-transform: none;
+        label {
+          cursor: inherit;
+        }
+      }
+    }
+    &.disabled {
+      border-color: lighten($grey, 20%);
+      opacity: 0.4;
+      pointer-events: auto;
+      cursor: not-allowed;
+      .tile {
+        pointer-events: none;
+        opacity: 1;
+      }
+    }
+  }
+}

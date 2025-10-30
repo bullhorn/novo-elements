@@ -1,0 +1,205 @@
+// --------------------------------------------------
+// Global
+// --------------------------------------------------
+@import 'novo-design-tokens/scss';
+@import 'novo-design-tokens/css/variables.min';
+
+@import "./styles/variables";
+@import "./styles/reset";
+@import "./styles/base";
+@import "./styles/global/functions";
+@import "./styles/global/include-media";
+@import "./styles/global/flex-grid";
+
+// --------------------------------------------------
+// Content
+// --------------------------------------------------
+@import "./styles/typography";
+@import "./styles/iconography";
+@import "./elements/common/typography/text.mixins";
+
+// CDK
+@import "./styles/cdk";
+@include cdk-overlay();
+
+// --------------------------------------------------
+// Directives
+// --------------------------------------------------
+@import "./elements/picker/extras/picker-results/PickerResults";
+
+.bgc-main,
+.novo-background-main {
+  background-color: var(--background-main, $color-bright);
+}
+.bgc-alt,
+.bgc-bright,
+.novo-background-bright {
+  background-color: var(--background-bright, $color-white);
+}
+.bgc-dark,
+.novo-background-dark {
+  background-color: var(--background-dark, $color-white);
+}
+.bgc-muted,
+.novo-background-muted {
+  background-color: var(--background-muted, $color-white);
+}
+.bgc-body,
+.novo-background-body {
+  background-color: var(--background-body, $color-silver);
+}
+.txc-main {
+  color: var(--text-main, $color-charcoal);
+}
+.txc-muted {
+  color: var(--text-muted, $color-neutral);
+}
+.txc-disabled {
+  color: var(--text-disabled, $color-slate);
+}
+
+.novo-visibility-hidden {
+  visibility: hidden !important;
+}
+
+@include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
+  $excluded: (bright, muted);
+
+  @if index($excluded, $name) == null {
+    .novo-background-#{$name} {
+      background: $color;
+      color: $contrast;
+    }
+    .novo-text-#{$name} {
+      color: $color;
+    }
+
+    .bgc-#{$name} {
+      background: $color;
+      color: $contrast;
+    }
+
+    .bgc-#{$name}-striped {
+      & > *:nth-child(odd) {
+        background: $color;
+      }
+    }
+    .txc-#{$name} {
+      color: $color;
+    }
+  }
+}
+
+@each $key, $value in $spacing-rules {
+  .padding-#{$key} {
+    padding: $value !important;
+  }
+  .px-#{$key} {
+    padding-left: $value !important;
+    padding-right: $value !important;
+  }
+  .py-#{$key} {
+    padding-top: $value !important;
+    padding-bottom: $value !important;
+  }
+  .margin-#{$key} {
+    margin: $value !important;
+  }
+  .ml-#{$key},
+  .mx-#{$key} {
+    margin-left: $value !important;
+  }
+  .mr-#{$key},
+  .mx-#{$key} {
+    margin-right: $value !important;
+  }
+  .mt-#{$key},
+  .my-#{$key} {
+    margin-top: $value !important;
+  }
+  .mb-#{$key},
+  .my-#{$key} {
+    margin-bottom: $value !important;
+  }
+}
+
+.modal-overlay-backdrop,
+.aside-overlay-backdrop {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.aside-overlay-panel {
+  position: relative;
+  // z-index: 1001;
+}
+
+@keyframes iconEnter {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  90% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+// Animations
+// -------------------------
+@keyframes rotate {
+  0% {
+    transform: rotateZ(0deg);
+  }
+
+  75% {
+    transform: rotateZ(200deg);
+  }
+
+  100% {
+    transform: rotateZ(180deg);
+  }
+}
+
+@keyframes half-rotate {
+  0% {
+    transform: rotateZ(45deg);
+  }
+
+  75% {
+    transform: rotateZ(100deg);
+  }
+
+  100% {
+    transform: rotateZ(90deg);
+  }
+}
+
+@keyframes rotateBack {
+  0% {
+    transform: rotateZ(90deg);
+  }
+
+  100% {
+    transform: rotateZ(0deg);
+  }
+}
+
+@keyframes show {
+  0% {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+
+  75% {
+    transform: translateX(0px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

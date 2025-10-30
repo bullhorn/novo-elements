@@ -1,0 +1,70 @@
+import { DoCheck, EventEmitter, OnInit } from '@angular/core';
+import { ControlValueAccessor } from '@angular/forms';
+import { NovoLabelService } from 'novo-elements/services';
+import * as i0 from "@angular/core";
+export interface NovoAddressSubfieldConfig {
+    label: string;
+    required: boolean;
+    maxlength: number;
+    pickerConfig?: any;
+    hidden: boolean;
+    updated?: boolean;
+    readOnly?: boolean;
+}
+export interface NovoAddressConfig {
+    required?: boolean;
+    readOnly?: boolean;
+    address1?: NovoAddressSubfieldConfig;
+    address2?: NovoAddressSubfieldConfig;
+    city?: NovoAddressSubfieldConfig;
+    state?: NovoAddressSubfieldConfig;
+    zip?: NovoAddressSubfieldConfig;
+    countryID?: NovoAddressSubfieldConfig;
+}
+export declare class NovoAddressElement implements ControlValueAccessor, OnInit, DoCheck {
+    labels: NovoLabelService;
+    config: NovoAddressConfig;
+    private _readOnly;
+    set readOnly(readOnly: boolean);
+    get readOnly(): boolean;
+    private previousRequiredState;
+    states: Array<any>;
+    fieldList: Array<string>;
+    model: any;
+    onModelChange: Function;
+    onModelTouched: Function;
+    focused: any;
+    invalid: any;
+    disabled: any;
+    invalidMaxlength: any;
+    valid: any;
+    stateOptions: any;
+    tooltip: any;
+    initComplete: boolean;
+    change: EventEmitter<any>;
+    focus: EventEmitter<any>;
+    blur: EventEmitter<any>;
+    validityChange: EventEmitter<any>;
+    constructor(labels: NovoLabelService);
+    ngOnInit(): void;
+    initConfig(): void;
+    ngDoCheck(): void;
+    isValid(field: string): void;
+    isInvalid(field: string): void;
+    onInput(event: Event, field: string): void;
+    isFocused(event: Event, field: string): void;
+    isBlurred(event: Event, field: string): void;
+    onCountryChange(evt: any): void;
+    onStateChange(evt: any): void;
+    setStateLabel(model: any): void;
+    updateStates(): void;
+    getStateOptions(filter: string, countryID: number): string[];
+    updateControl(): void;
+    writeValue(model: any): void;
+    registerOnChange(fn: Function): void;
+    registerOnTouched(fn: Function): void;
+    private getDefaultStateConfig;
+    private getDefaultCountryConfig;
+    static ɵfac: i0.ɵɵFactoryDeclaration<NovoAddressElement, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<NovoAddressElement, "novo-address", never, { "config": { "alias": "config"; "required": false; }; "readOnly": { "alias": "readOnly"; "required": false; }; }, { "change": "change"; "focus": "focus"; "blur": "blur"; "validityChange": "validityChange"; }, never, never, false, never>;
+}

@@ -1,0 +1,149 @@
+@import "../../../../styles/variables.scss";
+
+@mixin file-item-style() {
+  background-color: $white;
+  box-shadow: 0 1px 4px rgba(#000, 0.15), 0 2px 10px rgba(#000, 0.09);
+  padding: 4px 12px;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  i.bhi-move {
+    color: $grey;
+    padding-right: 0.75em;
+    padding-bottom: 4px;
+    font-size: 2em;
+    cursor: -webkit-grab;
+    cursor: grab;
+  }
+  label {
+    flex: 1;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    span {
+      margin: 0 8px;
+    }
+  }
+  button {
+    font-size: 1.4rem;
+    width: 42px;
+    height: 42px;
+    padding: 4px;
+    color: $grey;
+  }
+}
+
+novo-file-input {
+  display: flex;
+  flex-flow: row wrap;
+  .files-below {
+    padding-top: 10px;
+  }
+  .file-output-group {
+    width: 100%;
+    margin-top: 15px;
+    .file-item {
+      @include file-item-style;
+      margin-bottom: 15px;
+      position: relative; //border-radius: 3px;
+      width: 100%;
+      button:hover,
+      button:focus,
+      button.active {
+        background: none;
+        color: $positive;
+      }
+      &.disabled {
+        box-shadow: none;
+        border: 2px dashed $grey;
+      }
+    }
+    &.cdk-drop-list-dragging {
+      cursor: grabbing;
+      .file-item {
+        transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+      }
+    }
+  }
+  .file-input-group {
+    cursor: pointer;
+    width: 100%;
+    position: relative;
+    input[type="file"] {
+      opacity: 0;
+      position: absolute;
+      width: 100% !important;
+      height: 100% !important;
+      cursor: pointer;
+    }
+    &:hover,
+    &.active {
+      label.boxed {
+        border: 2px dashed $positive;
+      }
+    }
+    &.disabled {
+      opacity: 0.3;
+      pointer-events: none;
+    }
+    label {
+      color: $grey;
+      margin-left: 0;
+      transition: all 200ms ease-in-out;
+      display: flex;
+      flex-flow: column;
+      align-items: center;
+      position: relative;
+      padding: 15px;
+      cursor: pointer;
+      pointer-events: none;
+      /*This for FF*/
+      strong {
+        color: $positive;
+      }
+      small {
+        margin-top: 7px;
+      }
+      i.bhi-dropzone {
+        float: left;
+        margin: -17px 0.25em 0 0;
+      }
+      &.boxed {
+        border: 2px dashed $grey;
+      }
+      i {
+        font-size: 3em;
+      }
+    }
+  }
+  novo-loading {
+    padding: 10px;
+    transform: scale(0.8, 0.8);
+  }
+}
+
+.gu-mirror {
+  .actions {
+    button {
+      display: none;
+    }
+  }
+}
+
+// Configuration for CDK Drag/Drop
+// https://material.angular.io/cdk/drag-drop/overview
+
+.cdk-drag-preview.file-item {
+  cursor: grab;
+  @include file-item-style;
+}
+
+.cdk-drag-placeholder.file-item {
+  opacity: 0;
+}
+
+// This element will be outside of component layout, at the DOM root
+.cdk-drag-animating.file-item {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+

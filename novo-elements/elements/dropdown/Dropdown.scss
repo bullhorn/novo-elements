@@ -1,0 +1,77 @@
+@import "../common/typography/text.mixins";
+
+:host {
+  display: inline-block;
+  position: relative;
+  outline: none;
+  ::ng-deep .novo-dropdown-trigger {
+    cursor: pointer;
+    -webkit-appearance: none;
+  }
+  ::ng-deep button,
+  ::ng-deep novo-button {
+    position: relative;
+    z-index: 0;
+    .novo-button-icon {
+      font-size: 0.8em !important;
+      width: 1em !important;
+      height: 1em !important;
+      margin: 0 0.5em;
+    }
+  }
+}
+
+.dropdown-container {
+  background-color: var(--background-bright, $color-bright);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  min-width: 180px;
+  margin-top: $spacing-sm;
+  margin-bottom: $spacing-sm;
+  box-shadow: $shadow-3;
+  &.has-height {
+    overflow: auto;
+  }
+  ::ng-deep list {
+    dropdown-item-header {
+      color: #9e9e9e;
+      font-size: 0.8em;
+      flex: 1;
+      font-weight: 500;
+      text-transform: uppercase;
+      padding: $spacing-sm $spacing-md;
+      display: block;
+    }
+    hr {
+      border: none;
+      height: 1px;
+      background: $light;
+    }
+  }
+  &.novo-table-dropdown-cell {
+    ::ng-deep list {
+      max-height: 400px;
+      display: block;
+      overflow: auto;
+      padding: 5px 0;
+    }
+    ::ng-deep item {
+      height: 30px !important;
+      padding: 0 16px !important;
+      span {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        display: inline-block;
+        max-width: 80%;
+      }
+      &.active {
+        font-weight: 500;
+      }
+    }
+    ::ng-deep dropdown-item-header {
+      padding: 0 10px !important;
+    }
+  }
+}

@@ -1,0 +1,1 @@
+{"version":3,"file":"novo-elements-addons.mjs","sources":["../../../projects/novo-elements/src/addons/novo-elements-addons.ts"],"sourcesContent":["/**\n * Generated bundle index. Do not edit.\n */\n\nexport * from './index';\n"],"names":[],"mappings":";;;;AAAA;;AAEG"}

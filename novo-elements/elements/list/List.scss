@@ -1,0 +1,21 @@
+@import "../../styles/variables.scss";
+
+:host {
+  display: flex;
+  &.vertical-list {
+    flex-direction: column;
+  }
+  &.horizontal-list {
+    flex-direction: row;
+  }
+}
+
+
+.novo-list-item,
+a[list-item],
+button[list-item] {
+
+  .avatar .novo-item-content {
+    margin-left: 2.7em;
+  }
+}

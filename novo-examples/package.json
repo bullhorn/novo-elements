@@ -1,0 +1,23 @@
+{
+  "name": "novo-examples",
+  "version": "10.0.0",
+  "peerDependencies": {
+    "@angular/common": ">=10",
+    "@angular/core": ">=10"
+  },
+  "dependencies": {
+    "tslib": "^2.0.0"
+  },
+  "module": "fesm2022/novo-examples.mjs",
+  "typings": "index.d.ts",
+  "exports": {
+    "./package.json": {
+      "default": "./package.json"
+    },
+    ".": {
+      "types": "./index.d.ts",
+      "default": "./fesm2022/novo-examples.mjs"
+    }
+  },
+  "sideEffects": false
+}

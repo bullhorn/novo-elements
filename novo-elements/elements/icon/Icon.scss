@@ -1,0 +1,71 @@
+@import "../common/typography/text.mixins.scss";
+
+$small-themed-icon-size: 1.6em;
+$medium-themed-icon-size: 2em;
+$large-themed-icon-size: 2.4em;
+$small-icon-size: 1.2em;
+$medium-icon-size: 1.8em;
+$large-icon-size: 2.1em;
+$icon-border-radius: 0.3em;
+
+:host {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2em;
+  line-height: inherit;
+  vertical-align: middle;
+  i {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: inherit;
+    line-height: inherit;
+    width: 1em;
+    height: 1em;
+    color: inherit;
+    outline: none;
+    &:before {
+      color: inherit;
+    }
+    * {
+      display: none !important;
+    }
+  }
+
+  @include base-text-rules();
+  @include theme-colors() using ($name, $color, $contrast, $tint, $shade, $pale) {
+    &[theme="#{$name}"] {
+      i {
+        color: $white;
+        background: $color;
+        border-radius: $icon-border-radius;
+        width: 1.6em;
+        height: 1.6em;
+      }
+      &[shape='circle'] {
+        i {
+          border-radius: 50%;
+        }
+      }
+    }
+  }
+
+  &.novo-icon-raised {
+    i {
+      // background-color: rgba(0, 0, 0, .25);
+      box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.2);
+    }
+  }
+  &[shape='circle'] {
+    i {
+      border-radius: 50%;
+    }
+  }
+  &.icon-size-smaller {
+    font-size: 1.0em;
+  }
+  &.icon-size-larger {
+    font-size: 1.4em;
+  }
+}

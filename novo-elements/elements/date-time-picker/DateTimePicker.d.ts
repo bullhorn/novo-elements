@@ -1,0 +1,51 @@
+import { ElementRef, EventEmitter } from '@angular/core';
+import { ControlValueAccessor } from '@angular/forms';
+import { NovoLabelService } from 'novo-elements/services';
+import * as i0 from "@angular/core";
+export declare class NovoDateTimePickerElement implements ControlValueAccessor {
+    labels: NovoLabelService;
+    private element;
+    defaultTime: string;
+    minYear: any;
+    maxYear: any;
+    start: any;
+    end: any;
+    military: any;
+    weekStart: number;
+    disabledDateMessage: string;
+    onSelect: EventEmitter<any>;
+    componentTabState: string;
+    selectedLabel: string;
+    hours: string;
+    minutes: string;
+    meridian: string;
+    datePickerValue: Date;
+    timePickerValue: Date;
+    model: any;
+    _onChange: Function;
+    _onTouched: Function;
+    constructor(labels: NovoLabelService, element: ElementRef);
+    toggleView(tab: string): void;
+    onModelChange(event: any): void;
+    setDateLabels(value: Date): void;
+    setTimeLabels(value: Date): void;
+    onDateSelected(event: {
+        month?: any;
+        year?: any;
+        day?: any;
+        date?: Date;
+    }): void;
+    onTimeSelected(event: {
+        hours?: number;
+        minutes?: number;
+        meridian?: string;
+        date?: Date;
+        text?: string;
+    }): void;
+    createFullDateValue(datePickerValue: Date, timePickerValue: Date): Date;
+    writeValue(modelArg: any): void;
+    registerOnChange(fn: Function): void;
+    registerOnTouched(fn: Function): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<NovoDateTimePickerElement, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<NovoDateTimePickerElement, "novo-date-time-picker", never, { "defaultTime": { "alias": "defaultTime"; "required": false; }; "minYear": { "alias": "minYear"; "required": false; }; "maxYear": { "alias": "maxYear"; "required": false; }; "start": { "alias": "start"; "required": false; }; "end": { "alias": "end"; "required": false; }; "military": { "alias": "military"; "required": false; }; "weekStart": { "alias": "weekStart"; "required": false; }; "disabledDateMessage": { "alias": "disabledDateMessage"; "required": false; }; }, { "onSelect": "onSelect"; }, never, never, false, never>;
+}
