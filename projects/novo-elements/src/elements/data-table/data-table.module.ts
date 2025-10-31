@@ -7,6 +7,7 @@ import { NovoButtonModule } from 'novo-elements/elements/button';
 import { NovoCheckboxModule } from 'novo-elements/elements/checkbox';
 import { NovoCommonModule, NovoOptionModule } from 'novo-elements/elements/common';
 import { NovoDatePickerModule } from 'novo-elements/elements/date-picker';
+import { NovoDragDropModule } from 'novo-elements/elements/drag-drop';
 import { NovoDropdownModule } from 'novo-elements/elements/dropdown';
 import { NovoFieldModule } from 'novo-elements/elements/field';
 import { NovoFlexModule } from 'novo-elements/elements/flex';
@@ -19,9 +20,9 @@ import { NovoTilesModule } from 'novo-elements/elements/tiles';
 import { NovoTooltipModule } from 'novo-elements/elements/tooltip';
 import { NovoDataTableCheckboxHeaderCell } from './cell-headers/data-table-checkbox-header-cell.component';
 import { NovoDataTableExpandHeaderCell } from './cell-headers/data-table-expand-header-cell.component';
+import { NovoDataTableCellFilterHeader } from './cell-headers/data-table-header-cell-filter-header.component';
 import { NovoDataTableCellHeader } from './cell-headers/data-table-header-cell.component';
 import { NovoDataTableHeaderCell } from './cell-headers/data-table-header-cell.directive';
-import { NovoDataTableCellFilterHeader } from './cell-headers/data-table-header-cell-filter-header.component';
 import { NovoDataTableCell } from './cells/data-table-cell.component';
 import { NovoDataTableCheckboxCell } from './cells/data-table-checkbox-cell.component';
 import { NovoDataTableExpandCell } from './cells/data-table-expand-cell.component';
@@ -53,6 +54,7 @@ import { DataTableState } from './state/data-table-state.service';
     NovoIconModule,
     NovoButtonModule,
     NovoDropdownModule,
+    NovoDragDropModule,
     NovoFormExtrasModule,
     NovoLoadingModule,
     NovoTilesModule,
